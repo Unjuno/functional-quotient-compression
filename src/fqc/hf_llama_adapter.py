@@ -19,19 +19,7 @@ def _positive_int(config: Mapping[str, Any], key: str) -> int:
     return value
 
 
-def build_hf_llama_adapter_plan(
-    config: Mapping[str, Any],
-    *,
-    checkpoint_sha256: str,
-    model_id: str,
-    available_checkpoint_keys: Collection[str] | None = None,
-    adapter_version: str = '1',
-) -> AdapterPlan:
-    """Build an explicit plan for Transformers `LlamaForCausalLM` checkpoints."""
-    if config.get('model_type')!='llama':
-        raise ValueError('model_type must be llama')
-    if not checkpoint_sha256.startswith('sha256:'):
-        raise ValueError('checkpoint_sha256 must use sha256:<hex> form')
+def _geometry(config: Mapping[str, Any]) -> tuple[int,int,int,int,int,int]:
     d_model=_positive_int(config,'hidden_size')
     intermediate=_positive_int(config,'intermediate_size')
     layers=_positive_int(config,'num_hidden_layers')
@@ -46,6 +34,53 @@ def build_hf_llama_adapter_plan(
         raise ValueError('head_dim must be a positive integer')
     if q_heads*head_dim!=d_model:
         raise ValueError('current FQC Llama adapter requires q_heads * head_dim == hidden_size')
+    return d_model,intermediate,layers,q_heads,kv_heads,head_dim
+
+
+def _check_supported_biases(config: Mapping[str, Any]) -> None:
+    if bool(config.get('attention_bias',False)):
+        raise ValueError('attention_bias=true is not supported by the current FQC Llama adapter')
+    if bool(config.get('mlp_bias',False)):
+        raise ValueError('mlp_bias=true is not supported by the current FQC Llama adapter')
+
+
+def expected_hf_llama_unique_scalars(config: Mapping[str, Any]) -> int:
+    """Config-derived scalar-count cross-check for the currently supported Llama layout.
+
+    This is not authoritative for a real compression denominator; live storage
+    inventory remains authoritative. It is used to catch adapter/storage drift.
+    """
+    if config.get('model_type')!='llama':
+        raise ValueError('model_type must be llama')
+    _check_supported_biases(config)
+    d_model,intermediate,layers,q_heads,kv_heads,head_dim=_geometry(config)
+    vocab=_positive_int(config,'vocab_size')
+    tie=bool(config.get('tie_word_embeddings',False))
+    embedding=vocab*d_model
+    lm_head=0 if tie else vocab*d_model
+    attention=(d_model*q_heads*head_dim + d_model*kv_heads*head_dim +
+               d_model*kv_heads*head_dim + q_heads*head_dim*d_model)
+    mlp=3*d_model*intermediate
+    per_layer=attention+mlp+2*d_model
+    final_norm=d_model
+    return embedding+lm_head+layers*per_layer+final_norm
+
+
+def build_hf_llama_adapter_plan(
+    config: Mapping[str, Any],
+    *,
+    checkpoint_sha256: str,
+    model_id: str,
+    available_checkpoint_keys: Collection[str] | None = None,
+    adapter_version: str = '1',
+) -> AdapterPlan:
+    """Build an explicit plan for Transformers `LlamaForCausalLM` checkpoints."""
+    if config.get('model_type')!='llama':
+        raise ValueError('model_type must be llama')
+    if not checkpoint_sha256.startswith('sha256:'):
+        raise ValueError('checkpoint_sha256 must use sha256:<hex> form')
+    _check_supported_biases(config)
+    d_model,intermediate,layers,q_heads,kv_heads,head_dim=_geometry(config)
     q_to_kv=contiguous_gqa_map(q_heads,kv_heads)
     tie=bool(config.get('tie_word_embeddings',False))
     hidden_act=config.get('hidden_act')
@@ -115,7 +150,8 @@ def build_hf_llama_adapter_plan(
         'num_hidden_layers':layers,'num_attention_heads':q_heads,'num_key_value_heads':kv_heads,
         'head_dim':head_dim,'hidden_act':hidden_act,'tie_word_embeddings':tie,
         'rope_theta':config.get('rope_theta'),'rope_scaling':config.get('rope_scaling'),
-        'rms_norm_eps':config.get('rms_norm_eps'),'attention_bias':config.get('attention_bias',False),
+        'rms_norm_eps':config.get('rms_norm_eps'),'attention_bias':False,'mlp_bias':False,
+        'config_expected_unique_scalar_count':expected_hf_llama_unique_scalars(config),
     }
     return AdapterPlan(
         adapter_id='hf-transformers-llama',adapter_version=adapter_version,
