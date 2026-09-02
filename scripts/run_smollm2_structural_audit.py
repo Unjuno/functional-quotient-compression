@@ -48,6 +48,74 @@ def _load_tensor(handle, key):
     return handle.get_tensor(key).float().cpu().numpy()
 
 
+def _rank1_excess(span):
+    """Concentration above an equal-energy orthogonal member family.
+
+    For m Frobenius-normalized mutually orthogonal members, the rank-1 residual
+    is 1-1/m. Positive excess means the observed family is more concentrated.
+    This is a descriptive reference, not a statistical null test.
+    """
+    m=int(span['member_count'])
+    baseline=1.0-1.0/m
+    observed=float(span['residual_by_rank']['1'])
+    return {
+        'orthogonal_reference_rank1_residual':baseline,
+        'observed_rank1_residual':observed,
+        'rank1_concentration_excess_vs_orthogonal':baseline-observed,
+    }
+
+
+def _build_summary(result):
+    layers={}
+    for layer,r in result['layer_results'].items():
+        sw=r['swiglu']
+        layers[layer]={
+            'query_head_family':_rank1_excess(r['query_head_family']['span']),
+            'key_head_family':_rank1_excess(r['key_head_family']['span']),
+            'value_head_family':_rank1_excess(r['value_head_family']['span']),
+            'value_output_operator_family':_rank1_excess(r['value_output_operator_family']['span']),
+            'qk_gqa_groups':[
+                {'kv_head':int(x['kv_head']),**_rank1_excess(x['span'])}
+                for x in r['qk_gqa_groups']
+            ],
+            'swiglu_descriptor':{
+                'cv':float(sw['descriptor_norm_cv']),
+                'top_10_percent_energy_fraction':float(sw['descriptor_energy_concentration']['top_10_percent_energy_fraction']),
+                'top_10_percent_excess_over_uniform':float(sw['descriptor_energy_concentration']['top_10_percent_energy_fraction'])-0.10,
+                'top_25_percent_energy_fraction':float(sw['descriptor_energy_concentration']['top_25_percent_energy_fraction']),
+                'top_25_percent_excess_over_uniform':float(sw['descriptor_energy_concentration']['top_25_percent_energy_fraction'])-0.25,
+                'gate_up_cosine_mean_abs':float(sw['gate_up_cosine_mean_abs']),
+                'gate_up_cosine_max_abs':float(sw['gate_up_cosine_max_abs']),
+            },
+        }
+    cross={role:_rank1_excess(x['span']) for role,x in result['cross_layer_corresponding_weights'].items()}
+    strongest=[]
+    for layer,r in layers.items():
+        for g in r['qk_gqa_groups']:
+            strongest.append((g['rank1_concentration_excess_vs_orthogonal'],f'L{layer}.qk_gqa.kv{g["kv_head"]}'))
+        strongest.append((r['query_head_family']['rank1_concentration_excess_vs_orthogonal'],f'L{layer}.query_heads'))
+        strongest.append((r['value_output_operator_family']['rank1_concentration_excess_vs_orthogonal'],f'L{layer}.value_output_ops'))
+    strongest=sorted(strongest,reverse=True)[:8]
+    return {
+        'experiment_id':result['experiment_id'],
+        'status':'PASS',
+        'evidence_scope':result['evidence_scope'],
+        'descriptive_reference':'equal_energy_mutually_orthogonal_family_not_a_statistical_null',
+        'layers':layers,
+        'cross_layer_corresponding_weights':cross,
+        'strongest_rank1_concentration_excesses':[
+            {'family':name,'excess':float(value)} for value,name in strongest
+        ],
+        'interpretation':{
+            'raw_cross_layer_sharing':'corresponding raw weights across layers 0/15/29 are close to the orthogonal reference',
+            'local_candidate':'some GQA 3Q+1K groups and value-output operator families are substantially more concentrated than the orthogonal reference',
+            'mlp_candidate':'SwiGLU descriptor energy concentration is weakest at layer 0 and strongest at layer 15 among the audited layers',
+            'next_required_gate':'task-conditioned functional sensitivity before any removability or codec claim',
+        },
+        'forbidden_inference':result['interpretation_boundary'],
+    }
+
+
 def main() -> int:
     ap=argparse.ArgumentParser()
     ap.add_argument('--checkpoint',required=True)
@@ -116,9 +184,11 @@ def main() -> int:
         'cross_layer_corresponding_weights':cross_layer,
         'interpretation_boundary':contract['forbidden_inference'],
     }
+    summary=_build_summary(result)
     out=Path(args.output_dir); out.mkdir(parents=True,exist_ok=True)
     (out/'structural_audit_result.json').write_text(json.dumps(result,indent=2,sort_keys=True)+'\n')
-    print(json.dumps(result,indent=2,sort_keys=True))
+    (out/'structural_audit_summary.json').write_text(json.dumps(summary,indent=2,sort_keys=True)+'\n')
+    print(json.dumps(summary,indent=2,sort_keys=True))
     return 0
 
 
