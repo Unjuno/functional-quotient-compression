@@ -6,6 +6,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any, Mapping
 from .decoder_dag import Atom, compile_decoder_dag
+from .linear_orientation import expected_attention_projection_shapes
 
 @dataclass(frozen=True)
 class PilotValidation:
@@ -88,25 +89,23 @@ def validate_transformer_extraction(m: Mapping[str,Any]) -> ExtractionValidation
         projection_ids=a.get('projection_tensor_ids',{})
         for role,tid in projection_ids.items():
             if tid not in tensors: e.append(f'{mid}: missing projection tensor {role}:{tid}')
-        orientation=m.get('model_identity',{}).get('orientation')
+        identity=m.get('model_identity',{})
+        orientation=identity.get('checkpoint_weight_orientation',identity.get('orientation'))
         d_model=a.get('d_model'); hd=a.get('head_dim'); vd=a.get('value_dim',hd)
-        if orientation=='row_vector_x_times_W' and all(isinstance(x,int) and x>0 for x in (d_model,hd,vd)):
-            expected={
-                'WQ':[d_model,qh*hd],
-                'WK':[d_model,kvh*hd],
-                'WV':[d_model,kvh*vd],
-                'WO':[qh*vd,d_model],
-            }
-            for role,shape_expected in expected.items():
-                tid=projection_ids.get(role)
-                if tid in tensors and tensors[tid].get('shape')!=shape_expected:
-                    e.append(f'{mid}: {role} shape {tensors[tid].get("shape")} != expected {shape_expected} for row_vector_x_times_W')
-        elif orientation=='row_vector_x_times_W':
+        if orientation is not None and all(isinstance(x,int) and x>0 for x in (d_model,hd,vd)):
+            try:
+                expected=expected_attention_projection_shapes(orientation,d_model,qh,kvh,hd,vd)
+            except ValueError:
+                w.append(f'{mid}: projection shape validation unsupported for orientation {orientation}')
+            else:
+                for role,shape_expected in expected.items():
+                    tid=projection_ids.get(role)
+                    if tid in tensors and tensors[tid].get('shape')!=shape_expected:
+                        e.append(f'{mid}: {role} shape {tensors[tid].get("shape")} != expected {shape_expected} for {orientation}')
+        elif orientation is not None:
             w.append(f'{mid}: projection shape validation skipped because d_model/head_dim/value_dim metadata is incomplete')
-        elif orientation is None:
-            w.append(f'{mid}: projection shape validation skipped because model orientation is missing')
         else:
-            w.append(f'{mid}: projection shape validation unsupported for orientation {orientation}')
+            w.append(f'{mid}: projection shape validation skipped because checkpoint weight orientation is missing')
         red=a.get('exact_reduction_policy')
         if a.get('position_operator')=='rope' and red=='plain_bilinear_family': e.append(f'{mid}: plain bilinear reduction invalid under RoPE')
         if a.get('qk_norm') not in (None,'none') and red!='factor_preserving_required': e.append(f'{mid}: QK norm requires factor-preserving extraction')
