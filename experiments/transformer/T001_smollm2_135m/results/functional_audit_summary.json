@@ -1,0 +1,106 @@
+{
+  "experiment_id": "T003_smollm2_functional_interventions",
+  "status": "PASS",
+  "evidence_scope": "RANK_FUNCTIONAL_SENSITIVITY_ONLY",
+  "checkpoint_sha256": "80521b40281d6ce74e35c9282c22539e75aa0ac8578892b2a59955ef78d55da1",
+  "full_result_sha256": "e43343ffd93085e52b5f2611d7d02fab7e1f55321cbbdf2feb369326d74a578a",
+  "summary_sha256": "4efed0a070a35e8884706fb2ac2dac44175571c738efe99824a3bd91e964f14e",
+  "reproducibility": {
+    "independent_fresh_runner_executions": 2,
+    "full_result_json_identical": true,
+    "summary_json_identical": true,
+    "run_id": 33640150625,
+    "run_1": {
+      "artifact_id": 9850620496,
+      "artifact_digest": "sha256:d2bb959ca468d91a52c07d5eac5b83ffa4fd9628d7f54e96275dcb68b07cfbc3"
+    },
+    "run_2": {
+      "artifact_id": 9850884309,
+      "artifact_digest": "sha256:013c541560372f440fa2fd74905b033412c6b16cdc287af33afd6fa134054789"
+    }
+  },
+  "calibration": {
+    "kind": "fixed_authored_texts_not_a_benchmark",
+    "text_count": 4,
+    "valid_next_token_count": 164,
+    "tokenized_inputs_sha256": "sha256:73f8f678ed31618564191dc7760e51819a7737d57d1a4037135ce6cb96e4b27d",
+    "reference_next_token_nll": 3.272606134414673
+  },
+  "findings": {
+    "similar_structure_different_function": {
+      "comparison": "L15_qk_kv2_rank3_vs_L29_qk_kv2_rank3",
+      "layer_15_structural_residual": 0.09015215903474633,
+      "layer_29_structural_residual": 0.10745298361039111,
+      "layer_15_mean_kl": 0.03012665919959545,
+      "layer_29_mean_kl": 0.0014041241956874728,
+      "kl_ratio_L15_over_L29": 21.455836522242354,
+      "layer_15_top1_flip_fraction": 0.0731707289814949,
+      "layer_29_top1_flip_fraction": 0.006097560748457909,
+      "top1_flip_ratio_L15_over_L29": 12.0,
+      "interpretation": "Similar raw family residual does not imply similar functional sensitivity; layer/activation/continuation geometry matters strongly."
+    },
+    "same_family_residual_vs_function": {
+      "comparison": "L15_qk_kv2_rank3_to_rank1",
+      "structural_residual_multiplier": 5.247496754679325,
+      "kl_multiplier": 1.189547973748444,
+      "rank3": {
+        "residual": 0.09015215903474633,
+        "mean_kl": 0.03012665919959545,
+        "top1_flip_fraction": 0.0731707289814949
+      },
+      "rank2": {
+        "residual": 0.2097265206029431,
+        "mean_kl": 0.03118673525750637,
+        "top1_flip_fraction": 0.1036585345864296
+      },
+      "rank1": {
+        "residual": 0.47307316196216576,
+        "mean_kl": 0.03583710640668869,
+        "top1_flip_fraction": 0.09756097197532654
+      },
+      "interpretation": "Within the same sensitive family, increasing Frobenius family residual by more than fivefold produces only a modest KL increase; structural residual is not a calibrated functional metric."
+    },
+    "calibration_nll_can_mislead": {
+      "L15_rank3_nll_delta": -0.018673181533813477,
+      "L15_rank2_nll_delta": -0.019188642501831055,
+      "L15_rank1_nll_delta": -0.020750999450683594,
+      "interpretation": "All three L15 Q/K perturbations improve NLL on this tiny fixed calibration set while producing material KL and top-1 changes. This is not quality improvement evidence and demonstrates why one calibration loss cannot be the sole admission metric."
+    },
+    "promising_local_candidate": {
+      "id": "L29_qk_kv2_rank3",
+      "structural_residual": 0.10745298361039111,
+      "mean_kl": 0.0014041241956874728,
+      "top1_flip_fraction": 0.006097560748457909,
+      "relative_rms_logit_delta": 0.007237272017846142,
+      "interpretation": "This is the least sensitive tested Q/K family intervention on the fixed calibration distribution, but it is not yet codec-positive or benchmark-validated."
+    },
+    "mlp_low_descriptor_not_free": {
+      "id": "L15_mlp_drop_bottom10",
+      "removed_channel_fraction": 0.099609375,
+      "removed_descriptor_energy_fraction": 0.03239970832877039,
+      "removed_parameter_frobenius_energy_fraction": 0.09993034288696633,
+      "mean_kl": 0.011752083897590637,
+      "top1_flip_fraction": 0.060975611209869385,
+      "next_token_nll_delta": 0.01247262954711914,
+      "interpretation": "Only 3.24% of the T002 descriptor energy is removed, yet functional changes are material. Descriptor energy alone is not a safe removability criterion. These channels are not low in total parameter Frobenius energy, so this is not an ordinary low-weight-energy pruning claim."
+    }
+  },
+  "local_rate_scale_note": {
+    "qk_family_raw_scalar_count": 147456,
+    "qk_family_fraction_of_model_N": 0.0010962048190191537,
+    "rank3_naive_continuous_scalar_saving_ignoring_quantization_and_metadata": 36848,
+    "rank3_naive_saving_fraction_of_model_N": 0.0002739322589193914,
+    "interpretation": "Even a functionally mild local rank-3 family move is globally tiny by itself. Practical compression requires repeated reuse, broader quotients, or other dominant-structure solutions."
+  },
+  "next_experiment": {
+    "id": "T004",
+    "goal": "Separate local activation-weighted sensitivity from downstream continuation amplification across many GQA groups.",
+    "priority_question": "Why do structurally similar L15 and L29 rank-3 interventions differ by about 21.5x in KL?"
+  },
+  "forbidden_inference": [
+    "calibration_nll_is_not_a_benchmark_quality_score",
+    "small_logit_delta_does_not_imply_codec_positive",
+    "structural_residual_does_not_imply_removability",
+    "no_64x_claim_from_this_experiment"
+  ]
+}
