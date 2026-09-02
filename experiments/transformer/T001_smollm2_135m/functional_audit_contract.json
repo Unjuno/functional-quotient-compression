@@ -1,0 +1,51 @@
+{
+  "experiment_id": "T003_smollm2_functional_interventions",
+  "source_structural_experiment": "T002_smollm2_raw_structural_audit",
+  "model_id": "HuggingFaceTB/SmolLM2-135M",
+  "hub_revision": "28e66ca6931668447a3bac213f23d990ad3b0e2b",
+  "checkpoint_sha256": "80521b40281d6ce74e35c9282c22539e75aa0ac8578892b2a59955ef78d55da1",
+  "runtime": {
+    "transformers": "4.47.1",
+    "torch": "2.5.1+cpu",
+    "device": "cpu",
+    "dtype": "bfloat16",
+    "attention": "eager",
+    "seed": 20260902
+  },
+  "calibration": {
+    "kind": "fixed_authored_texts_not_a_benchmark",
+    "tokenizer_revision": "28e66ca6931668447a3bac213f23d990ad3b0e2b",
+    "max_length": 64,
+    "texts": [
+      "A compact language model can store useful regularities without memorizing every sentence. This calibration passage discusses representation, prediction, and efficient computation in neutral technical prose.",
+      "Consider a program that receives a list of numbers, removes duplicates, sorts the remaining values, and returns the median. Correctness depends on both the data transformation and the final decision rule.",
+      "In linear algebra, a basis is useful when it exposes structure that is otherwise hidden by coordinates. A low-energy direction is not automatically unimportant if a downstream decision is sensitive to it.",
+      "小さな言語モデルの内部表現を調べるときは、重みの大きさだけでなく、実際の入力に対する出力の変化も測る必要がある。構造が似ていても機能的な重要度は同じとは限らない。"
+    ]
+  },
+  "interventions": [
+    {"id": "L15_qk_kv2_rank3", "kind": "qk_family_rank", "layer": 15, "kv_head": 2, "rank": 3, "expected_normalized_family_residual": 0.09015215903474635},
+    {"id": "L15_qk_kv2_rank2", "kind": "qk_family_rank", "layer": 15, "kv_head": 2, "rank": 2, "expected_normalized_family_residual": 0.20972652060294308},
+    {"id": "L15_qk_kv2_rank1", "kind": "qk_family_rank", "layer": 15, "kv_head": 2, "rank": 1, "expected_normalized_family_residual": 0.47307316196216576},
+    {"id": "L29_qk_kv2_rank3", "kind": "qk_family_rank", "layer": 29, "kv_head": 2, "rank": 3, "expected_normalized_family_residual": 0.1074529836103911},
+    {"id": "L0_qk_kv0_rank3_control", "kind": "qk_family_rank", "layer": 0, "kv_head": 0, "rank": 3, "expected_normalized_family_residual": 0.17597124286337845},
+    {"id": "L15_mlp_drop_bottom10", "kind": "swiglu_drop_bottom_descriptor", "layer": 15, "fraction": 0.10},
+    {"id": "L15_mlp_drop_bottom25", "kind": "swiglu_drop_bottom_descriptor", "layer": 15, "fraction": 0.25},
+    {"id": "L15_mlp_drop_bottom50", "kind": "swiglu_drop_bottom_descriptor", "layer": 15, "fraction": 0.50}
+  ],
+  "metrics": [
+    "next_token_nll_delta",
+    "mean_kl_reference_to_perturbed",
+    "top1_flip_fraction",
+    "rms_logit_delta",
+    "relative_rms_logit_delta",
+    "max_abs_logit_delta"
+  ],
+  "decision_scope": "RANK_FUNCTIONAL_SENSITIVITY_ONLY",
+  "forbidden_inference": [
+    "calibration_nll_is_not_a_benchmark_quality_score",
+    "small_logit_delta_does_not_imply_codec_positive",
+    "structural_residual_does_not_imply_removability",
+    "no_64x_claim_from_this_experiment"
+  ]
+}
