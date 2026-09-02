@@ -1,0 +1,62 @@
+{
+  "authority": "DERIVED_FROM_PINNED_CONFIG_AND_ACTUAL_SOURCE_DENOMINATOR",
+  "experiment_id": "T001_smollm2_135m",
+  "source_denominator_N": 134515008,
+  "hard_64x_target_bits": 33628752,
+  "hard_64x_target_bytes": 4203594,
+  "components": {
+    "token_embedding_tied_lm_head": {
+      "scalars": 28311552,
+      "fraction_of_N": 0.2104713252516775,
+      "bf16_payload_bytes": 56623104,
+      "max_bits_per_scalar_if_entire_64x_budget_were_spent_here": 1.1878102620442708
+    },
+    "attention_all_30_layers": {
+      "scalars": 26542080,
+      "fraction_of_N": 0.19731686742344764,
+      "bf16_payload_bytes": 53084160,
+      "max_bits_per_scalar_if_entire_64x_budget_were_spent_here": 1.2669976128472222
+    },
+    "mlp_all_30_layers": {
+      "scalars": 79626240,
+      "fraction_of_N": 0.5919506022703429,
+      "bf16_payload_bytes": 159252480,
+      "max_bits_per_scalar_if_entire_64x_budget_were_spent_here": 0.42233253761574074
+    },
+    "two_rmsnorm_scales_per_layer": {
+      "scalars": 34560,
+      "fraction_of_N": 0.0002569230044576141,
+      "bf16_payload_bytes": 69120
+    },
+    "final_rmsnorm_scale": {
+      "scalars": 576,
+      "fraction_of_N": 0.000004282050074293569,
+      "bf16_payload_bytes": 1152
+    }
+  },
+  "per_layer": {
+    "q_projection_scalars": 331776,
+    "k_projection_scalars": 110592,
+    "v_projection_scalars": 110592,
+    "o_projection_scalars": 331776,
+    "attention_scalars": 884736,
+    "swiglu_mlp_scalars": 2654208,
+    "two_rmsnorm_scale_scalars": 1152,
+    "total_scalars": 3540096
+  },
+  "hard_constraints": {
+    "embedding_at_2_bits_per_scalar": {
+      "bits": 56623104,
+      "exceeds_entire_64x_budget_by_bits": 22994352,
+      "exceeds_entire_64x_budget_by_bytes": 2874294,
+      "feasible_even_if_everything_else_cost_zero": false
+    },
+    "embedding_at_1_bit_per_scalar": {
+      "bits": 28311552,
+      "remaining_bits_for_all_other_scalars": 5317200,
+      "remaining_other_scalars": 106203456,
+      "maximum_average_bits_per_remaining_scalar": 0.05006616733828323
+    },
+    "interpretation": "These are arithmetic budget constraints only. They do not establish quality feasibility or any specific codec lower bound."
+  }
+}

@@ -1,6 +1,6 @@
 {
   "experiment_id": "T001_smollm2_135m",
-  "status": "SERIALIZED_CHECKPOINT_HEADER_PASS_RUNTIME_REPLAY_PENDING",
+  "status": "RUNTIME_REPLAY_PASS_STRUCTURAL_AUDIT_PENDING",
   "model_id": "HuggingFaceTB/SmolLM2-135M",
   "license": "apache-2.0",
   "hub_revision": "28e66ca6931668447a3bac213f23d990ad3b0e2b",
@@ -39,6 +39,7 @@
   },
   "actual_serialized_checkpoint": {
     "status": "PASS",
+    "adapter_version": "2",
     "serialized_tensor_count": 272,
     "serialized_scalar_count_N": 134515008,
     "dtype_scalar_counts": {
@@ -51,11 +52,32 @@
     "serialized_tensor_payload_bytes": 269030016,
     "safetensors_container_overhead_bytes": 30536
   },
+  "actual_runtime_replay": {
+    "status": "PASS",
+    "transformers_version": "4.47.1",
+    "torch_version": "2.5.1+cpu",
+    "attention_implementation": "eager",
+    "evaluation_dtype": "bfloat16",
+    "runtime_manifest_unique_scalar_count_N": 134515008,
+    "embedding_lm_head_same_parameter_object": true,
+    "embedding_lm_head_same_storage": true,
+    "runtime_source_keys_missing": 0,
+    "expected_runtime_tied_alias_extra_key": "lm_head.weight",
+    "layer_index": 0,
+    "replay_case_count": 5,
+    "all_replay_cases_passed": true,
+    "all_replay_cases_max_abs_error": 0.0,
+    "fresh_runner_repeat_count": 2,
+    "fresh_runner_manifest_and_replay_hashes_identical": true,
+    "runtime_manifest_canonical_sha256": "sha256:feb51f0b71f56a76410c5cac23d6dbc67205268f4f75cdd6772f397bfb4dbcc2",
+    "replay_contract_sha256": "sha256:70cf983f7c7892f6f2e431d8e20b97b825c1a1160e17277d12fea1dea0f9b375"
+  },
   "authority": {
     "compression_denominator": "PINNED_SERIALIZED_CHECKPOINT_UNIQUE_PAID_SCALAR_PAYLOAD",
     "denominator_N": 134515008,
-    "runtime_storage_inventory": "CONSISTENCY_CHECK_REQUIRED_NOT_DENOMINATOR_AUTHORITY",
-    "module_replay": "REQUIRED_BEFORE_STRUCTURAL_COMPRESSION_CLAIMS",
+    "runtime_storage_inventory": "CONSISTENCY_CHECK_PASSED_NOT_DENOMINATOR_AUTHORITY",
+    "module_replay": "LAYER0_PASS_MORE_LAYERS_OPTIONAL_BEFORE_STRUCTURAL_AUDIT",
+    "structural_compression_evidence": "NOT_TESTED",
     "compression_result": "NOT_TESTED"
   },
   "source_checked_date": "2026-09-02"

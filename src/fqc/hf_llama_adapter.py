@@ -47,8 +47,9 @@ def _check_supported_biases(config: Mapping[str, Any]) -> None:
 def expected_hf_llama_unique_scalars(config: Mapping[str, Any]) -> int:
     """Config-derived scalar-count cross-check for the currently supported Llama layout.
 
-    This is not authoritative for a real compression denominator; live storage
-    inventory remains authoritative. It is used to catch adapter/storage drift.
+    For a pinned real pilot, the serialized source checkpoint is the denominator
+    authority. This function remains a preflight cross-check that catches
+    adapter/checkpoint drift before or during extraction.
     """
     if config.get('model_type')!='llama':
         raise ValueError('model_type must be llama')
@@ -72,7 +73,7 @@ def build_hf_llama_adapter_plan(
     checkpoint_sha256: str,
     model_id: str,
     available_checkpoint_keys: Collection[str] | None = None,
-    adapter_version: str = '1',
+    adapter_version: str = '2',
 ) -> AdapterPlan:
     """Build an explicit plan for Transformers `LlamaForCausalLM` checkpoints."""
     if config.get('model_type')!='llama':
@@ -122,7 +123,14 @@ def build_hf_llama_adapter_plan(
             'module_id':f'{public}.attn','d_model':d_model,'q_heads':q_heads,'kv_heads':kv_heads,
             'head_dim':head_dim,'value_dim':head_dim,'q_to_kv_map':q_to_kv,
             'projection_tensor_ids':{'WQ':f'{public}.WQ','WK':f'{public}.WK','WV':f'{public}.WV','WO':f'{public}.WO'},
-            'position_operator':'rope','rope':{'rotary_dim':head_dim,'frequency_source':'EXTERNAL_FIXED','layout':'pairwise_2d'},
+            'position_operator':'rope',
+            'rope':{
+                'rotary_dim':head_dim,
+                'frequency_source':'EXTERNAL_FIXED',
+                'frequency_embedding':'concat_freqs_freqs',
+                'rotation_pairing':'half_split_rotate_half',
+                'layout':'hf_llama_half_split',
+            },
             'qk_norm':'none','bias':{'q':False,'k':False,'v':False,'o':False},
             'logit_scale':'1/sqrt(head_dim)','output_block_policy':'split_WO_by_query_head',
             'exact_reduction_policy':'rope_profile_operator_family',
@@ -150,6 +158,7 @@ def build_hf_llama_adapter_plan(
         'num_hidden_layers':layers,'num_attention_heads':q_heads,'num_key_value_heads':kv_heads,
         'head_dim':head_dim,'hidden_act':hidden_act,'tie_word_embeddings':tie,
         'rope_theta':config.get('rope_theta'),'rope_scaling':config.get('rope_scaling'),
+        'rope_frequency_embedding':'concat_freqs_freqs','rope_rotation_pairing':'half_split_rotate_half',
         'rms_norm_eps':config.get('rms_norm_eps'),'attention_bias':False,'mlp_bias':False,
         'config_expected_unique_scalar_count':expected_hf_llama_unique_scalars(config),
     }

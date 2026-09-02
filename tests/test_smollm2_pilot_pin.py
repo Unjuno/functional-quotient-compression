@@ -21,7 +21,7 @@ def test_smollm2_pin_config_and_hard_budget_are_internally_consistent():
 
 def test_actual_serialized_checkpoint_matches_preflight_cross_checks():
     pin=_pin(); p=pin['config_derived_preflight']; f=pin['checkpoint_file']; a=pin['actual_serialized_checkpoint']
-    assert a['status']=='PASS'
+    assert a['status']=='PASS' and a['adapter_version']=='2'
     assert a['serialized_tensor_count']==272
     assert a['serialized_scalar_count_N']==p['expected_unique_scalar_count_N']==134_515_008
     assert a['dtype_scalar_counts']=={'BF16':134_515_008}
@@ -32,11 +32,17 @@ def test_actual_serialized_checkpoint_matches_preflight_cross_checks():
     assert len(f['sha256'])==64
 
 
-def test_pin_promotes_source_denominator_without_claiming_runtime_or_compression_evidence():
-    pin=_pin(); authority=pin['authority']
-    assert pin['status']=='SERIALIZED_CHECKPOINT_HEADER_PASS_RUNTIME_REPLAY_PENDING'
+def test_runtime_replay_pass_is_recorded_without_promoting_compression_claims():
+    pin=_pin(); authority=pin['authority']; run=pin['actual_runtime_replay']
+    assert pin['status']=='RUNTIME_REPLAY_PASS_STRUCTURAL_AUDIT_PENDING'
     assert authority['compression_denominator']=='PINNED_SERIALIZED_CHECKPOINT_UNIQUE_PAID_SCALAR_PAYLOAD'
     assert authority['denominator_N']==134_515_008
-    assert authority['runtime_storage_inventory']=='CONSISTENCY_CHECK_REQUIRED_NOT_DENOMINATOR_AUTHORITY'
-    assert authority['module_replay']=='REQUIRED_BEFORE_STRUCTURAL_COMPRESSION_CLAIMS'
+    assert authority['runtime_storage_inventory']=='CONSISTENCY_CHECK_PASSED_NOT_DENOMINATOR_AUTHORITY'
+    assert run['status']=='PASS'
+    assert run['runtime_manifest_unique_scalar_count_N']==authority['denominator_N']
+    assert run['embedding_lm_head_same_parameter_object'] and run['embedding_lm_head_same_storage']
+    assert run['runtime_source_keys_missing']==0
+    assert run['all_replay_cases_passed'] and run['all_replay_cases_max_abs_error']==0.0
+    assert run['fresh_runner_repeat_count']==2 and run['fresh_runner_manifest_and_replay_hashes_identical']
+    assert authority['structural_compression_evidence']=='NOT_TESTED'
     assert authority['compression_result']=='NOT_TESTED'

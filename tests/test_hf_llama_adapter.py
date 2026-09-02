@@ -44,13 +44,18 @@ def test_llama_adapter_materializes_pytorch_shapes_and_tied_embedding():
     ck=_checkpoint()
     plan=build_hf_llama_adapter_plan(CONFIG,checkpoint_sha256='sha256:abc',model_id='tiny',available_checkpoint_keys=ck)
     manifest=materialize_adapter_plan(plan,ck)
+    assert plan.adapter_version=='2'
     assert manifest['model_identity']['checkpoint_weight_orientation']=='pytorch_linear_weight_out_in'
     assert manifest['model_identity']['unique_baseline_scalar_count_N']==300
     assert plan.config_evidence['config_expected_unique_scalar_count']==300
     groups={x['tensor_id']:x['storage_group'] for x in manifest['tensor_inventory']}
     assert groups['tok_emb']==groups['lm_head']
     assert len(manifest['modules']['attention'])==2
-    assert manifest['modules']['attention'][0]['q_to_kv_map']==[0,0]
+    attn=manifest['modules']['attention'][0]
+    assert attn['q_to_kv_map']==[0,0]
+    assert attn['rope']['layout']=='hf_llama_half_split'
+    assert attn['rope']['rotation_pairing']=='half_split_rotate_half'
+    assert attn['rope']['frequency_embedding']=='concat_freqs_freqs'
 
 
 def test_smollm2_135m_config_generates_expected_geometry_and_scalar_count_without_weights():
@@ -59,6 +64,7 @@ def test_smollm2_135m_config_generates_expected_geometry_and_scalar_count_withou
     a=plan.attention_modules[0]
     assert a['head_dim']==64 and a['q_heads']==9 and a['kv_heads']==3
     assert a['q_to_kv_map']==[0,0,0,1,1,1,2,2,2]
+    assert a['rope']['rotation_pairing']=='half_split_rotate_half'
     assert len(plan.attention_modules)==30
     assert expected_hf_llama_unique_scalars(config)==134_515_008
     assert plan.config_evidence['config_expected_unique_scalar_count']==134_515_008
