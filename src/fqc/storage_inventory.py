@@ -39,16 +39,16 @@ def analyze_storage_slices(slices: Iterable[StorageSlice], *, reject_partial_ove
     for s in xs: _validate(s)
     by_storage=defaultdict(list)
     for s in xs: by_storage[s.storage_key].append(s)
-    groups={}; partial=[]; total=0
+    groups={}; exact_members=[]; partial=[]; total=0
     for key,items in by_storage.items():
         dtypes={(s.dtype,s.element_size) for s in items}
         if len(dtypes)!=1:
             raise ValueError(f'storage {key}: mixed dtype/element-size views are unsupported')
+        # Exact alias groups are identical intervals on the same storage.
         interval_groups=defaultdict(list)
         for s in items: interval_groups[(s.offset,s.end)].append(s)
-        for (a,b),members in interval_groups.items():
-            gid=f'{key}:{a}:{b}'
-            for s in members: groups[s.tensor_id]=gid
+        for (_a,_b),members in interval_groups.items():
+            exact_members.append(tuple(sorted(s.tensor_id for s in members)))
         intervals=sorted((s.offset,s.end,s.tensor_id) for s in items)
         for i in range(len(intervals)):
             a0,a1,aid=intervals[i]
@@ -56,11 +56,18 @@ def analyze_storage_slices(slices: Iterable[StorageSlice], *, reject_partial_ove
                 b0,b1,bid=intervals[j]
                 if b0>=a1: break
                 if (a0,a1)!=(b0,b1): partial.append(tuple(sorted((aid,bid))))
+        # Union length in scalar elements (dtype is uniform within storage key).
         merged=[]
         for a,b,_ in intervals:
             if not merged or a>merged[-1][1]: merged.append([a,b])
             else: merged[-1][1]=max(merged[-1][1],b)
         total += sum(b-a for a,b in merged)
+    # Runtime storage keys prove aliasing during extraction but can contain
+    # process-local pointers. Public group IDs are deterministic functions of
+    # tensor membership, so manifest hashes remain stable across runs.
+    for idx,members in enumerate(sorted(exact_members)):
+        gid=f'sg{idx:06d}'
+        for tensor_id in members: groups[tensor_id]=gid
     partial=tuple(sorted(set(partial)))
     if partial and reject_partial_overlap:
         raise ValueError('partial storage overlap requires explicit range accounting: '+', '.join(f'{a}<->{b}' for a,b in partial))
@@ -72,7 +79,9 @@ def torch_like_storage_slice(tensor_id: str, tensor: Any) -> StorageSlice:
 
     No torch dependency is imported; the object must expose the usual tensor
     methods/attributes. Noncontiguous views are rejected because their exact
-    scalar coverage is not one interval.
+    scalar coverage is not one interval. The returned storage key may contain a
+    runtime pointer and is therefore internal evidence only; never serialize it
+    as a stable public identifier.
     """
     if not bool(tensor.is_contiguous()):
         raise ValueError(f'{tensor_id}: noncontiguous tensor requires explicit index accounting')
