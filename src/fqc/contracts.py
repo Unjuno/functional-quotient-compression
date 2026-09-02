@@ -113,6 +113,22 @@ def validate_transformer_extraction(m: Mapping[str,Any]) -> ExtractionValidation
         if a.get('position_operator')=='rope':
             rd=a.get('rope',{}).get('rotary_dim'); hd=a.get('head_dim')
             if not isinstance(rd,int) or not isinstance(hd,int) or rd<0 or rd>hd or rd%2: e.append(f'{mid}: invalid rotary_dim')
+    for mlp in modules.get('mlp',[]) if isinstance(modules.get('mlp',[]),list) else []:
+        mid=mlp.get('module_id','<mlp>')
+        tids=mlp.get('tensor_ids',{})
+        if not isinstance(tids,Mapping):
+            e.append(f'{mid}: tensor_ids must be a mapping')
+        else:
+            for role,tid in tids.items():
+                if tid not in tensors: e.append(f'{mid}: missing MLP tensor {role}:{tid}')
+    for norm in modules.get('normalization',[]) if isinstance(modules.get('normalization',[]),list) else []:
+        mid=norm.get('module_id','<norm>')
+        tids=norm.get('tensor_ids',[])
+        if not isinstance(tids,list) or any(not isinstance(tid,str) for tid in tids):
+            e.append(f'{mid}: tensor_ids must be a list of tensor ids')
+        else:
+            for tid in tids:
+                if tid not in tensors: e.append(f'{mid}: missing normalization tensor {tid}')
     pids=set()
     for p in m.get('derived_primitives',[]) if isinstance(m.get('derived_primitives',[]),list) else []:
         pid=p.get('primitive_id')
