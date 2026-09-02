@@ -40,3 +40,11 @@ def test_torch_like_slice_uses_real_storage_range_fields():
     s=torch_like_storage_slice('x',_Tensor())
     assert (s.offset,s.length,s.element_size)==(10,40,2)
     assert s.storage_key=='cpu:1234:200'
+
+
+def test_public_alias_group_ids_do_not_depend_on_runtime_storage_pointer():
+    a=[StorageSlice('embed','pointer-A',0,40,'bf16',2),StorageSlice('lm_head','pointer-A',0,40,'bf16',2)]
+    b=[StorageSlice('embed','pointer-B',0,40,'bf16',2),StorageSlice('lm_head','pointer-B',0,40,'bf16',2)]
+    ia=analyze_storage_slices(a); ib=analyze_storage_slices(b)
+    assert ia.exact_alias_group==ib.exact_alias_group
+    assert ia.exact_alias_group['embed']=='sg000000'
