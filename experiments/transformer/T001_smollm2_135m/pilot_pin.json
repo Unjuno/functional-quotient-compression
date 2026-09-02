@@ -1,6 +1,6 @@
 {
   "experiment_id": "T001_smollm2_135m",
-  "status": "PREFLIGHT_ONLY_NO_LIVE_STORAGE_INVENTORY",
+  "status": "SERIALIZED_CHECKPOINT_HEADER_PASS_RUNTIME_REPLAY_PENDING",
   "model_id": "HuggingFaceTB/SmolLM2-135M",
   "license": "apache-2.0",
   "hub_revision": "28e66ca6931668447a3bac213f23d990ad3b0e2b",
@@ -37,9 +37,25 @@
     "hard_64x_target_mib": 4.008859634399414,
     "published_safetensors_minus_scalar_payload_bytes": 30536
   },
+  "actual_serialized_checkpoint": {
+    "status": "PASS",
+    "serialized_tensor_count": 272,
+    "serialized_scalar_count_N": 134515008,
+    "dtype_scalar_counts": {
+      "BF16": 134515008
+    },
+    "missing_checkpoint_keys": 0,
+    "unaccounted_checkpoint_keys": 0,
+    "safetensors_header_size_bytes": 30528,
+    "safetensors_prefix_plus_header_bytes": 30536,
+    "serialized_tensor_payload_bytes": 269030016,
+    "safetensors_container_overhead_bytes": 30536
+  },
   "authority": {
-    "compression_denominator": "LIVE_STORAGE_INVENTORY_REQUIRED",
-    "preflight_scalar_count": "CONFIG_CROSS_CHECK_ONLY",
+    "compression_denominator": "PINNED_SERIALIZED_CHECKPOINT_UNIQUE_PAID_SCALAR_PAYLOAD",
+    "denominator_N": 134515008,
+    "runtime_storage_inventory": "CONSISTENCY_CHECK_REQUIRED_NOT_DENOMINATOR_AUTHORITY",
+    "module_replay": "REQUIRED_BEFORE_STRUCTURAL_COMPRESSION_CLAIMS",
     "compression_result": "NOT_TESTED"
   },
   "source_checked_date": "2026-09-02"
