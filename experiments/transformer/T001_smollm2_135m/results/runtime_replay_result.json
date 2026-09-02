@@ -1,0 +1,90 @@
+{
+  "adapter_version": "2",
+  "artifact_provenance": {
+    "attempt_1": {
+      "artifact_digest": "sha256:078d8c22bfb48bd022484a0ff490c0f4560350cd820ccc6308bf1370c7c71c24",
+      "artifact_id": 9847001570
+    },
+    "attempt_2_fresh_runner": {
+      "artifact_digest": "sha256:f5e3d7e8f99478822d7e606964152d47dda61da48954c029fb0f9e1865e63f61",
+      "artifact_id": 9847062798
+    },
+    "github_actions_run_id": 33631511117,
+    "head_sha": "c211387e5d7d7ad8d4d5d3daf8d06e236009f1d8",
+    "pr_merge_sha": "3f7f8b2accb1856a5980f159e5890826f984e3e9"
+  },
+  "attention_implementation": "eager",
+  "checkpoint_sha256": "80521b40281d6ce74e35c9282c22539e75aa0ac8578892b2a59955ef78d55da1",
+  "embedding_lm_head_same_parameter_object": true,
+  "embedding_lm_head_same_storage": true,
+  "evidence_scope": "RUNTIME_STORAGE_AND_LAYER0_REPLAY_ONLY_NO_COMPRESSION_RESULT",
+  "experiment_id": "T001_smollm2_135m",
+  "fresh_process_stability": {
+    "all_replay_reference_hashes_identical": true,
+    "all_replay_extracted_hashes_identical": true,
+    "attempt_count": 2,
+    "runtime_manifest_hash_identical": true
+  },
+  "hub_revision": "28e66ca6931668447a3bac213f23d990ad3b0e2b",
+  "replay_cases": [
+    {
+      "case_id": "attention_output",
+      "extracted_hash": "sha256:303b0a8cc799abecce9dc546d5f924ee074c0a12f6a94adc77c0ebb0ac8fab7b",
+      "max_abs_error": 0.0,
+      "max_tolerance_ratio": 0.0,
+      "passed": true,
+      "reference_hash": "sha256:303b0a8cc799abecce9dc546d5f924ee074c0a12f6a94adc77c0ebb0ac8fab7b"
+    },
+    {
+      "case_id": "full_decoder_layer",
+      "extracted_hash": "sha256:d3164b63a255818303283bc3300e6505ae8ac9901a0ccef68fe0040b18ffa1ad",
+      "max_abs_error": 0.0,
+      "max_tolerance_ratio": 0.0,
+      "passed": true,
+      "reference_hash": "sha256:d3164b63a255818303283bc3300e6505ae8ac9901a0ccef68fe0040b18ffa1ad"
+    },
+    {
+      "case_id": "input_rms_norm",
+      "extracted_hash": "sha256:301ae678d987c46aabcb05953c5dd09a7cbcadca4a171253878e4a469f94cf66",
+      "max_abs_error": 0.0,
+      "max_tolerance_ratio": 0.0,
+      "passed": true,
+      "reference_hash": "sha256:301ae678d987c46aabcb05953c5dd09a7cbcadca4a171253878e4a469f94cf66"
+    },
+    {
+      "case_id": "mlp_output",
+      "extracted_hash": "sha256:66b4b556bc137f9f5a78b382c4b6dd9c8ff0820fa2118c759c733799d6978f55",
+      "max_abs_error": 0.0,
+      "max_tolerance_ratio": 0.0,
+      "passed": true,
+      "reference_hash": "sha256:66b4b556bc137f9f5a78b382c4b6dd9c8ff0820fa2118c759c733799d6978f55"
+    },
+    {
+      "case_id": "rope_cos_sin",
+      "extracted_hash": "sha256:f674c7d00ad82449ec2e3502d9ebe650f36ab3557ccd149fffdda8c1e0ebbaac",
+      "max_abs_error": 0.0,
+      "max_tolerance_ratio": 0.0,
+      "passed": true,
+      "reference_hash": "sha256:f674c7d00ad82449ec2e3502d9ebe650f36ab3557ccd149fffdda8c1e0ebbaac"
+    }
+  ],
+  "replay_contract_sha256": "sha256:70cf983f7c7892f6f2e431d8e20b97b825c1a1160e17277d12fea1dea0f9b375",
+  "replay_passed": true,
+  "rope_contract": {
+    "frequency_embedding": "concat_freqs_freqs",
+    "frequency_source": "EXTERNAL_FIXED",
+    "layout": "hf_llama_half_split",
+    "rotary_dim": 64,
+    "rotation_pairing": "half_split_rotate_half"
+  },
+  "runtime_manifest_canonical_sha256": "sha256:feb51f0b71f56a76410c5cac23d6dbc67205268f4f75cdd6772f397bfb4dbcc2",
+  "runtime_manifest_unique_scalar_count_N": 134515008,
+  "runtime_source_keys_missing": [],
+  "runtime_state_extra_keys": [
+    "lm_head.weight"
+  ],
+  "source_denominator_N": 134515008,
+  "status": "PASS",
+  "torch_version": "2.5.1+cpu",
+  "transformers_version": "4.47.1"
+}
