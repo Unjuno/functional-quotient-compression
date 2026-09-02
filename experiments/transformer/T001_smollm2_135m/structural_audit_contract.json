@@ -1,0 +1,28 @@
+{
+  "experiment_id": "T002_smollm2_raw_structural_audit",
+  "source_experiment": "T001_smollm2_135m",
+  "checkpoint_sha256": "80521b40281d6ce74e35c9282c22539e75aa0ac8578892b2a59955ef78d55da1",
+  "layers": [0, 15, 29],
+  "geometry": {
+    "d_model": 576,
+    "q_heads": 9,
+    "kv_heads": 3,
+    "head_dim": 64,
+    "intermediate_size": 1536,
+    "gqa_mapping": "contiguous_3_query_heads_per_kv_head"
+  },
+  "metrics": {
+    "head_family_span": "frobenius_normalized_family_svd",
+    "qk_gqa_group_span": "three_query_heads_plus_corresponding_key_head",
+    "value_output_operator": "exact_WV_k_times_WO_h_per_query_head",
+    "cross_layer_span": "same_tensor_role_across_layers_0_15_29",
+    "swiglu_channel": "up_row_norm_times_down_column_norm_plus_gate_up_cosine"
+  },
+  "precision": "convert_checkpoint_BF16_to_float32_then_diagnostics_float64",
+  "evidence_scope": "TASK_UNCONDITIONED_STRUCTURE_ONLY",
+  "forbidden_inference": [
+    "no_codec_bit_claim_from_span_residual",
+    "no_task_quality_claim_from_energy_or_cosine",
+    "no_64x_feasibility_claim_from_raw_structure_alone"
+  ]
+}

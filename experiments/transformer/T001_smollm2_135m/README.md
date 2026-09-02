@@ -1,8 +1,9 @@
 # T001 — SmolLM2-135M Real-Model Pilot
 
 This directory is the first real-model FQC pilot. The pinned source checkpoint
-has passed both the **serialized checkpoint gate** and the **live runtime /
-layer-0 replay gate**. Structural compression measurements are the next phase.
+has passed the **serialized checkpoint gate**, the **live runtime / layer-0
+replay gate**, and the first **task-unconditioned raw structural audit**. The next
+required phase is task-conditioned functional sensitivity.
 
 ## Pinned source
 
@@ -100,30 +101,70 @@ other dominant structures must obtain very low description length.
 
 See `results/source_component_budget.json`.
 
+## G3a / T002 — raw structural audit: PASS
+
+Layers **0, 15, and 29** were audited directly from the pinned BF16 checkpoint.
+The full result was reproduced byte-for-byte across two independent GitHub
+Actions runs (`structural_audit_result.json` SHA-256
+`b051c3b4b87430902156451ccee11d6b166260c77b839f4f2f850dda56fa6a77`).
+
+The descriptive reference is an equal-energy mutually orthogonal family: for
+`m` Frobenius-normalized family members its rank-1 residual is `1 - 1/m`. This is
+**not** a statistical null test.
+
+### Main findings
+
+1. **Direct raw cross-layer sharing is essentially absent.** For corresponding
+   WQ/WK/WV/WO/gate/up/down tensors across layers 0/15/29, the largest rank-1
+   concentration excess above the orthogonal reference is only **0.00225**
+   (WQ). Pairwise raw-weight cosines are correspondingly near zero.
+2. **Local GQA Q/K families are much more structured.** The strongest audited
+   family is layer 15, KV group 2 (`3 Q heads + corresponding K head`): rank-1
+   residual **0.4731** versus orthogonal reference **0.75**, an excess
+   concentration of **0.2769**. Strong candidates also appear in layer 29.
+3. **Value-output derived operators show moderate concentration**, especially
+   layer 29 (excess **0.1662**) and layer 15 (**0.1404**). Because GQA already
+   shares V parameters, this must not be double-counted as new compression gain.
+4. **MLP channel structure is layer-dependent.** In layer 15 the top 10% of
+   SwiGLU channel descriptor energy contains **23.73%** of the total and the top
+   25% contains **44.72%**. Layer 0 is much closer to uniform (top 10% =
+   **11.75%**).
+
+The practical consequence is that root search should prioritize **local,
+architecture-aware families** rather than a single shared raw basis across
+distant layers. A uniform per-layer codec policy is also poorly motivated by
+these measurements.
+
+See `results/structural_audit_summary.json`. Full exploratory matrices and
+singular spectra remain in the GitHub Actions artifact rather than the canonical
+repository result.
+
 ## Evidence boundary
 
-The current T001 evidence establishes:
+The current T001/T002 evidence establishes:
 
 - exact pinned source identity and denominator,
 - full serialized tensor coverage,
 - runtime tied-storage consistency,
 - deterministic adapter semantics,
-- exact layer-0 replay under the pinned runtime.
+- exact layer-0 replay under the pinned runtime,
+- reproducible raw structural measurements on layers 0/15/29.
 
 It does **not** yet establish:
 
-- shared low-description structure,
 - task-weighted null directions,
-- functional sensitivity of candidate compression moves,
+- functional sensitivity or removability of structural candidates,
+- actual root/dictionary bit savings,
 - any actual FQC encoded byte count,
 - or 64x feasibility.
 
-## Next gate — G3 structural and functional audit
+## Next gate — G3b functional audit
 
-1. Run structural diagnostics on layers 0, 15, and 29 using correctly oriented
-   actual weights.
-2. Measure Q/K and V/O shared-span spectra, support overlap, and MLP structure.
-3. Keep structural residuals separate from rate claims.
-4. Add calibration activations and D61 functional sensitivity.
+1. Fix a calibration corpus and hash the exact tokenized samples.
+2. Capture layer inputs / outputs under the pinned runtime.
+3. Measure D61-style functional sensitivity for the strongest T002 candidates,
+   especially layer-15/29 GQA groups and layer-15 MLP channels.
+4. Compare structural score against functional score; explicitly search for
+   low-energy/high-task-value counterexamples.
 5. Only then generate shared-root/private-residual codec candidates and price
-   them against the 4,203,594-byte hard budget.
+   them against the **4,203,594-byte** hard budget.

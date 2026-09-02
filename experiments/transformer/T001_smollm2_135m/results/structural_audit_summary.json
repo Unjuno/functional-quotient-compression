@@ -1,0 +1,61 @@
+{
+  "experiment_id": "T002_smollm2_raw_structural_audit",
+  "status": "PASS",
+  "evidence_scope": "TASK_UNCONDITIONED_STRUCTURE_ONLY",
+  "checkpoint_sha256": "80521b40281d6ce74e35c9282c22539e75aa0ac8578892b2a59955ef78d55da1",
+  "full_result_sha256": "b051c3b4b87430902156451ccee11d6b166260c77b839f4f2f850dda56fa6a77",
+  "reproducibility": {
+    "independent_workflow_runs": 2,
+    "full_result_json_identical": true,
+    "run_1": {
+      "run_id": 33639071201,
+      "artifact_id": 9850048530,
+      "artifact_digest": "sha256:8ad905e9c61797bf50edebea01fa87a985c413f16b7c780bcbc0021f23f37c64"
+    },
+    "run_2": {
+      "run_id": 33639361001,
+      "artifact_id": 9850162022,
+      "artifact_digest": "sha256:ff6d5a5d19d23d37cefd6c9e7d221bdf03c7d224ac4d3ddb8c47f33817bd7d91"
+    }
+  },
+  "descriptive_reference": "For m Frobenius-normalized mutually orthogonal family members, rank-1 residual = 1 - 1/m. This is a descriptive reference, not a statistical null test.",
+  "findings": {
+    "raw_cross_layer_corresponding_weights": {
+      "interpretation": "No meaningful direct raw-coordinate shared rank-1 structure was observed across layers 0, 15, and 29 for WQ/WK/WV/WO/gate/up/down.",
+      "largest_rank1_concentration_excess_vs_orthogonal": 0.0022501324471537743,
+      "role_with_largest_excess": "WQ"
+    },
+    "strongest_local_gqa_candidate": {
+      "family": "layer_15_three_query_heads_plus_kv_head_2_key_head",
+      "observed_rank1_residual": 0.47307316196216576,
+      "orthogonal_reference_rank1_residual": 0.75,
+      "rank1_concentration_excess_vs_orthogonal": 0.27692683803783424
+    },
+    "other_local_candidates": [
+      {"family": "layer_29_qk_gqa_kv2", "rank1_concentration_excess_vs_orthogonal": 0.19364014203672875},
+      {"family": "layer_15_qk_gqa_kv1", "rank1_concentration_excess_vs_orthogonal": 0.1730898025823393},
+      {"family": "layer_29_qk_gqa_kv0", "rank1_concentration_excess_vs_orthogonal": 0.1724423634618949},
+      {"family": "layer_29_value_output_operators", "rank1_concentration_excess_vs_orthogonal": 0.16623854406962035},
+      {"family": "layer_15_value_output_operators", "rank1_concentration_excess_vs_orthogonal": 0.1403957602805983}
+    ],
+    "swiglu_descriptor_concentration": {
+      "layer_0_top10_percent_energy": 0.11746242633899964,
+      "layer_15_top10_percent_energy": 0.23731299493703803,
+      "layer_29_top10_percent_energy": 0.1683910787694094,
+      "layer_15_top25_percent_energy": 0.4472466303025619,
+      "interpretation": "Among the three audited layers, layer 15 has the strongest channel-descriptor concentration; layer 0 is close to uniform by this metric."
+    }
+  },
+  "scientific_interpretation": [
+    "A single shared raw basis across distant corresponding layers is not supported by this audit.",
+    "Local architecture-aware families, especially GQA Q/K groups, are a better root-search target than raw cross-layer weight sharing.",
+    "MLP channel concentration is strongly layer-dependent, so a uniform per-layer codec policy is unlikely to be optimal.",
+    "Value-output operator concentration partly reflects known GQA reuse and must not be counted as new compression gain without an exact bit ledger."
+  ],
+  "next_gate": "Task-conditioned functional sensitivity on the strongest local candidates before any removability, codec-rate, or 64x claim.",
+  "forbidden_inference": [
+    "no codec bit claim from span residual",
+    "no task-quality claim from energy or cosine",
+    "no 64x feasibility claim from raw structure alone"
+  ]
+}
