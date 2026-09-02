@@ -1,0 +1,53 @@
+{
+  "experiment_id": "T004_smollm2_continuation_amplification",
+  "source_functional_experiment": "T003_smollm2_functional_interventions",
+  "model_id": "HuggingFaceTB/SmolLM2-135M",
+  "hub_revision": "28e66ca6931668447a3bac213f23d990ad3b0e2b",
+  "checkpoint_sha256": "80521b40281d6ce74e35c9282c22539e75aa0ac8578892b2a59955ef78d55da1",
+  "runtime": {
+    "transformers": "4.47.1",
+    "torch": "2.5.1+cpu",
+    "device": "cpu",
+    "dtype": "bfloat16",
+    "attention": "eager",
+    "seed": 20260902
+  },
+  "calibration_source": "experiments/transformer/T001_smollm2_135m/functional_audit_contract.json",
+  "expected_tokenized_inputs_sha256": "sha256:73f8f678ed31618564191dc7760e51819a7737d57d1a4037135ce6cb96e4b27d",
+  "candidate_grid": {
+    "kind": "qk_family_rank",
+    "layers": [0, 5, 10, 15, 20, 25, 29],
+    "kv_heads": [0, 1, 2],
+    "rank": 3,
+    "total_candidates": 21
+  },
+  "geometry": {
+    "q_heads": 9,
+    "kv_heads": 3,
+    "head_dim": 64,
+    "gqa_mapping": "contiguous_3_query_heads_per_kv_head"
+  },
+  "local_measurements": [
+    "target_attention_output_relative_rms_delta",
+    "target_decoder_layer_output_relative_rms_delta"
+  ],
+  "final_measurements": [
+    "mean_kl_reference_to_perturbed",
+    "top1_flip_fraction",
+    "next_token_nll_delta",
+    "relative_rms_logit_delta"
+  ],
+  "derived_measurements": [
+    "within_layer_ratio_decoder_over_attention",
+    "continuation_ratio_final_logit_over_decoder",
+    "structural_residual_vs_function_correlations"
+  ],
+  "decision_scope": "MECHANISM_AUDIT_LOCAL_TO_FINAL_AMPLIFICATION",
+  "interpretation_policy": "RUNNER_EMITS_MEASUREMENTS_ONLY_POST_RUN_INTERPRETATION_MUST_BE_SEPARATE",
+  "forbidden_inference": [
+    "calibration_probe_is_not_benchmark_quality",
+    "amplification_ratio_is_not_codec_bit_saving",
+    "small_final_delta_does_not_imply_codec_positive",
+    "no_64x_claim_from_this_experiment"
+  ]
+}
