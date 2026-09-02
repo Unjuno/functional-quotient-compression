@@ -1,5 +1,7 @@
+import pytest
+
 from fqc.adapter_plan import materialize_adapter_plan
-from fqc.hf_llama_adapter import build_hf_llama_adapter_plan
+from fqc.hf_llama_adapter import build_hf_llama_adapter_plan, expected_hf_llama_unique_scalars
 
 
 class _Storage:
@@ -18,7 +20,7 @@ class _Tensor:
     def storage_offset(self):return 0
     def numel(self):return self._n
 
-CONFIG={'model_type':'llama','hidden_size':4,'intermediate_size':6,'num_hidden_layers':2,'num_attention_heads':2,'num_key_value_heads':1,'hidden_act':'silu','tie_word_embeddings':True,'rope_theta':10000,'rope_scaling':None,'rms_norm_eps':1e-5,'attention_bias':False}
+CONFIG={'model_type':'llama','vocab_size':10,'hidden_size':4,'intermediate_size':6,'num_hidden_layers':2,'num_attention_heads':2,'num_key_value_heads':1,'hidden_act':'silu','tie_word_embeddings':True,'rope_theta':10000,'rope_scaling':None,'rms_norm_eps':1e-5,'attention_bias':False,'mlp_bias':False}
 
 
 def _checkpoint():
@@ -44,16 +46,26 @@ def test_llama_adapter_materializes_pytorch_shapes_and_tied_embedding():
     manifest=materialize_adapter_plan(plan,ck)
     assert manifest['model_identity']['checkpoint_weight_orientation']=='pytorch_linear_weight_out_in'
     assert manifest['model_identity']['unique_baseline_scalar_count_N']==300
+    assert plan.config_evidence['config_expected_unique_scalar_count']==300
     groups={x['tensor_id']:x['storage_group'] for x in manifest['tensor_inventory']}
     assert groups['tok_emb']==groups['lm_head']
     assert len(manifest['modules']['attention'])==2
     assert manifest['modules']['attention'][0]['q_to_kv_map']==[0,0]
 
 
-def test_smollm2_135m_config_generates_expected_geometry_without_weights():
-    config={'model_type':'llama','hidden_size':576,'intermediate_size':1536,'num_hidden_layers':30,'num_attention_heads':9,'num_key_value_heads':3,'hidden_act':'silu','tie_word_embeddings':True,'rope_theta':100000,'rope_scaling':None,'rms_norm_eps':1e-5,'attention_bias':False}
+def test_smollm2_135m_config_generates_expected_geometry_and_scalar_count_without_weights():
+    config={'model_type':'llama','vocab_size':49152,'hidden_size':576,'intermediate_size':1536,'num_hidden_layers':30,'num_attention_heads':9,'num_key_value_heads':3,'hidden_act':'silu','tie_word_embeddings':True,'rope_theta':100000,'rope_scaling':None,'rms_norm_eps':1e-5,'attention_bias':False,'mlp_bias':False}
     plan=build_hf_llama_adapter_plan(config,checkpoint_sha256='sha256:placeholder',model_id='HuggingFaceTB/SmolLM2-135M')
     a=plan.attention_modules[0]
     assert a['head_dim']==64 and a['q_heads']==9 and a['kv_heads']==3
     assert a['q_to_kv_map']==[0,0,0,1,1,1,2,2,2]
     assert len(plan.attention_modules)==30
+    assert expected_hf_llama_unique_scalars(config)==134_515_008
+    assert plan.config_evidence['config_expected_unique_scalar_count']==134_515_008
+
+
+def test_adapter_rejects_unmodeled_attention_or_mlp_biases():
+    for key in ('attention_bias','mlp_bias'):
+        bad=dict(CONFIG); bad[key]=True
+        with pytest.raises(ValueError,match=key):
+            build_hf_llama_adapter_plan(bad,checkpoint_sha256='sha256:abc',model_id='tiny')
