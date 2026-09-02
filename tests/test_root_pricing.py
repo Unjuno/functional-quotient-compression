@@ -40,7 +40,7 @@ from fqc.root_pricing import (
 
 
 def test_d67_replacement_trap_reduced_objective():
-    delta=exact_replacement_score(0.1,36,40,[0.3,0.3,0.3,0.3],[0.1,0.1,0.1,0.1])
+    delta=exact_replacement_score(0.1,40,44,[0.3,0.3,0.3,0.3],[0.1,0.1,0.1,0.1])
     assert abs(delta+0.4)<1e-12
 
 
@@ -62,14 +62,19 @@ def test_d68_family_bound_safe_prune_semantics():
 
 def test_d69_compatibility_grouping_can_prune_when_singletons_cannot():
     current=[0.0,0.0,0.0,0.0]
-    coalitions=[
-      {'closure_delta':13,'block_q':[-2.0,1.0,0.0,0.0]},
-      {'closure_delta':13,'block_q':[1.0,-2.0,0.0,0.0]},
-    ]
+    A=[(-1.0,0.4),(0.4,-1.0),(-0.8,0.2)]
+    B=[(-1.0,0.4),(0.4,-1.0),(-0.8,0.2)]
+    coalitions=[]
+    for a in A:
+        for b in B:
+            coalitions.append({'closure_delta':13,'block_q':[a[0],a[1],b[0],b[1]]})
     singleton=grouped_lower_bound(0.1,13,current,coalitions,[(0,),(1,),(2,),(3,)])
     paired=grouped_lower_bound(0.1,13,current,coalitions,[(0,1),(2,3)])
-    assert singleton < 0
-    assert abs(paired-0.3)<1e-12
+    exact=min(0.1*c['closure_delta']+sum(c['block_q']) for c in coalitions)
+    assert abs(singleton+2.7)<1e-12
+    assert abs(paired-0.1)<1e-12
+    assert abs(exact-0.1)<1e-12
+    assert not safe_prune(singleton)
     assert safe_prune(paired)
 
 
