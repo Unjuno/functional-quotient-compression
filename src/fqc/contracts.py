@@ -85,14 +85,50 @@ def validate_transformer_extraction(m: Mapping[str,Any]) -> ExtractionValidation
         mid=a.get('module_id','<attn>'); qh=a.get('q_heads'); kvh=a.get('kv_heads'); mp=a.get('q_to_kv_map',[])
         if not isinstance(qh,int) or qh<=0 or not isinstance(kvh,int) or kvh<=0: e.append(f'{mid}: invalid head counts'); continue
         if len(mp)!=qh or any(not isinstance(x,int) or x<0 or x>=kvh for x in mp): e.append(f'{mid}: invalid q_to_kv_map')
-        for role,tid in a.get('projection_tensor_ids',{}).items():
+        projection_ids=a.get('projection_tensor_ids',{})
+        for role,tid in projection_ids.items():
             if tid not in tensors: e.append(f'{mid}: missing projection tensor {role}:{tid}')
+        orientation=m.get('model_identity',{}).get('orientation')
+        d_model=a.get('d_model'); hd=a.get('head_dim'); vd=a.get('value_dim',hd)
+        if orientation=='row_vector_x_times_W' and all(isinstance(x,int) and x>0 for x in (d_model,hd,vd)):
+            expected={
+                'WQ':[d_model,qh*hd],
+                'WK':[d_model,kvh*hd],
+                'WV':[d_model,kvh*vd],
+                'WO':[qh*vd,d_model],
+            }
+            for role,shape_expected in expected.items():
+                tid=projection_ids.get(role)
+                if tid in tensors and tensors[tid].get('shape')!=shape_expected:
+                    e.append(f'{mid}: {role} shape {tensors[tid].get("shape")} != expected {shape_expected} for row_vector_x_times_W')
+        elif orientation=='row_vector_x_times_W':
+            w.append(f'{mid}: projection shape validation skipped because d_model/head_dim/value_dim metadata is incomplete')
+        elif orientation is None:
+            w.append(f'{mid}: projection shape validation skipped because model orientation is missing')
+        else:
+            w.append(f'{mid}: projection shape validation unsupported for orientation {orientation}')
         red=a.get('exact_reduction_policy')
         if a.get('position_operator')=='rope' and red=='plain_bilinear_family': e.append(f'{mid}: plain bilinear reduction invalid under RoPE')
         if a.get('qk_norm') not in (None,'none') and red!='factor_preserving_required': e.append(f'{mid}: QK norm requires factor-preserving extraction')
         if a.get('position_operator')=='rope':
             rd=a.get('rope',{}).get('rotary_dim'); hd=a.get('head_dim')
             if not isinstance(rd,int) or not isinstance(hd,int) or rd<0 or rd>hd or rd%2: e.append(f'{mid}: invalid rotary_dim')
+    for mlp in modules.get('mlp',[]) if isinstance(modules.get('mlp',[]),list) else []:
+        mid=mlp.get('module_id','<mlp>')
+        tids=mlp.get('tensor_ids',{})
+        if not isinstance(tids,Mapping):
+            e.append(f'{mid}: tensor_ids must be a mapping')
+        else:
+            for role,tid in tids.items():
+                if tid not in tensors: e.append(f'{mid}: missing MLP tensor {role}:{tid}')
+    for norm in modules.get('normalization',[]) if isinstance(modules.get('normalization',[]),list) else []:
+        mid=norm.get('module_id','<norm>')
+        tids=norm.get('tensor_ids',[])
+        if not isinstance(tids,list) or any(not isinstance(tid,str) for tid in tids):
+            e.append(f'{mid}: tensor_ids must be a list of tensor ids')
+        else:
+            for tid in tids:
+                if tid not in tensors: e.append(f'{mid}: missing normalization tensor {tid}')
     pids=set()
     for p in m.get('derived_primitives',[]) if isinstance(m.get('derived_primitives',[]),list) else []:
         pid=p.get('primitive_id')

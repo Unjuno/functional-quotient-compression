@@ -46,3 +46,22 @@ def test_duplicate_tensor_ids_rejected():
 def test_plain_bilinear_rejected_under_rope():
  m=deepcopy(EXTRACTION); m['modules']['attention'][0]['exact_reduction_policy']='plain_bilinear_family'; r=validate_transformer_extraction(m)
  assert not r.valid and any('RoPE' in e for e in r.errors)
+
+def test_row_vector_attention_projection_shapes_are_checked():
+ m=deepcopy(EXTRACTION)
+ m['model_identity']['orientation']='row_vector_x_times_W'
+ m['modules']['attention'][0]['d_model']=4
+ m['modules']['attention'][0]['value_dim']=2
+ assert validate_transformer_extraction(m).valid
+ m['tensor_inventory'][2]['shape']=[4,3]
+ r=validate_transformer_extraction(m)
+ assert not r.valid and any('WQ shape' in e for e in r.errors)
+
+def test_mlp_and_normalization_tensor_references_are_checked():
+ m=deepcopy(EXTRACTION)
+ m['modules']['mlp']=[{'module_id':'mlp','tensor_ids':{'gate':'ghost_gate'}}]
+ m['modules']['normalization']=[{'module_id':'norm','tensor_ids':['ghost_norm']}]
+ r=validate_transformer_extraction(m)
+ assert not r.valid
+ assert any('missing MLP tensor' in e for e in r.errors)
+ assert any('missing normalization tensor' in e for e in r.errors)
