@@ -1,0 +1,21 @@
+canonical_path,source_package,source_path_or_range,action,status
+README.md,"all three handoffs","consolidated summaries + claim boundaries",MERGE,ACTIVE
+docs/RESEARCH_STATE.md,"COMPLETE + D120","MASTER_THEORY.md; EXACT_EXPERIMENT_LOG.md; MASTER_RESEARCH_SUMMARY_D1_D120.md; CLAIM_BOUNDARIES.md",MERGE,ACTIVE
+docs/EVIDENCE_POLICY.md,"D120","CLAIM_BOUNDARIES.md; D050-D057 contract line",MERGE,ACTIVE
+docs/RESEARCH_HISTORY.md,"D120 + COMPLETE","D001-D120 phase summaries; E1-E7 exact branch",MERGE,ACTIVE
+docs/EXACT_RESULTS.md,"COMPLETE","02_EXPERIMENTS/EXACT_EXPERIMENT_LOG.md",MERGE,ACTIVE
+docs/SYNTHETIC_RESULTS_D115_D120.md,"D120","D115-D120 result JSONs + master summary",MERGE,ACTIVE
+docs/contracts/REAL_PILOT_CONTRACT.md,"D120","D056__vm_real_pilot_contract_step_20260830.zip",MERGE,ACTIVE
+docs/contracts/TRANSFORMER_EXTRACTION_CONTRACT.md,"D120","D057__vm_transformer_extraction_contract_step_20260830.zip",MERGE,ACTIVE
+claims/CLAIM_LEDGER.csv,"all three handoffs","validated cross-source claims",MERGE,ACTIVE
+roadmap/ROADMAP.md,"current reconstruction decision + handoff next-step queues","multiple",MERGE,ACTIVE
+provenance/RECONSTRUCTION_LOG.md,"all three handoffs","package-level audit",MERGE,ACTIVE
+src/*,"COMPLETE + D120","executable code and validated specifications",REIMPLEMENT,PENDING
+tests/*,"COMPLETE + D120","E1-E7 and contract validators",REIMPLEMENT,PENDING
+experiments/exact_codec/*,"COMPLETE","E1-E7 logged experiment branch",REIMPLEMENT,PENDING
+experiments/transformer/*,"D056-D057 contracts","future real-model pilot",NEW,PENDING
+scheduler/*,"D070-D120","synthetic scheduler/controller line",RECLASSIFY,PENDING
+legacy/missing/D096,"D120","missing original checkpoint",MISSING,KNOWN_MISSING
+legacy/missing/mixed_gate_case.npz,"COMPLETE","absolute-path dependency in full_jacobian_mixed_gate_analysis.py",MISSING,KNOWN_MISSING
+legacy/missing/mixed_gate_three_layer_case.npz,"COMPLETE","absolute-path dependency in full_three_layer_mixed_analysis.py",MISSING,KNOWN_MISSING
+legacy/specifications/*,"D075-D120 subset","41 non-compiling *_reference.py-style pseudo-code/spec files",RECLASSIFY,PENDING
