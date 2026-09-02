@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 from pathlib import Path
 
 from fqc.hf_llama_adapter import build_hf_llama_adapter_plan
@@ -41,8 +42,17 @@ def main() -> int:
     manifest['model_identity']['hub_revision']=pin['hub_revision']
     manifest['model_identity']['checkpoint_file']=expected_file['path']
     manifest['model_identity']['checkpoint_file_size_bytes']=actual_size
+    manifest['extraction_policy']['storage_alias_evidence']='serialized_checkpoint_key_identity_only_runtime_alias_unverified'
     manifest_hash=sha256_json(manifest)
     n=manifest['model_identity']['unique_baseline_scalar_count_N']
+    tensor_payload_bytes=sum(x.data_bytes for x in header.entries.values())
+    container_overhead_bytes=actual_size-tensor_payload_bytes
+    runner_provenance={
+        'github_run_id':os.environ.get('GITHUB_RUN_ID'),
+        'github_sha':os.environ.get('GITHUB_SHA'),
+        'github_ref':os.environ.get('GITHUB_REF'),
+        'github_workflow':os.environ.get('GITHUB_WORKFLOW'),
+    }
     result={
         'experiment_id':pin['experiment_id'],
         'status':'PASS' if preflight.passed else 'FAIL',
@@ -50,17 +60,21 @@ def main() -> int:
         'checkpoint_sha256':actual_sha,
         'checkpoint_size_bytes':actual_size,
         'safetensors_header_size_bytes':header.header_size_bytes,
+        'safetensors_prefix_plus_header_bytes':8+header.header_size_bytes,
+        'serialized_tensor_payload_bytes':tensor_payload_bytes,
+        'safetensors_container_overhead_bytes':container_overhead_bytes,
         'serialized_tensor_count':preflight.serialized_tensor_count,
         'serialized_scalar_count':preflight.serialized_scalar_count,
         'dtype_scalar_counts':dict(preflight.dtype_scalar_counts),
         'config_expected_scalar_count':preflight.config_expected_scalar_count,
-        'live_D57_unique_baseline_scalar_count_N':n,
+        'serialized_header_unique_baseline_scalar_count_N':n,
         'hard_64x_target_bits':n//4,
         'hard_64x_target_bytes':(n//4)//8,
         'unaccounted_checkpoint_keys':list(preflight.unaccounted_checkpoint_keys),
         'missing_checkpoint_keys':list(preflight.missing_checkpoint_keys),
-        'extraction_manifest_sha256':manifest_hash,
-        'evidence_scope':'SERIALIZED_CHECKPOINT_HEADER_ONLY_NO_MODULE_REPLAY',
+        'extraction_manifest_canonical_sha256':manifest_hash,
+        'evidence_scope':'SERIALIZED_CHECKPOINT_HEADER_ONLY_RUNTIME_ALIAS_AND_MODULE_REPLAY_UNVERIFIED',
+        'runner_provenance':runner_provenance,
     }
     pin_pre=pin['config_derived_preflight']
     required=(
@@ -68,7 +82,8 @@ def main() -> int:
         n==pin_pre['expected_unique_scalar_count_N']==preflight.serialized_scalar_count and
         n//4==pin_pre['hard_64x_target_bits'] and
         preflight.serialized_tensor_count==272 and
-        preflight.dtype_scalar_counts=={'BF16':n}
+        preflight.dtype_scalar_counts=={'BF16':n} and
+        container_overhead_bytes==8+header.header_size_bytes
     )
     result['status']='PASS' if required else 'FAIL'
     (out/'preflight_result.json').write_text(json.dumps(result,indent=2,sort_keys=True)+'\n')
