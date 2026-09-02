@@ -1,0 +1,56 @@
+{
+  "candidate_grid": {
+    "candidate_count": 21,
+    "kv_groups_per_layer": 3,
+    "layers": [0,5,10,15,20,25,29],
+    "rank": 3
+  },
+  "experiment_id": "T004_GQA_functional_geometry_canonical_summary",
+  "model": "HuggingFaceTB/SmolLM2-135M",
+  "primary_findings": {
+    "layer_transfer_cross_validation": {
+      "interpretation": "layer-specific transfer can screen candidates, but exact replay remains required for commit decisions",
+      "leave_one_KV_out_decoder_to_final_median_APE": 0.11598726068952203,
+      "pearson": 0.7938559232874884
+    },
+    "layer_transfer_is_dominant": {
+      "eta2_kv_log_continuation_ratio": 0.0011323329684301206,
+      "eta2_kv_log_within_layer_ratio": 0.00017664185660872246,
+      "eta2_layer_log_continuation_ratio": 0.9755661423171004,
+      "eta2_layer_log_within_layer_ratio": 0.9977479265471784
+    },
+    "local_attention_tracks_final_better": {
+      "pearson_attention_relative_rms_vs_final_relative_rms": 0.7814913341513146,
+      "pearson_decoder_relative_rms_vs_final_relative_rms": 0.6268096976608091
+    },
+    "raw_residual_is_not_functional_metric": {
+      "pearson_structural_residual_vs_final_relative_rms": -0.010511629740753212,
+      "pearson_structural_residual_vs_mean_kl": -0.07162465667583343
+    },
+    "shared_K_error_within_layer_association": {
+      "bonferroni_4metrics_p": 0.016117969821673524,
+      "exact_stratified_permutation_one_sided_p": 0.004029492455418381,
+      "layers_audited": 7,
+      "mean_spearman_K_error_vs_attention_damage": 0.7142857142857143,
+      "positive_layers": 7,
+      "raw_family_residual_exact_p": 0.5510116598079561,
+      "raw_family_residual_mean_spearman": 0.0,
+      "topology_score_exact_p": 0.00973079561042524,
+      "topology_score_mean_spearman": 0.6428571428571429
+    }
+  },
+  "reproducibility": {
+    "byte_identical": true,
+    "full_result_sha256": "db35b182620a36c8330aac69afecf34b5ee28526ebba06eaed678d65a5b29b5a",
+    "independent_runs": 2,
+    "summary_sha256": "527121073f77926001871e605f117eaea2fd14ddc7c29a8e8457be731d1bb38c"
+  },
+  "scientific_boundary": [
+    "fixed_calibration_probe_only",
+    "joint_QK_rank3_interventions_only",
+    "association_does_not_prove_K_only_causality",
+    "no_codec_bit_claim",
+    "no_64x_claim"
+  ],
+  "source_actual_forward": "T004_smollm2_continuation_amplification"
+}
