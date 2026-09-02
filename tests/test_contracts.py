@@ -65,3 +65,17 @@ def test_mlp_and_normalization_tensor_references_are_checked():
  assert not r.valid
  assert any('missing MLP tensor' in e for e in r.errors)
  assert any('missing normalization tensor' in e for e in r.errors)
+
+def test_pytorch_out_in_attention_projection_shapes_are_checked():
+ m=deepcopy(EXTRACTION)
+ m['model_identity']['checkpoint_weight_orientation']='pytorch_linear_weight_out_in'
+ m['model_identity']['canonical_operator_orientation']='row_vector_x_times_W'
+ m['modules']['attention'][0]['d_model']=4
+ m['modules']['attention'][0]['value_dim']=2
+ for t in m['tensor_inventory']:
+  if t['tensor_id'] in ('WK','WV'): t['shape']=[2,4]
+ assert validate_transformer_extraction(m).valid
+ for t in m['tensor_inventory']:
+  if t['tensor_id']=='WK': t['shape']=[4,2]
+ r=validate_transformer_extraction(m)
+ assert not r.valid and any('WK shape' in e for e in r.errors)
