@@ -1,0 +1,48 @@
+{
+  "evidence_lane": "CODEC_SERIALIZED_EMBEDDING_ONLY",
+  "model": "roneneldan/TinyStories-28M",
+  "checkpoint_sha256": "8ddd260f51b439744c8cc785b5516327d4bf32e31ccbfa9009bfadf12557fcf5",
+  "embedding_shape": [50257, 512],
+  "component_budget_bps": 0.25,
+  "component_budget_bytes": 804112,
+  "codec": {
+    "root_K": 256,
+    "root_value_bits": 4,
+    "root_scale_bits": 16,
+    "full_exception_count": 2250,
+    "full_residual_bits": 4,
+    "tail_K": 512,
+    "tail_codebook_bits": 2,
+    "tail_token_count": 4679,
+    "tail_block_dim": 32,
+    "tail_index_bits": 9,
+    "header_bytes": 4096
+  },
+  "serialized_bytes": 804101,
+  "headroom_bytes": 11,
+  "binary_sha256": "c8af91de2df4d061a2b12c7588901ca6a69aab8cfccb11870e491c533783fb6b",
+  "decoder_roundtrip_max_abs": 0.0,
+  "holdout_12": {
+    "mean_kl": 0.6699269935488701,
+    "first_4_mean_kl": 0.5319011211395264,
+    "extra_8_mean_kl": 0.738939929753542,
+    "mean_top1_flip": 0.3725849576294422
+  },
+  "alignment_rate_only": {
+    "8_byte": {"tail_tokens": 4678, "dropped_tail_tokens": 1, "bytes": 804100, "headroom": 12},
+    "16_byte": {"tail_tokens": 4677, "dropped_tail_tokens": 2, "bytes": 804106, "headroom": 6},
+    "32_byte": {"tail_tokens": 4676, "dropped_tail_tokens": 3, "bytes": 804104, "headroom": 8},
+    "64_byte": {"tail_tokens": 4672, "dropped_tail_tokens": 7, "bytes": 804096, "headroom": 16}
+  },
+  "status": {
+    "embedding_rate": "PASS",
+    "decoder_roundtrip": "PASS",
+    "functional_quality": "FAIL",
+    "whole_model_64x": "NOT_TESTED"
+  },
+  "boundaries": [
+    "Embedding component only; not a whole-model serializer.",
+    "Local manual GPT-Neo replay is not an independent Hugging Face extraction certificate.",
+    "Alignment variants are rate-only calculations; only the dense T147 file was decoded and functionally replayed."
+  ]
+}
