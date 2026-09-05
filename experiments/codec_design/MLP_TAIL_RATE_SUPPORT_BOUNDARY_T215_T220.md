@@ -1,56 +1,104 @@
-# MLP tail exact rate/support boundary (T215–T220)
+# MLP tail rate/support boundary — T215–T220, corrected by T221–T224
 
-This note records durable conclusions from local experiments T215–T220. The functional proxy in T217 is synthetic and is intentionally not promoted as real-model quality evidence.
+## Critical correction (2026-09-06)
 
-## Exact 64x candidate bytes
+The earlier instruction to treat exact restoration of selected neurons as a task-quality upper bound, and prune a candidate when that restoration loses to uniform K128, is **withdrawn**. Partial restoration is a useful control, not a certified optimum: errors in the remaining compressed parameters can be compensated by an inexact selected correction. No candidate may be hard-pruned from restoration quality alone.
 
-Under the current 28M whole-model rate skeleton with a 32 KiB metadata reserve and 1,624,624-byte 64x target, exact packed tail sections and full placeholder containers were built and round-tripped:
+The earlier support ratio also pooled two separately trained residual codebooks. The correct support must be counted **per codebook**, not across both FC and PROJ.
 
-| tail K | protected neuron bundles | coverage | whole bytes | headroom |
-|---:|---:|---:|---:|---:|
-| 256 | 1,976 | 12.0605% | 1,624,599 | 25 |
-| 512 | 1,542 | 9.4116% | 1,624,624 | 0 |
-| 1024 | 959 | 5.8533% | 1,624,600 | 24 |
+All functional experiments in T221–T224 are constructed or synthetic. No TinyStories weights were available and no new real-model or whole-model 64x quality claim is made.
 
-The full placeholder containers include the previously reserved 32 KiB metadata region. A concrete 128-entry directory with per-section CRC32 and payload SHA-256 occupies 4,352 bytes of that reserve; 28,416 bytes remain reserved. K512 therefore fits exactly at the hard target but has no byte headroom outside the reserve.
+## Historical exact candidate layouts (unchanged)
 
-These are exact byte-layout / serializer results over deterministic placeholder payload, not real encoded weights.
+Under the 28M layout assumptions, 32 KiB metadata reserve, and 1,624,624-byte ceiling:
 
-## Self-trained tail codebook support boundary
+| Tail codewords | Protected bundles | Whole placeholder bytes | Headroom, bytes |
+|---:|---:|---:|---:|
+| 256 | 1,976 | 1,624,599 | 25 |
+| 512 | 1,542 | 1,624,624 | 0 |
+| 1024 | 959 | 1,624,600 | 24 |
 
-The current coupled-neuron tail design protects one MLP neuron bundle consisting of one FC output row plus the corresponding PROJ input column. At hidden size 512 this is 1,024 scalars = 32 residual blocks of 32 scalars.
+These measured layouts contain deterministic placeholder payloads, not real encoded weights. The 4,352-byte directory is included in the 32,768-byte reservation. Neither file size nor checksums establish functional quality.
 
-For a self-trained selected-tail K-codebook, a necessary condition is therefore
+## Corrected per-codebook training support
 
-`protected_bundles * 32 >= K`
+A target bundle has one 512-coordinate FC row and one 512-coordinate PROJ column. There are 32 total 32-coordinate blocks per bundle, but **16 go to each of two independent codebooks** in the audited T217 implementation.
 
-in addition to exact rate fit.
+| Tail codewords | Bundles | Training blocks per codebook | Samples per codeword |
+|---:|---:|---:|---:|
+| 256 | 1,976 | 31,616 | 123.5 |
+| 512 | 1,542 | 24,672 | 48.1875 |
+| 1024 | 959 | 15,344 | 14.984375 |
+| 2048 | 59 | 944 | 0.4609375 |
 
-Relevant results:
+K1024 remains the largest tested power-of-two candidate satisfying both the historical budget and the current selected-only KMeans fitter's sample-count prerequisite. This is not an information-theoretic codec impossibility result. Other training pools or unused/duplicate centroids change the training assumption; an external training pool need not add decoder bytes when the resulting codebook was already fully paid. K4096 still exceeds the historical tail budget in codebook metadata alone.
 
-- K1024: 959 bundles -> 30,688 residual blocks -> support ratio 29.97 -> feasible.
-- K2048: the byte budget leaves only 59 bundles -> 1,888 residual blocks < 2,048 -> infeasible under the current self-trained selected-tail design.
-- K4096: codebook metadata alone exceeds the available tail budget.
+## T221: explicit counterexample to restoration pruning
 
-Therefore **K1024 is the largest feasible power-of-two K in the current self-trained tail format**. K2048/K4096 should not be explored further unless the codec design changes, e.g. by training from external/shared residual samples; that would be a different representation contract.
+Consider a two-class model whose logits are the sum of two weights and zero. All quantities are dimensionless; natural logarithms are used for KL. The original weights are 1 and 1, giving logits [2,0]. The second compressed weight stays fixed at 0.5.
 
-## Real-model run gate
+| Selected first weight | Interpretation | KL from original distribution |
+|---:|---|---:|
+| 1.5 | Compressed base; errors cancel | 0 |
+| 1.0 | Exact restoration of selected weight | 0.014883805929 |
+| 1.2 | Comparison candidate | 0.005097141737 |
+| 1.25 | Inexact restoration | 0.003495408890 |
 
-The three remaining candidates are K256, K512, and K1024. All have exact RATE_PASS and the required training support, but all remain **REAL_QUALITY_PENDING**.
+Exact restoration loses to the comparison candidate, yet the inexact correction beats it. This is enough to refute the general pruning rule. The same construction was checked with two identical GELU neurons on 4,097 inputs. It does not say that restoring *all* original parameters is suboptimal; it concerns a selected subset while other parameters remain compressed.
 
-When the real TinyStories-28M checkpoint is available, the run order is:
+## T222: decoded INT4 nonlinear control
 
-1. verify checkpoint provenance and MLP tensor shapes;
-2. build real K64 shared MLP base and real uniform-K128 baseline;
-3. freeze first-order selected bundle sets for K1024/K512/K256;
-4. run an exact-restoration upper bound for each selected set;
-5. prune a candidate immediately if exact restoration cannot beat uniform K128 on holdout;
-6. train/quantize residual tail only for survivors;
-7. serialize emitted bytes;
-8. require whole-model JOINT replay before any real quality pass claim.
+A fixed test used 24 random GELU networks: 12 independent-input-weight instances and 12 correlated-pair-input instances. Dimensions were input 64, hidden 128, output 16. Thirteen coupled neurons were selected on 96 calibration inputs; a global gain from five fixed candidates was selected on a different 96 inputs; task KL was measured on 384 untouched audit inputs.
 
-Historical 8M layer2 c_fc K64/K128/K256 KL values are only a boundary reference and must not be treated as 28M candidate scores.
+Each tail was packed and decoded before evaluation: symmetric INT4 codes, FP16 scales, 7-bit IDs, FP16 gain, header, and SHA-256 trailer. Every selected tail was 962 bytes. This is a tail-only synthetic format, not the target VQ codec.
 
-## Evidence boundary
+- Unit-gain decoded INT4 corrections beat exact partial restoration in **2/24** instances.
+- Across all 24 instances, mean KL was **0.05176176** for exact restoration and **0.05252787** for the INT4 candidate: exact restoration was better on average.
+- The five-value gain selection selected unit gain in all 24 cases; this test does not demonstrate a gain-tuning improvement.
+- Against the separately defined uniform three-bit control, no actual false-prune event occurred in these 24 instances. The universal pruning rule is refuted by T221 and by the two restoration-order reversals, not by claiming a nonzero empirical false-prune rate against that particular control.
 
-No TinyStories checkpoint weights were available during T215–T220. T215/T216/T218/T219/T220 are exact serializer, necessary-feasibility, or software evidence. T217 used a nonlinear synthetic proxy only. No new real-model functional quality claim is made here.
+## T223: why the old high-K proxy ordering is not a target-quality result
+
+T217 preserved protected-neuron fractions but not codebook occupancy. Its input/hidden dimensions were both 768, with only 45 selected neurons for K1024. Thus each residual codebook saw 1,080 blocks: **1.0546875 samples per codeword**, versus **14.984375** in the intended 28M layout.
+
+The corresponding proxy/target occupancies are:
+
+| Codewords | Small proxy | Intended target |
+|---:|---:|---:|
+| 256 | 8.71875 | 123.5 |
+| 512 | 3.375 | 48.1875 |
+| 1024 | 1.0546875 | 14.984375 |
+
+A controlled IID Gaussian residual experiment held block length and quantization fixed, ran 18 fits (three codeword counts, two support sizes, three seeds), and decoded affine INT4 centroids with FP16 offsets/scales. For K1024:
+
+| Support condition | Training-block NMSE, median [range] | Independent-block NMSE, median [range] |
+|---|---:|---:|
+| Proxy-like | 0.023564 [0.023563, 0.024124] | 0.859891 [0.858134, 0.864603] |
+| Target-like | 0.634888 [0.634202, 0.638603] | 0.750352 [0.749750, 0.752326] |
+
+Near-interpolation is therefore a concrete transfer risk. Fitting a codebook to the very weights being compressed is legitimate; the issue is that the tiny proxy and intended target have materially different representational resources per training vector. These NMSE values are **not task KL** and do not establish which tail wins on TinyStories.
+
+The audited T217 base centroids and tail quantizer scales/offsets also remained FP32; its functional forward was not a replay of the T215 FP16-scale binary. The old K1024-first quality ordering is downgraded to a weak proposal, not an established target ranking.
+
+## T224: evidence-gate regression tests
+
+The archived T212 gate accepted six invalid or inadequate fixture cases: NaN metrics, negative bytes, synthetic evidence labelled with joint scope, placeholder payloads, one improved metric with catastrophic regression in the others, and a mismatched replayed-file hash.
+
+The replacement local gate passed **33 regression tests**. It checks finite metrics, ranges, actual supplied artifact size/hash, checkpoint and audit/backend matching, real versus synthetic/placeholder evidence, a predeclared quality policy, and all quality guardrails. Restoration quality cannot trigger pruning. Its positive status is **PASS_FIXED_SAMPLE**, not a generalization or intrinsic-mirror certificate. Input validation cannot independently attest that a trusted runner executed a forward pass.
+
+The replacement gate's numeric acceptance limits in unit tests are demonstration fixtures only; no TinyStories acceptance thresholds were retroactively chosen.
+
+## Updated real-model run protocol
+
+1. Restore the original checkpoint and verify hash, shapes, and a baseline forward.
+2. Separate calibration, development selection, and final audit passages before fitting.
+3. Build uniform K128 and the K64-base candidates using the declared, fully charged serializer format.
+4. Freeze calibration-selected supports. Evaluate exact restoration only as a diagnostic control; do not prune from it.
+5. Train and serialize actual K256/K512/K1024 candidates as resources permit. Select on development data, not final audit.
+6. Evaluate the exact decoded artifact jointly. Do not add component KLs.
+7. Keep RATE, decoding fidelity, fixed-sample quality, uncertainty, and intrinsic-scaling claims separate.
+8. Without a verified real checkpoint, serialized candidate, and predeclared quality policy, real quality remains BLOCKED/PENDING.
+
+## Execution boundary
+
+T221–T224 ran locally on CPU (Intel Xeon Platinum 8370C, nominal 2.80 GHz; clock not locked; two numerical threads), Python 3.13.5 and PyTorch 2.10.0+cpu. This is not a speed benchmark. The original T221 development assertion used the wrong comparison logit; it failed and was corrected to 1.7 before recording results. Raw scripts, fixed protocols, per-seed JSON, decoded tails, source snapshots and failure notes are retained in the local T221–T224 result bundle.
