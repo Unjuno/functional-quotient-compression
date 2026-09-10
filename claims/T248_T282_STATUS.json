@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-09-11",
+  "claims": [
+    {
+      "id": "T248-T265",
+      "lane": "SYNTHETIC",
+      "claim": "support selection, joint allocation, gain compilation studied",
+      "status": "RECORDED_SYNTHETIC_ONLY",
+      "restriction": "Not real Transformer quality or runtime evidence"
+    },
+    {
+      "id": "T266-T272",
+      "lane": "REAL_CHECKPOINT_AUTHORED_PROBES",
+      "claim": "whole-weight serialized 64x artifact and independent decode",
+      "status": "RATE_PASS_QUALITY_FAIL",
+      "restriction": "Never label 64x quality-preserving success"
+    },
+    {
+      "id": "T273-T278",
+      "lane": "REAL_CHECKPOINT_REUSED_PROBES",
+      "claim": "27 candidates and same-environment full artifact rebuild",
+      "status": "RECORDED_ENGINEERING_PASS",
+      "restriction": "Not untouched external validation; not FQC-specific superiority"
+    },
+    {
+      "id": "T279",
+      "lane": "REAL_CHECKPOINT_PUBLIC_TRANSCRIPTION_PILOT",
+      "claim": "three frozen candidates on 44 public-derived prompt prefixes",
+      "status": "EXPLORATORY",
+      "restriction": "2682 predicted tokens; source YAML bytes unverified; not official validation"
+    },
+    {
+      "id": "T280",
+      "lane": "ENGINEERING",
+      "claim": "29 model/length conditions; independent reference/cache/causality checks",
+      "status": "RECORDED_PASS",
+      "restriction": "Not installed HuggingFace runtime parity"
+    },
+    {
+      "id": "T281",
+      "lane": "STORAGE_ENGINEERING",
+      "claim": "same XZ for control and candidate; 25507600-byte primary artifact",
+      "status": "RECORDED_PASS",
+      "restriction": "Off-the-shelf lossless compression; dense FP32 execution"
+    },
+    {
+      "id": "T282",
+      "lane": "SAME_ENVIRONMENT_REPLAY",
+      "claim": "153 historical tests, 132 prompt evaluations and 29 long-context cases replayed",
+      "status": "RECORDED_PASS",
+      "restriction": "Not independent hardware or training-replica reproduction"
+    },
+    {
+      "id": "H282",
+      "lane": "PACKAGING_AUDIT",
+      "claim": "relocated core and new CPU rebuild entry point",
+      "status": "THREE_ARTIFACTS_BYTE_AND_TENSOR_EXACT;149_UNIT_TESTS_PASS",
+      "restriction": "This handoff audit did not rerun all historical quality evaluations; MPS/CUDA not tested"
+    },
+    {
+      "id": "FQC_MAIN",
+      "lane": "SCIENTIFIC",
+      "claim": "whole-model functional sharing improves over strong non-sharing controls",
+      "status": "UNRESOLVED",
+      "restriction": "Historical attention-only positive evidence does not settle this stronger claim"
+    },
+    {
+      "id": "EXTERNAL",
+      "lane": "SCIENTIFIC",
+      "claim": "official validation and installed Transformers parity",
+      "status": "NOT_VERIFIED",
+      "restriction": "Must complete locally before a confirmatory quality claim"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+# Local setup bounds, NOT a bitwise-reproducibility lock or a promise of macOS wheels.
+# Prefer the observed versions in provenance/t282/HANDOFF_ENVIRONMENT.json when compatible.
+torch>=2.6,<3
+numpy>=2,<3
+regex>=2024
+scikit-learn>=1.5,<2
+scipy>=1.11,<2
+threadpoolctl>=3,<4
+pytest>=8,<10
+# Official Transformers/tokenizers are deliberately installed and pinned separately
+# after compatibility review; they were not installed in the measured container.
