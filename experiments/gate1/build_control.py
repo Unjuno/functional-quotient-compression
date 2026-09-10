@@ -26,6 +26,8 @@ MODEL_DIR = ROOT / "models/HF-28M"
 SEED = 273278
 PAID_SCALARS = 51987968
 BASE16 = PAID_SCALARS * 2
+TAG = "28M"
+CKPT_SHA = "8ddd260f51b439744c8cc785b5516327d4bf32e31ccbfa9009bfadf12557fcf5"
 
 UNIFORM_GRID = [(8, 64), (6, 64), (4, 64), (4, 128), (3, 64), (3, 128), (2, 64), (2, 256)]
 VQ_GRID = [(256, 4), (256, 8), (64, 8), (256, 16), (256, 32), (64, 32)]
@@ -72,8 +74,9 @@ def collect_moments(state, cfg, tok, stories):
     return out
 
 
-def build_uniform(state, cfg, moments, bits, group, method, outdir):
-    name = f"28M_{method}_b{bits}_g{group}"
+def build_uniform(state, cfg, moments, bits, group, method, outdir,
+                  tag=TAG, paid=PAID_SCALARS, ckpt=CKPT_SHA):
+    name = f"{tag}_{method}_b{bits}_g{group}"
     sections = []
     for key, tensor in state.items():
         a = tensor.numpy()
@@ -88,17 +91,18 @@ def build_uniform(state, cfg, moments, bits, group, method, outdir):
                        {"experiment": "GATE2", "family": "A-control",
                         "method": method, "bits": bits, "group": group,
                         "fit": "official-calibration-0-64",
-                        "checkpoint_sha256": "8ddd260f51b439744c8cc785b5516327d4bf32e31ccbfa9009bfadf12557fcf5"})
+                        "checkpoint_sha256": ckpt})
     del sections
     gc.collect()
     return {"candidate": name, **info,
-            "bits_per_paid_scalar": info["bytes"] * 8 / PAID_SCALARS,
-            "ratio_vs_16bit": BASE16 / info["bytes"]}
+            "bits_per_paid_scalar": info["bytes"] * 8 / paid,
+            "ratio_vs_16bit": (paid * 2) / info["bytes"]}
 
 
-def build_vq(state, cfg, K, block, outdir, normalize=False):
-    tag = f"28M_vq{'N' if normalize else ''}K{K}_B{block}"
-    name = tag.replace(" ", "")
+def build_vq(state, cfg, K, block, outdir, normalize=False,
+             tag=TAG, paid=PAID_SCALARS, ckpt=CKPT_SHA):
+    vqtag = f"{tag}_vq{'N' if normalize else ''}K{K}_B{block}"
+    name = vqtag.replace(" ", "")
     sections, stats = [], []
     for key, tensor in state.items():
         a = tensor.numpy()
@@ -119,12 +123,12 @@ def build_vq(state, cfg, K, block, outdir, normalize=False):
                        {"experiment": "GATE2", "family": "A-control-VQ-per-tensor",
                         "K": K, "block": block, "normalize_rows": normalize,
                         "fit": "unsupervised-kmeans-seed266",
-                        "checkpoint_sha256": "8ddd260f51b439744c8cc785b5516327d4bf32e31ccbfa9009bfadf12557fcf5"})
+                        "checkpoint_sha256": ckpt})
     del sections
     gc.collect()
     return {"candidate": name, **info,
-            "bits_per_paid_scalar": info["bytes"] * 8 / PAID_SCALARS,
-            "ratio_vs_16bit": BASE16 / info["bytes"]}
+            "bits_per_paid_scalar": info["bytes"] * 8 / paid,
+            "ratio_vs_16bit": (paid * 2) / info["bytes"]}
 
 
 def main():
@@ -133,6 +137,12 @@ def main():
     ap.add_argument("--only", default=None)
     ap.add_argument("--append", action="store_true",
                     help="allow adding artifacts to an existing output dir")
+    ap.add_argument("--model-dir", default=str(MODEL_DIR))
+    ap.add_argument("--tag", default=TAG)
+    ap.add_argument("--paid-scalars", type=int, default=PAID_SCALARS)
+    ap.add_argument("--checkpoint-sha", default=CKPT_SHA)
+    ap.add_argument("--skip", action="append", default=[],
+                    help="skip job keys (repeatable); structural inapplicability only, recorded in log")
     a = ap.parse_args()
     outdir = Path(a.output)
     if outdir.exists() and not a.append:
@@ -142,35 +152,48 @@ def main():
     torch.set_num_interop_threads(1)
     torch.use_deterministic_algorithms(True)
     torch.manual_seed(SEED)
-    cfg, state, _ = load_checkpoint(MODEL_DIR, "cpu")
+    model_dir = Path(a.model_dir)
+    cfg, state, _ = load_checkpoint(model_dir, "cpu")
     # Header recipe fidelity: store the full config as shipped (including
     # `_name_or_path`), exactly like the T277 rebuild. Verified: with T277
     # provenance labels this reproduces the historical header byte count
     # (16471) to the byte; payload equality already confirmed (29303584).
     # The +56 header bytes vs history come solely from the GATE2 provenance
     # labels below and are paid/counted in every artifact of this lane.
-    tok = BPETokenizer(MODEL_DIR)
+    tok = BPETokenizer(model_dir)
     stories = load_calibration()
     assert all(tok.decode(tok.encode(s)) == s for s in stories[:8]), "tokenizer drift"
     moments = collect_moments(state, cfg, tok, stories)
     rows = []
-    jobs = [(f"u-{m}-{b}-{g}", m, b, g) for m in ("rtn", "act") for b, g in UNIFORM_GRID]
+    cols = sorted({t.shape[1] for t in state.values() if t.numpy().ndim == 2})
+    grid = [(b, g) for b, g in UNIFORM_GRID if all(c % g == 0 for c in cols)]
+    skipped = [(b, g) for b, g in UNIFORM_GRID if not all(c % g == 0 for c in cols)]
+    for b, g in skipped:
+        print(f"SKIP u-*-{b}-{g}: group {g} incompatible with 2D cols {cols} "
+              f"(refit requires col % group == 0; pair kept paired)", flush=True)
+    jobs = [(f"u-{m}-{b}-{g}", m, b, g) for m in ("rtn", "act") for b, g in grid]
     jobs += [(f"vq-{K}-{B}", K, B) for K, B in VQ_GRID]
     jobs += [(f"vqn-{K}-{B}", K, B) for K, B in [(256, 8), (256, 16), (256, 32), (64, 32)]]
     if a.only:
         jobs = [j for j in jobs if j[0] == a.only]
         assert jobs, "unknown --only key"
+    for sk in (a.skip or []):
+        jobs = [j for j in jobs if j[0] != sk]
+        print(f"SKIP {sk}: declared structurally inapplicable for this scale", flush=True)
     for job in jobs:
         print("BUILD", job[0], flush=True)
         if job[0].startswith("u-"):
             _, m, b, g = job
-            rows.append(build_uniform(state, cfg, moments, b, g, m, outdir))
+            rows.append(build_uniform(state, cfg, moments, b, g, m, outdir,
+                                      tag=a.tag, paid=a.paid_scalars, ckpt=a.checkpoint_sha))
         elif job[0].startswith("vqn-"):
             _, K, B = job
-            rows.append(build_vq(state, cfg, K, B, outdir, normalize=True))
+            rows.append(build_vq(state, cfg, K, B, outdir, normalize=True,
+                                 tag=a.tag, paid=a.paid_scalars, ckpt=a.checkpoint_sha))
         else:
             _, K, B = job
-            rows.append(build_vq(state, cfg, K, B, outdir))
+            rows.append(build_vq(state, cfg, K, B, outdir,
+                                 tag=a.tag, paid=a.paid_scalars, ckpt=a.checkpoint_sha))
     man_path = outdir / "GATE2_CONTROLS.json"
     if a.append and man_path.exists():
         prior = {r["candidate"]: r for r in json.loads(man_path.read_text())}

@@ -20,6 +20,8 @@ ROOT = Path(".")
 MODEL_DIR = ROOT / "models/HF-28M"
 PAID = 51987968
 BASE16 = PAID * 2
+TAG = "28M"
+CKPT_SHA = "8ddd260f51b439744c8cc785b5516327d4bf32e31ccbfa9009bfadf12557fcf5"
 POINTS = [(256, 8), (256, 16), (256, 32), (64, 32)]
 
 
@@ -29,14 +31,19 @@ def main():
     ap.add_argument("--only", default=None)
     ap.add_argument("--append", action="store_true")
     ap.add_argument("--normalize", action="store_true")
+    ap.add_argument("--model-dir", default=str(MODEL_DIR))
+    ap.add_argument("--tag", default=TAG)
+    ap.add_argument("--paid-scalars", type=int, default=PAID)
+    ap.add_argument("--checkpoint-sha", default=CKPT_SHA)
     a = ap.parse_args()
+    base16 = a.paid_scalars * 2
     outdir = Path(a.output)
     if outdir.exists() and not a.append:
         raise FileExistsError("refuse to overwrite existing evidence")
     outdir.mkdir(parents=True, exist_ok=True)
     torch.set_num_threads(2)
     torch.manual_seed(266)
-    cfg, state, _ = load_checkpoint(MODEL_DIR, "cpu")
+    cfg, state, _ = load_checkpoint(Path(a.model_dir), "cpu")
     groups = {}
     for key, tensor in state.items():
         if tensor.numpy().ndim == 1:
@@ -49,7 +56,7 @@ def main():
         assert jobs, "unknown --only"
     rows = []
     for tag, K, B in jobs:
-        name = f"28M_share{'N' if a.normalize else ''}K{K}_B{B}"
+        name = f"{a.tag}_share{'N' if a.normalize else ''}K{K}_B{B}"
         print("BUILD", name, flush=True)
         sections = []
         for key, tensor in state.items():
@@ -68,12 +75,12 @@ def main():
                            {"experiment": "GATE3", "family": "B-sharing-role-codebook",
                             "K": K, "block": B, "normalize_rows": a.normalize,
                             "fit": "unsupervised-kmeans-seed266",
-                            "checkpoint_sha256": "8ddd260f51b439744c8cc785b5516327d4bf32e31ccbfa9009bfadf12557fcf5"})
+                            "checkpoint_sha256": a.checkpoint_sha})
         del sections
         gc.collect()
         rows.append({"candidate": name, **info,
-                     "bits_per_paid_scalar": info["bytes"] * 8 / PAID,
-                     "ratio_vs_16bit": BASE16 / info["bytes"]})
+                     "bits_per_paid_scalar": info["bytes"] * 8 / a.paid_scalars,
+                     "ratio_vs_16bit": base16 / info["bytes"]})
     man_path = outdir / "GATE3_SHARING.json"
     if a.append and man_path.exists():
         prior = {r["candidate"]: r for r in json.loads(man_path.read_text())}

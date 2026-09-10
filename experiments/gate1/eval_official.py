@@ -82,6 +82,7 @@ def main():
     ap.add_argument("--threads", type=int, default=4)
     ap.add_argument("--output", required=True)
     ap.add_argument("--max-stories", type=int, default=None)
+    ap.add_argument("--model-dir", default=str(ROOT / "models/HF-28M"))
     a = ap.parse_args()
     out = Path(a.output)
     if out.exists():
@@ -93,7 +94,7 @@ def main():
     if a.max_stories:
         hi = min(hi, lo + a.max_stories)
     stories = stories[lo:hi]
-    model_dir = ROOT / "models/HF-28M"
+    model_dir = Path(a.model_dir)
     cfg, ref_state, _ = load_checkpoint(model_dir, "cpu")
     tok = BPETokenizer(model_dir)
     if a.artifact:
@@ -117,6 +118,7 @@ def main():
             row["story_index"] = lo + i
             rows.append(row)
     result = {"split": a.split, "range": [lo, hi], "n": len(rows),
+              "model_dir": str(model_dir),
               "artifact": a.artifact, "artifact_sha256": art_sha,
               "device": a.device, "threads": a.threads,
               "elapsed_seconds": time.perf_counter() - t,

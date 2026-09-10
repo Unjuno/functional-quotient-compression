@@ -2,19 +2,24 @@
 """Gate 1: official HF Transformers GPT-Neo runtime parity vs offline engine.
 Read-only. Uses official validation story 0 as probe text (parity only, no selection).
 """
-import sys, json, hashlib
+import sys, json, argparse, hashlib
 from pathlib import Path
 import torch
 sys.path.insert(0, "experiments/t282/code")
 from engine import BPETokenizer, forward, load_checkpoint
 
-MODEL = Path("models/HF-28M")
+ap = argparse.ArgumentParser()
+ap.add_argument("--model-dir", default="models/HF-28M")
+ap.add_argument("--output", default="runs/manifest-001/hf_parity.json")
+ap.add_argument("--probe-index", type=int, default=0)
+args = ap.parse_args()
+MODEL = Path(args.model_dir)
 torch.set_num_threads(4)
 
 raw = Path("data/official/TinyStories-valid.txt").read_text()
 stories = [s.strip() for s in raw.split("<|endoftext|>") if s.strip()]
 print("n_stories_primary:", len(stories))
-probe_text = stories[0]
+probe_text = stories[args.probe_index]
 print("probe_chars:", len(probe_text))
 
 # --- offline engine path ---
@@ -49,7 +54,8 @@ print("mean_abs_err:", float(diff.mean()))
 ref_nll = torch.nn.functional.cross_entropy(
     z_off[0, :-1].float(), ids_t[0, 1:], reduction="mean").item()
 print("engine_ref_NLL_story0:", ref_nll)
-out = {"stories_primary": len(stories), "probe_chars": len(probe_text),
+out = {"model_dir": str(MODEL), "probe_index": args.probe_index,
+       "stories_primary": len(stories), "probe_chars": len(probe_text),
        "offline_ids_len": len(ids_offline),
        "tokenizer_id_parity": list(hf_ids[0].numpy()) == ids_offline,
        "max_abs_err": float(diff.max()), "max_rel_err": float((diff / den).max()),
@@ -58,5 +64,5 @@ out = {"stories_primary": len(stories), "probe_chars": len(probe_text),
        "torch": torch.__version__}
 import transformers
 out["transformers"] = transformers.__version__
-Path("runs/manifest-001/hf_parity.json").write_text(json.dumps(out, indent=2))
-print("wrote runs/manifest-001/hf_parity.json")
+Path(args.output).write_text(json.dumps(out, indent=2))
+print("wrote", args.output)

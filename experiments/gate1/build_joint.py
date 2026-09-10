@@ -25,7 +25,7 @@ from build_control import collect_moments, load_calibration
 ROOT = Path(".")
 MODEL_DIR = ROOT / "models/HF-28M"
 PAID = 51987968
-BASE16 = PAID * 2
+TAG = "28M"
 CKPT = "8ddd260f51b439744c8cc785b5516327d4bf32e31ccbfa9009bfadf12557fcf5"
 
 
@@ -39,9 +39,10 @@ def module_of(key):
     return "other"
 
 
-def build_sharedmeta(state, cfg, moments, outdir):
-    name = "28M_actmeta_b4_g64_sg128"
+def build_sharedmeta(state, cfg, moments, outdir, tag=TAG, paid=PAID, ckpt=CKPT):
+    name = f"{tag}_actmeta_b4_g64_sg128"
     print("BUILD", name, flush=True)
+    fallbacks = []
     sections = []
     for key, tensor in state.items():
         a = tensor.numpy()
@@ -55,19 +56,21 @@ def build_sharedmeta(state, cfg, moments, outdir):
             except ValueError:
                 desc, blob, _ = encode_refit(a, 4, moments.get(key), group=64)
                 desc = {**desc, "fallback": "uniform-refit"}
+                fallbacks.append(key)
         sections.append(({**desc, "name": key}, blob))
     info = write_model(outdir / (name + ".fqc"), cfg, sections,
                        {"experiment": "GATE3B", "family": "B-sharing-metadata",
                         "bits": 4, "group": 64, "supergroup": 128,
-                        "fit": "official-calibration-weighted", "checkpoint_sha256": CKPT})
+                        "fit": "official-calibration-weighted", "checkpoint_sha256": ckpt,
+                        "fallback_tensors": fallbacks})
     del sections
     gc.collect()
-    return {"candidate": name, **info, "bits_per_paid_scalar": info["bytes"] * 8 / PAID,
-            "ratio_vs_16bit": BASE16 / info["bytes"]}
+    return {"candidate": name, **info, "bits_per_paid_scalar": info["bytes"] * 8 / paid,
+            "ratio_vs_16bit": (paid * 2) / info["bytes"]}
 
 
-def build_joint(state, cfg, moments, triple, outdir):
-    name = f"28M_joint_emb{triple['emb']}_attn{triple['attn']}_mlp{triple['mlp']}"
+def build_joint(state, cfg, moments, triple, outdir, tag=TAG, paid=PAID, ckpt=CKPT):
+    name = f"{tag}_joint_emb{triple['emb']}_attn{triple['attn']}_mlp{triple['mlp']}"
     print("BUILD", name, flush=True)
     sections = []
     for key, tensor in state.items():
@@ -88,9 +91,24 @@ def build_joint(state, cfg, moments, triple, outdir):
             "ratio_vs_16bit": BASE16 / info["bytes"]}
 
 
+    info = write_model(outdir / (name + ".fqc"), cfg, sections,
+                       {"experiment": "GATE5-DLITE", "family": "D-joint-mixed-precision",
+                        "triple": triple, "group": 64,
+                        "fit": "official-calibration-weighted", "checkpoint_sha256": ckpt})
+    del sections
+    gc.collect()
+    return {"candidate": name, **info, "bits_per_paid_scalar": info["bytes"] * 8 / paid,
+            "ratio_vs_16bit": (paid * 2) / info["bytes"]}
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--output", required=True)
+    ap.add_argument("--only", default=None, help="meta or joint0/1/2")
+    ap.add_argument("--model-dir", default=str(MODEL_DIR))
+    ap.add_argument("--tag", default=TAG)
+    ap.add_argument("--paid-scalars", type=int, default=PAID)
+    ap.add_argument("--checkpoint-sha", default=CKPT)
     a = ap.parse_args()
     outdir = Path(a.output)
     if outdir.exists():
@@ -100,14 +118,22 @@ def main():
     torch.set_num_interop_threads(1)
     torch.use_deterministic_algorithms(True)
     torch.manual_seed(50711)
-    cfg, state, _ = load_checkpoint(MODEL_DIR, "cpu")
-    tok = BPETokenizer(MODEL_DIR)
+    model_dir = Path(a.model_dir)
+    cfg, state, _ = load_checkpoint(model_dir, "cpu")
+    tok = BPETokenizer(model_dir)
     moments = collect_moments(state, cfg, tok, load_calibration())
-    rows = [build_sharedmeta(state, cfg, moments, outdir)]
-    for triple in ({"emb": 4, "attn": 3, "mlp": 2},
-                   {"emb": 4, "attn": 2, "mlp": 3},
-                   {"emb": 2, "attn": 4, "mlp": 3}):
-        rows.append(build_joint(state, cfg, moments, triple, outdir))
+    triples = ({"emb": 4, "attn": 3, "mlp": 2},
+               {"emb": 4, "attn": 2, "mlp": 3},
+               {"emb": 2, "attn": 4, "mlp": 3})
+    rows = []
+    if a.only in (None, "meta"):
+        rows.append(build_sharedmeta(state, cfg, moments, outdir,
+                                     tag=a.tag, paid=a.paid_scalars, ckpt=a.checkpoint_sha))
+    for i, triple in enumerate(triples):
+        if a.only in (None, f"joint{i}"):
+            rows.append(build_joint(state, cfg, moments, triple, outdir,
+                                    tag=a.tag, paid=a.paid_scalars, ckpt=a.checkpoint_sha))
+    assert rows, "unknown --only key"
     (outdir / "GATE35_JOINT.json").write_text(json.dumps(rows, indent=2))
     for r in rows:
         print(f"{r['candidate']}: bytes={r['bytes']} ratio={r['ratio_vs_16bit']:.3f}x")

@@ -25,27 +25,38 @@ from build_control import collect_moments, load_calibration
 ROOT = Path(".")
 MODEL_DIR = ROOT / "models/HF-28M"
 PAID = 51987968
-BASE16 = PAID * 2
+TAG = "28M"
+CKPT_SHA = "8ddd260f51b439744c8cc785b5516327d4bf32e31ccbfa9009bfadf12557fcf5"
 SUPPORTS = [0, 64, 256, 1024]
-BACKBONES = {"B": "runs/gate3-sharing/28M_shareK256_B8.fqc",
-             "A": "runs/gate2-controls/28M_vqK256_B8.fqc"}
+BACKBONES_28M = {"B": "runs/gate3-sharing/28M_shareK256_B8.fqc",
+                 "A": "runs/gate2-controls/28M_vqK256_B8.fqc"}
 
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--output", required=True)
+    ap.add_argument("--model-dir", default=str(MODEL_DIR))
+    ap.add_argument("--tag", default=TAG)
+    ap.add_argument("--paid-scalars", type=int, default=PAID)
+    ap.add_argument("--checkpoint-sha", default=CKPT_SHA)
+    ap.add_argument("--backbone-b", default=None)
+    ap.add_argument("--backbone-a", default=None)
     a = ap.parse_args()
+    base16 = a.paid_scalars * 2
+    backbones = {"B": a.backbone_b or BACKBONES_28M["B"],
+                 "A": a.backbone_a or BACKBONES_28M["A"]}
     outdir = Path(a.output)
     if outdir.exists():
         raise FileExistsError("refuse to overwrite existing evidence")
     outdir.mkdir(parents=True)
     torch.set_num_threads(2)
     torch.manual_seed(40604)
-    cfg, orig, _ = load_checkpoint(MODEL_DIR, "cpu")
-    tok = BPETokenizer(MODEL_DIR)
+    model_dir = Path(a.model_dir)
+    cfg, orig, _ = load_checkpoint(model_dir, "cpu")
+    tok = BPETokenizer(model_dir)
     moments = collect_moments(orig, cfg, tok, load_calibration())
     rows = []
-    for tag, art in BACKBONES.items():
+    for tag, art in backbones.items():
         _, dec, _ = read_model(Path(art), "cpu")
         scored = []
         for key, t in orig.items():
@@ -59,7 +70,7 @@ def main():
                 scored.append((float(s), key, r))
         scored.sort(reverse=True)
         for S in SUPPORTS:
-            name = f"28M_{tag}C_P{S}"
+            name = f"{a.tag}_{tag}C_P{S}"
             print("BUILD", name, flush=True)
             by_tensor = {}
             for _, key, r in scored[:S]:
@@ -82,12 +93,12 @@ def main():
                                {"experiment": "GATE4", "family": "C-private-rowpatch",
                                 "backbone": art, "support_rows": S,
                                 "fit": "official-calibration-weighted-SSE",
-                                "checkpoint_sha256": "8ddd260f51b439744c8cc785b5516327d4bf32e31ccbfa9009bfadf12557fcf5"})
+                                "checkpoint_sha256": a.checkpoint_sha})
             del sections
             gc.collect()
             rows.append({"candidate": name, **info,
-                         "bits_per_paid_scalar": info["bytes"] * 8 / PAID,
-                         "ratio_vs_16bit": BASE16 / info["bytes"]})
+                         "bits_per_paid_scalar": info["bytes"] * 8 / a.paid_scalars,
+                         "ratio_vs_16bit": base16 / info["bytes"]})
     (outdir / "GATE4_PRIVATE.json").write_text(json.dumps(rows, indent=2))
     for r in rows:
         print(f"{r['candidate']}: bytes={r['bytes']} ratio={r['ratio_vs_16bit']:.3f}x")
