@@ -10,7 +10,7 @@ The project grew out of earlier “Vector Mirror” experiments. The current fra
 
 Can a trained neural network be represented by coding only the degrees of freedom that remain distinguishable under the target task, while deriving or sharing the rest through a decoder with exact serialized-bit accounting?
 
-The long-term target is to determine—by proof, exact optimization, and real-model experiments—whether **64× compression relative to a 16-bit parameter baseline** is feasible under a pre-registered task-quality constraint. A 64× real-Transformer result has **not** been demonstrated.
+The long-term target is to determine—by proof, exact optimization, and real-model experiments—whether **64× compression relative to a 16-bit parameter baseline** is feasible under a pre-registered task-quality constraint. A quality-preserving 64× real-Transformer result has **not** been demonstrated.
 
 ## What is established so far
 
@@ -20,30 +20,39 @@ Known invertible transforms (including mirror/orthogonal changes of basis) do no
 
 ### 2. Functional / decision equivalence
 
-Several research lines converge on the same principle: states that produce the same relevant decoded or decision behavior can be merged. This includes gauge freedoms, decoded-signature equivalence, and the D116 decision-null common-mode result.
+Several research lines converge on the same principle: states that produce the same relevant decoded or decision behavior can be merged. This includes gauge freedoms, decoded-signature equivalence, and decision-null common-mode constructions.
 
 ### 3. Task-aware geometry matters
 
-Small parameter or spectral energy does not imply small task importance. In the D117 line, a mode carrying only about 0.019% of coefficient Frobenius energy was still decision-critical under hard removal; soft shrink was substantially better.
+Small parameter or spectral energy does not imply small task importance. Later real-checkpoint experiments also show that lower parameter-space reconstruction error need not improve task KL/NLL.
 
 ### 4. Exact structural codec optimization
 
-Deterministic toy experiments show that serializer effects, cross-block coupling, tree topology, precision, selectors, and decoder prerequisites must be optimized jointly. A constructed tree/precision example exhibits strict complementarity: neither coordinate alone improves the incumbent, while the joint move does.
+Deterministic toy experiments show that serializer effects, cross-block coupling, tree topology, precision, selectors, and decoder prerequisites must be optimized jointly.
 
-### 5. Search work is not codec bits
+### 5. Real Transformer codec path now exists
 
-The D70–D120 scheduler/controller line studies how to reduce experiment, query, and validation work. These are useful optimization results, but they are **not evidence of model-bit compression** unless they change the serialized decoder DAG.
+The T266-T282 real-checkpoint lane crossed the earlier engineering boundary: learned Transformer weights have been serialized into actual codec artifacts, independently decoded, and executed end-to-end. Reproduction and corruption/configuration checks were expanded through this phase.
+
+This does **not** establish quality-preserving 64× compression. The tested simple 64× family failed quality, and FQC-specific functional sharing has not yet been shown to beat a strong non-sharing baseline at matched final bytes.
+
+### 6. Search work is not codec bits
+
+Scheduler/controller experiments study how to reduce experiment, query, and validation work. These are useful optimization results, but they are **not evidence of model-bit compression** unless they change the serialized decoder DAG.
 
 ## Evidence status
 
 | Evidence lane | Status |
 |---|---|
 | Mathematical / structural framework | Active |
-| Exact deterministic toy optimization | Available; canonical reconstruction in progress |
+| Exact deterministic toy optimization | Available |
 | Synthetic scheduler / decision-geometry experiments | Available |
-| Real Transformer structural audit | Next major phase |
-| Actual serialized Transformer codec | Not yet demonstrated |
-| 64× real-model compression | **Not demonstrated** |
+| Real Transformer structural / codec engineering | **Available through T282** |
+| Actual serialized Transformer codec | **Demonstrated as an engineering artifact** |
+| Official TinyStories validation advantage | Not yet demonstrated |
+| FQC sharing advantage over strong non-sharing control | Not yet demonstrated |
+| Quality-preserving 64× real-model compression | **Not demonstrated; tested simple family failed** |
+| MPS/CUDA runtime advantage | Not yet measured |
 
 ## Repository structure
 
@@ -52,18 +61,30 @@ claims/        machine-readable claim/evidence ledger
 docs/          canonical research state, theory map, and evidence policy
 roadmap/       gated research plan
 provenance/    reconstruction rules and source mapping
-src/           canonical implementations (to be reconstructed)
-tests/         exact/reproducibility tests (to be reconstructed)
-experiments/   normalized experiment suites (to be reconstructed)
+src/           canonical implementations
+tests/         exact/reproducibility tests
+experiments/   normalized experiment suites
 ```
 
-The repository is being **reconstructed from prior handoff packages**, not used as a dump of those packages. Duplicate, obsolete, and pseudo-code artifacts are normalized into a canonical structure while preserving provenance.
+The repository is being **reconstructed from prior handoff packages**, not used as a dump of those packages. Duplicate, obsolete, and pseudo-code artifacts are normalized into a canonical structure while preserving provenance. Large checkpoints and duplicated binary artifacts are intentionally kept out of normal git history.
+
+## Current central experiment
+
+The next falsifiable comparison is at matched **final serialized bytes**:
+
+1. strong activation-aware non-sharing control;
+2. control + FQC functional sharing;
+3. sharing + selected private exceptions;
+4. private exceptions + joint byte allocation / QCO.
+
+The comparison must use held-out evaluation, token NLL and KL, and a multi-rate frontier. The purpose is to determine whether FQC-specific structure adds rate-distortion value beyond a strong conventional control.
 
 ## Core research lanes
 
 1. **Compression Core** — functional equivalence, shared roots, task geometry, decoder DAG, exact bit accounting.
 2. **Exact Codec Optimizer** — Bellman/Pareto methods, state quotients, branch-and-bound, local joint bundles, serializer-aware optimization.
 3. **Synthetic Research Scheduler** — experiment/query/validation work optimization; intentionally separated from codec evidence.
+4. **Real-model validation** — official evaluation path, strong controls, FQC ablations, multi-rate frontiers, and later MPS/CUDA measurements.
 
 ## Non-negotiable claim boundaries
 
@@ -72,9 +93,11 @@ The repository is being **reconstructed from prior handoff packages**, not used 
 - Synthetic work savings are not codec-bit savings.
 - Toy optimality is not real-model optimality.
 - Low energy is not assumed to mean low task value.
-- A real 64× claim requires exact serialization and a task-quality witness under the real-pilot / Transformer-extraction contract.
+- Parameter-space reconstruction error is not treated as task quality.
+- KL-only improvement is not promoted to an NLL-quality claim.
+- A real 64× claim requires exact serialization and a pre-registered task-quality witness.
 
-See [`docs/RESEARCH_STATE.md`](docs/RESEARCH_STATE.md), [`docs/EVIDENCE_POLICY.md`](docs/EVIDENCE_POLICY.md), and [`roadmap/ROADMAP.md`](roadmap/ROADMAP.md).
+See [`docs/RESEARCH_STATE.md`](docs/RESEARCH_STATE.md), [`docs/REAL_MODEL_T266_T282.md`](docs/REAL_MODEL_T266_T282.md), [`docs/EVIDENCE_POLICY.md`](docs/EVIDENCE_POLICY.md), and [`roadmap/ROADMAP.md`](roadmap/ROADMAP.md).
 
 ## License
 
