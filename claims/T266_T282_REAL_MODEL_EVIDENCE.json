@@ -1,0 +1,57 @@
+{
+  "lane": "REAL_CHECKPOINT_T266_T282",
+  "status": "ENGINEERING_REPRODUCIBILITY_PASS_SCIENTIFIC_QUALITY_UNCERTAIN",
+  "models": ["TinyStories-1M", "TinyStories-3M", "TinyStories-8M", "TinyStories-28M"],
+  "established": {
+    "actual_serialized_transformer_codec": true,
+    "independent_decode_and_forward": true,
+    "checkpoint_free_decode_witness": true,
+    "clean_rebuild_27_artifacts_t278": true,
+    "tests_passed_t282": 153,
+    "long_context_cases_t280": 29,
+    "frozen_public_prompt_rows_replayed_t282": 132
+  },
+  "t278_storage_candidate": {
+    "name": "28M_act_b4_g128",
+    "raw_bytes": 27696776,
+    "control_raw_bytes": 29320087,
+    "raw_storage_reduction_percent": 5.536514949631632,
+    "regression_probe_KL_mean_reduction_percent": 25.477106255574878,
+    "paired_NLL_CI_includes_zero": true,
+    "NLL_noninferiority_established": false
+  },
+  "t279_t282_frozen_pilot": {
+    "candidate": "28M_act_b4_g128",
+    "xz_envelope_bytes": 25507600,
+    "control_xz_bytes": 27064624,
+    "effective_bits_per_paid_scalar": 3.925154374181349,
+    "compression_vs_16bit_paid_weights": 4.076272797127131,
+    "public_prompt_count": 44,
+    "predicted_tokens": 2682,
+    "quality_tuning_on_public_prompts": false,
+    "official_validation": false,
+    "upstream_prompt_yaml_byte_parity": false
+  },
+  "hard_boundaries": {
+    "quality_preserving_64x": false,
+    "simple_64x_family_result": "FAILED_QUALITY",
+    "FQC_specific_sharing_advantage": false,
+    "official_TinyStories_validation_advantage": false,
+    "official_HF_runtime_parity": false,
+    "strong_GPTQ_AWQ_AQLM_comparison": false,
+    "MPS_or_CUDA_measurement": false,
+    "independent_training_replicas": false
+  },
+  "next_central_test": {
+    "matched_quantity": "final_serialized_bytes",
+    "arms": [
+      "strong_activation_aware_nonsharing_control",
+      "control_plus_functional_sharing",
+      "sharing_plus_private_exceptions",
+      "private_plus_joint_allocation_QCO"
+    ],
+    "quality_metrics": ["token_weighted_NLL", "KL"],
+    "requires_held_out_final_audit": true,
+    "requires_multi_rate_frontier": true
+  }
+}
