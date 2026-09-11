@@ -1,0 +1,24 @@
+{
+  "audit_range": [
+    320,
+    1344
+  ],
+  "audit_touched_before_freeze": false,
+  "candidates": [
+    "ORIGINAL",
+    "1M_act_b8_g64",
+    "1M_act_b6_g64",
+    "1M_act_b4_g64",
+    "1M_act_b3_g64",
+    "1M_act_b2_g64",
+    "1M_shareK64_B32",
+    "1M_vqK64_B32",
+    "1M_BC_P256"
+  ],
+  "excluded_B_meta": "structurally impossible on 1M (cols=64 < supergroup=128); recorded, not redesigned",
+  "excluded_K256_VQ": "structurally impossible (K=256 > per-tensor sample count on tiny tensors); only K64 pairs replicable",
+  "freeze_utc": "2026-09-10T22:50Z (no later than first audit write 22:51Z)",
+  "git_sha": "65af8603ae492d5fb040fb0081d526308c06affd (lane code base; results on branch experiment/c4-scale-replication-8m-1m)",
+  "rule": "audit evaluated once after this freeze",
+  "scale": "1M"
+}
