@@ -1,104 +1,37 @@
-# Functional Quotient Compression
+# Vector Mirror Research — FQC and Mirror-native models
 
-> Compress task-relevant structure; quotient redundant degrees of freedom.
+**Research in progress. No quality-preserving 64x Transformer result or general capacity advantage is claimed.**
 
-Functional Quotient Compression (FQC) is a research project on neural-network compression through **functional equivalence**, **quotient representations**, **shared low-description structure**, and **task-aware codec optimization**.
+## Current organization (2026-10-03)
 
-The project grew out of earlier “Vector Mirror” experiments. The current framework is broader: mirror transformations are treated as one possible structural tool, not as the fundamental source of compression.
+| Phase | Scope | Status |
+|---|---|---|
+| [Phase I: Functional Quotient Compression](docs/phase1/STATUS.md) | Post-training compression, task-sensitive shared/private codecs, exact byte accounting | **Paused; results, code and history preserved** |
+| [Phase II: Mirror-native conditional models](docs/phase2/README.md) | Jointly trained shared FFNs, small state vectors and input-dependent routers | **Active; minimal CPU experiments** |
 
-## Research question
+The previous README is preserved verbatim in [the Phase I snapshot](docs/phase1/README_before_phase2_20261003.md). Its main-branch baseline was `41e084440e5c8525c1e1adeefd172be7f05acb10`. No historical source, tests, claims or experiment directory was deleted by this transition.
 
-Can a trained neural network be represented by coding only the degrees of freedom that remain distinguishable under the target task, while deriving or sharing the rest through a decoder with exact serialized-bit accounting?
+## Start here
 
-The long-term target is to determine—by proof, exact optimization, and real-model experiments—whether **64× compression relative to a 16-bit parameter baseline** is feasible under a pre-registered task-quality constraint. A quality-preserving 64× real-Transformer result has **not** been demonstrated.
+[**MN002: runnable code, fixed protocols, positive and negative results**](experiments/mirror_native/mn002_20261003/README.md)
 
-## What is established so far
+The small causal Transformer learns input-dependent shared states without expanding a full expert weight matrix per token. MN002 compares 1/4/16 states against exactly parameter-, file-byte- and FFN-linear-MAC-matched Dense controls. It includes 24 main training runs and a 9-run fresh-table follow-up, plus cache and serialized-model tests.
 
-### 1. Corrected compression principle
+**Result boundary:** Mirror4 beats matched Dense on the first finite task in 3/3 seeds, but only 2/3 on the second task and only 1/3 against a near-matched simple gate. Mirror16 loses to its Dense control in 3/3 primary seeds. This supports feasibility and motivates further testing; it does not demonstrate universal efficiency, exponential capacity, natural-language quality or a new invention of parameter-sharing MoE.
 
-Known invertible transforms (including mirror/orthogonal changes of basis) do not by themselves create fundamental rate-distortion gains. Compression must come from actual non-redundant structure: hard sharing, quotienting task-null degrees of freedom, low-description decoder structure, structured private exceptions, or restricted codecs.
+## Reproduce
 
-### 2. Functional / decision equivalence
-
-Several research lines converge on the same principle: states that produce the same relevant decoded or decision behavior can be merged. This includes gauge freedoms, decoded-signature equivalence, and decision-null common-mode constructions.
-
-### 3. Task-aware geometry matters
-
-Small parameter or spectral energy does not imply small task importance. Later real-checkpoint experiments also show that lower parameter-space reconstruction error need not improve task KL/NLL.
-
-### 4. Exact structural codec optimization
-
-Deterministic toy experiments show that serializer effects, cross-block coupling, tree topology, precision, selectors, and decoder prerequisites must be optimized jointly.
-
-### 5. Real Transformer codec path now exists
-
-The T266-T282 real-checkpoint lane crossed the earlier engineering boundary: learned Transformer weights have been serialized into actual codec artifacts, independently decoded, and executed end-to-end. Reproduction and corruption/configuration checks were expanded through this phase.
-
-This does **not** establish quality-preserving 64× compression. The tested simple 64× family failed quality, and FQC-specific functional sharing has not yet been shown to beat a strong non-sharing baseline at matched final bytes.
-
-### 6. Search work is not codec bits
-
-Scheduler/controller experiments study how to reduce experiment, query, and validation work. These are useful optimization results, but they are **not evidence of model-bit compression** unless they change the serialized decoder DAG.
-
-## Evidence status
-
-| Evidence lane | Status |
-|---|---|
-| Mathematical / structural framework | Active |
-| Exact deterministic toy optimization | Available |
-| Synthetic scheduler / decision-geometry experiments | Available |
-| Real Transformer structural / codec engineering | **Available through T282** |
-| Actual serialized Transformer codec | **Demonstrated as an engineering artifact** |
-| Official TinyStories validation advantage | Not yet demonstrated |
-| FQC sharing advantage over strong non-sharing control | Not yet demonstrated |
-| Quality-preserving 64× real-model compression | **Not demonstrated; tested simple family failed** |
-| MPS/CUDA runtime advantage | Not yet measured |
-
-## Repository structure
-
-```text
-claims/        machine-readable claim/evidence ledger
-docs/          canonical research state, theory map, and evidence policy
-roadmap/       gated research plan
-provenance/    reconstruction rules and source mapping
-src/           canonical implementations
-tests/         exact/reproducibility tests
-experiments/   normalized experiment suites
+```bash
+cd experiments/mirror_native/mn002_20261003
+python -m pip install -r requirements.txt
+python -m pytest -q
+OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 OPENBLAS_NUM_THREADS=1 python reproduce.py --output /tmp/mn002-reproduction
 ```
 
-The repository is being **reconstructed from prior handoff packages**, not used as a dump of those packages. Duplicate, obsolete, and pseudo-code artifacts are normalized into a canonical structure while preserving provenance. Large checkpoints and duplicated binary artifacts are intentionally kept out of normal git history.
+After dependencies are installed, the experiment requires no network, model download, API key or paid service. Select a new output directory. Full protocols and limitations are in the experiment README.
 
-## Current central experiment
+## Reuse and evaluation
 
-The next falsifiable comparison is at matched **final serialized bytes**:
+Code and extensions are welcome under the existing **Apache License 2.0**; see [LICENSE](LICENSE). Please cite Unjuno's repository/experiment when using it or reporting evaluations. A [citation file](experiments/mirror_native/mn002_20261003/CITATION.cff) is provided. Citation is a request, not an additional license restriction.
 
-1. strong activation-aware non-sharing control;
-2. control + FQC functional sharing;
-3. sharing + selected private exceptions;
-4. private exceptions + joint byte allocation / QCO.
-
-The comparison must use held-out evaluation, token NLL and KL, and a multi-rate frontier. The purpose is to determine whether FQC-specific structure adds rate-distortion value beyond a strong conventional control.
-
-## Core research lanes
-
-1. **Compression Core** — functional equivalence, shared roots, task geometry, decoder DAG, exact bit accounting.
-2. **Exact Codec Optimizer** — Bellman/Pareto methods, state quotients, branch-and-bound, local joint bundles, serializer-aware optimization.
-3. **Synthetic Research Scheduler** — experiment/query/validation work optimization; intentionally separated from codec evidence.
-4. **Real-model validation** — official evaluation path, strong controls, FQC ablations, multi-rate frontiers, and later MPS/CUDA measurements.
-
-## Non-negotiable claim boundaries
-
-- Invertible representation changes are not themselves compression evidence.
-- Logical bits are not accepted as a 64× result; actual serialized bits are authoritative.
-- Synthetic work savings are not codec-bit savings.
-- Toy optimality is not real-model optimality.
-- Low energy is not assumed to mean low task value.
-- Parameter-space reconstruction error is not treated as task quality.
-- KL-only improvement is not promoted to an NLL-quality claim.
-- A real 64× claim requires exact serialization and a pre-registered task-quality witness.
-
-See [`docs/RESEARCH_STATE.md`](docs/RESEARCH_STATE.md), [`docs/REAL_MODEL_T266_T282.md`](docs/REAL_MODEL_T266_T282.md), [`docs/EVIDENCE_POLICY.md`](docs/EVIDENCE_POLICY.md), and [`roadmap/ROADMAP.md`](roadmap/ROADMAP.md).
-
-## License
-
-Apache License 2.0. See [`LICENSE`](LICENSE).
+Independent evaluations, including null/negative results, are welcome. Useful targets are non-saturating tasks, stronger matched-resource gate/shared-expert baselines, cache correctness and real throughput/memory. The project is unfinished, and the public prototype is not a production model.

@@ -1,0 +1,68 @@
+{
+  "experiment": "MN002R",
+  "status_at_creation": "FROZEN_AFTER_MN002_BEFORE_ANY_MN002R_TRAINING",
+  "purpose": "Fresh-table follow-up of MN002 mirror S4 versus matched dense and near-matched direct feature gate. Chosen after primary results; not independent hyperparameter-free discovery.",
+  "rules": 16,
+  "symbols": 32,
+  "records": 4,
+  "table_seed": 161803,
+  "train_sequences": 8192,
+  "development_sequences": 512,
+  "audit_sequences": 2048,
+  "train_seed": 12101,
+  "development_seed": 23102,
+  "audit_seed": 34103,
+  "seeds": [
+    211,
+    212,
+    213
+  ],
+  "d": 32,
+  "layers": 2,
+  "heads": 4,
+  "max_length": 32,
+  "steps": 600,
+  "batch": 64,
+  "learning_rate": 0.003,
+  "optimizer": "AdamW",
+  "betas": [
+    0.9,
+    0.95
+  ],
+  "weight_decay": 0.01,
+  "clip_norm": 1.0,
+  "threads": 2,
+  "variants": [
+    {
+      "name": "mirror_s4",
+      "kind": "mirror",
+      "hidden": 32,
+      "states": 4
+    },
+    {
+      "name": "dense_m4",
+      "kind": "dense",
+      "hidden": 36,
+      "states": 1
+    },
+    {
+      "name": "direct_gate_m4",
+      "kind": "direct_gate",
+      "hidden": 24,
+      "states": 1
+    }
+  ],
+  "checkpoint_selection": "Always step 600, no best-development/test checkpoint selection.",
+  "audit_policy": "Freeze all 24 checkpoint hashes before generating audit; fresh sequences, known rule-symbol mappings. Report every seed.",
+  "primary": "Paired-seed audit answer-token NLL and accuracy versus exact-parameter dense; median and full seed range, not asymptotic capacity.",
+  "routing_controls": [
+    "fixed_development_mean_all_positions",
+    "uniform",
+    "cyclic_state_identity_shift"
+  ],
+  "inference_contract": "Local causal soft routing in FFN only; attention remains unchanged; no full expert matrix materialization; no sparse compute claim.",
+  "kv_gate": "Full vs cached logits max absolute difference <= 0.00005; answer argmax unchanged.",
+  "reproduction": "One MN002 run re-executed in a separate process; compare metrics/state tensors excluding wall time.",
+  "no_hidden_tests": "Report finite-table fitting only; not unseen rule-symbol generalization, natural language or proof of unlimited states. Primary no hyperparameter sweep.",
+  "matched_control_note": "Mirror4 and dense36 exactly equal parameters and FF linear MACs. Direct gate24 is +24 parameters (+0.136%) with identical FF linear MACs. Nonlinear runtime is not matched."
+}
