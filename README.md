@@ -1,25 +1,48 @@
 # Vector Mirror Research — FQC and Mirror-native models
 
-**Research in progress. No quality-preserving 64x Transformer result or general capacity advantage is claimed.**
+**Research in progress. No quality-preserving 64x Transformer result or general Mirror-native capacity advantage is claimed.**
 
 ## Current organization (2026-10-03)
 
 | Phase | Scope | Status |
 |---|---|---|
 | [Phase I: Functional Quotient Compression](docs/phase1/STATUS.md) | Post-training compression, task-sensitive shared/private codecs, exact byte accounting | **Paused; results, code and history preserved** |
-| [Phase II: Mirror-native conditional models](docs/phase2/README.md) | Jointly trained shared FFNs, small state vectors and input-dependent routers | **Active; minimal CPU experiments** |
+| [Phase II: Mirror-native conditional models](docs/phase2/README.md) | Native shared-state models, parallel routing, sparse/state modulation, semantic parameter sharing | **Active through MN007** |
 
-The previous README is preserved verbatim in [the Phase I snapshot](docs/phase1/README_before_phase2_20261003.md). Its main-branch baseline was `41e084440e5c8525c1e1adeefd172be7f05acb10`. No historical source, tests, claims or experiment directory was deleted by this transition.
+The previous Phase-I README is preserved verbatim in [the Phase I snapshot](docs/phase1/README_before_phase2_20261003.md). Its baseline was commit `41e084440e5c8525c1e1adeefd172be7f05acb10`. Historical source, tests, claims and experiment directories remain preserved.
 
 ## Start here
 
-[**MN002: runnable code, fixed protocols, positive and negative results**](experiments/mirror_native/mn002_20261003/README.md)
+- [**Phase II research state through MN007**](docs/phase2/RESEARCH_STATE_THROUGH_MN007.md)
+- [**Semantic Mirror hypothesis**](docs/phase2/SEMANTIC_MIRROR_HYPOTHESIS.md)
+- [**Mirror-native experiment index**](experiments/mirror_native/INDEX.md)
+- [**MN002 runnable public experiment**](experiments/mirror_native/mn002_20261003/README.md)
 
-The small causal Transformer learns input-dependent shared states without expanding a full expert weight matrix per token. MN002 compares 1/4/16 states against exactly parameter-, file-byte- and FFN-linear-MAC-matched Dense controls. It includes 24 main training runs and a 9-run fresh-table follow-up, plus cache and serialized-model tests.
+## What Phase II has established
 
-**Result boundary:** Mirror4 beats matched Dense on the first finite task in 3/3 seeds, but only 2/3 on the second task and only 1/3 against a near-matched simple gate. Mirror16 loses to its Dense control in 3/3 primary seeds. This supports feasibility and motivates further testing; it does not demonstrate universal efficiency, exponential capacity, natural-language quality or a new invention of parameter-sharing MoE.
+Small CPU experiments demonstrate that:
 
-## Reproduce
+- shared FFN/state models can learn input-dependent functional states without materializing a full expert matrix per token;
+- independent routing heads can be packed into batched projections rather than executed as a sequential routing chain;
+- the tested MLP-centered designs preserve ordinary causal KV-cache reuse under fixed past states;
+- candidate-region routing can reduce routing metadata/parameter cost;
+- shared-base/state representations can be serialized more compactly than fully independent embeddings in some controlled settings.
+
+## What remains unresolved
+
+The evidence does **not** establish that:
+
+- more Mirror states automatically increase useful capacity;
+- combinatorial routing-path count equals independent-expert capacity;
+- dynamic overlap or averaging is generally superior to structured disjoint subspaces;
+- router collapse is the main optimization bottleneck;
+- task learning automatically organizes semantic relatives into one shared parameter identity;
+- Mirror transforms beat strong additive or low-rank factorization controls;
+- the CPU measurements predict GPU/production-LLM speed.
+
+MN007 makes the current representation question explicit: can a model learn **shared parameter identity + low-description view/state coordinates** for related concepts, rather than only placing separate vectors near one another? That hypothesis remains open.
+
+## Reproduce the public MN002 baseline
 
 ```bash
 cd experiments/mirror_native/mn002_20261003
@@ -28,10 +51,10 @@ python -m pytest -q
 OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 OPENBLAS_NUM_THREADS=1 python reproduce.py --output /tmp/mn002-reproduction
 ```
 
-After dependencies are installed, the experiment requires no network, model download, API key or paid service. Select a new output directory. Full protocols and limitations are in the experiment README.
+MN003-MN007 were run locally in the project container. Their large evidence bundles are not committed to ordinary Git history; verified SHA-256 provenance is recorded in the [Phase II research state](docs/phase2/RESEARCH_STATE_THROUGH_MN007.md).
 
 ## Reuse and evaluation
 
-Code and extensions are welcome under the existing **Apache License 2.0**; see [LICENSE](LICENSE). Please cite Unjuno's repository/experiment when using it or reporting evaluations. A [citation file](experiments/mirror_native/mn002_20261003/CITATION.cff) is provided. Citation is a request, not an additional license restriction.
+Code and extensions are welcome under the existing **Apache License 2.0**; see [LICENSE](LICENSE). Please cite this repository when using the prototype or reporting independent evaluations. Citation is requested, not an additional license restriction.
 
-Independent evaluations, including null/negative results, are welcome. Useful targets are non-saturating tasks, stronger matched-resource gate/shared-expert baselines, cache correctness and real throughput/memory. The project is unfinished, and the public prototype is not a production model.
+Independent replications, including negative results, are welcome. Especially useful tests are stronger additive/low-rank controls, non-saturating compositional tasks, semantic state-swap consistency, matched-byte comparisons, and later real-language/model-scale evaluation.

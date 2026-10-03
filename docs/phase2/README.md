@@ -1,26 +1,73 @@
 # Phase II — Mirror-native conditional models
 
-**Active, unfinished research.** One shared FFN per layer is modulated by a small state bank and a token-local router, all trained together. The model does not store a separate full FFN for every state or materialize one for every token. The current implementation is feature-wise modulation, not a literal frequency/mirror transform or sparse-MoE kernel.
+**Active, unfinished research.** Phase II asks whether one learned shared representation can support multiple functional states through low-description state/view coordinates and parallel routing, without storing a separate full expert for every state.
+
+The current work has moved beyond the initial single-router feasibility study. The main evidence summary is [RESEARCH_STATE_THROUGH_MN007.md](RESEARCH_STATE_THROUGH_MN007.md). The current conceptual target is recorded separately in [SEMANTIC_MIRROR_HYPOTHESIS.md](SEMANTIC_MIRROR_HYPOTHESIS.md).
 
 ## Evidence map
 
 | Experiment | Role | Status |
 |---|---|---|
-| MN001 | Initial 2-layer causal Transformer / 4-rule toy | Learned, routing ablation and cache feasibility; ordinary Dense also solved it. Historical local package preserved. |
-| [MN002](../../experiments/mirror_native/mn002_20261003/README.md) | 16-rule x 32-symbol task, 24 fixed-budget training runs | Mirror4 wins against matched Dense in 3/3 seeds; Mirror16 loses in 3/3. |
-| MN002R | New task table and 9 fresh training runs | Mirror4 wins Dense in 2/3, simple gate in only 1/3; superiority not established. |
+| MN001 | Initial 2-layer causal Transformer / 4-rule toy | Learned, router ablation and cache feasibility; ordinary Dense also solved it. |
+| [MN002](../../experiments/mirror_native/mn002_20261003/README.md) | 16-rule task with matched Dense controls | Mirror4 positive on one table, weaker fresh-table result; no general advantage. |
+| MN003 | Fixed disjoint block factorization + packed parallel router | Packed routing preserves tested function/gradients and reduces Python-loop routing overhead; Dense still strong. |
+| MN004 | Overlapping sparse supports + mean/sum aggregation | Where/how routing works; averaging is not consistently superior; fixed-support sum/mean are reparameterization-equivalent under stated assumptions. |
+| MN005 | Candidate-region where-routing | Lower parameter/file cost; runtime benefit depends on shape; fixed disjoint routing remains a strong control. |
+| MN006 | Router early-lock-in diagnosis | Strong collapse explanation not supported; router-only tuning helps, full joint tuning helps much more. |
+| MN007 | Shared semantic bases + state/view codes | Compact shared representation works; strong semantic self-organization and Mirror-specific advantage remain unproven. |
 
-## What is currently useful
+See the [experiment index](../../experiments/mirror_native/INDEX.md) for local evidence-package hashes.
 
-The inspectable implementation demonstrates learned state-dependent computation without token-specific full-matrix expansion; cache equivalence and actual model-file accounting are tested. It supplies reproducible controls and failure conditions, not a capacity multiplier or an LLM performance claim.
+## Current architectural interpretation
 
-Published scopes must remain separate: **numerical identity**, **successful learning**, **router usage**, **equal-resource predictive advantage**, **scaling**. The first three have small-test evidence. The last two are unresolved. A router ablation is not a proof that a retrained static model would fail.
+The evidence favors **structured shared subspaces + parallel routing + joint optimization** over unrestricted per-token support search.
 
-## Roadmap
+Three distinctions are mandatory:
 
-1. Preserve the working model, protocols, all seed results and failures.
-2. Evaluate non-saturating tasks and multiple independent task distributions.
-3. Match parameter bytes and training/inference computation against Dense, direct gates, FiLM-style modulation and shared-expert baselines.
-4. Only then seek larger-scale independent replication. No paid compute is required by the current prototype.
+1. **Functional mechanism:** can the model execute distinct input-dependent states?
+2. **Resource efficiency:** does it do so at lower stored bytes and acceptable compute?
+3. **Representation semantics:** do related concepts actually share the same parameter identity with reusable low-description transformations?
 
-Phase I remains [preserved and paused](../phase1/STATUS.md), not deleted or scientifically declared complete. Existing Apache-2.0 terms are unchanged. Use the experiment's `CITATION.cff`; citation is requested, not an extra legal condition.
+The first has small-scale evidence. The second is mixed. The third is the current open problem.
+
+## Current representation hypothesis
+
+The central candidate factorization is:
+
+```math
+concept \approx (shared\ canonical\ parameter,\ Mirror/view\ coordinate)
+```
+
+The dual parameterization must also be tested:
+
+```math
+concept \approx (concept\ coordinate,\ shared\ transformation\ basis/directions)
+```
+
+Task loss alone did not recover strong semantic grouping in MN007. The next experiment therefore needs a direct **transformation-consistency** objective: the same state/view code should induce a consistent functional change across multiple bases.
+
+## Evidence boundaries
+
+Do not conflate:
+
+- router usage with superiority over a retrained static model;
+- routing combinations with independent-expert capacity;
+- lower parameter count with lower serialized bytes;
+- CPU loop-overhead speedups with production throughput;
+- positive ARI with successful semantic-factor recovery;
+- compact shared representation with Mirror-specific advantage over additive/low-rank factorization.
+
+## Next gate
+
+The next falsifiable comparison should use held-out family x state combinations and matched serialized bytes across:
+
+1. independent embedding;
+2. additive factorization;
+3. CP/low-rank factorization;
+4. shared-base Mirror;
+5. shared-transformation-basis Mirror;
+6. optional small private residual.
+
+Measure task NLL/accuracy, state-swap consistency, cross-family transfer, semantic clustering, actual bytes, and active compute. A Mirror-specific claim requires improvement beyond the additive/low-rank controls.
+
+Phase I remains [preserved and paused](../phase1/STATUS.md). Existing Apache-2.0 terms are unchanged.
