@@ -71,6 +71,23 @@ Interpretation:
 - preserving a wide shared computation can be better than splitting the same storage budget into many narrow experts;
 - the result does not yet show a Mirror-specific advantage over Dense or a simple gate.
 
+## Analytic bridge — function-preserving global-state growth
+
+Before MN010, the project reconnected the current architecture to the earlier holographic/shared-parameter analysis.
+
+Key analytic results used by MN010:
+
+- deterministic Mirror views do not create new Shannon information by themselves;
+- Mirror count, state/control dimension, and shared Dense width are distinct resources;
+- under soft routing a state can be split into two symmetric children while preserving the mixed control exactly at insertion time;
+- the two children can still receive different router gradients after the split;
+- a local router-control tangent has at most \(\min(q,E-1)\) independent directions for control dimension \(q\) and state count \(E\).
+
+Verified local artifacts:
+
+- analysis ZIP SHA-256: `7b3bb4b14d5a56c4576431bf5d049f5fbdb1a7bbc5f34881e05f2a3364671932`;
+- analysis report SHA-256: `e952186b11703373c21420fae48acee8baf30e118a3a84dc65f7c64bbcddbff8`.
+
 ## MN010 — single Dense, single router, dynamically added global Mirror states
 
 Question: can one dense model be kept intact while global Mirror states are added during training only when they provide additional value?
