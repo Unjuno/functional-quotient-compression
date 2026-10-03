@@ -8,9 +8,9 @@ Conventional embeddings represent semantic similarity largely through geometric 
 
 The current Mirror-native hypothesis asks whether some of that redundancy can instead be represented structurally:
 
-[
+```math
 \text{concept} \approx (\text{shared parameter identity},\; \text{small view/state coordinate})
-]
+```
 
 In words: related concepts may be able to reuse the **same underlying parameter object** while differing by a small learned Mirror/view coordinate.
 
@@ -22,9 +22,9 @@ Both directions must be tested.
 
 ### A. Shared canonical parameter + concept/state Mirror
 
-[
+```math
 z_c = M_{m_c}(B_{g(c)})
-]
+```
 
 - (B_{g(c)}): shared canonical base;
 - (m_c): small Mirror/view code;
@@ -34,15 +34,15 @@ This is the direct "same parameter, different view" formulation.
 
 ### B. Shared Mirror direction/basis + concept-specific coordinate
 
-[
+```math
 z_c = M_{A u_c}(b_c)
-]
+```
 
-or more generally
+or more generally:
 
-[
+```math
 M_c = \sum_k u_{c,k} M_k
-]
+```
 
 where the transformation directions (M_k) are shared and concepts carry only small coefficients.
 
