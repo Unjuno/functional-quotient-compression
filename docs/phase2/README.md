@@ -1,73 +1,84 @@
 # Phase II — Mirror-native conditional models
 
-**Active, unfinished research.** Phase II asks whether one learned shared representation can support multiple functional states through low-description state/view coordinates and parallel routing, without storing a separate full expert for every state.
+**Active, unfinished research.** Phase II now focuses on a single wide Dense model controlled by one context-aware router and a small bank of global Mirror states.
 
-The current work has moved beyond the initial single-router feasibility study. The main evidence summary is [RESEARCH_STATE_THROUGH_MN007.md](RESEARCH_STATE_THROUGH_MN007.md). The current conceptual target is recorded separately in [SEMANTIC_MIRROR_HYPOTHESIS.md](SEMANTIC_MIRROR_HYPOTHESIS.md).
+The active state is [RESEARCH_STATE_THROUGH_MN010.md](RESEARCH_STATE_THROUGH_MN010.md). The architecture is specified in [GLOBAL_DENSE_MIRROR_ARCHITECTURE.md](GLOBAL_DENSE_MIRROR_ARCHITECTURE.md). The next experiment is pre-registered in [MN011_PLAN.md](../../experiments/mirror_native/MN011_PLAN.md).
 
 ## Evidence map
 
 | Experiment | Role | Status |
 |---|---|---|
-| MN001 | Initial 2-layer causal Transformer / 4-rule toy | Learned, router ablation and cache feasibility; ordinary Dense also solved it. |
-| [MN002](../../experiments/mirror_native/mn002_20261003/README.md) | 16-rule task with matched Dense controls | Mirror4 positive on one table, weaker fresh-table result; no general advantage. |
-| MN003 | Fixed disjoint block factorization + packed parallel router | Packed routing preserves tested function/gradients and reduces Python-loop routing overhead; Dense still strong. |
-| MN004 | Overlapping sparse supports + mean/sum aggregation | Where/how routing works; averaging is not consistently superior; fixed-support sum/mean are reparameterization-equivalent under stated assumptions. |
-| MN005 | Candidate-region where-routing | Lower parameter/file cost; runtime benefit depends on shape; fixed disjoint routing remains a strong control. |
-| MN006 | Router early-lock-in diagnosis | Strong collapse explanation not supported; router-only tuning helps, full joint tuning helps much more. |
-| MN007 | Shared semantic bases + state/view codes | Compact shared representation works; strong semantic self-organization and Mirror-specific advantage remain unproven. |
+| MN001 | Initial causal shared-state toy | Feasibility only; Dense also solved it. |
+| [MN002](../../experiments/mirror_native/mn002_20261003/README.md) | Matched Dense/shared-state comparison | Mixed; no general advantage. |
+| MN003 | Packed parallel block routing | Numerical equivalence and loop-overhead reduction demonstrated. |
+| MN004 | Overlapping sparse supports | Averaging not consistently superior; fixed-support sum/mean are reparameterization-equivalent under stated assumptions. |
+| MN005 | Candidate-region routing | Lower metadata/parameter cost; quality/runtime benefits are shape- and task-dependent. |
+| MN006 | Router early-lock-in diagnosis | Strong collapse explanation not supported; joint optimization mattered more. |
+| MN007 | Semantic shared bases | Compact representation works; strong semantic self-organization and Mirror-specific advantage not demonstrated. |
+| MN008 | Functional recombination supervision | Reusable factor structure improves strongly with relation supervision; additive control remains stronger on median NLL. |
+| MN009 | Shared Dense vs duplicated experts | Mirror beats a near-byte-matched narrow soft-MoE; not consistently better than Dense/simple gate and not quality-equivalent to a much larger MoE. |
+| MN010 | Single Dense + single router + dynamic global Mirror | Low-dimensional state-count growth ineffective; broad 256-dim global modulation gives a discovery signal but replication is mixed. |
+| MN011 | Mirror breadth × Mirror count | **Pre-registered next experiment.** |
 
-See the [experiment index](../../experiments/mirror_native/INDEX.md) for local evidence-package hashes.
+## Main architectural interpretation
 
-## Current architectural interpretation
+The evidence currently favors:
 
-The evidence favors **structured shared subspaces + parallel routing + joint optimization** over unrestricted per-token support search.
+> **wide shared Dense computation + context-aware global control**
 
-Three distinctions are mandatory:
+over aggressively fragmenting the model into narrow independent experts.
 
-1. **Functional mechanism:** can the model execute distinct input-dependent states?
-2. **Resource efficiency:** does it do so at lower stored bytes and acceptable compute?
-3. **Representation semantics:** do related concepts actually share the same parameter identity with reusable low-description transformations?
+Three resources must be optimized separately:
 
-The first has small-scale evidence. The second is mixed. The third is the current open problem.
+1. **Dense width** — shared capacity;
+2. **Mirror breadth** — how many functional directions one state can change;
+3. **Mirror count** — how many alternative states can be routed.
 
-## Current representation hypothesis
+MN010 is the first experiment to separate these explicitly. Increasing count with a small 8-dimensional control did not help; increasing state breadth to direct 256-dimensional modulation produced a stronger signal in one data world.
 
-The central candidate factorization is:
+## Router rule
 
-```math
-concept \approx (shared\ canonical\ parameter,\ Mirror/view\ coordinate)
-```
+The router must see enough causal context to distinguish the functions it is meant to select.
 
-The dual parameterization must also be tested:
+MN010 found that:
 
-```math
-concept \approx (concept\ coordinate,\ shared\ transformation\ basis/directions)
-```
+- raw final-token routing was context-blind on the synthetic task;
+- prefix mean removed operation order;
+- an order-sensitive causal prefix summary corrected the information defect.
 
-Task loss alone did not recover strong semantic grouping in MN007. The next experiment therefore needs a direct **transformation-consistency** objective: the same state/view code should induce a consistent functional change across multiple bases.
+Router design is therefore part of the model's information interface, not merely a latency component.
 
-## Evidence boundaries
+## Dynamic growth
+
+A Mirror state can be split function-preservingly under soft routing. This allows state count to grow during training without an insertion-time output jump.
+
+Growth is not automatic evidence of capacity. Every proposed addition must be compared from the same parent checkpoint against:
+
+- no structural change;
+- similar-byte Dense widening.
+
+The current automatic-growth rule correctly rejected state additions when measured development gain was too small.
+
+## Semantic-sharing side lane
+
+MN008 showed that explicit recombination supervision can produce strong semantic grouping and held-out recombination. However, additive factorization also benefited and remained strong. Semantic Mirror work is preserved as an auxiliary representation-learning lane in [SEMANTIC_MIRROR_HYPOTHESIS.md](SEMANTIC_MIRROR_HYPOTHESIS.md), not the current main architecture.
+
+## Current evidence boundaries
 
 Do not conflate:
 
-- router usage with superiority over a retrained static model;
-- routing combinations with independent-expert capacity;
-- lower parameter count with lower serialized bytes;
-- CPU loop-overhead speedups with production throughput;
-- positive ARI with successful semantic-factor recovery;
-- compact shared representation with Mirror-specific advantage over additive/low-rank factorization.
+- state count with functional breadth;
+- path count with independent-expert capacity;
+- parameter count with actual serialized bytes;
+- discovery-world improvements with replication;
+- router usage with superiority over retrained Dense;
+- soft-MoE CPU timing with optimized sparse-MoE timing;
+- synthetic arithmetic/compositional tasks with natural-language quality.
 
 ## Next gate
 
-The next falsifiable comparison should use held-out family x state combinations and matched serialized bytes across:
+MN011 will test a factorial grid of Mirror breadth 32/64/128/256 and state count E=1/2/4/8, plus dynamic state growth with no-change and similar-byte Dense-widening controls.
 
-1. independent embedding;
-2. additive factorization;
-3. CP/low-rank factorization;
-4. shared-base Mirror;
-5. shared-transformation-basis Mirror;
-6. optional small private residual.
+A Mirror-specific claim requires a reproducible rate-quality advantage beyond both ordinary extra training and Dense widening.
 
-Measure task NLL/accuracy, state-swap consistency, cross-family transfer, semantic clustering, actual bytes, and active compute. A Mirror-specific claim requires improvement beyond the additive/low-rank controls.
-
-Phase I remains [preserved and paused](../phase1/STATUS.md). Existing Apache-2.0 terms are unchanged.
+Phase I remains [preserved and paused](../phase1/STATUS.md). Apache-2.0 terms are unchanged.
