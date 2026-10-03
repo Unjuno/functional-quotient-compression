@@ -32,17 +32,17 @@ The first has small-scale evidence. The second is mixed. The third is the curren
 
 ## Current representation hypothesis
 
-The central candidate factorization is
+The central candidate factorization is:
 
-[
-\text{concept} \approx (\text{shared canonical parameter},\; \text{Mirror/view coordinate})
-]
+```math
+concept \approx (shared\ canonical\ parameter,\ Mirror/view\ coordinate)
+```
 
-but the dual parameterization must also be tested:
+The dual parameterization must also be tested:
 
-[
-\text{concept} \approx (\text{concept coordinate},\; \text{shared transformation basis/directions})
-]
+```math
+concept \approx (concept\ coordinate,\ shared\ transformation\ basis/directions)
+```
 
 Task loss alone did not recover strong semantic grouping in MN007. The next experiment therefore needs a direct **transformation-consistency** objective: the same state/view code should induce a consistent functional change across multiple bases.
 
