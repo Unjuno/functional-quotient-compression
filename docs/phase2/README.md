@@ -1,8 +1,16 @@
 # Phase II — Mirror-native conditional models
 
-**Active, unfinished research.** Phase II now focuses on a single wide Dense model controlled by one context-aware router and a small bank of global Mirror states.
+**Active, unfinished research.** The retained experimental record through MN010 focuses on a single wide Dense model controlled by one context-aware router and a small bank of global Mirror states. A newer router-free analytical extension is indexed below; it does not overwrite those experimental results.
 
-The active state is [RESEARCH_STATE_THROUGH_MN010.md](RESEARCH_STATE_THROUGH_MN010.md). The architecture is specified in [GLOBAL_DENSE_MIRROR_ARCHITECTURE.md](GLOBAL_DENSE_MIRROR_ARCHITECTURE.md). The next experiment is pre-registered in [MN011_PLAN.md](../../experiments/mirror_native/MN011_PLAN.md).
+The experimental state through MN010 is [RESEARCH_STATE_THROUGH_MN010.md](RESEARCH_STATE_THROUGH_MN010.md). Its architecture is specified in [GLOBAL_DENSE_MIRROR_ARCHITECTURE.md](GLOBAL_DENSE_MIRROR_ARCHITECTURE.md). The existing pre-registration is preserved in [MN011_PLAN.md](../../experiments/mirror_native/MN011_PLAN.md).
+
+## Router-free analytical extension — 2026-10-05
+
+[Reachability-adjusted Mirror analysis (Japanese)](REACHABILITY_ADJUSTED_MIRROR_ANALYSIS_JA.md) separates representability, finite-budget reachability, task utility, old-task interference, and actual description cost. It preserves the router-free proposal: one shared parameter set, fixed deterministic views, and no learned per-input routing.
+
+The note corrects the orientation of the cost-ratio eigenproblem, states the reachability feasibility condition, proves fixed-view folding and the limited simplex support bound, and includes token-period counterexamples. **K=r+1 is not an optimal-capacity theorem; the previous K=5/6/9 suggestions remain unvalidated candidates.**
+
+[Verification code and results](../../experiments/analytic_mirror/reachability_v1/README.md) contain 15 passing finite float64 algebra tests. No new Transformer training, real-checkpoint reachability spectrum, optimal K/rho, or capacity gain is claimed. MN010 results and the MN011 pre-registration remain unchanged as provenance.
 
 ## Evidence map
 
@@ -18,9 +26,10 @@ The active state is [RESEARCH_STATE_THROUGH_MN010.md](RESEARCH_STATE_THROUGH_MN0
 | MN008 | Functional recombination supervision | Reusable factor structure improves strongly with relation supervision; additive control remains stronger on median NLL. |
 | MN009 | Shared Dense vs duplicated experts | Mirror beats a near-byte-matched narrow soft-MoE; not consistently better than Dense/simple gate and not quality-equivalent to a much larger MoE. |
 | MN010 | Single Dense + single router + dynamic global Mirror | Low-dimensional state-count growth ineffective; broad 256-dim global modulation gives a discovery signal but replication is mixed. |
-| MN011 | Mirror breadth × Mirror count | **Pre-registered next experiment.** |
+| MN011 | Mirror breadth × Mirror count | **Preserved pre-registration; no new execution claimed here.** |
+| [RA-Mirror analysis](REACHABILITY_ADJUSTED_MIRROR_ANALYSIS_JA.md) | Reachability-adjusted selection for router-free views | Theory + 15 finite numerical tests; model-level benefit untested. |
 
-## Main architectural interpretation
+## Interpretation of the MN010 experimental record
 
 The evidence currently favors:
 
@@ -36,7 +45,7 @@ Three resources must be optimized separately:
 
 MN010 is the first experiment to separate these explicitly. Increasing count with a small 8-dimensional control did not help; increasing state breadth to direct 256-dimensional modulation produced a stronger signal in one data world.
 
-## Router rule
+## Router rule in the MN010 architecture
 
 The router must see enough causal context to distinguish the functions it is meant to select.
 
@@ -48,7 +57,7 @@ MN010 found that:
 
 Router design is therefore part of the model's information interface, not merely a latency component.
 
-## Dynamic growth
+## Dynamic growth in the MN010 architecture
 
 A Mirror state can be split function-preservingly under soft routing. This allows state count to grow during training without an insertion-time output jump.
 
@@ -75,7 +84,7 @@ Do not conflate:
 - soft-MoE CPU timing with optimized sparse-MoE timing;
 - synthetic arithmetic/compositional tasks with natural-language quality.
 
-## Next gate
+## Retained MN011 gate
 
 MN011 will test a factorial grid of Mirror breadth 32/64/128/256 and state count E=1/2/4/8, plus dynamic state growth with no-change and similar-byte Dense-widening controls.
 
