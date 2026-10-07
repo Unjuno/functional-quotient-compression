@@ -2,7 +2,9 @@
 
 ## Objective
 
-Systematically test the MA registry to discover where a low-description Mirror/View coordinate can replace physical parameter duplication with useful logical multiplicity.
+Systematically test the MA registry to discover where the extra low-description Mirror/View functional parameter `m` can be inserted into existing methods to replace physical parameter duplication or add useful logical functional freedom at worthwhile marginal cost.
+
+The central program is **broad integration and falsification of `m` across strong existing methods**. Quotient/manifold discovery is a helper for finding better parameterizations or insertion points for `m`, not a replacement research objective.
 
 The goal is **not** to prove Mirror works everywhere. Negative results are first-class outputs.
 
@@ -11,19 +13,21 @@ The goal is **not** to prove Mirror works everywhere. Negative results are first
 Read in order:
 1. `AGENTS.md`
 2. `WORKER_START_HERE.md`
-3. `docs/phase2/LATEST_WORKER_FINDINGS.md`
-4. `experiments/mirror_applications/CONTEXT_ROUTER.md`
-5. `experiments/mirror_applications/STATUS_BOARD.md`
-6. `experiments/mirror_applications/IDEA_REGISTRY.csv`
-7. selected row's prior-art references from `docs/phase2/MIRROR_APPLICATION_PRIOR_ART.md`
-8. `experiments/mirror_applications/EXPERIMENT_CONTRACT.md`
-9. `experiments/mirror_applications/TEMPLATE/`
+3. `docs/phase2/MIRROR_PARAMETER_INTEGRATION_DOCTRINE.md`
+4. `docs/phase2/LATEST_WORKER_FINDINGS.md`
+5. `experiments/mirror_applications/CONTEXT_ROUTER.md`
+6. `experiments/mirror_applications/STATUS_BOARD.md`
+7. `experiments/mirror_applications/IDEA_REGISTRY.csv`
+8. selected row's prior-art references from `docs/phase2/MIRROR_APPLICATION_PRIOR_ART.md`
+9. `experiments/mirror_applications/EXPERIMENT_CONTRACT.md`
+10. `experiments/mirror_applications/TEMPLATE/`
 
 ## Iteration loop
 
 Repeat:
 
 1. Select the next UNTESTED candidate from STATUS_BOARD / WORKER_QUEUE.
+   - Interpret every candidate through the doctrine: identify the exact native method/interface receiving `m` and the marginal cost/benefit being tested.
 2. Check whether an experiment directory or research branch already claims that ID.
 3. Create a dedicated research branch from the latest worker-ready baseline.
 4. Copy the TEMPLATE into a stable MA directory.
