@@ -8,23 +8,23 @@ Updated: 2026-10-07
 - P0: **34**
 - P1: **126**
 - P2: **94**
-- Current MA statuses: **249 UNTESTED, 3 PROMISING, 2 FAIL**
+- Current MA statuses: **248 UNTESTED, 4 PROMISING, 3 FAIL**
 - Historical evidence lanes SRM/TM are not MA statuses.
 
 ## Next candidate
 
-**MA-249 — one physical future head + Mirror future-offset views**
+**MA-250 — MAP/Hadamard binding as Mirror expert address**
 
 Why next:
-- MA-241, MA-244, MA-245, MA-247, MA-248 and MA-253 are now checked; MA-249 is the next untested cross-over P0 candidate.
-- its closest prior-art controls are multi-token prediction and parallel token prediction (PA09/PA10).
+- MA-241, MA-244, MA-245, MA-247, MA-248, MA-249 and MA-253 are now checked; MA-250 is the next untested cross-over P0 candidate.
+- its closest prior-art controls are MAP and Hadamard binding (PA11/PA12).
 
-If MA-247 is blocked, use this order:
-MA-249 -> MA-250 -> MA-251 -> MA-003.
+If MA-250 is blocked, use this order:
+MA-251 -> MA-003.
 
 ## Active experiments
 
-- MA-249 — branch `research/ma-249-future-head-views-20261007`; directory `experiments/mirror_applications/ma-249-future-head-views/`; worker/run `Codex session 2026-10-07`; start commit `78257e8f0bace7ee1509dca7c80b3fae7d6ee15c`.
+
 
 
 When a worker starts an MA experiment, add:
@@ -34,9 +34,11 @@ When a worker starts an MA experiment, add:
 - worker/run identifier if available;
 - start commit.
 
-- None. MA-247 and MA-248 are complete and verified.
+- None. MA-247, MA-248 and MA-249 are complete and verified.
 
 ## Recently completed
+
+- MA-249 — PROMISING on aligned synthetic head sharing: 3/3 fresh worlds matched MTP top-1 with 32.5% lower full model payload; CPU inference throughput 0.42x MTP; independent-head control required more private degrees of freedom. Branch `research/ma-249-future-head-views-20261007`; report `experiments/mirror_applications/ma-249-future-head-views/README.md`; result commit `20a0984965e879fed8c1b085f02fa5aefc68828b`.
 
 - MA-248 — FAIL for Mirror-specific frontier: packet Givens views passed 2/3 correlated fresh worlds, while broadcast shared code passed 3/3 at 378 fewer serialized bytes; independent entropy boundary NOT ESTABLISHED. Branch `research/ma-248-packet-mirror-code-20261007`; report `experiments/mirror_applications/ma-248-packet-mirror-code/README.md`; result commit `433a2229362db23bcd43b3830358e674799c6247`.
 
