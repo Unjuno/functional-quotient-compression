@@ -8,7 +8,7 @@ Updated: 2026-10-07
 - P0: **34**
 - P1: **126**
 - P2: **94**
-- Current MA statuses: **238 UNTESTED, 9 PROMISING, 7 FAIL**
+- Current MA statuses: **237 UNTESTED, 1 SCREENING, 9 PROMISING, 7 FAIL**
 - Historical evidence lanes SRM/TM are not MA statuses.
 
 ## Next candidate
@@ -24,7 +24,7 @@ MA-063.
 
 ## Active experiments
 
-- None. MA-003, MA-005, MA-009, MA-019, MA-024, MA-041 and MA-048 have completed; MA-061 is next.
+- MA-061 — branch `research/ma-061-single-kv-logical-views-20261007`; directory `experiments/mirror_applications/ma-061-single-kv-logical-views/`; worker/run `Codex session 2026-10-07`; start commit pending.
 
 
 When a worker starts an MA experiment, add:
