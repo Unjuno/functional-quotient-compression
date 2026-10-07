@@ -1,0 +1,10 @@
+{
+  "experiment_id":"SRM001",
+  "date_jst":"2026-10-07",
+  "evidence_lane":"synthetic causal Transformer mechanism",
+  "task":{"domains":4,"common_rules":8,"private_rules_per_domain":[16,32,64],"input_symbols":16,"active_rules":4,"active_structure":"2 common + 2 private","rule":"independent random binary truth table","primary_target":"count 0..4","hard_negative":"parity","heldout":"1/5 common/private compositions"},
+  "transformer":{"d_model":32,"d_ff":64,"heads":4,"specialization":"final Transformer FFN only; attention shared"},
+  "mirror":{"geometry":"structured stretch+shear around shared FFN GELU","rank_sweep":[4,8,16],"selected_rank":16},
+  "storage":"actual torch serialized bytes including learned tensors and reconstruction metadata",
+  "limits":["synthetic factorized task","primary capacity results use oracle addresses","supervised router uses explicit rule tokens","not natural-language evidence"]
+}
