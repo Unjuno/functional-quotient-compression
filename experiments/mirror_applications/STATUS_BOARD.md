@@ -24,6 +24,7 @@ MA-251 -> MA-003.
 
 ## Active experiments
 
+- MA-250 — branch `research/ma-250-vsa-expert-address-20261007`; directory `experiments/mirror_applications/ma-250-vsa-expert-address/`; worker/run `Codex session 2026-10-07`; start commit `112fcf6ac688598bcda5fbab31693ce2bdde5bcb`.
 
 
 
