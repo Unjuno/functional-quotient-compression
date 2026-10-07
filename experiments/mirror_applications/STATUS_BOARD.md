@@ -4,11 +4,11 @@ Updated: 2026-10-07
 
 ## Program totals
 
-- Registered candidates: **254**
-- P0: **34**
-- P1: **126**
+- Registered candidates: **300**
+- P0: **55**
+- P1: **151**
 - P2: **94**
-- Current MA statuses: **254 UNTESTED**
+- Current MA statuses: **300 UNTESTED**
 - Historical evidence lanes SRM/TM are not MA statuses.
 
 ## Next candidate
