@@ -8,22 +8,22 @@ Updated: 2026-10-07
 - P0: **34**
 - P1: **126**
 - P2: **94**
-- Current MA statuses: **226 UNTESTED, 15 PROMISING, 13 FAIL**
+- Current MA statuses: **225 UNTESTED, 16 PROMISING, 13 FAIL**
 - Historical evidence lanes SRM/TM are not MA statuses.
 
 ## Next candidate
 
-**MA-173 — next eligible Family E compression candidate**
+**MA-181 — next eligible Family E compression candidate**
 
 Why next:
-- MA-241, MA-244, MA-245, MA-247, MA-248, MA-249, MA-250, MA-251, MA-253, MA-003, MA-005, MA-009, MA-019, MA-024, MA-041, MA-048, MA-061, MA-063, MA-076, MA-079, MA-086, MA-116, MA-121, MA-129, MA-156, MA-160 and MA-171 are checked; Family B KV views remain paused, so MA-173 is next.
-- MA-173 continues compression/holographic work after MA-171 found an HRR-aligned fixed-budget storage/quality signal and documented a wrong-learning-rate fresh invocation.
+- MA-241, MA-244, MA-245, MA-247, MA-248, MA-249, MA-250, MA-251, MA-253, MA-003, MA-005, MA-009, MA-019, MA-024, MA-041, MA-048, MA-061, MA-063, MA-076, MA-079, MA-086, MA-116, MA-121, MA-129, MA-156, MA-160, MA-171 and MA-173 are checked; Family B KV views remain paused, so MA-181 is next.
+- MA-181 continues after MA-173 found learned FFT-phase coordinates useful for a matching teacher but slower in measured runtime.
 
-If MA-173 is blocked, use the next eligible P0 in the registry.
+If MA-181 is blocked, use the next eligible P0 in the registry.
 
 ## Active experiments
 
-- None. MA-003, MA-005, MA-009, MA-019, MA-024, MA-041, MA-048, MA-061, MA-063, MA-076, MA-079, MA-086, MA-116, MA-121, MA-129, MA-156, MA-160 and MA-171 have completed; Family B KV subfamily paused with diagnostic; MA-173 is next.
+- None. MA-003, MA-005, MA-009, MA-019, MA-024, MA-041, MA-048, MA-061, MA-063, MA-076, MA-079, MA-086, MA-116, MA-121, MA-129, MA-156, MA-160, MA-171 and MA-173 have completed; Family B KV subfamily paused with diagnostic; MA-181 is next.
 
 
 When a worker starts an MA experiment, add:
@@ -88,3 +88,5 @@ The authoritative scientific status is the registry row. This board is an operat
 - MA-160 — PROMISING, with strict fresh quality gate narrowly missed: shared residual Mirror used 393B vs 607B independent int4 (0.647x) and averaged 1.035x fresh activation MSE, but seed 16011 was 1.106x against a 1.10x limit. Residual-free Mirror averaged 3.37x MSE; independent role matrices needed private state. Branch `research/ma-160-compression-view-20261007`; report `experiments/mirror_applications/ma-160-compression-view/README.md`; result commit `269ee343d78f7791cb7b0a272834da05ea3cc486`.
 
 - MA-171 — PROMISING on an intentionally HRR-aligned linear teacher: corrected fresh seeds 17121–17123 passed the preregistered quality/byte gate with HRR MSE below fixed-update untied and 2,853B vs 5,349B (0.533x). Arbitrary role functions required private weights; not capacity evidence. Original fresh seeds were mistakenly run at LR 0.01 instead of dev-selected 0.003, retained as exploratory and excluded; corrected seed amendment A1 was frozen before access. Branch `research/ma-171-compression-view-20261007`; report `experiments/mirror_applications/ma-171-circular-convolution-mirror/README.md`; result commit `4025b477f666bb7369531296eb4807c206799b88`.
+
+- MA-173 — PROMISING on a learned real Fourier-phase teacher: 3,169B vs 5,349B untied (0.592x) and lower fixed-update MSE in 3/3 fresh aligned worlds. Fixed HRR/MAP/Hadamard/Givens did not fit this orbit; independent roles required private parameters. Active MAC proxy improved, but measured training wall and inference throughput were slower. Branch `research/ma-173-holographic-compression-20261007`; report `experiments/mirror_applications/ma-173-fft-phase-mirror/README.md`; result commit `20adace6cbc1e149265da9d8626897b8d47ddbb4`.

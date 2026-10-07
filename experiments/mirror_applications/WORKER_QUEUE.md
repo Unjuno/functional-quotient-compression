@@ -38,7 +38,8 @@ MA-121 completed PROMISING on aligned phase slots; MA-129 completed FAIL at deve
 MA-156 completed PROMISING on aligned quantized weight views; strict secondary margin missed.
 MA-160 completed PROMISING with its strict fresh quality gate narrowly missed: 0.647x bytes vs independent int4, 1.035x mean fresh MSE, but one seed at 1.106x crossed the 1.10 limit.
 MA-171 completed PROMISING on an HRR-aligned fixed-budget teacher; 0.533x bytes and lower MSE than untied in 3/3 corrected fresh worlds, with wrong-LR exploratory access disclosed.
-MA-173 -> MA-181
+MA-173 completed PROMISING: learned FFT-phase views passed aligned quality/bytes in 3/3 fresh worlds (0.592x bytes, lower fixed-update MSE); active MAC proxy improved, but wall time/throughput regressed. Independent roles required private parameters.
+MA-181
 
 ### Family F — Continual / optimization / distillation
 MA-186 -> MA-189 -> MA-199 -> MA-208

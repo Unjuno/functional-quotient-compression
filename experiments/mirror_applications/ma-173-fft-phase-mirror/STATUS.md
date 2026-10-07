@@ -3,16 +3,16 @@
 - Status: PROMISING, aligned fixed-budget storage/quality result
 - Branch: `research/ma-173-holographic-compression-20261007`
 - Base commit: `3d5ee6755361a304d9084bfb232c55b1ca5e565c`
-- Last verified commit: pending
+- Last verified commit: `20adace6cbc1e149265da9d8626897b8d47ddbb4`
 - Development complete: yes
 - Fresh/audit opened: yes, after LR 0.01 was selected on development
-- Results committed: no
-- Verification committed: no
-- Registry row updated: pending
+- Results committed: yes (`20adace6cbc1e149265da9d8626897b8d47ddbb4`)
+- Verification committed: yes (`20adace6cbc1e149265da9d8626897b8d47ddbb4`)
+- Registry row updated: yes in tracker commit
 
 ## Next action
 
-Update the registry and claim trackers, commit MA-173 results, push the research branch, and continue to MA-181.
+Commit the tracker updates, push the research branch, and continue to MA-181.
 
 ## Blockers
 
