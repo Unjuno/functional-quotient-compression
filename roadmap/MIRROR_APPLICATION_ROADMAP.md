@@ -25,6 +25,22 @@ Do not fork the training loop separately for every idea when a thin module injec
 
 ## Stage 1 — P0 family screens
 
+### Literature-derived cross-over experiments
+
+Before broad family screens, prefer the highest-information intersections with strong known baselines:
+- MA-241 expert tying + Mirror depth-specific expert views;
+- MA-244 K=V projection sharing + Mirror role recovery;
+- MA-245 MLKV + Mirror per-layer KV views;
+- MA-247 recursive tied block + Mirror depth modulation;
+- MA-248 PTP-style packet latent as Mirror code;
+- MA-249 shared future head + Mirror future-offset views;
+- MA-250 MAP/Hadamard binding as Mirror expert address;
+- MA-251 factorized expert x depth coordinates.
+
+These are high-value because failure is also informative: each has a strong non-Mirror method that defines what Mirror must add.
+
+
+
 ### 1A. FFN / expert / adapter
 MA-003, MA-005, MA-009, MA-019, MA-024.
 
