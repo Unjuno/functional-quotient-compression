@@ -1,4 +1,4 @@
-# Phase II current state — 2026-10-07, through SRM003
+# Phase II current state — 2026-10-07, through SRM003 and TM001
 
 Status: **current navigation and interpretation, not a preregistration**.
 
@@ -6,7 +6,7 @@ Status: **current navigation and interpretation, not a preregistration**.
 
 The hypothesis is a canonical shared backbone plus multiple reusable specialist residuals and only-when-needed private capacity. Whole-model Mirrorization, ES and recurrent training loops are not the default.
 
-**SRM003 was executed, but the scientific adoption gate failed.** A small causal decoder learned all atomic mappings but did not reliably compose them from endpoint-token loss. More residual experts and validation-based pruning did not resolve this. The next bottleneck is the interface and execution structure connecting learned operators, not merely the number of stored atoms.
+**SRM003 was executed, but the scientific adoption gate failed.** A small causal decoder learned all atomic mappings but did not reliably compose them from endpoint-token loss. More residual experts and validation-based pruning did not resolve this. TM001 then tested temporal packetization directly: multiple future tokens can be emitted in one forward when the information determining the packet is already available, but factorized parallel slots fail when a packet-level latent is still unresolved.
 
 ## What the latest evidence actually says
 
@@ -34,13 +34,27 @@ Two-layer causal Transformer, width32, 24 operators on16 states, explicit operat
 
 Primary comparisons controlled data/update opportunities, not total FLOPs or wall time. No LLM or general capacity claim is made.
 
+### TM001: parallel period token generation
+
+Two-layer width32 causal Transformer, 32 states, 12 transition rules, P=2/4/8.
+
+- P=4 Direct and triangular-Mixer period decoders reached 100% joint accuracy in 3/3 deterministic fresh worlds.
+- When the packet branch was random but exposed in context, Direct reached 100% in 3/3; Mixer reached 100%, 100%, 99.87%.
+- When that one packet-level branch bit was hidden, P=4 median sequence NLL was 0.769 nat for KV-cached AR versus 3.318 Direct and 3.354 Mixer; AR generated valid trajectories in 100%, period decoders about 39–41%.
+- On world201 hidden P=8, AR sequence NLL stayed 0.777 nat while Direct/Mixer rose to 10.49/10.77 nat and valid trajectories fell to 2.9%.
+- Triangular slot mixing gave no stable quality advantage over independent phase slots.
+- CPU one-thread batch1 throughput was about 3.1x cached AR for P=4 and 5.1–5.4x for P=8; speedup shrank with batch and P=2 batch128 was slower than AR.
+- A shared packet-latent diagnostic improved the hidden case but did not reliably close the AR gap.
+
+Interpretation: period-token parallelism is viable for conditionally determined packets. It is not a substitute for modeling joint uncertainty that is resolved inside the packet. This is a synthetic CPU mechanism result, not a natural-language or GPU claim.
+
 ## Interpretation and open hypotheses
 
 Fact: reusable atomic mappings can exist without successful in-model ordered execution.
 
 Interpretation: shared/private FFN parameterization alone does not impose the state-passing structure needed for non-commutative composition. The mechanism could involve optimization, representation of intermediate states, placement, routing or limited depth; the present diagnostic does not uniquely identify one cause.
 
-Hypothesis: a fixed-depth, non-recurrent composition interface may allow the learned rules to be reused internally. This has NOT been tested by SRM003. Do not label it an adopted solution or promise a gain.
+Hypothesis: a fixed-depth, non-recurrent composition interface may allow learned rules to be reused internally. TM001 shows that P output slots can be evaluated in one forward, but also shows that unresolved within-packet uncertainty needs a shared packet-level latent or another joint mechanism. The combined interface has not yet been demonstrated.
 
 ## Active evidence map
 
@@ -52,6 +66,7 @@ Hypothesis: a fixed-depth, non-recurrent composition interface may allow the lea
 | SRM001 | shared-rule synthetic causal tasks | controlled fixed-update signals; parity failed |
 | SRM002 | operator composition and shared/private pruning | controlled factorized teacher with supplied execution |
 | SRM003 | causal discovery and pruning without oracle routing | completed negative gate; storage and execution separated |
+| TM001 | parallel period token generation | conditionally determined packets PASS; hidden packet latent boundary; CPU speed signal |
 
 ## Decision rules
 
@@ -61,6 +76,7 @@ Primary scientific adoption gate: **FAIL**. Pruning hardware/byte mechanics: ver
 
 ## Navigation
 
+- [TM001 report](TM001_PARALLEL_PERIOD_TOKEN_MIXING.md)
 - [SRM003 report](SRM003_CAUSAL_DISCOVERY.md)
 - [SRM003 runnable source, tests and counts](../../experiments/shared_rule_moe/srm003_20261007/README.md)
 - [SRM002 original record](SRM002_NONCOMMUTATIVE_COMPOSITION.md)
