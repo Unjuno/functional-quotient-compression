@@ -55,6 +55,7 @@ A worker may batch implementation work across a family, but scientific status is
 If two consecutive candidates in a family fail for the same demonstrated structural reason, stop that family and write a family diagnostic before continuing.
 
 
+
 ## Next eligible candidate
 
-MA-111 is the first remaining P0 candidate in registry order: semantic-role Mirror embedding (PA13).
+No P0 candidates remain UNTESTED. Under the priority rule, start MA-001 (P1 Mirror top-1 expert) as the first remaining candidate in registry order.

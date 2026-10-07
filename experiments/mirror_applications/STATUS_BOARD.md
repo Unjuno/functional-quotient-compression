@@ -8,22 +8,22 @@ Updated: 2026-10-07
 - P0: **34**
 - P1: **126**
 - P2: **94**
-- Current MA statuses: **221 UNTESTED, 18 PROMISING, 15 FAIL**
+- Current MA statuses: **220 UNTESTED, 19 PROMISING, 15 FAIL**
 - Historical evidence lanes SRM/TM are not MA statuses.
 
 ## Next candidate
 
-**MA-111 — next eligible P0 candidate (Embedding / output / position)**
+**MA-001 — next eligible P1 candidate (MoE / experts)**
 
 Why next:
 - MA-241, MA-244, MA-245, MA-247, MA-248, MA-249, MA-250, MA-251, MA-253, MA-003, MA-005, MA-009, MA-019, MA-024, MA-041, MA-048, MA-061, MA-063, MA-076, MA-079, MA-086, MA-116, MA-121, MA-129, MA-156, MA-160, MA-171, MA-173 and MA-181 are checked; Family B KV views remain paused.
-- MA-186, MA-189, MA-199 and MA-208 are completed; MA-208 failed its development relative-KL gate. MA-111 is the first remaining eligible P0 by registry order.
+- MA-186, MA-189, MA-199, MA-208 and MA-111 are completed. MA-111 passed its aligned synthetic gate; no P0 candidate remains UNTESTED. MA-001 is the first remaining P1 in registry order.
 
 If MA-186 is blocked, use the next eligible P0 in the registry.
 
 ## Active experiments
 
-- MA-111 — branch `research/ma-111-semantic-role-embedding-20261007`; directory `experiments/mirror_applications/ma-111-semantic-role-embedding/`; started from commit `6e0ed10a094f9a082a144a2d8d86f508fd4cbad6`. PA13/TPE, tied-embedding, Kronecker and semantic-concept prior art reviewed; protocol and implementation frozen before development; preflight tests passed. Development passed the aligned opening gate; selected LR .01 is frozen, fresh remains sealed.
+
 
 
 When a worker starts an MA experiment, add:
@@ -45,6 +45,8 @@ When a worker starts an MA experiment, add:
 - MA-247 through MA-251 are complete and verified.
 
 ## Recently completed
+
+- MA-111 — PROMISING: the registered aligned held-out-filler quality/storage gate passed in 3/3 fresh worlds at 2,770B vs 5,839B full per-role maps (0.474x); rank-2 output LoRA matched quality at 3,411B. Mirror active-compute proxy was 0.773x LoRA but measured throughput was 0.599x and train wall 1.25x. Independent random role transforms needed richer/private state; the exact teacher used a packed-angle payload 17B smaller than current Mirror records. Synthetic controlled roles, no natural semantic/LM claim. Branch `research/ma-111-semantic-role-embedding-20261007`; report `experiments/mirror_applications/ma-111-semantic-role-embedding/README.md`; result commit `865c8f1f842db934b94564ed0c1d97f688879740`.
 
 - MA-208 — FAIL at development: Mirror passed absolute KL, top-1, ECE and 0.476x multi-head bytes, but exceeded the relative-KL limit in both aligned seeds (38.8x and 1,027.7x). Fresh seeds 20811–20813 were mistakenly opened after this subgate was overlooked; they are exploratory only and split integrity is false. Exploratory aligned payload was 1,322B vs 2,775B, but throughput was 0.435x multi-head; independent teachers needed private weights. Branch `research/ma-208-mirror-expert-distill-20261007`; report `experiments/mirror_applications/ma-208-mirror-expert-distill/README.md`; result commit `5a37f6abdcb073240541e5fe2349b2ac23454462`.
 
