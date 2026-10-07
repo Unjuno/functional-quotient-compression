@@ -8,6 +8,18 @@ The hypothesis is a canonical shared backbone plus multiple reusable specialist 
 
 **SRM003 was executed, but the scientific adoption gate failed.** A small causal decoder learned all atomic mappings but did not reliably compose them from endpoint-token loss. More residual experts and validation-based pruning did not resolve this. TM001 then tested temporal packetization directly: multiple future tokens can be emitted in one forward when the information determining the packet is already available, but factorized parallel slots fail when a packet-level latent is still unresolved.
 
+## Mirror program invariant
+
+The application program is centered on the extra low-description functional parameter `m`, not on any one transform family.
+
+Operationally:
+
+`F(x; theta) -> F(x; theta, m)`.
+
+The current mandate is to insert and stress-test `m` across as many strong existing mechanisms as practical, with the native method retained as a control. Manifold/quotient discovery, expert merging, KAN bases, tangent spaces, fast states, and other newer research lanes are supporting tools for choosing where and how `m` should act; they do not supersede the Mirror parameter as the program's central experimental variable.
+
+See [MIRROR_PARAMETER_INTEGRATION_DOCTRINE.md](MIRROR_PARAMETER_INTEGRATION_DOCTRINE.md).
+
 ## What the latest evidence actually says
 
 ### SRM001: decomposable synthetic tasks
