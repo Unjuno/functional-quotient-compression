@@ -3,12 +3,12 @@
 - Status: FAIL at development gate
 - Branch: `research/ma-129-temporal-view-20261007`
 - Base commit: `1ccd2583fa05619acbb87ce8f2c2531dce04cfcc`
-- Last verified commit: pending
+- Last verified commit: `35cd8bb9fa638006828bdd61ae9511df11dc8af1`
 - Development complete: yes; seeds 12901–12902
 - Fresh/audit opened: yes, incorrectly after development byte-gate failure; exploratory only
-- Results committed: pending
-- Verification committed: pending
-- Registry row updated: pending
+- Results committed: yes (`35cd8bb9fa638006828bdd61ae9511df11dc8af1`)
+- Verification committed: yes (`35cd8bb9fa638006828bdd61ae9511df11dc8af1`)
+- Registry row updated: yes
 
 ## H / T / D / C / U
 

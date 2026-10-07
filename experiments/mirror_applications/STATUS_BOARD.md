@@ -46,7 +46,7 @@ When a worker starts an MA experiment, add:
 
 ## Recently completed
 
-- MA-129 — FAIL at development actual-byte gate: Mirror passed aligned quality but payload 1,957B exceeded MTP 1,833B; three exploratory worlds were mistakenly opened after gate failure and are excluded from status. Branch `research/ma-129-temporal-view-20261007`; report `experiments/mirror_applications/ma-129-temporal-view/README.md`; result commit pending.
+- MA-129 — FAIL at development actual-byte gate: Mirror passed aligned quality but payload 1,957B exceeded MTP 1,833B; three exploratory worlds were mistakenly opened after gate failure and are excluded from status. Branch `research/ma-129-temporal-view-20261007`; report `experiments/mirror_applications/ma-129-temporal-view/README.md`; result commit `35cd8bb9fa638006828bdd61ae9511df11dc8af1`.
 
 - MA-121 — PROMISING on the aligned synthetic packet task: improved NLL and exact packet accuracy over MTP in 3/3 fresh worlds with 21.3% fewer bytes; rank-2 PTP had better NLL at higher storage; independent slot functions and eager runtime were poor. Branch `research/ma-121-temporal-view-20261007`; report `experiments/mirror_applications/ma-121-temporal-view/README.md`; result commit `0ccd5470dcac07afba3b9cf77bbfbb7cf8e82bfc`.
 
