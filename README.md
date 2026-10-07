@@ -1,77 +1,106 @@
-# Vector Mirror Research — FQC and Mirror-native models
+# Vector Mirror Research — Functional sharing, sparse rules, and Mirror residuals
 
-**Research in progress. No quality-preserving 64x Transformer result or general Mirror-native capacity advantage is claimed.**
+**Research in progress. No quality-preserving 64x Transformer result, general LLM capacity multiplier, or general Mirror-native advantage is claimed.**
 
-## Current organization (2026-10-04)
+## Current organization — 2026-10-07
 
 | Phase | Scope | Status |
 |---|---|---|
-| [Phase I: Functional Quotient Compression](docs/phase1/STATUS.md) | Post-training compression, task-sensitive shared/private codecs, exact byte accounting | **Paused; results, code and history preserved** |
-| [Phase II: Mirror-native conditional models](docs/phase2/README.md) | Native shared-state models, global Mirror control, dynamic state growth | **Active through MN010; MN011 pre-registered** |
+| [Phase I — Functional Quotient Compression](docs/phase1/STATUS.md) | post-training functional compression, exact byte accounting, codec design | **Paused; preserved** |
+| [Phase II — shared-backbone conditional models](docs/phase2/README.md) | native sharing, residual specialization, sparse compositional rules | **Active** |
 
-The previous Phase-I README remains preserved verbatim in [the Phase I snapshot](docs/phase1/README_before_phase2_20261003.md). Historical source, tests, claims and experiment directories remain preserved.
+Historical source and negative results are preserved rather than rewritten into the current architecture.
 
 ## Start here
 
-- [**Phase II research state through MN010**](docs/phase2/RESEARCH_STATE_THROUGH_MN010.md)
-- [**Global Dense Mirror architecture**](docs/phase2/GLOBAL_DENSE_MIRROR_ARCHITECTURE.md)
-- [**MN011 pre-registered breadth × count plan**](experiments/mirror_native/MN011_PLAN.md)
-- [**Mirror-native experiment index**](experiments/mirror_native/INDEX.md)
-- [MN002 runnable public experiment](experiments/mirror_native/mn002_20261003/README.md)
+1. [**Current Phase II state**](docs/phase2/CURRENT_STATE_2026-10-07.md)
+2. [**Current architecture — Sparse Compositional Shared-Rule Transformer**](docs/phase2/ARCHITECTURE_SPARSE_SHARED_RULE_MOE.md)
+3. [**Phase II experiment registry**](docs/phase2/EXPERIMENT_REGISTRY.md)
+4. [**Active Phase II roadmap**](roadmap/PHASE2_SPARSE_RULE_ROADMAP.md)
+5. [**Known negative results**](docs/KNOWN_NEGATIVE_RESULTS.md)
+6. [**SRM001 — strongest current synthetic Transformer evidence**](docs/phase2/SRM001_SHARED_RULE_MOE.md)
 
-Historical conceptual side lane:
+## Current research question
 
-- [Semantic Mirror hypothesis](docs/phase2/SEMANTIC_MIRROR_HYPOTHESIS.md)
+The active hypothesis is no longer "Mirrorize the whole model."
 
-## Current main hypothesis
+It is:
 
-The active architecture is:
+> **Store common Transformer computation once, represent only specialist residual behavior with a sparse bank of reusable rule atoms, and select multiple atoms per token/context to construct virtual experts.**
+
+Mirror geometry is currently one candidate low-description parameterization of those rule atoms. It must beat simpler low-rank/shared-rule controls before any Mirror-specific claim is made.
 
 ```text
-context
-  -> one context-aware router
-  -> global Mirror state / mixture
-  -> one wide Dense model
+token/context
+    |
+shared Transformer backbone
+    |
+shared FFN base
+    |
+    +-- sparse residual router
+           |
+           +-- rule atom A
+           +-- rule atom B
+           +-- rule atom C
+           |
+        compose multiple rules
+    |
+output
 ```
 
-The Dense path remains primary. The research question is whether a small number of sufficiently broad Mirror states can provide useful conditional specialization without duplicating full expert matrices.
+## Current evidence boundary
 
-MN010 indicates that **Mirror count and Mirror breadth are separate resources**. Increasing the number of 8-dimensional states produced little split-specific gain on the tested task, while a 256-dimensional global modulation produced a positive signal in one discovery world. A fresh-world replication was mixed, so no general advantage is claimed.
+Small synthetic experiments support:
+- reusable shared factors;
+- separating shared world/core computation from condition-specific residuals;
+- sparse multi-rule composition;
+- promising LM-loss-only address discovery on a controlled synthetic task.
 
-## What Phase II has established at small scale
+They do **not** establish:
+- a natural-language LLM advantage;
+- near-convergence capacity superiority over strong MoE baselines;
+- a universal Mirror-specific benefit;
+- a general compression factor inferred from synthetic tasks.
 
-- shared-state conditional computation can be trained without materializing a full expert matrix per token;
-- router heads can be packed rather than executed as a sequential routing chain;
-- the tested MLP-centered designs preserve ordinary causal KV-cache reuse under fixed past states;
-- functional recombination supervision can organize reusable semantic factors, although additive/low-rank controls remain strong;
-- a wide shared FFN can outperform a near-byte-matched collection of narrow independent experts on one synthetic task;
-- global Mirror states can be added function-preservingly during training;
-- context information supplied to the router is a first-order architectural constraint.
+Actual serialized bytes are required for storage claims.
 
-## What remains unresolved
+## Repository map
 
-The evidence does **not** establish that:
+```text
+docs/
+  phase1/                   historical FQC state
+  phase2/
+    CURRENT_STATE_2026-10-07.md
+    ARCHITECTURE_SPARSE_SHARED_RULE_MOE.md
+    EXPERIMENT_REGISTRY.md
+    SRM001_SHARED_RULE_MOE.md
+    ... historical Phase II records
+  KNOWN_NEGATIVE_RESULTS.md
 
-- Mirror-native models generally outperform Dense;
-- Mirror states can replace a strong sparse-MoE at equal quality;
-- more states monotonically improve useful capacity;
-- the MN010 rich-Mirror improvement is stable across data worlds;
-- semantic factorization is intrinsically better with phase Mirrors;
-- CPU synthetic measurements predict GPU or production-LLM behavior.
+experiments/
+  mirror_native/            historical MN experiments
+  analytic_mirror/          reachability / local geometry
+  sensor_mirror/            sensor/world residual experiments
+  srm001_20261007/          current shared-rule result tables/protocol
 
-## Reproduce the public MN002 baseline
+roadmap/
+  PHASE2_SPARSE_RULE_ROADMAP.md
+  ROADMAP.md                 broader historical FQC roadmap
 
-```bash
-cd experiments/mirror_native/mn002_20261003
-python -m pip install -r requirements.txt
-python -m pytest -q
-OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 OPENBLAS_NUM_THREADS=1 python reproduce.py --output /tmp/mn002-reproduction
+src/fqc/                    canonical reusable implementation
+tests/                      repository-level tests
 ```
 
-MN003-MN010 were run in the project container. Their large evidence bundles are intentionally not committed to ordinary Git history; verified SHA-256 provenance is listed in the [experiment index](experiments/mirror_native/INDEX.md) and current research-state document.
+## Historical records
 
-## Reuse and evaluation
+Important historical architecture documents are intentionally retained:
+- [Research state through MN010](docs/phase2/RESEARCH_STATE_THROUGH_MN010.md)
+- [Global Dense Mirror architecture](docs/phase2/GLOBAL_DENSE_MIRROR_ARCHITECTURE.md)
+- [2026-10-06 Mirror Transformer proposal](docs/phase2/MIRROR_TRANSFORMER_CURRENT_ARCHITECTURE.md)
+- [Reachability-adjusted Mirror analysis](docs/phase2/REACHABILITY_ADJUSTED_MIRROR_ANALYSIS_JA.md)
 
-Code and extensions are welcome under **Apache License 2.0**; see [LICENSE](LICENSE). Please cite this repository when using the prototype or reporting independent evaluations. Citation is requested, not an additional license restriction.
+Their status should be read from their headers. A historical document may be superseded without being invalid as an experimental record.
 
-Independent replications, including negative results, are welcome. The next useful target is the MN011 breadth × count experiment at matched serialized bytes.
+## Reuse
+
+Apache License 2.0; see [LICENSE](LICENSE). Independent replications, including negative results, are welcome.
