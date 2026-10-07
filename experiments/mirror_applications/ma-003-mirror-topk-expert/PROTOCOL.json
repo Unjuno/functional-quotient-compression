@@ -103,6 +103,12 @@
       "stage": "development only; before fresh access",
       "reason": "Initial dev routed MSE was close to full MoE, but router role accuracy was 97.5-98.6%, below the registered 99% threshold; CE weight 0.2 left avoidable router errors on a deterministic four-quadrant label.",
       "change": "Increase auxiliary router CE weight from 0.2 to 1.0. Keep all methods, worlds, minibatches, learning rates, updates and quality gates unchanged. Preserve all dev_v1 rows; only v2 selects the LR and opens fresh worlds."
+    },
+    {
+      "date": "2026-10-07",
+      "stage": "development only; before fresh access",
+      "reason": "With CE weight 1.0, dev_v2 router role accuracy remained around 98%, just below the 99% gate. The shared AdamW weight decay regularized router confidence along with the expert weights.",
+      "change": "Use separate AdamW parameter groups: zero weight decay for router parameters, retain 1e-4 for expert/view parameters. Keep CE=1.0 and all other conditions unchanged. Preserve dev_v1/v2 rows; only v3 selects and may open fresh data."
     }
   ]
 }

@@ -16,7 +16,7 @@ def target(x,role,w,mode):
  if mode=='aligned_views':return givens(x,w['angles'][role])@w['w']+w['b']
  return torch.einsum('bd,bdo->bo',x,w['wi'][role])+w['bi'][role]
 def fit(method,w,mode,seed,data_seed,lr):
- torch.manual_seed(seed);m=TopKExperts(method,data_seed,N,D,O);opt=torch.optim.AdamW(m.parameters(),lr=lr,weight_decay=1e-4);g=torch.Generator().manual_seed(data_seed+31);t0=time.perf_counter();m.train()
+ torch.manual_seed(seed);m=TopKExperts(method,data_seed,N,D,O);router_params=[p for n,p in m.named_parameters() if n.startswith('router')];expert_params=[p for n,p in m.named_parameters() if not n.startswith('router')];opt=torch.optim.AdamW([{'params':router_params,'weight_decay':0.0},{'params':expert_params,'weight_decay':1e-4}],lr=lr);g=torch.Generator().manual_seed(data_seed+31);t0=time.perf_counter();m.train()
  for _ in range(UPDATES):
   x=torch.randn(64,D,generator=g);r=role_of(x);y=target(x,r,w,mode);pred,logits,_=m(x);loss=F.mse_loss(pred,y)+CE_WEIGHT*F.cross_entropy(logits,r);opt.zero_grad(set_to_none=True);loss.backward();opt.step()
  return m,time.perf_counter()-t0
@@ -45,7 +45,7 @@ def main():
     for i,method in enumerate(METHODS):
      m,elapsed=fit(method,w,mode,init+i*193+int(lr*10000),ds,lr);mse,acc,r2,x=evaluate(m,w,mode,init+91)
      if a.phase=='dev':scores[lr].append(mse)
-     row={'condition':a.phase,'world_or_seed':wid,'mode':mode,'method':method,'serialized_model_bytes':m.serialized_payload_bytes(),'train_examples':UPDATES*64,'optimizer_updates':UPDATES,'active_compute_proxy':compute_proxy(method,UPDATES*64),'wall_time_s':round(elapsed,6),'inference_examples_per_s':round(throughput(m,x),3),'primary_metric':'routed_MSE','primary_value':f'{mse:.10g}','secondary_metric':'router_accuracy;R2','secondary_value':f'{acc:.8g};{r2:.8g}','status_note':f'lr={lr}; matched minibatches; top_k=1; auxiliary_CE={CE_WEIGHT}; dev_v2'};rows.append(row);print(a.phase,wid,mode,method,lr,'MSE',mse,'router_acc',acc,'bytes',row['serialized_model_bytes'],flush=True)
+     row={'condition':a.phase,'world_or_seed':wid,'mode':mode,'method':method,'serialized_model_bytes':m.serialized_payload_bytes(),'train_examples':UPDATES*64,'optimizer_updates':UPDATES,'active_compute_proxy':compute_proxy(method,UPDATES*64),'wall_time_s':round(elapsed,6),'inference_examples_per_s':round(throughput(m,x),3),'primary_metric':'routed_MSE','primary_value':f'{mse:.10g}','secondary_metric':'router_accuracy;R2','secondary_value':f'{acc:.8g};{r2:.8g}','status_note':f'lr={lr}; matched minibatches; top_k=1; auxiliary_CE={CE_WEIGHT}; router_wd=0; dev_v3'};rows.append(row);print(a.phase,wid,mode,method,lr,'MSE',mse,'router_acc',acc,'bytes',row['serialized_model_bytes'],flush=True)
  if a.phase=='dev':
   best=min(scores,key=lambda lr:sum(scores[lr])/len(scores[lr]));(ROOT/'DEV_SELECTION.json').write_text(json.dumps({'experiment_id':'MA-003','selected_common_lr':best,'mean_mse_by_lr':{str(k):sum(v)/len(v) for k,v in scores.items()},'fresh_worlds':[30001,30002,30003],'updates':UPDATES},indent=2)+'\n')
  with (ROOT/'RESULTS_CORE.csv').open('a',newline='') as f:csv.DictWriter(f,fieldnames=FIELDS,lineterminator='\n').writerows(rows)
