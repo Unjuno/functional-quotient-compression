@@ -26,7 +26,7 @@ MA-253 -> MA-244 -> MA-245 -> MA-247 -> MA-248 -> MA-249 -> MA-250 -> MA-251 -> 
 
 ## Active experiments
 
-None.
+No active MA experiment is registered on this board in this baseline commit. A worker may already be running from an earlier checkout; it must claim its MA ID/branch here before another worker starts the same ID.
 
 When a worker starts an MA experiment, add:
 - MA ID;
