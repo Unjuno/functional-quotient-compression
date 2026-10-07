@@ -4,25 +4,24 @@ Updated: 2026-10-07
 
 ## Program totals
 
-- Registered candidates: **700**
-- P0: **280**
-- P1: **318**
+- Registered candidates: **740**
+- P0: **308**
+- P1: **330**
 - P2: **102**
-- Current MA statuses: **695 UNTESTED, 4 PROMISING, 1 FAIL**
+- Current MA statuses: **733 UNTESTED, 4 PROMISING, 3 FAIL**
 - Historical evidence lanes SRM/TM are not MA statuses.
 
 ## Next candidate
 
-**MA-247 — recursive shared block + Mirror depth modulation**
+**MA-249 — one physical future head + Mirror future-head views**
 
 Why next:
-- MA-241, MA-244 and MA-245 produced aligned feasibility signals;
-- MA-253 showed a narrow Givens view fails on deliberately independent rank-2 private variation;
-- MA-247 tests the same physical-to-logical principle on reused depth with strong controls from PA06;
-- protocol should use the orbit/private frontier guidance in `docs/phase2/LATEST_WORKER_FINDINGS.md` rather than an aligned-only teacher if feasible.
+- MA-247 and MA-248 are complete scoped FAIL results and should not be rerun under the same protocols;
+- MA-249 is the next untested locked cross-over P0 candidate;
+- MA-701..740 are newly researched KV/cache candidates and enter after currently locked worker order unless a blocker makes the temporal lane unavailable.
 
-If MA-247 is blocked, continue:
-MA-248 -> MA-249 -> MA-250 -> MA-251 -> MA-003, then follow WORKER_QUEUE.md.
+If MA-249 is blocked, continue:
+MA-250 -> MA-251 -> MA-003, then follow WORKER_QUEUE.md. KV/cache expansion candidates begin at MA-701.
 
 ## Active experiments
 
@@ -31,6 +30,9 @@ No active experiment is registered on this baseline at the time of this update.
 A worker may create a dedicated branch immediately after this commit. Before another worker claims the same ID, search existing `research/ma-*` branches.
 
 ## Recently completed
+
+- **MA-248 — FAIL**: packet Mirror code did not establish a Mirror-specific frontier; broadcast code was cheaper and more consistent on correlated worlds. Verified commit `433a2229362db23bcd43b3830358e674799c6247`.
+- **MA-247 — FAIL**: recurrent depth Givens View lost to scalar gating and static rank-1 LoRA on the development screen; fresh worlds were not opened by protocol. Verified commit `62f0acf3f680ff3bbab8e0e20e194f4065f026e5`.
 
 - **MA-691 — PROMISING**: exact lazy canonical-cache algebra passed 3/3 fresh seeds; max lazy/materialized error 3.13e-7, RoPE-plane commutation and MLA latent absorption passed; CPU runtime exploratory. Branch `research/ma-691-lazy-kv-mirror-20261007`; verification commit `3643118351eb026c31fc00802e47381e8cdfba93`.
 
