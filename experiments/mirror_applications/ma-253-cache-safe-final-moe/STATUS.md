@@ -3,12 +3,12 @@
 - Status: FAIL (Mirror expert replacement); cache-placement mechanics PASS
 - Branch: `research/ma-253-cache-safe-final-moe-20261007`
 - Base commit: `01b515cf8d0603481cb00ff1d5be45541411eebb`
-- Last verified commit: pending result commit
+- Last verified commit: `1891cbc36d3a99b4dd63517b469f8b246dbf0be0`
 - Development complete: yes; common LR `0.003`
 - Fresh/audit opened: yes; worlds 25301, 25302, 25303
-- Results committed: pending
-- Verification committed: pending
-- Registry row updated: pending until verification is committed
+- Results committed: yes (`1891cbc36d3a99b4dd63517b469f8b246dbf0be0`)
+- Verification committed: yes (`1891cbc36d3a99b4dd63517b469f8b246dbf0be0`)
+- Registry row updated: yes (FAIL; independent rank-2 domain updates)
 
 ## Decision
 
@@ -18,7 +18,7 @@ The implementation also has a training-time slowdown: 9.6–11.9s for Mirror ver
 
 ## Next action
 
-Commit results and verification; update the registry, claim ledger, status board and worker queue; push the MA-253 branch; continue to MA-244.
+Push the dedicated MA-253 branch, then continue to MA-244.
 
 ## Blockers
 

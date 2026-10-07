@@ -1,6 +1,6 @@
 {
   "experiment_id": "MA-253",
-  "commit": "pending result commit",
+  "commit": "1891cbc36d3a99b4dd63517b469f8b246dbf0be0",
   "tests": {
     "command": "python -m pytest -q experiments/mirror_applications/ma-253-cache-safe-final-moe/tests",
     "passed": 4,
@@ -32,16 +32,32 @@
   },
   "source_freeze": {
     "freeze_commit": "8ca3418",
-    "fresh_seeds": [25301, 25302, 25303],
+    "fresh_seeds": [
+      25301,
+      25302,
+      25303
+    ],
     "source_hashes_match": true,
     "fresh_data_used_for_tuning": false
   },
   "runtime": {
     "device": "CPU only; Intel Xeon Platinum 8573C; one thread",
-    "training_wall_time_mirror_seconds": [11.899296, 10.14863, 9.559191],
-    "training_wall_time_lora_r2_seconds": [1.330306, 1.315111, 1.337281],
+    "training_wall_time_mirror_seconds": [
+      11.899296,
+      10.14863,
+      9.559191
+    ],
+    "training_wall_time_lora_r2_seconds": [
+      1.330306,
+      1.315111,
+      1.337281
+    ],
     "inference_benchmark": "CPU 1 thread, batch 4096, 12 measured forward passes after 2 warmups",
-    "inference_throughput_ratio_mirror_to_lora_by_world": [0.5167751959150122, 0.4933767318266339, 1.0645324990974845],
+    "inference_throughput_ratio_mirror_to_lora_by_world": [
+      0.5167751959150122,
+      0.4933767318266339,
+      1.0645324990974845
+    ],
     "interpretation": "Single-host throughput is variable and not a general runtime claim; measured training wall time was consistently much higher for the unfused Givens implementation."
   },
   "environment": {
