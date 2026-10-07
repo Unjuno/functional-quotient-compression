@@ -43,7 +43,13 @@ The registry treats any repeated object as a candidate:
 - neural operators over PDE/function families;
 - relation-specific graph message transforms;
 - diffusion control branches/adapters;
-- neural-cellular-automata local update rules and goal states.
+- neural-cellular-automata local update rules and goal states;
+- invertible activation charts / flow coupling transforms;
+- globally reused or merged expert pools;
+- latent dynamical / Koopman operators and rank-1 weight atoms;
+- robot-policy skills and motor-option adapters;
+- matrix-memory rank budgets;
+- programmable graph topology / executable architecture state.
 
 ## Four mechanism classes
 
