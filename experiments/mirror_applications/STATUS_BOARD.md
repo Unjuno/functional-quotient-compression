@@ -24,6 +24,7 @@ MA-249 -> MA-250 -> MA-251 -> MA-003.
 
 ## Active experiments
 
+- MA-249 — branch `research/ma-249-future-head-views-20261007`; directory `experiments/mirror_applications/ma-249-future-head-views/`; worker/run `Codex session 2026-10-07`; start commit `78257e8f0bace7ee1509dca7c80b3fae7d6ee15c`.
 
 
 When a worker starts an MA experiment, add:
