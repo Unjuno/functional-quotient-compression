@@ -36,7 +36,14 @@ The registry treats any repeated object as a candidate:
 - holographic binding roles;
 - continual-learning skills / update geometries;
 - ensembles / students;
-- SSM states and execution kernels.
+- SSM states and execution kernels;
+- structured orthogonal / low-displacement matrix families;
+- task-delta and model-merging capability directions;
+- Bayesian posterior / ensemble subspaces;
+- neural operators over PDE/function families;
+- relation-specific graph message transforms;
+- diffusion control branches/adapters;
+- neural-cellular-automata local update rules and goal states.
 
 ## Four mechanism classes
 
