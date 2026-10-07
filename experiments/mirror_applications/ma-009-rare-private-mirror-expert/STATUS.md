@@ -5,8 +5,8 @@
 - Base commit: `f45deaeccb` (full SHA in protocol)
 - Development complete: yes; selected LR 0.01
 - Fresh/audit opened: yes; worlds 90001–90003
-- Results committed: yes (`e2232f0382eb66721e90d7b295fb0b2c33eb9731`)
-- Verification committed: yes (`e2232f0382eb66721e90d7b295fb0b2c33eb9731`)
+- Results committed: yes (`e2232f0382eb66721e90d7b295fb0b2c33eb9731`); source/tests committed `41020ba0aa45d9337fec68f7f772d8d5076534a6`
+- Verification committed: yes (`e2232f0382eb66721e90d7b295fb0b2c33eb9731`); executable replay harness committed `41020ba0aa45d9337fec68f7f772d8d5076534a6`
 - Registry row updated: yes (tracker commit pending)
 
 ## H / T / D / C / U
