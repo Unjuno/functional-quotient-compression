@@ -1,8 +1,8 @@
 # MA-004 — nonlinear soft Mirror expert mixture
 
-Status: **PROMISING** (aligned dense soft-mixture gate passed 3/3; hard tying has a smaller/faster frontier)  
-Evidence lane: MECHANISM / STORAGE / COMPUTE / RUNTIME  
-Branch: `research/ma-004-soft-mirror-expert-mixture-20261007`  
+Status: **PROMISING** (aligned dense soft-mixture gate passed 3/3; hard tying has a smaller/faster frontier)
+Evidence lane: MECHANISM / STORAGE / COMPUTE / RUNTIME
+Branch: `research/ma-004-soft-mirror-expert-mixture-20261007`
 Base commit: `7ff5430` (verified MA-002 parent)
 
 ## H — hypothesis

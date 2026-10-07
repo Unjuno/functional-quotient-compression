@@ -45,7 +45,7 @@ When a worker starts an MA experiment, add:
 
 ## Recently completed
 
-- MA-004 — PROMISING: nonlinear dense softmax Givens mixture passed aligned quality/storage 3/3 (Mirror/untied MSE 0.297–1.030; 7,697B vs 23,277B). Hard tying was 252B smaller and used one quarter of active MACs; independent roles needed private/richer state, and Mirror CPU throughput was 0.086x tying. Synthetic fixed-update result. Branch `research/ma-004-soft-mirror-expert-mixture-20261007`; report `experiments/mirror_applications/ma-004-soft-mirror-expert-mixture/README.md`; result commit `RESULT_COMMIT_PENDING`.
+- MA-004 — PROMISING: nonlinear dense softmax Givens mixture passed aligned quality/storage 3/3 (Mirror/untied MSE 0.297–1.030; 7,697B vs 23,277B). Hard tying was 252B smaller and used one quarter of active MACs; independent roles needed private/richer state, and Mirror CPU throughput was 0.086x tying. Synthetic fixed-update result. Branch `research/ma-004-soft-mirror-expert-mixture-20261007`; report `experiments/mirror_applications/ma-004-soft-mirror-expert-mixture/README.md`; result commit `e8fea8ef10f876835c4683bad0203ec7fdc91e16`.
 
 - MA-002 — PROMISING: nonlinear sparse top-2 Givens views passed aligned quality/storage 3/3 (Mirror/untied MSE 0.223–0.403; 7,697B vs 23,277B); hard tying was 252B smaller and ~2.03x lower active proxy. Independent functions needed private/richer state; Mirror CPU inference throughput was 0.102x tying. Synthetic fixed-update result; protocol base_commit typo is disclosed. Branch `research/ma-002-mirror-top2-expert-20261007`; report `experiments/mirror_applications/ma-002-mirror-top2-expert/README.md`; result commit `2b7f7fe736393ef3702daa7995e0951d54e4de12`.
 
