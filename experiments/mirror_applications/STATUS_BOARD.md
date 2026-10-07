@@ -23,7 +23,7 @@ If MA-186 is blocked, use the next eligible P0 in the registry.
 
 ## Active experiments
 
-
+- MA-111 — branch `research/ma-111-semantic-role-embedding-20261007`; directory `experiments/mirror_applications/ma-111-semantic-role-embedding/`; started from commit `6e0ed10a094f9a082a144a2d8d86f508fd4cbad6`. PA13/TPE, tied-embedding, Kronecker and semantic-concept prior art reviewed; protocol and implementation frozen before development; preflight tests passed.
 
 
 When a worker starts an MA experiment, add:
