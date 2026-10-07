@@ -35,7 +35,8 @@ MA-116 completed FAIL at the development gate.
 MA-121 completed PROMISING on aligned phase slots; MA-129 completed FAIL at development; three exploratory worlds were opened after gate failure and excluded from status.
 
 ### Family E — Compression / holographic
-MA-156 -> MA-160 -> MA-171 -> MA-173 -> MA-181
+MA-156 completed PROMISING on aligned quantized weight views; strict secondary margin missed.
+MA-160 -> MA-171 -> MA-173 -> MA-181
 
 ### Family F — Continual / optimization / distillation
 MA-186 -> MA-189 -> MA-199 -> MA-208

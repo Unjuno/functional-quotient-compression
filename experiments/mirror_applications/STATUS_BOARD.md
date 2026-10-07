@@ -8,22 +8,22 @@ Updated: 2026-10-07
 - P0: **34**
 - P1: **126**
 - P2: **94**
-- Current MA statuses: **229 UNTESTED, 12 PROMISING, 13 FAIL**
+- Current MA statuses: **228 UNTESTED, 13 PROMISING, 13 FAIL**
 - Historical evidence lanes SRM/TM are not MA statuses.
 
 ## Next candidate
 
-**MA-156 — next Family E compression candidate**
+**MA-160 — next Family E compression candidate**
 
 Why next:
-- MA-241, MA-244, MA-245, MA-247, MA-248, MA-249, MA-250, MA-251, MA-253, MA-003, MA-005, MA-009, MA-019, MA-024, MA-041, MA-048, MA-061, MA-063, MA-076, MA-079, MA-086, MA-116, MA-121 and MA-129 are checked; Family B KV views remain paused, so MA-156 is next.
-- MA-156 begins compression/holographic candidates; follow its registered storage and reconstruction controls.
+- MA-241, MA-244, MA-245, MA-247, MA-248, MA-249, MA-250, MA-251, MA-253, MA-003, MA-005, MA-009, MA-019, MA-024, MA-041, MA-048, MA-061, MA-063, MA-076, MA-079, MA-086, MA-116, MA-121, MA-129 and MA-156 are checked; Family B KV views remain paused, so MA-160 is next.
+- MA-160 continues compression/holographic work; follow its registered storage and reconstruction controls.
 
-If MA-156 is blocked, use the next eligible P0 in the registry.
+If MA-160 is blocked, use the next eligible P0 in the registry.
 
 ## Active experiments
 
-- None. MA-003, MA-005, MA-009, MA-019, MA-024, MA-041, MA-048, MA-061, MA-063, MA-076, MA-079, MA-086, MA-116, MA-121 and MA-129 have completed; Family B KV subfamily paused with diagnostic; MA-156 is next.
+- None. MA-003, MA-005, MA-009, MA-019, MA-024, MA-041, MA-048, MA-061, MA-063, MA-076, MA-079, MA-086, MA-116, MA-121, MA-129 and MA-156 have completed; Family B KV subfamily paused with diagnostic; MA-160 is next.
 
 
 When a worker starts an MA experiment, add:
@@ -45,6 +45,8 @@ When a worker starts an MA experiment, add:
 - MA-247 through MA-251 are complete and verified.
 
 ## Recently completed
+
+- MA-156 — PROMISING storage/quality frontier: one packed int4 base plus charged views matched independent-int4 quality in 3/3 fresh worlds with 68.0% fewer bytes; stricter hard-tie margin missed, arbitrary matrices needed private QER capacity, decode MAC proxy rose 32x. Branch `research/ma-156-compression-view-20261007`; report `experiments/mirror_applications/ma-156-compression-view/README.md`; result commit pending.
 
 - MA-129 — FAIL at development actual-byte gate: Mirror passed aligned quality but payload 1,957B exceeded MTP 1,833B; three exploratory worlds were mistakenly opened after gate failure and are excluded from status. Branch `research/ma-129-temporal-view-20261007`; report `experiments/mirror_applications/ma-129-temporal-view/README.md`; result commit `35cd8bb9fa638006828bdd61ae9511df11dc8af1`.
 
