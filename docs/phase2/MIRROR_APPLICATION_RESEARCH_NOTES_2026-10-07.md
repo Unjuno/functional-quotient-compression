@@ -517,3 +517,73 @@ Implication: Mirror need not be a static expert ID. It can be a transient rule c
 - Existing worker order remains authoritative; this sweep does not preempt an already-started experiment.
 
 The new lanes span structured linear algebra, model merging, Bayesian uncertainty, scientific operator learning, relational graph models, diffusion control and self-organising recurrent systems. This broadens the test from "does Mirror help Transformers?" to "is a structured functional coordinate a reusable compression primitive across model classes?"
+
+## Ninth literature sweep — invertible coordinates, expert reuse and compositional dynamics
+
+This sweep targeted places where the logical function can move without paying for a full new parameter object: nonlinear coordinate charts, reused expert pools, shared dynamical components, low-rank weight atoms, latent linear operators, motor options and executable graph programs.
+
+### AW. Invertibility turns a simple latent View into a nonlinear input-dependent function
+
+RealNVP/i-ResNet establish tractable invertible maps. INNSteer makes the application especially direct: learn an invertible activation chart, perform a simple intervention in latent coordinates, and invert back. The resulting intervention is nonlinear and input-dependent in the original representation.
+
+Implication: Mirror does not need a complicated code algebra in the original activation space. A shared nonlinear chart can make small codes expressive. Exact inverse/cycle behavior also gives a stronger diagnostic than arbitrary MLP steering.
+
+### AX. Expert ownership is becoming a global resource-allocation problem
+
+MoRE reuses expert pools across adjacent depth and adds lightweight depth conditioning. UniPool goes further and exposes one global expert pool to per-layer routers. These are close prior art, not merely adjacent systems work.
+
+Implication: "shared physical expert + layer code" is no longer sufficient as a claim. Mirror must show value beyond depth embeddings/global pooling: smaller physical pool, stronger logical specialization, factorized layer x expert roles, or less router metadata.
+
+### AY. Merge/prune/upcycle reveals where logical experts should come from
+
+M-SMoE discovers merge groups from routing statistics; REAP identifies experts safe to prune; Expert Upcycling and Cluster-Aware Upcycling determine where new physical experts should be born; SIMoE represents new experts by sparse interpolation.
+
+Implication: the Mirror program should not start from arbitrary tied experts. A better pipeline is:
+1. learn or inspect an overcomplete expert population;
+2. identify mergeable/prunable/shared structure;
+3. fit logical Views only to distinctions that matter;
+4. allocate a physical expert only when the View residual remains too large.
+
+### AZ. Shared dynamical components can be causal rather than metaphorical
+
+The 2026 low-rank RNN theory identifies reusable latent dynamical components and distinct loci where task dependence enters. Vector Networks similarly expose reusable rank-1 weight atoms selected dynamically per input.
+
+Implication: Mirror coordinates can be grounded in identified computation atoms. Causal perturbation and held-out recombination become stronger tests than pairwise weight distance.
+
+### BA. Koopman space is a natural functional-coordinate space for dynamics
+
+Deep Koopman methods seek coordinates in which nonlinear dynamics become approximately linear; Koopman Neural Operators extend this idea toward operator learning.
+
+Implication: for dynamical systems, place Mirror on the latent evolution operator/eigenmodes rather than arbitrary full-network weights. Spectral stability and horizon error are part of the evidence contract.
+
+### BB. Motor options are a concrete bank of reusable functions
+
+Recent motor-control work learns low-rank residual adapters around a shared recurrent core and sequences them as options for novel movements. The adapter bank is therefore a direct target for physical-to-logical compression.
+
+Implication: measure bytes per added useful skill, option-switch latency and out-of-distribution sequence composition. A storage-only result that damages closed-loop robustness is not a win.
+
+### BC. "What" and "how" should be separate coordinates
+
+Compositional continual-learning work argues for separating represented content from the transformation applied to it.
+
+Implication: instead of one task ID, use factorized Mirror coordinates for operand/content and operation/program. New-content and new-operation adaptation should be tested asymmetrically.
+
+### BD. Capacity rank can be demanded by task algebra
+
+Controlled matrix-memory experiments report that group-composition tasks recruit the minimal representation rank required by their algebra.
+
+Implication: Mirror state dimension/rank should be allocated adaptively. If a task requires rank r, compression below that structural threshold should be expected to fail rather than treated as an optimization issue.
+
+### BE. Architecture itself can be the functional coordinate
+
+GrapNet treats mutable graph relations as executable program structure.
+
+Implication: Level-3 Mirror can include topology, route, state and weight/activation View together. But graph metadata and program-synthesis cost are real storage/compute costs and must be accounted for.
+
+## Registry growth
+
+- Ninth sweep: MA-771 through MA-825.
+- Registry after this sweep: **825 candidates**.
+- Maintained prior-art map: **PA01–PA220**.
+- New candidates: **43 P0, 12 P1**.
+- Existing next-candidate/worker ordering remains unchanged.
