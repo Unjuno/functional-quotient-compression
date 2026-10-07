@@ -3,7 +3,7 @@
 - Status: SCREENING
 - Branch: `research/ma-199-gradient-coordinate-20261007`
 - Base commit: `a5dc84c59a6a7fd35c43dc40003f3be52cc03d75`
-- Protocol frozen: no
+- Protocol frozen: yes at commit `6a2e22c08c3e766359c986e4b7202b4651feee39`
 - Development complete: no
 - Fresh/audit opened: no
 - Results committed: no
@@ -20,7 +20,7 @@ A task-specific angular coordinate in a paid shared gradient plane can encode al
 
 ## D — pending
 
-Targeted prior-art review is complete. Protocol and implementation are in progress.
+Targeted prior-art review and protocol are frozen. Development has not started.
 
 ## C — strongest counter-hypothesis
 
