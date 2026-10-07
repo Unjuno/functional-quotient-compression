@@ -20,6 +20,22 @@ The compression question is whether one physical object plus small addresses can
 
 This does NOT imply independent information or independent-model capacity. Every claim must be measured at actual serialized bytes and useful quality.
 
+## Program invariant: stress-test `m` across methods
+
+The design-space expansion does not change the central experimental variable.
+
+The program's Mirror-specific move is always to add a low-description functional parameter:
+
+`F(x; theta) -> F(x; theta, m)`.
+
+New literature families primarily supply:
+- places to insert `m`;
+- stronger controls for `m`;
+- better parameterizations of `m`;
+- evidence about which variation cannot fit `m`.
+
+Do not turn the application program into a generic survey of adjacent architectures. The purpose of breadth is to test the same extra functional degree of freedom in many mechanisms.
+
 ## What can be multiplied logically?
 
 The registry treats any repeated object as a candidate:
