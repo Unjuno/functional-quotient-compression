@@ -8,22 +8,22 @@ Updated: 2026-10-07
 - P0: **34**
 - P1: **126**
 - P2: **94**
-- Current MA statuses: **222 UNTESTED, 18 PROMISING, 14 FAIL**
+- Current MA statuses: **221 UNTESTED, 18 PROMISING, 15 FAIL**
 - Historical evidence lanes SRM/TM are not MA statuses.
 
 ## Next candidate
 
-**MA-199 — next eligible P0 candidate (Family F)**
+**MA-208 — next eligible P0 candidate (Family F)**
 
 Why next:
 - MA-241, MA-244, MA-245, MA-247, MA-248, MA-249, MA-250, MA-251, MA-253, MA-003, MA-005, MA-009, MA-019, MA-024, MA-041, MA-048, MA-061, MA-063, MA-076, MA-079, MA-086, MA-116, MA-121, MA-129, MA-156, MA-160, MA-171, MA-173 and MA-181 are checked; Family B KV views remain paused.
-- MA-186 and MA-189 are completed; MA-199 is next in Family F.
+- MA-186, MA-189 and MA-199 are completed; MA-208 is next in Family F.
 
 If MA-186 is blocked, use the next eligible P0 in the registry.
 
 ## Active experiments
 
-- MA-199 — branch `research/ma-199-gradient-coordinate-20261007`; directory `experiments/mirror_applications/ma-199-gradient-coordinate/`; started from commit `a5dc84c59a6a7fd35c43dc40003f3be52cc03d75`. Protocol frozen at `6a2e22c08c3e766359c986e4b7202b4651feee39`; development pending.
+None.
 
 
 When a worker starts an MA experiment, add:
@@ -45,6 +45,8 @@ When a worker starts an MA experiment, add:
 - MA-247 through MA-251 are complete and verified.
 
 ## Recently completed
+
+- MA-199 — FAIL at development: task Givens coordinates used 1,103B total vs 1,196B rank-1 LoRA (0.922x), missing the <=0.90x byte gate in both development seeds; fresh stayed sealed. Incremental bytes/skill were lower, but the generic shared-plane control had similar mean quality and smaller resume state. Independent updates needed private weights. Branch `research/ma-199-gradient-coordinate-20261007`; report `experiments/mirror_applications/ma-199-gradient-coordinate/README.md`; result commit `577ceb9f5d8d3d55f8350808e03bb5ee3839e090`.
 
 - MA-189 — PROMISING on the deliberately two-sided-Givens-aligned task family: at 64 examples, 2-view Mirror passed quality/byte/retention in 3/3 fresh worlds with 55B incremental inference vs 228B rank-2 LoRA and unchanged Task-0 MSE. Unrelated maps needed private state; eager inference throughput was 0.20x LoRA. Rank-4 LoRA and generic byte-matched basis remain untested. Branch `research/ma-189-freeze-backbone-mirror-20261007`; report `experiments/mirror_applications/ma-189-freeze-backbone-mirror/README.md`; result commit `ba9639983b09eb75237a6732d1f3c75ad8d75b8a`.
 

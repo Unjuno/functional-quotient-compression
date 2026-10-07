@@ -3,11 +3,12 @@
 - Status: **FAIL at development**; no fresh worlds opened
 - Branch: `research/ma-199-gradient-coordinate-20261007`
 - Protocol freeze commit: `6a2e22c08c3e766359c986e4b7202b4651feee39`
+- Result commit: `577ceb9f5d8d3d55f8350808e03bb5ee3839e090`
 - Development complete: yes
 - Fresh/audit opened: no
-- Results committed: pending
-- Verification committed: pending
-- Registry row updated: pending
+- Results committed: yes
+- Verification committed: yes (in tracker commit)
+- Registry row updated: yes
 
 ## H — hypothesis
 

@@ -1,0 +1,32 @@
+{
+  "experiment_id": "MA-199",
+  "commit": "577ceb9f5d8d3d55f8350808e03bb5ee3839e090",
+  "tests": {
+    "command": "PYTHONPATH=experiments/mirror_applications/ma-199-gradient-coordinate/source python -m pytest -q experiments/mirror_applications/ma-199-gradient-coordinate/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "notes": "All seven methods restore identical predictions and reserialize byte-identically. Inference payloads charge the shared plane, every task code/adapter, task IDs and tensor-record metadata. Resume payloads use torch.save and include per-task or shared optimizer moments and step counters."
+  },
+  "metric_replay": {
+    "checked": true,
+    "report_records": 336,
+    "distinct_training_rows_replayed": 224,
+    "max_mse_difference": 0.0,
+    "payload_bytes_and_compute_exact": true,
+    "replay_artifact": ["RESULTS_CORE.csv", "DEV_LR003.csv", "DEV_LR010.csv"],
+    "command": "PYTHONPATH=experiments/mirror_applications/ma-199-gradient-coordinate/source python experiments/mirror_applications/ma-199-gradient-coordinate/source/verify_replay.py experiments/mirror_applications/ma-199-gradient-coordinate/RESULTS_CORE.csv experiments/mirror_applications/ma-199-gradient-coordinate/DEV_LR003.csv experiments/mirror_applications/ma-199-gradient-coordinate/DEV_LR010.csv",
+    "notes": "RESULTS_CORE duplicates the selected-LR003 development table. Unique training records replayed all MSE, retention, actual-byte, examples/updates and active-compute fields exactly. Wall-clock and throughput were excluded from exact replay."
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_worlds_opened": false,
+  "notes": [
+    "Protocol was frozen at 6a2e22c08c3e766359c986e4b7202b4651feee39 before development; LR 0.003 was selected using the preregistered all-method/all-condition mean MSE.",
+    "Both development worlds missed the registered <=0.90x rank-1 LoRA total-inference-byte gate (1,103B vs 1,196B), so fresh seeds remained sealed.",
+    "The generic P@C_t shared-plane control had nearly identical mean aligned MSE and smaller optimizer resume state than the Mirror coordinate.",
+    "Independent task updates required private parameters. The supplied plane was synthetic; no capacity or language-model claim."
+  ]
+}
