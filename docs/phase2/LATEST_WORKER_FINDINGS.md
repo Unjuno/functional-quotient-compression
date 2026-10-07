@@ -76,13 +76,56 @@ Boundary: all layers saw the same memory hidden state and the teacher was exactl
 
 
 
-The four results form a coherent pattern:
+## MA-247 — recurrent depth Mirror modulation
+
+Branch: `research/ma-247-recursive-depth-view-20261007`  
+Verified result: `62f0acf3f680ff3bbab8e0e20e194f4065f026e5`  
+Status: **FAIL at development screen**
+
+At the selected common LR 0.01, per-step Givens Mirror depth views had MSE 2.664e-3, worse than hard tying (2.012e-3), scalar gating (6.384e-4), and static rank-1 LoRA (1.076e-3), despite using 46.7% fewer serialized bytes than the untied upper control. Fresh worlds were not opened by the preregistered stop rule.
+
+Boundary: this is a fixed-budget recurrent optimization/task-family failure, not proof that depth Views are unrepresentable.
+
+## MA-248 — packet Mirror code
+
+Branch: `research/ma-248-packet-mirror-code-20261007`  
+Verified result: `433a2229362db23bcd43b3830358e674799c6247`  
+Status: **FAIL for Mirror-specific frontier**
+
+Mirror reached >=99% joint accuracy in 2/3 correlated fresh worlds, while a cheaper broadcast-code control did so in 3/3. It used no fewer address bits than the PTP-style control. Independent-mode quality was weak across methods.
+
+Boundary: packet-level shared randomness/plan remains useful, but the tested Givens phase geometry added no demonstrated value over a simpler shared code.
+
+## MA-691 — lazy canonical KV Mirror read
+
+Branch: `research/ma-691-lazy-kv-mirror-20261007`  
+Verified result: `3643118351eb026c31fc00802e47381e8cdfba93`  
+Status: **PROMISING**
+
+For logical Views satisfying
+
+`K_m = K A_m`, `V_m = V B_m`,
+
+one canonical physical prefix cache reproduced explicitly materialized View attention within 3.13e-7 maximum FP32 error across 3/3 fresh seeds by moving the View to the current query and attention output:
+
+`softmax(q K_m^T) V_m = softmax((q A_m^T) K^T) V B_m`.
+
+RoPE-plane commutation and MLA-style latent absorption diagnostics also passed.
+
+At T=8192 in the tested shape, one canonical FP32 K+V cache was 33,554,432 bytes and one View code 2,048 bytes; eight full materialized View caches would be about 268.4 MB versus about 33.57 MB for one canonical cache plus eight codes.
+
+Boundary: exact by construction. Arbitrary earlier FFN/LoRA specialist changes are not guaranteed to satisfy this relation. CPU timing is exploratory; natural-language and GPU behavior remain untested.
+
+
+The verified results form a coherent pattern:
 
 1. **aligned functional variation** -> compact Views can work very well; this has now repeated across tied experts, head/role K/V views, and cross-layer K/V views;
 2. **misaligned independent variation** -> a narrow View can fail completely;
 3. **private residual capacity** helps when variation leaves the shared orbit;
 4. **placement** can determine cache/runtime properties independently of quality;
-5. **unfused structured operations** can lose wall-clock Pareto position even when analytical MAC overhead is small.
+5. **unfused structured operations** can lose wall-clock Pareto position even when analytical MAC overhead is small;
+6. **cache compatibility can be designed algebraically**: logical K/V variation need not imply physical cache duplication when Views can be moved to read-side computation;
+7. **simple codes often beat richer geometry** when the task only needs shared conditioning, as MA-248 showed.
 
 The next question is therefore not "does Mirror work?" but:
 
