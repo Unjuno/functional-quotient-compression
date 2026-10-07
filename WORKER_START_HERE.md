@@ -140,3 +140,23 @@ Not allowed without evidence:
 ## Concurrent registry edits
 
 Before adding a new MA candidate, re-read `IDEA_REGISTRY.csv` from the current branch and allocate IDs starting at **max existing MA ID + 1**. Never reserve an ID from memory or an older checkout. After writing, re-read the registry and verify zero duplicate IDs. If concurrent additions collide, preserve both hypotheses and renumber the later addition rather than deleting either one.
+
+
+## 11. Candidate-specific context
+
+### KV-cache candidates
+
+For MA-691..700 and any later cache-transform candidate, read:
+`docs/phase2/MIRROR_KV_CACHE_REUSE.md`.
+
+Before coding, classify the hypothesis as one of:
+1. identical-cache placement;
+2. exact analytical cache transform;
+3. canonical latent/cache with View-specific readout;
+4. approximate learned cache translation.
+
+Do not mix these four evidence classes. Measure physical cache aliasing/storage separately from prefill/switch latency and attention compute.
+
+### Recurrent/depth candidates
+
+MA-247 showed that even an aligned Givens teacher can fail a fixed-budget recurrent optimization screen. Include a scalar/static-LoRA optimization control and do not infer representational impossibility from failed convergence.
