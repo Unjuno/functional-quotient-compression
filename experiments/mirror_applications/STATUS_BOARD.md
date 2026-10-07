@@ -8,23 +8,23 @@ Updated: 2026-10-07
 - P0: **34**
 - P1: **126**
 - P2: **94**
-- Current MA statuses: **238 UNTESTED, 1 SCREENING, 9 PROMISING, 6 FAIL**
+- Current MA statuses: **238 UNTESTED, 9 PROMISING, 7 FAIL**
 - Historical evidence lanes SRM/TM are not MA statuses.
 
 ## Next candidate
 
-**MA-048 — physical-4 to logical-16 heads**
+**MA-061 — one KV head to many logical KV heads**
 
 Why next:
-- MA-241, MA-244, MA-245, MA-247, MA-248, MA-249, MA-250, MA-251, MA-253, MA-003, MA-005, MA-009, MA-019, MA-024 and MA-041 are checked; MA-048 is the next executable P0 candidate.
-- its closest controls should compare ordinary MHA and learned/shared projection views, including generated adapters (PA04; PA07).
+- MA-241, MA-244, MA-245, MA-247, MA-248, MA-249, MA-250, MA-251, MA-253, MA-003, MA-005, MA-009, MA-019, MA-024, MA-041 and MA-048 are checked; MA-061 is the next executable P0 candidate.
+- its closest controls should compare MQA/GQA, KV projection sharing and MLKV (PA07; PA08).
 
-If MA-048 is blocked, use this order:
-MA-061 -> MA-063.
+If MA-061 is blocked, use this order:
+MA-063.
 
 ## Active experiments
 
-- MA-048 — branch `research/ma-048-physical4-logical16-attention-20261007`; directory `experiments/mirror_applications/ma-048-physical4-logical16-attention/`; worker/run `Codex session 2026-10-07`; start commit pending.
+- None. MA-003, MA-005, MA-009, MA-019, MA-024, MA-041 and MA-048 have completed; MA-061 is next.
 
 
 When a worker starts an MA experiment, add:
@@ -40,6 +40,7 @@ When a worker starts an MA experiment, add:
 - MA-019 — FAIL at development: one-angle Mirror missed the full-MoE quality/storage gates; generic rank-2 basis used only 64B more and fit the aligned teacher much better at the same compute proxy. Fresh worlds were not opened. Branch `research/ma-019-mirror-coefficient-basis-20261007`; report `experiments/mirror_applications/ma-019-mirror-coefficient-basis/README.md`; result commit `b880e34edb8210ad318091be2e17e170ef09c5a0`.
 - MA-024 — FAIL at development: one-angle virtual LoRA used 2,401B vs 2,657B generic shared basis, but generic basis had much lower MSE with the same compute proxy; fresh worlds not opened. Branch `research/ma-024-virtual-lora-mirror-20261007`; report `experiments/mirror_applications/ma-024-virtual-lora-mirror/README.md`; result commit `4a41b4af333d181bd873f2f79751177f8c1c9a95`.
 - MA-041 — PROMISING: aligned attention output/payload gates passed 3/3 with 32.8% fewer bytes; head-level contribution quality and CPU runtime lagged, independent QKV required private weights. Branch `research/ma-041-mirror-attention-heads-20261007`; report `experiments/mirror_applications/ma-041-mirror-attention-heads/README.md`; result commit `359111bc9cc649fe29ad8793035c237dbf211cba`.
+- MA-048 — FAIL: physical-4 to logical-16 Mirror heads saved 43.5% payload and had better head-contribution audit, but aggregate MSE missed full MHA 3/3; CPU throughput 0.189x. Branch `research/ma-048-physical4-logical16-attention-20261007`; report `experiments/mirror_applications/ma-048-physical4-logical16-attention/README.md`; result commit `bdd1dd3002b493cf1355dcc297e9de23b5e0b532`.
 - MA-247 through MA-251 are complete and verified.
 
 ## Recently completed

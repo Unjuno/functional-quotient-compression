@@ -4,9 +4,9 @@
 - Branch: `research/ma-048-physical4-logical16-attention-20261007`
 - Development complete: yes; LR 0.003
 - Fresh/audit opened: yes; worlds 48001–48003
-- Results committed: pending
-- Verification committed: pending
-- Registry row updated: pending
+- Results committed: yes (`bdd1dd3002b493cf1355dcc297e9de23b5e0b532`)
+- Verification committed: yes (`bdd1dd3002b493cf1355dcc297e9de23b5e0b532`)
+- Registry row updated: yes (tracker commit pending)
 
 ## H / T / D / C / U
 
