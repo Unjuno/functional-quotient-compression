@@ -24,6 +24,7 @@ MA-003.
 
 ## Active experiments
 
+- MA-251 — branch `research/ma-251-expert-depth-factorization-20261007`; directory `experiments/mirror_applications/ma-251-expert-depth-factorization/`; worker/run `Codex session 2026-10-07`; start commit `0bc21d10a76dc624f935e20e20a546a2ca5f12d5`.
 
 
 
