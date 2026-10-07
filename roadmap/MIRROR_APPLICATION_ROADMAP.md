@@ -98,7 +98,7 @@ These do not preempt an already-started worker experiment. They enter the queue 
 
 ## Expansion lanes discovered by research
 
-The backlog now contains **550 candidates**. Recent literature sweeps add four new strategic lanes:
+The backlog now contains **770 candidates**. Recent literature sweeps add four new strategic lanes:
 
 ### A. Representation selection
 Masks/supermasks and intrinsic subspaces ask whether a task needs a new weight transform at all, or only a compact selector/coordinate.
@@ -139,6 +139,42 @@ ReFT, activation steering, function vectors, SAEs and transcoders show that usef
 Research question: for a fixed behavior/task family, is the most storage-efficient functional coordinate a weight View, a hidden-state View, a sparse feature program, a latent code, or an external memory entry?
 
 This lane must report inference-time intervention cost and off-target effects in addition to stored bytes.
+
+### I. Structured transform coordinates
+
+Householder, scaled-Cayley, GSOFT and low-displacement-rank families expand the View geometry beyond diagonal/low-rank/BOFT transforms.
+
+Research question: which structured family gives the best useful-function quality per serialized byte and realized transform time?
+
+### J. Model-merge geometry
+
+DARE/DELLA sparsification, Fisher/RegMean weighting, KnOTS alignment and Model Stock expose different low-dimensional structures in task deltas.
+
+Research question: after removing redundancy and alignment artifacts, can reusable Mirror capability atoms preserve both individual and composed task behavior?
+
+### K. Posterior and ensemble coordinates
+
+SWAG, Subspace Inference, Laplace, Packed-Ensembles and Snapshot Ensembles provide distinct ways to obtain several predictive models without training fully independent copies.
+
+Research question: can uncertainty/diversity live in a compact View space without collapsing calibration or OOD detection?
+
+### L. Neural-operator and relational coordinates
+
+FNO/DeepONet represent operator families, while R-GCN/CompGCN already represent relation-specific functions with shared structure.
+
+Research question: do factorized Mirror codes generalize to held-out physics/relation combinations rather than merely memorize task IDs?
+
+### M. Diffusion-control coordinates
+
+ControlNet, T2I-Adapter, IP-Adapter, Ctrl-Adapter and CtrLoRA create or reuse condition-specific control functions.
+
+Research question: can control type x depth x timestep x target-backbone structure be represented by a shared control basis and compact composable Views?
+
+### N. Self-organising rule coordinates
+
+Neural Cellular Automata repeatedly apply one local rule, while goal conditioning, attention and online self-organisation make that rule/task state dynamic.
+
+Research question: can a small transient Mirror state select stable global behaviors and adapt online without duplicating the local update network?
 
 ## KV-cache transformation lane
 
