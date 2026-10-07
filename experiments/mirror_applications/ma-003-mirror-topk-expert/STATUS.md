@@ -5,9 +5,9 @@
 - Base commit: `3826b43b4f474e8739392322d399e50c1ac11e6b`
 - Development complete: yes; final v3 selected LR 0.01
 - Fresh/audit opened: yes; worlds 30001–30003
-- Results committed: pending
-- Verification committed: pending
-- Registry row updated: pending
+- Results committed: yes (`e50a20fe4c000ffb3113f9d3e6564b3efacd4395`)
+- Verification committed: yes (`e50a20fe4c000ffb3113f9d3e6564b3efacd4395`)
+- Registry row updated: yes (tracker commit pending)
 
 ## Decision
 

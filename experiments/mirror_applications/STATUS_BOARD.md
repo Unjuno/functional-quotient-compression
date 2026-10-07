@@ -8,23 +8,23 @@ Updated: 2026-10-07
 - P0: **34**
 - P1: **126**
 - P2: **94**
-- Current MA statuses: **245 UNTESTED, 6 PROMISING, 3 FAIL**
+- Current MA statuses: **244 UNTESTED, 7 PROMISING, 3 FAIL**
 - Historical evidence lanes SRM/TM are not MA statuses.
 
 ## Next candidate
 
-**MA-003 — Mirror top-k expert**
+**MA-005 — signed Mirror expert mixture**
 
 Why next:
-- MA-241, MA-244, MA-245, MA-247, MA-248, MA-249, MA-250, MA-251 and MA-253 are checked; MA-003 is the next executable P0 candidate.
-- its closest prior-art controls are expert tying and standard top-k MoE (PA01–PA03).
+- MA-241, MA-244, MA-245, MA-247, MA-248, MA-249, MA-250, MA-251, MA-253 and MA-003 are checked; MA-005 is the next executable P0 candidate.
+- its closest controls should compare signed expert mixtures with standard expert mixtures (PA01–PA03).
 
-If MA-003 is blocked, use this order:
-MA-005 -> MA-009 -> MA-019 -> MA-024.
+If MA-005 is blocked, use this order:
+MA-009 -> MA-019 -> MA-024.
 
 ## Active experiments
 
-- MA-003 — branch `research/ma-003-mirror-topk-expert-20261007`; directory `experiments/mirror_applications/ma-003-mirror-topk-expert/`; worker/run `Codex session 2026-10-07`; start commit `4ddc2962b53dc621ec6ce30758a3cf527aaa2c18`.
+- None. MA-003 has completed; MA-005 is next.
 
 
 
@@ -37,7 +37,8 @@ When a worker starts an MA experiment, add:
 - worker/run identifier if available;
 - start commit.
 
-- None. MA-247 through MA-251 are complete and verified.
+- MA-003 — PROMISING: aligned synthetic top-1 Mirror experts passed routed-MSE gate in 2/3 fresh worlds with 35.8% fewer serialized bytes; independent experts needed private capacity; CPU inference was slower. Branch `research/ma-003-mirror-topk-expert-20261007`; report `experiments/mirror_applications/ma-003-mirror-topk-expert/README.md`; result commit `e50a20fe4c000ffb3113f9d3e6564b3efacd4395`.
+- MA-247 through MA-251 are complete and verified.
 
 ## Recently completed
 
