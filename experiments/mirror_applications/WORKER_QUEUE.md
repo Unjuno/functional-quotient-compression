@@ -258,6 +258,38 @@ Operational rule:
 - robot-control experiments must report per-skill bytes, inference latency and rollout conditions;
 - programmable-architecture experiments must count graph/program metadata as stored state.
 
+## Tenth research-expansion queue — functional edges, tangent geometry and adaptive state
+
+Added after the KAN/NTK/engram/plasticity/model-manifold/collective-inference sweep. Do not interrupt active or already-locked work.
+
+High-information P0:
+1. MA-826/827 — GS-KAN shared parent function and factorized edge coordinates
+2. MA-829/830 — KanAdapter bank compression and task x layer functional codes
+3. MA-833/834 — KARC shared basis bank and adaptive basis-family Views
+4. MA-836/837 — NTK-orthogonal task codes and NTK-CL coordinate generation
+5. MA-838/840 — tangent-space task coordinates with nonlinear private fallback
+6. MA-841/842/844 — causal AI-engram basis, compositional memory and Fisher-metric code geometry
+7. MA-846/847/848 — differentiable plasticity and persistent x transient Hebbian coordinates
+8. MA-851/852/853 — DeltaNet writable matrix state and factorized associative-memory roles
+9. MA-856/858 — learned low-loss subspace and Bezier-surface model coordinates
+10. MA-860/862/864 — new-task projection, symmetry-aligned manifolds and off-manifold private residuals
+11. MA-866/867/869 — Mesh protocol codes and minimal carrier-connected coalitions
+12. MA-871/872/873 — module-reuse structure, discrete hypothesis codes and module x rule factorization
+13. MA-874 — gain-modulated dynamic Mirror state with stable synapses
+
+P1 follow-ups remain in registry order within MA-826..875.
+
+Operational rule:
+- append behind existing locked/research queues;
+- do not change the current next candidate;
+- KAN experiments count basis/function-evaluation runtime, not only coefficients;
+- tangent experiments measure linearization error or NTK geometry before interpreting failure;
+- engram experiments retain causal specificity/reactivation/sufficiency/necessity checks;
+- online-state experiments count writable bytes and write FLOPs separately from persistent parameters;
+- model-manifold experiments count endpoints/control points/bases as physical storage;
+- Mesh experiments preserve observation-only communication and count message/topology overhead;
+- structural-composition experiments require held-out recombination, not only seen task IDs.
+
 ## Current P0 sequence
 
 ### Family A — FFN / MoE / adapter
