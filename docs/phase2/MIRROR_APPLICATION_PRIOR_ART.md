@@ -1825,3 +1825,201 @@ https://arxiv.org/abs/2609.29281
 Studies online adaptation through self-organising neural cellular systems, making deployment-time task change part of the learned dynamics rather than requiring a static task-specific model.
 
 **Mirror implication:** online adaptation can be restricted to a compact functional coordinate, giving a direct test of whether transient task state can replace larger updates while retaining prior behaviors.
+
+## PA199 — Real NVP / invertible coupling transforms
+
+**Density estimation using Real NVP**  
+https://arxiv.org/abs/1605.08803
+
+Builds expressive exactly invertible transformations from tractable affine coupling layers, enabling exact forward/inverse mappings and latent-space manipulation.
+
+**Mirror implication:** an invertible coupling map can act as a nonlinear coordinate chart for functional Views. Composition and inverse-cycle error become measurable properties, while exact invertibility prevents silent information destruction from being confused with useful specialization.
+
+## PA200 — Invertible Residual Networks
+
+**Invertible Residual Networks**  
+https://arxiv.org/abs/1811.00995
+
+Shows that residual networks can be made invertible under suitable contraction/Lipschitz constraints while retaining standard residual-network structure.
+
+**Mirror implication:** reversible residual View families can specialize a shared block without abandoning invertibility. Runtime must include inverse iterations and any normalization needed to maintain the contraction constraint.
+
+## PA201 — INNSteer nonlinear invertible activation steering
+
+**Beyond Linear Activation Steering: Invertible Latent Transformations for Controlling LLM Behavior**  
+https://arxiv.org/abs/2606.08454
+
+Learns a lightweight invertible neural map from original LLM activations into a latent space where simple linear steering is easier, then maps the steered state back with the exact inverse. The resulting intervention is nonlinear and input-dependent in the original activation space.
+
+**Mirror implication:** this is a direct Level-3 representation-space prior: a fixed small latent displacement can become a context-dependent nonlinear functional View after a learned coordinate warp. Multi-behavior Mirror work must compare against INNSteer rather than linear steering alone.
+
+## PA202 — invertible adapter for one-step flow-matching policies
+
+**Invertible Neural Network Adapter for One-Step Flow Matching in Robot Manipulation**  
+https://arxiv.org/abs/2606.19194
+
+Places an invertible neural adapter around the action-generation process so a flow-matching manipulation policy can refine high-dimensional actions in one inference step while preserving latent information.
+
+**Mirror implication:** robot/action policies provide a latency-sensitive domain for invertible functional coordinates. A Mirror policy code is useful only if it preserves one-step execution and reduces per-skill storage or adaptation cost.
+
+## PA203 — M-SMoE / MC-SMoE expert merge-then-compress
+
+**Merge, Then Compress: Demystify Efficient SMoE with Hints from Its Routing Policy**  
+https://proceedings.iclr.cc/paper_files/paper/2024/file/3d09a88c3372cdb79401fde592ca4db8-Paper-Conference.pdf
+
+Uses routing statistics to align, group and frequency-weight expert merging; the merged experts exhibit lower-dimensional weight structure that is then compressed further.
+
+**Mirror implication:** empirically merged expert groups define a much stronger candidate shared physical basis than arbitrary tying. Fit Mirror Views around merged experts and test whether discarded expert distinctions can be recovered cheaply.
+
+## PA204 — MoRE / Mixture of Reused Experts
+
+**MoRE: Mixture of Reused Experts**  
+https://arxiv.org/abs/2609.18176
+
+Shares expert pools across groups of adjacent Transformer layers while retaining per-layer routers; lightweight depth embeddings condition reused experts so they can distinguish which layer is invoking them.
+
+**Mirror implication:** MoRE is very close to Mirror depth-specialized experts. Mirror must beat or complement simple depth embeddings while preserving the parameter savings of expert reuse.
+
+## PA205 — UniPool globally shared expert pool
+
+**UniPool: A Globally Shared Expert Pool for Mixture-of-Experts**  
+https://arxiv.org/abs/2605.06665
+
+Replaces per-layer expert ownership with a single global expert pool accessed by independent layer routers, using pool-level balancing and scale-stable routing. Reduced pools can match or exceed larger layer-wise expert budgets in the reported experiments.
+
+**Mirror implication:** physical expert count is itself a global resource. Mirror should test whether compact layer/expert Views can shrink the physical pool further without losing depth-specific functions.
+
+## PA206 — Expert Upcycling
+
+**Expert Upcycling: Shifting the Compute-Efficient Frontier of Mixture-of-Experts**  
+https://arxiv.org/abs/2604.19835
+
+Expands a trained MoE by duplicating experts and extending the router while keeping active top-k fixed; continued pretraining breaks symmetry among duplicated copies. Utility scores can decide which experts receive more physical copies.
+
+**Mirror implication:** expert duplication creates an explicit fork where the system can either pay for a new physical expert or try a cheap logical View first. This gives a clean physical-growth versus functional-coordinate frontier.
+
+## PA207 — Cluster-Aware Upcycling
+
+**Enhancing Mixture-of-Experts Specialization via Cluster-Aware Upcycling**  
+https://arxiv.org/abs/2604.13508
+
+Clusters dense-model activations semantically, initializes experts from cluster-specific truncated-SVD subspaces, initializes routing from cluster centroids, and uses self-distillation to stabilize specialization.
+
+**Mirror implication:** semantic clusters and their SVD subspaces are a principled expert-coordinate initialization. A Mirror basis should compare against storing full cluster-specific upcycled experts.
+
+## PA208 — Sparse Interpolated Mixture-of-Experts
+
+**Automatic Expert Discovery in LLM Upcycling via Sparse Interpolated Mixture-of-Experts**  
+https://aclanthology.org/2025.acl-long.816/
+
+Creates experts during upcycling through sparse interpolation over reusable parameter components rather than relying only on identical expert copies.
+
+**Mirror implication:** sparse interpolation coefficients are already compact logical expert coordinates. Mirror-specific value must come from factorizing, composing, robustifying or dynamically generating those coefficients.
+
+## PA209 — REAP Experts
+
+**REAP the Experts: Why Pruning Prevails for One-Shot MoE Compression**  
+https://arxiv.org/abs/2510.13999
+
+Analyzes one-shot expert compression and derives a reconstruction-aware expert-importance criterion, showing strong results from pruning experts that contribute least to layer output.
+
+**Mirror implication:** do not spend View capacity reconstructing functionally irrelevant experts. First prune with a causal/reconstruction-aware criterion; then ask whether useful removed distinctions can be represented as logical Views.
+
+## PA210 — Routing-Free Mixture-of-Experts
+
+**Routing-Free Mixture-of-Experts**  
+https://arxiv.org/abs/2604.00801
+
+Eliminates centralized top-k/softmax routing and lets individual experts determine activation through continuous learned self-activation, together with adaptive balancing.
+
+**Mirror implication:** routing can live inside the expert function itself. A dynamic Mirror expert may jointly decide activation and transformation, but must compare against routing-free experts rather than assuming a separate router is necessary.
+
+## PA211 — Soft MoE
+
+**From Sparse to Soft Mixtures of Experts**  
+https://proceedings.iclr.cc/paper_files/paper/2024/file/79fea214543ba263952ac3f4e5452b14-Paper-Conference.pdf
+
+Uses differentiable soft assignments between tokens and expert slots rather than hard token-choice routing, avoiding several routing pathologies while retaining sparse expert computation.
+
+**Mirror implication:** continuous expert assignment is a strong baseline whenever Mirror synthesizes or mixes logical experts. Distinguish gains from View geometry from gains due only to soft routing.
+
+## PA212 — shared latent components in low-rank recurrent computation
+
+**Interpretable compositional computation with recurrent neural networks**  
+https://www.biorxiv.org/content/10.64898/2026.06.23.733979v1
+
+Develops a theory in which multi-task low-rank recurrent networks reuse shared dynamical structures in a low-dimensional latent space, while task dependence can enter at distinct computational loci.
+
+**Mirror implication:** this is direct evidence for reusable functional components in dynamics. Mirror task coordinates should be tested at the input, recurrent and readout loci separately, with causal perturbations validating that recovered components are real.
+
+## PA213 — Vector Networks
+
+**Learning Compositional Latent Structure with Vector Networks**  
+https://arxiv.org/abs/2605.28007
+
+Replaces fixed dense layer weights with libraries of reusable rank-1 weight atoms. Per-input local inference selects sparse atoms and coefficients to synthesize an input-specific low-rank weight matrix, yielding strong compositional generalization in reported tests.
+
+**Mirror implication:** this is a direct dynamic-weight prior for shared physical atoms plus fast functional coordinates. Mirror must improve coefficient storage, inference cost, factorization or cross-task reuse beyond the native sparse atom inference.
+
+## PA214 — deep Koopman latent linearization
+
+**Deep learning for universal linear embeddings of nonlinear dynamics**  
+https://www.nature.com/articles/s41467-018-07210-0
+
+Learns nonlinear encoders/decoders so complex nonlinear dynamics can be represented by approximately linear evolution in a learned latent coordinate system.
+
+**Mirror implication:** the latent linear operator is an especially interpretable place for task/regime View coordinates. Spectral stability and long-horizon error are mandatory because small operator errors compound through recurrence.
+
+## PA215 — Koopman Neural Operator
+
+**Koopman neural operator as a mesh-free solver of non-linear partial differential equations**  
+https://arxiv.org/abs/2301.10022
+
+Combines operator learning with Koopman-style latent evolution to model nonlinear PDE dynamics without tying the learned solution operator to a single mesh.
+
+**Mirror implication:** PDE/system identity can be encoded directly in latent evolution-operator Views, giving a bridge between the FNO/DeepONet lane and structured recurrent dynamics.
+
+## PA216 — adapter-bank motor options
+
+**Learning Options for Compositional Motor Control with Adapter Banks**  
+https://arxiv.org/abs/2609.17042
+
+Uses a shared recurrent motor core plus a bank of residual adapters selected by discrete option codes; learned adapters become low-rank perturbations and can be sequenced by a high-level policy to produce novel motor combinations.
+
+**Mirror implication:** this is an unusually direct physical-adapter-bank target. Mirror can compress option storage or factor option identity from sequence position, but must preserve out-of-distribution sequence composition.
+
+## PA217 — separating the what and how of computation
+
+**Separating the what and how of compositional computation to enable reuse and continual learning**  
+https://arxiv.org/abs/2510.20709
+
+Separates representations of computational content from the mechanisms that operate on that content so components can be reused and extended more independently across tasks.
+
+**Mirror implication:** factorized coordinates should distinguish the operand/content ("what") from the transformation/program ("how"). Held-out cross-products and asymmetric continual-learning tests can directly test whether the factorization is meaningful.
+
+## PA218 — Equilibrium State Estimation
+
+**Once-for-All: Scalable Simultaneous Forecasting via Equilibrium State Estimation**  
+https://arxiv.org/abs/2606.13285
+
+Forecasts multiple interacting systems in one pass by estimating a shared equilibrium state and predicting relative to that equilibrium, rather than running a separate predictor independently for each system.
+
+**Mirror implication:** interacting-system identity is another logical role around shared global state. Mirror Views can specialize system reads/writes while retaining the single-pass shared computation.
+
+## PA219 — task-dependent rank law for matrix memories
+
+**The Rank the Task Demands: A Causal Rank Law for Matrix Memories Trained on Group Composition**  
+https://arxiv.org/abs/2609.12259
+
+Provides causal evidence in controlled group-composition tasks that learned matrix memory recruits the effective rank demanded by the task's minimal faithful representation.
+
+**Mirror implication:** rank is not merely a hyperparameter but can be a task-imposed information budget. Mirror memories should allocate coordinate/state rank adaptively and compare against the known minimal-rank requirement.
+
+## PA220 — GrapNet programmable dynamic neural graph
+
+**GrapNet: A Programmable Dynamic-Architecture Neural Graph Substrate**  
+https://arxiv.org/abs/2606.18923
+
+Treats a neural graph's mutable connectivity as executable program structure rather than only as input data, enabling dynamic architectural relations over a reusable neural substrate.
+
+**Mirror implication:** the functional coordinate can include topology/program structure, not only weights or activations. Separate the address cost of graph connectivity from the cost of node-function Views and measure dynamic execution overhead.
