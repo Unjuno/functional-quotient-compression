@@ -8,7 +8,7 @@ This repository studies whether low-description Mirror/View coordinates can turn
 
 Read `WORKER_START_HERE.md` before making research changes.
 
-Then read `docs/phase2/MIRROR_PARAMETER_INTEGRATION_DOCTRINE.md`. The Mirror application program is centered on the extra low-description functional parameter `m`; new external methods are primarily targets/controls for inserting and stress-testing that parameter, not replacements for the Mirror question.
+Then read `docs/phase2/MIRROR_PARAMETER_INTEGRATION_DOCTRINE.md` and `docs/phase2/MIRROR_PARAMETER_INTEGRATION_MATRIX.md`. The Mirror application program is centered on the extra low-description functional parameter `m`; new external methods are primarily targets/controls for inserting and stress-testing that parameter, not replacements for the Mirror question.
 
 ## Current active program
 
