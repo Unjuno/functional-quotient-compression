@@ -54,6 +54,58 @@ Direct/high-information P0 order:
 
 Then continue the remaining P0 entries by family and registry order.
 
+## Third research-expansion queue — representation and symmetry
+
+Added after the subnetwork/tensor/symmetry sweep. Do not interrupt active work.
+
+High-information P0:
+1. MA-301 — continuous Mirror supermask
+2. MA-307 — Mirror code before PackNet physical allocation
+3. MA-311 — Mirror task code in intrinsic subspace
+4. MA-312 — shared intrinsic basis + many Mirror task coordinates
+5. MA-314 — adaptive intrinsic-dimension allocation
+6. MA-319 — Tucker matrix-bank Mirror layer coefficients
+7. MA-320 — Tucker logical experts
+8. MA-322 — TT-core Mirror adapter bank
+9. MA-325 — tensorized embedding domain views
+10. MA-327 — factorized layer x expert Tucker address
+11. MA-330 — tensorized KV reconstruction
+12. MA-331 — Re-Basin-aligned Mirror task deltas
+13. MA-332/333 — permutation and sign/scale symmetry audits
+14. MA-338 — symmetry-normalized Mirror code learning
+15. MA-341/342 — personalized/federated Mirror codes
+16. MA-344 — PreLort nested-rank Mirror segments
+17. MA-349 — Rank-1 Bayesian Mirror posterior
+18. MA-351 — MIMO + Mirror diversity
+19. MA-355/356 — product-key Mirror addresses
+20. MA-357 — Hopfield reservoir for Mirror addresses
+21. MA-359 — ACDC/AFDF Mirror transform
+22. MA-360 — reversible Mirror block
+
+## Fourth research-expansion queue — execution structure and module banks
+
+Added after the dynamic-compute/supernet/prompt/embedding sweep. Do not interrupt active work.
+
+High-information P0:
+1. MA-361 — Mixture-of-Depths + Mirror block-role view
+2. MA-364 — early-exit Mirror readout views
+3. MA-366 — factorized depth x expert routing
+4. MA-367/368 — slimmable width/depth Mirror codes
+5. MA-369 — Once-for-All subnetwork Mirror correction
+6. MA-371/372 — MatFormer granularity and Mix'n'Match Views
+7. MA-374 — ALBERT shared layers + depth Mirror
+8. MA-375 — one-shot supernet + Mirror correction
+9. MA-379 — Mirror-compressed AdapterFusion bank
+10. MA-381 — LoRAHub over Mirror-compressed basis
+11. MA-383 — L2P prompt pool + Mirror generator
+12. MA-385 — DualPrompt expert prompts as Views
+13. MA-389 — Hash Embedding Mirror importance codes
+14. MA-391/392 — compositional embedding Mirror addresses
+15. MA-393 — adaptive-capacity embedding + View
+16. MA-395 — ALBERT factorized embedding + domain View
+17. MA-397 — product-address Mirror vocabulary
+18. MA-399 — MatFormer speculative drafter via View
+
 ## Current P0 sequence
 
 ### Family A — FFN / MoE / adapter
