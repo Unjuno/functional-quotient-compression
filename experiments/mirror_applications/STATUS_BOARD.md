@@ -26,7 +26,7 @@ MA-253 -> MA-244 -> MA-245 -> MA-247 -> MA-248 -> MA-249 -> MA-250 -> MA-251 -> 
 
 ## Active experiments
 
-None.
+- MA-241 — branch `research/ma-241-expert-tying-mirror-20261007`; directory `experiments/mirror_applications/ma-241-expert-tying-mirror/`; worker/run `Codex session 2026-10-07`; start commit `ccf4d5c4e83992d70ccdc5db6032e428f6532380`.
 
 When a worker starts an MA experiment, add:
 - MA ID;
