@@ -140,6 +140,17 @@ Research question: for a fixed behavior/task family, is the most storage-efficie
 
 This lane must report inference-time intervention cost and off-target effects in addition to stored bytes.
 
+## KV-cache transformation lane
+
+MA-691..700 test whether one physical canonical KV/cache latent can serve multiple logical Mirror Views.
+
+Key distinction:
+- final-only placement avoids cache invalidation by construction;
+- cache-transformable Views support specialists that differ while reusing one physical cache;
+- arbitrary earlier FFN changes are not automatically cache-transformable.
+
+Start with MA-691 exact lazy-cache algebra, then RoPE/MLA/YOCO integration. Only after exact mechanics pass should this lane move to nanoGPT/language and GPU kernels.
+
 ## Stage 2 — Replication gate
 
 A candidate moves beyond SCREENING only if:
