@@ -5,9 +5,9 @@
 - Base commit: `f11fb3cf08634d1a79c1b7c7366bad49b8828ff2`
 - Development complete: yes
 - Fresh/audit opened: no; unused seeds 24701–24703
-- Results committed: pending
-- Verification committed: pending
-- Registry row updated: pending
+- Results committed: yes (`62f0acf3f680ff3bbab8e0e20e194f4065f026e5`)
+- Verification committed: yes (`62f0acf3f680ff3bbab8e0e20e194f4065f026e5`)
+- Registry row updated: see status board and registry
 
 ## Decision
 
