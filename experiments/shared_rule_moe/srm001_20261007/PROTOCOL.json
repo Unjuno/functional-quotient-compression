@@ -1,10 +1,75 @@
 {
-  "experiment_id":"SRM001",
-  "date_jst":"2026-10-07",
-  "evidence_lane":"synthetic causal Transformer mechanism",
-  "task":{"domains":4,"common_rules":8,"private_rules_per_domain":[16,32,64],"input_symbols":16,"active_rules":4,"active_structure":"2 common + 2 private","rule":"independent random binary truth table","primary_target":"count 0..4","hard_negative":"parity","heldout":"1/5 common/private compositions"},
-  "transformer":{"d_model":32,"d_ff":64,"heads":4,"specialization":"final Transformer FFN only; attention shared"},
-  "mirror":{"geometry":"structured stretch+shear around shared FFN GELU","rank_sweep":[4,8,16],"selected_rank":16},
-  "storage":"actual torch serialized bytes including learned tensors and reconstruction metadata",
-  "limits":["synthetic factorized task","primary capacity results use oracle addresses","supervised router uses explicit rule tokens","not natural-language evidence"]
+  "experiment_id": "SRM001",
+  "date_jst": "2026-10-07",
+  "status": "active strongest synthetic shared-rule evidence",
+  "evidence_lane": "synthetic causal Transformer mechanism",
+  "task": {
+    "domains": 4,
+    "common_rules": 8,
+    "private_rules_per_domain": [16, 32, 64],
+    "input_symbols": 16,
+    "active_rules": 4,
+    "active_structure": "2 common + 2 private",
+    "rule": "independent random binary truth table",
+    "primary_target": "count of firing rules, classes 0..4",
+    "adversarial_targets": [
+      "four firing bits encoded as 16 classes",
+      "parity"
+    ],
+    "heldout": "deterministic 1/5 common/private compositions"
+  },
+  "transformer": {
+    "d_model": 32,
+    "d_ff": 64,
+    "heads": 4,
+    "specialization_site": "final Transformer FFN residual only",
+    "whole_transformer_mirror": false
+  },
+  "shared_rule": {
+    "active_rule_sweep": [1, 2, 4],
+    "main_active_rules": 4,
+    "low_rank_family": true
+  },
+  "mirror": {
+    "geometry": "shared W1/W2 plus per-address structured stretch+shear coordinates around GELU",
+    "rank_sweep": [4, 8, 16],
+    "selected_rank": 16
+  },
+  "routing": {
+    "stages_tested": [
+      "oracle addresses",
+      "supervised learned address router",
+      "LM-loss-only deterministic straight-through sparse router"
+    ],
+    "e2e_router_v2": {
+      "supervision": "LM loss only",
+      "input": "rule-token plus position representation",
+      "selection": "top-1 address per rule-token position; four positions compose four addresses",
+      "mirror_code_init_std": 0.01,
+      "load_balance": false
+    }
+  },
+  "training": {
+    "optimizer": "AdamW",
+    "main_lr": 0.003,
+    "batch_size": 256,
+    "main_updates": 1000,
+    "extended_standard_moe_audit_updates": 1500,
+    "ES": false,
+    "loop": false
+  },
+  "storage": "actual torch serialized bytes including learned tensors and reconstruction metadata",
+  "verification": {
+    "tests": "9/9 PASS",
+    "selected_e2e_reload": "private 16/32/64 state reload and evaluation reproduced"
+  },
+  "limits": [
+    "synthetic factorized task",
+    "count target is strongly decomposable",
+    "bitmask advantage is weaker",
+    "parity adversary failed",
+    "near-convergence capacity superiority not established",
+    "not natural-language evidence",
+    "not an LLM capacity multiplier claim"
+  ]
 }
