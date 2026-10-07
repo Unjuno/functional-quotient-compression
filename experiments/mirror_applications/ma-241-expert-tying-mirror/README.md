@@ -65,6 +65,33 @@ Measure actual `torch.save` serialized state-dict bytes, including every learned
 
 ## Results and decision
 
-Fact: see `RESULTS_CORE.csv` and `VERIFICATION.json`.  
-Interpretation: this mechanism screen measures whether the specified coordinate can recover this deliberately aligned synthetic teacher.  
-Hypothesis: broad generalization to naturally trained expert banks remains untested.
+### H — hypothesis
+
+For layer variants produced by low-description orthogonal coordinate changes, tied expert weights plus layer-specific Givens views recover most untied function quality with lower serialized storage, and beat byte-near gate/low-rank controls.
+
+### T — execution
+
+Five methods (untied, tied, gate, rank-1 residual, Mirror) trained 1,800 AdamW updates on the same generated examples per world. Common LR `0.003` was selected from two values on development world 24100 only. Fresh worlds 24101–24103 used independent teacher parameters, samples, and fixed initializations. CPU PyTorch 2.10.0, one thread, Xeon Platinum 8573C; all four experts were evaluated using soft routing. Actual `torch.save` state-dict bytes plus config JSON were counted. Each fresh result was independently replayed.
+
+### D — decision
+
+**PASS for the preregistered synthetic quality/storage mechanism gates; PROMISING at MA status level.** In all 3 fresh worlds, Mirror MSE was at most 1.10x untied and below 0.80x hard tying. Mirror payload was 24,286 bytes versus 45,681 untied (46.8% smaller) and 23,967 hard tied. At effectively matched payloads, Mirror MSE beat the gate by 26.6–66.1% and the rank-1 residual by 25.0–65.0% in the fresh worlds. All 15 quality rows replayed within `4.6e-13` absolute MSE difference.
+
+**Compute/runtime did not improve in this implementation.** The analytical MAC proxy is within 2% of simple tied controls, but measured training was 2.1–2.3x the tied condition in the replay run. Inference examples/sec were 0.43x, 0.77x, and 0.61x tied across the three worlds (median 0.61x). This likely reflects unfused coordinate operations and Python/PyTorch overhead; no optimized kernel was tested, so MACs do not describe the observed latency.
+
+### C — strongest counter-hypothesis
+
+The synthetic teacher was intentionally constructed as a shared expert pool conjugated by the same type of learned orthogonal views. This is an aligned feasibility case. The apparent Mirror advantage may disappear for independently learned Transformer experts or for less structured layer changes. The simpler controls were not granted this exact teacher transform, while the Mirror was; this asymmetry makes the quality result optimistic for the Mirror family.
+
+### U — unconfirmed
+
+- Whether naturally trained layer-specific experts have recoverable shared coordinate structure.
+- Whether a fused/compiled Givens implementation can keep the measured quality while avoiding current runtime overhead.
+- Sparse top-k routing, Transformer/nanoGPT integration, natural-language quality, near-convergence capacity, and fixed-byte frontier.
+- Whether private residual parameters are necessary when the layer differences include genuinely unrelated functions.
+
+### Evidence classification
+
+- **Fact:** the listed MSE, byte, update, MAC-proxy, throughput, and replay measurements were observed under this protocol.
+- **Interpretation:** the View recovers a deliberately aligned layer variation in this small regression task and reduces weight storage, but the current implementation loses compute/runtime Pareto position.
+- **Hypothesis:** pretrained MoE expert banks may contain similarly compact layer-coordinate structure; this experiment does not establish that.

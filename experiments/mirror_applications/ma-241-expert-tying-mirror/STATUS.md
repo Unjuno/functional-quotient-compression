@@ -1,25 +1,28 @@
 # MA-241 status
 
-- Status: SCREENING
+- Status: PROMISING (synthetic mechanism/storage gates PASS; broad application not established)
 - Branch: `research/ma-241-expert-tying-mirror-20261007`
 - Base commit: `ccf4d5c4e83992d70ccdc5db6032e428f6532380`
-- Last verified commit: pending fresh run and verification
-- Development complete: yes; selected common learning rate `0.003`
-- Fresh/audit opened: no
-- Results committed: no
-- Verification committed: no
-- Registry row updated: no
+- Last verified commit: pending result commit
+- Development complete: yes; common learning rate `0.003`
+- Fresh/audit opened: yes; worlds 24101, 24102, 24103
+- Results committed: pending
+- Verification committed: pending
+- Registry row updated: pending until verification is committed
+
+## Decision
+
+In all three deliberately coordinate-aligned synthetic worlds, the Mirror model passed the preregistered held-out MSE and storage gates and beat byte-near gate/rank-1 controls. The measured implementation was slower: replay training wall time was about 2.1–2.3x hard tying and median CPU inference throughput was 0.61x hard tying. This is not a language, nanoGPT, near-convergence capacity, or broad MoE result.
 
 ## Next action
 
-Freeze source/protocol hashes and execute worlds 24101, 24102, 24103 at 1,800 updates.
+Commit verified files, update registry/claim ledger/status board, push the dedicated MA-241 research branch, then advance to MA-253.
 
 ## Blockers
 
-None. CPU PyTorch 2.10.0+cpu installed; CUDA/GPU is absent and not required for this synthetic screen.
+None for this mechanism screen.
 
 ## Decisions / rulings
 
-- The task is a synthetic regression mechanism screen. Its teacher is deliberately conjugate under layer-specific Givens views, so any positive result is an aligned feasibility result.
-- The router evaluates all four experts with soft weights; this screen does not claim sparse MoE runtime.
-- Development selected one learning rate (`0.003`) shared across all five methods by mean development MSE. Fresh data have not been evaluated.
+- Evidence scope remains an aligned synthetic teacher; status is PROMISING rather than ADOPTED.
+- Preserve CPU implementation's measured slowdown as a compute/runtime negative result.
