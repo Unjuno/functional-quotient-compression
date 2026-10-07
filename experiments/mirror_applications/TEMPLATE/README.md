@@ -8,6 +8,16 @@ Base commit: <sha>
 
 H: <one falsifiable sentence>
 
+## Mirror insertion
+
+> **Mirror insertion:** this experiment adds `m` to <exact object/interface> so that <claimed logical variation> can be expressed without <targeted physical duplication/cost>.
+
+- Native method before adding `m`:
+- Exact insertion point for `m`:
+- Persistent or dynamic `m`:
+- Mirror resources to sweep (`d_m`, `K`, `rho`, factorization, private residual as applicable):
+- Cheapest ordinary parameter that might provide the same freedom:
+
 ## Physical-to-logical claim
 
 - Physical object being shared:
