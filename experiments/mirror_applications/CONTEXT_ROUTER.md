@@ -7,12 +7,13 @@ Purpose: give an experiment worker the **smallest sufficient context** for one M
 1. `AGENTS.md`
 2. `GOAL.md`
 3. `docs/phase2/MIRROR_PARAMETER_INTEGRATION_DOCTRINE.md`
-4. `docs/phase2/LATEST_WORKER_FINDINGS.md`
-5. `experiments/mirror_applications/STATUS_BOARD.md`
-6. exactly one selected row from `IDEA_REGISTRY.csv`
-7. only the PA headings named by that row's `prior_art_refs`
-8. `EXPERIMENT_CONTRACT.md`
-9. `TEMPLATE/`
+4. `docs/phase2/MIRROR_PARAMETER_INTEGRATION_MATRIX.md`
+5. `docs/phase2/LATEST_WORKER_FINDINGS.md`
+6. `experiments/mirror_applications/STATUS_BOARD.md`
+7. exactly one selected row from `IDEA_REGISTRY.csv`
+8. only the PA headings named by that row's `prior_art_refs`
+9. `EXPERIMENT_CONTRACT.md`
+10. `TEMPLATE/`
 
 Then load family-specific evidence below.
 
