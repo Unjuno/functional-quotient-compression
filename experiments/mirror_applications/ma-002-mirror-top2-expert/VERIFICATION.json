@@ -1,0 +1,42 @@
+{
+  "experiment_id": "MA-002",
+  "commit": "76623848ed74f3b8846ba3037961991b1e908f2c",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-002-mirror-top2-expert/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "runs_checked": 72,
+    "fresh_payload_bytes_by_method": {
+      "full_dense": 23277,
+      "full_rank2": 23466,
+      "tied": 7445,
+      "film": 8845,
+      "residual2": 8845,
+      "mirror": 7697
+    }
+  },
+  "metric_replay": {
+    "checked": true,
+    "fresh_rows_checked": 36,
+    "deterministic_fields_exact": true,
+    "max_difference": 0.0,
+    "timing_fields_excluded": [
+      "training_wall_seconds",
+      "inference_examples_per_second"
+    ]
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_freeze_manifest_hashes_checked_before_access": true,
+  "notes": [
+    "All registered fresh worlds and both teacher modes were executed.",
+    "All frozen files were hash-checked before fresh access; README was subsequently expanded with results.",
+    "The frozen PROTOCOL.json base_commit metadata has a transcription error; actual protocol parent is 4236bb640e1f52fd2abd80fb966c0588eb2ff950, documented in PROTOCOL_AMENDMENT.json.",
+    "Method-specific init seeds use the frozen engine rule base_init_seed + 100*method_index.",
+    "Aligned quality/storage gate passed 3/3; Mirror-specific storage/compute gate failed vs hard tying.",
+    "Timing and throughput are descriptive single-host CPU measurements."
+  ]
+}

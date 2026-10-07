@@ -8,22 +8,20 @@ Updated: 2026-10-07
 - P0: **34**
 - P1: **126**
 - P2: **94**
-- Current MA statuses: **219 UNTESTED, 20 PROMISING, 15 FAIL**
+- Current MA statuses: **218 UNTESTED, 21 PROMISING, 15 FAIL**
 - Historical evidence lanes SRM/TM are not MA statuses.
 
 ## Next candidate
 
-**MA-002 — next eligible P1 candidate (MoE / experts)**
+**MA-004 — next eligible P1 candidate (MoE / experts)**
 
 Why next:
 - MA-241, MA-244, MA-245, MA-247, MA-248, MA-249, MA-250, MA-251, MA-253, MA-003, MA-005, MA-009, MA-019, MA-024, MA-041, MA-048, MA-061, MA-063, MA-076, MA-079, MA-086, MA-116, MA-121, MA-129, MA-156, MA-160, MA-171, MA-173 and MA-181 are checked; Family B KV views remain paused.
-- MA-186, MA-189, MA-199, MA-208 and MA-111 are completed. MA-111 passed its aligned synthetic gate; no P0 candidate remains UNTESTED. MA-001 is now checked; MA-002 is the first remaining P1 in registry order.
+- MA-186, MA-189, MA-199, MA-208 and MA-111 are completed. MA-111 passed its aligned synthetic gate; no P0 candidate remains UNTESTED. MA-001 and MA-002 are now checked; MA-004 is the first remaining P1 in registry order.
 
 If MA-186 is blocked, use the next eligible P0 in the registry.
 
 ## Active experiments
-
-- MA-002 — `research/ma-002-mirror-top2-expert-20261007`; directory `experiments/mirror_applications/ma-002-mirror-top2-expert/`; start commit `4236bb6` (verified MA-001 base). Scoped as learned sparse top-2 composition over nonlinear experts, distinct from MA-001 top-1 and MA-005 all-expert signed mixture.
 
 
 
@@ -46,6 +44,8 @@ When a worker starts an MA experiment, add:
 - MA-247 through MA-251 are complete and verified.
 
 ## Recently completed
+
+- MA-002 — PROMISING: nonlinear sparse top-2 Givens views passed aligned quality/storage 3/3 (Mirror/untied MSE 0.223–0.403; 7,697B vs 23,277B); hard tying was 252B smaller and ~2.03x lower active proxy. Independent functions needed private/richer state; Mirror CPU inference throughput was 0.102x tying. Synthetic fixed-update result; protocol base_commit typo is disclosed. Branch `research/ma-002-mirror-top2-expert-20261007`; report `experiments/mirror_applications/ma-002-mirror-top2-expert/README.md`; result commit `RESULT_COMMIT_PENDING`.
 
 - MA-001 — PROMISING: nonlinear single-layer top-1 Givens views passed the aligned quality/storage gate in 3/3 fresh worlds (Mirror/untied MSE 0.419–0.572; 7,697B vs 23,277B). Hard tying used 252B fewer bytes, Mirror inference throughput was 0.194x hard tying, and unrelated functions needed private capacity. Synthetic fixed-update result only. Branch `research/ma-001-mirror-top1-expert-20261007`; report `experiments/mirror_applications/ma-001-nonlinear-top1-expert/README.md`; result commit `60ca242afcce0ff78b5116ce57dbe454a9dc4629`.
 
