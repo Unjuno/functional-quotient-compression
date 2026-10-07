@@ -169,6 +169,19 @@ Before implementing any MA-701..770 candidate:
 7. for dynamical/NCA candidates, report stability and rollout/recovery failure modes;
 8. treat MA-770 as a cross-domain benchmark only after representative component mechanisms have been screened.
 
+### MA-771..825 invertible/reuse/dynamics expansion
+
+Before implementing any MA-771..825 candidate:
+1. read every referenced PA item and identify whether the candidate changes physical storage, logical multiplicity, routing, state rank or only coordinates;
+2. for invertible Views, report forward quality, inverse/cycle numerical error, transform latency and any convergence/Lipschitz constraint;
+3. for MoE reuse/upcycling, report physical expert count, logical expert count, router bytes, load balance, active K, continued-pretraining compute and expert similarity/diversity;
+4. when using merge/prune results as a physical basis, compare against merge-only/prune-only and small-from-start controls;
+5. for low-rank recurrent/Koopman candidates, report latent/effective rank, stability spectrum where meaningful and long-horizon error;
+6. for Vector-Network/dynamic-atom candidates, count per-input inference iterations and active atoms;
+7. for robot/control candidates, report hardware, rollout horizon, inference latency, bytes per added skill and OOD composition;
+8. for matrix-memory candidates, do not interpret failure below a proven/known rank threshold as evidence against optimization alone;
+9. for programmable graphs, count topology/program metadata and dynamic execution cost as part of the Mirror state.
+
 ### Recurrent/depth candidates
 
 MA-247 showed that even an aligned Givens teacher can fail a fixed-budget recurrent optimization screen. Include a scalar/static-LoRA optimization control and do not infer representational impossibility from failed convergence.
