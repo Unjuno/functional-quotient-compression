@@ -1,16 +1,39 @@
 {
   "experiment_id": "MA-041",
-  "commit": "pending",
+  "commit": "pending result commit",
   "tests": {
     "command": "python -m pytest -q experiments/mirror_applications/ma-041-mirror-attention-heads/tests",
-    "passed": 0,
+    "passed": 3,
     "failed": 0
   },
-  "metric_replay": {
-    "checked": false,
-    "rows": 0
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
   },
-  "fresh_split_integrity_checked": false,
-  "fresh_worlds_opened": false,
-  "notes": []
+  "metric_replay": {
+    "checked": true,
+    "rows": 30,
+    "max_abs_delta": {
+      "attention_output_mse": 4.9274820335121206e-12,
+      "worst_head_contribution_mse": 4.86047660452904e-12,
+      "r2": 4.873657255544117e-09,
+      "serialized_bytes": 0
+    },
+    "replay_artifact": "VERIFICATION_REPLAY.json"
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_worlds_opened": true,
+  "fresh_worlds": [
+    41001,
+    41002,
+    41003
+  ],
+  "notes": [
+    "Frozen source/protocol/test/selection/dev-row hashes verified before fresh access.",
+    "Aggregate attention-output MSE and payload gates passed in all three aligned worlds; Mirror beat tying and rank-1 residual controls.",
+    "Worst per-head contribution MSE remained above ordinary MHA in all aligned worlds; per-head functional recovery is not established by aggregate quality.",
+    "Independent QKV teacher was not recovered by the shared Mirror view.",
+    "Mirror MAC proxy was lower than full MHA, but measured single-thread CPU inference throughput was about 0.53x and training wall time about 2.8x.",
+    "Synthetic fixed-update attention block only; no language or near-convergence capacity claim."
+  ]
 }
