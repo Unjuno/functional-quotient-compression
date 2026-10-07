@@ -58,4 +58,4 @@ If two consecutive candidates in a family fail for the same demonstrated structu
 
 ## Next eligible candidate
 
-No P0 candidates remain UNTESTED. MA-008 is complete PROMISING for aligned expert sharing, with no established hierarchy advantage and a hard-tie/runtime counter-frontier. MA-009 is checked FAIL. Under registry priority/order, start MA-010, the next UNTESTED candidate. MA-007 confirms token-choice Mirror quality/coverage vs expert-choice on balanced synthetic roles; hard tying remains smaller and faster.
+No P0 candidates remain UNTESTED. MA-008 is complete PROMISING for aligned expert sharing, with no established hierarchy advantage and a hard-tie/runtime counter-frontier. MA-009 is checked FAIL. MA-010 failed at development and fresh remained sealed. Under registry priority/order, start MA-011, the next UNTESTED candidate. MA-007 confirms token-choice Mirror quality/coverage vs expert-choice on balanced synthetic roles; hard tying remains smaller and faster.

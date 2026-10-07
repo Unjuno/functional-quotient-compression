@@ -5,12 +5,12 @@
 - Protocol freeze: `f3d22a8a1f8fd93fd49f0f2c91a0bd2d3ab593c3`
 - Development complete: yes; selected LR 0.01 on world 100000 only
 - Fresh/audit opened: no; gate failed, worlds remain sealed
-- Results committed: pending
-- Verification committed: pending
+- Results committed: yes (`64caf2d8e5f338a53347f6b59628fbc6ad30fced`)
+- Verification committed: yes
 
 ## Next action
 
-Replay development deterministically, finalize verification, and index the FAIL while keeping fresh worlds sealed.
+Candidate closed FAIL at development; fresh worlds remain sealed. Next candidate: MA-011.
 
 ## Blockers
 

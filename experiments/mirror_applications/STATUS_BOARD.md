@@ -8,20 +8,19 @@ Updated: 2026-10-07
 - P0: **34**
 - P1: **126**
 - P2: **94**
-- Current MA statuses: **214 UNTESTED, 25 PROMISING, 15 FAIL**
+- Current MA statuses: **213 UNTESTED, 25 PROMISING, 16 FAIL**
 - Historical evidence lanes SRM/TM are not MA statuses.
 
 ## Next candidate
 
-**MA-010 — next eligible candidate (see registry priority/order)**
+**MA-011 — next eligible candidate (MoE / experts)**
 
 Why next:
-- MA-008 completed PROMISING on aligned hierarchical expert sharing; flat-vs-hierarchical quality benefit was not established.
-- MA-009 is already checked FAIL; MA-010 is the next UNTESTED candidate under registry priority/order.
+- MA-010 failed at the pre-fresh development gate; its fresh worlds remain sealed. MA-009 is also checked FAIL. MA-011 is the next UNTESTED candidate in registry order.
 
 ## Active experiments
 
-None. MA-008 is complete; see result entry below.
+None. MA-008 and MA-010 are complete; see result entries below.
 
 When a worker starts an MA experiment, add:
 - MA ID;
@@ -42,6 +41,8 @@ When a worker starts an MA experiment, add:
 - MA-247 through MA-251 are complete and verified.
 
 ## Recently completed
+- MA-010 — FAIL at development: sequential Mirror expert composition missed both pre-fresh gates (MSE 2.13x independent; payload 0.875x vs required 0.65x). Rank-2 residual had lower aligned MSE; hard tying was smaller. Fresh stayed sealed. Branch `research/ma-010-sequential-mirror-experts-20261007`; report `experiments/mirror_applications/ma-010-sequential-mirror-experts/README.md`; result commit `64caf2d8e5f338a53347f6b59628fbc6ad30fced`.
+
 
 - MA-007 — PROMISING: balanced-role token-choice Mirror passed aligned quality/storage 3/3 with full coverage (Mirror/untied MSE 0.766–0.769; payload 0.334x). Paired expert-choice Mirror coverage was 0.818–0.827 and MSE 3.3–4.8x worse. Hard tying was 252B smaller; Mirror throughput was 0.233x tied. Branch `research/ma-007-token-choice-mirror-20261007`; report `experiments/mirror_applications/ma-007-token-choice-mirror/README.md`; result commit `877e22589af90afb3ddd0e7f422977034831bab7`.
 
