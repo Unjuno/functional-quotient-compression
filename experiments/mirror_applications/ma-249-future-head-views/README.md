@@ -16,9 +16,9 @@ PA09 (Multi-token Prediction) uses a shared trunk with separate future-token pre
 
 See `PROTOCOL.json`. Primary quality is teacher-to-student categorical KL, with top-1 distribution agreement as a second measure. Every full inference payload, including the shared frozen feature map and metadata, is serialized and charged. The Mirror variant rotates a 16D shared hidden vector with four offset-specific Givens views before applying the one shared output matrix.
 
-## Results
+## Development screen
 
-Pending development and fresh evaluations.
+On development world 24900, the selected common LR was 0.01 (pooled mean KL 0.3551 vs 0.3598 at LR 0.003). In aligned mode, Mirror KL was 1.11e-9 with 100% top-1 agreement and 4,384 serialized bytes; ordinary MTP had near-zero KL and 100% agreement at 6,497 bytes. The full-model ratio was 67.5%, meeting the amended <=75% screen. In independent-head mode, Mirror KL was 0.7246 / top-1 38.2%, while rank-1 residual was KL 0.6179 / top-1 44.0% and MTP was effectively exact. Fresh worlds 24901–24903 remain unopened at freeze.
 
 ## Decision
 

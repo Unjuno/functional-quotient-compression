@@ -13,3 +13,9 @@ def test_method_shapes_and_payloads():
 def test_teacher_modes_have_valid_distributions():
  for mode in ('aligned_shared_base','independent_offset_heads'):
   w=world(24900,mode);p=targets(torch.randn(11,16),w,mode);assert p.shape==(11,4,12);assert torch.allclose(p.sum(-1),torch.ones(11,4),atol=1e-6)
+
+def test_payload_roundtrip_preserves_exact_logits():
+ import json
+ m=HeadStudent('mirror',torch.eye(16));x=torch.randn(9,16);raw=m.serialize();cfg={'method':m.method,'offsets':m.offsets,'vocab':m.vocab,'d':m.d,'rank':m.rank};meta=json.dumps(cfg,sort_keys=True).encode()
+ obj=torch.load(io.BytesIO(raw[:-len(meta)]),weights_only=False);clone=HeadStudent(cfg['method'],torch.eye(16),cfg['offsets'],cfg['vocab'],cfg['d'],cfg['rank']);clone.load_state_dict(obj['state_dict'])
+ assert torch.equal(m(x),clone(x));assert raw==m.serialize() and len(raw)==m.serialized_payload_bytes()
