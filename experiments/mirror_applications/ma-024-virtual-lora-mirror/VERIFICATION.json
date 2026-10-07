@@ -1,16 +1,32 @@
 {
   "experiment_id": "MA-024",
-  "commit": "pending",
+  "commit": "pending result commit",
   "tests": {
     "command": "python -m pytest -q experiments/mirror_applications/ma-024-virtual-lora-mirror/tests",
-    "passed": 0,
+    "passed": 3,
     "failed": 0
   },
-  "metric_replay": {
-    "checked": false,
-    "rows": 0
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
   },
-  "fresh_split_integrity_checked": false,
+  "metric_replay": {
+    "checked": true,
+    "rows": 20,
+    "max_abs_delta": {
+      "mse": 4.4744874472257834e-10,
+      "worst_task_mse": 4.50195436485501e-10,
+      "r2": 4.860382096794069e-09,
+      "serialized_bytes": 0
+    },
+    "replay_artifact": "VERIFICATION_REPLAY.json"
+  },
+  "fresh_split_integrity_checked": true,
   "fresh_worlds_opened": false,
-  "notes": []
+  "notes": [
+    "Development world 240000 only; fresh worlds 240001\u2013240003 remained sealed because the Mirror-specific frontier was not promising.",
+    "Selected common LR 0.01 using the preregistered pooled development metric.",
+    "Mirror actual payload 2,401B vs 2,657B generic rank-2 shared-basis (only 9.6% fewer), with the same compute proxy. Generic control had much lower aligned development MSE.",
+    "Mirror used 8.60M active-compute proxy vs 4.30M for an independent rank-2 LoRA bank."
+  ]
 }
