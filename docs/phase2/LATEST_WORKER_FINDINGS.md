@@ -76,13 +76,14 @@ Boundary: all layers saw the same memory hidden state and the teacher was exactl
 
 
 
-The four results form a coherent pattern:
+The five results form a coherent pattern:
 
 1. **aligned functional variation** -> compact Views can work very well; this has now repeated across tied experts, head/role K/V views, and cross-layer K/V views;
 2. **misaligned independent variation** -> a narrow View can fail completely;
-3. **private residual capacity** helps when variation leaves the shared orbit;
-4. **placement** can determine cache/runtime properties independently of quality;
-5. **unfused structured operations** can lose wall-clock Pareto position even when analytical MAC overhead is small.
+3. **aligned variation can still fail to learn when the View is embedded inside recurrent/sequential credit assignment**;
+4. **private residual capacity** helps when variation leaves the shared orbit;
+5. **placement** can determine cache/runtime properties independently of quality;
+6. **unfused structured operations** can lose wall-clock Pareto position even when analytical MAC overhead is small.
 
 The next question is therefore not "does Mirror work?" but:
 
