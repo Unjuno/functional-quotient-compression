@@ -42,7 +42,7 @@ MA-173 completed PROMISING: learned FFT-phase views passed aligned quality/bytes
 MA-181 completed PROMISING: shared block-circulant plus charged role shifts reached 0.413x untied bytes and similar quality to independent BCA, saving 21% more bytes, but eager runtime regressed sharply; unrelated roles needed dense private state.
 
 ### Family F — Continual / optimization / distillation
-MA-186 -> MA-189 -> MA-199 -> MA-208
+MA-186 completed FAIL for registered aligned quality gate: 20B/skill vs 241B/skill rank-2 LoRA, retained prior aligned tasks 3/3, but missed relative quality in 2/3 fresh worlds; unrelated tasks needed private state. Shared hypernetwork control was degenerate and cannot establish Mirror-specific advantage. -> **MA-189 next** -> MA-199 -> MA-208
 
 ## Family handoff rule
 

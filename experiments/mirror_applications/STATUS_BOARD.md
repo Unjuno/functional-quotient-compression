@@ -8,22 +8,22 @@ Updated: 2026-10-07
 - P0: **34**
 - P1: **126**
 - P2: **94**
-- Current MA statuses: **224 UNTESTED, 17 PROMISING, 13 FAIL**
+- Current MA statuses: **223 UNTESTED, 17 PROMISING, 14 FAIL**
 - Historical evidence lanes SRM/TM are not MA statuses.
 
 ## Next candidate
 
-**MA-186 — next eligible P0 candidate (Family F)**
+**MA-189 — next eligible P0 candidate (Family F)**
 
 Why next:
 - MA-241, MA-244, MA-245, MA-247, MA-248, MA-249, MA-250, MA-251, MA-253, MA-003, MA-005, MA-009, MA-019, MA-024, MA-041, MA-048, MA-061, MA-063, MA-076, MA-079, MA-086, MA-116, MA-121, MA-129, MA-156, MA-160, MA-171, MA-173 and MA-181 are checked; Family B KV views remain paused, so MA-186 is next.
-- MA-186 begins Family F after MA-181 found a block-shift storage win over independent BCA but a large eager-runtime regression.
+- MA-186 completed with an aligned storage/retention benefit but failed the registered quality gate; MA-189 is next in Family F.
 
 If MA-186 is blocked, use the next eligible P0 in the registry.
 
 ## Active experiments
 
-- None. MA-003, MA-005, MA-009, MA-019, MA-024, MA-041, MA-048, MA-061, MA-063, MA-076, MA-079, MA-086, MA-116, MA-121, MA-129, MA-156, MA-160, MA-171, MA-173 and MA-181 have completed; Family B KV subfamily paused with diagnostic; MA-186 is next.
+None.
 
 
 When a worker starts an MA experiment, add:
@@ -45,6 +45,8 @@ When a worker starts an MA experiment, add:
 - MA-247 through MA-251 are complete and verified.
 
 ## Recently completed
+
+- MA-186 — FAIL for the registered quality gate: task-only one-angle views used 20 B/skill vs 241 B/skill rank-2 LoRA and retained aligned skills in 3/3 fresh worlds, but final MSE exceeded the 1.10x LoRA limit in 2/3. Unrelated task maps required private parameters. The shared hypernetwork control was degenerate due zero initialization, so Mirror-specific superiority is not established. Branch `research/ma-186-continual-views-20261007`; report `experiments/mirror_applications/ma-186-continual-views/README.md`; result commit `e2a54862a926f024254b1e29cc2101c5bdf826b9`.
 
 - MA-156 — PROMISING storage/quality frontier: one packed int4 base plus charged views matched independent-int4 quality in 3/3 fresh worlds with 68.0% fewer bytes; stricter hard-tie margin missed, arbitrary matrices needed private QER capacity, decode MAC proxy rose 32x. Branch `research/ma-156-compression-view-20261007`; report `experiments/mirror_applications/ma-156-compression-view/README.md`; result commit `c21413fbfd4c4280aee6103a711105f54359638c`.
 

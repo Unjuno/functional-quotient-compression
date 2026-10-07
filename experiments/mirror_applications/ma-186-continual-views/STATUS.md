@@ -3,13 +3,13 @@
 - Status: **FAIL** for the registered aligned quality gate; storage and retention subclaims passed.
 - Branch: `research/ma-186-continual-views-20261007`
 - Base commit: `480d956ef9eb84216358a72d809cc81bcd16a958`
-- Result commit: pending
+- Result commit: `e2a54862a926f024254b1e29cc2101c5bdf826b9`
 - Verification commit: pending
 - Development complete: yes
 - Fresh/audit opened: yes, after selecting LR 0.01 on development seeds
-- Results committed: pending
-- Verification committed: pending
-- Registry row updated: pending
+- Results committed: yes
+- Verification committed: yes (included in tracker commit)
+- Registry row updated: yes
 
 ## H — hypothesis
 

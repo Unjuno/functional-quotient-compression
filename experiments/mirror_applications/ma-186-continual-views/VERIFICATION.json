@@ -1,0 +1,37 @@
+{
+  "experiment_id": "MA-186",
+  "commit": "e2a54862a926f024254b1e29cc2101c5bdf826b9",
+  "tests": {
+    "command": "PYTHONPATH=experiments/mirror_applications/ma-186-continual-views/source python -m pytest -q experiments/mirror_applications/ma-186-continual-views/tests",
+    "passed": 4,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "notes": "All six methods restore identical predictions from deterministic inference payloads. Payload format includes method, dimensions, all field names, dtypes, shapes, metadata, task IDs and raw tensor bytes. Resume bytes use torch.save with optimizer state."
+  },
+  "metric_replay": {
+    "checked": true,
+    "report_records": 336,
+    "distinct_training_rows_replayed": 336,
+    "max_mse_difference": 0.0,
+    "payload_bytes_and_compute_exact": true,
+    "replay_artifact": [
+      "RESULTS_CORE.csv",
+      "DEV_LR003.csv",
+      "DEV_LR010.csv"
+    ],
+    "command": "PYTHONPATH=experiments/mirror_applications/ma-186-continual-views/source python experiments/mirror_applications/ma-186-continual-views/source/verify_replay.py experiments/mirror_applications/ma-186-continual-views/RESULTS_CORE.csv experiments/mirror_applications/ma-186-continual-views/DEV_LR003.csv experiments/mirror_applications/ma-186-continual-views/DEV_LR010.csv",
+    "notes": "All MSE, payload-byte, example/update, and active-compute fields replayed exactly. Non-deterministic wall-clock and throughput columns were excluded from exact replay."
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_worlds_opened": true,
+  "notes": [
+    "Development seeds 18601-18602 selected LR 0.01 before fresh seeds 18611-18613 were run; no fresh-based tuning occurred.",
+    "Inference storage and aligned retention gates passed, but the registered <=1.10x LoRA quality gate failed in two of three fresh worlds.",
+    "Unrelated task maps were not recovered by one-angle views and required private weights in the independent-full control.",
+    "The shared hypernetwork control was degenerate because both low-rank factors were zero-initialized; Mirror-specific superiority is not established.",
+    "Fixed-update synthetic linear evidence only; no capacity or natural continual-learning claim."
+  ]
+}
