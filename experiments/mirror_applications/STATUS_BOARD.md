@@ -45,7 +45,7 @@ When a worker starts an MA experiment, add:
 
 ## Recently completed
 
-- MA-007 — PROMISING: balanced-role token-choice Mirror passed aligned quality/storage 3/3 with full coverage (Mirror/untied MSE 0.766–0.769; payload 0.334x). Paired expert-choice Mirror coverage was 0.818–0.827 and MSE 3.3–4.8x worse. Hard tying was 252B smaller; Mirror throughput was 0.233x tied. Branch `research/ma-007-token-choice-mirror-20261007`; report `experiments/mirror_applications/ma-007-token-choice-mirror/README.md`; result commit `RESULT_COMMIT_PENDING`.
+- MA-007 — PROMISING: balanced-role token-choice Mirror passed aligned quality/storage 3/3 with full coverage (Mirror/untied MSE 0.766–0.769; payload 0.334x). Paired expert-choice Mirror coverage was 0.818–0.827 and MSE 3.3–4.8x worse. Hard tying was 252B smaller; Mirror throughput was 0.233x tied. Branch `research/ma-007-token-choice-mirror-20261007`; report `experiments/mirror_applications/ma-007-token-choice-mirror/README.md`; result commit `877e22589af90afb3ddd0e7f422977034831bab7`.
 
 - MA-006 — PROMISING for the registered expert-choice sharing gate: Mirror passed 3/3 aligned quality/coverage/storage at 7,761B vs 23,341B full expert-choice. Token-choice had 100% coverage and 2.50–3.42x lower MSE; no-route expert-choice tokens and eager runtime limit usefulness. Mirror-specific FiLM/residual margin failed. Branch `research/ma-006-expert-choice-mirror-20261007`; report `experiments/mirror_applications/ma-006-expert-choice-mirror/README.md`; result commit `572e245bee17ffe430863a4827baa21da809fb82`.
 
