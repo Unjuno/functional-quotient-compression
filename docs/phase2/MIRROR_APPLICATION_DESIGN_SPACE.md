@@ -49,7 +49,14 @@ The registry treats any repeated object as a candidate:
 - latent dynamical / Koopman operators and rank-1 weight atoms;
 - robot-policy skills and motor-option adapters;
 - matrix-memory rank budgets;
-- programmable graph topology / executable architecture state.
+- programmable graph topology / executable architecture state;
+- KAN edge functions and shared parent nonlinearities;
+- tangent/NTK/Fisher-geometric task coordinates;
+- causal engram memory traces;
+- plasticity rules and writable fast-weight state;
+- learned low-loss model-manifold coordinates;
+- collective admission/communication protocols;
+- module-reuse and recombination-rule structure.
 
 ## Four mechanism classes
 
