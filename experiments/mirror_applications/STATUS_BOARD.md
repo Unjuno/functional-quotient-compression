@@ -8,19 +8,19 @@ Updated: 2026-10-07
 - P0: **34**
 - P1: **126**
 - P2: **94**
-- Current MA statuses: **209 UNTESTED, 27 PROMISING, 18 FAIL**
+- Current MA statuses: **208 UNTESTED, 28 PROMISING, 18 FAIL**
 - Historical evidence lanes SRM/TM are not MA statuses.
 
 ## Next candidate
 
-**MA-015 — next eligible candidate (MoE / experts)**
+**MA-016 — next eligible candidate (MoE / experts)**
 
 Why next:
-- MA-010 and MA-011 failed at pre-fresh development gates. MA-012 passed its aligned residual-view gate 3/3 but CPU throughput regressed and independent roles needed private capacity. MA-013 passed aligned quality/storage vs independent, but FiLM dominated the Mirror frontier. MA-014 extended MA-241 to four layers and top-1 sparse execution; aligned quality/storage passed 3/3, with CPU slowdown. MA-015 is next UNTESTED in registry order.
+- MA-010 and MA-011 failed at pre-fresh development gates. MA-012 passed its aligned residual-view gate 3/3 but CPU throughput regressed and independent roles needed private capacity. MA-013 passed aligned quality/storage vs independent, but FiLM dominated the Mirror frontier. MA-014 extended MA-241 to four layers and top-1 sparse execution; aligned quality/storage passed 3/3, with CPU slowdown. MA-015 passed domain×expert factorization in 3/3 aligned fresh worlds, with CPU slowdown and an independent-function boundary. MA-016 is next UNTESTED in registry order.
 
 ## Active experiments
 
-None. MA-008 and MA-010 through MA-014 are complete; see result entries below.
+None. MA-008 and MA-010 through MA-015 are complete; see result entries below.
 
 When a worker starts an MA experiment, add:
 - MA ID;
@@ -41,6 +41,8 @@ When a worker starts an MA experiment, add:
 - MA-247 through MA-251 are complete and verified.
 
 ## Recently completed
+- MA-015 — PROMISING: three-domain × four-expert factorized Mirror views passed aligned quality/storage 3/3 at 18,727B vs 51,060B independent (0.367x); MSE 0.503–0.621x full. It used 2.8% more bytes than hard tying and reduced MSE 37.5–60.6%; rank-2 residual used more bytes for slightly higher MSE. CPU throughput was 0.55x tied. Independent functions needed private state. Branch `research/ma-015-domain-factorized-experts-20261007`; report `experiments/mirror_applications/ma-015-domain-factorized-experts/README.md`; result commit `65e006d1f4b2fac64c4b89d89437e36f481f6ea9`.
+
 - MA-014 — PROMISING: four-layer oracle top-1 Mirror views passed aligned quality/storage 3/3 at 6,372B vs 18,289B independent (0.348x); MSE was 0.384–0.508x full. It used 7.5% more bytes than hard tying and had 86.7–92.6% lower MSE, but CPU throughput was 0.63x tied. Extension of MA-241; natural MoE untested. Branch `research/ma-014-layer-specific-expert-bank-20261007`; report `experiments/mirror_applications/ma-014-layer-specific-expert-bank/README.md`; result commit `bf54b738a1e88abd0165f1fc889b1639b262d05b`.
 
 - MA-013 — FAIL for Mirror-specific frontier: aligned quality/storage vs independent passed 3/3 (0.384x payload), but multiplicative Mirror used 18.3% more bytes than hard tying; FiLM used 382B fewer and had lower MSE in all three fresh worlds. Independent functions needed private state. Branch `research/ma-013-multiplicative-mirror-moe-20261007`; report `experiments/mirror_applications/ma-013-multiplicative-mirror-moe/README.md`; result commit `e0c7831f0547de1bb824cbe403f01bb9138e0b4d`.

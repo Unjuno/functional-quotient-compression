@@ -5,12 +5,12 @@
 - Protocol freeze: `14facb3c072228129945d925200a3a4eacc95a77`
 - Development complete: yes; selected LR 0.003 on world 150000
 - Fresh/audit opened: yes; 3 worlds completed and replayed exactly
-- Results committed: pending
-- Verification committed: pending
+- Results committed: yes (`65e006d1f4b2fac64c4b89d89437e36f481f6ea9`)
+- Verification committed: yes
 
 ## Next action
 
-Finalize result verification, update trackers, and push this branch; next candidate MA-016.
+Candidate complete PROMISING; next candidate MA-016.
 
 ## Blockers
 
