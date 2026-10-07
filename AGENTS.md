@@ -31,3 +31,8 @@ SRM and TM reports are evidence, not the current task queue. Use them when refer
 ## Output discipline
 
 Every experiment needs a protocol, result table, verification record, and a scoped conclusion stating what is and is not established.
+
+
+## Concurrent registry edits
+
+Before adding a new MA candidate, re-read `IDEA_REGISTRY.csv` from the current branch and allocate IDs starting at **max existing MA ID + 1**. Never reserve an ID from memory or an older checkout. After writing, re-read the registry and verify zero duplicate IDs. If concurrent additions collide, preserve both hypotheses and renumber the later addition rather than deleting either one.
