@@ -45,7 +45,7 @@ When a worker starts an MA experiment, add:
 
 ## Recently completed
 
-- MA-002 — PROMISING: nonlinear sparse top-2 Givens views passed aligned quality/storage 3/3 (Mirror/untied MSE 0.223–0.403; 7,697B vs 23,277B); hard tying was 252B smaller and ~2.03x lower active proxy. Independent functions needed private/richer state; Mirror CPU inference throughput was 0.102x tying. Synthetic fixed-update result; protocol base_commit typo is disclosed. Branch `research/ma-002-mirror-top2-expert-20261007`; report `experiments/mirror_applications/ma-002-mirror-top2-expert/README.md`; result commit `RESULT_COMMIT_PENDING`.
+- MA-002 — PROMISING: nonlinear sparse top-2 Givens views passed aligned quality/storage 3/3 (Mirror/untied MSE 0.223–0.403; 7,697B vs 23,277B); hard tying was 252B smaller and ~2.03x lower active proxy. Independent functions needed private/richer state; Mirror CPU inference throughput was 0.102x tying. Synthetic fixed-update result; protocol base_commit typo is disclosed. Branch `research/ma-002-mirror-top2-expert-20261007`; report `experiments/mirror_applications/ma-002-mirror-top2-expert/README.md`; result commit `2b7f7fe736393ef3702daa7995e0951d54e4de12`.
 
 - MA-001 — PROMISING: nonlinear single-layer top-1 Givens views passed the aligned quality/storage gate in 3/3 fresh worlds (Mirror/untied MSE 0.419–0.572; 7,697B vs 23,277B). Hard tying used 252B fewer bytes, Mirror inference throughput was 0.194x hard tying, and unrelated functions needed private capacity. Synthetic fixed-update result only. Branch `research/ma-001-mirror-top1-expert-20261007`; report `experiments/mirror_applications/ma-001-nonlinear-top1-expert/README.md`; result commit `60ca242afcce0ff78b5116ce57dbe454a9dc4629`.
 
