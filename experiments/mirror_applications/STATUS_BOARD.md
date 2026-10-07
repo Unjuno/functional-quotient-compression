@@ -8,22 +8,22 @@ Updated: 2026-10-07
 - P0: **34**
 - P1: **126**
 - P2: **94**
-- Current MA statuses: **228 UNTESTED, 13 PROMISING, 13 FAIL**
+- Current MA statuses: **227 UNTESTED, 14 PROMISING, 13 FAIL**
 - Historical evidence lanes SRM/TM are not MA statuses.
 
 ## Next candidate
 
-**MA-160 — next Family E compression candidate**
+**MA-171 — next eligible Family E compression candidate**
 
 Why next:
-- MA-241, MA-244, MA-245, MA-247, MA-248, MA-249, MA-250, MA-251, MA-253, MA-003, MA-005, MA-009, MA-019, MA-024, MA-041, MA-048, MA-061, MA-063, MA-076, MA-079, MA-086, MA-116, MA-121, MA-129 and MA-156 are checked; Family B KV views remain paused, so MA-160 is next.
-- MA-160 continues compression/holographic work; follow its registered storage and reconstruction controls.
+- MA-241, MA-244, MA-245, MA-247, MA-248, MA-249, MA-250, MA-251, MA-253, MA-003, MA-005, MA-009, MA-019, MA-024, MA-041, MA-048, MA-061, MA-063, MA-076, MA-079, MA-086, MA-116, MA-121, MA-129, MA-156 and MA-160 are checked; Family B KV views remain paused, so MA-171 is next.
+- MA-171 continues compression/holographic work after MA-160 found a narrow aligned residual-storage tradeoff but missed its strict fresh quality gate.
 
-If MA-160 is blocked, use the next eligible P0 in the registry.
+If MA-171 is blocked, use the next eligible P0 in the registry.
 
 ## Active experiments
 
-- None. MA-003, MA-005, MA-009, MA-019, MA-024, MA-041, MA-048, MA-061, MA-063, MA-076, MA-079, MA-086, MA-116, MA-121, MA-129 and MA-156 have completed; Family B KV subfamily paused with diagnostic; MA-160 is next.
+- None. MA-003, MA-005, MA-009, MA-019, MA-024, MA-041, MA-048, MA-061, MA-063, MA-076, MA-079, MA-086, MA-116, MA-121, MA-129, MA-156 and MA-160 have completed; Family B KV subfamily paused with diagnostic; MA-171 is next.
 
 
 When a worker starts an MA experiment, add:
@@ -84,3 +84,5 @@ None.
 ## Status policy
 
 The authoritative scientific status is the registry row. This board is an operational cache. If they disagree, fix the board from the registry, not the other way around.
+
+- MA-160 — PROMISING, with strict fresh quality gate narrowly missed: shared residual Mirror used 393B vs 607B independent int4 (0.647x) and averaged 1.035x fresh activation MSE, but seed 16011 was 1.106x against a 1.10x limit. Residual-free Mirror averaged 3.37x MSE; independent role matrices needed private state. Branch `research/ma-160-compression-view-20261007`; report `experiments/mirror_applications/ma-160-compression-view/README.md`; result commit `269ee343d78f7791cb7b0a272834da05ea3cc486`.

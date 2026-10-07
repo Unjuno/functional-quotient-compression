@@ -3,12 +3,12 @@
 - Status: PROMISING (preregistered fresh quality gate missed narrowly)
 - Branch: `research/ma-160-compression-view-20261007`
 - Base commit: `5ec66a61c6007b4bc5bb3e5902701880a47d3594`
-- Last verified commit: pending
+- Last verified commit: `269ee343d78f7791cb7b0a272834da05ea3cc486`
 - Development complete: yes
 - Fresh/audit opened: yes, only after both development seeds passed
-- Results committed: no
-- Verification committed: no
-- Registry row updated: pending
+- Results committed: yes (`269ee343d78f7791cb7b0a272834da05ea3cc486`)
+- Verification committed: yes (`269ee343d78f7791cb7b0a272834da05ea3cc486`)
+- Registry row updated: yes in tracker commit
 
 ## Next action
 
