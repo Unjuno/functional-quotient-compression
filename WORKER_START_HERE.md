@@ -182,6 +182,19 @@ Before implementing any MA-771..825 candidate:
 8. for matrix-memory candidates, do not interpret failure below a proven/known rank threshold as evidence against optimization alone;
 9. for programmable graphs, count topology/program metadata and dynamic execution cost as part of the Mirror state.
 
+### MA-826..875 edge/tangent/adaptive-state expansion
+
+Before implementing any MA-826..875 candidate:
+1. KAN candidates must count stored basis/function parameters and actual function-evaluation runtime; coefficient count alone is insufficient.
+2. NTK/tangent candidates must measure the relevant linearization or kernel approximation error before interpreting representational failure.
+3. AI-engram candidates must retain causal specificity, reactivation, sufficiency and necessity checks; weight similarity is not enough.
+4. online-state candidates must separate persistent bytes, writable state bytes, write FLOPs and reset/restore cost.
+5. DeltaNet/fast-memory candidates must include long-context retrieval and state-drift tests.
+6. learned-subspace/manifold candidates must count all endpoints, basis vectors and Bezier/control parameters as physical storage.
+7. Mesh candidates must preserve the observation-only boundary and include communication latency/message bytes.
+8. structural-composition candidates require held-out module/rule combinations and sample-efficiency measurements.
+9. stable-synapse controls are mandatory when a claimed fast-weight benefit might be achievable by gain/context modulation alone.
+
 ### Recurrent/depth candidates
 
 MA-247 showed that even an aligned Givens teacher can fail a fixed-budget recurrent optimization screen. Include a scalar/static-LoRA optimization control and do not infer representational impossibility from failed convergence.
