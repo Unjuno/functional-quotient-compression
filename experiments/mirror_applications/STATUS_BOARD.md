@@ -8,19 +8,19 @@ Updated: 2026-10-07
 - P0: **34**
 - P1: **126**
 - P2: **94**
-- Current MA statuses: **240 UNTESTED, 1 SCREENING, 8 PROMISING, 5 FAIL**
+- Current MA statuses: **240 UNTESTED, 8 PROMISING, 6 FAIL**
 - Historical evidence lanes SRM/TM are not MA statuses.
 
 ## Next candidate
 
-**MA-024 — rank-adaptive Mirror expert basis**
+**MA-041 — one QKV to multiple Mirror heads**
 
 Why next:
-- MA-241, MA-244, MA-245, MA-247, MA-248, MA-249, MA-250, MA-251, MA-253, MA-003, MA-005, MA-009 and MA-019 are checked; MA-024 is the next executable P0 candidate.
-- its closest controls should compare rank-adaptive shared bases against ordinary LoRA/low-rank controls (PA01–PA06).
+- MA-241, MA-244, MA-245, MA-247, MA-248, MA-249, MA-250, MA-251, MA-253, MA-003, MA-005, MA-009, MA-019 and MA-024 are checked; MA-041 is the next executable P0 candidate.
+- its closest controls should compare ordinary MHA, projection sharing, and generated-view controls (PA04; PA07).
 
-If MA-024 is blocked, use this order:
-MA-041 -> MA-048 -> MA-061 -> MA-063.
+If MA-041 is blocked, use this order:
+MA-048 -> MA-061 -> MA-063.
 
 ## Active experiments
 
@@ -41,6 +41,7 @@ When a worker starts an MA experiment, add:
 - MA-005 — PROMISING: signed Givens expert mixture passed aligned quality/storage 3/3 with 41.1% fewer serialized bytes; arbitrary experts required private capacity; current CPU runtime regressed sharply. Branch `research/ma-005-signed-mirror-mixture-20261007`; report `experiments/mirror_applications/ma-005-signed-mirror-mixture/README.md`; result commit `de68ec4c440e54fc4870734e9bbd1fdc99515628`.
 - MA-009 — FAIL: one private rare-role expert plus common Mirror views used 0.774x full-MoE bytes and beat shared-only controls, but missed full-MoE relative MSE in 2/3 fresh worlds; arbitrary experts needed more capacity and CPU runtime regressed. Branch `research/ma-009-rare-private-mirror-expert-20261007`; report `experiments/mirror_applications/ma-009-rare-private-mirror-expert/README.md`; result commit `41020ba0aa45d9337fec68f7f772d8d5076534a6`.
 - MA-019 — FAIL at development: one-angle Mirror missed the full-MoE quality/storage gates; generic rank-2 basis used only 64B more and fit the aligned teacher much better at the same compute proxy. Fresh worlds were not opened. Branch `research/ma-019-mirror-coefficient-basis-20261007`; report `experiments/mirror_applications/ma-019-mirror-coefficient-basis/README.md`; result commit `b880e34edb8210ad318091be2e17e170ef09c5a0`.
+- MA-024 — FAIL at development: one-angle virtual LoRA used 2,401B vs 2,657B generic shared basis, but generic basis had much lower MSE with the same compute proxy; fresh worlds not opened. Branch `research/ma-024-virtual-lora-mirror-20261007`; report `experiments/mirror_applications/ma-024-virtual-lora-mirror/README.md`; result commit `4a41b4af333d181bd873f2f79751177f8c1c9a95`.
 - MA-247 through MA-251 are complete and verified.
 
 ## Recently completed

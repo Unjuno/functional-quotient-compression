@@ -4,9 +4,9 @@
 - Branch: `research/ma-024-virtual-lora-mirror-20261007`
 - Development complete: yes; common-LR selection chose 0.01
 - Fresh/audit opened: no
-- Results committed: pending
-- Verification committed: pending
-- Registry row updated: pending
+- Results committed: yes (`4a41b4af333d181bd873f2f79751177f8c1c9a95`)
+- Verification committed: yes (`4a41b4af333d181bd873f2f79751177f8c1c9a95`)
+- Registry row updated: yes (tracker commit pending)
 
 ## H / T / D / C / U
 
