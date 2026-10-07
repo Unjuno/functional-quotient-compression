@@ -1,5 +1,8 @@
 # Research Roadmap
 
+> **Current Phase II work has its own active gated roadmap:** [PHASE2_SPARSE_RULE_ROADMAP.md](PHASE2_SPARSE_RULE_ROADMAP.md).  
+> The G0–G7 roadmap below is retained as the broader/historical FQC program and should not be read as the immediate SRM execution order.
+
 The roadmap is gated. A phase does not count as complete because more experiments were run; it is complete only when its exit criteria are satisfied.
 
 ## G0 — Canonical repository reconstruction
