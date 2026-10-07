@@ -5,16 +5,33 @@ This repository contains several historical research lanes. Do not infer the cur
 ## 1. Read in this order
 
 1. `docs/phase2/CURRENT_STATE_2026-10-07.md`
-2. `docs/phase2/MIRROR_APPLICATION_DESIGN_SPACE.md`
-3. `docs/phase2/LATEST_WORKER_FINDINGS.md`
-4. `experiments/mirror_applications/CONTEXT_ROUTER.md`
-5. `docs/phase2/MIRROR_APPLICATION_PRIOR_ART.md`
-6. `experiments/mirror_applications/IDEA_REGISTRY.csv`
-7. `experiments/mirror_applications/FIRST_QUEUE.md`
-8. `experiments/mirror_applications/EXPERIMENT_CONTRACT.md`
-9. `roadmap/MIRROR_APPLICATION_ROADMAP.md`
+2. `docs/phase2/MIRROR_PARAMETER_INTEGRATION_DOCTRINE.md`
+3. `docs/phase2/MIRROR_APPLICATION_DESIGN_SPACE.md`
+4. `docs/phase2/LATEST_WORKER_FINDINGS.md`
+5. `experiments/mirror_applications/CONTEXT_ROUTER.md`
+6. `docs/phase2/MIRROR_APPLICATION_PRIOR_ART.md`
+7. `experiments/mirror_applications/IDEA_REGISTRY.csv`
+8. `experiments/mirror_applications/FIRST_QUEUE.md`
+9. `experiments/mirror_applications/EXPERIMENT_CONTRACT.md`
+10. `roadmap/MIRROR_APPLICATION_ROADMAP.md`
 
 Read historical reports only when the selected MA experiment points to them.
+
+## 1.5 Core Mirror parameter rule
+
+The application program is explicitly about stress-testing the added low-description functional parameter `m` across established methods.
+
+For every selected MA candidate, preserve the native method as a baseline and identify the smallest interface where
+
+`F(x; theta) -> F(x; theta, m)`
+
+is introduced.
+
+Do not let generic manifold discovery, model merging, PEFT, MoE compression, or another adjacent method replace this question. Those methods are controls, insertion targets, or ways to discover a better parameterization of `m`.
+
+Every experiment README must include:
+
+> **Mirror insertion:** this experiment adds `m` to [exact object/interface] so that [claimed logical variation] can be expressed without [targeted physical duplication/cost].
 
 ## 2. Select exactly one MA ID
 
