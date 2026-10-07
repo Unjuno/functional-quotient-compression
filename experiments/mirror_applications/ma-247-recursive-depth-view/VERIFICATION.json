@@ -1,0 +1,26 @@
+{
+  "experiment_id": "MA-247",
+  "commit": "pending result commit",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-247-recursive-depth-view/tests",
+    "passed": 4,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": false,
+    "byte_exact": true,
+    "all_12_dev_payload_counts_replayed": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "rows": 12,
+    "max_difference": 4.502604886158501e-13
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_worlds_opened": false,
+  "notes": [
+    "Development-screen FAIL; fresh worlds 24701-24703 were not opened by the preregistered stop rule.",
+    "All recorded development MSE values replayed within 4.51e-13; all serialized payload byte counts matched exactly.",
+    "CPU-only synthetic endpoint-regression screen; no capacity, natural-language, or fresh-world claim."
+  ]
+}

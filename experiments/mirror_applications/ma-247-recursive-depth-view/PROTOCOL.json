@@ -1,0 +1,23 @@
+{
+  "experiment_id":"MA-247",
+  "title":"recursive shared block + Mirror depth modulation",
+  "status":"SCREENING",
+  "evidence_lane":"MECHANISM/STORAGE/RUNTIME",
+  "base_commit":"f11fb3cf08634d1a79c1b7c7366bad49b8828ff2",
+  "prior_art_refs":["PA06"],
+  "hypothesis":"A tied nonlinear block with one learned Givens coordinate per depth step recovers step-specific function composition with fewer serialized bytes, beating hard tying and same-byte scalar step gates; compare with static and input-conditioned generated LoRA.",
+  "physical_object":"one shared nonlinear recurrent block",
+  "mirror_coordinate":"one Givens angle per depth step on hidden and block output",
+  "logical_multiplicity":"four layer-specific logical operations from one physical block",
+  "teacher":"four residual recurrent steps using a common block conjugated by independent per-step Givens rotations",
+  "controls":["four untied blocks","hard-tied block","tied plus scalar step gate","tied plus static rank-1 per-step LoRA","tied plus input-conditioned generated rank-1 LoRA","tied plus Mirror step views"],
+  "task":{"input_dim":8,"hidden_dim":16,"depth":4,"metric":"final-state MSE"},
+  "development":{"worlds_or_seeds":[{"world":24700,"init_seed":247000}],"selection_metric":"mean development MSE across all methods","learning_rate_candidates":[0.003,0.01]},
+  "fresh":{"worlds_or_seeds":[{"world":24701,"init_seed":247001},{"world":24702,"init_seed":247002},{"world":24703,"init_seed":247003}],"locked_before_access":true},
+  "training":{"updates":1200,"batch_size":64,"optimizer":"AdamW","weight_decay":0.0001,"common_residual_gates":true},
+  "storage":{"authority":"actual serialized inference payload bytes","serialization":"torch.save state_dict plus deterministic config JSON","paid_objects":["shared/untied block matrices","all Mirror coordinates","LoRA bases and per-step coefficients/controllers","residual gates","metadata"]},
+  "compute":{"report_examples":true,"report_updates":true,"report_active_MAC_proxy":true,"report_wall_time":true,"report_inference_throughput":true,"cpu_threads":1},
+  "success_gate":"Every fresh world: Mirror MSE <=1.10x untied, <=0.10x hard-tied, <=0.90x scalar gate, and Mirror payload <=0.75x untied. Compare static and generated LoRA; if either is within10% MSE at equal/lower bytes, not Mirror-specific.",
+  "failure_gate":"Mirror misses the quality gate or static/generated LoRA or same-byte gate matches within10% MSE at equal/lower bytes.",
+  "boundaries":["synthetic endpoint regression","teacher deliberately aligned to per-step Givens views","no transformer/natural-language test","no fixed-byte near-convergence capacity frontier","hypernetwork is a small linear coefficient controller, not full Ouroboros reproduction"]
+}
