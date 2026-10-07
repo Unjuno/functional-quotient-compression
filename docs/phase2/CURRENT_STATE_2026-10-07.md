@@ -88,6 +88,7 @@ Primary scientific adoption gate: **FAIL**. Pruning hardware/byte mechanics: ver
 
 - [Mirror application design space](MIRROR_APPLICATION_DESIGN_SPACE.md)
 - [Mirror application prior-art map](MIRROR_APPLICATION_PRIOR_ART.md)
+- [Mirror KV cache reuse design](MIRROR_KV_CACHE_REUSE.md)
 - [Mirror application research notes](MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-07.md)
 - [Autonomous worker goal](../../GOAL.md)
 - [Mirror application roadmap](../../roadmap/MIRROR_APPLICATION_ROADMAP.md)
