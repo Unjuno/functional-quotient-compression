@@ -8,22 +8,22 @@ Updated: 2026-10-07
 - P0: **34**
 - P1: **126**
 - P2: **94**
-- Current MA statuses: **233 UNTESTED, 11 PROMISING, 10 FAIL**
+- Current MA statuses: **231 UNTESTED, 11 PROMISING, 12 FAIL**
 - Historical evidence lanes SRM/TM are not MA statuses.
 
 ## Next candidate
 
-**MA-116 — next Family C candidate**
+**MA-121 — next Family D temporal candidate**
 
 Why next:
-- MA-241, MA-244, MA-245, MA-247, MA-248, MA-249, MA-250, MA-251, MA-253, MA-003, MA-005, MA-009, MA-019, MA-024, MA-041, MA-048, MA-061, MA-063, MA-076, MA-079 and MA-086 are checked; Family B KV views are paused after the diagnostic, so MA-116 is next.
-- MA-116 tests Mirror-RoPE; compare against ordinary tied embeddings and RoPE variants (PA13).
+- MA-241, MA-244, MA-245, MA-247, MA-248, MA-249, MA-250, MA-251, MA-253, MA-003, MA-005, MA-009, MA-019, MA-024, MA-041, MA-048, MA-061, MA-063, MA-076, MA-079, MA-086 and MA-116 are checked; Family B KV views remain paused, so MA-121 is next.
+- MA-121 begins the temporal family; use the specific controls and prior art named in its registry row.
 
-If MA-116 is blocked, use the next eligible P0 in the registry.
+If MA-121 is blocked, use the next eligible P0 in the registry.
 
 ## Active experiments
 
-- None. MA-003, MA-005, MA-009, MA-019, MA-024, MA-041, MA-048, MA-061, MA-063, MA-076, MA-079 and MA-086 have completed; Family B KV subfamily paused with diagnostic; MA-116 is next.
+- None. MA-003, MA-005, MA-009, MA-019, MA-024, MA-041, MA-048, MA-061, MA-063, MA-076, MA-079, MA-086 and MA-116 have completed; Family B KV subfamily paused with diagnostic; MA-121 is next.
 
 
 When a worker starts an MA experiment, add:
@@ -45,6 +45,8 @@ When a worker starts an MA experiment, add:
 - MA-247 through MA-251 are complete and verified.
 
 ## Recently completed
+
+- MA-116 — FAIL at development: Mirror-RoPE beat scalar scaling on synthetic held-out positions, but independent frequencies were more accurate and had a smaller actual serialized payload (2,021B vs 2,209B). Fresh stayed sealed. Branch `research/ma-116-mirror-rope-20261007`; report `experiments/mirror_applications/ma-116-mirror-rope/README.md`; result commit pending.
 
 - MA-086 — FAIL at development storage gate: group-size-2 Mirror matched aligned quality but used 0.777x untied bytes vs required ≤0.65; group-size 4 compressed more but quality fell. Fresh stayed sealed. Branch `research/ma-086-depth-address-20261007`; report `experiments/mirror_applications/ma-086-depth-address/README.md`; result commit `155231548d0c202ec1d23b708206452434a7c2b7`.
 

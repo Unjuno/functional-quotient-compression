@@ -1,0 +1,27 @@
+{
+  "experiment_id": "MA-116",
+  "commit": "pending result commit",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-116-mirror-rope/tests",
+    "passed": 2,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "rows": 8,
+    "max_difference": 4.16e-11,
+    "replay_artifact": "VERIFICATION_REPLAY.json"
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_worlds_opened": false,
+  "notes": [
+    "Fresh worlds 11611-11613 remained sealed after Mirror failed the development comparison to independent frequencies and the actual serialized-byte gate.",
+    "Base frequency configuration and method metadata were included in actual torch.save payload bytes.",
+    "Fixed RoPE has zero train examples and updates; trainable methods use 800 Adam updates per development seed.",
+    "PA13 is adjacent attention-binding prior art, not direct RoPE prior art."
+  ]
+}

@@ -29,7 +29,7 @@ MA-063 (paused after MA-061/063 diagnostic; redesign required before more KV-vie
 
 ### Family C — Depth / position
 MA-076 and MA-079 completed PROMISING; MA-086 failed the storage gate. Independent layer functions did not benefit from shared views.
-MA-116
+MA-116 completed FAIL at the development gate.
 
 ### Family D — Temporal
 MA-121 -> MA-129
