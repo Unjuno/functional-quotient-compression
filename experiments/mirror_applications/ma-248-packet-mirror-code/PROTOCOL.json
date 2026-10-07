@@ -119,6 +119,12 @@
       "stage": "development only; no fresh worlds opened",
       "reason": "The initial one-block development pass produced low joint packet accuracy across methods. In one causal block, later phase slots can read earlier raw auxiliary-slot inputs but cannot read a contextualized earlier phase representation containing its context/history. The registered task requires that cross-slot path.",
       "change": "Use two causal slot blocks for all methods, matching the depth of the adjacent TM001 period decoder; retain P=4, methods, data, learning-rate candidates and 1,200-update budget. Preserve the initial development rows as architecture_v1; re-run development as architecture_v2 and use only v2 for selection and fresh evaluation."
+    },
+    {
+      "date": "2026-10-07",
+      "stage": "development only; no fresh worlds opened",
+      "reason": "A methods audit found that the runner used method-specific minibatch streams, adding avoidable data-order noise to the control comparison.",
+      "change": "Keep method-specific initialization seeds but use identical minibatch samples across all methods and learning rates within each world/mode. Retain two causal blocks, same task, learning-rate candidates, and update budget. Preserve v1 and v2 development rows; only the matched-minibatch v3 development run selects the rate and may open fresh worlds."
     }
   ]
 }

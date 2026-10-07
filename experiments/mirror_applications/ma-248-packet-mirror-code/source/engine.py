@@ -29,8 +29,8 @@ def evaluate(model,batch,table):
         for j in range(P):
             y=pred[:,j];valid&=(table[0,rule,prev]==y)|(table[1,rule,prev]==y);prev=y
     return {"token_nll":nll,"token_accuracy":tok,"joint_packet_accuracy":joint,"valid_path_rate":float(valid.float().mean())}
-def fit(method,mode,table,seed,lr,updates=UPDATES):
-    codes=2 if mode=="correlated_two_packet_codes" else 16;torch.manual_seed(seed);model=PacketDecoder(method,P,codes,STATES,RULES);opt=torch.optim.AdamW(model.parameters(),lr=lr,weight_decay=1e-4);g=torch.Generator().manual_seed(seed+29);start_time=time.perf_counter();model.train()
+def fit(method,mode,table,seed,data_seed,lr,updates=UPDATES):
+    codes=2 if mode=="correlated_two_packet_codes" else 16;torch.manual_seed(seed);model=PacketDecoder(method,P,codes,STATES,RULES);opt=torch.optim.AdamW(model.parameters(),lr=lr,weight_decay=1e-4);g=torch.Generator().manual_seed(data_seed+29);start_time=time.perf_counter();model.train()
     for _ in range(updates):
         batch=sample(table,64,mode,int(torch.randint(2**31-1,(1,),generator=g)));r,s,b,c,y=batch;logits=model(r,s,b,c);loss=F.cross_entropy(logits.reshape(-1,STATES),y.reshape(-1));opt.zero_grad(set_to_none=True);loss.backward();opt.step()
     return model,time.perf_counter()-start_time
@@ -58,10 +58,10 @@ def main():
             val=sample(table,4096,mode,init+101);trainseed=init+211+(0 if mode==modes[0] else 10000)
             for lr in lrs:
                 for i,method in enumerate(methods):
-                    model,elapsed=fit(method,mode,table,trainseed+i*313+int(lr*10000),lr);m=evaluate(model,val,table);ips=throughput(model,val)
+                    model,elapsed=fit(method,mode,table,trainseed+i*313+int(lr*10000),trainseed,lr);m=evaluate(model,val,table);ips=throughput(model,val)
                     if a.phase=='dev':scores[lr].append(m['token_nll'])
                     ab=address_bits(mode,method);payload=model.serialized_payload_bytes()
-                    rows.append({"condition":a.phase,"world_or_seed":world,"mode":mode,"method":method,"serialized_model_bytes":payload,"packet_address_bits":ab,"combined_cost_bytes":f"{payload+ab/8:.3f}","train_tokens_or_examples":UPDATES*64*P,"optimizer_updates":UPDATES,"active_compute_proxy":compute_proxy(P,model.d,UPDATES*64,method),"wall_time_s":round(elapsed,6),"inference_examples_per_s":round(ips,3),"primary_metric":"token_nll","primary_value":f"{m['token_nll']:.10g}","secondary_metric":"joint_packet_accuracy;token_accuracy;valid_path_rate","secondary_value":f"{m['joint_packet_accuracy']:.8g};{m['token_accuracy']:.8g};{m['valid_path_rate']:.8g}","status_note":f"lr={lr}; exact source entropy bits; deterministic config charged; architecture_v2=two causal slot blocks"})
+                    rows.append({"condition":a.phase,"world_or_seed":world,"mode":mode,"method":method,"serialized_model_bytes":payload,"packet_address_bits":ab,"combined_cost_bytes":f"{payload+ab/8:.3f}","train_tokens_or_examples":UPDATES*64*P,"optimizer_updates":UPDATES,"active_compute_proxy":compute_proxy(P,model.d,UPDATES*64,method),"wall_time_s":round(elapsed,6),"inference_examples_per_s":round(ips,3),"primary_metric":"token_nll","primary_value":f"{m['token_nll']:.10g}","secondary_metric":"joint_packet_accuracy;token_accuracy;valid_path_rate","secondary_value":f"{m['joint_packet_accuracy']:.8g};{m['token_accuracy']:.8g};{m['valid_path_rate']:.8g}","status_note":f"lr={lr}; exact source entropy bits; deterministic config charged; architecture_v3=two causal slot blocks; shared minibatches across methods/lrs"})
                     print(a.phase,world,mode,method,lr,m,"bytes",payload,"secs",round(elapsed,2),flush=True)
     if a.phase=='dev':
         best=min(scores,key=lambda lr:sum(scores[lr])/len(scores[lr]));(ROOT/'DEV_SELECTION.json').write_text(json.dumps({"experiment_id":"MA-248","selected_common_lr":best,"mean_token_nll_by_lr":{str(k):sum(v)/len(v) for k,v in scores.items()},"fresh_worlds":[24801,24802,24803],"updates":UPDATES},indent=2)+'\n')
