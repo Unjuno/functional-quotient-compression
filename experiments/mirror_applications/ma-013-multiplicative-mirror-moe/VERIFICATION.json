@@ -1,0 +1,53 @@
+{
+  "decision": "FAIL_FULL_SUCCESS_GATE_MIRROR_SPECIFIC_FRONTIER_DOMINATED",
+  "deterministic_fields_exact": true,
+  "development_rows": 30,
+  "experiment_id": "MA-013",
+  "fresh_config_freeze_commit": "06e332cc28c3d721fbfd1eee23929285f3216b75",
+  "fresh_freeze_hashes_checked_before_access": true,
+  "fresh_freeze_hashes_matched_commit": true,
+  "fresh_mirror_to_film_mse_ratio": [
+    1.045,
+    34.153,
+    48.342
+  ],
+  "fresh_mirror_to_independent_mse_ratio": [
+    0.24433789974663067,
+    0.22064659414096155,
+    0.27394940679495877
+  ],
+  "fresh_payload_ratio_to_independent": 0.384396,
+  "fresh_rows": 30,
+  "fresh_rows_replayed": 30,
+  "hard_tie_payload_ratio_to_mirror": 0.845165,
+  "mirror_bytes_over_hard_tie": 0.18297,
+  "notes": [
+    "Aligned quality/storage versus independent passed in all three fresh worlds.",
+    "Mirror-specific value was not established against direct role-FiLM.",
+    "Independent functions required richer/private state.",
+    "Synthetic fixed-update result, not capacity or language evidence."
+  ],
+  "protocol_freeze_commit": "87c64f041dd0a994071051a9a43cf36b1afcb933",
+  "selected_learning_rate": 0.01,
+  "serialization": {
+    "authority": "actual torch.save state_dict plus deterministic config bytes",
+    "bytes_by_method": {
+      "film": 6619,
+      "independent": 18214,
+      "multiplicative": 7001,
+      "rank2": 7832,
+      "tied": 5919
+    },
+    "payload_bytes_recorded_all_rows": true
+  },
+  "simple_control": "FiLM had lower MSE and lower bytes in 3/3 worlds; it was within 10% quality in one and substantially better in two. Thus registered <=10%-quality-near-match FAIL clause is 1/3, while overall success gate fails hard-tie byte margin and observed Mirror Pareto frontier is dominated.",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-013-multiplicative-mirror-moe/tests",
+    "failed": 0,
+    "passed": 3
+  },
+  "timing_fields_excluded": [
+    "train_wall_seconds",
+    "inference_examples_per_second"
+  ]
+}

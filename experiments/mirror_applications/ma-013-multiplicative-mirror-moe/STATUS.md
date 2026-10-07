@@ -1,16 +1,16 @@
 # MA-013 status
 
-- Status: SCREENING
+- Status: FAIL (Mirror-specific control gate)
 - Branch: `research/ma-013-multiplicative-mirror-moe-20261007`
 - Protocol freeze: `87c64f041dd0a994071051a9a43cf36b1afcb933`
 - Development complete: yes; selected LR 0.01 on world 130000
-- Fresh/audit opened: no; frozen settings passed access gate
-- Results committed: no
-- Verification committed: no
+- Fresh/audit opened: yes; 3 worlds complete and replayed exactly
+- Results committed: pending
+- Verification committed: pending
 
 ## Next action
 
-Run fresh worlds 130001–130003 at frozen LR 0.01.
+Index FAIL: role-FiLM dominated in 2/3 worlds despite Mirror beating the independent storage/quality reference.
 
 ## Blockers
 

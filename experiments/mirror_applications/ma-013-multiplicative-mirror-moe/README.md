@@ -1,7 +1,7 @@
 # MA-013 — multiplicative Mirror-MoE
 
-Status: SCREENING; development gate passed and fresh settings frozen.  
-Branch: `research/ma-013-multiplicative-mirror-moe-20261007`.  
+Status: **FAIL** for Mirror-specific benefit; aligned quality/storage passed 3/3.
+Branch: `research/ma-013-multiplicative-mirror-moe-20261007`.
 Base commit: `62a801584be2cf504e5142b9e7689f6ee44b5ea5`.
 
 ## H — Hypothesis
@@ -18,22 +18,22 @@ Four balanced oracle-routed 16→32→16 GELU experts. The aligned teacher uses 
 - Aligned multiplicative Mirror MSE was 1.29e-5 vs 4.67e-4 independent (0.028×); actual payload was 7,001B vs 18,214B (0.384×). The preregistered pre-fresh access gate passed.
 - Role-FiLM had MSE 7.93e-5 at 6,619B; multiplicative Mirror used 382B more payload and had 6.1× lower MSE. Rank-2 residual MSE was 4.23e-4 at 7,832B. Hard tie used 5,919B but had 67× Mirror's MSE.
 - On independent functions, multiplicative Mirror MSE was 7.66e-3 vs 4.23e-4 for full independent weights; unrelated roles remain a private-function boundary.
-- Fresh worlds 130001–130003 are frozen at LR 0.01. Do not tune from them.
+- Fresh worlds 130001–130003 used frozen LR 0.01. Deterministic fields replayed exactly in all 30 fresh rows.
 
 ## D — Decision
 
-Fresh results pending; development is not capacity evidence.
+Fresh aligned quality/storage passed in 3/3 worlds, with multiplicative Mirror MSE 0.221–0.274x independent and actual payload 7,001B vs 18,214B (0.384x). The full success gate failed: Mirror uses 18.3% more bytes than hard tying, above the 10% allowance. FiLM is 4.5% lower MSE with fewer bytes in one world and 34–48x lower MSE with fewer bytes in the other two, so the observed quality/storage frontier is dominated by the simpler control. This is a FAIL for the candidate and does not establish Mirror-specific value. Independent teacher functions also required private weights.
 
 ## C — Strongest counter-hypothesis
 
-The teacher is generated from this exact factorized multiplicative form. Ordinary FiLM or a small residual may match its behavior with simpler parameters.
+Role-FiLM is a simpler direct hidden gate. It matched or beat the Mirror candidate while storing fewer bytes in two worlds, showing that factorized multiplication may not be needed for the observed useful quality/storage effect.
 
 ## U — Unconfirmed
 
-Fresh replication, learned routing, larger experts, near-convergence capacity, optimized inference, and language quality are untested.
+Learned routing, larger experts, near-convergence capacity, optimized inference, and language quality remain untested.
 
 ## Fact / interpretation / hypothesis
 
-- **Fact:** the development aligned quality/storage gate passed; multiplicative Mirror also beat role-FiLM MSE at 5.8% more payload.
-- **Interpretation:** factorized hidden modulation captured the deliberately aligned teacher compactly, but independent experts were much better on unrelated functions.
-- **Hypothesis:** product coordinates could capture useful multiplicative interactions among related learned roles.
+- **Fact:** fresh quality/storage versus independent passed 3/3; FiLM had lower MSE and bytes in all three worlds. Median Mirror CPU throughput was 1.62M examples/s vs 2.08M for FiLM; median training wall was 1.26s vs 0.94s. Independent functions had much lower full-model MSE than Mirror.
+- **Interpretation:** the factorized scale model is a compact aligned representation, but its gains are not Mirror-specific against role-FiLM.
+- **Hypothesis:** this multiplication could still be useful if it improves a broader task where role-FiLM does not match quality.
