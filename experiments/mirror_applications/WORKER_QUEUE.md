@@ -16,12 +16,11 @@ Do not skip to a visually interesting P1/P2 idea while an executable P0 remains,
 
 These were added after the 2026-10-07 prior-art sweep and should be considered before duplicating a simpler P0 experiment:
 
-1. MA-245 — MLKV shared cache + per-layer Mirror KV views
-2. MA-247 — recursive shared block + Mirror depth modulation
-3. MA-248 — packet random variable as a Mirror code
-4. MA-249 — one physical future head + Mirror future-offset views
-5. MA-250 — MAP/Hadamard binding as Mirror expert address
-6. MA-251 — factorized expert x depth Mirror coordinate
+1. MA-247 — recursive shared block + Mirror depth modulation
+2. MA-248 — packet random variable as a Mirror code
+3. MA-249 — one physical future head + Mirror future-offset views
+4. MA-250 — MAP/Hadamard binding as Mirror expert address
+5. MA-251 — factorized expert x depth Mirror coordinate
 
 These have strong adjacent prior art, so the experiment must implement the cited non-Mirror method as a control.
 
