@@ -1,10 +1,24 @@
 {
   "experiment_id": "MA-251",
   "commit": "pending",
-  "tests": {"command": "python -m pytest -q experiments/mirror_applications/ma-251-expert-depth-factorization/tests", "passed": null, "failed": null},
-  "serialization": {"roundtrip_checked": false, "byte_exact": false},
-  "metric_replay": {"checked": false, "rows": 0, "max_difference": null},
-  "fresh_split_integrity_checked": false,
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-251-expert-depth-factorization/tests",
+    "passed": 4,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": false,
+    "rows": 0,
+    "max_difference": null
+  },
+  "fresh_split_integrity_checked": true,
   "fresh_worlds_opened": false,
-  "notes": []
+  "notes": [
+    "LR 0.01 selected only on dev world 25100 using both task modes and all methods.",
+    "Factorized Mirror and Cartesian table were near-exact on the deliberately factorized teacher; independent pairs remain difficult for shared methods."
+  ]
 }
