@@ -8,19 +8,19 @@ Updated: 2026-10-07
 - P0: **34**
 - P1: **126**
 - P2: **94**
-- Current MA statuses: **243 UNTESTED, 1 SCREENING, 7 PROMISING, 3 FAIL**
+- Current MA statuses: **243 UNTESTED, 8 PROMISING, 3 FAIL**
 - Historical evidence lanes SRM/TM are not MA statuses.
 
 ## Next candidate
 
-**MA-005 — signed Mirror expert mixture**
+**MA-009 — shared Mirror experts + rare private expert**
 
 Why next:
-- MA-241, MA-244, MA-245, MA-247, MA-248, MA-249, MA-250, MA-251, MA-253 and MA-003 are checked; MA-005 is the next executable P0 candidate.
-- its closest controls should compare signed expert mixtures with standard expert mixtures (PA01–PA03).
+- MA-241, MA-244, MA-245, MA-247, MA-248, MA-249, MA-250, MA-251, MA-253, MA-003 and MA-005 are checked; MA-009 is the next executable P0 candidate.
+- its closest controls should compare rare private experts against shared expert views and standard full MoE (PA01–PA03).
 
-If MA-005 is blocked, use this order:
-MA-009 -> MA-019 -> MA-024.
+If MA-009 is blocked, use this order:
+MA-019 -> MA-024.
 
 ## Active experiments
 
@@ -38,6 +38,7 @@ When a worker starts an MA experiment, add:
 - start commit.
 
 - MA-003 — PROMISING: aligned synthetic top-1 Mirror experts passed routed-MSE gate in 2/3 fresh worlds with 35.8% fewer serialized bytes; independent experts needed private capacity; CPU inference was slower. Branch `research/ma-003-mirror-topk-expert-20261007`; report `experiments/mirror_applications/ma-003-mirror-topk-expert/README.md`; result commit `e50a20fe4c000ffb3113f9d3e6564b3efacd4395`.
+- MA-005 — PROMISING: signed Givens expert mixture passed aligned quality/storage 3/3 with 41.1% fewer serialized bytes; arbitrary experts required private capacity; current CPU runtime regressed sharply. Branch `research/ma-005-signed-mirror-mixture-20261007`; report `experiments/mirror_applications/ma-005-signed-mirror-mixture/README.md`; result commit `de68ec4c440e54fc4870734e9bbd1fdc99515628`.
 - MA-247 through MA-251 are complete and verified.
 
 ## Recently completed

@@ -5,9 +5,9 @@
 - Base commit: `e50a20fe4c000ffb3113f9d3e6564b3efacd4395`
 - Development complete: yes; selected LR 0.01
 - Fresh/audit opened: yes; worlds 50001–50003
-- Results committed: pending
-- Verification committed: pending
-- Registry row updated: pending
+- Results committed: yes (`de68ec4c440e54fc4870734e9bbd1fdc99515628`)
+- Verification committed: yes (`de68ec4c440e54fc4870734e9bbd1fdc99515628`)
+- Registry row updated: yes (tracker commit pending)
 
 ## H / T / D / C / U
 

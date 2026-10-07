@@ -22,7 +22,7 @@ These have strong adjacent prior art, so the experiment must implement the cited
 ## Current P0 sequence
 
 ### Family A — FFN / MoE / adapter
-MA-005 -> MA-009 -> MA-019 -> MA-024
+MA-009 -> MA-019 -> MA-024
 
 ### Family B — Attention / KV
 MA-041 -> MA-048 -> MA-061 -> MA-063
