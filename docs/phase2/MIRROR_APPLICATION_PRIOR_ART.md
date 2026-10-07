@@ -1397,7 +1397,7 @@ Instruction-tunes language models to process/generate multiple causally evolving
 
 **Mirror implication:** stream identity is another logical-role coordinate. Shared projections/FFNs can be tested with compact stream Views while preserving stream-specific state and causal boundaries.
 
-## PA49 — Activated LoRA cache-compatible adapter switching
+## PA154 — Activated LoRA cache-compatible adapter switching
 
 **Activated LoRA: Fine-tuned LLMs for Intrinsics**  
 https://arxiv.org/abs/2504.12397
@@ -1406,7 +1406,7 @@ aLoRA adapts Q/K/V and other weights only after an invocation point so prefix st
 
 **Mirror implication:** aLoRA obtains cache compatibility by restricting *when* adaptation is active. A cache-compatible Mirror can instead ask whether a known transform lets an already-different logical view reuse the same physical cache.
 
-## PA50 — Standard-LoRA shared-prefix KV reuse
+## PA155 — Standard-LoRA shared-prefix KV reuse
 
 **Shared-Prefix KV Reuse Across Standard LoRA Adapters: Quality and Serving Tradeoffs**  
 https://arxiv.org/abs/2609.17109
@@ -1415,7 +1415,7 @@ Directly reuses a base-model prefix cache across already-trained standard LoRA s
 
 **Mirror implication:** exact algebraic cache compatibility would be stronger than approximate direct reuse: compare quality, physical storage aliasing, TTFT and completion latency.
 
-## PA51 — LazyAttention / deferred positional encoding
+## PA156 — LazyAttention / deferred positional encoding
 
 **LazyAttention: Efficient Retrieval-Augmented Generation with Deferred Positional Encoding**  
 https://arxiv.org/abs/2606.04302
@@ -1424,7 +1424,7 @@ Keeps a position-agnostic physical KV representation and applies positional enco
 
 **Mirror implication:** this is a direct systems analogue of deferred Mirror transforms. If a View can be moved from cached K/V to query/output algebra, one physical cache can serve multiple logical Views zero-copy.
 
-## PA52 — Cross-model linear KV translation
+## PA157 — Cross-model linear KV translation
 
 **Cross-Model KV Cache Transfer in LLM Families: A Closed-Form Linear Mapping for Prefill Reuse**  
 https://arxiv.org/abs/2608.03893
@@ -1433,7 +1433,7 @@ Fits per-head linear/ridge mappings from source-model caches to target-model cac
 
 **Mirror implication:** generic models need an approximate learned mapper; Mirror architectures can be designed so the source->View map is known analytically and exact by construction.
 
-## PA53 — CacheBridge
+## PA158 — CacheBridge
 
 **CacheBridge: Efficient Cross-Model KV Cache Transfer**  
 https://arxiv.org/abs/2609.00891
@@ -1442,7 +1442,7 @@ Improves cross-model affine cache transfer with architecture-indexed source supp
 
 **Mirror implication:** attention-aligned error, not raw KV reconstruction, is the correct metric when exact algebra is unavailable. It is a strong fallback control for approximate Mirror cache translators.
 
-## PA54 — Cache-to-Cache semantic projection
+## PA159 — Cache-to-Cache semantic projection
 
 **Cache-to-Cache: Direct Semantic Communication Between Large Language Models**  
 https://arxiv.org/abs/2510.03215
@@ -1451,7 +1451,7 @@ Learns to project and fuse one model's KV cache into another model's cache space
 
 **Mirror implication:** learned cache projection is already viable across heterogeneous models. Mirror-specific work should exploit known shared geometry to make the translator much smaller, exact, or both.
 
-## PA55 — KVEraser direct KV-state editing
+## PA160 — KVEraser direct KV-state editing
 
 **KVEraser: Learning to Steer KV Cache for Efficient Localized Context Erasing**  
 https://arxiv.org/abs/2606.17034
@@ -1460,7 +1460,7 @@ Learns steering KV states that locally edit a processed context while leaving th
 
 **Mirror implication:** cache-space edits can change downstream behavior without exact full-cache reconstruction. This supports a second approximate lane when exact View algebra is too restrictive.
 
-## PA56 — Multi-head Latent Attention
+## PA161 — Multi-head Latent Attention
 
 **DeepSeek-V2: A Strong, Economical, and Efficient Mixture-of-Experts Language Model**  
 https://arxiv.org/abs/2405.04434
@@ -1469,7 +1469,7 @@ MLA caches one low-dimensional joint KV latent and absorbs key/value up-projecti
 
 **Mirror implication:** a canonical latent cache plus View-conditioned up-projections is a natural Mirror generalization: cache one physical latent, derive many logical K/V functions on read.
 
-## PA57 — YOCO shared global cache
+## PA162 — YOCO shared global cache
 
 **You Only Cache Once: Decoder-Decoder Architectures for Language Models**  
 https://arxiv.org/abs/2405.05254
@@ -1478,7 +1478,7 @@ A self-decoder constructs one global KV cache and multiple cross-decoder layers 
 
 **Mirror implication:** instead of hard-reusing identical K/V across layers, layer-specific Mirror read transforms may recover logical layer diversity while preserving the one-cache property.
 
-## PA58 — CLSA shared cache and shared routing
+## PA163 — CLSA shared cache and shared routing
 
 **You Only Index Once: Cross-Layer Sparse Attention with Shared Routing**  
 https://arxiv.org/abs/2606.06467
