@@ -100,5 +100,18 @@
     "not a general claim that one packet code can replace independent auxiliaries",
     "fixed-update mechanism screen rather than near-convergence capacity study",
     "PTP random auxiliary is discretized to the teacher's binary branch choice"
+  ],
+  "model": {
+    "hidden_dim": 16,
+    "attention_heads": 4,
+    "causal_slot_blocks": 2
+  },
+  "protocol_amendments": [
+    {
+      "date": "2026-10-07",
+      "stage": "development only; no fresh worlds opened",
+      "reason": "The initial one-block development pass produced low joint packet accuracy across methods. In one causal block, later phase slots can read earlier raw auxiliary-slot inputs but cannot read a contextualized earlier phase representation containing its context/history. The registered task requires that cross-slot path.",
+      "change": "Use two causal slot blocks for all methods, matching the depth of the adjacent TM001 period decoder; retain P=4, methods, data, learning-rate candidates and 1,200-update budget. Preserve the initial development rows as architecture_v1; re-run development as architecture_v2 and use only v2 for selection and fresh evaluation."
+    }
   ]
 }

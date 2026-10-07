@@ -23,7 +23,7 @@ class PacketDecoder(nn.Module):
         if method=="untied":self.phase_code=nn.Parameter(torch.randn(period,codes,d)*.02)
         if method=="scalar_gate":self.phase_gate=nn.Parameter(torch.ones(period))
         if method=="mirror":self.angles=nn.Parameter(torch.zeros(period,d//2))
-        self.blocks=nn.ModuleList([SlotBlock(d,4)]);self.norm=nn.LayerNorm(d);self.head=nn.Linear(d,states)
+        self.blocks=nn.ModuleList([SlotBlock(d,4) for _ in range(2)]);self.norm=nn.LayerNorm(d);self.head=nn.Linear(d,states)
     def _phase_inputs(self,bits,code):
         b=bits.shape[0]
         if self.method=="ptp":z=self.ptp_bit(bits.long())
@@ -44,7 +44,7 @@ class PacketDecoder(nn.Module):
         return self.head(self.norm(x[:,2:]))
     def parameter_count(self):return sum(p.numel() for p in self.parameters())
     def serialized_payload_bytes(self):
-        buf=io.BytesIO();cfg={"method":self.method,"period":self.period,"codes":self.codes,"states":self.states,"rules":self.rules,"d":self.d}
+        buf=io.BytesIO();cfg={"method":self.method,"period":self.period,"codes":self.codes,"states":self.states,"rules":self.rules,"d":self.d,"blocks":len(self.blocks)}
         torch.save({"state_dict":self.state_dict(),"config":cfg},buf);return buf.tell()+len(json.dumps(cfg,sort_keys=True).encode())
 
 def compute_proxy(period,d,examples,method):

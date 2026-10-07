@@ -20,9 +20,13 @@ The teacher predicts four state transitions from 16 states and 8 rules using two
 
 See `PROTOCOL.json`. The key measurements are exact joint packet accuracy, token NLL, valid path, serialized model bytes, random-address bits per packet, combined bytes, compute proxy and CPU wall time. Random address cost is kept separate from model payload to show which frontier improves.
 
+## Development amendment
+
+The initial dev-only implementation used one causal slot block. Its joint packet accuracy was low for every method (for example, correlated-mode PTP 24.4% at LR 0.01, Mirror 25.2%, and independent-mode PTP 0.8%). Inspection showed that with one block, a later slot cannot attend to an earlier slot representation that already incorporates its context/history. Before any fresh evaluation, the protocol was amended to two causal slot blocks, matching the adjacent TM001 decoder depth. The original 24 rows remain in `RESULTS_CORE.csv` tagged `architecture_v1`; development is being repeated under `architecture_v2`, and only v2 will select LR or access fresh worlds. This amendment changes model depth only, retaining the task, methods, seeds, rates, and update budget.
+
 ## Results
 
-Do not write conclusions until development selection, source freeze, fresh evaluation, and metric replay are complete.
+Final conclusions follow after v2 development selection, source freeze, fresh evaluation, and metric replay.
 
 ## Decision
 
