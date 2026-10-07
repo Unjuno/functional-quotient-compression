@@ -1,6 +1,6 @@
 # Original first validation queue
 
-This file preserves the original 25 P0 seed candidates. The registry has since expanded to 500 candidates and 159 P0 entries through literature research. **WORKER_QUEUE.md and STATUS_BOARD.md are operationally authoritative.** Priority may change from development evidence, never from fresh/audit evidence.
+This file preserves the original 25 P0 seed candidates. The registry has since expanded to 550 candidates and 183 P0 entries through literature research. **WORKER_QUEUE.md and STATUS_BOARD.md are operationally authoritative.** Priority may change from development evidence, never from fresh/audit evidence.
 
 1. MA-003 — Mirror top-k expert
 2. MA-005 — signed Mirror expert mixture
