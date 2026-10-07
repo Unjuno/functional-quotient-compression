@@ -98,7 +98,7 @@ These do not preempt an already-started worker experiment. They enter the queue 
 
 ## Expansion lanes discovered by research
 
-The backlog now contains **770 candidates**. Recent literature sweeps add four new strategic lanes:
+The backlog now contains **825 candidates**. The literature program now spans the following strategic lanes:
 
 ### A. Representation selection
 Masks/supermasks and intrinsic subspaces ask whether a task needs a new weight transform at all, or only a compact selector/coordinate.
@@ -175,6 +175,30 @@ Research question: can control type x depth x timestep x target-backbone structu
 Neural Cellular Automata repeatedly apply one local rule, while goal conditioning, attention and online self-organisation make that rule/task state dynamic.
 
 Research question: can a small transient Mirror state select stable global behaviors and adapt online without duplicating the local update network?
+
+### O. Invertible coordinate charts
+
+RealNVP/i-ResNet/INNSteer expose exact or near-exact coordinate changes where a small latent intervention becomes a nonlinear functional change in the original representation.
+
+Research question: when does a shared nonlinear invertible chart beat linear/orthogonal/low-rank Views after inverse cost and cycle error are counted?
+
+### P. Global expert budgets and logical recovery
+
+MoRE/UniPool decouple experts from strict layer ownership, while M-SMoE/REAP/upcycling expose mergeable, prunable and expandable expert structure.
+
+Research question: can the system learn an overcomplete expert population, compact it to fewer physical experts, then recover only behaviorally necessary distinctions through Mirror codes?
+
+### Q. Compositional latent dynamics and control
+
+Low-rank recurrent theories, Vector Networks, Koopman models and motor option banks all expose reusable computation atoms with task/state-dependent coefficients.
+
+Research question: can persistent task coordinates and fast context coordinates be factorized while preserving held-out composition and long-horizon stability?
+
+### R. Programmable architecture and task-matched state rank
+
+Matrix-memory results expose task-dependent rank requirements; programmable neural graphs expose connectivity itself as an executable state.
+
+Research question: can Mirror allocate state rank and graph structure only when demanded, without hiding storage in metadata or dynamic program synthesis?
 
 ## KV-cache transformation lane
 
