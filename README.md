@@ -14,18 +14,21 @@ Historical source and negative results are preserved rather than rewritten into 
 ## Start here
 
 1. [Current Phase II state](docs/phase2/CURRENT_STATE_2026-10-07.md)
-2. [Latest result — SRM003 causal discovery and pruning](docs/phase2/SRM003_CAUSAL_DISCOVERY.md)
-3. [Runnable SRM003 source, tests, protocol and counts](experiments/shared_rule_moe/srm003_20261007/README.md)
-4. [Architecture hypothesis — Sparse Compositional Shared-Rule Transformer](docs/phase2/ARCHITECTURE_SPARSE_SHARED_RULE_MOE.md)
-5. [Experiment registry](docs/phase2/EXPERIMENT_REGISTRY.md)
-6. [Active roadmap](roadmap/PHASE2_SPARSE_RULE_ROADMAP.md)
-7. [Known negative results](docs/KNOWN_NEGATIVE_RESULTS.md)
+2. [Mirror application design space — 240 candidate applications](docs/phase2/MIRROR_APPLICATION_DESIGN_SPACE.md)
+3. [Mirror application validation roadmap](roadmap/MIRROR_APPLICATION_ROADMAP.md)
+4. [Latest result — TM001 parallel period token mixing](docs/phase2/TM001_PARALLEL_PERIOD_TOKEN_MIXING.md)
+5. [Runnable SRM003 source, tests, protocol and counts](experiments/shared_rule_moe/srm003_20261007/README.md)
+6. [Architecture hypothesis — Sparse Compositional Shared-Rule Transformer](docs/phase2/ARCHITECTURE_SPARSE_SHARED_RULE_MOE.md)
+7. [Experiment registry](docs/phase2/EXPERIMENT_REGISTRY.md)
+8. [Known negative results](docs/KNOWN_NEGATIVE_RESULTS.md)
 
 ## Latest result and current question
 
 SRM001 showed strong fixed-update signals on explicitly factorized synthetic tasks. SRM002 learned ordered operators efficiently when the execution order was supplied by the model's control flow. SRM003 removed oracle routing/private masks in a conventional two-layer causal decoder: all 24 atomic rules could be retained exactly, yet direct unseen two-rule composition remained about 13–19% even after 6,400 updates. Calling the same trained model twice with its own predicted intermediate state gave 100%, but costs two forwards and supplies the execution procedure externally.
 
 This is evidence for separating **rule storage**, **rule selection**, and **ordered execution**. It is not a natural-language capacity or same-compute result.
+
+The project now has a second explicit lane: systematically apply the Mirror/View coordinate to existing multiplicities (experts, adapters, heads, KV, layers, packet slots, quantizers, memory, etc.) and measure whether physical duplication can be replaced by low-description logical multiplicity. The machine-readable registry currently contains 240 MA-xxx candidates.
 
 The research hypothesis remains:
 
@@ -60,7 +63,14 @@ experiments/
   shared_rule_moe/
     srm001_20261007/
     srm002_20261007/
-    srm003_20261007/               runnable new causal experiment
+    srm003_20261007/
+  token_mixing/
+    tm001_20261007/
+  mirror_applications/
+    IDEA_REGISTRY.csv             240 candidate applications
+    FIRST_QUEUE.md                first 25 P0 candidates
+third_party/
+  nanoGPT/                       compact shared A/B baseline
 roadmap/
   PHASE2_SPARSE_RULE_ROADMAP.md
   ROADMAP.md                      broader historical FQC roadmap
