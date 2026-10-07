@@ -13,15 +13,17 @@ Updated: 2026-10-07
 
 ## Next candidate
 
-**MA-004 — next eligible P1 candidate (MoE / experts)**
+**MA-004 — active P1 candidate (MoE / experts)**
 
 Why next:
 - MA-241, MA-244, MA-245, MA-247, MA-248, MA-249, MA-250, MA-251, MA-253, MA-003, MA-005, MA-009, MA-019, MA-024, MA-041, MA-048, MA-061, MA-063, MA-076, MA-079, MA-086, MA-116, MA-121, MA-129, MA-156, MA-160, MA-171, MA-173 and MA-181 are checked; Family B KV views remain paused.
-- MA-186, MA-189, MA-199, MA-208 and MA-111 are completed. MA-111 passed its aligned synthetic gate; no P0 candidate remains UNTESTED. MA-001 and MA-002 are now checked; MA-004 is the first remaining P1 in registry order.
+- MA-186, MA-189, MA-199, MA-208 and MA-111 are completed. MA-111 passed its aligned synthetic gate; no P0 candidate remains UNTESTED. MA-001 and MA-002 are checked. MA-004 is the active next registry candidate.
 
 If MA-186 is blocked, use the next eligible P0 in the registry.
 
 ## Active experiments
+
+- MA-004 — `research/ma-004-soft-mirror-expert-mixture-20261007`; directory `experiments/mirror_applications/ma-004-soft-mirror-expert-mixture/`; start commit `7ff5430` (verified MA-002 base). Scoped as a learned dense softmax mixture over all nonlinear experts, distinct from MA-002 sparse top-2 and MA-005 deterministic signed mixture.
 
 
 
