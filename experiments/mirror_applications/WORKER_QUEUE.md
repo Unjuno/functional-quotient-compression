@@ -155,6 +155,27 @@ High-information P0:
 19. MA-494 — error-correcting Mirror expert IDs
 20. MA-498 — learned code-distance regularization
 
+## Seventh research-expansion queue — representation-space functional coordinates
+
+Added after the ReFT/function-vector/sparse-feature sweep. Do not interrupt active work.
+
+High-information P0:
+1. MA-501/502 — shared LoReFT basis + Mirror task codes
+2. MA-503 — factorized layer x task representation code
+3. MA-504 — token-conditioned Mirror ReFT
+4. MA-508 — activation-addition Mirror basis
+5. MA-510/511 — conditional condition x behavior View codes
+6. MA-516/517 — compressed/composed Function Vectors
+7. MA-520/521 — FV-to-code distillation and demonstration-to-code compilation
+8. MA-526/527/528 — SAE feature atoms and Mirror transforms
+9. MA-530 — SAE feature logical experts
+10. MA-533/534 — transcoder feature experts / logical MLPs
+11. MA-539/540 — packet/executor use of function vectors
+12. MA-545 — function-vector MoE without weight experts
+13. MA-546 — representation-space symmetry audit
+14. MA-547 — RoseLoRA versus Mirror edit locality
+15. MA-550 — adaptive allocation between weight-space and activation-space Views
+
 ## Current P0 sequence
 
 ### Family A — FFN / MoE / adapter
