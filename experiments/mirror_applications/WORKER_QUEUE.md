@@ -192,6 +192,39 @@ P1 follow-ups: MA-696, MA-698, MA-700.
 
 Use `docs/phase2/MIRROR_KV_CACHE_REUSE.md` before implementing any of these. Cache aliasing, switch latency, dwell length and attention-output equivalence are mandatory metrics.
 
+## Eighth research-expansion queue — structured merge geometry and cross-domain functional coordinates
+
+Added after the structured-transform/model-merging/uncertainty/operator/relational/diffusion/NCA sweep. Do not interrupt active or already-locked work.
+
+High-information P0:
+1. MA-701 — Householder Mirror task views
+2. MA-704 — GSOFT group-shuffle Mirror task views
+3. MA-708 — low-displacement-rank Mirror layer family
+4. MA-711 — DARE-sparsified task deltas as Mirror codes
+5. MA-714/715 — Fisher/RegMean coordinate-space merging
+6. MA-716 — KnOTS-aligned LoRA Mirror bank
+7. MA-721/724 — SWAG/Laplace posterior coordinates
+8. MA-725 — Packed-Ensemble subnetworks + Mirror member views
+9. MA-731/732 — FNO operator Views and factorized physics codes
+10. MA-734/740 — DeepONet role sharing and code-only operator adaptation
+11. MA-741/743 — R-GCN/CompGCN relation Views
+12. MA-746 — add-new-relation by Mirror code only
+13. MA-751/753 — ControlNet/T2I-Adapter control-bank compression
+14. MA-755 — Ctrl-Adapter cross-backbone Mirror bridge
+15. MA-758 — precompose multi-control Mirror codes before one adapter pass
+16. MA-761 — GoalNCA goal embedding as Mirror functional coordinate
+17. MA-764 — attention-conditioned dynamic Mirror NCA rule
+18. MA-767 — online task adaptation in Mirror-code space
+19. MA-770 — cross-domain functional-coordinate universality benchmark
+
+P1/P2 follow-ups remain in registry order within MA-701..MA-770.
+
+Operational rule:
+- this queue is appended behind already-locked cross-over/research lanes;
+- it does **not** replace the current next candidate;
+- when entering a new family, use the family-specific direct prior as the mandatory control;
+- MA-770 is a benchmark/meta-experiment, not permission to skip the component screens.
+
 ## Current P0 sequence
 
 ### Family A — FFN / MoE / adapter
