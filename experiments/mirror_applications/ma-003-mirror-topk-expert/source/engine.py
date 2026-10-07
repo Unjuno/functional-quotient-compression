@@ -5,7 +5,7 @@ from pathlib import Path
 import torch
 from torch.nn import functional as F
 from model import METHODS,TopKExperts,compute_proxy,givens
-ROOT=Path(__file__).resolve().parents[1];N=4;D=16;O=12;UPDATES=1200;CE_WEIGHT=.2;FIELDS=['condition','world_or_seed','mode','method','serialized_model_bytes','train_examples','optimizer_updates','active_compute_proxy','wall_time_s','inference_examples_per_s','primary_metric','primary_value','secondary_metric','secondary_value','status_note']
+ROOT=Path(__file__).resolve().parents[1];N=4;D=16;O=12;UPDATES=1200;CE_WEIGHT=1.0;FIELDS=['condition','world_or_seed','mode','method','serialized_model_bytes','train_examples','optimizer_updates','active_compute_proxy','wall_time_s','inference_examples_per_s','primary_metric','primary_value','secondary_metric','secondary_value','status_note']
 def make_world(seed,mode):
  g=torch.Generator().manual_seed(seed);w=torch.randn(D,O,generator=g)*.6;b=torch.randn(O,generator=g)*.1;a=torch.rand(N,D//2,generator=g)*1.2-.6
  if mode=='independent_experts':wi=torch.randn(N,D,O,generator=g)*.6;bi=torch.randn(N,O,generator=g)*.1
@@ -45,7 +45,7 @@ def main():
     for i,method in enumerate(METHODS):
      m,elapsed=fit(method,w,mode,init+i*193+int(lr*10000),ds,lr);mse,acc,r2,x=evaluate(m,w,mode,init+91)
      if a.phase=='dev':scores[lr].append(mse)
-     row={'condition':a.phase,'world_or_seed':wid,'mode':mode,'method':method,'serialized_model_bytes':m.serialized_payload_bytes(),'train_examples':UPDATES*64,'optimizer_updates':UPDATES,'active_compute_proxy':compute_proxy(method,UPDATES*64),'wall_time_s':round(elapsed,6),'inference_examples_per_s':round(throughput(m,x),3),'primary_metric':'routed_MSE','primary_value':f'{mse:.10g}','secondary_metric':'router_accuracy;R2','secondary_value':f'{acc:.8g};{r2:.8g}','status_note':f'lr={lr}; matched minibatches; top_k=1; auxiliary_CE={CE_WEIGHT}'};rows.append(row);print(a.phase,wid,mode,method,lr,'MSE',mse,'router_acc',acc,'bytes',row['serialized_model_bytes'],flush=True)
+     row={'condition':a.phase,'world_or_seed':wid,'mode':mode,'method':method,'serialized_model_bytes':m.serialized_payload_bytes(),'train_examples':UPDATES*64,'optimizer_updates':UPDATES,'active_compute_proxy':compute_proxy(method,UPDATES*64),'wall_time_s':round(elapsed,6),'inference_examples_per_s':round(throughput(m,x),3),'primary_metric':'routed_MSE','primary_value':f'{mse:.10g}','secondary_metric':'router_accuracy;R2','secondary_value':f'{acc:.8g};{r2:.8g}','status_note':f'lr={lr}; matched minibatches; top_k=1; auxiliary_CE={CE_WEIGHT}; dev_v2'};rows.append(row);print(a.phase,wid,mode,method,lr,'MSE',mse,'router_acc',acc,'bytes',row['serialized_model_bytes'],flush=True)
  if a.phase=='dev':
   best=min(scores,key=lambda lr:sum(scores[lr])/len(scores[lr]));(ROOT/'DEV_SELECTION.json').write_text(json.dumps({'experiment_id':'MA-003','selected_common_lr':best,'mean_mse_by_lr':{str(k):sum(v)/len(v) for k,v in scores.items()},'fresh_worlds':[30001,30002,30003],'updates':UPDATES},indent=2)+'\n')
  with (ROOT/'RESULTS_CORE.csv').open('a',newline='') as f:csv.DictWriter(f,fieldnames=FIELDS,lineterminator='\n').writerows(rows)
