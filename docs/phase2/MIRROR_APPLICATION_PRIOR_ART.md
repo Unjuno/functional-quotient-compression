@@ -1487,6 +1487,195 @@ Builds on YOCO: cross-decoder layers reuse both one shared KV cache and one toke
 
 **Mirror implication:** cache and routing can be jointly shared. Mirror View codes should be tested on top of a single physical cache/index rather than reintroducing per-layer cache or routing state.
 
+## PA164 — QuaRot
+
+**QuaRot: Outlier-Free 4-Bit Inference in Rotated LLMs**  
+https://arxiv.org/abs/2404.00456
+
+Uses function-preserving rotations, including online Hadamard transforms in attention, to remove outliers and enable low-bit weight/activation/KV-cache quantization.
+
+**Mirror implication:** a View coordinate has a second use beyond functional multiplicity: choose an equivalent numerical gauge that is easier to quantize. Functional View codes and quantization-gauge codes should be treated as separate factors.
+
+## PA165 — SpinQuant
+
+**SpinQuant: LLM Quantization with Learned Rotations**  
+https://arxiv.org/abs/2405.16406
+
+Learns function-preserving rotation matrices to improve low-bit weight, activation and KV-cache quantization, including online Hadamard rotations for cache/activation outliers.
+
+**Mirror implication:** quantization-aware Mirror geometry should compare against learned gauge rotations; an exact-function gauge is not new functional multiplicity but may materially reduce cache/model bits.
+
+## PA166 — KIVI
+
+**KIVI: A Tuning-Free Asymmetric 2bit Quantization for KV Cache**  
+https://proceedings.mlr.press/v235/liu24bz.html
+
+Finds different quantization structure for keys and values: per-channel keys and per-token values, enabling 2-bit KV cache with strong quality.
+
+**Mirror implication:** canonical Mirror caches should preserve or improve the natural K/V quantization geometry and measure transform/dequantization ordering.
+
+## PA167 — KVQuant
+
+**KVQuant: Towards 10 Million Context Length LLM Inference with KV Cache Quantization**  
+https://arxiv.org/abs/2401.18079
+
+Uses pre-RoPE per-channel key quantization, non-uniform datatypes and sparse outlier handling for ultra-low-bit KV caches.
+
+**Mirror implication:** position-free canonical cache and Mirror transformations align naturally with pre-RoPE quantization. Quantize-canonical-then-View and View-then-quantize are distinct error paths.
+
+## PA168 — Palu
+
+**Palu: Compressing KV-Cache with Low-Rank Projection**  
+https://arxiv.org/abs/2407.21118
+
+Decomposes K/V projection matrices, caches low-dimensional intermediate states and reconstructs keys/values on demand; value reconstruction can be fused into the output projection.
+
+**Mirror implication:** this is a direct architectural control for canonical latent cache + logical read projections. Mirror should add reusable/factorized read coordinates or private residuals beyond Palu's low-rank latent.
+
+## PA169 — MiniCache
+
+**MiniCache: KV Cache Compression in Depth Dimension for Large Language Models**  
+https://arxiv.org/abs/2405.14366
+
+Merges similar adjacent-layer cache states in direction/magnitude form and retains exceptional tokens separately.
+
+**Mirror implication:** naturally imperfect layer sharing can be represented as canonical View geometry plus sparse private token exceptions. This is a strong control for an orbit/private cache frontier.
+
+## PA170 — CacheBlend
+
+**CacheBlend: Fast Large Language Model Serving for RAG with Cached Knowledge Fusion**  
+https://arxiv.org/abs/2405.16444
+
+Reuses cached non-prefix chunks and selectively recomputes a small subset of tokens to recover cross-context attention fidelity.
+
+**Mirror implication:** when exact View algebra is imperfect, sparse token recomputation is a principled fallback. Compare full View residual storage against recomputing only high-error/high-attention tokens.
+
+## PA171 — KVShare
+
+**KVShare: An LLM Service System with Efficient and Effective Multi-Tenant KV Cache Reuse**  
+https://arxiv.org/abs/2503.16525
+
+Shares reusable cache chunks across multi-tenant requests and selectively recomputes high-deviation tokens during prefill/decode.
+
+**Mirror implication:** canonical Mirror cache blocks can potentially be physically aliased across logical specialists/tenants; the system still needs deviation-aware correction when contexts or models leave the exact orbit.
+
+## PA172 — DroidSpeak
+
+**DroidSpeak: KV Cache Sharing for Cross-LLM Communication and Multi-LLM Serving**  
+https://arxiv.org/abs/2411.02820
+
+Shares KV state between same-architecture but different-weight LLMs and selectively recomputes critical contiguous layer groups, with pipelined remote loading.
+
+**Mirror implication:** layer-wise orbit mismatch can be handled by a hybrid exact-View + critical-layer recompute policy. This is a strong systems control for approximate cross-specialist cache reuse.
+
+## PA173 — Speculative Streaming
+
+**Speculative Streaming: Efficient and Scalable Speculative Decoding with Multi-Stream Attention**  
+https://arxiv.org/abs/2402.11131
+
+Uses one target model with several speculative streams. Speculative streams read the main stream's cached K/V and do not store separate stream-specific KV caches.
+
+**Mirror implication:** multiple logical decode streams can already share one physical cache. Mirror stream Views are valuable only if they reduce extra stream parameters or increase useful diversity/acceptance.
+
+## PA174 — aLoRA-aware production prefix caching
+
+**Efficient Multi-Adapter LLM Serving via Cross-Model KV Cache Reuse**  
+https://arxiv.org/abs/2512.17910
+
+Implements aLoRA cache reuse in vLLM by changing block-hash semantics and activation-aware execution, enabling physical cache reuse across base/aLoRA prefixes.
+
+**Mirror implication:** exact canonical Mirror cache reuse should have a serving-level test where View identity is excluded from cache-block identity when the physical cache is truly View-invariant.
+
+## PA175 — FastLibra
+
+**Improving the Serving Performance of Multi-LoRA Large Language Models via Efficient LoRA and KV Cache Management**  
+https://arxiv.org/abs/2505.03756
+
+Jointly manages LoRA and KV-cache residency using dependency-aware caching and a performance cost model.
+
+**Mirror implication:** if many logical adapters share one physical cache and one expert base, the LoRA<->KV dependency graph changes substantially. Serving benefits must be measured end-to-end, not inferred from bytes.
+
+## PA176 — Latent Space Communication via KV alignment
+
+**Latent Space Communication via K-V Cache Alignment**  
+https://arxiv.org/abs/2601.06123
+
+Learns model-specific adapters into/out of a global shared KV latent space so different models can communicate and transfer cache-resident skills.
+
+**Mirror implication:** a model family can be designed around a canonical cache ABI. Mirror read/write maps could be structured, smaller and potentially exact-by-construction rather than learned post-hoc.
+
+## PA177 — XKV dual-cache latent communication
+
+**Dual-Cache Latent Space Communication between Heterogeneous Language Models**  
+https://arxiv.org/abs/2608.20617
+
+Builds a compact joint memory from both sender and receiver caches, with layer reconciliation and receiver-position-specific residual retrieval.
+
+**Mirror implication:** heterogeneous cache communication benefits from conditioning on both source and target state. A structured Mirror ABI is the exact/simple endpoint; XKV is a strong learned fallback when models are not co-designed.
+
+## PA178 — MoLAE
+
+**Mixture of Latent Experts**  
+https://arxiv.org/abs/2503.23100
+
+Factorizes expert matrices into shared latent mappings and expert-specific transformations, reducing parameter and compute requirements.
+
+**Mirror implication:** Mirror-MoE must compare against shared latent expert factorization. The high-value delta is whether expert-specific transformations can become much smaller structured View codes and whether computation can be shared across routed experts.
+
+## PA179 — MoBE
+
+**MoBE: Mixture-of-Basis-Experts for Compressing MoE-based LLMs**  
+https://arxiv.org/abs/2508.05257
+
+Represents expert factors using a small shared basis plus expert-specific transformations/coefficients and reports substantial MoE parameter compression.
+
+**Mirror implication:** shared-basis expert compression is already strong. Mirror-specific value should target code size, active compute, HBM traffic or compositional reuse, not just parameter reduction.
+
+## PA180 — distributed MoE all-to-all bottleneck
+
+**Communication Efficient Parallel MoE Inference with Speculative MoE**  
+https://arxiv.org/abs/2503.04398
+
+Shows expert parallelism can be dominated by all-to-all token dispatch/re-dispatch and optimizes communication through predicted routing and expert grouping.
+
+**Mirror implication:** if logical experts share one local physical expert, expert-parallel token shuffles may be avoidable altogether. This is a systems-level hypothesis requiring end-to-end distributed measurement.
+
+## PA181 — MoE-Infinity
+
+**MoE-Infinity: Activation-Aware Expert Offloading for Efficient MoE Serving**  
+https://arxiv.org/abs/2401.14361
+
+Caches/prefetches activated experts under limited GPU memory and targets the latency/bandwidth cost of moving large expert weights through slower memory links.
+
+**Mirror implication:** a shared physical expert + tiny View codes could remove much of expert-weight movement instead of predicting which full expert to fetch.
+
+## PA182 — Fiddler
+
+**Fiddler: CPU-GPU Orchestration for Fast Inference of Mixture-of-Experts Models**  
+https://arxiv.org/abs/2402.07033
+
+Chooses between transferring expert weights to GPU or executing missing experts on CPU based on workload/device cost.
+
+**Mirror implication:** Mirror-MoE can change this cost model by keeping shared base expert weights resident and moving only small codes/private residuals.
+
+## PA183 — MegaBlocks
+
+**MegaBlocks: Efficient Sparse Training with Mixture-of-Experts**  
+https://proceedings.mlsys.org/paper_files/paper/2023/file/5a54f79333768effe7e8927bcccffe40-Paper-mlsys2023.pdf
+
+Implements routed experts with block-sparse GPU kernels to reduce padding and improve hardware utilization.
+
+**Mirror implication:** standard MoE pays complexity for multiple expert matrices and load-imbalanced sparse GEMMs. A shared-weight Mirror-MoE may instead turn routed computation into larger shared GEMMs plus cheap per-token transforms.
+
+## PA184 — DeepSeekMoE
+
+**DeepSeekMoE: Towards Ultimate Expert Specialization in Mixture-of-Experts Language Models**  
+https://arxiv.org/abs/2401.06066
+
+Uses fine-grained routed experts plus always-active shared experts to capture common knowledge and improve specialization.
+
+**Mirror implication:** common-vs-specialized decomposition is already useful in large MoE. Mirror can test whether routed specialization is represented as Views/residuals around shared physical expert computation.
+
 ## Research gaps that remain especially relevant here
 
 1. **Logical expert multiplicity from one physical expert via a structured view** — adjacent to expert tying, but not equivalent.
