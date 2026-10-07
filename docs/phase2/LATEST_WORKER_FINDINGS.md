@@ -57,11 +57,28 @@ Observed:
 
 Boundary: narrow coordinate views do not replace genuinely independent private variation. Placement and parameterization are separate hypotheses.
 
-# Cross-experiment conclusion
+## MA-245 — MLKV shared cache + per-layer Mirror views
 
-The three results form a coherent pattern:
+Branch: `research/ma-245-mlkv-layer-views-20261007`
+Verified result: `76d91b7a662b4227e7f25e4733e06d6735cf1cd2`
+Status: **PROMISING**, strict model-payload gate missed.
 
-1. **aligned functional variation** -> compact Views can work very well;
+Aligned synthetic teacher: one physical K/V base transformed by layer/role Givens views.
+
+Observed:
+- Mirror fresh MSE ~6.7e-12 to 6.8e-11;
+- scalar gate and hard one-group MLKV remained ~0.015–0.028 MSE;
+- Mirror payload 2,541 B vs two-group MLKV 2,864 B: 11.3% smaller, below the preregistered 25% gate;
+- actual cache state 256 B vs two-group MLKV 512 B and MHA 1,024 B;
+- eager CPU Mirror throughput ~0.85x two-group MLKV and training ~2.1–2.2x slower.
+
+Boundary: all layers saw the same memory hidden state and the teacher was exactly on the candidate orbit. Real layer-to-layer hidden-state evolution is untested.
+
+
+
+The four results form a coherent pattern:
+
+1. **aligned functional variation** -> compact Views can work very well; this has now repeated across tied experts, head/role K/V views, and cross-layer K/V views;
 2. **misaligned independent variation** -> a narrow View can fail completely;
 3. **private residual capacity** helps when variation leaves the shared orbit;
 4. **placement** can determine cache/runtime properties independently of quality;
