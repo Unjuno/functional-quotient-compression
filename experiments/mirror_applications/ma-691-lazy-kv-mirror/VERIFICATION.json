@@ -1,0 +1,22 @@
+{
+  "experiment_id":"MA-691",
+  "protocol_frozen_before_fresh":true,
+  "protocol_freeze_commit":"316e50d761ba5f23792702f0128b6e83c2178d63",
+  "source_commit":"44beb84a3f33b9a1034699b3c081fadfe7575ff7",
+  "fresh_seeds":[69101,69102,69103],
+  "tests":{"passed":4,"failed":0},
+  "environment":{"torch":"2.10.0+cpu","device":"CPU","threads":1,"dtype":"float32"},
+  "lazy_exact_pass":true,
+  "rope_commutation_pass":true,
+  "mla_absorption_pass":true,
+  "max_lazy_error":3.129243850708008e-07,
+  "max_rope_error":7.152557373046875e-07,
+  "max_mla_error":4.172325134277344e-07,
+  "physical_cache_model":"lazy path retains one canonical K tensor and one canonical V tensor; no per-View cache is persisted",
+  "runtime_boundary":"one-thread eager PyTorch microbenchmark only; no GPU/production claim",
+  "notes":[
+    "Runtime values are from one final authoritative run after unit checks.",
+    "The exactness result follows algebraically from known right-transforms and does not establish that natural trained specialists satisfy this relation.",
+    "Arbitrary earlier FFN/expert changes are outside this exact cache-transformability claim."
+  ]
+}
