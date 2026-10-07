@@ -58,4 +58,4 @@ If two consecutive candidates in a family fail for the same demonstrated structu
 
 ## Next eligible candidate
 
-No P0 candidates remain UNTESTED. Under the priority rule, start MA-001 (P1 Mirror top-1 expert) as the first remaining candidate in registry order.
+No P0 candidates remain UNTESTED. Under the priority rule, start MA-002 (P1 Mirror top-2 expert) as the first remaining candidate in registry order. MA-001 is complete; its aligned quality/storage gate passed, but Mirror-specific bytes missed ordinary hard tying by 252B.
