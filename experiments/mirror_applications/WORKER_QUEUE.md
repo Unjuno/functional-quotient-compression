@@ -28,6 +28,32 @@ These were added after the 2026-10-07 prior-art sweep and should be considered b
 
 These have strong adjacent prior art, so the experiment must implement the cited non-Mirror method as a control.
 
+## Second research-expansion queue
+
+Added from the second literature sweep. **Do not interrupt an already-started experiment to switch queues.**
+
+Direct/high-information P0 order:
+1. MA-255 — Mirror context superposition vs Parameter Superposition
+2. MA-260 — BatchEnsemble rank-one Mirror ensemble
+3. MA-261 — BatchEnsemble-style logical experts
+4. MA-265 — VeRA Mirror scaling code bank
+5. MA-268 — IA3 Mirror activation views
+6. MA-271 — OFT Mirror task views
+7. MA-272 — input-centric OFTv2 Mirror views
+8. MA-273 — BOFT Mirror adapter bank
+9. MA-274 — BOFT logical expert views
+10. MA-276 — BOFT depth views
+11. MA-278 — Compacter Mirror hypercomplex adapters
+12. MA-282 — Monarch Mirror FFN transform
+13. MA-286 — Cheap-LoRA Mirror column-subspace views
+14. MA-288 — Mirror fast-weight programmer context code
+15. MA-292 — task-vector Mirror basis
+16. MA-296 — orthogonalized task-vector Mirror superposition
+17. MA-297 — SETA shared sparse subspace + Mirror views
+18. MA-299 — Split-on-Share Mirror code allocation
+
+Then continue the remaining P0 entries by family and registry order.
+
 ## Current P0 sequence
 
 ### Family A — FFN / MoE / adapter
