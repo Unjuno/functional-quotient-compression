@@ -1,0 +1,27 @@
+{
+  "experiment_id": "MA-121",
+  "commit": "pending result commit",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-121-temporal-view/tests",
+    "passed": 2,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "rows": 50,
+    "max_difference": 4.85e-10,
+    "replay_artifact": "VERIFICATION_REPLAY.json"
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_worlds_opened": true,
+  "notes": [
+    "Fresh worlds 12111-12113 were opened after two aligned development worlds passed the NLL, packet-accuracy, and byte screen.",
+    "Mirror exceeded MTP packet accuracy by more than 0.01 absolute in each fresh world; the protocol wording is interpreted as a no-degradation threshold.",
+    "The aligned teacher is generated from the same Givens phase family; natural packet generalization is untested.",
+    "The token-feedback sequential baseline is not a full Transformer with KV cache."
+  ]
+}

@@ -32,7 +32,7 @@ MA-076 and MA-079 completed PROMISING; MA-086 failed the storage gate. Independe
 MA-116 completed FAIL at the development gate.
 
 ### Family D — Temporal
-MA-121 -> MA-129
+MA-121 completed PROMISING on aligned phase slots; MA-129
 
 ### Family E — Compression / holographic
 MA-156 -> MA-160 -> MA-171 -> MA-173 -> MA-181

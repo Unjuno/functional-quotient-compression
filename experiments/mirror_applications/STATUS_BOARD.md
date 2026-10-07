@@ -8,18 +8,18 @@ Updated: 2026-10-07
 - P0: **34**
 - P1: **126**
 - P2: **94**
-- Current MA statuses: **231 UNTESTED, 11 PROMISING, 12 FAIL**
+- Current MA statuses: **230 UNTESTED, 12 PROMISING, 12 FAIL**
 - Historical evidence lanes SRM/TM are not MA statuses.
 
 ## Next candidate
 
-**MA-121 — next Family D temporal candidate**
+**MA-129 — next Family D temporal candidate**
 
 Why next:
-- MA-241, MA-244, MA-245, MA-247, MA-248, MA-249, MA-250, MA-251, MA-253, MA-003, MA-005, MA-009, MA-019, MA-024, MA-041, MA-048, MA-061, MA-063, MA-076, MA-079, MA-086 and MA-116 are checked; Family B KV views remain paused, so MA-121 is next.
+- MA-241, MA-244, MA-245, MA-247, MA-248, MA-249, MA-250, MA-251, MA-253, MA-003, MA-005, MA-009, MA-019, MA-024, MA-041, MA-048, MA-061, MA-063, MA-076, MA-079, MA-086, MA-116 and MA-121 are checked; Family B KV views remain paused, so MA-129 is next.
 - MA-121 begins the temporal family; use the specific controls and prior art named in its registry row.
 
-If MA-121 is blocked, use the next eligible P0 in the registry.
+If MA-129 is blocked, use the next eligible P0 in the registry.
 
 ## Active experiments
 
@@ -45,6 +45,8 @@ When a worker starts an MA experiment, add:
 - MA-247 through MA-251 are complete and verified.
 
 ## Recently completed
+
+- MA-121 — PROMISING on the aligned synthetic packet task: improved NLL and exact packet accuracy over MTP in 3/3 fresh worlds with 21.3% fewer bytes; rank-2 PTP had better NLL at higher storage; independent slot functions and eager runtime were poor. Branch `research/ma-121-temporal-view-20261007`; report `experiments/mirror_applications/ma-121-temporal-view/README.md`; result commit pending.
 
 - MA-116 — FAIL at development: Mirror-RoPE beat scalar scaling on synthetic held-out positions, but independent frequencies were more accurate and had a smaller actual serialized payload (2,021B vs 2,209B). Fresh stayed sealed. Branch `research/ma-116-mirror-rope-20261007`; report `experiments/mirror_applications/ma-116-mirror-rope/README.md`; result commit `b5d0b623df16f2ea3b024e92c53edb96f26ea00f`.
 
