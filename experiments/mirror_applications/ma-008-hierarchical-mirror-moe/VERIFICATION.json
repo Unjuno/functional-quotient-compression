@@ -1,0 +1,42 @@
+{
+  "experiment_id": "MA-008",
+  "commit": "97aa8e6da75fc487415eedca3640cee4dbf1a027",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-008-hierarchical-mirror-moe/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "runs_checked": 84,
+    "fresh_payload_bytes_by_method": {
+      "full_flat": 23341,
+      "full_hier": 24673,
+      "full_rank2_flat": 23530,
+      "tied_hier": 8581,
+      "film_hier": 10111,
+      "residual2_hier": 10111,
+      "mirror_hier": 8898
+    }
+  },
+  "metric_replay": {
+    "checked": true,
+    "fresh_rows_checked": 42,
+    "deterministic_fields_exact": true,
+    "max_difference": 0.0,
+    "timing_fields_excluded": [
+      "training_wall_seconds",
+      "inference_examples_per_second"
+    ]
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_freeze_manifest_hashes_checked_before_access": true,
+  "notes": [
+    "All fresh worlds and teacher modes completed under the pre-access frozen configuration.",
+    "Mirror/full-hier MSE ratio was 0.931\u20130.949 and payload ratio 0.361 in aligned worlds.",
+    "Hierarchical full routing did not systematically improve quality over flat full routing.",
+    "Hard tying used 317 fewer serialized bytes; eager CPU inference throughput was 0.317x tied.",
+    "README was expanded after fresh access; freeze manifest captures the pre-access version."
+  ]
+}
