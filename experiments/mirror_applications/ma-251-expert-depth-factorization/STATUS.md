@@ -5,9 +5,9 @@
 - Base commit: `809f9d50ef85d470d8bac045db291349e264dcba`
 - Development: complete; LR 0.01 selected on world 25100
 - Fresh/audit: complete; worlds 25101–25103
-- Results committed: pending
-- Verification committed: pending
-- Registry row updated: pending
+- Results committed: yes (`f494b8986a3807e512d0255811f62857758c7ca6`)
+- Verification committed: yes (`f494b8986a3807e512d0255811f62857758c7ca6`)
+- Registry row updated: see status board and registry
 
 ## H / T / D / C / U
 

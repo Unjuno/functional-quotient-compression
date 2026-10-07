@@ -16,7 +16,6 @@ Do not skip to a visually interesting P1/P2 idea while an executable P0 remains,
 
 These were added after the 2026-10-07 prior-art sweep and should be considered before duplicating a simpler P0 experiment:
 
-1. MA-251 — factorized expert x depth Mirror coordinate
 
 These have strong adjacent prior art, so the experiment must implement the cited non-Mirror method as a control.
 

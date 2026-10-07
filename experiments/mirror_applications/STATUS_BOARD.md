@@ -8,23 +8,23 @@ Updated: 2026-10-07
 - P0: **34**
 - P1: **126**
 - P2: **94**
-- Current MA statuses: **246 UNTESTED, 5 PROMISING, 3 FAIL**
+- Current MA statuses: **245 UNTESTED, 6 PROMISING, 3 FAIL**
 - Historical evidence lanes SRM/TM are not MA statuses.
 
 ## Next candidate
 
-**MA-251 — factorized expert x depth Mirror coordinate**
+**MA-003 — Mirror top-k expert**
 
 Why next:
-- MA-241, MA-244, MA-245, MA-247, MA-248, MA-249, MA-250 and MA-253 are now checked; MA-251 is the next untested cross-over P0 candidate.
-- its closest prior-art controls are expert tying and depth-specific adapters (PA01/PA06).
+- MA-241, MA-244, MA-245, MA-247, MA-248, MA-249, MA-250, MA-251 and MA-253 are checked; MA-003 is the next executable P0 candidate.
+- its closest prior-art controls are expert tying and standard top-k MoE (PA01–PA03).
 
-If MA-251 is blocked, use this order:
-MA-003.
+If MA-003 is blocked, use this order:
+MA-005 -> MA-009 -> MA-019 -> MA-024.
 
 ## Active experiments
 
-- MA-251 — branch `research/ma-251-expert-depth-factorization-20261007`; directory `experiments/mirror_applications/ma-251-expert-depth-factorization/`; worker/run `Codex session 2026-10-07`; start commit `0bc21d10a76dc624f935e20e20a546a2ca5f12d5`.
+
 
 
 
@@ -36,9 +36,11 @@ When a worker starts an MA experiment, add:
 - worker/run identifier if available;
 - start commit.
 
-- None. MA-247, MA-248, MA-249 and MA-250 are complete and verified.
+- None. MA-247 through MA-251 are complete and verified.
 
 ## Recently completed
+
+- MA-251 — PROMISING: factorized Givens expert/depth coordinates matched untied quality 3/3 with 76.4% fewer bytes; independent pair functions required more capacity; CPU throughput regression recorded. Branch `research/ma-251-expert-depth-factorization-20261007`; report `experiments/mirror_applications/ma-251-expert-depth-factorization/README.md`; result commit `f494b8986a3807e512d0255811f62857758c7ca6`.
 
 - MA-250 — PROMISING on aligned linear expert roles: Mirror matched untied quality 3/3 with 38.3% fewer payload bytes; independent roles required private/full weights; fixed MAP/Hadamard/HRR codes did not fit this Givens-aligned teacher. Branch `research/ma-250-vsa-expert-address-20261007`; report `experiments/mirror_applications/ma-250-vsa-expert-address/README.md`; result commit `05ad4f7efb92a3b7bbe8f4f0674377223d6bc768`.
 
