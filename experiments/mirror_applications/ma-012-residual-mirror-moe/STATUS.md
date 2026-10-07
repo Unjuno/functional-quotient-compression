@@ -5,8 +5,8 @@
 - Protocol freeze: `310660393eddf53df790411db902fd4a5f702b48`
 - Development complete: yes; selected LR 0.003 and Mirror rank-2 on world 120000
 - Fresh/audit opened: yes; worlds 120001–120003 complete and replayed exactly
-- Results committed: pending
-- Verification committed: pending
+- Results committed: yes (`3cdff5dc56cc2c44a1b29112d823c9e13ee9744a`)
+- Verification committed: yes
 
 ## Next action
 
