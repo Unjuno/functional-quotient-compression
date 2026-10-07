@@ -1,0 +1,134 @@
+{
+  "experiment_id": "MA-008",
+  "title": "hierarchical nonlinear Mirror-MoE",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/COMPUTE/RUNTIME",
+  "base_commit": "993c4ce",
+  "hypothesis": "For four related nonlinear experts in two role groups, a hierarchical group\u2192expert router plus one shared FFN and four Givens views recovers untied hierarchical MoE quality at lower bytes and beats simple tied FiLM/residual controls; flat and low-rank routers test whether hierarchy adds value.",
+  "scope_delta": "Adds a two-level group/expert token-choice router on the balanced synthetic role family used for MA006/007; all models dispatch exactly one expert role per token.",
+  "physical_object": "one 16x32x16 GELU FFN",
+  "mirror_coordinate": "four role-specific four-angle Givens input/output views",
+  "logical_multiplicity": "four expert roles addressed through two groups and two children/group",
+  "prior_art_refs": [
+    "PA01",
+    "PA02",
+    "PA03"
+  ],
+  "controls": [
+    "full untied flat token-choice MoE",
+    "full untied hierarchical group\u2192expert MoE",
+    "full untied flat MoE with rank-2 router",
+    "hard-tied hierarchical MoE",
+    "tied hierarchical expert plus per-role hidden FiLM",
+    "tied hierarchical expert plus per-role rank-2 output residual",
+    "tied hierarchical expert plus Mirror views"
+  ],
+  "task": {
+    "input_dim": 16,
+    "hidden_dim": 32,
+    "output_dim": 16,
+    "experts": 4,
+    "groups": 2,
+    "experts_per_group": 2,
+    "activation": "GELU",
+    "balanced_batch": {
+      "batch_size": 64,
+      "examples_per_role": 16
+    },
+    "group_rule": "roles 0/1 form group 0; roles 2/3 form group 1",
+    "primary_metric": "held-out routed MSE",
+    "structure_audit": "group accuracy, role accuracy and per-role MSE"
+  },
+  "teacher": {
+    "aligned": "one frozen nonlinear FFN conjugated by per-role Givens views",
+    "independent": "four independently initialized FFNs",
+    "routing_targets": "known balanced role IDs and group IDs from data generator"
+  },
+  "development": {
+    "world": 80000,
+    "teacher_seed": 800000,
+    "initialization_seed": 8000000,
+    "learning_rate_candidates": [
+      0.001,
+      0.003,
+      0.01
+    ],
+    "selection_metric": "mean held-out MSE across seven methods and both teacher modes",
+    "updates": 1200,
+    "batch_size": 64
+  },
+  "fresh": {
+    "worlds": [
+      80001,
+      80002,
+      80003
+    ],
+    "teacher_seeds": [
+      800001,
+      800002,
+      800003
+    ],
+    "initialization_seeds": [
+      8000001,
+      8000002,
+      8000003
+    ],
+    "locked_before_access": true,
+    "access_condition": "At selected LR, aligned Mirror MSE <=1.25x untied hierarchical MSE and payload <=0.65x hierarchical payload; otherwise FAIL and keep fresh sealed."
+  },
+  "routing": {
+    "flat": "One four-way linear argmax router.",
+    "hierarchical": "A two-way group router selects a group; only its two-way child router selects a role. Training loss is group CE plus selected-group child CE.",
+    "token_choice": "Exactly one role per input; no no-route state.",
+    "no_oracle_fallback": true
+  },
+  "training": {
+    "optimizer": "AdamW",
+    "weight_decay": 0.0001,
+    "router_weight_decay": 0.0,
+    "router_auxiliary_cross_entropy_weight": 1.0,
+    "dtype": "float32",
+    "matched_minibatches_across_methods": true,
+    "threads": 1,
+    "all_methods_same_updates": true
+  },
+  "storage": {
+    "authority": "actual serialized full inference payload bytes",
+    "serialization": "torch.save CPU state dict and deterministic compact JSON config",
+    "paid_objects": [
+      "router(s)",
+      "full/shared FFN state",
+      "Mirror angles",
+      "FiLM and residual controls",
+      "metadata"
+    ]
+  },
+  "compute": {
+    "report_examples": true,
+    "report_updates": true,
+    "report_one_active_FFN_MAC_proxy": true,
+    "report_hierarchical_router_MACs": true,
+    "report_coordinate_FLOPs": true,
+    "report_group_and_role_accuracy": true,
+    "report_wall_time": true,
+    "report_inference_throughput": true,
+    "inference_batch_size": 1024,
+    "inference_repetitions": 20
+  },
+  "gates": {
+    "development_open_fresh": "Aligned Mirror MSE <=1.25x full hierarchical MoE and payload <=0.65x; otherwise FAIL/fresh sealed.",
+    "fresh_useful_sharing": "All three aligned fresh worlds: Mirror MSE <=1.10x full hierarchical MoE, role accuracy within 1 pp, payload <=0.65x full hierarchical.",
+    "mirror_specific": "All three worlds: Mirror MSE at least 10% lower than hard tying, FiLM, and rank-2 residual at no more than 10% greater bytes or active MACs.",
+    "fail": "Development gate misses; or fresh useful gate misses in at least two worlds; or a simple control matches within 10% MSE at equal/lower bytes/compute in at least two worlds.",
+    "promising": "Fresh useful gate passes >=2/3, or 3/3 with a declared simple-control/storage/runtime limitation.",
+    "not_established": "Invalid/missing worlds or unreproducible serialization."
+  },
+  "boundaries": [
+    "synthetic balanced roles and known hierarchy",
+    "four roles/two groups only",
+    "aligned teacher favors coordinate views",
+    "fixed updates are not capacity evidence",
+    "no language or large-scale routing claim"
+  ],
+  "protocol_frozen_before_development": true
+}

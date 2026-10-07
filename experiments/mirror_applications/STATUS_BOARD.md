@@ -23,6 +23,8 @@ If MA-186 is blocked, use the next eligible P0 in the registry.
 
 ## Active experiments
 
+- MA-008 — `research/ma-008-hierarchical-mirror-moe-20261007`; directory `experiments/mirror_applications/ma-008-hierarchical-mirror-moe/`; start commit `993c4ce` (verified MA-007 base). Tests whether hierarchical group→expert routing plus Mirror expert views adds value over flat token-choice and low-rank controls.
+
 
 
 When a worker starts an MA experiment, add:
