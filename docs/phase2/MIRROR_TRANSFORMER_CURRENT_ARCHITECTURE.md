@@ -1,3 +1,8 @@
+> **SUPERSEDED — historical architecture proposal (2026-10-06).**  
+> The current design no longer Mirrorizes the whole/shared computation path by default.  
+> Start with [CURRENT_STATE_2026-10-07.md](CURRENT_STATE_2026-10-07.md) and [ARCHITECTURE_SPARSE_SHARED_RULE_MOE.md](ARCHITECTURE_SPARSE_SHARED_RULE_MOE.md).  
+> This file is preserved as provenance for the router-free / deterministic-view stage of the research.
+
 # Mirror Transformer — current architecture proposal
 
 Date: 2026-10-06  
