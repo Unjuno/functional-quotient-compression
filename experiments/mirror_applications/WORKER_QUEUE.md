@@ -12,6 +12,21 @@ Pick the first candidate satisfying all of:
 
 Do not skip to a visually interesting P1/P2 idea while an executable P0 remains, unless the skipped candidate has a recorded blocker.
 
+## Literature-derived cross-over queue
+
+These were added after the 2026-10-07 prior-art sweep and should be considered before duplicating a simpler P0 experiment:
+
+1. MA-241 — expert tying across depth + layer-specific Mirror expert views
+2. MA-244 — K=V projection sharing + Mirror role recovery
+3. MA-245 — MLKV shared cache + per-layer Mirror KV views
+4. MA-247 — recursive shared block + Mirror depth modulation
+5. MA-248 — packet random variable as a Mirror code
+6. MA-249 — one physical future head + Mirror future-offset views
+7. MA-250 — MAP/Hadamard binding as Mirror expert address
+8. MA-251 — factorized expert x depth Mirror coordinate
+
+These have strong adjacent prior art, so the experiment must implement the cited non-Mirror method as a control.
+
 ## Current P0 sequence
 
 ### Family A — FFN / MoE / adapter
