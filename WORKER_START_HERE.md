@@ -157,6 +157,18 @@ Before coding, classify the hypothesis as one of:
 
 Do not mix these four evidence classes. Measure physical cache aliasing/storage separately from prefill/switch latency and attention compute.
 
+### MA-701..770 cross-domain expansion
+
+Before implementing any MA-701..770 candidate:
+1. read the exact registry row and all referenced PA entries;
+2. read the "Eighth literature sweep" section in `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-07.md`;
+3. use the native domain metric/harness when the candidate is not a language-model mechanism — do not force FNO/DeepONet, GNN, diffusion or NCA hypotheses through nanoGPT merely for uniformity;
+4. preserve the common evidence contract: actual serialized bytes, active compute, wall-clock calibration, strongest simple control, and fresh/audit split;
+5. for factorized coordinates, hold out combinations rather than only evaluating seen IDs;
+6. for Bayesian/ensemble candidates, report calibration and member diversity;
+7. for dynamical/NCA candidates, report stability and rollout/recovery failure modes;
+8. treat MA-770 as a cross-domain benchmark only after representative component mechanisms have been screened.
+
 ### Recurrent/depth candidates
 
 MA-247 showed that even an aligned Givens teacher can fail a fixed-budget recurrent optimization screen. Include a scalar/static-LoRA optimization control and do not infer representational impossibility from failed convergence.
