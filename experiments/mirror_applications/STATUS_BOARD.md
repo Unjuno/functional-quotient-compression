@@ -8,22 +8,22 @@ Updated: 2026-10-07
 - P0: **34**
 - P1: **126**
 - P2: **94**
-- Current MA statuses: **230 UNTESTED, 12 PROMISING, 12 FAIL**
+- Current MA statuses: **229 UNTESTED, 12 PROMISING, 13 FAIL**
 - Historical evidence lanes SRM/TM are not MA statuses.
 
 ## Next candidate
 
-**MA-129 — next Family D temporal candidate**
+**MA-156 — next Family E compression candidate**
 
 Why next:
-- MA-241, MA-244, MA-245, MA-247, MA-248, MA-249, MA-250, MA-251, MA-253, MA-003, MA-005, MA-009, MA-019, MA-024, MA-041, MA-048, MA-061, MA-063, MA-076, MA-079, MA-086, MA-116 and MA-121 are checked; Family B KV views remain paused, so MA-129 is next.
-- MA-121 begins the temporal family; use the specific controls and prior art named in its registry row.
+- MA-241, MA-244, MA-245, MA-247, MA-248, MA-249, MA-250, MA-251, MA-253, MA-003, MA-005, MA-009, MA-019, MA-024, MA-041, MA-048, MA-061, MA-063, MA-076, MA-079, MA-086, MA-116, MA-121 and MA-129 are checked; Family B KV views remain paused, so MA-156 is next.
+- MA-156 begins compression/holographic candidates; follow its registered storage and reconstruction controls.
 
-If MA-129 is blocked, use the next eligible P0 in the registry.
+If MA-156 is blocked, use the next eligible P0 in the registry.
 
 ## Active experiments
 
-- None. MA-003, MA-005, MA-009, MA-019, MA-024, MA-041, MA-048, MA-061, MA-063, MA-076, MA-079, MA-086 and MA-116 have completed; Family B KV subfamily paused with diagnostic; MA-121 is next.
+- None. MA-003, MA-005, MA-009, MA-019, MA-024, MA-041, MA-048, MA-061, MA-063, MA-076, MA-079, MA-086, MA-116, MA-121 and MA-129 have completed; Family B KV subfamily paused with diagnostic; MA-156 is next.
 
 
 When a worker starts an MA experiment, add:
@@ -45,6 +45,8 @@ When a worker starts an MA experiment, add:
 - MA-247 through MA-251 are complete and verified.
 
 ## Recently completed
+
+- MA-129 — FAIL at development actual-byte gate: Mirror passed aligned quality but payload 1,957B exceeded MTP 1,833B; three exploratory worlds were mistakenly opened after gate failure and are excluded from status. Branch `research/ma-129-temporal-view-20261007`; report `experiments/mirror_applications/ma-129-temporal-view/README.md`; result commit pending.
 
 - MA-121 — PROMISING on the aligned synthetic packet task: improved NLL and exact packet accuracy over MTP in 3/3 fresh worlds with 21.3% fewer bytes; rank-2 PTP had better NLL at higher storage; independent slot functions and eager runtime were poor. Branch `research/ma-121-temporal-view-20261007`; report `experiments/mirror_applications/ma-121-temporal-view/README.md`; result commit `0ccd5470dcac07afba3b9cf77bbfbb7cf8e82bfc`.
 
