@@ -959,6 +959,198 @@ Encodes position through rotation matrices applied to query/key representations 
 
 **Mirror implication:** positional rotation is an established structured coordinate transformation. Mirror-RoPE experiments should test additional logical positional/domain roles beyond standard RoPE rather than claim rotation itself as new.
 
+## PA49 — FiLM and feature-wise conditional modulation
+
+**FiLM: Visual Reasoning with a General Conditioning Layer**  
+https://arxiv.org/abs/1709.07871
+
+Applies conditioning-dependent feature-wise affine transformations `gamma * x + beta` throughout a shared network.
+
+**Mirror implication:** diagonal affine modulation is a very strong cheap conditional-function baseline. Richer Mirror geometry must justify its extra bytes/compute over FiLM.
+
+## PA50 — MatFormer
+
+**MatFormer: Nested Transformer for Elastic Inference**  
+https://arxiv.org/abs/2310.07707
+
+Jointly trains nested FFN submodels so one Transformer contains multiple accurate granularities and many mix-and-match submodels.
+
+**Mirror implication:** logical model multiplicity can come from nested parameter inclusion alone. Mirror elasticity should compare to MatFormer and test whether Views recover specialization at fixed physical width or improve mixed-granularity submodels.
+
+## PA51 — Universally Slimmable Networks
+
+**Universally Slimmable Networks and Improved Training Techniques**  
+https://arxiv.org/abs/1903.05134
+
+Trains one network to execute at arbitrary widths using sandwich-rule sampling and inplace distillation.
+
+**Mirror implication:** width is already a cheap architecture coordinate. A Mirror code may differentiate shared channels across widths or make width selection task/context dependent.
+
+## PA52 — Once-for-All networks
+
+**Once-for-All: Train One Network and Specialize it for Efficient Deployment**  
+https://arxiv.org/abs/1908.09791
+
+One trained supernetwork supports elastic depth, width, kernel size and resolution through progressive shrinking and subnetwork selection.
+
+**Mirror implication:** hardware/configuration coordinates are another form of logical multiplicity. Mirror should be tested as a specialization coordinate inside a supernetwork, not mistaken for the concept of one-model-many-subnets itself.
+
+## PA53 — LayerDrop
+
+**Reducing Transformer Depth on Demand with Structured Dropout**  
+https://arxiv.org/abs/1909.11556
+
+Trains Transformers to tolerate dropping entire layers, enabling shallower inference subnetworks from one model without extra finetuning.
+
+**Mirror implication:** variable logical depth can be obtained by omission alone. Mirror depth views should compare against LayerDrop-trained subnetworks.
+
+## PA54 — Mixture-of-Depths
+
+**Mixture-of-Depths: Dynamically allocating compute in transformer-based language models**  
+https://arxiv.org/abs/2404.02258
+
+Uses token-wise top-k routing to decide which tokens receive attention/MLP computation at each layer under a fixed compute budget.
+
+**Mirror implication:** Mirror coordinates can potentially choose both *what function* and *whether compute is spent*. Compute-routing gains must be compared to MoD, not only dense depth.
+
+## PA55 — QuaRot
+
+**QuaRot: Outlier-Free 4-Bit Inference in Rotated LLMs**  
+https://arxiv.org/abs/2404.00456
+
+Uses function-preserving randomized Hadamard rotations, folding them into weights where possible, to remove outliers and enable low-bit weight/activation/KV quantization.
+
+**Mirror implication:** some rotations are exact gauge changes whose value appears only after quantization. Mirror experiments must distinguish functional multiplicity from representation conditioning and can exploit coordinate choice specifically for compression.
+
+## PA56 — SpinQuant
+
+**SpinQuant: LLM Quantization with Learned Rotations**  
+https://arxiv.org/abs/2405.16406
+
+Optimizes function-preserving rotation matrices for quantized-model accuracy and shows substantial variance among random rotations.
+
+**Mirror implication:** the choice of a function-preserving Mirror coordinate can itself be optimized for downstream compression. Learned rotations are a mandatory control for quantization-focused Mirror geometry.
+
+## PA57 — SmoothQuant
+
+**SmoothQuant: Accurate and Efficient Post-Training Quantization for Large Language Models**  
+https://arxiv.org/abs/2211.10438
+
+Uses mathematically equivalent per-channel scaling to migrate quantization difficulty from activations to weights.
+
+**Mirror implication:** scaling symmetries can be exploited purely for numerical conditioning. Mirror quantization must compare against this cheaper equivalence transformation.
+
+## PA58 — Multi-Head Latent Attention
+
+**DeepSeek-V2: A Strong, Economical, and Efficient Mixture-of-Experts Language Model**  
+https://arxiv.org/abs/2405.04434
+
+MLA jointly compresses keys/values into a low-rank latent representation cached once and reconstructs attention roles, substantially reducing KV-cache storage.
+
+**Mirror implication:** "one physical latent -> many logical KV/head roles" is already practical. Mirror-KV should test whether compact View codes improve reconstruction, personalization, or layer/head sharing beyond MLA.
+
+## PA59 — Prefix-Tuning
+
+**Prefix-Tuning: Optimizing Continuous Prompts for Generation**  
+https://arxiv.org/abs/2101.00190
+
+Freezes the language model and stores small trainable continuous prefix states that condition all layers for each task.
+
+**Mirror implication:** functional diversity can live in hidden-state prefixes rather than weight views. Mirror prompt/prefix compression must compare bytes and context/cache cost.
+
+## PA60 — Prompt Tuning
+
+**The Power of Scale for Parameter-Efficient Prompt Tuning**  
+https://arxiv.org/abs/2104.08691
+
+Learns task-specific soft input embeddings while freezing model weights.
+
+**Mirror implication:** small task coordinates at the input are a minimal functional-control baseline, especially for large pretrained models.
+
+## PA61 — HyperFormer++
+
+**Parameter-efficient Multi-task Fine-tuning for Transformers via Shared Hypernetworks**  
+https://arxiv.org/abs/2106.04489
+
+A shared hypernetwork conditions on task, layer and adapter position embeddings to generate task-specific adapters and layer-normalization parameters.
+
+**Mirror implication:** this is a direct baseline for factorized task x layer x position coordinates generating functions. Mirror codes must be cheaper/simpler or more compositional than a generic shared hypernetwork.
+
+## PA62 — Prompt pools / L2P and DualPrompt
+
+**Learning To Prompt for Continual Learning**  
+https://openaccess.thecvf.com/content/CVPR2022/papers/Wang_Learning_To_Prompt_for_Continual_Learning_CVPR_2022_paper.pdf
+
+**DualPrompt: Complementary Prompting for Rehearsal-free Continual Learning**  
+https://arxiv.org/abs/2204.04799
+
+Use pools of compact prompts, often with input-dependent key/query selection, to store shared and task-specific knowledge over a frozen backbone.
+
+**Mirror implication:** prompt-code banks already implement task-agnostic conditional functionality. Mirror prompt banks should compare routing/storage/interference directly.
+
+## PA63 — HashedNets
+
+**Compressing Neural Networks with the Hashing Trick**  
+https://arxiv.org/abs/1504.04788
+
+Maps many virtual connections to a smaller physical parameter vector via deterministic hash buckets, allowing virtual expansion without proportional stored weights.
+
+**Mirror implication:** this is a direct physical-vs-virtual parameter baseline. Mirror hashing/virtual experts should measure collision interference rather than treating virtual count as capacity.
+
+## PA64 — CondConv
+
+**CondConv: Conditionally Parameterized Convolutions for Efficient Inference**  
+https://arxiv.org/abs/1904.04971
+
+Computes an input-specific effective kernel as a linear combination of expert kernels before applying the expensive convolution.
+
+**Mirror implication:** input-dependent coefficient mixing is a generic way to generate logical weights. Mirror dynamic-weight methods should compare to linear expert-basis synthesis.
+
+## PA65 — Dynamic Filter Networks
+
+**Dynamic Filter Networks**  
+https://proceedings.neurips.cc/paper_files/paper/2016/file/8bf1211fd4b7b94528899de0a43b9fb3-Paper.pdf
+
+A filter-generating network produces sample- or position-specific filters on the fly.
+
+**Mirror implication:** dynamic Mirror addresses are a structured subset of generic dynamic weight generation. The structured constraint must buy storage, stability, or generalization.
+
+## PA66 — Universal Transformer
+
+**Universal Transformers**  
+https://arxiv.org/abs/1807.03819
+
+Recurrently applies a shared Transformer transition across depth/time, optionally with per-position adaptive halting.
+
+**Mirror implication:** repeated use of one block is established; the Mirror question is how cheaply to differentiate iterations while retaining useful weight sharing.
+
+## PA67 — Deep Equilibrium Models
+
+**Deep Equilibrium Models**  
+https://papers.nips.cc/paper/8358-deep-equilibrium-models
+
+Represents effectively infinite weight-tied depth by solving for an equilibrium and uses implicit differentiation with constant activation-memory scaling in depth.
+
+**Mirror implication:** Mirror depth coordinates can be tested inside fixed-point/recurrent shared-weight systems, but iteration count and solver compute must be explicit.
+
+## PA68 — AdapterFusion
+
+**AdapterFusion: Non-Destructive Task Composition for Transfer Learning**  
+https://aclanthology.org/2021.eacl-main.39/
+
+Freezes separately learned task adapters and learns contextual attention-like fusion over their representations.
+
+**Mirror implication:** multi-View composition should compare against explicit adapter composition rather than only adapter selection.
+
+## PA69 — AdapterDrop
+
+**AdapterDrop: On the Efficiency of Adapters in Transformers**  
+https://aclanthology.org/2021.emnlp-main.626/
+
+Trains adapters to tolerate removal from lower layers and prunes low-contribution adapters from AdapterFusion for runtime efficiency.
+
+**Mirror implication:** logical adapter multiplicity and composition should be evaluated with variable active adapter count; storage and active compute are separate axes.
+
 ## Research gaps that remain especially relevant here
 
 1. **Logical expert multiplicity from one physical expert via a structured view** — adjacent to expert tying, but not equivalent.
