@@ -23,6 +23,8 @@ If MA-186 is blocked, use the next eligible P0 in the registry.
 
 ## Active experiments
 
+- MA-007 — `research/ma-007-token-choice-mirror-20261007`; directory `experiments/mirror_applications/ma-007-token-choice-mirror/`; start commit `a556e63` (verified MA-006 base). Paired token-choice/expert-choice Mirror routing on balanced synthetic roles, targeting MA-006 no-route vs token-choice counter-hypothesis; MA-001 is the related nonlinear top-1 precedent.
+
 
 
 When a worker starts an MA experiment, add:
