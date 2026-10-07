@@ -134,3 +134,8 @@ Not allowed without evidence:
 - "free compute";
 - "general LLM compression";
 - "proves natural-language rule reuse".
+
+
+## Concurrent registry edits
+
+Before adding a new MA candidate, re-read `IDEA_REGISTRY.csv` from the current branch and allocate IDs starting at **max existing MA ID + 1**. Never reserve an ID from memory or an older checkout. After writing, re-read the registry and verify zero duplicate IDs. If concurrent additions collide, preserve both hypotheses and renumber the later addition rather than deleting either one.
