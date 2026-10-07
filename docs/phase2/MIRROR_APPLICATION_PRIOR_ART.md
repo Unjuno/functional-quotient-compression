@@ -722,6 +722,153 @@ Formalizes attribute-indexed modulators that induce concept distributions under 
 
 **Mirror implication:** factorized Mirror attributes should be evaluated for extrapolation to unseen coordinate combinations, not only interpolation on trained addresses.
 
+## PA80 — PathNet
+
+**PathNet: Evolution Channels Gradient Descent in Super Neural Networks**  
+https://arxiv.org/abs/1701.08734
+
+Represents a task by a pathway selecting a subset of modules in each layer, allowing later tasks to reuse/freeze previously useful modules.
+
+**Mirror implication:** module-path identity is a functional coordinate. Mirror path methods should ask whether one physical module can serve more path roles or whether path codes can be compressed/factorized.
+
+## PA81 — Routing Networks
+
+**Routing Networks: Adaptive Selection of Non-Linear Functions for Multi-Task Learning**  
+https://arxiv.org/abs/1711.01239
+
+Dynamically composes reusable function blocks per input/task using a learned router and recursive path selection.
+
+**Mirror implication:** dynamic function composition is an established alternative to generating new weights. Mirror-routing needs to show value beyond selecting/reordering existing blocks.
+
+## PA82 — HyperFormer
+
+**Parameter-efficient Multi-task Fine-tuning for Transformers via Shared Hypernetworks**  
+https://arxiv.org/abs/2106.04489
+
+Uses shared hypernetworks conditioned on task, layer and adapter position embeddings to generate task-specific adapters and LayerNorm parameters.
+
+**Mirror implication:** small task/layer codes generating many logical modules is already a strong baseline. Structured Mirror generation must beat generic shared hypernetworks in storage, quality or extrapolation.
+
+## PA83 — AdaMix
+
+**AdaMix: Mixture-of-Adaptations for Parameter-efficient Model Tuning**  
+https://arxiv.org/abs/2205.12410
+
+Trains mixtures of adapters or LoRA modules with stochastic routing and merges adaptation modules for inference.
+
+**Mirror implication:** mixture diversity can help even when inference collapses to one merged module. Mirror mixtures should compare against stochastic PEFT mixtures and merged inference.
+
+## PA84 — UniPELT
+
+**UniPELT: A Unified Framework for Parameter-Efficient Language Model Tuning**  
+https://aclanthology.org/2022.acl-long.433/
+
+Combines several PEFT mechanisms such as adapters, prefix tuning and LoRA with learned gates.
+
+**Mirror implication:** combining multiple adaptation freedoms is already beneficial. A Mirror combination must beat gated composition of standard PEFT components.
+
+## PA85 — Polytropon / latent modular skills
+
+**Combining Modular Skills in Multitask Learning**  
+https://arxiv.org/abs/2202.13914
+
+Learns a discrete task-skill allocation matrix over a bank of parameter-efficient skills, allowing tasks to compose subsets of reusable modules.
+
+**Mirror implication:** logical capability can be represented by sparse skill combinations. Mirror-skill composition should compare against explicit modular skill banks and task-skill allocation.
+
+## PA86 — MEND
+
+**Fast Model Editing at Scale**  
+https://arxiv.org/abs/2110.11309
+
+Learns small editor networks that transform low-rank decompositions of edit gradients into parameter updates.
+
+**Mirror implication:** learned functional changes can be generated from a compact edit signal. Mirror edit codes should compare against learned low-rank gradient transforms.
+
+## PA87 — ROME
+
+**Locating and Editing Factual Associations in GPT**  
+https://arxiv.org/abs/2202.05262
+
+Applies targeted rank-one updates to selected MLP weights to edit factual associations.
+
+**Mirror implication:** a small low-rank/private residual is a strong direct control for storing one fact/association. Mirror must show better multi-edit storage, reversibility or interference.
+
+## PA88 — MEMIT
+
+**Mass-Editing Memory in a Transformer**  
+https://arxiv.org/abs/2210.07229
+
+Distributes calculated weight updates across causal MLP layers to insert many factual associations.
+
+**Mirror implication:** multi-edit compression should compare against directly integrating memories into shared weights, including specificity/generalization and interference.
+
+## PA89 — SERAC
+
+**Memory-Based Model Editing at Scale**  
+https://arxiv.org/abs/2206.06520
+
+Stores edits explicitly in a memory, routes matching inputs to a counterfactual model, and otherwise defers to the base model.
+
+**Mirror implication:** not every new behavior needs to live in base weights. Mirror edit banks must beat external memory on bytes, latency or generalization for the intended use case.
+
+## PA90 — GRACE
+
+**Aging with GRACE: Lifelong Model Editing with Discrete Key-Value Adaptors**  
+https://arxiv.org/abs/2211.11031
+
+Adds a discrete key-value codebook around a model layer, retrieving local edit values for nearby latent queries without changing base weights.
+
+**Mirror implication:** a codebook of local edits is a direct alternative to per-edit View codes. Mirror can test codebook compression, binding and shared edit bases.
+
+## PA91 — VQ-VAE
+
+**Neural Discrete Representation Learning**  
+https://arxiv.org/abs/1711.00937
+
+Uses a learned codebook and discrete latent indices to condition a shared decoder.
+
+**Mirror implication:** a functional coordinate may be discrete and dictionary-coded. Mirror addresses should compare continuous codes against codebook index bits and reconstruction quality.
+
+## PA92 — Residual vector quantization
+
+**SoundStream: An End-to-End Neural Audio Codec**  
+https://arxiv.org/abs/2107.03312
+
+**High Fidelity Neural Audio Compression (EnCodec)**  
+https://arxiv.org/abs/2210.13438
+
+Stacks residual vector quantizers so multiple codebooks progressively refine the latent representation; codebook count can trade bitrate for quality.
+
+**Mirror implication:** multiple small discrete coordinates can compose residual refinements. This is a direct control for additive/compositional Mirror codes and adaptive code budgets.
+
+## PA93 — LISTA / learned sparse coding
+
+**Learning Fast Approximations of Sparse Coding**  
+http://yann.lecun.com/exdb/publis/pdf/gregor-icml-10.pdf
+
+Learns a fixed-depth network approximating sparse-code inference over shared dictionary atoms.
+
+**Mirror implication:** sparse coefficients over a shared basis are a fundamental competitor to Mirror rule/expert codes. Learned code inference is also a strong router baseline.
+
+## PA94 — Shared/private dictionary learning
+
+**Learning a Low-Rank Shared Dictionary for Object Classification**  
+https://arxiv.org/abs/1602.00310
+
+Separates a low-rank shared dictionary from class-specific dictionaries and sparse coefficients.
+
+**Mirror implication:** the project's shared/private decomposition has a dictionary-learning analogue. Mirror should test whether class/task-private dictionaries can be reduced to Views over shared atoms before allocating new atoms.
+
+## PA95 — Error-Correcting Output Codes
+
+**Solving Multiclass Learning Problems via Error-Correcting Output Codes**  
+https://www.cs.cmu.edu/afs/cs/project/jair/pub/volume2/dietterich95a.pdf
+
+Represents classes by separated codewords and predicts code bits, gaining robustness from redundancy and Hamming distance.
+
+**Mirror implication:** logical addresses need not only be compact; they can be deliberately redundant/error-correcting. Robust Mirror routing/addressing can trade a few extra bits for lower misrouting/cross-talk.
+
 ## Research gaps that remain especially relevant here
 
 1. **Logical expert multiplicity from one physical expert via a structured view** — adjacent to expert tying, but not equivalent.
