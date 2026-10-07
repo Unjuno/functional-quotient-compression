@@ -106,6 +106,55 @@ High-information P0:
 17. MA-397 — product-address Mirror vocabulary
 18. MA-399 — MatFormer speculative drafter via View
 
+## Fifth research-expansion queue — conditional functions and dynamics
+
+Added after the conditional-modulation/dynamical-system/meta-learning sweep. Do not interrupt active work.
+
+High-information P0:
+1. MA-401 — FiLM versus Mirror feature conditioning
+2. MA-403 — token-wise generated Mirror modulation
+3. MA-405 — StyleGAN2-like FFN weight modulation
+4. MA-407 — demodulated Mirror-MoE
+5. MA-408 — CondConv-style synthesized FFN
+6. MA-411 — canonical transform + sparse Mirror refinement
+7. MA-413 — factorized concept Mirror coordinates
+8. MA-416/417 — shared decoder + Mirror function codes
+9. MA-418/419 — compositional/modulated neural-function codes
+10. MA-424/425 — continuous-depth Mirror dynamics
+11. MA-427 — DEQ conditioned fixed-point map
+12. MA-429/431 — Universal Transformer depth Views/composition
+13. MA-434 — Mamba selective-state Mirror roles
+14. MA-436/437 — logical SSM experts and S4 structured Views
+15. MA-442 — MAML with Mirror-only inner-loop adaptation
+16. MA-444 — LEO latent decoder versus structured Mirror
+17. MA-446 — learned optimizer for Mirror coordinates
+
+## Sixth research-expansion queue — modular programs, editing and coded addresses
+
+Added after the modular-routing/model-editing/codebook sweep. Do not interrupt active work.
+
+High-information P0:
+1. MA-451/452 — PathNet path + Mirror role/factorization
+2. MA-453 — Routing Network with logical Mirror blocks
+3. MA-455 — sequential Mirror program over one block
+4. MA-457 — path reuse before module birth
+5. MA-461/462/463 — HyperFormer versus generated Mirror adapters
+6. MA-464 — AdaMix over logical Mirror adaptations
+7. MA-466 — UniPELT components as Mirror axes
+8. MA-468 — Polytropon shared/private skill bank + Views
+9. MA-469/470 — MEND-generated Mirror edit codes
+10. MA-471 — ROME rank-one edit as Mirror coordinate
+11. MA-473 — MEMIT edit basis + Mirror memory codes
+12. MA-475/476 — SERAC/GRACE edit-memory compression
+13. MA-478 — compact View first, explicit edit fallback
+14. MA-481/482 — VQ and residual-VQ Mirror addresses
+15. MA-484 — VQ logical expert codebook
+16. MA-486/487 — sparse dictionary Mirror functions + LISTA routing
+17. MA-488 — shared/private dictionary + Mirror coefficients
+18. MA-492 — quantized packet-plan latent
+19. MA-494 — error-correcting Mirror expert IDs
+20. MA-498 — learned code-distance regularization
+
 ## Current P0 sequence
 
 ### Family A — FFN / MoE / adapter
