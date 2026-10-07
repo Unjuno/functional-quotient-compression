@@ -1,30 +1,30 @@
 # MA-189 status
 
-- Status: SCREENING
+- Status: **PROMISING** for the preregistered aligned-family quality/byte/retention gate
 - Branch: `research/ma-189-freeze-backbone-mirror-20261007`
-- Base commit: `8d0763ddc241667e6e5c0fdefad16b2d71152538`
+- Protocol freeze commit: `08b8c7b89d38edafe48d1e25b5aeba93a485c7c6`
 - Development complete: yes
-- Fresh/audit opened: no
-- Results committed: no
-- Verification committed: no
-- Registry row updated: no
+- Fresh/audit opened: yes, after selecting LR 0.01 using development rows
+- Results committed: pending
+- Verification committed: pending
+- Registry row updated: pending
 
 ## H — hypothesis
 
-Two task-specific Givens coordinates on a frozen shared base will match rank-2 LoRA at 64 examples with <=0.25x incremental inference bytes on the matching two-sided task family; independent tasks will require private parameters.
+On a frozen shared linear base, two Givens coordinates will recover a task in the corresponding input/output view family within 1.10x rank-2 LoRA quality and at <=0.25x its incremental inference bytes, while unrelated maps require private parameters.
 
-## T — fixed setup
+## T — execution
 
-16D-to-8D synthetic map; one held-out skill per world; budgets 16/64/256 examples and 200 updates each. Development seeds 18901–18902 choose LR .003/.01. Fresh seeds 18911–18913 remain sealed. Controls: hard tie, one-sided Mirror, rank-1/2 LoRA, non-degenerate shared rank-2 hypernetwork, independent full map.
+One new 16D->8D skill after an exact frozen Task-0 synthetic base. Aligned teacher applies input and output first-pair rotations; unrelated teacher is an independent map. Budgets 16/64/256 examples, 200 full-batch updates. Development seeds 18901/18902 selected LR .01; fresh 18911–18913. Controls: hard tie, one-sided view, rank-1/2 LoRA, nonzero-initialized rank-2 hypernetwork, independent full weights.
 
-## D — development screen
+## D — decision
 
-The registered all-method/all-condition mean MSE at 64 examples selected LR 0.01 (0.6240 vs 0.6548 for LR 0.003). At 64 aligned examples, two-sided Mirror fit the view-aligned task near numerical precision; on unrelated task matrices it remained poor and rank-2 LoRA was better. Development did not meet the stop rule that both worlds miss the 256-example quality or byte gate, so fresh worlds remain authorized by the preregistered plan.
+**PROMISING** on this constructed aligned family. At 64 examples, quality/retention/bytes passed 3/3 fresh worlds. Mean aligned MSE: two-sided Mirror 8.87e-11 vs rank-2 LoRA 6.75e-3. Incremental inference payload 55 B vs 228 B (0.241x); full payload 684 B vs 851 B. Task-0 MSE did not change. Active-compute proxy was 0.773x LoRA, but eager training wall was ~2.25x and inference throughput ~0.20x LoRA. Unrelated tasks remained poor and favored private weights.
 
 ## C — strongest counter-hypothesis
 
-Two angles may be an arbitrary low-dimensional task code with no advantage over rank-1 LoRA or a compact hypernetwork once metadata and compute are charged.
+The aligned teacher exactly matches the two-angle candidate, while rank-2 LoRA does not represent the combined view as directly and only 200 updates were allowed. Rank-4 LoRA was not tested.
 
 ## U — unresolved
 
-No result yet. The synthetic aligned family does not imply natural-task or language-model utility.
+No rank-4 LoRA or byte-matched generic shared-basis control; no optimized runtime; no natural tasks or capacity frontier. Mirror-specific superiority beyond this exact teacher family is not established.
