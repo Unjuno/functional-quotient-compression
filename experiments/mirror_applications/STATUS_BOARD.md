@@ -8,22 +8,20 @@ Updated: 2026-10-07
 - P0: **34**
 - P1: **126**
 - P2: **94**
-- Current MA statuses: **217 UNTESTED, 22 PROMISING, 15 FAIL**
+- Current MA statuses: **216 UNTESTED, 23 PROMISING, 15 FAIL**
 - Historical evidence lanes SRM/TM are not MA statuses.
 
 ## Next candidate
 
-**MA-006 — next eligible P1 candidate (MoE / experts)**
+**MA-007 — next eligible P1 candidate (MoE / experts)**
 
 Why next:
 - MA-241, MA-244, MA-245, MA-247, MA-248, MA-249, MA-250, MA-251, MA-253, MA-003, MA-005, MA-009, MA-019, MA-024, MA-041, MA-048, MA-061, MA-063, MA-076, MA-079, MA-086, MA-116, MA-121, MA-129, MA-156, MA-160, MA-171, MA-173 and MA-181 are checked; Family B KV views remain paused.
-- MA-186, MA-189, MA-199, MA-208 and MA-111 are completed. MA-111 passed its aligned synthetic gate; no P0 candidate remains UNTESTED. MA-001, MA-002 and MA-004 are checked. MA-006 is first remaining P1 in registry order.
+- MA-186, MA-189, MA-199, MA-208 and MA-111 are completed. MA-111 passed its aligned synthetic gate; no P0 candidate remains UNTESTED. MA-001, MA-002, MA-004 and MA-006 are checked. MA-007 is first remaining P1 in registry order.
 
 If MA-186 is blocked, use the next eligible P0 in the registry.
 
 ## Active experiments
-
-- MA-006 — `research/ma-006-expert-choice-mirror-20261007`; directory `experiments/mirror_applications/ma-006-expert-choice-mirror/`; start commit `eca36e2` (verified MA-004 base). Tests capacity-balanced expert-choice routing with a shared nonlinear expert and role views; token-choice and full expert-choice are controls.
 
 
 
@@ -46,6 +44,8 @@ When a worker starts an MA experiment, add:
 - MA-247 through MA-251 are complete and verified.
 
 ## Recently completed
+
+- MA-006 — PROMISING for the registered expert-choice sharing gate: Mirror passed 3/3 aligned quality/coverage/storage at 7,761B vs 23,341B full expert-choice. Token-choice had 100% coverage and 2.50–3.42x lower MSE; no-route expert-choice tokens and eager runtime limit usefulness. Mirror-specific FiLM/residual margin failed. Branch `research/ma-006-expert-choice-mirror-20261007`; report `experiments/mirror_applications/ma-006-expert-choice-mirror/README.md`; result commit `RESULT_COMMIT_PENDING`.
 
 - MA-004 — PROMISING: nonlinear dense softmax Givens mixture passed aligned quality/storage 3/3 (Mirror/untied MSE 0.297–1.030; 7,697B vs 23,277B). Hard tying was 252B smaller and used one quarter of active MACs; independent roles needed private/richer state, and Mirror CPU throughput was 0.086x tying. Synthetic fixed-update result. Branch `research/ma-004-soft-mirror-expert-mixture-20261007`; report `experiments/mirror_applications/ma-004-soft-mirror-expert-mixture/README.md`; result commit `e8fea8ef10f876835c4683bad0203ec7fdc91e16`.
 
