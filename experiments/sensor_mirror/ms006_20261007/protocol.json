@@ -1,0 +1,21 @@
+{
+  "experiment": "MS006",
+  "fresh_worlds": [54201, 54202, 54203],
+  "fresh_inits": [701, 702, 703],
+  "parent": "MS005 byte-identical parents",
+  "backprop_lr_selected_on_dev": {"identity": 0.1, "mirror_mean": 0.1},
+  "fixed_steps_or_generations": 120,
+  "batch": 192,
+  "equal_wall_seconds": 2.0,
+  "equal_time_backprop_cosine": {
+    "identity": {"lr_start": 0.03, "lr_end": 0.0003},
+    "mirror_mean": {"lr_start": 0.05, "lr_end": 0.0005}
+  },
+  "es_sigma": 0.01,
+  "es_step": 0.05,
+  "es_branch_budget_per_generation": 128,
+  "es_identity_pairs": 64,
+  "es_mirror_K16_pairs": 4,
+  "looping": false,
+  "torch_threads": 1
+}
