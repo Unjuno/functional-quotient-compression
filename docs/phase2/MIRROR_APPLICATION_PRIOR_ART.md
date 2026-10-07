@@ -869,6 +869,87 @@ Represents classes by separated codewords and predicts code bits, gaining robust
 
 **Mirror implication:** logical addresses need not only be compact; they can be deliberately redundant/error-correcting. Robust Mirror routing/addressing can trade a few extra bits for lower misrouting/cross-talk.
 
+## PA96 — ReFT / LoReFT
+
+**ReFT: Representation Finetuning for Language Models**  
+https://arxiv.org/abs/2404.03592
+
+Freezes model weights and learns low-rank interventions on hidden representations. LoReFT edits a learned low-dimensional representation subspace.
+
+**Mirror implication:** hidden-state View interventions can be substantially cheaper than weight edits. Any representation-space Mirror method should compare directly to LoReFT/DiReFT.
+
+## PA97 — Representation Engineering
+
+**Representation Engineering: A Top-Down Approach to AI Transparency**  
+https://arxiv.org/abs/2310.01405
+
+Treats high-level representation directions/subspaces as units for reading and controlling model behavior.
+
+**Mirror implication:** the functional coordinate may live directly in residual-stream representation space. Behavior control must be separated from actual weight-storage capacity.
+
+## PA98 — Activation Addition
+
+**Steering Language Models With Activation Engineering / Activation Addition**  
+https://arxiv.org/abs/2308.10248
+
+Builds steering vectors from contrastive activation differences and adds them during forward passes without optimizing model weights.
+
+**Mirror implication:** additive activation vectors are an extremely cheap control for hidden-state Mirror Views.
+
+## PA99 — Function Vectors
+
+**Function Vectors in Large Language Models**  
+https://arxiv.org/abs/2310.15213
+
+Finds compact activation vectors carried by attention heads that causally trigger learned input-output functions and reports partial algebraic composition of such vectors.
+
+**Mirror implication:** this is direct evidence that function identity can be encoded as a hidden-state coordinate. Mirror research should test compression, composition and extraction of function vectors rather than only parameter views.
+
+## PA100 — Contrastive Activation Addition
+
+**Steering Llama 2 via Contrastive Activation Addition**  
+https://arxiv.org/abs/2312.06681
+
+Averages contrastive residual-stream activation differences to construct steering directions that can be scaled and added at inference.
+
+**Mirror implication:** robust behavior vectors can be estimated from data without weight training. Compare learned View codes to contrastive activation vectors at equal storage.
+
+## PA101 — Conditional Activation Steering
+
+**Conditional Activation Steering**  
+https://proceedings.iclr.cc/paper_files/paper/2025/file/e2dd53601de57c773343a7cdf09fae1c-Paper-Conference.pdf
+
+Uses condition vectors to decide whether behavior steering vectors should be applied, enabling context-dependent activation control.
+
+**Mirror implication:** dynamic routing of Views can be implemented entirely in activation space. Compare Mirror routers against condition-vector similarity gates.
+
+## PA102 — Sparse-autoencoder feature steering
+
+**SAEs Are Good for Steering — If You Select the Right Features**  
+https://aclanthology.org/2025.emnlp-main.519/
+
+Studies steering language models with sparse-autoencoder features and shows feature choice and side effects matter strongly.
+
+**Mirror implication:** sparse learned features provide a dictionary of representation-space functional atoms. Mirror feature banks should compare to SAE feature activation and sparse combinations.
+
+## PA103 — Transcoders
+
+**Transcoders Find Interpretable LLM Feature Circuits**  
+https://arxiv.org/abs/2406.11944
+
+Approximates dense MLP sublayers with wider sparsely activating feature layers and enables feature-level circuit decomposition.
+
+**Mirror implication:** logical functions may be sparse combinations of feature-level computations rather than views of dense weights. Transcoder features are a strong atom-basis control.
+
+## PA104 — Sparse low-rank representation/weight intervention
+
+**RoseLoRA: Row and Column-wise Sparse Low-rank Adaptation of Pre-trained Language Model for Knowledge Editing and Fine-tuning**  
+https://aclanthology.org/2024.emnlp-main.57/
+
+Constrains low-rank updates so the resulting weight change affects selected rows/columns more sparsely.
+
+**Mirror implication:** when Mirror edits are claimed to be local or knowledge-preserving, sparse low-rank updates are a strong locality control.
+
 ## Research gaps that remain especially relevant here
 
 1. **Logical expert multiplicity from one physical expert via a structured view** — adjacent to expert tying, but not equivalent.
