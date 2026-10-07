@@ -1,0 +1,75 @@
+{
+  "experiment_id": "MA-005",
+  "title": "signed Mirror expert mixture",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/RUNTIME",
+  "base_commit": "e50a20fe4c000ffb3113f9d3e6564b3efacd4395",
+  "prior_art_refs": ["PA01", "PA02", "PA03"],
+  "hypothesis": "A signed mixture of four Givens-coordinate views of one shared expert matrix can reproduce an aligned four-expert mixture teacher at lower actual serialized payload than independent signed full experts; independently parameterized mixture experts should require private degrees of freedom.",
+  "physical_object": "one shared linear expert matrix W mapping 16D inputs to 12D outputs",
+  "mirror_coordinate": "four expert-specific Givens coordinate vectors on the input representation",
+  "logical_multiplicity": "four signed-mixture expert functions evaluated jointly per example",
+  "task": {
+    "input_dim": 16,
+    "output_dim": 12,
+    "experts": 4,
+    "mixture": "coefficients are (+/- 0.5) Walsh sign patterns from signs of x[0] and x[1]; all four experts are composed for every example",
+    "teacher_modes": {
+      "aligned_views": "one random base matrix W with four fixed Givens input views",
+      "independent_experts": "four independently sampled matrices"
+    },
+    "primary_metric": "held-out output MSE",
+    "structure_audit": "maximum per-sign-pattern MSE across four coefficient patterns"
+  },
+  "controls": [
+    "independent full expert matrices with the same signed coefficients",
+    "hard tied expert matrix with the same signed coefficients",
+    "shared matrix with learned per-expert scalar amplitudes",
+    "shared matrix plus rank-1 per-expert residuals",
+    "shared matrix plus learned per-expert Givens views (Mirror)"
+  ],
+  "development": {
+    "worlds_or_seeds": [{"world": 50000, "init_seed": 500000}],
+    "learning_rate_candidates": [0.003, 0.01],
+    "selection_metric": "mean held-out MSE pooled across methods and both teacher modes"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      {"world": 50001, "init_seed": 500001},
+      {"world": 50002, "init_seed": 500002},
+      {"world": 50003, "init_seed": 500003}
+    ],
+    "locked_before_access": true
+  },
+  "training": {
+    "updates": 1200,
+    "batch_size": 64,
+    "optimizer": "AdamW",
+    "weight_decay": 0.0001,
+    "dtype": "float32",
+    "matched_minibatches_across_methods": true,
+    "router": "none; signed coefficient code is deterministic from input signs and identical across methods"
+  },
+  "storage": {
+    "authority": "actual serialized full inference payload bytes",
+    "serialization": "torch.save state_dict plus deterministic config JSON",
+    "paid_objects": ["expert matrices or shared matrix", "Givens angles", "scalar amplitudes", "rank-1 residual factors", "metadata"]
+  },
+  "compute": {
+    "report_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_MAC_proxy": true,
+    "report_wall_time": true,
+    "report_inference_throughput": true,
+    "cpu_threads": 1
+  },
+  "success_gate": "In all three fresh aligned worlds, Mirror MSE <=1.10x independent full-expert mixture MSE and <=0.70x its serialized payload; it must beat hard tying, scalar amplitude, and rank-1 residual controls on MSE. Independent mode maps the private-parameter boundary.",
+  "failure_gate": "Mirror misses the aligned MSE or byte gate in at least two fresh worlds, or a simpler control reaches Mirror MSE with equal or fewer serialized bytes. Independent-mode failure alone is a structural boundary, not overall failure.",
+  "boundaries": [
+    "linear experts and synthetic signed coefficient regions only",
+    "aligned teacher is deliberately Mirror-generated",
+    "all four experts are evaluated; no sparse routing claim",
+    "fixed 1,200-update screen, not near-convergence capacity",
+    "signed coefficients are supplied by deterministic input-sign rule, so this isolates expert functional composition rather than learned routing"
+  ]
+}

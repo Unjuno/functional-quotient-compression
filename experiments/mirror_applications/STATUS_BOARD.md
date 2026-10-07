@@ -8,7 +8,7 @@ Updated: 2026-10-07
 - P0: **34**
 - P1: **126**
 - P2: **94**
-- Current MA statuses: **244 UNTESTED, 7 PROMISING, 3 FAIL**
+- Current MA statuses: **243 UNTESTED, 1 SCREENING, 7 PROMISING, 3 FAIL**
 - Historical evidence lanes SRM/TM are not MA statuses.
 
 ## Next candidate
@@ -24,7 +24,7 @@ MA-009 -> MA-019 -> MA-024.
 
 ## Active experiments
 
-- None. MA-003 has completed; MA-005 is next.
+- MA-005 — branch `research/ma-005-signed-mirror-mixture-20261007`; directory `experiments/mirror_applications/ma-005-signed-mirror-mixture/`; worker/run `Codex session 2026-10-07`; start commit pending.
 
 
 
