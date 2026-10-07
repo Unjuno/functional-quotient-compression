@@ -1,31 +1,30 @@
 # MA-199 status
 
-- Status: SCREENING
+- Status: **FAIL at development**; no fresh worlds opened
 - Branch: `research/ma-199-gradient-coordinate-20261007`
-- Base commit: `a5dc84c59a6a7fd35c43dc40003f3be52cc03d75`
-- Protocol frozen: yes at commit `6a2e22c08c3e766359c986e4b7202b4651feee39`
-- Development complete: no
+- Protocol freeze commit: `6a2e22c08c3e766359c986e4b7202b4651feee39`
+- Development complete: yes
 - Fresh/audit opened: no
-- Results committed: no
-- Verification committed: no
-- Registry row updated: no
+- Results committed: pending
+- Verification committed: pending
+- Registry row updated: pending
 
 ## H — hypothesis
 
-A task-specific angular coordinate in a paid shared gradient plane can encode aligned rank-1 skill updates with fewer actual bytes than private rank-1 LoRA, while unrelated updates need private capacity.
+Task-specific Givens gradient coordinates on a paid shared plane will encode aligned updates with lower total bytes and optimizer resume state than per-task rank-1 LoRA while retaining old skills.
 
-## T — fixed setup
+## T — execution
 
-16x8 base, shared 16x2 plane, four sequential tasks. Compare angular coordinates plus one update vector to generic plane coefficients, rank-1/2 LoRA, hard tie and independent full maps. Dev seeds 19901/19902; fresh seeds 19911–19913 remain locked.
+16x8 frozen base, shared 16x2 plane, four sequential tasks, 64 examples and 300 updates per task. LR .003 selected by registered dev metric over .01 on seeds 19901/19902. Controls: hard tie, generic `P @ C_t` shared plane, rank-1/2 LoRA, shared rank-1 hypernetwork, independent full.
 
-## D — pending
+## D — decision
 
-Targeted prior-art review and protocol are frozen. Development has not started.
+**FAIL at development.** Mirror total inference payload was 1,103B versus 1,196B rank-1 LoRA (0.922x), missing <=0.90x on both development worlds. Fresh seeds 19911–19913 stayed sealed. The generic shared-plane control had nearly identical mean aligned MSE and smaller resume state (1,267B/skill vs 2,119B/skill). Mirror/LoRA rank-1 quality ratios were 18.10 and 0.656, unstable across seeds.
 
 ## C — strongest counter-hypothesis
 
-The ordinary shared-plane coefficient matrix may fit the same functions at comparable bytes, making the angular Mirror code an unnecessary constraint.
+The optimizer checkpoint stores angle and vector as separate parameters, adding metadata. A packed coordinate parameter could shrink real resume bytes. This does not change the failed total-inference-byte gate or the generic-control result.
 
 ## U — unresolved
 
-No measurements yet. Basis discovery is not charged in this screen; only the supplied basis and its ongoing state are counted.
+Fresh quality and retention were not established. Basis discovery cost from real gradients and language-model performance remain untested.
