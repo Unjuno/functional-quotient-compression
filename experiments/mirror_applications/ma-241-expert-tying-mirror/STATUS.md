@@ -3,12 +3,12 @@
 - Status: PROMISING (synthetic mechanism/storage gates PASS; broad application not established)
 - Branch: `research/ma-241-expert-tying-mirror-20261007`
 - Base commit: `ccf4d5c4e83992d70ccdc5db6032e428f6532380`
-- Last verified commit: pending result commit
+- Last verified commit: `0ee183668285231d825e853c69c4791b9d252bf2`
 - Development complete: yes; common learning rate `0.003`
 - Fresh/audit opened: yes; worlds 24101, 24102, 24103
-- Results committed: pending
-- Verification committed: pending
-- Registry row updated: pending until verification is committed
+- Results committed: yes (`0ee183668285231d825e853c69c4791b9d252bf2`)
+- Verification committed: yes (`0ee183668285231d825e853c69c4791b9d252bf2`)
+- Registry row updated: yes (PROMISING; synthetic aligned screen)
 
 ## Decision
 
@@ -16,7 +16,7 @@ In all three deliberately coordinate-aligned synthetic worlds, the Mirror model 
 
 ## Next action
 
-Commit verified files, update registry/claim ledger/status board, push the dedicated MA-241 research branch, then advance to MA-253.
+Push the dedicated MA-241 branch, then advance to MA-253.
 
 ## Blockers
 
