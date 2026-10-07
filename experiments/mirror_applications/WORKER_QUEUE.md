@@ -25,7 +25,7 @@ These have strong adjacent prior art, so the experiment must implement the cited
 Completed this run: MA-003 -> MA-005 -> MA-009 -> MA-019 -> MA-024.
 
 ### Family B — Attention / KV
-MA-061 -> MA-063
+MA-063
 
 ### Family C — Depth / position
 MA-076 -> MA-079 -> MA-086 -> MA-116

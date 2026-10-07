@@ -4,9 +4,9 @@
 - Branch: `research/ma-061-single-kv-logical-views-20261007`
 - Development complete: yes; selected LR 0.003
 - Fresh/audit opened: no
-- Results committed: pending
-- Verification committed: pending
-- Registry row updated: pending
+- Results committed: yes (`53e80de855950fb52062e1dd51c3b5c41395c408`); development selection provenance `90ae87a3c36d4a9cee79dca01881cd060266ab7b`
+- Verification committed: yes (`53e80de855950fb52062e1dd51c3b5c41395c408`)
+- Registry row updated: yes (tracker commit pending)
 
 ## H / T / D / C / U
 
