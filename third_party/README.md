@@ -4,7 +4,7 @@ Third-party snapshots used as experimental baselines live here. Preserve their o
 
 ## nanoGPT
 
-`nanoGPT/` is a source snapshot supplied by the project user on 2026-10-07.
+`nanoGPT/` is a runnable research baseline derived from a source archive supplied by the project user on 2026-10-07. See `nanoGPT/VENDOR_NOTES.md` for exact archive provenance and the committed subset.
 
 - original archive SHA-256: `7f8b869f501ef8015407399e92f895d2bc6113f64fb8444f67de6b010febd992`
 - upstream license in snapshot: MIT, copyright Andrej Karpathy
