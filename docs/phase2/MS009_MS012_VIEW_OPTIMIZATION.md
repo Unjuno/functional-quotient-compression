@@ -133,6 +133,22 @@ The evidence supports this hierarchy:
 9. count all View/calibration metadata in serialized bytes;
 10. keep local prediction, cross-sensor law transfer, new-sensor onboarding, compute, and storage as separate metrics.
 
+## Mirror-MoE status
+
+The current validated residual-View architecture should **not** be mistaken for sparse MoE merely because multiple sensors/views can be evaluated in parallel.
+
+Mirror-MoE remains an active, separate hypothesis:
+
+- keep one shared world core;
+- maintain a bank of low-description residual Mirror experts generated from shared parameters;
+- route from canonical world state / role, not raw sensor identity;
+- activate only top-1/top-2 experts so active compute does not scale linearly with the total expert count;
+- compare against fixed gate, FiLM/low-rank residual, dense parallel Mirror bank, and independent MoE under actual serialized-byte and active-compute budgets.
+
+See [MIRROR_MOE_OPEN_DIRECTION.md](MIRROR_MOE_OPEN_DIRECTION.md).
+
+The key unresolved question is whether sparse Mirror selection preserves the shared-law-transfer advantage while obtaining specialization at approximately constant active compute.
+
 ## Boundaries
 
 These are small synthetic results. Fresh-world ranges are not confidence intervals. The experiments do not establish that world laws are stored only once internally, do not demonstrate a Transformer capacity multiplier, and do not establish real camera/LiDAR/IMU performance.
