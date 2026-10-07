@@ -1,0 +1,49 @@
+{
+  "experiment_id": "SRM002",
+  "date_jst": "2026-10-07",
+  "evidence_lane": "synthetic mechanism + causal-transformer bridge",
+  "panels": {
+    "operator_factorized": {
+      "state_dim": 16,
+      "shared_basis_dim": 8,
+      "rules": [68, 132, 260],
+      "rules_per_example": 4,
+      "primary_worlds": [64001, 64002, 64003, 64004],
+      "methods": ["hashed_moe", "shared_signed_basis", "mirror_stretch_shear", "full_independent", "soft_positive_mixture", "signed_mixture"],
+      "training_steps": [300, 600],
+      "long_control_steps": 2400
+    },
+    "hybrid_private": {
+      "rules": 132,
+      "private_rank": 2,
+      "private_fraction_sweep": [0.0, 0.125, 0.25, 0.5],
+      "fresh_worlds_for_0.25_and_0.5": [65001, 65002, 65003]
+    },
+    "automatic_private_discovery": {
+      "private_fraction": 0.25,
+      "overcomplete_private_rank": 2,
+      "regularization_lambda": 0.001,
+      "worlds": [65101, 65102, 65103],
+      "score": "Frobenius norm of effective low-rank residual",
+      "count_free_pruning": "2-cluster k-means on log residual norm"
+    },
+    "causal_bridge": {
+      "state_space": "GF(5)^2",
+      "classes": 25,
+      "rules_per_example": 4,
+      "reverse_order_changes_target_fraction": 0.964,
+      "world": 63001,
+      "comparison": ["final_loss_only", "intermediate_state_auxiliary"]
+    }
+  },
+  "storage": "actual torch serialized bytes",
+  "optimizer": "AdamW",
+  "ES": false,
+  "loop": false,
+  "boundaries": [
+    "not natural language",
+    "not an LLM capacity multiplier claim",
+    "factorized teacher families are mechanism diagnostics",
+    "Mirror-specific advantage failed in the main operator panel"
+  ]
+}
