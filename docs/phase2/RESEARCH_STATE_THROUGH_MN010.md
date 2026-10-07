@@ -1,4 +1,4 @@
-# Phase II research state through MN010
+> **HISTORICAL SNAPSHOT.**\n> This was canonical through MN010, but is no longer the current Phase II state. See [CURRENT_STATE_2026-10-07.md](CURRENT_STATE_2026-10-07.md).\n\n# Phase II research state through MN010
 
 Date: 2026-10-04
 
