@@ -160,3 +160,11 @@ Do not mix these four evidence classes. Measure physical cache aliasing/storage 
 ### Recurrent/depth candidates
 
 MA-247 showed that even an aligned Givens teacher can fail a fixed-budget recurrent optimization screen. Include a scalar/static-LoRA optimization control and do not infer representational impossibility from failed convergence.
+
+## 12. Research support intake — use at the next safe boundary
+
+[PR #27: computation reuse and correctness guards](https://github.com/Unjuno/functional-quotient-compression/pull/27) adds 16 follow-up subtests for existing MA-003/672/691..700, with proofs, 19 unit tests and a 200-check numerical replay. The package is on `research/mirror-compute-reuse-support-20261007`, under `experiments/mirror_applications/research_intake/compute_reuse_20261007/`. It is not a language-quality or runtime result.
+
+For MA-003, inspect shared-projection fusion, sign-View gate/bypass equivalence and antipodal cancellation. For KV candidates, inspect common-map value fusion, original key-width temperature after latent absorption, missing-information counterexamples and source-token cache provenance.
+
+Do not interrupt a frozen run or change audit seeds/gates to incorporate this intake. Check dedicated experiment branches before claiming work: at the inspected snapshots MA-248..251 were already reported complete on the MA-251 branch, while the shared board still listed MA-248 next. Preserve both histories; do not replace the expanded global registry with an older worker checkout. The PR uses local CR subtest IDs, not newly reserved global MA IDs.
