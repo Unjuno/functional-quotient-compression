@@ -96,6 +96,24 @@ Highest-information new P0 candidates:
 
 These do not preempt an already-started worker experiment. They enter the queue after current active work and earlier locked cross-over candidates.
 
+## Expansion lanes discovered by research
+
+The backlog now contains **400 candidates**. Recent literature sweeps add four new strategic lanes:
+
+### A. Representation selection
+Masks/supermasks and intrinsic subspaces ask whether a task needs a new weight transform at all, or only a compact selector/coordinate.
+
+### B. Tensor and symmetry coordinates
+Tucker/TT factors provide shared physical banks; Re-Basin and monomial symmetries identify directions that change coordinates without changing function. Symmetry audits are required before capacity claims.
+
+### C. Elastic execution
+MoD, early exit, slimmable/OFA/MatFormer and supernet methods make architecture/depth/width a logical coordinate. Mirror is tested as a low-cost correction on top of shared supernet weights.
+
+### D. Module/address compression
+Prompt pools, adapter composition, hash/compositional embeddings and associative/product-key memories expose large banks of small logical objects that may be represented by shared bases plus addresses.
+
+These lanes enter only after current locked/active work and should reuse family-level harnesses.
+
 ## Stage 2 — Replication gate
 
 A candidate moves beyond SCREENING only if:
