@@ -1,0 +1,78 @@
+{
+  "decision": "FAIL_DEVELOPMENT_GATE",
+  "development": {
+    "fresh_accessed": false,
+    "learning_rates": [
+      0.001,
+      0.003,
+      0.01
+    ],
+    "methods": [
+      "independent",
+      "tied",
+      "rank2",
+      "scalar",
+      "mirror"
+    ],
+    "rows": 30,
+    "selected_learning_rate": 0.01,
+    "teacher_modes": [
+      "aligned",
+      "independent"
+    ],
+    "world": 100000
+  },
+  "experiment_id": "MA-010",
+  "fresh_freeze_manifest_hashes_checked_before_access": true,
+  "fresh_split_integrity_checked": true,
+  "fresh_worlds_sealed": [
+    100001,
+    100002,
+    100003
+  ],
+  "gate": {
+    "aligned_mirror_to_independent_mse_ratio": 2.127969,
+    "aligned_mirror_to_independent_payload_ratio": 0.875329,
+    "passed": false,
+    "required_max": 1.25,
+    "required_max_payload": 0.65
+  },
+  "notes": [
+    "Development quality and payload gates both failed; fresh conditions were not opened.",
+    "Order-swap teacher audit was nonzero on aligned world.",
+    "Fixed-update synthetic screen; no capacity or LM claim."
+  ],
+  "protocol_freeze_commit": "f3d22a8a1f8fd93fd49f0f2c91a0bd2d3ab593c3",
+  "selected_lr_aligned_metrics": {
+    "independent": {
+      "bytes": 2663,
+      "mse": 0.0003748344024643302
+    },
+    "mirror": {
+      "bytes": 2330,
+      "mse": 0.0007976464694365859
+    },
+    "rank2": {
+      "bytes": 2777,
+      "mse": 0.00034264271380379796
+    },
+    "scalar": {
+      "bytes": 2078,
+      "mse": 0.001669222
+    },
+    "tied": {
+      "bytes": 1888,
+      "mse": 0.0017270962707698345
+    }
+  },
+  "serialization": {
+    "authority": "actual torch.save state_dict bytes plus compact deterministic JSON config",
+    "payload_bytes_recorded_for_all_rows": true,
+    "roundtrip_checked_by_tests": false
+  },
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-010-sequential-mirror-experts/tests",
+    "failed": 0,
+    "passed": 3
+  }
+}
