@@ -1,23 +1,14 @@
-# MA-XXX status
+# MA-250 status
 
 - Status: SCREENING
-- Branch: `research/ma-xxx-short-name-YYYYMMDD`
-- Base commit:
-- Last verified commit:
+- Branch: `research/ma-250-vsa-expert-address-20261007`
+- Base commit: `d657dbe8539e5af756cb89533fd9651e968ef4e3`
 - Development complete: no
 - Fresh/audit opened: no
 - Results committed: no
 - Verification committed: no
 - Registry row updated: no
 
-## Next action
-
-<exactly one action>
-
 ## Blockers
 
 None.
-
-## Decisions / rulings
-
-Record deviations from the original protocol here.

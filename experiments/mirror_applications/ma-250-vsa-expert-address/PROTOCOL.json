@@ -1,34 +1,24 @@
 {
-  "experiment_id": "MA-XXX",
-  "title": "<short title>",
+  "experiment_id": "MA-250",
+  "title": "MAP/Hadamard binding as Mirror expert address",
   "status": "SCREENING",
-  "evidence_lane": "MECHANISM",
-  "base_commit": "<sha>",
-  "hypothesis": "<falsifiable hypothesis>",
-  "physical_object": "<shared object>",
-  "mirror_coordinate": "<view/address>",
-  "logical_multiplicity": "<what becomes multiple>",
-  "prior_art_refs": [],
-  "controls": [],
-  "development": {
-    "worlds_or_seeds": [],
-    "selection_metric": "<metric>"
-  },
-  "fresh": {
-    "worlds_or_seeds": [],
-    "locked_before_access": true
-  },
-  "storage": {
-    "authority": "actual serialized inference payload bytes",
-    "paid_objects": []
-  },
-  "compute": {
-    "report_tokens_or_examples": true,
-    "report_optimizer_updates": true,
-    "report_active_compute_proxy": true,
-    "report_isolated_wall_clock": true
-  },
-  "success_gate": "<predeclared gate>",
-  "failure_gate": "<predeclared gate>",
-  "boundaries": []
+  "evidence_lane": "MECHANISM/STORAGE/RUNTIME",
+  "base_commit": "d657dbe8539e5af756cb89533fd9651e968ef4e3",
+  "prior_art_refs": ["PA11", "PA12"],
+  "hypothesis": "A shared expert matrix plus a small per-role Givens Mirror coordinate can recover four logical functions from one physical expert when roles share a transformed basis; MAP, Hadamard linear binding, and HRR are required address controls, and independent role matrices should require private residuals or untied experts.",
+  "physical_object": "one shared linear expert basis W from 16D input to 12D output",
+  "mirror_coordinate": "one set of 8 Givens angles per logical role",
+  "logical_multiplicity": "four role-specific expert functions from one shared physical matrix",
+  "teacher": "aligned mode generates each role matrix by rotating one shared base W; independent mode draws an unrelated matrix for each role",
+  "task": {"input_dim": 16, "output_dim": 12, "roles": 4, "metric": "held-out role-conditioned MSE"},
+  "controls": ["four untied full experts", "hard tied expert", "tied plus scalar role gate", "tied plus rank-1 private residual", "MAP sign-permutation role binding", "Hadamard linear role binding", "HRR circular-convolution role binding", "tied expert plus learned Givens Mirror role views"],
+  "address_operators": {"MAP": "fixed role-specific signed permutations reconstructed deterministically from a paid address seed", "Hadamard": "fixed role-specific H diag(sign) H transforms reconstructed from a paid address seed", "HRR": "fixed real orthogonal circular-convolution transforms from conjugate-symmetric unit-magnitude spectra; reconstructed from a paid address seed"},
+  "development": {"worlds_or_seeds": [{"world": 25000, "init_seed": 250000}], "learning_rate_candidates": [0.003, 0.01], "selection_metric": "mean held-out MSE over methods and both teacher modes"},
+  "fresh": {"worlds_or_seeds": [{"world": 25001, "init_seed": 250001}, {"world": 25002, "init_seed": 250002}, {"world": 25003, "init_seed": 250003}], "locked_before_access": true},
+  "training": {"updates": 1200, "batch_size": 64, "optimizer": "AdamW", "weight_decay": 0.0001, "dtype": "float32", "matched_minibatches_across_methods": true},
+  "storage": {"authority": "actual serialized inference payload bytes", "serialization": "torch.save state_dict plus deterministic config/address-seed JSON", "paid_objects": ["shared or untied expert matrices", "biases", "Mirror angles", "scalar gates", "private residuals", "address seed and metadata"]},
+  "compute": {"report_examples": true, "report_optimizer_updates": true, "report_active_MAC_proxy": true, "report_wall_time": true, "report_inference_throughput": true, "cpu_threads": 1},
+  "success_gate": "In all three fresh aligned worlds, Mirror MSE <=1.10x untied, at least 10x lower than hard tying and at least 10% lower than each MAP/Hadamard/HRR control; actual serialized payload <=0.60x untied. In independent mode, identify whether rank-1 residual closes any of the gap to untied.",
+  "failure_gate": "Mirror misses two or more aligned fresh quality gates, or a MAP/Hadamard/simple gate control matches Mirror at equal or lower bytes. Independent-mode failure alone is a mapped private-parameter boundary, not overall Mirror failure.",
+  "boundaries": ["linear synthetic experts only", "aligned teacher is an optimistic mechanism case", "fixed 1,200-update screen, not capacity", "no natural MoE/router/load-balancing result", "address transforms use deterministic fixed codes reconstructed from a charged seed"]
 }
