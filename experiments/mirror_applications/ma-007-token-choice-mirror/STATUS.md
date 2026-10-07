@@ -2,14 +2,12 @@
 
 - Status: SCREENING
 - Branch: `research/ma-007-token-choice-mirror-20261007`
-- Base commit: `a556e63` (verified MA-006 parent)
-- Protocol frozen before development; no new world data opened
-- Registry: UNTESTED
-
-## Scope ruling
-
-This is a paired router-policy crossover on balanced overlapping role clouds. MA-001's sign-quadrant top-1 study and MA-006's expert-choice study are prior evidence; this candidate tests token-choice Mirror in the exact task family that exposed expert-choice no-route loss.
+- Protocol/source freeze: `76cf864`
+- Development complete: yes; LR 0.01 selected by preregistered all-method mean MSE
+- Development access gate: passed (Mirror/full-token MSE ratio 0.764, payload ratio 0.333)
+- Fresh/audit opened: no; seeds/configuration frozen
+- Registry: SCREENING
 
 ## Next action
 
-Implement token-choice Mirror and the paired expert-choice control, freeze source and tests, then run development only.
+Run frozen worlds 70001–70003 across both teacher modes and all eight methods.
