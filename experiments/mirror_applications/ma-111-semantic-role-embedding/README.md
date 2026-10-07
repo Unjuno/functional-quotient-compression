@@ -20,9 +20,13 @@ Cheapest controls are ordinary role-vector addition and FiLM, followed by per-ro
 
 A controlled one-step next-symbol task uses 32 filler token IDs, four explicit roles (agent, patient, instrument, location), 16-dimensional shared input embeddings, and an 8-token continuation distribution from one shared readout. The shared embedding/readout are frozen after initialization and charged to every method. Development and evaluation split lexical fillers: train on IDs 0–23 and measure transfer on IDs 24–31 with fresh Gaussian input noise.
 
-In the aligned family, each role teacher is the same shared function after a Givens rotation of the first embedding-coordinate pair. In the independent family, each role uses its own random orthogonal embedding transform. Distill temperature-2 teacher distributions for 128 examples/role and 300 updates/role. Development seeds are 11101/11102; learning rates .003/.01. Fresh seeds 11111–11113 remain sealed unless both development worlds pass the gate.
+In the aligned family, each role teacher is the same shared function after a Givens rotation of the first embedding-coordinate pair. In the independent family, each role uses its own random orthogonal embedding transform. Distill temperature-2 teacher distributions for 128 examples/role and 300 updates/role. Development seeds are 11101/11102; learning rates .003/.01. Fresh seeds 11111–11113 remain sealed unless both development worlds pass the gate. The registered aggregate selector chose LR .01: mean held-out KL .00322458 versus .00333996 at .003. The fresh LR was frozen to .01 before access.
 
 Controls: hard tying; additive role vectors; role FiLM; per-role rank-2 input LoRA; per-role rank-2 output-head LoRA; per-role full output heads; fixed VSA sign binding; learned full per-role input maps; and exact teachers as quality upper references. Final-role throughput is measured on a 2048-example batch after 5 warm-ups and 50 timed CPU forwards with one torch thread.
+
+## Development screen
+
+Both aligned development seeds passed the registered absolute-KL, top-1, ECE, and total-byte opening gates at LR .01. Mirror held-out KL was 3.42e-10 and 9.17e-10, top-1 agreement was 1.0 in both, and payload was 2,770 B versus 5,839 B for full per-role maps (0.474x). Rank-2 output LoRA reached similarly low KL at 3,411 B. Mirror inference throughput varied substantially across the two development runs and was below LoRA; fresh timing remains to be measured. The independent-map development family was poor for Mirror and better captured by role FiLM, low-rank controls, or full maps.
 
 ## Gates
 

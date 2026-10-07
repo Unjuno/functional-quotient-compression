@@ -3,9 +3,9 @@
 - Status: SCREENING
 - Branch: `research/ma-111-semantic-role-embedding-20261007`
 - Base commit: `6e0ed10a094f9a082a144a2d8d86f508fd4cbad6`
-- Protocol frozen: yes, before development in the current branch commit.
-- Development complete: no
-- Fresh/audit opened: no; 11111–11113 sealed.
+- Protocol frozen: yes before development; LR selection amendment frozen before fresh.
+- Development complete: yes; registered aggregate selected LR 0.01 (mean KL .00322458 vs .00333996 at .003).
+- Fresh/audit opened: no; 11111–11113 sealed. Fresh LR 0.01 and protocol amendment committed before access.
 - Results committed: no
 - Verification committed: no
 
@@ -27,4 +27,4 @@ A rank-2 output-head LoRA can represent the linear effect of a Givens input view
 
 ## U — unresolved
 
-No results. Semantic-role names are controlled synthetic role IDs; natural semantic binding and language-model NLL remain untested.
+Development passed the aligned quality/storage opening gate; fresh results pending. Semantic-role IDs are controlled synthetic categories; natural semantic binding and language-model NLL remain untested.
