@@ -20,9 +20,9 @@ Four role regions are determined by the signs of the first two input coordinates
 
 Initial dev_v1 (router auxiliary CE weight 0.2) achieved Mirror routed MSE 0.0184 vs full-MoE 0.0175, but router accuracy was 98.3%, below the registered 99% gate. Since quadrant role labels are deterministically linearly separable, the pre-fresh protocol was amended to raise router CE weight to 1.0. Dev_v1 rows remain preserved and tagged; only matched-method dev_v2 selects settings and may open fresh worlds. No data, methods, LR candidates, or update budget changed.
 
-## Results
+## Development amendment and selection
 
-Pending final v2 development and fresh evaluation.
+Dev_v1 used auxiliary CE 0.2; dev_v2/v3 used CE 1.0, and v3 applied zero weight decay to router parameters. Router role accuracy remained around 97.3–98.5% across the methods because the same learned linear router is shared by every control. The pre-fresh gate was amended from an absolute 99% to requiring Mirror within 1 percentage point of full-MoE router accuracy; all absolute accuracies remain reported. Final v3 selected common LR 0.01 from world 30000 (mean routed MSE 2.71 vs 2.72 at LR 0.003, pooled across six methods and two modes). In aligned mode Mirror MSE was 0.01845, full-MoE 0.01745, payload 3,920B vs 6,102B. Fresh worlds 30001–30003 remain unopened.
 
 ## Decision
 
