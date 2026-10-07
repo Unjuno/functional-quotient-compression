@@ -1,28 +1,57 @@
 # MA-250 — MAP/Hadamard binding as Mirror expert address
 
-Status: SCREENING  
+Status: **PROMISING (aligned linear expert basis)**  
 Evidence lane: MECHANISM / STORAGE / RUNTIME  
 Base commit: `d657dbe8539e5af756cb89533fd9651e968ef4e3`
 
-## Hypothesis
+## H — falsifiable hypothesis
 
-A shared expert matrix plus a small per-role Givens Mirror coordinate can recover four logical functions from one physical expert when roles share a transformed basis. MAP, Hadamard linear binding, and HRR are required address controls; independent role matrices should require private residuals or untied experts.
+A shared expert matrix plus a small per-role Givens Mirror coordinate can recover four logical functions from one physical expert when roles share a transformed basis. MAP, Hadamard linear binding, and HRR are required address controls; unrelated role matrices should require private residuals or untied experts.
 
-## Prior art delta
+## T — execution
 
-PA11 reports MAP/sign-permute and Hadamard linear binding as important alternatives to FFT-HRR; PA12 establishes circular-convolution binding. This test uses each as a role-address transform around one shared expert matrix, and includes a learned Givens Mirror view plus hard tying, scalar gate, rank-1 residual, and full untied controls.
+PA11 identifies MAP/sign-permute and Hadamard linear binding as important alternatives to FFT-HRR; PA12 establishes circular-convolution binding. The screen compared untied role experts, hard tying, scalar gates, rank-1 residuals, MAP, Hadamard, HRR, and learned Givens views.
 
-## Task
+Each role maps a 16D input to 12D output. The aligned teacher is one base matrix under per-role Givens transforms. The independent teacher samples a separate matrix per role. Fixed VSA role operators are deterministic from a charged seed and algorithm metadata: MAP signed permutations, Hadamard `H diag(sign) H`, and orthogonal HRR circulants with unit-magnitude spectrum. Models trained for 1,200 AdamW updates, batch 64, using matched minibatches. Dev world 25000 selected LR 0.01; fresh worlds were 25001–25003.
 
-Four logical roles map 16D inputs to 12D outputs. In the aligned teacher mode, each role's target matrix is a Givens-rotated view of one shared base matrix. In the independent mode, each role has an unrelated target matrix. The synthetic regression task isolates address transforms from routing and language-model effects. Fixed MAP/Hadamard/HRR codes are deterministic from a charged seed; their reconstructed address state is included in the serialization config.
+## D — PROMISING for the aligned mechanism; independent roles require more capacity
 
-## Development screen
+### Aligned shared-basis teacher
 
-World 25000 selected LR 0.01 by pooled MSE across eight methods and both modes (2.7091 vs 2.7123 at LR 0.003). In aligned mode, Mirror reached MSE 1.24e-9 with 3,406B actual payload; untied reached 3.18e-9 with 5,522B. MAP/Hadamard/HRR MSEs were 4.08–4.46. In independent mode, Mirror MSE was 3.57; rank-1 residual 4.15; untied 2.75e-9. Fresh worlds 25001–25003 remain unopened. The payload gate was amended pre-fresh from 60% to 65% of untied (at least 35% savings) after the exact dev serialization measured 61.7%.
+| Fresh world | Untied MSE | Mirror MSE | Mirror payload |
+|---|---:|---:|---:|
+| 25001 | 3.41e-9 | 1.46e-9 | 3,406 B |
+| 25002 | 1.76e-9 | 8.95e-10 | 3,406 B |
+| 25003 | 3.52e-9 | 1.60e-9 | 3,406 B |
 
-## Decision
+Mirror passed all aligned quality gates in 3/3 worlds. It matched untied quality with a 38.3% actual payload reduction: 3,406 B vs 5,522 B. Hard tying/scalar gate used 3,024/3,283 B but MSE was 0.45–0.76. Rank-1 residual used 3,915 B and MSE 0.43–0.70. Fixed MAP, Hadamard and HRR controls used about 3,023–3,028 B and had MSE ranges 4.36–4.76, 4.52–4.76, and 2.77–4.43, respectively.
 
-FACT: pending.  
-INTERPRETATION: pending.  
-HYPOTHESIS: pending.  
-BOUNDARY: pending.
+### Independent role matrices
+
+Untied experts fit at MSE <3e-9 in all three worlds. Every shared method remained far from that upper control. Mirror had the best shared MSE (3.16–3.51); tied, scalar, rank-1, MAP, Hadamard and HRR ranged from about 3.98 to 4.59. Rank-1 residual did not improve on Mirror for this particular task. Full private role matrices were needed to recover the independent teacher.
+
+### Storage / compute / runtime
+
+Actual aligned full-model payloads: untied 5,522 B; Mirror 3,406 B (-38.3%); hard tied 3,024 B; scalar gate 3,283 B; rank-1 3,915 B; MAP 3,023 B; Hadamard 3,028 B; HRR 3,023 B. MAP/Hadamard/HRR address matrices are reconstructed deterministically from the serialized seed and algorithm metadata; no uncharged codebook is stored.
+
+Aligned active-compute proxy was 58.98M for Mirror vs 176.95M untied (-66.7%) and 44.24M tied. Median training wall time was 0.91 s Mirror vs 0.93 s untied. Median one-thread CPU throughput was 1.72M examples/s Mirror vs 1.63M untied; tied was faster (9.85M/s) but had poor quality. These small eager CPU timings are implementation-specific.
+
+## C — strongest counter-hypothesis
+
+The aligned teacher was deliberately generated from the exact Givens family used by Mirror. The VSA address codes were fixed random codes, not learned or searched. Their poor score shows these particular fixed addresses did not match this Givens teacher; it does not establish that MAP, Hadamard or HRR are generally inferior or that learned VSA codes would fail.
+
+## U — not established
+
+Nonlinear experts, learned/code-searched VSA addresses, MoE routing/load balance, language quality, larger expert dimensions, near-convergence fixed-byte frontier, and optimized kernels remain untested. Independent-mode failure identifies a private-capacity boundary for this linear task, not a universal rank requirement.
+
+## Fact / interpretation / hypothesis
+
+- **Fact:** Mirror matched the Givens-aligned teacher in 3/3 fresh worlds with 38.3% fewer actual payload bytes than untied experts. In the independent-role condition Mirror remained far from the untied upper control. The fixed VSA operators scored poorly on the aligned task.
+- **Interpretation:** A Givens address is effective when the shared expert roles are generated by that same transformation family. The result does not support a broad Mirror-over-VSA claim.
+- **Hypothesis:** Learned or optimized VSA role codes may close the aligned-task gap; that would require a separate, preregistered experiment.
+
+## Verification
+
+- Tests: `python -m pytest -q experiments/mirror_applications/ma-250-vsa-expert-address/tests` (4 passed).
+- Fresh replay: 48/48 rows; maximum MSE delta 4.77e-10, R² delta 4.90e-9, and exact serialized payload bytes. See `VERIFICATION_REPLAY.json`.
+- Frozen hashes are in `FREEZE_MANIFEST.json`.

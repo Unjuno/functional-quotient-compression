@@ -1,18 +1,22 @@
 # MA-250 status
 
-- Status: SCREENING
+- Status: **PROMISING (aligned linear expert basis)**
 - Branch: `research/ma-250-vsa-expert-address-20261007`
 - Base commit: `d657dbe8539e5af756cb89533fd9651e968ef4e3`
-- Development complete: yes; selected LR 0.01
-- Fresh/audit opened: no; worlds 25001–25003 locked
-- Results committed: no
-- Verification committed: no
-- Registry row updated: no
+- Development: complete; LR 0.01 selected on world 25000
+- Fresh/audit: complete; worlds 25001–25003
+- Results committed: pending
+- Verification committed: pending
+- Registry row updated: pending
 
-## Development screen
+## H / T / D / C / U
 
-Aligned Mirror reached held-out MSE 1.24e-9 with 3,406B; untied reached 3.18e-9 with 5,522B. MAP, Hadamard and HRR controls were far worse. Independent roles remained difficult for all tied methods; full experts fit exactly. The byte threshold was amended before fresh access to <=65% of untied, a 35% actual reduction.
+- **H:** A shared expert matrix with per-role Givens coordinates can recover four role-specific functions from one physical expert when roles share that transformed basis; compare MAP, Hadamard and HRR binding.
+- **T:** 16D-to-12D linear roles; aligned and independent teacher modes; eight controls; 1,200 AdamW updates, matched minibatches; dev world 25000; fresh worlds 25001–25003; common LR 0.01.
+- **D:** PROMISING on aligned mode: Mirror matched untied quality in 3/3 worlds with 3,406B vs 5,522B (-38.3%); fixed MAP/Hadamard/HRR controls had much higher MSE. Independent roles defeated all shared transforms; untied fit exactly.
+- **C:** Teacher is intentionally aligned to Givens; VSA codes were fixed random codes, not optimized.
+- **U:** Learned VSA codes, nonlinear experts, MoE routing, language, near-convergence frontier, and accelerator kernels.
 
-## Blockers
+## Verification
 
-None.
+Four tests passed. All 48 fresh metrics replayed; maximum MSE difference 4.77e-10, R² difference 4.90e-9, exact payload-byte match 48/48.
