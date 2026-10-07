@@ -45,7 +45,7 @@ When a worker starts an MA experiment, add:
 
 ## Recently completed
 
-- MA-006 — PROMISING for the registered expert-choice sharing gate: Mirror passed 3/3 aligned quality/coverage/storage at 7,761B vs 23,341B full expert-choice. Token-choice had 100% coverage and 2.50–3.42x lower MSE; no-route expert-choice tokens and eager runtime limit usefulness. Mirror-specific FiLM/residual margin failed. Branch `research/ma-006-expert-choice-mirror-20261007`; report `experiments/mirror_applications/ma-006-expert-choice-mirror/README.md`; result commit `RESULT_COMMIT_PENDING`.
+- MA-006 — PROMISING for the registered expert-choice sharing gate: Mirror passed 3/3 aligned quality/coverage/storage at 7,761B vs 23,341B full expert-choice. Token-choice had 100% coverage and 2.50–3.42x lower MSE; no-route expert-choice tokens and eager runtime limit usefulness. Mirror-specific FiLM/residual margin failed. Branch `research/ma-006-expert-choice-mirror-20261007`; report `experiments/mirror_applications/ma-006-expert-choice-mirror/README.md`; result commit `572e245bee17ffe430863a4827baa21da809fb82`.
 
 - MA-004 — PROMISING: nonlinear dense softmax Givens mixture passed aligned quality/storage 3/3 (Mirror/untied MSE 0.297–1.030; 7,697B vs 23,277B). Hard tying was 252B smaller and used one quarter of active MACs; independent roles needed private/richer state, and Mirror CPU throughput was 0.086x tying. Synthetic fixed-update result. Branch `research/ma-004-soft-mirror-expert-mixture-20261007`; report `experiments/mirror_applications/ma-004-soft-mirror-expert-mixture/README.md`; result commit `e8fea8ef10f876835c4683bad0203ec7fdc91e16`.
 
