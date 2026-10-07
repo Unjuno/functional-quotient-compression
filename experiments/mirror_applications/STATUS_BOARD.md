@@ -8,23 +8,23 @@ Updated: 2026-10-07
 - P0: **34**
 - P1: **126**
 - P2: **94**
-- Current MA statuses: **236 UNTESTED, 1 SCREENING, 9 PROMISING, 8 FAIL**
+- Current MA statuses: **236 UNTESTED, 9 PROMISING, 9 FAIL**
 - Historical evidence lanes SRM/TM are not MA statuses.
 
 ## Next candidate
 
-**MA-063 — Mirror-MQA**
+**MA-076 — one block to multiple Mirror layers**
 
 Why next:
-- MA-241, MA-244, MA-245, MA-247, MA-248, MA-249, MA-250, MA-251, MA-253, MA-003, MA-005, MA-009, MA-019, MA-024, MA-041, MA-048 and MA-061 are checked; MA-063 is the next executable P0 candidate.
-- its closest controls should compare MQA and projection-sharing controls (PA07; PA08).
+- MA-241, MA-244, MA-245, MA-247, MA-248, MA-249, MA-250, MA-251, MA-253, MA-003, MA-005, MA-009, MA-019, MA-024, MA-041, MA-048, MA-061 and MA-063 are checked; Family B KV views are paused after the diagnostic, so MA-076 is next.
+- its closest controls should compare tied Transformer blocks, static per-step LoRA, and generated modulation (PA01; PA06).
 
-If MA-063 is blocked, use this order:
-MA-076 -> MA-079 -> MA-086 -> MA-116.
+If MA-076 is blocked, use this order:
+MA-079 -> MA-086 -> MA-116.
 
 ## Active experiments
 
-- MA-063 — branch `research/ma-063-causal-mirror-mqa-20261007`; directory `experiments/mirror_applications/ma-063-causal-mirror-mqa/`; worker/run `Codex session 2026-10-07`; start commit pending.
+- None. MA-003, MA-005, MA-009, MA-019, MA-024, MA-041, MA-048, MA-061 and MA-063 have completed; Family B KV subfamily paused with diagnostic; MA-076 is next.
 
 
 When a worker starts an MA experiment, add:
@@ -42,6 +42,7 @@ When a worker starts an MA experiment, add:
 - MA-041 — PROMISING: aligned attention output/payload gates passed 3/3 with 32.8% fewer bytes; head-level contribution quality and CPU runtime lagged, independent QKV required private weights. Branch `research/ma-041-mirror-attention-heads-20261007`; report `experiments/mirror_applications/ma-041-mirror-attention-heads/README.md`; result commit `359111bc9cc649fe29ad8793035c237dbf211cba`.
 - MA-048 — FAIL: physical-4 to logical-16 Mirror heads saved 43.5% payload and had better head-contribution audit, but aggregate MSE missed full MHA 3/3; CPU throughput 0.189x. Branch `research/ma-048-physical4-logical16-attention-20261007`; report `experiments/mirror_applications/ma-048-physical4-logical16-attention/README.md`; result commit `bdd1dd3002b493cf1355dcc297e9de23b5e0b532`.
 - MA-061 — FAIL at development: MQA matched the one-head cache size, had smaller model payload, equal compute proxy, much lower aligned MSE and higher CPU throughput. Fresh worlds stayed sealed. Branch `research/ma-061-single-kv-logical-views-20261007`; report `experiments/mirror_applications/ma-061-single-kv-logical-views/README.md`; result commit `90ae87a3c36d4a9cee79dca01881cd060266ab7b`.
+- MA-063 — FAIL at development, confirming MA-061 MQA dominance: equal cache bytes, lower MQA model payload, better MQA output MSE, and no compute advantage for Mirror. Branch `research/ma-063-causal-mirror-mqa-20261007`; report `experiments/mirror_applications/ma-063-causal-mirror-mqa/README.md`; result commit pending. See `experiments/mirror_applications/FAMILY_B_KV_DIAGNOSTIC_2026-10-07.md`.
 - MA-247 through MA-251 are complete and verified.
 
 ## Recently completed
