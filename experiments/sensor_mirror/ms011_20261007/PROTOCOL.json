@@ -1,0 +1,18 @@
+{
+  "date_jst":"2026-10-07",
+  "evidence_lane":"SYNTHETIC",
+  "model":"4->48->48->2 MLP",
+  "sensor_world":"four full-observation sensors with affine plus beta=0.6 nonlinear observation residual and Gaussian noise 0.01",
+  "shared_core_sensor_id":false,
+  "view_optimizer":"Backprop",
+  "ES":false,
+  "loop":false,
+  "view_training":{"shared_parent_updates":1000,"code_only_updates":400,"joint_core_view_updates":1000,"source0_changed_law_updates":300},
+  "MS009_fresh_worlds":[53701,53702,53703,53704,53705,53706,53707,53708,53709,53710],
+  "MS011_dev_world":53900,
+  "MS011_fresh_worlds":[53901,53902,53903,53904,53905,53906,53907,53908,53909,53910],
+  "MS012_dev_world":54000,
+  "MS012_fresh_worlds":[54001,54002,54003,54004,54005],
+  "serializer":"deterministic uncompressed FP32; actual bytes measured",
+  "primary_metrics":["seen sensor NMSE","worst sensor NMSE","source0-only changed-law transfer to sensors1/2","label-free new-sensor reference onboarding","serialized bytes","runtime diagnostics"]
+}
