@@ -23,7 +23,7 @@ If MA-186 is blocked, use the next eligible P0 in the registry.
 
 ## Active experiments
 
-None.
+- MA-189 — branch `research/ma-189-freeze-backbone-mirror-20261007`; directory `experiments/mirror_applications/ma-189-freeze-backbone-mirror/`; started from commit `8d0763ddc241667e6e5c0fdefad16b2d71152538`. Prior-art delta and protocol being fixed before development.
 
 
 When a worker starts an MA experiment, add:
