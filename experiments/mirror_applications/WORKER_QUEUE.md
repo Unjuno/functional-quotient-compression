@@ -2,6 +2,16 @@
 
 The queue is derived from `IDEA_REGISTRY.csv`. The registry is authoritative.
 
+## Queue interpretation invariant
+
+Every queued MA hypothesis is an experiment on the extra low-description Mirror functional parameter `m`.
+
+The worker should preserve the strongest native method as a control and ask where `m` can be inserted with minimal surgery. Literature-derived families are **integration targets and controls**, not permission to leave the Mirror program and study the adjacent method by itself.
+
+Use:
+- `docs/phase2/MIRROR_PARAMETER_INTEGRATION_DOCTRINE.md`
+- `docs/phase2/MIRROR_PARAMETER_INTEGRATION_MATRIX.md`
+
 ## Selection rule
 
 Pick the first candidate satisfying all of:
