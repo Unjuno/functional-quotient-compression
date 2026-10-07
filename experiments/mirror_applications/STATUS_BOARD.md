@@ -23,6 +23,8 @@ If MA-186 is blocked, use the next eligible P0 in the registry.
 
 ## Active experiments
 
+- MA-006 — `research/ma-006-expert-choice-mirror-20261007`; directory `experiments/mirror_applications/ma-006-expert-choice-mirror/`; start commit `eca36e2` (verified MA-004 base). Tests capacity-balanced expert-choice routing with a shared nonlinear expert and role views; token-choice and full expert-choice are controls.
+
 
 
 When a worker starts an MA experiment, add:
