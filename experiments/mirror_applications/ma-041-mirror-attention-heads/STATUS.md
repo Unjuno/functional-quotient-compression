@@ -4,9 +4,9 @@
 - Branch: `research/ma-041-mirror-attention-heads-20261007`
 - Development complete: yes; LR 0.003
 - Fresh/audit opened: yes; worlds 41001–41003
-- Results committed: pending
-- Verification committed: pending
-- Registry row updated: pending
+- Results committed: yes (`359111bc9cc649fe29ad8793035c237dbf211cba`)
+- Verification committed: yes (`359111bc9cc649fe29ad8793035c237dbf211cba`)
+- Registry row updated: yes (tracker commit pending)
 
 ## H / T / D / C / U
 
