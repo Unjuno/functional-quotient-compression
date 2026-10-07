@@ -114,6 +114,24 @@ Prompt pools, adapter composition, hash/compositional embeddings and associative
 
 These lanes enter only after current locked/active work and should reuse family-level harnesses.
 
+### E. Dynamic functional coordinates
+
+FiLM/StyleGAN/CondConv-style mechanisms make the functional coordinate input-dependent. Neural fields make it an instance latent. Meta-learning makes it an adapted latent. SSMs make it part of the dynamical state.
+
+Research question: which representation of m gives the best storage/quality/runtime frontier for the same family of logical functions?
+
+### F. Modular programs and editable memory
+
+Path/routing networks make the coordinate a program over reusable modules. Model editors and codebooks make it a persistent behavioral memory.
+
+Research question: can Mirror compress module programs or edit memories while preserving locality, routing correctness and lifelong retention?
+
+### G. Discrete/rate-controlled addresses
+
+VQ/RVQ and error-correcting codes expose an explicit number-of-bits axis.
+
+Research question: how many bits of functional address are actually needed at a target quality/robustness, and when is residual/private capacity preferable?
+
 ## Stage 2 — Replication gate
 
 A candidate moves beyond SCREENING only if:
