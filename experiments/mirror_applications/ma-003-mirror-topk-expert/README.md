@@ -1,75 +1,28 @@
-# MA-XXX — <short title>
+# MA-003 — Mirror top-k expert
 
-Status: SCREENING
-Evidence lane: <MECHANISM | LANGUAGE | STORAGE | RUNTIME | CAPACITY>
-Base commit: <sha>
+Status: SCREENING  
+Evidence lane: MECHANISM / STORAGE / RUNTIME  
+Base commit: `3826b43b4f474e8739392322d399e50c1ac11e6b`
 
 ## Hypothesis
 
-H: <one falsifiable sentence>
+A top-1 router over four logical expert views of one shared matrix can recover a four-expert teacher whose experts are shared-base Givens views, at lower actual model bytes than standard top-1 MoE. Independent expert functions should require private residuals or full weights.
 
-## Physical-to-logical claim
+## Prior art delta
 
-- Physical object being shared:
-- Mirror/View coordinate:
-- Claimed logical multiplicity:
-- Why this could save storage:
-- Why it might fail:
+PA01 motivates hard expert tying, PA02 motivates path/router-sharing and low-rank router controls, and PA03 motivates low-rank routing. This screen fixes the router task and compares standard dense routing against a rank-2 factorized router, while varying expert parameterization: full, hard-tied, scalar-gated, rank-1 residual, and Mirror view.
 
-## Prior-art delta
+## Task
 
-Read the registry row and referenced PA items first.
-
-- Closest prior art:
-- What prior art already establishes:
-- Exact Mirror-specific delta tested here:
-- Cheapest simpler control that could explain the result:
-
-## Comparisons
-
-Primary:
-1. ordinary baseline;
-2. existing non-Mirror method being replaced;
-3. byte-near low-rank/gate/shared-basis control;
-4. Mirror candidate;
-5. unrestricted independent-object upper control when practical.
-
-## Gates
-
-### PASS
-<predeclared useful-quality / byte / compute condition>
-
-### FAIL
-<condition that falsifies the hypothesis>
-
-### NOT ESTABLISHED
-<conditions where the run is informative but cannot decide the claim>
-
-## Tuning boundary
-
-Development:
-- worlds/seeds:
-- hyperparameters allowed to change:
-
-Fresh/audit:
-- worlds/seeds:
-- never used for tuning.
-
-## Storage contract
-
-List every paid inference object. Actual serialized payload is authoritative.
-
-## Compute contract
-
-Record tokens/examples, optimizer updates, active-compute proxy, isolated wall-clock, and inference throughput if relevant.
+Four role regions are determined by the signs of the first two input coordinates. Each logical expert maps a 16D input to 12D output. In the aligned teacher, the four experts are one shared matrix under Givens views. In the independent teacher, each expert is unrelated. Students route top-1 and are trained with a fixed auxiliary role cross-entropy plus regression loss. No combination count is used as a capacity metric.
 
 ## Results
 
-Do not write conclusions until RESULTS_CORE.csv and VERIFICATION.json exist.
+Pending development and fresh evaluations.
 
 ## Decision
 
-FACT:
-INTERPRETATION:
-HYPOTHESIS:
-BOUNDARY:
+FACT: pending.  
+INTERPRETATION: pending.  
+HYPOTHESIS: pending.  
+BOUNDARY: pending.
