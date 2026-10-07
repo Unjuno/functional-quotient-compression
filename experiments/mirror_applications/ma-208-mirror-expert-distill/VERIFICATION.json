@@ -1,19 +1,31 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-208",
+  "commit": "5a37f6abdcb073240541e5fe2349b2ac23454462",
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m pytest -q experiments/mirror_applications/ma-208-mirror-expert-distill/tests",
+    "passed": 3,
+    "failed": 0
   },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "notes": "All seven adapted student payload variants parsed and reserialized byte-identically. Payloads charge the shared base, task IDs, each Mirror angle or control/private state, tensor names, shapes, dtype, dimensions and headers; resume bytes separately serialize optimizer state."
   },
   "metric_replay": {
-    "checked": false,
-    "max_difference": null
+    "checked": true,
+    "report_records": 1470,
+    "exploratory_fresh_records_replayed": 630,
+    "max_difference": 0.0,
+    "payload_bytes_and_compute_exact": true,
+    "command": "OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python experiments/mirror_applications/ma-208-mirror-expert-distill/source/run.py --seeds 20811,20812,20813 --conditions aligned,independent --lrs 0.003 --out /tmp/ma208-fresh-replay.csv",
+    "notes": "Exploratory replay matched all quality, actual-byte, training-example/update and active-compute fields exactly. Wall-clock and inference throughput are timing measurements and were excluded."
   },
   "fresh_split_integrity_checked": false,
-  "notes": []
+  "fresh_worlds_opened": true,
+  "notes": [
+    "Development gate failed in both aligned seeds because Mirror teacher KL exceeded 1.10x ordinary multi-head KL, despite meeting the absolute 1e-4 KL, top-1, ECE and <=0.50x byte subgates.",
+    "The three registered fresh seeds were mistakenly run after the development relative-KL subgate was overlooked. They are retained as exploratory rows and excluded from the status decision.",
+    "Exploratory fresh rerun was exact on metrics/bytes/compute; timing was not expected to replay.",
+    "Aligned teachers were deliberately constructed from the candidate Givens hidden-view transformation; no broad expert-distillation or language-model claim."
+  ]
 }

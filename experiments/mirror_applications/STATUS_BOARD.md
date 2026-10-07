@@ -13,17 +13,17 @@ Updated: 2026-10-07
 
 ## Next candidate
 
-**MA-208 — next eligible P0 candidate (Family F)**
+**MA-111 — next eligible P0 candidate (Embedding / output / position)**
 
 Why next:
 - MA-241, MA-244, MA-245, MA-247, MA-248, MA-249, MA-250, MA-251, MA-253, MA-003, MA-005, MA-009, MA-019, MA-024, MA-041, MA-048, MA-061, MA-063, MA-076, MA-079, MA-086, MA-116, MA-121, MA-129, MA-156, MA-160, MA-171, MA-173 and MA-181 are checked; Family B KV views remain paused.
-- MA-186, MA-189 and MA-199 are completed; MA-208 is next in Family F.
+- MA-186, MA-189, MA-199 and MA-208 are completed; MA-208 failed its development relative-KL gate. MA-111 is the first remaining eligible P0 by registry order.
 
 If MA-186 is blocked, use the next eligible P0 in the registry.
 
 ## Active experiments
 
-- MA-208 — branch `research/ma-208-mirror-expert-distill-20261007`; directory `experiments/mirror_applications/ma-208-mirror-expert-distill/`; started from commit `621dec2ffdf55c3f0503dd75695ea27fdc68544c`. Targeted MoE-to-dense and multi-teacher distillation literature read; protocol frozen before development; development selected LR 0.003. A measurement-only KL/throughput amendment is frozen before fresh seeds 20811–20813.
+
 
 
 When a worker starts an MA experiment, add:
@@ -45,6 +45,8 @@ When a worker starts an MA experiment, add:
 - MA-247 through MA-251 are complete and verified.
 
 ## Recently completed
+
+- MA-208 — FAIL at development: Mirror passed absolute KL, top-1, ECE and 0.476x multi-head bytes, but exceeded the relative-KL limit in both aligned seeds (38.8x and 1,027.7x). Fresh seeds 20811–20813 were mistakenly opened after this subgate was overlooked; they are exploratory only and split integrity is false. Exploratory aligned payload was 1,322B vs 2,775B, but throughput was 0.435x multi-head; independent teachers needed private weights. Branch `research/ma-208-mirror-expert-distill-20261007`; report `experiments/mirror_applications/ma-208-mirror-expert-distill/README.md`; result commit `5a37f6abdcb073240541e5fe2349b2ac23454462`.
 
 - MA-199 — FAIL at development: task Givens coordinates used 1,103B total vs 1,196B rank-1 LoRA (0.922x), missing the <=0.90x byte gate in both development seeds; fresh stayed sealed. Incremental bytes/skill were lower, but the generic shared-plane control had similar mean quality and smaller resume state. Independent updates needed private weights. Branch `research/ma-199-gradient-coordinate-20261007`; report `experiments/mirror_applications/ma-199-gradient-coordinate/README.md`; result commit `577ceb9f5d8d3d55f8350808e03bb5ee3839e090`.
 

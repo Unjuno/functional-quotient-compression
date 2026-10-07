@@ -42,7 +42,7 @@ MA-173 completed PROMISING: learned FFT-phase views passed aligned quality/bytes
 MA-181 completed PROMISING: shared block-circulant plus charged role shifts reached 0.413x untied bytes and similar quality to independent BCA, saving 21% more bytes, but eager runtime regressed sharply; unrelated roles needed dense private state.
 
 ### Family F — Continual / optimization / distillation
-MA-186 completed FAIL for registered aligned quality gate: 20B/skill vs 241B/skill rank-2 LoRA, retained prior aligned tasks 3/3, but missed relative quality in 2/3 fresh worlds; unrelated tasks needed private state. Shared hypernetwork control was degenerate and cannot establish Mirror-specific advantage. -> MA-189 completed PROMISING: two-sided Givens views passed aligned quality/byte/retention 3/3 at 55B vs 228B rank-2 LoRA, while eager throughput was 0.20x LoRA; unrelated tasks required private weights. Rank-4 LoRA remains untested. -> MA-199 completed FAIL at development: 1,103B vs 1,196B rank-1 LoRA missed the <=0.90x total-byte gate in both seeds; generic shared-plane control matched mean quality and used smaller resume state; fresh sealed. -> **MA-208 next**
+MA-186 completed FAIL for registered aligned quality gate: 20B/skill vs 241B/skill rank-2 LoRA, retained prior aligned tasks 3/3, but missed relative quality in 2/3 fresh worlds; unrelated tasks needed private state. Shared hypernetwork control was degenerate and cannot establish Mirror-specific advantage. -> MA-189 completed PROMISING: two-sided Givens views passed aligned quality/byte/retention 3/3 at 55B vs 228B rank-2 LoRA, while eager throughput was 0.20x LoRA; unrelated tasks required private weights. Rank-4 LoRA remains untested. -> MA-199 completed FAIL at development: 1,103B vs 1,196B rank-1 LoRA missed the <=0.90x total-byte gate in both seeds; generic shared-plane control matched mean quality and used smaller resume state; fresh sealed. -> MA-208 completed FAIL: relative-KL subgate missed in both development worlds; fresh runs were mistakenly opened and are exploratory only.
 
 ## Family handoff rule
 
@@ -53,3 +53,8 @@ A worker may batch implementation work across a family, but scientific status is
 ## Stop rule
 
 If two consecutive candidates in a family fail for the same demonstrated structural reason, stop that family and write a family diagnostic before continuing.
+
+
+## Next eligible candidate
+
+MA-111 is the first remaining P0 candidate in registry order: semantic-role Mirror embedding (PA13).
