@@ -461,3 +461,59 @@ The research program now explicitly includes weight-space, representation-space,
 
 
 RoPE positional controls are tracked as PA105 after a registry-reference audit.
+
+## Eighth literature sweep — structured merge geometry and cross-domain functional coordinates
+
+This sweep deliberately moved beyond Transformer-local parameter sharing. The criterion was: find places where a system already contains a repeated logical function, a compact task/relation/control state, or a low-dimensional family of models, then ask whether Mirror can make that coordinate more structured, compositional, smaller, or dynamically generated.
+
+### AP. Orthogonal geometry still has cheaper families
+
+Householder products, scaled Cayley transforms and Group-and-Shuffle/GSOFT provide distinct points on the expressivity/parameter/runtime frontier. BOFT is not the only credible structured orthogonal control.
+
+Implication: Mirror geometry selection should be empirical. Compare diagonal/rank-one/low-rank/Householder/BOFT/GS/LDR families at matched serialized bytes and realized runtime.
+
+### AQ. Post-hoc model merging is a source of functional coordinates
+
+DARE and DELLA expose redundancy and salience inside task deltas; Fisher merging and RegMean use importance or activation statistics; KnOTS aligns LoRA subspaces before merging; Model Stock studies low-dimensional interpolation geometry.
+
+Implication: do not treat a raw task vector as the canonical function coordinate. Sparsify, align and/or statistically weight the source deltas first, then ask whether the remaining capability directions admit a compact reusable Mirror basis.
+
+### AR. Predictive uncertainty already lives in low-dimensional model families
+
+SWAG and Subspace Inference construct low-dimensional posterior subspaces; Laplace approximations attach local uncertainty geometry; Packed-Ensembles and Snapshot Ensembles produce efficient logical model multiplicity through different mechanisms.
+
+Implication: Mirror ensemble claims must report calibration, OOD behavior and member diversity, not only average accuracy. A shared physical model is not an ensemble unless its Views remain predictively distinct.
+
+### AS. Neural operators make the project abstraction literal
+
+FNO and DeepONet learn operators over families of functions rather than one finite-dimensional mapping.
+
+Implication: operator learning is a high-value stress test for Mirror. Physics parameters, boundary conditions, sensor layouts and spectral modes provide semantically grounded coordinates whose held-out combinations can test whether factorized m has real compositional meaning.
+
+### AT. Relation types are already compact function addresses
+
+R-GCN basis decomposition represents relation-specific transforms using shared bases plus per-relation coefficients. CompGCN explicitly composes relation and entity representations.
+
+Implication: relational models provide a direct control for the "shared object + small address -> many logical transforms" thesis. Mirror must improve coefficient storage, composition, unseen-relation generalization or robustness beyond these existing constructions.
+
+### AU. Diffusion control contains large duplicated logical functions
+
+ControlNet can add substantial condition-specific trainable branches; T2I-Adapter and CtrLoRA reduce that cost; IP-Adapter changes the attention path; Ctrl-Adapter bridges pretrained controls to new backbones and supports multi-condition routing.
+
+Implication: control type, denoising time, UNet depth and target backbone form a natural factorized address space. The strongest experiments compress a bank of existing controls or precompose multiple controls before execution, while retaining spatial fidelity.
+
+### AV. Self-organising systems expose dynamic functional coordinates
+
+Growing NCA uses one repeated local update rule; GoalNCA conditions behavior on a goal; Attention NCA makes local computation context sensitive; recent online self-organisation work pushes adaptation into deployment time.
+
+Implication: Mirror need not be a static expert ID. It can be a transient rule coordinate updated from local context, goal or online experience. This is a clean non-Transformer test of Level-3 dynamic functional coordinates.
+
+## Registry growth
+
+- Eighth sweep: MA-701 through MA-770.
+- Registry after this sweep: **770 candidates**.
+- Maintained prior-art map: **PA01–PA198**.
+- New candidates added by priority: **46 P0, 23 P1, 1 P2**.
+- Existing worker order remains authoritative; this sweep does not preempt an already-started experiment.
+
+The new lanes span structured linear algebra, model merging, Bayesian uncertainty, scientific operator learning, relational graph models, diffusion control and self-organising recurrent systems. This broadens the test from "does Mirror help Transformers?" to "is a structured functional coordinate a reusable compression primitive across model classes?"
