@@ -455,6 +455,9 @@ Implication: SRM003's storage-versus-execution split can be revisited without we
 
 - Seventh sweep: MA-501 through MA-550.
 - Registry after this sweep: **550 candidates**.
-- Maintained prior-art map: **PA01–PA104**.
+- Maintained prior-art map: **PA01–PA105**.
 
 The research program now explicitly includes weight-space, representation-space, latent-code, memory, routing/path, architecture, dynamic-state, and optimization-space functional coordinates.
+
+
+RoPE positional controls are tracked as PA105 after a registry-reference audit.
