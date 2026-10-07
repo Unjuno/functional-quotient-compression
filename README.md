@@ -18,7 +18,7 @@ For autonomous / worker execution:
 1. [**GOAL.md**](GOAL.md) — autonomous iteration loop and stop rules
 2. [**WORKER_START_HERE.md**](WORKER_START_HERE.md) — repository navigation and evidence rules
 3. [**Mirror Application Status Board**](experiments/mirror_applications/STATUS_BOARD.md) — exact next MA candidate
-4. [**252-candidate registry**](experiments/mirror_applications/IDEA_REGISTRY.csv)
+4. [**254-candidate registry**](experiments/mirror_applications/IDEA_REGISTRY.csv)
 
 For research context:
 
