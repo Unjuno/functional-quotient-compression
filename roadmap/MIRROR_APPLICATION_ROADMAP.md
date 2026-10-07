@@ -71,6 +71,31 @@ MA-186, MA-189, MA-199, MA-208.
 
 Question: can new skills or expert behavior be added mainly through a coordinate rather than duplicated weights?
 
+## Research-expansion P0
+
+The second literature sweep added direct controls from Parameter Superposition, BatchEnsemble, VeRA, IA3, OFT/BOFT/OFTv2, Compacter, Monarch matrices, Fast Weight Programmers, task-vector/model-merging methods, Cheap-LoRA/circulant adapters, and SETA.
+
+Highest-information new P0 candidates:
+- MA-255 parameter-superposition Mirror contexts;
+- MA-257 compositional context groups;
+- MA-258 superposed expert bank + Mirror unbinding;
+- MA-260 BatchEnsemble Mirror ensemble;
+- MA-261 rank-one logical experts;
+- MA-265/266 VeRA-based Mirror adapter views;
+- MA-268 IA3 vs richer Mirror activation views;
+- MA-271/272/273 OFT/OFTv2/BOFT Mirror views;
+- MA-274 BOFT logical experts;
+- MA-276 BOFT depth views;
+- MA-278 Compacter Mirror adapters;
+- MA-282 Monarch Mirror FFN transforms;
+- MA-286 Cheap-LoRA Mirror subspace views;
+- MA-288 dynamic fast-weight Mirror state;
+- MA-292 task-vector Mirror basis;
+- MA-296 orthogonalized task-vector superposition;
+- MA-297/299 SETA shared/private subspace + Mirror allocation.
+
+These do not preempt an already-started worker experiment. They enter the queue after current active work and earlier locked cross-over candidates.
+
 ## Stage 2 — Replication gate
 
 A candidate moves beyond SCREENING only if:
