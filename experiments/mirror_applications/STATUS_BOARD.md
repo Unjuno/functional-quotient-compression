@@ -13,11 +13,11 @@ Updated: 2026-10-07
 
 ## Next candidate
 
-**MA-248 — PTP random variable represented as packet Mirror code**
+**MA-249 — one physical future head + Mirror future-offset views**
 
 Why next:
-- MA-241, MA-244, MA-245, MA-247 and MA-253 are now checked; MA-248 is the next untested cross-over P0 candidate.
-- its closest prior-art control is packet-level stochastic conditioning in Parallel Token Prediction (PA10).
+- MA-241, MA-244, MA-245, MA-247, MA-248 and MA-253 are now checked; MA-249 is the next untested cross-over P0 candidate.
+- its closest prior-art controls are multi-token prediction and parallel token prediction (PA09/PA10).
 
 If MA-247 is blocked, use this order:
 MA-249 -> MA-250 -> MA-251 -> MA-003.
@@ -33,9 +33,11 @@ When a worker starts an MA experiment, add:
 - worker/run identifier if available;
 - start commit.
 
-- None. MA-247 is complete and verified.
+- None. MA-247 and MA-248 are complete and verified.
 
 ## Recently completed
+
+- MA-248 — FAIL for Mirror-specific frontier: packet Givens views passed 2/3 correlated fresh worlds, while broadcast shared code passed 3/3 at 378 fewer serialized bytes; independent entropy boundary NOT ESTABLISHED. Branch `research/ma-248-packet-mirror-code-20261007`; report `experiments/mirror_applications/ma-248-packet-mirror-code/README.md`; result commit `433a2229362db23bcd43b3830358e674799c6247`.
 
 - MA-247 — FAIL at development screen; Mirror used fewer bytes than untied but had worse MSE than tied, scalar-gate, and static LoRA controls. Fresh worlds were not opened by the failure rule; branch `research/ma-247-recursive-depth-view-20261007`; report `experiments/mirror_applications/ma-247-recursive-depth-view/README.md`; result commit `62f0acf3f680ff3bbab8e0e20e194f4065f026e5`.
 

@@ -5,9 +5,9 @@
 - Base commit: `f91625f2fe1b110593b16605c26fc9c7675c1824`
 - Development: complete; final v3 matched-minibatch screen selected LR 0.01
 - Fresh/audit: complete; worlds 24801–24803
-- Results committed: pending
-- Verification committed: pending
-- Registry row updated: pending
+- Results committed: yes (`433a2229362db23bcd43b3830358e674799c6247`)
+- Verification committed: yes (`433a2229362db23bcd43b3830358e674799c6247`)
+- Registry row updated: see status board and registry
 
 ## H / T / D / C / U
 
