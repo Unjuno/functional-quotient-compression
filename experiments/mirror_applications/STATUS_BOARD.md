@@ -8,23 +8,23 @@ Updated: 2026-10-07
 - P0: **34**
 - P1: **126**
 - P2: **94**
-- Current MA statuses: **250 UNTESTED, 3 PROMISING, 1 FAIL**
+- Current MA statuses: **249 UNTESTED, 3 PROMISING, 2 FAIL**
 - Historical evidence lanes SRM/TM are not MA statuses.
 
 ## Next candidate
 
-**MA-247 — recursive shared block + Mirror depth modulation**
+**MA-248 — PTP random variable represented as packet Mirror code**
 
 Why next:
-- MA-241, MA-244, MA-245 and MA-253 are now checked; MA-247 is the next untested cross-over P0 candidate.
-- its closest prior-art controls are recursive tied blocks and generated per-step modulation (PA06).
+- MA-241, MA-244, MA-245, MA-247 and MA-253 are now checked; MA-248 is the next untested cross-over P0 candidate.
+- its closest prior-art control is packet-level stochastic conditioning in Parallel Token Prediction (PA10).
 
 If MA-247 is blocked, use this order:
-MA-248 -> MA-249 -> MA-250 -> MA-251 -> MA-003.
+MA-249 -> MA-250 -> MA-251 -> MA-003.
 
 ## Active experiments
 
-None.
+
 
 When a worker starts an MA experiment, add:
 - MA ID;
@@ -33,9 +33,11 @@ When a worker starts an MA experiment, add:
 - worker/run identifier if available;
 - start commit.
 
-Remove from Active only after STATUS.md and VERIFICATION.json are committed.
+- None. MA-247 is complete and verified.
 
 ## Recently completed
+
+- MA-247 — FAIL at development screen; Mirror used fewer bytes than untied but had worse MSE than tied, scalar-gate, and static LoRA controls. Fresh worlds were not opened by the failure rule; branch `research/ma-247-recursive-depth-view-20261007`; report `experiments/mirror_applications/ma-247-recursive-depth-view/README.md`; result commit `62f0acf3f680ff3bbab8e0e20e194f4065f026e5`.
 
 - MA-245 — PROMISING (aligned output/cache result; missed model-payload threshold; CPU slowdown); branch `research/ma-245-mlkv-layer-views-20261007`; report `experiments/mirror_applications/ma-245-mlkv-layer-views/README.md`; result commit `76d91b7a662b4227e7f25e4733e06d6735cf1cd2`.
 - MA-244 — PROMISING (aligned quality/cache mechanism; missed 20% model-payload gate; CPU slowdown); branch `research/ma-244-kv-role-view-20261007`; report `experiments/mirror_applications/ma-244-kv-role-view/README.md`; result commit `85de2fd65618d72bd0bf6a091b558a0dda57b741`.
