@@ -1,6 +1,8 @@
 # Phase II roadmap — shared rules, private residuals and execution
 
-Date: 2026-10-07, after SRM003.
+Date: 2026-10-07, after SRM003 and TM001.
+
+Systematic application exploration is tracked separately in [MIRROR_APPLICATION_ROADMAP.md](MIRROR_APPLICATION_ROADMAP.md); this file remains the shared-rule/execution roadmap.
 
 ## R0 — Repository/state consolidation
 
