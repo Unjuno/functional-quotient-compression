@@ -1,37 +1,42 @@
 # MA-244 — K=V projection sharing + Mirror role recovery
 
-Status: SCREENING
+Status: PROMISING (quality/cache frontier; strict payload-byte gate missed)
 Evidence lane: MECHANISM / STORAGE / RUNTIME
 Base commit: `5b736a0f7cfca9c3f7794005dfb70954f155ea02`
 
 ## H — hypothesis
 
-A single physical MQA K/V projection plus small head-and-role Mirror coordinates can recover useful K-versus-V and per-head attention distinctions while storing fewer K/V projection parameters and cache states than ordinary MQA or MHA. It must beat a byte-near per-head gate control to justify Mirror-specific value.
+A single physical MQA K/V projection plus small head-and-role Mirror coordinates can recover query-head and K/V role distinctions while reducing projection and KV-cache state relative to standard MHA and hard K=V sharing. The Mirror must outperform a byte-near scalar gate control.
 
-## Prior art and exact delta
+## T — what ran
 
-PA07 (*Do Transformers Need Three Projections? Systematic Study of QKV Variants*) reports Q != K=V as a strong sharing baseline, including 50% KV cache reduction with 3.1% perplexity degradation in its language experiments, and finds that projection sharing combines with GQA/MQA. MA-244 tests whether structured role addresses can recover role distinction after more aggressive K=V and MQA sharing. A tiny attention task is used as a mechanism screen, not as a replication of PA07.
+PA07 (*Do Transformers Need Three Projections?*) reports Q != K=V as a strong sharing baseline, with 50% cache reduction and 3.1% perplexity degradation in its language experiment; it also combines projection sharing with GQA/MQA. This experiment tested seven controls: MHA, K=V-tied MHA, GQA-2, MQA with separate K/V, MQA hard K=V, Mirror MQA, and same-size Gate MQA.
 
-## Controls
+The synthetic teacher was built from one shared projection transformed by independently sampled role/head Givens angles. Each task input had four query heads and an 8-token memory; the target was teacher attention output. Common LR `0.003` was selected using development world 24400 only. Three fresh worlds (24401–24403) independently generated the projection, role/head angles, and input samples. Each method received the same query/memory inputs and 900 AdamW updates.
 
-- MHA: independent per-head K and V projections (quality upper control).
-- K=V MHA: separate key/value-head matrices are hard-tied per head.
-- GQA-2: two K heads and two V heads shared over four query heads.
-- MQA: one K and one V projection shared by all query heads.
-- MQA K=V: one matrix and one cached vector serve both roles.
-- Mirror MQA: one shared base projection, with one Givens angle for every query-head/role pair; one base projected cache is transformed on read.
-- Gate MQA: byte-near scalar multiplier per head/role on the same one-projection base.
+The serialized inference payload was measured as actual `torch.save` state-dict bytes plus deterministic config JSON. The cache audit materialized the physical K/V cache tensors and measured `numel × element_size` for an 8-token prompt. Inference throughput was replayed on one CPU thread.
 
-## Task and scope
+## D — decision
 
-The synthetic teacher uses one shared base projection with independently sampled role/head Givens transformations. That is an optimistic alignment screen for Mirror's stated coordinate family. Each sample is a one-step multihead attention query over an eight-token memory; target is teacher attention output MSE. The same query and memory inputs are used by all methods. This tests whether the mechanism can recover structured role asymmetry and quantifies actual bytes, cache-state size, active MAC proxy, and CPU runtime. No natural language or generalization claim follows.
+**PROMISING for this aligned mechanism screen; strict predeclared payload gate missed.** In all 3 fresh worlds, Mirror output MSE was `9.3e-12`–`1.9e-11`, below both the standard MHA control (`1.4e-9`–`1.3e-7`) and hard MQA K=V (`0.056`–`0.133`). The byte-near scalar Gate MQA used 2,098 bytes versus Mirror's 2,100 bytes, but its MSE was `0.056`–`0.130`; the role rotation recovered distinctions that the scalar gate did not.
 
-## Gates
+Actual inference payload was 2,100 bytes for Mirror, versus 2,349 bytes for separate-K/V MQA (10.6% smaller) and 3,885 bytes for MHA (45.9% smaller). The preregistered requirement of at least 20% fewer payload bytes than MQA was not met. Cache-state payload was 128 bytes for Mirror, versus 256 for MQA (50% smaller) and 1,024 for MHA (87.5% smaller). The model stores one projected vector per memory token and derives logical head/role views on read.
 
-PASS requires, in all three fresh worlds: Mirror MSE within 10% of MHA, at least 20% lower projection payload than MQA, at least 10% lower MSE than hard MQA K=V, and within 10% MSE of or better than byte-near Gate MQA. Report cache bytes separately; a one-vector shared cache is charged as actually stored.
+Compute did not improve in this Python implementation. Training took roughly 2.1–2.4 s for Mirror versus 0.8–1.8 s for separate-K/V MQA; median single-thread inference throughput was about 0.67x MQA. These are small-batch CPU mechanism timings, not an optimized-kernel or GPU claim. All 21 fresh result rows replayed; max MSE difference was `4.3e-11`; payload counts matched. Tests: 4 passed.
 
-FAIL if the quality gate is missed or Gate MQA matches Mirror within 10% at equal or lower bytes. NOT ESTABLISHED if any fresh world or strong control is missing.
+## C — strongest counter-hypothesis
 
-## H / T / D / C / U
+The teacher is exactly generated by the same shared-projection-plus-Givens family being tested. This is an optimistic demonstration that the coordinate can recover aligned role/head structure, not evidence that natural Q/K/V projections lie on this orbit. The mirror's low MSE may reflect exact parameterization match. Full MHA also had much lower error than Mirror in two worlds under the fixed update budget; near-convergence capacity was not tested.
 
-H is stated above. T, D, C, and U will be written after the configuration and source are frozen and all fresh worlds are complete.
+## U — what remains unconfirmed
+
+- Whether natural text or trained Transformer K/V maps share this coordinate structure.
+- Whether the payload saving versus MQA grows after serializer overhead is amortized at larger dimensions.
+- Whether fused view operations recover MQA throughput while preserving the 50% cache-state reduction.
+- Perplexity, autoregressive quality, cache bandwidth, GPU throughput, and fixed-byte near-convergence frontier.
+
+## Fact / interpretation / hypothesis
+
+- **Fact:** measurements in `RESULTS_CORE.csv`, `CACHE_BYTES_AUDIT.json`, and `VERIFICATION_REPLAY.json` follow the frozen protocol.
+- **Interpretation:** role/head Givens addresses recover the deliberately aligned teacher with fewer cache bytes and beat an equal-size scalar gate, but the small task misses the predeclared 20% model-payload reduction versus MQA and incurs runtime overhead.
+- **Hypothesis:** if trained attention K/V projections have low-description role geometry, this view could improve the quality/cache frontier; the present experiment does not establish such geometry in real models.
