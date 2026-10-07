@@ -3,12 +3,12 @@
 - Status: PROMISING; secondary tied-quality gate missed
 - Branch: `research/ma-156-compression-view-20261007`
 - Base commit: `35f6bb0646d566011554222851e3b4473306ca57`
-- Last verified commit: pending
+- Last verified commit: `c21413fbfd4c4280aee6103a711105f54359638c`
 - Development complete: yes; seeds 15601–15602
 - Fresh/audit opened: yes; seeds 15611–15613 after the independent-int4 development gates passed
-- Results committed: pending
-- Verification committed: pending
-- Registry row updated: pending
+- Results committed: yes (`c21413fbfd4c4280aee6103a711105f54359638c`)
+- Verification committed: yes (`c21413fbfd4c4280aee6103a711105f54359638c`)
+- Registry row updated: yes
 
 ## H / T / D / C / U
 

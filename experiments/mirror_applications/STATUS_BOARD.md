@@ -46,7 +46,7 @@ When a worker starts an MA experiment, add:
 
 ## Recently completed
 
-- MA-156 — PROMISING storage/quality frontier: one packed int4 base plus charged views matched independent-int4 quality in 3/3 fresh worlds with 68.0% fewer bytes; stricter hard-tie margin missed, arbitrary matrices needed private QER capacity, decode MAC proxy rose 32x. Branch `research/ma-156-compression-view-20261007`; report `experiments/mirror_applications/ma-156-compression-view/README.md`; result commit pending.
+- MA-156 — PROMISING storage/quality frontier: one packed int4 base plus charged views matched independent-int4 quality in 3/3 fresh worlds with 68.0% fewer bytes; stricter hard-tie margin missed, arbitrary matrices needed private QER capacity, decode MAC proxy rose 32x. Branch `research/ma-156-compression-view-20261007`; report `experiments/mirror_applications/ma-156-compression-view/README.md`; result commit `c21413fbfd4c4280aee6103a711105f54359638c`.
 
 - MA-129 — FAIL at development actual-byte gate: Mirror passed aligned quality but payload 1,957B exceeded MTP 1,833B; three exploratory worlds were mistakenly opened after gate failure and are excluded from status. Branch `research/ma-129-temporal-view-20261007`; report `experiments/mirror_applications/ma-129-temporal-view/README.md`; result commit `35cd8bb9fa638006828bdd61ae9511df11dc8af1`.
 
