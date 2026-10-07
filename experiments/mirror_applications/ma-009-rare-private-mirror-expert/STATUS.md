@@ -1,22 +1,22 @@
 # MA-009 status
 
-- Status: SCREENING
+- Status: FAIL under preregistered quality gate
 - Branch: `research/ma-009-rare-private-mirror-expert-20261007`
-- Base commit: `f45deaeccb` (full SHA recorded in protocol)
+- Base commit: `f45deaeccb` (full SHA in protocol)
 - Development complete: yes; selected LR 0.01
-- Fresh/audit opened: no
-- Results committed: no
-- Verification committed: no
-- Registry row updated: SCREENING
+- Fresh/audit opened: yes; worlds 90001–90003
+- Results committed: pending
+- Verification committed: pending
+- Registry row updated: pending
 
-## Development decision
+## H / T / D / C / U
 
-World 90000: Mirror-common plus private-rare matched full MoE quality on both natural and rare-role MSE at 3,745B vs 4,841B. All-Mirror missed rare-role quality; one private role did not solve the all-independent task.
+- **H:** one private rare-role matrix plus common Mirror views recover aligned roles with fewer bytes; all-shared views fail at the outlier.
+- **T:** synthetic hard-routed linear MoE, five controls, skewed role distribution, three fresh worlds, 1,200 updates.
+- **D:** FAIL: storage gate passed (0.774x bytes), but full-MoE relative quality failed in two of three fresh aligned worlds; independent-all also required more capacity.
+- **C:** rare-role relative errors are small in absolute terms; fixed-update and initialization variance may explain the threshold misses.
+- **U:** longer updates, rare oversampling, nonlinear experts, and optimized kernels.
 
-## Amendment
-
-Before fresh access, the serializer-inclusive byte gate changed from 0.70x to 0.80x full MoE after dev measured 0.774x. The new gate still requires >=20% fewer actual bytes. No fresh data were opened.
-
-## Next action
-
-Verify the freeze manifest and run fresh worlds 90001–90003 at LR 0.01.
+**Fact:** 30/30 rows replayed with exact bytes, four tests passed.
+**Interpretation:** one private expert strongly repairs the rare role versus shared-only controls but is not reliably full-MoE-equivalent in this screen.
+**Hypothesis:** a separate oversampling/compute-matched study could improve rare-role stability; fresh data must not be reused.
