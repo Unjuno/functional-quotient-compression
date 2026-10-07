@@ -25,7 +25,7 @@ The corresponding narrative report is:
 
 ### Mirror application map
 
-- [Mirror application registry](mirror_applications/) — 254 MA-xxx hypotheses, common contract, prior-art annotations, templates and queue.
+- [Mirror application registry](mirror_applications/) — 300 MA-xxx hypotheses, common contract, prior-art annotations, templates and queue.
 - [Operational status board](mirror_applications/STATUS_BOARD.md) — exact next candidate and active/blocked experiments.
 - Common baseline: [third-party nanoGPT core](../third_party/nanoGPT/) for controlled A/B integration when a real causal-LM fixture is needed.
 
