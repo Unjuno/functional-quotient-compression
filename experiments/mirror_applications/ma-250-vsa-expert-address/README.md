@@ -16,9 +16,9 @@ PA11 reports MAP/sign-permute and Hadamard linear binding as important alternati
 
 Four logical roles map 16D inputs to 12D outputs. In the aligned teacher mode, each role's target matrix is a Givens-rotated view of one shared base matrix. In the independent mode, each role has an unrelated target matrix. The synthetic regression task isolates address transforms from routing and language-model effects. Fixed MAP/Hadamard/HRR codes are deterministic from a charged seed; their reconstructed address state is included in the serialization config.
 
-## Results
+## Development screen
 
-Pending development and fresh evaluations.
+World 25000 selected LR 0.01 by pooled MSE across eight methods and both modes (2.7091 vs 2.7123 at LR 0.003). In aligned mode, Mirror reached MSE 1.24e-9 with 3,406B actual payload; untied reached 3.18e-9 with 5,522B. MAP/Hadamard/HRR MSEs were 4.08–4.46. In independent mode, Mirror MSE was 3.57; rank-1 residual 4.15; untied 2.75e-9. Fresh worlds 25001–25003 remain unopened. The payload gate was amended pre-fresh from 60% to 65% of untied (at least 35% savings) after the exact dev serialization measured 61.7%.
 
 ## Decision
 

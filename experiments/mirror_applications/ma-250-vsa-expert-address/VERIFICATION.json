@@ -1,10 +1,24 @@
 {
   "experiment_id": "MA-250",
   "commit": "pending",
-  "tests": {"command": "python -m pytest -q experiments/mirror_applications/ma-250-vsa-expert-address/tests", "passed": null, "failed": null},
-  "serialization": {"roundtrip_checked": false, "byte_exact": false},
-  "metric_replay": {"checked": false, "rows": 0, "max_difference": null},
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-250-vsa-expert-address/tests",
+    "passed": 4,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": false,
+    "rows": 0,
+    "max_difference": null
+  },
   "fresh_split_integrity_checked": false,
   "fresh_worlds_opened": false,
-  "notes": []
+  "notes": [
+    "MAP, Hadamard and HRR address operators passed orthogonality checks and reconstruct from the charged address seed.",
+    "Final development selected LR 0.01; fresh worlds remain unopened."
+  ]
 }
