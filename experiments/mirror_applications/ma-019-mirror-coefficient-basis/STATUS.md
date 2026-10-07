@@ -4,9 +4,9 @@
 - Branch: `research/ma-019-mirror-coefficient-basis-20261007`
 - Development complete: yes; pooled selection chose LR 0.01
 - Fresh/audit opened: no
-- Results committed: pending
-- Verification committed: pending
-- Registry row updated: pending
+- Results committed: yes (`b880e34edb8210ad318091be2e17e170ef09c5a0`)
+- Verification committed: yes (`b880e34edb8210ad318091be2e17e170ef09c5a0`)
+- Registry row updated: yes (tracker commit pending)
 
 ## H / T / D / C / U
 
