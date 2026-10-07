@@ -1,0 +1,20 @@
+{
+  "experiment_id": "MA-086",
+  "title": "layer-group Mirror views",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM",
+  "base_commit": "e0cf13997e0477e9022e4c1fcf07bd99f5075ccb",
+  "hypothesis": "Group size 2 with learned within-group Givens views will recover a teacher made from four shared layer-group bases, at materially fewer serialized bytes than untied layers and better quality than hard group tying; group size 4 will expose the quality-storage tradeoff.",
+  "physical_object": "One 8x8 block per layer group, reused by two or four logical depths",
+  "mirror_coordinate": "One learned Givens angle per logical layer within each group",
+  "logical_multiplicity": "Eight logical depth maps from two or four physical blocks",
+  "prior_art_refs": ["PA01", "PA06"],
+  "controls": ["hard tying at group sizes 2 and 4", "rank-1 per-layer residual on group-size-2 bases", "untied full matrices"],
+  "development": {"worlds_or_seeds": [86001, 86002], "selection_metric": "all-layer held-out MSE after 600 Adam updates at LR 0.01"},
+  "fresh": {"worlds_or_seeds": [86011, 86012, 86013], "locked_before_access": true},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["group matrices", "per-layer Mirror angles", "LoRA factors", "method metadata"]},
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true},
+  "success_gate": "On aligned fresh worlds, mirror2 MSE <=1.10x untied in all 3 worlds and <=1.10x the best group-size-2 non-Mirror shared control; mirror2 payload <=0.65x untied. Report mirror4 as a group-size tradeoff and independent matrices as a boundary.",
+  "failure_gate": "Both development worlds miss either aligned quality or payload threshold, or rank-1 residual matches Mirror quality at materially lower payload/compute.",
+  "boundaries": ["Synthetic linear maps", "Teacher directly follows size-2 group Givens orbit", "Fixed-update learning efficiency, not capacity", "CPU-only eager implementation"]
+}

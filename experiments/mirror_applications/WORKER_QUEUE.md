@@ -28,8 +28,8 @@ Completed this run: MA-003 -> MA-005 -> MA-009 -> MA-019 -> MA-024.
 MA-063 (paused after MA-061/063 diagnostic; redesign required before more KV-view work).
 
 ### Family C — Depth / position
-MA-076 and MA-079 completed as PROMISING on aligned synthetic mechanism screens; independent layers did not benefit.
-MA-086 -> MA-116
+MA-076 and MA-079 completed PROMISING; MA-086 failed the storage gate. Independent layer functions did not benefit from shared views.
+MA-116
 
 ### Family D — Temporal
 MA-121 -> MA-129

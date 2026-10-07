@@ -8,23 +8,22 @@ Updated: 2026-10-07
 - P0: **34**
 - P1: **126**
 - P2: **94**
-- Current MA statuses: **234 UNTESTED, 11 PROMISING, 9 FAIL**
+- Current MA statuses: **233 UNTESTED, 11 PROMISING, 10 FAIL**
 - Historical evidence lanes SRM/TM are not MA statuses.
 
 ## Next candidate
 
-**MA-086 — next Family C depth/view candidate**
+**MA-116 — next Family C candidate**
 
 Why next:
-- MA-241, MA-244, MA-245, MA-247, MA-248, MA-249, MA-250, MA-251, MA-253, MA-003, MA-005, MA-009, MA-019, MA-024, MA-041, MA-048, MA-061, MA-063, MA-076 and MA-079 are checked; Family B KV views are paused after the diagnostic, so MA-086 is next.
-- its closest controls should compare tied Transformer blocks, static per-step LoRA, and generated modulation (PA01; PA06).
+- MA-241, MA-244, MA-245, MA-247, MA-248, MA-249, MA-250, MA-251, MA-253, MA-003, MA-005, MA-009, MA-019, MA-024, MA-041, MA-048, MA-061, MA-063, MA-076, MA-079 and MA-086 are checked; Family B KV views are paused after the diagnostic, so MA-116 is next.
+- MA-116 tests Mirror-RoPE; compare against ordinary tied embeddings and RoPE variants (PA13).
 
-If MA-086 is blocked, use this order:
-MA-116.
+If MA-116 is blocked, use the next eligible P0 in the registry.
 
 ## Active experiments
 
-- None. MA-003, MA-005, MA-009, MA-019, MA-024, MA-041, MA-048, MA-061, MA-063, MA-076 and MA-079 have completed; Family B KV subfamily paused with diagnostic; MA-086 is next.
+- None. MA-003, MA-005, MA-009, MA-019, MA-024, MA-041, MA-048, MA-061, MA-063, MA-076, MA-079 and MA-086 have completed; Family B KV subfamily paused with diagnostic; MA-116 is next.
 
 
 When a worker starts an MA experiment, add:
@@ -46,6 +45,8 @@ When a worker starts an MA experiment, add:
 - MA-247 through MA-251 are complete and verified.
 
 ## Recently completed
+
+- MA-086 — FAIL at development storage gate: group-size-2 Mirror matched aligned quality but used 0.777x untied bytes vs required ≤0.65; group-size 4 compressed more but quality fell. Fresh stayed sealed. Branch `research/ma-086-depth-address-20261007`; report `experiments/mirror_applications/ma-086-depth-address/README.md`; result commit pending.
 
 - MA-079 — PROMISING for sparse depth interpolation on the aligned teacher: 3/3 fresh worlds recovered held-out maps at median MSE 3.36e-12 with 2,149B vs 3,753B sparse-trained untied and 2,213B generated gain. Independent maps did not benefit; untied held-out quality is not a fully supervised upper control. Branch `research/ma-079-learned-depth-address-20261007`; report `experiments/mirror_applications/ma-079-learned-depth-address/README.md`; result commit `f1cf8d6a64e7f3fbee4b25bddfba71f0a8f731db`.
 
