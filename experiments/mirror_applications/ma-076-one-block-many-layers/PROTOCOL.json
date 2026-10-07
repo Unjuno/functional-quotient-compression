@@ -1,0 +1,34 @@
+{
+  "experiment_id": "MA-076",
+  "title": "one tied block to multiple Mirror layers",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM",
+  "base_commit": "ccf4d5c4e83992d70ccdc5db6032e428f6532380",
+  "hypothesis": "A single shared linear block wrapped by learned per-depth Givens conjugation can recover layer-specific behavior for a coordinate-aligned depth teacher with fewer serialized inference bytes than independent layers, and can outperform byte-near ordinary tying, rank-1 static per-step LoRA, and shared generated-gain controls at equal updates.",
+  "physical_object": "One 8x8 shared linear block reused at four logical depths",
+  "mirror_coordinate": "One learned Givens angle for each logical depth, charged in the model payload",
+  "logical_multiplicity": "Four depth-specific linear maps from one physical block",
+  "prior_art_refs": ["PA01", "PA06"],
+  "controls": ["ordinary tied block", "rank-1 static per-step LoRA", "shared block with learned per-depth diagonal gain", "independent full matrix per depth"],
+  "development": {
+    "worlds_or_seeds": [76001, 76002],
+    "selection_metric": "four-layer held-out MSE at a fixed 600 Adam updates, learning rate 0.01"
+  },
+  "fresh": {
+    "worlds_or_seeds": [76011, 76012, 76013],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": ["shared or independent matrix weights", "Mirror angles", "LoRA factors", "generated gains", "method metadata"]
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true
+  },
+  "success_gate": "On the aligned teacher, all three fresh worlds: Mirror test MSE <= 1.10x untied MSE, <= 1.10x the best shared baseline MSE, and Mirror serialized payload <= 0.80x untied bytes. Report independent teacher separately as a boundary; this is a fixed-update mechanism screen, not a capacity claim.",
+  "failure_gate": "On development, Mirror misses either the 1.10x quality comparison to untied or 0.80x byte ratio in both worlds, or a byte-near simple shared control matches/lowers MSE. Do not open fresh worlds after this gate.",
+  "boundaries": ["Synthetic linear block task only", "Fixed-update learning-efficiency screen, not near-convergence capacity evidence", "CPU only", "Mirror addresses use a single Givens plane", "Independent teacher tests the need for private depth parameters"]
+}

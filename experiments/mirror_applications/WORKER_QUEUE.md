@@ -28,7 +28,8 @@ Completed this run: MA-003 -> MA-005 -> MA-009 -> MA-019 -> MA-024.
 MA-063 (paused after MA-061/063 diagnostic; redesign required before more KV-view work).
 
 ### Family C — Depth / position
-MA-076 -> MA-079 -> MA-086 -> MA-116
+MA-076 completed as PROMISING on the aligned mechanism screen; independent layers failed.
+MA-079 -> MA-086 -> MA-116
 
 ### Family D — Temporal
 MA-121 -> MA-129
