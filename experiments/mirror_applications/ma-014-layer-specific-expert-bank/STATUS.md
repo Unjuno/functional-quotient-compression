@@ -1,16 +1,16 @@
 # MA-014 status
 
-- Status: SCREENING
+- Status: PROMISING (registered aligned fresh gate passed 3/3)
 - Branch: `research/ma-014-layer-specific-expert-bank-20261007`
 - Protocol freeze: `529ebae35703f0e076f33b6e2782af710cee3d89`
 - Development complete: yes; selected LR 0.003 on world 140000
-- Fresh/audit opened: no; frozen settings passed gate
-- Results committed: no
-- Verification committed: no
+- Fresh/audit opened: yes; 3 worlds completed and replayed exactly
+- Results committed: pending
+- Verification committed: pending
 
 ## Next action
 
-Run fresh worlds 140001–140003 at the frozen LR 0.003.
+Finalize result verification and update the registry; next candidate MA-015.
 
 ## Blockers
 

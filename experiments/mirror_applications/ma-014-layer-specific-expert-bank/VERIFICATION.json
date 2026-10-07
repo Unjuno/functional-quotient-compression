@@ -1,0 +1,61 @@
+{
+  "decision": "PROMISING",
+  "deterministic_fields_exact": true,
+  "development_rows": 36,
+  "experiment_id": "MA-014",
+  "fresh_config_freeze_commit": "0f852c9f9408a210fd4d6b4ddf60281ed5c76550",
+  "fresh_freeze_hashes_checked_before_access": true,
+  "fresh_freeze_hashes_matched_frozen_commit": true,
+  "fresh_mirror_to_gate_mse_ratio": [
+    0.137,
+    0.092,
+    0.074
+  ],
+  "fresh_mirror_to_independent_mse_ratio": [
+    0.4703782761537818,
+    0.508390205867734,
+    0.38434359630925724
+  ],
+  "fresh_mirror_to_tied_mse_ratio": [
+    0.133,
+    0.091,
+    0.074
+  ],
+  "fresh_payload_ratio_to_independent": 0.3484,
+  "fresh_rows": 36,
+  "fresh_rows_replayed": 36,
+  "independent_teacher_mirror_mse": [
+    0.0059237,
+    0.0057926,
+    0.0062698
+  ],
+  "mirror_byte_overhead_vs_tied": 0.0742,
+  "notes": [
+    "Registered aligned quality/storage and hard-tie control gates passed in all three fresh worlds.",
+    "CPU throughput and training wall regressed versus hard tying.",
+    "Synthetic fixed-update aligned screen only; natural-layer structure untested."
+  ],
+  "protocol_freeze_commit": "529ebae35703f0e076f33b6e2782af710cee3d89",
+  "selected_learning_rate": 0.003,
+  "serialization": {
+    "authority": "actual torch.save state_dict plus deterministic config bytes",
+    "payload_bytes_by_method": {
+      "gate": 6182,
+      "independent": 18289,
+      "mirror": 6372,
+      "rank1": 7907,
+      "rank2": 9443,
+      "tied": 5930
+    },
+    "payload_bytes_recorded_all_rows": true
+  },
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-014-layer-specific-expert-bank/tests",
+    "failed": 0,
+    "passed": 3
+  },
+  "timing_fields_excluded": [
+    "train_wall_seconds",
+    "inference_examples_per_second"
+  ]
+}

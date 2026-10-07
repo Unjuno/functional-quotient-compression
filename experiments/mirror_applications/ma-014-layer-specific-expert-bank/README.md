@@ -1,7 +1,7 @@
 # MA-014 — four-layer layer-specific Mirror expert bank
 
-Status: SCREENING; development passed, fresh settings frozen.  
-Branch: `research/ma-014-layer-specific-expert-bank-20261007`.  
+Status: **PROMISING**; registered aligned quality/storage gate passed 3/3.
+Branch: `research/ma-014-layer-specific-expert-bank-20261007`.
 Base commit: `d8cd702778026c114d1a1f48dc1eee4f66582eed`.
 
 ## H — Hypothesis
@@ -21,7 +21,11 @@ Four 8→16→8 GELU layers, four experts, balanced oracle top-1 routing. This e
 
 ## D — Decision
 
-Fresh results pending; fixed-update development is not capacity evidence.
+**PASS** on the registered fresh mechanism gate. Mirror/full MSE was 0.384–0.508 and actual payload was 6,372B vs 18,289B independent (0.348x, 65.2% fewer bytes). Mirror used 7.5% more bytes than hard tying and reduced MSE by 86.7–92.6% in all worlds. At near bytes, Mirror MSE was also 86–93% below the scalar gate; rank-2 residual used more bytes and had higher MSE.
+
+This was not a runtime win: median eager CPU throughput was 1.65M examples/s vs 2.63M hard-tied and 3.10M independent; median training wall was 1.65s vs 0.84s tied. The MAC proxy was 256 per example plus about 12 Givens coordinate FLOPs, compared with 256 for tying and 256 for the one active expert in the independent model. On independent functions, Mirror MSE was 0.00579–0.00627 vs 0.000078–0.000089 for full independent. The teacher is deliberately view-aligned; this fixed-update screen is not capacity or language evidence.
+
+All 36 deterministic fresh rows replayed exactly (timing excluded); eight frozen input hashes verified against commit `0f852c9f9408a210fd4d6b4ddf60281ed5c76550`.
 
 ## C — Strongest counter-hypothesis
 
@@ -29,10 +33,10 @@ As in MA-241, the aligned teacher is generated from a shared expert bank and lay
 
 ## U — Unconfirmed
 
-Natural MoE layers, learned routing, near-convergence capacity, fixed-byte frontiers, and optimized kernels remain untested.
+Whether naturally trained layers contain this structure, learned routing, near-convergence capacity, fixed-byte frontiers, and optimized kernels remain untested.
 
 ## Fact / interpretation / hypothesis
 
-- **Fact:** the protocol fixes four layers and one active expert per example; development passed quality/storage access conditions.
-- **Interpretation:** this isolates scaling the layer-view idea from two layers while reducing expert compute vs MA-241's all-expert evaluation.
-- **Hypothesis:** layer-specific views may retain their storage/quality value when expert execution is sparse.
+- **Fact:** all three fresh worlds passed the aligned quality/storage and simple-control gates with 65.2% fewer bytes than independent and 7.5% more than hard tie.
+- **Interpretation:** scaling to four layers and sparse top-1 execution retained the aligned synthetic view advantage, but eager runtime regressed and unrelated layers needed private weights.
+- **Hypothesis:** naturally trained MoE layers may share a similar low-description layer orbit; this has not been measured.
