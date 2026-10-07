@@ -24,6 +24,7 @@ MA-005 -> MA-009 -> MA-019 -> MA-024.
 
 ## Active experiments
 
+- MA-003 — branch `research/ma-003-mirror-topk-expert-20261007`; directory `experiments/mirror_applications/ma-003-mirror-topk-expert/`; worker/run `Codex session 2026-10-07`; start commit `4ddc2962b53dc621ec6ce30758a3cf527aaa2c18`.
 
 
 
