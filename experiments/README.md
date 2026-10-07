@@ -23,6 +23,11 @@ The corresponding narrative report is:
 
 - [TM001 parallel period token mixing](token_mixing/tm001_20261007/) — one-forward P-token phase slots, hidden packet-latent boundary, and CPU cached-AR benchmark.
 
+### Mirror application map
+
+- [Mirror application registry](mirror_applications/) — 240 MA-xxx hypotheses, common experiment contract, and the first 25 P0 validation candidates.
+- Common baseline: [third-party nanoGPT core](../third_party/nanoGPT/) for controlled A/B integration when a real causal-LM fixture is needed.
+
 ## Preserved historical lanes
 
 - `mirror_native/` — MN-series shared-state / Mirror experiments;
