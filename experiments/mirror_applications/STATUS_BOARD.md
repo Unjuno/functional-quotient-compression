@@ -23,7 +23,7 @@ If MA-186 is blocked, use the next eligible P0 in the registry.
 
 ## Active experiments
 
-None.
+- MA-199 — branch `research/ma-199-gradient-coordinate-20261007`; directory `experiments/mirror_applications/ma-199-gradient-coordinate/`; started from commit `a5dc84c59a6a7fd35c43dc40003f3be52cc03d75`. Targeted gradient-projection/continual-optimizer prior art read; mechanism protocol being fixed.
 
 
 When a worker starts an MA experiment, add:
