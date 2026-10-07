@@ -98,7 +98,7 @@ These do not preempt an already-started worker experiment. They enter the queue 
 
 ## Expansion lanes discovered by research
 
-The backlog now contains **825 candidates**. The literature program now spans the following strategic lanes:
+The backlog now contains **875 candidates**. The literature program now spans the following strategic lanes:
 
 ### A. Representation selection
 Masks/supermasks and intrinsic subspaces ask whether a task needs a new weight transform at all, or only a compact selector/coordinate.
@@ -199,6 +199,30 @@ Research question: can persistent task coordinates and fast context coordinates 
 Matrix-memory results expose task-dependent rank requirements; programmable neural graphs expose connectivity itself as an executable state.
 
 Research question: can Mirror allocate state rank and graph structure only when demanded, without hiding storage in metadata or dynamic program synthesis?
+
+### S. Functional edges and causal coordinates
+
+KAN/GS-KAN expose learnable edge functions and shared parent functions; NTK/linearization and AI Engram expose tangent or Fisher-geometric task/memory directions.
+
+Research question: is the cheapest functional coordinate a transformed edge function, a local tangent coordinate, or a causal memory trace rather than a weight-space adapter?
+
+### T. Writable state versus stable-state adaptation
+
+Differentiable plasticity, Hebbian fast weights and DeltaNet use online writable state; gain-modulated stable-synapse networks adapt through dynamic activation state without changing synapses.
+
+Research question: how many writable bits and update FLOPs are actually required for Level-3 Mirror adaptation, and when can stable gain/context state replace fast weights?
+
+### U. Learned model manifolds
+
+Learned neural subspaces and Bezier mode-connectivity surfaces produce empirical low-loss coordinate spaces rather than choosing a transform family a priori.
+
+Research question: does a learned low-loss manifold give a better rate-quality quotient than task vectors, random intrinsic dimensions or Model Stock interpolation?
+
+### V. Collective and structural coordinates
+
+Mesh Inference moves the functional coordinate into admission/communication policy over private agents, while Structural Composition encodes how reusable modules should be recombined.
+
+Research question: can the project compress protocols and composition rules when the underlying physical models/modules themselves remain separate?
 
 ## KV-cache transformation lane
 
