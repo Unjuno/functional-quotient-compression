@@ -401,3 +401,60 @@ Implication: when routing/address errors matter, a few extra code bits may impro
 - Maintained prior-art map: **PA01–PA95**.
 
 The operational rule remains unchanged: research additions enter later queues and do not interrupt a worker's already-locked experiment.
+
+
+## Seventh literature sweep — representation-space functions and sparse features
+
+This sweep focused on the cheapest possible place for the functional coordinate: the hidden representation itself.
+
+New territories:
+1. ReFT / LoReFT representation finetuning;
+2. Representation Engineering;
+3. Activation Addition and Contrastive Activation Addition;
+4. Function Vectors;
+5. Conditional Activation Steering;
+6. sparse-autoencoder feature steering;
+7. transcoders / sparse feature circuits;
+8. sparse/local low-rank knowledge intervention.
+
+### AK. Weight space is not necessarily the cheapest functional space
+
+ReFT shows that downstream behavior can be changed through low-rank interventions on frozen hidden representations.
+
+Implication: every weight-space Mirror family now has a representation-space competitor. The experiment program should eventually map which functions are cheaper in:
+- weight space;
+- activation/representation space;
+- latent-code space;
+- external memory.
+
+### AL. Function vectors are unusually direct evidence for the project framing
+
+Function-vector work reports compact activation vectors that causally trigger input-output functions and sometimes compose algebraically.
+
+Implication: "functional coordinate" is not only an analogy. A controlled experiment can extract a function vector, compress it into a Mirror basis/code, and measure whether the same function survives.
+
+### AM. Sparse feature dictionaries offer interpretable functional atoms
+
+SAEs and transcoders decompose dense hidden computations into sparse features; feature steering can causally change behavior.
+
+Implication: shared-rule banks should compare to sparse representation-space atoms. If a task/expert can be expressed by a handful of SAE/transcoder features, a dense Mirror transformation may be unnecessary.
+
+### AN. Dynamic condition x behavior factorization is already practical
+
+Conditional Activation Steering separates a condition vector from a behavior vector.
+
+Implication: factorized addresses such as m=(condition, behavior) can be tested directly with held-out combinations and false-trigger metrics.
+
+### AO. Function storage and execution can be separated in activation space
+
+Function vectors provide function identity, while repeated/tied blocks or packet slots can provide execution structure.
+
+Implication: SRM003's storage-versus-execution split can be revisited without weight-space experts: use function vectors/representation Views as operators and separately test the executor.
+
+## Registry growth
+
+- Seventh sweep: MA-501 through MA-550.
+- Registry after this sweep: **550 candidates**.
+- Maintained prior-art map: **PA01–PA104**.
+
+The research program now explicitly includes weight-space, representation-space, latent-code, memory, routing/path, architecture, dynamic-state, and optimization-space functional coordinates.
