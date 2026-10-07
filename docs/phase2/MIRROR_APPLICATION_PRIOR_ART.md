@@ -440,6 +440,135 @@ Uses adapters and reversible computation so activations can be reconstructed dur
 
 **Mirror implication:** reversible Mirror transforms can target training-memory compression in addition to weight storage, but compute/recomputation cost must be reported separately.
 
+## PA49 — Mixture-of-Depths
+
+**Mixture-of-Depths: Dynamically allocating compute in transformer-based language models**  
+https://arxiv.org/abs/2404.02258
+
+Routes only a fixed-capacity top-k subset of tokens through each Transformer block, making token-level depth dynamic while total per-layer compute remains bounded.
+
+**Mirror implication:** the functional coordinate can control whether/where computation happens, not only how weights are transformed. Mirror compute-routing must compare against MoD.
+
+## PA50 — Adaptive depth / early exit
+
+**DeeBERT: Dynamic Early Exiting for Accelerating BERT Inference**  
+https://aclanthology.org/2020.acl-main.204/
+
+**Depth-adaptive Transformer**  
+https://inria.hal.science/hal-02422914
+
+Selects input/token-specific exit depth to trade quality for computation.
+
+**Mirror implication:** a depth View can encode logical computation stage or confidence, but any speed claim must compare to simple halting/early-exit policies.
+
+## PA51 — Universally Slimmable Networks
+
+**Universally Slimmable Networks and Improved Training Techniques**  
+https://openaccess.thecvf.com/content_ICCV_2019/html/Yu_Universally_Slimmable_Networks_and_Improved_Training_Techniques_ICCV_2019_paper.html
+
+Trains one shared network that operates at many widths, using techniques such as the sandwich rule and inplace distillation.
+
+**Mirror implication:** width is itself a logical model coordinate. Mirror can be tested as a small width-specific correction that recovers quality lost by aggressive weight sharing.
+
+## PA52 — Once-for-All supernet
+
+**Once-for-All: Train One Network and Specialize it for Efficient Deployment**  
+https://arxiv.org/abs/1908.09791
+
+Trains a single supernet supporting many depth/width/kernel/resolution subnetworks through progressive shrinking.
+
+**Mirror implication:** architecture choice can be treated as a factorized address. Mirror should be tested as a correction/view over shared supernet weights, not as a replacement for subnet selection itself.
+
+## PA53 — MatFormer
+
+**MatFormer: Nested Transformer for Elastic Inference**  
+https://arxiv.org/abs/2310.07707
+
+Jointly optimizes nested Transformer FFN widths and allows many untrained Mix'n'Match layer granularities to be extracted from one model.
+
+**Mirror implication:** nested-width logical models already exist without separate weights. Mirror can test whether tiny granularity/layer codes reduce interference or improve arbitrary mix-and-match configurations.
+
+## PA54 — AdapterFusion
+
+**AdapterFusion: Non-Destructive Task Composition for Transfer Learning**  
+https://arxiv.org/abs/2005.00247
+
+Keeps independently trained task adapters frozen and learns a separate fusion mechanism to combine their representations.
+
+**Mirror implication:** adapter-composition Mirror ideas must compare to fusion over independent adapters; a useful result should reduce adapter storage or fusion cost, not merely compose them.
+
+## PA55 — LoraHub
+
+**LoraHub: Efficient Cross-Task Generalization via Dynamic LoRA Composition**  
+https://arxiv.org/abs/2307.13269
+
+Combines multiple pre-trained LoRA modules with learned positive/negative scalar coefficients for few-shot unseen-task adaptation.
+
+**Mirror implication:** Mirror-LoRA composition must beat or compress simple signed LoRA-module mixtures.
+
+## PA56 — Learning to Prompt (L2P)
+
+**Learning to Prompt for Continual Learning**  
+https://openaccess.thecvf.com/content/CVPR2022/html/Wang_Learning_To_Prompt_for_Continual_Learning_CVPR_2022_paper.html
+
+Maintains a prompt pool and dynamically retrieves prompts without requiring task identity at test time.
+
+**Mirror implication:** prompt/View banks are another physical-multiplicity target. Compare explicit prompt storage to generated/compressed Mirror prompts.
+
+## PA57 — DualPrompt
+
+**DualPrompt: Complementary Prompting for Rehearsal-free Continual Learning**  
+https://arxiv.org/abs/2204.04799
+
+Separates task-invariant general prompts and task-specific expert prompts.
+
+**Mirror implication:** this maps directly to shared basis + private residual. Mirror prompt experiments can ask whether many expert prompts collapse to small coordinates around general prompts.
+
+## PA58 — Hash Embeddings
+
+**Hash Embeddings for Efficient Word Representations**  
+https://proceedings.neurips.cc/paper/2017/file/f0f6ba4b5e0000340312d33c212c3ae8-Paper.pdf
+
+Represents tokens by combining a few component vectors from a shared pool selected by hash functions, plus token-specific importance weights.
+
+**Mirror implication:** vocabulary-level logical multiplicity can be created from a small component pool; Mirror embeddings should compare against hashing plus learned importance weights.
+
+## PA59 — Compositional / quotient-remainder embeddings
+
+**Compositional Embeddings Using Complementary Partitions for Memory-Efficient Recommendation Systems**  
+https://arxiv.org/abs/1909.02107
+
+Builds unique embeddings from several smaller tables using complementary partitions such as quotient/remainder indexing.
+
+**Mirror implication:** factorized address products can create unique logical embeddings with sublinear table storage. This is a direct control for factorized Mirror addresses.
+
+## PA60 — Adaptive input representations
+
+**Adaptive Input Representations for Neural Language Modeling**  
+https://arxiv.org/abs/1809.10853
+
+Allocates different embedding capacity to frequency bands and can tie adaptive input/output embeddings.
+
+**Mirror implication:** embedding Mirror storage must compare against simply allocating less physical capacity to rare tokens.
+
+## PA61 — ALBERT parameter sharing
+
+**ALBERT: A Lite BERT for Self-supervised Learning of Language Representations**  
+https://arxiv.org/abs/1909.11942
+
+Uses factorized embeddings and cross-layer parameter sharing, including ablations that separately share attention or FFN parameters.
+
+**Mirror implication:** shared-layer Mirror variants should compare directly to ALBERT-style hard sharing. A View is valuable only if it restores quality/flexibility cheaply.
+
+## PA62 — One-shot NAS / shared supernets
+
+**Efficient Neural Architecture Search via Parameter Sharing (ENAS)**  
+https://arxiv.org/abs/1802.03268
+
+Represents many child architectures as subgraphs of one shared supernetwork.
+
+**Mirror implication:** architecture configuration can be another low-description logical coordinate, but weight-sharing bias/interference is a known confound. Mirror corrections should be evaluated against the same child architectures trained independently where practical.
+
 ## Research gaps that remain especially relevant here
 
 1. **Logical expert multiplicity from one physical expert via a structured view** — adjacent to expert tying, but not equivalent.
