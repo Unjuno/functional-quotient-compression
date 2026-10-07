@@ -224,6 +224,16 @@ Mesh Inference moves the functional coordinate into admission/communication poli
 
 Research question: can the project compress protocols and composition rules when the underlying physical models/modules themselves remain separate?
 
+## Core execution doctrine
+
+Across every strategic lane, the default question is not "is this adjacent method interesting?" It is:
+
+> Where can the extra low-description Mirror parameter `m` be inserted into the native method, and what marginal functional freedom does it buy per byte/compute/interference cost?
+
+Workers should preserve the native method as a direct baseline, insert `m` with minimal surgery, compare against the cheapest ordinary parameter that could provide similar freedom, and then sweep static/dynamic/factorized/shared-private variants where justified.
+
+Broad literature exploration is therefore converted into **Mirror-parameter integration experiments**, not independent research detours.
+
 ## KV-cache transformation lane
 
 MA-691..700 test whether one physical canonical KV/cache latent can serve multiple logical Mirror Views.
