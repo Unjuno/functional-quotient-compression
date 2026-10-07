@@ -11,11 +11,12 @@ The goal is **not** to prove Mirror works everywhere. Negative results are first
 Read in order:
 1. `AGENTS.md`
 2. `WORKER_START_HERE.md`
-3. `experiments/mirror_applications/STATUS_BOARD.md`
-4. `experiments/mirror_applications/IDEA_REGISTRY.csv`
-5. selected row's prior-art references from `docs/phase2/MIRROR_APPLICATION_PRIOR_ART.md`
-6. `experiments/mirror_applications/EXPERIMENT_CONTRACT.md`
-7. `experiments/mirror_applications/TEMPLATE/`
+3. `docs/phase2/LATEST_WORKER_FINDINGS.md`
+4. `experiments/mirror_applications/STATUS_BOARD.md`
+5. `experiments/mirror_applications/IDEA_REGISTRY.csv`
+6. selected row's prior-art references from `docs/phase2/MIRROR_APPLICATION_PRIOR_ART.md`
+7. `experiments/mirror_applications/EXPERIMENT_CONTRACT.md`
+8. `experiments/mirror_applications/TEMPLATE/`
 
 ## Iteration loop
 
