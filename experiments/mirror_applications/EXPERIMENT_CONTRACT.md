@@ -2,6 +2,8 @@
 
 Use this contract for every MA-xxx candidate unless its report explicitly preregisters a deviation.
 
+Interpret this contract under `docs/phase2/MIRROR_PARAMETER_INTEGRATION_DOCTRINE.md` and use `docs/phase2/MIRROR_PARAMETER_INTEGRATION_MATRIX.md` for the cross-method insertion map.
+
 ## 0. Mirror parameter isolation
 
 Every experiment must isolate the marginal contribution of the extra low-description functional parameter `m`.
