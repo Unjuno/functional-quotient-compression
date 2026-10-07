@@ -1,6 +1,6 @@
 {
   "experiment_id": "MA-244",
-  "commit": "pending result commit",
+  "commit": "85de2fd65618d72bd0bf6a091b558a0dda57b741",
   "tests": {
     "command": "python -m pytest -q experiments/mirror_applications/ma-244-kv-role-view/tests",
     "passed": 4,
@@ -12,14 +12,14 @@
     "notes": [
       "All seven attention variants passed strict state-dict save/load and exact output equality tests.",
       "Actual serialized state-dict plus config payload counts exactly matched across all 21 fresh replay rows.",
-      "Physical KV cache tensors were materialized and their numel × element_size matched cache_bytes for all methods."
+      "Physical KV cache tensors were materialized and their numel \u00d7 element_size matched cache_bytes for all methods."
     ]
   },
   "metric_replay": {
     "checked": true,
     "fresh_rows_replayed": 21,
     "max_difference": 4.268799203011042e-11,
-    "tolerance": 1e-9,
+    "tolerance": 1e-09,
     "command": "CPU one-thread replay through source/engine.py with frozen worlds and LR 0.003"
   },
   "fresh_split_integrity_checked": true,
@@ -32,14 +32,21 @@
   "source_freeze": {
     "freeze_commit": "d1a3493",
     "source_hashes_match": true,
-    "fresh_worlds": [24401, 24402, 24403],
+    "fresh_worlds": [
+      24401,
+      24402,
+      24403
+    ],
     "fresh_data_used_for_tuning": false
   },
   "runtime": {
     "device": "CPU only; Intel Xeon Platinum 8573C; one thread",
     "inference_benchmark": "batch 4096, 10 forward passes after 2 warmups",
     "median_mirror_to_mqa_throughput_ratio": 0.674391781849341,
-    "notes": ["Small synthetic CPU benchmark only.", "Givens views use eager Python/PyTorch ops; no fused kernel."]
+    "notes": [
+      "Small synthetic CPU benchmark only.",
+      "Givens views use eager Python/PyTorch ops; no fused kernel."
+    ]
   },
   "environment": {
     "python": "3.12.14",

@@ -3,12 +3,12 @@
 - Status: PROMISING (quality/cache frontier); strict payload-byte gate missed
 - Branch: `research/ma-244-kv-role-view-20261007`
 - Base commit: `5b736a0f7cfca9c3f7794005dfb70954f155ea02`
-- Last verified commit: pending result commit
+- Last verified commit: `85de2fd65618d72bd0bf6a091b558a0dda57b741`
 - Development complete: yes; selected common LR `0.003`
 - Fresh/audit opened: yes; worlds 24401, 24402, 24403
-- Results committed: pending
-- Verification committed: pending
-- Registry row updated: pending until verification is committed
+- Results committed: yes (`85de2fd65618d72bd0bf6a091b558a0dda57b741`)
+- Verification committed: yes (`85de2fd65618d72bd0bf6a091b558a0dda57b741`)
+- Registry row updated: yes (PROMISING; aligned quality/cache result)
 
 ## Decision
 
@@ -18,7 +18,7 @@ The eager CPU implementation was slower than MQA and the scalar gate. The result
 
 ## Next action
 
-Commit verified files, update registry/claim ledger/status board/queue, push the MA-244 branch, then continue to MA-245.
+Push the dedicated MA-244 branch, then continue to MA-245.
 
 ## Blockers
 
