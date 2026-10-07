@@ -3,7 +3,7 @@
 This lane tests where the extra Mirror/View coordinate can replace physical duplication with logical multiplicity.
 
 Files:
-- IDEA_REGISTRY.csv — 825 candidate applications with status, prior-art links and first control.
+- IDEA_REGISTRY.csv — 875 candidate applications with status, prior-art links and first control.
 - FIRST_QUEUE.md — 25 P0 candidates spanning different physical objects.
 - EXPERIMENT_CONTRACT.md — common byte/compute/quality rules.
 
