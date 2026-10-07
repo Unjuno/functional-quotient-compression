@@ -1,0 +1,16 @@
+{
+  "experiment_id":"TM001",
+  "date_jst":"2026-10-07",
+  "evidence_lane":"synthetic tiny causal Transformer + CPU benchmark",
+  "states":32,
+  "rules":12,
+  "periods":[2,4,8],
+  "modes":["deterministic","revealed","hidden"],
+  "model":{"layers":2,"d_model":32,"heads":4,"ffn":64,"context_tokens":4},
+  "methods":["kv_cached_ar","direct_period_slots","triangular_period_mixer"],
+  "training":{"optimizer":"AdamW","lr":0.003,"batch":128,"updates":1600,"fp32":true},
+  "fresh_worlds":[201,202,203],
+  "benchmark":{"device":"CPU","torch":"2.10.0+cpu","threads":1,"batches":[1,32,128],"warmup":20,"iterations":100},
+  "storage":"actual deterministic serialized FP32 payload bytes",
+  "boundaries":["not natural language","not GPU throughput","not equal FLOPs","future target embeddings are never supplied to period slots"]
+}
