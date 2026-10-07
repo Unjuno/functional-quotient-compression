@@ -122,6 +122,24 @@ Connects attention to role/filler binding and proposes explicit VSA-inspired bin
 
 **Mirror implication:** attention-binding candidates should compare to explicit binding heads, not only ordinary MHA.
 
+## PA14 — Decoupled MoE with cache-safe expert placement
+
+**Decoupled Mixture-of-Experts for Parametric Knowledge Injection**  
+https://arxiv.org/abs/2606.14243
+
+Places independently updatable experts only at the final-layer FFN so dynamic expert activation does not invalidate earlier KV caches.
+
+**Mirror implication:** expert placement is part of the compression/runtime hypothesis. A final-FFN Mirror-MoE may preserve cache reuse while testing whether one physical expert basis can replace many knowledge adapters.
+
+## PA15 — Intra-model routed verifier for speculative decoding
+
+**VIA-SD: Verification via Intra-Model Routing for Speculative Decoding**  
+https://arxiv.org/abs/2606.12243
+
+Builds a slim verifier from the full model via intra-model routing and uses hierarchical draft -> slim verifier -> full verifier decisions.
+
+**Mirror implication:** Mirror speculative-decoding ideas should compare against routed slim-verifiers. The interesting delta is whether low-description views can create several verification strengths or candidate distributions without separate model copies.
+
 ## Research gaps that remain especially relevant here
 
 1. **Logical expert multiplicity from one physical expert via a structured view** — adjacent to expert tying, but not equivalent.
