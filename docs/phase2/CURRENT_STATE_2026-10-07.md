@@ -47,7 +47,7 @@ Canonical specification: [ARCHITECTURE_SPARSE_SHARED_RULE_MOE.md](ARCHITECTURE_S
 - A structured Mirror residual preserved the same qualitative signal at much lower storage than one-full-expert-per-rule controls.
 - LM-loss-only sparse routing worked on the tested synthetic task and beat the near-byte standard MoE in 4/4 private=32 worlds.
 - Standard MoE improves substantially with more training; near-convergence capacity superiority is therefore **not yet established**.
-- A parity adversary failed for both shared/Mirror and standard variants. Current composition is not universal.
+- A parity adversary failed for both shared/Mirror and standard variants. Current composition is not universal.\n- SRM002 established ordered non-commutative composition when rules truly lie in a reusable shared signed basis.\n- In SRM002, Mirror stretch+shear failed that operator family; signed/weighted shared composition, not Mirror geometry, was the useful mechanism.\n- With 25% private rules, shared basis + sparse rank-2 private residual matched the full teacher at about 24.7 KB versus 137.0 KB for all-independent rules; with 50% private it used about 33.1 KB.\n- In the controlled 25%-private family, overcomplete training followed by residual-norm clustering recovered the private mask exactly in 3/3 worlds and physically compacted to about 24.9 KB.\n- A discrete GF(5)^2 causal bridge showed a separate credit-assignment failure: high-capacity private residuals solved the task with intermediate-state supervision but stayed near chance with final-only loss.
 
 ### Interpretation
 
@@ -55,7 +55,7 @@ The current strongest hypothesis is not "Mirror creates more capacity by itself.
 
 It is:
 
-> **If specialist behavior is factorable into reusable functional rules, storing one shared backbone plus a sparse bank of reusable rule coordinates may be more storage- and learning-efficient than storing many independent full experts.**
+> **If specialist behavior decomposes into reusable rule directions plus a smaller set of genuinely private residuals, store the reusable directions once, compose several of them per context, and allocate private expert capacity only where the shared basis leaves measurable residual error.**
 
 ### Unresolved
 
@@ -74,7 +74,7 @@ It is:
 | MN007–MN010 | native shared-state / Mirror exploration | factor reuse trainable; count alone weak; breadth matters |
 | MT / RF / reachability | routing, view, geometry diagnostics | whole-view capacity claim failed; robustness / analysis signals only |
 | MS008–MS014 | shared world-core + residual View decomposition | shared-core isolation and residual specialization supported; quality-equivalent compression not reached |
-| SRM001 | sparse compositional shared-rule MoE | strongest current signal; multi-rule composition and LM-loss-only routing promising |
+| SRM001 | sparse compositional shared-rule MoE | multi-rule composition and LM-loss-only routing promising |\n| SRM002 | ordered composition + shared/private decomposition | strongest current mechanism result; shared weighted basis and sparse-private autoprune pass; Mirror-specific hypothesis fails on main family |
 
 Detailed registry: [EXPERIMENT_REGISTRY.md](EXPERIMENT_REGISTRY.md)
 
@@ -91,17 +91,18 @@ A claim of Mirror-specific value additionally requires Mirror to beat a non-Mirr
 
 ## Current next gate
 
-The next decisive experiment is ordered non-commutative composition:
+SRM002 closed the ordered non-commutative mechanism gate.
 
-```text
-A(B(x)) != B(A(x))
-```
+The next decisive experiment is **SRM003: causal shared/private discovery without oracle structure**.
 
-Compare:
-- sequential independent full experts;
-- sequential shared low-rank rule atoms;
-- sequential Mirror rule atoms;
+Use a small causal Transformer with:
+- a shared signed/weighted rule basis in the FFN residual;
+- an initially overcomplete low-rank private residual bank;
+- no oracle private mask;
+- no supervised rule address;
+- LM loss only;
+- post-training residual-score clustering, pruning, and physical compaction.
 
-under actual serialized-byte and training-compute frontiers.
+Compare Dense, standard top-k MoE, LoRA-MoE, and the shared-rule hybrid under actual serialized bytes, active compute, and near-convergence training curves.
 
-Only after that should the project spend significant budget on natural-language scaling.
+Mirror should remain only as a control unless it beats the simpler shared-basis representation.
