@@ -1487,6 +1487,107 @@ Builds on YOCO: cross-decoder layers reuse both one shared KV cache and one toke
 
 **Mirror implication:** cache and routing can be jointly shared. Mirror View codes should be tested on top of a single physical cache/index rather than reintroducing per-layer cache or routing state.
 
+
+## PA164 — LRAgent: shared base cache + low-rank adapter cache
+
+**LRAgent: Efficient KV Cache Sharing for Multi-LoRA LLM Agents**  
+https://arxiv.org/abs/2602.01053
+
+Decomposes multi-LoRA agent caches into a shared base component and adapter-dependent low-rank state. In its BaseLRShared variant, agents share the LoRA down-projection so the low-rank cache itself can also be shared; agent-specific up-projections recover role-specific values. Flash-LoRA-Attention reorders attention so the low-rank cache is consumed before up-projection, avoiding full cache materialization.
+
+**Mirror implication:** this is a direct real-model analogue of canonical cache + compact View delta. Mirror should generalize the factorization from LoRA-specific low-rank deltas to structured View coordinates and test exact versus residual off-orbit decomposition.
+
+## PA165 — KVCMAS low-rank chained cache correction
+
+**KVCMAS: Efficient KV cache Correction for Shared Context in Multi-Agent Systems**  
+https://arxiv.org/abs/2609.34060
+
+Represents cross-agent cache deviations with compact low-rank correction states and chains corrections along the workflow from an exact first-agent cache, avoiding an extra reference prefill.
+
+**Mirror implication:** when exact View algebra fails, a compact correction state can bridge nearby logical Views. Chained corrections and error accumulation are mandatory controls for multi-agent Mirror cache switching.
+
+## PA166 — xKV shared cross-layer token basis
+
+**xKV: Cross-Layer KV-Cache Compression via Aligned Singular Vector Extraction**  
+https://arxiv.org/abs/2503.18893
+
+Factorizes adjacent-layer caches into a shared low-rank token basis plus layer-specific reconstruction matrices and selectively reconstructs query-relevant rows at decode time.
+
+**Mirror implication:** a canonical cache can be more general than one full K/V tensor. Mirror layer/head/View codes can operate on reconstruction maps over a shared token basis, combining cross-layer and cross-View reuse.
+
+## PA167 — Looped Latent Attention
+
+**Looped Latent Attention: Cross-Loop KV Compression for Looped Transformers**  
+https://arxiv.org/abs/2607.15456
+
+Compresses the recurrence/loop axis of weight-tied Transformers into shared latent K/V state with loop-specific reconstruction maps; reports that the loop axis is substantially more compressible than naive final-loop reuse.
+
+**Mirror implication:** tied-depth Mirror models may cache one latent state and use depth/View-specific reconstruction rather than one K/V cache per logical depth step.
+
+## PA168 — PatchKV selective recovery after context edits
+
+**PatchKV: Efficient KV Cache Recovery for Dynamically Edited LLM Contexts**  
+https://arxiv.org/abs/2609.26219
+
+Predicts a compact dirty region after a middle-context edit, augments it with sparse nonlocal important blocks, recomputes only that repair set, and restores the remainder with position/precision correction.
+
+**Mirror implication:** after a View switch that invalidates only part of the causal state, copy-on-write plus selective repair may be preferable to full cache translation or re-prefill.
+
+## PA169 — PatchKV weight-space compensation
+
+**PatchKV: Weight-Space Compensation of KV Cache**  
+https://arxiv.org/abs/2609.39329
+
+Pairs an aggressively compressed cache with context-specific closed-form MLP weight patches, shifting part of context information from cache state into weights and amortizing patch construction across queries.
+
+**Mirror implication:** cache capacity and functional View capacity can trade against each other. A Mirror code or private residual may compensate a smaller canonical cache instead of enlarging the cache.
+
+## PA170 — ICaRus identical cache reuse by architectural decomposition
+
+**ICaRus: Identical Cache Reuse for Efficient Multi Model Inference**  
+https://arxiv.org/abs/2603.13281
+
+Freezes a shared logical encoder that alone generates K/V and fine-tunes task-specific logical decoders that read the identical cache. This makes cross-model cache sharing exact by architectural construction.
+
+**Mirror implication:** a cache-invariant canonical stream plus specialized Mirror decoder/read stream is a strong architecture-level alternative to translating cache after the fact.
+
+## PA171 — Bank of Values
+
+**Do Value Vectors in Deep Layers Need Context from the Residual Stream?**  
+https://arxiv.org/abs/2606.02780
+
+Bank of Values replaces context-dependent V computation in deeper layers with token-indexed context-free values, eliminating persistent V caches in those layers.
+
+**Mirror implication:** some cache axes can be removed entirely before compression. Mirror KV work should test key-only canonical caches with logical value Views/lookups instead of assuming both K and V require persistent cache state.
+
+## PA172 — LoRA-Null / null-space adaptation
+
+**LoRA-Null: Low-Rank Adaptation via Null Space for Large Language Models**  
+https://arxiv.org/abs/2503.02659
+
+Constructs low-rank adaptation directions from approximate null spaces of pretrained activations to reduce interference with pretrained knowledge.
+
+**Mirror implication:** null-space constraints suggest a cache-preserving specialization lane: constrain View/private residual updates to directions that minimally affect cache-generating projections or canonical representations, then measure remaining specialist capacity.
+
+## PA173 — production aLoRA cross-model cache reuse
+
+**Efficient Multi-Adapter LLM Serving via Cross-Model KV-Cache Reuse with Activated LoRA**  
+https://arxiv.org/abs/2512.17910
+
+Implements cross-model prefix cache reuse for activated LoRA inside vLLM using base-aligned block hashing and activation-aware masking, showing large latency reductions in multi-adapter pipelines.
+
+**Mirror implication:** exact Mirror-compatible caches need a systems implementation with physical block aliasing and cache-key semantics, not just algebraic equality.
+
+## PA174 — ALoRA / asymmetric shared-factor multi-LoRA
+
+**Rethinking Parameter Sharing for LLM Fine-Tuning with Multiple LoRAs**  
+https://aclanthology.org/2026.findings-acl.625/
+
+Finds that sharing the LoRA A factor can reflect common initialization more than shared knowledge and proposes multiple A matrices with a shared B matrix for multi-task and federated settings.
+
+**Mirror implication:** cache-sharing designs must empirically choose which low-rank factor is globally shared. Shared-A is attractive for reusable low-rank cache state, while shared-B may transfer task knowledge better; Mirror can factor these roles explicitly rather than assume one orientation.
+
+
 ## Research gaps that remain especially relevant here
 
 1. **Logical expert multiplicity from one physical expert via a structured view** — adjacent to expert tying, but not equivalent.
