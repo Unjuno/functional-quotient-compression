@@ -8,19 +8,19 @@ Updated: 2026-10-07
 - P0: **34**
 - P1: **126**
 - P2: **94**
-- Current MA statuses: **213 UNTESTED, 25 PROMISING, 16 FAIL**
+- Current MA statuses: **212 UNTESTED, 25 PROMISING, 17 FAIL**
 - Historical evidence lanes SRM/TM are not MA statuses.
 
 ## Next candidate
 
-**MA-011 — next eligible candidate (MoE / experts)**
+**MA-012 — next eligible candidate (MoE / experts)**
 
 Why next:
-- MA-010 failed at the pre-fresh development gate; its fresh worlds remain sealed. MA-009 is also checked FAIL. MA-011 is the next UNTESTED candidate in registry order.
+- MA-010 and MA-011 failed at their pre-fresh development gates; fresh worlds remain sealed. MA-012 is the next UNTESTED candidate in registry order.
 
 ## Active experiments
 
-None. MA-008 and MA-010 are complete; see result entries below.
+None. MA-008, MA-010 and MA-011 are complete; see result entries below.
 
 When a worker starts an MA experiment, add:
 - MA ID;
@@ -41,6 +41,8 @@ When a worker starts an MA experiment, add:
 - MA-247 through MA-251 are complete and verified.
 
 ## Recently completed
+- MA-011 — FAIL at development storage gate: aligned product Mirror achieved 0.140x independent MSE and lower error than rank-2 at fewer bytes, but payload was 0.719x vs required <=0.65x; fresh stayed sealed. Independent factor functions needed richer state; CPU throughput lagged. Branch `research/ma-011-product-mirror-experts-20261007`; report `experiments/mirror_applications/ma-011-product-mirror-experts/README.md`; result commit `5ae711ee4e6721ef1cee6e78e666b7f760f609d9`.
+
 - MA-010 — FAIL at development: sequential Mirror expert composition missed both pre-fresh gates (MSE 2.13x independent; payload 0.875x vs required 0.65x). Rank-2 residual had lower aligned MSE; hard tying was smaller. Fresh stayed sealed. Branch `research/ma-010-sequential-mirror-experts-20261007`; report `experiments/mirror_applications/ma-010-sequential-mirror-experts/README.md`; result commit `64caf2d8e5f338a53347f6b59628fbc6ad30fced`.
 
 
