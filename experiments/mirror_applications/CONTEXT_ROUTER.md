@@ -28,8 +28,9 @@ Primary question: what fraction of expert variation is shared-coordinate versus 
 
 ### Attention / KV / GQA / MLA
 Read:
-- MA-244 and MA-245 summaries in LATEST_WORKER_FINDINGS;
-- PA07, PA08 and PA58 when referenced.
+- MA-244, MA-245 and MA-691 summaries in LATEST_WORKER_FINDINGS;
+- `docs/phase2/MIRROR_KV_CACHE_REUSE_ALGEBRA.md` for exact and residual cache conditions;
+- PA07, PA08, PA58, PA154–174 when referenced.
 
 Keep separate:
 - projection/model bytes;
@@ -39,6 +40,16 @@ Keep separate:
 - wall-clock.
 
 Do not infer cache reuse from parameter sharing alone.
+
+For KV experiments, classify the candidate before coding:
+1. **IDENTICAL** — cache-generating path is architecturally identical;
+2. **EXACT-TRANSFORMABLE** — logical cache is a known read-side transform of canonical state;
+3. **SHARED-LATENT** — cache is exactly reconstructed from shared token latents + small View maps;
+4. **DELTA** — canonical state plus compact View-specific residual;
+5. **REPAIR/APPROXIMATE** — selective recomputation or learned correction;
+6. **INCOMPATIBLE** — full re-prefill/materialization is required.
+
+Prefer the highest exact class that can represent the target behavior.
 
 ### Depth / recurrent / equilibrium
 Read:
