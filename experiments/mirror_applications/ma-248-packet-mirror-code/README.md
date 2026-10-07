@@ -24,9 +24,13 @@ See `PROTOCOL.json`. The key measurements are exact joint packet accuracy, token
 
 The initial dev-only implementation used one causal slot block. Its joint packet accuracy was low for every method (for example, correlated-mode PTP 24.4% at LR 0.01, Mirror 25.2%, and independent-mode PTP 0.8%). Inspection showed that with one block, a later slot cannot attend to an earlier slot representation that already incorporates its context/history. Before any fresh evaluation, the protocol was amended to two causal slot blocks, matching the adjacent TM001 decoder depth. The original 24 rows remain tagged `architecture_v1`; the 24 two-block rows are `architecture_v2`. A second dev-only amendment found method-specific minibatch streams; v3 keeps initialization seeds method-specific but matches minibatch sequences across methods and learning rates. Only the matched-minibatch v3 run selects LR or accesses fresh worlds. Both amendments retain task, methods, worlds, rates and update budget.
 
+## Development screen (v3, selection run)
+
+Development world 24800 selected common LR 0.01 (mean NLL 1.01452 vs 1.01567 at LR 0.003, pooled across six methods and both modes). In the correlated condition, v3 Mirror reached 100% exact packets / 100% valid paths and NLL 0.0102; PTP reached 97.7% / 97.7% and NLL 0.0736. The scalar-gate control was unstable at this LR (48.2% exact packets), while untied reached 100%. Independent-source exact packet accuracy remained low across all methods (PTP 2.3%, Mirror 2.0%, untied 3.8%); this is a development-only signal and may reflect fixed-budget optimization. The fresh worlds 24801–24803 remain unopened at freeze.
+
 ## Results
 
-Final conclusions follow after v2 development selection, source freeze, fresh evaluation, and metric replay.
+Fresh conclusions follow after replay verification.
 
 ## Decision
 
