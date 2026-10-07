@@ -8,22 +8,20 @@ Updated: 2026-10-07
 - P0: **34**
 - P1: **126**
 - P2: **94**
-- Current MA statuses: **218 UNTESTED, 21 PROMISING, 15 FAIL**
+- Current MA statuses: **217 UNTESTED, 22 PROMISING, 15 FAIL**
 - Historical evidence lanes SRM/TM are not MA statuses.
 
 ## Next candidate
 
-**MA-004 — active P1 candidate (MoE / experts)**
+**MA-006 — next eligible P1 candidate (MoE / experts)**
 
 Why next:
 - MA-241, MA-244, MA-245, MA-247, MA-248, MA-249, MA-250, MA-251, MA-253, MA-003, MA-005, MA-009, MA-019, MA-024, MA-041, MA-048, MA-061, MA-063, MA-076, MA-079, MA-086, MA-116, MA-121, MA-129, MA-156, MA-160, MA-171, MA-173 and MA-181 are checked; Family B KV views remain paused.
-- MA-186, MA-189, MA-199, MA-208 and MA-111 are completed. MA-111 passed its aligned synthetic gate; no P0 candidate remains UNTESTED. MA-001 and MA-002 are checked. MA-004 is the active next registry candidate.
+- MA-186, MA-189, MA-199, MA-208 and MA-111 are completed. MA-111 passed its aligned synthetic gate; no P0 candidate remains UNTESTED. MA-001, MA-002 and MA-004 are checked. MA-006 is first remaining P1 in registry order.
 
 If MA-186 is blocked, use the next eligible P0 in the registry.
 
 ## Active experiments
-
-- MA-004 — `research/ma-004-soft-mirror-expert-mixture-20261007`; directory `experiments/mirror_applications/ma-004-soft-mirror-expert-mixture/`; start commit `7ff5430` (verified MA-002 base). Scoped as a learned dense softmax mixture over all nonlinear experts, distinct from MA-002 sparse top-2 and MA-005 deterministic signed mixture.
 
 
 
@@ -46,6 +44,8 @@ When a worker starts an MA experiment, add:
 - MA-247 through MA-251 are complete and verified.
 
 ## Recently completed
+
+- MA-004 — PROMISING: nonlinear dense softmax Givens mixture passed aligned quality/storage 3/3 (Mirror/untied MSE 0.297–1.030; 7,697B vs 23,277B). Hard tying was 252B smaller and used one quarter of active MACs; independent roles needed private/richer state, and Mirror CPU throughput was 0.086x tying. Synthetic fixed-update result. Branch `research/ma-004-soft-mirror-expert-mixture-20261007`; report `experiments/mirror_applications/ma-004-soft-mirror-expert-mixture/README.md`; result commit `RESULT_COMMIT_PENDING`.
 
 - MA-002 — PROMISING: nonlinear sparse top-2 Givens views passed aligned quality/storage 3/3 (Mirror/untied MSE 0.223–0.403; 7,697B vs 23,277B); hard tying was 252B smaller and ~2.03x lower active proxy. Independent functions needed private/richer state; Mirror CPU inference throughput was 0.102x tying. Synthetic fixed-update result; protocol base_commit typo is disclosed. Branch `research/ma-002-mirror-top2-expert-20261007`; report `experiments/mirror_applications/ma-002-mirror-top2-expert/README.md`; result commit `2b7f7fe736393ef3702daa7995e0951d54e4de12`.
 

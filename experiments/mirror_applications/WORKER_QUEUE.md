@@ -58,4 +58,4 @@ If two consecutive candidates in a family fail for the same demonstrated structu
 
 ## Next eligible candidate
 
-No P0 candidates remain UNTESTED. Under the priority rule, start MA-004 (P1 soft Mirror expert mixture) as the first remaining candidate in registry order. MA-001 and MA-002 are complete; both aligned sharing gates passed, but hard tying remained smaller and faster.
+No P0 candidates remain UNTESTED. Under the priority rule, start MA-006 (P1 expert-choice Mirror) as the first remaining candidate in registry order. MA-001, MA-002 and MA-004 are complete; aligned sharing gates passed, but hard tying remained smaller/faster in all three screens.
