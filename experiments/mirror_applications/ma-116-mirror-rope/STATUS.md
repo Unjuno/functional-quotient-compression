@@ -3,12 +3,12 @@
 - Status: FAIL at development gate
 - Branch: `research/ma-116-mirror-rope-20261007`
 - Base commit: `68775c5784f0954adcf72147535a8569adfd8bd9`
-- Last verified commit: pending
+- Last verified commit: `b5d0b623df16f2ea3b024e92c53edb96f26ea00f`
 - Development complete: yes; seeds 11601–11602
 - Fresh/audit opened: no; independent-frequency quality and byte gates failed
-- Results committed: pending
-- Verification committed: pending
-- Registry row updated: pending
+- Results committed: yes (`b5d0b623df16f2ea3b024e92c53edb96f26ea00f`)
+- Verification committed: yes (`b5d0b623df16f2ea3b024e92c53edb96f26ea00f`)
+- Registry row updated: yes
 
 ## H / T / D / C / U
 

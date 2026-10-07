@@ -46,7 +46,7 @@ When a worker starts an MA experiment, add:
 
 ## Recently completed
 
-- MA-116 — FAIL at development: Mirror-RoPE beat scalar scaling on synthetic held-out positions, but independent frequencies were more accurate and had a smaller actual serialized payload (2,021B vs 2,209B). Fresh stayed sealed. Branch `research/ma-116-mirror-rope-20261007`; report `experiments/mirror_applications/ma-116-mirror-rope/README.md`; result commit pending.
+- MA-116 — FAIL at development: Mirror-RoPE beat scalar scaling on synthetic held-out positions, but independent frequencies were more accurate and had a smaller actual serialized payload (2,021B vs 2,209B). Fresh stayed sealed. Branch `research/ma-116-mirror-rope-20261007`; report `experiments/mirror_applications/ma-116-mirror-rope/README.md`; result commit `b5d0b623df16f2ea3b024e92c53edb96f26ea00f`.
 
 - MA-086 — FAIL at development storage gate: group-size-2 Mirror matched aligned quality but used 0.777x untied bytes vs required ≤0.65; group-size 4 compressed more but quality fell. Fresh stayed sealed. Branch `research/ma-086-depth-address-20261007`; report `experiments/mirror_applications/ma-086-depth-address/README.md`; result commit `155231548d0c202ec1d23b708206452434a7c2b7`.
 
