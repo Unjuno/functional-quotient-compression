@@ -186,3 +186,102 @@ Especially direct/high-information:
 ## Updated closest-source map
 
 The maintained prior-art map now runs **PA01–PA30**. Before implementing any new MA candidate, workers must still perform a narrow current search for that mechanism; this document is a baseline, not a guarantee of novelty.
+
+
+## Third and fourth literature sweeps — subnetworks, tensors, symmetries, supernets and prompts
+
+Two further sweeps broadened the search beyond parameter-efficient weight modulation.
+
+The sweeps issued **60 focused searches and screened 346 search-result candidates** before selecting high-signal primary sources for the maintained prior-art map.
+
+New territories:
+1. supermasks, Piggyback/PackNet and fixed-weight subnetworks;
+2. intrinsic-dimensional/random-subspace fine-tuning;
+3. Tensor-Train/Tucker tensorization and LoRETTA;
+4. permutation/sign/scale weight-space symmetries and Re-Basin alignment;
+5. personalized/federated hypernetworks and rank-heterogeneous LoRA;
+6. rank-one Bayesian models and MIMO implicit ensembles;
+7. product-key and modern Hopfield associative memory;
+8. ACDC/structured fast transforms and Lie-group equivariance;
+9. Mixture-of-Depths and adaptive early exit;
+10. universally slimmable, Once-for-All and MatFormer supernets;
+11. AdapterFusion / LoRAHub composition;
+12. L2P / DualPrompt prompt pools;
+13. hash, compositional and adaptive embeddings;
+14. one-shot NAS and architecture weight sharing.
+
+### O. A View can be a mask, not only a transform
+
+SupSup/Piggyback show that a fixed weight tensor can express many functions by changing only a task mask.
+
+Implication: every richer Mirror transform should be compared against a binary/sparse mask when the use case permits it. The extra geometry must buy something: fewer stored bits, smoother composition, better routing, or better quality.
+
+### P. A View can live in intrinsic task space
+
+Intrinsic-dimension results show that some language-model adaptations can be described with surprisingly small coordinate vectors projected into the full parameter space.
+
+Implication: do not always apply Mirror in d_model or weight-matrix space. It may be much cheaper and better conditioned to apply structure to the already-low-dimensional task coordinate.
+
+### Q. Tensor banks are direct physical-to-logical decompositions
+
+Tucker compression explicitly represents many Transformer matrices by a shared matrix bank plus per-matrix coefficients. TT/LoRETTA similarly uses small cores/factors.
+
+Implication: tensor factors and their coefficient vectors are natural Mirror-address spaces. This is a strong alternative to low-rank matrices and deserves equal priority.
+
+### R. Gauge/symmetry directions must not be counted as functional multiplicity
+
+Permutation, scaling and sign symmetries can produce different parameter tensors with exactly the same function.
+
+Implication: every Mirror family needs a symmetry audit. If a View is only moving along a parameter-symmetry orbit, it is not a new expert/function and must not be counted as capacity.
+
+### S. Personalization exposes an address-compression problem
+
+pFedHN, HyperLoRA and PreLort all represent many clients using shared global structure plus smaller client-specific state.
+
+Implication: federated/personalized models provide a concrete environment for testing whether Mirror codes are cheaper than generic hypernetwork outputs or independent client adapters, including communication cost.
+
+### T. A View can encode posterior/member identity
+
+Rank-1 Bayesian networks, BatchEnsemble and MIMO show several ways to obtain many predictive members from one physical network.
+
+Implication: Mirror uncertainty work should measure diversity, calibration and posterior quality—not merely accuracy or the number of codes.
+
+### U. A View can address memory combinatorially
+
+Product Key Memory factorizes a large address space into products of smaller sub-key sets; modern Hopfield networks provide associative retrieval.
+
+Implication: the number of Mirror addresses need not imply a dense router/table. Product/address factorization and associative retrieval are direct methods to control routing/storage growth.
+
+### V. The View can be the computation path itself
+
+Mixture-of-Depths, early exit, slimmable networks, OFA, MatFormer and one-shot supernets show that one physical training object can represent many computation graphs.
+
+Implication: Mirror is not restricted to weight transformations. The coordinate can represent:
+- depth;
+- width;
+- active subnetwork;
+- architecture;
+- hardware/latency target;
+- token-specific compute budget.
+
+The interesting test is whether a tiny View-specific correction recovers quality lost by aggressive weight sharing.
+
+### W. Prompt/adapter composition is a separate multiplicity layer
+
+AdapterFusion, LoRAHub, L2P and DualPrompt already store and compose many small modules.
+
+Implication: Mirror can compress the module bank itself, or operate on its composition coefficients. These two hypotheses must be tested separately.
+
+### X. Embedding tables are an unusually large physical-multiplicity target
+
+Hash embeddings, quotient-remainder compositional embeddings, adaptive embeddings and ALBERT factorization show multiple ways to create large logical vocabularies from less physical state.
+
+Implication: embedding-space Mirror experiments should compete against these specialized compression methods, not only a dense embedding baseline.
+
+## Registry growth
+
+- Third sweep: MA-301 through MA-360.
+- Fourth sweep: MA-361 through MA-400.
+- Registry after these sweeps: **400 candidates**.
+
+The current worker queue is intentionally not reordered around an already-running experiment. New candidates enter subsequent research-expansion queues.
