@@ -23,7 +23,8 @@ def train_world(seed, condition, lr, updates):
         for method, student in students.items():
             state = effective_teacher_state(w, task)
             student.acquire(task, x, target_logits, lr, updates=updates, teacher_state=state)
-            for prior_task, metric in enumerate(evaluate(student, w, seed + 200000 + task * 100 + prior_task, task)):
+            metrics = evaluate(student, w, seed + 200000 + task * 100, task)
+            for prior_task, metric in enumerate(metrics):
                 payload = student.serialize()
                 rows.append({
                     'condition': condition, 'world_or_seed': seed, 'stage_task': task, 'evaluated_task': prior_task,
