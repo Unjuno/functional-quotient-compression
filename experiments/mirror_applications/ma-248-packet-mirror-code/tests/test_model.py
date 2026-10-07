@@ -1,7 +1,7 @@
 import sys
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'source'))
-import torch
+import io,torch
 from model import PacketDecoder
 from engine import make_world,sample
 
@@ -24,3 +24,14 @@ def test_sample_contains_valid_teacher_trajectories():
         rule,start,bits,code,target=sample(table,32,mode,123);prev=start
         for j in range(4):
             assert torch.equal(table[bits[:,j],rule,prev],target[:,j]);prev=target[:,j]
+
+
+def test_serialization_roundtrip_exact_outputs():
+    import json
+    m=PacketDecoder('mirror',4,2);table=make_world(24800);batch=sample(table,8,'correlated_two_packet_codes',44)
+    payload=m.serialize();cfg={"method":m.method,"period":m.period,"codes":m.codes,"states":m.states,"rules":m.rules,"d":m.d,"blocks":len(m.blocks)}
+    metadata=json.dumps(cfg,sort_keys=True).encode();obj=torch.load(io.BytesIO(payload[:-len(metadata)]),weights_only=False)
+    clone=PacketDecoder(cfg['method'],cfg['period'],cfg['codes'],cfg['states'],cfg['rules'],cfg['d']);clone.load_state_dict(obj['state_dict'])
+    assert obj['config']==cfg
+    assert torch.equal(m(*batch[:4]),clone(*batch[:4]))
+    assert m.serialized_payload_bytes()==len(payload) and payload==m.serialize()

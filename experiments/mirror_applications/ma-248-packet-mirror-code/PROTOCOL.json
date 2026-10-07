@@ -89,7 +89,14 @@
     "report_active_MAC_proxy": true,
     "report_wall_time": true,
     "report_inference_throughput": true,
-    "cpu_threads": 1
+    "cpu_threads": 1,
+    "inference_throughput_benchmark": {
+      "threads": 1,
+      "warmup_batches": 5,
+      "timed_batches": 30,
+      "batch_size": 64,
+      "report": "examples/second"
+    }
   },
   "success_gate": "In all three fresh correlated worlds, Mirror exact joint packet accuracy >=99%, per-token NLL <=1.10x PTP and valid path >=99%; its address entropy must not exceed the PTP source entropy (1 bit correlated, 4 bits independent). A Mirror-specific improvement additionally requires a better model-payload/quality point than both broadcast and scalar-gate controls. Independent-mode result maps the entropy boundary.",
   "failure_gate": "In all three fresh correlated worlds, Mirror quality misses the PTP gate, or broadcast/scalar-gate matches quality with equal or fewer model bytes. If quality passes but no Mirror-specific frontier gain exists, classify the mechanism as feasible but not Mirror-specific. Independent-mode quality/address failure alone maps the entropy boundary.",

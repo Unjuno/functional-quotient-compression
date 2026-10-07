@@ -6,7 +6,7 @@ import numpy as np
 import torch
 from torch.nn import functional as F
 from model import PacketDecoder,compute_proxy
-ROOT=Path(__file__).resolve().parents[1];FIELDS=["condition","world_or_seed","mode","method","serialized_model_bytes","packet_address_bits","combined_cost_bytes","train_tokens_or_examples","optimizer_updates","active_compute_proxy","wall_time_s","primary_metric","primary_value","secondary_metric","secondary_value","status_note"]
+ROOT=Path(__file__).resolve().parents[1];FIELDS=["condition","world_or_seed","mode","method","serialized_model_bytes","packet_address_bits","combined_cost_bytes","train_tokens_or_examples","optimizer_updates","active_compute_proxy","wall_time_s","inference_examples_per_s","primary_metric","primary_value","secondary_metric","secondary_value","status_note"]
 P=4;STATES=16;RULES=8;UPDATES=1200
 
 def make_world(world):
@@ -35,6 +35,15 @@ def fit(method,mode,table,seed,lr,updates=UPDATES):
         batch=sample(table,64,mode,int(torch.randint(2**31-1,(1,),generator=g)));r,s,b,c,y=batch;logits=model(r,s,b,c);loss=F.cross_entropy(logits.reshape(-1,STATES),y.reshape(-1));opt.zero_grad(set_to_none=True);loss.backward();opt.step()
     return model,time.perf_counter()-start_time
 def address_bits(mode,method):return 1 if mode=="correlated_two_packet_codes" else P
+def throughput(model,batch):
+    rule,start,bits,code,_=batch;rule=rule[:64];start=start[:64];bits=bits[:64];code=code[:64]
+    model.eval()
+    with torch.no_grad():
+        for _ in range(5):model(rule,start,bits,code)
+        begin=time.perf_counter()
+        for _ in range(30):model(rule,start,bits,code)
+        elapsed=time.perf_counter()-begin
+    return 64*30/elapsed
 def main():
     ap=argparse.ArgumentParser();ap.add_argument('--phase',choices=['dev','fresh'],required=True);ap.add_argument('--lr',type=float);a=ap.parse_args();torch.set_num_threads(1)
     methods=PacketDecoder.METHODS;modes=['correlated_two_packet_codes','independent_sixteen_packet_codes']
@@ -49,10 +58,10 @@ def main():
             val=sample(table,4096,mode,init+101);trainseed=init+211+(0 if mode==modes[0] else 10000)
             for lr in lrs:
                 for i,method in enumerate(methods):
-                    model,elapsed=fit(method,mode,table,trainseed+i*313+int(lr*10000),lr);m=evaluate(model,val,table)
+                    model,elapsed=fit(method,mode,table,trainseed+i*313+int(lr*10000),lr);m=evaluate(model,val,table);ips=throughput(model,val)
                     if a.phase=='dev':scores[lr].append(m['token_nll'])
                     ab=address_bits(mode,method);payload=model.serialized_payload_bytes()
-                    rows.append({"condition":a.phase,"world_or_seed":world,"mode":mode,"method":method,"serialized_model_bytes":payload,"packet_address_bits":ab,"combined_cost_bytes":f"{payload+ab/8:.3f}","train_tokens_or_examples":UPDATES*64*P,"optimizer_updates":UPDATES,"active_compute_proxy":compute_proxy(P,model.d,UPDATES*64,method),"wall_time_s":round(elapsed,6),"primary_metric":"token_nll","primary_value":f"{m['token_nll']:.10g}","secondary_metric":"joint_packet_accuracy;token_accuracy;valid_path_rate","secondary_value":f"{m['joint_packet_accuracy']:.8g};{m['token_accuracy']:.8g};{m['valid_path_rate']:.8g}","status_note":f"lr={lr}; exact source entropy bits; deterministic config charged; architecture_v2=two causal slot blocks"})
+                    rows.append({"condition":a.phase,"world_or_seed":world,"mode":mode,"method":method,"serialized_model_bytes":payload,"packet_address_bits":ab,"combined_cost_bytes":f"{payload+ab/8:.3f}","train_tokens_or_examples":UPDATES*64*P,"optimizer_updates":UPDATES,"active_compute_proxy":compute_proxy(P,model.d,UPDATES*64,method),"wall_time_s":round(elapsed,6),"inference_examples_per_s":round(ips,3),"primary_metric":"token_nll","primary_value":f"{m['token_nll']:.10g}","secondary_metric":"joint_packet_accuracy;token_accuracy;valid_path_rate","secondary_value":f"{m['joint_packet_accuracy']:.8g};{m['token_accuracy']:.8g};{m['valid_path_rate']:.8g}","status_note":f"lr={lr}; exact source entropy bits; deterministic config charged; architecture_v2=two causal slot blocks"})
                     print(a.phase,world,mode,method,lr,m,"bytes",payload,"secs",round(elapsed,2),flush=True)
     if a.phase=='dev':
         best=min(scores,key=lambda lr:sum(scores[lr])/len(scores[lr]));(ROOT/'DEV_SELECTION.json').write_text(json.dumps({"experiment_id":"MA-248","selected_common_lr":best,"mean_token_nll_by_lr":{str(k):sum(v)/len(v) for k,v in scores.items()},"fresh_worlds":[24801,24802,24803],"updates":UPDATES},indent=2)+'\n')

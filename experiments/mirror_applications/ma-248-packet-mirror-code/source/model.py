@@ -43,9 +43,11 @@ class PacketDecoder(nn.Module):
         for block in self.blocks:x=block(x,mask)
         return self.head(self.norm(x[:,2:]))
     def parameter_count(self):return sum(p.numel() for p in self.parameters())
-    def serialized_payload_bytes(self):
+    def serialize(self):
         buf=io.BytesIO();cfg={"method":self.method,"period":self.period,"codes":self.codes,"states":self.states,"rules":self.rules,"d":self.d,"blocks":len(self.blocks)}
-        torch.save({"state_dict":self.state_dict(),"config":cfg},buf);return buf.tell()+len(json.dumps(cfg,sort_keys=True).encode())
+        torch.save({"state_dict":self.state_dict(),"config":cfg},buf)
+        return buf.getvalue()+json.dumps(cfg,sort_keys=True).encode()
+    def serialized_payload_bytes(self):return len(self.serialize())
 
 def compute_proxy(period,d,examples,method):
     seq=period+2;base=4*seq*d*d+2*seq*d*(2*d)+seq*d*16+2*seq*seq*d
