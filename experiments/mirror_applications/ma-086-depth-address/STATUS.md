@@ -3,12 +3,12 @@
 - Status: FAIL at development gate
 - Branch: `research/ma-086-depth-address-20261007`
 - Base commit: `e0cf13997e0477e9022e4c1fcf07bd99f5075ccb`
-- Last verified commit: pending
+- Last verified commit: `155231548d0c202ec1d23b708206452434a7c2b7`
 - Development complete: yes; seeds 86001–86002
 - Fresh/audit opened: no; byte gate missed
-- Results committed: pending
-- Verification committed: pending
-- Registry row updated: pending
+- Results committed: yes (`155231548d0c202ec1d23b708206452434a7c2b7`)
+- Verification committed: yes (`155231548d0c202ec1d23b708206452434a7c2b7`)
+- Registry row updated: yes
 
 ## H / T / D / C / U
 
