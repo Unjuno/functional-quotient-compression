@@ -8,22 +8,22 @@ Updated: 2026-10-07
 - P0: **34**
 - P1: **126**
 - P2: **94**
-- Current MA statuses: **223 UNTESTED, 17 PROMISING, 14 FAIL**
+- Current MA statuses: **222 UNTESTED, 18 PROMISING, 14 FAIL**
 - Historical evidence lanes SRM/TM are not MA statuses.
 
 ## Next candidate
 
-**MA-189 — next eligible P0 candidate (Family F)**
+**MA-199 — next eligible P0 candidate (Family F)**
 
 Why next:
-- MA-241, MA-244, MA-245, MA-247, MA-248, MA-249, MA-250, MA-251, MA-253, MA-003, MA-005, MA-009, MA-019, MA-024, MA-041, MA-048, MA-061, MA-063, MA-076, MA-079, MA-086, MA-116, MA-121, MA-129, MA-156, MA-160, MA-171, MA-173 and MA-181 are checked; Family B KV views remain paused, so MA-186 is next.
-- MA-186 completed with an aligned storage/retention benefit but failed the registered quality gate; MA-189 is next in Family F.
+- MA-241, MA-244, MA-245, MA-247, MA-248, MA-249, MA-250, MA-251, MA-253, MA-003, MA-005, MA-009, MA-019, MA-024, MA-041, MA-048, MA-061, MA-063, MA-076, MA-079, MA-086, MA-116, MA-121, MA-129, MA-156, MA-160, MA-171, MA-173 and MA-181 are checked; Family B KV views remain paused.
+- MA-186 and MA-189 are completed; MA-199 is next in Family F.
 
 If MA-186 is blocked, use the next eligible P0 in the registry.
 
 ## Active experiments
 
-- MA-189 — branch `research/ma-189-freeze-backbone-mirror-20261007`; directory `experiments/mirror_applications/ma-189-freeze-backbone-mirror/`; started from commit `8d0763ddc241667e6e5c0fdefad16b2d71152538`. Prior-art delta and protocol being fixed before development.
+None.
 
 
 When a worker starts an MA experiment, add:
@@ -45,6 +45,8 @@ When a worker starts an MA experiment, add:
 - MA-247 through MA-251 are complete and verified.
 
 ## Recently completed
+
+- MA-189 — PROMISING on the deliberately two-sided-Givens-aligned task family: at 64 examples, 2-view Mirror passed quality/byte/retention in 3/3 fresh worlds with 55B incremental inference vs 228B rank-2 LoRA and unchanged Task-0 MSE. Unrelated maps needed private state; eager inference throughput was 0.20x LoRA. Rank-4 LoRA and generic byte-matched basis remain untested. Branch `research/ma-189-freeze-backbone-mirror-20261007`; report `experiments/mirror_applications/ma-189-freeze-backbone-mirror/README.md`; result commit `ba9639983b09eb75237a6732d1f3c75ad8d75b8a`.
 
 - MA-186 — FAIL for the registered quality gate: task-only one-angle views used 20 B/skill vs 241 B/skill rank-2 LoRA and retained aligned skills in 3/3 fresh worlds, but final MSE exceeded the 1.10x LoRA limit in 2/3. Unrelated task maps required private parameters. The shared hypernetwork control was degenerate due zero initialization, so Mirror-specific superiority is not established. Branch `research/ma-186-continual-views-20261007`; report `experiments/mirror_applications/ma-186-continual-views/README.md`; result commit `e2a54862a926f024254b1e29cc2101c5bdf826b9`.
 

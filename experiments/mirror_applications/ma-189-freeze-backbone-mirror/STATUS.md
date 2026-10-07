@@ -3,11 +3,12 @@
 - Status: **PROMISING** for the preregistered aligned-family quality/byte/retention gate
 - Branch: `research/ma-189-freeze-backbone-mirror-20261007`
 - Protocol freeze commit: `08b8c7b89d38edafe48d1e25b5aeba93a485c7c6`
+- Result commit: `ba9639983b09eb75237a6732d1f3c75ad8d75b8a`
 - Development complete: yes
 - Fresh/audit opened: yes, after selecting LR 0.01 using development rows
-- Results committed: pending
-- Verification committed: pending
-- Registry row updated: pending
+- Results committed: yes
+- Verification committed: yes (in the tracker commit)
+- Registry row updated: yes
 
 ## H — hypothesis
 
