@@ -24,7 +24,7 @@ MA-245 -> MA-247 -> MA-248 -> MA-249 -> MA-250 -> MA-251 -> MA-003.
 
 ## Active experiments
 
-None.
+- MA-244 — branch `research/ma-244-kv-role-view-20261007`; directory `experiments/mirror_applications/ma-244-kv-role-view/`; worker/run `Codex session 2026-10-07`; start commit `5b736a0f7cfca9c3f7794005dfb70954f155ea02`.
 
 When a worker starts an MA experiment, add:
 - MA ID;

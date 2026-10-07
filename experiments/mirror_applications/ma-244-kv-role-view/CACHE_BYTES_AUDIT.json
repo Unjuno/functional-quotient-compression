@@ -1,0 +1,109 @@
+{
+  "dtype": "float32",
+  "rows": [
+    {
+      "method": "mha",
+      "measured_cache_bytes_8_tokens": 1024,
+      "cache_shape": [
+        [
+          1,
+          4,
+          8,
+          4
+        ],
+        [
+          1,
+          4,
+          8,
+          4
+        ]
+      ],
+      "projection_payload_bytes": 3885
+    },
+    {
+      "method": "kv_equal_mha",
+      "measured_cache_bytes_8_tokens": 512,
+      "cache_shape": [
+        [
+          1,
+          4,
+          8,
+          4
+        ]
+      ],
+      "projection_payload_bytes": 2682
+    },
+    {
+      "method": "gqa2",
+      "measured_cache_bytes_8_tokens": 512,
+      "cache_shape": [
+        [
+          1,
+          2,
+          8,
+          4
+        ],
+        [
+          1,
+          2,
+          8,
+          4
+        ]
+      ],
+      "projection_payload_bytes": 2862
+    },
+    {
+      "method": "mqa",
+      "measured_cache_bytes_8_tokens": 256,
+      "cache_shape": [
+        [
+          1,
+          8,
+          4
+        ],
+        [
+          1,
+          8,
+          4
+        ]
+      ],
+      "projection_payload_bytes": 2349
+    },
+    {
+      "method": "mqa_equal",
+      "measured_cache_bytes_8_tokens": 128,
+      "cache_shape": [
+        [
+          1,
+          8,
+          4
+        ]
+      ],
+      "projection_payload_bytes": 1911
+    },
+    {
+      "method": "mirror_mqa",
+      "measured_cache_bytes_8_tokens": 128,
+      "cache_shape": [
+        [
+          1,
+          8,
+          4
+        ]
+      ],
+      "projection_payload_bytes": 2100
+    },
+    {
+      "method": "gate_mqa",
+      "measured_cache_bytes_8_tokens": 128,
+      "cache_shape": [
+        [
+          1,
+          8,
+          4
+        ]
+      ],
+      "projection_payload_bytes": 2098
+    }
+  ]
+}
