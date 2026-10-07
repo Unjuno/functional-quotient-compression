@@ -16,15 +16,15 @@ Updated: 2026-10-07
 **MA-245 — MLKV shared cache + per-layer Mirror KV views**
 
 Why next:
-- MA-241 and MA-253 are now checked; MA-244 is the next untested cross-over P0 candidate.
-- its closest prior-art controls are QKV/K=V projection sharing (PA07).
+- MA-241, MA-244 and MA-253 are now checked; MA-245 is the next untested cross-over P0 candidate.
+- its closest prior-art control is MLKV cross-layer cache sharing (PA08).
 
 If MA-245 is blocked, use this order:
 MA-247 -> MA-248 -> MA-249 -> MA-250 -> MA-251 -> MA-003.
 
 ## Active experiments
 
-- MA-244 — branch `research/ma-244-kv-role-view-20261007`; directory `experiments/mirror_applications/ma-244-kv-role-view/`; worker/run `Codex session 2026-10-07`; start commit `5b736a0f7cfca9c3f7794005dfb70954f155ea02`.
+- MA-245 — branch `research/ma-245-mlkv-layer-views-20261007`; directory `experiments/mirror_applications/ma-245-mlkv-layer-views/`; worker/run `Codex session 2026-10-07`; start commit `1c313c1ac6aba2b5c4cd4bcc3933c08b1f98ce19`.
 
 When a worker starts an MA experiment, add:
 - MA ID;
