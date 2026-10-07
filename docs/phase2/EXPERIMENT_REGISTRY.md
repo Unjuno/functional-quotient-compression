@@ -1,6 +1,6 @@
 # Phase II experiment registry
 
-Date: 2026-10-07, updated through SRM003.
+Date: 2026-10-07, updated through SRM003 and TM001.
 
 This is a navigation index, not a replacement for original protocols. Status refers to the stated tested regime, not a universal theorem.
 
@@ -22,10 +22,11 @@ This is a navigation index, not a replacement for original protocols. Status ref
 | SRM001 | sparse multi-rule causal task | controlled fixed-update and routing signals; parity failed | [report](SRM001_SHARED_RULE_MOE.md) / [experiment](../../experiments/shared_rule_moe/srm001_20261007/) |
 | SRM002 | non-commutative operators | shared/private success with supplied executor and controlled teacher | [report](SRM002_NONCOMMUTATIVE_COMPOSITION.md) / [experiment](../../experiments/shared_rule_moe/srm002_20261007/) |
 | SRM003 | no-oracle causal discovery/pruning | atomic retention complete, direct composition weak; adoption FAIL | [report](SRM003_CAUSAL_DISCOVERY.md) / [runnable experiment](../../experiments/shared_rule_moe/srm003_20261007/README.md) |
+| TM001 | emit P period tokens in one forward | deterministic/revealed packet PASS; hidden joint-latent boundary; CPU low-batch speed signal | [report](TM001_PARALLEL_PERIOD_TOKEN_MIXING.md) / [experiment](../../experiments/token_mixing/tm001_20261007/) |
 
 ## Branches
 
-Latest SRM experiment and integrated state: `research/srm003-causal-discovery-20261007`.
+Latest integrated experiment branch: `research/tm001-parallel-period-20261007`. Latest SRM branch remains `research/srm003-causal-discovery-20261007`.
 
 Preserved branches include `research/repo-reorg-20261007`, `research/srm001-shared-rule-moe-20261007`, `research/srm002-noncommutative-20261007`, `research/ms013-ms014-shared-world-frontier-20261007`, `research/ms011-ms012-view-optimization-20261007`, `research/ms008-view-decomposition-20261007`, `research/ms006-backprop-vs-es-20261007`, `research/ms005-mirror-ensemble-es-20261007`, and `research/ms003-sn001-sensor-bridge-20261007`.
 
