@@ -3,16 +3,16 @@
 - Status: PROMISING, narrow HRR-aligned fixed-budget result
 - Branch: `research/ma-171-compression-view-20261007`
 - Base commit: `7f454be235b1d7ad5db14f75490e796a2b090110`
-- Last verified commit: pending
+- Last verified commit: `4025b477f666bb7369531296eb4807c206799b88`
 - Development complete: yes
 - Fresh/audit opened: yes; corrected A1 split passed, original split was accidentally run at wrong LR and excluded
-- Results committed: no
-- Verification committed: no
-- Registry row updated: no
+- Results committed: yes (`4025b477f666bb7369531296eb4807c206799b88`)
+- Verification committed: yes (`4025b477f666bb7369531296eb4807c206799b88`)
+- Registry row updated: yes in tracker commit
 
 ## Next action
 
-Complete full metric replay, commit this experiment and trackers, then continue to MA-173.
+Complete registry/queue updates, push the research branch, then continue to MA-173.
 
 ## Blockers
 
