@@ -140,6 +140,141 @@ Builds a slim verifier from the full model via intra-model routing and uses hier
 
 **Mirror implication:** Mirror speculative-decoding ideas should compare against routed slim-verifiers. The interesting delta is whether low-description views can create several verification strengths or candidate distributions without separate model copies.
 
+## PA16 — Parameter Superposition
+
+**Superposition of many models into one**  
+https://arxiv.org/abs/1902.05522
+
+Stores several task models in one parameter tensor and uses task-dependent context vectors/matrices to bind and retrieve them with low interference. The paper studies binary, complex/unitary and rotational contexts and composition of contexts.
+
+**Mirror implication:** this is one of the closest conceptual predecessors to the project. Any claim that a context/View coordinate alone creates many logical models must compare against parameter superposition. The interesting delta is whether learned/structured Mirror coordinates improve useful multiplicity, composability, routing, or interference at the same stored bytes.
+
+## PA17 — BatchEnsemble
+
+**BatchEnsemble: An Alternative Approach to Efficient Ensemble and Lifelong Learning**  
+https://arxiv.org/abs/2002.06715
+
+Each logical member uses a shared weight matrix modulated by member-specific rank-one fast weights. The formulation is vectorizable within a device and was also used for lifelong learning.
+
+**Mirror implication:** rank-one multiplicative modulation is a mandatory control for ensemble/expert logical multiplicity. Mirror must improve quality-per-byte, composability, or functional diversity beyond rank-one member factors.
+
+## PA18 — VeRA
+
+**VeRA: Vector-based Random Matrix Adaptation**  
+https://proceedings.iclr.cc/paper_files/paper/2024/hash/1b53ad08de383a049e9668a9d0b6a053-Abstract-Conference.html
+
+Shares one pair of frozen low-rank random matrices across adapted layers and learns small scaling vectors. It targets the cost of storing many LoRA-like adaptations.
+
+**Mirror implication:** many Mirror-LoRA ideas are close to VeRA. The relevant test is whether structured/invertible View coordinates over a common basis improve adaptation quality or logical multiplicity over simple scaling vectors.
+
+## PA19 — IA3 / T-Few
+
+**Few-Shot Parameter-Efficient Fine-Tuning is Better and Cheaper than In-Context Learning**  
+https://arxiv.org/abs/2205.05638
+
+IA3 learns small vectors that multiplicatively rescale key, value and FFN intermediate activations.
+
+**Mirror implication:** activation-side Mirror ideas must compare to simple per-channel rescaling. A rotation/shear/binding view is only useful if it beats IA3-like diagonal modulation at comparable bytes.
+
+## PA20 — Orthogonal Finetuning
+
+**Controlling Text-to-Image Diffusion by Orthogonal Finetuning**  
+https://arxiv.org/abs/2306.07280
+
+Introduces OFT, which adapts pretrained weights through orthogonal transformations designed to preserve geometric relationships.
+
+**Mirror implication:** orthogonal Mirror/View transforms have a direct PEFT predecessor. Mirror-specific value must come from sharing/composing addresses across tasks, layers, experts or heads rather than merely using an orthogonal transform.
+
+## PA21 — BOFT
+
+**Parameter-Efficient Orthogonal Finetuning via Butterfly Factorization**  
+https://arxiv.org/abs/2311.06243
+
+Parameterizes dense orthogonal transforms as products of sparse butterfly factors, reaching O(d log d) trainable-parameter scaling for a dense transform in the butterfly setting.
+
+**Mirror implication:** butterfly orthogonal transforms are a strong structured-Mirror candidate and control. Dense rotations should not be used as the only orthogonal baseline.
+
+## PA22 — OFTv2 / input-centric orthogonal adaptation
+
+**Orthogonal Finetuning Made Scalable**  
+https://arxiv.org/abs/2506.19847
+
+Reformulates OFT by applying the orthogonal transform to input vectors rather than materializing transformed weights and introduces a Cayley-Neumann parameterization.
+
+**Mirror implication:** runtime-efficient Mirror transforms should be implemented input-side when possible and compared against matrix-free OFT-style execution.
+
+## PA23 — Compacter
+
+**Compacter: Efficient Low-Rank Hypercomplex Adapter Layers**  
+https://arxiv.org/abs/2106.04647
+
+Constructs adapter matrices as sums of Kronecker products between shared slow weights and layer-specific low-rank/rank-one fast factors.
+
+**Mirror implication:** this is a direct control for shared structured adapter bases plus small local coordinates. Mirror-Kronecker/hypercomplex variants must beat or complement Compacter rather than only LoRA.
+
+## PA24 — Monarch structured matrices
+
+**Monarch Mixer: A Simple Sub-Quadratic GEMM-Based Architecture**  
+https://arxiv.org/abs/2310.12109
+
+Uses products of block-diagonal matrices and permutations to build expressive structured transforms with sub-quadratic compute, including sequence- and model-dimension mixing.
+
+**Mirror implication:** Monarch factors offer a hardware-friendly structured transform family for logical views; compare against butterfly/circulant/low-rank views rather than assuming dense Mirror matrices.
+
+## PA25 — Fast Weight Programmers
+
+**Linear Transformers Are Secretly Fast Weight Programmers**  
+https://arxiv.org/abs/2102.11174
+
+Interprets linear attention as context-dependent fast-weight memory programmed by outer-product updates and studies delta-rule-style corrections.
+
+**Mirror implication:** a Mirror address can itself be dynamic state rather than a static task/expert code. Fast-weight baselines are required for input-dependent or session-dependent Mirror coordinates.
+
+## PA26 — Task Arithmetic
+
+**Editing Models with Task Arithmetic**  
+https://arxiv.org/abs/2212.04089
+
+Represents a task as a weight-space delta from a common pretrained model and combines task vectors by addition, negation and analogical arithmetic.
+
+**Mirror implication:** functional coordinates may live in task-vector space. Mirror composition should be compared to ordinary task-vector arithmetic and must measure interference as the number of combined tasks grows.
+
+## PA27 — TIES-Merging
+
+**TIES-Merging: Resolving Interference When Merging Models**  
+https://arxiv.org/abs/2306.01708
+
+Trims weak task-vector entries, resolves sign conflicts, and merges only aligned parameter directions.
+
+**Mirror implication:** when several Mirror/task coordinates are superposed, sign/direction interference is a known failure mode. TIES-style conflict resolution is a strong control and possible component.
+
+## PA28 — Model Soups
+
+**Model soups: averaging weights of multiple fine-tuned models improves accuracy without increasing inference time**  
+https://proceedings.mlr.press/v162/wortsman22a.html
+
+Averages compatible fine-tuned checkpoints in a common basin to obtain one model with no ensemble inference cost.
+
+**Mirror implication:** continuous/interpolated Mirror coordinates should be tested against simple weight averaging/interpolation. If averaging works equally well, a more elaborate View mechanism is unnecessary.
+
+## PA29 — Structured sparse / circulant LoRA
+
+**Beyond LoRA: Is Sparsity-Induced Adaptation Better?**  
+https://arxiv.org/abs/2606.13767
+
+Studies Cheap LoRA variants that fix one factor and introduces a chained circulant-style column-subspace adaptation family.
+
+**Mirror implication:** structured/circulant Mirror-LoRA must compare against extremely cheap fixed-subspace and chained structured adapters, not only full LoRA.
+
+## PA30 — SETA continual sparse experts
+
+**Sparse Subspace-to-Expert Sharing for Task-Agnostic Continual Learning**  
+https://arxiv.org/abs/2606.07500
+
+Discovers high-utility sparse parameter subspaces and dynamically separates overlapping shared experts from task-unique experts while preserving routing behavior.
+
+**Mirror implication:** continual-learning Mirror experiments need to separate "discover shared/private subspaces" from "compress those subspaces via a View". SETA provides a strong decomposition control.
+
 ## Research gaps that remain especially relevant here
 
 1. **Logical expert multiplicity from one physical expert via a structured view** — adjacent to expert tying, but not equivalent.
