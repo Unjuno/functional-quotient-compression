@@ -175,10 +175,24 @@ def evaluate(student,w,seed,upto):
         for task in range(upto+1):
             x=torch.randn(2048,D,generator=g); tlog=teacher_logits(x,w,task); slog=student.forward(x,task)
             tp=F.softmax(tlog/TEMPERATURE,dim=-1); sp=F.softmax(slog/TEMPERATURE,dim=-1)
-            kl=float((tp*(tp.clamp_min(1e-12).log()-sp.clamp_min(1e-12).log())).sum(-1).mean())
+            kl=float((tp*(tp.clamp_min(1e-12).log()-sp.clamp_min(1e-12).log())).sum(-1).mean().clamp_min(0))
             tl=tlog.argmax(-1); sl=slog.argmax(-1); conf=F.softmax(slog,dim=-1).max(-1).values
             rows.append({'kl':kl,'agreement':float((tl==sl).float().mean()),'ece':ece(conf,tl==sl)})
     return rows
+
+
+def benchmark_inference(student, seed, repeats=50):
+    g = torch.Generator().manual_seed(seed)
+    x = torch.randn(2048, D, generator=g)
+    with torch.no_grad():
+        for _ in range(5):
+            student.forward(x, TASKS - 1)
+        start = time.perf_counter()
+        for _ in range(repeats):
+            student.forward(x, TASKS - 1)
+        elapsed = time.perf_counter() - start
+    return {'inference_batch_size': len(x), 'inference_repeats': repeats,
+            'inference_wall_time_s': elapsed, 'inference_examples_per_s': len(x) * repeats / elapsed}
 
 
 def mac_proxy(method,examples):

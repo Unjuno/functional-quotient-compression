@@ -3,9 +3,9 @@
 - Status: SCREENING
 - Branch: `research/ma-208-mirror-expert-distill-20261007`
 - Base commit: `621dec2ffdf55c3f0503dd75695ea27fdc68544c`
-- Protocol frozen: yes (implementation and protocol committed before development; fresh seeds remain sealed)
-- Development complete: no
-- Fresh/audit opened: no
+- Protocol frozen: yes (initial freeze before development; measurement-only amendment frozen before fresh; fresh seeds remain sealed)
+- Development complete: yes; registered aggregate selected LR 0.003. Development rerun under a pre-fresh metric clarification is pending.
+- Fresh/audit opened: no; seeds 20811–20813 remain sealed.
 - Results committed: no
 - Verification committed: no
 - Registry row updated: no

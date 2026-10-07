@@ -23,7 +23,7 @@ If MA-186 is blocked, use the next eligible P0 in the registry.
 
 ## Active experiments
 
-- MA-208 — branch `research/ma-208-mirror-expert-distill-20261007`; directory `experiments/mirror_applications/ma-208-mirror-expert-distill/`; started from commit `621dec2ffdf55c3f0503dd75695ea27fdc68544c`. Targeted MoE-to-dense and multi-teacher distillation literature read; protocol and implementation frozen in commit pending. Fresh seeds 20811–20813 remain sealed.
+- MA-208 — branch `research/ma-208-mirror-expert-distill-20261007`; directory `experiments/mirror_applications/ma-208-mirror-expert-distill/`; started from commit `621dec2ffdf55c3f0503dd75695ea27fdc68544c`. Targeted MoE-to-dense and multi-teacher distillation literature read; protocol frozen before development; development selected LR 0.003. A measurement-only KL/throughput amendment is frozen before fresh seeds 20811–20813.
 
 
 When a worker starts an MA experiment, add:

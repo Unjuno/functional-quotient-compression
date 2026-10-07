@@ -49,7 +49,8 @@
       20812,
       20813
     ],
-    "locked_before_access": true
+    "locked_before_access": true,
+    "selected_learning_rate": 0.003
   },
   "storage": {
     "authority": "actual deterministic serialized inference payload bytes",
@@ -81,5 +82,13 @@
     "Independent MLP teachers define the private-function boundary",
     "Fixed 300-update distillation screen; no near-convergence capacity claim",
     "No language-model, open-ended expert reasoning, or production ensemble claim"
+  ],
+  "amendments": [
+    {
+      "date": "2026-10-07",
+      "after": "initial development screen, before any fresh seed access",
+      "reason": "operational metric clarification only: clamp sub-precision negative KL estimates to zero; define final-stage inference throughput as 5 warm-up forwards then 50 timed forwards on a 2048-example batch with one CPU thread; do not change model, optimizer, updates, seeds, gates, or candidate selection rule",
+      "development_selection_result": "learning_rate 0.003 selected by the registered mean held-out KL across methods, conditions, and development seeds"
+    }
   ]
 }

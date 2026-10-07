@@ -5,7 +5,7 @@ import os
 import torch
 torch.set_num_threads(1)
 
-from engine import METHODS, TASKS, world, teacher_logits, effective_teacher_state, Student, evaluate, mac_proxy
+from engine import METHODS, TASKS, world, teacher_logits, effective_teacher_state, Student, evaluate, mac_proxy, benchmark_inference
 
 
 def task_data(w, seed, n):
@@ -24,6 +24,9 @@ def train_world(seed, condition, lr, updates):
             state = effective_teacher_state(w, task)
             student.acquire(task, x, target_logits, lr, updates=updates, teacher_state=state)
             metrics = evaluate(student, w, seed + 200000 + task * 100, task)
+            throughput = benchmark_inference(student, seed + 400000 + task) if task == TASKS - 1 else {
+                'inference_batch_size': 0, 'inference_repeats': 0,
+                'inference_wall_time_s': 0.0, 'inference_examples_per_s': 0.0}
             for prior_task, metric in enumerate(metrics):
                 payload = student.serialize()
                 rows.append({
@@ -34,6 +37,7 @@ def train_world(seed, condition, lr, updates):
                     'active_compute_proxy': mac_proxy(method, student.examples.get(task, 0)),
                     'wall_time_s': student.wall.get(task, 0.0), 'teacher_kl': metric['kl'],
                     'teacher_top1_agreement': metric['agreement'], 'ece': metric['ece'],
+                    **throughput,
                 })
     return rows
 
