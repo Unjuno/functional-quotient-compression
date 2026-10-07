@@ -16,9 +16,10 @@ Historical source and negative results are preserved rather than rewritten into 
 1. [**Current Phase II state**](docs/phase2/CURRENT_STATE_2026-10-07.md)
 2. [**Current architecture — Sparse Compositional Shared-Rule Transformer**](docs/phase2/ARCHITECTURE_SPARSE_SHARED_RULE_MOE.md)
 3. [**Phase II experiment registry**](docs/phase2/EXPERIMENT_REGISTRY.md)
-4. [**Active Phase II roadmap**](roadmap/PHASE2_SPARSE_RULE_ROADMAP.md)
-5. [**Known negative results**](docs/KNOWN_NEGATIVE_RESULTS.md)
-6. [**SRM001 — strongest current synthetic Transformer evidence**](docs/phase2/SRM001_SHARED_RULE_MOE.md)
+4. [**Experiments index**](experiments/README.md)
+5. [**Active Phase II roadmap**](roadmap/PHASE2_SPARSE_RULE_ROADMAP.md)
+6. [**Known negative results**](docs/KNOWN_NEGATIVE_RESULTS.md)
+7. [**SRM001 — strongest current synthetic Transformer evidence**](docs/phase2/SRM001_SHARED_RULE_MOE.md)
 
 ## Current research question
 
@@ -78,10 +79,12 @@ docs/
   KNOWN_NEGATIVE_RESULTS.md
 
 experiments/
+  README.md                 experiment-lane navigation
   mirror_native/            historical MN experiments
   analytic_mirror/          reachability / local geometry
   sensor_mirror/            sensor/world residual experiments
-  srm001_20261007/          current shared-rule result tables/protocol
+  shared_rule_moe/
+    srm001_20261007/        current shared-rule code/results/protocol
 
 roadmap/
   PHASE2_SPARSE_RULE_ROADMAP.md
