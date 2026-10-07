@@ -76,7 +76,105 @@ Boundary: all layers saw the same memory hidden state and the teacher was exactl
 
 
 
-The four results form a coherent pattern:
+## MA-247 — recursive shared block + Mirror depth modulation
+
+Branch: `research/ma-247-recursive-depth-view-20261007`  
+Verified result: `62f0acf3f680ff3bbab8e0e20e194f4065f026e5`  
+Status: **FAIL at development screen**
+
+A four-step recurrent 8D/16-hidden synthetic teacher was deliberately aligned to per-step Givens Views.
+
+At the selected LR 0.01:
+- untied MSE 1.463e-4, 6,181 B;
+- hard tied 2.012e-3, 3,043 B;
+- scalar gate 6.384e-4, 3,366 B;
+- static rank-1 LoRA 1.076e-3, 3,938 B;
+- generated rank-1 LoRA 2.614e-3, 4,373 B;
+- Mirror 2.664e-3, 3,297 B.
+
+Mirror saved bytes but failed even against hard tying/scalar/static-LoRA on development. Fresh worlds were correctly not opened.
+
+Boundary: this rejects the registered fixed-budget recurrent configuration, not the representational possibility of depth Views. Optimization/credit assignment is a live counter-hypothesis.
+
+## MA-248 — packet Mirror code
+
+Branch: `research/ma-248-packet-mirror-code-20261007`  
+Verified result: `433a2229362db23bcd43b3830358e674799c6247`  
+Status: **FAIL for Mirror-specific frontier**
+
+For a correlated one-bit packet source:
+- broadcast shared code reached 100% packet accuracy in all 3 fresh worlds;
+- Mirror reached 26.5%, 100%, 99.3%;
+- broadcast payload 31,840 B vs Mirror 32,218 B.
+
+For independent per-phase entropy every method was weak, so no entropy/capacity boundary was established.
+
+Boundary: a shared packet code can be useful, but the Givens View did not beat the simpler broadcast code.
+
+## MA-249 — one future head + Mirror offset Views
+
+Branch: `research/ma-249-future-head-views-20261007`  
+Verified result: `20a0984965e879fed8c1b085f02fa5aefc68828b`  
+Status: **PROMISING**
+
+Aligned four-offset synthetic teacher:
+- ordinary MTP and Mirror both reached 100% top-1 in 3/3 fresh worlds;
+- Mirror payload 4,384 B vs ordinary MTP 6,497 B: **32.5% smaller**;
+- hard tying/scalar/rank-1 controls were substantially less accurate;
+- eager CPU throughput was ~0.42x MTP.
+
+Independent offset matrices:
+- ordinary MTP stayed exact;
+- Mirror top-1 only ~37.6–38.6%;
+- rank-1 private residual helped modestly but remained far from MTP.
+
+Boundary: strong aligned head-sharing mechanism, not natural-language MTP evidence.
+
+## MA-250 — VSA/Mirror expert address
+
+Branch: `research/ma-250-vsa-expert-address-20261007`  
+Verified result: `05ad4f7efb92a3b7bbe8f4f0674377223d6bc768`  
+Status: **PROMISING**
+
+Aligned linear role teacher:
+- Mirror MSE ~0.9e-9 to 1.6e-9 in 3/3 fresh worlds;
+- untied MSE similarly near zero;
+- Mirror payload 3,406 B vs untied 5,522 B: **38.3% smaller**;
+- fixed MAP/Hadamard/HRR codes did not fit the Givens-aligned teacher;
+- independent role matrices remained far from the untied upper control.
+
+Boundary: this establishes aligned role-coordinate recovery, not a general Mirror-over-VSA result.
+
+## MA-691 — lazy canonical KV Mirror read
+
+Branch: `research/ma-691-lazy-kv-mirror-20261007`  
+Verified result: `3643118351eb026c31fc00802e47381e8cdfba93`  
+Status: **PROMISING — exact mechanism PASS**
+
+For known logical transforms
+
+    K_m = K A_m
+    V_m = V B_m
+
+the physical prefix cache stayed canonical and the View was moved to the current query and attention output.
+
+Three fresh seeds, head dimension 64, prefix lengths 128..32768:
+- maximum lazy/materialized error: **3.13e-7**;
+- RoPE-plane commutation diagnostic: **7.15e-7** max error;
+- MLA latent absorption diagnostic: **4.17e-7** max error.
+
+At T=8192:
+- one canonical FP32 K+V cache: 33,554,432 B;
+- one Givens View code: 2,048 B;
+- eight materialized logical caches would be ~268.4 MB;
+- one canonical cache + eight codes ~33.57 MB.
+
+Boundary: exact by architectural construction; it does not show arbitrary trained specialists have this relation. CPU runtime measurements are exploratory, not GPU claims.
+
+See `MIRROR_KV_CACHE_REUSE.md` and `MIRROR_KV_MOE_GENERALIZATION_2026-10-07.md` for the expanded exact/approximate cache design space.
+
+
+The verified results form a coherent pattern:
 
 1. **aligned functional variation** -> compact Views can work very well; this has now repeated across tied experts, head/role K/V views, and cross-layer K/V views;
 2. **misaligned independent variation** -> a narrow View can fail completely;
