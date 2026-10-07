@@ -8,22 +8,20 @@ Updated: 2026-10-07
 - P0: **34**
 - P1: **126**
 - P2: **94**
-- Current MA statuses: **216 UNTESTED, 23 PROMISING, 15 FAIL**
+- Current MA statuses: **215 UNTESTED, 24 PROMISING, 15 FAIL**
 - Historical evidence lanes SRM/TM are not MA statuses.
 
 ## Next candidate
 
-**MA-007 — next eligible P1 candidate (MoE / experts)**
+**MA-008 — next eligible P1 candidate (MoE / experts)**
 
 Why next:
 - MA-241, MA-244, MA-245, MA-247, MA-248, MA-249, MA-250, MA-251, MA-253, MA-003, MA-005, MA-009, MA-019, MA-024, MA-041, MA-048, MA-061, MA-063, MA-076, MA-079, MA-086, MA-116, MA-121, MA-129, MA-156, MA-160, MA-171, MA-173 and MA-181 are checked; Family B KV views remain paused.
-- MA-186, MA-189, MA-199, MA-208 and MA-111 are completed. MA-111 passed its aligned synthetic gate; no P0 candidate remains UNTESTED. MA-001, MA-002, MA-004 and MA-006 are checked. MA-007 is first remaining P1 in registry order.
+- MA-186, MA-189, MA-199, MA-208 and MA-111 are completed. MA-111 passed its aligned synthetic gate; no P0 candidate remains UNTESTED. MA-001, MA-002, MA-004, MA-006 and MA-007 are checked. MA-008 is first remaining P1 in registry order.
 
 If MA-186 is blocked, use the next eligible P0 in the registry.
 
 ## Active experiments
-
-- MA-007 — `research/ma-007-token-choice-mirror-20261007`; directory `experiments/mirror_applications/ma-007-token-choice-mirror/`; start commit `a556e63` (verified MA-006 base). Paired token-choice/expert-choice Mirror routing on balanced synthetic roles, targeting MA-006 no-route vs token-choice counter-hypothesis; MA-001 is the related nonlinear top-1 precedent.
 
 
 
@@ -46,6 +44,8 @@ When a worker starts an MA experiment, add:
 - MA-247 through MA-251 are complete and verified.
 
 ## Recently completed
+
+- MA-007 — PROMISING: balanced-role token-choice Mirror passed aligned quality/storage 3/3 with full coverage (Mirror/untied MSE 0.766–0.769; payload 0.334x). Paired expert-choice Mirror coverage was 0.818–0.827 and MSE 3.3–4.8x worse. Hard tying was 252B smaller; Mirror throughput was 0.233x tied. Branch `research/ma-007-token-choice-mirror-20261007`; report `experiments/mirror_applications/ma-007-token-choice-mirror/README.md`; result commit `RESULT_COMMIT_PENDING`.
 
 - MA-006 — PROMISING for the registered expert-choice sharing gate: Mirror passed 3/3 aligned quality/coverage/storage at 7,761B vs 23,341B full expert-choice. Token-choice had 100% coverage and 2.50–3.42x lower MSE; no-route expert-choice tokens and eager runtime limit usefulness. Mirror-specific FiLM/residual margin failed. Branch `research/ma-006-expert-choice-mirror-20261007`; report `experiments/mirror_applications/ma-006-expert-choice-mirror/README.md`; result commit `572e245bee17ffe430863a4827baa21da809fb82`.
 

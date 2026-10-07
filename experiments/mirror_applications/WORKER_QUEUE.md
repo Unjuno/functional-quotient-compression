@@ -58,4 +58,4 @@ If two consecutive candidates in a family fail for the same demonstrated structu
 
 ## Next eligible candidate
 
-No P0 candidates remain UNTESTED. Under the priority rule, start MA-007 (P1 token-choice Mirror) as the first remaining candidate in registry order. MA-001, MA-002, MA-004 and MA-006 are checked; MA-006 confirms expert-choice gate but dense token-choice had much higher coverage and better quality.
+No P0 candidates remain UNTESTED. Under the priority rule, start MA-008 (P1 hierarchical Mirror-MoE) as the first remaining candidate in registry order. MA-007 confirms token-choice Mirror quality/coverage vs expert-choice on balanced synthetic roles; hard tying is smaller and faster.
