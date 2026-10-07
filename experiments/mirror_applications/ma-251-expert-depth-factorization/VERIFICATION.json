@@ -1,6 +1,6 @@
 {
   "experiment_id": "MA-251",
-  "commit": "pending",
+  "commit": "pending result commit",
   "tests": {
     "command": "python -m pytest -q experiments/mirror_applications/ma-251-expert-depth-factorization/tests",
     "passed": 4,
@@ -8,17 +8,20 @@
   },
   "serialization": {
     "roundtrip_checked": true,
-    "byte_exact": true
+    "byte_exact": true,
+    "all_payload_bytes_match": true
   },
   "metric_replay": {
-    "checked": false,
-    "rows": 0,
-    "max_difference": null
+    "checked": true,
+    "rows": 54,
+    "max_mse_difference": 4.304201439708777e-10,
+    "max_r2_difference": 4.661865227184592e-09
   },
   "fresh_split_integrity_checked": true,
-  "fresh_worlds_opened": false,
+  "fresh_worlds_opened": true,
   "notes": [
-    "LR 0.01 selected only on dev world 25100 using both task modes and all methods.",
-    "Factorized Mirror and Cartesian table were near-exact on the deliberately factorized teacher; independent pairs remain difficult for shared methods."
+    "Factorized Mirror passed aligned quality/storage gates in all three fresh worlds.",
+    "Independent-pair mode remained far from the untied upper control; combination count is not capacity.",
+    "CPU eager inference throughput of factorized view was lower than untied and Cartesian table despite lower active-compute proxy."
   ]
 }
