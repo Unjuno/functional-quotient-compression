@@ -48,6 +48,16 @@ Two-layer width32 causal Transformer, 32 states, 12 transition rules, P=2/4/8.
 
 Interpretation: period-token parallelism is viable for conditionally determined packets. It is not a substitute for modeling joint uncertainty that is resolved inside the packet. This is a synthetic CPU mechanism result, not a natural-language or GPU claim.
 
+## Mirror application exploration lane
+
+A new explicit exploration lane treats the Mirror/View coordinate as a reusable design freedom rather than one fixed architecture. The question is whether an existing physically repeated object can be replaced by one shared object plus low-description addresses while retaining useful logical multiplicity.
+
+The current registry contains **240 MA-xxx candidates** across MoE experts, LoRA/adapters, attention heads, KV/GQA, depth tying, FFNs, embeddings/position, packet decoding, memory/retrieval, quantization, holographic binding, continual learning/optimization, ensembles/distillation, and SSM/runtime mechanisms.
+
+This registry is a hypothesis backlog, not evidence. Each candidate must use actual serialized bytes and the relevant simple control. Mirror-specific value requires beating a simpler non-Mirror shared/low-rank alternative.
+
+A compact nanoGPT-derived baseline is stored under `third_party/nanoGPT/` for common A/B experiments. The original user-supplied archive SHA-256 and license provenance are recorded there.
+
 ## Interpretation and open hypotheses
 
 Fact: reusable atomic mappings can exist without successful in-model ordered execution.
@@ -76,6 +86,8 @@ Primary scientific adoption gate: **FAIL**. Pruning hardware/byte mechanics: ver
 
 ## Navigation
 
+- [Mirror application design space](MIRROR_APPLICATION_DESIGN_SPACE.md)
+- [Mirror application roadmap](../../roadmap/MIRROR_APPLICATION_ROADMAP.md)
 - [TM001 report](TM001_PARALLEL_PERIOD_TOKEN_MIXING.md)
 - [SRM003 report](SRM003_CAUSAL_DISCOVERY.md)
 - [SRM003 runnable source, tests and counts](../../experiments/shared_rule_moe/srm003_20261007/README.md)
