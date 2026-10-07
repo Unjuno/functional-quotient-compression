@@ -1,0 +1,21 @@
+{
+  "experiment": "SRM003",
+  "tests_passed": 19,
+  "tests_failed": 0,
+  "final_test_duration_seconds": 2.77,
+  "inference_payloads_roundtrip_byte_exact": 182,
+  "final_model_metric_records_recomputed": 52,
+  "maximum_metric_difference": 0.0,
+  "frozen_training_sources_unchanged": true,
+  "full_training_replay": [
+    {"method":"dense","updates":1600,"payload_byte_exact":true},
+    {"method":"hybrid","updates":1600,"payload_byte_exact":true},
+    {"method":"selected_prune","selection_replayed":true,"consolidation_updates":400,"payload_byte_exact":true}
+  ],
+  "train_dev_audit_pair_intersections_empty": true,
+  "reverse_pairs_share_split": true,
+  "teacher_tables_excluded_from_inference": true,
+  "historical_repository_suite_rerun": false,
+  "scope": "New experiment suite; unchanged historical sources were not rerun. Same-session self-audit, not independent external replication.",
+  "decision": "Plan execution complete; scientific task-readiness and hybrid-adoption gates failed. Numerical pruning noninferiority at low composition quality is not useful-quality compression."
+}

@@ -1,119 +1,44 @@
-# Phase II roadmap — Sparse Shared-Rule / Mirror-MoE
+# Phase II roadmap — shared rules, private residuals and execution
 
-Date: 2026-10-07
-Status: active gated roadmap
+Date: 2026-10-07, after SRM003.
 
 ## R0 — Repository/state consolidation
 
-Goal: one current entry point, historical evidence preserved.
+Current entry points, historical records and SRM experiment paths are separated. SRM003 adds complete executable code, tests, original plan, frozen configuration and exact fresh counts. Main and historical experiments are not overwritten by this research branch. Preserve source hashes and negative outcomes.
 
-Exit:
-- README points to current state;
-- Phase II index distinguishes current vs historical;
-- experiment registry exists;
-- superseded architecture docs are explicitly marked;
-- negative results include the major Phase II failures.
+## R1 — Ordered composition mechanism
 
-## R1 — Ordered functional composition
+SRM002 completed an operator-level mechanism probe with explicit ordered execution. A signed shared basis and sparse private corrections learned the factorized teacher efficiently; the tested Mirror family did not. This gate does not establish automatic execution discovery by a causal LM.
 
-Question: can shared rule atoms represent genuinely ordered, non-commutative composition?
+SRM003 subsequently removed oracle routing/private masks in a small causal Transformer. Atomic retention reached100%, but direct unseen ordered composition remained poor even at6400 updates. The same models reached100% only when called twice with a predicted intermediate state and an externally supplied procedure. Execution completion: DONE. Scientific automatic-composition/adoption gate: FAIL.
 
-Construct tasks with:
+## R2 — Capacity versus learning efficiency
 
-[
-A(B(x)) \neq B(A(x)).
-]
+Still open. Require byte/compute/quality frontiers and adequate task accuracy. Neither a favorable fixed-update snapshot nor an unsuccessful longer run establishes a capacity upper bound. Do not widen banks solely because composition failed while atomic mappings were already retained.
 
-Compare:
-- independent sequential full experts;
-- shared low-rank sequential rules;
-- Mirror sequential rules.
+## R3 — Next bounded hypothesis: learned intermediate-state interface
 
-Report:
-- actual bytes;
-- fixed-compute frontier;
-- near-convergence frontier;
-- held-out ordered compositions.
+PROPOSED, NOT EXECUTED: test a fixed-depth feed-forward architecture that passes the output of one learned rule to the next, without true intermediate targets at training or test time. Keep ordinary Dense, top-k MoE and shared-rule baselines and the two-forward external-executor control. Explicitly state which execution structure is supplied and which is learned. No ES or recurrent training loop is assumed.
 
-Exit:
-- either repeated shared-rule advantage or explicit failure.
-
-## R2 — Capacity vs learning-efficiency separation
-
-For the best R1 architecture, sweep private-rule load and train substantially past the current 500–1500 update regime.
-
-Primary outputs:
-- retained rules vs bytes;
-- retained rules vs training compute;
-- convergence curves;
-- active compute;
-- wall-clock.
-
-Exit:
-- classify result as learning-efficiency-only, capacity-only, both, or neither.
-
-## SRM003 active integration gate\n\nCombine R3 and R5 in one small causal Transformer: learn an overcomplete shared/private residual representation from LM loss only, discover private residuals from learned scores, physically prune, and compare to Dense / standard MoE / LoRA-MoE at actual bytes and active compute.\n\n## R3 — Routing discovery
-
-Remove synthetic routing scaffolds in stages.
-
-Compare:
-- oracle;
-- supervised;
-- LM-loss-only with explicit rule tokens;
-- LM-loss-only from ordinary contextual states.
-
-Do not optimize load balance as a proxy objective unless it improves end quality.
-
-Exit:
-- stable routing advantage across fresh worlds, or identify routing as the limiting factor.
+Before making a performance claim, separate atomic learning, intermediate-state transport, routing, final readout, sequence-length transfer and active compute. Use a development-only protocol and fresh worlds. A human-readable reasoning trace is not required, and an internal state should not be assumed to have a particular semantic interpretation without intervention tests.
 
 ## R4 — Atom family competition
 
-At matched bytes and compute compare:
-- low-rank residual atoms;
-- stretch;
-- shear;
-- combined stretch+shear;
-- low-rank + Mirror hybrid.
+Only after useful composition accuracy: compare signed low-rank basis, independent low-rank residual, standard full experts, and Mirror controls at actual bytes and measured compute. Mirror survives only when it improves the relevant frontier. Do not claim arbitrary rules are unshareable from failure of one narrow parameterization.
 
-Mirror remains only if it beats simpler shared-rule controls.
+## R5 — Learn-many, prune and compact
 
-## R5 — Learn-many -> prune / rank allocation
+SRM003 physically removed half the additional residual slots, saving5.16% of model bytes, but did not show consistent selected-pruning benefit over random pruning or small-from-start. Continue only with useful task accuracy and held-out deletion audits. Top-k activation can stay constant after pruning, so storage reduction is not automatically runtime reduction.
 
-Train overcomplete banks, then prune or reduce rank using validation-only criteria.
+## R6 — Natural-language external validity
 
-Compare to:
-- same final bank from scratch;
-- random pruning;
-- usage-only pruning.
+No natural-language capacity claim follows from SRM001–003. A future tiny-LM comparison may test external validity once a clearly scoped mechanism or practical frontier is established. Natural-language NLL is a quality measure, not a ground-truth count of stored independent rules. Compare Dense, standard sparse MoE, low-rank MoE and any justified shared-rule variant; record bytes, data, full training cost and inference throughput.
 
-Measure quality recovery and actual bytes.
+## Stop and pivot criteria
 
-## R6 — Natural-language tiny-LM gate
+- Preserve failures and report whether the limit is observed optimization or demonstrated representation.
+- Remove added machinery if a simpler control matches its quality/cost frontier.
+- Keep the executor-supplied and executor-learned evidence lanes distinct.
+- Do not change an audit split into a tuning set or label a rewritten retrospective plan as preregistration.
 
-Proceed only if R1–R4 produce a defensible synthetic frontier.
-
-Use one small decoder Transformer first.
-
-Compare:
-- Dense;
-- standard sparse MoE;
-- shared low-rank rule MoE;
-- Mirror rule MoE only if R4 justifies it.
-
-Measure:
-- validation NLL;
-- targeted compositional probes;
-- actual bytes;
-- active FLOPs/MACs;
-- throughput;
-- training compute.
-
-No rule-capacity claim is inferred from natural-language NLL alone.
-
-## Stop / pivot criteria
-
-- If near-convergence shared-rule capacity is not better and fixed-compute advantage disappears, reclassify the method as an optimization aid rather than capacity mechanism.
-- If low-rank shared rules match Mirror, drop Mirror-specific complexity.
-- If routing without explicit rule scaffolds collapses, keep representation and routing research separate.
-- If natural-language quality requires independent-expert-like private storage, preserve the negative result and reconsider the factorization premise.
+[Latest current state](../docs/phase2/CURRENT_STATE_2026-10-07.md) · [SRM003 report](../docs/phase2/SRM003_CAUSAL_DISCOVERY.md)

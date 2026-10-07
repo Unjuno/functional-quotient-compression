@@ -1,108 +1,72 @@
-# Phase II current state — 2026-10-07
+# Phase II current state — 2026-10-07, through SRM003
 
-Status: **canonical current-state entry point**
-
-This document supersedes older architecture summaries as the place to start. Historical documents remain valid records of what was believed or tested at the time; they are not deleted or rewritten retroactively.
+Status: **current navigation and interpretation, not a preregistration**.
 
 ## Executive conclusion
 
-The project has converged away from whole-model Mirrorization.
+The hypothesis is a canonical shared backbone plus multiple reusable specialist residuals and only-when-needed private capacity. Whole-model Mirrorization, ES and recurrent training loops are not the default.
 
-The current architecture hypothesis is:
+**SRM003 was executed, but the scientific adoption gate failed.** A small causal decoder learned all atomic mappings but did not reliably compose them from endpoint-token loss. More residual experts and validation-based pruning did not resolve this. The next bottleneck is the interface and execution structure connecting learned operators, not merely the number of stored atoms.
 
-> **Keep the Transformer backbone canonical and shared. Put only the condition-specific / expert-specific residual into a sparse compositional rule bank. For one token/context, select multiple shared rule atoms and compose them into a virtual expert. Mirror geometry is one low-description parameterization of those rule atoms, not the organizing principle for the whole model.**
+## What the latest evidence actually says
 
-Current evidence is synthetic and small-scale. There is no natural-language LLM capacity claim.
+### SRM001: decomposable synthetic tasks
 
-## Current architecture
+Multiple selected components had a strong fixed-update advantage in the count task and weaker signals on bitmask tasks. LM-loss-only routing still received explicitly structured rule-token inputs. The result is not unconstrained rule discovery in language. Some reported retention counters aggregate compound examples containing a rule; they must not be substituted for exhaustive atomic truth-table retention. Standard MoE improved with longer training, so near-convergence capacity superiority was not established.
 
-```text
-token / context
-    |
-shared embedding + attention
-    |
-shared FFN base
-    |
-    +------------------------------+
-    | sparse compositional residual|
-    | router -> top-k rule atoms   |
-    | R3 + R8 + R17 + ...         |
-    +------------------------------+
-    |
-output
-```
+### SRM002: ordered operators with a supplied executor
 
-Canonical specification: [ARCHITECTURE_SPARSE_SHARED_RULE_MOE.md](ARCHITECTURE_SPARSE_SHARED_RULE_MOE.md)
+A teacher generated from a shared signed basis plus sparse rank-2 private residuals could be learned and compacted efficiently. Mirror stretch/shear was weaker than a signed shared basis on that family. Learned residual scores separated teacher-private slots in that controlled setting.
 
-## What is currently supported
+The operator fixture explicitly passed the updated state through the supplied ordered list of operators. It demonstrated learning reusable operators **with an executor**, not discovering an executor from a conventional decoder's final loss. Failure of a narrow shared model on another discrete family does not prove that family is intrinsically unshareable.
 
-### Fact
+### SRM003: no oracle router or private mask
 
-- Whole-model Mirrorization is not required for the strongest observed effects.
-- Mirror count alone did not produce a stable capacity advantage in earlier experiments.
-- Shared sensor/world cores transferred changed laws better when sensor identity was kept out of the shared core.
-- Residual Views were useful only when calibration left meaningful condition-specific mismatch.
-- In SRM001, sparse **multi-rule** composition was much stronger than top-1/top-2 selection on the decomposable synthetic task.
-- At private=32 in SRM001, shared low-rank top-4 reached about 99.9% held-out at 500 updates versus about 66.9% for a byte-near standard full-FFN MoE.
-- A structured Mirror residual preserved the same qualitative signal at much lower storage than one-full-expert-per-rule controls.
-- LM-loss-only sparse routing worked on the tested synthetic task and beat the near-byte standard MoE in 4/4 private=32 worlds.
-- Standard MoE improves substantially with more training; near-convergence capacity superiority is therefore **not yet established**.
-- A parity adversary failed for both shared/Mirror and standard variants. Current composition is not universal.\n- SRM002 established ordered non-commutative composition when rules truly lie in a reusable shared signed basis.\n- In SRM002, Mirror stretch+shear failed that operator family; signed/weighted shared composition, not Mirror geometry, was the useful mechanism.\n- With 25% private rules, shared basis + sparse rank-2 private residual matched the full teacher at about 24.7 KB versus 137.0 KB for all-independent rules; with 50% private it used about 33.1 KB.\n- In the controlled 25%-private family, overcomplete training followed by residual-norm clustering recovered the private mask exactly in 3/3 worlds and physically compacted to about 24.9 KB.\n- A discrete GF(5)^2 causal bridge showed a separate credit-assignment failure: high-capacity private residuals solved the task with intermediate-state supervision but stayed near chance with final-only loss.
+Two-layer causal Transformer, width32, 24 operators on16 states, explicit operator tokens, final answer CE. Three fresh world/init pairs; no auxiliary intermediate labels. Models train on both atomic and two-rule examples; pair combinations are held out with reverse-closed splits.
 
-### Interpretation
+- All five main architectures retained all24 atomic rules over every one of16 inputs at1600 updates.
+- Unseen-pair accuracy was only about9–16% across the five methods at1600 updates.
+- Dense, full-MoE and Hybrid long controls reached about13–19% at6400 updates; they still retained all atomic rules.
+- Hybrid did not satisfy the predeclared2-point advantage over both full-MoE and low-rank-MoE in every fresh setting.
+- Two externally orchestrated calls using the model's **predicted**, not true, intermediate state scored100% in all9 long models and their1600-update parents. This supplies execution order and costs extra compute; it is not a one-forward success.
+- Validation-pruning reduced Hybrid inference bytes90,329 ->85,672 (5.16%). It passed a numerical1-point tolerance at low composition accuracy, but was not consistently better than random pruning or small-from-start.
+- Removing atomic examples gave zero exactly retained atomic rules in the pair-only diagnostic; query-position exposure also changed, so this is not a single-factor causal proof.
 
-The current strongest hypothesis is not "Mirror creates more capacity by itself."
+Primary comparisons controlled data/update opportunities, not total FLOPs or wall time. No LLM or general capacity claim is made.
 
-It is:
+## Interpretation and open hypotheses
 
-> **If specialist behavior decomposes into reusable rule directions plus a smaller set of genuinely private residuals, store the reusable directions once, compose several of them per context, and allocate private expert capacity only where the shared basis leaves measurable residual error.**
+Fact: reusable atomic mappings can exist without successful in-model ordered execution.
 
-### Unresolved
+Interpretation: shared/private FFN parameterization alone does not impose the state-passing structure needed for non-commutative composition. The mechanism could involve optimization, representation of intermediate states, placement, routing or limited depth; the present diagnostic does not uniquely identify one cause.
 
-- true near-convergence capacity frontier;
-- ordered / non-commutative rule composition;
-- routing discovery without explicit rule-like tokens;
-- active-compute and wall-clock frontier;
-- transfer to natural-language Transformers;
-- whether Mirror geometry is better than simpler low-rank rule parameterizations after all budgets are matched.
+Hypothesis: a fixed-depth, non-recurrent composition interface may allow the learned rules to be reused internally. This has NOT been tested by SRM003. Do not label it an adopted solution or promise a gain.
 
-## Evidence line
+## Active evidence map
 
-| Line | Role | Current status |
+| Line | Role | Scope/status |
 |---|---|---|
-| Phase I / FQC | post-training functional compression | useful negative controls; no general sharing win |
-| MN007–MN010 | native shared-state / Mirror exploration | factor reuse trainable; count alone weak; breadth matters |
-| MT / RF / reachability | routing, view, geometry diagnostics | whole-view capacity claim failed; robustness / analysis signals only |
-| MS008–MS014 | shared world-core + residual View decomposition | shared-core isolation and residual specialization supported; quality-equivalent compression not reached |
-| SRM001 | sparse compositional shared-rule MoE | multi-rule composition and LM-loss-only routing promising |\n| SRM002 | ordered composition + shared/private decomposition | strongest current mechanism result; shared weighted basis and sparse-private autoprune pass; Mirror-specific hypothesis fails on main family |
-
-Detailed registry: [EXPERIMENT_REGISTRY.md](EXPERIMENT_REGISTRY.md)
+| Phase I/FQC | post-training compression | preserved; no general sharing win |
+| MN/MT/RF/reachability | views, geometry and routing | count-only weak; robustness and analytical diagnostics |
+| MS008–MS014 | sensor/world decomposition | functional transfer signals; quality-equivalent compression not reached |
+| SRM001 | shared-rule synthetic causal tasks | controlled fixed-update signals; parity failed |
+| SRM002 | operator composition and shared/private pruning | controlled factorized teacher with supplied execution |
+| SRM003 | causal discovery and pruning without oracle routing | completed negative gate; storage and execution separated |
 
 ## Decision rules
 
-A claim of capacity improvement requires:
-1. actual serialized bytes;
-2. a controlled compute frontier;
-3. explicit rule-retention / quality gates;
-4. near-convergence checks, not a single update count;
-5. strong Dense / standard MoE / low-rank controls.
+Keep learning efficiency, observed retention, mathematical capacity, rule reuse and compression separate. Require actual serialized bytes, strong Dense/top-k MoE/low-rank controls, and compute frontiers for any performance claim. A longer unsuccessful training run is not a certified upper capacity bound. Mirror-specific value additionally needs a non-Mirror shared-rule comparison.
 
-A claim of Mirror-specific value additionally requires Mirror to beat a non-Mirror shared-rule parameterization at comparable bytes and compute.
+Primary scientific adoption gate: **FAIL**. Pruning hardware/byte mechanics: verified. Useful-quality compression: **not established**. Natural-language evidence: **not tested**.
 
-## Current next gate
+## Navigation
 
-SRM002 closed the ordered non-commutative mechanism gate.
+- [SRM003 report](SRM003_CAUSAL_DISCOVERY.md)
+- [SRM003 runnable source, tests and counts](../../experiments/shared_rule_moe/srm003_20261007/README.md)
+- [SRM002 original record](SRM002_NONCOMMUTATIVE_COMPOSITION.md)
+- [SRM001 original record](SRM001_SHARED_RULE_MOE.md)
+- [Architecture hypothesis](ARCHITECTURE_SPARSE_SHARED_RULE_MOE.md)
+- [Experiment registry](EXPERIMENT_REGISTRY.md)
+- [Roadmap](../../roadmap/PHASE2_SPARSE_RULE_ROADMAP.md)
 
-The next decisive experiment is **SRM003: causal shared/private discovery without oracle structure**.
-
-Use a small causal Transformer with:
-- a shared signed/weighted rule basis in the FFN residual;
-- an initially overcomplete low-rank private residual bank;
-- no oracle private mask;
-- no supervised rule address;
-- LM loss only;
-- post-training residual-score clustering, pruning, and physical compaction.
-
-Compare Dense, standard top-k MoE, LoRA-MoE, and the shared-rule hybrid under actual serialized bytes, active compute, and near-convergence training curves.
-
-Mirror should remain only as a control unless it beats the simpler shared-basis representation.
+Historical records are preserved. This document corrects earlier overbroad interpretations without replacing their original measurements or protocols.

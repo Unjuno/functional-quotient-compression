@@ -1,0 +1,34 @@
+{
+  "experiment": "SRM003",
+  "parent_git_commit": "c4004a2287ea338fed1722ccd3fb7e1d1ae8e3ff",
+  "registered_plan_commit": "9f03af294dc43ca3c53fef23a429f321813d9438",
+  "freeze_utc": "2026-10-07T08:01:13.844506+00:00",
+  "fresh_worlds": [66001, 66002, 66003],
+  "init_seeds": [1701, 1702, 1703],
+  "lr": 0.003,
+  "parent_updates": 400,
+  "pre_prune_updates": 800,
+  "consolidation_updates": 400,
+  "batch": 96,
+  "source_hashes": {
+    "source/core.py": "4effe1aadc4bdf9f06866197e81a2e7d8c1b365d982367fe73516ab36a8a669b",
+    "source/engine.py": "869448de9b99abdfa6a949070272480949041e71f3e0ee1feb1f005bfec0fc45"
+  },
+  "test_hashes": {
+    "tests/test_core.py": "20a9fa30f5397cdda8186554d4812b270bba608c87c5863e77cf5193b82a77f3",
+    "tests/test_engine.py": "b8170def506f7d742e974a72404c3fc0c924962883faddec91c19c9e6ff5b2b3"
+  },
+  "configs_reference": "CONFIGS.json (same values; separately stored here rather than nested)",
+  "development_outcome": "Both rates failed 25% dev pair-readiness. 0.003 selected since all five methods exceeded their 0.001 dev pair accuracy. Do not treat low-endpoint accuracy as capacity evidence.",
+  "amendment_before_fresh": {
+    "reason": "dev atomic rules learned but pair composition readiness failed",
+    "long_controls": ["dense", "moe", "hybrid"],
+    "extra_updates": 4800,
+    "extra_lr": 0.001,
+    "fresh_counterfactual": "same trained model applied twice via predicted intermediate state; evaluation only, two forwards, not a recurrent training architecture",
+    "pair_only_diagnostic": ["dense", "hybrid"],
+    "primary_unchanged": true
+  },
+  "limits": ["synthetic endpoint-token loss, not natural language", "no intermediate-state labels", "no private masks or address labels", "one world/init pairing per seed; not CI", "fixed updates/data not equal full FLOPs", "final-only credit assignment challenge remains"],
+  "publication_note": "Training-source hashes are exact. This repository manifest separates CONFIGS.json for readability; the full original nested freeze is in the experiment artifact."
+}
