@@ -1,23 +1,14 @@
-# MA-XXX status
+# MA-251 status
 
 - Status: SCREENING
-- Branch: `research/ma-xxx-short-name-YYYYMMDD`
-- Base commit:
-- Last verified commit:
+- Branch: `research/ma-251-expert-depth-factorization-20261007`
+- Base commit: `809f9d50ef85d470d8bac045db291349e264dcba`
 - Development complete: no
 - Fresh/audit opened: no
 - Results committed: no
 - Verification committed: no
 - Registry row updated: no
 
-## Next action
-
-<exactly one action>
-
 ## Blockers
 
 None.
-
-## Decisions / rulings
-
-Record deviations from the original protocol here.

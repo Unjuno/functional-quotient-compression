@@ -1,75 +1,28 @@
-# MA-XXX — <short title>
+# MA-251 — factorized expert x depth Mirror coordinate
 
-Status: SCREENING
-Evidence lane: <MECHANISM | LANGUAGE | STORAGE | RUNTIME | CAPACITY>
-Base commit: <sha>
+Status: SCREENING  
+Evidence lane: MECHANISM / STORAGE / RUNTIME  
+Base commit: `809f9d50ef85d470d8bac045db291349e264dcba`
 
 ## Hypothesis
 
-H: <one falsifiable sentence>
+Factorized expert and depth Mirror coordinates can express a Cartesian family of logical role-depth functions from one shared expert matrix with fewer actual bytes than a per-pair coordinate table, when teacher roles factor across expert and depth. Independent pair functions should expose the need for private/table parameters.
 
-## Physical-to-logical claim
+## Prior art delta
 
-- Physical object being shared:
-- Mirror/View coordinate:
-- Claimed logical multiplicity:
-- Why this could save storage:
-- Why it might fail:
+PA01 shares expert weights across depth and requires ordinary expert tying as a control. PA06 reuses blocks with per-step generated modulation and motivates static per-depth LoRA controls. MA-251 tests a product coordinate `(expert, depth)` while explicitly measuring whether the resulting logical combinations correspond to task quality rather than counting combinations as capacity.
 
-## Prior-art delta
+## Task
 
-Read the registry row and referenced PA items first.
-
-- Closest prior art:
-- What prior art already establishes:
-- Exact Mirror-specific delta tested here:
-- Cheapest simpler control that could explain the result:
-
-## Comparisons
-
-Primary:
-1. ordinary baseline;
-2. existing non-Mirror method being replaced;
-3. byte-near low-rank/gate/shared-basis control;
-4. Mirror candidate;
-5. unrestricted independent-object upper control when practical.
-
-## Gates
-
-### PASS
-<predeclared useful-quality / byte / compute condition>
-
-### FAIL
-<condition that falsifies the hypothesis>
-
-### NOT ESTABLISHED
-<conditions where the run is informative but cannot decide the claim>
-
-## Tuning boundary
-
-Development:
-- worlds/seeds:
-- hyperparameters allowed to change:
-
-Fresh/audit:
-- worlds/seeds:
-- never used for tuning.
-
-## Storage contract
-
-List every paid inference object. Actual serialized payload is authoritative.
-
-## Compute contract
-
-Record tokens/examples, optimizer updates, active-compute proxy, isolated wall-clock, and inference throughput if relevant.
+A 16D input is mapped to 12D output for one of 4 expert identities and 4 depth positions. The aligned teacher applies expert Givens rotations to one half of the hidden coordinates and depth Givens rotations to the other half before one shared matrix. The negative teacher uses an independent matrix for every expert-depth pair. Controls span full Cartesian parameters, one-axis tying, static depth LoRA, single-axis views, factorized views and an explicit per-pair coordinate table.
 
 ## Results
 
-Do not write conclusions until RESULTS_CORE.csv and VERIFICATION.json exist.
+Pending development and fresh evaluations.
 
 ## Decision
 
-FACT:
-INTERPRETATION:
-HYPOTHESIS:
-BOUNDARY:
+FACT: pending.  
+INTERPRETATION: pending.  
+HYPOTHESIS: pending.  
+BOUNDARY: pending.
