@@ -1,34 +1,104 @@
 {
-  "experiment_id": "MA-XXX",
-  "title": "<short title>",
+  "experiment_id": "MA-248",
+  "title": "PTP random variable represented as packet Mirror code",
   "status": "SCREENING",
-  "evidence_lane": "MECHANISM",
-  "base_commit": "<sha>",
-  "hypothesis": "<falsifiable hypothesis>",
-  "physical_object": "<shared object>",
-  "mirror_coordinate": "<view/address>",
-  "logical_multiplicity": "<what becomes multiple>",
-  "prior_art_refs": [],
-  "controls": [],
+  "evidence_lane": "MECHANISM/STORAGE/RUNTIME",
+  "base_commit": "f91625f2fe1b110593b16605c26fc9c7675c1824",
+  "prior_art_refs": [
+    "PA10"
+  ],
+  "hypothesis": "A single packet address, read through phase-specific low-description Mirror views, can generate a jointly consistent P=4 trajectory when branch uncertainty is shared across phases; when branch entropy is independent per phase, the required address entropy grows from one to four bits. Mirror must be compared with a simple shared-code embedding and PTP per-slot auxiliaries so any gain is attributed to the view rather than the compact address alone.",
+  "physical_object": "one shared phase-slot decoder plus one packet-address embedding table",
+  "mirror_coordinate": "one categorical packet code, transformed by a learned phase-specific Givens rotation before each logical slot reads it",
+  "logical_multiplicity": "four phase-specific next-state functions from one shared packet address and decoder",
+  "teacher": "P=4 transitions through two random state-permutation tables; correlated world draws one branch bit for the entire packet, independent world draws one bit per phase",
+  "task": {
+    "states": 16,
+    "rules": 8,
+    "period": 4,
+    "metric": "per-token NLL, exact joint packet accuracy, valid-path rate"
+  },
+  "controls": [
+    "factorized PTP-style per-slot branch auxiliaries",
+    "no-aux direct period prediction",
+    "shared categorical packet embedding broadcast to every phase",
+    "shared packet embedding with scalar phase gates",
+    "shared packet code with phase-specific Givens Mirror views",
+    "untied per-phase packet-code embeddings as a capacity upper control"
+  ],
   "development": {
-    "worlds_or_seeds": [],
-    "selection_metric": "<metric>"
+    "worlds_or_seeds": [
+      {
+        "world": 24800,
+        "init_seed": 248000
+      }
+    ],
+    "modes": [
+      "correlated_two_packet_codes",
+      "independent_sixteen_packet_codes"
+    ],
+    "learning_rate_candidates": [
+      0.003,
+      0.01
+    ],
+    "selection_metric": "mean validation token NLL across methods and both source modes"
   },
   "fresh": {
-    "worlds_or_seeds": [],
+    "worlds_or_seeds": [
+      {
+        "world": 24801,
+        "init_seed": 248001
+      },
+      {
+        "world": 24802,
+        "init_seed": 248002
+      },
+      {
+        "world": 24803,
+        "init_seed": 248003
+      }
+    ],
+    "modes": [
+      "correlated_two_packet_codes",
+      "independent_sixteen_packet_codes"
+    ],
     "locked_before_access": true
   },
+  "training": {
+    "updates": 1200,
+    "batch_size": 64,
+    "optimizer": "AdamW",
+    "weight_decay": 0.0001,
+    "dtype": "float32"
+  },
   "storage": {
-    "authority": "actual serialized inference payload bytes",
-    "paid_objects": []
+    "authority": "actual serialized model payload bytes plus per-packet random-address bits, reported separately and summed for the per-packet frontier",
+    "serialization": "torch.save state_dict plus deterministic config JSON",
+    "paid_objects": [
+      "all shared decoder tensors",
+      "all packet-code embeddings",
+      "all Givens angles or scalar gates",
+      "all independent phase embeddings",
+      "metadata",
+      "per-packet address bits"
+    ]
   },
   "compute": {
-    "report_tokens_or_examples": true,
-    "report_optimizer_updates": true,
-    "report_active_compute_proxy": true,
-    "report_isolated_wall_clock": true
+    "report_examples": true,
+    "report_updates": true,
+    "report_active_MAC_proxy": true,
+    "report_wall_time": true,
+    "report_inference_throughput": true,
+    "cpu_threads": 1
   },
-  "success_gate": "<predeclared gate>",
-  "failure_gate": "<predeclared gate>",
-  "boundaries": []
+  "success_gate": "In all three fresh correlated worlds, Mirror exact joint packet accuracy >=99%, per-token NLL <=1.10x PTP and valid path >=99%; its address entropy must not exceed the PTP source entropy (1 bit correlated, 4 bits independent). A Mirror-specific improvement additionally requires a better model-payload/quality point than both broadcast and scalar-gate controls. Independent-mode result maps the entropy boundary.",
+  "failure_gate": "In all three fresh correlated worlds, Mirror quality misses the PTP gate, or broadcast/scalar-gate matches quality with equal or fewer model bytes. If quality passes but no Mirror-specific frontier gain exists, classify the mechanism as feasible but not Mirror-specific. Independent-mode quality/address failure alone maps the entropy boundary.",
+  "boundaries": [
+    "synthetic state-transition process only",
+    "no natural-language or GPU claim",
+    "P=4",
+    "not a general claim that one packet code can replace independent auxiliaries",
+    "fixed-update mechanism screen rather than near-convergence capacity study",
+    "PTP random auxiliary is discretized to the teacher's binary branch choice"
+  ]
 }

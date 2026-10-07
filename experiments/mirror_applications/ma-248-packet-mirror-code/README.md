@@ -1,75 +1,32 @@
-# MA-XXX — <short title>
+# MA-248 — PTP random variable represented as packet Mirror code
 
-Status: SCREENING
-Evidence lane: <MECHANISM | LANGUAGE | STORAGE | RUNTIME | CAPACITY>
-Base commit: <sha>
+Status: SCREENING  
+Evidence lane: MECHANISM / STORAGE / RUNTIME  
+Base commit: `f91625f2fe1b110593b16605c26fc9c7675c1824`
 
 ## Hypothesis
 
-H: <one falsifiable sentence>
+A shared categorical packet address with phase-specific low-description Mirror views can preserve jointly consistent P=4 outputs when branch uncertainty is correlated. With independent per-position uncertainty, address entropy should grow from one to four bits and match PTP. Any quality or storage gain must beat a simple broadcast-code control, not just exploit the smaller correlated source.
 
-## Physical-to-logical claim
+## Prior art delta
 
-- Physical object being shared:
-- Mirror/View coordinate:
-- Claimed logical multiplicity:
-- Why this could save storage:
-- Why it might fail:
+PA10 (Parallel Token Prediction, ICLR 2026) feeds one random auxiliary `u_i` per future position. Each future token is a deterministic function of context and its own plus preceding auxiliaries; this construction can represent arbitrary dependencies. TM001 found that factorized period slots failed when a single hidden branch was shared across the packet; a small packet latent helped but did not close the gap. MA-248 tests a narrower proposition: whether one packet address, read through phase-specific Givens views over a shared decoder, can encode correlated packet randomness compactly, and where it stops helping as branch entropy becomes independent across phases.
 
-## Prior-art delta
+## Experiment design
 
-Read the registry row and referenced PA items first.
+The teacher predicts four state transitions from 16 states and 8 rules using two random branch-specific permutation tables. In the correlated condition one binary branch is sampled once per packet, giving two possible packet codes. In the independent condition each of four phases draws its own branch, giving sixteen possible packets. Inputs contain only context plus the method's registered random address; target tokens are never fed to future slots. Methods: PTP-style factorized branch auxiliaries, no-aux direct slots, shared packet embedding, scalar-gated shared packet embedding, Givens Mirror packet views, and untied phase-specific packet embeddings.
 
-- Closest prior art:
-- What prior art already establishes:
-- Exact Mirror-specific delta tested here:
-- Cheapest simpler control that could explain the result:
+## Predeclared gates
 
-## Comparisons
-
-Primary:
-1. ordinary baseline;
-2. existing non-Mirror method being replaced;
-3. byte-near low-rank/gate/shared-basis control;
-4. Mirror candidate;
-5. unrestricted independent-object upper control when practical.
-
-## Gates
-
-### PASS
-<predeclared useful-quality / byte / compute condition>
-
-### FAIL
-<condition that falsifies the hypothesis>
-
-### NOT ESTABLISHED
-<conditions where the run is informative but cannot decide the claim>
-
-## Tuning boundary
-
-Development:
-- worlds/seeds:
-- hyperparameters allowed to change:
-
-Fresh/audit:
-- worlds/seeds:
-- never used for tuning.
-
-## Storage contract
-
-List every paid inference object. Actual serialized payload is authoritative.
-
-## Compute contract
-
-Record tokens/examples, optimizer updates, active-compute proxy, isolated wall-clock, and inference throughput if relevant.
+See `PROTOCOL.json`. The key measurements are exact joint packet accuracy, token NLL, valid path, serialized model bytes, random-address bits per packet, combined bytes, compute proxy and CPU wall time. Random address cost is kept separate from model payload to show which frontier improves.
 
 ## Results
 
-Do not write conclusions until RESULTS_CORE.csv and VERIFICATION.json exist.
+Do not write conclusions until development selection, source freeze, fresh evaluation, and metric replay are complete.
 
 ## Decision
 
-FACT:
-INTERPRETATION:
-HYPOTHESIS:
-BOUNDARY:
+FACT: pending.  
+INTERPRETATION: pending.  
+HYPOTHESIS: pending.  
+BOUNDARY: pending.
