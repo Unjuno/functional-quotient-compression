@@ -1,0 +1,56 @@
+{
+  "experiment_id": "MA-691",
+  "title": "lazy canonical KV Mirror read",
+  "status": "SCREENING",
+  "evidence_lane": ["MECHANISM", "STORAGE", "RUNTIME"],
+  "base_commit": "7589ce171d6aa6743b7b0d43cd424134afb8fbdc",
+  "hypothesis": "For logical K/V views related by known structured right-transforms K_m=K A_m and V_m=V B_m, one canonical physical cache can reproduce materialized-view attention exactly by transforming only the current query and attention output, eliminating prefix-length-dependent cache conversion on view switches.",
+  "prior_art_refs": ["PA51", "PA52", "PA56"],
+  "fresh_seeds": [69101, 69102, 69103],
+  "tensor_shape": {
+    "batch": 1,
+    "heads": 8,
+    "head_dim": 64,
+    "prefix_lengths": [128, 512, 2048, 8192, 32768],
+    "dtype": "float32"
+  },
+  "view": {
+    "family": "pairwise Givens rotations",
+    "angle_std": 0.25,
+    "separate_key_and_value_angles": true
+  },
+  "exactness_gates": {
+    "lazy_vs_materialized_max_abs_error": 0.000002,
+    "rope_plane_commutation_max_abs_error": 0.000002,
+    "mla_absorption_max_abs_error": 0.000002
+  },
+  "mla_check": {
+    "prefix_length": 1024,
+    "heads": 6,
+    "head_dim": 16,
+    "latent_dim": 24
+  },
+  "runtime": {
+    "device": "CPU",
+    "torch_threads": 1,
+    "warmups": 5,
+    "median_iterations_small": 20,
+    "median_iterations_medium": 10,
+    "median_iterations_large": 4,
+    "interpretation": "exploratory microbenchmark only; not a GPU or production claim"
+  },
+  "storage": {
+    "authority": "tensor numel * element_size for live KV state plus explicit View-code tensor bytes",
+    "logical_view_counts": [1, 2, 4, 8, 16],
+    "physical_aliasing_goal": "one canonical K/V allocation regardless of logical View count"
+  },
+  "success_gate": "All three fresh seeds satisfy every exactness gate at every tested prefix length; canonical cache storage is independent of logical View count except for View-code bytes; measured full-cache materialization cost increases with prefix length.",
+  "failure_gate": "Any exactness gate fails on a fresh seed, or the claimed lazy computation requires a separate physical K/V cache per View.",
+  "boundaries": [
+    "synthetic algebraic attention only",
+    "teacher/View relation is exact by construction",
+    "no natural-language quality claim",
+    "no GPU throughput claim",
+    "arbitrary earlier FFN changes are not assumed cache-transformable"
+  ]
+}
