@@ -1,24 +1,22 @@
 # MA-248 status
 
-- Status: SCREENING
+- Status: **FAIL (Mirror-specific frontier not established)**
 - Branch: `research/ma-248-packet-mirror-code-20261007`
 - Base commit: `f91625f2fe1b110593b16605c26fc9c7675c1824`
-- Development complete: yes (v3 matched-minibatch screen; LR 0.01 selected)
-- Fresh/audit opened: no; seeds 24801–24803 locked
-- Results committed: no
-- Verification committed: no
-- Registry row updated: no
+- Development: complete; final v3 matched-minibatch screen selected LR 0.01
+- Fresh/audit: complete; worlds 24801–24803
+- Results committed: pending
+- Verification committed: pending
+- Registry row updated: pending
 
-## Development screen
+## H / T / D / C / U
 
-At selected LR 0.01, correlated-mode Mirror reached 100% exact packets on development world 24800 and outperformed the PTP and scalar-gate runs in that single world; untied also reached 100%. Independent-source exact accuracy remained low for PTP, Mirror, and untied. Proceed to the locked fresh worlds for replication and entropy-boundary measurement.
+- **H:** A shared packet code with phase-specific Givens views can preserve a jointly consistent four-token packet when source branch entropy is shared, and must beat simple shared-code controls to count as Mirror-specific.
+- **T:** Six methods, two binary branch-source modes, two-block phase-slot decoder, 1,200 AdamW updates, final v3 minibatches matched across controls; dev world 24800 selected LR 0.01; fresh worlds 24801–24803. Actual serialized payload, address bits, training time, compute proxy, and CPU throughput were measured.
+- **D:** FAIL for the registered Mirror-specific frontier. Mirror reached >=99% fresh joint accuracy in 2/3 correlated worlds, while broadcast code did so in 3/3 at 378 fewer serialized bytes. Mirror used no fewer address bits than PTP. Independent-mode quality was weak across controls and is NOT ESTABLISHED as an entropy boundary.
+- **C:** The correlated Mirror miss may be fixed-budget optimization/initialization variance; the untied upper control also underperformed in one fresh world.
+- **U:** Natural language, longer packets, continuous PTP auxiliaries, near-convergence/fixed-byte capacity, stronger optimization, and optimized kernels.
 
-## Blockers
+## Verification
 
-None.
-
-## Decisions
-
-- PA10 uses one random auxiliary per predicted future position; the test retains that as the direct non-Mirror control.
-- Correlated and independent binary branch sources distinguish packet entropy 1 bit from 4 bits at P=4.
-- Model payload, packet-address bits, and their sum will be separately reported.
+Four tests passed. All 36 fresh metric rows replayed: max NLL delta 4.62e-10, max secondary metric delta 5e-9, exact payload-byte match 36/36. No fresh data was used for tuning.

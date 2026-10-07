@@ -1,6 +1,6 @@
 {
   "experiment_id": "MA-248",
-  "commit": "pending",
+  "commit": "pending result commit",
   "tests": {
     "command": "python -m pytest -q experiments/mirror_applications/ma-248-packet-mirror-code/tests",
     "passed": 4,
@@ -9,18 +9,21 @@
   "serialization": {
     "roundtrip_checked": true,
     "byte_exact": true,
-    "all_v3_payload_bytes_measured": true
+    "fresh_payload_rows_replayed": 36,
+    "all_payload_bytes_match": true
   },
   "metric_replay": {
-    "checked": false,
-    "rows": 0,
-    "max_difference": null
+    "checked": true,
+    "rows": 36,
+    "max_nll_difference": 4.613036619360855e-10,
+    "max_secondary_metric_difference": 4.999999997368221e-09
   },
   "fresh_split_integrity_checked": true,
-  "fresh_worlds_opened": false,
+  "fresh_worlds_opened": true,
   "notes": [
-    "v1 and v2 development results retained; v3 uses two causal blocks and matched minibatches.",
-    "Selected LR 0.01 using only v3 development rows.",
-    "Independent mode remains weak for all methods during dev; report as a potential optimization/capacity boundary."
+    "Final development selection used only world 24800, architecture v3, with minibatches matched across methods/rates.",
+    "Fresh worlds 24801-24803 were opened only after freeze-manifest hashes were validated.",
+    "Mirror met the correlated >=99% joint accuracy gate in 2/3 worlds; broadcast shared code met it 3/3 and used 378 fewer serialized bytes.",
+    "Independent mode was weak for all controls; no entropy boundary is established."
   ]
 }
