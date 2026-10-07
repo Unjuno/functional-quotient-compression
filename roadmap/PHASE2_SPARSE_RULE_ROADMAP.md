@@ -52,7 +52,7 @@ Primary outputs:
 Exit:
 - classify result as learning-efficiency-only, capacity-only, both, or neither.
 
-## R3 — Routing discovery
+## SRM003 active integration gate\n\nCombine R3 and R5 in one small causal Transformer: learn an overcomplete shared/private residual representation from LM loss only, discover private residuals from learned scores, physically prune, and compare to Dense / standard MoE / LoRA-MoE at actual bytes and active compute.\n\n## R3 — Routing discovery
 
 Remove synthetic routing scaffolds in stages.
 
