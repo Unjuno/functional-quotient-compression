@@ -85,7 +85,7 @@ class Student:
         return h@self.base_w2+self.base_b2
 
     def acquire(self,task,x,logits,lr,updates=300,teacher_state=None):
-        if self.method=='hard_tie':
+        if self.method=='hard_tie' or (self.method=='hypernet_rank2' and task == 0):
             if task not in self.seen: self.seen.append(task)
             return
         if self.method=='independent_full':
