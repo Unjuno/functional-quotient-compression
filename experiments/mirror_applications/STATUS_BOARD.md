@@ -8,23 +8,23 @@ Updated: 2026-10-07
 - P0: **34**
 - P1: **126**
 - P2: **94**
-- Current MA statuses: **235 UNTESTED, 10 PROMISING, 9 FAIL**
+- Current MA statuses: **234 UNTESTED, 11 PROMISING, 9 FAIL**
 - Historical evidence lanes SRM/TM are not MA statuses.
 
 ## Next candidate
 
-**MA-079 — next Family C depth/view candidate**
+**MA-086 — next Family C depth/view candidate**
 
 Why next:
-- MA-241, MA-244, MA-245, MA-247, MA-248, MA-249, MA-250, MA-251, MA-253, MA-003, MA-005, MA-009, MA-019, MA-024, MA-041, MA-048, MA-061, MA-063 and MA-076 are checked; Family B KV views are paused after the diagnostic, so MA-079 is next.
+- MA-241, MA-244, MA-245, MA-247, MA-248, MA-249, MA-250, MA-251, MA-253, MA-003, MA-005, MA-009, MA-019, MA-024, MA-041, MA-048, MA-061, MA-063, MA-076 and MA-079 are checked; Family B KV views are paused after the diagnostic, so MA-086 is next.
 - its closest controls should compare tied Transformer blocks, static per-step LoRA, and generated modulation (PA01; PA06).
 
-If MA-079 is blocked, use this order:
-MA-086 -> MA-116.
+If MA-086 is blocked, use this order:
+MA-116.
 
 ## Active experiments
 
-- None. MA-003, MA-005, MA-009, MA-019, MA-024, MA-041, MA-048, MA-061, MA-063 and MA-076 have completed; Family B KV subfamily paused with diagnostic; MA-079 is next.
+- None. MA-003, MA-005, MA-009, MA-019, MA-024, MA-041, MA-048, MA-061, MA-063, MA-076 and MA-079 have completed; Family B KV subfamily paused with diagnostic; MA-086 is next.
 
 
 When a worker starts an MA experiment, add:
@@ -46,6 +46,8 @@ When a worker starts an MA experiment, add:
 - MA-247 through MA-251 are complete and verified.
 
 ## Recently completed
+
+- MA-079 — PROMISING for sparse depth interpolation on the aligned teacher: 3/3 fresh worlds recovered held-out maps at median MSE 3.36e-12 with 2,149B vs 3,753B sparse-trained untied and 2,213B generated gain. Independent maps did not benefit; untied held-out quality is not a fully supervised upper control. Branch `research/ma-079-learned-depth-address-20261007`; report `experiments/mirror_applications/ma-079-learned-depth-address/README.md`; result commit pending.
 
 - MA-076 — PROMISING on the deliberately Givens-aligned depth teacher: matched untied quality in 3/3 fresh worlds with 21.3% fewer payload bytes; independent layer maps remained poorly fit and eager CPU throughput was 0.235x untied. Branch `research/ma-076-one-block-many-layers-20261007`; report `experiments/mirror_applications/ma-076-one-block-many-layers/README.md`; result commit `418a888bfebfb9bf0ad38dbc1b3c97a5001ec7ce`.
 

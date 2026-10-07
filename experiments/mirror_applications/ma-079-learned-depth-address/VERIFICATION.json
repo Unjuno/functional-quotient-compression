@@ -1,0 +1,27 @@
+{
+  "experiment_id": "MA-079",
+  "commit": "pending result commit",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-079-learned-depth-address/tests",
+    "passed": 2,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "rows": 50,
+    "max_difference": 4.94e-10,
+    "replay_artifact": "VERIFICATION_REPLAY.json"
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_worlds_opened": true,
+  "notes": [
+    "Fresh worlds 79011-79013 were opened only after both development worlds passed the aligned held-out-depth screen.",
+    "The untied control was trained with the same sparse four-depth observations; it is not a fully supervised all-depth quality upper bound.",
+    "The aligned teacher directly follows the same polynomial Givens-address mechanism, so the result is an intentionally favorable interpolation screen.",
+    "All address generator and method metadata bytes are counted in serialized inference payload."
+  ]
+}
