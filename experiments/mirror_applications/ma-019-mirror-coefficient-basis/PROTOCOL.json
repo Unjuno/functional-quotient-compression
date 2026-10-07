@@ -1,0 +1,102 @@
+{
+  "experiment_id": "MA-019",
+  "title": "shared expert basis plus Mirror coefficient",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/RUNTIME",
+  "base_commit": "7e2aa51f31bfd779c6c7869e9646f9a4c340dd8f",
+  "prior_art_refs": [
+    "PA01",
+    "PA02",
+    "PA03",
+    "PA04",
+    "PA05"
+  ],
+  "hypothesis": "Eight routed expert functions generated as unit-circle coefficients over two shared physical expert matrices can be represented by two matrices plus one Mirror angle per role; this should compress versus full MoE, while independent matrices should need more basis rank. Generic learned two-coefficient shared-basis control may match Mirror and bounds any Mirror-specific claim.",
+  "physical_object": "two shared 16D-to-12D expert basis matrices",
+  "mirror_coordinate": "one angle per logical expert, decoded as (cos(phi), sin(phi))",
+  "logical_multiplicity": "eight hard-routed expert functions composed from the two physical bases",
+  "task": {
+    "input_dim": 16,
+    "output_dim": 12,
+    "experts": 8,
+    "routing": "deterministic three-sign role id, supplied identically to all methods",
+    "teacher_modes": {
+      "unit_circle_basis": "each expert is a unit-circle linear combination of two random shared matrices",
+      "independent_experts": "eight unrelated expert matrices"
+    },
+    "primary_metric": "held-out routed MSE",
+    "structure_audit": "maximum per-role MSE across eight roles"
+  },
+  "controls": [
+    "full independent MoE",
+    "hard-tied one expert",
+    "shared expert plus rank-1 per-role residual",
+    "generic shared rank-2 basis with two learned coefficients per role",
+    "shared rank-2 basis with one learned Mirror angle per role"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      {
+        "world": 190000,
+        "init_seed": 1900000
+      }
+    ],
+    "learning_rate_candidates": [
+      0.003,
+      0.01
+    ],
+    "selection_metric": "mean held-out MSE pooled across methods and both teacher modes"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      {
+        "world": 190001,
+        "init_seed": 1900001
+      },
+      {
+        "world": 190002,
+        "init_seed": 1900002
+      },
+      {
+        "world": 190003,
+        "init_seed": 1900003
+      }
+    ],
+    "locked_before_access": true
+  },
+  "training": {
+    "updates": 1200,
+    "batch_size": 64,
+    "optimizer": "AdamW",
+    "weight_decay": 0.0001,
+    "dtype": "float32",
+    "matched_minibatches_across_methods": true,
+    "router": "oracle hard route; routing quality not tested"
+  },
+  "storage": {
+    "authority": "actual serialized full inference payload bytes",
+    "serialization": "torch.save state_dict plus deterministic config JSON",
+    "paid_objects": [
+      "full expert matrices or shared bases",
+      "per-role Mirror angles or generic coefficients",
+      "residual factors",
+      "metadata"
+    ]
+  },
+  "compute": {
+    "report_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_wall_time": true,
+    "report_inference_throughput": true,
+    "cpu_threads": 1
+  },
+  "success_gate": "In all three fresh unit-circle worlds, Mirror MSE <=1.10x full MoE MSE and payload <=0.40x full MoE, while beating the generic shared-rank-2 control by >=10% in payload at no more than 5% worse MSE. Independent mode is a boundary test.",
+  "failure_gate": "Mirror misses full-MoE quality/storage gates in two or more fresh worlds, or generic rank-2 control matches Mirror quality with equal/lower payload and compute. Independent-mode failure alone is a structural boundary.",
+  "boundaries": [
+    "linear synthetic experts only",
+    "teacher is aligned to two-basis unit-circle coefficients",
+    "hard route supplied; no router claim",
+    "fixed update screen, not language or capacity claim"
+  ]
+}
