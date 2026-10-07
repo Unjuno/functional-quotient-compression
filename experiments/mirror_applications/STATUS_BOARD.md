@@ -8,19 +8,19 @@ Updated: 2026-10-07
 - P0: **34**
 - P1: **126**
 - P2: **94**
-- Current MA statuses: **211 UNTESTED, 26 PROMISING, 17 FAIL**
+- Current MA statuses: **211 UNTESTED, 26 PROMISING, 18 FAIL**
 - Historical evidence lanes SRM/TM are not MA statuses.
 
 ## Next candidate
 
-**MA-013 — next eligible candidate (MoE / experts)**
+**MA-014 — next eligible candidate (MoE / experts)**
 
 Why next:
-- MA-010 and MA-011 failed at pre-fresh development gates; fresh worlds remain sealed. MA-012 passed its aligned residual-view gate 3/3 but CPU throughput regressed and independent roles needed private capacity. MA-013 is next UNTESTED in registry order.
+- MA-010 and MA-011 failed at pre-fresh development gates. MA-012 passed its aligned residual-view gate 3/3 but CPU throughput regressed and independent roles needed private capacity. MA-013 passed aligned quality/storage vs independent, but FiLM dominated the Mirror frontier in all three fresh worlds and the hard-tie byte margin failed. MA-014 is next UNTESTED in registry order.
 
 ## Active experiments
 
-None. MA-008, MA-010, MA-011 and MA-012 are complete; see result entries below.
+None. MA-008, MA-010, MA-011, MA-012 and MA-013 are complete; see result entries below.
 
 When a worker starts an MA experiment, add:
 - MA ID;
@@ -41,6 +41,8 @@ When a worker starts an MA experiment, add:
 - MA-247 through MA-251 are complete and verified.
 
 ## Recently completed
+- MA-013 — FAIL for Mirror-specific frontier: aligned quality/storage vs independent passed 3/3 (0.384x payload), but multiplicative Mirror used 18.3% more bytes than hard tying; FiLM used 382B fewer and had lower MSE in all three fresh worlds. Independent functions needed private state. Branch `research/ma-013-multiplicative-mirror-moe-20261007`; report `experiments/mirror_applications/ma-013-multiplicative-mirror-moe/README.md`; result commit `e0c7831f0547de1bb824cbe403f01bb9138e0b4d`.
+
 - MA-012 — PROMISING: shared Mirror plus rank-2 private residual passed aligned quality/storage and matched-rank comparison in 3/3 fresh worlds (0.458x full-expert bytes; 0.393–0.597x MSE). It used 6.5% more bytes than tied-rank2 for 18.7–33.1% lower MSE; CPU throughput was 0.52x tied-rank2. Independent roles required richer state. Branch `research/ma-012-residual-mirror-moe-20261007`; report `experiments/mirror_applications/ma-012-residual-mirror-moe/README.md`; result commit `3cdff5dc56cc2c44a1b29112d823c9e13ee9744a`.
 
 - MA-011 — FAIL at development storage gate: aligned product Mirror achieved 0.140x independent MSE and lower error than rank-2 at fewer bytes, but payload was 0.719x vs required <=0.65x; fresh stayed sealed. Independent factor functions needed richer state; CPU throughput lagged. Branch `research/ma-011-product-mirror-experts-20261007`; report `experiments/mirror_applications/ma-011-product-mirror-experts/README.md`; result commit `5ae711ee4e6721ef1cee6e78e666b7f760f609d9`.
