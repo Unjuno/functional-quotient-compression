@@ -1,16 +1,35 @@
 {
   "experiment_id": "MA-061",
-  "commit": "pending",
+  "commit": "pending result commit",
   "tests": {
     "command": "python -m pytest -q experiments/mirror_applications/ma-061-single-kv-logical-views/tests",
-    "passed": 0,
+    "passed": 3,
     "failed": 0
   },
-  "metric_replay": {
-    "checked": false,
-    "rows": 0
+  "serialization": {
+    "roundtrip_checked": true,
+    "model_bytes_exact": true,
+    "cache_bytes_exact": true
   },
-  "fresh_split_integrity_checked": false,
+  "metric_replay": {
+    "checked": true,
+    "rows": 20,
+    "max_abs_delta": {
+      "mse": 4.9083324210608126e-12,
+      "worst_head_mse": 4.966582700660638e-12,
+      "r2": 4.8498535187846414e-09,
+      "serialized_bytes": 0,
+      "cache_bytes": 0
+    },
+    "replay_artifact": "VERIFICATION_REPLAY.json"
+  },
+  "fresh_split_integrity_checked": true,
   "fresh_worlds_opened": false,
-  "notes": []
+  "notes": [
+    "Development world 61000 only; fresh worlds 61001\u201361003 stayed sealed after MQA dominated Mirror at both candidate LRs.",
+    "Selected LR 0.003 by the preregistered pooled development criterion.",
+    "At selected LR in aligned mode, MQA had 6.68e-6 MSE, 4,893B model and 256B cache; Mirror had 1.43e-3 MSE, 5,333B model and the same 256B cache.",
+    "Mirror and MQA had equal compute proxy, but Mirror CPU throughput was lower.",
+    "All cache sizes are exact f32 tensor bytes for one sequence of length 8; bandwidth remains proxy only."
+  ]
 }
