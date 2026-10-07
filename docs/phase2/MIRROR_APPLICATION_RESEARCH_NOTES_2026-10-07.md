@@ -91,3 +91,98 @@ See `MIRROR_APPLICATION_PRIOR_ART.md` for the maintained PA01–PA13 map and URL
 ## Worker interpretation
 
 Treat the literature map as a control-selection tool, not as a claim that an idea is novel or non-novel. Before a fresh experiment, search again for the selected MA ID's narrow mechanism because the research landscape is moving quickly.
+
+
+## Second literature sweep — parameter superposition and structured adaptation
+
+A second focused sweep reviewed **115 additional search-result candidates** across seven broad and nine targeted queries. Combined with the first sweep, the repository's prior-art map now spans the main neighboring families needed to control the next MA experiments.
+
+New territories:
+1. Parameter Superposition and context-vector retrieval;
+2. BatchEnsemble rank-one fast weights;
+3. VeRA shared random low-rank bases;
+4. IA3 activation scaling;
+5. OFT, BOFT and matrix-free OFTv2;
+6. Compacter / Kronecker / hypercomplex adapters;
+7. Monarch structured matrices;
+8. Fast Weight Programmers and dynamic memory;
+9. Task Arithmetic, TIES-Merging and Model Soups;
+10. Cheap-LoRA / chained structured column subspaces;
+11. SETA shared-vs-unique sparse continual experts.
+
+### H. Parameter superposition is the closest historical analogue
+
+Parameter Superposition already stores several task models in one physical parameter tensor and retrieves them with context operators. It even studies complex/unitary and rotational contexts plus composition.
+
+Implication: the project must not claim that "one weight tensor + a context coordinate gives multiple logical models" is novel. The Mirror question is narrower and testable: do the project's structured, learned or factorized View coordinates give a better useful-multiplicity / interference / byte frontier than PSP contexts?
+
+### I. Rank-one modulation is a very strong cheap baseline
+
+BatchEnsemble represents each ensemble member as one shared weight plus two member-specific vectors. VeRA similarly shares low-rank matrices and learns small scaling vectors; IA3 goes cheaper still by rescaling activations.
+
+Implication: any Mirror-MoE/head/adapter result must survive a progression:
+IA3/diagonal -> BatchEnsemble/rank-one -> VeRA/shared-low-rank -> richer Mirror transform.
+
+If a diagonal or rank-one control matches quality, the richer geometry is not justified.
+
+### J. Orthogonal transforms are established PEFT, but their reuse is open
+
+OFT and BOFT establish that orthogonal and butterfly-orthogonal transforms are useful adaptation coordinates. OFTv2 shows the same transform can often be applied input-side instead of materializing changed weights.
+
+Implication: Mirror experiments should separate:
+- geometry: orthogonal / shear / stretch / binding;
+- address sharing: one transform family across many tasks/experts/heads;
+- execution: weight-centric vs input-centric.
+
+The project's high-value delta is logical multiplicity and factorized reuse, not orthogonality itself.
+
+### K. Structured matrices enlarge the Mirror implementation toolbox
+
+Compacter uses shared Kronecker/hypercomplex slow weights plus layer-specific fast rank-one factors. Monarch matrices use block-diagonal factors and permutations to produce expressive hardware-friendly transforms.
+
+Implication: the View need not be a dense matrix. Butterfly, Kronecker, Monarch, circulant and rank-one forms should be compared on both bytes and actual runtime.
+
+### L. Mirror coordinates may be dynamic state
+
+Fast Weight Programmers make effective weights input-dependent and editable during inference.
+
+Implication: (m) need not be a stored expert/task ID. It can be a session- or context-generated state. This creates a separate line:
+static address -> generated address -> fast writable address.
+
+This line is directly relevant to packet plans, live adaptation and transient experts.
+
+### M. Model merging supplies interference controls
+
+Task Arithmetic shows task deltas can be added/subtracted; TIES shows sign conflicts and weak directions cause interference; Model Soups shows simple weight averaging can work when models occupy a compatible basin.
+
+Implication: composed Mirror codes must compare against simple task-vector arithmetic and sign-aware merging. A complicated composition mechanism that only reproduces averaging is not useful.
+
+### N. Continual learning should separate discovery from compression
+
+SETA explicitly discovers shared versus task-unique sparse subspaces and protects routing/weights over time.
+
+Implication: a Mirror continual-learning claim should not conflate discovering what should be shared with compressing what was discovered. The clean test is:
+1. discover shared/private structure with a strong baseline;
+2. apply Mirror coding inside or across those components;
+3. measure whether parameter growth is delayed without hurting retention.
+
+## Second-sweep MA candidates
+
+The second sweep added **MA-255 through MA-300**, bringing the registry to **300 candidates**.
+
+Especially direct/high-information:
+- MA-255/257/258 — Parameter Superposition crossovers;
+- MA-260/261 — BatchEnsemble rank-one controls;
+- MA-265/266 — VeRA shared-basis Mirror adapters;
+- MA-268 — IA3 versus richer activation views;
+- MA-271/272/273 — OFT/OFTv2/BOFT Mirror variants;
+- MA-278 — Compacter hypercomplex/Kronecker crossover;
+- MA-282 — Monarch structured Mirror transform;
+- MA-286 — Cheap-LoRA structured-subspace crossover;
+- MA-288 — dynamic fast-weight Mirror address;
+- MA-292/296 — task-vector compression/superposition;
+- MA-297/299 — SETA shared/private continual-learning crossover.
+
+## Updated closest-source map
+
+The maintained prior-art map now runs **PA01–PA30**. Before implementing any new MA candidate, workers must still perform a narrow current search for that mechanism; this document is a baseline, not a guarantee of novelty.
