@@ -1,0 +1,37 @@
+{
+  "experiment_id": "MS008",
+  "date_jst": "2026-10-07",
+  "evidence_lane": "SYNTHETIC",
+  "model": "4->48->48->2 MLP",
+  "primary_shared_core_input": "canonical 4D state only; sensor ID excluded",
+  "view": {
+    "type": "learned residual conjugation",
+    "geometries": ["shear", "stretch", "combined"],
+    "reference_sensor_code": 0,
+    "candidate_rank": [1, 2, 4, 8],
+    "candidate_strength": [0.05, 0.1, 0.25, 0.5, 1.0],
+    "candidate_placement": ["first", "second", "both"]
+  },
+  "training": {
+    "shared_parent_updates": 1000,
+    "view_code_only_updates": 400,
+    "joint_updates": 600,
+    "source0_only_changed_law_updates": 300,
+    "batch": 96,
+    "optimizer": "AdamW",
+    "loop": false,
+    "ES": false
+  },
+  "fresh_affine_worlds": [53401,53402,53403,53404,53405,53406,53407,53408],
+  "fresh_nonlinear_beta06_worlds": [53502,53503,53504,53505,53506],
+  "beta_sweep_worlds": [53601,53602,53603],
+  "beta_sweep": [0.2,0.4,0.6],
+  "beta_sweep_view": {"geometry":"combined","rank":4,"alpha":1.0,"placement":"both"},
+  "serializer": "deterministic uncompressed FP32 MS08/SN01; actual file bytes measured",
+  "boundaries": [
+    "not Transformer",
+    "not real sensor",
+    "not a capacity multiplier result",
+    "fresh-world ranges are not confidence intervals"
+  ]
+}
