@@ -20,7 +20,7 @@ This file is an index, not a claim ledger. Exact claims remain in the experiment
 | MS006 | Backprop vs ES | Backprop dominates for shared differentiable parameters | MS006_BACKPROP_VS_ES.md |
 | MS008 | view decomposition | sensor ID should stay out of shared core; residual View only when needed | MS008_VIEW_DECOMPOSITION.md |
 | MS009–MS014 | residual View optimization / pruning / shared-world frontier | adaptive residual capacity promising; quality-equivalent compression not reached | MS009_MS014_VIEW_OPTIMIZATION.md |
-| SRM001 | sparse compositional shared-rule / Mirror-MoE | strongest current synthetic signal; multi-rule composition essential; routing promising | [report](SRM001_SHARED_RULE_MOE.md) / [experiment](../../experiments/shared_rule_moe/srm001_20261007/) |
+| SRM001 | sparse compositional shared-rule / Mirror-MoE | multi-rule composition essential; LM-loss-only routing promising | [report](SRM001_SHARED_RULE_MOE.md) / [experiment](../../experiments/shared_rule_moe/srm001_20261007/) |\n| SRM002 | ordered non-commutative composition; shared/private decomposition | weighted shared basis PASS; sparse private hybrid + autoprune PASS in controlled family; Mirror main family FAIL | [report](SRM002_NONCOMMUTATIVE_COMPOSITION.md) / [experiment](../../experiments/shared_rule_moe/srm002_20261007/) |
 
 ## Status vocabulary
 
