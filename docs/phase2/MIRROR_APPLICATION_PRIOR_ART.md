@@ -959,7 +959,7 @@ Encodes position through rotation matrices applied to query/key representations 
 
 **Mirror implication:** positional rotation is an established structured coordinate transformation. Mirror-RoPE experiments should test additional logical positional/domain roles beyond standard RoPE rather than claim rotation itself as new.
 
-## PA49 — FiLM and feature-wise conditional modulation
+## PA106 — FiLM and feature-wise conditional modulation
 
 **FiLM: Visual Reasoning with a General Conditioning Layer**  
 https://arxiv.org/abs/1709.07871
@@ -968,7 +968,7 @@ Applies conditioning-dependent feature-wise affine transformations `gamma * x + 
 
 **Mirror implication:** diagonal affine modulation is a very strong cheap conditional-function baseline. Richer Mirror geometry must justify its extra bytes/compute over FiLM.
 
-## PA50 — MatFormer
+## PA107 — MatFormer
 
 **MatFormer: Nested Transformer for Elastic Inference**  
 https://arxiv.org/abs/2310.07707
@@ -977,7 +977,7 @@ Jointly trains nested FFN submodels so one Transformer contains multiple accurat
 
 **Mirror implication:** logical model multiplicity can come from nested parameter inclusion alone. Mirror elasticity should compare to MatFormer and test whether Views recover specialization at fixed physical width or improve mixed-granularity submodels.
 
-## PA51 — Universally Slimmable Networks
+## PA108 — Universally Slimmable Networks
 
 **Universally Slimmable Networks and Improved Training Techniques**  
 https://arxiv.org/abs/1903.05134
@@ -986,7 +986,7 @@ Trains one network to execute at arbitrary widths using sandwich-rule sampling a
 
 **Mirror implication:** width is already a cheap architecture coordinate. A Mirror code may differentiate shared channels across widths or make width selection task/context dependent.
 
-## PA52 — Once-for-All networks
+## PA109 — Once-for-All networks
 
 **Once-for-All: Train One Network and Specialize it for Efficient Deployment**  
 https://arxiv.org/abs/1908.09791
@@ -995,7 +995,7 @@ One trained supernetwork supports elastic depth, width, kernel size and resoluti
 
 **Mirror implication:** hardware/configuration coordinates are another form of logical multiplicity. Mirror should be tested as a specialization coordinate inside a supernetwork, not mistaken for the concept of one-model-many-subnets itself.
 
-## PA53 — LayerDrop
+## PA110 — LayerDrop
 
 **Reducing Transformer Depth on Demand with Structured Dropout**  
 https://arxiv.org/abs/1909.11556
@@ -1004,7 +1004,7 @@ Trains Transformers to tolerate dropping entire layers, enabling shallower infer
 
 **Mirror implication:** variable logical depth can be obtained by omission alone. Mirror depth views should compare against LayerDrop-trained subnetworks.
 
-## PA54 — Mixture-of-Depths
+## PA111 — Mixture-of-Depths
 
 **Mixture-of-Depths: Dynamically allocating compute in transformer-based language models**  
 https://arxiv.org/abs/2404.02258
@@ -1013,7 +1013,7 @@ Uses token-wise top-k routing to decide which tokens receive attention/MLP compu
 
 **Mirror implication:** Mirror coordinates can potentially choose both *what function* and *whether compute is spent*. Compute-routing gains must be compared to MoD, not only dense depth.
 
-## PA55 — QuaRot
+## PA112 — QuaRot
 
 **QuaRot: Outlier-Free 4-Bit Inference in Rotated LLMs**  
 https://arxiv.org/abs/2404.00456
@@ -1022,7 +1022,7 @@ Uses function-preserving randomized Hadamard rotations, folding them into weight
 
 **Mirror implication:** some rotations are exact gauge changes whose value appears only after quantization. Mirror experiments must distinguish functional multiplicity from representation conditioning and can exploit coordinate choice specifically for compression.
 
-## PA56 — SpinQuant
+## PA113 — SpinQuant
 
 **SpinQuant: LLM Quantization with Learned Rotations**  
 https://arxiv.org/abs/2405.16406
@@ -1031,7 +1031,7 @@ Optimizes function-preserving rotation matrices for quantized-model accuracy and
 
 **Mirror implication:** the choice of a function-preserving Mirror coordinate can itself be optimized for downstream compression. Learned rotations are a mandatory control for quantization-focused Mirror geometry.
 
-## PA57 — SmoothQuant
+## PA114 — SmoothQuant
 
 **SmoothQuant: Accurate and Efficient Post-Training Quantization for Large Language Models**  
 https://arxiv.org/abs/2211.10438
@@ -1040,7 +1040,7 @@ Uses mathematically equivalent per-channel scaling to migrate quantization diffi
 
 **Mirror implication:** scaling symmetries can be exploited purely for numerical conditioning. Mirror quantization must compare against this cheaper equivalence transformation.
 
-## PA58 — Multi-Head Latent Attention
+## PA115 — Multi-Head Latent Attention
 
 **DeepSeek-V2: A Strong, Economical, and Efficient Mixture-of-Experts Language Model**  
 https://arxiv.org/abs/2405.04434
@@ -1049,7 +1049,7 @@ MLA jointly compresses keys/values into a low-rank latent representation cached 
 
 **Mirror implication:** "one physical latent -> many logical KV/head roles" is already practical. Mirror-KV should test whether compact View codes improve reconstruction, personalization, or layer/head sharing beyond MLA.
 
-## PA59 — Prefix-Tuning
+## PA116 — Prefix-Tuning
 
 **Prefix-Tuning: Optimizing Continuous Prompts for Generation**  
 https://arxiv.org/abs/2101.00190
@@ -1058,7 +1058,7 @@ Freezes the language model and stores small trainable continuous prefix states t
 
 **Mirror implication:** functional diversity can live in hidden-state prefixes rather than weight views. Mirror prompt/prefix compression must compare bytes and context/cache cost.
 
-## PA60 — Prompt Tuning
+## PA117 — Prompt Tuning
 
 **The Power of Scale for Parameter-Efficient Prompt Tuning**  
 https://arxiv.org/abs/2104.08691
@@ -1067,7 +1067,7 @@ Learns task-specific soft input embeddings while freezing model weights.
 
 **Mirror implication:** small task coordinates at the input are a minimal functional-control baseline, especially for large pretrained models.
 
-## PA61 — HyperFormer++
+## PA118 — HyperFormer++
 
 **Parameter-efficient Multi-task Fine-tuning for Transformers via Shared Hypernetworks**  
 https://arxiv.org/abs/2106.04489
@@ -1076,7 +1076,7 @@ A shared hypernetwork conditions on task, layer and adapter position embeddings 
 
 **Mirror implication:** this is a direct baseline for factorized task x layer x position coordinates generating functions. Mirror codes must be cheaper/simpler or more compositional than a generic shared hypernetwork.
 
-## PA62 — Prompt pools / L2P and DualPrompt
+## PA119 — Prompt pools / L2P and DualPrompt
 
 **Learning To Prompt for Continual Learning**  
 https://openaccess.thecvf.com/content/CVPR2022/papers/Wang_Learning_To_Prompt_for_Continual_Learning_CVPR_2022_paper.pdf
@@ -1088,7 +1088,7 @@ Use pools of compact prompts, often with input-dependent key/query selection, to
 
 **Mirror implication:** prompt-code banks already implement task-agnostic conditional functionality. Mirror prompt banks should compare routing/storage/interference directly.
 
-## PA63 — HashedNets
+## PA120 — HashedNets
 
 **Compressing Neural Networks with the Hashing Trick**  
 https://arxiv.org/abs/1504.04788
@@ -1097,7 +1097,7 @@ Maps many virtual connections to a smaller physical parameter vector via determi
 
 **Mirror implication:** this is a direct physical-vs-virtual parameter baseline. Mirror hashing/virtual experts should measure collision interference rather than treating virtual count as capacity.
 
-## PA64 — CondConv
+## PA121 — CondConv
 
 **CondConv: Conditionally Parameterized Convolutions for Efficient Inference**  
 https://arxiv.org/abs/1904.04971
@@ -1106,7 +1106,7 @@ Computes an input-specific effective kernel as a linear combination of expert ke
 
 **Mirror implication:** input-dependent coefficient mixing is a generic way to generate logical weights. Mirror dynamic-weight methods should compare to linear expert-basis synthesis.
 
-## PA65 — Dynamic Filter Networks
+## PA122 — Dynamic Filter Networks
 
 **Dynamic Filter Networks**  
 https://proceedings.neurips.cc/paper_files/paper/2016/file/8bf1211fd4b7b94528899de0a43b9fb3-Paper.pdf
@@ -1115,7 +1115,7 @@ A filter-generating network produces sample- or position-specific filters on the
 
 **Mirror implication:** dynamic Mirror addresses are a structured subset of generic dynamic weight generation. The structured constraint must buy storage, stability, or generalization.
 
-## PA66 — Universal Transformer
+## PA123 — Universal Transformer
 
 **Universal Transformers**  
 https://arxiv.org/abs/1807.03819
@@ -1124,7 +1124,7 @@ Recurrently applies a shared Transformer transition across depth/time, optionall
 
 **Mirror implication:** repeated use of one block is established; the Mirror question is how cheaply to differentiate iterations while retaining useful weight sharing.
 
-## PA67 — Deep Equilibrium Models
+## PA124 — Deep Equilibrium Models
 
 **Deep Equilibrium Models**  
 https://papers.nips.cc/paper/8358-deep-equilibrium-models
@@ -1133,7 +1133,7 @@ Represents effectively infinite weight-tied depth by solving for an equilibrium 
 
 **Mirror implication:** Mirror depth coordinates can be tested inside fixed-point/recurrent shared-weight systems, but iteration count and solver compute must be explicit.
 
-## PA68 — AdapterFusion
+## PA125 — AdapterFusion
 
 **AdapterFusion: Non-Destructive Task Composition for Transfer Learning**  
 https://aclanthology.org/2021.eacl-main.39/
@@ -1142,7 +1142,7 @@ Freezes separately learned task adapters and learns contextual attention-like fu
 
 **Mirror implication:** multi-View composition should compare against explicit adapter composition rather than only adapter selection.
 
-## PA69 — AdapterDrop
+## PA126 — AdapterDrop
 
 **AdapterDrop: On the Efficiency of Adapters in Transformers**  
 https://aclanthology.org/2021.emnlp-main.626/
@@ -1151,7 +1151,7 @@ Trains adapters to tolerate removal from lower layers and prunes low-contributio
 
 **Mirror implication:** logical adapter multiplicity and composition should be evaluated with variable active adapter count; storage and active compute are separate axes.
 
-## PA70 — Routing Networks and PathNet
+## PA127 — Routing Networks and PathNet
 
 **Routing Networks and the Challenges of Modular and Compositional Computation**  
 https://arxiv.org/abs/1904.12774
@@ -1163,7 +1163,7 @@ Both study reuse of shared neural modules through task/input-specific computatio
 
 **Mirror implication:** the function address may select a composition/order of shared modules rather than only transform one module. Mirror routing must account for routing/module co-adaptation, collapse and interference.
 
-## PA71 — Neural Interpreters
+## PA128 — Neural Interpreters
 
 **Dynamic Inference with Neural Interpreters**  
 https://arxiv.org/abs/2110.06399
@@ -1172,7 +1172,7 @@ Represents reusable functions by compact signature and code vectors. A shared in
 
 **Mirror implication:** this is a close direct baseline for "small function code + shared physical executor -> many logical functions". Mirror code should be compared on code bytes, new-function extensibility, composition and held-out systematic generalization.
 
-## PA72 — CAVIA
+## PA129 — CAVIA
 
 **Fast Context Adaptation via Meta-Learning**  
 https://proceedings.mlr.press/v97/zintgraf19a.html
@@ -1181,7 +1181,7 @@ Separates shared model parameters from a low-dimensional task context vector ada
 
 **Mirror implication:** a low-dimensional task coordinate is established meta-learning. Mirror must add structure, composability or lower adaptation/storage cost beyond a generic context vector.
 
-## PA73 — Conditional Neural Processes
+## PA130 — Conditional Neural Processes
 
 **Conditional Neural Processes**  
 https://arxiv.org/abs/1807.01613
@@ -1190,7 +1190,7 @@ Aggregates context observations into a fixed-dimensional representation that con
 
 **Mirror implication:** a functional coordinate can be inferred from examples rather than stored by task ID. Mirror function-code inference should compare against generic context aggregation.
 
-## PA74 — DeepSDF latent auto-decoder
+## PA131 — DeepSDF latent auto-decoder
 
 **DeepSDF: Learning Continuous Signed Distance Functions for Shape Representation**  
 https://arxiv.org/abs/1901.05103
@@ -1199,7 +1199,7 @@ One shared decoder represents a family of continuous functions; each instance is
 
 **Mirror implication:** "shared physical decoder + per-function code" is a mature compression/generative paradigm. Mirror's contribution must be code geometry or efficiency, not the general concept.
 
-## PA75 — Modulated implicit neural representations
+## PA132 — Modulated implicit neural representations
 
 **Modulated Periodic Activations for Generalizable Local Functional Representations**  
 https://arxiv.org/abs/2104.03960
@@ -1208,7 +1208,7 @@ A shared synthesis network represents many signals; per-signal latent codes driv
 
 **Mirror implication:** activation-phase/frequency modulation is a rich direct control for nonlinear Mirror/View families.
 
-## PA76 — COIN++
+## PA133 — COIN++
 
 **COIN++: Neural Compression Across Modalities**  
 https://arxiv.org/abs/2201.12904
@@ -1217,7 +1217,7 @@ Compresses signals as quantized/entropy-coded modulation vectors over a meta-lea
 
 **Mirror implication:** this is a direct example of physical network sharing plus paid per-instance functional codes. Mirror compression experiments should copy its discipline: code quantization, entropy/storage accounting and fast code fitting.
 
-## PA77 — Neural Stored-program Memory
+## PA134 — Neural Stored-program Memory
 
 **Neural Stored-program Memory**  
 https://arxiv.org/abs/1906.08862
@@ -1226,7 +1226,7 @@ Stores basis controller weights as programs in key-value memory and retrieves/in
 
 **Mirror implication:** program memory is a direct baseline for dynamic logical weights. Mirror can compress program values, use structured program coordinates, or replace full program retrieval with a small View code.
 
-## PA78 — ROME
+## PA135 — ROME
 
 **Locating and Editing Factual Associations in GPT**  
 https://arxiv.org/abs/2202.05262
@@ -1235,7 +1235,7 @@ ROME inserts a factual association through a targeted rank-one MLP weight update
 
 **Mirror implication:** rank-one edit vectors are a compact unit of functional change. Mirror editing should compare against rank-one direct edits and preserve specificity/generalization.
 
-## PA79 — MEMIT
+## PA136 — MEMIT
 
 **Mass Editing Memory in a Transformer**  
 https://arxiv.org/abs/2210.07229
@@ -1244,7 +1244,7 @@ Extends direct parameter editing to thousands of memories by distributing calcul
 
 **Mirror implication:** a large edit bank is a concrete compression target for shared basis + View coordinates; editing efficacy, paraphrase generalization and locality are mandatory metrics.
 
-## PA80 — MEND
+## PA137 — MEND
 
 **Fast Model Editing at Scale**  
 https://arxiv.org/abs/2110.11309
@@ -1253,7 +1253,7 @@ Learns editor networks that transform the rank-one factors of standard fine-tuni
 
 **Mirror implication:** editing coordinates can be generated from gradient factors. Mirror should test whether a structured editor code is cheaper or more stable than a generic gradient-transform MLP.
 
-## PA81 — SERAC
+## PA138 — SERAC
 
 **Memory-Based Model Editing at Scale**  
 https://arxiv.org/abs/2206.06520
@@ -1262,7 +1262,7 @@ Stores edits explicitly and uses a scope classifier plus counterfactual model to
 
 **Mirror implication:** parametric compression is not automatically better than explicit edit memory. Mirror edit banks must compare storage, retrieval latency, edit scope and interference.
 
-## PA82 — GRACE
+## PA139 — GRACE
 
 **Aging with GRACE: Lifelong Model Editing with Discrete Key-Value Adaptors**  
 https://arxiv.org/abs/2211.11031
@@ -1271,7 +1271,7 @@ Stores sequential edits in a discrete latent-space key/value codebook with per-k
 
 **Mirror implication:** codebook growth, locality and lifelong retention are strong controls for Mirror edit/code memory.
 
-## PA83 — LOKI
+## PA140 — LOKI
 
 **LOKI: Memory-Free Null-Space Constrained Lifelong Knowledge Editing**  
 https://arxiv.org/abs/2606.19679
@@ -1280,7 +1280,7 @@ Selects edit layers dynamically and projects edit gradients into weight null spa
 
 **Mirror implication:** private/edit residuals can be constrained to low-interference subspaces before compression. Mirror coding should not conflate storage compression with interference avoidance.
 
-## PA84 — RRDA
+## PA141 — RRDA
 
 **When to Write and When to Suppress: Route-Specialized Dual Adapters for Memory-Assisted Knowledge Editing**  
 https://arxiv.org/abs/2606.14668
@@ -1289,7 +1289,7 @@ Uses explicit edit memory, a relevance router, an edit adapter for routed prompt
 
 **Mirror implication:** write and suppress are distinct logical functions. A shared View basis can be tested against two independent adapters, but routing/locality must remain explicit.
 
-## PA85 — GaLore
+## PA142 — GaLore
 
 **GaLore: Memory-Efficient LLM Training by Gradient Low-Rank Projection**  
 https://arxiv.org/abs/2403.03507
@@ -1298,7 +1298,7 @@ Projects full-parameter gradients into periodically refreshed low-rank subspaces
 
 **Mirror implication:** the low-description coordinate can live in optimizer/update space rather than inference weights. Mirror optimizer claims must report optimizer memory separately from inference storage.
 
-## PA86 — ReLoRA
+## PA143 — ReLoRA
 
 **ReLoRA: High-Rank Training Through Low-Rank Updates**  
 https://arxiv.org/abs/2307.05695
@@ -1307,7 +1307,7 @@ Periodically merges low-rank updates into base weights and reinitializes LoRA fa
 
 **Mirror implication:** several small functional coordinates applied over time can span a richer final function than one static coordinate. This is a temporal-composition control.
 
-## PA87 — Test-Time Training layers
+## PA144 — Test-Time Training layers
 
 **Learning to (Learn at Test Time): RNNs with Expressive Hidden States**  
 https://arxiv.org/abs/2407.04620
@@ -1316,7 +1316,7 @@ Makes the recurrent hidden state itself a model whose weights are updated by sel
 
 **Mirror implication:** a dynamic functional coordinate can be the test-time learner state. Mirror can constrain/compress this writable state rather than keep it fixed.
 
-## PA88 — Mamba selective state spaces
+## PA145 — Mamba selective state spaces
 
 **Mamba: Linear-Time Sequence Modeling with Selective State Spaces**  
 https://arxiv.org/abs/2312.00752
@@ -1325,7 +1325,7 @@ Makes SSM parameters B, C and step size input-dependent, producing content-selec
 
 **Mirror implication:** the View coordinate can modulate state dynamics rather than Transformer weights. Input-dependent selectivity is the mandatory control.
 
-## PA89 — Hyena
+## PA146 — Hyena
 
 **Hyena Hierarchy: Towards Larger Convolutional Language Models**  
 https://arxiv.org/abs/2302.10866
@@ -1334,7 +1334,7 @@ Uses implicitly generated long-convolution filters interleaved with data-control
 
 **Mirror implication:** implicit filter generators offer another route to logical functional multiplicity with low stored parameter cost.
 
-## PA90 — Titans
+## PA147 — Titans
 
 **Titans: Learning to Memorize at Test Time**  
 https://arxiv.org/abs/2501.00663
@@ -1343,7 +1343,7 @@ Uses a neural long-term memory whose parameters are updated at test time, alongs
 
 **Mirror implication:** stored, persistent and writable memories should be separated. Mirror may compress persistent/task coordinates or constrain writable long-term memory updates.
 
-## PA91 — LoRAHub
+## PA148 — LoRAHub
 
 **LoraHub: Efficient Cross-Task Generalization via Dynamic LoRA Composition**  
 https://openreview.net/pdf?id=w8eCnnq57m
@@ -1352,7 +1352,7 @@ Combines previously trained LoRA modules with learned scalar coefficients for a 
 
 **Mirror implication:** code-space composition must beat simple signed/weighted LoRA composition before claiming a special composition mechanism.
 
-## PA92 — Mixture of LoRA Experts
+## PA149 — Mixture of LoRA Experts
 
 **Mixture of LoRA Experts**  
 https://arxiv.org/abs/2404.13628
@@ -1361,7 +1361,7 @@ Learns layer-wise gates over multiple trained LoRA modules to compose their outp
 
 **Mirror implication:** multiple adapter execution is a strong functional-composition baseline. A Mirror basis is valuable if it reduces adapter storage or pre-composes codes so fewer adapter forwards are needed.
 
-## PA93 — learned optimizers
+## PA150 — learned optimizers
 
 **Learning to learn by gradient descent by gradient descent**  
 https://arxiv.org/abs/1606.04474
@@ -1370,7 +1370,7 @@ Learns an RNN optimizer specialized to a distribution of optimization problems.
 
 **Mirror implication:** optimizer behavior can itself be a reusable logical function. A small optimizer View/task code could specialize one learned optimizer across task families.
 
-## PA94 — Meta-SGD
+## PA151 — Meta-SGD
 
 **Meta-SGD: Learning to Learn Quickly for Few-Shot Learning**  
 https://arxiv.org/abs/1707.09835
@@ -1379,7 +1379,7 @@ Meta-learns initialization plus per-parameter update direction/learning-rate mul
 
 **Mirror implication:** small learned update geometry is a direct control for gradient-space Mirror coordinates.
 
-## PA95 — complementary episodic adapters
+## PA152 — complementary episodic adapters
 
 **A complementary learning system for continual episodic memory in large language models**  
 https://www.biorxiv.org/content/10.64898/2026.08.24.746712v1
@@ -1388,7 +1388,7 @@ Stores episodes in dedicated extremely sparse low-rank adapters with competitive
 
 **Mirror implication:** episodic adapter banks are a concrete high-cardinality private-memory target for shared View compression; recall and interference must not be sacrificed.
 
-## PA96 — Multi-Stream LLMs
+## PA153 — Multi-Stream LLMs
 
 **Multi-Stream LLMs: Unblocking Language Models with Parallel Streams of Thoughts, Inputs and Outputs**  
 https://arxiv.org/abs/2605.12460
