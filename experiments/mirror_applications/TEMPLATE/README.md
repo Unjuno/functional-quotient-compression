@@ -3,6 +3,8 @@
 Status: SCREENING
 Evidence lane: <MECHANISM | LANGUAGE | STORAGE | RUNTIME | CAPACITY>
 Base commit: <sha>
+Doctrine: `docs/phase2/MIRROR_PARAMETER_INTEGRATION_DOCTRINE.md`
+Integration map: `docs/phase2/MIRROR_PARAMETER_INTEGRATION_MATRIX.md`
 
 ## Hypothesis
 
