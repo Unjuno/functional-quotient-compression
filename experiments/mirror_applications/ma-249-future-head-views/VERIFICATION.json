@@ -1,10 +1,27 @@
 {
   "experiment_id": "MA-249",
-  "commit": "pending",
-  "tests": {"command": "python -m pytest -q experiments/mirror_applications/ma-249-future-head-views/tests", "passed": null, "failed": null},
-  "serialization": {"roundtrip_checked": false, "byte_exact": false},
-  "metric_replay": {"checked": false, "rows": 0, "max_difference": null},
-  "fresh_split_integrity_checked": false,
-  "fresh_worlds_opened": false,
-  "notes": []
+  "commit": "pending result commit",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-249-future-head-views/tests",
+    "passed": 4,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "all_fresh_payloads_match": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "rows": 30,
+    "max_KL_difference": 4.91089391374544e-11,
+    "max_top1_difference": 4.375000028922216e-09
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_worlds_opened": true,
+  "notes": [
+    "Aligned shared-base result passed quality/storage gates in all three fresh worlds.",
+    "Independent-offset control indicates the tested Givens view family is insufficient; rank-1 private residual improved quality but did not match MTP.",
+    "Synthetic frozen-feature head test only; throughput regression measured on eager CPU."
+  ]
 }
