@@ -8,7 +8,7 @@ Updated: 2026-10-07
 - P0: **34**
 - P1: **126**
 - P2: **94**
-- Current MA statuses: **237 UNTESTED, 9 PROMISING, 8 FAIL**
+- Current MA statuses: **236 UNTESTED, 1 SCREENING, 9 PROMISING, 8 FAIL**
 - Historical evidence lanes SRM/TM are not MA statuses.
 
 ## Next candidate
@@ -24,7 +24,7 @@ MA-076 -> MA-079 -> MA-086 -> MA-116.
 
 ## Active experiments
 
-- None. MA-003, MA-005, MA-009, MA-019, MA-024, MA-041, MA-048 and MA-061 have completed; MA-063 is next.
+- MA-063 — branch `research/ma-063-causal-mirror-mqa-20261007`; directory `experiments/mirror_applications/ma-063-causal-mirror-mqa/`; worker/run `Codex session 2026-10-07`; start commit pending.
 
 
 When a worker starts an MA experiment, add:

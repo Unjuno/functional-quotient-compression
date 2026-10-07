@@ -1,0 +1,103 @@
+{
+  "experiment_id": "MA-063",
+  "title": "causal Mirror-MQA",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/RUNTIME",
+  "base_commit": "820d8adacb0725f64ae424e778f856659b9e555a",
+  "prior_art_refs": [
+    "PA07",
+    "PA08"
+  ],
+  "hypothesis": "Causal decoding with one physical MQA K/V cache and vectorized per-query-head Mirror views can recover a shared-view four-head teacher without expanding persistent cache state; MQA/GQA and full MHA bound quality and cache bandwidth.",
+  "physical_object": "one causal K/V projection pair and one shared persistent cache stream",
+  "mirror_coordinate": "vectorized pairwise rotations over four-dimensional cached K/V channels, one angle per pair and query head",
+  "logical_multiplicity": "four query heads with distinct K/V views of one physical MQA cache",
+  "task": {
+    "d_model": 16,
+    "query_heads": 4,
+    "head_dim": 4,
+    "sequence_length": 16,
+    "attention": "causal self-attention with shared output projection",
+    "teacher_modes": {
+      "shared_causal_kv": "one K/V projection pair plus per-head rotations, causal mask",
+      "independent_causal_kv": "four independent K/V pairs, causal mask"
+    },
+    "primary_metric": "held-out causal attention-output MSE",
+    "storage_metric": "serialized model bytes, exact persistent cache bytes per sequence, and cache-read proxy",
+    "structure_audit": "worst per-head output contribution MSE"
+  },
+  "controls": [
+    "full causal MHA",
+    "causal GQA-2",
+    "causal MQA with one cache",
+    "MQA plus per-head rank-1 residuals",
+    "MQA cache plus vectorized Mirror views"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      {
+        "world": 63000,
+        "init_seed": 630000
+      }
+    ],
+    "learning_rate_candidates": [
+      0.001,
+      0.003
+    ],
+    "selection_metric": "mean held-out causal output MSE pooled across methods and modes"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      {
+        "world": 63001,
+        "init_seed": 630001
+      },
+      {
+        "world": 63002,
+        "init_seed": 630002
+      },
+      {
+        "world": 63003,
+        "init_seed": 630003
+      }
+    ],
+    "locked_before_access": true
+  },
+  "training": {
+    "updates": 600,
+    "batch_size": 8,
+    "optimizer": "AdamW",
+    "weight_decay": 0.0001,
+    "dtype": "float32",
+    "matched_minibatches_across_methods": true,
+    "router": "all four query heads active"
+  },
+  "storage": {
+    "authority": "actual serialized full inference payload bytes and exact float32 KV tensor bytes",
+    "cache_formula": "2 * physical KV heads * head_dim * sequence length * 4 bytes",
+    "paid_objects": [
+      "query and KV projections",
+      "view angles or residual factors",
+      "output projection",
+      "cache tensors",
+      "metadata"
+    ]
+  },
+  "compute": {
+    "report_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_wall_time": true,
+    "report_inference_throughput": true,
+    "report_cache_read_proxy": true,
+    "cpu_threads": 1
+  },
+  "success_gate": "In all three fresh shared-causal-KV worlds, Mirror output MSE <=1.10x full MHA, model+cache bytes < full MHA, and it beats MQA at equal cache bytes with no worse combined storage/compute. Report bandwidth and CPU runtime separately.",
+  "failure_gate": "Mirror misses output quality in two or more fresh shared-view worlds, or MQA/GQA has equal/lower total storage and compute with equal/better quality. Independent-KV failure alone is a structural boundary.",
+  "boundaries": [
+    "synthetic causal attention only",
+    "teacher intentionally uses the same vectorized rotation family",
+    "cache bandwidth is a proxy, not GPU hardware measurement",
+    "fixed update screen, not language/capacity claim"
+  ]
+}
