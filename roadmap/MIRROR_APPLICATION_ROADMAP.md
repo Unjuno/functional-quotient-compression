@@ -132,6 +132,14 @@ VQ/RVQ and error-correcting codes expose an explicit number-of-bits axis.
 
 Research question: how many bits of functional address are actually needed at a target quality/robustness, and when is residual/private capacity preferable?
 
+### H. Representation-space functional coordinates
+
+ReFT, activation steering, function vectors, SAEs and transcoders show that useful task/behavior coordinates can live directly in hidden-state space.
+
+Research question: for a fixed behavior/task family, is the most storage-efficient functional coordinate a weight View, a hidden-state View, a sparse feature program, a latent code, or an external memory entry?
+
+This lane must report inference-time intervention cost and off-target effects in addition to stored bytes.
+
 ## Stage 2 — Replication gate
 
 A candidate moves beyond SCREENING only if:
