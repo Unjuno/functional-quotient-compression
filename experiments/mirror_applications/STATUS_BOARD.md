@@ -8,24 +8,20 @@ Updated: 2026-10-07
 - P0: **34**
 - P1: **126**
 - P2: **94**
-- Current MA statuses: **215 UNTESTED, 24 PROMISING, 15 FAIL**
+- Current MA statuses: **214 UNTESTED, 25 PROMISING, 15 FAIL**
 - Historical evidence lanes SRM/TM are not MA statuses.
 
 ## Next candidate
 
-**MA-008 — next eligible P1 candidate (MoE / experts)**
+**MA-010 — next eligible candidate (see registry priority/order)**
 
 Why next:
-- MA-241, MA-244, MA-245, MA-247, MA-248, MA-249, MA-250, MA-251, MA-253, MA-003, MA-005, MA-009, MA-019, MA-024, MA-041, MA-048, MA-061, MA-063, MA-076, MA-079, MA-086, MA-116, MA-121, MA-129, MA-156, MA-160, MA-171, MA-173 and MA-181 are checked; Family B KV views remain paused.
-- MA-186, MA-189, MA-199, MA-208 and MA-111 are completed. MA-111 passed its aligned synthetic gate; no P0 candidate remains UNTESTED. MA-001, MA-002, MA-004, MA-006 and MA-007 are checked. MA-008 is first remaining P1 in registry order.
-
-If MA-186 is blocked, use the next eligible P0 in the registry.
+- MA-008 completed PROMISING on aligned hierarchical expert sharing; flat-vs-hierarchical quality benefit was not established.
+- MA-009 is already checked FAIL; MA-010 is the next UNTESTED candidate under registry priority/order.
 
 ## Active experiments
 
-- MA-008 — `research/ma-008-hierarchical-mirror-moe-20261007`; directory `experiments/mirror_applications/ma-008-hierarchical-mirror-moe/`; start commit `993c4ce` (verified MA-007 base). Tests whether hierarchical group→expert routing plus Mirror expert views adds value over flat token-choice and low-rank controls.
-
-
+None. MA-008 is complete; see result entry below.
 
 When a worker starts an MA experiment, add:
 - MA ID;
@@ -113,3 +109,6 @@ The authoritative scientific status is the registry row. This board is an operat
 - MA-173 — PROMISING on a learned real Fourier-phase teacher: 3,169B vs 5,349B untied (0.592x) and lower fixed-update MSE in 3/3 fresh aligned worlds. Fixed HRR/MAP/Hadamard/Givens did not fit this orbit; independent roles required private parameters. Active MAC proxy improved, but measured training wall and inference throughput were slower. Branch `research/ma-173-holographic-compression-20261007`; report `experiments/mirror_applications/ma-173-fft-phase-mirror/README.md`; result commit `20adace6cbc1e149265da9d8626897b8d47ddbb4`.
 
 - MA-181 — PROMISING aligned storage/quality frontier: shared block-circulant kernel bank plus role shifts passed quality/bytes in 3/3 fresh worlds at 2,657B vs 6,437B untied (0.413x), and 21% fewer bytes than independent block-circulant at similar MSE. Unrelated roles required dense private parameters. Active MAC proxy slightly exceeded untied; eager training/inference runtime regressed sharply. Branch `research/ma-181-compression-view-20261007`; report `experiments/mirror_applications/ma-181-block-circulant-mirror/README.md`; result commit `09fadf2f2908ce81742d2de09ea6ffa42b40cc30`.
+## Recent completed result
+
+- MA-008 — PROMISING for aligned hierarchical expert sharing: passed quality/storage in 3/3 fresh worlds (Mirror/full-hier MSE 0.931–0.949; 8,898B vs 24,673B), but hard tying was 317B smaller and Mirror CPU throughput was 0.317x tied. Hierarchy did not consistently beat flat routing; independent roles needed richer state. Branch `research/ma-008-hierarchical-mirror-moe-20261007`; report `experiments/mirror_applications/ma-008-hierarchical-mirror-moe/README.md`; result commit `2497982dc0d2861cc89acc115cffb2877439c71e`.
