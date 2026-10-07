@@ -28,3 +28,5 @@ Before starting an MA experiment, read:
 - [experiment template](TEMPLATE/)
 
 The registry is authoritative for IDs/status. The queue is operational guidance only.
+
+- [Mirror KV cache reuse design](../../docs/phase2/MIRROR_KV_CACHE_REUSE.md) — canonical-cache algebra, prior art, POC and MA-691..700.
