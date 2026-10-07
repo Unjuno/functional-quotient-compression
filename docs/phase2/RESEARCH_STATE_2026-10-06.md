@@ -1,4 +1,4 @@
-# Research state — Mirror Transformer through 2026-10-06
+> **HISTORICAL SNAPSHOT — superseded as current-state entry point by [CURRENT_STATE_2026-10-07.md](CURRENT_STATE_2026-10-07.md).**\n> Experimental findings remain valid within their original scope.\n\n# Research state — Mirror Transformer through 2026-10-06
 
 Date: 2026-10-06  
 Status: **integrated evidence summary**
