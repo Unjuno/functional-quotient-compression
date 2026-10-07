@@ -1487,6 +1487,69 @@ Builds on YOCO: cross-decoder layers reuse both one shared KV cache and one toke
 
 **Mirror implication:** cache and routing can be jointly shared. Mirror View codes should be tested on top of a single physical cache/index rather than reintroducing per-layer cache or routing state.
 
+## PA164 — S-LoRA unified paging for adapters and KV
+
+**S-LoRA: Serving Thousands of Concurrent LoRA Adapters**  
+https://arxiv.org/abs/2311.03285
+
+Stores many LoRA adapters off-GPU and uses Unified Paging to manage adapter weights and KV-cache tensors in one paged memory pool, with specialized heterogeneous-batching kernels.
+
+**Mirror implication:** cache-compatible Mirror serving needs a real memory layout, not only an algebraic identity. Compare physical pages, fragmentation, adapter/View-code residency and heterogeneous batching.
+
+## PA165 — Punica multi-tenant LoRA kernels
+
+**Punica: Multi-Tenant LoRA Serving**  
+https://arxiv.org/abs/2310.18547
+
+Uses Segmented Gather Matrix-Vector kernels to batch different LoRA adapters over one shared backbone and efficiently serve heterogeneous adapter requests.
+
+**Mirror implication:** structured View transforms need fused/grouped kernels comparable to multi-adapter serving kernels; eager Python/PyTorch overhead is not a fair runtime endpoint.
+
+## PA166 — PagedAttention / vLLM physical KV sharing
+
+**Efficient Memory Management for Large Language Model Serving with PagedAttention**  
+https://arxiv.org/abs/2309.06180
+
+Pages KV state into fixed-size physical blocks, allows logical blocks to map to shared physical blocks, and uses copy-on-write to support sharing across decoding branches/requests.
+
+**Mirror implication:** exact Mirror cache reuse should physically alias canonical KV pages across logical Views. Logical value reuse without page aliasing is not a memory-sharing result.
+
+## PA167 — RadixAttention / SGLang
+
+**SGLang: Efficient Execution of Structured Language Model Programs**  
+https://proceedings.neurips.cc/paper_files/paper/2024/file/724be4472168f31ba1c9ac630f15dec8-Paper-Conference.pdf
+
+Uses a radix tree over shared prefixes and paged KV tensors to retain, match and evict reusable cache across structured generation programs.
+
+**Mirror implication:** Mirror View identity can become metadata over shared radix/paged prefixes rather than a reason to duplicate prefix state.
+
+## PA168 — LoRA-Switch token-wise dynamic adapters
+
+**LoRA-Switch: Boosting the Efficiency of Dynamic LLM Adapters via System-Algorithm Co-design**  
+https://arxiv.org/abs/2405.17741
+
+Routes adapters token-wise, uses one pre-gating decision across layers, and fuses adapter merging/switching with custom SGMM kernels.
+
+**Mirror implication:** token-wise View switching is a realistic workload. A canonical-cache design should avoid prefix conversion when the View changes every token and be compared with fused adapter switching.
+
+## PA169 — MoLoRA per-token composable specialization
+
+**MoLoRA: Composable Specialization via Per-Token Adapter Routing**  
+https://arxiv.org/abs/2603.15965
+
+Routes tokens to specialized LoRA adapters within one sequence and unifies adapter dispatch with MoE-style grouped computation.
+
+**Mirror implication:** per-token logical specialist identity must be stored/used without duplicating historical KV. Grouped-by-View canonical-cache attention is a direct candidate architecture.
+
+## PA170 — Hydragen shared-prefix exact attention
+
+**Hydragen: High-Throughput LLM Inference with Shared Prefixes**  
+https://arxiv.org/abs/2402.05099
+
+Decomposes attention over shared prefixes and unique suffixes, then batches queries over one shared prefix to reduce redundant KV reads and turn memory-bound matrix-vector work into more efficient matrix-matrix work.
+
+**Mirror implication:** multiple logical Views reading the same canonical cache can batch transformed queries over one physical prefix; cache sharing can reduce bandwidth as well as storage.
+
 ## Research gaps that remain especially relevant here
 
 1. **Logical expert multiplicity from one physical expert via a structured view** — adjacent to expert tying, but not equivalent.
