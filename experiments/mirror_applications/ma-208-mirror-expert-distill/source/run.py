@@ -3,6 +3,7 @@ import csv
 import json
 import os
 import torch
+torch.set_num_threads(1)
 
 from engine import METHODS, TASKS, world, teacher_logits, effective_teacher_state, Student, evaluate, mac_proxy
 
