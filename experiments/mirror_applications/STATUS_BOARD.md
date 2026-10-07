@@ -46,7 +46,7 @@ When a worker starts an MA experiment, add:
 
 ## Recently completed
 
-- MA-121 — PROMISING on the aligned synthetic packet task: improved NLL and exact packet accuracy over MTP in 3/3 fresh worlds with 21.3% fewer bytes; rank-2 PTP had better NLL at higher storage; independent slot functions and eager runtime were poor. Branch `research/ma-121-temporal-view-20261007`; report `experiments/mirror_applications/ma-121-temporal-view/README.md`; result commit pending.
+- MA-121 — PROMISING on the aligned synthetic packet task: improved NLL and exact packet accuracy over MTP in 3/3 fresh worlds with 21.3% fewer bytes; rank-2 PTP had better NLL at higher storage; independent slot functions and eager runtime were poor. Branch `research/ma-121-temporal-view-20261007`; report `experiments/mirror_applications/ma-121-temporal-view/README.md`; result commit `0ccd5470dcac07afba3b9cf77bbfbb7cf8e82bfc`.
 
 - MA-116 — FAIL at development: Mirror-RoPE beat scalar scaling on synthetic held-out positions, but independent frequencies were more accurate and had a smaller actual serialized payload (2,021B vs 2,209B). Fresh stayed sealed. Branch `research/ma-116-mirror-rope-20261007`; report `experiments/mirror_applications/ma-116-mirror-rope/README.md`; result commit `b5d0b623df16f2ea3b024e92c53edb96f26ea00f`.
 

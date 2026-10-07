@@ -3,12 +3,12 @@
 - Status: PROMISING
 - Branch: `research/ma-121-temporal-view-20261007`
 - Base commit: `e04e131926978fada98129d52e2146534a8db6e9`
-- Last verified commit: pending
+- Last verified commit: `0ccd5470dcac07afba3b9cf77bbfbb7cf8e82bfc`
 - Development complete: yes; seeds 12101–12102
 - Fresh/audit opened: yes; seeds 12111–12113 after aligned development gate
-- Results committed: pending
-- Verification committed: pending
-- Registry row updated: pending
+- Results committed: yes (`0ccd5470dcac07afba3b9cf77bbfbb7cf8e82bfc`)
+- Verification committed: yes (`0ccd5470dcac07afba3b9cf77bbfbb7cf8e82bfc`)
+- Registry row updated: yes
 
 ## H / T / D / C / U
 
