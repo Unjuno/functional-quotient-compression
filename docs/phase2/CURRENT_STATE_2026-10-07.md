@@ -52,7 +52,7 @@ Interpretation: period-token parallelism is viable for conditionally determined 
 
 A new explicit exploration lane treats the Mirror/View coordinate as a reusable design freedom rather than one fixed architecture. The question is whether an existing physically repeated object can be replaced by one shared object plus low-description addresses while retaining useful logical multiplicity.
 
-The current registry contains **500 MA-xxx candidates** across MoE experts, LoRA/adapters, attention heads, KV/GQA, depth tying, FFNs, embeddings/position, packet decoding, memory/retrieval, quantization, holographic binding, continual learning/optimization, ensembles/distillation, and SSM/runtime mechanisms.
+The current registry contains **550 MA-xxx candidates** across MoE experts, LoRA/adapters, attention heads, KV/GQA, depth tying, FFNs, embeddings/position, packet decoding, memory/retrieval, quantization, holographic binding, continual learning/optimization, ensembles/distillation, and SSM/runtime mechanisms.
 
 This registry is a hypothesis backlog, not evidence. Each candidate must use actual serialized bytes and the relevant simple control. Mirror-specific value requires beating a simpler non-Mirror shared/low-rank alternative.
 
