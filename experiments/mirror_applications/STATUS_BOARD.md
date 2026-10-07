@@ -8,7 +8,7 @@ Updated: 2026-10-07
 - P0: **34**
 - P1: **126**
 - P2: **94**
-- Current MA statuses: **239 UNTESTED, 9 PROMISING, 6 FAIL**
+- Current MA statuses: **238 UNTESTED, 1 SCREENING, 9 PROMISING, 6 FAIL**
 - Historical evidence lanes SRM/TM are not MA statuses.
 
 ## Next candidate
@@ -24,7 +24,7 @@ MA-061 -> MA-063.
 
 ## Active experiments
 
-- None. MA-003, MA-005, MA-009, MA-019, MA-024 and MA-041 have completed; MA-048 is next.
+- MA-048 — branch `research/ma-048-physical4-logical16-attention-20261007`; directory `experiments/mirror_applications/ma-048-physical4-logical16-attention/`; worker/run `Codex session 2026-10-07`; start commit pending.
 
 
 When a worker starts an MA experiment, add:
