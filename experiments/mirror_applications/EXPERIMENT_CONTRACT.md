@@ -2,6 +2,19 @@
 
 Use this contract for every MA-xxx candidate unless its report explicitly preregisters a deviation.
 
+## 0. Mirror parameter isolation
+
+Every experiment must isolate the marginal contribution of the extra low-description functional parameter `m`.
+
+Required sequence:
+1. reproduce or preserve the native method `B(x; theta)`;
+2. construct the minimal Mirror extension `B_M(x; theta, m)`;
+3. identify the cheapest native/non-Mirror parameter that could provide similar freedom;
+4. compare at relevant byte/compute/state budgets;
+5. report whether `m` is replacement, complementary freedom, factorization, dynamic functional state, shared/private frontier, or no Mirror-specific value.
+
+Generic improvement from adding parameters is not sufficient.
+
 ## A. Required baselines
 
 At minimum:
@@ -47,4 +60,4 @@ ADOPTED requires a useful Pareto improvement over the relevant simple control, n
 
 ## G. Mirror-specific claim
 
-A Mirror-specific claim requires the Mirror parameterization to outperform a simpler non-Mirror shared-basis or low-rank control at comparable storage and compute.
+A Mirror-specific claim requires the Mirror parameterization to outperform a simpler non-Mirror shared-basis or low-rank/native-parameter control at comparable storage and compute. The experiment must state the exact insertion point and marginal cost of `m`.
