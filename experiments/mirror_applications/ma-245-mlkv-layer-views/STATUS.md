@@ -1,26 +1,29 @@
 # MA-245 status
 
-- Status: SCREENING
+- Status: PROMISING (quality/cache frontier); model-payload gate missed
 - Branch: `research/ma-245-mlkv-layer-views-20261007`
 - Base commit: `1c313c1ac6aba2b5c4cd4bcc3933c08b1f98ce19`
-- Last verified commit: pending preregistration commit
+- Last verified commit: pending result commit
 - Development complete: yes; selected common LR `0.003`
-- Fresh/audit opened: no
-- Results committed: no
-- Verification committed: no
-- Registry row updated: no
+- Fresh/audit opened: yes; worlds 24501, 24502, 24503
+- Results committed: pending
+- Verification committed: pending
+- Registry row updated: pending until verification is committed
+
+## Decision
+
+Mirror produced MSE `6.7e-12`–`6.8e-11` in all three aligned synthetic worlds and beat one-group hard MLKV and the same-byte gate. Its actual cache payload was 256 bytes versus 512 bytes for two-group MLKV (50% reduction). Serialized model payload was 2,541 bytes versus 2,864 bytes (11.3% reduction), below the predeclared 25% storage gate. Current CPU implementation was slower in both training wall time and measured throughput.
 
 ## Next action
 
-Freeze source/protocol and run fresh worlds 24501–24503 at 900 updates.
+Commit results and verification, update registry/claim ledger/status board/queue, push the MA-245 branch, then advance to MA-247.
 
 ## Blockers
 
-None. CPU PyTorch is available; GPU is not needed for this mechanism screen.
+None for this screen.
 
 ## Decisions / rulings
 
-- PA08's main comparison is cross-layer cache sharing with explicit layer groups. The screen includes four independent layers, two MLKV groups, one hard-shared group, and layer-specific views.
-- The teacher is exactly a shared K/V pair under layer/role views, an optimistic feasibility setup. Every layer uses the same memory hidden state to isolate projection and cache sharing; evolving layer-state interactions are not modeled.
-
-- Development selected common LR `0.003` from the two-value grid. The view passes quality and gate-control checks in development; actual payload reduction versus two-group MLKV is 11.3%, below the preregistered 25% threshold. Cache tensor audit shows 256 bytes for one group versus 512 bytes for MLKV-2.
+- Scope is the aligned shared-base teacher with identical memory state supplied at each layer.
+- Keep cache-state reduction separate from serialized model-payload reduction.
+- Preserve runtime regression; do not infer production throughput from the analytical MAC proxy.
