@@ -275,6 +275,171 @@ Discovers high-utility sparse parameter subspaces and dynamically separates over
 
 **Mirror implication:** continual-learning Mirror experiments need to separate "discover shared/private subspaces" from "compress those subspaces via a View". SETA provides a strong decomposition control.
 
+## PA31 — Supermasks in Superposition
+
+**Supermasks in Superposition (SupSup)**  
+https://proceedings.neurips.cc/paper/2020/file/ad1f8bb9b51f023cdc80cf94bb615aa9-Paper.pdf
+
+Uses one fixed random network and learns a task-specific supermask for each task. It can infer task identity by optimizing a superposition of learned masks and can store many masks in a fixed-size attractor reservoir.
+
+**Mirror implication:** a binary/sparse mask is itself a low-description functional coordinate. Mirror proposals should test whether a continuous/invertible View can provide better quality-per-bit, smoother composition, or cheaper task inference than task masks.
+
+## PA32 — Piggyback and PackNet
+
+**Piggyback: Adapting a Single Network to Multiple Tasks by Learning to Mask Weights**  
+https://arxiv.org/abs/1801.06519
+
+**PackNet: Adding Multiple Tasks to a Single Network by Iterative Pruning**  
+https://openaccess.thecvf.com/content_cvpr_2018/papers/Mallya_PackNet_Adding_Multiple_CVPR_2018_paper.pdf
+
+Piggyback keeps backbone weights fixed and learns a binary mask per task; PackNet allocates disjoint/free weight subsets sequentially.
+
+**Mirror implication:** continual-learning Mirror methods need mask/subnetwork baselines. A useful Mirror code should either use fewer bits than masks, compose better, or delay physical parameter allocation.
+
+## PA33 — Intrinsic-dimensional fine-tuning
+
+**Intrinsic Dimensionality Explains the Effectiveness of Language Model Fine-Tuning**  
+https://aclanthology.org/2021.acl-long.568/
+
+Shows that pretrained language models can often be adapted by optimizing a very low-dimensional parameter vector projected into the full parameter space; hundreds of dimensions can recover substantial task performance in some settings.
+
+**Mirror implication:** a Mirror address may be interpreted as an intrinsic task coordinate. Random projected subspace tuning is a mandatory control for claims about small task coordinates.
+
+## PA34 — Tensorized embedding layers
+
+**Tensorized Embedding Layers**  
+https://aclanthology.org/2020.findings-emnlp.436/
+
+Uses Tensor-Train decomposition for embedding/softmax matrices and studies compression-quality tradeoffs in NLP/Transformer models.
+
+**Mirror implication:** embedding Mirror views should compare against tensorized shared cores rather than only dense/low-rank embeddings.
+
+## PA35 — Tensor decomposition across Transformer layers
+
+**Exploring extreme parameter compression for pre-trained language models**  
+https://arxiv.org/abs/2205.10036
+
+Compares matrix, Tensor-Train and Tucker decompositions. Its Tucker formulation uses a fixed matrix bank with layer-specific coefficients, making parameter scale nearly constant with layer count.
+
+**Mirror implication:** this is extremely close to "shared basis + small logical layer address". Mirror-depth and projection-bank claims must compare against Tucker/matrix-bank decomposition.
+
+## PA36 — LoRETTA
+
+**LoRETTA: Low-Rank Economic Tensor-Train Adaptation for Ultra-Low-Parameter Fine-Tuning of Large Language Models**  
+https://arxiv.org/abs/2402.11417
+
+Uses Tensor-Train factors for tensorized adapters and weight reparameterization, reporting large reductions in trainable parameters versus common PEFT methods.
+
+**Mirror implication:** tensor-factor Mirror adapters need LoRETTA as a direct PEFT control.
+
+## PA37 — Git Re-Basin
+
+**Git Re-Basin: Merging Models Modulo Permutation Symmetries**  
+https://arxiv.org/abs/2209.04836
+
+Aligns independently trained networks by neuron permutation symmetries before interpolation/merging.
+
+**Mirror implication:** some apparent functional diversity is pure parameter-coordinate symmetry. Before calling a View a new logical function, audit whether it is only a function-preserving reparameterization; conversely, symmetry alignment can make Mirror/task deltas more mergeable.
+
+## PA38 — HyperLoRA federated personalization
+
+**Amortizing Federated Adaptation: Hypernetwork Driven LoRA for Personalized Foundation Models**  
+https://arxiv.org/abs/2606.06154
+
+Uses a hypernetwork to generate client-conditioned LoRA initialization and a learned server-side synthesizer in low-rank product space.
+
+**Mirror implication:** federated Mirror codes should compare against generated client-specific LoRA and product-space aggregation.
+
+## PA39 — PreLort rank-heterogeneous federated LoRA
+
+**PreLort: Prefix-Nested LoRA for Federated Fine-Tuning under Rank Heterogeneity**  
+https://arxiv.org/abs/2606.15963
+
+Organizes heterogeneous client ranks into nested prefixes and aggregates each rank segment only across clients that actually train that segment.
+
+**Mirror implication:** client/rank Mirror coordinates can be factorized along nested rank segments, but must beat prefix-nested LoRA as the simple sharing baseline.
+
+## PA40 — Personalized federated hypernetworks
+
+**Personalized Federated Learning using Hypernetworks (pFedHN)**  
+https://arxiv.org/abs/2103.04628
+
+A central hypernetwork maps compact client embeddings to personalized client models.
+
+**Mirror implication:** client-specific Mirror addresses are a structured, potentially cheaper alternative to generic model generation. Compare bytes, communication, unseen-client generalization and personalization.
+
+## PA41 — Rank-1 Bayesian neural networks
+
+**Efficient and Scalable Bayesian Neural Nets with Rank-1 Factors**  
+https://proceedings.mlr.press/v119/dusenberry20a.html
+
+Places distributions over rank-one factors multiplying shared weight matrices and supports low-overhead multimodal posterior mixtures.
+
+**Mirror implication:** uncertainty/ensemble Mirror views need Bayesian rank-one factors as a strong probabilistic control, not only deterministic BatchEnsemble.
+
+## PA42 — MIMO implicit ensemble subnetworks
+
+**Training independent subnetworks for robust prediction**  
+https://arxiv.org/abs/2010.06610
+
+Trains multiple functionally distinct subnetworks inside one network using multi-input/multi-output training and evaluates them in one forward pass.
+
+**Mirror implication:** "multiple logical models inside one physical model" can emerge without explicit per-member weight views. Mirror ensemble claims must measure actual member diversity against MIMO.
+
+## PA43 — Product Key Memory
+
+**Large Memory Layers with Product Keys**  
+https://arxiv.org/abs/1907.05242
+
+Factorizes keys as a Cartesian product of sub-key sets, enabling very large sparse memories with efficient exact lookup.
+
+**Mirror implication:** factorized Mirror addresses for memory/expert selection can use product-key indexing so logical address count grows multiplicatively without dense routing cost.
+
+## PA44 — Modern Hopfield networks
+
+**Hopfield Networks is All You Need**  
+https://arxiv.org/abs/2008.02217
+
+Modern continuous Hopfield layers provide high-capacity associative retrieval and connect directly to attention.
+
+**Mirror implication:** Mirror address banks can be stored/retrieved as associative attractors rather than explicit tables; retrieval interference and memory capacity must be measured.
+
+## PA45 — ACDC structured transforms
+
+**ACDC: A Structured Efficient Linear Layer**  
+https://arxiv.org/abs/1511.05946
+
+Uses alternating learned diagonal matrices and fixed cosine/Fourier-like transforms, reducing dense-linear parameterization from O(N^2) toward O(N) with O(N log N) transform cost.
+
+**Mirror implication:** ACDC/AFDF is an especially cheap structured View family: diagonal code + fixed global mixing. It is a required control for FFT/Hadamard/structured Mirror transforms.
+
+## PA46 — LieTransformer / group equivariance
+
+**LieTransformer: Equivariant Self-Attention for Lie Groups**  
+https://proceedings.mlr.press/v139/hutchinson21a.html
+
+Builds self-attention equivariant to Lie-group actions through principled parameter sharing.
+
+**Mirror implication:** a Mirror coordinate can be interpreted as a group element. Group-action Mirror experiments should distinguish exact equivariance from learned functional specialization.
+
+## PA47 — Monomial weight-space symmetries
+
+**Monomial Matrix Group Equivariant Neural Functional Networks**  
+https://arxiv.org/abs/2409.11697
+
+Extends weight-space symmetry analysis beyond permutations to scaling/sign-flip symmetries represented by monomial matrix groups.
+
+**Mirror implication:** permutation/sign/scale Views may be exact reparameterization symmetries rather than new functions. This provides an explicit symmetry audit for Mirror geometry.
+
+## PA48 — Reversible PEFT
+
+**Make Pre-trained Model Reversible: From Parameter to Memory Efficient Fine-Tuning**  
+https://arxiv.org/abs/2306.00477
+
+Uses adapters and reversible computation so activations can be reconstructed during backward, reducing training-memory requirements.
+
+**Mirror implication:** reversible Mirror transforms can target training-memory compression in addition to weight storage, but compute/recomputation cost must be reported separately.
+
 ## Research gaps that remain especially relevant here
 
 1. **Logical expert multiplicity from one physical expert via a structured view** — adjacent to expert tying, but not equivalent.
