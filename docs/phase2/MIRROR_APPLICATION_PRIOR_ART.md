@@ -1635,6 +1635,116 @@ Optimizes synchronized multi-agent rounds collectively, stores one master cache 
 **Mirror implication:** View families can be treated as a cache collective rather than independent requests. A master canonical cache plus sparse/structured Mirror differences can exploit group-wide amortization.
 
 
+
+## PA180 — MambaPEFT / Additional-scan
+
+**MambaPEFT: Exploring Parameter-Efficient Fine-Tuning for Mamba**  
+https://arxiv.org/abs/2411.03855
+
+Benchmarks PEFT on Mamba and introduces Additional-scan, which adds SSM state dimensions so new task information can be stored without modifying the original pretrained hidden-state dimensions.
+
+**Mirror implication:** recurrent state itself is a specialization substrate. Mirror can test whether many logical task states can share one physical recurrent state/scan plus small read/write/View coordinates before adding new state dimensions.
+
+## PA181 — EAGLE feature-level speculative decoding
+
+**EAGLE: Speculative Sampling Requires Rethinking Feature Uncertainty**  
+https://arxiv.org/abs/2401.15077
+
+Drafts at the target model's second-to-top-layer feature level and combines target features with shifted sampled tokens to resolve feature uncertainty.
+
+**Mirror implication:** hidden features can be a reusable canonical intermediate state. Multiple logical drafters/roles may be represented as Views over one target feature stream instead of separate draft-model state.
+
+## PA182 — EAGLE-3 multi-layer feature fusion
+
+**EAGLE-3: Scaling up Inference Acceleration of Large Language Models via Training-Time Test**  
+https://arxiv.org/abs/2503.01840
+
+Moves from top-layer feature prediction to direct token drafting with fused lower/middle/upper target features and training-time simulation of multi-step draft behavior.
+
+**Mirror implication:** a canonical multi-layer feature basis can feed several View-conditioned draft functions. This is a strong control for Mirror feature reuse across depth.
+
+## PA183 — LayerSkip self-speculative decoding
+
+**LayerSkip: Enabling Early Exit Inference and Self-Speculative Decoding**  
+https://arxiv.org/abs/2404.16710
+
+Trains one model for accurate early exits and uses early layers as a self-drafter while later layers verify/correct, avoiding a separate draft model.
+
+**Mirror implication:** logical draft/verifier roles can share one physical network and intermediate hidden state. Mirror should compress role differentiation or enable several exit behaviors without extra modules.
+
+## PA184 — S-LoRA
+
+**S-LoRA: Serving Thousands of Concurrent LoRA Adapters**  
+https://arxiv.org/abs/2311.03285
+
+Separates batchable shared-backbone computation from adapter-specific LoRA computation, uses unified paging for adapters and KV cache, and heterogeneous batched kernels.
+
+**Mirror implication:** multi-View serving must be compared at systems level to mature multi-adapter batching. View codes are useful only if they reduce adapter/state bytes or improve batching beyond a standard LoRA serving stack.
+
+## PA185 — Punica
+
+**Punica: Multi-Tenant LoRA Serving**  
+https://arxiv.org/abs/2310.18547
+
+Uses a Segmented Gather Matrix-Vector multiplication kernel to batch many different LoRA adapters while storing only one backbone copy on each GPU.
+
+**Mirror implication:** one physical backbone already supports many logical models efficiently. Mirror serving should target the remaining adapter/cache/state overhead and exploit fused heterogeneous View kernels.
+
+## PA186 — TokMem
+
+**One-Token Procedural Memory / TokMem**  
+https://arxiv.org/abs/2510.00444
+
+Compiles reusable procedures into individual learned memory-token embeddings on a frozen backbone and supports routing/chaining of procedure tokens.
+
+**Mirror implication:** one compact token is an extremely cheap functional coordinate. Mirror procedure codes must beat token embeddings in bytes, composition, or functional diversity.
+
+## PA187 — Memory Layers at Scale
+
+**Memory Layers at Scale**  
+https://arxiv.org/abs/2412.09764
+
+Scales sparse trainable key-value memory layers to very large parameter counts while keeping activated compute small and reports strong gains on factual tasks.
+
+**Mirror implication:** explicit memory is an alternative axis of capacity. Mirror may compress memory entries/keys, create logical memory Views, or share memory state across roles; weight compression is not automatically superior.
+
+## PA188 — Mixture of Chapters
+
+**Mixture of Chapters: Scaling Learnt Memory in Transformers**  
+https://arxiv.org/abs/2603.21096
+
+Partitions a large learned latent-token memory bank into routed chapters so only a small subset is attended per sequence.
+
+**Mirror implication:** memory chapter identity is another sparse functional coordinate. Mirror can test one physical chapter/basis serving several logical roles or factorized chapter x View addressing.
+
+## PA189 — L2P prompt pools
+
+**Learning To Prompt for Continual Learning**  
+https://arxiv.org/abs/2112.08654
+
+Stores task knowledge in a prompt pool and selects prompt subsets per input without requiring test-time task identity.
+
+**Mirror implication:** prompt/prefix state is a strong low-byte specialization baseline. Mirror prompt Views should beat explicit prompt pools in storage, routing or composition.
+
+## PA190 — LoRA-Muon
+
+**LoRA-Muon: Spectral Steepest Descent on the Low-Rank Manifold**  
+https://arxiv.org/abs/2606.12921
+
+Defines optimizer geometry directly on the low-rank manifold and avoids second-moment storage in its proposed realization.
+
+**Mirror implication:** when the extra freedom is placed in update space, optimizer geometry should be invariant to arbitrary factor coordinates. Mirror optimizer codes must be compared in function/update space rather than raw factor space.
+
+## PA191 — Flora
+
+**Flora: Low-Rank Adapters Are Secretly Gradient Compressors**  
+https://arxiv.org/abs/2402.03293
+
+Compresses gradient accumulation and momentum with resampled random projections, achieving high-rank cumulative weight updates with sublinear optimizer-state memory.
+
+**Mirror implication:** optimizer state itself can be a shared compressed substrate. Mirror can structure or reuse projection/state coordinates across tasks while allowing cumulative updates to escape one fixed low-rank subspace.
+
+
 ## Research gaps that remain especially relevant here
 
 1. **Logical expert multiplicity from one physical expert via a structured view** — adjacent to expert tying, but not equivalent.
