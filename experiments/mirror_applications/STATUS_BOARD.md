@@ -4,11 +4,11 @@ Updated: 2026-10-07
 
 ## Program totals
 
-- Registered candidates: **252**
-- P0: **33**
-- P1: **125**
+- Registered candidates: **254**
+- P0: **34**
+- P1: **126**
 - P2: **94**
-- Current MA statuses: **252 UNTESTED**
+- Current MA statuses: **254 UNTESTED**
 - Historical evidence lanes SRM/TM are not MA statuses.
 
 ## Next candidate
@@ -22,7 +22,7 @@ Why first:
 - failure cleanly bounds how much Mirror adds beyond ordinary expert tying.
 
 If MA-241 is blocked, use this order:
-MA-244 -> MA-245 -> MA-247 -> MA-248 -> MA-249 -> MA-250 -> MA-251 -> MA-003.
+MA-253 -> MA-244 -> MA-245 -> MA-247 -> MA-248 -> MA-249 -> MA-250 -> MA-251 -> MA-003.
 
 ## Active experiments
 
