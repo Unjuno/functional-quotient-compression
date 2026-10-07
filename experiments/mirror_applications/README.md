@@ -1,6 +1,6 @@
 # Mirror application experiments
 
-This lane tests where the extra Mirror/View coordinate can replace physical duplication with logical multiplicity.
+This lane tests where the extra low-description Mirror/View functional parameter `m` can be inserted into existing methods to replace physical duplication or add useful logical functional freedom at worthwhile marginal cost.
 
 Files:
 - IDEA_REGISTRY.csv — 875 candidate applications with status, prior-art links and first control.
@@ -20,6 +20,7 @@ The design rationale is documented in ../../docs/phase2/MIRROR_APPLICATION_DESIG
 
 Before starting an MA experiment, read:
 - [worker start guide](../../WORKER_START_HERE.md)
+- [Mirror parameter integration doctrine](../../docs/phase2/MIRROR_PARAMETER_INTEGRATION_DOCTRINE.md)
 - [latest verified worker findings and design rules](../../docs/phase2/LATEST_WORKER_FINDINGS.md)
 - [minimal-context router](CONTEXT_ROUTER.md)
 - [prior-art map](../../docs/phase2/MIRROR_APPLICATION_PRIOR_ART.md)
