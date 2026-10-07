@@ -3,16 +3,16 @@
 - Status: PROMISING, aligned storage/quality gain with major runtime regression
 - Branch: `research/ma-181-compression-view-20261007`
 - Base commit: `24b6c2e2ff699a48d8ad1246ff9c205b6cc71964`
-- Last verified commit: pending
+- Last verified commit: `09fadf2f2908ce81742d2de09ea6ffa42b40cc30`
 - Development complete: yes
 - Fresh/audit opened: yes, after selected LR 0.01 passed both dev gates
-- Results committed: no
-- Verification committed: no
-- Registry row updated: pending
+- Results committed: yes (`09fadf2f2908ce81742d2de09ea6ffa42b40cc30`)
+- Verification committed: yes (`09fadf2f2908ce81742d2de09ea6ffa42b40cc30`)
+- Registry row updated: yes in tracker commit
 
 ## Next action
 
-Commit the checked result, update trackers, push the dedicated research branch, and continue to MA-186.
+Push the research branch and continue to MA-186.
 
 ## Blockers
 
