@@ -225,6 +225,39 @@ Operational rule:
 - when entering a new family, use the family-specific direct prior as the mandatory control;
 - MA-770 is a benchmark/meta-experiment, not permission to skip the component screens.
 
+## Ninth research-expansion queue — invertible coordinates, expert reuse and compositional dynamics
+
+Added after the invertible-flow/MoE-reuse/latent-dynamics/robot-control sweep. Do not interrupt active or already-locked work.
+
+High-information P0:
+1. MA-776/777 — INNSteer nonlinear activation chart and factorized conditional behavior
+2. MA-781/783 — MoRE and UniPool shared expert pools with Mirror depth/layer Views
+3. MA-785/786 — M-SMoE merged experts as physical orbit centers with logical member recovery
+4. MA-787/788 — Expert-Upcycling physical duplication versus cheap logical duplication
+5. MA-789/790 — Cluster-aware and sparse-interpolated upcycling coordinates
+6. MA-791/792 — REAP-aware logical recovery and routing-free Mirror experts
+7. MA-794/795 — global reused pool factorization and learn-many->compact logical recovery
+8. MA-796/798 — low-rank recurrent shared dynamical components and held-out composition
+9. MA-800/801 — Vector-Network reusable rank-1 atoms with persistent x fast coordinates
+10. MA-802/803/805 — Koopman latent operator Views and neural-operator bridge
+11. MA-806/807 — invertible one-step robot-policy Views and embodiment x task factorization
+12. MA-810/811/813 — motor option-bank compression, positional role factorization and code-only new skills
+13. MA-816/817/818 — explicit what x how computation coordinates
+14. MA-819 — ESE shared equilibrium state with system-role Views
+15. MA-821/822 — task-demanded rank allocation in Matrix Mirror memory
+16. MA-823/824 — GrapNet topology-program x node-function factorization
+
+P1 follow-ups remain in registry order inside MA-771..825.
+
+Operational rule:
+- append behind existing locked/research queues;
+- do not change the current next candidate;
+- MoE-reuse experiments must compare physical expert count, logical expert count and router/load-balancing cost separately;
+- invertible experiments must report inverse/cycle error and transform latency;
+- recurrent/Koopman experiments must report long-horizon stability;
+- robot-control experiments must report per-skill bytes, inference latency and rollout conditions;
+- programmable-architecture experiments must count graph/program metadata as stored state.
+
 ## Current P0 sequence
 
 ### Family A — FFN / MoE / adapter
