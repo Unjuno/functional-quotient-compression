@@ -47,7 +47,7 @@ When a worker starts an MA experiment, add:
 
 ## Recently completed
 
-- MA-079 — PROMISING for sparse depth interpolation on the aligned teacher: 3/3 fresh worlds recovered held-out maps at median MSE 3.36e-12 with 2,149B vs 3,753B sparse-trained untied and 2,213B generated gain. Independent maps did not benefit; untied held-out quality is not a fully supervised upper control. Branch `research/ma-079-learned-depth-address-20261007`; report `experiments/mirror_applications/ma-079-learned-depth-address/README.md`; result commit pending.
+- MA-079 — PROMISING for sparse depth interpolation on the aligned teacher: 3/3 fresh worlds recovered held-out maps at median MSE 3.36e-12 with 2,149B vs 3,753B sparse-trained untied and 2,213B generated gain. Independent maps did not benefit; untied held-out quality is not a fully supervised upper control. Branch `research/ma-079-learned-depth-address-20261007`; report `experiments/mirror_applications/ma-079-learned-depth-address/README.md`; result commit `f1cf8d6a64e7f3fbee4b25bddfba71f0a8f731db`.
 
 - MA-076 — PROMISING on the deliberately Givens-aligned depth teacher: matched untied quality in 3/3 fresh worlds with 21.3% fewer payload bytes; independent layer maps remained poorly fit and eager CPU throughput was 0.235x untied. Branch `research/ma-076-one-block-many-layers-20261007`; report `experiments/mirror_applications/ma-076-one-block-many-layers/README.md`; result commit `418a888bfebfb9bf0ad38dbc1b3c97a5001ec7ce`.
 

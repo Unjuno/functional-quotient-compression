@@ -3,12 +3,12 @@
 - Status: PROMISING
 - Branch: `research/ma-079-learned-depth-address-20261007`
 - Base commit: `a761cc84422c323e78ad8290a2ff6581bc39723a`
-- Last verified commit: pending
+- Last verified commit: `f1cf8d6a64e7f3fbee4b25bddfba71f0a8f731db`
 - Development complete: yes; seeds 79001–79002
 - Fresh/audit opened: yes; seeds 79011–79013 after development gate
-- Results committed: pending
-- Verification committed: pending
-- Registry row updated: pending
+- Results committed: yes (`f1cf8d6a64e7f3fbee4b25bddfba71f0a8f731db`)
+- Verification committed: yes (`f1cf8d6a64e7f3fbee4b25bddfba71f0a8f731db`)
+- Registry row updated: yes
 
 ## H / T / D / C / U
 
