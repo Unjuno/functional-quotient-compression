@@ -950,6 +950,15 @@ Constrains low-rank updates so the resulting weight change affects selected rows
 
 **Mirror implication:** when Mirror edits are claimed to be local or knowledge-preserving, sparse low-rank updates are a strong locality control.
 
+## PA105 — Rotary Position Embedding
+
+**RoFormer: Enhanced Transformer with Rotary Position Embedding**  
+https://arxiv.org/abs/2104.09864
+
+Encodes position through rotation matrices applied to query/key representations while inducing explicit relative-position structure in attention.
+
+**Mirror implication:** positional rotation is an established structured coordinate transformation. Mirror-RoPE experiments should test additional logical positional/domain roles beyond standard RoPE rather than claim rotation itself as new.
+
 ## Research gaps that remain especially relevant here
 
 1. **Logical expert multiplicity from one physical expert via a structured view** — adjacent to expert tying, but not equivalent.
