@@ -5,9 +5,9 @@
 - Base commit: `f45deaeccb` (full SHA in protocol)
 - Development complete: yes; selected LR 0.01
 - Fresh/audit opened: yes; worlds 90001–90003
-- Results committed: pending
-- Verification committed: pending
-- Registry row updated: pending
+- Results committed: yes (`e2232f0382eb66721e90d7b295fb0b2c33eb9731`)
+- Verification committed: yes (`e2232f0382eb66721e90d7b295fb0b2c33eb9731`)
+- Registry row updated: yes (tracker commit pending)
 
 ## H / T / D / C / U
 

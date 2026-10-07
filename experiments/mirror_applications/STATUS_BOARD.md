@@ -8,19 +8,19 @@ Updated: 2026-10-07
 - P0: **34**
 - P1: **126**
 - P2: **94**
-- Current MA statuses: **242 UNTESTED, 1 SCREENING, 8 PROMISING, 3 FAIL**
+- Current MA statuses: **242 UNTESTED, 8 PROMISING, 4 FAIL**
 - Historical evidence lanes SRM/TM are not MA statuses.
 
 ## Next candidate
 
-**MA-009 — shared Mirror experts + rare private expert**
+**MA-019 — Mirror expert residual rank allocation**
 
 Why next:
-- MA-241, MA-244, MA-245, MA-247, MA-248, MA-249, MA-250, MA-251, MA-253, MA-003 and MA-005 are checked; MA-009 is the next executable P0 candidate.
-- its closest controls should compare rare private experts against shared expert views and standard full MoE (PA01–PA03).
+- MA-241, MA-244, MA-245, MA-247, MA-248, MA-249, MA-250, MA-251, MA-253, MA-003, MA-005 and MA-009 are checked; MA-019 is the next executable P0 candidate.
+- its closest controls should compare Mirror expert residuals against shared bases and ordinary LoRA/low-rank controls (PA01–PA06).
 
-If MA-009 is blocked, use this order:
-MA-019 -> MA-024.
+If MA-019 is blocked, use this order:
+MA-024.
 
 ## Active experiments
 
@@ -39,6 +39,7 @@ When a worker starts an MA experiment, add:
 
 - MA-003 — PROMISING: aligned synthetic top-1 Mirror experts passed routed-MSE gate in 2/3 fresh worlds with 35.8% fewer serialized bytes; independent experts needed private capacity; CPU inference was slower. Branch `research/ma-003-mirror-topk-expert-20261007`; report `experiments/mirror_applications/ma-003-mirror-topk-expert/README.md`; result commit `e50a20fe4c000ffb3113f9d3e6564b3efacd4395`.
 - MA-005 — PROMISING: signed Givens expert mixture passed aligned quality/storage 3/3 with 41.1% fewer serialized bytes; arbitrary experts required private capacity; current CPU runtime regressed sharply. Branch `research/ma-005-signed-mirror-mixture-20261007`; report `experiments/mirror_applications/ma-005-signed-mirror-mixture/README.md`; result commit `de68ec4c440e54fc4870734e9bbd1fdc99515628`.
+- MA-009 — FAIL: one private rare-role expert plus common Mirror views used 0.774x full-MoE bytes and beat shared-only controls, but missed full-MoE relative MSE in 2/3 fresh worlds; arbitrary experts needed more capacity and CPU runtime regressed. Branch `research/ma-009-rare-private-mirror-expert-20261007`; report `experiments/mirror_applications/ma-009-rare-private-mirror-expert/README.md`; result commit `e2232f0382eb66721e90d7b295fb0b2c33eb9731`.
 - MA-247 through MA-251 are complete and verified.
 
 ## Recently completed
