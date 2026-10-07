@@ -23,6 +23,7 @@ If MA-186 is blocked, use the next eligible P0 in the registry.
 
 ## Active experiments
 
+- MA-001 — `research/ma-001-mirror-top1-expert-20261007`; directory `experiments/mirror_applications/ma-001-nonlinear-top1-expert/`; start commit `fa635d0` (MA-111 verified base). Scoped as a nonlinear single-layer top-1 extension of MA-003's linear screen; fresh gate stays sealed until development decision.
 
 
 
