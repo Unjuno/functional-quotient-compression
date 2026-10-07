@@ -18,6 +18,11 @@ Files:
 The corresponding narrative report is:
 - [../docs/phase2/SRM001_SHARED_RULE_MOE.md](../docs/phase2/SRM001_SHARED_RULE_MOE.md)
 
+
+### Token mixing / parallel period generation
+
+- [TM001 parallel period token mixing](token_mixing/tm001_20261007/) — one-forward P-token phase slots, hidden packet-latent boundary, and CPU cached-AR benchmark.
+
 ## Preserved historical lanes
 
 - `mirror_native/` — MN-series shared-state / Mirror experiments;
