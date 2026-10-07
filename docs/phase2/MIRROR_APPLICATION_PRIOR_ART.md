@@ -569,6 +569,159 @@ Represents many child architectures as subgraphs of one shared supernetwork.
 
 **Mirror implication:** architecture configuration can be another low-description logical coordinate, but weight-sharing bias/interference is a known confound. Mirror corrections should be evaluated against the same child architectures trained independently where practical.
 
+## PA63 — FiLM conditioning
+
+**FiLM: Visual Reasoning with a General Conditioning Layer**  
+https://arxiv.org/abs/1709.07871
+
+Applies conditioning-dependent feature-wise affine transformations, with a generator producing per-channel scale and bias.
+
+**Mirror implication:** conditional feature scaling is a very cheap functional coordinate. Richer Mirror activation/feature views must beat FiLM in quality-per-byte or compositional behavior.
+
+## PA64 — SPADE / spatially adaptive normalization
+
+**Semantic Image Synthesis with Spatially-Adaptive Normalization**  
+https://openaccess.thecvf.com/content_CVPR_2019/html/Park_Semantic_Image_Synthesis_With_Spatially-Adaptive_Normalization_CVPR_2019_paper.html
+
+Generates spatially varying affine normalization parameters from conditioning input.
+
+**Mirror implication:** the View coordinate need not be global; it may vary over token/position. Token-wise or spatial Mirror modulation should compare against conditional affine normalization.
+
+## PA65 — StyleGAN2 weight modulation
+
+**Analyzing and Improving the Image Quality of StyleGAN**  
+https://arxiv.org/abs/1912.04958
+
+Modulates convolution weights per sample using a compact style vector and then demodulates them. Equivalent feature scaling can be folded into effective weights.
+
+**Mirror implication:** this is one of the closest examples of a small latent changing effective weights at inference. Mirror-weight modulation must compare against simple channel-wise modulation/demodulation.
+
+## PA66 — CondConv
+
+**Conditionally Parameterized Convolutions for Efficient Inference**  
+https://arxiv.org/abs/1904.04971
+
+Builds an input-specific kernel as a learned linear combination of physical expert kernels and applies the resulting kernel once.
+
+**Mirror implication:** dynamic effective weights can be created by coefficient mixing without running all experts. Mirror dynamic-weight methods should compare storage and runtime against conditional kernel/weight synthesis.
+
+## PA67 — Dynamic Convolution
+
+**Dynamic Convolution: Attention over Convolution Kernels**  
+https://arxiv.org/abs/1912.03458
+
+Aggregates several kernels by input-dependent attention weights before applying the convolution.
+
+**Mirror implication:** input-dependent mixing coefficients are a strong baseline for dynamic logical functions. A View must add structure beyond ordinary convex/soft kernel mixtures.
+
+## PA68 — DeepSDF latent-code decoder
+
+**DeepSDF: Learning Continuous Signed Distance Functions for Shape Representation**  
+https://arxiv.org/abs/1901.05103
+
+Represents many shapes with one shared continuous decoder and compact per-shape latent codes; new instance codes can be optimized while the decoder is shared.
+
+**Mirror implication:** one shared function plus instance latent code is a direct physical-to-logical pattern. Mirror latent codes should be evaluated by code size, interpolation/generalization and reconstruction quality.
+
+## PA69 — Modulated implicit neural representations
+
+**Modulated Periodic Activations for Generalizable Local Functional Representations**  
+https://openaccess.thecvf.com/content/ICCV2021/papers/Mehta_Modulated_Periodic_Activations_for_Generalizable_Local_Functional_Representations_ICCV_2021_paper.pdf
+
+Uses latent codes and a modulation network to alter amplitude, phase and frequency of periodic activations in a shared synthesis MLP.
+
+**Mirror implication:** nonlinear activation geometry itself can be the functional coordinate. Mirror-SIREN/activation views need this as a direct control.
+
+## PA70 — Neural ODEs
+
+**Neural Ordinary Differential Equations**  
+https://arxiv.org/abs/1806.07366
+
+Defines continuous-depth models by repeatedly integrating a shared learned vector field, trading explicit layer copies for a continuous computation trajectory.
+
+**Mirror implication:** depth can be represented by state/time in a shared dynamical rule. Depth Mirror experiments should distinguish discrete role specialization from continuous shared dynamics.
+
+## PA71 — Deep Equilibrium Models
+
+**Deep Equilibrium Models**  
+https://arxiv.org/abs/1909.01377
+
+Uses a weight-tied transformation solved to a fixed point, representing effectively infinite depth with one physical layer and implicit differentiation.
+
+**Mirror implication:** repeated logical depth does not require independent blocks. Mirror can test multiple equilibria/roles or condition the shared fixed-point map, but must compare solve cost and stability.
+
+## PA72 — Universal Transformer
+
+**Universal Transformers**  
+https://arxiv.org/abs/1807.03819
+
+Recurrently applies a shared transition function across depth with timestep/depth information and optional adaptive computation.
+
+**Mirror implication:** a depth address already differentiates repeated shared computation. Mirror-depth claims should compare against simple timestep embeddings and recurrent sharing.
+
+## PA73 — Mamba selective state spaces
+
+**Mamba: Linear-Time Sequence Modeling with Selective State Spaces**  
+https://arxiv.org/abs/2312.00752
+
+Makes parts of the state-space dynamics input-dependent, allowing selective propagation/forgetting while retaining efficient recurrent execution.
+
+**Mirror implication:** the functional coordinate can modulate state dynamics per token. Mirror-SSM ideas need selective-SSM controls.
+
+## PA74 — S4 structured state spaces
+
+**Efficiently Modeling Long Sequences with Structured State Spaces**  
+https://arxiv.org/abs/2111.00396
+
+Uses structured normal-plus-low-rank state matrices and efficient convolution/recurrent forms for long sequence modeling.
+
+**Mirror implication:** state-transition Views can be applied in an already structured low-description parameterization; compare to S4's native structure rather than dense transition matrices.
+
+## PA75 — MAML
+
+**Model-Agnostic Meta-Learning for Fast Adaptation of Deep Networks**  
+https://arxiv.org/abs/1703.03400
+
+Learns a shared initialization designed so a small number of task-specific gradient steps produce effective specialized models.
+
+**Mirror implication:** task-specific logical functions can arise from a shared point plus a short update trajectory. Mirror task codes should compare against few-step adaptation cost and resulting delta storage.
+
+## PA76 — LEO
+
+**Meta-Learning with Latent Embedding Optimization**  
+https://arxiv.org/abs/1807.05960
+
+Learns a low-dimensional task latent, optimizes it, and decodes it into high-dimensional task parameters.
+
+**Mirror implication:** low-dimensional functional coordinates plus a decoder are a direct alternative to structured Mirror codes. Compare decoder size, adaptation steps and code size.
+
+## PA77 — Learned optimizers
+
+**Learning to learn by gradient descent by gradient descent**  
+https://arxiv.org/abs/1606.04474
+
+Learns a recurrent optimizer that maps gradients/history to parameter updates.
+
+**Mirror implication:** the added freedom may live in the update rule rather than the forward model. Mirror-optimizer coordinates should compare against learned update policies and standard optimizers.
+
+## PA78 — Doubly sparse explicitly conditioned transforms
+
+**Learning Doubly Sparse Explicitly Conditioned Transforms**  
+https://arxiv.org/abs/2606.10975
+
+Models a transform as a fixed canonical matrix followed by a learned sparse refining factor with explicit conditioning/stability constraints.
+
+**Mirror implication:** "fixed efficient transform + sparse adaptive refinement" is a direct structured-View family and control for FFT/DCT/Hadamard Mirror variants.
+
+## PA79 — Concept Modulation Models
+
+**Concept Modulation Models: A Unified Framework for Identifiability and Extrapolation**  
+https://arxiv.org/abs/2606.18509
+
+Formalizes attribute-indexed modulators that induce concept distributions under a shared generative mechanism and analyzes identifiability/extrapolation through attribute potentials.
+
+**Mirror implication:** factorized Mirror attributes should be evaluated for extrapolation to unseen coordinate combinations, not only interpolation on trained addresses.
+
 ## Research gaps that remain especially relevant here
 
 1. **Logical expert multiplicity from one physical expert via a structured view** — adjacent to expert tying, but not equivalent.
