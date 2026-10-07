@@ -23,6 +23,8 @@ If MA-186 is blocked, use the next eligible P0 in the registry.
 
 ## Active experiments
 
+- MA-002 — `research/ma-002-mirror-top2-expert-20261007`; directory `experiments/mirror_applications/ma-002-mirror-top2-expert/`; start commit `4236bb6` (verified MA-001 base). Scoped as learned sparse top-2 composition over nonlinear experts, distinct from MA-001 top-1 and MA-005 all-expert signed mixture.
+
 
 
 When a worker starts an MA experiment, add:
