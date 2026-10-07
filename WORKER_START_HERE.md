@@ -6,14 +6,15 @@ This repository contains several historical research lanes. Do not infer the cur
 
 1. `docs/phase2/CURRENT_STATE_2026-10-07.md`
 2. `docs/phase2/MIRROR_PARAMETER_INTEGRATION_DOCTRINE.md`
-3. `docs/phase2/MIRROR_APPLICATION_DESIGN_SPACE.md`
-4. `docs/phase2/LATEST_WORKER_FINDINGS.md`
-5. `experiments/mirror_applications/CONTEXT_ROUTER.md`
-6. `docs/phase2/MIRROR_APPLICATION_PRIOR_ART.md`
-7. `experiments/mirror_applications/IDEA_REGISTRY.csv`
-8. `experiments/mirror_applications/FIRST_QUEUE.md`
-9. `experiments/mirror_applications/EXPERIMENT_CONTRACT.md`
-10. `roadmap/MIRROR_APPLICATION_ROADMAP.md`
+3. `docs/phase2/MIRROR_PARAMETER_INTEGRATION_MATRIX.md`
+4. `docs/phase2/MIRROR_APPLICATION_DESIGN_SPACE.md`
+5. `docs/phase2/LATEST_WORKER_FINDINGS.md`
+6. `experiments/mirror_applications/CONTEXT_ROUTER.md`
+7. `docs/phase2/MIRROR_APPLICATION_PRIOR_ART.md`
+8. `experiments/mirror_applications/IDEA_REGISTRY.csv`
+9. `experiments/mirror_applications/FIRST_QUEUE.md`
+10. `experiments/mirror_applications/EXPERIMENT_CONTRACT.md`
+11. `roadmap/MIRROR_APPLICATION_ROADMAP.md`
 
 Read historical reports only when the selected MA experiment points to them.
 
