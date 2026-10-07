@@ -2,14 +2,12 @@
 
 - Status: SCREENING
 - Branch: `research/ma-006-expert-choice-mirror-20261007`
-- Base commit: `eca36e2` (verified MA-004 parent)
-- Protocol frozen before development; data not opened
-- Registry: UNTESTED
-
-## Routing contract
-
-Expert-choice dispatch gives each expert exactly batch_size/4 candidate tokens; overlaps are allowed and unselected tokens receive zero MoE output. Dense token-choice top-1 is the routing comparator. No oracle fallback is supplied.
+- Protocol/source freeze: `d1d0d76`
+- Development complete: yes; selected LR 0.003 by preregistered pooled MSE
+- Development fresh gate: passed (Mirror/full expert-choice MSE ratio 1.0046; payload ratio 0.3325)
+- Fresh/audit opened: no; settings and worlds frozen
+- Registry: SCREENING
 
 ## Next action
 
-Implement and test capacity routing and the expert controls; freeze source hashes before development. Fresh remains sealed unless the registered development gate passes.
+Run fresh worlds 60001–60003 unchanged, including the full token-choice comparison.

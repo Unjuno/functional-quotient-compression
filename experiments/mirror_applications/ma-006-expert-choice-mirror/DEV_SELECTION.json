@@ -1,0 +1,49 @@
+{
+  "experiment_id": "MA-006",
+  "stage": "development_selection_before_fresh_access",
+  "selected_learning_rate": 0.003,
+  "selection_rule": "minimum mean heldout MSE across eight methods and both teacher modes on development world 60000",
+  "mean_heldout_mse_by_learning_rate": {
+    "0.001": 0.017446511861635372,
+    "0.003": 0.01529261376708746,
+    "0.01": 0.015318829158786684
+  },
+  "rows_per_learning_rate": 16,
+  "development_open_fresh_gate": {
+    "aligned_mirror_to_full_expert_choice_mse_ratio": 1.00460189210952,
+    "aligned_mirror_to_full_expert_choice_payload_ratio": 0.33250503406023735,
+    "thresholds": {
+      "mse_max": 1.25,
+      "payload_max": 0.65
+    },
+    "passed": true
+  },
+  "strongest_route_control_at_selected_lr": {
+    "mirror_to_full_token_choice_mse_ratio": 2.6226483259216575,
+    "note": "descriptive comparator; not an access gate"
+  },
+  "selected_configuration_frozen": {
+    "updates": 1200,
+    "batch_size": 64,
+    "methods": [
+      "full_ec",
+      "full_token",
+      "full_rank2_ec",
+      "full_rank2_token",
+      "tied_ec",
+      "film_ec",
+      "residual2_ec",
+      "mirror_ec"
+    ],
+    "teacher_modes": [
+      "aligned",
+      "independent"
+    ],
+    "fresh_worlds": [
+      60001,
+      60002,
+      60003
+    ]
+  },
+  "fresh_access_authorized_by_preregistered_gate": true
+}
