@@ -3,12 +3,12 @@
 - Status: PROMISING
 - Branch: `research/ma-076-one-block-many-layers-20261007`
 - Base commit: `ccf4d5c4e83992d70ccdc5db6032e428f6532380`
-- Last verified commit: pending
+- Last verified commit: `418a888bfebfb9bf0ad38dbc1b3c97a5001ec7ce`
 - Development complete: yes; seeds 76001–76002
 - Fresh/audit opened: yes; seeds 76011–76013, after development gate
-- Results committed: pending
-- Verification committed: pending
-- Registry row updated: pending
+- Results committed: yes (`418a888bfebfb9bf0ad38dbc1b3c97a5001ec7ce`)
+- Verification committed: yes (`418a888bfebfb9bf0ad38dbc1b3c97a5001ec7ce`)
+- Registry row updated: yes
 
 ## H / T / D / C / U
 

@@ -47,7 +47,7 @@ When a worker starts an MA experiment, add:
 
 ## Recently completed
 
-- MA-076 — PROMISING on the deliberately Givens-aligned depth teacher: matched untied quality in 3/3 fresh worlds with 21.3% fewer payload bytes; independent layer maps remained poorly fit and eager CPU throughput was 0.235x untied. Branch `research/ma-076-one-block-many-layers-20261007`; report `experiments/mirror_applications/ma-076-one-block-many-layers/README.md`; result commit pending.
+- MA-076 — PROMISING on the deliberately Givens-aligned depth teacher: matched untied quality in 3/3 fresh worlds with 21.3% fewer payload bytes; independent layer maps remained poorly fit and eager CPU throughput was 0.235x untied. Branch `research/ma-076-one-block-many-layers-20261007`; report `experiments/mirror_applications/ma-076-one-block-many-layers/README.md`; result commit `418a888bfebfb9bf0ad38dbc1b3c97a5001ec7ce`.
 
 - MA-251 — PROMISING: factorized Givens expert/depth coordinates matched untied quality 3/3 with 76.4% fewer bytes; independent pair functions required more capacity; CPU throughput regression recorded. Branch `research/ma-251-expert-depth-factorization-20261007`; report `experiments/mirror_applications/ma-251-expert-depth-factorization/README.md`; result commit `f494b8986a3807e512d0255811f62857758c7ca6`.
 
