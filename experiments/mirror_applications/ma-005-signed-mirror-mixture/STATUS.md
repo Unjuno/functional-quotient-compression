@@ -3,7 +3,7 @@
 - Status: SCREENING
 - Branch: `research/ma-005-signed-mirror-mixture-20261007`
 - Base commit: `e50a20fe4c000ffb3113f9d3e6564b3efacd4395`
-- Development complete: no
+- Development complete: yes; v1 selected LR 0.01
 - Fresh/audit opened: no
 - Results committed: no
 - Verification committed: no
@@ -11,7 +11,7 @@
 
 ## Next action
 
-Run the frozen development comparison on world 50000, then freeze source, tests, selected LR and hashes before opening fresh worlds.
+Source, tests, protocol, selected LR and dev-row hashes are frozen. Verify manifest, then open fresh worlds 50001–50003.
 
 ## Blockers
 
