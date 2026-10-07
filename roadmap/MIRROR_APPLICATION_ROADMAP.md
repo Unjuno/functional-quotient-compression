@@ -98,7 +98,7 @@ These do not preempt an already-started worker experiment. They enter the queue 
 
 ## Expansion lanes discovered by research
 
-The backlog now contains **400 candidates**. Recent literature sweeps add four new strategic lanes:
+The backlog now contains **500 candidates**. Recent literature sweeps add four new strategic lanes:
 
 ### A. Representation selection
 Masks/supermasks and intrinsic subspaces ask whether a task needs a new weight transform at all, or only a compact selector/coordinate.
