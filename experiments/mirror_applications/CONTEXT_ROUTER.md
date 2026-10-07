@@ -57,18 +57,23 @@ Read:
 Default baseline ladder:
 IA3 -> BatchEnsemble rank-one -> VeRA/shared low-rank -> candidate -> candidate+private residual -> independent LoRA.
 
+### LoRA composition libraries
+Read PA148–149 when referenced.
+
+Compare code-space precomposition against executing multiple full LoRAs. Active adapter FLOPs are a first-class metric.
+
 ### Temporal / packet / parallel streams
 Read:
 - TM001 first.
 - PA09/10 for multi-token/parallel-token;
-- PA96 for multi-stream when referenced.
+- PA153 for multi-stream when referenced.
 
 Joint consistency is mandatory. Per-slot token accuracy alone is insufficient.
 
 ### Quantization / gauge
 Read:
 - symmetry-audit section of LATEST_WORKER_FINDINGS;
-- PA55/56/57.
+- PA112/113/114.
 
 Exact function-preserving rotations/scales count as zero functional multiplicity but may still improve quantization. Full-precision equivalence must be tested.
 
@@ -88,8 +93,13 @@ Read PA21/23/24/34/35/36/45 as referenced.
 
 Measure actual runtime: structured asymptotic savings may lose to dense GEMM at small scale.
 
+### Modular execution / function codes
+Read PA127–128 as referenced.
+
+Keep routing/composition and function-parameterization errors separate. Neural Interpreter is a direct baseline for compact function code + shared executor.
+
 ### Function codes / meta-learning / implicit representations
-Read PA71–76 as referenced.
+Read PA128–133 as referenced.
 
 The direct question is not whether small codes can represent functions — prior art establishes that — but whether Mirror structure improves:
 - code size;
@@ -100,7 +110,7 @@ The direct question is not whether small codes can represent functions — prior
 - private-residual need.
 
 ### Model editing / episodic memory
-Read PA78–84 and PA95 as referenced.
+Read PA135–141 and PA152 as referenced.
 
 Always report:
 - edit efficacy;
@@ -113,7 +123,7 @@ Always report:
 Explicit memory is a strong control; parameter compression is not automatically superior.
 
 ### Test-time writable memory / SSM
-Read PA77, PA87–90.
+Read PA134 and PA144–147.
 
 Separate:
 - fixed model parameters;
