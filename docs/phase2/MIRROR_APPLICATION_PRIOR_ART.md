@@ -1568,3 +1568,260 @@ Before implementing an MA candidate:
 3. write down the exact delta from prior art in the experiment README;
 4. include the closest non-Mirror prior as a control when feasible;
 5. do not claim novelty from absence of a paper in this map.
+
+## PA171 — Householder / scaled-Cayley orthogonal parameterizations
+
+**Efficient Orthogonal Parametrisation of Recurrent Neural Networks Using Householder Reflections**  
+https://proceedings.mlr.press/v70/mhammedi17a/mhammedi17a.pdf
+
+Parameterizes orthogonal matrices as products of Householder-style reflections with efficient matrix-vector application and gradient computation.
+
+**Orthogonal Recurrent Neural Networks with Scaled Cayley Transform**  
+https://proceedings.mlr.press/v80/helfrich18a.html
+
+Parameterizes recurrent matrices through a scaled Cayley transform of skew-symmetric matrices to retain orthogonality while allowing the relevant sign/eigenvalue cases.
+
+**Mirror implication:** reflection vectors or skew-symmetric coordinates are compact, stable transform families for task/expert/recurrent Views. Mirror experiments using them must compare expressivity, matrix-free runtime and stability against OFT/BOFT rather than claiming orthogonality itself as novel.
+
+## PA172 — Group-and-Shuffle / GSOFT
+
+**Group and Shuffle: Efficient Structured Orthogonal Parametrization**  
+https://arxiv.org/abs/2406.10019
+
+Introduces Group-and-Shuffle structured matrices and GSOFT, using alternating small block transforms and permutations to form dense orthogonal transformations with fewer stages than butterfly constructions in the tested setting.
+
+**Mirror implication:** GS matrices are a direct hardware-oriented candidate for a low-description View. The open question is whether one shared physical object plus many GS codes yields useful logical multiplicity beyond simply training one GSOFT transform per task.
+
+## PA173 — low-displacement-rank neural matrices
+
+**Theoretical Properties for Neural Networks with Weight Matrices of Low Displacement Rank**  
+https://proceedings.mlr.press/v70/zhao17b/zhao17b.pdf
+
+Studies neural networks whose dense weight matrices are represented by low-displacement-rank structure, including Toeplitz-like families, and analyzes their approximation/expressivity properties.
+
+**Mirror implication:** displacement generators can be treated as the shared physical bank while small task/layer codes select logical matrices. This is a stronger structured-matrix control than arbitrary dense Mirror transforms.
+
+## PA174 — learned compressed transforms with low displacement rank
+
+**Learning Compressed Transforms with Low Displacement Rank**  
+https://proceedings.neurips.cc/paper_files/paper/2018/file/8e621619d71d0ae5ef4e631ad586334f-Paper.pdf
+
+Learns fast compressed transforms in a low-displacement-rank family rather than restricting the model to a single fixed Toeplitz/circulant form.
+
+**Mirror implication:** learnable displacement structure supplies a reusable atom bank for logical Views. Compare learned LDR atoms, sparse coefficient composition and physical pruning before introducing richer transforms.
+
+## PA175 — DARE sparse task deltas
+
+**Language Models are Super Mario: Absorbing Abilities from Homologous Models as a Free Lunch**  
+https://arxiv.org/abs/2311.03099
+
+Introduces DARE, which drops many parameters from fine-tuning deltas and rescales the retained entries before model merging, exploiting redundancy in task deltas.
+
+**Mirror implication:** sparse task deltas are a direct preconditioner/control for task-vector Mirror storage. Any claimed compression from a Mirror delta basis must be measured after DARE-style sparsification as well as before it.
+
+## PA176 — DELLA magnitude-aware merging
+
+**DELLA-Merging: Reducing Interference in Model Merging through Magnitude-Based Sampling**  
+https://arxiv.org/abs/2406.11617
+
+Uses magnitude-aware sampling of task-vector entries to reduce destructive interference during model merging.
+
+**Mirror implication:** magnitude is a principled signal for deciding which delta components deserve shared coordinate capacity. Mirror shared/private allocation must compare against DELLA rather than random sparsification alone.
+
+## PA177 — RegMean / dataless regression merging
+
+**Dataless Knowledge Fusion by Merging Weights of Language Models**  
+https://arxiv.org/abs/2212.09849
+
+Introduces Regression Mean (RegMean), which uses layer-input Gram statistics to derive closed-form merged linear weights without requiring the original training examples at merge time.
+
+**Mirror implication:** sufficient statistics can determine merge coefficients. A compact View-space merger should test whether the same statistics can solve for Mirror coordinates with less stored model state while preserving the RegMean objective.
+
+## PA178 — Fisher-weighted model merging
+
+**Merging Models with Fisher-Weighted Averaging**  
+https://arxiv.org/abs/2111.09832
+
+Approximates each model posterior with a Laplace/Fisher precision and merges parameters using importance-weighted averaging rather than an isotropic mean.
+
+**Mirror implication:** importance weighting belongs in coordinate-space composition too. Compare Fisher-weighted Mirror-code merging against both full-weight Fisher merging and unweighted View arithmetic.
+
+## PA179 — Model Stock
+
+**Model Stock: All we need is just a few fine-tuned models**  
+https://arxiv.org/abs/2403.19522
+
+Studies how a small number of fine-tuned models can define useful interpolation geometry for producing a stronger merged model.
+
+**Mirror implication:** a small model stock can itself define a low-dimensional functional manifold. Mirror should test whether that geometry can be represented by smaller reusable coordinates rather than storing many explicit interpolation endpoints.
+
+## PA180 — KnOTS aligned LoRA merging
+
+**Model merging with SVD to tie the Knots**  
+https://arxiv.org/abs/2410.19735
+
+Uses a joint SVD-derived transformation to align heterogeneous LoRA update spaces before applying merging methods in the aligned representation.
+
+**Mirror implication:** LoRA task coordinates should be learned after subspace alignment when possible. Otherwise a Mirror basis may waste capacity explaining arbitrary factorization orientation instead of functional differences.
+
+## PA181 — SWAG posterior subspace
+
+**A Simple Baseline for Bayesian Uncertainty in Deep Learning**  
+https://arxiv.org/abs/1902.02476
+
+Stochastic Weight Averaging-Gaussian (SWAG) fits a Gaussian approximation around an SGD trajectory using a mean plus low-rank and diagonal covariance structure, enabling posterior sampling without independent full models.
+
+**Mirror implication:** posterior samples are already low-dimensional logical models around one physical mean. A Mirror posterior must beat or compress the SWAG covariance representation at matched calibration and predictive quality.
+
+## PA182 — Subspace Inference
+
+**Subspace Inference for Bayesian Deep Learning**  
+https://arxiv.org/abs/1907.07504
+
+Constructs low-dimensional weight subspaces from training trajectories and performs Bayesian inference inside those subspaces.
+
+**Mirror implication:** low-dimensional posterior coordinates are a direct prior art analogue of functional coordinates. The differentiating question is whether structured/factorized Mirror geometry stores the subspace or task-conditioned uncertainty more efficiently.
+
+## PA183 — Laplace Redux
+
+**Laplace Redux -- Effortless Bayesian Deep Learning**  
+https://arxiv.org/abs/2106.14806
+
+Systematizes practical Laplace approximations for neural networks with scalable curvature structures and post-hoc Bayesian uncertainty estimation.
+
+**Mirror implication:** when the functional state is low-dimensional, curvature can be estimated directly in Mirror-code space. Compare code-space Laplace with full/subnetwork Laplace and deterministic View ensembles.
+
+## PA184 — Packed-Ensembles
+
+**Packed-Ensembles for Efficient Uncertainty Estimation**  
+https://arxiv.org/abs/2210.09184
+
+Packs several smaller independent subnetworks into grouped operations so ensemble members can be trained and evaluated efficiently in one network-shaped computation.
+
+**Mirror implication:** efficient ensemble multiplicity does not require weight sharing. Mirror member Views must preserve useful predictive diversity while reducing physical member storage relative to Packed-Ensembles.
+
+## PA185 — Snapshot Ensembles
+
+**Snapshot Ensembles: Train 1, get M for free**  
+https://arxiv.org/abs/1704.00109
+
+Obtains multiple ensemble members from different points of one cyclic learning-rate training trajectory instead of training independent models from scratch.
+
+**Mirror implication:** checkpoint trajectory is another source of logical model multiplicity. Mirror can attempt to encode snapshot differences as compact coordinates, but must match the ensemble benefit of storing the actual snapshots.
+
+## PA186 — Fourier Neural Operator
+
+**Fourier Neural Operator for Parametric Partial Differential Equations**  
+https://arxiv.org/abs/2010.08895
+
+Learns mappings between function spaces using Fourier-domain kernel parameterization, producing one operator model that can solve families of parameterized PDE instances and transfer across discretization resolutions.
+
+**Mirror implication:** neural operators make the project framing literal: one physical learned operator already represents a function family. Mirror-specific value is cheaper specialization, composition, adaptation or regime-specific Views on top of that universal operator.
+
+## PA187 — DeepONet
+
+**DeepONet: Learning nonlinear operators for identifying differential equations based on the universal approximation theorem of operators**  
+https://arxiv.org/abs/1910.03193
+
+Uses separate branch and trunk networks to encode an input function and an output evaluation location, then combines them to represent nonlinear operators.
+
+**Mirror implication:** branch/trunk roles, sensing layouts and physical regimes expose several natural functional coordinates. Mirror should be tested against ordinary operator conditioning and latent-context adaptation, not against separately trained PDE models only.
+
+## PA188 — R-GCN relation-basis sharing
+
+**Modeling Relational Data with Graph Convolutional Networks**  
+https://arxiv.org/abs/1703.06103
+
+R-GCN gives each relation a message transform and explicitly proposes basis decomposition, where relation-specific weight matrices are linear combinations of shared basis matrices, plus a block-diagonal alternative.
+
+**Mirror implication:** relation identity is already a compact function address. Mirror relation Views must beat or factor the free R-GCN basis coefficients and should test unseen relations rather than only memorized relation IDs.
+
+## PA189 — CompGCN relation composition
+
+**Composition-based Multi-Relational Graph Convolutional Networks**  
+https://arxiv.org/abs/1911.03082
+
+CompGCN composes entity and relation embeddings during message passing so relation semantics participate directly in the transformation rather than requiring an entirely independent operator for each relation.
+
+**Mirror implication:** composition is a strong control for relation-conditioned functional coordinates. Mirror residuals are useful only if they add quality, extrapolation or storage efficiency beyond the relation-composition baseline.
+
+## PA190 — ControlNet
+
+**Adding Conditional Control to Text-to-Image Diffusion Models**  
+https://arxiv.org/abs/2302.05543
+
+Adds spatial conditioning by freezing the pretrained diffusion model and training copied encoder blocks connected through zero-initialized convolutions; separate controls can require substantial condition-specific trainable branches.
+
+**Mirror implication:** the condition-specific copied branch is a high-value physical-duplication target. A shared control basis plus View codes should be judged on control fidelity, generation quality, bytes and extra FLOPs.
+
+## PA191 — T2I-Adapter
+
+**T2I-Adapter: Learning Adapters to Dig out More Controllable Ability for Text-to-Image Diffusion Models**  
+https://arxiv.org/abs/2302.08453
+
+Learns lightweight condition-specific adapters on top of a frozen text-to-image diffusion model and supports composing multiple condition adapters at inference.
+
+**Mirror implication:** T2I-Adapter is the cheap direct control for a Mirror control bank. The key question is whether a shared basis/code can preserve condition diversity and multi-control composition with fewer stored adapter parameters or fewer active adapter passes.
+
+## PA192 — IP-Adapter
+
+**IP-Adapter: Text Compatible Image Prompt Adapter for Text-to-Image Diffusion Models**  
+https://arxiv.org/abs/2308.06721
+
+Introduces a lightweight image-prompt adapter with decoupled cross-attention for image and text conditions.
+
+**Mirror implication:** image-prompt roles can be modeled as logical attention Views, but Mirror must preserve the decoupling that prevents image conditioning from destroying text control.
+
+## PA193 — Ctrl-Adapter
+
+**Ctrl-Adapter: An Efficient and Versatile Framework for Adapting Diverse Controls to Any Diffusion Model**  
+https://arxiv.org/abs/2404.09967
+
+Reuses pretrained ControlNets by learning compact bridges into different image/video diffusion backbones and includes fine-grained multi-condition routing.
+
+**Mirror implication:** source-control x target-backbone is naturally a factorized coordinate. Test whether bridge parameters can be shared across this Cartesian space without sacrificing zero-shot control transfer.
+
+## PA194 — CtrLoRA
+
+**CtrLoRA: An Extensible and Efficient Framework for Controllable Image Generation**  
+https://arxiv.org/abs/2410.09400
+
+Uses low-rank adaptation to build extensible controllable-generation modules more cheaply than full condition-specific control branches.
+
+**Mirror implication:** any low-rank Mirror control proposal must compare against a bank of CtrLoRAs and VeRA-like shared low-rank bases; the value must come from additional sharing/composition, not LoRA itself.
+
+## PA195 — Growing Neural Cellular Automata
+
+**Growing Neural Cellular Automata**  
+https://distill.pub/2020/growing-ca/
+
+Learns one local, recurrently applied neural update rule whose repeated decentralized interactions grow and regenerate target patterns.
+
+**Mirror implication:** one physical local rule already produces a complex global computation. Mirror can ask whether a small rule/goal coordinate yields many stable logical dynamics without duplicating the update network.
+
+## PA196 — Goal-Guided Neural Cellular Automata
+
+**Goal-Guided Neural Cellular Automata: Learning to Control Self-Organising Systems**  
+https://arxiv.org/abs/2205.06806
+
+Conditions a shared NCA update process on goal information so the same self-organising substrate can produce different target-directed behaviors.
+
+**Mirror implication:** goal encoding is a direct dynamic functional coordinate. Mirror-specific work should structure, compose, compress or robustify that coordinate and test unseen goals rather than merely adding conditioning.
+
+## PA197 — Attention-based Neural Cellular Automata
+
+**Attention-based Neural Cellular Automata**  
+https://arxiv.org/abs/2211.01233
+
+Augments NCA-style local computation with attention mechanisms to improve information exchange and learned self-organising behavior.
+
+**Mirror implication:** context can choose the local function dynamically. Compare attention that only changes features against attention that generates/selects a compact update-rule View.
+
+## PA198 — Online Task Adaptation via Self-Organisation
+
+**Online Task Adaptation via Self-Organisation**  
+https://arxiv.org/abs/2609.29281
+
+Studies online adaptation through self-organising neural cellular systems, making deployment-time task change part of the learned dynamics rather than requiring a static task-specific model.
+
+**Mirror implication:** online adaptation can be restricted to a compact functional coordinate, giving a direct test of whether transient task state can replace larger updates while retaining prior behaviors.
