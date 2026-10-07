@@ -21,6 +21,7 @@ The design rationale is documented in ../../docs/phase2/MIRROR_APPLICATION_DESIG
 Before starting an MA experiment, read:
 - [worker start guide](../../WORKER_START_HERE.md)
 - [latest verified worker findings and design rules](../../docs/phase2/LATEST_WORKER_FINDINGS.md)
+- [minimal-context router](CONTEXT_ROUTER.md)
 - [prior-art map](../../docs/phase2/MIRROR_APPLICATION_PRIOR_ART.md)
 - [research notes](../../docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-07.md)
 - [worker queue](WORKER_QUEUE.md)
