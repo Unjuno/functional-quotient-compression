@@ -2,10 +2,12 @@
 
 - Status: SCREENING
 - Branch: `research/ma-008-hierarchical-mirror-moe-20261007`
-- Base commit: `993c4ce` (verified MA-007 parent)
-- Protocol frozen before development; no data opened
-- Registry: UNTESTED
+- Protocol/source freeze: `5ad3afe`
+- Development selected LR 0.003 by preregistered pooled MSE
+- Fresh access gate: passed (Mirror/full-hier MSE 0.827, payload 0.361)
+- Fresh/audit opened: no; worlds/settings frozen
+- Registry: SCREENING
 
 ## Next action
 
-Implement flat and hierarchical routing controls plus Mirror views, test round-trips, freeze source hashes, then run development.
+Run fresh worlds 80001–80003 under the locked setting.

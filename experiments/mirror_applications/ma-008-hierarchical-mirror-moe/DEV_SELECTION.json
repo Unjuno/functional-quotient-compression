@@ -1,0 +1,47 @@
+{
+  "experiment_id": "MA-008",
+  "stage": "development_selection_before_fresh_access",
+  "selected_learning_rate": 0.003,
+  "selection_rule": "minimum mean heldout MSE across seven methods and two teacher modes on development world 80000",
+  "mean_heldout_mse_by_learning_rate": {
+    "0.001": 0.012018014444038272,
+    "0.003": 0.010382289249849106,
+    "0.01": 0.01043732268070536
+  },
+  "rows_per_learning_rate": 14,
+  "development_open_fresh_gate": {
+    "mirror_to_full_hier_mse_ratio": 0.8272897291893551,
+    "payload_ratio": 0.3606371337089126,
+    "thresholds": {
+      "mse_max": 1.25,
+      "payload_max": 0.65
+    },
+    "passed": true
+  },
+  "flat_route_control": {
+    "mirror_hier_to_full_flat_mse_ratio": 0.8012413019259661
+  },
+  "fresh_worlds": [
+    80001,
+    80002,
+    80003
+  ],
+  "configuration": {
+    "updates": 1200,
+    "batch_size": 64,
+    "methods": [
+      "full_flat",
+      "full_hier",
+      "full_rank2_flat",
+      "tied_hier",
+      "film_hier",
+      "residual2_hier",
+      "mirror_hier"
+    ],
+    "teacher_modes": [
+      "aligned",
+      "independent"
+    ]
+  },
+  "fresh_access_authorized_by_preregistered_gate": true
+}
