@@ -8,7 +8,7 @@ Updated: 2026-10-07
 - P0: **34**
 - P1: **126**
 - P2: **94**
-- Current MA statuses: **241 UNTESTED, 8 PROMISING, 5 FAIL**
+- Current MA statuses: **240 UNTESTED, 1 SCREENING, 8 PROMISING, 5 FAIL**
 - Historical evidence lanes SRM/TM are not MA statuses.
 
 ## Next candidate
