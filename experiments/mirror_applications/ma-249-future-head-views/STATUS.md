@@ -1,23 +1,14 @@
-# MA-XXX status
+# MA-249 status
 
 - Status: SCREENING
-- Branch: `research/ma-xxx-short-name-YYYYMMDD`
-- Base commit:
-- Last verified commit:
+- Branch: `research/ma-249-future-head-views-20261007`
+- Base commit: `4fe9b5fe51bfcd488ddff9a9702f8cb9bee4b08a`
 - Development complete: no
 - Fresh/audit opened: no
 - Results committed: no
 - Verification committed: no
 - Registry row updated: no
 
-## Next action
-
-<exactly one action>
-
 ## Blockers
 
 None.
-
-## Decisions / rulings
-
-Record deviations from the original protocol here.
