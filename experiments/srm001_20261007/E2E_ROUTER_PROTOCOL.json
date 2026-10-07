@@ -1,0 +1,55 @@
+{
+  "experiment_id": "SRM001",
+  "date_jst": "2026-10-07",
+  "evidence_lane": "SYNTHETIC_CAUSAL_TRANSFORMER",
+  "task": {
+    "domains": 4,
+    "common_rules": 8,
+    "private_rules_per_domain": [16, 32, 64],
+    "active_rules_per_example": 4,
+    "active_rule_breakdown": "2 common + 2 private",
+    "primary_target": "count of firing rules, classes 0..4",
+    "adversarial_target": "four firing bits encoded as 16 classes",
+    "heldout_composition": "deterministic 1/5 common/private pair split"
+  },
+  "transformer": {
+    "d_model": 32,
+    "d_ff": 64,
+    "heads": 4,
+    "specialization_site": "final-block FFN residual only",
+    "whole_transformer_mirror": false
+  },
+  "mirror": {
+    "geometry": "shared W1/W2 plus per-address stretch+shear coordinates",
+    "rank_main": 16,
+    "active_addresses": 4
+  },
+  "e2e_router_v2": {
+    "supervision": "LM loss only",
+    "input": "raw rule-token + position representation",
+    "selection": "deterministic straight-through top-1 per rule-token position",
+    "total_selected_addresses": 4,
+    "mirror_code_init_std": 0.01,
+    "load_balance": false
+  },
+  "training": {
+    "optimizer": "AdamW",
+    "lr": 0.003,
+    "batch_size": 256,
+    "main_updates": 1000,
+    "ES": false,
+    "loop": false
+  },
+  "storage": "actual torch serialized file bytes including learned state and reconstruction config",
+  "verification": {
+    "tests": "9/9 PASS",
+    "selected_e2e_reload": "private 16/32/64 exact state reload and evaluation reproduced"
+  },
+  "boundaries": [
+    "not natural language",
+    "not an LLM capacity multiplier claim",
+    "count task is decomposable",
+    "parity adversary failed",
+    "near-convergence capacity superiority not established"
+  ]
+}
