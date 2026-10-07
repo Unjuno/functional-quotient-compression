@@ -176,6 +176,22 @@ High-information P0:
 14. MA-547 — RoseLoRA versus Mirror edit locality
 15. MA-550 — adaptive allocation between weight-space and activation-space Views
 
+## KV-cache transformation research lane
+
+Added from cache-reuse research. Do not preempt an already-started worker experiment.
+
+- MA-691 — lazy canonical KV Mirror read
+- MA-692 — RoPE-commuting Mirror KV Views
+- MA-693 — position-free cache + deferred Mirror/RoPE
+- MA-694 — Mirror-MLA canonical latent cache
+- MA-695 — YOCO one-cache + Mirror layer reads
+- MA-697 — exact Mirror adapter switching with cache reuse
+- MA-699 — top-k Mirror attention Views over one physical cache
+
+P1 follow-ups: MA-696, MA-698, MA-700.
+
+Use `docs/phase2/MIRROR_KV_CACHE_REUSE.md` before implementing any of these. Cache aliasing, switch latency, dwell length and attention-output equivalence are mandatory metrics.
+
 ## Current P0 sequence
 
 ### Family A — FFN / MoE / adapter
