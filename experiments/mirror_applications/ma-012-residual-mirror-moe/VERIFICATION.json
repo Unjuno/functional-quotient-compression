@@ -1,0 +1,59 @@
+{
+  "aligned_fresh_mirror_rank2_to_independent_mse_ratio": [
+    0.4384455194705989,
+    0.39292723453716283,
+    0.5969956249147139
+  ],
+  "aligned_mirror_rank2_payload_ratio_to_independent": 0.458,
+  "aligned_mirror_rank2_to_tied_rank2_mse_ratio": [
+    0.8128369677395575,
+    0.7063481527750803,
+    0.6691907968333896
+  ],
+  "decision": "PROMISING",
+  "experiment_id": "MA-012",
+  "fresh_freeze_manifest_hashes_checked_against_frozen_commit": true,
+  "fresh_split_integrity_checked": true,
+  "implementation_fresh_freeze_commit": "cfee04ee5047b9dcfe49ad47405e0840b2bd828b",
+  "independent_teacher_boundary_mirror_rank2_mse": [
+    0.013906,
+    0.0139509,
+    0.0135207
+  ],
+  "metric_replay": {
+    "checked": true,
+    "deterministic_fields_exact": true,
+    "fresh_rows_checked": 42,
+    "max_difference": 0.0,
+    "timing_fields_excluded": [
+      "train_wall_seconds",
+      "inference_examples_per_second"
+    ]
+  },
+  "notes": [
+    "Registered aligned useful-sharing and Mirror-specific matched-rank gates passed in 3/3 fresh worlds.",
+    "CPU throughput and training wall regressed; independent functions required private/richer state.",
+    "Fresh replay first failed only when opening an absent temporary output directory; subsequent replay completed exact deterministic-field comparison.",
+    "Synthetic fixed-update result; not capacity or language evidence."
+  ],
+  "protocol_freeze_commit": "310660393eddf53df790411db902fd4a5f702b48",
+  "serialization": {
+    "authority": "actual torch.save state_dict plus deterministic compact config bytes",
+    "fresh_bytes_by_method": {
+      "independent": 18218,
+      "mirror": 6365,
+      "mirror_rank1": 7579,
+      "mirror_rank2": 8347,
+      "tied": 5923,
+      "tied_rank1": 7073,
+      "tied_rank2": 7841
+    },
+    "runs_checked": 84,
+    "serializer_roundtrip_checked": false
+  },
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-012-residual-mirror-moe/tests",
+    "failed": 0,
+    "passed": 3
+  }
+}
