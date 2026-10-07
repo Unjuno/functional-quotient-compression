@@ -1,72 +1,71 @@
-# Phase II — Mirror-native conditional models
+# Phase II — Shared-backbone conditional models
 
 **Active, unfinished research.**
 
-## Current integrated state — 2026-10-06
+## Current canonical state — 2026-10-07
 
-The latest integrated architecture proposal is:
+Start with:
 
-- [Mirror Transformer — current architecture proposal](MIRROR_TRANSFORMER_CURRENT_ARCHITECTURE.md)
-- [Research state through 2026-10-06](RESEARCH_STATE_2026-10-06.md)
+- [Current state](CURRENT_STATE_2026-10-07.md)
+- [Current architecture — Sparse Compositional Shared-Rule Transformer](ARCHITECTURE_SPARSE_SHARED_RULE_MOE.md)
+- [Experiment registry](EXPERIMENT_REGISTRY.md)
+- [SRM001 current synthetic evidence](SRM001_SHARED_RULE_MOE.md)
+- [Active roadmap](../../roadmap/PHASE2_SPARSE_RULE_ROADMAP.md)
 
-The current proposal is **router-free by default**: one shared Transformer is trained through deterministic Mirror coordinates derived from known sensor/token/layer/global state. This is a next architecture hypothesis, not a replacement of the historical MN results.
+## Current architecture in one sentence
 
-The integrated evidence summary keeps Fact / Interpretation / Hypothesis separate. In particular:
+> Keep the Transformer backbone canonical and shared; put only specialist residual behavior into a sparse rule bank; select **multiple** reusable rules per token/context to construct a virtual expert.
 
-- narrow gain/rotation Mirror families have not shown a stable capacity advantage;
-- RF1 showed an unseen-view robustness signal but not a Dense-beating capacity result;
-- reachability-only Mirror selection did not reliably improve small-FFN continuation;
-- token-period and sensor-parallel Mirror are proposed next directions and remain untested.
+Mirror is a candidate rule-atom parameterization, not the default transformation of the whole model.
 
-## Historical canonical records
+## What changed from earlier Phase II
 
-- [Research state through MN010](RESEARCH_STATE_THROUGH_MN010.md)
-- [Global Dense Mirror architecture](GLOBAL_DENSE_MIRROR_ARCHITECTURE.md) — historical router-based architecture hypothesis
-- [Reachability-adjusted Mirror analysis](REACHABILITY_ADJUSTED_MIRROR_ANALYSIS_JA.md)
-- [MN011 preregistration](../../experiments/mirror_native/MN011_PLAN.md)
-- [Semantic Mirror hypothesis](SEMANTIC_MIRROR_HYPOTHESIS.md)
+Earlier work explored:
+- router-based global Mirror states;
+- deterministic router-free views;
+- token/layer/sensor coordinates;
+- rotation/gain/stretch/shear families;
+- reachability-guided candidate directions.
 
-The MN010/MN011 documents are preserved as provenance. The new integrated architecture does not retroactively change their claims or experimental conditions.
+Those experiments remain important because they rejected several simpler explanations:
+- more Mirror states alone did not yield a stable capacity gain;
+- narrow rotation/gain families were not enough;
+- a whole shared core can lose transfer when condition identity is injected too deeply;
+- ES did not provide a free continuous-parameter optimization advantage;
+- local reachability is not sufficient evidence of task utility.
+
+The current SRM direction therefore localizes specialization to a sparse FFN residual instead of Mirrorizing the full computation path.
 
 ## Evidence map
 
-| Line | Role | Current status |
+| Line | Role | Status |
 |---|---|---|
-| Phase I / FQC | Post-training functional sharing/compression | Strong sharing controls did not establish a general win; motivates native-training approach. |
-| MN007 | Semantic shared bases | Compact representation, weak spontaneous grouping. |
-| MN008 | Relation-supervised factor reuse | Reusable factors trainable; not Mirror-specific. |
-| MN009 | Shared wide path vs duplicated experts | Mirror beat near-byte narrow soft-MoE, but Dense/simple gate remained strong. |
-| MN010 | Global Mirror count vs breadth | Count-only weak; broad state gave discovery signal with mixed replication. |
-| MT001 | Multi-view paired learning | NLL signal confounded by repeated exposure; packed execution useful. |
-| MT002A/B | Routing diagnosis | Learned bridge unstable; oracle routing exposed representation bottleneck. |
-| MT003A | Gain-Mirror breadth sweep | Gain family too narrow; independent experts much stronger under oracle routing. |
-| RF1 | Router-free deterministic rotation Mirror | No stable Dense quality advantage; unseen-view robustness signal; packed execution works. |
-| RA-Mirror | Reachability-adjusted local analysis | Algebra verified; not a model-level capacity proof. |
-| Small-FFN RA pilot | Reachability-selected direction continuation | No stable learning advantage; 2/6 paired wins. |
-| Token Mirror | Periodic computation coordinate | Proposed; not yet validated. |
-| Sensor Mirror | Sensor/view observation coordinate | Proposed; not yet validated. |
+| MN007–MN010 | factor reuse / global Mirror exploration | historical; count-only weak, breadth mattered |
+| MT / RF | routing and deterministic-view diagnostics | historical; no stable capacity result |
+| Reachability | geometry analysis | analytical tool, not capacity proof |
+| MS005–MS006 | ES and Backprop | ES rejected for continuous shared parameters |
+| MS008–MS014 | sensor/world decomposition | supports shared-core isolation + residual specialization |
+| SRM001 | sparse shared-rule / Mirror-MoE | **active strongest synthetic signal** |
 
-## Current interpretation
+See [EXPERIMENT_REGISTRY.md](EXPERIMENT_REGISTRY.md) for navigation.
 
-The active hypothesis is no longer “more states are better.”
+## Historical canonical records
 
-It is:
+These are preserved for provenance and should not be mistaken for the current design:
 
-> **A small number of low-description Mirror transformations may improve effective capacity only if they expose task-useful functional directions that are expensive/interfering for ordinary shared-weight updates and still survive actual multi-view training.**
-
-The proposed next architecture is therefore:
-
-> **one shared Transformer + deterministic token/layer/sensor Mirror coordinates + structured non-rotation transforms + explicit capacity-frontier evaluation.**
+- [Research state through MN010](RESEARCH_STATE_THROUGH_MN010.md)
+- [Global Dense Mirror architecture](GLOBAL_DENSE_MIRROR_ARCHITECTURE.md)
+- [Mirror Transformer proposal from 2026-10-06](MIRROR_TRANSFORMER_CURRENT_ARCHITECTURE.md)
+- [Research state through 2026-10-06](RESEARCH_STATE_2026-10-06.md)
+- [Reachability-adjusted Mirror analysis](REACHABILITY_ADJUSTED_MIRROR_ANALYSIS_JA.md)
+- [Semantic Mirror hypothesis](SEMANTIC_MIRROR_HYPOTHESIS.md)
 
 ## Evidence boundaries
 
 Do not conflate:
-
-- Mirror state count with independent-expert capacity;
-- robustness to view changes with capacity;
-- local reachability cost with task value;
-- parameter count with serialized bytes;
-- deterministic transform diversity with new Shannon information;
-- small synthetic CPU results with natural-language or real-world sensor performance.
-
-Phase I remains preserved. Apache-2.0 terms are unchanged.
+- logical virtual-expert combinations with independent expert capacity;
+- fixed-update learning speed with near-convergence capacity;
+- robustness with capacity;
+- parameter count with actual serialized bytes;
+- routing consistency with end-task quality;
+- synthetic causal-LM results with natural-language LLM performance.
