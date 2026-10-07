@@ -1,4 +1,4 @@
-# Global Dense Mirror architecture
+> **SUPERSEDED architecture hypothesis.**\n> The active design is [Sparse Compositional Shared-Rule Transformer](ARCHITECTURE_SPARSE_SHARED_RULE_MOE.md). This file is preserved for the global-router/Mirror stage of the research.\n\n# Global Dense Mirror architecture
 
 Status: **active Phase II architecture hypothesis**
 
