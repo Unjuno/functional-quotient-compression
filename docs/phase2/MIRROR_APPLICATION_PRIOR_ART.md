@@ -1588,6 +1588,53 @@ Finds that sharing the LoRA A factor can reflect common initialization more than
 **Mirror implication:** cache-sharing designs must empirically choose which low-rank factor is globally shared. Shared-A is attractive for reusable low-rank cache state, while shared-B may transfer task knowledge better; Mirror can factor these roles explicitly rather than assume one orientation.
 
 
+
+## PA175 — Hydragen shared-prefix attention
+
+**Hydragen: High-Throughput LLM Inference with Shared Prefixes**  
+https://arxiv.org/abs/2402.05099
+
+Decomposes attention into shared-prefix and unique-suffix parts and batches queries from many sequences against one shared prefix KV, replacing repeated matrix-vector reads with matrix-matrix operations and reducing redundant HBM traffic.
+
+**Mirror implication:** if many logical Views share one canonical cache, their transformed queries can be batched against that cache in a Hydragen-like kernel. Cache sharing can therefore reduce memory bandwidth, not only storage.
+
+## PA176 — ChunkAttention
+
+**ChunkAttention: Efficient Self-Attention with Prefix-Aware KV Cache and Two-Phase Partition**  
+https://aclanthology.org/2024.acl-long.623/
+
+Stores shared prefix KV chunks in a prefix tree and batches query work for shared chunks with a specialized two-phase attention kernel.
+
+**Mirror implication:** a View-aware prefix tree could physically alias canonical chunks across task/model identities while keeping small View metadata or residual chunks separate.
+
+## PA177 — ForkKV
+
+**ForkKV: Scaling Multi-LoRA Agent Serving via Copy-on-Write Disaggregated KV Cache**  
+https://arxiv.org/abs/2604.06370
+
+Physically splits multi-LoRA KV state into a globally shared base cache and lightweight agent-specific residual caches, manages them with DualRadixTree copy-on-write semantics, and uses ResidualAttention to reconstruct residuals inside SRAM.
+
+**Mirror implication:** this is a direct systems blueprint for canonical Mirror cache + View residual. Mirror can aim to shrink or eliminate the residual cache and use exact/lazy read transforms where possible.
+
+## PA178 — KVCOMM
+
+**KVCOMM: Online Cross-context KV-cache Communication for Efficient LLM-based Multi-agent Systems**  
+https://arxiv.org/abs/2510.12872
+
+Uses online anchor caches to estimate cache offsets for shared content under different agent prefixes, enabling training-free approximate cache reuse across contexts.
+
+**Mirror implication:** when View/context differences are not analytically exact, an anchor-based offset lane is a strong approximate control; Mirror codes may provide better priors/features for the offset predictor.
+
+## PA179 — TokenDance collective cache sharing
+
+**TokenDance: Scaling Multi-Agent LLM Serving via Collective KV Cache Sharing**  
+https://arxiv.org/abs/2604.03143
+
+Optimizes synchronized multi-agent rounds collectively, stores one master cache plus block-sparse per-agent differences, and amortizes reuse computation across the group.
+
+**Mirror implication:** View families can be treated as a cache collective rather than independent requests. A master canonical cache plus sparse/structured Mirror differences can exploit group-wide amortization.
+
+
 ## Research gaps that remain especially relevant here
 
 1. **Logical expert multiplicity from one physical expert via a structured view** — adjacent to expert tying, but not equivalent.
