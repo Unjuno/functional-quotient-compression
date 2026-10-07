@@ -2023,3 +2023,138 @@ https://arxiv.org/abs/2606.18923
 Treats a neural graph's mutable connectivity as executable program structure rather than only as input data, enabling dynamic architectural relations over a reusable neural substrate.
 
 **Mirror implication:** the functional coordinate can include topology/program structure, not only weights or activations. Separate the address cost of graph connectivity from the cost of node-function Views and measure dynamic execution overhead.
+
+## PA221 — Kolmogorov-Arnold Networks
+
+**KAN: Kolmogorov-Arnold Networks**  
+https://arxiv.org/abs/2404.19756
+
+Replaces scalar linear edge weights plus fixed node activations with learnable univariate functions on edges, typically spline-parameterized. The network therefore represents computation through compositions of local functions rather than dense matrices alone.
+
+**Mirror implication:** edge functions themselves are physical objects that can be shared, transformed and addressed. Mirror-KAN work must compare against native per-edge functions and count function-evaluation cost, not only coefficient bytes.
+
+## PA222 — GS-KAN shared parent functions
+
+**GS-KAN: Parameter-Efficient Kolmogorov-Arnold Networks via Sprecher-Type Shared Basis Functions**  
+https://arxiv.org/abs/2512.09084
+
+Constructs unique KAN edge functions by applying learnable linear transformations to a single learnable shared parent function per layer, reducing the parameter explosion of one independent function per edge.
+
+**Mirror implication:** this is a direct prior for "one physical function -> many logical edge functions." Mirror-specific value must come from better factorization, composition, dynamic generation, robustness or shared/private allocation beyond the GS-KAN transform.
+
+## PA223 — Kolmogorov-Arnold Reservoir Computing
+
+**Kolmogorov-Arnold Reservoir Computing**  
+https://arxiv.org/abs/2606.19984
+
+Replaces a recurrent reservoir with explicit univariate basis-function expansions over delayed coordinates and trains only a linear readout in closed form. It connects KAN-style representation with lightweight reservoir training and allows Fourier, B-spline or Chebyshev features.
+
+**Mirror implication:** explicit basis functions form a cheap physical function bank for dynamical-system Views. Compare code-only/readout adaptation against independent KARC readouts and count active feature evaluation.
+
+## PA224 — KanAdapter
+
+**KanAdapter: A Kolmogorov-Arnold Network-based Plug-and-Play Module for Efficient Fine-tuning of Foundation Speech Models**  
+https://arxiv.org/abs/2609.05281
+
+Uses compact Group-Rational KAN modules as parallel adapters around frozen Transformer encoder blocks, replacing conventional MLP bottleneck adapters with learnable localized nonlinear functions.
+
+**Mirror implication:** KAN-based task adapters are already a PEFT mechanism. Mirror-KAN adapters should share functional parents/bases across tasks or layers rather than merely replacing an MLP with a KAN.
+
+## PA225 — NTK-CL
+
+**Parameter-Efficient Fine-Tuning for Continual Learning: A Neural Tangent Kernel Perspective**  
+https://arxiv.org/abs/2407.17120
+
+Analyzes PEFT continual learning with Neural Tangent Kernels and identifies task-level feature orthogonality, sample size and regularization as major factors in continual generalization. NTK-CL adaptively generates task-relevant features without storing task-specific parameters.
+
+**Mirror implication:** functional-coordinate separation can be evaluated in the induced NTK geometry rather than Euclidean code space. Any task-code bank should measure inter-task versus intra-task tangent similarity.
+
+## PA226 — linearization of LLM fine-tuning
+
+**Linearization Explains Fine-Tuning in Large Language Models**  
+https://proceedings.neurips.cc/paper_files/paper/2025/file/becc00fe2e0ade58213cff16a166fa25-Paper-Conference.pdf
+
+Studies first-order linearization around pretrained LLM parameters and shows that substantial aspects of fine-tuning behavior can be explained through the model's local tangent/Jacobian representation.
+
+**Mirror implication:** when task adaptation is approximately linearizable, the natural compact object is a coordinate in tangent-feature space. Mirror should measure linearization residual before adding nonlinear/private capacity.
+
+## PA227 — AI Engram / Fisher-geometric memory traces
+
+**AI Engram: In Search of Memory Traces in Artificial Intelligence**  
+https://arxiv.org/abs/2606.14997
+
+Derives a closed-form estimator for causal memory traces satisfying specificity, reactivation, sufficiency and necessity constraints. The resulting solution corresponds to a minimum-norm/natural-gradient direction under Fisher information geometry and supports linear composition or erasure of memories.
+
+**Mirror implication:** this is a strong causal alternative to heuristic task/edit vectors. Mirror memory coordinates should preserve the engram causal tests and can use Fisher geometry for code distance and shared/private decomposition.
+
+## PA228 — differentiable plasticity
+
+**Differentiable plasticity: training plastic neural networks with backpropagation**  
+https://proceedings.mlr.press/v80/miconi18a.html
+
+Meta-learns synaptic plasticity coefficients alongside slow weights so recurrent networks can change effective connections online through Hebbian-style updates after deployment.
+
+**Mirror implication:** the functional coordinate can be the learning rule/plasticity itself, not only a static weight View. Report writable state and online update cost separately from persistent model bytes.
+
+## PA229 — Hebbian Fast Weights
+
+**Metalearning with Hebbian Fast Weights**  
+https://arxiv.org/abs/1807.05076
+
+Combines slow weights learned across tasks with fast weights written by a Hebbian rule during each new task, enabling one-shot binding of labels/representations.
+
+**Mirror implication:** persistent task identity and transient fast state are naturally separate coordinate factors. Mirror can compress the fast matrix or structure the write rule, but must compare against the full Hebbian state.
+
+## PA230 — DeltaNet fast matrix state
+
+**Parallelizing Linear Transformers with the Delta Rule over Sequence Length**  
+https://arxiv.org/abs/2406.06484
+
+Scales DeltaNet, whose matrix-valued recurrent state is updated with a delta-rule associative-memory update. A generalized Householder/WY reparameterization enables parallel, memory-efficient training while preserving constant-memory recurrent inference.
+
+**Mirror implication:** a writable matrix state is a dynamic physical memory object. Mirror can restrict it to a low-description state family or condition the write/erase rule, but long-context recall and state-update throughput are mandatory controls.
+
+## PA231 — Learning Neural Network Subspaces
+
+**Learning Neural Network Subspaces**  
+https://proceedings.mlr.press/v139/wortsman21a.html
+
+Learns lines, curves and simplexes containing diverse high-accuracy neural-network solutions within one training run, enabling model sampling/ensembling from a low-dimensional weight subspace.
+
+**Mirror implication:** a trained low-loss model manifold is a direct functional-coordinate space. Count the basis/endpoints/control points as physical storage and compare new-task projection against random intrinsic/task-vector bases.
+
+## PA232 — Bezier-surface mode connectivity
+
+**Revisiting Mode Connectivity in Neural Networks with Bezier Surface**  
+https://proceedings.iclr.cc/paper_files/paper/2025/file/fc65418739d66d1d4fc464807f177c91-Paper-Conference.pdf
+
+Extends low-loss mode connectivity from curves between two models to learned Bezier surfaces connecting multiple models, with applications to averaging and ensembling.
+
+**Mirror implication:** multi-dimensional low-loss surfaces can serve as learned model charts. Mirror coordinates on these surfaces should be compared against model soups, task-vector bases and simple learned subspaces.
+
+## PA233 — Mesh Inference
+
+**Mesh Inference: A Formal Model of Collective Inference Without a Center**  
+https://arxiv.org/abs/2606.19537
+
+Models collective inference among independent agents that exchange only admitted typed observations: no weights, gradients or hidden states are shared. In the linear-Gaussian regime, exact centralized recovery occurs under a carrier-connectivity condition, with decentralization incurring network-diameter-dependent latency.
+
+**Mirror implication:** protocol/admission state can be a functional coordinate even when physical models remain private. Any collective Mirror must count messages/topology/policy bytes and preserve the observation-only boundary.
+
+## PA234 — Structural Composition
+
+**Structural Composition Enables Very Fast Learning**  
+https://www.biorxiv.org/content/10.64898/2026.07.14.738142v1
+
+Shows that multi-task models can learn a low-dimensional representation encoding how reusable task subcomponents are recombined. Restricting new-task learning to this structural subspace can greatly reduce required experience and sometimes reduce adaptation to hypothesis testing over a few discrete candidate points.
+
+**Mirror implication:** useful task coordinates may encode recombination rules rather than module identities. This provides a direct test for module x rule factorization and discrete low-bit new-task codes.
+
+## PA235 — Adaptive Behavior with Stable Synapses
+
+**Adaptive behavior with stable synapses**  
+https://arxiv.org/abs/2404.07150
+
+Shows rapid in-context behavioral adaptation in gain-modulated recurrent networks with stable synaptic weights, using input segregation and dendritic/gain modulation rather than changing model parameters online.
+
+**Mirror implication:** Level-3 functional state need not be a writable weight matrix. Gain/context state is a lower-cost control for dynamic Mirror adaptation and should be compared against Hebbian/DeltaNet fast-weight mechanisms.
