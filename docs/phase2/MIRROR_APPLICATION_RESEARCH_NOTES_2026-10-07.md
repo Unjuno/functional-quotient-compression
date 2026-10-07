@@ -587,3 +587,67 @@ Implication: Level-3 Mirror can include topology, route, state and weight/activa
 - Maintained prior-art map: **PA01–PA220**.
 - New candidates: **43 P0, 12 P1**.
 - Existing next-candidate/worker ordering remains unchanged.
+
+## Tenth literature sweep — functional edges, tangent geometry and adaptive state
+
+This sweep targeted representations where the logical function is not naturally a whole weight matrix.
+
+### BF. KAN makes the edge itself a reusable function
+
+Standard KAN replaces scalar weights with learnable univariate edge functions. GS-KAN then goes directly toward the Mirror thesis by deriving many edge functions from one shared parent function per layer using small transformations.
+
+Implication: one physical function -> many logical functions is not only a metaphor. Edge-function sharing provides a direct test bed where code bytes, approximation error and function-evaluation compute are all explicit.
+
+### BG. Tangent space may be the right local quotient after pretraining
+
+NTK analyses emphasize task-level feature orthogonality in continual learning, while LLM fine-tuning can often be substantially explained by local linearization.
+
+Implication: before learning an arbitrary nonlinear Mirror geometry around a pretrained model, measure how much task variation is already captured by the pretrained tangent/Jacobian space. Spend nonlinear/private capacity only on the residual that escapes linearization.
+
+### BH. Memory coordinates can be causal and information-geometric
+
+AI Engram derives memory traces under specificity, reactivation, sufficiency and necessity constraints and connects the solution to natural-gradient/Fisher geometry. These traces support direct composition and erasure.
+
+Implication: task/edit vectors should not be treated as equally meaningful coordinates. A memory View can be required to pass causal tests, and code distance can be measured in functional Fisher geometry rather than Euclidean parameter distance.
+
+### BI. Dynamic function can live in a write rule or writable state
+
+Differentiable plasticity meta-learns how connections should change; Hebbian fast weights separate slow representation from one-shot writable associations; DeltaNet uses a matrix-valued recurrent fast state with a delta-rule write.
+
+Implication: Level-3 Mirror has at least three distinct costs:
+1. persistent code bytes;
+2. writable online-state bytes;
+3. write/update FLOPs.
+These must be reported separately.
+
+### BJ. A learned low-loss model manifold is an empirical quotient candidate
+
+Learning Neural Network Subspaces produces lines/curves/simplexes of high-quality models in one training run. Bezier-surface mode connectivity generalizes this from paths to surfaces connecting multiple solutions.
+
+Implication: instead of choosing a Mirror transform family a priori, learn the low-loss manifold first and use its position as the coordinate. Compare this against task-vector bases, Model Stock and random intrinsic subspaces.
+
+### BK. Collective inference has a functional coordinate even when models cannot be shared
+
+Mesh Inference formalizes agents that never exchange weights, gradients or hidden states, only admitted typed observations.
+
+Implication: the Mirror object can be a communication/admission policy or dynamic coalition rather than a shared neural tensor. This extends functional quotient compression to sovereign heterogeneous models, but network messages and topology metadata become part of the cost.
+
+### BL. Structure of module reuse can itself be learned and compressed
+
+Structural Composition reports low-dimensional representations of how subcomponents are recombined across tasks, with new-task learning sometimes reduced to testing a few discrete hypotheses.
+
+Implication: the cheapest task coordinate may encode the recombination rule over existing modules rather than module parameters. This strengthens the what/how and module/rule factorization lanes.
+
+### BM. Fast adaptation does not necessarily require writable weights
+
+Gain-modulated recurrent networks can adapt rapidly with stable synapses by reconfiguring dynamics through context/gain state.
+
+Implication: every fast-weight Mirror should include a stable-synapse/gain-state control. If activation-state modulation matches writable weights, the latter is unnecessary state complexity.
+
+## Registry growth
+
+- Tenth sweep: MA-826 through MA-875.
+- Registry after this sweep: **875 candidates**.
+- Maintained prior-art map: **PA01–PA235**.
+- New candidates: **39 P0, 11 P1**.
+- Existing next-candidate/worker ordering remains unchanged.
