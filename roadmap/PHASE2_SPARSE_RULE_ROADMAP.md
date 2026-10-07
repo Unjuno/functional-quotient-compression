@@ -22,6 +22,12 @@ PROPOSED, NOT EXECUTED: test a fixed-depth feed-forward architecture that passes
 
 Before making a performance claim, separate atomic learning, intermediate-state transport, routing, final readout, sequence-length transfer and active compute. Use a development-only protocol and fresh worlds. A human-readable reasoning trace is not required, and an internal state should not be assumed to have a particular semantic interpretation without intervention tests.
 
+## R3b — TM001 temporal packetization result
+
+TM001 tested P learned future slots in one forward. When all information determining the packet was available at macro-step start, P=4 replicated at essentially 100% joint accuracy and P=8 worked on one fresh world. A one-thread CPU benchmark showed low-batch throughput gains versus KV-cached AR. When one packet-level branch variable was hidden, factorized slots and triangular latent mixing failed to preserve the joint trajectory; a preliminary shared packet latent improved but did not close the gap.
+
+Next bounded hypothesis: combine a fixed-depth intermediate-state / packet-latent interface with parallel phase slots. Do not scale P or claim language speedup until joint consistency and GPU behavior are measured.
+
 ## R4 — Atom family competition
 
 Only after useful composition accuracy: compare signed low-rank basis, independent low-rank residual, standard full experts, and Mirror controls at actual bytes and measured compute. Mirror survives only when it improves the relevant frontier. Do not claim arbitrary rules are unshareable from failure of one narrow parameterization.
