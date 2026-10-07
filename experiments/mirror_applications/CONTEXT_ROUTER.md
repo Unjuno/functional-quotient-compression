@@ -6,14 +6,26 @@ Purpose: give an experiment worker the **smallest sufficient context** for one M
 
 1. `AGENTS.md`
 2. `GOAL.md`
-3. `docs/phase2/LATEST_WORKER_FINDINGS.md`
-4. `experiments/mirror_applications/STATUS_BOARD.md`
-5. exactly one selected row from `IDEA_REGISTRY.csv`
-6. only the PA headings named by that row's `prior_art_refs`
-7. `EXPERIMENT_CONTRACT.md`
-8. `TEMPLATE/`
+3. `docs/phase2/MIRROR_PARAMETER_INTEGRATION_DOCTRINE.md`
+4. `docs/phase2/LATEST_WORKER_FINDINGS.md`
+5. `experiments/mirror_applications/STATUS_BOARD.md`
+6. exactly one selected row from `IDEA_REGISTRY.csv`
+7. only the PA headings named by that row's `prior_art_refs`
+8. `EXPERIMENT_CONTRACT.md`
+9. `TEMPLATE/`
 
 Then load family-specific evidence below.
+
+## Mirror parameter translation rule
+
+Before loading family-specific material, translate the selected candidate into four fields:
+
+1. native method and physical object;
+2. exact insertion point for Mirror parameter `m`;
+3. cheapest native/non-Mirror parameter that could provide the same freedom;
+4. claimed marginal benefit of `m` in bytes, compute, interference, adaptation, reuse, or functional multiplicity.
+
+If these four fields are not clear, scope the candidate before coding.
 
 ## Family-specific context
 
