@@ -1,0 +1,56 @@
+{
+  "experiment_id": "MA-1176",
+  "status": "UNTESTED",
+  "worker_claim": false,
+  "plan_only": true,
+  "stage0_report": "../../REPORT.md",
+  "title": "Grouped physical Mirror blocks with predicted asynchronous expert prefetch",
+  "prior_art_refs": [
+    "PA434",
+    "PA435",
+    "PA436",
+    "PA16",
+    "PA42"
+  ],
+  "hypothesis": "At fixed GPU resident-byte cap and trained routing, predictive offload of the next physical block overlaps with K=4/5 useful Mirror outputs and beats native pre-gated + ordinary factorized + hot-prefolded strategies by >=15% TPOT in 4/5 fresh conditions at <=0.02 nat/token NLL difference.",
+  "physical_object": "CPU resident expert groups and two GPU staging buffers",
+  "mirror_coordinate": "short role/view address bank within each physical group",
+  "controls": [
+    "native Pre-gated MoE",
+    "SpecPrefetch",
+    "SPICE low-rank surrogate",
+    "same-byte grouped ordinary factor bank",
+    "hot pre-folded ordinary experts",
+    "native on-demand"
+  ],
+  "development": {
+    "seeds": [
+      11,
+      12,
+      13
+    ],
+    "whole_prompt_identities": true
+  },
+  "fresh": {
+    "seeds": [
+      101,
+      102,
+      103,
+      104,
+      105
+    ],
+    "locked_before_access": true,
+    "no_audit_tuning": true
+  },
+  "mechanism_evidence": {
+    "virtual_transfer_overlap_possible": true,
+    "predictor_oracle_only_in_some_scenarios": true,
+    "native_same_cost_factorization_ties": true,
+    "real_GPU_not_run": true
+  },
+  "success_gate": "Real GPU pinned-memory two-buffer trace with native predictor hit and >=15% faster P95 TPOT at same total actual VRAM and heldout NLL vs fastest native strong baseline in >=4/5 independent fresh prompts.",
+  "failure_gate": "Same byte native pre-gated factor bank matches or exceeds, mispredicted bytes/sync consume benefit, or tensor caches copied but called aliased.",
+  "uncertainty": "predictor hit rate, transfer bandwidth, CPU/GPU synchronization, clock, batch/context; 5 seeds small and hardware measurement currently unavailable",
+  "hardware": "Stage-0 CPU + virtual event model executed; CUDA two-stream hardware stage BLOCKED",
+  "result_status": "NOT_COMPLETED"
+}

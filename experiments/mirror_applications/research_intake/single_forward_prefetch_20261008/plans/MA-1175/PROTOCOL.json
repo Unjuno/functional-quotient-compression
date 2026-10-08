@@ -1,0 +1,55 @@
+{
+  "experiment_id": "MA-1175",
+  "status": "UNTESTED",
+  "worker_claim": false,
+  "plan_only": true,
+  "stage0_report": "../../REPORT.md",
+  "title": "Single-forward multi-Mirror functional output transport",
+  "prior_art_refs": [
+    "PA16",
+    "PA42",
+    "PA417",
+    "PA414"
+  ],
+  "hypothesis": "At heldout useful task quality and matched actual serialized bytes, 4/5 trained logical Experts can be reconstructed from one cached statistic at <=0.90 P95 compared with strongest admissible byte-near non-Mirror method.",
+  "physical_object": "one shared nonlinear FFN/attention trunk",
+  "mirror_coordinate": "per-role output or hidden m; f_m(x)=g_m(r(x)) only if fiber invariance",
+  "controls": [
+    "MIMO",
+    "Parameter Superposition",
+    "simple linear/gate/IA3 output heads",
+    "cached preactivation",
+    "pre-folded tied ordinary experts",
+    "independent full experts"
+  ],
+  "development": {
+    "seeds": [
+      11,
+      12,
+      13
+    ],
+    "whole_task_identities": true
+  },
+  "fresh": {
+    "seeds": [
+      101,
+      102,
+      103,
+      104,
+      105
+    ],
+    "locked_before_access": true,
+    "no_audit_tuning": true
+  },
+  "mechanism_evidence": {
+    "output_only_exact": true,
+    "cache_preactivation_exact": true,
+    "arbitrary_hidden_output_only": false,
+    "gradient_share": true
+  },
+  "success_gate": "4/5 fresh task identities within +0.02 nat/token NLL and >=10% actual total bytes savings and <=0.90x P95 of fastest same-quality strong native baseline; extra simple code must not dominate.",
+  "failure_gate": "Exact output transport fails for hidden nonlinear tasks or ordinary output head / pre-folded control dominates at feasible RAM.",
+  "uncertainty": "metric u_c covariance aware, k=2 indicative only; runtime clock in seconds and serialized bytes measured separately",
+  "hardware": "CPU mechanism tested; real CPU/GPU natural task evaluation pending",
+  "result_status": "NOT_COMPLETED"
+}

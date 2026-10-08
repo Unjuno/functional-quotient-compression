@@ -1,0 +1,86 @@
+{
+  "study": "SFM001 + SFM002",
+  "branch": "research/mirror-single-forward-prefetch-20261008",
+  "primary_protocol_commit": "8579b4368bc8a39f7ea9f15861963c2319fd973c",
+  "folded_protocol_commit": "758a59c28b510bd9a9081b59c1e2383e20b38665",
+  "date": "2026-10-08",
+  "method_status": "SYNTHETIC_MECHANISM_ONLY",
+  "backend": "PyTorch 2.10 CPU eager; NumPy 2.3.5; float64 algebra; float32 CPU benchmark",
+  "hardware": "AMD EPYC 9V74 virtual CPU",
+  "CPU_threads": 1,
+  "CUDA_available": false,
+  "clock_locked": false,
+  "warmup": 20,
+  "timed_repetitions": 100,
+  "stage0_dev_worlds": [
+    11,
+    12,
+    13
+  ],
+  "stage0_fresh_worlds": [
+    101,
+    102,
+    103,
+    104,
+    105
+  ],
+  "folded_dev_worlds": [
+    21,
+    22,
+    23
+  ],
+  "folded_fresh_worlds": [
+    201,
+    202,
+    203,
+    204,
+    205
+  ],
+  "methods": [
+    "repeat full",
+    "shared preactivation",
+    "packed full",
+    "packed cached preactivation",
+    "exact output orbit",
+    "learned ordinary ridge output decoder",
+    "native pre-folded experts",
+    "two-buffer offload event model"
+  ],
+  "facts": {
+    "exact_algebra_pass": "5/5 fresh",
+    "tests": "10/10 stage0 and 2/2 folded",
+    "gradient_abs_max": "6.94e-18",
+    "nonlinear_output_collision_gap": "0.141630",
+    "pointwise_approx_lower_bound": "0.070815",
+    "learned_ridge_hidden_transport_mean_NMSE_median": "0.143113",
+    "learned_ridge_mean_NMSE_range": [
+      0.125678,
+      0.157903
+    ],
+    "cpu_B128_K4_p95_ratio": "1.039762, 0/5 <=0.90",
+    "cpu_B128_K5_p95_ratio": "0.861578, 5/5 <=0.90",
+    "folded_CPU_B128_K5_p95_ms_median": "0.750105",
+    "cached_CPU_B128_K5_p95_ms_median": "1.736695 in folded-controlled run",
+    "resident_fold_npz_bytes": 655886,
+    "resident_shared_npz_bytes": 134378,
+    "virtual_16MiB_12GBps_K4_transfer_ms": 1.648101,
+    "virtual_16MiB_12GBps_K4_ideal_hidden_after_initial": true,
+    "native_factorized_prefetch_parity": true
+  },
+  "gates": {
+    "exact_factorization": "PASS under constrained architecture",
+    "hidden_output_only_generic": "FAIL",
+    "joint_K4_K5_cpu_speed": "FAIL",
+    "K5_CPU_isolated_setting": "PASS",
+    "real_GPU_offload": "NOT_TESTED",
+    "mirror_specific_system_advantage": "NOT_ESTABLISHED"
+  },
+  "strict_recording": "The raw 8 source/test + 10 data CSV files are archived in the conversation ZIP; this Git branch retains the frozen protocols, full mathematical report, and summary evidence. Production checkpoints/GPU traces not available.",
+  "future_requirements": [
+    "real native pre-gated compare",
+    "trained independent task outputs/quality",
+    "GPU VRAM, PCIe/transfer streams",
+    "matched task budget and native cheap factor codes"
+  ],
+  "uncertainty": "5 seed ranges not confidence intervals; runtime unlocked-clock noisy, simulator timings assumed; report metric-typed u_c when actual task data exist."
+}
