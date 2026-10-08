@@ -1,6 +1,6 @@
 {
   "experiment_id": "MA-260",
-  "commit": "pending",
+  "commit": "80d47a5",
   "tests": {
     "command": "pytest -q experiments/mirror_applications/ma-260-batchensemble-mirror-ensemble/tests",
     "passed": 3,
@@ -19,22 +19,36 @@
     "all_development_and_fresh_payloads_replayed": true
   },
   "fresh_split_integrity_checked": true,
-  "development_seeds": [26001,26002],
-  "fresh_seeds": [26011,26012,26013],
-  "regimes": ["aligned","unrelated"],
+  "development_seeds": [
+    26001,
+    26002
+  ],
+  "fresh_seeds": [
+    26011,
+    26012,
+    26013
+  ],
+  "regimes": [
+    "aligned",
+    "unrelated"
+  ],
   "success_gate": {
     "mirror_accuracy_gap_to_independent_limit": 0.02,
     "mirror_accuracy_gap_passed": true,
     "mirror_NLL_and_ECE_gap_to_BatchEnsemble_limit": 0.02,
     "mirror_payload_le_batchensemble": true,
     "diversity_floor": 0.01,
-    "fresh_aligned_pairwise_JS": [0.0314,0.0838,0.0068],
+    "fresh_aligned_pairwise_JS": [
+      0.0314,
+      0.0838,
+      0.0068
+    ],
     "overall_gate_passed": false
   },
   "notes": [
     "Aligned Mirror actual payload was 1159 B versus BatchEnsemble 1536 B in every world.",
     "One fresh aligned seed failed the pairwise diversity floor; no post-fresh tuning was performed.",
-    "Fresh unrelated Mirror member accuracy ranged 0.458–0.474, below BatchEnsemble 0.633–0.665.",
+    "Fresh unrelated Mirror member accuracy ranged 0.458\u20130.474, below BatchEnsemble 0.633\u20130.665.",
     "CPU throughput is noisy and no runtime win is claimed."
   ]
 }

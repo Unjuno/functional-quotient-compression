@@ -5,8 +5,8 @@
 - Base commit: `ba345ff`
 - Development complete: yes (26001, 26002; both regimes)
 - Fresh/audit opened: yes (26011–26013; both regimes)
-- Results committed: pending
-- Verification committed: pending
+- Results committed: yes
+- Verification committed: yes
 - Registry row updated: pending
 
 ## Next action
