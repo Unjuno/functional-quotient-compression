@@ -1,0 +1,125 @@
+{
+  "condition": "development",
+  "seed": 38902,
+  "hash_params": [
+    2733,
+    8769
+  ],
+  "unique_hash_signatures": 80,
+  "collision_groups": 36,
+  "collided_token_fraction": 0.65625,
+  "summaries": [
+    {
+      "method": "independent",
+      "serialized_bytes": 5290,
+      "payload_sha256": "570dac628d7e1d780f937603727e15fe8aae86f495ab021245a466b760fb9a71",
+      "optimizer_updates": 512,
+      "training_examples_seen": 131072,
+      "train_wall_s": 0.521175810994464,
+      "validation": {
+        "accuracy": 1.0,
+        "nll": 0.0076371761970222,
+        "collided_token_accuracy": 1.0,
+        "unique_signature_accuracy": 1.0,
+        "collision_rate": 0.65625
+      },
+      "test": {
+        "accuracy": 1.0,
+        "nll": 0.0076532731764018536,
+        "collided_token_accuracy": 1.0,
+        "unique_signature_accuracy": 1.0,
+        "collision_rate": 0.65625
+      },
+      "macs_per_token_estimate": {
+        "lookup_macs": 0,
+        "importance_macs": 0,
+        "classifier_macs": 128,
+        "trig_ops_per_token": 0
+      }
+    },
+    {
+      "method": "fixed_hash",
+      "serialized_bytes": 2674,
+      "payload_sha256": "5b4dcd75e2dacd7ed8c23d0f66b6b5a2b6fd79155cf9a54b21e0aeb377f762a2",
+      "optimizer_updates": 512,
+      "training_examples_seen": 131072,
+      "train_wall_s": 0.6590757530066185,
+      "validation": {
+        "accuracy": 0.694427490234375,
+        "nll": 0.7048956751823425,
+        "collided_token_accuracy": 0.6034963726997375,
+        "unique_signature_accuracy": 0.8681172132492065,
+        "collision_rate": 0.65625
+      },
+      "test": {
+        "accuracy": 0.694793701171875,
+        "nll": 0.7050006985664368,
+        "collided_token_accuracy": 0.605370044708252,
+        "unique_signature_accuracy": 0.8634722232818604,
+        "collision_rate": 0.65625
+      },
+      "macs_per_token_estimate": {
+        "lookup_macs": 32,
+        "importance_macs": 0,
+        "classifier_macs": 128,
+        "trig_ops_per_token": 0
+      }
+    },
+    {
+      "method": "native_hash",
+      "serialized_bytes": 3418,
+      "payload_sha256": "012b37fa992b2418a5f7afa625bd922e54cd4024a6c433677dcae29486038273",
+      "optimizer_updates": 512,
+      "training_examples_seen": 131072,
+      "train_wall_s": 1.4575824619969353,
+      "validation": {
+        "accuracy": 1.0,
+        "nll": 0.0353572852909565,
+        "collided_token_accuracy": 1.0,
+        "unique_signature_accuracy": 1.0,
+        "collision_rate": 0.65625
+      },
+      "test": {
+        "accuracy": 1.0,
+        "nll": 0.03508907929062843,
+        "collided_token_accuracy": 1.0,
+        "unique_signature_accuracy": 1.0,
+        "collision_rate": 0.65625
+      },
+      "macs_per_token_estimate": {
+        "lookup_macs": 32,
+        "importance_macs": 32,
+        "classifier_macs": 128,
+        "trig_ops_per_token": 0
+      }
+    },
+    {
+      "method": "mirror_angle",
+      "serialized_bytes": 3154,
+      "payload_sha256": "4b58f9d2418f05a889df40d2bfe653b8f3da73608d935b4879aaeda1fee59485",
+      "optimizer_updates": 512,
+      "training_examples_seen": 131072,
+      "train_wall_s": 0.7754033640085254,
+      "validation": {
+        "accuracy": 1.0,
+        "nll": 0.041320592164993286,
+        "collided_token_accuracy": 1.0,
+        "unique_signature_accuracy": 1.0,
+        "collision_rate": 0.65625
+      },
+      "test": {
+        "accuracy": 1.0,
+        "nll": 0.04153958335518837,
+        "collided_token_accuracy": 1.0,
+        "unique_signature_accuracy": 1.0,
+        "collision_rate": 0.65625
+      },
+      "macs_per_token_estimate": {
+        "lookup_macs": 32,
+        "importance_macs": 32,
+        "classifier_macs": 128,
+        "trig_ops_per_token": 2
+      }
+    }
+  ]
+}

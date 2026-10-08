@@ -1,23 +1,23 @@
 # MA-389 status
 
-- Status: SCREENING; development protocol frozen before implementation.
+- Status: FAIL against the frozen <=0.90x native Hash Embedding byte gate; other gates pass.
 - Branch: `research/ma-389-hash-embedding-mirror-importance-20261008`
 - Base commit: `f3f9240`
 - Last verified commit: pending
-- Development complete: no
+- Development complete: yes (seeds 38901, 38902)
 - Fresh/audit opened: no
-- Results committed: no
-- Verification committed: no
-- Registry row updated: no
+- Results committed: yes (pending final commit)
+- Verification committed: yes (pending final commit)
+- Registry row updated: yes in working tree (FAIL)
 
 ## Next action
 
-Implement native two-table Hash Embedding and the one-angle importance-code control; run development seeds only.
+Preserve the aligned feasibility point and strict byte-gate miss; continue to MA-391. Fresh remains sealed.
 
 ## Blockers
 
-None.
+No blocker. Mirror missed the registered 10% byte reduction against native Hash Embedding in both worlds; fresh was not run.
 
 ## Decisions / rulings
 
-This is a synthetic aligned lookup screen and does not establish natural vocabulary compression.
+This is a synthetic aligned lookup screen and does not establish natural vocabulary compression. Fresh seeds remain sealed because the strict byte gate failed.

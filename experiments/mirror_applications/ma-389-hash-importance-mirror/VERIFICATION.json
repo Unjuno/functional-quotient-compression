@@ -1,19 +1,32 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-389",
+  "evidence_commit": "pending-result-commit",
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "python -m pytest -q experiments/mirror_applications/ma-389-hash-importance-mirror/tests",
+    "passed": 3,
+    "failed": 0
   },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "final_inference_payloads": 8,
+    "format": "deterministic ZIP/NPY FP16",
+    "actual_bytes_and_sha256_checked": true,
+    "hash_parameters_paid": true
   },
   "metric_replay": {
-    "checked": false,
-    "max_difference": null
+    "checked": true,
+    "max_difference": 0.0,
+    "quality_and_collision_metrics": "exact from reloaded serialized payloads"
   },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "runtime": {
+    "source": "RUNTIME_AUDIT.csv",
+    "repetitions_per_method_seed": 20,
+    "condition": "CPU one torch thread"
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_opened": false,
+  "notes": [
+    "Mirror meets quality, collision, and runtime gates in both aligned development worlds and uses 0.596x the independent table bytes.",
+    "Mirror uses 0.923x the native Hash Embedding payload, missing the frozen <=0.90x storage threshold; fresh remains sealed.",
+    "The teacher is generated directly from a normalized two-hash angular combination, so this is an aligned synthetic feasibility screen, not natural language evidence."
+  ]
 }

@@ -1,0 +1,35 @@
+{
+  "seed": 38902,
+  "repeats": 20,
+  "runtime": "CPU, one torch thread",
+  "rows": [
+    {
+      "method": "independent",
+      "payload_bytes": 5290,
+      "token_lookups": 655360,
+      "wall_seconds": 0.019126490005874075,
+      "lookups_per_second": 34264520.03471246
+    },
+    {
+      "method": "fixed_hash",
+      "payload_bytes": 2674,
+      "token_lookups": 655360,
+      "wall_seconds": 0.11678906599991024,
+      "lookups_per_second": 5611484.212062315
+    },
+    {
+      "method": "native_hash",
+      "payload_bytes": 3418,
+      "token_lookups": 655360,
+      "wall_seconds": 0.11753689900797326,
+      "lookups_per_second": 5575780.92948958
+    },
+    {
+      "method": "mirror_angle",
+      "payload_bytes": 3154,
+      "token_lookups": 655360,
+      "wall_seconds": 0.11037797799508553,
+      "lookups_per_second": 5937416.248277163
+    }
+  ]
+}

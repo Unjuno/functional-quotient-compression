@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (42 completed; 588 UNTESTED)
+- P0: **630** (43 completed; 587 UNTESTED)
 - P1: **422** (12 completed; 410 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1100 UNTESTED, 31 PROMISING, 24 FAIL**
+- Current MA statuses: **1099 UNTESTED, 31 PROMISING, 25 FAIL**
 - 47 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -23,22 +23,22 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-389 — Hash Embedding Mirror importance codes (P0; PA58)**
+**MA-391 — quotient-remainder Mirror compositional embeddings (P0; PA59)**
 
-MA-385 FAILED both development gates: the 1,396 B Mirror prompt was larger than the 1,352 B explicit DualPrompt bank, and accuracy was about 3 points lower. Fresh remains sealed. MA-383 also failed its synthetic prompt compression screen. Continue with Hash Embeddings: compare native hash-selected shared components and token importance weights against the exact same bank with a Mirror importance code. MA-374's original replay limitation remains documented: its current-runtime replay variant is exact, but the original twelve payload hashes are unreproducible. MA-369/371/372 remain UNTESTED and paused pending width/depth output-code family redesign.
+MA-389 met aligned synthetic quality, collision, and CPU runtime gates and used 0.596x the independent table bytes, but its 3,154 B Mirror payload was only 0.923x the native Hash Embedding payload, missing the registered 0.90x requirement; fresh remains sealed. Continue with quotient-remainder compositional embeddings: compare its native multiplication/concatenation composition to a Mirror-coded partition view and measure uniqueness, bytes, and lookup speed. MA-374's original replay limitation remains documented; MA-369/371/372 remain paused after same-family width/depth output-code failures.
 
-Required controls: the native Hash Embedding implementation with its hash-selected component pool and learned per-token importance weights, an identical fixed component pool with direct scalar importance controls, and a Mirror-coded importance view. Use the same token distribution, collisions, and lookup protocol. Measure next-token quality, actual table/code bytes, collision sensitivity, and lookup throughput.
+Required controls: native quotient-remainder partition tables with multiplication, concatenation, and addition composition; independent embedding table; fixed component sharing; and the Mirror partition/View code. Hold out unseen token IDs and report embedding uniqueness/collision, NLL, actual table/code bytes, and CPU lookup throughput.
 
-Prior art: PA58 Hash Embeddings. Learned token-specific importance weights are established prior art; Mirror must add a useful or smaller functional coordinate beyond those weights and must pay hash state, indices, and code metadata.
+Prior art: PA59 quotient-remainder embeddings. Native partition composition is already a compact unique-address mechanism; Mirror must improve quality-byte or runtime frontier beyond these direct composition controls.
 
 ## Active experiment
 
-MA-389 is next on its dedicated research branch. MA-367/368/374/375/379/381/383/385 fresh worlds remain unopened under their registered gates.
+MA-391 is next on its dedicated research branch. MA-367/368/374/375/379/381/383/385/389 fresh worlds remain unopened under their registered gates.
 
 ## Verified status index
 
 - **PROMISING (31):** MA-001, MA-002, MA-003, MA-004, MA-005, MA-006, MA-007, MA-008, MA-012, MA-014, MA-015, MA-041, MA-076, MA-079, MA-111, MA-121, MA-156, MA-160, MA-171, MA-173, MA-181, MA-189, MA-241, MA-244, MA-245, MA-249, MA-250, MA-251, MA-374, MA-381, MA-691.
-- **FAIL (24):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-367, MA-368, MA-375, MA-379, MA-383, MA-385.
+- **FAIL (25):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-367, MA-368, MA-375, MA-379, MA-383, MA-385, MA-389.
 
 All per-ID evidence is retained in the local experiment directories and in `CLAIM_LEDGER.csv`. Consult [the evidence integration audit](../../docs/phase2/MIRROR_MA_EVIDENCE_INTEGRATION_2026-10-08.md) for linked reports, verifications, provenance and claim boundaries.
 
