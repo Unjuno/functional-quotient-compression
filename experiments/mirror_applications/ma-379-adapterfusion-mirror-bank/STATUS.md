@@ -3,11 +3,11 @@
 - Status: FAIL; frozen development gate did not pass.
 - Branch: `research/ma-379-adapterfusion-mirror-bank-20261008`
 - Base commit: `ad51e99`
-- Last verified commit: pending
+- Last verified commit: `84a9b73`
 - Development complete: yes (seeds 37901, 37902)
 - Fresh/audit opened: no
-- Results committed: pending
-- Verification committed: pending
+- Results committed: yes
+- Verification committed: yes
 - Registry row updated: yes (FAIL)
 
 ## Next action
