@@ -1,1 +1,28 @@
-{"experiment_id":"MA-674","draw_id":"Draw43","protocol_sha256":"","draw_record_sha256":"","results_sha256":"","audit_replay":"pending","serialized_payload_replay":"pending","checks":[]}
+{
+  "experiment_id": "MA-674",
+  "draw_id": "Draw43",
+  "protocol_sha256": "5f1b493d60bf3123886cda5c9a8bb41c3347d37fee43db4e85c1817122df145c",
+  "draw_record_sha256": "6789cc2289ca3f3ca7953d7571e7716e3b8f2aa407e01ccfe385e0e15a3da46e",
+  "results_sha256": "4152eb48b08c3dab3c3f6ebdd895129c54164df1f7313e7319dee5af7f07e1b2",
+  "audit_replay": "pending",
+  "serialized_payload_replay": "pending",
+  "checks": [
+    {
+      "name": "focused tests",
+      "command": "pytest -q experiments/mirror_applications/ma-674-sparse-lora-atoms/tests",
+      "passed": 2,
+      "failed": 0
+    },
+    {
+      "name": "fixed-seed fresh replay",
+      "command": "python experiments/mirror_applications/ma-674-sparse-lora-atoms/source/run_experiment.py --seeds 67411 67412 67413",
+      "passed": true,
+      "notes": "quality and serialized byte metrics replayed; time excluded"
+    },
+    {
+      "name": "gauge-invariant functional comparison",
+      "passed": true,
+      "notes": "compares reconstructed full delta matrices rather than factor coordinates"
+    }
+  ]
+}
