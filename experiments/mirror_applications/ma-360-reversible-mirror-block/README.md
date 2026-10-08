@@ -1,34 +1,40 @@
 # MA-360 — Reversible shared block with Mirror depth views
 
-Status: SCREENING; protocol frozen before development  
+Status: **FAIL for Mirror-specific value; reversible tied-block memory result is narrow synthetic evidence.**
 Branch: `research/ma-360-reversible-mirror-block-20261008`  
 Base: `c935a90`  
 Prior art: PA48 reversible PEFT.
 
 ## H — Hypothesis
 
-A shared additive-coupling block with one small layer-specific Mirror coordinate can retain a multi-step synthetic task while reducing saved activation memory versus an ordinary shared tied block, at lower serialized weight bytes than untied blocks, with recomputation overhead below 2×.
-
-## Mirror insertion
+A scalar Mirror coordinate per application of one shared reversible additive-coupling block may preserve a multi-step task while reducing serialized weights and activation memory, with recomputation below 2x.
 
 > **Mirror insertion:** this experiment adds a scalar coordinate `m_l` to each repeated application of one shared reversible coupling block so logical depth steps can differ without separate physical block weights.
 
-Controls: untied coupling blocks, ordinary tied block, tied block plus direct layer scalar gates, reversible tied block, and reversible tied block plus Mirror scalar views. Mirror and direct scalar views use identical parameter counts and initialization.
+Direct layer gates are the closest non-Mirror control.
 
-## T — Frozen protocol
+## T — Protocol and amendment
 
-Small CPU PyTorch mechanism screen, 4 seeds: dev 36001/36002, fresh 36011/36012 locked. Dimension 32, depth 8, batch 64, synthetic regression from an untied additive-coupling teacher. 300 AdamW updates, lr=1e-3. Record task MSE, parameter archive bytes, peak live saved activation bytes excluding parameters, MAC proxy, train time and forward/backward time. The custom reversible backward reconstructs each prior coupling input from its output and recomputes local gradients. No CUDA device is present, so conclusions are CPU-scoped.
+Synthetic 32D regression from an untied additive-coupling teacher; depth 8, batch 64, 300 AdamW updates. Development seeds 36001/36002; fresh 36011/36012 locked. Compared untied, ordinary tied, tied with direct gates, tied with Mirror, and reversible tied controls. Metrics include actual serialized bytes, task MSE, saved activation bytes excluding parameter storage, MAC proxy, and train/one-pass wall times.
 
-## Gates
+The original development payloads did not replay in the current container. Amendment A1 preserved them under `protocol_variants/pre_environment_replay_audit/`, fixed CPU threads at one, recorded runtime versions, and reran development seeds only. No model or gate was tuned; fresh seeds remain sealed. Ten amended rows replay exactly.
 
-PASS if both dev worlds: Mirror MSE within 5% of untied upper control, at least 30% lower activation bytes than ordinary tied unrolled execution, at least 10% fewer parameter bytes than untied blocks, and runtime <=2× non-reversible tied. Direct scalar gate must be at least 10% larger or worse quality for Mirror-specific claim. FAIL if quality misses, activation saving <30%, runtime >2×, or direct gate matches within 10%. Fresh remains sealed after any dev fail.
+## D — Development result
 
-## Boundaries
+**FAIL for Mirror-specific value.** Direct and Mirror had identical payload/hash/task MSE in both seeds: 2,600B at MSE 2.0094 and 2,606B at MSE 1.9862. Their saved activation count was also identical (204,896B/batch), so no Mirror-specific compression or memory effect appears.
 
-Synthetic CPU screen only; no Transformer, long-sequence training, GPU throughput, or scaling evidence. Report recomputation cost separately from activation bytes and weight storage.
+The reversible tied block used 2,382B/2,400B and saved 81,956B/batch versus 139,264B for ordinary tied execution (41.1% fewer saved activation bytes). Its task MSE matched tied at 2.0364/2.0022, within 5% of the untied upper control. Training was 1.225s/1.003s versus tied 0.869s/0.759s (1.41x/1.32x), below the 2x ceiling. This is a narrow reversible execution point, not a Mirror benefit.
 
-## Result — development
+## C — Counter-hypothesis
 
-**FAIL for Mirror-specific value; reversible tied block is a narrow PROMISING memory point.** On both dev seeds, direct scalar gates and Mirror views had identical payload hashes and task MSE. They used 2,598/2,608B versus tied 2,388/2,398B. The reversible tied block used 2,385/2,401B, matched tied task MSE, and reduced peak live saved activations from 139,264B to 81,956B (41.1%). Training wall time was 1.28–1.33s vs 0.68–0.76s tied (~1.8×), within the frozen 2× bound. Untied models had lower MSE but ~19.1KB payload.
+Direct scalar gates exactly reproduce the Mirror view, so any apparent difference is attributable to shared/tied or reversible execution. The synthetic shallow CPU task may not expose natural Transformer activation-memory behavior.
 
-The first exploratory run used generic checkpointing rather than inverse reconstruction; it is retained in `artifacts/development.log` and excluded. Three tests checked inverse reconstruction, gradient agreement with direct autograd, and deterministic serialization. Fresh seeds remain sealed because the Mirror/direct gate failed.
+## U — Unconfirmed
+
+Fresh seeds, GPU scaling, long sequence training, Transformer quality, and optimized reversible kernels remain untested.
+
+## Fact / interpretation / hypothesis
+
+- **Fact:** see `RESULTS_CORE.csv`, `VERIFICATION.json`, and preserved pre-amendment data. Ten amended rows replay exactly.
+- **Interpretation:** reversible tying reduced measured saved activation bytes but cost roughly 1.3–1.4x training time. Mirror matched a simple direct gate exactly.
+- **Hypothesis:** a Mirror-specific gain would require a coordinate richer than direct scalar gating and must be separately tested against reversible native controls.

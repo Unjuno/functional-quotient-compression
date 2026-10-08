@@ -4,6 +4,7 @@ from pathlib import Path
 import numpy as np
 import torch
 from torch import nn
+torch.set_num_threads(1)
 ROOT=Path(__file__).resolve().parents[1];OUT=ROOT/'artifacts';SEEDS=(36001,36002,36011,36012);D=32;H=D//2;DEPTH=8;BATCH=64;UPDATES=300
 
 class RevStep(torch.autograd.Function):

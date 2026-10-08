@@ -6,7 +6,7 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (36 completed; 594 UNTESTED)
+- P0: **630** (37 completed; 593 UNTESTED)
 - P1: **422** (12 completed; 410 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
 - Current MA statuses: **1107 UNTESTED, 29 PROMISING, 19 FAIL**

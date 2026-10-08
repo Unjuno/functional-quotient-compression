@@ -8,13 +8,77 @@
   "physical_object": "one shared additive-coupling block repeated eight times",
   "mirror_coordinate": "one learned scalar per repeated depth step modulating coupling branches",
   "logical_multiplicity": "eight distinct depth-step functions from shared block parameters",
-  "prior_art_refs": ["PA48"],
-  "controls": ["untied blocks", "ordinary tied unrolled block", "tied with direct layer gates", "reversible tied block", "reversible tied block with Mirror scalar views"],
-  "development": {"worlds_or_seeds": [36001,36002], "fresh": [36011,36012], "dim": 32, "depth": 8, "batch_size": 64, "updates": 300, "selection_metric": "task MSE, serialized weight bytes, peak saved activation bytes, MAC proxy, wall time"},
-  "fresh": {"worlds_or_seeds": [36011,36012], "locked_before_access": true, "open_only_if_development_passes": true},
-  "storage": {"authority": "actual serialized inference state bytes", "paid_objects": ["all block weights", "layer coordinates/gates", "optimizer-independent inference buffers", "metadata"]},
-  "compute": {"report_examples": true, "report_optimizer_updates": true, "report_MAC_proxy": true, "report_train_wall_time": true, "report_inference_wall_time": true, "report_recomputation_separately": true},
+  "prior_art_refs": [
+    "PA48"
+  ],
+  "controls": [
+    "untied blocks",
+    "ordinary tied unrolled block",
+    "tied with direct layer gates",
+    "reversible tied block",
+    "reversible tied block with Mirror scalar views"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      36001,
+      36002
+    ],
+    "fresh": [
+      36011,
+      36012
+    ],
+    "dim": 32,
+    "depth": 8,
+    "batch_size": 64,
+    "updates": 300,
+    "selection_metric": "task MSE, serialized weight bytes, peak saved activation bytes, MAC proxy, wall time"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      36011,
+      36012
+    ],
+    "locked_before_access": true,
+    "open_only_if_development_passes": true
+  },
+  "storage": {
+    "authority": "actual serialized inference state bytes",
+    "paid_objects": [
+      "all block weights",
+      "layer coordinates/gates",
+      "optimizer-independent inference buffers",
+      "metadata"
+    ]
+  },
+  "compute": {
+    "report_examples": true,
+    "report_optimizer_updates": true,
+    "report_MAC_proxy": true,
+    "report_train_wall_time": true,
+    "report_inference_wall_time": true,
+    "report_recomputation_separately": true
+  },
   "success_gate": "Both dev worlds: Mirror MSE within 5% of untied upper control, >=30% lower saved activation bytes than ordinary tied unrolled, >=10% fewer parameter bytes than untied, runtime <=2x tied; direct gate >=10% larger or worse quality for Mirror-specific claim.",
   "failure_gate": "Quality or activation-saving threshold missed, runtime >2x, or direct gate within 10%; fresh sealed.",
-  "boundaries": ["synthetic CPU mechanism screen only", "no Transformer or GPU scaling claim", "activation memory and recomputation are reported separately"]
+  "boundaries": [
+    "synthetic CPU mechanism screen only",
+    "no Transformer or GPU scaling claim",
+    "activation memory and recomputation are reported separately"
+  ],
+  "amendments": [
+    {
+      "id": "A1",
+      "timing": "before fresh seeds were accessed",
+      "reason": "Committed development payloads did not reproduce in current container; fresh seeds remain sealed.",
+      "change": "Preserve the original run as an excluded variant; pin CPU thread count to 1 and current Python/NumPy/PyTorch versions, then rerun only development seeds 36001 and 36002 without tuning model or gates.",
+      "fresh_status": "36011-36012 remain sealed."
+    }
+  ],
+  "runtime_environment": {
+    "device": "CPU",
+    "threads": 1,
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "pytorch": "2.10.0+cpu"
+  }
 }
