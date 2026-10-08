@@ -21,7 +21,7 @@ Use one fresh random draw per experiment rather than advancing through IDs in or
 4. Before development/audit results are accessed, persist the seed, baseline commit, eligible pool CSV and hash, pool size, index, selected registry row and excluded branch IDs on that experiment's research branch.
 5. Complete or document a blocker for the selected ID before drawing again. Re-fetch and rebuild the pool for each next draw; do not reserve multiple IDs or select the next numeric ID.
 
-The user's randomized-selection instruction supersedes the numbered literature queues below. Those queues remain prior-art maps, not execution order. Draw 5 selected MA-945; its experiment branch is `research/ma-945-coanerv-mirror-20261008`.
+The user's randomized-selection instruction supersedes the numbered literature queues below. Those queues remain prior-art maps, not execution order. Draw 5 selected MA-945 and completed FAIL; its evidence is on `research/ma-945-coanerv-mirror-20261008`. Next candidate must come from a fresh uniform draw after fetching the latest worker-ready baseline. Historical numeric queues below are prior-art maps only.
 
 ## Literature-derived cross-over queue
 
@@ -399,7 +399,7 @@ Read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_FOURTEENTH_SWEEP.
 
 L0/L1 outcomes alone never justify MA PROMISING as a deployable compression claim. Pre-trained base SVD and shared bases may cost storage/calibration, and heldout test-task weight deltas cannot be used to fit a deployable code at inference.
 
-**Next candidate remains MA-255; no existing status or frozen protocol changed.**
+Execution order is randomized per the user instruction; MA-255 is not reserved. Choose the next ID only by a fresh uniform draw from the refreshed eligible pool.
 
 ## Supplemental function-space falsification (no newly allocated MA IDs)
 

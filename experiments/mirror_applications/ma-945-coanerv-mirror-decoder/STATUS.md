@@ -3,12 +3,12 @@
 - Status: FAIL (development gate)
 - Branch: `research/ma-945-coanerv-mirror-20261008`
 - Base commit: 379a9417cb32c9f96c68c779315f90381151eed1
-- Last verified commit: pending-result-commit
+- Last verified commit: 0b5a0f7f1772135250afdb5c3b3b3a6e02a90ea0-result-commit
 - Development complete: yes (44 fits, 2 seeds, 2 videos)
 - Fresh/audit opened: no (no product-Mirror rank passed)
-- Results committed: pending
-- Verification committed: pending
-- Registry row updated: pending
+- Results committed: yes
+- Verification committed: yes
+- Registry row updated: yes
 
 ## Decision
 
