@@ -79,6 +79,15 @@ The table below tells workers where to try the same extra low-description functi
 | Many-LoRA serving | shared multi-adapter basis/cluster and GPU pager | per-adapter structured `m` with cluster/private exception | lower useful adapter bytes/TTFT than optimized serving? | Compress then Serve clusters, S-LoRA, Punica, LoRDBA |
 | Multi-agent low-rank KV | base/neutral KV cache plus task LR cache | agent m over already low-rank cache or exact read-path transform | true cache alias and target quality gain beyond native LR kernel? | LRAgent Flash-LoRA-Attention, PReCache, aLoRA, MA691 |
 
+| KG relation operator | RotatE phase/QuatE relation/PairRE head-tail/TuckER shared tensor | relation×domain×time `m` over native relation map | additional natural relation transfer with fewer paid codes? | RotatE, ComplEx, TuckER, PairRE, QuatE, KrausKGE |
+| KG graph message transformation | CompGCN shared relation/entity composition | edge role×graph-domain `m` | functionally distinct message operators beyond native relation codes? | CompGCN, TuckER, filtered MRR |
+| Camera RAW ISP and photometric control | ParamISP/Uni-ISP shared forward+inverse camera pipeline | camera×EXIF ISO×exposure/stage `m` | useful camera adaptation beyond native device metadata/gates? | ParamISP, Uni-ISP, PQDynamicISP, MetaISP |
+| Camera optical PSF | shared lens PSF latent / spatially varying optical corrector | lens×focus×spatial-position `m` | compact lens correction without full per-lens filters? | OmniLens++, Neural Lens Modeling, low-rank lens correction |
+| Adaptive robot dynamics | UP-OSI/RMA/CoRMA shared policy + history system-ID | deployable history-derived physics×contact `m` | fewer task policy bytes at equal OOD control/latency? | RMA, UP-OSI, CoRMA, A-NC |
+| Robot body dynamics | shared morphology-conditioned world model | embodiment×skill×dynamics `m` | unseen body-skill rollouts without independent policies? | morphology graph world model, RMA, CTS |
+| Acoustic room fields | NAF/TA-RIR shared source-receiver field | room×source×receiver `m` | per-room response quality beyond native room latent at fewer bytes? | NAF, retrieval NAF, TA-RIR, NAMS |
+| Acoustic directional propagation | shared multipole/Ambisonic field | room×source×orientation `m` | physical RIR transfer without per-room multipoles? | NAMS, directional NAF, few-shot acoustic flow |
+
 ## Required variants after a direct screen
 
 A family that passes a first mechanism screen should usually be expanded in this order:
