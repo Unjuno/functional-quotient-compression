@@ -9,7 +9,7 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 - P0: **630** (53 completed; 577 UNTESTED)
 - P1: **422** (12 completed; 410 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1090 UNTESTED, 32 PROMISING, 33 FAIL**
+- Current MA statuses: **1090 UNTESTED, 33 PROMISING, 32 FAIL**
 - 51 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -25,18 +25,18 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 **MA-260 — BatchEnsemble rank-one Mirror ensemble (P0; PA17)**
 
-MA-257 is PROMISING only for a synthetic rotation-compositional family: it reached 0.986–0.994 on the withheld factor pair and used 819 B versus 827 B for the additive control; the control matched quality. MA-258 is FAIL: aligned Mirror quality was exact but actual bytes were 0.512x rank-2 SVD, narrowly missing the frozen 0.50x cap; unrelated expert MSE was 0.87–0.89. Fresh is sealed. MA-255 and MA-399 are also recorded FAIL. MA-369/371/372 remain UNTESTED and paused pending width/depth output-code family redesign.
+MA-257 is PROMISING only for a synthetic rotation-compositional family: it reached 0.986–0.994 on the withheld factor pair and used 819 B versus 827 B for the additive control; the control matched quality. MA-258 is PROMISING on its canonical output-channel Givens screen: fresh aligned Mirror MSE was about 1e-9 at 1,514 B versus rank-2 SVD at 3,822 B; unrelated fresh MSE was 0.848–0.889. A separate flattened-matrix sensitivity rerun was exact on aligned maps but missed its stricter 0.50x total-byte cap at 0.512x; its fresh seeds remain sealed. MA-255 and MA-399 are recorded FAIL. MA-369/371/372 remain UNTESTED and paused pending width/depth output-code family redesign.
 
 Next: read PA17 and freeze the BatchEnsemble rank-one versus Mirror member-context controls for MA-260.
 
 ## Active experiment
 
-MA-255, MA-258, MA-383, MA-385, MA-389, MA-391, MA-392, MA-393, MA-395, MA-397 and MA-399 are FAIL and recorded on dedicated research branches. MA-257 is PROMISING on a dedicated branch. MA-260 is next. MA-367/368/374/375/379/381/383/385/389/391/392/393/395/397/399 fresh worlds remain unopened under their registered gates.
+MA-255, MA-383, MA-385, MA-389, MA-391, MA-392, MA-393, MA-395, MA-397 and MA-399 are FAIL and recorded on dedicated research branches. MA-257 and canonical MA-258 are PROMISING on dedicated branches. MA-260 is next. MA-367/368/374/375/379/381/383/385/389/391/392/393/395/397/399 fresh worlds remain unopened under their registered gates.
 
 ## Verified status index
 
-- **PROMISING (32):** MA-001, MA-002, MA-003, MA-004, MA-005, MA-006, MA-007, MA-008, MA-012, MA-014, MA-015, MA-041, MA-076, MA-079, MA-111, MA-121, MA-156, MA-160, MA-171, MA-173, MA-181, MA-189, MA-241, MA-244, MA-245, MA-249, MA-250, MA-251, MA-257, MA-374, MA-381, MA-691.
-- **FAIL (33):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-258, MA-367, MA-368, MA-375, MA-379, MA-383, MA-385, MA-389, MA-391, MA-392, MA-393, MA-255, MA-395, MA-397, MA-399.
+- **PROMISING (33):** MA-001, MA-002, MA-003, MA-004, MA-005, MA-006, MA-007, MA-008, MA-012, MA-014, MA-015, MA-041, MA-076, MA-079, MA-111, MA-121, MA-156, MA-160, MA-171, MA-173, MA-181, MA-189, MA-241, MA-244, MA-245, MA-249, MA-250, MA-251, MA-257, MA-258, MA-374, MA-381, MA-691.
+- **FAIL (32):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-367, MA-368, MA-375, MA-379, MA-383, MA-385, MA-389, MA-391, MA-392, MA-393, MA-255, MA-395, MA-397, MA-399.
 
 All per-ID evidence is retained in the local experiment directories and in `CLAIM_LEDGER.csv`. Consult [the evidence integration audit](../../docs/phase2/MIRROR_MA_EVIDENCE_INTEGRATION_2026-10-08.md) for linked reports, verifications, provenance and claim boundaries.
 

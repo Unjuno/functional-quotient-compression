@@ -1,9 +1,12 @@
 {
   "experiment_id": "MA-258",
-  "title": "Expert parameter bank: PSP unbinding versus Mirror orbit codes",
-  "status": "PROTOCOL_FROZEN_BEFORE_CLEAN_RERUN",
+  "title": "MA-258 supplemental sensitivity: flattened-parameter Mirror orbit versus PSP expert bank",
+  "status": "SUPPLEMENTAL_FROZEN_RERUN",
   "base_commit": "3ea72d6",
-  "prior_art_refs": ["PA16", "PA01"],
+  "prior_art_refs": [
+    "PA16",
+    "PA01"
+  ],
   "evidence_lane": "EXPERT_QUALITY/INTERFERENCE/COMPRESSION/ACTUAL_BYTES",
   "hypothesis": "For eight aligned expert matrices generated along one orthogonal Mirror orbit, one shared matrix plus eight FP16 angles will preserve function quality within 0.01 normalized MSE of independent experts and use at most half the actual bytes of a rank-2 shared-basis control; for unrelated expert matrices, the same Mirror orbit code will miss the quality gate. Fixed-sign PSP is the mandatory direct unbinding control.",
   "physical_object": "one 16x16 expert weight matrix",
@@ -11,14 +14,24 @@
   "logical_multiplicity": "eight logical 16x16 experts reconstructed from one shared matrix plus eight view angles",
   "model": {
     "experts": 8,
-    "matrix_shape": [16,16],
+    "matrix_shape": [
+      16,
+      16
+    ],
     "aligned_regime": "eight target matrices are pairwise orthogonal rotations of one random base matrix with seeded angles in [-0.7,0.7] radians",
     "unrelated_regime": "eight independent random target matrices scaled to the same mean Frobenius norm",
     "mirror_fit_updates": 2000,
     "mirror_optimizer": "Adam",
     "mirror_learning_rate": 0.01,
-    "development_seeds": [25821,25822],
-    "fresh_seeds": [25831,25832,25833]
+    "development_seeds": [
+      25821,
+      25822
+    ],
+    "fresh_seeds": [
+      25831,
+      25832,
+      25833
+    ]
   },
   "controls": [
     "independent full expert matrices (upper quality reference)",
@@ -42,12 +55,21 @@
   "failure_gate": "Any fresh aligned seed misses the registered aligned quality or byte gate.",
   "storage": {
     "authority": "actual deterministic ZIP/NPY FP16 payload after reload",
-    "paid_objects": ["one shared matrix or reconstruction basis", "all expert codes", "PSP context bits", "metadata and archive headers", "private residuals"]
+    "paid_objects": [
+      "one shared matrix or reconstruction basis",
+      "all expert codes",
+      "PSP context bits",
+      "metadata and archive headers",
+      "private residuals"
+    ]
   },
   "boundaries": [
     "oracle weight-bank compression on synthetic linear operators; not trained Transformer/MoE evidence",
     "aligned data are intentionally generated from the Mirror orbit; this is a favorable mechanism test",
     "rank-2 SVD is an ordinary shared-basis control and can recover any rank-2 matrix bank",
-    "legacy artifact/cache files already present in this untracked directory are excluded; this clean rerun uses only the newly listed seeds and results path"
-  ]
+    "legacy artifact/cache files already present in this untracked directory are excluded; this clean rerun uses only the newly listed seeds and results path",
+    "This is a protocol-distinct strict sensitivity rerun; it does not replace the canonical output-channel Givens screen or its PROMISING result."
+  ],
+  "canonical_experiment_branch": "research/ma-258-psp-mirror-expert-bank-20261008",
+  "canonical_result_commit": "82263f49d4d0d5af96f4ee715ac7a6622b60da71"
 }

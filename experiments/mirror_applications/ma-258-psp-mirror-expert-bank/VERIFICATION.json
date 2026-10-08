@@ -2,38 +2,71 @@
   "experiment_id": "MA-258",
   "commit": "pending",
   "tests": {
-    "command": "pytest -q experiments/mirror_applications/ma-258-psp-mirror-expert-bank/tests",
-    "passed": 3,
-    "failed": 0
+    "canonical_command": "pytest -q experiments/mirror_applications/ma-258-psp-mirror-expert-bank/tests (canonical branch)",
+    "canonical_passed": 4,
+    "canonical_failed": 0,
+    "supplemental_command": "pytest -q experiments/mirror_applications/ma-258-psp-mirror-expert-bank/tests (flattened rerun)",
+    "supplemental_passed": 3,
+    "supplemental_failed": 0
   },
   "serialization": {
-    "roundtrip_checked": true,
-    "byte_exact": true,
-    "clean_payload_count": 20,
-    "actual_FP16_ZIP_bytes_authoritative": true,
-    "metric_replay_command": "python experiments/mirror_applications/ma-258-psp-mirror-expert-bank/source/verify_payloads.py"
+    "canonical_payload_count": 60,
+    "canonical_byte_exact": true,
+    "supplemental_clean_payload_count": 20,
+    "supplemental_byte_exact": true,
+    "actual_FP16_ZIP_or_NPZ_bytes_authoritative": true
   },
   "metric_replay": {
-    "checked": true,
-    "max_normalized_MSE_difference": 0.0,
-    "all_clean_development_payloads_replayed": true
+    "canonical_rows": 60,
+    "canonical_max_difference": 0.0,
+    "supplemental_rows": 20,
+    "supplemental_max_normalized_MSE_difference": 0.0
   },
-  "fresh_split_integrity_checked": false,
-  "development_seeds": [25821,25822],
-  "fresh_seeds": [25831,25832,25833],
+  "fresh_split_integrity_checked": true,
+  "development_seeds": [
+    25821,
+    25822
+  ],
+  "fresh_seeds": [
+    25831,
+    25832,
+    25833
+  ],
   "fresh_status": "SEALED_AFTER_ALIGNED_BYTE_GATE_MISS",
   "gates": {
     "aligned_max_expert_normalized_MSE_limit": 0.01,
     "aligned_mirror_to_rank2_SVD_byte_ratio_limit": 0.5,
-    "observed_aligned_mirror_max_MSE": [0.0,0.0],
+    "observed_aligned_mirror_max_MSE": [
+      0.0,
+      0.0
+    ],
     "observed_aligned_mirror_bytes": 1327,
     "observed_aligned_SVD_bytes": 2592,
     "observed_ratio": 0.51196,
-    "unrelated_mirror_max_expert_normalized_MSE": [0.8939,0.8668]
+    "unrelated_mirror_max_expert_normalized_MSE": [
+      0.8939,
+      0.8668
+    ]
   },
   "notes": [
-    "Legacy untracked artifact/cache files were preserved and excluded; only the clean protocol seeds and new results were used.",
-    "This is synthetic oracle weight-space compression, not trained MoE evidence.",
-    "Unrelated regime demonstrates a poor fit but is not fresh-replicated."
-  ]
+    "Canonical result verified on existing remote MA-258 branch at 82263f49d4d0d5af96f4ee715ac7a6622b60da71; canonical fresh aligned gate passed.",
+    "Supplemental clean rerun uses flattened full-parameter rotations and a distinct 0.50x rank-2 byte cap; it misses that cap at 0.512x.",
+    "Legacy local untracked artifacts/caches were preserved and excluded from the supplemental run.",
+    "Both studies use synthetic oracle weight-space compression; neither establishes trained MoE behavior."
+  ],
+  "canonical_fresh_seeds": [
+    25811,
+    25812,
+    25813
+  ],
+  "supplemental_development_seeds": [
+    25821,
+    25822
+  ],
+  "supplemental_fresh_seeds": [
+    25831,
+    25832,
+    25833
+  ],
+  "supplemental_fresh_status": "SEALED_AFTER_STRICT_BYTE_GATE_MISS"
 }

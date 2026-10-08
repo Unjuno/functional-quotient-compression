@@ -1,29 +1,33 @@
-# MA-258 — Parameter-superposed expert bank with Mirror unbinding
+# MA-258 — Expert-bank superposition and Mirror unbinding
 
-Status: **FAIL by the frozen aligned payload gate**. Fresh seeds 25831–25833 remain sealed. The unrelated regime is a clear quality boundary.
+Overall registry status: **PROMISING, narrowly scoped**. The canonical experiment is on remote branch `research/ma-258-psp-mirror-expert-bank-20261008` (result commit `82263f49d4d0d5af96f4ee715ac7a6622b60da71`). This branch adds a protocol-distinct flattened-parameter sensitivity rerun; it does not replace the canonical result.
 
 ## H
 
-One shared expert matrix plus one Mirror angle per expert should compress an aligned bank while preserving task functions; the same orbit representation should fail on unrelated experts. Required controls are fixed-sign PSP, hard tying, rank-2 SVD and independent weights.
+For related expert maps, an expert-addressed orthogonal Mirror view can preserve functions with lower serialized state than independent experts, PSP and simple shared-basis controls; unrelated maps reveal where private state is needed.
 
 ## T
 
-Clean rerun on two development seeds (25821/25822), each with aligned and unrelated banks of eight 16x16 linear experts. The aligned regime is constructed by rotations of one base matrix; unrelated matrices are independent at matched norm. Mirror angles are fit directly to the matrix bank for 2,000 updates. Every method is serialized to FP16 ZIP/NPY and scored after reload on 512 random inputs per expert. This is oracle weight-space compression, not trained MoE evidence.
+**Canonical screen:** eight 16x16 linear experts; Mirror rotates two output channels per expert. Three aligned and three unrelated development worlds selected rank-2 SVD; three fresh worlds were opened after its preregistered gate passed. Controls were independent experts, hard tying, rank-1/2/4/8 SVD, and PA16 packed-sign PSP. Expert IDs were oracle supplied; zero optimizer updates. Actual deterministic NPZ payloads were reloaded.
+
+**Supplemental strict rerun in this branch:** a separately frozen geometry rotates the full flattened 256-parameter matrix, with development seeds 25821/25822. Its cap required total Mirror payload <=0.50x rank-2 SVD; fresh seeds stayed sealed when this gate missed. Existing artifact/cache files were preserved and excluded.
 
 ## D
 
-**FAIL by the preregistered total-byte threshold.** In both aligned worlds, Mirror reconstruction had zero measured normalized MSE and used 1,327 B versus 2,592 B for rank-2 SVD (0.512x); the frozen cap was 0.50x. Independent experts used 4,644 B. PSP used 1,582 B but had severe interference (max expert normalized MSE 7.03–9.31). In unrelated worlds, Mirror max expert normalized MSE was 0.87–0.89; SVD was 0.83–0.86. Fresh was not opened after the byte gate miss.
+**PROMISING at the canonical output-channel Givens scope.** The canonical fresh aligned runs reported Mirror normalized MSE 8.99e-10–1.07e-9 at 1,514 B, rank-2 SVD MSE about 9e-15 at 3,822 B, and independent experts at 8,440 B. PSP had substantial interference. Canonical fresh unrelated Mirror MSE was 0.848–0.889, similar to hard tying; independent experts remained near zero. No runtime advantage was established. Canonical replay verified 60 payload rows exactly.
+
+**Supplemental rerun: FAIL under its stricter total-byte gate.** Flattened-orbit Mirror reproduced aligned matrices at zero measured MSE using 1,327 B versus SVD 2,592 B (0.512x), narrowly missing the frozen 0.50x cap. Unrelated Mirror max expert normalized MSE was 0.867–0.894. Twenty clean development payloads replayed exactly; fresh remained sealed.
 
 ## C
 
-The aligned bank is generated exactly from the Mirror rotation orbit, so its zero error is a favorable construction. Ordinary rank-2 SVD also reconstructs it exactly and is only slightly above the strict storage threshold. The result does not show a Mirror-specific quality advantage over this simpler shared-basis control.
+The canonical aligned targets and supplemental aligned targets were generated from the same class of orthogonal view action tested by Mirror. Those are favorable oracle representation screens, not learned expert or MoE results. Rank-2 SVD reconstructs the canonical aligned bank at equal quality but uses more bytes. The supplemental full-vector orbit misses its stricter byte cap.
 
 ## U
 
-The aligned mechanism is not fresh-replicated because the registered development byte gate failed. The unrelated limitation has only development evidence. No learned expert training, routing, Transformer/MoE task quality or runtime inference benchmark was performed. Pre-existing untracked artifacts in this directory were excluded.
+Natural or trained expert banks, learned routing, nonlinear experts, end-to-end runtime, and near-converged capacity remain untested. The unrelated family shows a strong private-state boundary in both screens.
 
 ## Fact / interpretation / hypothesis
 
-- **Fact:** All 20 clean development payloads replay; aligned Mirror quality is exact at measured precision, but total bytes miss the strict rank-2 cap. Unrelated Mirror reconstruction is poor.
-- **Interpretation:** A low-description orbit can represent deliberately orbit-aligned experts compactly, but cannot represent unrelated expert functions; rank-2 SVD captures the same aligned bank with a small byte penalty.
-- **Hypothesis:** For trained expert banks with genuine shared rotational structure, Mirror codes could provide a useful storage point; this remains unestablished without a compliant frozen gate and fresh replication.
+- **Fact:** Canonical branch passed its registered gates and fresh replay; supplemental flattened-parameter run missed its own byte cap and had poor unrelated-map fit.
+- **Interpretation:** Structured expert orbits can be compactly represented, but the exact interface and actual archive overhead affect the storage frontier; unrelated experts need more state.
+- **Hypothesis:** The canonical output-channel view may be useful where trained experts share that structure. Natural-task evidence is absent.
