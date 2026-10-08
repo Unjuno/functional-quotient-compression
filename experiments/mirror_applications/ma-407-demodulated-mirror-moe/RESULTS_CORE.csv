@@ -1,0 +1,7 @@
+condition,world_or_seed,method,serialized_bytes,train_tokens_or_examples,optimizer_updates,active_compute_proxy,wall_time_s,primary_metric,primary_value,secondary_metric,secondary_value,status_note
+fresh_mean,40710-40712,shared,9829,25600,200,4032 MAC/example,0.066,accuracy,0.5850,cross_entropy,1.1848,baseline
+fresh_mean,40710-40712,mirror_raw,10081,25600,200,5568 MAC/example,0.352,accuracy,0.6645,activation RMS CV,0.0093,Mirror coordinate improves over shared; compute cost increased
+fresh_mean,40710-40712,mirror_demod,10081,25600,200,5568 MAC/example,0.608,accuracy,0.6645,activation RMS CV,0.0093,FAIL demodulation changes neither accuracy nor scale stability
+fresh_mean,40710-40712,ia3,10529,25600,200,5568 MAC/example,0.078,accuracy,0.6018,activation RMS CV,0.0329,simple control
+fresh_mean,40710-40712,rank1,11485,25600,200,5568 MAC/example,0.143,accuracy,0.6074,activation RMS CV,0.0143,simple control
+fresh_mean,40710-40712,independent,34021,25600,200,4032 MAC/example,0.161,accuracy,0.5979,activation RMS CV,0.0168,upper control underfit in this screen
