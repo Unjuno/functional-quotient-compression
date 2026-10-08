@@ -6,11 +6,11 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (75 completed; 555 UNTESTED)
+- P0: **630** (76 completed; 554 UNTESTED)
 - P1: **422** (12 completed; 410 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1068 UNTESTED, 37 PROMISING, 50 FAIL**
-- 74 local experiment directories are complete; MA-301 and MA-307 are additional completed experiments linked to their dedicated research branches.
+- Current MA statuses: **1067 UNTESTED, 37 PROMISING, 51 FAIL**
+- 75 local experiment directories are complete; MA-301 and MA-307 are additional completed experiments linked to their dedicated research branches.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-276 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-276 is next; MA-275 remains UNTESTED (P1).
 - Thirteenth literature sweep added MA-996..1045 (50 UNTESTED; 40 P0/10 P1) and PA296..PA325. IDs MA-1000+ use four digits; consult `check_registry_integrity.py`. No new experiment results.
@@ -21,7 +21,7 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-337 — group-factorized position × role Mirror (P0)**
+**MA-338 — symmetry-normalized Mirror code learning (P0)**
 
 MA-325 was attempted on development seeds but is **NOT ESTABLISHED**: all methods, including independent full tables, remained at uniform NLL (~ln 16). Fresh seeds stayed sealed; a learnable task requires a separately versioned protocol. See its report on `research/ma-325-tt-embedding-domain-mirror-20261008`. MA-330 is PROMISING only for synthetic aligned cache views: 36,458B vs 131,752B independent, near-zero output nMSE, but the direct cos/sin control is only 30B larger and there is no decode-speed gain. One unrelated layer needs private cache. See report. MA-331 development failed its Mirror-specific 10% byte gate: Re-Basin/direct was 2,574B and phase Mirror 2,562B, both with nMSE <1e-8; unaligned low-rank deltas were poor. Fresh stayed sealed. MA-332 confirmed eight hidden-unit permutation states are one function (max output difference <=2.25e-7); the paid shared checkpoint is 81.6% smaller than eight duplicate archives, but adds zero functional multiplicity. MA-333 likewise confirmed coupled ReLU positive-scale and tanh sign symmetries preserve FP32 functions; FP16 quantization was separated. MA-332/333 pause pure gauge-orbit capacity proposals pending a function-changing extension.
 
@@ -47,7 +47,7 @@ MA-274 is complete FAIL on a two-world fixed-update development screen: at 5,430
 
 ## Active experiment
 
-MA-335 is complete FAIL for Mirror-specific value; see its result below. MA-337 is next P0 by registry order. Pure permutation/sign/scale symmetry orbit proposals remain paused after MA-332/333. MA-312 is PROMISING only for the aligned 256-task storage/quality point; its fit compute proxy was over 1,000x the direct coefficient control and throughput lower. MA-258 has a narrow PROMISING aligned codec result; unrelated experts required private/richer state. MA-266 is FAIL for Mirror-specific value: factorized views generalized on an aligned task cross-product, but the ordinary coefficient-product control matched within 2.1% payload bytes. Together with MA-265 this pauses VeRA family follow-up MA-267 pending redesign. MA-255 through MA-299 now have verified status records. MA-257 failed against the exact native PA16 rotational-context control; MA-297/299 SETA remains paused. Next by the registered P0 queue: MA-330.
+MA-335 is complete FAIL for Mirror-specific value; see its result below. MA-337 is complete FAIL for Mirror-specific value; see its result below. MA-338 is next P0 by registry order. Pure permutation/sign/scale symmetry orbit proposals remain paused after MA-332/333. MA-312 is PROMISING only for the aligned 256-task storage/quality point; its fit compute proxy was over 1,000x the direct coefficient control and throughput lower. MA-258 has a narrow PROMISING aligned codec result; unrelated experts required private/richer state. MA-266 is FAIL for Mirror-specific value: factorized views generalized on an aligned task cross-product, but the ordinary coefficient-product control matched within 2.1% payload bytes. Together with MA-265 this pauses VeRA family follow-up MA-267 pending redesign. MA-255 through MA-299 now have verified status records. MA-257 failed against the exact native PA16 rotational-context control; MA-297/299 SETA remains paused. Next by the registered P0 queue: MA-330.
 
 ## Verified status index
 
@@ -237,3 +237,8 @@ On three fresh seeds, coupled ReLU positive hidden scaling preserved FP32 output
 ## MA-335 — FAIL for Mirror-specific advantage
 
 Across three confirmatory synthetic C4 worlds, group-action Mirror payload averaged 717.3B with exact related-view and private-task outputs; five independent experts averaged 1,091.3B. However, the ordinary irreducible-coefficient control averaged 722.0B at equal quality, only 0.65% larger, so this is not a Mirror-specific gain. Four C4 addresses yielded two distinct functions. Removing the private fifth matrix produced mean unrelated-task nMSE 4.6976. The exact equivariant projection retained one function and failed the non-equivariant target quality. The corrected direct-control protocol was validated on development seeds before confirmatory seeds 33520–33522. Three earlier screens are retained but excluded from the confirmatory verdict. Four tests passed and byte/hash/metric replay was exact. Synthetic analytic 2x2 functions only; no trained MoE or LM evidence. Dedicated branch: `research/ma-335-group-action-mirror-experts-20261008`. Next P0: MA-337.
+
+
+## MA-337 — FAIL for Mirror-specific advantage
+
+Across three fresh synthetic C4×C2 worlds, factorized group coordinates reconstructed both held-out compositions at nMSE 0 using 974.3B, 72.9% below eight independent operators (3,598.3B). An ordinary direct position/role coordinate control also had zero error at 985.3B, only 1.1% larger, so the result is not Mirror-specific. Eight group compositions yielded eight distinct functions. The off-orbit ninth task had nMSE 1.0958 without private state; a private operator restored zero error at 1,411.3B versus 4,036.3B for nine independent operators. Flat six-entry table did not encode the held-out compositions; exact equivariant projection and hard tying collapsed to one function. 27 fresh payload/hash/metric rows replayed exactly; three tests passed. Analytic operators only, known generators, no trained attention or LM evidence. Dedicated branch: `research/ma-337-group-factorized-position-role-20261008`. Next P0: MA-338.
