@@ -1,0 +1,22 @@
+{
+  "experiment_id": "MA-416",
+  "title": "Shared decoder plus per-function Mirror codes versus ordinary latent codes",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY",
+  "base_commit": "40382ba",
+  "hypothesis": "Across 16 continuous functions, a shared MLP decoder with two per-function Givens angles achieves held-out query normalized RMSE within 10% of a two-dimensional ordinary latent code while using <=80% its actual serialized bytes.",
+  "physical_object": "one shared MLP coordinate decoder",
+  "mirror_coordinate": "two per-function Givens angles applied to hidden feature pairs",
+  "logical_multiplicity": "16 distinct continuous functions decoded by one shared network",
+  "prior_art_refs": ["PA68"],
+  "controls": ["shared decoder without function code", "two-angle Mirror hidden view", "ordinary latent code dimensions 1, 2, and 8 concatenated to decoder input", "independent MLP per function"],
+  "task": {"type": "synthetic 1D continuous-function reconstruction", "functions_per_world": 16, "query_dim": 1, "hidden_dim": 32, "teacher": "random weighted Fourier sums with frequencies 1, 2, 3", "training_queries_per_function": 64, "held_out_queries_per_function": 128},
+  "development": {"worlds_or_seeds": [41600, 41601], "learning_rates": [0.003, 0.01], "selection_metric": "lowest mean held-out-query normalized RMSE"},
+  "fresh": {"worlds_or_seeds": [41610, 41611, 41612], "locked_before_access": true},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["shared decoder weights", "all per-function codes", "independent function decoder weights", "metadata"]},
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true, "report_per-function_quality": true},
+  "training": {"updates": 500, "batch_size": 256, "optimizer": "AdamW", "seeds": [0, 1, 2]},
+  "success_gate": "Mirror normalized RMSE is <=1.1x latent2 RMSE on each fresh world and Mirror payload <=80% latent2 payload; report all other code dimensions and independent upper control.",
+  "failure_gate": "Mirror misses either the quality or actual-byte gate, or latent2 weakly dominates it.",
+  "boundaries": ["Synthetic 1D functions only; not DeepSDF/3D evidence.", "Fresh worlds use new functions and query samples.", "Fixed-update results are not near-converged capacity claims."]
+}
