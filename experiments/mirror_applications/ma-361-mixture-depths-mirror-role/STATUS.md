@@ -1,19 +1,17 @@
 # MA-361 status
 
-- Status: FAIL at development gate
+- Status: FAIL at amended development gate; fresh sealed
 - Branch: `research/ma-361-mixture-depths-mirror-role-20261008`
 - Base commit: `c935a90`
-- Last verified commit: `fb7c8ec6f0df0c9678e58b6bc766d2f8b0037cba`
-- Development complete: yes
-- Fresh/audit opened: no; 36111–36113 remain sealed
-- Results committed: yes
-- Verification committed: yes
-- Registry row updated: no
+- Development: 2 seeds x 4 controls rerun after A1; exact replay passed
+- Fresh/audit: not opened; 36111–36113 remain sealed
+- Result bundle: pending commit
+- Registry/claim: registry and status board now carry the amended-run metrics; claim provenance needs binding
 
-## Decision summary
+## Decision
 
-Mirror/direct gate outputs and payload hashes matched exactly. Shared MoD reduced bytes against native MoD by ~52%, but seed 36102 missed the 0.01 NLL margin. Fresh sealed.
+Mirror and direct scalar gate have identical payload hashes and metrics in both development seeds. Shared MoD is about 52% smaller than native MoD, but seed 36102 misses the frozen +0.01 NLL margin (0.11502 vs 0.10227). The registered hypothesis fails; no Mirror-specific gain is established.
 
 ## Next action
 
-Verify replay/tests, record FAIL in registry and board, then proceed to next P0.
+Bind verification and claim provenance to the amended result bundle, push, then recheck the latest registry and branches before selecting another candidate.

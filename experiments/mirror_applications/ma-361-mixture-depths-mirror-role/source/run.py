@@ -4,6 +4,7 @@ from pathlib import Path
 import numpy as np
 import torch
 from torch import nn
+torch.set_num_threads(1)
 ROOT=Path(__file__).resolve().parents[1];OUT=ROOT/'artifacts';SEEDS=(36101,36102,36111,36112,36113);T=16;D=16;C=4;ROLES=3;CAP=.5;UPDATES=1000;BATCH=64
 
 class Block(nn.Module):

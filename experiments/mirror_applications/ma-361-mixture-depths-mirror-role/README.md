@@ -1,46 +1,40 @@
 # MA-361 — Mixture-of-Depths with Mirror block-role views
 
-Status: SCREENING; frozen before development  
+Status: **FAIL at development; fresh sealed.**
 Branch: `research/ma-361-mixture-depths-mirror-role-20261008`  
 Base: `c935a90`  
 Prior art: PA49 Mixture-of-Depths.
 
 ## H — Hypothesis
 
-With the same token routing capacity, a shared block equipped with small role coordinates can preserve token prediction quality while using fewer physical block parameters than ordinary Mixture-of-Depths blocks, without increasing active FLOPs beyond 10%.
+With identical token routing, one shared residual MLP block plus small per-role functional coordinates can preserve native MoD NLL while reducing actual inference bytes and keeping active MACs within 10%.
 
-## Mirror insertion
+> **Mirror insertion:** this experiment adds a role coordinate to the shared residual MLP used by routed tokens, to express multiple logical depth roles without separate block weights.
 
-> **Mirror insertion:** this experiment adds a compact block-role coordinate to the shared residual MLP that selected tokens traverse, so a smaller physical block bank can provide multiple logical depth roles.
+The direct scalar-gate control uses the same coordinates and is the closest non-Mirror alternative.
 
-Native control: Mixture-of-Depths top-capacity token routing through separate depth blocks. Candidate shares one block across routed roles and adds one scalar coordinate per role. Direct FiLM/scalar-gate control has identical coordinates and routing.
+## T — Protocol and amendment
 
-## T — Frozen protocol
+Synthetic four-class token task, 16 tokens/example, width 16, 3 block roles, top-50% fixed input-derived routing, 1,024 train and 512 test sequences/world, 1,000 AdamW updates and batch 64. Development seeds 36101/36102; fresh seeds 36111/36112/36113 remain locked and unopened. Controls: dense three-block model, native MoD with separate blocks, tied MoD, tied MoD plus direct scalar gates, tied MoD plus Mirror role coordinates.
 
-Synthetic tokenwise four-class task, 16 tokens per example, width 16, 3 candidate depth roles, top-50% routing capacity per MoD layer, 1,024 train and 512 test sequences per world; 1,000 AdamW updates, batch 64. Development seeds 36101/36102; fresh 36111/36112/36113 locked. All methods use the same fixed input-derived router and routed token identities. Compare dense 3-block network, ordinary MoD with 3 role-specific blocks, tied MoD with one shared block, tied MoD plus direct scalar gates, tied MoD plus Mirror role coordinates. Measure token NLL, per-token-position accuracy, actual serialized weight bytes, active MACs after routing, routing capacity/overflow, and latency. This is fixed-budget mechanism evidence, not capacity evidence.
+The original development artifacts did not replay under the current container runtime. Amendment A1 was recorded before any fresh access: preserve the old artifacts as an excluded protocol variant, pin CPU threads to 1, report Python/NumPy/PyTorch versions, and rerun only development seeds without tuning the model or gates. The amended 8 rows now replay exactly.
 
-## Gates
+## D — Development result
 
-PASS both development worlds if Mirror NLL is within 0.01 of ordinary MoD, at least 10% lower weight bytes than MoD, active MACs <=1.10× MoD, and direct gate control is at least 10% larger or worse quality for Mirror-specific value. FAIL if quality misses by >0.03, active MACs >1.10×, or direct gate is within 10%. Fresh remains sealed after dev fail.
+**FAIL for Mirror-specific value and the frozen quality margin.** On amended development runs, Mirror used 5,307B and 5,321B versus native MoD 11,053B and 11,084B. All methods routed 8/16 tokens and had the same active-MAC proxy, 786,432,000. But direct scalar gate and Mirror payload/hash/NLL/accuracy were identical in both seeds. Mirror NLL was 0.10016 and 0.11502 versus native MoD 0.09525 and 0.10227. Seed 36102 exceeds the allowed +0.01 NLL margin by 0.00274. Therefore fresh remains sealed.
 
-## Boundaries
+Measured training wall time was 2.32–2.87s for tied/gated methods versus 2.57–2.65s native in these small CPU runs; this noisy screen establishes no runtime advantage. Training saw 1,024,000 token examples per method.
 
-Synthetic token classification only. Router is fixed and identical; this isolates block-role parameterization, not learned routing. No language model or token-dependent natural sequence claim.
+## C — Counter-hypothesis
 
-## Result — development
+The role coordinate is ordinary scalar gating: its exact equivalence to the direct gate control explains the result. Fixed input-derived routing and this synthetic task may not expose a distinct Mirror contribution.
 
-**FAIL for Mirror-specific value and frozen quality margin; fresh sealed.** At the same top-50% routing budget, Mirror tied MoD used 5,298/5,312B versus native MoD 11,076/11,077B, and all models routed exactly 8 tokens/sequence with equal active-MAC proxy. However, direct-gate control had identical payload hashes, NLL and accuracy to Mirror in both worlds. Mirror NLL was 0.1001/0.1150 versus native 0.0952/0.1023; seed 36102 missed the frozen 0.01 NLL margin. Fresh 36111–36113 remained sealed.
+## U — Unconfirmed
 
-**Fact:** routing identities/capacity were fixed; Mirror and direct scalar gates were exactly the same implementation state/function.  
-**Interpretation:** parameter sharing reduced archive bytes relative to independent MoD blocks, but the gain is ordinary shared-block/gate compression, not Mirror-specific; quality slipped in one seed.  
-**C:** this simple tokenwise task and fixed router may not expose block-role benefits under learned routing.  
-**U:** no trained MoD router, language model, near-convergence capacity study, or fresh replication.
+Fresh seeds, learned routing, natural language, near-convergence capacity, larger models and optimized inference kernels remain untested. The byte reduction is shared-block tying and does not establish Mirror-specific value.
 
-## Result — development
+## Fact / interpretation / hypothesis
 
-**FAIL for Mirror-specific value and frozen quality margin; fresh sealed.** At the same top-50% routing budget, Mirror tied MoD used 5,298/5,312B versus native MoD 11,076/11,077B, and all models routed exactly 8 tokens/sequence with equal active-MAC proxy. However, direct-gate control had identical payload hashes, NLL and accuracy to Mirror in both worlds. Mirror NLL was 0.1001/0.1150 versus native 0.0952/0.1023; seed 36102 missed the frozen 0.01 NLL margin. Fresh 36111–36113 remained sealed.
-
-**Fact:** routing identities/capacity were fixed; Mirror and direct scalar gates were exactly the same implementation state/function.  
-**Interpretation:** parameter sharing reduced archive bytes relative to independent MoD blocks, but the gain is ordinary shared-block/gate compression, not Mirror-specific; quality slipped in one seed.  
-**C:** this simple tokenwise task and fixed router may not expose block-role benefits under learned routing.  
-**U:** no trained MoD router, language model, near-convergence capacity study, or fresh replication.
+- **Fact:** see `RESULTS_CORE.csv`, `VERIFICATION.json`, and the preserved pre-amendment artifacts. Eight amended development rows replay exactly; fresh seeds were not opened.
+- **Interpretation:** physical block sharing cuts bytes, while the added Mirror parameter matches a direct scalar gate exactly and misses the NLL margin in one development world.
+- **Hypothesis:** learned routing or deeper natural tasks may make depth-role coordinates useful, but that requires a new preregistered experiment.

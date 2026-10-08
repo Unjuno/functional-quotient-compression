@@ -1,8 +1,8 @@
 {
   "experiment_id": "MA-361",
-  "commit": "fb7c8ec6f0df0c9678e58b6bc766d2f8b0037cba",
+  "commit": "pending-result-bundle",
   "tests": {
-    "command": "python -m pytest -q experiments/mirror_applications/ma-361-mixture-depths-mirror-role/tests",
+    "command": "pytest -q experiments/mirror_applications/ma-361-mixture-depths-mirror-role/tests",
     "passed": 3,
     "failed": 0
   },
@@ -16,10 +16,13 @@
     "checked": true,
     "development_rows_replayed": 8,
     "fresh_rows": 0,
-    "max_difference": 0.0
+    "max_difference": 0.0,
+    "amendment": "A1 fixed one CPU thread and current runtime versions after cross-container replay discrepancy."
   },
   "fresh_split_integrity_checked": true,
   "notes": [
-    "Only development seeds 36101 and 36102 were accessed; fresh seeds remain sealed."
+    "Only amended development seeds 36101 and 36102 were accessed.",
+    "Fresh seeds 36111, 36112 and 36113 remain sealed.",
+    "Direct scalar gate and Mirror payloads, hashes and metrics are identical in both development seeds."
   ]
 }

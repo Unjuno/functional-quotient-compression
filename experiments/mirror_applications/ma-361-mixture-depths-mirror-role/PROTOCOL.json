@@ -8,13 +8,83 @@
   "physical_object": "three residual MLP depth-role blocks, with candidate sharing one physical block",
   "mirror_coordinate": "one scalar role coordinate for each routed block invocation",
   "logical_multiplicity": "three logical depth-role functions under identical token routing capacity",
-  "prior_art_refs": ["PA49"],
-  "controls": ["dense three-block network", "native MoD with three separate blocks", "MoD with one tied block", "tied MoD plus direct scalar gates", "tied MoD plus Mirror coordinates"],
-  "development": {"worlds_or_seeds": [36101,36102], "fresh_seeds": [36111,36112,36113], "sequence_tokens": 16, "width": 16, "classes": 4, "train_sequences": 1024, "test_sequences": 512, "routing_capacity": 0.5, "updates": 1000, "batch_size": 64, "selection_metric": "token NLL, per-position accuracy, actual bytes, routed MACs, capacity/overflow, latency"},
-  "fresh": {"worlds_or_seeds": [36111,36112,36113], "locked_before_access": true, "open_only_after_development_pass": true},
-  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["all block tensors", "role coordinates/gates", "router state", "normalization and biases", "metadata"]},
-  "compute": {"report_tokens": true, "report_optimizer_updates": true, "report_active_MACs_after_routing": true, "report_router_overflow": true, "report_wall_clock": true},
+  "prior_art_refs": [
+    "PA49"
+  ],
+  "controls": [
+    "dense three-block network",
+    "native MoD with three separate blocks",
+    "MoD with one tied block",
+    "tied MoD plus direct scalar gates",
+    "tied MoD plus Mirror coordinates"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      36101,
+      36102
+    ],
+    "fresh_seeds": [
+      36111,
+      36112,
+      36113
+    ],
+    "sequence_tokens": 16,
+    "width": 16,
+    "classes": 4,
+    "train_sequences": 1024,
+    "test_sequences": 512,
+    "routing_capacity": 0.5,
+    "updates": 1000,
+    "batch_size": 64,
+    "selection_metric": "token NLL, per-position accuracy, actual bytes, routed MACs, capacity/overflow, latency"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      36111,
+      36112,
+      36113
+    ],
+    "locked_before_access": true,
+    "open_only_after_development_pass": true
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "all block tensors",
+      "role coordinates/gates",
+      "router state",
+      "normalization and biases",
+      "metadata"
+    ]
+  },
+  "compute": {
+    "report_tokens": true,
+    "report_optimizer_updates": true,
+    "report_active_MACs_after_routing": true,
+    "report_router_overflow": true,
+    "report_wall_clock": true
+  },
   "success_gate": "Both dev seeds: Mirror NLL within 0.01 native MoD, >=10% fewer bytes than MoD, active MAC <=1.10x MoD; direct gate >=10% larger or worse quality for Mirror-specific result.",
   "failure_gate": "NLL >0.03 worse, active MAC >1.10x, or direct gate within 10%; fresh sealed.",
-  "boundaries": ["synthetic token classification", "router is fixed identically across methods", "fixed-budget screen, not capacity evidence"]
+  "boundaries": [
+    "synthetic token classification",
+    "router is fixed identically across methods",
+    "fixed-budget screen, not capacity evidence"
+  ],
+  "amendments": [
+    {
+      "id": "A1",
+      "timing": "before fresh seeds were accessed",
+      "reason": "Exact development replay failed because the recorded payload/NLLs did not reproduce in the current container despite unchanged source. Fresh seeds remain sealed.",
+      "change": "Freeze CPU threads at 1 and pin/report the current Python, NumPy and PyTorch runtime. Rerun only development seeds 36101 and 36102; do not tune the model or gates.",
+      "fresh_status": "36111-36113 remain sealed; no fresh data opened."
+    }
+  ],
+  "runtime_environment": {
+    "device": "CPU",
+    "threads": 1,
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "pytorch": "2.10.0+cpu"
+  }
 }
