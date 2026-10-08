@@ -5,7 +5,7 @@ Status: active backlog roadmap
 
 ## Goal
 
-Systematically test whether the extra low-description Mirror parameter m can replace duplicated physical state or improve logical functional freedom in strong existing methods. The registry now has **1045** candidate experiments; MA-876..935 were added as UNTESTED research targets on 2026-10-08.
+Systematically test whether the extra low-description Mirror parameter m can replace duplicated physical state or improve logical functional freedom in strong existing methods. The registry now has **1095** candidate experiments; MA-876..935 were added as UNTESTED research targets on 2026-10-08.
 
 The unit of work is an MA-xxx entry from:
 `experiments/mirror_applications/IDEA_REGISTRY.csv`.
@@ -297,6 +297,18 @@ MA1024–1034 target shared prompt/adapter/memory state, with CoOp, CoCoOp, MaPL
 ### AL. Retrieval indexes and implicit quantizer codebooks
 
 MA1035–1045 test compact task/shard/metric m over fixed ScaNN/RaBitQ/Matryoshka, QINCo/ColBERTv2/PLAID, DiskANN and PGM index. Measure true recall, encoded physical index bytes, SSD reads, P99 and update bounds. Isometric/gauge rank-preserving transformations do not constitute new independent search capability; see PA318–325.
+
+### AN. Universal time-series foundation models
+
+MA1046..1061 investigate an extra low-description Mirror coordinate over *already shared* Chronos, TimesFM, Moirai, PatchTST and related forecasting models. Most decisive comparisons: MA1049 PatchTST variate View, MA1052 TRACE-selected LoRA, MA1057 factorized frequency×horizon and MA1059 natural-series orbit/private frontier. DLinear and seasonal-naive are mandatory inexpensive controls; Chronos/Lag-Llama probabilistic baselines require CRPS/WQL and interval coverage. Chronological split integrity, unseen datasets and measured inference cost are hard gates. See PA326..336.
+
+### AO. Memory-dominant recommendation embeddings and task experts
+
+MA1062..1078 compare Mirror m to DHE's existing table-free hash generator, QR compositional embedding tables, TT-Rec optimized tensor cores/lookup, VQ-Rec semantic IDs, HSTU sequential histories and native MMoE task gates. The goal is additional useful CTR/ranking tasks or cheaper per-ID/field functions at matched AUC/NDCG, true storage and P95/P99 lookup. Simple item IDs are not free functional capacity. MA1063, MA1066, MA1070, MA1072 and MA1078 are highest-information. See PA337..343.
+
+### AP. Physically conditioned Earth-observation sensors
+
+MA1079..1095 stress test Mirror m with continuous wavelength, sensor hardware, ground sampling distance, observation time and EO task against **DOFA's wavelength-conditioned hypernetwork** and native AnySat/CROMA/Prithvi/TerraMind/AlphaEarth. MA1079, MA1080, MA1083, MA1090 and MA1095 separate true spectral/OOD transfer from ordinary sensor-ID conditioning. Compare complete held-out sensors, region/time splits, all filter-generation bytes and GPU runtime; SAR is not merely rotated optical color. See PA344..350.
 
 ## KV-cache transformation lane
 
