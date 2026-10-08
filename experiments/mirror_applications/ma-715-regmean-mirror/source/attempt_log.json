@@ -1,1 +1,51 @@
-[]
+[
+  {
+    "attempt": 1,
+    "phase": "algebra preflight before data access",
+    "failure": "Full-basis equivalence found a code output dtype promotion bug.",
+    "dataset_values_accessed": false,
+    "development_scores_computed": false,
+    "correction": "Capture the requested output dtype before float64 accumulation and cast solved codes back. Frozen experiment settings unchanged."
+  },
+  {
+    "attempt": 2,
+    "phase": "development evaluator",
+    "failure": "Float64 feature matrices were multiplied by float32 decoded weights; execution stopped before development metrics.",
+    "dataset_values_accessed": true,
+    "development_scores_computed": false,
+    "correction": "Cast feature batches to model dtype for evaluation. No audit data were sliced or scored."
+  },
+  {
+    "attempt": 3,
+    "phase": "serialized Task Arithmetic replay",
+    "failure": "The delta-based state w0 + (source - w0) failed bitwise replay due float32 rounding (maximum difference 1.49e-8). Development scores had been computed; audit remained locked.",
+    "dataset_values_accessed": true,
+    "development_scores_computed": true,
+    "correction": "Serialize source models directly as paid state and use them in the task-mixture payload."
+  },
+  {
+    "attempt": 4,
+    "phase": "serialized Task Arithmetic replay",
+    "failure": "Reconstruction still had float32 reduction-order differences up to 1.86e-8. Development scores had been computed; audit remained locked.",
+    "dataset_values_accessed": true,
+    "development_scores_computed": true,
+    "correction": "Record deterministic float32 replay difference and require maximum absolute difference <=5e-8; do not claim bitwise exact replay."
+  },
+  {
+    "attempt": 5,
+    "phase": "development artifact writing",
+    "failure": "After development metrics and payload replay completed, raw result serialization failed because rows contained torch alpha tensors.",
+    "dataset_values_accessed": true,
+    "development_scores_computed": true,
+    "correction": "Convert tensors in raw rows to JSON lists before writing. Protocol, data, hyperparameters and gate unchanged."
+  },
+  {
+    "attempt": 6,
+    "phase": "final frozen development run",
+    "failure": null,
+    "dataset_values_accessed": true,
+    "development_scores_computed": true,
+    "audit_accessed": false,
+    "result": "FAIL quality/storage gate; 448 rows, payload artifacts and summary written."
+  }
+]

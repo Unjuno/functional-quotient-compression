@@ -1,14 +1,44 @@
 {
   "experiment_id": "MA-715",
-  "status": "PROTOCOL_FROZEN_PRE_DATA",
+  "status": "FAIL_DEVELOPMENT_GATE",
   "base_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
-  "random_draw_replay": "pending",
+  "branch": "research/ma-715-regmean-mirror-20261008",
+  "random_draw_replay": "PASS",
   "protocol_frozen_before_data_access": true,
-  "dataset_values_accessed": false,
+  "development_dataset_values_accessed": true,
   "audit_accessed": false,
+  "development_worlds": [
+    71501,
+    71502
+  ],
+  "development_requests_per_world": 16,
+  "method_rows": 640,
+  "selected_common_rank": null,
+  "quality_storage_gate_pass": false,
+  "mirror_specific_gate_evaluated": false,
+  "decision": "FAIL",
+  "actual_payload_replay_max_abs_difference": 2.9802322387695312e-08,
+  "payload_replay_tolerance": 5e-08,
   "tests": {
-    "passed": 0,
+    "passed": 5,
     "failed": 0,
-    "status": "not run"
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-715-regmean-mirror/tests -v"
+  },
+  "result_artifacts": [
+    "RESULTS_CORE.csv",
+    "source/development_raw.json",
+    "source/development_summary.json",
+    "source/attempt_log.json"
+  ],
+  "limitations": [
+    "Audit partition remained unopened by the frozen fail gate.",
+    "Digits/ridge mechanism screen only; no Transformer or general-model inference.",
+    "Short single-thread CPU timings are not a serving benchmark."
+  ],
+  "file_sha256": {
+    "PROTOCOL.json": "5b052b74907218f2e0653e76b3d765e6f4d8bbed9bc2086415c7a1bf143c0db6",
+    "RESULTS_CORE.csv": "a6ba243581a41c7bf917e488d31812b9a241f7f30f5bd6da05453fc9a2dc0fe0",
+    "source/development_raw.json": "796f21a3a80ea2589e6455021a3ce38c94253ad5beec484d51cfc0152d85277d",
+    "source/development_summary.json": "837c96193ead4b7f14616f72de9025293e54983af523f8c7519d8d24d1952de3"
   }
 }

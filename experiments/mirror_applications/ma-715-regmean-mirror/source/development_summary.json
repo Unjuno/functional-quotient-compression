@@ -1,0 +1,630 @@
+{
+  "experiment_id": "MA-715",
+  "status": "DEVELOPMENT_COMPLETE_PENDING_GATE",
+  "world_seeds": [
+    71501,
+    71502
+  ],
+  "dataset": "sklearn.load_digits",
+  "sklearn_version": "1.8.0",
+  "split_manifests": [
+    "source/split_manifest_seed71501.json",
+    "source/split_manifest_seed71502.json"
+  ],
+  "train_models_per_world": 5,
+  "train_merge_requests": 8,
+  "dev_merge_requests_per_world": 16,
+  "audit_accessed": false,
+  "rank_sweep": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "selected_common_rank": null,
+  "quality_storage_gate_pass": false,
+  "mirror_specific_gate_by_world": {},
+  "all_development_gates_pass": false,
+  "decision": "FAIL",
+  "world_results": {
+    "71501": {
+      "statistics_payload": {
+        "path": "/workspace/functional-quotient-compression/experiments/mirror_applications/ma-715-regmean-mirror/source/artifacts/seed71501_regmean_statistics.pt",
+        "bytes": 158976,
+        "sha256": "5f55febde201e9720dfff6c3355da6e7ba7c4133cdd4fada0b5195b01b685a8c"
+      },
+      "source_model_payload": {
+        "path": "/workspace/functional-quotient-compression/experiments/mirror_applications/ma-715-regmean-mirror/source/artifacts/seed71501_source_models.pt",
+        "bytes": 14424,
+        "sha256": "4b87fc1647efac2d0adc6f8c0caa91faad2f6081b1d7d14da6a345d226335f15"
+      },
+      "library_payloads": {
+        "full_regmean": {
+          "path": "/workspace/functional-quotient-compression/experiments/mirror_applications/ma-715-regmean-mirror/source/artifacts/seed71501_full_regmean_K16.pt",
+          "bytes": 42972,
+          "sha256": "fc97276993511397af834a3c0c45b7130671ae09b5a89c9d6006888083ef6e94",
+          "roundtrip_max_weight_difference": 0.0
+        },
+        "task_arithmetic": {
+          "path": "/workspace/functional-quotient-compression/experiments/mirror_applications/ma-715-regmean-mirror/source/artifacts/seed71501_task_arithmetic_K16.pt",
+          "bytes": 12312,
+          "sha256": "0014793831c1bc0af7c436e98b55a2987cd34265c1acfa4453e7c2291104ff34",
+          "roundtrip_max_weight_difference": 0.0
+        },
+        "mirror_stats_r1": {
+          "path": "/workspace/functional-quotient-compression/experiments/mirror_applications/ma-715-regmean-mirror/source/artifacts/seed71501_mirror_stats_r1_K16.pt",
+          "bytes": 7060,
+          "sha256": "b2482922237a0edb96b3d5bd78d223388b796a05e36b7b121cdb03c309b1ea05",
+          "roundtrip_max_weight_difference": 0.0
+        },
+        "source_projection_r1": {
+          "path": "/workspace/functional-quotient-compression/experiments/mirror_applications/ma-715-regmean-mirror/source/artifacts/seed71501_source_projection_r1_K16.pt",
+          "bytes": 7060,
+          "sha256": "4ca0bd7bb4fdbfeb7b50df99d16b1a92c1e71caf27e4565f8d7589f799522dda",
+          "roundtrip_max_weight_difference": 0.0
+        },
+        "output_pca_r1": {
+          "path": "/workspace/functional-quotient-compression/experiments/mirror_applications/ma-715-regmean-mirror/source/artifacts/seed71501_output_pca_r1_K16.pt",
+          "bytes": 7060,
+          "sha256": "c05c549f63a5eb4708d51e1c11e96a84094c5a3512be9fb909b2011502455c71",
+          "roundtrip_max_weight_difference": 0.0
+        },
+        "mirror_stats_r2": {
+          "path": "/workspace/functional-quotient-compression/experiments/mirror_applications/ma-715-regmean-mirror/source/artifacts/seed71501_mirror_stats_r2_K16.pt",
+          "bytes": 9748,
+          "sha256": "2097ff0ffbd9478f929b93daccf6dd2431115e3a2ca047cb56e7fe828b646ac3",
+          "roundtrip_max_weight_difference": 1.4901161193847656e-08
+        },
+        "source_projection_r2": {
+          "path": "/workspace/functional-quotient-compression/experiments/mirror_applications/ma-715-regmean-mirror/source/artifacts/seed71501_source_projection_r2_K16.pt",
+          "bytes": 9748,
+          "sha256": "f1a5a5a87ebef6e3d5bdbb3a9c986bbf6420f82e20ea0bfad3b2f2c18baa3452",
+          "roundtrip_max_weight_difference": 1.4901161193847656e-08
+        },
+        "output_pca_r2": {
+          "path": "/workspace/functional-quotient-compression/experiments/mirror_applications/ma-715-regmean-mirror/source/artifacts/seed71501_output_pca_r2_K16.pt",
+          "bytes": 9748,
+          "sha256": "6464ed34663f1377c1c19dc7eb49c3c221cab7e2fbd0fe56d5163bd987d02f8b",
+          "roundtrip_max_weight_difference": 2.9802322387695312e-08
+        },
+        "mirror_stats_r3": {
+          "path": "/workspace/functional-quotient-compression/experiments/mirror_applications/ma-715-regmean-mirror/source/artifacts/seed71501_mirror_stats_r3_K16.pt",
+          "bytes": 12372,
+          "sha256": "0423d436c895afe4f25fe49b73cea822ec2019d8b7fb7e84c830531db042a0b1",
+          "roundtrip_max_weight_difference": 1.4901161193847656e-08
+        },
+        "source_projection_r3": {
+          "path": "/workspace/functional-quotient-compression/experiments/mirror_applications/ma-715-regmean-mirror/source/artifacts/seed71501_source_projection_r3_K16.pt",
+          "bytes": 12372,
+          "sha256": "cf7819b016be08ead54a8a03459787b3e1b78e1419fd567524b6e10459f9dcde",
+          "roundtrip_max_weight_difference": 1.4901161193847656e-08
+        },
+        "output_pca_r3": {
+          "path": "/workspace/functional-quotient-compression/experiments/mirror_applications/ma-715-regmean-mirror/source/artifacts/seed71501_output_pca_r3_K16.pt",
+          "bytes": 12372,
+          "sha256": "aa7ac216f78f4be42f971cde0694283892b585bef113ba399708681a0bf6ad43",
+          "roundtrip_max_weight_difference": 2.9802322387695312e-08
+        },
+        "mirror_stats_r4": {
+          "path": "/workspace/functional-quotient-compression/experiments/mirror_applications/ma-715-regmean-mirror/source/artifacts/seed71501_mirror_stats_r4_K16.pt",
+          "bytes": 15060,
+          "sha256": "4de2b386a37d102deb75fabb8b055d0956657bd0877015ceec50280682a9624e",
+          "roundtrip_max_weight_difference": 1.4901161193847656e-08
+        },
+        "source_projection_r4": {
+          "path": "/workspace/functional-quotient-compression/experiments/mirror_applications/ma-715-regmean-mirror/source/artifacts/seed71501_source_projection_r4_K16.pt",
+          "bytes": 15060,
+          "sha256": "096ba93589d90a0c0aec8df90bfd9a9f6f9868d4d5e2c7552f741e91bc5eb295",
+          "roundtrip_max_weight_difference": 1.4901161193847656e-08
+        },
+        "output_pca_r4": {
+          "path": "/workspace/functional-quotient-compression/experiments/mirror_applications/ma-715-regmean-mirror/source/artifacts/seed71501_output_pca_r4_K16.pt",
+          "bytes": 15060,
+          "sha256": "b95d49a9d9c938eab8148c0d74a67b2470713a8a49934e4e9139a8a0548c3be5",
+          "roundtrip_max_weight_difference": 2.9802322387695312e-08
+        }
+      },
+      "merge_packages": {
+        "full_regmean": {
+          "total_merge_package_bytes": 201592,
+          "statistics_payload_bytes": 158976,
+          "merge_recipe_bytes": 1500,
+          "inference_payload_bytes": 42972,
+          "package_sha256": "71414e2522e3d18a17b712a9ebe0342d8292e425419fa703c1c5e9dd4b692f9b"
+        },
+        "task_arithmetic": {
+          "total_merge_package_bytes": 12120,
+          "statistics_payload_bytes": 0,
+          "merge_recipe_bytes": 1500,
+          "inference_payload_bytes": 12312,
+          "package_sha256": "11c51cc33408c32f68aa284e7fdb6c8f77ee1f0442d0e0ca64c008e1b30729ad"
+        },
+        "mirror_stats_r1": {
+          "total_merge_package_bytes": 165618,
+          "statistics_payload_bytes": 158976,
+          "merge_recipe_bytes": 1500,
+          "inference_payload_bytes": 7060,
+          "package_sha256": "38a545dac2a2ce1184a7bf5a393b826b245f3055e8f4a4e444304fe408695a33"
+        },
+        "source_projection_r1": {
+          "total_merge_package_bytes": 165618,
+          "statistics_payload_bytes": 158976,
+          "merge_recipe_bytes": 1500,
+          "inference_payload_bytes": 7060,
+          "package_sha256": "ad1c34f500a58cf13842232af56e67250ccaf0a27185f092009d7aa8e9698cd0"
+        },
+        "output_pca_r1": {
+          "total_merge_package_bytes": 165618,
+          "statistics_payload_bytes": 158976,
+          "merge_recipe_bytes": 1500,
+          "inference_payload_bytes": 7060,
+          "package_sha256": "16d5e7efd3f62d3db9c77577cf560c3c7d98d9797a0e10e2a18f538f7f83af38"
+        },
+        "mirror_stats_r2": {
+          "total_merge_package_bytes": 168306,
+          "statistics_payload_bytes": 158976,
+          "merge_recipe_bytes": 1500,
+          "inference_payload_bytes": 9748,
+          "package_sha256": "ccdde24aca9350b0a07694a43f0223b078220f1835fa268268e77d53f0601ade"
+        },
+        "source_projection_r2": {
+          "total_merge_package_bytes": 168306,
+          "statistics_payload_bytes": 158976,
+          "merge_recipe_bytes": 1500,
+          "inference_payload_bytes": 9748,
+          "package_sha256": "2bb8ffcd1ec6552abbc49bf4f23e9c84495276409b1096fa2a4ea53c2fc575cf"
+        },
+        "output_pca_r2": {
+          "total_merge_package_bytes": 168306,
+          "statistics_payload_bytes": 158976,
+          "merge_recipe_bytes": 1500,
+          "inference_payload_bytes": 9748,
+          "package_sha256": "675fc21621b071db5022c85ae7e011c082628d36dbe5a9b222e1f43ea8f9599a"
+        },
+        "mirror_stats_r3": {
+          "total_merge_package_bytes": 170930,
+          "statistics_payload_bytes": 158976,
+          "merge_recipe_bytes": 1500,
+          "inference_payload_bytes": 12372,
+          "package_sha256": "a204198ce35e3fb7361ca7ab49f7826f4d993838f4a27907077849e38c04f9b8"
+        },
+        "source_projection_r3": {
+          "total_merge_package_bytes": 170930,
+          "statistics_payload_bytes": 158976,
+          "merge_recipe_bytes": 1500,
+          "inference_payload_bytes": 12372,
+          "package_sha256": "6fd78336e02049c542d3e949fbb0bb2d5de88e890d210b35536443d2108d8a96"
+        },
+        "output_pca_r3": {
+          "total_merge_package_bytes": 170930,
+          "statistics_payload_bytes": 158976,
+          "merge_recipe_bytes": 1500,
+          "inference_payload_bytes": 12372,
+          "package_sha256": "d37dff72cb9585db22ddba3fd56e91f8483c431b83a41baf7c1ac90c357e57b7"
+        },
+        "mirror_stats_r4": {
+          "total_merge_package_bytes": 173618,
+          "statistics_payload_bytes": 158976,
+          "merge_recipe_bytes": 1500,
+          "inference_payload_bytes": 15060,
+          "package_sha256": "a1c98fe02d06c2191fa7ea2c112fff6672eb877bc8ba9c1b28149492f3df2b64"
+        },
+        "source_projection_r4": {
+          "total_merge_package_bytes": 173618,
+          "statistics_payload_bytes": 158976,
+          "merge_recipe_bytes": 1500,
+          "inference_payload_bytes": 15060,
+          "package_sha256": "54ab391d9f05345720660a57e478422610ce4facb4704c81393028c37d3e7501"
+        },
+        "output_pca_r4": {
+          "total_merge_package_bytes": 173618,
+          "statistics_payload_bytes": 158976,
+          "merge_recipe_bytes": 1500,
+          "inference_payload_bytes": 15060,
+          "package_sha256": "8d362b75942b70440887cff52fb4262b4f000b4aaf3a705568a183c460d55355"
+        }
+      },
+      "mean_metrics": {
+        "full_regmean": {
+          "accuracy": 0.7758083483519268,
+          "nll": 2.0275717377219067,
+          "merge_error": 0.0,
+          "compute_proxy": 336375,
+          "wall": 0.0001590518129432894
+        },
+        "task_arithmetic": {
+          "accuracy": 0.5704800400724681,
+          "nll": 2.1046307307726235,
+          "merge_error": 0.5398523910140515,
+          "compute_proxy": 2600,
+          "wall": 0.0
+        },
+        "mirror_stats_r1": {
+          "accuracy": 0.4215861329705337,
+          "nll": 2.1554326517211595,
+          "merge_error": 0.676007118466614,
+          "compute_proxy": 61816,
+          "wall": 0.00015064374974826933
+        },
+        "source_projection_r1": {
+          "accuracy": 0.33508018612014917,
+          "nll": 2.1668692457271534,
+          "merge_error": 0.7139753129084948,
+          "compute_proxy": 337025,
+          "wall": 0.0001917604377013049
+        },
+        "output_pca_r1": {
+          "accuracy": 0.6595244957186903,
+          "nll": 2.0892245803680876,
+          "merge_error": 0.3611614132761172,
+          "compute_proxy": 337025,
+          "wall": 0.00018994006290995458
+        },
+        "mirror_stats_r2": {
+          "accuracy": 0.5301833796648144,
+          "nll": 2.1276185061369346,
+          "merge_error": 0.5953949237642263,
+          "compute_proxy": 104268,
+          "wall": 0.0002101893746839778
+        },
+        "source_projection_r2": {
+          "accuracy": 0.4944946289431677,
+          "nll": 2.137894834252784,
+          "merge_error": 0.6105625166562,
+          "compute_proxy": 337675,
+          "wall": 0.00019780324987550557
+        },
+        "output_pca_r2": {
+          "accuracy": 0.7091921737893144,
+          "nll": 2.064120796210298,
+          "merge_error": 0.2863597174693502,
+          "compute_proxy": 337675,
+          "wall": 0.00019447012550699583
+        },
+        "mirror_stats_r3": {
+          "accuracy": 0.5797435820823734,
+          "nll": 2.0999397220139686,
+          "merge_error": 0.538047441817048,
+          "compute_proxy": 146862,
+          "wall": 0.00025141381297544285
+        },
+        "source_projection_r3": {
+          "accuracy": 0.5449882263843537,
+          "nll": 2.111336878827893,
+          "merge_error": 0.5586635360180612,
+          "compute_proxy": 338325,
+          "wall": 0.00019945043800362328
+        },
+        "output_pca_r3": {
+          "accuracy": 0.7500255228031275,
+          "nll": 2.0446616236897577,
+          "merge_error": 0.20268355606704402,
+          "compute_proxy": 338325,
+          "wall": 0.00019231431292610068
+        },
+        "mirror_stats_r4": {
+          "accuracy": 0.579719732268751,
+          "nll": 2.099892886423966,
+          "merge_error": 0.5379827584944556,
+          "compute_proxy": 189604,
+          "wall": 0.00031913824977891636
+        },
+        "source_projection_r4": {
+          "accuracy": 0.5449882263843537,
+          "nll": 2.1113229878574162,
+          "merge_error": 0.5586379696079851,
+          "compute_proxy": 338975,
+          "wall": 0.00019940250103900325
+        },
+        "output_pca_r4": {
+          "accuracy": 0.7517944202810348,
+          "nll": 2.0408616430195767,
+          "merge_error": 0.15907607655936665,
+          "compute_proxy": 338975,
+          "wall": 0.00019433175066296826
+        }
+      },
+      "request_count": 16
+    },
+    "71502": {
+      "statistics_payload": {
+        "path": "/workspace/functional-quotient-compression/experiments/mirror_applications/ma-715-regmean-mirror/source/artifacts/seed71502_regmean_statistics.pt",
+        "bytes": 158976,
+        "sha256": "8c2462ac9f7fa06fdbe8229daed431655cc15e8b411ede28315a35e8af4dbd2d"
+      },
+      "source_model_payload": {
+        "path": "/workspace/functional-quotient-compression/experiments/mirror_applications/ma-715-regmean-mirror/source/artifacts/seed71502_source_models.pt",
+        "bytes": 14424,
+        "sha256": "2b07206d4227cf5ecf62d8732d6d06e50e059a74d11db3f2505caaa4e7ee85e7"
+      },
+      "library_payloads": {
+        "full_regmean": {
+          "path": "/workspace/functional-quotient-compression/experiments/mirror_applications/ma-715-regmean-mirror/source/artifacts/seed71502_full_regmean_K16.pt",
+          "bytes": 42972,
+          "sha256": "2b0b4eaf32482e95756bd55f3571aa50b6760849aaea8de94c0cb993226873cb",
+          "roundtrip_max_weight_difference": 0.0
+        },
+        "task_arithmetic": {
+          "path": "/workspace/functional-quotient-compression/experiments/mirror_applications/ma-715-regmean-mirror/source/artifacts/seed71502_task_arithmetic_K16.pt",
+          "bytes": 12312,
+          "sha256": "9e3d786745fc5d17c7984c203ff674d4447f02f705b8388b9190341eb95a5258",
+          "roundtrip_max_weight_difference": 0.0
+        },
+        "mirror_stats_r1": {
+          "path": "/workspace/functional-quotient-compression/experiments/mirror_applications/ma-715-regmean-mirror/source/artifacts/seed71502_mirror_stats_r1_K16.pt",
+          "bytes": 7060,
+          "sha256": "284bc8b4b05714f1be4bce5446ae3cca18e8c47a302707fe7455ce6548287f81",
+          "roundtrip_max_weight_difference": 0.0
+        },
+        "source_projection_r1": {
+          "path": "/workspace/functional-quotient-compression/experiments/mirror_applications/ma-715-regmean-mirror/source/artifacts/seed71502_source_projection_r1_K16.pt",
+          "bytes": 7060,
+          "sha256": "50980e3a6d73baa45764a96e3c6375875054813f74fab362a0e1b99000631f8e",
+          "roundtrip_max_weight_difference": 0.0
+        },
+        "output_pca_r1": {
+          "path": "/workspace/functional-quotient-compression/experiments/mirror_applications/ma-715-regmean-mirror/source/artifacts/seed71502_output_pca_r1_K16.pt",
+          "bytes": 7060,
+          "sha256": "e822521b58751f4ffeb683251251f0ddcf0c0fbc3d4617ff8c522672a239adc5",
+          "roundtrip_max_weight_difference": 0.0
+        },
+        "mirror_stats_r2": {
+          "path": "/workspace/functional-quotient-compression/experiments/mirror_applications/ma-715-regmean-mirror/source/artifacts/seed71502_mirror_stats_r2_K16.pt",
+          "bytes": 9748,
+          "sha256": "7ee2f5f47cb2268deea5b124a4ef90938d5df4a027f09ed052c40748aaa27841",
+          "roundtrip_max_weight_difference": 1.4901161193847656e-08
+        },
+        "source_projection_r2": {
+          "path": "/workspace/functional-quotient-compression/experiments/mirror_applications/ma-715-regmean-mirror/source/artifacts/seed71502_source_projection_r2_K16.pt",
+          "bytes": 9748,
+          "sha256": "1f553ad56ac19ff0030365d4a24b675fdc93013860732e7e4255f672001e63de",
+          "roundtrip_max_weight_difference": 1.4901161193847656e-08
+        },
+        "output_pca_r2": {
+          "path": "/workspace/functional-quotient-compression/experiments/mirror_applications/ma-715-regmean-mirror/source/artifacts/seed71502_output_pca_r2_K16.pt",
+          "bytes": 9748,
+          "sha256": "7fc2d833916fab9a72759082b7f19feb9358c7616b30b16fdf98c652cdad08e1",
+          "roundtrip_max_weight_difference": 2.9802322387695312e-08
+        },
+        "mirror_stats_r3": {
+          "path": "/workspace/functional-quotient-compression/experiments/mirror_applications/ma-715-regmean-mirror/source/artifacts/seed71502_mirror_stats_r3_K16.pt",
+          "bytes": 12372,
+          "sha256": "3a3baa7095cedd8a13eb9b292d1f0c869a906d62a6fd6e505aa039f3c1d4acb1",
+          "roundtrip_max_weight_difference": 2.2351741790771484e-08
+        },
+        "source_projection_r3": {
+          "path": "/workspace/functional-quotient-compression/experiments/mirror_applications/ma-715-regmean-mirror/source/artifacts/seed71502_source_projection_r3_K16.pt",
+          "bytes": 12372,
+          "sha256": "b936c5bfad5da5634499c7a21eb62b4a79d74f590c12a31861ba0a3e2d08993e",
+          "roundtrip_max_weight_difference": 1.4901161193847656e-08
+        },
+        "output_pca_r3": {
+          "path": "/workspace/functional-quotient-compression/experiments/mirror_applications/ma-715-regmean-mirror/source/artifacts/seed71502_output_pca_r3_K16.pt",
+          "bytes": 12372,
+          "sha256": "da0d031261bef1783e7d2ebd0e581a71a87c919d2fb759ceeef3e337b576c5c4",
+          "roundtrip_max_weight_difference": 2.9802322387695312e-08
+        },
+        "mirror_stats_r4": {
+          "path": "/workspace/functional-quotient-compression/experiments/mirror_applications/ma-715-regmean-mirror/source/artifacts/seed71502_mirror_stats_r4_K16.pt",
+          "bytes": 15060,
+          "sha256": "a97b8b67c5093087adc41896f2b67d29354db6a9da8e5b9113cd2a7d91df43a9",
+          "roundtrip_max_weight_difference": 1.4901161193847656e-08
+        },
+        "source_projection_r4": {
+          "path": "/workspace/functional-quotient-compression/experiments/mirror_applications/ma-715-regmean-mirror/source/artifacts/seed71502_source_projection_r4_K16.pt",
+          "bytes": 15060,
+          "sha256": "a9a84ae842580b715e080277f1ba0407d485a8bd7561697b057ccf7ee85d2448",
+          "roundtrip_max_weight_difference": 1.4901161193847656e-08
+        },
+        "output_pca_r4": {
+          "path": "/workspace/functional-quotient-compression/experiments/mirror_applications/ma-715-regmean-mirror/source/artifacts/seed71502_output_pca_r4_K16.pt",
+          "bytes": 15060,
+          "sha256": "c52c8279ab2dd1d80812c559e27baab8fec90b03b1efb206c1718a1bfb825560",
+          "roundtrip_max_weight_difference": 2.9802322387695312e-08
+        }
+      },
+      "merge_packages": {
+        "full_regmean": {
+          "total_merge_package_bytes": 201592,
+          "statistics_payload_bytes": 158976,
+          "merge_recipe_bytes": 1500,
+          "inference_payload_bytes": 42972,
+          "package_sha256": "dbe2228236593a2e1e5589b1876a77887eb6ce66465e57a4bf6100247699cf67"
+        },
+        "task_arithmetic": {
+          "total_merge_package_bytes": 12120,
+          "statistics_payload_bytes": 0,
+          "merge_recipe_bytes": 1500,
+          "inference_payload_bytes": 12312,
+          "package_sha256": "a27962eb8c8dca6752bdfa26344af0dd8532394f1e909204a0c912fe74c69172"
+        },
+        "mirror_stats_r1": {
+          "total_merge_package_bytes": 165618,
+          "statistics_payload_bytes": 158976,
+          "merge_recipe_bytes": 1500,
+          "inference_payload_bytes": 7060,
+          "package_sha256": "67f54fdc3403c3a71d1c2d33b97e53c2be2adeb4a240e8875670d0ffdea97e67"
+        },
+        "source_projection_r1": {
+          "total_merge_package_bytes": 165618,
+          "statistics_payload_bytes": 158976,
+          "merge_recipe_bytes": 1500,
+          "inference_payload_bytes": 7060,
+          "package_sha256": "d3633c00399246bd9d8e2c9d452b5aa385b1a5710da4b9beb18c0577f48c622b"
+        },
+        "output_pca_r1": {
+          "total_merge_package_bytes": 165618,
+          "statistics_payload_bytes": 158976,
+          "merge_recipe_bytes": 1500,
+          "inference_payload_bytes": 7060,
+          "package_sha256": "7edc123527b2408fb19ec668a77852f3b969c5fc8959b18065e46d2c06c1a2c1"
+        },
+        "mirror_stats_r2": {
+          "total_merge_package_bytes": 168306,
+          "statistics_payload_bytes": 158976,
+          "merge_recipe_bytes": 1500,
+          "inference_payload_bytes": 9748,
+          "package_sha256": "f09ccaf2168de4dfb04b7aa4f39ac735c6359608bb3720fc926158719f8d6913"
+        },
+        "source_projection_r2": {
+          "total_merge_package_bytes": 168306,
+          "statistics_payload_bytes": 158976,
+          "merge_recipe_bytes": 1500,
+          "inference_payload_bytes": 9748,
+          "package_sha256": "3c9c78dda32759619a805671d34201317dc988955a8867dfa72227c33e7b7aaf"
+        },
+        "output_pca_r2": {
+          "total_merge_package_bytes": 168306,
+          "statistics_payload_bytes": 158976,
+          "merge_recipe_bytes": 1500,
+          "inference_payload_bytes": 9748,
+          "package_sha256": "a9fac6679d118c2789f13f62df884655449b1e5807d9de41e665db9aeb56500d"
+        },
+        "mirror_stats_r3": {
+          "total_merge_package_bytes": 170930,
+          "statistics_payload_bytes": 158976,
+          "merge_recipe_bytes": 1500,
+          "inference_payload_bytes": 12372,
+          "package_sha256": "be002cb57c9d231bd5b7989e3aff2eef1cb4d52abdbdefdac1d37063c1d4afbf"
+        },
+        "source_projection_r3": {
+          "total_merge_package_bytes": 170930,
+          "statistics_payload_bytes": 158976,
+          "merge_recipe_bytes": 1500,
+          "inference_payload_bytes": 12372,
+          "package_sha256": "d4bb9c33100ac61f152305a987c1f1b559e78a9e76e9a1cd96676ec251bfca16"
+        },
+        "output_pca_r3": {
+          "total_merge_package_bytes": 170930,
+          "statistics_payload_bytes": 158976,
+          "merge_recipe_bytes": 1500,
+          "inference_payload_bytes": 12372,
+          "package_sha256": "94c97adf754eff4f5afcfca8ca937f6c856503349e6941ac5d3b4dd9457e87de"
+        },
+        "mirror_stats_r4": {
+          "total_merge_package_bytes": 173618,
+          "statistics_payload_bytes": 158976,
+          "merge_recipe_bytes": 1500,
+          "inference_payload_bytes": 15060,
+          "package_sha256": "6cbbdaef19a5be63fa832aa323d3ea5903737e5a660e45b64b899fe3e7963da7"
+        },
+        "source_projection_r4": {
+          "total_merge_package_bytes": 173618,
+          "statistics_payload_bytes": 158976,
+          "merge_recipe_bytes": 1500,
+          "inference_payload_bytes": 15060,
+          "package_sha256": "410a7299db57c9982fae37bd68a4583939bddb9b61711f7300e33d68a0c6923d"
+        },
+        "output_pca_r4": {
+          "total_merge_package_bytes": 173618,
+          "statistics_payload_bytes": 158976,
+          "merge_recipe_bytes": 1500,
+          "inference_payload_bytes": 15060,
+          "package_sha256": "f3723ed486e2244d257576c0a7fb4b4e0340e6f8387f72d857918849f466b1e9"
+        }
+      },
+      "mean_metrics": {
+        "full_regmean": {
+          "accuracy": 0.7663721881889954,
+          "nll": 2.044019328106287,
+          "merge_error": 0.0,
+          "compute_proxy": 336375,
+          "wall": 0.000162596687914629
+        },
+        "task_arithmetic": {
+          "accuracy": 0.5649745776679626,
+          "nll": 2.1194452666579764,
+          "merge_error": 0.5839183461526101,
+          "compute_proxy": 2600,
+          "wall": 0.0
+        },
+        "mirror_stats_r1": {
+          "accuracy": 0.3875143990447975,
+          "nll": 2.161855833151686,
+          "merge_error": 0.6900825148437227,
+          "compute_proxy": 61816,
+          "wall": 0.00013933706304669613
+        },
+        "source_projection_r1": {
+          "accuracy": 0.33239388076513754,
+          "nll": 2.1669875797816016,
+          "merge_error": 0.71801754565703,
+          "compute_proxy": 337025,
+          "wall": 0.00019447775048320182
+        },
+        "output_pca_r1": {
+          "accuracy": 0.6769529181875152,
+          "nll": 2.0961002094753503,
+          "merge_error": 0.33711394721587856,
+          "compute_proxy": 337025,
+          "wall": 0.00018792162495628872
+        },
+        "mirror_stats_r2": {
+          "accuracy": 0.5228794781471514,
+          "nll": 2.1331686479016434,
+          "merge_error": 0.6181189768624565,
+          "compute_proxy": 104268,
+          "wall": 0.00021595931298179494
+        },
+        "source_projection_r2": {
+          "accuracy": 0.4385021521725982,
+          "nll": 2.144548118341655,
+          "merge_error": 0.6358804743916274,
+          "compute_proxy": 337675,
+          "wall": 0.00020938837565154245
+        },
+        "output_pca_r2": {
+          "accuracy": 0.7127009640824512,
+          "nll": 2.0790824883098638,
+          "merge_error": 0.27184963245467175,
+          "compute_proxy": 337675,
+          "wall": 0.00019766025070566684
+        },
+        "mirror_stats_r3": {
+          "accuracy": 0.5728650263296957,
+          "nll": 2.1150218649959536,
+          "merge_error": 0.5819295884583284,
+          "compute_proxy": 146862,
+          "wall": 0.0002607049998459843
+        },
+        "source_projection_r3": {
+          "accuracy": 0.4883652951864319,
+          "nll": 2.1256714702796824,
+          "merge_error": 0.602969047828963,
+          "compute_proxy": 338325,
+          "wall": 0.000200816813048732
+        },
+        "output_pca_r3": {
+          "accuracy": 0.7225851353742138,
+          "nll": 2.0680804866123608,
+          "merge_error": 0.22545186981659163,
+          "compute_proxy": 338325,
+          "wall": 0.00019774831298491335
+        },
+        "mirror_stats_r4": {
+          "accuracy": 0.5731203474183075,
+          "nll": 2.1149691585695867,
+          "merge_error": 0.5818509405236921,
+          "compute_proxy": 189604,
+          "wall": 0.0003873973746522097
+        },
+        "source_projection_r4": {
+          "accuracy": 0.4883652951864319,
+          "nll": 2.1256671787290955,
+          "merge_error": 0.602959891470696,
+          "compute_proxy": 338975,
+          "wall": 0.00020641762512241257
+        },
+        "output_pca_r4": {
+          "accuracy": 0.7421726467433708,
+          "nll": 2.053177993952433,
+          "merge_error": 0.17211012160619818,
+          "compute_proxy": 338975,
+          "wall": 0.0001995866882680275
+        }
+      },
+      "request_count": 16
+    }
+  },
+  "total_development_wall_seconds": 0.40384369299863465
+}

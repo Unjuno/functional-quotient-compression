@@ -6,11 +6,11 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (35 completed; 594 UNTESTED; 1 SCREENING)
+- P0: **630** (36 completed; 594 UNTESTED; 0 SCREENING)
 - P1: **422** (12 completed; 410 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1107 UNTESTED, 1 SCREENING, 29 PROMISING, 18 FAIL**
-- 47 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
+- Current MA statuses: **1107 UNTESTED, 0 SCREENING, 29 PROMISING, 19 FAIL**
+- 48 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This was literature intake; randomized draws govern candidate selection.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed; randomized draws govern candidate selection.
 - Thirteenth literature sweep added MA-996..1045 (50 UNTESTED; 40 P0/10 P1) and PA296..PA325. IDs MA-1000+ use four digits; consult `check_registry_integrity.py`. No new experiment results.
@@ -23,14 +23,12 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Active experiment
 
-Draw 11 selected **MA-715 — RegMean statistics to Mirror merge coefficients** from 557 candidates on baseline `c935a903daca5c7d1d48aa50d05b5bd50f239cba` (seed `43612469e490f6898d367f0b6918e51cab79cfb35f5351c51f30d0887a77b957`, index 231). Protocol is frozen on `research/ma-715-regmean-mirror-20261008`; development/test data have not been accessed.
-
-After completion, refresh baseline and live branches before a new random draw. No numeric queue candidate is reserved.
+Draw 11 selected **MA-715 — RegMean statistics to Mirror merge coefficients** from 557 candidates (seed `43612469e490f6898d367f0b6918e51cab79cfb35f5351c51f30d0887a77b957`, index 231). It is **FAIL**: rank-4 direct-stat Mirror saved 65.0% inference bytes but lost 19.3–19.6 accuracy points; byte-matched output-PCA was stronger. Audit remained unopened. Evidence is on `research/ma-715-regmean-mirror-20261008`. Selection uses a fresh auditable random draw after excluding live branch/directory IDs; no numeric queue candidate is reserved.
 
 ## Verified status index
 
 - **PROMISING (29):** MA-001, MA-002, MA-003, MA-004, MA-005, MA-006, MA-007, MA-008, MA-012, MA-014, MA-015, MA-041, MA-076, MA-079, MA-111, MA-121, MA-156, MA-160, MA-171, MA-173, MA-181, MA-189, MA-241, MA-244, MA-245, MA-249, MA-250, MA-251, MA-691.
-- **FAIL (18):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253.
+- **FAIL (19):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-715
 
 All per-ID evidence is retained in the local experiment directories and in `CLAIM_LEDGER.csv`. Consult [the evidence integration audit](../../docs/phase2/MIRROR_MA_EVIDENCE_INTEGRATION_2026-10-08.md) for linked reports, verifications, provenance and claim boundaries.
 
