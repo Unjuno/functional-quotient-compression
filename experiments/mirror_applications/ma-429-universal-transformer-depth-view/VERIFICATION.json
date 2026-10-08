@@ -1,0 +1,10 @@
+{
+  "experiment_id": "MA-429",
+  "protocol_commit": "f3f7d41",
+  "tests": {"command": "python -m unittest discover -s experiments/mirror_applications/ma-429-universal-transformer-depth-view/tests -v", "passed": 2, "failed": 0},
+  "serialization": {"roundtrip_checked": true, "byte_exact": true, "payload_rows": 84, "payload_hashes_replayed": true, "actual_payload_bytes_authoritative": true},
+  "metric_replay": {"checked": true, "max_difference": 0.0, "notes": ["Every payload size and hash matches run records.", "Fresh per-depth errors replay from JSONL.", "Mirror extrapolation is better but bytes equal the linear time embedding, missing the <=90% gate."]},
+  "fresh_split_integrity_checked": true,
+  "fresh_worlds": [42910, 42911, 42912],
+  "notes": ["Training used depths 1-4; fresh evaluation covers depths 1-8.", "All models execute the same eight recurrence steps."]
+}
