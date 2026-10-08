@@ -1,0 +1,8 @@
+{
+  "experiment_id": "MA-516",
+  "amendment": 2,
+  "reason": "Post-run accounting review found the reported support input-token total contained only the final task's subtotal, although all 16 task subtotals were measured and all 256 support forward calls executed.",
+  "change": "Sum support prompt token counts over all 16 tasks before writing metrics. This changes only a reported compute count; task vectors, outputs, gates, data, seeds and payloads are unchanged.",
+  "preserved_pre_amendment_outputs": "runs/pre_amendment_2_support_token_counter/",
+  "fresh_accessed": false
+}

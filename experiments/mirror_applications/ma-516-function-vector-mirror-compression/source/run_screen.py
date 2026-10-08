@@ -62,7 +62,7 @@ def get_activation(model,tok,torch,text):
  return out.hidden_states[LAYER_OUT][0,-1].detach().cpu().numpy().astype(np.float32),len(ids)
 
 def extract_task_vectors(model,tok,torch,seed):
- vectors=[]; manifest=[]
+ vectors=[]; manifest=[]; all_support_tokens=0
  for tid,(name,pairs) in enumerate(TASKS):
   support,queries=split_task(tid,seed)
   ds=[]; token_count=0
@@ -74,7 +74,8 @@ def extract_task_vectors(model,tok,torch,seed):
    ds.append(full-base)
   vectors.append(np.mean(ds,axis=0,dtype=np.float64).astype(np.float32))
   manifest.append(dict(task_id=tid,name=name,support=support,evaluation=queries))
- return np.stack(vectors),manifest,dict(forward_calls=16*8*2,input_tokens=token_count)
+  all_support_tokens+=token_count
+ return np.stack(vectors),manifest,dict(forward_calls=16*8*2,input_tokens=all_support_tokens)
 
 def hook_forward(model,torch,ids,mask,pos,vec):
  layer=model.gpt_neox.layers[HOOK_LAYER]

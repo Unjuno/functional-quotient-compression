@@ -2,7 +2,7 @@
 
 - Status: SCREENING
 - Branch: research/ma-516-function-vector-mirror-compression-20261008
-- Protocol frozen before development: yes (freeze commit 75a80cd); Amendment 1 corrected only rank-1 method dispatch and added a regression test
+- Protocol frozen before development: yes (freeze commit 75a80cd); Amendment 1 corrected only rank-1 method dispatch; Amendment 2 corrects support token aggregation only
 - Development seeds 51601/51602: not run
 - Fresh seeds 51611–51613: sealed
 - Registry/status board: SCREENING
