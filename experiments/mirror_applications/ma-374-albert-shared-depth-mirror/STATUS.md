@@ -3,7 +3,7 @@
 - Status: PROMISING only for a development final-depth signal; preregistered multi-depth gate missed. Original payload replay is not independently reproducible from this branch; see the A1 runtime replay audit.
 - Branch: `research/ma-374-albert-shared-depth-mirror-20261008`
 - Base commit: `de5504c`
-- Last verified commit: pending A1 audit commit
+- Last verified commit: `80725b5`
 - Development complete: yes (seeds 37401, 37402)
 - Fresh/audit opened: no
 - Results committed: yes

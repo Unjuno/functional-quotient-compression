@@ -1,6 +1,6 @@
 {
   "experiment_id": "MA-374",
-  "commit": "4e75142d1848ad4e7f51de9fa1dbda0bd02990a7",
+  "commit": "80725b5",
   "historical_verification": {
     "reported_commit": "52fd6b6",
     "preserved_claim": "The original verification reported 4 tests passed, 12 payloads byte-exact and metrics replayed with max difference 0.0.",
@@ -25,7 +25,7 @@
   "notes": [
     "Two development worlds used distinct recurrence coefficients and fresh randomized sequences.",
     "The original verification stated that all 12 payloads replayed exactly, but those payload files were missing from the canonical branch; this claim could not be reproduced in the current runtime. The separate runtime replay variant archives its 12 actual payloads and replays them exactly against its own metrics.",
-    "Prefix throughput was initially measured while computing the full four-layer prefix stack. The evaluator was corrected to stop at each requested depth; the locked development seeds were rerun. Stored payload hashes and quality metrics remained exact; throughput values now correspond to the requested depth.",
+    "The historical verification says prefix throughput was initially measured while computing the full four-layer stack and later corrected. That historical exact-hash claim is not independently reproducible from the canonical branch; A1 records a separate current-runtime replay only.",
     "The preregistered multi-depth gate failed in development; fresh seeds 37411, 37412, 37413 remain unopened."
   ]
 }
