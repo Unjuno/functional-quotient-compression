@@ -4,12 +4,12 @@
 - Branch: `research/ma-742-rgcn-attribute-mirror-20261008`
 - Base commit: `16807a7d6dc17a834a44ed3cc793ccc28b615691`
 - Pre-fresh freeze commit: `74e0d32`
-- Last verified commit: pending
+- Last verified commit: `65a73e1`
 - Development complete: yes
 - Fresh/audit opened: yes; seeds 74201, 74202 and 74203
-- Results committed: pending
-- Verification committed: pending
-- Registry row updated: pending
+- Results committed: yes (`98e9ffc`)
+- Verification committed: yes (`98e9ffc`); registry integration verified in `65a73e1`
+- Registry row updated: yes (`65a73e1`)
 
 ## Result
 
