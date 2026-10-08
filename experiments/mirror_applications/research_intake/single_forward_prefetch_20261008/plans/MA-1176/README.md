@@ -60,3 +60,8 @@ Paired seed/task bootstrap; predictor accuracy and miss cost variation; clock fr
 ## Evidence and next action
 
 [CPU exactness and virtual scheduler report](../../REPORT.md). A truthful deployment experiment cannot be marked PASS without a GPU. A hot-fold cache may be worth further testing, but its memory residency must be charged.
+
+## Dependency on the primary 1-forward output hypothesis
+
+This is a *secondary deployment application*, not the primary Mirror research claim. Start only after MA-1175 has K4/K5 **independently useful learned outputs** with realistic native controls. Include PA439 SpecMD (native cache/eviction benchmark) alongside PA434 Pre-gated MoE, PA435 SpecPrefetch and PA436 SPICE. Compare true native proactive prefetch at equal router/predictor cost, model quality, PCIe bandwidth, hot/cold VRAM and TTFT/TPOT; virtual DMA simulator alone is not evidence of GPU throughput.
+

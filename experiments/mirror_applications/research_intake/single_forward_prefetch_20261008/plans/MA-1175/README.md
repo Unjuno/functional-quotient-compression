@@ -58,3 +58,20 @@ u_c=sqrt(u_seed²+u_eval²+u_num²) only for uncorrelated quality estimates; inc
 ## Evidence and required next action
 
 Read [Stage-0 report](../../REPORT.md), source archive and two frozen protocols, then implement an independent learned multitask specialist teacher. Do not change worker status based only on source-aligned toy.
+
+
+## Principal research focus — one heavy forward, K useful learned outputs
+
+**Priority inside isolated research: #1.** The user-selected primary claim is **K functional outputs from ONE expensive shared inference**, not KV-cache storage and not GPU offload. The full [research focus queue](../../RESEARCH_FOCUS_QUEUE.md) keeps related but separate work in order; this is not the canonical live worker queue.
+
+### SFM003: trained tiny-head mechanism (completed exploratory pilot)
+
+[Frozen protocol](../../pilots/sfm003_trained_multioutput/PROTOCOL.json) and [scientific result](../../SFM003_REPORT.md) with exact [source](../../pilots/sfm003_trained_multioutput/source/run_sfm003.py), [unit tests](../../pilots/sfm003_trained_multioutput/source/test_sfm003.py), [raw fresh quality](../../pilots/sfm003_trained_multioutput/results/fresh_quality.csv), [timing](../../pilots/sfm003_trained_multioutput/results/fresh_timing.csv), and [SHA/limits](../../pilots/sfm003_trained_multioutput/results/VERIFICATION.json).
+
+For an intentionally output-rotated 4/5-function synthetic teacher, source-supervised learned 4-angle/head codes reconstructed **all K distinct useful outputs** at near floating-point precision across five fresh worlds per K using exactly one frozen heavy shared trunk call. K=5 measured 3.87x faster than an **intentionally redundant K-forward control**, but this is NOT a speed advantage over native one-forward heads. The native full linear head did one forward too and measured faster CPU eager despite its larger output-state bytes; its K=5 NPZ was 8556 B vs 6958 B for the Mirror. On independent nonlinear off-orbit functions, Mirror NMSE rose above 0.4. An ordinary paired Givens head is mathematically identical to this Mirror output transform (M0), so no new model class or Mirror-specific hardware win is claimed. The physical base is **frozen and teacher-known**, not jointly learned.
+
+### Next experiment: actual learned shared trunk
+
+[SFM004 independent joint-learning protocol](../../SFM004_JOINT_LEARNING_PLAN.md) removes the teacher-known shared statistic. It co-trains the heavy trunk and K role codes and compares them with the fastest **native shared-trunk linear head**, ordinary paired Givens/FiLM, MIMO, MIMMO (PA437), Network Fission Ensembles (PA438), BatchEnsemble and K independent experts. Train/test on aligned and out-of-orbit function families. K in {2,4,5,8,16}; distinguish one-forward feasibility, accuracy, serialized bytes, and true runtime. Do not treat MIMO / Network Fission one-forward claims as Mirror inventions.
+
+**MA scientific status remains UNTESTED.** Stage0 narrow PASS/M0/FAIL is a pilot finding, not an MA-1175 adoption claim.

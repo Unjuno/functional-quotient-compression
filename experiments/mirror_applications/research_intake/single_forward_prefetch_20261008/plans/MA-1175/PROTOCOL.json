@@ -9,7 +9,9 @@
     "PA16",
     "PA42",
     "PA417",
-    "PA414"
+    "PA414",
+    "PA437",
+    "PA438"
   ],
   "hypothesis": "At heldout useful task quality and matched actual serialized bytes, 4/5 trained logical Experts can be reconstructed from one cached statistic at <=0.90 P95 compared with strongest admissible byte-near non-Mirror method.",
   "physical_object": "one shared nonlinear FFN/attention trunk",
@@ -20,7 +22,10 @@
     "simple linear/gate/IA3 output heads",
     "cached preactivation",
     "pre-folded tied ordinary experts",
-    "independent full experts"
+    "independent full experts",
+    "ordinary paired-Givens readout (mathematically identical M0)",
+    "MIMMO (PA437)",
+    "Network Fission Ensembles (PA438)"
   ],
   "development": {
     "seeds": [
@@ -51,5 +56,24 @@
   "failure_gate": "Exact output transport fails for hidden nonlinear tasks or ordinary output head / pre-folded control dominates at feasible RAM.",
   "uncertainty": "metric u_c covariance aware, k=2 indicative only; runtime clock in seconds and serialized bytes measured separately",
   "hardware": "CPU mechanism tested; real CPU/GPU natural task evaluation pending",
-  "result_status": "NOT_COMPLETED"
+  "result_status": "NOT_COMPLETED",
+  "experiment_priority": "RESEARCH_PRIMARY_ONLY; canonical worker queue unchanged",
+  "research_focus": "One costly forward -> K distinct useful outputs by short trained Mirror codes; offload is secondary",
+  "stage0_learned_code_pilot": {
+    "path": "experiments/mirror_applications/research_intake/single_forward_prefetch_20261008/pilots/sfm003_trained_multioutput/PROTOCOL.json",
+    "science_report": "experiments/mirror_applications/research_intake/single_forward_prefetch_20261008/SFM003_REPORT.md",
+    "outcome": "Favorable output-rotation K4/K5 5/5 synthetic worlds at near-zero NMSE; independent off-orbit beta=.8 failures; native paired Givens identical; no full MA completion"
+  },
+  "next_stage": {
+    "plan": "experiments/mirror_applications/research_intake/single_forward_prefetch_20261008/SFM004_JOINT_LEARNING_PLAN.md",
+    "scientific_requirements": [
+      "joint training of shared heavy trunk with actual K labels",
+      "native one-forward per-task linear head comparator",
+      "MIMO and MIMMO/NFE controls when implementations verified",
+      "K 2/4/5/8/16 scaling",
+      "matched bytes and real inference time",
+      "multiple independent latent target families and held-out teacher task identities",
+      "new fresh seeds preregistered"
+    ]
+  }
 }

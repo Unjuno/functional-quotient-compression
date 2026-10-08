@@ -10,7 +10,8 @@
     "PA435",
     "PA436",
     "PA16",
-    "PA42"
+    "PA42",
+    "PA439"
   ],
   "hypothesis": "At fixed GPU resident-byte cap and trained routing, predictive offload of the next physical block overlaps with K=4/5 useful Mirror outputs and beats native pre-gated + ordinary factorized + hot-prefolded strategies by >=15% TPOT in 4/5 fresh conditions at <=0.02 nat/token NLL difference.",
   "physical_object": "CPU resident expert groups and two GPU staging buffers",
@@ -21,7 +22,8 @@
     "SPICE low-rank surrogate",
     "same-byte grouped ordinary factor bank",
     "hot pre-folded ordinary experts",
-    "native on-demand"
+    "native on-demand",
+    "SpecMD cached-expert eviction/prefetch benchmark (PA439)"
   ],
   "development": {
     "seeds": [
@@ -52,5 +54,6 @@
   "failure_gate": "Same byte native pre-gated factor bank matches or exceeds, mispredicted bytes/sync consume benefit, or tensor caches copied but called aliased.",
   "uncertainty": "predictor hit rate, transfer bandwidth, CPU/GPU synchronization, clock, batch/context; 5 seeds small and hardware measurement currently unavailable",
   "hardware": "Stage-0 CPU + virtual event model executed; CUDA two-stream hardware stage BLOCKED",
-  "result_status": "NOT_COMPLETED"
+  "result_status": "NOT_COMPLETED",
+  "primary_dependency": "MA-1175 SFM004 real jointly learned K outputs; do not claim generic prefetch as Mirror novelty"
 }
