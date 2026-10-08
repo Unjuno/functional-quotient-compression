@@ -1,1 +1,28 @@
-{"experiment_id":"MA-669","draw_id":"Draw44","protocol_sha256":"","draw_record_sha256":"","results_sha256":"","audit_replay":"pending","serialized_payload_replay":"pending","checks":[]}
+{
+  "experiment_id": "MA-669",
+  "draw_id": "Draw44",
+  "protocol_sha256": "ee1dd83c6478d12dfe0b2a85a39e3c10712ca18657d295d8917886463e1fa30b",
+  "draw_record_sha256": "c574ccc7965af448767780267f6f43926ad62b44673d3f93ac2354966098fc28",
+  "results_sha256": "aeee17ab504e44d311e2873b2a18ccf5812b65b8a2f31d3bb9a16dffac15bae5",
+  "audit_replay": "pending",
+  "serialized_payload_replay": "pending",
+  "checks": [
+    {
+      "name": "focused tests",
+      "command": "pytest -q experiments/mirror_applications/ma-669-lorahub-mirror/tests",
+      "passed": 2,
+      "failed": 0
+    },
+    {
+      "name": "fixed-seed fresh replay",
+      "command": "python experiments/mirror_applications/ma-669-lorahub-mirror/source/run_experiment.py --seeds 66911 66912 66913",
+      "passed": true,
+      "notes": "quality and payloads reproduced; timing excluded"
+    },
+    {
+      "name": "actual serialized payload",
+      "passed": true,
+      "notes": "Mirror 1906 B; LoRAHub/direct 1220 B; independent deltas 1068 B"
+    }
+  ]
+}
