@@ -25,7 +25,7 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 **MA-375 — One-shot supernet + Mirror subgraph correction (P0; PA62)**
 
-MA-374 is PROMISING only for final-depth prediction on the registered synthetic recurrence worlds; the multi-depth gate missed in one seed, so fresh remains sealed. Continue with the one-shot subgraph-rank-bias candidate. MA-369/371/372 remain UNTESTED and paused pending width/depth output-code family redesign.
+MA-374 is PROMISING only for final-depth prediction on the registered synthetic recurrence worlds; the multi-depth gate missed in one seed, so fresh remains sealed. A1 found the original twelve payloads absent and 0/12 original hashes reproducible under the current runtime; the current-runtime variant is archived and replays exactly against its own metrics. Continue with the one-shot subgraph-rank-bias candidate. MA-369/371/372 remain UNTESTED and paused pending width/depth output-code family redesign.
 
 Required controls: native one-shot shared supernet, the exact Mirror architecture-class correction, a byte-matched scalar/gate control, and independently trained children. Measure child ranking agreement and actual child quality/bytes.
 
