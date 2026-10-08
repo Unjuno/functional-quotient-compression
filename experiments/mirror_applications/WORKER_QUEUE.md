@@ -355,6 +355,28 @@ Read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_THIRTEENTH_SWEEP.
 
 **Variable-width IDs:** MA-1000+ use four decimal digits. Parse full `^MA-[0-9]{3,}$` IDs and use integer max+1; never use three-digit-only regex or `id[:6]`. The read-only integrity check is `python experiments/mirror_applications/check_registry_integrity.py`.
 
+## Fourteenth research expansion — time-series, recommendation tables and multi-sensor Earth observation
+
+**MA-1046..1095 are 50 new UNTESTED hypotheses** appended after earlier literature intakes and the original locked direct-prior queue. All comparisons study the marginal value of the extra Mirror parameter `m`; no new source-paper result is a Mirror result.
+
+**Current canonical next candidate: MA-255** (Parameter Superposition). Do not interrupt its frozen protocol, claim or branch.
+
+Recommended high-information P0 studies **within this new family**:
+
+1. **Time-series MA1046..1061:** MA1049 PatchTST channel-independent shared encoder + channel View; MA1052 TRACE selected LoRA + Mirror code; MA1057 frequency×horizon code held-out grid; MA1059 natural aligned/private series frontier. Native Chronos, TimesFM, Moirai, PatchTST, TimeMixer, iTransformer, TRACE, DLinear/seasonal naive as relevant. Hold out future times, datasets and series. Use MASE/sMAPE plus CRPS/WQL for probabilistic tasks, all bytes and actual latency.
+2. **Recommender MA1062..1078:** MA1063 table-free DHE + Mirror field code; MA1066 TT-Rec cores with Mirror task View; MA1070 native MMoE+Mirror expert modulation; MA1072 frequency-aware private-embedding exceptions; MA1078 end-to-end system Pareto. Compare DHE zero-ID-table, QR, optimized TT-Rec, VQ-Rec, HSTU and native MMoE. Count every ID code, hash/generator, TT core and cache byte. Use AUC/logloss, ranking NDCG, cold IDs, memory bandwidth, QPS/P99.
+3. **Earth observation MA1079..1095:** MA1079 DOFA native wavelength-conditioned hypernetwork plus shared-view filter; MA1080 held-out sensor×wavelength; MA1083 CROMA SAR↔optical transport; MA1090 calibrated continuous band response; MA1095 EO sensor generalization benchmark. Native DOFA, AnySat, SatMAE, CROMA, Prithvi-EO-2.0, TerraMind and AlphaEarth are mandatory where relevant. Hold out entire sensors, geography, years and band-response configurations. Charge spectral metadata/generator parameters and measure mIoU/F1 plus GPU runtime.
+
+Scientific guards:
+- Native conditioning by timestamps, user/item IDs and sensor wavelengths is established prior art; Mirror **must provide additional useful functional freedom per byte/compute**.
+- Compare against the strongest practical cheap gate/embedding/rank-1/LoRA alternative, a naturally learned baseline, and shared+private exceptions.
+- For codes factoring horizon×frequency, field×task or sensor×wavelength, hold out full factor combinations, not merely new inputs.
+- Forecast future-label leakage, recommender time/item-popularity leakage and satellite geographic/seasonal leakage must be excluded from split construction.
+- DOFA already creates weights dynamically from wavelength, and DHE already removes per-ID tables. A larger Mirror code with worse runtime is a scientifically negative result.
+- Report exactly what new `m` changes causally and where it is inserted; ordinary coordinate relabelings count as zero new functional multiplicity.
+
+Read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_FOURTEENTH_SWEEP.md` and PA326..350 before implementing any MA1046..1095.
+
 ## Historical P0 family sequence (completed screens; not current queue)
 
 The historical A–F lists below record previously screened experiments and must not override `STATUS_BOARD.md` (MA-255 next).
