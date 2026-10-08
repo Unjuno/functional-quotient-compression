@@ -1,0 +1,64 @@
+{
+  "experiment_id": "MA-470",
+  "title": "Shared Mirror edit basis + MEND coefficient generator",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/EDIT_SUCCESS/LOCALITY/INTERFERENCE/RUNTIME",
+  "base_commit": "94cdea8af94aaf2345870cc7e89c6b08df725f07",
+  "hypothesis": "For multiple key-routed local edit requests whose matrix updates share two atoms, an editor that emits two per-edit coordinates and decodes them over a shared basis will preserve held-out edit RMSE <=0.05, locality RMSE <=0.05, wrong-route rate <=0.01, and use <=0.75x the actual payload bytes of a MEND-style full-update bank; the matched native coefficient/basis implementation tests whether any gain is Mirror-specific.",
+  "physical_object": "one frozen 8x8 linear base, a shared two-matrix edit basis, and one shared support-signal editor",
+  "mirror_coordinate": "two generated coefficients per edit request",
+  "logical_multiplicity": "20 simultaneously available key-routed edit functions, four held out from editor training",
+  "prior_art_refs": ["PA86"],
+  "controls": ["MEND-style network maps flattened support gradient to a full 8x8 update", "same two-coefficient editor and basis as direct native low-rank control", "rank-one support-derived ROME-style edit per request", "independent least-squares 8x8 update from each support set", "frozen base with no edits"],
+  "task": {
+    "type": "synthetic simultaneous local edits selected by a frozen nearest-key router",
+    "key_anchors": "the first 20 coordinate basis vectors in R^24, serialized as float32 in each paid inference payload",
+    "dimension": 24,
+    "edit_requests": 20,
+    "editor_train_edits": 16,
+    "heldout_edits": 4,
+    "support_examples_per_edit": 24,
+    "query_examples_per_edit": 128,
+    "locality_examples_per_world": 512,
+    "noise_sigma": 0.01,
+    "key_query_sigma": 0.18,
+    "route_radius": 1.8,
+    "outer_updates": 2200,
+    "batch_size": 8,
+    "optimizer": "Adam; learning rate 0.01",
+    "target_update_family": "rank at most two from a seeded shared basis; coefficients and basis are not exposed to the learned editor"
+  },
+  "development": {
+    "worlds_or_seeds": [47001, 47002],
+    "selection_metric": "held-out edit RMSE, locality RMSE, route accuracy, actual payload bytes, and separately timed edit generation/query runtime",
+    "hyperparameter_changes_after_run": "prohibited without numbered amendment"
+  },
+  "fresh": {"worlds_or_seeds": [47011, 47012, 47013], "locked_before_access": true, "opened": false},
+  "storage": {
+    "authority": "actual serialized uncompressed .npz inference-bank bytes",
+    "paid_objects": ["frozen base matrix", "editor weights", "shared update basis", "all edit keys", "all MEND updates or Mirror/native codes", "route radius and format metadata"]
+  },
+  "compute": {
+    "report_support_examples_seen": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_edit_generation_ops": true,
+    "report_route_and_query_ops": true,
+    "report_training_wall_time": true,
+    "report_edit_generation_wall_time": true,
+    "report_query_wall_time": true,
+    "operation_proxy": "Learned generator MAC/edit = 36*32 + 32*out_dim + (2*36 for Mirror/native decode); out_dim=36 for MEND and 2 for Mirror/native. Routed query MAC proxy/example = 36 for the base/update matrix multiply plus 20*6 distance operations; router comparisons and exp-like operations are reported separately as counts. Support controls charge their least-squares/rank-one solve proxy and routed query operations separately."
+  },
+  "gates": {
+    "PROMISING": "Both development seeds: held-out edit RMSE <=0.05, locality RMSE <=0.05, wrong-route rate <=0.01, Mirror payload <=0.75x MEND and <=1.0x independent-fit payload, and edit-generation MAC/edit <=1.25x MEND. This establishes a native shared-basis storage signal only if the direct native control is separately reported; it is not Mirror-specific when output/payload exactly alias.",
+    "FAIL": "Independent upper passes the validity bounds but either the quality/storage/route/compute clause fails or direct native low-rank exactly aliases Mirror.",
+    "NOT ESTABLISHED": "Independent support-fit upper has edit RMSE >0.025 or locality RMSE >0.05, wrong-route rate >0.01 on its own queries, or serialization/metric replay fails."
+  },
+  "boundaries": [
+    "Synthetic linear model editing only; this is not a factual language-model MEND reproduction.",
+    "All methods share the same nearest-key router, and the complete key table/radius is charged in every payload.",
+    "Locality uses independent random inputs and tests whether any edit is incorrectly routed; simultaneous queries use the closest edit key when within radius.",
+    "The independent full-update fit must pass frozen edit, locality and route bounds before quality/storage-frontier conclusions.",
+    "Fresh worlds remain sealed unless the complete frozen PROMISING gate passes; an exact native alias disallows a Mirror-specific claim."
+  ]
+}
