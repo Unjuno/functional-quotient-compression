@@ -35,5 +35,12 @@
     "fresh_or_audit_accessed": false,
     "quality_hyperparameters_or_gate_changed": false,
     "correction": "Apply protocol amendment A2: serialize explicit update counters, save a separate inference-only payload for every method, retain the frozen gate on restartable bytes, and report both byte metrics. Recompute the same development run deterministically."
+  },
+  {
+    "attempt": 5,
+    "phase": "independent result replay",
+    "failure": "The first replay verifier used an absolute CSV metric tolerance of 1e-8, tighter than the preregistered CSV formatting precision of 10 significant digits; one rounded value differed by 2.98e-8.",
+    "development_or_fresh_data_changed": false,
+    "correction": "Use 1e-7 tolerance for CSV text roundtrip while retaining exact-byte SHA-256 and exact payload prediction replay checks. No experiment settings or scores changed."
   }
 ]

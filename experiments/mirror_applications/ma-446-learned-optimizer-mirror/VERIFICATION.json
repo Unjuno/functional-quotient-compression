@@ -1,6 +1,6 @@
 {
   "experiment_id": "MA-446",
-  "status": "PROTOCOL_FROZEN_PRE_DEVELOPMENT",
+  "status": "VERIFIED_DEVELOPMENT_FAIL",
   "base_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
   "random_draw_replay": "passed",
   "protocol_frozen_before_scores": true,
@@ -9,8 +9,19 @@
   "tests": {
     "command": "PYTHONDONTWRITEBYTECODE=1 python -m unittest discover -s experiments/mirror_applications/ma-446-learned-optimizer-mirror/tests -v",
     "passed": 5,
-    "failed": 0,
-    "status": "passed after A2 serializer accounting change"
+    "failed": 0
   },
-  "initial_development_run": "completed; FAIL; serialization accounting amendment A2 pending deterministic rerun"
+  "initial_development_run": "completed; FAIL; serialization accounting amendment A2 pending deterministic rerun",
+  "development_complete": true,
+  "result_replay": "source/metric_replay.json",
+  "payloads": {
+    "inference_only": 14,
+    "restartable": 14,
+    "total_checked": 28,
+    "byte_and_sha256_checked": true,
+    "max_prediction_difference": 0.0
+  },
+  "registry_integrity_pending": true,
+  "exact_inference_payload_bytes_reported": true,
+  "exact_restartable_payload_bytes_reported": true
 }
