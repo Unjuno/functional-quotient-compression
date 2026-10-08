@@ -37,7 +37,7 @@
     "rank-2 SVD with float16 task coefficients (same coefficient payload bytes as one float32 Mirror angle)",
     "independent full task vectors"
   ],
-  "stream": "Per world, four support task deltas discover the shared basis; eight new task deltas are encoded and evaluated. Aligned task deltas use a fixed-radius circular orbit in the support-discovered rank-2 subspace. Independent deltas are isotropic and unrelated. Each task is f(x)=x^T(theta0+delta) on held-out isotropic x. Also evaluate pairwise positive and negative task-vector compositions.",
+  "stream": "Per world, eight support task deltas discover the shared basis; eight new task deltas are encoded and evaluated. Aligned task deltas use a fixed-radius circular orbit in the support-discovered rank-2 subspace. Independent deltas are isotropic and unrelated. Each task is f(x)=x^T(theta0+delta) on held-out isotropic x. Also evaluate pairwise positive and negative task-vector compositions.",
   "development": {
     "worlds_or_seeds": [
       29201,
@@ -92,7 +92,7 @@
   "boundaries": [
     "Synthetic linear task vectors",
     "Fixed compression screen, not capacity",
-    "Four support vectors per world discover the basis and are not evaluated task instances",
+    "Eight support vectors per world discover the basis and are not evaluated task instances",
     "No Transformer or natural-task result"
   ],
   "amendments": [

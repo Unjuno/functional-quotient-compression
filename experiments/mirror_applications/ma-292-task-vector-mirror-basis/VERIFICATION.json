@@ -1,9 +1,34 @@
 {
   "experiment_id": "MA-292",
-  "commit": null,
-  "tests": {"command": "python -m unittest discover -s experiments/mirror_applications/ma-292-task-vector-mirror-basis/tests -v", "passed": null, "failed": null},
-  "serialization": {"roundtrip_checked": false, "byte_exact": false, "maximum_reconstruction_abs_difference": null},
-  "metric_replay": {"checked": false, "max_difference": null},
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "commit": "655b1db0b6730739f1891332d8dbf17487f5a729",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-292-task-vector-mirror-basis/tests -v",
+    "passed": 5,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "maximum_reconstruction_abs_difference": 0.0,
+    "state_sha256_replay": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "development_seeds": [
+    29201,
+    29202
+  ],
+  "fresh_seeds": [
+    29211,
+    29212,
+    29213
+  ],
+  "notes": [
+    "Final MSE is evaluated from functions reconstructed from the saved serialized state.",
+    "Actual payloads include method-specific state, shared basis/base, task codes and IDs, tensor metadata and headers.",
+    "Four FP32/control plus FP16 rank-2 control results replay exactly; no optimizer updates were used."
+  ]
 }

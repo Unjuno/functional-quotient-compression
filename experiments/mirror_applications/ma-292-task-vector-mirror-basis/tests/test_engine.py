@@ -9,9 +9,12 @@ class MA292Tests(unittest.TestCase):
   self.assertEqual(len(rows),12)
   self.assertTrue(all(r['serialized_bytes']>0 for r in rows))
   self.assertTrue(all(r['optimizer_updates']==0 for r in rows))
-  self.assertTrue(all(r['serialized_bytes']>0 for r in rows))
   full=[r for r in rows if r['method']=='independent_full']
   self.assertTrue(all(r['max_delta_abs_error']<1e-6 for r in full))
+ def test_record_codec_is_byte_exact(self):
+  records=[('method','mirror_angle'),('tensor',np.arange(8,dtype=np.float32).reshape(2,4)),('half',np.array([.25,-.5],dtype=np.float16))]
+  payload=engine._payload_pack(records)
+  self.assertEqual(engine._payload_pack(engine._payload_unpack(payload)),payload)
  def test_mirror_has_smaller_code_and_svd_has_zeroish_projection_error(self):
   rows=engine.run(29211,'fresh',4)
   a={r['method']:r for r in rows if r['condition']=='aligned'}
