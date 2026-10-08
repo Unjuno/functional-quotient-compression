@@ -1,0 +1,61 @@
+{
+  "experiment_id": "MA-385",
+  "title": "DualPrompt general prompt with Mirror expert-prompt views",
+  "status": "FROZEN_DEVELOPMENT",
+  "base_commit": "0c3580b",
+  "evidence_lane": "MECHANISM/STORAGE/RUNTIME/RETENTION",
+  "prior_art_refs": ["PA57"],
+  "hypothesis": "For aligned task-specific prompt residuals, a shared rank-two expert basis plus one per-task angle around a common general prompt retains explicit DualPrompt quality at fewer serialized bytes; it must beat hard expert sharing and the direct two-coefficient basis control.",
+  "physical_object": "one task-invariant general prompt plus either an expert prompt bank or one shared rank-two expert basis",
+  "mirror_coordinate": "one persisted FP16 angle m_j per retrieved task; expert_j = cos(m_j)u + sin(m_j)v",
+  "logical_multiplicity": "eight task-specific expert residual prompts",
+  "model": {
+    "tasks": 8,
+    "key_dim": 8,
+    "feature_dim": 16,
+    "prompt_dim": 16,
+    "train_examples_per_task": 1024,
+    "validation_examples_per_task": 256,
+    "test_examples_per_task": 512,
+    "batch_size": 128,
+    "optimizer_updates": 800,
+    "updates_per_sequential_task": 100,
+    "optimizer": "Adam",
+    "learning_rate": 0.002,
+    "development_seeds": [38501, 38502],
+    "fresh_seeds": [38511, 38512, 38513],
+    "data": "Synthetic binary classification with eight sequential task distributions. Inputs contain a noisy task-key vector and a Gaussian feature vector. Teacher decision functions share a task-invariant general component and have task residuals on a two-dimensional Givens orbit. Train, validation, and test examples are disjoint. Router prototypes are fitted from training key centroids, serialized as FP16, and used by every method at inference."
+  },
+  "controls": [
+    "DualPrompt-style independent general prompt plus per-task expert prompt bank",
+    "general prompt plus one hard-shared expert residual",
+    "general prompt plus shared rank-two expert basis with two direct coefficients per task",
+    "general prompt plus shared rank-two expert basis with one Mirror angle per task"
+  ],
+  "development_gate_before_fresh": "Both development worlds: explicit DualPrompt test accuracy >=0.85; Mirror within 0.02 absolute accuracy of explicit; Mirror actual serialized bytes <=0.65x explicit and <=1.10x direct coefficient basis; task-key retrieval >=0.98; Mirror mean final accuracy >=0.05 absolute over hard-shared expert residual. Report per-task accuracy, forgetting, training time, MAC estimate, and serialized-state throughput. Otherwise fresh remains sealed.",
+  "success_gate": "All three fresh worlds satisfy every quality, byte, retrieval, and retention gate; Mirror improves the quality-byte frontier over direct coefficient control; deterministic payload replay exact.",
+  "failure_gate": "Any development seed misses a registered gate or direct coefficient control matches Mirror at comparable or lower bytes. Fresh remains sealed.",
+  "storage": {
+    "authority": "actual deterministic ZIP/NPY FP16 inference payload after reload",
+    "paid_objects": [
+      "general prompt",
+      "all expert prompts or shared expert basis",
+      "all task codes",
+      "router key centroids",
+      "metadata and archive headers"
+    ]
+  },
+  "compute": {
+    "report_examples_and_updates": true,
+    "report_train_wall_clock": true,
+    "report_router_and_prompt_generation_ops": true,
+    "report_active_macs_proxy": true,
+    "report_serialized_state_cpu_throughput": true
+  },
+  "boundaries": [
+    "aligned synthetic prompt-residual family only",
+    "no natural DualPrompt benchmark, image, or broad continual-learning claim",
+    "logical prompt count is not independent capacity",
+    "fresh seeds remain sealed unless the full development gate passes"
+  ]
+}
