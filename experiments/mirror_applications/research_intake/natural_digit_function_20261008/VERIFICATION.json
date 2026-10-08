@@ -1,0 +1,61 @@
+{
+  "protocol_commit": "d12d62a1902c702e57b09cfaba49d0862d485226",
+  "ran_in_container": true,
+  "protocol_seeds": [
+    41,
+    42
+  ],
+  "source_sha256": "a2c847b4fa3a95c443487d3551728a0107936ac4f66983a8ac1d48e04bca6f55",
+  "result_csv_first_run_sha256": "db044815d36d8e08e53817744aa8f7b6406ad03bdee020196951f1aab7a84c9a",
+  "measurement_rows": 48,
+  "score_records_per_seed": 24,
+  "deterministic_replay": {
+    "rerun_completed": true,
+    "fields_compared": 14,
+    "rows_compared": 48,
+    "max_numeric_difference": 0,
+    "failures_over_tolerance_1e_minus_7": 0,
+    "timing_fields_excluded": [
+      "forward_ms",
+      "train_wall_s"
+    ]
+  },
+  "serialized_state": {
+    "format": "numpy savez named archive (uncompressed)",
+    "shared_frozen_base_excluded_from_all_methods": true,
+    "npz_roundtrip_exact": true,
+    "task_bank_size": 4,
+    "additional_model_states_by_method_bytes": {
+      "base": 22,
+      "scalar": 2026,
+      "diagonal": 4662,
+      "mirror": 4694,
+      "dense": 5142,
+      "lora4": 10222
+    }
+  },
+  "controls": [
+    "frozen base",
+    "pooled rank-one scalar",
+    "BOLT-like diagonal 6-code",
+    "structured Mirror 8-code",
+    "dense 6x6 shared core",
+    "independent LoRA rank 4"
+  ],
+  "scientific_status": "EXPLORATORY NEGATIVE/INCOMPLETE; no Mirror-specific Pareto win; no MA status changes",
+  "strict_gate": {
+    "seed41_mirror_accuracy_improvements": 4,
+    "seed42_mirror_accuracy_improvements": 2,
+    "required_accuracy_improvements_each_seed": 3,
+    "mirror_inference_not_slower": false,
+    "mirror_better_than_dense_or_independent": false,
+    "passed": false
+  },
+  "limitations": [
+    "real image dataset but artificially imposed corruption tasks",
+    "not independently trained production NLP/LLM models",
+    "source task LoRA training cost not amortized into deployment bytes",
+    "basis construction training/compute not included in bank inference storage",
+    "BOLT-like comparator is simplified rather than a faithful external BOLT reproduction"
+  ]
+}
