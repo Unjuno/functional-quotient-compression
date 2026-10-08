@@ -1,6 +1,6 @@
 # Worker queue
 
-**Current operational pointer (2026-10-08): MA-379.** MA-369/371/372/374 are consecutive supernet/depth-family FAILs against simpler controls. MA-375 is deferred until family redesign; it remains UNTESTED. Continue with the separate AdapterFusion family, MA-379.
+**Current operational pointer (2026-10-08): MA-401.** MA-375/379/383/385/389/391/392/393/395/397/399 have existing branch results reconciled as FAIL; MA-381 remains scoped PROMISING with strict gates missed. Continue with the next P0, MA-401.
 
 The queue is derived from `IDEA_REGISTRY.csv`. The registry is authoritative.
 
@@ -107,16 +107,25 @@ High-information P0:
 6. MA-371 — MatFormer granularity Mirror views (completed FAIL; 2026-10-08)
 7. MA-372 — Mix'n'Match Views (completed FAIL; 2026-10-08)
 8. MA-374 — ALBERT shared layers + depth Mirror (completed FAIL; 2026-10-08)
-9. MA-375 — one-shot supernet + Mirror correction (deferred UNTESTED; family redesign required)
-10. MA-379 — Mirror-compressed AdapterFusion bank
+9. MA-375 — one-shot supernet + Mirror correction (completed FAIL; dedicated branch)
+10. MA-379 — Mirror-compressed AdapterFusion bank (completed FAIL; dedicated branch)
 7. MA-372 — Mix'n'Match Views (completed FAIL; 2026-10-08)
 8. MA-374 — ALBERT shared layers + depth Mirror (completed FAIL; 2026-10-08)
-9. MA-375 — one-shot supernet + Mirror correction (deferred UNTESTED; family redesign required)
-10. MA-379 — Mirror-compressed AdapterFusion bank
+9. MA-375 — one-shot supernet + Mirror correction (completed FAIL; dedicated branch)
+10. MA-379 — Mirror-compressed AdapterFusion bank (completed FAIL; dedicated branch)
 7. MA-374 — ALBERT shared layers + depth Mirror
 8. MA-375 — one-shot supernet + Mirror correction
 9. MA-379 — Mirror-compressed AdapterFusion bank
-10. MA-381 — LoRAHub over Mirror-compressed basis
+10. MA-381 — LoRAHub over Mirror-compressed basis (scoped PROMISING; strict gates missed; fresh sealed)
+11. MA-383 — L2P prompt pool + Mirror prompt generator (completed FAIL; dedicated branch)
+12. MA-385 — DualPrompt shared/private prompt Mirror views (completed FAIL; dedicated branch)
+13. MA-389 — Hash Embedding Mirror importance codes (completed FAIL; dedicated branch)
+14. MA-391 — quotient/remainder Mirror compositional embeddings (completed FAIL; dedicated branch)
+15. MA-392 — factorized token x domain Mirror embeddings (completed FAIL; dedicated branch)
+16. MA-393 — adaptive-capacity embedding + View (completed FAIL; dedicated branch)
+17. MA-395 — ALBERT factorized embeddings + domain View (completed FAIL; dedicated branch)
+18. MA-397 — product-address Mirror vocabulary (completed FAIL by registered scalar margin)
+19. MA-399 — MatFormer speculative drafter via Mirror granularity code (completed FAIL; fresh/latency unopened)
 11. MA-383 — L2P prompt pool + Mirror generator
 12. MA-385 — DualPrompt expert prompts as Views
 13. MA-389 — Hash Embedding Mirror importance codes

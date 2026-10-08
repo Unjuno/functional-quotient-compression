@@ -6,10 +6,10 @@ Integration branch: `research/mirror-application-current-evidence-20261008`; can
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (92 completed; 538 UNTESTED)
+- P0: **630** (110 completed; 520 UNTESTED)
 - P1: **422** (12 completed; 410 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1046 UNTESTED, 39 PROMISING, 70 FAIL**
+- Current MA statuses: **1034 UNTESTED, 40 PROMISING, 81 FAIL**
 - 48 experiment directories, complete with status/protocol/results/verification files, are represented in the current evidence set.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-268 is next.
@@ -23,7 +23,7 @@ Integration branch: `research/mirror-application-current-evidence-20261008`; can
 
 ## Next candidate
 
-**MA-379 — Mirror-compressed AdapterFusion bank (P0; PA54)**
+**MA-401 — FiLM versus Mirror feature conditioning (P0; PA106)**
 
 MA-366 is reconciled as FAIL: direct pair coefficients match Mirror outputs and bytes, and PA02 factorization is smaller. The runner accidentally generated the registered fresh IDs before the gate; those rows are excluded and fresh integrity is invalid. MA-367 and MA-368 are also recorded FAIL. MA-369 is completed FAIL on its dedicated branch; next executable P0 is MA-371.
 
@@ -39,6 +39,14 @@ MA-369 FAIL: on fresh digits worlds the OFA-style supernet + four-angle View imp
 
 **MA-374 — ALBERT shared layers + depth Mirror (P0; PA61): FAIL.** On a digits residual-block proxy, tied+Mirror scored 96.39% vs tied 96.48%, and equal-byte FiLM 96.67%; partial FFN sharing scored 97.50%. Storage reduction vs untied came from shared parameters. Not ALBERT language-model evidence. **Next: MA-375.**
 
+**Prior branches reconciled:** MA-375 FAIL (ranking codes did not improve child ranking); MA-379 FAIL (independent AdapterFusion quality not recovered; 46× decode MAC proxy); MA-381 PROMISING only for aligned synthetic rank-2 LoRA orbit, while strict byte/quality gates failed and fresh stayed sealed. These were validated from their dedicated branches and are now counted in the registry.
+
+**Supernet/depth family ruling:** MA-369/371/372/374/375 all fail Mirror-specific quality or compute against native/FiLM/partial-sharing controls. Defer additional variants until the structure is redesigned.
+
+**MA-383/385/389 reconciled from dedicated branches:** L2P prompt Mirror (383) failed quality and 80%-of-explicit byte limits with perfect retrieval; DualPrompt Mirror (385) failed quality, bytes and forgetting; Hash Embedding Mirror (389) saved bytes and beat scalar but missed native quality and collision-bin limits. Each branch has replayed serialized payloads and passing tests; fresh remained sealed.
+
+**MA-391/392/393/395/397/399 reconciled from their branches:** multiplicative composition matched or beat Mirror at lower bytes; Mirror failed held-out token-domain quality despite storage savings; the adaptive Zipf pilot had no rare-token undercoverage because every token appeared during training. All six have serialized replay and passing tests; fresh remains sealed when development gates missed.
+
 MA-255 is reconciled PROMISING only for its aligned post-fit screen; its separate fixed-update variant failed. Dedicated branch evidence for all new results is cited in `CLAIM_LEDGER.csv`.
 
 MA-327 FAIL: ordinary rank-2 coefficient products match Mirror exactly and both exceed flat-pair bytes. MA-330 PROMISING only for aligned synthetic KV views: 72.3% below independent caches, but only 30B below direct cos/sin control; unrelated layers need private cache and runtime/LM gains remain unestablished. MA-331 FAIL (fresh sealed after development byte miss); MA-332/333 FAIL as pure function-preserving gauge orbits; MA-335 FAIL for Mirror-specific margin (direct irreducible coefficients within 0.65%). MA-337/338/341/342 also fail their registered Mirror-specific gates; MA-341 has a separate Digits screen whose overall Mirror advantage vs FiLM is NOT ESTABLISHED. MA-344/346 are PROMISING only for synthetic storage/communication frontiers against native methods; scalar phase controls are exact equivalents. MA-349 FAILs against rank-1 BNN and independent posterior bytes. MA-257 FAILs because native PA16 rotational contexts exactly alias its Mirror representation. MA-258 is narrowly PROMISING on an oracle-routed aligned synthetic expert bank: 60.4% fewer bytes than quality-passing rank-2 SVD, but unrelated experts collapse and no runtime/learned routing gain is established. MA-265 and MA-266 are consecutive VeRA-family FAILs against simple controls; MA-267 is paused until redesign. MA-318 failed its storage/compute gates despite correctly locating basis growth points. MA-325 A0 was NOT ESTABLISHED due unlearnable near-uniform task; A3 increased teacher logit scale to make it learnable, then failed the frozen Mirror/direct byte gate (2631B/2637B), with fresh sealed. Next P0 is MA-351.
@@ -50,7 +58,7 @@ No active experiment is declared. MA-366 is verified as a development-only FAIL;
 ## Verified status index
 
 - **PROMISING (39):** MA-001, MA-002, MA-003, MA-004, MA-005, MA-006, MA-007, MA-008, MA-012, MA-014, MA-015, MA-041, MA-076, MA-079, MA-111, MA-121, MA-156, MA-160, MA-171, MA-173, MA-181, MA-189, MA-241, MA-244, MA-245, MA-249, MA-250, MA-251, MA-255, MA-268, MA-276, MA-282, MA-312, MA-258, MA-314, MA-330, MA-344, MA-346, MA-691.
-- **FAIL (66):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-257, MA-260, MA-261, MA-265, MA-271, MA-272, MA-273, MA-274, MA-278, MA-286, MA-288, MA-292, MA-296, MA-297, MA-299, MA-301, MA-303, MA-304, MA-307, MA-309, MA-311, MA-315, MA-319, MA-320, MA-322, MA-327, MA-331, MA-332, MA-333, MA-335, MA-337, MA-338, MA-341, MA-266, MA-318, MA-325, MA-342, MA-349, MA-351, MA-353, MA-355, MA-357, MA-359, MA-356, MA-360, MA-361, MA-364, MA-366, MA-369, MA-371, MA-372, MA-374.
+- **FAIL (66):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-257, MA-260, MA-261, MA-265, MA-271, MA-272, MA-273, MA-274, MA-278, MA-286, MA-288, MA-292, MA-296, MA-297, MA-299, MA-301, MA-303, MA-304, MA-307, MA-309, MA-311, MA-315, MA-319, MA-320, MA-322, MA-327, MA-331, MA-332, MA-333, MA-335, MA-337, MA-338, MA-341, MA-266, MA-318, MA-325, MA-342, MA-349, MA-351, MA-353, MA-355, MA-357, MA-359, MA-356, MA-360, MA-361, MA-364, MA-366, MA-369, MA-371, MA-372, MA-374, MA-375, MA-379, MA-383, MA-385, MA-389, MA-391, MA-392, MA-393, MA-395, MA-397, MA-399.
 
 All per-ID evidence is retained in the local experiment directories and in `CLAIM_LEDGER.csv`. Consult [the evidence integration audit](../../docs/phase2/MIRROR_MA_EVIDENCE_INTEGRATION_2026-10-08.md) for linked reports, verifications, provenance and claim boundaries.
 
