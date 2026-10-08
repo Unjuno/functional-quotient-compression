@@ -1,0 +1,100 @@
+{
+  "id": "MA-1183-REAL-TABULAR-V1",
+  "created": "2026-10-08",
+  "parent_study": "MA-1183-STYLE-20261008",
+  "status": "FROZEN_BEFORE_REAL_LABELS_OR_SPLIT_RESULTS",
+  "purpose": "Independent public-data stress check after original synthetic mechanism FAIL, not an original author TabM reproduction or TabReD.",
+  "same_native_style_source": "source/ma1183_tabm_style.py at frozen commit 48a29306ad2c8b38c1cd8778aaa4c130b2d34ecb",
+  "datasets": [
+    {
+      "dataset": "sklearn load_breast_cancer",
+      "samples": 569,
+      "features": 30,
+      "labels": "native binary malignant/benign"
+    },
+    {
+      "dataset": "sklearn load_wine",
+      "samples": 178,
+      "features": 13,
+      "labels": "class0 versus other classes (binarized)"
+    }
+  ],
+  "license": "scikit-learn packaged reference datasets; no internet/download required",
+  "splits": {
+    "seeds": [
+      301,
+      302,
+      303,
+      304,
+      305
+    ],
+    "data_group": "Each seed an overlapping stratified real dataset split, NOT 5 independent dataset worlds",
+    "test_fraction": 0.3,
+    "train_validation_fraction": 0.2,
+    "standard_scaler_fit": "TRAIN ONLY",
+    "zero_pad_to_dim": 32,
+    "forbid_test_tuning": true
+  },
+  "methods": [
+    "native_full_fast_weights",
+    "fixed_seed_linear_code4",
+    "learned_dictionary_linear_code4",
+    "structured_mirror_rotation4",
+    "no_member_shared"
+  ],
+  "model": {
+    "K": 8,
+    "input": 32,
+    "hidden": 64,
+    "classes": 2,
+    "shared_backbone": true,
+    "fast_weight_input_and_hidden": true,
+    "mirror_code_dim": 4,
+    "output": "average K member predictive probabilities, not independent physical tasks"
+  },
+  "training": {
+    "optimizer": "AdamW",
+    "LR": 0.002,
+    "weight_decay": 0.0001,
+    "max_updates": 200,
+    "batch": 64,
+    "validation_checkpoints": [
+      25,
+      50,
+      100,
+      150,
+      200
+    ],
+    "best_checkpoint_by": "minimal validation ensemble NLL, per method; never test",
+    "random_stream": "seeded within each split",
+    "initialization": "same shared parent per split/method",
+    "train_all_methods": "equal max candidate steps; selected checkpoint inference, report checkpoint"
+  },
+  "evaluation": {
+    "metrics": [
+      "test ensemble NLL",
+      "ROC AUC",
+      "Brier",
+      "ECE",
+      "member-logit variance",
+      "actual NPZ bytes",
+      "CPU p95 B128"
+    ],
+    "warmup": 20,
+    "repeats": 100,
+    "torch_threads": 1,
+    "num_datasets": 2,
+    "folds_per_dataset": 5,
+    "none_are_independent_population_replications": true
+  },
+  "gate": {
+    "mechanism_PASS": "On both datasets, Mirror within 0.02 NLL and 0.01 AUC of native full fast weight at lower paid NPZ bytes, and genuine nonzero member diversity; not sufficient if native no-member single-forward Pareto-dominates.",
+    "Mirror_specific_PASS": "Mirror strictly better out-of-sample quality/storage/CPU P95 Pareto vs the strongest native equal-byte simple code and no-member, with validation-only selection.",
+    "FAIL": "Native no-member or simple linear-head/factorized code Pareto dominates, or no useful member diversity, or real heldout NLL/ROC AUC below trivial baseline.",
+    "UNCERTAIN": "Only two tiny real datasets, overlapping splits and no official TabM; no claim of long-term tabular drift or production inference."
+  },
+  "provenance": "Source hash and sklearn version in verification. Original synthetic observations cannot be relabeled. Store all 50 result rows and both validation-selected update counts; outcome-selected metric comparisons descriptive.",
+  "hardware": "CPU AMD EPYC 9V74, PyTorch2.10 CPU FP32, sklearn 1.8, one BLAS/torch thread, no CUDA.",
+  "original_worker_change": false,
+  "scientific_status": "will stay UNTESTED MA until native original implementation and >10 independent natural datasets"
+}
