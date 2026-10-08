@@ -1,0 +1,32 @@
+{
+  "experiment_id": "MA-272",
+  "commit": "pending",
+  "tests": {
+    "command": "python experiments/mirror_applications/ma-272-oftv2-mirror-views/tests/test_roundtrip.py",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "method": "independent skew lower-triangle coordinates; shared control and Mirror packed identically"
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_seeds": [
+    149,
+    251,
+    353,
+    457
+  ],
+  "notes": [
+    "Initial fresh seeds 133/241/337/449 are retained in fresh_metrics_v1_buggy.json but excluded due runtime accounting bug.",
+    "Corrected fresh audit was locked to new seeds before rerun.",
+    "Materialized inference now performs x@(QW); input-side inference executes transform and W multiply; Neumann recurrence is included in timing.",
+    "Mirror equals simple scalar-times-shared-skew control in function and bytes.",
+    "CPU timing is a microbenchmark and not production latency evidence."
+  ]
+}
