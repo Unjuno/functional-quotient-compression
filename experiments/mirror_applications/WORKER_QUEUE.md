@@ -14,7 +14,7 @@ Use:
 
 ## Live selection snapshot — 2026-10-08
 
-The latest canonical baseline and reconciled result branches have been merged into the current worker chain. MA-255/260/261/265/266/268 and the second research-expansion sequence through MA-299 have recorded outcomes. MA-257 is FAIL against its exact PA16 rotation-context control; MA-258 is PROMISING only for an aligned post-fit expert-bank codec, with unrelated functions requiring richer/private state. MA-266 is FAIL because the non-Mirror coefficient-product control matched within 2.1% bytes; together with MA-265, pause MA-267 pending family redesign. MA-301 and MA-307 are complete on dedicated remote branches; MA-307 retained a 35.9% aligned storage reduction but failed its strict runtime gate in 1/3 fresh worlds. MA-311 then failed its nearest-control total-byte gate (1,248B vs 1,140B direct coefficients) and its angle-fit compute proxy was 17.7M vs 16.9k; fresh stayed sealed. MA-312 passed its narrow aligned storage/quality screen on 3/3 fresh worlds (1,600B vs 2,100B direct coefficients), but the fit proxy was 70.78M vs 67.6k and runtime slower. The next executable untested P0 is **MA-314**. MA-297/299 SETA and MA-265/266 VeRA families are paused pending redesign. The appended MA-1116..1155 intake remains behind P0 work. This snapshot supersedes older queue paragraphs below that still name MA-255, MA-260, or MA-265 as next. Recheck the live registry and branch list before each new experiment.
+The latest canonical baseline and reconciled result branches have been merged into the current worker chain. MA-255/260/261/265/266/268 and the second research-expansion sequence through MA-299 have recorded outcomes. MA-257 is FAIL against its exact PA16 rotation-context control; MA-258 is PROMISING only for an aligned post-fit expert-bank codec, with unrelated functions requiring richer/private state. MA-266 is FAIL because the non-Mirror coefficient-product control matched within 2.1% bytes; together with MA-265, pause MA-267 pending family redesign. MA-301 and MA-307 are complete on dedicated remote branches; MA-307 retained a 35.9% aligned storage reduction but failed its strict runtime gate in 1/3 fresh worlds. MA-311 then failed its nearest-control total-byte gate (1,248B vs 1,140B direct coefficients) and its angle-fit compute proxy was 17.7M vs 16.9k; fresh stayed sealed. MA-312 passed its narrow aligned storage/quality screen on 3/3 fresh worlds (1,600B vs 2,100B direct coefficients), but the fit proxy was 70.78M vs 67.6k and runtime slower. MA-314 passed its adaptive-dimension storage/quality gates on 3/3 fresh worlds (1,996B vs 2,220B adaptive FP16 coefficients), but required 371.6M fit operations vs 286k and had higher active inference work. The next executable untested P0 is **MA-315**. MA-297/299 SETA and MA-265/266 VeRA families are paused pending redesign. The appended MA-1116..1155 intake remains behind P0 work. This snapshot supersedes older queue paragraphs below that still name MA-255, MA-260, or MA-265 as next. Recheck the live registry and branch list before each new experiment.
 
 ## Selection rule
 
@@ -77,24 +77,25 @@ High-information P0:
 2. MA-307 — Mirror code before PackNet physical allocation
 3. MA-311 — Mirror task code in intrinsic subspace
 4. MA-312 — shared intrinsic basis + many Mirror task coordinates
-5. MA-314 — adaptive intrinsic-dimension allocation
-6. MA-319 — Tucker matrix-bank Mirror layer coefficients
-7. MA-320 — Tucker logical experts
-8. MA-322 — TT-core Mirror adapter bank
-9. MA-325 — tensorized embedding domain views
-10. MA-327 — factorized layer x expert Tucker address
-11. MA-330 — tensorized KV reconstruction
-12. MA-331 — Re-Basin-aligned Mirror task deltas
-13. MA-332/333 — permutation and sign/scale symmetry audits
-14. MA-338 — symmetry-normalized Mirror code learning
-15. MA-341/342 — personalized/federated Mirror codes
-16. MA-344 — PreLort nested-rank Mirror segments
-17. MA-349 — Rank-1 Bayesian Mirror posterior
-18. MA-351 — MIMO + Mirror diversity
-19. MA-355/356 — product-key Mirror addresses
-20. MA-357 — Hopfield reservoir for Mirror addresses
-21. MA-359 — ACDC/AFDF Mirror transform
-22. MA-360 — reversible Mirror block
+5. MA-314 — adaptive intrinsic-dimension allocation (PROMISING, narrow aligned storage/quality; complete)
+6. MA-315 — shared intrinsic basis + sparse private coordinate
+7. MA-319 — Tucker matrix-bank Mirror layer coefficients
+8. MA-320 — Tucker logical experts
+9. MA-322 — TT-core Mirror adapter bank
+10. MA-325 — tensorized embedding domain views
+11. MA-327 — factorized layer x expert Tucker address
+12. MA-330 — tensorized KV reconstruction
+13. MA-331 — Re-Basin-aligned Mirror task deltas
+14. MA-332/333 — permutation and sign/scale symmetry audits
+15. MA-338 — symmetry-normalized Mirror code learning
+16. MA-341/342 — personalized/federated Mirror codes
+17. MA-344 — PreLort nested-rank Mirror segments
+18. MA-349 — Rank-1 Bayesian Mirror posterior
+19. MA-351 — MIMO + Mirror diversity
+20. MA-355/356 — product-key Mirror addresses
+21. MA-357 — Hopfield reservoir for Mirror addresses
+22. MA-359 — ACDC/AFDF Mirror transform
+23. MA-360 — reversible Mirror block
 
 ## Fourth research-expansion queue — execution structure and module banks
 

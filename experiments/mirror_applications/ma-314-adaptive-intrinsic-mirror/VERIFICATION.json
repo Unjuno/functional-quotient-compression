@@ -1,0 +1,31 @@
+{
+  "experiment_id": "MA-314",
+  "commit": "pending-result-commit",
+  "base_commit": "9ca5c968b5ec9a285b11140f08a0f573c8e07cf3",
+  "protocol_frozen_before_fresh": true,
+  "development_seeds": [31401, 31402, 31403],
+  "fresh_seeds": [31411, 31412, 31413],
+  "development_gate_passed_before_fresh": true,
+  "tests": {
+    "command": "pytest -q experiments/mirror_applications/ma-314-adaptive-intrinsic-mirror/tests",
+    "passed": 4,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "deterministic_fixed_timestamp_zip": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "result_rows": 36,
+    "payload_hashes_checked": 36,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "First development implementation incorrectly optimized each angle against the full task residual while omitting other active pairs. This was diagnosed as an implementation bug, corrected to four pairwise coordinate-descent passes, and all development seeds were rerun before fresh data was opened.",
+    "The corrected development run passed all byte, quality and active-dimension gates before fresh seeds 31411-31413 were accessed.",
+    "Fresh seeds are reported without tuning. Synthetic post-fit task bank; no optimizer updates, learned router, capacity claim, or private-state stress claim."
+  ]
+}
