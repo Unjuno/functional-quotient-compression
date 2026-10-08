@@ -13,3 +13,7 @@ PA33 shows low-dimensional coordinates can adapt a shared model; PA30 motivates 
 ## Frozen protocol
 
 See `PROTOCOL.json`. Three four-skill groups: initial phase orbit, second orbit, and unrelated functions. Each task has 128 support, 64 validation and 128 test inputs. Development seeds 31801/31802; fresh 31811/31812/31813. No optimizer updates. Actual payload bytes and task retention are recorded after every new skill.
+
+## Development observations
+
+Both development streams triggered zero growth for the initial four tasks, two basis additions for the second two-dimensional orbit, and four more for unrelated tasks (six growth events total). Direct evolving-basis coefficients retained all skills at max test nMSE <=2.1e-7 and used 2,160B final payload. Mirror retained them at <=9.3e-6 but used 2,654B because phase codes plus post-growth coefficients/metadata exceeded the direct representation. Independent FP16 vectors used 2,250B. The frozen Mirror storage gate is therefore missed in development; fresh evaluation remains locked and will proceed unchanged.
