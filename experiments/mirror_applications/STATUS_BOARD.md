@@ -94,4 +94,4 @@ KG relation rotations (RotatE, TuckER, QuatE, PairRE), EXIF/device-aware ISPs (P
 
 ## MA-364 — FAIL for Mirror-specific early-exit readout value
 
-Across two oracle exit-head worlds, Mirror and direct coefficient controls had identical per-exit/mixed NLL and accuracy at equal payload bytes (4,554/4,565B). Both used fewer bytes than independent heads (6,061/6,071B); hard sharing was smaller but slightly lower quality. Fixed exit policy and MACs were identical. Fresh remained sealed. Eight rows replayed exactly; three tests passed. Synthetic oracle heads only. Dedicated branch: `research/ma-364-early-exit-mirror-readout-20261008`.
+Across two oracle exit-head worlds, Mirror and direct coefficient controls had identical per-exit/mixed NLL and accuracy at equal payload bytes (4,554/4,565B). Both used fewer bytes than independent heads (6,061/6,071B); hard sharing was smaller but slightly lower quality. Fixed exit policy and MACs were identical. Fresh remained sealed. Eight rows replayed exactly; three tests passed. Synthetic oracle heads only. Dedicated branch: `research/ma-364-early-exit-mirror-readout-20261008` (commit `b75e25d`).
