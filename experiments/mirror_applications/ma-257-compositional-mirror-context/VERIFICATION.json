@@ -1,0 +1,48 @@
+{
+  "experiment_id": "MA-257",
+  "commit": "pending-evidence-commit",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-257-compositional-mirror-context/tests -v",
+    "passed": 7,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "fresh_payloads_checked": false,
+    "development_payload_hashes_recorded": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0,
+    "rows_replayed": 54,
+    "payload_hashes_exact": true,
+    "fit_compute_and_workspace_proxy_exact": true,
+    "wall_clock": "remeasured, excluded from exact replay"
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_split_opened": false,
+  "fresh_seeds": [
+    25711,
+    25712,
+    25713
+  ],
+  "development_seeds": [
+    25701,
+    25702,
+    25703
+  ],
+  "selected_support_residues": 1,
+  "native_PA16_alias": {
+    "seeds_and_conditions_checked": 18,
+    "function_metrics_exact": true,
+    "serialized_payload_lengths_exact": true
+  },
+  "notes": [
+    "Support selected from development validation only; no fresh metric was opened.",
+    "Native PA16 factorized rotational contexts are an exact functional control; measured eager timing differences are noise and do not change the FAIL gate.",
+    "Independent upper directly calibrates all task maps and is sample-unmatched.",
+    "Synthetic post-fit representation screen only; no optimizer updates or capacity claim.",
+    "Estimated NumPy workspace is reported separately from serialized payload bytes; PSP teacher-map access (512 task maps) is disclosed."
+  ]
+}
