@@ -1,0 +1,12 @@
+test_family,fresh_worlds,parameter,metric,median_value,wins,scope
+reverse_complement,5,length16,exact_float64_max_abs,1.3322676295501878e-15,5/5,linear RC-equivariant synthetic feature only
+batchensemble,5,rank_input,output_collision_deviation_l2_min,0.042848989892255454,5/5,rectangular W input-rank-one necessity
+PDE_Lie,5,dt_0.05_s,relative_frobenius_error,0.00034688988569874,,small linear A+B numerical step
+PDE_BCH_correction,5,dt_0.05_s,relative_frobenius_error,0.00001145929763839,0/5_vs_Strang,not Mirror-specific
+PDE_Strang,5,dt_0.05_s,relative_frobenius_error,0.00000286433248309,5/5_vs_correction,native strong baseline
+PDE_Lie,5,dt_0.1_s,relative_frobenius_error,0.0013937099272316907,,small linear A+B numerical step
+PDE_BCH_correction,5,dt_0.1_s,relative_frobenius_error,0.00009123040334417684,0/5_vs_Strang,not Mirror-specific
+PDE_Strang,5,dt_0.1_s,relative_frobenius_error,0.000022791940420420393,5/5_vs_correction,native strong baseline
+PDE_Lie,5,dt_0.2_s,relative_frobenius_error,0.0055704440171757,,small linear A+B numerical step
+PDE_BCH_correction,5,dt_0.2_s,relative_frobenius_error,0.00072254799568035,0/5_vs_Strang,not Mirror-specific
+PDE_Strang,5,dt_0.2_s,relative_frobenius_error,0.00018014105080991,5/5_vs_correction,native strong baseline
