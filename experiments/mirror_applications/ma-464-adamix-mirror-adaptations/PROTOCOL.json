@@ -1,0 +1,116 @@
+{
+  "experiment_id": "MA-464",
+  "title": "AdaMix over logical Mirror adaptations",
+  "status": "FROZEN_PRE_DATA",
+  "base_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
+  "branch": "research/ma-464-adamix-mirror-20261008",
+  "selection_draw": 19,
+  "prior_art_refs": ["PA83"],
+  "hypothesis": "A shared rank-4 QKV LoRA basis with two stochastic rank-space Givens views can preserve the per-view and merged quality of two-branch AdaMix over two text domains at no more than 75% of AdaMix bank bytes and beat matched-byte FiLM by 0.02 mean nat.",
+  "mirror_insertion": {
+    "physical_object": "one rank-4 A/B low-rank update on every layer's nanoGPT attention QKV projection",
+    "coordinate": "six trainable Givens angles per layer and view, acting in the rank-4 latent space",
+    "logical_functions": "two per-view adapter realizations and one merged single-module deployment",
+    "route": "uniformly sample one of two view IDs per adaptation minibatch; base and shared basis train, only the selected view code receives view-specific gradient",
+    "native_delta": "AdaMix uses two independently parameterized rank-4 QKV LoRA branches with the same stochastic minibatch route schedule"
+  },
+  "data": {
+    "domains": [
+      {
+        "name": "Tiny Shakespeare",
+        "url": "https://raw.githubusercontent.com/karpathy/char-rnn/master/data/tinyshakespeare/input.txt",
+        "train_use": "base pretraining and 50% of adaptation batches"
+      },
+      {
+        "name": "Pride and Prejudice (Project Gutenberg eBook 1342)",
+        "url": "https://www.gutenberg.org/files/1342/1342-0.txt",
+        "train_use": "50% of adaptation batches"
+      }
+    ],
+    "acquisition": "Download only after preregistration; record exact byte length and SHA-256 for both files.",
+    "split": "For each raw byte stream independently: [0,80%) train; [80,90%) development; [90,100%) audit. Use separate token windows within each span, never crossing boundaries. Character vocabulary is the union of both training spans only; unseen dev/audit characters map to one fixed UNK.",
+    "audit_access": "Do not decode, tokenize, evaluate, or report per-example information from either audit span unless every development gate passes in both seeds. Whole-file SHA-256 may be streamed for provenance."
+  },
+  "model": {
+    "implementation": "thin adapter wrapping third_party/nanoGPT/model.py; do not modify the vendor tree",
+    "layers": 4,
+    "width": 64,
+    "heads": 4,
+    "sequence_length": 128,
+    "batch_size": 16,
+    "adapter_target": "attn.c_attn QKV projection in every block",
+    "lora_rank": 4,
+    "mirror_view": "six pairwise Givens rotations in rank-4 latent space",
+    "film_control": "four diagonal rank scales per layer and view"
+  },
+  "conditions": [
+    "frozen base-only reference",
+    "one conventional rank-4 LoRA trained with every minibatch",
+    "AdaMix: two independent rank-4 LoRA branches; uniformly sample one branch per minibatch",
+    "Mirror: one shared rank-4 A/B basis and two per-layer Givens View codes; uniformly sample one view per minibatch",
+    "FiLM: one shared rank-4 A/B basis and two per-layer diagonal rank scales; uniformly sample one view per minibatch"
+  ],
+  "training": {
+    "development_seeds": [46401, 46402],
+    "base_pretraining_updates_per_seed": 1200,
+    "adaptation_updates_per_condition_per_seed": 600,
+    "base_optimizer": "AdamW",
+    "base_learning_rate": 0.0006,
+    "base_weight_decay": 0.1,
+    "adapter_optimizer": "AdamW; frozen base; train only adapter parameters and Mirror/FiLM codes",
+    "adapter_learning_rate": 0.003,
+    "adapter_weight_decay": 0.0,
+    "adaptation_sampling": "each update selects Shakespeare or Pride and Prejudice with probability 0.5; AdaMix/Mirror/FiLM also sample one of two routes/views uniformly using a separate deterministic RNG stream. Expected branch/view exposure is 300 of 600 minibatches; actual route counts are recorded.",
+    "checkpoint_rule": "fixed final update; no dev-based checkpoint or hyperparameter selection",
+    "tuning": "none after protocol freeze"
+  },
+  "metrics": [
+    "per-view development next-character NLL separately for each domain",
+    "mean per-view development NLL across both domains and both views",
+    "merged single-module NLL separately per domain and mean across domains",
+    "actual serialized full inference-bank payload bytes and SHA-256",
+    "adapter-only serialized component bytes",
+    "actual merged model payload bytes and SHA-256",
+    "base and adapter training examples/tokens, updates, single-thread CPU wall time",
+    "active QKV LoRA MAC proxy and evaluation tokens/second",
+    "view-pair functional output/logit distance on the same fixed dev minibatch"
+  ],
+  "merge": {
+    "AdaMix": "exact arithmetic mean of the two dense low-rank delta matrices, folded into the frozen base QKV weights",
+    "Mirror": "exact arithmetic mean of B R(m_i) A across the two codes, folded into the frozen base QKV weights",
+    "FiLM": "exact arithmetic mean of B diag(s_i) A, folded into the frozen base QKV weights",
+    "single_lora": "fold its one delta into the frozen base QKV weights",
+    "storage": "serialize merged models separately; for multi-view inference-bank byte comparisons, count base plus every retained component and code"
+  },
+  "gates": {
+    "quality_vs_adamix": "In both seeds, Mirror mean per-view NLL and mean merged NLL must each be <= AdaMix +0.10 nat.",
+    "storage": "In both seeds, complete Mirror two-view inference-bank payload must be <=0.99x complete AdaMix two-view bank payload AND adapter-only serialized bytes must be <=0.55x AdaMix; report both full and incremental payload axes.",
+    "mirror_specific": "In both seeds, Mirror mean per-view NLL and mean merged NLL must each beat matched-byte FiLM by >=0.02 nat. If full bank payloads differ by >5%, report the comparison unmatched and fail this gate.",
+    "audit": "Open both locked audit spans only if all development gates pass in both seeds. Use unchanged models and no tuning."
+  },
+  "fresh": {
+    "audit_window_seeds": [46403, 46404],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": ["full frozen base state", "all retained adapter bases or independent adapters", "all Mirror/FiLM codes", "vocabulary", "configuration", "merge metadata"]
+  },
+  "compute": {
+    "hardware": "single-thread CPU (CUDA not available in selected container)",
+    "report": ["base pretraining wall time", "adapter training wall time", "optimizer updates", "tokens/examples", "active QKV MAC proxy", "evaluation throughput"]
+  },
+  "boundaries": [
+    "This is a low-resource two-domain mechanism screen, not a general PEFT or language-model claim.",
+    "AdaMix implementation reproduces its stochastic branch selection and mean-update merge at this small nanoGPT scale; it is not the paper's large-model benchmark reproduction.",
+    "A fixed-update result is not a capacity result.",
+    "Averaging separate adapters and averaging Mirror Views are evaluated as merged models; merged quality does not imply the individual logical views are independently capable."
+  ],
+  "selection_provenance": {
+    "pool_size": 542,
+    "pool_sha256": "da66e6233dae64d34422c9b44e615051a4c76f73025e98767562201c648cecd2",
+    "cryptographic_seed_hex": "05471bba8bd3bac0b3170707b24e0dd3be6bdd3c8daf08844be748e27f10b22a",
+    "uniform_index": 78,
+    "selected_id": "MA-464"
+  }
+}

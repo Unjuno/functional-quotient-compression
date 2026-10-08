@@ -1,5 +1,9 @@
 # Worker Start Here — Mirror Application Program
 
+## Active randomized execution override (Draw17 onward)
+
+All numeric next-candidate references and fixed-order queues below are historical. Uniformly sample from eligible `P0 + UNTESTED` registry rows after excluding live remote MA branches and existing experiment directories. Freeze the replayable ordered pool, exclusions, hash, seed, index, and selected row with the experiment. If protocol freeze is blocked, record the reason without changing scientific status and draw again. This changes selection order only; all scientific and verification requirements remain active.
+
 This repository contains several historical research lanes. Do not infer the current task from the oldest or largest directory.
 
 ## 1. Read in this order

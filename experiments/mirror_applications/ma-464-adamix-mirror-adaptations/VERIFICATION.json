@@ -1,0 +1,35 @@
+{
+  "experiment_id": "MA-464",
+  "commit": "pending pre-data freeze",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-464-adamix-mirror-adaptations/tests -v",
+    "passed": 4,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": false,
+    "actual_inference_payloads_measured": false
+  },
+  "metric_replay": {
+    "checked": false,
+    "max_difference": null
+  },
+  "fresh_split_integrity_checked": false,
+  "random_draw": {
+    "draw19_replayed": true,
+    "pool_size": 542,
+    "index": 78,
+    "selected_id": "MA-464",
+    "pool_sha256": "da66e6233dae64d34422c9b44e615051a4c76f73025e98767562201c648cecd2",
+    "baseline_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba"
+  },
+  "preflight_notes": [
+    "All four adapter conditions have finite forward/backward behavior with base weights frozen.",
+    "Rank-4 Givens matrices preserve latent norms and receive finite gradients.",
+    "Folding a selected adapter delta into the base QKV projection reproduces the selected-view logits within the declared numerical tolerance.",
+    "AdaMix/Mirror/FiLM merge deltas are exact arithmetic mean updates at the weight-matrix level.",
+    "Two-view adapter serialization reload reproduces the same output; no data or model weights were acquired."
+  ],
+  "notes": []
+}

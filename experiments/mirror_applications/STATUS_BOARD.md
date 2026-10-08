@@ -3,14 +3,22 @@
 Updated: 2026-10-08 JST
 Canonical branch: `research/mirror-application-worker-ready-20261007`
 
-## Program totals (reconciled from authoritative 1155-row registry)
+## Randomized worker execution override (active from Draw17)
+
+Numeric “Next candidate” and fixed-order queues in this board are historical navigation only. Uniformly sample one eligible `P0 + UNTESTED` row after excluding IDs with a live remote MA branch or an existing experiment directory in the workspace. Freeze the ordered pool, exclusion IDs, hash, cryptographic seed, index, and replay method with each experiment. A pre-protocol blocker remains UNTESTED and triggers a fresh draw. This changes selection order only; branches remain separate and are never auto-merged.
+
+- Draw17 selected MA-1091 (pool 550, index 499); blocked before protocol freeze.
+- Draw18 selected MA-784 (pool 549, index 269); FAIL recorded on its dedicated branch.
+- Draw19 selected MA-464 (pool 542, index 78); replay proof is in the MA-464 experiment directory.
+
+## Program totals (reconciled from authoritative 1155-row registry plus indexed MA-784 result)
 
 - Registered candidates: **1155**
-- P0: **630** (35 completed; 595 UNTESTED)
+- P0: **630** (36 completed; 594 UNTESTED)
 - P1: **422** (12 completed; 410 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1108 UNTESTED, 29 PROMISING, 18 FAIL**
-- 47 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
+- Current MA statuses: **1107 UNTESTED, 29 PROMISING, 19 FAIL**
+- 48 verified experiment results are indexed here, including MA-784 from its separate research branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
 - Thirteenth literature sweep added MA-996..1045 (50 UNTESTED; 40 P0/10 P1) and PA296..PA325. IDs MA-1000+ use four digits; consult `check_registry_integrity.py`. No new experiment results.
@@ -21,7 +29,7 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 - PROMISING is **not** ADOPTED. Treat reports with strict-gate misses or exploratory protocol deviations at their documented scope.
 - SRM/TM and prior Phase I results are not MA statuses.
 
-## Next candidate
+## Historical default candidate (superseded for randomized execution)
 
 **MA-255 — Mirror context superposition for task models (P0; PA16)**
 
@@ -37,14 +45,18 @@ If blocked by a documented reproducibility or harness issue, record it and resum
 
 ## Active experiment
 
-No active experiment was declared on either inspected baseline/status chain at reconciliation. Before claiming MA-255, check live research/ma-* branches again; this statement is not a realtime worker lock.
+**MA-464 — AdaMix over logical Mirror adaptations**, selected by Draw19. Its dedicated branch is `research/ma-464-adamix-mirror-20261008`; protocol freeze and control feasibility are in progress.
 
 ## Verified status index
 
 - **PROMISING (29):** MA-001, MA-002, MA-003, MA-004, MA-005, MA-006, MA-007, MA-008, MA-012, MA-014, MA-015, MA-041, MA-076, MA-079, MA-111, MA-121, MA-156, MA-160, MA-171, MA-173, MA-181, MA-189, MA-241, MA-244, MA-245, MA-249, MA-250, MA-251, MA-691.
-- **FAIL (18):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253.
+- **FAIL (19):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-784.
 
 All per-ID evidence is retained in the local experiment directories and in `CLAIM_LEDGER.csv`. Consult [the evidence integration audit](../../docs/phase2/MIRROR_MA_EVIDENCE_INTEGRATION_2026-10-08.md) for linked reports, verifications, provenance and claim boundaries.
+
+## Latest randomized experiment result
+
+- **MA-784 — FAIL:** Two-seed fixed-budget Tiny Shakespeare screen passed quality/storage against four-expert UniPool and reduced actual serialized bytes by 21.96%, but did not beat byte-near FiLM in either seed; audit unopened. See branch `research/ma-784-adaptive-mirror-pool-20261008`.
 
 ## 2026-10-08 research sweep
 
