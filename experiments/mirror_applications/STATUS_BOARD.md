@@ -6,15 +6,15 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (54 completed; 576 UNTESTED)
+- P0: **630** (55 completed; 575 UNTESTED)
 - P1: **422** (12 completed; 410 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1089 UNTESTED, 33 PROMISING, 33 FAIL**
-- 47 experiment directories are present in this baseline; 18 audited historical outcomes and MA-301 are indexed by links to their dedicated research branches in the registry and claim ledger.
-- New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current see the current Next candidate section-candidate decision.
-- Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. historical queue status superseded by the Next candidate section.
+- Current MA statuses: **1088 UNTESTED, 33 PROMISING, 34 FAIL**
+- 47 experiment directories are present in this baseline; 18 audited historical outcomes plus MA-301/MA-307 are indexed by links to their dedicated research branches in the registry and claim ledger.
+- New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified MA outcomes; see the current Next candidate section.
+- Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed; see the current Next candidate section.
 - Thirteenth literature sweep added MA-996..1045 (50 UNTESTED; 40 P0/10 P1) and PA296..PA325. IDs MA-1000+ use four digits; consult `check_registry_integrity.py`. No new experiment results.
-- Fourteenth sweep added **MA-1046..1095** (50 UNTESTED; 40 P0 / 10 P1) and **PA326..PA350**. Focus: time-series foundation forecasting, recommender embedding tables, and Earth-observation multi-sensor networks. No new experiment results; historical queue status superseded by the Next candidate section.
+- Fourteenth sweep added **MA-1046..1095** (50 UNTESTED; 40 P0 / 10 P1) and **PA326..PA350**. Focus: time-series foundation forecasting, recommender embedding tables, and Earth-observation multi-sensor networks. No new experiment results; see the current Next candidate section.
 - Fifteenth direct-prior sweep added **MA-1096..1115** (20 UNTESTED, 16 P0 / 4 P1) and **PA351..371**. A gauge-invariant LoRA audit harness is present; its unit tests are **not** trained-model evidence. historical queue status superseded by the Next candidate section.
 - Research support PA372..381 and a **separate 48-row / two-seed real-digit shifted-task code pilot** have been added. Structured 8-value Mirror m improved average CE versus 6-value diagonal code but FAILED the preregistered full quality/bytes/runtime gate. This is an **exploratory negative pilot**, not an MA-1096/1099/1115 completed experiment. This exploratory pilot is excluded from MA registry status totals. See [function-space review](../../docs/phase2/MIRROR_FUNCTION_SPACE_FALSIFICATION_2026-10-08.md) and [pilot results](research_intake/natural_digit_function_20261008/RESULTS.md).
 - Sixteenth literature sweep added **MA-1116..1155** (40 UNTESTED; 33 P0 / 7 P1) and **PA382..413** (32 primary sources): knowledge graph relation operators, camera ISP/lens optics, robot dynamics and room neural acoustic fields. No new MA measurements. See [sixteenth research notes](../../docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_SIXTEENTH_SWEEP.md) and [40 per-ID test blueprints](../../docs/phase2/MIRROR_APPLICATION_EXPERIMENT_BLUEPRINTS_MA1116_1155.md); see the current Next candidate section.
@@ -23,20 +23,20 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-307 — Mirror code before PackNet physical allocation (P0; PA32)**
+**MA-311 — Mirror task code in random intrinsic subspace (P0; PA33)**
 
-The audited historical branches through MA-299 are now reflected in the registry and claim ledger. MA-297 and MA-299 triggered the stop rule for the SETA shared/private allocation family; redesign is required before resuming that family. MA-301 is FAIL: the amended 32-task screen saved payload versus packed masks but missed independent quality in two of three fresh worlds. MA-307 is in a separate supermask/PackNet family and has no existing remote experiment branch.
+The audited historical branches through MA-299 are now reflected in the registry and claim ledger. MA-297 and MA-299 triggered the stop rule for the SETA shared/private allocation family; redesign is required before resuming that family. MA-301 failed its amended fresh quality gate in two of three worlds. MA-307 then showed a 35.9% storage saving and four delayed allocations on an aligned stream, but failed its strict runtime ceiling in one fresh world. MA-311 is the next separate intrinsic-subspace family candidate; no remote MA-311 branch was found.
 
-Required control: PackNet-style physical allocation plus binary masks. Count packed masks, allocated weights, metadata, and any private residuals in actual payload bytes.
+Required control: random intrinsic-subspace tuning over the same frozen backbone and coordinate budget. Count projection bases, task coordinates, optimizer updates, and reconstruction metadata in actual payload bytes.
 
 ## Active experiment
 
-MA-301 completed on `research/ma-301-continuous-mirror-supermask-20261008`; its full protocol, results, tests, and verification are in the linked experiment directory.
+MA-307 completed on `research/ma-307-packnet-mirror-allocation-20261008`; its full protocol, results, tests, and verification are in the experiment directory.
 
 ## Verified status index
 
 - **PROMISING (33):** MA-001, MA-002, MA-003, MA-004, MA-005, MA-006, MA-007, MA-008, MA-012, MA-014, MA-015, MA-041, MA-076, MA-079, MA-111, MA-121, MA-156, MA-160, MA-171, MA-173, MA-181, MA-189, MA-241, MA-244, MA-245, MA-249, MA-250, MA-251, MA-255, MA-268, MA-276, MA-282, MA-691.
-- **FAIL (33):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-260, MA-261, MA-265, MA-271, MA-272, MA-273, MA-274, MA-278, MA-286, MA-288, MA-292, MA-296, MA-297, MA-299, MA-301.
+- **FAIL (34):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-260, MA-261, MA-265, MA-271, MA-272, MA-273, MA-274, MA-278, MA-286, MA-288, MA-292, MA-296, MA-297, MA-299, MA-301, MA-307.
 
 All per-ID evidence is retained in the local experiment directories and in `CLAIM_LEDGER.csv`. Consult [the evidence integration audit](../../docs/phase2/MIRROR_MA_EVIDENCE_INTEGRATION_2026-10-08.md) for linked reports, verifications, provenance and claim boundaries.
 

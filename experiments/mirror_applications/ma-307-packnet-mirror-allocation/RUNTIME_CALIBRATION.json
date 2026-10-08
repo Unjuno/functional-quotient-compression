@@ -1,0 +1,13 @@
+{
+  "experiment_id":"MA-307",
+  "purpose":"supplementary repeated measurement of the preregistered allocation-search wall-time metric after the primary fresh runs; no threshold or model selection changes",
+  "warmup_runs_per_method_world":1,
+  "timed_runs_per_method_world":8,
+  "fresh_worlds":{
+    "30712":{"mirror_median_s":0.0741198063,"packnet_median_s":0.0509766340,"ratio":1.4539957},
+    "30713":{"mirror_median_s":0.0647441149,"packnet_median_s":0.0587511063,"ratio":1.1020067},
+    "30714":{"mirror_median_s":0.0742310286,"packnet_median_s":0.0609174967,"ratio":1.2185502}
+  },
+  "decision":"The strict <=1.25x per-fresh-world runtime clause misses in world 30712. Storage, allocation count, quality and retention outcomes were unchanged.",
+  "limitations":"Small NumPy CPU screen; timing variability is high and is not deployment latency evidence. Raw repetitions are in source/artifacts/fresh_runtime_repeats.json."
+}
