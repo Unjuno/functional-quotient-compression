@@ -8,8 +8,8 @@
 - Supplemental clean development: yes (25821/25822; aligned and unrelated)
 - Supplemental fresh opened: no (strict 0.50x byte cap missed at 0.512x)
 - Pre-existing local artifact/cache files: preserved and excluded from supplemental run
-- Results committed: pending
-- Verification committed: pending
+- Results committed: yes
+- Verification committed: yes
 
 ## Next action
 
