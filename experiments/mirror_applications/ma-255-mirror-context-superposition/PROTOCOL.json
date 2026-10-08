@@ -1,0 +1,22 @@
+{
+  "experiment_id": "MA-255",
+  "title": "Mirror context superposition vs Parameter Superposition",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/RUNTIME",
+  "base_commit": "f7f76de193063950d28b7834f337840b1e86f0ce",
+  "hypothesis": "A learned orthogonal Mirror task coordinate can retrieve multiple useful task maps from one shared physical operator with a better byte-quality-interference frontier than fixed-context PSP and simple task-code low-rank sharing.",
+  "physical_object": "One shared physical linear operator and its deterministic task-map reconstruction state",
+  "mirror_coordinate": "A learned task-specific 2D rotation angle with one learned shared base angle",
+  "logical_multiplicity": "T task-specific linear maps",
+  "prior_art_refs": ["PA16"],
+  "controls": ["independent task maps", "row/column-factorized diagonal ±1 Parameter Superposition", "task-code shared rank-r basis"],
+  "task": {"input_dim": 24, "output_dim": 24, "tasks": 6, "train_examples_per_task": 384, "test_examples_per_task": 512, "teacher_family": "seeded orthogonal conjugates of a common spectrum with task-specific 2D rotations", "selection_metric": "mean per-task test MSE"},
+  "optimization": {"optimizer": "full-batch gradient descent", "updates": 0, "learning_rate": 0.03, "selection_ranks": [2, 4, 6], "fresh_rank": 4, "report_examples": 2304},
+  "development": {"worlds_or_seeds": [11, 23], "selection_metric": "mean test MSE; rank only among predeclared candidates"},
+  "fresh": {"worlds_or_seeds": [101, 211, 307, 401], "locked_before_access": true},
+  "storage": {"authority": "actual serialized inference payload bytes", "serializer": "numpy savez compressed=False, native fitted dtype retained", "paid_objects": ["base matrices/factors", "Mirror/task codes", "PSP superposed tensor/context metadata", "independent task matrices"]},
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true, "active_compute_proxy": "dense linear multiply MACs; report method-specific transform work separately"},
+  "success_gate": "At least 3/4 fresh seeds: Mirror MSE <= 1.10x best control, <=75% independent bytes, and lower error than PSP and task-code at payload bytes within 10%.",
+  "failure_gate": "Mirror test MSE >1.25x best control on at least 3/4 fresh seeds, or no byte-quality frontier improvement over simpler controls.",
+  "boundaries": ["CPU NumPy mechanism screen only", "post-fit representation screen; not optimizer learning efficiency or capacity", "no LM claim", "no fresh-seed tuning"]
+}

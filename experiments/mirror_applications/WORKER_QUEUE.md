@@ -43,7 +43,7 @@ These have strong adjacent prior art, so the experiment must implement the cited
 Added from the second literature sweep. **Do not interrupt an already-started experiment to switch queues.**
 
 Direct/high-information P0 order:
-1. MA-255 — Mirror context superposition vs Parameter Superposition
+1. MA-255 — Mirror context superposition vs Parameter Superposition (completed PROMISING; see experiment report)
 2. MA-260 — BatchEnsemble rank-one Mirror ensemble
 3. MA-261 — BatchEnsemble-style logical experts
 4. MA-265 — VeRA Mirror scaling code bank

@@ -1,0 +1,11 @@
+{
+  "experiment_id": "MA-255",
+  "commit": "pending",
+  "tests": {"command": "python experiments/mirror_applications/ma-255-mirror-context-superposition/tests/test_roundtrip.py", "passed": 1, "failed": 0},
+  "serialization": {"roundtrip_checked": true, "byte_exact": true, "method": "actual uncompressed NumPy NPZ payload; float64 learned states retained"},
+  "metric_replay": {"checked": true, "max_difference": 0.0},
+  "fresh_split_integrity_checked": true,
+  "fresh_seeds": [101, 211, 307, 401],
+  "fresh_rank_locked": 2,
+  "notes": ["Fresh seeds and rank were recorded before fresh execution.", "Task family exactly matches the Mirror rotation chart; this is an intentionally aligned mechanism case.", "Task-code rank 2 also reaches numerical-zero test error with 14650 bytes versus Mirror 734 bytes.", "PSP row/column-factorized sign context is evaluated as implemented; this is a limited PSP baseline, not a reproduction of every PA16 context family.", "No optimizer updates were run: this is a post-fit representation screen.", "Inference timing is CPU microbenchmark-scale and not a runtime claim.", "No LM, convergence, fixed-byte optimization or general capacity evidence is established."]
+}
