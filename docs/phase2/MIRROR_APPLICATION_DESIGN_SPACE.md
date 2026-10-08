@@ -89,6 +89,9 @@ The registry treats any repeated object as a candidate:
 - quantum variational circuits with paid gate/shot/program resource budgets;
 - coupled vision-language prompts and per-object streaming segmentation memories;
 - task-aware retrieval index, generated residual codebooks and ANN search policies.
+- shared universal time-series forecasting models with horizon, variable, frequency and regime Views;
+- high-cardinality recommender categorical tables/generators with field, task, domain and rare-ID coordinates;
+- physically calibrated multi-sensor Earth-observation networks with wavelength, modality, scale and season Views.
 
 ## Four mechanism classes
 
