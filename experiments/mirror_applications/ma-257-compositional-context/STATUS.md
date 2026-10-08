@@ -7,11 +7,11 @@
 - Fresh/audit opened: yes (25711, 25712, 25713)
 - Results committed: yes
 - Verification committed: yes
-- Registry row updated: pending
+- Registry row updated: yes (PROMISING, scoped to the synthetic rotation-compositional family)
 
 ## Next action
 
-Record the scoped compositional-transfer result; inspect whether MA-258 has an active experiment directory before selecting the next P0 candidate.
+Tests and exact payload replay pass; registry, claim ledger, and status board record the scoped PROMISING result. Check current MA-258 branches and latest registry before selecting work.
 
 ## Blockers
 
