@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (166 completed; 463 UNTESTED; 1 SCREENING)
+- P0: **630** (167 completed; 463 UNTESTED)
 - P1: **422** (13 completed; 409 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **123 FAIL, 11 NOT ESTABLISHED, 45 PROMISING, 975 UNTESTED, 1 SCREENING**
+- Current MA statuses: **124 FAIL, 11 NOT ESTABLISHED, 45 PROMISING, 975 UNTESTED**
 - 47 baseline experiment directories remain present; 133 additional per-ID outcomes are linked to their dedicated research branches in `LIVE_BRANCH_RECONCILIATION.csv`.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This was the intake-time queue; current selection follows the live-branch reconciliation at the top of this board.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed at intake time; later live-branch outcomes are indexed above.
@@ -23,20 +23,20 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-444 — LEO decoder replaced by structured Mirror map (P0; PA76).** MA-442 FAIL was pushed and remote branches refreshed; no MA-444 branch exists. MA-444 is now SCREENING. MA-446 has a terminal FAIL branch. MA-434..438 remain paused.
+**Pending live branch refresh.** MA-444 completed as FAIL. Refresh remote branches and select the next eligible P0 outside paused families; MA-446 already has a terminal FAIL branch.
 
 MA-434 and MA-436 found exact native SSM parameterization aliases; MA-442 likewise aliases a native Givens angle conditioner. Its two-angle model beats the tested rank-2 LoRA on query RMSE and model-bank bytes, but misses the end-to-end runtime gate and is exactly reproduced by the native conditioned predictor. Fresh seeds remain sealed.
 
 ## Active experiment
 
-MA-416 through MA-419, MA-424, MA-434, MA-436 and MA-442 are verified development-screen FAILs, with fresh seeds sealed. Amended MA-436's native generated-A control matched outputs and payloads exactly; Mirror throughput was 0.382/0.645x native and diversity RMS was 0.0206/0.0252. MA-442 failed after an exact native Givens conditioner alias, slower adaptation than rank-2 LoRA, and no actual byte saving over the independent task-vector bank. MA-444 is screening a matched-latent-width LEO decoder versus structured three-angle Mirror Views on a separate synthetic task family. State-space role/expert candidates are paused under the family rule. See [MA-436 report](ma-436-ssm-expert-views/README.md), [verification](ma-436-ssm-expert-views/VERIFICATION.json), [state-space diagnostic](../../docs/phase2/STATE_SPACE_MIRROR_FAMILY_DIAGNOSTIC_2026-10-08.md), [MA-434 report](ma-434-selective-ssm-mirror-roles/README.md), [MA-424 report](ma-424-neural-ode-mirror-modes/README.md), [continuous-depth diagnostic](../../docs/phase2/NEURAL_ODE_MIRROR_FAMILY_DIAGNOSTIC_2026-10-08.md), and [latent-code diagnostic](../../docs/phase2/LATENT_CODE_MIRROR_FAMILY_DIAGNOSTIC_2026-10-08.md).
+MA-416 through MA-419, MA-424, MA-434, MA-436 and MA-442 are verified development-screen FAILs, with fresh seeds sealed. Amended MA-436's native generated-A control matched outputs and payloads exactly; Mirror throughput was 0.382/0.645x native and diversity RMS was 0.0206/0.0252. MA-442 failed after an exact native Givens conditioner alias, slower adaptation than rank-2 LoRA, and no actual byte saving over the independent task-vector bank. MA-444 failed its runtime gate and exactly matched native Givens conditioning despite an aligned quality/byte win over LEO and rank-3. Fresh seeds remain sealed. State-space role/expert candidates are paused under the family rule. See [MA-436 report](ma-436-ssm-expert-views/README.md), [verification](ma-436-ssm-expert-views/VERIFICATION.json), [state-space diagnostic](../../docs/phase2/STATE_SPACE_MIRROR_FAMILY_DIAGNOSTIC_2026-10-08.md), [MA-434 report](ma-434-selective-ssm-mirror-roles/README.md), [MA-424 report](ma-424-neural-ode-mirror-modes/README.md), [continuous-depth diagnostic](../../docs/phase2/NEURAL_ODE_MIRROR_FAMILY_DIAGNOSTIC_2026-10-08.md), and [latent-code diagnostic](../../docs/phase2/LATENT_CODE_MIRROR_FAMILY_DIAGNOSTIC_2026-10-08.md).
 
 
 ## Verified status index
 
 - **PROMISING (45):** MA-001, MA-002, MA-003, MA-004, MA-005, MA-006, MA-007, MA-008, MA-012, MA-014, MA-015, MA-041, MA-076, MA-079, MA-111, MA-121, MA-156, MA-160, MA-171, MA-173, MA-181, MA-189, MA-241, MA-244, MA-245, MA-249, MA-250, MA-251, MA-257, MA-258, MA-268, MA-276, MA-282, MA-312, MA-314, MA-330, MA-344, MA-346, MA-374, MA-381, MA-603, MA-691, MA-771, MA-841, MA-879.
 - **NOT ESTABLISHED (11):** MA-325, MA-643, MA-899, MA-971, MA-998, MA-1010, MA-1066, MA-1069, MA-1091, MA-1138, MA-1141.
-- **FAIL (123):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-255, MA-260, MA-261, MA-265, MA-266, MA-271, MA-272, MA-273, MA-274, MA-278, MA-286, MA-288, MA-292, MA-296, MA-297, MA-299, MA-301, MA-303, MA-304, MA-307, MA-309, MA-311, MA-315, MA-318, MA-319, MA-320, MA-322, MA-327, MA-331, MA-332, MA-333, MA-335, MA-337, MA-338, MA-341, MA-342, MA-349, MA-351, MA-353, MA-355, MA-356, MA-357, MA-359, MA-360, MA-361, MA-364, MA-366, MA-367, MA-368, MA-375, MA-379, MA-383, MA-385, MA-389, MA-391, MA-392, MA-393, MA-395, MA-397, MA-399, MA-401, MA-403, MA-405, MA-416, MA-417, MA-418, MA-419, MA-424, MA-427, MA-434, MA-436, MA-442, MA-446, MA-462, MA-464, MA-492, MA-504, MA-669, MA-674, MA-707, MA-715, MA-721, MA-732, MA-742, MA-753, MA-760, MA-767, MA-783, MA-784, MA-790, MA-818, MA-824, MA-840, MA-921, MA-932, MA-945, MA-951, MA-962, MA-981, MA-990, MA-1018, MA-1064, MA-1075, MA-1097, MA-1120.
+- **FAIL (124):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-255, MA-260, MA-261, MA-265, MA-266, MA-271, MA-272, MA-273, MA-274, MA-278, MA-286, MA-288, MA-292, MA-296, MA-297, MA-299, MA-301, MA-303, MA-304, MA-307, MA-309, MA-311, MA-315, MA-318, MA-319, MA-320, MA-322, MA-327, MA-331, MA-332, MA-333, MA-335, MA-337, MA-338, MA-341, MA-342, MA-349, MA-351, MA-353, MA-355, MA-356, MA-357, MA-359, MA-360, MA-361, MA-364, MA-366, MA-367, MA-368, MA-375, MA-379, MA-383, MA-385, MA-389, MA-391, MA-392, MA-393, MA-395, MA-397, MA-399, MA-401, MA-403, MA-405, MA-416, MA-417, MA-418, MA-419, MA-424, MA-427, MA-434, MA-436, MA-442, MA-444, MA-446, MA-462, MA-464, MA-492, MA-504, MA-669, MA-674, MA-707, MA-715, MA-721, MA-732, MA-742, MA-753, MA-760, MA-767, MA-783, MA-784, MA-790, MA-818, MA-824, MA-840, MA-921, MA-932, MA-945, MA-951, MA-962, MA-981, MA-990, MA-1018, MA-1064, MA-1075, MA-1097, MA-1120.
 
 All per-ID evidence is retained in the local experiment directories and in `CLAIM_LEDGER.csv`. Consult [the evidence integration audit](../../docs/phase2/MIRROR_MA_EVIDENCE_INTEGRATION_2026-10-08.md) for linked reports, verifications, provenance and claim boundaries.
 
