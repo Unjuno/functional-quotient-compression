@@ -1,0 +1,15 @@
+{
+  "experiment_id":"MA-438","title":"Frequency-band Mirror Views over shared S4 kernel","status":"SCREENING","evidence_lane":"MECHANISM/STORAGE/QUALITY","base_commit":"eac3d8e",
+  "hypothesis":"A shared stable diagonal S4 kernel plus two-coordinate role codes that shift pole timescales recovers four band-specific sequence filters at <=60% independent-kernel actual bytes and <=1.10x NRMSE.",
+  "physical_object":"shared diagonal S4 pole spectrum and input/output coefficients","mirror_coordinate":"two per-role coefficients shifting log decay rates along fixed slow/fast spectral directions","logical_multiplicity":"four frequency-band sequence kernels",
+  "prior_art_refs":[74],"controls":["shared kernel","per-role scalar output gate","Mirror spectral shifts","equal-rank-two pole residual","independent pole spectra"],
+  "task":{"type":"synthetic stable sequence filtering","state_dim":8,"roles":4,"train_length":64,"evaluation_lengths":[64,128],"teacher":"one shared stable eight-pole S4D kernel with role-specific two-coordinate shifts that generate slow/mid/fast/broadband filters"},
+  "development":{"worlds_or_seeds":[43800,43801],"training_seeds":[0,1,2],"learning_rates":[0.003,0.01],"selection_metric":"mean validation NRMSE at length 64"},
+  "fresh":{"worlds_or_seeds":[43810,43811,43812],"training_seeds":[0,1,2],"locked_before_access":true},
+  "training":{"updates":500,"batch_size":64,"optimizer":"AdamW","same_updates_all_methods":true},
+  "storage":{"authority":"actual serialized inference payload bytes","paid_objects":["shared poles and kernel coefficients","Mirror coordinates","gate or pole residuals","metadata"]},
+  "compute":{"report_examples":true,"report_updates":true,"report_MAC_proxy":true,"report_training_wall":true,"report_sequence_evaluation_wall":true},
+  "success_gate":"Every fresh world at length 128: Mirror NRMSE <=1.10x independent, actual bytes <=60% independent, stable poles, MAC proxy <=1.25x independent.",
+  "failure_gate":"Any quality/byte/stability/compute gate fails, or equal-rank pole residual matches Mirror quality at lower bytes.",
+  "boundaries":["Synthetic aligned timescale teacher only.","No FFT implementation or language model claim.","CPU proxy costs do not establish accelerator throughput."]
+}
