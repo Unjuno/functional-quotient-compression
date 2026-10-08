@@ -1,1 +1,40 @@
-{"experiment_id":"MA-441","protocol_commit":null,"tests":{"passed":0,"failed":0},"serialization":{"roundtrip_checked":false,"byte_exact":false,"payload_rows":0},"metric_replay":{"checked":false},"fresh_split_integrity_checked":false,"fresh_worlds":[],"notes":[]}
+{
+  "experiment_id": "MA-441",
+  "protocol_commit": "3a0bd4e",
+  "protocol_amendments": [
+    "a13a1f2",
+    "0e3ae02"
+  ],
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-441-state-space-address-memory/tests -v",
+    "passed": 2,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "payload_rows": 36,
+    "payload_hashes_replayed": true,
+    "actual_payload_bytes_authoritative": true,
+    "recurrent_state_bytes_checked": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "tolerance": 1e-08,
+    "notes": [
+      "144 corrected fresh rows replay from 36 payloads.",
+      "A1/A2 initial fresh results excluded; corrected outputs are the final fresh records.",
+      "Mirror retains 100% hard accuracy but probability NRMSE grows with delay."
+    ]
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_worlds": [
+    44110,
+    44111,
+    44112
+  ],
+  "notes": [
+    "Exact external route is a deterministic no-training control.",
+    "No natural Mamba/LM evidence."
+  ]
+}
