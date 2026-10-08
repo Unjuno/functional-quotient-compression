@@ -1,23 +1,15 @@
 # MA-455 status
 
-- Status: SCREENING
+- Status: FAIL
 - Branch: `research/ma-455-sequential-mirror-program-20261008`
 - Base commit: `04554b5`
 - Protocol frozen: yes; SHA-256 f26455ad6123f78f587d688e849741947d5eb316d219a6fdef4c6edea91744bf
-- Development complete: no
-- Fresh/audit opened: no
-- Results committed: no
-- Verification committed: no
-- Registry row: SCREENING
+- Development complete: yes; seeds 45501, 45502
+- Fresh/audit opened: no; sealed by frozen gate
+- Results committed: pending
+- Verification committed: pending
+- Registry row: SCREENING until terminal metadata update
 
-## Next action
+## Decision
 
-Protocol/source are frozen; next run only development seeds 45501 and 45502.
-
-## Blockers
-
-None.
-
-## Decisions / rulings
-
-PA81 reviewed: routing networks dynamically compose reusable blocks with a learned router. This experiment uses fixed depth and no router, isolating ordered step views from dynamic routing.
+FAIL: actual payload exceeds the independent three-block bank by 31.6% in both seeds, native Givens exactly aliases Mirror, and seed 45501 misses the 0.05 RMSE gate. Reverse View ordering increases error on both seeds. See README.md for H/T/D/C/U and the bounded interpretation.
