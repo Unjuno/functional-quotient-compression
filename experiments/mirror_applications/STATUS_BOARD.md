@@ -94,4 +94,4 @@ KG relation rotations (RotatE, TuckER, QuatE, PairRE), EXIF/device-aware ISPs (P
 
 ## MA-361 — FAIL for Mirror-specific MoD block-role value
 
-Under fixed top-50% routing, tied MoD+Mirror used 5,298/5,312B versus native MoD 11,076/11,077B, but direct scalar gate matched Mirror hash/NLL/accuracy exactly. Seed 36102 missed frozen NLL margin (0.1150 vs 0.1023 native). All methods routed 8/16 tokens with equal active-MAC proxy. Fresh remained sealed. Eight rows replayed; three tests passed. Synthetic fixed-router screen only. Dedicated branch: `research/ma-361-mixture-depths-mirror-role-20261008`.
+Under fixed top-50% routing, tied MoD+Mirror used 5,298/5,312B versus native MoD 11,076/11,077B, but direct scalar gate matched Mirror hash/NLL/accuracy exactly. Seed 36102 missed frozen NLL margin (0.1150 vs 0.1023 native). All methods routed 8/16 tokens with equal active-MAC proxy. Fresh remained sealed. Eight rows replayed; three tests passed. Synthetic fixed-router screen only. Dedicated branch: `research/ma-361-mixture-depths-mirror-role-20261008` (commit `fb7c8ec`).
