@@ -1,6 +1,7 @@
 {
   "experiment_id": "MA-824",
-  "commit": "pending",
+  "commit": "pending-result-commit",
+  "amendment": 1,
   "selection_draw": {
     "draw": 22,
     "pool_size": 536,
@@ -16,15 +17,121 @@
     "failed": 0
   },
   "serialization": {
-    "actual_payloads_measured": false
+    "actual_payloads_measured": true,
+    "payload_count": 20,
+    "independent_duplicate_storages_checked": true,
+    "payload_manifest": [
+      {
+        "path": "source/artifacts/amended_development_82401_mirror_factors.pt",
+        "bytes": 3852,
+        "sha256": "9cf5ae82ac01731f581b07dd106093d88d0bc91ca35edcb1a4b345265c335772"
+      },
+      {
+        "path": "source/artifacts/amended_development_82401_native_interpreter.pt",
+        "bytes": 4028,
+        "sha256": "d6741e3a1bf859ed4cba22e1f98772acfad39559021c4283b450bc999e58a34d"
+      },
+      {
+        "path": "source/artifacts/amended_development_82401_hard_shared_indices.pt",
+        "bytes": 3912,
+        "sha256": "5f875119d16c216c83e99cb2409d0740ac2522255f6933a766888bd29307135b"
+      },
+      {
+        "path": "source/artifacts/amended_development_82401_independent_programs.pt",
+        "bytes": 10994,
+        "sha256": "8b1388b9a698a0587131d104492890c4d1d722207dbebdf8218056aa6d16a5c5"
+      },
+      {
+        "path": "source/artifacts/amended_development_82402_mirror_factors.pt",
+        "bytes": 3852,
+        "sha256": "c6a27be5dea02258408908bce857db2576dc39c9bbf2da949852b66641de5cd5"
+      },
+      {
+        "path": "source/artifacts/amended_development_82402_native_interpreter.pt",
+        "bytes": 4028,
+        "sha256": "09f3d5b7888399a4359e9e19a3866a0eed64827ff2b90621bcdc57ebed74f201"
+      },
+      {
+        "path": "source/artifacts/amended_development_82402_hard_shared_indices.pt",
+        "bytes": 3912,
+        "sha256": "6c31931a13963b1a7bd9bf32dddfa2e6e864f603647ad355c5ad058d4545471e"
+      },
+      {
+        "path": "source/artifacts/amended_development_82402_independent_programs.pt",
+        "bytes": 10994,
+        "sha256": "f96112b66cc76a108fefae2342fbf4beaf92c5eb06846a9a83531b9ff87fcd67"
+      },
+      {
+        "path": "source/artifacts/amended_fresh_82406_mirror_factors.pt",
+        "bytes": 3780,
+        "sha256": "18cd39fd103a1b03d4d64e08d934603e2f7d0ca4925dc9ddb2e5638419901a69"
+      },
+      {
+        "path": "source/artifacts/amended_fresh_82406_native_interpreter.pt",
+        "bytes": 3956,
+        "sha256": "363b26952825da80c10cf5f09565676013546b97ac1b6a36f4554c8b3b697e83"
+      },
+      {
+        "path": "source/artifacts/amended_fresh_82406_hard_shared_indices.pt",
+        "bytes": 3840,
+        "sha256": "fe021756066b6d24ed7951f562a345250cbf96cdd6d7d5577eacc0a2ed9f8160"
+      },
+      {
+        "path": "source/artifacts/amended_fresh_82406_independent_programs.pt",
+        "bytes": 10778,
+        "sha256": "766c84e4ab6605c5eb24d4583a3f094aa475870fba4fc5ea68f0036d89738717"
+      },
+      {
+        "path": "source/artifacts/amended_fresh_82407_mirror_factors.pt",
+        "bytes": 3780,
+        "sha256": "9297020ab67100d5764b0372c097fcc676635c2ceab22ee10d912a4597a8df81"
+      },
+      {
+        "path": "source/artifacts/amended_fresh_82407_native_interpreter.pt",
+        "bytes": 3956,
+        "sha256": "4e1851253609d368e900dd1e13d4d0713fa1509d9763620ec55fd373e27ef051"
+      },
+      {
+        "path": "source/artifacts/amended_fresh_82407_hard_shared_indices.pt",
+        "bytes": 3840,
+        "sha256": "162fcd24062f2379f284de85159d53d287675ba542b6f5b9e4fd591e03c28b44"
+      },
+      {
+        "path": "source/artifacts/amended_fresh_82407_independent_programs.pt",
+        "bytes": 10778,
+        "sha256": "005227c9312a2fa219617a9e8c7ae18ef3d1d9c762e290a28cb1486ee4417568"
+      },
+      {
+        "path": "source/artifacts/amended_fresh_82408_mirror_factors.pt",
+        "bytes": 3780,
+        "sha256": "9906faa0d2ec42b301a66d0218371ea431b32508bb06462cea71065178cfe3d3"
+      },
+      {
+        "path": "source/artifacts/amended_fresh_82408_native_interpreter.pt",
+        "bytes": 3956,
+        "sha256": "5790a04afaa7f6396f27777aea2c135cd2f7c5e0bf852b756ffb210b0da0b1d0"
+      },
+      {
+        "path": "source/artifacts/amended_fresh_82408_hard_shared_indices.pt",
+        "bytes": 3840,
+        "sha256": "1ff79a77860ee4c0d70634331fe1c25136de7c25a9be93bbf03b23b2b735a701"
+      },
+      {
+        "path": "source/artifacts/amended_fresh_82408_independent_programs.pt",
+        "bytes": 10778,
+        "sha256": "fe51d639240aad179784afe1370ee7a7812b6517ce44456ea142b16cb2e9688e"
+      }
+    ]
   },
   "metric_replay": {
-    "checked": false,
-    "max_difference": null
+    "checked": true,
+    "rows": 20,
+    "max_program_mse_difference": 0.0
   },
   "audit_opened": false,
   "notes": [
-    "Draw22 pool/index replay passed.",
-    "Pre-run tests verify exact four-combination composition and distinct physical storages for the amended independent control before and after serialization."
+    "Initial aliased-storage attempt is retained separately and excluded from decisions.",
+    "Amended independent controls use distinct node tensor storages; fresh seeds 82406\u201382408 were not viewed before amendment.",
+    "All amended program outputs, including the held-out topology/function pair, replay exactly from serialized payloads."
   ]
 }

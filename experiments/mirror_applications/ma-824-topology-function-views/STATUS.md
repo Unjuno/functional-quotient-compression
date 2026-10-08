@@ -1,19 +1,19 @@
 # MA-824 status
 
-- Status: SCREENING — amendment frozen; amended fresh run pending
+- Status: FAIL — amended runs exact, but native-interpreter Mirror-specific byte gate failed
 - Branch: `research/ma-824-topology-function-views-20261008`
 - Base commit: `c935a903daca5c7d1d48aa50d05b5bd50f239cba`
 - Draw: 22; uniform from 536 eligible P0/UNTESTED rows, index 289; amendment 1 adds fresh seeds 82406–82408
-- Last verified commit: pre-data protocol freeze follows
-- Development complete: no
-- Fresh/audit opened: no
-- Results committed: no
-- Verification committed: no
-- Registry row updated: no
+- Last verified commit: amendment freeze `10537fe`
+- Development complete: yes (2 seeds)
+- Fresh/audit opened: fresh yes; separate audit none
+- Results committed: pending result commit
+- Verification committed: pending result commit
+- Registry row updated: pending result commit
 
 ## Next action
 
-Run amended development/fresh payload screen; retain initial aliased-storage attempt as invalid evidence.
+Commit amended evidence and continue with another uniform draw.
 
 ## Blockers
 
@@ -25,3 +25,4 @@ None identified. The exact two-node program executor is CPU-feasible.
 - Draw22 pool and exclusions are preserved in `source/`.
 - Program combinations are treated as exact cases tested, never as a capacity count.
 - Initial serialization attempt was invalid because PyTorch deduplicated aliased node tensors in the independent control. Amendment 1 deep-copies those weights and uses unused fresh seeds 82406–82408; the earlier attempt is preserved and excluded from decisions.
+- The amended Mirror compression versus independent duplication passed (64.9% lower bytes), but the ≥10% advantage over the native interpreter failed in all three fresh worlds. All four tested program outputs were exact; no learning or capacity conclusion follows.

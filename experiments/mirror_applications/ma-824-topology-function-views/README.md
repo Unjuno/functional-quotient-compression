@@ -26,3 +26,13 @@ The node MLP weights are deterministic and frozen. Each program composes either 
 ## Boundaries
 
 The result can establish exact composition and serialization efficiency for four synthetic programs. It cannot establish learned neural interpreter quality, arbitrary logical capacity, or Mirror-specific value if the native interpreter stores the same factorization at equal cost.
+
+## Result and worker report
+
+**Fact.** With independently serialized node tensors, all four programs including the held-out `parallel × sine_mlp` pair had exactly 0 fresh MSE in all three worlds. Mirror payload was 3,780 B, versus 10,778 B for duplicated independent programs (64.9% fewer bytes), 3,956 B for the PA128-style native interpreter (4.45% fewer), and 3,840 B for hard shared indices. The Mirror-specific 10% advantage over the native interpreter failed in all three fresh worlds. The initial aliased-storage attempt is separately preserved and excluded from this result. Twenty amended payloads passed hash and output replay with max error 0.0; no optimizer updates occurred and no audit set was opened.
+
+**Interpretation.** Separating topology from node-function identity composes the tested factors and saves bytes against physical duplication. The PA128-style shared interpreter achieves the same exact functions with nearly the same storage, so the observed compression is generic program sharing rather than a Mirror-specific gain. The four tested programs are not a capacity count.
+
+**Hypothesis.** Larger graphs or a broader function library may make separate topology/function codes useful if a native program signature must store repeated routing detail. This small exact executor does not establish that advantage.
+
+**H** Factorized topology × node-function codes would compose held-out combinations and compress duplicated program state, with a measurable storage advantage over native interpreter signatures. **T** Two dev and three amended fresh seeds, two topologies, two fixed node MLPs, four controls, actual serialized payloads and held-out output replay; no learning. **D: FAIL** for Mirror-specific value: independent duplication was compressed, but the native interpreter advantage missed its frozen 10% threshold. **C** Neural Interpreter/GrapNet-style generic code factoring explains the result. **U** Learned node libraries, larger graph families, natural programs and capacity remain untested.
