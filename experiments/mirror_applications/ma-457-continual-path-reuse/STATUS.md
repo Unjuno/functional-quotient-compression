@@ -1,31 +1,19 @@
 # MA-457 status
 
-- Status: SCREENING
+- Status: FAIL
 - Branch: `research/ma-457-continual-path-reuse-20261008`
 - Base commit: `2264c54`
 - Protocol frozen: yes; SHA-256 25fb9ce4341f410582cc674a16a01eedf66b5688a002c0c00073e10aa9c9803d
-- Development complete: no
-- Fresh/audit opened: no
-- Results committed: no
-- Verification committed: no
-- Registry row: SCREENING
+- Development complete: yes; seeds 45701, 45702
+- Fresh/audit opened: no; sealed by frozen gate
+- Results committed: pending
+- Verification committed: pending
+- Registry row: SCREENING until terminal metadata update
 
-## Next action
+## Decision
 
-Protocol and source are frozen; next run only development seeds 45701 and 45702.
+FAIL: Mirror reduced full-module births to two but its actual payload (2,222 bytes) exceeded both PathNet (1,442) and independent modules (1,180); it also exactly aliased native rank-one conditioning and had higher error and much slower training. Fresh data stayed sealed.
 
-## Blockers
+## Preserved implementation records
 
-None.
-
-## Decisions / rulings
-
-PA80 reviewed. This candidate tests continual module allocation and growth with rank-one task views; it does not repeat the paused Givens path-role conditioner from MA-451/452.
-
-Implementation note: the first preflight attempt stopped before complete metrics due to a Tensor/dict retention-check bug. The partial PathNet payload and failure record are preserved under `runs/invalid_preflight_45701_01/`; it is excluded from evidence and was not used to tune the frozen configuration.
-
-A second invalid preflight stopped before metrics because the accepted-query dictionary was not initialized. Partial PathNet/shared payloads are preserved in `runs/invalid_preflight_45701_02/`; this attempt also was not used for tuning.
-
-A third invalid preflight caught the same accepted-query dictionary initialization ordering defect; partial PathNet/shared payloads are preserved in `runs/invalid_preflight_45701_03/`. None of the three invalid preflights produced complete metrics or influenced tuning.
-
-Compute metadata correction: an initial completed run wrote 0.0 s for closed-form shared/independent control fitting and mislabeled independent module births. Original outputs are preserved under `runs/superseded_initial_compute_reporting_*`; same frozen seeds are rerun to measure those fields. The original quality outputs were not used for tuning.
+Three incomplete preflights and the superseded initial control-timing report are retained in `runs/`; they are excluded from the terminal result and were not used for tuning. The full corrected runs pass serialization and metric replay.
