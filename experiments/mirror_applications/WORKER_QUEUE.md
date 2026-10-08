@@ -177,7 +177,7 @@ High-information P0:
 2. MA-503 — factorized layer x task representation code (**FAIL**: heldout rho=0 error .00215/6.754 across seeds, factor bytes 95.6% of dense table, and exact native bilinear alias; rho=.25 error .563/22.515; amendment 1 preserved; fresh sealed). The MA501–503 diagnostic pauses unchanged shared-code/factor families.
 3. MA-504 — token-conditioned Mirror ReFT
 4. MA-508 — activation-addition Mirror basis (**FAIL for Mirror attribution**: rank-8 rho=0 is 8,324 B vs 13,194 B explicit at zero RMSE, but exact native PCA alias; rho=.1 RMSE .063/.080; 9x decoder compute. Amendment 1 causal metric fix preserved; fresh sealed.)
-5. MA-510/511 — conditional condition x behavior View codes (**MA-510 FAIL**: synthetic gate misses false-trigger/recall/accuracy and aliases native PCA; MA-511 next; PA101)
+5. MA-510/511 — conditional condition x behavior View codes (**MA-510 FAIL**: synthetic gate misses false-trigger/recall/accuracy and aliases native PCA; MA-511 screening active; PA101)
 6. MA-516/517 — compressed/composed Function Vectors
 7. MA-520/521 — FV-to-code distillation and demonstration-to-code compilation
 8. MA-526/527/528 — SAE feature atoms and Mirror transforms
