@@ -47,7 +47,7 @@ Direct/high-information P0 order:
 2. MA-260 — BatchEnsemble rank-one Mirror ensemble
 3. MA-261 — BatchEnsemble-style logical experts
 4. MA-265 — VeRA Mirror scaling code bank
-5. MA-268 — IA3 Mirror activation views
+5. MA-268 — IA3 Mirror activation views (completed PROMISING; aligned screen 15.7% byte saving, gate missed)
 6. MA-271 — OFT Mirror task views
 7. MA-272 — input-centric OFTv2 Mirror views
 8. MA-273 — BOFT Mirror adapter bank
