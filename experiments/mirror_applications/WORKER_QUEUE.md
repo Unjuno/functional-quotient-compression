@@ -1,6 +1,6 @@
 # Worker queue
 
-**Current operational pointer (2026-10-08): MA-403.** MA-375/379/383/385/389/391/392/393/395/397/399/401 have branch results reconciled as FAIL; MA-381 remains scoped PROMISING with strict gates missed. Continue with MA-403.
+**Current operational pointer (2026-10-08): MA-405.** MA-375/379/383/385/389/391/392/393/395/397/399/401/403 have branch or verified results reconciled as FAIL; MA-381 remains scoped PROMISING with strict gates missed. Continue with MA-405.
 
 The queue is derived from `IDEA_REGISTRY.csv`. The registry is authoritative.
 
@@ -127,6 +127,7 @@ High-information P0:
 18. MA-397 — product-address Mirror vocabulary (completed FAIL by registered scalar margin)
 19. MA-399 — MatFormer speculative drafter via Mirror granularity code (completed FAIL; fresh/latency unopened)
 20. MA-401 — FiLM versus Mirror feature conditioning (completed FAIL; dedicated branch)
+21. MA-403 — token-wise generated Mirror modulation (completed FAIL; dedicated branch)
 11. MA-383 — L2P prompt pool + Mirror generator
 12. MA-385 — DualPrompt expert prompts as Views
 13. MA-389 — Hash Embedding Mirror importance codes
