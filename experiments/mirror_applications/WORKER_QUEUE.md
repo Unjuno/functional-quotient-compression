@@ -12,15 +12,28 @@ Use:
 - `docs/phase2/MIRROR_PARAMETER_INTEGRATION_DOCTRINE.md`
 - `docs/phase2/MIRROR_PARAMETER_INTEGRATION_MATRIX.md`
 
-## Selection rule
+## Selection rule — randomized worker policy
 
-Pick the first candidate satisfying all of:
-1. status is UNTESTED;
-2. highest available priority;
-3. no other active experiment directory already claims the ID;
-4. its closest prior-art controls can be implemented in the current harness.
+The registry defines eligibility; the worker does **not** choose the first row or follow the listed sequence linearly. For each draw:
+1. Read the current registry and status board.
+2. Form a sorted pool of executable P0/UNTESTED IDs, excluding completed IDs, paused families, active claims, and documented blockers.
+3. Save the complete pool before drawing. Use `secrets.randbelow(len(pool))`; record the draw index, pool size, pool hash, excluded IDs/reasons, and branch-conflict check in the selected experiment.
+4. Work only on the selected ID, then refresh eligibility and draw again.
 
-Do not skip to a visually interesting P1/P2 idea while an executable P0 remains, unless the skipped candidate has a recorded blocker.
+If another worker has a result on the selected ID, inspect it and reconcile selectively; preserve both branches and let maintainers adjudicate integration. Do not silently substitute the next ID. Listed family queues below are context and eligibility hints, not an execution order.
+
+### Recorded draws
+
+| Draw | Eligible pool | Draw | Outcome |
+|---|---:|---:|---|
+| 1 | 6 | index 2 | MA-282; completed on its dedicated branch |
+| 2 | 5 | index 1 | MA-278; competing FAIL branch selectively reconciled |
+| 3 | 4 | index 3 | MA-299; completed FAIL; shared-angle SETA family paused after MA-297/299 |
+| 4 | 3 | index 0 | MA-274; competing FAIL branch selectively reconciled; task/expert BOFT angle-code family paused |
+| 5 | 2 | index 0 | MA-286; completed FAIL for Mirror-specific byte margin |
+| 6 | 456 | index 26 | MA-330; pool snapshot and hash discrepancy retained in its experiment protocol |
+
+The prior status board's deterministic “next candidate” text is superseded by this user-directed random policy. Historical family queues remain context only.
 
 ## Literature-derived cross-over queue
 

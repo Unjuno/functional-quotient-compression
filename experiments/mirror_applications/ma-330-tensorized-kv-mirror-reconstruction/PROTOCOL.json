@@ -1,0 +1,108 @@
+{
+  "experiment_id": "MA-330",
+  "title": "Tensorized KV cache/view reconstruction",
+  "status": "PROMISING",
+  "evidence_lane": [
+    "MECHANISM",
+    "STORAGE",
+    "RUNTIME"
+  ],
+  "base_commit": "28194ea",
+  "hypothesis": "Charged per-role Mirror coordinates around a shared compressed KV tensor can reconstruct aligned logical KV roles with a useful quality/serialized-byte frontier against PA35-style shared matrix-bank factors, after reconstruction cost is counted.",
+  "physical_object": "per-role sequence-by-channel K and V cache tensors",
+  "mirror_coordinate": "one float32 2D channel rotation angle per aligned role, stored in payload; angles are supplied task metadata, not learned",
+  "logical_multiplicity": "six aligned role-specific K/V cache tensors from one shared factor pair, plus two unrelated roles represented privately",
+  "prior_art_refs": [
+    "PA08",
+    "PA35",
+    "MA-061",
+    "MA-245"
+  ],
+  "selection": {
+    "method": "uniform integer draw using Python secrets.randbelow over sorted P0 UNTESTED registry IDs, excluding completed worker IDs and paused families",
+    "pool_size": 456,
+    "draw_index_zero_based": 26,
+    "selected_id": "MA-330",
+    "pool_sha256": "8e13b9eb084b546a3a4ebdde5b0ba589b27854ba1aa5374982d1609f0ab79633",
+    "snapshot": "source/selection_pool.csv",
+    "branch_conflict_checked": true,
+    "conflicting_branch_found": false,
+    "reconstructed_pool_file_sha256": "af35cac199e81324b168a9dd22535aeed51399ac8af60bbfada60945d9a6afa0",
+    "recorded_prework_pool_sha256": "8e13b9eb084b546a3a4ebdde5b0ba589b27854ba1aa5374982d1609f0ab79633",
+    "provenance_note": "The pre-work draw record said 456 candidates and MA-330 at index 26. The saved ID-list reconstruction also has 456 IDs and MA-330 at index 26, but its file SHA-256 differs from the previously recorded fingerprint. Random draw provenance is retained; the fingerprint discrepancy is unresolved."
+  },
+  "task": {
+    "layers": 4,
+    "roles_per_layer": 2,
+    "roles": 8,
+    "sequence_length": 16,
+    "head_dim": 8,
+    "aligned_roles": 6,
+    "unrelated_private_roles": 2,
+    "dtype": "float32"
+  },
+  "methods": [
+    "raw_mha",
+    "hard_shared",
+    "independent_svd",
+    "pa35_shared_sequence_basis",
+    "mirror_shared_base_private_boundary"
+  ],
+  "rank_candidates": [
+    2,
+    4,
+    6,
+    8
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      33001,
+      33002
+    ],
+    "selection_metric": "mean normalized attention output MSE; choose smallest rank with mean <= 1e-4, otherwise minimum mean MSE"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      33031,
+      33032,
+      33033
+    ],
+    "locked_before_access": true,
+    "protocol_and_source_frozen_before_open": true
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "all SVD/shared factors",
+      "all private role factors",
+      "per-role Mirror angles",
+      "role indices",
+      "method identifier",
+      "shape and dtype metadata",
+      "payload header"
+    ]
+  },
+  "quality": {
+    "metric": "normalized MSE of synthetic attention outputs against full teacher KV tensors",
+    "query_count_per_role": 64,
+    "queries_are_not_used_to_fit_factors": true
+  },
+  "compute": {
+    "optimizer_updates": 0,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true,
+    "report_decode_macs": true,
+    "report_attention_macs": true,
+    "report_peak_streaming_workspace_bytes": true,
+    "report_expanded_cache_bytes": true,
+    "report_modeled_payload_read_write_bytes": true
+  },
+  "success_gate": "All three fresh worlds have Mirror normalized attention-output MSE <= 1e-4, at least 10% fewer serialized bytes than PA35 control at matched quality, and decode MAC proxy <= 2x PA35.",
+  "failure_gate": "Fresh quality fails, or Mirror has <10% byte advantage over best non-Mirror shared-factor control at matched quality, or decode MAC proxy >2x.",
+  "boundaries": [
+    "Synthetic mechanism screen only; no natural language or pretrained model claims.",
+    "Angles are supplied task metadata; no learned-code claim.",
+    "The teacher intentionally contains six rotated aligned roles and two unrelated private roles.",
+    "No optimizer training; factors are direct deterministic SVD fits."
+  ]
+}

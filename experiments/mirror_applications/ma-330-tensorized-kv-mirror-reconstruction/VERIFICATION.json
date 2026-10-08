@@ -1,0 +1,95 @@
+{
+  "experiment_id": "MA-330",
+  "decision": "PASS for predeclared synthetic mechanism gate; natural-language claim not established",
+  "base_commit": "28194ea",
+  "branch": "research/ma-330-tensorized-kv-mirror-reconstruction-20261008",
+  "protocol_freeze": {
+    "selected_rank": 4,
+    "development_seeds": [
+      33001,
+      33002
+    ],
+    "fresh_seeds": [
+      33031,
+      33032,
+      33033
+    ],
+    "source_sha256": "e9ddd1d445e5f27234a19500ed54d2231b0a5e8c831b778370fe2be9d60a5d1c",
+    "protocol_sha256_at_fresh_run": "6e818a6324573d009fe9b2318f66ea69d5d8fa5d5e94e42ab0cb4c5af7d5421e",
+    "fresh_opened_after_config_and_source_freeze": true
+  },
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-330-tensorized-kv-mirror-reconstruction/tests -v",
+    "passed": 3,
+    "failed": 0,
+    "notes": [
+      "pytest is not installed; the same unit checks were run with unittest."
+    ]
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "re_serialized_payload_byte_exact": true,
+    "all_paid_factors_and_angles_in_payload": true,
+    "payload_bytes": {
+      "mirror_shared_base_private_boundary": 3137,
+      "pa35_shared_sequence_basis": 4802
+    },
+    "logical_expanded_cache_bytes": 8192,
+    "peak_stream_workspace_bytes": 1024
+  },
+  "metric_replay": {
+    "fresh_rows_replayed": 15,
+    "serialized_bytes_compute_and_workspace_exact": true,
+    "max_normalized_mse_difference": 0.0
+  },
+  "fresh_summary": {
+    "mirror_mse": [
+      1.8686830032802613e-14,
+      1.0767771915080423e-14,
+      1.3009236720008504e-14
+    ],
+    "pa35_mse": [
+      1.9418387674207673e-14,
+      1.6356733353446696e-14,
+      2.382668505881293e-14
+    ],
+    "mirror_decode_macs": 16384,
+    "pa35_decode_macs": 8192,
+    "mirror_mean_decode_attention_seconds": 0.00025529466650671867,
+    "pa35_mean_decode_attention_seconds": 0.00020540599992576367
+  },
+  "invalidated_exploratory_runs": [
+    {
+      "seeds": [
+        33011,
+        33012,
+        33013
+      ],
+      "reason": "PA35 implementation initially shared one basis across the unrelated private roles, weakening the native control; results superseded after fixing the control."
+    },
+    {
+      "seeds": [
+        33021,
+        33022,
+        33023
+      ],
+      "reason": "A subsequent exploratory run used a stale seed list, and the wall timer excluded reconstruction; results superseded by fresh seeds 33031-33033 and decode-inclusive timing."
+    }
+  ],
+  "selection_provenance": {
+    "pool_ids_file": "source/selection_pool.csv",
+    "pool_file_sha256": "af35cac199e81324b168a9dd22535aeed51399ac8af60bbfada60945d9a6afa0",
+    "prior_draw_recorded_hash": "8e13b9eb084b546a3a4ebdde5b0ba589b27854ba1aa5374982d1609f0ab79633",
+    "discrepancy": "The reconstructed saved pool file hash does not match the earlier pre-work recorded fingerprint; membership count and selected index are recorded, and discrepancy is unresolved."
+  },
+  "environment": {
+    "python_numpy": "numpy 2.3.5",
+    "device": "CPU only",
+    "torch": "not installed"
+  },
+  "claim_boundary": [
+    "Synthetic aligned tensor screen only.",
+    "Mirror angles are supplied task metadata and paid, not learned.",
+    "No LM/NLL, GPU, cache bandwidth, natural cache distribution, or fixed-byte capacity claim."
+  ]
+}

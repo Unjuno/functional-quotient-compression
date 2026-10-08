@@ -6,11 +6,11 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 995-row registry)
 
 - Registered candidates: **995**
-- P0: **501** (35 completed; 466 UNTESTED)
+- P0: **501** (36 completed; 465 UNTESTED)
 - P1: **391** (12 completed; 379 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **948 UNTESTED, 29 PROMISING, 18 FAIL**
-- 47 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
+- Current MA statuses: **947 UNTESTED, 30 PROMISING, 18 FAIL**
+- 48 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
 - PROMISING is **not** ADOPTED. Treat reports with strict-gate misses or exploratory protocol deviations at their documented scope.
@@ -18,7 +18,7 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-255 — Mirror context superposition for task models (P0; PA16)**
+Next selection follows the worker random-draw policy recorded in `WORKER_QUEUE.md`; MA-255 is not chosen by linear order.
 
 Reason:
 - all previously locked MA-241/244/245/247–251/253 and subsequent old-chain P0 screens have completed;
@@ -63,3 +63,7 @@ Additional Mirror m insertion targets: neural video chunk sharing (NerVast/DCVC-
 - `CLAIM_LEDGER.csv` and each experiment's `VERIFICATION.json` are the evidence index; `STATUS_BOARD.md` is an operational cache.
 - Before allocating an ID or starting work, re-read the live registry and search for experiment branches.
 - Preserve old branches, failed results, exploratory data and locked protocols. No automatic merge to main.
+
+## MA-330 randomized worker result — 2026-10-08
+
+MA-330 passed its preregistered synthetic mechanism gate at rank 4: 3/3 fresh seeds matched PA35 shared-sequence-basis attention quality within numerical tolerance, using 3,137 serialized bytes vs 4,802 (34.7% fewer); Mirror reconstruction MACs were 2x and CPU decode+attention was slower in this tiny benchmark. Supplied rotation angles were charged. No natural-language/cache-bandwidth claim. Selection pool fingerprint discrepancy is retained in its protocol.
