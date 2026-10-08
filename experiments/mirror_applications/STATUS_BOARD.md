@@ -1,15 +1,16 @@
 # Mirror Application Status Board
 
 Updated: 2026-10-08 JST
-Canonical branch: `research/mirror-application-worker-ready-20261007`
+Canonical WORKER branch (not changed): `research/mirror-application-worker-ready-20261007`
+Isolated proposal branch ONLY: `research/mirror-isolated-gauge-cache-protocols-20261008`
 
 ## Program totals (reconciled from authoritative 1115-row registry)
 
-- Registered candidates: **1115**
-- P0: **597** (35 completed; 562 UNTESTED)
-- P1: **415** (12 completed; 403 UNTESTED)
+- Registered candidates: **1123**
+- P0: **602** (35 completed; 567 UNTESTED)
+- P1: **418** (12 completed; 406 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1068 UNTESTED, 29 PROMISING, 18 FAIL**
+- Current MA statuses: **1076 UNTESTED, 29 PROMISING, 18 FAIL**
 - 47 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -85,3 +86,8 @@ Existing methods **Compress then Serve, CtM, EigenLoRAx, MetaTT, GLoRA, LRAgent 
 - `CLAIM_LEDGER.csv` and each experiment's `VERIFICATION.json` are the evidence index; `STATUS_BOARD.md` is an operational cache.
 - Before allocating an ID or starting work, re-read the live registry and search for experiment branches.
 - Preserve old branches, failed results, exploratory data and locked protocols. No automatic merge to main.
+
+
+## Isolated proposal-only supplement (2026-10-08)
+
+This section applies **only to the independent branch** `research/mirror-isolated-gauge-cache-protocols-20261008`, not the worker branch. MA-1116..1123 and PA382..390 are research plans, all UNTESTED, not worker claims. Their 8 entries are counted in this branch's 1123 rows; verified experiment results (29 PROMISING/18 FAIL) are unchanged. The worker queue and next MA-255 are unchanged. Detailed standalone plans: [isolated review](experiments/mirror_applications/research_intake/isolated_geometry_20261008/README.md). Before merging/cherry-picking, reconcile current branch max MA ID and renumber collisions.

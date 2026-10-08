@@ -1,0 +1,66 @@
+{
+  "experiment_id": "MA-1121",
+  "title": "GVA head-reconstruction Mirror code bank",
+  "status": "UNTESTED",
+  "plan_only": true,
+  "evidence_lane": "MECHANISM",
+  "isolated_research_branch": "research/mirror-isolated-gauge-cache-protocols-20261008",
+  "baseline_sha": "407ca7e2047326d1e4b753e55e05c4730f26f32b",
+  "plan_review_date": "2026-10-08",
+  "hypothesis": "At fixed training tokens and matched native GVA architecture, a structured head-m bank reduces all inference reconstruction state by >=15% while keeping NLL within +0.02 nats/token and P95 decode latency <=1.10 native GVA.",
+  "physical_object": "one GVA grouped-V and decoupled positional-key cache with shared reconstruction basis",
+  "mirror_coordinate": "head/role m selecting a compact content-key reconstruction map",
+  "logical_multiplicity": "logical query-head key functions over the same grouped cached V stream",
+  "prior_art_refs": [
+    "PA385",
+    "PA115",
+    "PA156"
+  ],
+  "closest_controls": "native GVA full M_h / GVA low-rank M_h / GQA / MLA",
+  "requirements": {
+    "native": "Reproduce a 2-group 4-head tiny GVA block with separate position key and full per-head matrix M_h, plus GQA/MLA and low-rank GVA map controls. If GVA author kernels/checkpoint unavailable, report proxy reproduction and do not claim paper speedups.",
+    "insertion": "Parameterize content key reconstruction M_h(m)=M_shared+sum_i m_hi B_i with small head m; use q'=q M_h(m)^T at inference instead of materializing K. The positional RoPE key stays separate. Include shared basis, m vectors and query-side transform compute.",
+    "method": "Use shape-conformant tensors V_cache[b,t,g,dv], q[b,t,h,dk], M_h[dv,dk]. Compute scores both explicitly with reconstructed content keys and via absorbed query; their max difference in float64 must be <1e-9 on a deterministic toy fixture. Sweep k=2,4,8 against full M and LoRA rank-matched maps. Verify GVA content/position channels never get incorrectly fused.",
+    "fixture": "Synthetic attention retrieval (copy and multi-query matching) with length 64/128, d_model=64, H=4, grouped V G=2, position channel=16, fixed optimizer steps=2000 per model and identical training examples; a tiny word-level LM lane is secondary and must be labeled.",
+    "hardware": "Stage 1 CPU float64 exact algebra and PyTorch float32 8M-style tiny LM; Stage 2 optional CUDA GPU with batch 1 and 8, context length 128 and 512, warmup and 100 repeated isolated steps, report GPU type/clock."
+  },
+  "split": {
+    "development": {
+      "seeds": [
+        11,
+        12,
+        13
+      ],
+      "allowed": "select code dimension, LR, stop condition only"
+    },
+    "fresh": {
+      "seeds": [
+        101,
+        102,
+        103,
+        104,
+        105
+      ],
+      "locked_before_access": true
+    },
+    "disjoint_task_identities": true,
+    "no_target_oracle_deltas": true
+  },
+  "resources": {
+    "storage": "actual serialized inference payload; count basis/router/m/indices/normalization/metadata",
+    "compute": "training examples and updates, FLOPs or MACs, CPU/GPU P50/P95 with batch/dtype/hardware",
+    "quality": "NLL/retrieval accuracy, serialized basis+head m bytes, physical cache scalars/bytes and allocator stats, attention score error, FLOPs/step, isolated CPU P50/P95 and optional GPU decode."
+  },
+  "gates": {
+    "PASS": "All 5 fresh seeds <=+0.02 nats/token vs matched native full-GVA, >=15% reconstruction-state bytes saved (not double count baseline cache), and P95 decode <=1.10 GVA. End-to-end claims require a real decode kernel, not eager PyTorch alone.",
+    "FAIL": "Byte-near native GVA low-rank control matches or beats quality/runtime, nonmatching attention scores, or basis+code overhead erases reconstruction savings.",
+    "UNCERTAIN": "Missing strong control, uncertain precision, insufficient heldout data, unmeasured runtime or CI overlap"
+  },
+  "alternative": "Native full M can be too cheap relative to basis metadata; GVA baseline already eliminates persistent content-key cache, leaving little marginal Mirror opportunity.",
+  "uncertainty": "Kernel and hardware dependence, eager-vs-fused query transform, RoPE position provenance, model training variance. Report CPU and GPU separately, seeds=5.",
+  "stopping": "Stop after 3 dev seeds then 5 fresh worlds; if cheap mechanism fails predeclared gate, record negative and do not tune fresh. Hardware unavailable => BLOCKED (not PASS).",
+  "prior_art_delta": "Compress multiple GVA head-specific M_h maps with small Mirror codes and quantify incremental gain beyond native GVA; query-side absorption itself belongs to GVA.",
+  "limitations": "GVA's query absorption and value caching are established prior art; Mirror claim is only the marginal head-map parameterization.",
+  "result_files_present": false,
+  "worker_claim": false
+}

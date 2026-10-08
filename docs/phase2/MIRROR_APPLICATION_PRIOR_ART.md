@@ -3473,3 +3473,93 @@ Connects regularized fine-tuning dynamics to linearized neural tangent kernel re
 
 **Mirror implication:** For Mirror m learned near pretrained theta, estimate functional Jacobian/NTK spectrum and local linearization error as an additional test beyond weight-delta rank.
 
+## PA382 — Complete Characterization of Gauge Symmetries in Transformer Architectures
+
+**Complete Characterization of Gauge Symmetries in Transformer Architectures**  
+Hong Wang, Kelly Wang. PMLR 282 (2026).  
+https://proceedings.mlr.press/v282/wang26a.html
+
+**Established prior:** Determines canonical MHA Q/K and V/output head-wise gauge groups, including RoPE commutant restrictions and head permutations. Exact gauge actions preserve function. The proposed Mirror insertion must not claim these invariances as new logical functions.
+
+**Worker-ready note:** The isolated plan README states the implementation and direct control; verify the above original source before any real-paper reproduction claim.
+
+## PA383 — Gauge Fiber Bundle Geometry of Transformers
+
+**Gauge Fiber Bundle Geometry of Transformers**  
+Hong Wang, Kelly Wang. PMLR 282 (2026).  
+https://proceedings.mlr.press/v282/wang26b.html
+
+**Established prior:** Studies quotient geometry, Ehresmann connection, gauge gradient split, curvature and holonomy. Prior art for horizontal and path-dependent diagnostics; Mirror-specific claim must be incremental m utility.
+
+**Worker-ready note:** The isolated plan README states the implementation and direct control; verify the above original source before any real-paper reproduction claim.
+
+## PA384 — Curvature Meets Bispectrum: A Correspondence Theory for Transformer Gauge Invariants
+
+**Curvature Meets Bispectrum: A Correspondence Theory for Transformer Gauge Invariants**  
+Hong Wang, Kelly Wang. PMLR 282 (2026).  
+https://proceedings.mlr.press/v282/wang26c.html
+
+**Established prior:** Relates gauge-aware geometry and bispectral invariant signatures for equivalence diagnosis. Native invariant comparison is a strong control, not a new Mirror operator.
+
+**Worker-ready note:** The isolated plan README states the implementation and direct control; verify the above original source before any real-paper reproduction claim.
+
+## PA385 — Grouped Value Attention: Efficient KV Caching via On-Demand Key Reconstruction
+
+**Grouped Value Attention: Efficient KV Caching via On-Demand Key Reconstruction**  
+Vishesh Tripathi, Abhay Kumar, Ramsha Khan. arXiv:2609.13285 (2026 preprint).  
+https://arxiv.org/abs/2609.13285
+
+**Established prior:** Reconstructs head content keys from grouped values with an absorbable query-side map and separately cached position key. Mirror can only claim extra gain from compact per-head/readout m or safe role sharing; paper itself does not establish end-to-end kernel throughput gains.
+
+**Worker-ready note:** The isolated plan README states the implementation and direct control; verify the above original source before any real-paper reproduction claim.
+
+## PA386 — Permutation Equivariant Neural Functionals
+
+**Permutation Equivariant Neural Functionals**  
+Allan Zhou et al.. NeurIPS 2023; arXiv:2302.14040.  
+https://arxiv.org/abs/2302.14040
+
+**Established prior:** Neural functionals processing weights/gradients equivariantly under neuron permutations. This symmetry-aware encoding is established; compare functional m output to native weight-space models.
+
+**Worker-ready note:** The isolated plan README states the implementation and direct control; verify the above original source before any real-paper reproduction claim.
+
+## PA387 — Universal Neural Functionals
+
+**Universal Neural Functionals**  
+Allan Zhou, Chelsea Finn, James Harrison. NeurIPS 2024; DOI 10.52202/079017-3326.  
+https://proceedings.neurips.cc/paper_files/paper/2024/hash/bd20595c8e5802ba40ed418f4ec116f0-Abstract-Conference.html
+
+**Established prior:** Builds permutation-equivariant neural functionals for general weight spaces, including learned optimizers. m code generation must beat ordinary UNF + cheap native adapter at counted generator bytes.
+
+**Worker-ready note:** The isolated plan README states the implementation and direct control; verify the above original source before any real-paper reproduction claim.
+
+## PA388 — The Geometry of Sequential Learning: Lie-Bracket Prediction of Transfer Order
+
+**The Geometry of Sequential Learning: Lie-Bracket Prediction of Transfer Order**  
+John Sweeney. ICML 2026; PMLR 306.  
+https://proceedings.mlr.press/v306/sweeney26a.html
+
+**Established prior:** Relates order-dependent sequential learning to computable gradient Lie brackets. Bracket-based sequencing is prior art; proposed Mirror insertion tests factorized code composition rather than claiming the Lie bracket.
+
+**Worker-ready note:** The isolated plan README states the implementation and direct control; verify the above original source before any real-paper reproduction claim.
+
+## PA389 — First-Order Predictable but Pairwise Fragile: Local Task Adaptation in Trained Transformers
+
+**First-Order Predictable but Pairwise Fragile: Local Task Adaptation in Trained Transformers**  
+Irina Piontkovskaia, Sergey Nikolenko. arXiv:2607.16821 (2026 preprint).  
+https://arxiv.org/abs/2607.16821
+
+**Established prior:** Reports order-sensitive pairs and fragile local task arithmetic in trained Transformers. Requires heldout pair, step-size and gauge audits; an optimistic global composition radius is not assumed.
+
+**Worker-ready note:** The isolated plan README states the implementation and direct control; verify the above original source before any real-paper reproduction claim.
+
+## PA390 — Platonic Task Arithmetic
+
+**Platonic Task Arithmetic**  
+Junghwan Park, Woojin Cho. arXiv:2610.00929 (2026 preprint).  
+https://arxiv.org/abs/2610.00929
+
+**Established prior:** Proposes architecture-agnostic task descriptors and cross-model arithmetic/transfer via functional probes. Multi-model descriptor sharing is native; the Mirror delta is extra code-bank compression or cheaper factorized task x model state.
+
+**Worker-ready note:** The isolated plan README states the implementation and direct control; verify the above original source before any real-paper reproduction claim.
+

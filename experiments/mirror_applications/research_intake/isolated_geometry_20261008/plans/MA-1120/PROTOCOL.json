@@ -1,0 +1,67 @@
+{
+  "experiment_id": "MA-1120",
+  "title": "Lie-bracket controlled noncommuting Mirror composition",
+  "status": "UNTESTED",
+  "plan_only": true,
+  "evidence_lane": "MECHANISM",
+  "isolated_research_branch": "research/mirror-isolated-gauge-cache-protocols-20261008",
+  "baseline_sha": "407ca7e2047326d1e4b753e55e05c4730f26f32b",
+  "plan_review_date": "2026-10-08",
+  "hypothesis": "For unseen ordered pairs (A,B) and (B,A), a commutator-aware m composition lowers mean held-out pair loss by >=2% relative to native additive composition at matched bytes and by >=1% vs a byte-near ordinary ordered adapter, with at most 10% extra P95 latency.",
+  "physical_object": "one shared task-update matrix basis or function block",
+  "mirror_coordinate": "two cheap task codes m_A and m_B with an explicit order bit or Lie-bracket correction",
+  "logical_multiplicity": "ordered composite behaviors from factor codes without a per-ordered-pair trained adapter",
+  "prior_art_refs": [
+    "PA388",
+    "PA389",
+    "PA375",
+    "PA16"
+  ],
+  "closest_controls": "additive Task Arithmetic / native sequential gradient updates / full matrix products / MA-257",
+  "requirements": {
+    "native": "Train native additive task-vector composition and ordinary sequential A->B versus B->A updates. Include full small-matrix product, independent ordered-pair adapter as upper bound (not for hyperparameter search), and MA-257 factorized group-code comparison.",
+    "insertion": "Before a shared block, decode two small task codes into structured operators and compose in order; optional single rank-corrected Lie bracket term is stored in a shared basis. Store the order bit, operator basis and any cached products.",
+    "method": "Start with bounded noncommuting 2D/4D rotations/shears as a synthetic teacher, then learned tasks. Compute AB, BA and additive controls with identical active matmul count when possible; on fixed task-gradient fields estimate bracket via paired Hessian-vector products only from training support. Lock a heldout ordered-pair split; forbid fitting pair-specific m.",
+    "fixture": "Four source primitive skills and six held-out ordered 2-skill combinations, each with disjoint support/dev/audit sequences; include commuting counterexamples where expected advantage is zero; d=32 shared two-layer MLP/attention.",
+    "hardware": "Stage 1 CPU float64 algebra tests and float32 PyTorch training; stage 2 1 GPU for language-style tasks only after mechanism screen."
+  },
+  "split": {
+    "development": {
+      "seeds": [
+        11,
+        12,
+        13
+      ],
+      "allowed": "select code dimension, LR, stop condition only"
+    },
+    "fresh": {
+      "seeds": [
+        101,
+        102,
+        103,
+        104,
+        105
+      ],
+      "locked_before_access": true
+    },
+    "disjoint_task_identities": true,
+    "no_target_oracle_deltas": true
+  },
+  "resources": {
+    "storage": "actual serialized inference payload; count basis/router/m/indices/normalization/metadata",
+    "compute": "training examples and updates, FLOPs or MACs, CPU/GPU P50/P95 with batch/dtype/hardware",
+    "quality": "Heldout pair CE, direction/order confusion rate, primitive-task retention, bytes incl ordering metadata, active multiplies and P95 CPU/GPU latency."
+  },
+  "gates": {
+    "PASS": "Across five fresh seeds, median held-out ordered-pair CE improves by >=2% vs additive and >=1% vs best cheap ordered non-Mirror control, persistent bytes <= control, P95 <=1.10 control, and no held-out pair task training leaked.",
+    "FAIL": "Improvements vanish against native ordered product, any pair-specific trained model is secretly present, or commuting tasks show artificial order benefit indicating leakage.",
+    "UNCERTAIN": "Missing strong control, uncertain precision, insufficient heldout data, unmeasured runtime or CI overlap"
+  },
+  "alternative": "Order effects may be too weak or native matrix multiplication already optimal; extra bracket correction may overfit and cost more than a simple ordered adapter.",
+  "uncertainty": "HVP finite precision, optimizer step size, higher-order truncation, order-label correlation, task-seed variance; evaluate four step scales on dev and bootstrap by ordered pair.",
+  "stopping": "Stop after 3 dev seeds then 5 fresh worlds; if cheap mechanism fails predeclared gate, record negative and do not tune fresh. Hardware unavailable => BLOCKED (not PASS).",
+  "prior_art_delta": "Predict or correct order-dependent functional interaction using small Mirror commutator information, not mere Cartesian code combination already in MA-257.",
+  "limitations": "An order bit does not create independent expert capacity; report unique target functions and the true number of independently trained primitive tasks.",
+  "result_files_present": false,
+  "worker_claim": false
+}

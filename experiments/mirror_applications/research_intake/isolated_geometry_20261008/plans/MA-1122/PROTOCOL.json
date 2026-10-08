@@ -1,0 +1,67 @@
+{
+  "experiment_id": "MA-1122",
+  "title": "GVA physical cache alias on Mirror role switches",
+  "status": "UNTESTED",
+  "plan_only": true,
+  "evidence_lane": "MECHANISM",
+  "isolated_research_branch": "research/mirror-isolated-gauge-cache-protocols-20261008",
+  "baseline_sha": "407ca7e2047326d1e4b753e55e05c4730f26f32b",
+  "plan_review_date": "2026-10-08",
+  "hypothesis": "For a verified identical prefill trajectory with readout-only role m, 2 or 4 logical role switches preserve target logits within float32 atol=1e-4 and reuse a single physical cache allocation, while reducing combined resident-prefix bytes >=25% versus native per-role copies with P95 switch <=1.10 native GVA readout-switch control.",
+  "physical_object": "one physically aliased grouped-V and positional-key prefix cache",
+  "mirror_coordinate": "small readout m switched between compatible GVA attention roles without rebuilding prefix",
+  "logical_multiplicity": "multiple logical role/readout functions reusing the same prefix tensors",
+  "prior_art_refs": [
+    "PA385",
+    "PA364",
+    "PA365",
+    "PA156"
+  ],
+  "closest_controls": "native GVA role switch / eager copies / target re-prefill / MA-691 alias",
+  "requirements": {
+    "native": "Build native GVA prefix once. Compare zero-switch, per-role copied caches, native per-role full GVA M_h without m, lazy algebraic transform, re-prefill, and proposed structured readout m. Do not compare to a purposefully inefficient memcpy-only strawman as the main control.",
+    "insertion": "Change only the query-side reconstruction/readout code m after a frozen prefix; physically alias the exact V_cache/Kpos buffers. If m also changes past hidden activations, mark prefix INCOMPATIBLE and re-prefill; do not translate without a separately verified mapper.",
+    "method": "In 4-head 2-group GVA, construct three switch conditions: (A) identical prefix content/weights with readout-only m (exactly safe), (B) compatible invertible readout changes with explicit conjugation/commutant check, (C) upstream attention weights changed during prefill (unsafe). Trace data_ptr and allocator counts, tensor lifetime/refcounts and copy-on-write; compare each target to true target re-prefill. Include batch fork/cold/warm cache and RoPE offset changes.",
+    "fixture": "Frozen tiny decoder with deterministic 128/256 token prefixes and switch at 32/64/128 tokens, 2 and 4 roles, heldout source prompts. No training is needed for algebraic case; a separately pretrained tiny GVA is required for learned-role quality.",
+    "hardware": "Stage 1 CPU PyTorch contiguous tensor pointers and byte storage; optional CUDA GPU for actual VRAM `max_memory_allocated` with explicit synchronize, report device, dtype, batch and context."
+  },
+  "split": {
+    "development": {
+      "seeds": [
+        11,
+        12,
+        13
+      ],
+      "allowed": "select code dimension, LR, stop condition only"
+    },
+    "fresh": {
+      "seeds": [
+        101,
+        102,
+        103,
+        104,
+        105
+      ],
+      "locked_before_access": true
+    },
+    "disjoint_task_identities": true,
+    "no_target_oracle_deltas": true
+  },
+  "resources": {
+    "storage": "actual serialized inference payload; count basis/router/m/indices/normalization/metadata",
+    "compute": "training examples and updates, FLOPs or MACs, CPU/GPU P50/P95 with batch/dtype/hardware",
+    "quality": "Exact target logits/NLL, heap/VRAM allocation and alias pointers, prefix bytes, TTFT, 50/95/99% switching time, synchronization, additional FLOPs, prefill copies, buffer fork counts."
+  },
+  "gates": {
+    "PASS": "All five fresh prompt seeds case A and B meet target-logit atol=1e-4 float32 and actual alias equality with no prefix copies; vs real independent per-role caches physical bytes <=0.75 and measured P95 switch <=1.10 native GVA role-read baseline. Case C MUST be detected as unsafe, not counted as shared.",
+    "FAIL": "Case C incorrectly declared safe, any prefix copy called alias, quality drift exceeds tolerance in case A, or native GVA readout handles switches equally well at lower memory/latency.",
+    "UNCERTAIN": "Missing strong control, uncertain precision, insufficient heldout data, unmeasured runtime or CI overlap"
+  },
+  "alternative": "Exact algebra at an attention readout does not imply cache equivalence after different upstream hidden states; native GVA with shared heads may already provide the same alias.",
+  "uncertainty": "Allocator caching and tensor view alias semantics, async GPU timing synchronization, RoPE offset and token provenance, copy-on-write, model training differences; log device allocator behavior and confidence interval over prompts.",
+  "stopping": "Stop after 3 dev seeds then 5 fresh worlds; if cheap mechanism fails predeclared gate, record negative and do not tune fresh. Hardware unavailable => BLOCKED (not PASS).",
+  "prior_art_delta": "Separate algebraic query-side readout switching from physically shared cache and show precisely when a changed upstream hidden trajectory invalidates the prefix.",
+  "limitations": "Never extrapolate from identical-prefix readout-only compatibility to cross-model or independently generated prefixes.",
+  "result_files_present": false,
+  "worker_claim": false
+}

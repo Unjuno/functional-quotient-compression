@@ -1,0 +1,66 @@
+{
+  "experiment_id": "MA-1117",
+  "title": "Holonomy-robust Mirror code transport",
+  "status": "UNTESTED",
+  "plan_only": true,
+  "evidence_lane": "MECHANISM",
+  "isolated_research_branch": "research/mirror-isolated-gauge-cache-protocols-20261008",
+  "baseline_sha": "407ca7e2047326d1e4b753e55e05c4730f26f32b",
+  "plan_review_date": "2026-10-08",
+  "hypothesis": "On a frozen sequence of chart changes, transported Mirror codes reduce same-function code drift by >=25% median versus direct code carryover and native Procrustes, without worsening target function loss by >0.01 nats/token or raising serialized inference state >10%.",
+  "physical_object": "one pretrained attention model and shared Mirror basis transported between equivalent parameter charts",
+  "mirror_coordinate": "chart-specific m corrected by a cheap transport address",
+  "logical_multiplicity": "stable reusable task m across equivalent optimization/gauge histories",
+  "prior_art_refs": [
+    "PA383",
+    "PA382",
+    "PA367"
+  ],
+  "closest_controls": "no transport / orthogonal Procrustes / direct native re-fit / gauge-aware optimizer",
+  "requirements": {
+    "native": "Implement standard code re-fitting or Procrustes alignment between weight-basis charts using a fixed calibration split and equal adaptation steps.",
+    "insertion": "At each optimizer/chart transition, calculate a source-only transport matrix for the small m code or its tangent basis. Keep shared weights and code function fixed; do not declare the resulting gauge difference a new function.",
+    "method": "First use a closed exact change-of-basis loop G1,G2,G2^{-1},G1^{-1} and verify final parameter product is identity; this is a gauge-safety unit test, NOT a holonomy demonstration. Then use a small rectangular horizontal parameter-update loop and estimate connection-based transport plus a separate gauge-normalization step. Log path dependence and whether the induced code correction preserves predictions; report connection definition and discretization error.",
+    "fixture": "Two-head d=16 attention, 6 source chart trajectories and 4 unseen loop trajectories of 4 or 8 small update segments, lengths fixed before audit. Use one frozen teacher objective with separate probe inputs and held-out examples.",
+    "hardware": "Stage 1 CPU float64 NumPy/PyTorch; no pretrained large language model required. Stage 2 CUDA only for a separately approved small-transformer transfer test."
+  },
+  "split": {
+    "development": {
+      "seeds": [
+        11,
+        12,
+        13
+      ],
+      "allowed": "select code dimension, LR, stop condition only"
+    },
+    "fresh": {
+      "seeds": [
+        101,
+        102,
+        103,
+        104,
+        105
+      ],
+      "locked_before_access": true
+    },
+    "disjoint_task_identities": true,
+    "no_target_oracle_deltas": true
+  },
+  "resources": {
+    "storage": "actual serialized inference payload; count basis/router/m/indices/normalization/metadata",
+    "compute": "training examples and updates, FLOPs or MACs, CPU/GPU P50/P95 with batch/dtype/hardware",
+    "quality": "Relative code drift after cycle, maximum function/logit discrepancy, NLL retention, fit steps to restore code, code/transport bytes, matrix conditioning and update-loop area."
+  },
+  "gates": {
+    "PASS": "At least 4/5 fresh seeds show >=25% lower code drift than best native alignment, no excess NLL >0.01, and all persistent transport bytes <=1.10 best control; any claimed m reuse also meets equal-input prediction check.",
+    "FAIL": "Correct exact closed gauge loop alone appears to create new function; transport loses accuracy or uses more bytes without sample-efficiency gain; Procrustes alone matches.",
+    "UNCERTAIN": "Missing strong control, uncertain precision, insufficient heldout data, unmeasured runtime or CI overlap"
+  },
+  "alternative": "Nontrivial holonomy lives in coordinate transport, not newly distinguishable functions; computation may overwhelm storage savings.",
+  "uncertainty": "Discrete connection approximation, floating point, ill-conditioned charts, path length and loop area; estimate errors across 5 seeds and two step-size grids.",
+  "stopping": "Stop after 3 dev seeds then 5 fresh worlds; if cheap mechanism fails predeclared gate, record negative and do not tune fresh. Hardware unavailable => BLOCKED (not PASS).",
+  "prior_art_delta": "Test whether cheap m transport suppresses spurious gauge drift during repeated reuse, beyond static gauge audits; holonomy itself is not new functional multiplicity.",
+  "limitations": "Does not claim holonomy itself represents a new task or that gauge loops guarantee useful memory savings.",
+  "result_files_present": false,
+  "worker_claim": false
+}
