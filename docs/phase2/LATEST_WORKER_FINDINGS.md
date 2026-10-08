@@ -11,7 +11,9 @@ Read `experiments/mirror_applications/STATUS_BOARD.md` and `docs/phase2/MIRROR_M
 
 MA-255 is reconciled as **PROMISING only for a post-fit aligned representation screen**: 734B Mirror state reached 6.68e-17 fresh MSE across seeds 101/211/307/401, versus 6,490B implemented PSP, 14,650B rank-2 task code and 27,906B independent. A different 1,200-update protocol variant failed its development quality gate and stayed sealed on fresh worlds. The two protocols are retained separately and are not a replication pair; see `experiments/mirror_applications/ma-255-mirror-context-superposition/RECONCILIATION.md`.
 
-**The next candidate is MA-260.** MA-876..1115 remain appended research-intake hypotheses and must not preempt the registered P0 crossovers. Natural variation and benchmark-level runtime remain unproven; aligned synthetic PROMISING must not be described as real-world Mirror adoption.
+MA-260 is **FAIL** for its registered byte gate: the four-seed aligned case used 890B versus 1,226B BatchEnsemble (27.4% saving, below the required 75%); the independent-task stress case fell to 0.6018 accuracy versus 0.8332 controls. This was a post-fit one-layer linear screen, not a deep BatchEnsemble reproduction. See `experiments/mirror_applications/ma-260-batchensemble-mirror/README.md`.
+
+**The next candidate is MA-261.** MA-876..1115 remain appended research-intake hypotheses and must not preempt the registered P0 crossovers. Natural variation and benchmark-level runtime remain unproven; aligned synthetic PROMISING must not be described as real-world Mirror adoption.
 
 ## MA-241 — layer-specific Mirror views over tied experts
 
