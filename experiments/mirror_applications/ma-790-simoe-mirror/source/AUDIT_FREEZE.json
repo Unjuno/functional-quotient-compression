@@ -1,0 +1,27 @@
+{
+  "experiment_id": "MA-790",
+  "phase": "pre_audit_freeze",
+  "model_code_commit": "6c83493",
+  "protocol_commit": "a85411e plus amendments through 6c83493",
+  "development_metrics_sha256": "ce24da57a9cb4cdf22901ceab125efca604b6c3319e9f2dad52df0ea6d0f8a5a",
+  "development_metrics_rows": 576,
+  "world_seeds": [
+    11,
+    23,
+    37
+  ],
+  "model_init_seeds": [
+    31,
+    47,
+    59
+  ],
+  "max_updates": 2000,
+  "methods": [
+    "native_simoe",
+    "mirror_factorized",
+    "ordinary_low_rank",
+    "no_code"
+  ],
+  "audit_pairs_opened": false,
+  "selection_rule": "Model checkpoints selected from even-parity development MSE only. No architecture, optimizer, factor rank, sparsity, or gate was changed after development results."
+}
