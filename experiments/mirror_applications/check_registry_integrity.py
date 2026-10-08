@@ -25,8 +25,8 @@ PRIOR_ART = ROOT / "docs" / "phase2" / "MIRROR_APPLICATION_PRIOR_ART.md"
 MA_ID = re.compile(r"^MA-([0-9]{3,})$")
 PA_HEADING = re.compile(r"^## PA([0-9]+)\b", re.MULTILINE)
 PA_REF = re.compile(r"PA([0-9]+)")
-STATUS_ALLOWED = {"UNTESTED", "SCREENING", "PROMISING", "FAIL", "REPLICATED", "ADOPTED"}
-FINISHED = {"PROMISING", "FAIL", "REPLICATED", "ADOPTED"}
+STATUS_ALLOWED = {"UNTESTED", "SCREENING", "PROMISING", "FAIL", "REPLICATED", "ADOPTED", "NOT ESTABLISHED"}
+FINISHED = {"PROMISING", "FAIL", "REPLICATED", "ADOPTED", "NOT ESTABLISHED"}
 REQUIRED = {
     "id", "family", "proposal", "shared_object", "mirror_coordinate",
     "logical_multiplicity", "cheapest_control", "first_metric", "priority",

@@ -457,3 +457,8 @@ A worker may batch implementation work across a family, but scientific status is
 ## Stop rule
 
 If two consecutive candidates in a family fail for the same demonstrated structural reason, stop that family and write a family diagnostic before continuing.
+
+
+## Live branch reconciliation — 2026-10-08
+
+The 1155-row worker-ready registry was reconciled against fetched `origin/research/ma-*` branches. See `LIVE_BRANCH_RECONCILIATION.csv` and `.md`. MA-255 through MA-399 outcomes and later direct branches through MA-399 are linked there; MA-325 is NOT ESTABLISHED because the frozen task was not learnable even by its independent upper control. MA-369/371/372 remain paused under the documented family stop rule. MA-401 (PA63) has since completed its development screen as FAIL: aligned quality/FiLM bytes passed, but CPU runtime and strict independent-byte gates missed; fresh remained sealed. The next untested P0 without a live branch is MA-403 (PA63/PA64). Re-fetch before selection; do not use stale MA-255 queue notes as a current lock.

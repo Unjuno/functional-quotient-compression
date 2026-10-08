@@ -107,3 +107,12 @@ The program is successful when it produces a map, not only wins:
 - how storage, compute, learning speed and quality trade off.
 
 A candidate reaches ADOPTED only after a useful Pareto improvement is replicated and its nearest simple control is beaten.
+
+
+## Measurable completion criterion
+
+Complete a verified, scoped disposition for every candidate registered in `experiments/mirror_applications/IDEA_REGISTRY.csv`. Valid completed dispositions are PROMISING, REPLICATED, ADOPTED, FAIL, or NOT ESTABLISHED; UNTESTED and unexplained SCREENING do not count. The live registry currently has 1,155 candidates.
+
+Each result must identify the native physical object, the exact Mirror insertion point and paid coordinate bytes, quality, active compute, training cost, measured runtime where relevant, private residual needs, strongest native/simple controls, and the scope of any fresh replication. Logical combinations are not independent capacity. ADOPTED requires replicated Pareto improvement; it is not a quota.
+
+At each handoff, re-fetch and reconcile live `research/ma-*` branches before selecting the next untested P0. Preserve branch ownership and negative results; do not run remote CI. MA-401 (PA63) is now a verified development-screen FAIL; the current next candidate is MA-403 (PA63/PA64). The status board and live reconciliation manifest are the operational source of truth.
