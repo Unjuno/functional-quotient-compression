@@ -1,0 +1,151 @@
+{
+  "experiment_id": "MA-397",
+  "commit": "PENDING_COMMIT",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-397-product-address-mirror-vocabulary/tests",
+    "passed": 4,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "payload_count": 10,
+    "payloads": [
+      {
+        "seed": 39701,
+        "method": "full",
+        "bytes": 132244,
+        "sha256": "97d2df1a2e6331aa1a5ded51ba81343ec7814c1cc21d2affdb76133010c730f7",
+        "arrays": [
+          "classifier.bias",
+          "classifier.weight",
+          "embedding"
+        ]
+      },
+      {
+        "seed": 39701,
+        "method": "product",
+        "bytes": 3446,
+        "sha256": "9adbcec1e83c84b5fe2fda7bef45bc1578dc4b73b70a1ee4df511d1c2784bab5",
+        "arrays": [
+          "classifier.bias",
+          "classifier.weight",
+          "left",
+          "right"
+        ]
+      },
+      {
+        "seed": 39701,
+        "method": "scalar",
+        "bytes": 11872,
+        "sha256": "0ffc1a2a690e2f34b08f7357bc6eee69932a2494010893cd9f4bc0697241186a",
+        "arrays": [
+          "classifier.bias",
+          "classifier.weight",
+          "gain",
+          "left",
+          "right"
+        ]
+      },
+      {
+        "seed": 39701,
+        "method": "hash",
+        "bytes": 20076,
+        "sha256": "6768fff13218a79af963a21f8f290b6976add60352cd17e3d5c3ff23dcaf6fc8",
+        "arrays": [
+          "classifier.bias",
+          "classifier.weight",
+          "importance",
+          "left",
+          "right"
+        ]
+      },
+      {
+        "seed": 39701,
+        "method": "mirror",
+        "bytes": 11874,
+        "sha256": "bf137303bf98b88124f8fd5229aa064701c1af184306887eaa51c9a946979087",
+        "arrays": [
+          "angle",
+          "classifier.bias",
+          "classifier.weight",
+          "left",
+          "right"
+        ]
+      },
+      {
+        "seed": 39702,
+        "method": "full",
+        "bytes": 132244,
+        "sha256": "4c8f737bb18197728e691cb6dee38a71bf3e92226193062161044295c993b7d5",
+        "arrays": [
+          "classifier.bias",
+          "classifier.weight",
+          "embedding"
+        ]
+      },
+      {
+        "seed": 39702,
+        "method": "product",
+        "bytes": 3446,
+        "sha256": "0df510ce390e924cc8a6d3fe6ff2a133a109e3ecefdb8f713bc629414e130383",
+        "arrays": [
+          "classifier.bias",
+          "classifier.weight",
+          "left",
+          "right"
+        ]
+      },
+      {
+        "seed": 39702,
+        "method": "scalar",
+        "bytes": 11872,
+        "sha256": "cdff66dd6b3b3686a8f5d12a34efb82f666f129adfa4d8f75a53bbc050f7c600",
+        "arrays": [
+          "classifier.bias",
+          "classifier.weight",
+          "gain",
+          "left",
+          "right"
+        ]
+      },
+      {
+        "seed": 39702,
+        "method": "hash",
+        "bytes": 20076,
+        "sha256": "a22659a27b09e70452aa01e9435e1bf81190671c9d3ac21b965f5648e77ee213",
+        "arrays": [
+          "classifier.bias",
+          "classifier.weight",
+          "importance",
+          "left",
+          "right"
+        ]
+      },
+      {
+        "seed": 39702,
+        "method": "mirror",
+        "bytes": 11874,
+        "sha256": "ad51d8e729f78bb073bf1185dea6a0b5b76b63f16cc4dfb26dac942e1ee2bdf8",
+        "arrays": [
+          "angle",
+          "classifier.bias",
+          "classifier.weight",
+          "left",
+          "right"
+        ]
+      }
+    ],
+    "actual_FP16_payload_bytes_authoritative": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "accuracy_nll_collision_group_metrics_and_unique_vectors_exact": true
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Two development seeds, 5 controls, four token classes deliberately share each product address.",
+    "Mirror matches native two-weight hash quality and passes byte/collision gates; scalar margin gate misses.",
+    "All four collision groups and 4,096 token IDs are measured after serialization reload.",
+    "Fresh seeds 39711, 39712 and 39713 remain unopened."
+  ]
+}
