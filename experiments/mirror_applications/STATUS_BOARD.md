@@ -20,23 +20,15 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 - PROMISING is **not** ADOPTED. Treat reports with strict-gate misses or exploratory protocol deviations at their documented scope.
 - SRM/TM and prior Phase I results are not MA statuses.
 
-## Next candidate
+## Next candidate selection
 
-**MA-255 — Mirror context superposition for task models (P0; PA16)**
+Select a new candidate by a fresh random draw per experiment. Use the latest worker-ready baseline registry, P0/UNTESTED rows, and exclude IDs with existing experiment directories or live remote `research/ma-*` branches. Log seed, pool ordering/hash, size, index, selected row and baseline commit before development/audit access. Do not advance numerically or reserve multiple IDs.
 
-Reason:
-- all previously locked MA-241/244/245/247–251/253 and subsequent old-chain P0 screens have completed;
-- the original P0 cross-over queue is exhausted among checked candidates;
-- MA-255 is the first untested P0 in the earlier high-information literature cross-over queue;
-- direct Parameter Superposition prior art gives a strong nearest control for insertion of the extra Mirror parameter `m`.
-
-Required controls: native Parameter Superposition, naive/shared task-code basis, matched byte-near low-rank or VeRA-style modulation, independent-model upper reference where practical. Do not claim the superposition concept itself as a Mirror invention.
-
-If blocked by a documented reproducibility or harness issue, record it and resume at MA-260 (BatchEnsemble), then MA-261/265/268 in the registered literature priority sequence. Do not jump to P1/novelty-picked topics before P0.
+Draw 5 selected **MA-945 — CoANeRV shared coordinate decoder Mirror code** from 530 eligible rows (seed `482080debf0235a1d1b77470d40a595a2f42fade3b841a45b197e8d92c18e544`, index 398, pool SHA-256 `908156c9b1c2e21c528117abcd34c129e37d52121b0e00b370f48e9a058bb0eb`). See `ma-945-coanerv-mirror-decoder/source/random_draw.json`.
 
 ## Active experiment
 
-No active experiment was declared on either inspected baseline/status chain at reconciliation. Before claiming MA-255, check live research/ma-* branches again; this statement is not a realtime worker lock.
+**MA-945 — CoANeRV shared coordinate decoder Mirror code**, selected by Draw 5 on `research/ma-945-coanerv-mirror-20261008` from baseline `379a9417cb32c9f96c68c779315f90381151eed1`. Protocol is being frozen before development evaluation.
 
 ## Verified status index
 
@@ -81,7 +73,7 @@ Existing methods **Compress then Serve, CtM, EigenLoRAx, MetaTT, GLoRA, LRAgent 
 
 ## Concurrency and truth policy
 
-- The **995-row** `IDEA_REGISTRY.csv` is authoritative for status and candidate identity. Do not merge or overwrite it with an older 254-row experiment checkout.
+- The **1115-row** `IDEA_REGISTRY.csv` is authoritative for status and candidate identity. Do not merge or overwrite it with an older 254-row experiment checkout.
 - `CLAIM_LEDGER.csv` and each experiment's `VERIFICATION.json` are the evidence index; `STATUS_BOARD.md` is an operational cache.
 - Before allocating an ID or starting work, re-read the live registry and search for experiment branches.
 - Preserve old branches, failed results, exploratory data and locked protocols. No automatic merge to main.
