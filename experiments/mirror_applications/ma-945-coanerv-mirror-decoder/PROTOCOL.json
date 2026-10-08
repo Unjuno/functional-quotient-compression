@@ -1,34 +1,148 @@
 {
-  "experiment_id": "MA-XXX",
-  "title": "<short title>",
-  "status": "SCREENING",
-  "evidence_lane": "MECHANISM",
-  "base_commit": "<sha>",
-  "hypothesis": "<falsifiable hypothesis>",
-  "physical_object": "<shared object>",
-  "mirror_coordinate": "<view/address>",
-  "logical_multiplicity": "<what becomes multiple>",
-  "prior_art_refs": [],
-  "controls": [],
+  "experiment_id": "MA-945",
+  "title": "CoANeRV shared coordinate decoder with factorized video/time/region Mirror codes",
+  "status": "FAIL",
+  "evidence_lane": "MECHANISM/STORAGE/COMPUTE/RUNTIME",
+  "base_commit": "379a9417cb32c9f96c68c779315f90381151eed1",
+  "random_selection": {
+    "draw": 5,
+    "pool_size": 530,
+    "pool_sha256": "908156c9b1c2e21c528117abcd34c129e37d52121b0e00b370f48e9a058bb0eb",
+    "seed_hex": "482080debf0235a1d1b77470d40a595a2f42fade3b841a45b197e8d92c18e544",
+    "zero_based_index": 398,
+    "selected_id": "MA-945",
+    "baseline_commit": "379a9417cb32c9f96c68c779315f90381151eed1"
+  },
+  "hypothesis": "For a small video library sharing one CoANeRV-style coordinate-conditioned decoder, a product-factor Mirror code over video x temporal-token-role x spatial-region can replace much of each full per-video token bank while preserving reconstruction quality and query throughput, and can improve the quality/bytes frontier over low-rank or additive token-code controls.",
+  "physical_object": "One shared frozen coordinate-query cross-attention decoder and shared code-generator state; each video is represented by a video-specific token bank or a compact code that generates it.",
+  "mirror_coordinate": "For token slot i=(time_role t, spatial_region r), h_i=(m_video P_v) elementwise-multiplied by (E_t P_t) and (E_r P_r); token T_i=h_i D. Time/region tables and projections are shared; m_video is the per-video code.",
+  "logical_multiplicity": "Per-video continuous RGB video reconstruction functions queried at arbitrary (x,y,t) coordinates; the factor code is evaluated for every video-token slot.",
+  "prior_art_refs": [
+    "PA272"
+  ],
+  "upstream": {
+    "repository": "https://github.com/jialong2023/CoANeRV",
+    "commit": "3afe1122146819d5854eca2376e5c0faabb72818",
+    "paper": "arXiv:2608.13938v1, 2026-08-14",
+    "direct_control": "Paper Appendix A.5 / Table 7: freeze shared coordinate decoder and optimize only each video token bank."
+  },
+  "controls": [
+    "Native CoANeRV decoder-only control: full independent N x d learned token bank per video, shared decoder frozen during per-video fitting.",
+    "Shared low-rank token dictionary control: rank-r code per video over a common learned token-slot basis.",
+    "Additive factor code: video + temporal-role + spatial-region projected embeddings decoded to token vectors.",
+    "Mirror product-factor code, using the same factor tables and code width as additive control.",
+    "Mirror product code plus rank-2 private token residual dictionary."
+  ],
+  "data": {
+    "source": "Xiph/Derf standard Y4M test sequences from https://media.xiph.org/video/derf/y4m/",
+    "decode": "first 8 consecutive frames; center-crop 176x144 QCIF to 144x144 then bicubic resize to 64x64 RGB in [0,1]. Preserve source file SHA-256 and exact Y4M parser/frame offsets.",
+    "shared_decoder_train_clips": [
+      "akiyo_qcif",
+      "coastguard_qcif",
+      "foreman_qcif",
+      "news_qcif"
+    ],
+    "development_adaptation_clips": [
+      "carphone_qcif",
+      "container_qcif"
+    ],
+    "fresh_adaptation_clips_locked": [
+      "salesman_qcif",
+      "silent_qcif",
+      "grandma_qcif"
+    ],
+    "pixel_split": "Within each 8-frame development/fresh clip, deterministic 80% coordinate train / 20% coordinate evaluation split from SHA256(seed, frame, x, y); all times and spatial regions appear in train and evaluation. No frame is fully withheld because native CoANeRV encoder sees the complete clip.",
+    "source_data_license_scope": "Public video test sequences used only for this local research screen; source clips are not committed."
+  },
+  "model": {
+    "decoder": "Reduced CoANeRV coordinate-decoder core: axis-adaptive (x,y,t) Fourier embedding, temperature-scaled cross-attention to video tokens (tau=0.4), and a shared 2-layer RGB MLP. This is not the full convolutional tokenizer/six-layer token former/384x72 paper system.",
+    "frames": 8,
+    "resolution": [
+      64,
+      64
+    ],
+    "token_count": 32,
+    "token_roles": "8 temporal roles x 4 spatial-region roles",
+    "token_dim": 24,
+    "attention_heads": 3,
+    "mlp_hidden_dim": 48,
+    "role_mapping": "Fixed token index order: i=4*t+r, t in 0..7, r in 0..3; spatial regions are the 2x2 image quadrants.",
+    "pretrain_updates": 800,
+    "per_video_code_updates": 600,
+    "batch_coordinates": 256,
+    "optimizer": "Adam, lr=0.001; fixed across methods and seeds; no decay or scheduler.",
+    "mirror_and_additive_ranks": [
+      2,
+      4,
+      8
+    ],
+    "random_threads": 1,
+    "shared_generator_fit_updates": 600,
+    "shared_generator_fit_optimizer": "Adam, lr=0.001, fit against decoder-trained source token banks",
+    "rng_scheme": "torch.manual_seed(base_seed) before shared decoder; seed+100+video_index for source sample RNG; seed+100+rank+method_id for factor generator; seed+500+dev_clip_index+method_id+rank for per-video code initialization; explicit Generator(seed-derived) for coordinate sampling."
+  },
   "development": {
-    "worlds_or_seeds": [],
-    "selection_metric": "<metric>"
+    "base_training_world_seeds": [
+      9451,
+      9452
+    ],
+    "adaptation_world_seeds": [
+      9451,
+      9452
+    ],
+    "clips": [
+      "carphone_qcif",
+      "container_qcif"
+    ],
+    "selection_metric": "All predeclared quality, complete-payload, marginal-code, compute/runtime, and simple-control gates at the best eligible Mirror rank.",
+    "allowed_tuning": "Only Mirror/additive/low-rank rank in {2,4,8}. Training updates, decoder architecture, data split, optimizer, model size, and thresholds are fixed."
   },
   "fresh": {
-    "worlds_or_seeds": [],
-    "locked_before_access": true
+    "world_seeds": [
+      94501,
+      94502
+    ],
+    "clips": [
+      "salesman_qcif",
+      "silent_qcif",
+      "grandma_qcif"
+    ],
+    "locked_before_access": true,
+    "methods": "Selected Mirror rank, full-token native control, byte-near low-rank/additive controls, and Mirror+private rank-2; no exclusions after fresh access."
   },
   "storage": {
-    "authority": "actual serialized inference payload bytes",
-    "paid_objects": []
+    "authority": "actual serialized inference payload bytes from torch.save",
+    "single_video_payload": "Shared decoder plus shared code generator (if present), one video code/token state, and metadata.",
+    "library_payload": "One shared decoder/generator object plus all per-video token/code entries for K=1 or K=2 real clips; no decoder duplication across the library.",
+    "paid_objects": [
+      "shared coordinate decoder parameters",
+      "all shared code-generator factors/embeddings/bases",
+      "every video-specific full token table or Mirror/additive/low-rank code",
+      "private residual dictionary and per-video residual codes",
+      "factor-role mapping, precision, architecture, and serialization metadata"
+    ],
+    "metrics": [
+      "single-video complete bytes",
+      "K=2 complete library bytes",
+      "marginal added bytes per video",
+      "serialized payload bits per reconstructed RGB pixel (neural-payload bpp; not conventional codec bpp)"
+    ]
   },
   "compute": {
-    "report_tokens_or_examples": true,
-    "report_optimizer_updates": true,
-    "report_active_compute_proxy": true,
-    "report_isolated_wall_clock": true
+    "report_examples_and_updates": true,
+    "active_compute": "Report coordinate-query attention and MLP MACs per pixel; token-code generation MACs per video and per token; per-video fitting MAC proxy.",
+    "runtime": "CPU only, OMP/MKL threads=1; measure decoder training, per-video code fitting, token generation, full reconstruction wall time and random-query pixels/second.",
+    "memory": "Report peak process RSS and explicit peak attention-logit tensor bytes. No GPU/energy extrapolation."
   },
-  "success_gate": "<predeclared gate>",
-  "failure_gate": "<predeclared gate>",
-  "boundaries": []
+  "development_gate": "A single rank must satisfy on BOTH dev clips and BOTH seeds: (1) product-Mirror PSNR no more than 1.0 dB below native full-token control; (2) SSIM no more than 0.03 below native; (3) K=2 complete library serialized payload <=0.95x native full-token library payload and marginal per-video state <=0.50x native token table; (4) query throughput >=0.50x native full-token decoder. To support a Mirror-specific result, at K=2 bytes within 10%, Mirror must also exceed the best low-rank/additive control by at least 0.30 dB average PSNR. If the general gate passes but the last clause fails, report no Mirror-specific advantage.",
+  "success_gate": "Freeze the smallest rank passing all development clauses. On all three fresh clips and both fresh seeds, retain the same quality, storage, throughput, and matched-simple-control gates. Fresh only replicates the frozen configuration.",
+  "failure_gate": "No rank passes the complete development gate on both development clips and seeds; record FAIL and do not access fresh clips. A fresh gate miss also yields FAIL.",
+  "boundaries": [
+    "Reduced CoANeRV coordinate-decoder mechanism screen, not a full CoANeRV reproduction or official Kinetics/UVG rate-distortion result.",
+    "The full feed-forward video tokenizer/token former is not implemented; the native baseline is the paper\u2019s decoder-only per-video token optimization ablation.",
+    "Neural-payload bpp is not an entropy-coded conventional video bitstream rate.",
+    "Fixed-update results do not establish near-converged capacity.",
+    "CPU measurements do not establish GPU/FPS/energy gains.",
+    "Fresh video files are not downloaded/opened unless development gate passes."
+  ]
 }

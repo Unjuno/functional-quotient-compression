@@ -1,19 +1,29 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-945",
+  "commit": "pending-result-commit",
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-945-coanerv-mirror-decoder/tests -v",
+    "passed": 4,
+    "failed": 0
   },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "payload_files": 22,
+    "payload_hashes_and_actual_sizes_checked": true
   },
   "metric_replay": {
-    "checked": false,
-    "max_difference": null
+    "checked": true,
+    "rows": 44,
+    "max_difference": 8.933114461484593e-07,
+    "absolute_tolerance": 1e-05
   },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "fresh_split_integrity_checked": true,
+  "fresh_accessed": false,
+  "notes": [
+    "Payload artifacts were loaded from disk and their actual serialized byte lengths and SHA256 hashes matched the frozen results.",
+    "Held-out MSE, PSNR, SSIM, and coordinate counts replayed from saved payloads; floating point absolute difference was below 1e-5.",
+    "Fresh clips were not downloaded or evaluated because no product-Mirror rank passed the frozen development gate.",
+    "pytest was unavailable in the environment; equivalent unittest suite passed."
+  ]
 }
