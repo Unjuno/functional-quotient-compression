@@ -125,9 +125,11 @@ def deserialize(blob):
 
 
 def macs_per_sample(method,rank):
-    if method=='fmm': return (DIM+6)*32+32*32+32*DIM
+    if method in ('fmm','native_basis'):
+        output=DIM if method=='fmm' else K_BASIS
+        return (DIM+6)*32+32*32+32*output + (0 if method=='fmm' else K_BASIS*DIM*DIM+K_BASIS*DIM)
     if method=='independent': return DIM*DIM
-    coeff=6 if method=='native_basis' else rank*K_BASIS+(rank if method=='mirror' else 0)
+    coeff=rank*K_BASIS+(rank if method=='mirror' else 0)
     return K_BASIS*DIM*DIM+K_BASIS*DIM+coeff
 
 

@@ -199,6 +199,11 @@
       "before": "500-update development run",
       "reason": "Cache deterministic RK4 reference maps by world seed to avoid recomputing the exact same target maps for each model/control.",
       "protocol_effect": "Execution-time optimization only; generated values, training samples, seeds, models, metrics and gate values remain unchanged."
+    },
+    {
+      "before": "final development gate evaluation; no fresh access",
+      "reason": "The first MAC proxy omitted the native shared-basis coefficient network MACs. The proxy now includes its full 6\u219232\u219232\u21924 coefficient MLP and shared-basis application; model/data/quality gates/settings are unchanged. Re-run both permitted development budgets with corrected accounting.",
+      "protocol_effect": "Compute reporting formula correction only; quality values and thresholds unchanged."
     }
   ]
 }
