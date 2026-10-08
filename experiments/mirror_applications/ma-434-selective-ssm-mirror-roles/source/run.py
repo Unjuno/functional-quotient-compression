@@ -21,7 +21,7 @@ def pack(base,codes,kind):
     if kind in ('mirror','native'):
         arrays={k:v.detach().cpu().numpy().astype(np.float16) for k,v in base.items()};arrays['codes']=codes.numpy().astype(np.float16);arrays['ids']=np.arange(ROLES,dtype=np.uint8);metadata={'kind':'shared_selective_ssm_plus_role_code','state_dim':D,'dtype':'float16'}
     elif kind=='independent':
-        arrays={k:v.detach().cpu().numpy().astype(np.float16) for k,v in base.items()};arrays['A']=np.stack([base['A']+c for c in codes]).numpy().astype(np.float16)
+        arrays={k:v.detach().cpu().numpy().astype(np.float16) for k,v in base.items()};arrays['A']=np.stack([base['A']+c for c in codes]).astype(np.float16)
         for k in ('B','C','wd','bd','wb','bb','wc','bc'):arrays[k]=np.broadcast_to(arrays[k],(ROLES,*arrays[k].shape)).copy()
         arrays['ids']=np.arange(ROLES,dtype=np.uint8);metadata={'kind':'independent_full_selective_ssm','state_dim':D,'dtype':'float16'}
     else:
