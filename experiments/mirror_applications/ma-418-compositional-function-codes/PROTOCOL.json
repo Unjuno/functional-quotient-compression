@@ -1,0 +1,22 @@
+{
+  "experiment_id": "MA-418",
+  "title": "Factorized object/style Mirror codes for held-out function combinations",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/GENERALIZATION",
+  "base_commit": "57fea50",
+  "hypothesis": "On a 4-object x 4-style continuous function grid with four diagonal pairs fully held out, factorized Mirror codes achieve held-out-pair normalized RMSE <=1.1x factorized latent codes while using <=1.1x their actual bytes and beat direct pair-code views by >=10% RMSE.",
+  "physical_object": "one shared continuous-coordinate MLP decoder",
+  "mirror_coordinate": "one learned Givens angle per object and per style, composed on separate hidden planes",
+  "logical_multiplicity": "16 object/style functions represented by factor combinations",
+  "prior_art_refs": ["PA68", "PA79"],
+  "controls": ["shared decoder without codes", "factorized object/style Mirror angles", "factorized ordinary object/style latent vectors", "factorized FiLM", "direct per-pair Mirror angle table with held-out entries untrained", "independent per-pair decoder oracle trained on all pairs"],
+  "task": {"type": "synthetic continuous function reconstruction", "objects": 4, "styles": 4, "held_out_pairs": [[0,0],[1,1],[2,2],[3,3]], "query_dim": 1, "hidden_dim": 32, "teacher": "shared coordinate MLP with object and style disjoint Givens views", "train_queries_per_seen_pair": 128, "evaluation_queries_per_pair": 128},
+  "development": {"worlds_or_seeds": [41800, 41801], "learning_rates": [0.003, 0.01], "selection_metric": "lowest validation normalized RMSE on observed pairs only"},
+  "fresh": {"worlds_or_seeds": [41810, 41811, 41812], "locked_before_access": true},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["shared decoder weights", "object/style factors", "pair-specific codes", "independent per-pair decoder weights", "indices and metadata"]},
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true, "report_seen_and_held_out_pair_metrics": true},
+  "training": {"updates": 600, "batch_size": 256, "optimizer": "AdamW", "seeds": [0, 1, 2]},
+  "success_gate": "On each fresh world, Mirror held-out-pair normalized RMSE <=1.1x factorized latent and Mirror bytes <=1.1x latent bytes, with >=10% lower RMSE than direct pair-code Mirror table.",
+  "failure_gate": "Mirror misses any held-out quality or byte threshold, or a simple factorized control dominates at similar bytes.",
+  "boundaries": ["Teacher generated from the same compositional Givens family; aligned feasibility only.", "Diagonal pairs are unseen during training/validation for non-oracle methods.", "No natural object/style or 3D reconstruction claim."]
+}
