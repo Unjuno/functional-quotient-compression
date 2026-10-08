@@ -1,6 +1,6 @@
 {
   "experiment_id": "MA-464",
-  "commit": "7ae90fc",
+  "commit": "pending-result-commit",
   "tests": {
     "command": "python -m unittest discover -s experiments/mirror_applications/ma-464-adamix-mirror-adaptations/tests -v",
     "passed": 4,
@@ -8,14 +8,352 @@
   },
   "serialization": {
     "roundtrip_checked": true,
-    "byte_exact": false,
-    "actual_inference_payloads_measured": false
+    "byte_exact": true,
+    "actual_inference_payloads_measured": true,
+    "payload_count": 28,
+    "payload_manifest": [
+      {
+        "kind": "bank_payload",
+        "path": "source/artifacts/seed46401_base_inference.pt",
+        "bytes": 876210,
+        "sha256": "b13bcc107a32f8b5575872c850d18411483d1500d7bf7ef756996e038eb674e1"
+      },
+      {
+        "kind": "merged_payload",
+        "path": "source/artifacts/seed46401_base_inference.pt",
+        "bytes": 876210,
+        "sha256": "b13bcc107a32f8b5575872c850d18411483d1500d7bf7ef756996e038eb674e1"
+      },
+      {
+        "kind": "bank_payload",
+        "path": "source/artifacts/seed46401_single_two_view_bank.pt",
+        "bytes": 896226,
+        "sha256": "0fa0b7aa7e1d7c7fdbd596c7bc3209101e7a4af2af4e158beb1c295acb597a92"
+      },
+      {
+        "kind": "merged_payload",
+        "path": "source/artifacts/seed46401_single_merged_inference.pt",
+        "bytes": 876842,
+        "sha256": "162342239d154e97e3e6ad50fb17463e7eba29d7c341aa8ea34380179ce9c141"
+      },
+      {
+        "kind": "adapter_payload",
+        "path": "source/artifacts/seed46401_single_adapter_bank.pt",
+        "bytes": 19848,
+        "sha256": "235da88684cde9e292c88f74a7c4c545db4e40df1010d2d88c25f3d2b176a479"
+      },
+      {
+        "kind": "bank_payload",
+        "path": "source/artifacts/seed46401_adamix_two_view_bank.pt",
+        "bytes": 912610,
+        "sha256": "42a24ac2ecd1a221961580ed9dc348dac6f3df99561cd229d7da85ee5e1c8119"
+      },
+      {
+        "kind": "merged_payload",
+        "path": "source/artifacts/seed46401_adamix_merged_inference.pt",
+        "bytes": 876842,
+        "sha256": "a3a83775551ccb545af144a9e9c00feb3dfbff5a37889a2ea08f6873002c23fd"
+      },
+      {
+        "kind": "adapter_payload",
+        "path": "source/artifacts/seed46401_adamix_adapter_bank.pt",
+        "bytes": 36232,
+        "sha256": "fd46ce34428eb560042b1877c2c3d1a1fd580c3c00e39114db85004c123d4b97"
+      },
+      {
+        "kind": "bank_payload",
+        "path": "source/artifacts/seed46401_mirror_two_view_bank.pt",
+        "bytes": 897778,
+        "sha256": "5066ae8123432b9136b700d58d8ab4fff046eee733f6c9128c85d872084f2928"
+      },
+      {
+        "kind": "merged_payload",
+        "path": "source/artifacts/seed46401_mirror_merged_inference.pt",
+        "bytes": 876842,
+        "sha256": "aac5f3a1617cc08e143503f1d86e594e029ee8f3509b273d9f7f487c8fba3097"
+      },
+      {
+        "kind": "adapter_payload",
+        "path": "source/artifacts/seed46401_mirror_adapter_bank.pt",
+        "bytes": 21202,
+        "sha256": "248b3f7cfd7a7e0901a95e5a3958bd76f91d6cd9c9b2a937739572042590abc2"
+      },
+      {
+        "kind": "bank_payload",
+        "path": "source/artifacts/seed46401_film_two_view_bank.pt",
+        "bytes": 897386,
+        "sha256": "37ad32f311619c6508ff4ed224a3d9f238508f2d42caa14ffb19112e08078c5a"
+      },
+      {
+        "kind": "merged_payload",
+        "path": "source/artifacts/seed46401_film_merged_inference.pt",
+        "bytes": 876666,
+        "sha256": "269715c1fdaf7ea4414135e54fb95c56d91660788f045b9798fe3fe6e7dfa678"
+      },
+      {
+        "kind": "adapter_payload",
+        "path": "source/artifacts/seed46401_film_adapter_bank.pt",
+        "bytes": 20914,
+        "sha256": "6758527f7571d15d7ad842db35526d2cfb365717480dbdf5f6649af456f1a210"
+      },
+      {
+        "kind": "bank_payload",
+        "path": "source/artifacts/seed46402_base_inference.pt",
+        "bytes": 876210,
+        "sha256": "4e791a799362d22b600a9d9e60212c239d167fed3d94d0c31d4ddf69d42048d8"
+      },
+      {
+        "kind": "merged_payload",
+        "path": "source/artifacts/seed46402_base_inference.pt",
+        "bytes": 876210,
+        "sha256": "4e791a799362d22b600a9d9e60212c239d167fed3d94d0c31d4ddf69d42048d8"
+      },
+      {
+        "kind": "bank_payload",
+        "path": "source/artifacts/seed46402_single_two_view_bank.pt",
+        "bytes": 896226,
+        "sha256": "043140a0d27dba12ec2094ccb4646e1767201689c5f0cbda04a9298d727a38ce"
+      },
+      {
+        "kind": "merged_payload",
+        "path": "source/artifacts/seed46402_single_merged_inference.pt",
+        "bytes": 876842,
+        "sha256": "ad4fff03f23ee057fc2136fc5ff08b38f8ada81ed3cec911b75a8d8793c48a7b"
+      },
+      {
+        "kind": "adapter_payload",
+        "path": "source/artifacts/seed46402_single_adapter_bank.pt",
+        "bytes": 19848,
+        "sha256": "19c2de25908fb77f98cb771468b223a01e68710494740627f36dc42efc9c4560"
+      },
+      {
+        "kind": "bank_payload",
+        "path": "source/artifacts/seed46402_adamix_two_view_bank.pt",
+        "bytes": 912610,
+        "sha256": "3aee6f89f2117dc249236f4a9cb64d84072dec898fb57d04ade0edd33a683818"
+      },
+      {
+        "kind": "merged_payload",
+        "path": "source/artifacts/seed46402_adamix_merged_inference.pt",
+        "bytes": 876842,
+        "sha256": "905678eb30ce3b607508519e9d32c2f7831470abd5b86b0e8391642f1407fcb9"
+      },
+      {
+        "kind": "adapter_payload",
+        "path": "source/artifacts/seed46402_adamix_adapter_bank.pt",
+        "bytes": 36232,
+        "sha256": "380b6da94169c4fb456cc1e974845da3433ec3bc7628d1d9b461c24422cda0e8"
+      },
+      {
+        "kind": "bank_payload",
+        "path": "source/artifacts/seed46402_mirror_two_view_bank.pt",
+        "bytes": 897778,
+        "sha256": "e60369623c4a0477f75ec4f1c6c57c827ff66561490826ebc96399a53aa2c28b"
+      },
+      {
+        "kind": "merged_payload",
+        "path": "source/artifacts/seed46402_mirror_merged_inference.pt",
+        "bytes": 876842,
+        "sha256": "790b3a1be7d334e0add7afae1c8e57522f8d94f6516c58b29954ac8d99e458c3"
+      },
+      {
+        "kind": "adapter_payload",
+        "path": "source/artifacts/seed46402_mirror_adapter_bank.pt",
+        "bytes": 21202,
+        "sha256": "45d98e48ff994cc728e4b7e28529ddca22d0792e1c6f298ce4b8bce877c2793e"
+      },
+      {
+        "kind": "bank_payload",
+        "path": "source/artifacts/seed46402_film_two_view_bank.pt",
+        "bytes": 897386,
+        "sha256": "2a0f7e71aff758cf8d59ccd66a3a5bacb0bf11c66fe76a608efffc04baa3cf67"
+      },
+      {
+        "kind": "merged_payload",
+        "path": "source/artifacts/seed46402_film_merged_inference.pt",
+        "bytes": 876666,
+        "sha256": "bfd55a56788ca2909f9921fdc806deb4298fdc90b0ce1b13165465e4fe9180b2"
+      },
+      {
+        "kind": "adapter_payload",
+        "path": "source/artifacts/seed46402_film_adapter_bank.pt",
+        "bytes": 20914,
+        "sha256": "496158ab68e9b262e9dde63668c346e65df1db83de3cb71a25cd9526d1920ba5"
+      }
+    ]
   },
   "metric_replay": {
-    "checked": false,
-    "max_difference": null
+    "checked": true,
+    "max_difference": 0.0,
+    "replayed_rows": 10,
+    "replay": [
+      {
+        "seed": 46401,
+        "condition": "base_only",
+        "per_view": {
+          "0": {
+            "shakespeare": 2.1873240768909454,
+            "austen": 2.5193024277687073
+          }
+        },
+        "merged": {
+          "shakespeare": 2.1873240768909454,
+          "austen": 2.5193024277687073
+        }
+      },
+      {
+        "seed": 46401,
+        "condition": "single",
+        "per_view": {
+          "0": {
+            "shakespeare": 2.1760550439357758,
+            "austen": 2.3296788930892944
+          }
+        },
+        "merged": {
+          "shakespeare": 2.1760551035404205,
+          "austen": 2.329678952693939
+        }
+      },
+      {
+        "seed": 46401,
+        "condition": "adamix",
+        "per_view": {
+          "0": {
+            "shakespeare": 2.1797763407230377,
+            "austen": 2.3635634779930115
+          },
+          "1": {
+            "shakespeare": 2.1811529397964478,
+            "austen": 2.346196562051773
+          }
+        },
+        "merged": {
+          "shakespeare": 2.173891067504883,
+          "austen": 2.3503410518169403
+        }
+      },
+      {
+        "seed": 46401,
+        "condition": "mirror",
+        "per_view": {
+          "0": {
+            "shakespeare": 2.1828367710113525,
+            "austen": 2.3304266035556793
+          },
+          "1": {
+            "shakespeare": 2.1818904876708984,
+            "austen": 2.3319758474826813
+          }
+        },
+        "merged": {
+          "shakespeare": 2.182241678237915,
+          "austen": 2.331037789583206
+        }
+      },
+      {
+        "seed": 46401,
+        "condition": "film",
+        "per_view": {
+          "0": {
+            "shakespeare": 2.1776662170886993,
+            "austen": 2.3306025862693787
+          },
+          "1": {
+            "shakespeare": 2.174846589565277,
+            "austen": 2.3319356441497803
+          }
+        },
+        "merged": {
+          "shakespeare": 2.176194041967392,
+          "austen": 2.331201285123825
+        }
+      },
+      {
+        "seed": 46402,
+        "condition": "base_only",
+        "per_view": {
+          "0": {
+            "shakespeare": 2.17448428273201,
+            "austen": 2.4035840034484863
+          }
+        },
+        "merged": {
+          "shakespeare": 2.17448428273201,
+          "austen": 2.4035840034484863
+        }
+      },
+      {
+        "seed": 46402,
+        "condition": "single",
+        "per_view": {
+          "0": {
+            "shakespeare": 2.164751887321472,
+            "austen": 2.24786177277565
+          }
+        },
+        "merged": {
+          "shakespeare": 2.1647518277168274,
+          "austen": 2.2478617429733276
+        }
+      },
+      {
+        "seed": 46402,
+        "condition": "adamix",
+        "per_view": {
+          "0": {
+            "shakespeare": 2.186687648296356,
+            "austen": 2.2826049625873566
+          },
+          "1": {
+            "shakespeare": 2.169649302959442,
+            "austen": 2.2846021950244904
+          }
+        },
+        "merged": {
+          "shakespeare": 2.1649445295333862,
+          "austen": 2.27460840344429
+        }
+      },
+      {
+        "seed": 46402,
+        "condition": "mirror",
+        "per_view": {
+          "0": {
+            "shakespeare": 2.165970414876938,
+            "austen": 2.250794917345047
+          },
+          "1": {
+            "shakespeare": 2.1669774055480957,
+            "austen": 2.2514351308345795
+          }
+        },
+        "merged": {
+          "shakespeare": 2.1663805544376373,
+          "austen": 2.2510292530059814
+        }
+      },
+      {
+        "seed": 46402,
+        "condition": "film",
+        "per_view": {
+          "0": {
+            "shakespeare": 2.163629561662674,
+            "austen": 2.251421272754669
+          },
+          "1": {
+            "shakespeare": 2.1650170981884003,
+            "austen": 2.250308483839035
+          }
+        },
+        "merged": {
+          "shakespeare": 2.1643012166023254,
+          "austen": 2.250841110944748
+        }
+      }
+    ]
   },
-  "fresh_split_integrity_checked": false,
+  "fresh_split_integrity_checked": true,
   "random_draw": {
     "draw19_replayed": true,
     "pool_size": 542,
@@ -24,12 +362,9 @@
     "pool_sha256": "da66e6233dae64d34422c9b44e615051a4c76f73025e98767562201c648cecd2",
     "baseline_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba"
   },
-  "preflight_notes": [
-    "All four adapter conditions have finite forward/backward behavior with base weights frozen.",
-    "Rank-4 Givens matrices preserve latent norms and receive finite gradients.",
-    "Folding a selected adapter delta into the base QKV projection reproduces the selected-view logits within the declared numerical tolerance.",
-    "AdaMix/Mirror/FiLM merge deltas are exact arithmetic mean updates at the weight-matrix level.",
-    "Two-view adapter serialization reload reproduces the same output; no data or model weights were acquired."
-  ],
-  "notes": []
+  "notes": [
+    "Both development seeds and all five conditions completed; frozen gates failed, so audit was not opened.",
+    "All payloads in the result rows were checked for size, SHA-256, and torch deserialization.",
+    "Development NLLs were independently replayed from serialized bank and merged payloads on train/dev prefixes only."
+  ]
 }

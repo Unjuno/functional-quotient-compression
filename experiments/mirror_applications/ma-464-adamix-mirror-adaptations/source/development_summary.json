@@ -1,0 +1,801 @@
+{
+  "corpora": [
+    {
+      "name": "shakespeare",
+      "url": "https://raw.githubusercontent.com/karpathy/char-rnn/master/data/tinyshakespeare/input.txt",
+      "bytes": 1115394,
+      "sha256": "86c4e6aa9db7c042ec79f339dcb96d42b0075e16b8fc2e86bf0ca57e2dc565ed",
+      "path": "source/data/shakespeare.txt"
+    },
+    {
+      "name": "austen",
+      "url": "https://www.gutenberg.org/files/1342/1342-0.txt",
+      "bytes": 738046,
+      "sha256": "81300b79e8a8d65ac530a97578417d06137e3bbc90622a10a65e5036183d2500",
+      "path": "source/data/austen.txt"
+    }
+  ],
+  "split_sizes": {
+    "shakespeare": {
+      "train_bytes": 892315,
+      "dev_bytes": 111539,
+      "train_chars": 892315,
+      "dev_chars": 111539,
+      "audit_bytes_not_read": 111540
+    },
+    "austen": {
+      "train_bytes": 590436,
+      "dev_bytes": 73805,
+      "train_chars": 583168,
+      "dev_chars": 72903,
+      "audit_bytes_not_read": 73805
+    }
+  },
+  "vocabulary_size": 95,
+  "audit_opened": false,
+  "results": [
+    {
+      "seed": 46401,
+      "condition": "base_only",
+      "updates": 1200,
+      "training_tokens_seen": 2457600,
+      "domain_update_counts": {
+        "shakespeare": 1200,
+        "austen": 0
+      },
+      "route_update_counts": [],
+      "train_wall_seconds": 73.1250423800011,
+      "active_lora_macs_per_token_proxy": 0,
+      "per_view": {
+        "0": {
+          "shakespeare": {
+            "nll": 2.1873240768909454,
+            "bits_per_character": 3.155641598547597,
+            "evaluation_wall_seconds": 0.15542016399922431,
+            "tokens_per_second": 105417.46693872855
+          },
+          "austen": {
+            "nll": 2.5193024277687073,
+            "bits_per_character": 3.63458511904144,
+            "evaluation_wall_seconds": 0.15534803500122507,
+            "tokens_per_second": 105466.41288298753
+          }
+        }
+      },
+      "mean_per_view_nll": 2.3533132523298264,
+      "merged": {
+        "shakespeare": {
+          "nll": 2.1873240768909454,
+          "bits_per_character": 3.155641598547597,
+          "evaluation_wall_seconds": 0.15542016399922431,
+          "tokens_per_second": 105417.46693872855
+        },
+        "austen": {
+          "nll": 2.5193024277687073,
+          "bits_per_character": 3.63458511904144,
+          "evaluation_wall_seconds": 0.15534803500122507,
+          "tokens_per_second": 105466.41288298753
+        }
+      },
+      "merged_mean_nll": 2.3533132523298264,
+      "view_logit_distance": 0.0,
+      "bank_payload": {
+        "path": "source/artifacts/seed46401_base_inference.pt",
+        "bytes": 876210,
+        "sha256": "b13bcc107a32f8b5575872c850d18411483d1500d7bf7ef756996e038eb674e1"
+      },
+      "adapter_payload": {
+        "bytes": 0,
+        "sha256": null
+      },
+      "merged_payload": {
+        "path": "source/artifacts/seed46401_base_inference.pt",
+        "bytes": 876210,
+        "sha256": "b13bcc107a32f8b5575872c850d18411483d1500d7bf7ef756996e038eb674e1"
+      }
+    },
+    {
+      "seed": 46401,
+      "condition": "single",
+      "updates": 600,
+      "training_tokens_seen": 1228800,
+      "domain_update_counts": {
+        "shakespeare": 291,
+        "austen": 309
+      },
+      "route_update_counts": [
+        0,
+        0
+      ],
+      "train_wall_seconds": 31.395315684996604,
+      "active_lora_macs_per_token_proxy": 8192,
+      "per_view": {
+        "0": {
+          "shakespeare": {
+            "nll": 2.1760550439357758,
+            "bits_per_character": 3.1393838205875593,
+            "evaluation_wall_seconds": 0.16504596400045557,
+            "tokens_per_second": 99269.31627334296
+          },
+          "austen": {
+            "nll": 2.3296788930892944,
+            "bits_per_character": 3.361016185923615,
+            "evaluation_wall_seconds": 0.16412683100134018,
+            "tokens_per_second": 99825.23820170644
+          }
+        }
+      },
+      "mean_per_view_nll": 2.252866968512535,
+      "merged": {
+        "shakespeare": {
+          "nll": 2.1760551035404205,
+          "bits_per_character": 3.1393839065788844,
+          "evaluation_wall_seconds": 0.1556962040012877,
+          "tokens_per_second": 105230.56811240237
+        },
+        "austen": {
+          "nll": 2.329678952693939,
+          "bits_per_character": 3.36101627191494,
+          "evaluation_wall_seconds": 0.1567604060001031,
+          "tokens_per_second": 104516.18758877943
+        }
+      },
+      "merged_mean_nll": 2.25286702811718,
+      "view_logit_distance": 0.0,
+      "bank_payload": {
+        "path": "source/artifacts/seed46401_single_two_view_bank.pt",
+        "bytes": 896226,
+        "sha256": "0fa0b7aa7e1d7c7fdbd596c7bc3209101e7a4af2af4e158beb1c295acb597a92",
+        "adapter_only_bytes": 19848,
+        "adapter_only_sha256": "235da88684cde9e292c88f74a7c4c545db4e40df1010d2d88c25f3d2b176a479"
+      },
+      "adapter_payload": {
+        "bytes": 19848,
+        "sha256": "235da88684cde9e292c88f74a7c4c545db4e40df1010d2d88c25f3d2b176a479"
+      },
+      "merged_payload": {
+        "path": "source/artifacts/seed46401_single_merged_inference.pt",
+        "bytes": 876842,
+        "sha256": "162342239d154e97e3e6ad50fb17463e7eba29d7c341aa8ea34380179ce9c141"
+      }
+    },
+    {
+      "seed": 46401,
+      "condition": "adamix",
+      "updates": 600,
+      "training_tokens_seen": 1228800,
+      "domain_update_counts": {
+        "shakespeare": 291,
+        "austen": 309
+      },
+      "route_update_counts": [
+        288,
+        312
+      ],
+      "train_wall_seconds": 31.928897797999525,
+      "active_lora_macs_per_token_proxy": 8192,
+      "per_view": {
+        "0": {
+          "shakespeare": {
+            "nll": 2.1797763407230377,
+            "bits_per_character": 3.144752517008218,
+            "evaluation_wall_seconds": 0.16594044500016025,
+            "tokens_per_second": 98734.21756814125
+          },
+          "austen": {
+            "nll": 2.3635634779930115,
+            "bits_per_character": 3.409901308526788,
+            "evaluation_wall_seconds": 0.16714066999702482,
+            "tokens_per_second": 98025.21433168625
+          }
+        },
+        "1": {
+          "shakespeare": {
+            "nll": 2.1811529397964478,
+            "bits_per_character": 3.1467385296647192,
+            "evaluation_wall_seconds": 0.1718496520006738,
+            "tokens_per_second": 95339.15145743653
+          },
+          "austen": {
+            "nll": 2.346196562051773,
+            "bits_per_character": 3.3848461450228284,
+            "evaluation_wall_seconds": 0.17532265199770336,
+            "tokens_per_second": 93450.55994370095
+          }
+        }
+      },
+      "mean_per_view_nll": 2.2676723301410675,
+      "merged": {
+        "shakespeare": {
+          "nll": 2.173891067504883,
+          "bits_per_character": 3.1362618625221095,
+          "evaluation_wall_seconds": 0.15501140999913332,
+          "tokens_per_second": 105695.44525845938
+        },
+        "austen": {
+          "nll": 2.3503410518169403,
+          "bits_per_character": 3.39082537985405,
+          "evaluation_wall_seconds": 0.15485560600063764,
+          "tokens_per_second": 105801.78802136835
+        }
+      },
+      "merged_mean_nll": 2.2621160596609116,
+      "view_logit_distance": 0.18539319932460785,
+      "bank_payload": {
+        "path": "source/artifacts/seed46401_adamix_two_view_bank.pt",
+        "bytes": 912610,
+        "sha256": "42a24ac2ecd1a221961580ed9dc348dac6f3df99561cd229d7da85ee5e1c8119",
+        "adapter_only_bytes": 36232,
+        "adapter_only_sha256": "fd46ce34428eb560042b1877c2c3d1a1fd580c3c00e39114db85004c123d4b97"
+      },
+      "adapter_payload": {
+        "bytes": 36232,
+        "sha256": "fd46ce34428eb560042b1877c2c3d1a1fd580c3c00e39114db85004c123d4b97"
+      },
+      "merged_payload": {
+        "path": "source/artifacts/seed46401_adamix_merged_inference.pt",
+        "bytes": 876842,
+        "sha256": "a3a83775551ccb545af144a9e9c00feb3dfbff5a37889a2ea08f6873002c23fd"
+      }
+    },
+    {
+      "seed": 46401,
+      "condition": "mirror",
+      "updates": 600,
+      "training_tokens_seen": 1228800,
+      "domain_update_counts": {
+        "shakespeare": 291,
+        "austen": 309
+      },
+      "route_update_counts": [
+        301,
+        299
+      ],
+      "train_wall_seconds": 33.34002589699958,
+      "active_lora_macs_per_token_proxy": 8192,
+      "per_view": {
+        "0": {
+          "shakespeare": {
+            "nll": 2.1828367710113525,
+            "bits_per_character": 3.149167784608156,
+            "evaluation_wall_seconds": 0.17490449099932448,
+            "tokens_per_second": 93673.98119047315
+          },
+          "austen": {
+            "nll": 2.3304266035556793,
+            "bits_per_character": 3.362094904105489,
+            "evaluation_wall_seconds": 0.1711420249994262,
+            "tokens_per_second": 95733.35362868899
+          }
+        },
+        "1": {
+          "shakespeare": {
+            "nll": 2.1818904876708984,
+            "bits_per_character": 3.147802586325607,
+            "evaluation_wall_seconds": 0.1706801699983771,
+            "tokens_per_second": 95992.40497683935
+          },
+          "austen": {
+            "nll": 2.3319758474826813,
+            "bits_per_character": 3.364329990636102,
+            "evaluation_wall_seconds": 0.1710802710003918,
+            "tokens_per_second": 95767.91002372494
+          }
+        }
+      },
+      "mean_per_view_nll": 2.256782427430153,
+      "merged": {
+        "shakespeare": {
+          "nll": 2.182241678237915,
+          "bits_per_character": 3.148309247215049,
+          "evaluation_wall_seconds": 0.1544603719994484,
+          "tokens_per_second": 106072.5141854411
+        },
+        "austen": {
+          "nll": 2.331037789583206,
+          "bits_per_character": 3.3629766591564625,
+          "evaluation_wall_seconds": 0.15810291299931123,
+          "tokens_per_second": 103628.704172398
+        }
+      },
+      "merged_mean_nll": 2.2566397339105606,
+      "view_logit_distance": 0.026628553867340088,
+      "bank_payload": {
+        "path": "source/artifacts/seed46401_mirror_two_view_bank.pt",
+        "bytes": 897778,
+        "sha256": "5066ae8123432b9136b700d58d8ab4fff046eee733f6c9128c85d872084f2928",
+        "adapter_only_bytes": 21202,
+        "adapter_only_sha256": "248b3f7cfd7a7e0901a95e5a3958bd76f91d6cd9c9b2a937739572042590abc2"
+      },
+      "adapter_payload": {
+        "bytes": 21202,
+        "sha256": "248b3f7cfd7a7e0901a95e5a3958bd76f91d6cd9c9b2a937739572042590abc2"
+      },
+      "merged_payload": {
+        "path": "source/artifacts/seed46401_mirror_merged_inference.pt",
+        "bytes": 876842,
+        "sha256": "aac5f3a1617cc08e143503f1d86e594e029ee8f3509b273d9f7f487c8fba3097"
+      }
+    },
+    {
+      "seed": 46401,
+      "condition": "film",
+      "updates": 600,
+      "training_tokens_seen": 1228800,
+      "domain_update_counts": {
+        "shakespeare": 291,
+        "austen": 309
+      },
+      "route_update_counts": [
+        306,
+        294
+      ],
+      "train_wall_seconds": 31.407595338001556,
+      "active_lora_macs_per_token_proxy": 8192,
+      "per_view": {
+        "0": {
+          "shakespeare": {
+            "nll": 2.1776662170886993,
+            "bits_per_character": 3.1417082521052953,
+            "evaluation_wall_seconds": 0.16494149299978744,
+            "tokens_per_second": 99332.19168824375
+          },
+          "austen": {
+            "nll": 2.3306025862693787,
+            "bits_per_character": 3.362348793493825,
+            "evaluation_wall_seconds": 0.163487484001962,
+            "tokens_per_second": 100215.62262101591
+          }
+        },
+        "1": {
+          "shakespeare": {
+            "nll": 2.174846589565277,
+            "bits_per_character": 3.1376403894601004,
+            "evaluation_wall_seconds": 0.16365132099963375,
+            "tokens_per_second": 100115.29329504567
+          },
+          "austen": {
+            "nll": 2.3319356441497803,
+            "bits_per_character": 3.3642719894870985,
+            "evaluation_wall_seconds": 0.16553127899896936,
+            "tokens_per_second": 98978.27225815135
+          }
+        }
+      },
+      "mean_per_view_nll": 2.253762759268284,
+      "merged": {
+        "shakespeare": {
+          "nll": 2.176194041967392,
+          "bits_per_character": 3.1395843523584652,
+          "evaluation_wall_seconds": 0.1591807789991435,
+          "tokens_per_second": 102926.99974843166
+        },
+        "austen": {
+          "nll": 2.331201285123825,
+          "bits_per_character": 3.363212533362121,
+          "evaluation_wall_seconds": 0.16186461200049962,
+          "tokens_per_second": 101220.39522727444
+        }
+      },
+      "merged_mean_nll": 2.2536976635456085,
+      "view_logit_distance": 0.015927713364362717,
+      "bank_payload": {
+        "path": "source/artifacts/seed46401_film_two_view_bank.pt",
+        "bytes": 897386,
+        "sha256": "37ad32f311619c6508ff4ed224a3d9f238508f2d42caa14ffb19112e08078c5a",
+        "adapter_only_bytes": 20914,
+        "adapter_only_sha256": "6758527f7571d15d7ad842db35526d2cfb365717480dbdf5f6649af456f1a210"
+      },
+      "adapter_payload": {
+        "bytes": 20914,
+        "sha256": "6758527f7571d15d7ad842db35526d2cfb365717480dbdf5f6649af456f1a210"
+      },
+      "merged_payload": {
+        "path": "source/artifacts/seed46401_film_merged_inference.pt",
+        "bytes": 876666,
+        "sha256": "269715c1fdaf7ea4414135e54fb95c56d91660788f045b9798fe3fe6e7dfa678"
+      }
+    },
+    {
+      "seed": 46402,
+      "condition": "base_only",
+      "updates": 1200,
+      "training_tokens_seen": 2457600,
+      "domain_update_counts": {
+        "shakespeare": 1200,
+        "austen": 0
+      },
+      "route_update_counts": [],
+      "train_wall_seconds": 74.47055281800203,
+      "active_lora_macs_per_token_proxy": 0,
+      "per_view": {
+        "0": {
+          "shakespeare": {
+            "nll": 2.17448428273201,
+            "bits_per_character": 3.1371176911884655,
+            "evaluation_wall_seconds": 0.1563883220005664,
+            "tokens_per_second": 104764.85577958092
+          },
+          "austen": {
+            "nll": 2.4035840034484863,
+            "bits_per_character": 3.4676387221351725,
+            "evaluation_wall_seconds": 0.15487040700099897,
+            "tokens_per_second": 105791.67652019096
+          }
+        }
+      },
+      "mean_per_view_nll": 2.289034143090248,
+      "merged": {
+        "shakespeare": {
+          "nll": 2.17448428273201,
+          "bits_per_character": 3.1371176911884655,
+          "evaluation_wall_seconds": 0.1563883220005664,
+          "tokens_per_second": 104764.85577958092
+        },
+        "austen": {
+          "nll": 2.4035840034484863,
+          "bits_per_character": 3.4676387221351725,
+          "evaluation_wall_seconds": 0.15487040700099897,
+          "tokens_per_second": 105791.67652019096
+        }
+      },
+      "merged_mean_nll": 2.289034143090248,
+      "view_logit_distance": 0.0,
+      "bank_payload": {
+        "path": "source/artifacts/seed46402_base_inference.pt",
+        "bytes": 876210,
+        "sha256": "4e791a799362d22b600a9d9e60212c239d167fed3d94d0c31d4ddf69d42048d8"
+      },
+      "adapter_payload": {
+        "bytes": 0,
+        "sha256": null
+      },
+      "merged_payload": {
+        "path": "source/artifacts/seed46402_base_inference.pt",
+        "bytes": 876210,
+        "sha256": "4e791a799362d22b600a9d9e60212c239d167fed3d94d0c31d4ddf69d42048d8"
+      }
+    },
+    {
+      "seed": 46402,
+      "condition": "single",
+      "updates": 600,
+      "training_tokens_seen": 1228800,
+      "domain_update_counts": {
+        "shakespeare": 294,
+        "austen": 306
+      },
+      "route_update_counts": [
+        0,
+        0
+      ],
+      "train_wall_seconds": 32.13491815300222,
+      "active_lora_macs_per_token_proxy": 8192,
+      "per_view": {
+        "0": {
+          "shakespeare": {
+            "nll": 2.164751887321472,
+            "bits_per_character": 3.123076812593712,
+            "evaluation_wall_seconds": 0.16412356100045145,
+            "tokens_per_second": 99827.22712161316
+          },
+          "austen": {
+            "nll": 2.24786177277565,
+            "bits_per_character": 3.2429790321873044,
+            "evaluation_wall_seconds": 0.16337073400063673,
+            "tokens_per_second": 100287.23994063798
+          }
+        }
+      },
+      "mean_per_view_nll": 2.206306830048561,
+      "merged": {
+        "shakespeare": {
+          "nll": 2.1647518277168274,
+          "bits_per_character": 3.123076726602387,
+          "evaluation_wall_seconds": 0.1546471069996187,
+          "tokens_per_second": 105944.43257215538
+        },
+        "austen": {
+          "nll": 2.2478617429733276,
+          "bits_per_character": 3.2429789891916414,
+          "evaluation_wall_seconds": 0.15536532800251734,
+          "tokens_per_second": 105454.67390082384
+        }
+      },
+      "merged_mean_nll": 2.2063067853450775,
+      "view_logit_distance": 0.0,
+      "bank_payload": {
+        "path": "source/artifacts/seed46402_single_two_view_bank.pt",
+        "bytes": 896226,
+        "sha256": "043140a0d27dba12ec2094ccb4646e1767201689c5f0cbda04a9298d727a38ce",
+        "adapter_only_bytes": 19848,
+        "adapter_only_sha256": "19c2de25908fb77f98cb771468b223a01e68710494740627f36dc42efc9c4560"
+      },
+      "adapter_payload": {
+        "bytes": 19848,
+        "sha256": "19c2de25908fb77f98cb771468b223a01e68710494740627f36dc42efc9c4560"
+      },
+      "merged_payload": {
+        "path": "source/artifacts/seed46402_single_merged_inference.pt",
+        "bytes": 876842,
+        "sha256": "ad4fff03f23ee057fc2136fc5ff08b38f8ada81ed3cec911b75a8d8793c48a7b"
+      }
+    },
+    {
+      "seed": 46402,
+      "condition": "adamix",
+      "updates": 600,
+      "training_tokens_seen": 1228800,
+      "domain_update_counts": {
+        "shakespeare": 294,
+        "austen": 306
+      },
+      "route_update_counts": [
+        301,
+        299
+      ],
+      "train_wall_seconds": 32.4146892250028,
+      "active_lora_macs_per_token_proxy": 8192,
+      "per_view": {
+        "0": {
+          "shakespeare": {
+            "nll": 2.186687648296356,
+            "bits_per_character": 3.1547234261703028,
+            "evaluation_wall_seconds": 0.16634264899767004,
+            "tokens_per_second": 98495.48566603319
+          },
+          "austen": {
+            "nll": 2.2826049625873566,
+            "bits_per_character": 3.293102859833317,
+            "evaluation_wall_seconds": 0.16563146999760647,
+            "tokens_per_second": 98918.39998906467
+          }
+        },
+        "1": {
+          "shakespeare": {
+            "nll": 2.169649302959442,
+            "bits_per_character": 3.1301422898477833,
+            "evaluation_wall_seconds": 0.16754942500119796,
+            "tokens_per_second": 97786.0711839677
+          },
+          "austen": {
+            "nll": 2.2846021950244904,
+            "bits_per_character": 3.295984257165873,
+            "evaluation_wall_seconds": 0.1650412810013222,
+            "tokens_per_second": 99272.13301179322
+          }
+        }
+      },
+      "mean_per_view_nll": 2.2308860272169113,
+      "merged": {
+        "shakespeare": {
+          "nll": 2.1649445295333862,
+          "bits_per_character": 3.1233547365575065,
+          "evaluation_wall_seconds": 0.15610491400002502,
+          "tokens_per_second": 104955.05605926905
+        },
+        "austen": {
+          "nll": 2.27460840344429,
+          "bits_per_character": 3.28156626361344,
+          "evaluation_wall_seconds": 0.15696009100065567,
+          "tokens_per_second": 104383.22184670216
+        }
+      },
+      "merged_mean_nll": 2.219776466488838,
+      "view_logit_distance": 0.2575574517250061,
+      "bank_payload": {
+        "path": "source/artifacts/seed46402_adamix_two_view_bank.pt",
+        "bytes": 912610,
+        "sha256": "3aee6f89f2117dc249236f4a9cb64d84072dec898fb57d04ade0edd33a683818",
+        "adapter_only_bytes": 36232,
+        "adapter_only_sha256": "380b6da94169c4fb456cc1e974845da3433ec3bc7628d1d9b461c24422cda0e8"
+      },
+      "adapter_payload": {
+        "bytes": 36232,
+        "sha256": "380b6da94169c4fb456cc1e974845da3433ec3bc7628d1d9b461c24422cda0e8"
+      },
+      "merged_payload": {
+        "path": "source/artifacts/seed46402_adamix_merged_inference.pt",
+        "bytes": 876842,
+        "sha256": "905678eb30ce3b607508519e9d32c2f7831470abd5b86b0e8391642f1407fcb9"
+      }
+    },
+    {
+      "seed": 46402,
+      "condition": "mirror",
+      "updates": 600,
+      "training_tokens_seen": 1228800,
+      "domain_update_counts": {
+        "shakespeare": 294,
+        "austen": 306
+      },
+      "route_update_counts": [
+        306,
+        294
+      ],
+      "train_wall_seconds": 34.573810958998365,
+      "active_lora_macs_per_token_proxy": 8192,
+      "per_view": {
+        "0": {
+          "shakespeare": {
+            "nll": 2.165970414876938,
+            "bits_per_character": 3.124834776255169,
+            "evaluation_wall_seconds": 0.16894824100018013,
+            "tokens_per_second": 96976.44617668752
+          },
+          "austen": {
+            "nll": 2.250794917345047,
+            "bits_per_character": 3.247210665311784,
+            "evaluation_wall_seconds": 0.16960174400082906,
+            "tokens_per_second": 96602.78021622178
+          }
+        },
+        "1": {
+          "shakespeare": {
+            "nll": 2.1669774055480957,
+            "bits_per_character": 3.12628755670267,
+            "evaluation_wall_seconds": 0.1689261789979355,
+            "tokens_per_second": 96989.1114402122
+          },
+          "austen": {
+            "nll": 2.2514351308345795,
+            "bits_per_character": 3.2481342981382424,
+            "evaluation_wall_seconds": 0.16938271499748225,
+            "tokens_per_second": 96727.69739370122
+          }
+        }
+      },
+      "mean_per_view_nll": 2.208794467151165,
+      "merged": {
+        "shakespeare": {
+          "nll": 2.1663805544376373,
+          "bits_per_character": 3.1254264825654623,
+          "evaluation_wall_seconds": 0.15576760700059822,
+          "tokens_per_second": 105182.33100889248
+        },
+        "austen": {
+          "nll": 2.2510292530059814,
+          "bits_per_character": 3.2475487402077174,
+          "evaluation_wall_seconds": 0.15603537100105314,
+          "tokens_per_second": 105001.83320543019
+        }
+      },
+      "merged_mean_nll": 2.2087049037218094,
+      "view_logit_distance": 0.021032685413956642,
+      "bank_payload": {
+        "path": "source/artifacts/seed46402_mirror_two_view_bank.pt",
+        "bytes": 897778,
+        "sha256": "e60369623c4a0477f75ec4f1c6c57c827ff66561490826ebc96399a53aa2c28b",
+        "adapter_only_bytes": 21202,
+        "adapter_only_sha256": "45d98e48ff994cc728e4b7e28529ddca22d0792e1c6f298ce4b8bce877c2793e"
+      },
+      "adapter_payload": {
+        "bytes": 21202,
+        "sha256": "45d98e48ff994cc728e4b7e28529ddca22d0792e1c6f298ce4b8bce877c2793e"
+      },
+      "merged_payload": {
+        "path": "source/artifacts/seed46402_mirror_merged_inference.pt",
+        "bytes": 876842,
+        "sha256": "790b3a1be7d334e0add7afae1c8e57522f8d94f6516c58b29954ac8d99e458c3"
+      }
+    },
+    {
+      "seed": 46402,
+      "condition": "film",
+      "updates": 600,
+      "training_tokens_seen": 1228800,
+      "domain_update_counts": {
+        "shakespeare": 294,
+        "austen": 306
+      },
+      "route_update_counts": [
+        293,
+        307
+      ],
+      "train_wall_seconds": 32.5242638009986,
+      "active_lora_macs_per_token_proxy": 8192,
+      "per_view": {
+        "0": {
+          "shakespeare": {
+            "nll": 2.163629561662674,
+            "bits_per_character": 3.1214576389315014,
+            "evaluation_wall_seconds": 0.16291391999766347,
+            "tokens_per_second": 100568.44743675053
+          },
+          "austen": {
+            "nll": 2.251421272754669,
+            "bits_per_character": 3.2481143051550796,
+            "evaluation_wall_seconds": 0.16273209800056065,
+            "tokens_per_second": 100680.81344310791
+          }
+        },
+        "1": {
+          "shakespeare": {
+            "nll": 2.1650170981884003,
+            "bits_per_character": 3.123459430996219,
+            "evaluation_wall_seconds": 0.16297404100259882,
+            "tokens_per_second": 100531.34780979466
+          },
+          "austen": {
+            "nll": 2.250308483839035,
+            "bits_per_character": 3.246508890104938,
+            "evaluation_wall_seconds": 0.1628150119977363,
+            "tokens_per_second": 100629.541459161
+          }
+        }
+      },
+      "mean_per_view_nll": 2.2075941041111946,
+      "merged": {
+        "shakespeare": {
+          "nll": 2.1643012166023254,
+          "bits_per_character": 3.1224266321821252,
+          "evaluation_wall_seconds": 0.15316289700058405,
+          "tokens_per_second": 106971.07668273944
+        },
+        "austen": {
+          "nll": 2.250841110944748,
+          "bits_per_character": 3.247277308588993,
+          "evaluation_wall_seconds": 0.15354904900232214,
+          "tokens_per_second": 106702.06104469082
+        }
+      },
+      "merged_mean_nll": 2.2075711637735367,
+      "view_logit_distance": 0.012097828090190887,
+      "bank_payload": {
+        "path": "source/artifacts/seed46402_film_two_view_bank.pt",
+        "bytes": 897386,
+        "sha256": "2a0f7e71aff758cf8d59ccd66a3a5bacb0bf11c66fe76a608efffc04baa3cf67",
+        "adapter_only_bytes": 20914,
+        "adapter_only_sha256": "496158ab68e9b262e9dde63668c346e65df1db83de3cb71a25cd9526d1920ba5"
+      },
+      "adapter_payload": {
+        "bytes": 20914,
+        "sha256": "496158ab68e9b262e9dde63668c346e65df1db83de3cb71a25cd9526d1920ba5"
+      },
+      "merged_payload": {
+        "path": "source/artifacts/seed46402_film_merged_inference.pt",
+        "bytes": 876666,
+        "sha256": "bfd55a56788ca2909f9921fdc806deb4298fdc90b0ce1b13165465e4fe9180b2"
+      }
+    }
+  ],
+  "gates": {
+    "development_gate_pass": false,
+    "audit_eligible": false,
+    "checks": [
+      {
+        "seed": 46401,
+        "per_view_quality_vs_adamix": true,
+        "merged_quality_vs_adamix": true,
+        "complete_bank_bytes": true,
+        "adapter_only_bytes": false,
+        "fiLM_byte_match": true,
+        "per_view_beats_film": false,
+        "merged_beats_film": false
+      },
+      {
+        "seed": 46402,
+        "per_view_quality_vs_adamix": true,
+        "merged_quality_vs_adamix": true,
+        "complete_bank_bytes": true,
+        "adapter_only_bytes": false,
+        "fiLM_byte_match": true,
+        "per_view_beats_film": false,
+        "merged_beats_film": false
+      }
+    ]
+  },
+  "audit": null,
+  "protocol": {
+    "base_updates": 1200,
+    "adaptation_updates": 600,
+    "seeds": [
+      46401,
+      46402
+    ],
+    "domains": [
+      "shakespeare",
+      "austen"
+    ]
+  }
+}

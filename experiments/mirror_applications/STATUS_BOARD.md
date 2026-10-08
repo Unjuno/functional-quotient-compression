@@ -11,14 +11,14 @@ Numeric “Next candidate” and fixed-order queues in this board are historical
 - Draw18 selected MA-784 (pool 549, index 269); FAIL recorded on its dedicated branch.
 - Draw19 selected MA-464 (pool 542, index 78); replay proof is in the MA-464 experiment directory.
 
-## Program totals (reconciled from authoritative 1155-row registry plus indexed MA-784 result)
+## Program totals (reconciled from authoritative 1155-row registry plus indexed MA-784 and MA-464 results)
 
 - Registered candidates: **1155**
-- P0: **630** (36 completed; 594 UNTESTED)
+- P0: **630** (37 completed; 593 UNTESTED)
 - P1: **422** (12 completed; 410 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1107 UNTESTED, 29 PROMISING, 19 FAIL**
-- 48 verified experiment results are indexed here, including MA-784 from its separate research branch.
+- Current MA statuses: **1106 UNTESTED, 29 PROMISING, 20 FAIL**
+- 49 verified experiment results are indexed here, including MA-784 and MA-464 from their separate research branches.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
 - Thirteenth literature sweep added MA-996..1045 (50 UNTESTED; 40 P0/10 P1) and PA296..PA325. IDs MA-1000+ use four digits; consult `check_registry_integrity.py`. No new experiment results.
@@ -45,7 +45,7 @@ If blocked by a documented reproducibility or harness issue, record it and resum
 
 ## Active experiment
 
-**MA-464 — AdaMix over logical Mirror adaptations**, selected by Draw19. Its dedicated branch is `research/ma-464-adamix-mirror-20261008`; protocol freeze and control feasibility are in progress.
+**MA-464 — FAIL:** two-seed AdaMix/FiLM comparison reduced full bank bytes 1.63%, but failed adapter-only storage and Mirror-specific quality gates; audit unopened. See its dedicated branch `research/ma-464-adamix-mirror-20261008`.
 
 ## Verified status index
 
@@ -56,6 +56,7 @@ All per-ID evidence is retained in the local experiment directories and in `CLAI
 
 ## Latest randomized experiment result
 
+- **MA-464 — FAIL:** two-seed adaptation screen failed adapter-only bytes and FiLM superiority gates; audit unopened. See branch `research/ma-464-adamix-mirror-20261008`.
 - **MA-784 — FAIL:** Two-seed fixed-budget Tiny Shakespeare screen passed quality/storage against four-expert UniPool and reduced actual serialized bytes by 21.96%, but did not beat byte-near FiLM in either seed; audit unopened. See branch `research/ma-784-adaptive-mirror-pool-20261008`.
 
 ## 2026-10-08 research sweep
