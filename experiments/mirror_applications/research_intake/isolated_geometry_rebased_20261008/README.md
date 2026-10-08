@@ -4,7 +4,7 @@
 
 ## Purpose
 
-nine literature-derived, non-duplicative **marginal Mirror** hypotheses (not 8 proved improvements); three additional detailed plans for existing MA IDs where a new ID would duplicate an existing question. PA414..PA424 contain the source titles, links and mandatory native controls.
+15 literature-derived marginal Mirror hypotheses (9 earlier + 6 new; none is presumed to work); three additional detailed plans for existing MA IDs where a new ID would duplicate an existing question. PA414..PA424 contain the source titles, links and mandatory native controls.
 
 A plan is self-contained for a cheap mechanism screen: exact insertion, native method, code shape, controls, train/dev/fresh split, pass/fail/uncertain criteria, gauge and byte audit, implementation order, hardware and expected failure modes. Full native reproduction still requires reading/checking the original paper or official implementation before publication, but no external reading is required to start the synthetic screen.
 
@@ -13,7 +13,7 @@ A plan is self-contained for a cheap mechanism screen: exact insertion, native m
 - Plan status: **DESIGNED / UNTESTED**, not SCREENING, PROMISING, FAIL or ADOPTED.
 - Existing status unchanged: 29 PROMISING / 18 FAIL; verified experiment directories remain 47.
 - Current worker next remains MA-255 on the canonical branch; no work is claimed for it.
-- Only a read-only stdlib integrity checker and four-case pure-algebra smoke test are provided; no model experiments, pretrained wnines or fresh datasets have been run. No trained-model evidence is produced.
+- Only a read-only stdlib integrity checker and four-case pure-algebra smoke test are provided; no model experiments, pretrained weights or fresh datasets have been run. No trained-model evidence is produced.
 - Promotion workflow: re-fetch canonical max MA ID, reconcile any collision and renumber on promotion; recheck PA numbers; open exactly one MA-specific experiment branch and move that plan into template; freeze first; only then run.
 - Use `python experiments/mirror_applications/check_registry_integrity.py` on a full checkout. This staging branch locally updates registry/PA/status only for internal consistency.
 
@@ -61,7 +61,7 @@ All learned weights/activations in these neural models are dimensionless after n
 
 ## Read-only preflight scripts
 
-- `python experiments/mirror_applications/research_intake/isolated_geometry_rebased_20261008/selfcheck.py` checks the eight plans and JSON schemas, frozen seeds, PA refs and staged registry/board. Needs a complete local checkout. No network or GPU.
+- `python experiments/mirror_applications/research_intake/isolated_geometry_rebased_20261008/selfcheck.py` checks the 15 plans and JSON schemas, frozen seeds, PA refs and staged registry/board. Needs a complete local checkout. No network or GPU.
 - `python experiments/mirror_applications/research_intake/isolated_geometry_rebased_20261008/algebra_smoke.py` checks exact Q/K gauge identity, GVA query absorption, valid/invalid RoPE commutation and noncommuting matrix products. Pure algebra is **not** trained-model or efficiency evidence.
 - The branch has been remotely cross-checked for registry/claim consistency; Python script execution requires a local checkout and should not be claimed without an interpreter exit status.
 
@@ -80,3 +80,13 @@ The frozen [MA-1162 GVA Stage-0 protocol](pilots/gva_alias_stage0/PROTOCOL.json)
 ## Independent runbook
 
 Open [SELF_CONTAINED_RUNBOOK.md](SELF_CONTAINED_RUNBOOK.md) for exact isolated worktree commands, per-MA launch interface, CPU algebra pilots, and the data/audit firewall. It intentionally does not alter the active worker context.
+
+## Seventeenth independent paper sweep
+
+Six new UNTESTED MA-1165..1170, PA425..433 controls; [implementation and deduplication](SEVENTEENTH_SWEEP.md). Original worker and MA-255 unchanged.
+- **MA-1165** [xKV cross-layer shared-basis Mirror reconstruction codes](plans/MA-1165/README.md) — P0; PA425;PA426;PA432.
+- **MA-1166** [KQ-SVD multi-context Mirror query-conditioned cache View](plans/MA-1166/README.md) — P0; PA426;PA425;PA432.
+- **MA-1167** [mtLoRA spectral-aware Mirror dimension-router bank](plans/MA-1167/README.md) — P0; PA428;PA427;PA373.
+- **MA-1168** [FACET single-adapter dynamic Mirror feature-code boundary](plans/MA-1168/README.md) — P1; PA429;PA431;PA63.
+- **MA-1169** [MoLoRA per-token physical specialist-bank compression](plans/MA-1169/README.md) — P0; PA430;PA433;PA364.
+- **MA-1170** [NeuroLoRA dynamic gate versus structured Mirror online coordinate](plans/MA-1170/README.md) — P1; PA431;PA429;PA19.

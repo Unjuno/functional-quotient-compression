@@ -4,13 +4,13 @@ Updated: 2026-10-08 JST
 Canonical worker branch remains `research/mirror-application-worker-ready-20261007` (unchanged).
 This is an ISOLATED RESEARCH branch `research/mirror-isolated-protocols-rebased-20261008`, NOT the worker authoritative queue.
 
-## Program totals (reconciled from authoritative 1164-row **isolated staging** registry)
+## Program totals (reconciled from authoritative 1170-row **isolated staging** registry)
 
-- Registered candidates: **1164**
-- P0: **636** (35 completed; 601 UNTESTED)
-- P1: **425** (12 completed; 413 UNTESTED)
+- Registered candidates: **1170**
+- P0: **640** (35 completed; 605 UNTESTED)
+- P1: **427** (12 completed; 415 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1117 UNTESTED, 29 PROMISING, 18 FAIL**
+- Current MA statuses: **1123 UNTESTED, 29 PROMISING, 18 FAIL**
 - 47 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -96,3 +96,7 @@ KG relation rotations (RotatE, TuckER, QuatE, PairRE), EXIF/device-aware ISPs (P
 ## Seventeenth independent research intake (staging only)
 
 The isolated research branch includes **MA-1156..1164** (nine UNTESTED candidates) and PA414..424 (11 external primary papers). It was rebased to canonical worker SHA `c935a903daca5c7d1d48aa50d05b5bd50f239cba` to avoid earlier ID collisions. Do not promote it or read it as the current worker queue. Source/audit protocols and code: [isolated geometry research](research_intake/isolated_geometry_rebased_20261008/README.md). Existing MA statuses, claims and MA-255 next candidate remain unchanged.
+
+## Seventeenth independent research intake — no worker preemption
+
+The isolated branch adds MA-1165..1170 (six UNTESTED; four P0, two P1), PA425..433 (nine primary controls), and three supplements to existing MA-1097, MA-578, MA-1112. Detailed self-contained plans: [seventeenth sweep](research_intake/isolated_geometry_rebased_20261008/SEVENTEENTH_SWEEP.md). Current worker candidate MA-255, scientific statuses and main are unchanged. This registry is branch-local staging; reconcile IDs again before promotion.

@@ -3864,3 +3864,98 @@ Native LRKV uses a shared full-rank key/value projection with low-rank head-spec
 https://proceedings.mlr.press/v306/tran26d.html
 
 Analyzes equivalences under sinusoidal and rotary positional encodings and explores symmetry-aware alignment and mode connectivity. Mirror RoPE audit must not assume arbitrary GL key transforms survive RoPE; compare with exact commutant families and invalid-transformation counterexamples.
+
+## PA425 — xKV: Cross-Layer KV-Cache Compression via Aligned Singular Vector Extraction
+
+**xKV: Cross-Layer KV-Cache Compression via Aligned Singular Vector Extraction** — Chi-Chih Chang et al.. ICML 2026, PMLR 306:12758-12778.  
+https://proceedings.mlr.press/v306/chang26d.html
+
+Code: https://github.com/abdelfattah-lab/xKV
+
+**Native prior/control:** Cross-layer shared token basis and selective reconstruction are native xKV. Mirror must beat xKV-SR on quality, actual physical cache bytes and real decode cost.
+
+**Mirror delta:** Demonstrate marginal m utility over native at real serialized bytes, active compute, and held-out quality. Paper results are not Mirror claims.
+
+
+## PA426 — KQ-SVD: Compressing the KV Cache with Provable Guarantees on Attention Fidelity
+
+**KQ-SVD: Compressing the KV Cache with Provable Guarantees on Attention Fidelity** — Damien Lesens, Beheshteh T. Rakhshan, Guillaume Rabusseau. AISTATS 2026, PMLR 300:3556-3564.  
+https://proceedings.mlr.press/v300/lesens26a.html
+
+**Native prior/control:** Native KQ-SVD uses query-key attention-score reconstruction rather than plain key weight error. Mirror must beat strong source-calibrated per-role projector banks.
+
+**Mirror delta:** Demonstrate marginal m utility over native at real serialized bytes, active compute, and held-out quality. Paper results are not Mirror claims.
+
+
+## PA427 — Rethinking Parameter Sharing for LLM Fine-Tuning with Multiple LoRAs
+
+**Rethinking Parameter Sharing for LLM Fine-Tuning with Multiple LoRAs** — Hao Ban, Kaiyi Ji. ACL Findings 2026, DOI 10.18653/v1/2026.findings-acl.625.  
+https://aclanthology.org/2026.findings-acl.625/
+
+Code: https://github.com/OptMN-Lab/ALoRA
+
+**Native prior/control:** ALoRA shares output B while fitting per-task A; identical A initialization can create spurious apparent cross-task similarity. Strong mandatory control for existing MA-1097.
+
+**Mirror delta:** Demonstrate marginal m utility over native at real serialized bytes, active compute, and held-out quality. Paper results are not Mirror claims.
+
+
+## PA428 — Scalable Multi-Task Low-Rank Model Adaptation
+
+**Scalable Multi-Task Low-Rank Model Adaptation** — Zichen Tian, Antoine Ledent, Qianru Sun. ICLR 2026.  
+https://proceedings.iclr.cc/paper_files/paper/2026/hash/791de7c35bb49cfca56744e67f90eef4-Abstract-Conference.html
+
+Code: https://github.com/doem97/ICLR26_mtLoRA
+
+**Native prior/control:** Native mtLoRA uses spectral-aware regularization, block-level adaptation and fine-grained dimension-wise routing; code compresses only this existing native state.
+
+**Mirror delta:** Demonstrate marginal m utility over native at real serialized bytes, active compute, and held-out quality. Paper results are not Mirror claims.
+
+
+## PA429 — One Adapter, Many Tasks: Task-Conditioned Feature Transformations for Continual Learning
+
+**One Adapter, Many Tasks: Task-Conditioned Feature Transformations for Continual Learning** — Yunxiang Fu, Meng Lou, Yizhou Yu. arXiv:2608.31096, Aug 2026 preprint.  
+https://arxiv.org/abs/2608.31096
+
+**Native prior/control:** FACET already uses a single shared adapter and a task-conditioned feature consistency scheme. Mirror must beat original conditioning and FiLM.
+
+**Mirror delta:** Demonstrate marginal m utility over native at real serialized bytes, active compute, and held-out quality. Paper results are not Mirror claims.
+
+
+## PA430 — MoLoRA: Composable Specialization via Per-Token Adapter Routing
+
+**MoLoRA: Composable Specialization via Per-Token Adapter Routing** — Shrey Shah, Justin Wagle. arXiv:2603.15965, Mar 2026 preprint.  
+https://arxiv.org/abs/2603.15965
+
+**Native prior/control:** Native MoLoRA routes per token across independent LoRA adapters; Mirror must reduce the bank without changing routing and without false cache compatibility.
+
+**Mirror delta:** Demonstrate marginal m utility over native at real serialized bytes, active compute, and held-out quality. Paper results are not Mirror claims.
+
+
+## PA431 — NeuroLoRA: Context-Aware Neuromodulation for Parameter-Efficient Multi-Task Adaptation
+
+**NeuroLoRA: Context-Aware Neuromodulation for Parameter-Efficient Multi-Task Adaptation** — Yuxin Yang et al.. arXiv:2603.12378, Mar 2026 preprint.  
+https://arxiv.org/abs/2603.12378
+
+**Native prior/control:** Context modulation of frozen sparse random projections and contrastive orthogonality are native NeuroLoRA. Extra Mirror m must outperform same-byte native gate.
+
+**Mirror delta:** Demonstrate marginal m utility over native at real serialized bytes, active compute, and held-out quality. Paper results are not Mirror claims.
+
+
+## PA432 — Quantization Dominates Rank Reduction for KV-Cache Compression
+
+**Quantization Dominates Rank Reduction for KV-Cache Compression** — Samuel Salfati. arXiv:2604.11501, Apr 2026 preprint.  
+https://arxiv.org/abs/2604.11501
+
+**Native prior/control:** Full-dimensional KV INT4 can outperform low-rank cache compression at equal physical storage on tested models. Require a strong bitpacked control for MA-578.
+
+**Mirror delta:** Demonstrate marginal m utility over native at real serialized bytes, active compute, and held-out quality. Paper results are not Mirror claims.
+
+
+## PA433 — Shared-Prefix KV Reuse Across Standard LoRA Adapters: Quality and Serving Tradeoffs
+
+**Shared-Prefix KV Reuse Across Standard LoRA Adapters: Quality and Serving Tradeoffs** — Dushyant Rajput. arXiv:2609.17109, Sep 2026 preprint.  
+https://arxiv.org/abs/2609.17109
+
+**Native prior/control:** Reused numerical standard-LoRA cache prefixes can still be physically copied; quality need not be equivalent to the specialist's native prefill. Add to MA-1112 controls.
+
+**Mirror delta:** Demonstrate marginal m utility over native at real serialized bytes, active compute, and held-out quality. Paper results are not Mirror claims.
