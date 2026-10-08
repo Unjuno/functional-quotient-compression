@@ -413,7 +413,7 @@ Pilot: BOLT-like shared orthogonal basis plus 6 diagonal m coefficients averaged
 
 When selecting MA-1096/1099/1102/1105/1114/1115, include BOLT (PA372), function-space/curvature metric (CG-LoRA PA373, Fora PA374), SVD+CUR localized task residual (PA376), task-vector bases PA375, information filtering PA377, and a gauge-invariant functional/OOD check (PA378..381) where applicable. Do not inflate the MA backlog with duplicated new rows for these existing questions. A task-code success must survive *actual held-out task outcomes and serializer/runtime*, not just weight reconstruction.
 
-MA-320 is complete. MA-322, MA-303 and MA-304 are complete; MA-303/304 trigger a pause for the factorized/supermask subfamily; MA-305 is paused. **MA-309 is the next P0** because MIMO tests a distinct implicit-ensemble mechanism. Do not interrupt active/frozen jobs to consume supplemental intake.
+MA-320 is complete. MA-322, MA-303 and MA-304 are complete; MA-303/304 trigger a pause for the factorized/supermask subfamily; MA-305 is paused. MA-309 tested a distinct MIMO mechanism and is complete; **MA-318 is next P0**. Do not interrupt active/frozen jobs to consume supplemental intake.
 
 ## Sixteenth research intake — KG relation operators, cameras, robotics and acoustic rooms
 
@@ -482,3 +482,6 @@ MA-304 is complete FAIL: 256-edge Mirror quality passed, but total payload was o
 ## Family pause: factorized and supermask codes
 
 MA-303 and MA-304 are consecutive P0 FAILs with the same structural result: ordinary direct codes reproduce Mirror functions while total archive bytes improve by less than 0.15%. Pause MA-305 and related factorized-mask candidates until a redesign adds a distinct quality/compute mechanism or materially changes amortization. MA-309 is not part of this failure mechanism: it tests the separate MIMO implicit-ensemble method and remains next.
+
+
+MA-309 is complete FAIL after FP16 payload reload: Mirror reduced serialized bytes by 25.6% but missed MIMO accuracy/diversity margins in all three fresh seeds. See A1 reconciliation and report. Next P0: MA-318.

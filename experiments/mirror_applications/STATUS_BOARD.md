@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (67 completed; 563 UNTESTED)
+- P0: **630** (68 completed; 562 UNTESTED)
 - P1: **422** (12 completed; 410 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1076 UNTESTED, 36 PROMISING, 43 FAIL**
+- Current MA statuses: **1075 UNTESTED, 36 PROMISING, 44 FAIL**
 - 73 local experiment directories are complete; MA-301 and MA-307 are additional completed experiments linked to their dedicated research branches.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-276 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-276 is next; MA-275 remains UNTESTED (P1).
@@ -21,7 +21,7 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-309 — MIMO subnetworks + Mirror member views (P0; PA42)**
+**MA-318 — continual coordinate-first skill acquisition (P0; PA33/PA30)**
 
 MA-255 is reconciled as PROMISING only for its aligned post-fit representation screen; a distinct 1,200-update protocol variant failed at development and remains sealed on fresh worlds. See `experiments/mirror_applications/ma-255-mirror-context-superposition/RECONCILIATION.md`.
 
@@ -195,3 +195,8 @@ Across three fresh seeds, Mirror phase views stayed at exactly 256 active edges 
 ## Masks/subnetworks family pause — 2026-10-08
 
 MA-303 and MA-304 are consecutive P0 FAILs in the factorized/supermask subfamily. Both produced aligned synthetic quality, but the Mirror coordinate reduced actual payload by only 0.080% and 0.141% versus the closest ordinary direct-code control. Shared bases/backbone and serialization dominate the one-coordinate saving; direct coefficients reconstruct the same task functions. Pause MA-305 and related factorized-mask proposals pending redesign. MA-309 tests a distinct MIMO implicit-ensemble mechanism and remains next P0.
+
+
+## MA-309 — FAIL for MIMO quality/diversity retention
+
+After A1 reloaded the actual FP16 inference payload, three fresh seeds gave standard MIMO heads 0.986 mean macro accuracy and 0.497 member disagreement at 6,256B. Mirror views saved 25.6% payload (4,652B) but reached only 0.809 accuracy and 0.189 disagreement; each seed missed the 2pp accuracy and 0.05 diversity margins. Mirror throughput was 0.62–0.85x standard MIMO. Scalar gate had equal bytes but lower accuracy. Fifteen corrected payloads were hash/byte checked and 15 metric rows replayed exactly; five tests pass. Initial FP32-only runs were quarantined. Synthetic fixed-update screen only; no capacity claim. Dedicated branch `research/ma-309-mimo-mirror-member-views-20261008`. Next P0: MA-318.

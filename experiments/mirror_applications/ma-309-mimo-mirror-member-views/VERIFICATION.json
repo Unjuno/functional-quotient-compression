@@ -1,9 +1,24 @@
 {
   "experiment_id": "MA-309",
   "commit": "PENDING",
-  "tests": {"command": "python -m pytest -q experiments/mirror_applications/ma-309-mimo-mirror-member-views/tests", "passed": 5, "failed": 0},
-  "serialization": {"roundtrip_checked": true, "byte_exact": true},
-  "metric_replay": {"checked": true, "max_difference": 0.0},
-  "fresh_split_integrity_checked": false,
-  "notes": ["A1 evaluates only after reloading actual serialized FP16 weights.", "Original 30911-30913 fresh results and initial FP32-only dev results are quarantined and excluded.", "Corrected fresh seeds 30921-30923 have not been opened."]
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-309-mimo-mirror-member-views/tests",
+    "passed": 5,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Corrected inference evaluation reloaded actual serialized FP16 weights.",
+    "15 corrected fresh payloads reloaded and matched recorded byte length and SHA-256.",
+    "All three corrected fresh seeds replayed exactly for 15 metric rows and payload hashes.",
+    "Initial fresh seeds 30911-30913 were quarantined after the FP32-evaluation implementation bug; they are excluded from primary results."
+  ]
 }
