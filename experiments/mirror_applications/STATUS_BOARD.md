@@ -1,15 +1,16 @@
 # Mirror Application Status Board
 
 Updated: 2026-10-08 JST
-Canonical branch: `research/mirror-application-worker-ready-20261007`
+Canonical worker branch remains `research/mirror-application-worker-ready-20261007` (unchanged).
+This is an ISOLATED RESEARCH branch `research/mirror-isolated-protocols-rebased-20261008`, NOT the worker authoritative queue.
 
-## Program totals (reconciled from authoritative 1155-row registry)
+## Program totals (reconciled from authoritative 1164-row **isolated staging** registry)
 
-- Registered candidates: **1155**
-- P0: **630** (35 completed; 595 UNTESTED)
-- P1: **422** (12 completed; 410 UNTESTED)
+- Registered candidates: **1164**
+- P0: **636** (35 completed; 601 UNTESTED)
+- P1: **425** (12 completed; 413 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1108 UNTESTED, 29 PROMISING, 18 FAIL**
+- Current MA statuses: **1117 UNTESTED, 29 PROMISING, 18 FAIL**
 - 47 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -90,3 +91,8 @@ KG relation rotations (RotatE, TuckER, QuatE, PairRE), EXIF/device-aware ISPs (P
 - `CLAIM_LEDGER.csv` and each experiment's `VERIFICATION.json` are the evidence index; `STATUS_BOARD.md` is an operational cache.
 - Before allocating an ID or starting work, re-read the live registry and search for experiment branches.
 - Preserve old branches, failed results, exploratory data and locked protocols. No automatic merge to main.
+
+
+## Seventeenth independent research intake (staging only)
+
+The isolated research branch includes **MA-1156..1164** (nine UNTESTED candidates) and PA414..424 (11 external primary papers). It was rebased to canonical worker SHA `c935a903daca5c7d1d48aa50d05b5bd50f239cba` to avoid earlier ID collisions. Do not promote it or read it as the current worker queue. Source/audit protocols and code: [isolated geometry research](research_intake/isolated_geometry_rebased_20261008/README.md). Existing MA statuses, claims and MA-255 next candidate remain unchanged.
