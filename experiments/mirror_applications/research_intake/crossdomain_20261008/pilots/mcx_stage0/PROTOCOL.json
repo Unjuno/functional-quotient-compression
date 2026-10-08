@@ -1,0 +1,72 @@
+{
+  "id": "MCX_STAGE0_20261008",
+  "version": 1,
+  "status": "FROZEN_BEFORE_DEV_AND_FRESH",
+  "created": "2026-10-08",
+  "branch": "research/mirror-crossdomain-method-sweep-20261008",
+  "base_commit": "fce23965253b42538fa6c5d1611332b3eea392b6",
+  "no_worker_queue_change": true,
+  "evidence_lane": "finite-dimensional mathematical/structural CPU demonstration, NOT original TabM/Caduceus/DISCO benchmark, no neural model training",
+  "related_candidates": [
+    "MA-1183",
+    "MA-1186",
+    "MA-1187"
+  ],
+  "source_refs": [
+    "PA453 TabM",
+    "PA457 Caduceus",
+    "PA458 operator splitting",
+    "PA462 DISCO"
+  ],
+  "controls": {
+    "RC": "Construct exact reverse-complement permutation J on length-16 four-symbol DNA, form even=(R+J R)/2 and odd=(R-J R)/2 representations. Assert J²=I and h(Jx)=P h(x) to 1e-11. Test generic unsymmetrized matrix violates P-equivariance on 5/5 worlds. Functional output under RC is symmetry-equivalent, not new independent expert.",
+    "BatchEnsemble": "For rectangular input→output W(6x4), construct a nonzero nullspace vector n with n@W=0; generic input-side rank-one r causes (n*r)@W ≠0. This is a counterexample to extracting all input-conditioned TabM branches from only y0=xW; output-side only scaling is exact cheap reconstruction.",
+    "operator_splitting": "N=16 spatial points, fixed skew circulant transport A and spatially heterogeneous diagonal reaction/damping B. Compare exact exp(dt(A+B)), Lie exp(dt A)exp(dt B), commutator-corrected Lie and Strang exp(dt A/2)exp(dt B)exp(dt A/2) for dt in [0.05,0.1,0.2]. Include B scalar*I as exact commuting null. Never call a commutator correction novel relative to ordinary numerical splitting."
+  },
+  "seeds": {
+    "development": [
+      11,
+      12,
+      13
+    ],
+    "fresh": [
+      101,
+      102,
+      103,
+      104,
+      105
+    ],
+    "fresh_locked": true,
+    "split_unit": "independent random matrices and DNA sequences per world",
+    "fresh_used_for_selection": false
+  },
+  "implementation": {
+    "runtime": "Python3, numpy2.3.5, scipy1.17, float64, OPENBLAS_NUM_THREADS=1",
+    "device": "CPU only",
+    "rows": "one row per world x check / timestep, raw dev and fresh CSV",
+    "unit_tests": ">=5 deterministic tests for exact+counterexamples",
+    "trained_networks": false
+  },
+  "frozen_gates": {
+    "algebra_PASS": "Every fresh world: J²=I and RC parity <=1e-11, native BatchEnsemble post-output exact <=1e-11, input-code collision full output differs >=1e-4, commuting Lie residual <=1e-11.",
+    "algebra_FAIL": "Exact parity mismatch, false same-output collision, noncommuting mismatch mislabeled exact, or unstable matrix exponential results.",
+    "comparison_UNCERTAIN": "Finite dt at random worlds may favor or hurt correction vs Strang; report both, no selection from audit. Does NOT measure Mirror-specific utility, compression, TabM TabPFN accuracy or actual Caduceus behavior."
+  },
+  "units": {
+    "dt": "time (s) for synthetic normalized ODE, A,B 1/s",
+    "matrix_norm": "dimensionless when normalized",
+    "error": "dimensionless relative Frobenius",
+    "storage": "not measured, no compression claim"
+  },
+  "uncertainty": "max FP64 residuals and paired five-world spread, not statistical 95% CI; time/performance tests not run.",
+  "output_contract": [
+    "source/run_stage0.py",
+    "source/test_stage0.py",
+    "results/dev_raw.csv",
+    "results/fresh_raw.csv",
+    "results/VERIFICATION.json",
+    "REPORT.md"
+  ],
+  "audit_policy": "Frozen protocol commit precedes code creation, five fresh worlds run once and are not used to revise analytic setup. Any changed protocol requires separate amendment and fresh seeds.",
+  "limitations": "Caduceus native is a learned reverse-complement-equivariant Mamba; this toy uses linear intertwiners only. DISCO operator is learned neural, this toy uses exact small linear operators. TabM is more than BatchEnsemble; toy only demonstrates non-shareable input factor algebra."
+}
