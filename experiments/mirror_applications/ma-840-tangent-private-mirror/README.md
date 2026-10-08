@@ -2,26 +2,26 @@
 
 ## H — hypothesis
 
-A shared rank-2 tangent basis may represent small task adaptations compactly; large nonlinear deviations may require private rank-1 residual parameters.
+A shared rank-2 tangent basis with task Mirror codes should cover small, approximately linearizable adaptations cheaply; high residual tasks should benefit from a private rank-1 nonlinear residual without paying for a full update.
 
-## T — planned test
+## T — execution
 
-Synthetic vector regression around one tanh base network, stratified by teacher residual amplitude. Compare tangent-only task codes, tangent plus private rank-1 nonlinear residual, and independent full updates. Fresh seeds and gates are frozen in `PROTOCOL.json`. PA226 motivates tangent linearization; PA18 provides the low-rank adapter control.
+Three fresh synthetic worlds (84011–84013), each with 4 development task IDs used to estimate the rank-2 tangent basis and 8 fresh task IDs (4 low-residual, 4 high-residual). Each fresh task used 32 support and 256 query examples. Controls were tangent-only task codes, tangent plus private rank-1 nonlinear residual, and independent full weight updates. Inference payloads were serialized with safetensors, including shared base weights and basis where required.
 
-## D — status
+## D — FAIL
 
-SCREENING.
+The preregistered low-residual tangent quality gate passed in all 3 seeds: mean query MSE was `1.78e-6`, with 2,256 B shared tangent payload. In the high-residual stratum, tangent-only mean MSE was `1.415e-2`; adding the private rank-1 residual produced `1.415e-2` as well, failing the registered requirement for at least 50% improvement. Full per-task updates reached mean MSE about `1.67e-6` at 5,232 B. The hybrid payload was 4,024 B but did not recover quality.
 
 ## C — strongest counter-hypothesis
 
-The teacher is constructed in a shared tangent subspace, so low-residual gains may reflect alignment with the known basis; rank-1 private control may also simply reproduce the teacher's hard-task construction.
+The chosen rank-1 residual parameterization is ineffective under the frozen 32-example support budget; this does not show that all private residuals fail. Full updates show that nonlinear capacity is useful for the hard stratum, while this particular residual implementation did not learn it.
 
 ## U — unconfirmed
 
-No result yet; no natural task or pretrained network is included.
+No natural tasks or pretrained network were tested. The tangent basis was estimated from synthetic task deltas that share a rank-2 subspace. Whether a better private residual, selective allocation rule or more support data fixes the hard stratum remains unknown.
 
 ## Fact / Interpretation / Hypothesis
 
-- Fact: PA226 studies when fine-tuning is explained by first-order linearization; PA18 is a low-rank adapter method.
-- Interpretation: a useful screen must separate the tangent regime from the nonlinear residual regime.
-- Hypothesis: a small shared code plus selective private state may give a better storage/quality frontier across both strata.
+- Fact: tangent-only fits the low-residual group; hybrid and tangent-only errors are effectively equal on the high-residual group; full updates improve high-residual quality by roughly four orders of magnitude.
+- Interpretation: shared tangent coordinates compress this aligned low-residual task family, but the tested private residual does not bridge the nonlinear boundary.
+- Hypothesis: private state needs a more learnable factorization or residual selection rule for nonlinear tasks.

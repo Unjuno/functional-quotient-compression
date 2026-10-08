@@ -1,7 +1,7 @@
 {
   "experiment_id": "MA-840",
   "title": "Tangent Mirror basis with nonlinear private residual",
-  "status": "SCREENING",
+  "status": "FAIL",
   "evidence_lane": "MECHANISM/STORAGE",
   "base_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
   "draw_id": "Draw35",
@@ -58,5 +58,6 @@
     "task teacher shares a known tangent subspace",
     "no capacity claim from fixed updates",
     "private residual threshold does not generalize without non-synthetic task families"
-  ]
+  ],
+  "outcome_note": "Low-residual tangent-only gate passed, but the private rank-1 nonlinear residual had effectively identical query MSE to tangent-only on all high-residual fresh tasks; preregistered >=50% improvement gate failed. Full task-specific weight updates reduced high-residual MSE to about 1.65e-6, showing the residual regime needs a better private parameterization. No audit-driven changes were made."
 }

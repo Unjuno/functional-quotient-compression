@@ -1,10 +1,25 @@
 {
   "experiment_id": "MA-840",
   "draw_id": "Draw35",
-  "protocol_sha256": "",
-  "draw_record_sha256": "",
-  "results_sha256": "",
-  "audit_replay": "pending",
-  "serialized_payload_replay": "pending",
-  "checks": []
+  "protocol_sha256": "ddc18900fdd963d5ae75d762453cf4c68b9efc8ce033de86d0894a7f650a82c7",
+  "draw_record_sha256": "f0f5ae3443fac72fa962c26235c66f75e0c099ab1e6ec71c1963fd0936e8f7f1",
+  "results_sha256": "cf184251be234baa1af9aba51628cb678ecd70a6c75ce9cc0a95852e7e2c3f59",
+  "core_csv_sha256": "4505a3a2d98f80c1fb5257bcdefe680ed5dffe4af390b9793cc5b443317a497f",
+  "audit_replay_log_sha256": "06b9d93bcbe30f065e897ac8378ad97cb4f06b1a28615c8d8e293aa6c83d9db3",
+  "audit_replay": "passed: all 72 rows reproduced exact query MSE, payload bytes and payload hashes",
+  "serialized_payload_replay": "passed: safetensors byte counts and hashes checked; full-state payload test passed",
+  "audit_seeds": [
+    84011,
+    84012,
+    84013
+  ],
+  "audit_rows": 72,
+  "tests": "5 passed",
+  "registry_integrity": "pending claim registration",
+  "checks": [
+    "fresh low-residual tangent gate passes on all 3 seeds",
+    "fresh high-residual private rank-1 quality improvement gate fails on all 3 seeds",
+    "full updates recover high-residual MSE at larger payload",
+    "results replay is deterministic"
+  ]
 }

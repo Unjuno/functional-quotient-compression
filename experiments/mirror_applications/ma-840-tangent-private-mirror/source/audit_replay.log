@@ -1,0 +1,30 @@
+/workspace/functional-quotient-compression/experiments/mirror_applications/ma-840-tangent-private-mirror/source/experiment.py:41: DeprecationWarning: __array_wrap__ must accept context and return_scalar arguments (positionally) in the future. (Deprecated NumPy 2.0)
+  def target(x,W,delta):return torch.tanh(x@(W+delta).T)
+/workspace/functional-quotient-compression/experiments/mirror_applications/ma-840-tangent-private-mirror/source/experiment.py:56: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  for _ in range(steps):loss=((torch.tanh(x@(torch.tensor(W0_global)+delta).T)-y)**2).mean();opt.zero_grad();loss.backward();opt.step()
+/workspace/functional-quotient-compression/experiments/mirror_applications/ma-840-tangent-private-mirror/source/experiment.py:41: DeprecationWarning: __array_wrap__ must accept context and return_scalar arguments (positionally) in the future. (Deprecated NumPy 2.0)
+  def target(x,W,delta):return torch.tanh(x@(W+delta).T)
+84011 low
+tangent mse 4.2683206150084807e-07 bytes 2256
+hybrid mse 4.2683275572330537e-07 bytes 4024
+full mse 5.914431966402844e-07 bytes 5232
+84011 high
+tangent mse 0.01438057841733098 bytes 2256
+hybrid mse 0.01438057841733098 bytes 4024
+full mse 1.4719205188029605e-06 bytes 5232
+84012 low
+tangent mse 7.364750778116047e-07 bytes 2256
+hybrid mse 7.364756937633388e-07 bytes 4024
+full mse 2.2895898581509755e-06 bytes 5232
+84012 high
+tangent mse 0.014278922230005264 bytes 2256
+hybrid mse 0.014278922462835908 bytes 4024
+full mse 1.770422352276313e-06 bytes 5232
+84013 low
+tangent mse 4.181777320866331e-06 bytes 2256
+hybrid mse 4.181775944189781e-06 bytes 4024
+full mse 1.2352199227905203e-06 bytes 5232
+84013 high
+tangent mse 0.013801872730255127 bytes 2256
+hybrid mse 0.013801873195916414 bytes 4024
+full mse 1.7077457812320063e-06 bytes 5232
