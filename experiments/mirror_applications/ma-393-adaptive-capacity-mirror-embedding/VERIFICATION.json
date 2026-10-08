@@ -1,0 +1,185 @@
+{
+  "experiment_id": "MA-393",
+  "commit": "PENDING_COMMIT",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-393-adaptive-capacity-mirror-embedding/tests",
+    "passed": 4,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "payload_count": 12,
+    "payloads": [
+      {
+        "seed": 39301,
+        "method": "full",
+        "bytes": 67085,
+        "sha256": "a3017e436d4baa19af49711f0f001cb0a42d0aff24a9e10f650031d0159ddf1a",
+        "arrays": [
+          "classifier.bias",
+          "classifier.weight",
+          "embedding"
+        ]
+      },
+      {
+        "seed": 39301,
+        "method": "adaptive",
+        "bytes": 24539,
+        "sha256": "3f18246a443fb753b42cee68a118e3f20ffcf5095689fd4b11917311aede3154",
+        "arrays": [
+          "classifier.bias",
+          "classifier.weight",
+          "head",
+          "middle",
+          "tail"
+        ]
+      },
+      {
+        "seed": 39301,
+        "method": "uniform12",
+        "bytes": 26125,
+        "sha256": "563057cffdfa5b1bd353fbd6b4ffac8908961c23bef81d94c60114f04850156c",
+        "arrays": [
+          "classifier.bias",
+          "classifier.weight",
+          "embedding"
+        ]
+      },
+      {
+        "seed": 39301,
+        "method": "tail_basis",
+        "bytes": 18897,
+        "sha256": "5bafd1f6411d46e234175c0626c40da859852e35da462186c2f5a2649ff6c57b",
+        "arrays": [
+          "basis",
+          "classifier.bias",
+          "classifier.weight",
+          "head",
+          "middle",
+          "tail_code"
+        ]
+      },
+      {
+        "seed": 39301,
+        "method": "tail_scalar",
+        "bytes": 20667,
+        "sha256": "e02ba47cbe42d323c2210b2a55d60978369acb9a29d1dbccbca433f4ad06fb0a",
+        "arrays": [
+          "basis",
+          "classifier.bias",
+          "classifier.weight",
+          "gain",
+          "head",
+          "middle",
+          "tail_code"
+        ]
+      },
+      {
+        "seed": 39301,
+        "method": "mirror",
+        "bytes": 20669,
+        "sha256": "ee7a0dc5705b0e7ba135f82313151c01f4e42719081b44047ad62ff64763ab12",
+        "arrays": [
+          "angle",
+          "basis",
+          "classifier.bias",
+          "classifier.weight",
+          "head",
+          "middle",
+          "tail_code"
+        ]
+      },
+      {
+        "seed": 39302,
+        "method": "full",
+        "bytes": 67085,
+        "sha256": "d7cc95f06fbc0476a4b7c594e805ebc6f7d423afb7db0fb7e84c8e5688069e1e",
+        "arrays": [
+          "classifier.bias",
+          "classifier.weight",
+          "embedding"
+        ]
+      },
+      {
+        "seed": 39302,
+        "method": "adaptive",
+        "bytes": 24539,
+        "sha256": "51516f06da3e4b4d57d7da6c7ba9ccec270c3f0529660fbaaca28d853c9cc3af",
+        "arrays": [
+          "classifier.bias",
+          "classifier.weight",
+          "head",
+          "middle",
+          "tail"
+        ]
+      },
+      {
+        "seed": 39302,
+        "method": "uniform12",
+        "bytes": 26125,
+        "sha256": "e8a5923bdbf2bc0872ec006c67d72fc93a4531391183242d92e6149042d62852",
+        "arrays": [
+          "classifier.bias",
+          "classifier.weight",
+          "embedding"
+        ]
+      },
+      {
+        "seed": 39302,
+        "method": "tail_basis",
+        "bytes": 18897,
+        "sha256": "7473a236f0c31aa4d5bfcaa85109ec4cd860f66dc67cec48feaf878d0ad5ba69",
+        "arrays": [
+          "basis",
+          "classifier.bias",
+          "classifier.weight",
+          "head",
+          "middle",
+          "tail_code"
+        ]
+      },
+      {
+        "seed": 39302,
+        "method": "tail_scalar",
+        "bytes": 20667,
+        "sha256": "bfff1c90bd34b8def30130c09c8d736c23bc54e17b0ababc3a19163dd2ccd573",
+        "arrays": [
+          "basis",
+          "classifier.bias",
+          "classifier.weight",
+          "gain",
+          "head",
+          "middle",
+          "tail_code"
+        ]
+      },
+      {
+        "seed": 39302,
+        "method": "mirror",
+        "bytes": 20669,
+        "sha256": "56b3d209602c11d8f2020026c1aa830c2b4f67008d252188b8c79e3ecc18725b",
+        "arrays": [
+          "angle",
+          "basis",
+          "classifier.bias",
+          "classifier.weight",
+          "head",
+          "middle",
+          "tail_code"
+        ]
+      }
+    ],
+    "FP16_payload_bytes_authoritative": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "all_frequency_band_accuracy_and_NLL_replayed_exactly": true
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Two development seeds, Zipf exponent 1.1, all six registered controls.",
+    "All methods reached 100% accuracy in all frequency bands; every tail token was present in training.",
+    "Mirror storage gate passed but tail accuracy-gain gate failed against simpler controls.",
+    "Fresh seeds 39311, 39312 and 39313 remain unopened."
+  ]
+}

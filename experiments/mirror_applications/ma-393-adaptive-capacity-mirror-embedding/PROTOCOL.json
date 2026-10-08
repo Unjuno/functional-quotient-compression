@@ -1,0 +1,83 @@
+{
+  "experiment_id": "MA-393",
+  "title": "Adaptive-capacity embedding plus rare-token Mirror views",
+  "status": "PROTOCOL_FROZEN_BEFORE_DEVELOPMENT",
+  "base_commit": "16b06fd",
+  "prior_art_refs": [
+    "PA60"
+  ],
+  "evidence_lane": "QUALITY/STORAGE/FREQUENCY_BANDS/COMPUTE",
+  "hypothesis": "Under a Zipf token distribution, a frequency-banded embedding with rare-token rank-4 shared bases and one Givens View angle per rare token will improve tail-token accuracy by >=0.05 over both a same-byte uniform embedding and the same rare-token basis without Mirror, while keeping head accuracy within 0.02 of the ordinary adaptive baseline and overall NLL within 0.02; total inference bytes should be <=0.85x adaptive input embeddings.",
+  "physical_object": "full-dimensional head embeddings, medium-band embeddings, and one shared rank-4 basis for rare tokens",
+  "mirror_coordinate": "one per-rare-token Givens angle rotating the rank-4 reconstruction in 32D",
+  "logical_multiplicity": "768 rare-token embedding views from shared basis parameters plus individual low-dimensional token codes",
+  "model": {
+    "vocabulary_size": 1024,
+    "embedding_dim": 32,
+    "classes": 8,
+    "frequency_bands": {
+      "head_tokens": 64,
+      "middle_tokens": 192,
+      "tail_tokens": 768
+    },
+    "adaptive_dimensions": {
+      "head": 32,
+      "middle": 16,
+      "tail": 8
+    },
+    "mirror_tail_code_dim": 4,
+    "train_examples": 65536,
+    "validation_examples": 16384,
+    "test_examples": 32768,
+    "batch_size": 512,
+    "optimizer_updates": 1200,
+    "optimizer": "Adam",
+    "learning_rate": 0.003,
+    "zipf_exponent": 1.1,
+    "development_seeds": [
+      39301,
+      39302
+    ],
+    "fresh_seeds": [
+      39311,
+      39312,
+      39313
+    ],
+    "labels": "token_id mod 8; all methods share same sampled token sequences within each seed"
+  },
+  "controls": [
+    "independent full 32D embedding table upper control",
+    "ordinary adaptive input: dimensions 32/16/8 for head/middle/tail",
+    "same-byte uniform 12D embedding across vocabulary",
+    "rare-token shared rank-4 basis without per-token Mirror View",
+    "same rare-token rank-4 basis plus scalar token gain",
+    "Mirror rare-token rank-4 basis plus one per-token Givens angle; head/middle allocations identical to ordinary adaptive input"
+  ],
+  "development_gate_before_fresh": "In both development seeds: Mirror tail-band accuracy >=0.05 above both uniform12 and tail-basis-without-view; head-band accuracy within 0.02 of adaptive input; overall test NLL <= adaptive NLL +0.02; and Mirror full serialized bytes <=0.85x adaptive input. Otherwise fresh remains sealed.",
+  "success_gate": "All three fresh seeds meet tail/head/overall-NLL/byte gates with exact reloaded payload replay; report per-band token coverage, NLL, accuracy, bytes, runtime and throughput.",
+  "failure_gate": "Any development gate misses in either seed; fresh stays sealed.",
+  "storage": {
+    "authority": "actual deterministic ZIP/NPY FP16 inference payload after reload",
+    "paid_objects": [
+      "head/middle embeddings",
+      "rare per-token codes",
+      "shared basis and reconstruction matrices",
+      "classifier",
+      "band boundaries and vocabulary metadata",
+      "archive headers"
+    ]
+  },
+  "compute": {
+    "report_updates_examples_and_wall": true,
+    "report_embedding_lookup_and_view_macs": true,
+    "report_band_token_coverage": true,
+    "report_test_throughput": true
+  },
+  "boundaries": [
+    "synthetic token classification with Zipf sampling; not natural LM evidence",
+    "same Zipf sample sequences within each seed for all methods",
+    "per-band frequency counts are determined before training",
+    "fixed update performance is not a capacity claim",
+    "fresh seeds unopened until every development gate passes"
+  ]
+}
