@@ -1,9 +1,9 @@
 {
   "experiment_id": "MA-320",
-  "commit": "<frozen protocol commit>",
-  "tests": {"command": "", "passed": null, "failed": null},
-  "serialization": {"roundtrip_checked": false, "byte_exact": false},
+  "commit": "protocol 3f23869; pre-fresh source/result commit pending",
+  "tests": {"command": "python -m pytest -q experiments/mirror_applications/ma-320-tucker-logical-experts/tests", "passed": 5, "failed": 0},
+  "serialization": {"roundtrip_checked": true, "byte_exact": true, "payload_hashes_exact": true},
   "metric_replay": {"checked": false, "max_difference": null},
   "fresh_split_integrity_checked": false,
-  "notes": []
+  "notes": ["Development results only. Frozen fresh seeds 32011, 32012, 32013 have not been opened.", "Mirror phase codes preserve aligned experts below the quality threshold; all 16 unrelated experts are assigned private full matrices by the frozen validation fallback rule."]
 }
