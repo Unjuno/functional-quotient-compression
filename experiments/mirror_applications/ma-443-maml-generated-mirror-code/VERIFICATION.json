@@ -1,6 +1,7 @@
 {
   "experiment_id": "MA-443",
   "protocol_commit": "027c608",
+  "protocol_amendment_commit": "f717bf0",
   "tests": {
     "command": "python -m unittest discover -s experiments/mirror_applications/ma-443-maml-generated-mirror-code/tests -v",
     "passed": 2,
@@ -9,7 +10,7 @@
   "serialization": {
     "roundtrip_checked": true,
     "byte_exact": true,
-    "fresh_task_payloads": 1200,
+    "fresh_task_payloads": 3600,
     "encoder_checkpoints": 27,
     "payload_hashes_checked": true,
     "actual_serialized_bytes_authoritative": true,
@@ -19,9 +20,11 @@
     "checked": true,
     "tolerance": 1e-08,
     "notes": [
-      "3,600 fresh step/task/method rows replay from exact task payloads.",
+      "Corrected 3600 fresh step/task/method rows replay from exact task payloads.",
+      "Meta/dev/fresh task IDs are disjoint after A1.",
       "Encoder checkpoints are charged once and amortized at N=1/20/100.",
-      "Mirror encoder beats zero-init quality but misses storage and compute gates."
+      "Encoder improves zero-init quality but misses storage/compute gates.",
+      "A1-invalidated task-overlap results excluded."
     ]
   },
   "fresh_split_integrity_checked": true,
@@ -29,6 +32,18 @@
     44310,
     44311,
     44312
+  ],
+  "fresh_task_ids": [
+    2000,
+    2019
+  ],
+  "meta_train_task_ids": [
+    1000,
+    1127
+  ],
+  "development_task_ids": [
+    0,
+    11
   ],
   "notes": [
     "Aligned synthetic linear task only.",
