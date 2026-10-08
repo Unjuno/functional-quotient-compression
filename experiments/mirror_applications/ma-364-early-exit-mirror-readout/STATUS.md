@@ -8,7 +8,7 @@
 - Fresh/audit opened: no; 36411–36413 remain sealed
 - Results committed: yes
 - Verification committed: yes
-- Registry row updated: no
+- Registry and claim ledger updated: yes (FAIL)
 
 ## Decision summary
 
@@ -16,4 +16,4 @@ Mirror and direct coefficient controls had identical predictions and payload byt
 
 ## Next action
 
-Verify replay and tests, update records, then continue through the registry.
+Replay and tests pass locally; FAIL is present in registry, claim ledger, and status board. Continue from the latest eligible P0.
