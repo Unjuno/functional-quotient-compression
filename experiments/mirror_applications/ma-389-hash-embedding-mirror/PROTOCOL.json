@@ -1,0 +1,74 @@
+{
+  "experiment_id": "MA-389",
+  "title": "Hash Embedding Mirror importance codes",
+  "status": "PROTOCOL_FROZEN_BEFORE_DEVELOPMENT",
+  "base_commit": "81f653b",
+  "prior_art_refs": [
+    "PA58"
+  ],
+  "evidence_lane": "QUALITY/STORAGE/COMPUTE/COLLISION",
+  "hypothesis": "For token labels recoverable from two hashed shared components, replacing two learned Hash Embedding importance values per token with one Mirror Givens angle preserves held-out-token classification NLL within 0.02 accuracy points of native Hash Embeddings, beats a one-scalar importance control by at least 0.05 accuracy, and reduces actual inference payload bytes by at least 15%; collision-degree performance should degrade less than unweighted hashing.",
+  "physical_object": "shared pool of 64 learned 16-dimensional component embeddings and a shared linear classifier",
+  "mirror_coordinate": "one learned angle per token mixing its two fixed hashed component vectors with cosine and sine coefficients",
+  "logical_multiplicity": "1024 token embeddings from a shared component table and one token-specific Mirror coordinate each",
+  "prior_art_delta": "PA58 Hash Embeddings combine a few shared hashed component vectors with token-specific learned importance weights; the Mirror code replaces that importance vector with a structured coordinate.",
+  "model": {
+    "vocabulary_size": 1024,
+    "embedding_dim": 16,
+    "classes": 8,
+    "component_pool_size": 64,
+    "components_per_token": 2,
+    "train_examples": 65536,
+    "validation_examples": 16384,
+    "test_examples": 32768,
+    "batch_size": 512,
+    "optimizer_updates": 1200,
+    "optimizer": "Adam",
+    "learning_rate": 0.003,
+    "development_seeds": [
+      38901,
+      38902
+    ],
+    "fresh_seeds": [
+      38911,
+      38912,
+      38913
+    ],
+    "labels": "seeded balanced random class per token; all methods use the same fixed token labels per world",
+    "hashing": "two fixed deterministic uint8 component indices per token, identical across methods within a world; indexes and metadata are charged"
+  },
+  "controls": [
+    "independent full token embedding table upper control",
+    "native Hash Embeddings: shared component pool plus two learned token importance weights",
+    "same hash sum with no importance coefficients",
+    "same hash pool plus one learned scalar token gain on the component sum",
+    "Mirror: same hash pool plus one per-token Givens angle mixing the two selected vectors"
+  ],
+  "development_gate_before_fresh": "For both development seeds: Mirror test accuracy within 0.02 of native Hash Embeddings; Mirror >=0.05 above scalar importance; actual serialized inference payload <=0.85x native Hash Embeddings; and Mirror collision-degree accuracy no more than 0.05 below native in any populated degree bin. Otherwise fresh remains sealed.",
+  "success_gate": "All three fresh worlds meet the quality/bytes/collision gates, with exact loaded-payload replay. Report NLL, accuracy, actual full payload bytes, token-level collision bins, train/inference compute and throughput.",
+  "failure_gate": "Any registered development gate fails in either seed; fresh stays unopened.",
+  "storage": {
+    "authority": "actual deterministic ZIP/NPY FP16 model inference payload bytes after reload",
+    "paid_objects": [
+      "component vectors or explicit embeddings",
+      "all per-token importance weights/scalars/angles",
+      "fixed hash component indices",
+      "classifier",
+      "vocabulary and hash metadata",
+      "archive headers"
+    ]
+  },
+  "compute": {
+    "report_optimizer_updates_and_examples": true,
+    "report_embedding_lookups_and_generation_macs": true,
+    "report_inference_throughput": true,
+    "report_training_wall_clock": true
+  },
+  "boundaries": [
+    "synthetic token-to-class lexical surrogate, not language-model or natural vocabulary evidence",
+    "same task labels and hash assignments for all controls within each world",
+    "collision degree is determined by full two-index tuple and fixed before evaluation",
+    "logical token count does not imply independent capacity",
+    "fresh seeds unopened until all development gates pass"
+  ]
+}

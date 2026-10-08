@@ -1,0 +1,162 @@
+{
+  "experiment_id": "MA-389",
+  "commit": "PENDING_COMMIT",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-389-hash-embedding-mirror/tests",
+    "passed": 4,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "payload_count": 10,
+    "payloads": [
+      {
+        "seed": 38901,
+        "method": "full",
+        "bytes": 34007,
+        "sha256": "a0adfa8e592ee2bc29aa4efd87e12c1ff1be390a1b10f277942d370440ed25a9",
+        "arrays": [
+          "classifier.bias",
+          "classifier.weight",
+          "embedding"
+        ],
+        "charged_hash_indices": false
+      },
+      {
+        "seed": 38901,
+        "method": "hash",
+        "bytes": 9929,
+        "sha256": "fe176fd225ffb19a26c8d850753136cd423670c3d2a5b82f984950184ab3dd82",
+        "arrays": [
+          "classifier.bias",
+          "classifier.weight",
+          "components",
+          "hash_indices",
+          "importance"
+        ],
+        "charged_hash_indices": true
+      },
+      {
+        "seed": 38901,
+        "method": "unweighted",
+        "bytes": 5587,
+        "sha256": "8ba3b814dc7c9ba85ada531916c0f2d66e309c1fc2a195f358f3031fb70be620",
+        "arrays": [
+          "classifier.bias",
+          "classifier.weight",
+          "components",
+          "hash_indices"
+        ],
+        "charged_hash_indices": true
+      },
+      {
+        "seed": 38901,
+        "method": "scalar",
+        "bytes": 7869,
+        "sha256": "4b4fe4ceccb4aff3fa18cd5b14c2d1948bee3958129286b0c8233275e3f13eff",
+        "arrays": [
+          "classifier.bias",
+          "classifier.weight",
+          "components",
+          "gain",
+          "hash_indices"
+        ],
+        "charged_hash_indices": true
+      },
+      {
+        "seed": 38901,
+        "method": "mirror",
+        "bytes": 7871,
+        "sha256": "f978915596c05b663ae13271f16a24db6f9e4bdd6898da92415146c718c6c039",
+        "arrays": [
+          "angle",
+          "classifier.bias",
+          "classifier.weight",
+          "components",
+          "hash_indices"
+        ],
+        "charged_hash_indices": true
+      },
+      {
+        "seed": 38902,
+        "method": "full",
+        "bytes": 34007,
+        "sha256": "ad52bd45d6aaab48815440573421f871455d4c39edb8193da085c43556f3ffc4",
+        "arrays": [
+          "classifier.bias",
+          "classifier.weight",
+          "embedding"
+        ],
+        "charged_hash_indices": false
+      },
+      {
+        "seed": 38902,
+        "method": "hash",
+        "bytes": 9929,
+        "sha256": "9c65e11e2d66b30e19404c8b25b40cea6bcca16ce9fabe2a1176b5303403eb6e",
+        "arrays": [
+          "classifier.bias",
+          "classifier.weight",
+          "components",
+          "hash_indices",
+          "importance"
+        ],
+        "charged_hash_indices": true
+      },
+      {
+        "seed": 38902,
+        "method": "unweighted",
+        "bytes": 5587,
+        "sha256": "6d18c0b768cc007a2df0452465cb33e86161792e5a6334bb8ba94a83e0e607e4",
+        "arrays": [
+          "classifier.bias",
+          "classifier.weight",
+          "components",
+          "hash_indices"
+        ],
+        "charged_hash_indices": true
+      },
+      {
+        "seed": 38902,
+        "method": "scalar",
+        "bytes": 7869,
+        "sha256": "787ead8f3ee2e6167b1349a09e75522335a7bc2a69a4525cf56ef2d9e0924f6d",
+        "arrays": [
+          "classifier.bias",
+          "classifier.weight",
+          "components",
+          "gain",
+          "hash_indices"
+        ],
+        "charged_hash_indices": true
+      },
+      {
+        "seed": 38902,
+        "method": "mirror",
+        "bytes": 7871,
+        "sha256": "0f514368320d1ee60394ae792ba06ce5da18845ef8a784a4dc2d32a56934d55a",
+        "arrays": [
+          "angle",
+          "classifier.bias",
+          "classifier.weight",
+          "components",
+          "hash_indices"
+        ],
+        "charged_hash_indices": true
+      }
+    ],
+    "hash_indices_charged_for_hashed_controls": true,
+    "actual_bytes_used_for_gate": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "test_accuracy_nll_and_per_token_collision_bins_replayed_exactly": true
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Two development seeds and five registered methods; all models evaluated on same held-out token samples within each world.",
+    "Fixed uint8 hash component indices are charged and shared across methods within each seed.",
+    "The Mirror actual-byte gate passed but both native-quality and collision-bin gates missed; fresh seeds remain sealed.",
+    "Task is synthetic token-to-class classification only, not language modeling."
+  ]
+}
