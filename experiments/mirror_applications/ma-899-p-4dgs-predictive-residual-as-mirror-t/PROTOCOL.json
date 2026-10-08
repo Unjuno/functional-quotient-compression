@@ -1,0 +1,35 @@
+{
+  "experiment_id": "MA-899",
+  "title": "P-4DGS predictive residual as Mirror temporal code",
+  "status": "BLOCKED_BEFORE_PROTOCOL_FREEZE",
+  "base_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
+  "branch": "research/ma-899-p4dgs-mirror-predictive-residual-20261008",
+  "selection_draw": 16,
+  "prior_art_refs": [
+    "PA251"
+  ],
+  "registered_hypothesis": "Temporal Mirror prediction residuals may improve the rate-distortion frontier of a shared spatio-temporal Gaussian anchor predictor beyond P-4DGS predictive entropy coding.",
+  "protocol_frozen": false,
+  "data_accessed": false,
+  "training_run": false,
+  "decision": "NOT_ESTABLISHED",
+  "required_controls": [
+    "P-4DGS predictive entropy codec",
+    "independent scene/motion Gaussian assets",
+    "native accelerated renderer with random access"
+  ],
+  "blockers": [
+    "No P-4DGS implementation or source repository URL identified in the arXiv source bundle.",
+    "No dynamic Gaussian scene/video data or compatible rendering assets in the checkout.",
+    "CUDA unavailable; hardware-accelerated render/FPS measurement required by the research note."
+  ],
+  "prior_art_source": "https://arxiv.org/src/2510.10030",
+  "environment": {
+    "cuda_available": false
+  },
+  "boundaries": [
+    "No negative Mirror result is claimed.",
+    "Registry remains UNTESTED.",
+    "No scene data were downloaded or inspected."
+  ]
+}

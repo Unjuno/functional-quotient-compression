@@ -1,0 +1,28 @@
+{
+  "experiment_id": "MA-899",
+  "status": "NOT_ESTABLISHED_PRE_PROTOCOL_BLOCKER",
+  "base_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
+  "draw_replay": {
+    "command": "python experiments/mirror_applications/ma-899-p-4dgs-predictive-residual-as-mirror-t/source/verify_draw.py",
+    "pool_size": 551,
+    "index": 358,
+    "selected_id": "MA-899",
+    "status": "PASS"
+  },
+  "prior_art_review": {
+    "PA251_read": true,
+    "arxiv_source_read": true,
+    "code_repository_url_in_source_bundle": false
+  },
+  "asset_check": {
+    "P4DGS_codec_in_checkout": false,
+    "dynamic_gaussian_dataset_in_checkout": false,
+    "renderer_assets_in_checkout": false,
+    "cuda_available": false
+  },
+  "protocol_frozen": false,
+  "data_accessed": false,
+  "training_run": false,
+  "registry_status": "UNTESTED",
+  "decision_reason": "Required predictive entropy codec and accelerated rendering/data path are not reproducible from available assets."
+}

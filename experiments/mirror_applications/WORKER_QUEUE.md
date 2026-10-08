@@ -14,13 +14,9 @@ Use:
 
 ## Selection rule
 
-Pick the first candidate satisfying all of:
-1. status is UNTESTED;
-2. highest available priority;
-3. no other active experiment directory already claims the ID;
-4. its closest prior-art controls can be implemented in the current harness.
+Use one fresh, replayable uniform draw per experiment from the latest worker-ready baseline's P0/UNTESTED registry rows. Exclude IDs with live remote `research/ma-*` branches and MA experiment directories in the baseline or shared workspace. Record baseline commit, ordered pool and hash, cryptographic seed, pool size and selected index before protocol work. Use the seed-derived uniform index recorded in `source/random_draw.json`; do not reserve numeric IDs or use the historical queues below as execution order. If a selected candidate is blocked before protocol freeze, preserve its draw and blocker evidence with registry status UNTESTED, then refresh the live exclusion set and draw again. Do not merge another worker's result branch automatically.
 
-Do not skip to a visually interesting P1/P2 idea while an executable P0 remains, unless the skipped candidate has a recorded blocker.
+Draw 14 selected MA-1010 and was blocked before protocol freeze because D2SA/MRI implementation, checkpoint and data assets were unavailable; registry remains UNTESTED. Draw 15 selected MA-962 and completed a two-seed development FAIL against its equal-byte scalar control; the official test audit remained unopened on `research/ma-962-task-time-mirror-tebn-20261008`. Draw 16 selected MA-899 and was blocked before protocol freeze because the P-4DGS codec, dynamic-scene assets and accelerated renderer were unavailable; registry remains UNTESTED. These results remain on their dedicated branches until evidence integration.
 
 ## Literature-derived cross-over queue
 
@@ -302,7 +298,7 @@ Operational rule:
 
 ## Eleventh literature expansion — cross-model state, scenes, audio, generators and stitching
 
-**MA-876..935 are new UNTESTED candidates and are appended behind the already-selected MA-255 crossover.** Do not interrupt active experiments.
+**MA-876..935 are new UNTESTED candidates.** Historical lists do not set selection order; use fresh uniform draws and do not interrupt frozen experiments.
 
 High-information P0 applications by domain:
 1. **Cross-model caches MA-876..890:** MA-876 shared ridge translator basis versus native per-pair ridge; MA-878 head-matched CacheBridge; MA-880 ordered source×target factorization; MA-881 MoT translator bank; MA-887 exact-versus-approximate boundary; MA-889 confidence fallback.
@@ -315,11 +311,11 @@ Every experiment must isolate the extra Mirror parameter `m` beyond its strong n
 
 Read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08.md`, PA236..PA265 and the selected MA registry row.
 
-**MA-255 remains the canonical next worker candidate.** This queue must not preempt it or supersede its frozen protocol.
+**Historical prior-art map only.** Candidate selection is governed by fresh uniform draws, not this list.
 
 ## Twelfth research expansion — video, equivariance, spiking, physical optics, wireless and spatial audio
 
-**MA-936..995 are UNTESTED research candidates** appended after the already queued crossovers and prior MA-876..935 intake. No active or frozen run may be interrupted to work on these. **Canonical next remains MA-255**.
+**MA-936..995 are UNTESTED research candidates** appended after the already queued crossovers and prior MA-876..935 intake. No active or frozen run may be interrupted to work on these. **This historical order does not assign the next candidate**.
 
 Recommended representative P0 order *within this new family only*:
 
@@ -339,7 +335,7 @@ Do not reclassify any of the already verified 47 MA results based on these untes
 
 ## Thirteenth research expansion — atomistic, MRI, quantum, visual memory and ANN
 
-**MA-996..1045 are new UNTESTED hypotheses**, appended to the research intake. They do NOT replace or preempt **MA-255** as the next worker candidate.
+**MA-996..1045 are new UNTESTED hypotheses**, appended to the research intake. They do not set execution order; fresh uniform draws govern selection.
 
 Representative P0 screens within this research intake:
 1. **MA-997 / MA-1000** — Mirror material adaptation against native equivariant-sparse MACE and conservative energy-gradient audit. Test force equivariance and long-run stability rather than energy-only fit.
@@ -359,7 +355,7 @@ Read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_THIRTEENTH_SWEEP.
 
 **MA-1046..1095 are 50 new UNTESTED hypotheses** appended after earlier literature intakes and the original locked direct-prior queue. All comparisons study the marginal value of the extra Mirror parameter `m`; no new source-paper result is a Mirror result.
 
-**Current canonical next candidate: MA-255** (Parameter Superposition). Do not interrupt its frozen protocol, claim or branch.
+Historical queue note: MA-255 is not reserved; fresh uniform draws govern execution order.
 
 Recommended high-information P0 studies **within this new family**:
 
@@ -379,7 +375,7 @@ Read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_FOURTEENTH_SWEEP.
 
 ## Fifteenth research intake — gauge-invariant natural LoRA, shared serving and KV-cache state
 
-**New entries MA-1096..1115 are UNTESTED** and form a supplemental natural-adapter diagnostic and serving research family. They do **not** preempt the locked **MA-255 Parameter Superposition** experiment or any currently frozen worker run. Read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_FIFTEENTH_SWEEP.md` and PA351..371 when selecting one.
+**New entries MA-1096..1115 are UNTESTED** and form a supplemental natural-adapter diagnostic and serving research family. Do not interrupt any currently frozen worker run; fresh uniform draws govern the next candidate. Read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_FIFTEENTH_SWEEP.md` and PA351..371 when selecting one.
 
 **High-information scientific screens within this intake:**
 
@@ -398,7 +394,7 @@ Read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_FOURTEENTH_SWEEP.
 
 L0/L1 outcomes alone never justify MA PROMISING as a deployable compression claim. Pre-trained base SVD and shared bases may cost storage/calibration, and heldout test-task weight deltas cannot be used to fit a deployable code at inference.
 
-**Next candidate remains MA-255; no existing status or frozen protocol changed.**
+No existing status or frozen protocol changed; fresh uniform draws govern execution order.
 
 ## Supplemental function-space falsification (no newly allocated MA IDs)
 
@@ -408,11 +404,11 @@ Pilot: BOLT-like shared orthogonal basis plus 6 diagonal m coefficients averaged
 
 When selecting MA-1096/1099/1102/1105/1114/1115, include BOLT (PA372), function-space/curvature metric (CG-LoRA PA373, Fora PA374), SVD+CUR localized task residual (PA376), task-vector bases PA375, information filtering PA377, and a gauge-invariant functional/OOD check (PA378..381) where applicable. Do not inflate the MA backlog with duplicated new rows for these existing questions. A task-code success must survive *actual held-out task outcomes and serializer/runtime*, not just weight reconstruction.
 
-**MA-255 remains next**. Do not interrupt active/frozen jobs to consume this support intake.
+This intake is a prior-art map only; randomized selection governs the next candidate.
 
 ## Sixteenth research intake — KG relation operators, cameras, robotics and acoustic rooms
 
-**MA-1116..1155 are 40 newly registered UNTESTED candidates**, appended after the existing MA-255 direct-prior sequence and all already accepted intake. This is an experiment *planning* list, not an instruction to preempt an existing worker or change any locked fresh split.
+**MA-1116..1155 are 40 newly registered UNTESTED candidates**, added to the registry; fresh uniform draws govern execution order. This is an experiment *planning* list, not an instruction to preempt an existing worker or change any locked fresh split.
 
 Recommended P0 order **within this new family only**:
 1. **KG relations MA1116..1125:** MA-1123 naturally fitted RotatE/PairRE/TuckER relation orbit versus private bank, then MA-1121 KrausKGE relation-rank and MA-1120 native time-relation factors. Native relation phase/core, CompGCN and 5starE are direct prior art; compare filtered link-prediction MRR, link ranking and full physical entity+relation bytes. Exact scoring gauge relabeling does not add independent task information.
@@ -424,11 +420,11 @@ For the individually scoped 40 hypotheses, consult **`docs/phase2/MIRROR_APPLICA
 
 Read **`docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_SIXTEENTH_SWEEP.md`** and only the cited PA382..413 for the selected MA. Every new experiment must identify `B(theta) -> B(theta,m)` beyond an **already-existing relation/EXIF/robot/room native code**, use a byte-near cheap control and an independent/private reference, and report real task quality instead of counting logical addresses. Keep aligned feasibility and natural/off-orbit results distinct.
 
-**Canonical next remains MA-255.** The registered 47 outcomes, the separate two-seed natural-digit negative pilot, and ongoing worker-owned branches are not touched by this appended research.
+This research intake does not set execution order; randomized selection governs. Do not merge other worker branches automatically.
 
 ## Historical P0 family sequence (completed screens; not current queue)
 
-The historical A–F lists below record previously screened experiments and must not override `STATUS_BOARD.md` (MA-255 next).
+The historical A–F lists below record previously screened experiments and must not override the fresh-uniform selection rule in this file.
 
 ### Family A — FFN / MoE / adapter
 MA-003 -> MA-005 -> MA-009 -> MA-019 -> MA-024
