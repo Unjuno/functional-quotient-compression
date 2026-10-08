@@ -1,0 +1,53 @@
+{
+  "experiment_id": "MA-932",
+  "title": "informational validity of Mirror stitching views",
+  "status": "FROZEN_PRE_DATA",
+  "base_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
+  "selection_draw": 21,
+  "prior_art_refs": ["PA241"],
+  "hypothesis": "A connector can match a task output across representations while those representations differ in retained information; per-view counterfactual tasks and linear information probes will detect the mismatch, including for shared-basis Mirror stitching.",
+  "mirror_insertion": {
+    "physical_object": "one rank-2 linear hidden-state connector basis",
+    "coordinate": "task-addressed rank-2 Givens rotation between shared connector A and B maps",
+    "logical_functions": "task-specific scalar predictions from the same representation",
+    "controls": ["hard-tied shared connector", "shared-basis diagonal FiLM", "independent task-specific full linear connectors", "structured-noise representation negative control"]
+  },
+  "task": {
+    "type": "synthetic representation stitching and information audit",
+    "input": "eight-dimensional hidden representation, sampled from three fixed encoders over latent scalar features u and v",
+    "representations": {
+      "full": "contains both u and v plus independent nuisance features",
+      "task0_only": "preserves u and replaces v with independent structured nuisance",
+      "unrelated_noise": "all coordinates independent of u and v"
+    },
+    "targets": "task 0 predicts u; task 1 predicts v; task 2 is an independent random negative-control target",
+    "train_examples_per_seed": 16384,
+    "dev_examples_per_seed": 4096,
+    "fresh_examples_per_seed": 4096,
+    "data_generator": "fixed split-specific seeds; audit generator remains unopened unless all preregistered validation criteria pass"
+  },
+  "training": {
+    "development_seeds": [93201, 93202],
+    "fresh_seeds": [93203, 93204, 93205],
+    "updates_per_method_representation_seed": 500,
+    "batch_size": 128,
+    "optimizer": "AdamW",
+    "learning_rate": 0.003,
+    "weight_decay": 0.0001,
+    "task_schedule": "uniform per example among task0 and task1; task2 is evaluation-only",
+    "fixed_update_checkpoint": 500,
+    "tuning": "none"
+  },
+  "metrics": ["per-task held-out MSE and R2", "task-0 cross-representation output match", "independent linear-probe MSE for u/v", "actual serialized connector payload bytes", "optimizer updates/examples", "active multiply-add proxy", "wall time and throughput"],
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": ["shared connector basis", "per-task Mirror codes", "FiLM codes or independent connectors", "configuration and representation/task metadata"]
+  },
+  "decision_rules": {
+    "informational_validity_pass": "Across all three fresh seeds, task0-only representation matches task0 output within 0.05 MSE of the full representation while its task1 MSE is at least 0.5 worse; the u/v linear probes must independently show that task1 information is absent. This validates the diagnostic, not Mirror compression.",
+    "mirror_function_gate": "On full representations, Mirror must be within 1.10x independent connector MSE on both tasks, use <=0.8x independent connector payload, and beat byte-matched FiLM by >=2% pooled MSE in all three fresh seeds.",
+    "failure": "Mirror misses at least one of the quality/storage/Mirror-specific gates in two or more fresh seeds; output match alone never counts as informational equivalence.",
+    "audit": "Do not generate audit examples unless all Mirror function gates pass in every fresh seed."
+  },
+  "boundaries": ["synthetic linear representations only", "full representation is intentionally shared-information and low-rank aligned", "task0-only and unrelated-noise encoders deliberately remove information", "no pretrained model, natural language, or general stitching claim", "fixed update result is not capacity evidence"]
+}

@@ -1,0 +1,31 @@
+{
+  "experiment_id": "MA-932",
+  "commit": "pending",
+  "selection_draw": {
+    "draw": 21,
+    "pool_size": 537,
+    "uniform_index": 369,
+    "selected_id": "MA-932",
+    "pool_sha256": "0481fd6373f34e425745835fee835f32b279aa1092fcdcaac20677f249adaa58",
+    "baseline_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
+    "replay_checked": true
+  },
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-932-stitching-information-validity/tests -v",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "actual_payloads_measured": false
+  },
+  "metric_replay": {
+    "checked": false,
+    "max_difference": null
+  },
+  "audit_opened": false,
+  "notes": [
+    "Draw21 pool and index replay passed.",
+    "Pre-data tests passed: Givens orthogonality, intended representation-information boundary, all stitcher forward/backward passes.",
+    "Synthetic generator/probe sanity only; no development/fresh training runs yet."
+  ]
+}
