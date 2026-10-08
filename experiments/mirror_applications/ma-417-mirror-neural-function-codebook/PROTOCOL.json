@@ -1,0 +1,22 @@
+{
+  "experiment_id": "MA-417",
+  "title": "Shared decoder with K-entry Mirror or latent function codebook",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/MULTIPLICITY",
+  "base_commit": "90f8b79",
+  "hypothesis": "For 16 continuous functions, a K=16 codebook of two-angle Mirror views matches continuous latent2 normalized reconstruction RMSE within 10% at lower actual payload bytes, while K=4/8/16 sweeps quantify the quality/storage cost of fewer logical codes; compare to matched ordinary latent codebooks at each K.",
+  "physical_object": "one shared coordinate MLP decoder",
+  "mirror_coordinate": "K learned two-angle hidden Givens codes and one quantized code index per function",
+  "logical_multiplicity": "16 function realizations selected from K codebook entries",
+  "prior_art_refs": ["PA68"],
+  "controls": ["continuous latent2 codes", "per-function Mirror2 codes", "ordinary two-dimensional latent codebooks K=4/8/16", "independent per-function decoders"],
+  "task": {"type": "synthetic continuous 1D function reconstruction", "functions_per_world": 16, "query_dim": 1, "hidden_dim": 32, "teacher": "random weighted Fourier sums with frequencies 1, 2, 3", "training_queries_per_function": 64, "held_out_queries_per_function": 128},
+  "development": {"worlds_or_seeds": [41700, 41701], "learning_rates": [0.003, 0.01], "selection_metric": "lowest mean held-out-query normalized RMSE"},
+  "fresh": {"worlds_or_seeds": [41710, 41711, 41712], "locked_before_access": true},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["decoder weights", "K codebook entries", "per-function quantized indices", "continuous per-function codes", "independent weights", "metadata"]},
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true, "report_unique_code_use_and_per_function_quality": true},
+  "training": {"updates": 500, "batch_size": 256, "optimizer": "AdamW", "assignment": "straight-through hard argmax; temperature 0.7", "seeds": [0, 1, 2]},
+  "success_gate": "At K=16, Mirror codebook RMSE <=1.1x continuous latent2 RMSE and Mirror actual payload bytes are lower; compare matched-K ordinary latent codebooks and show the K-dependent function-quality frontier.",
+  "failure_gate": "K=16 misses quality/bytes or a matched-K ordinary latent codebook matches or beats Mirror at comparable bytes.",
+  "boundaries": ["Synthetic 1D functions only.", "K entries do not imply K useful independent functions; report reconstruction and code use.", "Fixed-update screen, not near-converged capacity evidence."]
+}
