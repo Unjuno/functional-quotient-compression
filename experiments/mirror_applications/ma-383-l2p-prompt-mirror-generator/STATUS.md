@@ -3,12 +3,12 @@
 - Status: FAIL; the A1 serialized-state development replay misses quality and storage gates in both worlds.
 - Branch: `research/ma-383-l2p-prompt-mirror-generator-20261008`
 - Base commit: `0739bf3`
-- Last verified commit: pending
+- Last verified commit: `61c1e20`
 - Development complete: yes (A1 seeds 38301, 38302)
 - Fresh/audit opened: no
-- Results committed: yes (pending final commit)
-- Verification committed: yes (pending final commit)
-- Registry row updated: yes in working tree (FAIL)
+- Results committed: yes (`61c1e20`)
+- Verification committed: yes (`61c1e20`)
+- Registry row updated: yes (FAIL)
 
 ## Next action
 
