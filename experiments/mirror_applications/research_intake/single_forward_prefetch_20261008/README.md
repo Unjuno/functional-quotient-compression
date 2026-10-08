@@ -22,3 +22,8 @@ All tests are **isolated** on `research/mirror-single-forward-prefetch-20261008`
 **Storage:** Actual NPZ for shared/tied and prefolded resident matrices; count generator, View codes, per-role trained readout, metadata and buffers in further lanes. A k-fold expansion is NOT k independent trained experts.
 
 **Required evidence:** `RESULTS_CORE.csv`, dev/fresh CSVs, `VERIFICATION.json`, source/test hashes, hardware and launch provenance, downstream task utility, task-identity holdout and native competitors before status changes.
+
+## PRIMARY research objective: one forward → multiple useful outputs
+
+Read [RESEARCH_FOCUS_QUEUE.md](RESEARCH_FOCUS_QUEUE.md) first for a **research-only** prioritization. MA-1175 is already registered (P0), and has been made the first experimental focus rather than giving it another MA ID. The independent [SFM003 4/5-output learned-code result](SFM003_REPORT.md) preserves aligned synthetic success and off-orbit failure. [SFM004](SFM004_JOINT_LEARNING_PLAN.md) specifies the next joint-training experiment with native shared-output-head and MIMO/MIMMO/NFE controls. The transfer hiding/offload idea MA-1176 remains downstream of establishing true useful multi-output quality.
+

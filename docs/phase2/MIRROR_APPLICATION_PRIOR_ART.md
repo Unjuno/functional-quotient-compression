@@ -3981,3 +3981,31 @@ https://arxiv.org/abs/2607.24787
 https://arxiv.org/abs/2608.21240
 
 **Established prior:** Speculative expert prediction, lightweight low-rank surrogate fallback, and CPU/GPU asynchronous orchestration for unloaded experts. Mirror must surpass an equivalently costed low-rank surrogate, and do not count hidden exact CPU residual compute as free.
+
+## PA437 — MIMMO: Multi-Input Massive Multi-Output Neural Network
+
+**Martin Ferianc, Miguel Rodrigues**. CVPR Workshops (ECV), 2023, pp. 4564–4569.
+https://openaccess.thecvf.com/content/CVPR2023W/ECV/html/Ferianc_MIMMO_Multi-Input_Massive_Multi-Output_Neural_Network_CVPRW_2023_paper.html
+
+**Native claim:** MIMMO extends MIMO with multiple predictions / early exits within a conventional network; one-forward multiple outputs is not conceptually exclusive to Mirror. Match trained output quality, ensemble diversity, entire serialized head/trunk bytes, and active FLOPs. MIMMO may be a different problem (ensemble outputs rather than addressed specialist functions): match the declared task before quality comparison.
+
+**Mirror-specific question:** Can a very short learned m express K useful, distinct addressed functions at smaller marginal state and comparable inference cost than MIMMO's native output/exit scheme? Do not use repeated full-forward recomputation as the only competing design.
+
+## PA438 — Network Fission Ensembles for low-cost self-ensembles
+
+**Hojung Lee, Jong-Seok Lee**. Pattern Recognition Letters 190 (2025), 22–28; DOI 10.1016/j.patrec.2025.01.032.
+https://doi.org/10.1016/j.patrec.2025.01.032
+https://arxiv.org/abs/2408.02301
+
+Code: https://github.com/hjdw2/NFE
+
+**Native claim:** Network Fission Ensembles reuses parts of a conventional network to build several output/exit paths, including distillation for accuracy and diversity. Shared-trunk multi-output work must compare native output diversity, trained task fidelity and incremental active compute rather than claiming one forward or a parameter-tied network is new.
+
+**Mirror-specific question:** Output-coded functions must beat same-byte shared multi-exit / regular linear-head controls, with a different role address causing useful functional divergence. Ensemble diversity alone is not proof of independent specialist capacity.
+
+## PA439 — SpecMD: A Comprehensive Study On Speculative Expert Prefetching
+
+**Duc N. M. Hoang, Mohammad Samragh, Ajay Kumar Jaiswal, Minsik Cho**. ICML 2026; PMLR 306:43336–43350.
+https://proceedings.mlr.press/v306/hoang26d.html
+
+**Native claim:** SpecMD benchmarks expert caching and prefetch on realistic memory/hardware budgets, including a Least-Stale eviction strategy. This is a direct scheduler/memory-control baseline for MA-1176 after the primary multi-output mechanism is validated. Do not attribute generic prefetch/caching gains to Mirror.

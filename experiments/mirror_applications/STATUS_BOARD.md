@@ -111,3 +111,10 @@ Four new design-only MA-1171..MA-1174, all UNTESTED (3 P0, 1 P1), cross-linking 
 - Added **MA-1175** (one shared forward / multi-output View factorization) and **MA-1176** (CPU-GPU grouped physical block prefetch) as UNTESTED hypotheses, with PA434..PA436.
 - Stage-0 and separately seeded folded CPU mechanics are in [SFM001/002 research](research_intake/single_forward_prefetch_20261008/README.md). Mathematical output-only exactness, hidden-view obstruction, and synthetic preactivation sharing do **not** establish a native-LM Mirror performance gain.
 - No worker queue/active experimental conditions/main were modified. Promote only after checking moving canonical worker ID/PA allocation.
+
+## Research-only focus: single-forward multiple useful outputs (2026-10-08)
+
+**MA-1175 is the FIRST research-priority experiment inside this isolated branch**, with its MA priority **P0/UNTESTED unchanged**. The focus is learning useful separate logical functions from exactly one heavy shared trunk call plus small m, not counting cache/offload savings as the primary result. Frozen SFM003 task-head study and raw dev/fresh measurements are in [SFM003](research_intake/single_forward_prefetch_20261008/SFM003_REPORT.md). The favorable beta=0 synthetic output-orbit mechanism was recovered at K4/K5 in 5/5 fresh worlds. Native ordinary Givens heads have the identical functional model (M0) and standard shared-trunk linear heads are a stronger, faster CPU competitor with a larger output-head footprint. With independent private nonlinear target variation the Mirror-only task model degrades substantially. No full MA status change or learned-LM adoption is claimed.
+
+New native source controls PA437 MIMMO, PA438 Network Fission Ensembles, and PA439 SpecMD were registered without new MA numbers. Research priority [focus queue](research_intake/single_forward_prefetch_20261008/RESEARCH_FOCUS_QUEUE.md) is **not** the canonical worker queue; live worker MA-255 remains next.
+
