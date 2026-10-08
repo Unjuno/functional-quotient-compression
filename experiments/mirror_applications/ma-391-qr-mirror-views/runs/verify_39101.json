@@ -1,0 +1,106 @@
+{
+  "condition": "development",
+  "seed": 39101,
+  "payloads": [
+    {
+      "method": "independent",
+      "bytes_match": true,
+      "sha256_match": true,
+      "zip_names": [
+        "bias.npy",
+        "embedding.npy",
+        "head.npy",
+        "meta.npy"
+      ],
+      "method_id": 0,
+      "metadata_match": true,
+      "arrays_finite": true,
+      "metrics_match": true
+    },
+    {
+      "method": "qr_add",
+      "bytes_match": true,
+      "sha256_match": true,
+      "zip_names": [
+        "bias.npy",
+        "head.npy",
+        "meta.npy",
+        "q_table.npy",
+        "r_table.npy"
+      ],
+      "method_id": 1,
+      "metadata_match": true,
+      "arrays_finite": true,
+      "metrics_match": true
+    },
+    {
+      "method": "qr_multiply",
+      "bytes_match": true,
+      "sha256_match": true,
+      "zip_names": [
+        "bias.npy",
+        "head.npy",
+        "meta.npy",
+        "q_table.npy",
+        "r_table.npy"
+      ],
+      "method_id": 2,
+      "metadata_match": true,
+      "arrays_finite": true,
+      "metrics_match": true
+    },
+    {
+      "method": "qr_concat",
+      "bytes_match": true,
+      "sha256_match": true,
+      "zip_names": [
+        "bias.npy",
+        "head.npy",
+        "meta.npy",
+        "q_table.npy",
+        "r_table.npy"
+      ],
+      "method_id": 3,
+      "metadata_match": true,
+      "arrays_finite": true,
+      "metrics_match": true
+    },
+    {
+      "method": "mirror_factorized",
+      "bytes_match": true,
+      "sha256_match": true,
+      "zip_names": [
+        "alpha.npy",
+        "beta.npy",
+        "bias.npy",
+        "head.npy",
+        "meta.npy",
+        "q_table.npy",
+        "r_table.npy"
+      ],
+      "method_id": 4,
+      "metadata_match": true,
+      "arrays_finite": true,
+      "metrics_match": true
+    },
+    {
+      "method": "free_pair_angle",
+      "bytes_match": true,
+      "sha256_match": true,
+      "zip_names": [
+        "bias.npy",
+        "head.npy",
+        "meta.npy",
+        "pair_angles.npy",
+        "q_table.npy",
+        "r_table.npy"
+      ],
+      "method_id": 5,
+      "metadata_match": true,
+      "arrays_finite": true,
+      "metrics_match": true
+    }
+  ],
+  "exact_replay": "payloads reloaded and validation/test metrics recomputed from the frozen seed",
+  "passed": true
+}

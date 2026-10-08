@@ -1,6 +1,6 @@
 # MA-391 — Quotient-remainder Mirror compositional embeddings
 
-Status: SCREENING  
+Status: FAIL (development screen; fresh sealed)  
 Evidence lane: MECHANISM / STORAGE / UNSEEN COMBINATIONS / RUNTIME  
 Base commit: `b444c99` (MA-389 result branch)  
 Prior art: PA59 (quotient-remainder compositional embeddings)
@@ -60,3 +60,7 @@ Actual deterministic ZIP/NPY FP16 inference payload bytes are authoritative. Cou
 ## Scope
 
 This is a synthetic held-out recombination screen over a fixed vocabulary. It is not natural language or a large-vocabulary deployment result.
+
+## Results
+
+The preregistered screen **failed**: held-out accuracy changed direction across the two worlds, the Mirror payload was 1.272x the best fixed composition, and measured CPU throughput was 0.282–0.332x concatenation. All 144 pair embeddings were distinct after FP16 serialization. Fresh seeds remain sealed. See [REPORT.md](REPORT.md), [RESULTS_CORE.csv](RESULTS_CORE.csv), and [VERIFICATION.json](VERIFICATION.json).

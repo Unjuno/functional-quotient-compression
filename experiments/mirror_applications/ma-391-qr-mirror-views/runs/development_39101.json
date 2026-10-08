@@ -1,0 +1,283 @@
+{
+  "condition": "development",
+  "seed": 39101,
+  "heldout_pairs": [
+    1,
+    2,
+    3,
+    14,
+    15,
+    16,
+    27,
+    28,
+    29,
+    40,
+    41,
+    42,
+    53,
+    54,
+    55,
+    66,
+    67,
+    68,
+    79,
+    80,
+    81,
+    92,
+    93,
+    94,
+    105,
+    106,
+    107,
+    108,
+    118,
+    119,
+    120,
+    121,
+    131,
+    132,
+    133,
+    134
+  ],
+  "heldout_pair_fraction": 0.25,
+  "teacher_alpha": [
+    -0.2609249949455261,
+    0.01923311874270439,
+    -0.6113053560256958,
+    -0.08257565647363663,
+    0.04301596060395241,
+    -0.536457359790802,
+    0.2562166154384613,
+    -0.5770798325538635,
+    -0.35578519105911255,
+    0.6678162217140198,
+    -0.33352476358413696,
+    -0.7601466178894043
+  ],
+  "teacher_beta": [
+    -0.7539899945259094,
+    0.8700871467590332,
+    0.6882513165473938,
+    -0.3235023021697998,
+    -0.7681443691253662,
+    1.0349433422088623,
+    0.29017525911331177,
+    -0.3575412929058075,
+    -0.09932290762662888,
+    0.5463850498199463,
+    -0.7047044634819031,
+    -0.7881247401237488
+  ],
+  "summaries": [
+    {
+      "method": "independent",
+      "serialized_bytes": 5804,
+      "payload_sha256": "b3dd4957c67c95f0d836b58f76d5ed1a241d9d5441d4363dfec43f244ab3a816",
+      "optimizer_updates": 512,
+      "training_examples_seen": 65536,
+      "train_wall_s": 0.2897609750070842,
+      "validation": {
+        "accuracy": 0.798858642578125,
+        "nll": 0.4934648871421814,
+        "seen_accuracy": 1.0,
+        "heldout_accuracy": 0.19395866990089417,
+        "seen_nll": 0.007688136771321297,
+        "heldout_nll": 1.9543596506118774,
+        "unique_embeddings_fp16": 144,
+        "possible_embeddings": 144,
+        "heldout_pair_fraction": 0.25
+      },
+      "test": {
+        "accuracy": 0.798370361328125,
+        "nll": 0.4963510036468506,
+        "seen_accuracy": 1.0,
+        "heldout_accuracy": 0.19759534299373627,
+        "seen_nll": 0.00762840174138546,
+        "heldout_nll": 1.952547311782837,
+        "unique_embeddings_fp16": 144,
+        "possible_embeddings": 144,
+        "heldout_pair_fraction": 0.25
+      },
+      "macs_per_lookup_estimate": {
+        "embedding_compose": 0,
+        "classifier": 128,
+        "angle_trig_ops": 0
+      }
+    },
+    {
+      "method": "qr_add",
+      "serialized_bytes": 2186,
+      "payload_sha256": "9159da8bb8edeab36f48f4932790d12cb6907c999e6db260567ca432ff998068",
+      "optimizer_updates": 512,
+      "training_examples_seen": 65536,
+      "train_wall_s": 0.34602535200247075,
+      "validation": {
+        "accuracy": 0.82049560546875,
+        "nll": 0.6395079493522644,
+        "seen_accuracy": 0.9172054529190063,
+        "heldout_accuracy": 0.5296563506126404,
+        "seen_nll": 0.24305644631385803,
+        "heldout_nll": 1.8317714929580688,
+        "unique_embeddings_fp16": 144,
+        "possible_embeddings": 144,
+        "heldout_pair_fraction": 0.25
+      },
+      "test": {
+        "accuracy": 0.820037841796875,
+        "nll": 0.6499582529067993,
+        "seen_accuracy": 0.9177467823028564,
+        "heldout_accuracy": 0.5289045572280884,
+        "seen_nll": 0.24146336317062378,
+        "heldout_nll": 1.8671082258224487,
+        "unique_embeddings_fp16": 144,
+        "possible_embeddings": 144,
+        "heldout_pair_fraction": 0.25
+      },
+      "macs_per_lookup_estimate": {
+        "embedding_compose": 16,
+        "classifier": 128,
+        "angle_trig_ops": 0
+      }
+    },
+    {
+      "method": "qr_multiply",
+      "serialized_bytes": 2186,
+      "payload_sha256": "4158b632fbc7ac1810d63f320969bb0cf0d1133319cfb922b33c5462ac7e8b39",
+      "optimizer_updates": 512,
+      "training_examples_seen": 65536,
+      "train_wall_s": 0.356381371995667,
+      "validation": {
+        "accuracy": 0.860107421875,
+        "nll": 0.6239608526229858,
+        "seen_accuracy": 1.0,
+        "heldout_accuracy": 0.4394032061100006,
+        "seen_nll": 0.013888300396502018,
+        "heldout_nll": 2.4586544036865234,
+        "unique_embeddings_fp16": 144,
+        "possible_embeddings": 144,
+        "heldout_pair_fraction": 0.25
+      },
+      "test": {
+        "accuracy": 0.861602783203125,
+        "nll": 0.6222109198570251,
+        "seen_accuracy": 1.0,
+        "heldout_accuracy": 0.44923487305641174,
+        "seen_nll": 0.01378912664949894,
+        "heldout_nll": 2.4350624084472656,
+        "unique_embeddings_fp16": 144,
+        "possible_embeddings": 144,
+        "heldout_pair_fraction": 0.25
+      },
+      "macs_per_lookup_estimate": {
+        "embedding_compose": 16,
+        "classifier": 128,
+        "angle_trig_ops": 0
+      }
+    },
+    {
+      "method": "qr_concat",
+      "serialized_bytes": 1802,
+      "payload_sha256": "d06c0e05e7647e3df559a6319184e671018199824a7ea2cd8ae242968225b5e1",
+      "optimizer_updates": 512,
+      "training_examples_seen": 65536,
+      "train_wall_s": 0.3593013019999489,
+      "validation": {
+        "accuracy": 0.790863037109375,
+        "nll": 0.6298347115516663,
+        "seen_accuracy": 0.8880484700202942,
+        "heldout_accuracy": 0.49859362840652466,
+        "seen_nll": 0.3446130156517029,
+        "heldout_nll": 1.487593173980713,
+        "unique_embeddings_fp16": 144,
+        "possible_embeddings": 144,
+        "heldout_pair_fraction": 0.25
+      },
+      "test": {
+        "accuracy": 0.791534423828125,
+        "nll": 0.6349872946739197,
+        "seen_accuracy": 0.889378011226654,
+        "heldout_accuracy": 0.5,
+        "seen_nll": 0.34157198667526245,
+        "heldout_nll": 1.509246826171875,
+        "unique_embeddings_fp16": 144,
+        "possible_embeddings": 144,
+        "heldout_pair_fraction": 0.25
+      },
+      "macs_per_lookup_estimate": {
+        "embedding_compose": 0,
+        "classifier": 128,
+        "angle_trig_ops": 0
+      }
+    },
+    {
+      "method": "mirror_factorized",
+      "serialized_bytes": 2292,
+      "payload_sha256": "7ff674e32cc30d48f4bcbcf23e606c3f03581418f422ac58b3cafe74eea1a122",
+      "optimizer_updates": 512,
+      "training_examples_seen": 65536,
+      "train_wall_s": 0.5169032709964085,
+      "validation": {
+        "accuracy": 0.861236572265625,
+        "nll": 0.7280126214027405,
+        "seen_accuracy": 0.9617339968681335,
+        "heldout_accuracy": 0.5590069890022278,
+        "seen_nll": 0.226361483335495,
+        "heldout_nll": 2.236646890640259,
+        "unique_embeddings_fp16": 144,
+        "possible_embeddings": 144,
+        "heldout_pair_fraction": 0.25
+      },
+      "test": {
+        "accuracy": 0.86016845703125,
+        "nll": 0.7467124462127686,
+        "seen_accuracy": 0.9623379707336426,
+        "heldout_accuracy": 0.555744469165802,
+        "seen_nll": 0.22251257300376892,
+        "heldout_nll": 2.308617115020752,
+        "unique_embeddings_fp16": 144,
+        "possible_embeddings": 144,
+        "heldout_pair_fraction": 0.25
+      },
+      "macs_per_lookup_estimate": {
+        "embedding_compose": 16,
+        "classifier": 128,
+        "angle_trig_ops": 2
+      }
+    },
+    {
+      "method": "free_pair_angle",
+      "serialized_bytes": 2324,
+      "payload_sha256": "d9d4250ef926ca417145ff4f3cad73181678903babaf330147dd5621b982ab4c",
+      "optimizer_updates": 512,
+      "training_examples_seen": 65536,
+      "train_wall_s": 0.5027211039996473,
+      "validation": {
+        "accuracy": 0.87432861328125,
+        "nll": 0.489339679479599,
+        "seen_accuracy": 1.0,
+        "heldout_accuracy": 0.49639230966567993,
+        "seen_nll": 0.033103421330451965,
+        "heldout_nll": 1.8613959550857544,
+        "unique_embeddings_fp16": 144,
+        "possible_embeddings": 144,
+        "heldout_pair_fraction": 0.25
+      },
+      "test": {
+        "accuracy": 0.8740234375,
+        "nll": 0.4870895445346832,
+        "seen_accuracy": 1.0,
+        "heldout_accuracy": 0.49866408109664917,
+        "seen_nll": 0.03272518143057823,
+        "heldout_nll": 1.8409119844436646,
+        "unique_embeddings_fp16": 144,
+        "possible_embeddings": 144,
+        "heldout_pair_fraction": 0.25
+      },
+      "macs_per_lookup_estimate": {
+        "embedding_compose": 16,
+        "classifier": 128,
+        "angle_trig_ops": 2
+      }
+    }
+  ]
+}
