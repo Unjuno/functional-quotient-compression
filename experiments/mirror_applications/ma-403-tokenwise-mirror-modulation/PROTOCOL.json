@@ -1,0 +1,83 @@
+{
+  "experiment_id": "MA-403",
+  "title": "Token-wise generated Mirror modulation",
+  "status": "PROTOCOL_FROZEN_BEFORE_DEVELOPMENT",
+  "base_commit": "561ea4e",
+  "prior_art_refs": [
+    "PA63",
+    "PA64"
+  ],
+  "hypothesis": "For a token sequence task whose teacher applies context-specific Givens transforms, an input-conditioned token-wise Mirror generator reaches near-teacher accuracy with lower complete payload and modulation compute than a matched FiLM generator and improves over a static code table on mixed-context token streams.",
+  "physical_object": "Shared 16-32-4 token classifier applied independently to each token in a length-8 sequence; token context varies within each sequence.",
+  "mirror_coordinate": "Four Givens angles generated from each token hidden state plus context one-hot; every token may receive a distinct code.",
+  "logical_multiplicity": "Eight token functions per sequence with context roles varying token by token.",
+  "task": {
+    "kind": "synthetic teacher-forced token classification",
+    "input_dim": 16,
+    "hidden_dim": 32,
+    "classes": 4,
+    "contexts": 4,
+    "sequence_length": 8,
+    "teacher": "shared random ReLU base with one fixed four-angle Givens view per context",
+    "world_seeded_teacher_and_examples": true,
+    "split": "stratified token-level train/validation/test within each generated world"
+  },
+  "model": {
+    "updates": 1200,
+    "batch_size": 128,
+    "optimizer": "AdamW",
+    "learning_rates": [
+      0.003,
+      0.01
+    ],
+    "methods": [
+      "shared no modulation",
+      "input/context-conditioned Givens generator",
+      "same-input FiLM generator outputting grouped scales+biases",
+      "static per-context four-angle table",
+      "independent per-context classifier upper control"
+    ]
+  },
+  "development": {
+    "worlds": [
+      40300,
+      40301
+    ],
+    "selection": "mean validation NLL across methods",
+    "allowed_tuning": "select only learning rate from preregistered grid"
+  },
+  "fresh": {
+    "worlds": [
+      40310,
+      40311,
+      40312
+    ],
+    "locked_before_access": true,
+    "required_cli": "--phase fresh --confirm-fresh after DEV_SELECTION.json"
+  },
+  "storage": {
+    "authority": "actual torch.save inference bundle bytes after reload",
+    "paid": [
+      "shared classifier",
+      "code generator or context table",
+      "per-context independent weights",
+      "metadata and context encoding",
+      "serialization overhead"
+    ]
+  },
+  "compute": {
+    "report_tokens_seen": true,
+    "optimizer_updates": true,
+    "base_MAC_and_generator_MAC_per_token": true,
+    "training_wall_time": true,
+    "inference_tokens_per_second": true
+  },
+  "success_gate": "All fresh worlds: Mirror within 2pp of oracle teacher and independent upper control; at least 1pp above static code table; complete payload <=80% of FiLM generator or <=0.5pp quality loss at <=bytes; generator active MAC <=1.5x FiLM generator.",
+  "failure_gate": "Mirror fails near-teacher quality in >=2 worlds or FiLM/direct table matches or dominates at equal/lower actual bytes and generator compute.",
+  "boundaries": [
+    "aligned synthetic Givens teacher only; no natural language claim",
+    "sequence context variations are not independent model capacity",
+    "no device latency or energy claim",
+    "fixed updates do not establish capacity"
+  ]
+}
