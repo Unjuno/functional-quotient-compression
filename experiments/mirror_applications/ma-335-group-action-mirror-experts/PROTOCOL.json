@@ -1,0 +1,22 @@
+{
+  "experiment_id": "MA-335",
+  "title": "C4 group-action Mirror expert views",
+  "status": "AMENDED_AFTER_CONTROL_IMPLEMENTATION_ERROR_BEFORE_CONFIRMATORY_FRESH",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY/COMPUTE",
+  "base_commit": "52c4f00",
+  "hypothesis": "A paid C4 group element address applied to one shared non-equivariant linear expert will reconstruct its related conjugate expert views with held-out nMSE <=1e-10 and lower actual payload bytes than four independent experts; it will expose the orbit stabilizer (fewer distinct functions than addresses), while a group-external fifth task requires private state. A direct coefficient control at comparable bytes determines whether the benefit is group-structured compression or Mirror-specific.",
+  "physical_object": "one 2x2 linear expert matrix W shared across C4-related tasks",
+  "mirror_coordinate": "2-bit C4 group element address selecting R_k W R_k^T",
+  "logical_multiplicity": "four addressed C4 views plus one deliberately unrelated task with private residual",
+  "prior_art_refs": ["PA46"],
+  "controls": ["one hard-tied expert", "exact C4-equivariant projection of W", "four independent expert matrices", "group-action Mirror base+addresses plus private fifth expert", "direct ordinary per-task matrix coefficients for the same four related views plus private fifth expert"],
+  "development": {"worlds_or_seeds": [33501, 33502], "selection_metric": "held-out function nMSE, actual serialized payload bytes, unique output-function count, operation count"},
+  "fresh": {"worlds_or_seeds": [33520, 33521, 33522], "locked_before_access": true},
+  "storage": {"authority": "actual deterministic ZIP/NPY FP32 inference payload bytes after reload", "paid_objects": ["shared matrix", "packed group addresses", "private unrelated expert", "direct per-view matrices", "metadata and archive headers"]},
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true},
+  "success_gate": "All fresh seeds: group-action held-out nMSE <=1e-10 on related views; total payload at least 20% below independent five-expert payload when fifth private task is included; group-action and direct coefficient control reported at actual bytes; unrelated task nMSE <=1e-10 only when its private matrix is paid. Do not claim Mirror-specific value if direct control matches within 10% bytes and quality.",
+  "failure_gate": "Related-view quality misses 1e-10, or compression is below 20% versus independent experts, or claimed four-view multiplicity collapses under measured output-function equivalence, or the group-action representation is dominated by the direct control by >10% bytes at equal quality.",
+  "amendment": "Exploratory/screen seeds 33511-33519 are retained and excluded from confirmatory verdicts. A control implementation audit found a sign error in the direct C4 irreducible-coefficient decoder, which caused false poor quality. Correct the decoder, validate on development seeds 33501-33502, and freeze fresh seeds 33520-33522 before confirmatory access. Compact uint8 addresses and gates remain unchanged.",
+  "selection_rule": "Development seeds 33501-33502 validate the corrected coefficient control. All earlier fresh-labeled seeds are exploratory only. Confirmatory seeds are 33520-33522.",
+  "boundaries": ["synthetic post-fit linear expert functions, not trained MoE or language-model evidence", "group addresses do not count as independent capacity", "C4 conjugation has a nontrivial stabilizer; report unique functions rather than address count", "exact equivariance and non-equivariant specialization are reported separately", "no optimizer updates; target matrices are analytic constructions"]
+}

@@ -1,0 +1,36 @@
+{
+  "experiment_id": "MA-335",
+  "commit": "<RESULT_COMMIT>",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-335-group-action-mirror-experts/tests",
+    "passed": 4,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "confirmatory_payloads_checked": 21,
+    "confirmatory_unique_payload_hashes": 21,
+    "max_metric_replay_difference": 0.0
+  },
+  "metric_replay": {
+    "command": "python experiments/mirror_applications/ma-335-group-action-mirror-experts/source/verify.py",
+    "checked": true,
+    "rows_replayed": 35,
+    "confirmatory_fresh_method_rows": 21,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "integrity": {
+    "command": "python experiments/mirror_applications/check_registry_integrity.py",
+    "errors": 0,
+    "registry_candidates": 1155,
+    "claim_ledger_rows": 87
+  },
+  "notes": [
+    "Confirmatory seeds 33520, 33521, and 33522 were frozen after protocol amendments and before access. Earlier fresh-labeled seeds 33511-33519 are archived as exploratory screens and excluded from the confirmatory verdict.",
+    "On all confirmatory seeds, group-action payload had exact related-view outputs and exact private fifth-task output; direct irreducible coefficients matched quality and were only 0.65% larger on mean payload.",
+    "Group-action address count was four but only two unique related functions were observed. Omitting private state caused high error on the unrelated fifth task.",
+    "Synthetic analytic 2x2 functions only; no optimizer training, trained MoE, or language-model quality claim."
+  ]
+}
