@@ -1,0 +1,31 @@
+{
+  "experiment_id": "MA-981",
+  "commit": "pending",
+  "selection_draw": {
+    "draw": 23,
+    "pool_size": 534,
+    "uniform_index": 401,
+    "selected_id": "MA-981",
+    "pool_sha256": "a517687df225c309c60189bb05a484bdd0152f7ef9cd236f98708daf176b39be",
+    "baseline_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
+    "replay_checked": true
+  },
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-981-sector-beam-mirror/tests -v",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "actual_payloads_measured": false
+  },
+  "metric_replay": {
+    "checked": false,
+    "max_difference": null
+  },
+  "audit_opened": false,
+  "notes": [
+    "Draw23 pool/index replay passed.",
+    "Pre-data tests passed: phase-only constant modulus, channel/rate shapes, finite rates and Mirror gradient flow.",
+    "Channel generation and model training have not begun."
+  ]
+}

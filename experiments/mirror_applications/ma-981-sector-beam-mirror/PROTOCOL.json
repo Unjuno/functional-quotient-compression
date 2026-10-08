@@ -1,0 +1,50 @@
+{
+  "experiment_id": "MA-981",
+  "title": "shared learned beam codebook with sector Mirror View",
+  "status": "FROZEN_PRE_DATA",
+  "base_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
+  "selection_draw": 23,
+  "prior_art_refs": ["PA288"],
+  "hypothesis": "One shared phase-only beam codebook plus compact sector Givens/phase Views will retain near-independent-sector spectral efficiency with materially fewer actual bytes and beat same-budget scalar and rank-2 phase-offset controls on held-out channel worlds.",
+  "mirror_insertion": {
+    "physical_object": "one learned phase-only 8-beam codebook for an 8-element ULA",
+    "coordinate": "one sector-specific phase View added to each shared codeword across array elements",
+    "logical_functions": "four sector-conditioned beam codebooks, addressed with 3-bit feedback among 8 beams",
+    "controls": ["global learned codebook", "independent learned codebook per sector", "shared codebook plus scalar sector phase", "shared codebook plus rank-2 factorized phase correction", "fixed DFT codebook"]
+  },
+  "channel_simulation": {
+    "array": "8-element half-wavelength uniform linear array, single RF chain, constant-modulus phase-only transmit beam",
+    "sectors": 4,
+    "sector_centers_degrees": [-45, -15, 15, 45],
+    "channel": "three-path narrowband Rayleigh channel; path angles Gaussian around sector center with 3-degree standard deviation; independent complex Gaussian path gains normalized by path count",
+    "snr_db": 10,
+    "codebook_beams": 8,
+    "feedback_bits": 3,
+    "split_sizes_per_sector": {"train": 8192, "development": 2048, "fresh": 4096},
+    "simulation_only": true
+  },
+  "training": {
+    "development_seeds": [98101, 98102],
+    "fresh_seeds": [98103, 98104, 98105],
+    "updates": 500,
+    "batch_size": 128,
+    "optimizer": "Adam",
+    "learning_rate": 0.02,
+    "objective": "temperature-0.2 log-sum-exp approximation to expected maximum selected-beam spectral efficiency",
+    "weight_decay": 0,
+    "initialization": "shared DFT phase codebook plus zero sector corrections for all learned methods; independent method receives a copy per sector",
+    "hyperparameter_tuning": "none"
+  },
+  "metrics": ["mean spectral efficiency in bit/s/Hz", "per-sector rate and worst-sector rate", "beam selection accuracy versus continuous matched beam", "actual serialized inference payload bytes including all sector views and metadata", "feedback bits", "optimizer updates", "active trigonometric/MAC proxy", "training wall time", "inference throughput"],
+  "storage": {
+    "authority": "actual torch.save inference payload byte length",
+    "paid_objects": ["all shared or independent codebook phases", "sector View codes", "low-rank phase bases and factors", "beam indices", "sector metadata", "configuration"]
+  },
+  "gates": {
+    "quality_storage": "In all three fresh channel worlds, Mirror mean rate must be within 0.20 bit/s/Hz of independent-sector codebooks and use <=0.75x their actual payload bytes.",
+    "mirror_specific": "In all three fresh worlds, Mirror must beat the byte-near rank-2 phase correction by >=0.10 bit/s/Hz; when payload differs by >5%, report the comparison unmatched and fail this gate.",
+    "failure": "Mirror misses quality/storage in at least two fresh worlds or fails the rank-2 control margin in two or more worlds.",
+    "audit": "No external audit dataset; fresh channel worlds are the locked holdout."
+  },
+  "boundaries": ["synthetic narrowband channel simulator only", "no real CSI, hardware, RF switching delay, energy, or multipath field measurement", "one antenna geometry and SNR", "no capacity claim"]
+}
