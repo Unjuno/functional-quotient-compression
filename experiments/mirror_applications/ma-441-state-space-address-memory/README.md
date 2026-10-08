@@ -24,6 +24,10 @@ PASS: at delay 512, Mirror recall NRMSE <=1.10x external register, <=60% its act
 
 An initial dev/fresh run exposed a setup defect: the learned retention parameter started at alpha=0.018, causing immediate address erasure and chance-level recall. A1 changes only the initial retention logit to 6 (alpha=0.9975), preserves all data worlds, seeds, optimizer budgets, and gates, and invalidates the initial fresh rows.
 
+### Amendment A2
+
+A post-run audit found a metric mismatch: the frozen contract names recall NRMSE, while the runner used NLL for primary selection/results. A2 changes primary metric to probability-vector NRMSE against the one-hot target; NLL and accuracy remain secondary diagnostics. Development and fresh are rerun on the same worlds/seeds with no gate changes.
+
 ## C — strongest counter-hypothesis
 
 A recurrent address is an ordinary persistent register; external storage is already only a few bytes, and writing/maintaining `m` may add noise and drift without reducing total state.
