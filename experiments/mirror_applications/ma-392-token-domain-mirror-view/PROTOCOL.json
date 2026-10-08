@@ -1,0 +1,59 @@
+{
+  "experiment_id": "MA-392",
+  "title": "Factorized token x domain Mirror embedding address",
+  "status": "FROZEN_DEVELOPMENT",
+  "base_commit": "bcf903fa3055d60ca45e99beb66bf56a5ae00aeb",
+  "evidence_lane": "MECHANISM/STORAGE/UNSEEN_COMBINATIONS/RUNTIME",
+  "prior_art_refs": ["PA59"],
+  "hypothesis": "A shared quotient/remainder embedding basis plus a small domain-specific Givens View can recover useful domain-specific embeddings for held-out token-domain combinations beyond tied composition and simple FiLM controls, without duplicating per-domain token tables.",
+  "physical_object": "shared quotient and remainder partition embedding tables",
+  "mirror_coordinate": "one learned Givens angle per domain, applied to each quotient/remainder pair",
+  "logical_multiplicity": "64 token ids x 4 domains = 256 logical embedding roles",
+  "model": {
+    "quotient_partitions": 8,
+    "remainder_partitions": 8,
+    "vocabulary": 64,
+    "domains": 4,
+    "embedding_dim": 16,
+    "classes": 8,
+    "heldout_pair_fraction": 0.25,
+    "training_examples_per_method": 65536,
+    "validation_examples": 32768,
+    "test_examples": 32768,
+    "batch_size": 128,
+    "optimizer_updates": 512,
+    "optimizer": "Adam",
+    "learning_rate": 0.003,
+    "development_seeds": [39201, 39202],
+    "fresh_seeds": [39211, 39212, 39213],
+    "data": "Synthetic 64-token by 4-domain classification. The teacher uses shared 8D quotient/remainder vectors rotated by one domain angle. A seed-locked 25% of token-domain pairs is excluded from training; every token and domain appears in other training pairs. All methods receive identical examples and labels."
+  },
+  "controls": [
+    "independent token-domain embedding table",
+    "shared quotient/remainder concatenation tied across domains",
+    "domain FiLM scale and bias on shared concatenated embeddings",
+    "domain additive 16D embedding vector on shared concatenation",
+    "shared quotient/remainder basis plus one Mirror Givens angle per domain"
+  ],
+  "development_gate_before_fresh": "Both development seeds: independent seen-pair accuracy >=0.80; Mirror seen-pair accuracy within 0.02 of the best non-independent control; Mirror held-out-pair accuracy >=0.05 absolute above tied concatenation; Mirror actual payload <=1.10x the smallest of tied concatenation/FiLM/additive controls and <=0.50x independent table; count unique serialized FP16 embeddings across all 256 token-domain roles; serialized-state CPU throughput >=0.90x the fastest simple shared control. Otherwise fresh remains sealed.",
+  "success_gate": "All three fresh worlds pass quality, held-out transfer, actual bytes, uniqueness, runtime, and exact replay gates; Mirror improves the quality-byte frontier over tied and FiLM controls.",
+  "failure_gate": "Any development seed misses a registered gate, or a simple shared control matches Mirror held-out quality at comparable/lower actual bytes. Fresh remains sealed.",
+  "storage": {
+    "authority": "actual deterministic ZIP/NPY FP16 inference payload after reload",
+    "paid_objects": ["both partition tables", "all domain Mirror codes", "all FiLM/additive state", "classifier weights and bias", "domain/partition metadata", "archive headers"]
+  },
+  "compute": {
+    "report_examples_and_updates": true,
+    "report_train_wall_clock": true,
+    "report_active_macs_proxy": true,
+    "report_embedding_uniqueness": true,
+    "report_serialized_state_cpu_throughput": true
+  },
+  "boundaries": [
+    "synthetic aligned factorized teacher only",
+    "held-out token-domain pairs are not trained",
+    "256 role count is not independent capacity",
+    "no natural-language or recommendation-system claim",
+    "fresh seeds remain closed unless every development gate passes"
+  ]
+}
