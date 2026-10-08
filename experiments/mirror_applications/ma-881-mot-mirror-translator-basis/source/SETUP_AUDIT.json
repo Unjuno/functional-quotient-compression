@@ -1,0 +1,64 @@
+{
+  "purpose": "Measure omitted compression setup cost after fresh quality/quality settings were already frozen; no hyperparameter or result selection changed.",
+  "seeds": [
+    88111,
+    88112,
+    88113
+  ],
+  "shared_matrix_bank": {
+    "svd_input_shape": [
+      5,
+      256
+    ],
+    "calls_per_setup": 1,
+    "flop_proxy": 26600,
+    "wall_seconds": [
+      0.000250818000495201,
+      6.269500045164023e-05,
+      5.3952000598656014e-05
+    ],
+    "mean_wall_seconds": 0.00012248833384849908
+  },
+  "independent_rank16": {
+    "svd_input_shapes_per_setup": [
+      [
+        16,
+        16
+      ],
+      [
+        16,
+        16
+      ],
+      [
+        16,
+        16
+      ],
+      [
+        16,
+        16
+      ],
+      [
+        16,
+        16
+      ]
+    ],
+    "calls_per_setup": 5,
+    "flop_proxy": 245760,
+    "wall_seconds": [
+      0.0003138029987894697,
+      0.00023660599981667474,
+      0.00025618499967094976
+    ],
+    "mean_wall_seconds": 0.00026886466609236476
+  },
+  "native_mot_full": {
+    "svd_calls": 0,
+    "flop_proxy": 0
+  },
+  "mirror_givens_view": {
+    "svd_calls": 0,
+    "flop_proxy": 0,
+    "note": "teacher angles were supplied; angle extraction/calibration is unmeasured"
+  },
+  "formula": "Thin-SVD proxy for m<=n: 4*m^2*n + 8*m^3; arithmetic estimate, not hardware counter."
+}

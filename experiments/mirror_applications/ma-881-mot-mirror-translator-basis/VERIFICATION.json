@@ -1,0 +1,191 @@
+{
+  "experiment_id": "MA-881",
+  "decision": "PASS on preregistered aligned synthetic mechanism gate; status PROMISING",
+  "base_commit": "28194ea",
+  "branch": "research/ma-881-mot-mirror-translator-basis-20261008",
+  "configuration": {
+    "shared_matrix_bank_rank": 4,
+    "independent_delta_rank": 16,
+    "mirror_angles_per_aligned_expert": 8
+  },
+  "development_seeds": [
+    88101,
+    88102
+  ],
+  "fresh_seeds": [
+    88111,
+    88112,
+    88113
+  ],
+  "freeze_hashes": {
+    "source_sha256": "2b866ccd6901b0d441e7fd4cdcc233569f367c645c83b97e479e76db29ef601f",
+    "protocol_before_fresh_sha256": "3ea3bd35a46f5c0a2f3fd3ae69eca9f54f01c0c90a536543b0744472287dd436",
+    "frozen_config_sha256": "b3b49fe84bb7b209e3790da2357996e99b227761339520d3c35ca04acf8086b5"
+  },
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-881-mot-mirror-translator-basis/tests -v",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "actual_serialized_bytes": true,
+    "byte_exact_roundtrip": true,
+    "paid_components": [
+      "translator matrices/factors/views",
+      "per-expert angles",
+      "private matrix",
+      "router",
+      "context correction",
+      "metadata/header"
+    ],
+    "fresh_payload_hashes_recorded": true
+  },
+  "metric_replay": {
+    "fresh_rows_replayed": 12,
+    "bytes_compute_payload_hash_exact": true,
+    "max_normalized_mse_delta": 0.0
+  },
+  "fresh_summary": {
+    "independent_rank_r_delta": {
+      "serialized_bytes": 13694,
+      "mean_normalized_trajectory_mse": 9.270832422388003e-16,
+      "translator_macs": 915968,
+      "router_macs": 73728,
+      "context_correction_macs": 49152,
+      "givens_scalar_flops": 0,
+      "mean_wall_clock_seconds": 0.034796362666384084,
+      "payload_hashes": [
+        "86c2c5c0ec1e440365029e49565f709975a1dbe8874d06df98eaf5fca4865e1d",
+        "ba73f41b4fe55ae8ebec140aa78357f9724abe1983832fd8ea807a315a7978ff",
+        "9f982d1754f93a09bd4994e9b69551af227c411bb9462b0cf1f2b826f1ee3993"
+      ]
+    },
+    "mirror_shared_givens_views": {
+      "serialized_bytes": 3201,
+      "mean_normalized_trajectory_mse": 1.0285618532765925e-15,
+      "translator_macs": 263680,
+      "router_macs": 73728,
+      "context_correction_macs": 49152,
+      "givens_scalar_flops": 61152,
+      "mean_wall_clock_seconds": 0.05105514599987752,
+      "payload_hashes": [
+        "8402e4311baded9592e820c031fbd85f0f38aba25b76221c3363cdd51dae9197",
+        "f60575832219ec6e754ebb4ce286a573d7f2d5aae61331e56a1f5dc2aeb6637c",
+        "97993ab1c0847331b8fe5a0408c640fcba553ba1dcd07758172cc640727f38b0"
+      ]
+    },
+    "native_mot_full": {
+      "serialized_bytes": 7039,
+      "mean_normalized_trajectory_mse": 0.0,
+      "translator_macs": 393216,
+      "router_macs": 73728,
+      "context_correction_macs": 49152,
+      "givens_scalar_flops": 0,
+      "mean_wall_clock_seconds": 0.03636478900019332,
+      "payload_hashes": [
+        "536a96275df181ea05d2d2c3fe1e42e25ecb52ba79a4767015bfafe678908ff5",
+        "efd0cb11c8e2066ba7d91d909d771695e6d3a0b7b5ccc2a69b4799a1f26b14f9",
+        "ff7ce8b7b08d6f502ce90123bf659331675ca08506e1b6fe00ecb38f70376607"
+      ]
+    },
+    "ordinary_shared_matrix_bank": {
+      "serialized_bytes": 7274,
+      "mean_normalized_trajectory_mse": 9.378606860956894e-16,
+      "translator_macs": 1568256,
+      "router_macs": 73728,
+      "context_correction_macs": 49152,
+      "givens_scalar_flops": 0,
+      "mean_wall_clock_seconds": 0.04606922899984056,
+      "payload_hashes": [
+        "487faf9b5e921ab1666386161b3ae9cac4910501dbf627177c2869594cad9a5f",
+        "e854e8a3e1d7f94cac5da4b1b5abbcc8fe12146521843a542bb7d9c2008469dd",
+        "62f8f6a4838a446db4bd6599c6286bdae2c1f4844bd66fe2313e77f4c06976a2"
+      ]
+    }
+  },
+  "setup_audit": {
+    "purpose": "Measure omitted compression setup cost after fresh quality/quality settings were already frozen; no hyperparameter or result selection changed.",
+    "seeds": [
+      88111,
+      88112,
+      88113
+    ],
+    "shared_matrix_bank": {
+      "svd_input_shape": [
+        5,
+        256
+      ],
+      "calls_per_setup": 1,
+      "flop_proxy": 26600,
+      "wall_seconds": [
+        0.000250818000495201,
+        6.269500045164023e-05,
+        5.3952000598656014e-05
+      ],
+      "mean_wall_seconds": 0.00012248833384849908
+    },
+    "independent_rank16": {
+      "svd_input_shapes_per_setup": [
+        [
+          16,
+          16
+        ],
+        [
+          16,
+          16
+        ],
+        [
+          16,
+          16
+        ],
+        [
+          16,
+          16
+        ],
+        [
+          16,
+          16
+        ]
+      ],
+      "calls_per_setup": 5,
+      "flop_proxy": 245760,
+      "wall_seconds": [
+        0.0003138029987894697,
+        0.00023660599981667474,
+        0.00025618499967094976
+      ],
+      "mean_wall_seconds": 0.00026886466609236476
+    },
+    "native_mot_full": {
+      "svd_calls": 0,
+      "flop_proxy": 0
+    },
+    "mirror_givens_view": {
+      "svd_calls": 0,
+      "flop_proxy": 0,
+      "note": "teacher angles were supplied; angle extraction/calibration is unmeasured"
+    },
+    "formula": "Thin-SVD proxy for m<=n: 4*m^2*n + 8*m^3; arithmetic estimate, not hardware counter."
+  },
+  "selection": {
+    "pool_size": 455,
+    "draw_index_zero_based": 367,
+    "selected": "MA-881",
+    "pool_ids_sha256": "c68e7219ecfe57b8f8fa54263d643f4f7e5e47284f0ae4875692eaabde67caf1",
+    "pool_file_sha256": "f7eae9a81eb431ec5f56191c187092965eafc688048d514ed365bf380c61e4aa",
+    "branch_conflict_found": false
+  },
+  "protocol_amendment": "After fresh access, added source/SETUP_AUDIT.json to report previously omitted SVD setup cost. No settings or quality results changed; details are in PROTOCOL.json.",
+  "invalidated_development": "An initial development run used input-state energy rather than target-trajectory energy in the MSE denominator and an independent-residual base mismatch. Those rows are preserved as source/development_invalid_initial.csv; metric and base were corrected and development rerun before fresh access.",
+  "environment": {
+    "numpy": "2.3.5",
+    "device": "CPU only",
+    "torch": "not installed"
+  },
+  "claim_boundary": [
+    "Synthetic routed recurrent vector translator only.",
+    "Five aligned experts exactly follow the tested Givens orbit; angles were supplied and charged.",
+    "Context correction is an additive synthetic target-context map, not PA238 trajectory-correction loss.",
+    "No natural heterogeneous LLM/cache transfer, target NLL/KL, source prefill, or long-context latency claim."
+  ]
+}

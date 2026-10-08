@@ -1,0 +1,131 @@
+{
+  "experiment_id": "MA-881",
+  "title": "MoT translators compressed into Mirror logical experts",
+  "status": "PROMISING",
+  "evidence_lane": [
+    "MECHANISM",
+    "STORAGE",
+    "RUNTIME"
+  ],
+  "base_commit": "28194ea",
+  "hypothesis": "A shared translator basis plus per-expert Mirror codes and a private fallback will preserve the routed target trajectory while reducing serialized payload against native full MoT, and beat an ordinary shared matrix-bank control.",
+  "physical_object": "Mixture-of-Translators expert matrix bank",
+  "mirror_coordinate": "eight per-expert Givens angles that rotate one shared translator output; private full matrix for the unrelated expert",
+  "logical_multiplicity": "six routed translator experts; five aligned, one unrelated private expert",
+  "prior_art_refs": [
+    "PA238",
+    "MA-876",
+    "MA-880"
+  ],
+  "selection": {
+    "method": "secrets.randbelow over sorted eligible P0/UNTESTED IDs after exclusions",
+    "pool_size": 455,
+    "draw_index_zero_based": 367,
+    "selected_id": "MA-881",
+    "pool_ids_sha256": "c68e7219ecfe57b8f8fa54263d643f4f7e5e47284f0ae4875692eaabde67caf1",
+    "pool_file": "source/selection_pool.csv",
+    "branch_conflict_found": false,
+    "pool_exclusions": "completed worker IDs and paused families documented in previous draw records",
+    "pool_file_sha256": "f7eae9a81eb431ec5f56191c187092965eafc688048d514ed365bf380c61e4aa"
+  },
+  "task": {
+    "experts": 6,
+    "aligned_experts": 5,
+    "private_experts": 1,
+    "hidden_width": 16,
+    "target_context_width": 4,
+    "top_k": 2,
+    "trajectory_steps": 8,
+    "dtype": "float32",
+    "expert_matrix_structure": "five experts are per-output Givens rotations of one full-rank shared translator; one unrelated expert is stored privately",
+    "view_code_provenance": "per-expert Givens angles are supplied by the synthetic teacher and charged; code-learning is not claimed"
+  },
+  "native_mot_components": [
+    "input-conditioned soft router with top-2 mixture",
+    "target-context correction map added at every trajectory step"
+  ],
+  "methods": [
+    "native_mot_full",
+    "independent_rank_r_translators",
+    "ordinary_shared_matrix_bank",
+    "mirror_shared_translator_codes"
+  ],
+  "rank_candidates": {
+    "shared_matrix_bank": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "independent_rank_r_delta": [
+      1,
+      2,
+      4,
+      8,
+      16
+    ]
+  },
+  "development": {
+    "worlds_or_seeds": [
+      88101,
+      88102
+    ],
+    "selection_metric": "for each low-rank control choose smallest q/r with normalized trajectory MSE <=1e-4; no fresh tuning"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      88111,
+      88112,
+      88113
+    ],
+    "locked_before_access": true,
+    "source_sha256_at_freeze": "2b866ccd6901b0d441e7fd4cdcc233569f367c645c83b97e479e76db29ef601f",
+    "protocol_sha256_at_freeze": "3ea3bd35a46f5c0a2f3fd3ae69eca9f54f01c0c90a536543b0744472287dd436",
+    "frozen_config_sha256": "b3b49fe84bb7b209e3790da2357996e99b227761339520d3c35ca04acf8086b5"
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "translator matrices or factors",
+      "shared bases and expert codes",
+      "private expert residual",
+      "router weights",
+      "target context correction weights",
+      "metadata and serializer header"
+    ]
+  },
+  "compute": {
+    "optimizer_updates": 0,
+    "report_fit_operations": true,
+    "report_router_macs": true,
+    "report_translator_macs": true,
+    "report_context_correction_macs": true,
+    "report_isolated_wall_clock": true,
+    "report_trajectory_steps": true,
+    "report_reconstruction_setup_cost": true,
+    "report_setup_decomposition_ops": true
+  },
+  "success_gate": "All three fresh worlds have normalized target trajectory MSE <=1e-4; Mirror payload <=0.80x native full MoT; Mirror active MAC proxy <=1.25x native full MoT; and Mirror payload <=0.90x the nearest ordinary shared matrix-bank or independent-rank control at matched quality.",
+  "failure_gate": "Any fresh quality/compute/storage gate is missed, or the ordinary shared matrix-bank control matches Mirror quality and bytes within 10%.",
+  "boundaries": [
+    "Synthetic vector translator mechanism only; no actual heterogeneous LLM cache or Transformer trajectory KL.",
+    "Router and target context correction are present in every primary method and fully charged.",
+    "Five aligned experts are deliberately generated from the tested shared basis; one unrelated expert is private.",
+    "No learned router, real cache layout, calibration corpus, or end-to-end source prefill is tested.",
+    "Context correction is a synthetic target-context input map; no MoT trajectory-correction loss is trained or replicated.",
+    "Per-expert angles are supplied teacher metadata rather than fitted from model-pair calibration data."
+  ],
+  "selected_configuration": {
+    "shared_matrix_bank_rank": 4,
+    "independent_delta_rank": 16,
+    "mirror_angle_count_per_aligned_expert": 8
+  },
+  "protocol_amendments": [
+    {
+      "after_fresh_access": true,
+      "reason": "The first verification review found that setup decomposition cost was listed but not represented in the core rows. Added a separate deterministic SVD-shape/flop proxy and measured setup wall time; no model setting, fresh metric, or selection changed.",
+      "artifact": "source/SETUP_AUDIT.json"
+    }
+  ]
+}
