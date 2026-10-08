@@ -1,6 +1,6 @@
 # Worker queue
 
-**Current operational pointer (2026-10-08): MA-424/425.** MA-419 is completed FAIL: activation Mirror failed its per-world modnet gate in two fresh worlds and latent3 had lower error at nearly equal bytes. Continue with continuous-depth Mirror dynamics.
+**Current operational pointer (2026-10-08): MA-425.** MA-424 is completed FAIL: aligned rotated vector fields fit quality but actual serialized Mirror state exceeded independent matrices and stiffness rose slightly. Continue with continuous depth/time views.
 
 The queue is derived from `IDEA_REGISTRY.csv`. The registry is authoritative.
 
@@ -152,7 +152,7 @@ High-information P0:
 8. MA-416 — shared decoder + Mirror function codes (completed FAIL); MA-417 — Mirror codebook (completed FAIL)
 9. MA-418 — compositional function codes (completed FAIL); MA-419 — modulated periodic activations (completed FAIL)
 9. MA-418/419 — compositional/modulated neural-function codes
-10. MA-424/425 — continuous-depth Mirror dynamics — current candidates
+10. MA-424 — Neural-ODE Mirror vector-field modes (completed FAIL); MA-425 — continuous depth/time views — current candidate
 11. MA-427 — DEQ conditioned fixed-point map
 12. MA-429/431 — Universal Transformer depth Views/composition
 13. MA-434 — Mamba selective-state Mirror roles

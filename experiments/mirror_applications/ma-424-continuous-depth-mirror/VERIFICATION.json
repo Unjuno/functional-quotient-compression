@@ -1,0 +1,10 @@
+{
+  "experiment_id": "MA-424",
+  "protocol_commit": "f6be1be",
+  "tests": {"command": "python -m unittest discover -s experiments/mirror_applications/ma-424-continuous-depth-mirror/tests -v", "passed": 2, "failed": 0},
+  "serialization": {"roundtrip_checked": true, "byte_exact": true, "payload_rows": 105, "payload_hashes_replayed": true, "actual_payload_bytes_authoritative": true},
+  "metric_replay": {"checked": true, "max_difference": 0.0, "notes": ["Actual bytes and SHA-256 match all saved payloads.", "All methods used identical RK4 NFE at each step count.", "Mirror fails the <=60% independent-byte gate and strict stiffness comparison."]},
+  "fresh_split_integrity_checked": true,
+  "fresh_worlds": [42410, 42411, 42412],
+  "notes": ["Development worlds selected LR before fresh runs.", "Stable linear 2D rotational teacher; aligned mechanism only."]
+}
