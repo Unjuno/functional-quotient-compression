@@ -6,35 +6,39 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1115-row registry)
 
 - Registered candidates: **1115**
-- P0: **597** (37 completed; 560 UNTESTED)
+- P0: **597** (38 completed; 559 UNTESTED)
 - P1: **415** (12 completed; 403 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1066 UNTESTED, 30 PROMISING, 19 FAIL**
-- 49 experiment directories, complete with status/protocol/results/verification files, are indexed in this branch.
-- New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-261 next-candidate decision.
-- Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-261 remains next.
+- Current MA statuses: **1065 UNTESTED, 30 PROMISING, 20 FAIL**
+- 50 experiment directories, complete with status/protocol/results/verification files, are indexed in this branch.
+- New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-265 next-candidate decision.
+- Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-265 remains next.
 - Thirteenth literature sweep added MA-996..1045 (50 UNTESTED; 40 P0/10 P1) and PA296..PA325. IDs MA-1000+ use four digits; consult `check_registry_integrity.py`. No new experiment results.
-- Fourteenth sweep added **MA-1046..1095** (50 UNTESTED; 40 P0 / 10 P1) and **PA326..PA350**. Focus: time-series foundation forecasting, recommender embedding tables, and Earth-observation multi-sensor networks. No new experiment results; MA-261 remains next.
-- Fifteenth direct-prior sweep added **MA-1096..1115** (20 UNTESTED, 16 P0 / 4 P1) and **PA351..371**. A gauge-invariant LoRA audit harness is present; its unit tests are **not** trained-model evidence. MA-261 is next.
+- Fourteenth sweep added **MA-1046..1095** (50 UNTESTED; 40 P0 / 10 P1) and **PA326..PA350**. Focus: time-series foundation forecasting, recommender embedding tables, and Earth-observation multi-sensor networks. No new experiment results; MA-265 remains next.
+- Fifteenth direct-prior sweep added **MA-1096..1115** (20 UNTESTED, 16 P0 / 4 P1) and **PA351..371**. A gauge-invariant LoRA audit harness is present; its unit tests are **not** trained-model evidence. MA-265 is next.
 - PROMISING is **not** ADOPTED. Treat reports with strict-gate misses or exploratory protocol deviations at their documented scope.
 - SRM/TM and prior Phase I results are not MA statuses.
 
 ## Next candidate
 
-**MA-261 — BatchEnsemble-style rank-one Mirror experts (P0; PA17)**
+**MA-265 — VeRA Mirror scaling code bank (P0; PA18)**
 
 MA-255 is reconciled as PROMISING only for its aligned post-fit representation screen; a distinct 1,200-update protocol variant failed at development and remains sealed on fresh worlds. See `experiments/mirror_applications/ma-255-mirror-context-superposition/RECONCILIATION.md`.
 
-MA-260 is complete FAIL: the one-layer linear screen missed its predeclared byte gate, while the independent-task stress case collapsed. It is not a deep BatchEnsemble result; see its report and verification. MA-261 has a completed fresh mechanism report on a dedicated branch and is next for verification/tracker reconciliation.
+MA-260 is complete FAIL: the one-layer linear screen missed its predeclared byte gate, while the independent-task stress case collapsed. It is not a deep BatchEnsemble result; see its report and verification.
+
+MA-261 is complete FAIL after audit: its post-fit branch's raw MSE ratios meet the frozen <=1.10x independent quality criterion in only 1/4 fresh worlds, despite source wording claiming 4/4. A different fixed-update protocol also failed during development. Both variants are retained in its reconciliation report.
+
+MA-265 is the next P0. Dedicated branches already exist; inspect their frozen protocols and verification records before starting or importing anything.
 
 ## Active experiment
 
-No active experiment declared. MA-260 is integrated as FAIL. MA-261's reported experiment is present on a dedicated branch but its source status says tracker results are pending; it awaits final verification review.
+No active experiment declared. MA-255–261 screened IDs are indexed. MA-265 branches exist and require protocol/verification reconciliation before status assignment.
 
 ## Verified status index
 
 - **PROMISING (30):** MA-001, MA-002, MA-003, MA-004, MA-005, MA-006, MA-007, MA-008, MA-012, MA-014, MA-015, MA-041, MA-076, MA-079, MA-111, MA-121, MA-156, MA-160, MA-171, MA-173, MA-181, MA-189, MA-241, MA-244, MA-245, MA-249, MA-250, MA-251, MA-255, MA-691.
-- **FAIL (19):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-260.
+- **FAIL (20):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-260, MA-261.
 
 All per-ID evidence is retained in the local experiment directories and in `CLAIM_LEDGER.csv`. Consult [the evidence integration audit](../../docs/phase2/MIRROR_MA_EVIDENCE_INTEGRATION_2026-10-08.md) for linked reports, verifications, provenance and claim boundaries.
 
@@ -42,6 +46,7 @@ All per-ID evidence is retained in the local experiment directories and in `CLAI
 
 - MA-255 — PROMISING only for an aligned post-fit representation screen: 734B Mirror payload achieved 6.68e-17 fresh MSE on seeds 101/211/307/401 versus 6,490B implemented PSP, 14,650B rank-2 task code, and 27,906B independent. A separate 1,200-update protocol variant failed its development quality gate (Mirror MSE 0.0922 vs 4.52e-5 independent; fresh sealed). These are different protocols, not a replication pair. See `experiments/mirror_applications/ma-255-mirror-context-superposition/RECONCILIATION.md`. Source branches: `research/ma-255-mirror-context-superposition-20261008` and `research/ma-255-mirror-context-superposition-replication-20261008`.
 - MA-260 — FAIL: on four fresh rotation-aligned worlds Mirror matched member accuracy but used 890B, only 27.4% below implemented BatchEnsemble (1,226B) and 3.9% below independent (926B), missing its <=25% byte-ratio gate. On independent task separators its accuracy fell to 0.6018 vs 0.8332 controls. Post-fit one-layer linear screen only; BatchEnsemble rank-one is a weak single-output control, and deep ensembles remain untested. Source result `33da88ba71cb053a8729a393ccc1ed1a2cc4fcf3`, report `experiments/mirror_applications/ma-260-batchensemble-mirror/README.md`.
+- MA-261 — FAIL: post-fit aligned Givens views used 1,006B vs 1,562B BatchEnsemble and 1,794B independent, with tiny absolute error, but the frozen <=1.10x independent MSE ratio passed only 1/4 fresh worlds (raw ratios 1,390x, 302,057x, 11.7x, 0.227x). A separate 1,200-update expert task failed at development. The original source's “PASS 4/4” summary conflicts with raw rows and frozen gate; see `experiments/mirror_applications/ma-261-batchensemble-logical-experts/RECONCILIATION.md`.
 
 ## 2026-10-08 research sweep
 

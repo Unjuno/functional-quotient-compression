@@ -13,7 +13,9 @@ MA-255 is reconciled as **PROMISING only for a post-fit aligned representation s
 
 MA-260 is **FAIL** for its registered byte gate: the four-seed aligned case used 890B versus 1,226B BatchEnsemble (27.4% saving, below the required 75%); the independent-task stress case fell to 0.6018 accuracy versus 0.8332 controls. This was a post-fit one-layer linear screen, not a deep BatchEnsemble reproduction. See `experiments/mirror_applications/ma-260-batchensemble-mirror/README.md`.
 
-**The next candidate is MA-261.** MA-876..1115 remain appended research-intake hypotheses and must not preempt the registered P0 crossovers. Natural variation and benchmark-level runtime remain unproven; aligned synthetic PROMISING must not be described as real-world Mirror adoption.
+MA-261 is **FAIL** against the literal frozen gate. Its source branch claimed 4/4 PASS, but raw fresh per-seed Mirror/independent MSE ratios are 1,390x, 302,057x, 11.7x and 0.227x; the <=1.10x criterion passes only 1/4. A separate fixed-update two-expert protocol failed during development. See `experiments/mirror_applications/ma-261-batchensemble-logical-experts/RECONCILIATION.md`.
+
+**The next candidate is MA-265.** MA-876..1115 remain appended research-intake hypotheses and must not preempt the registered P0 crossovers. Natural variation and benchmark-level runtime remain unproven; aligned synthetic PROMISING must not be described as real-world Mirror adoption.
 
 ## MA-241 — layer-specific Mirror views over tied experts
 
