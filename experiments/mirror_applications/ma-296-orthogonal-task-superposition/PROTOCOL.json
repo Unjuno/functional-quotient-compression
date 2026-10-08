@@ -1,0 +1,104 @@
+{
+  "experiment_id": "MA-296",
+  "title": "Orthogonalized task-vector Mirror superposition",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/TASK-ARITHMETIC/STORAGE/RUNTIME",
+  "base_commit": "037b849",
+  "hypothesis": "Bind related task deltas using a compact orthogonal Mirror address, sum the bound vectors into one physical state, and unbind by task address to retain low-interference logical edits with lower bytes than independent deltas and ordinary PSP; independent tasks require private or richer state.",
+  "physical_object": "One shared base vector and one superposed task-delta vector",
+  "mirror_coordinate": "One float32 task angle m_t for a deterministic block-Givens orthogonal Q(m_t)",
+  "logical_multiplicity": "Eight held-out task functions from one superposed delta state",
+  "prior_art_refs": [
+    "PA16",
+    "PA26"
+  ],
+  "task": {
+    "parameter_dim": 128,
+    "support_tasks": 8,
+    "evaluation_tasks": 8,
+    "train_examples_per_task": 256,
+    "heldout_examples_per_task": 512,
+    "conditions": [
+      "aligned_orthogonal_orbit",
+      "independent_isotropic_deltas"
+    ],
+    "quality": "normalized held-out function MSE; also signed pair-sum and pair-difference MSE"
+  },
+  "controls": [
+    "independent full task vectors",
+    "unbound shared arithmetic mean",
+    "Rademacher Parameter Superposition with charged packed sign contexts",
+    "support-fitted rank-2 SVD task-vector basis",
+    "support-fitted rank-4 SVD task-vector basis",
+    "support-fitted rank-8 SVD task-vector basis",
+    "direct shared-orbit generator storing one seed vector and task angles",
+    "Mirror inverse-bind, superpose, and task-address unbind"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      29601,
+      29602
+    ],
+    "allowed_selection": [
+      "PSP context seed from fixed candidate list",
+      "SVD rank from 2,4,8"
+    ],
+    "selection_metric": "mean normalized held-out task and signed-composition MSE, then actual serialized bytes and throughput",
+    "psp_context_seed_candidates": [
+      296101,
+      296102,
+      296103
+    ],
+    "optimizer_updates": 0
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      29611,
+      29612,
+      29613
+    ],
+    "locked_before_access": true,
+    "locked_psp_context_seed": 296103,
+    "locked_svd_rank": 8
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "serializer": "deterministic typed tensor records charging IDs, names, shapes, dtype, raw bytes, metadata and headers",
+    "paid_objects": [
+      "shared pretrained base",
+      "superposed Mirror task-delta vector",
+      "task coordinates and IDs",
+      "orthogonal frequency schedule",
+      "PSP packed sign contexts and superposed state",
+      "SVD basis and per-task coefficients",
+      "independent full task vectors",
+      "private residuals",
+      "all metadata and codec headers"
+    ]
+  },
+  "compute": {
+    "report_examples_seen": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_construction_wall_time": true,
+    "report_inference_throughput": true,
+    "report_runtime_workspace_bytes": true,
+    "optimizer_updates": 0
+  },
+  "success_gate": "Every fresh aligned world: Mirror task and signed-composition normalized MSE <=1.10x direct shared-orbit generator; payload <=0.5x independent full; throughput >=0.5x direct generator. Mirror-specific value additionally requires >=10% better actual quality/byte/compute frontier than byte-matched PSP and direct shared-orbit generator.",
+  "failure_gate": "Mirror is function/quality matched or dominated by the direct shared-orbit generator at equal/lower payload, misses aligned quality/storage/runtime gate, or cannot recover independent tasks without measured private state.",
+  "boundaries": [
+    "synthetic linear task functions only",
+    "known task identities and supplied angles; no learned router",
+    "fixed-function screen, not learning efficiency or capacity",
+    "no Transformer or language-model claim"
+  ],
+  "amendments": [
+    {
+      "id": "A1",
+      "fixed_before_fresh_access": true,
+      "change": "Freeze PSP context seed 296103 and SVD rank 8 from development-only selection.",
+      "reason": "Development chose the Rademacher context seed by mean task MSE over both conditions and worlds, and the SVD rank by aligned task MSE; fresh seeds remain sealed."
+    }
+  ]
+}
