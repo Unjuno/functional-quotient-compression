@@ -1,0 +1,81 @@
+{
+  "experiment_id": "MA-724",
+  "title": "Laplace posterior over Mirror functional coordinates",
+  "status": "SCREENING",
+  "evidence_lane": "QUALITY/STORAGE/RUNTIME",
+  "base_commit": "16807a7d6dc17a834a44ed3cc793ccc28b615691",
+  "hypothesis": "For one trained shared MLP plus a low-dimensional Givens view code m, a posterior restricted to m provides held-out predictive NLL and calibration close to subnetwork/full diagonal Laplace while materially reducing actual serialized posterior bytes and sampling latency.",
+  "physical_object": "One MAP shared MLP \u03b8 and one Givens feature-view m inserted before the readout.",
+  "mirror_coordinate": "Sixteen learned Givens angles over 32 hidden feature coordinates.",
+  "logical_multiplicity": "Posterior samples over m induce multiple predictive functions without independent full-network posterior draws.",
+  "prior_art_refs": [
+    "PA183",
+    "PA41"
+  ],
+  "dataset": "UCI Wisconsin Diagnostic Breast Cancer (WDBC), via sklearn load_breast_cancer; 569 rows, 30 features, binary target.",
+  "split": {
+    "method": "stratified nested random split; train 60%, dev 20%, fresh 20%",
+    "seed_train_fresh": 724,
+    "seed_dev_fresh": 725,
+    "standardization": "fit mean/std on train only",
+    "fresh_quality_metrics_opened": false
+  },
+  "development": {
+    "training": "one shared MLP with Givens m, Adam full-batch; maximum 300 updates, stop after 40 non-improving dev NLL epochs; best dev checkpoint retained.",
+    "posterior_prior_precision_grid": [
+      0.1,
+      1.0,
+      10.0,
+      100.0
+    ],
+    "posterior_predictive_mc_samples": 100,
+    "selection_metric": "development NLL, with ECE as tie-break; choose \u03bb separately per approximation family",
+    "fixed_seed": 724,
+    "fixed_outcome": "Four Laplace methods selected prior precision using dev NLL/ECE; all selected \u03bb=100. Best Laplace dev control is subnet_full. The frozen_config.json records this before fresh access."
+  },
+  "fresh": {
+    "locked_before_access": true,
+    "prior_precision_selection": "development only",
+    "mc_samples": 100,
+    "metrics": [
+      "NLL",
+      "Brier",
+      "ECE-10",
+      "accuracy"
+    ],
+    "opened": false
+  },
+  "controls": [
+    "Deterministic shared MLP+MAP Mirror code.",
+    "Full-network diagonal empirical-Fisher Laplace.",
+    "Last-layer/subnetwork full-covariance Laplace.",
+    "Mirror m full-covariance Gauss-Newton Laplace.",
+    "Mirror m diagonal Gauss-Newton Laplace.",
+    "Independent 5-member MLP ensemble as practical upper compute/bytes control."
+  ],
+  "storage": {
+    "authority": "actual torch.save serialized inference payload bytes",
+    "paid_objects": [
+      "One shared_base.pt with \u03b8 mean weights and train-fit standardizer (charged once).",
+      "Per-method actual serialized posterior state: m mean plus all covariance/variance tensors needed for that method.",
+      "Independent 5-model upper control stores all five full network states.",
+      "Architecture, class mapping, prior precision and sampler metadata."
+    ]
+  },
+  "compute": {
+    "report_training_examples_updates": true,
+    "report_curvature_pass_examples": true,
+    "report_posterior_samples": true,
+    "report_wall_clock_and_predictive_latency": true
+  },
+  "success_gate": "Fresh NLL within 0.02 nats and ECE-10 within 0.02 of the best Laplace control, while the code-space marginal posterior state uses at least 4x fewer actual serialized bytes than the full diagonal posterior state and 100-sample predictive wall time is at least 2x lower; total shared-base+state bytes are also reported.",
+  "failure_gate": "FAIL if Mirror posterior misses best Laplace control by >0.02 NLL or >0.02 ECE, or if its marginal posterior state is not at least 4x smaller or predictive wall time misses the 2x gate. Structured full-covariance m must beat diagonal m to claim a structured-curvature benefit.",
+  "boundaries": [
+    "One small tabular classification benchmark; no broad BNN claim.",
+    "Curvature controls use empirical Fisher/Gauss-Newton Laplace; not exact Hessian.",
+    "View angle code is optimized on train, with MAP trunk trained jointly.",
+    "Fresh split will not be used for \u03bb/configuration selection.",
+    "Random draw #18: pool size 1038, index 653, selected MA-724; pool ids SHA 3dfa6d9a528adfee8c4307f27ace5f5a7982f8430110589e03599a691f33ca70; pool CSV SHA 5700ee051a0d7d39d901214b97051a03d199075cd64d0c5bb17f6b2df36846eb; seed 5add466b61e9a0875b4b64a6f73228f62433a7e8432353c937c7dc4c2c831698.",
+    "Report marginal posterior-state bytes separately from complete inference payload bytes; the shared \u03b8 checkpoint is charged once and included in every complete-payload total."
+  ]
+}

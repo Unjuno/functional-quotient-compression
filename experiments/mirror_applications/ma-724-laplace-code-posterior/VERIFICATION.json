@@ -1,0 +1,27 @@
+{
+  "experiment_id": "MA-724",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror-applications/ma-724-laplace-code-posterior/tests -v",
+    "passed": 5,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": false,
+    "actual_payload_bytes_and_hashes": "development_result.json; payload files are small and will be committed"
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0,
+    "notes": [
+      "Dev metric generation and loading checked; selection metrics stored in development_result.json."
+    ]
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_quality_metrics_opened": false,
+  "notes": [
+    "Frozen \u03bb configuration and source hash recorded before fresh run.",
+    "PA41 Rank-1 BNN was not reproduced; no claim against it."
+  ]
+}

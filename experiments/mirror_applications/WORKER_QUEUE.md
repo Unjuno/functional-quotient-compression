@@ -431,3 +431,8 @@ A worker may batch implementation work across a family, but scientific status is
 ## Stop rule
 
 If two consecutive candidates in a family fail for the same demonstrated structural reason, stop that family and write a family diagnostic before continuing.
+
+
+## Random selection worker log — draw 18
+
+Uniform pseudorandom draw over 1038 eligible UNTESTED candidates after remote-branch exclusions. Selected MA-724 at zero-based index 653; pool ID-list SHA-256 `3dfa6d9a528adfee8c4307f27ace5f5a7982f8430110589e03599a691f33ca70`; seed `5add466b61e9a0875b4b64a6f73228f62433a7e8432353c937c7dc4c2c831698`. Work is in `experiments/mirror_applications/ma-724-laplace-code-posterior/`.

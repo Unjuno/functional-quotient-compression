@@ -35,7 +35,7 @@ If blocked by a documented reproducibility or harness issue, record it and resum
 
 ## Active experiment
 
-No active experiment was declared on either inspected baseline/status chain at reconciliation. Before claiming MA-255, check live research/ma-* branches again; this statement is not a realtime worker lock.
+**MA-724** was selected by random worker draw 18 and is in development/fresh-locked review on branch `research/ma-724-laplace-code-20261008`. This worker uses the appended random selection logs; legacy MA-255 priority is not its linear next-ID rule.
 
 ## Verified status index
 
@@ -84,3 +84,8 @@ Existing methods **Compress then Serve, CtM, EigenLoRAx, MetaTT, GLoRA, LRAgent 
 - `CLAIM_LEDGER.csv` and each experiment's `VERIFICATION.json` are the evidence index; `STATUS_BOARD.md` is an operational cache.
 - Before allocating an ID or starting work, re-read the live registry and search for experiment branches.
 - Preserve old branches, failed results, exploratory data and locked protocols. No automatic merge to main.
+
+
+## Concurrent random worker update
+
+Random draw 18 selected MA-724 (Laplace posterior over Mirror code). Development metrics and frozen config are on `research/ma-724-laplace-code-20261008`; fresh metrics remain locked pending branch commit.
