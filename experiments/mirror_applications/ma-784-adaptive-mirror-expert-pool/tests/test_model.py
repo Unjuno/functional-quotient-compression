@@ -81,6 +81,13 @@ class AdaptivePoolTests(unittest.TestCase):
             self.assertEqual(len(payload["vocabulary"]), len(vocab))
             self.assertEqual(result["inference_payload"]["bytes"], (artifact_dir / "seed788_mirror2x_inference.pt").stat().st_size)
             self.assertTrue(torch.isfinite(torch.tensor(result["nll"])))
+            dense = SmallGPT(cfg, "dense", 9)
+            with patch.object(runner, "ARTIFACTS", artifact_dir):
+                dense_meta = runner.serialize(789, "dense", dense, vocab, manifest)
+            dense_payload = torch.load(artifact_dir / "seed789_dense_inference.pt", map_location="cpu", weights_only=False)
+            self.assertIsNone(dense_payload["config"]["normrouter_c"])
+            self.assertEqual(dense_payload["config"]["routing"], "none")
+            self.assertEqual(dense_meta["bytes"], (artifact_dir / "seed789_dense_inference.pt").stat().st_size)
 
 
 if __name__ == "__main__":

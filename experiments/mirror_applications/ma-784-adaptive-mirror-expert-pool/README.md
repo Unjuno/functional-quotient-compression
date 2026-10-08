@@ -37,3 +37,7 @@ UniPool's shared routers and balancing provide most of the reuse benefit; when t
 ## U — Boundaries
 
 The run can establish only a fixed-budget small character-LM mechanism signal. It cannot establish asymptotic capacity, production-scale expert reuse, arbitrary expert multiplicity, or optimized serving. Count actual serialized bytes for all tensors, routing state, view/FiLM codes, vocabulary, configuration, and metadata. Report active MAC proxy and wall time separately.
+
+## Execution note
+
+The first development attempt completed 1,200 updates for the dense condition, then failed while serializing metadata because the no-router baseline had no NormRouter calibration entry. No metric row or checkpoint was retained. The protocol records this attempt and a serializer-only correction (`normrouter_c=null`, `routing=none`) before an identical rerun. All model/data/split/seed/update/metric/gate settings remain frozen.

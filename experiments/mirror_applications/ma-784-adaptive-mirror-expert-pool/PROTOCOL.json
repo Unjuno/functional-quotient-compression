@@ -1,7 +1,7 @@
 {
   "experiment_id": "MA-784",
   "title": "Adaptive global expert pool with logical Mirror views",
-  "status": "FROZEN_PRE_DATA",
+  "status": "AMENDED_FOR_IDENTICAL_PROTOCOL_RERUN",
   "base_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
   "branch": "research/ma-784-adaptive-mirror-pool-20261008",
   "selection_draw": 18,
@@ -93,5 +93,13 @@
     "cryptographic_seed_hex": "89253d001af66ade263038b97d2e3e75167e1f8cbc9b91e61540174cf75f51cf",
     "uniform_index": 269,
     "selected_id": "MA-784"
-  }
+  },
+  "amendments": [
+    {
+      "date": "2026-10-08",
+      "timing": "after one development training attempt completed; its preregistered best-dev checkpoint rule evaluated development NLL internally, but no values or checkpoint were retained, printed, or compared across conditions",
+      "change": "Inference metadata serialization now stores normrouter_c as null and routing=none for the dense baseline, which has no router.",
+      "rationale": "The original serializer indexed the NormRouter calibration table with the dense baseline's placeholder route count and raised KeyError after training. This correction changes no model, data, split, metric, seed, update, gate, or condition. The failed attempt is recorded in source/attempt_log.json."
+    }
+  ]
 }

@@ -1,13 +1,13 @@
 {
   "experiment_id": "MA-784",
-  "commit": "0b63f8e",
+  "commit": "pending amended rerun freeze",
   "tests": {
     "command": "python -m unittest discover -s experiments/mirror_applications/ma-784-adaptive-mirror-expert-pool/tests -v",
     "passed": 4,
     "failed": 0
   },
   "serialization": {
-    "roundtrip_checked": false,
+    "roundtrip_checked": true,
     "byte_exact": false
   },
   "metric_replay": {
@@ -27,7 +27,9 @@
     "Givens views preserve norm, receive finite gradients, and change outputs for nonzero codes.",
     "2 physical / 4 logical mirror pool topology and parameter counts match the frozen design.",
     "One-update synthetic preflight serializes and reloads a complete inference payload.",
-    "No corpus values or audit split were opened before the preregistration commit."
+    "No corpus values or audit split were opened before the preregistration commit.",
+    "One complete dense training attempt failed at serializer metadata after 1200 updates; no metric result or checkpoint was retained. This was logged and did not change the frozen scientific settings.",
+    "The serializer-only amendment passed a dense payload metadata regression test before rerunning the identical experiment."
   ],
   "notes": []
 }

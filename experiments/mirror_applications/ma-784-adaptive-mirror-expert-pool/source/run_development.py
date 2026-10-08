@@ -161,7 +161,7 @@ def serialize(seed, condition, model, vocab, manifest):
     config = {"layers": LAYERS, "width": WIDTH, "heads": HEADS, "logical_routes": logical,
               "physical_experts": physical, "expert_hidden": FF, "block_size": BLOCK,
               "condition": condition, "mode": mode, "gate_groups": GATE_GROUPS,
-              "normrouter_c": model.config.normrouter_c_by_logical[logical], "routing": "top1-PA205-NormRouter"}
+              "normrouter_c": model.config.normrouter_c_by_logical.get(logical), "routing": "top1-PA205-NormRouter" if mode != "dense" else "none"}
     payload = {"schema": "MA-784/inference-v1", "seed": seed, "condition": condition,
                "config": config, "vocabulary": vocab, "corpus_sha256": manifest["sha256"],
                "model_state": {k: v.detach().cpu().contiguous() for k, v in model.state_dict().items()}}
@@ -278,7 +278,8 @@ def main():
     audit = evaluate_audit(results, vocab) if gate["audit_eligible"] else None
     summary = {"corpus": corpus_manifest,
                "split": {"audit_opened": audit is not None, "train_characters": train.numel(), "dev_characters": dev.numel()},
-               "results": results, "gates": gate, "audit": audit}
+               "results": results, "gates": gate, "audit": audit,
+               "failed_attempts": json.loads((SOURCE / "attempt_log.json").read_text()) if (SOURCE / "attempt_log.json").exists() else []}
     out = SOURCE / "development_summary.json"
     out.write_text(json.dumps(summary, indent=2) + "\n")
     with (ROOT / "RESULTS_CORE.csv").open("w", newline="") as f:
@@ -301,6 +302,14 @@ def main():
                     "active_compute_proxy": active_macs_per_token(r["condition"]), "wall_time_s": r["evaluation_wall_seconds"],
                     "primary_metric": "audit NLL", "primary_value": r["nll"], "secondary_metric": "audit tokens/sec",
                     "secondary_value": r["evaluation_tokens_per_second"], "status_note": "no tuning"})
+        for attempt in summary["failed_attempts"]:
+            writer.writerow({"condition": attempt["condition"], "world_or_seed": attempt["seed"],
+                "method": "failed serialization attempt; development only", "serialized_bytes": "",
+                "expert_bank_tensor_bytes": "", "train_tokens_or_examples": attempt["train_tokens_seen"],
+                "optimizer_updates": attempt["updates_completed"], "active_compute_proxy": active_macs_per_token(attempt["condition"]),
+                "wall_time_s": attempt["observed_process_wall_seconds"], "primary_metric": "not retained",
+                "primary_value": "", "secondary_metric": "serialization error", "secondary_value": "",
+                "status_note": attempt["failure"]})
     print(json.dumps(gate, indent=2), flush=True)
 
 
