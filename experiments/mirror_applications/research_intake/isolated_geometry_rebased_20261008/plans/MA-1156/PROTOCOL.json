@@ -1,0 +1,82 @@
+{
+  "experiment_id": "MA-1156",
+  "title": "Horizontal-gauge Mirror task codes",
+  "status": "UNTESTED",
+  "plan_only": true,
+  "evidence_lane": "MECHANISM",
+  "isolated_research_branch": "research/mirror-isolated-protocols-rebased-20261008",
+  "baseline_sha": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
+  "plan_review_date": "2026-10-08",
+  "hypothesis": "On held-out tasks with the same frozen attention backbone, a gauge-horizontal Mirror code reaches no worse than +0.01 nats/token relative to the best byte-matched ordinary task code, while reducing serialized code-bank bytes by at least 10% and not increasing P95 forward latency by over 10%.",
+  "physical_object": "shared frozen attention Q/K/V/O maps and a source-task residual basis",
+  "mirror_coordinate": "small task m in the numerically estimated horizontal (non-gauge) complement",
+  "logical_multiplicity": "multiple genuinely different task attention functions from shared maps",
+  "prior_art_refs": [
+    "PA414",
+    "PA415",
+    "PA373",
+    "PA381"
+  ],
+  "closest_controls": "unprojected Mirror code / direct low-rank code / native gauge-invariant optimization",
+  "requirements": {
+    "native": "Freeze a 2-head 32-wide attention block. Fit a regular shared task residual basis with unrestricted small task codes; separately instantiate unconstrained low-rank and rank-one codes. Preserve identical task split, optimizer and shared basis.",
+    "insertion": "Compute attention-layer gauge tangent directions on the SOURCE models only (Q/K inverse coordinate transforms and V/O inverse output transforms). QR-project candidate low-dimensional residual directions away from these tangent directions. Train the remaining coefficients m from allowed per-task support examples. A projection or decomposition used at inference is paid in bytes/FLOPs unless compiled into the shared basis.",
+    "method": "For each source model, sample invertible G for Q'=QG and K'=KG^{-T}, plus H for V'=VH and output map O'=H^{-1}O. Confirm attention/model outputs unchanged before estimating a gauge tangent. Construct finite-difference tangent columns and orthonormalize in float64. Compare m-basis before/after removing their tangent components; train 4 code sizes {2,4,8,16} and retain best dev. Do not assume a Frobenius-horizontal direction automatically gives lower end-to-end loss.",
+    "fixture": "Synthetic teacher attention: d_model=32, heads=2, sequence=16; eight train/source tasks and four task-identity heldouts, each with disjoint support/dev/audit examples. A teacher generates coherent classification/next-token labels; no target oracle weight deltas allowed for fitting m. Repeat with random and structured task families.",
+    "hardware": "Stage 1 CPU PyTorch float64 for gauge diagnostics, float32 for training; no GPU required. Stage 2 single CUDA GPU if available, otherwise record Stage-2 BLOCKED instead of inventing language-model results."
+  },
+  "split": {
+    "development": {
+      "seeds": [
+        11,
+        12,
+        13
+      ],
+      "allowed": "select code dimension, LR, stop condition only"
+    },
+    "fresh": {
+      "seeds": [
+        101,
+        102,
+        103,
+        104,
+        105
+      ],
+      "locked_before_access": true
+    },
+    "disjoint_task_identities": true,
+    "no_target_oracle_deltas": true
+  },
+  "resources": {
+    "storage": "actual serialized inference payload; count basis/router/m/indices/normalization/metadata",
+    "compute": "training examples and updates, FLOPs or MACs, CPU/GPU P50/P95 with batch/dtype/hardware",
+    "quality": "Teacher/logit MSE, held-out cross entropy, output Jacobian singular-rank diagnostic on fixed probe inputs, per-task accuracy, serial bytes including QR/basis metadata, training FLOPs, CPU/GPU P50/P95 inference."
+  },
+  "gates": {
+    "PASS": "All five fresh task-world seeds satisfy non-inferiority margin 0.01 nats/token vs best byte-near non-Mirror code, median additional serialized bytes <=0.90 control, median P95 <=1.10 control, and functional Jacobian rank is nonzero for each claimed logical role.",
+    "FAIL": "Any exact gauge transform is counted as a distinct logical function; or matched control reaches quality with <= candidate bytes and latency; or fresh quality margin is exceeded in >=2 of 5 worlds.",
+    "UNCERTAIN": "Missing strong control, uncertain precision, insufficient heldout data, unmeasured runtime or CI overlap"
+  },
+  "alternative": "Gauge complement can rotate with task/data and a training-friendly horizontal projection can discard useful nonlinear directions; simpler low-rank basis may win.",
+  "uncertainty": "Finite-probe tangent nullspace, near-degenerate rank, learned basis randomness, optimizer choice, float32 vs float64. Treat near-zero singular values as uncertain; bootstrap by task identity and report u_c from seeds plus numerical precision.",
+  "stopping": "Stop after 3 dev seeds then 5 fresh worlds; if cheap mechanism fails predeclared gate, record negative and do not tune fresh. Hardware unavailable => BLOCKED (not PASS).",
+  "prior_art_delta": "Test whether allocating m only to observable function directions improves capacity-per-byte beyond unconstrained codes; do not treat gauge orbit as a new expert.",
+  "limitations": "A local/probe-space gauge complement is not a proof of global quotient geometry or independent expert capacity.",
+  "result_files_present": false,
+  "worker_claim": false,
+  "uncertainty_model": {
+    "observable": "Quality Q in its declared units (nat/token or dimensionless error), task/seed paired samples",
+    "n_min_fresh": 5,
+    "components": [
+      "u_seed",
+      "u_eval",
+      "u_num"
+    ],
+    "combined_standard": "u_c=sqrt(u_seed^2+u_eval^2+u_num^2) for independent components; include covariance otherwise",
+    "coverage_factor": 2,
+    "expanded": "U=k_cov*u_c; only indicative with 5 worlds, bootstrap interval primary",
+    "runtime": "u_t=sqrt(u_repeat^2+u_clock^2) in seconds",
+    "storage": "actual byte count is exact for fixed serialization",
+    "sequential_stop": "perform all five frozen fresh worlds, do not early-stop for favorable result or tune on audit data"
+  }
+}

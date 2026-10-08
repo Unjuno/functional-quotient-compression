@@ -1,0 +1,82 @@
+{
+  "experiment_id": "MA-1159",
+  "title": "Symmetry-equivariant functional Mirror code generator",
+  "status": "UNTESTED",
+  "plan_only": true,
+  "evidence_lane": "MECHANISM",
+  "isolated_research_branch": "research/mirror-isolated-protocols-rebased-20261008",
+  "baseline_sha": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
+  "plan_review_date": "2026-10-08",
+  "hypothesis": "With an amortized generator counted as inference state, a symmetry-equivariant m generator achieves <=+0.01 held-out CE vs a byte-near generic m-generator, improves performance after unseen hidden-unit permutations, and saves >=10% total multi-task inference bytes versus full-adapter generation.",
+  "physical_object": "shared frozen task backbone and a single amortized meta-code generator",
+  "mirror_coordinate": "task-specific m generated from support data and symmetry-equivariant weight/gradient features",
+  "logical_multiplicity": "unseen-task functional adapters without one stored dense adapter per task",
+  "prior_art_refs": [
+    "PA418",
+    "PA419",
+    "PA363",
+    "PA368"
+  ],
+  "closest_controls": "ordinary MLP hypernetwork / native UNF or NFN / direct learned LoRA task code",
+  "requirements": {
+    "native": "Train a generic support-set encoder -> low-rank adapter and a native permutation-equivariant functional network/UNF-style generator -> full adapter. Count the amortized generator size; do not weaken native controls.",
+    "insertion": "Replace the generator final head with a k-dimensional m head and a shared fixed task-update basis; feed permutable gradients/weights through an equivariant encoder. Ensure the m output itself is invariant when the requested function is invariant, while intermediate unit-wise outputs transform equivariantly.",
+    "method": "For each support set, compute pooled activation and gradient features for a frozen d=32 MLP (2 hidden layers) with explicit neuron-permutation twins. Build small NFN with shared intra-/inter-layer aggregation, plus generic MLP and simple DeepSets baselines; use k={4,8,16}, common base/basis fixed across task families. Independently test exact permutation transport, label-independent feature pipeline and output consistency.",
+    "fixture": "Ten source task transformations and six unseen task transformations over class-balanced synthetic classification; each unseen task has 32 support examples, disjoint 128 dev and 256 audit examples; 4 unique permutations of each model for invariance checks.",
+    "hardware": "Stage 1 CPU PyTorch float32; optional stage 2 CUDA 1 GPU with transformer if source-only NFN architecture and licenses can be verified."
+  },
+  "split": {
+    "development": {
+      "seeds": [
+        11,
+        12,
+        13
+      ],
+      "allowed": "select code dimension, LR, stop condition only"
+    },
+    "fresh": {
+      "seeds": [
+        101,
+        102,
+        103,
+        104,
+        105
+      ],
+      "locked_before_access": true
+    },
+    "disjoint_task_identities": true,
+    "no_target_oracle_deltas": true
+  },
+  "resources": {
+    "storage": "actual serialized inference payload; count basis/router/m/indices/normalization/metadata",
+    "compute": "training examples and updates, FLOPs or MACs, CPU/GPU P50/P95 with batch/dtype/hardware",
+    "quality": "Few-shot accuracy, CE, m invariance and output equivalence across permutations, actual generator plus basis plus codes bytes, adaptation wall-clock/updates and OOD task identity transfer."
+  },
+  "gates": {
+    "PASS": "All five fresh seeds preserve prediction invariance within 1e-4 float32 relative after valid neuron permutation; median held-out loss within +0.01 of best byte-matched m baseline, >=10% full-system byte saving versus UNF-generated full adapters, and no added test-only oracle information.",
+    "FAIL": "Generic DeepSets/MLP equal or better under matched bytes, broken permutation invariance, or generator cost erases task-code savings.",
+    "UNCERTAIN": "Missing strong control, uncertain precision, insufficient heldout data, unmeasured runtime or CI overlap"
+  },
+  "alternative": "NFN/UNF parameter sharing is already an effective inductive bias; specialized m may be an information bottleneck and meta-network overhead dominates until many tasks.",
+  "uncertainty": "Meta-training task diversity, support set draw, permutation group scope, optimizer and model scale; report five seed variation and calibration/test disjointness.",
+  "stopping": "Stop after 3 dev seeds then 5 fresh worlds; if cheap mechanism fails predeclared gate, record negative and do not tune fresh. Hardware unavailable => BLOCKED (not PASS).",
+  "prior_art_delta": "Use equivariant neural functionals to emit only low-description m, not full weights, and test byte/transfer gains beyond native UNF and generic hypernetworks.",
+  "limitations": "Permutation equivariance of an encoder is not itself novel and is not functional multiplicity.",
+  "result_files_present": false,
+  "worker_claim": false,
+  "uncertainty_model": {
+    "observable": "Quality Q in its declared units (nat/token or dimensionless error), task/seed paired samples",
+    "n_min_fresh": 5,
+    "components": [
+      "u_seed",
+      "u_eval",
+      "u_num"
+    ],
+    "combined_standard": "u_c=sqrt(u_seed^2+u_eval^2+u_num^2) for independent components; include covariance otherwise",
+    "coverage_factor": 2,
+    "expanded": "U=k_cov*u_c; only indicative with 5 worlds, bootstrap interval primary",
+    "runtime": "u_t=sqrt(u_repeat^2+u_clock^2) in seconds",
+    "storage": "actual byte count is exact for fixed serialization",
+    "sequential_stop": "perform all five frozen fresh worlds, do not early-stop for favorable result or tune on audit data"
+  }
+}

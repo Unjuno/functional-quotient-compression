@@ -1,0 +1,115 @@
+{
+  "version": 1,
+  "date": "2026-10-08",
+  "branch": "research/mirror-isolated-protocols-rebased-20261008",
+  "base_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
+  "quarantined": true,
+  "worker_queue_change": false,
+  "purpose": "Independent preregistered plans, not started experiments. No active worker is required to read this directory. Each plan contains local method and controls; primary papers serve verification, not prerequisites to implement the mechanism screen.",
+  "dev_seeds": [
+    11,
+    12,
+    13
+  ],
+  "fresh_seeds": [
+    101,
+    102,
+    103,
+    104,
+    105
+  ],
+  "audit_firewall": "Source/task IDs and all synthetic task definitions split before training. Dev chooses config. Fresh identities/labels and heldout pair/architecture combinations are never used for tuning. Any peek invalidates fresh result.",
+  "decision": "A five-world fresh gate is screening evidence only; ADOPTED requires separate independent replication with >=10 seed/task units and measurements on a real workload if relevant.",
+  "threshold_note": "Numerical tolerances and relative thresholds below are preregistered research choices, not claims from the cited papers.",
+  "files": "Plans under research_intake only do not constitute an active experiment directory, RESULTS_CORE.csv or VERIFICATION.json. Promote to experiment template only by explicit user decision.",
+  "source_check": "Freeze exact model commit, tokenizer, pretrained checkpoint hash, random seed, software versions, dtype, GPU and batch before results.",
+  "experiments": [
+    {
+      "id": "MA-1156",
+      "title": "Horizontal-gauge Mirror task codes",
+      "priority": "P0",
+      "path": "plans/MA-1156/README.md",
+      "protocol": "plans/MA-1156/PROTOCOL.json"
+    },
+    {
+      "id": "MA-1157",
+      "title": "Holonomy-robust Mirror code transport",
+      "priority": "P1",
+      "path": "plans/MA-1157/README.md",
+      "protocol": "plans/MA-1157/PROTOCOL.json"
+    },
+    {
+      "id": "MA-1158",
+      "title": "Invariant fingerprint selected Mirror bank",
+      "priority": "P1",
+      "path": "plans/MA-1158/README.md",
+      "protocol": "plans/MA-1158/PROTOCOL.json"
+    },
+    {
+      "id": "MA-1159",
+      "title": "Symmetry-equivariant functional Mirror code generator",
+      "priority": "P0",
+      "path": "plans/MA-1159/README.md",
+      "protocol": "plans/MA-1159/PROTOCOL.json"
+    },
+    {
+      "id": "MA-1160",
+      "title": "Lie-bracket controlled noncommuting Mirror composition",
+      "priority": "P0",
+      "path": "plans/MA-1160/README.md",
+      "protocol": "plans/MA-1160/PROTOCOL.json"
+    },
+    {
+      "id": "MA-1161",
+      "title": "GVA head-reconstruction Mirror code bank",
+      "priority": "P0",
+      "path": "plans/MA-1161/README.md",
+      "protocol": "plans/MA-1161/PROTOCOL.json"
+    },
+    {
+      "id": "MA-1162",
+      "title": "GVA physical cache alias on Mirror role switches",
+      "priority": "P0",
+      "path": "plans/MA-1162/README.md",
+      "protocol": "plans/MA-1162/PROTOCOL.json"
+    },
+    {
+      "id": "MA-1163",
+      "title": "Cross-architecture functional descriptor Mirror code",
+      "priority": "P1",
+      "path": "plans/MA-1163/README.md",
+      "protocol": "plans/MA-1163/PROTOCOL.json"
+    },
+    {
+      "id": "MA-1164",
+      "title": "Shared LRKV basis with small Mirror head-role code",
+      "priority": "P0",
+      "path": "plans/MA-1164/README.md",
+      "protocol": "plans/MA-1164/PROTOCOL.json"
+    }
+  ],
+  "existing": [
+    "MA-338",
+    "MA-692",
+    "MA-1155"
+  ],
+  "new_papers": [
+    "PA414",
+    "PA415",
+    "PA416",
+    "PA417",
+    "PA418",
+    "PA419",
+    "PA420",
+    "PA421",
+    "PA422",
+    "PA423",
+    "PA424"
+  ],
+  "staging": true,
+  "original_collided_branch": "research/mirror-isolated-gauge-cache-protocols-20261008",
+  "original_collided_id_range": "MA-1116..1123; PA382..390",
+  "canonical_rebase_max_at_creation": "MA-1155",
+  "new_range": "MA-1156..1164",
+  "prior_added": "PA414..424"
+}

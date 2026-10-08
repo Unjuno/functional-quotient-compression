@@ -1,0 +1,81 @@
+{
+  "experiment_id": "MA-1158",
+  "title": "Invariant fingerprint selected Mirror bank",
+  "status": "UNTESTED",
+  "plan_only": true,
+  "evidence_lane": "MECHANISM",
+  "isolated_research_branch": "research/mirror-isolated-protocols-rebased-20261008",
+  "baseline_sha": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
+  "plan_review_date": "2026-10-08",
+  "hypothesis": "Source-only invariant fingerprints select code families that lower total stored task-bank bytes >=10% versus best output-probe or SVD clustering at held-out loss difference <=0.01 nats/token, with zero false equivalences under prescribed counterexamples.",
+  "physical_object": "shared pretrained model plus a bank of candidate adaptation bases",
+  "mirror_coordinate": "fingerprint-selected basis index plus small m and optional paid private residual",
+  "logical_multiplicity": "many naturally trained tasks mapped into fewer task-code/basis families",
+  "prior_art_refs": [
+    "PA416",
+    "PA414",
+    "PA418"
+  ],
+  "closest_controls": "output-probe clustering / weight-SVD clustering / bispectral-only invariant test / independent adapters",
+  "requirements": {
+    "native": "Reproduce a task-delta SVD + nearest-codebook and a function-logit probe clustering baseline; if canonical bispectral computation from PA416 is unavailable, label any simplified spectral signature as a PROXY, not native replication.",
+    "insertion": "Select basis family using a gauge-invariant signature estimated on source/calibration data; train per-task m on support data and store basis index. The selector, tables and signal samples used at inference count if needed online.",
+    "method": "Generate source task delta functions and multiple exact Q/K, V/O gauge copies. Make feature sets: raw Frobenius/SVD, held-out calibration logits, curvature/Fisher sketch, and full bispectral signature only if independently implemented/validated. Cluster on source; fit m with frozen source basis; include a negative pair with identical low-order moments but different outputs.",
+    "fixture": "Eight source task families x 3 gauge twins, six truly new held-out tasks, and two adversarial near-collision families using tiny attention/MLP blocks; target adapters are learned independently but share the identical frozen base revision.",
+    "hardware": "Stage 1 CPU float64 invariance checks and torch float32 training; stage 2 GPU natural independently learned adapter bank only if checkpoint provenance identical."
+  },
+  "split": {
+    "development": {
+      "seeds": [
+        11,
+        12,
+        13
+      ],
+      "allowed": "select code dimension, LR, stop condition only"
+    },
+    "fresh": {
+      "seeds": [
+        101,
+        102,
+        103,
+        104,
+        105
+      ],
+      "locked_before_access": true
+    },
+    "disjoint_task_identities": true,
+    "no_target_oracle_deltas": true
+  },
+  "resources": {
+    "storage": "actual serialized inference payload; count basis/router/m/indices/normalization/metadata",
+    "compute": "training examples and updates, FLOPs or MACs, CPU/GPU P50/P95 with batch/dtype/hardware",
+    "quality": "False same-function/equivalence decisions, held-out NLL/accuracy and logits, bank basis count, actual compressed bytes including signature/selector indices, inference CPU latency and source-training time."
+  },
+  "gates": {
+    "PASS": "Across five fresh seeds, no confirmed functionally different pair merged as exact equivalent, held-out NLL within +0.01 of best byte-near control, >=10% bank byte saving and P95 inference <=1.10 control; otherwise at most PROMISING for screening.",
+    "FAIL": "Any false-equivalence decision using ground-truth synthetic exact functions; audit-task delta used to form source basis; simple output clustering equal/better at matched bytes.",
+    "UNCERTAIN": "Missing strong control, uncertain precision, insufficient heldout data, unmeasured runtime or CI overlap"
+  },
+  "alternative": "Gauge invariant fingerprint may be too coarse, expensive or non-identifying; output-space clustering can dominate.",
+  "uncertainty": "Calibration coverage and fingerprint collisions, condition number, signature truncation, oracle-equivalence testing limitations; bootstrap by task identity and report collision confidence interval.",
+  "stopping": "Stop after 3 dev seeds then 5 fresh worlds; if cheap mechanism fails predeclared gate, record negative and do not tune fresh. Hardware unavailable => BLOCKED (not PASS).",
+  "prior_art_delta": "Use hybrid function/gauge invariants to choose the cheapest Mirror code bank that preserves task quality; equivalence signatures alone are native prior art.",
+  "limitations": "No claim that signatures completely characterize global transformer equivalence; diagnostic finite-probe score only.",
+  "result_files_present": false,
+  "worker_claim": false,
+  "uncertainty_model": {
+    "observable": "Quality Q in its declared units (nat/token or dimensionless error), task/seed paired samples",
+    "n_min_fresh": 5,
+    "components": [
+      "u_seed",
+      "u_eval",
+      "u_num"
+    ],
+    "combined_standard": "u_c=sqrt(u_seed^2+u_eval^2+u_num^2) for independent components; include covariance otherwise",
+    "coverage_factor": 2,
+    "expanded": "U=k_cov*u_c; only indicative with 5 worlds, bootstrap interval primary",
+    "runtime": "u_t=sqrt(u_repeat^2+u_clock^2) in seconds",
+    "storage": "actual byte count is exact for fixed serialization",
+    "sequential_stop": "perform all five frozen fresh worlds, do not early-stop for favorable result or tune on audit data"
+  }
+}
