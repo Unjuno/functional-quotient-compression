@@ -1,0 +1,78 @@
+{
+  "schema_version": 2,
+  "experiment_id": "MA-1167",
+  "title": "mtLoRA spectral-aware Mirror dimension-router bank",
+  "status": "UNTESTED",
+  "plan_only": true,
+  "worker_claim": false,
+  "branch": "research/mirror-isolated-protocols-rebased-20261008",
+  "prior_art_refs": [
+    "PA428",
+    "PA427",
+    "PA373"
+  ],
+  "priority": "P0",
+  "hypothesis": "On >=12 task source families, Mirror compresses native per-task routing state by at least 10% overall inference bytes while preserving mean task accuracy within 0.5 percentage point and worst-task within 2.0 points of full native mtLoRA, with <=1.10x P95 latency and advantage over a byte-matched linear routing SVD.",
+  "physical_object": "native mtLoRA block adapters with spectral-aware source basis and task×rank fine-grained routing tensors",
+  "mirror_code": "small task×block m encoding only native routing factors in low-SV task-private components",
+  "native_control": "native mtLoRA: source-identical block placement + spectral-aware regularization + dimension-wise router",
+  "controls": [
+    "full native mtLoRA",
+    "native routing SVD at matched total serialized bytes",
+    "IA3/scalar gate at equal bytes",
+    "mtLoRA without spectral regularizer (diagnostic)",
+    "individual native LoRA upper quality reference"
+  ],
+  "development": {
+    "seeds": [
+      11,
+      12,
+      13
+    ],
+    "allowed_selection": "source/dev only"
+  },
+  "fresh": {
+    "seeds": [
+      101,
+      102,
+      103,
+      104,
+      105
+    ],
+    "whole_task_holdout": true,
+    "no_target_oracle": true,
+    "locked_before_access": true,
+    "no_favorable_early_stop": true
+  },
+  "screen": {
+    "fixture": "Frozen 64×64 pretrained block, 15 source tasks plus 5 whole-task heldouts differing high-vs-low singular directions; source spectral decomposition alone selects high-SV shared directions. Native ICLR mtLoRA code/benchmark second stage, not assumed on CPU.",
+    "steps": [
+      "Freeze base/task identities and source singular decomposition.",
+      "Train native mtLoRA 15 tasks at identical block placements and original spectral penalty.",
+      "Compress per-dimension routing using simple SVD/linear low-rank, then m={2,4,8} structured signed/orthogonal coefficient chart.",
+      "Keep high-SV shared components, optimizer budget, and task identity router identical across baselines.",
+      "Audit held-out task combinations with all five fresh seeds; report per-task old/new accuracy, worst-task, physical basis and router bytes, learning speed and runtime.",
+      "Fail if linear native factorization matches m or high-SV preservation is violated."
+    ],
+    "hardware": "Stage1 torch CPU float32 small d=64 task pool; Stage2 official mtLoRA GPU / 15-25 benchmark if available. Report batch, GPU, dtype, frequency and exact training updates.",
+    "metrics": "balanced mean and worst task accuracy, heldout task cross entropy, routing occupancy, old-task forgetting, real total adapter+router bytes, MACs, CPU/GPU P95"
+  },
+  "gates": {
+    "PASS": "4/5 fresh worlds within native average <=0.5 pp and worst-task <=2.0 pp, >=10% total incremental adapter+router bytes saved, P95 <=1.10 native, and an incremental benefit over same-byte native routing factorization.",
+    "FAIL": "Native simple SVD achieves same Pareto frontier, any task repeatedly collapses, source/native spectral penalty missing or timing/bytes exclude learned router.",
+    "UNCERTAIN": "Missing native control, audit correctness, or physical byte/time measurement"
+  },
+  "storage": "serialize paid inference bases/router/task codes and metadata",
+  "compute": "MAC/FLOP proxy, examples/updates, warmup and real P50/P95 calibrated seconds",
+  "uncertainty": {
+    "n_min": 5,
+    "k_cov": 2,
+    "variance_components": [
+      "seed",
+      "task_bootstrap",
+      "numeric"
+    ],
+    "include_covariances_if_correlated": true
+  },
+  "verified": false
+}

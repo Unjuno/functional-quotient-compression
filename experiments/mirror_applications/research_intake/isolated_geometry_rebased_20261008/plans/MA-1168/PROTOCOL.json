@@ -1,0 +1,78 @@
+{
+  "schema_version": 2,
+  "experiment_id": "MA-1168",
+  "title": "FACET single-adapter dynamic Mirror feature-code boundary",
+  "status": "UNTESTED",
+  "plan_only": true,
+  "worker_claim": false,
+  "branch": "research/mirror-isolated-protocols-rebased-20261008",
+  "prior_art_refs": [
+    "PA429",
+    "PA431",
+    "PA63"
+  ],
+  "priority": "P1",
+  "hypothesis": "On a frozen 20-task class-incremental sequence with no oracle task ID at inference, replacing native FACET task transformations with structured m preserves final mean accuracy and backward transfer within 1.0 percentage point while reducing total inference task-state bytes >=15% and keeping P95 <=1.10 native, beyond same-byte FiLM.",
+  "physical_object": "one shared FACET adapter, task-conditioned feature transform and replay-free consistency regularizer",
+  "mirror_code": "compact task/history m substituting only the native feature transform coefficients",
+  "native_control": "FACET original single-adapter task-conditioned feature consistency with no replay",
+  "controls": [
+    "native FACET with full original task conditioning and consistency loss",
+    "FACET conditioned diagonal/FiLM at matched bytes",
+    "one shared adapter plus simple task linear embedding",
+    "independent task-specific adapters as upper bound",
+    "no-task-conditioning ablation"
+  ],
+  "development": {
+    "seeds": [
+      11,
+      12,
+      13
+    ],
+    "allowed_selection": "source/dev only"
+  },
+  "fresh": {
+    "seeds": [
+      101,
+      102,
+      103,
+      104,
+      105
+    ],
+    "whole_task_holdout": true,
+    "no_target_oracle": true,
+    "locked_before_access": true,
+    "no_favorable_early_stop": true
+  },
+  "screen": {
+    "fixture": "CPU initially: class-balanced 8×8 handwritten-digit feature vectors or synthetic class-incremental 20 tasks, 32-feature MLP base frozen, train stream disjoint task identities; natural ViT+FACET second stage requires verified official code, no independent paper-gain claim from toy.",
+    "steps": [
+      "Construct disjoint class/task ID stream and five held-out task orders; do not reveal true task ID during inference.",
+      "Reproduce one shared adapter, native FACET task conditioner and replay-free consistency loss; keep absence of replay buffer explicit.",
+      "Replace only task transform with diagonal, low-rank ordinary embedding and m signed/Givens chart with k=2/4/8.",
+      "Use same task-identification policy and support examples for all methods; preserve feature consistency coefficients.",
+      "Log all prior-class accuracies after each task, forward/backward transfer, task-code bytes and generator FLOPs.",
+      "Run all five fresh sequences and classify M0 when native conditioner or FiLM matches."
+    ],
+    "hardware": "Stage1 torch CPU float32 batch 32; Stage2 1 CUDA GPU if reproducing FACET ViT; report clock, seed, support/test split and genuine native implementation status.",
+    "metrics": "CIL final mean accuracy, backward transfer and old-task retention, feature consistency loss, task-state actual bytes, hidden task ID leakage, latency"
+  },
+  "gates": {
+    "PASS": "4/5 fresh task orders meet FACET mean and backward transfer within 1.0 pp, >=15% total learned task-state bytes saved with P95 <=1.10, and cheap same-byte FiLM control does not dominate.",
+    "FAIL": "Original FACET/FiLM equal or better at bytes+quality+runtime, task ID leaked or replay enabled, or toy class task not appropriate for trained-model claim.",
+    "UNCERTAIN": "Missing native control, audit correctness, or physical byte/time measurement"
+  },
+  "storage": "serialize paid inference bases/router/task codes and metadata",
+  "compute": "MAC/FLOP proxy, examples/updates, warmup and real P50/P95 calibrated seconds",
+  "uncertainty": {
+    "n_min": 5,
+    "k_cov": 2,
+    "variance_components": [
+      "seed",
+      "task_bootstrap",
+      "numeric"
+    ],
+    "include_covariances_if_correlated": true
+  },
+  "verified": false
+}
