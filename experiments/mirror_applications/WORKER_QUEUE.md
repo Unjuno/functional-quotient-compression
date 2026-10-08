@@ -1,6 +1,6 @@
 # Worker queue
 
-**Current operational pointer (2026-10-08): MA-442.** MA-436/438 show scoped synthetic quality/storage Pareto points; MA-437/439/440/441 failed their registered gates. Continue with the next registered queue item.
+**Current operational pointer (2026-10-08): MA-443.** MA-436/438 show scoped synthetic quality/storage Pareto points; MA-437/439/440/441/442 failed their registered gates. Continue with the next registered queue item.
 
 The queue is derived from `IDEA_REGISTRY.csv`. The registry is authoritative.
 

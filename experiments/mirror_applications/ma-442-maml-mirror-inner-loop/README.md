@@ -27,3 +27,19 @@ The task family is constructed from the same Givens View used by Mirror; even th
 ## U — unresolved
 
 Natural task distributions, second-order MAML, neural-network task transfer, and deployment serialization are untested.
+
+## Results and decision
+
+**D — FAIL.** Fresh query NRMSE means over 3 worlds × 3 seeds × 20 tasks: shared/no-adaptation 0.5888 (2,161B per task payload); Mirror-only adaptation 0.5948 (2,430B); full-vector adaptation 0.7937 (2,348B); rank-two LoRA 0.6923 (2,476B). Mirror is slightly worse than the unchanged shared model and has a larger payload than both shared and full-vector controls, so its <=60% full-MAML byte gate fails. It narrowly beats LoRA quality and bytes, but that does not produce a useful frontier against shared-only.
+
+**FACT:** all fresh task query metrics were replayed from actual serialized per-task payloads. Mirror learned only a 2D coordinate in the inner loop. The first-order outer loop and Givens-aligned teacher were used as frozen.
+
+**INTERPRETATION:** this aligned linear screen provides no evidence that Mirror-only inner-loop adaptation improves few-shot quality or storage over an unchanged shared initialization. The very weak full-vector MAML result also means this is not evidence against well-tuned MAML generally.
+
+**H:** tested whether a meta-initialized shared function plus a small View code matches full MAML/LoRA at lower task-state bytes.
+
+**T:** 8D linear regression, 8 support and 128 query examples, 5 inner updates; first-order meta-training, 300 outer updates × 16 tasks; development selected outer LR 0.03 for shared/Mirror/full and 0.01 LoRA; fresh 3 worlds × 3 seeds × 20 tasks.
+
+**C:** the evaluation tasks are drawn from a deliberately aligned Givens orbit and use a small linear model; the poor outer initialization may dominate all adaptation comparisons.
+
+**U:** neural-network task transfer, natural task distributions, second-order MAML, additional basis amortization regimes, and deployment latency remain untested.
