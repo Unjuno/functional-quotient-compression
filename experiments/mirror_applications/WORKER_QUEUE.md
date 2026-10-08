@@ -82,7 +82,8 @@ High-information P0:
 7. MA-319 — Tucker matrix-bank Mirror layer coefficients
 8. MA-320 — Tucker logical experts
 9. ~~MA-322 — TT-core Mirror adapter bank~~ (FAIL: aligned byte gain 0.51%; mixed is 0.15% larger; fit proxy ~1,536x)
-10. MA-325 — tensorized embedding domain views
+10. ~~MA-303 — factorized layer-mask Mirror codes~~ (FAIL: held-out synthetic quality passed, but direct coefficient control matched within 0.080% bytes)
+11. MA-325 — tensorized embedding domain views
 11. MA-327 — factorized layer x expert Tucker address
 12. MA-330 — tensorized KV reconstruction
 13. MA-331 — Re-Basin-aligned Mirror task deltas
@@ -402,7 +403,7 @@ Read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_FOURTEENTH_SWEEP.
 
 L0/L1 outcomes alone never justify MA PROMISING as a deployable compression claim. Pre-trained base SVD and shared bases may cost storage/calibration, and heldout test-task weight deltas cannot be used to fit a deployable code at inference.
 
-MA-255 through MA-319 have now been reconciled or completed on dedicated branches. The current next candidate is **MA-322** after MA-320 completed; the supplemental intake does not reorder the registered queue.
+MA-255 through MA-319 have now been reconciled or completed on dedicated branches. MA-322 and MA-303 are complete. The next registered executable P0 is **MA-304**; supplemental intake does not reorder the queue.
 
 ## Supplemental function-space falsification (no newly allocated MA IDs)
 
@@ -412,7 +413,7 @@ Pilot: BOLT-like shared orthogonal basis plus 6 diagonal m coefficients averaged
 
 When selecting MA-1096/1099/1102/1105/1114/1115, include BOLT (PA372), function-space/curvature metric (CG-LoRA PA373, Fora PA374), SVD+CUR localized task residual (PA376), task-vector bases PA375, information filtering PA377, and a gauge-invariant functional/OOD check (PA378..381) where applicable. Do not inflate the MA backlog with duplicated new rows for these existing questions. A task-code success must survive *actual held-out task outcomes and serializer/runtime*, not just weight reconstruction.
 
-MA-320 is complete. **MA-322 is next** after reconciliation of MA-255 through MA-319. Do not interrupt active/frozen jobs to consume supplemental intake.
+MA-320 is complete. MA-322 and MA-303 are complete; **MA-304 is next** by registry order. Do not interrupt active/frozen jobs to consume supplemental intake.
 
 ## Sixteenth research intake — KG relation operators, cameras, robotics and acoustic rooms
 
@@ -470,3 +471,6 @@ MA-257 failed its Mirror-specific gate at development: the native PA16 factorize
 ## Current worker checkpoint — 2026-10-08
 
 MA-315, MA-319, MA-320 and MA-322 have recorded outcomes on dedicated research branches. MA-322 failed the strict total-byte gate despite aligned quality passing; see its report. Registry-order selection now resumes at MA-303.
+
+
+MA-303 is complete FAIL for Mirror-specific storage margin: 34,892B Mirror vs 34,920B direct factorized (0.080% delta), although held-out synthetic quality passed and payload was 51% below Piggyback masks. See its A1 amendment and report. The next candidate is MA-304.
