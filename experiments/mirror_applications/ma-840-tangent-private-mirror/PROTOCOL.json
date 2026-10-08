@@ -1,0 +1,62 @@
+{
+  "experiment_id": "MA-840",
+  "title": "Tangent Mirror basis with nonlinear private residual",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE",
+  "base_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
+  "draw_id": "Draw35",
+  "hypothesis": "A shared rank-2 tangent basis with task Mirror coordinates will fit small, approximately linearizable adaptations using fewer bytes than private full updates. For tasks with a large nonlinear residual, adding a private rank-1 nonlinear weight residual should recover query quality with less state than a full per-task update. Stratify fresh tasks by their known teacher residual amplitude before averaging.",
+  "physical_object": "shared base tanh network and rank-2 tangent basis over output-weight perturbations",
+  "mirror_coordinate": "task coefficients in shared first-order Jacobian basis",
+  "logical_multiplicity": "multiple task-specific local adaptations around one shared base",
+  "prior_art_refs": [
+    "PA226",
+    "PA18"
+  ],
+  "controls": [
+    "first-order tangent model with task code only",
+    "native full per-task weight update",
+    "tangent code plus task-private rank-1 nonlinear residual (LoRA-shaped control)",
+    "linearized tuning with an equivalent rank-1 residual"
+  ],
+  "task": "Synthetic vector regression with shared tanh base, low-rank task tangent directions, and a preregistered easy/hard residual stratum; report query MSE by stratum and actual serialized bytes.",
+  "development": {
+    "worlds_or_seeds": [
+      84001
+    ],
+    "selection_metric": "query MSE by residual stratum, byte frontier and private-state activation rate; no fresh tuning"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      84011,
+      84012,
+      84013
+    ],
+    "locked_before_access": true,
+    "split": "4 development task IDs for fixed tangent basis setup; each fresh world has 4 low-residual and 4 high-residual task IDs, 32 support and 256 query examples per task"
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "shared base weights",
+      "tangent basis",
+      "task Mirror codes",
+      "private residual factors",
+      "task metadata"
+    ]
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true
+  },
+  "success_gate": "On >=2/3 fresh seeds, low-residual tangent Mirror MSE <= 1e-2 and uses <=60% full-update payload. On high-residual tasks, private rank-1 residual reduces query MSE by >=50% vs tangent-only while hybrid payload <=70% full-update payload.",
+  "failure_gate": "FAIL if either stratum misses its quality/storage gate on >=2/3 seeds, or private residual does not improve high-residual quality; PROMISING only if low-residual gate passes and high-residual private residual is useful but misses a byte gate narrowly.",
+  "boundaries": [
+    "synthetic tanh regression only",
+    "task teacher shares a known tangent subspace",
+    "no capacity claim from fixed updates",
+    "private residual threshold does not generalize without non-synthetic task families"
+  ]
+}
