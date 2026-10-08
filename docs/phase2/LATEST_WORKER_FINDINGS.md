@@ -3,6 +3,14 @@
 Date: 2026-10-07 JST
 Purpose: concise operational context for every new MA worker. Dedicated experiment branches are the source of truth for measurements.
 
+## Reconciled program and new research intake — 2026-10-08
+
+This file's detailed five experimental reports are still valid, but not the complete MA count. The canonical worker-ready branch now indexes **47 completed MA experiments**: 29 PROMISING, 18 FAIL. The eleventh literature sweep added **60 entirely UNTESTED** candidates, bringing the registry to **935**, with **888 UNTESTED** total.
+
+Read `experiments/mirror_applications/STATUS_BOARD.md` and `docs/phase2/MIRROR_MA_EVIDENCE_INTEGRATION_2026-10-08.md` for all 47 verified historical experiment reports and their scoped claims. New prior art PA236..265 and MA876..935 are detailed in `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08.md`.
+
+**The next candidate remains MA-255.** MA-876..935 are research-intake candidates and must not preempt previously registered P0 crossovers. Natural variation and benchmark-level runtime remain unproven; aligned synthetic PROMISING must not be described as real-world Mirror adoption.
+
 ## MA-241 — layer-specific Mirror views over tied experts
 
 Branch: `research/ma-241-expert-tying-mirror-20261007`
