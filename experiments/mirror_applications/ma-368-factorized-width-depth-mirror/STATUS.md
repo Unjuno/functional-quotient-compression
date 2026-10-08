@@ -3,11 +3,11 @@
 - Status: FAIL; frozen development gate did not pass.
 - Branch: `research/ma-368-factorized-width-depth-mirror-20261008`
 - Base commit: `research/ma-367-universally-slimmable-width-mirror-20261008`
-- Last verified commit: code/result commit to be recorded after commit.
+- Last verified commit: `4db10d4`
 - Development complete: yes (seeds 36801, 36802)
 - Fresh/audit opened: no
-- Results committed: no
-- Verification committed: no
+- Results committed: yes
+- Verification committed: yes
 - Registry row updated: yes (FAIL)
 
 ## Next action
