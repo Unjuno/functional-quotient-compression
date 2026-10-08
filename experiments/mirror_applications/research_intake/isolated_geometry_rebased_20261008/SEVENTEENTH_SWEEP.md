@@ -51,3 +51,7 @@ Every folder includes `README.md` (H/T/D/C/U, shapes/variables/units, native con
 ## Isolation instructions
 
 The **canonical worker branch** `research/mirror-application-worker-ready-20261007`, current next candidate `MA-255`, WORKER_START_HERE, CONTEXT_ROUTER, FIRST_QUEUE, WORKER_QUEUE and main are not modified. This document lives **only** on `research/mirror-isolated-protocols-rebased-20261008`. Do not auto-claim new MA IDs, do not preempt current worker queue, and re-check canonical max MA and PA IDs before promoting any plan.
+
+## Frozen MA-1166 native-control Stage-0 evidence (not MA completion)
+
+A [preregistered synthetic KQ-SVD control](pilots/kqsvd_controls_stage0/PROTOCOL.json) ran CPU NumPy 2.3.5 float64 with 3 development seeds and all 5 locked fresh seeds. Four algebra/byte tests passed. The [results and full source](pilots/kqsvd_controls_stage0/REPORT.md) show the rank-4 **audit oracle** score error lower than key-only SVD (fresh means 0.416 versus 0.902); a source/target-support-trained ordinary 2-coefficient linear bank scored 0.534 and occupied 12,580 NPZ bytes versus a 15,886-byte dense projector bank. This supports strong native query-aware baselines, **not Mirror-specific improvement**. The oracle accesses audit scores only to establish a mathematical bound, never to tune m. The CPU study has no learned LM NLL, GPU speed, or native paper-performance claims. The MA-1166 registry row remains UNTESTED.
