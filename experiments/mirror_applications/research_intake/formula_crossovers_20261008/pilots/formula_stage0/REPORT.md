@@ -33,3 +33,7 @@ python test_formula_audit.py
 ### Variable/units
 
 See prior defined symbols in [the formula ledger](../../FORMULA_LEDGER.md). Here `epsilon` is dimensionless max absolute numerical discrepancy (real scalar >=0), `S` is actual serialized bits/bytes (nonnegative integer), `L` denotes task loss in nat/token (dimensionless real), `t` is runtime in SI seconds (real >=0). Never infer equal-time benefits or add unlike units.
+
+## Post-publication replay qualification
+
+A second independent **process launch in the same container environment** with `OPENBLAS_NUM_THREADS=1` reproduced both CSV SHA-256 digests byte-for-byte (3 dev / 5 fresh). An intentionally stripped Python environment (`env={PATH,OPENBLAS_NUM_THREADS}`) preserved every algebraic PASS and all five worlds but altered floating-point low bits of several outputs (approximately machine epsilon), so **bitwise reproducibility is conditional on the recorded NumPy/BLAS/process environment**, not guaranteed across arbitrary runtimes. The scientific decision did not change. The exact two original CSVs and their source SHA are immutable above.
