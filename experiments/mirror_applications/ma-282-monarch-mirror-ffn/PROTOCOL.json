@@ -1,0 +1,141 @@
+{
+  "experiment_id": "MA-282",
+  "title": "Monarch Mirror FFN transform",
+  "status": "PROMISING",
+  "evidence_lane": "MECHANISM/STORAGE/RUNTIME",
+  "base_commit": "28194ea",
+  "random_selection": {
+    "date_utc": "2026-10-08",
+    "method": "Python secrets.randbelow(6)",
+    "draw_index_zero_based": 2,
+    "candidate_pool": [
+      "MA-274",
+      "MA-278",
+      "MA-282",
+      "MA-286",
+      "MA-296",
+      "MA-299"
+    ],
+    "selected": "MA-282",
+    "live_conflict_check": "git fetch origin --prune; no MA-282 branch found; MA-274 and MA-278 branches belong to other workers"
+  },
+  "hypothesis": "Four logical nonlinear FFNs related by a Monarch structured transform can share one physical FFN plus one scalar coordinate per task; unrelated FFNs require private parameters.",
+  "physical_object": "One shared ReLU FFN with dimensions 8x12x8",
+  "mirror_coordinate": "One float32 m per task controlling two block-diagonal Givens factors around a fixed shuffle permutation",
+  "logical_multiplicity": "Four task-specific FFN functions",
+  "prior_art_refs": [
+    "PA24"
+  ],
+  "controls": [
+    "hard-tied shared FFN",
+    "one-scalar butterfly view",
+    "per-task IA3 hidden scaling fit on training examples",
+    "per-task rank-r output LoRA fit on training examples",
+    "per-task independent Monarch factor codes",
+    "independent full FFN weights"
+  ],
+  "task_family": "Aligned teacher f_m(x)=ReLU(x T(m)^T W1) W2 T(m), T(m)=A1(m) P A2(m). A1 and A2 are block-diagonal 2x2 Givens rotations on four pairs with fixed angle multipliers and a fixed perfect-shuffle permutation P. Independent tasks use unrelated W1/W2 and unrelated context cues.",
+  "development": {
+    "worlds_or_seeds": [
+      28201,
+      28202
+    ],
+    "lora_rank_candidates": [
+      1,
+      2,
+      4
+    ],
+    "selection_metric": "mean held-out task output MSE over methods and aligned/independent conditions; bytes and coordinate throughput are preregistered tie-breakers",
+    "train_examples_per_task": 128,
+    "held_out_examples_per_task": 512,
+    "lora_rank_selection": "Average held-out MSE across both development worlds and both aligned/independent conditions; rank 4 selected (mean aligned 1.082671, independent 0.821937; ranks 1/2 were worse in both)."
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      28241,
+      28242,
+      28243
+    ],
+    "locked_before_access": true,
+    "train_examples_per_task": 128,
+    "held_out_examples_per_task": 512,
+    "supersedes_invalidated_seeds": [
+      28211,
+      28212,
+      28213,
+      28221,
+      28222,
+      28223,
+      28231,
+      28232,
+      28233
+    ],
+    "run_split_name": "upper_fixed_fresh"
+  },
+  "storage": {
+    "authority": "actual deterministic serialized inference payload bytes",
+    "codec": "binary tensor records charge field names, context IDs/codes, dtype, shape, all learned tensors and headers",
+    "paid_objects": [
+      "shared W1/W2",
+      "Monarch m codes",
+      "independent Monarch factors",
+      "butterfly codes",
+      "IA3 gates",
+      "LoRA factors",
+      "independent FFNs",
+      "metadata"
+    ]
+  },
+  "compute": {
+    "report_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_MAC_proxy": true,
+    "report_wall_time": true,
+    "report_coordinate_path_throughput": true,
+    "report_operator_prepare_s": true,
+    "report_operator_workspace_bytes": true,
+    "optimizer_updates": 0
+  },
+  "success_gate": "On every fresh aligned world, Mirror task MSE <=1e-5, actual payload <=0.5x independent full FFNs, and coordinate-path throughput >=0.5x the best matched simple control. Mirror-specific value additionally requires a better quality/byte/compute frontier than Monarch factors, IA3, LoRA and butterfly views.",
+  "failure_gate": "Mirror misses an aligned quality/storage/runtime gate or is Pareto-dominated by a simpler structured/PEFT control.",
+  "boundaries": [
+    "Synthetic ReLU FFN with four known tasks",
+    "Fixed operator screen, not trained capacity",
+    "Aligned teacher is generated from the Monarch view family",
+    "Independent condition tests private weights",
+    "No Transformer or language-model claim"
+  ],
+  "amendments": [
+    {
+      "date_utc": "2026-10-08",
+      "reason": "Post-fresh code audit found the independent Monarch payload omitted the shared FFN it executes, and throughput replay used the shared-FFN path for several methods rather than each method\u2019s actual inference path. The first fresh output is retained as invalid diagnostic evidence and excluded from all claims.",
+      "changes": [
+        "Charge shared W1/W2 to independent Monarch view control.",
+        "Measure inference by replaying each serialized method\u2019s actual frozen forward path; report per-example MAC proxy and prepared operator workspace.",
+        "Store low-rank LoRA factors as factors and evaluate genuine rank-r forward.",
+        "Fit IA3 gates by least squares on training-only examples.",
+        "Use new fresh seeds 28221\u201328223; no fitting or selection uses the invalidated fresh outcomes."
+      ],
+      "locked_before_new_fresh": true
+    },
+    {
+      "date_utc": "2026-10-08",
+      "reason": "A second audit found independent Monarch angles were charged but bypassed by the unrelated-condition inference branch. The first corrected fresh outputs are retained as invalid diagnostics and excluded.",
+      "changes": [
+        "Always execute the charged per-task Monarch angle factors in the independent-Monarch control, including unrelated tasks.",
+        "Reserve new fresh seeds 28231\u201328233."
+      ],
+      "locked_before_new_fresh": true
+    },
+    {
+      "date_utc": "2026-10-08",
+      "reason": "Audit found the aligned independent-full upper control used the untransformed common FFN weights and therefore did not exactly reconstruct its teacher. Outputs are retained as invalid diagnostics and excluded.",
+      "changes": [
+        "For aligned teachers store each task\u2019s equivalent independent FFN matrices W1_t=T(m_t)^T W1 and W2_t=W2 T(m_t), then execute those matrices.",
+        "Add an upper-control reconstruction test.",
+        "Reserve new fresh seeds 28241\u201328243."
+      ],
+      "locked_before_new_fresh": true
+    }
+  ]
+}
