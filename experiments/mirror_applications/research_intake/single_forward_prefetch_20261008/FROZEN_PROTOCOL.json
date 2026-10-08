@@ -1,0 +1,197 @@
+{
+  "protocol_version": 1,
+  "pilot_id": "SFM001",
+  "title": "One shared heavy forward and multi-Mirror output transport with grouped offload overlap",
+  "date": "2026-10-08",
+  "status": "FROZEN_BEFORE_DATA",
+  "isolation": {
+    "research_branch": "research/mirror-single-forward-prefetch-20261008",
+    "base_commit": "18d73e8a78e59f09baad0cefda6539acaa634a38",
+    "canonical_worker_branch": "research/mirror-application-worker-ready-20261007",
+    "main_changed": false,
+    "worker_claim": false,
+    "queue_change": false,
+    "registrations_provisional": [
+      "MA-1175",
+      "MA-1176"
+    ]
+  },
+  "literature": [
+    "PA16 Parameter Superposition",
+    "PA42 MIMO",
+    "PA417 Grouped Value Attention",
+    "PA434 Pre-gated MoE (ISCA 2024)",
+    "PA435 SpecPrefetch (2026)",
+    "PA436 SPICE (2026)"
+  ],
+  "scientific_questions": [
+    "Under which exact equivariance or factorization conditions are four/five logical expert outputs obtainable from one heavy shared execution and cheap Mirror transforms?",
+    "When global/hidden Mirror acts before a nonlinear activation, does the base output preserve sufficient information for cheap reconstruction? Test explicit collision and fresh heldout distortion.",
+    "How much common FFN computation can be saved by caching preactivation versus only output versus recomputing all views?",
+    "Given transfer T_io, compute window and predictor accuracy, does grouped multi-Mirror execution hide transfer versus equally proactive ordinary grouped/non-grouped offload controls?"
+  ],
+  "hypotheses": {
+    "H1_exact": "For pure output-transport views and value-only attention, single-forward decoded outputs equal direct per-view evaluation within 1e-10 float64/3e-5 float32; preactivation-reuse hidden Mirror also equals direct evaluation while base output-only generally does not.",
+    "H2_approx": "Output-only ridge/MLP transport can approximate hidden nonlinear views only where heldout functional difference is contained in the base output. No blanket claim of exact multi-View amortization.",
+    "H3_perf": "Under CPU eager implementation and K=4/5, measured cost of sharing preactivation is lower than K independent full FFN evaluations on >=4/5 fresh worlds for B=128; latency of output-only exact views is separately benchmarked, and same-byte linear decoder baseline has priority.",
+    "H4_overlap": "In a predeclared two-buffer deterministic event simulator, forwarding a group for longer can hide more transfer, but net tokens/s improves only if the reuse computation saved exceeds transfer/prefetch/false-prediction overhead. Compare oracle lookahead and realistic imperfect prefetch with a native pre-gated competitor."
+  },
+  "splits": {
+    "development": [
+      11,
+      12,
+      13
+    ],
+    "fresh": [
+      101,
+      102,
+      103,
+      104,
+      105
+    ],
+    "full_task_holdout": true,
+    "all_fresh_once": true,
+    "hyperparameter_selection": "dev only",
+    "fresh_never_tuned": true
+  },
+  "parameters": {
+    "mechanism": {
+      "d_in": 32,
+      "d_hidden": 128,
+      "d_out": 16,
+      "train_examples": 1024,
+      "development_examples": 256,
+      "audit_examples": 512,
+      "views": [
+        1,
+        2,
+        4,
+        5,
+        8
+      ],
+      "mirror_angles": "independent pairwise angles uniformly within [-0.8,0.8] rad",
+      "network": "W_down GELU(W_up x) with hidden pairwise rotations inside nonlinearity",
+      "learned_readouts": [
+        "ridge affine from y0 to each hidden Mirror output, λ in 1e-3; same-byte ordinary linear head",
+        "small MLP optional only after ridge source/dev gate, 100-150 updates fixed before fresh"
+      ],
+      "float64_algebra": true
+    },
+    "runtime": {
+      "device": "CPU",
+      "backend": "torch 2.10 CPU eager",
+      "dtype": "float32",
+      "threads": 1,
+      "dimensions": [
+        {
+          "batch": 16,
+          "d_in": 64,
+          "d_hidden": 256,
+          "d_out": 64
+        },
+        {
+          "batch": 128,
+          "d_in": 64,
+          "d_hidden": 256,
+          "d_out": 64
+        }
+      ],
+      "views": [
+        1,
+        2,
+        4,
+        5,
+        8
+      ],
+      "warmup": 20,
+      "iterations": 100,
+      "repeats_per_seed": 1,
+      "clock": "time.perf_counter_ns",
+      "no_concurrent_workers_claimed": true
+    },
+    "prefetch_simulator": {
+      "physical_groups": 12,
+      "bandwidth_gbps_decimal": [
+        4,
+        12,
+        24
+      ],
+      "group_bytes_mib": [
+        16,
+        64,
+        256
+      ],
+      "base_transfer_latency_ms": 0.25,
+      "predictor_hit_probability": [
+        0.5,
+        0.9,
+        1
+      ],
+      "view_counts": [
+        1,
+        2,
+        4,
+        5,
+        8
+      ],
+      "cuda_streams": 0,
+      "model": "deterministic simulated two-buffer nonblocking DMA model with serial transfer stream and exact demand miss penalty, not measured physical PCIe",
+      "native_controls": [
+        "on-demand group loading",
+        "oracle pre-gated native independent experts",
+        "ordinary linear-factor group with matched bytes and compute",
+        "Mirror grouped prefetch with same predictor/hardware"
+      ]
+    },
+    "attention": {
+      "cache_tokens": 64,
+      "head_dim": 16,
+      "views": [
+        1,
+        4,
+        5
+      ],
+      "value_only": "same keys and queries, V_m=V B_m; attention distribution invariant; exact o_m=o_0 B_m",
+      "key_transform": "K_m=K A_m with q fixed changes attention probabilities, query GEMM/softmax not generally reusable",
+      "coupled_transform": "q_m=q (A_m^T)^(-1), K_m=K A_m makes query-key scores invariant, value readout output transformation only"
+    }
+  },
+  "gates": {
+    "PASS_algebra": "All five fresh numerical worlds satisfy shape, exact output-only/value-only/compatible q,k transport and shared-preactivation equals full per-view recompute at float64 <1e-10 or float32 <=3e-5; show explicit non-reusable counterexample in every world.",
+    "FAIL_algebra": "Exact identities fail, or output-only recovery asserted when same base output maps to two distinct hidden-view outputs.",
+    "PASS_perf_screen": "Paired CPU B=128, K=4 and K=5 shared-preactivation time <=0.90 K-full baseline median on >=4/5 worlds and difference doesn't disappear against cheapest direct output-only or native linear-code baseline in claims of Mirror-specific advantage.",
+    "FAIL_perf_screen": "Any claimed shared-preactivation speedup vanishes under matched native linear factorization, training-specific decoding produces worse latency, or CPU time not consistently lower at fixed workload.",
+    "PASS_overlap_mechanism": "At some pre-registered physically feasible simulated IO budget and predictor hit>=0.9, two-buffer Mirror grouped schedule reduces calculated transfer-related stall relative to on-demand by >=50%; report matched proactive native group baseline even if no Mirror-specific speedup.",
+    "FAIL_overlap": "No cost case wins end-to-end over equal-factorized pre-gated control, or H4 relies on oracle router lookahead without labeling it oracle.",
+    "UNCERTAIN": "No actual GPU/PCIe measurement; downstream LM quality not measured; numerical statistical evidence insufficient. These remain necessary for adoption."
+  },
+  "metrics": [
+    "max_exact_fp64",
+    "max_exact_fp32",
+    "collision_lower_bound",
+    "outonly_ridge_test_NMSE",
+    "output_orbit_exact_error",
+    "cached_pre_exact_error",
+    "cpu_p50_p95_ms",
+    "active_MAC_estimate",
+    "simulated_prefetch_critical_path_ms",
+    "simulated_mem_bytes",
+    "transfer_miss_count",
+    "real_serialized_npz_bytes"
+  ],
+  "negative_controls": [
+    "nonlinear hidden pre-transform",
+    "output collision y0(x1)=y0(x2) while hidden view differs",
+    "key-only attention transformation with unchanged q",
+    "native trained output linear head",
+    "same-byte ordinary grouped code",
+    "native proactive prefetch"
+  ],
+  "scope_limits": [
+    "One shared forward is exact only when all desired outputs factor through the cached statistic; view address choice or knowledge of router outcome does not establish this.",
+    "Cache storage reuse is not compute reuse; key transform changes QK scores/softmax unless coupled query and key actions preserve logits.",
+    "Both output-only and global transformed models need their own training/fitting for useful specialist diversity; output-only factorization may reduce reachable functions.",
+    "Prefetch is existing work, including Pre-gated MoE; special claim is saved physical transfer bytes or useful longer compute window after fair amortized view computation.",
+    "No CUDA available in current container; memory transfer schedules are simulation, not measured overlap or GPU speedup."
+  ]
+}
