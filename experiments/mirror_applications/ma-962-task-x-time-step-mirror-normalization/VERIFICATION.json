@@ -15,13 +15,19 @@
     "PA283"
   ],
   "tests": {
-    "passed": 0,
+    "passed": 4,
     "failed": 0,
-    "status": "not run; implementation pending"
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-962-task-x-time-step-mirror-normalization/tests -v",
+    "status": "passed before data acquisition"
   },
   "protocol_amendment_before_data": {
     "payload_gate_changed_to_0.98x": true,
     "basis": "pre-data architecture-shape accounting; full shared synaptic weights dominate complete inference payload",
+    "data_accessed": false
+  },
+  "pre_data_amendments": {
+    "equal_byte_task_scalar_gate": true,
+    "fixed_development_images_per_world": 2048,
     "data_accessed": false
   }
 }

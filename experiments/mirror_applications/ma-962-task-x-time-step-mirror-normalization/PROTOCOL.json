@@ -8,13 +8,13 @@
   "prior_art_refs": [
     "PA283"
   ],
-  "hypothesis": "For four task-specific temporal encodings of MNIST, a shared SNN with one learned temporal-gain profile and one scalar cyclic phase code per task will retain test accuracy within 1.5 percentage points of native task\u00d7time TEBN while using at most 75% of its actual serialized inference bytes, and exceed a byte-near rank-1 task\u00d7time factor control by at least 1 percentage point.",
+  "hypothesis": "For four task-specific temporal encodings of MNIST, a shared SNN with one learned temporal-gain profile and one scalar cyclic phase code per task will retain held-out accuracy within 1.5 percentage points of native task\u00d7time TEBN while using at least 2% fewer actual serialized inference bytes (<=0.98x native task\u00d7time TEBN), and exceed a byte-near rank-1 task\u00d7time factor control by at least 1 percentage point.",
   "mirror_insertion": {
     "physical_object": "one shared input and recurrent synaptic SNN across tasks",
     "coordinate": "one continuous cyclic phase m per task, shifting the shared learned T\u00d7H temporal normalization-gain profile by periodic linear interpolation",
     "logical_function": "task-specific temporal gain trajectories on shared synapses",
     "native_before_m": "one shared LIF network with native TEBN gains for each task and time step",
-    "simple_control": "rank-1 additive task\u00d7time\u00d7hidden gain factorization, matched to Mirror payload within 5%"
+    "simple_control": "one learned scalar task gain added to the shared T\u00d7H log-gain profile (rank-1 task modulation), with exactly the same number of adaptive normalization parameters as Mirror"
   },
   "dataset": {
     "name": "MNIST",
@@ -61,7 +61,7 @@
     "shared_no_task_gain",
     "native_task_time_tebn",
     "mirror_cyclic_phase",
-    "lowrank_rank1_task_time_gain",
+    "rank1_task_scalar_gate_on_shared_tebn_profile",
     "independent_snn_per_task"
   ],
   "training": {
@@ -76,11 +76,19 @@
     "learning_rate": 0.001,
     "weight_decay": 0.0001,
     "checkpoint_rule": "best development accuracy among fixed checkpoints every 100 updates; ties choose lower dev loss",
-    "hyperparameter_tuning": "none; fixed-budget mechanism screen"
+    "hyperparameter_tuning": "none; fixed-budget mechanism screen",
+    "development_eval": {
+      "images_per_world": 2048,
+      "tasks_per_image": 4,
+      "checkpoint_interval_updates": 100,
+      "selection": "highest aggregate accuracy; tie-break by lower loss",
+      "fixed_seeded_indices": true,
+      "paired_event_draws_across_conditions": true
+    }
   },
   "gates": {
     "quality_storage": "In each development seed, Mirror accuracy must be no more than 1.5 percentage points below native task\u00d7time TEBN and actual serialized inference payload must be <=0.98x native TEBN (at least 2% end-to-end byte reduction).",
-    "mirror_specific": "in each development seed, Mirror accuracy must exceed the byte-near rank-1 task\u00d7time gain control by >=1.0 percentage point; otherwise no Mirror-specific value is established.",
+    "mirror_specific": "in each development seed, Mirror accuracy must exceed the byte-near rank-1 task-scalar gain control by >=1.0 percentage point; otherwise no Mirror-specific value is established.",
     "audit": "Open official MNIST test files only if both development gates pass in both seeds; apply identical accuracy gates and no tuning."
   },
   "fresh": {
@@ -88,7 +96,8 @@
       96203,
       96204
     ],
-    "locked_before_access": true
+    "locked_before_access": true,
+    "audit_images_per_world": 2048
   },
   "storage": {
     "authority": "actual serialized inference payload bytes",
@@ -124,6 +133,24 @@
       "timing": "before implementation and any MNIST access",
       "change": "Relaxed end-to-end payload ratio from 0.75x to 0.98x native task\u00d7time TEBN.",
       "rationale": "Shape-only parameter accounting before data shows shared synaptic weights contribute ~407 KB, native task\u00d7time gains ~16 KB, and Mirror temporal profile+phase coordinates ~4.1 KB, so full payload reduction is only about 3%; a 25% reduction gate would be unattainable even if every Mirror normalization byte were free."
+    },
+    {
+      "date": "2026-10-08",
+      "timing": "before implementation and any MNIST access",
+      "change": "Aligned the falsifiable hypothesis sentence with the amended 0.98x complete-payload gate.",
+      "rationale": "Keep the protocol summary and exact decision gate numerically consistent."
+    },
+    {
+      "date": "2026-10-08",
+      "timing": "before implementation completion and before any MNIST access",
+      "change": "Made the ordinary gain control an equal-size rank-1 task-scalar modulation of the shared temporal TEBN profile, rather than a learned task\u00d7time basis tensor.",
+      "rationale": "The initial low-rank control implementation carried an additional free T\u00d7H basis and was twice the Mirror adaptation-state size. A task scalar added to the shared profile isolates a simple equal-byte native gate and avoids an unfair parameter budget."
+    },
+    {
+      "date": "2026-10-08",
+      "timing": "before implementation completion and before any MNIST access",
+      "change": "Fixed development evaluation to a deterministic 2,048-row subset per world across all four tasks, evaluated every 100 updates; audit uses the same row count from official test data with separate locked seeds.",
+      "rationale": "Specify compute-bounded fixed evaluation draws and exact paired event-generation seeds before acquiring MNIST."
     }
   ]
 }

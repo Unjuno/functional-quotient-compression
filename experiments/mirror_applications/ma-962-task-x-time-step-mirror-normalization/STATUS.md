@@ -8,11 +8,11 @@
 - Protocol: frozen before dataset access
 - Dataset values / model metrics: not accessed
 - Audit: locked
-- Implementation: pending
+- Implementation: four shared SNN conditions, independent upper control, and gated MNIST acquisition runner complete; four preflight tests pass
 
 ## Next action
 
-Implement the frozen SNN, TEBN, cyclic-phase and rank-1 controls, run preflight checks, then commit implementation before MNIST acquisition.
+Commit the implementation and passing preflight checks, then acquire only the MNIST training IDX files and run the frozen development schedule.
 
 ## Blockers
 
