@@ -1,0 +1,183 @@
+{
+  "experiment_id": "MA-299",
+  "title": "Split-on-Share Mirror code allocation",
+  "status": "FAIL",
+  "evidence_lane": "MECHANISM/CONTINUAL/STORAGE/RUNTIME",
+  "base_commit": "28194ea",
+  "random_selection": {
+    "date_utc": "2026-10-08",
+    "method": "Python secrets.randbelow(4)",
+    "draw_index_zero_based": 3,
+    "candidate_pool": [
+      "MA-274",
+      "MA-286",
+      "MA-296",
+      "MA-299"
+    ],
+    "selected": "MA-299",
+    "live_conflict_check": "git fetch origin --prune; no MA-299 branch found; MA-274 branch exists and remains in the random pool"
+  },
+  "selection_history": [
+    {
+      "pool": [
+        "MA-274",
+        "MA-278",
+        "MA-282",
+        "MA-286",
+        "MA-296",
+        "MA-299"
+      ],
+      "method": "secrets.randbelow(6)",
+      "index": 2,
+      "selected": "MA-282",
+      "result": "PROMISING on isolated branch"
+    },
+    {
+      "pool": [
+        "MA-274",
+        "MA-278",
+        "MA-286",
+        "MA-296",
+        "MA-299"
+      ],
+      "method": "secrets.randbelow(5)",
+      "index": 1,
+      "selected": "MA-278",
+      "result": "competing completed FAIL selectively adopted; fresh sealed by its gate"
+    },
+    {
+      "pool": [
+        "MA-274",
+        "MA-286",
+        "MA-296",
+        "MA-299"
+      ],
+      "method": "secrets.randbelow(4)",
+      "index": 3,
+      "selected": "MA-299",
+      "result": "active"
+    }
+  ],
+  "hypothesis": "In a sequential task stream, trialing one scalar Mirror coordinate before allocating a unique full matrix delays private-weight growth for aligned tasks; unrelated tasks trigger a private split. The Mirror policy must improve the byte/quality/compute frontier over native split-on-share, two-coefficient shared-basis, and low-rank-residual controls.",
+  "physical_object": "A frozen shared 16x16 linear map learned from task zero",
+  "mirror_coordinate": "One float32 Givens angle per accepted task; fixed pairwise generator G is identified by charged architecture metadata and deterministically reconstructed",
+  "logical_multiplicity": "Six sequential task maps, with private matrices allocated only when a share candidate fails validation",
+  "prior_art_refs": [
+    "PA30",
+    "PA16"
+  ],
+  "related_evidence": "MA-297 tested Mirror views within a discovered sparse basis and failed its strict quality/compute gate; this candidate isolates the allocation decision before a full private matrix is created.",
+  "controls": [
+    "hard shared tie",
+    "native no-view split-on-share: private full matrix on validation failure",
+    "two-free-coefficient shared-basis split-on-share",
+    "rank-1 residual split-on-share",
+    "Mirror-code split-on-share",
+    "always-Mirror without private fallback",
+    "independent full matrices"
+  ],
+  "task": {
+    "input_dim": 16,
+    "output_dim": 16,
+    "tasks": 6,
+    "metric": "per-task normalized held-out MSE, total/incremental actual serialized inference bytes, private split count, and coordinate-path throughput",
+    "stream": "task 0 defines the shared map; tasks 1-3 are G(m) aligned; task 4 is unrelated; task 5 is a small-residual near-aligned case",
+    "generator": "Y=XW; aligned W_t=W_0 R(m_t), with R(m)=cos(m)I+sin(m)G and G a fixed block-diagonal 2x2 quarter-turn generator; unrelated W is independent; near-aligned W= W_0 R(m)+small independent residual"
+  },
+  "development": {
+    "worlds": [
+      29901,
+      29902
+    ],
+    "train_examples_per_task": 256,
+    "validation_examples_per_task": 128,
+    "threshold_candidates_normalized_mse": [
+      0.001,
+      0.01,
+      0.03
+    ],
+    "selection_metric": "Choose the smallest validation acceptance threshold whose maximum seen-task validation normalized MSE is <=0.01 and whose total payload is minimal; ties choose the smaller threshold. No test values enter the allocation decision.",
+    "mirror_angle_fit": "fixed 4097-point grid on [-pi,pi], training examples only",
+    "other_fit": "least squares for coefficient/private matrices; truncated SVD for rank-1 residual; training examples only",
+    "selected_threshold": 0.01,
+    "selection_result": {
+      "threshold_0.001": {
+        "mean_Mirror_payload_bytes": 3357,
+        "max_validation_normalized_mse": 5.160478669209047e-07,
+        "view_codes_per_world": 3,
+        "private_splits_per_world": 2
+      },
+      "threshold_0.01": {
+        "mean_Mirror_payload_bytes": 2337,
+        "max_validation_normalized_mse": 0.004148440144326258,
+        "view_codes_per_world": 4,
+        "private_splits_per_world": 1
+      },
+      "threshold_0.03": {
+        "mean_Mirror_payload_bytes": 2337,
+        "max_validation_normalized_mse": 0.004148440144326258,
+        "view_codes_per_world": 4,
+        "private_splits_per_world": 1
+      },
+      "rule": "0.01 has minimum payload among thresholds satisfying validation MSE <=0.01; 0.03 ties on bytes, smaller-threshold tie-break selects 0.01"
+    }
+  },
+  "fresh": {
+    "worlds": [
+      29921,
+      29922,
+      29923
+    ],
+    "locked_before_access": true,
+    "train_examples_per_task": 256,
+    "validation_examples_per_task": 128,
+    "test_examples_per_task": 512,
+    "superseded_compute_only_seeds": [
+      29911,
+      29912,
+      29913
+    ]
+  },
+  "storage": {
+    "authority": "actual deterministic serialized inference payload bytes",
+    "codec": "typed binary tensor records charge magic/version, field names, dtype, shape, record count, task-kind markers, coordinates, shared weights, private weights, residual factors and method metadata",
+    "paid_objects": [
+      "shared W",
+      "per-task Mirror angles",
+      "coefficient controls",
+      "private matrices",
+      "residual factors",
+      "task routing/kind IDs",
+      "method/version metadata",
+      "codec headers"
+    ]
+  },
+  "compute": {
+    "report_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_MAC_proxy": true,
+    "report_isolated_wall_time": true,
+    "report_inference_throughput": true,
+    "optimizer_updates": 0,
+    "workspace": "Report one prepared 16x16 float32 view matrix (1,024 B) for coordinate methods; count preparation in measured method-path latency.",
+    "fit_proxy_definition": "Count all five post-root task candidate fits; each Mirror task includes two dense projections plus the 4097-angle scalar objective, plus private fit when rejected. Exact formula is in source/run_screen.py."
+  },
+  "success_gate": "On every fresh world, Mirror split accepts all three aligned tasks with normalized held-out MSE <=0.01, privately splits the unrelated task when validation requires it, keeps max seen-task normalized MSE <=0.02, and total payload <=0.75x independent-full. A Mirror-specific PROMISING result additionally requires >=10% lower total bytes than the strongest coefficient/residual split control at comparable quality and no >2x inference latency.",
+  "failure_gate": "The Mirror split fails a fresh quality/split requirement, or a simple native split control matches the useful allocation/quality frontier without a >=10% Mirror byte advantage.",
+  "boundaries": [
+    "Synthetic known-task linear stream",
+    "Frozen shared map and zero optimizer updates; allocation mechanism, not continual learning",
+    "Task IDs are given; no task-agnostic routing",
+    "No reproduction of SETA discovery/routing",
+    "No language-model or capacity claim"
+  ],
+  "amendments": [
+    {
+      "date_utc": "2026-10-08",
+      "reason": "Post-fresh compute audit found the Mirror angle-fit MAC-equivalent proxy counted only one arriving task instead of all five post-root tasks.",
+      "change": "Correct the method-specific fit compute proxy and rerun fresh seeds 29921\u201329923. Earlier seeds remain valid for their MSE/bytes results but their fit-compute values are invalidated. No model, fit rule, threshold, quality metric, or acceptance gate changes.",
+      "fresh_access_after_amendment": true,
+      "locked_before_amended_fresh": true
+    }
+  ]
+}
