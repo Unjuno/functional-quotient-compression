@@ -1,0 +1,34 @@
+{
+  "experiment_id": "MA-296",
+  "development_seeds": [
+    29601,
+    29602
+  ],
+  "development_conditions": [
+    "aligned_orthogonal_orbit",
+    "independent_isotropic_deltas"
+  ],
+  "locked_before_fresh_access": true,
+  "selected_psp_context_seed": 296103,
+  "psp_seed_mean_task_mse": {
+    "296101": 9.1767741486136,
+    "296102": 9.124910536952191,
+    "296103": 8.796452569130597
+  },
+  "selected_svd_rank": 8,
+  "svd_aligned_mean_task_mse": {
+    "2": 0.20686223720691943,
+    "4": 0.011125261682673172,
+    "8": 2.762161314446991e-07
+  },
+  "fresh_seeds": [
+    29611,
+    29612,
+    29613
+  ],
+  "notes": [
+    "PSP context seed selected by mean task MSE over both conditions and development worlds.",
+    "SVD rank selected by aligned task MSE over development worlds; fresh results remain unopened.",
+    "Mirror and direct shared-orbit are exact function-path controls on the aligned teacher; code and bases are fully charged."
+  ]
+}
