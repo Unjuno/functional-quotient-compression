@@ -1,0 +1,77 @@
+{
+  "schema_version": 2,
+  "experiment_id": "MA-1178",
+  "title": "LoGo instance-level Mirror-compressed adapter bank",
+  "status": "UNTESTED",
+  "stage": "DESIGN_ONLY",
+  "plan_only": true,
+  "worker_claim": false,
+  "program_type": "broad_method_intake_no_queue_priority",
+  "canonical_worker_branch": "research/mirror-application-worker-ready-20261007",
+  "isolated_branch": "research/mirror-breadth-method-sweep-20261008",
+  "priority": "P0",
+  "hypothesis": "For mixed-domain heldout instances using an unchanged source adapter library and the ORIGINAL LoGo algorithm, a Mirror-coded adapter bank saves >=15% complete adapter-bank serialized bytes, preserves native LoGo NLL within +0.02 nat/token and P95 <=1.10x, and improves the quality/bytes Pareto frontier beyond plain same-byte SVD/compressed adapter banks.",
+  "prior_art_refs": [
+    "PA442",
+    "PA427",
+    "PA351"
+  ],
+  "closest_existing": [
+    "MA-670",
+    "MA-714",
+    "MA-1169",
+    "MA-1114"
+  ],
+  "native_method": "Training-free LoRA on the Go (LoGo) selection/merging of an existing adapter library from instance-specific model signals, without new target labels",
+  "physical_object": "one source-learned shared LoRA delta dictionary plus the original frozen base LLM and native LoGo instance router/merger",
+  "mirror_insertion": "small role/adapter Mirror code m reconstructing each adapter update before native LoGo computes its input-dependent relevance weights",
+  "synthetic_mechanism": "Frozen 64x64 2-layer small teacher with six independently trained rank-4 adapter updates for 6 domain shifts; 3 aligned tasks, 3 independent off-orbit; 256 source training examples per domain, 128 valid, 512 fresh. Generate heldout mixed-domain instances and task-combination sequences; do NOT fit codes to the full target audit LoRA deltas or target test labels. Native LoGo router observes exactly same permissible token/activation signals for every method.",
+  "method_steps": "(1) Freeze same pretrained base and train six native LoRAs independently. (2) Reproduce LoGo's training-free relevance extraction and merge on frozen native LoRAs; validate with reference outputs. (3) Learn a source-only shared delta basis and per-adapter m; optional sparse private exception when evidence of off-orbit mismatch. (4) Run two bank controls: common SVD delta dictionary+linear coefficients and independent byte-near quantized LoRAs. (5) Pass reconstructed LoRAs to the *same native LoGo routing/merge*. (6) Probe new combinations, 4 vs 8 vs 16 adapter libraries; count offline fitting separately from online signals. (7) Natural lane: author LoGo evaluation dataset/model with license, tokenizer/hash fixed before fresh.",
+  "native_controls": [
+    "Official/native LoGo on uncompressed, independently fitted LoRAs",
+    "LoGo on ordinary source-bank SVD coefficients at equal bytes",
+    "LoGo on per-adapter quantized LoRA at equal bytes",
+    "LoGo on ALoRA shared-B when valid",
+    "LoRAHub/native instance composer where equivalent",
+    "Single chosen LoRA and dense merged delta quality floor"
+  ],
+  "measurements": "per-domain and joint instance-level NLL, worst-domain retention, negative transfer, instance router agreement/entropy, serial bank bytes, per-instance merge overhead, B1/B8 P95 and library scalability",
+  "hardware": "CPU torch 2-layer test; standard LLM/LoGo released code is GPU lane; record optimizer steps for source adapter fitting, native router overhead, and actual copy-on-write state.",
+  "split": {
+    "development": {
+      "seeds": [
+        11,
+        12,
+        13
+      ],
+      "allowed_selection": "hyperparameter/rank only"
+    },
+    "fresh": {
+      "seeds": [
+        101,
+        102,
+        103,
+        104,
+        105
+      ],
+      "locked_before_access": true,
+      "no_tuning": true,
+      "entire_task_heldout": true,
+      "run_all_worlds": true
+    }
+  },
+  "gates": {
+    "PASS": "At least four of five fresh instance-domain worlds NLL <= native LoGo+0.02 nat/token; complete bank bytes <=0.85 native; P95 <=1.10; and some measurable Pareto gain over ordinary SVD/quant LoRA bank. Native LoGo itself is never attributed to Mirror.",
+    "FAIL": "Native LoGo or same-byte source delta factorization dominates, native per-instance merging requires hidden K full passes, task labels/target oracle leak into code fitting, or poorly aligned tasks suffer systematic negative transfer.",
+    "UNCERTAIN": "native implementation unavailable, data contamination, missing bytes/quality/runtime or underpowered intervals"
+  },
+  "counterhypothesis": "LoGo already obtains useful per-instance combinations from one evaluation of adapters; its selection signal and merge computation could dominate any savings from a small m. Random independently trained adapters may not share a cheap function orbit.",
+  "uncertainty": "Identical initialization vs independent LoRA gauge ambiguity; cross-task identity leakage; router per-instance cost; token-level class prevalence and interference; group CI by task/world, not token.",
+  "accounting": {
+    "storage": "real serialized decoder/bank/code/cache/index/router metadata, no free shared bases",
+    "runtime": "real hardware P50/P95, active compute and all copy/swap costs",
+    "quality": "heldout function space, per-task worst"
+  },
+  "observations": "none",
+  "result_files_present": false
+}

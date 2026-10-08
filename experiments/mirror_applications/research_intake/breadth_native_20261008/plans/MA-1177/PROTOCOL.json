@@ -1,0 +1,76 @@
+{
+  "schema_version": 2,
+  "experiment_id": "MA-1177",
+  "title": "UniSparse composite-token Mirror role-readout code",
+  "status": "UNTESTED",
+  "stage": "DESIGN_ONLY",
+  "plan_only": true,
+  "worker_claim": false,
+  "program_type": "broad_method_intake_no_queue_priority",
+  "canonical_worker_branch": "research/mirror-application-worker-ready-20261007",
+  "isolated_branch": "research/mirror-breadth-method-sweep-20261008",
+  "priority": "P0",
+  "hypothesis": "Given fixed UniSparse composite-token construction and exactly the native sparse attention selector, m yields 4 useful query-role outputs from one physical index with total readout/index/code state <=0.95x native separate-per-role state at heldout attention output error <=1.05x native and P95 <=1.10 native, and cannot be explained solely by a byte-matched ordinary linear projection code.",
+  "prior_art_refs": [
+    "PA440",
+    "PA441"
+  ],
+  "closest_existing": [
+    "MA-691",
+    "MA-696",
+    "MA-699",
+    "MA-1172"
+  ],
+  "native_method": "UniSparse native composite-token multi-granularity summarization and block selection, not replaced by a different attention approximation",
+  "physical_object": "one native multi-granularity composite-token index and KV bank produced for the document once",
+  "mirror_insertion": "short query-role m selecting task-conditioned transforms of composite-token readout coefficients and block score correction, without independently materializing per-role indices",
+  "synthetic_mechanism": "Create 512-token x32-dimensional stationary and shift/nonstationary source sequences, four composite granularities g={8,16,32,64}, 4 query-role labels. Train 6 source query-family/sequence worlds; hold out entirely new query-role covariance and sequence families with seeds 101-105. Use 8 selected blocks per query after a fixed native composite-token score ranking. Causal masks/prefix index provenance must match native.",
+  "method_steps": "(1) Build native per-granularity composite tokens as blockwise pooled K/V in fixed source-only strategy. (2) Query-side selector ranks native block summaries and retrieves top-8 blocks exactly, with no use of target labels. (3) Fit a shared role correction dictionary on source-role query-output pairs only; m dimension k={2,4,8}, try diagonal, signed/butterfly and short Givens. (4) Evaluate no-view/native UniSparse, native UniSparse per-role trained readouts, native single shared readout, same-byte linear factor bank and Mirror on the same frozen query outputs. (5) Reconstruct full attention only as an accuracy ceiling and separately benchmark a CUDA block-sparse kernel if available. Never call a dense Python selector faster solely from fewer reported FLOPs.",
+  "native_controls": [
+    "Exact native UniSparse compressed-token block selector and its per-role ordinary readout",
+    "UniSparse single shared readout (no role)",
+    "same-byte native rank-k linear/diagonal task code on the same composite tokens",
+    "full FlashAttention or PyTorch dense attention quality ceiling",
+    "equal-byte INT4 cache plus selected-block native path",
+    "MInference/XAttention/FlexPrefill when official kernels/checkpoints available"
+  ],
+  "measurements": "per-role attention output relative RMSE and heldout NLL where model available; selected-block overlap/recall; bytes for all token summaries, selector, weights, code, metadata; CPU/GPU P50/P95, active MACs and memory footprint",
+  "hardware": "CPU NumPy/torch for 512-token mechanism, one GPU with actual block-sparse kernels for any GPU runtime claim; record kernel choice and source commit.",
+  "split": {
+    "development": {
+      "seeds": [
+        11,
+        12,
+        13
+      ],
+      "allowed_selection": "hyperparameter/rank only"
+    },
+    "fresh": {
+      "seeds": [
+        101,
+        102,
+        103,
+        104,
+        105
+      ],
+      "locked_before_access": true,
+      "no_tuning": true,
+      "entire_task_heldout": true,
+      "run_all_worlds": true
+    }
+  },
+  "gates": {
+    "PASS": "At least 4/5 fresh full-role worlds satisfy <=1.05x native error (or NLL<=+0.02 nat/token), combined resident summary+selector+readout bytes <=0.95 native, P95<=1.10 native; and strict utility/bytes benefit over ordinary code (otherwise M0).",
+    "FAIL": "Ordinary linear readout bank Pareto-dominates, native composite index must be duplicated per role, selector uses heldout attention as oracle, or any role falls below allowed NLL/error in >=2 fresh worlds.",
+    "UNCERTAIN": "native implementation unavailable, data contamination, missing bytes/quality/runtime or underpowered intervals"
+  },
+  "counterhypothesis": "Native UniSparse already shares all composite tokens; code only saves a small readout payload, while different query roles may require different token selection and thus attention work remains. This is not a claim of 4x sparse-attention compute savings.",
+  "uncertainty": "Query distribution shift and selection near-ties, correlation of heldout tokens, granularity/batch kernel effects, decoder cost, stochastic retrieval; bootstrap by entire sequence-role world, not token. Confidence from five worlds is only preliminary.",
+  "accounting": {
+    "storage": "real serialized decoder/bank/code/cache/index/router metadata, no free shared bases",
+    "runtime": "real hardware P50/P95, active compute and all copy/swap costs",
+    "quality": "heldout function space, per-task worst"
+  },
+  "observations": "none",
+  "result_files_present": false
+}
