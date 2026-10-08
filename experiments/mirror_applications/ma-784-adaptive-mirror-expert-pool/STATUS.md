@@ -3,7 +3,7 @@
 - Status: SCREENING — protocol frozen before data access
 - Branch: `research/ma-784-adaptive-mirror-pool-20261008`
 - Base commit: `c935a903daca5c7d1d48aa50d05b5bd50f239cba`
-- Last verified commit: pending pre-data freeze commit
+- Last verified code/protocol commit: `0b63f8e` (housekeeping ignore commit: `1f9cee7`)
 - Development complete: no
 - Fresh/audit opened: no
 - Results committed: no
