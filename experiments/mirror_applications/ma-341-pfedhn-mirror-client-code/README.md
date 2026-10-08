@@ -14,7 +14,7 @@ MA-341 was sampled uniformly from 526 eligible P0/UNTESTED candidates after excl
 
 ## T — experiment
 
-Simulate 12 clients from the public 8×8 sklearn Digits classification data with fixed Dirichlet label skew. Clients 0–9 train the shared systems; clients 10–11 remain unseen until local support adaptation. Run three fresh partition/model seeds. Compare pFedHN-style client-code-to-full-model generation, a shared MLP with Givens Mirror client codes, byte-near shared MLP + FiLM codes, a global shared MLP, and independent local models.
+Simulate 12 clients from the public 8×8 sklearn Digits classification data with fixed Dirichlet label skew. Clients 0–9 train the shared systems; clients 10–11 remain unseen until local support adaptation. Run three fresh partition/model seeds. Compare pFedHN-style client-code-to-full-model generation, a shared MLP with Givens Mirror client codes, byte-near shared MLP + FiLM codes, a global shared MLP, and independent local models. During unseen adaptation, only the client's code is updated (the full local model for the independent control); shared weights stay frozen. The same 20 full-batch support updates are used and their optimization targets are explicit in the results.
 
 Checkpoint selection uses development examples from training clients only. On unseen clients, adapt only client codes or the local model using support examples; query examples remain audit. Measure accuracy and cross-entropy, actual serialized server/client state, communication bytes, adaptation updates, client-model generation MACs, CPU latency and wall time.
 

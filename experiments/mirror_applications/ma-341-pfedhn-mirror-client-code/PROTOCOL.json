@@ -25,10 +25,10 @@
     "features": "64 normalized pixels from 8x8 greyscale images",
     "target": "10-way digit classification",
     "clients": 12,
-    "client_distribution": "per-class Dirichlet assignment alpha=0.5; all samples assigned once per world",
+    "client_distribution": "per-class Dirichlet assignment alpha=0.5; within each class shuffle once and assign each example to a client sampled from its Dirichlet proportions; all samples assigned once per world",
     "train_clients": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
     "unseen_clients": [10, 11],
-    "within_client_split": "train clients: 60% train, 20% dev, 20% audit; unseen clients: 60% support, 40% audit query",
+    "within_client_split": "After client assignment, shuffle each client's indices using the world RNG. Train clients: floor(60%) train, floor(20%) dev, remainder audit; unseen clients: floor(60%) support, remainder audit query. Persist exact indices and counts.",
     "world_seeds": [23, 47, 71]
   },
   "model": {
@@ -45,7 +45,11 @@
     "weight_decay": 0.0001,
     "max_epochs": 80,
     "checkpoint_selection": "lowest mean development cross-entropy on the ten training clients; patience 8",
-    "local_adaptation": "20 support-set Adam steps; report fixed checkpoints at 0, 5, 20 steps",
+    "local_adaptation": "For pFedHN/Mirror/FiLM update only that unseen client's embedding/angles/code using 20 full-batch support Adam steps; shared parameters remain frozen. For global control report 0 steps only. For independent control train that client's full local model for 20 full-batch steps. Report fixed checkpoints at 0, 5, 20 steps; exact update target and number of examples are included in results.",
+    "local_adaptation_optimizer": "Adam, learning_rate=0.01, betas=(0.9,0.999), eps=1e-8; no weight decay",
+    "initial_client_code": "zeros for all methods; unseen pFedHN/Mirror/FiLM code begins at zero",
+    "independent_unseen_control": "fresh independently initialized local MLP per held-out client, initialized from that world/model seed, then trained only on support for 20 full-batch Adam steps at lr=0.01",
+    "optimization_accounting": "record train examples consumed and optimizer steps; shared methods use minibatches of 128 per client per epoch; code adaptation uses all support examples per step",
     "fresh_world_seeds": [23, 47, 71],
     "model_init_seeds": [31, 47, 59],
     "torch_threads": 1
@@ -68,7 +72,7 @@
     "authority": "actual serialized safetensors bytes",
     "paid_objects": ["shared models", "hypernetwork", "client embeddings/codes", "FiLM or Mirror bases", "independent client models", "client ID maps", "decoder metadata"]
   },
-  "success_gate": "Mirror is within 2 accuracy points of pFedHN after 20 support updates on both unseen clients in >=2/3 worlds; central model plus registered-client payload <=80% of pFedHN; per-client code download after base cached <=25% of a generated full model; and Mirror is not dominated by byte-near FiLM.",
+  "success_gate": "Mirror is within 2 accuracy points of pFedHN after 20 support updates on both unseen clients in >=2/3 worlds; central model plus registered-client payload <=80% of pFedHN; per-client code download after base cached <=25% of a generated full model; and Mirror is not dominated by byte-near FiLM. Each held-out client's query metric is reported separately; pooled metrics are supplementary.",
   "failure_gate": "Any success condition fails.",
   "boundaries": ["Client partitions are simulated from one small dataset.", "The pFedHN-style control is a direct compact-code-to-full-MLP reimplementation, not a reproduction of every paper detail.", "No privacy, secure aggregation, real-user or production federated claim."]
 }
