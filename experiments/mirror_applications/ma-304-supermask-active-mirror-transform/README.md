@@ -13,3 +13,7 @@ The base is a 32x32 linear map with exactly 256 active edges per task. Mirror in
 ## Frozen protocol
 
 See `PROTOCOL.json`. 128 aligned tasks and 16 unrelated tasks; 64 support, 32 validation and 64 test vectors per task; development seeds 30401/30402 and fresh seeds 30411/30412/30413. No optimizer updates. The actual deterministic ZIP/NPY payload includes all paid bases, indices, task codes, masks, private state and metadata.
+
+## Development observations
+
+Across both development seeds, Mirror used 21,288B versus 21,318B for direct coefficients (30B / 0.14% smaller), with 16 unrelated tasks privately stored in both. Mirror aligned max nMSE was 5.07e-5–5.26e-5; direct was about 1.5e-7. Mirror fit operation proxy was 452,984,832 vs 150,994,944 for direct (~3x). The frozen 10% fresh storage gate is therefore unlikely to pass, but fresh evaluation proceeds without tuning or changing gates.
