@@ -163,7 +163,7 @@ High-information P0:
 15. MA-483..485 — paused after MA-481/482 exact native VQ/RVQ aliases; see [family diagnostic](../../docs/phase2/VQ_MIRROR_FUNCTION_ADDRESS_FAMILY_DIAGNOSTIC_2026-10-08.md). Resume only with a materially different insertion hypothesis.
 16. MA-486/487 — completed FAIL screens; sparse coding aliases OMP and LISTA is dominated by direct top-3. See [family diagnostic](../../docs/phase2/SPARSE_FUNCTION_MIRROR_COORDINATE_DIAGNOSTIC_2026-10-08.md). MA-488 shared/private dictionary is active.
 16. MA-486/487 — completed FAIL screens; sparse coding aliases OMP and LISTA is dominated by direct top-3. See [family diagnostic](../../docs/phase2/SPARSE_FUNCTION_MIRROR_COORDINATE_DIAGNOSTIC_2026-10-08.md).
-17. MA-488 — shared/private dictionary + Mirror coefficients (active P0 screen; PA94; test private-atom need across heterogeneous heldout functions)
+17. MA-488 — shared/private dictionary + Mirror coefficients (**FAIL for Mirror-specific attribution:** at p=.125 private residuals give exact quality at 33.6% fewer bytes than full int8; at p=.25 the bank exceeds int8, and native shared/private exactly aliases; fresh sealed). MA-492 packet-plan latent is next P0.
 18. MA-492 — quantized packet-plan latent
 19. MA-494 — error-correcting Mirror expert IDs
 20. MA-498 — learned code-distance regularization

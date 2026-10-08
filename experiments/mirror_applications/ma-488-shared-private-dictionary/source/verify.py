@@ -24,6 +24,9 @@ def verify(root):
      mat=flat.reshape(N,D,D)
     pred=torch.stack([w['queries'][i]@mat[i].T for i in range(N)]);err=(pred[TRAIN:]-w['outputs'][TRAIN:]);rmse=float(torch.sqrt(torch.mean(err**2)));diff=abs(rmse-m['overall_heldout_rmse']);mx=max(mx,diff)
     if diff>1e-7:errors.append(f'{seed}/{p}/{method}: metric replay mismatch')
+    mask=torch.zeros(N,dtype=torch.bool);mask[w['private_rows']]=True;ph=mask[TRAIN:]
+    perr=float(torch.sqrt(torch.mean(err[ph]**2))) if bool(ph.any()) else 0.;pdiff=abs(perr-m['private_heldout_rmse']);mx=max(mx,pdiff)
+    if pdiff>1e-7:errors.append(f'{seed}/{p}/{method}: private RMSE replay mismatch')
    a=(d/f'h{p}_mirror_shared_private_payload.npz').read_bytes();b=(d/f'h{p}_native_shared_private_payload.npz').read_bytes()
    if a!=b:errors.append(f'{seed}/{p}: native shared/private mismatch')
    else:checks.append({'seed':seed,'heterogeneity':p,'sha256':hashlib.sha256(a).hexdigest()})
