@@ -400,6 +400,16 @@ L0/L1 outcomes alone never justify MA PROMISING as a deployable compression clai
 
 **Next candidate remains MA-255; no existing status or frozen protocol changed.**
 
+## Supplemental function-space falsification (no newly allocated MA IDs)
+
+This research pass added **PA372..381** and ran one small real-image-digit-shift pilot with a protocol frozen before numerical execution. The full report/code/48-row data/replay are in `research_intake/natural_digit_function_20261008/` and the scientific interpretation is `docs/phase2/MIRROR_FUNCTION_SPACE_FALSIFICATION_2026-10-08.md`.
+
+Pilot: BOLT-like shared orthogonal basis plus 6 diagonal m coefficients averaged 49.79% top-1; same rank-6 basis plus 2 extra fixed Givens angles/task averaged 52.19% but was slower and fell far behind dense core 69.97% and independent rank-4 LoRA 86.98%. Preregistered Pareto gate FAILED. **No formal registry status changes**.
+
+When selecting MA-1096/1099/1102/1105/1114/1115, include BOLT (PA372), function-space/curvature metric (CG-LoRA PA373, Fora PA374), SVD+CUR localized task residual (PA376), task-vector bases PA375, information filtering PA377, and a gauge-invariant functional/OOD check (PA378..381) where applicable. Do not inflate the MA backlog with duplicated new rows for these existing questions. A task-code success must survive *actual held-out task outcomes and serializer/runtime*, not just weight reconstruction.
+
+**MA-255 remains next**. Do not interrupt active/frozen jobs to consume this support intake.
+
 ## Historical P0 family sequence (completed screens; not current queue)
 
 The historical A–F lists below record previously screened experiments and must not override `STATUS_BOARD.md` (MA-255 next).
