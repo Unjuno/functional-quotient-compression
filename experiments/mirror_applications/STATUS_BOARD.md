@@ -19,14 +19,11 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 **MA-255 — Mirror context superposition for task models (P0; PA16)**
 
 Reason:
-- all previously locked MA-241/244/245/247–251/253 and subsequent old-chain P0 screens have completed;
-- the original P0 cross-over queue is exhausted among checked candidates;
-- MA-255 is the first untested P0 in the earlier high-information literature cross-over queue;
-- direct Parameter Superposition prior art gives a strong nearest control for insertion of the extra Mirror parameter `m`.
+- MA-255, MA-260, MA-261 and MA-265 completed development-only FAIL screens; MA-268 is PROMISING on a bounded synthetic family.
+- MA-271 is next in the registered direct P0 crossover order.
+- Native OFT orthogonal adaptation is the mandatory direct control.
 
-Required controls: native Parameter Superposition, naive/shared task-code basis, matched byte-near low-rank or VeRA-style modulation, independent-model upper reference where practical. Do not claim the superposition concept itself as a Mirror invention.
-
-If blocked by a documented reproducibility or harness issue, record it and resume at MA-260 (BatchEnsemble), then MA-261/265/268 in the registered literature priority sequence. Do not jump to P1/novelty-picked topics before P0.
+Required controls: shared pretrained/base weights, native OFT task transforms, byte-near simpler orthogonal/low-rank controls, and independent full task weights where practical. Count transform application compute and stored transform state.
 
 ## Active experiment
 

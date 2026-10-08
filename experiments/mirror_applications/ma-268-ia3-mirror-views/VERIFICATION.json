@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-268",
+  "commit": null,
+  "tests": {
+    "command": "PYTHONPATH=.../ma-268-ia3-mirror-views/source python -m pytest -q .../tests",
+    "passed": 2,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Fresh worlds 26802-26804 were evaluated once with frozen LR=0.01.",
+    "Actual serialized bytes counted all weights, biases, task codes and metadata.",
+    "No fresh result used for tuning."
+  ]
+}

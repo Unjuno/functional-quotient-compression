@@ -1,0 +1,86 @@
+{
+  "experiment_id": "MA-268",
+  "title": "IA3 Mirror activation views",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/RUNTIME",
+  "base_commit": "f7f76de193063950d28b7834f337840b1e86f0ce",
+  "prior_art_refs": [
+    "PA19"
+  ],
+  "hypothesis": "Task-specific Givens activation Views on a shared nonlinear feature network outperform IA3 diagonal task scaling in quality-per-byte on held-out task regression.",
+  "physical_object": "Shared 16x16 tanh hidden network and shared readout",
+  "mirror_coordinate": "Task-specific four-angle block Givens hidden activation transform",
+  "logical_multiplicity": "Four task functions",
+  "task": {
+    "input_dim": 16,
+    "hidden_dim": 16,
+    "output_dim": 4,
+    "tasks": 4,
+    "metric": "mean and worst task held-out MSE"
+  },
+  "controls": [
+    "independent task networks",
+    "hard-shared network",
+    "IA3 hidden-channel task scales with shared output readout",
+    "Mirror Givens hidden views with shared readout"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      {
+        "world": 26800,
+        "init_seed": 268000
+      },
+      {
+        "world": 26801,
+        "init_seed": 268001
+      }
+    ],
+    "learning_rate_candidates": [
+      0.003,
+      0.01
+    ],
+    "updates": 1000,
+    "selection_metric": "mean heldout task MSE"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      {
+        "world": 26802,
+        "init_seed": 268002
+      },
+      {
+        "world": 26803,
+        "init_seed": 268003
+      },
+      {
+        "world": 26804,
+        "init_seed": 268004
+      }
+    ],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual torch.save inference payload plus canonical JSON metadata",
+    "paid_objects": [
+      "shared network and readout weights",
+      "IA3 task scales",
+      "Mirror task angles",
+      "independent weights",
+      "metadata"
+    ]
+  },
+  "compute": {
+    "report_examples": true,
+    "report_updates": true,
+    "report_MAC_proxy": true,
+    "report_wall_time": true,
+    "report_throughput": true
+  },
+  "success_gate": "Mirror MSE <=1.10x independent, bytes <=65% independent, and >=10% better MSE than IA3 at byte-near cost (within 15%) or lower bytes.",
+  "failure_gate": "Mirror misses gate or IA3 matches at equal/lower bytes.",
+  "boundaries": [
+    "synthetic task regression only",
+    "fixed-update not capacity proof",
+    "no language claim"
+  ]
+}
