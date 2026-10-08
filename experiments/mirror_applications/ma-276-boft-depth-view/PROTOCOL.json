@@ -1,0 +1,113 @@
+{
+  "experiment_id": "MA-276",
+  "title": "BOFT depth views for tied blocks",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/DEPTH/STORAGE/RUNTIME",
+  "base_commit": "19f0b5a",
+  "random_selection": {
+    "date_utc": "2026-10-08",
+    "method": "Python secrets.randbelow(7)",
+    "draw_index_zero_based": 1,
+    "candidate_pool": [
+      "MA-274",
+      "MA-276",
+      "MA-278",
+      "MA-282",
+      "MA-286",
+      "MA-296",
+      "MA-299"
+    ],
+    "selected": "MA-276",
+    "live_conflict_check": "git fetch origin --prune; no remote MA-276 branch found"
+  },
+  "hypothesis": "One tied 8x8 block plus one butterfly-coordinate angle per depth step can recover four aligned logical layer functions with less inference state than independent depth blocks; unrelated layers need private state.",
+  "physical_object": "One shared 8x8 linear block",
+  "mirror_coordinate": "One float32 scalar per depth step controlling 12 fixed butterfly pair rotations",
+  "logical_multiplicity": "Four distinct layer operators and their composed depth function",
+  "prior_art_refs": [
+    "PA21",
+    "PA06"
+  ],
+  "controls": [
+    "hard-tied shared block",
+    "scalar per-step gate",
+    "static rank-2 per-step LoRA residual",
+    "input-conditioned generated shared residual basis",
+    "independent per-depth BOFT factors",
+    "untied full per-depth matrices"
+  ],
+  "task_family": "Four depth steps apply W_l=B(m_l) W B(m_l)^T. B(m) is three butterfly stages at strides 1,2,4 with four Givens rotations per stage, stage multipliers [1,-0.7,0.5], all controlled by scalar m. Independent condition uses unrelated matrices. Evaluate layer outputs and the full four-step composition on held-out Gaussian inputs.",
+  "development": {
+    "worlds_or_seeds": [
+      27601,
+      27602
+    ],
+    "generated_basis_rank_candidates": [
+      1,
+      2,
+      4
+    ],
+    "selection_metric": "mean layer and composed-map held-out MSE across methods and both conditions",
+    "held_out_examples": 512,
+    "selected_generated_basis_rank": 4,
+    "selection_result_mean_composed_mse": {
+      "1": 0.014699497748126417,
+      "2": 0.014648337743844391,
+      "4": 0.014618345360764343
+    }
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      27611,
+      27612,
+      27613
+    ],
+    "locked_before_access": true,
+    "held_out_examples": 512
+  },
+  "storage": {
+    "authority": "actual deterministic serialized inference payload bytes",
+    "codec": "binary tensor records charge field names, method/depth IDs, dtype, shape, raw bytes and headers",
+    "paid_objects": [
+      "shared block",
+      "Mirror angles",
+      "static LoRA factors",
+      "generated residual basis",
+      "per-depth codes",
+      "BOFT factors",
+      "untied matrices",
+      "all metadata"
+    ]
+  },
+  "compute": {
+    "report_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_MAC_proxy": true,
+    "report_wall_time": true,
+    "report_coordinate_path_inference_throughput": true,
+    "optimizer_updates": 0,
+    "operator_prepare_cost": "Record per-depth BOFT operator generation from serialized coordinates separately; static operators are prepared once before serving a query batch, then applied input-side."
+  },
+  "success_gate": "On all fresh aligned worlds, composed-map MSE <=1e-5, Mirror actual payload <=0.5x untied full blocks, and Mirror coordinate-path throughput >=0.5x generated shared-residual control. Mirror-specific value also requires a better quality/byte/compute frontier than static per-step LoRA and generated modulation.",
+  "failure_gate": "Mirror misses an aligned quality/storage/runtime gate or is Pareto-dominated by static LoRA or generated shared-residual modulation.",
+  "boundaries": [
+    "Synthetic linear block with four depth steps",
+    "Fixed transformation screen, not capacity",
+    "Teacher is aligned to one scalar-controlled butterfly orbit",
+    "No Transformer language-model result"
+  ],
+  "amendments": [
+    {
+      "id": "A1",
+      "fixed_before_fresh_access": true,
+      "change": "Execute each saved BOFT view input-side with its operator prepared once per depth step, and report operator preparation cost separately.",
+      "reason": "The first development runtime timing regenerated all 12 rotation matrices for every query batch. PA22 and the static depth-coordinate protocol imply a per-layer operator can be prepared once and reused. Initial timings remain preserved as invalidated diagnostics; task functions and fit setting did not change."
+    },
+    {
+      "id": "A2",
+      "fixed_before_fresh_access": true,
+      "change": "Freeze generated shared residual rank 4.",
+      "reason": "Development mean composed-map MSE was 0.014618 at rank 4, 0.014648 at rank 2, and 0.014699 at rank 1."
+    }
+  ]
+}
