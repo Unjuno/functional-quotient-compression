@@ -1,0 +1,91 @@
+{
+  "experiment_id": "MA-307",
+  "title": "View-first task allocation versus PackNet-style masks",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/COMPUTE/RETENTION",
+  "base_commit": "56f23e1",
+  "hypothesis": "In a sequential task stream with five tasks on one shared Givens orbit followed by three unrelated tasks, a Mirror-first allocator delays private readout allocation for more tasks than a packed binary-mask/PackNet-style allocator, while preserving all prior task functions and reducing complete serialized bytes.",
+  "physical_object": "one shared 32-value readout over a fixed deterministic 16-to-32 ReLU feature encoder",
+  "mirror_coordinate": "one int8 scalar angle per accepted task over a fixed pairwise Givens schedule; private float32 readout fallback when validation fails",
+  "logical_multiplicity": "eight sequential task functions: five aligned, three unrelated",
+  "prior_art_refs": [
+    "PA31",
+    "PA32"
+  ],
+  "controls": [
+    "hard shared readout",
+    "PackNet-style packed binary mask followed by private-readout allocation",
+    "independent readouts for every task"
+  ],
+  "task": {
+    "input_dim": 16,
+    "hidden_dim": 32,
+    "tasks": 8,
+    "stream_order": "five Givens-aligned tasks then three unrelated task vectors",
+    "metric": "mean normalized held-out MSE across all seen tasks",
+    "retention_audit": "re-evaluate every earlier task after each new task allocation"
+  },
+  "development": {
+    "worlds": [
+      30710,
+      30711
+    ],
+    "acceptance_thresholds": [
+      0.0001,
+      0.001,
+      0.01
+    ],
+    "updates": 0,
+    "support_examples_per_task": 512,
+    "validation_examples_per_task": 256,
+    "selection_metric": "smallest validation threshold accepting all five aligned tasks while rejecting unrelated tasks to private allocation",
+    "selected_threshold": 0.001,
+    "selection_reason": "At 0.001 both development worlds accepted all five aligned tasks and rejected all three unrelated tasks. Threshold 0.0001 caused one aligned private fallback; 0.01 did not improve allocation or quality over 0.001."
+  },
+  "fresh": {
+    "worlds": [
+      30712,
+      30713,
+      30714
+    ],
+    "locked_before_access": true,
+    "locked_threshold": 0.001,
+    "access_condition": "Development selected one frozen threshold; fresh reports allocation events, retention, quality and complete payload bytes without retuning."
+  },
+  "training": {
+    "optimizer": "least-squares support fit plus deterministic coordinate/grid search",
+    "gradient_updates": 0,
+    "threads": 1
+  },
+  "storage": {
+    "authority": "actual complete compact serialized inference payload bytes",
+    "serialization": "uint16 JSON-header length plus little-endian state tensors and compact per-task allocation records",
+    "paid_objects": [
+      "shared readout",
+      "every accepted angle code or packed mask",
+      "all private fallback readouts",
+      "task allocation records",
+      "encoder reconstruction seed",
+      "rotation schedule and metadata"
+    ]
+  },
+  "compute": {
+    "report_examples": true,
+    "report_updates": true,
+    "report_allocation_search_operations": true,
+    "report_wall_time": true,
+    "report_inference_throughput": true,
+    "report_cumulative_bytes_after_each_task": true
+  },
+  "gates": {
+    "promising": "In all three fresh worlds: Mirror accepts all five aligned tasks without private weights, allocates private readouts only for unrelated tasks, retains earlier tasks within 1e-6 normalized MSE, and reduces total payload at least 20% vs PackNet-style masks plus allocation at no more than 1.25x measured allocation-search time.",
+    "fail": "Mirror allocates aligned tasks privately in >=2 fresh worlds, retention exceeds 1e-4, or complete bytes are not at least 10% lower than PackNet-style allocation in >=2 fresh worlds.",
+    "not_established": "invalid split, serializer mismatch, or incomplete worlds"
+  },
+  "boundaries": [
+    "synthetic linear readout stream over fixed random features",
+    "PackNet-style mask/allocate control is a small linear allocation analogue, not a full Transformer PackNet reproduction",
+    "no continual optimizer training or language-model claim"
+  ],
+  "protocol_frozen_before_development": true
+}
