@@ -3,9 +3,44 @@
   "gymnasium_version": "1.4.0",
   "mujoco_version": "3.15.0",
   "base_ant_xml_sha256": "cd5f83ef0ea35b0969e65d360c5bacd5b74ccaef6b27e4433b5168c605e3e2be",
-  "morphology_xml_sha256": "generated and recorded before trajectory generation",
+  "morphology_xml_sha256": [
+    "df2f148992049386a09c6b7d03cb7ca166042cc580310a574c75d63e6b64b3f6",
+    "a6a33503d6fe532a4f89b9b97c50b22ffbf611e523bd9797afee36ff9c007f57",
+    "76749d1e9174cb371cd13c561341bf37c5677d86d8f7994f0cb67ef927912f7f",
+    "a3afe2a8f3c2019e0d6354ab38be641c9f0f1ef93a553592ab827821e62845ea"
+  ],
   "trajectory_data": "not generated",
-  "world_seeds": [23, 47, 71],
+  "world_seeds": [
+    23,
+    47,
+    71
+  ],
   "train_pair_rule": "(morphology_id + skill_id) mod 2 == 0",
-  "audit_pair_rule": "(morphology_id + skill_id) mod 2 == 1"
+  "audit_pair_rule": "(morphology_id + skill_id) mod 2 == 1",
+  "morphologies": [
+    {
+      "morphology_id": 0,
+      "path": "assets/ant_morph_0.xml",
+      "sha256": "df2f148992049386a09c6b7d03cb7ca166042cc580310a574c75d63e6b64b3f6",
+      "bytes": 4931
+    },
+    {
+      "morphology_id": 1,
+      "path": "assets/ant_morph_1.xml",
+      "sha256": "a6a33503d6fe532a4f89b9b97c50b22ffbf611e523bd9797afee36ff9c007f57",
+      "bytes": 4983
+    },
+    {
+      "morphology_id": 2,
+      "path": "assets/ant_morph_2.xml",
+      "sha256": "76749d1e9174cb371cd13c561341bf37c5677d86d8f7994f0cb67ef927912f7f",
+      "bytes": 4983
+    },
+    {
+      "morphology_id": 3,
+      "path": "assets/ant_morph_3.xml",
+      "sha256": "a3afe2a8f3c2019e0d6354ab38be641c9f0f1ef93a553592ab827821e62845ea",
+      "bytes": 4999
+    }
+  ]
 }
