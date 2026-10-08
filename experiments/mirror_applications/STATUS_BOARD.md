@@ -6,10 +6,10 @@ Integration branch: `research/mirror-application-current-evidence-20261008`; can
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (119 completed; 511 UNTESTED)
+- P0: **630** (120 completed; 510 UNTESTED)
 - P1: **422** (12 completed; 410 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1024 UNTESTED, 42 PROMISING, 89 FAIL**
+- Current MA statuses: **1023 UNTESTED, 42 PROMISING, 90 FAIL**
 - 48 experiment directories, complete with status/protocol/results/verification files, are represented in the current evidence set.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-268 is next.
@@ -41,6 +41,8 @@ Integration branch: `research/mirror-application-current-evidence-20261008`; can
 
 **MA-418 FAIL:** on held-out object/style pairs, factorized Mirror normalized RMSE was 0.0740 vs latent factors 0.0327 and FiLM 0.0149. Its payload was smaller than latent by 14.5%, but quality missed the registered gate. **Next: MA-419.**
 
+**MA-419 FAIL:** Mirror3 sinusoid error was 0.3476 vs latent3 0.2653 at nearly equal bytes. The per-world gate vs modulation network failed on two of three fresh worlds. **Next: MA-424/425.**
+
 MA-366 is reconciled as FAIL: direct pair coefficients match Mirror outputs and bytes, and PA02 factorization is smaller. The runner accidentally generated the registered fresh IDs before the gate; those rows are excluded and fresh integrity is invalid. MA-367 and MA-368 are also recorded FAIL. MA-369 is completed FAIL on its dedicated branch; next executable P0 is MA-371.
 
 **MA-371 — MatFormer granularity Mirror views (P0; PA53)**
@@ -69,7 +71,7 @@ MA-327 FAIL: ordinary rank-2 coefficient products match Mirror exactly and both 
 
 ## Active experiment
 
-MA-418 is completed FAIL and committed on its dedicated branch. Next is MA-419.
+MA-419 is completed FAIL and committed on its dedicated branch. Next is MA-424/425.
 
 ## Verified status index
 
