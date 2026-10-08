@@ -1,0 +1,59 @@
+{
+  "experiment_id": "MA-367",
+  "title": "Universally slimmable network with width Mirror corrections",
+  "status": "FROZEN_DEVELOPMENT_COMPLETED",
+  "base_commit": "research/mirror-application-worker-ready-20261007",
+  "evidence_lane": "QUALITY/STORAGE/COMPUTE/RUNTIME",
+  "hypothesis": "On a learnable nested-width classification task, a shared slimmable MLP plus one small width-specific Mirror coordinate will improve narrow-width quality over ordinary US-Net weight sharing while retaining full-width quality, with a useful quality/byte/compute point beyond a matched scalar gate.",
+  "prior_art_refs": ["PA51"],
+  "physical_object": "one max-width MLP whose weights are channel-sliced for widths 8, 16, 24, and 32",
+  "mirror_coordinate": "one learned Givens angle per supported width, applied to paired hidden activations before the shared readout",
+  "logical_multiplicity": "four width-conditioned subnetworks from one shared physical max-width parameter set",
+  "model": {
+    "input_dim": 32,
+    "classes": 4,
+    "max_hidden_width": 32,
+    "widths": [8, 16, 24, 32],
+    "teacher_width": 32,
+    "train_examples": 8192,
+    "validation_examples": 2048,
+    "test_examples": 4096,
+    "batch_size": 128,
+    "optimizer_updates": 1000,
+    "optimizer": "Adam",
+    "learning_rate": 0.001,
+    "development_seeds": [36701, 36702],
+    "fresh_seeds": [36711, 36712, 36713],
+    "width_sampling": "US-Net sandwich-style: always minimum and maximum width plus one uniformly sampled intermediate width each update; same sampled widths across shared variants"
+  },
+  "controls": [
+    "independent full model trained for each width (upper/control; all width payloads charged)",
+    "shared US-Net nested weights with no width correction",
+    "shared US-Net plus one direct scalar hidden-gain code per width",
+    "shared US-Net plus one Mirror Givens angle per width",
+    "shared US-Net plus width-specific IA3 channel gains (larger native control)"
+  ],
+  "development_gate_before_fresh": "Both development seeds: independent-width upper has mean validation accuracy >=0.70; Mirror average NLL at widths 8 and 16 is at least 5% lower than plain shared US-Net; width-32 NLL is no more than 0.02 nat worse than plain shared; Mirror is within 0.03 nat NLL of independent at every width; and either Mirror improves narrow-width NLL by >=10% versus the scalar-gain control at <=10% extra actual bytes or is >=10% smaller than the best quality-matched ordinary control. Otherwise record FAIL/NOT ESTABLISHED and keep fresh sealed.",
+  "success_gate": "All three fresh seeds: development gates replicate; Mirror width-8/16 NLL improves >=5% vs plain US-Net; width-32 degradation <=0.02 nat; per-width NLL within 0.03 nat of independent; Mirror-specific margin >=10% vs scalar gate or best matched ordinary control; actual serialized payload <=0.90x independent-width payload; active MACs <=1.10x plain US-Net; reloaded metrics/hash replay exact.",
+  "failure_gate": "Mirror misses narrow-width quality improvement in >=2 fresh seeds; or direct scalar/IA3 control matches within the registered 10% quality/byte margin; or width-32 NLL degrades >0.02 in >=2 seeds; or active MACs exceed 1.10x US-Net.",
+  "storage": {
+    "authority": "actual deterministic ZIP/NPY FP16 inference payload bytes after reload",
+    "paid_objects": ["all shared max-width weights and biases", "all width-specific Mirror angles or scalar gates", "all IA3 channel scales", "all independent width model weights", "width IDs, architecture metadata, and archive headers"]
+  },
+  "compute": {
+    "report_examples_per_width": true,
+    "report_optimizer_updates": true,
+    "report_active_macs_by_width": true,
+    "mac_equivalent_convention": "linear layers count one MAC per weight; each adjacent Givens pair counts four multiplies plus two adds = two MAC equivalents",
+    "report_training_wall_clock": true,
+    "report_inference_throughput_by_width": true
+  },
+  "boundaries": [
+    "synthetic teacher MLP classification only; no ImageNet or language-model claim",
+    "shared variants use common US-Net sandwich width sampling and fixed minibatch sequence",
+    "independent width models are an upper/reference and incur separate stored weights",
+    "width count is not independent capacity; evaluate actual per-width test quality",
+    "fixed-budget evidence is not a near-converged capacity claim",
+    "fresh IDs remain unopened until the frozen development gate passes"
+  ]
+}

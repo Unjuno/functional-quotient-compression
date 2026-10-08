@@ -1,0 +1,24 @@
+{
+  "experiment_id": "MA-367",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-367-universally-slimmable-width-mirror/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "No fresh split was opened because the registered development gate failed.",
+    "Ten development payload archives were hashed, loaded from serialized ZIP/NPY state, and their validation/test metrics replayed exactly.",
+    "Actual payload bytes, including four width IDs and metadata, are recorded per method/seed in results/development and RESULTS_CORE.csv.",
+    "Fresh seed IDs are present only in the protocol and were not executed."
+  ]
+}
