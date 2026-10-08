@@ -178,7 +178,7 @@ High-information P0:
 3. MA-504 — token-conditioned Mirror ReFT
 4. MA-508 — activation-addition Mirror basis (**FAIL for Mirror attribution**: rank-8 rho=0 is 8,324 B vs 13,194 B explicit at zero RMSE, but exact native PCA alias; rho=.1 RMSE .063/.080; 9x decoder compute. Amendment 1 causal metric fix preserved; fresh sealed.)
 5. MA-510/511 — conditional condition x behavior View codes (**MA-510/511 FAIL**: synthetic activation gate misses false-trigger/recall/accuracy and aliases native PCA; held-out pair composition is explained by native additive/PCA; MA-516 next; PA101)
-6. MA-516/517 — compressed/composed Function Vectors (**MA-516 screening active**)
+6. MA-516/517 — compressed/composed Function Vectors (MA-516 **FAIL**: rank4 function vectors miss gold-logprob preservation and exactly alias native PCA; MA-517 next)
 7. MA-520/521 — FV-to-code distillation and demonstration-to-code compilation
 8. MA-526/527/528 — SAE feature atoms and Mirror transforms
 9. MA-530 — SAE feature logical experts
