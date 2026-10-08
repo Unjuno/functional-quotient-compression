@@ -1,19 +1,34 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-383",
+  "evidence_commit": "pending-final-report-commit",
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "python -m pytest -q experiments/mirror_applications/ma-383-l2p-prompt-mirror-generator/tests",
+    "passed": 3,
+    "failed": 0
   },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "payloads": 10,
+    "actual_zip_npy_fp16": true,
+    "all_size_and_sha256_checked": true,
+    "loaded_state_includes_fp16_router_centroids": true
   },
   "metric_replay": {
-    "checked": false,
-    "max_difference": null
+    "checked": true,
+    "max_difference": 0.0,
+    "variant": "protocol_variants/serialized_state_eval_20261008"
   },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "runtime": {
+    "benchmarked_from_serialized_payload": true,
+    "runtime_reports": "RUNTIME_AUDIT.csv",
+    "repeats_per_seed_method": 100,
+    "condition": "CPU one thread; small synthetic batches; noisy at this scale"
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_opened": false,
+  "notes": [
+    "Initial development results are preserved under results/development/; their evaluator used full-precision router prototypes while the serialized payload stored FP16 prototypes.",
+    "A1 reran the same seeds and training settings; all primary metrics were evaluated after loading both prompt and router state from actual serialized payloads.",
+    "Both development seeds missed registered independent-quality and byte gates and the hard-sharing improvement gate. Fresh seeds 38311, 38312, 38313 remain sealed.",
+    "Mirror is only 20 bytes smaller than the direct rank-two coefficient payload, has no stable CPU throughput gain, and exceeds the independent prompt payload in this four-task setting."
+  ]
 }

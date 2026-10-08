@@ -1,0 +1,199 @@
+{
+  "condition": "development",
+  "seed": 38302,
+  "world_directions": [
+    [
+      0.7145393490791321,
+      -0.6995952129364014
+    ],
+    [
+      0.9831135869026184,
+      -0.18299627304077148
+    ],
+    [
+      0.9755014777183533,
+      0.2199929654598236
+    ],
+    [
+      0.773131787776947,
+      0.6342454552650452
+    ]
+  ],
+  "summaries": [
+    {
+      "method": "independent",
+      "serialized_bytes": 838,
+      "payload_sha256": "f72b9273c15ada95930df1a98c332b1a13f6a8a33625e5efb11463510e780d4f",
+      "optimizer_updates": 600,
+      "training_examples_seen": 76800,
+      "train_wall_s": 1.5071014460118022,
+      "validation": {
+        "accuracy": 0.9267578125,
+        "bce": 0.42394429445266724,
+        "retrieval_accuracy": 0.99951171875,
+        "per_task_accuracy": [
+          0.89453125,
+          0.916015625,
+          0.919921875,
+          0.9765625
+        ]
+      },
+      "test": {
+        "accuracy": 0.928466796875,
+        "bce": 0.426148921251297,
+        "retrieval_accuracy": 0.998779296875,
+        "per_task_accuracy": [
+          0.90234375,
+          0.9267578125,
+          0.9091796875,
+          0.9755859375
+        ]
+      },
+      "macs_per_example_estimate": {
+        "retrieval": 32,
+        "prompt_generation": 0,
+        "score": 8
+      }
+    },
+    {
+      "method": "hard_shared",
+      "serialized_bytes": 788,
+      "payload_sha256": "8b5bb23d7d3d308f7bd2c52f28ea60ab8fed4b6f9dbb17a8821521685c32b78d",
+      "optimizer_updates": 600,
+      "training_examples_seen": 76800,
+      "train_wall_s": 0.4436032110097585,
+      "validation": {
+        "accuracy": 0.8330078125,
+        "bce": 0.4398583769798279,
+        "retrieval_accuracy": 0.99951171875,
+        "per_task_accuracy": [
+          0.638671875,
+          0.826171875,
+          0.955078125,
+          0.912109375
+        ]
+      },
+      "test": {
+        "accuracy": 0.822998046875,
+        "bce": 0.44953036308288574,
+        "retrieval_accuracy": 0.998779296875,
+        "per_task_accuracy": [
+          0.6357421875,
+          0.822265625,
+          0.9404296875,
+          0.8935546875
+        ]
+      },
+      "macs_per_example_estimate": {
+        "retrieval": 32,
+        "prompt_generation": 0,
+        "score": 8
+      }
+    },
+    {
+      "method": "rank2_coeff",
+      "serialized_bytes": 1054,
+      "payload_sha256": "ad72d89b73b8d77f0e608446d9b6abd66531481e78fb4276f18e8f21b6ce4a4d",
+      "optimizer_updates": 600,
+      "training_examples_seen": 76800,
+      "train_wall_s": 0.5681856430019252,
+      "validation": {
+        "accuracy": 0.81591796875,
+        "bce": 0.420712411403656,
+        "retrieval_accuracy": 0.99951171875,
+        "per_task_accuracy": [
+          0.6171875,
+          0.791015625,
+          0.91796875,
+          0.9375
+        ]
+      },
+      "test": {
+        "accuracy": 0.802978515625,
+        "bce": 0.43689537048339844,
+        "retrieval_accuracy": 0.998779296875,
+        "per_task_accuracy": [
+          0.5927734375,
+          0.783203125,
+          0.904296875,
+          0.931640625
+        ]
+      },
+      "macs_per_example_estimate": {
+        "retrieval": 32,
+        "prompt_generation": 8,
+        "score": 8
+      }
+    },
+    {
+      "method": "hypernet",
+      "serialized_bytes": 2092,
+      "payload_sha256": "2b926dd9f50d74e98478195e9b75a17de955c5a45e6018b229a7fe131f70c5eb",
+      "optimizer_updates": 600,
+      "training_examples_seen": 76800,
+      "train_wall_s": 2.1926324930100236,
+      "validation": {
+        "accuracy": 0.80908203125,
+        "bce": 0.8597123026847839,
+        "retrieval_accuracy": 0.99951171875,
+        "per_task_accuracy": [
+          0.630859375,
+          0.767578125,
+          0.83984375,
+          0.998046875
+        ]
+      },
+      "test": {
+        "accuracy": 0.802978515625,
+        "bce": 0.9169009923934937,
+        "retrieval_accuracy": 0.998779296875,
+        "per_task_accuracy": [
+          0.634765625,
+          0.7587890625,
+          0.822265625,
+          0.99609375
+        ]
+      },
+      "macs_per_example_estimate": {
+        "retrieval": 32,
+        "prompt_generation": 256,
+        "score": 8
+      }
+    },
+    {
+      "method": "mirror_angle",
+      "serialized_bytes": 1034,
+      "payload_sha256": "62e04c07aa51f1a89679d2d090f6b289b158d93653ddeb04be2d293980287baa",
+      "optimizer_updates": 600,
+      "training_examples_seen": 76800,
+      "train_wall_s": 2.1196396830055164,
+      "validation": {
+        "accuracy": 0.845703125,
+        "bce": 0.4087327718734741,
+        "retrieval_accuracy": 0.99951171875,
+        "per_task_accuracy": [
+          0.658203125,
+          0.853515625,
+          0.95703125,
+          0.9140625
+        ]
+      },
+      "test": {
+        "accuracy": 0.8330078125,
+        "bce": 0.4213787317276001,
+        "retrieval_accuracy": 0.998779296875,
+        "per_task_accuracy": [
+          0.654296875,
+          0.83203125,
+          0.9462890625,
+          0.8994140625
+        ]
+      },
+      "macs_per_example_estimate": {
+        "retrieval": 32,
+        "prompt_generation": 16,
+        "score": 8
+      }
+    }
+  ]
+}

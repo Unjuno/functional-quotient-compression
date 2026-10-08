@@ -1,7 +1,7 @@
 {
   "experiment_id": "MA-383",
   "title": "L2P prompt pool with Mirror prompt codes",
-  "status": "FROZEN_DEVELOPMENT",
+  "status": "FROZEN_DEVELOPMENT_WITH_A1_SERIALIZED_STATE_REPLAY",
   "base_commit": "0739bf3",
   "evidence_lane": "MECHANISM/STORAGE/RUNTIME",
   "hypothesis": "For task families whose useful prompts lie near a shared two-vector orbit, a shared prompt basis plus one angle per retrieved task preserves prompt-conditioned classification quality with fewer serialized bytes than an explicit prompt bank, while any Mirror-specific claim also requires beating the direct two-coefficient basis control.",
@@ -23,7 +23,7 @@
     "learning_rate": 0.003,
     "development_seeds": [38301, 38302],
     "fresh_seeds": [38311, 38312, 38313],
-    "data": "Synthetic continual binary classification. The input contains a noisy task-key vector and an independent Gaussian feature vector. A shared frozen feature map is perturbed by the selected prompt before a shared frozen readout. Teacher decision directions for each world are sampled on a two-dimensional Givens rotation orbit; train/validation/test examples are disjoint. Test-time task identity is not given: all conditions use cosine top-1 retrieval over the same serialized learned key prototypes."
+    "data": "Synthetic continual binary classification. The input contains a noisy task-key vector and an independent Gaussian feature vector. In this minimal linearized prompt proxy, the retrieved prompt is a task-specific linear readout over a fixed identity feature representation. Teacher decision directions for each world are sampled on a two-dimensional Givens rotation orbit; train/validation/test examples are disjoint. Test-time task identity is not given: all conditions use cosine top-1 retrieval over the same serialized key prototypes fit as train-key centroids. This is not a frozen-backbone L2P benchmark."
   },
   "controls": [
     "independent explicit trainable prompt per task",
@@ -58,5 +58,15 @@
     "no natural image, continual-learning, or L2P benchmark result is established",
     "retrieved task prompts are not independent capacity merely because four codes exist",
     "development seeds alone may select implementation details; fresh remains sealed unless all development gates pass"
+  ],
+  "amendments": [
+    {
+      "id": "A1",
+      "date": "2026-10-08",
+      "reason": "Serializer audit found the original development evaluator used FP32 task-key centroids even though the inference payload stores those centroids as FP16.",
+      "change": "The preserved initial development outputs remain available under results/development/. A1 repeats the same frozen development seeds, task schedule, model initialization, optimizer, and update budget, then evaluates only after reloading both prompt parameters and FP16 router keys from the actual inference payload. A1 outputs are stored separately under protocol_variants/serialized_state_eval_20261008/.",
+      "gate_or_seed_change": false,
+      "fresh_opened": false
+    }
   ]
 }
