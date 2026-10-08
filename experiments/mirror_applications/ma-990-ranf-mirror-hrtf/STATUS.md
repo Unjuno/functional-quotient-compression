@@ -3,7 +3,7 @@
 - Status: FAIL for Mirror-specific advantage and quality gate
 - Branch: `research/ma-990-ranf-mirror-hrtf-20261008`
 - Base commit: `f255f0b` (`research/mirror-application-worker-ready-20261007`)
-- Last verified commit: `70f854b`
+- Last verified commit: `9cf16e4`
 - Development complete: yes
 - Fresh/audit opened: yes, after source/protocol lock
 - Results committed: yes
