@@ -1,0 +1,20 @@
+{
+  "experiment_id": "MA-356",
+  "title": "Product-key factorized Mirror code composition",
+  "status": "FROZEN_BEFORE_DEVELOPMENT",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY/COMPOSITION",
+  "base_commit": "c935a90",
+  "hypothesis": "A Cartesian product of two compact Mirror subcodes represents held-out compositions with lower actual bytes than flat independent function codes while preserving quality and distinct functions.",
+  "physical_object": "shared 8x8 base operator and two banks of eight 8x8 basis operators",
+  "mirror_coordinate": "pair (m1,m2), each selecting one of eight functional directions",
+  "logical_multiplicity": "64 composed operators, each evaluated for quality and distinctness",
+  "prior_art_refs": ["PA43"],
+  "controls": ["flat 64-function operator codebook", "Product-Key factorized address plus flat value table", "factorized Mirror pair code", "direct two-coefficient code over same shared basis"],
+  "development": {"worlds_or_seeds": [35601,35602], "functions": 64, "heldout_pairs": 16, "heldout_inputs_per_pair": 256, "selection_metric": "held-out nMSE, collisions, distinct functions, actual bytes, lookup MAC proxy"},
+  "fresh": {"worlds_or_seeds": [35611,35612,35613], "locked_before_access": true, "open_only_after_development_pass": true},
+  "storage": {"authority": "actual deterministic ZIP/NPY inference payload after reload", "paid_objects": ["shared base", "both factor banks", "all flat codebook tensors", "Product-Key keys and values", "subcodes/indices", "residual state", "metadata"]},
+  "compute": {"optimizer_updates": 0, "report_examples": true, "report_lookup_MAC_proxy": true, "report_reconstruction_MAC_proxy": true, "report_wall_clock": true},
+  "success_gate": "Both dev seeds: held-out nMSE <=1e-4; 64 distinct functions; Mirror >=10% smaller than flat and Product-Key; lookup MAC no higher than Product-Key; direct coefficient control >=10% larger for Mirror-specific value.",
+  "failure_gate": "Any held-out nMSE >1e-3, fewer than 64 distinct functions, storage margin <10%, direct control within 10%, or lookup/runtime proxy >1.1x Product Key; fresh sealed.",
+  "boundaries": ["oracle factor-basis screen", "no learned codebooks or router", "logical combination count is not capacity"]
+}
