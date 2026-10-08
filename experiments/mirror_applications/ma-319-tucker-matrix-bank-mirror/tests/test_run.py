@@ -32,3 +32,10 @@ def test_mirror_uses_one_angle_per_layer_and_reconstructs():
 def test_serialization_deterministic():
     p=m.compress(fixture_state(),'mirror')
     assert m.serialize(p)==m.serialize(p)
+
+def test_development_selection_never_reads_audit_file(tmp_path):
+    dev=torch.arange(8).numpy();vocab=list('abcdefgh')
+    selected,meta=m.select_evaluation('development',dev,tmp_path/'missing-audit.txt',vocab)
+    assert (selected==dev).all()
+    assert meta['fresh_accessed'] is False
+    assert not (tmp_path/'missing-audit.txt').exists()

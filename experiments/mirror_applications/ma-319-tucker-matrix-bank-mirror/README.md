@@ -12,7 +12,7 @@ The insertion point is the coefficient row for each layer in four repeated nanoG
 
 ## Frozen protocol
 
-See `PROTOCOL.json`. Four-layer nanoGPT character LM: 4 heads, width 64, context 64; 500 AdamW updates per model seed. Tiny Shakespeare data is fetched by pinned SHA-256 and split sequentially 80/10/10. Development seeds are 31901/31902. Fresh seeds 31911/31912/31913 and the final text split stay sealed until source and protocol are committed. All bytes include untouched tensors, banks, layer addresses, metadata and serialization headers.
+See `PROTOCOL.json` and amendment A1. Four-layer nanoGPT character LM: 4 heads, width 64, context 64; 500 AdamW updates per model seed. Tiny Shakespeare data is fetched by pinned SHA-256 and split sequentially 80/10/10. Development seeds are 31901/31902 and evaluate only the designated Tiny Shakespeare development split. Fresh seeds 31911/31912/31913 evaluate the independent Project Gutenberg audit corpus fixed in amendment A1. A source bug exposed the original Tiny Shakespeare audit partition on development runs; those logs are quarantined and excluded. All bytes include untouched tensors, banks, layer addresses, metadata and serialization headers.
 
 ## Prior-art delta
 

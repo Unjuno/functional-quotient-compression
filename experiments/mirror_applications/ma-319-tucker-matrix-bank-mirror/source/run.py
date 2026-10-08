@@ -10,6 +10,7 @@ N_LAYER, N_HEAD, N_EMBD, BLOCK, BATCH, STEPS = 4, 4, 64, 64, 32, 500
 LR = 1e-3
 FAMILIES = ['attn.c_attn.weight','attn.c_proj.weight','mlp.c_fc.weight','mlp.c_proj.weight']
 URL = 'https://raw.githubusercontent.com/karpathy/char-rnn/master/data/tinyshakespeare/input.txt'
+AUDIT_URL = 'https://www.gutenberg.org/cache/epub/1342/pg1342.txt'
 SHA256 = '86c4e6aa9db7c042ec79f339dcb96d42b0075e16b8fc2e86bf0ca57e2dc565ed'
 
 def get_text(path):
@@ -20,7 +21,22 @@ def get_text(path):
     text=raw.decode('utf-8'); vocab=sorted(set(text)); stoi={c:i for i,c in enumerate(vocab)}
     ids=np.asarray([stoi[c] for c in text],dtype=np.int64); n=len(ids)
     a=int(.8*n); b=int(.9*n)
-    return ids[:a],ids[a:b],ids[b:],vocab,digest
+    return ids[:a],ids[a:b],vocab,digest
+
+
+def get_audit_text(path,vocab):
+    path=Path(path);path.parent.mkdir(parents=True,exist_ok=True)
+    if not path.exists(): urllib.request.urlretrieve(AUDIT_URL,path)
+    raw=path.read_bytes(); digest=hashlib.sha256(raw).hexdigest()
+    text=raw.decode('utf-8',errors='replace')
+    text=text.replace('—','-').replace('–','-').replace('“','"').replace('”','"').replace('’',"'").replace('‘',"'")
+    allowed=set(vocab); kept=[c for c in text if c in allowed]
+    stoi={c:i for i,c in enumerate(vocab)}; ids=np.asarray([stoi[c] for c in kept],dtype=np.int64)
+    return ids,{'audit_source':AUDIT_URL,'audit_sha256':digest,'raw_characters':len(text),'retained_characters':len(kept),'filtered_fraction':1-len(kept)/max(len(text),1)}
+
+def select_evaluation(split,dev_ids,audit_path,vocab):
+    if split=='development': return dev_ids,{'evaluation_split':'development','fresh_accessed':False}
+    ids,meta=get_audit_text(audit_path,vocab);meta.update({'evaluation_split':'fresh','fresh_accessed':True});return ids,meta
 
 def new_model(seed,vocab_size):
     sys.path.insert(0,str(REPO/'third_party/nanoGPT'))
@@ -106,18 +122,18 @@ def build_model(seed,vocab_size,state):
 def serialize(payload):
     bio=io.BytesIO();torch.save(payload,bio);return bio.getvalue()
 
-def run(seed,split,datapath,outdir):
-    train_ids,dev_ids,fresh_ids,vocab,dhash=get_text(datapath);model,train_stats=train(seed,train_ids,dev_ids,len(vocab));base=tensors(model);rows=[];payload_dir=Path(outdir);payload_dir.mkdir(parents=True,exist_ok=True)
+def run(seed,split,datapath,outdir,auditpath):
+    train_ids,dev_ids,vocab,dhash=get_text(datapath);model,train_stats=train(seed,train_ids,dev_ids,len(vocab));base=tensors(model);rows=[];payload_dir=Path(outdir);payload_dir.mkdir(parents=True,exist_ok=True);eval_ids,eval_meta=select_evaluation(split,dev_ids,auditpath,vocab)
     for method in ['full','tucker1','tucker2','tucker4','mirror']:
         t0=time.perf_counter()
         if method=='full':payload={'format':'ma319-v1','method':'full','config':{'n_layer':N_LAYER,'n_head':N_HEAD,'n_embd':N_EMBD,'block_size':BLOCK},'tensors':{k:v.float() for k,v in base.items()},'banks':{}}
         else:payload=compress(base,method)
         fit_wall=time.perf_counter()-t0;data=serialize(payload);path=payload_dir/f'{split}_{seed}_{method}.pt';path.write_bytes(data)
         t1=time.perf_counter();decoded=payload['tensors'] if method=='full' else decode(payload,base);decode_wall=time.perf_counter()-t1
-        candidate=build_model(seed,len(vocab),decoded);fresh=evaluate(candidate,fresh_ids)
+        candidate=build_model(seed,len(vocab),decoded);quality=evaluate(candidate,eval_ids)
         dev=evaluate(candidate,dev_ids)
-        rows.append({'condition':split,'seed':seed,'method':method,'payload_bytes':len(data),'payload_sha256':hashlib.sha256(data).hexdigest(),'train_steps':STEPS,'train_tokens':train_stats['tokens_seen'],'train_wall_s':train_stats['train_wall_s'],'base_dev_nll':train_stats['dev_nll']['nll'],'dev_nll':dev['nll'],'fresh_nll':fresh['nll'],'fresh_tokens':fresh['tokens'],'fresh_eval_wall_s':fresh['wall_s'],'fresh_tokens_per_s':fresh['tokens_per_s'],'compression_wall_s':fit_wall,'decode_wall_s':decode_wall,'compression_fit_ops_proxy':payload.get('compression_fit_ops_proxy',0),'matrix_reconstruction_mse':payload.get('mean_matrix_reconstruction_mse',0.0)})
+        rows.append({'condition':split,'seed':seed,'method':method,'payload_bytes':len(data),'payload_sha256':hashlib.sha256(data).hexdigest(),'train_steps':STEPS,'train_tokens':train_stats['tokens_seen'],'train_wall_s':train_stats['train_wall_s'],'base_dev_nll':train_stats['dev_nll']['nll'],'dev_nll':dev['nll'],'evaluation_nll':quality['nll'],'evaluation_tokens':quality['tokens'],'evaluation_wall_s':quality['wall_s'],'evaluation_tokens_per_s':quality['tokens_per_s'],'fresh_accessed':eval_meta['fresh_accessed'],'audit_sha256':eval_meta.get('audit_sha256',''),'compression_wall_s':fit_wall,'decode_wall_s':decode_wall,'compression_fit_ops_proxy':payload.get('compression_fit_ops_proxy',0),'matrix_reconstruction_mse':payload.get('mean_matrix_reconstruction_mse',0.0)})
     return rows
 
 if __name__=='__main__':
-    ap=argparse.ArgumentParser();ap.add_argument('--seed',type=int,required=True);ap.add_argument('--split',choices=['development','fresh'],required=True);ap.add_argument('--data',default=str(ROOT/'source/data/tinyshakespeare.txt'));ap.add_argument('--outdir',default=str(ROOT/'artifacts/packages'));ap.add_argument('--json',required=True);a=ap.parse_args();rows=run(a.seed,a.split,a.data,a.outdir);p=Path(a.json);p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps({'dataset_sha256':SHA256,'rows':rows},indent=2)+'\n')
+    ap=argparse.ArgumentParser();ap.add_argument('--seed',type=int,required=True);ap.add_argument('--split',choices=['development','fresh'],required=True);ap.add_argument('--data',default=str(ROOT/'source/data/tinyshakespeare.txt'));ap.add_argument('--outdir',default=str(ROOT/'artifacts/packages'));ap.add_argument('--audit-data',default=str(ROOT/'source/data/pride_and_prejudice.txt'));ap.add_argument('--json',required=True);a=ap.parse_args();rows=run(a.seed,a.split,a.data,a.outdir,a.audit_data);p=Path(a.json);p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps({'dataset_sha256':SHA256,'rows':rows},indent=2)+'\n')
