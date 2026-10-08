@@ -1,0 +1,22 @@
+{
+  "experiment_id": "MA-407",
+  "title": "Demodulated Mirror-MoE expert views",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/COMPUTE",
+  "base_commit": "69a042c",
+  "hypothesis": "For four context-addressed logical experts on a shared FFN, row-norm demodulation of learned Givens weight views improves mean fresh accuracy by at least 1.0pp and cuts context activation RMS coefficient of variation by at least 25% versus the identical undemodulated Mirror model, with <=1.1x payload bytes and <=1.2x active MACs versus IA3.",
+  "physical_object": "one shared two-layer ReLU FFN classifier",
+  "mirror_coordinate": "four context-specific Givens rotations on input planes, optionally followed by row-norm demodulation",
+  "logical_multiplicity": "four address-selected effective FFNs",
+  "prior_art_refs": ["PA65"],
+  "controls": ["shared baseline", "Mirror Givens without demodulation", "same Mirror Givens with row-norm demodulation", "IA3 input-channel modulation", "rank-one context weight residual", "independent per-context FFNs"],
+  "task": {"type": "synthetic four-context classification", "contexts": 4, "input_dim": 32, "hidden_dim": 48, "classes": 10, "teacher": "shared random two-layer ReLU classifier with four context Givens views and per-output row norm normalization", "examples_per_world": 4096, "train_examples": 3072, "evaluation_examples": 1024},
+  "development": {"worlds_or_seeds": [40700, 40701], "learning_rates": [0.003, 0.01], "selection_metric": "mean validation accuracy; ties resolved by lower cross entropy"},
+  "fresh": {"worlds_or_seeds": [40710, 40711, 40712], "locked_before_access": true},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["shared and independent weights", "Givens coordinates", "IA3 scales", "rank-one factors", "context metadata", "normalization state"]},
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true, "report_activation_scale_stability": true, "report_per_context_quality": true},
+  "training": {"updates": 200, "batch_size": 128, "optimizer": "AdamW", "seeds": [0, 1, 2]},
+  "success_gate": "Fresh demodulated Mirror beats identical undemodulated Mirror by >=1.0pp accuracy and reduces context activation RMS coefficient of variation >=25%, and is not dominated by IA3/rank-one on quality, bytes, and active MACs.",
+  "failure_gate": "Demodulation misses either preregistered Mirror-vs-Mirror condition or a simple control dominates quality at comparable or lower bytes/compute.",
+  "boundaries": ["Known context addresses; learned routing not tested.", "Synthetic mechanism screen only.", "Fixed-update performance is not a capacity claim."]
+}
