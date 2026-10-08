@@ -14,6 +14,10 @@ Use:
 
 ## Selection rule
 
+### Active-worker randomized override (Draw28 onward)
+
+For this worker, ignore the ordered/first-eligible selection rules below. Before each new experiment, refresh remote refs, snapshot the currently eligible `P0 + UNTESTED` IDs, exclude IDs claimed by live remote `research/ma-*`/`origin/ma-*` branches or existing `ma-*` experiment directories, freeze the sorted pool and SHA-256, draw a fresh 256-bit OS-entropy seed, and use rejection sampling to select uniformly. Save pool, exclusions, seed, digest/counter, zero-based index and replay verifier under the selected experiment's `source/drawNN_exclusions.json` before viewing any experimental outcome. Do not re-draw because of preference; if blocked, record the blocker and draw again from a newly frozen pool. Other workers' branches and experiment directories take precedence as exclusions. This override is per worker branch and does not reorder another worker's queue.
+
 Pick the first candidate satisfying all of:
 1. status is UNTESTED;
 2. highest available priority;

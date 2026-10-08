@@ -1,19 +1,21 @@
 {
   "experiment_id": "MA-790",
-  "commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
+  "commit": "pending",
   "tests": {
-    "command": "pending",
-    "passed": null,
-    "failed": null
+    "command": "pytest -q experiments/mirror_applications/ma-790-simoe-mirror/tests",
+    "passed": 5,
+    "failed": 0
   },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "payload_format": "Safetensors MA790-PAYLOAD-V2; actual serialized file bytes reported"
   },
   "metric_replay": {
-    "checked": false,
-    "max_difference": null
+    "checked": true,
+    "max_difference": 0.0,
+    "metrics_sha256": "a8cc8bf67d412008f17dad00cf68c7e5468a81215681c86d7736abfcd4429f8e"
   },
-  "fresh_split_integrity_checked": false,
-  "notes": ["Draw28 and protocol frozen before generating task coefficients or train/dev/support/query samples."]
+  "fresh_split_integrity_checked": true,
+  "notes": ["Draw28 replay passed; protocol and development settings were frozen before odd-parity audit query evaluation.", "All 1008 row-level metrics are retained in the audit CSV and regenerate exactly with the declared script/seeds.", "The aligned quality gate passed in only 1 of 3 worlds; storage subgate passed."]
 }
