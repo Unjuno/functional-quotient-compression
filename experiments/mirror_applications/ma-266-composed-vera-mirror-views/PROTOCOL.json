@@ -1,0 +1,55 @@
+{
+  "experiment_id": "MA-266",
+  "title": "composed VeRA codes and Mirror views",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY/RUNTIME",
+  "base_commit": "af1d096cae5057098f60f91d74be9d382cb598ad",
+  "hypothesis": "Composing two per-factor Givens Mirror views recovers held-out combinations of a shared adapter family more compactly than VeRA-style additive scaling codes and an ordinary coefficient-product control; unrelated maps require private state.",
+  "physical_object": "one frozen 12x12 core matrix plus a shared factorized adapter basis for the VeRA control",
+  "mirror_coordinate": "one FP16 Givens angle per value of each of two task factors; compose left and right views",
+  "logical_multiplicity": "16 factor-pair maps, with 8 support pairs and 8 held-out pairs",
+  "prior_art_refs": ["PA18", "PA26"],
+  "controls": ["hard tied core", "VeRA-style shared random rank-6 outer-product basis with sum of factor scaling codes", "ordinary sin/cos coefficient-product control", "independent full 16-map bank"],
+  "data": {
+    "dimension": 12,
+    "factor_cardinality": [4, 4],
+    "examples_per_factor_pair": 128,
+    "support_rule": "(i+j) mod 2 == 0",
+    "held_out_rule": "(i+j) mod 2 == 1",
+    "representation_fit_input": "the eight exact full support matrices (post-fit screen); Mirror angle tables are the public teacher factor coordinates",
+    "evaluation_input": "128 held-out Gaussian inputs per factor-pair map; these inputs do not train or fit the codecs",
+    "development_seeds": [26601, 26602, 26603],
+    "fresh_seeds_locked_unopened": [26611, 26612, 26613],
+    "optimizer_updates": 0,
+    "expert_or_factor_ids_supplied": true,
+    "aligned_teacher": "W_ij = R(alpha_i) W_core R(beta_j), fixed angle schedule",
+    "unrelated_teacher": "W_core plus independently sampled per-combination deltas"
+  },
+  "selection": {
+    "development_only": true,
+    "tunable": "none; all ranks, angle precision, codes, splits and seeds are fixed",
+    "fresh_opened_only_if_development_passes_full_mirror_specific_gate": true
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes after reload",
+    "format": "NPZ-compatible fixed-timestamp ZIP",
+    "paid_objects": ["core matrix", "Mirror angles", "VeRA shared B/A basis", "VeRA per-factor codes", "coefficient-product sin/cos tables", "independent task matrices", "shape/format metadata and archive headers"]
+  },
+  "compute": {
+    "report_support_examples": true,
+    "report_held_out_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_operation_proxy": true,
+    "report_encoder_and_inference_wall_clock": true,
+    "report_batched_throughput": true,
+    "device": "CPU"
+  },
+  "success_gate": "All 3 development worlds: held-out Mirror normalized MSE <=1e-5, payload <=50% of independent, and either >=10% fewer bytes than the best non-Mirror method at that quality or >=10x lower error for <=10% extra bytes.",
+  "failure_gate": "Mirror misses held-out quality/storage or the VeRA additive/coefficient-product control matches it within 10% bytes; unrelated maps fail without evidence that factorized views recover them.",
+  "fresh": {
+    "locked_before_access": true,
+    "seeds": [26611, 26612, 26613],
+    "open_condition": "only if the complete development Mirror-specific gate is met"
+  },
+  "boundaries": ["synthetic post-fit linear family", "teacher shares the Mirror Givens composition chart", "factor IDs are supplied; no router", "zero optimizer updates; not capacity or natural-language evidence"]
+}
