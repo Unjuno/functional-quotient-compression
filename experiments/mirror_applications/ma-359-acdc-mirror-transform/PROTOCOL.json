@@ -1,0 +1,20 @@
+{
+  "experiment_id": "MA-359",
+  "title": "ACDC structured Mirror transform",
+  "status": "FROZEN_BEFORE_DEVELOPMENT",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY/COMPUTE",
+  "base_commit": "c935a90",
+  "hypothesis": "Two Mirror coefficients over shared ACDC diagonal basis factors preserve held-out operator quality with lower actual bytes and application compute than independent ACDC diagonal factors and dense matrices.",
+  "physical_object": "fixed DCT-II transform and shared diagonal base factors at dimension 32",
+  "mirror_coordinate": "two continuous coefficients per task selecting learned diagonal basis directions",
+  "logical_multiplicity": "64 task linear operators, including 16 held-out task identities",
+  "prior_art_refs": ["PA45"],
+  "controls": ["dense independent matrices", "independent ACDC diagonal factors", "shared ACDC plus Mirror coordinates", "direct two-coefficient basis control", "diagonal-only control"],
+  "development": {"worlds_or_seeds": [35901,35902], "tasks": 64, "train_tasks": 48, "heldout_tasks": 16, "dimension": 32, "probes_per_task": 512, "selection_metric": "held-out nMSE, actual bytes, distinct functions, application MAC proxy"},
+  "fresh": {"worlds_or_seeds": [35911,35912,35913], "locked_before_access": true, "open_only_if_development_passes": true},
+  "storage": {"authority": "actual deterministic ZIP/NPY inference payload after reload", "paid_objects": ["all shared/task diagonal factors", "Mirror coefficients", "basis directions", "dense matrices/residuals", "metadata"]},
+  "compute": {"optimizer_updates": 0, "report_examples": true, "report_DCT_application_MAC_proxy": true, "report_wall_clock": true, "proxy_definition": "dense D^2 MAC/input; diagonal  D MAC/input; ACDC DCT FFT estimate 2*D*log2(D)+2D MAC/input"},
+  "success_gate": "Both dev seeds: Mirror held-out nMSE <=2e-4 and within 10% of independent ACDC; payload >=10% below independent ACDC and direct coefficient control; DCT MAC <=1.2x ACDC; 64 distinct maps.",
+  "failure_gate": "Direct coefficient payload within 10%, quality gate missed, distinct map count <64, or compute >1.2x independent ACDC; fresh sealed.",
+  "boundaries": ["synthetic post-fit operator bank only", "DCT convention deterministically reconstructible but transform compute charged", "not trained ACDC or language-model evidence"]
+}
