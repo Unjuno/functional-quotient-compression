@@ -32,6 +32,9 @@ class MA297Tests(unittest.TestCase):
         self.assertTrue(all(r["inference_payload_bytes"] > 0 for r in mirror + coeff))
         self.assertEqual(mirror[-1]["optimizer_updates_cumulative"], 0)
         self.assertGreater(mirror[-1]["active_compute_proxy"], coeff[-1]["active_compute_proxy"])
+        self.assertLess(max(r["reconstruction_max_abs_diff"] for r in rows), 3e-7)
+        independent=[r for r in rows if r["method"]=="independent_full" and r["tasks_seen"]==5]
+        self.assertLess(independent[0]["inference_payload_bytes"], 2200)
 
     def test_seed_replay(self):
         rows = engine.deterministic_rows(29711, "fresh", 0.0, 1)

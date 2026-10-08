@@ -3,7 +3,7 @@ from pathlib import Path
 from engine import run
 
 ROOT=Path(__file__).resolve().parents[1]
-FIELDS=['split','seed','condition','learning_rate','method','tasks_seen','mean_seen_mse','forgetting_abs','shared_basis_bytes','inference_payload_bytes','incremental_inference_bytes','train_examples_cumulative','optimizer_updates_cumulative','active_compute_proxy','wall_time_s','inference_examples_per_s','payload_sha256','retention_task0_mse']
+FIELDS=['split','seed','condition','learning_rate','method','tasks_seen','mean_seen_mse','forgetting_abs','shared_basis_bytes','inference_payload_bytes','incremental_inference_bytes','train_examples_cumulative','optimizer_updates_cumulative','active_compute_proxy','wall_time_s','inference_examples_per_s','payload_sha256','retention_task0_mse','reconstruction_max_abs_diff']
 
 def main():
     p=argparse.ArgumentParser(); p.add_argument('--split',required=True); p.add_argument('--seeds',nargs='+',type=int,required=True); p.add_argument('--support-pairs',type=int,required=True); a=p.parse_args()

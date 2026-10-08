@@ -108,7 +108,25 @@
       "id": "A1",
       "fixed_before_fresh_access": true,
       "change": "Freeze support_pairs=1 after development selection.",
-      "reason": "Mean final seen-task held-out MSE across all methods, both task families, and both development worlds was 0.661397 (support 1), 0.751343 (support 2), and 0.952133 (support 4)."
+      "reason": "Mean final seen-task held-out MSE across both task families, all methods, and both development worlds was 0.661397 (one pair), 0.751343 (two), and 0.952133 (four)."
+    },
+    {
+      "id": "A2",
+      "fixed_before_fresh_access": false,
+      "change": "Inference throughput now executes the Mirror coordinate from shared physical tensors on every forward call, and serialized-state reconstruction is checked; initial dense-materialized inference timing is retained in FRESH_RUNTIME_INVALIDATED.csv.",
+      "reason": "The first audit timing bypassed the Mirror coordinate by timing a dense materialized matrix. This correction changes neither fit, seeds, support, nor quality selection."
+    },
+    {
+      "id": "A3",
+      "fixed_before_fresh_access": false,
+      "change": "Serializer stores only method-required persistent state: shared-only pays shared tensors without unused task IDs/empty task records; independent-full pays its task weights without unused shared tensors. The first corrected-runtime payload table is retained in invalidated diagnostics.",
+      "reason": "The audit serializer included unused state in the two endpoint controls. Mirror and matched-coefficient state remain fully charged; all corrected payloads are reconstructed and byte/hash replayed from saved state."
+    },
+    {
+      "id": "A4",
+      "fixed_before_fresh_access": false,
+      "change": "Primary task MSE is now computed from the float32 logical functions reconstructed from each actual serialized inference payload; previous pre-serialization fresh metrics are retained as invalidated diagnostics.",
+      "reason": "The deployed payload is authoritative, so small float32 serialization differences must be included in quality as well as byte accounting. This does not change the teacher, fitting, model, seeds, or gate."
     }
   ]
 }

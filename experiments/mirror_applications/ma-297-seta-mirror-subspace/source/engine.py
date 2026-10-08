@@ -52,11 +52,41 @@ def unpack(payload):
     return records
 
 def serialize(method,shared,basis,params,ids):
-    rec=[('method',method),('shared',shared),('basis',basis),('task_ids',np.asarray(ids,dtype=np.float32))]
-    rec += [(f'task_{i}',p) for i,p in enumerate(params)]
+    rec=[('method',method)]
+    if method!='independent_full': rec += [('shared',shared),('basis',basis)]
+    if method!='shared_only': rec.append(('task_ids',np.asarray(ids,dtype=np.float32)))
+    rec += [(f'task_{i}',p) for i,p in enumerate(params) if np.asarray(p).size]
     return pack(rec)
 
 def mse(x,w,y): return float(np.mean((x@w-y)**2))
+
+def reconstruct(payload, task_count=None):
+    """Rebuild logical task functions from the paid serialized state."""
+    records=dict(unpack(payload)); method=records['method'].decode(); base=records.get('shared'); basis=records.get('basis')
+    ids=records.get('task_ids'); n=len(ids) if ids is not None else (task_count or N_TASKS); functions=[]
+    for t in range(n):
+        param=records.get(f'task_{t}',np.zeros((0,N_OUT)))
+        if method=='shared_only': fn=base
+        elif method=='mirror' and t>0:
+            angle=float(param.reshape(-1)[0]); c,s=np.cos(angle),np.sin(angle); rot=np.array([[c,-s],[s,c]])
+            base_coef=np.linalg.lstsq(basis,base,rcond=None)[0][:2]
+            fn=base+basis[:,:2]@((rot-np.eye(2))@base_coef)
+        elif method in ('coeff2','lowrank1') and t>0: fn=base+basis[:,:2]@param
+        elif method=='independent_full': fn=param
+        else: fn=base
+        functions.append(fn)
+    return functions
+
+def infer_one(method,x,base,basis,param):
+    """Execute the task view from its physical state without a dense weight cache."""
+    if method=='mirror' and np.asarray(param).size:
+        angle=float(np.asarray(param).reshape(-1)[0]); c,s=np.cos(angle),np.sin(angle); rot=np.array([[c,-s],[s,c]])
+        base_coef=np.linalg.lstsq(basis,base,rcond=None)[0][:2]
+        return x@base + (x@basis[:,:2])@((rot-np.eye(2))@base_coef)
+    if method in ('coeff2','lowrank1') and np.asarray(param).size:
+        return x@base + (x@basis[:,:2])@param
+    if method=='independent_full': return x@param
+    return x@base
 
 def run_world(seed,condition,lr,support_pairs,split):
     xtr,xte,teachers,basis,ids=make_world(seed,condition,support_pairs)
@@ -91,15 +121,19 @@ def run_world(seed,condition,lr,support_pairs,split):
                 if method=='lowrank1':
                     # Rank-1 output residual over the shared representation.
                     u,svals,vh=np.linalg.svd(p,full_matrices=False); p=(u[:, :1]*svals[:1])@vh[:1, :]; fn=base+pair@p
-            fns.append(fn); params.append(p); errs=[mse(xte,fns[j],yte[j]) for j in range(t+1)]
+            fns.append(fn); params.append(p)
+            payload=serialize(method,base,basis,params,np.arange(t+1)); old=serialize(method,base,basis,params[:-1],np.arange(t)) if t else b''
+            decoded=reconstruct(payload,task_count=t+1)
+            replay_diff=max(float(np.max(np.abs(decoded[j]-fns[j]))) for j in range(t+1))
+            fns=decoded
+            errs=[mse(xte,fns[j],yte[j]) for j in range(t+1)]
             forgetting=0. if previous is None else max([errs[j]-previous[j] for j in range(t)]+[0.])
             previous=errs.copy(); active += (4097*N_EXAMPLES*N_IN*N_OUT if method=='mirror' and t else (N_EXAMPLES*N_IN*N_OUT + N_IN*N_IN*N_OUT if method=='independent_full' else 2*N_EXAMPLES*N_IN*N_OUT if method in ('coeff2','lowrank1') and t else 0))
-            payload=serialize(method,base,basis,params,np.arange(t+1)); old=serialize(method,base,basis,params[:-1],np.arange(t)) if t else b''
-            rows.append(dict(split=split,seed=seed,condition=condition,learning_rate=lr,method=method,tasks_seen=t+1,mean_seen_mse=float(np.mean(errs)),forgetting_abs=float(forgetting),shared_basis_bytes=len(serialize('shared_only',base,basis,[],[])),inference_payload_bytes=len(payload),incremental_inference_bytes=len(payload)-len(old),train_examples_cumulative=(t+1)*N_EXAMPLES,optimizer_updates_cumulative=0,active_compute_proxy=active,wall_time_s=None,inference_examples_per_s=None,payload_sha256=hashlib.sha256(payload).hexdigest(),retention_task0_mse=errs[0]))
+            rows.append(dict(split=split,seed=seed,condition=condition,learning_rate=lr,method=method,tasks_seen=t+1,mean_seen_mse=float(np.mean(errs)),forgetting_abs=float(forgetting),shared_basis_bytes=len(serialize('shared_only',base,basis,[],[])),inference_payload_bytes=len(payload),incremental_inference_bytes=len(payload)-len(old),train_examples_cumulative=(t+1)*N_EXAMPLES,optimizer_updates_cumulative=0,active_compute_proxy=active,wall_time_s=None,inference_examples_per_s=None,payload_sha256=hashlib.sha256(payload).hexdigest(),retention_task0_mse=errs[0],reconstruction_max_abs_diff=replay_diff))
         elapsed=time.perf_counter()-start
         infer_start=time.perf_counter()
         for _ in range(200):
-            for fn in fns: _=xte@fn
+            for j in range(N_TASKS): _=infer_one(method,xte,base,basis,params[j])
         infer_elapsed=time.perf_counter()-infer_start
         throughput=200*N_TASKS*len(xte)/max(infer_elapsed,1e-12)
         for row in rows[-N_TASKS:]: row['wall_time_s']=elapsed; row['inference_examples_per_s']=throughput

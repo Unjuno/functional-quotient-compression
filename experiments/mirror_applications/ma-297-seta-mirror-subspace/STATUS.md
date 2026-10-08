@@ -1,24 +1,24 @@
 # MA-297 status
 
-- Status: SCREENING
+- Status: FAIL
 - Branch: `research/ma-297-seta-mirror-subspace-20261008`
 - Base commit: `e259f27`
-- Last verified commit: pending
 - Development complete: yes
-- Fresh/audit opened: no
-- Results committed: no
-- Verification committed: no
-- Registry row updated: no
+- Fresh/audit opened: yes, locked seeds only
+- Results committed: pending
+- Verification committed: pending
+- Registry row updated: pending
 
 ## Next action
 
-Commit the frozen one-pair setting, then run fresh seeds 29711–29713.
+Commit and push checked result, registry, board, and claim-ledger updates.
 
 ## Blockers
 
-None. PyTorch is absent; the registered CPU screening harness will use NumPy/SciPy and state that limitation.
+None.
 
 ## Decisions / rulings
 
-- Candidate selection was randomized and recorded in PROTOCOL.json.
-- This protocol is a synthetic screening abstraction rather than full SETA reproduction.
+- The random candidate draw, pool, and index are in `PROTOCOL.json`.
+- Corrected audit state reconstruction, method-specific serialization, and payload-based quality use the same fresh seeds; invalid initial audit tables are retained.
+- FAIL: two fresh aligned seeds miss the 1.10 relative-quality ratio; Mirror also incurs a large fit-compute and inference-throughput penalty.
