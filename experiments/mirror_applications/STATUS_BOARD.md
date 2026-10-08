@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (163 completed; 467 UNTESTED)
+- P0: **630** (163 completed; 466 UNTESTED; 1 SCREENING)
 - P1: **422** (13 completed; 409 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **120 FAIL, 11 NOT ESTABLISHED, 45 PROMISING, 979 UNTESTED**
+- Current MA statuses: **120 FAIL, 11 NOT ESTABLISHED, 45 PROMISING, 978 UNTESTED, 1 SCREENING**
 - 47 baseline experiment directories remain present; 129 additional per-ID outcomes are linked to their dedicated research branches in `LIVE_BRANCH_RECONCILIATION.csv`.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This was the intake-time queue; current selection follows the live-branch reconciliation at the top of this board.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed at intake time; later live-branch outcomes are indexed above.
@@ -23,14 +23,14 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**Pending live branch refresh.** MA-424 completed its frozen mechanism screen as FAIL. The continuous-depth family is paused after MA-424 repeated MA-427's native-conditioning alias; select the next P0 outside paused families after refresh.
+**MA-434 — Mamba selective-state Mirror roles (P0; PA73)** — active; protocol frozen, development screen pending. The continuous-depth family MA-424..433 remains paused.
 
-Live research branches were fetched after MA-419; MA-424/425 had no terminal branch. MA-427 is a prior FAIL showing DEQ rank-1 conditioning exactly aliased native task-bias conditioning. MA-424 has now failed for the same family-level cause: direct generated MLP weights produced byte-identical state and identical trajectories. Its Givens view also had a 0.474x runtime ratio in one seed and only 5.55e-4–7.39e-4 RMS mode diversity. Pause MA-424..433 pending redesign; see [continuous-depth diagnostic](../../docs/phase2/NEURAL_ODE_MIRROR_FAMILY_DIAGNOSTIC_2026-10-08.md). MA-416..421 remain paused. MA-325 remains NOT ESTABLISHED because the frozen task was unlearnable even for the independent control. MA-369/371/372 remain paused under the documented family rule. The conditional-modulation family MA-401/403/405 and MA-407/408/411/413 remains paused pending a fused-kernel redesign.
+Live branches were fetched after MA-424; no competing MA-434/436/437 branch was present. MA-434 is the next P0 outside the paused families. It uses a minimal selective diagonal recurrence only; it is not a full Mamba or language-model experiment. The continuous-depth family MA-424..433 remains paused after the repeated native-conditioning alias; see [continuous-depth diagnostic](../../docs/phase2/NEURAL_ODE_MIRROR_FAMILY_DIAGNOSTIC_2026-10-08.md). MA-416..421 remain paused. MA-325 remains NOT ESTABLISHED because the frozen task was unlearnable even for the independent control. MA-369/371/372 remain paused under the documented family rule. The conditional-modulation family MA-401/403/405 and MA-407/408/411/413 remains paused pending a fused-kernel redesign.
 
 
 ## Active experiment
 
-MA-416 through MA-419 and MA-424 are verified development-screen FAILs, with fresh seeds sealed. MA-424 saved 84.5% payload bytes versus independent fields but exactly aliased a native generated-weight control and missed one seed's runtime gate. Two continuous-depth candidates now share this native-conditioning failure cause, so MA-424..433 are paused. See [MA-424 report](ma-424-neural-ode-mirror-modes/README.md), [verification](ma-424-neural-ode-mirror-modes/VERIFICATION.json), [continuous-depth diagnostic](../../docs/phase2/NEURAL_ODE_MIRROR_FAMILY_DIAGNOSTIC_2026-10-08.md), [MA-419 report](ma-419-modulated-periodic-activations/README.md), and [latent-code diagnostic](../../docs/phase2/LATENT_CODE_MIRROR_FAMILY_DIAGNOSTIC_2026-10-08.md).
+MA-416 through MA-419 and MA-424 are verified development-screen FAILs, with fresh seeds sealed. MA-424 saved 84.5% payload bytes versus independent fields but exactly aliased a native generated-weight control and missed one seed's runtime gate. Two continuous-depth candidates now share this native-conditioning failure cause, so MA-424..433 are paused. MA-434 is the current active P0 with a fixed selective-SSM role-decay protocol. See [MA-424 report](ma-424-neural-ode-mirror-modes/README.md), [verification](ma-424-neural-ode-mirror-modes/VERIFICATION.json), [continuous-depth diagnostic](../../docs/phase2/NEURAL_ODE_MIRROR_FAMILY_DIAGNOSTIC_2026-10-08.md), [MA-419 report](ma-419-modulated-periodic-activations/README.md), and [latent-code diagnostic](../../docs/phase2/LATENT_CODE_MIRROR_FAMILY_DIAGNOSTIC_2026-10-08.md).
 
 
 ## Verified status index
