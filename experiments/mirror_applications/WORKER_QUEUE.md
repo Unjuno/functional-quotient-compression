@@ -14,7 +14,7 @@ Use:
 
 ## Live selection snapshot — 2026-10-08
 
-The latest canonical baseline and reconciled result branches have been merged into the current worker chain. MA-255/260/261/265/266/268 and the second research-expansion sequence through MA-299 have recorded outcomes. MA-257 is FAIL against its exact PA16 rotation-context control; MA-258 is PROMISING only for an aligned post-fit expert-bank codec, with unrelated functions requiring richer/private state. MA-266 is FAIL because the non-Mirror coefficient-product control matched within 2.1% bytes; together with MA-265, pause MA-267 pending family redesign. MA-301 and MA-307 are complete on dedicated remote branches; MA-307 retained a 35.9% aligned storage reduction but failed its strict runtime gate in 1/3 fresh worlds. MA-311 then failed its nearest-control total-byte gate (1,248B vs 1,140B direct coefficients) and its angle-fit compute proxy was 17.7M vs 16.9k; fresh stayed sealed. MA-312 passed its narrow aligned storage/quality screen on 3/3 fresh worlds (1,600B vs 2,100B direct coefficients), but the fit proxy was 70.78M vs 67.6k and runtime slower. MA-314 is PROMISING only for a separate aligned-only 48-task variant (10.1% fewer bytes than adaptive coefficients, 3/3 fresh); its broad mixed/private variant FAILed at +5.2% bytes vs adaptive direct and used ~103x fit proxy. The next executable untested P0 is **MA-315**. MA-297/299 SETA and MA-265/266 VeRA families are paused pending redesign. The appended MA-1116..1155 intake remains behind P0 work. This snapshot supersedes older queue paragraphs below that still name MA-255, MA-260, or MA-265 as next. Recheck the live registry and branch list before each new experiment.
+The latest canonical baseline and reconciled result branches have been merged into the current worker chain. MA-255/260/261/265/266/268 and the second research-expansion sequence through MA-299 have recorded outcomes. MA-257 is FAIL against its exact PA16 rotation-context control; MA-258 is PROMISING only for an aligned post-fit expert-bank codec, with unrelated functions requiring richer/private state. MA-266 is FAIL because the non-Mirror coefficient-product control matched within 2.1% bytes; together with MA-265, pause MA-267 pending family redesign. MA-301 and MA-307 are complete on dedicated remote branches; MA-307 retained a 35.9% aligned storage reduction but failed its strict runtime gate in 1/3 fresh worlds. MA-311 then failed its nearest-control total-byte gate (1,248B vs 1,140B direct coefficients) and its angle-fit compute proxy was 17.7M vs 16.9k; fresh stayed sealed. MA-312 passed its narrow aligned storage/quality screen on 3/3 fresh worlds (1,600B vs 2,100B direct coefficients), but the fit proxy was 70.78M vs 67.6k and runtime slower. MA-314 is PROMISING only for a separate aligned-only 48-task variant (10.1% fewer bytes than adaptive coefficients, 3/3 fresh); its broad mixed/private variant FAILed at +5.2% bytes vs adaptive direct and used ~103x fit proxy. MA-315, MA-319, MA-320 and MA-322 are complete; the next untested P0 by registry order is **MA-303**. MA-297/299 SETA and MA-265/266 VeRA families are paused pending redesign. The appended MA-1116..1155 intake remains behind P0 work. This snapshot supersedes older queue paragraphs below that still name MA-255, MA-260, MA-265 or MA-315 as next. Recheck the live registry and branch list before each new experiment.
 
 ## Selection rule
 
@@ -81,7 +81,7 @@ High-information P0:
 6. MA-315 — shared intrinsic basis + sparse private coordinate residual
 7. MA-319 — Tucker matrix-bank Mirror layer coefficients
 8. MA-320 — Tucker logical experts
-9. MA-322 — TT-core Mirror adapter bank
+9. ~~MA-322 — TT-core Mirror adapter bank~~ (FAIL: aligned byte gain 0.51%; mixed is 0.15% larger; fit proxy ~1,536x)
 10. MA-325 — tensorized embedding domain views
 11. MA-327 — factorized layer x expert Tucker address
 12. MA-330 — tensorized KV reconstruction
@@ -466,3 +466,7 @@ If two consecutive candidates in a family fail for the same demonstrated structu
 ## MA-257 result pointer — 2026-10-08
 
 MA-257 failed its Mirror-specific gate at development: the native PA16 factorized rotational-context control is an exact function/payload alias. Fresh remains sealed. Next: MA-258.
+
+## Current worker checkpoint — 2026-10-08
+
+MA-315, MA-319, MA-320 and MA-322 have recorded outcomes on dedicated research branches. MA-322 failed the strict total-byte gate despite aligned quality passing; see its report. Registry-order selection now resumes at MA-303.
