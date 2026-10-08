@@ -153,6 +153,26 @@ Separate server/global bytes, per-client state, communication and client compute
 ### Representation-space / function-vector / sparse-feature experiments
 Read the PA references in the live registry row; these candidates may have been added concurrently by another research agent. Do not assume their current IDs from an older document.
 
+### Cross-model KV translation and handoff (MA-876..890)
+
+Read PA236–PA239 and `docs/phase2/MIRROR_KV_CACHE_REUSE.md`. Compare exact algebra and approximate fitted transfer as **different evidence lanes**. Native per-pair ridge, CacheBridge, MoT and re-prefill are mandatory relevant baselines. Count calibration/construction costs, map bytes, source prefill, target token provenance and target NLL, attention error, switching dwell length and end-to-end latency. Hold out ordered model pairs.
+
+### Neural scenes, NeRF, dynamic Gaussian assets (MA-891..905)
+
+Read PA243–PA252 and PA265. Use native C-NGP, ReFiNe, Instant-NGP, TensoRF, K-Planes, 4DGS, ADC-GS, CC-4DGS, P-4DGS as relevant controls. Report full hash/field/anchor/scene bytes and coded bitstream, PSNR, LPIPS, temporal/cross-view consistency, encoder time, actual FPS and peak VRAM.
+
+### Speech adaptation and neural audio codecs (MA-906..918)
+
+Read PA253–PA259. NanoVoice, HyperTTS, zero-shot MoA and Hyper-MoA already share speaker parameters. Test added Mirror `m` beyond these, with held-out speakers, speaker identity and intelligibility separately, voice/codec marginal bytes, realtime factor, and appropriately licensed/consented audio.
+
+### Flow maps, learned samplers and diffusion LoRA fusion (MA-919..928)
+
+Read PA260–PA264. Preserve native FMM interval conditioning, Consistency, S4S, LoRA.rar and EST-LoRA controls. Count NFEs, time/schedule/solver/LoRA state, measured GPU latency, FID/fidelity, and held-out interval/subject-style compositions.
+
+### Cross-model stitching and information retention (MA-929..935)
+
+Read PA240–PA242. Compare StitchLLM and per-model affine residual-stream stitchers. Evaluate target NLL, transferred SAE/probe feature consistency, connector/router bytes, held-out model/layer pairs, and informational/counterfactual negative controls. Output match alone does not prove shared knowledge.
+
 ## Historical result loading rule
 
 Do **not** load every SRM/MS/MN document.
