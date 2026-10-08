@@ -1,19 +1,85 @@
 {
   "experiment_id": "MA-401",
   "commit": null,
-  "protocol_frozen": true,
+  "protocol_frozen_before_development": true,
   "tests": {
-    "passed": null,
-    "failed": null
+    "passed": 3,
+    "failed": 0
   },
-  "fresh_opened": false,
+  "development_selection": {
+    "experiment_id": "MA-401",
+    "selected_learning_rate": 0.01,
+    "mean_validation_nll_by_lr": {
+      "0.003": 0.24761032965416666,
+      "0.01": 0.17586503829791666
+    },
+    "development_worlds": [
+      40100,
+      40101
+    ],
+    "fresh_worlds_locked": [
+      40110,
+      40111,
+      40112
+    ]
+  },
+  "fresh_summary": {
+    "shared": {
+      "mean_accuracy": 0.9333333316666667,
+      "mean_nll": 0.19962381073333332,
+      "serialized_bytes": 24029,
+      "mean_train_wall_s": 0.256463,
+      "mean_inference_examples_per_second": 4804494.977083334
+    },
+    "mirror": {
+      "mean_accuracy": 0.9384259283333334,
+      "mean_nll": 0.191860329375,
+      "serialized_bytes": 25037,
+      "mean_train_wall_s": 0.4222013333333333,
+      "mean_inference_examples_per_second": 2522486.6643333333
+    },
+    "film4": {
+      "mean_accuracy": 0.9361111075,
+      "mean_nll": 0.19355320805833334,
+      "serialized_bytes": 25037,
+      "mean_train_wall_s": 0.38934366666666664,
+      "mean_inference_examples_per_second": 3284664.852
+    },
+    "film8": {
+      "mean_accuracy": 0.9400462908333334,
+      "mean_nll": 0.18599865213333333,
+      "serialized_bytes": 25983,
+      "mean_train_wall_s": 0.40799466666666667,
+      "mean_inference_examples_per_second": 3252677.700583333
+    },
+    "rank1": {
+      "mean_accuracy": 0.9506944458333333,
+      "mean_nll": 0.15789018945,
+      "serialized_bytes": 26879,
+      "mean_train_wall_s": 0.376883,
+      "mean_inference_examples_per_second": 4118539.0658333334
+    },
+    "independent": {
+      "mean_accuracy": 0.9719907425,
+      "mean_nll": 0.09056874115833333,
+      "serialized_bytes": 84787,
+      "mean_train_wall_s": 0.9136596666666666,
+      "mean_inference_examples_per_second": 4632720.486833333
+    }
+  },
   "serialization": {
-    "roundtrip_checked": false
+    "roundtrip_checked": true,
+    "max_abs_logit_difference": 0.0,
+    "payload_hashes_checked": true
   },
   "metric_replay": {
-    "checked": false
+    "rows": 168,
+    "max_metric_difference": 4.850616464047164e-09
   },
+  "decision": "FAIL",
   "notes": [
-    "Fresh worlds 40110-40112 remain sealed."
+    "Four deterministic pixel permutation contexts, same stratified example identities across contexts.",
+    "Mirror misses both the registered +1pp improvement over shared and Mirror-specific gain over same-byte FiLM4; FiLM8 and rank1 controls are stronger.",
+    "Small digits feature-conditioning screen, not Transformer evidence."
   ]
 }
