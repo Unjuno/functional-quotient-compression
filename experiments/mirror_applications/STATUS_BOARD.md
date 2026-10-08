@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (185 completed; 445 UNTESTED; 0 SCREENING)
+- P0: **630** (185 completed; 444 UNTESTED; 1 SCREENING)
 - P1: **422** (13 completed; 409 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **139 FAIL, 14 NOT ESTABLISHED, 45 PROMISING, 957 UNTESTED, 0 SCREENING**
+- Current MA statuses: **139 FAIL, 14 NOT ESTABLISHED, 45 PROMISING, 956 UNTESTED, 1 SCREENING**
 - 47 baseline experiment directories remain present; 146 additional per-ID outcomes are linked to their dedicated research branches in `LIVE_BRANCH_RECONCILIATION.csv`.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This was the intake-time queue; current selection follows the live-branch reconciliation at the top of this board.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed at intake time; later live-branch outcomes are indexed above.
@@ -29,7 +29,7 @@ MA-434 and MA-436 found exact native SSM parameterization aliases; MA-442 and MA
 
 ## Active experiment
 
-MA-486 FAIL: sparse int8 reduced bytes 11.8% and decode operations 90.6% versus dense int8, but missed the frozen 20% byte gate and exactly aliased native OMP. Fresh stayed sealed. MA-487 LISTA inference is next, with OMP/native sparse controls.
+MA-486 FAIL: sparse int8 reduced bytes 11.8% and decode operations 90.6% versus dense int8, but missed the frozen 20% byte gate and exactly aliased native OMP. Fresh stayed sealed. MA-487 is active: learned LISTA code inference vs direct top-3 and OMP, with actual predictor bytes, heldout output quality, active atoms and inference compute.
 
 MA-461 and MA-466 are verified development-screen FAILs; MA463 remains paused with MA-461/462. MA-466 shows useful factorized gates but no Mirror-specific gain over native CP and misses the strict byte gate.
 
