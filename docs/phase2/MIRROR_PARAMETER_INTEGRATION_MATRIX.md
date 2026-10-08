@@ -61,6 +61,13 @@ The table below tells workers where to try the same extra low-description functi
 | Wireless beam control | physical antenna/RIS and learned beam codebook | site×user×frequency/channel `m` | compact logical beams at fixed signaling and spectral efficiency? | NBL, Type-II CSI, RIS optimization, CsiNet |
 | Personalized HRTF | shared neural spectral field and retrieval data | listener×direction×head-pose `m` | individualized binaural functions with fewer measurements/bytes? | RANF, anthropometric HRTF latent |
 
+| Atomistic materials / force fields | equivariant MACE/NequIP potential and sparse fine-tune support | material×element×environment m | domain-specific conservative forces at fewer stored bytes? | MACE-MP, sparse E3 fine-tuning, NequIP |
+| Physics-consistent MRI | VarNet/MoDL learned regularizer and data-consistency projection | scanner×contrast×unroll-step m | reconstruct different acquisitions without independent full priors? | VarNet, MoDL, DUNE, D2SA, SSDU |
+| Quantum circuit parameters | fixed compiled variational ansatz and classical TT parameter generator | task×gate-block m | logical circuits sharing a paid physical ansatz? | Data reuploading, TensorHyper-VQC, hardware transpiler |
+| Visual-language prompts | frozen CLIP and coupled visual/text prompt basis | class×domain×modality m | useful base-to-new visual functions per prompt byte? | CoOp, CoCoOp, MaPLe |
+| Video object segmentation | SAM2 temporal memory and mask decoder with per-object states | object×time×memory-path m | more tracked objects per physical memory with stable masks? | SAM2, SAM2Long, MoPEFT |
+| ANN retrieval index | shared codebooks, late-interaction centroids, disk graph index | task×query×shard×budget m | useful ranking change without rebuilding index? | RaBitQ, ScaNN, ColBERTv2, PLAID, QINCo, DiskANN |
+
 ## Required variants after a direct screen
 
 A family that passes a first mechanism screen should usually be expanded in this order:

@@ -5,11 +5,11 @@ Purpose: concise operational context for every new MA worker. Dedicated experime
 
 ## Reconciled program and new research intake — 2026-10-08
 
-This file's detailed five experimental reports are still valid, but not the complete MA count. The canonical worker-ready branch now indexes **47 completed MA experiments**: 29 PROMISING, 18 FAIL. The eleventh and twelfth literature sweeps added **120 entirely UNTESTED** candidates, bringing the registry to **995**, with **948 UNTESTED** total.
+This file's detailed five experimental reports are still valid, but not the complete MA count. The canonical worker-ready branch now indexes **47 completed MA experiments**: 29 PROMISING, 18 FAIL. The eleventh through thirteenth literature sweeps added **170 entirely UNTESTED** candidates, bringing the registry to **1045**, with **998 UNTESTED** total.
 
-Read `experiments/mirror_applications/STATUS_BOARD.md` and `docs/phase2/MIRROR_MA_EVIDENCE_INTEGRATION_2026-10-08.md` for all 47 verified historical experiment reports and their scoped claims. New prior art PA236..265 and MA876..935 are detailed in `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08.md`. Additional prior art PA266..295 and MA936..995 are detailed in `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_TWELFTH_SWEEP.md`.
+Read `experiments/mirror_applications/STATUS_BOARD.md` and `docs/phase2/MIRROR_MA_EVIDENCE_INTEGRATION_2026-10-08.md` for all 47 verified historical experiment reports and their scoped claims. New prior art PA236..265 and MA876..935 are detailed in `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08.md`. Additional prior art PA266..295 and MA936..995 are detailed in `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_TWELFTH_SWEEP.md`. PA296..325 and MA996..1045 are documented in `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_THIRTEENTH_SWEEP.md`. The read-only `experiments/mirror_applications/check_registry_integrity.py` audits MA-1000+ IDs, PA/claim consistency and the status board.
 
-**The next candidate remains MA-255.** MA-876..995 are research-intake candidates and must not preempt previously registered P0 crossovers. Natural variation and benchmark-level runtime remain unproven; aligned synthetic PROMISING must not be described as real-world Mirror adoption.
+**The next candidate remains MA-255.** MA-876..1045 are research-intake candidates and must not preempt previously registered P0 crossovers. Natural variation and benchmark-level runtime remain unproven; aligned synthetic PROMISING must not be described as real-world Mirror adoption.
 
 ## MA-241 — layer-specific Mirror views over tied experts
 

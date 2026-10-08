@@ -84,7 +84,7 @@ Workers may share code/checkpoints/data fixtures across candidates in the same f
 - Never implement experiments by editing `third_party/nanoGPT/`; use it as a stable baseline.
 - Never overwrite historical SRM/TM protocols.
 - Never merge to main unless explicitly requested.
-- Use stable MA IDs; never recycle them.
+- Use stable MA IDs; never recycle them. MA IDs are decimal of variable length (MA-001 through MA-1045+); do not assume a fixed three-digit regex or `MA-xxx` slice. Run the read-only `experiments/mirror_applications/check_registry_integrity.py` after updating registry/claim/status documents.
 - Large checkpoints may stay outside Git, but hashes/provenance must be recorded.
 
 ## Stop / escalate conditions

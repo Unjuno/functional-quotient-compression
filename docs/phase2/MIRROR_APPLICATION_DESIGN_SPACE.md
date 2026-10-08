@@ -83,7 +83,12 @@ The registry treats any repeated object as a candidate:
 - spiking synapse/threshold/membrane/neuromodulatory functions;
 - programmable optical MZI/PCM/diffractive physical operators;
 - wireless antenna beamforming, RIS phase and CSI-feedback subspaces;
-- individualized HRTF spatial-audio fields and head-pose coordinates.
+- individualized HRTF spatial-audio fields and head-pose coordinates;
+- conservative materials potentials and sparse domain-conditioned equivariant forces;
+- physics-constrained multicoil MRI reconstruction and scan adaptation;
+- quantum variational circuits with paid gate/shot/program resource budgets;
+- coupled vision-language prompts and per-object streaming segmentation memories;
+- task-aware retrieval index, generated residual codebooks and ANN search policies.
 
 ## Four mechanism classes
 

@@ -5,7 +5,7 @@ Status: active backlog roadmap
 
 ## Goal
 
-Systematically test whether the extra low-description Mirror parameter m can replace duplicated physical state or improve logical functional freedom in strong existing methods. The registry now has **995** candidate experiments; MA-876..935 were added as UNTESTED research targets on 2026-10-08.
+Systematically test whether the extra low-description Mirror parameter m can replace duplicated physical state or improve logical functional freedom in strong existing methods. The registry now has **1045** candidate experiments; MA-876..935 were added as UNTESTED research targets on 2026-10-08.
 
 The unit of work is an MA-xxx entry from:
 `experiments/mirror_applications/IDEA_REGISTRY.csv`.
@@ -277,6 +277,26 @@ MA-981..989 tests site×user×frequency/channel Mirror coordinates over shared p
 ### AG. Spatial-audio head transfer functions
 
 MA-990..995 tests one shared HRTF neural spectral basis with listener/direction/head-pose m. RANF retrieval and anthropometric listener latents are closest prior methods. Target listener held-outs and physical binaural transfer quality (spectral distortion, ITD/ILD/localization) per stored bit and head-motion update time.
+
+### AH. Constraint-preserving Mirror over atomistic potentials
+
+MA996–1005 add material/chemistry codes to native equivariant MACE-MP/NequIP/MatterSim force fields. Conservation of forces as negative energy gradients, E3 equivariance and long-run trajectory stability are hard gates. Sparse equivariant fine-tuning and frozen transfer are direct controls; see PA296–301.
+
+### AI. MRI unrolled inversion with immutable measurement consistency
+
+MA1006–1015 insert m only into learned VarNet/MoDL/DUNE reconstruction priors or scanner adaptation, preserving k-space data consistency. D2SA test-time adaptation and SSDU split measurements are native comparators; see PA302–307.
+
+### AJ. Quantum circuits under physical resources
+
+MA1016–1023 factor variational ansatz/task gates into small Mirror codes over one compiled circuit. Data reuploading, TensorHyper-VQC, superposed parameter circuits and transpiled device costs are mandatory baselines; count gates, shots, qRAM and postselection; see PA308–311.
+
+### AK. Vision-language prompts and long-video object memory
+
+MA1024–1034 target shared prompt/adapter/memory state, with CoOp, CoCoOp, MaPLe, SAM2, SAM2Long and MoPEFT as native controls. Measure base-to-new class transfer, tracked-object J&F, prompt/memory bytes and FPS; see PA312–317.
+
+### AL. Retrieval indexes and implicit quantizer codebooks
+
+MA1035–1045 test compact task/shard/metric m over fixed ScaNN/RaBitQ/Matryoshka, QINCo/ColBERTv2/PLAID, DiskANN and PGM index. Measure true recall, encoded physical index bytes, SSD reads, P99 and update bounds. Isometric/gauge rank-preserving transformations do not constitute new independent search capability; see PA318–325.
 
 ## KV-cache transformation lane
 
