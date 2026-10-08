@@ -1,1 +1,28 @@
-{"experiment_id":"MA-732","draw_id":"Draw42","protocol_sha256":"","draw_record_sha256":"","results_sha256":"","audit_replay":"pending","serialized_payload_replay":"pending","checks":[]}
+{
+  "experiment_id": "MA-732",
+  "draw_id": "Draw42",
+  "protocol_sha256": "29c971611e6ec82e570e75f2609c6724e4b1ecf9175e8c099a5718c97fa062c3",
+  "draw_record_sha256": "0ec1495175ed4e21cb5eeb57e3e95a74194da35d724b38bd4849bfb1c127d26a",
+  "results_sha256": "0fbd8bde967523ccaee06d7937fd6dfd62c168b2714cc0417e551d50da6a821a",
+  "audit_replay": "pending",
+  "serialized_payload_replay": "pending",
+  "checks": [
+    {
+      "name": "focused tests",
+      "command": "pytest -q experiments/mirror_applications/ma-732-factorized-pde-mirror/tests",
+      "passed": 2,
+      "failed": 0
+    },
+    {
+      "name": "fixed-seed fresh replay",
+      "command": "python experiments/mirror_applications/ma-732-factorized-pde-mirror/source/run_experiment.py --seeds 73211 73212 73213",
+      "passed": true,
+      "notes": "quality and serialized bytes reproduced; wall time is runtime calibration"
+    },
+    {
+      "name": "heldout factorization",
+      "passed": true,
+      "notes": "12 fresh heldout combos; factorized and direct conditioned operator have equal payload bytes"
+    }
+  ]
+}
