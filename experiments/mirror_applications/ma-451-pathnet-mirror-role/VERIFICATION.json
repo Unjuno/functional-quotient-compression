@@ -1,19 +1,35 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-451",
+  "status": "VERIFIED_DEVELOPMENT_SCREEN",
+  "protocol_sha256": "43ef022787d98870eba17b5bfb78184ca9a0a246d6c83a74e2247cd2e6be8787",
+  "development_gate_passed": false,
+  "fresh_accessed": false,
+  "serialization_roundtrip_checked": true,
+  "metric_replay_checked": true,
+  "native_alias_replay": "PASS",
+  "checks": [
+    {
+      "seed": 45101,
+      "mirror_bytes": 1557,
+      "native_bytes": 1557,
+      "mirror_native_rmse_difference": 0.0
+    },
+    {
+      "seed": 45102,
+      "mirror_bytes": 1557,
+      "native_bytes": 1557,
+      "mirror_native_rmse_difference": 0.0
+    }
+  ],
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "pytest -q -p no:cacheprovider experiments/mirror_applications/ma-451-pathnet-mirror-role/tests",
+    "passed": 4,
+    "failed": 0
   },
-  "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
-  },
-  "metric_replay": {
-    "checked": false,
-    "max_difference": null
-  },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "notes": [
+    "Mirror improved path-only RMSE 50%/54% on the two aligned dev worlds, but actual payload was 1.265x path-only and about 1.96x independent task vectors.",
+    "Mirror/native parameter arrays, payload hashes and query RMSE are identical in both seeds.",
+    "End-to-end adaptation was 5.8x/3.3x slower than rank-2 additive control.",
+    "Independent task vectors achieved RMSE <=0.025; fresh seeds 45111-45113 sealed."
+  ]
 }

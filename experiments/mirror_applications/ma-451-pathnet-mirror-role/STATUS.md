@@ -1,19 +1,19 @@
 # MA-451 status
 
-- Status: SCREENING
+- Status: FAIL (verified development screen)
 - Branch: `research/ma-451-pathnet-mirror-role-20261008`
 - Base commit: `1569029`
-- Protocol frozen: yes; SHA-256 43ef022787d98870eba17b5bfb78184ca9a0a246d6c83a74e2247cd2e6be8787
-- Last verified commit: pending
-- Development complete: no
-- Fresh/audit opened: no
+- Frozen protocol SHA-256: `43ef022787d98870eba17b5bfb78184ca9a0a246d6c83a74e2247cd2e6be8787`
+- Last verified commit: pending terminal report commit
+- Development complete: yes (45101, 45102)
+- Fresh/audit opened: no; seeds 45111–45113 remain sealed
 - Results committed: no
 - Verification committed: no
-- Registry row updated: SCREENING
+- Registry row updated: FAIL
 
 ## Next action
 
-Run only development seeds 45101 and 45102; fresh seeds remain sealed.
+Commit and push this verified FAIL, reconcile the live branch evidence, refresh the remote branches and select the next eligible P0.
 
 ## Blockers
 
@@ -21,4 +21,4 @@ None.
 
 ## Decisions / rulings
 
-No amendments.
+No amendments. PathNet path-only control is present; exact native Givens alias, byte/runtime misses, and output replay were checked. Fresh seeds remain sealed.
