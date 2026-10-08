@@ -3,12 +3,12 @@
 - Status: FAIL; both development worlds miss quality, byte and hard-sharing gates.
 - Branch: `research/ma-385-dualprompt-mirror-expert-20261008`
 - Base commit: `0c3580b`
-- Last verified commit: pending
+- Last verified commit: `812b421`
 - Development complete: yes (seeds 38501, 38502)
 - Fresh/audit opened: no
-- Results committed: yes (pending final commit)
-- Verification committed: yes (pending final commit)
-- Registry row updated: yes in working tree (FAIL)
+- Results committed: yes (`812b421`)
+- Verification committed: yes (`812b421`)
+- Registry row updated: yes (FAIL)
 
 ## Next action
 
