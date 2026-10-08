@@ -32,7 +32,7 @@ Doctrine: `docs/phase2/MIRROR_PARAMETER_INTEGRATION_DOCTRINE.md`
 ### PASS
 On all three fresh worlds, Mirror held-out-combination MSE is at least 20% below additive control, within 10% of free per-relation basis control on seen combinations, and serialized marginal relation-coordinate payload (excluding the shared basis common to all methods) is at most 60% of the native free coefficient-table payload. Full inference payload bytes are also reported and must be lower than the free-coefficient model. Runtime is reported as a separate axis.
 
-A pre-development protocol amendment clarifies the storage denominator: the shared basis is common to all models, so the compression gate is on the separately serialized marginal relation-coordinate payload. No model, data, optimizer or quality threshold changed.
+Pre-fresh amendments clarify the storage denominator and permit a 600-update equal-budget development option after the initial 150-update screen exposed a potential optimization confound. No fresh data were accessed. The storage amendment states: the shared basis is common to all models, so the compression gate is on the separately serialized marginal relation-coordinate payload. No model, data, optimizer or quality threshold changed.
 
 ### FAIL
 Mirror does not improve on additive factors on held-out combinations, exceeds the seen-relation quality tolerance, or fails to reduce actual serialized bytes against free per-relation coefficients. If additive factors match Mirror, the result is not Mirror-specific.
@@ -42,8 +42,8 @@ Synthetic mechanism only; no real-KG or link-prediction claim.
 
 ## Tuning boundary
 
-- Development worlds: seeds 7421 and 7422. Ranks `(2, 4, 8)` selected by mean held-out-combination MSE, with bytes as tie-break.
-- Fresh worlds: seeds 74201, 74202 and 74203. Rank and all training settings freeze before evaluation.
+- Development worlds: seeds 7421 and 7422. Ranks `(2, 4, 8)` and equal optimizer updates `(150, 600)` are dev-only choices; choose the lowest-compute setting meeting both predeclared seen-quality and held-out-combination gates.
+- Fresh worlds: seeds 74201, 74202 and 74203. Rank and update count freeze before evaluation.
 
 ## Random selection provenance
 
