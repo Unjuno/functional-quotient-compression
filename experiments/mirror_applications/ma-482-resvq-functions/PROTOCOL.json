@@ -1,0 +1,20 @@
+{
+  "experiment_id": "MA-482",
+  "title": "Residual-VQ Mirror code composition for logical linear functions",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/FUNCTION_MULTIPLICITY/STORAGE/QUALITY/COMPUTE",
+  "base_commit": "1b6ccdf9d5707529507d6bc5ee49e97133337b49",
+  "hypothesis": "On the same rank-four function bank as MA-481, train-only residual VQ at K=8 or 16 and 2/3/4 stages will improve the heldout function-quality/byte frontier over single-stage VQ, with at least one config achieving RMSE <=0.05, >=0.90 unique heldout address tuples, and <=6,101 actual serialized bytes in both development seeds.",
+  "physical_object": "four shared 16x16 matrix atoms fitted on 128 functions",
+  "mirror_coordinate": "ordered tuple of residual-VQ stage indices selecting a sum of residual latent code vectors",
+  "logical_multiplicity": "192 callable linear functions; 128 train and 64 heldout",
+  "prior_art_refs": ["PA92"],
+  "controls": ["independent full matrix bank", "continuous shared-basis codes", "per-coordinate int8 codes", "single-stage VQ K=16/64/128", "native residual VQ exact parameterization/serializer"],
+  "task": {"type":"synthetic rank-four function bank","dimension":16,"functions":192,"train":128,"heldout":64,"queries_per_function":64,"latent_rank":4,"residual_vq_sizes":[8,16],"residual_vq_depths":[2,3,4],"single_vq_sizes":[16,64,128],"fit":"SVD on training matrices; each residual codebook fitted by train-only Euclidean k-means with 100 Lloyd steps; heldout coordinates encoded stagewise using frozen codebooks"},
+  "development": {"seeds":[48201,48202],"selection_metrics":["heldout function output RMSE","unique heldout address-tuple fraction","actual serialized bytes","fit/decode/query wall time and operation proxies"],"hyperparameter_changes_after_run":"prohibited without numbered amendment"},
+  "fresh": {"seeds":[48211,48212,48213],"locked_before_access":true,"opened":false},
+  "storage": {"authority":"actual uncompressed NPZ payload bytes","paid_objects":["shared atoms","all stage codebook centers","one index per function per stage","codebook/stage schema and function ordering metadata"]},
+  "compute": {"report_examples":true,"report_optimizer_updates":true,"report_fit_wall":true,"report_decode_wall":true,"report_query_wall":true,"report_active_ops":true,"report_shared_decode_ops":true,"report_vq_fit_ops":true,"report_index_decode_ops":true,"query":"Every function uses the same 64 queries within each world. Matrix evaluation charges D^2 MACs; decoding sums all stage latent vectors then applies shared atoms. Fit includes SVD and all train-only k-means iterations; report heldout address encoding/query separately."},
+  "gates": {"PROMISING":"At least one residual-VQ configuration in both seeds has RMSE <=0.05, unique heldout address tuples >=0.90, complete payload <=6,101 bytes and exact replay; this is only a residual-VQ quality-rate result. No Mirror-specific claim if the native RVQ serializer aliases it.","FAIL":"Independent upper is valid, but no residual config satisfies the quality/uniqueness/byte gate, or residual VQ exactly aliases native RVQ for Mirror-specific attribution.","NOT ESTABLISHED":"Independent upper fails to reproduce targets or serialization/metric replay fails."},
+  "boundaries":["Synthetic rank-four linear bank only; not a trained language model or natural task set.","Nominal code sequence count is not independent function capacity; heldout output behavior and address collisions decide.","Fresh worlds remain sealed unless frozen feasibility gates pass; native RVQ attribution is reported separately."]
+}
