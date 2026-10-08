@@ -1,7 +1,7 @@
 {
   "experiment_id": "MA-303",
   "title": "Factorized layer-mask Mirror codes",
-  "status": "PROTOCOL_FROZEN_BEFORE_DEVELOPMENT",
+  "status": "AMENDMENT_A1_FROZEN_BEFORE_FRESH",
   "base_commit": "7ce8e04",
   "evidence_lane": "MECHANISM/STORAGE/QUALITY/COMPUTE",
   "hypothesis": "On a planted two-factor mask family, Mirror factor coordinates on a fixed random backbone will compose held-out task-factor x layer-factor pairs with test normalized MSE <=0.05 while saving at least 20% actual payload bytes versus Piggyback task masks and at least 10% versus a shared-factor direct coefficient control. On unrelated task masks, quality should reveal where private masks are required.",
@@ -27,7 +27,8 @@
     "threshold": 0.05,
     "development_seeds": [30301, 30302],
     "fresh_seeds": [30311, 30312, 30313],
-    "optimizer_updates": 0
+    "optimizer_updates": 0,
+    "amendment": "A1 adds preregistered validation nMSE fallback execution and explicit support/validation/test example accounting; all numerical gates and fresh seeds unchanged"
   },
   "controls": [
     "shared dense random backbone, no mask",

@@ -1,6 +1,6 @@
 # MA-303 — Factorized layer-mask Mirror codes
 
-Status: protocol frozen before development. Dedicated branch: `research/ma-303-factorized-layer-mask-mirror-20261008`.
+Status: amendment A1 runner frozen; fresh evaluation pending. Dedicated branch: `research/ma-303-factorized-layer-mask-mirror-20261008`.
 
 ## H — hypothesis
 
@@ -13,3 +13,5 @@ Native method is Piggyback-style binary task masks over a fixed random backbone.
 ## Frozen protocol
 
 See `PROTOCOL.json`. Six task factors and six layer factors are observed during development/training. Four combinations from held-out factor IDs are tested in fresh worlds. Each pair has 256 support, 128 validation and 256 test examples. Seeds: development 30301/30302; fresh 30311/30312/30313. No optimizer updates. Actual fixed-timestamp ZIP/NPY bytes are authoritative.
+
+After development, implementation audit found that the initial runner did not apply the declared validation fallback. Amendment A1 added the fallback and explicit split accounting without changing seeds or gates. Initial development JSON is preserved separately as pre-amendment and excluded from the corrected result table. Corrected development runs show held-out max nMSE 0.0, no private fallbacks, and 34,892B Mirror vs 34,920B direct factorized (28B difference, below the frozen 10% promotion margin). Fresh remains locked until the corrected source commit.
