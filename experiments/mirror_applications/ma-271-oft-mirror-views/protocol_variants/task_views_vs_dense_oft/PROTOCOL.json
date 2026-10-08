@@ -1,0 +1,95 @@
+{
+  "experiment_id": "MA-271",
+  "title": "OFT Mirror task views",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/RUNTIME",
+  "base_commit": "f7f76de193063950d28b7834f337840b1e86f0ce",
+  "prior_art_refs": [
+    "PA20"
+  ],
+  "hypothesis": "Structured Mirror orthogonal task coordinates preserve task quality with fewer actual bytes than native OFT and beat byte-near simple orthogonal/low-rank controls.",
+  "physical_object": "One shared 16x16 pretrained linear map",
+  "mirror_coordinate": "Task-specific product of eight adjacent-plane Givens rotations",
+  "logical_multiplicity": "Four task transforms",
+  "task": {
+    "input_dim": 16,
+    "output_dim": 16,
+    "tasks": 4,
+    "metric": "mean/worst heldout MSE"
+  },
+  "controls": [
+    "independent full task maps",
+    "native OFT dense Cayley task transforms",
+    "rank-2 task residual",
+    "shared map plus Mirror Givens Views",
+    "shared map plus exact matrix-free Mirror Givens View"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      {
+        "world": 27100,
+        "init_seed": 271000
+      },
+      {
+        "world": 27101,
+        "init_seed": 271001
+      }
+    ],
+    "learning_rate_candidates": [
+      0.003,
+      0.01
+    ],
+    "updates": 1000,
+    "selection_metric": "mean heldout MSE"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      {
+        "world": 27102,
+        "init_seed": 271002
+      },
+      {
+        "world": 27103,
+        "init_seed": 271003
+      },
+      {
+        "world": 27104,
+        "init_seed": 271004
+      }
+    ],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual torch.save payload plus metadata",
+    "paid_objects": [
+      "shared map",
+      "dense native OFT effective task transforms",
+      "Mirror Givens angle codes sufficient for exact transform reconstruction",
+      "low-rank bases/codes",
+      "metadata"
+    ]
+  },
+  "compute": {
+    "report_examples": true,
+    "report_updates": true,
+    "report_MAC_proxy": true,
+    "report_wall_time": true,
+    "report_throughput": true
+  },
+  "success_gate": "Mirror MSE <=1.10x independent, payload <=60% independent and >=10% better MSE than native OFT at byte-near cost (within 15%) or lower bytes.",
+  "failure_gate": "Mirror misses quality/storage gate or OFT/simple control matches at equal/lower bytes.",
+  "boundaries": [
+    "synthetic linear task family",
+    "no capacity claim",
+    "no optimized-kernel runtime claim"
+  ],
+  "amendments": [
+    {
+      "date": "2026-10-08",
+      "before_fresh_access": true,
+      "reason": "The initial serializer stored dense realized matrices for Mirror and block-orthogonal codes, so it overcharged a deterministically reconstructible Givens transform and made both controls functionally duplicate.",
+      "change": "Mirror inference payload now stores exact learned Givens angles; transform is reconstructed matrix-free. Remove duplicate block_orthogonal arm. Native OFT stores its dense effective orthogonal matrix used for inference. Rerun development and actual-byte checks.",
+      "scope": "No task, methods other than duplicate block control, quality metrics, seeds, updates, gates, or fresh seeds changed."
+    }
+  ]
+}

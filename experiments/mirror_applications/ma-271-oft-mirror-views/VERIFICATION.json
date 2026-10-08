@@ -1,0 +1,34 @@
+{
+  "experiment_id": "MA-271",
+  "commit": "eb9211c5830564363e10cdff71d1a5e34ac8f6e5",
+  "tests": {
+    "command": "python tests/test_roundtrip.py && python tests/test_exact_rank1_control.py",
+    "passed": 2,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "method": "uncompressed NumPy NPZ; shared rank-one and Mirror controls use identical packed parameter arrays"
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_seeds": [
+    127,
+    239,
+    331,
+    443
+  ],
+  "notes": [
+    "Development seeds 27 and 41; fresh seeds fixed before fresh evaluation.",
+    "Mirror is mathematically identical to ordinary rank-one factorization of task-by-plane angles.",
+    "Full and blockwise orthogonal controls preserve Q^T Q and inverse cycle to numerical precision.",
+    "CPU transform microbenchmark only; no optimized-kernel or diffusion claim.",
+    "Added deterministic raw-row audit confirming mirror_view and simple_rank1_angle have identical serialized bytes and metrics on all four fresh seeds in both conditions. A separate trained dense-OFT screen is retained as a distinct protocol variant.",
+    "Added deterministic audit confirming the registered simple rank-one task-code control and Mirror are identical in actual bytes and recorded function metrics over every fresh seed and both conditions."
+  ],
+  "source_branch": "research/ma-271-oft-mirror-views-20261008"
+}
