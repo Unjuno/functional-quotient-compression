@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (175 completed; 455 UNTESTED; 0 SCREENING)
+- P0: **630** (175 completed; 454 UNTESTED; 1 SCREENING)
 - P1: **422** (13 completed; 409 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **131 FAIL, 12 NOT ESTABLISHED, 45 PROMISING, 967 UNTESTED, 0 SCREENING**
+- Current MA statuses: **131 FAIL, 12 NOT ESTABLISHED, 45 PROMISING, 966 UNTESTED, 1 SCREENING**
 - 47 baseline experiment directories remain present; 143 additional per-ID outcomes are linked to their dedicated research branches in `LIVE_BRANCH_RECONCILIATION.csv`.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This was the intake-time queue; current selection follows the live-branch reconciliation at the top of this board.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed at intake time; later live-branch outcomes are indexed above.
