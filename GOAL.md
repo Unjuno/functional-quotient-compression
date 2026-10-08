@@ -8,6 +8,25 @@ The central program is **broad integration and falsification of `m` across stron
 
 The goal is **not** to prove Mirror works everywhere. Negative results are first-class outputs.
 
+## Measurable program goal
+
+Complete an evidence-backed disposition for **every candidate registered in `experiments/mirror_applications/IDEA_REGISTRY.csv`** (currently 875 candidates on the worker-ready baseline). A candidate is complete when its stable ID has a reviewed protocol and a recorded result with verification, and its registry row points to the result. Valid dispositions include `PROMISING`, `REPLICATED`, `ADOPTED`, `FAIL`, and `NOT ESTABLISHED`; a negative result counts as completion when the experiment and its limits are documented. `UNTESTED` and an unexplained `SCREENING` do not count as completed.
+
+The final map must let a reader answer, for each tested physical duplication structure:
+- what was shared and what logical functions were recovered;
+- which coordinate or address was added and its actual serialized byte cost;
+- whether quality, storage, active compute, training cost, or runtime improved or regressed against the strongest native and simple controls;
+- which behaviors required private residual parameters;
+- which findings replicated on fresh data and which remain bounded to a synthetic or development screen.
+
+Program completion is **not** an adoption quota. `ADOPTED` is reserved for replicated Pareto improvements over the nearest strong native and simple control. The synthesis deliverable is a cross-family comparison identifying the strongest storage/quality/runtime frontiers, clear failure boundaries, and only then a combination tournament among individually validated methods.
+
+## Worker-cycle target
+
+At each handoff, use the canonical worker-ready baseline plus the latest dedicated research branches to reconcile candidate status. Select the next unverified P0 in the registered queue, run one candidate per dedicated branch, preserve all negative and invalidated runs, and update the candidate evidence before moving on. Do not treat a stale board entry or an existing remote branch as permission to overwrite another worker's work.
+
+Immediate cycle target: finish the currently selected MA candidate through protocol, development gate, fresh replication when warranted, actual-payload and compute accounting, verification, and branch publication; then advance to the next unverified P0. Continue through the registry rather than stopping after the first promising result.
+
 ## Authoritative inputs
 
 Read in order:
