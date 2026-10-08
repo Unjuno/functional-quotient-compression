@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (45 completed; 585 UNTESTED)
+- P0: **630** (46 completed; 584 UNTESTED)
 - P1: **422** (12 completed; 410 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **26 FAIL, 31 PROMISING, 1098 UNTESTED**
+- Current MA statuses: **27 FAIL, 31 PROMISING, 1097 UNTESTED**
 - 47 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. MA-391 development screen FAIL; MA-392 is next.
@@ -17,26 +17,26 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 - Fourteenth sweep added **MA-1046..1095** (50 UNTESTED; 40 P0 / 10 P1) and **PA326..PA350**. Focus: time-series foundation forecasting, recommender embedding tables, and Earth-observation multi-sensor networks. No new experiment results; MA-255 remains next.
 - Fifteenth direct-prior sweep added **MA-1096..1115** (20 UNTESTED, 16 P0 / 4 P1) and **PA351..371**. A gauge-invariant LoRA audit harness is present; its unit tests are **not** trained-model evidence. MA-255 remains next.
 - Research support PA372..381 and a **separate 48-row / two-seed real-digit shifted-task code pilot** have been added. Structured 8-value Mirror m improved average CE versus 6-value diagonal code but FAILED the preregistered full quality/bytes/runtime gate. This is an **exploratory negative pilot**, not an MA-1096/1099/1115 completed experiment. Existing 29 PROMISING / 18 FAIL and MA-255 next are unchanged. See [function-space review](../../docs/phase2/MIRROR_FUNCTION_SPACE_FALSIFICATION_2026-10-08.md) and [pilot results](research_intake/natural_digit_function_20261008/RESULTS.md).
-- Sixteenth literature sweep added **MA-1116..1155** (40 UNTESTED; 33 P0 / 7 P1) and **PA382..413** (32 primary sources): knowledge graph relation operators, camera ISP/lens optics, robot dynamics and room neural acoustic fields. No new MA measurements beyond MA-391. See [sixteenth research notes](../../docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_SIXTEENTH_SWEEP.md) and [40 per-ID test blueprints](../../docs/phase2/MIRROR_APPLICATION_EXPERIMENT_BLUEPRINTS_MA1116_1155.md); next remains MA-255.
+- Sixteenth literature sweep added **MA-1116..1155** (40 UNTESTED; 33 P0 / 7 P1) and **PA382..413** (32 primary sources): knowledge graph relation operators, camera ISP/lens optics, robot dynamics and room neural acoustic fields. MA-391 and MA-392 development screens FAIL; MA-393 is next. See [sixteenth research notes](../../docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_SIXTEENTH_SWEEP.md) and [40 per-ID test blueprints](../../docs/phase2/MIRROR_APPLICATION_EXPERIMENT_BLUEPRINTS_MA1116_1155.md); next remains MA-255.
 - PROMISING is **not** ADOPTED. Treat reports with strict-gate misses or exploratory protocol deviations at their documented scope.
 - SRM/TM and prior Phase I results are not MA statuses.
 
 ## Next candidate
 
-**MA-392 — factorized token × domain Mirror embedding address (P0; PA59)**
+**MA-393 — adaptive-capacity embedding + Mirror view (P0; PA60)**
 
-MA-391 completed as a development-only FAIL. Its two held-out worlds disagreed on Mirror-vs-concatenation quality; Mirror used 2,292B versus 1,802B for native concatenation and achieved only 0.282–0.332× its serialized-state CPU throughput. Every method produced 144 unique FP16 embeddings. Fresh worlds remain sealed.
+MA-392 completed as a development-only FAIL. Mirror beat FiLM held-out accuracy by 3.32–5.07 points, but missed the +5 point held-out margin over tied concatenation in one world, missed seen-quality tolerance in one world, used 1.137× the smallest shared-control bytes, and ran at 0.241–0.334× tied concatenation throughput. Fresh worlds remain sealed.
 
-Continue with MA-392 on a dedicated branch. Test domain-specific embedding views over shared compositional tables against native compositional embeddings and private per-domain tables. Hold out token-domain combinations and report actual serialized bytes, NLL/quality, and runtime. Prior art: PA59.
+Continue with MA-393 on a dedicated branch. Test functional diversity in low-capacity rare-token embeddings against native adaptive-capacity allocation at equal total payload bytes. Prior art: PA60.
 
 ## Active experiment
 
-MA-392 is next. Fresh worlds for MA-391 and the prior gated experiments remain unopened.
+MA-393 is next. Fresh worlds for MA-391, MA-392, and earlier gated experiments remain unopened.
 
 ## Verified status index
 
 - **PROMISING (31):** MA-001, MA-002, MA-003, MA-004, MA-005, MA-006, MA-007, MA-008, MA-012, MA-014, MA-015, MA-041, MA-076, MA-079, MA-111, MA-121, MA-156, MA-160, MA-171, MA-173, MA-181, MA-189, MA-241, MA-244, MA-245, MA-249, MA-250, MA-251, MA-374, MA-381, MA-691.
-- **FAIL (26):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-367, MA-368, MA-375, MA-379, MA-383, MA-385, MA-389, MA-391.
+- **FAIL (27):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-367, MA-368, MA-375, MA-379, MA-383, MA-385, MA-389, MA-391, MA-392.
 
 All per-ID evidence is retained in the local experiment directories and in `CLAIM_LEDGER.csv`. Consult [the evidence integration audit](../../docs/phase2/MIRROR_MA_EVIDENCE_INTEGRATION_2026-10-08.md) for linked reports, verifications, provenance and claim boundaries.
 

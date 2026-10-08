@@ -1,0 +1,239 @@
+{
+  "condition": "development",
+  "seed": 39201,
+  "heldout_token_domain_pairs": [
+    1,
+    6,
+    11,
+    12,
+    17,
+    22,
+    27,
+    28,
+    33,
+    38,
+    43,
+    44,
+    49,
+    54,
+    59,
+    60,
+    65,
+    70,
+    75,
+    76,
+    81,
+    86,
+    91,
+    92,
+    97,
+    102,
+    107,
+    108,
+    113,
+    118,
+    123,
+    124,
+    129,
+    134,
+    139,
+    140,
+    145,
+    150,
+    155,
+    156,
+    161,
+    166,
+    171,
+    172,
+    177,
+    182,
+    187,
+    188,
+    193,
+    198,
+    203,
+    204,
+    209,
+    214,
+    219,
+    220,
+    225,
+    230,
+    235,
+    236,
+    241,
+    246,
+    251,
+    252
+  ],
+  "heldout_pair_fraction": 0.25,
+  "teacher_angles": [
+    0.4126184582710266,
+    1.0505096912384033,
+    0.5026629567146301,
+    0.08450915664434433
+  ],
+  "summaries": [
+    {
+      "method": "independent",
+      "serialized_bytes": 9390,
+      "payload_sha256": "849b688c57ccc1036f955d798950f0ef5fc805cb67439e26cfe94b012e03bb5d",
+      "optimizer_updates": 512,
+      "training_examples_seen": 65536,
+      "train_wall_s": 0.2824638460006099,
+      "validation": {
+        "accuracy": 0.832122802734375,
+        "nll": 0.49484020471572876,
+        "seen_accuracy": 1.0,
+        "heldout_accuracy": 0.32734164595603943,
+        "seen_nll": 0.009110364131629467,
+        "heldout_nll": 1.9553557634353638,
+        "unique_embeddings_fp16": 256,
+        "possible_roles": 256
+      },
+      "test": {
+        "accuracy": 0.830596923828125,
+        "nll": 0.49600496888160706,
+        "seen_accuracy": 1.0,
+        "heldout_accuracy": 0.32014697790145874,
+        "seen_nll": 0.00910242274403572,
+        "heldout_nll": 1.9631527662277222,
+        "unique_embeddings_fp16": 256,
+        "possible_roles": 256
+      },
+      "macs_per_lookup_proxy": {
+        "embedding_and_classifier": 128,
+        "view_coordinate_ops": 0
+      }
+    },
+    {
+      "method": "tied_concat",
+      "serialized_bytes": 1676,
+      "payload_sha256": "ffc794b69fd4291e9e0629063e23e2c791dba17ba51831f2254618c5f734d21b",
+      "optimizer_updates": 512,
+      "training_examples_seen": 65536,
+      "train_wall_s": 0.441143860007287,
+      "validation": {
+        "accuracy": 0.7777099609375,
+        "nll": 0.6186896562576294,
+        "seen_accuracy": 0.776209831237793,
+        "heldout_accuracy": 0.7822206020355225,
+        "seen_nll": 0.589282751083374,
+        "heldout_nll": 0.7071118950843811,
+        "unique_embeddings_fp16": 64,
+        "possible_roles": 256
+      },
+      "test": {
+        "accuracy": 0.775726318359375,
+        "nll": 0.6290913224220276,
+        "seen_accuracy": 0.776409387588501,
+        "heldout_accuracy": 0.773668110370636,
+        "seen_nll": 0.5907018780708313,
+        "heldout_nll": 0.7447676062583923,
+        "unique_embeddings_fp16": 64,
+        "possible_roles": 256
+      },
+      "macs_per_lookup_proxy": {
+        "embedding_and_classifier": 128,
+        "view_coordinate_ops": 0
+      }
+    },
+    {
+      "method": "domain_film",
+      "serialized_bytes": 2376,
+      "payload_sha256": "d7b70c0f6dc6f53791bf1822995ad5f674b58b536c17b1fd3030b58352f02899",
+      "optimizer_updates": 512,
+      "training_examples_seen": 65536,
+      "train_wall_s": 0.6126214340038132,
+      "validation": {
+        "accuracy": 0.918487548828125,
+        "nll": 0.2819816768169403,
+        "seen_accuracy": 0.973729133605957,
+        "heldout_accuracy": 0.7523844242095947,
+        "seen_nll": 0.17817720770835876,
+        "heldout_nll": 0.594106137752533,
+        "unique_embeddings_fp16": 256,
+        "possible_roles": 256
+      },
+      "test": {
+        "accuracy": 0.9166259765625,
+        "nll": 0.2884282171726227,
+        "seen_accuracy": 0.9751249551773071,
+        "heldout_accuracy": 0.7403551936149597,
+        "seen_nll": 0.1789887696504593,
+        "heldout_nll": 0.6181942820549011,
+        "unique_embeddings_fp16": 256,
+        "possible_roles": 256
+      },
+      "macs_per_lookup_proxy": {
+        "embedding_and_classifier": 128,
+        "view_coordinate_ops": 32
+      }
+    },
+    {
+      "method": "domain_add",
+      "serialized_bytes": 2038,
+      "payload_sha256": "82ffa75184ec25befc4e6d452bdb945dc780398dd72c1586fe06febed1f3a03c",
+      "optimizer_updates": 512,
+      "training_examples_seen": 65536,
+      "train_wall_s": 0.3917026999988593,
+      "validation": {
+        "accuracy": 0.755401611328125,
+        "nll": 0.6287088990211487,
+        "seen_accuracy": 0.7837738990783691,
+        "heldout_accuracy": 0.6700904965400696,
+        "seen_nll": 0.5606197714805603,
+        "heldout_nll": 0.8334425687789917,
+        "unique_embeddings_fp16": 256,
+        "possible_roles": 256
+      },
+      "test": {
+        "accuracy": 0.7523193359375,
+        "nll": 0.6348438262939453,
+        "seen_accuracy": 0.7811242341995239,
+        "heldout_accuracy": 0.6655235886573792,
+        "seen_nll": 0.5603745579719543,
+        "heldout_nll": 0.8592367172241211,
+        "unique_embeddings_fp16": 256,
+        "possible_roles": 256
+      },
+      "macs_per_lookup_proxy": {
+        "embedding_and_classifier": 128,
+        "view_coordinate_ops": 0
+      }
+    },
+    {
+      "method": "mirror_domain",
+      "serialized_bytes": 1906,
+      "payload_sha256": "a544cb6b1e55c2f1b7f2676f44c2c5389317109ad8bc20fc75ddcaa5106f7e17",
+      "optimizer_updates": 512,
+      "training_examples_seen": 65536,
+      "train_wall_s": 0.794242939009564,
+      "validation": {
+        "accuracy": 0.87750244140625,
+        "nll": 0.40192821621894836,
+        "seen_accuracy": 0.903659999370575,
+        "heldout_accuracy": 0.7988505959510803,
+        "seen_nll": 0.3469139635562897,
+        "heldout_nll": 0.567347526550293,
+        "unique_embeddings_fp16": 256,
+        "possible_roles": 256
+      },
+      "test": {
+        "accuracy": 0.87371826171875,
+        "nll": 0.4064704179763794,
+        "seen_accuracy": 0.9011502861976624,
+        "heldout_accuracy": 0.7910593748092651,
+        "seen_nll": 0.34718456864356995,
+        "heldout_nll": 0.5851119756698608,
+        "unique_embeddings_fp16": 256,
+        "possible_roles": 256
+      },
+      "macs_per_lookup_proxy": {
+        "embedding_and_classifier": 128,
+        "view_coordinate_ops": 2
+      }
+    }
+  ]
+}

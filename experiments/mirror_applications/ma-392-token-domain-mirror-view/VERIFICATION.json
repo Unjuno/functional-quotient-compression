@@ -1,19 +1,108 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-392",
+  "status": "FAIL",
+  "protocol_commit": "3790168d6298c8ee9ddd9d1a754545d66471d4b7",
+  "development_seeds": [
+    {
+      "seed": 39201,
+      "condition": "development",
+      "payload_checks": [
+        {
+          "method": "independent",
+          "bytes_match": true,
+          "sha256_match": true,
+          "metadata_match": true,
+          "finite": true,
+          "metrics_match": true
+        },
+        {
+          "method": "tied_concat",
+          "bytes_match": true,
+          "sha256_match": true,
+          "metadata_match": true,
+          "finite": true,
+          "metrics_match": true
+        },
+        {
+          "method": "domain_film",
+          "bytes_match": true,
+          "sha256_match": true,
+          "metadata_match": true,
+          "finite": true,
+          "metrics_match": true
+        },
+        {
+          "method": "domain_add",
+          "bytes_match": true,
+          "sha256_match": true,
+          "metadata_match": true,
+          "finite": true,
+          "metrics_match": true
+        },
+        {
+          "method": "mirror_domain",
+          "bytes_match": true,
+          "sha256_match": true,
+          "metadata_match": true,
+          "finite": true,
+          "metrics_match": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "seed": 39202,
+      "condition": "development",
+      "payload_checks": [
+        {
+          "method": "independent",
+          "bytes_match": true,
+          "sha256_match": true,
+          "metadata_match": true,
+          "finite": true,
+          "metrics_match": true
+        },
+        {
+          "method": "tied_concat",
+          "bytes_match": true,
+          "sha256_match": true,
+          "metadata_match": true,
+          "finite": true,
+          "metrics_match": true
+        },
+        {
+          "method": "domain_film",
+          "bytes_match": true,
+          "sha256_match": true,
+          "metadata_match": true,
+          "finite": true,
+          "metrics_match": true
+        },
+        {
+          "method": "domain_add",
+          "bytes_match": true,
+          "sha256_match": true,
+          "metadata_match": true,
+          "finite": true,
+          "metrics_match": true
+        },
+        {
+          "method": "mirror_domain",
+          "bytes_match": true,
+          "sha256_match": true,
+          "metadata_match": true,
+          "finite": true,
+          "metrics_match": true
+        }
+      ],
+      "passed": true
+    }
+  ],
+  "fresh_seeds": "SEALED: preregistered development gates missed",
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "PYTHONDONTWRITEBYTECODE=1 python -m unittest discover -s experiments/mirror_applications/ma-392-token-domain-mirror-view/tests -v",
+    "passed": 3
   },
-  "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
-  },
-  "metric_replay": {
-    "checked": false,
-    "max_difference": null
-  },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "payloads": "10 deterministic ZIP/NPY FP16 inference payloads; bytes, SHA256, metadata, finite arrays and validation/test metrics recomputed after payload reload",
+  "protocol_frozen_before_development": true
 }
