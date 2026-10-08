@@ -1,0 +1,115 @@
+{
+  "experiment_id": "MA-853",
+  "decision": "FAIL Mirror-specific; broad factorized mechanism passes",
+  "base_commit": "28194ea",
+  "branch": "research/ma-853-factorized-fast-memory-views-20261008",
+  "development_seeds": [
+    85301,
+    85302
+  ],
+  "fresh_seeds": [
+    85311,
+    85312,
+    85313
+  ],
+  "freeze_hashes": {
+    "source_sha256": "1bd2994d2145b2d926f2696c98a547b99a1f3c65aadde76cd2bd1df92ebad8bb",
+    "protocol_before_fresh_sha256": "8360811c2aec8a16811cae8eb0477172025b362be43a6939eec7a49bc14a921a"
+  },
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-853-factorized-fast-memory-views/tests -v",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "actual_typed_serialization_bytes": true,
+    "float32_and_uint8_roundtrip_byte_exact": true,
+    "pair_ids_and_metadata_paid": true
+  },
+  "metric_replay": {
+    "fresh_rows": 12,
+    "payload_hashes_and_metrics_exact": true,
+    "max_metric_delta": 0.0
+  },
+  "fresh_summary": {
+    "delta_rule_fast_matrix": {
+      "serialized_bytes": 2683,
+      "mean_seen_mse": 0.0,
+      "mean_heldout_mse": 0.8658088768043666,
+      "mean_heldout_exact_recall": 0.05555555555555555,
+      "write_updates": 30,
+      "write_macs_proxy": 34560,
+      "query_macs_proxy": 20736,
+      "mean_recall_wall_seconds": 0.0005890729995977987,
+      "payload_hashes": [
+        "b99399496c51d30c133d5bd0afbd574b98d9cc38ef4e2c8eec5dfa226399cf91",
+        "992ff80465825f1cd51098ae260408913fc3ab3d5373881877d8a8c95f458e4a",
+        "13c0d201ee3cf2c1faaf76fb945a331a98bf40ea7f6e364b16c02ed60232b14a"
+      ]
+    },
+    "independent_pair_table": {
+      "serialized_bytes": 2667,
+      "mean_seen_mse": 0.0,
+      "mean_heldout_mse": 0.0,
+      "mean_heldout_exact_recall": 1.0,
+      "write_updates": 0,
+      "write_macs_proxy": 0,
+      "query_macs_proxy": 0,
+      "mean_recall_wall_seconds": 0.0005489563336595893,
+      "payload_hashes": [
+        "b2a43152517c14c83102d1a5c7ca0cd54ea59254a08daf7ed0e7e9cee9442804",
+        "faedb8243d293aae20abf09566e714e7e968a8c095b11d798bf37b9ffc96cf2b",
+        "d6b0b29c59bd1f8449d7fde3985427dc81d335a6ef9cc494dd90591e304bb60d"
+      ]
+    },
+    "mirror_factorized_role_code": {
+      "serialized_bytes": 1207,
+      "mean_seen_mse": 0.0,
+      "mean_heldout_mse": 0.0,
+      "mean_heldout_exact_recall": 1.0,
+      "write_updates": 0,
+      "write_macs_proxy": 0,
+      "query_macs_proxy": 576,
+      "mean_recall_wall_seconds": 0.0005418623325870916,
+      "payload_hashes": [
+        "c2ba616c829ff55e7f31f56edb5aae9de1a86c4475c3198e188c87137fe035e6",
+        "59b240aafb2d28c569268db465a2879f9ee971e1707c39c9feeff24ed6a834b1",
+        "77586db03f600d8f15b520029488ffe7fa47ebd0f2ea35f0ca35bf2597e5c3d4"
+      ]
+    },
+    "vsa_hadamard_binding": {
+      "serialized_bytes": 1200,
+      "mean_seen_mse": 0.0,
+      "mean_heldout_mse": 0.0,
+      "mean_heldout_exact_recall": 1.0,
+      "write_updates": 0,
+      "write_macs_proxy": 0,
+      "query_macs_proxy": 576,
+      "mean_recall_wall_seconds": 0.0005785433331766399,
+      "payload_hashes": [
+        "f6a1343433ebb3bb8ce9fcae4f0b9cd97dac8456747fdd7cbd48fd0aaa20a59f",
+        "2427f12c2c96b2c93e8a458aef54396978c428c49b5a48cdd57d3caac1673459",
+        "39d648c18c8703a92b77cb417dd00fd0fe36e2654859351efbaa35cce7dbb78f"
+      ]
+    }
+  },
+  "selection": {
+    "pool_size": 453,
+    "draw_index_zero_based": 345,
+    "selected": "MA-853",
+    "pool_ids_sha256": "a2b87aa91864f63b59be61cd54fe7efced3110ba80f94704f17aabb76cb1cd04",
+    "pool_file_sha256": "49ab0a088a2afd8f12291c07a071120e85a7e2f055fa54eb9286b41c47c31820",
+    "branch_conflict_found": false
+  },
+  "environment": {
+    "numpy": "2.3.5",
+    "device": "CPU only",
+    "torch": "not installed"
+  },
+  "claim_boundary": [
+    "Synthetic role-pair associative recall only.",
+    "Role codebooks supplied and charged; no learned-code claim.",
+    "Hadamard VSA is a direct equivalent control and is slightly smaller.",
+    "Compositional count does not imply independent capacity."
+  ]
+}

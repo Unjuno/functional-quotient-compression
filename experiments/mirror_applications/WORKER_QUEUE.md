@@ -12,15 +12,32 @@ Use:
 - `docs/phase2/MIRROR_PARAMETER_INTEGRATION_DOCTRINE.md`
 - `docs/phase2/MIRROR_PARAMETER_INTEGRATION_MATRIX.md`
 
-## Selection rule
+## Selection rule — randomized worker policy
 
-Pick the first candidate satisfying all of:
-1. status is UNTESTED;
-2. highest available priority;
-3. no other active experiment directory already claims the ID;
-4. its closest prior-art controls can be implemented in the current harness.
+The registry defines eligibility; the worker does **not** choose the first row or follow the listed sequence linearly. For each draw:
+1. Read the current registry and status board.
+2. Form a sorted pool of executable P0/UNTESTED IDs, excluding completed IDs, paused families, active claims, and documented blockers.
+3. Save the complete pool before drawing. Use `secrets.randbelow(len(pool))`; record the draw index, pool size, pool hash, excluded IDs/reasons, and branch-conflict check in the selected experiment.
+4. Work only on the selected ID, then refresh eligibility and draw again.
 
-Do not skip to a visually interesting P1/P2 idea while an executable P0 remains, unless the skipped candidate has a recorded blocker.
+If another worker has a result on the selected ID, inspect it and reconcile selectively; preserve both branches and let maintainers adjudicate integration. Do not silently substitute the next ID. Listed family queues below are context and eligibility hints, not an execution order.
+
+### Recorded draws
+
+| Draw | Eligible pool | Draw | Outcome |
+|---|---:|---:|---|
+| 1 | 6 | index 2 | MA-282; completed on its dedicated branch |
+| 2 | 5 | index 1 | MA-278; competing FAIL branch selectively reconciled |
+| 3 | 4 | index 3 | MA-299; completed FAIL; shared-angle SETA family paused after MA-297/299 |
+| 4 | 3 | index 0 | MA-274; competing FAIL branch selectively reconciled; task/expert BOFT angle-code family paused |
+| 5 | 2 | index 0 | MA-286; completed FAIL for Mirror-specific byte margin |
+| 6 | 456 | index 26 | MA-330; pool snapshot and hash discrepancy retained in its experiment protocol |
+| 7 | 456 | index 133 | MA-539; pool ID hash f76c0389412aed1704aa9011edd75792fe40a1ff2db96bb12b383b359e649f0e; no conflicting branch found |
+| 8 | 455 | index 367 | MA-881; pool ID hash c68e7219ecfe57b8f8fa54263d643f4f7e5e47284f0ae4875692eaabde67caf1; no conflicting branch found |
+| 9 | 454 | index 205 | MA-655; pool ID hash 43b4e90df4540f70b4b1ac7b5710c168407693f11e92459b4216c49e5dd0f96a; no conflicting branch found |
+| 10 | 453 | index 345 | MA-853; pool ID hash a2b87aa91864f63b59be61cd54fe7efced3110ba80f94704f17aabb76cb1cd04; no conflicting branch found |
+
+The prior status board's deterministic “next candidate” text is superseded by this user-directed random policy. Historical family queues remain context only.
 
 ## Literature-derived cross-over queue
 
@@ -315,11 +332,11 @@ Every experiment must isolate the extra Mirror parameter `m` beyond its strong n
 
 Read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08.md`, PA236..PA265 and the selected MA registry row.
 
-**MA-255 remains the canonical next worker candidate.** This queue must not preempt it or supersede its frozen protocol.
+Random draw 10 selected MA-853 from 453 candidates at index 345. The next candidate is selected by a new draw after MA-853 verification.
 
 ## Twelfth research expansion — video, equivariance, spiking, physical optics, wireless and spatial audio
 
-**MA-936..995 are UNTESTED research candidates** appended after the already queued crossovers and prior MA-876..935 intake. No active or frozen run may be interrupted to work on these. **Canonical next remains MA-255**.
+**MA-936..995 are UNTESTED research candidates** appended to the registry. Candidate eligibility follows the randomized worker policy above; family lists are context, not order.
 
 Recommended representative P0 order *within this new family only*:
 
