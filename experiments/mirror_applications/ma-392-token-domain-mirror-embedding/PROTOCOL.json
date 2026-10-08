@@ -1,0 +1,71 @@
+{
+  "experiment_id": "MA-392",
+  "title": "Factorized token x domain Mirror embedding address",
+  "status": "PROTOCOL_FROZEN_BEFORE_DEVELOPMENT",
+  "base_commit": "f0e40b6",
+  "prior_art_refs": [
+    "PA59"
+  ],
+  "evidence_lane": "QUALITY/STORAGE/HELD_OUT_COMPOSITION/COMPUTE",
+  "hypothesis": "A shared token-logit table plus one Givens phase code per domain will generalize to held-out token-domain combinations under cyclic domain shifts, approaching a per-domain full linear map while using fewer actual bytes; it should outperform additive and rank-4 adapter controls if their function families cannot represent the phase shift compactly.",
+  "physical_object": "one shared token embedding/logit table for 128 tokens",
+  "mirror_coordinate": "one learned cyclic Fourier phase per domain, applied to the shared token representation",
+  "logical_multiplicity": "eight domain-specific token functions generated from one physical token table",
+  "model": {
+    "vocabulary_size": 128,
+    "domains": 8,
+    "classes": 8,
+    "token_logit_dim": 8,
+    "train_fraction_of_token_domain_pairs": 0.75,
+    "train_examples": 32768,
+    "validation_examples": 8192,
+    "test_examples_per_all_pairs": 8192,
+    "batch_size": 512,
+    "optimizer_updates": 1600,
+    "optimizer": "Adam",
+    "learning_rate": 0.01,
+    "development_seeds": [
+      39201,
+      39202
+    ],
+    "fresh_seeds": [
+      39211,
+      39212,
+      39213
+    ],
+    "target": "class=(token_id mod 8 + domain_id) mod 8; deterministic cyclic domain shift",
+    "held_out_split": "seeded 25% token-domain pairs withheld uniformly, while every token and every domain remains represented in training",
+    "domain_identity": "domain ID is an observed input for all methods; no withheld token-domain labels are used for training"
+  },
+  "controls": [
+    "independent full per-domain token-logit tables",
+    "shared token table plus domain-specific additive class bias",
+    "shared token table plus per-domain rank-4 residual linear adapter and bias",
+    "shared token table plus full per-domain 8x8 linear map and bias",
+    "Mirror: shared token table plus one Fourier/Givens phase per domain"
+  ],
+  "development_gate_before_fresh": "For both seeds, on held-out token-domain pairs: Mirror accuracy within 0.03 of the full per-domain map and >=0.05 above additive and rank-4 controls; actual serialized Mirror payload <=0.80x full per-domain-map payload; and Mirror held-out NLL no more than 0.10 above the full per-domain map. Seen-pair quality and full independent-table control are reported but do not gate. Any gate miss keeps fresh sealed.",
+  "success_gate": "All three fresh seeds meet the held-out quality/NLL/bytes gates with exact payload reload replay; report seen/heldout quality, actual bytes, compute, wall clock and throughput.",
+  "failure_gate": "Any held-out development gate misses in either seed; fresh remains unopened.",
+  "storage": {
+    "authority": "actual deterministic ZIP/NPY FP16 inference payload bytes after reload",
+    "paid_objects": [
+      "independent table or shared token table",
+      "domain biases/maps/adapters or all Mirror phases",
+      "domain and vocabulary metadata",
+      "archive headers"
+    ]
+  },
+  "compute": {
+    "report_updates_examples_wall": true,
+    "report_operator_macs_per_query": true,
+    "report_test_throughput": true
+  },
+  "boundaries": [
+    "synthetic cyclic domain-shift task, not natural recommendation or LM quality",
+    "held-out token-domain combinations are the primary measure",
+    "domain identity is input information shared by all methods",
+    "eight domains do not imply eight independent capacities",
+    "fresh data remain sealed until every development gate passes"
+  ]
+}

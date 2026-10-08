@@ -1,0 +1,131 @@
+{
+  "experiment_id": "MA-392",
+  "commit": "PENDING_COMMIT",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-392-token-domain-mirror-embedding/tests",
+    "passed": 4,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "payload_count": 10,
+    "payloads": [
+      {
+        "seed": 39201,
+        "method": "independent",
+        "bytes": 16831,
+        "sha256": "e344ff13149dc92a001ad4f615fc280fc9175180caf9acc5d7aa9976f4e87247",
+        "arrays": [
+          "full"
+        ]
+      },
+      {
+        "seed": 39201,
+        "method": "bias",
+        "bytes": 2859,
+        "sha256": "fd2836774278f774ce21fbeca16fecf4c5b5ff97bcc87db63425f99e5dbb3e89",
+        "arrays": [
+          "bias",
+          "token"
+        ]
+      },
+      {
+        "seed": 39201,
+        "method": "rank4",
+        "bytes": 4339,
+        "sha256": "3532b22ef337ec7d06727479c935747d4bc1f3b17d2082ae5673d8fbd60162b6",
+        "arrays": [
+          "a",
+          "b",
+          "bias",
+          "token"
+        ]
+      },
+      {
+        "seed": 39201,
+        "method": "domain_map",
+        "bytes": 4121,
+        "sha256": "e6773f26bccda3f862d33957c356268b3d4776f3431c666f414d1ab619ac9a3f",
+        "arrays": [
+          "bias",
+          "matrix",
+          "token"
+        ]
+      },
+      {
+        "seed": 39201,
+        "method": "mirror",
+        "bytes": 2749,
+        "sha256": "623ff1ea921b2b4cd96396462f77eea662b39287f8f64cf95dd847a00b2998d6",
+        "arrays": [
+          "phase",
+          "token"
+        ]
+      },
+      {
+        "seed": 39202,
+        "method": "independent",
+        "bytes": 16831,
+        "sha256": "4e221f684235517b7aa5c6b9317142d4b41d2ea0d5d606b98e0bd7138d638a35",
+        "arrays": [
+          "full"
+        ]
+      },
+      {
+        "seed": 39202,
+        "method": "bias",
+        "bytes": 2859,
+        "sha256": "955bf068826fbc2ab5b2adf6f4553660348fa2e2035f0fd6e99bab34bd85c7b6",
+        "arrays": [
+          "bias",
+          "token"
+        ]
+      },
+      {
+        "seed": 39202,
+        "method": "rank4",
+        "bytes": 4339,
+        "sha256": "60aae0f11454d54b00f6422f5b41395e94927c2056c016d799ae26d04ced714b",
+        "arrays": [
+          "a",
+          "b",
+          "bias",
+          "token"
+        ]
+      },
+      {
+        "seed": 39202,
+        "method": "domain_map",
+        "bytes": 4121,
+        "sha256": "f4bd97a8eb0f49af019fda675cf782c4a3344a0b2e102892ade633549461f9e1",
+        "arrays": [
+          "bias",
+          "matrix",
+          "token"
+        ]
+      },
+      {
+        "seed": 39202,
+        "method": "mirror",
+        "bytes": 2749,
+        "sha256": "b9129febe5124c2571ddc1672e13b3eb20ef8cf71d563e1d4890062ccb2d6451",
+        "arrays": [
+          "phase",
+          "token"
+        ]
+      }
+    ],
+    "fp16_payload_bytes_authoritative": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "seen_and_heldout_accuracy_nll_replayed_exactly": true
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Two development seeds on the same cyclic token-domain function with seed-specific held-out pair masks.",
+    "Mirror held-out quality/NLL gates miss; actual payload bytes gate passes.",
+    "Rank-4 ordinary adapter is a strong held-out control, while domain bias and independent unseen tables are weak.",
+    "Fresh seeds 39211, 39212 and 39213 remain unopened."
+  ]
+}
