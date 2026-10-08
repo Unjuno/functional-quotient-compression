@@ -1,0 +1,95 @@
+{
+  "experiment_id": "MA-643",
+  "title": "GaLore projection plus Mirror gradient subspace code",
+  "status": "NOT_ESTABLISHED_BLOCKED",
+  "evidence_lane": [
+    "MECHANISM",
+    "OPTIMIZER_MEMORY",
+    "COMPUTE"
+  ],
+  "base_commit": "c97bf7d",
+  "hypothesis": "On aligned synthetic quadratic tasks, a small Mirror address over shared gradient atoms can reduce projected optimizer state without harming update quality, but an ordinary coefficient code may match it.",
+  "physical_object": "shared low-rank gradient atom dictionary and task objective",
+  "mirror_coordinate": "small discrete/sparse address selecting active gradient atoms",
+  "logical_multiplicity": "task-specific optimizer update directions over shared physical atoms",
+  "prior_art_refs": [
+    "PA142"
+  ],
+  "selection": {
+    "method": "secrets.randbelow over sorted eligible P0/UNTESTED IDs after live branch exclusions",
+    "pool_size": 509,
+    "draw_index_zero_based": 252,
+    "selected_id": "MA-643",
+    "pool_ids_sha256": "2973a4f0403b3de19a43b859f767e7409a272fcf73199d3c7293a863a9b346e6",
+    "pool_file_sha256": "0f9c3d010374199af3a9758a2a360f7b3d70760e7b626901f3168abfc44de37f",
+    "branch_conflict_found": false,
+    "snapshot": "source/selection_pool.csv"
+  },
+  "environment": {
+    "numpy": true,
+    "scipy": true,
+    "pytorch": false,
+    "jax": false,
+    "tensorflow": false,
+    "cuda_visible": false,
+    "scope": "CPU algebraic mechanism screen only; GaLore training/hardware hypothesis cannot be established"
+  },
+  "task": {
+    "dimension": 64,
+    "atom_count": 16,
+    "active_atoms_per_task": 4,
+    "development_seeds": [
+      64301,
+      64302
+    ],
+    "fresh_seeds": [
+      64311,
+      64312,
+      64313
+    ],
+    "steps": 80,
+    "learning_rate": 0.08
+  },
+  "methods": [
+    "full_adam_state",
+    "galore_projected_adam_state",
+    "hard_shared_atom_tie",
+    "mirror_sparse_atom_address",
+    "ordinary_dense_atom_coefficients",
+    "full_gradient_upper_control"
+  ],
+  "fresh": {
+    "locked_before_access": false,
+    "not_run_reason": "Native GaLore hypothesis requires unsupported framework/hardware; no fresh seed was accessed."
+  },
+  "storage": {
+    "authority": "actual serialized optimizer/update payload bytes",
+    "paid_objects": [
+      "shared atom basis",
+      "selected addresses or coefficients",
+      "optimizer moments stored by each method",
+      "metadata"
+    ]
+  },
+  "compute": {
+    "report_examples": true,
+    "report_updates": true,
+    "report_active_operations": true,
+    "report_wall_clock": true
+  },
+  "success_gate": "CPU mechanism only: 3/3 fresh tasks final relative objective gap <=1e-3 and <=0.75x GaLore projected-state bytes.",
+  "mirror_specific_gate": "At matched bytes/active operations, Mirror must beat ordinary dense atom coefficients by >=10% bytes or predeclared objective margin.",
+  "failure_gate": "CPU mechanism misses quality/state gate or ordinary coefficient control matches Mirror within margin.",
+  "boundaries": [
+    "No autodiff framework, GPU, or GaLore code is available.",
+    "Fixed atoms do not test periodic SVD projector refresh.",
+    "Do not report the CPU screen as GaLore training evidence."
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      64301,
+      64302
+    ],
+    "purpose": "invalid tiny NumPy proxy was explored and rejected before fresh access; not claim-bearing evidence"
+  }
+}

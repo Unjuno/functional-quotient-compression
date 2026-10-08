@@ -3,13 +3,13 @@
 Updated: 2026-10-08 JST
 Canonical branch: `research/mirror-application-worker-ready-20261007`
 
-## Program totals (reconciled from authoritative 1045-row registry)
+## Program totals (reconciled from authoritative 1078-row registry; MA-643 blocker recorded branch-locally)
 
-- Registered candidates: **1045**
-- P0: **541** (35 completed; 506 UNTESTED)
-- P1: **401** (12 completed; 389 UNTESTED)
+- Registered candidates: **1078**
+- P0: **567** (35 completed; 532 UNTESTED)
+- P1: **408** (12 completed; 396 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **998 UNTESTED, 29 PROMISING, 18 FAIL**
+- Current MA statuses: **1031 UNTESTED, 29 PROMISING, 18 FAIL**
 - 47 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -74,3 +74,7 @@ Additional Mirror m insertion targets: neural video chunk sharing (NerVast/DCVC-
 - `CLAIM_LEDGER.csv` and each experiment's `VERIFICATION.json` are the evidence index; `STATUS_BOARD.md` is an operational cache.
 - Before allocating an ID or starting work, re-read the live registry and search for experiment branches.
 - Preserve old branches, failed results, exploratory data and locked protocols. No automatic merge to main.
+
+## Random worker update — MA-643 blocked
+
+MA-643 was selected from the live random pool and assigned to `research/ma-643-galore-mirror-subspace-20261008`. Native GaLore comparison is blocked here because PyTorch/JAX/TensorFlow and CUDA/GPU are absent. Scientific registry status remains UNTESTED; an invalid tiny NumPy proxy was rejected and fresh seeds were not opened. See the experiment branch-local report.

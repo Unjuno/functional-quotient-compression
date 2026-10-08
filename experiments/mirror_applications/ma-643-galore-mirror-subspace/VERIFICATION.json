@@ -1,0 +1,24 @@
+{
+  "experiment_id": "MA-643",
+  "commit": "333b282",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-643-galore-mirror-subspace/tests -v",
+    "passed": 4,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": false,
+    "max_difference": null
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Environment check: NumPy/SciPy available; PyTorch, JAX, TensorFlow, CUDA runtime and visible GPU unavailable.",
+    "A tiny NumPy prototype was explored on development seeds and tests passed, but matrix shape and shared-basis accounting were rejected as invalid for GaLore; it is not claim-bearing evidence.",
+    "No fresh seeds were opened; RESULTS_CORE.csv remains header-only.",
+    "The registered GaLore training and optimizer-memory hypothesis is NOT ESTABLISHED due missing required compute/software in this container."
+  ]
+}

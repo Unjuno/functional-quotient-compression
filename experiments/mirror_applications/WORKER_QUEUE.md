@@ -12,15 +12,11 @@ Use:
 - `docs/phase2/MIRROR_PARAMETER_INTEGRATION_DOCTRINE.md`
 - `docs/phase2/MIRROR_PARAMETER_INTEGRATION_MATRIX.md`
 
-## Selection rule
+## Selection rule — randomized worker policy
 
-Pick the first candidate satisfying all of:
-1. status is UNTESTED;
-2. highest available priority;
-3. no other active experiment directory already claims the ID;
-4. its closest prior-art controls can be implemented in the current harness.
+The user directed that candidate selection remain random across workers. The registry defines eligibility; do not follow the candidate list linearly. For each draw: read the live registry/status board; exclude completed, paused, blocked, and branch-claimed IDs; sort the eligible P0/UNTESTED IDs; save the complete pool; use `secrets.randbelow(len(pool))`; record pool size/hash/index and branch conflict; then work only on the selected ID. If a conflict appears, preserve both branches and reconcile selectively.
 
-Do not skip to a visually interesting P1/P2 idea while an executable P0 remains, unless the skipped candidate has a recorded blocker.
+Prior random draws from this worker session are recorded in the corresponding MA reports: #6 MA-330, #7 MA-539, #8 MA-881, #9 MA-655, #10 MA-853, #11 MA-818, and #12 MA-990. Draw #11 was blocked at MA-643 and is retained as a separate blocker record; it did not change registry status.
 
 ## Literature-derived cross-over queue
 
@@ -315,11 +311,11 @@ Every experiment must isolate the extra Mirror parameter `m` beyond its strong n
 
 Read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08.md`, PA236..PA265 and the selected MA registry row.
 
-**MA-255 remains the canonical next worker candidate.** This queue must not preempt it or supersede its frozen protocol.
+Random draws, not this list, determine the next candidate. This queue is context only.
 
 ## Twelfth research expansion — video, equivariance, spiking, physical optics, wireless and spatial audio
 
-**MA-936..995 are UNTESTED research candidates** appended after the already queued crossovers and prior MA-876..935 intake. No active or frozen run may be interrupted to work on these. **Canonical next remains MA-255**.
+**MA-936..995 are UNTESTED research candidates** appended to the registry. Eligibility follows the random selection rule.
 
 Recommended representative P0 order *within this new family only*:
 
@@ -386,3 +382,7 @@ A worker may batch implementation work across a family, but scientific status is
 ## Stop rule
 
 If two consecutive candidates in a family fail for the same demonstrated structural reason, stop that family and write a family diagnostic before continuing.
+
+## Random draw 12 — MA-990
+
+Selected from 508 eligible P0/UNTESTED IDs at index 500 using `secrets.randbelow`; pool ID hash `16dc53bf6814773a9b030ec87f67dc1fd6318af2c8869be84ac0ba460c09cc16`. Full snapshot will be stored with the MA-990 experiment. No remote MA-990 branch conflict was present during selection.
