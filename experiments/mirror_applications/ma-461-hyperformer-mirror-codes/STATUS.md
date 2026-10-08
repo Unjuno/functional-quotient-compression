@@ -21,3 +21,5 @@ None.
 ## Decisions / rulings
 
 PA82 reviewed. The native low-rank generator is an exact functional-form attribution control. Independent per-pair matrices are evaluated only on training pairs to avoid audit leakage.
+
+Evaluation correction: initial development files used delta-only RMSE despite serializing the common identity base. The shared base cancels exactly in this output RMSE, but corrected runs explicitly replay `base + adapter`; original files are preserved under `runs/superseded_delta_only_metric_*` and excluded from the terminal report. This changed neither training nor thresholds and used no new/fresh data.

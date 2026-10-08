@@ -76,11 +76,11 @@ def serialize(method,state):
 def evaluate(method,state,seed,targets,train_wall):
     rng=np.random.default_rng(seed+46121);scores=[];seen=[];start=time.perf_counter()
     for t,l in HELD:
-        x=torch.tensor(rng.normal(size=(NEVAL,D)).astype(np.float32));target=x@targets[t,l].T
-        y=x@output(method,state,t,l).detach().T
+        x=torch.tensor(rng.normal(size=(NEVAL,D)).astype(np.float32));base=torch.eye(D);target=x@(base+targets[t,l]).T
+        y=x@(base+output(method,state,t,l).detach()).T
         scores.append(float(torch.sqrt(((y-target)**2).mean())))
     for t,l in TRAIN:
-        x=torch.tensor(rng.normal(size=(NEVAL,D)).astype(np.float32));target=x@targets[t,l].T;y=x@output(method,state,t,l).detach().T
+        x=torch.tensor(rng.normal(size=(NEVAL,D)).astype(np.float32));base=torch.eye(D);target=x@(base+targets[t,l]).T;y=x@(base+output(method,state,t,l).detach()).T
         seen.append(float(torch.sqrt(((y-target)**2).mean())))
     query_wall=time.perf_counter()-start;raw=serialize(method,state)
     if method=='hyperformer':mac=4*HIDDEN+HIDDEN*HIDDEN+D*D+D*D
