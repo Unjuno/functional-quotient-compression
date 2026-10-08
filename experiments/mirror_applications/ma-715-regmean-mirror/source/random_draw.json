@@ -1,0 +1,31 @@
+{
+  "draw": 11,
+  "baseline_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
+  "eligible_rule": "P0 and UNTESTED rows on latest worker-ready baseline; exclude IDs with live origin/research/ma-* branches or MA directories in that baseline",
+  "remote_ma_branch_count": 114,
+  "remote_ma_id_count": 87,
+  "baseline_ma_directory_count": 47,
+  "p0_untested_before_exclusions": 595,
+  "eligible_pool_size": 557,
+  "pool_csv_sha256": "18f0412c74edaf8caef1a6cc2e9cd404da32327c4db7b1dcf8549524588478bf",
+  "seed_hex": "43612469e490f6898d367f0b6918e51cab79cfb35f5351c51f30d0887a77b957",
+  "sampling": "Rejection sample SHA256(seed_bytes || counter_u32_be), reject values >= floor(2^256/n)*n, index=value mod n",
+  "rejection_counter": 0,
+  "index_zero_based": 231,
+  "selected_row": {
+    "id": "MA-715",
+    "family": "Model merging",
+    "proposal": "RegMean statistics -> Mirror merge coefficients",
+    "shared_object": "shared base and View basis",
+    "mirror_coordinate": "layer input-statistics map to View coefficients",
+    "logical_multiplicity": "merged logical model without source data",
+    "cheapest_control": "RegMean",
+    "first_metric": "quality / statistic bytes / merge error",
+    "priority": "P0",
+    "status": "UNTESTED",
+    "prior_art_level": "DIRECT",
+    "prior_art_refs": "PA177;PA26",
+    "mirror_delta": "Use RegMean-style Gram statistics to solve for compact View coefficients instead of full layer weights.",
+    "worker_note": "Report metadata cost of statistics and compare full RegMean."
+  }
+}

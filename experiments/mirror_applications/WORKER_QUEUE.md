@@ -14,13 +14,9 @@ Use:
 
 ## Selection rule
 
-Pick the first candidate satisfying all of:
-1. status is UNTESTED;
-2. highest available priority;
-3. no other active experiment directory already claims the ID;
-4. its closest prior-art controls can be implemented in the current harness.
+Use one fresh uniform draw per experiment from the latest worker-ready baseline P0/UNTESTED rows. Exclude IDs with live remote `research/ma-*` branches or MA experiment directories in that baseline. Record baseline commit, ordered pool and hash, cryptographic seed, pool size, index and selected row before development/audit. Do not reserve IDs. Numeric/family queues below are prior-art maps only.
 
-Do not skip to a visually interesting P1/P2 idea while an executable P0 remains, unless the skipped candidate has a recorded blocker.
+Draw 11 selected MA-715; its protocol is frozen before dataset execution. Pool/hash/seed/index: `ma-715-regmean-mirror/source/random_draw.json`.
 
 ## Literature-derived cross-over queue
 
@@ -315,7 +311,7 @@ Every experiment must isolate the extra Mirror parameter `m` beyond its strong n
 
 Read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08.md`, PA236..PA265 and the selected MA registry row.
 
-**MA-255 remains the canonical next worker candidate.** This queue must not preempt it or supersede its frozen protocol.
+MA-255 is a historical queue recommendation. Random draws govern selection; frozen protocols on other branches remain untouched.
 
 ## Twelfth research expansion — video, equivariance, spiking, physical optics, wireless and spatial audio
 
@@ -339,7 +335,7 @@ Do not reclassify any of the already verified 47 MA results based on these untes
 
 ## Thirteenth research expansion — atomistic, MRI, quantum, visual memory and ANN
 
-**MA-996..1045 are new UNTESTED hypotheses**, appended to the research intake. They do NOT replace or preempt **MA-255** as the next worker candidate.
+**MA-996..1045 are new UNTESTED hypotheses** added to the research intake. Random draws govern candidate selection.
 
 Representative P0 screens within this research intake:
 1. **MA-997 / MA-1000** — Mirror material adaptation against native equivariant-sparse MACE and conservative energy-gradient audit. Test force equivariance and long-run stability rather than energy-only fit.
@@ -408,7 +404,7 @@ Pilot: BOLT-like shared orthogonal basis plus 6 diagonal m coefficients averaged
 
 When selecting MA-1096/1099/1102/1105/1114/1115, include BOLT (PA372), function-space/curvature metric (CG-LoRA PA373, Fora PA374), SVD+CUR localized task residual (PA376), task-vector bases PA375, information filtering PA377, and a gauge-invariant functional/OOD check (PA378..381) where applicable. Do not inflate the MA backlog with duplicated new rows for these existing questions. A task-code success must survive *actual held-out task outcomes and serializer/runtime*, not just weight reconstruction.
 
-**MA-255 remains next**. Do not interrupt active/frozen jobs to consume this support intake.
+MA-255 was a historical recommendation; random draws govern selection. Do not interrupt active/frozen jobs to consume this support intake.
 
 ## Sixteenth research intake — KG relation operators, cameras, robotics and acoustic rooms
 
@@ -428,7 +424,7 @@ Read **`docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_SIXTEENTH_SWEEP
 
 ## Historical P0 family sequence (completed screens; not current queue)
 
-The historical A–F lists below record previously screened experiments and must not override `STATUS_BOARD.md` (MA-255 next).
+The historical A–F lists below record prior-art/candidate maps; random draws in `STATUS_BOARD.md` govern execution.
 
 ### Family A — FFN / MoE / adapter
 MA-003 -> MA-005 -> MA-009 -> MA-019 -> MA-024

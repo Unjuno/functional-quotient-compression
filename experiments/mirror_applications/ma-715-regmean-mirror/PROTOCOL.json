@@ -1,0 +1,102 @@
+{
+  "experiment_id": "MA-715",
+  "title": "RegMean statistics to Mirror merge coefficients",
+  "status": "FROZEN_DEVELOPMENT",
+  "base_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
+  "branch": "research/ma-715-regmean-mirror-20261008",
+  "evidence_lane": "LANGUAGE/MECHANISM/STORAGE/COMPUTE",
+  "prior_art_refs": [
+    "PA177",
+    "PA26"
+  ],
+  "hypothesis": "For held-out mixtures of four task-adapted digit classifiers, a shared rank-r source-delta Mirror basis with coefficients solved directly from RegMean sufficient statistics preserves held-out mixture accuracy/NLL within the frozen tolerance of full RegMean while using at least 30% fewer actual serialized inference bytes for 16 merged functions, and beats byte-near simple shared-basis/task-arithmetic controls on quality or merge compute.",
+  "dataset": {
+    "name": "scikit-learn load_digits",
+    "version": "1.8.0",
+    "shape": [
+      1797,
+      64
+    ],
+    "license_boundary": "Use only local public digits fixture; no network or external model weights.",
+    "input_transform": "Scale pixel values by 16; four deterministic 90-degree rotations (k=0,1,2,3) preserve digit labels. Append a constant-one bias feature.",
+    "split": "Per world, stratified 60/20/20 train/development/audit indices using train_test_split; random_state=seed for train/rest and seed+1 for dev/audit split. Store index manifest before training.",
+    "world_seeds": [
+      71501,
+      71502
+    ]
+  },
+  "model": {
+    "type": "multiclass linear ridge classifier (10 logits)",
+    "dimension": "65 input features including bias, 10 outputs",
+    "base": "W0 is ridge fit on unrotated training images only.",
+    "source_models": "Four models Wi are ridge fits on the same training split under k=0,1,2,3 rotations, labels unchanged.",
+    "ridge_lambda": 0.1,
+    "penalty": "lambda times identity on 64 pixel coefficients; bias penalty is zero.",
+    "Gram_regularizer": 0.001
+  },
+  "regmean_statistics": {
+    "per_source": "G_i=X_i^T X_i/n_i and C_i=W_i G_i, computed from that source domain training split and fitted source model. Raw examples are not accessed during coefficient solve.",
+    "merge_request": "Each request stores nonnegative alpha over four source domains, normalized to sum 1. For request a: G_a=sum_i a_i G_i; C_a=sum_i a_i C_i. Full RegMean W*=C_a (G_a+lambda_reg I)^-1.",
+    "Mirror_solve": "For W(m)=W0+sum_j m_j B_j, solve Hm=b where H_jk=tr(B_j G_a B_k^T), b_j=tr(B_j(C_a-W0 G_a)^T). Basis B is SVD of source model deltas Wi-W0, fitted from training models only.",
+    "stat_storage": "Serialize all four G_i, C_i, domain IDs, scaling/regularization metadata, and merge coefficients; measure actual bytes. These are merge-time inputs, not silently free inference state."
+  },
+  "merge_requests": {
+    "train_requests": 8,
+    "development_requests": 16,
+    "audit_requests": 32,
+    "coefficient_distribution": "Dirichlet(alpha=0.7) on four sources",
+    "seed_schedule": "for world seed s: train requests s+1000; development requests s+2000; audit requests s+3000",
+    "audit_opening": "Only after the combined development gate, including Mirror-specific control gate, passes both worlds."
+  },
+  "controls": [
+    "Full independent RegMean output matrix per request (native upper)",
+    "Weighted task arithmetic of four source model matrices",
+    "Source-delta SVD basis with full-RegMean target projected by unweighted least squares (simple low-rank control)",
+    "Output-merge SVD basis trained on eight disjoint train merge requests, with target merge projected to code (shared-basis control)",
+    "Primary source-delta SVD Mirror basis with code solved directly from RegMean sufficient statistics"
+  ],
+  "rank_sweep": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "development_gates": {
+    "quality_and_storage": "One common rank must, in each development world, have request-weighted accuracy no more than 1.0 percentage point below full RegMean, request-weighted NLL no more than 0.05 above full RegMean, and an actual 16-request inference payload <=0.70x the full-RegMean payload.",
+    "mirror_specific": "At that rank, compare against every simple compressed control whose actual inference payload is within ±5% of the Mirror payload. Mirror must improve weighted accuracy by >=1.0 percentage point or NLL by >=0.05; alternatively it must be within 0.5 percentage point accuracy and use <=0.70x the strongest byte-near control merge MAC proxy. Equality alone is not a Mirror-specific pass.",
+    "select_rank": "Choose the lowest-byte common Mirror rank satisfying quality/storage on both development worlds. No gate retuning after results.",
+    "fail": "Any required quality/storage/Mirror-specific condition fails in either development world; audit remains unopened.",
+    "not_established": "Dataset/dependency/protocol/serializer blocker prevents the frozen comparison."
+  },
+  "storage": {
+    "authoritative": "Actual serialized inference payload bytes.",
+    "inference_objects": [
+      "For full RegMean: all 16 merged W matrices and request IDs.",
+      "For each compressed method: shared W0, complete basis or source deltas, all 16 codes/mixture alphas, reconstruction metadata and request IDs."
+    ],
+    "merge_time_objects": [
+      "All four G_i and C_i, merge coefficient recipes and method-specific source basis/model states required by the merger."
+    ],
+    "reports": [
+      "Inference library bytes",
+      "Merge-time statistics bytes",
+      "Total merge package bytes (method state + statistics + recipes)",
+      "Bytes per logical merged function"
+    ]
+  },
+  "compute": {
+    "report": "Train examples; closed-form fits/linear solves; merge MAC/FLOP proxy; per-request wall time; library serialization wall/bytes. No optimizer updates.",
+    "timing": "Single-thread CPU; report measured time as a short mechanism screen, not a serving benchmark."
+  },
+  "fresh": {
+    "audit_seeds": "Same two split seeds, untouched test partitions and 32 new merge coefficient vectors per world.",
+    "locked_before_access": true,
+    "accessed": false
+  },
+  "boundaries": [
+    "Linear classifier on small 8x8 digit dataset; not a Transformer or large language-model merge.",
+    "Evaluation is task mixture classification and merge distortion, not parameter count.",
+    "No capacity claim; only one fixed training procedure and no near-convergence study.",
+    "Statistics and source model costs reported separately from final inference storage."
+  ]
+}
