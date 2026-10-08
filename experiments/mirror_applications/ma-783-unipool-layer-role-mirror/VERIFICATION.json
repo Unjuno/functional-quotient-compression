@@ -1,6 +1,6 @@
 {
   "experiment_id": "MA-783",
-  "status": "PROTOCOL_FROZEN_PRE_DATA",
+  "status": "FROZEN_PRE_DATA_AMENDED",
   "base_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
   "protocol_frozen_before_corpus_access": true,
   "dataset_values_accessed": false,
@@ -12,10 +12,15 @@
     "pool_size": 555,
     "selected_id": "MA-783"
   },
-  "protocol_sha256": "697dcd48792e0921f220a560386bf4ffaad60224ba4fc4f957098a3c07cff31b",
+  "protocol_sha256": "8213fb9615dd14934d658a86bf974d0abee63d287f4b07e83aa15d7301f9f54d",
   "tests": {
-    "passed": 0,
+    "passed": 3,
     "failed": 0,
-    "status": "implementation/tests not run; protocol-only commit"
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-783-unipool-layer-role-mirror/tests -v",
+    "status": "passed before corpus access"
+  },
+  "protocol_amendment_before_data": {
+    "audit_gate_added": true,
+    "dataset_values_accessed": false
   }
 }

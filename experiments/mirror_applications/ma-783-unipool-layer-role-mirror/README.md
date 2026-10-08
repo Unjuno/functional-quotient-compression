@@ -11,15 +11,15 @@ One global pool of four physical FFN experts plus eight per-layer Givens coordin
 
 ## Prior art
 
-PA205 UniPool already shares one global expert pool across layers with independent routers, balancing and scale-stable routing. PA204 MoRE reuses experts across layer groups and uses learned depth embeddings. This experiment tests the marginal effect of a compact orthogonal layer View, with both a same-size simple gate and a depth-embedding control. It does not claim expert sharing or depth conditioning as new.
+PA205 UniPool-Full already shares one global expert pool across layers with independent routers, NormRouter scores and aggregate pool-level balancing. The protocol uses four shared experts (a reduced-pool setting) and keeps those routing mechanics explicit. PA204 MoRE reuses experts across layer groups and uses learned depth embeddings. This experiment tests the marginal effect of a compact orthogonal layer View, with both a same-size simple gate and a depth-embedding control. It does not claim expert sharing or depth conditioning as new.
 
 ## T — Frozen experiment
 
-The protocol specifies a 4-layer, width-64 causal character Transformer, four experts, two development seeds, 1,200 updates, six conditions, quality/bytes and Mirror-specific gates. The corpus will be acquired only after the protocol commit. Audit spans remain locked unless all development gates pass.
+The protocol specifies a 4-layer, width-64 causal character Transformer, four experts, two development seeds, 1,200 updates, six conditions, top-1 NormRouter, UniPool aggregate load balancing, quality/bytes and Mirror-specific gates. A pre-data protocol amendment also freezes the audit decision threshold: the Mirror must remain within 0.10 nats of untied MoE and beat both byte-near controls by 0.02 nats in each world. The corpus will be acquired only after the protocol commit. Audit spans remain locked unless all development gates pass.
 
 ## D — Pending
 
-No corpus values or model scores have been accessed.
+No corpus values or model scores have been accessed. The thin nanoGPT attention adapter, six model conditions and preflight tests are implemented; 3 tests pass.
 
 ## C — Strongest counter-hypothesis
 

@@ -14,7 +14,8 @@
     "physical_object": "four global FFN experts shared across all four Transformer layers",
     "coordinate": "eight fixed-pair Givens rotation angles per layer applied to the expert input",
     "logical_function": "layer-specific realization of the same physical expert bank",
-    "coordinates_per_layer": 8
+    "coordinates_per_layer": 8,
+    "router_interface": "Mirror Givens and byte-matched FiLM act only after routing, on selected expert inputs. The router sees the unmodified normalized layer activation. The MoRE-style depth embedding is added before both router and expert."
   },
   "dataset": {
     "name": "Tiny Shakespeare character corpus",
@@ -30,13 +31,14 @@
     "attention_heads": 4,
     "experts_per_layer": 4,
     "expert_hidden_width": 128,
-    "routing": "per-layer top-1 softmax routing with global pool load-balancing auxiliary loss",
-    "sequence_length": 128
+    "routing": "Top-1 NormRouter: per-layer router logits normalized by L2 norm, ReLU, multiplied by deterministic Appendix-L Monte Carlo scale c and a learned per-layer scalar. The selected expert output is scaled by its selected NormRouter score.",
+    "sequence_length": 128,
+    "load_balancing": "Untied MoE uses per-layer auxiliary balancing. All global-pool conditions use one pool-level auxiliary loss from mean expert score and assignment rates aggregated over all layers; coefficient 0.01."
   },
   "conditions": [
     "dense one-FFN-per-layer GPT control",
-    "untied 4-expert-per-layer top-1 MoE upper control",
-    "UniPool: one global 4-expert pool with independent layer routers",
+    "untied standard 4-expert-per-layer MoE with per-layer NormRouter and per-layer balancing",
+    "UniPool-style full-pool access during all training, four global experts, independent per-layer NormRouters, aggregate pool-level balancing",
     "UniPool + 8-angle/layer Givens Mirror view",
     "UniPool + byte-matched 8-group/layer FiLM scale gate",
     "UniPool + 8D/layer depth embedding through a shared projection (MoRE-style control)"
@@ -95,5 +97,27 @@
     "fixed 1200-update schedule cannot establish asymptotic capacity",
     "expert combination counts are not independent capacity",
     "softmax/top-1 implementation and CPU runtime must be reported exactly"
-  ]
+  ],
+  "audit_gate": {
+    "apply_to_each_development_world_seed_on_locked_audit_span": "Mirror next-character NLL must be <= untied MoE +0.10 nats and <= both byte-near UniPool+FiLM and UniPool+depth-embedding controls by at least 0.02 nats. Inference bytes are unchanged from the already measured checkpoint payload. Any miss is FAIL; no tuning."
+  },
+  "amendments": [
+    {
+      "date": "2026-10-08",
+      "timing": "before corpus acquisition and before any model/data metrics",
+      "change": "Specify the final audit decision gate after code review.",
+      "rationale": "The original protocol specified when to open audit but left the post-audit decision rule implicit. Freeze the same quality and Mirror-specific thresholds for audit before opening it."
+    },
+    {
+      "date": "2026-10-08",
+      "timing": "before corpus acquisition and any model/data metrics",
+      "change": "Refined all MoE routing controls to PA205 NormRouter and pool-level balancing, and fixed the exact Mirror/FiLM expert-input insertion after routing.",
+      "rationale": "Full-text PA205 confirms UniPool-Full uses top-1 NormRouter and aggregate pool-level balancing; per-layer balancing is retained only for the untied private-expert control. Givens/FiLM do not alter the independent router, while the MoRE depth embedding conditions routing and experts."
+    }
+  ],
+  "routing_calibration": {
+    "normrouter": "PA205 Appendix L Monte Carlo formula; 100000 standard-normal samples, fixed seed 78300, four candidates, top-1; fixed c is deterministic from algorithm and configuration. Each MoE layer has a learned scalar initialized to 1.",
+    "auxiliary_loss_weight": 0.01,
+    "capacity": "no capacity drop; each token selects one expert"
+  }
 }
