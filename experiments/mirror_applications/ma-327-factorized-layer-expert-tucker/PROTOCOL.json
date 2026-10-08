@@ -1,0 +1,34 @@
+{
+  "experiment_id": "MA-327",
+  "title": "Factorized layer x expert Tucker address",
+  "status": "PROTOCOL_FROZEN_BEFORE_DEVELOPMENT",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY/COMPUTE",
+  "base_commit": "1edb52e",
+  "hypothesis": "For a planted low-rank Tucker matrix bank of logical layer-expert transforms, a product of layer and expert coefficient factors will recover all held-out layer-expert combinations with test nMSE <= 1e-5 and use at least 20% fewer actual serialized bytes than a flat per-pair Tucker coefficient control. A direct low-rank coefficient product is the nearest non-Mirror control and may erase Mirror-specific value.",
+  "physical_object": "shared Tucker core and factor bank representing 16x16 linear maps for 4 layers x 4 experts",
+  "mirror_coordinate": "factorized layer code times expert code over shared Tucker bank",
+  "logical_multiplicity": "16 layer-expert transforms, including combinations held out from coefficient fitting",
+  "prior_art_refs": ["PA35"],
+  "controls": ["single shared Tucker bank hard tie", "flat pair-specific Tucker coefficients", "ordinary rank-2 layer-factor x expert-factor coefficient product", "Mirror layer/expert factor product over Tucker bank", "independent full transform per pair upper control"],
+  "development": {
+    "worlds_or_seeds": [32701, 32702],
+    "selection_metric": "held-out layer-expert test nMSE and serialized byte count"
+  },
+  "fresh": {
+    "worlds_or_seeds": [32711, 32712, 32713],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": ["shared Tucker basis and core", "all flat or factorized coefficients", "domain/layer/expert IDs", "metadata and archive headers"]
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true
+  },
+  "success_gate": "All 3 fresh seeds: held-out test nMSE <= 1e-5, Mirror payload <=0.80x flat pair coefficient payload, and Mirror strictly smaller than the rank-2 ordinary coefficient-product control by at least 10%; exact serialized reload and metrics replay.",
+  "failure_gate": "Mirror exceeds nMSE 1e-5 in >=2 fresh worlds; or saves <20% versus flat pairs in >=2; or ordinary product control is within 10% bytes at comparable quality; or compute proxy exceeds 10x flat control.",
+  "boundaries": ["synthetic linear transform bank, not trained MoE or natural-language evidence", "held-out layer-expert pair combinations required", "factorized coordinates are not independent capacity", "actual inference payload bytes are authoritative", "fixed-update learning evidence is not capacity"]
+}
