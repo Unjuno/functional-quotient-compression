@@ -1,0 +1,60 @@
+{
+  "experiment_id": "MA-707",
+  "title": "Scaled-Cayley Mirror recurrent dynamics",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/RUNTIME",
+  "base_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
+  "draw_id": "Draw39",
+  "hypothesis": "A shared orthogonal recurrent transition plus a compact skew-symmetric Cayley coordinate will represent multiple stable task dynamics at lower serialized bytes than independent task-specific orthogonal matrices, while preserving multi-step rollout quality. Larger angle tasks may expose the limited coordinate subspace.",
+  "physical_object": "shared base orthogonal recurrent transition matrix",
+  "mirror_coordinate": "two coefficients over shared skew-symmetric generators, composed through a Cayley map",
+  "logical_multiplicity": "task-specific stable recurrent dynamics",
+  "prior_art_refs": [
+    "PA171"
+  ],
+  "controls": [
+    "tied shared orthogonal transition with no task code",
+    "shared transition plus rank-2 skew-Cayley Mirror code",
+    "task-specific full orthogonal transition upper control",
+    "shared transition plus unconstrained rank-2 additive residual"
+  ],
+  "task": "Synthetic 4D linear recurrence; fit task dynamics from support state transitions, evaluate multi-step rollout MSE and spectral stability on held-out initial states.",
+  "development": {
+    "worlds_or_seeds": [
+      70701
+    ],
+    "selection_metric": "development one-step support fit and 32-step query rollout; rank fixed at 2"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      70711,
+      70712,
+      70713
+    ],
+    "locked_before_access": true,
+    "split": "four development task matrices determine shared base/generator span; each fresh world includes 6 low-angle and 6 high-angle task dynamics, 128 support transitions and 32 held-out 32-step trajectories per task"
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "shared base transition",
+      "skew generators",
+      "task codes",
+      "independent task matrices/control state"
+    ]
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true
+  },
+  "success_gate": "On >=2/3 fresh worlds, low-angle Mirror 32-step MSE <=1.05x full orthogonal control, spectral radius <=1.001, and actual payload <=60% of task-specific matrices. Report high-angle boundary and Cayley solve overhead.",
+  "failure_gate": "FAIL if low-angle rollout or stability gate fails on >=2/3 worlds, or payload exceeds 60% without a quality advantage over tied shared control. PROMISING is scoped recurrence evidence only; no general RNN claim.",
+  "boundaries": [
+    "synthetic linear recurrence only",
+    "teacher dynamics are generated from a low-rank Cayley family",
+    "no language or long-horizon real sequence task",
+    "Cayley orthogonality does not imply useful task diversity"
+  ]
+}
