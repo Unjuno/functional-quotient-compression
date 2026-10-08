@@ -173,6 +173,30 @@ Read PA260–PA264. Preserve native FMM interval conditioning, Consistency, S4S,
 
 Read PA240–PA242. Compare StitchLLM and per-model affine residual-stream stitchers. Evaluate target NLL, transferred SAE/probe feature consistency, connector/router bytes, held-out model/layer pairs, and informational/counterfactual negative controls. Output match alone does not prove shared knowledge.
 
+### Neural video rate-distortion and chunked INR (MA-936..950)
+
+Read PA266..274. Compare NerVast selected shared/private masks, DCVC-UF chunk-parallel decoder, DCVC-RT, native context modulation, HNeRV/CoANeRV/nested video codec. Use actual encoded bpp/BD-rate, PSNR/MS-SSIM, encoder time, seek time, FPS and VRAM. Analyze scene-cut failures and hold-out video segments; preserve same chunk latent and full control costs.
+
+### Group equivariance, irrep and learned symmetries (MA-951..960)
+
+Read PA275..280 and PA294. Native G-CNN/steerable/e3nn/EGNN and learned soft symmetry are strong controls; zero-parameter equivariance penalty is a strong byte control. **Exact gauge/covariant copies are zero independently learned functional multiplicity.** Only m that changes useful task behavior beyond symmetry earns Mirror-specific value.
+
+### Spiking thresholds, time gains and neuromodulation (MA-961..970)
+
+Read PA281..285. STL-SNN thresholds, TEBN time steps, TACOS task-free continual control and EAS-SNN event sampling are native mechanisms. Count spike operations and energy, temporal precision, membrane/synaptic bytes, event latency and retention. No oracle task boundary in task-agnostic comparisons.
+
+### Programmable photonic physical operators (MA-971..980)
+
+Read PA286, PA287 and PA295. LightPro/MZI/diffractive optical programming itself is prior art; only a smaller learned m with reduced reconfiguration/energy/control memory beyond native full programming is a Mirror-specific proposal. Distinguish circuit models and real chips; count loss/crosstalk, programmable devices, thermal drift, total power and switching milliseconds.
+
+### Beam codebooks, CSI feedback and RIS (MA-981..989)
+
+Read PA288..291. Native beamspace codebook, Type-II feedback, CsiNet and RIS phase optimization already give compact controls. Use net spectral efficiency, pilot/feedback bits, RF hardware constraints, dynamic channel variations, energy and reconfiguration latency; hold out wireless site/user/frequency combinations.
+
+### Personalized spatial HRTFs (MA-990..995)
+
+Read PA292..293. RANF/retrieval field and anthropometric latent codes are direct baselines. Use held-out listener/direction pairs, binaural spectral/phase distortion, interaural timing/levels, measurement budget, file bytes and streaming head-pose update cost.
+
 ## Historical result loading rule
 
 Do **not** load every SRM/MS/MN document.
