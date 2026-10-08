@@ -9,7 +9,7 @@ Integration branch: `research/mirror-application-current-evidence-20261008`; can
 - P0: **630** (92 completed; 538 UNTESTED)
 - P1: **422** (12 completed; 410 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1048 UNTESTED, 39 PROMISING, 68 FAIL**
+- Current MA statuses: **1047 UNTESTED, 39 PROMISING, 69 FAIL**
 - 48 experiment directories, complete with status/protocol/results/verification files, are represented in the current evidence set.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-268 is next.
@@ -23,7 +23,7 @@ Integration branch: `research/mirror-application-current-evidence-20261008`; can
 
 ## Next candidate
 
-**MA-372 — MatFormer Mix'n'Match factorized Mirror codes (P0; PA53)**
+**MA-374 — ALBERT shared layers + depth Mirror (P0; PA54)**
 
 MA-366 is reconciled as FAIL: direct pair coefficients match Mirror outputs and bytes, and PA02 factorization is smaller. The runner accidentally generated the registered fresh IDs before the gate; those rows are excluded and fresh integrity is invalid. MA-367 and MA-368 are also recorded FAIL. MA-369 is completed FAIL on its dedicated branch; next executable P0 is MA-371.
 
@@ -32,6 +32,8 @@ MA-366 is reconciled as FAIL: direct pair coefficients match Mirror outputs and 
 MA-369 FAIL: on fresh digits worlds the OFA-style supernet + four-angle View improved mean accuracy only 0.09pp over shared weights and was matched by equal-byte FiLM; shared-bank bytes were 40,191 vs 98,185 independent. The storage reduction came from weight sharing, not Mirror. Complete report and replay verification are in its dedicated branch. MA-371 is next.
 
 **MA-371 — MatFormer granularity Mirror views (P0; PA53): FAIL.** Fresh mean accuracy was 95.28% vs 94.85% nested baseline (+0.43pp), below the +1pp gate; 40,063B was 65.4% of the independent bank, above the 50% limit. Equal-byte FiLM was close. The screen is a nested MLP, not a Transformer reproduction. **Next: MA-372**, a separate held-out Mix'n'Match question.
+
+**MA-372 — MatFormer Mix'n'Match factorized Mirror codes (P0; PA53): FAIL.** Across 24 held-out mixed-width configurations and three fresh worlds, factorized Mirror gained 0.16pp over nested sharing, below the 1pp gate; equal-byte FiLM was more accurate and factor codes were 77.5% of direct-bank bytes versus the 60% limit. This is a digits MLP screen. **Next: MA-374.**
 
 MA-255 is reconciled PROMISING only for its aligned post-fit screen; its separate fixed-update variant failed. Dedicated branch evidence for all new results is cited in `CLAIM_LEDGER.csv`.
 
@@ -44,7 +46,7 @@ No active experiment is declared. MA-366 is verified as a development-only FAIL;
 ## Verified status index
 
 - **PROMISING (39):** MA-001, MA-002, MA-003, MA-004, MA-005, MA-006, MA-007, MA-008, MA-012, MA-014, MA-015, MA-041, MA-076, MA-079, MA-111, MA-121, MA-156, MA-160, MA-171, MA-173, MA-181, MA-189, MA-241, MA-244, MA-245, MA-249, MA-250, MA-251, MA-255, MA-268, MA-276, MA-282, MA-312, MA-258, MA-314, MA-330, MA-344, MA-346, MA-691.
-- **FAIL (66):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-257, MA-260, MA-261, MA-265, MA-271, MA-272, MA-273, MA-274, MA-278, MA-286, MA-288, MA-292, MA-296, MA-297, MA-299, MA-301, MA-303, MA-304, MA-307, MA-309, MA-311, MA-315, MA-319, MA-320, MA-322, MA-327, MA-331, MA-332, MA-333, MA-335, MA-337, MA-338, MA-341, MA-266, MA-318, MA-325, MA-342, MA-349, MA-351, MA-353, MA-355, MA-357, MA-359, MA-356, MA-360, MA-361, MA-364, MA-366, MA-369, MA-371.
+- **FAIL (66):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-257, MA-260, MA-261, MA-265, MA-271, MA-272, MA-273, MA-274, MA-278, MA-286, MA-288, MA-292, MA-296, MA-297, MA-299, MA-301, MA-303, MA-304, MA-307, MA-309, MA-311, MA-315, MA-319, MA-320, MA-322, MA-327, MA-331, MA-332, MA-333, MA-335, MA-337, MA-338, MA-341, MA-266, MA-318, MA-325, MA-342, MA-349, MA-351, MA-353, MA-355, MA-357, MA-359, MA-356, MA-360, MA-361, MA-364, MA-366, MA-369, MA-371, MA-372.
 
 All per-ID evidence is retained in the local experiment directories and in `CLAIM_LEDGER.csv`. Consult [the evidence integration audit](../../docs/phase2/MIRROR_MA_EVIDENCE_INTEGRATION_2026-10-08.md) for linked reports, verifications, provenance and claim boundaries.
 

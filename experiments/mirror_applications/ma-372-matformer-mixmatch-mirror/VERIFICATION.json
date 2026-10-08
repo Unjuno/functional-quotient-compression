@@ -1,20 +1,71 @@
 {
   "experiment_id": "MA-372",
   "commit": null,
-  "protocol_frozen": true,
   "tests": {
-    "passed": null,
-    "failed": null
+    "passed": 3,
+    "failed": 0
   },
-  "fresh_opened": false,
+  "protocol_frozen_before_development": true,
+  "development_selection": {
+    "experiment_id": "MA-372",
+    "selected_learning_rate": 0.003,
+    "mean_validation_nll_by_lr": {
+      "0.003": 0.19435454516666664,
+      "0.01": 0.24188856602135414
+    },
+    "development_worlds": [
+      37200,
+      37201
+    ],
+    "fresh_worlds_locked": [
+      37210,
+      37211,
+      37212
+    ]
+  },
+  "fresh_summary": {
+    "nested": {
+      "mean_accuracy": 0.9440586429166666,
+      "mean_nll": 0.24443892420277777,
+      "serialized_bytes": 55885,
+      "mean_train_wall_s": 0.814468,
+      "mean_inference_examples_per_second": 3244155.1575833336
+    },
+    "factor_mirror": {
+      "mean_accuracy": 0.9456404319444445,
+      "mean_nll": 0.2298561493986111,
+      "serialized_bytes": 57968,
+      "mean_train_wall_s": 1.0644576666666667,
+      "mean_inference_examples_per_second": 1274992.5607916666
+    },
+    "factor_film": {
+      "mean_accuracy": 0.9469907418055555,
+      "mean_nll": 0.23555086491388888,
+      "serialized_bytes": 57968,
+      "mean_train_wall_s": 0.9865656666666667,
+      "mean_inference_examples_per_second": 2046257.5515
+    },
+    "direct_mirror": {
+      "mean_accuracy": 0.9469521619444444,
+      "mean_nll": 0.22539524195833333,
+      "serialized_bytes": 74803,
+      "mean_train_wall_s": 2.756027,
+      "mean_inference_examples_per_second": 1279202.1128055556
+    }
+  },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "roundtrip_checked": true,
+    "max_abs_logit_difference": 0.0,
+    "payload_hash_checked": true
   },
   "metric_replay": {
-    "checked": false
+    "rows": 672,
+    "max_metric_difference": 4.850616464047164e-09
   },
+  "decision": "FAIL",
   "notes": [
-    "Fresh worlds 37210-37212 remain sealed."
+    "Fresh results score all 24 non-homogeneous width triples in three worlds; factor codes were trained only on homogeneous-width configurations.",
+    "Factorized Mirror misses the >=1pp quality gain and <=60% direct-bank byte gate; equal-byte FiLM is at least as accurate with lower correction MACs.",
+    "Small digits MLP screen, not Transformer MatFormer evidence."
   ]
 }
