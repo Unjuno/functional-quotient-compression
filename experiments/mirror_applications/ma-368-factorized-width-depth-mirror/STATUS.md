@@ -12,7 +12,7 @@
 
 ## Next action
 
-Commit and push the verified FAIL, then proceed to MA-369.
+Verified FAIL is committed and pushed. Width/depth post-output code family is paused after two same-cause FAILs; proceed to MA-374 and revisit MA-369/371/372 after a family redesign.
 
 ## Blockers
 

@@ -80,7 +80,7 @@ Held-out combinations may need configuration-specific calibration that an additi
 
 ### U — unresolved
 
-No natural workload, unseen continuous widths/depths, fused-kernel runtime, long convergence, or progressive-shrinking OFA implementation was tested. The result is a fixed-budget synthetic screen, not a capacity claim. MA-369 tests subnetwork-specific OFA correction as a separate candidate.
+No natural workload, unseen continuous widths/depths, fused-kernel runtime, long convergence, or progressive-shrinking OFA implementation was tested. The result is a fixed-budget synthetic screen, not a capacity claim. MA-369/371/372 remain untested pending redesign of the repeated width/depth output-code family.
 
 ### Evidence labels
 
@@ -88,9 +88,6 @@ No natural workload, unseen continuous widths/depths, fused-kernel runtime, long
 - **Interpretation:** the tested additive Givens parameterization failed its held-out quality gate and showed no Mirror-specific frontier gain.
 - **Hypothesis:** block-local or explicit interaction coordinates may be more useful; they remain untested.
 
-## Decision
+## Family decision
 
-FACT:
-INTERPRETATION:
-HYPOTHESIS:
-BOUNDARY:
+MA-367 and MA-368 are two consecutive width/depth supernet output-code screens. Both show the same structural pattern: the native shared supernet wins, while post-activation Givens and byte-matched scalar corrections fail to recover additional quality. Per the worker stop rule, closely related MA-369 and MA-371/372 are held pending family redesign. A redesigned test should move `m` inside the repeated block or adjust the sampled-training objective, with the same matched native controls. The research program continues on the distinct ALBERT tied-depth family (MA-374).

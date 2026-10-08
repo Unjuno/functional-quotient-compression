@@ -23,17 +23,17 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-369 — Once-for-All subnetwork Mirror correction (P0; PA52)**
+**MA-374 — ALBERT shared layers + Mirror depth coordinate (P0; PA61)**
 
-MA-367 and MA-368 completed as FAIL. MA-368's additive factorized Givens codes worsened held-out width-depth NLL versus the plain supernet and same-byte scalar control. Continue the registered P0 supernet sequence with an OFA architecture-code test.
+MA-367 and MA-368 completed as FAIL with the same width/depth supernet output-code failure pattern. Pause MA-369 and MA-371/372 until that family is redesigned; their registry rows remain UNTESTED. Continue with the distinct ALBERT repeated-block depth-coordinate family.
 
-Required controls: native OFA subnetwork selection without correction, a byte-matched direct scalar or IA3 correction, and independently specialized models when practical. Compare held-out architecture configurations with actual deployment latency where available.
+Required controls: fully untied block stack; one hard-shared ALBERT block; attention-only and FFN-only sharing; shared block with depth-conditioned scalar/FiLM and Mirror coordinate; count exact bytes and report depthwise representation/function diversity.
 
-Prior art: PA52 OFA progressive shrinking. Do not treat architecture count as capacity; measure subnetwork quality and charge every serialized correction.
+Prior art: PA61 ALBERT cross-layer parameter sharing. Do not count logical depths as independent capacity; measure per-depth quality and charge every correction.
 
 ## Active experiment
 
-MA-369 is next on its dedicated research branch; no fresh data from MA-367 or MA-368 were opened.
+MA-374 is next on its dedicated research branch; no fresh data from MA-367 or MA-368 were opened. MA-369/371/372 remain untested while the width/depth output-code family is redesigned.
 
 ## Verified status index
 
