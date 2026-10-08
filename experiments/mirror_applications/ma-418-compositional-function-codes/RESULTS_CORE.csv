@@ -1,0 +1,7 @@
+condition,world_or_seed,method,serialized_bytes,train_tokens_or_examples,optimizer_updates,active_compute_proxy,wall_time_s,primary_metric,primary_value,secondary_metric,secondary_value,status_note
+fresh_mean,41810-41812,shared,2525,153600,600,64 MAC/query,0.213,heldout_pair_normalized_rmse,0.1574,seen_pair_normalized_rmse,0.1621,baseline
+fresh_mean,41810-41812,mirror_factor,3029,153600,600,72 MAC/query,0.428,heldout_pair_normalized_rmse,0.0740,seen_pair_normalized_rmse,0.0525,FAIL misses factorized latent quality gate
+fresh_mean,41810-41812,latent_factor,3541,153600,600,192 MAC/query,0.290,heldout_pair_normalized_rmse,0.0327,seen_pair_normalized_rmse,0.0179,stronger factorized native control
+fresh_mean,41810-41812,film_factor,5389,153600,600,128 MAC/query,0.350,heldout_pair_normalized_rmse,0.0149,seen_pair_normalized_rmse,0.0138,stronger simple control
+fresh_mean,41810-41812,pair_table,2905,153600,600,72 MAC/query,0.429,heldout_pair_normalized_rmse,0.2035,seen_pair_normalized_rmse,0.0164,no held-out composition
+fresh_mean,41810-41812,oracle_independent,8349,153600,600,64 MAC/query,0.418,heldout_pair_normalized_rmse,0.0128,seen_pair_normalized_rmse,0.0125,oracle control

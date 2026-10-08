@@ -1,0 +1,10 @@
+{
+  "experiment_id": "MA-418",
+  "protocol_commit": "e811fba",
+  "tests": {"command": "python -m unittest discover -s experiments/mirror_applications/ma-418-compositional-function-codes/tests -v", "passed": 2, "failed": 0},
+  "serialization": {"roundtrip_checked": true, "byte_exact": true, "payload_rows": 126, "payload_hashes_replayed": true, "actual_payload_bytes_authoritative": true},
+  "metric_replay": {"checked": true, "max_difference": 0.0, "notes": ["Per-run serialized payload lengths and hashes verified.", "Fresh pair metrics replay from JSONL.", "Mirror held-out error was 2.26x the factorized latent control."]},
+  "fresh_split_integrity_checked": true,
+  "fresh_worlds": [41810, 41811, 41812],
+  "notes": ["Diagonal held-out pairs did not enter training or development for non-oracle methods.", "Oracle independent models trained on all pairs.", "Teacher uses compositional Givens, yet factorized FiLM/latent outperform Mirror."]
+}
