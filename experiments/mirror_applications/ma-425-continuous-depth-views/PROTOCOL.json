@@ -1,0 +1,22 @@
+{
+  "experiment_id": "MA-425",
+  "title": "Continuous depth-time Givens views versus shared and embedded vector fields",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/GENERALIZATION",
+  "base_commit": "3e23b93",
+  "hypothesis": "For a stable 2D vector field rotating smoothly with depth time, a continuous Givens Mirror view trained on t in [0,1] achieves extrapolated t=2 endpoint NRMSE <=1.1x a simple linear time-embedding field while using <=90% its actual bytes and the same solver NFE.",
+  "physical_object": "one shared 2x2 base vector-field matrix",
+  "mirror_coordinate": "continuous depth-time angle omega*t applied as Q(t) A Q(t)^T",
+  "logical_multiplicity": "a continuum of depth-specific vector-field roles from one shared field",
+  "prior_art_refs": ["PA70", "PA72"],
+  "controls": ["constant shared field", "continuous Givens Mirror depth view", "simple linear time embedding A+tB", "four discrete depth-bin matrices with last-bin extrapolation"],
+  "task": {"type": "stable 2D time-varying linear ODE", "state_dim": 2, "teacher": "A(t)=Q(omega*t) A0 Q(omega*t)^T with omega=0.7 and stable eigenvalues", "training_time_interval": [0.0, 1.0], "evaluation_horizons": [1.0, 2.0], "test_initial_states": 128, "rk4_steps": 16},
+  "development": {"worlds_or_seeds": [42500, 42501], "learning_rates": [0.003, 0.01], "selection_metric": "lowest validation derivative NRMSE for t<=1"},
+  "fresh": {"worlds_or_seeds": [42510, 42511, 42512], "locked_before_access": true},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["base matrix", "continuous angle/frequency code", "time-embedding matrices", "discrete depth matrices", "metadata"]},
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true, "report_solver_nfe": true},
+  "training": {"updates": 400, "batch_size": 256, "optimizer": "AdamW", "seeds": [0,1,2]},
+  "success_gate": "On each fresh world, Mirror t=2 endpoint NRMSE <=1.1x linear time embedding, Mirror bytes <=90% linear embedding bytes, and identical RK4 NFE.",
+  "failure_gate": "Mirror misses extrapolation quality or byte threshold, or simple time embedding dominates at comparable bytes.",
+  "boundaries": ["Teacher matches the continuous rotation view family; aligned feasibility only.", "One low-dimensional linear system; no Transformer depth or language model claim.", "Fixed-step RK4; adaptive solver stability untested."]
+}
