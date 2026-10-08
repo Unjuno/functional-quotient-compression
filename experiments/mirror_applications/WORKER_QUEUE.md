@@ -1,6 +1,6 @@
 # Worker queue
 
-**Current operational pointer (2026-10-08): MA-429/431.** MA-427 all converged but missed the registered independent quality/byte/iteration comparisons. Continue with Universal Transformer depth views/composition.
+**Current operational pointer (2026-10-08): MA-434.** MA-429 showed strong aligned depth extrapolation but again missed actual-byte reduction; MA-431 is deferred under the repeated depth-family byte failure rule. Continue with the Mamba selective-state family.
 
 The queue is derived from `IDEA_REGISTRY.csv`. The registry is authoritative.
 
@@ -154,8 +154,8 @@ High-information P0:
 9. MA-418/419 — compositional/modulated neural-function codes
 10. MA-424/425 — continuous-depth Mirror dynamics (both completed FAIL under strict byte gates)
 11. MA-427 — DEQ conditioned fixed-point map (completed FAIL)
-12. MA-429/431 — Universal Transformer depth Views/composition — current candidates
-13. MA-434 — Mamba selective-state Mirror roles
+12. MA-429 — Universal Transformer depth view (completed FAIL); MA-431 deferred pending depth-family redesign
+13. MA-434 — Mamba selective-state Mirror roles — current candidate
 14. MA-436/437 — logical SSM experts and S4 structured Views
 15. MA-442 — MAML with Mirror-only inner-loop adaptation
 16. MA-444 — LEO latent decoder versus structured Mirror
