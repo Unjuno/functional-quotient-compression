@@ -21,3 +21,42 @@ PA86's MEND maps low-rank edit-gradient decompositions into parameter updates. M
 ## Results
 
 Pending frozen development runs.
+
+## Development result
+
+**Decision: NOT ESTABLISHED.** Both frozen development seeds violate the independent-fit locality validity bound; fresh seeds remain sealed. Mirror itself misses edit and locality thresholds on both seeds and is byte/output-identical to direct native low-rank generation.
+
+### Facts
+
+| Seed | Method | Edit RMSE | Locality RMSE | Payload bytes | Edit MAC proxy / edit |
+|---:|---|---:|---:|---:|---:|
+| 46901 | MEND | 0.10309 | 0.27438 | 15,192 | 2,340 |
+| 46901 | Mirror | 0.10057 | 0.27151 | 8,526 | 1,324 |
+| 46901 | Native low-rank | 0.10057 | 0.27151 | 8,526 | 1,324 |
+| 46901 | ROME | 0.05486 | 0.09058 | 4,651 | 36 |
+| 46901 | Independent fit | 0.00430 | 0.26609 | 4,670 | 36 |
+| 46901 | No edit | 0.11172 | 0.00000 | 1,510 | 36 |
+| 46902 | MEND | 0.05965 | 0.25099 | 15,192 | 2,340 |
+| 46902 | Mirror | 0.07238 | 0.31140 | 8,526 | 1,324 |
+| 46902 | Native low-rank | 0.07238 | 0.31140 | 8,526 | 1,324 |
+| 46902 | ROME | 0.04618 | 0.09706 | 4,651 | 36 |
+| 46902 | Independent fit | 0.00434 | 0.23267 | 4,670 | 36 |
+| 46902 | No edit | 0.10526 | 0.00000 | 1,510 | 36 |
+
+Training and generation wall time varied at sub-millisecond scale and is retained verbatim in `RESULTS_CORE.csv` and per-seed metrics; it is not treated as a stable runtime comparison. The initial preflight launch failure is recorded in `attempts.jsonl`; it emitted no experiment data.
+
+### T — Execution
+
+Two development worlds (46901, 46902), 2,200 Adam updates for each learned editor, exact NPZ inference payload byte counts, ROME and independent support-fit controls, serialized metric replay and native-alias checks. Seeds 46911–46913 were never opened.
+
+### D — Decision
+
+The frozen NOT ESTABLISHED rule fired: the independent support-fit control had edit RMSE 0.00430/0.00434 but locality RMSE 0.26609/0.23267, above 0.05. The development protocol therefore cannot validate a local-edit quality frontier. Independently, Mirror misses its own <=0.05 edit and locality gates and exactly matches the native low-rank control.
+
+### C — Strongest counter-hypothesis
+
+The synthetic task applies every edit as a global matrix update, while scoring locality on unrelated inputs. This mismatch may explain the upper-control locality failure; the outcome does not test realistic key-conditioned locality.
+
+### U — Unconfirmed
+
+Local/key-conditioned editing, factual language-model edits, near-converged MEND controls, fresh-world replication, and any storage/quality Pareto claim are unconfirmed.

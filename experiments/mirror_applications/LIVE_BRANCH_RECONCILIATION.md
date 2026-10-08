@@ -7,3 +7,5 @@ MA-325 was separately marked NOT ESTABLISHED from its explicit status report bec
 MA-369/371/372 remain paused after the documented consecutive width/depth family failures. After MA-452 was terminally recorded and remote branches refreshed, MA-453 (PA81) was the next eligible P0 without a live experiment branch; MA-451/452 PathNet variants are paused after the repeated exact Givens alias.
 
 No fresh data were opened during reconciliation.
+
+- MA-469 — NOT ESTABLISHED, research branch `research/ma-469-mend-mirror-edit-code-20261008`: frozen synthetic global matrix edits made the independent support-fit upper violate the locality validity bound in both development seeds; Mirror missed both edit/locality gates and exactly matched native low-rank. Fresh seeds sealed.
