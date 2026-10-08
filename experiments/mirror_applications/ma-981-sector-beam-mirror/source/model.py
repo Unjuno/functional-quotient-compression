@@ -60,7 +60,8 @@ class BeamCodebook(nn.Module):
         return torch.complex(torch.cos(p),torch.sin(p))/math.sqrt(NANT)
 
     def active_proxy(self):
-        return {'dft':0,'global_learned':0,'scalar_view':8,'rank2_view':24,'mirror_view':8,'independent_sector':0}[self.method]
+        # Extra phase-codebook materialization ops per sector address; selection MACs are common.
+        return {'dft':0,'global_learned':0,'scalar_view':64,'rank2_view':80,'mirror_view':64,'independent_sector':0}[self.method]
 
 
 def rates(channels,beams):
