@@ -1,6 +1,6 @@
 # Worker queue
 
-**Current operational pointer (2026-10-08): MA-411.** MA-407 is completed FAIL; MA-408 is completed PROMISING only as a fixed-context CondConv synthetic control. Continue with MA-411.
+**Current operational pointer (2026-10-08): MA-413.** MA-411 is completed PROMISING only for the aligned shared-support operator case. Continue with MA-413.
 
 The queue is derived from `IDEA_REGISTRY.csv`. The registry is authoritative.
 
@@ -147,7 +147,7 @@ High-information P0:
 3. MA-405 — StyleGAN2-like FFN weight modulation
 4. MA-407 — demodulated Mirror-MoE (completed FAIL; orthogonal Givens makes demodulation a null)
 5. MA-408 — CondConv-style synthesized FFN (completed PROMISING in bounded synthetic control)
-6. MA-411 — canonical transform + sparse Mirror refinement
+6. MA-411 — canonical transform + sparse Mirror refinement (completed PROMISING for aligned shared-support operators)
 7. MA-413 — factorized concept Mirror coordinates
 8. MA-416/417 — shared decoder + Mirror function codes
 9. MA-418/419 — compositional/modulated neural-function codes

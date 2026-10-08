@@ -1,0 +1,10 @@
+{
+  "experiment_id": "MA-411",
+  "protocol_commit": "ac86b04",
+  "tests": {"command": "python -m unittest discover -s experiments/mirror_applications/ma-411-canonical-transform-sparse-mirror/tests -v", "passed": 2, "failed": 0},
+  "serialization": {"roundtrip_checked": true, "byte_exact": true, "payload_rows": 126, "payload_hashes_replayed": true, "actual_payload_bytes_authoritative": true},
+  "metric_replay": {"checked": true, "max_difference": 0.0, "notes": ["All saved payload lengths and SHA-256 hashes match the per-run records.", "Fresh quality, bytes, and condition-number gates replay from JSONL records.", "Sparse support indices are stored in the actual payload."]},
+  "fresh_split_integrity_checked": true,
+  "fresh_worlds": [41110, 41111, 41112],
+  "notes": ["Development worlds 41100/41101 selected learning rates before fresh runs.", "Aligned support across contexts and worlds; natural support discovery is not established.", "Frobenius residual radius 1/3 guarantees condition number at most 2 relative to the orthogonal base."]
+}
