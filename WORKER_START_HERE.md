@@ -243,6 +243,20 @@ Before starting an experiment in MA-936..995:
 8. Factorized codes require unseen task×time, scene×chunk, listener×direction, site×user or hardware task×configuration pairings. Prefer natural/out-of-family variation to more aligned-only tests.
 9. The new MA-936..995 ideas are UNTESTED. Existing completed experiments and MA-255 next-candidate selection are unchanged.
 
+### MA-996..1045 material/MRI/quantum/vision/retrieval expansion
+
+Always read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_THIRTEENTH_SWEEP.md`, the exact selected MA row and PA296..PA325 references. All these hypotheses are initially UNTESTED.
+
+1. **Atomistic potential (MA-996..1005):** start from MACE/MACE-MP/NequIP and native sparse/frozen equivariant fine-tuning; preserve scalar energy invariance and vector force equivariance; compute forces from negative energy derivative and measure long-rollout MD drift, OOD chemistry, atomic throughput and adapter bytes.
+2. **MRI reconstruction (MA-1006..1015):** native VarNet/MoDL/DUNE/D2SA/SSDU baselines mandatory as applicable; preserve multicoil acquisition operator/data consistency, separate acquired k-space and test-time self-supervised validation splits, and report PSNR/SSIM, k-space residual, wall time and bytes. Do not claim clinical adequacy from synthetic phantoms.
+3. **Quantum circuits (MA-1016..1023):** compare native data reuploading/TensorHyper-VQC/superposed circuits; count classical generator, circuit angle/code bytes, compiled native gates, entanglers, noisy device shot counts, qRAM/postselection success and training reliability. Simulation != physical hardware.
+4. **Vision/memory (MA-1024..1034):** compare CoOp, CoCoOp, MaPLe, SAM2, SAM2Long and MoPEFT. Measure held-out base-to-new transfer, video J&F, mask correction/occlusion, prompt and per-object memory state, inference FPS, and all generators.
+5. **ANN/retrieval (MA-1035..1045):** compare ScaNN, RaBitQ, Matryoshka prefixes, ColBERTv2, PLAID, QINCo, DiskANN, PGM as applicable; count encoded physical index plus generators, recall/nDCG/MRR, P95/P99, SSD reads and update costs. Gauge/isometric rotations that leave exact rankings unchanged count as zero additional independent retrieval function.
+
+**MA-1000+ IDs use four digits.** Never parse with a 3-digit exact regex or truncate an ID to six characters. Use numeric max existing + 1 and run `python experiments/mirror_applications/check_registry_integrity.py` at a safe commit boundary.
+
+The current next experiment remains **MA-255**; these are future hypotheses, not a new active worker priority.
+
 ### Recurrent/depth candidates
 
 MA-247 showed that even an aligned Givens teacher can fail a fixed-budget recurrent optimization screen. Include a scalar/static-LoRA optimization control and do not infer representational impossibility from failed convergence.

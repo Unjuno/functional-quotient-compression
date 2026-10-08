@@ -197,6 +197,26 @@ Read PA288..291. Native beamspace codebook, Type-II feedback, CsiNet and RIS pha
 
 Read PA292..293. RANF/retrieval field and anthropometric latent codes are direct baselines. Use held-out listener/direction pairs, binaural spectral/phase distortion, interaural timing/levels, measurement budget, file bytes and streaming head-pose update cost.
 
+### Atomistic materials and conservative forces (MA-996..1005)
+
+Read PA296..301. MACE-MP, NequIP, MatterSim, equivariant-sparse fine-tuning and frozen transfer are strong native baselines. A Mirror code m enters equivariant energy features; forces must be derived from the same scalar energy and audited for E3 covariance, energy/force errors, MD stability and actual adapter/neighbor compute. Hold out chemical families.
+
+### MRI physics and scan adaptation (MA-1006..1015)
+
+Read PA302..307. Use VarNet, MoDL, DUNE, D2SA and SSDU. Mirror codes modulate learned regularizers/latent priors, **not** acquired k-space measurements or known forward physics. Keep multicoil sensitivity and data consistency, disjoint k-space self-supervision, scanner/contrast held-outs, image metrics, resource bytes and runtime.
+
+### Variational quantum circuits (MA-1016..1023)
+
+Read PA308..311. Quantum data reuploading, TensorHyper-VQC TT generated parameters, superposed parameter circuits, and transpiled hardware-aware controls are prior art. Count circuit postcompilation depth/entangling gates, qubits, classical code/generator state, hardware noise and shots; qRAM/postselection failure costs are not free.
+
+### Visual foundation prompts and object memory (MA-1024..1034)
+
+Read PA312..317. Native CoOp/CoCoOp/MaPLe coupled prompts, SAM2 per-object streaming memory, SAM2Long path tree, and MoPEFT are mandatory nearest controls as relevant. Code only counts if it reduces physical prompt/adapter/object-memory state without losing base-to-new/OOD performance or object J&F, occlusion recovery or FPS.
+
+### Retrieval ANN indexes and ranking policies (MA-1035..1045)
+
+Read PA318..325. Preserve ScaNN/RaBitQ bounded quantizer, Matryoshka nested prefixes, ColBERTv2 residual token vectors, PLAID centroid pruning, QINCo generated codebook, DiskANN disk traversal or PGM correctness guarantee as applicable. Compare ranking recall/nDCG/MRR and complete index+codebook/generator memory, update cost and tail latency. Exact isometric m that leaves rankings unchanged is not independent learned capacity.
+
 ## Historical result loading rule
 
 Do **not** load every SRM/MS/MN document.
