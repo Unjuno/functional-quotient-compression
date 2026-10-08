@@ -1,6 +1,57 @@
 {
   "experiment_id": "MA-445",
-  "protocol_commit": "pending",
-  "status": "SCREENING",
-  "checks": []
+  "status": "FAIL",
+  "protocol_commit": "811b0527",
+  "amendments": [
+    "A1 invalid; A2 rank-matched teacher and new worlds; A3 exact serialized split-bank accounting. The A2 protocol edit was saved before new-world execution but committed with the post-run evidence bundle."
+  ],
+  "fresh_worlds": [
+    44530,
+    44531,
+    44532
+  ],
+  "methods": [
+    "shared",
+    "taskvec",
+    "mirror",
+    "leo"
+  ],
+  "fresh_run_rows": 2592,
+  "fresh_query_rows_per_method": 162,
+  "task_pairs_per_world": 6,
+  "seeds_per_world": 3,
+  "replicates_per_pair_seed": 3,
+  "refinement_steps": [
+    0,
+    1,
+    3,
+    5
+  ],
+  "step0_mean_nrmse": {
+    "mirror": 1.0417391043423171e-05,
+    "taskvec": 4.267264244440917e-05,
+    "leo": 0.00011671573112700437,
+    "shared": 1.1079071484230183
+  },
+  "n20_mean_serialized_bytes": {
+    "mirror": 28645,
+    "taskvec": 28649,
+    "leo": 28773
+  },
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-445-leo-latent-composition/tests",
+    "passed": 2,
+    "failed": 0
+  },
+  "artifact_rows": {
+    "fresh_runs.jsonl": 2592,
+    "serialized_accounting.csv": 486
+  },
+  "integrity": [
+    "all fresh payload hashes and lengths replayed",
+    "fresh worlds disjoint from development IDs",
+    "A1 pilot excluded",
+    "exact shared+view serialized byte accounting"
+  ],
+  "decision": "FAIL: quality passes; practical N=20 byte gate fails by 4 bytes only (0.014% saving), so no useful Mirror-specific compression established."
 }
