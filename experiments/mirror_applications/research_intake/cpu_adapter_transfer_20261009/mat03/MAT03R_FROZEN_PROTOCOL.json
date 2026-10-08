@@ -1,0 +1,48 @@
+{
+  "protocol_id": "MAT03R_20261009",
+  "date": "2026-10-09",
+  "status": "FROZEN_BEFORE_REPLICATION_FRESH",
+  "branch": "research/mirror-cpu-adapter-transfer-20261009",
+  "selection_context": "This second study is proposed AFTER observing MAT03 301..305 on the same digits dataset, so is a post-discovery replication of a known result, not a first untouched evaluation.",
+  "source_freeze_commit": "825c281dbdcda67168a3c98289a7cc04a802f631",
+  "frozen_source_paths": [
+    "source/run_mat03.py",
+    "source/test_mat03.py"
+  ],
+  "main_source_sha256": "e63b0f6cdc1f66d50cdd00629c05b4d0b800b73b9d24095a24076cad3736ffbe",
+  "replication_driver_sha256": "053d1d3f912b1ac0889652ce2319510cf95c1152d77d51129ae403403d21637f",
+  "protocol_parent": "../MAT03_FROZEN_PROTOCOL.json",
+  "prior_fresh_seeds": [
+    301,
+    302,
+    303,
+    304,
+    305
+  ],
+  "new_fresh_seeds": [
+    401,
+    402,
+    403,
+    404,
+    405
+  ],
+  "reuse_source_unchanged": true,
+  "no_hyperparameter_selection": true,
+  "methods": "all nine MAT03 methods unchanged; single shared 64-128-32 feature encoder K5 outputs; 400 updates, AdamW lr0.002, no data modifications",
+  "comparisons": {
+    "H1": "Four-coefficient Hadamard-exponential Mirror is better than 4-coefficient Hadamard-linear output chart on each same-input 5-task world. Predeclared margin: mean heldout NLL difference mirror minus linear <=-0.01 in at least 4/5 fresh seeds.",
+    "H2": "Mirror alone reaches native five independent one-pass heads within +0.02 NLL while whole serialized output bank <=.90 native bytes, with p95 <=1.10× native. If false, no full native-frontier win.",
+    "H3": "Mirror+private rank1 reaches native native_multihead within +0.02 NLL but saves >=5% whole serialized bytes and <=1.10 p95. If false, report the relative quality/size/time tradeoff, not adopted.",
+    "H4": "Every method executes exactly one trunk call per input, all 5 classification targets measured, and no labels from heldout image IDs are used for training/preprocessing/statistic thresholds."
+  },
+  "fresh_measurements": [
+    "5-task mean/worst NLL",
+    "task accuracies, task collapse",
+    "per-input real call counter",
+    "actual NPZ file bytes including shared encoder and learned heads",
+    "CPU P95 B128 same inputs for each K role, 20/100 warmups/repeats"
+  ],
+  "result_status": "UNTESTED till fresh complete",
+  "limitations": "Five new splits of same 1797 digits, not independent datasets; checkpoint training rerun, not identical hardware clocks. No natural-language benchmark, no real GPU/TabM/LoGo replication. Native normal shared-head already one forward.",
+  "evidence_contract": "source/test hashes pinned before fresh, save all 45 rows plus per-role metrics and verification hashes. Do not modify original source or original MAT03 results."
+}
