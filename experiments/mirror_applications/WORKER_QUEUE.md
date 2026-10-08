@@ -317,6 +317,26 @@ Read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08.md`, PA236..PA265
 
 **MA-255 remains the canonical next worker candidate.** This queue must not preempt it or supersede its frozen protocol.
 
+## Twelfth research expansion — video, equivariance, spiking, physical optics, wireless and spatial audio
+
+**MA-936..995 are UNTESTED research candidates** appended after the already queued crossovers and prior MA-876..935 intake. No active or frozen run may be interrupted to work on these. **Canonical next remains MA-255**.
+
+Recommended representative P0 order *within this new family only*:
+
+1. **MA-936 / MA-938**: NerVast Fisher-selected shared/private video INR weights + Mirror code; must improve native parameter masks and real bitstream RD/FPS.
+2. **MA-941 / MA-942**: DCVC-UF chunk latent with frame-offset Mirror decoder state; native parallel frame-specific decoders/rate controls mandatory.
+3. **MA-951 / MA-955 / MA-958**: task-specific useful symmetry breaking beyond G-CNN/steerable/soft learned symmetry and zero-parameter approximate equivariance. Gauge copies = zero new independent functionality.
+4. **MA-961 / MA-962 / MA-963**: frozen SNN weights plus Mirror threshold/time/neuromodulation; compare STL-SNN, TEBN and task-agnostic TACOS (no unfair oracle task ID).
+5. **MA-971 / MA-972**: fixed photonic hardware with small control m; LightPro/full-MZI programming baseline, optical noise and switch-time/power. Simulations and physical measurements reported separately.
+6. **MA-981 / MA-982 / MA-984**: physical beam/RIS or CSI feedback with low-description code; compare learned codebook/Type-II/CsiNet/RIS native signaling and net spectral efficiency.
+7. **MA-990 / MA-992 / MA-993**: shared HRTF field with listener/direction m; compare RANF and anthropometric latent personalization at measured directions, binaural spectral error and full storage.
+
+Research notes: `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_TWELFTH_SWEEP.md`; primary prior art PA266..295.
+
+**Universal scientific requirements:** identify the exact native insertion point of Mirror parameter `m`; implement native efficient controls and simple non-Mirror gate/embedding/low-rank controls; test aligned plus real/misaligned conditions; count all encoded bits, hardware/control/communication costs and measured runtime; preserve fresh split. Cross-domain hypotheses must use their domain-native metrics rather than treating parameter count as a sufficient success metric.
+
+Do not reclassify any of the already verified 47 MA results based on these untested research suggestions.
+
 ## Historical P0 family sequence (completed screens; not current queue)
 
 The historical A–F lists below record previously screened experiments and must not override `STATUS_BOARD.md` (MA-255 next).
