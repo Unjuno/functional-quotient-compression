@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (165 completed; 465 UNTESTED)
+- P0: **630** (165 completed; 464 UNTESTED; 1 SCREENING)
 - P1: **422** (13 completed; 409 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **122 FAIL, 11 NOT ESTABLISHED, 45 PROMISING, 977 UNTESTED**
+- Current MA statuses: **122 FAIL, 11 NOT ESTABLISHED, 45 PROMISING, 976 UNTESTED, 1 SCREENING**
 - 47 baseline experiment directories remain present; 132 additional per-ID outcomes are linked to their dedicated research branches in `LIVE_BRANCH_RECONCILIATION.csv`.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This was the intake-time queue; current selection follows the live-branch reconciliation at the top of this board.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed at intake time; later live-branch outcomes are indexed above.
@@ -23,14 +23,14 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**Pending live branch refresh.** MA-436 completed its amended P0 screen as FAIL; select the next eligible P0 after refresh and reconciling branches. Pause state-space role/expert candidates MA-434..438 pending redesign.
+**MA-442 — MAML initialization + Mirror-only inner loop (P0; PA75).** Live branches were fetched; MA-446 already has a terminal FAIL branch, and there is no MA-442 or MA-444 experiment branch. MA-442 is the next eligible P0 outside paused families.
 
 MA-434 and MA-436 both found exact native SSM parameterization aliases. MA-436's amended same-input screen also missed CPU throughput in both seeds and meaningful diversity; its invalid initial run and amendment trail are preserved. Pause MA-434..438 after the repeated native-conditioning cause; see [state-space diagnostic](../../docs/phase2/STATE_SPACE_MIRROR_FAMILY_DIAGNOSTIC_2026-10-08.md). The continuous-depth family MA-424..433 remains paused after its repeated native-conditioning alias; see [continuous-depth diagnostic](../../docs/phase2/NEURAL_ODE_MIRROR_FAMILY_DIAGNOSTIC_2026-10-08.md). MA-416..421 remain paused. MA-325 remains NOT ESTABLISHED because the frozen task was unlearnable even for the independent control. MA-369/371/372 remain paused under the documented family rule. The conditional-modulation family MA-401/403/405 and MA-407/408/411/413 remains paused pending a fused-kernel redesign.
 
 
 ## Active experiment
 
-MA-416 through MA-419, MA-424, MA-434 and MA-436 are verified development-screen FAILs, with fresh seeds sealed. Amended MA-436's native generated-A control matched outputs and payloads exactly; Mirror throughput was 0.382/0.645x native and diversity RMS was 0.0206/0.0252. State-space role/expert candidates are paused under the family rule. See [MA-436 report](ma-436-ssm-expert-views/README.md), [verification](ma-436-ssm-expert-views/VERIFICATION.json), [state-space diagnostic](../../docs/phase2/STATE_SPACE_MIRROR_FAMILY_DIAGNOSTIC_2026-10-08.md), [MA-434 report](ma-434-selective-ssm-mirror-roles/README.md), [MA-424 report](ma-424-neural-ode-mirror-modes/README.md), [continuous-depth diagnostic](../../docs/phase2/NEURAL_ODE_MIRROR_FAMILY_DIAGNOSTIC_2026-10-08.md), and [latent-code diagnostic](../../docs/phase2/LATENT_CODE_MIRROR_FAMILY_DIAGNOSTIC_2026-10-08.md).
+MA-416 through MA-419, MA-424, MA-434 and MA-436 are verified development-screen FAILs, with fresh seeds sealed. Amended MA-436's native generated-A control matched outputs and payloads exactly; Mirror throughput was 0.382/0.645x native and diversity RMS was 0.0206/0.0252. MA-442 is now SCREENING. State-space role/expert candidates are paused under the family rule. See [MA-436 report](ma-436-ssm-expert-views/README.md), [verification](ma-436-ssm-expert-views/VERIFICATION.json), [state-space diagnostic](../../docs/phase2/STATE_SPACE_MIRROR_FAMILY_DIAGNOSTIC_2026-10-08.md), [MA-434 report](ma-434-selective-ssm-mirror-roles/README.md), [MA-424 report](ma-424-neural-ode-mirror-modes/README.md), [continuous-depth diagnostic](../../docs/phase2/NEURAL_ODE_MIRROR_FAMILY_DIAGNOSTIC_2026-10-08.md), and [latent-code diagnostic](../../docs/phase2/LATENT_CODE_MIRROR_FAMILY_DIAGNOSTIC_2026-10-08.md).
 
 
 ## Verified status index
