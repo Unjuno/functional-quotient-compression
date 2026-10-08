@@ -1,19 +1,29 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-1018",
+  "commit": "pending-result-commit",
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-1018-quantum-gate-mirror/tests -v",
+    "passed": 3,
+    "failed": 0
   },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "library_payloads": 102,
+    "condition_payloads": 204
   },
   "metric_replay": {
-    "checked": false,
-    "max_difference": null
+    "checked": true,
+    "rows": 204,
+    "max_difference": 0.0
   },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "fresh_split_integrity_checked": true,
+  "fresh_accessed": false,
+  "qpu_or_shots_used": false,
+  "notes": [
+    "All 306 actual serialized artifacts were reloaded and their exact byte lengths/SHA256 hashes matched.",
+    "All process fidelity values were replayed from serialized state with maximum difference 0.",
+    "Held-out Mirror codes were oracle fits from known target angle tensors; this is not task-example learning.",
+    "No physical quantum hardware, shots or hardware-specific compilation were used."
+  ]
 }

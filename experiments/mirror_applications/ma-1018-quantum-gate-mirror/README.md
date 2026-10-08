@@ -1,16 +1,60 @@
 # MA-1018 — quantum gate-group factorized Mirror coordinates
 
-Status: SCREENING; draw and protocol are frozen before any fidelity score.
-Branch: `research/ma-1018-quantum-gate-mirror-20261008`.
-Baseline: `feb56df43d45068ad957bc028a7837cbd61d006b`.
-Draw 8 selected MA-1018 from 560 eligible P0 rows. Seed/index/pool SHA and exact registry row are in `source/random_draw.json`; the ordered pool is `source/selection_pool.csv`.
+Status: **FAIL (development gate)**
+Branch: `research/ma-1018-quantum-gate-mirror-20261008`
+Baseline: `feb56df43d45068ad957bc028a7837cbd61d006b`
+Draw 8: 560 eligible candidates; seed `c821526247968117be6f0cac68feff7c977f07a6678a575d8d64d76067424c2c`, index 451. Full pool/hash/registry row: `source/random_draw.json` and `source/selection_pool.csv`.
+
+## H — falsifiable hypothesis
+
+A CP-style coordinate over task × layer × qubit × rotation axis can represent related task unitaries with ≥20% fewer serialized library bytes than independent angle lists, while preserving process fidelity and beating byte-near matrix low-rank and TT-generated controls.
 
 ## Prior-art delta
 
-PA308 already establishes data re-uploading; it is not claimed as Mirror. PA309 TensorHyper-VQC is a direct compact parameter-generation control. This screen compares a task × layer × qubit × axis CP Mirror coordinate with shared angle low-rank and TT-SVD controls, plus independent full angle vectors.
+PA308 data re-uploading and PA309 TensorHyper-VQC are established controls, not Mirror inventions. This screen tests one explicit CP factorization against a matrix low-rank basis, a TT-SVD parameter generator, and independent angles.
 
-## Frozen mechanism screen
+## T — execution
 
-Exact CPU statevector simulation of 4-qubit, 6-layer circuits with ordered RX/RY/RZ rotations and nearest-neighbor CNOT chains. Each task has 72 rotation angles; all task methods use the same 90-gate skeleton and logical depth 36. Synthetic task tensors vary across three declared heterogeneity levels, six basis-training task identities and two held-out development tasks. The held-out Mirror code is fit from known target angles, so this is an **oracle representability/compression screen**, not task-data learning. Process fidelity, complete serialized library bytes, private residual bytes, simulator operations and wall time are recorded.
+- Deterministic exact CPU statevector: 4 qubits, 6 layers, 72 RX/RY/RZ angles per task, nearest-neighbor CNOT chain, 90 logical gates and depth 36. Every method uses the same gate order and entangler.
+- Synthetic targets have a shared mean plus rank-2 CP variation scaled by `rho ∈ {0.1, 0.4, 1.0}` and a small private residual. Six task identities fit shared state; tasks 6 and 7 are held-out development identities. Seeds 10181/10182.
+- Compared hard sharing, independent full angles, matrix SVD ranks 1/2/4/8, TT-SVD ranks 1/2/4/8, CP Mirror ranks 1/2/4/8, and CP plus top-8 private angle entries at ranks 2/4/8. CP factor fits used 1,200 Adam steps; held-out codes were closed-form fits from known target angles.
+- 204 development rows; total run wall time 15.68s. Every inference call rebuilds the angle tensor and evaluates the 16-dimensional statevector. Logical gate and depth costs stay fixed; no hardware compilation, shots, or QPU execution.
+- Whole library payload bytes serialize all shared factors, eight task codes or angles, private state, task IDs and skeleton metadata. 102 whole-library and 204 per-task payloads were reloaded and hash/size checked. Process fidelity replayed exactly with maximum difference 0 (`source/metric_replay.json`).
 
-No QPU, shots, hardware compilation or real quantum task performance is claimed. See `PROTOCOL.json` for gates and the fresh-opening rule.
+## D — FAIL
+
+No rank passed all predeclared quality, actual-byte, and Mirror-specific gates across both seeds and both held-out tasks. Fresh task families remain unopened.
+
+### Fact
+
+Mean process fidelity over seeds and held-out tasks:
+
+| rho | Hard shared | Matrix rank 1 | Matrix rank 2 | TT rank 2 | CP Mirror rank 1 | CP Mirror rank 2 | Independent |
+|---:|---:|---:|---:|---:|---:|---:|---:|
+| 0.1 | 0.9798 | 0.9920 | 1.0000 | 1.0000 | 0.9928 | 1.0000 | 1.0000 |
+| 0.4 | 0.8694 | 0.9641 | 0.9999 | 1.0000 | 0.9866 | 1.0000 | 1.0000 |
+| 1.0 | 0.2939 | 0.8296 | 0.9996 | 0.9996 | 0.8212 | 0.9996 | 1.0000 |
+
+Independent full-angle library: 3,939 bytes. At rho 0.4, CP rank 1 used 3,053 bytes and reached 0.9866 fidelity; its byte-near TT rank-1 control used 2,980 bytes and reached 0.9846. The +0.0020 fidelity difference misses the ≥0.01 Mirror-specific gate, and CP was larger than that control, so the storage clause failed there.
+
+At rank 2, CP Mirror reached 0.999957 fidelity at 3,181 bytes; matrix low-rank reached 0.999914 at 3,110 bytes and TT reached 0.999956 at 3,172 bytes. CP used slightly more bytes than both and added essentially no fidelity. Rank 4 CP used 3,373 bytes and slightly fewer bytes than the controls, but its fidelity advantage stayed below 0.0001. The three top-8 private angle residuals added several hundred to over a thousand bytes for ≤0.0002 fidelity gain.
+
+Hard sharing degraded with heterogeneity: mean fidelity fell from 0.9798 at rho 0.1 to 0.2939 at rho 1.0. Matrix low-rank and TT rank 2 stayed above 0.9995 on this rank-2 teacher. Every circuit retained the same 90 logical gates and depth 36.
+
+### Interpretation
+
+Structured CP codes can compress this deliberately CP-aligned task family, but the simpler matrix and TT controls reach the same fidelity at equal or smaller actual bytes. Private angle exceptions buy very little fidelity here. The hard-sharing failure maps the need for task-specific coordinates as heterogeneity grows, but the experiment does not show a Mirror-specific advantage.
+
+### H / T / D / C / U
+
+- **H:** CP Mirror across task, gate block, qubit and axis can recover useful task unitaries more compactly and outperform byte-near matrix/TT controls.
+- **T:** 4-qubit exact statevector circuits; 6 training and 2 held-out task IDs; 2 seeds; three heterogeneity levels; ranks 1/2/4/8; 204 rows; all exact serialized bytes.
+- **D:** **FAIL.** CP rank 1 saved bytes at rho 0.4 but missed the byte-near control fidelity margin. CP rank 2 matched TT/matrix fidelity with slightly higher bytes. Fresh remained unopened.
+- **C:** The target family was synthetic and generated by a rank-2 CP teacher. Held-out codes used oracle target angles; this advantages representability and is not learning from task examples.
+- **U:** New task families, real quantum classification, shot/device noise, hardware connectivity/transpilation, gradient trainability, and any QPU performance remain untested.
+
+## Implementation attempts
+
+Two wrapper failures before a persisted score were corrected: rank-8 matrix code now caps to the six available training-task directions, and CSV output now selects the declared result columns. The final settings did not change. See `source/attempt_log.json`.
+
+**BOUNDARY:** synthetic oracle angle compression with exact CPU statevector validation. No QPU, hardware advantage, or exponential logical-capacity claim.
