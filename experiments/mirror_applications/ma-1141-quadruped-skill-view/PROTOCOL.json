@@ -90,7 +90,8 @@
     "decision": "PROMISING only if all gates pass; FAIL if a valid simulator/controller screen runs and a quality/storage gate fails; NOT ESTABLISHED if simulator, teacher stability, or control validity prevents a decision."
   },
   "amendments": [
-    {"number": 1, "reason": "Initial 80%-of-native storage gate was incompatible with the strongest native control, which is already a single shared conditioned policy. Before trajectory generation, replace with <=105% payload parity and report a 16-policy storage-only reference; do not use that reference for quality claims.", "after_audit": false}
+    {"number": 1, "reason": "Initial 80%-of-native storage gate was incompatible with the strongest native control, which is already a single shared conditioned policy. Before trajectory generation, replace with <=105% payload parity and report a 16-policy storage-only reference; do not use that reference for quality claims.", "after_audit": false},
+    {"number": 2, "reason": "Development-only test found the frozen phase controller averaged 0.639 fall fraction over train pairs; a 25-point amplitude/frequency sweep on the same eight seen pairs had best return 0.3488 at zero falls, below a zero-action reference return 0.3570. The behavior-cloning target therefore does not define a useful locomotion skill in this setup. Stop before held-out audit; do not infer Mirror quality or failure.", "after_audit": false, "disposition": "NOT ESTABLISHED / task-controller blocker"}
   ],
   "limitations": ["Synthetic morphology/speed grid and phase-controller teacher.", "Behavior cloning and simulator rollouts are not RMA, PPO, real robot or safety evidence.", "No claim of near-converged policy capacity; this is a fixed-data/fixed-update composition screen."]
 }

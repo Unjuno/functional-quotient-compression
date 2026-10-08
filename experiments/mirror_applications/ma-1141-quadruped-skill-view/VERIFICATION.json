@@ -1,19 +1,65 @@
 {
   "experiment_id": "MA-1141",
-  "commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
-  "tests": {
-    "command": "pending",
-    "passed": null,
-    "failed": null
+  "protocol_commit": "d21e04d",
+  "amendments_before_audit": [
+    "38cd555",
+    "bfee6aa"
+  ],
+  "status": "NOT ESTABLISHED",
+  "checks": [
+    {
+      "name": "random_draw_replay",
+      "result": "PASS",
+      "detail": "523-item frozen pool; seed/index replays MA-1141"
+    },
+    {
+      "name": "protocol_frozen_before_demo_generation",
+      "result": "PASS",
+      "detail": "Draw, task split, morphologies, teacher, controls and gates were committed before trajectories"
+    },
+    {
+      "name": "mujoco_runtime",
+      "result": "PASS",
+      "detail": "Gymnasium 1.4.0 / MuJoCo 3.15.0; all four morphology models load"
+    },
+    {
+      "name": "implementation_tests",
+      "result": "PASS",
+      "detail": "5 tests pass; one earlier failed test caught and fixed Mirror in-place autograd mutation before training"
+    },
+    {
+      "name": "development_controller_validity",
+      "result": "FAIL",
+      "detail": "frozen teacher mean fall fraction 0.639; best recorded amplitude/frequency sweep return 0.3488 vs zero-action 0.3570"
+    },
+    {
+      "name": "heldout_audit",
+      "result": "NOT RUN",
+      "detail": "stopped before odd-parity pair evaluation because development task/controller was invalid"
+    },
+    {
+      "name": "mirror_hypothesis",
+      "result": "NOT ESTABLISHED",
+      "detail": "no inference about Mirror quality or capacity"
+    }
+  ],
+  "data_manifest": "source/data_manifest.json",
+  "provenance": {
+    "development_metrics_sha256": "94e43c5e1bb88e986f51393a6a67eecd844d247454662e5722aecab64456c310",
+    "teacher_sweep_sha256": "2e426011452b839808a5c7483c2881310edf5b6231e46b19cca1f22730d34338",
+    "development_data_sha256": "a72186f2e81b6e411e1efaf6025c49f6b3e97193e2249f97dbf5c6726dcebf89",
+    "payload_manifest_sha256": "1475f1fbe374635f560aecbc1515f147037d5d69746b70cbc3680e576029b60d",
+    "results_core_sha256": "f5305413ba09dfe153113ab4911b399e90582b4ee20b2e754bc875af2d895263",
+    "runner_sha256": "35491ea362d5f88103325c306d0f8f643ec35f14d3713ae4c4ba8aa4ea016818",
+    "python": "3.12",
+    "torch": "2.6.0+cpu",
+    "gymnasium": "1.4.0",
+    "mujoco": "3.15.0",
+    "safetensors": "0.6.2"
   },
-  "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
-  },
-  "metric_replay": {
-    "checked": false,
-    "max_difference": null
-  },
-  "fresh_split_integrity_checked": false,
-  "notes": ["Protocol and draw frozen before simulator installation/data generation; no simulator metrics have been opened."]
+  "notes": [
+    "Development only: world seed 23 / model init 31 / 100 updates.",
+    "No held-out pair metrics were read or created.",
+    "The simulation is not real-robot evidence."
+  ]
 }

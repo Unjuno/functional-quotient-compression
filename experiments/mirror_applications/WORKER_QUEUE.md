@@ -4,6 +4,10 @@ The queue is derived from `IDEA_REGISTRY.csv`. The registry is authoritative.
 
 ## Queue interpretation invariant
 
+### Randomized worker override — active 2026-10-08
+
+This worker draws uniformly from eligible `P0 + UNTESTED` candidates after excluding IDs with live remote `origin/research/ma-*` branches or pre-existing `experiments/mirror_applications/ma-*` directories. Freeze the full pool, hash, cryptographic seed, index and replay before numerical outcomes. Do not follow numeric or literature queue order. Each MA remains on a dedicated branch; concurrent branches are not merged automatically. Draw records live under each selected experiment's `source/draw*_exclusions.json`.
+
 Every queued MA hypothesis is an experiment on the extra low-description Mirror functional parameter `m`.
 
 The worker should preserve the strongest native method as a control and ask where `m` can be inserted with minimal surgery. Literature-derived families are **integration targets and controls**, not permission to leave the Mirror program and study the adjacent method by itself.

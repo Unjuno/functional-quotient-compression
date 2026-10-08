@@ -55,7 +55,7 @@ def main() -> None:
     manifest = json.loads(manifest_path.read_text())
     manifest["base_ant_xml_sha256"] = hashlib.sha256(base.read_bytes()).hexdigest()
     manifest["morphologies"] = rows
-    manifest["trajectory_data"] = "not generated"
+    manifest.setdefault("trajectory_data", "not generated")
     manifest_path.write_text(json.dumps(manifest, indent=2) + "\n")
     print(json.dumps(rows, indent=2))
 
