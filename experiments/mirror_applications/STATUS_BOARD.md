@@ -16,17 +16,15 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-255 — Mirror context superposition for task models (P0; PA16)**
+**MA-274 — BOFT logical expert views (P0; PA21)**
 
 Reason:
-- all previously locked MA-241/244/245/247–251/253 and subsequent old-chain P0 screens have completed;
-- the original P0 cross-over queue is exhausted among checked candidates;
-- MA-255 is the first untested P0 in the earlier high-information literature cross-over queue;
-- direct Parameter Superposition prior art gives a strong nearest control for insertion of the extra Mirror parameter `m`.
+- MA-255/260/261/265 recorded FAIL screens; MA-268/271/272 are bounded PROMISING results on aligned synthetic families.
+- MA-273 failed after a corrected neutral-initialization screen; fresh data remained unopened.
+- MA-274 is the next P0 in the registered literature crossover order.
+- Native BOFT task transforms and rank-one/simple expert controls are mandatory.
 
-Required controls: native Parameter Superposition, naive/shared task-code basis, matched byte-near low-rank or VeRA-style modulation, independent-model upper reference where practical. Do not claim the superposition concept itself as a Mirror invention.
-
-If blocked by a documented reproducibility or harness issue, record it and resume at MA-260 (BatchEnsemble), then MA-261/265/268 in the registered literature priority sequence. Do not jump to P1/novelty-picked topics before P0.
+Required controls: shared BOFT basis, independent BOFT experts, native BOFT per-expert transforms, and byte-near rank-one/gate control. Count routing and transform compute separately.
 
 ## Active experiment
 

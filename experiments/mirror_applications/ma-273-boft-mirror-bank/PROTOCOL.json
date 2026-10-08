@@ -1,0 +1,95 @@
+{
+  "experiment_id": "MA-273",
+  "title": "BOFT Mirror adapter bank",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/RUNTIME",
+  "base_commit": "f7f76de193063950d28b7834f337840b1e86f0ce",
+  "prior_art_refs": [
+    "PA21"
+  ],
+  "hypothesis": "A shared butterfly orthogonal atom bank plus one scalar task Mirror code recovers factorized BOFT task transforms at lower actual bytes/compute than independent per-task BOFT factors.",
+  "physical_object": "One shared 16x16 map and one 4-stage x 8-pair butterfly angle bank",
+  "mirror_coordinate": "One scalar coefficient per task multiplying shared butterfly angle atom",
+  "logical_multiplicity": "Four task orthogonal maps",
+  "task": {
+    "input_dim": 16,
+    "output_dim": 16,
+    "tasks": 4,
+    "metric": "per-task heldout MSE"
+  },
+  "controls": [
+    "independent full task maps",
+    "hard-shared map",
+    "native BOFT independent angle table per task",
+    "rank-2 private residual",
+    "shared butterfly atom plus Mirror scalar task code"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      {
+        "world": 27300,
+        "init_seed": 273000
+      },
+      {
+        "world": 27301,
+        "init_seed": 273001
+      }
+    ],
+    "learning_rate_candidates": [
+      0.003,
+      0.01
+    ],
+    "updates": 1000,
+    "selection_metric": "mean heldout MSE"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      {
+        "world": 27302,
+        "init_seed": 273002
+      },
+      {
+        "world": 27303,
+        "init_seed": 273003
+      },
+      {
+        "world": 27304,
+        "init_seed": 273004
+      }
+    ],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual torch.save payload plus metadata",
+    "paid_objects": [
+      "shared base map",
+      "native per-task BOFT angles",
+      "Mirror shared angle bank/task scalar codes",
+      "low-rank residuals",
+      "metadata"
+    ]
+  },
+  "compute": {
+    "report_examples": true,
+    "report_updates": true,
+    "report_MAC_proxy": true,
+    "report_wall_time": true,
+    "report_throughput": true
+  },
+  "success_gate": "Mirror MSE <=1.10x independent, payload <=60% independent and >=10% better MSE than native BOFT at byte-near cost or lower bytes.",
+  "failure_gate": "Mirror misses gate or BOFT/simple residual matches at equal/lower bytes.",
+  "boundaries": [
+    "teacher deliberately factorized across BOFT task angles",
+    "no arbitrary task or language claim",
+    "no capacity claim"
+  ],
+  "amendments": [
+    {
+      "date": "2026-10-08",
+      "before_fresh_access": true,
+      "reason": "Development code audit found teacher angle atom/task codes copied into Mirror initialization and teacher angles copied into native BOFT initialization, leaking target coordinates.",
+      "change": "All task transform parameters now initialize from neutral zeros/defaults independently of teacher state. Rerun all development methods/LRs/worlds; retain initial rows in a separate invalidated results file.",
+      "scope": "Only initialization changed; teacher, methods, seeds, updates, selection metric and fresh gate unchanged."
+    }
+  ]
+}
