@@ -20,6 +20,10 @@ Synthetic recall task with four stable 4D logical transitions. An initial cue se
 
 PASS: at delay 512, Mirror recall NRMSE <=1.10x external register, <=60% its actual state bytes, and no more than 1.25x MAC; drift must not increase by >10% from delay 8. FAIL if these gates miss or ordinary register/fast-weight control matches at lower bytes.
 
+### Amendment A1
+
+An initial dev/fresh run exposed a setup defect: the learned retention parameter started at alpha=0.018, causing immediate address erasure and chance-level recall. A1 changes only the initial retention logit to 6 (alpha=0.9975), preserves all data worlds, seeds, optimizer budgets, and gates, and invalidates the initial fresh rows.
+
 ## C — strongest counter-hypothesis
 
 A recurrent address is an ordinary persistent register; external storage is already only a few bytes, and writing/maintaining `m` may add noise and drift without reducing total state.
