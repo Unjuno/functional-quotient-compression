@@ -1,0 +1,25 @@
+{
+  "experiment_id": "MA-818",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-818-mirror-new-operation-codes/tests -v",
+    "passed": 4,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "72 fresh rows cover 3 seeds x 3 support sizes x 2 relations x 4 methods.",
+    "All 72 deterministic metrics, payload byte counts, and payload hashes replayed exactly; wall clock fields were inspected separately and are expected to vary.",
+    "The Mirror and ordinary structured operation embedding have byte-identical payload hashes and exact metric equality in all 18 paired fresh conditions.",
+    "Actual serialized inference payload bytes include old operation angles, new code or private matrix, and metadata.",
+    "Engine SHA-256 matched the pre-fresh lock: 5f32b89b6af85e1727d7c7c1f91a8591c274eedafff18e9dbe9b57c61d3069f2. Protocol lock value 4fe057d462af870d97f1e89a715d3b519fcadb014a2538c189ff7bbb7acaff7f matches the protocol at the time fresh was generated; subsequent documentation/status annotations changed its current hash to 65705538e311f0741f611c4ad4e224630bd2d8d1e245ba0eca94068d677b4d96. No task parameters changed after lock."
+  ]
+}

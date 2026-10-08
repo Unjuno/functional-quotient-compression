@@ -1,0 +1,94 @@
+{
+  "experiment_id": "MA-818",
+  "title": "Add a new how operation without changing what content",
+  "status": "SCREENING",
+  "evidence_lane": [
+    "MECHANISM",
+    "STORAGE",
+    "RUNTIME"
+  ],
+  "base_commit": "28194ea",
+  "hypothesis": "A compact operation-only Mirror code inferred from support examples will add an aligned new transform over frozen content without modifying content state or storing a full operator, while unrelated dynamics reveal a private-state boundary.",
+  "physical_object": "frozen 8-dimensional content representation and old operation bank",
+  "mirror_coordinate": "four Givens angles for a new operation, inferred from support input/output pairs",
+  "logical_multiplicity": "three old operations plus one new operation acting on existing content",
+  "prior_art_refs": [
+    "PA217",
+    "MA-817"
+  ],
+  "selection": {
+    "method": "secrets.randbelow over sorted eligible P0/UNTESTED IDs after exclusions",
+    "pool_size": 452,
+    "draw_index_zero_based": 316,
+    "selected_id": "MA-818",
+    "pool_ids_sha256": "04da21ef42ceaab53dcd955a4621049602fac1ee58243313cd6f7c9e79803c36",
+    "snapshot": "source/selection_pool.csv",
+    "branch_conflict_found": false,
+    "pool_file_sha256": "08baf1d25c6bf244f22ee5b6b3c626f93cbd2dedc5eb8bf124dbbf0078b31da2"
+  },
+  "task": {
+    "content_dim": 8,
+    "givens_pairs": 4,
+    "old_operations": 3,
+    "new_aligned_operations": 1,
+    "support_sizes": [
+      4,
+      8,
+      16
+    ],
+    "heldout_content_per_world": 64,
+    "trajectory_composition_steps": 4
+  },
+  "methods": [
+    "structured_mirror_angles",
+    "ordinary_structured_operation_embedding",
+    "ordinary_linearized_operation_code",
+    "independent_full_operator"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      81801,
+      81802
+    ],
+    "purpose": "validate operation fit and heldout metric only; no fresh tuning"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      81811,
+      81812,
+      81813
+    ],
+    "locked_before_access": true,
+    "locked_source_sha256": "5f32b89b6af85e1727d7c7c1f91a8591c274eedafff18e9dbe9b57c61d3069f2",
+    "locked_protocol_sha256": "4fe057d462af870d97f1e89a715d3b519fcadb014a2538c189ff7bbb7acaff7f"
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "three old operation codes",
+      "new operation code or fitted matrix",
+      "ordinary adapter bases and coefficients",
+      "private operator for unrelated diagnostic",
+      "metadata/header"
+    ]
+  },
+  "compute": {
+    "optimizer_updates": 0,
+    "report_support_fit_operations": true,
+    "report_query_macs": true,
+    "report_operation_switch_wall_time": true,
+    "report_old_operation_retention": true,
+    "report_givens_scalar_multiplications": true,
+    "report_trigonometric_evaluations": true
+  },
+  "success_gate": "For aligned new operation at support=8, all 3 fresh worlds have held-out normalized MSE <=1e-5, payload <=0.90x full operator, and old-operation retention MSE <=1e-5. Unrelated full-operator diagnostic must fit with normalized MSE <=1e-5 while compact structured codes fail above 0.1.",
+  "mirror_specific_gate": "Mirror must beat the ordinary structured operation embedding by >=10% payload or a predeclared quality improvement at matched bytes; the direct embedding uses the same operation code and transform family.",
+  "failure_gate": "Aligned quality/retention/storage gate misses, or ordinary operation-code control matches Mirror within 10% bytes at matched quality.",
+  "boundaries": [
+    "Synthetic linear transform task only; no learned RNN or neural content encoder.",
+    "New operation angle codes are fit from support examples, not supplied directly.",
+    "Mirror and ordinary structured null control share the same serialized function state; byte/hash/quality identity is a planned falsification control.",
+    "Unrelated dense transform is a private-state diagnostic.",
+    "No task-combination count is interpreted as independent capacity."
+  ]
+}
