@@ -23,7 +23,9 @@ Integration branch: `research/mirror-application-current-evidence-20261008`; can
 
 ## Next candidate
 
-**Next P0 after MA-356: reconcile MA-366 if not already verified on this integration branch; then re-read the live registry for the first eligible P0.**
+**MA-369 — Once-for-All subnetwork Mirror correction (P0; PA52)**
+
+MA-366 is reconciled as FAIL: direct pair coefficients match Mirror outputs and bytes, and PA02 factorization is smaller. The runner accidentally generated the registered fresh IDs before the gate; those rows are excluded and fresh integrity is invalid. MA-367 and MA-368 are also recorded FAIL. MA-369 is the next executable P0; its dedicated branch was absent at the live branch check.
 
 MA-255 is reconciled PROMISING only for its aligned post-fit screen; its separate fixed-update variant failed. Dedicated branch evidence for all new results is cited in `CLAIM_LEDGER.csv`.
 
@@ -31,7 +33,7 @@ MA-327 FAIL: ordinary rank-2 coefficient products match Mirror exactly and both 
 
 ## Active experiment
 
-MA-366 completed as FAIL on branch `research/ma-366-depth-expert-factorized-routing-20261008`. Its accidental fresh-ID generation is disclosed; those rows are excluded and fresh integrity is invalid. MA-268 is PROMISING only for a synthetic rotation-aligned trained mechanism (3/3 fresh); compute was 1.5x IA3 and eager CPU throughput 0.29–0.34x. The separate post-fit variant missed its byte gate. Next is MA-286.
+No active experiment is declared. MA-366 is verified as a development-only FAIL; its accidental fresh-ID rows are disclosed and excluded. MA-367/368 are completed FAIL screens. MA-369 is next.
 
 ## Verified status index
 

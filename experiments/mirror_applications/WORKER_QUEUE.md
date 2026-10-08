@@ -1,5 +1,7 @@
 # Worker queue
 
+**Current operational pointer (2026-10-08): MA-369.** MA-366 is a verified development-only FAIL with invalidated fresh IDs; MA-367/368 are already FAIL. Re-read the live registry and research branches before starting MA-369.
+
 The queue is derived from `IDEA_REGISTRY.csv`. The registry is authoritative.
 
 ## Queue interpretation invariant

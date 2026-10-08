@@ -1,6 +1,6 @@
 # MA-366 status
 
-- Status: FAIL (Mirror-specific gate)
+- Status: FAIL (Mirror-specific gate; development-only, fresh split invalid)
 - Branch: `research/ma-366-depth-expert-factorized-routing-20261008`
 - Base commit: `c935a90`
 - Last verified commit: `9b25863`

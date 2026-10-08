@@ -1,6 +1,6 @@
 # MA-366 — Depth × expert factorized Mirror routing
 
-Status: SCREENING; frozen before development  
+Status: **FAIL for Mirror-specific value** (development only; fresh split invalid)  
 Branch: `research/ma-366-depth-expert-factorized-routing-20261008`  
 Base: `c935a90`  
 Prior art: PA02 shared/path-constrained MoE routing; PA49 Mixture-of-Depths.
@@ -17,7 +17,7 @@ Compare flat path table, PA02-style factorized routing, factorized Mirror path c
 
 ## T — Frozen protocol
 
-Synthetic 4-depth × 4-expert bank of 16D→8D linear operators. Generate targets exactly from `W0 + alpha_depth*D + beta_expert*E + alpha_depth*beta_expert*C`. Hold out 4 of 16 pairs as unseen compositions. For each of two dev seeds, evaluate on 512 Gaussian inputs per path. Fresh seeds 36611/36612/36613 remain locked. Controls serialize 16 independent path maps, shared depth/expert factor maps plus coefficients, and direct pair coefficients. Report nMSE, distinct operators, address collisions/path entropy, actual serialized bytes, route lookup MACs and approximate active operator MACs. No training updates; oracle factor bank is a mechanism/storage screen.
+Synthetic 4-depth × 4-expert bank of 16D→8D linear operators. Generate targets exactly from `W0 + alpha_depth*D + beta_expert*E + alpha_depth*beta_expert*C`. Hold out 4 of 16 pairs as unseen compositions. For each of two dev seeds, evaluate on 512 Gaussian inputs per path. Fresh IDs 36611/36612/36613 were inadvertently generated before the development gate was adjudicated; the rows are preserved under `protocol_variants/accidentally_exposed_fresh/` and excluded from all claims. Fresh integrity is invalid. Controls serialize 16 independent path maps, shared depth/expert factor maps plus coefficients, and direct pair coefficients. Report nMSE, distinct operators, address collisions/path entropy, actual serialized bytes, route lookup MACs and approximate active operator MACs. No training updates; oracle factor bank is a mechanism/storage screen.
 
 ## Gates
 
@@ -35,7 +35,7 @@ Both development seeds recovered all 16 paths with zero held-out nMSE and no add
 
 ### Interpretation
 
-The synthetic factor bank supports compositional path recovery and reduces payload versus a flat path table. It does not beat the PA02-style factorized control on storage, and the direct coefficient control matches Mirror exactly. The preregistered Mirror-specific gate therefore fails. The accidental fresh-run invocation breaks the split integrity; the fresh rows are disclosed but not analyzed and cannot support any claim. The routing proxy omits learned routing, dispatch, memory traffic, and end-to-end model execution.
+The synthetic factor bank supports compositional path recovery and reduces payload versus a flat path table. It does not beat the PA02-style factorized control on storage, and the direct coefficient control matches Mirror exactly. The preregistered Mirror-specific gate therefore fails. The accidental fresh-run invocation breaks the split integrity; the fresh rows are disclosed but not analyzed and cannot support any claim. The routing proxy omits learned routing, dispatch, memory traffic, and end-to-end model execution. `RESULTS_CORE.csv` contains only the eight development rows and separates route lookup MACs from the operator MAC proxy; the accidentally generated fresh rows are provenance-only.
 
 ### H / T / D / C / U
 
