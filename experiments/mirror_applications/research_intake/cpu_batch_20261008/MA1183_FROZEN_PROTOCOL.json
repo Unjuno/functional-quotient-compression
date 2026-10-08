@@ -1,0 +1,80 @@
+{
+  "id": "MA-1183-STYLE-20261008",
+  "version": 1,
+  "status": "PREREGISTERED_BEFORE_FRESH",
+  "date": "2026-10-08",
+  "branch": "research/mirror-cpu-experiment-batch-20261008",
+  "scope": "TabM/BatchEnsemble-style rank-one multi-member feedforward classification MECHANISM, not official TabM implementation or TabReD reproduction",
+  "related": "MA-1183",
+  "original_plan": "experiments/mirror_applications/research_intake/crossdomain_20261008/plans/MA-1183/README.md",
+  "hypothesis": "A small block-rotation m chart can encode useful native rank-one member diversity using less paid state; it must beat an equal-parameter source-independent deterministic linear role-code bank and native full member-specific rank-one fast weights in quality-per-byte, not merely a K-times full-network strawman.",
+  "worlds": {
+    "dev": [
+      11,
+      12,
+      13
+    ],
+    "fresh": [
+      101,
+      102,
+      103,
+      104,
+      105
+    ],
+    "synthetic_task_families": [
+      "structured",
+      "mixed",
+      "off_orbit"
+    ],
+    "mix_strength": [
+      0,
+      0.5,
+      1
+    ],
+    "train_samples": 1024,
+    "valid_samples": 256,
+    "fresh_test_samples": 512,
+    "features": 32,
+    "hidden": 64,
+    "num_classes": 2,
+    "K": 8,
+    "whole_task_generator_seed_per_world": true
+  },
+  "teacher": "binary labels from smooth nonlinear combination of 32d Gaussian features with within-world random invertible feature mixing; strength beta adds independently random higher-order features; all model methods share source data and parent initialization and see same labels. Not a TabM native benchmark.",
+  "model": "shared 32→64 GELU→2 MLP with native per-member input r_in of length32 and hidden s_h length64. K predictions trained independently through same per-member loss averaged; ensemble evaluation averages softmax probabilities.",
+  "methods": [
+    "native_full_fast_weights",
+    "fixed_seed_linear_code4",
+    "learned_dictionary_linear_code4",
+    "structured_mirror_rotation4",
+    "no_member_shared"
+  ],
+  "mirror": "one learned 96d shared template fast-weight vector and K learned 4d angles; rotate all 48 adjacent 2D pairs with block angles from fixed 4x48 sign/frequency pattern; fast weights=1+0.1*rotated_template; template/angles paid. The rotation is a functional coordinate over fast weights, not a guarantee of superior model class.",
+  "linear_equal": "learned template 96 plus Kx4 codes; fixed 4x96 orthonormal Hadamard decoder publicly reproducible from fixed seed (count seed/config); scales match Mirror. Separate learned dictionary full 4x96 control paid.",
+  "training": {
+    "optimizer": "AdamW",
+    "lr": 0.004,
+    "weight_decay": 0.0001,
+    "updates": 300,
+    "batch": 128,
+    "shared_initialization_world_locked": true,
+    "loss": "mean K member CE",
+    "fresh_no_tuning": true,
+    "torch_threads": 1
+  },
+  "evaluation": "ensemble test NLL/Brier/AUROC, member-specific CE, member prediction variance, calibration ECE, actual NPZ inferred-state bytes incl generator config and shared weights, CPU single-batch128 p50/p95 latency, trained MAC proxy and number of shared W GEMMs. Measure k=8 only stage0, later K4/16 only after new freeze.",
+  "gates": {
+    "PASS": "At least 4/5 fresh worlds (all beta families reported) Mirror role chart gains >=2% test NLL over equal-byte fixed-basis code while within +0.02 nat/example of native full fast weights, and stores at least 3% fewer whole-model bytes than native with <=1.10 native CPU P95. This is a mechanism only.",
+    "FAIL": "Native full or simple code dominates Mirror in task quality/storage/latency, or output members collapse with no ensemble benefit, or only a favorable aligned family passes.",
+    "UNCERTAIN": "single CPU tiny model, native TabM author source not reproduced, insufficient across-world support or clock variability; no natural TabReD or GPU claims."
+  },
+  "checks": [
+    "per-member fast weights genuinely change logits",
+    "manual packed and loop K members predictions equal",
+    "float64/float32 gradients for summed members",
+    "true serializer bytes not parameter proxies",
+    "native and Mirror share same input/targets/update counts, fixed seed head fair controls"
+  ],
+  "hardware": "PyTorch2.10+cpu, float32, 1 CPU thread, AMD EPYC9V74; fixed 20 warmups+100 repeats B128 for latency, no CUDA",
+  "policy": "No auto change to registry status; experimental evidence is branch-isolated and original paper reproduction remains blocked."
+}

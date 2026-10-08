@@ -1,0 +1,87 @@
+{
+  "id": "MA-1171-STAGE0-20261008",
+  "version": 1,
+  "status": "PREREGISTERED_BEFORE_FRESH",
+  "date": "2026-10-08",
+  "branch": "research/mirror-cpu-experiment-batch-20261008",
+  "scope": "CPU synthetic source-trained linear-adapter family + exact joint source-only codec; not natural LLM or original paper reproduction",
+  "related": "MA-1171",
+  "original_plan": "experiments/mirror_applications/research_intake/formula_crossovers_20261008/plans/MA-1171/README.md",
+  "hypothesis": "At actual physical full-codec bytes and calibrated output distortion, small Mirror orientation codes can sometimes save bytes on orbit-aligned function families beyond native directly quantized updates, but may be dominated by an ordinary source-trained linear dictionary; joint method/bit/private selection can beat single-axis restriction without being Mirror-specific.",
+  "worlds": {
+    "dev": [
+      11,
+      12,
+      13
+    ],
+    "fresh": [
+      101,
+      102,
+      103,
+      104,
+      105
+    ],
+    "generator_seed_is_independent_task_world": true,
+    "all_fresh_mandatory": true,
+    "source_tasks": 6,
+    "target_tasks": 6,
+    "d": 8,
+    "blocks": 4,
+    "block_width": 2,
+    "source_support_per_task": 128,
+    "target_support_per_task": 96,
+    "development_probe_per_task": 256,
+    "audit_examples_per_task": 512,
+    "teacher_mix_aligned": [
+      1,
+      0.5,
+      0
+    ],
+    "activation_cross_block_covariance": "X mixed with fixed dense invertible matrix; source-only dev probes supply Gram matrix, never audit"
+  },
+  "optimization": {
+    "methods": [
+      "direct_native",
+      "linear_source_dictionary",
+      "mirror_angular_source_code"
+    ],
+    "quantization_bits": [
+      2,
+      4,
+      8
+    ],
+    "private_coordinate_count": [
+      0,
+      1
+    ],
+    "per_block_choices": 18,
+    "exact_joint_state_count": 104976,
+    "budget_ratios_of_native_direct_8bit": [
+      0.65,
+      0.8,
+      1,
+      1.15
+    ],
+    "baseline_state_selection": "compute best no-Mirror exact joint candidate under same serializer/budget, and best fixed-one-method across blocks",
+    "codec": "portable custom binary exact serializer struct header + per-block tag/scale/int-packed code/mask; use actual len(bytes) and exact decoder, not npz logical tensor sizes",
+    "all_candidates": "development-only low code fit to source/test support, same fits for native + Mirror; no target audit used to fit",
+    "loss": "squared output error averaged over 6 roles and heldout X. Cross-block X^T X interactions included, independent block approximation diagnostic only"
+  },
+  "decision": {
+    "PASS": "Across >=4/5 fresh worlds at >=1 viable budget ratio Mirror-enabled joint codec gives >=2% lower true heldout MSE than best no-Mirror joint at <=same physical bytes, and decoder output roundtrip exactly; no source/audit leakage; full end-to-end runtime <=1.10 native.",
+    "FAIL": "No improvement over best native linear/direct joint codec, advantage only relative to naive diagonal/coordinate optimizer, wrong byte accounting or privately paid basis omitted.",
+    "UNCERTAIN": "a fresh world has no feasible baseline under hard bytes, support and oracle mismatch or CPU timing dominated by Python decoder; status remains UNTESTED until independent natural task replication."
+  },
+  "checks": [
+    "bits2/4/8 unpack roundtrip and payload corruption",
+    "all codec choices valid and binary lengths exact",
+    "full Gram distortion equals heldout predictions",
+    "cross terms produce nonadditive counterexample",
+    "source-only dictionary/code fitting verified by train/test leakage test",
+    "same full-codec byte budget for all methods"
+  ],
+  "measure": "all source/dev/fresh per-world outcomes, true MSE vs exact controls, physical codec bytes, selected methods/bits/private, additive-vs-coupled false-pass, CPU decode time per six role outputs, planned vs actual state count",
+  "limitations": "Aligned teacher is intentionally favorable; full native per-role 8-bit bank is strong baseline but regular linear dictionary can be equally efficient. Not a general model compression theorem.",
+  "hardware": "numpy2.3.5 scipy1.17 CPU float64; OPENBLAS_NUM_THREADS=1, no CUDA; report wall but no production inference throughput.",
+  "policy": "no existing worker queue/status changes; store results under intake rather than finalized MA experiment directory"
+}
