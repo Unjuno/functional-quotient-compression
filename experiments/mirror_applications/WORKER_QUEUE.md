@@ -12,15 +12,9 @@ Use:
 - `docs/phase2/MIRROR_PARAMETER_INTEGRATION_DOCTRINE.md`
 - `docs/phase2/MIRROR_PARAMETER_INTEGRATION_MATRIX.md`
 
-## Selection rule
+## Selection rule (randomized worker execution)
 
-Pick the first candidate satisfying all of:
-1. status is UNTESTED;
-2. highest available priority;
-3. no other active experiment directory already claims the ID;
-4. its closest prior-art controls can be implemented in the current harness.
-
-Do not skip to a visually interesting P1/P2 idea while an executable P0 remains, unless the skipped candidate has a recorded blocker.
+For worker branches, choose uniformly at random from eligible `P0 + UNTESTED` registry rows after excluding IDs with a live remote MA branch or a pre-existing experiment directory. Freeze the ordered pool, exclusions, pool hash, cryptographic seed, index and replay method in the selected experiment directory. A pre-protocol blocker remains UNTESTED and triggers a fresh draw. Branches remain separate; do not auto-merge. Numeric order and queues below are historical navigation only, not selection order.
 
 ## Literature-derived cross-over queue
 

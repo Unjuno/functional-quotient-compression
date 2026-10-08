@@ -98,15 +98,16 @@ class Intervention(nn.Module):
         return F.linear(z, self.b)
 
     def active_macs_per_token(self):
+        base = RANK * WIDTH + OUT * RANK
         if self.mode == "full":
             return OUT * WIDTH
         if self.mode == "independent":
-            return 2 * RANK * WIDTH
-        base = 2 * RANK * WIDTH
+            return base
         if self.mode == "mirror":
-            return base + 6 * 4 * RANK + 4 * 1 + 4 * 6
+            # Count the optimized rank-4 Givens updates, not dense matrix materialization.
+            return base + (1 * 4 + 4 * 6) + 6 * 4
         if self.mode == "film":
-            return base + 4 * RANK + 4 * 1 + 4 * RANK
+            return base + (1 * 4 + 4 * RANK) + RANK
         return base
 
 
