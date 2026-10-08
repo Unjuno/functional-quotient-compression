@@ -1,19 +1,28 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-487",
+  "protocol_sha256": "e21488b2556892bdcf67061da12aac0f4cfd097c2dd222e52ad12f11cb992a47",
+  "commit": "5fbed7c683a5408f954b293e96d49440bcf075b7",
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "pytest -q experiments/mirror_applications/ma-487-lista-sparse-inference/tests",
+    "passed": 3,
+    "failed": 0
   },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "roundtrip_checked": true,
+    "byte_exact": true
   },
   "metric_replay": {
-    "checked": false,
-    "max_difference": null
+    "checked": true,
+    "max_difference": 0.0
   },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "fresh_split_integrity_checked": true,
+  "fresh_accessed": false,
+  "direct_top3_dominates": true,
+  "disposition": "FAIL: LISTA met quality/active-atom/OMP-operation gates but direct top-3 projection had materially lower error, similar/lower ops and smaller bytes.",
+  "notes": [
+    "Function matrices are supplied as transient encoder inputs and are not part of predictor payload; no function-bank storage/compression claim is made.",
+    "Both frozen development seeds replayed with zero metric difference.",
+    "Fresh seeds 48711-48713 remained sealed.",
+    "Orthonormal synthetic function bank only."
+  ]
 }
