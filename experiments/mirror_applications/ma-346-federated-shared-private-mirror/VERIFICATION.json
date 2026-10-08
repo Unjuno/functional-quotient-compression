@@ -1,0 +1,9 @@
+{
+  "experiment_id": "MA-346",
+  "commit": "<RESULT_COMMIT>",
+  "tests": {"command": "python -m pytest -q experiments/mirror_applications/ma-346-federated-shared-private-mirror/tests", "passed": 3, "failed": 0},
+  "serialization": {"roundtrip_checked": true, "byte_exact": true, "payloads_checked": 175, "fresh_payloads_checked": 105, "native_phase_hashes_match": true, "max_metric_replay_difference": 0.0},
+  "metric_replay": {"command": "python experiments/mirror_applications/ma-346-federated-shared-private-mirror/source/verify.py", "checked": true, "rows_replayed": 175, "fresh_rows": 105, "max_difference": 0.0},
+  "fresh_split_integrity_checked": true,
+  "notes": ["Fresh seeds 34611–34613 covered all five heterogeneity rates and seven methods.", "Primary 25%/50% rates met the shared/private quality and payload gate against FedRep dense-private state.", "Native phase state exactly matched Mirror; no Mirror-specific effect is claimed.", "Synthetic post-fit client maps only; no training or real client data."]
+}
