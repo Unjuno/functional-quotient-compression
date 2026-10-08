@@ -5,8 +5,8 @@
 - Base commit: `2d686f0`
 - Development complete: yes (seeds 39901, 39902)
 - Fresh/audit opened: no (39911–39913 sealed after gate failure)
-- Results committed: pending
-- Verification committed: pending
+- Results committed: yes
+- Verification committed: yes
 - Registry row updated: pending
 
 ## Next action

@@ -1,6 +1,6 @@
 {
   "experiment_id": "MA-255",
-  "commit": "pending",
+  "commit": "65ab2ca",
   "tests": {
     "command": "pytest -q experiments/mirror_applications/ma-255-context-superposition/tests",
     "passed": 3,
@@ -19,7 +19,11 @@
     "all_payload_methods_replayed": true
   },
   "fresh_split_integrity_checked": false,
-  "fresh_seeds": [25511, 25512, 25513],
+  "fresh_seeds": [
+    25511,
+    25512,
+    25513
+  ],
   "fresh_status": "SEALED_AFTER_REGISTERED_DEVELOPMENT_GATE_FAILURE",
   "development_gate": {
     "mirror_accuracy_gain_over_PSP_required": 0.03,
@@ -29,7 +33,10 @@
     "observed_payload_bytes": 830,
     "PSP_payload_bytes": 822,
     "independent_accuracy_gap_limit": 0.05,
-    "observed_mean_gap_to_independent": [0.2798, 0.2803]
+    "observed_mean_gap_to_independent": [
+      0.2798,
+      0.2803
+    ]
   },
   "notes": [
     "An initial PSP sign bit serialization error was caught by payload replay; fixed and both development worlds rerun before finalizing results.",

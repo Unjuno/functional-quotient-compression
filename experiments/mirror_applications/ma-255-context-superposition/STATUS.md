@@ -5,8 +5,8 @@
 - Base commit: `cbd8140`
 - Development complete: yes (seeds 25501, 25502)
 - Fresh/audit opened: no (25511–25513 sealed)
-- Results committed: pending
-- Verification committed: pending
+- Results committed: yes
+- Verification committed: yes
 - Registry row updated: pending
 
 ## Next action
