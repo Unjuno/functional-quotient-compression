@@ -68,3 +68,7 @@ All learned weights/activations in these neural models are dimensionless after n
 - **MA-1164** [LRKV head residual Mirror code](plans/MA-1164/README.md) — P0; native LRKV mandatory baseline; source PA423 and exact attention equivalence PA424.
 
 **Collision fix:** Previous unrelated preliminary IDs MA-1116..1123 / PA382..390 are reserved by the live worker on its canonical branch. This isolated branch allocates MA-1156..1164 / PA414..424 instead. Do NOT cherry-pick old registry from the previous experimental branch.
+
+## Recorded exploratory negative result: GVA role switching
+
+The frozen [MA-1162 GVA Stage-0 protocol](pilots/gva_alias_stage0/PROTOCOL.json) and [five-world result](pilots/gva_alias_stage0/REPORT.md) confirm exact cache alias under identical prefix/readout-only changes, and a failure counterexample when upstream prefix states differ. The native same-basis factorized control matches Mirror's 4,936-B serialized code state, while Mirror recomposition increases eager CPU P95 latency (median ratio 1.248); therefore **Mirror-specific M0/FAIL at this narrow synthetic scope**. This is **not** MA-1162 completion and does not change its UNTESTED status. Full executed source is in a separate conversation ZIP (SHA256 recorded in verification); do not treat repository-only report as fully source-complete until exact code is synced.

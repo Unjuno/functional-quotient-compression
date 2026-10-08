@@ -1,0 +1,63 @@
+{
+  "experiment": "MA-1162",
+  "stage": "EXPLORATORY_ALGEBRA_PILOT",
+  "status": "SYNTHETIC_MIRROR_SPECIFIC_FAIL",
+  "worker_registry_unchanged": true,
+  "protocol_commit": "ecc8e9d847c22f2cb682aae7fc60fe6e1f289509",
+  "dev_seeds": [
+    11,
+    12,
+    13
+  ],
+  "fresh_seeds": [
+    101,
+    102,
+    103,
+    104,
+    105
+  ],
+  "all_worlds_run": true,
+  "hardware": {
+    "cpu": "Linux x86_64; 5 logical CPUs",
+    "torch": "2.10.0+cpu",
+    "numpy": "2.3.5",
+    "threads": 1,
+    "dtype": "float32",
+    "device": "CPU",
+    "batch": 1,
+    "heads": 4,
+    "roles": 8,
+    "context": 128,
+    "warmup": 20,
+    "timed_calls": 100
+  },
+  "source_sha256": "c45abbadf56ca83759f42e93b4f78af26ca665c9ddc874561b69eb6b6a17ef86",
+  "dev_csv_sha256": "8c89061980087622ff177f9e5ece2bec58c6742c33d52825247926fa4bea0e9a",
+  "fresh_csv_sha256": "c3973191b9754741a81d52605dd1b153ce1e85a94b5097068914bfcd6521d3f2",
+  "expected_gates": {
+    "exact_safe": "PASS all 5",
+    "unsafe_prefix": "PASS all 5",
+    "physical_alias": "PASS all 5",
+    "native_factorized_parity": "PASS all 5",
+    "Mirror_specific_storage_10pct": "FAIL all 5",
+    "p95_runtime_le_1p10": "FAIL at median 1.24777"
+  },
+  "metrics": {
+    "maximum_score_error": 1.4901161193847656e-7,
+    "maximum_output_error": 3.725290298461914e-8,
+    "minimum_invalid_prefix_output_error": 0.019833851605653763,
+    "cache_allocated_single_B": 12288,
+    "cache_cloned_B": 98304,
+    "full_matrix_NPZ_B": 8460,
+    "Mirror_code_NPZ_B": 4936,
+    "matched_native_code_NPZ_B": 4936,
+    "median_native_p95_ms": 0.0660853,
+    "median_Mirror_p95_ms": 0.0806746,
+    "median_p95_ratio": 1.2477713035480233
+  },
+  "limitations": [
+    "No trained LM quality, natural task, NLL, GPU fused decode, or cross-model prefix compatibility.",
+    "No source uploaded to GitHub in this commit: source plus tests are in companion chat bundle with exact hashes.",
+    "Exact alias save relative to redundant copies is also achieved by native GVA; no Mirror-specific Pareto improvement."
+  ]
+}
