@@ -1,0 +1,121 @@
+{
+  "condition": "development",
+  "seed": 33002,
+  "summaries": [
+    {
+      "condition": "development",
+      "seed": 33002,
+      "method": "independent_full",
+      "serialized_bytes": 131752,
+      "payload_sha256": "9709b3599db8c4455a7d76723de401e4d16c82853c97ae5efafc519c44f68c8e",
+      "active_attention_macs_proxy": 8388608,
+      "reconstruction_macs_proxy": 0,
+      "updates": 0,
+      "examples_seen": 2048,
+      "output_mse": 7.191628542679851e-11,
+      "output_nmse": 4.66817372607969e-08,
+      "layer_output_nmse": [
+        4.779495199613848e-08,
+        5.188341134498842e-08,
+        4.601791658842558e-08,
+        4.6510038487213023e-08
+      ],
+      "decode_wall_s": 0.022414331000618404,
+      "reconstruction_wall_s": 0.00014794900198467076,
+      "attention_wall_s": 0.022266381998633733,
+      "queries_per_s": 91370.11494759742
+    },
+    {
+      "condition": "development",
+      "seed": 33002,
+      "method": "mlkv_hard_share",
+      "serialized_bytes": 2984,
+      "payload_sha256": "62cd15c7655e60430a44e1145f35954165812fb9bdab263f0aa3ee53acd7db7b",
+      "active_attention_macs_proxy": 8388608,
+      "reconstruction_macs_proxy": 65536,
+      "updates": 0,
+      "examples_seen": 2048,
+      "output_mse": 0.0014976393431425095,
+      "output_nmse": 0.9721359482501759,
+      "layer_output_nmse": [
+        0.25475919246673584,
+        0.16410595178604126,
+        0.0938141793012619,
+        1.0453414916992188
+      ],
+      "decode_wall_s": 0.02243492199704633,
+      "reconstruction_wall_s": 0.00018747799913398921,
+      "attention_wall_s": 0.02224744399791234,
+      "queries_per_s": 91286.25453966942
+    },
+    {
+      "condition": "development",
+      "seed": 33002,
+      "method": "shared_direct",
+      "serialized_bytes": 36488,
+      "payload_sha256": "5f6b2cd215c68f4901e62594d46aff8b041a76c317af6d508b2a0c422bdad4a2",
+      "active_attention_macs_proxy": 8388608,
+      "reconstruction_macs_proxy": 163840,
+      "updates": 0,
+      "examples_seen": 2048,
+      "output_mse": 7.436895543833089e-11,
+      "output_nmse": 4.827379525414712e-08,
+      "layer_output_nmse": [
+        6.860568646516185e-08,
+        7.125849066369483e-08,
+        6.288399134746214e-08,
+        4.6510038487213023e-08
+      ],
+      "decode_wall_s": 0.02311192200068035,
+      "reconstruction_wall_s": 0.0011348179978085682,
+      "attention_wall_s": 0.021977104002871783,
+      "queries_per_s": 88612.27551476301
+    },
+    {
+      "condition": "development",
+      "seed": 33002,
+      "method": "mirror_phase",
+      "serialized_bytes": 36458,
+      "payload_sha256": "ecbd2bf0eea30bcbbe27c336a236c6195c7576f286ca1a3abfbb1f39268171fc",
+      "active_attention_macs_proxy": 8388608,
+      "reconstruction_macs_proxy": 163840,
+      "updates": 0,
+      "examples_seen": 2048,
+      "output_mse": 7.484068920149411e-11,
+      "output_nmse": 4.858000338848475e-08,
+      "layer_output_nmse": [
+        8.335544521287375e-08,
+        6.459784884782493e-08,
+        6.572440014451786e-08,
+        4.6510038487213023e-08
+      ],
+      "decode_wall_s": 0.02394557599836844,
+      "reconstruction_wall_s": 0.001290698997763684,
+      "attention_wall_s": 0.022654877000604756,
+      "queries_per_s": 85527.28070268774
+    },
+    {
+      "condition": "development",
+      "seed": 33002,
+      "method": "mirror_no_private",
+      "serialized_bytes": 3238,
+      "payload_sha256": "a4532370d370a3b088a832be44d331b233db9f5047c3eec92e266051881323fb",
+      "active_attention_macs_proxy": 8388608,
+      "reconstruction_macs_proxy": 196608,
+      "updates": 0,
+      "examples_seen": 2048,
+      "output_mse": 0.0014943989226594567,
+      "output_nmse": 0.970032551826033,
+      "layer_output_nmse": [
+        8.335544521287375e-08,
+        6.459784884782493e-08,
+        6.572440014451786e-08,
+        1.0586613416671753
+      ],
+      "decode_wall_s": 0.02280125300239888,
+      "reconstruction_wall_s": 0.001206194003316341,
+      "attention_wall_s": 0.02159505899908254,
+      "queries_per_s": 89819.62525412676
+    }
+  ]
+}

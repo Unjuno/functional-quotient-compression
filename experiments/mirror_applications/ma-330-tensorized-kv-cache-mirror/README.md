@@ -21,8 +21,12 @@ PA08 (MLKV) shares KV heads across layers. PA35 motivates shared tensor factors 
 
 ## Frozen controls and gates
 
-See `PROTOCOL.json`; fresh seeds are sealed. Required controls: independent cache, MLKV-style hard sharing, shared-basis direct coefficients, Mirror coordinates, and private residual upper control.
+See `PROTOCOL.json`; fresh seeds are sealed. Required controls: independent cache, MLKV-style hard sharing, direct cos/sin coefficients with private unrelated-layer state, Mirror phase codes with private state, and a no-private Mirror condition to expose the private-state boundary.
+
+The development implementation was frozen before fresh access. Its timing now reports cache reconstruction and causal attention separately, with total query throughput including reconstruction. This timing amendment does not change thresholds or seeds.
 
 ## Results
 
 Pending development.
+
+Development also reports per-layer attention-output error. The fourth layer was planted unrelated; the no-private condition should expose whether one shared cache address can serve it. Frozen development suggests it cannot, while one private cache restores that layer.

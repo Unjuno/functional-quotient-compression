@@ -1,0 +1,121 @@
+{
+  "condition": "development",
+  "seed": 33001,
+  "summaries": [
+    {
+      "condition": "development",
+      "seed": 33001,
+      "method": "independent_full",
+      "serialized_bytes": 131752,
+      "payload_sha256": "62bd6404613e64ca3ab36790e77db069fb5e4008e38abd4ce621b365ddb9ab3a",
+      "active_attention_macs_proxy": 8388608,
+      "reconstruction_macs_proxy": 0,
+      "updates": 0,
+      "examples_seen": 2048,
+      "output_mse": 5.845250672376068e-11,
+      "output_nmse": 4.152020444047061e-08,
+      "layer_output_nmse": [
+        6.879594849351633e-08,
+        5.8361479204904754e-08,
+        7.41562047323896e-08,
+        3.958298577799724e-08
+      ],
+      "decode_wall_s": 0.02387079500113032,
+      "reconstruction_wall_s": 0.00011099400217062794,
+      "attention_wall_s": 0.02375980099895969,
+      "queries_per_s": 85795.21544644928
+    },
+    {
+      "condition": "development",
+      "seed": 33001,
+      "method": "mlkv_hard_share",
+      "serialized_bytes": 2984,
+      "payload_sha256": "4fbffdaf858b9dcccdc2d12e7057a08bd80bc6e8fe20f0de491df7bb0cf52d2b",
+      "active_attention_macs_proxy": 8388608,
+      "reconstruction_macs_proxy": 65536,
+      "updates": 0,
+      "examples_seen": 2048,
+      "output_mse": 0.0014196709962561727,
+      "output_nmse": 1.0084260420400752,
+      "layer_output_nmse": [
+        0.010848543606698513,
+        0.12164478003978729,
+        0.20963004231452942,
+        1.0761644840240479
+      ],
+      "decode_wall_s": 0.025121463997493265,
+      "reconstruction_wall_s": 0.00018457299665897153,
+      "attention_wall_s": 0.024936891000834294,
+      "queries_per_s": 81523.91119420265
+    },
+    {
+      "condition": "development",
+      "seed": 33001,
+      "method": "shared_direct",
+      "serialized_bytes": 36488,
+      "payload_sha256": "ebfd691de7f17b5225edad88e4e11adb893dc551c8e3f1f2dfe46a08580f8a73",
+      "active_attention_macs_proxy": 8388608,
+      "reconstruction_macs_proxy": 163840,
+      "updates": 0,
+      "examples_seen": 2048,
+      "output_mse": 6.366802918211789e-11,
+      "output_nmse": 4.5224913970863266e-08,
+      "layer_output_nmse": [
+        1.1965003920977324e-07,
+        1.207112916290498e-07,
+        1.1881553518833243e-07,
+        3.958298577799724e-08
+      ],
+      "decode_wall_s": 0.023641255000256933,
+      "reconstruction_wall_s": 0.001059817001078045,
+      "attention_wall_s": 0.02258143799917889,
+      "queries_per_s": 86628.22680004688
+    },
+    {
+      "condition": "development",
+      "seed": 33001,
+      "method": "mirror_phase",
+      "serialized_bytes": 36458,
+      "payload_sha256": "278e7d6bf29a360286146d53c0285d41a9469886d03cfb7c58d22908f7041584",
+      "active_attention_macs_proxy": 8388608,
+      "reconstruction_macs_proxy": 163840,
+      "updates": 0,
+      "examples_seen": 2048,
+      "output_mse": 6.406168651107436e-11,
+      "output_nmse": 4.550453812547832e-08,
+      "layer_output_nmse": [
+        1.1870474736497272e-07,
+        1.1854263703980905e-07,
+        1.3387136732490035e-07,
+        3.958298577799724e-08
+      ],
+      "decode_wall_s": 0.02518395600054646,
+      "reconstruction_wall_s": 0.0009055890004674438,
+      "attention_wall_s": 0.024278367000079015,
+      "queries_per_s": 81321.61603028377
+    },
+    {
+      "condition": "development",
+      "seed": 33001,
+      "method": "mirror_no_private",
+      "serialized_bytes": 3238,
+      "payload_sha256": "e2f7f2147e502270cac6154f48d9c461feeb03b070d22ae2dbb263e7aaf7e5db",
+      "active_attention_macs_proxy": 8388608,
+      "reconstruction_macs_proxy": 196608,
+      "updates": 0,
+      "examples_seen": 2048,
+      "output_mse": 0.001395582570694387,
+      "output_nmse": 0.9913154609883333,
+      "layer_output_nmse": [
+        1.1870474736497272e-07,
+        1.1854263703980905e-07,
+        1.3387136732490035e-07,
+        1.0663870573043823
+      ],
+      "decode_wall_s": 0.025968677997298073,
+      "reconstruction_wall_s": 0.0012647209987335373,
+      "attention_wall_s": 0.024703956998564536,
+      "queries_per_s": 78864.23791819843
+    }
+  ]
+}
