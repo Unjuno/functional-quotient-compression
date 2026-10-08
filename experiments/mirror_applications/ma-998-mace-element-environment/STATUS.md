@@ -3,11 +3,11 @@
 - Status: NOT ESTABLISHED — BLOCKED
 - Branch: `research/ma-998-mace-element-env-mirror-20261008`
 - Base commit: `16807a7` (`research/mirror-application-worker-ready-20261007`)
-- Last verified commit: pending
+- Last verified commit: `beb962a`
 - Development complete: yes (environment capability check only)
 - Fresh/audit opened: no
 - Results committed: yes (header-only)
-- Verification committed: pending
+- Verification committed: yes
 - Registry row updated: worker note only; scientific status remains UNTESTED
 
 ## Next action
