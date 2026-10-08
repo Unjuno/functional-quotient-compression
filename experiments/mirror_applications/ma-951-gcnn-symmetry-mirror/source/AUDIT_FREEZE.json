@@ -1,6 +1,6 @@
 {
   "experiment_id": "MA-951",
-  "phase": "pre_audit_freeze",
+  "phase": "completed_audit",
   "files": {
     "PROTOCOL.json": "9015cb304ccabecef470ff43e64dca4b3b7ecbcd2360d475b11804677b9e76a3",
     "source/run_ma951.py": "ee887d09d8124a6da98615e34fa778f17dbead89f0949ea6d854a7526643b7da",
@@ -40,6 +40,13 @@
     47,
     59
   ],
-  "audit_query_accessed": false,
-  "selection_frozen": true
+  "audit_query_accessed": true,
+  "selection_frozen": true,
+  "audit_completed": true,
+  "raw_metrics_sha256_before_reporting_annotation": "c0b2154b45930d6624172ed17c15efe4859a8211aa65a3ef981666d944a801cd",
+  "reported_metrics_sha256": "dd4959aa33499abe3114590f0a941746bf6918d25da67c2621fd85b1934169fb",
+  "audit_rows": 360,
+  "replay_check": "Two runs exactly reproduced IDs, payload bytes, MSE, accuracy and equivariance error; runtime varied.",
+  "post_audit_annotation": "Parameter counts and analytic MACs computed from frozen matrix dimensions; no experiment or query outcomes changed.",
+  "raw_metrics_sha256": "19808ef6da2373c7b13ec7771c308d6e61d6f6f9d4e2ad8ae28269901973a6b8"
 }

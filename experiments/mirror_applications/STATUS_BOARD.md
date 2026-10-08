@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (35 completed; 595 UNTESTED)
+- P0: **630** (36 completed; 594 UNTESTED)
 - P1: **422** (12 completed; 410 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1108 UNTESTED, 29 PROMISING, 18 FAIL**
+- Current MA statuses: **1107 UNTESTED, 29 PROMISING, 19 FAIL**
 - 47 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -77,6 +77,8 @@ Existing methods **Compress then Serve, CtM, EigenLoRAx, MetaTT, GLoRA, LRAgent 
 KG relation rotations (RotatE, TuckER, QuatE, PairRE), EXIF/device-aware ISPs (ParamISP, Uni-ISP), deployable dynamics adaptation (UP-OSI, RMA, CoRMA) and room/source acoustic neural fields (NAF, TA-RIR) are **existing directly conditioned-function baselines**. A new Mirror code m earns credit only for marginal useful function/byte improvement versus its corresponding native conditioner, with natural held-out relations/cameras/physics/rooms and true physical runtime/cost. New MA1116..1155 are all UNTESTED.
 
 ## Main scientific findings
+
+- **MA-951 FAIL:** C4 Mirror exceptions recovered aligned task accuracy (0.99996 vs 0.99973 independent) but 272 B was 64.2% of independent 424 B, missing the <=60% bytes gate. Independent residuals reduced Mirror accuracy to 0.748. Finite linear screen only.
 
 - Aligned functional variation often admits a compact Mirror View, including experts, QKV, future heads, depth and structured codecs.
 - Arbitrary unrelated functions are not made independent by cheap address combinatorics; private residuals are often necessary.

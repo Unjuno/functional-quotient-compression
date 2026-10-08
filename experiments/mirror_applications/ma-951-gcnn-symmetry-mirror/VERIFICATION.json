@@ -1,0 +1,28 @@
+{
+  "experiment_id": "MA-951",
+  "commit": "pending",
+  "tests": {
+    "command": "pytest -q experiments/mirror_applications/ma-951-gcnn-symmetry-mirror/tests",
+    "passed": 5,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "format": "Safetensors flattened model state; schema/layout metadata charged in actual file size"
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference_query_mse": 0.0,
+    "max_difference_accuracy": 0.0,
+    "max_difference_equivariance": 0.0,
+    "metrics_sha256": "dd4959aa33499abe3114590f0a941746bf6918d25da67c2621fd85b1934169fb"
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Draw31 rejection sampling replay passed.",
+    "Second audit rerun exactly matched query metrics and bytes; timings varied.",
+    "360 audit rows cover 3 worlds \u00d7 3 model seeds \u00d7 2 teacher families \u00d7 4 tasks \u00d7 5 methods.",
+    "Registered storage gate failed; quality gate passed on aligned worlds. No CNN or capacity claim."
+  ]
+}
