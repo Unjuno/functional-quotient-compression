@@ -10,7 +10,8 @@ import torch
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'source'))
-from experiment import CoordinateLSTM, decode_m, generator, make_world, tensor_bytes
+from experiment import (CoordinateLSTM, decode_m, generator, make_world, tensor_bytes,
+                        make_episode, make_payload, make_inference_payload, STEPS)
 
 
 class MA446MechanismTests(unittest.TestCase):
@@ -39,6 +40,21 @@ class MA446MechanismTests(unittest.TestCase):
         restored=torch.load(io.BytesIO(blob),map_location='cpu',weights_only=False)
         self.assertEqual(len(blob),len(tensor_bytes(payload)))
         torch.testing.assert_close(restored['params'],payload['params'],atol=0,rtol=0)
+
+
+    def test_adam_step_counter_is_charged_and_inference_payload_excludes_optimizer(self):
+        w0,basis=make_world(44601)
+        episode=make_episode(8,w0,basis,generator(44602))
+        params=torch.zeros(8,3)
+        result={'params':params,'m1':torch.ones_like(params),'m2':torch.ones_like(params)}
+        payload=make_payload('mirror_adam',44601,w0,basis,result,episode,lr=.3)
+        self.assertEqual(payload['adaptation_updates'],STEPS)
+        self.assertEqual(payload['optimizer_step'],STEPS)
+        self.assertIn('m1',payload['states'])
+        inference=make_inference_payload('mirror_adam',44601,w0,basis,result)
+        self.assertIn('task_codes',inference)
+        self.assertNotIn('states',inference)
+        self.assertNotIn('learned_optimizer_state_dict',inference.get('shared',{}))
 
     def test_random_draw_pool_hash_and_index_replay(self):
         source=ROOT/'source'
