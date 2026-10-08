@@ -1,0 +1,7 @@
+condition,world_or_seed,method,serialized_bytes,train_tokens_or_examples,optimizer_updates,active_compute_proxy,wall_time_s,primary_metric,primary_value,secondary_metric,secondary_value,status_note
+fresh_mean,41610-41612,shared,2525,128000,500,64 MAC/query,0.179,normalized_rmse,0.9904,functions,16,baseline
+fresh_mean,41610-41612,mirror2,2905,128000,500,72 MAC/query,0.342,normalized_rmse,0.8884,functions,16,FAIL quality gate
+fresh_mean,41610-41612,latent1,2969,128000,500,96 MAC/query,0.219,normalized_rmse,0.8037,functions,16,ordinary one-value code stronger at similar bytes
+fresh_mean,41610-41612,latent2,3161,128000,500,128 MAC/query,0.221,normalized_rmse,0.7264,functions,16,quality reference
+fresh_mean,41610-41612,latent8,4313,128000,500,320 MAC/query,0.222,normalized_rmse,0.5151,functions,16,larger code improves fit
+fresh_mean,41610-41612,independent,8349,128000,500,64 MAC/query,0.279,normalized_rmse,0.5173,functions,16,independent decoder upper control
