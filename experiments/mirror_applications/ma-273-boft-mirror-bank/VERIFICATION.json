@@ -1,0 +1,33 @@
+{
+  "experiment_id": "MA-273",
+  "source_commit": "9e9b9b5",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-273-boft-mirror-bank/tests -v",
+    "passed": 2,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "method": "actual uncompressed NPZ; stored factorized codes are optimized values and exactly reconstruct BOFT matrices"
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_seeds": [
+    163,
+    269,
+    367,
+    463
+  ],
+  "notes": [
+    "Reconciled root status is FAIL for Mirror-specific value; a separate neutral-initialization trained protocol failed at development and remains fresh-sealed under protocol_variants/.",
+    "Initial seeds 137/243/347/457 are preserved but excluded after test found serialized coordinates were pre-optimization initial values.",
+    "Corrected fresh run uses new locked seeds.",
+    "Mirror and simple factorized control are mathematically identical and have identical packed state.",
+    "All BOFT transforms preserve orthogonality and inverse cycles to numerical precision.",
+    "No learning, language or capacity claim."
+  ]
+}
