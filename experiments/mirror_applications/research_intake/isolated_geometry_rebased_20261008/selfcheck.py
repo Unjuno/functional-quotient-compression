@@ -89,11 +89,12 @@ def check():
         sections = protocol.get("split", {})
         dev = sections.get("development", protocol.get("development", {}))
         fresh = sections.get("fresh", protocol.get("fresh", {}))
-        devseeds = dev.get("seeds", dev.get("worlds_or_seeds", []))
-        frseeds = fresh.get("seeds", fresh.get("worlds_or_seeds", []))
+        firewall = protocol.get("data_firewall", {})
+        devseeds = dev.get("seeds", dev.get("worlds_or_seeds", firewall.get("dev_seeds", [])))
+        frseeds = fresh.get("seeds", fresh.get("worlds_or_seeds", firewall.get("fresh_seeds", [])))
         if list(devseeds) != [11,12,13] or list(frseeds) != [101,102,103,104,105]:
             error("%s dev/fresh seed mismatch" % label)
-        if not fresh.get("locked_before_access", False):
+        if not fresh.get("locked_before_access", firewall.get("fresh_locked_before_access", False)):
             error("%s fresh not locked" % label)
         if set(protocol.get("gates", {})) != {"PASS","FAIL","UNCERTAIN"}:
             error("%s missing predeclared gates" % label)
