@@ -1,19 +1,31 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-760",
+  "commit": "pending-result-commit",
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-760-diffusion-control-view/tests -v",
+    "passed": 3,
+    "failed": 0
   },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "library_payloads": 90,
+    "condition_payloads": 180,
+    "base_unet_bytes": 5830450,
+    "base_unet_sha256": "b91caffead060f07ee552264ced8ed7e533309def04c53b95de0c3e3c86ea855"
   },
   "metric_replay": {
-    "checked": false,
-    "max_difference": null
+    "checked": true,
+    "rows": 180,
+    "max_difference": 0.0
   },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "fresh_split_integrity_checked": true,
+  "fresh_accessed": false,
+  "notes": [
+    "All serialized inference library and per-condition payloads had actual byte length and SHA256 checked.",
+    "Held-out synthetic residual MSE replayed exactly from the serialized payloads.",
+    "Tiny UNet checkpoint is pinned by public model ID/revision; its local serialized state is not committed as a checkpoint.",
+    "Protocol amendment 1 was committed before development scores.",
+    "No GPU; no full diffusion image-generation or real-control data claim."
+  ]
 }
