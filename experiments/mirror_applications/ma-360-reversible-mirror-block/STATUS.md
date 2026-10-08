@@ -3,7 +3,7 @@
 - Status: FAIL for Mirror-specific value; reversible tied-block memory point is narrow PROMISING
 - Branch: `research/ma-360-reversible-mirror-block-20261008`
 - Base commit: `c935a90`
-- Last verified commit: pending
+- Last verified commit: `7d0bf37c4e008a804f32a2b94a8e6baa7aa21a86`
 - Development complete: yes; checkpoint-only attempt excluded and documented
 - Fresh/audit opened: no; seeds 36011–36012 sealed
 - Results committed: yes

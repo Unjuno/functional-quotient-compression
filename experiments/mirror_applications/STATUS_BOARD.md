@@ -94,4 +94,4 @@ KG relation rotations (RotatE, TuckER, QuatE, PairRE), EXIF/device-aware ISPs (P
 
 ## MA-360 — FAIL for Mirror-specific reversible block value
 
-Across two synthetic CPU worlds, custom reversible tied coupling reduced peak live saved activations 41.1% (139,264B to 81,956B) at ~1.8× wall time and matched tied task MSE. Mirror and direct scalar views had identical hashes and outputs. Reversible payload was ~2.4KB versus untied ~19.1KB. Fresh seeds remained sealed. Ten rows replayed exactly; three tests passed. Synthetic CPU only. Dedicated branch: `research/ma-360-reversible-mirror-block-20261008`.
+Across two synthetic CPU worlds, custom reversible tied coupling reduced peak live saved activations 41.1% (139,264B to 81,956B) at ~1.8× wall time and matched tied task MSE. Mirror and direct scalar views had identical hashes and outputs. Reversible payload was ~2.4KB versus untied ~19.1KB. Fresh seeds remained sealed. Ten rows replayed exactly; three tests passed. Synthetic CPU only. Dedicated branch: `research/ma-360-reversible-mirror-block-20261008` (commit `7d0bf37`).
