@@ -38,3 +38,19 @@ Native diagonal pole residuals are already the simplest representation of timesc
 ## U — unresolved
 
 Natural S4 kernel banks, learned timescale mixtures, FFT kernels, long-range language tasks, and accelerator runtime remain untested.
+
+## Results and decision
+
+**D — PROMISING, narrowly scoped, strict byte gate missed.** Fresh horizon-128 means over three worlds and three seeds: Mirror NRMSE 0.000041 at 2,061B; independent poles 0.000075 at 2,293B; rank-two pole residual 0.000275 at 2,053B. Mirror is more accurate than independent while using 10.1% fewer actual bytes and is substantially more accurate than the nearly equal-byte rank-two residual. It misses the preregistered <=60% payload gate. Active MAC proxy is 10 vs 8 per step (1.25x, at the gate), and measured CPU sequence-evaluation time is comparable. All poles remained stable (maximum <0.762).
+
+**FACT:** quality and stability gates pass in all three fresh worlds; the registered byte threshold does not. Mirror beats independent on both quality and bytes by a modest margin. Its clear matched-size comparison is rank-two residual: Mirror costs 8B more and reduces NRMSE about 6.7x.
+
+**INTERPRETATION:** the chosen spectral code produces a useful timescale specialization point, but most of the physical kernel remains shared and serialized overhead limits compression. This is a bounded synthetic quality/storage Pareto signal, not an S4 serving result or capacity claim.
+
+**H — tested:** low-dimensional role codes shifting a shared diagonal S4 pole spectrum recover band-specific filters with lower bytes than independent kernels.
+
+**T — executed:** 8-pole diagonal recurrence; four role-specific timescales; 500 AdamW updates × batch 64; development worlds 43800/43801 chose LR 0.003 for shared/gate and 0.01 for Mirror/rank2/independent; fresh worlds 43810/43811/43812, three seeds each; horizons 64 and 128; actual torch inference payload bytes and recurrent MAC proxy.
+
+**C — strongest counter-hypothesis:** the teacher is intentionally aligned to log-pole shifts, and the byte gain comes partly from sharing. Natural S4 kernel banks may favor native pole adaptation or require more private coefficients.
+
+**U — unresolved:** natural S4 kernels, FFT implementation, long-range language quality, and accelerator runtime.
