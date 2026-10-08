@@ -1,0 +1,65 @@
+{
+  "experiment_id": "MA-315",
+  "title": "Shared intrinsic Mirror view with sparse private residuals",
+  "status": "PROTOCOL_FROZEN_BEFORE_DEVELOPMENT",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY/COMPUTE",
+  "base_commit": "66d7db2",
+  "hypothesis": "For a mixed task bank with one common aligned two-dimensional function plus sparse task-private intrinsic residuals, replacing the common two-coefficient address with one Mirror angle will reduce actual serialized payload by at least 10% versus the same shared/private decomposition with direct common coefficients, while meeting held-out quality. This should outperform simply increasing a global intrinsic dimension when private residual density is low.",
+  "physical_object": "one 32D linear base predictor and deterministic 32x16 random orthonormal intrinsic basis shared across tasks",
+  "mirror_coordinate": "one FP16 angle/task over a shared-radius first two basis columns; sparse private residuals store intrinsic coordinate indices plus FP16 values",
+  "logical_multiplicity": "128 task functions with a common orbit component and task-specific sparse residuals; task count is not independent capacity",
+  "prior_art_refs": ["PA33", "PA30", "MA-314"],
+  "controls": ["hard tie", "fixed global intrinsic dimensions 2/4/8/16", "shared direct two-coefficient address plus identical sparse private residuals", "adaptive/global dense intrinsic coefficients", "independent full 32D weights"],
+  "task": {
+    "input_dim": 32,
+    "intrinsic_dim_max": 16,
+    "tasks": 128,
+    "private_residual_groups": "48 tasks with 0 private values; 32 with 2; 32 with 4; 16 with 8, on randomly selected coordinates 2..15",
+    "shared_orbit": "first two intrinsic coordinates have fixed radius 0.25 and per-task uniform angle",
+    "support_examples_per_task": 96,
+    "validation_examples_per_task": 64,
+    "test_examples_per_task": 128,
+    "angle_grid_points": 720,
+    "development_seeds": [31501, 31502],
+    "fresh_seeds": [31511, 31512, 31513],
+    "optimizer_updates": 0,
+    "task_id_supplied": true
+  },
+  "development": {
+    "seeds": [31501, 31502],
+    "settings_allowed_to_change": [],
+    "fresh_access_after_protocol_freeze": true
+  },
+  "fresh": {
+    "locked_before_access": true,
+    "seeds": [31511, 31512, 31513],
+    "access_condition": "Source, controls, generation, metric, byte gate and decision rule frozen before fresh execution."
+  },
+  "training": {
+    "optimizer": "least squares for direct coefficients and sparse private values; fixed 720-point grid for angle fitting",
+    "gradient_updates": 0,
+    "threads": 1
+  },
+  "storage": {
+    "authority": "actual deterministic serialized inference payload bytes after reload",
+    "format": "deterministic fixed-timestamp ZIP/NPY state",
+    "paid_objects": ["shared base", "basis prefix", "task metadata and offsets", "common direct coefficients or Mirror angles", "shared radius", "private residual indices and values", "independent full vectors", "archive headers"],
+    "sparse_index_dtype": "uint8",
+    "residual_dtype": "float16"
+  },
+  "compute": {
+    "report_examples": true,
+    "report_fit_operation_proxy": true,
+    "report_angle_search_operations": true,
+    "report_active_inference_operations": true,
+    "report_wall_clock": true,
+    "report_throughput": true,
+    "device": "CPU"
+  },
+  "gates": {
+    "promising": "All fresh seeds: Mirror actual payload <=0.90x shared-direct+sparse-residual control; mean normalized held-out MSE <=1e-4 and within 1e-5 of direct control; report fixed-dimension and private-count frontier.",
+    "fail": "Mirror payload >= direct shared/private control in >=2 fresh seeds, or quality misses in >=2 fresh seeds.",
+    "not_established": "Any serialization, split-integrity, or deterministic replay mismatch."
+  },
+  "boundaries": ["synthetic post-fit linear functions", "teacher explicitly shares a fixed-radius orbit", "sparse private indices are supplied by task fitting", "no learned router, continual optimizer, language model, or capacity claim"]
+}

@@ -1,0 +1,85 @@
+{
+  "experiment_id": "MA-261",
+  "title": "BatchEnsemble-style rank-one Mirror experts",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/RUNTIME",
+  "base_commit": "f7f76de193063950d28b7834f337840b1e86f0ce",
+  "prior_art_refs": [
+    "PA17"
+  ],
+  "hypothesis": "A shared expert matrix with low-description Givens expert Views yields useful routed expert multiplicity and beats rank-one BatchEnsemble modulation in MSE-per-byte.",
+  "physical_object": "One 16 x 16 expert matrix",
+  "mirror_coordinate": "Expert-specific eight-plane hidden Givens coordinate",
+  "logical_multiplicity": "Two top-1 routed expert functions",
+  "task": {
+    "input_dim": 16,
+    "output_dim": 8,
+    "experts": 2,
+    "router": "oracle selects expert by input half; same router for every method",
+    "metric": "held-out MSE, expertwise error"
+  },
+  "controls": [
+    "independent full experts",
+    "hard-tied shared expert",
+    "BatchEnsemble rank-one input/output factors",
+    "shared expert plus Mirror Givens views"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      {
+        "world": 26100,
+        "init_seed": 261000
+      },
+      {
+        "world": 26101,
+        "init_seed": 261001
+      }
+    ],
+    "learning_rate_candidates": [
+      0.003,
+      0.01
+    ],
+    "updates": 1200,
+    "selection_metric": "mean heldout MSE across all methods/worlds"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      {
+        "world": 26102,
+        "init_seed": 261002
+      },
+      {
+        "world": 26103,
+        "init_seed": 261003
+      },
+      {
+        "world": 26104,
+        "init_seed": 261004
+      }
+    ],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual torch.save inference payload plus canonical JSON metadata",
+    "paid_objects": [
+      "all shared or independent matrices",
+      "BatchEnsemble factors",
+      "Mirror codes",
+      "biases and router metadata"
+    ]
+  },
+  "compute": {
+    "report_examples": true,
+    "report_updates": true,
+    "report_MAC_proxy": true,
+    "report_wall_time": true,
+    "report_throughput": true
+  },
+  "success_gate": "Mirror MSE <=1.10x independent, payload <=65% independent, and beats BatchEnsemble by >=10% at byte-near cost (within 15%) or strictly lower bytes.",
+  "failure_gate": "Mirror misses quality/storage gate or BatchEnsemble matches at equal/lower bytes.",
+  "boundaries": [
+    "oracle router supplied and charged as metadata",
+    "synthetic regression only",
+    "fixed updates are not capacity proof"
+  ]
+}

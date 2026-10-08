@@ -1,0 +1,50 @@
+{
+  "experiment_id": "MA-258",
+  "title": "PSP and Mirror unbinding for logical expert banks",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/RUNTIME",
+  "base_commit": "54abf8c2f768e20f071c3e62d6b5a5108bebc313",
+  "hypothesis": "For related linear experts, a per-expert orthogonal Mirror view of one shared expert matrix beats native PSP and simple shared-basis controls on the serialized byte-quality frontier; unrelated experts reveal the private-state boundary.",
+  "physical_object": "one 16x16 linear expert matrix",
+  "mirror_coordinate": "one FP16 Givens angle per explicitly supplied expert ID, acting on two output channels",
+  "logical_multiplicity": "8 addressable linear expert maps",
+  "prior_art_refs": ["PA16", "PA01", "MA-255", "MA-257"],
+  "controls": ["independent full expert bank", "hard tied mean expert", "shared rank-r SVD basis with expert coefficients", "binary sign-context parameter superposition"],
+  "data": {
+    "experts": 8,
+    "matrix_shape": [16, 16],
+    "examples_per_expert_per_world": 256,
+    "aligned_world_seeds": [25801, 25802, 25803, 25811, 25812, 25813],
+    "unrelated_world_seeds": [25801, 25802, 25803, 25811, 25812, 25813],
+    "development_seeds": [25801, 25802, 25803],
+    "fresh_seeds_locked_unopened": [25811, 25812, 25813],
+    "oracle_expert_id": true,
+    "updates": 0
+  },
+  "selection": {
+    "development_only": true,
+    "tunable": "SVD rank selected on development seeds from 1,2,4,8 by lowest aligned mean normalized MSE among candidates whose actual bytes are <=50% of the independent bank; exact ties choose the lower rank. All other method definitions and seeds are fixed.",
+    "fresh_opened_only_if_development_passes_promising_gate": true
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes after reload",
+    "format": "deterministic NPZ",
+    "paid_objects": ["all expert/base matrices", "Mirror angles", "shared-basis coefficients", "packed PSP sign contexts", "PSP seed and shape metadata", "archive headers"]
+  },
+  "compute": {
+    "report_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_macs": true,
+    "report_encode_decode_and_inference_wall_clock": true,
+    "report_throughput": true,
+    "device": "CPU"
+  },
+  "success_gate": "All 3 development worlds: aligned Mirror normalized MSE <=1e-6 and bytes <=50% independent, plus >=10% byte reduction at <=1e-6 MSE versus best non-Mirror OR >=10x lower MSE with <=10% extra bytes; PSP is mandatory direct comparator.",
+  "failure_gate": "Mirror misses aligned quality or both incremental gates against PSP and shared low-rank control, or unrelated maps require essentially independent-sized private state without useful recovery.",
+  "fresh": {
+    "locked_before_access": true,
+    "seeds": [25811, 25812, 25813],
+    "open_condition": "only if all development promising criteria are met"
+  },
+  "boundaries": ["post-fit synthetic linear function representation screen", "oracle expert IDs; no learned router", "not a trained MoE or capacity experiment", "held-out Gaussian inputs do not test task generalization"]
+}

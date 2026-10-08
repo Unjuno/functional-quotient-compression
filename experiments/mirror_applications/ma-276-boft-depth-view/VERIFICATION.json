@@ -1,0 +1,35 @@
+{
+  "experiment_id": "MA-276",
+  "source_commit": "aeb0291385499d2e8be5ad850365bb788daa684a",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-276-boft-depth-view/tests -v",
+    "passed": 5,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "maximum_reconstruction_abs_difference": 1.214065905585926e-07,
+    "state_sha256_replay": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "development_seeds": [
+    27601,
+    27602
+  ],
+  "fresh_seeds": [
+    27611,
+    27612,
+    27613
+  ],
+  "notes": [
+    "Fresh MSE values, payload bytes and hashes replay exactly.",
+    "Integrated branch reran all 5 unit tests and verify_replay.py successfully.",
+    "Prepared input-side transform output matches serialized-state operators within 3e-7.",
+    "Prepared BOFT workspace is separately reported and not included in serialized payload claims."
+  ]
+}

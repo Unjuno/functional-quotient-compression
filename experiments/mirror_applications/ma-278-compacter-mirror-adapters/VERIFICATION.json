@@ -1,0 +1,27 @@
+{
+  "experiment_id": "MA-278",
+  "source_result_commit": "c159672",
+  "source_verification_commit": "1d93af7",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-278-compacter-mirror-adapters/tests",
+    "passed": 4,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": false,
+    "byte_exact": false,
+    "notes": "torch.save payload sizes measured from complete CPU state_dict and JSON configuration; every method's measured payload is nonzero."
+  },
+  "metric_replay": {
+    "checked": false,
+    "max_difference": null,
+    "notes": "Metrics are directly emitted by the deterministic runner; no independent replay was run."
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Development train and held-out input tensors use separate draws from a world-seeded generator.",
+    "Fresh worlds 27802-27804 were not run because the preregistered development access gate failed.",
+    "Integrated branch reran three model tests and a result-row audit; this does not add metric replay or serialization-roundtrip evidence.",
+    "Actual payload bytes include all learned state_dict tensors and serialized configuration."
+  ]
+}

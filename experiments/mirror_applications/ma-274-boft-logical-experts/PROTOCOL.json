@@ -1,0 +1,90 @@
+{
+  "experiment_id": "MA-274",
+  "title": "BOFT logical expert views",
+  "status": "FAIL",
+  "evidence_lane": "MECHANISM/STORAGE/RUNTIME",
+  "base_commit": "f7f76de193063950d28b7834f337840b1e86f0ce",
+  "prior_art_refs": [
+    "PA21"
+  ],
+  "hypothesis": "A shared nonlinear expert plus shared butterfly angle atom and small expert scalar codes recovers routed logical expert functions with lower actual bytes than independent BOFT experts and improves on hard tying, IA3, and rank-one modulation.",
+  "physical_object": "One shared 16x16 tanh FFN",
+  "mirror_coordinate": "One scalar code per expert multiplying a shared 4x8 butterfly angle atom at the hidden activation interface",
+  "logical_multiplicity": "Four routed experts",
+  "task": {
+    "input_dim": 16,
+    "hidden_dim": 16,
+    "output_dim": 16,
+    "experts": 4,
+    "router": "oracle IDs supplied equally to all methods",
+    "metric": "mean and worst expert held-out MSE"
+  },
+  "controls": [
+    "four independent full FFNs",
+    "hard-tied shared FFN",
+    "IA3 per-expert hidden gains",
+    "BatchEnsemble rank-one per-expert factors",
+    "native BOFT per-expert 32-angle table",
+    "shared butterfly atom plus Mirror expert codes"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      {
+        "world": 27400,
+        "init_seed": 274000
+      },
+      {
+        "world": 27401,
+        "init_seed": 274001
+      }
+    ],
+    "learning_rate_candidates": [
+      0.003,
+      0.01
+    ],
+    "updates": 1000,
+    "selection_metric": "mean heldout MSE across methods and worlds"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      {
+        "world": 27402,
+        "init_seed": 274002
+      },
+      {
+        "world": 27403,
+        "init_seed": 274003
+      },
+      {
+        "world": 27404,
+        "init_seed": 274004
+      }
+    ],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual torch.save inference payload plus canonical JSON metadata",
+    "paid_objects": [
+      "all FFN weights",
+      "IA3 gains",
+      "BatchEnsemble factors",
+      "native BOFT angles",
+      "Mirror atom and expert codes",
+      "oracle route metadata"
+    ]
+  },
+  "compute": {
+    "report_examples": true,
+    "report_updates": true,
+    "report_active_MAC_proxy": true,
+    "report_wall_time": true,
+    "report_throughput": true
+  },
+  "success_gate": "Mirror MSE <=1.10x independent; payload <=60% independent; and >=10% lower MSE than BOFT and rank-one at byte-near storage or lower bytes.",
+  "failure_gate": "Mirror misses quality/storage gate or a simpler control matches at equal/lower bytes.",
+  "boundaries": [
+    "oracle router supplied; learned routing not evaluated",
+    "teacher deliberately factorized via shared butterfly atom",
+    "fixed-update screen not a capacity proof"
+  ]
+}

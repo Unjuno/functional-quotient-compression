@@ -1,0 +1,27 @@
+{
+  "experiment_id": "MA-258",
+  "commit": "82263f49d4d0d5af96f4ee715ac7a6622b60da71",
+  "tests": {
+    "command": "pytest -q experiments/mirror_applications/ma-258-psp-mirror-expert-bank/tests",
+    "passed": 4,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "format": "NPZ-compatible fixed-timestamp ZIP; byte counts include headers and metadata"
+  },
+  "metric_replay": {
+    "checked": true,
+    "rows": 60,
+    "max_difference": 0.0,
+    "payload_hashes_exact": true
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Development seeds 25801-25803 selected SVD rank 2; frozen promising gate passed before opening fresh seeds 25811-25813.",
+    "All 60 development/fresh rows and payload hashes replay exactly. Fresh IDs are disjoint from development IDs.",
+    "Python 3.12.14, NumPy 2.3.5. Expert IDs are oracle supplied; optimizer updates are zero.",
+    "Sub-millisecond encoder timings and batched NumPy inference rates are noisy CPU calibration, not a runtime-performance claim."
+  ]
+}

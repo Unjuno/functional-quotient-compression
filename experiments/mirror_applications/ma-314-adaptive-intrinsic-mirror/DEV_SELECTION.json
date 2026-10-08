@@ -1,0 +1,449 @@
+{
+  "threshold_candidates": [
+    0.0001,
+    0.001,
+    0.01
+  ],
+  "selected_threshold": 0.0001,
+  "fresh_seeds_locked": [
+    31411,
+    31412,
+    31413
+  ],
+  "fresh_accessed": false,
+  "criteria": "group median active dimension matches nominal aligned dimension on both dev seeds; adaptive test normalized MSE <=1e-4; then select strictest qualifying threshold",
+  "rows": [
+    {
+      "seed": 31401,
+      "threshold": 0.0001,
+      "method": "adaptive_direct",
+      "payload_bytes": 6730,
+      "test_normalized_mse": 1.6503059820545397e-07,
+      "fit_compute_proxy": 1612800,
+      "active_ops_proxy_per_example": 326.0,
+      "dimensions_median_by_group": {
+        "aligned_d2": 2.0,
+        "aligned_d4": 4.0,
+        "aligned_d8": 8.0,
+        "aligned_d16": 16.0,
+        "unrelated": 16.0
+      },
+      "dimensions_histogram_by_group": {
+        "aligned_d2": {
+          "2": 32
+        },
+        "aligned_d4": {
+          "2": 1,
+          "4": 31
+        },
+        "aligned_d8": {
+          "8": 32
+        },
+        "aligned_d16": {
+          "16": 32
+        },
+        "unrelated": {
+          "16": 32
+        }
+      },
+      "fallback_count": 0
+    },
+    {
+      "seed": 31401,
+      "threshold": 0.0001,
+      "method": "adaptive_mirror",
+      "payload_bytes": 7082,
+      "test_normalized_mse": 9.130879393608703e-07,
+      "fit_compute_proxy": 166362880,
+      "active_ops_proxy_per_example": 332.0,
+      "dimensions_median_by_group": {
+        "aligned_d2": 2.0,
+        "aligned_d4": 4.0,
+        "aligned_d8": 8.0,
+        "aligned_d16": 16.0,
+        "unrelated": 16.0
+      },
+      "dimensions_histogram_by_group": {
+        "aligned_d2": {
+          "2": 32
+        },
+        "aligned_d4": {
+          "2": 1,
+          "4": 31
+        },
+        "aligned_d8": {
+          "8": 32
+        },
+        "aligned_d16": {
+          "16": 32
+        },
+        "unrelated": {
+          "16": 32
+        }
+      },
+      "fallback_count": 32
+    },
+    {
+      "seed": 31401,
+      "threshold": 0.001,
+      "method": "adaptive_direct",
+      "payload_bytes": 6702,
+      "test_normalized_mse": 2.2696685387700934e-05,
+      "fit_compute_proxy": 1605632,
+      "active_ops_proxy_per_example": 323.2,
+      "dimensions_median_by_group": {
+        "aligned_d2": 2.0,
+        "aligned_d4": 4.0,
+        "aligned_d8": 8.0,
+        "aligned_d16": 16.0,
+        "unrelated": 16.0
+      },
+      "dimensions_histogram_by_group": {
+        "aligned_d2": {
+          "2": 32
+        },
+        "aligned_d4": {
+          "2": 8,
+          "4": 24
+        },
+        "aligned_d8": {
+          "8": 32
+        },
+        "aligned_d16": {
+          "16": 32
+        },
+        "unrelated": {
+          "16": 32
+        }
+      },
+      "fallback_count": 0
+    },
+    {
+      "seed": 31401,
+      "threshold": 0.001,
+      "method": "adaptive_mirror",
+      "payload_bytes": 7044,
+      "test_normalized_mse": 3.0427750125819243e-05,
+      "fit_compute_proxy": 163698688,
+      "active_ops_proxy_per_example": 329.2,
+      "dimensions_median_by_group": {
+        "aligned_d2": 2.0,
+        "aligned_d4": 4.0,
+        "aligned_d8": 8.0,
+        "aligned_d16": 16.0,
+        "unrelated": 16.0
+      },
+      "dimensions_histogram_by_group": {
+        "aligned_d2": {
+          "2": 32
+        },
+        "aligned_d4": {
+          "2": 8,
+          "4": 24
+        },
+        "aligned_d8": {
+          "8": 32
+        },
+        "aligned_d16": {
+          "16": 32
+        },
+        "unrelated": {
+          "16": 32
+        }
+      },
+      "fallback_count": 27
+    },
+    {
+      "seed": 31401,
+      "threshold": 0.01,
+      "method": "adaptive_direct",
+      "payload_bytes": 6458,
+      "test_normalized_mse": 0.001426000349965753,
+      "fit_compute_proxy": 1496064,
+      "active_ops_proxy_per_example": 298.8,
+      "dimensions_median_by_group": {
+        "aligned_d2": 2.0,
+        "aligned_d4": 2.0,
+        "aligned_d8": 4.0,
+        "aligned_d16": 16.0,
+        "unrelated": 16.0
+      },
+      "dimensions_histogram_by_group": {
+        "aligned_d2": {
+          "2": 32
+        },
+        "aligned_d4": {
+          "2": 25,
+          "4": 7
+        },
+        "aligned_d8": {
+          "2": 6,
+          "4": 11,
+          "8": 15
+        },
+        "aligned_d16": {
+          "8": 1,
+          "16": 31
+        },
+        "unrelated": {
+          "16": 32
+        }
+      },
+      "fallback_count": 0
+    },
+    {
+      "seed": 31401,
+      "threshold": 0.01,
+      "method": "adaptive_mirror",
+      "payload_bytes": 6804,
+      "test_normalized_mse": 0.001490456366610507,
+      "fit_compute_proxy": 148834304,
+      "active_ops_proxy_per_example": 306.0,
+      "dimensions_median_by_group": {
+        "aligned_d2": 2.0,
+        "aligned_d4": 2.0,
+        "aligned_d8": 8.0,
+        "aligned_d16": 16.0,
+        "unrelated": 16.0
+      },
+      "dimensions_histogram_by_group": {
+        "aligned_d2": {
+          "2": 32
+        },
+        "aligned_d4": {
+          "2": 26,
+          "4": 6
+        },
+        "aligned_d8": {
+          "2": 6,
+          "4": 9,
+          "8": 17
+        },
+        "aligned_d16": {
+          "8": 1,
+          "16": 31
+        },
+        "unrelated": {
+          "16": 32
+        }
+      },
+      "fallback_count": 23
+    },
+    {
+      "seed": 31402,
+      "threshold": 0.0001,
+      "method": "adaptive_direct",
+      "payload_bytes": 6734,
+      "test_normalized_mse": 6.215841041553628e-09,
+      "fit_compute_proxy": 1613824,
+      "active_ops_proxy_per_example": 326.4,
+      "dimensions_median_by_group": {
+        "aligned_d2": 2.0,
+        "aligned_d4": 4.0,
+        "aligned_d8": 8.0,
+        "aligned_d16": 16.0,
+        "unrelated": 16.0
+      },
+      "dimensions_histogram_by_group": {
+        "aligned_d2": {
+          "2": 32
+        },
+        "aligned_d4": {
+          "4": 32
+        },
+        "aligned_d8": {
+          "8": 32
+        },
+        "aligned_d16": {
+          "16": 32
+        },
+        "unrelated": {
+          "16": 32
+        }
+      },
+      "fallback_count": 0
+    },
+    {
+      "seed": 31402,
+      "threshold": 0.0001,
+      "method": "adaptive_mirror",
+      "payload_bytes": 7084,
+      "test_normalized_mse": 1.1874610001565036e-06,
+      "fit_compute_proxy": 166715392,
+      "active_ops_proxy_per_example": 332.4,
+      "dimensions_median_by_group": {
+        "aligned_d2": 2.0,
+        "aligned_d4": 4.0,
+        "aligned_d8": 8.0,
+        "aligned_d16": 16.0,
+        "unrelated": 16.0
+      },
+      "dimensions_histogram_by_group": {
+        "aligned_d2": {
+          "2": 32
+        },
+        "aligned_d4": {
+          "4": 32
+        },
+        "aligned_d8": {
+          "8": 32
+        },
+        "aligned_d16": {
+          "16": 32
+        },
+        "unrelated": {
+          "16": 32
+        }
+      },
+      "fallback_count": 31
+    },
+    {
+      "seed": 31402,
+      "threshold": 0.001,
+      "method": "adaptive_direct",
+      "payload_bytes": 6690,
+      "test_normalized_mse": 2.585766180383637e-05,
+      "fit_compute_proxy": 1600512,
+      "active_ops_proxy_per_example": 322.0,
+      "dimensions_median_by_group": {
+        "aligned_d2": 2.0,
+        "aligned_d4": 4.0,
+        "aligned_d8": 8.0,
+        "aligned_d16": 16.0,
+        "unrelated": 16.0
+      },
+      "dimensions_histogram_by_group": {
+        "aligned_d2": {
+          "2": 32
+        },
+        "aligned_d4": {
+          "2": 9,
+          "4": 23
+        },
+        "aligned_d8": {
+          "4": 1,
+          "8": 31
+        },
+        "aligned_d16": {
+          "16": 32
+        },
+        "unrelated": {
+          "16": 32
+        }
+      },
+      "fallback_count": 0
+    },
+    {
+      "seed": 31402,
+      "threshold": 0.001,
+      "method": "adaptive_mirror",
+      "payload_bytes": 7030,
+      "test_normalized_mse": 4.170566477605871e-05,
+      "fit_compute_proxy": 162606336,
+      "active_ops_proxy_per_example": 327.6,
+      "dimensions_median_by_group": {
+        "aligned_d2": 2.0,
+        "aligned_d4": 4.0,
+        "aligned_d8": 8.0,
+        "aligned_d16": 16.0,
+        "unrelated": 16.0
+      },
+      "dimensions_histogram_by_group": {
+        "aligned_d2": {
+          "2": 32
+        },
+        "aligned_d4": {
+          "2": 10,
+          "4": 22
+        },
+        "aligned_d8": {
+          "4": 1,
+          "8": 31
+        },
+        "aligned_d16": {
+          "16": 32
+        },
+        "unrelated": {
+          "16": 32
+        }
+      },
+      "fallback_count": 28
+    },
+    {
+      "seed": 31402,
+      "threshold": 0.01,
+      "method": "adaptive_direct",
+      "payload_bytes": 6382,
+      "test_normalized_mse": 0.0015026996805979822,
+      "fit_compute_proxy": 1427456,
+      "active_ops_proxy_per_example": 291.2,
+      "dimensions_median_by_group": {
+        "aligned_d2": 2.0,
+        "aligned_d4": 2.0,
+        "aligned_d8": 4.0,
+        "aligned_d16": 16.0,
+        "unrelated": 16.0
+      },
+      "dimensions_histogram_by_group": {
+        "aligned_d2": {
+          "2": 32
+        },
+        "aligned_d4": {
+          "2": 25,
+          "4": 7
+        },
+        "aligned_d8": {
+          "2": 9,
+          "4": 8,
+          "8": 15
+        },
+        "aligned_d16": {
+          "8": 5,
+          "16": 27
+        },
+        "unrelated": {
+          "16": 32
+        }
+      },
+      "fallback_count": 0
+    },
+    {
+      "seed": 31402,
+      "threshold": 0.01,
+      "method": "adaptive_mirror",
+      "payload_bytes": 6698,
+      "test_normalized_mse": 0.0017752977199138348,
+      "fit_compute_proxy": 145040896,
+      "active_ops_proxy_per_example": 296.0,
+      "dimensions_median_by_group": {
+        "aligned_d2": 2.0,
+        "aligned_d4": 2.0,
+        "aligned_d8": 4.0,
+        "aligned_d16": 16.0,
+        "unrelated": 16.0
+      },
+      "dimensions_histogram_by_group": {
+        "aligned_d2": {
+          "2": 32
+        },
+        "aligned_d4": {
+          "2": 25,
+          "4": 7
+        },
+        "aligned_d8": {
+          "2": 10,
+          "4": 8,
+          "8": 14
+        },
+        "aligned_d16": {
+          "8": 5,
+          "16": 27
+        },
+        "unrelated": {
+          "16": 32
+        }
+      },
+      "fallback_count": 20
+    }
+  ]
+}

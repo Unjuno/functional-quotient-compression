@@ -1,0 +1,81 @@
+{
+  "experiment_id": "MA-265",
+  "title": "VeRA shared scaling codes vs Mirror scaling views",
+  "status": "FAIL",
+  "evidence_lane": "MECHANISM/STORAGE",
+  "base_commit": "f7f76de193063950d28b7834f337840b1e86f0ce",
+  "hypothesis": "Orbit-coded VeRA tasks can be represented by one shared scale vector plus low-description Mirror angles at lower serialized bytes; unrelated scale codes need private state.",
+  "physical_object": "One shared frozen rank-4 A/B basis",
+  "mirror_coordinate": "One task-specific angle rotating the first two scale coordinates",
+  "logical_multiplicity": "Eight low-rank task adapters",
+  "prior_art_refs": [
+    "PA18"
+  ],
+  "controls": [
+    "VeRA per-task scaling vectors",
+    "hard tied scale vector",
+    "per-task LoRA factors",
+    "independent dense task maps"
+  ],
+  "task": {
+    "input_dim": 16,
+    "output_dim": 12,
+    "rank": 4,
+    "tasks": 8,
+    "train_examples_per_task": 512,
+    "test_examples_per_task": 1024,
+    "conditions": [
+      "aligned_scale_orbit",
+      "independent_scale_codes"
+    ]
+  },
+  "development": {
+    "worlds_or_seeds": [
+      19,
+      37
+    ],
+    "selection_metric": "test MSE and actual serialized payload bytes"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      109,
+      229,
+      313,
+      421
+    ],
+    "locked_before_access": true
+  },
+  "optimization": {
+    "task_map_fit": "least squares",
+    "code_fit": "least squares and nonlinear least squares for Mirror chart",
+    "optimizer_updates": 0
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "serializer": "uncompressed NumPy NPZ, native learned dtype; Mirror base code and angles packed into one array before fresh access",
+    "paid_objects": [
+      "shared frozen A/B bases",
+      "VeRA codes",
+      "packed Mirror base code and per-task angles in one coordinate array",
+      "LoRA factors",
+      "independent dense matrices"
+    ]
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true,
+    "active_compute_proxy": "dense projection and rank reconstruction MAC proxy; code decode operations reported"
+  },
+  "success_gate": "At least 3/4 fresh aligned worlds: Mirror MSE <=1.10x VeRA, <=80% VeRA bytes and below hard tying.",
+  "failure_gate": "Mirror aligned MSE >1.25x VeRA on >=3/4 seeds, or <10% byte reduction at matched quality.",
+  "boundaries": [
+    "post-fit synthetic low-rank adaptation screen",
+    "no language or capacity claim",
+    "fresh seeds never tune"
+  ],
+  "result_source_branch": "research/ma-265-vera-mirror-scaling-20261008",
+  "result_source_commit": "9e3442255afbd309d29100c32f006df216b2102b",
+  "protocol_variant_note": "A distinct 1000-update diagonal-code task is retained under protocol_variants/fixed_update_failure and failed during development; metrics are not pooled."
+}

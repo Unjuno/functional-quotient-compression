@@ -6,45 +6,63 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (37 completed; 593 UNTESTED)
+- P0: **630** (62 completed; 568 UNTESTED)
 - P1: **422** (12 completed; 410 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1106 UNTESTED, 29 PROMISING, 20 FAIL**
-- 47 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch. MA-315 and MA-319 have additional verified outcomes on their dedicated research branches and are linked from the registry/claim ledger; the next-candidate order below is unchanged.
-- New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
-- Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
+- Current MA statuses: **1080 UNTESTED, 36 PROMISING, 39 FAIL**
+- 72 local experiment directories are complete; MA-301 and MA-307 are additional completed experiments linked to their dedicated research branches.
+- New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-276 next-candidate decision.
+- Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-276 is next; MA-275 remains UNTESTED (P1).
 - Thirteenth literature sweep added MA-996..1045 (50 UNTESTED; 40 P0/10 P1) and PA296..PA325. IDs MA-1000+ use four digits; consult `check_registry_integrity.py`. No new experiment results.
-- Fourteenth sweep added **MA-1046..1095** (50 UNTESTED; 40 P0 / 10 P1) and **PA326..PA350**. Focus: time-series foundation forecasting, recommender embedding tables, and Earth-observation multi-sensor networks. No new experiment results; MA-255 remains next.
-- Fifteenth direct-prior sweep added **MA-1096..1115** (20 UNTESTED, 16 P0 / 4 P1) and **PA351..371**. A gauge-invariant LoRA audit harness is present; its unit tests are **not** trained-model evidence. MA-255 remains next.
-- Research support PA372..381 and a **separate 48-row / two-seed real-digit shifted-task code pilot** have been added. Structured 8-value Mirror m improved average CE versus 6-value diagonal code but FAILED the preregistered full quality/bytes/runtime gate. This is an **exploratory negative pilot**, not an MA-1096/1099/1115 completed experiment. Existing 29 PROMISING / 18 FAIL and MA-255 next are unchanged. See [function-space review](../../docs/phase2/MIRROR_FUNCTION_SPACE_FALSIFICATION_2026-10-08.md) and [pilot results](research_intake/natural_digit_function_20261008/RESULTS.md).
-- Sixteenth literature sweep added **MA-1116..1155** (40 UNTESTED; 33 P0 / 7 P1) and **PA382..413** (32 primary sources): knowledge graph relation operators, camera ISP/lens optics, robot dynamics and room neural acoustic fields. No new MA measurements. See [sixteenth research notes](../../docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_SIXTEENTH_SWEEP.md) and [40 per-ID test blueprints](../../docs/phase2/MIRROR_APPLICATION_EXPERIMENT_BLUEPRINTS_MA1116_1155.md); next remains MA-255.
+- Fourteenth sweep added **MA-1046..1095** (50 UNTESTED; 40 P0 / 10 P1) and **PA326..PA350**. Focus: time-series foundation forecasting, recommender embedding tables, and Earth-observation multi-sensor networks. No new experiment results; MA-276 is next; MA-275 remains UNTESTED (P1).
+- Fifteenth direct-prior sweep added **MA-1096..1115** (20 UNTESTED, 16 P0 / 4 P1) and **PA351..371**. A gauge-invariant LoRA audit harness is present; its unit tests are **not** trained-model evidence. MA-276 is next; MA-275 remains UNTESTED (P1).
 - PROMISING is **not** ADOPTED. Treat reports with strict-gate misses or exploratory protocol deviations at their documented scope.
 - SRM/TM and prior Phase I results are not MA statuses.
 
 ## Next candidate
 
-**MA-255 — Mirror context superposition for task models (P0; PA16)**
+**MA-320 — Tucker logical experts (P0; PA35)**
 
-Reason:
-- all previously locked MA-241/244/245/247–251/253 and subsequent old-chain P0 screens have completed;
-- the original P0 cross-over queue is exhausted among checked candidates;
-- MA-255 is the first untested P0 in the earlier high-information literature cross-over queue;
-- direct Parameter Superposition prior art gives a strong nearest control for insertion of the extra Mirror parameter `m`.
+MA-255 is reconciled as PROMISING only for its aligned post-fit representation screen; a distinct 1,200-update protocol variant failed at development and remains sealed on fresh worlds. See `experiments/mirror_applications/ma-255-mirror-context-superposition/RECONCILIATION.md`.
 
-Required controls: native Parameter Superposition, naive/shared task-code basis, matched byte-near low-rank or VeRA-style modulation, independent-model upper reference where practical. Do not claim the superposition concept itself as a Mirror invention.
+MA-260 is complete FAIL: the one-layer linear screen missed its predeclared byte gate, while the independent-task stress case collapsed. It is not a deep BatchEnsemble result; see its report and verification.
 
-If blocked by a documented reproducibility or harness issue, record it and resume at MA-260 (BatchEnsemble), then MA-261/265/268 in the registered literature priority sequence. Do not jump to P1/novelty-picked topics before P0.
+MA-261 is complete FAIL after audit: its post-fit branch's raw MSE ratios meet the frozen <=1.10x independent quality criterion in only 1/4 fresh worlds, despite source wording claiming 4/4. A different fixed-update protocol also failed during development. Both variants are retained in its reconciliation report.
+
+MA-265 is complete FAIL: a fresh aligned post-fit screen achieved numerical-zero task MSE but saved only 4.4% total payload versus VeRA, below the preregistered 20% gate; independent codes failed. A distinct 1,000-update diagonal-code protocol also failed at development against VeRA. Both protocols are retained separately.
+
+MA-265 and MA-266 are consecutive FAILs in the VeRA Mirror family: native VeRA missed the strict margin in MA-265, and an ordinary coefficient-product control matched MA-266 within 2.1% bytes. Pause MA-267 until the family has a control/redesign that tests a distinct Mirror-specific contribution.
+
+MA-268 is PROMISING on a narrow synthetic nonlinear task: a trained Givens-aligned screen passed its quality/byte gate 3/3 at 4,167B vs 4,273B IA3, with lower quality error but 1.5x MACs and substantially slower eager CPU throughput. A separate post-fit linear activation screen missed its strict 20% byte gate (15.7% saving). See its protocol reconciliation.
+
+MA-271 is FAIL for Mirror-specific value. One post-fit screen found a low-byte Givens orbit, but an exact simple rank-one angle-factor control produced identical functions and bytes (1,086B); a separate trained dense-OFT screen omitted that control. See its reconciliation report.
+
+MA-272 is FAIL for Mirror-specific/runtime gain: the corrected audit found that scalar-times-shared-skew exactly matches Mirror at 3,786B, while exact input-side execution averaged 0.335ms versus 0.138ms materialized. A separate trained screen retains its bounded storage/quality result but was slower than dense OFTv2.
+
+MA-273 is complete FAIL for Mirror-specific value: corrected post-fit views exactly matched ordinary scalar-times-shared-angle factorization (same 1,150B payload); an independent neutral-initialization training screen failed at development and left fresh sealed. See its reconciliation report.
+
+MA-274 is complete FAIL on a two-world fixed-update development screen: at 5,430B Mirror was 3.4% smaller than native BOFT but had worse MSE in both worlds; independent experts were much better and butterfly eager CPU throughput was 9–20x below IA3/rank-one. Fresh worlds stayed sealed. Together with MA-273, this pauses the shared scalar-angle task/expert BOFT insertion family. MA-275 remains UNTESTED (P1). MA-276 is PROMISING only for aligned serialized-state compression: 396B Mirror vs 1,193B untied (3/3 fresh), but 2,048B runtime workspace exceeds that payload and unrelated layers fail. No runtime-memory claim. MA-278 is FAIL on the unaligned task-factor screen: Mirror matched scalar control bytes at 2,525B but lost quality at both development worlds and both learning rates; native Compacter also dominated quality. Fresh worlds remained sealed. Aligned feasibility is untested. MA-282 is PROMISING only for a deliberately aligned synthetic ReLU FFN orbit: exact in 3/3 at 925B vs 1,145B free-angle Monarch and 3,279B independent full. Unrelated functions collapse to hard-tie quality; view workspace is 1,024B, so no runtime-RAM claim. MA-286 is FAIL for Mirror-specific margin: the shared-B index screen reached aligned quality with 4,412B vs task-local Cheap-LoRA 6,580B, but an identical one-hot shared-B gate was only 78B larger (1.74%, below the preregistered 10%). Two unrelated functions used private rank-4 factors. MA-288 is FAIL under its preregistered direct-path runtime gate: aligned Mirror state/quality was strong at 378B vs 1,203B independent and quarter the writes, but throughput was 0.178–0.456x rank-4 residual in all fresh seeds. A cached path reached 201M examples/s with 1,024B workspace and is only supplemental. MA-292 is FAIL for Mirror-specific value: one angle beat FP32 SVD code size but matched-byte FP16 SVD was 23B smaller overall, slightly more accurate in all 3 fresh worlds, and about 1.55x faster. Unrelated task vectors required richer/private state. MA-296 is FAIL for Mirror-specific value: the simpler direct shared-orbit generator matched Mirror exactly at 1,524B vs 1,561B, while independent task vectors were needed for unrelated maps (4,771B). Rademacher PSP interference was high; rank-8 SVD matched quality with larger payload. MA-297 and MA-299 are FAIL; this SETA shared/private Mirror-code family is paused for redesign under the two-consecutive-failure stop condition. MA-314 is PROMISING only for its separate aligned-only 48-task variant (1,996B vs 2,220B adaptive coefficients, 3/3 fresh); the broad 160-task private-fallback protocol FAILed at +5.2% bytes vs adaptive direct in 3/3. Current next P0 is MA-320.
 
 ## Active experiment
 
-No active experiment was declared on either inspected baseline/status chain at reconciliation. Before claiming MA-255, check live research/ma-* branches again; this statement is not a realtime worker lock.
+No active experiment declared. MA-312 is PROMISING only for the aligned 256-task storage/quality point; its fit compute proxy was over 1,000x the direct coefficient control and throughput lower. MA-258 has a narrow PROMISING aligned codec result; unrelated experts required private/richer state. MA-266 is FAIL for Mirror-specific value: factorized views generalized on an aligned task cross-product, but the ordinary coefficient-product control matched within 2.1% payload bytes. Together with MA-265 this pauses VeRA family follow-up MA-267 pending redesign. MA-255 through MA-299 now have verified status records. MA-257 failed against the exact native PA16 rotational-context control; MA-297/299 SETA remains paused. Next by the registered P0 queue: MA-315.
 
 ## Verified status index
 
-- **PROMISING (29):** MA-001, MA-002, MA-003, MA-004, MA-005, MA-006, MA-007, MA-008, MA-012, MA-014, MA-015, MA-041, MA-076, MA-079, MA-111, MA-121, MA-156, MA-160, MA-171, MA-173, MA-181, MA-189, MA-241, MA-244, MA-245, MA-249, MA-250, MA-251, MA-691.
-- **FAIL (18):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253.
+- **PROMISING (35):** MA-001, MA-002, MA-003, MA-004, MA-005, MA-006, MA-007, MA-008, MA-012, MA-014, MA-015, MA-041, MA-076, MA-079, MA-111, MA-121, MA-156, MA-160, MA-171, MA-173, MA-181, MA-189, MA-241, MA-244, MA-245, MA-249, MA-250, MA-251, MA-255, MA-258, MA-268, MA-276, MA-282, MA-312, MA-314, MA-691.
+- **FAIL (37):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-257, MA-260, MA-261, MA-265, MA-266, MA-271, MA-272, MA-273, MA-274, MA-278, MA-286, MA-288, MA-292, MA-296, MA-297, MA-299, MA-301, MA-307, MA-311.
 
 All per-ID evidence is retained in the local experiment directories and in `CLAIM_LEDGER.csv`. Consult [the evidence integration audit](../../docs/phase2/MIRROR_MA_EVIDENCE_INTEGRATION_2026-10-08.md) for linked reports, verifications, provenance and claim boundaries.
+
+## Newly reconciled result
+
+- MA-255 — PROMISING only for an aligned post-fit representation screen: 734B Mirror payload achieved 6.68e-17 fresh MSE on seeds 101/211/307/401 versus 6,490B implemented PSP, 14,650B rank-2 task code, and 27,906B independent. A separate 1,200-update protocol variant failed its development quality gate (Mirror MSE 0.0922 vs 4.52e-5 independent; fresh sealed). These are different protocols, not a replication pair. See `experiments/mirror_applications/ma-255-mirror-context-superposition/RECONCILIATION.md`. Source branches: `research/ma-255-mirror-context-superposition-20261008` and `research/ma-255-mirror-context-superposition-replication-20261008`.
+- MA-260 — FAIL: on four fresh rotation-aligned worlds Mirror matched member accuracy but used 890B, only 27.4% below implemented BatchEnsemble (1,226B) and 3.9% below independent (926B), missing its <=25% byte-ratio gate. On independent task separators its accuracy fell to 0.6018 vs 0.8332 controls. Post-fit one-layer linear screen only; BatchEnsemble rank-one is a weak single-output control, and deep ensembles remain untested. Source result `33da88ba71cb053a8729a393ccc1ed1a2cc4fcf3`, report `experiments/mirror_applications/ma-260-batchensemble-mirror/README.md`.
+- MA-261 — FAIL: post-fit aligned Givens views used 1,006B vs 1,562B BatchEnsemble and 1,794B independent, with tiny absolute error, but the frozen <=1.10x independent MSE ratio passed only 1/4 fresh worlds (raw ratios 1,390x, 302,057x, 11.7x, 0.227x). A separate 1,200-update expert task failed at development. The original source's “PASS 4/4” summary conflicts with raw rows and frozen gate; see `experiments/mirror_applications/ma-261-batchensemble-logical-experts/RECONCILIATION.md`.
+- MA-265 — FAIL: four fresh aligned rotation worlds reached numerical-zero error, but payload was 3,494B vs 3,654B VeRA (only 4.4% savings, below the 20% gate); hard tying was 3,430B and unrelated scales failed. A separate trained diagonal-code protocol also failed against VeRA at development. Both protocols are retained at `experiments/mirror_applications/ma-265-vera-mirror-scaling/README.md`.
+- MA-268 — PROMISING for the trained nonlinear aligned screen: 3/3 fresh worlds passed the frozen gate, with 4,167B Mirror vs 4,273B IA3 and 7,933B independent. MSE beat IA3; active MAC proxy was 1.5x and eager throughput ~0.29–0.34x IA3. The separate post-fit linear orbit screen saved only 15.7% vs IA3 and missed its 20% byte gate. No natural-language evidence; see the two protocols in `experiments/mirror_applications/ma-268-ia3-mirror-views/`.
+- MA-271 — FAIL for Mirror-specific advantage: on four fresh worlds, Mirror and simple rank-one shared-angle control were identical in function and payload (1,086B); independent-plane stress also matched exactly while full OFT remained near-zero. A separate trained screen had 3,309B vs 7,253B dense OFT but lacked the exact rank-one control. See `experiments/mirror_applications/ma-271-oft-mirror-views/RECONCILIATION.md`.
+- MA-272 — FAIL for Mirror-specific/runtime Pareto: corrected fresh audit found exact equivalence to scalar-times-shared-skew at 3,786B, with 0 aligned relative error, but exact input-side execution averaged 0.335ms vs 0.138ms materialized. A separate trained screen saved bytes vs dense OFTv2 but had slower eager CPU throughput. See `experiments/mirror_applications/ma-272-oftv2-mirror-views/RECONCILIATION.md`.
 
 ## 2026-10-08 research sweep
 
@@ -72,10 +90,6 @@ Native methods Chronos/TimesFM/Moirai/PatchTST/TRACE, DHE/TT-Rec/QR/MMoE, and DO
 
 Existing methods **Compress then Serve, CtM, EigenLoRAx, MetaTT, GLoRA, LRAgent and PReCache** already share adapter bases or canonical KV cache state. The distinct Mirror question is whether structured m gives incremental useful functionality, bytes and runtime gains beyond these methods on natural tasks. Compare only gauge-invariant task-delta geometry. See [fifteenth research note](../../docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_FIFTEENTH_SWEEP.md) and [audit intake](research_intake/natural_lora_orbit_20261008/README.md).
 
-## Sixteenth research intake — 2026-10-08
-
-KG relation rotations (RotatE, TuckER, QuatE, PairRE), EXIF/device-aware ISPs (ParamISP, Uni-ISP), deployable dynamics adaptation (UP-OSI, RMA, CoRMA) and room/source acoustic neural fields (NAF, TA-RIR) are **existing directly conditioned-function baselines**. A new Mirror code m earns credit only for marginal useful function/byte improvement versus its corresponding native conditioner, with natural held-out relations/cameras/physics/rooms and true physical runtime/cost. New MA1116..1155 are all UNTESTED.
-
 ## Main scientific findings
 
 - Aligned functional variation often admits a compact Mirror View, including experts, QKV, future heads, depth and structured codecs.
@@ -92,9 +106,70 @@ KG relation rotations (RotatE, TuckER, QuatE, PairRE), EXIF/device-aware ISPs (P
 - Preserve old branches, failed results, exploratory data and locked protocols. No automatic merge to main.
 
 
-## Dedicated-branch outcomes recorded after the worker-ready snapshot
+## MA-297 — FAIL
 
-- **MA-315 — FAIL:** fresh Mirror payload was 3.31–3.32% larger than the matched shared-direct plus sparse-private control in 3/3 seeds. Both met quality; Mirror fitting used ~42x operation proxy and 0.61–0.78x throughput. Exact replay and hash checks passed.
-- **MA-319 — FAIL:** fresh Mirror payload was 0.60% larger than rank-2 Tucker in 3/3; NLL limit was missed in 2/3. All 25 packages reloaded and replayed exactly. A development audit-read bug was preserved and excluded after amendment.
+Corrected serialized-payload quality passed the frozen ratio gate in only one of three fresh aligned worlds. The angle-grid fit proxy was about 2,048x same-basis least squares and inference throughput was 0.43x; the simple coefficient control had better mean error and independent tasks required private capacity. Four tests and payload/metric/hash replay passed. See `experiments/mirror_applications/ma-297-seta-mirror-subspace/README.md`. Next: MA-299.
 
-These branch-linked outcomes do not reorder the STATUS_BOARD queue: the next candidate remains **MA-255**.
+
+## MA-299 — FAIL; SETA family paused
+
+**Fact:** On three amended fresh streams, Mirror split-on-share used 2,337B, mean normalized held-out MSE 0.0005970 and max 0.0040706; independent full used 6,417B at near-zero error. The two-coefficient split made the same four-view/one-private allocation at 2,352B and mean error 0.0005962. Mirror saved 15B (0.64%) but its fit-compute proxy was 1.74x the coefficient control. Five tests and all 21 corrected deterministic metric/byte/hash rows replayed.
+
+**Interpretation:** share-before-private allocation delayed physical growth on aligned synthetic tasks; an ordinary two-coefficient address achieved the same allocation and quality.
+
+**Family decision:** MA-297 and MA-299 are consecutive P0 FAILs in the SETA shared/private family, both showing ordinary coefficient representation removes Mirror-specific advantage. Per stop condition, pause MA-298/MA-300 family work pending redesign. This does not pause unrelated Mirror families.
+
+
+## Sixteenth research intake — 2026-10-08
+
+The latest canonical baseline added MA-1116..1155 (40 UNTESTED; 33 P0 / 7 P1) and PA382..413. These knowledge-graph, camera/optics, robot-dynamics and room-acoustics proposals remain behind the outstanding P0 queue. Their source sweeps do not change MA statuses. See `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_SIXTEENTH_SWEEP.md` and `docs/phase2/MIRROR_APPLICATION_EXPERIMENT_BLUEPRINTS_MA1116_1155.md`.
+
+
+## MA-257 — FAIL for Mirror-specific value
+
+On three development worlds, the smallest selected support (64/512 factor combinations) composed the aligned teacher at 296B and mean test normalized MSE 6.58e-9. Native PA16 factorized rotational contexts produced the exact same functions, bytes and errors, so the registered Mirror-specific gate failed; fresh seeds remain sealed. The FP16 free-coefficient table used 348B, but it is a weaker control than native rotational context. On independent maps Mirror mean error was 8.64, while coefficient pairs reached 1.036 and independent full weights were near zero. Seven tests and 54 selected-support development metric/byte/compute/workspace/hash replays passed. Next P0: MA-319.
+
+
+## MA-258 — PROMISING only for aligned post-fit expert-bank coding
+
+On three fresh aligned worlds, an eight-expert Givens family used 1,514B Mirror payload at normalized MSE 8.99e-10–1.07e-9; rank-2 shared SVD reached near-zero error at 3,822B, and independent maps used 8,440B. Native binary-context PSP used 1,766B but had normalized MSE 4.62–5.46. This passed the preregistered development gate and replicated on 3/3 fresh worlds. On unrelated experts, Mirror normalized MSE was 0.848–0.889, essentially hard tying; independent weights were needed for near-zero error. Mirror had no measured throughput gain (11.16M examples/s fresh aligned vs 17.88M independent). Four tests and 60 metric/byte/hash replays passed. Oracle expert IDs and zero training updates; synthetic linear screen only. Next P0: MA-266.
+
+
+## MA-266 — FAIL for Mirror-specific value; VeRA family paused
+
+In three synthetic development worlds, Mirror composed 8 held-out factor pairs from 8 checkerboard support maps at normalized MSE 7.91e-9 and 1,276B. The direct sine/cosine coefficient-product control had normalized MSE 4.20e-8 at 1,304B, just 2.1% more bytes and within quality; this misses the frozen 10% byte and 10× quality margins. VeRA-style additive factor codes failed aligned composition (MSE 0.289). On unrelated maps Mirror and coefficient-product errors were about 0.401; independent full weights were near zero. The measured operation proxy favored direct Mirror rotations, but an optimized coefficient-product implementation can apply the same transform; no runtime claim. Four tests and 60 exact metric/byte/hash replays passed. Fresh 26611–26613 remain sealed. Alongside MA-265, this pauses MA-267 for redesign. MA-301 was completed on a separate research branch; next independent P0: MA-307.
+
+
+## MA-301 — FAIL; branch-linked result
+
+The amended 32-task random-feature screen saved 21.2% payload versus packed binary masks (334B vs 424B), but Mirror missed the independent-quality criterion in 2/3 fresh worlds (normalized MSE 2.14e-5, 0.412 and 0.256). Only one fresh world passed. Its initial four-task storage-gate miss is retained separately. Throughput used precomputed effective vectors, so no direct-view runtime claim. Three tests and 35 metric replays passed. Full evidence is on `research/ma-301-continuous-mirror-supermask-20261008`. Next P0: MA-307.
+
+
+## MA-307 — FAIL for strict composite Pareto; storage frontier retained
+
+On three fresh eight-task streams, four Givens-aligned tasks used one-byte View codes before allocation; three unrelated tasks received private readouts. Mirror payload averaged 854B vs 1,333B PackNet-style mask-plus-allocation (35.9% saving), and no prior-task test error changed. Mean normalized MSE was 2.08e-5 vs about 9.2e-16 for private PackNet readouts. Allocation-search runtime ratios were 1.45x, 1.10x and 1.22x; one exceeded the preregistered 1.25x ceiling. Four tests, 36 summary rows and 288 allocation-event rows replayed. Dedicated branch: `research/ma-307-packnet-mirror-allocation-20261008`. Next P0: MA-312.
+
+
+## MA-311 — FAIL for both frozen protocol gates; one fresh d=64 follow-up
+
+On three aligned development worlds, the one-angle Mirror code achieved 7.50e-7 normalized test MSE and 1,248B. It was 38.2% smaller than PA33 SAID-4 (2,018B), but 9.5% larger than the direct two-coefficient control (1,140B), failing the nearest-control payload gate. Its 322B tensor state expanded to 1,248B serialized NPZ; the coefficient state was 448B but serialized to 1,140B because the Mirror payload carries an additional array/header. Mirror angle search used 17.7M fit-operation proxy vs 16.9k for coefficient least squares. On unrelated codes Mirror MSE was 0.210; SAID-4 was near zero. Four tests and 30 exact metric/byte/hash replays passed. Fresh seeds stayed sealed. Two MA-311 protocol variants are retained on separate branches: the earlier d=4 screen missed the nearest-control byte gate with fresh sealed; a d=64 follow-up saved 14.1–21.1% vs ordinary intrinsic codes in 3/3 fresh worlds but missed its <=0.85x all-world promotion gate once and used one aligned private fallback. Both remain FAIL for their frozen gates.
+
+
+## MA-312 — PROMISING only for aligned 256-task storage/quality
+
+Across three fresh 256-task worlds, Mirror used 1,600B (normalized MSE 3.83e-7–5.30e-7), versus 2,100B two-coefficient codes, 10,034B SAID-8 and 33,024B independent. It saved 23.8% vs the nearest coefficient control and 84.1% vs SAID-8 while meeting the frozen quality gates. On unrelated tasks Mirror error was about 0.31; SAID-8/independent were near zero. Fit compute was 70.78M vs 67.6k coefficient ops, and Mirror throughput was lower than the coefficient/SAID controls. Four tests and all 60 dev/fresh metric/byte/hash replays passed. Synthetic post-fit screen; no capacity claim. Next P0: MA-319.
+
+
+## MA-314 — PROMISING only for the aligned-only variant; broad screen FAIL
+
+The broad mixed/private 160-task screen had a 24.5% adaptive-dimension reduction vs fixed d=16, but Mirror was 5.2% larger than adaptive direct in 3/3 fresh worlds, with ~103x fit proxy and 0.59–0.69x throughput; unrelated tasks used private fallbacks. A separate aligned-only 48-task variant passed its frozen storage/quality gate 3/3 fresh at 1,996B vs 2,220B adaptive coefficients (10.1% saving), but fit proxy was ~1,299x. These protocol variants are not pooled. Four tests for each variant and 72+36 exact replay rows passed. Dedicated branch: `research/ma-314-adaptive-intrinsic-mirror-20261008`. Next P0: MA-319.
+
+
+## MA-315 — FAIL
+
+On three fresh mixed common/private synthetic task banks, sparse private allocation met held-out quality (nMSE <=1e-4) but Mirror payload was 3.31–3.32% larger than the matched shared-direct two-coefficient plus identical sparse residual control (6,044–6,056B vs 5,850–5,862B). Mirror fit proxy was about 42x and throughput 0.61–0.78x. Three tests, 45 summary rows and 1,280 task allocation events replayed with exact metrics and payload hashes. Synthetic post-fit screen only; no capacity claim. Next P0: MA-319.
+
+
+## MA-319 — FAIL
+
+On three fresh four-layer nanoGPT seeds, circular rank-2 Mirror Tucker used 358,587B versus 356,435B for free Tucker coefficients (+0.60%) in all three seeds. Fresh NLL limits were missed in 2/3 seeds. Five tests passed; 25 serialized packages reloaded with exact hashes and metric replay. Amendment A1 quarantined the initial development audit-read bug; contaminated results were excluded. No capacity claim. Dedicated branch: `research/ma-319-tucker-matrix-bank-mirror-20261008`. Next P0: MA-320.

@@ -1,0 +1,85 @@
+{
+  "experiment_id": "MA-272",
+  "title": "input-centric OFTv2 Mirror views",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/RUNTIME",
+  "base_commit": "f7f76de193063950d28b7834f337840b1e86f0ce",
+  "prior_art_refs": [
+    "PA22"
+  ],
+  "hypothesis": "Input-side matrix-free Mirror Givens task codes retain independent-map quality with fewer actual bytes and lower active compute than dense native OFTv2 task transforms.",
+  "physical_object": "One shared 16x16 linear map",
+  "mirror_coordinate": "Eight learned Givens rotations applied to input activation per task",
+  "logical_multiplicity": "Four task functions",
+  "task": {
+    "input_dim": 16,
+    "output_dim": 16,
+    "tasks": 4,
+    "metric": "per-task held-out MSE"
+  },
+  "controls": [
+    "independent full task maps",
+    "hard-shared map",
+    "native OFTv2-style dense input-side orthogonal transform per task",
+    "shared map plus Mirror Givens input views"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      {
+        "world": 27200,
+        "init_seed": 272000
+      },
+      {
+        "world": 27201,
+        "init_seed": 272001
+      }
+    ],
+    "learning_rate_candidates": [
+      0.003,
+      0.01
+    ],
+    "updates": 1000,
+    "selection_metric": "mean heldout MSE"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      {
+        "world": 27202,
+        "init_seed": 272002
+      },
+      {
+        "world": 27203,
+        "init_seed": 272003
+      },
+      {
+        "world": 27204,
+        "init_seed": 272004
+      }
+    ],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual torch.save inference payload plus canonical JSON metadata",
+    "paid_objects": [
+      "shared map",
+      "independent matrices",
+      "dense OFTv2 effective transforms",
+      "Mirror Givens angles",
+      "metadata"
+    ]
+  },
+  "compute": {
+    "report_examples": true,
+    "report_updates": true,
+    "report_MAC_proxy": true,
+    "report_wall_time": true,
+    "report_throughput": true
+  },
+  "success_gate": "Mirror MSE <=1.10x independent, payload <=60% independent, and lower bytes than OFTv2 with MSE <=1.10x OFTv2.",
+  "failure_gate": "Mirror misses quality/byte gate or OFTv2 matches at equal/lower bytes and runtime.",
+  "boundaries": [
+    "synthetic linear family",
+    "no natural language or capacity claim",
+    "report eager runtime separately"
+  ]
+}

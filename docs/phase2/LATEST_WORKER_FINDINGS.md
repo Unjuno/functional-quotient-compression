@@ -191,3 +191,13 @@ Before starting a new MA experiment:
 4. declare the cheapest baseline rung and strongest upper control;
 5. declare whether runtime is part of the adoption gate;
 6. only then freeze PROTOCOL.json.
+
+
+## MA-297/299 cumulative reconciliation (2026-10-08)
+
+MA-297 and MA-299 are both verified FAIL in the SETA shared/private allocation family. Across the consecutive screens, simpler free coefficients remove any Mirror-specific advantage; MA-299 demonstrated share-before-private allocation but saved only 0.64% payload over the coefficient control while using 1.74x fit-compute proxy. The family is paused for redesign under the documented two-consecutive-failure condition; unrelated P0 families continue. See `experiments/mirror_applications/ma-297-seta-mirror-subspace/README.md` and `experiments/mirror_applications/ma-299-split-on-share-mirror/README.md`.
+
+
+## MA-257 compositional context result (2026-10-08)
+
+The aligned commuting three-factor rotation grid composed 512 task maps from 64 support combinations at 296B and mean test normalized MSE 6.58e-9. Native PA16 rotational composition was functionally and byte-identical, so MA-257 is FAIL for Mirror-specific value at development; fresh was not opened. On independent task matrices the factorized view failed without private capacity. The next P0 is MA-258. Details: `experiments/mirror_applications/ma-257-compositional-mirror-context/README.md`.

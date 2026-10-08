@@ -1,0 +1,79 @@
+{
+  "experiment_id": "MA-271",
+  "title": "OFT task views vs shared Mirror orthogonal orbit",
+  "status": "FAIL",
+  "evidence_lane": "MECHANISM/STORAGE/RUNTIME",
+  "base_commit": "f7f76de193063950d28b7834f337840b1e86f0ce",
+  "hypothesis": "A shared orthogonal angle template plus scalar task addresses compresses tasks on a common orbit; simple rank-one task-code factorization may provide the same result.",
+  "physical_object": "One frozen 8x8 linear block and shared orthogonal view family",
+  "mirror_coordinate": "Six scalar task codes applied to four shared plane-angle generators",
+  "logical_multiplicity": "Six orthogonal task transforms",
+  "prior_art_refs": [
+    "PA20",
+    "PA22"
+  ],
+  "controls": [
+    "full dense OFT Q per task",
+    "blockwise OFT plane angles per task",
+    "simple rank-one task-code x shared-angle template"
+  ],
+  "task": {
+    "dimension": 8,
+    "rotation_planes": 4,
+    "tasks": 6,
+    "train_examples_per_task": 512,
+    "test_examples_per_task": 1024,
+    "teacher": "Q_t=blockdiag(R(m_t*phi_j)); task m and shared phi vary by seed"
+  },
+  "development": {
+    "worlds_or_seeds": [
+      27,
+      41
+    ],
+    "selection_metric": "test MSE, bytes, orthogonality/cycle error"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      127,
+      239,
+      331,
+      443
+    ],
+    "locked_before_access": true
+  },
+  "optimization": {
+    "fit": "least squares task maps; nonlinear least squares for shared template/address",
+    "optimizer_updates": 0
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "serializer": "uncompressed NumPy NPZ",
+    "paid_objects": [
+      "shared frozen W",
+      "dense OFT matrices",
+      "blockwise angles",
+      "Mirror shared angle template and task codes",
+      "metadata"
+    ]
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_time": true,
+    "active_compute_proxy": "dense Q application and linear block multiply; transform time reported separately"
+  },
+  "success_gate": "At least 3/4 fresh: Mirror MSE <=1.10x full OFT, <=80% its bytes, orthogonality/cycle <1e-10 and lower bytes than simple rank-one angle factorization.",
+  "failure_gate": "Mirror MSE >1.25x OFT on >=3/4 or no byte-quality improvement over simple factorized angle control.",
+  "boundaries": [
+    "post-fit synthetic orbit screen",
+    "no optimizer learning/capacity claim",
+    "no diffusion or LM validity",
+    "CPU transform timing only"
+  ],
+  "development_amendment": "Development revealed Mirror is exactly the ordinary rank-one factorization of task-by-plane angle matrix. Before fresh access, serialize the simple rank-one control and Mirror with identical packed tensors; archive-header differences are not model compression.",
+  "amended_success_gate": "Report actual byte/quality frontier. No Mirror-specific PASS is possible unless it improves over the exact rank-one control under identical state encoding; functional equality is reported as a negative Mirror-specific result.",
+  "result_source_branch": "research/ma-271-oft-mirror-views-20261008",
+  "result_source_commit": "eb9211c5830564363e10cdff71d1a5e34ac8f6e5",
+  "protocol_variant_note": "A separate trained cross-over against dense OFT is retained under protocol_variants/task_views_vs_dense_oft; it did not include the exact simple rank-one control and is not pooled."
+}

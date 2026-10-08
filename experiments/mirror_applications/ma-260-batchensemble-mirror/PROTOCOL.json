@@ -1,0 +1,83 @@
+{
+  "experiment_id": "MA-260",
+  "title": "BatchEnsemble rank-one vs Mirror task ensemble views",
+  "status": "FAIL",
+  "evidence_lane": "MECHANISM/STORAGE",
+  "base_commit": "f7f76de193063950d28b7834f337840b1e86f0ce",
+  "hypothesis": "A per-member orthogonal input-view address preserves task-member quality on a low-dimensional classifier orbit at fewer bytes than BatchEnsemble rank-one factors.",
+  "physical_object": "One shared binary linear classifier vector",
+  "mirror_coordinate": "One per-task 2D input rotation angle",
+  "logical_multiplicity": "Six task-specific binary classifiers",
+  "prior_art_refs": [
+    "PA17"
+  ],
+  "controls": [
+    "shared classifier",
+    "independent logistic classifiers",
+    "BatchEnsemble rank-one member factors"
+  ],
+  "task": {
+    "input_dim": 8,
+    "tasks": 6,
+    "train_examples_per_task": 512,
+    "test_examples_per_task": 1024,
+    "conditions": [
+      "rotation-aligned",
+      "independent-random"
+    ],
+    "metrics": [
+      "accuracy",
+      "ECE",
+      "pairwise member disagreement"
+    ]
+  },
+  "development": {
+    "worlds_or_seeds": [
+      13,
+      29
+    ],
+    "selection_metric": "aligned accuracy and actual payload bytes"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      103,
+      223,
+      317,
+      409
+    ],
+    "locked_before_access": true
+  },
+  "optimization": {
+    "classifier_fit": "convex logistic regression via scipy L-BFGS",
+    "representation_fit": "least squares on fitted member separator vectors",
+    "mirror_angle_fit": "bounded scalar search per member",
+    "optimizer_updates_for_representation": 0
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "serializer": "uncompressed NumPy NPZ preserving learned dtype",
+    "paid_objects": [
+      "shared classifier weights and bias",
+      "BatchEnsemble member factors",
+      "Mirror angles and shared classifier",
+      "independent member weights and biases"
+    ]
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true,
+    "active_compute_proxy": "classifier fit examples and dense inference multiply proxy; representation decode work separately disclosed"
+  },
+  "success_gate": "On at least 3/4 fresh aligned seeds, Mirror within 1 accuracy point and 2 disagreement points of independent while using <=25% BatchEnsemble bytes.",
+  "failure_gate": "On at least 3/4 fresh seeds, aligned Mirror loses >5 accuracy points, or uses more bytes than BatchEnsemble for quality within 1 point.",
+  "boundaries": [
+    "post-fit linear classifier mechanism screen",
+    "unaligned stress set is a scope test",
+    "no LM or capacity claim",
+    "runtime not compared because decode kernels are unoptimized"
+  ],
+  "result_source_branch": "research/ma-260-batchensemble-mirror-20261008",
+  "result_source_commit": "33da88ba71cb053a8729a393ccc1ed1a2cc4fcf3"
+}

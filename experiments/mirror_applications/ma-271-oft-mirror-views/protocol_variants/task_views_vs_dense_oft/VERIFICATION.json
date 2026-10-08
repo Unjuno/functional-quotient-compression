@@ -1,0 +1,24 @@
+{
+  "experiment_id": "MA-271",
+  "commit": null,
+  "tests": {
+    "command": "PYTHONPATH=.../ma-271-oft-mirror-task-views/source python -m pytest -q .../tests",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Fresh worlds 27102-27104 used frozen LR=0.01.",
+    "Mirror payload stores shared base plus exact task Givens angles; transforms reconstruct deterministically.",
+    "Native OFT effective matrices are charged as dense inference state.",
+    "CPU runtime is limited by eager Python-loop Givens implementation."
+  ]
+}

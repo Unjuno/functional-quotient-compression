@@ -1,0 +1,35 @@
+{
+  "experiment_id": "MA-288",
+  "source_commit": "4c7610ddbd99e734bd5dd5f7806d511bcd35ef15",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-288-fastweight-mirror-context/tests -v",
+    "passed": 5,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "maximum_reconstruction_abs_difference": 2.58066208846941e-07,
+    "state_sha256_replay": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "development_seeds": [
+    28801,
+    28802
+  ],
+  "fresh_seeds": [
+    28811,
+    28812,
+    28813
+  ],
+  "notes": [
+    "Fresh raw metrics, actual payload lengths and SHA256 hashes replay exactly.",
+    "Coordinate-path outputs match reconstructed matrices within 3e-7 absolute error.",
+    "Post-audit cached-session runtime diagnostic is supplementary; it does not replace the registered per-call throughput result.",
+    "Integrated cumulative branch reran all 5 tests, serialization roundtrip, and fresh metric/hash replay successfully; disposition follows the preregistered direct-path runtime gate."
+  ]
+}
