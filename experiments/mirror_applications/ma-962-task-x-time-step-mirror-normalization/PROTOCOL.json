@@ -79,7 +79,7 @@
     "hyperparameter_tuning": "none; fixed-budget mechanism screen"
   },
   "gates": {
-    "quality_storage": "in each development seed, Mirror test-on-development accuracy must be no more than 1.5 percentage points below native task\u00d7time TEBN and actual serialized payload must be <=0.75x native TEBN.",
+    "quality_storage": "In each development seed, Mirror accuracy must be no more than 1.5 percentage points below native task\u00d7time TEBN and actual serialized inference payload must be <=0.98x native TEBN (at least 2% end-to-end byte reduction).",
     "mirror_specific": "in each development seed, Mirror accuracy must exceed the byte-near rank-1 task\u00d7time gain control by >=1.0 percentage point; otherwise no Mirror-specific value is established.",
     "audit": "Open official MNIST test files only if both development gates pass in both seeds; apply identical accuracy gates and no tuning."
   },
@@ -118,5 +118,12 @@
     "No hardware-energy or specialized neuromorphic-runtime claim.",
     "Classification has identical label mapping across tasks; this isolates temporal normalization sharing."
   ],
-  "amendments": []
+  "amendments": [
+    {
+      "date": "2026-10-08",
+      "timing": "before implementation and any MNIST access",
+      "change": "Relaxed end-to-end payload ratio from 0.75x to 0.98x native task\u00d7time TEBN.",
+      "rationale": "Shape-only parameter accounting before data shows shared synaptic weights contribute ~407 KB, native task\u00d7time gains ~16 KB, and Mirror temporal profile+phase coordinates ~4.1 KB, so full payload reduction is only about 3%; a 25% reduction gate would be unattainable even if every Mirror normalization byte were free."
+    }
+  ]
 }
