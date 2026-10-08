@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (44 completed; 586 UNTESTED)
+- P0: **630** (45 completed; 585 UNTESTED)
 - P1: **422** (12 completed; 410 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1099 UNTESTED, 31 PROMISING, 25 FAIL**
+- Current MA statuses: **1098 UNTESTED, 31 PROMISING, 26 FAIL**
 - 47 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -23,22 +23,22 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-391 — Quotient/remainder Mirror compositional embeddings (P0; PA59)**
+**MA-392 — Factorized token × domain Mirror embedding address (P0; PA59)**
 
-MA-389 FAIL: the one-angle Mirror token code reached 79.2% of native Hash Embedding bytes and substantially beat scalar importance, but missed native accuracy by 5.1/4.1 points and collision degree 3 by 8.3/9.5 points. Fresh remains sealed. This synthetic token-class result is not a natural LM result. MA-369/371/372 remain UNTESTED and paused pending width/depth output-code family redesign.
+MA-391 FAIL: on XOR, Mirror reached 0.996/1.000 accuracy with 1,024 distinct decoded rows and 17.0% of full-table bytes, but elementwise multiplication matched accuracy at 3,506 B vs 5,790 B and had much lower NLL. The fixed additive control remained near chance even on the separable target, so one clause is a control optimization limitation. Fresh remains sealed. MA-369/371/372 remain UNTESTED and paused pending width/depth output-code family redesign.
 
-Required controls: complementary quotient/remainder embeddings, learned multiplication, concatenation/addition, and Mirror composition with any per-token View codes charged. Test logical ID uniqueness, quality and actual bytes; compare collision/alias rates and lookup latency at matched storage.
+Required controls: one shared token embedding plus a domain factor, ordinary additive or low-rank domain adaptation, independent per-domain vocabulary tables, and the Mirror token×domain factor code. Hold vocabulary and domain tasks fixed; test held-out token-domain combinations and charge domain codes, tables, routers and all payload metadata.
 
-Prior art: PA59 quotient-remainder embeddings. Mirror must add useful function or a better storage-quality-runtime frontier beyond fixed complementary partitions and ordinary composition operators.
+Prior art: PA59 complementary compositional embeddings. Mirror must add generalization to unseen token-domain pairs beyond factorized sharing and ordinary low-rank/domain-adapter controls.
 
 ## Active experiment
 
-MA-383, MA-385 and MA-389 are FAIL and recorded on their dedicated research branches. MA-391 is next. MA-367/368/374/375/379/381/383/385/389 fresh worlds remain unopened under their registered gates.
+MA-383, MA-385, MA-389 and MA-391 are FAIL and recorded on dedicated research branches. MA-392 is next. MA-367/368/374/375/379/381/383/385/389/391 fresh worlds remain unopened under their registered gates.
 
 ## Verified status index
 
 - **PROMISING (31):** MA-001, MA-002, MA-003, MA-004, MA-005, MA-006, MA-007, MA-008, MA-012, MA-014, MA-015, MA-041, MA-076, MA-079, MA-111, MA-121, MA-156, MA-160, MA-171, MA-173, MA-181, MA-189, MA-241, MA-244, MA-245, MA-249, MA-250, MA-251, MA-374, MA-381, MA-691.
-- **FAIL (25):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-367, MA-368, MA-375, MA-379, MA-383, MA-385, MA-389.
+- **FAIL (26):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-367, MA-368, MA-375, MA-379, MA-383, MA-385, MA-389, MA-391.
 
 All per-ID evidence is retained in the local experiment directories and in `CLAIM_LEDGER.csv`. Consult [the evidence integration audit](../../docs/phase2/MIRROR_MA_EVIDENCE_INTEGRATION_2026-10-08.md) for linked reports, verifications, provenance and claim boundaries.
 

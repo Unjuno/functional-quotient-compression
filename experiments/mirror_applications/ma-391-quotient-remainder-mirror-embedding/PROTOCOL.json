@@ -1,0 +1,74 @@
+{
+  "experiment_id": "MA-391",
+  "title": "Quotient/remainder Mirror compositional embeddings",
+  "status": "PROTOCOL_FROZEN_BEFORE_DEVELOPMENT",
+  "base_commit": "bec8819",
+  "prior_art_refs": [
+    "PA59"
+  ],
+  "evidence_lane": "QUALITY/STORAGE/UNIQUENESS/RUNTIME",
+  "hypothesis": "For separable quotient/remainder labels, fixed additive complementary tables should be sufficient; for a nonseparable XOR interaction, one per-ID Mirror angle over the same quotient/remainder tables should improve test accuracy over fixed addition by at least 0.05 while remaining within 0.02 of the strongest ordinary operator control and under 0.80x the full table bytes. It must also report whether decoded embeddings remain unique.",
+  "physical_object": "two shared 32-row embedding tables for quotient and remainder components",
+  "mirror_coordinate": "one learned Givens angle per logical ID selecting a functional mixture of its quotient and remainder component vectors",
+  "logical_multiplicity": "1024 logical token embeddings addressed uniquely by their quotient/remainder pair",
+  "model": {
+    "vocabulary_size": 1024,
+    "embedding_dim": 16,
+    "quotient_rows": 32,
+    "remainder_rows": 32,
+    "classes": 8,
+    "train_examples": 65536,
+    "validation_examples": 16384,
+    "test_examples": 32768,
+    "batch_size": 512,
+    "optimizer_updates": 1200,
+    "optimizer": "Adam",
+    "learning_rate": 0.003,
+    "development_seeds": [
+      39101,
+      39102
+    ],
+    "fresh_seeds": [
+      39111,
+      39112,
+      39113
+    ],
+    "target_families": [
+      "separable modular target (3*q + 5*r) mod 8",
+      "nonseparable low-bit XOR target (q xor r) mod 8"
+    ],
+    "addressing": "q=id//32, r=id%32, deterministic and identical for every method"
+  },
+  "controls": [
+    "independent full 1024x16 embedding table upper control",
+    "fixed quotient/remainder additive composition Q[q]+R[r]",
+    "elementwise multiplicative composition Q[q]*R[r]",
+    "concatenation [Q[q],R[r]] with shared learned projection",
+    "Mirror per-ID angle composition cos(theta_id)*Q[q]+sin(theta_id)*R[r]"
+  ],
+  "development_gate_before_fresh": "For both seeds: on XOR family, Mirror accuracy >= additive +0.05 and within 0.02 of the best ordinary factorized control (multiply/concat); Mirror actual payload <=0.80x full-table payload; on separable family Mirror within 0.02 of additive; decoded Mirror embeddings have >=90% unique 16D rows after FP16 reload. Any miss keeps fresh unopened.",
+  "success_gate": "All registered development gates replicate on all three fresh seeds; report task NLL/accuracy, actual bytes, decoded-vector uniqueness, address uniqueness, compute and throughput.",
+  "failure_gate": "Any development gate misses in either development seed; fresh remains sealed.",
+  "storage": {
+    "authority": "actual deterministic ZIP/NPY FP16 inference payload bytes after reload",
+    "paid_objects": [
+      "full table or quotient/remainder tables",
+      "per-ID Mirror angles",
+      "concatenation projection",
+      "classifier",
+      "partition and vocabulary metadata",
+      "archive headers"
+    ]
+  },
+  "compute": {
+    "report_examples_updates_wall_clock": true,
+    "report_embedding_lookup_and_operator_macs": true,
+    "report_test_throughput": true
+  },
+  "boundaries": [
+    "synthetic token-to-class surrogate, no natural language claim",
+    "unique quotient/remainder addresses do not by themselves establish unique decoded embeddings or function capacity",
+    "fixed update quality is not a capacity claim",
+    "fresh seeds stay sealed until all development gates pass"
+  ]
+}
