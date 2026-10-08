@@ -1,19 +1,18 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-304",
+  "commit": "PENDING",
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "python -m pytest -q experiments/mirror_applications/ma-304-supermask-active-mirror-transform/tests",
+    "passed": 4,
+    "failed": 0
   },
-  "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
-  },
-  "metric_replay": {
-    "checked": false,
-    "max_difference": null
-  },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "serialization": {"roundtrip_checked": true, "byte_exact": true},
+  "metric_replay": {"checked": true, "max_difference": 0.0},
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "21 fresh serialized packages reloaded and matched byte lengths and SHA-256 hashes.",
+    "All three fresh seeds replayed exactly for 21 summary rows and 3,024 task allocation records.",
+    "Source and development evidence were committed before fresh seeds were run.",
+    "Synthetic planted post-fit task functions; no optimizer updates or capacity claim."
+  ]
 }

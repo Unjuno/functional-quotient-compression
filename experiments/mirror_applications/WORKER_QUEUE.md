@@ -403,7 +403,7 @@ Read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_FOURTEENTH_SWEEP.
 
 L0/L1 outcomes alone never justify MA PROMISING as a deployable compression claim. Pre-trained base SVD and shared bases may cost storage/calibration, and heldout test-task weight deltas cannot be used to fit a deployable code at inference.
 
-MA-255 through MA-319 have now been reconciled or completed on dedicated branches. MA-322 and MA-303 are complete. The next registered executable P0 is **MA-304**; supplemental intake does not reorder the queue.
+MA-255 through MA-319 have now been reconciled or completed on dedicated branches. MA-322 and MA-303 are complete. MA-304 is complete; the next registered executable P0 is **MA-305**. Supplemental intake does not reorder the queue.
 
 ## Supplemental function-space falsification (no newly allocated MA IDs)
 
@@ -413,7 +413,7 @@ Pilot: BOLT-like shared orthogonal basis plus 6 diagonal m coefficients averaged
 
 When selecting MA-1096/1099/1102/1105/1114/1115, include BOLT (PA372), function-space/curvature metric (CG-LoRA PA373, Fora PA374), SVD+CUR localized task residual (PA376), task-vector bases PA375, information filtering PA377, and a gauge-invariant functional/OOD check (PA378..381) where applicable. Do not inflate the MA backlog with duplicated new rows for these existing questions. A task-code success must survive *actual held-out task outcomes and serializer/runtime*, not just weight reconstruction.
 
-MA-320 is complete. MA-322 and MA-303 are complete; **MA-304 is next** by registry order. Do not interrupt active/frozen jobs to consume supplemental intake.
+MA-320 is complete. MA-322, MA-303 and MA-304 are complete; **MA-305 is next** by registry order. Do not interrupt active/frozen jobs to consume supplemental intake.
 
 ## Sixteenth research intake — KG relation operators, cameras, robotics and acoustic rooms
 
@@ -474,3 +474,6 @@ MA-315, MA-319, MA-320 and MA-322 have recorded outcomes on dedicated research b
 
 
 MA-303 is complete FAIL for Mirror-specific storage margin: 34,892B Mirror vs 34,920B direct factorized (0.080% delta), although held-out synthetic quality passed and payload was 51% below Piggyback masks. See its A1 amendment and report. The next candidate is MA-304.
+
+
+MA-304 is complete FAIL: 256-edge Mirror quality passed, but total payload was only 0.141% below the direct coefficient control and phase fitting used ~3x operations with slower eager CPU throughput. See report and verification. Next P0: MA-305.
