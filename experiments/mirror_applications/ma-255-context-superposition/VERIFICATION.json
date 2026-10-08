@@ -1,0 +1,39 @@
+{
+  "experiment_id": "MA-255",
+  "commit": "pending",
+  "tests": {
+    "command": "pytest -q experiments/mirror_applications/ma-255-context-superposition/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "payload_count": 12,
+    "actual_FP16_ZIP_bytes_authoritative": true,
+    "payload_integrity_replay": "source/verify_payloads.py checks exact byte lengths and SHA256, reloads all arrays, reconstructs each control and replays held-out accuracy"
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_accuracy_difference_after_FP16_reload": 0.00018310546875,
+    "all_payload_methods_replayed": true
+  },
+  "fresh_split_integrity_checked": false,
+  "fresh_seeds": [25511, 25512, 25513],
+  "fresh_status": "SEALED_AFTER_REGISTERED_DEVELOPMENT_GATE_FAILURE",
+  "development_gate": {
+    "mirror_accuracy_gain_over_PSP_required": 0.03,
+    "observed_seed_25501": 0.0125,
+    "observed_seed_25502": 0.0264,
+    "mirror_payload_must_not_exceed_PSP": true,
+    "observed_payload_bytes": 830,
+    "PSP_payload_bytes": 822,
+    "independent_accuracy_gap_limit": 0.05,
+    "observed_mean_gap_to_independent": [0.2798, 0.2803]
+  },
+  "notes": [
+    "An initial PSP sign bit serialization error was caught by payload replay; fixed and both development worlds rerun before finalizing results.",
+    "Dense learned diagonal control had higher quality but used 1068 bytes, versus Mirror 830 and PSP 822.",
+    "Synthetic linear tasks; no natural task or neural-network evidence."
+  ]
+}

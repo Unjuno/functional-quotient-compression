@@ -1,0 +1,54 @@
+{
+  "experiment_id": "MA-255",
+  "title": "Learned Mirror phase contexts for parameter-superposed task models",
+  "status": "PROTOCOL_FROZEN_BEFORE_DEVELOPMENT",
+  "base_commit": "cbd8140",
+  "prior_art_refs": ["PA16"],
+  "evidence_lane": "TASK_QUALITY/INTERFERENCE/ACTUAL_BYTES",
+  "hypothesis": "For four independently learned task classifiers compressed into one shared parameter vector, a one-angle-per-task Mirror rotation context optimized on training examples will improve mean held-out task accuracy by at least 0.03 over fixed random-sign Parameter Superposition (PSP), while using no more serialized bytes than PSP and remaining within 0.05 mean accuracy of independent models.",
+  "physical_object": "one shared 32-dimensional vector containing the sum of four context-bound task-model vectors",
+  "mirror_coordinate": "one learned FP16 scalar angle per task; the view rotates adjacent weight pairs before binding and inverse-rotates after unbinding",
+  "logical_multiplicity": "four task-specific classifiers reconstructed from one shared parameter vector",
+  "model": {
+    "task_count": 4,
+    "input_dim": 32,
+    "train_examples_per_task": 1024,
+    "test_examples_per_task": 4096,
+    "base_optimizer_updates_per_task": 500,
+    "base_optimizer": "Adam",
+    "base_learning_rate": 0.02,
+    "mirror_code_updates": 300,
+    "mirror_code_optimizer": "Adam",
+    "mirror_code_learning_rate": 0.01,
+    "development_world_seeds": [25501, 25502],
+    "fresh_world_seeds": [25511, 25512, 25513],
+    "world": "four independently seeded Gaussian linear teachers; train/test inputs are independent standard normal samples"
+  },
+  "controls": [
+    "independent separately trained model per task (upper reference)",
+    "one shared tied classifier jointly trained on all tasks (hard-sharing control)",
+    "fixed random-sign PSP contexts, applied by elementwise binding and unbinding",
+    "fixed seeded random Mirror phase context",
+    "learned per-task Mirror phase contexts",
+    "learned dense diagonal binding coefficients (simple higher-byte native control)"
+  ],
+  "evaluation": {
+    "primary_metric": "macro mean and per-task held-out classification accuracy",
+    "interference_metric": "each compressed task model accuracy loss versus its independent model",
+    "serialized_payload": "actual ZIP/NPY FP16 inference payload bytes, including all context codes, shared tensor, metadata and reconstruction state",
+    "active_compute": "report coordinate-generation and bind/unbind arithmetic count; training examples, updates and wall clock"
+  },
+  "development_gate_before_fresh": "On both development worlds, learned Mirror mean accuracy must be >= fixed-sign PSP +0.03, no more than 0.05 below independent mean accuracy, and actual payload bytes <= fixed-sign PSP. Otherwise fresh remains unopened.",
+  "success_gate": "All three fresh worlds meet the frozen accuracy, interference and byte gates; report per-task quality and actual bytes.",
+  "failure_gate": "Any development world misses a registered gate; fresh remains sealed.",
+  "storage": {
+    "authority": "actual deterministic ZIP/NPY FP16 inference payload after reload",
+    "paid_objects": ["shared superposed parameter tensor", "task context codes", "metadata and archive headers", "any private task weights or reconstruction state"]
+  },
+  "boundaries": [
+    "linear synthetic task bank; not neural-network benchmark evidence",
+    "independent task models are trained before compression, so this measures retrieval/compression, not joint learning efficiency",
+    "task identities are held out by complete world seed in fresh evaluation",
+    "fixed random codes and all generated reconstruction state must be reproducible from paid metadata"
+  ]
+}
