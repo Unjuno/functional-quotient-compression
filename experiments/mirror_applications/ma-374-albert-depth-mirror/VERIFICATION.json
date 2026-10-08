@@ -1,16 +1,85 @@
 {
   "experiment_id": "MA-374",
   "commit": null,
-  "protocol_frozen": true,
+  "protocol_frozen_before_development": true,
   "tests": {
-    "passed": null,
-    "failed": null
+    "passed": 3,
+    "failed": 0
   },
-  "fresh_opened": false,
+  "development_selection": {
+    "experiment_id": "MA-374",
+    "selected_learning_rate": 0.003,
+    "mean_validation_nll_by_lr": {
+      "0.003": 0.16871203233333332,
+      "0.01": 0.30727640661666666
+    },
+    "development_worlds": [
+      37400,
+      37401
+    ],
+    "fresh_worlds_locked": [
+      37410,
+      37411,
+      37412
+    ]
+  },
+  "fresh_summary": {
+    "untied": {
+      "mean_accuracy": 0.9722222266666667,
+      "mean_nll": 0.14016789196666665,
+      "serialized_bytes": 257447,
+      "mean_train_wall_s": 0.8460623333333334,
+      "mean_inference_examples_per_second": 531008.937
+    },
+    "tied": {
+      "mean_accuracy": 0.9648148033333334,
+      "mean_nll": 0.17313889166666666,
+      "serialized_bytes": 88525,
+      "mean_train_wall_s": 0.6746553333333334,
+      "mean_inference_examples_per_second": 526863.3163333334
+    },
+    "attention_shared": {
+      "mean_accuracy": 0.9712962866666667,
+      "mean_nll": 0.1413088714,
+      "serialized_bytes": 122751,
+      "mean_train_wall_s": 0.7406236666666667,
+      "mean_inference_examples_per_second": 518753.1936666667
+    },
+    "ffn_shared": {
+      "mean_accuracy": 0.9750000033333334,
+      "mean_nll": 0.1419976602,
+      "serialized_bytes": 223091,
+      "mean_train_wall_s": 0.8128656666666667,
+      "mean_inference_examples_per_second": 516689.74199999997
+    },
+    "mirror": {
+      "mean_accuracy": 0.9638888633333333,
+      "mean_nll": 0.1713856508,
+      "serialized_bytes": 89282,
+      "mean_train_wall_s": 0.7549833333333333,
+      "mean_inference_examples_per_second": 412713.95133333333
+    },
+    "film": {
+      "mean_accuracy": 0.96666666,
+      "mean_nll": 0.17479774106666668,
+      "serialized_bytes": 89282,
+      "mean_train_wall_s": 0.7284316666666667,
+      "mean_inference_examples_per_second": 466580.1286666667
+    }
+  },
   "serialization": {
-    "roundtrip_checked": false
+    "roundtrip_checked": true,
+    "max_abs_logit_difference": 0.0,
+    "payload_hashes_checked": true
   },
   "metric_replay": {
-    "checked": false
-  }
+    "rows": 42,
+    "max_metric_difference": 4.6304321488221944e-09
+  },
+  "decision": "FAIL",
+  "notes": [
+    "Digits residual-block proxy only, not ALBERT/Transformer evidence.",
+    "Full tied+depth Mirror does not improve over full tied baseline; partial sharing provides better quality.",
+    "Equal-payload FiLM is slightly more accurate than Mirror."
+  ]
 }
