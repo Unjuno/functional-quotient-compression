@@ -65,7 +65,8 @@
     "decision": "PROMISING only if aligned quality/bytes pass and Mirror improves on ordinary low-rank at matched budgets; FAIL if valid runs fail the aligned quality or storage gates; NOT ESTABLISHED for implementation or split invalidity."
   },
   "amendments": [
-    {"number": 1, "reason": "A development payload audit showed per-tensor safetensors key headers dominated this tiny coefficient model. Before full development/fresh audit runs, use one flat vector per anchor/generator/code payload and serialize the deterministic shape/order map in charged metadata. This is an inference serialization format change only; model parameterization, seeds, data, optimizer and gates are unchanged.", "after_audit": false}
+    {"number": 1, "reason": "A development payload audit showed per-tensor safetensors key headers dominated this tiny coefficient model. Before full development/fresh audit runs, use one flat vector per anchor/generator/code payload and serialize the deterministic shape/order map in charged metadata. This is an inference serialization format change only; model parameterization, seeds, data, optimizer and gates are unchanged.", "after_audit": false},
+    {"number": 2, "reason": "After the full development pass, a serialization replay showed duplicate sidecar JSON repeated the same static shape map already stored in each packed payload header. Keep all required layout/schema metadata charged once in the safetensors header and remove the duplicate sidecar. Report V2 bytes; no trained tensor, split, update count, metric or gate changes.", "after_audit": false}
   ],
   "limitations": ["Synthetic fixed linear anchors, not a full SIMoE reproduction.", "No LLM natural-language loss, sparse routing runtime, distributed upcycling, or full expert-network training claim.", "Aligned worlds are designed to test compositional coefficient structure; off-orbit worlds test its boundary."]
 }

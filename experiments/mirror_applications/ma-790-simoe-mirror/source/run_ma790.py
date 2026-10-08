@@ -206,7 +206,7 @@ def serialize_model(model, method, anchors, biases, coefficient_world, world, in
         return flat,layout
     anchor_path=ART/f"{stem}_anchors.safetensors"
     anchor_flat,anchor_layout=packed({"weights":torch.as_tensor(anchors),"biases":torch.as_tensor(biases)})
-    save_file({"p":anchor_flat},str(anchor_path),metadata={"schema":"MA790-PAYLOAD-V1","group":"anchors"})
+    save_file({"p":anchor_flat},str(anchor_path),metadata={"schema":"MA790-PAYLOAD-V2","group":"anchors","layout":"weights[12,8,16];biases[12,8]"})
     sd={k:v.detach().cpu().contiguous() for k,v in model.state_dict().items()}
     if method=="mirror_factorized":
         code_keys={k:v for k,v in sd.items() if "radius" in k or "angle" in k}
@@ -219,17 +219,18 @@ def serialize_model(model, method, anchors, biases, coefficient_world, world, in
         gen=sd
     gen_path=ART/f"{stem}_generator.safetensors"
     gen_flat,gen_layout=packed(gen)
-    save_file({"p":gen_flat},str(gen_path),metadata={"schema":"MA790-PAYLOAD-V1","group":"generator"})
+    gen_layout_text=";".join(f"{k}[{','.join(map(str,v.shape))}]" for k,v in sorted(gen.items()))
+    save_file({"p":gen_flat},str(gen_path),metadata={"schema":"MA790-PAYLOAD-V2","group":"generator","layout":gen_layout_text})
     code_bytes=0
     if code_keys:
-        cp=ART/f"{stem}_factor_codes.safetensors";code_flat,code_layout=packed(code_keys);save_file({"p":code_flat},str(cp),metadata={"schema":"MA790-PAYLOAD-V1","group":"factor_codes"});code_bytes=cp.stat().st_size
+        cp=ART/f"{stem}_factor_codes.safetensors";code_flat,code_layout=packed(code_keys)
+        code_layout_text=";".join(f"{k}[{','.join(map(str,v.shape))}]" for k,v in sorted(code_keys.items()))
+        save_file({"p":code_flat},str(cp),metadata={"schema":"MA790-PAYLOAD-V2","group":"factor_codes","layout":code_layout_text});code_bytes=cp.stat().st_size
     else:
         code_layout={}
-    meta={"method":method,"coefficient_world":coefficient_world,"task_grid":"4x4","top_k":3,"anchor_layout":anchor_layout,"generator_layout":gen_layout,"factor_code_layout":code_layout}
-    mp=ART/f"{stem}_metadata.json";mp.write_text(json.dumps(meta,sort_keys=True,separators=(",",":"))+"\n")
-    anchor_bytes=anchor_path.stat().st_size;generator_bytes=gen_path.stat().st_size+mp.stat().st_size
+    anchor_bytes=anchor_path.stat().st_size;generator_bytes=gen_path.stat().st_size
     full16=ART/f"{stem}_free16_coefficient_reference.safetensors"
-    save_file({"p":torch.zeros(16*K)},str(full16),metadata={"schema":"MA790-PAYLOAD-V1","group":"free16_coefficients"})
+    save_file({"p":torch.zeros(16*K)},str(full16),metadata={"schema":"MA790-PAYLOAD-V2","group":"free16_coefficients","layout":"coefficients[16,12]"})
     return anchor_bytes,generator_bytes,code_bytes,anchor_bytes+generator_bytes+code_bytes,full16.stat().st_size
 
 

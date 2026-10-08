@@ -5,6 +5,7 @@ from pathlib import Path
 
 import numpy as np
 import torch
+from safetensors import safe_open
 
 ROOT = Path(__file__).resolve().parents[1]
 spec = importlib.util.spec_from_file_location("run_ma790", ROOT / "source" / "run_ma790.py")
@@ -68,3 +69,7 @@ def test_actual_payload_measurement(tmp_path,monkeypatch):
     assert a>anchors.nbytes+bias.nbytes
     assert c==(tmp_path/"aligned_w11_s31_mirror_factorized_factor_codes.safetensors").stat().st_size
     assert f==(tmp_path/"aligned_w11_s31_mirror_factorized_free16_coefficient_reference.safetensors").stat().st_size
+    with safe_open(str(tmp_path/"aligned_w11_s31_mirror_factorized_generator.safetensors"),framework="pt") as sf:
+        assert sf.metadata()["schema"]=="MA790-PAYLOAD-V2"
+        assert "bias[12]" in sf.metadata()["layout"]
+    assert not (tmp_path/"aligned_w11_s31_mirror_factorized_metadata.json").exists()
