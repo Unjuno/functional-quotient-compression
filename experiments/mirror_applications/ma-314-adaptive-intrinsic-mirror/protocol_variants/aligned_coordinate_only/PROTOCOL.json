@@ -1,0 +1,103 @@
+{
+  "experiment_id": "MA-314",
+  "title": "adaptive intrinsic-dimension Mirror allocation",
+  "status": "PROMISING (aligned-only fresh storage/quality gates passed; no compute claim)",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY/COMPUTE/RUNTIME",
+  "base_commit": "9ca5c968b5ec9a285b11140f08a0f573c8e07cf3",
+  "hypothesis": "A validation-selected prefix of shared 2D Mirror planes allocates fewer serialized bytes than adaptive random-subspace coefficient vectors across tasks with intrinsic dimensions 2, 4, and 8, while matching held-out quality.",
+  "physical_object": "shared 16D linear predictor and paid random orthonormal 16x8 task-update basis",
+  "mirror_coordinate": "per-task FP16 angle for each active 2D pair plus an explicit active-dimension address",
+  "logical_multiplicity": "48 task-conditioned predictors with variable active intrinsic dimensions; task count is not independent capacity",
+  "prior_art_refs": [
+    "PA33",
+    "MA-311",
+    "MA-312"
+  ],
+  "controls": [
+    "hard tie",
+    "adaptive PA33 random-subspace least-squares FP32 codes",
+    "adaptive direct FP16 coefficient codes on same basis",
+    "fixed SAID-8",
+    "independent full 16D task vectors"
+  ],
+  "data": {
+    "input_dimension": 16,
+    "maximum_intrinsic_dimension": 8,
+    "dimension_levels": [
+      2,
+      4,
+      8
+    ],
+    "task_count": 48,
+    "support_examples_per_task": 64,
+    "validation_examples_per_task": 64,
+    "test_examples_per_task": 128,
+    "development_seeds": [
+      31401,
+      31402,
+      31403
+    ],
+    "fresh_seeds_locked_unopened": [
+      31411,
+      31412,
+      31413
+    ],
+    "optimizer_updates": 0,
+    "task_id_supplied": true,
+    "angle_grid_points": 720,
+    "mirror_angle_solver": "four pairwise coordinate-descent sweeps over the frozen grid, initialized at zero; each pair is fitted against the support residual after subtracting current estimates for the other active pairs",
+    "shared_pair_radii": [
+      0.25,
+      0.2,
+      0.15,
+      0.1
+    ],
+    "teacher": "task deltas occupy the first d coordinates in the paid random basis, with d balanced over 2,4,8; each active pair has its registered shared radius and a task-specific uniform angle",
+    "dimension_selection": "fit on support; select smallest d in [2,4,8] with validation normalized MSE <= 1e-4; evaluate once on test"
+  },
+  "selection": {
+    "development_only": true,
+    "tunable": "none; dimensions, precision, support/validation/test sizes, threshold and grid are frozen",
+    "fresh_opened_only_if_every_development_world_passes_byte_quality_and_dimension_gates": true
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes after reload",
+    "format": "NPZ-compatible fixed-timestamp ZIP with uncompressed NPY arrays",
+    "paid_objects": [
+      "shared predictor",
+      "full shared maximum basis",
+      "shared pair radii",
+      "per-task active-dimension metadata",
+      "all active codes",
+      "full independent weights for upper control",
+      "array metadata and ZIP/NPY headers"
+    ]
+  },
+  "compute": {
+    "report_support_validation_test_examples": true,
+    "report_optimizer_updates": true,
+    "report_fit_operation_proxy": true,
+    "report_active_inference_operations": true,
+    "report_encoder_wall_clock": true,
+    "report_inference_throughput": true,
+    "device": "CPU"
+  },
+  "success_gate": "Every development seed: adaptive Mirror normalized test MSE <=1e-4; exact minimum dimension selected on >=95% tasks; actual bytes <=90% both adaptive FP16 coefficient control and adaptive SAID; per-dimension quality within 1e-5 absolute normalized MSE of adaptive FP16 control.",
+  "failure_gate": "Any aligned development byte, quality, or dimension-selection gate fails; or a simple control matches Mirror within the registered actual-byte margin.",
+  "fresh": {
+    "locked_before_access": true,
+    "seeds": [
+      31411,
+      31412,
+      31413
+    ],
+    "open_condition": "only if all development gates pass"
+  },
+  "boundaries": [
+    "synthetic supervised linear task bank",
+    "teacher lies on shared fixed-radius polar planes",
+    "zero gradient optimizer updates",
+    "task IDs supplied; no learned router",
+    "no capacity or language evidence"
+  ]
+}

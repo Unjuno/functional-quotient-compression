@@ -1,31 +1,44 @@
 {
   "experiment_id": "MA-314",
-  "commit": "4bd89532bb79d9639bb02d29fa608e16236b2f71",
-  "base_commit": "9ca5c968b5ec9a285b11140f08a0f573c8e07cf3",
-  "protocol_frozen_before_fresh": true,
-  "development_seeds": [31401, 31402, 31403],
-  "fresh_seeds": [31411, 31412, 31413],
-  "development_gate_passed_before_fresh": true,
+  "commit": "a1d57372925eea7fd86a0297a116b5c5ce6f70f2",
   "tests": {
-    "command": "pytest -q experiments/mirror_applications/ma-314-adaptive-intrinsic-mirror/tests",
-    "passed": 4,
+    "command": "python -m pytest -q experiments/mirror_applications/ma-314-adaptive-intrinsic-mirror/tests",
+    "passed": 3,
     "failed": 0
   },
   "serialization": {
     "roundtrip_checked": true,
     "byte_exact": true,
-    "deterministic_fixed_timestamp_zip": true
+    "notes": "Deterministic ZIP/NPY payloads are reloaded before inference; bytes and hashes are replayed."
   },
   "metric_replay": {
     "checked": true,
-    "result_rows": 36,
-    "payload_hashes_checked": 36,
-    "max_difference": 0.0
+    "summary_rows_replayed": 48,
+    "allocation_events_replayed": 1920,
+    "max_difference": 0
   },
   "fresh_split_integrity_checked": true,
+  "fresh_worlds_locked": [
+    31411,
+    31412,
+    31413
+  ],
+  "fresh_opened": false,
   "notes": [
-    "First development implementation incorrectly optimized each angle against the full task residual while omitting other active pairs. This was diagnosed as an implementation bug, corrected to four pairwise coordinate-descent passes, and all development seeds were rerun before fresh data was opened.",
-    "The corrected development run passed all byte, quality and active-dimension gates before fresh seeds 31411-31413 were accessed.",
-    "Fresh seeds are reported without tuning. Synthetic post-fit task bank; no optimizer updates, learned router, capacity claim, or private-state stress claim."
-  ]
+    "Development threshold 0.0001 was selected and frozen before fresh access.",
+    "Broad Mirror payload exceeded adaptive direct in both development worlds; broad-protocol fresh seeds remain unopened.",
+    "Development-only broad task bank is synthetic; 0 optimizer updates."
+  ],
+  "protocol_variants": {
+    "aligned_coordinate_only": {
+      "evidence_path": "protocol_variants/aligned_coordinate_only/",
+      "result_commit": "4bd89532bb79d9639bb02d29fa608e16236b2f71",
+      "fresh_opened_after_its_own_development_gates": true,
+      "fresh_seeds": [31411, 31412, 31413],
+      "tests_passed": 4,
+      "result_rows_replayed": 36,
+      "max_metric_difference": 0.0,
+      "scope": "separate 16D/48-task aligned-only world generator; do not pool with the root 32D/160-task private-fallback screen"
+    }
+  }
 }

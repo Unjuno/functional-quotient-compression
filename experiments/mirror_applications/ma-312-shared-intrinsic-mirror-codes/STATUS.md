@@ -12,7 +12,7 @@
 
 ## Next action
 
-Commit the verified report, payload results and current status integration to this branch.
+MA-312 is complete. The current next executable P0 is MA-314.
 
 ## Blockers
 

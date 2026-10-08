@@ -1,62 +1,31 @@
-# MA-314 — adaptive intrinsic-dimension Mirror allocation
+# MA-314 — adaptive intrinsic dimension with Mirror views
 
-Status: SCREENING  
-Evidence lane: MECHANISM / STORAGE / QUALITY / COMPUTE / RUNTIME  
-Base commit: `9ca5c968b5ec9a285b11140f08a0f573c8e07cf3`  
-Prior art: PA33 intrinsic-dimensional fine-tuning; MA-311 and MA-312 shared intrinsic Mirror screens
+Status: PROMISING only for the aligned coordinate-only variant; broader private-fallback screen missed its byte gate and remains fresh-locked.
+Branch: `research/ma-314-adaptive-intrinsic-mirror-20261008`
+Prior art: PA33; direct adaptive random-subspace coefficients are mandatory.
 
-## H — falsifiable hypothesis
+## H — hypothesis
 
-Across task functions whose required intrinsic dimensions vary, a validation-selected prefix of shared two-dimensional Mirror planes will allocate fewer actual serialized bytes than adaptive random-subspace (SAID) and direct coefficient vectors, while matching held-out quality and choosing the smallest sufficient dimension.
+On a task bank with different intrinsic complexities, validation-selected dimension plus a Mirror angle for a shared-radius first coordinate pair and private residuals should reduce actual serialized bytes by at least 10% versus validation-selected ordinary intrinsic coefficients at held-out normalized MSE <=1e-4. Tasks outside the orbit should require private intrinsic fallback.
 
-> **Mirror insertion:** this experiment adds per-task Mirror angles `m_t` and an active-dimension address to a shared intrinsic update basis so that tasks requiring different numbers of coordinate pairs can use different logical functions without storing a full coefficient vector or private weight vector per task.
+## T — protocol frozen before fresh
 
-## T — frozen mechanism screen
+A shared 32D linear predictor has one deterministic 32x16 random orthonormal update basis. The 160-task bank includes four aligned groups of 32 tasks at true dimensions 2, 4, 8 and 16, plus 32 unrelated 16D tasks. Each has 64 support, 64 validation and 128 held-out examples. Controls are hard tying, fixed direct dimensions 2/4/8/16, adaptive direct intrinsic coefficients, adaptive Mirror angle plus residual/private fallback, and independent full 32D fits. Optimizer updates: zero. Mirror angle search: fixed 720-point grid. All serialized inference bytes include used basis prefix, shared base/radius, per-task dimensions/modes, offsets, coefficients and archive metadata.
 
-One shared 16D linear predictor and a paid random orthonormal 16×8 task-update basis serve 48 task IDs. Target updates use 1, 2, or 4 active coordinate pairs (intrinsic dimensions 2, 4, 8), balanced across tasks; each active pair has a shared fixed radius and task-specific angle. Tasks receive 64 support, 64 validation, and 128 test examples. Fit codes on support only; choose the smallest active dimension whose validation normalized MSE is at most `1e-4`; report test metrics only after that choice. No optimizer updates; task IDs are supplied.
+Development seeds 31401/31402 compared validation thresholds 1e-4, 1e-3 and 1e-2. The selected threshold is 1e-4. Before fresh access, the selection rule was clarified to use group-median dimensions, and the active operation proxy was corrected; the initial summaries are retained under `protocol_variants/`. See `PROTOCOL_AMENDMENTS.md`. Fresh seeds 31411–31413 remain locked.
 
-Controls: hard tie; adaptive PA33-style least-squares random-subspace coordinates (FP32); adaptive direct FP16 coefficient codes on the same basis; fixed-dimension SAID-8; and independent full 16D task weights. Mirror fits pair angles with four coordinate-descent sweeps on a frozen 720-point grid. Every method pays the shared predictor and full maximum basis, active-dimension metadata, codes, radii and deterministic ZIP/NPY headers. Development seeds 31401–31403; fresh seeds 31411–31413 are sealed unless all development gates pass. No hyperparameter is tunable.
+## Current development observation
 
-## Gates
+At 1e-4 both methods chose median dimensions 2/4/8/16 for the aligned groups. Adaptive direct payloads were 6,730/6,734B; adaptive Mirror payloads were 7,082/7,084B. Mirror had 32 unrelated private fallbacks per seed. Development therefore misses the byte gate, but fresh evaluation remains locked and the preregistered fresh worlds are retained to check replication.
 
-**Promising / open fresh:** in each development world, Mirror test normalized MSE ≤`1e-4`, chooses the registered minimum dimension for at least 95% of tasks, and actual bytes are ≤90% of both adaptive FP16 coefficients and adaptive SAID; per-dimension test error is within `1e-5` absolute normalized MSE of adaptive FP16 coefficients.  
-**Fail:** any development byte/quality/dimension gate fails. A simple coefficient match also fails Mirror-specific value.  
-**Not established:** replay, serialization or split-integrity verification fails.
+## U
 
-## C / U
+No fresh result is available yet. The task bank is synthetic and post-fit; this is not language-model or capacity evidence.
 
-**Strongest counter-hypothesis:** an angle is a polar encoding of two ordinary coefficients on a deliberately aligned fixed-radius orbit; a compact FP16 coefficient vector may be smaller or more accurate, and validation thresholding may select the same dimensions without Mirror. The varying-dimension task bank can therefore show allocation utility while falsifying Mirror-specific value.
+## Protocol reconciliation — separate completed aligned-only variant
 
-**Unconfirmed:** learned bases, noisy/natural tasks, gradient-trained models, learned routing, capacity at convergence, and tasks requiring directions outside the shared basis (private-state frontier).
+An independent MA-314 variant was completed on the same research branch and is retained under [`protocol_variants/aligned_coordinate_only/README.md`](protocol_variants/aligned_coordinate_only/README.md). It uses a 16D predictor, a random 16×8 basis, 48 tasks, and only nested fixed-radius aligned task functions; it has no unrelated-task private fallback. Its own preregistered development gates passed, then its distinct fresh worlds passed 3/3: exact 2/4/8 dimensions, 1,996B versus 2,220B adaptive FP16 coefficients, normalized test MSE 1.20e-6–2.09e-6. Its fit proxy was 371.6M versus 286k operations.
 
-## Results — fresh adaptive-dimension screen
+This variant does **not** replace or pool with the broader root protocol above. In the broader 160-task protocol, Mirror plus private fallback quality passed but its 7,082–7,084B payload exceeded adaptive direct's 6,730–6,734B in both development seeds, missing the registered storage gate; fresh seeds 31411–31413 therefore remain unopened. The broad result marks the private-fallback/aggregate storage boundary, while the aligned-only variant is a narrow storage/quality point. Their similarly named seeds come from different world generators and are not paired replications.
 
-### H / T / D / C / U
-
-**H:** validation-selected active Mirror dimension should reduce actual payload over adaptive random-subspace and direct coefficient controls while retaining test quality and choosing the minimum sufficient dimension.
-
-**T:** 48 tasks with balanced true dimensions 2/4/8; shared 16D predictor and full paid random 16×8 orthonormal basis; each task received 64 support, 64 validation and 128 test examples. Codes were fit on support, smallest dimension under validation normalized MSE `1e-4` was selected, and test was scored once. Development 31401–31403 passed all frozen gates before fresh 31411–31413 were run. Controls were tied, adaptive FP32 SAID, adaptive FP16 direct coefficients, fixed SAID-8 and independent full vectors. Zero gradient updates, oracle task IDs.
-
-**D: PROMISING, narrowly for this aligned synthetic storage/quality point.**
-
-**FACT:** On all three fresh seeds, Mirror selected the exact true dimension for 48/48 tasks and had maximum task normalized MSE at most `6.75e-6` (world mean `1.20e-6`–`2.09e-6`). Actual payload was **1,996B**, versus **2,220B** adaptive FP16 coefficients (10.1% fewer bytes), **2,668B** adaptive SAID, **3,308B** fixed SAID-8, and **3,320B** independent vectors. Mirror remained within the registered `1e-5` absolute normalized-error margin of adaptive coefficients, though coefficients were about 100–300× more accurate in normalized MSE. Hard tying used 310B but had mean normalized MSE 0.146–0.325. All shared predictor, full maximum basis, radii, task dimension tags, codes and archive headers were charged.
-
-Mirror's fit proxy was **371,589,120** operations versus **286,080** for adaptive coefficient least squares (~1,299×); its active inference proxy was **104.7** versus **90.7** operations/example (~15.4% higher). Median fresh CPU throughput was 3.95M examples/s Mirror and 6.46M direct coefficient, with timing sensitive to this small synthetic workload; there is no compute/runtime win. Adaptive dimension selection itself recovered the registered 2/4/8 frontier in every fresh world. Four tests passed and all 36 development/fresh result rows replayed exact metric, byte and payload hash.
-
-**INTERPRETATION:** a variable active dimension can be selected from validation and gives a useful storage point for this fixed-radius, shared-basis task family. The representation is a polar encoding of ordinary coefficient pairs, so this is a narrow Mirror-coded payload reduction, not evidence that Mirror adds function capacity or beats coefficient adaptation on compute or quality precision.
-
-**C — strongest counter-hypothesis:** target updates were deliberately generated from the same fixed-radius polar planes. Different radii, off-basis directions, learned bases, task-discovery cost, or packed coefficients could erase the byte margin. The simpler FP16 coefficients are more accurate and vastly cheaper to fit.
-
-**U:** private-state frontier outside the basis, noisy/natural task distributions, learned projections, nonlinear/deep models, learned routing, and near-convergence capacity remain untested.
-
-FACT: see `RESULTS_CORE.csv`, `DEV_RESULTS.csv`, `FRESH_RESULTS.csv`, `source/dev_gate.json`, `source/fresh_gate.json`, and `source/replay_verification.json`.  
-INTERPRETATION: dimension allocation passes; Mirror improves only the aligned payload point.  
-HYPOTHESIS: task-specific variable dimension can reduce storage when required functions occupy nested shared subspaces.  
-BOUNDARY: synthetic post-fit task bank; no capacity, language, private-state, or broad runtime claim.
-
-## Decision
-
-FACT: see `RESULTS_CORE.csv`, `FRESH_RESULTS.csv` (if opened) and `VERIFICATION.json`.  
-INTERPRETATION: separate adaptive dimension selection from the incremental value of polar Mirror codes; charge all serialized state and fit/inference work.  
-HYPOTHESIS: active intrinsic dimension may be allocated per task with a compact coordinate.  
-BOUNDARY: synthetic, post-fit, task-ID-supervised linear task bank; no capacity or language claim.
+**Reconciled scope:** PROMISING only for the completed aligned-only coordinate variant; the broader private-fallback allocation screen failed its development byte gate. Neither result establishes general capacity or natural-task transfer.
