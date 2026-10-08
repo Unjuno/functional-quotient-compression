@@ -1,9 +1,31 @@
 {
   "experiment_id": "MA-511",
   "commit": null,
-  "tests": {"command": "python -m pytest -q experiments/mirror_applications/ma-511-hierarchical-condition-behavior/tests", "passed": null, "failed": null},
-  "serialization": {"roundtrip_checked": false, "byte_exact": false},
-  "metric_replay": {"checked": false, "max_difference": null},
-  "fresh_split_integrity_checked": false,
-  "notes": ["Synthetic function-composition mechanism screen only; no LM-semantic result."]
+  "protocol_freeze_commit": "bc853bbfd42654e3bf168039c58e50c1810fe0f2",
+  "amendment_commit": "20200a74548dfe7eb7d1298b89d4acbf7feb8d99",
+  "protocol_sha256": "988d7cb72275dcb685aef72530d2f1618ce162280442a8126f844303ab408695",
+  "source_sha256": "c5b38ba81963dfea0f3f952888579a9ad51ab7f0d8fca1f240259fb673e263e0",
+  "amended_tests_sha256": "434686693fbd52cc30ed1c4cc0b8fe1824aa36ccb3228ac49fda208ff88863ee",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-511-hierarchical-condition-behavior/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "format": "uncompressed NPZ",
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "payloads_replayed": 54
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0,
+    "native_additive_pca_mirror_alias_all_conditions": true
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_seeds_accessed": [],
+  "notes": [
+    "Whole-pair holdout split manifests replay exactly; initial test-only amendment failure retained.",
+    "Synthetic activation function composition only; no LM-semantic result."
+  ]
 }
