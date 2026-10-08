@@ -302,7 +302,7 @@ Operational rule:
 
 ## Eleventh literature expansion — cross-model state, scenes, audio, generators and stitching
 
-**MA-876..935 are new UNTESTED candidates and remain behind the registered P0 queue. MA-255 is reconciled PROMISING (narrow), MA-260/261/265 are reconciled FAIL, and MA-268 is PROMISING (narrow); MA-271/272 are FAIL for Mirror-specific value; MA-273 and MA-274 are FAIL for the shared scalar-angle task/expert insertion; MA-276 is PROMISING on aligned serialized state only; MA-278 is FAIL on unaligned independent fast-factor tasks; MA-282 is next P0. Do not interrupt active experiments.
+**MA-876..935 are new UNTESTED candidates and remain behind the registered P0 queue. MA-255 is reconciled PROMISING (narrow), MA-260/261/265 are reconciled FAIL, and MA-268 is PROMISING (narrow); MA-271/272 are FAIL for Mirror-specific value; MA-273 and MA-274 are FAIL for the shared scalar-angle task/expert insertion; MA-276 is PROMISING on aligned serialized state only; MA-278 is FAIL on unaligned independent fast-factor tasks; MA-282 is PROMISING only on an aligned synthetic Monarch FFN; MA-286 is next P0. Do not interrupt active experiments.
 
 High-information P0 applications by domain:
 1. **Cross-model caches MA-876..890:** MA-876 shared ridge translator basis versus native per-pair ridge; MA-878 head-matched CacheBridge; MA-880 ordered source×target factorization; MA-881 MoT translator bank; MA-887 exact-versus-approximate boundary; MA-889 confidence fallback.
@@ -315,7 +315,7 @@ Every experiment must isolate the extra Mirror parameter `m` beyond its strong n
 
 Read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08.md`, PA236..PA265 and the selected MA registry row.
 
-**MA-255 is reconciled as a narrow PROMISING post-fit screen with a separate failed fixed-update variant; MA-260, MA-261 and MA-265 are integrated as FAIL; MA-268 is PROMISING (narrow); MA-271/272 are FAIL for Mirror-specific value. MA-273/274 are reconciled FAIL for the task/expert scalar-angle subfamily; MA-276 is PROMISING for aligned serialized bytes only, with 2,048B operator workspace; MA-278 is FAIL on unaligned independent fast-factor tasks; MA-282 is next P0.
+**MA-255 is reconciled as a narrow PROMISING post-fit screen with a separate failed fixed-update variant; MA-260, MA-261 and MA-265 are integrated as FAIL; MA-268 is PROMISING (narrow); MA-271/272 are FAIL for Mirror-specific value. MA-273/274 are reconciled FAIL for the task/expert scalar-angle subfamily; MA-276 is PROMISING for aligned serialized bytes only, with 2,048B operator workspace; MA-278 is FAIL on unaligned independent fast-factor tasks; MA-282 is PROMISING only on an aligned synthetic Monarch FFN; MA-286 is next P0.
 
 ## Twelfth research expansion — video, equivariance, spiking, physical optics, wireless and spatial audio
 
@@ -359,7 +359,7 @@ Read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_THIRTEENTH_SWEEP.
 
 **MA-1046..1095 are 50 new UNTESTED hypotheses** appended after earlier literature intakes and the original locked direct-prior queue. All comparisons study the marginal value of the extra Mirror parameter `m`; no new source-paper result is a Mirror result.
 
-**MA-255 is reconciled** (Parameter Superposition): an aligned post-fit screen is PROMISING, while a distinct fixed-update screen failed. MA-260, MA-261 and MA-265 are reconciled FAIL; MA-268 is PROMISING (narrow); MA-271/272 are FAIL for Mirror-specific value. **MA-276 is a narrow PROMISING depth-view result; current canonical next candidate: MA-278 is FAIL on unaligned task factors; current canonical next candidate: MA-282 (Monarch Mirror FFN transform). MA-275/277/279-281 remain P1 UNTESTED.
+**MA-255 is reconciled** (Parameter Superposition): an aligned post-fit screen is PROMISING, while a distinct fixed-update screen failed. MA-260, MA-261 and MA-265 are reconciled FAIL; MA-268 is PROMISING (narrow); MA-271/272 are FAIL for Mirror-specific value. **MA-276 is a narrow PROMISING depth-view result; current canonical next candidate: MA-278 is FAIL on unaligned task factors; current canonical next candidate: MA-282 is PROMISING narrowly on its aligned synthetic orbit; current canonical next candidate: MA-286 (Cheap-LoRA Mirror column-subspace views). MA-275/277/279-281 remain P1 UNTESTED.
 
 Recommended high-information P0 studies **within this new family**:
 
@@ -379,7 +379,7 @@ Read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_FOURTEENTH_SWEEP.
 
 ## Historical P0 family sequence (completed screens; not current queue)
 
-The historical A–F lists below record previously screened experiments and must not override `STATUS_BOARD.md` (MA-282 next; MA-275/277/279-281 remain P1).
+The historical A–F lists below record previously screened experiments and must not override `STATUS_BOARD.md` (MA-286 next; MA-275/277/279-281 remain P1).
 
 ### Family A — FFN / MoE / adapter
 MA-003 -> MA-005 -> MA-009 -> MA-019 -> MA-024

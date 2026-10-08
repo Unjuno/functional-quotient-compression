@@ -6,11 +6,11 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1115-row registry)
 
 - Registered candidates: **1115**
-- P0: **597** (46 completed; 551 UNTESTED)
+- P0: **597** (47 completed; 550 UNTESTED)
 - P1: **415** (12 completed; 403 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1057 UNTESTED, 32 PROMISING, 26 FAIL**
-- 58 experiment directories, complete with status/protocol/results/verification files, are indexed in this branch.
+- Current MA statuses: **1056 UNTESTED, 33 PROMISING, 26 FAIL**
+- 59 experiment directories, complete with status/protocol/results/verification files, are indexed in this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-276 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-276 is next; MA-275 remains UNTESTED (P1).
 - Thirteenth literature sweep added MA-996..1045 (50 UNTESTED; 40 P0/10 P1) and PA296..PA325. IDs MA-1000+ use four digits; consult `check_registry_integrity.py`. No new experiment results.
@@ -21,7 +21,7 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-282 — Monarch Mirror FFN transform (P0; PA24)**
+**MA-286 — Cheap-LoRA Mirror column-subspace views (P0; PA25)**
 
 MA-255 is reconciled as PROMISING only for its aligned post-fit representation screen; a distinct 1,200-update protocol variant failed at development and remains sealed on fresh worlds. See `experiments/mirror_applications/ma-255-mirror-context-superposition/RECONCILIATION.md`.
 
@@ -39,15 +39,15 @@ MA-272 is FAIL for Mirror-specific/runtime gain: the corrected audit found that 
 
 MA-273 is complete FAIL for Mirror-specific value: corrected post-fit views exactly matched ordinary scalar-times-shared-angle factorization (same 1,150B payload); an independent neutral-initialization training screen failed at development and left fresh sealed. See its reconciliation report.
 
-MA-274 is complete FAIL on a two-world fixed-update development screen: at 5,430B Mirror was 3.4% smaller than native BOFT but had worse MSE in both worlds; independent experts were much better and butterfly eager CPU throughput was 9–20x below IA3/rank-one. Fresh worlds stayed sealed. Together with MA-273, this pauses the shared scalar-angle task/expert BOFT insertion family. MA-275 remains UNTESTED (P1). MA-276 is PROMISING only for aligned serialized-state compression: 396B Mirror vs 1,193B untied (3/3 fresh), but 2,048B runtime workspace exceeds that payload and unrelated layers fail. No runtime-memory claim. MA-278 is FAIL on the unaligned task-factor screen: Mirror matched scalar control bytes at 2,525B but lost quality at both development worlds and both learning rates; native Compacter also dominated quality. Fresh worlds remained sealed. Aligned feasibility is untested. MA-282 is next P0; MA-275, MA-277, MA-279, MA-280, and MA-281 remain UNTESTED P1.
+MA-274 is complete FAIL on a two-world fixed-update development screen: at 5,430B Mirror was 3.4% smaller than native BOFT but had worse MSE in both worlds; independent experts were much better and butterfly eager CPU throughput was 9–20x below IA3/rank-one. Fresh worlds stayed sealed. Together with MA-273, this pauses the shared scalar-angle task/expert BOFT insertion family. MA-275 remains UNTESTED (P1). MA-276 is PROMISING only for aligned serialized-state compression: 396B Mirror vs 1,193B untied (3/3 fresh), but 2,048B runtime workspace exceeds that payload and unrelated layers fail. No runtime-memory claim. MA-278 is FAIL on the unaligned task-factor screen: Mirror matched scalar control bytes at 2,525B but lost quality at both development worlds and both learning rates; native Compacter also dominated quality. Fresh worlds remained sealed. Aligned feasibility is untested. MA-282 is PROMISING only for a deliberately aligned synthetic ReLU FFN orbit: exact in 3/3 at 925B vs 1,145B free-angle Monarch and 3,279B independent full. Unrelated functions collapse to hard-tie quality; view workspace is 1,024B, so no runtime-RAM claim. MA-286 is next P0; MA-275, MA-277, MA-279, MA-280, and MA-281 remain UNTESTED P1.
 
 ## Active experiment
 
-No active experiment declared. MA-255 through MA-278 are indexed. MA-282 is next; MA-275/277/279/280/281 remain UNTESTED (P1).
+No active experiment declared. MA-255 through MA-282 are indexed. MA-286 is next; MA-275/277/279/280/281 remain UNTESTED (P1).
 
 ## Verified status index
 
-- **PROMISING (32):** MA-001, MA-002, MA-003, MA-004, MA-005, MA-006, MA-007, MA-008, MA-012, MA-014, MA-015, MA-041, MA-076, MA-079, MA-111, MA-121, MA-156, MA-160, MA-171, MA-173, MA-181, MA-189, MA-241, MA-244, MA-245, MA-249, MA-250, MA-251, MA-255, MA-268, MA-276, MA-691.
+- **PROMISING (33):** MA-001, MA-002, MA-003, MA-004, MA-005, MA-006, MA-007, MA-008, MA-012, MA-014, MA-015, MA-041, MA-076, MA-079, MA-111, MA-121, MA-156, MA-160, MA-171, MA-173, MA-181, MA-189, MA-241, MA-244, MA-245, MA-249, MA-250, MA-251, MA-255, MA-268, MA-276, MA-282, MA-691.
 - **FAIL (26):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-260, MA-261, MA-265, MA-271, MA-272, MA-273, MA-274, MA-278.
 
 All per-ID evidence is retained in the local experiment directories and in `CLAIM_LEDGER.csv`. Consult [the evidence integration audit](../../docs/phase2/MIRROR_MA_EVIDENCE_INTEGRATION_2026-10-08.md) for linked reports, verifications, provenance and claim boundaries.

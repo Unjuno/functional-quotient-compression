@@ -31,7 +31,9 @@ MA-276 is **PROMISING only for aligned serialized-state compression**: the 3 fre
 
 MA-278 is **FAIL on this unaligned task-factor screen**: Mirror and scalar modulation both serialized to 2,525B, but Mirror had higher MSE in all four development world/LR pairs; native Compacter also beat Mirror. Fresh worlds stayed sealed. This does not test an aligned Compacter task family.
 
-**The next candidate is MA-282.** MA-275/277/279–281 remain P1 UNTESTED. MA-876..1115 remain appended research-intake hypotheses and must not preempt the registered P0 crossovers. Natural variation and benchmark-level runtime remain unproven; aligned synthetic PROMISING must not be described as real-world Mirror adoption.
+MA-282 is **PROMISING on a deliberately aligned synthetic Monarch FFN family**: four scalar Views reproduced exact outputs 3/3 at 925B, vs 1,145B free-angle Monarch and 3,279B independent FFNs, with 13.6M vs 10.7M examples/s. Unrelated task maps collapse to hard-tie quality; runtime workspace is 1,024B. Seven tests and all 42 fresh rows replayed exactly. No learned Transformer, language, capacity or runtime-RAM claim.
+
+**The next candidate is MA-286.** MA-275/277/279–281 remain P1 UNTESTED. MA-876..1115 remain appended research-intake hypotheses and must not preempt the registered P0 crossovers. Natural variation and benchmark-level runtime remain unproven; aligned synthetic PROMISING must not be described as real-world Mirror adoption.
 
 ## MA-241 — layer-specific Mirror views over tied experts
 

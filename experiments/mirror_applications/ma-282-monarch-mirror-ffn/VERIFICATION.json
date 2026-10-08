@@ -1,0 +1,44 @@
+{
+  "experiment_id": "MA-282",
+  "source_commit": "3b9d828",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-282-monarch-mirror-ffn/tests -v",
+    "passed": 7,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "maximum_reconstruction_abs_difference": 0.0,
+    "actual_payload_sha256_recorded_per_method_world": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0,
+    "rows_replayed": 42
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_seeds": [
+    28241,
+    28242,
+    28243
+  ],
+  "invalidated_fresh_seeds": [
+    28211,
+    28212,
+    28213,
+    28221,
+    28222,
+    28223,
+    28231,
+    28232,
+    28233
+  ],
+  "notes": [
+    "NumPy CPU fixed-function screen; no GPU used.",
+    "Upper control exactly reconstructs aligned and unrelated teachers.",
+    "Three instrumentation corrections were amended before final fresh data.",
+    "Integrated branch reran all 7 tests, metric replay, and serializer roundtrip successfully.",
+    "No tuning used final fresh data."
+  ]
+}
