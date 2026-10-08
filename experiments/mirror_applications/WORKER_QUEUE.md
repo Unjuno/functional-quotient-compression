@@ -166,7 +166,7 @@ High-information P0:
 17. MA-488 — shared/private dictionary + Mirror coefficients (**FAIL for Mirror-specific attribution:** at p=.125 private residuals give exact quality at 33.6% fewer bytes than full int8; at p=.25 the bank exceeds int8, and native shared/private exactly aliases; fresh sealed). MA-494 error-correcting expert IDs are next P0; MA-492 is already a registered FAIL.
 18. MA-492 — quantized packet-plan latent (**FAIL**; discrete code matched same-bit VQ, did not beat unconditional categorical control; see registry/result report).
 19. MA-494 — error-correcting Mirror expert IDs (**FAIL for Mirror-specific attribution:** Hamming(7,4) cuts p=.05 errors to 4.5% at +15B over raw ID, but exactly implements native ECOC; fresh sealed). MA-498 is next P0.
-20. MA-498 — learned code-distance regularization (next untested P0; PA95)
+20. MA-498 — learned code-distance regularization (ACTIVE SCREENING; frozen protocol; PA95)
 
 ## Seventh research-expansion queue — representation-space functional coordinates
 
