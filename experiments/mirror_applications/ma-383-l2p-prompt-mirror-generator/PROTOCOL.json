@@ -1,0 +1,62 @@
+{
+  "experiment_id": "MA-383",
+  "title": "L2P prompt pool with Mirror prompt codes",
+  "status": "FROZEN_DEVELOPMENT",
+  "base_commit": "0739bf3",
+  "evidence_lane": "MECHANISM/STORAGE/RUNTIME",
+  "hypothesis": "For task families whose useful prompts lie near a shared two-vector orbit, a shared prompt basis plus one angle per retrieved task preserves prompt-conditioned classification quality with fewer serialized bytes than an explicit prompt bank, while any Mirror-specific claim also requires beating the direct two-coefficient basis control.",
+  "prior_art_refs": ["PA56"],
+  "physical_object": "one shared rank-two prompt basis and one frozen feature/readout pair",
+  "mirror_coordinate": "one persistent angle m_j per retrieved task; prompt_j = cos(m_j) u + sin(m_j) v",
+  "logical_multiplicity": "four retrieved task-specific prompts",
+  "model": {
+    "tasks": 4,
+    "key_dim": 8,
+    "feature_dim": 8,
+    "prompt_dim": 8,
+    "train_examples_per_task": 2048,
+    "validation_examples_per_task": 512,
+    "test_examples_per_task": 1024,
+    "batch_size": 128,
+    "optimizer_updates": 600,
+    "optimizer": "Adam",
+    "learning_rate": 0.003,
+    "development_seeds": [38301, 38302],
+    "fresh_seeds": [38311, 38312, 38313],
+    "data": "Synthetic continual binary classification. The input contains a noisy task-key vector and an independent Gaussian feature vector. A shared frozen feature map is perturbed by the selected prompt before a shared frozen readout. Teacher decision directions for each world are sampled on a two-dimensional Givens rotation orbit; train/validation/test examples are disjoint. Test-time task identity is not given: all conditions use cosine top-1 retrieval over the same serialized learned key prototypes."
+  },
+  "controls": [
+    "independent explicit trainable prompt per task",
+    "one hard-shared prompt",
+    "shared rank-two basis with two direct coefficients per task",
+    "two-layer key-conditioned prompt generator",
+    "shared rank-two basis with one Givens angle per task (Mirror)"
+  ],
+  "development_gate_before_fresh": "Both development seeds: independent prompt accuracy >=0.80; Mirror accuracy within 0.02 absolute of independent; Mirror serialized bytes <=0.60x independent and <=1.10x direct rank-two coefficient control; top-1 retrieval accuracy >=0.98; Mirror exceeds hard-shared prompt accuracy by >=0.05 absolute. All methods use equal examples/updates. Otherwise fresh remains sealed.",
+  "success_gate": "All three fresh seeds meet quality, retrieval, and byte gates; Mirror beats the matched direct rank-two coefficient control on quality-per-byte or retrieval robustness; deterministic payload reload/replay is exact and runtime/compute overhead is reported.",
+  "failure_gate": "Either development seed misses any registered quality/storage/retrieval threshold, or the direct coefficient control matches Mirror quality at comparable or lower bytes. Fresh seeds remain sealed.",
+  "storage": {
+    "authority": "actual deterministic ZIP/NPY FP16 inference payload after reload",
+    "paid_objects": [
+      "all independent prompt vectors or shared prompt bases",
+      "all Mirror angles or direct coefficients",
+      "all router key prototypes and retrieval metadata",
+      "all hypernetwork parameters",
+      "frozen feature map and readout parameters",
+      "indices and archive headers"
+    ]
+  },
+  "compute": {
+    "report_examples_and_updates": true,
+    "report_train_wall_clock": true,
+    "report_active_macs": true,
+    "report_router_and_prompt_generation_ops": true,
+    "report_inference_throughput": true
+  },
+  "boundaries": [
+    "synthetic aligned prompt-family mechanism screen only",
+    "no natural image, continual-learning, or L2P benchmark result is established",
+    "retrieved task prompts are not independent capacity merely because four codes exist",
+    "development seeds alone may select implementation details; fresh remains sealed unless all development gates pass"
+  ]
+}
