@@ -3,11 +3,11 @@
 - Status: FAIL
 - Branch: `research/ma-265-vera-mirror-scaling-20261008`
 - Base commit: `f7f76de193063950d28b7834f337840b1e86f0ce`
-- Last verified commit: pending
+- Last verified commit: 9e34422
 - Development complete: yes
 - Fresh/audit opened: yes
-- Results committed: pending
-- Verification committed: pending
+- Results committed: yes
+- Verification committed: yes
 
 ## Next action
 

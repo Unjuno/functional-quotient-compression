@@ -1,8 +1,32 @@
 {
- "experiment_id":"MA-265","commit":"pending",
- "tests":{"command":"python experiments/mirror_applications/ma-265-vera-mirror-scaling/tests/test_roundtrip.py","passed":1,"failed":0},
- "serialization":{"roundtrip_checked":true,"byte_exact":true,"method":"actual uncompressed NPZ payloads; packed Mirror coordinate reconstructs base code and task angles exactly"},
- "metric_replay":{"checked":true,"max_difference":0.0},
- "fresh_split_integrity_checked":true,"fresh_seeds":[109,229,313,421],
- "notes":["Development seeds 19 and 37; fresh seeds locked in PROTOCOL before fresh evaluation.","The aligned scale teacher is generated from the selected Mirror rotation family.","VeRA shared basis A/B is charged in every VeRA and Mirror payload.","No optimizer updates; post-fit mechanism screen.","No LM, fixed-byte training, or runtime claim."]
+  "experiment_id": "MA-265",
+  "commit": "9e34422",
+  "tests": {
+    "command": "python experiments/mirror_applications/ma-265-vera-mirror-scaling/tests/test_roundtrip.py",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "method": "actual uncompressed NPZ payloads; packed Mirror coordinate reconstructs base code and task angles exactly"
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_seeds": [
+    109,
+    229,
+    313,
+    421
+  ],
+  "notes": [
+    "Development seeds 19 and 37; fresh seeds locked in PROTOCOL before fresh evaluation.",
+    "The aligned scale teacher is generated from the selected Mirror rotation family.",
+    "VeRA shared basis A/B is charged in every VeRA and Mirror payload.",
+    "No optimizer updates; post-fit mechanism screen.",
+    "No LM, fixed-byte training, or runtime claim."
+  ]
 }
