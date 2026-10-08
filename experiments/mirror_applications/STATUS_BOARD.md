@@ -12,32 +12,24 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 - Current MA statuses: **1108 UNTESTED, 29 PROMISING, 18 FAIL**
 - 47 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
-- Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
+- Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 was a historical queue recommendation; randomized draws now determine execution.
 - Thirteenth literature sweep added MA-996..1045 (50 UNTESTED; 40 P0/10 P1) and PA296..PA325. IDs MA-1000+ use four digits; consult `check_registry_integrity.py`. No new experiment results.
-- Fourteenth sweep added **MA-1046..1095** (50 UNTESTED; 40 P0 / 10 P1) and **PA326..PA350**. Focus: time-series foundation forecasting, recommender embedding tables, and Earth-observation multi-sensor networks. No new experiment results; MA-255 remains next.
-- Fifteenth direct-prior sweep added **MA-1096..1115** (20 UNTESTED, 16 P0 / 4 P1) and **PA351..371**. A gauge-invariant LoRA audit harness is present; its unit tests are **not** trained-model evidence. MA-255 remains next.
+- Fourteenth sweep added **MA-1046..1095** (50 UNTESTED; 40 P0 / 10 P1) and **PA326..PA350**. Focus: time-series foundation forecasting, recommender embedding tables, and Earth-observation multi-sensor networks. No new experiment results; MA-255 was a historical queue recommendation; randomized draws now determine execution.
+- Fifteenth direct-prior sweep added **MA-1096..1115** (20 UNTESTED, 16 P0 / 4 P1) and **PA351..371**. A gauge-invariant LoRA audit harness is present; its unit tests are **not** trained-model evidence. MA-255 was a historical queue recommendation; randomized draws now determine execution.
 - Research support PA372..381 and a **separate 48-row / two-seed real-digit shifted-task code pilot** have been added. Structured 8-value Mirror m improved average CE versus 6-value diagonal code but FAILED the preregistered full quality/bytes/runtime gate. This is an **exploratory negative pilot**, not an MA-1096/1099/1115 completed experiment. Existing 29 PROMISING / 18 FAIL and MA-255 next are unchanged. See [function-space review](../../docs/phase2/MIRROR_FUNCTION_SPACE_FALSIFICATION_2026-10-08.md) and [pilot results](research_intake/natural_digit_function_20261008/RESULTS.md).
-- Sixteenth literature sweep added **MA-1116..1155** (40 UNTESTED; 33 P0 / 7 P1) and **PA382..413** (32 primary sources): knowledge graph relation operators, camera ISP/lens optics, robot dynamics and room neural acoustic fields. No new MA measurements. See [sixteenth research notes](../../docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_SIXTEENTH_SWEEP.md) and [40 per-ID test blueprints](../../docs/phase2/MIRROR_APPLICATION_EXPERIMENT_BLUEPRINTS_MA1116_1155.md); next remains MA-255.
+- Sixteenth literature sweep added **MA-1116..1155** (40 UNTESTED; 33 P0 / 7 P1) and **PA382..413** (32 primary sources): knowledge graph relation operators, camera ISP/lens optics, robot dynamics and room neural acoustic fields. No new MA measurements. See [sixteenth research notes](../../docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_SIXTEENTH_SWEEP.md) and [40 per-ID test blueprints](../../docs/phase2/MIRROR_APPLICATION_EXPERIMENT_BLUEPRINTS_MA1116_1155.md); MA-255 was a historical queue recommendation; randomized draws now determine execution.
 - PROMISING is **not** ADOPTED. Treat reports with strict-gate misses or exploratory protocol deviations at their documented scope.
 - SRM/TM and prior Phase I results are not MA statuses.
 
-## Next candidate
+## Next candidate selection
 
-**MA-255 — Mirror context superposition for task models (P0; PA16)**
+Use one fresh uniform draw per experiment from the latest worker-ready baseline P0/UNTESTED rows. Exclude IDs with a live remote `research/ma-*` branch or an MA experiment directory in that baseline. Record the baseline, ordered pool and hash, seed, and index before development/audit access. Historical queues are prior-art maps only.
 
-Reason:
-- all previously locked MA-241/244/245/247–251/253 and subsequent old-chain P0 screens have completed;
-- the original P0 cross-over queue is exhausted among checked candidates;
-- MA-255 is the first untested P0 in the earlier high-information literature cross-over queue;
-- direct Parameter Superposition prior art gives a strong nearest control for insertion of the extra Mirror parameter `m`.
-
-Required controls: native Parameter Superposition, naive/shared task-code basis, matched byte-near low-rank or VeRA-style modulation, independent-model upper reference where practical. Do not claim the superposition concept itself as a Mirror invention.
-
-If blocked by a documented reproducibility or harness issue, record it and resume at MA-260 (BatchEnsemble), then MA-261/265/268 in the registered literature priority sequence. Do not jump to P1/novelty-picked topics before P0.
+Draw 9 selected **MA-971 — LightPro physical coupler bank with sparse Mirror task code** from 559 candidates (baseline `c935a903daca5c7d1d48aa50d05b5bd50f239cba`, seed `e918da4745e41f6ef1a45b0b5c30e6e14723272bf810c43f2cd624a13b971da4`, index 415). It is **NOT ESTABLISHED**: the environment has no photonic hardware or calibrated device model to evaluate physical loss, drift, switching time, or energy. The candidate remains UNTESTED in the registry. Blocker and draw evidence: `ma-971-lightpro-mirror/`.
 
 ## Active experiment
 
-No active experiment was declared on either inspected baseline/status chain at reconciliation. Before claiming MA-255, check live research/ma-* branches again; this statement is not a realtime worker lock.
+No experiment is running. Draw 9 is blocked before implementation by missing photonic hardware. Resume only when physical hardware or a calibrated model and optical evidence are available; otherwise report this explicit stop condition.
 
 ## Verified status index
 

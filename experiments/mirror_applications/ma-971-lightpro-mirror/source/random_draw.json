@@ -1,0 +1,30 @@
+{
+  "draw": 9,
+  "baseline_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
+  "eligible_rule": "P0 and UNTESTED rows in baseline; exclude any MA ID with a live origin/research/ma-* branch or MA experiment directory in baseline",
+  "remote_ma_branches_count": 112,
+  "remote_ma_branch_ids_count": 85,
+  "baseline_ma_experiment_dirs_count": 47,
+  "eligible_pool_size": 559,
+  "pool_sha256": "a0dc6aebbd57d11ffd307169fec814a0273ff3c988741a2369c4200d55d06a47",
+  "pool_hash_construction": "SHA-256 of ordered pool rows serialized as comma-joined registry fields followed by newline; field order is IDEA_REGISTRY.csv header",
+  "seed_hex": "e918da4745e41f6ef1a45b0b5c30e6e14723272bf810c43f2cd624a13b971da4",
+  "index_zero_based": 415,
+  "selected_row": {
+    "id": "MA-971",
+    "family": "Photonic / physical Mirror",
+    "proposal": "LightPro physical coupler bank with sparse Mirror task code",
+    "shared_object": "one static phase-change photonic linear processor topology",
+    "mirror_coordinate": "task code m sets few coupler ratios",
+    "logical_multiplicity": "many logical optical linear maps from one physical circuit",
+    "cheapest_control": "LightPro full programmable couplers",
+    "first_metric": "accuracy / programmed bits / switch energy / footprint",
+    "priority": "P0",
+    "status": "UNTESTED",
+    "prior_art_level": "DIRECT",
+    "prior_art_refs": "PA286",
+    "mirror_delta": "Minimize programmed devices per task beyond native photonic full-matrix programming.",
+    "worker_note": "Use calibrated optical loss and nonlinear thermal control; don't assume updates are free."
+  },
+  "draw_method": "Uniform index = integer(seed bytes, big-endian) modulo pool size"
+}
