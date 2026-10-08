@@ -1,0 +1,57 @@
+{
+  "experiment_id": "MA-1138",
+  "status": "NOT_ESTABLISHED_PRE_PROTOCOL",
+  "draw_replay": "verified by pool SHA/index selection",
+  "baseline_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
+  "protocol_frozen": false,
+  "dataset_or_scores_accessed": false,
+  "audit_accessed": false,
+  "dependency_availability": {
+    "mujoco": false,
+    "gymnasium": false,
+    "pybullet": false,
+    "dm_control": false,
+    "brax": false,
+    "isaaclab": false,
+    "isaacgym": false,
+    "legged_gym": false,
+    "rsl_rl": false
+  },
+  "torch_version": "2.6.0+cpu",
+  "cuda_available": false,
+  "required_controls_available": false,
+  "reason": "No physical robot or installed simulator stack; CoRMA/RMA implementations, weights and contact-task assets absent.",
+  "scientific_claim": "none; registry remains UNTESTED",
+  "tests": {
+    "run": false,
+    "reason": "No experiment implementation was possible without the mandatory native controls and environment."
+  },
+  "selection_replay_command": "python experiments/mirror_applications/ma-1138-corma-contact-terrain-view/source/verify_draw.py",
+  "selection_replay_output": {
+    "pool_sha256": "PASS",
+    "uniform_draw_replay": "PASS",
+    "selected_id": "MA-1138",
+    "pool_size": 556
+  },
+  "prior_art_read": [
+    "PA401 RMA",
+    "PA402 CoRMA",
+    "docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_SIXTEENTH_SWEEP.md",
+    "MA-1138 row in docs/phase2/MIRROR_APPLICATION_EXPERIMENT_BLUEPRINTS_MA1116_1155.md"
+  ],
+  "environment_checks": {
+    "simulator_modules_checked": [
+      "mujoco",
+      "gymnasium",
+      "pybullet",
+      "dm_control",
+      "brax",
+      "isaaclab",
+      "isaacgym",
+      "legged_gym",
+      "rsl_rl"
+    ],
+    "robot_device_nodes_checked": "/dev contains no robot device; only generic pseudo-devices were present.",
+    "repository_search": "No CoRMA/RMA implementation, checkpoint, or contact-task assets found."
+  }
+}
