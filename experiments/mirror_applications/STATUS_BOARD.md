@@ -67,7 +67,7 @@ Integration branch: `research/mirror-application-current-evidence-20261008`; can
 
 **MA-442 FAIL:** in fresh aligned 8D linear tasks, Mirror NRMSE was 0.5948/2,430B; shared no-adaptation was 0.5888/2,161B; full adaptation 0.7937/2,348B; LoRA 0.6923/2,476B. Mirror loses to shared quality/bytes and misses the registered byte gate. Full MAML control was weak, limiting generalization. **Next: MA-443.**
 
-**MA-443 FAIL:** support-encoder Mirror NRMSE 0.2746 matched full adaptation 0.2759 and beat zero-init Mirror 0.3889, but N=20 amortized bytes were 2,742B vs full 2,348B; query wall was ~3.3x. LEO was more accurate (0.1452) at 2,602B. Encoder helps initialization, but registered storage/compute gate fails. **Next: MA-444.**
+**MA-443 FAIL (A1 disjoint task split):** support-encoder Mirror NRMSE 0.2851 matched full adaptation 0.2758 and beat zero-init Mirror 0.3932, but N=20 amortized bytes were 2,764B vs full 2,435B; query wall was ~3.2x. LEO was more accurate (0.1491) at 2,657B. Encoder helps initialization, but registered storage/compute gate fails. Initial overlapping-task results are excluded. **Next: MA-444.**
 
 MA-366 is reconciled as FAIL: direct pair coefficients match Mirror outputs and bytes, and PA02 factorization is smaller. The runner accidentally generated the registered fresh IDs before the gate; those rows are excluded and fresh integrity is invalid. MA-367 and MA-368 are also recorded FAIL. MA-369 is completed FAIL on its dedicated branch; next executable P0 is MA-371.
 

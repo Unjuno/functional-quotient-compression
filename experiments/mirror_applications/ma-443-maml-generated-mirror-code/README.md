@@ -34,11 +34,11 @@ An audit after the initial run found meta-training task IDs 0..127 overlapped de
 
 ## Results and decision
 
-**D — FAIL under the registered storage/compute gate.** At five refinement steps, fresh mean NRMSE: encoder-init Mirror 0.2746, zero-init Mirror 0.3889, full-vector adaptation 0.2759, and LEO-style latent 0.1452. Encoder-init Mirror beat zero-init in all three worlds and matched full adaptation within 1.10x. However, its actual task payload was 2,566B and shared encoder checkpoint 3,520B; at N=20 amortized total was 2,742B versus full adaptation 2,348B and LEO 2,602B. Query/adaptation wall was 0.001388s vs 0.000420s for full adaptation (about 3.3x).
+**D — FAIL under the registered storage/compute gate.** On the corrected disjoint fresh tasks, five-step NRMSE means: encoder-init Mirror 0.2851, zero-init Mirror 0.3932, full-vector adaptation 0.2758, and LEO-style latent 0.1491. Encoder-init Mirror improved over zero-init in all three worlds and matched full adaptation within 1.10x. Its task payload was 2,589B plus a 3,500B shared encoder; at N=20 the amortized total was 2,764B, versus 2,435B full adaptation and 2,657B LEO. Query/adaptation wall was 0.001362s vs 0.000430s full adaptation (about 3.2x).
 
-**FACT:** the support encoder gave a large improvement over zero-init Mirror and reached near-full-MAML quality. It did not lower amortized bytes or query cost against the stronger controls. Encoder-only NRMSE was 0.3848; refinement was needed for most of the gain. LEO was more accurate but also used more bytes than full adaptation.
+**FACT:** support encoding substantially improved zero-init Mirror quality and reached near-full-vector quality on disjoint tasks. It did not lower amortized bytes or query cost against the stronger controls. LEO was more accurate at lower N=20 amortized bytes than encoder-init Mirror. The original overlapping-task fresh results were invalidated by amendment A1 and are not used.
 
-**INTERPRETATION:** a learned initializer is useful for placing `m` near the task orbit, but its persistent encoder and refinement compute erase the intended compression/adaptation advantage in this screen. This does not support a Mirror-specific compression claim.
+**INTERPRETATION:** a learned initializer can place `m` near the task orbit, but encoder cost and code refinement erase a storage/compute advantage here. This does not support a Mirror-specific compression claim.
 
 **H:** tested whether amortized support-set code initialization plus refinement improves over zero-init Mirror and matches full adaptation at lower amortized cost.
 
