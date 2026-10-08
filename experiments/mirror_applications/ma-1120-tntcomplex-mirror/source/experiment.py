@@ -12,7 +12,8 @@ DEVICE = torch.device('cpu')
 class TemporalScorer(nn.Module):
     def __init__(self, method: str, n_entities=24, n_relations=6, n_times=12, rank=8, view_rank=2):
         super().__init__(); self.method=method; self.n_entities=n_entities; self.n_relations=n_relations; self.n_times=n_times; self.rank=rank; self.view_rank=view_rank
-        self.entity=nn.Embedding(n_entities,rank); self.left=nn.Embedding(n_relations,rank); self.right=nn.Embedding(n_relations,rank)
+        self.entity=nn.Embedding(n_entities,rank)
+        if method=='native': self.left=nn.Embedding(n_relations,rank)
         self.register_buffer('time_features', torch.tensor(np.stack([np.cos(2*np.pi*np.arange(n_times)/8), np.sin(2*np.pi*np.arange(n_times)/8)],1), dtype=torch.float32))
         if method=='mirror':
             self.basis=nn.Parameter(torch.randn(2,rank)*.03); self.code=nn.Embedding(n_relations,2)
@@ -72,16 +73,21 @@ def payload(model,path):
     return os.path.getsize(path),hashlib.sha256(open(path,'rb').read()).hexdigest()
 
 def ranking(model,triples,all_candidates=24):
-    # all-entity ranking among generated positive and negative sampled candidates; deterministic MRR.
+    # Filter other known positives in this evaluation slice before ranking each target.
+    positives={}
+    for h,r,t,tail,label in triples:
+        if label==1: positives.setdefault((int(h),int(r),int(t)),set()).add(int(tail))
     ranks=[]
     with torch.no_grad():
       for h,r,t,tail,label in triples:
         if label!=1: continue
         h1=torch.tensor([h]);r1=torch.tensor([r]);t1=torch.tensor([t]);scores=model.score(h1,r1,t1,True)[0]
+        for other in positives[(int(h),int(r),int(t))]:
+            if other!=int(tail): scores[other]=-torch.inf
         rank=1+int((scores>scores[tail]).sum());ranks.append(rank)
     return float(np.mean(1/np.asarray(ranks))),float(np.mean(np.asarray(ranks)==1))
 
-def train_one(method,seed,aligned,updates=120,rank=8,view_rank=2):
+def train_one(method,seed,aligned,updates=120,rank=8,view_rank=2,eval_times=None):
     torch.manual_seed(seed); np.random.seed(seed)
     e,op,trip=make_world(seed,aligned)
     model=TemporalScorer(method,rank=rank,view_rank=view_rank)
@@ -99,10 +105,11 @@ def train_one(method,seed,aligned,updates=120,rank=8,view_rank=2):
         loss=nn.functional.cross_entropy(logits,tail)
         opt.zero_grad();loss.backward();opt.step();seen+=len(batch)
     train_s=time.perf_counter()-started
-    mrr,h1=ranking(model,dev)
+    eval_data=dev if eval_times is None else dev[np.isin(dev[:,2],eval_times)]
+    mrr,h1=ranking(model,eval_data)
     infer0=time.perf_counter()
-    for row in dev[:min(300,len(dev))]: model.score(torch.tensor([row[0]]),torch.tensor([row[1]]),torch.tensor([row[2]]),True)
-    infer=(time.perf_counter()-infer0)/min(300,len(dev))*1e6
+    for row in eval_data[:min(300,len(eval_data))]: model.score(torch.tensor([row[0]]),torch.tensor([row[1]]),torch.tensor([row[2]]),True)
+    infer=(time.perf_counter()-infer0)/min(300,len(eval_data))*1e6
     tmp=ROOT/'source'/f'.payload-{method}-{seed}.pt'; size,sha=payload(model,tmp); tmp.unlink()
     return model,mrr,h1,size,sha,seen,train_s,infer,updates
 
@@ -114,8 +121,8 @@ def main():
       for aligned in ([True] if args.mode=='dev' else [True,False]):
        world=f'{seed}-'+('aligned' if aligned else 'independent')
        for method in ['native','tucker','lowrank','mirror','independent']:
-        model,mrr,h1,size,sha,seen,sec,inf,updates=train_one(method,seed,aligned,rank=8,view_rank=2)
-        row={'world':world,'method':method,'filtered_mrr':mrr,'hits1':h1,'serialized_bytes':size,'train_examples':seen,'updates':updates,'active_macs_per_score':3*8+8,'train_seconds':sec,'infer_us_per_score':inf,'notes':'payload_sha256='+sha}
+        model,mrr,h1,size,sha,seen,sec,inf,updates=train_one(method,seed,aligned,rank=8,view_rank=2,eval_times=[10,11] if args.mode=='audit' else None)
+        row={'world':world,'method':method,'filtered_mrr':mrr,'hits1':h1,'serialized_bytes':size,'train_examples':seen,'updates':updates,'active_macs_per_score':(218 if method in ('mirror','tucker') else (200 if method in ('lowrank','independent') else 208)),'train_seconds':sec,'infer_us_per_score':inf,'notes':'payload_sha256='+sha}
         rows.append(row); reports[world,method]=model
         print(world,method,f'MRR={mrr:.5f}',f'bytes={size}',f'sec={sec:.2f}',flush=True)
     out=ROOT/'source'/f'{args.mode}_results.json';out.write_text(json.dumps(rows,indent=2)+'\n')

@@ -1,9 +1,27 @@
 {
   "experiment_id": "MA-1120",
-  "protocol_sha256": "",
-  "draw_record_sha256": "",
-  "results_sha256": "",
-  "audit_replay": "pending",
-  "serialized_payload_replay": "pending",
-  "checks": []
+  "draw_id": "Draw33",
+  "audit_replay": "passed: fixed seeds produced identical filtered MRR, Hits@1 and serialized bytes in the saved replay log",
+  "serialized_payload_replay": "passed: safetensors round-trip size/hash checked in tests",
+  "protocol_sha256": "0af951703e1db8f4c58e3f3879d7c54eaa3a9db5f3b1d1cc03881ed30ac1493d",
+  "draw_record_sha256": "dbdb488ec5f7069d4defa60db366a533f79ed55757138871d5aa4db9416144c7",
+  "results_sha256": "4b504b6dc92497a2e78aeebb68fa3062b909bb1639c564324648ae513c4552f5",
+  "core_csv_sha256": "9d9b602654bb72d165843057e1361b7ce00a6655b5b4b7eeb7e27d8b9a95f05f",
+  "replay_log_sha256": "c671547165ddb2748dbffe6614bd3cc344147e21d64036163f9619a59694f32a",
+  "audit_seeds": [
+    112101,
+    112102,
+    112103
+  ],
+  "audit_worlds": 6,
+  "audit_rows": 30,
+  "tests": "6 passed",
+  "registry_integrity": "pending final check",
+  "checks": [
+    "audit timestamp filter restricted to 10..11",
+    "filtered positive-tail ranking",
+    "Mirror equals TuckER exactly in 3/3 aligned audit worlds",
+    "Mirror payload 1264 B; native payload 1280 B",
+    "independent timestamp-specific operators are diagnostic only, not future-time upper control"
+  ]
 }

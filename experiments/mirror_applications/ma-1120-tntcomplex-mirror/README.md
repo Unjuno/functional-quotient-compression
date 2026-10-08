@@ -2,30 +2,30 @@
 
 ## H — hypothesis
 
-A shared temporal relation basis with compact per-relation Mirror coordinates may retain chronological relation-time link quality on a low-dimensional periodic operator family while using fewer serialized bytes than native temporal factors. Independently generated relation-time operators are the private-state boundary.
+A shared temporal relation basis with compact per-relation Mirror coordinates could preserve future relation-time links on a low-dimensional periodic family with substantially fewer inference bytes than native temporal factors, while independently sampled operators would require private state.
 
-## T — planned test
+## T — execution
 
-A deterministic synthetic temporal knowledge graph; chronological train/development/audit times; native TNTComplEx-style factors, TuckER/low-rank basis, simple coefficient control, and independent operators. Draw33 froze the audit seeds and gates in `PROTOCOL.json` before audit access.
+CPU synthetic temporal graph, 24 entities, 6 relations, rank 8; training timestamps 0–7, development 8–9, fresh audit 10–11. Fresh worlds: 112101, 112102, 112103. Each method received 120 Adam updates and 11,520 sampled training examples. The same fixed sinusoidal 8-period time features were used by every method. Reported metrics use filtered entity ranking over both known positive tails for each `(head, relation, time)`.
 
-## D — status
+Controls: native periodic relation modulation; a TuckER-style relation coefficient × time feature × shared basis; per-relation low-rank time maps; and independent relation-time operators as a diagnostic. The last is not a valid future-time upper control because its timestamp-specific parameters for audit times are untrained.
 
-SCREENING. No result yet.
+Actual inference state was serialized as safetensors. Parameters unused by the scoring path were removed before the final audit. Earlier metric and payload runs are retained under `source/` as provenance; final interpretation uses `source/audit_results.json`.
+
+## D — FAIL
+
+On aligned fresh worlds, Mirror and TuckER produced identical filtered MRR and Hits@1 in all 3 seeds. Mean filtered MRR was 0.21743 for both, versus 0.19239 for native; this is a shared low-rank/Tucker benefit, not a Mirror-specific result. The Mirror payload was 1,264 B versus 1,280 B native (1.25% smaller), far above the preregistered `<=60%` storage gate. The Mirror and TuckER payloads were identical in size. Compute was similar: mean training wall time 0.055 s Mirror, 0.061 s TuckER, 0.058 s native; eager CPU all-tail inference was about 34.9, 35.0, and 48.5 microseconds per example respectively. Tiny synthetic timings are not deployment claims.
 
 ## C — strongest counter-hypothesis
 
-A per-relation temporal factor or Tucker coefficient is already the same compact degree of freedom, so Mirror may only rename/reparameterize a native temporal tensor model.
+The Mirror parameterization is algebraically equivalent to an ordinary TuckER-style low-rank relation-time factorization. The exact equality across all aligned audit seeds supports this counter-hypothesis. The observed quality gain over native comes from the shared low-rank basis, not Mirror coordinates.
 
 ## U — unconfirmed
 
-Whether Mirror improves the quality-by-actual-bytes frontier, its runtime cost, and whether any effect generalizes beyond aligned synthetic factors.
+No benchmark or natural temporal knowledge graph was tested. The low filtered MRR values indicate weak absolute task performance. Independent operators could not serve as a valid unseen-time upper bound under the chronological split. No capacity claim is supported; all methods used a fixed update budget.
 
 ## Fact / Interpretation / Hypothesis
 
-- Fact: PA388 describes TNTComplEx temporal tensor factorization; PA384 describes TuckER shared tensor cores.
-- Interpretation: these are strong native controls and reduce the novelty claim to incremental parameterization and measured deployment tradeoffs.
-- Hypothesis: a compact Mirror address may factorize relation x time operators more efficiently on a shared periodic structure.
-
-## Protocol amendment before audit
-
-Development diagnostics showed that learned timestamp embeddings cannot evaluate unseen future timestamps. Before opening any fresh seeds, protocol amendment 1 replaced those embeddings with the same fixed 8-period sinusoidal timestamp features in every method. Fresh seeds remain 112101–112103. The Mirror and TuckER controls have equal parameter counts and the same separable function family; this makes the TuckER comparison a direct check for Mirror-specific benefit.
+- Fact: Mirror and TuckER matched exactly in filtered MRR, Hits@1, and bytes on each aligned fresh world; Mirror saved 16 B versus native.
+- Interpretation: the chosen Mirror insertion duplicates a standard factorized temporal tensor model and does not establish Mirror-specific gain or the storage target.
+- Hypothesis: stronger results may require a different temporal address construction and a valid native extrapolator control; this experiment gives no evidence for that direction.

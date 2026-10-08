@@ -1,3 +1,5 @@
+> **User-directed selection override (2026-10-08):** The worker must draw uniformly from eligible P0 + UNTESTED IDs, excluding active local/remote MA branches and existing experiment directories. Record seed/pool/exclusions/digest/index. Do not follow the sequential queue for candidate selection.
+
 # Worker queue
 
 The queue is derived from `IDEA_REGISTRY.csv`. The registry is authoritative.

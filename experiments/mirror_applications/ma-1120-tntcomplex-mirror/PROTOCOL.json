@@ -1,7 +1,7 @@
 {
   "experiment_id": "MA-1120",
   "title": "TNTComplEx relation x time Mirror factor bank",
-  "status": "SCREENING",
+  "status": "FAIL",
   "evidence_lane": "MECHANISM",
   "base_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
   "draw_id": "Draw33",
@@ -17,7 +17,7 @@
     "native periodic temporal relation modulation with fixed shared time features",
     "TuckER-style relation coefficient x fixed time feature x shared operator basis",
     "per-relation low-rank time-to-operator maps",
-    "independent relation-time operators as upper control"
+    "independent relation-time operators (diagnostic only; not a valid unseen-future upper control because future timestamp rows are untrained)"
   ],
   "task": "binary temporal link ranking on generated entity-relation-time triples; report filtered MRR and Hits@1",
   "development": {
@@ -52,12 +52,15 @@
     "report_isolated_wall_clock": true
   },
   "success_gate": "On at least 2/3 fresh aligned worlds, Mirror filtered MRR >= 0.95 * native periodic temporal baseline and >= 0.95 * byte-near Tucker/low-rank control while actual payload <= 0.60 * native TNTComplEx-style periodic baseline; report independent-operator boundary and compute. This supports only an aligned synthetic mechanism result.",
-  "failure_gate": "FAIL if the quality condition fails on at least 2/3 fresh aligned worlds, Mirror is not better in quality-by-bytes than the strongest non-Mirror control, or serialized payload exceeds 60% of native periodic baseline. PROMISING only if a directionally positive result misses a gate narrowly.",
+  "failure_gate": "Observed: Mirror and equally sized TuckER have identical aligned-world MRR on all 3 seeds (same function family and matched state), so no Mirror-specific gain; serialized Mirror payload is >60% native payload. The preregistered storage gate is not met. Independent operators are not a valid future-time upper control because their future timestamp rows receive no training; report as unavailable/diagnostic only.",
   "boundaries": [
     "synthetic graph only; no benchmark reproduction",
     "fixed-update learning efficiency is not capacity evidence",
     "logical relation-time combinations do not imply independent capacity",
     "no audit-driven tuning"
   ],
-  "amendment_1": "Before fresh audit: correct time extrapolation validity. All methods now receive the same fixed 8-period sinusoidal timestamp features; train timestamps 0..7 and evaluate unseen future timestamps 8..11. This prevents an embedding-only failure from deciding the temporal generalization question. Amendment based only on development diagnostics; audit seeds remain unopened."
+  "amendment_1": "Before fresh audit: correct time extrapolation validity. All methods now receive the same fixed 8-period sinusoidal timestamp features; train timestamps 0..7 and evaluate unseen future timestamps 8..11. This prevents an embedding-only failure from deciding the temporal generalization question. Amendment based only on development diagnostics; audit seeds remain unopened.",
+  "amendment_2": "After initial audit run and before result interpretation, noticed audit script aggregated timestamps 8..11 although preregistered fresh window is 10..11. No model or hyperparameter choices were made from these values. Reran the exact fixed models/seeds/updates with evaluation restricted to 10..11; initial aggregate is retained as source/initial_audit_deviation.json for provenance.",
+  "amendment_3": "Corrected the metric implementation to filtered MRR by removing the other known positive tail for the same (head, relation, timestamp) from each candidate ranking. This metric bug was found during protocol audit before interpreting final results. Reran the exact fixed fresh seeds and training configuration; earlier runs remain archived.",
+  "amendment_4": "Removed non-forward unused relation parameters discovered by final payload audit. These tensors were not read by any scoring path but were present in earlier serialized states. Final audit payloads now include only forward-reachable learned tensors and deterministic time features. Same fresh seeds and update schedule rerun; prior files retained."
 }
