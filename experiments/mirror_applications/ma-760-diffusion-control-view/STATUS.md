@@ -3,12 +3,12 @@
 - Status: FAIL (development gate)
 - Branch: `research/ma-760-diffusion-control-view-20261008`
 - Base commit: `407ca7e2047326d1e4b753e55e05c4730f26f32b`
-- Last verified commit: pending
+- Last verified commit: ac2e2eef1a0730096257d00fd28fda30cd919e2c
 - Development complete: yes (180 held-out rows, 2 seeds)
 - Fresh/audit opened: no
-- Results committed: no
-- Verification committed: no
-- Registry row updated: no
+- Results committed: yes
+- Verification committed: yes
+- Registry row updated: yes
 
 ## Decision
 
