@@ -1,0 +1,1 @@
+Invalid partial execution: evaluator raised TypeError when checking dictionary keys on the ordinary shared Tensor state. PathNet payload was written before the failure. No metrics were produced or used for tuning. Preserved under invalid_preflight_45701_01; excluded from RESULTS_CORE.
