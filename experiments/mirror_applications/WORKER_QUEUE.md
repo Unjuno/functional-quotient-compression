@@ -12,15 +12,30 @@ Use:
 - `docs/phase2/MIRROR_PARAMETER_INTEGRATION_DOCTRINE.md`
 - `docs/phase2/MIRROR_PARAMETER_INTEGRATION_MATRIX.md`
 
-## Selection rule
+## Selection rule — randomized worker policy
 
-Pick the first candidate satisfying all of:
-1. status is UNTESTED;
-2. highest available priority;
-3. no other active experiment directory already claims the ID;
-4. its closest prior-art controls can be implemented in the current harness.
+The user directed random candidate selection across concurrent workers. Registry/family order is not execution order. Before every draw, read live registry/status, exclude completed IDs, paused families, blockers and existing MA branches, save sorted eligible P0/UNTESTED IDs, then use `secrets.randbelow(len(pool))`. Record pool size/index/hash and branch conflict. Preserve both branches if a competing worker claims the selected ID; do not silently substitute a neighboring ID.
 
-Do not skip to a visually interesting P1/P2 idea while an executable P0 remains, unless the skipped candidate has a recorded blocker.
+### Recorded worker-session draws
+
+| Draw | Pool | Index | Selected result |
+|---|---:|---:|---|
+| 1 | 6 | 2 | MA-282 |
+| 2 | 5 | 1 | MA-278; competing FAIL branch reconciled selectively |
+| 3 | 4 | 3 | MA-299; FAIL; SETA shared-angle family paused after MA-297/299 |
+| 4 | 3 | 0 | MA-274; competing FAIL branch reconciled; BOFT task/expert angle family paused |
+| 5 | 2 | 0 | MA-286; FAIL for Mirror-specific byte margin |
+| 6 | 456 | 26 | MA-330 |
+| 7 | 456 | 133 | MA-539 |
+| 8 | 455 | 367 | MA-881 |
+| 9 | 454 | 205 | MA-655 |
+| 10 | 453 | 345 | MA-853 |
+| 11 | 452 | 316 | MA-818 |
+| 12 | 509 | 252 | MA-643; blocked by missing GaLore runtime/hardware; registry remains UNTESTED |
+| 13 | 508 | 500 | MA-990; measured HRTF screen FAIL; separate branch |
+| 14 | 537 | 535 | MA-998; blocked by absent native equivariant force-field stack; registry remains UNTESTED |
+
+Family queues below are context only. Check live status and branches before every draw.
 
 ## Literature-derived cross-over queue
 
@@ -315,11 +330,11 @@ Every experiment must isolate the extra Mirror parameter `m` beyond its strong n
 
 Read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08.md`, PA236..PA265 and the selected MA registry row.
 
-**MA-255 remains the canonical next worker candidate.** This queue must not preempt it or supersede its frozen protocol.
+Random draws, not this literature list, determine the next candidate.
 
 ## Twelfth research expansion — video, equivariance, spiking, physical optics, wireless and spatial audio
 
-**MA-936..995 are UNTESTED research candidates** appended after the already queued crossovers and prior MA-876..935 intake. No active or frozen run may be interrupted to work on these. **Canonical next remains MA-255**.
+MA-936..995 are registered research candidates; individual statuses are authoritative. Eligibility follows random selection.
 
 Recommended representative P0 order *within this new family only*:
 

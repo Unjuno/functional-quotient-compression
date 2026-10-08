@@ -1,0 +1,32 @@
+{
+  "experiment_id": "MA-998",
+  "title": "Element × local-environment MACE Mirror coordinates",
+  "status": "NOT_ESTABLISHED_BLOCKED",
+  "base_commit": "16807a7",
+  "hypothesis": "A factorized element and local-environment Mirror coordinate can share part of an equivariant atomistic potential while preserving energy/force quality on held-out combinations.",
+  "prior_art_refs": ["PA297", "PA298"],
+  "selection": {
+    "draw_number": 14,
+    "method": "secrets.randbelow over sorted eligible live P0/UNTESTED IDs after branch and blocker exclusions",
+    "pool_size": 537,
+    "draw_index_zero_based": 535,
+    "selected_id": "MA-998",
+    "pool_ids_sha256": "42428dd74a753969fd15be2da612d2ecf4f9dc1a7d9c22a5ac62b5f716cdb3f6",
+    "pool_file_sha256": "9bfc545e4665fd9962ef695d17d8ed3d79f089252f227fea9775d6d9f157e1ae",
+    "snapshot": "source/selection_pool.csv",
+    "branch_conflict_found": false
+  },
+  "environment": {
+    "numpy": true,
+    "scipy": true,
+    "pytorch": false,
+    "mace": false,
+    "e3nn": false,
+    "ase": false,
+    "cuda_or_gpu_visible": false
+  },
+  "fresh": {"locked_before_access": false, "not_run_reason": "Native equivariant model/control stack unavailable; no scientific or fresh data run."},
+  "methods_required_when_resumed": ["native_frozen_mace_mp", "native_finetuned_mace_mp", "native_nequip_or_equivariant_control", "factorized_mirror_element_environment", "ordinary_factorized_latent_or_embedding", "independent_element_heads"],
+  "required_audits": ["energy_mae", "force_mae", "rotational_force_equivariance_error", "energy_force_conservative_consistency", "actual_serialized_inference_bytes", "training_and_inference_compute"],
+  "boundaries": ["No experiment or fresh outcomes were run.", "Do not change registry status from UNTESTED.", "Do not replace atomistic energy/force evaluation with a scalar toy task."]
+}
