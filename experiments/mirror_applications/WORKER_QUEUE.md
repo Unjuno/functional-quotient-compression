@@ -1,6 +1,6 @@
 # Worker queue
 
-**Current operational pointer (2026-10-08): MA-418/419.** MA-417 is completed FAIL: Mirror codebooks missed continuous-latent and matched-K quality controls, with fewer observed unique assignments than nominal K. Continue with compositional function codes.
+**Current operational pointer (2026-10-08): MA-419.** MA-418 is completed FAIL: factorized Mirror missed latent/FiLM reconstruction quality on held-out object/style pairs. Continue with periodic activation modulation.
 
 The queue is derived from `IDEA_REGISTRY.csv`. The registry is authoritative.
 
@@ -150,7 +150,7 @@ High-information P0:
 6. MA-411 — canonical transform + sparse Mirror refinement (completed PROMISING for aligned shared-support operators)
 7. MA-413 — factorized concept Mirror coordinates (completed FAIL; missed >=5pp margin over FiLM/direct table)
 8. MA-416 — shared decoder + Mirror function codes (completed FAIL); MA-417 — Mirror codebook (completed FAIL)
-9. MA-418/419 — compositional/modulated neural-function codes — current candidates
+9. MA-418 — compositional function codes (completed FAIL); MA-419 — modulated periodic activations — current candidate
 9. MA-418/419 — compositional/modulated neural-function codes
 10. MA-424/425 — continuous-depth Mirror dynamics
 11. MA-427 — DEQ conditioned fixed-point map
