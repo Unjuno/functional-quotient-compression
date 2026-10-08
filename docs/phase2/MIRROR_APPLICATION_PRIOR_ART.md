@@ -3194,3 +3194,192 @@ Produces general global space-time sensor-fused embedding fields.
 
 **Mirror implication:** Mirror task/region codes must improve index storage and spatial holdout downstream quality.
 
+## PA351 — Compress then Serve: multi-LoRA shared basis
+
+**Compress then Serve: Serving Thousands of LoRA Adapters with Little Overhead**  
+https://proceedings.mlr.press/v267/gabrielsson25a.html
+
+ICML 2025 jointly compresses many independently trained LoRA adapters into shared bases and per-adapter scaling matrices; clusters less-related adapters and evaluates large multi-adapter serving workloads.
+
+**Mirror implication:** This is a DIRECT precedent for one physical low-rank basis + small logical adapter codes. Mirror m needs a marginal quality/byte/throughput gain beyond this method, including clustering and optimized serving.
+
+## PA352 — Compress then Merge in common LoRA subspace
+
+**Compress then Merge: From Multiple LoRAs into One Low-Rank Adapter**  
+https://proceedings.mlr.press/v306/he26h.html
+
+ICML 2026 projects multiple adapters into common left/right low-rank subspaces with small core coordinates, then merges in core space at guaranteed output rank.
+
+**Mirror implication:** A common U C_t V^T code is already known; distinguish per-task retrieval from producing one merged model and compare the strongest relevant CtM operation.
+
+## PA353 — EigenLoRAx reused adapter principal subspace
+
+**EigenLoRAx: Recycling Adapters to Find Principal Subspaces for Resource-Efficient Adaptation and Inference**  
+https://arxiv.org/abs/2502.04700
+
+Fits principal subspaces of existing pretrained adapters and learns small coefficients for new tasks, augmenting basis if coverage is insufficient.
+
+**Mirror implication:** Direct baseline for naturally trained LoRA-bank coordinate reuse and unseen task induction; mirror must beat principal coefficients and orthogonal/private expansion.
+
+## PA354 — VB-LoRA shared vector bank
+
+**VB-LoRA: Extreme Parameter Efficient Fine-Tuning with Vector Banks**  
+https://proceedings.neurips.cc/paper_files/paper/2024/hash/1e0d38c676d5855bcfab7f6d29d20ad9-Abstract-Conference.html
+
+Shares a bank of vectors to compactly parameterize low-rank adapter weights and specialized adaptation.
+
+**Mirror implication:** Strong shared-vector parameter-efficient baseline; charge vector bank cost and task-selection/code metadata.
+
+## PA355 — MetaTT global TT adapters
+
+**MetaTT: A Global Tensor-Train Adapter for Parameter-Efficient Fine-Tuning**  
+https://arxiv.org/abs/2506.09105
+
+Uses a global tensor-train adapter factorized across layer, matrix type and optionally head/task dimensions; includes rank-adaptive optimization.
+
+**Mirror implication:** Factorized m across task×layer×matrix already has a global TT analogue. Mirror must beat TT core compression, optimizer storage and end-to-end NLL/runtime.
+
+## PA356 — Stable pretrained spectral basis across tasks
+
+**Pretraining Induces a Reusable Spectral Basis for Downstream Task Adaptation**  
+https://arxiv.org/abs/2605.07302
+
+Reports stability of leading singular vectors of pretrained matrices across fine-tuned vision/language models; tunes spectral coefficients with small parameter budgets.
+
+**Mirror implication:** Pretrained W stability is not proof that task DELTAS share a low-rank orbit. Measure both independently and include the cost of computing/storing U,V.
+
+## PA357 — LoRA B-space sharing and interference
+
+**Crowded in B-Space: Calibrating Shared Directions for LoRA Merging**  
+https://arxiv.org/abs/2604.16826
+
+Finds output-side LoRA factor B directions may be shared across tasks more than A, and proposes Pico output-direction calibration for merging.
+
+**Mirror implication:** Test shared-left, shared-right and shared-both candidate bases. Raw B factor comparisons are gauge-dependent; use canonicalized projectors and holdout task quality.
+
+## PA358 — GLoRA gauge-aware federated subspaces
+
+**Beyond Factor Aggregation: Gauge-Aware Low-Rank Server Representations for Federated LoRA**  
+https://arxiv.org/abs/2605.06733
+
+Shows raw low-rank factor aggregation depends on basis gauge and proposes projector-aligned consensus subspace plus low-rank rank-compatible clients.
+
+**Mirror implication:** Gauge-invariant projector/control is mandatory. Invariance under B->BG, A->G^-1 A is a basic correctness requirement for an LoRA-orbit audit.
+
+## PA359 — Learning on LoRAs and GL symmetry
+
+**Learning on LoRAs: GL-Equivariant Processing of Low-Rank Weight Spaces for Large Finetuned Models**  
+https://arxiv.org/abs/2410.04207
+
+Processes large LoRA collections with low-rank decomposition symmetry-aware invariant/canonical features, including natural diffusion and language LoRAs.
+
+**Mirror implication:** Provides natural adapter-bank testing and canonicalization controls; do not learn spurious m based on arbitrary internal factor coordinates.
+
+## PA360 — W2T canonical LoRA weight tokenization
+
+**W2T: LoRA Weights Already Know What They Can Do**  
+https://arxiv.org/abs/2603.15990
+
+Canonicalizes LoRA parameterizations via QR/SVD before learning representations of adapter function/performance from weights.
+
+**Mirror implication:** QR/SVD canonicalization is a direct prerequisite for robust adapter-distance and task family discovery; raw factor retrieval can be spurious.
+
+## PA361 — Share evolving LoRA subspace
+
+**Shared LoRA Subspaces for almost Strict Continual Learning**  
+https://arxiv.org/abs/2602.06043
+
+Builds and updates a common low-rank subspace across continual downstream tasks rather than maintaining many separate adapters.
+
+**Mirror implication:** Shared evolving subspaces and retention are native controls; measure online basis drift, prior-task quality and writable/optimizer state as m is added.
+
+## PA362 — LoDA shared and private adaptation
+
+**Task-Driven Subspace Decomposition for Knowledge Sharing and Isolation in LoRA-based Continual Learning**  
+https://arxiv.org/abs/2603.00191
+
+Separates task-general and task-specific LoRA subspaces by projection energy and uses a recalibration for shared directions.
+
+**Mirror implication:** Direct shared/private frontier control; demonstrate where cheap m replaces task-specific directions without catastrophic interference.
+
+## PA363 — Zhyper task conditioned LoRA generator
+
+**Zhyper: Factorized Hypernetworks for Conditioned LLM Fine-Tuning**  
+https://arxiv.org/abs/2510.19733
+
+Generates conditioned LoRA weights from textual context using a factorized hypernetwork, with explicit parameter-efficiency objectives.
+
+**Mirror implication:** Dynamic m conditioned on task text is not conceptually unique; include native Zhyper generator and its compute/state costs.
+
+## PA364 — LRAgent low-rank multi-LoRA KV sharing
+
+**LRAgent: Efficient KV Cache Sharing for Multi-LoRA LLM Agents**  
+https://proceedings.mlr.press/v306/jeon26b.html
+
+ICML 2026 decomposes multi-LoRA KV state into shared base and compact adapter-dependent terms, using low-rank cache sharing and Flash-LoRA-Attention.
+
+**Mirror implication:** Extremely direct prior for shared physical cache + small adapter state. Mirror must prove additional benefit beyond LRAgent's fused materialization-free low-rank attention.
+
+## PA365 — PReCache base cache and low-rank correction
+
+**PReCache: Efficient KV Cache Sharing for Multi-LoRA Agents via Low-Rank Precomputation and Neutral Reconstruction**  
+https://arxiv.org/abs/2609.34054
+
+Proposes PreLRShared and ReBaseShared for training-free shared-base KV with low-rank adapter caches and base-state reconstruction.
+
+**Mirror implication:** Direct current baseline for multi-agent cache switching and prefix reuse. Check temporal provenance, target NLL, LR-state bytes, precompute and reconstruction overhead.
+
+## PA366 — LoRDBA low-bit adapters
+
+**Signs Beat Floats: Low-Rank Double-Binary Adaptation for On-Device Fine-Tuning**  
+https://arxiv.org/abs/2605.24058
+
+Encodes LoRA factors using binary sign carriers plus small magnitude/channel scale vectors to reduce unmerged adapter footprint.
+
+**Mirror implication:** Lower-byte sign plus scales is a cheap direct control; Mirror code must beat bit-packed binary factors, not float16 LoRA only.
+
+## PA367 — LoRA-RITE invariant optimization
+
+**LoRA Done RITE: Robust Invariant Transformation Equilibration for LoRA Optimization**  
+https://arxiv.org/abs/2410.20625
+
+Introduces transformation/gauge-invariant low-rank optimizer preconditioning for task adaptation.
+
+**Mirror implication:** Even the optimizer trajectory can change under gauge reparameterization. Code discovery, alignment and online update must be tested invariantly.
+
+## PA368 — HyperLoader task layer hypernetwork
+
+**HyperLoader: Integrating Hypernetwork-Based LoRA and Adapter Layers into Multi-Task Transformers for Sequence Labelling**  
+https://arxiv.org/abs/2407.01411
+
+Conditions a common hypernetwork on task, transformer layer and internal adapter slot to generate task-specific parameter-efficient operators.
+
+**Mirror implication:** Task×layer×matrix physical operator generation is a native hypernetwork prior; compare factorized m against HyperLoader generator cost and quality.
+
+## PA369 — TC-LoRA clustered CP task delta bank
+
+**Tensorized Clustered LoRA Merging for Multi-Task Interference**  
+https://arxiv.org/abs/2508.03999
+
+Clusters training examples and jointly CP-decomposes LoRA task banks to disentangle shared and private factors and mitigate merging interference.
+
+**Mirror implication:** Clustered tensor decomposition is a strong existing physical shared/private model of learned adapter deltas; measure held-out tasks and byte/rank Pareto.
+
+## PA370 — ThanoRA task heterogeneity subspace
+
+**ThanoRA: Task Heterogeneity-Aware Multi-Task Low-Rank Adaptation**  
+https://arxiv.org/abs/2505.18640
+
+Allocates task-specific low-rank subspace dimensions by task heterogeneity while preserving diversity and limiting cross-task interference.
+
+**Mirror implication:** A flat small m for all tasks may fail; benchmark heterogeneity-aware variable rank and private residual allocation against ThanoRA.
+
+## PA371 — TT-LoRA MoE sparse adapter specialists
+
+**TT-LoRA MoE: Unifying Parameter-Efficient Fine-Tuning and Sparse Mixture-of-Experts**  
+https://arxiv.org/abs/2504.21190
+
+Uses independently trained tensorized LoRA specialists with sparse routing and frozen per-expert updates to reduce shared multi-task complexity.
+
+**Mirror implication:** Native sparse TT-LoRA expert routing is a strong non-Mirror baseline for logical expert multiplication. Count router and all frozen expert state.
+
