@@ -1,1 +1,37 @@
-{"experiment_id":"MA-443","protocol_commit":null,"tests":{"passed":0,"failed":0},"serialization":{"roundtrip_checked":false,"byte_exact":false,"payload_rows":0},"metric_replay":{"checked":false},"fresh_split_integrity_checked":false,"fresh_worlds":[],"notes":[]}
+{
+  "experiment_id": "MA-443",
+  "protocol_commit": "027c608",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-443-maml-generated-mirror-code/tests -v",
+    "passed": 2,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "fresh_task_payloads": 1200,
+    "encoder_checkpoints": 27,
+    "payload_hashes_checked": true,
+    "actual_serialized_bytes_authoritative": true,
+    "encoder_amortization_checked": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "tolerance": 1e-08,
+    "notes": [
+      "3,600 fresh step/task/method rows replay from exact task payloads.",
+      "Encoder checkpoints are charged once and amortized at N=1/20/100.",
+      "Mirror encoder beats zero-init quality but misses storage and compute gates."
+    ]
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_worlds": [
+    44310,
+    44311,
+    44312
+  ],
+  "notes": [
+    "Aligned synthetic linear task only.",
+    "No natural task/neural network transfer evidence."
+  ]
+}

@@ -7,9 +7,9 @@ Integration branch: `research/mirror-application-current-evidence-20261008`; can
 
 - Registered candidates: **1155**
 - P0: **630** (128 completed; 502 UNTESTED)
-- P1: **422** (16 completed; 406 UNTESTED)
+- P1: **422** (17 completed; 405 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1011 UNTESTED, 44 PROMISING, 100 FAIL**
+- Current MA statuses: **1010 UNTESTED, 44 PROMISING, 101 FAIL**
 - 48 experiment directories, complete with status/protocol/results/verification files, are represented in the current evidence set.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-268 is next.
@@ -67,6 +67,8 @@ Integration branch: `research/mirror-application-current-evidence-20261008`; can
 
 **MA-442 FAIL:** in fresh aligned 8D linear tasks, Mirror NRMSE was 0.5948/2,430B; shared no-adaptation was 0.5888/2,161B; full adaptation 0.7937/2,348B; LoRA 0.6923/2,476B. Mirror loses to shared quality/bytes and misses the registered byte gate. Full MAML control was weak, limiting generalization. **Next: MA-443.**
 
+**MA-443 FAIL:** support-encoder Mirror NRMSE 0.2746 matched full adaptation 0.2759 and beat zero-init Mirror 0.3889, but N=20 amortized bytes were 2,742B vs full 2,348B; query wall was ~3.3x. LEO was more accurate (0.1452) at 2,602B. Encoder helps initialization, but registered storage/compute gate fails. **Next: MA-444.**
+
 MA-366 is reconciled as FAIL: direct pair coefficients match Mirror outputs and bytes, and PA02 factorization is smaller. The runner accidentally generated the registered fresh IDs before the gate; those rows are excluded and fresh integrity is invalid. MA-367 and MA-368 are also recorded FAIL. MA-369 is completed FAIL on its dedicated branch; next executable P0 is MA-371.
 
 **MA-371 — MatFormer granularity Mirror views (P0; PA53)**
@@ -95,7 +97,7 @@ MA-327 FAIL: ordinary rank-2 coefficient products match Mirror exactly and both 
 
 ## Active experiment
 
-MA-434 is completed FAIL and committed on its dedicated branch. MA-436 is PROMISING only for synthetic quality/storage (Mirror 2,529B vs independent 3,045B, but 192 vs 128 MAC/token and 1.56× measured inference time). MA-437 failed its strict byte gate; MA-438 is narrowly PROMISING for a synthetic S4 timescale quality/storage Pareto point (10.1% fewer actual bytes than independent, but missed <=60% gate). MA-439 failed both independent quality and byte gates; MA-440 failed retention and byte gates; MA-441 also failed storage/drift gates despite 100% hard recall. MA-442 failed the Mirror-specific adaptation/storage gate; next is MA-443.
+MA-434 is completed FAIL and committed on its dedicated branch. MA-436 is PROMISING only for synthetic quality/storage (Mirror 2,529B vs independent 3,045B, but 192 vs 128 MAC/token and 1.56× measured inference time). MA-437 failed its strict byte gate; MA-438 is narrowly PROMISING for a synthetic S4 timescale quality/storage Pareto point (10.1% fewer actual bytes than independent, but missed <=60% gate). MA-439 failed both independent quality and byte gates; MA-440 failed retention and byte gates; MA-441 also failed storage/drift gates despite 100% hard recall. MA-442 failed the Mirror-specific adaptation/storage gate; MA-443 also failed amortized storage/compute despite improving over zero-init Mirror. Next is MA-444.
 
 ## Verified status index
 
