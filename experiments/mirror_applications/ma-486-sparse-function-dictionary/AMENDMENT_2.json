@@ -1,0 +1,7 @@
+{
+  "amendment_id": "AMENDMENT_2",
+  "experiment_id": "MA-486",
+  "date": "2026-10-08",
+  "reason": "The first complete development run computed distinct-code uniqueness over all 192 functions but divided by the 64 heldout count, producing values up to 3.0. The protocol calls for heldout uniqueness.",
+  "scope": "Accounting-only correction: compute distinct sparse index/value tuples on heldout rows only. Task, OMP, payload serialization, quality and storage gates are unchanged. Both original complete runs are retained under runs/pre_amendment_uniqueness_dev_*. Rerun the same frozen development seeds; fresh remains sealed."
+}

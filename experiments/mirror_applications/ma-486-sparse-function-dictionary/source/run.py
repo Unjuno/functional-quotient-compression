@@ -50,16 +50,16 @@ def serialize(method,s):
  if method=='independent':a={'function_matrices':s['matrices'].numpy()}
  elif method=='dense_float':a={'shared_atoms':s['atoms'].numpy(),'dense_codes':s['codes'].numpy()}
  elif method=='dense_int8':a={'shared_atoms':s['atoms'].numpy(),'codes_int8':s['q'].numpy(),'scale':s['scale'].numpy()}
- elif method.endswith('float'):a={'shared_atoms':s['atoms'].numpy(),'sparse_indices':s['indices'].numpy(),'sparse_values':s['values'].numpy()}
- else:a={'shared_atoms':s['atoms'].numpy(),'sparse_indices':s['indices'].numpy(),'sparse_values_int8':s['q'].numpy(),'scale':s['scale'].numpy()}
+ elif method.endswith('float'):a={'shared_atoms':s['atoms'].numpy(),'sparse_indices':s['indices'].to(torch.uint8).numpy(),'sparse_values':s['values'].numpy()}
+ else:a={'shared_atoms':s['atoms'].numpy(),'sparse_indices':s['indices'].to(torch.uint8).numpy(),'sparse_values_int8':s['q'].numpy(),'scale':s['scale'].numpy()}
  return pack(a,{'format':'MA486-sparse-function-dictionary-v1','method_family':'independent' if method=='independent' else ('dense' if method.startswith('dense') else 'omp-sparse'),'functions':N,'dim':D,'dictionary_atoms':K,'nnz_per_function':S})
 
 def evaluate(method,w):
  start=time.perf_counter();s,encodewall,encops=fit(w,method);fitwall=time.perf_counter()-start;start=time.perf_counter();mat=reconstruct(method,s);decodewall=time.perf_counter()-start;start=time.perf_counter();pred=torch.stack([w['queries'][i]@mat[i].T for i in range(N)]);querywall=time.perf_counter()-start
- rmse=float(torch.sqrt(torch.mean((pred[TRAIN:]-w['outputs'][TRAIN:])**2)));raw=serialize(method,s);dense=method.startswith('dense');sparse=method.endswith('float') or method.endswith('int8') and method.startswith(('mirror_','native_'))
+ rmse=float(torch.sqrt(torch.mean((pred[TRAIN:]-w['outputs'][TRAIN:])**2)));raw=serialize(method,s);dense=method.startswith('dense');sparse=method.startswith(('mirror_sparse','native_omp'))
  if sparse:
   vals=s['values'] if method.endswith('float') else s['q'].float()
-  uniq=int(torch.unique(torch.round(torch.cat([s['indices'].float(),vals],dim=1)*1e5),dim=0).shape[0]);decodeops=N*S*D*D
+  uniq=int(torch.unique(torch.round(torch.cat([s['indices'][TRAIN:].float(),vals[TRAIN:]],dim=1)*1e5),dim=0).shape[0]);decodeops=N*S*D*D
  else:uniq=N-TRAIN;decodeops=N*K*D*D if method!='independent' else 0
  queryops=(N-TRAIN)*Q*D*D
  m={'heldout_function_rmse':rmse,'distinct_sparse_code_fraction':uniq/(N-TRAIN),'serialized_payload_bytes':len(raw),'payload_sha256':hashlib.sha256(raw).hexdigest(),'optimizer_updates':0,'examples_seen':N*Q,'fit_wall_s':fitwall,'omp_encode_wall_s':encodewall,'decode_wall_s':decodewall,'query_wall_s':querywall,'omp_encode_ops_proxy':encops,'shared_decode_ops_proxy':decodeops,'query_ops_proxy':queryops,'active_compute_proxy':encops+decodeops+queryops}
