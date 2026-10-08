@@ -302,7 +302,7 @@ Operational rule:
 
 ## Eleventh literature expansion — cross-model state, scenes, audio, generators and stitching
 
-**MA-876..935 remain UNTESTED behind registered P0 work. Narrow PROMISING: MA-255/268/276/282. FAIL in documented scope: MA-260/261/265/271/272/273/274/278/286/288/292. Current next candidate: MA-296 (orthogonalized task-vector superposition).**
+**MA-876..935 remain UNTESTED behind registered P0 work. Narrow PROMISING: MA-255/268/276/282. FAIL in documented scope: MA-260/261/265/271/272/273/274/278/286/288/292/296/297. Current next candidate: MA-299 (SETA Split-on-Share Mirror allocation).**
 
 High-information P0 applications by domain:
 1. **Cross-model caches MA-876..890:** MA-876 shared ridge translator basis versus native per-pair ridge; MA-878 head-matched CacheBridge; MA-880 ordered source×target factorization; MA-881 MoT translator bank; MA-887 exact-versus-approximate boundary; MA-889 confidence fallback.
@@ -379,7 +379,7 @@ Read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_FOURTEENTH_SWEEP.
 
 ## Historical P0 family sequence (completed screens; not current queue)
 
-The historical A–F lists below record previously screened experiments and must not override `STATUS_BOARD.md` (MA-297 next).
+The historical A–F lists below record previously screened experiments and must not override `STATUS_BOARD.md` (MA-299 next).
 
 ### Family A — FFN / MoE / adapter
 MA-003 -> MA-005 -> MA-009 -> MA-019 -> MA-024
