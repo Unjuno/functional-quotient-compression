@@ -4,10 +4,10 @@
 - Branch: `research/ma-446-learned-optimizer-mirror-20261008`
 - Base commit: `c935a903daca5c7d1d48aa50d05b5bd50f239cba`
 - Protocol frozen: `699061f0684d22ced8985974938ff0f836c8d3ee` with pre-run schedule amendment `26ff1d90425cdeb3902882ad5c4b3682f85310e5`
-- Development evidence and replay: verified, pending evidence commit
+- Last verified commit: `8484a373f62991307a7bfa30d8d6d4e7b98cfd73`
 - Development complete: yes (two worlds, 64 held-out tasks)
 - Fresh/audit opened: no
-- Registry row: FAIL pending bookkeeping commit
+- Registry row: FAIL
 - Tests: 5 passed, 0 failed
 - Actual serialized payloads: 28 checked; exact prediction replay
 

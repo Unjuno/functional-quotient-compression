@@ -16,7 +16,7 @@ Use:
 
 Use one fresh uniform draw per experiment from the latest worker-ready baseline P0/UNTESTED rows. Exclude IDs with live remote `research/ma-*` branches or MA experiment directories in that baseline. Record baseline commit, ordered eligible pool and its hash, cryptographic seed, pool size, index and selected row before development/audit. Do not reserve IDs. Numeric and family queues below are prior-art maps only.
 
-Draw 10 selected MA-446; its protocol is frozen before development. Full pool/hash/seed/index: `ma-446-learned-optimizer-mirror/source/random_draw.json`.
+Draw 10 selected MA-446 and completed FAIL at the development gate. Full pool/hash/seed/index and checked result: `ma-446-learned-optimizer-mirror/`. Refresh baseline and live branches before the next random draw.
 
 ## Literature-derived cross-over queue
 
@@ -335,7 +335,7 @@ Do not reclassify any of the already verified 47 MA results based on these untes
 
 ## Thirteenth research expansion — atomistic, MRI, quantum, visual memory and ANN
 
-**MA-996..1045 are new UNTESTED hypotheses**, appended to the research intake. They do NOT replace or preempt **MA-255** as the next worker candidate.
+**MA-996..1045 are new UNTESTED hypotheses** added to the research intake. Random draws govern candidate selection.
 
 Representative P0 screens within this research intake:
 1. **MA-997 / MA-1000** — Mirror material adaptation against native equivariant-sparse MACE and conservative energy-gradient audit. Test force equivariance and long-run stability rather than energy-only fit.
@@ -375,7 +375,7 @@ Read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_FOURTEENTH_SWEEP.
 
 ## Fifteenth research intake — gauge-invariant natural LoRA, shared serving and KV-cache state
 
-**New entries MA-1096..1115 are UNTESTED** and form a supplemental natural-adapter diagnostic and serving research family. They do **not** preempt the locked **MA-255 Parameter Superposition** experiment or any currently frozen worker run. Read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_FIFTEENTH_SWEEP.md` and PA351..371 when selecting one.
+**New entries MA-1096..1115 are UNTESTED** and form a supplemental natural-adapter diagnostic and serving research family. Random draws govern future candidate selection; do not interrupt frozen worker runs. Read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_FIFTEENTH_SWEEP.md` and PA351..371 when selecting one.
 
 **High-information scientific screens within this intake:**
 
@@ -408,7 +408,7 @@ MA-255 was a historical recommendation; randomized draws govern selection. Do no
 
 ## Sixteenth research intake — KG relation operators, cameras, robotics and acoustic rooms
 
-**MA-1116..1155 are 40 newly registered UNTESTED candidates**, appended after the existing MA-255 direct-prior sequence and all already accepted intake. This is an experiment *planning* list, not an instruction to preempt an existing worker or change any locked fresh split.
+**MA-1116..1155 are 40 newly registered UNTESTED candidates**, added to the existing candidate registry. This is an experiment planning list; random draws govern execution and frozen splits remain untouched.
 
 Recommended P0 order **within this new family only**:
 1. **KG relations MA1116..1125:** MA-1123 naturally fitted RotatE/PairRE/TuckER relation orbit versus private bank, then MA-1121 KrausKGE relation-rank and MA-1120 native time-relation factors. Native relation phase/core, CompGCN and 5starE are direct prior art; compare filtered link-prediction MRR, link ranking and full physical entity+relation bytes. Exact scoring gauge relabeling does not add independent task information.
@@ -424,7 +424,7 @@ MA-255 is a historical recommendation; random draws govern selection. The regist
 
 ## Historical P0 family sequence (completed screens; not current queue)
 
-The historical A–F lists below record previously screened experiments and must not override `STATUS_BOARD.md` (MA-255 next).
+The historical A–F lists below record prior-art and candidate maps; random draws in `STATUS_BOARD.md` govern execution.
 
 ### Family A — FFN / MoE / adapter
 MA-003 -> MA-005 -> MA-009 -> MA-019 -> MA-024
