@@ -94,4 +94,4 @@ KG relation rotations (RotatE, TuckER, QuatE, PairRE), EXIF/device-aware ISPs (P
 
 ## MA-359 — FAIL for Mirror-specific ACDC value
 
-Across two oracle aligned ACDC bank worlds, shared ACDC+Mirror used 2,077–2,079B at zero held-out nMSE versus independent ACDC 11,131–11,137B and dense about 240KB. The direct coefficient control was only 8B larger. ACDC and Mirror had equal 12.58M FFT MAC proxy. Fresh seeds remained sealed. Ten rows replayed exactly; three tests passed. Oracle basis only; no learned ACDC result. Dedicated branch: `research/ma-359-acdc-mirror-transform-20261008`. Next P0: MA-360.
+Across two oracle aligned ACDC bank worlds, shared ACDC+Mirror used 2,077–2,079B at zero held-out nMSE versus independent ACDC 11,131–11,137B and dense about 240KB. The direct coefficient control was only 8B larger. ACDC and Mirror had equal 12.58M FFT MAC proxy. Fresh seeds remained sealed. Ten rows replayed exactly; three tests passed. Oracle basis only; no learned ACDC result. Dedicated branch: `research/ma-359-acdc-mirror-transform-20261008` (commit `4908f2c`). Next P0: MA-360.
