@@ -1,0 +1,22 @@
+{
+  "experiment_id": "MA-732",
+  "title": "Factorized PDE-coefficient × boundary-condition operator views",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY",
+  "base_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
+  "draw_id": "Draw42",
+  "hypothesis": "For a 1D Poisson solution operator, one shared low-dimensional function basis plus factorized coefficient and boundary-condition coordinates can recover held-out coefficient×boundary combinations at lower actual bytes than storing each solution map independently.",
+  "physical_object": "shared basis/trunk over spatial coordinate x",
+  "mirror_coordinate": "PDE coefficient coordinate 1/kappa × boundary coordinates (left,right)",
+  "logical_multiplicity": "solution operators across coefficient-boundary combinations",
+  "prior_art_refs": ["PA186", "PA187"],
+  "controls": ["direct coefficient/boundary conditioned DeepONet-style shared operator", "factorized Mirror coordinates with shared spatial basis", "independent per-combination sampled solution maps", "exact analytical PDE solver upper control"],
+  "task": "Solve -kappa*u''=1 on [0,1], u(0)=L, u(1)=R. Evaluate held-out parameter combinations and PDE residual on a fixed spatial grid. The exact solution is u=(1-x)L+xR+x(1-x)/(2*kappa).",
+  "development": {"worlds_or_seeds": [73201], "selection_metric": "Validate basis and numerical encoding on development combinations; no fresh combination used for design changes."},
+  "fresh": {"worlds_or_seeds": [73211, 73212, 73213], "locked_before_access": true, "split": "Each world samples 16 coefficient-boundary task combinations. Training combinations cover coefficient and boundary marginals; test contains held-out cross-combinations. Each combination evaluated at 64 fixed x-grid points."},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["shared spatial basis/trunk", "coefficient and boundary codebooks", "per-task codes", "direct conditioner state", "independent solution maps", "headers/metadata"]},
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true},
+  "success_gate": "On >=2/3 fresh worlds, held-out solution MSE <=1e-8, PDE residual <=1e-6, and factorized bank actual bytes <=60% of independent sampled maps. Mirror-specific evidence additionally requires improved quality/bytes/compute over direct DeepONet-style conditioning.",
+  "failure_gate": "FAIL if quality or storage gate fails in >=2/3 worlds, or if the direct coefficient/boundary-conditioned operator matches the Mirror function and Pareto point.",
+  "boundaries": ["known one-dimensional linear Poisson equation", "analytical solution basis is available", "not trained FNO/DeepONet evidence", "held-out combinations test algebraic composition, not learned generalization", "logical combination count is not capacity"]
+}
