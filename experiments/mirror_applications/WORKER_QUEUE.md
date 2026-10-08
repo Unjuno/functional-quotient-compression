@@ -1,6 +1,6 @@
 # Worker queue
 
-**Current operational pointer (2026-10-08): MA-427.** MA-425 showed strong aligned t=2 extrapolation but failed the registered byte reduction gate. Continue with conditioned fixed-point dynamics.
+**Current operational pointer (2026-10-08): MA-429/431.** MA-427 all converged but missed the registered independent quality/byte/iteration comparisons. Continue with Universal Transformer depth views/composition.
 
 The queue is derived from `IDEA_REGISTRY.csv`. The registry is authoritative.
 
@@ -153,8 +153,8 @@ High-information P0:
 9. MA-418 — compositional function codes (completed FAIL); MA-419 — modulated periodic activations (completed FAIL)
 9. MA-418/419 — compositional/modulated neural-function codes
 10. MA-424/425 — continuous-depth Mirror dynamics (both completed FAIL under strict byte gates)
-11. MA-427 — DEQ conditioned fixed-point map — current candidate
-12. MA-429/431 — Universal Transformer depth Views/composition
+11. MA-427 — DEQ conditioned fixed-point map (completed FAIL)
+12. MA-429/431 — Universal Transformer depth Views/composition — current candidates
 13. MA-434 — Mamba selective-state Mirror roles
 14. MA-436/437 — logical SSM experts and S4 structured Views
 15. MA-442 — MAML with Mirror-only inner-loop adaptation
