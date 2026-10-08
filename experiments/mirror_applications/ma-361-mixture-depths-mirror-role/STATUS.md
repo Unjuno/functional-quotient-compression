@@ -5,7 +5,7 @@
 - Base commit: `c935a90`
 - Development: 2 seeds x 4 controls rerun after A1; exact replay passed
 - Fresh/audit: not opened; 36111–36113 remain sealed
-- Result bundle: pending commit
+- Result bundle: 24116ef7edf9500c5128ddb7c0f08d03f8d41974
 - Registry/claim: registry and status board now carry the amended-run metrics; claim provenance needs binding
 
 ## Decision
