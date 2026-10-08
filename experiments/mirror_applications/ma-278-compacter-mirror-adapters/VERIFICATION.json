@@ -1,0 +1,33 @@
+{
+  "experiment_id": "MA-278",
+  "commit": "c159672",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-278-compacter-mirror-adapters/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": false,
+    "byte_exact": false,
+    "notes": "torch.save payload sizes measured from complete CPU state_dict and JSON configuration; every method's measured payload is nonzero."
+  },
+  "metric_replay": {
+    "checked": false,
+    "max_difference": null,
+    "notes": "Metrics are directly emitted by the deterministic runner; no independent replay was run."
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Development train and held-out input tensors use separate draws from a world-seeded generator.",
+    "Fresh worlds 27802-27804 were not run because the preregistered development access gate failed.",
+    "Actual payload bytes include all learned state_dict tensors and serialized configuration.",
+    "Cross-worker evidence selectively imported; local test replay blocked by missing PyTorch."
+  ],
+  "local_reverification": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-278-compacter-mirror-adapters/tests -v",
+    "passed": 0,
+    "failed_to_import": 1,
+    "reason": "PyTorch is not installed in this container; ModuleNotFoundError: torch",
+    "scope": "The imported origin branch records 3 pytest tests passed; this worker could not reproduce them locally."
+  }
+}

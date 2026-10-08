@@ -14,13 +14,14 @@ Use:
 
 ## Selection rule
 
-Pick the first candidate satisfying all of:
-1. status is UNTESTED;
-2. highest available priority;
-3. no other active experiment directory already claims the ID;
-4. its closest prior-art controls can be implemented in the current harness.
+Preserve priority strata and use a recorded random draw within the current eligible stratum; do not always take the first row. For each draw:
+1. Read the live registry and enumerate UNTESTED candidates at the current highest priority stratum.
+2. Check experiment directories and live branches; record conflicts, but do not silently remove a conflicting ID from the draw pool. If drawn, inspect competing evidence and continue/merge based on protocol quality and provenance.
+3. Freeze the sorted candidate pool, use OS-backed entropy (`secrets.randbelow`), and record method, pool, index, selected ID, timestamp, and live-branch check in the selected experiment protocol.
+4. Keep blocked/active candidates in the pool only when status and worker isolation permit a parallel non-destructive run; otherwise record the blocker and draw from the remaining executable set.
+5. After each completed MA, draw again from the still-eligible candidates. Never advance the queue linearly.
 
-Do not skip to a visually interesting P1/P2 idea while an executable P0 remains, unless the skipped candidate has a recorded blocker.
+Priority remains a stratum constraint; randomness selects within the stratum. Do not switch to P1/P2 while executable P0 candidates remain.
 
 ## Literature-derived cross-over queue
 
@@ -368,3 +369,9 @@ A worker may batch implementation work across a family, but scientific status is
 ## Stop rule
 
 If two consecutive candidates in a family fail for the same demonstrated structural reason, stop that family and write a family diagnostic before continuing.
+
+
+## 2026-10-08 randomized worker selection log
+
+- Draw 1: pool `[MA-274, MA-278, MA-282, MA-286, MA-296, MA-299]`; `secrets.randbelow(6)` index 2 selected MA-282 on its isolated branch.
+- Draw 2: pool `[MA-274, MA-278, MA-286, MA-296, MA-299]`; `secrets.randbelow(5)` index 1 selected MA-278. A completed competing branch was selectively adopted after review; fresh remained sealed by its access gate.
