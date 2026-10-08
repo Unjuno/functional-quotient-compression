@@ -4,12 +4,12 @@
 - Branch: `research/ma-824-topology-function-views-20261008`
 - Base commit: `c935a903daca5c7d1d48aa50d05b5bd50f239cba`
 - Draw: 22; uniform from 536 eligible P0/UNTESTED rows, index 289; amendment 1 adds fresh seeds 82406–82408
-- Last verified commit: amendment freeze `10537fe`
+- Last verified commit: `cee0029`
 - Development complete: yes (2 seeds)
 - Fresh/audit opened: fresh yes; separate audit none
-- Results committed: pending result commit
-- Verification committed: pending result commit
-- Registry row updated: pending result commit
+- Results committed: yes (this branch)
+- Verification committed: yes (this branch)
+- Registry row updated: yes (this branch)
 
 ## Next action
 

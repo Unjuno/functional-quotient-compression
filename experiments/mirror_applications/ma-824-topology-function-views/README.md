@@ -1,6 +1,6 @@
 # MA-824 — factorized topology × node-function views
 
-Status: SCREENING — frozen compositional serialization screen
+Status: FAIL — compression over duplication passed; Mirror-specific native-interpreter gate failed
 Evidence lane: MECHANISM / STORAGE / RUNTIME
 Base commit: `c935a903daca5c7d1d48aa50d05b5bd50f239cba`
 Selection: Draw22, uniform over eligible P0/UNTESTED candidates; replay in `source/random_draw.json`.
