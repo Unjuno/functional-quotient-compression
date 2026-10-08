@@ -1,0 +1,100 @@
+{
+  "experiment_id": "MA-462",
+  "title": "Fixed-embedding Mirror adapter decoder vs HyperFormer-style hypernetwork",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/COMPUTE/RUNTIME",
+  "base_commit": "d12d62a1902c702e57b09cfaba49d0862d485226",
+  "hypothesis": "With identical fixed task-factor embeddings and a shared frozen backbone/adapter basis, a structured Mirror decoder can generate useful adapters for held-out task-factor combinations with lower full inference bytes than a generic HyperFormer-style decoder, and can beat simple linear/additive decoders when task variation is factor-aligned.",
+  "physical_object": "One frozen shared feature backbone plus a shared adapter-atom basis at its output projection.",
+  "mirror_coordinate": "For task factors (a,b), m(a,b)=((E_A[a] P_A) elementwise-multiplied by (E_B[b] P_B)) Q, decoded to coefficients over shared adapter atoms.",
+  "logical_multiplicity": "Generated task adapters for a 4\u00d74 task-factor grid, including four held-out factor pairs.",
+  "prior_art_refs": [
+    "PA82",
+    "PA118"
+  ],
+  "random_selection": {
+    "draw": 4,
+    "pool_size": 531,
+    "pool_sha256": "0a0533a26d6167925c99a82de82998e3bd62866afd0caa240a4a9be583d1ceee",
+    "seed_hex": "42f298445c52ea5c353a15b5773db25722053894df0f79475b288183507293af",
+    "zero_based_index": 85,
+    "selection_rule": "registry rows priority=P0 AND status=UNTESTED; exclude every ID with any remote research/ma-* branch; numeric ID order"
+  },
+  "conditioning_embeddings": "Fixed E_A and E_B tables generated once per world, identical and frozen across all decoder methods; included in every applicable serialized inference payload. No decoder may train or replace these conditioning embeddings.",
+  "controls": [
+    "Frozen shared backbone with no adapter",
+    "Linear fixed-embedding-to-coefficient decoder",
+    "Native HyperFormer-style generic MLP hypernetwork emitting coefficients over the same shared adapter atoms",
+    "Additive factor decoder (E_A P_A + E_B P_B) over the same atoms",
+    "Flat learned coefficient per seen task",
+    "Mirror decoder plus per-task private coefficient residual",
+    "Independent full adapter matrix per seen task as upper control"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      4621,
+      4622
+    ],
+    "alpha_values": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      1.0
+    ],
+    "selection_metric": "alpha=1 held-out task NMSE plus fixed byte/control gates; inspect the full alpha frontier but do not select on fresh",
+    "allowed_tuning": "Mirror/additive latent rank in {2,4,8}; decoder optimizer, architecture and update count fixed."
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      46201,
+      46202,
+      46203
+    ],
+    "locked_before_access": true,
+    "alpha_values": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      1.0
+    ],
+    "all_methods": "same methods and rank selected on development; no exclusions after fresh access"
+  },
+  "data": {
+    "generator": "Synthetic task-conditioned regression over a shared frozen MLP feature model. The target adapter code is alpha*view_code(a,b)+(1-alpha)*private_code(task). view_code is generated from products of two latent projections of fixed factor embeddings; private_code is independent per task.",
+    "factor_grid": "4\u00d74 tasks; pairs (0,0),(1,2),(2,3),(3,1) held out from decoder fitting; every factor value remains represented in training tasks.",
+    "base_pretraining": "500 Adam updates on a task-agnostic common teacher per world, then backbone frozen before adapter decoder comparison.",
+    "train_examples_per_seen_task": 32,
+    "eval_examples_per_task": 64,
+    "decoder_optimizer_updates": 300
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "frozen backbone parameters",
+      "shared adapter-atom basis",
+      "fixed conditioning embeddings E_A/E_B",
+      "decoder/hypernetwork weights",
+      "flat task coefficient table or private residual where present",
+      "full-adapter upper-control matrices",
+      "architecture/config/precision metadata and serialization overhead"
+    ]
+  },
+  "compute": {
+    "report_train_examples_and_updates": true,
+    "report_active_compute_proxy": "decoder-generation MACs per task, adapter-application MACs per example, and 3\u00d7 forward proxy for training",
+    "report_isolated_wall_clock": true,
+    "runtime": "measure per-task decoder generation separately from applying generated adapters over evaluation examples; count generated code cache bytes as transient state"
+  },
+  "development_gate": "At alpha=1 on both development worlds, at least one rank must satisfy: Mirror seen and held-out NMSE <=1.10x generic HyperFormer; Mirror held-out NMSE <=0.80x the best of linear and additive simple controls; full serialized Mirror payload <=0.80x HyperFormer payload. If none pass, record FAIL and do not open fresh.",
+  "success_gate": "After passing the development gate and freezing the smallest passing rank, all three fresh worlds at alpha=1 meet the same quality and storage gates. Report the full alpha=0..1 shared/private frontier; alpha=0 is a private-variation boundary, not a required Mirror pass.",
+  "failure_gate": "No development rank passes the aligned alpha=1 gate, or any fresh world fails the frozen aligned gate. Never tune on fresh worlds.",
+  "boundaries": [
+    "Synthetic decoder mechanism screen, not a language/GLUE benchmark and not a reproduction of the full HyperFormer++ paper.",
+    "All decoder methods receive identical fixed E_A/E_B conditioning embeddings.",
+    "The shared frozen backbone and adapter atoms are common across methods and their complete bytes are charged.",
+    "Alpha=0 private codes are independent across tasks; unseen private task behavior is not predictable without private state.",
+    "No capacity claim: fixed 300 decoder updates."
+  ]
+}

@@ -431,3 +431,8 @@ A worker may batch implementation work across a family, but scientific status is
 ## Stop rule
 
 If two consecutive candidates in a family fail for the same demonstrated structural reason, stop that family and write a family diagnostic before continuing.
+
+
+## 2026-10-08 randomized worker selection log
+
+- Draw 4: P0/UNTESTED baseline registry candidates without remote `research/ma-*` branches (N=531); pool SHA-256 `0a0533a26d6167925c99a82de82998e3bd62866afd0caa240a4a9be583d1ceee`; seed `42f298445c52ea5c353a15b5773db25722053894df0f79475b288183507293af`; zero-based index 85 selected MA-462. Protocol: `experiments/mirror_applications/ma-462-mirror-hyperformer-decoder/PROTOCOL.json`.

@@ -1,0 +1,28 @@
+{
+  "draw": 4,
+  "date_utc": "2026-10-08T05:11:01.047833+00:00",
+  "baseline_ref": "origin/research/mirror-application-worker-ready-20261007",
+  "pool_rule": "registry rows priority=P0 AND status=UNTESTED; exclude every ID with any remote research/ma-* branch; numeric ID order",
+  "pool_size": 531,
+  "pool_sha256": "0a0533a26d6167925c99a82de82998e3bd62866afd0caa240a4a9be583d1ceee",
+  "seed_hex": "42f298445c52ea5c353a15b5773db25722053894df0f79475b288183507293af",
+  "zero_based_index": 85,
+  "selected_id": "MA-462",
+  "selected_row": {
+    "id": "MA-462",
+    "family": "Generated adapters / PEFT mixtures",
+    "proposal": "Mirror code decoder vs HyperFormer adapter decoder",
+    "shared_object": "shared pretrained model",
+    "mirror_coordinate": "same task embeddings decoded by structured View or generic hypernetwork",
+    "logical_multiplicity": "logical adapters",
+    "cheapest_control": "HyperFormer++",
+    "first_metric": "quality / decoder parameters / extrapolation",
+    "priority": "P0",
+    "status": "UNTESTED",
+    "prior_art_level": "DIRECT",
+    "prior_art_refs": "PA82",
+    "mirror_delta": "Directly compare structured and generic task-to-adapter decoders.",
+    "worker_note": "Hold conditioning embeddings fixed."
+  },
+  "excluded_remote_branch_ids": 80
+}
