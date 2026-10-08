@@ -1,19 +1,28 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-482",
+  "protocol_sha256": "73df7d81ab8f20e2135ea46c937c5994635399e78b149389f32cb1da408d432f",
+  "commit": "63f01240d9f3fbbfd313a554839e5367886c5903",
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "pytest -q experiments/mirror_applications/ma-482-resvq-functions/tests",
+    "passed": 3,
+    "failed": 0
   },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "roundtrip_checked": true,
+    "byte_exact": true
   },
   "metric_replay": {
-    "checked": false,
-    "max_difference": null
+    "checked": true,
+    "max_difference": 0.0
   },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "fresh_split_integrity_checked": true,
+  "fresh_accessed": false,
+  "native_rvq_exact_alias": true,
+  "disposition": "FAIL: Residual VQ improves heldout quality and address diversity over one-stage VQ, but all quality-qualified configurations exceed int8 bytes; native RVQ exactly aliases Mirror.",
+  "notes": [
+    "Actual uncompressed NPZ bytes include shared atoms, every stage center and all per-function stage indices plus schema.",
+    "Both frozen development worlds replayed with zero metric difference; six Mirror/native RVQ payload pairs match byte-for-byte.",
+    "Fresh seeds 48211-48213 remained sealed.",
+    "Synthetic rank-four function bank only; no neural language-model claim."
+  ]
 }
