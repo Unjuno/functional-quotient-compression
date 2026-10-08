@@ -1,0 +1,85 @@
+{
+  "experiment_id": "MA-265",
+  "title": "VeRA Mirror scaling code bank",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/RUNTIME",
+  "base_commit": "f7f76de193063950d28b7834f337840b1e86f0ce",
+  "prior_art_refs": [
+    "PA18"
+  ],
+  "hypothesis": "At a common frozen random low-rank basis, Givens Mirror task codes improve regression quality or multiplicity over VeRA scaling vectors at comparable serialized bytes.",
+  "physical_object": "One frozen shared random low-rank A/B basis (rank 4)",
+  "mirror_coordinate": "Task-specific Givens transforms on rank channels",
+  "logical_multiplicity": "Four task adapters",
+  "task": {
+    "input_dim": 16,
+    "output_dim": 8,
+    "tasks": 4,
+    "rank": 4,
+    "metric": "mean and worst task held-out MSE"
+  },
+  "controls": [
+    "independent rank-4 adapter per task",
+    "shared base with zero adapter",
+    "native VeRA task left/right scale vectors",
+    "same shared basis with task Givens Mirror codes"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      {
+        "world": 26500,
+        "init_seed": 265000
+      },
+      {
+        "world": 26501,
+        "init_seed": 265001
+      }
+    ],
+    "learning_rate_candidates": [
+      0.003,
+      0.01
+    ],
+    "updates": 1000,
+    "selection_metric": "mean heldout task MSE"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      {
+        "world": 26502,
+        "init_seed": 265002
+      },
+      {
+        "world": 26503,
+        "init_seed": 265003
+      },
+      {
+        "world": 26504,
+        "init_seed": 265004
+      }
+    ],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual torch.save inference payload plus canonical JSON metadata",
+    "paid_objects": [
+      "shared frozen random A/B basis or exact generator metadata",
+      "all task scale or Mirror codes",
+      "task metadata",
+      "independent adapters where used"
+    ]
+  },
+  "compute": {
+    "report_examples": true,
+    "report_updates": true,
+    "report_MAC_proxy": true,
+    "report_wall_time": true,
+    "report_throughput": true
+  },
+  "success_gate": "Mirror mean MSE <=1.10x independent, bytes <=60% independent, and >=10% lower MSE than VeRA at byte-near storage (within 15%) or lower bytes.",
+  "failure_gate": "Mirror misses quality/storage gate or VeRA matches at equal/lower bytes.",
+  "boundaries": [
+    "synthetic linear adapter family only",
+    "fixed-update screen not capacity proof",
+    "all methods use same basis/teacher per world"
+  ]
+}
