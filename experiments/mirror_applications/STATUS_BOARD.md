@@ -16,17 +16,14 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-255 — Mirror context superposition for task models (P0; PA16)**
+**MA-265 — VeRA Mirror scaling code bank (P0; PA18)**
 
 Reason:
-- all previously locked MA-241/244/245/247–251/253 and subsequent old-chain P0 screens have completed;
-- the original P0 cross-over queue is exhausted among checked candidates;
-- MA-255 is the first untested P0 in the earlier high-information literature cross-over queue;
-- direct Parameter Superposition prior art gives a strong nearest control for insertion of the extra Mirror parameter `m`.
+- MA-255, MA-260 and MA-261 completed development-only FAIL screens; fresh data remained unopened.
+- MA-265 is next in the registered high-information P0 crossover queue.
+- VeRA with the same shared basis is its mandatory direct control.
 
-Required controls: native Parameter Superposition, naive/shared task-code basis, matched byte-near low-rank or VeRA-style modulation, independent-model upper reference where practical. Do not claim the superposition concept itself as a Mirror invention.
-
-If blocked by a documented reproducibility or harness issue, record it and resume at MA-260 (BatchEnsemble), then MA-261/265/268 in the registered literature priority sequence. Do not jump to P1/novelty-picked topics before P0.
+Required controls: native VeRA with the same shared basis, ordinary shared/independent adapters, and Mirror scaling views. Measure quality and actual bytes; do not claim adapter multiplicity from address count alone.
 
 ## Active experiment
 
