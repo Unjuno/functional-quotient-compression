@@ -3,7 +3,7 @@
 This lane tests where the extra low-description Mirror/View functional parameter `m` can be inserted into existing methods to replace physical duplication or add useful logical functional freedom at worthwhile marginal cost.
 
 Files:
-- IDEA_REGISTRY.csv — 1045 candidate applications with status, prior-art links and first control.
+- IDEA_REGISTRY.csv — 1095 candidate applications with status, prior-art links and first control.
 - FIRST_QUEUE.md — 25 P0 candidates spanning different physical objects.
 - EXPERIMENT_CONTRACT.md — common byte/compute/quality rules.
 
@@ -29,6 +29,7 @@ Before starting an MA experiment, read:
 - [2026-10-08 research notes](../../docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08.md) — cross-model cache, neural graphics, multi-speaker TTS, generative flows and model stitching
 - [twelfth sweep: video, symmetry, spiking, photonic, wireless, HRTF](../../docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_TWELFTH_SWEEP.md)
 - [thirteenth sweep: materials, MRI, quantum circuits, visual memory and ANN](../../docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_THIRTEENTH_SWEEP.md)
+- [fourteenth sweep: time-series forecasting, DLRM embeddings and Earth-observation sensors](../../docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_FOURTEENTH_SWEEP.md)
 - [run registry integrity check](check_registry_integrity.py) — supports MA-1000 and beyond
 - [worker queue](WORKER_QUEUE.md)
 - [experiment template](TEMPLATE/)
