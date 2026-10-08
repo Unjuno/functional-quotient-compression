@@ -1,6 +1,6 @@
 {
   "experiment_id": "MA-366",
-  "commit": "9b25863",
+  "commit": "e53ce5ebb93a96c8004823bf945fca96714e4419",
   "tests": {
     "command": "python -m unittest discover -s experiments/mirror_applications/ma-366-depth-expert-factorized-routing/tests; python experiments/mirror_applications/ma-366-depth-expert-factorized-routing/source/verify.py",
     "passed": 3,
@@ -17,6 +17,7 @@
   "fresh_split_integrity_checked": false,
   "notes": [
     "Protocol deviation: runner was inadvertently invoked without --dev-only and generated fresh IDs 36611-36613 before gate evaluation. These rows are retained, excluded from analysis, and fresh integrity is invalid.",
-    "Development direct-pair control has identical serialized byte count and decoded function to Mirror coordinates on both development seeds."
+    "Development direct-pair control has identical serialized byte count and decoded function to Mirror coordinates on both development seeds.",
+    "Verification rerun after evidence reconciliation: 3 tests passed; the core result table contains only the eight development rows. Fresh IDs 36611-36613 are disclosed separately and excluded."
   ]
 }
