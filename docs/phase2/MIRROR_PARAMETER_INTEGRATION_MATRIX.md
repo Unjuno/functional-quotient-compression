@@ -54,6 +54,13 @@ The table below tells workers where to try the same extra low-description functi
 | Image personalization | subject/style LoRA banks and merger | subject×style×timestep `m` | adaptive composition without per-pair adapters? | LoRA.rar, EST-LoRA |
 | Cross-model stitching | pretrained model blocks/affine feature maps | source×target×layer/feature `m` | portable functions with fewer paid connectors? | StitchLLM, affine feature stitching, information audit |
 
+| Neural video segment codec | Fisher-shared INR parameters / chunk latent frame decoder | scene×chunk×slot/bitrate `m` | many useful frames/chunks without independent group weights? | NerVast, DCVC-UF, DCVC-RT, HNeRV |
+| Group-equivariant features | steerable filters / irrep tensor-product weights | task×group/irrep `m` | extra task behavior beyond zero-information group orbit? | G-CNN, e3nn, EGNN, learned symmetry, no-parameter approximate equivariance |
+| Spiking neurons | shared synapses and native plasticity | task×time threshold/leak/neuromodulation `m` | distinct learned temporal behaviors without duplicating synapses? | STL-SNN, TEBN, TACOS, EAS-SNN |
+| Photonic programmable MVM | one physical MZI/PCM/diffractive processor | sparse phase/coupler configuration `m` | multiple tasks per chip at less programming state/energy? | LightPro, MZI photonic circuits, MDR-HDONN |
+| Wireless beam control | physical antenna/RIS and learned beam codebook | site×user×frequency/channel `m` | compact logical beams at fixed signaling and spectral efficiency? | NBL, Type-II CSI, RIS optimization, CsiNet |
+| Personalized HRTF | shared neural spectral field and retrieval data | listener×direction×head-pose `m` | individualized binaural functions with fewer measurements/bytes? | RANF, anthropometric HRTF latent |
+
 ## Required variants after a direct screen
 
 A family that passes a first mechanism screen should usually be expanded in this order:
