@@ -41,7 +41,8 @@
       "shared rule logits",
       "basis vectors",
       "task code bank or full rule snapshots",
-      "task indices/metadata"
+      "task indices/metadata",
+      "contiguous task-bank tensor payload and its safetensors metadata"
     ]
   },
   "compute": {
@@ -58,5 +59,6 @@
     "logical task multiplicity is measured by held-out rule quality and bytes, not code combinations",
     "no natural data or learned autonomous self-organization claim"
   ],
-  "amendment_1": "Before audit: expand each fresh world from 4+4 to 32 in-subspace and 32 independent rules. For only eight tasks, actual safetensors metadata and shared basis overhead dominate, and the theoretical code-bank byte ratio is near the 60% gate; 64 task views provide a meaningful payload test. Add a single overwritten full-rule state as a direct retention control. No audit observations were accessed."
+  "amendment_1": "Before audit: expand each fresh world from 4+4 to 32 in-subspace and 32 independent rules. For only eight tasks, actual safetensors metadata and shared basis overhead dominate, and the theoretical code-bank byte ratio is near the 60% gate; 64 task views provide a meaningful payload test. Add a single overwritten full-rule state as a direct retention control. No audit observations were accessed.",
+  "amendment_2": "After the first audit serialization, found that storing each task view as a separately named tensor made safetensors metadata dominate. Before interpreting the result, encode both Mirror codes and full-rule snapshots as one contiguous tensor bank (same for both methods). Also report explicit accuracy retention from the stored bank after all task adaptations. No model, optimizer, seed, or quality metric changed; the initial per-key serialization is archived."
 }
