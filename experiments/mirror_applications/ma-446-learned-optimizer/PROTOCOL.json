@@ -1,7 +1,7 @@
 {
   "experiment_id": "MA-446",
   "title": "Learned optimizer for Mirror coordinates only",
-  "status": "SCREENING",
+  "status": "COMPLETED_FAIL",
   "evidence_lane": "FEW_SHOT/OPTIMIZER/QUALITY/BYTES",
   "base_commit": "e5995c5d",
   "hypothesis": "A learned per-step diagonal update schedule acting only on a 2D Mirror code reaches at least 10% lower fresh query NRMSE than development-tuned Adam and SGD after four updates on held-out linear tasks.",
@@ -105,5 +105,6 @@
     "Synthetic linear few-shot mechanism test only.",
     "The optimizer learns only update multipliers; it does not change model weights or task code dimension.",
     "No natural task, nonlinear model, or capacity claim."
-  ]
+  ],
+  "implemented_optimizer": "learned coordinatewise per-step gradient multipliers"
 }

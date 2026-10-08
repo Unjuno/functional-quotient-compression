@@ -6,10 +6,10 @@ Integration branch: `research/mirror-application-current-evidence-20261008`; can
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (129 completed; 501 UNTESTED)
+- P0: **630** (130 completed; 500 UNTESTED)
 - P1: **422** (18 completed; 404 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1008 UNTESTED, 44 PROMISING, 103 FAIL**
+- Current MA statuses: **1007 UNTESTED, 44 PROMISING, 104 FAIL**
 - 48 experiment directories, complete with status/protocol/results/verification files, are represented in the current evidence set.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-268 is next.
@@ -71,7 +71,9 @@ Integration branch: `research/mirror-application-current-evidence-20261008`; can
 
 **MA-444 FAIL:** with matched 2D latent on disjoint tasks, Mirror NRMSE 0.5805/2,181B vs LEO 0.2037/2,251B N=20 amortized; the 70B saving accompanies ~2.85x worse error and ~2.7x slower adaptation. Full-vector NRMSE was 0.4061. Registered quality gate failed.
 
-**MA-445 FAIL:** on A2 rank-matched additive skills, fresh step0 Mirror NRMSE was 1.0e-5 vs direct task-vector 4.3e-5; exact serialized N=20 payload was 28,645B vs 28,649B (4B / 0.014% smaller), below useful byte gate. A1 invalid pilot excluded. Aligned synthetic quality only; natural/nonlinear composition untested. **Next: MA-446.**
+**MA-445 FAIL:** on A2 rank-matched additive skills, fresh step0 Mirror NRMSE was 1.0e-5 vs direct task-vector 4.3e-5; exact serialized N=20 payload was 28,645B vs 28,649B (4B / 0.014% smaller), below useful byte gate. A1 invalid pilot excluded. Aligned synthetic quality only; natural/nonlinear composition untested.
+
+**MA-446 FAIL:** learned schedule step4 mean NRMSE 0.4062 vs Adam 0.4882 and SGD 0.5697, but it missed the 10% per-world margin in world 44612 and used 101.25B/task vs Adam 91.65B at N=20. **Next: MA-447.**
 
 MA-366 is reconciled as FAIL: direct pair coefficients match Mirror outputs and bytes, and PA02 factorization is smaller. The runner accidentally generated the registered fresh IDs before the gate; those rows are excluded and fresh integrity is invalid. MA-367 and MA-368 are also recorded FAIL. MA-369 is completed FAIL on its dedicated branch; next executable P0 is MA-371.
 
