@@ -35,14 +35,20 @@
     "meta_optimizer_outer_updates": 256,
     "meta_unroll_updates": 4,
     "meta_optimizer": "Adam lr=1e-3 over recurrent learned-optimizer weights",
-    "outer_training": "Each meta-update samples a fresh batch of task identities and support/query examples from the development task family; held-out development task identities are separate."
+    "outer_training": "Each meta-update samples a fresh batch of task identities and support/query examples from the development task family; held-out development task identities are separate.",
+    "development_tasks_per_world": 32,
+    "seed_schedule": "For each world seed s: derive shared W0/basis from s; meta-training task/example stream uses s+1000000; held-out development tasks/examples use s+2000000. Both streams use CPU torch.Generator with explicit seed.",
+    "task_noise": "Independent Gaussian output noise std=0.05 for support and query examples."
   },
   "learned_optimizer": {
     "architecture": "Coordinate-shared LSTMCell with input [sign(g)*log1p(abs(g)), log1p(abs(g))], hidden width 8, scalar delta head initialized to zero; one recurrent state per optimized scalar.",
     "mirror_variant": "Same optimizer architecture updates only three m coordinates; W0/B are frozen.",
     "full_variant": "Same-size optimizer architecture updates all 12 W coordinates from W0; this is the independent full-weight upper control.",
     "trained_separately": true,
-    "optimizer_state": "Persist LSTM h,c per task and charge their bytes."
+    "optimizer_state": "Persist LSTM h,c per task and charge their bytes.",
+    "meta_train_outer_updates": 256,
+    "meta_train_batch_tasks": 16,
+    "outer_loss": "Mean query MSE after 4 support updates, averaged across meta-batch tasks."
   },
   "controls": [
     "Hard shared W0, m=0",
@@ -59,7 +65,8 @@
       44602
     ],
     "tuning": "Only the Adam/SGD learning-rate grid may select settings on development tasks; learned optimizer architecture and outer-loop update count are frozen.",
-    "report": "Per-task query MSE by update 0..4; four-update quality, actual bytes for eight-task resumable libraries, optimizer forward/backward compute proxy, wall-clock and per-task adaptation state."
+    "report": "Per-task query MSE by update 0..4; four-update quality, actual bytes for eight-task resumable libraries, optimizer forward/backward compute proxy, wall-clock and per-task adaptation state.",
+    "learning_rate_selection": "Choose one learning rate per SGD/Adam method by lowest mean query MSE averaged over all 32 development tasks in both worlds; then report each world separately."
   },
   "fresh": {
     "worlds_or_seeds": "Generate new task-family seeds only if every predeclared gate passes on both development worlds.",
@@ -105,7 +112,9 @@
   ],
   "meta_sgd": {
     "method": "Meta-learn initial m and one per-coordinate update scale using the same 256 outer meta-updates and training task batches; apply the learned update rule for four support steps.",
-    "purpose": "Simpler learned update control: isolates whether recurrent gradient/history learning adds value over static learned update geometry."
+    "purpose": "Simpler learned update control: isolates whether recurrent gradient/history learning adds value over static learned update geometry.",
+    "outer_updates": 256,
+    "batch_tasks": 16
   },
   "prior_art_refs": [
     "PA77",

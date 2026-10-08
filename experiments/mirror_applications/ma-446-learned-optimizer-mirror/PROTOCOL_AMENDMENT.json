@@ -1,0 +1,13 @@
+{
+  "amendment_id": "A1",
+  "timing": "Before implementation tests and before any development scores",
+  "reason": "Specify task counts and deterministic train/dev seed derivation for exact reproducibility.",
+  "changes": [
+    "32 held-out development tasks per world",
+    "meta-training stream seed s+1000000 and development evaluation stream seed s+2000000 using CPU torch.Generator",
+    "make noise/control task generation explicit",
+    "choose one SGD/Adam learning rate from mean query MSE over both worlds"
+  ],
+  "scientific_gate_changed": false,
+  "audit_or_fresh_accessed": false
+}
