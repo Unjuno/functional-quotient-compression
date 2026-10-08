@@ -3383,3 +3383,93 @@ Uses independently trained tensorized LoRA specialists with sparse routing and f
 
 **Mirror implication:** Native sparse TT-LoRA expert routing is a strong non-Mirror baseline for logical expert multiplication. Count router and all frozen expert state.
 
+## PA372 — BOLT reusable task spectral basis
+
+**Basis-Oriented Low-rank Transfer for Few-Shot and Test-Time Adaptation**  
+https://openaccess.thecvf.com/content/CVPR2026/html/Park_Basis-Oriented_Low-rank_Transfer_for_Few-Shot_and_Test-Time_Adaptation_CVPR_2026_paper.html
+
+Collects principal spectral directions from pre-adapted tasks, builds a shared orthogonal basis, then optimizes only per-task diagonal coefficients for previously unseen tasks. This is direct published prior for a shared basis with a tiny functional task code.
+
+**Mirror implication:** Diagonal source-task basis codes are already an efficient native adapter. Mirror m must outperform BOLT at matched downstream accuracy and actual bytes including source-basis construction/adaptation.
+
+## PA373 — CG-LoRA function-space direction selection
+
+**Curvature-Guided LoRA: Matching Full Fine-Tuning in Function Space**  
+https://arxiv.org/abs/2603.29824
+
+Selects low-rank fine-tuning directions from a curvature-aware objective that approximates downstream prediction changes rather than only matching parameter deltas.
+
+**Mirror implication:** Prior for evaluating adapter geometry through function-space quality and curvature. Mirror delta reconstruction error alone is not a sufficient task-quality metric; match downstream output/latency vs CG-LoRA.
+
+## PA374 — Fora activation-subspace capability protection
+
+**Fora: From Weight-Space to Function-Space Protection in Capability-Preserving Fine-Tuning**  
+https://arxiv.org/abs/2606.31092
+
+Builds input-activation-derived projectors for protecting preexisting capabilities while admitting controlled residual adaptation; contrasts activation geometry with weight SVD geometry.
+
+**Mirror implication:** A Mirror chart that looks compact in weights can harm functional directions. Compare function-space capability retention, activation projectors, and per-task private exceptions.
+
+## PA375 — Task Vector Bases compressed arithmetic
+
+**Task Vector Bases: A Unified and Scalable Framework for Compressed Task Arithmetic**  
+https://arxiv.org/abs/2502.01015
+
+Expresses many learned task vectors as structured combinations of fewer task-basis vectors and studies preserving task arithmetic and composition.
+
+**Mirror implication:** Shared task basis with small coefficients and compositional addition is established. Mirror must beat task-vector basis storage/accuracy and hold out task combinations.
+
+## PA376 — SVD and CUR geometry in LoRA merging
+
+**On the Representation Geometry of LoRA Model Merging**  
+https://aclanthology.org/2026.findings-acl.261/
+
+Studies complementary geometry of global SVD shared components and localized CUR task-specific components in learned LoRA merges.
+
+**Mirror implication:** Require SVD-plus-CUR native shared/private control and task-utility metrics; an optimal delta Frobenius approximation may discard localized functional information.
+
+## PA377 — StructLoRA task-aware information bottleneck
+
+**Not All Directions Matter: Towards Structured and Task-Aware Low-Rank Model Adaptation**  
+https://aclanthology.org/2026.acl-long.97/
+
+Uses task-aware information bottleneck filtering and a training-only interlayer coordinator for low-rank adaptation; reports no extra inference module cost.
+
+**Mirror implication:** Mirror code rank/placement selection must beat zero-extra-inference information filtering and coordinated task-aware low-rank baselines.
+
+## PA378 — Training Jacobian task subspace geometry
+
+**Understanding Gradient Descent through the Training Jacobian**  
+https://arxiv.org/abs/2412.07003
+
+Investigates Jacobian of trained weights with respect to initialization and shows data-dependent low-dimensional structure, including directions with limited in-distribution but meaningful OOD output effect.
+
+**Mirror implication:** A weight-space orbit can hide large OOD functional changes. Test input-distribution and OOD Jacobian probes before compressing meaningful directions into m.
+
+## PA379 — NTK regime LoRA optimization theory
+
+**LoRA Training in the NTK Regime has No Spurious Local Minima**  
+https://proceedings.mlr.press/v235/jang24d.html
+
+Studies optimization geometry of rank-constrained fine-tuning in an NTK regime and explains conditions under which low-rank optimization avoids spurious local minima.
+
+**Mirror implication:** Distinguish fixed-update training failure from representation capacity. Do not claim every low-rank optimization miss is a proof the Mirror chart lacks capacity.
+
+## PA380 — FuLA functional latent model stitching
+
+**Model Stitching by Functional Latent Alignment**  
+https://arxiv.org/abs/2505.20142
+
+Defines a functional latent alignment criterion for model stitching beyond simple affine output agreement, with adversarial/shortcut/cross-layer diagnostic tests.
+
+**Mirror implication:** Mirror stitching/transfer must include information-sensitive and counterfactual probes, not just a high aggregate output agreement.
+
+## PA381 — NTK linearization of LLM fine-tuning
+
+**Linearization Explains Fine-Tuning in Large Language Models**  
+https://papers.nips.cc/paper_files/paper/2025/file/becc00fe2e0ade58213cff16a166fa25-Paper-Conference.pdf
+
+Connects regularized fine-tuning dynamics to linearized neural tangent kernel regression, including spectral effects of layer selection and LoRA updates.
+
+**Mirror implication:** For Mirror m learned near pretrained theta, estimate functional Jacobian/NTK spectrum and local linearization error as an additional test beyond weight-delta rank.
+
