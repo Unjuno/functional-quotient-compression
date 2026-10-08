@@ -1,0 +1,30 @@
+{
+  "experiment_id": "MA-1091",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m json.tool experiments/mirror_applications/ma-1091-before-after-season-mirror-state-on-ge/PROTOCOL.json",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": false,
+    "byte_exact": false
+  },
+  "metric_replay": {
+    "checked": false,
+    "max_difference": null
+  },
+  "fresh_split_integrity_checked": false,
+  "random_draw": {
+    "draw17_replayed": true,
+    "pool_size": 550,
+    "index": 499,
+    "selected_id": "MA-1091",
+    "pool_sha256": "2977c7d392f2aaec5813d55a8b677ab262e0d2fb016cffe8e1f6f0c1e20a5b83"
+  },
+  "notes": [
+    "Protocol-freeze blocker; no data, labels, or model weights accessed.",
+    "Registry remains UNTESTED; no experiment metric or Mirror result is claimed.",
+    "Draw18 eligibility pool and replay proof are retained alongside the blocker record."
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "experiment_id": "MA-1091",
+  "title": "Before/after season Mirror state on geospatial features",
+  "status": "BLOCKED_BEFORE_PROTOCOL_FREEZE",
+  "base_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
+  "registered_status": "UNTESTED",
+  "hypothesis": "A small factorized pre-observation and post-observation Mirror state over one Prithvi/AnySat backbone recovers useful change functions across seasonal and geographic shifts.",
+  "physical_object": "one shared Prithvi-EO-2.0 or AnySat temporal backbone",
+  "mirror_coordinate": "factorized pre-observation m_pre and post-observation m_post",
+  "logical_multiplicity": "temporal change task functions across observations",
+  "prior_art_refs": ["PA347", "PA348"],
+  "controls": ["native temporal backbone plus binary change head", "matched-byte FiLM/gate on the same shared features", "independent per-observation/head upper control if feasible"],
+  "protocol_frozen": false,
+  "data_accessed": false,
+  "model_weights_accessed": false,
+  "fresh_or_audit_opened": false,
+  "blocker": "Available OSCD_MSI metadata does not establish acquisition seasons/years needed by the registered seasonal claim; the documented Prithvi config uses four frames while OSCD pairs contain two dates, and adapting the input would change the registered comparison. CPU-only environment further limits practical backbone training/inference, but was not the primary blocker.",
+  "decision": "NOT_ESTABLISHED",
+  "boundaries": ["This is a reproducibility/data-interface blocker, not a negative result about Mirror.", "Do not infer change quality, seasonal generalization, storage, or runtime."]
+}

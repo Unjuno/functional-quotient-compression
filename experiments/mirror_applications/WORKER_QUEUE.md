@@ -2,6 +2,12 @@
 
 The queue is derived from `IDEA_REGISTRY.csv`. The registry is authoritative.
 
+## Randomized execution policy (active from Draw17)
+
+The deterministic numeric candidate lists in this file are historical maps of prior-art families, not execution order. For each new experiment, uniformly sample one row from current `P0 + UNTESTED` registry candidates, excluding IDs with a live remote `research/ma-*` branch or an existing experiment directory in the workspace. Freeze the exact pool and SHA-256, cryptographic seed, random index, and replay method in that experiment's `source/random_draw.json`. If protocol freeze is blocked, document the reason without changing the row's scientific status, then draw again with a new seed and updated eligibility pool. Use one dedicated research branch per MA and do not merge automatically.
+
+Draw17 MA-1091 is blocked before protocol freeze. Draw18 selected MA-784; see the replayable pool/seed record on the MA-1091 blocker branch. This policy supersedes all “pick the first candidate” and fixed-order execution instructions below.
+
 ## Queue interpretation invariant
 
 Every queued MA hypothesis is an experiment on the extra low-description Mirror functional parameter `m`.
