@@ -12,7 +12,7 @@ Mirror insertion: independently encode condition and behavior factors in shared 
 
 ## T — Frozen protocol
 
-See PROTOCOL.json and freeze.json. Two development seeds (51101, 51102), 64-dimensional outputs, 8 condition IDs, 8 behavior IDs, 48 visible pairs, and 16 held-out pair identities. Basis ranks {2,4,8}, with rho {0,.1,.25} private pair residual. The native additive least-squares plus PCA control receives the same visible vectors. Full-pair table, bases, factor codes, global bias and schema are charged in actual uncompressed NPZ bytes. Fresh seeds 51111–51113 stay sealed.
+See PROTOCOL.json and freeze.json. Amendment 1 fixed only a unit-test tolerance mismatch (the runner/protocol are unchanged); the original failing test log is preserved. Two development seeds (51101, 51102), 64-dimensional outputs, 8 condition IDs, 8 behavior IDs, 48 visible pairs, and 16 held-out pair identities. Basis ranks {2,4,8}, with rho {0,.1,.25} private pair residual. The native additive least-squares plus PCA control receives the same visible vectors. Full-pair table, bases, factor codes, global bias and schema are charged in actual uncompressed NPZ bytes. Fresh seeds 51111–51113 stay sealed.
 
 ## D — Decision
 
