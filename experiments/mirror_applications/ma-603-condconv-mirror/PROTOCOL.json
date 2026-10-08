@@ -46,5 +46,6 @@
   "success_gate": "Mirror audit MSE <=1.10x full_dynamic8 and <=1.10x CondConv4 in at least 2/3 audit worlds, and Pareto improve over CondConv4 in actual payload bytes or CPU batch-1 latency; all payload components included.",
   "failure_gate": "FAIL if Mirror misses quality gate in at least 2/3 valid audit worlds, or CondConv4 matches/betters quality and is no worse in both bytes and latency in all audit worlds. Invalid data/split or implementation is NOT ESTABLISHED.",
   "frozen_before_audit": true,
-  "boundaries": ["Synthetic linear dynamic-weight mechanism, not a convolution benchmark or Transformer result.", "Teacher deliberately has Givens structure; report that alignment explicitly.", "No language, scale, GPU kernel, or general dynamic-filter claim."]
+  "boundaries": ["Synthetic linear dynamic-weight mechanism, not a convolution benchmark or Transformer result.", "Teacher deliberately has Givens structure; report that alignment explicitly.", "No language, scale, GPU kernel, or general dynamic-filter claim."],
+  "amendments": [{"number": 1, "after_audit": true, "reason": "Reporting-only clarification: add deterministic analytic parameter/MAC counts from frozen model definitions to the result summary. No training, architecture, selection, query values, or gates changed.", "new_fields": ["parameter_count", "analytic_active_macs_per_example"]}]
 }

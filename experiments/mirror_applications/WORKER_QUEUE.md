@@ -14,6 +14,10 @@ Use:
 
 ## Selection rule
 
+### Active-worker randomized override (Draw28 onward)
+
+For the active experiment worker, do not use the ordered/first-eligible queue. Before each experiment, refresh remote refs and freeze the eligible `P0 + UNTESTED` IDs after excluding IDs on live remote MA research branches or with existing experiment directories. Hash the sorted pool, draw a fresh 256-bit OS-entropy seed, and use rejection sampling for a uniform index. Save the complete pool, exclusions, seed, digest/counter, index and replay verifier under the selected experiment's `source/drawNN_exclusions.json` before viewing outcomes. Do not redraw based on preference; record blockers and draw again only from a newly frozen pool. This is branch-local and does not reorder other workers' queues.
+
 Pick the first candidate satisfying all of:
 1. status is UNTESTED;
 2. highest available priority;

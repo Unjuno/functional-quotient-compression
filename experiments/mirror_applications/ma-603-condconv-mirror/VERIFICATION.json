@@ -1,0 +1,27 @@
+{
+  "experiment_id": "MA-603",
+  "commit": "pending",
+  "tests": {
+    "command": "pytest -q experiments/mirror_applications/ma-603-condconv-mirror/tests",
+    "passed": 5,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "format": "Safetensors packed inference state with schema/layout metadata charged in actual file bytes"
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference_query_mse": 0.0,
+    "raw_metrics_sha256": "528e449ad5d1115b35765d72378ee9103d09c723f7d0867a01add3dfc28b4788",
+    "reported_metrics_sha256": "62c4380df4423c2175dd390dfec71ee7e6836a6325021fda638e2a89641c2e6e"
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Draw29 uniform rejection sampling replay passed.",
+    "Two audit executions exactly agreed on per-row query MSE, payload bytes and seed/update identifiers; runtime measurements varied.",
+    "45 audit rows across 3 fresh worlds \u00d7 3 model seeds \u00d7 5 methods.",
+    "Teacher deliberately matches the Mirror Givens family; scope is aligned synthetic feasibility, not capacity/general dynamic-filter evidence."
+  ]
+}
