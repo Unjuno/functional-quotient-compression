@@ -1,0 +1,127 @@
+{
+  "protocol_id": "MAT03-REAL-SAME-INPUT-MULTI-HEAD",
+  "status": "PRE_REGISTERED_BEFORE_DEV_AND_FRESH",
+  "created": "2026-10-09",
+  "branch": "research/mirror-cpu-adapter-transfer-20261009",
+  "identity": "NOT_NATIVE_LOGo_OR_CLAIMED_MA_1175_COMPLETION",
+  "question": "Can one heavy shared trunk forward train K=5 useful different same-input outputs using small structured Mirror m at actual byte/quality/CPU speed advantage to strongest native one-trunk multiheads and equal-code linear roles?",
+  "data": {
+    "dataset": "sklearn load_digits 1797 raw grayscale originals",
+    "input_shape": [
+      64
+    ],
+    "K": 5,
+    "tasks": [
+      "digit_label_parity",
+      "digit_label_at_least_5",
+      "left_vs_right_ink_median_threshold",
+      "upper_vs_lower_ink_median_threshold",
+      "center_vs_border_mass_median_threshold"
+    ],
+    "task_binarization": "compute each scalar ink statistic's median using the training originals only; labels on untouched heldout originals from same fixed threshold. The first two labels are distinct categorical tasks determined by digit identity; other three depend on actual individual image pixels. No transformed input per task.",
+    "splits": {
+      "development": [
+        31,
+        32,
+        33
+      ],
+      "fresh": [
+        301,
+        302,
+        303,
+        304,
+        305
+      ],
+      "fresh_not_seen": true,
+      "whole_seed_split": true
+    },
+    "normalization": "pixel data /16, train-only mean and sd+0.15; original train/test 75/25 stratified digit label per seed",
+    "train_examples": "75% original image IDs per seed",
+    "audit_examples": "25% original image IDs",
+    "fresh_world_limitation": "same original dataset repeated splits, not five independent datasets"
+  },
+  "model": {
+    "shared_heavy": "64 -> 128 GELU -> 32 GELU, always one trunk call per input for all K logical tasks",
+    "head": "common trained 32->2 plus task-modulation",
+    "views": {
+      "shared": "one 32->2 head, identical across 5 roles",
+      "native_multihead": "five independent 32->2 heads (strong native one-forward baseline)",
+      "native_fastweight": "native shared head, per-role 32D feature diagonal plus 2 class biases",
+      "mirror_hadamard4": "Hadamard32 known fixed, fixed 32x4 orthogonal code basis. Per role 4 coefficient m; feature chart h_m = ((hH)*exp(Bm))H, 32x2 common head. This is existing learned feature modulation in rotated coordinates, not a novel architecture by itself.",
+      "native_hadamard_linear4": "same fixed Hadamard and B, affine coefficients 1+Bm instead of exp(Bm), exactly same code/payload and tangent",
+      "native_direct_diagonal4": "only four fixed feature channels can be modulated by code4",
+      "native_learned_dictionary4": "paid learned feature-code 4x32 + 5 role code4, same shared head; strong conventional code baseline",
+      "mirror_private1": "mirror_hadamard4 plus per-role 32x1 and 1x2 learned rank1 residual, all bytes paid",
+      "native_linear_private1": "native_hadamard_linear4 plus identical private residual rank1"
+    },
+    "role_trainable_m": [
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "widths": [
+      64,
+      128,
+      32,
+      2
+    ],
+    "kernel": "grouped 5 role readouts from cached 32D latent, no repeated trunk or attention",
+    "eval_calls": "hook counts exactly one shared trunk invocation per 128-image batch, not duplicated per role"
+  },
+  "training": {
+    "optimizer": "AdamW",
+    "steps": 400,
+    "lr": 0.002,
+    "weight_decay": 0.0001,
+    "batch": 128,
+    "dtype": "float32",
+    "torch_threads": 1,
+    "fresh_no_tuning": true,
+    "all_methods_equal_update_samples": true,
+    "heavy_initial": "same W1/W2 for every method within seed; task head independent training except group code",
+    "code_initial": "0/near-0 for output readout identity; native independent task heads seeded from same common head initially",
+    "metrics": "all five task CE averaged; balanced binary task crossentropy; report worst task and per-task discrimination"
+  },
+  "bench": {
+    "batch": 128,
+    "warmups": 20,
+    "iterations": 100,
+    "device": "CPU",
+    "dtype": "float32",
+    "time_unit": "ms",
+    "serialized_unit": "byte",
+    "workload": "identical image input for all five logically distinct tasks"
+  },
+  "null_controls": [
+    "Native separate 5 heads also needs only one heavy trunk call",
+    "One common no-role classifier",
+    "Native fastweight role gate (IA3/BatchEnsemble-style)",
+    "Ordinary linear Hadamard code (same coefficient count and fixed operator)",
+    "Native learned linear dictionary, all shared basis bytes paid"
+  ],
+  "PASS": "At least 4/5 fresh seeds: Mirror has average five-task heldout CE <=native_multihead+0.02 nat/label and <=native_hadamard_linear4-0.01; total actual serialized NPZ bytes <=.90 native_multihead; CPU P95 <=1.10 native_multihead; all five tasks are distinct and noncollapsed on heldout original x. This is synthetic/real-feature multitask only.",
+  "FAIL": "Native same-code linear basis or native one-forward multihead Pareto dominates, or Mirror task code cannot learn independent pixel property functions at realistic K5 and same heavy call count; divergent tasks require private residuals that exhaust any byte saving.",
+  "UNCERTAIN": "only sklearn digits/overlapping seed splits, CPU eager no GPU, native TabM/LoGo not reproduced and no independent natural benchmark. Status parent MA-1175 remains UNTESTED.",
+  "failure_modes": [
+    "output-only code cannot create feature information missing from shared trunk",
+    "exp diagonal in Hadamard basis may overfit and be equivalent to inexpensive FiLM",
+    "extra view transformations may dominate real CPU latency",
+    "future role labels are unknown; multi-output quality, not just different logits, is crucial"
+  ],
+  "reproduction": {
+    "files": [
+      "source/run_mat03.py",
+      "source/test_mat03.py",
+      "results/dev_raw.csv",
+      "results/fresh_raw.csv",
+      "results/RESULTS_CORE.csv",
+      "results/VERIFICATION.json",
+      "REPORT.md"
+    ],
+    "frozen_before_any_fresh": true,
+    "worker_queue_changed": false,
+    "main_changed": false
+  }
+}
