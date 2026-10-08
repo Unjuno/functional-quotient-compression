@@ -1,0 +1,93 @@
+{
+  "experiment_id": "MA-372",
+  "title": "MatFormer Mix'n'Match factorized Mirror codes",
+  "status": "PROTOCOL_FROZEN_BEFORE_DEVELOPMENT",
+  "base_commit": "6abe041",
+  "prior_art_refs": [
+    "PA53",
+    "PA107"
+  ],
+  "hypothesis": "Layer\u00d7width-factorized four-angle Mirror codes fitted only on homogeneous-width subnetworks improve held-out mixed-width configurations over vanilla nested execution and byte-near FiLM, at lower complete payload than storing an independent code for every mixed configuration.",
+  "physical_object": "Three-layer width-64 nested MLP with shared prefix weights; each layer selects width 16, 32, or 64.",
+  "mirror_coordinate": "A four-angle code for each (layer,width) pair, composed layerwise; only factor codes are learned on homogeneous-width cases.",
+  "logical_multiplicity": "27 ordered mixed-width configurations; 3 homogeneous configurations are development support, all mixed configurations are held out from code fitting.",
+  "dataset": {
+    "name": "sklearn digits",
+    "version": "1.8.0",
+    "sha256": "faf2d98f61250c1cdc0b114323133d3c58da04f5c5d28bb78e4bde3c936a75b1",
+    "split": "stratified 60/20/20 per world"
+  },
+  "model": {
+    "input": 64,
+    "hidden_width": 64,
+    "depth": 3,
+    "classes": 10,
+    "widths": [
+      16,
+      32,
+      64
+    ],
+    "training": "sandwich sampling with independent width per layer and distillation from all-64 path",
+    "updates": 800,
+    "batch_size": 64,
+    "optimizer": "AdamW",
+    "learning_rates": [
+      0.003,
+      0.01
+    ],
+    "factor_code_updates": 100,
+    "factor_fit_configs": "homogeneous widths only",
+    "heldout_eval": "all 24 non-homogeneous ordered width triples"
+  },
+  "controls": [
+    "vanilla shared nested model",
+    "factorized layer\u00d7width Givens Mirror codes",
+    "same-shape layer\u00d7width FiLM codes",
+    "direct per-mixed-configuration Givens code bank (upper/storage control)",
+    "independent models for every evaluated mixed configuration (optional only if resource allows)"
+  ],
+  "development": {
+    "worlds": [
+      37200,
+      37201
+    ],
+    "selection": "mean validation NLL over all held-out mixed configs and methods",
+    "allowed_tuning": "select only base learning rate from frozen grid"
+  },
+  "fresh": {
+    "worlds": [
+      37210,
+      37211,
+      37212
+    ],
+    "locked_before_access": true,
+    "required_cli": "--phase fresh --confirm-fresh with DEV_SELECTION.json"
+  },
+  "storage": {
+    "authority": "actual torch.save full inference payload bytes, charging all 27 config descriptors and codes",
+    "paid": [
+      "shared supernet weights",
+      "factor codes",
+      "direct mixed-config code bank",
+      "architecture metadata",
+      "normalization",
+      "serialization overhead"
+    ]
+  },
+  "compute": {
+    "report_examples_seen": true,
+    "optimizer_updates": true,
+    "active_MAC_proxy": true,
+    "adaptation_MAC_proxy": true,
+    "training_wall_time": true,
+    "inference_throughput": true
+  },
+  "success_gate": "On every fresh world, factorized Mirror improves mean mixed-config accuracy by >=1pp over vanilla nested; remains within 2pp of direct per-config code upper control; full payload <=60% of direct bank; and beats equal-byte FiLM by >=1pp or saves >=10% bytes at <=0.5pp loss.",
+  "failure_gate": "Miss quality/byte gates in at least two fresh worlds or FiLM matches/dominates at equal/lower payload and active compute.",
+  "boundaries": [
+    "small digit MLP screen, not Transformer MatFormer reproduction",
+    "unseen mixed configuration evaluation, not independent capacity count",
+    "fixed update evidence is not capacity",
+    "no hardware latency claim"
+  ]
+}
