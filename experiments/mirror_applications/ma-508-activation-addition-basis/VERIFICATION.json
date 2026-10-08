@@ -1,1 +1,15 @@
-{"experiment_id":"MA-508","commit":"<sha>","tests":{"command":"","passed":null,"failed":null},"serialization":{"roundtrip_checked":false,"byte_exact":false},"metric_replay":{"checked":false,"max_difference":null},"fresh_split_integrity_checked":false,"notes":[]}
+{
+  "experiment_id":"MA-508",
+  "protocol_sha256":"44c396a0647bede8edd9a2d9c4e2dcee7a4066b079f8d05f19bd5f174a493d58",
+  "amendment":1,
+  "original_runner_sha256":"7c5947b78cc329d6a4a9e446f2f334414621468437838f04a8d0b1e98624a4cd",
+  "amended_runner_sha256":"0d23ecd9cbcdc6edbb9027b3dcc50339688a72e0a4bc561eb266496f9e49dc2a",
+  "tested_code_commit":"68c868557fa7d73bcb4843a2d0fdc71fa8af2502",
+  "tests":{"command":"python -m pytest -q experiments/mirror_applications/ma-508-activation-addition-basis/tests","passed":3,"failed":0},
+  "serialization":{"roundtrip_checked":true,"actual_lengths_and_hashes_checked":true,"native_pca_payload_byte_identical":true},
+  "metric_replay":{"checked":true,"max_difference":0.0,"all_rank_and_rho_curves_checked":true,"explicit_activation_addition_upper_valid":true,"code_zero_causality_metric_checked":true},
+  "fresh_split_integrity_checked":true,
+  "fresh_accessed":false,
+  "pre_amendment_outputs_preserved":true,
+  "notes":["Initial frozen outputs were preserved because a secondary code-causality metric returned zero for all views due to a comparison bug. Amendment 1 corrected only that diagnostic and reran the same seeds.","At rank 8/rho 0, relative heldout probe RMSE is zero in both worlds and payload is 8,324 B versus 13,194 B explicit. Native PCA exactly matches payload/output.","Fresh seeds 50811-50813 remain sealed due exact native PCA attribution."]
+}
