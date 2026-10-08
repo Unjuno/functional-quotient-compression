@@ -9,21 +9,41 @@
   "physical_object": "shared temporal relation operator basis",
   "mirror_coordinate": "per relation compact coefficients selecting a periodic time-view combination",
   "logical_multiplicity": "relation-specific operator at multiple timestamps",
-  "prior_art_refs": ["PA388", "PA384"],
-  "controls": ["native TNTComplEx-style entity/relation/time factors", "TuckER-style low-rank shared relation-time tensor basis", "simple per-relation low-rank time coefficients", "independent relation-time operators as upper control"],
+  "prior_art_refs": [
+    "PA388",
+    "PA384"
+  ],
+  "controls": [
+    "native periodic temporal relation modulation with fixed shared time features",
+    "TuckER-style relation coefficient x fixed time feature x shared operator basis",
+    "per-relation low-rank time-to-operator maps",
+    "independent relation-time operators as upper control"
+  ],
   "task": "binary temporal link ranking on generated entity-relation-time triples; report filtered MRR and Hits@1",
   "development": {
-    "worlds_or_seeds": [112001],
+    "worlds_or_seeds": [
+      112001
+    ],
     "selection_metric": "development filtered MRR with serialized payload bytes; choose only rank and Mirror coefficient budget"
   },
   "fresh": {
-    "worlds_or_seeds": [112101, 112102, 112103],
+    "worlds_or_seeds": [
+      112101,
+      112102,
+      112103
+    ],
     "locked_before_access": true,
     "split": "chronological training times 0..7, development 8..9, fresh audit 10..11; audit relation-time pairs are held out, and all training triples precede audit timestamps"
   },
   "storage": {
     "authority": "actual serialized inference payload bytes",
-    "paid_objects": ["all learned entity/relation/time embeddings", "Mirror codes", "shared basis", "private residuals", "indices and metadata"]
+    "paid_objects": [
+      "all learned entity/relation/time embeddings",
+      "Mirror codes",
+      "shared basis",
+      "private residuals",
+      "indices and metadata"
+    ]
   },
   "compute": {
     "report_tokens_or_examples": true,
@@ -31,7 +51,13 @@
     "report_active_compute_proxy": true,
     "report_isolated_wall_clock": true
   },
-  "success_gate": "On at least 2/3 fresh worlds, Mirror filtered MRR >= 0.95 * native TNTComplEx and >= 0.95 * byte-near Tucker/low-rank control while actual payload <= 0.60 * native TNTComplEx; report compute and independent-operator boundary. This supports only an aligned synthetic mechanism result.",
-  "failure_gate": "FAIL if the quality condition fails on at least 2/3 worlds, Mirror exceeds byte-near simple control, or serialized payload exceeds 60% native payload. PROMISING only if a directionally positive result misses a gate narrowly.",
-  "boundaries": ["synthetic graph only; no benchmark reproduction", "fixed-update learning efficiency is not capacity evidence", "logical relation-time combinations do not imply independent capacity", "no audit-driven tuning"]
+  "success_gate": "On at least 2/3 fresh aligned worlds, Mirror filtered MRR >= 0.95 * native periodic temporal baseline and >= 0.95 * byte-near Tucker/low-rank control while actual payload <= 0.60 * native TNTComplEx-style periodic baseline; report independent-operator boundary and compute. This supports only an aligned synthetic mechanism result.",
+  "failure_gate": "FAIL if the quality condition fails on at least 2/3 fresh aligned worlds, Mirror is not better in quality-by-bytes than the strongest non-Mirror control, or serialized payload exceeds 60% of native periodic baseline. PROMISING only if a directionally positive result misses a gate narrowly.",
+  "boundaries": [
+    "synthetic graph only; no benchmark reproduction",
+    "fixed-update learning efficiency is not capacity evidence",
+    "logical relation-time combinations do not imply independent capacity",
+    "no audit-driven tuning"
+  ],
+  "amendment_1": "Before fresh audit: correct time extrapolation validity. All methods now receive the same fixed 8-period sinusoidal timestamp features; train timestamps 0..7 and evaluate unseen future timestamps 8..11. This prevents an embedding-only failure from deciding the temporal generalization question. Amendment based only on development diagnostics; audit seeds remain unopened."
 }

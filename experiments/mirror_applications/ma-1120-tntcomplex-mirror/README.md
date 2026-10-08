@@ -25,3 +25,7 @@ Whether Mirror improves the quality-by-actual-bytes frontier, its runtime cost, 
 - Fact: PA388 describes TNTComplEx temporal tensor factorization; PA384 describes TuckER shared tensor cores.
 - Interpretation: these are strong native controls and reduce the novelty claim to incremental parameterization and measured deployment tradeoffs.
 - Hypothesis: a compact Mirror address may factorize relation x time operators more efficiently on a shared periodic structure.
+
+## Protocol amendment before audit
+
+Development diagnostics showed that learned timestamp embeddings cannot evaluate unseen future timestamps. Before opening any fresh seeds, protocol amendment 1 replaced those embeddings with the same fixed 8-period sinusoidal timestamp features in every method. Fresh seeds remain 112101–112103. The Mirror and TuckER controls have equal parameter counts and the same separable function family; this makes the TuckER comparison a direct check for Mirror-specific benefit.
