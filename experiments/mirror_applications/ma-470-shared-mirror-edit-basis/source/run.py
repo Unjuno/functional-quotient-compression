@@ -53,7 +53,7 @@ def init(method,seed):
 def gen(method,s,g):
     if method=='no_edit':return torch.zeros(D,D)
     if method in ('rome','independent_fit'):raise ValueError('support-derived method')
-    out=s['net'](g)
+    out=s['net'](g.reshape(-1))
     return out.reshape(D,D) if method=='mend' else torch.einsum('r,rij->ij',out,s['basis'])
 
 def params(method,s):
@@ -108,7 +108,7 @@ def evaluate(method,s,seed,w,wall,rome,ind):
         for e in range(EDITS):
             if method in ('mend','mirror','native_lowrank'):
                 updates.append(gen(method,s,w['signals'][e]))
-                if method in ('mirror','native_lowrank'):codes.append(s['net'](w['signals'][e]).reshape(2))
+                if method in ('mirror','native_lowrank'):codes.append(s['net'](w['signals'][e].reshape(-1)).reshape(2))
             elif method=='rome':updates.append(rome[e])
             elif method=='independent_fit':updates.append(ind[e])
             else:updates.append(torch.zeros(D,D))

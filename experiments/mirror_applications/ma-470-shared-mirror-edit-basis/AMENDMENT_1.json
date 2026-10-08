@@ -1,0 +1,18 @@
+{
+  "amendment": 1,
+  "change": "Flatten the matrix signal in the shared generator call and Mirror code extraction; add a regression test exercising both MEND and Mirror generation.",
+  "data_runs_before_amendment": false,
+  "date": "2026-10-08",
+  "experiment_id": "MA-470",
+  "original_protocol_sha256": "83a6a00a68351bae2dd0992895b3a0484cbe3f01aa226716183f6030a691cca3",
+  "reason": "Pre-run smoke review found the support gradient is stored as a D\u00d7D matrix while Editor expects a flattened D\u00b2 vector. The initial tests checked signal shape but did not call the editor.",
+  "type": "implementation-only before any development data run",
+  "unchanged": [
+    "protocol task",
+    "model dimensions",
+    "seeds",
+    "optimizer and updates",
+    "quality/storage/compute gates",
+    "fresh seal"
+  ]
+}

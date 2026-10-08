@@ -20,3 +20,11 @@ def test_native_basis_is_exact_mirror_parameterization():
     a=run.init('mirror',47001);b=run.init('native_lowrank',47001)
     for x,y in zip(a['net'].parameters(),b['net'].parameters()):assert torch.equal(x,y)
     assert torch.equal(a['basis'],b['basis'])
+
+
+def test_editor_accepts_matrix_signal_and_returns_expected_updates():
+    w=run.world(47001)
+    mirror=run.init('mirror',47001)
+    mend=run.init('mend',47001)
+    assert run.gen('mirror',mirror,w['signals'][0]).shape==(run.D,run.D)
+    assert run.gen('mend',mend,w['signals'][0]).shape==(run.D,run.D)
