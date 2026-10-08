@@ -92,6 +92,10 @@ The registry treats any repeated object as a candidate:
 - shared universal time-series forecasting models with horizon, variable, frequency and regime Views;
 - high-cardinality recommender categorical tables/generators with field, task, domain and rare-ID coordinates;
 - physically calibrated multi-sensor Earth-observation networks with wavelength, modality, scale and season Views.
+- relational KG transformations (complex rotations, quaternion, Tucker and Kraus relation operators) with domain/time coordinates;
+- camera ISP/PSF physical sensor families modulated by device, ISO, exposure and lens optics;
+- deployable robot control policies using online mass/friction/contact estimates and morphology codes;
+- continuous room-acoustic source/receiver neural fields with per-room spectral and reflection parameters;
 - natural, independently trained LoRA adapter banks with gauge-invariant shared subspaces, compact task cores and private residuals;
 - low-rank multi-agent KV cache states with neutral base-cache reconstruction beyond LRAgent/PReCache.
 
