@@ -1,19 +1,29 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-315",
+  "commit": "9bdcbdd (frozen pre-fresh protocol); final result commit recorded in Git history",
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "python -m pytest -q experiments/mirror_applications/ma-315-sparse-private-intrinsic-mirror/tests",
+    "passed": 3,
+    "failed": 0
   },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "payload_hashes_exact": true
   },
   "metric_replay": {
-    "checked": false,
-    "max_difference": null
+    "checked": true,
+    "summary_rows": 45,
+    "allocation_events": 1280,
+    "artifact_files": 5,
+    "max_difference": 0.0
   },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Fresh seeds 31511, 31512, 31513 were run only after frozen protocol commit 9bdcbdd.",
+    "Fresh gate FAIL: mirror payload exceeded matched shared-direct sparse control by 3.31-3.32% in all 3 seeds; both methods met test nMSE <=1e-4.",
+    "Fresh mirror fit compute proxy was about 41.9-42.2x control; throughput was 0.61-0.78x control.",
+    "All seeds and all 9 methods are separately serialized and hash-checked. Wall-clock is diagnostic and noisy.",
+    "Synthetic post-fit linear representation screen, no optimizer updates; no capacity or neural-network performance claim."
+  ]
 }
