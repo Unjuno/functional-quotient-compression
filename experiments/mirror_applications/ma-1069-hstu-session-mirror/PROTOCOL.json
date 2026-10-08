@@ -1,0 +1,55 @@
+{
+  "experiment_id": "MA-1069",
+  "title": "HSTU session-context Mirror views for logical user preferences",
+  "status": "NOT ESTABLISHED \u2014 environment blocker; registry remains UNTESTED",
+  "evidence_lane": "QUALITY/STORAGE/RUNTIME",
+  "base_commit": "16807a7d6dc17a834a44ed3cc793ccc28b615691",
+  "hypothesis": "Adding a small session-context m to a shared HSTU readout yields useful multiobjective user-preference functions without duplicating HSTU parameters or history state, at matched recommendation quality and serving cost.",
+  "physical_object": "One HSTU sequential recommendation model and its user interaction history/cache.",
+  "mirror_coordinate": "A compact session-context code m supplied to the native HSTU readout.",
+  "logical_multiplicity": "Distinct useful user-preference/readout functions.",
+  "prior_art_refs": [
+    "PA342"
+  ],
+  "controls": [
+    "native HSTU historical conditioning",
+    "shared HSTU with ordinary session embedding/gate or low-rank readout",
+    "independent per-objective/user head upper control"
+  ],
+  "development": {
+    "worlds_or_seeds": [],
+    "selection_metric": "No development run: required HSTU training/inference stack unavailable."
+  },
+  "fresh": {
+    "worlds_or_seeds": [],
+    "locked_before_access": true,
+    "opened": false
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "HSTU model",
+      "m codes",
+      "readout/gate/router",
+      "history/session cache",
+      "indices and metadata"
+    ]
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true,
+    "status": "Not measured; HSTU execution unavailable."
+  },
+  "success_gate": "Fresh time-ordered recommendation evaluation must show useful objective-specific quality at matched or improved serialized payload and serving latency versus native HSTU and the cheapest ordinary embedding/gate/low-rank control.",
+  "failure_gate": "Mirror fails if a simple session embedding/gate matches its quality at equal or lower bytes/latency, or if quality gains require duplicated history/model state that removes the Pareto benefit.",
+  "boundaries": [
+    "This candidate was randomly selected as draw 15, pool size 536, zero-based index 56.",
+    "Pool SHA-256: 39f013250a32880d6e046fd27ce97f3828203da417ff471cb9a21d0f2bb73942. Selection-pool CSV SHA-256: 54eb505ac21a72c04774ddd3733cb320be7c83ce58dcab96b480e77c4e1fe963.",
+    "No training, development, fresh or audit examples were opened.",
+    "Environment capability check: torch/tensorflow/jax/transformers/datasets absent; nvidia-smi/nvcc absent.",
+    "No HSTU implementation/checkpoint or recommendation dataset was present in the workspace.",
+    "Do not substitute a toy sequence model; it would not reproduce PA342 HSTU behavior."
+  ]
+}

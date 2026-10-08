@@ -431,3 +431,8 @@ A worker may batch implementation work across a family, but scientific status is
 ## Stop rule
 
 If two consecutive candidates in a family fail for the same demonstrated structural reason, stop that family and write a family diagnostic before continuing.
+
+
+## Random selection worker log — draw 15
+
+Selected MA-1069 from a uniform draw over 536 candidates eligible in the latest worker-ready registry snapshot. Zero-based index 56; PRNG selection digest `39f013250a32880d6e046fd27ce97f3828203da417ff471cb9a21d0f2bb73942`; ordered pool CSV SHA-256 `54eb505ac21a72c04774ddd3733cb320be7c83ce58dcab96b480e77c4e1fe963`. No conflicting remote MA-1069 branch existed after selection. Environment blocker is recorded in `experiments/mirror_applications/ma-1069-hstu-session-mirror/`; registry remains UNTESTED. Continue with a new independent uniform draw; never fall back to sequential MA order.
