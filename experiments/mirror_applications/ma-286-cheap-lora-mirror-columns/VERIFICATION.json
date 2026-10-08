@@ -1,0 +1,34 @@
+{
+  "experiment_id": "MA-286",
+  "source_commit": "ed10296",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-286-cheap-lora-mirror-columns/tests -v",
+    "passed": 5,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "maximum_reconstruction_abs_difference": 0.0,
+    "payload_hashes_recorded": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0,
+    "rows_replayed": 24
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_seeds": [
+    28611,
+    28612,
+    28613
+  ],
+  "notes": [
+    "Addresses are supplied metadata and charged; no task-code learning claim.",
+    "One-hot shared-B control is functionally identical and costs 78B more in this record codec.",
+    "Two unrelated maps use private rank-four factors.",
+    "No optimizer updates. NumPy CPU only.",
+    "Integrated branch reran all 5 tests, 24 fresh metric/hash replays and byte-exact serializer tests successfully.",
+    "Experiment result commit: ed10296."
+  ]
+}
