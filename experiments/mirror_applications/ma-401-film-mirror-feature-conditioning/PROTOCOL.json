@@ -1,0 +1,84 @@
+{
+  "experiment_id": "MA-401",
+  "title": "FiLM versus Mirror feature conditioning",
+  "status": "PROTOCOL_FROZEN_BEFORE_DEVELOPMENT",
+  "base_commit": "9cfebcc",
+  "prior_art_refs": [
+    "PA63",
+    "PA106"
+  ],
+  "hypothesis": "For context-conditioned digit classification under four fixed input domains, a four-angle Givens feature View can improve quality over shared unconditioned features with a smaller actual inference payload than FiLM, while matching or exceeding same-dimensional grouped FiLM and rank-1 controls.",
+  "physical_object": "One 64-64-10 MLP shared by four fixed pixel-permutation contexts.",
+  "mirror_coordinate": "Four context-specific Givens angles over the first eight hidden activation coordinates before the classifier.",
+  "logical_multiplicity": "Four context-conditioned digit classifiers from one shared MLP.",
+  "dataset": {
+    "name": "sklearn digits",
+    "version": "1.8.0",
+    "sha256": "faf2d98f61250c1cdc0b114323133d3c58da04f5c5d28bb78e4bde3c936a75b1",
+    "contexts": "four deterministic pixel-index permutations; labels unchanged",
+    "split": "stratified 60/20/20 by base example; same identities across contexts; per-world seed"
+  },
+  "model": {
+    "input": 64,
+    "hidden": 64,
+    "classes": 10,
+    "updates": 600,
+    "batch_size": 64,
+    "optimizer": "AdamW",
+    "learning_rates": [
+      0.003,
+      0.01
+    ],
+    "context_code_updates": 100,
+    "methods": [
+      "shared no-code",
+      "4-angle Givens Mirror/context",
+      "4-value grouped scale FiLM/context",
+      "8-value grouped affine FiLM/context",
+      "rank-1 output adapter/context",
+      "independent MLP/context"
+    ]
+  },
+  "development": {
+    "worlds": [
+      40100,
+      40101
+    ],
+    "selection": "minimum validation NLL averaged across four contexts and methods",
+    "allowed_tuning": "select only shared/independent training LR from frozen grid"
+  },
+  "fresh": {
+    "worlds": [
+      40110,
+      40111,
+      40112
+    ],
+    "locked_before_access": true,
+    "required_cli": "--phase fresh --confirm-fresh with DEV_SELECTION.json"
+  },
+  "storage": {
+    "authority": "actual torch.save complete inference bank bytes after reload",
+    "paid": [
+      "shared/independent weights",
+      "all context codes/adapters",
+      "permutation indices",
+      "normalization and metadata",
+      "serialization overhead"
+    ]
+  },
+  "compute": {
+    "report_examples_seen": true,
+    "optimizer_updates": true,
+    "active_MAC_proxy": true,
+    "adaptation_MAC_proxy": true,
+    "training_wall_time": true,
+    "inference_throughput": true
+  },
+  "success_gate": "Every fresh world: Mirror improves mean accuracy over no-code shared baseline by >=1pp, within 2pp of independent, complete payload <=60% independent, and vs same-dimensional scale FiLM either >=1pp accuracy gain at byte-near cost or >=10% byte savings at <=0.5pp loss.",
+  "failure_gate": "Quality/storage gate fails in >=2 fresh worlds or grouped FiLM/rank-1 matches or dominates at equal/lower complete bytes and active compute.",
+  "boundaries": [
+    "digits context classification only, not a Transformer feature-conditioning benchmark",
+    "fixed updates are not capacity evidence",
+    "no device latency claim"
+  ]
+}
