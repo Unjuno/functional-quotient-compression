@@ -6,25 +6,24 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 875-row registry)
 
 - Registered candidates: **875**
-- P0: **408** (35 completed; 373 UNTESTED)
+- P0: **408** (36 completed; 372 UNTESTED)
 - P1: **364** (12 completed; 352 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **828 UNTESTED, 29 PROMISING, 18 FAIL**
+- Current MA statuses: **827 UNTESTED, 29 PROMISING, 19 FAIL**
 - 47 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - PROMISING is **not** ADOPTED. Treat reports with strict-gate misses or exploratory protocol deviations at their documented scope.
 - SRM/TM and prior Phase I results are not MA statuses.
 
 ## Next candidate
 
-**MA-255 — Mirror context superposition for task models (P0; PA16)**
+**MA-260 — BatchEnsemble rank-one Mirror ensemble (P0; PA17)**
 
 Reason:
-- all previously locked MA-241/244/245/247–251/253 and subsequent old-chain P0 screens have completed;
-- the original P0 cross-over queue is exhausted among checked candidates;
-- MA-255 is the first untested P0 in the earlier high-information literature cross-over queue;
-- direct Parameter Superposition prior art gives a strong nearest control for insertion of the extra Mirror parameter `m`.
+- MA-255 completed a development-only FAIL; fresh data remained unopened after failing the quality gate.
+- MA-260 is the next registered high-information P0 literature crossover in WORKER_QUEUE.
+- BatchEnsemble is its mandatory direct control.
 
-Required controls: native Parameter Superposition, naive/shared task-code basis, matched byte-near low-rank or VeRA-style modulation, independent-model upper reference where practical. Do not claim the superposition concept itself as a Mirror invention.
+Required controls: native BatchEnsemble rank-one factors, ordinary shared/independent ensemble, byte-near Mirror views, calibration/diversity. Do not claim ensemble multiplicity from member count alone.
 
 If blocked by a documented reproducibility or harness issue, record it and resume at MA-260 (BatchEnsemble), then MA-261/265/268 in the registered literature priority sequence. Do not jump to P1/novelty-picked topics before P0.
 

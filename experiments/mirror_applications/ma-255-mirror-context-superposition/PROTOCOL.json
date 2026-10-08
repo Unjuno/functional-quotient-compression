@@ -1,0 +1,96 @@
+{
+  "experiment_id": "MA-255",
+  "title": "Mirror context superposition for task models",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/RUNTIME",
+  "base_commit": "f7f76de193063950d28b7834f337840b1e86f0ce",
+  "prior_art_refs": [
+    "PA16"
+  ],
+  "hypothesis": "Learned diagonal or orthogonal task Mirror views over one shared physical matrix recover related task functions with lower bytes than independent matrices and improve on fixed PSP contexts and byte-near low-rank residuals.",
+  "physical_object": "One shared D x O linear-map matrix",
+  "mirror_coordinate": "Task-specific learned output diagonal gain or matrix-free Givens rotation code",
+  "logical_multiplicity": "Eight task-specific linear functions",
+  "task": {
+    "input_dim": 16,
+    "output_dim": 16,
+    "task_count": 8,
+    "family": "shared base matrix plus task-specific structured output transforms",
+    "metric": "per-task held-out MSE"
+  },
+  "controls": [
+    "independent full task matrices",
+    "one ordinary shared matrix",
+    "native PSP fixed Rademacher contexts with unbinding",
+    "shared matrix + task-conditioned rank-2 residual",
+    "shared matrix + learned task-specific diagonal gain",
+    "shared matrix + learned task-specific Givens orthogonal output transform"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      {
+        "world": 25500,
+        "init_seed": 255000
+      }
+    ],
+    "learning_rate_candidates": [
+      0.003,
+      0.01
+    ],
+    "updates": 1200,
+    "selection_metric": "mean held-out task MSE across all methods"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      {
+        "world": 25501,
+        "init_seed": 255001
+      },
+      {
+        "world": 25502,
+        "init_seed": 255002
+      },
+      {
+        "world": 25503,
+        "init_seed": 255003
+      }
+    ],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual torch.save inference payload plus canonical JSON metadata",
+    "paid_objects": [
+      "shared/independent matrices",
+      "all Mirror coordinates",
+      "low-rank bases/task codes",
+      "biases",
+      "architecture metadata",
+      "PSP superposed matrix and deterministic context seed metadata"
+    ]
+  },
+  "compute": {
+    "report_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_MAC_proxy": true,
+    "report_isolated_wall_time": true,
+    "report_inference_throughput": true,
+    "cpu_threads": 1
+  },
+  "success_gate": "Mirror per-task heldout MSE <=1.10x independent, payload <=50% independent, and >=10% lower mean MSE than PSP and lowrank at byte-near payload (within 15%) or strictly lower bytes.",
+  "failure_gate": "Mirror misses quality/byte gate or PSP/lowrank matches it at equal/lower bytes.",
+  "boundaries": [
+    "synthetic linear task family only",
+    "fixed-update screen is not capacity proof",
+    "task ID supplied; no routing",
+    "no language quality or fixed-byte near-convergence frontier"
+  ],
+  "amendments": [
+    {
+      "date": "2026-10-08",
+      "before_fresh_access": true,
+      "reason": "Code audit found initial PSP implementation did not encode task-specific target matrices: it reused the shared parameter as every bound item and serialized a duplicated context buffer.",
+      "change": "PSP control now directly trains one physical superposed tensor; inference sign-unbinds a fixed seeded Rademacher context, with context deterministically reconstructed from the paid seed metadata. Development screen is rerun from scratch under the same world/seed and LR candidates.",
+      "scope": "Only native PSP control implementation and paid context storage representation; other methods and all seeds/gates unchanged."
+    }
+  ]
+}
