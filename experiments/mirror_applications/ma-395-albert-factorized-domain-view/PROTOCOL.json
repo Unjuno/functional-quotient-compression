@@ -1,0 +1,20 @@
+{
+ "experiment_id":"MA-395",
+ "title":"ALBERT factorized embedding plus domain Mirror views",
+ "status":"FROZEN_DEVELOPMENT",
+ "base_commit":"bb638b6327323c265a1a0d602a9d7964a073ab06",
+ "evidence_lane":"MECHANISM/STORAGE/DOMAIN_TRANSFER/RUNTIME",
+ "prior_art_refs":["PA61"],
+ "hypothesis":"A small domain Givens coordinate applied inside an ALBERT-style low-dimensional token embedding bottleneck can restore useful domain-specific functions for held-out token-domain pairs at lower actual bytes than domain adapters applied after the embedding projection.",
+ "physical_object":"one shared 4D vocabulary embedding table and one shared 4D-to-16D projection",
+ "mirror_coordinate":"one Givens angle per domain, applied in the 4D embedding bottleneck before the shared projection",
+ "logical_multiplicity":"64 tokens x 4 domains = 256 domain-token roles",
+ "model":{"vocabulary":64,"domains":4,"factorized_embedding_dim":4,"hidden_dim":16,"classes":8,"heldout_pair_fraction":0.25,"train_examples":65536,"validation_examples":32768,"test_examples":32768,"batch_size":128,"optimizer_updates":512,"optimizer":"Adam","learning_rate":0.003,"development_seeds":[39501,39502],"fresh_seeds":[39511,39512,39513],"data":"Synthetic token-domain classification. A shared token latent is transformed by a domain-specific Givens rotation in the 4D bottleneck and projected to 16D before a shared classifier. A seed-locked 25% of token-domain pairs is held out while each token and domain remains represented in training."},
+ "controls":["independent 16D embedding per token-domain pair","ALBERT-style hard-shared 4D embedding plus shared projection","domain FiLM after the shared projection","rank-2 domain LoRA adapter after the shared projection","Mirror domain angle inside the 4D bottleneck"],
+ "development_gate_before_fresh":"Both seeds: independent seen-pair accuracy >=0.80; Mirror seen-pair accuracy within 0.02 of the best non-independent control; Mirror held-out-pair accuracy >=0.05 absolute above ALBERT hard sharing; actual payload <=1.10x the smallest ALBERT/FiLM/LoRA control and <=0.50x independent embedding; count unique FP16 role embeddings; serialized-state CPU throughput >=0.90x the fastest shared control. Fresh remains sealed if any gate misses.",
+ "success_gate":"All three fresh worlds pass held-out quality, bytes, uniqueness, runtime and exact replay, and Mirror improves the quality-byte frontier over hard sharing and domain adapters.",
+ "failure_gate":"Any development seed misses a registered gate or an outside-embedding adapter matches the held-out transfer at comparable/lower bytes.",
+ "storage":{"authority":"actual deterministic ZIP/NPY FP16 payload after reload","paid_objects":["shared vocabulary embedding","shared projection","all domain Mirror codes","all FiLM or LoRA adapter state","classifier","metadata","archive headers"]},
+ "compute":{"report_updates_examples_and_wall_clock":true,"report_actual_payload_bytes":true,"report_seen_and_heldout_nll_accuracy":true,"report_unique_role_embeddings":true,"report_serialized_state_cpu_throughput":true},
+ "boundaries":["synthetic aligned teacher only","role multiplicity is not independent capacity","no natural language or multilingual transfer claim","fresh worlds remain sealed unless all development gates pass"]
+}
