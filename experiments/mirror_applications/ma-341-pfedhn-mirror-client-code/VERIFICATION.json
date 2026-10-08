@@ -1,0 +1,28 @@
+{
+  "status": "AMENDMENT REQUIRED",
+  "protocol_frozen": true,
+  "base_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
+  "checks": [
+    {"name": "protocol_draw_frozen_before_data_metrics", "result": "PASS", "commit": "c2e21ae"},
+    {"name": "deterministic_partition_and_model_tests", "result": "PASS", "detail": "4 tests passed"},
+    {"name": "fresh_worlds_and_model_seeds", "result": "PASS", "detail": "3 worlds x 3 model seeds"},
+    {"name": "heldout_query_not_used_for_selection", "result": "PASS", "detail": "train-client dev only for shared checkpoint selection; unseen query evaluated after adaptation"},
+    {"name": "actual_serialized_payload_bytes", "result": "PASS", "detail": "safetensors file sizes recorded in metrics.csv; payload hashes in artifacts/SHA256SUMS"},
+    {"name": "registered_mirror_quality_gate", "result": "PASS", "detail": "after averaging model seeds per world/client, both held-out clients within 2 points in all 3 worlds"},
+    {"name": "registered_mirror_storage_gate", "result": "PASS", "detail": "Mirror server+registered payload 10,792B vs pFedHN 630,248B; 88B per-client code vs 9,640B generated full model"},
+    {"name": "mirror_specificity_vs_film", "result": "NOT ESTABLISHED", "detail": "corrected FiLM is near-quality with equal per-client bytes; Mirror improves average quality and shared bytes but has slower code adaptation"},
+    {"name": "batch1_latency", "result": "NOT MEASURED", "detail": "CPU batch-1 p95 instrumentation omitted; no claim based on it"}
+  ],
+  "notes": ["Metrics are a fixed-budget screening result, not a near-convergence capacity claim.", "Small simulated-client task; pFedHN-style direct reimplementation, not a faithful paper reproduction.", "Independent unseen local model adaptation uses fresh deterministic initialization and support only."],
+  "provenance": {
+    "metrics_csv_sha256": "30dc41153528ae16a6c6891a72644bc173aaa08e966c531653ba361d5dc03435",
+    "payload_sha256_manifest": "artifacts/SHA256SUMS",
+    "payload_sha256_manifest_hash": "729f679acb03de1d618a019fbf193b88a374f2e8cfb1795ac059342f71a840dd",
+    "runner_sha256": "4b48fd5aa4797768507ec51933893970d0bf677808dc07f9a2b4e47a6a177350",
+    "data_manifest_sha256": "786e1bc0b584e2f2ba3f4f35db3ee32acdcddf6e7894d5bcebdc8a0e18dc6de9",
+    "python": "3.12",
+    "torch": "2.6.0+cpu",
+    "safetensors": "0.6.2",
+    "scikit_learn": "1.8.0"
+  }
+}

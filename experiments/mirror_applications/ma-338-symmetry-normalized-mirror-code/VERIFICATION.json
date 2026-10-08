@@ -1,0 +1,9 @@
+{
+  "experiment_id": "MA-338",
+  "commit": "2bc31c9ba29fae752f714e3e0c91ce59413ef4ce",
+  "tests": {"command": "python -m pytest -q experiments/mirror_applications/ma-338-symmetry-normalized-mirror-code/tests", "passed": 3, "failed": 0},
+  "serialization": {"roundtrip_checked": true, "byte_exact": true, "development_payloads_checked": 12, "max_metric_replay_difference": 0.0},
+  "metric_replay": {"command": "python experiments/mirror_applications/ma-338-symmetry-normalized-mirror-code/source/verify.py", "checked": true, "development_rows_replayed": 12, "fresh_rows": 0, "max_difference": 0.0},
+  "fresh_split_integrity_checked": true,
+  "notes": ["Development seeds 33801 and 33802 were the only experiment worlds accessed. Fresh seeds 33811–33813 remained sealed after the frozen Mirror byte gate was missed in both development worlds.", "Activation matching canonicalized hidden permutation/sign states; normalized direct/phase task reconstruction was near exact. The serialized phase method was larger than direct coefficients on both development seeds.", "Synthetic post-fit MLP checkpoints only; no trained-model or natural-task result."]
+}

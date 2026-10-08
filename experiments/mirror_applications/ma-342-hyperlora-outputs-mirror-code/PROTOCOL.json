@@ -1,0 +1,22 @@
+{
+  "experiment_id": "MA-342",
+  "title": "HyperLoRA factor generation vs client Mirror code",
+  "status": "AMENDED_AFTER_DEVELOPMENT_FAIL_BEFORE_FRESH",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY/COMMUNICATION/COMPUTE/GENERALIZATION",
+  "base_commit": "7d5084a",
+  "hypothesis": "For clients whose rank-2 LoRA updates share a left factor and lie on a sinusoidal task orbit, one shared LoRA basis plus a phase code will reproduce unseen client adapters with lower actual server+client payload than a HyperLoRA-style generator that emits full A/B initialization. A direct low-rank coefficient control and an ordinary scalar phase control determine whether any gain is Mirror-specific. An off-orbit client may require private rank-2 factors.",
+  "physical_object": "one shared 16x16 base weight, rank-2 left LoRA factor B, and two right-factor basis matrices A1/A2",
+  "mirror_coordinate": "one phase angle per client selecting cos(theta) A1 + sin(theta) A2",
+  "logical_multiplicity": "64 client adapters on a rank-2 orbit, including 16 clients held out from local fitting, plus one off-orbit client",
+  "prior_art_refs": ["PA38"],
+  "controls": ["independent rank-2 client LoRA factors", "one averaged shared adapter", "HyperLoRA-style linear generator emitting full client-specific A/B factors from 2D client embeddings", "HyperLoRA generator with/without private off-orbit factors", "Mirror phase with/without private rank-2 factors", "ordinary direct rank-2 coefficients", "ordinary scalar phase code with identical inference state"],
+  "development": {"worlds_or_seeds": [34201, 34202], "selection_metric": "unseen-client output nMSE, actual total payload bytes, client communication bytes, factor-generation MACs, private-state need"},
+  "fresh": {"worlds_or_seeds": [34211, 34212, 34213], "locked_before_access": true},
+  "storage": {"authority": "actual deterministic ZIP/NPY FP32 inference payload after reload", "paid_objects": ["shared base weight", "HyperLoRA generator or shared B/A basis", "all client embeddings/phase/direct coefficient codes", "private off-orbit factors", "metadata"]},
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true},
+  "success_gate": "All fresh seeds: unseen-client nMSE <=1e-5; Mirror total payload at least 20% below HyperLoRA with private fallback; Mirror at least 10% below both direct coefficient and native scalar-phase controls at equal quality; generation compute <=2x HyperLoRA; report communication and off-orbit private state.",
+  "failure_gate": "Unseen quality misses 1e-5 in at least two fresh seeds; or storage reduction vs HyperLoRA is <20%; or a direct/native control is within 10% bytes at equal quality; or generation compute exceeds 2x.",
+  "development_decision": "On both development worlds, HyperLoRA full-factor generator with the private fallback had lower serialized bytes than Mirror (2,861B vs 2,980B; 2,874B vs 2,976B). Mirror also missed the 20% payload margin versus HyperLoRA, and the native phase control was byte/hash identical. Since the representation shapes and exact synthetic family are fixed, freeze FAIL at development and keep fresh seeds sealed.",
+  "amendment": "After development-only inspection and before fresh access, lock the stated development stop. No fresh results were accessed; quality or byte thresholds were not changed. Seeds 34211–34213 remain sealed.",
+  "boundaries": ["synthetic post-fit linear LoRA functions, not neural model fine-tuning", "client features are available to both HyperLoRA and Mirror; 16 unseen clients have no local examples", "HyperLoRA control is a linear full-factor generator on a planted task manifold, not a reproduction of the full HyperLoRA training stack", "no optimizer updates; client adapters are estimated from local linear regression support data and generator fitted by least squares", "one off-orbit client is included to measure private rank-2 factor need"]
+}

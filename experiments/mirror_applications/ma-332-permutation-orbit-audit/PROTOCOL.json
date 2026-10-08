@@ -1,0 +1,20 @@
+{
+  "experiment_id": "MA-332",
+  "title": "Mirror permutation-orbit audit",
+  "status": "PROTOCOL_FROZEN_BEFORE_DEVELOPMENT",
+  "evidence_lane": "MECHANISM/STORAGE/NUMERICAL",
+  "base_commit": "16578db",
+  "hypothesis": "For a trained one-hidden-layer ReLU MLP, hidden-unit permutation Views with correspondingly permuted incoming weights/biases and outgoing rows will preserve test outputs to numerical tolerance. Encoding 8 such Views as base weights plus paid permutation indices may appear to compress compared with 8 checkpoint copies, but permutation count must not be called functional multiplicity if outputs do not change.",
+  "physical_object": "one trained 8-12-3 ReLU MLP",
+  "mirror_coordinate": "hidden-unit permutation indices applied consistently across adjacent tensors",
+  "logical_multiplicity": "eight parameter coordinate variants in one exact function orbit",
+  "prior_art_refs": ["PA37", "PA47"],
+  "controls": ["single unpermuted trained network", "eight separately serialized permuted checkpoints", "one shared checkpoint plus eight paid permutation index vectors", "permutation applied only to incoming weights as a negative control"],
+  "development": {"worlds_or_seeds": [33201, 33202], "selection_metric": "maximum and RMS output difference on held-out examples and actual serialized bytes"},
+  "fresh": {"worlds_or_seeds": [33211, 33212, 33213], "locked_before_access": true},
+  "storage": {"authority": "actual deterministic fixed-timestamp ZIP/NPY FP16 payload bytes", "paid_objects": ["all base weights", "all permutation indices", "metadata and archive headers"]},
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true},
+  "success_gate": "Audit confirms functional equivalence within max abs output difference <=1e-5 after FP16 reload in all fresh seeds; quantify actual bytes and explicitly classify the orbit as zero additional function multiplicity.",
+  "failure_gate": "Consistent function difference >1e-5 after correct permutation of all symmetry-coupled tensors, indicating a broken symmetry implementation or numerical issue requiring NOT ESTABLISHED.",
+  "boundaries": ["permutation orbit is a symmetry audit, not a compression win", "permutations are parameter-coordinate variants of one function", "only a single synthetic trained MLP is evaluated", "sign/scale symmetries and other architectures are not tested"]
+}

@@ -1,0 +1,9 @@
+{
+  "experiment_id": "MA-342",
+  "commit": "1d30da996fc809269718337c71b714122d1c7ec3",
+  "tests": {"command": "python -m pytest -q experiments/mirror_applications/ma-342-hyperlora-outputs-mirror-code/tests", "passed": 3, "failed": 0},
+  "serialization": {"roundtrip_checked": true, "byte_exact": true, "development_payloads_checked": 16, "mirror_native_phase_hashes_identical": true, "max_metric_replay_difference": 0.0},
+  "metric_replay": {"command": "python experiments/mirror_applications/ma-342-hyperlora-outputs-mirror-code/source/verify.py", "checked": true, "development_rows_replayed": 16, "fresh_rows": 0, "max_difference": 0.0},
+  "fresh_split_integrity_checked": true,
+  "notes": ["Only development seeds 34201 and 34202 were accessed; fresh seeds 34211–34213 remain sealed.", "Mirror payload exceeded the HyperLoRA-style full-factor generator payload in both development worlds at equal unseen-client quality.", "Native scalar phase reproduced identical payload bytes/hash; no Mirror-specific advantage established."]
+}

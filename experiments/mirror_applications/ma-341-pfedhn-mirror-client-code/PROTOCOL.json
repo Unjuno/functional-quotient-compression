@@ -1,0 +1,81 @@
+{
+  "experiment_id": "MA-341",
+  "title": "Client Mirror code versus pFedHN full-model generation",
+  "status": "SCREENING",
+  "evidence_lane": "PERSONALIZATION/STORAGE/COMMUNICATION",
+  "base_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
+  "hypothesis": "On held-out non-IID client partitions of sklearn Digits, a shared classifier with four per-client Givens View angles reaches within 2 accuracy points of a pFedHN-style full-model generator after 20 support updates, with lower actual server/client bytes and client download volume, and is not dominated by byte-near FiLM codes.",
+  "physical_object": "One shared 64-32-10 MLP classifier",
+  "mirror_coordinate": "Four per-client Givens angles on four fixed hidden-unit pairs (0,1),(2,3),(4,5),(6,7)",
+  "logical_multiplicity": "Personalized client classifiers",
+  "prior_art_refs": ["PA40"],
+  "draw": {
+    "number": 26,
+    "eligible_rule": "P0 + UNTESTED; exclude IDs with live origin/research/ma-* branches or pre-existing experiments/mirror_applications/ma-* directories",
+    "eligible_count": 526,
+    "pool_sha256": "e3b982bf493455e868b393bd5cc497c1c0175f724e83c134e3598edc23bebe88",
+    "seed_hex": "22e18d547c678ecb8c63d20315388d09ef08077a59e2db7b2ce593c0a9a91fde",
+    "selection_index_zero_based": 8,
+    "selected_id": "MA-341",
+    "record": "source/draw26_exclusions.json"
+  },
+  "data": {
+    "dataset": "sklearn.datasets.load_digits",
+    "version": "pinned in source/data_manifest.json after protocol freeze",
+    "features": "64 normalized pixels from 8x8 greyscale images",
+    "target": "10-way digit classification",
+    "clients": 12,
+    "client_distribution": "per-class Dirichlet assignment alpha=0.5; within each class shuffle once and assign each example to a client sampled from its Dirichlet proportions; all samples assigned once per world",
+    "train_clients": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+    "unseen_clients": [10, 11],
+    "within_client_split": "After client assignment, shuffle each client's indices using the world RNG. Train clients: floor(60%) train, floor(20%) dev, remainder audit; unseen clients: floor(60%) support, remainder audit query. Persist exact indices and counts.",
+    "world_seeds": [23, 47, 71]
+  },
+  "model": {
+    "architecture": "input 64, hidden 32 ReLU, output 10",
+    "pFedHN_style": "client embedding z in R^8 -> shared 2-layer hypernetwork -> all 2410 client MLP parameters",
+    "mirror": "shared MLP plus four Givens angles per client, rotating four fixed hidden activation pairs",
+    "film_control": "shared MLP plus client code in R^4 projected to hidden gamma/beta by shared learned bases; basis entries are seeded normal(0,0.02) to avoid the all-zero bilinear dead start",
+    "global_control": "one MLP shared by all clients, no client code",
+    "independent_control": "one local MLP per client"
+  },
+  "training": {
+    "optimizer": "AdamW",
+    "learning_rate": 0.003,
+    "weight_decay": 0.0001,
+    "max_epochs": 80,
+    "checkpoint_selection": "lowest mean development cross-entropy on the ten training clients; patience 8",
+    "local_adaptation": "For pFedHN/Mirror/FiLM update only that unseen client's embedding/angles/code using 20 full-batch support Adam steps; shared parameters remain frozen. For global control report 0 steps only. For independent control train that client's full local model for 20 full-batch steps. Report fixed checkpoints at 0, 5, 20 steps; exact update target and number of examples are included in results.",
+    "local_adaptation_optimizer": "Adam, learning_rate=0.01, betas=(0.9,0.999), eps=1e-8; no weight decay",
+    "initial_client_code": "zeros for all methods; unseen pFedHN/Mirror/FiLM code begins at zero; FiLM modulation bases are nonzero seeded normal(0,0.02)",
+    "independent_unseen_control": "fresh independently initialized local MLP per held-out client, initialized from that world/model seed, then trained only on support for 20 full-batch Adam steps at lr=0.01",
+    "optimization_accounting": "record train examples consumed and optimizer steps; shared methods use minibatches of 128 per client per epoch; code adaptation uses all support examples per step",
+    "fresh_world_seeds": [23, 47, 71],
+    "model_init_seeds": [31, 47, 59],
+    "torch_threads": 1
+  },
+  "controls": [
+    "pFedHN-style central hypernetwork and client embeddings",
+    "Shared MLP with four-angle Mirror client views",
+    "Byte-near shared MLP plus four-dimensional FiLM code",
+    "Shared global MLP, no personalization",
+    "Independent local MLP upper control"
+  ],
+  "metrics": [
+    "seen-client and unseen-client query accuracy and cross-entropy",
+    "actual serialized central/server model and client-code bytes",
+    "one-time shared-base and per-client download bytes",
+    "local adaptation updates and client model-generation MACs",
+    "CPU batch-1 latency, client personalization wall time"
+  ],
+  "storage": {
+    "authority": "actual serialized safetensors bytes",
+    "paid_objects": ["shared models", "hypernetwork", "client embeddings/codes", "FiLM or Mirror bases", "independent client models", "client ID maps", "decoder metadata"]
+  },
+  "success_gate": "For each world, average the three model-init seeds per held-out client; Mirror must be within 2 accuracy points of pFedHN on both unseen clients in >=2/3 worlds. Central model plus registered-client payload <=80% of pFedHN; per-client code download after base cached <=25% of a generated full model; and Mirror must not be weakly Pareto-dominated by byte-near FiLM over mean unseen accuracy, central+registered payload, per-client download, and adaptation time. Each held-out client's query metric is reported separately; pooled metrics are supplementary.",
+  "failure_gate": "Any success condition fails.",
+  "amendments": [
+    {"number": 1, "date": "2026-10-08", "reason": "implementation audit found the FiLM gamma/beta bases were initialized to all zeros, yielding zero unseen-code gradient and a degenerate control identical to global; correct to seeded N(0,0.02) basis initialization and rerun the full frozen world/model-seed grid", "pre_amendment_data_status": "invalid for Mirror-specific comparison; retained as artifacts/initial_invalid_control_metrics.csv", "after_audit": false}
+  ],
+  "boundaries": ["Client partitions are simulated from one small dataset.", "The pFedHN-style control is a direct compact-code-to-full-MLP reimplementation, not a reproduction of every paper detail.", "No privacy, secure aggregation, real-user or production federated claim."]
+}

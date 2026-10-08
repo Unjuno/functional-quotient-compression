@@ -1,0 +1,22 @@
+{
+  "experiment_id": "MA-338",
+  "title": "Symmetry-normalized functional code learning",
+  "status": "AMENDED_AFTER_DEVELOPMENT_FAIL_BEFORE_FRESH",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY/COMPUTE/OPTIMIZATION",
+  "base_commit": "133e531",
+  "hypothesis": "For functionally related tanh-MLP task checkpoints obfuscated by exact hidden-unit permutations and sign symmetries, activation-based symmetry canonicalization followed by a rank-2 functional code will reduce the held-out task code dimension and interference relative to raw parameter-coordinate compression. A one-angle Mirror phase code may reduce actual serialized bytes versus direct two-coefficient codes; simple polar/low-rank controls determine whether that reduction is Mirror-specific. An unrelated task should require private residual state.",
+  "physical_object": "one shared 8-12-4 tanh MLP plus a rank-2 output-head delta basis",
+  "mirror_coordinate": "one per-task phase angle after activation-based hidden permutation/sign canonicalization",
+  "logical_multiplicity": "64 related task functions on a constant-radius rank-2 orbit plus one unrelated task",
+  "prior_art_refs": ["PA37", "PA47"],
+  "controls": ["independent full task checkpoints", "hard tied shared network", "raw-coordinate rank-2 checkpoint PCA", "symmetry-normalized direct two-coefficient basis code", "symmetry-normalized one-angle phase code", "normalized phase code without private residual for unrelated task"],
+  "development": {"worlds_or_seeds": [33801, 33802], "selection_metric": "held-out function nMSE, actual serialized bytes, raw-vs-normalized effective rank, alignment recovery accuracy, task interference"},
+  "fresh": {"worlds_or_seeds": [33811, 33812, 33813], "locked_before_access": true},
+  "storage": {"authority": "actual deterministic ZIP/NPY FP32 inference payload after reload", "paid_objects": ["shared network", "functional output basis", "per-task direct coefficients or phase codes", "shared radius", "private unrelated residual", "raw PCA basis/mean/codes", "metadata"]},
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true},
+  "success_gate": "All fresh worlds: activation matching recovers exact gauge to max hidden-activation difference <=1e-5; normalized direct and Mirror held-out aligned task nMSE <=1e-5; Mirror payload at least 10% below direct coefficients at equal quality; raw-coordinate rank-2 has worse held-out nMSE or needs higher rank to reach 1e-5; private residual restores unrelated task quality.",
+  "failure_gate": "Canonicalization fails in at least two fresh worlds; normalized code misses held-out quality; or the one-angle code is <10% smaller than direct coefficients at equal quality. Any raw-vs-normalized difference is reported as symmetry-normalization evidence, not automatically Mirror-specific value.",
+  "development_decision": "The two development seeds met normalized function quality but missed the predeclared >=10% payload reduction versus direct coefficients: phase payload was larger in both worlds. This design has fixed tensor shapes and no tunable parameters left that could meet the byte gate without changing the method. Record FAIL at development and keep fresh seeds sealed; a materially different encoding requires a new protocol/MA candidate.",
+  "amendment": "After development-only inspection and before fresh access, lock the above stop rule. Seeds 33811-33813 remain sealed and are excluded. No code, threshold, or seed was changed based on fresh results.",
+  "boundaries": ["synthetic post-fit tanh MLP task checkpoints; no optimizer training", "all hidden gauges are exact function-preserving permutations/sign flips", "basis learned only from 48 designated development tasks within each world; 16 aligned tasks held out", "codes are fitted from post-fit checkpoints and do not establish online adaptation or learning efficiency", "one unrelated task is deliberately off the shared rank-2 orbit", "do not count gauge-related checkpoints as independent functions"]
+}

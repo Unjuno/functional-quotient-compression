@@ -6,10 +6,10 @@ Integration branch: `research/mirror-application-current-evidence-20261008`; can
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (67 completed; 563 UNTESTED)
+- P0: **630** (75 completed; 555 UNTESTED)
 - P1: **422** (12 completed; 410 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1075 UNTESTED, 36 PROMISING, 44 FAIL**
+- Current MA statuses: **1067 UNTESTED, 36 PROMISING, 52 FAIL**
 - 48 experiment directories, complete with status/protocol/results/verification files, are represented in the current evidence set.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-268 is next.
@@ -23,11 +23,11 @@ Integration branch: `research/mirror-application-current-evidence-20261008`; can
 
 ## Next candidate
 
-**MA-331 — Re-Basin-aligned Mirror task deltas (P0; PA37/PA26)**
+**MA-344 — PreLort nested-rank Mirror segments (P0; PA38)**
 
 MA-255 is reconciled PROMISING only for its aligned post-fit screen; its separate fixed-update variant failed. Dedicated branch evidence for all new results is cited in `CLAIM_LEDGER.csv`.
 
-MA-327 FAIL: ordinary rank-2 coefficient products match Mirror exactly and both exceed flat-pair bytes. MA-330 PROMISING only for aligned synthetic KV views: 72.3% below independent caches, but only 30B below direct cos/sin control; unrelated layers need private cache and runtime/LM gains remain unestablished. Prior reconciled results remain unchanged.
+MA-327 FAIL: ordinary rank-2 coefficient products match Mirror exactly and both exceed flat-pair bytes. MA-330 PROMISING only for aligned synthetic KV views: 72.3% below independent caches, but only 30B below direct cos/sin control; unrelated layers need private cache and runtime/LM gains remain unestablished. MA-331 FAIL (fresh sealed after development byte miss); MA-332/333 FAIL as pure function-preserving gauge orbits; MA-335 FAIL for Mirror-specific margin (direct irreducible coefficients within 0.65%). MA-337/338/341/342 also fail their registered Mirror-specific gates; MA-341 has a separate Digits screen whose overall Mirror advantage vs FiLM is NOT ESTABLISHED.
 
 ## Active experiment
 
@@ -36,7 +36,7 @@ MA-366 completed as FAIL on branch `research/ma-366-depth-expert-factorized-rout
 ## Verified status index
 
 - **PROMISING (36):** MA-001, MA-002, MA-003, MA-004, MA-005, MA-006, MA-007, MA-008, MA-012, MA-014, MA-015, MA-041, MA-076, MA-079, MA-111, MA-121, MA-156, MA-160, MA-171, MA-173, MA-181, MA-189, MA-241, MA-244, MA-245, MA-249, MA-250, MA-251, MA-255, MA-268, MA-276, MA-282, MA-312, MA-314, MA-330, MA-691.
-- **FAIL (44):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-260, MA-261, MA-265, MA-271, MA-272, MA-273, MA-274, MA-278, MA-286, MA-288, MA-292, MA-296, MA-297, MA-299, MA-301, MA-303, MA-304, MA-307, MA-309, MA-311, MA-315, MA-319, MA-320, MA-322, MA-327, MA-366.
+- **FAIL (52):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-260, MA-261, MA-265, MA-271, MA-272, MA-273, MA-274, MA-278, MA-286, MA-288, MA-292, MA-296, MA-297, MA-299, MA-301, MA-303, MA-304, MA-307, MA-309, MA-311, MA-315, MA-319, MA-320, MA-322, MA-327, MA-331, MA-332, MA-333, MA-335, MA-337, MA-338, MA-341, MA-342, MA-366.
 
 All per-ID evidence is retained in the local experiment directories and in `CLAIM_LEDGER.csv`. Consult [the evidence integration audit](../../docs/phase2/MIRROR_MA_EVIDENCE_INTEGRATION_2026-10-08.md) for linked reports, verifications, provenance and claim boundaries.
 

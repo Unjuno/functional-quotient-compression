@@ -1,0 +1,25 @@
+{
+  "experiment_id": "MA-332",
+  "commit": "b0f8109dea4866e9cf39f20dfa8e1826f5912b17",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-332-permutation-orbit-audit/tests",
+    "passed": 4,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "payload_rows_checked": 10,
+    "max_metric_replay_difference": 0.0
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Across development and fresh seeds, hidden-unit permutation transformed incoming weights, biases and outgoing rows consistently and preserved FP16-reloaded output to <=2.25e-7 max difference.",
+    "One shared checkpoint plus eight paid index vectors used 1,740B vs 9,440B for eight archives, but all eight variants are the same function.",
+    "Incoming-only negative control changed outputs and confirmed coupled tensor transformation is required."
+  ]
+}
