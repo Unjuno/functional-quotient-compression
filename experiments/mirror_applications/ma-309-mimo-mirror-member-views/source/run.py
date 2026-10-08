@@ -157,6 +157,20 @@ def payload(model, path):
     return len(raw), hashlib.sha256(raw).hexdigest(), arrays
 
 
+def reload_inference_model(method, arrays):
+    model = MimoModel(method)
+    reference = model.state_dict()
+    restored = {}
+    for key, tensor in reference.items():
+        value = np.array(arrays[key], copy=True)
+        loaded = torch.from_numpy(value)
+        if tensor.is_floating_point():
+            loaded = loaded.to(dtype=tensor.dtype)
+        restored[key] = loaded
+    model.load_state_dict(restored)
+    return model.eval()
+
+
 def diversity(logits):
     # logits: [member, common_examples, classes]
     pred = logits.argmax(dim=-1).cpu().numpy()
@@ -194,8 +208,10 @@ def run(seed, split, outdir, jsonpath):
     summaries = []
     for ix, method in enumerate(METHODS):
         train_seed = seed * 100 + ix
-        model, trainwall, trainloss = train(method, train_seed, splits)
-        nbytes, digest, arrays = payload(model, Path(outdir) / f"{split}_{seed}_{method}.npz")
+        trained_model, trainwall, trainloss = train(method, train_seed, splits)
+        nbytes, digest, arrays = payload(trained_model, Path(outdir) / f"{split}_{seed}_{method}.npz")
+        # Inference quality is measured only after reloading the serialized FP16 payload.
+        model = reload_inference_model(method, arrays)
         metrics = evaluate(model, splits, common)
         params = sum(v.numel() for v in model.parameters())
         macs_per_mimo_call = M * ((IN * H) + (H * H) + (H * CLASSES))

@@ -47,3 +47,13 @@ def test_serialized_payload_is_deterministic(tmp_path):
     m.payload(model, a)
     m.payload(model, b)
     assert a.read_bytes() == b.read_bytes()
+
+
+def test_reload_inference_model_uses_payload_weights(tmp_path):
+    torch.manual_seed(31)
+    model = m.MimoModel("mirror_givens")
+    _, _, arrays = m.payload(model, tmp_path / "payload.npz")
+    restored = m.reload_inference_model("mirror_givens", arrays)
+    for key, value in restored.state_dict().items():
+        expected = torch.from_numpy(arrays[key].copy()).to(dtype=value.dtype)
+        assert torch.equal(value, expected)

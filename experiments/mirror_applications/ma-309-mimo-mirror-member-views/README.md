@@ -1,6 +1,6 @@
 # MA-309 — MIMO subnetworks with Mirror member views
 
-Status: protocol frozen before development. Dedicated branch: `research/ma-309-mimo-mirror-member-views-20261008`.
+Status: amendment A1 frozen; corrected development pending. Dedicated branch: `research/ma-309-mimo-mirror-member-views-20261008`.
 
 ## H — hypothesis
 
@@ -16,4 +16,7 @@ See `PROTOCOL.json`. Four binary classification rules on 2D Gaussian inputs; 4,0
 
 ## Development observations
 
-On both development seeds, standard MIMO heads reached 0.976–0.984 macro accuracy, while Mirror reached 0.843. Mirror payload was 4,652B vs 6,256B (25.6% smaller); pairwise disagreement was 0.433–0.473 vs 0.500–0.506. Because accuracy missed the frozen 2-point margin, settings remain unchanged and fresh evaluation is a confirmatory negative screen.
+After amendment A1 reloads, both development seeds remain: standard MIMO heads reached 0.976–0.984 macro accuracy, while Mirror reached 0.843. Mirror payload was 4,652B vs 6,256B (25.6% smaller); pairwise disagreement was 0.433–0.473 vs 0.500–0.506. Because accuracy misses the frozen 2-point margin, settings remain unchanged and corrected fresh evaluation is a confirmatory negative screen.
+
+
+Implementation audit found that the initial runner evaluated FP32 in-memory weights instead of the serialized FP16 inference payload. Those development/fresh runs are retained under `artifacts/quarantined_pre_A1/` and excluded from the primary record. Amendment A1 reloads the actual package before evaluation; thresholds and model settings are unchanged, and new fresh seeds are 30921–30923.

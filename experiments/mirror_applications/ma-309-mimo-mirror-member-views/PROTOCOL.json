@@ -1,7 +1,7 @@
 {
   "experiment_id": "MA-309",
   "title": "MIMO subnetworks with Mirror member views",
-  "status": "PROTOCOL_FROZEN_BEFORE_DEVELOPMENT",
+  "status": "AMENDMENT_A1_FROZEN_BEFORE_VALID_FRESH",
   "base_commit": "086e974",
   "evidence_lane": "MECHANISM/QUALITY/STORAGE/COMPUTE/RUNTIME",
   "hypothesis": "In a four-member MIMO synthetic classification task, member-specific Givens views on one shared hidden trunk and classifier will preserve per-task accuracy within 2 percentage points of standard MIMO member heads, retain pairwise prediction disagreement within 0.05, and reduce actual inference payload by at least 15% versus member heads; a scalar output-gate control tests the cheapest non-Mirror explanation.",
@@ -21,7 +21,7 @@
     "batch_per_member": 64,
     "optimizer_updates": 500,
     "development_seeds": [30901, 30902],
-    "fresh_seeds": [30911, 30912, 30913],
+    "fresh_seeds": [30921, 30922, 30923],
     "optimizer": "Adam",
     "learning_rate": 0.01
   },
@@ -36,7 +36,8 @@
   "storage": {
     "authority": "actual deterministic fixed-timestamp ZIP/NPY inference payload bytes",
     "paid_objects": ["all inference weights", "member heads, gates or Mirror angles", "normalization state if any", "member IDs", "metadata and archive headers"],
-    "optimizer_state": "training-only and excluded from inference payload; optimizer updates and training compute reported separately"
+    "optimizer_state": "training-only and excluded from inference payload; optimizer updates and training compute reported separately",
+    "inference_evaluation": "reload fixed FP16 payload and evaluate the reloaded model; F32 training weights are never used for final inference quality metrics"
   },
   "gates": {
     "promising": "Across all 3 fresh seeds, Mirror macro accuracy is within 2 percentage points of standard MIMO heads, member disagreement is within absolute 0.05, Mirror payload <=0.85x standard MIMO payload, and Mirror is not dominated by scalar-gate control at comparable bytes/quality.",

@@ -1,19 +1,9 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
-  "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
-  },
-  "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
-  },
-  "metric_replay": {
-    "checked": false,
-    "max_difference": null
-  },
+  "experiment_id": "MA-309",
+  "commit": "PENDING",
+  "tests": {"command": "python -m pytest -q experiments/mirror_applications/ma-309-mimo-mirror-member-views/tests", "passed": 5, "failed": 0},
+  "serialization": {"roundtrip_checked": true, "byte_exact": true},
+  "metric_replay": {"checked": true, "max_difference": 0.0},
   "fresh_split_integrity_checked": false,
-  "notes": []
+  "notes": ["A1 evaluates only after reloading actual serialized FP16 weights.", "Original 30911-30913 fresh results and initial FP32-only dev results are quarantined and excluded.", "Corrected fresh seeds 30921-30923 have not been opened."]
 }
