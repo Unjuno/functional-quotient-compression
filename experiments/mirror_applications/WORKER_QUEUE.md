@@ -147,7 +147,7 @@ High-information P0:
 1. MA-451/452 — PathNet path + Mirror role/factorization
 2. MA-453 — Routing Network with logical Mirror blocks
 3. MA-455 — sequential Mirror program over one block
-4. MA-457 — path reuse before module birth
+4. MA-457 — path reuse before module birth (**FAIL; module births dropped but actual NPZ was larger than PathNet and independent controls, with exact rank-one native alias; fresh sealed**)
 5. MA-461/462/463 — HyperFormer versus generated Mirror adapters
 6. MA-464 — AdaMix over logical Mirror adaptations
 7. MA-466 — UniPELT components as Mirror axes
