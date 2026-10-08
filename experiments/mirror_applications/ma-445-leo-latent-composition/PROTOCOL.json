@@ -1,0 +1,143 @@
+{
+  "experiment_id": "MA-445",
+  "title": "LEO latent composition of known skills",
+  "status": "SCREENING",
+  "evidence_lane": "HELD_OUT_COMPOSITION/QUALITY/BYTES",
+  "base_commit": "5896232",
+  "hypothesis": "For additive task families with independently trained skill factors, composing two learned 2D latent task codes and decoding once matches direct task-vector addition within 1.10x held-out query NRMSE, and is smaller in actual amortized inference bytes at N=20.",
+  "physical_object": "shared meta-trained base function plus reusable skill latent factors",
+  "mirror_coordinate": "sum of two learned 2D skill coordinates, decoded through shared structured Mirror map",
+  "logical_multiplicity": "unseen pairwise compositions of known skill directions",
+  "prior_art_refs": [
+    76,
+    26
+  ],
+  "controls": [
+    "shared base with no task code",
+    "direct task-vector arithmetic (sum of learned skill deltas)",
+    "LEO generic latent decoder with summed skill latents",
+    "structured Mirror decoder with summed skill latents",
+    "independent per-combination fit upper reference"
+  ],
+  "task": {
+    "type": "synthetic additive 8D linear skill regression",
+    "input_dim": 8,
+    "output_dim": 1,
+    "skill_count": 6,
+    "held_out_pairs": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        4
+      ],
+      [
+        1,
+        3
+      ],
+      [
+        2,
+        5
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        5
+      ]
+    ],
+    "support_examples": 8,
+    "query_examples": 128,
+    "code_dim_per_skill": 2,
+    "refinement_steps": [
+      0,
+      1,
+      3,
+      5
+    ],
+    "task_ids": {
+      "meta_train": [
+        3000,
+        3119
+      ],
+      "development": [
+        100,
+        111
+      ],
+      "fresh": [
+        5000,
+        5059
+      ]
+    },
+    "fresh_tasks_per_world": 20
+  },
+  "development": {
+    "worlds_or_seeds": [
+      44500,
+      44501
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "selection_metric": "mean held-out-pair query NRMSE at step 5",
+    "outer_lrs": [
+      0.01,
+      0.03
+    ]
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      44510,
+      44511,
+      44512
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "locked_before_access": true,
+    "task_ids_disjoint": true
+  },
+  "meta_training": {
+    "updates": 300,
+    "tasks_per_batch": 8,
+    "first_order": true,
+    "skill_train_pairs": "all non-held-out pairs only"
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "shared base",
+      "skill factor codes",
+      "Mirror decoder or LEO decoder",
+      "task composition code",
+      "metadata"
+    ],
+    "report_amortization_N": [
+      1,
+      20,
+      100
+    ]
+  },
+  "compute": {
+    "report_inner_steps": true,
+    "report_query_wall": true,
+    "report_adaptation_MAC": true,
+    "report_outer_wall": true
+  },
+  "success_gate": "Every fresh world: Mirror composed-task NRMSE <= 1.10x direct task-vector arithmetic and Mirror total amortized inference bytes at N=20 are lower than direct arithmetic; report all worlds and per-pair outcomes.",
+  "failure_gate": "Any world misses quality/byte gate, generic LEO matches or beats Mirror at similar bytes, or composition requires pair-specific learned state.",
+  "boundaries": [
+    "Synthetic aligned additive linear skill screen only.",
+    "Skill pair identities are held out from all meta-training and development.",
+    "Combinatorial count is not claimed as independent capacity.",
+    "Task-vector arithmetic and any decoder, index, or composition state are fully charged."
+  ]
+}
