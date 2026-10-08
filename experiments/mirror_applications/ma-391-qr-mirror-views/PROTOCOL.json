@@ -1,0 +1,66 @@
+{
+  "experiment_id": "MA-391",
+  "title": "Quotient-remainder Mirror compositional embeddings",
+  "status": "FROZEN_DEVELOPMENT",
+  "base_commit": "b444c99",
+  "evidence_lane": "MECHANISM/STORAGE/UNSEEN_COMBINATIONS/RUNTIME",
+  "prior_art_refs": ["PA59"],
+  "hypothesis": "Factorized q/r Givens coordinates generalize useful embedding functions to held-out quotient-remainder combinations beyond fixed addition, multiplication, or concatenation without paying for independent token tables.",
+  "physical_object": "two small complementary quotient and remainder embedding tables",
+  "mirror_coordinate": "m(q,r)=alpha_q+beta_r; Givens rotation of the concatenated partition vectors",
+  "logical_multiplicity": "144 quotient-remainder token combinations",
+  "model": {
+    "quotient_partitions": 12,
+    "remainder_partitions": 12,
+    "vocabulary": 144,
+    "embedding_dim": 16,
+    "classes": 8,
+    "heldout_pair_fraction": 0.25,
+    "train_examples_seen_per_method": 65536,
+    "validation_examples": 32768,
+    "test_examples": 32768,
+    "batch_size": 128,
+    "optimizer_updates": 512,
+    "optimizer": "Adam",
+    "learning_rate": 0.003,
+    "development_seeds": [39101, 39102],
+    "fresh_seeds": [39111, 39112, 39113],
+    "data": "Synthetic q×r token task. A teacher uses two 8D partition vectors and a factorized Givens angle alpha_q+beta_r to produce class labels. A seed-locked 25% of q×r pairs is held out from training; train, validation, and test examples include seen and held-out pairs. The same vocabulary and teachers are used by each method within a world."
+  },
+  "controls": [
+    "independent token embedding table",
+    "native quotient/remainder addition",
+    "native quotient/remainder elementwise multiplication",
+    "native quotient/remainder concatenation",
+    "Mirror factorized Givens view with alpha_q+beta_r",
+    "free per-pair Givens angle diagnostic on seen combinations only"
+  ],
+  "development_gate_before_fresh": "Both development seeds: independent seen-pair accuracy >=0.80; Mirror seen-pair accuracy within 0.02 of the best fixed native composition; Mirror held-out-pair accuracy >=0.05 absolute above concatenation; Mirror actual payload <=1.10x the best fixed composition and <=0.50x independent table; exact uniqueness and collision counts over all 144 pairs; serialized-state CPU throughput >=0.90x concatenation. Otherwise fresh remains sealed.",
+  "success_gate": "All three fresh worlds satisfy quality, unseen-combination, storage, uniqueness, runtime and exact-replay gates; Mirror improves the fixed native quality-byte frontier.",
+  "failure_gate": "Any development seed misses a registered gate or a simple fixed composition matches Mirror's held-out quality at comparable/lower bytes. Fresh remains sealed.",
+  "storage": {
+    "authority": "actual deterministic ZIP/NPY FP16 inference payload after reload",
+    "paid_objects": [
+      "both partition embedding tables",
+      "all alpha_q and beta_r Mirror codes",
+      "classifier weights and bias",
+      "partition sizes and composition metadata",
+      "archive headers"
+    ]
+  },
+  "compute": {
+    "report_examples_and_updates": true,
+    "report_train_wall_clock": true,
+    "report_partition_lookup_ops": true,
+    "report_active_macs_proxy": true,
+    "report_embedding_uniqueness": true,
+    "report_serialized_state_cpu_throughput": true
+  },
+  "boundaries": [
+    "synthetic factorized teacher only",
+    "held-out q×r combinations are not trained",
+    "logical combination count is not independent capacity",
+    "no natural-language or large-vocabulary claim",
+    "fresh seeds remain sealed unless all development gates pass"
+  ]
+}
