@@ -3,11 +3,11 @@
 - Status: FAIL
 - Branch: `research/ma-1120-tntcomplex-mirror-20261008`
 - Base commit: `c935a903daca5c7d1d48aa50d05b5bd50f239cba`
-- Last verified commit: pending result commit
+- Last verified commit: `eeca3ab`
 - Development complete: yes
 - Fresh/audit opened: yes; final fixed-seed replay uses audit timestamps 10–11
-- Results committed: yes, pending final commit
-- Verification committed: pending final commit
+- Results committed: yes (`eeca3ab`)
+- Verification committed: yes (`eeca3ab`)
 - Registry row updated: no
 
 ## Next action
