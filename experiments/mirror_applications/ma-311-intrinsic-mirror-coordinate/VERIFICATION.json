@@ -1,0 +1,31 @@
+{
+  "experiment_id": "MA-311",
+  "commit": "fd2049e",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-311-intrinsic-mirror-coordinate/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": false,
+    "notes": "Serialized payload lengths and deterministic decoded metrics replay exactly; byte-for-byte re-encoding of every in-memory numerical intermediate is not claimed. Actual measured payload byte counts are authoritative."
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0,
+    "summary_rows_replayed": 28,
+    "allocation_events_replayed": 224
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_worlds": [
+    31122,
+    31123,
+    31124
+  ],
+  "notes": [
+    "The d=64 amendment and threshold were frozen before fresh access.",
+    "The strict all-world <=0.85x payload and all-aligned-view gate was not met.",
+    "CPU throughput and wall time are diagnostic, nondeterministic metrics."
+  ]
+}

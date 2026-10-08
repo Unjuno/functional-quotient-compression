@@ -1,0 +1,26 @@
+{
+  "experiment_id": "MA-311",
+  "commit": "4ccf0d26da4cd0e9ec80bb292587c55987567496",
+  "tests": {
+    "command": "pytest -q experiments/mirror_applications/ma-311-mirror-intrinsic-subspace/tests",
+    "passed": 4,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "rows": 30,
+    "max_difference": 0.0,
+    "payload_hashes_exact": true
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Development seeds 31101-31103; all 30 rows and payload hashes replayed exactly.",
+    "Fresh seeds 31111-31113 remain unopened: Mirror total payload 1,248B exceeded two-coefficient control 1,140B.",
+    "Four tests passed. Mirror fitting used a fixed 720-angle grid and zero gradient updates.",
+    "Python 3.12.14, NumPy 2.3.5; small CPU timing is calibration only."
+  ]
+}

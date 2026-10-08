@@ -1,0 +1,101 @@
+{
+  "experiment_id": "MA-311",
+  "title": "Mirror task codes inside a random intrinsic subspace",
+  "status": "FAIL",
+  "evidence_lane": "MECHANISM/STORAGE/COMPUTE",
+  "base_commit": "bfabb6e",
+  "hypothesis": "After all task updates are fitted in the same frozen random intrinsic subspace, one shared intrinsic vector plus compact Givens Mirror coordinates represents aligned tasks with lower serialized task-code bytes than ordinary intrinsic coefficients, while unrelated tasks fall back to private intrinsic coordinates.",
+  "physical_object": "one fitted 128-value shared base plus a deterministic 128x64 random orthonormal projection basis",
+  "mirror_coordinate": "one int8 scalar per accepted task rotating a shared 64-value intrinsic vector; private 64-value intrinsic coefficient fallback",
+  "logical_multiplicity": "eight task functions: five aligned intrinsic-coordinate tasks and three unrelated tasks",
+  "prior_art_refs": [
+    "PA33"
+  ],
+  "controls": [
+    "hard tied base",
+    "ordinary random-subspace intrinsic task vectors (mandatory PA33 control)",
+    "Mirror orbit code plus private intrinsic-coordinate fallback",
+    "independent full 128-dimensional task vectors"
+  ],
+  "task": {
+    "input_dim": 128,
+    "intrinsic_dim": 64,
+    "tasks": 8,
+    "teacher": "First task defines shared base; next four deltas are Givens-orbit members in the 64D intrinsic coordinates; final three deltas are unrelated random 64D coordinates.",
+    "metric": "mean normalized held-out output MSE from deserialized payload"
+  },
+  "development": {
+    "worlds": [
+      31120,
+      31121
+    ],
+    "intrinsic_dimensions": [
+      64
+    ],
+    "view_acceptance_thresholds": [
+      0.0001,
+      0.001
+    ],
+    "selected_threshold": 0.0001,
+    "support_examples_per_task": 512,
+    "validation_examples_per_task": 256,
+    "updates": 0,
+    "selection_metric": "smallest threshold accepting all four non-anchor aligned tasks and routing unrelated tasks to private intrinsic fallback",
+    "selection_reason": "d=32 development achieved only 0.865x the ordinary intrinsic-vector payload, missing the preregistered <=0.85x gate. At d=64 both development worlds achieved 0.791x payload while retaining normalized MSE below 2e-5. Thresholds 0.0001 and 0.001 made identical allocations, so the stricter value was frozen."
+  },
+  "fresh": {
+    "worlds": [
+      31122,
+      31123,
+      31124
+    ],
+    "locked_before_access": true,
+    "locked_threshold": 0.0001,
+    "locked_intrinsic_dim": 64,
+    "access_condition": "Both amended development worlds passed quality and payload gate; fresh uses d=64 and threshold 0.0001 without retuning."
+  },
+  "training": {
+    "optimizer": "least-squares fit in frozen random intrinsic basis; deterministic grid fit of task angles",
+    "gradient_updates": 0,
+    "threads": 1
+  },
+  "storage": {
+    "authority": "actual deterministic compact serialized inference payload bytes",
+    "serialization": "uint16 JSON-header length plus little-endian state tensors",
+    "paid_objects": [
+      "shared base vector",
+      "all task coefficient or Mirror angle/private coordinate codes",
+      "projection seed and deterministic QR recipe metadata",
+      "task records and codec metadata",
+      "full independent task vectors in upper reference"
+    ]
+  },
+  "compute": {
+    "report_examples": true,
+    "report_updates": true,
+    "report_intrinsic_fit_operations": true,
+    "report_angle_search_operations": true,
+    "report_basis_reconstruction_operations": true,
+    "report_wall_time": true,
+    "report_inference_throughput": true
+  },
+  "gates": {
+    "promising": "In all three fresh worlds: all four aligned non-anchor tasks use Mirror coordinates; unrelated tasks use private intrinsic coordinates; Mirror normalized MSE <=1e-4; payload <=0.85x ordinary intrinsic task-vector payload; and full decode/fit operation proxy <=2x ordinary intrinsic control.",
+    "fail": "Mirror misses quality in >=2 fresh worlds or payload saving is <10% in >=2 worlds, or aligned tasks require private fallback in >=2 worlds.",
+    "not_established": "invalid splits, serialization/replay mismatch, or incomplete worlds"
+  },
+  "boundaries": [
+    "synthetic linear functions in a random low-dimensional subspace",
+    "random-subspace fitting is analytical post-fit screen, not language-model training",
+    "no near-convergence capacity or learned task inference claim"
+  ],
+  "protocol_frozen_before_development": true,
+  "amendments": [
+    {
+      "before_fresh_access": true,
+      "reason": "The d=32 screen saved 13.5% payload versus ordinary intrinsic vectors, short of the preregistered 15% threshold. The intrinsic dimension is itself the candidate resource, so a d=64 development condition was added to determine whether address savings scale with the intrinsic vector size. The original d=32 data remain preserved; no fresh worlds from that variant were opened."
+    }
+  ],
+  "protocol_frozen_amendment_before_fresh": true,
+  "decision_note": "Strict promising gate failed: fresh world 31123 had 0.859x intrinsic payload and one aligned private fallback. The fail-gate threshold itself was not met; decision is conservative failure of the all-world promotion gate, not a claim of zero mechanism value."
+}
