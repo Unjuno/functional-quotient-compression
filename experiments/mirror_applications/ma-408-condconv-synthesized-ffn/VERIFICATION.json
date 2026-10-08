@@ -1,0 +1,10 @@
+{
+  "experiment_id": "MA-408",
+  "protocol_commit": "ad5b6a2",
+  "tests": {"command": "python -m unittest discover -s experiments/mirror_applications/ma-408-condconv-synthesized-ffn/tests -v", "passed": 2, "failed": 0},
+  "serialization": {"roundtrip_checked": true, "byte_exact": true, "payload_rows": 105, "payload_hashes_replayed": true, "actual_payload_bytes_authoritative": true},
+  "metric_replay": {"checked": true, "max_difference": 0.0, "notes": ["All actual serialized payload file sizes and SHA-256 hashes match the JSONL records.", "Fresh means and success gates replay from the per-run JSONL.", "CondConv synthesis MAC counts all four contexts and both terms per synthesized matrix, amortized across 3,072 examples."]},
+  "fresh_split_integrity_checked": true,
+  "fresh_worlds": [40810, 40811, 40812],
+  "notes": ["Development worlds 40800/40801 selected learning rates before fresh execution.", "Synthetic context-stationary coefficient screen only; no Mirror-specific claim.", "Training wall-clock is slower for CondConv despite lower active MAC proxy."]
+}

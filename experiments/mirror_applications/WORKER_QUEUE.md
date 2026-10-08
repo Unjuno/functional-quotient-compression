@@ -1,6 +1,6 @@
 # Worker queue
 
-**Current operational pointer (2026-10-08): MA-407.** MA-405 is completed FAIL: four-angle weight views trailed StyleGAN-style modulation and FiLM in the synthetic mechanism screen. Continue with MA-407.
+**Current operational pointer (2026-10-08): MA-411.** MA-407 is completed FAIL; MA-408 is completed PROMISING only as a fixed-context CondConv synthetic control. Continue with MA-411.
 
 The queue is derived from `IDEA_REGISTRY.csv`. The registry is authoritative.
 
@@ -146,7 +146,7 @@ High-information P0:
 2. MA-403 — token-wise generated Mirror modulation
 3. MA-405 — StyleGAN2-like FFN weight modulation
 4. MA-407 — demodulated Mirror-MoE (completed FAIL; orthogonal Givens makes demodulation a null)
-5. MA-408 — CondConv-style synthesized FFN — current candidate
+5. MA-408 — CondConv-style synthesized FFN (completed PROMISING in bounded synthetic control)
 6. MA-411 — canonical transform + sparse Mirror refinement
 7. MA-413 — factorized concept Mirror coordinates
 8. MA-416/417 — shared decoder + Mirror function codes
