@@ -5,9 +5,9 @@
 - Base commit: `e259f27`
 - Development complete: yes
 - Fresh/audit opened: yes, locked seeds only
-- Results committed: pending
-- Verification committed: pending
-- Registry row updated: pending
+- Results committed: yes
+- Verification committed: yes
+- Registry row updated: yes
 
 ## Next action
 
