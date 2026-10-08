@@ -1,6 +1,6 @@
 # MA-341 — Mirror client codes versus pFedHN
 
-Status: SCREENING
+Status: NOT ESTABLISHED (Mirror-specific overall advantage)
 Evidence lane: PERSONALIZATION / STORAGE / COMMUNICATION
 Base commit: `c935a903daca5c7d1d48aa50d05b5bd50f239cba`
 
@@ -23,6 +23,8 @@ Checkpoint selection uses development examples from training clients only. On un
 **PASS for this screen** requires Mirror within two accuracy points of pFedHN after 20 support updates on both held-out clients in at least 2/3 seeds; server plus registered-client payload ≤80% of pFedHN; per-client download after the shared base is cached ≤25% of a generated full model; and the Mirror code is not dominated by byte-near FiLM.
 
 **FAIL** if any gate fails. **NOT ESTABLISHED** if client partitioning or implementation invalidates the comparison. This simulated small-classification task does not establish production federated learning or privacy.
+
+Amendment 1: the first FiLM implementation had zero-initialized gamma/beta bases, making it a degenerate control. The invalid first run is retained in `artifacts/initial_invalid_control_metrics.csv`. Bases were corrected to seeded `N(0,0.02)`, the control gradient was tested, and the full seed grid was rerun. The corrected evidence is in `RESULTS_CORE.csv` and `STATUS.md`.
 
 ## C — strongest counter-hypothesis
 

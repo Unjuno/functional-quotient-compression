@@ -48,6 +48,15 @@ def test_mirror_rotation_preserves_hidden_pair_norm():
         assert torch.allclose((co*ha-si*hb)**2 + (si*ha+co*hb)**2, ha**2+hb**2, atol=1e-6)
 
 
+def test_film_code_has_nonzero_initial_gradient():
+    ma.seed_all(31)
+    model = ma.System("film")
+    x, y = torch.randn(8, 64), torch.randint(0, 10, (8,))
+    ma.loss_for(model, x, y, 0).backward()
+    assert model.codes.grad is not None
+    assert model.codes.grad.abs().max().item() > 0
+
+
 def test_payload_is_safetensors_bytes(tmp_path, monkeypatch):
     monkeypatch.setattr(ma, "OUT", tmp_path)
     data = {"w": torch.arange(5, dtype=torch.float32)}

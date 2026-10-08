@@ -35,7 +35,7 @@
     "architecture": "input 64, hidden 32 ReLU, output 10",
     "pFedHN_style": "client embedding z in R^8 -> shared 2-layer hypernetwork -> all 2410 client MLP parameters",
     "mirror": "shared MLP plus four Givens angles per client, rotating four fixed hidden activation pairs",
-    "film_control": "shared MLP plus client code in R^4 projected to hidden gamma/beta by shared learned bases",
+    "film_control": "shared MLP plus client code in R^4 projected to hidden gamma/beta by shared learned bases; basis entries are seeded normal(0,0.02) to avoid the all-zero bilinear dead start",
     "global_control": "one MLP shared by all clients, no client code",
     "independent_control": "one local MLP per client"
   },
@@ -47,7 +47,7 @@
     "checkpoint_selection": "lowest mean development cross-entropy on the ten training clients; patience 8",
     "local_adaptation": "For pFedHN/Mirror/FiLM update only that unseen client's embedding/angles/code using 20 full-batch support Adam steps; shared parameters remain frozen. For global control report 0 steps only. For independent control train that client's full local model for 20 full-batch steps. Report fixed checkpoints at 0, 5, 20 steps; exact update target and number of examples are included in results.",
     "local_adaptation_optimizer": "Adam, learning_rate=0.01, betas=(0.9,0.999), eps=1e-8; no weight decay",
-    "initial_client_code": "zeros for all methods; unseen pFedHN/Mirror/FiLM code begins at zero",
+    "initial_client_code": "zeros for all methods; unseen pFedHN/Mirror/FiLM code begins at zero; FiLM modulation bases are nonzero seeded normal(0,0.02)",
     "independent_unseen_control": "fresh independently initialized local MLP per held-out client, initialized from that world/model seed, then trained only on support for 20 full-batch Adam steps at lr=0.01",
     "optimization_accounting": "record train examples consumed and optimizer steps; shared methods use minibatches of 128 per client per epoch; code adaptation uses all support examples per step",
     "fresh_world_seeds": [23, 47, 71],
@@ -72,7 +72,10 @@
     "authority": "actual serialized safetensors bytes",
     "paid_objects": ["shared models", "hypernetwork", "client embeddings/codes", "FiLM or Mirror bases", "independent client models", "client ID maps", "decoder metadata"]
   },
-  "success_gate": "Mirror is within 2 accuracy points of pFedHN after 20 support updates on both unseen clients in >=2/3 worlds; central model plus registered-client payload <=80% of pFedHN; per-client code download after base cached <=25% of a generated full model; and Mirror is not dominated by byte-near FiLM. Each held-out client's query metric is reported separately; pooled metrics are supplementary.",
+  "success_gate": "For each world, average the three model-init seeds per held-out client; Mirror must be within 2 accuracy points of pFedHN on both unseen clients in >=2/3 worlds. Central model plus registered-client payload <=80% of pFedHN; per-client code download after base cached <=25% of a generated full model; and Mirror must not be weakly Pareto-dominated by byte-near FiLM over mean unseen accuracy, central+registered payload, per-client download, and adaptation time. Each held-out client's query metric is reported separately; pooled metrics are supplementary.",
   "failure_gate": "Any success condition fails.",
+  "amendments": [
+    {"number": 1, "date": "2026-10-08", "reason": "implementation audit found the FiLM gamma/beta bases were initialized to all zeros, yielding zero unseen-code gradient and a degenerate control identical to global; correct to seeded N(0,0.02) basis initialization and rerun the full frozen world/model-seed grid", "pre_amendment_data_status": "invalid for Mirror-specific comparison; retained as artifacts/initial_invalid_control_metrics.csv", "after_audit": false}
+  ],
   "boundaries": ["Client partitions are simulated from one small dataset.", "The pFedHN-style control is a direct compact-code-to-full-MLP reimplementation, not a reproduction of every paper detail.", "No privacy, secure aggregation, real-user or production federated claim."]
 }

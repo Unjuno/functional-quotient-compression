@@ -4,8 +4,6 @@ from __future__ import annotations
 
 import argparse
 import csv
-import hashlib
-import json
 import math
 import os
 import random
@@ -95,8 +93,8 @@ class System(torch.nn.Module):
             self.base = MLP()
             self.codes = torch.nn.Parameter(torch.zeros(12, 4))
             if method == "film":
-                self.gamma_basis = torch.nn.Parameter(torch.zeros(4, 32))
-                self.beta_basis = torch.nn.Parameter(torch.zeros(4, 32))
+                self.gamma_basis = torch.nn.Parameter(torch.randn(4, 32) * .02)
+                self.beta_basis = torch.nn.Parameter(torch.randn(4, 32) * .02)
         elif method == "global":
             self.base = MLP()
         elif method == "independent":
@@ -193,13 +191,14 @@ def train(system, x, y, splits, max_epochs=80):
     return epoch + 1, updates, time.perf_counter() - t0
 
 
-def adapt(system, x, y, support, client):
+def adapt(system, x, y, support, client, init_seed):
     """Update only unseen code (or independent full model) and snapshot 0/5/20."""
     method = system.method
     code = system.local_code(client)
     if method == "global":
         return {0: (None, 0.0)}, 0.0
     if method == "independent":
+        seed_all(init_seed)
         model = MLP()
         # There is no trained row for an unseen client; initialize a fresh local model.
         params = list(model.parameters())
@@ -321,7 +320,7 @@ def run(world_seeds=None, model_seeds=None, max_epochs=80):
                     a, ce = evaluate(system, x, y, splits[c]["audit"], c)
                     rows.append(dict(world_seed=ws,model_seed=ms,method=method,phase="seen_audit",client=c,step=0,epochs=epochs,updates=updates,train_examples=sum(len(splits[k]["train"]) for k in range(10)),support_examples=0,query_examples=len(splits[c]["audit"]),server_payload_bytes=server_b,registered_client_payload_bytes=clients_b,per_client_download_bytes=per_client_b,generated_full_model_bytes=full_b,heldout_clients=2,accuracy=a,cross_entropy=ce,client_generation_macs=gen_macs,cpu_batch1_p95_ms=float("nan"),train_wall_seconds=train_wall,adapt_wall_seconds=0.0))
                 for c in (10,11):
-                    snaps, adapt_wall = adapt(system,x,y,splits[c]["support"],c)
+                    snaps, adapt_wall = adapt(system,x,y,splits[c]["support"],c,ws*10000+ms*100+c)
                     for step,(snap,elapsed) in snaps.items():
                         a,ce=metrics_from_snapshot(system,x,y,splits[c]["query"],c,snap)
                         rows.append(dict(world_seed=ws,model_seed=ms,method=method,phase="unseen_query",client=c,step=step,epochs=epochs,updates=updates,train_examples=sum(len(splits[k]["train"]) for k in range(10)),support_examples=len(splits[c]["support"]),query_examples=len(splits[c]["query"]),server_payload_bytes=server_b,registered_client_payload_bytes=clients_b,per_client_download_bytes=per_client_b,generated_full_model_bytes=full_b,heldout_clients=2,accuracy=a,cross_entropy=ce,client_generation_macs=gen_macs,cpu_batch1_p95_ms=float("nan"),train_wall_seconds=train_wall,adapt_wall_seconds=elapsed))
