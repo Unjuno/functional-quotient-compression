@@ -5,9 +5,9 @@
 - Base commit: `28194ea`
 - Development complete: yes; threshold 0.01 selected from validation
 - Fresh/audit opened: yes; final seeds 29921–29923
-- Results committed: pending
-- Verification committed: pending
-- Registry row updated: pending
+- Results committed: yes (`0908ca2`)
+- Verification committed: yes
+- Registry row updated: yes
 
 ## Result
 
