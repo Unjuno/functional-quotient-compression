@@ -16,13 +16,13 @@ Actual inference posteriors were serialized as deterministic ZIP/NPY FP32 payloa
 
 ## D — Decision
 
-**FAIL at development for the frozen storage hypothesis.** In both development worlds, Mirror produced exact teacher probability calibration (probability MSE 0), predictive NLL about 0.658, Brier about 0.233, and ECE about 0.012. The rank-1 BNN matched these metrics within floating-point noise and used about 1,196B versus Mirror's 1,197B. The independent two-model posterior was smaller at about 652B with the same predictive quality. The deterministic mean model had worse NLL (~0.691), Brier (~0.244), ECE (~0.071), and calibration MSE (~0.011).
+**FAIL at development for the frozen storage hypothesis.** In both development worlds, Mirror produced exact teacher probability calibration (probability MSE 0), predictive NLL about 0.658, Brier about 0.233, and ECE about 0.012. The rank-1 BNN matched these metrics within floating-point noise and used 1,195B versus Mirror's 1,196B. The independent two-model posterior was smaller at 651–652B with the same predictive quality. The deterministic mean model had worse NLL (~0.691), Brier (~0.244), ECE (~0.071), and calibration MSE (~0.011).
 
 The Mirror and ordinary direct sparse scalar-code posterior payloads had identical bytes and hashes. Fresh seeds stayed sealed after the development storage gate failed.
 
 ## Fact / Interpretation / Hypothesis
 
-**Fact:** Mirror, rank-1 BNN and independent two-mode posterior had identical predictions/calibration. Mirror was larger than independent full models and tied in bytes with the rank-1 BNN. Ten development payload/hash/metric rows replay exactly.
+**Fact:** Mirror, rank-1 BNN and independent two-mode posterior had identical predictions/calibration. Mirror was larger than independent full models and one byte larger than the rank-1 BNN. Ten development payload/hash/metric rows replay exactly.
 
 **Interpretation:** The stochastic scalar coordinate can express the exact posterior modes, but rank-1 multiplicative factors already express the same distribution. For two models at this scale, storing the independent weights compresses better in the actual archive.
 
