@@ -1,0 +1,60 @@
+{
+  "experiment_id": "MA-841",
+  "title": "AI Engram bank compressed by Mirror basis",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE",
+  "base_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
+  "draw_id": "Draw37",
+  "hypothesis": "A rank-4 shared basis with per-memory Mirror coefficients will preserve causal memory behavior (sufficiency, reactivation, specificity, necessity) with fewer serialized bytes than an exact closed-form Engram trace bank. A matched PCA coefficient control is expected to perform identically and is the strongest counter-hypothesis for Mirror-specific value.",
+  "physical_object": "shared basis over 8x8 closed-form Engram memory traces",
+  "mirror_coordinate": "per-memory rank-4 coefficient vector",
+  "logical_multiplicity": "independent key-value memories addressed by their own trace coefficients",
+  "prior_art_refs": [
+    "PA227"
+  ],
+  "controls": [
+    "exact closed-form AI Engram trace bank",
+    "matched rank-4 PCA reconstruction without Mirror naming",
+    "random rank-4 basis least-squares coefficients",
+    "small private residual fallback if basis error exceeds development threshold"
+  ],
+  "task": "Synthetic key-value memory binding; report sufficiency MSE, reactivation cosine, specificity leakage, necessity ablation effect, actual serialized bytes and per-memory bytes.",
+  "development": {
+    "worlds_or_seeds": [
+      84101
+    ],
+    "selection_metric": "development causal metric preservation vs actual payload bytes; rank fixed at 4 before audit"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      84111,
+      84112,
+      84113
+    ],
+    "locked_before_access": true,
+    "split": "8 development traces estimate shared basis; each fresh world has 24 memory traces, 16 low-rank aligned and 8 residual/private boundary memories; 8 keys per memory"
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "shared basis",
+      "coefficient bank",
+      "exact full memory bank control",
+      "private residuals and indices if used"
+    ]
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true
+  },
+  "success_gate": "On >=2/3 fresh worlds, aligned memories preserve sufficiency/reactivation/necessity within 5% and specificity leakage within 5% of exact Engram, with actual payload <=50% exact bank. Report residual-memory boundary and PCA equivalence; do not claim Mirror-specific novelty if PCA matches.",
+  "failure_gate": "FAIL if aligned causal preservation or <=50% payload gate fails on >=2/3 seeds, or if residual/private memories fail and no private fallback is useful. PROMISING is scoped compression evidence even if PCA control matches, but not Mirror-specific benefit.",
+  "boundaries": [
+    "synthetic linear key-value memory only",
+    "PCA-equivalent control directly tests Mirror specificity",
+    "no natural continual-learning or language model claim",
+    "number of addresses is not independent capacity absent causal tests"
+  ]
+}
