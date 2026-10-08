@@ -1,0 +1,3 @@
+# MA-315 pre-fresh control strengthening
+
+During development, the direct shared/private control initially took the first two coefficients from an unconstrained 16D fit, then fitted residual coordinates. Before fresh access, this was strengthened to jointly refit the first two direct coefficients and selected sparse residual coefficients for each candidate residual budget. The initial development summaries are preserved at `protocol_variants/pre_direct_pair_refit/`; all development worlds were rerun with the stronger direct control. No fresh seed was opened before the correction. The registered storage/quality gates and teacher were unchanged.

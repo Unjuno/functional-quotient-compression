@@ -1,0 +1,35 @@
+{
+  "experiment_id": "MA-315",
+  "commit": "c422281755431107f1dd3d97bb2f477ca13d1688",
+  "base_commit": "9ccbb03b8a29f80ff489efacbef72d8a1b3921d1",
+  "protocol_amendment_before_fresh": true,
+  "development_seeds": [31501, 31502],
+  "fresh_seeds_locked_unopened": [31511, 31512, 31513],
+  "development_gate": {
+    "private_0_percent": "PASS on both seeds",
+    "private_25_percent": "FAIL on both seeds: 6.9% payload reduction vs required 10%",
+    "fresh_opened": false
+  },
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-315-shared-private-intrinsic/tests",
+    "passed": 4,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "payload_hashes_checked": 40
+  },
+  "metric_replay": {
+    "checked": true,
+    "result_rows": 40,
+    "task_event_rows": 10240,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Initial coordinate-descent development results are retained in protocol_variants/initial_coordinate_descent/.",
+    "The amended variable-projection solver and packed deterministic offsets were applied before any fresh access; all development worlds were rerun.",
+    "Synthetic post-fit tasks, oracle task IDs, zero optimizer updates; no capacity, natural-task, or learned-decomposition claim."
+  ]
+}

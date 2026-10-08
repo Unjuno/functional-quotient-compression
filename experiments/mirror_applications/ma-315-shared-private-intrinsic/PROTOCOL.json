@@ -1,0 +1,65 @@
+{
+  "experiment_id": "MA-315",
+  "title": "shared intrinsic Mirror with sparse private residual coordinates",
+  "status": "FAIL (25% private-fraction development byte gate missed)",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY/COMPUTE/RUNTIME",
+  "base_commit": "9ccbb03b8a29f80ff489efacbef72d8a1b3921d1",
+  "hypothesis": "A per-task Mirror angle plus validation-selected sparse residual coordinates will preserve quality and use at least 10% fewer actual bytes than adaptive direct coordinates at private task fractions 0% and 25%; the frontier will converge toward global intrinsic coordinates at higher fractions.",
+  "physical_object": "shared 32D linear predictor plus a paid random orthonormal 32x8 task-update basis",
+  "mirror_coordinate": "one task-specific FP16 angle over the first two shared basis columns, followed by ordinary FP16 residual coordinates over selected remaining basis columns",
+  "logical_multiplicity": "256 task-conditioned predictors with controlled private-task fraction; task count is not independent capacity",
+  "prior_art_refs": ["PA30", "PA33", "MA-311", "MA-312", "MA-314"],
+  "controls": ["hard tie", "adaptive direct FP16 coefficients on same basis and residual-rank choices", "fixed SAID-8 FP32", "independent full 32D task vectors"],
+  "data": {
+    "input_dimension": 32,
+    "maximum_intrinsic_dimension": 8,
+    "task_count": 256,
+    "private_fractions": [0.0, 0.25, 0.5, 1.0],
+    "private_task_counts": [0, 64, 128, 256],
+    "residual_dimensions": [0, 2, 4, 6],
+    "support_examples_per_task": 32,
+    "validation_examples_per_task": 32,
+    "test_examples_per_task": 64,
+    "development_seeds": [31501, 31502],
+    "fresh_seeds_locked_unopened": [31511, 31512, 31513],
+    "optimizer_updates": 0,
+    "task_id_supplied": true,
+    "shared_orbit_radius": 0.25,
+    "private_residual": "private tasks receive iid Gaussian coordinates with std 0.12 in shared basis columns 3-8; task labels are not provided to the representation selector",
+    "rank_selection": "fit on support; choose smallest residual rank k in [0,2,4,6] or direct prefix d in [2,4,6,8] with validation normalized MSE <= 1e-4; test is held out"
+  },
+  "selection": {
+    "development_only": true,
+    "tunable": "none; task fractions, seeds, dimensions, precisions, threshold, solvers and controls are frozen",
+    "fresh_opened_only_if_both_0_and_25_percent_development_worlds_pass_quality_and_actual_byte_gates": true
+  },
+  "protocol_amendment_before_fresh": {
+    "version": 1,
+    "mirror_solver": "for each candidate residual rank, variable-project the common plane and support targets orthogonally to the candidate residual subspace, then select the minimum-support-error angle on the fixed 720-point grid and refit residual coefficients",
+    "packed_code_layout": "concatenate each task's angle then residual coefficients; task offsets are deterministically derived from stored active-rank tags and are not separately serialized",
+    "reason": "the initial development-only coordinate-descent implementation missed validation quality on some private tasks, and serialized redundant offsets obscured the actual code payload; no fresh data had been accessed",
+    "fresh_reselection": "rerun all frozen development seeds under the amended deterministic solver/layout; fresh still opens only if low-private gates pass"
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes after reload",
+    "format": "fixed timestamp ZIP with uncompressed NPY arrays",
+    "paid_objects": ["shared predictor", "used shared basis columns", "shared orbit radius", "per-task active-rank and representation metadata", "all angles and residual/direct codes", "full FP32 independent vectors", "NPY and ZIP headers"]
+  },
+  "compute": {
+    "report_support_validation_test_examples": true,
+    "report_optimizer_updates": true,
+    "report_fit_operation_proxy": true,
+    "report_active_inference_operations": true,
+    "report_encoder_wall_clock": true,
+    "report_inference_throughput": true,
+    "device": "CPU"
+  },
+  "success_gate": "At fractions 0% and 25% on both development seeds, Mirror mean test normalized MSE <=1e-4, within 1e-5 of adaptive direct, and total actual serialized payload <=90% of adaptive direct.",
+  "failure_gate": "Either low-private development fraction misses the byte or quality margin. Higher-private cases remain frontier observations even if they fail.",
+  "fresh": {
+    "locked_before_access": true,
+    "seeds": [31511, 31512, 31513],
+    "open_condition": "only after both 0% and 25% development worlds pass all success gates"
+  },
+  "boundaries": ["synthetic supervised linear task bank", "fixed-radius aligned common orbit known by construction", "iid residuals restricted to the paid shared basis", "zero gradient optimizer updates", "oracle task IDs; no router", "no capacity or continual-learning claim"]
+}

@@ -1,0 +1,64 @@
+{
+  "threshold_frozen": 0.0001,
+  "fresh_seeds_locked": [
+    31511,
+    31512,
+    31513
+  ],
+  "fresh_opened": false,
+  "development_summary": [
+    {
+      "seed": 31501,
+      "method": "shared_sparse_direct",
+      "payload_bytes": 5856,
+      "test_normalized_mse": 3.9281086602264807e-07,
+      "fit_compute_proxy": 3630336,
+      "private_count_histogram": {
+        "0": 48,
+        "2": 34,
+        "4": 30,
+        "8": 16
+      }
+    },
+    {
+      "seed": 31501,
+      "method": "mirror_sparse",
+      "payload_bytes": 6050,
+      "test_normalized_mse": 1.261802044464494e-06,
+      "fit_compute_proxy": 152644608,
+      "private_count_histogram": {
+        "0": 48,
+        "2": 34,
+        "4": 30,
+        "8": 16
+      }
+    },
+    {
+      "seed": 31502,
+      "method": "shared_sparse_direct",
+      "payload_bytes": 5856,
+      "test_normalized_mse": 4.7681420672393397e-07,
+      "fit_compute_proxy": 3630336,
+      "private_count_histogram": {
+        "2": 34,
+        "0": 48,
+        "4": 30,
+        "8": 16
+      }
+    },
+    {
+      "seed": 31502,
+      "method": "mirror_sparse",
+      "payload_bytes": 6050,
+      "test_normalized_mse": 1.2601107379256633e-06,
+      "fit_compute_proxy": 152644608,
+      "private_count_histogram": {
+        "2": 34,
+        "0": 48,
+        "4": 30,
+        "8": 16
+      }
+    }
+  ],
+  "observation": "Mirror passed development quality but used 6050B vs 5856B for the matched shared-direct sparse-residual control in both seeds; fixed d=16 used 7790B and adaptive dense used 6254\u20136366B."
+}
