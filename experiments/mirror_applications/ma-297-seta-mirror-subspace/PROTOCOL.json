@@ -1,0 +1,138 @@
+{
+  "experiment_id": "MA-297",
+  "title": "SETA shared sparse subspace + Mirror views",
+  "status": "FAIL",
+  "evidence_lane": "MECHANISM/CONTINUAL/STORAGE",
+  "base_commit": "e259f27",
+  "random_selection": {
+    "date_utc": "2026-10-08",
+    "method": "Python secrets.randbelow(10)",
+    "draw_index_zero_based": 8,
+    "candidate_pool": [
+      "MA-274",
+      "MA-276",
+      "MA-278",
+      "MA-282",
+      "MA-286",
+      "MA-288",
+      "MA-292",
+      "MA-296",
+      "MA-297",
+      "MA-299"
+    ],
+    "selected": "MA-297",
+    "live_conflict_check": "git fetch origin --prune; no MA-297 branch found"
+  },
+  "hypothesis": "After a fixed shared-sparse-subspace discovery step, a per-task Mirror coordinate over retained shared atoms preserves aligned tasks with lower serialized inference bytes than matched task-specific shared-basis coefficients; unrelated tasks require private residual capacity.",
+  "physical_object": "One frozen shared linear map plus one discovered frozen sparse feature basis",
+  "mirror_coordinate": "One learned rotation angle per task over a pair of shared sparse atoms",
+  "logical_multiplicity": "Four sequential task-specific linear functions sharing the same sparse atoms",
+  "prior_art_refs": [
+    "PA30",
+    "PA16"
+  ],
+  "controls": [
+    "shared discovered basis without task code (SETA-style shared-only)",
+    "ordinary per-task coefficients on the exact same shared atom pairs",
+    "matched low-rank residual",
+    "independent full task weights"
+  ],
+  "task_stream": "Five known tasks: task 0 establishes shared physical weights; four sequential tasks fit with frozen base and frozen discovered basis. Aligned teachers are rotations of paired shared atoms; independent teachers have independently sampled maps. Task IDs supplied at inference and charged. Methods are fitted from training examples; held-out examples never enter fitting.",
+  "development": {
+    "worlds_or_seeds": [
+      29701,
+      29702
+    ],
+    "support_pair_candidates": [
+      1,
+      2,
+      4
+    ],
+    "selection_metric": "mean held-out task MSE at final task across methods and both task families; bytes and retention are preregistered tie-breakers",
+    "examples_per_task": 64,
+    "optimizer_updates_per_new_task": 0,
+    "fit_rule": "Mirror coordinate by fixed 4097-point angle grid search on training examples; ordinary shared-basis coefficients by least squares on training examples; rank-1 residual by truncated SVD; independent upper control by least squares. No gradient updates.",
+    "selected_support_pairs": 1,
+    "selection_result_mean_final_seen_mse": {
+      "1": 0.6613974442549378,
+      "2": 0.7513426845990723,
+      "4": 0.9521325624000704
+    }
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      29711,
+      29712,
+      29713
+    ],
+    "locked_before_access": true,
+    "examples_per_task": 64,
+    "optimizer_updates_per_new_task": 0,
+    "fit_rule": "Frozen fit rules and selected support pair count; same fixed angle grid and least-squares rules as development.",
+    "support_pairs": 1
+  },
+  "storage": {
+    "authority": "actual deterministic serialized inference payload bytes",
+    "codec": "binary tensor-record codec charges field names, method/task metadata, dtype, shape and raw bytes",
+    "paid_objects": [
+      "shared weights",
+      "shared sparse basis",
+      "Mirror angle codes",
+      "ordinary shared-basis coefficients",
+      "residual factors",
+      "private full weights",
+      "task IDs",
+      "indices",
+      "codec headers and metadata"
+    ],
+    "optimizer_state": "reported separately as resumable checkpoint bytes"
+  },
+  "compute": {
+    "report_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_MAC_proxy": true,
+    "report_wall_time": true,
+    "report_inference_throughput": true,
+    "active_MAC_proxy": "Count fixed angle-grid candidate evaluations or least-squares operations from selected fit rule; report zero optimizer updates."
+  },
+  "success_gate": "On every fresh aligned world, Mirror mean seen-task MSE <=1.10x matched ordinary shared-basis coefficient control, prior-task MSE increase <=0.01, and incremental inference bytes <=0.5x coefficient control. Mirror-specific result additionally requires a quality/byte frontier improvement over that native coefficient control.",
+  "failure_gate": "Mirror misses the aligned quality/retention gate or is not better than the same-basis ordinary coefficient control at matched bytes/compute.",
+  "boundaries": [
+    "Synthetic known-task sparse-linear stream",
+    "Fixed-update screen, not capacity",
+    "Does not reproduce SETA routing or its full sparse discovery algorithm",
+    "Independent tasks test the private-parameter boundary"
+  ],
+  "amendments": [
+    {
+      "id": "A1",
+      "fixed_before_fresh_access": true,
+      "change": "Freeze support_pairs=1 after development selection.",
+      "reason": "Mean final seen-task held-out MSE across both task families, all methods, and both development worlds was 0.661397 (one pair), 0.751343 (two), and 0.952133 (four)."
+    },
+    {
+      "id": "A2",
+      "fixed_before_fresh_access": false,
+      "change": "Inference throughput now executes the Mirror coordinate from shared physical tensors on every forward call, and serialized-state reconstruction is checked; initial dense-materialized inference timing is retained in FRESH_RUNTIME_INVALIDATED.csv.",
+      "reason": "The first audit timing bypassed the Mirror coordinate by timing a dense materialized matrix. This correction changes neither fit, seeds, support, nor quality selection."
+    },
+    {
+      "id": "A3",
+      "fixed_before_fresh_access": false,
+      "change": "Serializer stores only method-required persistent state: shared-only pays shared tensors without unused task IDs/empty task records; independent-full pays its task weights without unused shared tensors. The first corrected-runtime payload table is retained in invalidated diagnostics.",
+      "reason": "The audit serializer included unused state in the two endpoint controls. Mirror and matched-coefficient state remain fully charged; all corrected payloads are reconstructed and byte/hash replayed from saved state."
+    },
+    {
+      "id": "A4",
+      "fixed_before_fresh_access": false,
+      "change": "Primary task MSE is now computed from the float32 logical functions reconstructed from each actual serialized inference payload; previous pre-serialization fresh metrics are retained as invalidated diagnostics.",
+      "reason": "The deployed payload is authoritative, so small float32 serialization differences must be included in quality as well as byte accounting. This does not change the teacher, fitting, model, seeds, or gate."
+    }
+  ],
+  "reconciliation": {
+    "decision": "FAIL",
+    "source_branch": "research/ma-297-seta-mirror-subspace-20261008",
+    "source_result_commit": "e3b74c52bfc1030eb0bde57cf62511ad64d70054",
+    "reason": "Only one of three fresh aligned worlds met the frozen <=1.10x quality ratio; fixed-grid fit compute and eager inference throughput also missed useful Pareto gates."
+  }
+}

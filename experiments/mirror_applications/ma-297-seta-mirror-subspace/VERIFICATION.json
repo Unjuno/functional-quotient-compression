@@ -1,0 +1,41 @@
+{
+  "experiment_id": "MA-297",
+  "commit": "e3b74c52bfc1030eb0bde57cf62511ad64d70054",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-297-seta-mirror-subspace/tests -v",
+    "passed": 4,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "maximum_reconstruction_abs_difference": 1.473132132390198e-07,
+    "state_sha256_replay": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_seeds": [
+    29711,
+    29712,
+    29713
+  ],
+  "development_seeds": [
+    29701,
+    29702
+  ],
+  "notes": [
+    "Initial fresh tables with dense-materialized timing or unused endpoint state were preserved as invalidated diagnostic CSVs. Corrected audit reused the locked seeds and frozen one-pair fit setting.",
+    "No inference or optimizer update is present in the fixed-fit protocol; optimizer updates are zero.",
+    "Four unit/mechanism/serialization tests passed; raw fresh MSE, payload lengths and hashes replay exactly.",
+    "Final primary metric is computed on reconstructed serialized-state functions; development selection reproduced under the same frozen metric and selected one support pair."
+  ],
+  "integrated_provenance": {
+    "source_branch": "research/ma-297-seta-mirror-subspace-20261008",
+    "source_commit": "e3b74c52bfc1030eb0bde57cf62511ad64d70054",
+    "reconciled_branch": "research/ma-297-seta-reconciled-20261008",
+    "tests_and_replay_rerun_on_reconciled_branch": true
+  }
+}
