@@ -10,7 +10,7 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 - P1: **422** (13 completed; 409 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
 - Current MA statuses: **126 FAIL, 11 NOT ESTABLISHED, 45 PROMISING, 973 UNTESTED**
-- 47 baseline experiment directories remain present; 136 additional per-ID outcomes are linked to their dedicated research branches in `LIVE_BRANCH_RECONCILIATION.csv`.
+- 47 baseline experiment directories remain present; 137 additional per-ID outcomes are linked to their dedicated research branches in `LIVE_BRANCH_RECONCILIATION.csv`.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This was the intake-time queue; current selection follows the live-branch reconciliation at the top of this board.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed at intake time; later live-branch outcomes are indexed above.
 - Thirteenth literature sweep added MA-996..1045 (50 UNTESTED; 40 P0/10 P1) and PA296..PA325. IDs MA-1000+ use four digits; consult `check_registry_integrity.py`. No new experiment results.
@@ -23,7 +23,7 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**Pending live branch refresh.** MA-452 completed as FAIL. Refresh remote refs and select the next eligible P0 outside paused families. PathNet path × Givens-role experiments MA-451/452 are paused after the repeated native-conditioning alias; see [family diagnostic](../../docs/phase2/PATHNET_MIRROR_PATH_ROLE_FAMILY_DIAGNOSTIC_2026-10-08.md).
+**MA-453 — Routing Network with logical Mirror blocks (P0; PA81).** MA-452 FAIL was pushed and refs refreshed. No MA-453 experiment branch is present; MA-453 tests dynamic block routing separately from the paused PathNet path × role family. Remote MA-462/464 branches are tracked independently.
 
 MA-434 and MA-436 found exact native SSM parameterization aliases; MA-442 likewise aliases a native Givens angle conditioner. Its two-angle model beats the tested rank-2 LoRA on query RMSE and model-bank bytes, but misses the end-to-end runtime gate and is exactly reproduced by the native conditioned predictor. Fresh seeds remain sealed.
 
