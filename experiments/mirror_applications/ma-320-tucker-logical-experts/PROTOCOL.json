@@ -1,0 +1,83 @@
+{
+  "experiment_id": "MA-320",
+  "title": "Tucker logical expert bank with one phase Mirror address",
+  "status": "PROTOCOL_FROZEN_BEFORE_DEVELOPMENT",
+  "base_commit": "3f3b97a",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY/COMPUTE",
+  "hypothesis": "For a 64-expert linear MoE bank with 48 experts on a shared eight-harmonic coefficient orbit, one stored phase per aligned expert plus a shared Tucker matrix bank will reduce complete serialized bytes by at least 10% versus rank-16 free Tucker coefficients with the same private fallback rule while preserving held-out function nMSE <=1e-4; off-orbit experts will require private state.",
+  "prior_art_refs": [
+    "PA35",
+    "MA-319"
+  ],
+  "physical_object": "one shared 32x16 matrix bank (16 fixed random orthonormal matrix atoms plus shared mean) used to reconstruct 64 logical top-1 experts",
+  "mirror_coordinate": "one FP16 phase per expert; shared amplitudes produce coefficient pairs [a_h*cos(h*phase), a_h*sin(h*phase)] for h=1..8",
+  "logical_multiplicity": "48 aligned expert functions from the shared phase orbit; 16 unrelated expert functions may receive private full-matrix fallback",
+  "task": {
+    "input_dim": 32,
+    "output_dim": 16,
+    "experts": 64,
+    "aligned_experts": 48,
+    "unrelated_experts": 16,
+    "support_examples_per_expert": 96,
+    "validation_examples_per_expert": 64,
+    "fresh_test_examples_per_expert": 128,
+    "bank_rank": 16,
+    "harmonics": 8,
+    "phase_search_grid": 1024,
+    "amplitude_rule": "shared amplitude a_h=0.25/sqrt(h), h=1..8; charged in payload",
+    "private_gate": "if validation task nMSE > 1e-4, store that task's full FP16 matrix as private fallback",
+    "task_id": "oracle top-1 expert index, uint8 task-index table charged in each payload; router training and routing quality are out of scope",
+    "development_seeds": [
+      32001,
+      32002
+    ],
+    "fresh_seeds": [
+      32011,
+      32012,
+      32013
+    ],
+    "optimizer_updates": 0
+  },
+  "controls": [
+    "hard-tied shared mean only",
+    "free Tucker coefficient banks of rank 1/2/4/8/16 over identical shared atoms",
+    "rank-16 Tucker plus validation-selected private full-matrix fallback",
+    "Mirror phase address plus the same private fallback rule",
+    "independent full FP16 expert matrices"
+  ],
+  "selection": {
+    "development": "fixed conditions only; no hyperparameter tuning allowed",
+    "fresh": "seeds 32011/32012/32013 locked until frozen source and protocol are committed"
+  },
+  "storage": {
+    "authority": "actual deterministic serialized inference payload bytes after reload",
+    "format": "fixed-timestamp ZIP containing sorted NPY tensors, uncompressed",
+    "paid_objects": [
+      "shared mean and all matrix atoms",
+      "all direct coefficients or Fourier amplitudes and expert phases",
+      "private fallback matrices",
+      "expert IDs",
+      "metadata and archive headers"
+    ],
+    "random_basis": "serialized and charged; same shared basis used by all coefficient methods"
+  },
+  "compute": {
+    "report_examples_and_updates": true,
+    "report_angle_search_operations_and_wall_time": true,
+    "report_top1_active_mac_proxy": true,
+    "inference": "one expert matrix-vector product per request; no router or materialization counted as free"
+  },
+  "gates": {
+    "promising": "All fresh seeds: Mirror total package <=0.90x rank16-Tucker+same-private-fallback bytes and every expert test nMSE<=1e-4.",
+    "fail": "Mirror payload >= direct rank16+same-private control in >=2 seeds, or any private-task quality misses in >=2 seeds.",
+    "not_established": "serialization/replay mismatch or task split leakage"
+  },
+  "boundaries": [
+    "post-fit synthetic linear expert bank",
+    "oracle top-1 task IDs",
+    "teacher deliberately contains an eight-harmonic phase orbit",
+    "unrelated tasks stress private state",
+    "no router or learned MoE training claim",
+    "logical task count is not independent capacity"
+  ]
+}
