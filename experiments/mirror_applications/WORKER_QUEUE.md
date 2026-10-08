@@ -161,9 +161,9 @@ High-information P0:
 
 **PathNet path × role pause (2026-10-08):** MA-451/452 are verified FAILs with a repeated exact native Givens-conditioning alias; do not continue unchanged variants. See [family diagnostic](../../docs/phase2/PATHNET_MIRROR_PATH_ROLE_FAMILY_DIAGNOSTIC_2026-10-08.md). MA-453 Routing Networks is a distinct dynamic-routing candidate requiring its own native router controls.
 15. MA-483..485 — paused after MA-481/482 exact native VQ/RVQ aliases; see [family diagnostic](../../docs/phase2/VQ_MIRROR_FUNCTION_ADDRESS_FAMILY_DIAGNOSTIC_2026-10-08.md). Resume only with a materially different insertion hypothesis.
-16. MA-486 — sparse dictionary Mirror function codes (**FAIL:** 11.8% fewer bytes and 90.6% lower decode ops than dense int8, but misses 20% byte gate and exactly aliases OMP; fresh sealed). MA-487 LISTA inference is next.
+16. MA-486/487 — completed FAIL screens; sparse coding aliases OMP and LISTA is dominated by direct top-3. See [family diagnostic](../../docs/phase2/SPARSE_FUNCTION_MIRROR_COORDINATE_DIAGNOSTIC_2026-10-08.md). MA-488 shared/private dictionary is active.
 16. MA-486/487 — completed FAIL screens; sparse coding aliases OMP and LISTA is dominated by direct top-3. See [family diagnostic](../../docs/phase2/SPARSE_FUNCTION_MIRROR_COORDINATE_DIAGNOSTIC_2026-10-08.md).
-17. MA-488 — shared/private dictionary + Mirror coefficients (next P0; PA94; test private-atom need across heterogeneous heldout functions) (next P0; PA94; test private atom need across heterogeneous heldout functions)
+17. MA-488 — shared/private dictionary + Mirror coefficients (active P0 screen; PA94; test private-atom need across heterogeneous heldout functions)
 18. MA-492 — quantized packet-plan latent
 19. MA-494 — error-correcting Mirror expert IDs
 20. MA-498 — learned code-distance regularization
