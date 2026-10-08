@@ -324,6 +324,14 @@ MA1100–1109 compare structured m with clustered native adapter basis compressi
 
 MA1110–1112 compare Mirror canonical-cache Views against *native* ICML 2026 LRAgent low-rank cache decomposition/Flash-LoRA-Attention (PA364), PReCache (PA365), aLoRA/standard-LoRA reuse (PA154–155), and exact MA691 algebra. Require physical cache aliasing, adapter-specific state, exact source-token provenance, target output quality, end-to-end prefill and TTFT. A common base plus small LR cache is already established prior art.
 
+### AT. Function-space and natural task-code falsification
+
+MA1096/1099/1102/1105/1114/1115 should now read `docs/phase2/MIRROR_FUNCTION_SPACE_FALSIFICATION_2026-10-08.md` and PA372..381, alongside the original PA351..371. The additional parameter `m` must preserve actual **held-out task outputs and capabilities**, not merely reduce Frobenius error on learned weight deltas.
+
+A two-seed real-digit image-shift exploratory pilot was performed with a precommitted protocol; 8-value structured Mirror codes outperformed 6-value diagonal BOLT-like codes in mean CE but failed the stricter accuracy, dense-core and CPU runtime Pareto gates. Results are in `experiments/mirror_applications/research_intake/natural_digit_function_20261008/` and do **not** change MA statuses.
+
+Next preregister new natural task families and compare (a) weight-SVD basis, (b) BOLT task-spectral basis, (c) CG-LoRA/Fora-inspired activation/curvature-aware basis, (d) a simple FiLM/rank-one code, (e) dense shared task core, (f) structured Mirror m and optional sparse CUR private residual, and (g) independent LoRA. Freeze tasks/seeds before opening held-out task scores; count all source-adapter training, basis construction, serialized bytes and measured inference. Distinguish exact rank/representation capacity from fixed-update optimization and protect previously learned functions.
+
 ## KV-cache transformation lane
 
 MA-691..700 test whether one physical canonical KV/cache latent can serve multiple logical Mirror Views.
