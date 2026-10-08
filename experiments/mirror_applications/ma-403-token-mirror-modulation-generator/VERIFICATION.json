@@ -1,9 +1,81 @@
 {
   "experiment_id": "MA-403",
-  "status": "NOT_RUN",
-  "protocol_sha256": "PENDING",
-  "metric_replay": "NOT_RUN",
-  "payload_replay": "NOT_RUN",
+  "status": "VERIFIED_DEVELOPMENT_FAIL",
+  "protocol_sha256": "81b2442227b7512dbe23d3428a050f07a551b6a03283ddb2e7d0abcc5500fa55",
+  "metric_replay": "PASS",
+  "payload_replay": "PASS",
   "fresh_accessed": false,
-  "checks": []
+  "checks": [
+    {
+      "seed": 40301,
+      "method": "global_film",
+      "metric_replay": "PASS",
+      "payload_bytes": 2169,
+      "sha256": "124f2815c481c0c7e43d30149e3d2ef556e91ac5900c7d4203ae5a061acb775b"
+    },
+    {
+      "seed": 40301,
+      "method": "token_film",
+      "metric_replay": "PASS",
+      "payload_bytes": 2581,
+      "sha256": "418a11d1b107db46650a9845cb1361cfafb8914b762a497e07ac131502789e3d"
+    },
+    {
+      "seed": 40301,
+      "method": "token_rank1",
+      "metric_replay": "PASS",
+      "payload_bytes": 3002,
+      "sha256": "9b788a2aecc31cae8620ed03a604ef8f4f35063f6dc09a2a98edd1f1c8882435"
+    },
+    {
+      "seed": 40301,
+      "method": "mirror_generator",
+      "metric_replay": "PASS",
+      "payload_bytes": 2136,
+      "sha256": "885ac36a42fbc1c146b87bab3d34f8126c667bdcb72a28987ddad8b55c3c16cd"
+    },
+    {
+      "seed": 40301,
+      "method": "full_affine_generator",
+      "metric_replay": "PASS",
+      "payload_bytes": 3604,
+      "sha256": "aeb5f59decfd6ba9096de5c556361c1e5f8cf5a873858cc810e00d411865414e"
+    },
+    {
+      "seed": 40302,
+      "method": "global_film",
+      "metric_replay": "PASS",
+      "payload_bytes": 2162,
+      "sha256": "a278b5a06342c765f6d3b96ef3dc0d4fb20b28b99f39a6d8693637ebc3bf4da2"
+    },
+    {
+      "seed": 40302,
+      "method": "token_film",
+      "metric_replay": "PASS",
+      "payload_bytes": 2574,
+      "sha256": "f47983f6a99ce23070da787c73aa4f013fb1a8808555e90ab1204253aed79854"
+    },
+    {
+      "seed": 40302,
+      "method": "token_rank1",
+      "metric_replay": "PASS",
+      "payload_bytes": 2996,
+      "sha256": "d8206cc362dd8e13f2c874cdef72c58c405b93a31ca25bf4ce3f7d688dd85616"
+    },
+    {
+      "seed": 40302,
+      "method": "mirror_generator",
+      "metric_replay": "PASS",
+      "payload_bytes": 2129,
+      "sha256": "612d90a943aea9fa454c0aa1c3017556463d7c12de09443ca6e28c644ee9d2e8"
+    },
+    {
+      "seed": 40302,
+      "method": "full_affine_generator",
+      "metric_replay": "PASS",
+      "payload_bytes": 3601,
+      "sha256": "9598a809f96721c74878ce5e098090b8717148c4a25ce98813ebc2c2bc32f188"
+    }
+  ],
+  "development_gate_passed": false
 }

@@ -67,7 +67,8 @@
     "report_active_compute_proxy": true,
     "report_isolated_wall_clock": true,
     "report_inference_throughput": true,
-    "measurement": "Eager CPU single-thread; 10 warmup and 25 timed calls on batch 1024; include code generation and transform."
+    "measurement": "Eager CPU single-thread; 10 warmup and 25 timed calls on batch 1024; include code generation and transform.",
+    "active_compute_proxy": "Analytical per-token scalar operation count, separately identifying sin/cos calls for Mirror: global FiLM 32; token FiLM 96; token rank-one 175; Mirror 80 (16 codegen + 16 trig + 48 rotate); full affine generator 1072."
   },
   "success_gate": "Both development seeds: Mirror held-out NRMSE <=0.02 and <=0.10x token-wise FiLM NRMSE; payload <=0.75x token-wise FiLM and <=0.10x full-affine generator; throughput >=0.80x token-wise FiLM. Pass qualifies only for fresh confirmation.",
   "failure_gate": "FAIL if any full success gate criterion is missed in either seed, or if global/token-wise FiLM matches quality within 5% at byte ratio <=1.10.",
@@ -76,5 +77,6 @@
     "Held-out positions test extrapolation, not random interpolation.",
     "The teacher is structured to vary smoothly with token position; no arbitrary token-wise function capacity claim.",
     "Fresh remains sealed unless both development seeds pass."
-  ]
+  ],
+  "protocol_amendment_before_result_finalization": "After the development screen, corrected the analytical operation proxy to count parameter generation and apply operations. This changes no task, model, data, thresholds, or fresh access; screen status is already a FAIL on payload gates."
 }

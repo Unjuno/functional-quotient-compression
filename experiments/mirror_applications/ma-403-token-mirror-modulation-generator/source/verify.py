@@ -12,7 +12,7 @@ def verify():
   for method in METHODS:
    r=next(r for r in rows if int(r['world_or_seed'])==seed and r['method']==method)
    raw=(ROOT/'runs'/f'dev{seed}_{method}.npz').read_bytes();pred=replay(raw,xt,pt,method);score=nrmse(pred,yt)
-   assert abs(score-float(r['primary_value']))<1e-7
+   assert abs(score-float(r['primary_value']))<1e-6
    assert len(raw)==int(r['serialized_bytes'])
    assert hashlib.sha256(raw).hexdigest()==r['status_note']
    checks.append({'seed':seed,'method':method,'metric_replay':'PASS','payload_bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest()})

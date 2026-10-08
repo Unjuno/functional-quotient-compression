@@ -67,7 +67,7 @@ def replay(raw,h,p,method):
         m.load_state_dict({k:torch.tensor(a[k].astype(np.float32)) for k in m.state_dict()})
     return m(torch.relu(h@w1)@w2,p)
 
-def nrmse(a,b):return float(torch.sqrt(torch.mean((a-b)**2))/torch.sqrt(torch.mean((b-b.mean())**2)))
+def nrmse(a,b):return float((torch.sqrt(torch.mean((a-b)**2))/torch.sqrt(torch.mean((b-b.mean())**2))).detach())
 def benchmark(model,h,p):
     h=h[:1024];p=p[:1024]
     with torch.no_grad():
@@ -82,7 +82,7 @@ def run(out,seeds=(40301,40302),updates=400,n=4096):
         for method in METHODS:
             m,sec=fit(method,h,p,y,seed+len(method),updates);raw=pack(m,w1,w2,method);(out/f'dev{seed}_{method}.npz').write_bytes(raw)
             pred=replay(raw,xt,pt,method);score=nrmse(pred,yt);rate=benchmark(m,ht,pt);digest=hashlib.sha256(raw).hexdigest()
-            ops={'global_film':32,'token_film':64,'token_rank1':128,'mirror_generator':64,'full_affine_generator':544}[method]
+            ops={'global_film':32,'token_film':96,'token_rank1':175,'mirror_generator':80,'full_affine_generator':1072}[method]
             rows.append({'condition':'heldout_position_[0.8,1]','world_or_seed':seed,'method':method,'serialized_bytes':len(raw),'train_tokens_or_examples':updates*1024,'optimizer_updates':updates,'active_compute_proxy':ops,'wall_time_s':round(sec,6),'primary_metric':'NRMSE','primary_value':score,'secondary_metric':'examples_per_second','secondary_value':rate,'status_note':digest})
         by={r['method']:r for r in rows if r['world_or_seed']==seed};mi=by['mirror_generator'];tf=by['token_film'];fa=by['full_affine_generator']
         screens.append({'seed':seed,'pass':mi['primary_value']<=.02 and mi['primary_value']<=.1*tf['primary_value'] and mi['serialized_bytes']<=.75*tf['serialized_bytes'] and mi['serialized_bytes']<=.1*fa['serialized_bytes'] and mi['secondary_value']>=.8*tf['secondary_value'],'mirror_nrmse':mi['primary_value'],'token_film_nrmse':tf['primary_value'],'mirror_bytes':mi['serialized_bytes'],'token_film_bytes':tf['serialized_bytes'],'full_affine_bytes':fa['serialized_bytes'],'mirror_rate':mi['secondary_value'],'token_film_rate':tf['secondary_value']})
