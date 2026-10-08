@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-255",
+  "commit": "0a53c9c5a4902c3bd44295c6bcf24098c2f3a97a",
+  "tests": {
+    "command": "PYTHONPATH=experiments/mirror_applications/ma-255-mirror-context-superposition/source python -m pytest -q experiments/mirror_applications/ma-255-mirror-context-superposition/tests",
+    "passed": 2,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Development only; fresh worlds remained unopened after development gate failure.",
+    "PSP context is regenerated exactly from paid seed metadata and excluded from serialized tensor state.",
+    "Native PSP approximation is limited to direct training of one superposed tensor with seeded Rademacher sign unbinding; no full PA16 reproduction is claimed."
+  ]
+}

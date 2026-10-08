@@ -9,7 +9,9 @@ This file's detailed five experimental reports are still valid, but not the comp
 
 Read `experiments/mirror_applications/STATUS_BOARD.md` and `docs/phase2/MIRROR_MA_EVIDENCE_INTEGRATION_2026-10-08.md` for all 47 verified historical experiment reports and their scoped claims. New prior art PA236..265 and MA876..935 are detailed in `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08.md`. Additional prior art PA266..295 and MA936..995 are detailed in `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_TWELFTH_SWEEP.md`. PA296..325 and MA996..1045 are documented in `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_THIRTEENTH_SWEEP.md`. New PA326..350 and MA1046..1095 (time series, recommender embeddings, multisensor EO) are documented in `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_FOURTEENTH_SWEEP.md`. The read-only `experiments/mirror_applications/check_registry_integrity.py` audits MA-1000+ IDs, PA/claim consistency and the status board.
 
-**The next candidate remains MA-255.** MA-876..1095 are research-intake candidates and must not preempt previously registered P0 crossovers. Natural variation and benchmark-level runtime remain unproven; aligned synthetic PROMISING must not be described as real-world Mirror adoption.
+MA-255 is reconciled as **PROMISING only for a post-fit aligned representation screen**: 734B Mirror state reached 6.68e-17 fresh MSE across seeds 101/211/307/401, versus 6,490B implemented PSP, 14,650B rank-2 task code and 27,906B independent. A different 1,200-update protocol variant failed its development quality gate and stayed sealed on fresh worlds. The two protocols are retained separately and are not a replication pair; see `experiments/mirror_applications/ma-255-mirror-context-superposition/RECONCILIATION.md`.
+
+**The next candidate is MA-260.** MA-876..1115 remain appended research-intake hypotheses and must not preempt the registered P0 crossovers. Natural variation and benchmark-level runtime remain unproven; aligned synthetic PROMISING must not be described as real-world Mirror adoption.
 
 ## MA-241 — layer-specific Mirror views over tied experts
 
