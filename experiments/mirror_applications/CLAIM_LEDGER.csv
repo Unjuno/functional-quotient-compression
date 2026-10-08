@@ -166,3 +166,5 @@ MA-443,FAIL,FEW_SHOT/ADAPTATION/STORAGE/COMPUTE,"A1 corrected disjoint task IDs.
 
 
 
+
+MA-444,FAIL,FEW_SHOT/DECODER_STORAGE/QUALITY,"Fresh disjoint 8D tasks, matched 2D latent: Mirror step5 NRMSE 0.5805/2,181B vs LEO0.2037/2,157B task+1,892B decoder (N20 total2,251B); full-vector0.4061/2,165B. Mirror is slightly smaller but ~2.85x worse error and ~2.7x slower. Fails quality gate.",branch research/ma-444-leo-mirror-decoder-20261008: experiments/mirror_applications/ma-444-leo-mirror-decoder/README.md,branch research/ma-444-leo-mirror-decoder-20261008: experiments/mirror_applications/ma-444-leo-mirror-decoder/VERIFICATION.json,5896232,"2,880 fresh rows replayed; 2,880 task payloads and nine LEO decoder files verified by exact bytes/hash; 2 tests pass. Synthetic only."
