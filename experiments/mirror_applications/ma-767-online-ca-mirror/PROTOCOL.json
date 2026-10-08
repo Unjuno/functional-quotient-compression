@@ -16,7 +16,8 @@
     "frozen shared rule without task adaptation",
     "Mirror 2D code online SGD and per-task code bank",
     "full 8-logit local-rule online SGD with per-task rule snapshots",
-    "independent per-task full rule state as quality/storage upper control"
+    "independent per-task full rule state as quality/storage upper control",
+    "single full-rule state overwritten sequentially as a retention/forgetting control"
   ],
   "task": "Predict next cell from one of 8 binary neighborhoods sampled from seeded 1D CA trajectories; report next-state accuracy by online examples, rule-logit MSE, retention of earlier tasks, inference bytes and update compute.",
   "development": {
@@ -32,7 +33,7 @@
       76713
     ],
     "locked_before_access": true,
-    "split": "four development task rules estimate shared rank-2 basis; each fresh world contains four in-subspace rules and four independent hard rules, each with 256 online observations and 512 held-out observations"
+    "split": "four development task rules estimate shared rank-2 basis; each fresh world contains 32 in-subspace rules and 32 independent hard rules, each with 256 online observations and 512 held-out observations"
   },
   "storage": {
     "authority": "actual serialized inference payload bytes",
@@ -49,12 +50,13 @@
     "report_active_compute_proxy": true,
     "report_isolated_wall_clock": true
   },
-  "success_gate": "On >=2/3 fresh worlds, easy-rule Mirror accuracy after 64 online examples is within 5 percentage points of task-specific full-rule control and serialized code-bank payload <=60% of full-rule snapshots; previous-task accuracy after adapting all tasks remains >=95% of its post-adaptation value. Report hard-rule gap and update latency.",
+  "success_gate": "On >=2/3 fresh worlds, easy-rule Mirror accuracy after 64 online examples is within 5 percentage points of task-specific full-rule control and serialized code-bank payload <=60% of full-rule snapshots; previous-task accuracy after adapting all tasks remains >=95% of post-adaptation value. Report hard-rule gap, overwritten-state retention, and update latency.",
   "failure_gate": "FAIL if easy-rule accuracy/storage/retention gate fails on >=2/3 seeds or if the hard-rule gap cannot be reduced by full local-rule state. PROMISING only when the easy-rule storage/quality/retention gates pass; no general CA claim.",
   "boundaries": [
     "local rule prediction screen, not full spatial pattern-generation benchmark",
     "synthetic deterministic teacher rules",
     "logical task multiplicity is measured by held-out rule quality and bytes, not code combinations",
     "no natural data or learned autonomous self-organization claim"
-  ]
+  ],
+  "amendment_1": "Before audit: expand each fresh world from 4+4 to 32 in-subspace and 32 independent rules. For only eight tasks, actual safetensors metadata and shared basis overhead dominate, and the theoretical code-bank byte ratio is near the 60% gate; 64 task views provide a meaningful payload test. Add a single overwritten full-rule state as a direct retention control. No audit observations were accessed."
 }
