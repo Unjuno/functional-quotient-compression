@@ -3,11 +3,11 @@
 - Status: FAIL at development gate
 - Branch: `research/ma-351-mimo-mirror-diversity-20261008`
 - Base commit: `52d734a`
-- Last verified commit: pending
+- Last verified commit: `0ea05a86557544c9448bfa2011efb2045587877a`
 - Development complete: yes (protocol amended before fresh access)
 - Fresh/audit opened: no; seeds 35111–35113 remain sealed
-- Results committed: no
-- Verification committed: no
+- Results committed: yes
+- Verification committed: yes
 - Registry row updated: yes
 
 ## Decision summary

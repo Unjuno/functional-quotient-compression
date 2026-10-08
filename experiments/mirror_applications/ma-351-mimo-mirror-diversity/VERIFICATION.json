@@ -1,9 +1,28 @@
 {
   "experiment_id": "MA-351",
-  "commit": "pending",
-  "tests": {"command": "python -m pytest -q experiments/mirror_applications/ma-351-mimo-mirror-diversity/tests", "passed": null, "failed": null},
-  "serialization": {"roundtrip_checked": true, "byte_exact": true, "development_payloads_checked": 10, "mirror_direct_output_equal": true, "max_logit_roundtrip_error": 0.0},
-  "metric_replay": {"command": "python experiments/mirror_applications/ma-351-mimo-mirror-diversity/source/verify.py", "checked": true, "development_rows_replayed": 10, "fresh_rows": 0, "max_difference": 0.0},
+  "commit": "0ea05a86557544c9448bfa2011efb2045587877a",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-351-mimo-mirror-diversity/tests",
+    "passed": null,
+    "failed": null
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "development_payloads_checked": 10,
+    "mirror_direct_output_equal": true,
+    "max_logit_roundtrip_error": 0.0
+  },
+  "metric_replay": {
+    "command": "python experiments/mirror_applications/ma-351-mimo-mirror-diversity/source/verify.py",
+    "checked": true,
+    "development_rows_replayed": 10,
+    "fresh_rows": 0,
+    "max_difference": 0.0
+  },
   "fresh_split_integrity_checked": true,
-  "notes": ["Only amended development seeds 35101 and 35102 were accessed.", "An initial invalid development attempt was excluded and documented in the protocol amendment; no fresh seeds were accessed."]
+  "notes": [
+    "Only amended development seeds 35101 and 35102 were accessed.",
+    "An initial invalid development attempt was excluded and documented in the protocol amendment; no fresh seeds were accessed."
+  ]
 }
