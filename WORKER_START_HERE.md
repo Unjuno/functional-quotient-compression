@@ -213,6 +213,22 @@ Before implementing any MA-826..875 candidate:
 8. structural-composition candidates require held-out module/rule combinations and sample-efficiency measurements.
 9. stable-synapse controls are mandatory when a claimed fast-weight benefit might be achievable by gain/context modulation alone.
 
+### MA-876..935 cross-model KV, neural graphics, speech, generation and stitching
+
+Before starting a candidate in this range:
+
+1. Read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08.md`, the selected MA registry row, and PA236..PA265 as referenced. State exactly where `m` is inserted into the native method.
+2. Do not claim the native cross-model cache translator, NeRF scene label, Gaussian deformer, speaker adapter, diffusion sampler, or stitching layer as a novel Mirror operator. The test is the **marginal benefit of `m`**.
+3. Cross-model caches: separate MA-691-style **exact shared-state View algebra** from **approximate model-to-model cache transfer**; compare Heo ridge, CacheBridge, MoT and target re-prefill; report target NLL, RoPE/token provenance, calibration and mapper cost, physical cache bytes, and real handoff latency.
+4. Neural graphics/4D Gaussian: report rendered PSNR/LPIPS and temporal consistency, actual coded scene/appearance/hash/anchor/decoder bytes, random-access cost, FPS and VRAM. Compare C-NGP, ReFiNe, TensoRF, 4DGS, ADC-GS and CC-4DGS where relevant.
+5. Multi-speaker audio: compare NanoVoice/HyperTTS/MoA/Hyper-MoA, not merely per-speaker LoRA; report intelligibility, speaker identity, prosody, marginal bytes/voice, real-time factor and data/consent conditions.
+6. Generative functions: match FMM/Consistency Models, learned S4S/S4S-Alt solvers, LoRA.rar and EST-LoRA as relevant; count actual NFEs, solver/controller overhead and measured GPU latency.
+7. Cross-model stitching: compare native StitchLLM and affine feature transfer; measure target NLL, feature semantics, all bridge/router bytes and information-alignment counterexamples (PA241).
+8. Factorized Mirror claims require held-out ordered model pairs, scene-time, content-style or speaker-layer cross-products. Independently trained or out-of-family functions are the misalignment controls.
+9. All MA-876..935 remain UNTESTED. Do not change verified scientific status without frozen protocol, results, and verification.
+
+Current next candidate stays **MA-255**, regardless of this appended research queue.
+
 ### Recurrent/depth candidates
 
 MA-247 showed that even an aligned Givens teacher can fail a fixed-budget recurrent optimization screen. Include a scalar/static-LoRA optimization control and do not infer representational impossibility from failed convergence.
@@ -223,4 +239,4 @@ MA-247 showed that even an aligned Givens teacher can fail a fixed-budget recurr
 
 For MA-003, inspect shared-projection fusion, sign-View gate/bypass equivalence and antipodal cancellation. For KV candidates, inspect common-map value fusion, original key-width temperature after latent absorption, missing-information counterexamples and source-token cache provenance.
 
-Do not interrupt a frozen run or change audit seeds/gates to incorporate this intake. Check dedicated experiment branches before claiming work: at the inspected snapshots MA-248..251 were already reported complete on the MA-251 branch, while the shared board still listed MA-248 next. Preserve both histories; do not replace the expanded global registry with an older worker checkout. The PR uses local CR subtest IDs, not newly reserved global MA IDs.
+Do not interrupt frozen runs or change audit seeds/gates. **Historical note corrected:** MA-248..251 and the other 47 verified MA experiment directories were reconciled into the central 875-candidate registry on 2026-10-08, before this new 60-candidate expansion to 935. STATUS_BOARD now sets MA-255 next. Do not overwrite the expanded registry with the old 254-row worker checkout. PR #27 uses local CR subtest IDs, not new global MA IDs.
