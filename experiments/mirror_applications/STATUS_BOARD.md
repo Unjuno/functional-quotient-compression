@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (73 completed; 557 UNTESTED)
+- P0: **630** (74 completed; 556 UNTESTED)
 - P1: **422** (12 completed; 410 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1070 UNTESTED, 37 PROMISING, 48 FAIL**
+- Current MA statuses: **1069 UNTESTED, 37 PROMISING, 49 FAIL**
 - 73 local experiment directories are complete; MA-301 and MA-307 are additional completed experiments linked to their dedicated research branches.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-276 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-276 is next; MA-275 remains UNTESTED (P1).
@@ -21,9 +21,9 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-333 — Mirror sign/scale orbit audit (P0; PA47)**
+**MA-335 — group-action Mirror expert family (P0; check registry PA refs)**
 
-MA-325 was attempted on development seeds but is **NOT ESTABLISHED**: all methods, including independent full tables, remained at uniform NLL (~ln 16). Fresh seeds stayed sealed; a learnable task requires a separately versioned protocol. See its report on `research/ma-325-tt-embedding-domain-mirror-20261008`. MA-330 is PROMISING only for synthetic aligned cache views: 36,458B vs 131,752B independent, near-zero output nMSE, but the direct cos/sin control is only 30B larger and there is no decode-speed gain. One unrelated layer needs private cache. See report. MA-331 development failed its Mirror-specific 10% byte gate: Re-Basin/direct was 2,574B and phase Mirror 2,562B, both with nMSE <1e-8; unaligned low-rank deltas were poor. Fresh stayed sealed. MA-332 confirmed eight hidden-unit permutation states are one function (max output difference <=2.25e-7); the paid shared checkpoint is 81.6% smaller than eight duplicate archives, but adds zero functional multiplicity.
+MA-325 was attempted on development seeds but is **NOT ESTABLISHED**: all methods, including independent full tables, remained at uniform NLL (~ln 16). Fresh seeds stayed sealed; a learnable task requires a separately versioned protocol. See its report on `research/ma-325-tt-embedding-domain-mirror-20261008`. MA-330 is PROMISING only for synthetic aligned cache views: 36,458B vs 131,752B independent, near-zero output nMSE, but the direct cos/sin control is only 30B larger and there is no decode-speed gain. One unrelated layer needs private cache. See report. MA-331 development failed its Mirror-specific 10% byte gate: Re-Basin/direct was 2,574B and phase Mirror 2,562B, both with nMSE <1e-8; unaligned low-rank deltas were poor. Fresh stayed sealed. MA-332 confirmed eight hidden-unit permutation states are one function (max output difference <=2.25e-7); the paid shared checkpoint is 81.6% smaller than eight duplicate archives, but adds zero functional multiplicity. MA-333 likewise confirmed coupled ReLU positive-scale and tanh sign symmetries preserve FP32 functions; FP16 quantization was separated. MA-332/333 pause pure gauge-orbit capacity proposals pending a function-changing extension.
 
 MA-255 is reconciled as PROMISING only for its aligned post-fit representation screen; a distinct 1,200-update protocol variant failed at development and remains sealed on fresh worlds. See `experiments/mirror_applications/ma-255-mirror-context-superposition/RECONCILIATION.md`.
 
@@ -47,12 +47,12 @@ MA-274 is complete FAIL on a two-world fixed-update development screen: at 5,430
 
 ## Active experiment
 
-MA-333 protocol selection and prior-art review on `research/ma-333-sign-scale-orbit-audit-20261008`. MA-312 is PROMISING only for the aligned 256-task storage/quality point; its fit compute proxy was over 1,000x the direct coefficient control and throughput lower. MA-258 has a narrow PROMISING aligned codec result; unrelated experts required private/richer state. MA-266 is FAIL for Mirror-specific value: factorized views generalized on an aligned task cross-product, but the ordinary coefficient-product control matched within 2.1% payload bytes. Together with MA-265 this pauses VeRA family follow-up MA-267 pending redesign. MA-255 through MA-299 now have verified status records. MA-257 failed against the exact native PA16 rotational-context control; MA-297/299 SETA remains paused. Next by the registered P0 queue: MA-330.
+MA-335 next by registry order; pure permutation/sign/scale symmetry orbit subfamily paused after MA-332/333. MA-312 is PROMISING only for the aligned 256-task storage/quality point; its fit compute proxy was over 1,000x the direct coefficient control and throughput lower. MA-258 has a narrow PROMISING aligned codec result; unrelated experts required private/richer state. MA-266 is FAIL for Mirror-specific value: factorized views generalized on an aligned task cross-product, but the ordinary coefficient-product control matched within 2.1% payload bytes. Together with MA-265 this pauses VeRA family follow-up MA-267 pending redesign. MA-255 through MA-299 now have verified status records. MA-257 failed against the exact native PA16 rotational-context control; MA-297/299 SETA remains paused. Next by the registered P0 queue: MA-330.
 
 ## Verified status index
 
 - **PROMISING (36):** MA-001, MA-002, MA-003, MA-004, MA-005, MA-006, MA-007, MA-008, MA-012, MA-014, MA-015, MA-041, MA-076, MA-079, MA-111, MA-121, MA-156, MA-160, MA-171, MA-173, MA-181, MA-189, MA-241, MA-244, MA-245, MA-249, MA-250, MA-251, MA-255, MA-258, MA-268, MA-276, MA-282, MA-312, MA-314, MA-330, MA-691.
-- **FAIL (39):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-257, MA-260, MA-261, MA-265, MA-266, MA-271, MA-272, MA-273, MA-274, MA-278, MA-286, MA-288, MA-292, MA-296, MA-297, MA-299, MA-301, MA-307, MA-311, MA-327, MA-331, MA-332.
+- **FAIL (39):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-257, MA-260, MA-261, MA-265, MA-266, MA-271, MA-272, MA-273, MA-274, MA-278, MA-286, MA-288, MA-292, MA-296, MA-297, MA-299, MA-301, MA-307, MA-311, MA-327, MA-331, MA-332, MA-333.
 
 All per-ID evidence is retained in the local experiment directories and in `CLAIM_LEDGER.csv`. Consult [the evidence integration audit](../../docs/phase2/MIRROR_MA_EVIDENCE_INTEGRATION_2026-10-08.md) for linked reports, verifications, provenance and claim boundaries.
 
@@ -216,14 +216,19 @@ On three fresh synthetic 4x4 layer-expert worlds, ordinary rank-2 coefficient pr
 
 ## MA-330 — PROMISING for aligned synthetic cache views, no runtime gain established
 
-Across three fresh seeds, a shared rank-4 temporal K/V basis plus phase views used 36,458B (72.3% below 131,752B independent caches) at attention-output nMSE 5.15e-8–6.39e-8. Direct cos/sin coefficients used 36,488B at comparable quality, only 30B more; the phase code halves view-code storage but barely changes total payload. No-private Mirror was 3,238B but the unrelated fourth layer had nMSE ~1.0; private cache restored quality. Eager CPU throughput showed no consistent speed improvement. Fifteen payloads/hash/metric rows replayed exactly; four tests passed. Synthetic causal-attention screen with oracle-known phases only. Dedicated branch `research/ma-330-tensorized-kv-cache-mirror-20261008`. Next P0: MA-333.
+Across three fresh seeds, a shared rank-4 temporal K/V basis plus phase views used 36,458B (72.3% below 131,752B independent caches) at attention-output nMSE 5.15e-8–6.39e-8. Direct cos/sin coefficients used 36,488B at comparable quality, only 30B more; the phase code halves view-code storage but barely changes total payload. No-private Mirror was 3,238B but the unrelated fourth layer had nMSE ~1.0; private cache restored quality. Eager CPU throughput showed no consistent speed improvement. Fifteen payloads/hash/metric rows replayed exactly; four tests passed. Synthetic causal-attention screen with oracle-known phases only. Dedicated branch `research/ma-330-tensorized-kv-cache-mirror-20261008`. Next P0: MA-335.
 
 
 ## MA-331 — FAIL for the frozen Mirror-specific storage gate
 
-On two development seeds, Re-Basin/direct task codes used 2,574B and Mirror phase used 2,562B, only 0.47% smaller versus a preregistered 10% threshold. Both had function-output nMSE below 1e-8. Unaligned rank-2 task deltas had mean nMSE 0.20–0.264, showing that alignment helped but did not make that gain Mirror-specific. Eight payloads/hash/metric rows replayed exactly; four tests passed. Fresh remained sealed because byte structure is fixed and the development gate missed. Synthetic post-fit ReLU screen only. Dedicated branch `research/ma-331-rebasin-mirror-task-deltas-20261008`. Next P0: MA-333.
+On two development seeds, Re-Basin/direct task codes used 2,574B and Mirror phase used 2,562B, only 0.47% smaller versus a preregistered 10% threshold. Both had function-output nMSE below 1e-8. Unaligned rank-2 task deltas had mean nMSE 0.20–0.264, showing that alignment helped but did not make that gain Mirror-specific. Eight payloads/hash/metric rows replayed exactly; four tests passed. Fresh remained sealed because byte structure is fixed and the development gate missed. Synthetic post-fit ReLU screen only. Dedicated branch `research/ma-331-rebasin-mirror-task-deltas-20261008`. Next P0: MA-335.
 
 
 ## MA-332 — FAIL as additional function capacity; permutation audit passed
 
-Across five trained synthetic MLP seeds, eight consistent hidden-unit permutation states preserved FP16-reloaded outputs within max difference 1.1e-7–2.3e-7. One shared checkpoint plus all paid permutation indices used 1,740B versus 9,440B for eight separate archives, an 81.6% reduction in duplicate storage. These are one function in eight parameter coordinates, not eight logical functions. Incoming-only permutation changed outputs (max difference 10.0–18.8). Ten payload/metric rows replayed exactly; four tests passed. Dedicated branch `research/ma-332-permutation-orbit-audit-20261008`. Next P0: MA-333.
+Across five trained synthetic MLP seeds, eight consistent hidden-unit permutation states preserved FP16-reloaded outputs within max difference 1.1e-7–2.3e-7. One shared checkpoint plus all paid permutation indices used 1,740B versus 9,440B for eight separate archives, an 81.6% reduction in duplicate storage. These are one function in eight parameter coordinates, not eight logical functions. Incoming-only permutation changed outputs (max difference 10.0–18.8). Ten payload/metric rows replayed exactly; four tests passed. Dedicated branch `research/ma-332-permutation-orbit-audit-20261008`. Next P0: MA-335.
+
+
+## MA-333 — FAIL as added functional capacity; exact sign/scale audit passed
+
+On three fresh seeds, coupled ReLU positive hidden scaling preserved FP32 outputs within 2.98e-6, while tanh sign flips were exact. FP16 rounding error was reported separately and reached 0.0108 for ReLU. The symmetry codes add bytes but no new function. Twenty symmetry payload/hash/metric rows replayed; four tests passed. MA-332 and MA-333 are consecutive symmetry-orbit results with the same gauge-only cause; pause pure gauge-orbit capacity candidates pending a function-changing extension. Dedicated branch `research/ma-333-sign-scale-orbit-audit-20261008`. Next P0: MA-335.

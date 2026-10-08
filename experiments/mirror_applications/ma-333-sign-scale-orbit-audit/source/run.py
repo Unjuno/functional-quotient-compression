@@ -31,6 +31,10 @@ def transform(p,kind,codes):
   s=codes;return [w1*s[:,None],b1*s,w2,b2]
  s=codes;return [w1*s[:,None],b1*s,w2,b2]
 
+def symmetry_codes(activation):
+ if activation=='relu':return torch.exp(torch.linspace(-.65,.65,HIDDEN))
+ return torch.where(torch.arange(HIDDEN)%2==0,1.,-1.)
+
 def pack(arr,path):
  path=Path(path);path.parent.mkdir(parents=True,exist_ok=True)
  with zipfile.ZipFile(path,'w',compression=zipfile.ZIP_STORED) as z:
@@ -53,9 +57,7 @@ def eval_arrays(a,x,activation):
 def run(seed,split,outdir,jsonpath):
  rows=[]
  for act in ('relu','tanh'):
-  model,x,wall=world(seed,act);torch.manual_seed(seed+101)
-  if act=='relu':codes=torch.exp(torch.linspace(-.65,.65,HIDDEN))
-  else:codes=torch.where(torch.arange(HIDDEN)%2==0,1.,-1.)
+  model,x,wall=world(seed,act);codes=symmetry_codes(act)
   ref_path=Path(outdir)/f'{split}_{seed}_{act}_base.zip';base=weight_arrays(model);base['meta']=np.asarray([INPUT,HIDDEN,OUTPUT,UPDATES],dtype=np.uint16);bn,bh=pack(base,ref_path);base_loaded=load(ref_path);ref=eval_arrays(base_loaded,x,act)
   kind='relu_scale' if act=='relu' else 'tanh_sign';good=transform(model,kind,codes);badkind='relu_uncoupled' if act=='relu' else 'tanh_uncoupled';bad=transform(model,badkind,codes)
   with torch.no_grad():base32=forward(x,model,act);good32=forward(x,good,act)

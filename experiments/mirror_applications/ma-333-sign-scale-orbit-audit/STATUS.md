@@ -1,17 +1,14 @@
 # MA-333 status
 
-- Status: PROTOCOL FROZEN BEFORE DEVELOPMENT
+- Status: FAIL as additional functional capacity; sign/scale symmetry audit passed
 - Branch: `research/ma-333-sign-scale-orbit-audit-20261008`
-- Base commit: `6b88ce5`
-- Development complete: no
-- Fresh/audit opened: no
-- Results committed: no
-- Verification committed: no
+- Protocol/code frozen before fresh: `d030c92`
+- Fresh seeds 33311/33312/33313: complete
+- Results committed: pending
+- Verification committed: pending
 
-## Next action
+## Ruling
 
-Train the small ReLU/tanh controls and verify coupled sign/scale orbit invariance on development seeds.
+Coupled ReLU positive scales and tanh sign flips preserve FP32 functions. FP16 rounding error is reported separately. These parameter views are zero additional function multiplicity.
 
-## Blockers
-
-None known.
+MA-332/333 are consecutive symmetry-orbit P0 results with the same structural cause. Pause further pure gauge-orbit capacity proposals; next P0 is MA-335 group-action Mirror expert family.
