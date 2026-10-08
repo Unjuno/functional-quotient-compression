@@ -1,6 +1,6 @@
 # Worker queue
 
-**Current operational pointer (2026-10-08): MA-369.** MA-366 is a verified development-only FAIL with invalidated fresh IDs; MA-367/368 are already FAIL. Re-read the live registry and research branches before starting MA-369.
+**Current operational pointer (2026-10-08): MA-371.** MA-366 is a verified development-only FAIL with invalidated fresh IDs; MA-367/368 and MA-369 are FAIL. Re-read the live registry and research branches before starting MA-371.
 
 The queue is derived from `IDEA_REGISTRY.csv`. The registry is authoritative.
 
@@ -103,8 +103,9 @@ High-information P0:
 2. MA-364 — early-exit Mirror readout views
 3. MA-366 — factorized depth x expert routing
 4. MA-367/368 — slimmable width/depth Mirror codes
-5. MA-369 — Once-for-All subnetwork Mirror correction
-6. MA-371/372 — MatFormer granularity and Mix'n'Match Views
+5. MA-369 — Once-for-All subnetwork Mirror correction (completed FAIL; 2026-10-08)
+6. MA-371 — MatFormer granularity Mirror views
+7. MA-372 — Mix'n'Match Views
 7. MA-374 — ALBERT shared layers + depth Mirror
 8. MA-375 — one-shot supernet + Mirror correction
 9. MA-379 — Mirror-compressed AdapterFusion bank

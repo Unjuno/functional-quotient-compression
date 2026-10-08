@@ -1,6 +1,6 @@
 # MA-369 — Once-for-All subnetwork Mirror correction
 
-Status: **PROTOCOL FROZEN BEFORE DEVELOPMENT**  
+Status: **FAIL** (bounded OFA-style MLP screen)  
 Evidence lane: MECHANISM / STORAGE / QUALITY / COMPUTE / RUNTIME  
 Base commit: `ab95e5d` (cumulative evidence branch descended from worker-ready `c935a90`)  
 Prior art: PA52 Once-for-All; PA51 universally slimmable networks.
@@ -40,3 +40,10 @@ The independent control cannot learn the task, serialization/metric replay fails
 ## Boundaries
 
 Small grayscale digit classification only. Fresh results select no settings. Fixed update counts are not capacity evidence. No device-specific latency claim or full OFA/published benchmark reproduction.
+
+
+## Results and ruling
+
+Fresh worlds 36910–36912 (learning rate 0.01 selected only on development worlds 36900/36901) produced mean accuracy 95.09% for Mirror, 95.00% for uncorrected shared OFA, 95.09% for FiLM, 95.52% for rank-1 LoRA, and 95.71% for independent subnetworks. Mirror's +0.09 percentage-point difference from shared misses the frozen +1 point gate. FiLM matches Mirror at the same complete payload size (40,191 bytes) and uses fewer correction MACs. Independent bank size is 98,185 bytes; this sharing reduction is attributable to OFA-style shared weights rather than Mirror.
+
+**Decision: FAIL** for Mirror-specific value under this bounded screen. See `STATUS.md` for H/T/D/C/U and Fact/Interpretation/Hypothesis separation, and `VERIFICATION.json` for exact payload and metric replay.

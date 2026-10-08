@@ -1,9 +1,83 @@
 {
   "experiment_id": "MA-369",
   "commit": null,
-  "tests": {"command": "python -m unittest discover -s experiments/mirror_applications/ma-369-ofa-subnetwork-mirror-correction/tests -v", "passed": null, "failed": null},
-  "serialization": {"roundtrip_checked": false, "byte_exact": false},
-  "metric_replay": {"checked": false, "max_difference": null},
-  "fresh_split_integrity_checked": false,
-  "notes": ["Fresh seeds 36910-36912 remain sealed until development selection is frozen."]
+  "tests": {
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "max_abs_logit_difference": 0.0
+  },
+  "metric_replay": {
+    "checked": true,
+    "rows": 420,
+    "max_metric_difference": 4.6304321488221944e-09,
+    "payload_hash_checked": true
+  },
+  "fresh_split_integrity_checked": true,
+  "development_selection": {
+    "experiment_id": "MA-369",
+    "selected_learning_rate": 0.01,
+    "mean_validation_nll_by_lr": {
+      "0.003": 0.19724639268333333,
+      "0.01": 0.19031246342333336
+    },
+    "development_worlds": [
+      36900,
+      36901
+    ],
+    "fresh_worlds_locked": [
+      36910,
+      36911,
+      36912
+    ],
+    "updates": 500,
+    "correction_updates_per_architecture": 100
+  },
+  "fresh_summary": {
+    "ofa_shared": {
+      "mean_accuracy": 0.9500000061111111,
+      "mean_nll": 0.2077241242,
+      "serialized_bytes": 38677,
+      "mean_train_wall_s": 0.5176098333333333,
+      "mean_inference_examples_per_second": 4704883.322722223
+    },
+    "ofa_mirror": {
+      "mean_accuracy": 0.9509259188888889,
+      "mean_nll": 0.20642482695555556,
+      "serialized_bytes": 40191,
+      "mean_train_wall_s": 0.774725,
+      "mean_inference_examples_per_second": 2435144.2808055556
+    },
+    "ofa_film": {
+      "mean_accuracy": 0.9509259255555556,
+      "mean_nll": 0.19530814100555555,
+      "serialized_bytes": 40191,
+      "mean_train_wall_s": 0.7363565000000001,
+      "mean_inference_examples_per_second": 3518248.0027777776
+    },
+    "ofa_lora": {
+      "mean_accuracy": 0.9552469138888889,
+      "mean_nll": 0.20572658504444444,
+      "serialized_bytes": 42477,
+      "mean_train_wall_s": 0.7200233333333333,
+      "mean_inference_examples_per_second": 3760035.984388889
+    },
+    "independent": {
+      "mean_accuracy": 0.9570987711111111,
+      "mean_nll": 0.14843433307777779,
+      "serialized_bytes": 98185,
+      "mean_train_wall_s": 1.327409,
+      "mean_inference_examples_per_second": 5072483.134333333
+    }
+  },
+  "decision": "FAIL",
+  "notes": [
+    "Small OFA-style MLP screen only; not a published OFA reproduction.",
+    "Fresh worlds 36910-36912 evaluated once at frozen learning rate 0.01.",
+    "All six subnet architectures use each method bank complete actual payload bytes.",
+    "Mirror fails its registered quality gate; FiLM matches mean accuracy at identical bytes with lower measured correction compute."
+  ]
 }
