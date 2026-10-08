@@ -3,11 +3,11 @@
 - Status: FAIL; frozen development gate did not pass.
 - Branch: `research/ma-375-oneshot-subgraph-mirror-20261008`
 - Base commit: `4e75142`
-- Last verified commit: pending
+- Last verified commit: `309c158`
 - Development complete: yes (seeds 37501, 37502)
 - Fresh/audit opened: no
-- Results committed: pending
-- Verification committed: pending
+- Results committed: yes
+- Verification committed: yes
 - Registry row updated: yes (FAIL)
 
 ## Next action
