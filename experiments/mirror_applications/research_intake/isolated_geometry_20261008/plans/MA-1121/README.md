@@ -66,6 +66,23 @@ For each dimensionless quality metric, report paired differences over task/seed 
 
 **Required experiment outputs when later promoted:** `README.md`, frozen `PROTOCOL.json`, `STATUS.md`, implementation under `source/`, tests, `RESULTS_CORE.csv`, `VERIFICATION.json` containing dataset/hash/seed/byte/compute provenance. None of these runs have been executed by this design document.
 
+### Quantified uncertainty and sequential stopping
+
+For quality observable `Q`, combine same-unit standard uncertainties `u_seed` (independent seed/world mean standard error), `u_eval` (task-cluster bootstrap sample error), and `u_num` (numerical replay effect expressed in Q units). The independence model is `u_c = sqrt(u_seed^2 + u_eval^2 + u_num^2)`, expanded `U = k_cov * u_c` with indicative `k_cov = 2`. For only five fresh worlds, this **does not guarantee 95% coverage**; report paired per-seed outcomes and a task-bootstrap 95% interval. If terms correlate, use full covariance. Runtime has separate `u_t = sqrt(u_repeat^2 + u_clock^2)` (s); storage S is measured exactly as serialized bytes. Never combine uncertainties of different dimensions.
+
+| Symbol | Meaning (Japanese) | Unit (SI/practical) | Definition, domain, type |
+|---|---|---|---|
+| `Q` | 主評価量 | nat/token or 1 | finite real scalar, preselected |
+| `u_seed` | 独立試行による標準不確かさ | Qと同単位 | nonnegative real scalar, paired std/sqrt(n), n=5 |
+| `u_eval` | 評価標本の標準不確かさ | Qと同単位 | nonnegative real scalar, task bootstrap |
+| `u_num` | 数値誤差成分 | Qと同単位 | nonnegative real scalar, dtype/replay |
+| `u_c` | 合成標準不確かさ | Qと同単位 | nonnegative scalar, covariance-aware |
+| `k_cov` | 包含係数 | 1 | dimensionless positive scalar; indicative 2 |
+| `U` | 拡張不確かさ | Qと同単位 | nonnegative scalar, `k_cov * u_c` |
+| `u_t,u_repeat,u_clock` | 実行時間の標準不確かさ | s | real nonnegative scalars, runtime only |
+
+**Dimension check:** every squared term in `u_c` has unit Q², so square-root returns unit Q; `k_cov` has unit 1. Runtime uncertainty remains seconds, not bytes. **Sequential stop:** tune only on 3 dev seeds, run all 5 frozen fresh worlds without selective early stopping, and never use fresh outputs to retune. Separate independent replication is mandatory for ADOPTED.
+
 ## Variable table / dimension check
 
 | Symbol | Meaning (Japanese) | Unit (SI / practical) | Domain / type |
