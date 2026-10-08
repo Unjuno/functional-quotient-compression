@@ -3,12 +3,12 @@
 - Status: FAIL against the frozen <=0.90x native Hash Embedding byte gate; other gates pass.
 - Branch: `research/ma-389-hash-embedding-mirror-importance-20261008`
 - Base commit: `f3f9240`
-- Last verified commit: pending
+- Last verified commit: `3bd1122`
 - Development complete: yes (seeds 38901, 38902)
 - Fresh/audit opened: no
-- Results committed: yes (pending final commit)
-- Verification committed: yes (pending final commit)
-- Registry row updated: yes in working tree (FAIL)
+- Results committed: yes (`3bd1122`)
+- Verification committed: yes (`3bd1122`)
+- Registry row updated: yes (FAIL)
 
 ## Next action
 
