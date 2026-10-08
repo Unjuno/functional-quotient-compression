@@ -243,6 +243,27 @@ Before starting an experiment in MA-936..995:
 8. Factorized codes require unseen task×time, scene×chunk, listener×direction, site×user or hardware task×configuration pairings. Prefer natural/out-of-family variation to more aligned-only tests.
 9. The new MA-936..995 ideas are UNTESTED. Existing completed experiments and MA-255 next-candidate selection are unchanged.
 
+### Function-space evidence and native basis controls (PA372..381)
+
+Read `docs/phase2/MIRROR_FUNCTION_SPACE_FALSIFICATION_2026-10-08.md` **only** for natural adapter/low-description m/function-space questions, especially MA1096/1098/1099/1102/1105/1114/1115.
+
+- **BOLT** already trains low-description diagonal coefficients on a common spectral basis extracted from learned task vectors; it is a direct baseline, not a novel Mirror result.
+- **CG-LoRA** evaluates function-space prediction/curvature; **Fora** uses activation-derived capability projectors; **SVD+CUR** distinguishes common versus localized/private learned updates. Compare actual held-out task NLL/accuracy and retention rather than optimizing weight Frobenius alone.
+- An independent *real-digit image-shift pilot* used rank-6 common bases and four held-out adaptation conditions, seeds 41/42. Structured m had 52.19% mean accuracy at 4694 B versus diagonal 49.79% at 4662 B, but dense core scored 69.97% and independent rank-4 LoRA 86.98%; structured m was slower. It failed its preregistered gate; **do not** treat this as a completed MA, LM result, or a reason to retune opened fresh seeds.
+- New tests must fit m from permitted new-task data (no target-oracle LoRA delta), hold out whole tasks and ideally model families, preserve rank/gauge invariance, report function-space and weight-space diagnostics separately, and charge all shared basis, task-code, private residual, source adapter development and runtime costs.
+
+### MA-1096..1115 natural-LoRA gauge, adapter bank and cache crossovers
+
+For a selected MA1096..1115 (and as supplemental context if a compatible experiment is **not yet frozen**):
+
+1. Read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_FIFTEENTH_SWEEP.md`, PA351..371 and `experiments/mirror_applications/research_intake/natural_lora_orbit_20261008/README.md`. The included code is a gauge/weight-space screening harness, **not a natural-model outcome or a Mirror trained model**.
+2. For LoRA `D=B@A`, compare only gauge-invariant `D` singular spectra and row/column projectors. Verify the same `D` under `B->B G, A->G^-1 A`, even for nonorthogonal invertible `G`. Raw B/A elementwise similarity is not a valid independent-functional-similarity claim.
+3. Pretrained `W` singular-axis stability is separate from task-delta alignment. Compare pretrained-W basis, a train-task-only discovered basis, CtS native shared U/V with k×k task cores, CtM where merging is the task, EigenLoRAx, VB-LoRA, MetaTT, diagonal/FiLM, structured Mirror m and private residuals.
+4. Train the **new-task** Mirror m from examples for L2 performance; oracle projection of an already-trained audit LoRA delta is only L1 weight-space representability. Separate train-task and audit-task identities; enforce identical base model revision and layer shapes.
+5. Count full shared basis, all task codes, private residual, optimizer/resume state and metadata; serving cost includes adapter bank/paging/compiled kernels. A small core can cost more than native LoRA if there are few tasks.
+6. In multi-LoRA cache tests use **LRAgent** fused low-rank attention and **PReCache** neutral-base reconstruction as strong controls. Distinguish exact MA691 compatible-state algebra from approximate cached states across differently adapted prefixes. Count physically aliased bytes, model/source prefill, TTFT, prefix provenance and decoder task quality.
+7. The entire new range is UNTESTED. **Next is still MA-255.** Do not reopen frozen world IDs or change gates to apply this intake.
+
 ### MA-1046..1095 fourteenth research intake: temporal forecasting, DLRM, Earth sensors
 
 If a selected MA experiment is in MA-1046..1095, **read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_FOURTEENTH_SWEEP.md` and its PA326..PA350 entries**, but do not load this new research lane when the selected MA is unrelated.
@@ -267,6 +288,16 @@ Always read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_THIRTEENTH
 
 The current next experiment remains **MA-255**; these are future hypotheses, not a new active worker priority.
 
+### MA-1116..1155 sixteenth research intake: KG, ISP, robotics, acoustic rooms
+
+Load the **per-ID plan** `docs/phase2/MIRROR_APPLICATION_EXPERIMENT_BLUEPRINTS_MA1116_1155.md` plus `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_SIXTEENTH_SWEEP.md` and the selected PA382..413 items **only if your selected ID lies in this family**.
+
+- **Knowledge graphs MA1116..1125:** relation rotation, two-sided modulation and shared tensor relation cores already exist in RotatE, PairRE, QuatE, TuckER and CompGCN. For a genuinely new `m`, target relation×domain/time, independently fitted natural operators, or fewer private relation maps; compare filtered MRR/Hits@10, full entity+relation tensor bytes and scoring runtime. An exact triple-score-preserving gauge change is **zero new independent function**. KrausKGE's channel-rank/fan-out is a strong direct baseline.
+- **Camera/optics MA1126..1135:** ParamISP uses ISO/exposure EXIF metadata; Uni-ISP already learns shared camera-specific forward/inverse transforms; PQDynamicISP and modular ISP have locally controllable stages. A new `m` must win over these native controllers or MetaISP/OmniLens++ PSF code with held-out actual devices, paired RAW/sRGB, DeltaE/PSNR/LPIPS, codec/state bytes and true ISP FPS. Clipping destroys information; never promise exact inverse sRGB->RAW.
+- **Robotics MA1136..1145:** UP-OSI and RMA already use small dynamics codes with one physical policy. CoRMA, A-NC and morphology world models are direct controls. Policy Mirror `m` must provide additional benefit at **equal deployable sensor history**; mass/friction/privileged ground truth is *not* a fair test-time input. Test held-out physics and within-rollout changes, policy returns/falls, writable adaptation state, update FLOPs and latency. Simulation does not prove robot safety.
+- **Acoustic MA1146..1155:** NAF, retrieval-adapted NAF, TA-RIR, NAMS and few-shot direction-aware neural acoustic fields already use source/receiver/room conditioning. Mirror `m` must reduce per-room model state or improve sparse enrollment on real measured rooms. Report RIR waveform/phase/RT60/DRR/C50 and stored field+retrieval bytes, not magnitude-only match; hold out complete rooms and source/receiver pairs.
+- New candidates are **UNTESTED**. Preserve original 47 MA result statuses, the exploratory negative shifted-digit pilot and any precommitted worker experiments. **MA-255 remains the current next worker.**
+
 ### Recurrent/depth candidates
 
 MA-247 showed that even an aligned Givens teacher can fail a fixed-budget recurrent optimization screen. Include a scalar/static-LoRA optimization control and do not infer representational impossibility from failed convergence.
@@ -277,4 +308,4 @@ MA-247 showed that even an aligned Givens teacher can fail a fixed-budget recurr
 
 For MA-003, inspect shared-projection fusion, sign-View gate/bypass equivalence and antipodal cancellation. For KV candidates, inspect common-map value fusion, original key-width temperature after latent absorption, missing-information counterexamples and source-token cache provenance.
 
-Do not interrupt frozen runs or change audit seeds/gates. **Historical note:** 47 verified MA experiment directories were reconciled on 2026-10-08. The authoritative registry currently contains 1095 candidates, and MA-255 is still next. Never overwrite the expanded registry with the old 254-row worker checkout. PR #27 uses local CR subtest IDs, not new global MA IDs.
+Do not interrupt frozen runs or change audit seeds/gates. **Historical note:** 47 verified MA experiment directories were reconciled on 2026-10-08. The authoritative registry currently contains 1155 candidates, and MA-255 is still next. Never overwrite the expanded registry with the old 254-row worker checkout. PR #27 uses local CR subtest IDs, not new global MA IDs.

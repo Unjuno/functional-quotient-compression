@@ -5,11 +5,11 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Program totals (reconciled from authoritative 1115-row registry)
 
-- Registered candidates: **1115**
-- P0: **597** (53 completed; 544 UNTESTED)
-- P1: **415** (12 completed; 403 UNTESTED)
+- Registered candidates: **1155**
+- P0: **630** (53 completed; 577 UNTESTED)
+- P1: **422** (12 completed; 410 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1050 UNTESTED, 33 PROMISING, 32 FAIL**
+- Current MA statuses: **1090 UNTESTED, 33 PROMISING, 32 FAIL**
 - 65 experiment directories, complete with status/protocol/results/verification files, are indexed in this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-276 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-276 is next; MA-275 remains UNTESTED (P1).
@@ -21,7 +21,7 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**PAUSED — SETA shared/private Mirror-code allocation requires family redesign after MA-297 and MA-299 consecutive P0 FAIL results.**
+**MA-257 — compositional Mirror context group (P0; PA16)**
 
 MA-255 is reconciled as PROMISING only for its aligned post-fit representation screen; a distinct 1,200-update protocol variant failed at development and remains sealed on fresh worlds. See `experiments/mirror_applications/ma-255-mirror-context-superposition/RECONCILIATION.md`.
 
@@ -39,11 +39,11 @@ MA-272 is FAIL for Mirror-specific/runtime gain: the corrected audit found that 
 
 MA-273 is complete FAIL for Mirror-specific value: corrected post-fit views exactly matched ordinary scalar-times-shared-angle factorization (same 1,150B payload); an independent neutral-initialization training screen failed at development and left fresh sealed. See its reconciliation report.
 
-MA-274 is complete FAIL on a two-world fixed-update development screen: at 5,430B Mirror was 3.4% smaller than native BOFT but had worse MSE in both worlds; independent experts were much better and butterfly eager CPU throughput was 9–20x below IA3/rank-one. Fresh worlds stayed sealed. Together with MA-273, this pauses the shared scalar-angle task/expert BOFT insertion family. MA-275 remains UNTESTED (P1). MA-276 is PROMISING only for aligned serialized-state compression: 396B Mirror vs 1,193B untied (3/3 fresh), but 2,048B runtime workspace exceeds that payload and unrelated layers fail. No runtime-memory claim. MA-278 is FAIL on the unaligned task-factor screen: Mirror matched scalar control bytes at 2,525B but lost quality at both development worlds and both learning rates; native Compacter also dominated quality. Fresh worlds remained sealed. Aligned feasibility is untested. MA-282 is PROMISING only for a deliberately aligned synthetic ReLU FFN orbit: exact in 3/3 at 925B vs 1,145B free-angle Monarch and 3,279B independent full. Unrelated functions collapse to hard-tie quality; view workspace is 1,024B, so no runtime-RAM claim. MA-286 is FAIL for Mirror-specific margin: the shared-B index screen reached aligned quality with 4,412B vs task-local Cheap-LoRA 6,580B, but an identical one-hot shared-B gate was only 78B larger (1.74%, below the preregistered 10%). Two unrelated functions used private rank-4 factors. MA-288 is FAIL under its preregistered direct-path runtime gate: aligned Mirror state/quality was strong at 378B vs 1,203B independent and quarter the writes, but throughput was 0.178–0.456x rank-4 residual in all fresh seeds. A cached path reached 201M examples/s with 1,024B workspace and is only supplemental. MA-292 is FAIL for Mirror-specific value: one angle beat FP32 SVD code size but matched-byte FP16 SVD was 23B smaller overall, slightly more accurate in all 3 fresh worlds, and about 1.55x faster. Unrelated task vectors required richer/private state. MA-296 is FAIL for Mirror-specific value: the simpler direct shared-orbit generator matched Mirror exactly at 1,524B vs 1,561B, while independent task vectors were needed for unrelated maps (4,771B). Rademacher PSP interference was high; rank-8 SVD matched quality with larger payload. MA-297 and MA-299 are FAIL; this SETA shared/private Mirror-code family is paused for redesign under the two-consecutive-failure stop condition.
+MA-274 is complete FAIL on a two-world fixed-update development screen: at 5,430B Mirror was 3.4% smaller than native BOFT but had worse MSE in both worlds; independent experts were much better and butterfly eager CPU throughput was 9–20x below IA3/rank-one. Fresh worlds stayed sealed. Together with MA-273, this pauses the shared scalar-angle task/expert BOFT insertion family. MA-275 remains UNTESTED (P1). MA-276 is PROMISING only for aligned serialized-state compression: 396B Mirror vs 1,193B untied (3/3 fresh), but 2,048B runtime workspace exceeds that payload and unrelated layers fail. No runtime-memory claim. MA-278 is FAIL on the unaligned task-factor screen: Mirror matched scalar control bytes at 2,525B but lost quality at both development worlds and both learning rates; native Compacter also dominated quality. Fresh worlds remained sealed. Aligned feasibility is untested. MA-282 is PROMISING only for a deliberately aligned synthetic ReLU FFN orbit: exact in 3/3 at 925B vs 1,145B free-angle Monarch and 3,279B independent full. Unrelated functions collapse to hard-tie quality; view workspace is 1,024B, so no runtime-RAM claim. MA-286 is FAIL for Mirror-specific margin: the shared-B index screen reached aligned quality with 4,412B vs task-local Cheap-LoRA 6,580B, but an identical one-hot shared-B gate was only 78B larger (1.74%, below the preregistered 10%). Two unrelated functions used private rank-4 factors. MA-288 is FAIL under its preregistered direct-path runtime gate: aligned Mirror state/quality was strong at 378B vs 1,203B independent and quarter the writes, but throughput was 0.178–0.456x rank-4 residual in all fresh seeds. A cached path reached 201M examples/s with 1,024B workspace and is only supplemental. MA-292 is FAIL for Mirror-specific value: one angle beat FP32 SVD code size but matched-byte FP16 SVD was 23B smaller overall, slightly more accurate in all 3 fresh worlds, and about 1.55x faster. Unrelated task vectors required richer/private state. MA-296 is FAIL for Mirror-specific value: the simpler direct shared-orbit generator matched Mirror exactly at 1,524B vs 1,561B, while independent task vectors were needed for unrelated maps (4,771B). Rademacher PSP interference was high; rank-8 SVD matched quality with larger payload. MA-297 and MA-299 are FAIL; this SETA shared/private Mirror-code family is paused for redesign under the two-consecutive-failure stop condition. The next independent P0 screen is MA-257.
 
 ## Active experiment
 
-No active experiment declared. MA-255 through MA-299 are indexed. SETA shared/private allocation is paused for redesign; MA-275/277/279/280/281 remain UNTESTED (P1).
+No active experiment declared. MA-257 is the next untested P0 after the completed high-information crossover sequence; check live branches before creating its protocol. MA-255 through MA-299 have verified status records. MA-297/299 SETA shared/private family remains paused. Next by the registered P0 queue: MA-257; MA-258/266 follow if no blocker.
 
 ## Verified status index
 
@@ -116,3 +116,8 @@ Corrected serialized-payload quality passed the frozen ratio gate in only one of
 **Interpretation:** share-before-private allocation delayed physical growth on aligned synthetic tasks; an ordinary two-coefficient address achieved the same allocation and quality.
 
 **Family decision:** MA-297 and MA-299 are consecutive P0 FAILs in the SETA shared/private family, both showing ordinary coefficient representation removes Mirror-specific advantage. Per stop condition, pause MA-298/MA-300 family work pending redesign. This does not pause unrelated Mirror families.
+
+
+## Sixteenth research intake — 2026-10-08
+
+The latest canonical baseline added MA-1116..1155 (40 UNTESTED; 33 P0 / 7 P1) and PA382..413. These knowledge-graph, camera/optics, robot-dynamics and room-acoustics proposals remain behind the outstanding P0 queue. Their source sweeps do not change MA statuses. See `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_SIXTEENTH_SWEEP.md` and `docs/phase2/MIRROR_APPLICATION_EXPERIMENT_BLUEPRINTS_MA1116_1155.md`.

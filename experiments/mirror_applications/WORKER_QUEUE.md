@@ -12,6 +12,10 @@ Use:
 - `docs/phase2/MIRROR_PARAMETER_INTEGRATION_DOCTRINE.md`
 - `docs/phase2/MIRROR_PARAMETER_INTEGRATION_MATRIX.md`
 
+## Live selection snapshot — 2026-10-08
+
+The latest canonical baseline and reconciled result branches have been merged into the current worker chain. MA-255/260/261/265/268 and the second research-expansion sequence through MA-299 have recorded outcomes. Per the selection rule, the next executable untested P0 in the remaining registry order is **MA-257**; then MA-258 and MA-266 if still untested. MA-297/299 SETA allocation is paused for family redesign. The appended MA-1116..1155 intake remains behind P0 work. This snapshot supersedes older queue paragraphs below that still name MA-255, MA-260, or MA-265 as next. Recheck the live registry and branch list before each new experiment.
+
 ## Selection rule
 
 Pick the first candidate satisfying all of:
@@ -376,6 +380,55 @@ Scientific guards:
 - Report exactly what new `m` changes causally and where it is inserted; ordinary coordinate relabelings count as zero new functional multiplicity.
 
 Read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_FOURTEENTH_SWEEP.md` and PA326..350 before implementing any MA1046..1095.
+
+## Fifteenth research intake — gauge-invariant natural LoRA, shared serving and KV-cache state
+
+**New entries MA-1096..1115 are UNTESTED** and form a supplemental natural-adapter diagnostic and serving research family. They do **not** preempt the locked **MA-255 Parameter Superposition** experiment or any currently frozen worker run. Read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_FIFTEENTH_SWEEP.md` and PA351..371 when selecting one.
+
+**High-information scientific screens within this intake:**
+
+1. **MA1096** — true learned LoRA-bank row/column geometry with **GL(r) gauge invariance**. Compare real task deltas from identical base revision against natural (not planted) heldout task deltas. Preflight math/manifest intake: `research_intake/natural_lora_orbit_20261008/`.
+2. **MA1097–1099** — shared output B vs shared input A vs two-sided/pretrained-weight spectral spaces; compact structured Mirror m vs the **dense k×k CtS/CtM shared-core**, EigenLoRAx, diagonal/FiLM and native LoRA. Do not infer delta alignment solely from pretrained W singular stability.
+3. **MA1100–1104** — full adapter-bank economics and quality: native Compress then Serve clusters, CtM (merged-model objective), EigenLoRAx, VB-LoRA and MetaTT. Sweep task count, related/unrelated families, code dimension and actual serialized basis+code cost; measure GPU throughput.
+4. **MA1105–1109** — continual shared/private basis drift, LoDA, Pico, GLoRA/LoL/W2T factor gauge and Zhyper/HyperLoader task-condition generators. Hold out tasks, count optimizer/writable state, and never compare raw LoRA factors as unique coordinates.
+5. **MA1110–1112** — multi-agent canonical-cache + low-rank adapter state. **LRAgent Flash-LoRA-Attention and PReCache PreLRShared/ReBaseShared are mandatory direct controls** alongside PA154/155 aLoRA and MA691 exact algebra. Count physical KV alias versus copies, prefix/position provenance, resident bytes, TTFT, decode latency and quality.
+6. **MA1113–1115** — signed/low-bit LoRDBA controls, task-count compression break-even, and formal nonorthogonal-gauge perturbation tests.
+
+**Validity levels (do not collapse):**
+- L0 mathematical gauge invariance + synthetic harness tests;
+- L1 oracle representability of **natural heldout task weight updates** under shared bases;
+- L2 train a task code m from allowed new-task examples and test downstream performance against native baselines;
+- L3 prove net actual serialized-byte/VRAM and quality/latency gains in realistic serving.
+
+L0/L1 outcomes alone never justify MA PROMISING as a deployable compression claim. Pre-trained base SVD and shared bases may cost storage/calibration, and heldout test-task weight deltas cannot be used to fit a deployable code at inference.
+
+**Next candidate remains MA-255; no existing status or frozen protocol changed.**
+
+## Supplemental function-space falsification (no newly allocated MA IDs)
+
+This research pass added **PA372..381** and ran one small real-image-digit-shift pilot with a protocol frozen before numerical execution. The full report/code/48-row data/replay are in `research_intake/natural_digit_function_20261008/` and the scientific interpretation is `docs/phase2/MIRROR_FUNCTION_SPACE_FALSIFICATION_2026-10-08.md`.
+
+Pilot: BOLT-like shared orthogonal basis plus 6 diagonal m coefficients averaged 49.79% top-1; same rank-6 basis plus 2 extra fixed Givens angles/task averaged 52.19% but was slower and fell far behind dense core 69.97% and independent rank-4 LoRA 86.98%. Preregistered Pareto gate FAILED. **No formal registry status changes**.
+
+When selecting MA-1096/1099/1102/1105/1114/1115, include BOLT (PA372), function-space/curvature metric (CG-LoRA PA373, Fora PA374), SVD+CUR localized task residual (PA376), task-vector bases PA375, information filtering PA377, and a gauge-invariant functional/OOD check (PA378..381) where applicable. Do not inflate the MA backlog with duplicated new rows for these existing questions. A task-code success must survive *actual held-out task outcomes and serializer/runtime*, not just weight reconstruction.
+
+**MA-255 remains next**. Do not interrupt active/frozen jobs to consume this support intake.
+
+## Sixteenth research intake — KG relation operators, cameras, robotics and acoustic rooms
+
+**MA-1116..1155 are 40 newly registered UNTESTED candidates**, appended after the existing MA-255 direct-prior sequence and all already accepted intake. This is an experiment *planning* list, not an instruction to preempt an existing worker or change any locked fresh split.
+
+Recommended P0 order **within this new family only**:
+1. **KG relations MA1116..1125:** MA-1123 naturally fitted RotatE/PairRE/TuckER relation orbit versus private bank, then MA-1121 KrausKGE relation-rank and MA-1120 native time-relation factors. Native relation phase/core, CompGCN and 5starE are direct prior art; compare filtered link-prediction MRR, link ranking and full physical entity+relation bytes. Exact scoring gauge relabeling does not add independent task information.
+2. **Camera ISP and optics MA1126..1135:** MA-1127 Uni-ISP incremental per-device View, MA-1126 native ParamISP EXIF state, MA-1131 OmniLens++ PSF correction. Use paired held-out camera/ISO/lighting/lens, native ParamISP/Uni-ISP/MetaISP/PQDynamicISP/Modular ISP. Report color DeltaE, PSNR, true ISP state and device-specific runtime. Clipping destroys RAW information and cannot be inverted by coordinate change.
+3. **Robot dynamics MA1136..1145:** MA-1136 RMA deployable extrinsics View, MA-1137 UP-OSI physics factor, MA-1138 CoRMA contact adaptation, MA-1140 physical morphology code. **No oracle mass/friction at inference** when native policy receives only causal observation history. Report held-out physics/morphology rollouts, returns/fall rate, time-to-adapt, online state/write costs, latency and private residual share.
+4. **Acoustic fields MA1146..1155:** MA-1147 retrieval-augmented Neural Acoustic Fields adaptation, MA-1146 per-room field m, MA-1150 multipole bank versus NAMS and MA-1151 direction-aware Ambisonic RIR. Hold out real measured rooms and source/receiver positions. Compare NAF/retrieval NAF/TA-RIR/NAMS and native few-shot LoRA. Report RIR phase, RT60, DRR, spectral error, room geometry/retrieval bytes, enrollment cost and generation speed.
+
+For the individually scoped 40 hypotheses, consult **`docs/phase2/MIRROR_APPLICATION_EXPERIMENT_BLUEPRINTS_MA1116_1155.md`**. Each ID has an insertion interface, native comparator, concrete held-out natural/OOD test and deciding metrics.
+
+Read **`docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_SIXTEENTH_SWEEP.md`** and only the cited PA382..413 for the selected MA. Every new experiment must identify `B(theta) -> B(theta,m)` beyond an **already-existing relation/EXIF/robot/room native code**, use a byte-near cheap control and an independent/private reference, and report real task quality instead of counting logical addresses. Keep aligned feasibility and natural/off-orbit results distinct.
+
+**Canonical next remains MA-255.** The registered 47 outcomes, the separate two-seed natural-digit negative pilot, and ongoing worker-owned branches are not touched by this appended research.
 
 ## Historical P0 family sequence (completed screens; not current queue)
 

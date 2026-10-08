@@ -124,6 +124,12 @@ Use two different questions:
 
 Aligned success is mechanism evidence, not a claim that natural models share that geometry.
 
+### F. Function-space checks for naturally learned `m`
+
+For tasks using natural independent adapters or pretrained function deltas, **do not promote a result using weight-only reconstruction**. Weight delta Frobenius distance, factor-space similarity and functional test error can rank candidate Views differently. Evaluate target NLL/accuracy, logits or other task-native outputs and OOD/retention, with calibration/test data frozen before m fitting.
+
+Use PA372 (BOLT shared task-spectral basis with diagonal code), PA373 (curvature/function-space alignment), PA374 (Fora activation-space protection), PA375 (Task Vector Bases), PA376 (SVD+CUR shared/private controls) and PA377..381 (information/linearization checks) as relevant direct controls. Gauge-invariant delta geometry remains mandatory, but is *insufficient*. See `docs/phase2/MIRROR_FUNCTION_SPACE_FALSIFICATION_2026-10-08.md`. The preregistered real-image shift pilot there illustrates a useful but **non-Pareto** low-description View; it is not an MA status result.
+
 ## 4. Breadth-first validation mandate
 
 The program should test the same Mirror parameter idea across many existing methods before over-optimizing one family.

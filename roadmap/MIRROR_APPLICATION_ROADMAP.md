@@ -5,7 +5,7 @@ Status: active backlog roadmap
 
 ## Goal
 
-Systematically test whether the extra low-description Mirror parameter m can replace duplicated physical state or improve logical functional freedom in strong existing methods. The registry now has **1095** candidate experiments; MA-876..935 were added as UNTESTED research targets on 2026-10-08.
+Systematically test whether the extra low-description Mirror parameter m can replace duplicated physical state or improve logical functional freedom in strong existing methods. The registry now has **1155** candidate experiments; MA-876..935 were added as UNTESTED research targets on 2026-10-08.
 
 The unit of work is an MA-xxx entry from:
 `experiments/mirror_applications/IDEA_REGISTRY.csv`.
@@ -309,6 +309,44 @@ MA1062..1078 compare Mirror m to DHE's existing table-free hash generator, QR co
 ### AP. Physically conditioned Earth-observation sensors
 
 MA1079..1095 stress test Mirror m with continuous wavelength, sensor hardware, ground sampling distance, observation time and EO task against **DOFA's wavelength-conditioned hypernetwork** and native AnySat/CROMA/Prithvi/TerraMind/AlphaEarth. MA1079, MA1080, MA1083, MA1090 and MA1095 separate true spectral/OOD transfer from ordinary sensor-ID conditioning. Compare complete held-out sensors, region/time splits, all filter-generation bytes and GPU runtime; SAR is not merely rotated optical color. See PA344..350.
+
+### AQ. Gauge-invariant natural LoRA task geometry
+
+MA1096–1099, MA1114–1115 evaluate naturally trained adapter deltas, not artificial teachers constructed from the Mirror family. The same `D=B@A` has infinitely many GL(r)-equivalent factor pairs, so all shared-B/shared-A and task-similarity claims require gauge-invariant projector/spectrum analysis. First use `research_intake/natural_lora_orbit_20261008` only as a mathematical/oracle weight-space screen; then train m from new-task examples and measure task quality, serialization and GPU execution.
+
+Native controls: Compress then Serve (PA351), CtM (PA352, single-model merge objective), EigenLoRAx (PA353), VB-LoRA (PA354), MetaTT (PA355), pretrained singular-coefficient tuning (PA356), Pico (PA357), GLoRA (PA358), Share/LoDA (PA361/362) and independent LoRA. Do not infer task-delta alignment from stable pretrained W singular vectors alone.
+
+### AR. Compact task-address versus already optimized adapter serving
+
+MA1100–1109 compare structured m with clustered native adapter basis compression and factorized task×layer×matrix TT cores, natural heldout task adaptation, as well as client/task-specific shared/private residuals and text-conditioned hypernetwork generation. Report logical task quality, real basis+code+cluster+optimizer bytes, resident GPU state, adaptation time and serving throughput, not only parameter ratios.
+
+### AS. Exact cache arithmetic versus low-rank multi-agent baselines
+
+MA1110–1112 compare Mirror canonical-cache Views against *native* ICML 2026 LRAgent low-rank cache decomposition/Flash-LoRA-Attention (PA364), PReCache (PA365), aLoRA/standard-LoRA reuse (PA154–155), and exact MA691 algebra. Require physical cache aliasing, adapter-specific state, exact source-token provenance, target output quality, end-to-end prefill and TTFT. A common base plus small LR cache is already established prior art.
+
+### AT. Function-space and natural task-code falsification
+
+MA1096/1099/1102/1105/1114/1115 should now read `docs/phase2/MIRROR_FUNCTION_SPACE_FALSIFICATION_2026-10-08.md` and PA372..381, alongside the original PA351..371. The additional parameter `m` must preserve actual **held-out task outputs and capabilities**, not merely reduce Frobenius error on learned weight deltas.
+
+A two-seed real-digit image-shift exploratory pilot was performed with a precommitted protocol; 8-value structured Mirror codes outperformed 6-value diagonal BOLT-like codes in mean CE but failed the stricter accuracy, dense-core and CPU runtime Pareto gates. Results are in `experiments/mirror_applications/research_intake/natural_digit_function_20261008/` and do **not** change MA statuses.
+
+Next preregister new natural task families and compare (a) weight-SVD basis, (b) BOLT task-spectral basis, (c) CG-LoRA/Fora-inspired activation/curvature-aware basis, (d) a simple FiLM/rank-one code, (e) dense shared task core, (f) structured Mirror m and optional sparse CUR private residual, and (g) independent LoRA. Freeze tasks/seeds before opening held-out task scores; count all source-adapter training, basis construction, serialized bytes and measured inference. Distinguish exact rank/representation capacity from fixed-update optimization and protect previously learned functions.
+
+### AU. KG relation operators, beyond existing relational phases
+
+MA1116..1125 compare native RotatE complex rotations, QuatE noncommutative multiplication, PairRE paired vectors, TuckER tensor shared core, ComplEx, TNTComplEx temporal factors, CompGCN and KrausKGE with an *additional* compact Mirror relation×domain/time `m`. A rotation per relation is established, not new. Highest-value MA1123 tests independently learned relation-space natural/private frontier. Count full KG entity/relation/core state, report filtered MRR/Hits and gauge invariance. PA382..390.
+
+### AV. Camera ISP controls and optical point spread functions
+
+MA1126..1135 target existing ParamISP EXIF camera controller, Uni-ISP joint multi-device pipeline, MetaISP target appearance, PQDynamicISP local control, Modular ISP and lens PSF learned latent. A Mirror device×ISO×exposure/stage `m` must beat native conditions on unseen cameras with real RAW/sRGB, DeltaE/PSNR and FPS. Exact inverse after clipping is information-theoretically impossible. MA1127 and MA1131 first. PA391..399.
+
+### AW. Deployable robot morphology and friction conditioning
+
+MA1136..1145 compare UP-OSI/RMA/CoRMA, A-NC and morphology world-model priors. One shared policy + estimated extrinsics is existing prior art; Mirror `m` adds value only if it improves OOD rollouts or adaptation per paid byte/latency **without test-time privileged mass/friction**. Use held-out body/terrain/contact combinations and count online writes; MA1136 is first. PA400..406.
+
+### AX. Acoustic room-transfer function banks
+
+MA1146..1155 compare NAF, retrieval-pretrained NAF, topology-aware TA-RIR, NAMS, direction-aware Ambisonic NAF and few-shot acoustic flow. Test whether a shared physical sound-field plus room/source/receiver `m` saves useful per-room adaptation state on real recorded RIRs, while preserving waveform/phase, RT60/DRR and renderer latency. MA1147 and MA1150 first. PA407..413.
 
 ## KV-cache transformation lane
 

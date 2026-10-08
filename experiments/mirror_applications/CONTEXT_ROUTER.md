@@ -229,6 +229,38 @@ Read PA337..343. DHE requires no per-ID embedding table, TT-Rec has tensor-train
 
 Read PA344..350. DOFA is a direct dynamic wavelength-to-filter hypernetwork; AnySat/SatMAE, CROMA, Prithvi, TerraMind and AlphaEarth provide multisensor conditioning and task baselines. Report sensor-response/calibration metadata, generated filters, pixel/GSD/band counts, OOD sensor/held-out wavelength combinations, geographic/time-separated land cover/change/segmentation metrics, bytes and GPU inference wall-time. SAR and optical sensors cannot be assumed information-equivalent. Require actual functional advantage beyond one sensor ID or ordinary spectral mask.
 
+### Function-space adapter relevance (PA372..381; MA-1096/1099/1102/1114/1115)
+
+Load `docs/phase2/MIRROR_FUNCTION_SPACE_FALSIFICATION_2026-10-08.md` and, only when useful, the 48-row real-digit pilot under `research_intake/natural_digit_function_20261008`.
+
+Strong native baselines: BOLT shared orthogonal basis + diagonal coefficients, CG-LoRA prediction/curvature matching, Fora activation protection, task-vector bases, SVD+CUR and StructLoRA. A weight-close `m` is not proof of useful task preservation. Compare test NLL/accuracy, OOD capability, per-task codec bits and measured runtime, as well as weight-delta/projection errors. The real-image pilot's 2-angle View missed the preregistered downstream Pareto gate; no registry status was changed. New natural task tests must freeze fresh task identities and base revision before optimizing m. The oracle target task delta may be used only for post hoc diagnostics, never for learning the code.
+
+### Gauge-aware natural LoRA banks and physical cache reuse (MA-1096..1115)
+
+Read PA351–371, the fifteenth research notes and `research_intake/natural_lora_orbit_20261008/README.md` **only if** selected MA requires them. First classify: weight-space oracle check, trainable new-task m, merged-model generation, multiple logical adapters, or cache/state runtime test.
+
+Natural adapter audits must hold **base model revision and layer path fixed**, split whole task adapters before fitting basis, compare `D=B@A` row/column projectors and apply an invertible GL(r) gauge perturbation test. Stable pretrained W singular vectors do not imply natural update deltas align. Controls: CtS, CtM, EigenLoRAx, VB-LoRA, MetaTT, Pico/GLoRA or native basic LoRA depending on the target, plus simple m controls and shared+private residual.
+
+For KV reuse, LRAgent Flash-LoRA-Attention and PReCache are mandatory when the hypothesis involves multi-LoRA shared base cache and adapter LR contributions. aLoRA and normal re-prefill remain controls. Measure physical pointer alias/copy, honest cache provenance, prefill and neutral-reconstruction work, TTFT/VRAM and target NLL. The MA691 exact right-View result cannot certify cross-adapter exact equivalence.
+
+Do not report L0 mathematical unit tests or L1 oracle heldout weight-reconstruction as L2 task ability or L3 deployment gains. Count shared U/V storage and actual per-task code bytes.
+
+### Knowledge graph relation operators (MA-1116..1125)
+
+Read PA382..390 and the sixteenth research notes. RotatE relation phases, TuckER core coefficients, PairRE head/tail vectors, QuatE quaternion operations and CompGCN relation composition are **existing** low-description function addresses. KrausKGE relation channels and TNTComplEx time factors are direct controls. Test natural KG relation/domain/time variants, filtered MRR, noncommutative relation paths and score-preserving gauge counterexamples. Charge entity/relation/core bytes and real scorer QPS.
+
+### Camera ISP, exposure and optical PSF functions (MA-1126..1135)
+
+Read PA391..399 and the sixteenth research notes. ParamISP EXIF ParamNet, Uni-ISP device embeddings, MetaISP appearance styles, PQDynamicISP environment-control, Modular ISP and OmniLens++ lens PSF latent are mandatory native controls as applicable. Use real RAW/sRGB paired images, held-out cameras/ISO/lenses, color DeltaE and true physical inference FPS. Never claim lost clipped RAW information can be recovered exactly.
+
+### Robot online system-ID policy conditioning (MA-1136..1145)
+
+Read PA400..406. UP-OSI and RMA already implement one shared policy plus a compact estimated dynamics code. CoRMA, A-NC and morphology-conditioned world models are stronger follow-ups. Only deployable observations are allowed for fair online policy comparison; label privileged oracle control as upper bound. Evaluate held-out friction/payload/body, adaptation speed, return, falls, m/optimizer/state bytes and write FLOPs. Report simulator/hardware distinction.
+
+### Acoustic room fields and impulse-response adaptation (MA-1146..1155)
+
+Read PA407..413. Neural Acoustic Fields, Real Acoustic Fields benchmark, retrieval-augmented few-shot room NAF, topology-aware TA-RIR, NAMS and direction-aware Ambisonics are the closest priors. Hold out entire measured rooms, source/receiver geometry and microphone placements. Measure phase-coherent RIR quality, RT60/DRR/C50, per-room code/grid/retrieval-bank bytes, microphone enrollment counts and generation latency. Compare native few-shot LoRA and geometry conditioning.
+
 ## Historical result loading rule
 
 Do **not** load every SRM/MS/MN document.

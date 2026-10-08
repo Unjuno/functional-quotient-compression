@@ -312,6 +312,24 @@ Before screening these candidates classify the proposed transform:
 
 Charge source prefill, calibration and mapper construction, model/cache bytes, translator execution, metadata/token alignment and target decode. Benchmark end-to-end handoff versus native target re-prefill at multiple lengths/dwell times. Never substitute cache tensor MSE or an algebraic coordinate change for target quality and latency.
 
+## New direct 2026 multi-LoRA KV evidence: LRAgent and PReCache
+
+PA364 [LRAgent (ICML 2026)](https://proceedings.mlr.press/v306/jeon26b.html) and PA365 [PReCache (September 2026)](https://arxiv.org/abs/2609.34054) are exceptionally close to the originally proposed Mirror MoE/specialist cache-reuse mechanism.
+
+- **LRAgent** separates a common pretrained-base cache component from adapter-dependent low-rank terms. It offers Flash-LoRA-Attention to consume the low-rank cache without unnecessary full-dimensional materialization, with further sharing under shared-A multi-LoRA architecture.
+- **PReCache** compares low-rank agent-cache precomputation (PreLRShared) and neutral-base cache reconstruction (ReBaseShared) for multi-turn adapter switching. Adapter-specific hidden-state contributions and propagation cannot in general be ignored.
+- PA154 aLoRA avoids invalid caching by restricting the activation point; PA155 directly measures standard LoRA prefix reuse including failures of physical aliasing; PA156/MA691 establish **exact algebra for known compatible canonical-cache right transforms**, not arbitrary independently adapted models.
+
+The new Mirror-specific study MA1110..1112 must insert low-description `m_agent` into **the already compressed adapter LR cache** or the physical state-read algebra; a merely common base cache plus low-rank private state is now a published baseline, not a novel Mirror win.
+
+Hard guards:
+1. Track producer model, adapter, tokenization and exact source-token prefix for every shared cache.
+2. Probe actual storage/pointer alias and allocation, not just identical cached values copied between branches.
+3. Verify K, V, RoPE, attention-logit scaling, and target decode quality for each logical consumer.
+4. Count initial source prefill, low-rank-cache construction, neutral reconstruction, read transform, switches and resident adapter states; benchmark realistic prompt length and adapter dwell.
+5. Compare LRAgent fused low-rank kernels, PReCache precomputation/reconstruction, aLoRA compatible-prefix serving and native re-prefill. Lower tensor error is insufficient for adoption.
+6. Report relative quality/TTFT/VRAM/throughput **on the same model, task, workload and hardware**; distinguish learned approximate cache translation from MA691 exact algebra.
+
 ## Adoption condition
 
 The important target is not merely smaller cache.
