@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (35 completed; 594 UNTESTED; 1 SCREENING)
+- P0: **630** (36 completed; 594 UNTESTED)
 - P1: **422** (12 completed; 410 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1107 UNTESTED, 1 SCREENING, 29 PROMISING, 18 FAIL**
+- Current MA statuses: **1107 UNTESTED, 29 PROMISING, 19 FAIL**
 - 47 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This literature intake does not change prior results; randomized draws govern selection.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed; randomized draws govern selection.
@@ -23,22 +23,22 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Recent randomized selection
 
-Draw 12 selected MA-1138 but was blocked before protocol freeze because required robot simulation/native-control assets were unavailable; registry remains UNTESTED. Draw 13 selected **MA-783 — UniPool global expert pool + Mirror layer role** from 555 eligible P0/UNTESTED candidates. Its protocol is frozen on `research/ma-783-unipool-layer-role-mirror-20261008`; no corpus values have been accessed. Future selections use fresh uniform draws after live-branch/directory exclusions.
+Draw 12 selected MA-1138 but was blocked before protocol freeze because required robot simulation/native-control assets were unavailable; registry remains UNTESTED. Draw 13 selected **MA-783 — UniPool global expert pool + Mirror layer role** from 555 eligible P0/UNTESTED candidates. Its two-seed development screen FAILED the NLL and Mirror-specific gates; payload was 0.430x untied MoE and audit remained unopened. See its report and verification. Future selections use fresh uniform draws after live-branch/directory exclusions.
 
 Historical numeric/family queues below are prior-art maps only; they do not assign the next candidate.
 
 ## Next candidate
 
-MA-783 is the current randomized candidate. Its frozen protocol and experiment branch are recorded above.
+No active candidate. Make a fresh uniform draw from current eligible rows after refreshing the worker-ready baseline, live branches and experiment directories.
 
 ## Active experiment
 
-Draw 13 MA-783 is active on research/ma-783-unipool-layer-role-mirror-20261008. Future draws must refresh live branches and directories.
+None. Draw 13 MA-783 is terminal FAIL on `research/ma-783-unipool-layer-role-mirror-20261008`; future draws must refresh live branches and directories.
 
 ## Verified status index
 
 - **PROMISING (29):** MA-001, MA-002, MA-003, MA-004, MA-005, MA-006, MA-007, MA-008, MA-012, MA-014, MA-015, MA-041, MA-076, MA-079, MA-111, MA-121, MA-156, MA-160, MA-171, MA-173, MA-181, MA-189, MA-241, MA-244, MA-245, MA-249, MA-250, MA-251, MA-691.
-- **FAIL (18):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253.
+- **FAIL (19):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-783.
 
 All per-ID evidence is retained in the local experiment directories and in `CLAIM_LEDGER.csv`. Consult [the evidence integration audit](../../docs/phase2/MIRROR_MA_EVIDENCE_INTEGRATION_2026-10-08.md) for linked reports, verifications, provenance and claim boundaries.
 
@@ -74,6 +74,7 @@ KG relation rotations (RotatE, TuckER, QuatE, PairRE), EXIF/device-aware ISPs (P
 
 ## Main scientific findings
 
+- MA-783 found that on a two-seed fixed-budget character-LM screen, shared expert pooling cut inference bytes substantially, but Givens layer views missed the NLL gate in one seed and did not beat byte-near FiLM/depth controls; audit remained unopened. This does not establish near-convergence capacity.
 - Aligned functional variation often admits a compact Mirror View, including experts, QKV, future heads, depth and structured codecs.
 - Arbitrary unrelated functions are not made independent by cheap address combinatorics; private residuals are often necessary.
 - In many cases a simple baseline (MQA, broadcast, FiLM, rank-1/2) wins or dominates the Mirror candidate.

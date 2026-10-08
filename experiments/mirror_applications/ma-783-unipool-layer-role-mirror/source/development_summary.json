@@ -1,0 +1,2654 @@
+{
+  "experiment_id": "MA-783",
+  "status": "DEVELOPMENT_COMPLETE_PENDING_AUDIT_GATE",
+  "dataset_manifest": {
+    "source_url": "https://raw.githubusercontent.com/karpathy/char-rnn/master/data/tinyshakespeare/input.txt",
+    "sha256": "86c4e6aa9db7c042ec79f339dcb96d42b0075e16b8fc2e86bf0ca57e2dc565ed",
+    "bytes": 1115394,
+    "train_byte_span": [
+      0,
+      892315
+    ],
+    "development_byte_span": [
+      892315,
+      1003854
+    ],
+    "audit_byte_span_locked": [
+      1003854,
+      1115394
+    ],
+    "train_characters": 892315,
+    "development_characters": 111539,
+    "training_vocabulary_size": 66,
+    "training_vocabulary": [
+      "\n",
+      " ",
+      "!",
+      "$",
+      "&",
+      "'",
+      ",",
+      "-",
+      ".",
+      "3",
+      ":",
+      ";",
+      "?",
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K",
+      "L",
+      "M",
+      "N",
+      "O",
+      "P",
+      "Q",
+      "R",
+      "S",
+      "T",
+      "U",
+      "V",
+      "W",
+      "X",
+      "Y",
+      "Z",
+      "a",
+      "b",
+      "c",
+      "d",
+      "e",
+      "f",
+      "g",
+      "h",
+      "i",
+      "j",
+      "k",
+      "l",
+      "m",
+      "n",
+      "o",
+      "p",
+      "q",
+      "r",
+      "s",
+      "t",
+      "u",
+      "v",
+      "w",
+      "x",
+      "y",
+      "z",
+      "\ufffd"
+    ],
+    "unknown_token_id": 65,
+    "audit_bytes_decoded_or_tokenized": false,
+    "split_rule": "fixed contiguous byte spans at 80% and 90%; no windows cross boundaries"
+  },
+  "dataset_manifest_sha256": "477e692a6440f1016d54fa4390ac1544c9d72b52faf9e16d06e4bcb7ae2e1761",
+  "world_seeds": [
+    78301,
+    78302
+  ],
+  "conditions": [
+    "dense",
+    "untied_moe",
+    "unipool",
+    "mirror_givens",
+    "film_gate",
+    "depth_embedding"
+  ],
+  "updates_per_run": 1200,
+  "development_only": true,
+  "audit_accessed": false,
+  "quality_storage_gate_pass": false,
+  "mirror_specific_gate_pass": false,
+  "all_development_gates_pass": false,
+  "decision": "FAIL",
+  "per_seed": {
+    "78301": {
+      "dense": {
+        "seed": 78301,
+        "condition": "dense",
+        "best_step": 1200,
+        "development": {
+          "nll": 2.1216156780719757,
+          "bits_per_character": 3.060844417426715,
+          "router_load": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "router_entropy": 0.0,
+          "evaluation_wall_seconds": 0.12878772499971092,
+          "evaluation_tokens_per_second": 127217.09308893202,
+          "layer_role_output_cosine_distance": 0.7951875825723013
+        },
+        "history": [
+          {
+            "nll": 2.7407273054122925,
+            "bits_per_character": 3.954033691947286,
+            "router_load": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "router_entropy": 0.0,
+            "evaluation_wall_seconds": 0.12966993000009097,
+            "evaluation_tokens_per_second": 126351.57588184482,
+            "step": 100,
+            "training_objective": 2.722459554672241
+          },
+          {
+            "nll": 2.585086911916733,
+            "bits_per_character": 3.729492068089235,
+            "router_load": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "router_entropy": 0.0,
+            "evaluation_wall_seconds": 0.12654941599976155,
+            "evaluation_tokens_per_second": 129467.21144909014,
+            "step": 200,
+            "training_objective": 2.529346227645874
+          },
+          {
+            "nll": 2.5226802825927734,
+            "bits_per_character": 3.639458333444963,
+            "router_load": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "router_entropy": 0.0,
+            "evaluation_wall_seconds": 0.12672662099794252,
+            "evaluation_tokens_per_second": 129286.1742148558,
+            "step": 300,
+            "training_objective": 2.4649879932403564
+          },
+          {
+            "nll": 2.45479753613472,
+            "bits_per_character": 3.5415242317680065,
+            "router_load": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "router_entropy": 0.0,
+            "evaluation_wall_seconds": 0.12842775099852588,
+            "evaluation_tokens_per_second": 127573.67370069464,
+            "step": 400,
+            "training_objective": 2.405695676803589
+          },
+          {
+            "nll": 2.407934695482254,
+            "bits_per_character": 3.473915443956724,
+            "router_load": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "router_entropy": 0.0,
+            "evaluation_wall_seconds": 0.12753133200021693,
+            "evaluation_tokens_per_second": 128470.39031923645,
+            "step": 500,
+            "training_objective": 2.332099199295044
+          },
+          {
+            "nll": 2.37002694606781,
+            "bits_per_character": 3.419226121865244,
+            "router_load": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "router_entropy": 0.0,
+            "evaluation_wall_seconds": 0.13185058400267735,
+            "evaluation_tokens_per_second": 124261.86902340385,
+            "step": 600,
+            "training_objective": 2.3285675048828125
+          },
+          {
+            "nll": 2.3190378546714783,
+            "bits_per_character": 3.3456644125683224,
+            "router_load": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "router_entropy": 0.0,
+            "evaluation_wall_seconds": 0.1273397049990308,
+            "evaluation_tokens_per_second": 128663.71883086034,
+            "step": 700,
+            "training_objective": 2.2782678604125977
+          },
+          {
+            "nll": 2.2805718183517456,
+            "bits_per_character": 3.2901696527271893,
+            "router_load": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "router_entropy": 0.0,
+            "evaluation_wall_seconds": 0.12741249700047774,
+            "evaluation_tokens_per_second": 128590.21199418584,
+            "step": 800,
+            "training_objective": 2.235381603240967
+          },
+          {
+            "nll": 2.235511392354965,
+            "bits_per_character": 3.22516119960129,
+            "router_load": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "router_entropy": 0.0,
+            "evaluation_wall_seconds": 0.12750787099867011,
+            "evaluation_tokens_per_second": 128494.02842096612,
+            "step": 900,
+            "training_objective": 2.166689157485962
+          },
+          {
+            "nll": 2.187190532684326,
+            "bits_per_character": 3.1554489349829677,
+            "router_load": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "router_entropy": 0.0,
+            "evaluation_wall_seconds": 0.12756476399954408,
+            "evaluation_tokens_per_second": 128436.72097459888,
+            "step": 1000,
+            "training_objective": 2.138216972351074
+          },
+          {
+            "nll": 2.153792977333069,
+            "bits_per_character": 3.107266447499894,
+            "router_load": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "router_entropy": 0.0,
+            "evaluation_wall_seconds": 0.12796265100041637,
+            "evaluation_tokens_per_second": 128037.35990079393,
+            "step": 1100,
+            "training_objective": 2.089386463165283
+          },
+          {
+            "nll": 2.1216156780719757,
+            "bits_per_character": 3.060844417426715,
+            "router_load": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "router_entropy": 0.0,
+            "evaluation_wall_seconds": 0.1305841409994173,
+            "evaluation_tokens_per_second": 125466.99679307238,
+            "step": 1200,
+            "training_objective": 2.0591959953308105
+          }
+        ],
+        "train_wall_seconds": 60.316518616000394,
+        "train_tokens": 2457600,
+        "updates": 1200,
+        "forward_macs_per_token_proxy": 196608,
+        "training_forward_backward_macs_proxy": 1449551462400,
+        "inference_payload": {
+          "path": "source/artifacts/seed78301_dense_inference.pt",
+          "bytes": 603754,
+          "sha256": "c450df1bcb87816bcf81c1bb216b95db7da96d55aa35f39f79636143475dd8d5"
+        }
+      },
+      "untied_moe": {
+        "seed": 78301,
+        "condition": "untied_moe",
+        "best_step": 1200,
+        "development": {
+          "nll": 2.1151400208473206,
+          "bits_per_character": 3.051502018862208,
+          "router_load": [
+            0.47186279296875,
+            0.1952972412109375,
+            0.1098175048828125,
+            0.2230224609375
+          ],
+          "router_entropy": 0.28935445100069046,
+          "evaluation_wall_seconds": 0.15796552899701055,
+          "evaluation_tokens_per_second": 103718.83096286192,
+          "layer_role_output_cosine_distance": 0.8853386640548706
+        },
+        "history": [
+          {
+            "nll": 2.7216433584690094,
+            "bits_per_character": 3.926501376331623,
+            "router_load": [
+              0.337188720703125,
+              0.2027435302734375,
+              0.21319580078125,
+              0.2468719482421875
+            ],
+            "router_entropy": 0.3054150640964508,
+            "evaluation_wall_seconds": 0.17020511400187388,
+            "evaluation_tokens_per_second": 96260.32740602389,
+            "step": 100,
+            "training_objective": 2.690843343734741
+          },
+          {
+            "nll": 2.5734255015850067,
+            "bits_per_character": 3.7126682092338825,
+            "router_load": [
+              0.4087677001953125,
+              0.1890411376953125,
+              0.18817138671875,
+              0.214019775390625
+            ],
+            "router_entropy": 0.18349039368331432,
+            "evaluation_wall_seconds": 0.17215601899806643,
+            "evaluation_tokens_per_second": 95169.48693024795,
+            "step": 200,
+            "training_objective": 2.522935152053833
+          },
+          {
+            "nll": 2.516255021095276,
+            "bits_per_character": 3.6301886405461086,
+            "router_load": [
+              0.4235992431640625,
+              0.2157745361328125,
+              0.152679443359375,
+              0.20794677734375
+            ],
+            "router_entropy": 0.18017907813191414,
+            "evaluation_wall_seconds": 0.16525850700054434,
+            "evaluation_tokens_per_second": 99141.64358235447,
+            "step": 300,
+            "training_objective": 2.4827704429626465
+          },
+          {
+            "nll": 2.4730467200279236,
+            "bits_per_character": 3.5678522388710023,
+            "router_load": [
+              0.428619384765625,
+              0.1807861328125,
+              0.157379150390625,
+              0.23321533203125
+            ],
+            "router_entropy": 0.20314514823257923,
+            "evaluation_wall_seconds": 0.16646115600087796,
+            "evaluation_tokens_per_second": 98425.36477347054,
+            "step": 400,
+            "training_objective": 2.4152204990386963
+          },
+          {
+            "nll": 2.4015820622444153,
+            "bits_per_character": 3.464750531487908,
+            "router_load": [
+              0.4311370849609375,
+              0.2021484375,
+              0.1308746337890625,
+              0.23583984375
+            ],
+            "router_entropy": 0.21935283578932285,
+            "evaluation_wall_seconds": 0.17195811000055983,
+            "evaluation_tokens_per_second": 95279.01882584461,
+            "step": 500,
+            "training_objective": 2.3417110443115234
+          },
+          {
+            "nll": 2.3636898696422577,
+            "bits_per_character": 3.4100836531323657,
+            "router_load": [
+              0.408111572265625,
+              0.1837005615234375,
+              0.1662445068359375,
+              0.241943359375
+            ],
+            "router_entropy": 0.24099113792181015,
+            "evaluation_wall_seconds": 0.17044020400135196,
+            "evaluation_tokens_per_second": 96127.5545050981,
+            "step": 600,
+            "training_objective": 2.3077361583709717
+          },
+          {
+            "nll": 2.3140918910503387,
+            "bits_per_character": 3.338528895379687,
+            "router_load": [
+              0.435089111328125,
+              0.1870880126953125,
+              0.1318817138671875,
+              0.245941162109375
+            ],
+            "router_entropy": 0.27483170479536057,
+            "evaluation_wall_seconds": 0.16915958400204545,
+            "evaluation_tokens_per_second": 96855.28666115594,
+            "step": 700,
+            "training_objective": 2.286256790161133
+          },
+          {
+            "nll": 2.2805581092834473,
+            "bits_per_character": 3.2901498747223403,
+            "router_load": [
+              0.4531402587890625,
+              0.188201904296875,
+              0.1225433349609375,
+              0.236114501953125
+            ],
+            "router_entropy": 0.25935063883662224,
+            "evaluation_wall_seconds": 0.16834073200152488,
+            "evaluation_tokens_per_second": 97326.4153315645,
+            "step": 800,
+            "training_objective": 2.2292840480804443
+          },
+          {
+            "nll": 2.251271963119507,
+            "bits_per_character": 3.247898896884874,
+            "router_load": [
+              0.458465576171875,
+              0.1929168701171875,
+              0.1290435791015625,
+              0.219573974609375
+            ],
+            "router_entropy": 0.2685687020421028,
+            "evaluation_wall_seconds": 0.16696906200013473,
+            "evaluation_tokens_per_second": 98125.96300018011,
+            "step": 900,
+            "training_objective": 2.186004161834717
+          },
+          {
+            "nll": 2.1946665942668915,
+            "bits_per_character": 3.166234611953515,
+            "router_load": [
+              0.4745635986328125,
+              0.1843414306640625,
+              0.1149139404296875,
+              0.2261810302734375
+            ],
+            "router_entropy": 0.26581570878624916,
+            "evaluation_wall_seconds": 0.17242235499725211,
+            "evaluation_tokens_per_second": 95022.48128011655,
+            "step": 1000,
+            "training_objective": 2.1273751258850098
+          },
+          {
+            "nll": 2.167982429265976,
+            "bits_per_character": 3.1277374994364315,
+            "router_load": [
+              0.4788360595703125,
+              0.1927032470703125,
+              0.116058349609375,
+              0.21240234375
+            ],
+            "router_entropy": 0.26544392853975296,
+            "evaluation_wall_seconds": 0.17546322000271175,
+            "evaluation_tokens_per_second": 93375.69434635241,
+            "step": 1100,
+            "training_objective": 2.129518985748291
+          },
+          {
+            "nll": 2.1151400208473206,
+            "bits_per_character": 3.051502018862208,
+            "router_load": [
+              0.47186279296875,
+              0.1952972412109375,
+              0.1098175048828125,
+              0.2230224609375
+            ],
+            "router_entropy": 0.28935445100069046,
+            "evaluation_wall_seconds": 0.17032561899759457,
+            "evaluation_tokens_per_second": 96192.22343898473,
+            "step": 1200,
+            "training_objective": 2.064549207687378
+          }
+        ],
+        "train_wall_seconds": 78.98143201399944,
+        "train_tokens": 2457600,
+        "updates": 1200,
+        "forward_macs_per_token_proxy": 197680,
+        "training_forward_backward_macs_proxy": 1457455104000,
+        "inference_payload": {
+          "path": "source/artifacts/seed78301_untied_moe_inference.pt",
+          "bytes": 1423166,
+          "sha256": "ef5bb660142863e1c03343b830062067a8a88866b43eeee6961c147defcfbc21"
+        }
+      },
+      "unipool": {
+        "seed": 78301,
+        "condition": "unipool",
+        "best_step": 1200,
+        "development": {
+          "nll": 2.2370029985904694,
+          "bits_per_character": 3.227313132520211,
+          "router_load": [
+            0.5336761474609375,
+            0.1288299560546875,
+            0.0702056884765625,
+            0.2672882080078125
+          ],
+          "router_entropy": 0.2083639670163393,
+          "evaluation_wall_seconds": 0.16496610100148246,
+          "evaluation_tokens_per_second": 99317.37430014646,
+          "layer_role_output_cosine_distance": 0.6608669956525167
+        },
+        "history": [
+          {
+            "nll": 2.718618154525757,
+            "bits_per_character": 3.9221369296050153,
+            "router_load": [
+              0.4433441162109375,
+              0.1301422119140625,
+              0.124359130859375,
+              0.302154541015625
+            ],
+            "router_entropy": 0.21648085303604603,
+            "evaluation_wall_seconds": 0.16719874999762396,
+            "evaluation_tokens_per_second": 97991.16321284,
+            "step": 100,
+            "training_objective": 2.707162380218506
+          },
+          {
+            "nll": 2.5756264328956604,
+            "bits_per_character": 3.7158434819211,
+            "router_load": [
+              0.4903106689453125,
+              0.141845703125,
+              0.1261138916015625,
+              0.241729736328125
+            ],
+            "router_entropy": 0.1762091014534235,
+            "evaluation_wall_seconds": 0.1707630960008828,
+            "evaluation_tokens_per_second": 95945.7891294926,
+            "step": 200,
+            "training_objective": 2.529334783554077
+          },
+          {
+            "nll": 2.5270173251628876,
+            "bits_per_character": 3.6457153632529913,
+            "router_load": [
+              0.5167694091796875,
+              0.13665771484375,
+              0.1034088134765625,
+              0.2431640625
+            ],
+            "router_entropy": 0.18229323625564575,
+            "evaluation_wall_seconds": 0.16959862500152667,
+            "evaluation_tokens_per_second": 96604.55678725295,
+            "step": 300,
+            "training_objective": 2.4909539222717285
+          },
+          {
+            "nll": 2.473757416009903,
+            "bits_per_character": 3.5688775564397837,
+            "router_load": [
+              0.523681640625,
+              0.1331329345703125,
+              0.1129913330078125,
+              0.230194091796875
+            ],
+            "router_entropy": 0.1770328190177679,
+            "evaluation_wall_seconds": 0.16396853199694306,
+            "evaluation_tokens_per_second": 99921.61179015407,
+            "step": 400,
+            "training_objective": 2.426293134689331
+          },
+          {
+            "nll": 2.431744545698166,
+            "bits_per_character": 3.5082657967875295,
+            "router_load": [
+              0.56231689453125,
+              0.1368865966796875,
+              0.069305419921875,
+              0.2314910888671875
+            ],
+            "router_entropy": 0.1814103927463293,
+            "evaluation_wall_seconds": 0.16753865400096402,
+            "evaluation_tokens_per_second": 97792.35781556253,
+            "step": 500,
+            "training_objective": 2.3790063858032227
+          },
+          {
+            "nll": 2.399438500404358,
+            "bits_per_character": 3.461658025451418,
+            "router_load": [
+              0.547027587890625,
+              0.1419830322265625,
+              0.071380615234375,
+              0.2396087646484375
+            ],
+            "router_entropy": 0.1828450746834278,
+            "evaluation_wall_seconds": 0.16288701400117134,
+            "evaluation_tokens_per_second": 100585.05953017336,
+            "step": 600,
+            "training_objective": 2.3562183380126953
+          },
+          {
+            "nll": 2.362018406391144,
+            "bits_per_character": 3.4076722413889553,
+            "router_load": [
+              0.546905517578125,
+              0.1414794921875,
+              0.0777435302734375,
+              0.2338714599609375
+            ],
+            "router_entropy": 0.19656941294670105,
+            "evaluation_wall_seconds": 0.1665716989991779,
+            "evaluation_tokens_per_second": 98360.04614493884,
+            "step": 700,
+            "training_objective": 2.328888177871704
+          },
+          {
+            "nll": 2.336225003004074,
+            "bits_per_character": 3.3704602262347816,
+            "router_load": [
+              0.564697265625,
+              0.130706787109375,
+              0.07208251953125,
+              0.232513427734375
+            ],
+            "router_entropy": 0.199652386829257,
+            "evaluation_wall_seconds": 0.16583520099811722,
+            "evaluation_tokens_per_second": 98796.87726965768,
+            "step": 800,
+            "training_objective": 2.291973829269409
+          },
+          {
+            "nll": 2.3127312064170837,
+            "bits_per_character": 3.3365658424070763,
+            "router_load": [
+              0.548095703125,
+              0.1364898681640625,
+              0.064910888671875,
+              0.2505035400390625
+            ],
+            "router_entropy": 0.21286506578326225,
+            "evaluation_wall_seconds": 0.16319219300203258,
+            "evaluation_tokens_per_second": 100396.95955183306,
+            "step": 900,
+            "training_objective": 2.2641820907592773
+          },
+          {
+            "nll": 2.2867907881736755,
+            "bits_per_character": 3.299141729648726,
+            "router_load": [
+              0.5434417724609375,
+              0.125762939453125,
+              0.0804290771484375,
+              0.2503662109375
+            ],
+            "router_entropy": 0.22905133664608002,
+            "evaluation_wall_seconds": 0.16675412499898812,
+            "evaluation_tokens_per_second": 98252.44203164041,
+            "step": 1000,
+            "training_objective": 2.2265877723693848
+          },
+          {
+            "nll": 2.2618426978588104,
+            "bits_per_character": 3.26314924347182,
+            "router_load": [
+              0.5026092529296875,
+              0.1512298583984375,
+              0.0790252685546875,
+              0.2671356201171875
+            ],
+            "router_entropy": 0.20667744986712933,
+            "evaluation_wall_seconds": 0.17068647099949885,
+            "evaluation_tokens_per_second": 95988.86135532151,
+            "step": 1100,
+            "training_objective": 2.2149105072021484
+          },
+          {
+            "nll": 2.2370029985904694,
+            "bits_per_character": 3.227313132520211,
+            "router_load": [
+              0.5336761474609375,
+              0.1288299560546875,
+              0.0702056884765625,
+              0.2672882080078125
+            ],
+            "router_entropy": 0.2083639670163393,
+            "evaluation_wall_seconds": 0.17590725699847098,
+            "evaluation_tokens_per_second": 93139.98910313526,
+            "step": 1200,
+            "training_objective": 2.1800343990325928
+          }
+        ],
+        "train_wall_seconds": 76.5061674360004,
+        "train_tokens": 2457600,
+        "updates": 1200,
+        "forward_macs_per_token_proxy": 197680,
+        "training_forward_backward_macs_proxy": 1457455104000,
+        "inference_payload": {
+          "path": "source/artifacts/seed78301_unipool_inference.pt",
+          "bytes": 611622,
+          "sha256": "b3f95fe302ad0d77877d45d4d6684e8e43a9e818f9fa0da3a01e1448c7317afb"
+        }
+      },
+      "mirror_givens": {
+        "seed": 78301,
+        "condition": "mirror_givens",
+        "best_step": 1200,
+        "development": {
+          "nll": 2.2463144659996033,
+          "bits_per_character": 3.240746740374768,
+          "router_load": [
+            0.508544921875,
+            0.10906982421875,
+            0.12677001953125,
+            0.255615234375
+          ],
+          "router_entropy": 0.11986254528164864,
+          "evaluation_wall_seconds": 0.16847163700003875,
+          "evaluation_tokens_per_second": 97250.79124147307,
+          "layer_role_output_cosine_distance": 0.6345060169696808
+        },
+        "history": [
+          {
+            "nll": 2.717817336320877,
+            "bits_per_character": 3.9209815931521814,
+            "router_load": [
+              0.479278564453125,
+              0.1291656494140625,
+              0.133392333984375,
+              0.2581634521484375
+            ],
+            "router_entropy": 0.1990738157182932,
+            "evaluation_wall_seconds": 0.19099085699781426,
+            "evaluation_tokens_per_second": 85784.21112685777,
+            "step": 100,
+            "training_objective": 2.7005040645599365
+          },
+          {
+            "nll": 2.5818820893764496,
+            "bits_per_character": 3.724868486503439,
+            "router_load": [
+              0.5026397705078125,
+              0.10394287109375,
+              0.1286163330078125,
+              0.264801025390625
+            ],
+            "router_entropy": 0.14999199658632278,
+            "evaluation_wall_seconds": 0.18058597900017048,
+            "evaluation_tokens_per_second": 90726.86645281875,
+            "step": 200,
+            "training_objective": 2.5384864807128906
+          },
+          {
+            "nll": 2.524563282728195,
+            "bits_per_character": 3.6421749284023295,
+            "router_load": [
+              0.495574951171875,
+              0.108642578125,
+              0.1211395263671875,
+              0.2746429443359375
+            ],
+            "router_entropy": 0.13953647203743458,
+            "evaluation_wall_seconds": 0.1761881229977007,
+            "evaluation_tokens_per_second": 92991.512261095,
+            "step": 300,
+            "training_objective": 2.48466157913208
+          },
+          {
+            "nll": 2.4816157817840576,
+            "bits_per_character": 3.580214781771648,
+            "router_load": [
+              0.5349273681640625,
+              0.1120452880859375,
+              0.112213134765625,
+              0.240814208984375
+            ],
+            "router_entropy": 0.12085073627531528,
+            "evaluation_wall_seconds": 0.17651258600017172,
+            "evaluation_tokens_per_second": 92820.57654508592,
+            "step": 400,
+            "training_objective": 2.428584337234497
+          },
+          {
+            "nll": 2.441306710243225,
+            "bits_per_character": 3.5220610841568507,
+            "router_load": [
+              0.532379150390625,
+              0.117156982421875,
+              0.108154296875,
+              0.2423095703125
+            ],
+            "router_entropy": 0.09466961026191711,
+            "evaluation_wall_seconds": 0.1795864400010032,
+            "evaluation_tokens_per_second": 91231.83242514567,
+            "step": 500,
+            "training_objective": 2.386018753051758
+          },
+          {
+            "nll": 2.406846433877945,
+            "bits_per_character": 3.472345414336998,
+            "router_load": [
+              0.5045318603515625,
+              0.1182098388671875,
+              0.123565673828125,
+              0.253692626953125
+            ],
+            "router_entropy": 0.1123477928340435,
+            "evaluation_wall_seconds": 0.17712990300060483,
+            "evaluation_tokens_per_second": 92497.08672817404,
+            "step": 600,
+            "training_objective": 2.353943109512329
+          },
+          {
+            "nll": 2.356047123670578,
+            "bits_per_character": 3.3990575014202493,
+            "router_load": [
+              0.505035400390625,
+              0.111846923828125,
+              0.12890625,
+              0.25421142578125
+            ],
+            "router_entropy": 0.0900254100561142,
+            "evaluation_wall_seconds": 0.17767911199916853,
+            "evaluation_tokens_per_second": 92211.17674246746,
+            "step": 700,
+            "training_objective": 2.3255693912506104
+          },
+          {
+            "nll": 2.329155385494232,
+            "bits_per_character": 3.360260924112351,
+            "router_load": [
+              0.5203399658203125,
+              0.113037109375,
+              0.11517333984375,
+              0.2514495849609375
+            ],
+            "router_entropy": 0.09518007189035416,
+            "evaluation_wall_seconds": 0.1829574590010452,
+            "evaluation_tokens_per_second": 89550.87204127818,
+            "step": 800,
+            "training_objective": 2.291778326034546
+          },
+          {
+            "nll": 2.3135440051555634,
+            "bits_per_character": 3.3377384631163216,
+            "router_load": [
+              0.4941864013671875,
+              0.1159515380859375,
+              0.123321533203125,
+              0.26654052734375
+            ],
+            "router_entropy": 0.10124992113560438,
+            "evaluation_wall_seconds": 0.17848680499810143,
+            "evaluation_tokens_per_second": 91793.90039602242,
+            "step": 900,
+            "training_objective": 2.243544101715088
+          },
+          {
+            "nll": 2.2871686220169067,
+            "bits_per_character": 3.2996868286606356,
+            "router_load": [
+              0.5102691650390625,
+              0.11083984375,
+              0.127044677734375,
+              0.2518463134765625
+            ],
+            "router_entropy": 0.09912306442856789,
+            "evaluation_wall_seconds": 0.17674559799706913,
+            "evaluation_tokens_per_second": 92698.20683325696,
+            "step": 1000,
+            "training_objective": 2.2228403091430664
+          },
+          {
+            "nll": 2.2874747812747955,
+            "bits_per_character": 3.300128523103714,
+            "router_load": [
+              0.4766845703125,
+              0.109954833984375,
+              0.1413116455078125,
+              0.2720489501953125
+            ],
+            "router_entropy": 0.11567790061235428,
+            "evaluation_wall_seconds": 0.17904956299753394,
+            "evaluation_tokens_per_second": 91505.3894894212,
+            "step": 1100,
+            "training_objective": 2.2385430335998535
+          },
+          {
+            "nll": 2.2463144659996033,
+            "bits_per_character": 3.240746740374768,
+            "router_load": [
+              0.508544921875,
+              0.10906982421875,
+              0.12677001953125,
+              0.255615234375
+            ],
+            "router_entropy": 0.11986254528164864,
+            "evaluation_wall_seconds": 0.17881296799896518,
+            "evaluation_tokens_per_second": 91626.4641393057,
+            "step": 1200,
+            "training_objective": 2.1891798973083496
+          }
+        ],
+        "train_wall_seconds": 81.02253278900025,
+        "train_tokens": 2457600,
+        "updates": 1200,
+        "forward_macs_per_token_proxy": 197872,
+        "training_forward_backward_macs_proxy": 1458870681600,
+        "inference_payload": {
+          "path": "source/artifacts/seed78301_mirror_givens_inference.pt",
+          "bytes": 612501,
+          "sha256": "5d684a51b07b6e327723153422bfdedc29e679ae4d2cbdcfaca9b9a1a0bb96f8"
+        }
+      },
+      "film_gate": {
+        "seed": 78301,
+        "condition": "film_gate",
+        "best_step": 1200,
+        "development": {
+          "nll": 2.2286366522312164,
+          "bits_per_character": 3.2152430461173576,
+          "router_load": [
+            0.554351806640625,
+            0.121490478515625,
+            0.1182708740234375,
+            0.2058868408203125
+          ],
+          "router_entropy": 0.14995242282748222,
+          "evaluation_wall_seconds": 0.15844903900142526,
+          "evaluation_tokens_per_second": 103402.33114227108,
+          "layer_role_output_cosine_distance": 0.6866938869158427
+        },
+        "history": [
+          {
+            "nll": 2.717076301574707,
+            "bits_per_character": 3.9199125059987554,
+            "router_load": [
+              0.445404052734375,
+              0.1243743896484375,
+              0.121490478515625,
+              0.3087310791015625
+            ],
+            "router_entropy": 0.20442449115216732,
+            "evaluation_wall_seconds": 0.16660400700129685,
+            "evaluation_tokens_per_second": 98340.97207441395,
+            "step": 100,
+            "training_objective": 2.7019803524017334
+          },
+          {
+            "nll": 2.5785636007785797,
+            "bits_per_character": 3.7200809194600457,
+            "router_load": [
+              0.48980712890625,
+              0.105987548828125,
+              0.151947021484375,
+              0.25225830078125
+            ],
+            "router_entropy": 0.17762569338083267,
+            "evaluation_wall_seconds": 0.17931199799932074,
+            "evaluation_tokens_per_second": 91371.46528288678,
+            "step": 200,
+            "training_objective": 2.52994704246521
+          },
+          {
+            "nll": 2.524501085281372,
+            "bits_per_character": 3.6420851964542416,
+            "router_load": [
+              0.4975738525390625,
+              0.1131134033203125,
+              0.1438446044921875,
+              0.2454681396484375
+            ],
+            "router_entropy": 0.18342640437185764,
+            "evaluation_wall_seconds": 0.17015152600288275,
+            "evaluation_tokens_per_second": 96290.64390361341,
+            "step": 300,
+            "training_objective": 2.4835104942321777
+          },
+          {
+            "nll": 2.4808205366134644,
+            "bits_per_character": 3.5790674855077422,
+            "router_load": [
+              0.5083160400390625,
+              0.109466552734375,
+              0.1571502685546875,
+              0.225067138671875
+            ],
+            "router_entropy": 0.1688367072492838,
+            "evaluation_wall_seconds": 0.1700159399988479,
+            "evaluation_tokens_per_second": 96367.43472471478,
+            "step": 400,
+            "training_objective": 2.433610439300537
+          },
+          {
+            "nll": 2.434004932641983,
+            "bits_per_character": 3.5115268458218645,
+            "router_load": [
+              0.537841796875,
+              0.1259765625,
+              0.1078033447265625,
+              0.2283782958984375
+            ],
+            "router_entropy": 0.14756443351507187,
+            "evaluation_wall_seconds": 0.16876214800140588,
+            "evaluation_tokens_per_second": 97083.38151671021,
+            "step": 500,
+            "training_objective": 2.36830472946167
+          },
+          {
+            "nll": 2.3966409265995026,
+            "bits_per_character": 3.4576219795966328,
+            "router_load": [
+              0.5272064208984375,
+              0.122802734375,
+              0.11212158203125,
+              0.2378692626953125
+            ],
+            "router_entropy": 0.14409754052758217,
+            "evaluation_wall_seconds": 0.1717335440007446,
+            "evaluation_tokens_per_second": 95403.60967528257,
+            "step": 600,
+            "training_objective": 2.3478448390960693
+          },
+          {
+            "nll": 2.3538150787353516,
+            "bits_per_character": 3.395837341261157,
+            "router_load": [
+              0.511077880859375,
+              0.111328125,
+              0.1368865966796875,
+              0.2407073974609375
+            ],
+            "router_entropy": 0.15795888751745224,
+            "evaluation_wall_seconds": 0.1774380979986745,
+            "evaluation_tokens_per_second": 92336.42709652125,
+            "step": 700,
+            "training_objective": 2.3310251235961914
+          },
+          {
+            "nll": 2.322682738304138,
+            "bits_per_character": 3.3509228681097785,
+            "router_load": [
+              0.5396270751953125,
+              0.118743896484375,
+              0.133453369140625,
+              0.2081756591796875
+            ],
+            "router_entropy": 0.15917314402759075,
+            "evaluation_wall_seconds": 0.18035665999923367,
+            "evaluation_tokens_per_second": 90842.22340372468,
+            "step": 800,
+            "training_objective": 2.2739224433898926
+          },
+          {
+            "nll": 2.3051711320877075,
+            "bits_per_character": 3.3256589606633336,
+            "router_load": [
+              0.5352783203125,
+              0.1171722412109375,
+              0.118011474609375,
+              0.2295379638671875
+            ],
+            "router_entropy": 0.15434735640883446,
+            "evaluation_wall_seconds": 0.16738770499796374,
+            "evaluation_tokens_per_second": 97880.54624561171,
+            "step": 900,
+            "training_objective": 2.243925094604492
+          },
+          {
+            "nll": 2.280291438102722,
+            "bits_per_character": 3.28976514953236,
+            "router_load": [
+              0.532318115234375,
+              0.116912841796875,
+              0.120941162109375,
+              0.229827880859375
+            ],
+            "router_entropy": 0.13852831162512302,
+            "evaluation_wall_seconds": 0.16718740500073181,
+            "evaluation_tokens_per_second": 97997.81269365526,
+            "step": 1000,
+            "training_objective": 2.213930130004883
+          },
+          {
+            "nll": 2.2567406594753265,
+            "bits_per_character": 3.2557885579975427,
+            "router_load": [
+              0.5373382568359375,
+              0.13427734375,
+              0.1038970947265625,
+              0.2244873046875
+            ],
+            "router_entropy": 0.14269358292222023,
+            "evaluation_wall_seconds": 0.168428662000224,
+            "evaluation_tokens_per_second": 97275.60502723824,
+            "step": 1100,
+            "training_objective": 2.205996513366699
+          },
+          {
+            "nll": 2.2286366522312164,
+            "bits_per_character": 3.2152430461173576,
+            "router_load": [
+              0.554351806640625,
+              0.121490478515625,
+              0.1182708740234375,
+              0.2058868408203125
+            ],
+            "router_entropy": 0.14995242282748222,
+            "evaluation_wall_seconds": 0.16626347799683572,
+            "evaluation_tokens_per_second": 98542.38704372475,
+            "step": 1200,
+            "training_objective": 2.1694254875183105
+          }
+        ],
+        "train_wall_seconds": 77.41109595599846,
+        "train_tokens": 2457600,
+        "updates": 1200,
+        "forward_macs_per_token_proxy": 197936,
+        "training_forward_backward_macs_proxy": 1459342540800,
+        "inference_payload": {
+          "path": "source/artifacts/seed78301_film_gate_inference.pt",
+          "bytes": 612225,
+          "sha256": "fc78ddb381e8a4f69c7a3d964d6802d49dc09a886574ef9784570aa903d60edb"
+        }
+      },
+      "depth_embedding": {
+        "seed": 78301,
+        "condition": "depth_embedding",
+        "best_step": 1200,
+        "development": {
+          "nll": 2.231639117002487,
+          "bits_per_character": 3.2195746871533135,
+          "router_load": [
+            0.49273681640625,
+            0.11676025390625,
+            0.17236328125,
+            0.2181396484375
+          ],
+          "router_entropy": 0.11730409879237413,
+          "evaluation_wall_seconds": 0.1585173159983242,
+          "evaluation_tokens_per_second": 103357.793417176,
+          "layer_role_output_cosine_distance": 0.6728845040003458
+        },
+        "history": [
+          {
+            "nll": 2.717374086380005,
+            "bits_per_character": 3.920342118660611,
+            "router_load": [
+              0.4675140380859375,
+              0.1449432373046875,
+              0.1274871826171875,
+              0.2600555419921875
+            ],
+            "router_entropy": 0.2303916309028864,
+            "evaluation_wall_seconds": 0.1780845209977997,
+            "evaluation_tokens_per_second": 92001.25821267998,
+            "step": 100,
+            "training_objective": 2.700714588165283
+          },
+          {
+            "nll": 2.5751838386058807,
+            "bits_per_character": 3.715204953334109,
+            "router_load": [
+              0.4758758544921875,
+              0.1475372314453125,
+              0.1617431640625,
+              0.21484375
+            ],
+            "router_entropy": 0.225789250805974,
+            "evaluation_wall_seconds": 0.16773469699910493,
+            "evaluation_tokens_per_second": 97678.0612069036,
+            "step": 200,
+            "training_objective": 2.528494119644165
+          },
+          {
+            "nll": 2.5211371779441833,
+            "bits_per_character": 3.6372321040208697,
+            "router_load": [
+              0.5116119384765625,
+              0.12255859375,
+              0.15399169921875,
+              0.2118377685546875
+            ],
+            "router_entropy": 0.1937394216656685,
+            "evaluation_wall_seconds": 0.16957357699720887,
+            "evaluation_tokens_per_second": 96618.82641226395,
+            "step": 300,
+            "training_objective": 2.489046812057495
+          },
+          {
+            "nll": 2.476598769426346,
+            "bits_per_character": 3.5729767629230986,
+            "router_load": [
+              0.5138702392578125,
+              0.1134185791015625,
+              0.156005859375,
+              0.216705322265625
+            ],
+            "router_entropy": 0.20716000348329544,
+            "evaluation_wall_seconds": 0.21090297199771157,
+            "evaluation_tokens_per_second": 77685.01242447061,
+            "step": 400,
+            "training_objective": 2.426502227783203
+          },
+          {
+            "nll": 2.435899794101715,
+            "bits_per_character": 3.5142605530529916,
+            "router_load": [
+              0.552337646484375,
+              0.11614990234375,
+              0.14947509765625,
+              0.182037353515625
+            ],
+            "router_entropy": 0.1579225081950426,
+            "evaluation_wall_seconds": 0.1715253410002333,
+            "evaluation_tokens_per_second": 95519.41365898648,
+            "step": 500,
+            "training_objective": 2.3913769721984863
+          },
+          {
+            "nll": 2.394254595041275,
+            "bits_per_character": 3.454179230891661,
+            "router_load": [
+              0.5029754638671875,
+              0.1180419921875,
+              0.1822357177734375,
+              0.196746826171875
+            ],
+            "router_entropy": 0.133487394079566,
+            "evaluation_wall_seconds": 0.1713048899982823,
+            "evaluation_tokens_per_second": 95642.33688929887,
+            "step": 600,
+            "training_objective": 2.355929136276245
+          },
+          {
+            "nll": 2.3553086519241333,
+            "bits_per_character": 3.397992111893817,
+            "router_load": [
+              0.502227783203125,
+              0.113555908203125,
+              0.1800994873046875,
+              0.2041168212890625
+            ],
+            "router_entropy": 0.13327111303806305,
+            "evaluation_wall_seconds": 0.17829443400114542,
+            "evaluation_tokens_per_second": 91892.941536777,
+            "step": 700,
+            "training_objective": 2.3159191608428955
+          },
+          {
+            "nll": 2.3333208858966827,
+            "bits_per_character": 3.3662704708857873,
+            "router_load": [
+              0.5242462158203125,
+              0.112518310546875,
+              0.1591033935546875,
+              0.204132080078125
+            ],
+            "router_entropy": 0.13254643231630325,
+            "evaluation_wall_seconds": 0.16965007600083482,
+            "evaluation_tokens_per_second": 96575.25882817393,
+            "step": 800,
+            "training_objective": 2.301065683364868
+          },
+          {
+            "nll": 2.3034749925136566,
+            "bits_per_character": 3.3232119485111946,
+            "router_load": [
+              0.546142578125,
+              0.1104736328125,
+              0.13360595703125,
+              0.20977783203125
+            ],
+            "router_entropy": 0.14103400148451328,
+            "evaluation_wall_seconds": 0.1690182759994059,
+            "evaluation_tokens_per_second": 96936.26268000503,
+            "step": 900,
+            "training_objective": 2.2520577907562256
+          },
+          {
+            "nll": 2.2765939235687256,
+            "bits_per_character": 3.284430763650548,
+            "router_load": [
+              0.50958251953125,
+              0.1102752685546875,
+              0.169189453125,
+              0.2109527587890625
+            ],
+            "router_entropy": 0.135552691295743,
+            "evaluation_wall_seconds": 0.16514519799966365,
+            "evaluation_tokens_per_second": 99209.66639328725,
+            "step": 1000,
+            "training_objective": 2.2127954959869385
+          },
+          {
+            "nll": 2.2576295733451843,
+            "bits_per_character": 3.257070989629364,
+            "router_load": [
+              0.5010223388671875,
+              0.115570068359375,
+              0.1825714111328125,
+              0.200836181640625
+            ],
+            "router_entropy": 0.1322550382465124,
+            "evaluation_wall_seconds": 0.16699275900100474,
+            "evaluation_tokens_per_second": 98112.03849803704,
+            "step": 1100,
+            "training_objective": 2.2187235355377197
+          },
+          {
+            "nll": 2.231639117002487,
+            "bits_per_character": 3.2195746871533135,
+            "router_load": [
+              0.49273681640625,
+              0.11676025390625,
+              0.17236328125,
+              0.2181396484375
+            ],
+            "router_entropy": 0.11730409879237413,
+            "evaluation_wall_seconds": 0.16348213700257475,
+            "evaluation_tokens_per_second": 100218.90036672301,
+            "step": 1200,
+            "training_objective": 2.182404041290283
+          }
+        ],
+        "train_wall_seconds": 77.15960862399879,
+        "train_tokens": 2457600,
+        "updates": 1200,
+        "forward_macs_per_token_proxy": 199728,
+        "training_forward_backward_macs_proxy": 1472554598400,
+        "inference_payload": {
+          "path": "source/artifacts/seed78301_depth_embedding_inference.pt",
+          "bytes": 615032,
+          "sha256": "29749ab877a5f86db25ea754f1a96a527bf4272055c28b72de4b8abd66d4def0"
+        }
+      }
+    },
+    "78302": {
+      "dense": {
+        "seed": 78302,
+        "condition": "dense",
+        "best_step": 1200,
+        "development": {
+          "nll": 2.1756327748298645,
+          "bits_per_character": 3.13877461504254,
+          "router_load": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "router_entropy": 0.0,
+          "evaluation_wall_seconds": 0.12801146999845514,
+          "evaluation_tokens_per_second": 127988.53102927202,
+          "layer_role_output_cosine_distance": 0.808882494767507
+        },
+        "history": [
+          {
+            "nll": 2.7583883106708527,
+            "bits_per_character": 3.9795131366509247,
+            "router_load": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "router_entropy": 0.0,
+            "evaluation_wall_seconds": 0.12750518800021382,
+            "evaluation_tokens_per_second": 128496.73222686848,
+            "step": 100,
+            "training_objective": 2.7487876415252686
+          },
+          {
+            "nll": 2.589821606874466,
+            "bits_per_character": 3.7363227890248787,
+            "router_load": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "router_entropy": 0.0,
+            "evaluation_wall_seconds": 0.13324223100062227,
+            "evaluation_tokens_per_second": 122964.01731612768,
+            "step": 200,
+            "training_objective": 2.584545135498047
+          },
+          {
+            "nll": 2.517687052488327,
+            "bits_per_character": 3.632254625135261,
+            "router_load": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "router_entropy": 0.0,
+            "evaluation_wall_seconds": 0.13032052500057034,
+            "evaluation_tokens_per_second": 125720.79493946403,
+            "step": 300,
+            "training_objective": 2.507697582244873
+          },
+          {
+            "nll": 2.4796032905578613,
+            "bits_per_character": 3.577311370659782,
+            "router_load": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "router_entropy": 0.0,
+            "evaluation_wall_seconds": 0.1280312889975903,
+            "evaluation_tokens_per_second": 127968.71864898872,
+            "step": 400,
+            "training_objective": 2.4479405879974365
+          },
+          {
+            "nll": 2.427061915397644,
+            "bits_per_character": 3.50151018927465,
+            "router_load": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "router_entropy": 0.0,
+            "evaluation_wall_seconds": 0.13314171000092756,
+            "evaluation_tokens_per_second": 123056.85423362715,
+            "step": 500,
+            "training_objective": 2.4114248752593994
+          },
+          {
+            "nll": 2.3795024156570435,
+            "bits_per_character": 3.4328963348517254,
+            "router_load": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "router_entropy": 0.0,
+            "evaluation_wall_seconds": 0.12746356599745923,
+            "evaluation_tokens_per_second": 128538.69160012821,
+            "step": 600,
+            "training_objective": 2.3391916751861572
+          },
+          {
+            "nll": 2.3610450327396393,
+            "bits_per_character": 3.406267960048998,
+            "router_load": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "router_entropy": 0.0,
+            "evaluation_wall_seconds": 0.1350528149996535,
+            "evaluation_tokens_per_second": 121315.50164313152,
+            "step": 700,
+            "training_objective": 2.3030827045440674
+          },
+          {
+            "nll": 2.3281784057617188,
+            "bits_per_character": 3.3588514402972045,
+            "router_load": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "router_entropy": 0.0,
+            "evaluation_wall_seconds": 0.1280330720001075,
+            "evaluation_tokens_per_second": 127966.93654266332,
+            "step": 800,
+            "training_objective": 2.2631890773773193
+          },
+          {
+            "nll": 2.2790798246860504,
+            "bits_per_character": 3.288017160864653,
+            "router_load": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "router_entropy": 0.0,
+            "evaluation_wall_seconds": 0.1281824370016693,
+            "evaluation_tokens_per_second": 127817.82265371217,
+            "step": 900,
+            "training_objective": 2.238929033279419
+          },
+          {
+            "nll": 2.236056298017502,
+            "bits_per_character": 3.225947332298384,
+            "router_load": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "router_entropy": 0.0,
+            "evaluation_wall_seconds": 0.1288623500004178,
+            "evaluation_tokens_per_second": 127143.4208668931,
+            "step": 1000,
+            "training_objective": 2.169167995452881
+          },
+          {
+            "nll": 2.225031465291977,
+            "bits_per_character": 3.210041860798639,
+            "router_load": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "router_entropy": 0.0,
+            "evaluation_wall_seconds": 0.12741049499891233,
+            "evaluation_tokens_per_second": 128592.23253264863,
+            "step": 1100,
+            "training_objective": 2.1905205249786377
+          },
+          {
+            "nll": 2.1756327748298645,
+            "bits_per_character": 3.13877461504254,
+            "router_load": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "router_entropy": 0.0,
+            "evaluation_wall_seconds": 0.13041204199907952,
+            "evaluation_tokens_per_second": 125632.57003609868,
+            "step": 1200,
+            "training_objective": 2.1186561584472656
+          }
+        ],
+        "train_wall_seconds": 61.28086328599966,
+        "train_tokens": 2457600,
+        "updates": 1200,
+        "forward_macs_per_token_proxy": 196608,
+        "training_forward_backward_macs_proxy": 1449551462400,
+        "inference_payload": {
+          "path": "source/artifacts/seed78302_dense_inference.pt",
+          "bytes": 603754,
+          "sha256": "3e0f36dcd57a6fe0da3fff12f582b2dc948252721dda93cc215c4f5757fae296"
+        }
+      },
+      "untied_moe": {
+        "seed": 78302,
+        "condition": "untied_moe",
+        "best_step": 1200,
+        "development": {
+          "nll": 2.190825343132019,
+          "bits_per_character": 3.1606928579904254,
+          "router_load": [
+            0.3156890869140625,
+            0.177764892578125,
+            0.3734283447265625,
+            0.13311767578125
+          ],
+          "router_entropy": 0.18391854129731655,
+          "evaluation_wall_seconds": 0.15934751099848654,
+          "evaluation_tokens_per_second": 102819.30290179187,
+          "layer_role_output_cosine_distance": 0.8924402594566345
+        },
+        "history": [
+          {
+            "nll": 2.731338083744049,
+            "bits_per_character": 3.940487908408704,
+            "router_load": [
+              0.3157806396484375,
+              0.2486419677734375,
+              0.2893829345703125,
+              0.1461944580078125
+            ],
+            "router_entropy": 0.3523790016770363,
+            "evaluation_wall_seconds": 0.1676533899990318,
+            "evaluation_tokens_per_second": 97725.43221520673,
+            "step": 100,
+            "training_objective": 2.7294249534606934
+          },
+          {
+            "nll": 2.571237236261368,
+            "bits_per_character": 3.7095112097033196,
+            "router_load": [
+              0.3210906982421875,
+              0.199676513671875,
+              0.301788330078125,
+              0.1774444580078125
+            ],
+            "router_entropy": 0.3122938238084316,
+            "evaluation_wall_seconds": 0.17641887400168343,
+            "evaluation_tokens_per_second": 92869.88193702936,
+            "step": 200,
+            "training_objective": 2.560234308242798
+          },
+          {
+            "nll": 2.5264156460762024,
+            "bits_per_character": 3.644847323818424,
+            "router_load": [
+              0.2986602783203125,
+              0.23468017578125,
+              0.338134765625,
+              0.1285247802734375
+            ],
+            "router_entropy": 0.29655907675623894,
+            "evaluation_wall_seconds": 0.16975045800063526,
+            "evaluation_tokens_per_second": 96518.14901105413,
+            "step": 300,
+            "training_objective": 2.5029401779174805
+          },
+          {
+            "nll": 2.4850670397281647,
+            "bits_per_character": 3.58519389449244,
+            "router_load": [
+              0.2871856689453125,
+              0.221099853515625,
+              0.368804931640625,
+              0.1229095458984375
+            ],
+            "router_entropy": 0.25246335193514824,
+            "evaluation_wall_seconds": 0.17233088099965244,
+            "evaluation_tokens_per_second": 95072.91963552978,
+            "step": 400,
+            "training_objective": 2.463076591491699
+          },
+          {
+            "nll": 2.4433648586273193,
+            "bits_per_character": 3.525030364623997,
+            "router_load": [
+              0.326690673828125,
+              0.187530517578125,
+              0.3636016845703125,
+              0.1221771240234375
+            ],
+            "router_entropy": 0.2351597361266613,
+            "evaluation_wall_seconds": 0.18158595800196053,
+            "evaluation_tokens_per_second": 90227.24102831291,
+            "step": 500,
+            "training_objective": 2.4337148666381836
+          },
+          {
+            "nll": 2.3793534338474274,
+            "bits_per_character": 3.4326813995338097,
+            "router_load": [
+              0.32080078125,
+              0.1851654052734375,
+              0.367034912109375,
+              0.1269989013671875
+            ],
+            "router_entropy": 0.2386111617088318,
+            "evaluation_wall_seconds": 0.17616949999865028,
+            "evaluation_tokens_per_second": 93001.34245783479,
+            "step": 600,
+            "training_objective": 2.3407344818115234
+          },
+          {
+            "nll": 2.338661253452301,
+            "bits_per_character": 3.373974992674802,
+            "router_load": [
+              0.311981201171875,
+              0.193817138671875,
+              0.366729736328125,
+              0.127471923828125
+            ],
+            "router_entropy": 0.19088822230696678,
+            "evaluation_wall_seconds": 0.16876133700134233,
+            "evaluation_tokens_per_second": 97083.84806094349,
+            "step": 700,
+            "training_objective": 2.275204658508301
+          },
+          {
+            "nll": 2.318516582250595,
+            "bits_per_character": 3.344912375431762,
+            "router_load": [
+              0.3108062744140625,
+              0.1843414306640625,
+              0.3773193359375,
+              0.127532958984375
+            ],
+            "router_entropy": 0.20846202969551086,
+            "evaluation_wall_seconds": 0.1698854569985997,
+            "evaluation_tokens_per_second": 96441.45113689777,
+            "step": 800,
+            "training_objective": 2.24837327003479
+          },
+          {
+            "nll": 2.2716799080371857,
+            "bits_per_character": 3.277341337812344,
+            "router_load": [
+              0.32000732421875,
+              0.1788177490234375,
+              0.385589599609375,
+              0.1155853271484375
+            ],
+            "router_entropy": 0.1879321988672018,
+            "evaluation_wall_seconds": 0.17223141800059238,
+            "evaluation_tokens_per_second": 95127.8238906658,
+            "step": 900,
+            "training_objective": 2.220137596130371
+          },
+          {
+            "nll": 2.2354944050312042,
+            "bits_per_character": 3.225136692073542,
+            "router_load": [
+              0.3087310791015625,
+              0.1853179931640625,
+              0.385284423828125,
+              0.12066650390625
+            ],
+            "router_entropy": 0.1730219814926386,
+            "evaluation_wall_seconds": 0.1719546589993115,
+            "evaluation_tokens_per_second": 95280.93100440856,
+            "step": 1000,
+            "training_objective": 2.1825573444366455
+          },
+          {
+            "nll": 2.2221952378749847,
+            "bits_per_character": 3.205950049569311,
+            "router_load": [
+              0.3216400146484375,
+              0.1848907470703125,
+              0.3466949462890625,
+              0.1467742919921875
+            ],
+            "router_entropy": 0.18768285773694515,
+            "evaluation_wall_seconds": 0.17484744000103092,
+            "evaluation_tokens_per_second": 93704.54608831219,
+            "step": 1100,
+            "training_objective": 2.197355270385742
+          },
+          {
+            "nll": 2.190825343132019,
+            "bits_per_character": 3.1606928579904254,
+            "router_load": [
+              0.3156890869140625,
+              0.177764892578125,
+              0.3734283447265625,
+              0.13311767578125
+            ],
+            "router_entropy": 0.18391854129731655,
+            "evaluation_wall_seconds": 0.17152482899837196,
+            "evaluation_tokens_per_second": 95519.69878457369,
+            "step": 1200,
+            "training_objective": 2.1134653091430664
+          }
+        ],
+        "train_wall_seconds": 80.10689766799987,
+        "train_tokens": 2457600,
+        "updates": 1200,
+        "forward_macs_per_token_proxy": 197680,
+        "training_forward_backward_macs_proxy": 1457455104000,
+        "inference_payload": {
+          "path": "source/artifacts/seed78302_untied_moe_inference.pt",
+          "bytes": 1423166,
+          "sha256": "eb4a853cd9cbad6f1821bbfb2dc0adc64f18425be2d06c45ae306a7c86286678"
+        }
+      },
+      "unipool": {
+        "seed": 78302,
+        "condition": "unipool",
+        "best_step": 1200,
+        "development": {
+          "nll": 2.2148603796958923,
+          "bits_per_character": 3.1953680860487106,
+          "router_load": [
+            0.4864959716796875,
+            0.10467529296875,
+            0.2866668701171875,
+            0.122161865234375
+          ],
+          "router_entropy": 0.07616748008877039,
+          "evaluation_wall_seconds": 0.16163004800182534,
+          "evaluation_tokens_per_second": 101367.29031853638,
+          "layer_role_output_cosine_distance": 0.6565673351287842
+        },
+        "history": [
+          {
+            "nll": 2.739651083946228,
+            "bits_per_character": 3.9524810325752964,
+            "router_load": [
+              0.402252197265625,
+              0.149810791015625,
+              0.2743072509765625,
+              0.1736297607421875
+            ],
+            "router_entropy": 0.2029380165040493,
+            "evaluation_wall_seconds": 0.17595264400006272,
+            "evaluation_tokens_per_second": 93115.96363390914,
+            "step": 100,
+            "training_objective": 2.7360754013061523
+          },
+          {
+            "nll": 2.5801719427108765,
+            "bits_per_character": 3.722401266389824,
+            "router_load": [
+              0.4670562744140625,
+              0.1360931396484375,
+              0.2604522705078125,
+              0.1363983154296875
+            ],
+            "router_entropy": 0.13889591209590435,
+            "evaluation_wall_seconds": 0.17055281899956753,
+            "evaluation_tokens_per_second": 96064.08206035894,
+            "step": 200,
+            "training_objective": 2.5689573287963867
+          },
+          {
+            "nll": 2.534634828567505,
+            "bits_per_character": 3.6567050976387874,
+            "router_load": [
+              0.4603729248046875,
+              0.1343994140625,
+              0.2648773193359375,
+              0.140350341796875
+            ],
+            "router_entropy": 0.14640024863183498,
+            "evaluation_wall_seconds": 0.17377143299745512,
+            "evaluation_tokens_per_second": 94284.77234367943,
+            "step": 300,
+            "training_objective": 2.515507221221924
+          },
+          {
+            "nll": 2.5011162757873535,
+            "bits_per_character": 3.6083480477650878,
+            "router_load": [
+              0.4678192138671875,
+              0.126678466796875,
+              0.266204833984375,
+              0.1392974853515625
+            ],
+            "router_entropy": 0.09468843787908554,
+            "evaluation_wall_seconds": 0.16916340600073454,
+            "evaluation_tokens_per_second": 96853.09835821619,
+            "step": 400,
+            "training_objective": 2.483893394470215
+          },
+          {
+            "nll": 2.4700479805469513,
+            "bits_per_character": 3.5635259722928856,
+            "router_load": [
+              0.48779296875,
+              0.118743896484375,
+              0.2732086181640625,
+              0.1202545166015625
+            ],
+            "router_entropy": 0.09695231169462204,
+            "evaluation_wall_seconds": 0.1791453330006334,
+            "evaluation_tokens_per_second": 91456.47126594179,
+            "step": 500,
+            "training_objective": 2.4693117141723633
+          },
+          {
+            "nll": 2.4167056381702423,
+            "bits_per_character": 3.4865692394766064,
+            "router_load": [
+              0.5098419189453125,
+              0.114013671875,
+              0.2571258544921875,
+              0.1190185546875
+            ],
+            "router_entropy": 0.08316466771066189,
+            "evaluation_wall_seconds": 0.17082996699900832,
+            "evaluation_tokens_per_second": 95908.23137075892,
+            "step": 600,
+            "training_objective": 2.3806865215301514
+          },
+          {
+            "nll": 2.372620105743408,
+            "bits_per_character": 3.422967260469463,
+            "router_load": [
+              0.4823455810546875,
+              0.1088714599609375,
+              0.2792816162109375,
+              0.1295013427734375
+            ],
+            "router_entropy": 0.0822997884824872,
+            "evaluation_wall_seconds": 0.16627704500206164,
+            "evaluation_tokens_per_second": 98534.34669708532,
+            "step": 700,
+            "training_objective": 2.318859577178955
+          },
+          {
+            "nll": 2.3449540734291077,
+            "bits_per_character": 3.3830536128485478,
+            "router_load": [
+              0.4814300537109375,
+              0.1016387939453125,
+              0.288787841796875,
+              0.128143310546875
+            ],
+            "router_entropy": 0.08339142706245184,
+            "evaluation_wall_seconds": 0.16709660799824633,
+            "evaluation_tokens_per_second": 98051.06277305132,
+            "step": 800,
+            "training_objective": 2.269239664077759
+          },
+          {
+            "nll": 2.296554446220398,
+            "bits_per_character": 3.313227710693668,
+            "router_load": [
+              0.4811248779296875,
+              0.1164398193359375,
+              0.2879486083984375,
+              0.1144866943359375
+            ],
+            "router_entropy": 0.08618241362273693,
+            "evaluation_wall_seconds": 0.17018643600022187,
+            "evaluation_tokens_per_second": 96270.89199975162,
+            "step": 900,
+            "training_objective": 2.2400169372558594
+          },
+          {
+            "nll": 2.266422599554062,
+            "bits_per_character": 3.269756644935318,
+            "router_load": [
+              0.4935150146484375,
+              0.0960540771484375,
+              0.293487548828125,
+              0.116943359375
+            ],
+            "router_entropy": 0.0740577420219779,
+            "evaluation_wall_seconds": 0.16831742399881477,
+            "evaluation_tokens_per_second": 97339.89274999461,
+            "step": 1000,
+            "training_objective": 2.210233688354492
+          },
+          {
+            "nll": 2.242300033569336,
+            "bits_per_character": 3.2349551386156374,
+            "router_load": [
+              0.48199462890625,
+              0.1100006103515625,
+              0.2818756103515625,
+              0.126129150390625
+            ],
+            "router_entropy": 0.07831204310059547,
+            "evaluation_wall_seconds": 0.17357201499908115,
+            "evaluation_tokens_per_second": 94393.09672176551,
+            "step": 1100,
+            "training_objective": 2.20678448677063
+          },
+          {
+            "nll": 2.2148603796958923,
+            "bits_per_character": 3.1953680860487106,
+            "router_load": [
+              0.4864959716796875,
+              0.10467529296875,
+              0.2866668701171875,
+              0.122161865234375
+            ],
+            "router_entropy": 0.07616748008877039,
+            "evaluation_wall_seconds": 0.1711511830035306,
+            "evaluation_tokens_per_second": 95728.23110233496,
+            "step": 1200,
+            "training_objective": 2.1395103931427
+          }
+        ],
+        "train_wall_seconds": 77.55942451399824,
+        "train_tokens": 2457600,
+        "updates": 1200,
+        "forward_macs_per_token_proxy": 197680,
+        "training_forward_backward_macs_proxy": 1457455104000,
+        "inference_payload": {
+          "path": "source/artifacts/seed78302_unipool_inference.pt",
+          "bytes": 611622,
+          "sha256": "93a20387640ae84abf5072178363e35c4c956762802488b0256a064f7a5d0808"
+        }
+      },
+      "mirror_givens": {
+        "seed": 78302,
+        "condition": "mirror_givens",
+        "best_step": 1200,
+        "development": {
+          "nll": 2.2450773119926453,
+          "bits_per_character": 3.2389619044241136,
+          "router_load": [
+            0.42779541015625,
+            0.18170166015625,
+            0.28399658203125,
+            0.10650634765625
+          ],
+          "router_entropy": 0.13693701848387718,
+          "evaluation_wall_seconds": 0.1689205030015728,
+          "evaluation_tokens_per_second": 96992.3704279252,
+          "layer_role_output_cosine_distance": 0.6839565336704254
+        },
+        "history": [
+          {
+            "nll": 2.7547436952590942,
+            "bits_per_character": 3.974255068070433,
+            "router_load": [
+              0.39141845703125,
+              0.2308197021484375,
+              0.221710205078125,
+              0.1560516357421875
+            ],
+            "router_entropy": 0.22504594549536705,
+            "evaluation_wall_seconds": 0.1944594689994119,
+            "evaluation_tokens_per_second": 84254.06118973589,
+            "step": 100,
+            "training_objective": 2.7498795986175537
+          },
+          {
+            "nll": 2.590094029903412,
+            "bits_per_character": 3.736715812377763,
+            "router_load": [
+              0.4334869384765625,
+              0.1777801513671875,
+              0.25421142578125,
+              0.134521484375
+            ],
+            "router_entropy": 0.17181477509438992,
+            "evaluation_wall_seconds": 0.18708695999885094,
+            "evaluation_tokens_per_second": 87574.24889527644,
+            "step": 200,
+            "training_objective": 2.5753862857818604
+          },
+          {
+            "nll": 2.5329789519309998,
+            "bits_per_character": 3.6543161726269773,
+            "router_load": [
+              0.4395904541015625,
+              0.185333251953125,
+              0.238677978515625,
+              0.1363983154296875
+            ],
+            "router_entropy": 0.13378355652093887,
+            "evaluation_wall_seconds": 0.17949947400120436,
+            "evaluation_tokens_per_second": 91276.03348793139,
+            "step": 300,
+            "training_objective": 2.517803192138672
+          },
+          {
+            "nll": 2.498807519674301,
+            "bits_per_character": 3.605017216770165,
+            "router_load": [
+              0.455810546875,
+              0.167999267578125,
+              0.2484130859375,
+              0.127777099609375
+            ],
+            "router_entropy": 0.1348113063722849,
+            "evaluation_wall_seconds": 0.18176952499925392,
+            "evaluation_tokens_per_second": 90136.12155319903,
+            "step": 400,
+            "training_objective": 2.4871037006378174
+          },
+          {
+            "nll": 2.450977325439453,
+            "bits_per_character": 3.536012832742794,
+            "router_load": [
+              0.4467010498046875,
+              0.183380126953125,
+              0.2532196044921875,
+              0.11669921875
+            ],
+            "router_entropy": 0.128105697222054,
+            "evaluation_wall_seconds": 0.196092595000664,
+            "evaluation_tokens_per_second": 83552.36463643373,
+            "step": 500,
+            "training_objective": 2.4447882175445557
+          },
+          {
+            "nll": 2.3988747894763947,
+            "bits_per_character": 3.460844762491151,
+            "router_load": [
+              0.4225311279296875,
+              0.1855621337890625,
+              0.2662506103515625,
+              0.1256561279296875
+            ],
+            "router_entropy": 0.1283808797597885,
+            "evaluation_wall_seconds": 0.18635509199884837,
+            "evaluation_tokens_per_second": 87918.17719744009,
+            "step": 600,
+            "training_objective": 2.349454879760742
+          },
+          {
+            "nll": 2.3746083974838257,
+            "bits_per_character": 3.425835759103204,
+            "router_load": [
+              0.4491424560546875,
+              0.171600341796875,
+              0.2640533447265625,
+              0.115203857421875
+            ],
+            "router_entropy": 0.14846290089190006,
+            "evaluation_wall_seconds": 0.18092540799989365,
+            "evaluation_tokens_per_second": 90556.65636531067,
+            "step": 700,
+            "training_objective": 2.3319108486175537
+          },
+          {
+            "nll": 2.3550626635551453,
+            "bits_per_character": 3.3976372256937615,
+            "router_load": [
+              0.4373016357421875,
+              0.1772308349609375,
+              0.2674102783203125,
+              0.1180572509765625
+            ],
+            "router_entropy": 0.11967370938509703,
+            "evaluation_wall_seconds": 0.18373282799802837,
+            "evaluation_tokens_per_second": 89172.95933732548,
+            "step": 800,
+            "training_objective": 2.285506010055542
+          },
+          {
+            "nll": 2.3175203800201416,
+            "bits_per_character": 3.3434751594141643,
+            "router_load": [
+              0.4383544921875,
+              0.1737823486328125,
+              0.266937255859375,
+              0.1209259033203125
+            ],
+            "router_entropy": 0.1280419584363699,
+            "evaluation_wall_seconds": 0.19261086500046076,
+            "evaluation_tokens_per_second": 85062.69882522362,
+            "step": 900,
+            "training_objective": 2.261378526687622
+          },
+          {
+            "nll": 2.301596701145172,
+            "bits_per_character": 3.3205021468685376,
+            "router_load": [
+              0.4351959228515625,
+              0.1852569580078125,
+              0.2660369873046875,
+              0.1135101318359375
+            ],
+            "router_entropy": 0.12936717551201582,
+            "evaluation_wall_seconds": 0.18314190399905783,
+            "evaluation_tokens_per_second": 89460.68399553325,
+            "step": 1000,
+            "training_objective": 2.2541191577911377
+          },
+          {
+            "nll": 2.293385475873947,
+            "bits_per_character": 3.308655852890119,
+            "router_load": [
+              0.4342041015625,
+              0.1802215576171875,
+              0.2681732177734375,
+              0.117401123046875
+            ],
+            "router_entropy": 0.14406391605734825,
+            "evaluation_wall_seconds": 0.1828591149969725,
+            "evaluation_tokens_per_second": 89599.03366190557,
+            "step": 1100,
+            "training_objective": 2.255298137664795
+          },
+          {
+            "nll": 2.2450773119926453,
+            "bits_per_character": 3.2389619044241136,
+            "router_load": [
+              0.42779541015625,
+              0.18170166015625,
+              0.28399658203125,
+              0.10650634765625
+            ],
+            "router_entropy": 0.13693701848387718,
+            "evaluation_wall_seconds": 0.18051519599976018,
+            "evaluation_tokens_per_second": 90762.44196096247,
+            "step": 1200,
+            "training_objective": 2.1821744441986084
+          }
+        ],
+        "train_wall_seconds": 83.09232095699917,
+        "train_tokens": 2457600,
+        "updates": 1200,
+        "forward_macs_per_token_proxy": 197872,
+        "training_forward_backward_macs_proxy": 1458870681600,
+        "inference_payload": {
+          "path": "source/artifacts/seed78302_mirror_givens_inference.pt",
+          "bytes": 612501,
+          "sha256": "8afd9a479f025ec4177eb18881744e05a8bfb18d54f69019b191ec8453347163"
+        }
+      },
+      "film_gate": {
+        "seed": 78302,
+        "condition": "film_gate",
+        "best_step": 1200,
+        "development": {
+          "nll": 2.2470989525318146,
+          "bits_per_character": 3.241878515204433,
+          "router_load": [
+            0.4943084716796875,
+            0.1237030029296875,
+            0.169647216796875,
+            0.21234130859375
+          ],
+          "router_entropy": 0.12526000197976828,
+          "evaluation_wall_seconds": 0.15876559000025736,
+          "evaluation_tokens_per_second": 103196.16486150079,
+          "layer_role_output_cosine_distance": 0.6930730144182841
+        },
+        "history": [
+          {
+            "nll": 2.747250109910965,
+            "bits_per_character": 3.963444109650209,
+            "router_load": [
+              0.44354248046875,
+              0.0892486572265625,
+              0.1981964111328125,
+              0.269012451171875
+            ],
+            "router_entropy": 0.15383432805538177,
+            "evaluation_wall_seconds": 0.1697189320002508,
+            "evaluation_tokens_per_second": 96536.07766030362,
+            "step": 100,
+            "training_objective": 2.7417776584625244
+          },
+          {
+            "nll": 2.5855477154254913,
+            "bits_per_character": 3.730156867026145,
+            "router_load": [
+              0.426116943359375,
+              0.0991668701171875,
+              0.2054901123046875,
+              0.26922607421875
+            ],
+            "router_entropy": 0.13173683173954487,
+            "evaluation_wall_seconds": 0.17097760000251583,
+            "evaluation_tokens_per_second": 95825.41806505015,
+            "step": 200,
+            "training_objective": 2.575878858566284
+          },
+          {
+            "nll": 2.5309658646583557,
+            "bits_per_character": 3.651411901601857,
+            "router_load": [
+              0.4420623779296875,
+              0.1129608154296875,
+              0.16943359375,
+              0.275543212890625
+            ],
+            "router_entropy": 0.1372506432235241,
+            "evaluation_wall_seconds": 0.16937414900166914,
+            "evaluation_tokens_per_second": 96732.58933887567,
+            "step": 300,
+            "training_objective": 2.5166661739349365
+          },
+          {
+            "nll": 2.504101425409317,
+            "bits_per_character": 3.6126547083210063,
+            "router_load": [
+              0.496673583984375,
+              0.1063690185546875,
+              0.170684814453125,
+              0.2262725830078125
+            ],
+            "router_entropy": 0.1371806263923645,
+            "evaluation_wall_seconds": 0.17345058700084337,
+            "evaluation_tokens_per_second": 94459.17873959306,
+            "step": 400,
+            "training_objective": 2.4835894107818604
+          },
+          {
+            "nll": 2.4697089195251465,
+            "bits_per_character": 3.563036810638169,
+            "router_load": [
+              0.49884033203125,
+              0.11407470703125,
+              0.1712799072265625,
+              0.2158050537109375
+            ],
+            "router_entropy": 0.14385108649730682,
+            "evaluation_wall_seconds": 0.17480071799946018,
+            "evaluation_tokens_per_second": 93729.59211786874,
+            "step": 500,
+            "training_objective": 2.4755709171295166
+          },
+          {
+            "nll": 2.430421680212021,
+            "bits_per_character": 3.5063573053109045,
+            "router_load": [
+              0.5077972412109375,
+              0.1114501953125,
+              0.1671600341796875,
+              0.213592529296875
+            ],
+            "router_entropy": 0.13671059161424637,
+            "evaluation_wall_seconds": 0.1697308120019443,
+            "evaluation_tokens_per_second": 96529.32079186848,
+            "step": 600,
+            "training_objective": 2.396439790725708
+          },
+          {
+            "nll": 2.3994226455688477,
+            "bits_per_character": 3.4616351517588537,
+            "router_load": [
+              0.4637298583984375,
+              0.1158447265625,
+              0.168243408203125,
+              0.2521820068359375
+            ],
+            "router_entropy": 0.13171339593827724,
+            "evaluation_wall_seconds": 0.1667235669992806,
+            "evaluation_tokens_per_second": 98270.45027216036,
+            "step": 700,
+            "training_objective": 2.3337345123291016
+          },
+          {
+            "nll": 2.351666659116745,
+            "bits_per_character": 3.3927378269316444,
+            "router_load": [
+              0.4456024169921875,
+              0.116851806640625,
+              0.176788330078125,
+              0.2607574462890625
+            ],
+            "router_entropy": 0.14128850772976875,
+            "evaluation_wall_seconds": 0.16852423700038344,
+            "evaluation_tokens_per_second": 97220.4372001561,
+            "step": 800,
+            "training_objective": 2.2785496711730957
+          },
+          {
+            "nll": 2.3264509439468384,
+            "bits_per_character": 3.3563592397035515,
+            "router_load": [
+              0.47906494140625,
+              0.115020751953125,
+              0.17364501953125,
+              0.232269287109375
+            ],
+            "router_entropy": 0.11494983080774546,
+            "evaluation_wall_seconds": 0.17092574700291152,
+            "evaluation_tokens_per_second": 95854.48820487483,
+            "step": 900,
+            "training_objective": 2.2626607418060303
+          },
+          {
+            "nll": 2.3002719283103943,
+            "bits_per_character": 3.318590903669499,
+            "router_load": [
+              0.48895263671875,
+              0.119659423828125,
+              0.1714630126953125,
+              0.2199249267578125
+            ],
+            "router_entropy": 0.12609525863081217,
+            "evaluation_wall_seconds": 0.16753102900111116,
+            "evaluation_tokens_per_second": 97796.80873261593,
+            "step": 1000,
+            "training_objective": 2.230642557144165
+          },
+          {
+            "nll": 2.2835345566272736,
+            "bits_per_character": 3.2944439805447456,
+            "router_load": [
+              0.5078125,
+              0.118133544921875,
+              0.169464111328125,
+              0.20458984375
+            ],
+            "router_entropy": 0.12298182491213083,
+            "evaluation_wall_seconds": 0.1701856420004333,
+            "evaluation_tokens_per_second": 96271.34115084918,
+            "step": 1100,
+            "training_objective": 2.251537561416626
+          },
+          {
+            "nll": 2.2470989525318146,
+            "bits_per_character": 3.241878515204433,
+            "router_load": [
+              0.4943084716796875,
+              0.1237030029296875,
+              0.169647216796875,
+              0.21234130859375
+            ],
+            "router_entropy": 0.12526000197976828,
+            "evaluation_wall_seconds": 0.16897985099785728,
+            "evaluation_tokens_per_second": 96958.30540297822,
+            "step": 1200,
+            "training_objective": 2.176168441772461
+          }
+        ],
+        "train_wall_seconds": 81.93940424299944,
+        "train_tokens": 2457600,
+        "updates": 1200,
+        "forward_macs_per_token_proxy": 197936,
+        "training_forward_backward_macs_proxy": 1459342540800,
+        "inference_payload": {
+          "path": "source/artifacts/seed78302_film_gate_inference.pt",
+          "bytes": 612225,
+          "sha256": "83a6a5f692cddf205dfd5526adc8ebda7797508a0c29c96fe463162f1d115b67"
+        }
+      },
+      "depth_embedding": {
+        "seed": 78302,
+        "condition": "depth_embedding",
+        "best_step": 1200,
+        "development": {
+          "nll": 2.2155060172080994,
+          "bits_per_character": 3.1962995440857833,
+          "router_load": [
+            0.5857391357421875,
+            0.1456146240234375,
+            0.1732940673828125,
+            0.0953521728515625
+          ],
+          "router_entropy": 0.0933437030762434,
+          "evaluation_wall_seconds": 0.1590017929993337,
+          "evaluation_tokens_per_second": 103042.86317116347,
+          "layer_role_output_cosine_distance": 0.7574847141901652
+        },
+        "history": [
+          {
+            "nll": 2.7485066950321198,
+            "bits_per_character": 3.965256978772954,
+            "router_load": [
+              0.3874053955078125,
+              0.2282562255859375,
+              0.2313079833984375,
+              0.1530303955078125
+            ],
+            "router_entropy": 0.15006718039512634,
+            "evaluation_wall_seconds": 0.1681380089976301,
+            "evaluation_tokens_per_second": 97443.76121541283,
+            "step": 100,
+            "training_objective": 2.742433786392212
+          },
+          {
+            "nll": 2.587049752473831,
+            "bits_per_character": 3.7323238484270167,
+            "router_load": [
+              0.436492919921875,
+              0.2215423583984375,
+              0.216400146484375,
+              0.1255645751953125
+            ],
+            "router_entropy": 0.1115105701610446,
+            "evaluation_wall_seconds": 0.1684369089998654,
+            "evaluation_tokens_per_second": 97270.8422238566,
+            "step": 200,
+            "training_objective": 2.585339307785034
+          },
+          {
+            "nll": 2.531461238861084,
+            "bits_per_character": 3.6521265755075176,
+            "router_load": [
+              0.4736328125,
+              0.2167205810546875,
+              0.2064361572265625,
+              0.10321044921875
+            ],
+            "router_entropy": 0.09647434297949076,
+            "evaluation_wall_seconds": 0.16735626000081538,
+            "evaluation_tokens_per_second": 97898.93727261935,
+            "step": 300,
+            "training_objective": 2.5163731575012207
+          },
+          {
+            "nll": 2.4987604320049286,
+            "bits_per_character": 3.6049492836230743,
+            "router_load": [
+              0.5508880615234375,
+              0.1805572509765625,
+              0.1783905029296875,
+              0.0901641845703125
+            ],
+            "router_entropy": 0.1020925035700202,
+            "evaluation_wall_seconds": 0.16724689600232523,
+            "evaluation_tokens_per_second": 97962.9541212664,
+            "step": 400,
+            "training_objective": 2.485018491744995
+          },
+          {
+            "nll": 2.4736667573451996,
+            "bits_per_character": 3.5687467636338024,
+            "router_load": [
+              0.5470428466796875,
+              0.1831512451171875,
+              0.17987060546875,
+              0.089935302734375
+            ],
+            "router_entropy": 0.10422862228006124,
+            "evaluation_wall_seconds": 0.16639982100241468,
+            "evaluation_tokens_per_second": 98461.64437738336,
+            "step": 500,
+            "training_objective": 2.4723095893859863
+          },
+          {
+            "nll": 2.4338833391666412,
+            "bits_per_character": 3.5113514235179846,
+            "router_load": [
+              0.5559539794921875,
+              0.1674346923828125,
+              0.181915283203125,
+              0.094696044921875
+            ],
+            "router_entropy": 0.10345811769366264,
+            "evaluation_wall_seconds": 0.1671160720034095,
+            "evaluation_tokens_per_second": 98039.64276796629,
+            "step": 600,
+            "training_objective": 2.4045469760894775
+          },
+          {
+            "nll": 2.4008572697639465,
+            "bits_per_character": 3.463704876970662,
+            "router_load": [
+              0.5446319580078125,
+              0.1730804443359375,
+              0.1894378662109375,
+              0.0928497314453125
+            ],
+            "router_entropy": 0.10153199546039104,
+            "evaluation_wall_seconds": 0.17042797199974302,
+            "evaluation_tokens_per_second": 96134.45379743593,
+            "step": 700,
+            "training_objective": 2.3558285236358643
+          },
+          {
+            "nll": 2.3528304994106293,
+            "bits_per_character": 3.3944168935520183,
+            "router_load": [
+              0.5423126220703125,
+              0.1815948486328125,
+              0.1821136474609375,
+              0.0939788818359375
+            ],
+            "router_entropy": 0.09639858361333609,
+            "evaluation_wall_seconds": 0.1700376269982371,
+            "evaluation_tokens_per_second": 96355.14379514285,
+            "step": 800,
+            "training_objective": 2.267446517944336
+          },
+          {
+            "nll": 2.3075902462005615,
+            "bits_per_character": 3.3291490045972925,
+            "router_load": [
+              0.5543975830078125,
+              0.1648712158203125,
+              0.1854400634765625,
+              0.0952911376953125
+            ],
+            "router_entropy": 0.08893640618771315,
+            "evaluation_wall_seconds": 0.16995901799964486,
+            "evaluation_tokens_per_second": 96399.70972316536,
+            "step": 900,
+            "training_objective": 2.256502389907837
+          },
+          {
+            "nll": 2.285386621952057,
+            "bits_per_character": 3.297115946004213,
+            "router_load": [
+              0.555389404296875,
+              0.172271728515625,
+              0.1773681640625,
+              0.094970703125
+            ],
+            "router_entropy": 0.10194741282612085,
+            "evaluation_wall_seconds": 0.17034048700224957,
+            "evaluation_tokens_per_second": 96183.8273937988,
+            "step": 1000,
+            "training_objective": 2.2175583839416504
+          },
+          {
+            "nll": 2.2616614401340485,
+            "bits_per_character": 3.262887743851183,
+            "router_load": [
+              0.5765838623046875,
+              0.1630401611328125,
+              0.16650390625,
+              0.0938720703125
+            ],
+            "router_entropy": 0.09768664464354515,
+            "evaluation_wall_seconds": 0.16952994299936108,
+            "evaluation_tokens_per_second": 96643.69438301379,
+            "step": 1100,
+            "training_objective": 2.2230734825134277
+          },
+          {
+            "nll": 2.2155060172080994,
+            "bits_per_character": 3.1962995440857833,
+            "router_load": [
+              0.5857391357421875,
+              0.1456146240234375,
+              0.1732940673828125,
+              0.0953521728515625
+            ],
+            "router_entropy": 0.0933437030762434,
+            "evaluation_wall_seconds": 0.16704523199950927,
+            "evaluation_tokens_per_second": 98081.21910386602,
+            "step": 1200,
+            "training_objective": 2.146010160446167
+          }
+        ],
+        "train_wall_seconds": 77.76043501899767,
+        "train_tokens": 2457600,
+        "updates": 1200,
+        "forward_macs_per_token_proxy": 199728,
+        "training_forward_backward_macs_proxy": 1472554598400,
+        "inference_payload": {
+          "path": "source/artifacts/seed78302_depth_embedding_inference.pt",
+          "bytes": 615032,
+          "sha256": "15c0a0920b2a0db85782e41c1c167342c6d3cbea82c07667b7091e7b0efe4e9e"
+        }
+      }
+    }
+  },
+  "total_wall_seconds": 915.9321393449973
+}

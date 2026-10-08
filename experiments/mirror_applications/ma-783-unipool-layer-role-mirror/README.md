@@ -1,30 +1,38 @@
 # MA-783 — UniPool global expert pool + Mirror layer role
 
-Status: **SCREENING — protocol frozen before corpus access**
+Status: **FAIL (two-seed development screen; audit unopened)**
 Branch: `research/ma-783-unipool-layer-role-mirror-20261008`
 Baseline: `c935a903daca5c7d1d48aa50d05b5bd50f239cba`
-Draw 13 selected **MA-783** uniformly from 555 eligible P0/UNTESTED candidates. Ordered pool, SHA-256, exclusions, seed and index are under `source/`.
+Draw 13 selected this ID uniformly from 555 eligible P0/UNTESTED rows. The exact ordered pool, seed, index and hash are in `source/`.
 
-## H — Falsifiable hypothesis
+## H — Hypothesis
 
-One global pool of four physical FFN experts plus eight per-layer Givens coordinates can recover enough layer-specific function to approach a four-layer layer-owned MoE on held-out character-language NLL at no more than 70% of its full serialized inference bytes, and outperform byte-near FiLM and native depth-embedding controls.
+One global pool of four physical FFN experts plus eight per-layer Givens coordinates can recover enough layer-specific function to approach a layer-owned MoE on held-out character-language NLL at no more than 70% of its complete serialized inference bytes, and outperform byte-near FiLM and native depth-embedding controls.
 
-## Prior art
+## T — Execution
 
-PA205 UniPool-Full already shares one global expert pool across layers with independent routers, NormRouter scores and aggregate pool-level balancing. The protocol uses four shared experts (a reduced-pool setting) and keeps those routing mechanics explicit. PA204 MoRE reuses experts across layer groups and uses learned depth embeddings. This experiment tests the marginal effect of a compact orthogonal layer View, with both a same-size simple gate and a depth-embedding control. It does not claim expert sharing or depth conditioning as new.
+Frozen before corpus acquisition: four-layer, width-64 character Transformer; 1,200 AdamW updates per model; two world seeds (78301, 78302); six controls (dense, untied MoE, UniPool, UniPool+Givens, UniPool+FiLM, UniPool+depth embedding). PA205 NormRouter and aggregate shared-pool balancing were used. Development used fixed contiguous corpus bytes 0–80% for training and 80–90% for development. The final 10% audit span was not decoded or tokenized. No tuning occurred after the freeze.
 
-## T — Frozen experiment
+Corpus SHA-256: `86c4e6aa9db7c042ec79f339dcb96d42b0075e16b8fc2e86bf0ca57e2dc565ed` (1,115,394 bytes). The full manifest is in `source/development_summary.json`; raw corpus and inference payloads are local ignored artifacts, with serialized sizes and SHA-256 values recorded there and in `RESULTS_CORE.csv`.
 
-The protocol specifies a 4-layer, width-64 causal character Transformer, four experts, two development seeds, 1,200 updates, six conditions, top-1 NormRouter, UniPool aggregate load balancing, quality/bytes and Mirror-specific gates. A pre-data protocol amendment also freezes the audit decision threshold: the Mirror must remain within 0.10 nats of untied MoE and beat both byte-near controls by 0.02 nats in each world. The corpus will be acquired only after the protocol commit. Audit spans remain locked unless all development gates pass.
+## D — FAIL
 
-## D — Pending
+Both preregistered development gates failed, so the audit remained unopened.
 
-No corpus values or model scores have been accessed. The thin nanoGPT attention adapter, six model conditions and preflight tests are implemented; 3 tests pass.
+- **Storage passed:** Givens payload was 612,501 bytes in each seed versus 1,423,166 bytes for untied MoE (0.430x; the gate was <=0.70x).
+- **Quality/storage gate failed:** seed 78301 Givens NLL was 2.2463 versus untied 2.1151 (+0.1312 nats; limit +0.10). Seed 78302 was within the NLL margin (2.2451 vs 2.1908, +0.0543).
+- **Mirror-specific gate failed:** the Givens model did not beat both byte-near controls by 0.02 nats in either seed. Its NLL was 2.2463 / 2.2451, compared with FiLM 2.2286 / 2.2471 and depth embedding 2.2316 / 2.2155.
+- Givens payload was 612,501 bytes, FiLM 612,225, depth embedding 615,032, and UniPool 611,622. The shared-pool methods saved bytes relative to untied MoE, but Givens did not establish a Mirror-specific gain.
+- Total measured training wall time was 915.9 seconds for all 12 runs on single-thread CPU. Per-run times and MAC proxies are in the CSV. This short fixed-budget mechanism screen is not a capacity result.
 
 ## C — Strongest counter-hypothesis
 
-UniPool itself may already capture nearly all useful shared expert behavior, while learned depth embeddings or simple FiLM gates provide equal or better specialization with similar bytes.
+A single global pool provides most of the useful parameter sharing; ordinary FiLM or native depth conditioning recovers layer behavior as well as the Givens view. The observed NLL and payload results support that explanation at this screen's scope.
 
-## U — Unknown
+## U — Still unknown
 
-Whether the layer View preserves useful NLL, expert/load diversity, true end-to-end bytes and CPU compute remains unmeasured.
+Near-convergence capacity, additional natural language tasks, more fresh worlds, and optimized inference/runtime remain untested. The locked audit was not accessed because the frozen development gates failed. No conclusions extend beyond this small fixed-budget character-LM screen.
+
+## Verification and provenance
+
+`source/development_summary.json` records the gate decision and corpus manifest. `RESULTS_CORE.csv` contains all 12 development measurements. `VERIFICATION.json` records payload hashes, replay checks and audit status. The model adapter lives under `source/`; nanoGPT baseline files were not edited. The only tests were three preflight checks before corpus acquisition.

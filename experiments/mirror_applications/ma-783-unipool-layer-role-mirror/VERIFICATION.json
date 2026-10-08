@@ -1,26 +1,115 @@
 {
   "experiment_id": "MA-783",
-  "status": "FROZEN_PRE_DATA_AMENDED",
+  "status": "VERIFIED_FAIL_DEVELOPMENT",
   "base_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
   "protocol_frozen_before_corpus_access": true,
-  "dataset_values_accessed": false,
-  "audit_accessed": false,
+  "dataset_sha256": "86c4e6aa9db7c042ec79f339dcb96d42b0075e16b8fc2e86bf0ca57e2dc565ed",
+  "development_rows": 12,
+  "expected_development_rows": 12,
+  "payload_hash_and_size_checks": "PASS",
+  "payloads": [
+    {
+      "seed": 78301,
+      "condition": "dense",
+      "bytes": 603754,
+      "sha256": "c450df1bcb87816bcf81c1bb216b95db7da96d55aa35f39f79636143475dd8d5",
+      "path": "source/artifacts/seed78301_dense_inference.pt"
+    },
+    {
+      "seed": 78301,
+      "condition": "untied_moe",
+      "bytes": 1423166,
+      "sha256": "ef5bb660142863e1c03343b830062067a8a88866b43eeee6961c147defcfbc21",
+      "path": "source/artifacts/seed78301_untied_moe_inference.pt"
+    },
+    {
+      "seed": 78301,
+      "condition": "unipool",
+      "bytes": 611622,
+      "sha256": "b3f95fe302ad0d77877d45d4d6684e8e43a9e818f9fa0da3a01e1448c7317afb",
+      "path": "source/artifacts/seed78301_unipool_inference.pt"
+    },
+    {
+      "seed": 78301,
+      "condition": "mirror_givens",
+      "bytes": 612501,
+      "sha256": "5d684a51b07b6e327723153422bfdedc29e679ae4d2cbdcfaca9b9a1a0bb96f8",
+      "path": "source/artifacts/seed78301_mirror_givens_inference.pt"
+    },
+    {
+      "seed": 78301,
+      "condition": "film_gate",
+      "bytes": 612225,
+      "sha256": "fc78ddb381e8a4f69c7a3d964d6802d49dc09a886574ef9784570aa903d60edb",
+      "path": "source/artifacts/seed78301_film_gate_inference.pt"
+    },
+    {
+      "seed": 78301,
+      "condition": "depth_embedding",
+      "bytes": 615032,
+      "sha256": "29749ab877a5f86db25ea754f1a96a527bf4272055c28b72de4b8abd66d4def0",
+      "path": "source/artifacts/seed78301_depth_embedding_inference.pt"
+    },
+    {
+      "seed": 78302,
+      "condition": "dense",
+      "bytes": 603754,
+      "sha256": "3e0f36dcd57a6fe0da3fff12f582b2dc948252721dda93cc215c4f5757fae296",
+      "path": "source/artifacts/seed78302_dense_inference.pt"
+    },
+    {
+      "seed": 78302,
+      "condition": "untied_moe",
+      "bytes": 1423166,
+      "sha256": "eb4a853cd9cbad6f1821bbfb2dc0adc64f18425be2d06c45ae306a7c86286678",
+      "path": "source/artifacts/seed78302_untied_moe_inference.pt"
+    },
+    {
+      "seed": 78302,
+      "condition": "unipool",
+      "bytes": 611622,
+      "sha256": "93a20387640ae84abf5072178363e35c4c956762802488b0256a064f7a5d0808",
+      "path": "source/artifacts/seed78302_unipool_inference.pt"
+    },
+    {
+      "seed": 78302,
+      "condition": "mirror_givens",
+      "bytes": 612501,
+      "sha256": "8afd9a479f025ec4177eb18881744e05a8bfb18d54f69019b191ec8453347163",
+      "path": "source/artifacts/seed78302_mirror_givens_inference.pt"
+    },
+    {
+      "seed": 78302,
+      "condition": "film_gate",
+      "bytes": 612225,
+      "sha256": "83a6a5f692cddf205dfd5526adc8ebda7797508a0c29c96fe463162f1d115b67",
+      "path": "source/artifacts/seed78302_film_gate_inference.pt"
+    },
+    {
+      "seed": 78302,
+      "condition": "depth_embedding",
+      "bytes": 615032,
+      "sha256": "15c0a0920b2a0db85782e41c1c167342c6d3cbea82c07667b7091e7b0efe4e9e",
+      "path": "source/artifacts/seed78302_depth_embedding_inference.pt"
+    }
+  ],
   "draw_replay": {
     "command": "python experiments/mirror_applications/ma-783-unipool-layer-role-mirror/source/verify_draw.py",
-    "pool_hash": "PASS",
-    "uniform_selection": "PASS",
     "pool_size": 555,
-    "selected_id": "MA-783"
+    "selected_id": "MA-783",
+    "status": "PASS"
   },
-  "protocol_sha256": "8213fb9615dd14934d658a86bf974d0abee63d287f4b07e83aa15d7301f9f54d",
-  "tests": {
+  "preflight_tests": {
     "passed": 3,
     "failed": 0,
-    "command": "python -m unittest discover -s experiments/mirror_applications/ma-783-unipool-layer-role-mirror/tests -v",
-    "status": "passed before corpus access"
+    "timing": "before corpus access"
   },
-  "protocol_amendment_before_data": {
-    "audit_gate_added": true,
-    "dataset_values_accessed": false
-  }
+  "development_gate_decision": {
+    "decision": "FAIL",
+    "quality_storage_gate_pass": false,
+    "mirror_specific_gate_pass": false,
+    "audit_accessed": false,
+    "total_wall_seconds": 915.9321393449973
+  },
+  "limitations": "Two development seeds and a 1,200-update fixed-budget screen; not a capacity or optimized runtime claim."
 }
