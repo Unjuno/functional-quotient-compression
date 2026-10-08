@@ -76,3 +76,7 @@ The frozen [MA-1162 GVA Stage-0 protocol](pilots/gva_alias_stage0/PROTOCOL.json)
 ## Recorded gauge rank audit: MA-1156 Stage-0
 
 [Precommitted protocol](pilots/gauge_rank_stage0/PROTOCOL.json) and [fresh five-world result](pilots/gauge_rank_stage0/REPORT.md): a generic 4x2 Q/K bare-score Jacobian has rank 12 (four gauge-only null directions); adding one nontrivial RoPE rotation yields joint rank 14 (two commuting gauge directions). Both predictions held in 5/5 fresh worlds with exact invalid-shear counterexamples. This is a **negative control for false logical functional multiplicity**, not evidence of improved Mirror task quality/bytes; MA-1156 stays UNTESTED for its planned learned-code hypothesis.
+
+## Independent runbook
+
+Open [SELF_CONTAINED_RUNBOOK.md](SELF_CONTAINED_RUNBOOK.md) for exact isolated worktree commands, per-MA launch interface, CPU algebra pilots, and the data/audit firewall. It intentionally does not alter the active worker context.
