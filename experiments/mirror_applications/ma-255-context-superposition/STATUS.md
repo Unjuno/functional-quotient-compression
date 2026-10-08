@@ -7,11 +7,11 @@
 - Fresh/audit opened: no (25511–25513 sealed)
 - Results committed: yes
 - Verification committed: yes
-- Registry row updated: pending
+- Registry row updated: yes (FAIL, fresh remains sealed)
 
 ## Next action
 
-Record MA-255 failure in registry, ledger and status board; proceed to MA-257.
+Tests and serialized-payload replay verified locally; failure is present in registry/claim/status board. Continue to MA-257 after checking for a newer branch.
 
 ## Blockers
 
