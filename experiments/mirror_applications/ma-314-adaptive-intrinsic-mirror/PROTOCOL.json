@@ -1,7 +1,7 @@
 {
   "experiment_id": "MA-314",
   "title": "Adaptive intrinsic dimension with Mirror view and private residual",
-  "status": "FRESH_LOCKED",
+  "status": "FAIL",
   "evidence_lane": "MECHANISM/STORAGE/QUALITY/COMPUTE",
   "base_commit": "e037a79",
   "hypothesis": "On a mixed task bank with known task-to-task variation in intrinsic complexity, validation-selected per-task dimension plus a Mirror angle for a shared-radius first coordinate pair and private higher-dimensional residuals will lower the actual serialized payload by at least 10% versus validation-selected ordinary intrinsic coefficients, while meeting the same held-out quality gate. Tasks outside the orbit must fall back to private intrinsic coordinates.",
@@ -67,7 +67,8 @@
       31413
     ],
     "threshold": 0.0001,
-    "access_condition": "Only after source, threshold, byte gates, task split, and controls are frozen."
+    "access_condition": "Only after source, threshold, byte gates, task split, and controls are frozen.",
+    "opened": true
   },
   "training": {
     "optimizer": "least-squares fit in a frozen deterministic random intrinsic basis; 720-point angle grid for Mirror first pair",
@@ -111,5 +112,6 @@
       "before_fresh_access": true,
       "reason": "Corrected active inference operation proxy to use each task\u2019s selected dimension rather than max dimension for all adaptive tasks. Preserved the earlier summary JSON in protocol_variants/pre_active_ops_correction/. Payload bytes and held-out metrics are unchanged."
     }
-  ]
+  ],
+  "decision_note": "Fresh adaptive Mirror payload exceeded adaptive direct intrinsic coefficients by about 5.2% in 3/3 worlds, missing <=0.90x. Held-out quality passed, but fitting compute was about 103x and throughput 0.59\u20130.69x. The adaptive dimension saving versus fixed d=16 was reproduced by the simple direct control."
 }
