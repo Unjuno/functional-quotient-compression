@@ -1,0 +1,60 @@
+{
+  "experiment_id": "MA-767",
+  "title": "Online task adaptation in Mirror-code space for cellular automata",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/RUNTIME",
+  "base_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
+  "draw_id": "Draw36",
+  "hypothesis": "For online adaptation of 1D binary cellular-automaton local transition rules, updating a two-coordinate Mirror code over a shared rule basis will reach the target rule with fewer update-state bytes than full-rule adaptation and preserve prior tasks when codes are banked. A hard task with rule logits outside the shared rank-2 subspace should expose the boundary where private/full-rule state is necessary.",
+  "physical_object": "shared 8-entry local CA rule-logit vector plus rank-2 view basis",
+  "mirror_coordinate": "per-task 2D code updated online from neighborhood/next-state observations",
+  "logical_multiplicity": "multiple task-specific CA transition rules on one shared physical rule",
+  "prior_art_refs": [
+    "PA198"
+  ],
+  "controls": [
+    "frozen shared rule without task adaptation",
+    "Mirror 2D code online SGD and per-task code bank",
+    "full 8-logit local-rule online SGD with per-task rule snapshots",
+    "independent per-task full rule state as quality/storage upper control"
+  ],
+  "task": "Predict next cell from one of 8 binary neighborhoods sampled from seeded 1D CA trajectories; report next-state accuracy by online examples, rule-logit MSE, retention of earlier tasks, inference bytes and update compute.",
+  "development": {
+    "worlds_or_seeds": [
+      76701
+    ],
+    "selection_metric": "accuracy vs online examples and actual bytes on four development rules; no audit-driven code-rank changes"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      76711,
+      76712,
+      76713
+    ],
+    "locked_before_access": true,
+    "split": "four development task rules estimate shared rank-2 basis; each fresh world contains four in-subspace rules and four independent hard rules, each with 256 online observations and 512 held-out observations"
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "shared rule logits",
+      "basis vectors",
+      "task code bank or full rule snapshots",
+      "task indices/metadata"
+    ]
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true
+  },
+  "success_gate": "On >=2/3 fresh worlds, easy-rule Mirror accuracy after 64 online examples is within 5 percentage points of task-specific full-rule control and serialized code-bank payload <=60% of full-rule snapshots; previous-task accuracy after adapting all tasks remains >=95% of its post-adaptation value. Report hard-rule gap and update latency.",
+  "failure_gate": "FAIL if easy-rule accuracy/storage/retention gate fails on >=2/3 seeds or if the hard-rule gap cannot be reduced by full local-rule state. PROMISING only when the easy-rule storage/quality/retention gates pass; no general CA claim.",
+  "boundaries": [
+    "local rule prediction screen, not full spatial pattern-generation benchmark",
+    "synthetic deterministic teacher rules",
+    "logical task multiplicity is measured by held-out rule quality and bytes, not code combinations",
+    "no natural data or learned autonomous self-organization claim"
+  ]
+}
