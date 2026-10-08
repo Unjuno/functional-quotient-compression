@@ -1,6 +1,6 @@
 {
   "experiment_id": "MA-879",
-  "phase": "pre_audit_freeze",
+  "phase": "completed_audit",
   "files": {
     "PROTOCOL.json": "d77eb21d920eb6d8c17add215d88c410c5a705e488b4137855408397fd0a0fc7",
     "source/run_ma879.py": "608be8d2235a65a3a9d0b25b7d2c030dbe243a97719619e28b260cd224eb77bb",
@@ -44,6 +44,10 @@
     47,
     59
   ],
-  "audit_query_accessed": false,
-  "settings_frozen": true
+  "audit_query_accessed": true,
+  "settings_frozen": true,
+  "raw_metrics_sha256": "129c3f331b6597361f47c5290d9c8d77a092f440690770e813618c856e0f4613",
+  "reported_metrics_sha256": "8fcaac900fb079b162ffb6c04a3c36d51bc8a8a97c52c76e20924416c3bc7dd2",
+  "audit_rows": 432,
+  "replay_check": "Two audit executions exactly reproduced row IDs, payload bytes, cache MSE, attention output MSE, KL and target NLL; timing varied."
 }

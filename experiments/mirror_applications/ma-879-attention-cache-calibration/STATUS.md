@@ -1,6 +1,6 @@
 # MA-879 status
 
-Status: SCREENING — Draw32 and protocol frozen before calibration.
+Status: PROMISING — Draw32 and update settings frozen before fresh query audit.
 
 ## H
 
@@ -12,12 +12,12 @@ Four-context causal attention screen, aligned and unrelated KV translators, deve
 
 ## D
 
-Pending.
+**PASS aligned calibration gate.** Same-size Mirror attention calibration reduced held-out output MSE relative to raw-cache Mirror in 3/3 audit worlds (pooled 0 vs 1.33e-6; 336 B each), while attention KL/NLL did not regress against independent attention mappers. Weighted ridge was nearly exact at 688 B; basis2 nearly exact at 512 B. Off-orbit Mirror output MSE was 0.319. CPU latency 0.404 ms Mirror vs 0.0087 ms weighted ridge.
 
 ## C
 
-The native attention-calibrated independent mapper or plain basis may dominate Mirror.
+The aligned teacher favors Mirror; raw-cache Mirror is already near exact, weighted ridge is exact and much faster, and unrelated maps need independent capacity.
 
 ## U
 
-No results yet. No natural LM or end-to-end cache transfer.
+Synthetic mechanism only; no natural LM, autoregressive likelihood or end-to-end cache transfer.
