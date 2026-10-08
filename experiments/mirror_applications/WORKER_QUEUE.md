@@ -431,3 +431,8 @@ A worker may batch implementation work across a family, but scientific status is
 ## Stop rule
 
 If two consecutive candidates in a family fail for the same demonstrated structural reason, stop that family and write a family diagnostic before continuing.
+
+
+## Random selection worker log — draw 16
+
+Uniform pseudorandom draw over 1041 UNTESTED candidates after excluding 74 IDs with remote MA branches and paused families. Selected MA-224 at zero-based index 186; pool SHA-256 `6201dcdabf93c6bc99aa962dccd44307064a8352d6046b230819ef9bb1acd808`; CSV SHA-256 `9377d6da9fea73269a087f7f8b61fe167facfa8a347884d2af9278a904dd1105`. Candidate deferred as UNTESTED because its registered PA11 citation concerns VSA binding, not the registered SSM/convolution-kernel target. See `experiments/mirror_applications/ma-224-kernel-reference-blocker/`. Continue random draws.

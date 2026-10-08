@@ -1,0 +1,45 @@
+{
+  "experiment_id": "MA-224",
+  "title": "Convolution-kernel Mirror \u2014 reference mismatch preflight",
+  "status": "UNTESTED \u2014 repository reference mismatch blocker",
+  "evidence_lane": "PREFLIGHT",
+  "base_commit": "16807a7d6dc17a834a44ed3cc793ccc28b615691",
+  "hypothesis": "A small state/kernel/execution coordinate m may expose multiple useful logical state machines or runtime views from a shared physical kernel/state object.",
+  "registry_row": {
+    "category": "SSM / convolution / hardware",
+    "concept": "convolution-kernel Mirror",
+    "physical_object": "state-space / kernel / execution object",
+    "mirror_coordinate": "state/kernel/execution coordinate",
+    "logical_multiplicity": "logical state machines or runtime views",
+    "prior_art_refs": [
+      "PA11"
+    ]
+  },
+  "prior_art_refs_read": {
+    "PA11": "Vector-symbolic / holographic binding (MAP, HRR and Hadamard binding); not SSM or convolution-kernel reuse."
+  },
+  "blocker": "Registry row describes SSM/convolution-kernel/execution-object reuse and cites PA11; PA11 is Practical Lessons on Vector-Symbolic Architectures in Deep Learning-Inspired Environments, about MAP/HRR/Hadamard binding. No direct kernel/SSM prior art is identified by this citation.",
+  "development": {
+    "opened": false
+  },
+  "fresh": {
+    "opened": false
+  },
+  "controls_not_run": [
+    "native SSM/kernel baseline",
+    "ordinary conditional convolution/kernel mixing",
+    "low-rank or gate control",
+    "independent kernel/state upper control"
+  ],
+  "success_gate": "Unspecified until correct domain prior art and exact task are identified; do not infer or amend the scientific hypothesis here.",
+  "failure_gate": "Not evaluated.",
+  "selection": {
+    "draw_number": 16,
+    "pool_size": 1041,
+    "index": 186,
+    "selected": "MA-224",
+    "pool_id_sha256": "6201dcdabf93c6bc99aa962dccd44307064a8352d6046b230819ef9bb1acd808",
+    "pool_csv_sha256": "9377d6da9fea73269a087f7f8b61fe167facfa8a347884d2af9278a904dd1105",
+    "seed_hex": "b356d9fa475e302cc8d7630b2bb655228250fae0e233b9b959b3f9c4750a92fb"
+  }
+}
