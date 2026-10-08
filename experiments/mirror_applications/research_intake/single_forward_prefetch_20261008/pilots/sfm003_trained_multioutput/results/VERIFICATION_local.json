@@ -1,0 +1,60 @@
+{
+  "scope": "stage0 synthetic, frozen source common heavy trunk, train only tiny task heads, no native LM claims",
+  "software": {
+    "torch": "2.10.0+cpu",
+    "numpy": "2.3.5",
+    "python": "3.13.5"
+  },
+  "hardware": {
+    "cpu": "",
+    "cuda": false,
+    "threads": 1
+  },
+  "seed_sets": {
+    "dev": [
+      11,
+      12,
+      13
+    ],
+    "fresh": [
+      101,
+      102,
+      103,
+      104,
+      105
+    ]
+  },
+  "K": [
+    4,
+    5
+  ],
+  "beta": [
+    0.0,
+    0.3,
+    0.8
+  ],
+  "steps": 350,
+  "lr": 0.04,
+  "train_examples": 768,
+  "serialization": "named float32 np.savez arrays, real file byte count; no broad tokenizer/LLM metadata",
+  "main_boundary": "ordinary paired-Givens head is exactly equivalent to Mirror head (M0); native linear multi-head shares trunk too",
+  "files": {
+    "dev_quality.csv": {
+      "sha256": "912c0251521fcb8dd46cdc05891fdb6841426e50493f9472ed5c4c79c3bc1b2b",
+      "bytes": 10374
+    },
+    "dev_timing.csv": {
+      "sha256": "0e305df80d9db11e487366e6cdcd7a719f6da18e253691802567a26b92ddc0cc",
+      "bytes": 1834
+    },
+    "fresh_quality.csv": {
+      "sha256": "de659664792dacc6c49d23a5ab7fa24dbb924c4f21f0228a2d31f57508183d38",
+      "bytes": 17444
+    },
+    "fresh_timing.csv": {
+      "sha256": "0c535da6590082308a6672341d2927ad0ebd07f5fefaf83605afb0c7f668898b",
+      "bytes": 3234
+    }
+  },
+  "source_sha256": "60541467a66369157747987a52c42ee5d16a6383d3e6a3e49c2761d0baa5cf48"
+}
