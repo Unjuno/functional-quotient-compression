@@ -217,6 +217,18 @@ Read PA312..317. Native CoOp/CoCoOp/MaPLe coupled prompts, SAM2 per-object strea
 
 Read PA318..325. Preserve ScaNN/RaBitQ bounded quantizer, Matryoshka nested prefixes, ColBERTv2 residual token vectors, PLAID centroid pruning, QINCo generated codebook, DiskANN disk traversal or PGM correctness guarantee as applicable. Compare ranking recall/nDCG/MRR and complete index+codebook/generator memory, update cost and tail latency. Exact isometric m that leaves rankings unchanged is not independent learned capacity.
 
+### Time-series forecasting and temporal foundation models (MA-1046..1061)
+
+Read PA326..336, the fourteenth research notes and the selected MA hypothesis only. Native Chronos/TimesFM/Moirai/PatchTST/TimeMixer/iTransformer/TRACE are stronger than a freshly trained weak baseline; DLinear/seasonal naive and simple scalar/FiLM/rank-1 are minimum-cost controls. Lock chronological splits, frequency×horizon held-out pairs and OOD series. Report forecast quality (MASE/WQL/CRPS/coverage as applicable), trained/frozen state and real throughput.
+
+### Recommendation and high-cardinality ID embeddings (MA-1062..1078)
+
+Read PA337..343. DHE requires no per-ID embedding table, TT-Rec has tensor-train lookup kernels/caches, and QR/VQ-Rec already give compact item codes. Compare the native source method with native plus Mirror m and a simpler field/task gate. Evaluate cold IDs, CTR AUC/logloss, sequential ranking, full ID/codebook/table/generator bytes, GPU memory and QPS/P99. Per-ID m states count linearly with ID cardinality; no free IDs, item-frequency hindsight or private data.
+
+### Earth-observation multi-sensor foundation models (MA-1079..1095)
+
+Read PA344..350. DOFA is a direct dynamic wavelength-to-filter hypernetwork; AnySat/SatMAE, CROMA, Prithvi, TerraMind and AlphaEarth provide multisensor conditioning and task baselines. Report sensor-response/calibration metadata, generated filters, pixel/GSD/band counts, OOD sensor/held-out wavelength combinations, geographic/time-separated land cover/change/segmentation metrics, bytes and GPU inference wall-time. SAR and optical sensors cannot be assumed information-equivalent. Require actual functional advantage beyond one sensor ID or ordinary spectral mask.
+
 ## Historical result loading rule
 
 Do **not** load every SRM/MS/MN document.
