@@ -1,19 +1,28 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-494",
+  "protocol_sha256": "2c000f7edbdee0bd71cac3322a017dfcb2e9d4d68c051e045c5f1f213d5b3ae6",
+  "commit": "c48b1be3153f60d58e998cf880b850babde96ed6",
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "pytest -q experiments/mirror_applications/ma-494-error-correcting-expert-address/tests",
+    "passed": 3,
+    "failed": 0
   },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "roundtrip_checked": true,
+    "byte_exact": true
   },
   "metric_replay": {
-    "checked": false,
-    "max_difference": null
+    "checked": true,
+    "max_difference": 0.0
   },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "fresh_split_integrity_checked": true,
+  "fresh_accessed": false,
+  "native_ecoc_is_standard_control": true,
+  "disposition": "FAIL for Mirror-specific attribution; Hamming(7,4) meets frozen p=.05 reliability/bytes gate but is a standard native ECOC address code.",
+  "notes": [
+    "Every complete inference payload includes the expert matrix bank and packed address codebook bytes.",
+    "Both frozen development seeds replayed all five noise rates with zero metric difference.",
+    "Fresh seeds 49411-49413 remained sealed.",
+    "Synthetic independent bit-flip channel only; no trained router claim."
+  ]
 }
