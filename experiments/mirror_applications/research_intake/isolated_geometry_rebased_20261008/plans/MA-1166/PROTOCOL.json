@@ -1,0 +1,70 @@
+{
+  "schema_version": 2,
+  "experiment_id": "MA-1166",
+  "title": "KQ-SVD multi-context Mirror query-conditioned cache View",
+  "status": "UNTESTED",
+  "plan_only": true,
+  "worker_claim": false,
+  "branch": "research/mirror-isolated-protocols-rebased-20261008",
+  "base_sha": "aba15e1b83eb33b03d48663620a983bffd3952b6",
+  "priority": "P0",
+  "prior_art_refs": [
+    "PA426",
+    "PA425",
+    "PA432"
+  ],
+  "related_existing": "MA-691, MA-692, MA-879",
+  "hypothesis": "For heldout query roles, a shared source-KQ-SVD dictionary and small m attains attention-score RMSE <=1.05x per-role native KQ-SVD at complete cache+projector bytes <=0.90 native, with <=1.10 P95 latency and <=0.02 nat/token target NLL regression when tested on a causal LM.",
+  "physical_object": "canonical physical K/V cache and source-calibrated query-aware KQ-SVD projector bank",
+  "mirror_code": "query-family k-dimensional m selecting a structured query-side readout without copying physical cache",
+  "native_control": "per-role native KQ-SVD query-key low-rank approximation with source-only calibration",
+  "controls": [
+    "native per-role KQ-SVD with full paid projector bytes",
+    "one shared native KQ-SVD projector",
+    "K-only SVD",
+    "same-byte linear/diagonal task-code projector",
+    "INT4/INT8 full-dimensional KV at equal physical bytes"
+  ],
+  "screen": {
+    "synthetic": "CPU synthetic K:128x32, 4 source query-role covariance families and 2 whole heldout query roles with distinct spectra; optional frozen tiny LM calibration with role and prompt identities disjoint from audit.",
+    "steps": "Native control minimizes query-key score approximation, not raw key weight error. First calculate exact rank-r SVD of source score matrix Q@K.T as an oracle bound, then source-only implementable KQ-SVD projection, then K-only SVD. Fit task m to source projectors; contrast ordinary linear code versus structured rotation. Score on heldout Q before/after softmax and on attention output. Validate bad RoPE-noncommuting transforms and counterfactual long-tail queries.",
+    "hardware": "NumPy float64 algebra and torch float32 CPU first; CUDA causal LM only if available and recorded.",
+    "metrics": "score RMSE; attention output/logit error; heldout NLL if LM; physical cache aliases and bytes; actual projector bank bytes incl metadata; P95 attention time and active FLOPs."
+  },
+  "data_firewall": {
+    "dev_seeds": [
+      11,
+      12,
+      13
+    ],
+    "fresh_seeds": [
+      101,
+      102,
+      103,
+      104,
+      105
+    ],
+    "fresh_task_identities_disjoint": true,
+    "fresh_never_tuned": true,
+    "fresh_locked_before_access": true,
+    "independent_replication_before_adopted": true
+  },
+  "gates": {
+    "PASS": "4/5 fresh query roles score RMSE <=1.05 per-role native at <=0.90 total bytes and <=1.10 P95, and a strict Mirror-specific advantage over same-byte plain linear code on an independent axis; conditional NLL <=+0.02 nat/token.",
+    "FAIL": "Native linear code matches/surpasses, audit Q used to tune projection, RoPE-invalid change claimed exact, or resident KV actually cloned.",
+    "UNCERTAIN": "Native or real byte/runtime evidence missing; calibration leakage or too few independent worlds."
+  },
+  "uncertainty": {
+    "components": [
+      "u_seed",
+      "u_eval",
+      "u_num"
+    ],
+    "combined": "u_c=sqrt(sum(u_i^2)) if independent; include covariances otherwise",
+    "k_cov": 2,
+    "small_n_warning": true
+  },
+  "storage": "actual serialized inference payload bytes, including all shared bases, code/metadata and cache allocations",
+  "compute": "active FLOPs/MAC, examples/tokens, updates, calibrated P50/P95 seconds",
+  "result_exists": false
+}

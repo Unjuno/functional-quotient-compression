@@ -1,0 +1,70 @@
+{
+  "schema_version": 2,
+  "experiment_id": "MA-1165",
+  "title": "xKV cross-layer shared-basis Mirror reconstruction codes",
+  "status": "UNTESTED",
+  "plan_only": true,
+  "worker_claim": false,
+  "branch": "research/mirror-isolated-protocols-rebased-20261008",
+  "base_sha": "aba15e1b83eb33b03d48663620a983bffd3952b6",
+  "priority": "P0",
+  "prior_art_refs": [
+    "PA425",
+    "PA426",
+    "PA432"
+  ],
+  "related_existing": "MA-582, MA-695, MA-691",
+  "hypothesis": "At fixed native xKV rank and selector, Mirror layer m reduces complete physically resident compressed KV state >=10% relative to xKV-SR, with <=0.02 nats/token NLL increase and P95 <=1.10x native, while beating a same-byte ordinary linear coefficient bank.",
+  "physical_object": "native xKV post-hoc shared token basis and per-layer KV reconstruction coefficients",
+  "mirror_code": "layer/head m encoding additional shared reconstruction dictionary",
+  "native_control": "xKV-SR full native cross-layer SVD, selective token reconstruction",
+  "controls": [
+    "native xKV-SR matched group/rank and sparse token selector",
+    "ordinary truncated linear factorization of xKV reconstruction coefficients",
+    "native xKV dense readout",
+    "independent per-layer SVD",
+    "bitpacked INT4 native KV at same whole-cache bytes"
+  ],
+  "screen": {
+    "synthetic": "CPU source-only synthetic 8-layer, 128-token x 32-channel KV with low-rank signal plus independent perturbations; 4 unseen entire layer-role families. Natural follow-up: frozen tiny LM with heldout prompts and matched checkpoint.",
+    "steps": "Compute native grouped-layer xKV shared token basis with thin SVD; keep it physically identical for all conditions. Factorize only native per-layer reconstruction coefficient bank using source-only least squares/SVD. Train m (k=2,4,8) as diagonal/short Givens coefficient changes. Reconstruct the exact same selected token positions as native xKV-SR. Do not compare a dense xKV to sparse Mirror.",
+    "hardware": "CPU torch float32, NumPy float64 SVD; production xKV-SR CUDA kernel optional. Report GPU type, clock, batch, context and fused-kernel status; CPU eager benchmarks are not xKV-SR throughput proof.",
+    "metrics": "heldout NLL; KV reconstruction/logit error; physical cache bytes; actual NPZ/safetensors total bytes incl token basis, dictionary and m; P50/P95 decode seconds; SVD and selection FLOPs."
+  },
+  "data_firewall": {
+    "dev_seeds": [
+      11,
+      12,
+      13
+    ],
+    "fresh_seeds": [
+      101,
+      102,
+      103,
+      104,
+      105
+    ],
+    "fresh_task_identities_disjoint": true,
+    "fresh_never_tuned": true,
+    "fresh_locked_before_access": true,
+    "independent_replication_before_adopted": true
+  },
+  "gates": {
+    "PASS": "4/5 fresh worlds <=+0.02 nat/token NLL, median complete KV bytes <=0.90 native xKV-SR, median P95 <=1.10 native; simple native linear coefficient code not Pareto-dominant.",
+    "FAIL": "Source-only linear coefficient factorization ties or beats m; lost native selector advantage, miscounted basis/metadata, or NLL fails >=2/5 worlds.",
+    "UNCERTAIN": "Native or real byte/runtime evidence missing; calibration leakage or too few independent worlds."
+  },
+  "uncertainty": {
+    "components": [
+      "u_seed",
+      "u_eval",
+      "u_num"
+    ],
+    "combined": "u_c=sqrt(sum(u_i^2)) if independent; include covariances otherwise",
+    "k_cov": 2,
+    "small_n_warning": true
+  },
+  "storage": "actual serialized inference payload bytes, including all shared bases, code/metadata and cache allocations",
+  "compute": "active FLOPs/MAC, examples/tokens, updates, calibrated P50/P95 seconds",
+  "result_exists": false
+}
