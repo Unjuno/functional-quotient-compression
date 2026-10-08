@@ -161,11 +161,11 @@ High-information P0:
 
 **PathNet path × role pause (2026-10-08):** MA-451/452 are verified FAILs with a repeated exact native Givens-conditioning alias; do not continue unchanged variants. See [family diagnostic](../../docs/phase2/PATHNET_MIRROR_PATH_ROLE_FAMILY_DIAGNOSTIC_2026-10-08.md). MA-453 Routing Networks is a distinct dynamic-routing candidate requiring its own native router controls.
 15. MA-483..485 — paused after MA-481/482 exact native VQ/RVQ aliases; see [family diagnostic](../../docs/phase2/VQ_MIRROR_FUNCTION_ADDRESS_FAMILY_DIAGNOSTIC_2026-10-08.md). Resume only with a materially different insertion hypothesis.
-16. MA-486/487 — completed FAIL screens; sparse coding aliases OMP and LISTA is dominated by direct top-3. See [family diagnostic](../../docs/phase2/SPARSE_FUNCTION_MIRROR_COORDINATE_DIAGNOSTIC_2026-10-08.md). MA-488 shared/private dictionary is active.
 16. MA-486/487 — completed FAIL screens; sparse coding aliases OMP and LISTA is dominated by direct top-3. See [family diagnostic](../../docs/phase2/SPARSE_FUNCTION_MIRROR_COORDINATE_DIAGNOSTIC_2026-10-08.md).
-17. MA-488 — shared/private dictionary + Mirror coefficients (**FAIL for Mirror-specific attribution:** at p=.125 private residuals give exact quality at 33.6% fewer bytes than full int8; at p=.25 the bank exceeds int8, and native shared/private exactly aliases; fresh sealed). MA-492 packet-plan latent is next P0.
-18. MA-492 — quantized packet-plan latent
-19. MA-494 — error-correcting Mirror expert IDs
+16. MA-486/487 — completed FAIL screens; sparse coding aliases OMP and LISTA is dominated by direct top-3. See [family diagnostic](../../docs/phase2/SPARSE_FUNCTION_MIRROR_COORDINATE_DIAGNOSTIC_2026-10-08.md).
+17. MA-488 — shared/private dictionary + Mirror coefficients (**FAIL for Mirror-specific attribution:** at p=.125 private residuals give exact quality at 33.6% fewer bytes than full int8; at p=.25 the bank exceeds int8, and native shared/private exactly aliases; fresh sealed). MA-494 error-correcting expert IDs are next P0; MA-492 is already a registered FAIL.
+18. MA-492 — quantized packet-plan latent (**FAIL**; discrete code matched same-bit VQ, did not beat unconditional categorical control; see registry/result report).
+19. MA-494 — error-correcting Mirror expert IDs (active P0 screen; PA95)
 20. MA-498 — learned code-distance regularization
 
 ## Seventh research-expansion queue — representation-space functional coordinates

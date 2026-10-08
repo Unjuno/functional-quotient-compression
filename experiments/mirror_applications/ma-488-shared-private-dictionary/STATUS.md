@@ -10,7 +10,7 @@
 
 ## Next action
 
-Proceed to MA-492 packet-plan latent (next available P0 in the queue).
+Proceed to MA-494 error-correcting expert addresses; MA-492 is already FAIL in the authoritative registry.
 
 ## Decisions / rulings
 
