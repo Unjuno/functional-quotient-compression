@@ -288,6 +288,16 @@ Always read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_THIRTEENTH
 
 The current next experiment remains **MA-255**; these are future hypotheses, not a new active worker priority.
 
+### MA-1116..1155 sixteenth research intake: KG, ISP, robotics, acoustic rooms
+
+Load `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_SIXTEENTH_SWEEP.md` and the selected PA382..413 items **only if your selected ID lies in this family**.
+
+- **Knowledge graphs MA1116..1125:** relation rotation, two-sided modulation and shared tensor relation cores already exist in RotatE, PairRE, QuatE, TuckER and CompGCN. For a genuinely new `m`, target relation×domain/time, independently fitted natural operators, or fewer private relation maps; compare filtered MRR/Hits@10, full entity+relation tensor bytes and scoring runtime. An exact triple-score-preserving gauge change is **zero new independent function**. KrausKGE's channel-rank/fan-out is a strong direct baseline.
+- **Camera/optics MA1126..1135:** ParamISP uses ISO/exposure EXIF metadata; Uni-ISP already learns shared camera-specific forward/inverse transforms; PQDynamicISP and modular ISP have locally controllable stages. A new `m` must win over these native controllers or MetaISP/OmniLens++ PSF code with held-out actual devices, paired RAW/sRGB, DeltaE/PSNR/LPIPS, codec/state bytes and true ISP FPS. Clipping destroys information; never promise exact inverse sRGB->RAW.
+- **Robotics MA1136..1145:** UP-OSI and RMA already use small dynamics codes with one physical policy. CoRMA, A-NC and morphology world models are direct controls. Policy Mirror `m` must provide additional benefit at **equal deployable sensor history**; mass/friction/privileged ground truth is *not* a fair test-time input. Test held-out physics and within-rollout changes, policy returns/falls, writable adaptation state, update FLOPs and latency. Simulation does not prove robot safety.
+- **Acoustic MA1146..1155:** NAF, retrieval-adapted NAF, TA-RIR, NAMS and few-shot direction-aware neural acoustic fields already use source/receiver/room conditioning. Mirror `m` must reduce per-room model state or improve sparse enrollment on real measured rooms. Report RIR waveform/phase/RT60/DRR/C50 and stored field+retrieval bytes, not magnitude-only match; hold out complete rooms and source/receiver pairs.
+- New candidates are **UNTESTED**. Preserve original 47 MA result statuses, the exploratory negative shifted-digit pilot and any precommitted worker experiments. **MA-255 remains the current next worker.**
+
 ### Recurrent/depth candidates
 
 MA-247 showed that even an aligned Givens teacher can fail a fixed-budget recurrent optimization screen. Include a scalar/static-LoRA optimization control and do not infer representational impossibility from failed convergence.
@@ -298,4 +308,4 @@ MA-247 showed that even an aligned Givens teacher can fail a fixed-budget recurr
 
 For MA-003, inspect shared-projection fusion, sign-View gate/bypass equivalence and antipodal cancellation. For KV candidates, inspect common-map value fusion, original key-width temperature after latent absorption, missing-information counterexamples and source-token cache provenance.
 
-Do not interrupt frozen runs or change audit seeds/gates. **Historical note:** 47 verified MA experiment directories were reconciled on 2026-10-08. The authoritative registry currently contains 1115 candidates, and MA-255 is still next. Never overwrite the expanded registry with the old 254-row worker checkout. PR #27 uses local CR subtest IDs, not new global MA IDs.
+Do not interrupt frozen runs or change audit seeds/gates. **Historical note:** 47 verified MA experiment directories were reconciled on 2026-10-08. The authoritative registry currently contains 1155 candidates, and MA-255 is still next. Never overwrite the expanded registry with the old 254-row worker checkout. PR #27 uses local CR subtest IDs, not new global MA IDs.
