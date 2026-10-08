@@ -1,0 +1,20 @@
+{
+  "experiment_id": "MA-453",
+  "title": "Dynamic Routing Network with logical Mirror blocks",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/RUNTIME",
+  "base_commit": "c6bc140",
+  "hypothesis": "Given a context router that selects one of two physical linear blocks, a two-angle Mirror address can expand each selected block into two useful logical functions, reducing mean held-out RMSE by at least 30% versus Routing Network blocks alone while staying within 1.25x actual routing-model bytes and no more than 1.25x rank-2 inference compute; exact native Givens conditioning tests attribution.",
+  "physical_object": "two shared four-dimensional linear function blocks selected by a context-driven router",
+  "mirror_coordinate": "two learned role-angle codes selected by context and applied after block routing",
+  "logical_multiplicity": "four block × role functions from two physical blocks and two role addresses",
+  "prior_art_refs": ["PA81"],
+  "controls": ["shared single block", "Routing Network with two physical blocks and fixed context router, no View", "routed two-block model plus two-angle Mirror address", "same routed model with rank-2 additive residual", "same routed model with full role-vector residuals", "direct native Givens conditioner (exact map control)", "four independent logical block vectors"],
+  "task": {"type": "four-dimensional linear regression; teacher output is selected by one-hot module context and one-hot role context; role applies a fixed Givens rotation; noise sigma=0.02", "modules": 2, "roles_per_module": 2, "examples_per_outer_update": 8, "examples_per_function_eval": 64, "outer_updates": 180, "router": "fixed deterministic argmax over the module-context one-hot; route ID is serialized and paid"},
+  "development": {"worlds_or_seeds": [45301,45302], "selection_metric": "mean held-out RMSE averaged across four module × role contexts", "hyperparameter_changes_after_run": "prohibited without numbered amendment"},
+  "fresh": {"worlds_or_seeds": [45311,45312,45313], "locked_before_access": true, "opened": false},
+  "storage": {"authority": "actual uncompressed .npz inference payload bytes", "paid_objects": ["router/context mapping", "all shared block tensors", "Mirror codebook or residual table", "rank-2 basis where used", "four independent vectors for full-bank control", "shape/dtype metadata"]},
+  "compute": {"report_training_examples": true, "report_outer_updates": true, "report_training_and_evaluation_ops_proxy": true, "report_training_wall_time": true, "report_router_accuracy": true, "report_query_wall_time": true, "report_inference_active_compute_per_example": true},
+  "gates": {"PROMISING": "Both seeds: Mirror RMSE <=0.70x routed blocks-only; actual payload <=1.25x routed blocks-only; per-example inference ops <=1.25x rank-2 residual; routing accuracy >=0.99; native Givens output and bytes do not match Mirror.", "FAIL": "Either seed misses a success gate, exact native Givens control matches Mirror payload/output, or independent logical blocks are strictly better on both quality and actual bytes.", "NOT ESTABLISHED": "Independent full logical block bank has RMSE >0.08 on both worlds or serialized payload/metric replay fails."},
+  "boundaries": ["Synthetic linear mechanism screen with a known one-hot context router; not a full learned Routing Network or neural model.", "Role angles are aligned with the generator, and the direct native Givens control is intentionally included.", "Fresh seeds stay sealed unless all frozen gates pass."]
+}

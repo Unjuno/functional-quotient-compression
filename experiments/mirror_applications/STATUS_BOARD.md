@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (169 completed; 461 UNTESTED)
+- P0: **630** (169 completed; 460 UNTESTED; 1 SCREENING)
 - P1: **422** (13 completed; 409 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **126 FAIL, 11 NOT ESTABLISHED, 45 PROMISING, 973 UNTESTED**
+- Current MA statuses: **126 FAIL, 11 NOT ESTABLISHED, 45 PROMISING, 972 UNTESTED, 1 SCREENING**
 - 47 baseline experiment directories remain present; 137 additional per-ID outcomes are linked to their dedicated research branches in `LIVE_BRANCH_RECONCILIATION.csv`.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This was the intake-time queue; current selection follows the live-branch reconciliation at the top of this board.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed at intake time; later live-branch outcomes are indexed above.
@@ -23,7 +23,7 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-453 — Routing Network with logical Mirror blocks (P0; PA81).** MA-452 FAIL was pushed and refs refreshed. No MA-453 experiment branch is present; MA-453 tests dynamic block routing separately from the paused PathNet path × role family. Remote MA-462/464 branches are tracked independently.
+**MA-453 — Routing Network with logical Mirror blocks (P0; PA81).** MA-452 FAIL was pushed and refs refreshed; no MA-453 branch is present. MA-453 is now SCREENING, with the PathNet path × role family paused separately under its diagnostic.
 
 MA-434 and MA-436 found exact native SSM parameterization aliases; MA-442 likewise aliases a native Givens angle conditioner. Its two-angle model beats the tested rank-2 LoRA on query RMSE and model-bank bytes, but misses the end-to-end runtime gate and is exactly reproduced by the native conditioned predictor. Fresh seeds remain sealed.
 
