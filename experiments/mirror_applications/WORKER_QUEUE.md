@@ -377,6 +377,29 @@ Scientific guards:
 
 Read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_FOURTEENTH_SWEEP.md` and PA326..350 before implementing any MA1046..1095.
 
+## Fifteenth research intake — gauge-invariant natural LoRA, shared serving and KV-cache state
+
+**New entries MA-1096..1115 are UNTESTED** and form a supplemental natural-adapter diagnostic and serving research family. They do **not** preempt the locked **MA-255 Parameter Superposition** experiment or any currently frozen worker run. Read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_FIFTEENTH_SWEEP.md` and PA351..371 when selecting one.
+
+**High-information scientific screens within this intake:**
+
+1. **MA1096** — true learned LoRA-bank row/column geometry with **GL(r) gauge invariance**. Compare real task deltas from identical base revision against natural (not planted) heldout task deltas. Preflight math/manifest intake: `research_intake/natural_lora_orbit_20261008/`.
+2. **MA1097–1099** — shared output B vs shared input A vs two-sided/pretrained-weight spectral spaces; compact structured Mirror m vs the **dense k×k CtS/CtM shared-core**, EigenLoRAx, diagonal/FiLM and native LoRA. Do not infer delta alignment solely from pretrained W singular stability.
+3. **MA1100–1104** — full adapter-bank economics and quality: native Compress then Serve clusters, CtM (merged-model objective), EigenLoRAx, VB-LoRA and MetaTT. Sweep task count, related/unrelated families, code dimension and actual serialized basis+code cost; measure GPU throughput.
+4. **MA1105–1109** — continual shared/private basis drift, LoDA, Pico, GLoRA/LoL/W2T factor gauge and Zhyper/HyperLoader task-condition generators. Hold out tasks, count optimizer/writable state, and never compare raw LoRA factors as unique coordinates.
+5. **MA1110–1112** — multi-agent canonical-cache + low-rank adapter state. **LRAgent Flash-LoRA-Attention and PReCache PreLRShared/ReBaseShared are mandatory direct controls** alongside PA154/155 aLoRA and MA691 exact algebra. Count physical KV alias versus copies, prefix/position provenance, resident bytes, TTFT, decode latency and quality.
+6. **MA1113–1115** — signed/low-bit LoRDBA controls, task-count compression break-even, and formal nonorthogonal-gauge perturbation tests.
+
+**Validity levels (do not collapse):**
+- L0 mathematical gauge invariance + synthetic harness tests;
+- L1 oracle representability of **natural heldout task weight updates** under shared bases;
+- L2 train a task code m from allowed new-task examples and test downstream performance against native baselines;
+- L3 prove net actual serialized-byte/VRAM and quality/latency gains in realistic serving.
+
+L0/L1 outcomes alone never justify MA PROMISING as a deployable compression claim. Pre-trained base SVD and shared bases may cost storage/calibration, and heldout test-task weight deltas cannot be used to fit a deployable code at inference.
+
+**Next candidate remains MA-255; no existing status or frozen protocol changed.**
+
 ## Historical P0 family sequence (completed screens; not current queue)
 
 The historical A–F lists below record previously screened experiments and must not override `STATUS_BOARD.md` (MA-255 next).
