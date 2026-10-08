@@ -1,0 +1,87 @@
+{
+  "experiment_id": "MA-1075",
+  "title": "HSTU retrieval with user-interest Mirror and candidate-role views",
+  "status": "FAIL \u2014 development stop condition met; fresh not opened",
+  "evidence_lane": "QUALITY/STORAGE/RUNTIME",
+  "base_commit": "16807a7d6dc17a834a44ed3cc793ccc28b615691",
+  "hypothesis": "A small role-conditioned Mirror code on the HSTU session/user representation improves held-out genre-conditioned retrieval beyond ordinary HSTU scoring, at better quality-normalized bytes/latency than the same-size ordinary pairwise role gain.",
+  "physical_object": "One HSTU session encoder and shared item embedding/code substrate.",
+  "mirror_coordinate": "Per-genre low-description diagonal Givens/scale coordinate m applied to the HSTU user/session vector at late scoring.",
+  "logical_multiplicity": "Genre/candidate-role-specific retrieval scores from the same session representation and item vectors.",
+  "prior_art_refs": [
+    "PA341",
+    "PA342"
+  ],
+  "native_prior_art": "Meta generative-recommenders HSTU official public implementation; VQ-Rec PA341 item codes, not novelty claim.",
+  "development": {
+    "dataset": "MovieLens-1M public ratings/movies; temporally ordered per-user.",
+    "split": "Per-user chronological first 80% train, next 10% development, last 10% fresh; each proposed boundary moves forward to avoid splitting equal-timestamp event groups; minimum 10 events/user.",
+    "hyperparameters_allowed": [
+      "Mirror code dimension",
+      "regularization",
+      "rank for byte-matched simple control"
+    ],
+    "selection_metric": "mean per-genre nDCG@10 on development next-item targets; choose by best quality/byte among latency-feasible settings.",
+    "fixed_seed": 41075,
+    "model": "Meta public HSTU, 2 blocks, one head, d=32/dqk=dv=32, max sequence 50; official architecture, reference CPU jagged layout ops",
+    "training_budget": "8,000 deterministic training examples, 2 epochs, batch 64, 32 sampled negatives, AdamW lr 1e-3; 250 updates per condition",
+    "methods": "native dot-product; 16-code-per-genre pairwise gain; equal-code-count per-genre Givens rotations",
+    "primary_metric": "macro mean of per-genre nDCG@10 on chronological dev next-item retrieval",
+    "latency_measurement": "Interleaved, randomized method order, torch CPU threads=1; 64 identical dev contexts, 768 samples/method; report P50/P95/P99 for full HSTU encoding plus all-item score.",
+    "decision": "FAIL: Givens is lower quality than native HSTU and pair-gain at the fixed budget; P99 is 11.7% slower than pair-gain after interleaved latency replay."
+  },
+  "fresh": {
+    "dataset_split": "last 10% chronologically per eligible user, defined before data access",
+    "opened": false,
+    "locked_before_access": true,
+    "split_integrity": "verify strict timestamp order across split boundaries after moving cuts forward across timestamp ties; no quality metric or model selection uses fresh labels."
+  },
+  "controls": [
+    "Native HSTU single shared session/item dot-product ranker.",
+    "HSTU + per-genre pairwise per-dimension gain (same 16-code/role shape as Mirror; actual total payload measured).",
+    "HSTU + per-genre dense readout upper reference if feasible.",
+    "VQ-Rec-native item-code method was reviewed; implementation unavailable in this open-source checkout, so no direct PA341 reproduction claim."
+  ],
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "HSTU tensors",
+      "item embedding/codebook",
+      "all genre m vectors",
+      "pairwise role-gain control tensors",
+      "genre maps and scorer metadata",
+      "runtime cache/state included separately"
+    ]
+  },
+  "compute": {
+    "report_training_examples_updates_flops_proxy_wall_time": true,
+    "runtime": "CPU batch-1 QPS and P99 under identical candidate sets; no GPU claim."
+  },
+  "success_gate": "On fresh time-ordered recommendation data, Mirror must improve macro per-role nDCG@10 over native HSTU and the same-code-count pair-gain control, at matched/nearby actual payload bytes and no >10% CPU P99 regression.",
+  "failure_gate": "FAIL the screen if Mirror loses to native HSTU without a quality/storage/runtime Pareto gain or if same-code-count pair gain matches/beats Mirror quality with lower latency.",
+  "boundaries": [
+    "This is a CPU-scale HSTU application screen; no trillion-parameter/scaling claim.",
+    "VQ-Rec is cited PA341 and must be distinguished; this screen does not reproduce its native item quantizer.",
+    "Exact official HSTU architecture from Meta source is used with Python equivalents of three FBGEMM jagged tensor ops; those utilities are deterministic layout operations only.",
+    "Random draw #17: pool size 1040, zero-based index 999, MA-1075. pool id SHA256 673adf8ac9cf2e6a4c26f751d52a11de0fbfcc8c75ab68740966db6a880dbb81. ordered pool file SHA256 876cefe9323c4b88d54b412e60781486dbabf52b62fc5f8bfd992a8597e1de20. seed 2a3739f280a1b76b52cbf534a46eeb5a3282d882dab93c313bb7237130029a17.",
+    "Meta generative-recommenders source commit 25e032d6f1e29b7f7652aa2b0a9f75499a4b1940.",
+    "Fresh 10% split quality metrics were not opened because the development gate failed; only chronology integrity was tested."
+  ],
+  "amendments": [
+    {
+      "date": "2026-10-08",
+      "scope": "development only, before fresh split evaluation",
+      "reason": "Freeze implementation dimensions/budget and use equal-weight per-genre aggregation; initial dev code reported micro aggregation, corrected from stored per-role scores without re-running or using fresh outcomes."
+    },
+    {
+      "date": "2026-10-08",
+      "scope": "development CPU latency only; before any fresh score evaluation",
+      "reason": "Initial P99 varied materially by method under concurrent CPU load. Repeated interleaved replay on identical dev contexts, single-threaded, 768 samples/method; this replaces initial noisy latency estimates for screening."
+    },
+    {
+      "date": "2026-10-08",
+      "scope": "temporal split construction; before fresh scores opened",
+      "reason": "Split audit found identical per-user timestamps crossing an 80/90% cut. Cuts now move forward to keep each equal-timestamp group within one partition; old development metrics retained as pre-amendment exploratory output and excluded from final decision."
+    }
+  ]
+}

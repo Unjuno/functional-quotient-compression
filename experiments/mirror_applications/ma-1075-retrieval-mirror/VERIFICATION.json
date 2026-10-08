@@ -1,0 +1,36 @@
+{
+  "experiment_id": "MA-1075",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-1075-retrieval-mirror/tests -v",
+    "passed": 5,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": false,
+    "authority": "actual committed torch.save inference payload files with SHA256 and bytes in source/development_seed41075.json"
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0,
+    "method": "macro nDCG recomputed from stored per-role dev metrics"
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_quality_metrics_opened": false,
+  "selection": {
+    "draw_number": 17,
+    "pool_size": 1040,
+    "index": 999,
+    "selected": "MA-1075",
+    "pool_ids_sha256": "673adf8ac9cf2e6a4c26f751d52a11de0fbfcc8c75ab68740966db6a880dbb81"
+  },
+  "notes": [
+    "Official HSTU architecture from Meta generative-recommenders commit 25e032d6f1e29b7f7652aa2b0a9f75499a4b1940.",
+    "MovieLens-1M raw data remains outside Git; download URL and SHA-256 are in source/data_provenance.csv and development metrics.",
+    "Corrected timestamp-tie split; older dev run preserved and excluded.",
+    "Fresh split was inspected only for chronology integrity; no quality metric was computed.",
+    "Screen failed against native and low-rank controls; no fresh run.",
+    "VQ-Rec native method was not reproduced; no VQ-Rec claim."
+  ]
+}

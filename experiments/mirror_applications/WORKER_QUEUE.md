@@ -431,3 +431,8 @@ A worker may batch implementation work across a family, but scientific status is
 ## Stop rule
 
 If two consecutive candidates in a family fail for the same demonstrated structural reason, stop that family and write a family diagnostic before continuing.
+
+
+## Random selection worker log — draw 17
+
+Uniform pseudorandom draw over 1040 eligible UNTESTED candidates after excluding 75 IDs with active remote MA branches and paused structural families. Selected MA-1075 at zero-based index 999; pool ID-list SHA-256 `673adf8ac9cf2e6a4c26f751d52a11de0fbfcc8c75ab68740966db6a880dbb81`; seed `2a3739f280a1b76b52cbf534a46eeb5a3282d882dab93c313bb7237130029a17`. The experiment failed its development screen and remains bounded to the recorded HSTU/MovieLens setup; see `experiments/mirror_applications/ma-1075-retrieval-mirror/`. Next selection is a new uniform draw, not the next registry ID.
