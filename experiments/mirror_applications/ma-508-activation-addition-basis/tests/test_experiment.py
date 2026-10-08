@@ -11,6 +11,7 @@ def test_native_pca_alias_and_codes_causally_change_hidden_outputs():
  w=run.world(86,0.0);obj,_=run.objects('shared_mirror',w,8)
  assert run.pack('shared_mirror',obj,8)==run.pack('native_pca',obj,8)
  assert float(obj['codes'][24].abs().max())>0
+ assert run.score('shared_mirror',obj,w)['max_output_change_when_code_zeroed']>1e-5
 
 
 def test_rank_eight_actual_payload_under_half_explicit_vectors():

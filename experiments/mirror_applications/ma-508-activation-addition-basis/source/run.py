@@ -58,7 +58,7 @@ def score(method,obj,w):
   mask=torch.arange(Q)!=t%Q;off.append(err[t,:,mask])
  offrmse=float(torch.cat([a.reshape(-1) for a in off]).square().mean().sqrt())
  if method in ('shared_mirror','native_pca'):
-  vhat=(obj['basis']@obj['codes'].T).T;unique=int(torch.unique(torch.round(vhat[held]*1e6),dim=0).shape[0]);zero=w['xte'][held];causal=float((torch.stack([add_vector(method,{'probe':probe,'basis':obj['basis'],'codes':torch.zeros_like(obj['codes'])},t,zero[i]) for i,t in enumerate(HELD)])-zero).abs().max());ops=D*obj['basis'].shape[1]+D
+  vhat=(obj['basis']@obj['codes'].T).T;unique=int(torch.unique(torch.round(vhat[held]*1e6),dim=0).shape[0]);zero=w['xte'][held];causal=float((yhat[held]-zero).abs().max());ops=D*obj['basis'].shape[1]+D
  elif method=='explicit_vector':vhat=obj['vectors'];unique=int(torch.unique(torch.round(vhat[held]*1e6),dim=0).shape[0]);causal=float(vhat[held].abs().max());ops=D
  else:vhat=torch.zeros(T,D);unique=0;causal=0.;ops=0
  return {'heldout_probe_relative_rmse':rel,'heldout_off_target_probe_rmse':offrmse,'heldout_behavior_count':len(HELD),'unique_heldout_views':unique,'max_output_change_when_code_zeroed':causal,'active_compute_proxy_per_example':ops,'active_compute_proxy_all_eval_examples':ops*T*NTE,'inference_wall_s':wall}
