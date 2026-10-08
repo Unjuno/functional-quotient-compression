@@ -98,3 +98,7 @@ Six new UNTESTED MA-1165..1170, PA425..433 controls; [implementation and dedupli
 ## KQ-SVD audit-algebra Stage-0 negative-control evidence
 
 The [preregistered MA-1166 control study](pilots/kqsvd_controls_stage0/REPORT.md), its [complete source](pilots/kqsvd_controls_stage0/source/run_stage0.py), [four unit tests](pilots/kqsvd_controls_stage0/source/test_stage0.py), [development/fresh CSV](pilots/kqsvd_controls_stage0/results/fresh_raw.csv) and [verification](pilots/kqsvd_controls_stage0/results/VERIFICATION.json) are preserved here. Native optimal score-aware rank-4 oracle mean error was 0.416 vs 0.902 key-only SVD on five fresh synthetic worlds; ordinary linear code bank 12,580 B vs full projected bank 15,886 B. **This does NOT certify any structured Mirror benefit** and leaves all MA statuses unchanged.
+
+## Internal historical-formula crossovers (new isolated branch only)
+
+Four extra UNTESTED MA-1171..MA-1174 and 12 existing-MA source-controlled protocol extensions are documented in [FORMULA CROSSOVER INDEX](../formula_crossovers_20261008/README.md). Original FQC E1–E7, SRM, TM and RA-Mirror formulas and their evidence boundaries are in the [audited formula ledger](../formula_crossovers_20261008/FORMULA_LEDGER.md). The newly extended read-only selfcheck validates 1174 staged rows and 19 independent plans. Current worker and scientific claims unaffected.

@@ -14,9 +14,9 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[3]
 APPS = ROOT / "experiments" / "mirror_applications"
-EXPECTED_MA = 1170
+EXPECTED_MA = 1174
 EXPECTED_PA = 433
-ISOLATED = range(1156, 1171)
+ISOLATED = range(1156, 1175)
 REQUIRED = ("id","family","proposal","shared_object","mirror_coordinate",
             "logical_multiplicity","cheapest_control","first_metric",
             "priority","status","prior_art_level","prior_art_refs",
@@ -107,6 +107,30 @@ def check():
                  "MA-1112-STANDARD_LORA_PREFIX.md"):
         if not (HERE / "existing" / name).exists():
             error("missing native-control supplement " + name)
+        if not (ROOT / "experiments" / "mirror_applications" / "research_intake" / "formula_crossovers_20261008" / "existing" / "MA-690.md").is_file():
+            error("missing formula crossover supplement MA-690")
+        if not (ROOT / "experiments" / "mirror_applications" / "research_intake" / "formula_crossovers_20261008" / "existing" / "MA-1114.md").is_file():
+            error("missing formula crossover supplement MA-1114")
+        if not (ROOT / "experiments" / "mirror_applications" / "research_intake" / "formula_crossovers_20261008" / "existing" / "MA-1099.md").is_file():
+            error("missing formula crossover supplement MA-1099")
+        if not (ROOT / "experiments" / "mirror_applications" / "research_intake" / "formula_crossovers_20261008" / "existing" / "MA-1156.md").is_file():
+            error("missing formula crossover supplement MA-1156")
+        if not (ROOT / "experiments" / "mirror_applications" / "research_intake" / "formula_crossovers_20261008" / "existing" / "MA-1160.md").is_file():
+            error("missing formula crossover supplement MA-1160")
+        if not (ROOT / "experiments" / "mirror_applications" / "research_intake" / "formula_crossovers_20261008" / "existing" / "MA-1165.md").is_file():
+            error("missing formula crossover supplement MA-1165")
+        if not (ROOT / "experiments" / "mirror_applications" / "research_intake" / "formula_crossovers_20261008" / "existing" / "MA-1166.md").is_file():
+            error("missing formula crossover supplement MA-1166")
+        if not (ROOT / "experiments" / "mirror_applications" / "research_intake" / "formula_crossovers_20261008" / "existing" / "MA-1081.md").is_file():
+            error("missing formula crossover supplement MA-1081")
+        if not (ROOT / "experiments" / "mirror_applications" / "research_intake" / "formula_crossovers_20261008" / "existing" / "MA-1146.md").is_file():
+            error("missing formula crossover supplement MA-1146")
+        if not (ROOT / "experiments" / "mirror_applications" / "research_intake" / "formula_crossovers_20261008" / "existing" / "MA-248.md").is_file():
+            error("missing formula crossover supplement MA-248")
+        if not (ROOT / "experiments" / "mirror_applications" / "research_intake" / "formula_crossovers_20261008" / "existing" / "MA-231.md").is_file():
+            error("missing formula crossover supplement MA-231")
+        if not (ROOT / "experiments" / "mirror_applications" / "research_intake" / "formula_crossovers_20261008" / "existing" / "MA-196.md").is_file():
+            error("missing formula crossover supplement MA-196")
     with (APPS / "CLAIM_LEDGER.csv").open(encoding="utf-8", newline="") as stream:
         claims=list(csv.DictReader(stream))
     for r in claims:
