@@ -1,19 +1,31 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-498",
+  "protocol_sha256": "1762dfc9085b07acfdd578a025419d4fc9127f02302b8c1e5a337a678097d321",
+  "tested_code_commit": "8e134e31bd625e54456454785576b5ed337ed111",
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "python -m pytest -q experiments/mirror_applications/ma-498-code-distance-bank/tests",
+    "passed": 3,
+    "failed": 0
   },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "actual_uncompressed_payload_lengths_replayed": true
   },
   "metric_replay": {
-    "checked": false,
-    "max_difference": null
+    "checked": true,
+    "max_difference": 0.0,
+    "full_sigma_curve_replayed": true
   },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "native_control": {
+    "mirror_vs_native_metric_learning_payload_identical": true,
+    "mirror_vs_native_metric_learning_outputs_identical": true
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_accessed": false,
+  "notes": [
+    "Both frozen development seeds were run; fresh seeds 49811-49813 remained sealed.",
+    "Frozen <=1.05x raw-ID payload gate failed at 9384/8842=1.0613 in each seed.",
+    "The sigma=.2 routing robustness subgate against random orthogonal codes passed, but ordinary metric learning exactly reproduces the result."
+  ]
 }
