@@ -2699,3 +2699,273 @@ Experimentally demonstrated a programmable silicon-photonic processor using a me
 
 **Mirror implication:** Optical phase-programming is established hardware; count configuration bits, calibration drift, insertion loss and measured reconfiguration cost before identifying Mirror-specific benefits.
 
+## PA296 — MACE equivariant interatomic potentials
+
+**MACE: Higher Order Equivariant Message Passing Neural Networks for Fast and Accurate Force Fields**  
+https://arxiv.org/abs/2206.07697
+
+High-order E(3)-equivariant atomistic force-field network.
+
+**Mirror implication:** Native equivariant energy/force potential is the control; added material-code m must retain force consistency and improve state/quality.
+
+## PA297 — MACE-MP material foundation model
+
+**A foundation model for atomistic materials chemistry**  
+https://arxiv.org/abs/2401.00096
+
+Pretrained shared foundation interatomic potential across material chemistries.
+
+**Mirror implication:** A reusable foundation potential is prior art. Compare Mirror material Views against its native frozen and fine-tuned models.
+
+## PA298 — NequIP equivariant force fields
+
+**E(3)-equivariant graph neural networks for data-efficient and accurate interatomic potentials**  
+https://www.nature.com/articles/s41467-022-29939-5
+
+E(3)-equivariant atomic environment neural potential for accurate forces.
+
+**Mirror implication:** Compare native NequIP and independent force fields; preserve energy invariance, force equivariance and conservative derivatives.
+
+## PA299 — MatterSim atomistic foundation model
+
+**MatterSim: A Deep Learning Atomistic Model Across Elements, Temperatures and Pressures**  
+https://arxiv.org/abs/2405.04967
+
+General atomistic model spanning diverse elements and thermodynamic conditions.
+
+**Mirror implication:** Mirror temperature/pressure/composition codes must beat native condition response and out-of-distribution simulations.
+
+## PA300 — Sparse fine-tuning materials models
+
+**Robust and Interpretable Adaptation of Equivariant Materials Foundation Models via Sparsity-promoting Fine-tuning**  
+https://arxiv.org/abs/2606.18691
+
+Selective sparse parameter updating of equivariant materials foundation models compared to full and equivariant low-rank tuning.
+
+**Mirror implication:** Mandatory strong sparse/native control; count selected weights/mask metadata and energy/force/MD quality before crediting Mirror m.
+
+## PA301 — Frozen-transfer interatomic adaptation
+
+**Fine-tuning foundation models of materials interatomic potentials with frozen transfer learning**  
+https://arxiv.org/abs/2502.15582
+
+Partially frozen pretrained potentials adapted for reactions and alloys with fewer reference computations.
+
+**Mirror implication:** Mirror task adaptation must improve the native frozen-transfer sample/parameter frontier and count ab-initio reference cost.
+
+## PA302 — FastMRI VarNet
+
+**End-to-End Variational Networks for Accelerated MRI Reconstruction**  
+https://arxiv.org/abs/2004.06688
+
+Unrolled multi-coil MRI neural reconstruction with sensitivity estimates and k-space consistency.
+
+**Mirror implication:** Compare native VarNet and matched scan/cascade adapters; uphold physical measurement consistency and realistic reconstruction metrics.
+
+## PA303 — MoDL unrolled inverse problems
+
+**MoDL: Model Based Deep Learning Architecture for Inverse Problems**  
+https://arxiv.org/abs/1712.02862
+
+Uses a shared denoiser across data-consistent iterative inverse-problem blocks.
+
+**Mirror implication:** Depth-tying is prior art. Mirror per-iteration m must beat shared MoDL and native learnable iteration coefficients.
+
+## PA304 — DUNE representation-space inverse problems
+
+**Deep Unrolled Networks in Representation Space Applied to MRI Reconstruction**  
+https://arxiv.org/abs/2606.21602
+
+Physics-aware MRI unrolling in learned representation space with data consistency.
+
+**Mirror implication:** Representation-space View requires data-consistency and measured image quality, not only a low-dimensional latent reconstruction.
+
+## PA305 — D2SA MRI test-time adaptation
+
+**D2SA: Dual-Stage Distribution and Slice Adaptation for Efficient Test-Time Adaptation in MRI Reconstruction**  
+https://arxiv.org/abs/2503.20815
+
+Distribution-level and slice-level MRI adaptation across scanners/protocols.
+
+**Mirror implication:** A scan m is not new test-time adaptation; count online updates, per-slice storage and disjoint measurement splits.
+
+## PA306 — Multi-contrast MRI INR
+
+**INR meets Multi-Contrast MRI Reconstruction**  
+https://arxiv.org/abs/2509.04888
+
+Investigates implicit neural representation for undersampled multiple-contrast MR imaging.
+
+**Mirror implication:** Compare native continuous contrast/scan conditioning, not only one independent model per sequence.
+
+## PA307 — SSDU self-supervised MRI
+
+**Self-Supervised Learning of Physics-Guided Reconstruction Neural Networks without Fully-Sampled Reference Data**  
+https://pmc.ncbi.nlm.nih.gov/articles/PMC7811359/
+
+Splits acquired k-space samples to train data-consistent reconstruction without fully sampled references.
+
+**Mirror implication:** MRI Mirror validation must prevent self-supervised mask leakage and hallucinated anatomy; SSDU is a native training control.
+
+## PA308 — Quantum data re-uploading
+
+**Data re-uploading for a universal quantum classifier**  
+https://quantum-journal.org/papers/q-2020-02-06-226/
+
+Reuses input-dependent angle gates over variational circuit depth.
+
+**Mirror implication:** Parameterized gate schedule is prior art; Mirror m requires multi-task functional gains beyond data re-uploading, with gate/shot costs.
+
+## PA309 — TensorHyper-VQC TT quantum adapter
+
+**TensorHyper-VQC: a tensor-train-guided hypernetwork for robust and scalable variational quantum computing**  
+https://www.nature.com/articles/s41534-025-01157-z
+
+Classical tensor-train hypernetwork generates trainable quantum circuit parameters and addresses noise/trainability.
+
+**Mirror implication:** TT-hypernetwork is strong direct control for compact generated quantum parameters; count hardware depth, shots and TT storage.
+
+## PA310 — Superposed parameterised quantum circuits
+
+**Superposed parameterised quantum circuits**  
+https://arxiv.org/abs/2506.08749
+
+Uses quantum random-access and postselection to represent multiple parameterised circuit states.
+
+**Mirror implication:** Virtual circuit multiplicity is not free: count qRAM, postselection success, repeated attempts and actual physical gates.
+
+## PA311 — VQC hardware-aware compilation
+
+**Hardware-Aware Compilation Reshapes Trainability in Variational Quantum Circuits**  
+https://arxiv.org/abs/2604.16527
+
+Shows transpilation changes gradient/trainability properties of variational quantum circuits.
+
+**Mirror implication:** Evaluate Mirror parameterized ansatz only after architecture-matched hardware compilation, noise and shot budgets.
+
+## PA312 — CoOp visual-language context learning
+
+**Learning to Prompt for Vision-Language Models**  
+https://arxiv.org/abs/2109.01134
+
+Learns prompt context vectors on frozen CLIP-like vision-language models.
+
+**Mirror implication:** Static learned prompt m is prior art; Mirror must beat CoOp at comparable bytes and novel-class transfer.
+
+## PA313 — CoCoOp conditional CLIP prompts
+
+**Conditional Prompt Learning for Vision-Language Models**  
+https://arxiv.org/abs/2203.05557
+
+Uses image-conditioned generated prompt token for base-to-novel class generalization.
+
+**Mirror implication:** Dynamic m is not novelty alone; compare conditional prompt generator cost and unseen-class accuracy to CoCoOp.
+
+## PA314 — MaPLe coupled multimodal prompts
+
+**MaPLe: Multi-modal Prompt Learning**  
+https://arxiv.org/abs/2210.03117
+
+Learns coupled visual/text prompts across layers of frozen vision-language model.
+
+**Mirror implication:** A vision×text factor code must beat the native coupled prompts, charging both branches and all layers.
+
+## PA315 — SAM2 promptable temporal memory
+
+**SAM 2: Segment Anything in Images and Videos**  
+https://arxiv.org/abs/2408.00714
+
+Video object segmentation from prompts using a streaming temporal memory bank.
+
+**Mirror implication:** Object memory and interactive mask prompts are native; Mirror must improve object-specific memory per byte and segmentation runtime.
+
+## PA316 — SAM2Long robust memory paths
+
+**SAM2Long: Enhancing SAM 2 for Long Video Segmentation with a Training-Free Memory Tree**  
+https://arxiv.org/abs/2410.16268
+
+Uses fixed-width memory-path tree search to reduce long-video segmentation drift.
+
+**Mirror implication:** Compare against memory tree, including all path-state bytes and cumulative errors; compressed View identity alone is insufficient.
+
+## PA317 — MoPEFT SAM adapter mixture
+
+**MoPEFT: A Mixture-of-PEFTs for the Segment Anything Model**  
+https://arxiv.org/abs/2405.00293
+
+Selects among multiple PEFT modules to adapt SAM across target domains.
+
+**Mirror implication:** Compare native mixture of PEFTs, not just LoRA or full SAM, with mask quality and encoder/adaptation compute.
+
+## PA318 — ScaNN anisotropic quantization
+
+**Accelerating Large-Scale Inference with Anisotropic Vector Quantization**  
+https://arxiv.org/abs/1908.10396
+
+Optimizes anisotropic quantization for efficient maximum inner-product approximate search.
+
+**Mirror implication:** Compare native ScaNN recall/latency/index bytes and SIMD lookups; an exact isometric View yields no new ranking information.
+
+## PA319 — RaBitQ controlled-error ANN
+
+**RaBitQ: Quantizing High-Dimensional Vectors with a Theoretical Error Bound for Approximate Nearest Neighbor Search**  
+https://arxiv.org/abs/2405.12497
+
+Compact random vector quantization with distance estimator bounds and SIMD/bitwise retrieval.
+
+**Mirror implication:** A Mirror query/shard code must improve recall-latency-byte frontier against error-controlled RaBitQ.
+
+## PA320 — Matryoshka nested embeddings
+
+**Matryoshka Representation Learning**  
+https://arxiv.org/abs/2205.13147
+
+Nested embedding prefixes support variable representation dimension and inference budgets.
+
+**Mirror implication:** Variable-rank feature View is already prior art; Mirror m must beat nested-prefix retrieval at fixed bit/latency budget.
+
+## PA321 — ColBERTv2 compressed late interaction
+
+**ColBERTv2: Effective and Efficient Retrieval via Lightweight Late Interaction**  
+https://aclanthology.org/2022.naacl-main.272/
+
+Compresses token-level late-interaction document vectors with residual coding.
+
+**Mirror implication:** Native residual document storage and MaxSim quality form the control; factorized task View cannot assume one vector per document.
+
+## PA322 — PLAID centroid-pruned late interaction
+
+**PLAID: An Efficient Engine for Late Interaction Retrieval**  
+https://arxiv.org/abs/2205.09707
+
+Uses centroid interaction/pruning to reduce ColBERT multivector search time.
+
+**Mirror implication:** Mirror logical search Views must beat PLAID's actual index/traversal latency, not merely centroid reconstruction.
+
+## PA323 — QINCo implicit residual codebooks
+
+**Residual Quantization with Implicit Neural Codebooks**  
+https://proceedings.mlr.press/v235/huijben24a.html
+
+Generates stage-dependent residual codebooks conditioned on decoded vector.
+
+**Mirror implication:** Implicitly shared codebooks are prior art; Mirror m must improve true vector search and generated-codebook storage/compute.
+
+## PA324 — DiskANN SSD graph retrieval
+
+**DiskANN: Fast Accurate Billion-point Nearest Neighbor Search on a Single Node**  
+https://proceedings.neurips.cc/paper/2019/hash/09853c7fb1d3f8ee67a61b6bf4a7f8e6-Abstract.html
+
+Uses SSD-friendly approximate-neighbor graph access at large scale.
+
+**Mirror implication:** Mirror graph or query Views must beat the native SSD I/O, tail latency and recall tradeoff, not only embedding bytes.
+
+## PA325 — PGM-index dynamic compressed learned index
+
+**The PGM-index: a fully-dynamic compressed learned index with provable worst-case bounds**  
+https://www.vldb.org/pvldb/vol13/p1162-ferragina.pdf
+
+Piecewise learned index supports dynamic predecessor/range queries with strong correctness and worst-case time/space bounds.
+
+**Mirror implication:** Mirror index m must preserve the original ordering/correctness guarantees under updates and compare with adaptive native PGM.
+
