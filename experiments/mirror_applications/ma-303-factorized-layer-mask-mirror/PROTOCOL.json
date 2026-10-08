@@ -1,0 +1,64 @@
+{
+  "experiment_id": "MA-303",
+  "title": "Factorized layer-mask Mirror codes",
+  "status": "PROTOCOL_FROZEN_BEFORE_DEVELOPMENT",
+  "base_commit": "7ce8e04",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY/COMPUTE",
+  "hypothesis": "On a planted two-factor mask family, Mirror factor coordinates on a fixed random backbone will compose held-out task-factor x layer-factor pairs with test normalized MSE <=0.05 while saving at least 20% actual payload bytes versus Piggyback task masks and at least 10% versus a shared-factor direct coefficient control. On unrelated task masks, quality should reveal where private masks are required.",
+  "prior_art_refs": ["PA31", "PA32"],
+  "physical_object": "fixed random two-layer ReLU network represented as 64x64 weight matrices with 25% active edges",
+  "mirror_coordinate": "factorized mask modulation of per-layer and per-task latent coordinates; rank-2 factor interaction",
+  "logical_multiplicity": "held-out combinations of 8 task factors and 8 layer factors, with six trained pairs; separate unrelated stress bank",
+  "model": {
+    "input_dim": 64,
+    "hidden_dim": 64,
+    "output_dim": 64,
+    "layers": 2,
+    "activation": "relu",
+    "density": 0.25,
+    "train_pairs": 6,
+    "heldout_factor_pairs": 4,
+    "task_factors": 8,
+    "layer_factors": 8,
+    "mask_rank": 2,
+    "support_examples": 256,
+    "validation_examples": 128,
+    "test_examples": 256,
+    "threshold": 0.05,
+    "development_seeds": [30301, 30302],
+    "fresh_seeds": [30311, 30312, 30313],
+    "optimizer_updates": 0
+  },
+  "controls": [
+    "shared dense random backbone, no mask",
+    "Piggyback independent binary mask per seen task-layer pair",
+    "factorized direct real-valued task x layer rank-2 coefficient bank plus same private fallback",
+    "factorized Mirror task/layer codes on a rank-2 mask basis plus same private fallback",
+    "independent binary mask upper control per evaluated task-layer pair"
+  ],
+  "splits": {
+    "trained_task_factor_ids": [0, 1, 2, 3, 4, 5],
+    "heldout_task_factor_ids": [6, 7],
+    "trained_layer_factor_ids": [0, 1, 2, 3, 4, 5],
+    "heldout_layer_factor_ids": [6, 7],
+    "fresh_worlds_locked": true
+  },
+  "storage": {
+    "authority": "actual deterministic serialized inference payload bytes after reload",
+    "format": "fixed-timestamp ZIP of sorted NPY arrays",
+    "paid_objects": ["backbone matrices", "mask bases", "factor codes", "Piggyback masks", "private masks", "task/layer IDs", "metadata and archive headers"],
+    "private_rule": "validation nMSE > 0.05 stores a per-pair Piggyback mask for shared-factor methods"
+  },
+  "compute": {
+    "report_examples_and_updates": true,
+    "report_mask_fit_operation_proxy": true,
+    "report_isolated_wall_clock": true,
+    "report_active_edges_per_request": true
+  },
+  "gates": {
+    "promising": "Across all 3 fresh seeds, held-out factor-pair max test nMSE <=0.05; Mirror payload <=0.80x Piggyback and <=0.90x direct rank-2 coefficients; no more private fallbacks than direct control.",
+    "fail": "Mirror max test nMSE >0.05 in >=2 fresh seeds, or Mirror payload >= Piggyback in >=2 seeds, or Mirror >= direct control in >=2 seeds.",
+    "not_established": "serialization/hash replay mismatch, split leakage, or controls cannot be reconstructed"
+  },
+  "boundaries": ["small synthetic random-feature network, fixed random teacher and oracle factors", "post-fit/no optimizer training; this is not continual-learning capacity", "four held-out combinations are a task-quality test, not a capacity count", "no GPU runtime or natural multi-task benchmark claim"]
+}
