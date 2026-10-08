@@ -1,0 +1,64 @@
+{
+  "experiment_id": "MA-455",
+  "title": "Sequential Mirror program over one physical block",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/RUNTIME",
+  "base_commit": "04554b5",
+  "hypothesis": "For an aligned three-step non-commutative linear program, one physical 3x3 block with a distinct three-angle Givens-conjugation View at each step will reach mean held-out RMSE <= 0.05, use at least 25% fewer actual bytes than three independent blocks, and preserve order sensitivity (reversing View order raises RMSE at least 2x); the directly parameterized native Givens conditioner tests attribution.",
+  "physical_object": "one shared 3x3 linear transformation matrix reused at three sequential steps",
+  "mirror_coordinate": "one 3-angle Euler/Givens rotation coordinate per step, applied as R_j W R_j^T",
+  "logical_multiplicity": "three ordered step-specific transformations from one physical block",
+  "prior_art_refs": ["PA81"],
+  "controls": [
+    "one ordinary tied linear block repeated three times",
+    "three independent step-specific linear blocks (Routing Networks/multiple-block upper control)",
+    "one block with per-step rank-1 matrix residuals",
+    "one shared block with direct native three-angle Givens conjugation per step (exact parameterization alias control)",
+    "same trained Mirror model evaluated with step-code order reversed"
+  ],
+  "task": {
+    "type": "synthetic 3D linear regression of an ordered composition of three non-commuting Givens-conjugated matrices",
+    "dimension": 3,
+    "depth": 3,
+    "teacher": "M2 @ M1 @ M0 where M_j = R_j W R_j^T, W and each R_j are seeded; Gaussian input and sigma=0.01 output noise",
+    "examples_per_outer_update": 16,
+    "heldout_examples": 512,
+    "outer_updates": 600,
+    "optimizer": "Adam; fixed learning rate 0.01",
+    "ordered_probe": "evaluate the same learned step views in reversed composition order; no tuning from this result"
+  },
+  "development": {
+    "worlds_or_seeds": [45501, 45502],
+    "selection_metric": "mean held-out RMSE across the same 512 examples per seed",
+    "hyperparameter_changes_after_run": "prohibited without numbered amendment"
+  },
+  "fresh": {
+    "worlds_or_seeds": [45511, 45512, 45513],
+    "locked_before_access": true,
+    "opened": false
+  },
+  "storage": {
+    "authority": "actual uncompressed .npz inference payload bytes",
+    "paid_objects": ["physical matrix", "step Mirror angles or rank-1 residuals", "independent matrices where used", "format, shape, dtype and depth metadata"]
+  },
+  "compute": {
+    "report_training_examples": true,
+    "report_outer_updates": true,
+    "report_training_and_evaluation_ops_proxy": true,
+    "report_training_wall_time": true,
+    "report_query_wall_time": true,
+    "report_inference_ops_per_example": true,
+    "compute_proxy_definition": "assume deterministic R_j W R_j^T step matrices are reconstructed once when loading inference state; report cold-start reconstruction MACs separately and report inference operations/example amortized across the 512 held-out queries (3 vector-matrix applications plus reconstruction MACs divided by 512)"
+  },
+  "gates": {
+    "PROMISING": "Both development seeds: Mirror RMSE <= 0.05; actual payload <= 0.75x independent-three-block payload; ordered-code reversal RMSE >= 2x correct-order RMSE; and active ops/example <= 2x independent stack. Native Givens must not exactly match Mirror output and payload hash.",
+    "FAIL": "Either seed misses any PROMISING gate, Mirror exactly matches the native Givens map/payload, or the independent stack has lower RMSE at no greater actual bytes on both seeds.",
+    "NOT ESTABLISHED": "The independent stack has RMSE >0.05 on either seed, or serialization/metric replay fails."
+  },
+  "boundaries": [
+    "Mechanism screen on a teacher generated from the same Givens-conjugation family; not natural language or general routing-network evidence.",
+    "The direct native Givens conditioner is intentionally an exact functional-form control.",
+    "Fixed-update learning efficiency is not a capacity claim; no near-convergence or broad byte frontier is claimed.",
+    "Fresh seeds remain sealed unless every frozen PROMISING gate passes."
+  ]
+}

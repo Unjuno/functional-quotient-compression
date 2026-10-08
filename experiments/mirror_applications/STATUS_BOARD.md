@@ -29,6 +29,8 @@ MA-434 and MA-436 found exact native SSM parameterization aliases; MA-442 and MA
 
 ## Active experiment
 
+**MA-455** is in frozen-protocol screening on `research/ma-455-sequential-mirror-program-20261008`; the ordered non-commutative block program is being compared with tied, rank-1, direct Givens and independent-block controls.
+
 MA-416..419, MA-424, MA-434, MA-436, MA-442, MA-444 and MA-451/452/453 are verified development-screen FAILs with fresh data sealed. MA-451/452 both exactly alias native Givens conditioning, and MA-452's withheld path-role result is recorded as aligned compositional generalization only. Pause the PathNet path × role family; see [MA-451/452 diagnostic](../../docs/phase2/PATHNET_MIRROR_PATH_ROLE_FAMILY_DIAGNOSTIC_2026-10-08.md). State-space role/expert candidates remain paused under their separate diagnostic. See the corresponding per-ID reports and verifications.
 
 ## Verified status index
