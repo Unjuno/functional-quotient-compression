@@ -1,6 +1,37 @@
 {
   "experiment_id": "MA-447",
-  "status": "SCREENING",
-  "protocol_commit": "pending",
-  "checks": []
+  "status": "FAIL",
+  "protocol_commit": "e5f7d4c6",
+  "amendments": [
+    "A1 exact serializer correction includes full learned base/modulation basis; quality values unchanged."
+  ],
+  "fresh_worlds": [
+    44710,
+    44711,
+    44712
+  ],
+  "fresh_rows": 288,
+  "step4_mean_nrmse": {
+    "adam": 0.5008363,
+    "unconditioned": 0.7708227,
+    "conditioned": 0.6020229,
+    "separate": 0.6369981
+  },
+  "exact_serialized_n20_bytes_per_task": {
+    "adam": 113.85,
+    "unconditioned": 126.45,
+    "conditioned": 151.65,
+    "separate": 139.05
+  },
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-447-conditioned-optimizer/tests",
+    "passed": 2,
+    "failed": 0
+  },
+  "checks": [
+    "fresh payload exact byte length/hash replayed",
+    "all full-basis conditioned payloads serialized after A1",
+    "108 exact N=1/20/100 whole-bank payloads serialized and hashed"
+  ],
+  "decision": "FAIL: conditioned Mirror policy loses to Adam, misses per-domain separate-schedule bound, and costs more bytes."
 }

@@ -1,7 +1,7 @@
 {
   "experiment_id": "MA-447",
   "title": "Mirror-conditioned learned optimizer",
-  "status": "SCREENING",
+  "status": "COMPLETED_FAIL",
   "evidence_lane": "FEW_SHOT/CONDITIONAL_OPTIMIZER/QUALITY/BYTES",
   "base_commit": "86200956",
   "hypothesis": "A shared learned coordinate update schedule conditioned on a compact domain Mirror code reaches at least 10% lower fresh query NRMSE than one unconditioned learned schedule and matches separately learned per-domain schedules within 5%, while using fewer optimizer-policy bytes than storing separate schedules.",
@@ -98,5 +98,12 @@
     "Synthetic linear task-family test only.",
     "Domain identity is paid as a Mirror code and is known at inference.",
     "No natural task or independent-capacity claim."
+  ],
+  "amendments": [
+    {
+      "id": "A1",
+      "status": "active accounting correction",
+      "reason": "Initial fresh payloads serialized only effective conditioned schedule, omitting shared base/modulation basis. Reconstruct and serialize both learned basis tensors plus domain code in each conditioned package. This is accounting-only; no task, model, quality, optimizer, or hyperparameter change; fresh errors remain unchanged."
+    }
   ]
 }
