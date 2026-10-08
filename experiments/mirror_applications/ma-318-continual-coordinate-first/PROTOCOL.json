@@ -1,0 +1,50 @@
+{
+  "experiment_id": "MA-318",
+  "title": "Continual coordinate-first skill acquisition",
+  "status": "PROTOCOL_FROZEN_BEFORE_DEVELOPMENT",
+  "base_commit": "594568f",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY/RETENTION/COMPUTE",
+  "hypothesis": "For an ordered stream of 12 linear skills, first fitting each new skill with an existing shared Mirror coordinate and only adding a physical basis direction when validation nMSE exceeds 1e-4 will preserve every prior task, use fewer serialized bytes than task-local vectors, and add basis directions only for a new subspace family or unrelated skills. Direct coefficient coding on the same evolving basis is the mandatory nearest control.",
+  "prior_art_refs": ["PA33", "PA30"],
+  "physical_object": "shared FP16 basis of task weight vectors in a 64-dimensional linear map",
+  "mirror_coordinate": "one phase and fixed radius over the initial aligned two-vector subspace; direct coefficients on any subsequently added basis directions",
+  "logical_multiplicity": "12 sequential functions, including one new two-dimensional subspace family and four unrelated functions",
+  "task_stream": {
+    "input_dim": 64,
+    "output_dim": 64,
+    "initial_basis_rank": 2,
+    "tasks": 12,
+    "task_groups": ["4 initial-orbit skills", "4 second-orbit skills", "4 unrelated skills"],
+    "support_examples_per_skill": 128,
+    "validation_examples_per_skill": 64,
+    "test_examples_per_skill": 128,
+    "basis_growth_threshold_validation_n_mse": 0.0001,
+    "development_seeds": [31801, 31802],
+    "fresh_seeds": [31811, 31812, 31813],
+    "optimizer_updates": 0
+  },
+  "controls": [
+    "hard-tied initial basis with no task coordinates",
+    "ordinary evolving shared basis with free least-squares coefficients and validation-triggered rank-one growth",
+    "coordinate-first Mirror phase on initial orbit plus direct coordinates after basis growth; same private/growth rule",
+    "task-local independent FP16 vectors upper control"
+  ],
+  "storage": {
+    "authority": "actual deterministic serialized inference payload bytes after reload at every stream step",
+    "format": "fixed-timestamp ZIP/NPY with sorted arrays",
+    "paid_objects": ["all shared basis vectors", "per-task phase/direct coordinates", "task IDs", "private residual vectors", "growth-event metadata and archive headers"],
+    "growth_rule": "when validation nMSE exceeds 1e-4, append the normalized support residual as one shared basis direction, refit the task coordinate, and retain the event if validation still fails"
+  },
+  "compute": {
+    "report_support_and_validation_examples": true,
+    "report_basis_growth_and_parameter_events": true,
+    "report_phase_fit_vs_direct_fit_operation_proxy": true,
+    "report_bytes_and_old_task_retention_after_each_skill": true
+  },
+  "gates": {
+    "promising": "All 3 fresh streams retain every previous skill at test nMSE<=1e-4; Mirror final payload <=0.90x evolving direct-basis control and <=0.20x independent vectors; growth occurs only after validation failure and no Mirror-specific extra private tasks are needed.",
+    "fail": "Any prior-task test nMSE exceeds 1e-4 in >=2 fresh streams, or Mirror payload >= direct control in >=2 streams, or basis growth occurs before validation failure.",
+    "not_established": "serialized replay mismatch, task-order leakage, or fresh settings changed after access"
+  },
+  "boundaries": ["synthetic post-fit linear skill stream, no optimizer updates", "teacher subspaces are deliberately planted", "basis coordinates are oracle/projection-fit representations, not learned online skills", "12 functions do not represent independent capacity", "no natural continual-learning benchmark or GPU claim"]
+}
