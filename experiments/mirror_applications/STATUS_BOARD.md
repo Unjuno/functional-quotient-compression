@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (171 completed; 459 UNTESTED; 0 SCREENING)
+- P0: **630** (171 completed; 458 UNTESTED; 1 SCREENING)
 - P1: **422** (13 completed; 409 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **128 FAIL, 11 NOT ESTABLISHED, 45 PROMISING, 971 UNTESTED, 0 SCREENING**
+- Current MA statuses: **128 FAIL, 11 NOT ESTABLISHED, 45 PROMISING, 970 UNTESTED, 1 SCREENING**
 - 47 baseline experiment directories remain present; 139 additional per-ID outcomes are linked to their dedicated research branches in `LIVE_BRANCH_RECONCILIATION.csv`.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This was the intake-time queue; current selection follows the live-branch reconciliation at the top of this board.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed at intake time; later live-branch outcomes are indexed above.
@@ -23,11 +23,13 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-457 — continual path reuse before module birth (P0; PA80).** MA-455 is a verified development-screen FAIL: reverse View ordering raised error, but its 1,013-byte payload exceeded the independent three-block control at 770 bytes in both seeds; native Givens exactly aliased its output and payload. Fresh seeds stayed sealed. MA-455 result branch is pushed. MA-369/371/372 and conditional-modulation candidates MA-401/403/405/407/408/411/413 are paused in the worker queue. MA-457 tests PathNet-style reuse and module growth without the repeated Givens role coordinate.
+**MA-457 — continual path reuse before module birth (P0; PA80) is SCREENING.** MA-455 is a verified development-screen FAIL: reverse View ordering raised error, but its 1,013-byte payload exceeded the independent three-block control at 770 bytes in both seeds; native Givens exactly aliased its output and payload. Fresh seeds stayed sealed. MA-455 result branch is pushed. MA-369/371/372 and conditional-modulation candidates MA-401/403/405/407/408/411/413 are paused in the worker queue. MA-457 tests PathNet-style reuse and module growth without the repeated Givens role coordinate.
 
 MA-434 and MA-436 found exact native SSM parameterization aliases; MA-442 and MA-453 likewise alias native Givens conditioning. MA-453’s fixed-router synthetic screen showed no Mirror-specific value against role-vector or independent-block controls. Fresh seeds remain sealed.
 
 ## Active experiment
+
+MA-457 is screening on `research/ma-457-continual-path-reuse-20261008`; the frozen task stream tests rank-one task-code reuse before private module birth against PathNet growth and native low-rank controls.
 
 MA-453 and MA-455 are verified development-screen FAILs; fresh data remains sealed. MA-455 confirms ordered Views preserve order sensitivity on its aligned toy task but are larger than independent blocks and exactly alias native Givens. See the dedicated branch report and verification.
 
