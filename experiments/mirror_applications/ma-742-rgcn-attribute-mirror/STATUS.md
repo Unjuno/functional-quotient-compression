@@ -1,26 +1,24 @@
 # MA-742 status
 
-- Status: SCREENING (development gate passed; fresh locked)
+- Status: FAIL (fresh quality gate passed 2/3 worlds; all-world criterion failed)
 - Branch: `research/ma-742-rgcn-attribute-mirror-20261008`
 - Base commit: `16807a7d6dc17a834a44ed3cc793ccc28b615691`
+- Pre-fresh freeze commit: `74e0d32`
 - Last verified commit: pending
-- Development complete: yes (rank 2 / 600 updates selected)
-- Fresh/audit opened: no
-- Results committed: development only
-- Verification committed: protocol/tests/payload replay only
-- Registry row updated: no
+- Development complete: yes
+- Fresh/audit opened: yes; seeds 74201, 74202 and 74203
+- Results committed: pending
+- Verification committed: pending
+- Registry row updated: pending
 
-## Development gate facts
+## Result
 
-- Mirror rank 2 passes both preregistered mean development quality gates at 600 updates.
-- Marginal coordinate payload: 104 B vs 264 B for native free coefficients.
-- Complete payload: 1,128 B vs 1,288 B for native free coefficients.
-- Fresh seeds 74201, 74202 and 74203; exact code/protocol/development hashes are frozen in `source/frozen_config.json`.
+Mirror rank 2 uses 104 B of coordinate payload vs 264 B for native relation coefficients, and 1,128 B total vs 1,288 B. Fresh quality passed in worlds 74202 and 74203; world 74201 had 3.90× native seen MSE and 4.67× additive held-out MSE. The all-world quality gate therefore fails.
 
 ## Next action
 
-Push the freeze commit, then run the three fresh worlds once with no setting changes.
+Commit the report and verification, then update the registry, claim ledger and status board. Continue with a new random draw after MA-742 is recorded.
 
 ## Blockers
 
-None for the synthetic CPU mechanism screen.
+None for this scoped CPU mechanism screen.

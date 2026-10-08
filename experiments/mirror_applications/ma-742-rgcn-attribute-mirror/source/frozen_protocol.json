@@ -1,7 +1,7 @@
 {
   "experiment_id": "MA-742",
   "title": "Relation-attribute factorized R-GCN Mirror views",
-  "status": "FAIL",
+  "status": "SCREENING",
   "evidence_lane": "MECHANISM",
   "base_commit": "16807a7d6dc17a834a44ed3cc793ccc28b615691",
   "hypothesis": "A shared relation-transform basis plus a multiplicative Mirror coordinate composed from two semantic relation attributes will predict held-out attribute combinations with lower serialized inference bytes than per-relation R-GCN basis coefficients, while remaining within 10% of their seen-relation MSE.",
@@ -40,9 +40,7 @@
       74203
     ],
     "locked_before_access": true,
-    "selection_metric": "MSE on held-out attribute combinations and seen relation held-out examples",
-    "opened": true,
-    "results_file": "source/fresh_600_updates.json"
+    "selection_metric": "MSE on held-out attribute combinations and seen relation held-out examples"
   },
   "data": {
     "generator": "Synthetic relation-conditioned linear message operator with four values for each of two semantic relation attributes; true coefficient vectors are generated compositionally from rank-2 Hadamard products. Relations (0,0),(1,2),(2,3),(3,1) are excluded from train fitting and used as held-out combination evaluation.",
@@ -93,10 +91,5 @@
       "protocol_effect": "Only the serializer and its charged metadata format changed. Model, data, seeds, training budget, metrics and quality gates are unchanged; initial torch.save bytes remain archived as non-authoritative implementation diagnostics."
     }
   ],
-  "selection_gate": "Development selects the lowest update count then rank that meets both: Mirror seen-relation MSE <= 1.10x native basis MSE, and Mirror held-out-combination MSE <= 0.80x additive-factor MSE. If no candidate meets both, freeze the dev candidate with lowest held-out MSE and classify the development screen as a gate failure; do not open fresh.",
-  "decision": {
-    "status": "FAIL",
-    "reason": "Quality gate passed in only 2 of 3 fresh worlds; world 74201 failed both seen-relation and held-out-combination comparisons. Storage gates passed."
-  },
-  "posthoc_outcome_record": "Only status, fresh-opened state, result path, and final decision were added after fresh access. Frozen model/data/training/metric/storage settings are preserved verbatim in source/frozen_protocol.json and hash-match frozen_config.json."
+  "selection_gate": "Development selects the lowest update count then rank that meets both: Mirror seen-relation MSE <= 1.10x native basis MSE, and Mirror held-out-combination MSE <= 0.80x additive-factor MSE. If no candidate meets both, freeze the dev candidate with lowest held-out MSE and classify the development screen as a gate failure; do not open fresh."
 }

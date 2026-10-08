@@ -1,64 +1,65 @@
 # MA-742 — Relation-attribute factorized R-GCN Mirror views
 
-Status: SCREENING  
-Evidence lane: MECHANISM  
+Status: **FAIL**  
+Evidence lane: MECHANISM / STORAGE / COMPUTE / RUNTIME  
 Base commit: `16807a7d6dc17a834a44ed3cc793ccc28b615691`  
-Doctrine: `docs/phase2/MIRROR_PARAMETER_INTEGRATION_DOCTRINE.md`
+Experiment branch: `research/ma-742-rgcn-attribute-mirror-20261008`  
+Closest prior art: PA188, R-GCN relation-basis sharing.
 
-## Hypothesis
+## H — hypothesis
 
-**H:** A shared relation-transform basis plus a multiplicative Mirror coordinate composed from two semantic relation attributes will predict held-out attribute combinations with lower serialized inference bytes than per-relation R-GCN basis coefficients, while remaining within 10% of their seen-relation MSE.
-
-## Mirror insertion
+A shared relation-transform basis with multiplicative Mirror coordinates composed from two semantic relation attributes can predict held-out attribute combinations using a smaller relation-code payload than free R-GCN basis coefficients, while retaining seen-relation quality.
 
 > **Mirror insertion:** this experiment adds `m(a,b)` to the coefficient interface that selects shared R-GCN relation transforms, so unseen attribute combinations can express logical relation transforms without storing a free coefficient vector for every relation ID.
 
-- Native method: R-GCN relation-basis decomposition (PA188).
-- Shared object: one bank of learned relation-transform basis matrices.
-- Coordinate: `m(a,b) = tanh(U[a]) ⊙ tanh(V[b])`, decoded into basis coefficients.
-- Logical objects: relation transforms for pairs of relation attributes, including held-out pairs.
-- Cheapest control: additive attribute factorization of the basis coefficients; native free per-relation coefficients remain a seen-relation control.
-- Prior art: PA188; relation identity is already a compact address, so the test is whether compositional m adds held-out-combination generalization over ordinary basis coefficients.
+## T — what ran
 
-## Comparisons
+- Synthetic relation-conditioned linear message operator: four values per relation attribute, 16 ordered relation pairs, with `(0,0)`, `(1,2)`, `(2,3)`, `(3,1)` withheld from fitting. Each world generates a new shared basis and rank-2 multiplicative coefficient function.
+- 12 seen relations, 256 training examples each; evaluation uses 256 examples per relation (4,096 total). PyTorch 2.6.0 CPU; single thread. 600 full-batch Adam updates per model.
+- Development seeds: 7421, 7422. Frozen choice: rank 2, 600 updates.
+- Fresh seeds: 74201, 74202, 74203, run after the pre-fresh freeze commit `74e0d32`. No settings were changed after fresh access.
+- Controls: independent full relation matrices; native R-GCN basis with free per-relation coefficients; additive relation-attribute factors; multiplicative Mirror factors.
+- `native` and independent controls have no trained transform for held-out combinations; their held-out score is N/A. They are seen-quality and storage controls.
+- Every training condition sees 1,843,200 example exposures over 600 updates. Training MAC values are a 3× forward-pass proxy for forward/backward work. Runtime is one full 4,096-example CPU evaluation pass per condition.
 
-1. Independent full relation matrices (upper control, seen relations only).
-2. Native R-GCN basis decomposition with free coefficients per relation (seen-relation control).
-3. Additive relation-attribute coefficient factorization (simple compositional control).
-4. Mirror multiplicative relation-attribute coordinate.
+## Fresh results
 
-## Gates
+| World | Mirror held-out MSE | Additive held-out MSE | Mirror / additive | Mirror seen MSE | Native basis seen MSE | Mirror / native |
+|---:|---:|---:|---:|---:|---:|---:|
+| 74201 | 0.478681 | 0.102453 | 4.672× | 0.000884184 | 0.000226439 | 3.905× |
+| 74202 | 0.000222862 | 0.328444 | 0.000679× | 0.000227967 | 0.000229212 | 0.995× |
+| 74203 | 0.000229745 | 0.289335 | 0.000794× | 0.000226174 | 0.000227142 | 0.996× |
 
-### PASS
-On all three fresh worlds, Mirror held-out-combination MSE is at least 20% below additive control, within 10% of free per-relation basis control on seen combinations, and serialized marginal relation-coordinate payload (excluding the shared basis common to all methods) is at most 60% of the native free coefficient-table payload. Full inference payload bytes are also reported and must be lower than the free-coefficient model. Payload v1 charges its full eight-byte header and every FP32 tensor byte; reconstruction is checked exactly. Runtime is reported as a separate axis.
+Two of three fresh worlds pass both quality comparisons; world 74201 fails both. The preregistered gate requires all three, so overall status is **FAIL**.
 
-Pre-fresh amendments (1) clarified marginal relation-code storage alongside complete payload bytes, (2) permitted an equal-budget 600-update development check after the initial 150-update screen exposed a possible optimization confound, and (3) replaced generic pickle serialization with a compact, versioned inference format after pickle metadata dominated the small payload comparison. All methods use the same format and its complete header is charged. No fresh data were accessed; seeds, model, data, quality gates and the selected equal training budget are unchanged.
+## Storage, compute and runtime
 
-### FAIL
-Mirror does not improve on additive factors on held-out combinations, exceeds the seen-relation quality tolerance, or fails to reduce actual serialized bytes against free per-relation coefficients. If additive factors match Mirror, the result is not Mirror-specific.
+- Serialized marginal relation coordinate: Mirror **104 B**, native coefficient table **264 B** (Mirror uses 39.4% of the coefficient bytes, a 60.6% reduction).
+- Complete inference payload: Mirror **1,128 B**, native basis model **1,288 B** (12.4% fewer bytes). Independent full matrices use **4,104 B**.
+- Mean fresh training wall: Mirror 0.704s, additive 0.693s, native basis 0.553s, independent 0.662s.
+- Training MAC proxy per model: Mirror 1,592,654,400; native basis 1,592,784,000. Both use the same 600 updates and example exposures.
+- Mean full-pass inference wall on CPU: Mirror 0.377ms, additive 0.379ms, native basis 0.266ms. This is one small-batch timing per condition and is not a throughput claim.
+- Full packed payloads and 12 fresh model artifacts are retained under `source/payloads/`; hashes and exact bytes are checked by `source/verify_and_export.py`.
 
-### NOT ESTABLISHED
-Synthetic mechanism only; no real-KG or link-prediction claim.
+## D — decision
 
-## Tuning boundary
+**FAIL:** the storage gates passed, but fresh quality was not stable across all three worlds. Mirror failed seen and held-out quality in one world despite matching both in the other two.
 
-- Development worlds: seeds 7421 and 7422. Ranks `(2, 4, 8)` and equal optimizer updates `(150, 600)` are dev-only choices; choose the lowest-compute setting meeting both predeclared seen-quality and held-out-combination gates.
-- Fresh worlds: seeds 74201, 74202 and 74203. Rank 2 and 600 updates freeze before evaluation; settings and hashes are in `source/frozen_config.json`.
+## C — strongest counter-hypothesis
 
-## Random selection provenance
+The held-out result may depend on non-convex factor optimization and the random world/model initialization, rather than on a stable generalization property of relation-attribute Views. The single failing world is consistent with that explanation. The experiment does not separate optimization sensitivity from intrinsic ambiguity of the missing relation combinations.
 
-Draw 2 selected MA-742 from 533 P0 UNTESTED IDs without a remote `research/ma-*` branch. Seed, index, pool hash and exact eligible list are in `source/random_draw.json` and `source/selection_pool.csv`.
+## U — unconfirmed
 
-## Decision
+- Whether real relation attributes in a knowledge graph provide the required factor structure.
+- Whether other held-out pair layouts, optimizer initializations, or a small private residual stabilize the failing world.
+- Whether this result extends beyond this synthetic linear message operator.
+- Capacity near convergence; this is a fixed 600-update mechanism screen, not a capacity claim.
 
-### Development facts (fresh still unopened)
+## Fact / interpretation / hypothesis
 
-Across seeds 7421/7422, rank-2 Mirror mean held-out MSE was 0.00022764816 versus 0.22263122 for additive factors; seen MSE was 0.00022378165 versus 0.0002248915 for native basis coefficients. The serialized marginal coordinate was 104 B versus 264 B; full payload was 1128 B versus 1288 B.
+**Facts:** 104 B vs 264 B marginal coordinate; 1,128 B vs 1,288 B complete payload. Fresh quality gate passed 2/3 worlds and failed in world 74201. Exact serialized tensor reconstruction and all 12 payload hashes passed.
 
-FACT: fresh pending.
+**Interpretation:** compositional multiplicative codes can recover this generator's unseen relations in some worlds, but the observed failure rate makes this setting unreliable under the preregistered criterion. Byte savings alone do not establish useful logical multiplicity.
 
-INTERPRETATION: developmental evidence meets both quality selection gates; fresh confirmation is required.
-
-HYPOTHESIS: compositional multiplicative relation coordinates may improve unseen attribute-combination behavior with a smaller marginal code state.
-
-BOUNDARY: development-only synthetic relation-conditioned message operator; no natural-graph evidence.
+**Hypothesis:** low-description relation Views may be useful when relation factors are learnable and well-conditioned; reliable deployment may require stronger identifiability conditions or private residual capacity.

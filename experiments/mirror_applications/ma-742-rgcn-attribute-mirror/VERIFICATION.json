@@ -1,21 +1,33 @@
 {
   "experiment_id": "MA-742",
-  "commit": "pending",
+  "commit": "pending result commit",
   "tests": {
     "command": "python -m unittest discover -s experiments/mirror_applications/ma-742-rgcn-attribute-mirror/tests -v",
-    "passed": null,
-    "failed": null
+    "passed": 3,
+    "failed": 0
   },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "fresh_payloads_validated": 12,
+    "fresh_payload_sha256_all_match": true,
+    "format": "MA742 v1 packed FP32 inference payload; all 8-byte headers included"
   },
   "metric_replay": {
     "checked": false,
     "max_difference": null
   },
-  "fresh_split_integrity_checked": false,
+  "fresh_split_integrity_checked": true,
   "notes": [
-    "Random selection provenance saved before implementation."
-  ]
+    "Pre-fresh code, settings and frozen protocol hashes match source/frozen_config.json and source/frozen_protocol.json.",
+    "Fresh metric worlds are exactly 74201, 74202 and 74203; no fresh rerun or tuning occurred.",
+    "Fresh quality gate passes 2/3 worlds; overall FAIL under the all-three-world rule.",
+    "Native per-relation coefficients and independent relation matrices are scored only on seen relations; they have no trained held-out-combination maps.",
+    "Inference wall times are single CPU full-evaluation passes, not throughput benchmarks."
+  ],
+  "report_export": {
+    "command": "python experiments/mirror_applications/ma-742-rgcn-attribute-mirror/source/verify_and_export.py",
+    "results_rows": 28,
+    "payload_files_checked": 12
+  }
 }
