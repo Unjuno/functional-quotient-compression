@@ -1,10 +1,38 @@
 {
   "experiment_id": "MA-437",
-  "protocol_commit": null,
-  "tests": {"command": "python -m unittest discover -s experiments/mirror_applications/ma-437-s4-structured-transition-mirror/tests -v", "passed": 0, "failed": 0},
-  "serialization": {"roundtrip_checked": false, "byte_exact": false, "payload_rows": 0},
-  "metric_replay": {"checked": false},
-  "fresh_split_integrity_checked": false,
-  "fresh_worlds": [],
-  "notes": []
+  "protocol_commit": "276e77d",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-437-s4-structured-transition-mirror/tests -v",
+    "passed": 2,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "payload_rows": 90,
+    "payload_hashes_replayed": true,
+    "actual_payload_bytes_authoritative": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0,
+    "notes": [
+      "90 corrected fresh rows replayed from exact serialized payloads.",
+      "All transition spectral radii remain below 0.624.",
+      "Amendment A1 invalidated initial mismatched teacher outputs."
+    ]
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_worlds": [
+    43710,
+    43711,
+    43712
+  ],
+  "notes": [
+    "Amended fresh uses frozen development-selected LR: 0.01 Mirror; 0.003 all other methods.",
+    "Mirror quality/storage gate failed: payload is 96.3% independent, not <=60%.",
+    "Rank-one residual is more accurate than Mirror at 14.7% more bytes.",
+    "Synthetic aligned 4D mechanism screen only."
+  ],
+  "protocol_amendment_commit": "fc7aa29"
 }
