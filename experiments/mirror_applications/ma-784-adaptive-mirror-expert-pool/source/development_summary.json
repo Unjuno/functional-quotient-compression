@@ -1,0 +1,2460 @@
+{
+  "corpus": {
+    "path": "source/data/input.txt",
+    "url": "https://raw.githubusercontent.com/karpathy/char-rnn/master/data/tinyshakespeare/input.txt",
+    "sha256": "86c4e6aa9db7c042ec79f339dcb96d42b0075e16b8fc2e86bf0ca57e2dc565ed",
+    "bytes": 1115394,
+    "train_bytes": 892315,
+    "dev_bytes": 111539,
+    "train_chars": 892315,
+    "dev_chars": 111539,
+    "vocabulary_size": 66,
+    "audit_bytes_not_read": 111540
+  },
+  "split": {
+    "audit_opened": false,
+    "train_characters": 892315,
+    "dev_characters": 111539
+  },
+  "results": [
+    {
+      "nll": 2.1808846592903137,
+      "bits_per_character": 3.1463514827089525,
+      "physical_load": [],
+      "router_entropy": 0.0,
+      "evaluation_wall_seconds": 0.1424802859983174,
+      "evaluation_tokens_per_second": 114991.34694461158,
+      "seed": 78401,
+      "condition": "dense",
+      "updates": 1200,
+      "train_characters_seen": 2457600,
+      "active_macs_per_token_proxy": 197124,
+      "train_wall_seconds": 60.535626842000056,
+      "inference_payload": {
+        "path": "source/artifacts/seed78401_dense_inference.pt",
+        "bytes": 603690,
+        "sha256": "d5248dcb8a8583d3b92fb637303006dee0e15ed06a7819c00a992037eef600bd",
+        "expert_bank_tensor_bytes": 0
+      },
+      "history": [
+        {
+          "nll": 2.7520543336868286,
+          "bits_per_character": 3.9703751394669684,
+          "physical_load": [],
+          "router_entropy": 0.0,
+          "evaluation_wall_seconds": 0.14052840400108835,
+          "evaluation_tokens_per_second": 116588.52967456395,
+          "step": 100
+        },
+        {
+          "nll": 2.6010684967041016,
+          "bits_per_character": 3.7525486212075183,
+          "physical_load": [],
+          "router_entropy": 0.0,
+          "evaluation_wall_seconds": 0.1354216190011357,
+          "evaluation_tokens_per_second": 120985.11390461665,
+          "step": 200
+        },
+        {
+          "nll": 2.5271835029125214,
+          "bits_per_character": 3.645955107068294,
+          "physical_load": [],
+          "router_entropy": 0.0,
+          "evaluation_wall_seconds": 0.12746167899967986,
+          "evaluation_tokens_per_second": 128540.59454246754,
+          "step": 300
+        },
+        {
+          "nll": 2.48388534784317,
+          "bits_per_character": 3.5834890734700995,
+          "physical_load": [],
+          "router_entropy": 0.0,
+          "evaluation_wall_seconds": 0.13297018199955346,
+          "evaluation_tokens_per_second": 123215.59430560921,
+          "step": 400
+        },
+        {
+          "nll": 2.422417402267456,
+          "bits_per_character": 3.494809573214384,
+          "physical_load": [],
+          "router_entropy": 0.0,
+          "evaluation_wall_seconds": 0.12639508099891827,
+          "evaluation_tokens_per_second": 129625.29768179997,
+          "step": 500
+        },
+        {
+          "nll": 2.3919444382190704,
+          "bits_per_character": 3.4508463791005903,
+          "physical_load": [],
+          "router_entropy": 0.0,
+          "evaluation_wall_seconds": 0.12803551999968477,
+          "evaluation_tokens_per_second": 127964.48985438056,
+          "step": 600
+        },
+        {
+          "nll": 2.348081260919571,
+          "bits_per_character": 3.3875651907329694,
+          "physical_load": [],
+          "router_entropy": 0.0,
+          "evaluation_wall_seconds": 0.12865157700070995,
+          "evaluation_tokens_per_second": 127351.72301781879,
+          "step": 700
+        },
+        {
+          "nll": 2.318593919277191,
+          "bits_per_character": 3.3450239491765092,
+          "physical_load": [],
+          "router_entropy": 0.0,
+          "evaluation_wall_seconds": 0.12775306600087788,
+          "evaluation_tokens_per_second": 128247.41129803816,
+          "step": 800
+        },
+        {
+          "nll": 2.2871383130550385,
+          "bits_per_character": 3.2996431020716535,
+          "physical_load": [],
+          "router_entropy": 0.0,
+          "evaluation_wall_seconds": 0.1259841659993981,
+          "evaluation_tokens_per_second": 130048.08874218586,
+          "step": 900
+        },
+        {
+          "nll": 2.227011352777481,
+          "bits_per_character": 3.2128982346554937,
+          "physical_load": [],
+          "router_entropy": 0.0,
+          "evaluation_wall_seconds": 0.12870098600251367,
+          "evaluation_tokens_per_second": 127302.832005343,
+          "step": 1000
+        },
+        {
+          "nll": 2.216326206922531,
+          "bits_per_character": 3.1974828277193823,
+          "physical_load": [],
+          "router_entropy": 0.0,
+          "evaluation_wall_seconds": 0.12782031599999755,
+          "evaluation_tokens_per_second": 128179.93659161596,
+          "step": 1100
+        },
+        {
+          "nll": 2.1808846592903137,
+          "bits_per_character": 3.1463514827089525,
+          "physical_load": [],
+          "router_entropy": 0.0,
+          "evaluation_wall_seconds": 0.13461587100027828,
+          "evaluation_tokens_per_second": 121709.27453246676,
+          "step": 1200
+        }
+      ]
+    },
+    {
+      "nll": 2.162262737751007,
+      "bits_per_character": 3.1194857288523714,
+      "physical_load": [
+        0.6253204345703125,
+        0.115966796875,
+        0.141876220703125,
+        0.1168365478515625
+      ],
+      "router_entropy": 0.007061133859679103,
+      "evaluation_wall_seconds": 0.15804137000304763,
+      "evaluation_tokens_per_second": 103669.05829583769,
+      "seed": 78401,
+      "condition": "untied_moe",
+      "updates": 1200,
+      "train_characters_seen": 2457600,
+      "active_macs_per_token_proxy": 198672,
+      "train_wall_seconds": 81.10170812399883,
+      "inference_payload": {
+        "path": "source/artifacts/seed78401_untied_moe_inference.pt",
+        "bytes": 1423550,
+        "sha256": "adcde9a5bd8745f5cde8013da444edfa769803e2079f3b5fde59f67ed34377db",
+        "expert_bank_tensor_bytes": 1060864
+      },
+      "history": [
+        {
+          "nll": 2.770230084657669,
+          "bits_per_character": 3.9965972052570327,
+          "physical_load": [
+            0.6170196533203125,
+            0.1302947998046875,
+            0.1179962158203125,
+            0.1346893310546875
+          ],
+          "router_entropy": 0.0005655375825881492,
+          "evaluation_wall_seconds": 0.16666546999840648,
+          "evaluation_tokens_per_second": 98304.70582872775,
+          "step": 100
+        },
+        {
+          "nll": 2.585077404975891,
+          "bits_per_character": 3.7294783524728286,
+          "physical_load": [
+            0.6470489501953125,
+            0.1237030029296875,
+            0.1131744384765625,
+            0.1160736083984375
+          ],
+          "router_entropy": 0.000974367700109724,
+          "evaluation_wall_seconds": 0.16373001899773953,
+          "evaluation_tokens_per_second": 100067.17216728716,
+          "step": 200
+        },
+        {
+          "nll": 2.522747367620468,
+          "bits_per_character": 3.6395551166817364,
+          "physical_load": [
+            0.65045166015625,
+            0.1208648681640625,
+            0.1133880615234375,
+            0.11529541015625
+          ],
+          "router_entropy": 0.0009900390432449058,
+          "evaluation_wall_seconds": 0.15944997699989472,
+          "evaluation_tokens_per_second": 102753.22899551637,
+          "step": 300
+        },
+        {
+          "nll": 2.4923966228961945,
+          "bits_per_character": 3.5957682477807396,
+          "physical_load": [
+            0.64593505859375,
+            0.12200927734375,
+            0.11383056640625,
+            0.11822509765625
+          ],
+          "router_entropy": 0.001047815771016758,
+          "evaluation_wall_seconds": 0.16596407200268004,
+          "evaluation_tokens_per_second": 98720.16155240772,
+          "step": 400
+        },
+        {
+          "nll": 2.4276882708072662,
+          "bits_per_character": 3.502413829117946,
+          "physical_load": [
+            0.643768310546875,
+            0.1227569580078125,
+            0.117767333984375,
+            0.1157073974609375
+          ],
+          "router_entropy": 0.000358624030923238,
+          "evaluation_wall_seconds": 0.16168183900299482,
+          "evaluation_tokens_per_second": 101334.81967443803,
+          "step": 500
+        },
+        {
+          "nll": 2.3767902553081512,
+          "bits_per_character": 3.428983514566283,
+          "physical_load": [
+            0.642333984375,
+            0.1256103515625,
+            0.117218017578125,
+            0.114837646484375
+          ],
+          "router_entropy": 0.0008262502597062849,
+          "evaluation_wall_seconds": 0.16043594499933533,
+          "evaluation_tokens_per_second": 102121.75332696097,
+          "step": 600
+        },
+        {
+          "nll": 2.3270523846149445,
+          "bits_per_character": 3.3572269351728172,
+          "physical_load": [
+            0.6458587646484375,
+            0.1159210205078125,
+            0.121307373046875,
+            0.116912841796875
+          ],
+          "router_entropy": 0.0013068639091216028,
+          "evaluation_wall_seconds": 0.1659306870024011,
+          "evaluation_tokens_per_second": 98740.02389782738,
+          "step": 700
+        },
+        {
+          "nll": 2.3056330382823944,
+          "bits_per_character": 3.326325350439764,
+          "physical_load": [
+            0.65264892578125,
+            0.1115875244140625,
+            0.1212005615234375,
+            0.11456298828125
+          ],
+          "router_entropy": 0.001098526015994139,
+          "evaluation_wall_seconds": 0.16584281000177725,
+          "evaluation_tokens_per_second": 98792.34438818555,
+          "step": 800
+        },
+        {
+          "nll": 2.272642105817795,
+          "bits_per_character": 3.2787294957787836,
+          "physical_load": [
+            0.63616943359375,
+            0.111328125,
+            0.137054443359375,
+            0.115447998046875
+          ],
+          "router_entropy": 0.0053870685514993966,
+          "evaluation_wall_seconds": 0.17002695700284676,
+          "evaluation_tokens_per_second": 96361.19053595532,
+          "step": 900
+        },
+        {
+          "nll": 2.2141596376895905,
+          "bits_per_character": 3.194357129031276,
+          "physical_load": [
+            0.6285400390625,
+            0.122314453125,
+            0.133209228515625,
+            0.115936279296875
+          ],
+          "router_entropy": 0.0061079777660779655,
+          "evaluation_wall_seconds": 0.16263871699993615,
+          "evaluation_tokens_per_second": 100738.6205586363,
+          "step": 1000
+        },
+        {
+          "nll": 2.188114821910858,
+          "bits_per_character": 3.1567824024664324,
+          "physical_load": [
+            0.622100830078125,
+            0.122711181640625,
+            0.1396636962890625,
+            0.1155242919921875
+          ],
+          "router_entropy": 0.008070225303526968,
+          "evaluation_wall_seconds": 0.16621473799750675,
+          "evaluation_tokens_per_second": 98571.28313282161,
+          "step": 1100
+        },
+        {
+          "nll": 2.162262737751007,
+          "bits_per_character": 3.1194857288523714,
+          "physical_load": [
+            0.6253204345703125,
+            0.115966796875,
+            0.141876220703125,
+            0.1168365478515625
+          ],
+          "router_entropy": 0.007061133859679103,
+          "evaluation_wall_seconds": 0.16335334299947135,
+          "evaluation_tokens_per_second": 100297.91676839464,
+          "step": 1200
+        }
+      ]
+    },
+    {
+      "nll": 2.1630682945251465,
+      "bits_per_character": 3.120647901615577,
+      "physical_load": [
+        0.71380615234375,
+        0.0419921875,
+        0.1232452392578125,
+        0.1209564208984375
+      ],
+      "router_entropy": 0.01173693174496293,
+      "evaluation_wall_seconds": 0.1556273650021467,
+      "evaluation_tokens_per_second": 105277.11498407753,
+      "seed": 78401,
+      "condition": "unipool4",
+      "updates": 1200,
+      "train_characters_seen": 2457600,
+      "active_macs_per_token_proxy": 198672,
+      "train_wall_seconds": 75.91255406100026,
+      "inference_payload": {
+        "path": "source/artifacts/seed78401_unipool4_inference.pt",
+        "bytes": 611690,
+        "sha256": "138f3886c382c5b2b108877db07ec97fe66e09a280c41f109af0dc225a0e5ff9",
+        "expert_bank_tensor_bytes": 265216
+      },
+      "history": [
+        {
+          "nll": 2.808930665254593,
+          "bits_per_character": 4.052430340963738,
+          "physical_load": [
+            0.7022705078125,
+            0.0304718017578125,
+            0.1453094482421875,
+            0.1219482421875
+          ],
+          "router_entropy": 0.0017436069538234733,
+          "evaluation_wall_seconds": 0.1715829640015727,
+          "evaluation_tokens_per_second": 95487.33521032908,
+          "step": 100
+        },
+        {
+          "nll": 2.5981407165527344,
+          "bits_per_character": 3.748324727302328,
+          "physical_load": [
+            0.714935302734375,
+            0.0279388427734375,
+            0.141876220703125,
+            0.1152496337890625
+          ],
+          "router_entropy": 0.003077377565205097,
+          "evaluation_wall_seconds": 0.16949829800068983,
+          "evaluation_tokens_per_second": 96661.7375705644,
+          "step": 200
+        },
+        {
+          "nll": 2.5339364409446716,
+          "bits_per_character": 3.6556975372787077,
+          "physical_load": [
+            0.7247314453125,
+            0.0276336669921875,
+            0.132598876953125,
+            0.1150360107421875
+          ],
+          "router_entropy": 0.010669989860616624,
+          "evaluation_wall_seconds": 0.16728360500201234,
+          "evaluation_tokens_per_second": 97941.45696347773,
+          "step": 300
+        },
+        {
+          "nll": 2.502481073141098,
+          "bits_per_character": 3.6103170341391535,
+          "physical_load": [
+            0.7121734619140625,
+            0.043060302734375,
+            0.1248779296875,
+            0.1198883056640625
+          ],
+          "router_entropy": 0.012593446299433708,
+          "evaluation_wall_seconds": 0.16871849900053348,
+          "evaluation_tokens_per_second": 97108.49786512263,
+          "step": 400
+        },
+        {
+          "nll": 2.452092558145523,
+          "bits_per_character": 3.5376217734372783,
+          "physical_load": [
+            0.7069244384765625,
+            0.04681396484375,
+            0.1261444091796875,
+            0.1201171875
+          ],
+          "router_entropy": 0.01181242207530886,
+          "evaluation_wall_seconds": 0.16591328600043198,
+          "evaluation_tokens_per_second": 98750.3797613733,
+          "step": 500
+        },
+        {
+          "nll": 2.4013976752758026,
+          "bits_per_character": 3.4644845173226857,
+          "physical_load": [
+            0.7122802734375,
+            0.04205322265625,
+            0.125885009765625,
+            0.119781494140625
+          ],
+          "router_entropy": 0.012021622154861689,
+          "evaluation_wall_seconds": 0.16703903999950853,
+          "evaluation_tokens_per_second": 98084.85489409066,
+          "step": 600
+        },
+        {
+          "nll": 2.3423428535461426,
+          "bits_per_character": 3.3792864188727236,
+          "physical_load": [
+            0.7080230712890625,
+            0.036895751953125,
+            0.12896728515625,
+            0.1261138916015625
+          ],
+          "router_entropy": 0.012181215453892946,
+          "evaluation_wall_seconds": 0.165806994002196,
+          "evaluation_tokens_per_second": 98813.68454085238,
+          "step": 700
+        },
+        {
+          "nll": 2.308538407087326,
+          "bits_per_character": 3.3305169116065922,
+          "physical_load": [
+            0.7087554931640625,
+            0.04095458984375,
+            0.1270294189453125,
+            0.123260498046875
+          ],
+          "router_entropy": 0.012351940269581974,
+          "evaluation_wall_seconds": 0.170075899000949,
+          "evaluation_tokens_per_second": 96333.46109732208,
+          "step": 800
+        },
+        {
+          "nll": 2.2702488005161285,
+          "bits_per_character": 3.2752766860887363,
+          "physical_load": [
+            0.715911865234375,
+            0.0420074462890625,
+            0.1221771240234375,
+            0.119903564453125
+          ],
+          "router_entropy": 0.011607768945395947,
+          "evaluation_wall_seconds": 0.1619734249979956,
+          "evaluation_tokens_per_second": 101152.39583408667,
+          "step": 900
+        },
+        {
+          "nll": 2.2306416034698486,
+          "bits_per_character": 3.2181355793265563,
+          "physical_load": [
+            0.7122955322265625,
+            0.0419464111328125,
+            0.1241912841796875,
+            0.1215667724609375
+          ],
+          "router_entropy": 0.012311776983551681,
+          "evaluation_wall_seconds": 0.1646018510000431,
+          "evaluation_tokens_per_second": 99537.1552656216,
+          "step": 1000
+        },
+        {
+          "nll": 2.202821582555771,
+          "bits_per_character": 3.177999773116389,
+          "physical_load": [
+            0.709136962890625,
+            0.0422515869140625,
+            0.123199462890625,
+            0.1254119873046875
+          ],
+          "router_entropy": 0.01092333730775863,
+          "evaluation_wall_seconds": 0.16314005900130724,
+          "evaluation_tokens_per_second": 100429.04299715078,
+          "step": 1100
+        },
+        {
+          "nll": 2.1630682945251465,
+          "bits_per_character": 3.120647901615577,
+          "physical_load": [
+            0.71380615234375,
+            0.0419921875,
+            0.1232452392578125,
+            0.1209564208984375
+          ],
+          "router_entropy": 0.01173693174496293,
+          "evaluation_wall_seconds": 0.16328947600050014,
+          "evaluation_tokens_per_second": 100337.14603842453,
+          "step": 1200
+        }
+      ]
+    },
+    {
+      "nll": 2.267118275165558,
+      "bits_per_character": 3.270760292690091,
+      "physical_load": [
+        0.775146484375,
+        0.224853515625
+      ],
+      "router_entropy": 0.0,
+      "evaluation_wall_seconds": 0.14868396599922562,
+      "evaluation_tokens_per_second": 110193.45556120915,
+      "seed": 78401,
+      "condition": "unipool2",
+      "updates": 1200,
+      "train_characters_seen": 2457600,
+      "active_macs_per_token_proxy": 197640,
+      "train_wall_seconds": 70.52866777700183,
+      "inference_payload": {
+        "path": "source/artifacts/seed78401_unipool2_inference.pt",
+        "bytes": 474458,
+        "sha256": "ac06413b52197c2d56a640ade91c8a5286c5f70b6db5f4e68eb407e33a4d7c1b",
+        "expert_bank_tensor_bytes": 132608
+      },
+      "history": [
+        {
+          "nll": 2.853534907102585,
+          "bits_per_character": 4.116780659480448,
+          "physical_load": [
+            0.7516021728515625,
+            0.2483978271484375
+          ],
+          "router_entropy": 0.00010668106142475153,
+          "evaluation_wall_seconds": 0.15508613500060164,
+          "evaluation_tokens_per_second": 105644.5181249532,
+          "step": 100
+        },
+        {
+          "nll": 2.6576218008995056,
+          "bits_per_character": 3.834137792716113,
+          "physical_load": [
+            0.756256103515625,
+            0.243743896484375
+          ],
+          "router_entropy": 3.482076590444194e-05,
+          "evaluation_wall_seconds": 0.15741304699986358,
+          "evaluation_tokens_per_second": 104082.85915470653,
+          "step": 200
+        },
+        {
+          "nll": 2.5819735527038574,
+          "bits_per_character": 3.725000440192314,
+          "physical_load": [
+            0.770751953125,
+            0.229248046875
+          ],
+          "router_entropy": 0.0,
+          "evaluation_wall_seconds": 0.15449423899917747,
+          "evaluation_tokens_per_second": 106049.26181155033,
+          "step": 300
+        },
+        {
+          "nll": 2.548344761133194,
+          "bits_per_character": 3.6764843493622292,
+          "physical_load": [
+            0.7689971923828125,
+            0.2310028076171875
+          ],
+          "router_entropy": 7.35189278202597e-05,
+          "evaluation_wall_seconds": 0.1554484890002641,
+          "evaluation_tokens_per_second": 105398.2583257671,
+          "step": 400
+        },
+        {
+          "nll": 2.5064814686775208,
+          "bits_per_character": 3.616088384941145,
+          "physical_load": [
+            0.77349853515625,
+            0.22650146484375
+          ],
+          "router_entropy": 0.0,
+          "evaluation_wall_seconds": 0.15684455900191097,
+          "evaluation_tokens_per_second": 104460.11072529701,
+          "step": 500
+        },
+        {
+          "nll": 2.4803516566753387,
+          "bits_per_character": 3.578391034746236,
+          "physical_load": [
+            0.772796630859375,
+            0.227203369140625
+          ],
+          "router_entropy": 0.0,
+          "evaluation_wall_seconds": 0.15340559499964002,
+          "evaluation_tokens_per_second": 106801.84122383833,
+          "step": 600
+        },
+        {
+          "nll": 2.448416233062744,
+          "bits_per_character": 3.5323179574716574,
+          "physical_load": [
+            0.7710113525390625,
+            0.2289886474609375
+          ],
+          "router_entropy": 2.3742377379676327e-05,
+          "evaluation_wall_seconds": 0.1516710050018446,
+          "evaluation_tokens_per_second": 108023.28368431883,
+          "step": 700
+        },
+        {
+          "nll": 2.4191393554210663,
+          "bits_per_character": 3.490080351285296,
+          "physical_load": [
+            0.7727203369140625,
+            0.2272796630859375
+          ],
+          "router_entropy": 0.0,
+          "evaluation_wall_seconds": 0.15766989199983072,
+          "evaluation_tokens_per_second": 103913.30768475182,
+          "step": 800
+        },
+        {
+          "nll": 2.3800351321697235,
+          "bits_per_character": 3.433664882322769,
+          "physical_load": [
+            0.7735595703125,
+            0.2264404296875
+          ],
+          "router_entropy": 0.0,
+          "evaluation_wall_seconds": 0.14907733599829953,
+          "evaluation_tokens_per_second": 109902.68836160908,
+          "step": 900
+        },
+        {
+          "nll": 2.3311593532562256,
+          "bits_per_character": 3.36315203846468,
+          "physical_load": [
+            0.7714996337890625,
+            0.2285003662109375
+          ],
+          "router_entropy": 5.6204994507425e-06,
+          "evaluation_wall_seconds": 0.1503118139989965,
+          "evaluation_tokens_per_second": 109000.0816576492,
+          "step": 1000
+        },
+        {
+          "nll": 2.285798966884613,
+          "bits_per_character": 3.297710833993547,
+          "physical_load": [
+            0.773162841796875,
+            0.226837158203125
+          ],
+          "router_entropy": 0.0,
+          "evaluation_wall_seconds": 0.15366643300149008,
+          "evaluation_tokens_per_second": 106620.55258249618,
+          "step": 1100
+        },
+        {
+          "nll": 2.267118275165558,
+          "bits_per_character": 3.270760292690091,
+          "physical_load": [
+            0.775146484375,
+            0.224853515625
+          ],
+          "router_entropy": 0.0,
+          "evaluation_wall_seconds": 0.1491855399981432,
+          "evaluation_tokens_per_second": 109822.97614235213,
+          "step": 1200
+        }
+      ]
+    },
+    {
+      "nll": 2.157682478427887,
+      "bits_per_character": 3.1128778114409204,
+      "physical_load": [
+        0.73876953125,
+        0.26123046875
+      ],
+      "router_entropy": 0.017675668466836214,
+      "evaluation_wall_seconds": 0.1522998779983027,
+      "evaluation_tokens_per_second": 107577.23653713362,
+      "seed": 78401,
+      "condition": "hard_alias2x",
+      "updates": 1200,
+      "train_characters_seen": 2457600,
+      "active_macs_per_token_proxy": 198672,
+      "train_wall_seconds": 72.91085898800156,
+      "inference_payload": {
+        "path": "source/artifacts/seed78401_hard_alias2x_inference.pt",
+        "bytes": 476746,
+        "sha256": "2b33e5f0b08f027317444f83a4d86ad39ad310d2e505e67fba3a3ebd771ac621",
+        "expert_bank_tensor_bytes": 132608
+      },
+      "history": [
+        {
+          "nll": 2.859394669532776,
+          "bits_per_character": 4.125234509679272,
+          "physical_load": [
+            0.7540740966796875,
+            0.2459259033203125
+          ],
+          "router_entropy": 0.0023677035496803,
+          "evaluation_wall_seconds": 0.16061033200094244,
+          "evaluation_tokens_per_second": 102010.87187780585,
+          "step": 100
+        },
+        {
+          "nll": 2.612121492624283,
+          "bits_per_character": 3.76849472360853,
+          "physical_load": [
+            0.770721435546875,
+            0.229278564453125
+          ],
+          "router_entropy": 0.0038745740021113306,
+          "evaluation_wall_seconds": 0.16700329900049837,
+          "evaluation_tokens_per_second": 98105.84639978343,
+          "step": 200
+        },
+        {
+          "nll": 2.53086656332016,
+          "bits_per_character": 3.6512686400536887,
+          "physical_load": [
+            0.773651123046875,
+            0.226348876953125
+          ],
+          "router_entropy": 0.00486701272893697,
+          "evaluation_wall_seconds": 0.16646218900132226,
+          "evaluation_tokens_per_second": 98424.75398343979,
+          "step": 300
+        },
+        {
+          "nll": 2.477003574371338,
+          "bits_per_character": 3.573560773009766,
+          "physical_load": [
+            0.759765625,
+            0.240234375
+          ],
+          "router_entropy": 0.00804872892331332,
+          "evaluation_wall_seconds": 0.16350027500084252,
+          "evaluation_tokens_per_second": 100207.78252462005,
+          "step": 400
+        },
+        {
+          "nll": 2.414105236530304,
+          "bits_per_character": 3.4828176529263475,
+          "physical_load": [
+            0.7537841796875,
+            0.2462158203125
+          ],
+          "router_entropy": 0.014840643852949142,
+          "evaluation_wall_seconds": 0.15553555599763058,
+          "evaluation_tokens_per_second": 105339.25760518445,
+          "step": 500
+        },
+        {
+          "nll": 2.360735774040222,
+          "bits_per_character": 3.405821794056997,
+          "physical_load": [
+            0.7506561279296875,
+            0.2493438720703125
+          ],
+          "router_entropy": 0.012980008265003562,
+          "evaluation_wall_seconds": 0.15496429199993145,
+          "evaluation_tokens_per_second": 105727.58271310173,
+          "step": 600
+        },
+        {
+          "nll": 2.3205808997154236,
+          "bits_per_character": 3.3478905560010905,
+          "physical_load": [
+            0.728118896484375,
+            0.271881103515625
+          ],
+          "router_entropy": 0.013343714876100421,
+          "evaluation_wall_seconds": 0.158328541998344,
+          "evaluation_tokens_per_second": 103481.02618270408,
+          "step": 700
+        },
+        {
+          "nll": 2.295471966266632,
+          "bits_per_character": 3.311666022232508,
+          "physical_load": [
+            0.735748291015625,
+            0.264251708984375
+          ],
+          "router_entropy": 0.010381021304056048,
+          "evaluation_wall_seconds": 0.15861403600138146,
+          "evaluation_tokens_per_second": 103294.76768283799,
+          "step": 800
+        },
+        {
+          "nll": 2.2795530259609222,
+          "bits_per_character": 3.288699845997253,
+          "physical_load": [
+            0.7530517578125,
+            0.2469482421875
+          ],
+          "router_entropy": 0.009497029124759138,
+          "evaluation_wall_seconds": 0.15818395799942664,
+          "evaluation_tokens_per_second": 103575.61036663014,
+          "step": 900
+        },
+        {
+          "nll": 2.215913712978363,
+          "bits_per_character": 3.1968877247517344,
+          "physical_load": [
+            0.7301177978515625,
+            0.2698822021484375
+          ],
+          "router_entropy": 0.015834285644814372,
+          "evaluation_wall_seconds": 0.15730045000236714,
+          "evaluation_tokens_per_second": 104157.36254888937,
+          "step": 1000
+        },
+        {
+          "nll": 2.191882371902466,
+          "bits_per_character": 3.162217828155626,
+          "physical_load": [
+            0.7425384521484375,
+            0.2574615478515625
+          ],
+          "router_entropy": 0.010392575873993337,
+          "evaluation_wall_seconds": 0.15869634000046062,
+          "evaluation_tokens_per_second": 103241.19636251501,
+          "step": 1100
+        },
+        {
+          "nll": 2.157682478427887,
+          "bits_per_character": 3.1128778114409204,
+          "physical_load": [
+            0.73876953125,
+            0.26123046875
+          ],
+          "router_entropy": 0.017675668466836214,
+          "evaluation_wall_seconds": 0.15561356299804174,
+          "evaluation_tokens_per_second": 105286.45244249165,
+          "step": 1200
+        }
+      ]
+    },
+    {
+      "nll": 2.1929439306259155,
+      "bits_per_character": 3.1637493336615594,
+      "physical_load": [
+        0.763641357421875,
+        0.236358642578125
+      ],
+      "router_entropy": 0.01834515598602593,
+      "evaluation_wall_seconds": 0.17082491399924038,
+      "evaluation_tokens_per_second": 95911.06833557578,
+      "seed": 78401,
+      "condition": "mirror2x",
+      "updates": 1200,
+      "train_characters_seen": 2457600,
+      "active_macs_per_token_proxy": 198864,
+      "train_wall_seconds": 79.05210166799952,
+      "inference_payload": {
+        "path": "source/artifacts/seed78401_mirror2x_inference.pt",
+        "bytes": 477356,
+        "sha256": "bc2dada8721fe81c740e06cdbea34f0b37482f36ec5bf20d8fd3f9db269d267b",
+        "expert_bank_tensor_bytes": 132608
+      },
+      "history": [
+        {
+          "nll": 2.8317773044109344,
+          "bits_per_character": 4.085391073975572,
+          "physical_load": [
+            0.8041534423828125,
+            0.1958465576171875
+          ],
+          "router_entropy": 0.011075795744545758,
+          "evaluation_wall_seconds": 0.17738599999938742,
+          "evaluation_tokens_per_second": 92363.54616517978,
+          "step": 100
+        },
+        {
+          "nll": 2.6007362008094788,
+          "bits_per_character": 3.7520692195682384,
+          "physical_load": [
+            0.8089447021484375,
+            0.1910552978515625
+          ],
+          "router_entropy": 0.0037097535678185523,
+          "evaluation_wall_seconds": 0.18738132100043003,
+          "evaluation_tokens_per_second": 87436.67678574215,
+          "step": 200
+        },
+        {
+          "nll": 2.5258598625659943,
+          "bits_per_character": 3.6440454977044388,
+          "physical_load": [
+            0.7979583740234375,
+            0.2020416259765625
+          ],
+          "router_entropy": 0.0076407501474022865,
+          "evaluation_wall_seconds": 0.1758242590003647,
+          "evaluation_tokens_per_second": 93183.95591797157,
+          "step": 300
+        },
+        {
+          "nll": 2.4838245511054993,
+          "bits_per_character": 3.5834013623181598,
+          "physical_load": [
+            0.797515869140625,
+            0.202484130859375
+          ],
+          "router_entropy": 0.009682501200586557,
+          "evaluation_wall_seconds": 0.1763470949990733,
+          "evaluation_tokens_per_second": 92907.68299917896,
+          "step": 400
+        },
+        {
+          "nll": 2.419461578130722,
+          "bits_per_character": 3.4905452203905782,
+          "physical_load": [
+            0.78314208984375,
+            0.21685791015625
+          ],
+          "router_entropy": 0.025999173521995544,
+          "evaluation_wall_seconds": 0.17336169600093854,
+          "evaluation_tokens_per_second": 94507.61256922233,
+          "step": 500
+        },
+        {
+          "nll": 2.3715288937091827,
+          "bits_per_character": 3.4213929742791276,
+          "physical_load": [
+            0.7887420654296875,
+            0.2112579345703125
+          ],
+          "router_entropy": 0.024610026739537716,
+          "evaluation_wall_seconds": 0.17351464799867244,
+          "evaluation_tokens_per_second": 94424.3047429941,
+          "step": 600
+        },
+        {
+          "nll": 2.3355157673358917,
+          "bits_per_character": 3.369437015453473,
+          "physical_load": [
+            0.784332275390625,
+            0.215667724609375
+          ],
+          "router_entropy": 0.027370124822482467,
+          "evaluation_wall_seconds": 0.17469480499858037,
+          "evaluation_tokens_per_second": 93786.41797695783,
+          "step": 700
+        },
+        {
+          "nll": 2.31624236702919,
+          "bits_per_character": 3.341631376409927,
+          "physical_load": [
+            0.7674407958984375,
+            0.2325592041015625
+          ],
+          "router_entropy": 0.02832158701494336,
+          "evaluation_wall_seconds": 0.18192582800111268,
+          "evaluation_tokens_per_second": 90058.68039748482,
+          "step": 800
+        },
+        {
+          "nll": 2.2954564094543457,
+          "bits_per_character": 3.3116435784965703,
+          "physical_load": [
+            0.76446533203125,
+            0.23553466796875
+          ],
+          "router_entropy": 0.02510991902090609,
+          "evaluation_wall_seconds": 0.16859845900034998,
+          "evaluation_tokens_per_second": 97177.6379045433,
+          "step": 900
+        },
+        {
+          "nll": 2.25729763507843,
+          "bits_per_character": 3.2565921039380363,
+          "physical_load": [
+            0.749359130859375,
+            0.250640869140625
+          ],
+          "router_entropy": 0.03215499082580209,
+          "evaluation_wall_seconds": 0.17042067299917107,
+          "evaluation_tokens_per_second": 96138.57117017542,
+          "step": 1000
+        },
+        {
+          "nll": 2.234727144241333,
+          "bits_per_character": 3.2240297687369264,
+          "physical_load": [
+            0.75994873046875,
+            0.24005126953125
+          ],
+          "router_entropy": 0.027181289391592145,
+          "evaluation_wall_seconds": 0.17207567299919901,
+          "evaluation_tokens_per_second": 95213.92370248794,
+          "step": 1100
+        },
+        {
+          "nll": 2.1929439306259155,
+          "bits_per_character": 3.1637493336615594,
+          "physical_load": [
+            0.763641357421875,
+            0.236358642578125
+          ],
+          "router_entropy": 0.01834515598602593,
+          "evaluation_wall_seconds": 0.1721731629986607,
+          "evaluation_tokens_per_second": 95160.01050713954,
+          "step": 1200
+        }
+      ]
+    },
+    {
+      "nll": 2.185554325580597,
+      "bits_per_character": 3.1530883871085504,
+      "physical_load": [
+        0.7499542236328125,
+        0.2500457763671875
+      ],
+      "router_entropy": 0.01881924015469849,
+      "evaluation_wall_seconds": 0.16753954999876441,
+      "evaluation_tokens_per_second": 97791.8348242002,
+      "seed": 78401,
+      "condition": "film2x",
+      "updates": 1200,
+      "train_characters_seen": 2457600,
+      "active_macs_per_token_proxy": 198928,
+      "train_wall_seconds": 77.66093625900248,
+      "inference_payload": {
+        "path": "source/artifacts/seed78401_film2x_inference.pt",
+        "bytes": 477234,
+        "sha256": "71c08876d18bd82b963a4219344de5b650f56d0ac87be17ff83e772fb0e93799",
+        "expert_bank_tensor_bytes": 132608
+      },
+      "history": [
+        {
+          "nll": 2.897235006093979,
+          "bits_per_character": 4.179826575581689,
+          "physical_load": [
+            0.802398681640625,
+            0.197601318359375
+          ],
+          "router_entropy": 0.013722007744945586,
+          "evaluation_wall_seconds": 0.17669247899902984,
+          "evaluation_tokens_per_second": 92726.07466269098,
+          "step": 100
+        },
+        {
+          "nll": 2.6156984865665436,
+          "bits_per_character": 3.7736552350303194,
+          "physical_load": [
+            0.806060791015625,
+            0.193939208984375
+          ],
+          "router_entropy": 0.007535486831329763,
+          "evaluation_wall_seconds": 0.18000202999974135,
+          "evaluation_tokens_per_second": 91021.19570553477,
+          "step": 200
+        },
+        {
+          "nll": 2.536791443824768,
+          "bits_per_character": 3.6598164357755465,
+          "physical_load": [
+            0.794525146484375,
+            0.205474853515625
+          ],
+          "router_entropy": 0.00606082659214735,
+          "evaluation_wall_seconds": 0.17443988200102467,
+          "evaluation_tokens_per_second": 93923.47559547053,
+          "step": 300
+        },
+        {
+          "nll": 2.495194435119629,
+          "bits_per_character": 3.599804637600827,
+          "physical_load": [
+            0.79241943359375,
+            0.20758056640625
+          ],
+          "router_entropy": 0.009973439737223089,
+          "evaluation_wall_seconds": 0.17138245699970867,
+          "evaluation_tokens_per_second": 95599.04955749265,
+          "step": 400
+        },
+        {
+          "nll": 2.452412247657776,
+          "bits_per_character": 3.53808298791123,
+          "physical_load": [
+            0.7807159423828125,
+            0.2192840576171875
+          ],
+          "router_entropy": 0.019913798896595836,
+          "evaluation_wall_seconds": 0.16793915199741605,
+          "evaluation_tokens_per_second": 97559.14451831988,
+          "step": 500
+        },
+        {
+          "nll": 2.4021340012550354,
+          "bits_per_character": 3.4655468111614027,
+          "physical_load": [
+            0.7615203857421875,
+            0.2384796142578125
+          ],
+          "router_entropy": 0.02366125676780939,
+          "evaluation_wall_seconds": 0.17006010899785906,
+          "evaluation_tokens_per_second": 96342.40561498325,
+          "step": 600
+        },
+        {
+          "nll": 2.363867372274399,
+          "bits_per_character": 3.4103397352995004,
+          "physical_load": [
+            0.752685546875,
+            0.247314453125
+          ],
+          "router_entropy": 0.0262677778955549,
+          "evaluation_wall_seconds": 0.16946588599967072,
+          "evaluation_tokens_per_second": 96680.22506920263,
+          "step": 700
+        },
+        {
+          "nll": 2.3275465965270996,
+          "bits_per_character": 3.3579399322476315,
+          "physical_load": [
+            0.7555389404296875,
+            0.2444610595703125
+          ],
+          "router_entropy": 0.023021734785288572,
+          "evaluation_wall_seconds": 0.1722966119996272,
+          "evaluation_tokens_per_second": 95091.8291999581,
+          "step": 800
+        },
+        {
+          "nll": 2.308939039707184,
+          "bits_per_character": 3.3310949023004794,
+          "physical_load": [
+            0.7607879638671875,
+            0.2392120361328125
+          ],
+          "router_entropy": 0.02085035969503224,
+          "evaluation_wall_seconds": 0.1710961889984901,
+          "evaluation_tokens_per_second": 95759.0002203064,
+          "step": 900
+        },
+        {
+          "nll": 2.2496750950813293,
+          "bits_per_character": 3.245595103285241,
+          "physical_load": [
+            0.7421875,
+            0.2578125
+          ],
+          "router_entropy": 0.026361608179286122,
+          "evaluation_wall_seconds": 0.16765493999992032,
+          "evaluation_tokens_per_second": 97724.52872553465,
+          "step": 1000
+        },
+        {
+          "nll": 2.228382021188736,
+          "bits_per_character": 3.2148756911751146,
+          "physical_load": [
+            0.7501678466796875,
+            0.2498321533203125
+          ],
+          "router_entropy": 0.02531596482731402,
+          "evaluation_wall_seconds": 0.1653224460023921,
+          "evaluation_tokens_per_second": 99103.30022435632,
+          "step": 1100
+        },
+        {
+          "nll": 2.185554325580597,
+          "bits_per_character": 3.1530883871085504,
+          "physical_load": [
+            0.7499542236328125,
+            0.2500457763671875
+          ],
+          "router_entropy": 0.01881924015469849,
+          "evaluation_wall_seconds": 0.16900042099950952,
+          "evaluation_tokens_per_second": 96946.50405662334,
+          "step": 1200
+        }
+      ]
+    },
+    {
+      "nll": 2.1662046015262604,
+      "bits_per_character": 3.125172636172789,
+      "physical_load": [],
+      "router_entropy": 0.0,
+      "evaluation_wall_seconds": 0.12919020800109138,
+      "evaluation_tokens_per_second": 126820.75718820417,
+      "seed": 78402,
+      "condition": "dense",
+      "updates": 1200,
+      "train_characters_seen": 2457600,
+      "active_macs_per_token_proxy": 197124,
+      "train_wall_seconds": 60.327752043001965,
+      "inference_payload": {
+        "path": "source/artifacts/seed78402_dense_inference.pt",
+        "bytes": 603690,
+        "sha256": "dc57998632651cee99b351ec155dd6d1b51b119b4f0f6891df5101c7e2af9637",
+        "expert_bank_tensor_bytes": 0
+      },
+      "history": [
+        {
+          "nll": 2.7559993863105774,
+          "bits_per_character": 3.9760666473232966,
+          "physical_load": [],
+          "router_entropy": 0.0,
+          "evaluation_wall_seconds": 0.1313479410018772,
+          "evaluation_tokens_per_second": 124737.39500618319,
+          "step": 100
+        },
+        {
+          "nll": 2.6077166497707367,
+          "bits_per_character": 3.7621398786678237,
+          "physical_load": [],
+          "router_entropy": 0.0,
+          "evaluation_wall_seconds": 0.1271807200027979,
+          "evaluation_tokens_per_second": 128824.55768169549,
+          "step": 200
+        },
+        {
+          "nll": 2.5396293997764587,
+          "bits_per_character": 3.663910740753312,
+          "physical_load": [],
+          "router_entropy": 0.0,
+          "evaluation_wall_seconds": 0.1263988060018164,
+          "evaluation_tokens_per_second": 129621.47759342406,
+          "step": 300
+        },
+        {
+          "nll": 2.474692404270172,
+          "bits_per_character": 3.5702264593661632,
+          "physical_load": [],
+          "router_entropy": 0.0,
+          "evaluation_wall_seconds": 0.1272971910002525,
+          "evaluation_tokens_per_second": 128706.68921490578,
+          "step": 400
+        },
+        {
+          "nll": 2.4350405633449554,
+          "bits_per_character": 3.513020945101235,
+          "physical_load": [],
+          "router_entropy": 0.0,
+          "evaluation_wall_seconds": 0.12724031600009766,
+          "evaluation_tokens_per_second": 128764.21966751029,
+          "step": 500
+        },
+        {
+          "nll": 2.3872042298316956,
+          "bits_per_character": 3.4440077039673445,
+          "physical_load": [],
+          "router_entropy": 0.0,
+          "evaluation_wall_seconds": 0.12786720000076457,
+          "evaluation_tokens_per_second": 128132.93792232906,
+          "step": 600
+        },
+        {
+          "nll": 2.3548538386821747,
+          "bits_per_character": 3.3973359550851128,
+          "physical_load": [],
+          "router_entropy": 0.0,
+          "evaluation_wall_seconds": 0.12735976499971002,
+          "evaluation_tokens_per_second": 128643.45344887613,
+          "step": 700
+        },
+        {
+          "nll": 2.3233956694602966,
+          "bits_per_character": 3.351951410353263,
+          "physical_load": [],
+          "router_entropy": 0.0,
+          "evaluation_wall_seconds": 0.12748243600071874,
+          "evaluation_tokens_per_second": 128519.66524947506,
+          "step": 800
+        },
+        {
+          "nll": 2.2705820202827454,
+          "bits_per_character": 3.2757574205935605,
+          "physical_load": [],
+          "router_entropy": 0.0,
+          "evaluation_wall_seconds": 0.12731311499737785,
+          "evaluation_tokens_per_second": 128690.59091309992,
+          "step": 900
+        },
+        {
+          "nll": 2.2206366658210754,
+          "bits_per_character": 3.203701505396268,
+          "physical_load": [],
+          "router_entropy": 0.0,
+          "evaluation_wall_seconds": 0.1280887579996488,
+          "evaluation_tokens_per_second": 127911.30350444121,
+          "step": 1000
+        },
+        {
+          "nll": 2.2002526819705963,
+          "bits_per_character": 3.174293632981621,
+          "physical_load": [],
+          "router_entropy": 0.0,
+          "evaluation_wall_seconds": 0.127201948002039,
+          "evaluation_tokens_per_second": 128803.05889448621,
+          "step": 1100
+        },
+        {
+          "nll": 2.1662046015262604,
+          "bits_per_character": 3.125172636172789,
+          "physical_load": [],
+          "router_entropy": 0.0,
+          "evaluation_wall_seconds": 0.12767802999951527,
+          "evaluation_tokens_per_second": 128322.78192310926,
+          "step": 1200
+        }
+      ]
+    },
+    {
+      "nll": 2.1293376982212067,
+      "bits_per_character": 3.071984937601655,
+      "physical_load": [
+        0.5868682861328125,
+        0.1033172607421875,
+        0.123199462890625,
+        0.186614990234375
+      ],
+      "router_entropy": 0.016434740275144577,
+      "evaluation_wall_seconds": 0.1604678200019407,
+      "evaluation_tokens_per_second": 102101.46806881187,
+      "seed": 78402,
+      "condition": "untied_moe",
+      "updates": 1200,
+      "train_characters_seen": 2457600,
+      "active_macs_per_token_proxy": 198672,
+      "train_wall_seconds": 78.84246152500054,
+      "inference_payload": {
+        "path": "source/artifacts/seed78402_untied_moe_inference.pt",
+        "bytes": 1423550,
+        "sha256": "05b635bc3918f48c143284b5808a955d75840e6ebb355ddfef4ef2ac90148fc9",
+        "expert_bank_tensor_bytes": 1060864
+      },
+      "history": [
+        {
+          "nll": 2.759536176919937,
+          "bits_per_character": 3.981169157596083,
+          "physical_load": [
+            0.5954437255859375,
+            0.1120452880859375,
+            0.114776611328125,
+            0.177734375
+          ],
+          "router_entropy": 0.012662450782954693,
+          "evaluation_wall_seconds": 0.16892336800083285,
+          "evaluation_tokens_per_second": 96990.72540348131,
+          "step": 100
+        },
+        {
+          "nll": 2.607387125492096,
+          "bits_per_character": 3.7616644756251763,
+          "physical_load": [
+            0.6187744140625,
+            0.1003570556640625,
+            0.118927001953125,
+            0.1619415283203125
+          ],
+          "router_entropy": 0.008042905596084893,
+          "evaluation_wall_seconds": 0.16405717500310857,
+          "evaluation_tokens_per_second": 99867.62236817472,
+          "step": 200
+        },
+        {
+          "nll": 2.5322177410125732,
+          "bits_per_character": 3.653217977409893,
+          "physical_load": [
+            0.6091766357421875,
+            0.094207763671875,
+            0.1178131103515625,
+            0.178802490234375
+          ],
+          "router_entropy": 0.00819111819146201,
+          "evaluation_wall_seconds": 0.16328604799855384,
+          "evaluation_tokens_per_second": 100339.25250089406,
+          "step": 300
+        },
+        {
+          "nll": 2.4722639620304108,
+          "bits_per_character": 3.566722957789774,
+          "physical_load": [
+            0.6058349609375,
+            0.0967254638671875,
+            0.1155853271484375,
+            0.181854248046875
+          ],
+          "router_entropy": 0.012727009132504463,
+          "evaluation_wall_seconds": 0.16600940999705927,
+          "evaluation_tokens_per_second": 98693.20058598022,
+          "step": 400
+        },
+        {
+          "nll": 2.421040028333664,
+          "bits_per_character": 3.4928224426706524,
+          "physical_load": [
+            0.585052490234375,
+            0.1025543212890625,
+            0.122711181640625,
+            0.1896820068359375
+          ],
+          "router_entropy": 0.02252701693214476,
+          "evaluation_wall_seconds": 0.16544181700010085,
+          "evaluation_tokens_per_second": 99031.79436182094,
+          "step": 500
+        },
+        {
+          "nll": 2.3698944747447968,
+          "bits_per_character": 3.419035006144473,
+          "physical_load": [
+            0.59356689453125,
+            0.100372314453125,
+            0.1214447021484375,
+            0.1846160888671875
+          ],
+          "router_entropy": 0.017750729573890567,
+          "evaluation_wall_seconds": 0.16271466100079124,
+          "evaluation_tokens_per_second": 100691.60270641088,
+          "step": 600
+        },
+        {
+          "nll": 2.3222779035568237,
+          "bits_per_character": 3.350338815027448,
+          "physical_load": [
+            0.588287353515625,
+            0.107879638671875,
+            0.11907958984375,
+            0.18475341796875
+          ],
+          "router_entropy": 0.02245587599463761,
+          "evaluation_wall_seconds": 0.16489924599954975,
+          "evaluation_tokens_per_second": 99357.64048335755,
+          "step": 700
+        },
+        {
+          "nll": 2.2670941948890686,
+          "bits_per_character": 3.2707255521946164,
+          "physical_load": [
+            0.5817108154296875,
+            0.1031951904296875,
+            0.1202239990234375,
+            0.1948699951171875
+          ],
+          "router_entropy": 0.01974243251606822,
+          "evaluation_wall_seconds": 0.16746041899750708,
+          "evaluation_tokens_per_second": 97838.04494269122,
+          "step": 800
+        },
+        {
+          "nll": 2.218020260334015,
+          "bits_per_character": 3.199926830175131,
+          "physical_load": [
+            0.588653564453125,
+            0.10296630859375,
+            0.1233673095703125,
+            0.1850128173828125
+          ],
+          "router_entropy": 0.01360330602619797,
+          "evaluation_wall_seconds": 0.1638589200010756,
+          "evaluation_tokens_per_second": 99988.45348115594,
+          "step": 900
+        },
+        {
+          "nll": 2.1877746284008026,
+          "bits_per_character": 3.1562916069765325,
+          "physical_load": [
+            0.5699920654296875,
+            0.101959228515625,
+            0.128021240234375,
+            0.2000274658203125
+          ],
+          "router_entropy": 0.01661922177299857,
+          "evaluation_wall_seconds": 0.16526013100155978,
+          "evaluation_tokens_per_second": 99140.66932359725,
+          "step": 1000
+        },
+        {
+          "nll": 2.159502476453781,
+          "bits_per_character": 3.1155035135673055,
+          "physical_load": [
+            0.59234619140625,
+            0.1030426025390625,
+            0.1193389892578125,
+            0.185272216796875
+          ],
+          "router_entropy": 0.016056292573921382,
+          "evaluation_wall_seconds": 0.16539151899996796,
+          "evaluation_tokens_per_second": 99061.9113910138,
+          "step": 1100
+        },
+        {
+          "nll": 2.1293376982212067,
+          "bits_per_character": 3.071984937601655,
+          "physical_load": [
+            0.5868682861328125,
+            0.1033172607421875,
+            0.123199462890625,
+            0.186614990234375
+          ],
+          "router_entropy": 0.016434740275144577,
+          "evaluation_wall_seconds": 0.1671132010014844,
+          "evaluation_tokens_per_second": 98041.32708734642,
+          "step": 1200
+        }
+      ]
+    },
+    {
+      "nll": 2.1899428963661194,
+      "bits_per_character": 3.159419756417414,
+      "physical_load": [
+        0.6082916259765625,
+        0.1198272705078125,
+        0.11309814453125,
+        0.158782958984375
+      ],
+      "router_entropy": 0.04136411473155022,
+      "evaluation_wall_seconds": 0.15890779799883603,
+      "evaluation_tokens_per_second": 103103.81369780235,
+      "seed": 78402,
+      "condition": "unipool4",
+      "updates": 1200,
+      "train_characters_seen": 2457600,
+      "active_macs_per_token_proxy": 198672,
+      "train_wall_seconds": 75.4349717719997,
+      "inference_payload": {
+        "path": "source/artifacts/seed78402_unipool4_inference.pt",
+        "bytes": 611690,
+        "sha256": "75d9883ceea92619f1a61f83942cf1a83bfff2e46e1beddf81c88969aa0ec5d7",
+        "expert_bank_tensor_bytes": 265216
+      },
+      "history": [
+        {
+          "nll": 2.767793118953705,
+          "bits_per_character": 3.9930814069211067,
+          "physical_load": [
+            0.6192626953125,
+            0.1131591796875,
+            0.1176605224609375,
+            0.1499176025390625
+          ],
+          "router_entropy": 0.01367743348237127,
+          "evaluation_wall_seconds": 0.16558332500062534,
+          "evaluation_tokens_per_second": 98947.16149671547,
+          "step": 100
+        },
+        {
+          "nll": 2.6075111031532288,
+          "bits_per_character": 3.7618433375820737,
+          "physical_load": [
+            0.6278228759765625,
+            0.10101318359375,
+            0.1199188232421875,
+            0.1512451171875
+          ],
+          "router_entropy": 0.01058571063913405,
+          "evaluation_wall_seconds": 0.16589626299901283,
+          "evaluation_tokens_per_second": 98760.51276753288,
+          "step": 200
+        },
+        {
+          "nll": 2.5447983145713806,
+          "bits_per_character": 3.671367908494723,
+          "physical_load": [
+            0.6287384033203125,
+            0.1023406982421875,
+            0.119903564453125,
+            0.149017333984375
+          ],
+          "router_entropy": 0.011525897309184074,
+          "evaluation_wall_seconds": 0.16727083200021298,
+          "evaluation_tokens_per_second": 97948.93589086195,
+          "step": 300
+        },
+        {
+          "nll": 2.494898408651352,
+          "bits_per_character": 3.599377561683072,
+          "physical_load": [
+            0.6334686279296875,
+            0.1016998291015625,
+            0.1106719970703125,
+            0.1541595458984375
+          ],
+          "router_entropy": 0.012978966697119176,
+          "evaluation_wall_seconds": 0.16884658300114097,
+          "evaluation_tokens_per_second": 97034.83309395303,
+          "step": 400
+        },
+        {
+          "nll": 2.466868042945862,
+          "bits_per_character": 3.5589382920854575,
+          "physical_load": [
+            0.6293487548828125,
+            0.106964111328125,
+            0.109527587890625,
+            0.1541595458984375
+          ],
+          "router_entropy": 0.019735003588721156,
+          "evaluation_wall_seconds": 0.15923722699881182,
+          "evaluation_tokens_per_second": 102890.51315947779,
+          "step": 500
+        },
+        {
+          "nll": 2.413878083229065,
+          "bits_per_character": 3.4824899399851286,
+          "physical_load": [
+            0.6181793212890625,
+            0.105255126953125,
+            0.114593505859375,
+            0.1619720458984375
+          ],
+          "router_entropy": 0.026185292284935713,
+          "evaluation_wall_seconds": 0.16467147699950146,
+          "evaluation_tokens_per_second": 99495.06920405895,
+          "step": 600
+        },
+        {
+          "nll": 2.372426152229309,
+          "bits_per_character": 3.422687444696509,
+          "physical_load": [
+            0.616973876953125,
+            0.117584228515625,
+            0.115234375,
+            0.15020751953125
+          ],
+          "router_entropy": 0.027334654703736305,
+          "evaluation_wall_seconds": 0.1639536879993102,
+          "evaluation_tokens_per_second": 99930.65846782862,
+          "step": 700
+        },
+        {
+          "nll": 2.3319009244441986,
+          "bits_per_character": 3.3642218995400346,
+          "physical_load": [
+            0.6176300048828125,
+            0.1138916015625,
+            0.1110382080078125,
+            0.157440185546875
+          ],
+          "router_entropy": 0.03196338680572808,
+          "evaluation_wall_seconds": 0.1623290379975515,
+          "evaluation_tokens_per_second": 100930.8020432372,
+          "step": 800
+        },
+        {
+          "nll": 2.2801593244075775,
+          "bits_per_character": 3.2895745497595414,
+          "physical_load": [
+            0.6006927490234375,
+            0.12030029296875,
+            0.1126251220703125,
+            0.1663818359375
+          ],
+          "router_entropy": 0.04049382172524929,
+          "evaluation_wall_seconds": 0.1701053220022004,
+          "evaluation_tokens_per_second": 96316.79836441604,
+          "step": 900
+        },
+        {
+          "nll": 2.2377339601516724,
+          "bits_per_character": 3.228367687139639,
+          "physical_load": [
+            0.604339599609375,
+            0.1202392578125,
+            0.1126708984375,
+            0.162750244140625
+          ],
+          "router_entropy": 0.04141643224284053,
+          "evaluation_wall_seconds": 0.1599372669988952,
+          "evaluation_tokens_per_second": 102440.16486859923,
+          "step": 1000
+        },
+        {
+          "nll": 2.210819751024246,
+          "bits_per_character": 3.1895386911020527,
+          "physical_load": [
+            0.6107940673828125,
+            0.118896484375,
+            0.112762451171875,
+            0.1575469970703125
+          ],
+          "router_entropy": 0.03447330603376031,
+          "evaluation_wall_seconds": 0.1599252769992745,
+          "evaluation_tokens_per_second": 102447.84506500699,
+          "step": 1100
+        },
+        {
+          "nll": 2.1899428963661194,
+          "bits_per_character": 3.159419756417414,
+          "physical_load": [
+            0.6082916259765625,
+            0.1198272705078125,
+            0.11309814453125,
+            0.158782958984375
+          ],
+          "router_entropy": 0.04136411473155022,
+          "evaluation_wall_seconds": 0.16975563899904955,
+          "evaluation_tokens_per_second": 96515.20324512891,
+          "step": 1200
+        }
+      ]
+    },
+    {
+      "nll": 2.2815753519535065,
+      "bits_per_character": 3.291617445677815,
+      "physical_load": [
+        0.7717742919921875,
+        0.2282257080078125
+      ],
+      "router_entropy": 0.0,
+      "evaluation_wall_seconds": 0.14760499600015464,
+      "evaluation_tokens_per_second": 110998.95290795465,
+      "seed": 78402,
+      "condition": "unipool2",
+      "updates": 1200,
+      "train_characters_seen": 2457600,
+      "active_macs_per_token_proxy": 197640,
+      "train_wall_seconds": 74.62785715800055,
+      "inference_payload": {
+        "path": "source/artifacts/seed78402_unipool2_inference.pt",
+        "bytes": 474458,
+        "sha256": "a449078b55b43dcbc391ea0b050f014ee61e45bfee50e5ff4cb61e578b57d80c",
+        "expert_bank_tensor_bytes": 132608
+      },
+      "history": [
+        {
+          "nll": 2.7552937269210815,
+          "bits_per_character": 3.975048596021514,
+          "physical_load": [
+            0.7718658447265625,
+            0.2281341552734375
+          ],
+          "router_entropy": 0.0,
+          "evaluation_wall_seconds": 0.15141953200145508,
+          "evaluation_tokens_per_second": 108202.68550191105,
+          "step": 100
+        },
+        {
+          "nll": 2.614181697368622,
+          "bits_per_character": 3.771466970776404,
+          "physical_load": [
+            0.7717437744140625,
+            0.2282562255859375
+          ],
+          "router_entropy": 0.0,
+          "evaluation_wall_seconds": 0.1529929380012618,
+          "evaluation_tokens_per_second": 107089.91025366723,
+          "step": 200
+        },
+        {
+          "nll": 2.5522855520248413,
+          "bits_per_character": 3.682169708838789,
+          "physical_load": [
+            0.7718353271484375,
+            0.2281646728515625
+          ],
+          "router_entropy": 0.0,
+          "evaluation_wall_seconds": 0.14710956099952455,
+          "evaluation_tokens_per_second": 111372.77474475607,
+          "step": 300
+        },
+        {
+          "nll": 2.5169502198696136,
+          "bits_per_character": 3.6311916003702778,
+          "physical_load": [
+            0.7715606689453125,
+            0.2284393310546875
+          ],
+          "router_entropy": 0.0,
+          "evaluation_wall_seconds": 0.14851647799878265,
+          "evaluation_tokens_per_second": 110317.72514922079,
+          "step": 400
+        },
+        {
+          "nll": 2.4741709530353546,
+          "bits_per_character": 3.5694741642556265,
+          "physical_load": [
+            0.7716827392578125,
+            0.2283172607421875
+          ],
+          "router_entropy": 0.0,
+          "evaluation_wall_seconds": 0.148213090000354,
+          "evaluation_tokens_per_second": 110543.54240884438,
+          "step": 500
+        },
+        {
+          "nll": 2.4322526454925537,
+          "bits_per_character": 3.508998829841169,
+          "physical_load": [
+            0.7716064453125,
+            0.2283935546875
+          ],
+          "router_entropy": 0.0,
+          "evaluation_wall_seconds": 0.14741762599805952,
+          "evaluation_tokens_per_second": 111140.03423319044,
+          "step": 600
+        },
+        {
+          "nll": 2.41982439160347,
+          "bits_per_character": 3.491068649588479,
+          "physical_load": [
+            0.7711944580078125,
+            0.2288055419921875
+          ],
+          "router_entropy": 0.0,
+          "evaluation_wall_seconds": 0.1525156239986245,
+          "evaluation_tokens_per_second": 107425.05961322207,
+          "step": 700
+        },
+        {
+          "nll": 2.376723676919937,
+          "bits_per_character": 3.4288874622557763,
+          "physical_load": [
+            0.7715606689453125,
+            0.2284393310546875
+          ],
+          "router_entropy": 0.0,
+          "evaluation_wall_seconds": 0.1471346620019176,
+          "evaluation_tokens_per_second": 111353.77467878009,
+          "step": 800
+        },
+        {
+          "nll": 2.34770667552948,
+          "bits_per_character": 3.3870247782482954,
+          "physical_load": [
+            0.77178955078125,
+            0.22821044921875
+          ],
+          "router_entropy": 0.0,
+          "evaluation_wall_seconds": 0.14804001700031222,
+          "evaluation_tokens_per_second": 110672.77842831811,
+          "step": 900
+        },
+        {
+          "nll": 2.3201046884059906,
+          "bits_per_character": 3.347203528306556,
+          "physical_load": [
+            0.7716217041015625,
+            0.2283782958984375
+          ],
+          "router_entropy": 0.0,
+          "evaluation_wall_seconds": 0.15028538400292746,
+          "evaluation_tokens_per_second": 109019.25099835957,
+          "step": 1000
+        },
+        {
+          "nll": 2.3004641234874725,
+          "bits_per_character": 3.3188681826983526,
+          "physical_load": [
+            0.7714691162109375,
+            0.2285308837890625
+          ],
+          "router_entropy": 0.0,
+          "evaluation_wall_seconds": 0.14710483200178714,
+          "evaluation_tokens_per_second": 111376.35505950582,
+          "step": 1100
+        },
+        {
+          "nll": 2.2815753519535065,
+          "bits_per_character": 3.291617445677815,
+          "physical_load": [
+            0.7717742919921875,
+            0.2282257080078125
+          ],
+          "router_entropy": 0.0,
+          "evaluation_wall_seconds": 0.14746719899994787,
+          "evaluation_tokens_per_second": 111102.67307651101,
+          "step": 1200
+        }
+      ]
+    },
+    {
+      "nll": 2.2610702514648438,
+      "bits_per_character": 3.2620348388898917,
+      "physical_load": [
+        0.817047119140625,
+        0.182952880859375
+      ],
+      "router_entropy": 0.00031103846322366735,
+      "evaluation_wall_seconds": 0.1492521449981723,
+      "evaluation_tokens_per_second": 109773.96673394968,
+      "seed": 78402,
+      "condition": "hard_alias2x",
+      "updates": 1200,
+      "train_characters_seen": 2457600,
+      "active_macs_per_token_proxy": 198672,
+      "train_wall_seconds": 71.04878372500025,
+      "inference_payload": {
+        "path": "source/artifacts/seed78402_hard_alias2x_inference.pt",
+        "bytes": 476746,
+        "sha256": "ee5ae0506adf095bbd529205edc2f42e26953e9d437c6473338baeac83445327",
+        "expert_bank_tensor_bytes": 132608
+      },
+      "history": [
+        {
+          "nll": 2.7907941937446594,
+          "bits_per_character": 4.026264943457133,
+          "physical_load": [
+            0.7766876220703125,
+            0.2233123779296875
+          ],
+          "router_entropy": 0.001649787009228021,
+          "evaluation_wall_seconds": 0.15821745699940948,
+          "evaluation_tokens_per_second": 103553.68055284285,
+          "step": 100
+        },
+        {
+          "nll": 2.6126800775527954,
+          "bits_per_character": 3.7693005913148103,
+          "physical_load": [
+            0.79888916015625,
+            0.20111083984375
+          ],
+          "router_entropy": 0.0002143033761967672,
+          "evaluation_wall_seconds": 0.1528554479991726,
+          "evaluation_tokens_per_second": 107186.23519450013,
+          "step": 200
+        },
+        {
+          "nll": 2.560569554567337,
+          "bits_per_character": 3.6941209982255594,
+          "physical_load": [
+            0.801513671875,
+            0.198486328125
+          ],
+          "router_entropy": 0.000500377453136025,
+          "evaluation_wall_seconds": 0.16543451899997308,
+          "evaluation_tokens_per_second": 99036.16306342128,
+          "step": 300
+        },
+        {
+          "nll": 2.513080596923828,
+          "bits_per_character": 3.625608914536283,
+          "physical_load": [
+            0.8134613037109375,
+            0.1865386962890625
+          ],
+          "router_entropy": 0.00026603984497342026,
+          "evaluation_wall_seconds": 0.15254862499932642,
+          "evaluation_tokens_per_second": 107401.8202397586,
+          "step": 400
+        },
+        {
+          "nll": 2.46522718667984,
+          "bits_per_character": 3.5565710368876564,
+          "physical_load": [
+            0.816192626953125,
+            0.183807373046875
+          ],
+          "router_entropy": 0.0005466066377266543,
+          "evaluation_wall_seconds": 0.15975039399927482,
+          "evaluation_tokens_per_second": 102559.99744247501,
+          "step": 500
+        },
+        {
+          "nll": 2.4166179895401,
+          "bits_per_character": 3.4864427892325596,
+          "physical_load": [
+            0.8170623779296875,
+            0.1829376220703125
+          ],
+          "router_entropy": 0.00027522713844518876,
+          "evaluation_wall_seconds": 0.15401991100225132,
+          "evaluation_tokens_per_second": 106375.85681867141,
+          "step": 600
+        },
+        {
+          "nll": 2.3895795047283173,
+          "bits_per_character": 3.4474345012814487,
+          "physical_load": [
+            0.8162994384765625,
+            0.1837005615234375
+          ],
+          "router_entropy": 0.0002046608015007223,
+          "evaluation_wall_seconds": 0.14999123500092537,
+          "evaluation_tokens_per_second": 109233.04951718624,
+          "step": 700
+        },
+        {
+          "nll": 2.357262074947357,
+          "bits_per_character": 3.4008103056021803,
+          "physical_load": [
+            0.8175201416015625,
+            0.1824798583984375
+          ],
+          "router_entropy": 0.00030245813832152635,
+          "evaluation_wall_seconds": 0.1530230099997425,
+          "evaluation_tokens_per_second": 107068.865002901,
+          "step": 800
+        },
+        {
+          "nll": 2.321497619152069,
+          "bits_per_character": 3.3492131025862255,
+          "physical_load": [
+            0.816558837890625,
+            0.183441162109375
+          ],
+          "router_entropy": 0.0006037723796907812,
+          "evaluation_wall_seconds": 0.14911155399749987,
+          "evaluation_tokens_per_second": 109877.4679812854,
+          "step": 900
+        },
+        {
+          "nll": 2.290783703327179,
+          "bits_per_character": 3.3049022885393757,
+          "physical_load": [
+            0.8167572021484375,
+            0.1832427978515625
+          ],
+          "router_entropy": 0.0006583246649825014,
+          "evaluation_wall_seconds": 0.15060547100074473,
+          "evaluation_tokens_per_second": 108787.54862709458,
+          "step": 1000
+        },
+        {
+          "nll": 2.276062548160553,
+          "bits_per_character": 3.283664150984327,
+          "physical_load": [
+            0.8170318603515625,
+            0.1829681396484375
+          ],
+          "router_entropy": 0.0003240843034291174,
+          "evaluation_wall_seconds": 0.149387902001763,
+          "evaluation_tokens_per_second": 109674.20909229078,
+          "step": 1100
+        },
+        {
+          "nll": 2.2610702514648438,
+          "bits_per_character": 3.2620348388898917,
+          "physical_load": [
+            0.817047119140625,
+            0.182952880859375
+          ],
+          "router_entropy": 0.00031103846322366735,
+          "evaluation_wall_seconds": 0.14978983499895548,
+          "evaluation_tokens_per_second": 109379.91887175955,
+          "step": 1200
+        }
+      ]
+    },
+    {
+      "nll": 2.165198415517807,
+      "bits_per_character": 3.1237210166081812,
+      "physical_load": [
+        0.8261260986328125,
+        0.1738739013671875
+      ],
+      "router_entropy": 0.0004254909981682431,
+      "evaluation_wall_seconds": 0.16510499099968,
+      "evaluation_tokens_per_second": 99233.82631135454,
+      "seed": 78402,
+      "condition": "mirror2x",
+      "updates": 1200,
+      "train_characters_seen": 2457600,
+      "active_macs_per_token_proxy": 198864,
+      "train_wall_seconds": 76.97222634599893,
+      "inference_payload": {
+        "path": "source/artifacts/seed78402_mirror2x_inference.pt",
+        "bytes": 477356,
+        "sha256": "46be18b5d3cde36577791e5e0673ca4bcdd71f690e96bb04c49fbca19c5819a6",
+        "expert_bank_tensor_bytes": 132608
+      },
+      "history": [
+        {
+          "nll": 2.8372262120246887,
+          "bits_per_character": 4.093252185968197,
+          "physical_load": [
+            0.8250579833984375,
+            0.1749420166015625
+          ],
+          "router_entropy": 0.00011840553634101525,
+          "evaluation_wall_seconds": 0.19460540599902743,
+          "evaluation_tokens_per_second": 84190.87802772489,
+          "step": 100
+        },
+        {
+          "nll": 2.620374470949173,
+          "bits_per_character": 3.780401254510413,
+          "physical_load": [
+            0.8255615234375,
+            0.1744384765625
+          ],
+          "router_entropy": 0.00012065708455111235,
+          "evaluation_wall_seconds": 0.1679304419994878,
+          "evaluation_tokens_per_second": 97564.2045892428,
+          "step": 200
+        },
+        {
+          "nll": 2.546674966812134,
+          "bits_per_character": 3.674075345375931,
+          "physical_load": [
+            0.8263092041015625,
+            0.1736907958984375
+          ],
+          "router_entropy": 0.00019711186905624345,
+          "evaluation_wall_seconds": 0.16871965799873578,
+          "evaluation_tokens_per_second": 97107.83079066439,
+          "step": 300
+        },
+        {
+          "nll": 2.4736425578594208,
+          "bits_per_character": 3.568711851155677,
+          "physical_load": [
+            0.8264312744140625,
+            0.1735687255859375
+          ],
+          "router_entropy": 4.014726118839462e-05,
+          "evaluation_wall_seconds": 0.16524228399794083,
+          "evaluation_tokens_per_second": 99151.37701802868,
+          "step": 400
+        },
+        {
+          "nll": 2.410267472267151,
+          "bits_per_character": 3.477280929455796,
+          "physical_load": [
+            0.8257598876953125,
+            0.1742401123046875
+          ],
+          "router_entropy": 5.269392977425014e-05,
+          "evaluation_wall_seconds": 0.1646271279969369,
+          "evaluation_tokens_per_second": 99521.87224152294,
+          "step": 500
+        },
+        {
+          "nll": 2.351762056350708,
+          "bits_per_character": 3.3928754560479977,
+          "physical_load": [
+            0.8259735107421875,
+            0.1740264892578125
+          ],
+          "router_entropy": 0.0002613869277752201,
+          "evaluation_wall_seconds": 0.16455161300109467,
+          "evaluation_tokens_per_second": 99567.54419594178,
+          "step": 600
+        },
+        {
+          "nll": 2.310172885656357,
+          "bits_per_character": 3.3328749657325725,
+          "physical_load": [
+            0.8261260986328125,
+            0.1738739013671875
+          ],
+          "router_entropy": 0.00012627821661226335,
+          "evaluation_wall_seconds": 0.16381767300117644,
+          "evaluation_tokens_per_second": 100013.62917590913,
+          "step": 700
+        },
+        {
+          "nll": 2.284468412399292,
+          "bits_per_character": 3.295791249635942,
+          "physical_load": [
+            0.82525634765625,
+            0.17474365234375
+          ],
+          "router_entropy": 0.00019384615143280826,
+          "evaluation_wall_seconds": 0.17664312299893936,
+          "evaluation_tokens_per_second": 92751.98333137699,
+          "step": 800
+        },
+        {
+          "nll": 2.245095670223236,
+          "bits_per_character": 3.2389883897523464,
+          "physical_load": [
+            0.8260498046875,
+            0.1739501953125
+          ],
+          "router_entropy": 0.00011452561057012645,
+          "evaluation_wall_seconds": 0.16955478999807383,
+          "evaluation_tokens_per_second": 96629.53196536722,
+          "step": 900
+        },
+        {
+          "nll": 2.211706727743149,
+          "bits_per_character": 3.190818328015798,
+          "physical_load": [
+            0.8249969482421875,
+            0.1750030517578125
+          ],
+          "router_entropy": 0.00042051901255035773,
+          "evaluation_wall_seconds": 0.16695136400085175,
+          "evaluation_tokens_per_second": 98136.36503093447,
+          "step": 1000
+        },
+        {
+          "nll": 2.1846462786197662,
+          "bits_per_character": 3.1517783522612657,
+          "physical_load": [
+            0.826171875,
+            0.173828125
+          ],
+          "router_entropy": 0.0005203169357628212,
+          "evaluation_wall_seconds": 0.16451633599717752,
+          "evaluation_tokens_per_second": 99588.8943228172,
+          "step": 1100
+        },
+        {
+          "nll": 2.165198415517807,
+          "bits_per_character": 3.1237210166081812,
+          "physical_load": [
+            0.8261260986328125,
+            0.1738739013671875
+          ],
+          "router_entropy": 0.0004254909981682431,
+          "evaluation_wall_seconds": 0.16535793199727777,
+          "evaluation_tokens_per_second": 99082.03254664387,
+          "step": 1200
+        }
+      ]
+    },
+    {
+      "nll": 2.144324153661728,
+      "bits_per_character": 3.0936058225461984,
+      "physical_load": [
+        0.77423095703125,
+        0.22576904296875
+      ],
+      "router_entropy": 9.206103914038977e-05,
+      "evaluation_wall_seconds": 0.16678440200121258,
+      "evaluation_tokens_per_second": 98234.60589486589,
+      "seed": 78402,
+      "condition": "film2x",
+      "updates": 1200,
+      "train_characters_seen": 2457600,
+      "active_macs_per_token_proxy": 198928,
+      "train_wall_seconds": 78.73794767399886,
+      "inference_payload": {
+        "path": "source/artifacts/seed78402_film2x_inference.pt",
+        "bytes": 477234,
+        "sha256": "61adb5eebd2f3c6a4ae29db6a8bbe27f1b0344027d04f659f46edfbfd19ce442",
+        "expert_bank_tensor_bytes": 132608
+      },
+      "history": [
+        {
+          "nll": 2.8080370724201202,
+          "bits_per_character": 4.051141159012871,
+          "physical_load": [
+            0.7691802978515625,
+            0.2308197021484375
+          ],
+          "router_entropy": 0.0005792713600385468,
+          "evaluation_wall_seconds": 0.1809555330000876,
+          "evaluation_tokens_per_second": 90541.58073183686,
+          "step": 100
+        },
+        {
+          "nll": 2.6197370290756226,
+          "bits_per_character": 3.779481620280587,
+          "physical_load": [
+            0.7659912109375,
+            0.2340087890625
+          ],
+          "router_entropy": 0.0002404055376246106,
+          "evaluation_wall_seconds": 0.17222713199953432,
+          "evaluation_tokens_per_second": 95130.19121774785,
+          "step": 200
+        },
+        {
+          "nll": 2.5477074682712555,
+          "bits_per_character": 3.6755649301107165,
+          "physical_load": [
+            0.765777587890625,
+            0.234222412109375
+          ],
+          "router_entropy": 0.0003064100837946171,
+          "evaluation_wall_seconds": 0.17543251799725113,
+          "evaluation_tokens_per_second": 93392.03579268424,
+          "step": 300
+        },
+        {
+          "nll": 2.4781129956245422,
+          "bits_per_character": 3.5751613295500206,
+          "physical_load": [
+            0.77093505859375,
+            0.22906494140625
+          ],
+          "router_entropy": 0.00015535293823631946,
+          "evaluation_wall_seconds": 0.18086578299698886,
+          "evaluation_tokens_per_second": 90586.5096676289,
+          "step": 400
+        },
+        {
+          "nll": 2.4141798615455627,
+          "bits_per_character": 3.482925314065788,
+          "physical_load": [
+            0.7707977294921875,
+            0.2292022705078125
+          ],
+          "router_entropy": 7.58819521706755e-06,
+          "evaluation_wall_seconds": 0.17576756000198657,
+          "evaluation_tokens_per_second": 93214.0151448585,
+          "step": 500
+        },
+        {
+          "nll": 2.3667366206645966,
+          "bits_per_character": 3.4144791857231174,
+          "physical_load": [
+            0.7706451416015625,
+            0.2293548583984375
+          ],
+          "router_entropy": 1.3286088915265282e-05,
+          "evaluation_wall_seconds": 0.1716213810032059,
+          "evaluation_tokens_per_second": 95465.96061765723,
+          "step": 600
+        },
+        {
+          "nll": 2.32817280292511,
+          "bits_per_character": 3.358843357112614,
+          "physical_load": [
+            0.7836761474609375,
+            0.2163238525390625
+          ],
+          "router_entropy": 0.00016542207049496938,
+          "evaluation_wall_seconds": 0.17561864600065746,
+          "evaluation_tokens_per_second": 93293.05499792239,
+          "step": 700
+        },
+        {
+          "nll": 2.2856299579143524,
+          "bits_per_character": 3.2974670055902866,
+          "physical_load": [
+            0.7761077880859375,
+            0.2238922119140625
+          ],
+          "router_entropy": 0.00012218708752698149,
+          "evaluation_wall_seconds": 0.16933611700005713,
+          "evaluation_tokens_per_second": 96754.31496988013,
+          "step": 800
+        },
+        {
+          "nll": 2.228342652320862,
+          "bits_per_character": 3.214818893904667,
+          "physical_load": [
+            0.7814178466796875,
+            0.2185821533203125
+          ],
+          "router_entropy": 0.0002058481659332756,
+          "evaluation_wall_seconds": 0.17483303400149453,
+          "evaluation_tokens_per_second": 93712.2672129567,
+          "step": 900
+        },
+        {
+          "nll": 2.1911350190639496,
+          "bits_per_character": 3.1611396259217046,
+          "physical_load": [
+            0.7831268310546875,
+            0.2168731689453125
+          ],
+          "router_entropy": 0.0002309335450263461,
+          "evaluation_wall_seconds": 0.1706895590032218,
+          "evaluation_tokens_per_second": 95987.12478770157,
+          "step": 1000
+        },
+        {
+          "nll": 2.1599761247634888,
+          "bits_per_character": 3.1161868436348463,
+          "physical_load": [
+            0.7777252197265625,
+            0.2222747802734375
+          ],
+          "router_entropy": 0.00019843205427605426,
+          "evaluation_wall_seconds": 0.17198274299880723,
+          "evaluation_tokens_per_second": 95265.37206185641,
+          "step": 1100
+        },
+        {
+          "nll": 2.144324153661728,
+          "bits_per_character": 3.0936058225461984,
+          "physical_load": [
+            0.77423095703125,
+            0.22576904296875
+          ],
+          "router_entropy": 9.206103914038977e-05,
+          "evaluation_wall_seconds": 0.1682496680004988,
+          "evaluation_tokens_per_second": 97379.09259916893,
+          "step": 1200
+        }
+      ]
+    }
+  ],
+  "gates": {
+    "development_gate_pass": false,
+    "checks": [
+      {
+        "seed": 78401,
+        "quality_vs_unipool4": true,
+        "whole_payload_saving": true,
+        "beats_film": false,
+        "beats_hard_alias": false,
+        "film_byte_match": true,
+        "hard_byte_match": true,
+        "smaller_expert_bank": true
+      },
+      {
+        "seed": 78402,
+        "quality_vs_unipool4": true,
+        "whole_payload_saving": true,
+        "beats_film": false,
+        "beats_hard_alias": true,
+        "film_byte_match": true,
+        "hard_byte_match": true,
+        "smaller_expert_bank": true
+      }
+    ],
+    "audit_eligible": false,
+    "audit_opening_rule": "only all checks pass in both seeds"
+  },
+  "audit": null,
+  "failed_attempts": [
+    {
+      "attempt": 1,
+      "condition": "dense",
+      "seed": 78401,
+      "stage": "development training completed; serialization failed",
+      "failure": "KeyError: dense baseline has no router, but serializer indexed NormRouter calibration for logical route count 1",
+      "updates_completed": 1200,
+      "train_tokens_seen": 2457600,
+      "observed_process_wall_seconds": 60.1,
+      "wall_time_method": "sum of command and poll wall times; process exited at serialization with traceback",
+      "development_metrics_retained": false,
+      "development_evaluations_performed": 12,
+      "development_metric_use": "used only for the frozen best-development-checkpoint rule; values were not output or retained",
+      "checkpoint_retained": false,
+      "audit_accessed": false,
+      "protocol_effect": "No condition, split, model, seed, optimizer, metric, gate, or compute budget changed. Serializer-only correction documented in PROTOCOL.json amendments before rerun."
+    }
+  ]
+}

@@ -1,18 +1,18 @@
 # MA-784 status
 
-- Status: SCREENING — serializer-only amendment; identical-protocol rerun pending
+- Status: FAIL — development gates completed; audit unopened by preregistered rule
 - Branch: `research/ma-784-adaptive-mirror-pool-20261008`
 - Base commit: `c935a903daca5c7d1d48aa50d05b5bd50f239cba`
-- Last verified code/protocol commit: pending amendment commit (original freeze: `0b63f8e`)
-- Development complete: no (one 1,200-update dense attempt ended at serialization; no metrics/checkpoint retained)
+- Last verified commit: pending result verification commit
+- Development complete: yes (7 conditions × 2 seeds, 1,200 updates each; plus one logged serialization attempt)
 - Fresh/audit opened: no
-- Results committed: no
-- Verification committed: no
-- Registry row updated: no
+- Results committed: pending
+- Verification committed: pending
+- Registry row updated: pending
 
 ## Next action
 
-Rerun the frozen two-seed screen with corrected metadata serialization; do not open the audit span unless all development gates pass.
+Verify the serialized payloads and replay development NLL; update the registry, claim ledger, and status board with the FAIL result.
 
 ## Blockers
 
@@ -26,4 +26,5 @@ None identified. CPU-only is sufficient for the small character-LM screen; runti
 - The public corpus has been acquired; the development script only reads the first 90% for train/dev. The audit span remains unopened.
 - Attempt 1 (seed 78401, dense) completed 1,200 updates then failed to serialize because the no-router baseline was incorrectly indexed into the NormRouter table. No metric rows or checkpoint were retained; the precise failure is in `source/attempt_log.json`.
 - The protocol amendment changes only dense payload metadata (`normrouter_c=null`, `routing=none`) and was made before rerunning. No scientific settings or gates changed.
+- Both seeds passed the quality/storage gate. Mirror failed the Mirror-specific gate against FiLM in both seeds; hard-alias comparison failed in seed 78401. Audit was not opened.
 - No training data, model values, or audit values have been accessed on this branch.

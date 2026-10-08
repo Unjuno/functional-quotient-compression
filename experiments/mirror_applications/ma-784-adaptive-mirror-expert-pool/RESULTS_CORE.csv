@@ -1,1 +1,16 @@
-condition,world_or_seed,method,serialized_bytes,train_tokens_or_examples,optimizer_updates,active_compute_proxy,wall_time_s,primary_metric,primary_value,secondary_metric,secondary_value,status_note
+condition,world_or_seed,method,serialized_bytes,expert_bank_tensor_bytes,train_tokens_or_examples,optimizer_updates,active_compute_proxy,wall_time_s,primary_metric,primary_value,secondary_metric,secondary_value,status_note
+dense,78401,MA-784 frozen screen,603690,0,2457600,1200,197124,60.535626842000056,dev NLL,2.1808846592903137,dev tokens/sec,114991.34694461158,audit unopened
+untied_moe,78401,MA-784 frozen screen,1423550,1060864,2457600,1200,198672,81.10170812399883,dev NLL,2.162262737751007,dev tokens/sec,103669.05829583769,audit unopened
+unipool4,78401,MA-784 frozen screen,611690,265216,2457600,1200,198672,75.91255406100026,dev NLL,2.1630682945251465,dev tokens/sec,105277.11498407753,audit unopened
+unipool2,78401,MA-784 frozen screen,474458,132608,2457600,1200,197640,70.52866777700183,dev NLL,2.267118275165558,dev tokens/sec,110193.45556120915,audit unopened
+hard_alias2x,78401,MA-784 frozen screen,476746,132608,2457600,1200,198672,72.91085898800156,dev NLL,2.157682478427887,dev tokens/sec,107577.23653713362,audit unopened
+mirror2x,78401,MA-784 frozen screen,477356,132608,2457600,1200,198864,79.05210166799952,dev NLL,2.1929439306259155,dev tokens/sec,95911.06833557578,audit unopened
+film2x,78401,MA-784 frozen screen,477234,132608,2457600,1200,198928,77.66093625900248,dev NLL,2.185554325580597,dev tokens/sec,97791.8348242002,audit unopened
+dense,78402,MA-784 frozen screen,603690,0,2457600,1200,197124,60.327752043001965,dev NLL,2.1662046015262604,dev tokens/sec,126820.75718820417,audit unopened
+untied_moe,78402,MA-784 frozen screen,1423550,1060864,2457600,1200,198672,78.84246152500054,dev NLL,2.1293376982212067,dev tokens/sec,102101.46806881187,audit unopened
+unipool4,78402,MA-784 frozen screen,611690,265216,2457600,1200,198672,75.4349717719997,dev NLL,2.1899428963661194,dev tokens/sec,103103.81369780235,audit unopened
+unipool2,78402,MA-784 frozen screen,474458,132608,2457600,1200,197640,74.62785715800055,dev NLL,2.2815753519535065,dev tokens/sec,110998.95290795465,audit unopened
+hard_alias2x,78402,MA-784 frozen screen,476746,132608,2457600,1200,198672,71.04878372500025,dev NLL,2.2610702514648438,dev tokens/sec,109773.96673394968,audit unopened
+mirror2x,78402,MA-784 frozen screen,477356,132608,2457600,1200,198864,76.97222634599893,dev NLL,2.165198415517807,dev tokens/sec,99233.82631135454,audit unopened
+film2x,78402,MA-784 frozen screen,477234,132608,2457600,1200,198928,78.73794767399886,dev NLL,2.144324153661728,dev tokens/sec,98234.60589486589,audit unopened
+dense,78401,failed serialization attempt; development only,,,2457600,1200,197124,60.1,not retained,,serialization error,,"KeyError: dense baseline has no router, but serializer indexed NormRouter calibration for logical route count 1"

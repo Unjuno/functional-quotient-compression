@@ -1,6 +1,6 @@
 {
   "experiment_id": "MA-784",
-  "commit": "8da919f",
+  "commit": "pending result commit",
   "tests": {
     "command": "python -m unittest discover -s experiments/mirror_applications/ma-784-adaptive-mirror-expert-pool/tests -v",
     "passed": 4,
@@ -8,28 +8,126 @@
   },
   "serialization": {
     "roundtrip_checked": true,
-    "byte_exact": false
+    "byte_exact": true,
+    "payload_count": 14,
+    "payloads": [
+      {
+        "seed": 78401,
+        "condition": "dense",
+        "bytes": 603690,
+        "sha256": "d5248dcb8a8583d3b92fb637303006dee0e15ed06a7819c00a992037eef600bd"
+      },
+      {
+        "seed": 78401,
+        "condition": "untied_moe",
+        "bytes": 1423550,
+        "sha256": "adcde9a5bd8745f5cde8013da444edfa769803e2079f3b5fde59f67ed34377db"
+      },
+      {
+        "seed": 78401,
+        "condition": "unipool4",
+        "bytes": 611690,
+        "sha256": "138f3886c382c5b2b108877db07ec97fe66e09a280c41f109af0dc225a0e5ff9"
+      },
+      {
+        "seed": 78401,
+        "condition": "unipool2",
+        "bytes": 474458,
+        "sha256": "ac06413b52197c2d56a640ade91c8a5286c5f70b6db5f4e68eb407e33a4d7c1b"
+      },
+      {
+        "seed": 78401,
+        "condition": "hard_alias2x",
+        "bytes": 476746,
+        "sha256": "2b33e5f0b08f027317444f83a4d86ad39ad310d2e505e67fba3a3ebd771ac621"
+      },
+      {
+        "seed": 78401,
+        "condition": "mirror2x",
+        "bytes": 477356,
+        "sha256": "bc2dada8721fe81c740e06cdbea34f0b37482f36ec5bf20d8fd3f9db269d267b"
+      },
+      {
+        "seed": 78401,
+        "condition": "film2x",
+        "bytes": 477234,
+        "sha256": "71c08876d18bd82b963a4219344de5b650f56d0ac87be17ff83e772fb0e93799"
+      },
+      {
+        "seed": 78402,
+        "condition": "dense",
+        "bytes": 603690,
+        "sha256": "dc57998632651cee99b351ec155dd6d1b51b119b4f0f6891df5101c7e2af9637"
+      },
+      {
+        "seed": 78402,
+        "condition": "untied_moe",
+        "bytes": 1423550,
+        "sha256": "05b635bc3918f48c143284b5808a955d75840e6ebb355ddfef4ef2ac90148fc9"
+      },
+      {
+        "seed": 78402,
+        "condition": "unipool4",
+        "bytes": 611690,
+        "sha256": "75d9883ceea92619f1a61f83942cf1a83bfff2e46e1beddf81c88969aa0ec5d7"
+      },
+      {
+        "seed": 78402,
+        "condition": "unipool2",
+        "bytes": 474458,
+        "sha256": "a449078b55b43dcbc391ea0b050f014ee61e45bfee50e5ff4cb61e578b57d80c"
+      },
+      {
+        "seed": 78402,
+        "condition": "hard_alias2x",
+        "bytes": 476746,
+        "sha256": "ee5ae0506adf095bbd529205edc2f42e26953e9d437c6473338baeac83445327"
+      },
+      {
+        "seed": 78402,
+        "condition": "mirror2x",
+        "bytes": 477356,
+        "sha256": "46be18b5d3cde36577791e5e0673ca4bcdd71f690e96bb04c49fbca19c5819a6"
+      },
+      {
+        "seed": 78402,
+        "condition": "film2x",
+        "bytes": 477234,
+        "sha256": "61adb5eebd2f3c6a4ae29db6a8bbe27f1b0344027d04f659f46edfbfd19ce442"
+      }
+    ]
   },
   "metric_replay": {
-    "checked": false,
-    "max_difference": null
+    "checked": true,
+    "max_difference": 0.0,
+    "development_nll_replayed_rows": 14
   },
-  "fresh_split_integrity_checked": false,
+  "fresh_split_integrity_checked": true,
   "random_draw": {
     "draw18_replayed": true,
     "pool_size": 549,
     "index": 269,
     "selected_id": "MA-784",
-    "pool_sha256": "753bd189a0b8cc500e4a5057103f646509240834d5f3d63d6b0ad8a4a64077cc"
+    "pool_sha256": "753bd189a0b8cc500e4a5057103f646509240834d5f3d63d6b0ad8a4a64077cc",
+    "baseline_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba"
   },
-  "preflight_notes": [
-    "All seven conditions pass finite forward/backward checks.",
-    "Givens views preserve norm, receive finite gradients, and change outputs for nonzero codes.",
-    "2 physical / 4 logical mirror pool topology and parameter counts match the frozen design.",
-    "One-update synthetic preflight serializes and reloads a complete inference payload.",
-    "No corpus values or audit split were opened before the preregistration commit.",
-    "One complete dense training attempt failed at serializer metadata after 1200 updates; no metric result or checkpoint was retained. This was logged and did not change the frozen scientific settings.",
-    "The serializer-only amendment passed a dense payload metadata regression test before rerunning the identical experiment."
-  ],
-  "notes": []
+  "development": {
+    "seeds": [
+      78401,
+      78402
+    ],
+    "conditions_per_seed": 7,
+    "updates_per_run": 1200,
+    "development_gate_pass": false,
+    "audit_opened": false,
+    "audit_semantic_read": false,
+    "corpus_sha256": "86c4e6aa9db7c042ec79f339dcb96d42b0075e16b8fc2e86bf0ca57e2dc565ed",
+    "audit_bytes_not_decoded_or_tokenized": 111540
+  },
+  "notes": [
+    "Actual serialized inference payload byte counts and hashes match the run manifest for all 14 checkpoints.",
+    "Development NLL replay is exact to the stored precision for all 14 checkpoints (max absolute difference 0).",
+    "The audit gate failed because Mirror did not beat FiLM by the required 0.02 nat in both seeds; audit data were not opened.",
+    "One failed dense serialization attempt and its compute are retained in source/attempt_log.json and RESULTS_CORE.csv."
+  ]
 }
