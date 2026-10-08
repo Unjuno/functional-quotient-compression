@@ -1,0 +1,15 @@
+{
+ "experiment_id":"MA-440","title":"Continual SSM skill codes","status":"SCREENING","evidence_lane":"CONTINUAL/STORAGE/RETENTION","base_commit":"1555074",
+ "hypothesis":"Sequential acquisition of four related stable dynamics with one shared SSM plus per-skill Mirror coordinates retains earlier skills with <=60% independent transition bytes and <=1.10x independent final error/forgetting.",
+ "physical_object":"one shared 4D stable transition","mirror_coordinate":"per-skill two-angle Givens View code","logical_multiplicity":"continually added skill-specific dynamics",
+ "prior_art_refs":[30,73],"controls":["shared-only","shared plus Mirror skill codes","shared plus rank-one private residual per skill","independent transition per skill"],
+ "task":{"type":"sequential synthetic SSM skill regression","state_dim":4,"skills":4,"teacher":"related stable transitions generated from one base plus skill-specific Givens rotations","order":"fixed skill order per world; train each skill once, evaluate all seen skills after every stage"},
+ "development":{"worlds_or_seeds":[44000,44001],"seeds":[0,1,2],"learning_rates":[0.003,0.01],"selection_metric":"final-stage mean across-skill trajectory NRMSE plus forgetting"},
+ "fresh":{"worlds_or_seeds":[44010,44011,44012],"seeds":[0,1,2],"locked_before_access":true},
+ "training":{"updates_per_skill":250,"batch_size":64,"optimizer":"AdamW","same_updates_all_methods":true},
+ "storage":{"authority":"actual serialized inference payload bytes","paid_objects":["shared transition","per-skill codes/residuals/transitions","metadata"]},
+ "compute":{"report_examples":true,"report_updates":true,"report_MAC_proxy":true,"report_training_wall":true,"report_replay_wall":true},
+ "success_gate":"Every fresh world: final Mirror mean trajectory NRMSE <=1.10x independent; mean forgetting <=1.10x independent; bytes per skill <=60% independent; all stable.",
+ "failure_gate":"Any quality/forgetting/byte/stability gate fails or rank-one residual matches with fewer bytes.",
+ "boundaries":["Synthetic related skills only.","No learned routing or natural continual benchmark.","Not evidence of continual language-model retention."]
+}
