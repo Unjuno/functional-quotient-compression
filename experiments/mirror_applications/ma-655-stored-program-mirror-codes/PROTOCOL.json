@@ -1,0 +1,94 @@
+{
+  "experiment_id": "MA-655",
+  "title": "Neural Stored-program Memory with Mirror programs",
+  "status": "FAIL",
+  "evidence_lane": [
+    "MECHANISM",
+    "STORAGE",
+    "RUNTIME"
+  ],
+  "base_commit": "28194ea",
+  "hypothesis": "A small task program coordinate over a shared recurrent controller basis can match held-out program interpolation quality with fewer bytes than an NSPM-style key-value memory of full anchor programs.",
+  "physical_object": "recurrent controller matrix programs",
+  "mirror_coordinate": "per-task two-dimensional program code m=(z1,z2) over A0/B1/B2",
+  "logical_multiplicity": "23 aligned task controllers from shared state plus one unrelated private controller",
+  "prior_art_refs": [
+    "PA134"
+  ],
+  "selection": {
+    "method": "secrets.randbelow over sorted eligible P0/UNTESTED IDs after exclusions",
+    "pool_size": 454,
+    "draw_index_zero_based": 205,
+    "selected_id": "MA-655",
+    "pool_ids_sha256": "43b4e90df4540f70b4b1ac7b5710c168407693f11e92459b4216c49e5dd0f96a",
+    "snapshot": "source/selection_pool.csv",
+    "branch_conflict_found": false,
+    "pool_file_sha256": "e42961daa31f84449b5c9d4f567ab016044886dc2bc37742716b13919ce0ae25"
+  },
+  "task": {
+    "hidden_dim": 12,
+    "trajectory_steps": 8,
+    "aligned_tasks": 23,
+    "private_tasks": 1,
+    "heldout_coordinates_per_world": 32,
+    "coordinate_domain": "uniformly sampled inside [-1,1]^2",
+    "dtype": "float32",
+    "task_coordinate_provenance": "held-out z values are supplied context; the 23 stored task addresses are serialized in each method payload"
+  },
+  "teacher": {
+    "aligned_program": "A(z)=A0+z1*B1+z2*B2",
+    "private_program": "independent full controller matrix for task index 23",
+    "program_source": "A0/B1/B2 and one private matrix are synthetic teacher objects; no gradient training or learned memory keys"
+  },
+  "methods": [
+    "nspm_corner_memory",
+    "mirror_shared_program_code",
+    "ordinary_shared_matrix_basis",
+    "independent_full_programs"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      65501,
+      65502
+    ],
+    "purpose": "validate serializer and interpolation metric only; no fresh tuning"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      65511,
+      65512,
+      65513
+    ],
+    "locked_before_access": true,
+    "source_sha256_at_freeze": "a4c0b8c962dfc3ce65932a7bdb70498a4515cf66209c5750c7b131b2d8644e58",
+    "protocol_sha256_at_freeze": "16815a90b1304cbc1cd3580791bbddce40155604aaf2ebaacb681fc624ed4ef5"
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "all controller matrices/program anchors",
+      "shared bases and task codes",
+      "private controller",
+      "task address list",
+      "metadata/header"
+    ]
+  },
+  "compute": {
+    "optimizer_updates": 0,
+    "report_fit_operations": true,
+    "report_controller_macs": true,
+    "report_interpolation_macs": true,
+    "report_isolated_switch_wall_clock": true,
+    "report_trajectory_steps": true,
+    "fit_operations": 0
+  },
+  "success_gate": "All three fresh worlds have normalized held-out trajectory MSE <=1e-5; Mirror payload <=0.90x NSPM corner memory; Mirror controller/interpolation MACs <=1.25x NSPM; report comparison against ordinary shared-basis control.",
+  "mirror_specific_gate": "Mirror payload <=0.90x ordinary shared matrix-basis control at matched quality.",
+  "failure_gate": "Fresh quality or NSPM storage/compute gate fails, or ordinary shared-basis control matches Mirror within 10% bytes at matched quality.",
+  "boundaries": [
+    "Synthetic recurrent linear controller family only; not a full NSPM reproduction.",
+    "Task coordinates are supplied context and charged equally to memory and Mirror methods.",
+    "One unrelated task is stored privately.",
+    "No neural query/router learning, non-affine task family, or language model is tested."
+  ]
+}

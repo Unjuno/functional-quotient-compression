@@ -1,0 +1,101 @@
+{
+  "experiment_id": "MA-655",
+  "decision": "FAIL for Mirror-specific advantage; broad code mechanism beats NSPM-style anchor storage",
+  "base_commit": "28194ea",
+  "branch": "research/ma-655-stored-program-mirror-codes-20261008",
+  "development_seeds": [
+    65501,
+    65502
+  ],
+  "fresh_seeds": [
+    65511,
+    65512,
+    65513
+  ],
+  "freeze_hashes": {
+    "source_sha256": "a4c0b8c962dfc3ce65932a7bdb70498a4515cf66209c5750c7b131b2d8644e58",
+    "protocol_before_fresh_sha256": "16815a90b1304cbc1cd3580791bbddce40155604aaf2ebaacb681fc624ed4ef5"
+  },
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-655-stored-program-mirror-codes/tests -v",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "actual_bytes": true,
+    "roundtrip_byte_exact": true,
+    "task_addresses_and_private_program_paid": true
+  },
+  "metric_replay": {
+    "fresh_rows": 12,
+    "payload_hashes_exact": true,
+    "bytes_compute_and_quality_replayed": true,
+    "max_quality_delta": 0.0
+  },
+  "fresh_summary": {
+    "independent_full_programs": {
+      "serialized_bytes": 14281,
+      "mean_normalized_trajectory_mse": 0.13073215400066868,
+      "controller_macs_proxy": 38016,
+      "mean_switch_wall_seconds": 2.802092930865874e-05,
+      "payload_hashes": [
+        "508aa9657643660cf6d93ae575c79d7225882d34ba82904f5a0184d65c12e102",
+        "2137535f45fd6f436e17420b4666b7e9652b3db8233d0b67a40ff1cb7fd633b0",
+        "1e0e1958b14ce10c6d3dd225d2fe61130f3c15264134fdbe022ac488130e1693"
+      ]
+    },
+    "mirror_shared_program_code": {
+      "serialized_bytes": 2837,
+      "mean_normalized_trajectory_mse": 3.3710259831694915e-15,
+      "controller_macs_proxy": 117888,
+      "mean_switch_wall_seconds": 2.2720828190248348e-05,
+      "payload_hashes": [
+        "1677907af6a07ddc3690793b396d02adfc52c0dceacf9f68ea77fe8aee82e768",
+        "18bf66511ec57a5aff16b6f30b47ca0a42c97df3eac7f3833cd19a07cc0fc989",
+        "10144aed4198fb243e96655e675173dd6cd96a65432830a50e6ea3c4f7026d48"
+      ]
+    },
+    "nspm_corner_memory": {
+      "serialized_bytes": 3327,
+      "mean_normalized_trajectory_mse": 2.4567495222807673e-15,
+      "controller_macs_proxy": 150656,
+      "mean_switch_wall_seconds": 2.486670715058213e-05,
+      "payload_hashes": [
+        "77265b251eb14219c7eee15bba1a4dd36ed9b3e63e329acce590e7425a2fb4b7",
+        "5cc9463303f4aa301147920ca27dba3f3d926242633780669a98e9993c5e689a",
+        "611e5468f9ad9bd1582eb4bf980ec9a005a1cf127584278b8c96f920d022aa7f"
+      ]
+    },
+    "ordinary_shared_matrix_basis": {
+      "serialized_bytes": 2839,
+      "mean_normalized_trajectory_mse": 3.3710259831694915e-15,
+      "controller_macs_proxy": 117888,
+      "mean_switch_wall_seconds": 2.2147838498854944e-05,
+      "payload_hashes": [
+        "1e94b088ab5e363e3783fd8b3e1d34e7b79053907bb64d0544cb27bb3c19af95",
+        "ec66896e14e1299139ddfa1440b0d66a58dacc785375bd498a60e209942ae653",
+        "941a2837276c0b1ebf4802743ffaa20eee89498d13fc873c9097b9a1594d117f"
+      ]
+    }
+  },
+  "selection": {
+    "pool_size": 454,
+    "draw_index_zero_based": 205,
+    "selected": "MA-655",
+    "pool_ids_sha256": "43b4e90df4540f70b4b1ac7b5710c168407693f11e92459b4216c49e5dd0f96a",
+    "pool_file_sha256": "e42961daa31f84449b5c9d4f567ab016044886dc2bc37742716b13919ce0ae25",
+    "conflicting_branch_found": false
+  },
+  "invalidated_development": "Initial development run incorrectly mapped some held-out indices to the private task. Output retained as source/development_invalid_initial.csv; routing fixed and development rerun before fresh access.",
+  "environment": {
+    "numpy": "2.3.5",
+    "device": "CPU only",
+    "torch": "not installed"
+  },
+  "claim_boundary": [
+    "Synthetic affine controller functions only.",
+    "Task coordinates supplied as context and charged equally.",
+    "Ordinary shared-basis control matches Mirror within serializer metadata bytes.",
+    "No learned key-query retrieval, nonlinear controller, or language claim."
+  ]
+}
