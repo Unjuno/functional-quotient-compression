@@ -1,0 +1,22 @@
+{
+  "experiment_id": "MA-265",
+  "commit": "pending",
+  "tests": {
+    "command": "PYTHONPATH=.../ma-265-vera-mirror-scaling/source python -m pytest -q .../tests",
+    "passed": 2,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Fresh worlds 26502-26504 remained unopened after development gate failure.",
+    "Frozen shared basis tensors are included in actual serialized payload bytes."
+  ]
+}

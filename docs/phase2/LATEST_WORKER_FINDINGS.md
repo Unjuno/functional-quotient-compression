@@ -15,7 +15,9 @@ MA-260 is **FAIL** for its registered byte gate: the four-seed aligned case used
 
 MA-261 is **FAIL** against the literal frozen gate. Its source branch claimed 4/4 PASS, but raw fresh per-seed Mirror/independent MSE ratios are 1,390x, 302,057x, 11.7x and 0.227x; the <=1.10x criterion passes only 1/4. A separate fixed-update two-expert protocol failed during development. See `experiments/mirror_applications/ma-261-batchensemble-logical-experts/RECONCILIATION.md`.
 
-**The next candidate is MA-265.** MA-876..1115 remain appended research-intake hypotheses and must not preempt the registered P0 crossovers. Natural variation and benchmark-level runtime remain unproven; aligned synthetic PROMISING must not be described as real-world Mirror adoption.
+MA-265 is **FAIL**: four fresh aligned rotation worlds had numerical-zero task error, but the 3,494B Mirror payload saved only 4.4% versus 3,654B VeRA, below the frozen 20% storage gate. Independent scale codes failed, and a separate 1,000-update diagonal-code protocol also lost to native VeRA at development. See `experiments/mirror_applications/ma-265-vera-mirror-scaling/README.md`.
+
+**The next candidate is MA-268.** MA-876..1115 remain appended research-intake hypotheses and must not preempt the registered P0 crossovers. Natural variation and benchmark-level runtime remain unproven; aligned synthetic PROMISING must not be described as real-world Mirror adoption.
 
 ## MA-241 — layer-specific Mirror views over tied experts
 
