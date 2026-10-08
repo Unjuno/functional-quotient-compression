@@ -1,0 +1,21 @@
+{
+  "experiment_id": "MA-452",
+  "title": "Factorized PathNet path × Mirror role address on unseen combinations",
+  "status": "SCREENING",
+  "evidence_lane": "GENERALIZATION/STORAGE/RUNTIME",
+  "base_commit": "085e918",
+  "hypothesis": "A learned three-entry role codebook over a shared four-path PathNet module graph will generalize to four path-role pairs withheld from meta-training, achieving at most 0.65x the held-out query RMSE of PathNet path-only while using no more than 1.25x its actual payload bytes; rank-2 and additive role controls, independent held-out task fits, and direct native Givens conditioning test value and attribution.",
+  "physical_object": "two shared four-dimensional linear modules per each of two PathNet layers",
+  "mirror_coordinate": "a learned two-angle code per role identity, factorized independently from the two-layer path identity and composed at inference",
+  "logical_multiplicity": "12 possible path × role functions; 8 pairs observed in training, 4 unseen pairs evaluated",
+  "prior_art_refs": ["PA80", "PA81"],
+  "controls": ["PathNet path-only without a role coordinate", "factorized two-angle Mirror role codebook", "factorized rank-2 additive basis × role codebook", "full four-dimensional additive role-vector table", "direct native Givens role-code conditioner", "independent held-out task least-squares vectors"],
+  "split": {"train_pairs": [[0,0],[0,1],[1,1],[1,2],[2,0],[2,2],[3,0],[3,1]], "heldout_pairs": [[0,2],[1,0],[2,1],[3,2]], "all_path_ids_seen_in_train": true, "all_role_ids_seen_in_train": true},
+  "task": {"type": "4D linear regression with two module choices per layer and three fixed role orientations; target is a Givens rotation of the selected teacher module sum; noise sigma=0.02", "role_angles": [[-0.55,0.4],[0.1,-0.65],[0.6,0.5]], "train_updates": 160, "episodes_per_update": 8, "examples_per_episode": 48, "heldout_query_examples": 48, "independent_support_examples": 12},
+  "development": {"worlds_or_seeds": [45201,45202], "selection_metric": "query RMSE averaged over four withheld path-role pairs", "hyperparameter_changes_after_run": "prohibited without numbered amendment"},
+  "fresh": {"worlds_or_seeds": [45211,45212,45213], "locked_before_access": true, "opened": false},
+  "storage": {"authority": "actual uncompressed .npz inference payload bytes", "paid_objects": ["all module tensors", "four held-out path IDs", "four held-out role IDs", "role codebook or residual table", "rank-2 basis where applicable", "independent task vectors", "dtype/shape metadata"]},
+  "compute": {"report_training_examples": true, "report_optimizer_updates": true, "report_training_and_eval_compute_proxy": true, "report_training_wall_time": true, "report_query_wall_time": true, "report_independent_support_fit_time": true},
+  "gates": {"PROMISING": "Both dev seeds: Mirror held-out RMSE <=0.65x path-only; Mirror actual payload <=1.25x path-only and <= independent fit bytes; end-to-end query time <=1.25x rank-2 control; Mirror beats full role-vector table RMSE by >=10% at <= its bytes; direct native Givens is not output/payload equivalent.", "FAIL": "Either seed misses a success gate, or native Givens exactly matches the codebook map/payload, or held-out path-role RMSE fails the quality threshold.", "NOT ESTABLISHED": "Independent least-squares query RMSE exceeds 0.08 on both worlds, or serialized output replay fails."},
+  "boundaries": ["Synthetic aligned factorization test only; no full PathNet/Routing Network, neural or natural-task claim.", "Every path and every role appears in training, but the four listed path-role pairs do not.", "Native Givens is a direct implementation of the tested View and is required for attribution.", "Fresh seeds remain sealed unless all development gates pass."]
+}

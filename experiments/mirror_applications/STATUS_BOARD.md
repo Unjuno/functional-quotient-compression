@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (168 completed; 462 UNTESTED)
+- P0: **630** (168 completed; 461 UNTESTED; 1 SCREENING)
 - P1: **422** (13 completed; 409 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **125 FAIL, 11 NOT ESTABLISHED, 45 PROMISING, 974 UNTESTED**
+- Current MA statuses: **125 FAIL, 11 NOT ESTABLISHED, 45 PROMISING, 973 UNTESTED, 1 SCREENING**
 - 47 baseline experiment directories remain present; 136 additional per-ID outcomes are linked to their dedicated research branches in `LIVE_BRANCH_RECONCILIATION.csv`.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This was the intake-time queue; current selection follows the live-branch reconciliation at the top of this board.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed at intake time; later live-branch outcomes are indexed above.
@@ -23,13 +23,13 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-452 — factorized path × Mirror address (P0; PA80/PA81).** MA-451 FAIL was pushed and remote refs refreshed. MA-452 has no live branch and is the next eligible P0; MA-462/464 are separately indexed remote branches. MA-446 remains terminal FAIL.
+**MA-452 — factorized path × Mirror address (P0; PA80/PA81).** MA-451 FAIL was pushed and remote refs refreshed. MA-452 is now SCREENING; its branch was absent from live refs. MA-462/464 are separately indexed branches; MA-446 is terminal FAIL.
 
 MA-434 and MA-436 found exact native SSM parameterization aliases; MA-442 likewise aliases a native Givens angle conditioner. Its two-angle model beats the tested rank-2 LoRA on query RMSE and model-bank bytes, but misses the end-to-end runtime gate and is exactly reproduced by the native conditioned predictor. Fresh seeds remain sealed.
 
 ## Active experiment
 
-MA-416 through MA-419, MA-424, MA-434, MA-436 and MA-442 are verified development-screen FAILs, with fresh seeds sealed. Amended MA-436's native generated-A control matched outputs and payloads exactly; Mirror throughput was 0.382/0.645x native and diversity RMS was 0.0206/0.0252. MA-442 failed after an exact native Givens conditioner alias, slower adaptation than rank-2 LoRA, and no actual byte saving over the independent task-vector bank. MA-444 failed its runtime gate and exactly matched native Givens conditioning despite an aligned quality/byte win over LEO and rank-3. Fresh seeds remain sealed. MA-451 failed byte/runtime gates and exactly aliased native Givens conditioning despite a 50–54% query-RMSE reduction versus PathNet path-only. Fresh seeds remain sealed. State-space role/expert candidates are paused under the family rule. See [MA-436 report](ma-436-ssm-expert-views/README.md), [verification](ma-436-ssm-expert-views/VERIFICATION.json), [state-space diagnostic](../../docs/phase2/STATE_SPACE_MIRROR_FAMILY_DIAGNOSTIC_2026-10-08.md), [MA-434 report](ma-434-selective-ssm-mirror-roles/README.md), [MA-424 report](ma-424-neural-ode-mirror-modes/README.md), [continuous-depth diagnostic](../../docs/phase2/NEURAL_ODE_MIRROR_FAMILY_DIAGNOSTIC_2026-10-08.md), and [latent-code diagnostic](../../docs/phase2/LATENT_CODE_MIRROR_FAMILY_DIAGNOSTIC_2026-10-08.md).
+MA-416 through MA-419, MA-424, MA-434, MA-436 and MA-442 are verified development-screen FAILs, with fresh seeds sealed. Amended MA-436's native generated-A control matched outputs and payloads exactly; Mirror throughput was 0.382/0.645x native and diversity RMS was 0.0206/0.0252. MA-442 failed after an exact native Givens conditioner alias, slower adaptation than rank-2 LoRA, and no actual byte saving over the independent task-vector bank. MA-444 failed its runtime gate and exactly matched native Givens conditioning despite an aligned quality/byte win over LEO and rank-3. Fresh seeds remain sealed. MA-451 failed byte/runtime gates and exactly aliased native Givens conditioning despite a 50–54% query-RMSE reduction versus PathNet path-only. Fresh seeds remain sealed. MA-452 is testing factorized roles on unseen path-role combinations; no result yet. State-space role/expert candidates are paused under the family rule. See [MA-436 report](ma-436-ssm-expert-views/README.md), [verification](ma-436-ssm-expert-views/VERIFICATION.json), [state-space diagnostic](../../docs/phase2/STATE_SPACE_MIRROR_FAMILY_DIAGNOSTIC_2026-10-08.md), [MA-434 report](ma-434-selective-ssm-mirror-roles/README.md), [MA-424 report](ma-424-neural-ode-mirror-modes/README.md), [continuous-depth diagnostic](../../docs/phase2/NEURAL_ODE_MIRROR_FAMILY_DIAGNOSTIC_2026-10-08.md), and [latent-code diagnostic](../../docs/phase2/LATENT_CODE_MIRROR_FAMILY_DIAGNOSTIC_2026-10-08.md).
 
 
 ## Verified status index
