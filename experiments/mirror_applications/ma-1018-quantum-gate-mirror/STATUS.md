@@ -3,12 +3,12 @@
 - Status: FAIL (development gate)
 - Branch: `research/ma-1018-quantum-gate-mirror-20261008`
 - Base commit: `feb56df43d45068ad957bc028a7837cbd61d006b`
-- Last verified commit: pending-result-commit
+- Last verified commit: ca234abc358d0f15b5acd3c626d06b3f712bff0c
 - Development complete: yes (204 held-out rows)
 - Fresh/audit opened: no
-- Results committed: no
-- Verification committed: no
-- Registry row updated: no
+- Results committed: yes
+- Verification committed: yes
+- Registry row updated: yes
 
 ## Decision
 
@@ -16,7 +16,7 @@ No rank satisfied the predeclared whole-library byte and Mirror-specific fidelit
 
 ## Next action
 
-Commit and push the checked negative result with branch-local registry/claim/status updates, then refresh baseline and live branches for Draw 9.
+Refresh the baseline and live branch set, then use a fresh random draw for the next candidate.
 
 ## Boundaries
 
