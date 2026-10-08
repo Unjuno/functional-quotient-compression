@@ -160,3 +160,9 @@ MA-441,FAIL,DYNAMIC_STATE/RETENTION/STORAGE,"Corrected fresh recall: Mirror reta
 MA-442,FAIL,FEW_SHOT/STORAGE/COMPUTE,"Fresh aligned 8D linear tasks: Mirror NRMSE 0.5948/2,430B, shared no-adapt 0.5888/2,161B, full adaptation 0.7937/2,348B, LoRA 0.6923/2,476B. Mirror loses to shared quality/bytes and misses <=60% full-MAML bytes; slightly beats LoRA. Full MAML control weak; narrow first-order screen.",branch research/ma-442-maml-mirror-inner-loop-20261008: experiments/mirror_applications/ma-442-maml-mirror-inner-loop/README.md,branch research/ma-442-maml-mirror-inner-loop-20261008: experiments/mirror_applications/ma-442-maml-mirror-inner-loop/VERIFICATION.json,0d4c6852ad8ffd87c32655a3a57cc4b7c2b8a011,720 fresh rows replayed from serialized task payloads; 2 tests pass. Synthetic linear tasks only.
 
 
+
+MA-443,FAIL,FEW_SHOT/ADAPTATION/STORAGE/COMPUTE,"A1 corrected disjoint task IDs. Fresh step5: encoder-init Mirror NRMSE 0.2851 (2,589B/task +3,500B encoder; N=20 total2,764B), zero-init0.3932, full adaptation0.2758/2,435B, LEO0.1491/2,657B. Improves zero-init in all worlds and matches full quality, but loses amortized bytes and query wall (~3.2x full); strict gate FAIL. Initial overlapping-task results excluded.",branch research/ma-443-maml-generated-mirror-code-20261008: experiments/mirror_applications/ma-443-maml-generated-mirror-code/README.md,branch research/ma-443-maml-generated-mirror-code-20261008: experiments/mirror_applications/ma-443-maml-generated-mirror-code/VERIFICATION.json,013c56dc9338855e629bce6af6144e264a9bf7ff,"3,600 corrected fresh rows replayed; 3,600 task payloads and 27 encoder checkpoints verified; 2 tests pass. Disjoint synthetic linear tasks only."
+
+
+
+
