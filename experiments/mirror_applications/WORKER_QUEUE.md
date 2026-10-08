@@ -302,7 +302,7 @@ Operational rule:
 
 ## Eleventh literature expansion — cross-model state, scenes, audio, generators and stitching
 
-**MA-876..935 remain UNTESTED behind registered P0 work. Narrow PROMISING: MA-255/268/276/282. FAIL in documented scope: MA-260/261/265/271/272/273/274/278/286/288/292/296/297. SETA shared/private Mirror-code family paused after MA-297/299 consecutive FAIL; redesign required before MA-298/300.**
+**MA-876..935 remain UNTESTED behind registered P0 work. Narrow PROMISING: MA-255/268/276/282. FAIL in documented scope: MA-260/261/265/271/272/273/274/278/286/288/292/296/297/299. SETA shared/private Mirror-code family paused after MA-297/299 consecutive FAIL; redesign required before MA-298/300.**
 
 High-information P0 applications by domain:
 1. **Cross-model caches MA-876..890:** MA-876 shared ridge translator basis versus native per-pair ridge; MA-878 head-matched CacheBridge; MA-880 ordered source×target factorization; MA-881 MoT translator bank; MA-887 exact-versus-approximate boundary; MA-889 confidence fallback.
@@ -315,7 +315,7 @@ Every experiment must isolate the extra Mirror parameter `m` beyond its strong n
 
 Read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08.md`, PA236..PA265 and the selected MA registry row.
 
-**Current evidence:** MA-255/268/276/282 are narrow PROMISING; MA-260/261/265/271/272/273/274/278/286/288/292/296 are FAIL in their documented scopes. The next P0 candidate is MA-297 (SETA shared sparse subspace + Mirror views).
+**Current evidence:** MA-255/268/276/282 are narrow PROMISING; MA-260/261/265/271/272/273/274/278/286/288/292/296/297/299 are FAIL in their documented scopes. MA-297 and MA-299 are consecutive P0 FAILs; pause SETA shared/private Mirror-code work for redesign per stop condition.
 
 ## Twelfth research expansion — video, equivariance, spiking, physical optics, wireless and spatial audio
 
@@ -359,7 +359,7 @@ Read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_THIRTEENTH_SWEEP.
 
 **MA-1046..1095 are 50 new UNTESTED hypotheses** appended after earlier literature intakes and the original locked direct-prior queue. All comparisons study the marginal value of the extra Mirror parameter `m`; no new source-paper result is a Mirror result.
 
-**Current evidence:** MA-255/268/276/282 are narrow PROMISING; MA-260/261/265/271/272/273/274/278/286/288/292/296 are FAIL in their documented scopes. The next P0 candidate is MA-297 (SETA shared sparse subspace + Mirror views).
+**Current evidence:** MA-255/268/276/282 are narrow PROMISING; MA-260/261/265/271/272/273/274/278/286/288/292/296/297/299 are FAIL in their documented scopes. MA-297 and MA-299 are consecutive P0 FAILs; pause SETA shared/private Mirror-code work for redesign per stop condition.
 
 Recommended high-information P0 studies **within this new family**:
 
