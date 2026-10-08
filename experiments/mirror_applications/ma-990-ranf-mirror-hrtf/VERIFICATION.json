@@ -1,0 +1,26 @@
+{
+  "experiment_id": "MA-990",
+  "commit": "70f854b",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-990-ranf-mirror-hrtf/tests -v",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Final 72 fresh rows replayed exactly for quality metrics, serializer bytes and payload hashes; wall-clock fields are expected to vary.",
+    "All 42 source SOFA files match data_provenance.csv size and SHA-256.",
+    "The Mirror and ordinary sparse PCA control tie exactly for all 12 paired fresh subject/support cases.",
+    "The first fresh result was superseded after a serializer audit added paid listener identity and calibration-index metadata; methods, data splits, support settings, rank and ridge were unchanged, and corrected development/fresh runs were regenerated.",
+    "RANF neural model was not run; PA292-level reproduction is not claimed.",
+    "Final engine hash matches PROTOCOL.json; its lock was amended for deterministic metadata accounting before final replay."
+  ]
+}

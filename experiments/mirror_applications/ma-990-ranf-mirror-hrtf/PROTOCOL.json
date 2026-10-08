@@ -1,0 +1,131 @@
+{
+  "experiment_id": "MA-990",
+  "title": "Shared HRTF field with Mirror listener codes versus retrieval",
+  "status": "SCREENING",
+  "evidence_lane": [
+    "MECHANISM",
+    "STORAGE",
+    "RUNTIME",
+    "REAL_DATA"
+  ],
+  "base_commit": "f255f0b",
+  "hypothesis": "A shared data-derived HRTF field plus a small listener-specific sparse code can reconstruct held-out listeners from 3 or 5 measured directions with quality near retrieval, while reducing total serialized bytes once the shared field is amortized across enough listeners; ordinary sparse PCA coefficients may match Mirror exactly.",
+  "physical_object": "shared mean HRTF map and rank-8 cross-listener residual basis fit on 30 measured SONICOM listeners",
+  "mirror_coordinate": "four-term sparse listener code over shared basis atoms, selected from sparse direction measurements",
+  "logical_multiplicity": "listener-specific full-sphere binaural HRTF maps",
+  "prior_art_refs": [
+    "PA292",
+    "PA293"
+  ],
+  "selection": {
+    "method": "secrets.randbelow over sorted eligible P0/UNTESTED IDs after live branch exclusions",
+    "pool_size": 508,
+    "draw_index_zero_based": 500,
+    "selected_id": "MA-990",
+    "pool_ids_sha256": "16dc53bf6814773a9b030ec87f67dc1fd6318af2c8869be84ac0ba460c09cc16",
+    "pool_file_sha256": "5cd4e9162c38a1cad13dae34d023c9b83a698978c0c4cde237f1b71d5dd9f46f",
+    "snapshot": "source/selection_pool.csv",
+    "branch_conflict_found": false,
+    "draw_number": 13
+  },
+  "dataset": {
+    "name": "SONICOM HRTF dataset, 48 kHz FreeFieldCompMinPhase SOFA",
+    "source": "https://transfer.ic.ac.uk:9090/2022_SONICOM-HRTF-DATASET/",
+    "dataset_license": "MIT per SONICOM and RANF documentation",
+    "subjects": {
+      "train": [
+        "P0001-P0030"
+      ],
+      "development": [
+        "P0031-P0036"
+      ],
+      "fresh": [
+        "P0037-P0042"
+      ]
+    },
+    "directions": 793,
+    "calibration_directions_3": [
+      4,
+      11,
+      414
+    ],
+    "calibration_directions_5": [
+      0,
+      4,
+      8,
+      203,
+      612
+    ],
+    "fresh_subjects_locked_before_data_access": true
+  },
+  "methods": [
+    "nearest_measured_direction",
+    "retrieval_nearest_training_listener",
+    "shared_pca_rank8_dense_code",
+    "mirror_top4_sparse_code",
+    "ordinary_top4_sparse_pca_code",
+    "independent_full_listener_map"
+  ],
+  "development": {
+    "subjects": [
+      "P0031-P0036"
+    ],
+    "purpose": "select only ridge regularization from {0, 1e-4, 1e-2, 1}; Mirror sparse support is fixed at 4 of rank 8; no model-rank or split changes",
+    "selected_ridge": 0.0,
+    "selection_summary": "ridge 0 minimized development mean LSD among {0,1e-4,1e-2,1}; chosen without opening fresh subjects."
+  },
+  "fresh": {
+    "subjects": [
+      "P0037-P0042"
+    ],
+    "locked_before_access": true,
+    "never_used_for_tuning": true,
+    "locked_source_sha256": "8a6c2a4b0a0d0d2d9e7946afbd2080fde90e86d154f262e7e5fa5adada5e2559",
+    "protocol_sha256_at_lock": "75432e9c6d946e6aa8607a3b410a23a826bbee005d339896d792db45677417ad"
+  },
+  "quality": {
+    "primary": [
+      "LSD_dB",
+      "ILD_MAE_dB",
+      "ITD_MAE_us"
+    ],
+    "evaluation_directions": "all directions excluding the given 3/5 calibration indices",
+    "audio_perception_claim": false
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "accounting": "Report shared field bytes once plus all personalized code bytes, per-listener amortized bytes for 1/6/12/24/48 targets, and independent full-map bytes. Retrieval baseline includes the serialized training-listener HRTF database it requires and its selected listener index.",
+    "paid_objects": [
+      "shared mean map",
+      "shared PCA basis",
+      "listener coefficient values and sparse indices",
+      "retrieval HRTF database",
+      "retrieval index",
+      "metadata",
+      "full listener map upper control",
+      "listener identifier and support-direction index metadata"
+    ]
+  },
+  "compute": {
+    "report_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_cpu_wall_clock": true,
+    "report_gpu": "unavailable; no neural field training claim"
+  },
+  "success_gate": "3/3 fresh quality gate for each sparsity: Mirror LSD <= retrieval LSD + 1.0 dB, ILD MAE <= retrieval + 1.0 dB and ITD MAE <= retrieval + 100 us; amortized payload at 24 held-out listener maps <=0.75x independent full-map bytes.",
+  "mirror_specific_gate": "Mirror top-4 code must beat ordinary top-4 sparse PCA code by >=10% actual personalized bytes or a predeclared quality gain at matched bytes/compute.",
+  "failure_gate": "Mirror misses the quality/storage gate or ordinary sparse PCA code matches it within 10% bytes and metric tolerances.",
+  "boundaries": [
+    "The run is a real measured-HRTF field screen, not a reproduction of the RANF neural model.",
+    "No PyTorch/GPU training; RANF itself is not evaluated. Its learning-free HRTF selection/retrieval control is approximated using only train-subject maps and the allowed calibration directions.",
+    "Only acoustic signal metrics are measured; no listener study or spatial-perception claim.",
+    "Subject identities and split are fixed before data access; no demographic attributes are used.",
+    "Training corpus and shared basis bytes are paid and amortized; no parameter-count-only storage claims."
+  ],
+  "implementation_amendments": [
+    "Before development, NumPy>=2 compatibility shim added for sofar 1.1.3.",
+    "Before development, spatialaudiometrics 0.0.8 ITD list-division bug was bypassed by reproducing the documented MAXIACC estimator with NumPy output.",
+    "After first fresh evaluation, serializer audit found omitted per-listener identity and nearest-control support indices. These deterministic metadata fields were added; no quality method, split, support, rank, or ridge setting changed. The fixed dev/fresh outputs were regenerated for corrected byte accounting."
+  ]
+}
