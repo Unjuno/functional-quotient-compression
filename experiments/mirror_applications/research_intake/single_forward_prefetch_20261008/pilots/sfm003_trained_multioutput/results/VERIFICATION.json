@@ -1,0 +1,51 @@
+{
+  "stage": "SFM003",
+  "studied_as": "MA-1175 synthetic head-learning pilot, NOT a full MA scientific run",
+  "preregistration": "e6f6bf6708a63480c17a11e9a8b43408df53e494",
+  "worlds_dev": [
+    11,
+    12,
+    13
+  ],
+  "worlds_fresh": [
+    101,
+    102,
+    103,
+    104,
+    105
+  ],
+  "task_count": [
+    4,
+    5
+  ],
+  "beta": [
+    0,
+    0.3,
+    0.8
+  ],
+  "optim_steps": 350,
+  "environment": {
+    "torch": "2.10.0+cpu",
+    "numpy": "2.3.5",
+    "device": "CPU",
+    "threads": 1,
+    "dtype": "float32",
+    "CUDA": false
+  },
+  "local_exact_hashes": {
+    "source/run_sfm003.py": "60541467a66369157747987a52c42ee5d16a6383d3e6a3e49c2761d0baa5cf48",
+    "results/dev_quality.csv": "912c0251521fcb8dd46cdc05891fdb6841426e50493f9472ed5c4c79c3bc1b2b",
+    "results/dev_timing.csv": "0e305df80d9db11e487366e6cdcd7a719f6da18e253691802567a26b92ddc0cc",
+    "results/fresh_quality.csv": "de659664792dacc6c49d23a5ab7fa24dbb924c4f21f0228a2d31f57508183d38",
+    "results/fresh_timing.csv": "0c535da6590082308a6672341d2927ad0ebd07f5fefaf83605afb0c7f668898b"
+  },
+  "scope_note": "Frozen pretrained/teacher-known trunk and aligned mirror-friendly oracle; task codes fitted from train labels, no independent full-net training or natural LLM evidence.",
+  "limitations": [
+    "Native ordinary Givens output head is mathematically identical to Mirror (M0)",
+    "Native same-trunk linear heads also one-forward, faster CPU but larger serialization",
+    "CPU vs intentionally redundant K heavy recomputes is not native strong control",
+    "No real GPU/PCIe measurement",
+    "Raw full executable code also included in independent conversation ZIP"
+  ],
+  "claimed_ma_status": "UNTESTED"
+}
