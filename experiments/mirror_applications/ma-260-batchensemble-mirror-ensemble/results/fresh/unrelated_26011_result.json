@@ -1,0 +1,193 @@
+{
+  "experiment_id": "MA-260",
+  "seed": 26011,
+  "split": "fresh",
+  "regime": "unrelated",
+  "teacher_angles": null,
+  "train_examples": 8192,
+  "optimizer_updates": {
+    "independent": 4000,
+    "tied": 1000,
+    "batchensemble": 1000,
+    "mirror": 1000
+  },
+  "examples_seen": {
+    "independent": 512000,
+    "tied": 128000,
+    "batchensemble": 128000,
+    "mirror": 128000
+  },
+  "training_wall_seconds": {
+    "independent": 1.912842488993192,
+    "tied": 0.5028064409998478,
+    "batchensemble": 0.6325406239993754,
+    "mirror": 0.7975905710045481
+  },
+  "methods": {
+    "independent": {
+      "metrics": {
+        "mean_member_nll": 0.7130918502807617,
+        "per_member_nll": [
+          0.7351548075675964,
+          0.7001670598983765,
+          0.7021958231925964,
+          0.7148497104644775
+        ],
+        "mean_member_accuracy": 0.71136474609375,
+        "per_member_accuracy": [
+          0.697998046875,
+          0.72314453125,
+          0.709716796875,
+          0.714599609375
+        ],
+        "mean_member_ece": 0.02344265058854944,
+        "per_member_ece": [
+          0.026251042210788,
+          0.027330780576448888,
+          0.025502073742245557,
+          0.014686705824715318
+        ],
+        "mixture_nll": 1.215059757232666,
+        "mixture_accuracy": 0.9150390625,
+        "mean_pairwise_JS_divergence": 0.3257452646891276,
+        "per_pair_JS": [
+          0.3600989282131195,
+          0.2905539870262146,
+          0.3492234945297241,
+          0.31988704204559326,
+          0.3211672306060791,
+          0.31354090571403503
+        ]
+      },
+      "actual_payload_bytes": 1328,
+      "payload_sha256": "ea26c2f2fc4eb49ed041c1fd0688009cadabed209aef88c6a1c706b86e6e6ac2",
+      "inference_seconds": 0.0073861440032487735,
+      "test_examples_per_second": 2218207.496738968,
+      "weight_elements": 256
+    },
+    "tied": {
+      "metrics": {
+        "mean_member_nll": 1.2734805643558502,
+        "per_member_nll": [
+          1.3145458698272705,
+          1.2897945642471313,
+          1.1872050762176514,
+          1.3023767471313477
+        ],
+        "mean_member_accuracy": 0.4107666015625,
+        "per_member_accuracy": [
+          0.368408203125,
+          0.3984375,
+          0.484375,
+          0.391845703125
+        ],
+        "mean_member_ece": 0.04502841366411303,
+        "per_member_ece": [
+          0.0547979432012653,
+          0.03278643030353123,
+          0.06267795391613618,
+          0.02985132723551942
+        ],
+        "mixture_nll": 1.2735776901245117,
+        "mixture_accuracy": 0.72265625,
+        "mean_pairwise_JS_divergence": 0.0,
+        "per_pair_JS": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "actual_payload_bytes": 913,
+      "payload_sha256": "651c8886f6a716c8912cc5b10981e3c9a3f2abaa79d2c04f47ca7e6317f18c42",
+      "inference_seconds": 0.03141935700114118,
+      "test_examples_per_second": 521461.97643080086,
+      "weight_elements": 256
+    },
+    "batchensemble": {
+      "metrics": {
+        "mean_member_nll": 0.8331472724676132,
+        "per_member_nll": [
+          0.911353588104248,
+          0.7883914709091187,
+          0.812118411064148,
+          0.8207256197929382
+        ],
+        "mean_member_accuracy": 0.6522216796875,
+        "per_member_accuracy": [
+          0.61572265625,
+          0.6787109375,
+          0.658935546875,
+          0.655517578125
+        ],
+        "mean_member_ece": 0.023019734425361094,
+        "per_member_ece": [
+          0.0297597896278603,
+          0.022238465149712283,
+          0.023715119063126622,
+          0.01636556386074517
+        ],
+        "mixture_nll": 1.249213695526123,
+        "mixture_accuracy": 0.77490234375,
+        "mean_pairwise_JS_divergence": 0.26364174236853916,
+        "per_pair_JS": [
+          0.27001896500587463,
+          0.23836465179920197,
+          0.2582276165485382,
+          0.2653617560863495,
+          0.2888076901435852,
+          0.26106977462768555
+        ]
+      },
+      "actual_payload_bytes": 1538,
+      "payload_sha256": "510321661a5a657f43f7cb720c2179bdc3562c9ddf9a7eb7d53b69ef77dcfa1a",
+      "inference_seconds": 0.007366605001152493,
+      "test_examples_per_second": 2224091.01579856,
+      "weight_elements": 256
+    },
+    "mirror": {
+      "metrics": {
+        "mean_member_nll": 1.2038390636444092,
+        "per_member_nll": [
+          1.235195517539978,
+          1.1549978256225586,
+          1.2414488792419434,
+          1.1837140321731567
+        ],
+        "mean_member_accuracy": 0.4580078125,
+        "per_member_accuracy": [
+          0.439208984375,
+          0.48583984375,
+          0.442138671875,
+          0.46484375
+        ],
+        "mean_member_ece": 0.020699186579804518,
+        "per_member_ece": [
+          0.028403209922544193,
+          0.027676365309162065,
+          0.020548733067698777,
+          0.006168438019813038
+        ],
+        "mixture_nll": 1.3595072031021118,
+        "mixture_accuracy": 0.413818359375,
+        "mean_pairwise_JS_divergence": 0.10464597803850968,
+        "per_pair_JS": [
+          0.1591396927833557,
+          0.1611482948064804,
+          0.10554061084985733,
+          0.0535704605281353,
+          0.029795363545417786,
+          0.11868144571781158
+        ]
+      },
+      "actual_payload_bytes": 1161,
+      "payload_sha256": "05291db7e181a5bc8288fb5654c850549f4ccbd5c60f40ac9f8ffcca303e4621",
+      "inference_seconds": 0.00712542900146218,
+      "test_examples_per_second": 2299370.325160479,
+      "weight_elements": 256
+    }
+  },
+  "scope_note": "synthetic linear ensemble with externally supplied member IDs"
+}

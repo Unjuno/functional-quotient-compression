@@ -1,0 +1,59 @@
+{
+  "experiment_id": "MA-260",
+  "title": "BatchEnsemble rank-one member factors versus Mirror rotations",
+  "status": "PROTOCOL_FROZEN_BEFORE_DEVELOPMENT",
+  "base_commit": "ba345ff",
+  "prior_art_refs": ["PA17"],
+  "evidence_lane": "ENSEMBLE_QUALITY/CALIBRATION/DIVERSITY/STORAGE/RUNTIME",
+  "hypothesis": "For an ensemble of four related linear classifiers whose member maps differ by orthogonal feature rotations, one shared classifier plus one Mirror angle per member will match or exceed BatchEnsemble rank-one fast weights within 0.02 mean member NLL and ECE, use no more actual serialized bytes, and retain useful member diversity; unrelated member maps define the failure boundary.",
+  "physical_object": "one shared 4-class linear classifier weight matrix and bias",
+  "mirror_coordinate": "one per-member FP16 angle rotating adjacent input/output weight coordinates to produce a logical member function",
+  "logical_multiplicity": "four classifier members and their mixture prediction from one shared physical matrix",
+  "model": {
+    "members": 4,
+    "classes": 4,
+    "input_dim": 16,
+    "train_examples_per_member": 2048,
+    "test_examples_per_member": 4096,
+    "optimizer_updates_per_method": 1000,
+    "batch_size": 128,
+    "optimizer": "Adam",
+    "learning_rate": 0.01,
+    "development_seeds": [26001,26002],
+    "fresh_seeds": [26011,26012,26013],
+    "aligned_regime": "member teacher classifiers are rotations of one shared matrix; each member has a separate sample-label distribution",
+    "unrelated_regime": "member teacher classifiers are independently sampled matrices with matched norm"
+  },
+  "controls": [
+    "independent full classifier per member (quality/storage upper reference)",
+    "one hard-shared classifier trained across member data",
+    "BatchEnsemble shared weight with rank-one per-member input/output fast-weight vectors (PA17 direct control)",
+    "shared weight with one per-member Mirror orthogonal angle"
+  ],
+  "evaluation": {
+    "primary_metrics": ["mean per-member NLL", "mean per-member accuracy", "mean per-member ECE"],
+    "ensemble_metrics": ["mixture NLL and accuracy", "mean pairwise Jensen-Shannon divergence between member predictions"],
+    "storage": "actual ZIP/NPY FP16 inference payload bytes including all fast weights, Mirror codes, metadata and headers",
+    "runtime": "serialized inference throughput and wall clock on the same CPU and test batch"
+  },
+  "development_gate_before_fresh": "In both aligned development worlds: Mirror mean member NLL and ECE are each no more than 0.02 above BatchEnsemble; mean member accuracy is no more than 0.02 below independent; Mirror actual payload <= BatchEnsemble payload; and pairwise predictive JS divergence is >=0.01 (non-collapsed members). Otherwise fresh remains sealed. Unrelated regime is a preregistered boundary audit, not tuned.",
+  "success_gate": "All three fresh aligned worlds meet the frozen quality, calibration, diversity and byte gates; report unrelated boundary separately.",
+  "failure_gate": "Any development aligned gate misses; fresh remains sealed.",
+  "storage": {
+    "authority": "actual deterministic ZIP/NPY FP16 inference payload after reload",
+    "paid_objects": ["shared classifier weights and bias", "BatchEnsemble rank-one factors or Mirror angles", "metadata and archive headers"]
+  },
+  "compute": {
+    "report_optimizer_updates": true,
+    "report_examples_seen": true,
+    "report_active_operation_proxy": true,
+    "report_training_and_inference_wall_clock": true,
+    "report_examples_per_second": true
+  },
+  "boundaries": [
+    "synthetic linear classifiers, not a deep ensemble benchmark",
+    "member ID is supplied; this does not measure learned routing",
+    "mixture prediction models a uniformly random member task; it does not imply ordinary ensemble gains on natural data",
+    "all uncertainty and diversity metrics are computed after payload reload"
+  ]
+}
