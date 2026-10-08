@@ -1,19 +1,24 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-453",
+  "commit": "pending result commit",
   "tests": {
-    "command": "<command>",
+    "command": "python -B experiments/mirror_applications/ma-453-routing-logical-mirror-blocks/source/verify.py; pytest -q -p no:cacheprovider experiments/mirror_applications/ma-453-routing-logical-mirror-blocks/tests",
     "passed": null,
     "failed": null
   },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "roundtrip_checked": true,
+    "byte_exact": true
   },
   "metric_replay": {
-    "checked": false,
-    "max_difference": null
+    "checked": true,
+    "max_difference": 0.0
   },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "fresh_split_integrity_checked": true,
+  "fresh_accessed": false,
+  "notes": [
+    "Native Givens payload bytes, SHA-256 and output RMSE exactly alias Mirror for seeds 45301 and 45302.",
+    "Router is fixed deterministic one-hot context routing, not learned.",
+    "Fresh seeds 45311, 45312, 45313 remained sealed after frozen FAIL gates."
+  ]
 }
