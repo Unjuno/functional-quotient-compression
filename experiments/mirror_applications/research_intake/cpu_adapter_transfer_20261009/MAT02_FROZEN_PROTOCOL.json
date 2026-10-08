@@ -1,0 +1,87 @@
+{
+  "id": "MAT02_PRIVATE_FALLBACK_20261009",
+  "parent": "MAT01-20261009",
+  "status": "PRE_REGISTERED_BEFORE_NEW_SEEDS",
+  "research_branch": "research/mirror-cpu-adapter-transfer-20261009",
+  "motivation": "MAT01 observed shared r4 source subspace underfit heldout digit input corruptions. Is native LoRA rank4 quality recoverable with a little truly private target-specific rank2 capacity + a short Mirror code, at lower physical bytes and a gain over same-byte ordinary linear codes?",
+  "scope": "New CPU synthetic/real digits adapter bank with heldout corruptions; distinct seeded splits from MAT01. This is an independent follow-up; no modification of prior MAT01 outcomes and does not reproduce native LoGo.",
+  "frozen_source": "Reuse unchanged MAT01 implementation for preprocessing, 320-step base, six 145-step source rank4 LoRAs, source-only U/V r4 and C0; add per-task private low-rank residual to target-code training.",
+  "roles": {
+    "source": [
+      "left1",
+      "right1",
+      "up1",
+      "down1",
+      "blur065",
+      "contrast07"
+    ],
+    "target": [
+      "upper_left1",
+      "lower_right1",
+      "noise025",
+      "dropout020"
+    ],
+    "K": 4
+  },
+  "splits": {
+    "development": [
+      21,
+      22,
+      23
+    ],
+    "fresh": [
+      201,
+      202,
+      203,
+      204,
+      205
+    ],
+    "no_audit_tuning": true,
+    "all_fresh_once": true,
+    "train_fraction": 0.75,
+    "target_support_size": 300,
+    "per_role_audit_size": "25% original image IDs",
+    "note": "same sklearn digit dataset across seeds, repeated data partitions correlated; not 5 independent natural task datasets"
+  },
+  "methods": {
+    "base": "No target delta",
+    "native_lora4": "Native independent rank4 A(64x4)B(4x10), 296 trainable scalars/role",
+    "native_lora2": "Native independent rank2 A(64x2)B(2x10), 148 trainable scalars/role",
+    "mirror4": "Source-only U(64x4), V(4x10), C0(4x4), target 4 Givens angles, no private",
+    "linear4": "Source-only U,V,C0, source-code linear 4x4x4 dictionary, target 4 coefficients, no private",
+    "mirror4_private2": "U @ Q(m) C0 Q(m)^T @ V plus independent target-specific rank2 A_j B_j, optimize m,A,B jointly",
+    "linear4_private2": "U @ (C0+sum c_j[k] D_source[k]) @ V plus identical target rank2 A_j B_j, optimize code,A,B jointly",
+    "fullcore16_private1": "U @ (C0+16 target core scalars) @ V plus rank1 A_j B_j, optimize core and private jointly"
+  },
+  "training": {
+    "base_steps": 320,
+    "source_steps_per_task": 145,
+    "target_steps": 175,
+    "target_batch": 96,
+    "optimizer": "AdamW",
+    "lr": 0.045,
+    "weight_decay": 0.0001,
+    "deterministic_train_stream_same_per_role_for_all_methods": true,
+    "code_initialization": "zero/small rotation, private A random 0.02 and private B exactly zero",
+    "selection": "none, all fixed"
+  },
+  "metrics": [
+    "fresh task NLL nat/example and accuracy for all 4 roles",
+    "full physically serialized named NPZ including shared base, source U/V/C0 plus paid dictionary and all private parameters",
+    "actual CPU B128 four output P50/P95 in ms, 20 warmup,100 repeats, one BLAS thread",
+    "difference to strongest same-code linear4+private2 and to cheap independent private-only rank2",
+    "worst role and per-world paired improvement"
+  ],
+  "gates": {
+    "PASS_MECHANISM": "on 4/5 fresh heldout splits, mirror+private2 NLL <= native LoRA4 NLL+0.05 nat/example, full serialized bytes <=85% native LoRA4, <=1.10x native LoRA4 P95; additionally beats simple ordinary linear4+private2 NLL by >=0.01 to count incremental Mirror benefit. Otherwise M0/FAIL.",
+    "FAIL": "mirror+private2 fails the native quality or same-byte lowrank residual/linear controls dominate, and no narrow evidence of Mirror-specific gain",
+    "UNCERTAIN": "dataset split correlation, limited 5-world sample, native LoGo not reproduced, real GPU absent; preserve diagnostics and source-only model claims"
+  },
+  "limitations": [
+    "Fresh sets 201..205 must not select ranks or adjust learning steps; any new code must be frozen in repo before fresh evaluation.",
+    "Never conclude LOra/source adapter equivalence by Frobenius; score functional heldout CE and worst role.",
+    "Per-task target private trainable residual is a genuinely private paid object; do not count it as shared/mirror compression."
+  ],
+  "hardware": "CPU PyTorch2.10+cpu, NumPy2.3.5, sklearn1.8, 1 thread, FP32",
+  "output_prefix": "MAT02_"
+}
