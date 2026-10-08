@@ -1,0 +1,115 @@
+{
+  "experiment_id": "MA-314",
+  "title": "Adaptive intrinsic dimension with Mirror view and private residual",
+  "status": "FRESH_LOCKED",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY/COMPUTE",
+  "base_commit": "e037a79",
+  "hypothesis": "On a mixed task bank with known task-to-task variation in intrinsic complexity, validation-selected per-task dimension plus a Mirror angle for a shared-radius first coordinate pair and private higher-dimensional residuals will lower the actual serialized payload by at least 10% versus validation-selected ordinary intrinsic coefficients, while meeting the same held-out quality gate. Tasks outside the orbit must fall back to private intrinsic coordinates.",
+  "physical_object": "one shared 32D base predictor and a deterministic random orthonormal 32x16 intrinsic basis",
+  "mirror_coordinate": "one FP16 angle replacing two FP16 coefficients in the first two intrinsic coordinates; FP16 residual coordinates for active dimensions above two; private 16D coefficient fallback if the fixed-radius orbit misses validation",
+  "logical_multiplicity": "160 task functions across four orbit-aligned intrinsic complexities plus unrelated 16D functions; task count is not independent capacity",
+  "prior_art_refs": [
+    "PA33",
+    "MA-311",
+    "MA-312"
+  ],
+  "controls": [
+    "hard tie",
+    "fixed direct intrinsic dimensions 2/4/8/16",
+    "validation-selected adaptive direct intrinsic coefficients",
+    "adaptive Mirror angle plus private residual/fallback",
+    "independent full 32D task vectors"
+  ],
+  "task": {
+    "input_dim": 32,
+    "max_intrinsic_dim": 16,
+    "tasks": 160,
+    "task_groups": "four 32-task aligned groups with true intrinsic dimensions 2,4,8,16; 32 unrelated tasks with random 16D coefficients",
+    "support_examples_per_task": 64,
+    "validation_examples_per_task": 64,
+    "test_examples_per_task": 128,
+    "target_radius": 0.25,
+    "validation_threshold_candidates": [
+      0.0001,
+      0.001,
+      0.01
+    ],
+    "dimension_candidates": [
+      2,
+      4,
+      8,
+      16
+    ],
+    "threshold_selection": "development-only; choose the strictest threshold that selects each aligned group's true dimension on both development seeds and keeps mean held-out normalized MSE <=1e-4",
+    "fresh_seeds": [
+      31411,
+      31412,
+      31413
+    ]
+  },
+  "development": {
+    "seeds": [
+      31401,
+      31402
+    ],
+    "settings_allowed_to_change": [
+      "validation threshold from preregistered candidates"
+    ],
+    "no_fresh_access_before_threshold_freeze": true,
+    "selected_threshold": 0.0001,
+    "selection_reason": "At threshold 1e-4, both development seeds had group-median selected dimensions 2/4/8/16 for aligned groups, normalized test MSE below 1e-4, and the smallest observed adaptive payload among thresholds meeting the group-median dimension requirement. Mirror exceeded adaptive-direct actual bytes in both development seeds; the preregistered fresh worlds are still run to determine whether that negative storage result replicates."
+  },
+  "fresh": {
+    "locked_before_access": true,
+    "seeds": [
+      31411,
+      31412,
+      31413
+    ],
+    "threshold": 0.0001,
+    "access_condition": "Only after source, threshold, byte gates, task split, and controls are frozen."
+  },
+  "training": {
+    "optimizer": "least-squares fit in a frozen deterministic random intrinsic basis; 720-point angle grid for Mirror first pair",
+    "gradient_updates": 0,
+    "threads": 1
+  },
+  "storage": {
+    "authority": "actual deterministic serialized inference payload bytes after reload",
+    "format": "deterministic ZIP/NPY arrays with fixed timestamps; all bases used, task dimension/mode indices, offsets, coefficients, shared base, radius, and metadata included",
+    "basis_policy": "Persist only the maximum active basis prefix required by the method; no hidden reconstruction state.",
+    "private_fallback_policy": "If no Mirror dimension meets the validation threshold, serialize the full 16D intrinsic coefficient vector and mark the task private."
+  },
+  "compute": {
+    "report_examples": true,
+    "report_optimizer_updates": true,
+    "report_dimension_fit_operations": true,
+    "report_angle_search_operations": true,
+    "report_active_inference_operations": true,
+    "report_wall_clock": true,
+    "report_throughput": true,
+    "device": "CPU"
+  },
+  "gates": {
+    "promising": "On every fresh seed, adaptive Mirror mean held-out normalized MSE <=1e-4 and actual serialized bytes <=0.90x adaptive direct coefficients; additionally report dimension allocation, fixed-dimension frontier, and unrelated fallback rate.",
+    "fail": "Quality misses in >=2 fresh seeds, or Mirror payload is >= adaptive direct payload in >=2 fresh seeds, or aligned tasks need private fallback in >=2 seeds.",
+    "not_established": "Any split, deterministic replay, or payload serialization check fails."
+  },
+  "boundaries": [
+    "synthetic linear post-fit task bank",
+    "known shared-radius Givens orbit in the first pair",
+    "zero optimizer updates",
+    "no learned task router",
+    "no language or capacity claim"
+  ],
+  "amendments": [
+    {
+      "before_fresh_access": true,
+      "reason": "The original phrase \u201cselects each aligned group\u2019s true dimension\u201d was ambiguous if applied per task; one low-amplitude d=4 task selected d=2 at the strict threshold. It is now operationalized as matching the median selected dimension within each of the four aligned groups on both development seeds. All per-task allocations remain reported. This correction changes no data, fitting rule, or gate."
+    },
+    {
+      "before_fresh_access": true,
+      "reason": "Corrected active inference operation proxy to use each task\u2019s selected dimension rather than max dimension for all adaptive tasks. Preserved the earlier summary JSON in protocol_variants/pre_active_ops_correction/. Payload bytes and held-out metrics are unchanged."
+    }
+  ]
+}
