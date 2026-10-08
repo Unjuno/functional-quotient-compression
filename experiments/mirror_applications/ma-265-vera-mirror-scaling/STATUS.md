@@ -5,8 +5,8 @@
 - Base commit: `f7f76de193063950d28b7834f337840b1e86f0ce`
 - Protocol frozen before development: yes
 - Fresh worlds opened: no
-- Results committed: pending
-- Verification committed: pending
+- Results committed: yes
+- Verification committed: yes
 
 ## Next action
 
