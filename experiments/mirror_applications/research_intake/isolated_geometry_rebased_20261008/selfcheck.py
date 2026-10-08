@@ -14,8 +14,8 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[3]
 APPS = ROOT / "experiments" / "mirror_applications"
-EXPECTED_MA = 1174
-EXPECTED_PA = 433
+EXPECTED_MA = 1176
+EXPECTED_PA = 439
 ISOLATED = range(1156, 1175)
 REQUIRED = ("id","family","proposal","shared_object","mirror_coordinate",
             "logical_multiplicity","cheapest_control","first_metric",
@@ -104,6 +104,46 @@ def check():
             error("%s incomplete H/T/D/C/U or insertion" % label)
         if (folder / "RESULTS_CORE.csv").exists() or (folder / "VERIFICATION.json").exists():
             error("%s staged experimental result inside plan folder" % label)
+    # Two later SFM plans are in their own isolated research subtree, not
+    # historical geometry/formula MANIFEST.json and not the canonical worker.
+    sfm_root = APPS / "research_intake" / "single_forward_prefetch_20261008"
+    for num in (1175, 1176):
+        label = "MA-%d" % num
+        row = byid.get(label, {})
+        if row.get("status") != "UNTESTED" or "ISOLATED" not in row.get("worker_note", ""):
+            error("%s not isolated/UNTESTED" % label)
+        folder = sfm_root / "plans" / label
+        for filename in ("README.md", "PROTOCOL.json", "STATUS.md"):
+            if not (folder / filename).is_file():
+                error("missing SFM plan %s/%s" % (label, filename))
+        proto_file = folder / "PROTOCOL.json"
+        if proto_file.is_file():
+            protocol = json.loads(proto_file.read_text(encoding="utf-8"))
+            if protocol.get("experiment_id") != label or protocol.get("status") != "UNTESTED":
+                error("SFM plan ID/status invalid " + label)
+            if protocol.get("worker_claim") is not False or protocol.get("plan_only") is not True:
+                error("SFM plan incorrectly active " + label)
+    import hashlib
+    trained = sfm_root / "pilots" / "sfm003_trained_multioutput"
+    checksums = {
+        "source/run_sfm003.py": "60541467a66369157747987a52c42ee5d16a6383d3e6a3e49c2761d0baa5cf48",
+        "results/dev_quality.csv": "912c0251521fcb8dd46cdc05891fdb6841426e50493f9472ed5c4c79c3bc1b2b",
+        "results/fresh_quality.csv": "de659664792dacc6c49d23a5ab7fa24dbb924c4f21f0228a2d31f57508183d38",
+        "results/dev_timing.csv": "0e305df80d9db11e487366e6cdcd7a719f6da18e253691802567a26b92ddc0cc",
+        "results/fresh_timing.csv": "0c535da6590082308a6672341d2927ad0ebd07f5fefaf83605afb0c7f668898b",
+    }
+    for relative, digest in checksums.items():
+        name = trained / relative
+        if not name.is_file():
+            error("missing Stage-0 source/data " + relative)
+        elif hashlib.sha256(name.read_bytes()).hexdigest() != digest:
+            error("Stage-0 SHA mismatch " + relative)
+    if not (trained / "PROTOCOL.json").is_file():
+        error("SFM003 frozen protocol missing")
+    if not (sfm_root / "SFM003_REPORT.md").is_file():
+        error("SFM003 report missing")
+    if not (sfm_root / "RESEARCH_FOCUS_QUEUE.md").is_file():
+        error("research-only focus queue missing")
     for name in ("MA-1097-ALORA_CONTROL.md", "MA-578-KV_INT4_CONTROL.md",
                  "MA-1112-STANDARD_LORA_PREFIX.md"):
         if not (HERE / "existing" / name).exists():
