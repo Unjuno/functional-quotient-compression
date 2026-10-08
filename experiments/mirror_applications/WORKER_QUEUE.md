@@ -14,13 +14,14 @@ Use:
 
 ## Selection rule
 
-Pick the first candidate satisfying all of:
-1. status is UNTESTED;
-2. highest available priority;
-3. no other active experiment directory already claims the ID;
-4. its closest prior-art controls can be implemented in the current harness.
+Use one fresh random draw per experiment rather than advancing through IDs in order:
+1. Fetch the latest worker-ready baseline and its authoritative registry.
+2. Build the eligible pool from P0/UNTESTED rows, excluding IDs with an active experiment directory or any live remote `research/ma-*` branch.
+3. Sort the eligible rows by registry order, draw a uniform index from a fresh 256-bit random seed, and select exactly that one ID.
+4. Before development/audit results are accessed, persist the seed, baseline commit, eligible pool CSV and hash, pool size, index, selected registry row and excluded active branch IDs on that experiment's research branch.
+5. Complete or document a blocker for the selected ID before drawing again. Re-fetch and rebuild the pool for every subsequent draw; do not reserve multiple IDs or choose the next numeric ID.
 
-Do not skip to a visually interesting P1/P2 idea while an executable P0 remains, unless the skipped candidate has a recorded blocker.
+The user's instruction to preserve randomized selection supersedes the historical numbered research queues below. Those queues remain evidence/prior-art maps, not an execution order. Draw 4 selected MA-462; its development-only FAIL is recorded on `research/ma-462-mirror-hyperformer-decoder-20261008`.
 
 ## Literature-derived cross-over queue
 

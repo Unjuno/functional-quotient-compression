@@ -5,9 +5,9 @@
 - Base commit: `d12d62a1902c702e57b09cfaba49d0862d485226`
 - Development complete: yes (final deterministic run: 120 fits, 2 worlds, 5 alpha values)
 - Fresh/audit opened: no (development gate failed)
-- Results committed: pending
-- Verification committed: pending
-- Registry row updated: pending
+- Results committed: yes
+- Verification committed: yes
+- Registry row updated: yes
 
 ## Decision
 
