@@ -20,6 +20,7 @@ ALIGNED = 2
 UPDATES = 600
 BATCH = 128
 LR = 0.01
+TEACHER_LOGIT_SCALE = 32.0
 RHO = 0.25
 METHODS = ["hard_tied", "independent_tt", "shared_direct", "mirror_phase", "shared_private", "independent_full"]
 
@@ -50,7 +51,7 @@ def teacher_world(seed):
         # Keep the teacher transition distribution learnable from the tied
         # embedding softmax; the extra temperature creates a useful but
         # nontrivial bigram signal without changing the frozen task.
-        logits = (table * 8.0) @ (table * 8.0).T / (E ** 0.5)
+        logits = (table * TEACHER_LOGIT_SCALE) @ (table * TEACHER_LOGIT_SCALE).T / (E ** 0.5)
         transitions.append(torch.softmax(logits, dim=-1))
     return torch.stack(tables), torch.stack(transitions)
 

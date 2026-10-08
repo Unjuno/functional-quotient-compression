@@ -1,0 +1,22 @@
+{
+  "experiment_id": "MA-346",
+  "title": "Federated shared/private Mirror residual frontier",
+  "status": "AMENDED_AFTER_DEVELOPMENT_BEFORE_FRESH",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY/COMMUNICATION/COMPUTE",
+  "base_commit": "081e605",
+  "hypothesis": "Across increasing client heterogeneity, one shared global weight basis plus one client phase and rank-1 private residuals for outlier clients will preserve client function quality while reducing actual storage/communication versus a FedRep-style full private residual. The phase mechanism must be compared with direct coefficients and native scalar-phase control. The sweep will locate when private state dominates.",
+  "physical_object": "one shared 16x16 global client model with two shared functional update directions",
+  "mirror_coordinate": "one phase angle per client selecting a shared common update",
+  "logical_multiplicity": "64 client functions across five nested heterogeneity rates (0, 25, 50, 75, 100 percent outliers)",
+  "prior_art_refs": ["PA38", "PA40"],
+  "controls": ["independent full client matrices", "one global shared model", "shared phase with no private residual", "shared phase plus rank-1 private residuals", "direct two-coefficient basis plus the same private residuals", "native scalar-phase implementation identical to Mirror", "FedRep-style shared basis plus dense private residual matrices"],
+  "development": {"worlds_or_seeds": [34601, 34602], "selection_metric": "overall/aligned/outlier nMSE, actual serialized total bytes, private residual bytes, client communication by heterogeneity, MAC proxy"},
+  "fresh": {"worlds_or_seeds": [34611, 34612, 34613], "locked_before_access": true},
+  "storage": {"authority": "actual deterministic ZIP/NPY FP32 inference payload bytes after reload", "paid_objects": ["shared base and update directions", "all phase or direct coefficients", "private residual client IDs", "private rank-1 factors or dense matrices", "metadata"]},
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true},
+  "success_gate": "At fresh heterogeneity rates 25% and 50%: private-enabled Mirror nMSE <=1e-5 for aligned and outlier cohorts and actual payload <=0.80x FedRep-style dense-private payload. Report full 0–100% sweep and private-byte/communication slope. No Mirror-specific claim unless at least 10% below direct/native controls.",
+  "failure_gate": "At either primary fresh rate (25% or 50%), private-enabled Mirror misses quality or saves <20% versus FedRep dense-private state in at least two fresh worlds; or private-state cost eliminates the shared-state advantage across all rates. Native/direct equivalence only blocks Mirror-specific attribution, not the shared/private frontier comparison.",
+  "development_decision": "Both development worlds passed quality and the 20% FedRep payload margin at heterogeneity 25% and 50%, but not at 0%. Before fresh access, define 25% and 50% as the primary operating region and retain the entire sweep as secondary. Mirror/native phase state was identical, so the result can only support a shared/private application frontier, not a Mirror-specific gain.",
+  "amendment": "Following development-only inspection, freeze primary heterogeneity rates to 25% and 50% because the zero-outlier endpoint did not meet the registered Pareto margin. Fresh seeds 34611–34613 are unchanged; no model or byte threshold changed. All five heterogeneity rates will still be reported.",
+  "boundaries": ["synthetic post-fit client linear functions, not trained federated models", "outlier IDs and phase codes are oracle-known; no client-side learning or adaptation", "private residuals are planted rank-1 factors; the dense FedRep control is intentionally stronger in private expressivity", "sweeping outlier fraction is a storage/quality frontier, not a capacity claim"]
+}

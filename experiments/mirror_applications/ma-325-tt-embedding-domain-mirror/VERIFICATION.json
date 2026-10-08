@@ -1,6 +1,7 @@
 {
   "experiment_id": "MA-325",
-  "commit": "pending",
+  "protocol_amendment": "A3",
+  "commit": "pending integration commit",
   "tests": {
     "command": "python -m pytest -q experiments/mirror_applications/ma-325-tt-embedding-domain-mirror/tests",
     "passed": 4,
@@ -8,12 +9,49 @@
   },
   "serialization": {
     "roundtrip_checked": true,
-    "byte_exact": true
+    "byte_exact": true,
+    "payloads_checked": 12
   },
   "metric_replay": {
-    "checked": false,
-    "max_difference": null
+    "command": "python experiments/mirror_applications/ma-325-tt-embedding-domain-mirror/source/verify_a3.py",
+    "checked": true,
+    "rows_replayed": 12,
+    "max_difference": 0.0,
+    "hashes_exact": true
+  },
+  "development_gate": {
+    "independent_full_validation_macro_nll": [
+      1.1557759443918865,
+      1.2587047616640727
+    ],
+    "independent_full_validation_macro_accuracy": [
+      0.6134440104166666,
+      0.5757649739583334
+    ],
+    "aligned_mirror_no_more_than_0p05_worse_than_independent_tt": [
+      true,
+      true
+    ],
+    "mirror_bytes": [
+      2631,
+      2631
+    ],
+    "direct_control_bytes": [
+      2637,
+      2637
+    ],
+    "mirror_to_direct_ratio": [
+      0.9977246871444824,
+      0.9977246871444824
+    ],
+    "storage_gate_passed": false
   },
   "fresh_split_integrity_checked": true,
-  "notes": ["No fresh data accessed. Development seeds 32501/32502 across all six conditions were approximately uniform (NLL ~ ln(16), accuracy ~ 1/16), including independent full-table upper control. Frozen task cannot test the Mirror hypothesis; disposition NOT ESTABLISHED. Dev payload files can be reloaded by source loader; phase indexing fix is before fresh access. Exploratory teacher-rescaling variants are excluded."]
+  "fresh_split_opened": false,
+  "notes": [
+    "Original A0/A1 task was NOT ESTABLISHED because even independent full remained near-uniform; source and protocol are retained as run_A0.py and PROTOCOL_A0.json.",
+    "A3 changed only teacher logit scale to 32.0 after development-validation learnability diagnostics; architecture, optimizer, update count, LR, data volumes, gates, and fresh IDs stayed fixed.",
+    "A3 independent-full development passes learnability gate and aligned Mirror is no worse than independent TT, but 2631B vs 2637B direct control fails the frozen <=0.85x storage threshold; fresh IDs 32511-32513 remain sealed.",
+    "No capacity claim; synthetic tied-head bigram task only."
+  ]
 }

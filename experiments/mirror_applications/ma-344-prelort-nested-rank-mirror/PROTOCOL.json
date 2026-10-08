@@ -1,0 +1,22 @@
+{
+  "experiment_id": "MA-344",
+  "title": "PreLort nested-rank factors with client Mirror segment views",
+  "status": "AMENDED_AFTER_DEVELOPMENT_BEFORE_FRESH",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY/COMMUNICATION/COMPUTE",
+  "base_commit": "fdbdb1e",
+  "hypothesis": "For heterogeneous clients using nested LoRA ranks 1/2/4, shared prefix factors plus one phase code per active rank segment will preserve client outputs while reducing actual storage and per-client communication versus PreLort-style client-specific active A factors. Compare direct per-segment coefficients and ordinary scalar phase codes to identify any Mirror-specific value. A client outside the shared segment orbit may need private rank-4 factors.",
+  "physical_object": "shared global 16x16 linear base, nested 16x4 left factor, and two right-factor basis matrices per rank segment",
+  "mirror_coordinate": "one phase angle for each active rank segment of each client",
+  "logical_multiplicity": "64 rank-heterogeneous clients (ranks 1, 2, 4) with one task function per nested prefix plus one off-orbit client",
+  "prior_art_refs": ["PA39"],
+  "controls": ["independent full client matrices", "PreLort-style shared prefix B plus each client's active A factors", "shared nested basis plus direct cos/sin coefficients per active segment", "Mirror phase per active segment", "ordinary scalar phase code with identical inference state", "shared hard-tied adapter", "Mirror with and without private off-orbit rank-4 factors"],
+  "development": {"worlds_or_seeds": [34401, 34402], "selection_metric": "per-rank client output nMSE, actual serialized bytes, communication by rank, view-generation MACs, off-orbit private-state need"},
+  "fresh": {"worlds_or_seeds": [34411, 34412, 34413], "locked_before_access": true},
+  "storage": {"authority": "actual deterministic ZIP/NPY FP32 inference payload bytes after reload", "paid_objects": ["shared base", "nested B prefix", "two A basis factors per segment", "all active client phases or direct coefficients", "rank/offset metadata", "private off-orbit factors"]},
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true},
+  "success_gate": "All fresh seeds: nMSE <=1e-5 for all rank groups; total Mirror payload <=0.80x PreLort active-factor payload; communication scales with active rank; at least 10% fewer bytes than direct coefficient control to claim Mirror-specific value; private factors restore off-orbit quality.",
+  "failure_gate": "Any rank group misses quality in >=2 fresh seeds; storage reduction vs PreLort is <20%; direct/native control is within 10% bytes and quality; or private residual is needed for >25% of aligned clients.",
+  "development_decision": "On both development worlds, Mirror passed the primary PreLort storage/quality screen (about 59% fewer actual bytes, per-rank nMSE <=1.4e-14). Direct coefficients were about 10% larger, while the ordinary scalar-phase implementation was byte/hash identical. Continue fresh only to replicate the PreLort storage/quality/communication result; do not make a Mirror-specific claim if scalar phase remains equivalent.",
+  "amendment": "After development-only inspection and before fresh access, freeze the claim boundary above. Fresh seeds 34411-34413 remain unchanged; no tuning or threshold changes.",
+  "boundaries": ["synthetic post-fit linear LoRA tasks, no federated optimizer or local updates", "rank assignment and phase coordinates are supplied by the planted task family", "not trained PreLort or real federated data", "address count is not independent capacity", "no natural-language or Transformer result"]
+}
