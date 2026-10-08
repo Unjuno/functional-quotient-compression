@@ -38,7 +38,7 @@ def fit(w,s,method,lr,phase):
 def evaluate(m,w,delay,seed):
  r,x=data(w,512,delay,seed);y=torch.nn.functional.one_hot(r,D).float();st=time.perf_counter()
  with torch.no_grad():log=m(r,x,delay);pred=log.argmax(1);prob=log.softmax(-1)
- wall=time.perf_counter()-st;acc=(pred==r).float().mean().item();nll=nn.functional.cross_entropy(log,y.argmax(1)).item();drift=(1-acc);return nll,acc,wall,drift
+ wall=time.perf_counter()-st;acc=(pred==r).float().mean().item();nll=nn.functional.cross_entropy(log,y.argmax(1)).item();prob=log.softmax(-1);nrmse=((prob-y).square().mean().sqrt()/(y.square().mean().sqrt()+1e-12)).item();drift=nrmse;return nrmse,acc,wall,drift
 
 def main():
  ap=argparse.ArgumentParser();ap.add_argument('--phase',choices=['development','fresh'],required=True);a=ap.parse_args();OUT.mkdir(exist_ok=True);PAY.mkdir(parents=True,exist_ok=True);worlds=DEV if a.phase=='development' else FRESH;rows=[];sel=json.loads((OUT/'development_selection.json').read_text())['selected_learning_rate_by_method'] if a.phase=='fresh' else {}
@@ -51,13 +51,13 @@ def main():
       m,meta=fit(w,s,method,lr,a.phase)
       for delay in DELAYS:
        nll,acc,wall,drift=evaluate(m,w,delay,w*100+s+delay);scores[lr].append(nll)
-       rows.append({'condition':'development','world_or_seed':f'{w}-{s}-{delay}','method':method,'serialized_bytes':meta['bytes'],'train_tokens_or_examples':UPDATES*BATCH,'optimizer_updates':UPDATES,'active_compute_proxy':f'{dimension(method)*D} MAC/token','wall_time_s':round(wall,6),'primary_metric':'recall_NLL','primary_value':nll,'secondary_metric':'accuracy','secondary_value':acc,'status_note':f'lr={lr}; drift={drift}; state_bytes={dimension(method)*4}; hash={meta["hash"]}; payload={meta["path"]}'})
+       rows.append({'condition':'development','world_or_seed':f'{w}-{s}-{delay}','method':method,'serialized_bytes':meta['bytes'],'train_tokens_or_examples':UPDATES*BATCH,'optimizer_updates':UPDATES,'active_compute_proxy':f'{dimension(method)*D} MAC/token','wall_time_s':round(wall,6),'primary_metric':'recall_probability_NRMSE','primary_value':nll,'secondary_metric':'accuracy','secondary_value':acc,'status_note':f'lr={lr}; drift={drift}; state_bytes={dimension(method)*4}; hash={meta["hash"]}; payload={meta["path"]}'})
     sel[method]=min(LRS,key=lambda lr:sum(scores[lr])/len(scores[lr]))
    else:
     for s in SEEDS:
      m,meta=fit(w,s,method,sel[method],a.phase)
      for delay in DELAYS:
-      nll,acc,wall,drift=evaluate(m,w,delay,w*100+s+delay);rows.append({'condition':'fresh','world_or_seed':f'{w}-{s}-{delay}','method':method,'serialized_bytes':meta['bytes'],'train_tokens_or_examples':UPDATES*BATCH,'optimizer_updates':UPDATES,'active_compute_proxy':f'{dimension(method)*D} MAC/token','wall_time_s':round(wall,6),'primary_metric':'recall_NLL','primary_value':nll,'secondary_metric':'accuracy','secondary_value':acc,'status_note':f'lr={sel[method]}; drift={drift}; state_bytes={dimension(method)*4}; train_wall={meta["train_wall"]:.6f}; hash={meta["hash"]}; payload={meta["path"]}'})
+      nll,acc,wall,drift=evaluate(m,w,delay,w*100+s+delay);rows.append({'condition':'fresh','world_or_seed':f'{w}-{s}-{delay}','method':method,'serialized_bytes':meta['bytes'],'train_tokens_or_examples':UPDATES*BATCH,'optimizer_updates':UPDATES,'active_compute_proxy':f'{dimension(method)*D} MAC/token','wall_time_s':round(wall,6),'primary_metric':'recall_probability_NRMSE','primary_value':nll,'secondary_metric':'accuracy','secondary_value':acc,'status_note':f'lr={sel[method]}; drift={drift}; state_bytes={dimension(method)*4}; train_wall={meta["train_wall"]:.6f}; hash={meta["hash"]}; payload={meta["path"]}'})
  if a.phase=='development':(OUT/'development_selection.json').write_text(json.dumps({'selected_learning_rate_by_method':sel,'rule':'lowest mean recall NLL across delays, worlds, seeds','fresh_worlds_not_accessed':True},indent=2)+'\n')
  (OUT/f'{a.phase}_runs.jsonl').write_text(''.join(json.dumps(r)+'\n' for r in rows));print(json.dumps({'phase':a.phase,'selection':sel,'rows':len(rows)},indent=2))
 if __name__=='__main__':main()

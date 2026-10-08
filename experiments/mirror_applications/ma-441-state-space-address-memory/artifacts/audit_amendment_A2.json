@@ -1,0 +1,8 @@
+{
+  "amendment": "A2",
+  "reason": "Primary metric implementation used NLL instead of protocol-specified recall NRMSE.",
+  "invalidated_fresh_records": 144,
+  "prior_summary": "Mirror and equal-width register had 100% accuracy at all delays; external exact register NLL was 0; Mirror NLL increased to 0.012 at delay512.",
+  "handling": "Prior results excluded. Recompute dev and fresh metrics from same frozen worlds/seeds using probability NRMSE; gates unchanged.",
+  "metric_changes": "primary=probability-vector NRMSE; secondary=accuracy and NLL"
+}

@@ -93,6 +93,11 @@
       "id": "A1",
       "date": "2026-10-08",
       "reason": "Initial development/fresh audit found initialized retention alpha=sigmoid(-4)=0.018, so the address decayed before distractors and non-external recall stayed at chance. Correct to a near-persistent alpha initialization sigmoid(6)=0.9975. No metric, gate, data world, or update count changes. Initial fresh rows are invalidated and will be overwritten after rerun."
+    },
+    {
+      "id": "A2",
+      "date": "2026-10-08",
+      "reason": "Post-run audit found runner used recall NLL for development selection and primary results while frozen contract specified recall NRMSE. Change metric to probability-vector NRMSE against one-hot target, retain accuracy and NLL as secondary diagnostics, and rerun development/fresh on same splits. No gate or world/seed changes."
     }
   ]
 }
