@@ -1,0 +1,74 @@
+{
+  "experiment_id": "MA-742",
+  "title": "Relation-attribute factorized R-GCN Mirror views",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM",
+  "base_commit": "16807a7d6dc17a834a44ed3cc793ccc28b615691",
+  "hypothesis": "A shared relation-transform basis plus a multiplicative Mirror coordinate composed from two semantic relation attributes will predict held-out attribute combinations with lower serialized inference bytes than per-relation R-GCN basis coefficients, while remaining within 10% of their seen-relation MSE.",
+  "physical_object": "Shared relation transform basis matrices in a one-layer R-GCN message operator.",
+  "mirror_coordinate": "m(a,b) = tanh(U[a]) elementwise-multiplied by tanh(V[b]), then linearly decoded to shared-basis coefficients.",
+  "logical_multiplicity": "One logical relation transform for each ordered pair of relation attributes, including held-out pairs.",
+  "prior_art_refs": [
+    "PA188"
+  ],
+  "random_selection": {
+    "draw": 2,
+    "pool_size": 533,
+    "pool_sha256": "50edf0fd4a61587ce523088eccf9acff4d806827ce36677cadd79df40cc7d0b4",
+    "seed_hex": "4c51ce7c29e86e013b7dd9893628f35ea25b2386779bbefbc945da9fe8954e98",
+    "zero_based_index": 249,
+    "selection_rule": "registry rows priority=P0 AND status=UNTESTED; exclude every ID with any remote research/ma-* branch; numeric ID order"
+  },
+  "controls": [
+    "Independent full relation transforms (upper control; seen relations only)",
+    "Native R-GCN basis with free per-relation coefficients (seen-relation control)",
+    "Additive relation-attribute factorized coefficients (simple compositional control)",
+    "Mirror multiplicative factorized relation code"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      7421,
+      7422
+    ],
+    "selection_metric": "mean held-out-combination MSE; tie break by serialized inference bytes",
+    "allowed_tuning": "Mirror latent rank in {2,4,8}; additive-control rank matched; fixed optimizer/training budget."
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      74201,
+      74202,
+      74203
+    ],
+    "locked_before_access": true,
+    "selection_metric": "MSE on held-out attribute combinations and seen relation held-out examples"
+  },
+  "data": {
+    "generator": "Synthetic relation-conditioned linear message operator. Four values for each of two semantic relation attributes; 16 ordered pairs, with pairs (0,0),(1,2),(2,3),(3,1) excluded from training and development fit. Inputs/outputs and true relation coefficients generated per world seed.",
+    "train_examples_per_seen_relation": 256,
+    "dev_examples_per_relation": 128,
+    "fresh_examples_per_relation": 256
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "shared basis matrices",
+      "relation-attribute coordinate tables",
+      "coefficient decoder",
+      "all model buffers and inference metadata"
+    ]
+  },
+  "compute": {
+    "report_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": "counted multiply-adds in forward/backward and inference; estimate labeled as proxy",
+    "report_isolated_wall_clock": true
+  },
+  "success_gate": "On all three fresh worlds, Mirror held-out-combination MSE is at least 20% below additive control, within 10% of the free per-relation basis control on seen combinations, and complete serialized payload is at most 60% of its seen-relation coefficient payload baseline. Report runtime separately.",
+  "failure_gate": "Mirror fails if it does not improve on additive factorization on held-out combinations, or exceeds the quality tolerance on seen combinations, or its actual bytes do not beat the free per-relation coefficient model.",
+  "boundaries": [
+    "Synthetic mechanism screen only; no real KG/link-prediction claim.",
+    "Mirror coordinates do not count as independent relation capacity.",
+    "If ordinary additive factors match, no Mirror-specific claim.",
+    "Fresh results cannot change selected rank or any protocol setting."
+  ]
+}
