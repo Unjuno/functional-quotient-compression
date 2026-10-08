@@ -300,7 +300,26 @@ Operational rule:
 - Mesh experiments preserve observation-only communication and count message/topology overhead;
 - structural-composition experiments require held-out recombination, not only seen task IDs.
 
-## Current P0 sequence
+## Eleventh literature expansion — cross-model state, scenes, audio, generators and stitching
+
+**MA-876..935 are new UNTESTED candidates and are appended behind the already-selected MA-255 crossover.** Do not interrupt active experiments.
+
+High-information P0 applications by domain:
+1. **Cross-model caches MA-876..890:** MA-876 shared ridge translator basis versus native per-pair ridge; MA-878 head-matched CacheBridge; MA-880 ordered source×target factorization; MA-881 MoT translator bank; MA-887 exact-versus-approximate boundary; MA-889 confidence fallback.
+2. **Neural scenes and 4D Gaussian MA-891..905:** MA-891 C-NGP shared-scene code; MA-894 TensoRF factor views; MA-896 4DGS motion views; MA-897 ADC-GS anchor; MA-898 CC-4DGS; MA-902 held-out scene×time; MA-904 object×action.
+3. **Multi-speaker audio MA-906..918:** MA-906 NanoVoice scales; MA-908 HyperTTS generator-to-code; MA-909 speaker MoA; MA-910 Hyper-MoA residual; MA-911 content×speaker subspaces; MA-912 timbre×style; MA-914 HybridCodec; MA-917 new speaker via code.
+4. **Generative functions MA-919..928:** MA-919 two-time FMM; MA-921 factorized flow-map endpoints; MA-922 S4S solver code; MA-924 LoRA.rar subject×style; MA-925 EST-LoRA timestep selection; MA-926 new subject by code.
+5. **Model stitching MA-929..935:** MA-929 StitchLLM connectors; MA-930 ordered model×layer factorization; MA-931 SAE feature transfers; MA-932 informational-alignment falsification; MA-933 joint KV/residual transport.
+
+Every experiment must isolate the extra Mirror parameter `m` beyond its strong native method. For cross-model caches, distinguish exact lazy algebra from approximate translation and report target quality, calibration, mapper bytes and handoff vs re-prefill. For graphics report PSNR/LPIPS, *all* scene assets and measured FPS; speech requires intelligibility and speaker fidelity using licensed/consented data; few-step generation requires true NFEs and GPU wall-time; stitching needs informational counterexamples. Held-out ordered model pairs/scene-time/speaker-style/subject-style combinations are mandatory for factorized claims.
+
+Read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08.md`, PA236..PA265 and the selected MA registry row.
+
+**MA-255 remains the canonical next worker candidate.** This queue must not preempt it or supersede its frozen protocol.
+
+## Historical P0 family sequence (completed screens; not current queue)
+
+The historical A–F lists below record previously screened experiments and must not override `STATUS_BOARD.md` (MA-255 next).
 
 ### Family A — FFN / MoE / adapter
 MA-003 -> MA-005 -> MA-009 -> MA-019 -> MA-024
