@@ -1,0 +1,10 @@
+{
+  "experiment_id": "MA-434",
+  "protocol_commit": "1de00f2",
+  "tests": {"command": "python -m unittest discover -s experiments/mirror_applications/ma-434-mamba-selective-state-mirror/tests -v", "passed": 2, "failed": 0},
+  "serialization": {"roundtrip_checked": true, "byte_exact": true, "payload_rows": 84, "payload_hashes_replayed": true, "actual_payload_bytes_authoritative": true},
+  "metric_replay": {"checked": true, "max_difference": 0.0, "notes": ["All payload lengths and hashes verified against retained files.", "Fresh metrics use independent sequences generated from the same teacher parameters per world.", "Mirror quality improves over independent, but actual payload bytes exceed it and miss the registered 60% gate."]},
+  "fresh_split_integrity_checked": true,
+  "fresh_worlds": [43410,43411,43412],
+  "notes": ["Input-dependent delta remains active for all methods.", "Unfused Mirror role matrix operation has high measured wall time; this is not fused-kernel inference throughput."]
+}
