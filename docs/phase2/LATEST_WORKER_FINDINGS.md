@@ -39,7 +39,9 @@ MA-288 is **FAIL under the preregistered direct-path runtime gate**. Aligned sta
 
 MA-292 is **FAIL for Mirror-specific value**. The one-angle representation saved four incremental bytes/task vs FP32 rank-2 SVD, but matched-byte FP16 SVD was 23B smaller overall, slightly more accurate in all fresh worlds and about 1.55x faster. Independent deltas required private/richer state. Five tests, 42-row replay and exact serialization checks passed.
 
-**The next candidate is MA-296.** MA-275/277/279–281 remain P1 UNTESTED. MA-876..1115 remain appended research-intake hypotheses and must not preempt the registered P0 crossovers. Natural variation and benchmark-level runtime remain unproven; aligned synthetic PROMISING must not be described as real-world Mirror adoption.
+MA-296 is **FAIL for Mirror-specific value**. Across three fresh worlds, its aligned eight-task functions matched the direct shared-orbit generator exactly, but the simpler control used 1,524B vs Mirror 1,561B. Unrelated task vectors required the 4,771B independent state; Rademacher PSP interfered heavily. Five tests and all 36 metric/payload replays passed.
+
+**The next candidate is MA-297.** MA-275/277/279–281 remain P1 UNTESTED. MA-876..1115 remain appended research-intake hypotheses and must not preempt the registered P0 crossovers. Natural variation and benchmark-level runtime remain unproven; aligned synthetic PROMISING must not be described as real-world Mirror adoption.
 
 ## MA-241 — layer-specific Mirror views over tied experts
 

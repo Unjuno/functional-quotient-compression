@@ -1,18 +1,18 @@
 # MA-296 status
 
-- Status: SCREENING (development complete; fresh sealed)
+- Status: FAIL (fresh complete; Mirror-specific gate failed)
 - Branch: `research/ma-296-orthogonal-task-superposition-20261008`
 - Base commit: `037b849`
-- Last verified commit: pending
+- Protocol/source freeze commit: `d6c6d6e861524a7262ed02d9c976b4565c070bdf`
 - Development complete: yes (2 worlds; rank 8 and PSP seed 296103 selected)
-- Fresh/audit opened: no
-- Results committed: no
-- Verification committed: no
-- Registry row updated: no
+- Fresh/audit opened: yes; locked seeds only
+- Results committed: yes
+- Verification committed: yes
+- Registry row updated: yes on this branch
 
 ## Next action
 
-Run the locked fresh worlds 29611–29613 without changing any settings.
+Record final H/T/D/C/U, update the registry and cumulative status board, run integrity checks, then publish this research branch.
 
 ## Blockers
 

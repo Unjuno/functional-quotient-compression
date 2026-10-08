@@ -315,7 +315,7 @@ Every experiment must isolate the extra Mirror parameter `m` beyond its strong n
 
 Read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08.md`, PA236..PA265 and the selected MA registry row.
 
-**Current evidence:** MA-255/268/276/282 are narrow PROMISING; MA-260/261/265/271/272/273/274/278/286/288/292 are FAIL in their documented scopes. The next P0 candidate is MA-296 (orthogonalized task-vector superposition).
+**Current evidence:** MA-255/268/276/282 are narrow PROMISING; MA-260/261/265/271/272/273/274/278/286/288/292/296 are FAIL in their documented scopes. The next P0 candidate is MA-297 (SETA shared sparse subspace + Mirror views).
 
 ## Twelfth research expansion — video, equivariance, spiking, physical optics, wireless and spatial audio
 
@@ -359,7 +359,7 @@ Read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_THIRTEENTH_SWEEP.
 
 **MA-1046..1095 are 50 new UNTESTED hypotheses** appended after earlier literature intakes and the original locked direct-prior queue. All comparisons study the marginal value of the extra Mirror parameter `m`; no new source-paper result is a Mirror result.
 
-**Current evidence:** MA-255/268/276/282 are narrow PROMISING; MA-260/261/265/271/272/273/274/278/286/288/292 are FAIL in their documented scopes. The next P0 candidate is MA-296 (orthogonalized task-vector superposition).
+**Current evidence:** MA-255/268/276/282 are narrow PROMISING; MA-260/261/265/271/272/273/274/278/286/288/292/296 are FAIL in their documented scopes. The next P0 candidate is MA-297 (SETA shared sparse subspace + Mirror views).
 
 Recommended high-information P0 studies **within this new family**:
 
@@ -379,7 +379,7 @@ Read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_FOURTEENTH_SWEEP.
 
 ## Historical P0 family sequence (completed screens; not current queue)
 
-The historical A–F lists below record previously screened experiments and must not override `STATUS_BOARD.md` (MA-296 next).
+The historical A–F lists below record previously screened experiments and must not override `STATUS_BOARD.md` (MA-297 next).
 
 ### Family A — FFN / MoE / adapter
 MA-003 -> MA-005 -> MA-009 -> MA-019 -> MA-024

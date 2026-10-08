@@ -1,6 +1,6 @@
 # MA-296 — orthogonalized task-vector Mirror superposition
 
-Status: SCREENING (protocol frozen before fresh access)
+Status: FAIL (direct shared-orbit control exactly matches Mirror at fewer bytes)
 Evidence lane: MECHANISM / TASK-ARITHMETIC / STORAGE / RUNTIME
 Base commit: `037b849`
 Prior art: PA16 Parameter Superposition; PA26 Task Arithmetic.
@@ -18,6 +18,18 @@ Eight support task deltas define a shared physical state; eight new task views a
 Controls: independent full task vectors; unbound arithmetic/single shared delta; standard Rademacher Parameter Superposition (PSP); rank-2/4/8 SVD basis fitted on support tasks; direct shared-orbit generator storing `v*` plus task angles; Mirror `Q(-m)` binding, vector superposition, and `Q(m)` unbinding. Signed pair sums/differences are checked for each method. No optimizer updates.
 
 Development worlds 29601 and 29602 selected SVD rank 8 and PSP context seed 296103. Fresh worlds 29611–29613 and both settings are now frozen; see `DEV_SELECTION.json`. The development grid is preserved in `source/development_grid.json` and summarized in `DEV_RESULTS_CORE.csv`.
+
+## D — decision: FAIL for Mirror-specific value
+
+**Fact:** On fresh seeds 29611–29613, aligned Mirror task and signed-pair normalized MSE were 1.17e-14 and 2.41e-14, exactly the same values as the direct shared-orbit generator. The Mirror payload was 1,561B vs 1,524B direct; mean eager throughput was 37.4M vs 34.9M examples/s. Both were far below the 4,771B independent upper while recovering the aligned orbit. In the independent condition, Mirror and direct orbit both had MSE 1.132; independent full vectors were 4,771B and near-zero error. The rank-8 SVD control used 5,038B and had aligned MSE 2.76e-7. Rademacher PSP was 1,502B but its aligned MSE was 9.86.
+
+**Interpretation:** The orthogonal task orbit can be represented compactly, but summing bound task vectors provides no functional or byte benefit over directly storing the shared orbit seed; in this codec it adds 37B. Unrelated tasks need independent or richer task state.
+
+**Hypothesis:** A different binding family or task distribution may create a useful interference advantage, but this screen gives no evidence that this Givens superposition does.
+
+**C — strongest counter-hypothesis:** The aligned teacher is generated from the same Givens family and task angles are supplied. The direct control extracts the same orbit seed from support vectors and is a fair, simpler functional generator.
+
+**U — unconfirmed:** Learned context inference, nonlinear models, trained task vectors, alternative binding families, private-residual break-even, and language-model/capacity behavior.
 
 ## Gates
 
