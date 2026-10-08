@@ -37,14 +37,16 @@ def pack(f,theta,kind):
         arr={'l1w':st['l1.weight'].numpy().astype(np.float16),'l1b':st['l1.bias'].numpy().astype(np.float16),'l2w':st['l2.weight'].numpy().astype(np.float16),'l2b':st['l2.bias'].numpy().astype(np.float16),'ids':np.arange(M,dtype=np.uint8)};tag='one_shared_field'
     arr['metadata_utf8']=np.frombuffer(json.dumps({'kind':tag,'state_dimension':D,'hidden':H,'dtype':'float16'},sort_keys=True,separators=(',',':')).encode(),dtype=np.uint8);b=io.BytesIO();np.savez_compressed(b,**arr);return b.getvalue()
 
-def load(raw):
+def load(raw,method=None):
     a=np.load(io.BytesIO(raw),allow_pickle=False);meta=json.loads(bytes(a['metadata_utf8'].tolist()).decode());kind=meta['kind'];v={'kind':kind}
     if kind=='independent_transformed_fields':
         v.update(w1=torch.tensor(a['w1'].astype(np.float32)),w2=torch.tensor(a['w2'].astype(np.float32)),b1=torch.tensor(a['b1'].astype(np.float32))[None,:].expand(M,-1),b2=torch.tensor(a['b2'].astype(np.float32)))
     else:
         f=Field();f.load_state_dict({'l1.weight':torch.tensor(a['l1w'].astype(np.float32)),'l1.bias':torch.tensor(a['l1b'].astype(np.float32)),'l2.weight':torch.tensor(a['l2w'].astype(np.float32)),'l2.bias':torch.tensor(a['l2b'].astype(np.float32))});v['field']=f
         if 'theta' in a.files:
-            v['theta']=torch.tensor(a['theta'].astype(np.float32));q=rotation(v['theta']);w1,w2,b2=transformed(f,v['theta']);v.update(q=q,w1=w1,w2=w2,b1=f.l1.bias[None,:].expand(M,-1),b2=b2)
+            v['theta']=torch.tensor(a['theta'].astype(np.float32));v['q']=rotation(v['theta'])
+            if method=='native':
+                w1,w2,b2=transformed(f,v['theta']);v.update(w1=w1,w2=w2,b1=f.l1.bias[None,:].expand(M,-1),b2=b2)
     return v
 
 def basef(f,h):return f(h)
@@ -67,7 +69,7 @@ def simulate_loaded(v,x0,kind,steps=EULER,integrator='euler'):
             if (i+1)%stride==0:states.append(h.clone())
     return torch.stack(states)
 def simulate(raw,x0,kind,steps=EULER,integrator='euler'):
-    return simulate_loaded(load(raw),x0,kind,steps,integrator)
+    return simulate_loaded(load(raw,kind),x0,kind,steps,integrator)
 
 def rel_rmse(pred,ref):return float((torch.mean((pred-ref)**2).sqrt()/torch.mean(ref**2).sqrt().clamp_min(1e-9)))
 def diversity(pred):
@@ -76,12 +78,12 @@ def diversity(pred):
         for j in range(i+1,M):d.append((final[i]-final[j]).pow(2).mean().sqrt())
     return float(torch.stack(d).mean())
 def qps(raw,x0,kind):
-    v=load(raw)
+    v=load(raw,kind)
     for _ in range(5):simulate_loaded(v,x0,kind)
     st=time.perf_counter()
     for _ in range(15):simulate_loaded(v,x0,kind)
     return (15*M*N0*EULER)/(time.perf_counter()-st)
-def setup_seconds(raw):st=time.perf_counter();load(raw);return time.perf_counter()-st
+def setup_seconds(raw,kind):st=time.perf_counter();load(raw,kind);return time.perf_counter()-st
 
 def run(out,seeds=(42401,42402)):
     out.mkdir(parents=True,exist_ok=True);rows=[];screens=[];torch.set_num_threads(1)
@@ -92,7 +94,7 @@ def run(out,seeds=(42401,42402)):
         for name,raw in payloads.items():results[name]=simulate(raw,x0,name);rates[name]=qps(raw,x0,name)
         scores={name:rel_rmse(pred,ref) for name,pred in results.items()};div=diversity(results['mirror']);alias=float((results['mirror']-results['native']).abs().max())<=1e-7 and len(payloads['mirror'])==len(payloads['native'])
         for name,raw in payloads.items():
-            digest=hashlib.sha256(raw).hexdigest();proxy=(D*H+H*D)+(24 if name=='mirror' else 0);rows.append({'condition':'sixteen_mode_ode_trajectory','world_or_seed':seed,'method':name,'serialized_bytes':len(raw),'train_tokens_or_examples':0,'optimizer_updates':0,'active_compute_proxy':proxy,'wall_time_s':round(setup_seconds(raw),6),'primary_metric':'relative_trajectory_RMSE_vs_RK4','primary_value':scores[name],'secondary_metric':'vector_field_evaluations_per_second','secondary_value':rates[name],'status_note':digest+';64-Euler-NFE'})
+            digest=hashlib.sha256(raw).hexdigest();proxy=(D*H+H*D)+(24 if name=='mirror' else 0);rows.append({'condition':'sixteen_mode_ode_trajectory','world_or_seed':seed,'method':name,'serialized_bytes':len(raw),'train_tokens_or_examples':0,'optimizer_updates':0,'active_compute_proxy':proxy,'wall_time_s':round(setup_seconds(raw,name),6),'primary_metric':'relative_trajectory_RMSE_vs_RK4','primary_value':scores[name],'secondary_metric':'vector_field_evaluations_per_second','secondary_value':rates[name],'status_note':digest+';64-Euler-NFE'})
         screens.append({'seed':seed,'mirror_error':scores['mirror'],'native_error':scores['native'],'independent_error':scores['independent'],'shared_error':scores['shared'],'mirror_bytes':len(payloads['mirror']),'native_bytes':len(payloads['native']),'independent_bytes':len(payloads['independent']),'mirror_qps':rates['mirror'],'native_qps':rates['native'],'independent_qps':rates['independent'],'mode_diversity_rms':div,'native_exact_output_and_payload_size_alias':alias,'pass':scores['mirror']<=1e-3 and scores['mirror']<=1.05*scores['independent'] and len(payloads['mirror'])<=.8*len(payloads['independent']) and rates['mirror']>=.8*rates['native'] and div>1e-5 and not alias})
     with (out/'RESULTS_CORE.csv').open('w',newline='') as f:w=csv.DictWriter(f,fieldnames=list(rows[0]),lineterminator='\n');w.writeheader();w.writerows(rows)
     result={'experiment_id':'MA-424','protocol_frozen':True,'fresh_accessed':False,'development_gate_passed':all(x['pass'] for x in screens),'seed_results':screens};(out/'screen.json').write_text(json.dumps(result,indent=2)+'\n');return result
