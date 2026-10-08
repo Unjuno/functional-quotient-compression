@@ -5,7 +5,7 @@ Status: active backlog roadmap
 
 ## Goal
 
-Systematically test whether a low-description Mirror/View coordinate can replace physical duplication in existing model structures.
+Systematically test whether the extra low-description Mirror parameter m can replace duplicated physical state or improve logical functional freedom in strong existing methods. The registry now has **935** candidate experiments; MA-876..935 were added as UNTESTED research targets on 2026-10-08.
 
 The unit of work is an MA-xxx entry from:
 `experiments/mirror_applications/IDEA_REGISTRY.csv`.
@@ -233,6 +233,26 @@ Across every strategic lane, the default question is not "is this adjacent metho
 Workers should preserve the native method as a direct baseline, insert `m` with minimal surgery, compare against the cheapest ordinary parameter that could provide similar freedom, and then sweep static/dynamic/factorized/shared-private variants where justified.
 
 Broad literature exploration is therefore converted into **Mirror-parameter integration experiments**, not independent research detours.
+
+### W. Cross-model KV translator manifold
+
+New PA236–239 establish calibrated source/target KV transfer, compact head matching, translator mixtures and heterogeneous context reuse. MA-876..890 test whether multiple transfer maps can share a physical basis and cheap factorized Mirror codes. Strong native controls, exact/approximate separation, target model quality and end-to-end handoff costs are mandatory.
+
+### X. Multi-scene neural fields and dynamic Gaussian assets
+
+C-NGP, ReFiNe, Instant-NGP, TensoRF and K-Planes already share or compress scene representations. 4DGS, ADC-GS, CC-4DGS, P-4DGS and MRO-GWM supply canonical geometry/motion priors. MA-891..905 add scene/time/appearance/object/action m; test actual scene assets, PSNR/LPIPS and FPS against these native baselines.
+
+### Y. Multi-speaker speech and acoustic coding
+
+NanoVoice, HyperTTS, MoA and Hyper-MoA are direct shared-speaker adaptation baselines; StableVC, interventional content/speaker subspaces and HybridCodec separate voice semantics from acoustics. MA-906..918 test bytes per added speaker, intelligibility, timbre, prosody and rendering costs.
+
+### Z. Flow-map sampling and style/subject code
+
+Flow Map Matching, Consistency Models, S4S, LoRA.rar and EST-LoRA define already-efficient samplers and style merge operators. MA-919..928 insert factorized Mirror interval, solver, subject, style and timestep codes, measured at equal NFE and output-quality budgets.
+
+### AA. Cross-model block and feature stitching
+
+StitchLLM and cross-model residual-stream SAE feature transfer provide native affine connectors; functional alignment can mislead about shared information. MA-929..935 test source×target×layer View codes over a shared bridge with held-out pair and informational counterexamples.
 
 ## KV-cache transformation lane
 
