@@ -1,0 +1,76 @@
+{
+  "experiment_id": "MA-385",
+  "title": "DualPrompt general prompt + Mirror expert prompt views",
+  "status": "PROTOCOL_FROZEN_BEFORE_DEVELOPMENT",
+  "base_commit": "6bbb19c",
+  "prior_art_refs": [
+    "PA57"
+  ],
+  "evidence_lane": "QUALITY/STORAGE/COMPUTE/CONTINUAL_PROMPT",
+  "hypothesis": "On tasks whose expert prompt deltas lie on a low-dimensional Givens orbit around one general prompt, a shared general prompt plus one Mirror coordinate per task preserves continual classification quality with lower actual bytes than DualPrompt's explicit expert prompts and beats same-byte scalar and shared-plus-private residual controls; unrelated deltas require private residuals.",
+  "physical_object": "one task-invariant general prompt and shared expert-delta basis",
+  "mirror_coordinate": "one per-task Givens angle generating an expert prompt delta",
+  "logical_multiplicity": "eight task-specific expert prompt views combined with a shared general prompt",
+  "model": {
+    "input_dim": 32,
+    "classes": 4,
+    "tasks": 8,
+    "train_examples_per_task": 1024,
+    "validation_examples_per_task": 256,
+    "test_examples_per_task": 512,
+    "batch_size": 128,
+    "optimizer_updates": 1600,
+    "training_schedule": "task-ordered continual stream; 200 updates on each task, evaluate every previously seen task after each task block",
+    "optimizer": "Adam",
+    "learning_rate": 0.001,
+    "development_seeds": [
+      38501,
+      38502
+    ],
+    "fresh_seeds": [
+      38511,
+      38512,
+      38513
+    ],
+    "prompt_families": [
+      "aligned Givens orbit around general prompt",
+      "unrelated expert residuals"
+    ]
+  },
+  "retrieval": "same nearest input centroid for every method, task ID hidden at inference; general prompt always applied and retrieved expert view added",
+  "controls": [
+    "DualPrompt explicit: learned general prompt plus one expert prompt per task",
+    "shared general + one common expert delta hard tied",
+    "shared general + scalar per-task shared delta basis",
+    "shared general + Mirror Givens per-task view of one expert delta basis",
+    "shared general + per-task private rank-4 residual plus shared basis; all residual bytes charged",
+    "small hypernetwork from retrieved task slot to expert delta; all generator and embeddings charged"
+  ],
+  "development_gate_before_fresh": "For aligned family in both development seeds: retrieval >=0.95; Mirror test accuracy within 0.02 of explicit; Mirror >=0.05 above scalar and shared-plus-private rank-4 residual; actual inference payload <=0.80x explicit; no task accuracy >0.05 below explicit; otherwise fresh stays sealed.",
+  "success_gate": "All three fresh aligned worlds satisfy development quality/retrieval/bytes gates and exact serialized replay; report unrelated performance, forgetting proxy by sequential task test checkpoints, view generation compute and wall-clock.",
+  "failure_gate": "Any aligned development seed misses any registered gate; fresh remains unopened.",
+  "storage": {
+    "authority": "actual deterministic ZIP/NPY FP16 inference payload bytes after reload",
+    "paid_objects": [
+      "general prompt",
+      "explicit prompts or shared expert basis",
+      "angles/scalars/private residuals/hypernetwork",
+      "retrieval keys",
+      "frozen classifier",
+      "IDs, metadata, and archive headers"
+    ]
+  },
+  "compute": {
+    "report_updates_examples_wall_clock": true,
+    "report_retrieval_ops": true,
+    "report_prompt_generation_ops": true,
+    "report_inference_throughput": true
+  },
+  "boundaries": [
+    "synthetic continual classification; no DualPrompt benchmark claim",
+    "task identity hidden at inference",
+    "logical prompt count is not independent capacity",
+    "fixed updates do not establish capacity",
+    "fresh seeds unopened until every aligned gate passes"
+  ]
+}
