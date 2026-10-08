@@ -1,0 +1,30 @@
+{
+  "experiment_id": "MA-504",
+  "commit": "pending",
+  "selection_draw": {
+    "draw": 20,
+    "pool_size": 539,
+    "uniform_index": 97,
+    "selected_id": "MA-504",
+    "pool_sha256": "15aca967e14e36fb186f6596432ff8497671ec1710c71746b770bfdaf16c9b56",
+    "baseline_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
+    "replay_checked": true
+  },
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-504-token-conditioned-reft/tests -v",
+    "passed": 4,
+    "failed": 0
+  },
+  "serialization": {
+    "actual_payloads_measured": false
+  },
+  "metric_replay": {
+    "checked": false,
+    "max_difference": null
+  },
+  "audit_opened": false,
+  "notes": [
+    "Pre-data tests pass: Givens orthogonality/gradient, context-dependent teacher, all variants forward/backward, and context-dependent Mirror/FiLM generators.",
+    "Frozen synthetic task protocol and implementation are committed before training data generation."
+  ]
+}
