@@ -243,6 +243,16 @@ Before starting an experiment in MA-936..995:
 8. Factorized codes require unseen task×time, scene×chunk, listener×direction, site×user or hardware task×configuration pairings. Prefer natural/out-of-family variation to more aligned-only tests.
 9. The new MA-936..995 ideas are UNTESTED. Existing completed experiments and MA-255 next-candidate selection are unchanged.
 
+### MA-1046..1095 fourteenth research intake: temporal forecasting, DLRM, Earth sensors
+
+If a selected MA experiment is in MA-1046..1095, **read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_FOURTEENTH_SWEEP.md` and its PA326..PA350 entries**, but do not load this new research lane when the selected MA is unrelated.
+
+- **Time series (MA1046..1061):** use native Chronos/TimesFM/Moirai/PatchTST/TimeMixer/iTransformer/MOMENT/TRACE as relevant, plus DLinear/seasonal-naive; isolate the new `m` beyond already shared variate encoders, task-head conditioning and LoRA. Freeze chronological future tests and leave entire series, frequencies and forecast horizons out for factorized-code claims. Report MASE/sMAPE, CRPS/WQL/coverage as applicable, payload bytes and measured decode throughput.
+- **Recommender embeddings (MA1062..1078):** DHE is an existing **table-free** embedding generator, QR composes partition tables, and TT-Rec has highly optimized compressed lookup kernels; these are mandatory direct controls. An ID-specific `m_i` that grows with item count must be fully accounted. Report AUC/logloss, cold/hot IDs, ranking, raw/serialized tables+code+hash+generator+cache bytes, actual QPS/latency/memory traffic and privacy-safe time splits.
+- **Earth observation (MA1079..1095):** DOFA already emits dynamic spectral filters from wavelengths and AnySat already shares across sensors and scales. Test (m_sensor, m_wavelength, m_resolution, m_time) only for extra measured benefit beyond these and CROMA/Prithvi/TerraMind/AlphaEarth native conditioning. Preserve true sensor band response, SAR vs optical non-equivalence, geographic/season/time held-outs, missing-band/OOD-sensor tests, all generated-filter storage and runtime.
+- In all three families, differentiate a cheap existing label/embedding/generator from Mirror-specific function change; compare to a byte-near scalar/FiLM/rank-one/LoRA and private upper control. Naturally learned/off-orbit variation is mandatory before any general applicability claim.
+- This is **research intake only**. All new rows are UNTESTED; **MA-255 remains the next queued worker**, and old frozen runs, branches and statuses are unaffected.
+
 ### MA-996..1045 material/MRI/quantum/vision/retrieval expansion
 
 Always read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_THIRTEENTH_SWEEP.md`, the exact selected MA row and PA296..PA325 references. All these hypotheses are initially UNTESTED.
