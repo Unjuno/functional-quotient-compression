@@ -1,15 +1,17 @@
 # MA-487 status
 
-- Status: SCREENING
+- Status: **FAIL**
 - Branch: `research/ma-487-lista-sparse-function-inference-20261008`
-- Protocol frozen: no
-- Development complete: no
-- Fresh/audit opened: no
+- Base commit: `7f3f6586836fe3e34df6cb45ea1430871484a941`
+- Protocol frozen: yes
+- Development complete: yes (48701, 48702)
+- Fresh/audit opened: no (48711–48713 sealed)
+- Verification: serialized replay passed; tests 3 passed
 
 ## Next action
 
-Freeze LISTA architecture and training conditions, then run development seeds 48701 and 48702 only.
+Proceed to MA-488 shared/private dictionary and Mirror coefficients; require a heldout heterogeneity sweep and an explicit private-atom control.
 
 ## Decisions / rulings
 
-This candidate measures learned sparse-code inference against direct projection and OMP. The presented function matrix is an encoder input, not part of serialized predictor state; do not claim that predictor bytes compress an unseen function bank without charging its inputs or stored codes.
+LISTA passes quality/sparsity and beats OMP compute, but direct projection plus top-3 has better quality with similar/lower operations and bytes. FAIL; fresh sealed.
