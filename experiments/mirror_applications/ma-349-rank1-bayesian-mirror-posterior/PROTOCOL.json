@@ -1,0 +1,22 @@
+{
+  "experiment_id": "MA-349",
+  "title": "Sparse stochastic Mirror posterior vs rank-1 BNN",
+  "status": "AMENDED_AFTER_DEVELOPMENT_FAIL_BEFORE_FRESH",
+  "evidence_lane": "MECHANISM/UNCERTAINTY/CALIBRATION/STORAGE/COMPUTE",
+  "base_commit": "04af68f",
+  "hypothesis": "For a binary prediction task whose exact posterior has two weight modes differing on one sparse direction, a one-scalar Mirror view code over a shared mean/direction will preserve posterior predictive NLL and calibration while compressing the two-model posterior. A rank-1 multiplicative Bayesian neural network is the required strong uncertainty control; a direct sparse scalar code determines whether the effect is Mirror-specific.",
+  "physical_object": "one shared 32-dimensional linear classifier mean weight and one sparse functional uncertainty direction",
+  "mirror_coordinate": "categorical scalar m in {-1,+1} selecting one of two posterior weight realizations",
+  "logical_multiplicity": "two stochastic posterior functions with prior probability 0.5 each",
+  "prior_art_refs": ["PA41"],
+  "controls": ["deterministic posterior mean classifier", "two independent full posterior weight vectors", "rank-1 multiplicative BNN posterior with shared scalar stochastic factor", "Mirror sparse direction plus stochastic scalar code", "ordinary sparse scalar-code posterior"],
+  "development": {"worlds_or_seeds": [34901, 34902], "selection_metric": "predictive NLL, Brier, ECE, probability calibration error, actual posterior payload bytes, sample MACs"},
+  "fresh": {"worlds_or_seeds": [34911, 34912, 34913], "locked_before_access": true},
+  "storage": {"authority": "actual deterministic ZIP/NPY FP32 inference posterior payload bytes after reload", "paid_objects": ["posterior mean", "sparse direction index and value", "rank-1 factor or Mirror codebook", "posterior probabilities", "independent full weights where applicable", "metadata"]},
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true},
+  "success_gate": "All fresh worlds: Mirror predictive NLL within 0.01 of exact two-mode posterior, ECE <=0.02, probability calibration MSE <=1e-4, and payload at least 20% below both independent full weights and rank-1 BNN posterior at equal quality. Enumerate both posterior modes exactly and report the two-component compute.",
+  "failure_gate": "Mirror misses NLL/calibration thresholds in at least two fresh worlds; or rank-1 BNN/direct sparse code is within 10% bytes and equal quality; or posterior sampling compute exceeds 2x rank-1 BNN.",
+  "development_decision": "In both development worlds, Mirror had exact teacher calibration but was about 1,197B, larger than the independent two-weight posterior at about 652B, and matched the rank-1 BNN within 1B at equal quality. Freeze FAIL for the storage hypothesis and keep fresh seeds sealed. A code audit found that prediction enumerates the two discrete modes exactly rather than sampling 64 draws; report two exact components and amend the compute description accordingly.",
+  "amendment": "Before fresh access, correct posterior compute reporting to exact enumeration of both discrete modes. No model, quality result, storage threshold, or seed changed. Fresh seeds 34911–34913 remain sealed after the development fail gate.",
+  "boundaries": ["analytic synthetic Bayesian logistic model, no learned posterior or variational optimization", "true posterior is a planted two-mode distribution known to all methods", "sparse uncertainty direction is oracle supplied", "posterior calibration does not establish task learning, ensemble capacity, or natural-language uncertainty"]
+}

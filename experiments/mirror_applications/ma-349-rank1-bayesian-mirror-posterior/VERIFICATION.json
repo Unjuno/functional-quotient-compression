@@ -1,0 +1,9 @@
+{
+  "experiment_id": "MA-349",
+  "commit": "<RESULT_COMMIT>",
+  "tests": {"command": "python -m pytest -q experiments/mirror_applications/ma-349-rank1-bayesian-mirror-posterior/tests", "passed": 3, "failed": 0},
+  "serialization": {"roundtrip_checked": true, "byte_exact": true, "development_payloads_checked": 10, "mirror_direct_code_hashes_identical": true, "max_metric_replay_difference": 0.0},
+  "metric_replay": {"command": "python experiments/mirror_applications/ma-349-rank1-bayesian-mirror-posterior/source/verify.py", "checked": true, "development_rows_replayed": 10, "fresh_rows": 0, "max_difference": 0.0},
+  "fresh_split_integrity_checked": true,
+  "notes": ["Only development seeds 34901 and 34902 were accessed; fresh seeds 34911–34913 remain sealed.", "Rank-1 BNN and Mirror predictions exactly enumerated the same two-mode teacher posterior.", "Independent two-model payload was smaller than Mirror while achieving the same calibration and NLL."]
+}
