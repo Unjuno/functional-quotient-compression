@@ -1,0 +1,142 @@
+{
+  "protocol_id": "MX-FORMULA-STAGE0-20261008",
+  "status": "FROZEN_BEFORE_DEVELOPMENT_AND_FRESH",
+  "study_type": "MATHEMATICAL_DIAGNOSTIC_ONLY",
+  "revision": 1,
+  "created": "2026-10-08",
+  "research_branch": "research/mirror-internal-formula-crossovers-20261008",
+  "canonical_worker_branch": "research/mirror-application-worker-ready-20261007",
+  "worker_queue_change": false,
+  "base_commit": "3b38a2afc5f9bc806bdff7232814898fcf17fcd6",
+  "purpose": "Verify exact algebraic invariants and constructed counterexamples underlying cross-family Mirror experiment integration. Not a model-performance evaluation, not evidence of novelty, capacity or byte-saving by Mirror.",
+  "source_files": [
+    "docs/phase2/REACHABILITY_ADJUSTED_MIRROR_ANALYSIS_JA.md",
+    "docs/phase2/MIRROR_KV_CACHE_REUSE.md",
+    "docs/phase2/MS009_MS012_VIEW_OPTIMIZATION.md",
+    "docs/phase2/SRM002_NONCOMMUTATIVE_COMPOSITION.md",
+    "docs/phase2/SRM003_CAUSAL_DISCOVERY.md",
+    "docs/phase2/TM001_PARALLEL_PERIOD_TOKEN_MIXING.md",
+    "docs/EXACT_RESULTS.md",
+    "docs/KNOWN_NEGATIVE_RESULTS.md",
+    "src/fqc/coupling.py",
+    "src/fqc/joint_codec.py",
+    "src/fqc/quotient.py"
+  ],
+  "design": {
+    "device": "CPU",
+    "backend": "NumPy standard LAPACK",
+    "precision": "float64",
+    "model_dimensions": {
+      "ffn_in": 3,
+      "ffn_hidden": 4,
+      "ffn_out": 2,
+      "attention_dim": 4,
+      "cache_tokens": 7,
+      "coupling_dim": 4
+    },
+    "development_seeds": [
+      11,
+      12,
+      13
+    ],
+    "fresh_seeds": [
+      101,
+      102,
+      103,
+      104,
+      105
+    ],
+    "locked_fresh": true,
+    "hyperparameters": "none",
+    "all_fresh_once": true,
+    "seed_tuning": "none",
+    "clock": "not used as success metric",
+    "n_min": 5
+  },
+  "checks": [
+    {
+      "id": "F01",
+      "name": "fixed-view fold equality",
+      "tolerance": 1e-11,
+      "admissible": "invertible Q, componentwise GELU and matching folded biases",
+      "negative": "pure permutation alone yields no new function"
+    },
+    {
+      "id": "F02",
+      "name": "RA weighted baseline reachability",
+      "tolerance": 1e-10,
+      "admissible": "SPD metrics, in-range target b; out-of-range is infinity",
+      "negative": "reachability ratio does not imply task loss improvement"
+    },
+    {
+      "id": "F03",
+      "name": "finite-update residual recursion",
+      "tolerance": 1e-12,
+      "admissible": "fixed Jacobian and fixed SPD preconditioner, local least-squares"
+    },
+    {
+      "id": "F04",
+      "name": "K>=r+1 rank bound and regular simplex",
+      "tolerance": 1e-11,
+      "admissible": "positive weights, mean-zero finite states",
+      "negative": "not a capacity-optimal K theorem"
+    },
+    {
+      "id": "F05",
+      "name": "token phase cancellation counterexample",
+      "tolerance": 1e-12,
+      "admissible": "token-dependent sensitivity beta_t"
+    },
+    {
+      "id": "F06",
+      "name": "exact lazy canonical KV read",
+      "tolerance": 1e-11,
+      "admissible": "known right transforms on shared cached K,V and unchanged prefix hidden state",
+      "negative": "cannot infer safe sharing across distinct upstream states"
+    },
+    {
+      "id": "F07",
+      "name": "cross-block PSD coupling majorizer",
+      "tolerance": 1e-10,
+      "admissible": "symmetric PSD G; diagonal may underestimate"
+    },
+    {
+      "id": "F08",
+      "name": "actual serializer rounding boundary",
+      "tolerance": 0,
+      "admissible": "explicit bit serializer overhead and exact hard budget"
+    },
+    {
+      "id": "F09",
+      "name": "decoded-state quotient requires prerequisites",
+      "tolerance": 0,
+      "admissible": "decoded semantic state plus future decoder prerequisites"
+    },
+    {
+      "id": "F10",
+      "name": "constructed joint layout x code vs coordinate descent",
+      "tolerance": 0,
+      "admissible": "explicit four-state nonseparable table, not natural model evidence"
+    },
+    {
+      "id": "F11",
+      "name": "activation-weighted error vs raw Frobenius",
+      "tolerance": 1e-10,
+      "admissible": "fixed linear interface, uncentered second moment; not nonlinear end-to-end proof"
+    },
+    {
+      "id": "F12",
+      "name": "noncommuting two-step composition",
+      "tolerance": 1e-12,
+      "admissible": "matrix order and explicit executor; mere residual summation not equivalent"
+    }
+  ],
+  "decision": {
+    "PASS": "All F01..F12 exact checks satisfy conditions on each of five locked fresh worlds, and negative controls are flagged; mark algebraic implementation PASS only.",
+    "FAIL": "Any exact invariant mismatch beyond tolerance, invalid domain labeled valid, wrong budget with serializer, or a constructed counterexample not reproduced.",
+    "UNCERTAIN": "Ill-conditioned numerical inversion or rank choice reverses result; report relative/absolute err and conditioning. No training/LLM result or Mirror adoption."
+  },
+  "uncertainty": "Primary exact numerical algebra errors in dimensionless float64; report max absolute/relative error and matrix condition numbers, no simulated statistical CIs. For any measured quality metrics later, u_c=(u_seed²+u_eval²+u_num²)^(1/2) only under independent components and k=2 indicative. No latency/bytes natural performance claim.",
+  "audit_integrity": "All five frozen seeds run once; no result-based parameter tuning. Validation on constructed counterexamples is mathematical, not empirical task-capacity evidence.",
+  "created_files_only": "Save source, 3 dev and 5 fresh raw rows, verification JSON with source and data hashes after running. Preserve negative outcomes. No changes to scientific MA status."
+}
