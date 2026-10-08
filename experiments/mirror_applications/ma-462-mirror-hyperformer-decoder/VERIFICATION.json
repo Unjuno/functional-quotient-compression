@@ -2,21 +2,43 @@
   "experiment_id": "MA-462",
   "commit": "pending",
   "tests": {
-    "command": "python -m unittest discover -s experiments/mirror_applications/ma-462-mirror-hyperformer-decoder/tests -v",
-    "passed": null,
-    "failed": null
+    "command": "OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m unittest discover -s experiments/mirror_applications/ma-462-mirror-hyperformer-decoder/tests -v",
+    "passed": 4,
+    "failed": 0
   },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "note": "All tested control payloads reserialized byte-for-byte after exact tensor-state restoration."
   },
   "metric_replay": {
-    "checked": false,
-    "max_difference": null
+    "checked": true,
+    "rows": 120,
+    "max_difference": 0.0,
+    "fields": [
+      "world_seed",
+      "alpha",
+      "method",
+      "rank",
+      "serialized_bytes",
+      "train_examples",
+      "optimizer_updates",
+      "train_macs_proxy",
+      "adapter_gen_macs_per_task",
+      "adapter_apply_macs_per_example",
+      "inference_macs_proxy",
+      "train_loss",
+      "seen_nmse",
+      "heldout_nmse",
+      "private_state_bytes"
+    ],
+    "note": "torch.save archive SHA is recorded per execution and may vary despite identical tensors; actual byte length and tensor metrics are replayed"
   },
   "fresh_split_integrity_checked": false,
   "fresh_accessed": false,
   "notes": [
-    "Random draw and fixed-embedding protocol saved before implementation."
+    "Initial development output was superseded because backbone bias initialization was not seed-locked; corrected setup replayed exactly across all 120 rows.",
+    "No development rank passed the conjunction of preregistered quality/storage gates on both worlds; fresh seeds were not opened.",
+    "Actual serialized inference payload lengths are charged and reported. torch.save SHA-256 may vary between executions despite identical metrics and byte lengths."
   ]
 }

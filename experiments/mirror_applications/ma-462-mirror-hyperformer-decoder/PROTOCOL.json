@@ -1,7 +1,7 @@
 {
   "experiment_id": "MA-462",
   "title": "Fixed-embedding Mirror adapter decoder vs HyperFormer-style hypernetwork",
-  "status": "SCREENING",
+  "status": "FAIL",
   "evidence_lane": "MECHANISM/STORAGE/COMPUTE/RUNTIME",
   "base_commit": "d12d62a1902c702e57b09cfaba49d0862d485226",
   "hypothesis": "With identical fixed task-factor embeddings and a shared frozen backbone/adapter basis, a structured Mirror decoder can generate useful adapters for held-out task-factor combinations with lower full inference bytes than a generic HyperFormer-style decoder, and can beat simple linear/additive decoders when task variation is factor-aligned.",
@@ -67,7 +67,8 @@
     "base_pretraining": "500 Adam updates on a task-agnostic common teacher per world, then backbone frozen before adapter decoder comparison.",
     "train_examples_per_seen_task": 32,
     "eval_examples_per_task": 64,
-    "decoder_optimizer_updates": 300
+    "decoder_optimizer_updates": 300,
+    "reproducibility_note": "Set torch seed before constructing each base model so weight and bias initialization are deterministic; final development replay must match."
   },
   "storage": {
     "authority": "actual serialized inference payload bytes",
