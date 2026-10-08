@@ -363,4 +363,5 @@ def run_world(seed: int, artifacts: Path) -> dict[str, Any]:
         chosen[kind]=min(LRS,key=lambda lr:methods[f'{kind}_{lr:g}_mirror']['curve'][-1])
     chosen['full_adam']=min(LRS,key=lambda lr:methods[f'adam_{lr:g}_full']['curve'][-1])
     return {'world_seed':seed,'w0':w0,'basis':basis,'dev':dev,'methods':methods,'chosen':chosen,
+            'lstm_mirror':train_m,'lstm_full':train_w,'meta_init':meta_init,'meta_alpha':meta_alpha,
             'meta_train_seconds':train_seconds,'meta_train_loss_final':{'lstm_mirror':losses_m[-1],'lstm_full':losses_w[-1],'meta_sgd_mirror':losses_meta[-1]}}

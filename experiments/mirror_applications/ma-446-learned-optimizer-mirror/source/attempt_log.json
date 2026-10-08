@@ -5,5 +5,15 @@
     "failure": "CoordinateLSTM test supplied gradients with shape [batch, coordinates, 1], while the declared interface takes [batch, coordinates].",
     "data_or_scores_accessed": false,
     "correction": "Fixed the test and call sites to use [batch, coordinates]; reran the full preflight test suite successfully. No protocol setting changed."
+  },
+  {
+    "attempt": 2,
+    "phase": "frozen development execution",
+    "failure": "The first development execution completed meta-training and development adaptations but stopped at serialization because run_world did not return the learned optimizer and Meta-SGD parameters required to construct charged library payloads.",
+    "development_accessed": true,
+    "fresh_or_audit_accessed": false,
+    "persisted_results_written": false,
+    "protocol_or_hyperparameters_changed": false,
+    "correction": "Return the already-fitted optimizer objects and Meta-SGD initialization/step-size tensors from run_world, then deterministically rerun the same frozen seeds and settings."
   }
 ]
