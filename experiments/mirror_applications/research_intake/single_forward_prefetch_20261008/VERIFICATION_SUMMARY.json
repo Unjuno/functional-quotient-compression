@@ -59,13 +59,15 @@
     ],
     "cpu_B128_K4_p95_ratio": "1.039762, 0/5 <=0.90",
     "cpu_B128_K5_p95_ratio": "0.861578, 5/5 <=0.90",
-    "folded_CPU_B128_K5_p95_ms_median": "0.750105",
+    "folded_CPU_B128_K5_p95_ms_median": "0.7529623499999999",
     "cached_CPU_B128_K5_p95_ms_median": "1.736695 in folded-controlled run",
     "resident_fold_npz_bytes": 655886,
     "resident_shared_npz_bytes": 134378,
     "virtual_16MiB_12GBps_K4_transfer_ms": 1.648101,
     "virtual_16MiB_12GBps_K4_ideal_hidden_after_initial": true,
-    "native_factorized_prefetch_parity": true
+    "native_factorized_prefetch_parity": true,
+    "native_best_full_K1_p95_ms_median": "0.49370125",
+    "native_best_full_K8_p95_ms_median": "3.5373093"
   },
   "gates": {
     "exact_factorization": "PASS under constrained architecture",
@@ -82,5 +84,7 @@
     "GPU VRAM, PCIe/transfer streams",
     "matched task budget and native cheap factor codes"
   ],
-  "uncertainty": "5 seed ranges not confidence intervals; runtime unlocked-clock noisy, simulator timings assumed; report metric-typed u_c when actual task data exist."
+  "uncertainty": "5 seed ranges not confidence intervals; runtime unlocked-clock noisy, simulator timings assumed; report metric-typed u_c when actual task data exist.",
+  "repo_summary_matches_source_medians": true,
+  "repo_summary_roundtrip_note": "Git CSV data values match the original computed RESULTS_CORE.csv numerically, newline formatting might differ."
 }
