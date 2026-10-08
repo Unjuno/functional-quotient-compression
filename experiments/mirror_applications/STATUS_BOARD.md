@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (161 completed; 469 UNTESTED)
+- P0: **630** (161 completed; 468 UNTESTED; 1 SCREENING)
 - P1: **422** (13 completed; 409 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **118 FAIL, 11 NOT ESTABLISHED, 45 PROMISING, 981 UNTESTED**
+- Current MA statuses: **118 FAIL, 11 NOT ESTABLISHED, 45 PROMISING, 980 UNTESTED, 1 SCREENING**
 - 47 baseline experiment directories remain present; 127 additional per-ID outcomes are linked to their dedicated research branches in `LIVE_BRANCH_RECONCILIATION.csv`.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This was the intake-time queue; current selection follows the live-branch reconciliation at the top of this board.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed at intake time; later live-branch outcomes are indexed above.
@@ -23,14 +23,14 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**Pending live branch refresh.** MA-418 completed its frozen development screen as FAIL; select the next eligible P0 after refreshing and reconciling live research branches.
+**MA-419 — modulated periodic activation views (P0; PA69)** — active; protocol frozen, development seeds pending.
 
-Live research branches were fetched and reconciled into `LIVE_BRANCH_RECONCILIATION.csv`. MA-416/417/418 have completed as FAILs on dedicated branches. MA-418 factor tables saved 31% actual payload bytes, but heldout NRMSE missed the frozen gate by roughly 1.9x against support-adapted independent codes; the exact native additive control matched predictions. This fixed-budget synthetic result does not establish a converged capacity limit. MA-325 remains NOT ESTABLISHED because the frozen task was unlearnable even for the independent control. MA-369/371/372 remain paused under the documented family rule. The conditional-modulation family MA-401/403/405 and MA-407/408/411/413 remains paused pending a fused-kernel redesign.
+Live research branches were fetched after MA-418. No alternative MA-418 terminal result was present. MA-416/417/418 have completed as FAILs on dedicated branches. MA-418 factor tables saved 31% actual payload bytes, but heldout NRMSE missed the frozen gate by roughly 1.9x against support-adapted independent codes; the exact native additive control matched predictions. This fixed-budget synthetic result does not establish a converged capacity limit. MA-325 remains NOT ESTABLISHED because the frozen task was unlearnable even for the independent control. MA-369/371/372 remain paused under the documented family rule. The conditional-modulation family MA-401/403/405 and MA-407/408/411/413 remains paused pending a fused-kernel redesign.
 
 
 ## Active experiment
 
-MA-416, MA-417 and MA-418 are verified development-screen FAILs, with fresh seeds sealed. MA-418's metric replay and actual payload replay passed. See [MA-418 report](ma-418-compositional-latent-mirror/README.md), [verification](ma-418-compositional-latent-mirror/VERIFICATION.json), and [family diagnostic](CONDITIONAL_MODULATION_FAMILY_DIAGNOSTIC_2026-10-08.md).
+MA-416, MA-417 and MA-418 are verified development-screen FAILs, with fresh seeds sealed. MA-418's metric replay and actual payload replay passed. MA-419 is the active P0; its frozen screen compares periodic activation modulation with generic latent concatenation and an exact native harmonic control. Fresh remains sealed. See [MA-419 protocol](ma-419-modulated-periodic-activations/PROTOCOL.json), [MA-418 report](ma-418-compositional-latent-mirror/README.md), and [family diagnostic](CONDITIONAL_MODULATION_FAMILY_DIAGNOSTIC_2026-10-08.md).
 
 
 ## Verified status index
