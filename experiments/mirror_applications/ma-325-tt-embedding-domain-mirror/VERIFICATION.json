@@ -1,19 +1,19 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-325",
+  "commit": "pending",
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "python -m pytest -q experiments/mirror_applications/ma-325-tt-embedding-domain-mirror/tests",
+    "passed": 4,
+    "failed": 0
   },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "roundtrip_checked": true,
+    "byte_exact": true
   },
   "metric_replay": {
     "checked": false,
     "max_difference": null
   },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "fresh_split_integrity_checked": true,
+  "notes": ["No fresh data accessed. Development seeds 32501/32502 across all six conditions were approximately uniform (NLL ~ ln(16), accuracy ~ 1/16), including independent full-table upper control. Frozen task cannot test the Mirror hypothesis; disposition NOT ESTABLISHED. Dev payload files can be reloaded by source loader; phase indexing fix is before fresh access. Exploratory teacher-rescaling variants are excluded."]
 }
