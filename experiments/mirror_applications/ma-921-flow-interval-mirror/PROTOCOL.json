@@ -194,6 +194,11 @@
       "before": "development data access",
       "reason": "Implementation audit added the native shared-basis coefficient-conditioning control so Mirror is compared both with a direct state-conditioned FMM map and an ordinary two-time coefficient network over the same physical basis.",
       "protocol_effect": "Adds a native conditioning control only; data, held-out intervals, metrics, tuning space, thresholds and fresh seeds unchanged."
+    },
+    {
+      "before": "500-update development run",
+      "reason": "Cache deterministic RK4 reference maps by world seed to avoid recomputing the exact same target maps for each model/control.",
+      "protocol_effect": "Execution-time optimization only; generated values, training samples, seeds, models, metrics and gate values remain unchanged."
     }
   ]
 }
