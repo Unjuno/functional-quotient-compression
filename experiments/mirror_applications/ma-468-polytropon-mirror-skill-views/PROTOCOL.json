@@ -1,0 +1,20 @@
+{
+  "experiment_id": "MA-468",
+  "title": "Polytropon shared/private skill bank with Mirror skill views",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY/COMPUTE",
+  "base_commit": "595a429",
+  "hypothesis": "On 12 task functions composed from six aligned logical skills and four unrelated private skills, three physical shared skills plus rank-one Mirror Views and a four-skill private fallback will reach mean query RMSE <=0.03 with <=0.80x the actual bytes of an explicit ten-skill Polytropon bank, while preserving sparse task allocations; direct shared-basis low-rank control tests attribution.",
+  "physical_object": "three shared 8x8 physical skill matrices, one shared rank-one View basis, and four private full skill matrices for unrelated functions",
+  "mirror_coordinate": "one scalar View code for each of six logical skills generated from a shared rank-one matrix basis",
+  "logical_multiplicity": "six logical shared skills from three physical skills plus four private skills, composed by a sparse task-skill allocation table",
+  "prior_art_refs": ["PA85"],
+  "controls": ["Polytropon-style explicit ten-skill matrix bank with sparse task-skill allocations", "three physical shared skills without Mirror views plus four private full skills", "same three-base plus rank-one skill Views and private bank as a direct native low-rank control", "independent full task matrix per each of 12 task functions"],
+  "task": {"type": "synthetic 8D linear regression; eight tasks compose two of six aligned skills; four outlier tasks use one unrelated private skill", "dimension": 8, "physical_shared_skills": 3, "logical_aligned_skills": 6, "private_skills": 4, "tasks": 12, "task_skill_allocations": [[0,1],[1,3],[2,4],[4,5],[0,5],[1,2],[3,4],[2,5],[6],[7],[8],[9]], "examples_per_task_support": 128, "examples_per_task_query": 256, "noise_sigma": 0.015, "outer_updates": 4000, "batch_size": 32, "optimizer": "Adam; learning rate 0.01"},
+  "development": {"worlds_or_seeds": [46801,46802], "selection_metric": "mean query output RMSE across 12 tasks; report composition/private task split, active skills, physical modules, bytes and compute", "hyperparameter_changes_after_run": "prohibited without numbered amendment"},
+  "fresh": {"worlds_or_seeds": [46811,46812,46813], "locked_before_access": true, "opened": false},
+  "storage": {"authority": "actual uncompressed .npz inference payload bytes", "paid_objects": ["all physical skill matrices", "shared View basis", "six View codes", "four private skill matrices", "task-to-skill allocation indices", "format/dtype/shape metadata"]},
+  "compute": {"report_examples_seen": true, "report_optimizer_updates": true, "report_training_ops_proxy": true, "report_inference_ops_per_example": true, "report_cold_skill_reconstruction_ops": true, "report_training_wall_time": true, "report_query_wall_time": true},
+  "gates": {"PROMISING": "Both seeds: mean query RMSE <=0.03, Mirror payload <=0.80x explicit skill bank, no more than seven physical skill matrices total, inference ops/example <=1.25x skill bank, and native shared-basis control does not exactly match Mirror.", "FAIL": "Either seed misses a PROMISING clause or native shared-basis skill control exactly aliases Mirror outputs/payload.", "NOT ESTABLISHED": "Independent task upper control has mean query RMSE >0.025 on either seed, or serialization/metric replay fails."},
+  "boundaries": ["Synthetic linear skill composition, not a Polytropon reproduction or natural task benchmark.", "Task-skill allocations are known and paid; this screen isolates skill-bank representation, not learned routing quality.", "Four unrelated functions are assigned private skills by the frozen task design; no adaptive birth threshold is claimed.", "Fresh seeds remain sealed unless every frozen PROMISING gate passes."]
+}
