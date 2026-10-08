@@ -6,11 +6,11 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (160 completed; 470 UNTESTED)
+- P0: **630** (160 completed; 469 UNTESTED)
 - P1: **422** (13 completed; 409 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **117 FAIL, 11 NOT ESTABLISHED, 45 PROMISING, 982 UNTESTED**
-- 47 baseline experiment directories remain present; 125 additional per-ID outcomes are linked to their dedicated research branches in `LIVE_BRANCH_RECONCILIATION.csv`.
+- Current MA statuses: **117 FAIL, 11 NOT ESTABLISHED, 45 PROMISING, 981 UNTESTED, 1 SCREENING**
+- 47 baseline experiment directories remain present; 126 additional per-ID outcomes are linked to their dedicated research branches in `LIVE_BRANCH_RECONCILIATION.csv`.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This was the intake-time queue; current selection follows the live-branch reconciliation at the top of this board.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed at intake time; later live-branch outcomes are indexed above.
 - Thirteenth literature sweep added MA-996..1045 (50 UNTESTED; 40 P0/10 P1) and PA296..PA325. IDs MA-1000+ use four digits; consult `check_registry_integrity.py`. No new experiment results.
@@ -23,14 +23,14 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-416 — DeepSDF-style Mirror function code (P0; PA68)**
+**MA-418 — compositional latent Mirror factors (P0; PA68/PA79)** — active; protocol frozen, development seeds pending.
 
-Live research branches were fetched and reconciled into `LIVE_BRANCH_RECONCILIATION.csv`. Conflicting protocol variants use the latest branch endpoint with a matching terminal registry/claim status; the source branches and all variants remain linked. MA-325 is NOT ESTABLISHED because the frozen task was unlearnable even for the independent control. MA-369/371/372 remain paused under the documented family rule. MA-401 is now a development-screen FAIL: aligned Givens quality and bytes were favorable, but CPU throughput and independent-control byte gates failed in both seeds; fresh remained sealed. MA-403 is now a development-screen FAIL: low held-out error did not meet total-byte or CPU throughput gates; fresh remained sealed. A live branch refresh found no MA-405 experiment branch, making MA-405 the next P0 outside paused families.
+Live research branches were fetched and reconciled into `LIVE_BRANCH_RECONCILIATION.csv`. MA-416 and MA-417 have now been completed as FAILs on dedicated branches; their function-code geometry and hard codebook controls differ, so their outcomes do not establish a shared failure cause for MA-418. MA-325 remains NOT ESTABLISHED because the frozen task was unlearnable even for the independent control. MA-369/371/372 remain paused under the documented family rule. The conditional-modulation family MA-401/403/405 and MA-407/408/411/413 remains paused pending a fused-kernel redesign.
 
 
 ## Active experiment
 
-MA-403 completed its development gate on `research/ma-403-token-mirror-generator-20261008`; fresh remained sealed. MA-401/403/405 are verified development-screen FAILs. Their consecutive conditional-modulation screens share an eager CPU rotation-throughput bottleneck; pause this family under the queue stop rule. MA-407/408/411/413 remain UNTESTED and paused pending kernel redesign. A live branch refresh selects MA-416, the next P0 outside this family. See [family diagnostic](CONDITIONAL_MODULATION_FAMILY_DIAGNOSTIC_2026-10-08.md).
+MA-416 and MA-417 are verified development-screen FAILs, with fresh seeds sealed. MA-418 is the active P0 outside the paused conditional-modulation family. Its frozen screen compares additive object/style/domain factor views with independent codes, an exactly equivalent native factorization, and an oracle table; fresh remains sealed unless the two development seeds pass. See [MA-418 protocol](ma-418-compositional-latent-mirror/PROTOCOL.json) and [family diagnostic](CONDITIONAL_MODULATION_FAMILY_DIAGNOSTIC_2026-10-08.md).
 
 
 ## Verified status index

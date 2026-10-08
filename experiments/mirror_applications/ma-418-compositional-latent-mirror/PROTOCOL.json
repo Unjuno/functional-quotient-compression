@@ -1,0 +1,77 @@
+{
+  "experiment_id": "MA-418",
+  "title": "Compositional latent Mirror factors for unseen combinations",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/GENERALIZATION/STORAGE",
+  "base_commit": "e0e96ad",
+  "prior_art_refs": [
+    "PA68",
+    "PA79"
+  ],
+  "hypothesis": "Factorized object/style/domain Mirror latent tables trained on incomplete combinations can reconstruct unseen combinations from one fixed shared neural decoder at lower actual bytes than independent per-combination DeepSDF codes.",
+  "physical_object": "One fixed shared neural decoder F\u03b8(x,z), input x\u2208R\u00b2, latent z\u2208R\u00b9\u2076, MLP 18\u219264\u219264\u21921; identical frozen weights for every method.",
+  "mirror_coordinate": "Additive m(o,s,d)=E_object[o]+E_style[s]+E_domain[d], with factor table sizes 8,8,4 and 16 dimensions; store a tuple of three uint8 IDs per logical combination.",
+  "logical_multiplicity": "256 object\u00d7style\u00d7domain combinations realized by one fixed decoder; approximately 80% combinations observed for factor learning and the remainder held out.",
+  "controls": [
+    "independent DeepSDF code vector per combination fitted on support points",
+    "native additive object/style/domain latent factorization with same table geometry (exact algebraic alias to Mirror)",
+    "oracle full latent code table formed from teacher factor vectors"
+  ],
+  "task": {
+    "objects": 8,
+    "styles": 8,
+    "domains": 4,
+    "latent_dimension": 16,
+    "combinations": 256,
+    "train_split": "Deterministic 80/20 combination holdout; every individual factor value appears in training.",
+    "teacher": "Each target latent is the sum of independently sampled object, style and domain vectors; output target is the frozen shared decoder applied to x and that sum.",
+    "train_support_points_per_combination": 128,
+    "heldout_support_points_per_combination": 128,
+    "heldout_query_points_per_combination": 1024
+  },
+  "development": {
+    "worlds_or_seeds": [
+      41801,
+      41802
+    ],
+    "factor_updates": 600,
+    "independent_code_updates": 600,
+    "heldout_deepsdf_adaptation_updates": 300,
+    "selection_metric": "held-out combination query NRMSE, actual decoder+code payload bytes, and inference throughput."
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      41811,
+      41812,
+      41813
+    ],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "format": "compressed NPZ; FP16 decoder/factors/codes plus uint8 combination IDs and metadata",
+    "paid_objects": [
+      "fixed decoder weights",
+      "all object/style/domain factor tables",
+      "all per-combination IDs or independent latent vectors",
+      "metadata and reconstruction state"
+    ],
+    "replay_required": true
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true,
+    "report_inference_throughput": true,
+    "include": "factor-model training, independent-code fitting, heldout support adaptation, combination lookup, query inference."
+  },
+  "success_gate": "Both development seeds: zero-shot heldout-combination NRMSE <=0.05, <=0.5x the support-adapted DeepSDF NRMSE, actual payload <=0.80x independent full-code payload, and native additive control output agrees within 1e-6. Passing only qualifies for fresh confirmation.",
+  "failure_gate": "FAIL if either seed misses quality/bytes or if native additive factorization exactly matches Mirror with no other distinct benefit.",
+  "boundaries": [
+    "The shared decoder is fixed and identical, so this isolates latent factor composition from decoder capacity.",
+    "The teacher is additive in latent space; this does not establish arbitrary compositional capacity.",
+    "Combination counts alone are not capacity; only heldout function quality and bytes count.",
+    "Fresh remains sealed unless both development seeds pass."
+  ]
+}
