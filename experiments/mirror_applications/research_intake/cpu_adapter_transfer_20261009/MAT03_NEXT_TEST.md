@@ -1,3 +1,5 @@
+> **HISTORICAL DESIGN STATUS (2026-10-09):** The concrete same-input K5 experiment and a code-frozen replication were executed as [MAT03/MAT03R](mat03/REPORT.md). The observed code-only Mirror benefit did not pass preregistered new-seed margins; native one-trunk multihead remained stronger. The rank R=8/16 and genuinely independent new-task generalization proposals below are **still UNTESTED**. Do not treat this file as a queued first-priority action.
+
 # MAT03 suggested next experiment — fix the meaningful single-forward test
 
 **DESIGN ONLY — NOT preregistered for fresh execution.** MAT01/MAT02 failures do not imply all short Mirror codes fail, but reveal two unconfounded issues: (1) source rank4 basis misses large image perturbations; (2) source-target image shifts yield distinct **inputs** and hence require separate frozen encoders for quality, making the common-input latency microbenchmark nonrepresentative.
