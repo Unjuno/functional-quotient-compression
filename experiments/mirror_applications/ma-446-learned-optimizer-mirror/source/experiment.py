@@ -344,7 +344,8 @@ def run_world(seed: int, artifacts: Path) -> dict[str, Any]:
     meta_init,meta_alpha,wall_meta,losses_meta=train_meta_sgd(seed,w0,basis)
     dev=make_episode(32,w0,basis,generator(seed+2_000_000))
     methods:dict[str,dict[str,Any]]={}
-    methods['hard_shared']={'curve':[float(query_mse_w(w0.unsqueeze(0).expand(32,-1,-1),dev['query_x'],dev['query_y']).mean())]*5,'params':None,'wall_seconds_per_task':0.0}
+    qhard=query_mse_w(w0.unsqueeze(0).expand(32,-1,-1),dev['query_x'],dev['query_y'])
+    methods['hard_shared']={'curve':[float(qhard.mean())]*5,'task_curves':[qhard.tolist()]*5,'params':None,'wall_seconds_per_task':0.0}
     # Tune one learning rate per optimizer across both worlds in the caller.
     for kind in ('sgd','adam'):
         for lr in LRS:
