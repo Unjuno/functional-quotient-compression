@@ -1,0 +1,86 @@
+{
+  "development": {
+    "dataset_natural_worlds": "same sklearn digits, overlapping splits",
+    "exact_single_trunk_call": true,
+    "no_fresh_tuning": true,
+    "positive_binary_tasks": true,
+    "rows": 27,
+    "seeds": [
+      31,
+      32,
+      33
+    ]
+  },
+  "environment": {
+    "CUDA_tested": false,
+    "bench_cpu_only": true,
+    "numpy": "2.3.5",
+    "python": "3.13.5",
+    "torch": "2.10.0+cpu"
+  },
+  "freeze": {
+    "MAT03R_protocol_and_driver_frozen_commit": "c6a1a16974a607b51fc121f4ca57f75fc634942b",
+    "MAT03_initial_source_not_remote_pre_fresh": "True: initial frozen design was committed but full implementation was not committed to GitHub until after the 301..305 exploratory run. The independent 401..405 replication has the exact source pinned beforehand.",
+    "MAT03_main_source_frozen_before_replica_commit": "825c281dbdcda67168a3c98289a7cc04a802f631",
+    "MAT03_protocol_commit": "52afafbae5b4f1888e632488f85c430e01d749fa",
+    "source_sha256_original": "e63b0f6cdc1f66d50cdd00629c05b4d0b800b73b9d24095a24076cad3736ffbe"
+  },
+  "hypothesis": {
+    "Mirror_specific_adoption": false,
+    "initial_mirror_better_worlds": 5,
+    "initial_mirror_minus_linear_mean": -0.02439520806074144,
+    "native_5head_inference_true_forward_calls": 1,
+    "replica_margin_gate_pass": false,
+    "replica_margin_le_minus_0p01": 1,
+    "replica_mirror_better_worlds": 4,
+    "replica_mirror_minus_linear_mean": -0.0008240327239036616,
+    "replica_mirror_private_minus_linear_private_mean": 0.0013440206646919638
+  },
+  "initial_fresh": {
+    "dataset_natural_worlds": "same sklearn digits, overlapping splits",
+    "exact_single_trunk_call": true,
+    "no_fresh_tuning": true,
+    "positive_binary_tasks": true,
+    "rows": 45,
+    "seeds": [
+      301,
+      302,
+      303,
+      304,
+      305
+    ]
+  },
+  "limits": [
+    "5 fresh are repeated splits of one small dataset (not new independent task families)",
+    "Hadamard-exp View is a structured feature gate related to IA3/FiLM, not new one-forward invention",
+    "same-code linear chart is mandatory strong null",
+    "native one-trunk multihead is already one call",
+    "No LM token loss, MoE native reproduction, GPU offload"
+  ],
+  "postdiscovery_replication": {
+    "dataset_natural_worlds": "same sklearn digits, overlapping splits",
+    "exact_single_trunk_call": true,
+    "no_fresh_tuning": true,
+    "positive_binary_tasks": true,
+    "rows": 45,
+    "seeds": [
+      401,
+      402,
+      403,
+      404,
+      405
+    ]
+  },
+  "replay": true,
+  "result_sha256": {
+    "results/RESULTS_CORE.csv": "9cba7fea36ca0727d12d9891ca0db10017e39aabbbc8e1ecab01872bef10de16",
+    "results/dev_raw.csv": "b5b7884387ac630564c13160f4e69dec92a86aad849196c8dee8862e1db7d1c2",
+    "results/fresh_raw.csv": "cd5b8007a7153a30bb12dd21760eeb8af63a20e16569c78f0311138049d3ca17",
+    "results/replica/fresh_raw.csv": "6c1c47284ffe5442fcb1c767998cdfe7700448857e2e4b493fca06965fb9e8f1"
+  },
+  "source_sha256": {
+    "source/run_mat03.py": "e63b0f6cdc1f66d50cdd00629c05b4d0b800b73b9d24095a24076cad3736ffbe",
+    "source/run_mat03_replica.py": "053d1d3f912b1ac0889652ce2319510cf95c1152d77d51129ae403403d21637f",
+    "source/test_mat03.py": "81d0b37ad07d794de16af810033847f2a98c1e4e3de7655c54ca77eed228a1c8"
+  }
+}

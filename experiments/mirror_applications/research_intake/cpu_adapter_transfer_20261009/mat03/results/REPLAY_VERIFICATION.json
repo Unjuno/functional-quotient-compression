@@ -1,0 +1,108 @@
+{
+  "all_pass": true,
+  "checked_rows": 6,
+  "rows": [
+    {
+      "stage": "MAT03",
+      "seed": 301,
+      "method": "native_multihead",
+      "fields": [
+        "fresh_mean_nll",
+        "fresh_worst_task_nll",
+        "fresh_accuracy",
+        "serialized_npz_bytes",
+        "member_scalars",
+        "trunk_invocations_per_forward",
+        "out_prob_std"
+      ],
+      "max_abs_dev": 0.0,
+      "pass_same": 1.0,
+      "latency_replay": false
+    },
+    {
+      "stage": "MAT03",
+      "seed": 301,
+      "method": "mirror_hadamard4",
+      "fields": [
+        "fresh_mean_nll",
+        "fresh_worst_task_nll",
+        "fresh_accuracy",
+        "serialized_npz_bytes",
+        "member_scalars",
+        "trunk_invocations_per_forward",
+        "out_prob_std"
+      ],
+      "max_abs_dev": 0.0,
+      "pass_same": 1.0,
+      "latency_replay": false
+    },
+    {
+      "stage": "MAT03",
+      "seed": 301,
+      "method": "native_hadamard_linear4",
+      "fields": [
+        "fresh_mean_nll",
+        "fresh_worst_task_nll",
+        "fresh_accuracy",
+        "serialized_npz_bytes",
+        "member_scalars",
+        "trunk_invocations_per_forward",
+        "out_prob_std"
+      ],
+      "max_abs_dev": 0.0,
+      "pass_same": 1.0,
+      "latency_replay": false
+    },
+    {
+      "stage": "MAT03R",
+      "seed": 401,
+      "method": "native_multihead",
+      "fields": [
+        "fresh_mean_nll",
+        "fresh_worst_task_nll",
+        "fresh_accuracy",
+        "serialized_npz_bytes",
+        "member_scalars",
+        "trunk_invocations_per_forward",
+        "out_prob_std"
+      ],
+      "max_abs_dev": 0.0,
+      "pass_same": 1.0,
+      "latency_replay": false
+    },
+    {
+      "stage": "MAT03R",
+      "seed": 401,
+      "method": "mirror_hadamard4",
+      "fields": [
+        "fresh_mean_nll",
+        "fresh_worst_task_nll",
+        "fresh_accuracy",
+        "serialized_npz_bytes",
+        "member_scalars",
+        "trunk_invocations_per_forward",
+        "out_prob_std"
+      ],
+      "max_abs_dev": 0.0,
+      "pass_same": 1.0,
+      "latency_replay": false
+    },
+    {
+      "stage": "MAT03R",
+      "seed": 401,
+      "method": "native_hadamard_linear4",
+      "fields": [
+        "fresh_mean_nll",
+        "fresh_worst_task_nll",
+        "fresh_accuracy",
+        "serialized_npz_bytes",
+        "member_scalars",
+        "trunk_invocations_per_forward",
+        "out_prob_std"
+      ],
+      "max_abs_dev": 0.0,
+      "pass_same": 1.0,
+      "latency_replay": false
+    }
+  ]
+}
