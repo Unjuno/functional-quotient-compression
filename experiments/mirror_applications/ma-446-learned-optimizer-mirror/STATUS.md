@@ -6,7 +6,8 @@
 - Last verified commit: protocol commit `26ff1d90425cdeb3902882ad5c4b3682f85310e5`
 - Implementation complete: yes
 - Preflight tests: 4 passed, 0 failed
-- Development complete: no
+- Initial development run complete: FAIL; payload accounting amendment A2 requires deterministic reserialization before final verification.
+- Development complete: pending corrected payload replay
 - Fresh/audit opened: no
 - Results committed: no
 - Verification committed: no

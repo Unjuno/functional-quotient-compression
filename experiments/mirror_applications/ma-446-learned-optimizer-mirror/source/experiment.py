@@ -309,6 +309,39 @@ def save_library(path: Path, payload: dict[str, Any],
     return {'path':str(path.relative_to(ROOT)),'bytes':len(blob),'sha256':hashlib.sha256(blob).hexdigest(),'roundtrip_max_prediction_difference':diff}
 
 
+
+def make_inference_payload(method: str, world_seed: int, w0: torch.Tensor,
+                          basis: torch.Tensor, result: dict[str, Any]) -> dict[str, Any]:
+    """Deployment-only state; optimizer weights/history are excluded after adaptation."""
+    n=8
+    payload={'schema':'MA-446/inference-v1','experiment':'MA-446','world_seed':world_seed,
+             'method':method,'task_ids':list(range(n))}
+    if method=='hard_shared':
+        payload['shared']={'w0':w0}
+    elif method in ('full_adam','lstm_full'):
+        payload['task_weights']=result['params'][:n]
+    else:
+        payload['shared']={'w0':w0,'basis':basis}
+        payload['task_codes']=result['params'][:n]
+    return payload
+
+
+def save_inference_payload(path: Path, payload: dict[str, Any],
+                           episode: dict[str, torch.Tensor], expected: torch.Tensor) -> dict[str, Any]:
+    blob=tensor_bytes(payload); path.write_bytes(blob)
+    restored=torch.load(io.BytesIO(blob),map_location='cpu',weights_only=False)
+    if 'task_weights' in restored:
+        weights=restored['task_weights']
+        pred=torch.einsum('bni,boi->bno',episode['query_x'][:8],weights)
+    elif 'task_codes' in restored:
+        weights=decode_m(restored['shared']['w0'],restored['shared']['basis'],restored['task_codes'])
+        pred=torch.einsum('bni,boi->bno',episode['query_x'][:8],weights)
+    else:
+        pred=torch.einsum('bni,oi->bno',episode['query_x'][:8],restored['shared']['w0'])
+    diff=float((pred-expected).abs().max())
+    if diff != 0.0: raise AssertionError(f'inference payload replay difference {diff}')
+    return {'path':str(path.relative_to(ROOT)),'bytes':len(blob),'sha256':hashlib.sha256(blob).hexdigest(),'roundtrip_max_prediction_difference':diff}
+
 def make_payload(method: str, world_seed: int, w0: torch.Tensor,
                  basis: torch.Tensor, result: dict[str, Any], episode: dict[str, torch.Tensor],
                  learned_model: CoordinateLSTM | None = None,
@@ -317,7 +350,7 @@ def make_payload(method: str, world_seed: int, w0: torch.Tensor,
     n=8
     if method=='hard_shared':
         pred=torch.einsum('bni,oi->bno',episode['query_x'][:n],w0)
-        return {'schema':'MA-446/v1','experiment':'MA-446','world_seed':world_seed,'method':method,'task_ids':list(range(n)),'shared':{'w0':w0},'states':{}}
+        return {'schema':'MA-446/v1','experiment':'MA-446','world_seed':world_seed,'method':method,'task_ids':list(range(n)),'adaptation_updates':STEPS,'optimizer_step':None,'shared':{'w0':w0},'states':{}}
     params=result['params'][:n]
     if method in ('full_adam','lstm_full'):
         pred=torch.einsum('bni,boi->bno',episode['query_x'][:n],params)
@@ -326,7 +359,7 @@ def make_payload(method: str, world_seed: int, w0: torch.Tensor,
     state={'params':params}
     if 'm1' in result: state.update({'m1':result['m1'][:n],'m2':result['m2'][:n]})
     if 'state' in result: state.update({'h':result['state'][0][:n],'c':result['state'][1][:n]})
-    payload={'schema':'MA-446/v1','experiment':'MA-446','world_seed':world_seed,'method':method,'task_ids':list(range(n)),'shared':{},'states':state}
+    payload={'schema':'MA-446/v1','experiment':'MA-446','world_seed':world_seed,'method':method,'task_ids':list(range(n)),'adaptation_updates':STEPS,'optimizer_step':STEPS if method in ('mirror_adam','full_adam') else None,'shared':{},'states':state}
     if method not in ('full_adam','lstm_full'):
         payload['shared'].update({'w0':w0,'basis':basis})
     if learned_model is not None: payload['shared']['learned_optimizer_state_dict']=learned_model.state_dict()

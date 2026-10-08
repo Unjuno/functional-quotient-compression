@@ -1,0 +1,450 @@
+{
+  "experiment_id": "MA-446",
+  "status": "DEVELOPMENT_COMPLETE_PENDING_GATE",
+  "seeds": [
+    44601,
+    44602
+  ],
+  "selected_learning_rates": {
+    "sgd": 1.0,
+    "adam": 0.3,
+    "full_adam": 0.1
+  },
+  "development_tasks_per_world": 32,
+  "support_examples_per_update": 16,
+  "updates": 4,
+  "query_examples": 128,
+  "meta_training_outer_updates": 256,
+  "meta_training_batch_tasks": 16,
+  "meta_training_wall_seconds": {
+    "44601": {
+      "lstm_mirror": 0.9593317010003375,
+      "lstm_full": 0.8570896110031754,
+      "meta_sgd_mirror": 0.5591862199980824
+    },
+    "44602": {
+      "lstm_mirror": 0.9401990639998985,
+      "lstm_full": 0.869587347999186,
+      "meta_sgd_mirror": 0.5705775489986991
+    }
+  },
+  "meta_training_final_outer_loss": {
+    "44601": {
+      "lstm_mirror": 0.22280703485012054,
+      "lstm_full": 0.18178324401378632,
+      "meta_sgd_mirror": 0.3468712866306305
+    },
+    "44602": {
+      "lstm_mirror": 0.18008363246917725,
+      "lstm_full": 0.2708487808704376,
+      "meta_sgd_mirror": 0.4243920147418976
+    }
+  },
+  "library_artifacts": {
+    "44601": {
+      "hard_shared": {
+        "path": "source/artifacts/seed44601_hard_shared_K8.pt",
+        "bytes": 1372,
+        "sha256": "1c4cd861ec737d95ca1048662050a4cd5b5f18bf64b6c323ae6d810326af22e5",
+        "roundtrip_max_prediction_difference": 0.0,
+        "per_task_state_bytes_mean": 0,
+        "per_task_state_bytes": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "curve_mean": [
+          0.35621199011802673,
+          0.35621199011802673,
+          0.35621199011802673,
+          0.35621199011802673,
+          0.35621199011802673
+        ]
+      },
+      "mirror_sgd": {
+        "path": "source/artifacts/seed44601_mirror_sgd_K8.pt",
+        "bytes": 2452,
+        "sha256": "363d88530488f47d908ecb87c0efa4e9a0dde720b2bc105fad3615469194f770",
+        "roundtrip_max_prediction_difference": 0.0,
+        "per_task_state_bytes_mean": 1628,
+        "per_task_state_bytes": [
+          1628,
+          1628,
+          1628,
+          1628,
+          1628,
+          1628,
+          1628,
+          1628
+        ],
+        "curve_mean": [
+          0.35621199011802673,
+          0.3424747884273529,
+          0.32848113775253296,
+          0.3152492046356201,
+          0.3032093644142151
+        ]
+      },
+      "mirror_adam": {
+        "path": "source/artifacts/seed44601_mirror_adam_K8.pt",
+        "bytes": 3596,
+        "sha256": "42748955cff7c1610224f43a376f7b49646d731b9b5c3e0da793ffcb6fd2ba61",
+        "roundtrip_max_prediction_difference": 0.0,
+        "per_task_state_bytes_mean": 2772,
+        "per_task_state_bytes": [
+          2772,
+          2772,
+          2772,
+          2772,
+          2772,
+          2772,
+          2772,
+          2772
+        ],
+        "curve_mean": [
+          0.35621199011802673,
+          0.2080526053905487,
+          0.11002699285745621,
+          0.06829307973384857,
+          0.059746596962213516
+        ]
+      },
+      "meta_sgd_mirror": {
+        "path": "source/artifacts/seed44601_meta_sgd_mirror_K8.pt",
+        "bytes": 2892,
+        "sha256": "cb12fa8f1b44cdfaa099b079421155164db70a0837c5f705c70ee866f053f729",
+        "roundtrip_max_prediction_difference": 0.0,
+        "per_task_state_bytes_mean": 1628,
+        "per_task_state_bytes": [
+          1628,
+          1628,
+          1628,
+          1628,
+          1628,
+          1628,
+          1628,
+          1628
+        ],
+        "curve_mean": [
+          0.3560575246810913,
+          0.3525695204734802,
+          0.34890657663345337,
+          0.3453359603881836,
+          0.3419792652130127
+        ]
+      },
+      "lstm_mirror": {
+        "path": "source/artifacts/seed44601_lstm_mirror_K8.pt",
+        "bytes": 11893,
+        "sha256": "fc4a80d94a8a0be5a06c5b8355322f4f31ed4bd8025df33349add590dfeacd6b",
+        "roundtrip_max_prediction_difference": 0.0,
+        "per_task_state_bytes_mean": 8148,
+        "per_task_state_bytes": [
+          8148,
+          8148,
+          8148,
+          8148,
+          8148,
+          8148,
+          8148,
+          8148
+        ],
+        "curve_mean": [
+          0.35621199011802673,
+          0.35277917981147766,
+          0.34115269780158997,
+          0.31510740518569946,
+          0.2690085172653198
+        ]
+      },
+      "full_adam": {
+        "path": "source/artifacts/seed44601_full_adam_K8.pt",
+        "bytes": 6420,
+        "sha256": "a43a9d2a391cabaae535903ad521c465f80f376b86fa72a4a79251f092e0c66f",
+        "roundtrip_max_prediction_difference": 0.0,
+        "per_task_state_bytes_mean": 6228,
+        "per_task_state_bytes": [
+          6228,
+          6228,
+          6228,
+          6228,
+          6228,
+          6228,
+          6228,
+          6228
+        ],
+        "curve_mean": [
+          0.35621199011802673,
+          0.23891493678092957,
+          0.16356009244918823,
+          0.1145923063158989,
+          0.08541525155305862
+        ]
+      },
+      "lstm_full": {
+        "path": "source/artifacts/seed44601_lstm_full_K8.pt",
+        "bytes": 30844,
+        "sha256": "43728d3f4229531de584eefb414eb6eeb128c4db111edce3b6949dca5e54f605",
+        "roundtrip_max_prediction_difference": 0.0,
+        "per_task_state_bytes_mean": 27732,
+        "per_task_state_bytes": [
+          27732,
+          27732,
+          27732,
+          27732,
+          27732,
+          27732,
+          27732,
+          27732
+        ],
+        "curve_mean": [
+          0.35621199011802673,
+          0.3556199073791504,
+          0.3517110049724579,
+          0.32196927070617676,
+          0.24502328038215637
+        ]
+      }
+    },
+    "44602": {
+      "hard_shared": {
+        "path": "source/artifacts/seed44602_hard_shared_K8.pt",
+        "bytes": 1372,
+        "sha256": "3bc6658bae0edb033a09bf769b642e28d4afe1619a9bf7244f8d8560eb18581d",
+        "roundtrip_max_prediction_difference": 0.0,
+        "per_task_state_bytes_mean": 0,
+        "per_task_state_bytes": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "curve_mean": [
+          0.4062764644622803,
+          0.4062764644622803,
+          0.4062764644622803,
+          0.4062764644622803,
+          0.4062764644622803
+        ]
+      },
+      "mirror_sgd": {
+        "path": "source/artifacts/seed44602_mirror_sgd_K8.pt",
+        "bytes": 2452,
+        "sha256": "ded93e80fd58b11e82a3ce34bf12c9318ed2a135c01e3411e7e43b97490f12da",
+        "roundtrip_max_prediction_difference": 0.0,
+        "per_task_state_bytes_mean": 1628,
+        "per_task_state_bytes": [
+          1628,
+          1628,
+          1628,
+          1628,
+          1628,
+          1628,
+          1628,
+          1628
+        ],
+        "curve_mean": [
+          0.4062764644622803,
+          0.3874482810497284,
+          0.3706779479980469,
+          0.3557358384132385,
+          0.3418571352958679
+        ]
+      },
+      "mirror_adam": {
+        "path": "source/artifacts/seed44602_mirror_adam_K8.pt",
+        "bytes": 3596,
+        "sha256": "63bb27d1b4c50d7ee88184ce2ac8a4f07bdf3498cb82f5fe8767b3e29c7421d0",
+        "roundtrip_max_prediction_difference": 0.0,
+        "per_task_state_bytes_mean": 2772,
+        "per_task_state_bytes": [
+          2772,
+          2772,
+          2772,
+          2772,
+          2772,
+          2772,
+          2772,
+          2772
+        ],
+        "curve_mean": [
+          0.4062764644622803,
+          0.2457665055990219,
+          0.14788347482681274,
+          0.10136791318655014,
+          0.0814829170703888
+        ]
+      },
+      "meta_sgd_mirror": {
+        "path": "source/artifacts/seed44602_meta_sgd_mirror_K8.pt",
+        "bytes": 2892,
+        "sha256": "d8221f23a9b272afc05f242f71bb5c50c48e2c684db5f1fad3e8a18be03f45fe",
+        "roundtrip_max_prediction_difference": 0.0,
+        "per_task_state_bytes_mean": 1628,
+        "per_task_state_bytes": [
+          1628,
+          1628,
+          1628,
+          1628,
+          1628,
+          1628,
+          1628,
+          1628
+        ],
+        "curve_mean": [
+          0.4061165452003479,
+          0.40130820870399475,
+          0.39686962962150574,
+          0.3927913010120392,
+          0.3888794481754303
+        ]
+      },
+      "lstm_mirror": {
+        "path": "source/artifacts/seed44602_lstm_mirror_K8.pt",
+        "bytes": 11893,
+        "sha256": "196c5700102c2889c6ff7cb5f695bb1762e3f8a6cc9c34fb4ed5b2a04affdba5",
+        "roundtrip_max_prediction_difference": 0.0,
+        "per_task_state_bytes_mean": 8148,
+        "per_task_state_bytes": [
+          8148,
+          8148,
+          8148,
+          8148,
+          8148,
+          8148,
+          8148,
+          8148
+        ],
+        "curve_mean": [
+          0.4062764644622803,
+          0.3984474241733551,
+          0.3761235773563385,
+          0.3292345106601715,
+          0.24450699985027313
+        ]
+      },
+      "full_adam": {
+        "path": "source/artifacts/seed44602_full_adam_K8.pt",
+        "bytes": 6420,
+        "sha256": "036985caae6d7809df628e31496e9bbb661ac2d2d2e76f0ccd56735c11d25877",
+        "roundtrip_max_prediction_difference": 0.0,
+        "per_task_state_bytes_mean": 6228,
+        "per_task_state_bytes": [
+          6228,
+          6228,
+          6228,
+          6228,
+          6228,
+          6228,
+          6228,
+          6228
+        ],
+        "curve_mean": [
+          0.4062764644622803,
+          0.28075110912323,
+          0.1916554570198059,
+          0.1323578655719757,
+          0.09381357580423355
+        ]
+      },
+      "lstm_full": {
+        "path": "source/artifacts/seed44602_lstm_full_K8.pt",
+        "bytes": 30844,
+        "sha256": "fa2bd6b73f61b840c15348f9d6d3b1bda848ff6bd9153b3a41333cac45b089c2",
+        "roundtrip_max_prediction_difference": 0.0,
+        "per_task_state_bytes_mean": 27732,
+        "per_task_state_bytes": [
+          27732,
+          27732,
+          27732,
+          27732,
+          27732,
+          27732,
+          27732,
+          27732
+        ],
+        "curve_mean": [
+          0.4062764644622803,
+          0.39763134717941284,
+          0.38206708431243896,
+          0.3540164530277252,
+          0.30506834387779236
+        ]
+      }
+    }
+  },
+  "mean_query_mse_by_world": {
+    "44601": {
+      "hard_shared": 0.35621199011802673,
+      "mirror_sgd": 0.3032093644142151,
+      "mirror_adam": 0.059746596962213516,
+      "meta_sgd_mirror": 0.3419792652130127,
+      "lstm_mirror": 0.2690085172653198,
+      "full_adam": 0.08541525155305862,
+      "lstm_full": 0.24502328038215637
+    },
+    "44602": {
+      "hard_shared": 0.4062764644622803,
+      "mirror_sgd": 0.3418571352958679,
+      "mirror_adam": 0.0814829170703888,
+      "meta_sgd_mirror": 0.3888794481754303,
+      "lstm_mirror": 0.24450699985027313,
+      "full_adam": 0.09381357580423355,
+      "lstm_full": 0.30506834387779236
+    }
+  },
+  "mean_query_mse_pooled": {
+    "hard_shared": 0.3812442272901535,
+    "mirror_sgd": 0.3225332498550415,
+    "mirror_adam": 0.07061475701630116,
+    "meta_sgd_mirror": 0.3654293566942215,
+    "lstm_mirror": 0.2567577585577965,
+    "full_adam": 0.08961441367864609,
+    "lstm_full": 0.27504581212997437
+  },
+  "compute_proxy_per_task": {
+    "hard_shared": 0,
+    "mirror_sgd": 1836,
+    "mirror_adam": 1944,
+    "meta_sgd_mirror": 1836,
+    "lstm_mirror": 5760,
+    "full_adam": 2016,
+    "lstm_full": 17280
+  },
+  "torch_num_threads": 1,
+  "total_run_wall_seconds": 5.351976420002757,
+  "fresh_accessed": false,
+  "gates_by_world": {
+    "44601": {
+      "learned_mirror_beats_simple_by_15pct": false,
+      "within_5pct_full_learned_quality": false,
+      "at_least_30pct_payload_saving_vs_full_learned": true,
+      "best_simple_mse": 0.059746596962213516,
+      "mirror_lstm_mse": 0.2690085172653198,
+      "full_lstm_mse": 0.24502328038215637,
+      "mirror_bytes": 11893,
+      "full_bytes": 30844
+    },
+    "44602": {
+      "learned_mirror_beats_simple_by_15pct": false,
+      "within_5pct_full_learned_quality": true,
+      "at_least_30pct_payload_saving_vs_full_learned": true,
+      "best_simple_mse": 0.0814829170703888,
+      "mirror_lstm_mse": 0.24450699985027313,
+      "full_lstm_mse": 0.30506834387779236,
+      "mirror_bytes": 11893,
+      "full_bytes": 30844
+    }
+  },
+  "all_pass": false,
+  "decision": "FAIL"
+}

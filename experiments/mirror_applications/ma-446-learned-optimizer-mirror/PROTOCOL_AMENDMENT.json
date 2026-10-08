@@ -1,13 +1,28 @@
-{
-  "amendment_id": "A1",
-  "timing": "Before implementation tests and before any development scores",
-  "reason": "Specify task counts and deterministic train/dev seed derivation for exact reproducibility.",
-  "changes": [
-    "32 held-out development tasks per world",
-    "meta-training stream seed s+1000000 and development evaluation stream seed s+2000000 using CPU torch.Generator",
-    "make noise/control task generation explicit",
-    "choose one SGD/Adam learning rate from mean query MSE over both worlds"
-  ],
-  "scientific_gate_changed": false,
-  "audit_or_fresh_accessed": false
-}
+[
+  {
+    "amendment_id": "A1",
+    "timing": "Before implementation tests and before any development scores",
+    "reason": "Specify task counts and deterministic train/dev seed derivation for exact reproducibility.",
+    "changes": [
+      "32 held-out development tasks per world",
+      "meta-training stream seed s+1000000 and development evaluation stream seed s+2000000 using CPU torch.Generator",
+      "make noise/control task generation explicit",
+      "choose one SGD/Adam learning rate from mean query MSE over both worlds"
+    ],
+    "scientific_gate_changed": false,
+    "audit_or_fresh_accessed": false
+  },
+  {
+    "amendment_id": "A2",
+    "timing": "After the first development run and before audit/fresh access; no hyperparameters or task outcomes were changed",
+    "reason": "Separate actual deployed inference state from resumable adaptation state and explicitly serialize the Adam update counter required for exact restart.",
+    "changes": [
+      "Serialize and report a distinct eight-task inference-only payload for every method.",
+      "Keep the already-frozen 30% gate on the restartable payload and report inference-only bytes separately.",
+      "Add explicit adaptation update and Adam bias-correction step count metadata to restartable payloads."
+    ],
+    "scientific_gate_changed": false,
+    "development_data_reused": true,
+    "fresh_or_audit_accessed": false
+  }
+]

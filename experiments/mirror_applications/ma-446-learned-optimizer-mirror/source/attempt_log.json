@@ -26,5 +26,14 @@
     "summary_or_results_csv_written": false,
     "protocol_or_hyperparameters_changed": false,
     "correction": "Have the hard-shared control retain the same per-task query MSE vector across all five update indices, then rerun the same frozen development seeds."
+  },
+  {
+    "attempt": 4,
+    "phase": "post-development payload accounting audit",
+    "finding": "The initial serialized restartable Adam state omitted the shared four-step bias-correction counter, and the run did not separately report deployment-only inference bytes.",
+    "development_data_accessed": true,
+    "fresh_or_audit_accessed": false,
+    "quality_hyperparameters_or_gate_changed": false,
+    "correction": "Apply protocol amendment A2: serialize explicit update counters, save a separate inference-only payload for every method, retain the frozen gate on restartable bytes, and report both byte metrics. Recompute the same development run deterministically."
   }
 ]

@@ -3,7 +3,7 @@ import csv, hashlib, json, statistics, sys, time
 from pathlib import Path
 import torch
 from experiment import (ROOT, LRS, make_world, run_world, query_mse_m, query_mse_w,
-                        decode_m, make_payload, save_library, tensor_bytes,
+                        decode_m, make_payload, make_inference_payload, save_library, save_inference_payload, tensor_bytes,
                         compute_proxy, RANK, HIDDEN, STEPS)
 
 ART=ROOT/'source'/'artifacts'
@@ -34,6 +34,10 @@ def serialize_world(w:dict, selected:dict[str,str]) -> dict:
             pred=torch.einsum('bni,boi->bno',dev['query_x'][:8],decode_m(w0,basis,res['params'][:8]))
         file=ART/f'seed{seed}_{name}_K8.pt'
         info=save_library(file,payload,dev,w0,basis,pred)
+        inference=make_inference_payload(name,seed,w0,basis,res)
+        inference_file=ART/f'seed{seed}_{name}_K8_inference.pt'
+        inference_info=save_inference_payload(inference_file,inference,dev,pred)
+        info['inference_payload']=inference_info
         # Per-task serialized state bytes include optimizer state, not shared bases/optimizer weights.
         per_task=[]
         if name=='hard_shared':
@@ -79,7 +83,8 @@ def main():
             for tid in range(32):
                 for step,mse in enumerate(res['curve']):
                     rows.append({'world_seed':seed,'task_id':tid,'method':name,'update':step,'query_mse':f"{res['task_curves'][step][tid]:.10g}",
-                                 'library_payload_bytes':storage['bytes'] if tid<8 else '',
+                                 'restartable_payload_bytes':storage['bytes'] if tid<8 else '',
+                                 'inference_payload_bytes':storage['inference_payload']['bytes'] if tid<8 else '',
                                  'per_task_state_bytes':storage['per_task_state_bytes'][tid] if tid<8 and tid<len(storage['per_task_state_bytes']) else '',
                                  'optimizer_compute_proxy':0 if name=='hard_shared' else mac,'wall_seconds_per_task':f"{res.get('wall_seconds_per_task',0):.8g}"})
     summary={
@@ -87,7 +92,7 @@ def main():
       'selected_learning_rates':selected,'development_tasks_per_world':32,'support_examples_per_update':16,'updates':4,'query_examples':128,
       'meta_training_outer_updates':256,'meta_training_batch_tasks':16,'meta_training_wall_seconds':{str(w['world_seed']):w['meta_train_seconds'] for w in worlds},
       'meta_training_final_outer_loss':{str(w['world_seed']):w['meta_train_loss_final'] for w in worlds},
-      'library_artifacts':artifacts,'mean_query_mse_by_world':{seed:{name:traces[seed][name]['mean_query_mse_by_update'][-1] for name in chosen_names} for seed in traces},
+      'serialized_payloads':artifacts,'storage_metrics':{seed:{name:{'inference_payload_bytes':x['inference_payload']['bytes'],'restartable_payload_bytes':x['bytes'],'inference_sha256':x['inference_payload']['sha256'],'restartable_sha256':x['sha256']} for name,x in items.items()} for seed,items in artifacts.items()},'mean_query_mse_by_world':{seed:{name:traces[seed][name]['mean_query_mse_by_update'][-1] for name in chosen_names} for seed in traces},
       'mean_query_mse_pooled':{name:statistics.mean(traces[str(w['world_seed'])][name]['mean_query_mse_by_update'][-1] for w in worlds) for name in chosen_names},
       'compute_proxy_per_task':{name:(0 if name=='hard_shared' else compute_proxy('lstm_mirror' if name=='lstm_mirror' else ('lstm_full' if name=='lstm_full' else ('adam' if 'adam' in name else name)),RANK if name in ('mirror_sgd','mirror_adam','meta_sgd_mirror','lstm_mirror') else (0 if name=='hard_shared' else 12),name in ('mirror_sgd','mirror_adam','meta_sgd_mirror','lstm_mirror'))) for name in chosen_names},
       'torch_num_threads':torch.get_num_threads(),'total_run_wall_seconds':time.perf_counter()-begin,'fresh_accessed':False
@@ -110,7 +115,7 @@ def main():
     (ROOT/'source'/'development_summary.json').write_text(json.dumps(summary,indent=2)+'\n')
     (ROOT/'source'/'development_raw.json').write_text(json.dumps(traces,indent=2)+'\n')
     with (ROOT/'RESULTS_CORE.csv').open('w',newline='') as f:
-        writer=csv.DictWriter(f,fieldnames=['world_seed','task_id','method','update','query_mse','library_payload_bytes','per_task_state_bytes','optimizer_compute_proxy','wall_seconds_per_task'],lineterminator='\n')
+        writer=csv.DictWriter(f,fieldnames=['world_seed','task_id','method','update','query_mse','inference_payload_bytes','restartable_payload_bytes','per_task_state_bytes','optimizer_compute_proxy','wall_seconds_per_task'],lineterminator='\n')
         writer.writeheader(); writer.writerows(rows)
     return summary
 

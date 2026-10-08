@@ -83,7 +83,12 @@
       "per-task LSTM h/c or SGD/Adam moments",
       "task IDs and serializer metadata"
     ],
-    "library_size": "Eight task states plus one shared model/basis/optimizer payload; serialize and reload exact bytes."
+    "library_size": "Eight task states plus one shared model/basis/optimizer payload; serialize and reload exact bytes.",
+    "payload_reporting": {
+      "inference_payload": "Persist only the shared model/basis and final task function state plus identifiers/metadata required to deploy the eight logical functions.",
+      "restartable_adaptation_payload": "Inference payload plus learned optimizer weights and per-task optimizer state; Adam bias-correction step counter is explicitly serialized.",
+      "gate_bytes": "The frozen 30% gate compares the actual serialized restartable adaptation payloads; report inference-only payload sizes separately as the deployment storage metric."
+    }
   },
   "compute": {
     "examples_per_task": 192,
