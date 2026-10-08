@@ -1,0 +1,22 @@
+{
+  "experiment_id": "MA-492",
+  "title": "Discrete packet-plan Mirror latent",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY",
+  "base_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
+  "draw_id": "Draw40",
+  "hypothesis": "A compact discrete packet-plan code can condition one shared packet decoder and improve joint future-mode coverage at lower serialized state than storing one decoder/model per mode, while matching a VQ latent and continuous latent at equal bits.",
+  "physical_object": "one shared deterministic packet-plan decoder",
+  "mirror_coordinate": "discrete codebook index selecting a packet plan",
+  "logical_multiplicity": "joint logical future packet modes",
+  "prior_art_refs": ["PA91", "PA10"],
+  "controls": ["shared unconditional packet decoder", "discrete Mirror packet code", "same-bit VQ code + shared decoder", "same-bit continuous latent + shared decoder", "independent per-mode decoder upper control"],
+  "task": "Synthetic four-step binary packet prediction with correlated modes; learn the conditional joint packet distribution from support examples and evaluate joint NLL, valid-packet mass, mode coverage and bytes.",
+  "development": {"worlds_or_seeds": [49201], "selection_metric": "Freeze decoder family and codebook size using dev joint NLL; code budget fixed at 2 bits/packet."},
+  "fresh": {"worlds_or_seeds": [49211, 49212, 49213], "locked_before_access": true, "split": "Each fresh world generates new mode mixtures and packet frequencies; 4096 support packets and 4096 heldout packets. No audit frequency data used in codebook fitting."},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["shared decoder", "codebook/indices as deployed", "mode codebook", "continuous latent state", "independent decoder weights", "headers/metadata"]},
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true},
+  "success_gate": "On >=2/3 fresh worlds, discrete Mirror joint NLL improves by >=0.05 nats/packet over unconditional shared decoder, valid-packet mass >=0.99, and total payload <=60% of independent per-mode model bank. It must also be competitive with same-bit VQ and continuous latent controls to support Mirror-specific value.",
+  "failure_gate": "FAIL if the improvement or validity gate fails on >=2/3 worlds, if the payload exceeds 60% of independent mode models without a quality advantage, or if a same-bit native latent control matches or beats Mirror on quality/bytes.",
+  "boundaries": ["synthetic packet distribution only", "does not establish PTP performance on language models", "2-bit logical code does not imply independent capacity without measured heldout joint quality", "small codebooks and decoder intentionally kept tiny for CPU screening"]
+}
