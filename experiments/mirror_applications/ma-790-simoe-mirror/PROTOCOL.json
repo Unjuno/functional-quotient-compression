@@ -1,0 +1,68 @@
+{
+  "experiment_id": "MA-790",
+  "title": "SIMoE sparse interpolation coefficient factorization",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/COMPOSITION",
+  "base_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
+  "prior_art": {
+    "refs": ["PA208"],
+    "fact": "SIMoE uses sparse interpolation over reusable expert parameter components to create experts.",
+    "mirror_delta": "Test whether a factorized low-description code can produce sparse interpolation coefficient vectors for unseen factor combinations at lower paid bytes than separately stored rows.",
+    "mandatory_control": "Native SIMoE with independent free sparse coefficient logits for each trained logical expert."
+  },
+  "draw": {
+    "number": 28,
+    "eligible_rule": "uniform from P0 + UNTESTED; exclude IDs with live remote origin/research/ma-* branches or existing ma-* experiment directories",
+    "eligible_count": 519,
+    "pool_sha256": "ee1de129fb6b06a966ba834f4cc75c96fe37811b90055f4ee4ab5c7371399feb",
+    "seed_hex": "738f8a0a418b743439e2a0e6f7371a6b911572878e8b2b17009813ec523d46ac",
+    "selection_digest_sha256": "d8793effb99e4dc718be091b061c4d5986ae77519dce81ea318ba74ed1f62457",
+    "selection_index_zero_based": 251,
+    "selected_id": "MA-790",
+    "replay": "source/draw28_exclusions.json"
+  },
+  "task": {
+    "description": "Synthetic regression over mixtures of fixed physical anchor experts. For input x in R^16, each anchor j outputs W_j x + b_j in R^8. Each logical task (domain_id, skill_id) outputs the convex sparse top-3 mixture of anchors.",
+    "physical_anchors": 12,
+    "anchor_weights": "For each world seed, W is sampled Normal(0,1/16) with shape [12,8,16] and b Normal(0,0.05) with shape [12,8]; fixed and shared for all methods.",
+    "logical_tasks": "4 domains × 4 skills = 16 tasks.",
+    "aligned_world": "For every task, coefficient logits are b0 + A z_domain + B z_skill, with rank 2 latent factors. A/B/b0 and factor codes are generated from world seed; target coefficients are softmax of top-3 logits at temperature 0.5.",
+    "off_orbit_world": "Each of the 16 task coefficient-logit rows is sampled independently Normal(0,1) before the same top-3/temperature transform.",
+    "pair_split": "Train/dev tasks satisfy (domain_id + skill_id) mod 2 = 0. Held-out tasks satisfy odd parity. All four domain and all four skill IDs occur in both partitions.",
+    "data": "x is iid Normal(0,I_16), independent per task and split. Train 2048 examples per seen task, development 512 per seen task, held-out support 64 and held-out query 2048 per task.",
+    "world_seeds": [11, 23, 37],
+    "model_init_seeds": [31, 47, 59]
+  },
+  "methods": {
+    "native_simoe": "12 learned coefficient logits per seen task, trained independently; use top-3 softmax coefficients. For each unseen task, initialize a free 12-logit row at zero and adapt only that row on its 64 support examples for 300 full-batch Adam steps.",
+    "mirror_factorized": "Shared bias plus shared 12×2 domain/skill generators and per-domain/per-skill 2D polar coordinates (radius, angle); convert each coordinate to radius*[cos(angle),sin(angle)], sum projected factors into 12 logits, then top-3 softmax. Unseen tasks are composed zero-shot from previously trained factor codes.",
+    "ordinary_low_rank": "Same shared bias and 12×2 domain/skill generators, but each factor category has an unconstrained learned 2D vector. This is the equal-rank, equal-parameter direct low-rank control; no polar Mirror coordinate.",
+    "no_code": "One global 12-logit coefficient vector shared by all tasks, top-3 softmax.",
+    "independent_upper": "Not used as a quality control because held-out task target coefficients cannot be trained without leakage; report independent 12-float/task storage as an actual serialized storage-only reference."
+  },
+  "training": {
+    "loss": "mean squared error to task output y",
+    "optimizer": "Adam",
+    "learning_rate": 0.03,
+    "batch_size": 256,
+    "max_updates": 2000,
+    "checkpoint_selection": "lowest mean development MSE over the eight seen tasks; evaluate every 25 updates; patience 200 checks",
+    "native_support_adaptation": "Adam lr=0.03 for exactly 300 full-batch updates over the 64 support examples; report query at 0, 25, 100, 300 updates",
+    "mirror_support_adaptation": "None in primary screen; factorized code composition is evaluated zero-shot. This asymmetry is deliberate and reports the storage/generalization frontier; no query-based tuning.",
+    "torch_threads": 1
+  },
+  "metrics": {
+    "primary": ["held-out query MSE", "per-task query MSE", "actual serialized inference payload bytes"],
+    "secondary": ["seen-task dev MSE", "native support adaptation curve", "coefficient reconstruction error", "optimizer updates", "CPU train and inference wall-clock", "coefficient-generation MACs"],
+    "storage": "Actual safetensors bytes including shared anchors, generators, all registered factor codes, independent coefficient rows, and metadata. Report shared state plus registered factor state, per-task code download, and 16-row free SIMoE storage reference.",
+    "compute": "Record examples, optimizer updates, coefficient generation operations and measured CPU batch-1 latency."
+  },
+  "gates": {
+    "aligned_composition": "Mirror held-out query MSE <=1.05× ordinary low-rank control and <=1.10× adapted native SIMoE in at least 2/3 worlds.",
+    "bytes": "Mirror actual serialized coefficient-generator+factor-code payload <=80% of a serialized 16-row free SIMoE coefficient table. Also report whole inference payload including identical shared anchors; do not exclude anchors from total bytes, only from the incremental coefficient-state ratio.",
+    "mirror_specificity": "Compare Mirror with equal-rank ordinary low-rank control. Mirror-specific value requires a useful quality/byte/runtime Pareto gain; equivalence is not a Mirror-specific win.",
+    "off_orbit": "Report off-orbit degradation and the adapted SIMoE gap; do not require Mirror to represent arbitrary coefficient tables.",
+    "decision": "PROMISING only if aligned quality/bytes pass and Mirror improves on ordinary low-rank at matched budgets; FAIL if valid runs fail the aligned quality or storage gates; NOT ESTABLISHED for implementation or split invalidity."
+  },
+  "limitations": ["Synthetic fixed linear anchors, not a full SIMoE reproduction.", "No LLM natural-language loss, sparse routing runtime, distributed upcycling, or full expert-network training claim.", "Aligned worlds are designed to test compositional coefficient structure; off-orbit worlds test its boundary."]
+}
