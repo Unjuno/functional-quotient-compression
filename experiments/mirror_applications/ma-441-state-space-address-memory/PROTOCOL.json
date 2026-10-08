@@ -1,0 +1,15 @@
+{
+ "experiment_id":"MA-441","title":"State-space address memory for Mirror codes","status":"SCREENING","evidence_lane":"DYNAMIC_STATE/RETENTION/STORAGE","base_commit":"286f75c",
+ "hypothesis":"A two-coordinate Mirror address stored in recurrent SSM state recalls a selected logical transition after 512 distractor steps at <=1.10x external-register NRMSE, <=60% external-state bytes, <=1.25x MAC, and <=10% drift growth from delay 8.",
+ "physical_object":"one shared stable 4D state transition","mirror_coordinate":"two-coordinate dynamically written and retained address m","logical_multiplicity":"four selected transition functions recalled after distractors",
+ "prior_art_refs":[25,73],"controls":["external exact address register","recurrent Mirror address","equal-width ordinary recurrent register","rank-one fast-weight memory"],
+ "task":{"type":"synthetic cue-distractor-query recall","state_dim":4,"logical_functions":4,"delays":[8,32,128,512],"teacher":"cue selects one of four stable transitions; distractors intervene; query asks for selected transition response"},
+ "development":{"worlds_or_seeds":[44100,44101],"seeds":[0,1,2],"learning_rates":[0.003,0.01],"selection_metric":"delay-512 recall NRMSE plus drift"},
+ "fresh":{"worlds_or_seeds":[44110,44111,44112],"seeds":[0,1,2],"locked_before_access":true},
+ "training":{"updates":500,"batch_size":64,"optimizer":"AdamW","same_updates_all_methods":true},
+ "storage":{"authority":"actual serialized inference payload and recurrent-state bytes","paid_objects":["transition weights","external address or recurrent m/register state","fast-weight state","metadata"]},
+ "compute":{"report_examples":true,"report_updates":true,"report_MAC_proxy":true,"report_training_wall":true,"report_sequence_wall":true},
+ "success_gate":"Every fresh world at delay 512: Mirror recall NRMSE <=1.10x external; Mirror state bytes <=60% external; MAC <=1.25x; normalized error drift from delay 8 <=10%.",
+ "failure_gate":"Any registered quality/byte/compute/drift gate fails or equal-width ordinary register/fast-weight control matches at lower bytes.",
+ "boundaries":["Synthetic recall only.","No natural SSM or language-model retention claim.","State bytes include all persistent address memory."]
+}
