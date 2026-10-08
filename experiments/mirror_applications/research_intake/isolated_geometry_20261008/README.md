@@ -13,7 +13,7 @@ A plan is self-contained for a cheap mechanism screen: exact insertion, native m
 - Plan status: **DESIGNED / UNTESTED**, not SCREENING, PROMISING, FAIL or ADOPTED.
 - Existing status unchanged: 29 PROMISING / 18 FAIL; verified experiment directories remain 47.
 - Current worker next remains MA-255 on the canonical branch; no work is claimed for it.
-- No code, weights or fresh data are fetched by these notes. No trained-model evidence is produced.
+- Only a read-only stdlib integrity checker and four-case pure-algebra smoke test are provided; no model experiments, pretrained weights or fresh datasets have been run. No trained-model evidence is produced.
 - Promotion workflow: re-fetch canonical max MA ID, reconcile any collision and renumber on promotion; recheck PA numbers; open exactly one MA-specific experiment branch and move that plan into template; freeze first; only then run.
 - Use `python experiments/mirror_applications/check_registry_integrity.py` on a full checkout. This staging branch locally updates registry/PA/status only for internal consistency.
 
@@ -58,3 +58,9 @@ A plan is self-contained for a cheap mechanism screen: exact insertion, native m
 | L | 交差エントロピー | nat/token | dimensionless normalized per token; scalar |
 
 All learned weights/activations in these neural models are dimensionless after normalization; a weighted sum of B_i by dimensionless m therefore has the same units as W. Compute latency in seconds and storage in bytes (not equivalent to either latency or FLOPs).
+
+## Read-only preflight scripts
+
+- `python experiments/mirror_applications/research_intake/isolated_geometry_20261008/selfcheck.py` checks the eight plans and JSON schemas, frozen seeds, PA refs and staged registry/board. Needs a complete local checkout. No network or GPU.
+- `python experiments/mirror_applications/research_intake/isolated_geometry_20261008/algebra_smoke.py` checks exact Q/K gauge identity, GVA query absorption, valid/invalid RoPE commutation and noncommuting matrix products. Pure algebra is **not** trained-model or efficiency evidence.
+- The branch has been remotely cross-checked for registry/claim consistency; Python script execution requires a local checkout and should not be claimed without an interpreter exit status.

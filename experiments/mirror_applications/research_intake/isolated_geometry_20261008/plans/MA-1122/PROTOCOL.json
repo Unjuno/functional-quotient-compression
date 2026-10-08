@@ -63,5 +63,20 @@
   "prior_art_delta": "Separate algebraic query-side readout switching from physically shared cache and show precisely when a changed upstream hidden trajectory invalidates the prefix.",
   "limitations": "Never extrapolate from identical-prefix readout-only compatibility to cross-model or independently generated prefixes.",
   "result_files_present": false,
-  "worker_claim": false
+  "worker_claim": false,
+  "uncertainty_model": {
+    "observable": "Quality Q in its declared units (nat/token or dimensionless error), task/seed paired samples",
+    "n_min_fresh": 5,
+    "components": [
+      "u_seed",
+      "u_eval",
+      "u_num"
+    ],
+    "combined_standard": "u_c=sqrt(u_seed^2+u_eval^2+u_num^2) for independent components; include covariance otherwise",
+    "coverage_factor": 2,
+    "expanded": "U=k_cov*u_c; only indicative with 5 worlds, bootstrap interval primary",
+    "runtime": "u_t=sqrt(u_repeat^2+u_clock^2) in seconds",
+    "storage": "actual byte count is exact for fixed serialization",
+    "sequential_stop": "perform all five frozen fresh worlds, do not early-stop for favorable result or tune on audit data"
+  }
 }

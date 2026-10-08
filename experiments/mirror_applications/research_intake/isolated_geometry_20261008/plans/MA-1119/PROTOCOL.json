@@ -63,5 +63,20 @@
   "prior_art_delta": "Use equivariant neural functionals to emit only low-description m, not full weights, and test byte/transfer gains beyond native UNF and generic hypernetworks.",
   "limitations": "Permutation equivariance of an encoder is not itself novel and is not functional multiplicity.",
   "result_files_present": false,
-  "worker_claim": false
+  "worker_claim": false,
+  "uncertainty_model": {
+    "observable": "Quality Q in its declared units (nat/token or dimensionless error), task/seed paired samples",
+    "n_min_fresh": 5,
+    "components": [
+      "u_seed",
+      "u_eval",
+      "u_num"
+    ],
+    "combined_standard": "u_c=sqrt(u_seed^2+u_eval^2+u_num^2) for independent components; include covariance otherwise",
+    "coverage_factor": 2,
+    "expanded": "U=k_cov*u_c; only indicative with 5 worlds, bootstrap interval primary",
+    "runtime": "u_t=sqrt(u_repeat^2+u_clock^2) in seconds",
+    "storage": "actual byte count is exact for fixed serialization",
+    "sequential_stop": "perform all five frozen fresh worlds, do not early-stop for favorable result or tune on audit data"
+  }
 }
