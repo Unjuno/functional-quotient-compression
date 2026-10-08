@@ -1,7 +1,28 @@
 {
   "dataset": "MovieLens-100K",
   "url": "https://files.grouplens.org/datasets/movielens/ml-100k.zip",
-  "archive_sha256": "pending download after protocol freeze",
-  "license_and_card": "recorded from GroupLens README after download",
-  "not_in_git": true
+  "archive_bytes": 4924029,
+  "archive_sha256": "50d2a982c66986937beb9ffb3aa76efe955bf3d5c6b761f4e3a7cd717c6a3229",
+  "ratings_sha256": "06416e597f82b7342361e41163890c81036900f418ad91315590814211dca490",
+  "readme_sha256": "4883b8cf340ed0059971b33f56ad3adc88a40792108ebca3d24aafc4c82e8b52",
+  "license_and_card": "ml-100k/README in archive",
+  "split": "stable timestamp order; 70000 train, 10000 dev, 20000 audit",
+  "train_rare_items_1_to_5": 412,
+  "train_cold_items_0": 109,
+  "train_common_items_ge_6": 1161,
+  "audit_rare_events": 512,
+  "audit_cold_events": 438,
+  "audit_common_events": 19050,
+  "not_in_git": true,
+  "split_positive_rates": {
+    "train": 0.55668569,
+    "dev": 0.5104,
+    "audit": 0.56515002
+  },
+  "baseline_diagnostics": {
+    "train_prevalence": 0.5566856861114502,
+    "audit_constant_logloss": 0.6847792949756764,
+    "audit_constant_auc": 0.5,
+    "learned_models_all_have_audit_logloss_gt": 0.81
+  }
 }

@@ -35,3 +35,11 @@ DHE's deterministic hash features already share useful structure; rare-item gain
 This is one small public recommendation dataset with implicit binary labels. It does not establish large-scale recommendation behavior, production GPU throughput, cold-start quality beyond MovieLens, or superiority to optimized TT-Rec/Punica serving kernels. The exact DHE paper implementation is not reproduced.
 
 See `PROTOCOL.json`, `STATUS.md`, `RESULTS_CORE.csv`, and `VERIFICATION.json`.
+
+## Result
+
+**FAIL for this frozen screen.** Across three audit seeds, DHE + Mirror angle + rank-1 residual reached rare-item AUC **0.44456**, only **0.00078** above the byte-near ordinary rank-2 residual control (0.44378), versus the required +0.01. Overall AUC was 0.49622 versus 0.49617 for rank-2 residual. The candidate serialized to **189,240 B**, 344 B larger than that control and 55.6% of the 340,632 B full table. Its batch-1 P95 was **0.200 ms**, about 2.2× DHE's 0.090 ms, failing the 1.2× latency gate.
+
+All learned models performed poorly on this temporal split: candidate audit logloss averaged 0.86783, while a constant train-prevalence predictor scored 0.68478; full lookup AUC was 0.506. For seed 31, DHE train AUC/logloss were 0.695/0.625 versus dev 0.537/0.799; full-table train was 0.814/0.529 versus dev 0.522/0.851. This points to strong temporal generalization failure in this small setup. Only 512 audit events belonged to the train-rare stratum. Treat this as a negative result for the implemented screen, not a general DHE or Mirror conclusion.
+
+Amendment 1 corrected only method metadata in the serialized payload after discovering a Mirror descriptor on non-Mirror controls. Old metrics are preserved in `AMENDMENT1_PRE_CORRECTION.*`; all 18 audit prediction metrics replayed identically, and only corrected method-specific payload byte counts are used above. No model weights, settings, split, seeds or gates changed.

@@ -1,7 +1,17 @@
 {
-  "status": "pending",
+  "status": "verified_fail",
   "protocol_frozen": true,
   "base_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
-  "checks": [],
-  "notes": ["Fresh audit metrics are not recorded yet."]
+  "environment": {"device": "CPU", "torch": "2.6.0+cpu", "torch_threads": 1},
+  "checks": [
+    {"name": "draw replay", "result": "pass", "evidence": "pool hash, seed and index recompute to MA-1064"},
+    {"name": "data provenance", "result": "pass", "evidence": "MovieLens-100K archive SHA-256 and member hashes recorded in source/data_manifest.json"},
+    {"name": "method invariants", "result": "pass", "evidence": "six tests cover deterministic hashes, zero-angle identity, plane norm, rare-ID masking, state accounting and method-accurate metadata"},
+    {"name": "checkpoint selection", "result": "pass", "evidence": "18 architecture/seed checkpoints selected only by development logloss before audit evaluation"},
+    {"name": "fresh audit", "result": "pass", "evidence": "20,000 chronological events evaluated for seeds 31/47/59; 512 events in the train-rare stratum"},
+    {"name": "amendment 1", "result": "pass", "evidence": "method-specific metadata only; all 18 audit prediction metrics are exactly unchanged; pre-correction CSV/JSON retained"},
+    {"name": "serialized bytes", "result": "pass", "evidence": "full inference states serialized as safetensors with user/item weights, hash state, codes, residuals, rare IDs and metadata"},
+    {"name": "frozen decision gates", "result": "fail", "evidence": "rare AUC gain +0.00078 vs +0.01 requirement; candidate batch-1 P95 is 2.2x DHE"}
+  ],
+  "notes": ["All learned methods have audit logloss above the constant predictor and the full-table AUC is 0.506; general recommender quality is not established.", "The audit implementation is DHE-style and does not reproduce the paper's optimized kernel.", "An audit-stage invocation stopped before writing results on a missing bookkeeping field; completed re-evaluation used the same frozen checkpoints and settings."]
 }
