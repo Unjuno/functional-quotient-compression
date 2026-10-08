@@ -62,6 +62,18 @@ The Mirror code reduced cross entropy against the diagonal code on all **8/8** h
 
 Full replay: **48 rows × 14 deterministic fields exact, max difference 0**, CPU wall/forward timing excluded. Code, raw results and report committed. Small CPU condition and two seeds limit the conclusion.
 
+## A cheap exact functional metric for one linear interface
+
+For a frozen linear interface receiving activation vector `h`, let `E = D - D_hat` be the difference between a learned task update and a compressed update. With the **uncentered activation second moment** `Sigma_h = E[h h^T]` on a frozen permitted probe distribution,
+
+`E_h [ || E h ||_2^2 ] = tr(E Sigma_h E^T) = || E Sigma_h^(1/2) ||_F^2.`
+
+This identity is exact for the **local linear preactivation** on that probe distribution. In contrast, raw weight Frobenius `||E||_F` silently assumes every input direction has equal weight. An activation-weighted m-fitting objective can therefore prioritize differences along actually used features; measuring both in-distribution and OOD second moments can reveal hidden losses. Such weighting does not automatically imply that the end-to-end *nonlinear* network task loss is preserved: downstream Jacobians, activation gates and output cross-entropy also matter.
+
+For a stronger task-sensitive probe, weight the local error with downstream output/loss curvature or directly evaluate `||F(x;theta,D)-F(x;theta,D_hat)||` on **held-out inputs**. CG-LoRA and Fora supply direct published examples of selecting or protecting directions using more functional geometry (PA373/PA374). A future m test can compare **weight-SVD**, **activation-weighted SVD**, **function-output-curvature-aware code selection**, and the published native BOLT/task-vector controls, at identical source/calibration and training budgets.
+
+**Data firewall:** estimate `Sigma_h`, curvature and candidate basis from source/calibration tasks only. Fitting m to the held-out task's evaluation labels or oracle standalone LoRA delta leaks the audit and invalidates natural task-transfer claims.
+
 ## Next high-value experiment: function-sensitive versus weight-sensitive m basis
 
 Do **not** simply retry the same held-out test with more Givens rotations and claim a fresh result. A new protocol requires new source/audit splits, fresh seeds, and controls frozen before opening audit.
