@@ -1,0 +1,19 @@
+{
+  "amendment": 1,
+  "change": "No-edit payload now stores only the common paid key/router state and metadata; verifier reconstructs the all-zero behavior deterministically.",
+  "date": "2026-10-08",
+  "experiment_id": "MA-475",
+  "fresh_accessed": false,
+  "metrics_affected": [
+    "no_edit inference_payload_bytes",
+    "no_edit payload_sha256"
+  ],
+  "pre_amendment_runs_preserved": true,
+  "reason": "The no-edit control serialized a full array of 256 zero-valued 64D vectors, charging >65 KB of nonexistent edit state.",
+  "type": "implementation-only serialization correction after development screen",
+  "unchanged": [
+    "all edit-bearing payloads and metrics",
+    "basis, value targets, keys/router, development/fresh seeds",
+    "quality/storage/attribution gates"
+  ]
+}

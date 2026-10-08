@@ -38,7 +38,8 @@ def pack(arr,meta):
 
 def serialize(method,w,basis,code_state):
     obj={'keys':w['keys'].numpy(),'route_radius':np.asarray([RADIUS],np.float32)}
-    if method in ('serac_full','no_edit'):obj.update({'values':(w['values'] if method=='serac_full' else torch.zeros_like(w['values'])).numpy()});family='explicit-serac-value-bank-v1' if method=='serac_full' else 'no-edit-bank-v1'
+    if method=='serac_full':obj.update({'values':w['values'].numpy()});family='explicit-serac-value-bank-v1'
+    elif method=='no_edit':family='no-edit-bank-v1'
     elif method in ('mirror_pca','native_pca'):obj.update({'value_basis':basis.numpy(),'value_codes':code_state.numpy()});family='rank8-shared-pca-value-bank-v1'
     else:
         q,scale=code_state;obj.update({'value_int8':q.numpy(),'value_scales':scale.numpy()});family='per-value-symmetric-int8-v1'

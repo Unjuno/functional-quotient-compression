@@ -26,3 +26,11 @@ def test_shared_pca_serialization_aliases_native_control():
     a=run.serialize('mirror_pca',w,basis,codes)
     b=run.serialize('native_pca',w,basis,codes)
     assert a==b
+
+
+def test_no_edit_payload_does_not_store_value_arrays():
+    w=run.world(47501);raw=run.serialize('no_edit',w,None,None)
+    import io,numpy as np
+    with np.load(io.BytesIO(raw),allow_pickle=False) as z:
+        assert 'values' not in z.files
+        assert 'keys' in z.files

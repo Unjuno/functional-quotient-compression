@@ -13,7 +13,8 @@ def replay(root):
             path=d/f'{method}_payload.npz';raw=path.read_bytes()
             with np.load(path,allow_pickle=False) as z:a={k:np.array(z[k]) for k in z.files if not k.startswith('__')}
             if len(raw)!=m['inference_payload_bytes'] or hashlib.sha256(raw).hexdigest()!=m['payload_sha256']:errors.append(f'{seed}/{method}: payload bytes/hash mismatch')
-            if method in ('serac_full','no_edit'):values=torch.tensor(a['values'])
+            if method=='serac_full':values=torch.tensor(a['values'])
+            elif method=='no_edit':values=torch.zeros(N,D)
             elif method in ('mirror_pca','native_pca'):values=torch.tensor(a['value_codes'])@torch.tensor(a['value_basis']).T
             else:values=torch.tensor(a['value_int8']).float()*torch.tensor(a['value_scales'])
             keys=torch.tensor(a['keys']);errs=[];routes=[];false=[]
