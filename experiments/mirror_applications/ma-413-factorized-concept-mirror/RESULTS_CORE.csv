@@ -1,0 +1,7 @@
+condition,world_or_seed,method,serialized_bytes,train_tokens_or_examples,optimizer_updates,active_compute_proxy,wall_time_s,primary_metric,primary_value,secondary_metric,secondary_value,status_note
+fresh_mean,41310-41312,shared,10397,38400,300,4032 MAC/example,0.122,heldout_11_accuracy,0.7007,seen_accuracy,0.6969,shared baseline
+fresh_mean,41310-41312,factor_mirror,10649,38400,300,4040 MAC/example,0.218,heldout_11_accuracy,0.7072,seen_accuracy,0.7070,FAIL misses 5pp Mirror-specific margin
+fresh_mean,41310-41312,factor_film,11605,38400,300,4128 MAC/example,0.188,heldout_11_accuracy,0.6845,seen_accuracy,0.6878,simple factorized control
+fresh_mean,41310-41312,factor_rank1,11477,38400,300,7104 MAC/example,0.246,heldout_11_accuracy,0.6890,seen_accuracy,0.6948,simple low-rank control
+fresh_mean,41310-41312,direct_table,10649,38400,300,4040 MAC/example,0.227,heldout_11_accuracy,0.6997,seen_accuracy,0.7067,untrained held-out code remains zero
+fresh_mean,41310-41312,oracle_independent,35293,38400,300,4032 MAC/example,0.279,heldout_11_accuracy,0.6554,seen_accuracy,0.6407,underfit oracle; trained on all four combinations
