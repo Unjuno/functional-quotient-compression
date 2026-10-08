@@ -17,7 +17,9 @@ MA-261 is **FAIL** against the literal frozen gate. Its source branch claimed 4/
 
 MA-265 is **FAIL**: four fresh aligned rotation worlds had numerical-zero task error, but the 3,494B Mirror payload saved only 4.4% versus 3,654B VeRA, below the frozen 20% storage gate. Independent scale codes failed, and a separate 1,000-update diagonal-code protocol also lost to native VeRA at development. See `experiments/mirror_applications/ma-265-vera-mirror-scaling/README.md`.
 
-**The next candidate is MA-268.** MA-876..1115 remain appended research-intake hypotheses and must not preempt the registered P0 crossovers. Natural variation and benchmark-level runtime remain unproven; aligned synthetic PROMISING must not be described as real-world Mirror adoption.
+MA-268 is **PROMISING only for its trained nonlinear aligned task screen**: it passed the frozen quality/byte gate in 3/3 fresh worlds at 4,167B versus 4,273B IA3 and 7,933B independent, but used 1.5x IA3 active MACs and had about 0.29–0.34x IA3 eager CPU throughput. A separate post-fit linear orbit screen saved 15.7% versus IA3, below its 20% byte gate. See `experiments/mirror_applications/ma-268-ia3-mirror-views/`.
+
+**The next candidate is MA-271.** MA-876..1115 remain appended research-intake hypotheses and must not preempt the registered P0 crossovers. Natural variation and benchmark-level runtime remain unproven; aligned synthetic PROMISING must not be described as real-world Mirror adoption.
 
 ## MA-241 — layer-specific Mirror views over tied experts
 
