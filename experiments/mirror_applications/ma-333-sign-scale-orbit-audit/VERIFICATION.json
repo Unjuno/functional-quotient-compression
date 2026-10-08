@@ -1,9 +1,25 @@
 {
   "experiment_id": "MA-333",
-  "commit": "pending",
-  "tests": {"command": "python -m pytest -q experiments/mirror_applications/ma-333-sign-scale-orbit-audit/tests", "passed": 4, "failed": 0},
-  "serialization": {"roundtrip_checked": true, "byte_exact": true, "symmetry_rows_checked": 20, "max_metric_replay_difference": 0.0},
-  "metric_replay": {"checked": true, "max_difference": 0.0},
+  "commit": "7e620033e865f1cd8fa6dfa1871d56539b718caf",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-333-sign-scale-orbit-audit/tests",
+    "passed": 4,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "symmetry_rows_checked": 20,
+    "max_metric_replay_difference": 0.0
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
   "fresh_split_integrity_checked": true,
-  "notes": ["FP32 ReLU positive scale max symmetry difference <=2.98e-6 and tanh sign flip difference 0 across fresh seeds.", "FP16 quantization is separated: base/view cross-payload discrepancy reached 0.0108 for ReLU; tanh sign-only transform retained exact values.", "Sign/scale codes and archive metadata were charged; these parameter views do not create distinct functions."]
+  "notes": [
+    "FP32 ReLU positive scale max symmetry difference <=2.98e-6 and tanh sign flip difference 0 across fresh seeds.",
+    "FP16 quantization is separated: base/view cross-payload discrepancy reached 0.0108 for ReLU; tanh sign-only transform retained exact values.",
+    "Sign/scale codes and archive metadata were charged; these parameter views do not create distinct functions."
+  ]
 }
