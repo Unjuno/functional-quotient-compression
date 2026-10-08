@@ -1,0 +1,11 @@
+# MAT03 suggested next experiment — fix the meaningful single-forward test
+
+**DESIGN ONLY — NOT preregistered for fresh execution.** MAT01/MAT02 failures do not imply all short Mirror codes fail, but reveal two unconfounded issues: (1) source rank4 basis misses large image perturbations; (2) source-target image shifts yield distinct **inputs** and hence require separate frozen encoders for quality, making the common-input latency microbenchmark nonrepresentative.
+
+1. Real same-input multitask dataset: every task reads the **identical original 8x8 image**. Native supervised targets should include original digit class and independent pixel-derived spatial property labels (quadrant occupancy, local asymmetry, texture), not merely simple deterministic re-encodings of digit class. Share the same train/test original ID split across methods.
+2. Train the trunk end-to-end with multiple heads, compare native one-trunk multihead and independent LoRA/private heads at equal compute; small m Mirror output and hidden transforms; equivalent ordinary Givens code, linear/factorized multi-head, IA3/FiLM, and BatchEnsemble-style rank-one fast weights.
+3. Keep K=2/4/5/8/16 distinct and no privileged first experiment. Physically instrument the shared trunk with a call counter, true forward/backward time, actual NPZ bytes, and whole task quality; no K-times redundant trunk as the only control.
+4. Independently sweep learned source basis rank R={4,8,16} on separate heldout task worlds, and true private rank q={0,1,2}; charge source basis cost. Conduct source-target embedding overlap/functional Jacobian projections BEFORE explaining a failure as an inevitable capacity limit.
+5. Freeze a brand-new immutable protocol and new fresh seeds (do not re-use MAT01 or MAT02's opened sets) before opening results. Compare at equal serialized storage and true native single-forward compute. Require a quality/bytes/latency Pareto benefit over ordinary 4-coefficient linear/Givens heads before attributing success to Mirror.
+
+Explicit H: a shared representation with sufficient information to predict multiple useful tasks may enable short m code branches, but an ordinary native output head can already factor through the same z; only a strict differential benefit over this head is Mirror-specific.

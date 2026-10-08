@@ -1,0 +1,205 @@
+{
+  "dtype": "torch float32, SVD float64, NPZ float32 arrays",
+  "environment": {
+    "numpy": "2.3.5",
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.41",
+    "python": "3.13.5",
+    "torch": "2.10.0+cpu"
+  },
+  "limitations": {
+    "independent_natural_dataset_worlds": false,
+    "native_LoGo_reproduced": false,
+    "natural_LLM_or_GPU_benchmark": false,
+    "shared_inference_runtime_uses_same_canonical_input_per_role": "Yes: this measures a shared-trunk readout kernel, not inference for four different corrupted image inputs; per-role transformed images require distinct encoder work."
+  },
+  "mat01": {
+    "NPZ_physical_bytes_positive": true,
+    "all_values_finite": true,
+    "dev_rows": 72,
+    "dev_seeds": [
+      11,
+      12,
+      13
+    ],
+    "fresh_rows": 120,
+    "fresh_seeds": [
+      101,
+      102,
+      103,
+      104,
+      105
+    ],
+    "matched_world_nll": {
+      "101": {
+        "base": 3.0649993792176247,
+        "diag4": 2.45157478004694,
+        "fullcore16": 1.7932870015501976,
+        "linear4": 2.2788461446762085,
+        "mirror4": 2.61334078758955,
+        "native_lora4": 0.8007652163505554
+      },
+      "102": {
+        "base": 3.1602998971939087,
+        "diag4": 2.5810167491436005,
+        "fullcore16": 1.6484998017549515,
+        "linear4": 1.9983173310756683,
+        "mirror4": 2.410222753882408,
+        "native_lora4": 0.8407625257968903
+      },
+      "103": {
+        "base": 3.5657221972942352,
+        "diag4": 2.6847933158278465,
+        "fullcore16": 1.858661964535713,
+        "linear4": 2.376101963222027,
+        "mirror4": 2.8911465108394623,
+        "native_lora4": 0.8027193993330002
+      },
+      "104": {
+        "base": 2.9628146439790726,
+        "diag4": 2.2360202074050903,
+        "fullcore16": 1.524837389588356,
+        "linear4": 2.0036560967564583,
+        "mirror4": 2.444984421133995,
+        "native_lora4": 0.7303064167499542
+      },
+      "105": {
+        "base": 3.3709916323423386,
+        "diag4": 2.5665348768234253,
+        "fullcore16": 1.7295104339718819,
+        "linear4": 2.194545954465866,
+        "mirror4": 2.4902651757001877,
+        "native_lora4": 0.9602344334125518
+      }
+    },
+    "methods": [
+      "base",
+      "diag4",
+      "fullcore16",
+      "linear4",
+      "mirror4",
+      "native_lora4"
+    ],
+    "no_repeated_physical_copy_rows": true,
+    "roles": [
+      "dropout020",
+      "lower_right1",
+      "noise025",
+      "upper_left1"
+    ],
+    "same_source_basis_within_seed": true,
+    "true_dataset_hash_consistent": true,
+    "unique_seed_method_role": true
+  },
+  "mat02": {
+    "NPZ_physical_bytes_positive": true,
+    "all_values_finite": true,
+    "dev_rows": 96,
+    "dev_seeds": [
+      21,
+      22,
+      23
+    ],
+    "fresh_rows": 160,
+    "fresh_seeds": [
+      201,
+      202,
+      203,
+      204,
+      205
+    ],
+    "matched_world_nll": {
+      "201": {
+        "base": 2.941825360059738,
+        "fullcore16_private1": 0.8613022789359093,
+        "linear4": 2.230316184461117,
+        "linear4_private2": 0.8146635144948959,
+        "mirror4": 2.651377320289612,
+        "mirror4_private2": 0.8638654500246048,
+        "native_lora2": 1.0217681527137756,
+        "native_lora4": 0.7162785530090332
+      },
+      "202": {
+        "base": 3.064803756773472,
+        "fullcore16_private1": 1.075800359249115,
+        "linear4": 2.157949134707451,
+        "linear4_private2": 0.9270595908164978,
+        "mirror4": 2.5480955317616463,
+        "mirror4_private2": 0.9476417601108551,
+        "native_lora2": 0.9881938546895981,
+        "native_lora4": 0.8693964332342148
+      },
+      "203": {
+        "base": 3.055592693388462,
+        "fullcore16_private1": 1.017439603805542,
+        "linear4": 2.2194597870111465,
+        "linear4_private2": 0.9636188298463821,
+        "mirror4": 2.6241507828235626,
+        "mirror4_private2": 0.9312621206045151,
+        "native_lora2": 0.9595038294792176,
+        "native_lora4": 0.7678622454404831
+      },
+      "204": {
+        "base": 2.928826481103897,
+        "fullcore16_private1": 1.079786702990532,
+        "linear4": 2.429111488163471,
+        "linear4_private2": 0.809159979224205,
+        "mirror4": 2.65163017809391,
+        "mirror4_private2": 0.8196156024932861,
+        "native_lora2": 0.8572408109903336,
+        "native_lora4": 0.8140340894460678
+      },
+      "205": {
+        "base": 3.0755582228302956,
+        "fullcore16_private1": 1.0866233855485916,
+        "linear4": 2.3010179698467255,
+        "linear4_private2": 0.9302574098110199,
+        "mirror4": 2.5865325927734375,
+        "mirror4_private2": 0.9702742546796799,
+        "native_lora2": 0.9537905603647232,
+        "native_lora4": 0.8385419398546219
+      }
+    },
+    "methods": [
+      "base",
+      "fullcore16_private1",
+      "linear4",
+      "linear4_private2",
+      "mirror4",
+      "mirror4_private2",
+      "native_lora2",
+      "native_lora4"
+    ],
+    "no_repeated_physical_copy_rows": true,
+    "roles": [
+      "dropout020",
+      "lower_right1",
+      "noise025",
+      "upper_left1"
+    ],
+    "same_source_basis_within_seed": true,
+    "true_dataset_hash_consistent": true,
+    "unique_seed_method_role": true
+  },
+  "original_unit_tests": {
+    "MAT01": 9,
+    "MAT02": 5,
+    "prior_batch_regression": 17
+  },
+  "protocol_commits": {
+    "MAT01": "5d4c37a1ba70b162fa09bbe2182a4e2d206f5eac",
+    "MAT02": "c7b7b517c66d757930baf4b7054535c13a0dcf2a"
+  },
+  "results_hashes": {
+    "results/RESULTS_CORE.csv": "dc60c33a79fe81dcad4854db4b2c4c6eec7cb0f627a02649f529957a4d47cd9e",
+    "results/mat01/dev_raw.csv": "d0fb1bb3430b3e65c4f274479abebec5cd226e40ee147084c7817b4d940c4167",
+    "results/mat01/fresh_raw.csv": "2fbd40699d6a26b0f40ec42f87489f586adfae5a2eb3c9c10f6f367cdb6d5613",
+    "results/mat02/dev_raw.csv": "bc1801198f4d93bcc1687b93f76096a8b272d9cf56e5b72dc29303ddad38b0cf",
+    "results/mat02/fresh_raw.csv": "25337d1455fcc595f3abf26f259bc4756c5b0d6f3ef7246ef3ab8d8535b815b9"
+  },
+  "source_hashes": {
+    "source/run_mat01.py": "3873554e1f2ad30e1e847ac31a74b197477d2f47a68f65d26ca4a5025432743c",
+    "source/run_mat02.py": "ee729a05c1e883403d43d17190a0fed927e0daabbea5433ab68e71337a31cda5",
+    "source/test_mat01.py": "00526f937d53b55bc1acd529c337f8005ea1353e603ecf3ee18e71ec9e04383f",
+    "source/test_mat02.py": "9acca2320d1951f80574f3c10bb73f89af4471a4558089b0c33975362fc74ddf"
+  }
+}
