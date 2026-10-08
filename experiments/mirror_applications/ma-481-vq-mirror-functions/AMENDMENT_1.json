@@ -1,0 +1,8 @@
+{
+  "amendment_id": "AMENDMENT_1",
+  "experiment_id": "MA-481",
+  "date": "2026-10-08",
+  "reason": "The frozen protocol explicitly requires shared decode operations and index decode operations in the compute report; the initial runner included fit and query counts but omitted these accounting fields.",
+  "scope": "Accounting-only. No task, seed, hyperparameter, fit procedure, quality metric, serializer, thresholds or control changes. The original development outputs are preserved under runs/pre_amendment_dev_48101 and runs/pre_amendment_dev_48102. Re-run the same frozen development seeds and add decode wall time, shared_decode_ops, index_decode_ops and vq_fit_ops. Fresh seeds remain sealed.",
+  "approval": "Worker amendment before any fresh/audit access"
+}

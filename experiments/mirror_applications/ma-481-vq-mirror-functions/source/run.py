@@ -58,7 +58,7 @@ def serialize(method,state):
  return pack(obj,{'format':'MA481-logical-linear-function-bank-v1','method_family':fam,'functions':N,'input_dim':D,'output_dim':D,'latent_rank':R,'vq_size':state.get('k')})
 
 def evaluate(method,w,seed):
- state,wall,fitops=fit(w,method,seed);predmat=reconstruct(method,state);start=time.perf_counter();pred=torch.stack([w['queries'][e]@predmat[e].T for e in range(N)])
+ state,wall,fitops=fit(w,method,seed);decode_start=time.perf_counter();predmat=reconstruct(method,state);decodewall=time.perf_counter()-decode_start;start=time.perf_counter();pred=torch.stack([w['queries'][e]@predmat[e].T for e in range(N)])
  errors=(pred[TRAIN:]-w['outputs'][TRAIN:]);rmse=float(torch.sqrt(torch.mean(errors**2)));qwall=time.perf_counter()-start
  m=method.replace('mirror_','').replace('native_','')
  if m.startswith('vq'):uniq=int(torch.unique(state['indices'][TRAIN:]).numel());unique_fraction=uniq/(N-TRAIN)
@@ -66,7 +66,8 @@ def evaluate(method,w,seed):
  elif m=='int8':unique_fraction=float(torch.unique(state['q'][TRAIN:],dim=0).shape[0]/(N-TRAIN))
  else:unique_fraction=1.0
  raw=serialize(method,state);ops=(N-TRAIN)*QPER*D*D
- metrics={'heldout_function_rmse':rmse,'distinct_address_fraction':unique_fraction,'unique_heldout_addresses':int(round(unique_fraction*(N-TRAIN))),'inference_payload_bytes':len(raw),'payload_sha256':hashlib.sha256(raw).hexdigest(),'fit_wall_s':wall,'query_wall_s':qwall,'fit_ops_proxy':fitops,'decode_ops_per_function':D*D*R if m!='independent' else D*D,'query_ops_proxy':ops,'active_ops_proxy':fitops+ops,'optimizer_updates':0,'examples_seen':N*QPER}
+ decode=N*R*D*D if m!='independent' else 0;index=N*R if m in ('continuous','int8') else (N*(R+1) if m.startswith('vq') else 0)
+ metrics={'heldout_function_rmse':rmse,'distinct_address_fraction':unique_fraction,'unique_heldout_addresses':int(round(unique_fraction*(N-TRAIN))),'inference_payload_bytes':len(raw),'payload_sha256':hashlib.sha256(raw).hexdigest(),'fit_wall_s':wall,'decode_wall_s':decodewall,'query_wall_s':qwall,'fit_ops_proxy':fitops,'vq_fit_ops':fitops if m.startswith('vq') else 0,'shared_decode_ops':decode,'index_decode_ops':index,'decode_ops_per_function':D*D*R if m!='independent' else D*D,'query_ops_proxy':ops,'active_ops_proxy':fitops+decode+index+ops,'optimizer_updates':0,'examples_seen':N*QPER}
  return metrics,raw
 
 def run(seed,out):

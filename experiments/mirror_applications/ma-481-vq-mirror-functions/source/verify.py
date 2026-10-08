@@ -21,7 +21,8 @@ def replay(root):
     else:codes=torch.tensor(a['vq_centers'])[torch.tensor(a['function_indices']).long()]
     mat=(codes@atoms).reshape(N,D,D)
    pred=torch.stack([w['queries'][e]@mat[e].T for e in range(N)]);rmse=float(torch.sqrt(torch.mean((pred[TRAIN:]-w['outputs'][TRAIN:])**2)))
-   if abs(rmse-m['heldout_function_rmse'])>1e-7:errors.append(f'{seed}/{method}: function RMSE replay mismatch')
+   diff=abs(rmse-m['heldout_function_rmse']);mx=max(mx,diff)
+   if diff>1e-7:errors.append(f'{seed}/{method}: function RMSE replay mismatch')
   for k in (16,64,128):
    a=(d/f'mirror_vq{k}_payload.npz').read_bytes();b=(d/f'native_vq{k}_payload.npz').read_bytes()
    if a!=b:errors.append(f'{seed}: native VQ{k} mismatch')
