@@ -1,0 +1,113 @@
+{
+  "experiment_id": "MA-539",
+  "decision": "FAIL for Mirror-specific gate",
+  "base_commit": "28194ea",
+  "branch": "research/ma-539-packet-function-vector-20261008",
+  "selected_q": 2,
+  "selected_ridge": 0.0,
+  "development_seeds": [
+    53901,
+    53902
+  ],
+  "fresh_seeds": [
+    53911,
+    53912,
+    53913
+  ],
+  "freeze_hashes": {
+    "source_sha256": "ea590903b02bee952f5ba22a9ec588e3220a9f88e969556ba09ae923ad47f0e9",
+    "protocol_sha256_before_fresh": "bb4fd021d18b33a62493fac8820a9a9978bc1fd0ed44c62ebf730223e72312fc",
+    "frozen_config_sha256": "58224763a6480a8ad1855a730494208c081b8a3220d79357703cf55745998f57"
+  },
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-539-packet-function-vector/tests -v",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "actual_byte_payloads": true,
+    "roundtrip_checked": true,
+    "payload_hashes_recorded": true,
+    "every_code_basis_private_weight_and_metadata_paid": true
+  },
+  "metric_replay": {
+    "fresh_rows": 12,
+    "exact_metric_payload_compute_replay": true,
+    "tolerance": 1e-12
+  },
+  "fresh_summary": {
+    "hard_shared": {
+      "serialized_bytes": 281,
+      "mean_normalized_packet_mse": 0.8060502804985337,
+      "mean_exact_sign_packet_accuracy": 0.26318359375,
+      "inference_macs_proxy": 65536,
+      "mean_wall_clock_test_s": 0.0007104126658911506,
+      "payload_hashes": [
+        "396190707e3e8f1acd02c91e6a870d6ea59ecfc80ede5f7f8c03d1325bd190d7",
+        "b3c6c1bbddde8ce5e96b463058b911446fa0e9c6eb2410fe65d720206ebbea44",
+        "56b1eabd64c4970665aa5765d0746a83f357835d9bdd03f3af22340aa27ad065"
+      ]
+    },
+    "independent_task_slot_upper": {
+      "serialized_bytes": 1544,
+      "mean_normalized_packet_mse": 6.391014825924323e-16,
+      "mean_exact_sign_packet_accuracy": 1.0,
+      "inference_macs_proxy": 65536,
+      "mean_wall_clock_test_s": 0.0006575996667379513,
+      "payload_hashes": [
+        "dbb398e50f45e37c09a0caa4d6b4ac1095dbcd278a1a4082b274f6d0dc57f501",
+        "2e085505ceafe796619dcdbcbe5f3e491acb3389b719a34e9870cf5c22c18936",
+        "868cf8ef0ca592281eccfaf818fe3be78a20e44166ea3d89dead7eeb931d0c9a"
+      ]
+    },
+    "mirror_function_vector": {
+      "serialized_bytes": 1106,
+      "mean_normalized_packet_mse": 1.0977726629046492e-15,
+      "mean_exact_sign_packet_accuracy": 1.0,
+      "inference_macs_proxy": 221184,
+      "mean_wall_clock_test_s": 0.0006957636663476782,
+      "payload_hashes": [
+        "143684b7f1124bbe653d2346fcdba4b637c968dc0441869a4cd0998dc12929fb",
+        "f44adb9c99ba4df425608235ad582bf3ea8a48e9d1670f4b5cb8defa97b9cc9f",
+        "d806caa645810cf580a94e70c75adaca626723587402dd7b333e996c199c624d"
+      ]
+    },
+    "ptp_shared_packet_latent": {
+      "serialized_bytes": 1041,
+      "mean_normalized_packet_mse": 1.0977726629046492e-15,
+      "mean_exact_sign_packet_accuracy": 1.0,
+      "inference_macs_proxy": 196608,
+      "mean_wall_clock_test_s": 0.0007099316668851922,
+      "payload_hashes": [
+        "8be215d1fb369180329aae1c777c8cc07e30ed98c568e78fc9d121706d65c019",
+        "964de72c74f5c997643deb6ae68c50454dd70fe6b8e8859633705de1c292d9e6",
+        "7670d219d90611f3bede4de77b07136ec09a8180a0920416229a8f9fbebcc3af"
+      ]
+    }
+  },
+  "selection": {
+    "pool_size": 456,
+    "draw_index_zero_based": 133,
+    "selected": "MA-539",
+    "pool_id_sha256": "f76c0389412aed1704aa9011edd75792fe40a1ff2db96bb12b383b359e649f0e",
+    "pool_file_sha256": "643f6b0ca1787becdd2c86a6be1d1788bfdc9c459043e8021976be50efae2e71",
+    "snapshot": "source/selection_pool.csv",
+    "branch_conflict_found": false
+  },
+  "environment": {
+    "python_numpy": "2.3.5",
+    "device": "CPU only",
+    "torch": "not installed"
+  },
+  "invalidated_pre_fresh_attempts": [
+    {
+      "reason": "A preliminary development sweep exposed that the teacher basis initially had only rank 2 while the planned q=4 selection candidate accessed four components. Basis generation was corrected and development was rerun before source freeze; no fresh seed had been accessed."
+    }
+  ],
+  "claim_boundary": [
+    "Linear synthetic packet outputs only.",
+    "Function-vector codes are inferred from support examples; generic PTP codes use the same support and rank.",
+    "The generic PTP latent matched the function vector at lower bytes and MACs.",
+    "No language, nonlinear decoder, hidden packet randomness, or capacity inference."
+  ]
+}

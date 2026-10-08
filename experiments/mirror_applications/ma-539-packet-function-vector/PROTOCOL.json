@@ -1,0 +1,107 @@
+{
+  "experiment_id": "MA-539",
+  "title": "Packet-level function vector",
+  "status": "FAIL",
+  "evidence_lane": [
+    "MECHANISM",
+    "STORAGE",
+    "RUNTIME"
+  ],
+  "base_commit": "28194ea",
+  "hypothesis": "One compact task function vector shared across all packet slots can encode slot-coupled functions with a better payload/quality point than a generic PTP packet latent, including the cost of private exceptions.",
+  "physical_object": "shared linear context-to-packet function basis",
+  "mirror_coordinate": "rank-q task function vector m_t inferred from labeled support examples and shared over P=4 slots",
+  "logical_multiplicity": "task-specific four-slot packet functions from a shared decoder; six aligned tasks plus two private exceptions",
+  "prior_art_refs": [
+    "PA99",
+    "PA10",
+    "MA-121",
+    "TM001"
+  ],
+  "selection": {
+    "method": "secrets.randbelow over sorted eligible P0/UNTESTED IDs after exclusions",
+    "pool_size": 456,
+    "draw_index_zero_based": 133,
+    "selected_id": "MA-539",
+    "pool_ids_sha256": "f76c0389412aed1704aa9011edd75792fe40a1ff2db96bb12b383b359e649f0e",
+    "snapshot": "source/selection_pool.csv",
+    "ma_branch_conflict_found": false,
+    "exclusions": "previously completed worker IDs and paused families listed in prior draw record",
+    "pool_file_sha256": "643f6b0ca1787becdd2c86a6be1d1788bfdc9c459043e8021976be50efae2e71"
+  },
+  "task": {
+    "tasks": 8,
+    "slots_per_packet": 4,
+    "input_dim": 8,
+    "aligned_tasks": 6,
+    "private_tasks": 2,
+    "dtype": "float32"
+  },
+  "methods": [
+    "hard_shared",
+    "ptp_shared_packet_latent",
+    "mirror_function_vector",
+    "independent_task_slot_upper"
+  ],
+  "rank_candidates": [
+    1,
+    2,
+    4
+  ],
+  "ridge_penalties": [
+    0,
+    0.0001,
+    0.01
+  ],
+  "data": {
+    "support_examples_per_task": 64,
+    "test_examples_per_task": 256,
+    "target": "four continuous teacher outputs per context",
+    "secondary_metric": "exact four-slot sign packet accuracy"
+  },
+  "development": {
+    "worlds_or_seeds": [
+      53901,
+      53902
+    ],
+    "selection_metric": "choose the smallest q with mean Mirror normalized MSE <=1e-6; within that q choose ridge penalty with lowest mean MSE"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      53911,
+      53912,
+      53913
+    ],
+    "locked_before_access": true,
+    "source_sha256_at_freeze": "ea590903b02bee952f5ba22a9ec588e3220a9f88e969556ba09ae923ad47f0e9",
+    "protocol_sha256_at_freeze": "bb4fd021d18b33a62493fac8820a9a9978bc1fd0ed44c62ebf730223e72312fc",
+    "frozen_config_sha256": "58224763a6480a8ad1855a730494208c081b8a3220d79357703cf55745998f57"
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "shared base functions",
+      "rank-q shared slot basis",
+      "per-task function/latent codes",
+      "private task-slot weights",
+      "projection maps if any",
+      "metadata and serializer header"
+    ]
+  },
+  "compute": {
+    "optimizer_updates": 0,
+    "report_fit_examples": true,
+    "report_code_fit_flops": true,
+    "report_inference_macs": true,
+    "report_isolated_wall_clock": true,
+    "report_payload_bytes": true
+  },
+  "success_gate": "3/3 fresh seeds meet Mirror MSE <=1.05x PTP and exact packet accuracy within 0.01; actual Mirror payload <=0.90x PTP; inference MAC proxy <=1.25x.",
+  "failure_gate": "Quality gates pass but actual payload reduction is <10%, or either fresh quality gate fails.",
+  "boundaries": [
+    "Synthetic linear packet mechanism only.",
+    "Task function codes are inferred from labeled support examples; no oracle target code is provided at inference beyond serialized code.",
+    "No natural-language, pretrained Transformer, hidden random packet mode, or capacity claim.",
+    "The function-vector method and generic PTP latent are matched in rank and basis by design."
+  ]
+}
