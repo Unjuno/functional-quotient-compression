@@ -1,0 +1,88 @@
+{
+  "experiment_id": "MA-311",
+  "title": "Mirror task codes inside a random intrinsic subspace",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/COMPUTE",
+  "base_commit": "bfabb6e",
+  "hypothesis": "After all task updates are fitted in the same frozen random intrinsic subspace, one shared intrinsic vector plus compact Givens Mirror coordinates represents aligned tasks with lower serialized task-code bytes than ordinary intrinsic coefficients, while unrelated tasks fall back to private intrinsic coordinates.",
+  "physical_object": "one fitted 128-value shared base plus a deterministic 128x32 random orthonormal projection basis",
+  "mirror_coordinate": "one int8 scalar per accepted task rotating a shared 32-value intrinsic vector; private 32-value intrinsic coefficient fallback",
+  "logical_multiplicity": "eight task functions: five aligned intrinsic-coordinate tasks and three unrelated tasks",
+  "prior_art_refs": [
+    "PA33"
+  ],
+  "controls": [
+    "hard tied base",
+    "ordinary random-subspace intrinsic task vectors (mandatory PA33 control)",
+    "Mirror orbit code plus private intrinsic-coordinate fallback",
+    "independent full 128-dimensional task vectors"
+  ],
+  "task": {
+    "input_dim": 128,
+    "intrinsic_dim": 32,
+    "tasks": 8,
+    "teacher": "first task defines shared base; next four deltas are Givens-orbit members in the random subspace; final three deltas are unrelated random subspace vectors",
+    "metric": "mean normalized held-out output MSE from deserialized payload"
+  },
+  "development": {
+    "worlds": [
+      31110,
+      31111
+    ],
+    "view_acceptance_thresholds": [
+      0.0001,
+      0.001,
+      0.01
+    ],
+    "support_examples_per_task": 512,
+    "validation_examples_per_task": 256,
+    "updates": 0,
+    "selection_metric": "smallest fixed validation threshold accepting all four non-anchor aligned tasks and rejecting all unrelated tasks to private intrinsic fallback"
+  },
+  "fresh": {
+    "worlds": [
+      31112,
+      31113,
+      31114
+    ],
+    "locked_before_access": true,
+    "locked_threshold": 0.001,
+    "access_condition": "Development selects one threshold; fresh evaluation reports quality, actual payload, fit/view-search compute and throughput without retuning."
+  },
+  "training": {
+    "optimizer": "least-squares fit in frozen random intrinsic basis; deterministic grid fit of task angles",
+    "gradient_updates": 0,
+    "threads": 1
+  },
+  "storage": {
+    "authority": "actual deterministic compact serialized inference payload bytes",
+    "serialization": "uint16 JSON-header length plus little-endian state tensors",
+    "paid_objects": [
+      "shared base vector",
+      "all task coefficient or Mirror angle/private coordinate codes",
+      "projection seed and deterministic QR recipe metadata",
+      "task records and codec metadata",
+      "full independent task vectors in upper reference"
+    ]
+  },
+  "compute": {
+    "report_examples": true,
+    "report_updates": true,
+    "report_intrinsic_fit_operations": true,
+    "report_angle_search_operations": true,
+    "report_basis_reconstruction_operations": true,
+    "report_wall_time": true,
+    "report_inference_throughput": true
+  },
+  "gates": {
+    "promising": "In all three fresh worlds: all four aligned non-anchor tasks use Mirror coordinates; unrelated tasks use private intrinsic coordinates; Mirror normalized MSE <=1e-4; payload <=0.85x ordinary intrinsic task-vector payload; and full decode/fit operation proxy <=2x ordinary intrinsic control.",
+    "fail": "Mirror misses quality in >=2 fresh worlds or payload saving is <10% in >=2 worlds, or aligned tasks require private fallback in >=2 worlds.",
+    "not_established": "invalid splits, serialization/replay mismatch, or incomplete worlds"
+  },
+  "boundaries": [
+    "synthetic linear functions in a random low-dimensional subspace",
+    "random-subspace fitting is analytical post-fit screen, not language-model training",
+    "no near-convergence capacity or learned task inference claim"
+  ],
+  "protocol_frozen_before_development": true
+}

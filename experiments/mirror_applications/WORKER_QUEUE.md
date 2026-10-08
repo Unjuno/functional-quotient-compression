@@ -71,7 +71,7 @@ Added after the subnetwork/tensor/symmetry sweep. Do not interrupt active work.
 High-information P0:
 1. MA-301 — continuous Mirror supermask
 2. MA-307 — Mirror code before PackNet physical allocation
-3. MA-311 — Mirror task code in intrinsic subspace
+3. ~~MA-311 — Mirror task code in intrinsic subspace~~ (FAIL; see dedicated branch)
 4. MA-312 — shared intrinsic basis + many Mirror task coordinates
 5. MA-314 — adaptive intrinsic-dimension allocation
 6. MA-319 — Tucker matrix-bank Mirror layer coefficients
