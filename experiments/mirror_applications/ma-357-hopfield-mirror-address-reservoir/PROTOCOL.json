@@ -1,0 +1,20 @@
+{
+  "experiment_id": "MA-357",
+  "title": "Hopfield reservoir for Mirror address bank",
+  "status": "FROZEN_BEFORE_DEVELOPMENT",
+  "evidence_lane": "MECHANISM/STORAGE/RETRIEVAL/INTERFERENCE/COMPUTE",
+  "base_commit": "c935a90",
+  "hypothesis": "Modern Hopfield retrieval of binary Mirror addresses recovers corrupted view codes with lower total address bytes than an explicit packed table while retaining decoded function quality and limiting interference as bank size grows.",
+  "physical_object": "one shared linear view decoder and address bank",
+  "mirror_coordinate": "8D view code selected by a 32-bit binary address attractor",
+  "logical_multiplicity": "K logical linear functions, K in {16,64,256}, measured by decoded-view quality and retrieval accuracy",
+  "prior_art_refs": ["PA44", "PA31"],
+  "controls": ["packed explicit exact lookup", "nearest Hamming lookup", "modern Hopfield softmax retrieval"],
+  "development": {"worlds_or_seeds": [35701,35702,35703], "K_values": [16,64,256], "queries_per_K": 2000, "corrupt_bits": "uniform integers 0..8", "selection_metric": "exact view recovery, decoded nMSE, collisions, actual bytes, lookup MACs"},
+  "fresh": {"worlds_or_seeds": [35711,35712,35713], "locked_before_access": true, "open_only_if_all_development_gates_pass": true},
+  "storage": {"authority": "actual serialized ZIP/NPY inference payload bytes after reload", "paid_objects": ["packed or float address attractors", "view codebook", "decoder basis", "indices", "Hopfield temperature", "metadata"]},
+  "compute": {"optimizer_updates": 0, "report_queries": true, "report_lookup_MACs": true, "report_decode_MACs": true, "report_wall_clock": true},
+  "success_gate": "At K=64 and 256: >=99% exact recovery for <=2 bit flips, decoded nMSE <=1e-4, >=10% fewer total bytes than packed explicit table, and query MAC <= explicit lookup.",
+  "failure_gate": "Storage saving <10%, Hamming control matches recovery, quality fails, or Hopfield compute >1.1x Hamming; fresh sealed.",
+  "boundaries": ["synthetic random binary attractors and fixed decoder", "no trained associative memory", "attractor count is not model capacity"]
+}
