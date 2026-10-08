@@ -1,13 +1,14 @@
 # MA-288 status
 
 - Status: PROMISING (aligned state/quality; strict direct-path runtime gate missed)
+- Last verified commit: `4c7610ddbd99e734bd5dd5f7806d511bcd35ef15`
 - Branch: `research/ma-288-fastweight-mirror-context-20261008`
 - Base commit: `e259f27`
 - Development complete: yes
 - Fresh/audit opened: yes, locked seeds only
-- Results committed: pending
-- Verification committed: pending
-- Registry row updated: no
+- Results committed: yes
+- Verification committed: yes
+- Registry row updated: yes
 
 ## Next action
 

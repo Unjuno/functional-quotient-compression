@@ -14,13 +14,7 @@ Use:
 
 ## Selection rule
 
-Pick the first candidate satisfying all of:
-1. status is UNTESTED;
-2. highest available priority;
-3. no other active experiment directory already claims the ID;
-4. its closest prior-art controls can be implemented in the current harness.
-
-Do not skip to a visually interesting P1/P2 idea while an executable P0 remains, unless the skipped candidate has a recorded blocker.
+For the active queue, select randomly among eligible UNTESTED candidates at the highest available priority. Before drawing, record the exact candidate pool; use an operating-system-backed random draw, record the draw value and selected ID in the experiment protocol, then check live branches with `git fetch origin --prune`. Existing worker branches do not silently force sequential selection: if a draw collides, preserve both branches and compare evidence before deciding what to integrate. Do not proceed with non-selected IDs during that experiment. Each next experiment requires a new draw.
 
 ## Literature-derived cross-over queue
 
