@@ -6,27 +6,25 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 875-row registry)
 
 - Registered candidates: **875**
-- P0: **408** (35 completed; 373 UNTESTED)
+- P0: **408** (36 completed; 372 UNTESTED)
 - P1: **364** (12 completed; 352 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **828 UNTESTED, 29 PROMISING, 18 FAIL**
+- Current MA statuses: **827 UNTESTED, 29 PROMISING, 19 FAIL**
 - 47 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - PROMISING is **not** ADOPTED. Treat reports with strict-gate misses or exploratory protocol deviations at their documented scope.
 - SRM/TM and prior Phase I results are not MA statuses.
 
 ## Next candidate
 
-**MA-255 — Mirror context superposition for task models (P0; PA16)**
+**MA-278 — Compacter Mirror hypercomplex adapters (P0; PA23)**
 
 Reason:
-- all previously locked MA-241/244/245/247–251/253 and subsequent old-chain P0 screens have completed;
-- the original P0 cross-over queue is exhausted among checked candidates;
-- MA-255 is the first untested P0 in the earlier high-information literature cross-over queue;
-- direct Parameter Superposition prior art gives a strong nearest control for insertion of the extra Mirror parameter `m`.
+- MA-274 completed a development-only FAIL; fresh worlds remained unopened.
+- BOFT shared-angle scalar-code screens MA-273 and MA-274 both had a small byte advantage but did not retain native BOFT quality. Their family diagnostic is recorded at `experiments/mirror_applications/ma-274-boft-logical-experts/FAMILY_BOFT_MIRROR_DIAGNOSTIC.md`.
+- Defer MA-276 (same scalar-code BOFT family) until that family has a materially redesigned protocol; it remains UNTESTED.
+- MA-278 is the next available direct P0 crossover in another family. Compacter is its mandatory structured-adapter control.
 
-Required controls: native Parameter Superposition, naive/shared task-code basis, matched byte-near low-rank or VeRA-style modulation, independent-model upper reference where practical. Do not claim the superposition concept itself as a Mirror invention.
-
-If blocked by a documented reproducibility or harness issue, record it and resume at MA-260 (BatchEnsemble), then MA-261/265/268 in the registered literature priority sequence. Do not jump to P1/novelty-picked topics before P0.
+Required controls: native Compacter hypercomplex/Kronecker adapters, shared basis with Mirror modulation, and independent adapters. Count bases, factors, code state, actual payload bytes and inference compute.
 
 ## Active experiment
 
