@@ -1,6 +1,6 @@
 # MA-327 — Factorized layer x expert Tucker address
 
-Status: PROTOCOL FROZEN BEFORE DEVELOPMENT
+Status: DEVELOPMENT COMPLETE; amended paired-control protocol frozen before fresh
 Evidence lane: MECHANISM / STORAGE / QUALITY / COMPUTE
 Base commit: <sha>
 Doctrine: `docs/phase2/MIRROR_PARAMETER_INTEGRATION_DOCTRINE.md`
@@ -85,3 +85,8 @@ FACT: pending.
 INTERPRETATION: pending.
 HYPOTHESIS: pending.
 BOUNDARY: synthetic linear Tucker screen only.
+
+
+## Protocol amendment before fresh access
+
+Development showed the ordinary coefficient product and Mirror coefficient product are the same mathematical family. The final fresh run pairs identical initialization and minibatch seeds across those two rows, and fixes the shared bank to two basis matrices, matching the rank-2 address. This amendment was committed before any fresh seed was opened; all gates and fresh seeds stayed fixed.
