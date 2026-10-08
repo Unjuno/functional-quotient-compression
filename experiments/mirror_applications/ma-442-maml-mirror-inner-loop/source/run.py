@@ -20,6 +20,7 @@ def eff(method,base,code,basis):
  if method=='lora':return base+basis@code
  return base
 def adapt(method,base,basis,x,y,steps,lr):
+ if method=='shared':return None
  code=base if method=='full' else torch.zeros(2,requires_grad=True)
  for _ in range(steps):
   pred=x@eff(method,base,code,basis);loss=(pred-y).square().mean();g=torch.autograd.grad(loss,code,create_graph=False)[0].detach();code=code-lr*g
