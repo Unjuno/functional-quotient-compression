@@ -12,6 +12,10 @@ Use:
 - `docs/phase2/MIRROR_PARAMETER_INTEGRATION_DOCTRINE.md`
 - `docs/phase2/MIRROR_PARAMETER_INTEGRATION_MATRIX.md`
 
+## Active worker override (2026-10-08)
+
+For this worker's continuation, use the randomized queue recorded in `draw26_exclusions.json` for MA-341 and subsequent draws: uniformly sample from eligible P0 + UNTESTED IDs after excluding IDs with a live remote `research/ma-*` branch or a pre-existing `experiments/mirror_applications/ma-*` directory. Freeze the complete pool, hash, cryptographic seed, index and replay before inspecting outcome data. Do not follow the numeric or literature queue order for this worker. Concurrent branches remain separate and are not merged automatically.
+
 ## Selection rule
 
 Pick the first candidate satisfying all of:
