@@ -1,6 +1,6 @@
 # Worker queue
 
-**Current operational pointer (2026-10-08): MA-405.** MA-375/379/383/385/389/391/392/393/395/397/399/401/403 have branch or verified results reconciled as FAIL; MA-381 remains scoped PROMISING with strict gates missed. Continue with MA-405.
+**Current operational pointer (2026-10-08): MA-407.** MA-405 is completed FAIL: four-angle weight views trailed StyleGAN-style modulation and FiLM in the synthetic mechanism screen. Continue with MA-407.
 
 The queue is derived from `IDEA_REGISTRY.csv`. The registry is authoritative.
 

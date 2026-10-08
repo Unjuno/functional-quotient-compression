@@ -1,0 +1,10 @@
+{
+  "experiment_id": "MA-405",
+  "protocol_commit": "aa2878d",
+  "tests": {"command": "python -m unittest discover -s experiments/mirror_applications/ma-405-stylegan-mirror-weight-modulation/tests -v", "passed": 2, "failed": 0},
+  "serialization": {"roundtrip_checked": true, "byte_exact": true, "payload_rows": 126, "payload_hashes_replayed": true, "actual_payload_bytes_authoritative": true},
+  "metric_replay": {"checked": true, "max_difference": 0.0, "notes": ["Fresh aggregate values replayed directly from per-run JSONL rows.", "Every saved payload length and SHA-256 matches its result record; serialized state load/save is byte-exact."]},
+  "fresh_split_integrity_checked": true,
+  "fresh_worlds": [40510, 40511, 40512],
+  "notes": ["Synthetic context-conditioned feature-permutation task only.", "Development worlds 40500/40501 selected LR 0.01 before fresh execution.", "All 126 run payloads are retained under artifacts/payloads/."]
+}
