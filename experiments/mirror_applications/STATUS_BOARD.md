@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (164 completed; 466 UNTESTED)
+- P0: **630** (164 completed; 465 UNTESTED; 1 SCREENING)
 - P1: **422** (13 completed; 409 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **121 FAIL, 11 NOT ESTABLISHED, 45 PROMISING, 978 UNTESTED**
+- Current MA statuses: **121 FAIL, 11 NOT ESTABLISHED, 45 PROMISING, 977 UNTESTED, 1 SCREENING**
 - 47 baseline experiment directories remain present; 130 additional per-ID outcomes are linked to their dedicated research branches in `LIVE_BRANCH_RECONCILIATION.csv`.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This was the intake-time queue; current selection follows the live-branch reconciliation at the top of this board.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed at intake time; later live-branch outcomes are indexed above.
@@ -23,14 +23,14 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**Pending live branch refresh.** MA-434 completed its fixed synthetic mechanism screen as FAIL. The next P0 will be selected outside paused families after refetch and reconciliation.
+**MA-436 — routed logical SSM experts (P0; PA73/PA74)** — active; protocol frozen, development screen pending.
 
-MA-434 finished with strong synthetic role differentiation but missed actual-byte savings versus compressed full copies (0.930x) and exactly aliased the native log-decay bias control. This is not full Mamba evidence. The next P0 selection waits for a live branch refresh. The continuous-depth family MA-424..433 remains paused after the repeated native-conditioning alias; see [continuous-depth diagnostic](../../docs/phase2/NEURAL_ODE_MIRROR_FAMILY_DIAGNOSTIC_2026-10-08.md). MA-416..421 remain paused. MA-325 remains NOT ESTABLISHED because the frozen task was unlearnable even for the independent control. MA-369/371/372 remain paused under the documented family rule. The conditional-modulation family MA-401/403/405 and MA-407/408/411/413 remains paused pending a fused-kernel redesign.
+MA-434 finished with strong synthetic role differentiation but missed actual-byte savings versus compressed full copies (0.930x) and exactly aliased the native log-decay bias control. This is not full Mamba evidence. MA-436 is active after a live refresh found no competing MA-436/437 terminal branches. It tests routed SSM expert views versus exact generated weights and full copies. The continuous-depth family MA-424..433 remains paused after the repeated native-conditioning alias; see [continuous-depth diagnostic](../../docs/phase2/NEURAL_ODE_MIRROR_FAMILY_DIAGNOSTIC_2026-10-08.md). MA-416..421 remain paused. MA-325 remains NOT ESTABLISHED because the frozen task was unlearnable even for the independent control. MA-369/371/372 remain paused under the documented family rule. The conditional-modulation family MA-401/403/405 and MA-407/408/411/413 remains paused pending a fused-kernel redesign.
 
 
 ## Active experiment
 
-MA-416 through MA-419, MA-424 and MA-434 are verified development-screen FAILs, with fresh seeds sealed. MA-434's role code improved synthetic NRMSE from 0.20–0.22 to 0.00021–0.00024, but saved only 7.0% actual bytes and exactly aliased a native SSM log-decay bias. See [MA-434 report](ma-434-selective-ssm-mirror-roles/README.md), [verification](ma-434-selective-ssm-mirror-roles/VERIFICATION.json), [MA-424 report](ma-424-neural-ode-mirror-modes/README.md), [continuous-depth diagnostic](../../docs/phase2/NEURAL_ODE_MIRROR_FAMILY_DIAGNOSTIC_2026-10-08.md), and [latent-code diagnostic](../../docs/phase2/LATENT_CODE_MIRROR_FAMILY_DIAGNOSTIC_2026-10-08.md).
+MA-416 through MA-419, MA-424 and MA-434 are verified development-screen FAILs, with fresh seeds sealed. MA-434's role code improved synthetic NRMSE from 0.20–0.22 to 0.00021–0.00024, but saved only 7.0% actual bytes and exactly aliased a native SSM log-decay bias. MA-436 is the active P0 routed-expert mechanism screen. See [MA-434 report](ma-434-selective-ssm-mirror-roles/README.md), [verification](ma-434-selective-ssm-mirror-roles/VERIFICATION.json), [MA-424 report](ma-424-neural-ode-mirror-modes/README.md), [continuous-depth diagnostic](../../docs/phase2/NEURAL_ODE_MIRROR_FAMILY_DIAGNOSTIC_2026-10-08.md), and [latent-code diagnostic](../../docs/phase2/LATENT_CODE_MIRROR_FAMILY_DIAGNOSTIC_2026-10-08.md).
 
 
 ## Verified status index
