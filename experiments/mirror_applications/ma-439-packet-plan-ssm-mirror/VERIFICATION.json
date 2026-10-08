@@ -1,1 +1,35 @@
-{"experiment_id":"MA-439","protocol_commit":null,"tests":{"passed":0,"failed":0},"serialization":{"roundtrip_checked":false,"byte_exact":false,"payload_rows":0},"metric_replay":{"checked":false},"fresh_split_integrity_checked":false,"fresh_worlds":[],"notes":[]}
+{
+  "experiment_id": "MA-439",
+  "protocol_commit": "dc50701",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-439-packet-plan-ssm-mirror/tests -v",
+    "passed": 2,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "payload_rows": 12,
+    "payload_hashes_replayed": true,
+    "actual_payload_bytes_authoritative": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "tolerance": 1e-08,
+    "notes": [
+      "36 fresh metric records replayed from 12 fresh payloads.",
+      "All spectral radii are below 0.811.",
+      "Strict quality and byte gates failed."
+    ]
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_worlds": [
+    43910,
+    43911,
+    43912
+  ],
+  "notes": [
+    "Synthetic aligned task only.",
+    "Sequential rollout implementation; no parallel decoding speed claim."
+  ]
+}

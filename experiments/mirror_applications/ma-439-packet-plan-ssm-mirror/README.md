@@ -33,3 +33,19 @@ The packet code may merely be an ordinary latent or offset embedding; the AR bas
 ## U — unresolved
 
 Natural text token dependencies, valid-path rate, decoding throughput on accelerator, and learned packet routing remain untested.
+
+## Results and decision
+
+**D — FAIL.** Fresh mean packet NRMSE over three worlds × three seeds: shared recurrence 0.134059 / 1,860B; Mirror packet View 0.000225 / 2,125B; ordinary latent 0.006033 / 2,518B; independent offset transitions 0.000068 / 2,485B. Mirror is much better than the shared transition and latent control, but is 3.3× worse than independent and uses 85.5% of its bytes, missing both preregistered gates. Spectral radii remained below 0.811. Mirror’s measured CPU rollout time was 0.000234s vs 0.000150s shared recurrence; this implementation does not establish parallel decode speedup.
+
+**FACT:** the packet View improves sharply over shared recurrence, but does not recover independent quality or the required byte reduction. The ordinary latent control is weaker and larger. Same four recurrent transitions were used per method.
+
+**INTERPRETATION:** a low-dimensional packet plan can add useful function over a tied transition in this aligned task, but it does not replace independent offset functions at the registered cost/quality frontier. Extra logical outputs do not count as independent capacity.
+
+**H:** tested whether a per-packet View makes multiple future offsets from one shared SSM useful at lower bytes.
+
+**T:** 4D stable transition, packet width 4; 400 AdamW updates × batch 96; development worlds 43900/43901 selected LR 0.003 for shared/latent/independent and 0.01 for Mirror; fresh worlds 43910/43911/43912, three seeds; actual payload, packet NRMSE, MAC proxy, wall time, and stability.
+
+**C:** teacher dynamics are aligned to Givens rotations, and the result uses oracle role labels; natural packet prediction could behave differently. The implementation rolls the packet sequentially, so it is not evidence for actual parallel-token latency.
+
+**U:** natural language, valid-path retention, learned plans/routing, parallel kernels, and accelerator throughput remain untested.
