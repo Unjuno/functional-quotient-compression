@@ -1,0 +1,54 @@
+{
+  "experiment_id": "MA-383",
+  "title": "L2P prompt pool with shared-basis Mirror prompt generation",
+  "status": "PROTOCOL_FROZEN_BEFORE_DEVELOPMENT",
+  "base_commit": "0739bf3",
+  "evidence_lane": "QUALITY/STORAGE/COMPUTE/RETRIEVAL",
+  "hypothesis": "For task prompts lying on a Givens orbit, one physical prompt basis plus one code per slot will preserve retrieval-conditioned continual classification quality with fewer payload bytes than an explicit L2P prompt pool, and outperform a same-sized scalar prompt basis; unrelated prompt families should require private vectors.",
+  "prior_art_refs": ["PA56"],
+  "physical_object": "one frozen linear classifier and one shared prompt vector",
+  "mirror_coordinate": "one Givens angle per prompt slot; nearest-key retrieval selects a rotated view",
+  "logical_multiplicity": "eight task-specific prompts selected from input queries without task identity",
+  "model": {
+    "input_dim": 32,
+    "classes": 4,
+    "prompt_slots": 8,
+    "train_examples_per_task": 1024,
+    "validation_examples_per_task": 256,
+    "test_examples_per_task": 512,
+    "batch_size": 128,
+    "optimizer_updates": 1600,
+    "optimizer": "Adam",
+    "learning_rate": 0.001,
+    "development_seeds": [38301, 38302],
+    "fresh_seeds": [38311, 38312, 38313],
+    "prompt_families": ["aligned Givens orbit", "unrelated vectors"],
+    "retrieval": "same Euclidean nearest-key rule for all methods; keys are per-task train-input centroids and charged in every inference payload; task ID is not passed to the model"
+  },
+  "controls": [
+    "explicit L2P pool: one learned 32D prompt per task plus shared retrieval keys and frozen classifier",
+    "shared prompt basis plus one direct scalar gain per slot",
+    "shared prompt basis plus one Givens angle per slot",
+    "prompt hypernetwork conditioned on the retrieved slot ID, with generator and slot embeddings fully charged"
+  ],
+  "development_gate_before_fresh": "For aligned prompts in both development seeds: retrieval accuracy >=0.95; Mirror macro test accuracy within 0.02 of explicit pool; Mirror exceeds scalar basis by >=0.05 macro accuracy; actual payload <=0.80x explicit pool; and no task accuracy is more than 0.05 below explicit. Unrelated family is boundary evidence, not a pass gate. If any aligned gate fails, fresh remains sealed.",
+  "success_gate": "All three fresh aligned worlds replicate retrieval and quality gates; Mirror <=0.80x explicit prompt bytes and beats scalar quality; report unrelated prompt degradation, retrieval errors, prompt generation MACs, throughput, and exact replay.",
+  "failure_gate": "Mirror misses any registered aligned quality, retrieval, or byte gate in both development seeds, or simple scalar/hypernetwork controls match within 5 percentage points.",
+  "storage": {
+    "authority": "actual deterministic ZIP/NPY FP16 inference payload bytes after reload",
+    "paid_objects": ["explicit prompts or shared basis", "all slot angles/scalars/embeddings and hypernetwork weights", "retrieval keys", "frozen classifier", "slot IDs, metadata, and archive headers"]
+  },
+  "compute": {
+    "report_updates_examples_and_wall_clock": true,
+    "report_retrieval_distance_operations": true,
+    "report_prompt_generation_operations": true,
+    "report_inference_throughput": true
+  },
+  "boundaries": [
+    "synthetic continual classification only; no L2P benchmark claim",
+    "all methods use the same retrieval keys/rule; task identity remains hidden at inference",
+    "eight prompt slots are not eight independent capacities; per-task test quality and retrieval are authoritative",
+    "fixed-update evidence is not a capacity claim",
+    "fresh IDs remain sealed until the full aligned development gate passes"
+  ]
+}

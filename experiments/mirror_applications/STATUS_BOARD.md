@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (41 completed; 589 UNTESTED)
+- P0: **630** (42 completed; 588 UNTESTED)
 - P1: **422** (12 completed; 410 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1102 UNTESTED, 31 PROMISING, 22 FAIL**
+- Current MA statuses: **1101 UNTESTED, 31 PROMISING, 23 FAIL**
 - 47 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -23,9 +23,9 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-383 — L2P prompt pool + Mirror prompt generator (P0; PA56)**
+**MA-385 — DualPrompt expert prompts as Views (P0; PA57)**
 
-MA-381 is PROMISING only for an aligned synthetic Givens-orbit candidate bank: it beat scalar basis composition substantially but missed strict quality and byte gates, so fresh remains sealed. Unrelated candidates still required private modules. Continue to the P0 L2P prompt pool compression experiment. MA-369/371/372 remain UNTESTED and paused pending width/depth output-code family redesign.
+MA-383 FAIL: with perfect nearest-key retrieval, Givens prompt Mirror missed aligned quality gates across development seeds and used 90.7% of explicit bytes (registered maximum 80%); same-byte scalar was better on one seed, and Mirror training was about 3x slower. Fresh remains sealed. This does not reject prompt Views generally. MA-369/371/372 remain UNTESTED and paused pending width/depth output-code family redesign.
 
 Required controls: original explicit prompt pool/retrieval, generated prompt hypernetwork, a simple shared prompt-basis control, and Mirror code. Hold retrieval protocol fixed and pay prompt bytes and generation cost.
 
@@ -33,12 +33,12 @@ Prior art: PA56 L2P. Compression must retain continual-task quality and retrieva
 
 ## Active experiment
 
-MA-383 is next on its dedicated research branch. MA-367/368/374/375/379/381 fresh worlds remain unopened under their registered gates.
+MA-383 is FAIL and recorded on its dedicated research branch. MA-385 is next. MA-367/368/374/375/379/381 and MA-383 fresh worlds remain unopened under their registered gates.
 
 ## Verified status index
 
 - **PROMISING (31):** MA-001, MA-002, MA-003, MA-004, MA-005, MA-006, MA-007, MA-008, MA-012, MA-014, MA-015, MA-041, MA-076, MA-079, MA-111, MA-121, MA-156, MA-160, MA-171, MA-173, MA-181, MA-189, MA-241, MA-244, MA-245, MA-249, MA-250, MA-251, MA-374, MA-381, MA-691.
-- **FAIL (22):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-367, MA-368, MA-375, MA-379.
+- **FAIL (23):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-367, MA-368, MA-375, MA-379, MA-383.
 
 All per-ID evidence is retained in the local experiment directories and in `CLAIM_LEDGER.csv`. Consult [the evidence integration audit](../../docs/phase2/MIRROR_MA_EVIDENCE_INTEGRATION_2026-10-08.md) for linked reports, verifications, provenance and claim boundaries.
 

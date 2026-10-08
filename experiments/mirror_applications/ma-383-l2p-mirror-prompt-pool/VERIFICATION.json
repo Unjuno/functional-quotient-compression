@@ -1,0 +1,139 @@
+{
+  "experiment_id": "MA-383",
+  "commit": "PENDING_COMMIT",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-383-l2p-mirror-prompt-pool/tests",
+    "passed": 4,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "payloads": [
+      {
+        "file": "results/development/aligned_38301_explicit.zip",
+        "bytes": 2172,
+        "sha256": "47652c45c6db897e13179e37142e8d32850744fcb5b82d50f992804f0f601af6",
+        "arrays": 3,
+        "includes_keys_classifier": true
+      },
+      {
+        "file": "results/development/aligned_38301_hyper.zip",
+        "bytes": 5477,
+        "sha256": "e04eeb027a9fa4538eb588023ef1c3315d77abf9c203a4acb256bba0e7346abf",
+        "arrays": 7,
+        "includes_keys_classifier": true
+      },
+      {
+        "file": "results/development/aligned_38301_mirror.zip",
+        "bytes": 1970,
+        "sha256": "30166a3f55b454a3fa58401bdf061000448e3cb8faa1c230ad1a7586e25d7a64",
+        "arrays": 4,
+        "includes_keys_classifier": true
+      },
+      {
+        "file": "results/development/aligned_38301_scalar.zip",
+        "bytes": 1970,
+        "sha256": "01c8f61ec9acdc47d9a99ff010097b4aa78259fc2044734711fd665013358269",
+        "arrays": 4,
+        "includes_keys_classifier": true
+      },
+      {
+        "file": "results/development/aligned_38302_explicit.zip",
+        "bytes": 2172,
+        "sha256": "108bf8e81deed66bd6af7d5fa129f4dd2c535c204b8b49aacaafdb81cfadfd71",
+        "arrays": 3,
+        "includes_keys_classifier": true
+      },
+      {
+        "file": "results/development/aligned_38302_hyper.zip",
+        "bytes": 5477,
+        "sha256": "c794aa560b47b3b201a2fa86e10070c32e815aa064534def2150262a2344ff7e",
+        "arrays": 7,
+        "includes_keys_classifier": true
+      },
+      {
+        "file": "results/development/aligned_38302_mirror.zip",
+        "bytes": 1970,
+        "sha256": "0f8008285e5d27286ce7a23d31e6e186624865a11068f42121a94b1d72d9abb4",
+        "arrays": 4,
+        "includes_keys_classifier": true
+      },
+      {
+        "file": "results/development/aligned_38302_scalar.zip",
+        "bytes": 1970,
+        "sha256": "5945ec1bca4fed41fd18048d3affdcbe4d0e82dfa32fa364488c59a3ca46dec8",
+        "arrays": 4,
+        "includes_keys_classifier": true
+      },
+      {
+        "file": "results/development/unrelated_38301_explicit.zip",
+        "bytes": 2172,
+        "sha256": "c5d8fd0ef96324b7b090f69926bea7233f4eaae6786f07b89dfb0611d69b797f",
+        "arrays": 3,
+        "includes_keys_classifier": true
+      },
+      {
+        "file": "results/development/unrelated_38301_hyper.zip",
+        "bytes": 5477,
+        "sha256": "a198d4c2ba957b163f312cbc7dff6556c71cfb9d31546700746e44c2fda4e859",
+        "arrays": 7,
+        "includes_keys_classifier": true
+      },
+      {
+        "file": "results/development/unrelated_38301_mirror.zip",
+        "bytes": 1970,
+        "sha256": "0266e09d7b337d1dffaa492f741a2cc1247f35708fc25c473c0f779637cdb6f2",
+        "arrays": 4,
+        "includes_keys_classifier": true
+      },
+      {
+        "file": "results/development/unrelated_38301_scalar.zip",
+        "bytes": 1970,
+        "sha256": "0e40938eac18600ad49b7c68edaaffb71f61154817b97a0b6302c759182a4042",
+        "arrays": 4,
+        "includes_keys_classifier": true
+      },
+      {
+        "file": "results/development/unrelated_38302_explicit.zip",
+        "bytes": 2172,
+        "sha256": "8d1348d7c8f8c18a1b082f7017a32f69ab1e5f00a638a37258b56764f2edc96d",
+        "arrays": 3,
+        "includes_keys_classifier": true
+      },
+      {
+        "file": "results/development/unrelated_38302_hyper.zip",
+        "bytes": 5477,
+        "sha256": "622d0366d3ba40a44afb21c765edac3a43e372638abdcfb7d0ac01f7d48598ee",
+        "arrays": 7,
+        "includes_keys_classifier": true
+      },
+      {
+        "file": "results/development/unrelated_38302_mirror.zip",
+        "bytes": 1970,
+        "sha256": "d9efeb1f4e556100efbdc08c2435124d635d933c4a4eeea7537b8f7e8ada2e6c",
+        "arrays": 4,
+        "includes_keys_classifier": true
+      },
+      {
+        "file": "results/development/unrelated_38302_scalar.zip",
+        "bytes": 1970,
+        "sha256": "bc4bac0bf2f023549b874b4a69f094652846aef17275609d727e331ab7bd0478",
+        "arrays": 4,
+        "includes_keys_classifier": true
+      }
+    ],
+    "all_include_charged_keys_and_classifier": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "payloads_checked": 16,
+    "max_numeric_difference_after_FP16_reload": 4.184246063232422e-05,
+    "tolerance": "accuracy/per-task exact; NLL absolute difference < 5e-5"
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Both development seeds and both prompt families ran with all four controls.",
+    "Development gate failed; fresh IDs 38311, 38312, 38313 were not read or evaluated.",
+    "One initial seed-38301 aligned run exposed a detached Mirror angle; its corrected post-fix run is the canonical aligned result and the earlier payloads/results were overwritten before this verification."
+  ]
+}
