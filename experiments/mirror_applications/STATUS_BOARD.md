@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (162 completed; 468 UNTESTED)
+- P0: **630** (162 completed; 467 UNTESTED; 1 SCREENING)
 - P1: **422** (13 completed; 409 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **119 FAIL, 11 NOT ESTABLISHED, 45 PROMISING, 980 UNTESTED**
+- Current MA statuses: **119 FAIL, 11 NOT ESTABLISHED, 45 PROMISING, 979 UNTESTED, 1 SCREENING**
 - 47 baseline experiment directories remain present; 128 additional per-ID outcomes are linked to their dedicated research branches in `LIVE_BRANCH_RECONCILIATION.csv`.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This was the intake-time queue; current selection follows the live-branch reconciliation at the top of this board.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed at intake time; later live-branch outcomes are indexed above.
@@ -23,14 +23,14 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**Pending live branch refresh.** MA-419 completed its frozen development screen as FAIL. The latent-code function family MA-416..421 is paused under the repeated exact-native-alias stop rule; select the next eligible candidate outside the paused families after refreshing live branches.
+**MA-424 — Neural ODE Mirror vector-field modes (P0; PA70)** — active; protocol frozen, development screen pending. The latent-code family MA-416..421 remains paused.
 
-Live research branches were fetched after MA-418; no competing MA-419 branch was present at selection time. MA-416..419 have now completed as FAILs. Their ordinary controls exactly reproduce the candidate function views, establishing a repeated structural cause; pause MA-416..421 pending redesign. MA-419's aligned periodic teacher achieved strong quality and bytes versus a generic MLP but exact native harmonic conditioning matched it. See [latent-code family diagnostic](../../docs/phase2/LATENT_CODE_MIRROR_FAMILY_DIAGNOSTIC_2026-10-08.md). MA-325 remains NOT ESTABLISHED because the frozen task was unlearnable even for the independent control. MA-369/371/372 remain paused under the documented family rule. The conditional-modulation family MA-401/403/405 and MA-407/408/411/413 remains paused pending a fused-kernel redesign.
+Live research branches were fetched after MA-419. MA-424/425 had no terminal branch; MA-427 is a prior FAIL showing DEQ rank-1 conditioning exactly aliased native task-bias conditioning. MA-424 is the next P0 outside paused families; its neural ODE coordinate-conjugacy hypothesis is separate from latent-code function storage, but will be paused too if it repeats the native-alias cause. MA-416..421 remain paused pending redesign. MA-325 remains NOT ESTABLISHED because the frozen task was unlearnable even for the independent control. MA-369/371/372 remain paused under the documented family rule. The conditional-modulation family MA-401/403/405 and MA-407/408/411/413 remains paused pending a fused-kernel redesign.
 
 
 ## Active experiment
 
-MA-416 through MA-419 are verified development-screen FAILs, with fresh seeds sealed. MA-419 periodic modulation matched an aligned synthetic teacher at NRMSE 0.00013/0.00016 and 0.177–0.178x the concat payload, but its native direct-harmonic control matched both output and payload size exactly. This demonstrates only an aligned harmonic parameterization point, not a Mirror-specific gain. Metric, payload and native-control replay passed. The MA-416..421 family is paused; see [MA-419 report](ma-419-modulated-periodic-activations/README.md), [verification](ma-419-modulated-periodic-activations/VERIFICATION.json), [MA-418 report](ma-418-compositional-latent-mirror/README.md), and [latent-code family diagnostic](../../docs/phase2/LATENT_CODE_MIRROR_FAMILY_DIAGNOSTIC_2026-10-08.md).
+MA-416 through MA-419 are verified development-screen FAILs, with fresh seeds sealed. MA-419 periodic modulation matched an aligned synthetic teacher at NRMSE 0.00013/0.00016 and 0.177–0.178x the concat payload, but its native direct-harmonic control matched both output and payload size exactly. This demonstrates only an aligned harmonic parameterization point, not a Mirror-specific gain. Metric, payload and native-control replay passed. The MA-416..421 family is paused. MA-424 is now the active fixed-field neural ODE mechanism screen. See [MA-419 report](ma-419-modulated-periodic-activations/README.md), [verification](ma-419-modulated-periodic-activations/VERIFICATION.json), [MA-418 report](ma-418-compositional-latent-mirror/README.md), and [latent-code family diagnostic](../../docs/phase2/LATENT_CODE_MIRROR_FAMILY_DIAGNOSTIC_2026-10-08.md).
 
 
 ## Verified status index
