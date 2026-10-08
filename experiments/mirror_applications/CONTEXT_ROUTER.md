@@ -229,6 +229,12 @@ Read PA337..343. DHE requires no per-ID embedding table, TT-Rec has tensor-train
 
 Read PA344..350. DOFA is a direct dynamic wavelength-to-filter hypernetwork; AnySat/SatMAE, CROMA, Prithvi, TerraMind and AlphaEarth provide multisensor conditioning and task baselines. Report sensor-response/calibration metadata, generated filters, pixel/GSD/band counts, OOD sensor/held-out wavelength combinations, geographic/time-separated land cover/change/segmentation metrics, bytes and GPU inference wall-time. SAR and optical sensors cannot be assumed information-equivalent. Require actual functional advantage beyond one sensor ID or ordinary spectral mask.
 
+### Function-space adapter relevance (PA372..381; MA-1096/1099/1102/1114/1115)
+
+Load `docs/phase2/MIRROR_FUNCTION_SPACE_FALSIFICATION_2026-10-08.md` and, only when useful, the 48-row real-digit pilot under `research_intake/natural_digit_function_20261008`.
+
+Strong native baselines: BOLT shared orthogonal basis + diagonal coefficients, CG-LoRA prediction/curvature matching, Fora activation protection, task-vector bases, SVD+CUR and StructLoRA. A weight-close `m` is not proof of useful task preservation. Compare test NLL/accuracy, OOD capability, per-task codec bits and measured runtime, as well as weight-delta/projection errors. The real-image pilot's 2-angle View missed the preregistered downstream Pareto gate; no registry status was changed. New natural task tests must freeze fresh task identities and base revision before optimizing m. The oracle target task delta may be used only for post hoc diagnostics, never for learning the code.
+
 ### Gauge-aware natural LoRA banks and physical cache reuse (MA-1096..1115)
 
 Read PA351–371, the fifteenth research notes and `research_intake/natural_lora_orbit_20261008/README.md` **only if** selected MA requires them. First classify: weight-space oracle check, trainable new-task m, merged-model generation, multiple logical adapters, or cache/state runtime test.
