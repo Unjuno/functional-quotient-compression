@@ -4242,3 +4242,77 @@ https://proceedings.mlr.press/v267/morel25a.html
 **Native method / direct baseline:** DISCO already uses a hypernetwork to produce a small evolution operator from a short trajectory. The operator generator and its physical-parameter inference are native. Add m only to compact the paid source-trained operator bank or support new ordered useful compositions beyond simple coefficient codes.
 
 **Mirror-specific delta:** Evaluate a small structured m on top of the actual native physical method. Judge heldout useful function quality, whole real serialized bytes and active compute versus the best same-byte linear/diagonal/basis and original-native controls. The published native result is not a Mirror experiment.
+
+## PA463 — LiME: Lightweight Mixture of Experts for Efficient Multimodal Multi-task Learning
+
+**LiME: Lightweight Mixture of Experts for Efficient Multimodal Multi-task Learning** — Md Kowsher, Haris Mansoor, Nusrat Jahan Prottasha, Ozlem Garibay, Victor Zhu, Zhengping Ji, Chen Chen. ICML 2026, PMLR 306:60815-60863.  
+https://proceedings.mlr.press/v306/kowsher26a.html
+
+Native source/code: https://github.com/Kowsher/LiME
+
+**Native result and honest baseline:** One paid PEFT module, per-expert output modulation p_e and zero-parameter route/Auto Top-K. These ideas are established native; Mirror must beat the original and an ordinary compressed p_e code on quality/bytes/P95, not compare with K full transformer passes.
+
+**Mirror-specific frontier:** Add only the smallest paid task/expert m to the native method; require heldout functional utility, full native implementation, real serialized basis/decoder/metadata bytes and latency vs same-byte ordinary task codes. Neither native multi-output nor shared PEFT is Mirror novelty.
+
+## PA464 — M3LoRA: Flexible Task Adaptation via Multiple Low-Rank Matrices With Mixture-of-Subspaces and Minor Singular Components Initialization
+
+**M3LoRA: Flexible Task Adaptation via Multiple Low-Rank Matrices With Mixture-of-Subspaces and Minor Singular Components Initialization** — Xu Luo, Yongbin Liu, Chunping Ouyang, Ying Yu, Yang Yang. CAAI Transactions on Intelligence Technology 11(3):681-694, 2026.  
+https://doi.org/10.1049/cit2.70144
+
+**Native result and honest baseline:** Native source mixes multiple low-rank A/B subspaces with a learned matrix and initializes from minor singular vectors of pretrained W. All of those are native. Compress only the additional task mixer/weight-bank state m.
+
+**Mirror-specific frontier:** Add only the smallest paid task/expert m to the native method; require heldout functional utility, full native implementation, real serialized basis/decoder/metadata bytes and latency vs same-byte ordinary task codes. Neither native multi-output nor shared PEFT is Mirror novelty.
+
+## PA465 — Task-Driven Subspace Decomposition for Knowledge Sharing and Isolation in LoRA-based Continual Learning (LoDA)
+
+**Task-Driven Subspace Decomposition for Knowledge Sharing and Isolation in LoRA-based Continual Learning (LoDA)** — Lingfeng He, De Cheng, Huaijie Wang, Xi Yang, Nannan Wang, Xinbo Gao. ICML 2026, PMLR 306:41172-41194.  
+https://proceedings.mlr.press/v306/he26f.html
+
+**Native result and honest baseline:** Native LoDA jointly studies shared/private directions, gradient-aligned optimization and closed-form recalibration for retained knowledge. Best direct baseline for Mirror+private residual, not a new Mirror invention.
+
+**Mirror-specific frontier:** Add only the smallest paid task/expert m to the native method; require heldout functional utility, full native implementation, real serialized basis/decoder/metadata bytes and latency vs same-byte ordinary task codes. Neither native multi-output nor shared PEFT is Mirror novelty.
+
+## PA466 — FAAR: Efficient Frequency-Aware Multi-Task Fine-Tuning via Automatic Rank Selection
+
+**FAAR: Efficient Frequency-Aware Multi-Task Fine-Tuning via Automatic Rank Selection** — Maxime Fontana, Michael Spratling, Miaojing Shi. CVPR 2026, pp.31135-31144.  
+https://openaccess.thecvf.com/content/CVPR2026/html/Fontana_FAAR_Efficient_Frequency-Aware_Multi-Task_Fine-Tuning_via_Automatic_Rank_Selection_CVPR_2026_paper.html
+
+**Native result and honest baseline:** Performance-Driven Rank Shrinking and a Task-Spectral Pyramidal Decoder are both native FAAR. Compare m to the published rank allocation and same-byte task-frequency readout.
+
+**Mirror-specific frontier:** Add only the smallest paid task/expert m to the native method; require heldout functional utility, full native implementation, real serialized basis/decoder/metadata bytes and latency vs same-byte ordinary task codes. Neither native multi-output nor shared PEFT is Mirror novelty.
+
+## PA467 — MoEP: Compact and Efficient Sparsity with Modular Expert Paths
+
+**MoEP: Compact and Efficient Sparsity with Modular Expert Paths** — Joonas Tapaninaho and Mourad Oussalah. Neural Networks, September 2026, article 109617.  
+https://doi.org/10.1016/j.neunet.2026.109617
+
+**Native result and honest baseline:** Native whole Attention–FFN block path routing at fixed overall parameter budget; native study reports architecture/task-dependent gains and warns that Pythia-1B layer routing may not scale as standard FFN-only MoE. Count whole active block and cache validity.
+
+**Mirror-specific frontier:** Add only the smallest paid task/expert m to the native method; require heldout functional utility, full native implementation, real serialized basis/decoder/metadata bytes and latency vs same-byte ordinary task codes. Neither native multi-output nor shared PEFT is Mirror novelty.
+
+## PA468 — Learning Task-Preferred Inference Routes for Gradient De-Conflict in Multi-Output DNNs (DR-MGF)
+
+**Learning Task-Preferred Inference Routes for Gradient De-Conflict in Multi-Output DNNs (DR-MGF)** — Yi Sun, Xiaochang Hu, Xin Xu, Jian Li, Yifei Shi, Ling-Li Zeng. IEEE TPAMI 48(3):3154–3166 (2026).  
+https://doi.org/10.1109/TPAMI.2025.3635844
+
+**Native result and honest baseline:** Task-filter importance variables, task-preferred routes and meta-weighted gradient deconfliction are native DR-MGF. Short m must improve on this full route state and strong gradient-only controls PCGrad/CAGrad.
+
+**Mirror-specific frontier:** Add only the smallest paid task/expert m to the native method; require heldout functional utility, full native implementation, real serialized basis/decoder/metadata bytes and latency vs same-byte ordinary task codes. Neither native multi-output nor shared PEFT is Mirror novelty.
+
+## PA469 — Gradient Surgery for Multi-Task Learning (PCGrad)
+
+**Gradient Surgery for Multi-Task Learning (PCGrad)** — Tianhe Yu, Saurabh Kumar, Abhishek Gupta, Sergey Levine, Karol Hausman, Chelsea Finn. NeurIPS 2020.  
+https://proceedings.neurips.cc/paper/2020/hash/3fe78a8acf5fda99de95303940a2420c-Abstract.html
+
+**Native result and honest baseline:** PCGrad projects away conflicting per-task gradient components. Any multi-output Mirror training improvements must exceed PCGrad at matched optimization budget; no Mirror storage overhead required for gradient-only controls.
+
+**Mirror-specific frontier:** Add only the smallest paid task/expert m to the native method; require heldout functional utility, full native implementation, real serialized basis/decoder/metadata bytes and latency vs same-byte ordinary task codes. Neither native multi-output nor shared PEFT is Mirror novelty.
+
+## PA470 — Conflict-Averse Gradient Descent for Multi-Task Learning (CAGrad)
+
+**Conflict-Averse Gradient Descent for Multi-Task Learning (CAGrad)** — Bo Liu, Xingchao Liu, Xiaojie Jin, Peter Stone, Qiang Liu. NeurIPS 2021.  
+https://papers.nips.cc/paper/2021/hash/9d27fdf2477ffbff837d73ef7ae23db9-Abstract.html
+
+**Native result and honest baseline:** CAGrad balances average task loss and worst local descent and is an important gradient optimization control for one-trunk multi-output Mirror training; test actual quality rather than assuming routing is a representation deficiency.
+
+**Mirror-specific frontier:** Add only the smallest paid task/expert m to the native method; require heldout functional utility, full native implementation, real serialized basis/decoder/metadata bytes and latency vs same-byte ordinary task codes. Neither native multi-output nor shared PEFT is Mirror novelty.

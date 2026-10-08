@@ -1,16 +1,16 @@
 # Mirror Application Status Board
 
-Updated: 2026-10-08 JST
+Updated: 2026-10-09 JST
 Canonical worker branch remains `research/mirror-application-worker-ready-20261007` (unchanged).
-This is an ISOLATED RESEARCH branch `research/mirror-single-forward-prefetch-20261008`, NOT the worker authoritative queue.
+This is an ISOLATED RESEARCH branch `research/mirror-lime-output-view-20261009`, NOT the worker authoritative queue.
 
-## Program totals (reconciled from authoritative 1188-row **isolated staging** registry)
+## Program totals (reconciled from authoritative 1193-row **isolated staging** registry)
 
-- Registered candidates: **1188**
-- P0: **649** (35 completed; 614 UNTESTED)
-- P1: **436** (12 completed; 424 UNTESTED)
+- Registered candidates: **1193**
+- P0: **651** (35 completed; 616 UNTESTED)
+- P1: **439** (12 completed; 427 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1141 UNTESTED, 29 PROMISING, 18 FAIL**
+- Current MA statuses: **1146 UNTESTED, 29 PROMISING, 18 FAIL**
 - 47 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -138,3 +138,10 @@ Following the user's instruction, the previous MA-1175 first-priority assignment
 - **MA-1183 Stage0:** Trained 8-member rank-one fast-weight shared networks on five fresh synthetic worlds × three strength levels, compared 5 methods. Mirror code heldout NLL 0.89186 vs native full-fast-weight 0.89235 and fixed linear code 0.89854, but optimized no-member shared MLP 0.81928 had better quality, serialized bytes, and CPU P95. **This mechanism failed the strong native/simpler control test.**
 - **MA-1183 public-data check:** Built-in sklearn breast cancer and binarized wine; five **overlapping** stratified train/validation/test partitions per dataset, training-only normalization and validation-only checkpoint selection. On cancer, Mirror NLL 0.06031 vs native fast-weight 0.06086, but fixed linear code 0.05838 is better and Mirror slower; on wine Mirror 0.04597 vs native 0.02833 and no-member 0.03432. These two small public datasets do not reproduce official TabM/TabReD or supply independent benchmark worlds.
 - **Tests/audit:** 17 unit tests PASS, 180 MA-1171 fresh rows + 75 MA-1183 synthetic fresh + 50 public-data rows deterministic same-session replay exact excluding CPU clock fields. Exact CSV Git blob bytes restored and verified.
+
+## 2026-10-09 — LiME/native multi-task source-grounded intake and CPU study
+
+- Added **MA-1189..1193** (five UNTESTED, 2 P0/3 P1), **PA463..470** (eight verified direct sources), full independent H/T/D/C/U protocols under [LiME source research](research_intake/lime_output_view_20261009/README.md). No priority override or worker queue edit.
+- **LiME is an especially strong native control:** a single shared PEFT modulated by per-expert scaling vectors and zero-parameter routing already realizes one-expensive-adapter many logical experts; an extra Mirror m is not itself novel.
+- LME01 uses five outputs from one shared trunk+one shared PEFT per image on sklearn digits; source pinned to `research/mirror-lime-output-view-20261009` before the five fresh [701..705]. After this source-aligned CPU screen, the scientific MA-1189 remains UNTESTED; native LiME zero-parameter routing and MMT-47 are not reproduced. See [report](research_intake/lime_output_view_20261009/pilots/lme01/REPORT.md).
+- Existing completed claims remain 29 PROMISING and 18 FAIL. Current live worker research branch with MA-255 next, WORKER_QUEUE and main are untouched.
