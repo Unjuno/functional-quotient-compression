@@ -243,6 +243,18 @@ Before starting an experiment in MA-936..995:
 8. Factorized codes require unseen task×time, scene×chunk, listener×direction, site×user or hardware task×configuration pairings. Prefer natural/out-of-family variation to more aligned-only tests.
 9. The new MA-936..995 ideas are UNTESTED. Existing completed experiments and MA-255 next-candidate selection are unchanged.
 
+### MA-1096..1115 natural-LoRA gauge, adapter bank and cache crossovers
+
+For a selected MA1096..1115 (and as supplemental context if a compatible experiment is **not yet frozen**):
+
+1. Read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_FIFTEENTH_SWEEP.md`, PA351..371 and `experiments/mirror_applications/research_intake/natural_lora_orbit_20261008/README.md`. The included code is a gauge/weight-space screening harness, **not a natural-model outcome or a Mirror trained model**.
+2. For LoRA `D=B@A`, compare only gauge-invariant `D` singular spectra and row/column projectors. Verify the same `D` under `B->B G, A->G^-1 A`, even for nonorthogonal invertible `G`. Raw B/A elementwise similarity is not a valid independent-functional-similarity claim.
+3. Pretrained `W` singular-axis stability is separate from task-delta alignment. Compare pretrained-W basis, a train-task-only discovered basis, CtS native shared U/V with k×k task cores, CtM where merging is the task, EigenLoRAx, VB-LoRA, MetaTT, diagonal/FiLM, structured Mirror m and private residuals.
+4. Train the **new-task** Mirror m from examples for L2 performance; oracle projection of an already-trained audit LoRA delta is only L1 weight-space representability. Separate train-task and audit-task identities; enforce identical base model revision and layer shapes.
+5. Count full shared basis, all task codes, private residual, optimizer/resume state and metadata; serving cost includes adapter bank/paging/compiled kernels. A small core can cost more than native LoRA if there are few tasks.
+6. In multi-LoRA cache tests use **LRAgent** fused low-rank attention and **PReCache** neutral-base reconstruction as strong controls. Distinguish exact MA691 compatible-state algebra from approximate cached states across differently adapted prefixes. Count physically aliased bytes, model/source prefill, TTFT, prefix provenance and decoder task quality.
+7. The entire new range is UNTESTED. **Next is still MA-255.** Do not reopen frozen world IDs or change gates to apply this intake.
+
 ### MA-1046..1095 fourteenth research intake: temporal forecasting, DLRM, Earth sensors
 
 If a selected MA experiment is in MA-1046..1095, **read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_FOURTEENTH_SWEEP.md` and its PA326..PA350 entries**, but do not load this new research lane when the selected MA is unrelated.
