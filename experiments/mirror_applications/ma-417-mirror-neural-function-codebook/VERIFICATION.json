@@ -1,0 +1,10 @@
+{
+  "experiment_id": "MA-417",
+  "protocol_commit": "501eb9c",
+  "tests": {"command": "python -m unittest discover -s experiments/mirror_applications/ma-417-mirror-neural-function-codebook/tests -v", "passed": 2, "failed": 0},
+  "serialization": {"roundtrip_checked": true, "byte_exact": true, "payload_rows": 189, "payload_hashes_replayed": true, "actual_payload_bytes_authoritative": true},
+  "metric_replay": {"checked": true, "max_difference": 0.0, "notes": ["Every actual inference payload size and hash matches run records.", "Fresh normalized errors and unique code use replay from JSONL.", "Mirror codebook misses the continuous latent2 quality threshold and loses at matched K on this task."]},
+  "fresh_split_integrity_checked": true,
+  "fresh_worlds": [41710, 41711, 41712],
+  "notes": ["Development worlds 41700/41701 selected settings before fresh execution.", "Inference payload stores selected indices rather than training assignment logits.", "Codebook cardinality exceeds observed useful distinct assignments at K=8/16."]
+}
