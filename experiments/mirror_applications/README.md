@@ -3,7 +3,7 @@
 This lane tests where the extra low-description Mirror/View functional parameter `m` can be inserted into existing methods to replace physical duplication or add useful logical functional freedom at worthwhile marginal cost.
 
 Files:
-- IDEA_REGISTRY.csv — 1095 candidate applications with status, prior-art links and first control.
+- IDEA_REGISTRY.csv — 1115 candidate applications with status, prior-art links and first control.
 - FIRST_QUEUE.md — 25 P0 candidates spanning different physical objects.
 - EXPERIMENT_CONTRACT.md — common byte/compute/quality rules.
 
@@ -30,6 +30,8 @@ Before starting an MA experiment, read:
 - [twelfth sweep: video, symmetry, spiking, photonic, wireless, HRTF](../../docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_TWELFTH_SWEEP.md)
 - [thirteenth sweep: materials, MRI, quantum circuits, visual memory and ANN](../../docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_THIRTEENTH_SWEEP.md)
 - [fourteenth sweep: time-series forecasting, DLRM embeddings and Earth-observation sensors](../../docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_FOURTEENTH_SWEEP.md)
+- [fifteenth sweep: natural LoRA banks, gauge invariance and cache sharing](../../docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_FIFTEENTH_SWEEP.md)
+- [runnable gauge-invariant adapter orbit intake](research_intake/natural_lora_orbit_20261008/README.md) — mathematics/manifest tests; not a completed MA experiment
 - [run registry integrity check](check_registry_integrity.py) — supports MA-1000 and beyond
 - [worker queue](WORKER_QUEUE.md)
 - [experiment template](TEMPLATE/)
