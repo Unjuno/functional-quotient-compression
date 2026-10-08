@@ -30,7 +30,9 @@ Doctrine: `docs/phase2/MIRROR_PARAMETER_INTEGRATION_DOCTRINE.md`
 ## Gates
 
 ### PASS
-On all three fresh worlds, Mirror held-out-combination MSE is at least 20% below additive control, within 10% of free per-relation basis control on seen combinations, and complete serialized inference payload is at most 60% of the free-coefficient payload. Runtime is reported as a separate axis.
+On all three fresh worlds, Mirror held-out-combination MSE is at least 20% below additive control, within 10% of free per-relation basis control on seen combinations, and serialized marginal relation-coordinate payload (excluding the shared basis common to all methods) is at most 60% of the native free coefficient-table payload. Full inference payload bytes are also reported and must be lower than the free-coefficient model. Runtime is reported as a separate axis.
+
+A pre-development protocol amendment clarifies the storage denominator: the shared basis is common to all models, so the compression gate is on the separately serialized marginal relation-coordinate payload. No model, data, optimizer or quality threshold changed.
 
 ### FAIL
 Mirror does not improve on additive factors on held-out combinations, exceeds the seen-relation quality tolerance, or fails to reduce actual serialized bytes against free per-relation coefficients. If additive factors match Mirror, the result is not Mirror-specific.

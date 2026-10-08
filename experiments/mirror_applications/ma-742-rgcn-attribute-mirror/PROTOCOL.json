@@ -55,7 +55,8 @@
       "relation-attribute coordinate tables",
       "coefficient decoder",
       "all model buffers and inference metadata"
-    ]
+    ],
+    "marginal_state_comparison": "Report whole inference payload bytes and actual serialized marginal relation-code payload bytes separately. Shared basis is common state; the relation coefficient table or attribute factor tables plus coefficient decoder are serialized as independent marginal payloads. No parameter-count proxy."
   },
   "compute": {
     "report_examples": true,
@@ -63,12 +64,19 @@
     "report_active_compute_proxy": "counted multiply-adds in forward/backward and inference; estimate labeled as proxy",
     "report_isolated_wall_clock": true
   },
-  "success_gate": "On all three fresh worlds, Mirror held-out-combination MSE is at least 20% below additive control, within 10% of the free per-relation basis control on seen combinations, and complete serialized payload is at most 60% of its seen-relation coefficient payload baseline. Report runtime separately.",
+  "success_gate": "On all three fresh worlds, Mirror held-out-combination MSE is at least 20% below additive control, within 10% of free per-relation basis control on seen combinations, and serialized Mirror coordinate state (excluding the shared basis common to all methods) is at most 60% of the native free coefficient-table state. Complete serialized payload bytes are still reported and must be lower than the free-coefficient model. Runtime is separate.",
   "failure_gate": "Mirror fails if it does not improve on additive factorization on held-out combinations, or exceeds the quality tolerance on seen combinations, or its actual bytes do not beat the free per-relation coefficient model.",
   "boundaries": [
     "Synthetic mechanism screen only; no real KG/link-prediction claim.",
     "Mirror coordinates do not count as independent relation capacity.",
     "If ordinary additive factors match, no Mirror-specific claim.",
     "Fresh results cannot change selected rank or any protocol setting."
+  ],
+  "amendments": [
+    {
+      "before": "development data access",
+      "reason": "Clarified the storage denominator: full payload includes a basis shared by every compared method, so the code-compression gate applies to the separately serialized marginal relation-coordinate payload; full payload remains reported and compared.",
+      "protocol_effect": "No model, data, optimizer, selection, or quality threshold change."
+    }
   ]
 }
