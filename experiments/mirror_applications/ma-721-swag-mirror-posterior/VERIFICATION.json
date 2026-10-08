@@ -1,19 +1,29 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-721",
+  "commit": "pending-result-commit",
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-721-swag-mirror-posterior/tests -v",
+    "passed": 4,
+    "failed": 0
   },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "payloads": 56
   },
   "metric_replay": {
-    "checked": false,
-    "max_difference": null
+    "checked": true,
+    "rows": 60,
+    "max_difference": 0.0
   },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "fresh_split_integrity_checked": true,
+  "fresh_accessed": false,
+  "audit_labels_used": false,
+  "notes": [
+    "All final posterior/ensemble payloads were loaded from disk and their actual serialized byte lengths and SHA256 values matched.",
+    "All 60 final NLL, accuracy, ECE, Brier and disagreement rows replayed with max difference 0.",
+    "Two earlier implementation attempts are preserved and explicitly superseded; neither changed hyperparameters.",
+    "The stratified audit split was not scored.",
+    "The 56 condition-specific payload captures total about 29 MB and are intentionally excluded from Git; raw hashes/byte lengths are committed. Re-running the fixed script recreates them for verification."
+  ]
 }

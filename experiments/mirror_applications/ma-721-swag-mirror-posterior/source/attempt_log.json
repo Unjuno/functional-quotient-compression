@@ -1,0 +1,14 @@
+{
+  "attempt_01": {
+    "file": "source/development_attempt_01_duplicate_rank1_rows.json",
+    "issue": "rank-1 sigma grid was accidentally nested under each covariance rank, yielding 92 rows with exact duplicate rank-1 rows; no settings were tuned from this attempt."
+  },
+  "attempt_02": {
+    "file": "source/development_attempt_02_tensor_view_bytes.json",
+    "issue": "60-row rerun fixed duplicate reporting, but torch.save serialized the backing storage of sliced covariance basis tensors; actual payload bytes included unused directions. Metric values matched final rerun, but these payload byte results were superseded."
+  },
+  "final_rerun": {
+    "file": "source/development_raw.json",
+    "issue": "same predeclared data/model/seed/rank/sigma settings, corrected rank-1 row placement and cloned rank tensors before serialization; no hyperparameters changed."
+  }
+}

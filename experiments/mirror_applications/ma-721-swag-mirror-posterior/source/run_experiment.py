@@ -23,18 +23,18 @@ def main():
   for j in range(K):
    st=time.perf_counter();im,_,iu=fit(sd*100+j+72210,xtr,ytr,capture=False);ind_wall+=time.perf_counter()-st;ind_updates+=iu;ind_states.append(flatten(im))
   ipath=ART/f'seed{sd}_independent_K8.pt';ib,ih=save({'format':'MA721-independent-ensemble-v1','members':ind_states,'member_count':K},ipath);payloads.append({'key':f'seed{sd}_independent_K8','path':str(ipath.relative_to(ROOT)),'bytes':ib,'sha256':ih})
-  spath=ART/f'seed{sd}_swa_mean.pt';sb,sh=save({'format':'MA721-swa-mean-v1','mean':mean},spath);payloads.append({'key':f'seed{sd}_swa_mean','path':str(spath.relative_to(ROOT)),'bytes':sb,'sha256':sh})
+  spath=ART/f'seed{sd}_swa_mean.pt';sb,sh=save({'format':'MA721-swa-mean-v1','mean':mean.clone()},spath);payloads.append({'key':f'seed{sd}_swa_mean','path':str(spath.relative_to(ROOT)),'bytes':sb,'sha256':sh})
   # Save/score SWA mean and matched Gaussian / Mirror posterior representations.
   conds=[('clean',xdev),('corrupt_sigma0.25',shifted(xdev,sd+880))]
   for ci,(condition,xx) in enumerate(conds):
    # SWA point predictor.
    st=time.perf_counter();point=load_flat(DigitsMLP(),mean)(xx).clamp(-40,40);wall=time.perf_counter()-st
-   rows.append({'seed':sd,'condition':condition,'method':'swa_mean','rank':0,'sigma':0,'k_members':1,'train_updates':updates,'train_wall_s':swag_train_wall,'inference_wall_s':wall,'examples_per_s':len(xx)/wall,'mac_proxy_per_example':17224,'metrics':metrics(point,ydev),'payload_key':f'seed{sd}_swa_mean','serialized_payload_bytes':sb})
+   rows.append({'seed':sd,'condition':condition,'method':'swa_mean','rank':0,'sigma':0,'k_members':1,'train_updates':updates,'train_wall_s':swag_train_wall,'inference_wall_s':wall,'examples_per_s':len(xx)/wall,'mac_proxy_per_example':17024,'weight_reconstruction_ops_per_member':0,'metrics':metrics(point,ydev),'payload_key':f'seed{sd}_swa_mean','serialized_payload_bytes':sb})
    # Ensemble checkpoint upper control.
    ind_probs=[];st=time.perf_counter()
    for state in ind_states:ind_probs.append(load_flat(DigitsMLP(),state)(xx).softmax(-1))
    ip=torch.stack(ind_probs);ipred=ip.mean(0).clamp_min(1e-12).log();wall=time.perf_counter()-st
-   rows.append({'seed':sd,'condition':condition,'method':'independent_ensemble','rank':0,'sigma':0,'k_members':K,'train_updates':ind_updates,'train_wall_s':ind_wall,'inference_wall_s':wall,'examples_per_s':len(xx)/wall,'mac_proxy_per_example':17224*K,'metrics':evaluate_probs(ipred,ydev,ip),'payload_key':f'seed{sd}_independent_K8','serialized_payload_bytes':ib})
+   rows.append({'seed':sd,'condition':condition,'method':'independent_ensemble','rank':0,'sigma':0,'k_members':K,'train_updates':ind_updates,'train_wall_s':ind_wall,'inference_wall_s':wall,'examples_per_s':len(xx)/wall,'mac_proxy_per_example':17024*K,'weight_reconstruction_ops_per_member':0,'metrics':evaluate_probs(ipred,ydev,ip),'payload_key':f'seed{sd}_independent_K8','serialized_payload_bytes':ib})
    for rank in RANKS:
     b=basis[:rank];sc=scales[:rank]
     for method in ('swag_gaussian','mirror_rademacher','gaussian_lowrank_only'):
@@ -42,23 +42,23 @@ def main():
      rademacher=method=='mirror_rademacher';sseed=sd*100000+rank*100+ci
      st=time.perf_counter();logits,mem=posterior_logits(mean,b,sc,dd,xx,sseed,K,rademacher);wall=time.perf_counter()-st
      met=evaluate_probs(logits,ydev,mem)
-     payload={'format':'MA721-posterior-v1','method':method,'model':'64-128-64-10 MLP','mean':mean,'basis':b,'eigen_scales':sc,'diagonal_std':dd,'posterior_members':K,'sample_seed':sseed,'sample_rule':'Rademacher low-rank coordinates' if rademacher else 'Gaussian low-rank coordinates; independent diagonal Gaussian' if dd is not None else 'Gaussian low-rank only'}
+     payload={'format':'MA721-posterior-v1','method':method,'model':'64-128-64-10 MLP','mean':mean.clone(),'basis':b.clone(),'eigen_scales':sc.clone(),'diagonal_std':dd.clone() if dd is not None else None,'posterior_members':K,'sample_seed':sseed,'sample_rule':'Rademacher low-rank coordinates' if rademacher else 'Gaussian low-rank coordinates; independent diagonal Gaussian' if dd is not None else 'Gaussian low-rank only'}
      key=f'seed{sd}_{method}_r{rank}_{condition}';path=ART/(key+'.pt');n,dig=save(payload,path);payloads.append({'key':key,'path':str(path.relative_to(ROOT)),'bytes':n,'sha256':dig})
-     rows.append({'seed':sd,'condition':condition,'method':method,'rank':rank,'sigma':0,'k_members':K,'train_updates':updates,'train_wall_s':swag_train_wall,'inference_wall_s':wall,'examples_per_s':len(xx)/wall,'mac_proxy_per_example':17224*K,'metrics':met,'payload_key':key,'serialized_payload_bytes':n})
-    for sigma in SIGMAS:
-     sseed=sd*100000+int(sigma*10000)+ci
-     st=time.perf_counter();logits,mem=rank1_logits(mean,xx,sseed,sigma,K);wall=time.perf_counter()-st
-     met=evaluate_probs(logits,ydev,mem);key=f'seed{sd}_rank1_sigma{sigma}_{condition}'
-     payload={'format':'MA721-rank1-control-v1','method':'posthoc_rank1_factor','mean':mean,'global_factor_sigma':sigma,'posterior_members':K,'sample_seed':sseed,'factor_rule':'independent Normal(1,sigma) row/column factors per linear layer'}
-     path=ART/(key+'.pt');n,dig=save(payload,path);payloads.append({'key':key,'path':str(path.relative_to(ROOT)),'bytes':n,'sha256':dig})
-     rows.append({'seed':sd,'condition':condition,'method':'rank1_factor','rank':1,'sigma':sigma,'k_members':K,'train_updates':updates,'train_wall_s':swag_train_wall,'inference_wall_s':wall,'examples_per_s':len(xx)/wall,'mac_proxy_per_example':17224*K,'metrics':met,'payload_key':key,'serialized_payload_bytes':n})
+     rows.append({'seed':sd,'condition':condition,'method':method,'rank':rank,'sigma':0,'k_members':K,'train_updates':updates,'train_wall_s':swag_train_wall,'inference_wall_s':wall,'examples_per_s':len(xx)/wall,'mac_proxy_per_example':17024*K,'weight_reconstruction_ops_per_member':rank*17226+(17226 if dd is not None else 0),'metrics':met,'payload_key':key,'serialized_payload_bytes':n})
+   for sigma in SIGMAS:
+    sseed=sd*100000+int(sigma*10000)+ci
+    st=time.perf_counter();logits,mem=rank1_logits(mean,xx,sseed,sigma,K);wall=time.perf_counter()-st
+    met=evaluate_probs(logits,ydev,mem);key=f'seed{sd}_rank1_sigma{sigma}_{condition}'
+    payload={'format':'MA721-rank1-control-v1','method':'posthoc_rank1_factor','mean':mean.clone(),'global_factor_sigma':sigma,'posterior_members':K,'sample_seed':sseed,'factor_rule':'independent Normal(1,sigma) row/column factors per linear layer'}
+    path=ART/(key+'.pt');n,dig=save(payload,path);payloads.append({'key':key,'path':str(path.relative_to(ROOT)),'bytes':n,'sha256':dig})
+    rows.append({'seed':sd,'condition':condition,'method':'rank1_factor','rank':1,'sigma':sigma,'k_members':K,'train_updates':updates,'train_wall_s':swag_train_wall,'inference_wall_s':wall,'examples_per_s':len(xx)/wall,'mac_proxy_per_example':17024*K,'weight_reconstruction_ops_per_member':17226,'metrics':met,'payload_key':key,'serialized_payload_bytes':n})
   # Independent ensemble payload counted once per world.
   # Rank1 sigma is picked only from development corruption NLL, then frozen for reporting.
   corrupt=[r for r in rows if r['seed']==sd and r['condition']=='corrupt_sigma0.25' and r['method']=='rank1_factor']
   best=min(corrupt,key=lambda r:r['metrics']['nll']);rank1_selected.append({'seed':sd,'selected_sigma':best['sigma'],'selection_metric':'corrupt development NLL','nll':best['metrics']['nll']})
  (SRC/'development_raw.json').write_text(json.dumps({'experiment_id':'MA-721','rows':rows,'payloads':payloads,'rank1_sigma_selection':rank1_selected,'base_seeds':SEEDS,'fresh_accessed':False,'audit_labels_used':False},indent=2)+'\n')
  # Flat result table keeps every method/condition/seed and exact serialized size.
- fields=['seed','condition','method','rank','sigma','k_members','train_updates','train_wall_s','inference_wall_s','examples_per_s','mac_proxy_per_example','serialized_payload_bytes','nll','accuracy','ece10','brier','pairwise_disagreement','payload_key']
+ fields=['seed','condition','method','rank','sigma','k_members','train_updates','train_wall_s','inference_wall_s','examples_per_s','mac_proxy_per_example','weight_reconstruction_ops_per_member','serialized_payload_bytes','nll','accuracy','ece10','brier','pairwise_disagreement','payload_key']
  with (ROOT/'RESULTS_CORE.csv').open('w',newline='') as f:
   w=csv.DictWriter(f,fieldnames=fields,lineterminator='\n');w.writeheader()
   for r in rows:w.writerow({**{k:r[k] for k in fields if k in r},**r['metrics']})
