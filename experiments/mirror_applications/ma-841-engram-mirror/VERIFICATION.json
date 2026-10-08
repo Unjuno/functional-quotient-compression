@@ -1,10 +1,26 @@
 {
   "experiment_id": "MA-841",
   "draw_id": "Draw37",
-  "protocol_sha256": "",
-  "draw_record_sha256": "",
-  "results_sha256": "",
-  "audit_replay": "pending",
-  "serialized_payload_replay": "pending",
-  "checks": []
+  "protocol_sha256": "20fdf8977cec7d0079292b13b4097d581ee95eb61bf8e705e18092f56394abea",
+  "draw_record_sha256": "f6a7c823a0f261e0780d9e03ec4bdda73954abe626311d78a14188e2a1049a2d",
+  "results_sha256": "6f6c17de1d94116022b4b345e040473faf30670a981c1a94747c63064275d168",
+  "core_csv_sha256": "9c26dc7c3cce1ca18296a283ec7ce63856a792c003d4bb275e9e2967ae87f69a",
+  "replay_log_sha256": "097a75aeda95b1ae38e0efa8b2f6ba52c75d9e53ef619b049a34a37a4b0bf8cf",
+  "audit_replay": "passed: exact causal metrics, payload bytes and payload hashes across 360 rows",
+  "serialized_payload_replay": "passed in safetensors round-trip tests",
+  "audit_seeds": [
+    84111,
+    84112,
+    84113
+  ],
+  "audit_rows": 360,
+  "tests": "5 passed",
+  "registry_integrity": "pending claim ledger",
+  "checks": [
+    "aligned causal gate passes on all 3 seeds",
+    "Mirror and same-rank PCA are exactly equivalent",
+    "random basis is poor",
+    "full private residual restores residual trace behavior at 65.6% of exact bytes",
+    "standalone development seed deviation disclosed"
+  ]
 }

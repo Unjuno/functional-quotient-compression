@@ -1,7 +1,7 @@
 {
   "experiment_id": "MA-841",
   "title": "AI Engram bank compressed by Mirror basis",
-  "status": "SCREENING",
+  "status": "PROMISING",
   "evidence_lane": "MECHANISM/STORAGE",
   "base_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
   "draw_id": "Draw37",
@@ -58,5 +58,7 @@
     "no natural continual-learning or language model claim",
     "number of addresses is not independent capacity absent causal tests"
   ],
-  "amendment_1": "Before audit: define the private fallback threshold numerically. If development trace reconstruction MSE exceeds 1e-4, use and charge that memory's full residual; otherwise store only its code. Fresh trace counts and gates are unchanged. This makes the shared/private allocation diagnostic reproducible."
+  "amendment_1": "Before audit: define the private fallback threshold numerically. If development trace reconstruction MSE exceeds 1e-4, use and charge that memory's full residual; otherwise store only its code. Fresh trace counts and gates are unchanged. This makes the shared/private allocation diagnostic reproducible.",
+  "observed_deviation": "The standalone development seed 84101 was not separately run. Instead, each fresh world contained eight distinct development traces used only to estimate that world\u2019s rank-4 basis, followed by disjoint audit memories. The rank remained fixed and no audit tuning occurred; treat the result as per-world mechanism evidence.",
+  "outcome_note": "Aligned memory causal metrics and <=50% payload gate passed on all 3 fresh worlds. Matched PCA control was exactly equivalent, so there is no Mirror-specific advantage. Residual/private traces failed with code-only and were restored by charged full residual fallback at 65.6% of exact-bank bytes."
 }
