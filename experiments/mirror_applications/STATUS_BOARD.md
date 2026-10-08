@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (43 completed; 587 UNTESTED)
+- P0: **630** (44 completed; 586 UNTESTED)
 - P1: **422** (12 completed; 410 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1099 UNTESTED, 31 PROMISING, 25 FAIL**
+- Current MA statuses: **1098 UNTESTED, 31 PROMISING, 26 FAIL**
 - 48 experiment directories, complete with status/protocol/results/verification files, are represented in the current evidence set.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-268 is next.
@@ -23,20 +23,20 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-274 — BOFT logical expert views (P0; PA21)**
+**MA-278 — Compacter Mirror hypercomplex adapters (P0; PA23)**
 
 MA-255 is reconciled PROMISING only for its aligned post-fit screen; its separate fixed-update variant failed. MA-260, MA-261 and MA-265 are reconciled FAIL. Their dedicated evidence branches are cited in `CLAIM_LEDGER.csv`.
 
-MA-255, MA-260, MA-261, MA-265, MA-268, MA-271, MA-272, MA-273 and MA-366 are reconciled in the current evidence set. MA-274 is next.
+MA-255, MA-260, MA-261, MA-265, MA-268, MA-271, MA-272, MA-273, MA-274 and MA-366 are reconciled in the current evidence set. The BOFT family is paused after its scoped diagnostic; MA-276 is deferred and MA-278 is next.
 
 ## Active experiment
 
-MA-366 completed as FAIL on branch `research/ma-366-depth-expert-factorized-routing-20261008`. Its accidental fresh-ID generation is disclosed; those rows are excluded and fresh integrity is invalid. MA-268 is PROMISING only for a synthetic rotation-aligned trained mechanism (3/3 fresh); compute was 1.5x IA3 and eager CPU throughput 0.29–0.34x. The separate post-fit variant missed its byte gate. Next is MA-271.
+MA-366 completed as FAIL on branch `research/ma-366-depth-expert-factorized-routing-20261008`. Its accidental fresh-ID generation is disclosed; those rows are excluded and fresh integrity is invalid. MA-268 is PROMISING only for a synthetic rotation-aligned trained mechanism (3/3 fresh); compute was 1.5x IA3 and eager CPU throughput 0.29–0.34x. The separate post-fit variant missed its byte gate. Next is MA-278.
 
 ## Verified status index
 
 - **PROMISING (31):** MA-001, MA-002, MA-003, MA-004, MA-005, MA-006, MA-007, MA-008, MA-012, MA-014, MA-015, MA-041, MA-076, MA-079, MA-111, MA-121, MA-156, MA-160, MA-171, MA-173, MA-181, MA-189, MA-241, MA-244, MA-245, MA-249, MA-250, MA-251, MA-255, MA-268, MA-691.
-- **FAIL (25):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-260, MA-261, MA-265, MA-271, MA-272, MA-273, MA-366.
+- **FAIL (26):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-260, MA-261, MA-265, MA-271, MA-272, MA-273, MA-274, MA-366.
 
 All per-ID evidence is retained in the local experiment directories and in `CLAIM_LEDGER.csv`. Consult [the evidence integration audit](../../docs/phase2/MIRROR_MA_EVIDENCE_INTEGRATION_2026-10-08.md) for linked reports, verifications, provenance and claim boundaries.
 
