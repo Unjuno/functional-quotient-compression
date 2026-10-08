@@ -245,6 +245,22 @@ For KV reuse, LRAgent Flash-LoRA-Attention and PReCache are mandatory when the h
 
 Do not report L0 mathematical unit tests or L1 oracle heldout weight-reconstruction as L2 task ability or L3 deployment gains. Count shared U/V storage and actual per-task code bytes.
 
+### Knowledge graph relation operators (MA-1116..1125)
+
+Read PA382..390 and the sixteenth research notes. RotatE relation phases, TuckER core coefficients, PairRE head/tail vectors, QuatE quaternion operations and CompGCN relation composition are **existing** low-description function addresses. KrausKGE relation channels and TNTComplEx time factors are direct controls. Test natural KG relation/domain/time variants, filtered MRR, noncommutative relation paths and score-preserving gauge counterexamples. Charge entity/relation/core bytes and real scorer QPS.
+
+### Camera ISP, exposure and optical PSF functions (MA-1126..1135)
+
+Read PA391..399 and the sixteenth research notes. ParamISP EXIF ParamNet, Uni-ISP device embeddings, MetaISP appearance styles, PQDynamicISP environment-control, Modular ISP and OmniLens++ lens PSF latent are mandatory native controls as applicable. Use real RAW/sRGB paired images, held-out cameras/ISO/lenses, color DeltaE and true physical inference FPS. Never claim lost clipped RAW information can be recovered exactly.
+
+### Robot online system-ID policy conditioning (MA-1136..1145)
+
+Read PA400..406. UP-OSI and RMA already implement one shared policy plus a compact estimated dynamics code. CoRMA, A-NC and morphology-conditioned world models are stronger follow-ups. Only deployable observations are allowed for fair online policy comparison; label privileged oracle control as upper bound. Evaluate held-out friction/payload/body, adaptation speed, return, falls, m/optimizer/state bytes and write FLOPs. Report simulator/hardware distinction.
+
+### Acoustic room fields and impulse-response adaptation (MA-1146..1155)
+
+Read PA407..413. Neural Acoustic Fields, Real Acoustic Fields benchmark, retrieval-augmented few-shot room NAF, topology-aware TA-RIR, NAMS and direction-aware Ambisonics are the closest priors. Hold out entire measured rooms, source/receiver geometry and microphone placements. Measure phase-coherent RIR quality, RT60/DRR/C50, per-room code/grid/retrieval-bank bytes, microphone enrollment counts and generation latency. Compare native few-shot LoRA and geometry conditioning.
+
 ## Historical result loading rule
 
 Do **not** load every SRM/MS/MN document.
