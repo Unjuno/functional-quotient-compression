@@ -1,0 +1,172 @@
+{
+  "protocol_id": "LME01",
+  "revision": 1,
+  "created": "2026-10-09",
+  "status": "FROZEN_BEFORE_MODEL_OR_AUDIT",
+  "research_branch": "research/mirror-lime-output-view-20261009",
+  "parent_commit": "1bae95e58cc82aacaac98e7fc7dd1d69ed4da27f",
+  "science_scope": "Small real-digit five-target CPU multitask learning: direct specialization of ONE paid shared adapter output, comparing LiME-style diagonal vectors to Mirror 4D structured rotation/shear, strong one-forward independent output heads, and same-code linear scaling. This is NOT official LiME 47-task reproduction, not real LLM, and no native LiME zero-parameter router implemented (role known).",
+  "related_existing": [
+    "MA-1175",
+    "MA-1178",
+    "MA-351",
+    "MA-1169",
+    "MA-690"
+  ],
+  "new_prior": "PA463 LiME https://proceedings.mlr.press/v306/kowsher26a.html",
+  "hypothesis": "On five supervised useful output functions from the identical physical image and exactly one shared heavy forward, Mirror4 structured adapter-output rotations/shears have lower NLL than a same-four-coefficient native diagonal code in >=4/5 new heldout splits, while native full 32-vector LiME-style scalings and a single-forward five-independent-output-head set the stronger quality/byte/runtime Pareto controls.",
+  "data": {
+    "name": "sklearn load_digits 8x8 1797 images",
+    "inputs": "identical images for K=5 output roles",
+    "roles": [
+      "digit parity",
+      "digit >=5",
+      "left-right pixel mass balance",
+      "top-bottom pixel mass balance",
+      "center-intensity median"
+    ],
+    "role_thresholds": "derived from TRAIN-only image IDs, no audit label leakage",
+    "preprocessing": "images /16, train-only mean/std with additive +0.15 stabilizer",
+    "split": {
+      "dev_seeds": [
+        71,
+        72,
+        73
+      ],
+      "fresh_seeds": [
+        701,
+        702,
+        703,
+        704,
+        705
+      ],
+      "source_distribution_units": "different 75/25 stratified original-image partitions; same dataset across worlds hence correlated",
+      "never_tune_fresh": true,
+      "run_all_fresh": true,
+      "split_fraction": 0.25
+    }
+  },
+  "architecture": {
+    "trunk": "two dense layers Linear(64,128) GELU Linear(128,32) GELU, exactly one call per 5-output batch",
+    "peft": "shared rank8 adapter out GELU(Linear(32,8)) then Linear(8,32), computed once",
+    "common": "one shared Linear(32,2) classifier",
+    "role_bias": "Kx2 trainable for all conditional methods",
+    "K": 5,
+    "feature_dim": 32,
+    "code_dim": 4,
+    "planes": 16,
+    "native_reference": "LiME uses ONE shared PEFT and per expert trained elementwise scaling vectors p_j and zero-param routing; LME01 routes externally given output roles and does NOT reproduce native router. Call comparison LiME-style output modulation, not native full LiME.",
+    "views": {
+      "shared_broadcast": "one shared head h+δ without role-specific code or bias",
+      "native_onepass_linearheads": "K independent 32→2 heads on h+δ (already one trunk and one shared adapter call)",
+      "lime_full_diagonal": "role output h+δ*exp(p_j), p_j shape Kx32, with role bias",
+      "lime_linear4": "role output h+δ*(1 + B c_j), c_j Kx4 with fixed decoder matrix B 32x4 source-independent, role bias",
+      "lime_learned_linear4": "same native linear4 but shared B itself learned and physically stored",
+      "mirror_rot4": "role output h+Q(c_j)δ; Q is 16 independent planar Givens rotations with angle=(B c_j) per plane, c Kx4 and deterministic B 16x4 from QR; preserved norms; role bias",
+      "mirror_shear4": "role output h+S(c_j)δ; S is 16 block shears (a,b) -> (a+γb,b) with γ=B c_j, role bias. This includes no inverse because applied as readout to shared adapter output, not the exact conjugation of an internal nonlinear FFN.",
+      "native_givens4_null": "ordinary learned Givens output head with same fixed B code and exactly same model function as mirror_rot4, mechanically established by unit test and no claim of novel functionality."
+    }
+  },
+  "training": {
+    "steps": 350,
+    "batch": 128,
+    "optimizer": "AdamW",
+    "lr": 0.002,
+    "weight_decay": 0.0001,
+    "seed": "world*1439+137",
+    "data_stream_seed": "world*7919+71",
+    "shared_initialization": "same initial U,V,classifier,adapter for every method in a world",
+    "dtype": "torch.float32",
+    "threads": 1,
+    "train_loss": "mean over K binary cross-entropies, each label same weight; no extra balance penalty",
+    "tuning": "none after freeze; do not change LR/steps based on audit data"
+  },
+  "evaluation": {
+    "per_world_methods": "all seven methods trained for each dev and fresh, same data/init/update stream",
+    "metrics": [
+      "test mean/worst task NLL nat/label",
+      "test per-task accuracy",
+      "mean over inputs std of K outputs probability",
+      "5-way trunk call count and shared adapter call count",
+      "actual named deterministic NPZ serialized bytes incl base/adapter/code, metadata and preprocessing",
+      "batch128 median P50 and P95 CPU forward latency 20 warmups/80 timed repeats",
+      "estimated active multiplication operations separately"
+    ],
+    "timing": "One-thread CPU PyTorch2.10+cpu eager; clock unlocked, thread warmup, batching fixed, no GPU speed extrapolation",
+    "success": {
+      "mechanical": "all methods 1 trunk and 1 shared adapter call per K5 batch; Givens transform equals ordinary implementation <=2e-6; no test label leakage",
+      "Mirror_marginal_PASS": "Across >=4/5 fresh dataset splits mirror_rot4 or mirror_shear4 improves *paired* mean NLL by >=0.01 nat/label over native fixed-B same-4-code linear scaling, and achieves mean NLL <=lime_full_diagonal+0.02 with <=0.9 native full-vector member storage. CPU P95<=1.10 full-vector native.",
+      "Mirror_FAIL": "strong one-forward multihead or full diagonal or fixed-B linear4 dominates on quality/storage/latency; source-aligned method is merely a Givens reprametrization; no role-specific learning advantage.",
+      "UNCERTAIN": "5 correlated splits of one public dataset, output tasks correlated, official LiME router/AutoTopK not reproduced, GPU/native 47-task evidence absent."
+    }
+  },
+  "data_firewall": "Freeze current protocol before any development/fresh runs. Do not inspect audit for model selection. Dev worlds 71/72/73 and fresh 701-705, disjoint from earlier SFM/MAT03 seeds. No alteration of registry scientific status. If dev failure, still run preregistered fresh to diagnose if initiated; no cherry picking.",
+  "negative_controls": [
+    "shared broadcast output collapse",
+    "native one-forward five-head (not K repeated forwards)",
+    "same k linear code",
+    "LiME per-output direct 32 scalars",
+    "one ordinary Givens head equal to Mirror math",
+    "shear vs rotation requires quality and runtime checks"
+  ],
+  "unit_table": [
+    [
+      "x",
+      "same image vector",
+      "1",
+      "R^64"
+    ],
+    [
+      "h",
+      "shared trunk feature",
+      "1",
+      "R^32"
+    ],
+    [
+      "delta",
+      "single shared adapter output",
+      "1",
+      "R^32"
+    ],
+    [
+      "m",
+      "per task code",
+      "1",
+      "R^4"
+    ],
+    [
+      "B",
+      "fixed source-independent code mixing",
+      "1",
+      "16x4 or 32x4 depending view"
+    ],
+    [
+      "NLL",
+      "task quality",
+      "nat/label (SI 1)",
+      "float >=0"
+    ],
+    [
+      "S",
+      "actual codec state",
+      "byte",
+      "int >=0"
+    ],
+    [
+      "t",
+      "wall latency",
+      "s",
+      "float >=0"
+    ]
+  ],
+  "uncertainty": "Five repeated splits from the same digits dataset are correlated, descriptive min/median/max only, not population confidence. If independent variance components, u_c^2=sum u_i^2, otherwise include covariances. k=2 is descriptive, not certified 95%.",
+  "adoption": "Full real-liME 47-task independent benchmark, official exact routing, separate heldout task families, strong non-Mirror same-byte controls and GPU P95 before any adoption. Stage0 remains separate UNTESTED scientific MA status.",
+  "output_contract": [
+    "source/run_lme01.py",
+    "source/test_lme01.py",
+    "results/dev_raw.csv",
+    "results/fresh_raw.csv",
+    "results/VERIFICATION.json",
+    "REPORT.md"
+  ]
+}
