@@ -1,6 +1,6 @@
 # MA-371 — MatFormer granularity Mirror views
 
-Status: **PROTOCOL FROZEN BEFORE DEVELOPMENT**
+Status: **FAIL** (bounded nested-width MLP screen)
 
 PA53/PA107 establish that nested Transformer FFN widths support elastic and Mix'n'Match models. This screen tests only whether a small per-width/per-layer correction improves the three nested granularities. Unseen layer-granularity combinations are reserved for MA-372.
 
@@ -19,3 +19,8 @@ Digits v1.8.0 (recorded source hash), 60/20/20 stratified per-world splits, 2-la
 ## Gates
 
 See `PROTOCOL.json`. PASS requires all fresh worlds to meet the quality/byte gate and the separate Mirror-specific margin. FAIL includes parity or domination by simpler controls.
+
+
+## Results
+
+Fresh mean accuracies over widths and three worlds were 94.85% nested, 95.28% Mirror, 95.09% FiLM, 95.06% rank-1 LoRA, and 95.68% independent. Mirror misses the frozen +1pp and <=50%-of-independent-bytes gates: it improves by 0.43pp and uses 40,063/61,229 = 65.4% of independent bytes. Equal-byte FiLM is close with less correction compute. **Decision: FAIL for Mirror-specific value.** Replay details and H/T/D/C/U are in `STATUS.md` and `VERIFICATION.json`.

@@ -1,21 +1,78 @@
 {
   "experiment_id": "MA-371",
   "commit": null,
-  "protocol_frozen": true,
   "tests": {
-    "passed": null,
-    "failed": null
+    "passed": 3,
+    "failed": 0
   },
-  "development_complete": false,
-  "fresh_opened": false,
+  "protocol_frozen_before_development": true,
+  "development_selection": {
+    "experiment_id": "MA-371",
+    "selected_learning_rate": 0.003,
+    "mean_validation_nll_by_lr": {
+      "0.003": 0.15606264894333333,
+      "0.01": 0.21644770378
+    },
+    "development_worlds": [
+      37100,
+      37101
+    ],
+    "fresh_worlds_locked": [
+      37110,
+      37111,
+      37112
+    ]
+  },
+  "fresh_summary": {
+    "nested": {
+      "mean_accuracy": 0.9484567911111111,
+      "mean_nll": 0.20146978232222224,
+      "serialized_bytes": 38549,
+      "mean_train_wall_s": 0.907848,
+      "mean_inference_examples_per_second": 2673927.5454444443
+    },
+    "mirror": {
+      "mean_accuracy": 0.9527777766666666,
+      "mean_nll": 0.19126420054444446,
+      "serialized_bytes": 40063,
+      "mean_train_wall_s": 1.15627,
+      "mean_inference_examples_per_second": 1686987.4375555555
+    },
+    "film": {
+      "mean_accuracy": 0.9509259322222222,
+      "mean_nll": 0.20069541036666666,
+      "serialized_bytes": 40063,
+      "mean_train_wall_s": 1.0829463333333333,
+      "mean_inference_examples_per_second": 2748289.702888889
+    },
+    "lora": {
+      "mean_accuracy": 0.9506172788888889,
+      "mean_nll": 0.1944433873111111,
+      "serialized_bytes": 40383,
+      "mean_train_wall_s": 1.0374093333333334,
+      "mean_inference_examples_per_second": 2449357.5378888887
+    },
+    "independent": {
+      "mean_accuracy": 0.9567901211111111,
+      "mean_nll": 0.15285933265555557,
+      "serialized_bytes": 61229,
+      "mean_train_wall_s": 1.0663196666666668,
+      "mean_inference_examples_per_second": 4825065.118333333
+    }
+  },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "roundtrip_checked": true,
+    "max_abs_logit_difference": 0.0,
+    "payload_hash_checked": true
   },
   "metric_replay": {
-    "checked": false
+    "rows": 105,
+    "max_metric_difference": 4.506835904471984e-09
   },
+  "decision": "FAIL",
   "notes": [
-    "Fresh worlds 37110-37112 remain sealed."
+    "Small nested-width MLP screen, not MatFormer Transformer reproduction.",
+    "Mirror misses preregistered +1 percentage-point quality gain and <=50% independent-byte gate.",
+    "Equal-byte FiLM and near-byte rank-1 LoRA match the Mirror result; no Mirror-specific gain."
   ]
 }
