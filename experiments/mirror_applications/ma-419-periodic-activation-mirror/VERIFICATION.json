@@ -1,0 +1,10 @@
+{
+  "experiment_id": "MA-419",
+  "protocol_commit": "8503072",
+  "tests": {"command": "python -m unittest discover -s experiments/mirror_applications/ma-419-periodic-activation-mirror/tests -v", "passed": 2, "failed": 0},
+  "serialization": {"roundtrip_checked": true, "byte_exact": true, "payload_rows": 105, "payload_hashes_replayed": true, "actual_payload_bytes_authoritative": true},
+  "metric_replay": {"checked": true, "max_difference": 0.0, "notes": ["Per-run payload bytes and SHA-256 replay exactly.", "Mirror/modulation-network error ratio exceeds 1.1 on two fresh worlds.", "Latent3 mean normalized error is lower at nearly equal bytes."]},
+  "fresh_split_integrity_checked": true,
+  "fresh_worlds": [41910, 41911, 41912],
+  "notes": ["Development worlds selected LR before fresh evaluation.", "Modulation generator state and per-signal codes are included in payload."]
+}

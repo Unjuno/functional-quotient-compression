@@ -1,0 +1,6 @@
+condition,world_or_seed,method,serialized_bytes,train_tokens_or_examples,optimizer_updates,active_compute_proxy,wall_time_s,primary_metric,primary_value,secondary_metric,secondary_value,status_note
+fresh_mean,41910-41912,shared,2525,128000,500,64 MAC/query,0.180,normalized_rmse,0.9795,functions,16,baseline
+fresh_mean,41910-41912,mirror3,3345,128000,500,68 MAC/query,0.267,normalized_rmse,0.3476,functions,16,FAIL per-world modulation-network gate and latent3 dominates
+fresh_mean,41910-41912,latent3,3353,128000,500,160 MAC/query,0.222,normalized_rmse,0.2653,functions,16,stronger ordinary latent at nearly equal bytes
+fresh_mean,41910-41912,modnet,4433,128000,500,162 MAC/query,0.357,normalized_rmse,0.3271,functions,16,Mirror smaller but per-world gate failed
+fresh_mean,41910-41912,independent,8349,128000,500,64 MAC/query,0.288,normalized_rmse,0.1526,functions,16,quality control
