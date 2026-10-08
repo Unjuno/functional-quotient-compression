@@ -6,11 +6,11 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (35 completed; 595 UNTESTED)
+- P0: **630** (37 completed; 593 UNTESTED)
 - P1: **422** (12 completed; 410 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1108 UNTESTED, 29 PROMISING, 18 FAIL**
-- 47 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
+- Current MA statuses: **1106 UNTESTED, 29 PROMISING, 20 FAIL**
+- 47 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch. MA-315 and MA-319 have additional verified outcomes on their dedicated research branches and are linked from the registry/claim ledger; the next-candidate order below is unchanged.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
 - Thirteenth literature sweep added MA-996..1045 (50 UNTESTED; 40 P0/10 P1) and PA296..PA325. IDs MA-1000+ use four digits; consult `check_registry_integrity.py`. No new experiment results.
@@ -90,3 +90,11 @@ KG relation rotations (RotatE, TuckER, QuatE, PairRE), EXIF/device-aware ISPs (P
 - `CLAIM_LEDGER.csv` and each experiment's `VERIFICATION.json` are the evidence index; `STATUS_BOARD.md` is an operational cache.
 - Before allocating an ID or starting work, re-read the live registry and search for experiment branches.
 - Preserve old branches, failed results, exploratory data and locked protocols. No automatic merge to main.
+
+
+## Dedicated-branch outcomes recorded after the worker-ready snapshot
+
+- **MA-315 — FAIL:** fresh Mirror payload was 3.31–3.32% larger than the matched shared-direct plus sparse-private control in 3/3 seeds. Both met quality; Mirror fitting used ~42x operation proxy and 0.61–0.78x throughput. Exact replay and hash checks passed.
+- **MA-319 — FAIL:** fresh Mirror payload was 0.60% larger than rank-2 Tucker in 3/3; NLL limit was missed in 2/3. All 25 packages reloaded and replayed exactly. A development audit-read bug was preserved and excluded after amendment.
+
+These branch-linked outcomes do not reorder the STATUS_BOARD queue: the next candidate remains **MA-255**.

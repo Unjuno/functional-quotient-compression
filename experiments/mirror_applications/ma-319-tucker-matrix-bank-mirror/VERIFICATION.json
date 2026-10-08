@@ -1,9 +1,28 @@
 {
   "experiment_id": "MA-319",
-  "commit": "<frozen protocol commit>",
-  "tests": {"command": "", "passed": null, "failed": null},
-  "serialization": {"roundtrip_checked": false, "byte_exact": false},
-  "metric_replay": {"checked": false, "max_difference": null},
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "commit": "final report commit pending; protocol 85246ca, amended source/protocol dbeec29",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-319-tucker-matrix-bank-mirror/tests",
+    "passed": 5,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "packages_reloaded": 25,
+    "byte_exact": true,
+    "payload_hashes_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "rows": 25,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Corrected development path evaluated only the Tiny Shakespeare middle 10%; test asserts no audit file read.",
+    "Original source bug exposed Tiny Shakespeare final 10% during two development runs; those logs are quarantined and excluded. Amendment A1 committed before valid fresh audit evaluation.",
+    "Fresh audit is Gutenberg eBook 1342, SHA-256 3f6bb9d6f78e0293b56acd4714dd68cb7d6d1d293402031ce9d5a216bcaf9d75; 742112/763082 characters retained.",
+    "Fresh payload gate missed in 3/3 seeds; quality delta exceeded +0.02 nat/token in 2/3.",
+    "Training is a fixed 500-update CPU screen; no capacity claim."
+  ]
 }

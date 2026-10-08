@@ -39,3 +39,10 @@ def test_development_selection_never_reads_audit_file(tmp_path):
     assert (selected==dev).all()
     assert meta['fresh_accessed'] is False
     assert not (tmp_path/'missing-audit.txt').exists()
+
+def test_serialized_mirror_package_reloads_to_same_state():
+    import io
+    state=fixture_state();p=m.compress(state,'mirror');raw=m.serialize(p)
+    loaded=torch.load(io.BytesIO(raw),map_location='cpu',weights_only=False)
+    first=m.decode(p,state);second=m.decode(loaded,state)
+    assert all(torch.equal(first[k],second[k]) for k in first)
