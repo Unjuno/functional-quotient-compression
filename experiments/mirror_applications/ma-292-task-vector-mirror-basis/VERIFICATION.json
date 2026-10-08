@@ -1,0 +1,35 @@
+{
+  "experiment_id": "MA-292",
+  "source_commit": "5755f15",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-292-task-vector-mirror-basis/tests -v",
+    "passed": 5,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "maximum_reconstruction_abs_difference": 0.0,
+    "state_sha256_replay": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "development_seeds": [
+    29201,
+    29202
+  ],
+  "fresh_seeds": [
+    29211,
+    29212,
+    29213
+  ],
+  "notes": [
+    "Final MSE is evaluated from functions reconstructed from the saved serialized state.",
+    "Actual payloads include method-specific state, shared basis/base, task codes and IDs, tensor metadata and headers.",
+    "All 42 final rows replayed on the integrated branch; no optimizer updates were used.",
+    "Integrated branch reran 5 tests, serialization roundtrip, and payload/hash replay successfully."
+  ]
+}

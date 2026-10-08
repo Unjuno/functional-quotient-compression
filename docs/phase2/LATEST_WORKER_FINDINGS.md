@@ -37,7 +37,9 @@ MA-286 is **FAIL for its Mirror-specific margin**, while preserving a strong sha
 
 MA-288 is **FAIL under the preregistered direct-path runtime gate**. Aligned state MSE was near zero in 3/3 at 378B vs 1,203B independent FWP and quarter the writes, but direct throughput was 0.178–0.456x the rank-4 residual control in every fresh seed. A post-audit cached path reached 201M examples/s with 1,024B workspace; it is supplemental and does not change the gate. Unrelated contexts require private state. Five tests and 42-row replay passed.
 
-**The next candidate is MA-292.** MA-275/277/279–281 remain P1 UNTESTED. MA-876..1115 remain appended research-intake hypotheses and must not preempt the registered P0 crossovers. Natural variation and benchmark-level runtime remain unproven; aligned synthetic PROMISING must not be described as real-world Mirror adoption.
+MA-292 is **FAIL for Mirror-specific value**. The one-angle representation saved four incremental bytes/task vs FP32 rank-2 SVD, but matched-byte FP16 SVD was 23B smaller overall, slightly more accurate in all fresh worlds and about 1.55x faster. Independent deltas required private/richer state. Five tests, 42-row replay and exact serialization checks passed.
+
+**The next candidate is MA-296.** MA-275/277/279–281 remain P1 UNTESTED. MA-876..1115 remain appended research-intake hypotheses and must not preempt the registered P0 crossovers. Natural variation and benchmark-level runtime remain unproven; aligned synthetic PROMISING must not be described as real-world Mirror adoption.
 
 ## MA-241 — layer-specific Mirror views over tied experts
 
