@@ -78,6 +78,12 @@ The registry treats any repeated object as a candidate:
 - multi-speaker adapters, voice timbre/style functions and semantic/acoustic codec roles;
 - generative flow-map intervals, solver coefficients, subject/style LoRA merging;
 - cross-model block, residual-stream, and SAE feature stitching connectors.
+- neural video chunk/scene latent with frame-offset and bitrate-control Views;
+- group-equivariant tensor/filter banks and task-specific symmetry-breaking;
+- spiking synapse/threshold/membrane/neuromodulatory functions;
+- programmable optical MZI/PCM/diffractive physical operators;
+- wireless antenna beamforming, RIS phase and CSI-feedback subspaces;
+- individualized HRTF spatial-audio fields and head-pose coordinates.
 
 ## Four mechanism classes
 
