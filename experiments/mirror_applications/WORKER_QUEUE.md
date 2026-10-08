@@ -173,7 +173,7 @@ High-information P0:
 Added after the ReFT/function-vector/sparse-feature sweep. Do not interrupt active work.
 
 High-information P0:
-1. MA-501/502 — shared LoReFT basis + Mirror task codes (**MA-501 ACTIVE SCREENING**, frozen protocol; PA96)
+1. MA-501/502 — shared LoReFT basis + Mirror task codes (MA-501 **FAIL**: rho=0 saves 84.4% versus per-task rank-four but exactly aliases native shared coefficients; rho=.25 misses heldout quality; MA-502 is next to test the many-task private frontier; PA96)
 2. MA-503 — factorized layer x task representation code
 3. MA-504 — token-conditioned Mirror ReFT
 4. MA-508 — activation-addition Mirror basis

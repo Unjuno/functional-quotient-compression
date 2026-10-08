@@ -1,9 +1,32 @@
 {
   "experiment_id": "MA-501",
-  "commit": "<sha>",
-  "tests": {"command": "", "passed": null, "failed": null},
-  "serialization": {"roundtrip_checked": false, "byte_exact": false},
-  "metric_replay": {"checked": false, "max_difference": null},
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "protocol_sha256": "36998a7e4654f1ceab4d2733aa2b2450a7f1469b8be38cae9a8c85acc1f14024",
+  "tested_code_commit": "bfa5c96689cd3d3e24c681dff5d4ca86678d2d56",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-501-loreft-shared-code/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "actual_uncompressed_lengths_and_hashes_checked": true,
+    "native_shared_payload_byte_identical": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0,
+    "all_rho_and_method_curves_checked": true,
+    "full_matrix_upper_valid": true
+  },
+  "causal_code_intervention": {
+    "checked": true,
+    "heldout_output_changes_when_zeroed_or_permuted": true
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_accessed": false,
+  "notes": [
+    "Two frozen development worlds, each with 16 tasks and 128 calibration plus 256 heldout examples per task.",
+    "The rho=.25 relative-RMSE gate failed for the shared code in both worlds; independent rank-four intervention was more accurate and the full-matrix upper replayed exactly.",
+    "Native shared-subspace coefficient control exactly reproduces Mirror payload and outputs; fresh seeds 50111-50113 remain sealed."
+  ]
 }
