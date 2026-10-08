@@ -4,12 +4,12 @@
 - Branch: `research/ma-932-stitching-information-validity-20261008`
 - Base commit: `c935a903daca5c7d1d48aa50d05b5bd50f239cba`
 - Draw: 21; uniform from 537 eligible P0/UNTESTED rows, index 369
-- Last verified commit: `3e704f3` (pre-data freeze); result records pending commit
+- Last verified commit: `80c0f2e`
 - Development complete: yes (2 seeds)
 - Fresh/audit opened: fresh yes; audit no
-- Results committed: pending result commit
-- Verification committed: pending result commit
-- Registry row updated: pending result commit
+- Results committed: yes (this branch)
+- Verification committed: yes (this branch)
+- Registry row updated: yes (this branch)
 
 ## Next action
 
