@@ -21,7 +21,7 @@ The development seeds selected support 1/8 (64 of 512 combinations) using valida
 
 ## D — Decision
 
-**FAIL for Mirror-specific value at development; fresh sealed.** This is a preregistered direct-control failure, not a failed aligned mechanism. Three development worlds show the compositional aligned function family is representable by 24 factor angles and generalizes to held-out combinations from 64/512 support tasks. However, the closest native PA16 factorized rotational context uses the exact same code, function, payload length, and measured path. No fresh replication is needed to decide this identity claim; the fresh split remains unopened.
+**FAIL for Mirror-specific value at development; fresh sealed.** This is a preregistered direct-control failure, not a failed aligned mechanism. Three development worlds show the compositional aligned function family is representable by 24 factor angles and generalizes to held-out combinations from 64/512 support tasks. However, the closest native PA16 factorized rotational context uses the exact same angular code, function, payload length, and transform semantics. Measured CPU throughput varied around the same path and did not establish a runtime advantage. No fresh replication is needed to decide this identity claim; the fresh split remains unopened.
 
 ### Selected-support development facts
 

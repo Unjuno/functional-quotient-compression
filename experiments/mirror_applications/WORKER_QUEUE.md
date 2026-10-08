@@ -14,7 +14,7 @@ Use:
 
 ## Live selection snapshot — 2026-10-08
 
-The latest canonical baseline and reconciled result branches have been merged into the current worker chain. MA-255/260/261/265/268 and the second research-expansion sequence through MA-299 have recorded outcomes. Per the selection rule, the next executable untested P0 in the remaining registry order is **MA-257**; then MA-258 and MA-266 if still untested. MA-297/299 SETA allocation is paused for family redesign. The appended MA-1116..1155 intake remains behind P0 work. This snapshot supersedes older queue paragraphs below that still name MA-255, MA-260, or MA-265 as next. Recheck the live registry and branch list before each new experiment.
+The latest canonical baseline and reconciled result branches have been merged into the current worker chain. MA-255/260/261/265/268 and the second research-expansion sequence through MA-299 have recorded outcomes. Per the selection rule, MA-257 is now FAIL against its exact PA16 rotation-context control; the next executable untested P0 in the remaining registry order is **MA-258**; MA-266 follows if still untested. MA-297/299 SETA allocation is paused for family redesign. MA-257 demonstrates aligned factor composition but no Mirror-specific value over PA16 rotations. The appended MA-1116..1155 intake remains behind P0 work. This snapshot supersedes older queue paragraphs below that still name MA-255, MA-260, or MA-265 as next. Recheck the live registry and branch list before each new experiment.
 
 ## Selection rule
 
@@ -461,3 +461,8 @@ A worker may batch implementation work across a family, but scientific status is
 ## Stop rule
 
 If two consecutive candidates in a family fail for the same demonstrated structural reason, stop that family and write a family diagnostic before continuing.
+
+
+## MA-257 result pointer — 2026-10-08
+
+MA-257 failed its Mirror-specific gate at development: the native PA16 factorized rotational-context control is an exact function/payload alias. Fresh remains sealed. Next: MA-258.
