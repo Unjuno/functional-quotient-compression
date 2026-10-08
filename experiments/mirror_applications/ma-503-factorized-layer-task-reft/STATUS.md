@@ -1,8 +1,9 @@
 # MA-503 status
 
 - Status: SCREENING
-- Protocol frozen: yes (`freeze.json`)
-- Development runs: none
+- Protocol frozen: yes (`freeze.json`); cache-only Amendment 1 frozen (`amendment_freeze.json`)
+- Initial development launches: preserved invalid attempts; no metrics produced
+- Canonical development reruns: pending
 - Fresh/audit opened: no
 
 ## Next action

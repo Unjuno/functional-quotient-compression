@@ -123,10 +123,8 @@ def run(seed,out):
   for method in METHODS:
    key='factor_mirror' if method=='native_bilinear' else method
    if key not in cache:
-    start=time.perf_counter();obj=objects(key,w,seed);fitwall=time.perf_counter()-start;raw=pack(key,obj)
-    if key=='factor_mirror':cache[key]=(obj,raw,fitwall)
+    start=time.perf_counter();obj=objects(key,w,seed);fitwall=time.perf_counter()-start;raw=pack(key,obj);cache[key]=(obj,raw,fitwall)
    else:obj,raw,fitwall=cache[key]
-   if key!='factor_mirror':obj,raw,fitwall=cache[key]
    (rd/f'{method}_payload.npz').write_bytes(raw)
    met=score(key,obj,w);met.update({'inference_payload_bytes':len(raw),'payload_sha256':hashlib.sha256(raw).hexdigest(),'fit_wall_s':fitwall,'optimizer_updates':STEPS if key=='factor_mirror' else 0,'visible_calibration_examples':int(w['mask'].sum())*NTR})
    items[method]=met
