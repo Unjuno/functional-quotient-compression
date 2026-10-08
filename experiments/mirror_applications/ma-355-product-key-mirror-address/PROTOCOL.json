@@ -1,0 +1,21 @@
+{
+  "experiment_id": "MA-355",
+  "title": "Product-Key Mirror address lookup",
+  "status": "AMENDED_AFTER_INVALID_DEVELOPMENT_BEFORE_FRESH",
+  "evidence_lane": "MECHANISM/STORAGE/ROUTING/QUALITY",
+  "base_commit": "c935a90",
+  "hypothesis": "On a 256-map additive Cartesian task bank with held-out pair compositions, a factorized Mirror address will recover each composition from shared left/right factors while saving actual bytes versus Product-Key and flat independent maps.",
+  "physical_object": "shared 8x4 linear map basis with left/right factor tables and optional interaction state",
+  "mirror_coordinate": "two categorical 4-bit subaddresses selecting one of 16x16 logical combinations",
+  "logical_multiplicity": "256 selected linear maps whose quality and functional distinctness are directly measured",
+  "prior_art_refs": ["PA43"],
+  "controls": ["independent full matrices", "flat 256-entry matrix table", "ordinary Product-Key key/value retrieval", "factorized Mirror address", "direct two-index coefficient control"],
+  "development": {"worlds_or_seeds": [35501,35502], "train_tasks": 192, "heldout_pairs": 64, "examples_per_task_split": 512, "selection_metric": "held-out map nMSE, address accuracy, collision rate, distinct functions, actual bytes, query MACs"},
+  "fresh": {"worlds_or_seeds": [35511,35512,35513], "locked_before_access": true, "open_only_if_development_passes": true},
+  "storage": {"authority": "actual deterministic ZIP/NPY inference payload bytes after reload", "paid_objects": ["shared base map", "left/right factor tables", "interaction state", "all Product-Key vectors/value tables", "indices", "metadata"]},
+  "compute": {"optimizer_updates": 0, "report_examples": true, "report_routing_MAC_proxy": true, "report_inference_MAC_proxy": true, "report_wall_clock": true},
+  "success_gate": "Both dev worlds: address accuracy >=0.99, held-out nMSE <=1e-6, 256 distinct realized functions, Mirror payload >=10% below Product-Key and flat-table controls, routing MACs <= Product-Key; direct coefficient control >=10% larger for Mirror-specific result.",
+  "failure_gate": "Any quality or distinct-function gate missed; storage saving <10%; direct control within 10%; or routing compute >1.10x Product Key. Fresh remains sealed.",
+  "amendment": "The initial invalid development implementation gave the factorized Mirror and direct controls a full 256-entry interaction tensor, and scored held-out functions against maps stored in that tensor. This made the zero error tautological and the storage comparison unfair. Before any fresh access, amend the task to an exactly additive factorized bank with zero interaction, train factor recovery on 192 seen pairs, and evaluate held-out compositions using only recovered left/right factors. Product Key retains a charged 256-value table; independent/flat controls retain full matrices. Fresh seeds remain sealed.",
+  "boundaries": ["post-fit oracle synthetic linear-map mechanism screen", "combinatorial address count is not treated as capacity", "no end-to-end trained router or LM evidence"]
+}
