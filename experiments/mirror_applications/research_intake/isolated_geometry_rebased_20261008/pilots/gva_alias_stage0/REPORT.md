@@ -27,7 +27,7 @@ The 8x prefix reduction compares to an *unnecessarily replicated per-role cache*
 ## H / T / D / C / U
 
 - **H:** safe final-readout m preserves exact attention and memory alias; an independent Mirror-specific benefit requires beating the native GVA shared cache *and* an ordinary low-rank factorized readout bank at comparable bytes and runtime.
-- **T:** random stationary V and decoupled Kpos, 8 role-specific M, scores computed both explicit Kcontent and query absorption. Overridden past hidden tensors form the negative counterexample. The exact executed Python source is distributed in the companion downloadable ZIP linked in this conversation; its SHA256 is recorded below.
+- **T:** random stationary V and decoupled Kpos, 8 role-specific M, scores computed both explicit Kcontent and query absorption. Overridden past hidden tensors form the negative counterexample. The exact executed Python source is tracked at `source/run_stage0.py` and separately distributed in the companion download bundle; its SHA256 is recorded below.
 - **D:** safe numerical/copy and unsafe-detection checks PASS at 5/5; incremental Mirror storage and P95 runtime FAIL. No ADOPTED or capacity claim.
 - **C:** the architectural saving comes from native GVA-style readout absorption and ordinary factorization, not an additional Mirror-specific parameter advantage in this synthetic regime.
 - **U:** major errors are float32 accumulation, differing operation fusion, eager CPU timing, no true GPU decoder, no learned head weights, synthetic source distribution. Report full per-world rows and do not treat n=5 as inferential proof.
