@@ -1,0 +1,92 @@
+{
+  "experiment_id": "MA-1174",
+  "title": "Finite-step reachability-adjusted View selection with gauge and retention",
+  "stage": "DESIGN_ONLY",
+  "status": "UNTESTED",
+  "worker_claim": false,
+  "plan_only": true,
+  "branch": "research/mirror-internal-formula-crossovers-20261008",
+  "canonical_worker_queue_unchanged": true,
+  "baseline_sha": "3b38a2afc5f9bc806bdff7232814898fcf17fcd6",
+  "internal_formula_refs": [
+    "IF01",
+    "IF02",
+    "IF03",
+    "IF04",
+    "IF11"
+  ],
+  "nearest_existing": [
+    "MA-844",
+    "MA-1096",
+    "MA-1099",
+    "MA-1156",
+    "MA-1105",
+    "MA-199"
+  ],
+  "prior_art_refs": [
+    "PA373",
+    "PA374",
+    "PA381",
+    "PA414",
+    "PA367"
+  ],
+  "priority": "P1",
+  "evidence_lane": "MECHANISM",
+  "hypothesis": "Among source-trained task families, View directions selected by the *correct* baseline-emulation cost metric **and separately measured task utility** deliver >=2% lower fresh held-out CE than source-only gradient/Fisher ranking and same-byte simple low-rank controls after 100 matched updates in >=4/5 fresh worlds, with no >1% absolute old-task retention regression and <=1.10× P95.",
+  "physical_object": "frozen trained base and a task-adapter source bank with task-sensitive Jacobian metrics and a small paid candidate View basis",
+  "mirror_coordinate": "code coordinates selected by source-only baseline-cost generalized eigenvectors, intersected with task utility and old-task retention constraints",
+  "logical_multiplicity": "new task adaptations from cheap useful View coordinates rather than unreached or redundant parameter directions",
+  "mandatory_native_control": "source-only gradient norm / Fisher or curvature directions / native LoRA / simple shared low-rank basis / random equal-byte Views",
+  "baseline_hierarchy": [
+    "native full method",
+    "best same-byte non-Mirror factorization",
+    "proposed structured Mirror m",
+    "independent upper where practical"
+  ],
+  "dataset": {
+    "minimal_fixture": "First analytic fixture J=diag(1,0.1), Rθ=I, mirror B=I and full observable rank; verify λ=(1,100), unreachable target is infinite and finite-update e_N recursion. Then 64-wide shared MLP with source/target task banks and heldout family identities; fresh training uses 10/50/100 fixed optimizer updates, not near-convergence capacity inference. Natural stage: identical-base rank4 LoRA checkpoints with gauge stress and target code trained only from target support.",
+    "dev_seeds": [
+      11,
+      12,
+      13
+    ],
+    "fresh_seeds": [
+      101,
+      102,
+      103,
+      104,
+      105
+    ],
+    "heldout_whole_task_identities": true,
+    "allow_dev_selection_only": true,
+    "no_target_oracle_delta_fit": true,
+    "fresh_frozen": true
+  },
+  "implementation": {
+    "steps": [
+      "Freeze source-only observable witness inputs, source task IDs, Rθ/RM metrics and numerical SVD rank tolerance before any target development.",
+      "Compute baseline Jacobian J, Mirror Jacobian B, old-task Jacobian and correct R_B/R_M ratio; classify unreachable B directions explicitly.",
+      "Separately measure task utility/retention on development, select candidate m support by both, and compare simpler gradient/Fisher, shared SVD basis, LoRA and random equal-byte controls.",
+      "Check invariance under B->BG and A->G^{-1} A factor gauge and exact FFN folding; do not count gauge movement as new function.",
+      "Lock finite steps 10/50/100, same examples and optimizer initialization; run 5 unseen task-worlds without audit-time eigenbasis updates.",
+      "Measure CE, old-task failures, Jacobian nonlinearity at finite ρ, serialized basis bytes, CPU/GPU P95, active FLOPs and the continuing baseline reachability envelope."
+    ],
+    "hardware": "CPU NumPy float64 for certified local linear algebra; torch FP32 small MLP; only natural/checkpoint stage on CUDA if available. Batch, clock, dtype, rank tolerance fixed."
+  },
+  "metrics": "held-out task CE / old-task retention / finite-update efficiency / actual bytes / P95",
+  "gates": {
+    "PASS": "4/5 fresh world held-out CE >=2% relative better than strongest source-only task-aware native low-rank/Fisher control after 100 updates, old retention drop <=1 percentage point, actual payload <=matched budget and P95 <=1.10, with nonzero functional Jacobian directions beyond gauge.",
+    "FAIL": "E is high but task gradient/retention unfavourable; rank threshold flips selection; native low-rank/LoRA obtains same quality at <=bytes/time; unobservable probe nullspace is miscalled globally unreachable.",
+    "UNCERTAIN": "Strong native baseline, physical bytes/time, rank stability or independent task evidence unavailable"
+  },
+  "uncertainty": {
+    "sources": "Autodiff precision, preconditioner scale, JVP/VJP noise, output witness coverage, optimizer time variation, LoRA GL(r) gauge, Jacobian linearization residual and confidence intervals over task seeds.",
+    "standard": "u_c=sqrt(sum u_i²) when independent; add covariance otherwise",
+    "coverage_factor": 2,
+    "n_min_fresh": 5,
+    "small_n_guarantee": false,
+    "stop_before_fresh_on_dev_futility": true,
+    "no_favorable_audit_early_stop": true
+  },
+  "results_exist": false
+}

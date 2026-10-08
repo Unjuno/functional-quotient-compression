@@ -1,0 +1,89 @@
+{
+  "experiment_id": "MA-1172",
+  "title": "Coupled Fisher/activation allocation of Mirror head-layer state",
+  "stage": "DESIGN_ONLY",
+  "status": "UNTESTED",
+  "worker_claim": false,
+  "plan_only": true,
+  "branch": "research/mirror-internal-formula-crossovers-20261008",
+  "canonical_worker_queue_unchanged": true,
+  "baseline_sha": "3b38a2afc5f9bc806bdff7232814898fcf17fcd6",
+  "internal_formula_refs": [
+    "IF06",
+    "IF07",
+    "IF08",
+    "IF11"
+  ],
+  "nearest_existing": [
+    "MA-1165",
+    "MA-1166",
+    "MA-879",
+    "MA-844",
+    "MA-690"
+  ],
+  "prior_art_refs": [
+    "PA425",
+    "PA426",
+    "PA432",
+    "PA373"
+  ],
+  "priority": "P0",
+  "evidence_lane": "MECHANISM",
+  "hypothesis": "At the same physically resident KV+projector budget, allocation using source-only **cross-head coupled** task error avoids all diagonal-estimate false quality admissions and improves held-out NLL >=0.01 nat/token versus independent per-head Mirror rank allocation in >=4/5 fresh worlds, while beating a byte-near coupled *non-Mirror* allocator and keeping P95 <=1.10×.",
+  "physical_object": "native xKV/KQ-SVD or GQA physically shared KV/attention base and source-calibrated candidate per-head residual atoms",
+  "mirror_coordinate": "head×layer Mirror coefficient and selective private residual allocated with the full source-measured cross-head coupling matrix",
+  "logical_multiplicity": "many attention head/layer functions from one paid cache projection/decoder without violating task attention quality",
+  "mandatory_native_control": "native KQ-SVD / xKV-SR / same-byte coupled non-Mirror allocator / naive diagonal per-head allocation / packed INT4",
+  "baseline_hierarchy": [
+    "native full method",
+    "best same-byte non-Mirror factorization",
+    "proposed structured Mirror m",
+    "independent upper where practical"
+  ],
+  "dataset": {
+    "minimal_fixture": "Synthetic 4-head × 2-layer attention, d_head=16, length128, calibrated Q/K/V, coupled source score-error matrix from concatenated output residuals; 4 source prompt families and 2 OOD audit families. Candidate allocations: rank {0,2,4}, code size {0,2,4}, private {0,1}. Native per-role KQ-SVD and true K/V INT4 with scales are mandatory. Second stage use trained tiny LM with same RoPE and frozen tokenizer.",
+    "dev_seeds": [
+      11,
+      12,
+      13
+    ],
+    "fresh_seeds": [
+      101,
+      102,
+      103,
+      104,
+      105
+    ],
+    "heldout_whole_task_identities": true,
+    "allow_dev_selection_only": true,
+    "no_target_oracle_delta_fit": true,
+    "fresh_frozen": true
+  },
+  "implementation": {
+    "steps": [
+      "Freeze causal masks, RoPE/cache prefix provenance and query-family splits; source-only estimate PSD cross-head error metric G.",
+      "Verify G PSD after explicit eigenvalue tolerance; compute exact sum of per-head response errors and majorizer.",
+      "Enumerate equal serialized-budget private/shared atom choices, once using true coupled score or loss, once using diagonal G, once using native non-Mirror linear code.",
+      "Train source-only m dictionary, fit fresh role m only from permitted task support; never calibrate on hidden Query audit.",
+      "Evaluate true softmax attention output, long-context NLL, rare near-tie routing flips and exact physical cache pointer aliases.",
+      "Report false feasible allocations, NLL, whole-cache bytes incl codebook+indices, FLOPs and synchronized P95; an unattained mathematical upper bound is not a deployment baseline."
+    ],
+    "hardware": "Stage0 NumPy FP64/torch FP32 CPU score fixture; Stage1 CUDA optional for native xKV-SR/KQ-SVD and true bitpacked INT4. Record context/batch/clock and code materialization."
+  },
+  "metrics": "true held-out attention output and NLL / false-pass rate / serialized cache+code bytes / P95 decode",
+  "gates": {
+    "PASS": "No diagonal-derived false quality PASS after coupling-aware admission in five fresh worlds; >=4/5 fresh worlds meet +0.01 nat/token lower NLL than independently allocated Mirror at matched bytes, and strict Pareto gain over coupled native linear/INT4, P95<=1.10.",
+    "FAIL": "Coupling majorizer too loose and misallocates bits; exact native KQ-SVD or simple coupled linear code matches at equal bytes; learned m changes upstream KV invalidating physical sharing.",
+    "UNCERTAIN": "Strong native baseline, physical bytes/time, rank stability or independent task evidence unavailable"
+  },
+  "uncertainty": {
+    "sources": "Source-sample covariance rank, conditional input shift, cross-head correlation uncertainty, RoPE-position leakage, calibration/validation overlap, quantization and GPU materialization details.",
+    "standard": "u_c=sqrt(sum u_i²) when independent; add covariance otherwise",
+    "coverage_factor": 2,
+    "n_min_fresh": 5,
+    "small_n_guarantee": false,
+    "stop_before_fresh_on_dev_futility": true,
+    "no_favorable_audit_early_stop": true
+  },
+  "results_exist": false
+}

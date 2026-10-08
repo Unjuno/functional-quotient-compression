@@ -1,0 +1,88 @@
+{
+  "experiment_id": "MA-1171",
+  "title": "Serializer-aware joint Mirror basis × precision × private allocation",
+  "stage": "DESIGN_ONLY",
+  "status": "UNTESTED",
+  "worker_claim": false,
+  "plan_only": true,
+  "branch": "research/mirror-internal-formula-crossovers-20261008",
+  "canonical_worker_queue_unchanged": true,
+  "baseline_sha": "3b38a2afc5f9bc806bdff7232814898fcf17fcd6",
+  "internal_formula_refs": [
+    "IF07",
+    "IF08",
+    "IF09",
+    "IF10",
+    "IF11"
+  ],
+  "nearest_existing": [
+    "MA-690",
+    "MA-1114",
+    "MA-160",
+    "MA-1099"
+  ],
+  "prior_art_refs": [
+    "PA351",
+    "PA352",
+    "PA432"
+  ],
+  "priority": "P0",
+  "evidence_lane": "MECHANISM",
+  "hypothesis": "Across independently trained same-base source task adapters, full joint Mirror+bitwidth+private choice strictly improves held-out task NLL at the same **actual serialized** inference hard budget by >=2% relative to the best simple *non-Mirror* joint codec and one-axis coordinate-descent planner, and does not increase P95 inference more than 10%.",
+  "physical_object": "one source-trained task/adapter basis with a paid dictionary/decoder DAG; native quantized independent updates",
+  "mirror_coordinate": "code m_j selecting a structured basis layout and a quantized task core, with sparse private residual only when needed",
+  "logical_multiplicity": "many held-out task adapters from one physical basis plus small address bank",
+  "mandatory_native_control": "native joint codebook + quantization + sparse private allocation, no Mirror / coordinate-only optimizer / native Compress-then-Serve",
+  "baseline_hierarchy": [
+    "native full method",
+    "best same-byte non-Mirror factorization",
+    "proposed structured Mirror m",
+    "independent upper where practical"
+  ],
+  "dataset": {
+    "minimal_fixture": "Stage0: K=6 independent linear residual tasks, 4 signal blocks, shared task-delta rank 2/4, two code-basis layouts, 2/4/8-bit quantization and private ranks 0/1/2, with a coupled PSD activation metric; exact enum all legal joint bundles. Stage1: 4 source independently trained rank-4 LoRAs and 4 held-out task adaptations sharing the exact frozen base, no target oracle delta for m fitting. Use actual final serializer for each candidate, not proxy raw bits.",
+    "dev_seeds": [
+      11,
+      12,
+      13
+    ],
+    "fresh_seeds": [
+      101,
+      102,
+      103,
+      104,
+      105
+    ],
+    "heldout_whole_task_identities": true,
+    "allow_dev_selection_only": true,
+    "no_target_oracle_delta_fit": true,
+    "fresh_frozen": true
+  },
+  "implementation": {
+    "steps": [
+      "Freeze source/target tasks, base revision, activation calibration split and decoder DAG primitives.",
+      "Enumerate joint layout × m-family × quant precision × private support; fit all codes on source/support only.",
+      "For every candidate physically serialize identical inference payload format, including shared roots, private indexes, scalar metadata, and reconstruction state; reject over-budget final file.",
+      "Evaluate full coupled held-out logits/CE (cross terms), not a sum of independent block distortions; benchmark native non-Mirror joint solver and one-axis coordinate descent.",
+      "Choose only on 3 development seeds and lock one configuration; run five unseen task families without audit adaptation/selection.",
+      "Count runtime of dequantization, View decode, private execution, and off-device fetch; report dual axis RAM and on-disk size."
+    ],
+    "hardware": "Stage0 CPU NumPy float64 exact enum and actual NPZ serializer; Stage1 torch CPU float32 tiny adapters, optional CUDA for natural LLM throughput. Lock backend, dtype, batch, CPU/GPU clock and serializer version."
+  },
+  "metrics": "held-out task NLL/accuracy / actual final bytes / decoder DAG bytes / latency",
+  "gates": {
+    "PASS": ">=4/5 fresh worlds show >=2% relative task NLL improvement over the strongest native non-Mirror joint codec under identical final byte budget, P95<=1.10× native, no dev/audit leakage; superiority persists after eliminating any m code equivalent to a linear core.",
+    "FAIL": "Only the joint search improves but replacing m by a native linear/diagonal core matches the Pareto point; final serializer overflow; private rank approaches unrestricted LoRA; or source-conditioned aligned teacher explains all gains.",
+    "UNCERTAIN": "Strong native baseline, physical bytes/time, rank stability or independent task evidence unavailable"
+  },
+  "uncertainty": {
+    "sources": "Task covariance/cross-block metric estimation, short-support overfit, quant calibration, integer header overhead, private atom decoder prerequisites, quantization numerical error; stratify worlds and report paired sample CIs.",
+    "standard": "u_c=sqrt(sum u_i²) when independent; add covariance otherwise",
+    "coverage_factor": 2,
+    "n_min_fresh": 5,
+    "small_n_guarantee": false,
+    "stop_before_fresh_on_dev_futility": true,
+    "no_favorable_audit_early_stop": true
+  },
+  "results_exist": false
+}

@@ -1,0 +1,88 @@
+{
+  "experiment_id": "MA-1173",
+  "title": "Oracle-free ordered-rule packet Mirror factorial",
+  "stage": "DESIGN_ONLY",
+  "status": "UNTESTED",
+  "worker_claim": false,
+  "plan_only": true,
+  "branch": "research/mirror-internal-formula-crossovers-20261008",
+  "canonical_worker_queue_unchanged": true,
+  "baseline_sha": "3b38a2afc5f9bc806bdff7232814898fcf17fcd6",
+  "internal_formula_refs": [
+    "IF05",
+    "IF08",
+    "IF12"
+  ],
+  "nearest_existing": [
+    "MA-248",
+    "MA-131",
+    "MA-455",
+    "MA-1160",
+    "MA-257"
+  ],
+  "prior_art_refs": [
+    "PA10",
+    "PA16",
+    "PA420",
+    "PA375"
+  ],
+  "priority": "P0",
+  "evidence_lane": "MECHANISM",
+  "hypothesis": "On unseen order-reversed rule pairs with a hidden packet branch, a non-oracle fixed-depth execution interface with Mirror m attains >=95% exact two-rule and valid-path correctness in >=4/5 fresh worlds at <=1.10× native two-forward executor active compute, and beats a byte-matched signed shared-rule native executor and native PTP in the task-quality/bytes Pareto plane.",
+  "physical_object": "one causal Transformer with a common signed shared-rule bank and packet latent interface",
+  "mirror_coordinate": "compact rule/View address used at two verified causal execution steps, and one sampled packet-level branch shared over future slots",
+  "logical_multiplicity": "ordered noncommuting rule compositions and joint P-token packet futures without independent rule blocks or per-slot branch duplication",
+  "mandatory_native_control": "native two-forward predicted-intermediate executor / native PTP packet latent / signed shared basis / Dense / AR with KV",
+  "baseline_hierarchy": [
+    "native full method",
+    "best same-byte non-Mirror factorization",
+    "proposed structured Mirror m",
+    "independent upper where practical"
+  ],
+  "dataset": {
+    "minimal_fixture": "Base rules: 16 symbolic states, 8 common signed operator atoms, 4 ordered rule applications; train only atomic and seen ordered pairs; hold out entire unordered pair IDs with both reversed orders in same split. Distinguish revealed/deterministic and hidden shared packet-branch tasks (P={2,4}). No oracle intermediate target during training/inference. Use a fixed 2-step latent-state interface instead of recurrent loop or externally supplied true state.",
+    "dev_seeds": [
+      11,
+      12,
+      13
+    ],
+    "fresh_seeds": [
+      101,
+      102,
+      103,
+      104,
+      105
+    ],
+    "heldout_whole_task_identities": true,
+    "allow_dev_selection_only": true,
+    "no_target_oracle_delta_fit": true,
+    "fresh_frozen": true
+  },
+  "implementation": {
+    "steps": [
+      "Implement native Dense, native signed shared operator bank, fixed-depth predicted-intermediate two-step controller, and cached autoregressive/PTP packet baselines; freeze rule corpus.",
+      "Use 2×2 factorial: external executor absent/present and native signed basis/structured Mirror m; separately cross packet-level branch shared/not shared.",
+      "Allow only predicted intermediate token/state, never teacher state; verify that all methods receive the same known rule-token positions and context.",
+      "Train under matched token and optimizer update budgets; measure near-convergence quality separately from fixed update advantage.",
+      "Audit held-out reversed rule pairs, per-rule exact retention, hidden packet valid joint trajectory, runtime and actual bytes including packet latent/decoder state.",
+      "Evaluate counterexamples for commutation, parity, changed packet branch, teacher leakage and unobserved rule identity; record all unclosed gates as FAIL or UNCERTAIN."
+    ],
+    "hardware": "CPU torch FP32 2-layer width32 Transformer 4 heads, stage0 batch 32/96; optional CUDA with real causal decoding and kernel synchronization. Use total active forwards as explicit resource."
+  },
+  "metrics": "held-out reversed-pair validity / atomic retention / joint packet NLL / forward count / active FLOPs / wall",
+  "gates": {
+    "PASS": "At least 4/5 fresh rule worlds reach >=95% ordered pair and hidden joint packet validity, with quality no worse than native two-forward/AR and a strict improvement over the byte-near signed-basis+native packet-latent control at <=1.10× active compute and P95.",
+    "FAIL": "Only an oracle/teacher intermediate state recovers order; native signed executor matches m; hidden branch NLL remains factorized and inconsistent; or method uses extra forward passes claimed free.",
+    "UNCERTAIN": "Strong native baseline, physical bytes/time, rank stability or independent task evidence unavailable"
+  },
+  "uncertainty": {
+    "sources": "High-order credit assignment, hidden branch entropy, source pair leakage, validation task combinatorics, unintended teacher state input, cumulative decoding FLOPs and cache consistency.",
+    "standard": "u_c=sqrt(sum u_i²) when independent; add covariance otherwise",
+    "coverage_factor": 2,
+    "n_min_fresh": 5,
+    "small_n_guarantee": false,
+    "stop_before_fresh_on_dev_futility": true,
+    "no_favorable_audit_early_stop": true
+  },
+  "results_exist": false
+}

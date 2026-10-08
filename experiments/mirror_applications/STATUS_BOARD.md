@@ -4,13 +4,13 @@ Updated: 2026-10-08 JST
 Canonical worker branch remains `research/mirror-application-worker-ready-20261007` (unchanged).
 This is an ISOLATED RESEARCH branch `research/mirror-isolated-protocols-rebased-20261008`, NOT the worker authoritative queue.
 
-## Program totals (reconciled from authoritative 1170-row **isolated staging** registry)
+## Program totals (reconciled from authoritative 1174-row **isolated staging** registry)
 
-- Registered candidates: **1170**
-- P0: **640** (35 completed; 605 UNTESTED)
-- P1: **427** (12 completed; 415 UNTESTED)
+- Registered candidates: **1174**
+- P0: **643** (35 completed; 608 UNTESTED)
+- P1: **428** (12 completed; 416 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1123 UNTESTED, 29 PROMISING, 18 FAIL**
+- Current MA statuses: **1127 UNTESTED, 29 PROMISING, 18 FAIL**
 - 47 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -100,3 +100,8 @@ The isolated research branch includes **MA-1156..1164** (nine UNTESTED candidate
 ## Seventeenth independent research intake — no worker preemption
 
 The isolated branch adds MA-1165..1170 (six UNTESTED; four P0, two P1), PA425..433 (nine primary controls), and three supplements to existing MA-1097, MA-578, MA-1112. Detailed self-contained plans: [seventeenth sweep](research_intake/isolated_geometry_rebased_20261008/SEVENTEENTH_SWEEP.md). Current worker candidate MA-255, scientific statuses and main are unchanged. This registry is branch-local staging; reconcile IDs again before promotion.
+
+
+## 2026-10-08 internal formula cross-over — isolated branch only
+
+Four new design-only MA-1171..MA-1174, all UNTESTED (3 P0, 1 P1), cross-linking original FQC codec, RA-Mirror, MS, SRM and TM mathematical identities to application tests. No external PA is invented. [Formula ledger](research_intake/formula_crossovers_20261008/FORMULA_LEDGER.md), [cross-over plans](research_intake/formula_crossovers_20261008/README.md). The authoritative worker-ready branch and current next MA-255 are unchanged; avoid automatic queue insertion.
