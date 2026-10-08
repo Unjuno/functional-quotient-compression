@@ -1,0 +1,49 @@
+{
+  "experiment_id": "MA-299",
+  "commit": "0908ca2",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-299-split-on-share-mirror/tests -v",
+    "passed": 5,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "maximum_reconstruction_abs_difference": 0.0,
+    "payload_sha256_recorded": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0,
+    "rows_replayed": 21
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_seeds": [
+    29921,
+    29922,
+    29923
+  ],
+  "quality_bytes_valid_compute_invalid_seeds": [
+    29911,
+    29912,
+    29913
+  ],
+  "notes": [
+    "All final metrics are computed from deserialized inference payloads.",
+    "The 2-coefficient control is functionally equivalent on the registered Givens-aligned tasks.",
+    "Zero retention change follows from frozen state and does not test continual learning.",
+    "No optimizer updates. NumPy CPU only.",
+    "Result/protocol commit: 0908ca2.",
+    "On the reconciled branch, all 21 corrected fresh rows were regenerated; deterministic metrics, bytes, compute proxies and payload hashes matched source exactly. Wall-clock timing was remeasured."
+  ],
+  "integrated_provenance": {
+    "source_branch": "research/ma-299-split-on-share-mirror-20261008",
+    "source_result_commit": "0908ca2",
+    "latest_source_verification_commit": "6380945",
+    "reconciled_branch": "research/ma-299-split-on-share-reconciled-20261008",
+    "tests_rerun_on_reconciled_branch": 5,
+    "deterministic_fresh_rows_replayed": 21,
+    "metric_byte_compute_hash_match": true,
+    "timing": "remeasured; not required to match wall-clock values"
+  }
+}
