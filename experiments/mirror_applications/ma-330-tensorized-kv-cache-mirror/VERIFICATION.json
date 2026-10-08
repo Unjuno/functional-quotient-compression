@@ -1,0 +1,25 @@
+{
+  "experiment_id": "MA-330",
+  "commit": "c2d2aafa726daa791fca73c8f46d20319ceef0b6",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-330-tensorized-kv-cache-mirror/tests",
+    "passed": 4,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "payloads_checked": 15,
+    "max_abs_metric_replay_difference": 0.0
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "All 15 fresh payload byte counts and SHA-256 digests matched their recorded values; FP16-reloaded attention output metrics replayed exactly.",
+    "Mirror phase payload was 36,458B versus 36,488B direct cos/sin coefficients and 131,752B independent full caches in all three worlds.",
+    "Scope is a synthetic causal attention-cache reconstruction with oracle-known planted phases, not trained model or natural-language evidence."
+  ]
+}

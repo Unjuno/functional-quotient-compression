@@ -1,0 +1,26 @@
+{
+  "experiment_id": "MA-327",
+  "commit": "4dde340ef71b561fd07c439b4044de5b92f6bd53",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-327-factorized-layer-expert-tucker/tests",
+    "passed": 5,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "payloads_checked": 15,
+    "max_abs_metric_replay_difference": 0.0
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "All 15 fresh FP16 payload files were hashed and byte counts checked against metrics rows; FP16-reloaded test metrics and pair metrics replayed exactly.",
+    "Ordinary product and Mirror product are functionally and serialization-identical under paired initialization in all three fresh worlds.",
+    "Development artifact variants with different initial seeds are retained separately; final amendment and fresh results use paired seeds.",
+    "FAIL scoped to Mirror-specific byte/quality value for this synthetic rank-2 Tucker address."
+  ]
+}
