@@ -1,0 +1,52 @@
+{
+  "experiment_id": "MA-257",
+  "title": "Factorized Mirror context composition for held-out task combinations",
+  "status": "PROTOCOL_FROZEN_BEFORE_DEVELOPMENT",
+  "base_commit": "c0a232b",
+  "prior_art_refs": ["PA16"],
+  "evidence_lane": "COMPOSITIONAL_TRANSFER/TASK_QUALITY/INTERFERENCE/ACTUAL_BYTES",
+  "hypothesis": "A shared linear task model with two learned factor angles composed by addition will recover the unseen (A=1,B=1) task from observations of (0,0),(1,0),(0,1), reaching >=0.90 held-out accuracy and within 0.03 of a matched non-Mirror additive per-task-angle control, while its actual inference payload is smaller.",
+  "physical_object": "one shared 32-dimensional linear classifier weight vector",
+  "mirror_coordinate": "two learned FP16 factor angles; compose task view by theta(a,b)=a*theta_A+b*theta_B and rotate adjacent input-coordinate pairs",
+  "logical_multiplicity": "four task functions from two binary factors, with combination (1,1) withheld during Mirror and additive-control training",
+  "model": {
+    "task_count": 4,
+    "observed_factor_pairs": [[0,0],[1,0],[0,1]],
+    "heldout_factor_pair": [1,1],
+    "input_dim": 32,
+    "train_examples_per_observed_task": 1024,
+    "test_examples_per_task": 4096,
+    "optimizer_updates": 1200,
+    "optimizer": "Adam",
+    "learning_rate": 0.015,
+    "development_world_seeds": [25701,25702],
+    "fresh_world_seeds": [25711,25712,25713],
+    "teacher": "four binary classification functions generated from one random linear teacher by two independent pairwise orthogonal rotation factors; factor angles sampled before model fitting"
+  },
+  "controls": [
+    "one shared tied classifier trained across the three observed tasks",
+    "fixed random-sign PSP binding of three independently fitted observed-task classifiers; held-out task is not claimed",
+    "independent model per task, including held-out labels (upper reference only)",
+    "non-Mirror additive task-code control with one learned angle per observed task and held-out angle theta10+theta01-theta00",
+    "factorized Mirror with two learned factor angles and zero-shot held-out composition"
+  ],
+  "evaluation": {
+    "primary_metric": "held-out (1,1) task accuracy and three observed-task accuracies",
+    "compositional_metric": "held-out accuracy relative to independent oracle and additive-angle control",
+    "storage": "actual ZIP/NPY FP16 inference bytes including shared weights, all task/factor codes, metadata, reconstruction rules and archive headers",
+    "compute": "training examples, updates, optimizer wall-clock and inference coordinate operations"
+  },
+  "development_gate_before_fresh": "Both seeds: Mirror held-out accuracy >=0.90, within 0.03 of additive-angle control, and actual serialized payload strictly smaller than additive-angle control. Any miss seals fresh.",
+  "success_gate": "All three fresh worlds meet held-out quality, transfer and actual-byte gates; report every factor combination, per-task interference and serialized payload.",
+  "failure_gate": "Any development seed misses a registered quality or byte gate; fresh remains sealed.",
+  "storage": {
+    "authority": "actual deterministic ZIP/NPY FP16 inference payload after reload",
+    "paid_objects": ["shared classifier weights", "factor/task context codes", "metadata and archive headers", "reconstruction state"]
+  },
+  "boundaries": [
+    "synthetic linear compositional task family; no natural task or language evidence",
+    "logical combination count is not capacity; held-out task accuracy is required",
+    "PSP is measured only on its three stored tasks and is not credited with the unseen task",
+    "independent held-out oracle uses held-out labels and is not a zero-shot comparison"
+  ]
+}

@@ -1,0 +1,191 @@
+{
+  "experiment_id": "MA-257",
+  "seed": 25713,
+  "observed_tasks": [
+    0,
+    1,
+    2
+  ],
+  "heldout_task": 3,
+  "true_factor_angles": [
+    1.1800464391708374,
+    1.0981922149658203
+  ],
+  "teacher_task_angles": [
+    0.0,
+    1.1800464391708374,
+    1.0981922149658203,
+    2.2782387733459473
+  ],
+  "train_examples": 3072,
+  "optimizer_updates": {
+    "independent": 4800,
+    "shared_factorized": 1200,
+    "shared_additive": 1200,
+    "tied": 1200
+  },
+  "wall_seconds": {
+    "independent": 1.594572543996037,
+    "factorized": 0.8124282869976014,
+    "additive": 0.6685362000062014,
+    "tied": 0.35320368399698054
+  },
+  "methods": {
+    "independent_oracle": {
+      "quality_all_tasks": {
+        "mean_accuracy": 0.98138427734375,
+        "per_task_accuracy": [
+          0.980712890625,
+          0.978515625,
+          0.978271484375,
+          0.988037109375
+        ],
+        "mean_bce": 0.06812210381031036,
+        "per_task_bce": [
+          0.06541356444358826,
+          0.0702749639749527,
+          0.07325015962123871,
+          0.06354972720146179
+        ]
+      },
+      "quality_observed_tasks": {
+        "mean_accuracy": 0.9791666865348816,
+        "per_task_accuracy": [
+          0.980712890625,
+          0.978515625,
+          0.978271484375
+        ],
+        "mean_bce": 0.06964623183012009,
+        "per_task_bce": [
+          0.06541356444358826,
+          0.0702749639749527,
+          0.07325015962123871
+        ]
+      },
+      "actual_payload_bytes": 732,
+      "payload_sha256": "2c12cfa6d93f3b51da9477c65d7ac864e622c00780905295ac5730ab86e8a11b"
+    },
+    "tied": {
+      "quality_all_tasks": {
+        "mean_accuracy": 0.7537841796875,
+        "per_task_accuracy": [
+          0.76318359375,
+          0.856201171875,
+          0.880126953125,
+          0.515625
+        ],
+        "mean_bce": 0.6252948045730591,
+        "per_task_bce": [
+          0.5324909687042236,
+          0.3077322542667389,
+          0.2705242931842804,
+          1.3904318809509277
+        ]
+      },
+      "quality_observed_tasks": {
+        "mean_accuracy": 0.8331705927848816,
+        "per_task_accuracy": [
+          0.76318359375,
+          0.856201171875,
+          0.880126953125
+        ],
+        "mean_bce": 0.3702491521835327,
+        "per_task_bce": [
+          0.5324909687042236,
+          0.3077322542667389,
+          0.2705242931842804
+        ]
+      },
+      "actual_payload_bytes": 526,
+      "payload_sha256": "36172ce27a70a31ea0831e951a52f5c70e5df6fcbcf8b2b38c5d721e74d911d7"
+    },
+    "psp_sign": {
+      "quality_all_tasks": null,
+      "quality_observed_tasks": {
+        "mean_accuracy": 0.6980794072151184,
+        "per_task_accuracy": [
+          0.694580078125,
+          0.720947265625,
+          0.6787109375
+        ],
+        "mean_bce": 3.193295478820801,
+        "per_task_bce": [
+          3.176453113555908,
+          2.7566587924957275,
+          3.6467745304107666
+        ]
+      },
+      "actual_payload_bytes": 792,
+      "payload_sha256": "0241e78551c474a4e18b75a3600521a498ef47546123b69ae9c66c812d6f3252",
+      "heldout_supported": false
+    },
+    "factorized_mirror": {
+      "quality_all_tasks": {
+        "mean_accuracy": 0.987060546875,
+        "per_task_accuracy": [
+          0.98876953125,
+          0.987060546875,
+          0.98486328125,
+          0.987548828125
+        ],
+        "mean_bce": 0.06341324001550674,
+        "per_task_bce": [
+          0.05993851646780968,
+          0.063602976500988,
+          0.06688088178634644,
+          0.06323059648275375
+        ]
+      },
+      "quality_observed_tasks": {
+        "mean_accuracy": 0.9868977665901184,
+        "per_task_accuracy": [
+          0.98876953125,
+          0.987060546875,
+          0.98486328125
+        ],
+        "mean_bce": 0.0634741261601448,
+        "per_task_bce": [
+          0.05993851646780968,
+          0.063602976500988,
+          0.06688088178634644
+        ]
+      },
+      "actual_payload_bytes": 819,
+      "payload_sha256": "840179dda959c63803cd1916f55cb23e962fc1cfb5629c579bd46c46fdfb355d"
+    },
+    "additive_task_angles": {
+      "quality_all_tasks": {
+        "mean_accuracy": 0.98681640625,
+        "per_task_accuracy": [
+          0.986328125,
+          0.986328125,
+          0.985107421875,
+          0.989501953125
+        ],
+        "mean_bce": 0.06336453557014465,
+        "per_task_bce": [
+          0.060718294233083725,
+          0.06366807222366333,
+          0.06662026792764664,
+          0.062451526522636414
+        ]
+      },
+      "quality_observed_tasks": {
+        "mean_accuracy": 0.9859212040901184,
+        "per_task_accuracy": [
+          0.986328125,
+          0.986328125,
+          0.985107421875
+        ],
+        "mean_bce": 0.0636688768863678,
+        "per_task_bce": [
+          0.060718294233083725,
+          0.06366807222366333,
+          0.06662026792764664
+        ]
+      },
+      "actual_payload_bytes": 827,
+      "payload_sha256": "cb151eb9f7a324495ef7f3e2dc63bccd79883eb1f1577711461b72b1e43e14f7"
+    }
+  }
+}

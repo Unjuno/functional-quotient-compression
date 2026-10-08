@@ -6,11 +6,11 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (51 completed; 579 UNTESTED)
+- P0: **630** (52 completed; 578 UNTESTED)
 - P1: **422** (12 completed; 410 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1092 UNTESTED, 31 PROMISING, 32 FAIL**
-- 49 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
+- Current MA statuses: **1091 UNTESTED, 32 PROMISING, 32 FAIL**
+- 50 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
 - Thirteenth literature sweep added MA-996..1045 (50 UNTESTED; 40 P0/10 P1) and PA296..PA325. IDs MA-1000+ use four digits; consult `check_registry_integrity.py`. No new experiment results.
@@ -23,19 +23,19 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-257 — Compositional Mirror context group (P0; PA16)**
+**MA-258 — Parameter-superposed expert bank with Mirror unbinding (P0; PA16/PA01)**
 
-MA-255 and MA-399 are recorded FAIL. MA-255’s learned scalar phase gained only +0.0125/+0.0264 accuracy over PSP and used 830 B versus 822 B; fresh remains sealed. MA-399 also missed acceptance and payload gates. MA-369/371/372 remain UNTESTED and paused pending width/depth output-code family redesign.
+MA-257 is PROMISING only for a synthetic rotation-compositional family: it reached 0.986–0.994 on the withheld factor pair and used 819 B versus 827 B for the additive control; the control matched quality. MA-255 and MA-399 are recorded FAIL. MA-369/371/372 remain UNTESTED and paused pending width/depth output-code family redesign.
 
-Next: read PA16 and freeze MA-257’s compositional context controls before development.
+Next: inspect the existing MA-258 experiment directory, then read PA16/PA01 and determine whether this P0 candidate is active or blocked.
 
 ## Active experiment
 
-MA-255, MA-383, MA-385, MA-389, MA-391, MA-392, MA-393, MA-395, MA-397 and MA-399 are FAIL and recorded on dedicated research branches. MA-257 is next. MA-367/368/374/375/379/381/383/385/389/391/392/393/395/397/399 fresh worlds remain unopened under their registered gates.
+MA-255, MA-383, MA-385, MA-389, MA-391, MA-392, MA-393, MA-395, MA-397 and MA-399 are FAIL and recorded on dedicated research branches. MA-257 is PROMISING on a dedicated branch. MA-258 is next. MA-367/368/374/375/379/381/383/385/389/391/392/393/395/397/399 fresh worlds remain unopened under their registered gates.
 
 ## Verified status index
 
-- **PROMISING (31):** MA-001, MA-002, MA-003, MA-004, MA-005, MA-006, MA-007, MA-008, MA-012, MA-014, MA-015, MA-041, MA-076, MA-079, MA-111, MA-121, MA-156, MA-160, MA-171, MA-173, MA-181, MA-189, MA-241, MA-244, MA-245, MA-249, MA-250, MA-251, MA-374, MA-381, MA-691.
+- **PROMISING (32):** MA-001, MA-002, MA-003, MA-004, MA-005, MA-006, MA-007, MA-008, MA-012, MA-014, MA-015, MA-041, MA-076, MA-079, MA-111, MA-121, MA-156, MA-160, MA-171, MA-173, MA-181, MA-189, MA-241, MA-244, MA-245, MA-249, MA-250, MA-251, MA-257, MA-374, MA-381, MA-691.
 - **FAIL (32):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-367, MA-368, MA-375, MA-379, MA-383, MA-385, MA-389, MA-391, MA-392, MA-393, MA-255, MA-395, MA-397, MA-399.
 
 All per-ID evidence is retained in the local experiment directories and in `CLAIM_LEDGER.csv`. Consult [the evidence integration audit](../../docs/phase2/MIRROR_MA_EVIDENCE_INTEGRATION_2026-10-08.md) for linked reports, verifications, provenance and claim boundaries.

@@ -1,0 +1,51 @@
+{
+  "experiment_id": "MA-257",
+  "commit": "pending",
+  "tests": {
+    "command": "pytest -q experiments/mirror_applications/ma-257-compositional-context/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "payload_count": 25,
+    "actual_FP16_ZIP_bytes_authoritative": true,
+    "metric_replay_command": "python experiments/mirror_applications/ma-257-compositional-context/source/verify_payloads.py"
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_accuracy_difference_after_FP16_reload": 0.0001627802848815918,
+    "all_methods_replayed": true
+  },
+  "fresh_split_integrity_checked": true,
+  "development_seeds": [25701, 25702],
+  "fresh_seeds": [25711, 25712, 25713],
+  "fresh_status": "OPENED_AFTER_BOTH_DEVELOPMENT_GATES_PASSED",
+  "gates": {
+    "heldout_accuracy_min": 0.90,
+    "within_accuracy_of_additive_control_max_gap": 0.03,
+    "mirror_payload_strictly_smaller_than_additive_control": true,
+    "factorized_mirror_heldout_accuracy": {
+      "25701": 0.99365234375,
+      "25702": 0.989990234375,
+      "25711": 0.986083984375,
+      "25712": 0.98583984375,
+      "25713": 0.987548828125
+    },
+    "additive_control_heldout_accuracy": {
+      "25701": 0.988037109375,
+      "25702": 0.989990234375,
+      "25711": 0.98583984375,
+      "25712": 0.982421875,
+      "25713": 0.989501953125
+    },
+    "serialized_bytes_mirror_vs_additive": [819, 827]
+  },
+  "notes": [
+    "The synthetic task family is constructed from two composing orthogonal rotations; no natural-task generality is established.",
+    "PSP is evaluated only on the three stored/observed tasks; held-out task quality is unsupported by that control.",
+    "The independent oracle uses held-out task labels and is an upper reference, not a zero-shot control.",
+    "After payload replay corrected the stored factor code to two angles, all five worlds were rerun with the frozen settings."
+  ]
+}
