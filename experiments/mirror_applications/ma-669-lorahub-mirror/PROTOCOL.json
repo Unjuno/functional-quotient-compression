@@ -1,0 +1,22 @@
+{
+  "experiment_id": "MA-669",
+  "title": "LoRAHub coefficients from Mirror task code",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/COMPUTE/QUALITY",
+  "base_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
+  "draw_id": "Draw44",
+  "hypothesis": "A development-fitted map from few-shot task support statistics to coefficient-space Mirror coordinates can recover a useful composition of shared LoRA experts with fewer search evaluations than LoRAHub-style coefficient search, at comparable task quality and bytes.",
+  "physical_object": "shared bank of low-rank linear update experts",
+  "mirror_coordinate": "few-shot support-derived task code mapped to expert composition coefficients",
+  "logical_multiplicity": "few-shot task-specific composed adapters",
+  "prior_art_refs": ["PA148"],
+  "controls": ["LoRAHub-style gradient-free random coefficient search", "direct least-squares coefficient fit", "Mirror support-statistic coefficient map", "independent task delta upper control"],
+  "task": "Synthetic few-shot linear regression over 4-dimensional inputs; each task target is a sparse composition of six shared rank-1 experts. Fit coefficient map only on development task identities; evaluate new task identities using 32 support and 128 query examples.",
+  "development": {"worlds_or_seeds": [66901], "selection_metric": "Fit a fixed linear support-statistic-to-coefficient map; code dimension and expert count fixed before fresh tasks."},
+  "fresh": {"worlds_or_seeds": [66911, 66912, 66913], "locked_before_access": true, "split": "Each fresh world has 12 new tasks with 2-3 expert compositions; 32 support and 128 heldout query examples/task. No fresh task delta used to fit the Mirror map."},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["shared expert factors", "Mirror support-statistic map", "task code/coefficient vector", "LoRAHub coefficients", "independent task deltas", "metadata"]},
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true},
+  "success_gate": "On >=2/3 fresh worlds, Mirror query MSE <=1.05x direct least-squares fit, beats LoRAHub random search by >=10x coefficient objective evaluations at matched MSE, and actual bytes do not exceed LoRAHub by >5%.",
+  "failure_gate": "FAIL if quality misses in >=2/3 worlds, if direct coefficient fitting matches Mirror without extra cost, or if search-efficiency gain disappears against the direct least-squares control. Report fresh task code fitting as distinct from end-to-end task training.",
+  "boundaries": ["synthetic linear regression only", "known shared expert span", "no language tasks or pretrained LoRA modules", "support-statistic code learning is separate from search algorithm", "no capacity claim from logical coefficient combinations"]
+}
