@@ -1,0 +1,25 @@
+{
+  "experiment_id": "MA-355",
+  "commit": "14e94ae5230afbdb7312f988c689457ec9cef4f7",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-355-product-key-mirror-address/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "development_payloads_checked": 10
+  },
+  "metric_replay": {
+    "checked": true,
+    "development_rows_replayed": 10,
+    "fresh_rows": 0,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Only amended development seeds 35501 and 35502 were used.",
+    "Initial invalid interaction-tensor run is excluded and documented; no fresh seeds accessed."
+  ]
+}

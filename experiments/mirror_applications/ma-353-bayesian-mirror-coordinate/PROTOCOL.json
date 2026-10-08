@@ -1,0 +1,20 @@
+{
+  "experiment_id": "MA-353",
+  "title": "Bayesian posterior over Mirror coordinates",
+  "status": "FROZEN_BEFORE_DEVELOPMENT",
+  "evidence_lane": "MECHANISM/UNCERTAINTY/CALIBRATION/STORAGE/COMPUTE",
+  "base_commit": "c935a90",
+  "hypothesis": "A Gaussian posterior over a one-dimensional Mirror coordinate can represent a three-mode logistic posterior with matched predictive calibration using at least 10% fewer bytes than a matched rank-1 multiplicative BNN and independent three-model mixture.",
+  "physical_object": "one 16-dimensional logistic classifier mean and a sparse one-coordinate functional direction",
+  "mirror_coordinate": "Gaussian scalar m with five-node Gauss-Hermite predictive integration",
+  "logical_multiplicity": "continuous uncertainty over nearby logistic functions, approximated deterministically for prediction",
+  "prior_art_refs": ["PA41", "MA-349"],
+  "controls": ["deterministic mean classifier", "independent three-model posterior", "rank-1 multiplicative Gaussian BNN posterior", "Gaussian Mirror coordinate posterior", "ordinary direct scalar Gaussian posterior"],
+  "development": {"worlds_or_seeds": [35301,35302], "examples_per_world": 10000, "selection_metric": "predictive NLL, Brier, ECE, calibration MSE, shifted NLL, actual bytes, quadrature component compute"},
+  "fresh": {"worlds_or_seeds": [35311,35312,35313], "locked_before_access": true, "open_only_after_development_pass": true},
+  "storage": {"authority": "actual deterministic ZIP/NPY FP32 inference payload after reload", "paid_objects": ["posterior mean", "direction index and value", "posterior location and scale or discrete factors", "mixture probabilities", "quadrature rule metadata", "archive metadata"]},
+  "compute": {"report_examples": true, "report_optimizer_updates": true, "report_component_evaluations": true, "report_MAC_proxy": true, "report_wall_clock": true},
+  "success_gate": "Both development seeds: NLL within 0.01 of exact teacher, calibration MSE <=1e-4, ECE <=0.03, Mirror >=10% smaller than rank-1 BNN and independent three-model archive, compute <=1.5x BNN; direct scalar control >=10% larger or measurably worse calibrated for Mirror-specific claim.",
+  "failure_gate": "Either dev seed misses quality gates, byte savings <10%, rank-1 BNN within 10% bytes at equal quality, direct scalar control within 10%, or compute >1.5x; fresh sealed.",
+  "boundaries": ["oracle synthetic posterior, no posterior fitting", "no natural-data or learned-network claim", "deterministic quadrature approximates continuous Gaussian predictions and is charged for five components"]
+}

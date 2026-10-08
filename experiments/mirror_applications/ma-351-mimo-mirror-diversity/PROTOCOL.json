@@ -1,0 +1,33 @@
+{
+  "experiment_id": "MA-351",
+  "title": "MIMO + Mirror member diversity",
+  "status": "AMENDED_AFTER_INVALID_DEVELOPMENT_BEFORE_FRESH",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY/DIVERSITY/COMPUTE",
+  "base_commit": "52d734a",
+  "hypothesis": "On a controlled nonlinear classification problem, a shared MIMO trunk with one learned scalar Mirror coordinate per member can reduce member correlation and improve ensemble NLL over native MIMO while using fewer actual bytes than member-specific readout heads and preserving one shared-trunk evaluation.",
+  "physical_object": "one shared 2-layer MLP trunk plus readout state for four members",
+  "mirror_coordinate": "one learned scalar per member selecting a linear combination of two readout basis matrices",
+  "logical_multiplicity": "four independently supervised member classifiers evaluated from one shared trunk",
+  "prior_art_refs": ["PA42"],
+  "controls": ["four independent MLPs", "shared trunk with four native MIMO heads", "rank-1 readout basis with ordinary scalar member coefficients", "same rank-1 readout basis with Mirror scalar coordinates", "rank-2 readout basis with direct coefficients"],
+  "development": {
+    "worlds_or_seeds": [35101, 35102],
+    "selection_metric": "pooled ensemble NLL; member correctness correlation; pairwise Jensen-Shannon diversity; member accuracy and calibration; actual serialized bytes; MAC proxy and wall time",
+    "train_examples_per_world": 8192,
+    "test_examples_per_world": 4096,
+    "updates": 2000,
+    "batch_size": 128,
+    "optimizer": "AdamW lr=0.001",
+    "architecture": "2D input, four deterministic angular-sector classes, MLP hidden widths [32,32], ReLU, four members"
+  },
+  "fresh": {"worlds_or_seeds": [35111, 35112, 35113], "locked_before_access": true, "open_only_if_development_gate_passes": true},
+  "storage": {
+    "authority": "actual deterministic ZIP/NPY inference payload bytes after reload",
+    "paid_objects": ["shared trunk", "readout basis or native member heads", "all member scalar codes or direct coefficients", "normalization state", "metadata"]
+  },
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true, "report_member_inference_throughput": true},
+  "success_gate": "Both development worlds: Mirror pooled NLL within 0.01 of native MIMO, pairwise correctness correlation at least 0.05 lower, actual payload at least 10% smaller, compute <=1.10x; direct coefficients must be >=10% larger at equal quality for a Mirror-specific pass.",
+  "failure_gate": "Either development world has Mirror NLL > native MIMO by 0.03, or payload saving <10%, correlation gain <0.05, direct coefficients within 10% at equal quality, or compute >1.10x; seal fresh.",
+  "amendment": "Initial development attempt produced uniform four-class predictions in shared-readout methods (NLL approximately ln(4)) and exposed a label-indexing error in the independent upper control. No fresh seeds were accessed. Before any fresh/audit data, amend the synthetic task to deterministic angular sectors and train all members on the same labels/examples so native MIMO/shared-readout optimization is diagnostically valid. Same architecture widths, updates, optimizer, seeds, payload contract and gates; rerun development seeds from scratch. Archive invalid exploratory output and do not include it as evidence.",
+  "boundaries": ["synthetic fixed-budget mechanism screen, not near-converged capacity evidence", "MIMO is represented by jointly supervised member outputs sharing a hidden trunk", "no language modeling or natural-data claim"]
+}

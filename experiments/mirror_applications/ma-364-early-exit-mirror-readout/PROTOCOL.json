@@ -1,0 +1,20 @@
+{
+  "experiment_id": "MA-364",
+  "title": "Early-exit Mirror readout views",
+  "status": "FROZEN_BEFORE_DEVELOPMENT",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY/COMPUTE",
+  "base_commit": "c935a90",
+  "hypothesis": "Three exit readouts can be represented by one shared head plus Mirror depth coordinates at lower actual bytes than separate heads while preserving exit quality and fixed-policy MAC count.",
+  "physical_object": "three classifier readout matrices at hidden dimension 64 and 8 classes",
+  "mirror_coordinate": "one scalar depth coordinate per exit over a shared readout basis",
+  "logical_multiplicity": "three depth-specific prediction heads used at exits 2,4,6",
+  "prior_art_refs": ["PA50"],
+  "controls": ["three independent heads", "hard-shared head", "shared basis with direct coefficients", "shared basis with Mirror depth coordinates"],
+  "development": {"worlds_or_seeds": [36401,36402], "fresh_seeds": [36411,36412,36413], "examples": 4096, "hidden_dim": 64, "classes": 8, "exit_depths": [2,4,6], "fixed_exit_fractions": [0.5,0.3,0.2], "selection_metric": "per-exit and mixed-policy NLL/accuracy, serialized head bytes, average MACs"},
+  "fresh": {"worlds_or_seeds": [36411,36412,36413], "locked_before_access": true, "open_only_if_development_passes": true},
+  "storage": {"authority": "actual deterministic ZIP/NPY inference payload after reload", "paid_objects": ["all head matrices", "shared basis", "depth coordinates", "biases", "exit policy metadata"]},
+  "compute": {"optimizer_updates": 0, "report_examples": true, "report_average_MACs": true, "report_wall_time": true},
+  "success_gate": "Both dev seeds: mixed NLL within 0.01 separate heads, per-exit NLL within 0.02, >=10% head-byte savings, identical average MAC count; direct coefficients >=10% larger for Mirror-specific value.",
+  "failure_gate": "Quality gate missed or direct control within 10%; fresh sealed.",
+  "boundaries": ["synthetic oracle readout bank", "common fixed exit policy", "no trained Transformer or adaptive routing evidence"]
+}
