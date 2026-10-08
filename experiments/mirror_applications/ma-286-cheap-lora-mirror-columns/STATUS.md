@@ -5,8 +5,8 @@
 - Base commit: `28194ea`
 - Development complete: yes
 - Fresh/audit opened: yes; 28611–28613
-- Results committed: pending
-- Verification committed: pending
+- Results committed: yes (`ed10296`)
+- Verification committed: yes
 - Registry row updated: pending
 
 ## Result
