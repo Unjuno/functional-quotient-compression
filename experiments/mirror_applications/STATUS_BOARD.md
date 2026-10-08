@@ -23,7 +23,7 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-407 — demodulated Mirror-MoE expert views (P0; PA65).** MA-455 is a verified development-screen FAIL: reverse View ordering raised error, but its 1,013-byte payload exceeded the independent three-block control at 770 bytes in both seeds; native Givens exactly aliased its output and payload. Fresh seeds stayed sealed. MA-455 result branch is pushed. MA-369/371/372 are paused under the supernet-family diagnosis; MA-407 is the next eligible P0.
+**MA-457 — continual path reuse before module birth (P0; PA80).** MA-455 is a verified development-screen FAIL: reverse View ordering raised error, but its 1,013-byte payload exceeded the independent three-block control at 770 bytes in both seeds; native Givens exactly aliased its output and payload. Fresh seeds stayed sealed. MA-455 result branch is pushed. MA-369/371/372 and conditional-modulation candidates MA-401/403/405/407/408/411/413 are paused in the worker queue. MA-457 tests PathNet-style reuse and module growth without the repeated Givens role coordinate.
 
 MA-434 and MA-436 found exact native SSM parameterization aliases; MA-442 and MA-453 likewise alias native Givens conditioning. MA-453’s fixed-router synthetic screen showed no Mirror-specific value against role-vector or independent-block controls. Fresh seeds remain sealed.
 
