@@ -23,3 +23,5 @@ None.
 PA80 reviewed. This candidate tests continual module allocation and growth with rank-one task views; it does not repeat the paused Givens path-role conditioner from MA-451/452.
 
 Implementation note: the first preflight attempt stopped before complete metrics due to a Tensor/dict retention-check bug. The partial PathNet payload and failure record are preserved under `runs/invalid_preflight_45701_01/`; it is excluded from evidence and was not used to tune the frozen configuration.
+
+A second invalid preflight stopped before metrics because the accepted-query dictionary was not initialized. Partial PathNet/shared payloads are preserved in `runs/invalid_preflight_45701_02/`; this attempt also was not used for tuning.

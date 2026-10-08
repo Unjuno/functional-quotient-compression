@@ -41,7 +41,7 @@ def train_rank1(seed):
     for task in range(4):
         xq,yq=task_data(seed,task,'query');accepted[task]=float(torch.sqrt(((code_output(xq,params[0].detach(),params[1].detach(),params[2].detach(),params[3][task].detach())-yq)**2).mean()))
     # Sequential task arrival: preserve meta-task codes, fit each new scalar from support.
-    learned={i:float(params[3][i].detach()) for i in range(4)}; births={};per_task=[]
+    learned={i:float(params[3][i].detach()) for i in range(4)}; births={}; accepted={};per_task=[]
     for task in range(4,NTASK):
         x,y=task_data(seed,task,'support');c=torch.nn.Parameter(torch.zeros(()));o=torch.optim.Adam([c],lr=.02)
         for _ in range(CODE_UPDATES):
