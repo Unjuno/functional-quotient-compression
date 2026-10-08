@@ -1,0 +1,191 @@
+{
+  "experiment_id": "MA-921",
+  "title": "Factorized endpoint Views for reusable flow maps",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/COMPUTE/RUNTIME",
+  "base_commit": "16807a7d6dc17a834a44ed3cc793ccc28b615691",
+  "hypothesis": "Factorized Mirror endpoint coordinates over one shared two-time flow-map basis can recover held-out interval maps and preserve semigroup composition with lower actual inference bytes than native Flow Map Matching time conditioning, while outperforming a byte-matched additive endpoint factor control.",
+  "physical_object": "Shared matrix-valued flow-map basis for the two-time transport operator.",
+  "mirror_coordinate": "m(s,t) = U[start_index] elementwise-multiplied by V[end_index], linearly decoded to shared flow-map basis coefficients.",
+  "logical_multiplicity": "One logical transport map for every ordered interval pair on a fixed 21-point time grid, including held-out interval pairs.",
+  "prior_art_refs": [
+    "PA260"
+  ],
+  "random_selection": {
+    "draw": 3,
+    "pool_size": 532,
+    "pool_sha256": "1b3db07d7808291c738bb1af93595f97a486455a78438ce058ff8ac232bd3f21",
+    "seed_hex": "cf1ced50eaa989e911b662796dc52d2d1db1a19e78320ab4ee903fdfcf75bd06",
+    "zero_based_index": 382,
+    "selection_rule": "registry rows priority=P0 AND status=UNTESTED; exclude every ID with any remote research/ma-* branch; numeric ID order"
+  },
+  "controls": [
+    "Native FMM two-time conditioned flow-map MLP receiving state x and endpoints (s,t)",
+    "Additive endpoint factors U[s]+V[t] decoded into the same shared flow-map basis",
+    "Independent full 2x2 matrix per interval (seen-interval upper control; held-out score N/A)"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      9211,
+      9212
+    ],
+    "selection_metric": "held-out interval map MSE, subject to native-FMM quality, additive-control specificity, semigroup and bytes gates",
+    "allowed_tuning": "endpoint rank in {2,4,8} and equal optimizer update budget in {200,500}; all methods receive the selected update budget."
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      92101,
+      92102,
+      92103
+    ],
+    "locked_before_access": true,
+    "locked_interval_pairs": "same 12 held-out endpoint pairs as development"
+  },
+  "data": {
+    "generator": "Synthetic non-autonomous linear ODE dx/dt=(A0+sin(2*pi*t)*A1)x, with noncommuting 2x2 matrices drawn per world; true interval maps are integrated with fixed RK4 step 0.002. Time grid has 21 endpoints from 0 through 1 at spacing 0.05.",
+    "heldout_pairs": [
+      [
+        0,
+        20
+      ],
+      [
+        2,
+        14
+      ],
+      [
+        4,
+        16
+      ],
+      [
+        6,
+        18
+      ],
+      [
+        1,
+        10
+      ],
+      [
+        3,
+        12
+      ],
+      [
+        5,
+        15
+      ],
+      [
+        7,
+        17
+      ],
+      [
+        9,
+        20
+      ],
+      [
+        0,
+        11
+      ],
+      [
+        8,
+        19
+      ],
+      [
+        10,
+        20
+      ]
+    ],
+    "composition_intermediates": [
+      [
+        0,
+        8,
+        20
+      ],
+      [
+        2,
+        8,
+        14
+      ],
+      [
+        4,
+        10,
+        16
+      ],
+      [
+        6,
+        12,
+        18
+      ],
+      [
+        1,
+        5,
+        10
+      ],
+      [
+        3,
+        8,
+        12
+      ],
+      [
+        5,
+        10,
+        15
+      ],
+      [
+        7,
+        12,
+        17
+      ],
+      [
+        9,
+        14,
+        20
+      ],
+      [
+        0,
+        6,
+        11
+      ],
+      [
+        8,
+        13,
+        19
+      ],
+      [
+        10,
+        15,
+        20
+      ]
+    ],
+    "train_pairs": "All 198 remaining s<t pairs",
+    "train_examples_per_pair": 32,
+    "eval_examples_per_pair": 64
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "all shared flow-map basis weights",
+      "all endpoint factor tables and coefficient decoder",
+      "native conditioning network",
+      "independent interval matrices",
+      "time-grid/index metadata",
+      "model/config/precision metadata and serialization overhead"
+    ]
+  },
+  "compute": {
+    "report_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": "forward MACs per sample times examples and updates; training estimate uses 3x forward proxy",
+    "report_isolated_wall_clock": true,
+    "report_nfe": "one learned map evaluation for direct s-to-t; two for a two-segment composition",
+    "semigroup": "report heldout composition versus true flow and model semigroup discrepancy"
+  },
+  "development_gate": "Freeze the lowest equal update budget then rank meeting all on both development worlds: Mirror heldout map MSE <= 1.10x native FMM; <=0.80x additive endpoint control; normalized semigroup discrepancy <=0.01; and full serialized payload <=70% native FMM.",
+  "success_gate": "All three fresh worlds meet the four development gates at the frozen settings. Direct-map NFE must remain 1 and the two-segment composition NFE 2. Report quality, bytes, compute and runtime separately.",
+  "failure_gate": "If no development setting meets all gates, record development FAIL and do not open fresh. If any fresh world fails, final classification FAIL; no fresh tuning or retries.",
+  "boundaries": [
+    "Synthetic linear ODE mechanism only; no image FID, diffusion checkpoint or real-world FMM claim.",
+    "Endpoint coordinates live on a fixed discrete time grid; no claim about arbitrary continuous endpoint interpolation.",
+    "NFE counts one learned interval-map call; the map is not compared with a native ODE solver at equal NFE.",
+    "Independent interval matrices have no learned held-out relation map; their heldout metric is N/A.",
+    "The time grid and endpoint indices are shared schema; the full time grid metadata is included in every serialized payload."
+  ]
+}
