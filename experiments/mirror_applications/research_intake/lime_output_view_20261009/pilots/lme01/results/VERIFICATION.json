@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "pilot": "LME01",
+  "status": "FINISHED_NON_ADOPTION",
+  "protocol_commit": "7ee8674e5eb305296a953c66bdab0daf384e8010",
+  "source_commit": "ebd7b02c23df8aa7afd3625ae55a4de94fabd97e",
+  "data_source": "sklearn load_digits raw images, no network download",
+  "env": {
+    "torch": "2.10.0+cpu",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "sklearn": "1.8.0",
+    "python": "3.13.5",
+    "device": "CPU",
+    "threads": 1
+  },
+  "fresh_seeds": [
+    701,
+    702,
+    703,
+    704,
+    705
+  ],
+  "dev_seeds": [
+    71,
+    72,
+    73
+  ],
+  "method_count": 7,
+  "dev_rows": 21,
+  "fresh_rows": 35,
+  "separate_replay": {
+    "replayed_trainings": 14,
+    "checked_fields": 154,
+    "exact": true
+  },
+  "paired_per_fresh_seed": {
+    "701": {
+      "rot_minus_linear4": 0.05771970748901367,
+      "shear_minus_linear4": 0.08234795928001404,
+      "rot_minus_lime_full": 0.08564043045043945,
+      "rot_minus_native_heads": 0.20283185690641403
+    },
+    "702": {
+      "rot_minus_linear4": -0.12411826848983765,
+      "shear_minus_linear4": -0.10772755742073059,
+      "rot_minus_lime_full": 0.03146998584270477,
+      "rot_minus_native_heads": 0.10414670407772064
+    },
+    "703": {
+      "rot_minus_linear4": 0.02755957841873169,
+      "shear_minus_linear4": 0.010530546307563782,
+      "rot_minus_lime_full": 0.03702354431152344,
+      "rot_minus_native_heads": 0.14433099329471588
+    },
+    "704": {
+      "rot_minus_linear4": 0.03942680358886719,
+      "shear_minus_linear4": 0.1626693159341812,
+      "rot_minus_lime_full": 0.0392279177904129,
+      "rot_minus_native_heads": 0.13170234858989716
+    },
+    "705": {
+      "rot_minus_linear4": 0.024163976311683655,
+      "shear_minus_linear4": 0.1164487898349762,
+      "rot_minus_lime_full": 0.03649747371673584,
+      "rot_minus_native_heads": 0.13865330815315247
+    }
+  },
+  "mirror_rot_vs_linear_wins_no_threshold": 1,
+  "mirror_rot_001_gain_worlds": 1,
+  "gates": {
+    "all_dev_rows": true,
+    "all_fresh_rows": true,
+    "one_trunk_and_adapter_call_per_all_training_methods": true,
+    "same_train_audit_ids_within_seed": true,
+    "geometry_exact_same_as_native_givens_test_pass": true,
+    "within_environment_14_replays_154_field_matches": true,
+    "mechanism_gate_rot_improve_001_in_ge4_worlds": false,
+    "quality_noninferior_to_strong_native_heads_002": false
+  },
+  "scientific_verdict": "FAIL Mirror-specific LME01 predeclared improvement and native-head noninferiority; exact one-heavy-trunk/adapter mechanism PASS",
+  "limitations": [
+    "LiME original zero-parameter route, AutoTop-K, MMT-47 NOT reproduced",
+    "one real-digit dataset with correlated seed partitions",
+    "Givens output chart exactly a native structured head, no unique function class",
+    "no GPU throughput or verified public benchmark",
+    "all reported bytes named NPZ FP32 including shared trunk and adapter"
+  ],
+  "hashes_sha256": {
+    "source/run_lme01.py": "ec56b6487a12dd712fa9eb8c8082136acfb33001015167c99ec4841c2925e0de",
+    "source/test_lme01.py": "349e2a8b09aadee7be979a32ce597a106c6f63b50595bb9335d66ad6efaa2662",
+    "results/dev_raw.csv": "a6af24be8d70d23def5525c75864e9fa01b6ef5c8de5ff584346a669462410e4",
+    "results/fresh_raw.csv": "a37737ba1a8e3b6236bda7f80f22b6fdc5c9bbd7b793e13f26387cb8f469c0af",
+    "results/RESULTS_CORE.csv": "9c824bb3f1fcabe6b63e13840912b8175e8e08d9045cbc9c828988ab880d5402",
+    "results/REPLAY_VERIFICATION.json": "ff64b0645a8f05049c408aa8dde78bc6cd16776bd734df5b751c7eed2aac1516",
+    "replay_check.py": "6fa3b29323960af1cfbd9e123a9accaacec0dc1618a6f82934973ac7c875aff6",
+    "make_report.py": "b1dcc5765fe134b70343e5c4628ad232969883caaa3bb5a340887ab787716e96"
+  }
+}

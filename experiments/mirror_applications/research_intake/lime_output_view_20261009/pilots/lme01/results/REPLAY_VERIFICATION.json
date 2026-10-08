@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "seeds": [
+    701,
+    705
+  ],
+  "methods": [
+    "shared_broadcast",
+    "native_onepass_linearheads",
+    "lime_full_diagonal",
+    "lime_linear4",
+    "lime_learned_linear4",
+    "mirror_rot4",
+    "mirror_shear4"
+  ],
+  "model_training_replays": 14,
+  "fields_compared": [
+    "test_nll",
+    "test_worst_task_nll",
+    "test_accuracy",
+    "output_prob_std",
+    "train_nll",
+    "serializer_bytes",
+    "role_trainable_scalars",
+    "per_task_nll",
+    "per_task_accuracy",
+    "original_train_id_sha256",
+    "audit_id_sha256"
+  ],
+  "cells_compared": 154,
+  "errors": [],
+  "match": true,
+  "hardware": "CPU PyTorch2.10+cpu float32 OPENBLAS_NUM_THREADS=1",
+  "limitation": "This tests within-environment deterministic replay, not independent hardware reproduction; P95 timings excluded."
+}
