@@ -1,10 +1,10 @@
 # Isolated Mirror research protocols — 2026-10-08
 
-**QUARANTINE / DO NOT AUTO-CLAIM.** This directory and its staged MA-1156..1164 proposals live only on `research/mirror-isolated-protocols-rebased-20261008`. The authoritative worker-ready branch and current next MA-255 are untouched. Do not edit WORKER_START_HERE, CONTEXT_ROUTER, WORKER_QUEUE or active experiment files, and do not ask the current worker to scan the plans. These MA IDs are provisional until reconciled with the latest canonical registry at promotion.
+**QUARANTINE / DO NOT AUTO-CLAIM.** This directory and its staged MA-1156..1170 proposals live only on `research/mirror-isolated-protocols-rebased-20261008`. The authoritative worker-ready branch and current next MA-255 are untouched. Do not edit WORKER_START_HERE, CONTEXT_ROUTER, WORKER_QUEUE or active experiment files, and do not ask the current worker to scan the plans. These MA IDs are provisional until reconciled with the latest canonical registry at promotion.
 
 ## Purpose
 
-15 literature-derived marginal Mirror hypotheses (9 earlier + 6 new; none is presumed to work); three additional detailed plans for existing MA IDs where a new ID would duplicate an existing question. PA414..PA424 contain the source titles, links and mandatory native controls.
+15 literature-derived marginal Mirror hypotheses (9 earlier + 6 new; none is presumed to work); three additional detailed plans for existing MA IDs where a new ID would duplicate an existing question. PA414..PA433 contain the source titles, links and mandatory native controls.
 
 A plan is self-contained for a cheap mechanism screen: exact insertion, native method, code shape, controls, train/dev/fresh split, pass/fail/uncertain criteria, gauge and byte audit, implementation order, hardware and expected failure modes. Full native reproduction still requires reading/checking the original paper or official implementation before publication, but no external reading is required to start the synthetic screen.
 
@@ -90,3 +90,7 @@ Six new UNTESTED MA-1165..1170, PA425..433 controls; [implementation and dedupli
 - **MA-1168** [FACET single-adapter dynamic Mirror feature-code boundary](plans/MA-1168/README.md) — P1; PA429;PA431;PA63.
 - **MA-1169** [MoLoRA per-token physical specialist-bank compression](plans/MA-1169/README.md) — P0; PA430;PA433;PA364.
 - **MA-1170** [NeuroLoRA dynamic gate versus structured Mirror online coordinate](plans/MA-1170/README.md) — P1; PA431;PA429;PA19.
+
+### Independent current-state preflight
+
+`python experiments/mirror_applications/research_intake/isolated_geometry_rebased_20261008/selfcheck.py` verifies 1170 MA rows, 433 PA entries, all 15 frozen designs, claim/status agreement and isolation markers on a complete local checkout. This script does not change the worker and needs no GPU/network. No synthetic result counts as native-paper reproduction.
