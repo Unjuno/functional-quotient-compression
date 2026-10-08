@@ -3473,3 +3473,291 @@ Connects regularized fine-tuning dynamics to linearized neural tangent kernel re
 
 **Mirror implication:** For Mirror m learned near pretrained theta, estimate functional Jacobian/NTK spectrum and local linearization error as an additional test beyond weight-delta rank.
 
+## PA382 — RotatE relation rotations
+
+**RotatE: Knowledge Graph Embedding by Relational Rotation in Complex Space**  
+https://arxiv.org/abs/1902.10197
+
+Models each knowledge-graph relation as a complex-plane rotation of shared entity embeddings, supporting inversion and composition patterns.
+
+**Mirror implication:** Relation rotation as tiny m is direct prior art, not Mirror novelty. Test extra multi-domain/time sharing beyond RotatE and compare link-ranking plus actual relation bytes.
+
+## PA383 — ComplEx complex relation embeddings
+
+**Complex Embeddings for Simple Link Prediction**  
+https://arxiv.org/abs/1606.06357
+
+Models asymmetric multi-relational scores using complex-valued entity/relation factors.
+
+**Mirror implication:** Mirror relational m must beat the cheap ComplEx relation diagonals and use filtered ranking, not just triplet reconstruction.
+
+## PA384 — TuckER tensor relation cores
+
+**TuckER: Tensor Factorization for Knowledge Graph Completion**  
+https://arxiv.org/abs/1901.09590
+
+Factorizes entity-relation-entity score tensor with a learned shared Tucker core.
+
+**Mirror implication:** A shared operator core plus relation code is long-established. Compare dense/factorized Mirror code vs native TuckER core+relation coefficients.
+
+## PA385 — QuatE quaternion relation rotations
+
+**Quaternion Knowledge Graph Embeddings**  
+https://arxiv.org/abs/1904.10281
+
+Uses hypercomplex quaternion-valued entity/relation embeddings with relation-dependent quaternion rotations.
+
+**Mirror implication:** Mirror noncommutative relation composition must outperform native QuatE, count quaternion state and respect inverse/composition semantics.
+
+## PA386 — PairRE paired relation scaling
+
+**PairRE: Knowledge Graph Embeddings via Paired Relation Vectors**  
+https://arxiv.org/abs/2011.03798
+
+Uses head/tail-specific paired relation vectors to support many-to-many link patterns.
+
+**Mirror implication:** Separate left and right relation modulation already exists. An m-based two-sided View must beat PairRE with matched parameter sizes.
+
+## PA387 — CompGCN multi-relational composition
+
+**Composition-based Multi-Relational Graph Convolutional Networks**  
+https://arxiv.org/abs/1911.03082
+
+Composes node/entity and edge-relation embeddings inside one multi-relational message-passing graph network.
+
+**Mirror implication:** Mirror relation Views must beat native CompGCN relation composition at comparable active edge processing and memory.
+
+## PA388 — TNTComplEx time-relation factorization
+
+**Tensor Decompositions for Temporal Knowledge Base Completion**  
+https://arxiv.org/abs/2004.04926
+
+Uses tensor decompositions and temporal factors for relation facts that evolve over time.
+
+**Mirror implication:** Time and relation factor m must improve over native temporal tensor factorization, controlling future-edge leakage.
+
+## PA389 — 5starE projective relation functions
+
+**5* Knowledge Graph Embeddings with Projective Transformations**  
+https://arxiv.org/abs/2006.04986
+
+Models KG relation operators with projective transformations including rotation, scaling, reflection and inversion.
+
+**Mirror implication:** A projective Mirror transformation family must beat this strong native prior, not claim discovery of multi-transform relation operator.
+
+## PA390 — KrausKGE relation channels
+
+**Relations Are Channels: Knowledge Graph Embedding via Kraus Decompositions**  
+https://arxiv.org/abs/2605.10317
+
+2026 work proposes relation operators based on Kraus decompositions with relation-dependent channel complexity and fan-out handling.
+
+**Mirror implication:** Compare Mirror multi-operator banks against native Kraus rank and completely positive constraints. Relational channel families already support more than simple rotations.
+
+## PA391 — ParamISP camera-metadata conditioning
+
+**ParamISP: Learned Forward and Inverse ISPs using Camera Parameters**  
+https://arxiv.org/abs/2312.13313
+
+Controls learned RAW/sRGB forward and inverse camera pipelines using EXIF exposure/ISO conditions.
+
+**Mirror implication:** A camera control m derived from EXIF is direct prior. Mirror needs additional accuracy or lower conditioner/filter storage than ParamISP.
+
+## PA392 — MetaISP multi-device color rendition
+
+**MetaISP -- Exploiting Global Scene Structure for Accurate Multi-Device Color Rendition**  
+https://arxiv.org/abs/2401.03220
+
+Single model conditions scene-aware RAW-to-RGB color rendition on target device appearance.
+
+**Mirror implication:** Per-camera style codes already exist. Test Mirror low-bit per-device Views beyond native device conditioning and perceptual color error.
+
+## PA393 — Uni-ISP cross-camera sharing
+
+**Uni-ISP: Toward Unifying the Learning of ISPs from Multiple Mobile Cameras**  
+https://arxiv.org/abs/2406.01003
+
+Uses device-aware embeddings in one joint forward/inverse ISP trained across real multi-camera RAW/sRGB pairs.
+
+**Mirror implication:** This is close physical-one-ISP/many-logical-camera prior art. Compare per-camera incremental Mirror m to native learned device embeddings with held-out devices.
+
+## PA394 — PQDynamicISP condition-controlled operators
+
+**PQDynamicISP: Dynamically Controlled Image Signal Processor for Any Image Sensors Pursuing Perceptual Quality**  
+https://arxiv.org/abs/2403.10091
+
+Dynamically controls lightweight ISP operations by environment and local conditions to reuse one ISP across sensors.
+
+**Mirror implication:** A small environment/region functional parameter already exists. Mirror m must beat dynamic local ISP control at quality, speed and control bytes.
+
+## PA395 — Modular ISP configurable stage functions
+
+**Modular Neural Image Signal Processing**  
+https://arxiv.org/abs/2512.08564
+
+Provides independently controllable neural ISP stages and style/post-edit options within one pipeline.
+
+**Mirror implication:** Mirror stage composition must beat native stage knobs and count total pipeline graph, decoder state and runtime.
+
+## PA396 — Camera-aware real denoising
+
+**Towards Controllable Real Image Denoising with Camera Parameters**  
+https://arxiv.org/abs/2507.01587
+
+Conditions image denoising on camera/acquisition parameters for adaptable raw/sensor noise.
+
+**Mirror implication:** Noise-level and EXIF conditioning already have a direct baseline. Compare structured Mirror m against native camera/noise control on held-out sensors.
+
+## PA397 — OmniLens latent lens PSF
+
+**OmniLens++: Blind Lens Aberration Correction via Large LensLib Pre-Training and Latent PSF Representation**  
+https://arxiv.org/abs/2511.17126
+
+Learns latent representations of lens point spread functions from large pretraining to correct unknown optical aberrations.
+
+**Mirror implication:** PSF latent m is strong prior art. Mirror must reduce latent/filter or improve held-out physical lens calibration beyond OmniLens++.
+
+## PA398 — Neural lens modeling
+
+**Neural Lens Modeling**  
+https://openaccess.thecvf.com/content/CVPR2023/papers/Xian_Neural_Lens_Modeling_CVPR_2023_paper.pdf
+
+Learns differentiable lens image formation to model spatially varying optics.
+
+**Mirror implication:** A position-dependent lens neural field is established; Mirror m must improve per-lens transfer at fixed optical forward accuracy.
+
+## PA399 — Physics-informed low-rank aberration
+
+**A Physics-informed Low-rank Deep Neural Network for Blind and Universal Lens Aberration Correction**  
+https://openaccess.thecvf.com/content/CVPR2024/papers/Gong_A_Physics-informed_Low-rank_Deep_Neural_Network_for_Blind_and_Universal_CVPR_2024_paper.pdf
+
+Uses physics-informed low-rank parameterization to restore lens-degraded images across aberrations.
+
+**Mirror implication:** A low-rank optics corrector is a strong direct control. Mirror View cannot call generic rank compression a novel optical capability.
+
+## PA400 — UP-OSI universal control plus system ID
+
+**Preparing for the Unknown: Learning a Universal Policy with Online System Identification**  
+https://arxiv.org/abs/1702.02453
+
+Trains one policy over a range of physics parameters with an online system identification component.
+
+**Mirror implication:** One physical policy plus low-dimensional dynamics context m is prior art. Mirror must improve m-state/quality or robustness beyond UP-OSI.
+
+## PA401 — RMA latent extrinsics robot control
+
+**RMA: Rapid Motor Adaptation for Legged Robots**  
+https://arxiv.org/abs/2107.04034
+
+Uses a common legged-control policy conditioned on estimated environmental extrinsics from recent sensor history.
+
+**Mirror implication:** Dynamic latent physics m is directly established. Preserve RMA adaptation latency/history and compare no-privileged-observation fairness.
+
+## PA402 — CoRMA contact-aware adaptation
+
+**CoRMA: Contrastive RMA for Contact-Rich Meta-Adaptation**  
+https://arxiv.org/abs/2605.22082
+
+2026 work modifies RMA-style context-based adaptation for contact-rich robotic tasks using a contrastive objective.
+
+**Mirror implication:** Mirror dynamic friction/contact code must beat native contrastive RMA and handle ambiguous hidden physics.
+
+## PA403 — A-NC implicit adaptive neural control
+
+**A-NC: Adaptive Neural Control with implicit online inference of privileged parameters**  
+https://proceedings.mlr.press/v283/paluch25a.html
+
+Adapts recurrent neural control implicitly online when changes in environment/robot parameters are not directly measured.
+
+**Mirror implication:** Explicit Mirror physics codes must outperform implicit recurrent inference at equal history and no oracle physical parameters.
+
+## PA404 — Graph-operator morphology world models
+
+**Graph-Operator World Models for Morphology-Parameter Generalization in Continuous Control**  
+https://arxiv.org/abs/2608.20936
+
+2026 work explores morphology and physical parameter generalization via graph-structured dynamics operators.
+
+**Mirror implication:** Mirror morphology m must beat native structure-conditioned operators and preserve physical rollouts on unseen bodies.
+
+## PA405 — Morphology-conditioned world model
+
+**Morphology-Conditioned World Model for Cross-Embodiment Quadrupedal Locomotion**  
+https://arxiv.org/abs/2604.08780
+
+Conditions shared world dynamics on quadruped morphology for transfer across embodiments.
+
+**Mirror implication:** A morphology code is already prior art. Mirror should compress useful embodiment-specific dynamics beyond the native condition.
+
+## PA406 — CTS teacher-student legged control
+
+**CTS: Concurrent Teacher-Student Reinforcement Learning for Legged Locomotion**  
+https://arxiv.org/abs/2405.10830
+
+Uses teacher-student legged locomotion training to bridge privileged training and deployable observation conditions.
+
+**Mirror implication:** Mirror m adaptation must not use teacher-only physics at test time. Compare valid deployable student state and rollouts.
+
+## PA407 — Neural Acoustic Fields room RIR
+
+**Learning Neural Acoustic Fields**  
+https://arxiv.org/abs/2204.00628
+
+Models source-receiver-position-conditioned room acoustic responses as a continuous neural field.
+
+**Mirror implication:** Room/source/receiver coordinates already condition one neural field. Mirror must compress multi-room physical field parameters beyond native NAF.
+
+## PA408 — Real Acoustic Fields RIR benchmark
+
+**Real Acoustic Fields: An Audio-Visual Room Acoustics Dataset and Benchmark**  
+https://arxiv.org/abs/2403.18821
+
+Introduces measured audio-visual room acoustics benchmark for evaluating continuous room fields.
+
+**Mirror implication:** Use real measured impulse responses and room-held-out tests; synthetic aligned room kernels alone are not physical deployment evidence.
+
+## PA409 — Retrieval-augmented room acoustic adaptation
+
+**Data Augmentation Using Neural Acoustic Fields With Retrieval-Augmented Pre-training**  
+https://arxiv.org/abs/2504.14409
+
+Pretrains room-geometry conditioned acoustic field and adapts to unseen rooms using geometry retrieval/measurement enrollment.
+
+**Mirror implication:** Native few-room-shot field adaptation already exists. Mirror room m must improve measurements, storage or RIR fidelity beyond retrieved priors.
+
+## PA410 — Topology-aware RIR neural modeling
+
+**TA-RIR: Topology-Aware Neural Modeling of Acoustic Propagation for Room Impulse Response Synthesis**  
+https://www.isca-archive.org/interspeech_2025/zhao25i_interspeech.html
+
+Learns room topology-conditioned acoustic decoder using source-receiver geometry and reverberant observations.
+
+**Mirror implication:** Geometry m must beat topology-aware native embeddings and track physical RIR measures such as RT60 and DRR.
+
+## PA411 — Neural acoustic multipole splatting
+
+**Neural acoustic multipole splatting for room impulse response synthesis**  
+https://arxiv.org/abs/2509.17410
+
+Builds a physical acoustic multipole field with learned directivity and pruneable sources for efficient RIR synthesis.
+
+**Mirror implication:** Share/mirror multipole coefficients only if RIR fidelity and pruning/propagation runtime beat native NAMS. Count multipole positions and source-specific state.
+
+## PA412 — Direction-aware acoustic fields
+
+**Direction-Aware Neural Acoustic Fields for Few-Shot Interpolation of Ambisonic Impulse Responses**  
+https://arxiv.org/abs/2505.13617
+
+Fits directional ambisonic RIRs with neural fields and explores few-shot adaptation including low-rank updates.
+
+**Mirror implication:** Per-direction code and few-shot LoRA are already prior. Mirror must preserve phase/directivity and beat native Ambisonic NAF/LoRA.
+
+## PA413 — Few-shot acoustic flow synthesis
+
+**Few-shot Acoustic Synthesis with Multimodal Flow Matching**  
+https://openaccess.thecvf.com/content/CVPR2026/html/Brunetto_Few-shot_Acoustic_Synthesis_with_Multimodal_Flow_Matching_CVPR_2026_paper.html
+
+2026 work learns scene-consistent room acoustic synthesis from limited audio-visual room examples using multimodal generative flow.
+
+**Mirror implication:** Mirror environment code must beat few-shot flow prior at equal NFE and measured RIR fidelity; source-room identity is not a novel free functional parameter.
+
