@@ -1,18 +1,22 @@
 # MA-405 status
 
-Status: SCREENING — protocol frozen; no development runs yet.
+Status: **FAIL** at the frozen development gate.
 
 ## H
-A compact non-diagonal View can complement StyleGAN2 channel-wise modulation on rotation-dominated FFN variations.
+Non-diagonal Givens views may complement StyleGAN2 channel modulation on rotation-dominated FFN context variation.
 
 ## T
-Shared frozen 32D nonlinear feature block and projection; eight contexts × five target-mixture points; five controls; development seeds 40501/40502.
+Shared 32D FFN, eight contexts, five mixtures, five controls; seeds 40501 and 40502; 4096 train plus separate 4096 held-out inputs/task; 400 updates. Fresh stayed sealed.
 
 ## D
-Not determined.
+FAIL. At alpha 0, Mirror NRMSE was 0.000447/0.000473 against StyleGAN2 0.636/0.548. Payload was 0.874–0.876x StyleGAN2 and 0.0992–0.0993x independent full. Seed 40501 throughput was 0.633x StyleGAN2, below the 0.80 threshold; seed 40502 reached 0.996x. The two-seed screen therefore failed.
+
+At alpha 1, StyleGAN2 was accurate and Mirror was not. For mixed targets, both structured controls lost accuracy while independent matrices remained below 0.007 NRMSE.
 
 ## C
-StyleGAN2 weight modulation/demodulation is already a small context code and may be equally compact or faster on the task's diagonal endpoint.
+The endpoints are deliberately aligned with the tested mechanisms; results do not establish natural-task utility. The runtime gate missed in one seed, and the byte gain over StyleGAN2 was modest.
 
 ## U
-Held-out fit, serialized payload bytes, CPU runtime and replay. Fresh data are sealed.
+Natural task quality, fresh replication, optimized kernels, and whether composed style+Mirror codes improve the frontier.
+
+FACT: all 50 metrics replay from serialized inference payloads. INTERPRETATION: two complementary endpoint families are compact; their mixtures need private matrix state. HYPOTHESIS: composition may help but requires a new protocol.
