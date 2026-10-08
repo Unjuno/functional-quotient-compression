@@ -19,3 +19,5 @@ See `PROTOCOL.json`; fresh seeds are sealed. Both coupled symmetry and uncoupled
 ## Results
 
 Pending.
+
+Development exposed FP16 quantization effects in the ReLU scale transform. Before opening fresh, the protocol now records exact FP32 symmetry error separately from base and transformed FP16 rounding errors. Fresh seeds and training settings are unchanged.

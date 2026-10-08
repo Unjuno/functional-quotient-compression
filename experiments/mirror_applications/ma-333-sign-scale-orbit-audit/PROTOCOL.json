@@ -1,9 +1,9 @@
 {
   "experiment_id": "MA-333",
   "title": "Mirror sign/scale orbit audit",
-  "status": "PROTOCOL_FROZEN_BEFORE_DEVELOPMENT",
+  "status": "AMENDED_AFTER_DEVELOPMENT_BEFORE_FRESH",
   "evidence_lane": "MECHANISM/NUMERICAL",
-  "base_commit": "6b88ce5",
+  "base_commit": "6d5a65a",
   "hypothesis": "On trained one-hidden-layer MLPs, ReLU positive rescaling (incoming weights/bias times s, outgoing rows divided by s) and tanh hidden sign flips (incoming weights/bias and outgoing rows sign-flipped) preserve test outputs within max difference 1e-5 after FP16 serialization. Such coordinate variants are zero additional function multiplicity.",
   "physical_object": "one trained 8-12-3 ReLU or tanh MLP",
   "mirror_coordinate": "per-hidden-unit positive scale for ReLU or sign code for tanh",
@@ -14,7 +14,8 @@
   "fresh": {"worlds_or_seeds": [33311, 33312, 33313], "locked_before_access": true},
   "storage": {"authority": "actual deterministic fixed-timestamp ZIP/NPY FP16 payload bytes", "paid_objects": ["base weights", "all sign/scale codes", "metadata and archive headers"]},
   "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true},
-  "success_gate": "Both architecture-specific symmetry transforms preserve outputs within max abs 1e-5 in all three fresh seeds, with negative controls changing outputs; classify these as zero new functions regardless of representation storage.",
-  "failure_gate": "Correctly coupled transformations consistently change outputs beyond 1e-5 after accounting for FP16 rounding, indicating a symmetry implementation failure and NOT ESTABLISHED status.",
+  "success_gate": "FP32 function outputs under both symmetries differ by <=1e-5 in all three fresh seeds; FP16 quantization error is separately measured against each FP32 function; negative controls change outputs. Classify symmetry coordinates as zero new functions regardless of representation storage.",
+  "failure_gate": "Correctly coupled FP32 transformations consistently change outputs beyond 1e-5, indicating a symmetry implementation failure and NOT ESTABLISHED status.",
+  "amendment": "Development showed separate FP16 rounding of rescaled weights can create ~0.007 max output difference even when the FP32 reparameterization is invariant. Before fresh access, the audit separates algebraic FP32 symmetry difference from base/view FP16 quantization errors; seeds are unchanged and no model settings changed.",
   "boundaries": ["exact symmetry audit, not a compression claim", "ReLU scale is positive only", "tanh sign flips must couple incoming and outgoing tensors", "one hidden layer only", "coordinate orbit size is not functional capacity"]
 }
