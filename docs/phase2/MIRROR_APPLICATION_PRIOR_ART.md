@@ -2969,3 +2969,228 @@ Piecewise learned index supports dynamic predecessor/range queries with strong c
 
 **Mirror implication:** Mirror index m must preserve the original ordering/correctness guarantees under updates and compare with adaptive native PGM.
 
+## PA326 — Chronos time-series modeling
+
+**Chronos: Learning the Language of Time Series**  
+https://arxiv.org/abs/2403.07815
+
+Scales and tokenizes numeric time-series for pretrained probabilistic forecasting.
+
+**Mirror implication:** Mirror m must beat zero-shot forecast quality and calibrated native token sampling.
+
+## PA327 — TimesFM foundation forecasting
+
+**A decoder-only foundation model for time-series forecasting**  
+https://arxiv.org/abs/2310.10688
+
+Forecast transformer pretrained over varying horizons and frequencies.
+
+**Mirror implication:** Horizon m must improve native scale/horizon conditioning and cheap output heads.
+
+## PA328 — Moirai universal time series
+
+**Unified Training of Universal Time Series Forecasting Transformers**  
+https://proceedings.mlr.press/v235/woo24a.html
+
+Universal transformer handles many frequencies/variates/datasets from pretraining.
+
+**Mirror implication:** One shared forecaster exists already; test added m beyond native input conditioning.
+
+## PA329 — PatchTST channel-shared forecasting
+
+**A Time Series is Worth 64 Words: Long-term Forecasting with Transformers**  
+https://arxiv.org/abs/2211.14730
+
+Temporal patch transformer shares feature weights across variates.
+
+**Mirror implication:** An m per variate must beat already-shared PatchTST and simple channel embeddings.
+
+## PA330 — TimeMixer multi-scale seasonal decomposition
+
+**TimeMixer: Decomposable Multiscale Mixing for Time Series Forecasting**  
+https://arxiv.org/abs/2405.14616
+
+Mixes trend/seasonal temporal factors across scales.
+
+**Mirror implication:** Compare multi-timescale m with native TimeMixer mixing, not single-scale baseline.
+
+## PA331 — iTransformer variate tokens
+
+**iTransformer: Inverted Transformers Are Effective for Time Series Forecasting**  
+https://arxiv.org/abs/2310.06625
+
+Represents full variable histories as tokens for cross-variate attention.
+
+**Mirror implication:** Varying task/variable token identity is established; measure useful additional m.
+
+## PA332 — TRACE efficient time-series adaptation
+
+**TRACE: Time SeRies PArameter EffiCient FinE-tuning**  
+https://arxiv.org/abs/2503.16991
+
+Forecast-specific module-selected LoRA and adapted output heads.
+
+**Mirror implication:** Compare structured Mirror codes against TRACE's native LoRA module selection at matched state.
+
+## PA333 — MOMENT multi-task temporal foundation
+
+**MOMENT: A Family of Open Time-series Foundation Models**  
+https://proceedings.mlr.press/v235/goswami24a.html
+
+Open pretrained time-series features support forecasting and other tasks.
+
+**Mirror implication:** Task code m must outperform native pretrained temporal heads, not count a task label as capacity.
+
+## PA334 — Lag-Llama probabilistic time series
+
+**Lag-Llama: Towards Foundation Models for Probabilistic Time Series Forecasting**  
+https://arxiv.org/abs/2310.08278
+
+Pretrained probabilistic temporal forecaster uses lagged covariates.
+
+**Mirror implication:** Mirror risk/calibration m must beat Lag-Llama CRPS/coverage at equal history and steps.
+
+## PA335 — N-BEATS interpretable basis forecaster
+
+**N-BEATS: Neural basis expansion analysis for interpretable time series forecasting**  
+https://arxiv.org/abs/1905.10437
+
+Uses shared learned basis and residual expansions for forecast functions.
+
+**Mirror implication:** Basis coefficient m is direct prior art; require higher marginal value at equal basis bytes.
+
+## PA336 — DLinear inexpensive forecast baseline
+
+**Are Transformers Effective for Time Series Forecasting?**  
+https://arxiv.org/abs/2205.13504
+
+Simple decomposition/linear forecast controls can beat larger neural forecasters.
+
+**Mirror implication:** DLinear and seasonal naive are minimum-cost controls for complex Mirror temporal Views.
+
+## PA337 — DLRM categorical embeddings
+
+**Deep Learning Recommendation Model for Personalization and Recommendation Systems**  
+https://arxiv.org/abs/1906.00091
+
+Categorical embedding tables dominate production recommendation state and memory traffic.
+
+**Mirror implication:** Any claimed Mirror embedding benefit must count lookup memory bandwidth and full table bytes.
+
+## PA338 — DHE table-free recommendation embeddings
+
+**Learning to Embed Categorical Features without Embedding Tables for Recommendation**  
+https://arxiv.org/abs/2010.10784
+
+Deep Hash Embedding generates ID embeddings from deterministic hash features with no table.
+
+**Mirror implication:** Shared decoder plus ID code is known; m must beat DHE and charge per-ID state.
+
+## PA339 — QR compositional embeddings
+
+**Compositional Embeddings Using Complementary Partitions for Memory-Efficient Recommendation Systems**  
+https://arxiv.org/abs/1909.02107
+
+Combines small complementary table partitions to form categorical vectors.
+
+**Mirror implication:** Mirror factor addresses must beat native QR code storage and collisions.
+
+## PA340 — TT-Rec table tensorization
+
+**TT-Rec: Tensor Train Compression for Deep Learning Recommendation Models**  
+https://arxiv.org/abs/2101.11714
+
+TT-Rec uses tensor-train embedding cores and optimized lookup kernels.
+
+**Mirror implication:** Mirror must beat this very strong TT storage/latency/CTR frontier.
+
+## PA341 — VQ-Rec transferable item codes
+
+**Learning Vector-Quantized Item Representation for Transferable Sequential Recommenders**  
+https://arxiv.org/abs/2210.12316
+
+Item content is encoded to discrete quantized codes for domain transfer.
+
+**Mirror implication:** Discrete item Mirror codes require gain beyond VQ-Rec, especially cold start.
+
+## PA342 — HSTU generative recommendation
+
+**Actions Speak Louder than Words: Trillion-Parameter Sequential Transducers for Generative Recommendations**  
+https://proceedings.mlr.press/v235/zhai24a.html
+
+Sequential transducer scales event/action recommender modeling.
+
+**Mirror implication:** User-session m must earn value beyond pretrained HSTU and must count session KV/runtime.
+
+## PA343 — MMoE multitask recommender
+
+**Modeling Task Relationships in Multi-task Learning with Multi-gate Mixture-of-Experts**  
+https://research.google/pubs/modeling-task-relationships-in-multi-task-learning-with-multi-gate-mixture-of-experts/
+
+Shares experts across recommendation goals with per-task gates.
+
+**Mirror implication:** A Mirror task-expert code must beat native MMoE gate and task quality/interference.
+
+## PA344 — SatMAE multi-spectral satellite pretraining
+
+**SatMAE: Pre-training Transformers for Temporal and Multi-Spectral Satellite Imagery**  
+https://arxiv.org/abs/2207.08051
+
+MAE pretraining incorporates band grouping and temporal positions.
+
+**Mirror implication:** Band/time m is not novel alone; beat native spectral/temporal embeddings.
+
+## PA345 — DOFA wavelength-conditioned Earth hypernet
+
+**Neural Plasticity-Inspired Multimodal Foundation Model for Earth Observation**  
+https://arxiv.org/abs/2403.15356
+
+Wavelength-dependent hypernetwork emits sensor-adaptive filters for one EO foundation model.
+
+**Mirror implication:** This is direct physical-condition to weight prior art. m must beat dynamic filters and generation cost.
+
+## PA346 — CROMA SAR-optical Earth fusion
+
+**CROMA: Remote Sensing Representations with Contrastive Radar-Optical Masked Autoencoders**  
+https://papers.neurips.cc/paper_files/paper/2023/hash/11822e84689e631615199db3b75cd0e4-Abstract-Conference.html
+
+Aligns optical and SAR encoders using masked contrastive/fusion learning.
+
+**Mirror implication:** Cross-sensor m must preserve registered alignment and beat native paired fusion.
+
+## PA347 — AnySat multisensor Earth foundation
+
+**AnySat: One Earth Observation Model for Many Resolutions, Scales, and Modalities**  
+https://arxiv.org/abs/2412.14123
+
+Scale-adaptive Earth transformer spans sensor types/resolutions.
+
+**Mirror implication:** Mirror sensor-scale m must beat already generalized AnySat and OOD sensor transfer.
+
+## PA348 — Prithvi EO multi-temporal model
+
+**Prithvi-EO-2.0: A Versatile Multi-Temporal Foundation Model for Earth Observation Applications**  
+https://arxiv.org/abs/2412.02732
+
+Earth foundation model learns shared spectral and temporal representations.
+
+**Mirror implication:** Region/sensor/season Mirror effects must exceed native temporal transfer.
+
+## PA349 — TerraMind any-to-any EO generative model
+
+**TerraMind: Large-Scale Generative Multimodality for Earth Observation**  
+https://arxiv.org/abs/2504.11171
+
+Generative multi-sensor EO foundation model uses pixel and token representations.
+
+**Mirror implication:** Mirror modal m must beat native modality-conditioned generation, respecting missing sensors.
+
+## PA350 — AlphaEarth embedding-field maps
+
+**AlphaEarth Foundations: An embedding field model for accurate and efficient global mapping from sparse label data**  
+https://arxiv.org/abs/2507.22291
+
+Produces general global space-time sensor-fused embedding fields.
+
+**Mirror implication:** Mirror task/region codes must improve index storage and spatial holdout downstream quality.
+
