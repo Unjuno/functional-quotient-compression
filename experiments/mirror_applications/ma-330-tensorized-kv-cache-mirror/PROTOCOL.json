@@ -1,0 +1,34 @@
+{
+  "experiment_id": "MA-330",
+  "title": "Tensorized KV cache/view reconstruction",
+  "status": "PROTOCOL_FROZEN_BEFORE_DEVELOPMENT",
+  "evidence_lane": "STORAGE/QUALITY/COMPUTE/RUNTIME",
+  "base_commit": "3defded",
+  "hypothesis": "For a synthetic decoder with four layers and four KV heads, a shared temporal tensor basis plus compact layer/head Mirror coordinates will reconstruct aligned logical KV caches with held-out attention-output nMSE <= 1e-5 while reducing actual payload bytes by >=20% versus independent cache storage and remaining within 10% of the closest ordinary low-rank/MLKV control. Decode-time reconstruction operations and throughput must be reported.",
+  "physical_object": "per-head temporal K/V cache tensors across four decoder layers, represented by shared low-rank temporal bases",
+  "mirror_coordinate": "small layer/head phase or coefficient codes applied during cache reconstruction",
+  "logical_multiplicity": "sixteen layer/head KV cache views from shared physical cache factors",
+  "prior_art_refs": ["PA35", "PA08"],
+  "controls": ["independent full FP16 K/V cache per layer/head", "MLKV-style hard shared cache across layers", "shared temporal basis with flat per-layer/head direct coefficients", "shared temporal basis with Mirror factorized layer/head phase codes", "shared basis with independent per-view residual upper control"],
+  "development": {
+    "worlds_or_seeds": [33001, 33002],
+    "selection_metric": "held-out attention-output nMSE, actual payload bytes, reconstruction MACs and eager CPU throughput"
+  },
+  "fresh": {
+    "worlds_or_seeds": [33011, 33012, 33013],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual deterministic fixed-timestamp ZIP/NPY FP16 inference payload bytes after reload",
+    "paid_objects": ["shared K/V temporal bases", "all Mirror or direct codes", "MLKV sharing indices", "private residuals", "metadata and archive headers"]
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true
+  },
+  "success_gate": "All three fresh seeds: held-out attention-output nMSE <=1e-5; Mirror payload <=0.80x independent and <=1.10x closest ordinary shared-basis/MLKV control; reconstruction compute <=2x ordinary low-rank reconstruction; exact FP16 payload reload and metric replay.",
+  "failure_gate": "At least two fresh seeds miss quality; or Mirror saves <20% bytes vs independent in at least two; or ordinary control is >10% smaller at comparable quality in at least two; or reconstruction compute exceeds 2x ordinary control.",
+  "boundaries": ["synthetic attention-cache reconstruction, not natural language or trained nanoGPT evidence", "logical cache multiplicity is not independent model capacity", "report cache payload and decode-time reconstruction separately", "no quality claim from cache-element error alone; attention outputs are primary"]
+}
