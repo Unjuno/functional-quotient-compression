@@ -1,0 +1,25 @@
+{
+  "experiment_id": "MA-274",
+  "source_commit": "d9df358",
+  "tests": {
+    "command": "python experiments/mirror_applications/ma-274-boft-logical-experts/tests/test_model.py",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "24 dev rows parsed with 16 columns and nonzero serialized payload bytes.",
+    "Oracle routes were supplied equally to all methods.",
+    "No teacher weights or target angle coordinates were copied into student initialization.",
+    "Integrated copy reran the model roundtrip test successfully; fresh worlds were not opened because the development gate failed.",
+    "Fresh worlds remained unopened after development quality gate failure."
+  ]
+}

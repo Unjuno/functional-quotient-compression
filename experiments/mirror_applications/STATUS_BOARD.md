@@ -6,22 +6,22 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1115-row registry)
 
 - Registered candidates: **1115**
-- P0: **597** (43 completed; 554 UNTESTED)
+- P0: **597** (44 completed; 553 UNTESTED)
 - P1: **415** (12 completed; 403 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1060 UNTESTED, 31 PROMISING, 24 FAIL**
-- 55 experiment directories, complete with status/protocol/results/verification files, are indexed in this branch.
-- New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-274 next-candidate decision.
-- Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-274 is next.
+- Current MA statuses: **1059 UNTESTED, 31 PROMISING, 25 FAIL**
+- 56 experiment directories, complete with status/protocol/results/verification files, are indexed in this branch.
+- New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-276 next-candidate decision.
+- Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-276 is next; MA-275 remains UNTESTED (P1).
 - Thirteenth literature sweep added MA-996..1045 (50 UNTESTED; 40 P0/10 P1) and PA296..PA325. IDs MA-1000+ use four digits; consult `check_registry_integrity.py`. No new experiment results.
-- Fourteenth sweep added **MA-1046..1095** (50 UNTESTED; 40 P0 / 10 P1) and **PA326..PA350**. Focus: time-series foundation forecasting, recommender embedding tables, and Earth-observation multi-sensor networks. No new experiment results; MA-274 is next.
-- Fifteenth direct-prior sweep added **MA-1096..1115** (20 UNTESTED, 16 P0 / 4 P1) and **PA351..371**. A gauge-invariant LoRA audit harness is present; its unit tests are **not** trained-model evidence. MA-274 is next.
+- Fourteenth sweep added **MA-1046..1095** (50 UNTESTED; 40 P0 / 10 P1) and **PA326..PA350**. Focus: time-series foundation forecasting, recommender embedding tables, and Earth-observation multi-sensor networks. No new experiment results; MA-276 is next; MA-275 remains UNTESTED (P1).
+- Fifteenth direct-prior sweep added **MA-1096..1115** (20 UNTESTED, 16 P0 / 4 P1) and **PA351..371**. A gauge-invariant LoRA audit harness is present; its unit tests are **not** trained-model evidence. MA-276 is next; MA-275 remains UNTESTED (P1).
 - PROMISING is **not** ADOPTED. Treat reports with strict-gate misses or exploratory protocol deviations at their documented scope.
 - SRM/TM and prior Phase I results are not MA statuses.
 
 ## Next candidate
 
-**MA-274 — BOFT logical expert views (P0; PA21)**
+**MA-276 — BOFT depth views for tied blocks (P0; PA21; PA06)**
 
 MA-255 is reconciled as PROMISING only for its aligned post-fit representation screen; a distinct 1,200-update protocol variant failed at development and remains sealed on fresh worlds. See `experiments/mirror_applications/ma-255-mirror-context-superposition/RECONCILIATION.md`.
 
@@ -39,16 +39,16 @@ MA-272 is FAIL for Mirror-specific/runtime gain: the corrected audit found that 
 
 MA-273 is complete FAIL for Mirror-specific value: corrected post-fit views exactly matched ordinary scalar-times-shared-angle factorization (same 1,150B payload); an independent neutral-initialization training screen failed at development and left fresh sealed. See its reconciliation report.
 
-MA-274 is next; test butterfly views on logical experts against standard MoE, IA3, rank-one and low-rank controls.
+MA-274 is complete FAIL on a two-world fixed-update development screen: at 5,430B Mirror was 3.4% smaller than native BOFT but had worse MSE in both worlds; independent experts were much better and butterfly eager CPU throughput was 9–20x below IA3/rank-one. Fresh worlds stayed sealed. Together with MA-273, this pauses the shared scalar-angle task/expert BOFT insertion family. MA-275 remains UNTESTED (P1). MA-276 is next because it is a distinct P0 depth insertion point with separate existing evidence; the task/expert family pause does not apply.
 
 ## Active experiment
 
-No active experiment declared. MA-255 through MA-273 are indexed. MA-274 is next.
+No active experiment declared. MA-255 through MA-274 are indexed. MA-276 is next; MA-275 remains UNTESTED (P1).
 
 ## Verified status index
 
 - **PROMISING (31):** MA-001, MA-002, MA-003, MA-004, MA-005, MA-006, MA-007, MA-008, MA-012, MA-014, MA-015, MA-041, MA-076, MA-079, MA-111, MA-121, MA-156, MA-160, MA-171, MA-173, MA-181, MA-189, MA-241, MA-244, MA-245, MA-249, MA-250, MA-251, MA-255, MA-268, MA-691.
-- **FAIL (24):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-260, MA-261, MA-265, MA-271, MA-272, MA-273.
+- **FAIL (25):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-260, MA-261, MA-265, MA-271, MA-272, MA-273, MA-274.
 
 All per-ID evidence is retained in the local experiment directories and in `CLAIM_LEDGER.csv`. Consult [the evidence integration audit](../../docs/phase2/MIRROR_MA_EVIDENCE_INTEGRATION_2026-10-08.md) for linked reports, verifications, provenance and claim boundaries.
 

@@ -25,7 +25,9 @@ MA-272 is **FAIL for Mirror-specific/runtime Pareto value**. The corrected post-
 
 MA-273 is **FAIL for Mirror-specific value**. A corrected post-fit fresh audit (163/269/367/463) found Mirror identical in function and 1,150B payload to ordinary scalar-times-shared-angle factorization; the aligned orbit used 27.3% fewer bytes than independent BOFT but the stress family required independent angle state. A distinct neutral-initialization trained screen failed development (3,593B vs BOFT 3,787B, lower quality) and kept fresh worlds sealed. See `experiments/mirror_applications/ma-273-boft-mirror-bank/RECONCILIATION.md`.
 
-**The next candidate is MA-274.** MA-876..1115 remain appended research-intake hypotheses and must not preempt the registered P0 crossovers. Natural variation and benchmark-level runtime remain unproven; aligned synthetic PROMISING must not be described as real-world Mirror adoption.
+MA-274 is **FAIL (development screen)**. Across two fixed-update dev worlds with oracle routes, Mirror saved 3.4% bytes vs native BOFT (5,430B vs 5,624B) but lost in MSE both worlds; independent FFNs were much better. Mirror beat rank-one with 19% fewer bytes, but eager CPU throughput was 0.33–0.36M examples/s versus 3.58–4.32M rank-one and 6.35–7.20M IA3. Fresh worlds remained sealed. Alongside MA-273, this pauses the current task/expert shared scalar-angle BOFT family, without generalizing to other insertion points. See `experiments/mirror_applications/ma-274-boft-logical-experts/FAMILY_BOFT_MIRROR_DIAGNOSTIC.md`.
+
+**The next candidate is MA-276.** MA-275 remains UNTESTED at P1; MA-276 is the next P0 with a distinct depth insertion point. MA-876..1115 remain appended research-intake hypotheses and must not preempt the registered P0 crossovers. Natural variation and benchmark-level runtime remain unproven; aligned synthetic PROMISING must not be described as real-world Mirror adoption.
 
 ## MA-241 — layer-specific Mirror views over tied experts
 
