@@ -158,6 +158,8 @@ High-information P0:
 12. MA-475/476 — SERAC/GRACE edit-memory compression
 13. MA-478 — compact View first, explicit edit fallback
 14. MA-481/482 — VQ and residual-VQ Mirror addresses
+
+**PathNet path × role pause (2026-10-08):** MA-451/452 are verified FAILs with a repeated exact native Givens-conditioning alias; do not continue unchanged variants. See [family diagnostic](../../docs/phase2/PATHNET_MIRROR_PATH_ROLE_FAMILY_DIAGNOSTIC_2026-10-08.md). MA-453 Routing Networks is a distinct dynamic-routing candidate requiring its own native router controls.
 15. MA-484 — VQ logical expert codebook
 16. MA-486/487 — sparse dictionary Mirror functions + LISTA routing
 17. MA-488 — shared/private dictionary + Mirror coefficients
