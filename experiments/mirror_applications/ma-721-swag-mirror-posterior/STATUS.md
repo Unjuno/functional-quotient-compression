@@ -3,12 +3,12 @@
 - Status: FAIL (development gate)
 - Branch: `research/ma-721-swag-mirror-posterior-20261008`
 - Base commit: `407ca7e2047326d1e4b753e55e05c4730f26f32b`
-- Last verified commit: pending
+- Last verified commit: 147a1f8457f34838e5ee3eb483d87408bdb598e1
 - Development complete: yes (60 final rows, 2 seeds)
 - Fresh/audit opened: no
-- Results committed: no
-- Verification committed: no
-- Registry row updated: no
+- Results committed: yes
+- Verification committed: yes
+- Registry row updated: yes
 
 ## Decision
 

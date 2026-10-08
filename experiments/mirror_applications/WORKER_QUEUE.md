@@ -14,13 +14,9 @@ Use:
 
 ## Selection rule
 
-Pick the first candidate satisfying all of:
-1. status is UNTESTED;
-2. highest available priority;
-3. no other active experiment directory already claims the ID;
-4. its closest prior-art controls can be implemented in the current harness.
+Use one fresh uniform draw per experiment from the latest worker-ready baseline's P0/UNTESTED rows. Exclude every ID with a live remote `research/ma-*` branch or an existing MA experiment directory in that baseline. Record baseline commit, ordered pool CSV/hash, cryptographic seed, pool size, index and selected row before development/audit access. Do not reserve IDs. Numeric/family queues are prior-art maps only; they do not determine execution order.
 
-Do not skip to a visually interesting P1/P2 idea while an executable P0 remains, unless the skipped candidate has a recorded blocker.
+Draw 7 selected MA-721 and completed FAIL on `research/ma-721-swag-mirror-posterior-20261008`. Refresh baseline and branches before Draw 8.
 
 ## Literature-derived cross-over queue
 
@@ -398,7 +394,7 @@ Read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_FOURTEENTH_SWEEP.
 
 L0/L1 outcomes alone never justify MA PROMISING as a deployable compression claim. Pre-trained base SVD and shared bases may cost storage/calibration, and heldout test-task weight deltas cannot be used to fit a deployable code at inference.
 
-**Next candidate remains MA-255; no existing status or frozen protocol changed.**
+The historical MA-255 recommendation is not reserved. Draw 7 selected MA-721 and completed FAIL; refresh the pool for Draw 8.
 
 ## Supplemental function-space falsification (no newly allocated MA IDs)
 
