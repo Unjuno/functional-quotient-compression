@@ -1,6 +1,6 @@
 # MA-314 — adaptive intrinsic dimension with Mirror views
 
-Status: **FAIL for the preregistered Mirror storage/quality Pareto gate**
+Status: **PROMISING only for the aligned-only coordinate variant; broad private-fallback screen FAIL**
 Branch: `research/ma-314-adaptive-intrinsic-mirror-20261008`
 Prior art: PA33, with MA-311/312 as related intrinsic-coordinate screens.
 
@@ -41,3 +41,10 @@ The tasks deliberately contain a shared-radius circular first pair, favorable to
 No pretrained model, nonlinear task family, learned task router, optimizer-driven tuning, near-convergence capacity, or deployment kernel was measured. The dimension adaptation point is synthetic post-fit evidence only.
 
 Protocol: [PROTOCOL.json](PROTOCOL.json). Pre-fresh amendments: [PROTOCOL_AMENDMENTS.md](PROTOCOL_AMENDMENTS.md). Data: [RESULTS_CORE.csv](RESULTS_CORE.csv), [FRESH_RESULTS.csv](FRESH_RESULTS.csv), [ALLOCATION_EVENTS.csv](ALLOCATION_EVENTS.csv). Replay: [source/REPLAY_VERIFICATION.json](source/REPLAY_VERIFICATION.json).
+
+
+## Separate aligned-only coordinate variant
+
+A separate frozen variant is preserved under [`protocol_variants/aligned_coordinate_only/`](protocol_variants/aligned_coordinate_only/README.md). It uses a 16D predictor, paid 16x8 basis, 48 aligned tasks at dimensions 2/4/8, and no unrelated private-fallback group. It passed its development gates before fresh access and then passed the same gates in 3/3 fresh worlds: 1,996B Mirror vs 2,220B adaptive FP16 coefficients (10.1% fewer actual bytes), with normalized test MSE 1.20e-6–2.09e-6. It also used about 1,299x the coefficient fit-operation proxy and had lower measured throughput. Its angle fitter was corrected from a missing cross-pair term before fresh access; corrected development was rerun and all 36 dev/fresh rows were replayed exactly in this audit.
+
+**Candidate status is PROMISING only at that narrow aligned storage/quality point.** The broad 160-task protocol above remains a distinct FAIL: unrelated tasks needed private state and aggregate Mirror bytes exceeded adaptive direct coefficients by 5.2% in all three fresh worlds. Do not pool the two generators or use the aligned-only result to claim private-state scaling or capacity.

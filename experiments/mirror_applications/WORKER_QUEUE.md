@@ -14,7 +14,7 @@ Use:
 
 ## Live selection snapshot — 2026-10-08
 
-The latest canonical baseline and reconciled result branches have been merged into the current worker chain. MA-255/260/261/265/266/268 and the second research-expansion sequence through MA-299 have recorded outcomes. MA-257 is FAIL against its exact PA16 rotation-context control; MA-258 is PROMISING only for an aligned post-fit expert-bank codec, with unrelated functions requiring richer/private state. MA-266 is FAIL because the non-Mirror coefficient-product control matched within 2.1% bytes; together with MA-265, pause MA-267 pending family redesign. MA-301 and MA-307 are complete on dedicated remote branches; MA-307 retained a 35.9% aligned storage reduction but failed its strict runtime gate in 1/3 fresh worlds. MA-311 then failed its nearest-control total-byte gate (1,248B vs 1,140B direct coefficients) and its angle-fit compute proxy was 17.7M vs 16.9k; fresh stayed sealed. MA-312 passed its narrow aligned storage/quality screen on 3/3 fresh worlds (1,600B vs 2,100B direct coefficients), but the fit proxy was 70.78M vs 67.6k and runtime slower. MA-314 is FAIL for Mirror-specific value; adaptive dimension alone reduced bytes vs fixed d=16, while adaptive Mirror lost to direct coefficients. The next executable untested P0 is **MA-315**. MA-297/299 SETA and MA-265/266 VeRA families are paused pending redesign. The appended MA-1116..1155 intake remains behind P0 work. This snapshot supersedes older queue paragraphs below that still name MA-255, MA-260, or MA-265 as next. Recheck the live registry and branch list before each new experiment.
+The latest canonical baseline and reconciled result branches have been merged into the current worker chain. MA-255/260/261/265/266/268 and the second research-expansion sequence through MA-299 have recorded outcomes. MA-257 is FAIL against its exact PA16 rotation-context control; MA-258 is PROMISING only for an aligned post-fit expert-bank codec, with unrelated functions requiring richer/private state. MA-266 is FAIL because the non-Mirror coefficient-product control matched within 2.1% bytes; together with MA-265, pause MA-267 pending family redesign. MA-301 and MA-307 are complete on dedicated remote branches; MA-307 retained a 35.9% aligned storage reduction but failed its strict runtime gate in 1/3 fresh worlds. MA-311 then failed its nearest-control total-byte gate (1,248B vs 1,140B direct coefficients) and its angle-fit compute proxy was 17.7M vs 16.9k; fresh stayed sealed. MA-312 passed its narrow aligned storage/quality screen on 3/3 fresh worlds (1,600B vs 2,100B direct coefficients), but the fit proxy was 70.78M vs 67.6k and runtime slower. MA-314 is PROMISING only for a separate aligned-only 48-task variant (10.1% fewer bytes than adaptive coefficients, 3/3 fresh); its broad mixed/private variant FAILed at +5.2% bytes vs adaptive direct and used ~103x fit proxy. The next executable untested P0 is **MA-315**. MA-297/299 SETA and MA-265/266 VeRA families are paused pending redesign. The appended MA-1116..1155 intake remains behind P0 work. This snapshot supersedes older queue paragraphs below that still name MA-255, MA-260, or MA-265 as next. Recheck the live registry and branch list before each new experiment.
 
 ## Selection rule
 
@@ -56,15 +56,15 @@ Direct/high-information P0 order:
 7. MA-272 — input-centric OFTv2 Mirror views
 8. MA-273 — BOFT Mirror adapter bank
 9. MA-274 — BOFT logical expert views
-10. MA-276 — BOFT depth views
-11. MA-278 — Compacter Mirror hypercomplex adapters
-12. MA-282 — Monarch Mirror FFN transform
-13. MA-286 — Cheap-LoRA Mirror column-subspace views
-14. MA-288 — Mirror fast-weight programmer context code
-15. MA-292 — task-vector Mirror basis
-16. MA-296 — orthogonalized task-vector Mirror superposition
-17. MA-297 — SETA shared sparse subspace + Mirror views
-18. MA-299 — Split-on-Share Mirror code allocation
+23. MA-276 — BOFT depth views
+23. MA-278 — Compacter Mirror hypercomplex adapters
+23. MA-282 — Monarch Mirror FFN transform
+23. MA-286 — Cheap-LoRA Mirror column-subspace views
+23. MA-288 — Mirror fast-weight programmer context code
+23. MA-292 — task-vector Mirror basis
+23. MA-296 — orthogonalized task-vector Mirror superposition
+23. MA-297 — SETA shared sparse subspace + Mirror views
+23. MA-299 — Split-on-Share Mirror code allocation
 
 Then continue the remaining P0 entries by family and registry order.
 
@@ -77,26 +77,25 @@ High-information P0:
 2. MA-307 — Mirror code before PackNet physical allocation
 3. ~~MA-311 — Mirror task code in intrinsic subspace~~ (FAIL in two protocol variants; reports linked in registry)
 4. ~~MA-312 — shared intrinsic basis + many Mirror task coordinates~~ (PROMISING aligned storage/quality point; compute tradeoff)
-5. ~~MA-314 — adaptive intrinsic-dimension allocation~~ (FAIL for Mirror-specific storage; adaptive dimension control helped)
+5. ~~MA-314 — adaptive intrinsic-dimension allocation~~ (PROMISING aligned-only storage/quality; broad private-fallback screen FAIL)
 6. MA-315 — shared intrinsic basis + sparse private coordinate residual
 7. MA-319 — Tucker matrix-bank Mirror layer coefficients
 8. MA-320 — Tucker logical experts
 9. MA-322 — TT-core Mirror adapter bank
 10. MA-325 — tensorized embedding domain views
-10. MA-327 — factorized layer x expert Tucker address
-11. MA-330 — tensorized KV reconstruction
-12. MA-331 — Re-Basin-aligned Mirror task deltas
-13. MA-332/333 — permutation and sign/scale symmetry audits
-14. MA-338 — symmetry-normalized Mirror code learning
-15. MA-341/342 — personalized/federated Mirror codes
-16. MA-344 — PreLort nested-rank Mirror segments
-17. MA-349 — Rank-1 Bayesian Mirror posterior
-18. MA-351 — MIMO + Mirror diversity
-19. MA-355/356 — product-key Mirror addresses
-20. MA-357 — Hopfield reservoir for Mirror addresses
-21. MA-359 — ACDC/AFDF Mirror transform
-22. MA-360 — reversible Mirror block
-
+11. MA-327 — factorized layer x expert Tucker address
+12. MA-330 — tensorized KV reconstruction
+13. MA-331 — Re-Basin-aligned Mirror task deltas
+14. MA-332/333 — permutation and sign/scale symmetry audits
+15. MA-338 — symmetry-normalized Mirror code learning
+16. MA-341/342 — personalized/federated Mirror codes
+17. MA-344 — PreLort nested-rank Mirror segments
+18. MA-349 — Rank-1 Bayesian Mirror posterior
+19. MA-351 — MIMO + Mirror diversity
+20. MA-355/356 — product-key Mirror addresses
+21. MA-357 — Hopfield reservoir for Mirror addresses
+22. MA-359 — ACDC/AFDF Mirror transform
+23. MA-360 — reversible Mirror block
 ## Fourth research-expansion queue — execution structure and module banks
 
 Added after the dynamic-compute/supernet/prompt/embedding sweep. Do not interrupt active work.
@@ -111,15 +110,15 @@ High-information P0:
 7. MA-374 — ALBERT shared layers + depth Mirror
 8. MA-375 — one-shot supernet + Mirror correction
 9. MA-379 — Mirror-compressed AdapterFusion bank
-10. MA-381 — LoRAHub over Mirror-compressed basis
-11. MA-383 — L2P prompt pool + Mirror generator
-12. MA-385 — DualPrompt expert prompts as Views
-13. MA-389 — Hash Embedding Mirror importance codes
-14. MA-391/392 — compositional embedding Mirror addresses
-15. MA-393 — adaptive-capacity embedding + View
-16. MA-395 — ALBERT factorized embedding + domain View
-17. MA-397 — product-address Mirror vocabulary
-18. MA-399 — MatFormer speculative drafter via View
+23. MA-381 — LoRAHub over Mirror-compressed basis
+23. MA-383 — L2P prompt pool + Mirror generator
+23. MA-385 — DualPrompt expert prompts as Views
+23. MA-389 — Hash Embedding Mirror importance codes
+23. MA-391/392 — compositional embedding Mirror addresses
+23. MA-393 — adaptive-capacity embedding + View
+23. MA-395 — ALBERT factorized embedding + domain View
+23. MA-397 — product-address Mirror vocabulary
+23. MA-399 — MatFormer speculative drafter via View
 
 ## Fifth research-expansion queue — conditional functions and dynamics
 
@@ -135,14 +134,14 @@ High-information P0:
 7. MA-413 — factorized concept Mirror coordinates
 8. MA-416/417 — shared decoder + Mirror function codes
 9. MA-418/419 — compositional/modulated neural-function codes
-10. MA-424/425 — continuous-depth Mirror dynamics
-11. MA-427 — DEQ conditioned fixed-point map
-12. MA-429/431 — Universal Transformer depth Views/composition
-13. MA-434 — Mamba selective-state Mirror roles
-14. MA-436/437 — logical SSM experts and S4 structured Views
-15. MA-442 — MAML with Mirror-only inner-loop adaptation
-16. MA-444 — LEO latent decoder versus structured Mirror
-17. MA-446 — learned optimizer for Mirror coordinates
+23. MA-424/425 — continuous-depth Mirror dynamics
+23. MA-427 — DEQ conditioned fixed-point map
+23. MA-429/431 — Universal Transformer depth Views/composition
+23. MA-434 — Mamba selective-state Mirror roles
+23. MA-436/437 — logical SSM experts and S4 structured Views
+23. MA-442 — MAML with Mirror-only inner-loop adaptation
+23. MA-444 — LEO latent decoder versus structured Mirror
+23. MA-446 — learned optimizer for Mirror coordinates
 
 ## Sixth research-expansion queue — modular programs, editing and coded addresses
 
@@ -158,17 +157,17 @@ High-information P0:
 7. MA-466 — UniPELT components as Mirror axes
 8. MA-468 — Polytropon shared/private skill bank + Views
 9. MA-469/470 — MEND-generated Mirror edit codes
-10. MA-471 — ROME rank-one edit as Mirror coordinate
-11. MA-473 — MEMIT edit basis + Mirror memory codes
-12. MA-475/476 — SERAC/GRACE edit-memory compression
-13. MA-478 — compact View first, explicit edit fallback
-14. MA-481/482 — VQ and residual-VQ Mirror addresses
-15. MA-484 — VQ logical expert codebook
-16. MA-486/487 — sparse dictionary Mirror functions + LISTA routing
-17. MA-488 — shared/private dictionary + Mirror coefficients
-18. MA-492 — quantized packet-plan latent
-19. MA-494 — error-correcting Mirror expert IDs
-20. MA-498 — learned code-distance regularization
+23. MA-471 — ROME rank-one edit as Mirror coordinate
+23. MA-473 — MEMIT edit basis + Mirror memory codes
+23. MA-475/476 — SERAC/GRACE edit-memory compression
+23. MA-478 — compact View first, explicit edit fallback
+23. MA-481/482 — VQ and residual-VQ Mirror addresses
+23. MA-484 — VQ logical expert codebook
+23. MA-486/487 — sparse dictionary Mirror functions + LISTA routing
+23. MA-488 — shared/private dictionary + Mirror coefficients
+23. MA-492 — quantized packet-plan latent
+23. MA-494 — error-correcting Mirror expert IDs
+23. MA-498 — learned code-distance regularization
 
 ## Seventh research-expansion queue — representation-space functional coordinates
 
@@ -184,12 +183,12 @@ High-information P0:
 7. MA-520/521 — FV-to-code distillation and demonstration-to-code compilation
 8. MA-526/527/528 — SAE feature atoms and Mirror transforms
 9. MA-530 — SAE feature logical experts
-10. MA-533/534 — transcoder feature experts / logical MLPs
-11. MA-539/540 — packet/executor use of function vectors
-12. MA-545 — function-vector MoE without weight experts
-13. MA-546 — representation-space symmetry audit
-14. MA-547 — RoseLoRA versus Mirror edit locality
-15. MA-550 — adaptive allocation between weight-space and activation-space Views
+23. MA-533/534 — transcoder feature experts / logical MLPs
+23. MA-539/540 — packet/executor use of function vectors
+23. MA-545 — function-vector MoE without weight experts
+23. MA-546 — representation-space symmetry audit
+23. MA-547 — RoseLoRA versus Mirror edit locality
+23. MA-550 — adaptive allocation between weight-space and activation-space Views
 
 ## KV-cache transformation research lane
 
@@ -221,16 +220,16 @@ High-information P0:
 7. MA-721/724 — SWAG/Laplace posterior coordinates
 8. MA-725 — Packed-Ensemble subnetworks + Mirror member views
 9. MA-731/732 — FNO operator Views and factorized physics codes
-10. MA-734/740 — DeepONet role sharing and code-only operator adaptation
-11. MA-741/743 — R-GCN/CompGCN relation Views
-12. MA-746 — add-new-relation by Mirror code only
-13. MA-751/753 — ControlNet/T2I-Adapter control-bank compression
-14. MA-755 — Ctrl-Adapter cross-backbone Mirror bridge
-15. MA-758 — precompose multi-control Mirror codes before one adapter pass
-16. MA-761 — GoalNCA goal embedding as Mirror functional coordinate
-17. MA-764 — attention-conditioned dynamic Mirror NCA rule
-18. MA-767 — online task adaptation in Mirror-code space
-19. MA-770 — cross-domain functional-coordinate universality benchmark
+23. MA-734/740 — DeepONet role sharing and code-only operator adaptation
+23. MA-741/743 — R-GCN/CompGCN relation Views
+23. MA-746 — add-new-relation by Mirror code only
+23. MA-751/753 — ControlNet/T2I-Adapter control-bank compression
+23. MA-755 — Ctrl-Adapter cross-backbone Mirror bridge
+23. MA-758 — precompose multi-control Mirror codes before one adapter pass
+23. MA-761 — GoalNCA goal embedding as Mirror functional coordinate
+23. MA-764 — attention-conditioned dynamic Mirror NCA rule
+23. MA-767 — online task adaptation in Mirror-code space
+23. MA-770 — cross-domain functional-coordinate universality benchmark
 
 P1/P2 follow-ups remain in registry order within MA-701..MA-770.
 
@@ -254,13 +253,13 @@ High-information P0:
 7. MA-794/795 — global reused pool factorization and learn-many->compact logical recovery
 8. MA-796/798 — low-rank recurrent shared dynamical components and held-out composition
 9. MA-800/801 — Vector-Network reusable rank-1 atoms with persistent x fast coordinates
-10. MA-802/803/805 — Koopman latent operator Views and neural-operator bridge
-11. MA-806/807 — invertible one-step robot-policy Views and embodiment x task factorization
-12. MA-810/811/813 — motor option-bank compression, positional role factorization and code-only new skills
-13. MA-816/817/818 — explicit what x how computation coordinates
-14. MA-819 — ESE shared equilibrium state with system-role Views
-15. MA-821/822 — task-demanded rank allocation in Matrix Mirror memory
-16. MA-823/824 — GrapNet topology-program x node-function factorization
+23. MA-802/803/805 — Koopman latent operator Views and neural-operator bridge
+23. MA-806/807 — invertible one-step robot-policy Views and embodiment x task factorization
+23. MA-810/811/813 — motor option-bank compression, positional role factorization and code-only new skills
+23. MA-816/817/818 — explicit what x how computation coordinates
+23. MA-819 — ESE shared equilibrium state with system-role Views
+23. MA-821/822 — task-demanded rank allocation in Matrix Mirror memory
+23. MA-823/824 — GrapNet topology-program x node-function factorization
 
 P1 follow-ups remain in registry order inside MA-771..825.
 
@@ -287,10 +286,10 @@ High-information P0:
 7. MA-846/847/848 — differentiable plasticity and persistent x transient Hebbian coordinates
 8. MA-851/852/853 — DeltaNet writable matrix state and factorized associative-memory roles
 9. MA-856/858 — learned low-loss subspace and Bezier-surface model coordinates
-10. MA-860/862/864 — new-task projection, symmetry-aligned manifolds and off-manifold private residuals
-11. MA-866/867/869 — Mesh protocol codes and minimal carrier-connected coalitions
-12. MA-871/872/873 — module-reuse structure, discrete hypothesis codes and module x rule factorization
-13. MA-874 — gain-modulated dynamic Mirror state with stable synapses
+23. MA-860/862/864 — new-task projection, symmetry-aligned manifolds and off-manifold private residuals
+23. MA-866/867/869 — Mesh protocol codes and minimal carrier-connected coalitions
+23. MA-871/872/873 — module-reuse structure, discrete hypothesis codes and module x rule factorization
+23. MA-874 — gain-modulated dynamic Mirror state with stable synapses
 
 P1 follow-ups remain in registry order within MA-826..875.
 

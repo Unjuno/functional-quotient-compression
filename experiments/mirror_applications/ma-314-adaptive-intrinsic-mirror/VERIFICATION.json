@@ -34,5 +34,31 @@
     31411,
     31412,
     31413
-  ]
+  ],
+  "variant_verification": {
+    "path": "protocol_variants/aligned_coordinate_only/VERIFICATION.json",
+    "commit": "4bd89532bb79d9639bb02d29fa608e16236b2f71",
+    "tests": {
+      "command": "python -m pytest -q experiments/mirror_applications/ma-314-adaptive-intrinsic-mirror/protocol_variants/aligned_coordinate_only/tests",
+      "passed": 4,
+      "failed": 0
+    },
+    "metric_replay": {
+      "rows_replayed": 36,
+      "max_difference": 0.0,
+      "payload_hashes_exact": true,
+      "serialization_byte_exact": true
+    },
+    "fresh_worlds": [
+      31411,
+      31412,
+      31413
+    ],
+    "notes": [
+      "Independent replay rerun during reconciliation; reproduced all 36 result rows exactly.",
+      "Initial fitter omitted cross-pair residual terms; corrected to four coordinate-descent sweeps and development rerun before fresh access.",
+      "Do not pool with root broad protocol."
+    ]
+  },
+  "decision_scope": "PROMISING only for aligned-only variant; root broad mixed/private screen FAIL"
 }

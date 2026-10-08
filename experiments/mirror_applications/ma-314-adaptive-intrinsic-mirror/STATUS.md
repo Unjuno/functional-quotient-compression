@@ -1,17 +1,16 @@
 # MA-314 status
 
-- Status: **FAIL** — Mirror payload exceeded adaptive direct coefficients in 3/3 fresh worlds.
+- Status: **PROMISING only for the aligned-only coordinate variant; broad private-fallback screen FAIL**
 - Branch: `research/ma-314-adaptive-intrinsic-mirror-20261008`
-- Base commit: `e037a79`
-- Protocol freeze: `51ae73f` (bytecode cleanup followed before fresh access)
-- Fresh seeds: 31411, 31412, 31413
-- Development and fresh results, tests, and exact replay are complete.
-- The candidate registry and claim ledger are updated; final verification provenance is pinned in the last commit.
+- Broad protocol: fresh 31411–31413 completed; Mirror was 5.2% larger than adaptive direct in 3/3.
+- Aligned-only protocol variant: fresh 31411–31413 passed its own frozen storage/quality gates in 3/3; exact replay checked.
+- No compute, natural-task or capacity improvement is established.
+- Current next executable P0: MA-315.
 
 ## H / T / D / C / U
 
-- **H:** adaptive dimension plus a Mirror angle should beat adaptive intrinsic coefficients by >=10% actual bytes without violating held-out quality.
-- **T:** 32D synthetic linear task bank, 160 tasks, four aligned intrinsic dimensions and an unrelated group; development seeds 31401/31402; fresh 31411–31413; tied, fixed-dimensional, adaptive direct, adaptive Mirror and independent controls.
-- **D:** FAIL; fresh Mirror bytes were about 5.2% above adaptive direct in all worlds.
-- **C:** simple dimension selection accounts for the storage gain versus fixed-16D state; Mirror's angle, flags and archive metadata cost more than the replaced coefficients save.
-- **U:** natural/deep tasks, trained routers, optimizer-driven capacity and deployment kernels.
+- **H:** per-task adaptive intrinsic dimension plus Mirror views could reduce state for nested aligned functions; unrelated functions may need private coordinates.
+- **T:** two distinct frozen linear screens are retained separately: broad mixed-complexity 160-task bank and aligned-only 48-task bank. Both compare direct adaptive coefficients; see each protocol for exact seeds and controls.
+- **D:** PROMISING only for the aligned-only task-code storage/quality point; broad mixed/private allocation failed.
+- **C:** both task families are deliberately generated from the shared polar coordinate family; the direct coefficient control is cheaper to fit and more accurate.
+- **U:** natural/deep tasks, private-state scaling, learned routing, near-convergence capacity and optimized deployment.
