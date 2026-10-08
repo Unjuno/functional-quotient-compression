@@ -71,7 +71,7 @@ def check():
         row = byid.get(label, {})
         if row.get("status") != "UNTESTED" or "ISOLATED" not in row.get("worker_note", ""):
             error("%s not isolated/UNTESTED" % label)
-        folder = HERE / "plans" / label
+        folder = ((ROOT / "experiments" / "mirror_applications" / "research_intake" / "formula_crossovers_20261008" / "plans" / label) if num >= 1171 else (HERE / "plans" / label))
         for file in ("README.md", "PROTOCOL.json", "STATUS.md"):
             if not (folder / file).is_file():
                 error("missing plan file: %s/%s" % (label,file))
@@ -90,11 +90,12 @@ def check():
         dev = sections.get("development", protocol.get("development", {}))
         fresh = sections.get("fresh", protocol.get("fresh", {}))
         firewall = protocol.get("data_firewall", {})
-        devseeds = dev.get("seeds", dev.get("worlds_or_seeds", firewall.get("dev_seeds", [])))
-        frseeds = fresh.get("seeds", fresh.get("worlds_or_seeds", firewall.get("fresh_seeds", [])))
+        dataset = protocol.get("dataset", {})
+        devseeds = dev.get("seeds", dev.get("worlds_or_seeds", firewall.get("dev_seeds", dataset.get("dev_seeds", []))))
+        frseeds = fresh.get("seeds", fresh.get("worlds_or_seeds", firewall.get("fresh_seeds", dataset.get("fresh_seeds", []))))
         if list(devseeds) != [11,12,13] or list(frseeds) != [101,102,103,104,105]:
             error("%s dev/fresh seed mismatch" % label)
-        if not fresh.get("locked_before_access", firewall.get("fresh_locked_before_access", False)):
+        if not fresh.get("locked_before_access", firewall.get("fresh_locked_before_access", dataset.get("fresh_frozen", False))):
             error("%s fresh not locked" % label)
         if set(protocol.get("gates", {})) != {"PASS","FAIL","UNCERTAIN"}:
             error("%s missing predeclared gates" % label)
@@ -107,30 +108,17 @@ def check():
                  "MA-1112-STANDARD_LORA_PREFIX.md"):
         if not (HERE / "existing" / name).exists():
             error("missing native-control supplement " + name)
-        if not (ROOT / "experiments" / "mirror_applications" / "research_intake" / "formula_crossovers_20261008" / "existing" / "MA-690.md").is_file():
-            error("missing formula crossover supplement MA-690")
-        if not (ROOT / "experiments" / "mirror_applications" / "research_intake" / "formula_crossovers_20261008" / "existing" / "MA-1114.md").is_file():
-            error("missing formula crossover supplement MA-1114")
-        if not (ROOT / "experiments" / "mirror_applications" / "research_intake" / "formula_crossovers_20261008" / "existing" / "MA-1099.md").is_file():
-            error("missing formula crossover supplement MA-1099")
-        if not (ROOT / "experiments" / "mirror_applications" / "research_intake" / "formula_crossovers_20261008" / "existing" / "MA-1156.md").is_file():
-            error("missing formula crossover supplement MA-1156")
-        if not (ROOT / "experiments" / "mirror_applications" / "research_intake" / "formula_crossovers_20261008" / "existing" / "MA-1160.md").is_file():
-            error("missing formula crossover supplement MA-1160")
-        if not (ROOT / "experiments" / "mirror_applications" / "research_intake" / "formula_crossovers_20261008" / "existing" / "MA-1165.md").is_file():
-            error("missing formula crossover supplement MA-1165")
-        if not (ROOT / "experiments" / "mirror_applications" / "research_intake" / "formula_crossovers_20261008" / "existing" / "MA-1166.md").is_file():
-            error("missing formula crossover supplement MA-1166")
-        if not (ROOT / "experiments" / "mirror_applications" / "research_intake" / "formula_crossovers_20261008" / "existing" / "MA-1081.md").is_file():
-            error("missing formula crossover supplement MA-1081")
-        if not (ROOT / "experiments" / "mirror_applications" / "research_intake" / "formula_crossovers_20261008" / "existing" / "MA-1146.md").is_file():
-            error("missing formula crossover supplement MA-1146")
-        if not (ROOT / "experiments" / "mirror_applications" / "research_intake" / "formula_crossovers_20261008" / "existing" / "MA-248.md").is_file():
-            error("missing formula crossover supplement MA-248")
-        if not (ROOT / "experiments" / "mirror_applications" / "research_intake" / "formula_crossovers_20261008" / "existing" / "MA-231.md").is_file():
-            error("missing formula crossover supplement MA-231")
-        if not (ROOT / "experiments" / "mirror_applications" / "research_intake" / "formula_crossovers_20261008" / "existing" / "MA-196.md").is_file():
-            error("missing formula crossover supplement MA-196")
+    formula_base = ROOT / "experiments" / "mirror_applications" / "research_intake" / "formula_crossovers_20261008"
+    for ma_id in ['MA-690','MA-1114','MA-1099','MA-1156','MA-1160','MA-1165','MA-1166','MA-1081','MA-1146','MA-248','MA-231','MA-196']:
+        if not (formula_base / "existing" / (ma_id+".md")).is_file():
+            error("missing formula crossover supplement " + ma_id)
+    for required in ("FORMULA_LEDGER.md", "FORMULA_STAGE0_PROTOCOL.json",
+                     "pilots/formula_stage0/REPORT.md",
+                     "pilots/formula_stage0/source/run_formula_audit.py",
+                     "pilots/formula_stage0/results/fresh_raw.csv",
+                     "pilots/formula_stage0/results/VERIFICATION.json"):
+        if not (formula_base / required).is_file():
+            error("missing formula audit artifact "+required)
     with (APPS / "CLAIM_LEDGER.csv").open(encoding="utf-8", newline="") as stream:
         claims=list(csv.DictReader(stream))
     for r in claims:
