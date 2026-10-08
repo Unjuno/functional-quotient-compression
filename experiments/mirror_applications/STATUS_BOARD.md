@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (172 completed; 458 UNTESTED; 0 SCREENING)
+- P0: **630** (172 completed; 457 UNTESTED; 1 SCREENING)
 - P1: **422** (13 completed; 409 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **129 FAIL, 11 NOT ESTABLISHED, 45 PROMISING, 970 UNTESTED, 0 SCREENING**
+- Current MA statuses: **129 FAIL, 11 NOT ESTABLISHED, 45 PROMISING, 969 UNTESTED, 1 SCREENING**
 - 47 baseline experiment directories remain present; 140 additional per-ID outcomes are linked to their dedicated research branches in `LIVE_BRANCH_RECONCILIATION.csv`.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This was the intake-time queue; current selection follows the live-branch reconciliation at the top of this board.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed at intake time; later live-branch outcomes are indexed above.
@@ -28,6 +28,8 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 MA-434 and MA-436 found exact native SSM parameterization aliases; MA-442 and MA-453 likewise alias native Givens conditioning. MA-453’s fixed-router synthetic screen showed no Mirror-specific value against role-vector or independent-block controls. Fresh seeds remain sealed.
 
 ## Active experiment
+
+MA-461 is screening on `research/ma-461-hyperformer-mirror-codes-20261008`; it tests a code-output hypernetwork against direct HyperFormer and native low-rank controls on heldout task×layer pairs.
 
 MA-457 is a verified development-screen FAIL with fresh data sealed. It reduced births but not actual storage or compute, and exactly aliased native low-rank adaptation.
 

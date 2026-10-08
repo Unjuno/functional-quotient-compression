@@ -1,0 +1,25 @@
+{
+  "experiment_id": "MA-461",
+  "title": "HyperFormer generator outputs Mirror codes",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/GENERALIZATION/RUNTIME",
+  "base_commit": "a211269",
+  "hypothesis": "For an adapter bank with 18 observed and six withheld task×layer combinations, a HyperFormer-style generator that emits a two-dimensional code and decodes it through a shared matrix basis will reach withheld-combination output RMSE <=0.05 at <=0.75x the actual bytes and <=0.75x generator compute of a matched full-adapter hypernetwork; direct native low-rank code generation tests whether the gain is Mirror-specific.",
+  "physical_object": "shared frozen 4x4 base matrix, shared rank-two adapter basis, and task/layer embedding tables",
+  "mirror_coordinate": "two learned coefficients emitted from concatenated task and layer embeddings, decoded into a 4x4 adapter update",
+  "logical_multiplicity": "24 task×layer adapters generated from one shared basis and compact codes",
+  "prior_art_refs": ["PA82"],
+  "controls": [
+    "HyperFormer-style two-layer MLP generator directly emits all 16 adapter values",
+    "same two-dimensional code generator plus shared adapter basis named native low-rank generator (exact map control)",
+    "single shared adapter baseline",
+    "independent per-pair matrices trained only on the 18 observed pairs as a seen-pair fit/storage reference; no audit values are fit"
+  ],
+  "task": {"type": "synthetic 4D linear adapter generation; 6 task identities × 4 layer positions, with smooth rank-two teacher updates", "dimension": 4, "tasks": 6, "layers": 4, "training_pair_rule": "include pair (t,l) iff (3*t+5*l) mod 4 != 0", "heldout_pair_rule": "the complementary 6 Cartesian pairs; every task and layer identity appears in training", "teacher": "rank-two adapter update with coefficients smooth in numeric task and layer identities", "query_examples_per_heldout_pair": 256, "outer_updates": 1800, "combination_batch_size": 8, "optimizer": "Adam; fixed learning rate 0.01", "embedding_dim_per_axis": 2, "generator_hidden_width": 16},
+  "development": {"worlds_or_seeds": [46101, 46102], "selection_metric": "output RMSE averaged across the six heldout task×layer pairs; also report seen-pair RMSE, actual payload bytes, MAC proxy, query wall and per-pair scores", "hyperparameter_changes_after_run": "prohibited without numbered amendment"},
+  "fresh": {"worlds_or_seeds": [46111, 46112, 46113], "locked_before_access": true, "opened": false},
+  "storage": {"authority": "actual uncompressed .npz inference payload bytes", "paid_objects": ["base matrix", "task and layer embedding tables", "generator weights and biases", "Mirror adapter basis", "all dtype/shape/format metadata"]},
+  "compute": {"report_training_combinations_seen": true, "report_optimizer_updates": true, "report_training_and_query_MAC_proxy": true, "report_training_wall_time": true, "report_generation_plus_query_wall_time": true, "inference_mac_proxy": "direct generator: 4×16 + 16×16 + 16 output + 16 base application; Mirror: 4×16 + 16×2 + 2×16 basis decode + 16 application + 16 base application", "query_timing_boundary": "Generate one adapter per heldout task×layer pair, then evaluate 256 input examples; startup and query are timed together."},
+  "gates": {"PROMISING": "Both seeds: heldout RMSE <=0.05 and <=1.10x HyperFormer RMSE; Mirror actual payload <=0.75x HyperFormer bytes; Mirror MAC proxy <=0.75x HyperFormer; and native low-rank control does not exactly match Mirror payload/output.", "FAIL": "Either seed misses a PROMISING gate, the native low-rank generator exactly aliases Mirror, or the seen-pair independent table has lower training error at no more than 1.25x Mirror bytes (reported only as a seen-pair reference).", "NOT ESTABLISHED": "HyperFormer heldout RMSE >0.05 on either seed or serialization/metric replay fails."},
+  "boundaries": ["Mechanism screen on a synthetic rank-two adapter family; no language-model quality claim.", "The independent table is a seen-pair fit only; it is not a fair heldout-combination predictor.", "Shared task/layer embedding tables are learned and paid; all combinations use the same identity tables.", "Fixed-update learning signal is not a capacity claim; no near-convergence claim.", "Fresh seeds remain sealed unless every frozen PROMISING gate passes."]
+}
