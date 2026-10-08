@@ -1,0 +1,54 @@
+{
+  "experiment_id": "MA-311",
+  "title": "Mirror coordinates inside a random intrinsic subspace",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY/COMPUTE/RUNTIME",
+  "base_commit": "574f074877ae7939d678404d37329f526ad9b92f",
+  "hypothesis": "One fitted angle per task inside a random intrinsic subspace preserves aligned held-out predictions with lower total payload than standard SAID and direct two-coordinate coefficients; arbitrary intrinsic codes require richer state.",
+  "physical_object": "fixed 16-parameter predictor plus a shared paid 16x4 random orthonormal projection basis",
+  "mirror_coordinate": "per-task FP16 angle on a fixed-radius circle in the first two intrinsic coordinates",
+  "logical_multiplicity": "64 task-conditioned linear functions; the task count is not treated as independent capacity",
+  "prior_art_refs": ["PA33"],
+  "controls": ["hard tie", "PA33 random-subspace SAID with four FP32 codes/task", "same-plane two-coefficient code with two FP16 values/task", "independent full 16D task vectors"],
+  "data": {
+    "input_dimension": 16,
+    "intrinsic_dimension": 4,
+    "task_count": 64,
+    "support_examples_per_task": 64,
+    "test_examples_per_task": 256,
+    "development_seeds": [31101, 31102, 31103],
+    "fresh_seeds_locked_unopened": [31111, 31112, 31113],
+    "optimizer_updates": 0,
+    "task_id_supplied": true,
+    "aligned_teacher": "theta_t = theta0 + P @ [r*cos(m_t), r*sin(m_t), 0, 0], r=0.25",
+    "unrelated_teacher": "theta_t = theta0 + P @ z_t, z_t independently Gaussian in R^4"
+  },
+  "selection": {
+    "development_only": true,
+    "tunable": "none; 720-point angle grid, precision, dimensions and code families are frozen",
+    "fresh_opened_only_if_development_passes_quality_and_byte_gates": true
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes after reload",
+    "format": "NPZ-compatible fixed-timestamp ZIP",
+    "paid_objects": ["shared predictor theta0", "random projection basis P", "shared radius", "task angles or coefficient codes", "SAID latent vectors", "independent task vectors", "metadata and archive headers"]
+  },
+  "compute": {
+    "report_support_examples": true,
+    "report_test_examples": true,
+    "report_optimizer_updates": true,
+    "report_code_fit_operations": true,
+    "report_active_inference_operations": true,
+    "report_encoder_wall_clock": true,
+    "report_test_throughput": true,
+    "device": "CPU"
+  },
+  "success_gate": "All 3 development aligned worlds: Mirror normalized test MSE <=1e-4; within 1e-5 absolute normalized MSE of direct two-coefficient control; Mirror total bytes <=75% PA33 SAID and <=90% two-coefficient control.",
+  "failure_gate": "Mirror misses quality or either byte gate, or one-angle coordinates fail unrelated tasks without an aligned useful byte-quality point.",
+  "fresh": {
+    "locked_before_access": true,
+    "seeds": [31111, 31112, 31113],
+    "open_condition": "only if all development aligned quality and byte gates are met"
+  },
+  "boundaries": ["synthetic linear predictor", "post-fit supervised code estimation", "no gradient updates", "no natural-language or capacity claim"]
+}
