@@ -3,11 +3,11 @@
 - Status: FAIL at development for storage and Mirror-specific gates
 - Branch: `research/ma-353-bayesian-mirror-coordinate-20261008`
 - Base commit: `c935a90`
-- Last verified commit: pending
+- Last verified commit: `1ad968e`
 - Development complete: yes
 - Fresh/audit opened: no; seeds 35311–35313 remain sealed
-- Results committed: no
-- Verification committed: no
+- Results committed: yes
+- Verification committed: yes
 - Registry row updated: no
 
 ## Decision summary
