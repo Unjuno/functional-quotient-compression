@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-322",
+  "commit": "be71456",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-322-tt-core-mirror-adapter-bank/tests",
+    "passed": 5,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Three frozen fresh seeds, two banks, five methods; 30 summaries and 1,536 allocation events exactly replayed.",
+    "All 30 fresh serialized payload files were reloaded and matched recorded byte lengths and SHA-256 hashes.",
+    "No optimizer updates; generated function tasks and test vectors use deterministic seed-derived streams."
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "experiment_id": "MA-322",
+  "title": "Shared Tensor-Train adapter cores with Mirror phase views",
+  "status": "PROTOCOL_FROZEN_BEFORE_DEVELOPMENT",
+  "base_commit": "a9991e1",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY/COMPUTE/RUNTIME",
+  "hypothesis": "For a bank of 128 aligned TT adapter functions, storing one phase per task to modulate a selected shared TT core will reduce total serialized bytes by at least 10% versus storing two free coefficients per task at the same core while preserving held-out normalized function MSE <=1e-4. A second mixed bank of 96 aligned and 32 unrelated TT functions will test whether private factors erase this saving.",
+  "prior_art_refs": ["PA36", "MA-320"],
+  "physical_object": "shared order-4 Tensor-Train adapter factors with dimensions 8x8x8x8 and TT ranks 4",
+  "mirror_coordinate": "one FP16 phase per aligned task; selected middle TT core is G2 + rho*(cos(theta)*U + sin(theta)*V), with shared rho=0.25 and charged U/V core directions",
+  "logical_multiplicity": "128 phase-orbit task adapters in aligned bank; 96 orbit tasks plus 32 unrelated adapters with private TT factors in mixed bank",
+  "task": {
+    "adapter_matrix_shape": [64,64],
+    "tt_tensor_shape": [8,8,8,8],
+    "tt_ranks": [4,4,4],
+    "aligned_bank_tasks": 128,
+    "mixed_bank_tasks": 128,
+    "mixed_aligned_tasks": 96,
+    "mixed_unrelated_tasks": 32,
+    "support_examples_per_task": 64,
+    "validation_examples_per_task": 32,
+    "fresh_test_examples_per_task": 64,
+    "phase_search_grid": 1024,
+    "private_fallback_threshold": 1e-4,
+    "development_seeds": [32201,32202],
+    "fresh_seeds": [32211,32212,32213],
+    "optimizer_updates": 0
+  },
+  "controls": [
+    "hard-tied shared TT adapter",
+    "native LoRETTA-style independent per-task TT factors",
+    "shared TT factors plus two free scalar coefficients per task on selected core, with same private TT fallback",
+    "shared TT factors plus one Mirror phase per aligned task, with same private TT fallback",
+    "independent full FP16 64x64 adapter matrices"
+  ],
+  "storage": {
+    "authority": "actual deterministic serialized inference payload bytes after reload",
+    "format": "fixed-timestamp ZIP with sorted uncompressed NPY tensors",
+    "paid_objects": ["shared TT cores", "selected-core U/V directions", "direct coefficients or Mirror phase/radius", "private TT cores", "expert IDs", "metadata and archive headers"],
+    "private_rule": "validation nMSE >1e-4 stores that task's independent TT factors in both shared methods"
+  },
+  "compute": {
+    "report_support_examples_and_updates": true,
+    "report_phase_search_operation_proxy_and_wall_time": true,
+    "report_active_matrix_vector_MAC_proxy": true,
+    "report_package_decode_and_inference_wall_time": true
+  },
+  "gates": {
+    "promising": "All 3 fresh seeds in both aligned and mixed banks: Mirror package <=0.90x the matched shared-TT/free-pair control, max task test nMSE<=1e-4, and no additional private tasks versus the control.",
+    "fail": "Mirror package >= the free-pair control in >=2 fresh seeds in either bank, or max task nMSE>1e-4 in >=2 fresh seeds.",
+    "not_established": "Serialization/hash replay mismatch or split leakage"
+  },
+  "boundaries": ["post-fit synthetic adapter function screen", "teacher deliberately uses one selected-core phase orbit", "oracle task IDs", "no optimizer training, real pretrained language model, learned router, or capacity claim", "LoRETTA represented by independent TT factors, not a full method reproduction"]
+}
