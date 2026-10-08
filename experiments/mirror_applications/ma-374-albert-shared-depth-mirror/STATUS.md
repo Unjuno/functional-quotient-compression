@@ -3,11 +3,11 @@
 - Status: PROMISING, development-only final-depth signal; preregistered multi-depth gate missed.
 - Branch: `research/ma-374-albert-shared-depth-mirror-20261008`
 - Base commit: `de5504c`
-- Last verified commit: pending
+- Last verified commit: `52fd6b6`
 - Development complete: yes (seeds 37401, 37402)
 - Fresh/audit opened: no
-- Results committed: pending
-- Verification committed: pending
+- Results committed: yes
+- Verification committed: yes
 - Registry row updated: yes (PROMISING)
 
 ## Next action
