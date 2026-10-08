@@ -1,0 +1,29 @@
+{
+  "experiment_id": "MA-753",
+  "commit": "pending",
+  "tests": {
+    "command": "pytest -q experiments/mirror_applications/ma-753-t2i-adapter-mirror/tests",
+    "passed": 5,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "format": "Safetensors packed inference adapter parameters with schema/layout charged in actual file size"
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference_composition_mse": 0.0,
+    "max_difference_single_mse": 0.0,
+    "raw_metrics_sha256": "bb6c73c1a65223e5985e9a2663669823adee1074d5e37d1482c3aae96c70e6f0",
+    "reported_metrics_sha256": "cf43edcd6043389c91169886b7bd1d59001a7af1c50d9e1e7622ec94b235172c"
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Draw30 rejection-sampling replay passed.",
+    "Two fresh audit executions matched task IDs, actual payload bytes, single-control MSE and held-out pair MSE exactly; timing varied.",
+    "540 pair-level audit rows cover 3 worlds \u00d7 3 model seeds \u00d7 2 teacher variants \u00d7 6 compositions \u00d7 5 methods.",
+    "Strict preregistered relative quality gate failed on aligned data; storage gate passed. The aligned teacher intentionally uses the Mirror transform family.",
+    "No pretrained diffusion weights or image metrics were used."
+  ]
+}

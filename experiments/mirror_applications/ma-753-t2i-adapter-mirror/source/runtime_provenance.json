@@ -1,0 +1,9 @@
+{
+  "device": "CPU",
+  "gpu_used": false,
+  "framework": "PyTorch 2.6.0+cpu",
+  "torch_threads": 1,
+  "deterministic_algorithms": true,
+  "latency_note": "Eager CPU batch-1; Mirror currently materializes all four transformed adapter matrices before selecting a control, so observed latency includes avoidable Python/dispatch work.",
+  "compute_proxy": "Dense matrix-vector MACs and output mixture; excludes trig operations, elementwise adds, and runtime/dispatch overhead."
+}
