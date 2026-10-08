@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (55 completed; 575 UNTESTED)
+- P0: **630** (57 completed; 573 UNTESTED)
 - P1: **422** (12 completed; 410 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1088 UNTESTED, 33 PROMISING, 34 FAIL**
+- Current MA statuses: **1086 UNTESTED, 33 PROMISING, 36 FAIL**
 - 52 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -23,20 +23,20 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-265 — VeRA Mirror scaling code bank (P0; PA18)**
+**MA-268 — IA3 Mirror activation views (P0; PA19)**
 
-MA-257 is PROMISING only for a synthetic rotation-compositional family: it reached 0.986–0.994 on the withheld factor pair and used 819 B versus 827 B for the additive control; the control matched quality. MA-258 is PROMISING on its canonical output-channel Givens screen: fresh aligned Mirror MSE was about 1e-9 at 1,514 B versus rank-2 SVD at 3,822 B; unrelated fresh MSE was 0.848–0.889. A separate flattened-matrix sensitivity rerun was exact on aligned maps but missed its stricter 0.50x total-byte cap at 0.512x; its fresh seeds remain sealed. MA-260 is FAIL in both canonical and supplemental screens: the canonical aligned run missed its <=25% byte gate (890 B vs 1,226 B BatchEnsemble), and the supplemental run missed a fresh diversity floor; unrelated performance collapsed. MA-261 is FAIL after reconciliation: its frozen relative-MSE gate passed only 1/4 fresh worlds, and a separate fixed-update protocol failed at development. MA-255 and MA-399 are also FAIL. MA-369/371/372 remain UNTESTED and paused pending width/depth output-code family redesign.
+MA-257 is PROMISING only for a synthetic rotation-compositional family: it reached 0.986–0.994 on the withheld factor pair and used 819 B versus 827 B for the additive control; the control matched quality. MA-258 is PROMISING on its canonical output-channel Givens screen: fresh aligned Mirror MSE was about 1e-9 at 1,514 B versus rank-2 SVD at 3,822 B; unrelated fresh MSE was 0.848–0.889. A separate flattened-matrix sensitivity rerun was exact on aligned maps but missed its stricter 0.50x total-byte cap at 0.512x; its fresh seeds remain sealed. MA-260 is FAIL in both canonical and supplemental screens: the canonical aligned run missed its <=25% byte gate (890 B vs 1,226 B BatchEnsemble), and the supplemental run missed a fresh diversity floor; unrelated performance collapsed. MA-261 is FAIL after reconciliation: its frozen relative-MSE gate passed only 1/4 fresh worlds, and a separate fixed-update protocol failed at development. MA-265 is FAIL: the canonical fresh aligned run saved only 4.4% bytes vs VeRA, missing the 20% gate; a separate trained diagonal-code protocol also failed. MA-266 is FAIL: its direct coefficient-product control matched the composed Mirror within 2.1% bytes, so there was no Mirror-specific margin. Pause the VeRA family pending redesign. MA-255 and MA-399 are also FAIL. MA-369/371/372 remain UNTESTED and paused pending width/depth output-code family redesign.
 
-Next: inspect existing MA-265 branches, then read PA18 and reconcile their frozen protocols/verification before starting or importing results.
+Next: inspect existing MA-268 branches, then read PA19 and reconcile any frozen protocols/verification before starting or importing results.
 
 ## Active experiment
 
-MA-255, MA-260, MA-261, MA-383, MA-385, MA-389, MA-391, MA-392, MA-393, MA-395, MA-397 and MA-399 are FAIL and recorded on dedicated research branches. MA-257 and canonical MA-258 are PROMISING on dedicated branches. MA-265 is next. MA-367/368/374/375/379/381/383/385/389/391/392/393/395/397/399 fresh worlds remain unopened under their registered gates.
+MA-255, MA-260, MA-261, MA-265, MA-266, MA-383, MA-385, MA-389, MA-391, MA-392, MA-393, MA-395, MA-397 and MA-399 are FAIL and recorded on dedicated research branches. MA-257 and canonical MA-258 are PROMISING on dedicated branches. MA-268 is next. MA-367/368/374/375/379/381/383/385/389/391/392/393/395/397/399 fresh worlds remain unopened under their registered gates.
 
 ## Verified status index
 
 - **PROMISING (33):** MA-001, MA-002, MA-003, MA-004, MA-005, MA-006, MA-007, MA-008, MA-012, MA-014, MA-015, MA-041, MA-076, MA-079, MA-111, MA-121, MA-156, MA-160, MA-171, MA-173, MA-181, MA-189, MA-241, MA-244, MA-245, MA-249, MA-250, MA-251, MA-257, MA-258, MA-374, MA-381, MA-691.
-- **FAIL (34):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-260, MA-261, MA-367, MA-368, MA-375, MA-379, MA-383, MA-385, MA-389, MA-391, MA-392, MA-393, MA-255, MA-395, MA-397, MA-399.
+- **FAIL (36):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-260, MA-261, MA-265, MA-266, MA-367, MA-368, MA-375, MA-379, MA-383, MA-385, MA-389, MA-391, MA-392, MA-393, MA-255, MA-395, MA-397, MA-399.
 
 All per-ID evidence is retained in the local experiment directories and in `CLAIM_LEDGER.csv`. Consult [the evidence integration audit](../../docs/phase2/MIRROR_MA_EVIDENCE_INTEGRATION_2026-10-08.md) for linked reports, verifications, provenance and claim boundaries.
 
