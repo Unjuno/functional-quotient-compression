@@ -5,8 +5,8 @@
 - Base commit: `c935a903daca5c7d1d48aa50d05b5bd50f239cba`
 - Development complete: yes
 - Fresh/audit opened: yes
-- Results committed: pending commit
-- Verification committed: pending commit
+- Results committed: yes (`27b01c1`)
+- Verification committed: pending registry check commit
 
 ## Next action
 
