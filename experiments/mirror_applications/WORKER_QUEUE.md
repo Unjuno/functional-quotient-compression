@@ -1,6 +1,6 @@
 # Worker queue
 
-**Current operational pointer (2026-10-08): MA-439.** MA-436 and MA-438 show scoped synthetic quality/storage Pareto points; MA-437 failed its byte gate. Continue with packet-plan state-space Views.
+**Current operational pointer (2026-10-08): MA-440.** MA-436 and MA-438 show scoped synthetic quality/storage Pareto points; MA-437 and MA-439 failed registered gates. Continue with continual SSM skill codes.
 
 The queue is derived from `IDEA_REGISTRY.csv`. The registry is authoritative.
 
@@ -156,7 +156,7 @@ High-information P0:
 11. MA-427 — DEQ conditioned fixed-point map (completed FAIL)
 12. MA-429 — Universal Transformer depth view (completed FAIL); MA-431 deferred pending depth-family redesign
 13. MA-434 — Mamba selective-state Mirror roles (completed FAIL)
-14. MA-436 — logical SSM experts (completed PROMISING, synthetic quality/storage only); MA-437 — S4 structured transition Views (completed FAIL under byte gate); MA-438 — frequency-band S4 Views (completed PROMISING; strict byte gate missed); MA-439 — packet-plan state-space Mirror (current)
+14. MA-436 — logical SSM experts (completed PROMISING, synthetic quality/storage only); MA-437 — S4 structured transition Views (completed FAIL under byte gate); MA-438 — frequency-band S4 Views (completed PROMISING; strict byte gate missed); MA-439 — packet-plan state-space Mirror (completed FAIL; sequential rollout only); MA-440 — continual SSM skill codes (current)
 15. MA-442 — MAML with Mirror-only inner-loop adaptation
 16. MA-444 — LEO latent decoder versus structured Mirror
 17. MA-446 — learned optimizer for Mirror coordinates

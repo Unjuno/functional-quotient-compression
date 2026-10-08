@@ -1,15 +1,87 @@
 {
- "experiment_id":"MA-439","title":"Packet-plan state-space Mirror","status":"SCREENING","evidence_lane":"MECHANISM/QUALITY/COMPUTE","base_commit":"e3aa191",
- "hypothesis":"A packet-level 2D Mirror plan over one shared stable transition predicts four dependent future values in parallel within 1.10x autoregressive NRMSE and <=60% independent transition payload bytes.",
- "physical_object":"one shared 4D stable SSM transition","mirror_coordinate":"per-example two-coordinate packet plan selecting low-description transition Views","logical_multiplicity":"four jointly predicted future offsets",
- "prior_art_refs":[10,73],"controls":["autoregressive shared SSM","parallel shared SSM","parallel Mirror plan","equal-width ordinary packet latent","independent offset transitions"],
- "task":{"type":"synthetic packet future regression","state_dim":4,"packet_width":4,"teacher":"stable shared transition with per-packet two-coordinate Givens View and dependent future trajectory"},
- "development":{"worlds_or_seeds":[43900,43901],"seeds":[0,1,2],"learning_rates":[0.003,0.01],"selection_metric":"mean validation packet NRMSE"},
- "fresh":{"worlds_or_seeds":[43910,43911,43912],"seeds":[0,1,2],"locked_before_access":true},
- "training":{"updates":400,"batch_size":96,"optimizer":"AdamW","same_updates_all_methods":true},
- "storage":{"authority":"actual serialized inference payload bytes","paid_objects":["transition parameters","packet codes","latent controls","independent offset matrices","metadata"]},
- "compute":{"report_examples":true,"report_updates":true,"report_MAC_proxy":true,"report_training_wall":true,"report_decode_wall":true},
- "success_gate":"Every fresh world Mirror NRMSE <=1.10x autoregressive shared SSM, actual bytes <=60% independent offset transitions, and parallel wall <=1.25x AR.",
- "failure_gate":"Any quality/byte/wall gate missed or ordinary packet latent matches Mirror at lower bytes.",
- "boundaries":["Synthetic aligned mechanism screen only.","No language model, valid-path, or accelerator claim.","Packet count is not independent capacity."]
+  "experiment_id": "MA-439",
+  "title": "Packet-plan state-space Mirror",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/QUALITY/COMPUTE",
+  "base_commit": "e3aa191",
+  "hypothesis": "A packet-level 2D Mirror plan over one shared stable transition predicts four dependent future values in parallel within 1.10x autoregressive NRMSE and <=60% independent transition payload bytes.",
+  "physical_object": "one shared 4D stable SSM transition",
+  "mirror_coordinate": "per-example two-coordinate packet plan selecting low-description transition Views",
+  "logical_multiplicity": "four jointly predicted future offsets",
+  "prior_art_refs": [
+    10,
+    73
+  ],
+  "controls": [
+    "autoregressive shared SSM",
+    "parallel shared SSM",
+    "parallel Mirror plan",
+    "equal-width ordinary packet latent",
+    "independent offset transitions"
+  ],
+  "task": {
+    "type": "synthetic packet future regression",
+    "state_dim": 4,
+    "packet_width": 4,
+    "teacher": "stable shared transition with per-packet two-coordinate Givens View and dependent future trajectory"
+  },
+  "development": {
+    "worlds_or_seeds": [
+      43900,
+      43901
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "learning_rates": [
+      0.003,
+      0.01
+    ],
+    "selection_metric": "mean validation packet NRMSE"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      43910,
+      43911,
+      43912
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "locked_before_access": true
+  },
+  "training": {
+    "updates": 400,
+    "batch_size": 96,
+    "optimizer": "AdamW",
+    "same_updates_all_methods": true
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "transition parameters",
+      "packet codes",
+      "latent controls",
+      "independent offset matrices",
+      "metadata"
+    ]
+  },
+  "compute": {
+    "report_examples": true,
+    "report_updates": true,
+    "report_MAC_proxy": true,
+    "report_training_wall": true,
+    "report_decode_wall": true
+  },
+  "success_gate": "Every fresh world Mirror NRMSE <=1.10x autoregressive shared SSM, actual bytes <=60% independent offset transitions, and parallel wall <=1.25x AR.",
+  "failure_gate": "Any quality/byte/wall gate missed or ordinary packet latent matches Mirror at lower bytes.",
+  "boundaries": [
+    "Synthetic aligned mechanism screen only.",
+    "No language model, valid-path, or accelerator claim.",
+    "Packet count is not independent capacity."
+  ]
 }
