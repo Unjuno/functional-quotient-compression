@@ -1,0 +1,9 @@
+{
+  "experiment_id": "MA-344",
+  "commit": "<RESULT_COMMIT>",
+  "tests": {"command": "python -m pytest -q experiments/mirror_applications/ma-344-prelort-nested-rank-mirror/tests", "passed": 3, "failed": 0},
+  "serialization": {"roundtrip_checked": true, "byte_exact": true, "payloads_checked": 35, "fresh_payloads_checked": 21, "mirror_native_phase_hashes_identical": true, "max_metric_replay_difference": 0.0},
+  "metric_replay": {"command": "python experiments/mirror_applications/ma-344-prelort-nested-rank-mirror/source/verify.py", "checked": true, "rows_replayed": 35, "fresh_rows": 21, "max_difference": 0.0},
+  "fresh_split_integrity_checked": true,
+  "notes": ["Fresh seeds 34411–34413 were accessed after the protocol and development claim boundary were frozen.", "Mirror phase and ordinary scalar phase were byte/hash identical in all worlds.", "Synthetic post-fit rank-heterogeneous operators only; no optimizer training or real federated data."]
+}
