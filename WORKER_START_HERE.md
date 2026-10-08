@@ -229,6 +229,20 @@ Before starting a candidate in this range:
 
 Current next candidate stays **MA-255**, regardless of this appended research queue.
 
+### MA-936..995 twelfth-sweep video/symmetry/SNN/hardware applications
+
+Before starting an experiment in MA-936..995:
+
+1. Read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_TWELFTH_SWEEP.md`, the exact MA row and its PA266..PA295 references. State the physical object, the insertion interface for extra low-description `m`, and the strongest native parameter-sharing control.
+2. Video: compare native **NerVast** (Fisher-guided partial shared weights), **DCVC-UF** (chunk latent + frame-specific parallel decoders), **DCVC-RT**, HNeRV or the relevant video codec at identical bitrates. Record actual bitstream bits, PSNR/MS-SSIM, peak memory, encoding time, decode FPS and random access. No free frame-slot or QP codes.
+3. Group-equivariant methods: compare G-CNN/Steerable CNN/EGNN/e3nn and parameter-free approximate equivariance where relevant. Count transformed copies and function-preserving gauges as **zero additional independently learned functions**. Any Mirror gain must be task-specific functional freedom beyond known group action.
+4. Spiking methods: compare native STL-SNN learnable thresholds, per-time TEBN and TACOS task-agnostic plasticity. Separate synaptic bytes, neuron-threshold/membrane state, spike operations, event timing, energy and forgetting. Do not provide oracle task IDs unless the native control also receives them.
+5. Photonic: compare programmable LightPro/MZI/diffractive controls at realistic coupler/phase resolution, optical noise, insertion loss and thermal/calibration drift. Count physically changed devices, programming/config bits, switch/settling latency, and full energy including control/ADC/DAC. **Clearly label simulations**; never infer hardware gains from tensor FLOPs alone.
+6. Wireless: native neural beam codebook, site-specific Type-II CSI, CsiNet and RIS joint phase optimization are direct controls. Count feedback/probing/signaling bits, RF hardware constraints, spectral efficiency, device switch delay and energy.
+7. Spatial audio: compare RANF and anthropometric HRTF latents. Hold out actual listeners and directions; measure frequency/spectral distortion, ITD/ILD/localization error, listener code bytes, measurement count and update latency.
+8. Factorized codes require unseen task×time, scene×chunk, listener×direction, site×user or hardware task×configuration pairings. Prefer natural/out-of-family variation to more aligned-only tests.
+9. The new MA-936..995 ideas are UNTESTED. Existing completed experiments and MA-255 next-candidate selection are unchanged.
+
 ### Recurrent/depth candidates
 
 MA-247 showed that even an aligned Givens teacher can fail a fixed-budget recurrent optimization screen. Include a scalar/static-LoRA optimization control and do not infer representational impossibility from failed convergence.
