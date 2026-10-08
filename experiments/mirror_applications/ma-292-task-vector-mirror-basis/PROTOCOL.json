@@ -1,0 +1,106 @@
+{
+  "experiment_id": "MA-292",
+  "title": "task-vector Mirror basis",
+  "status": "FAIL",
+  "evidence_lane": "MECHANISM/STORAGE/TASK-ARITHMETIC",
+  "base_commit": "e259f27",
+  "random_selection": {
+    "date_utc": "2026-10-08",
+    "method": "Python secrets.randbelow(9)",
+    "draw_index_zero_based": 6,
+    "candidate_pool": [
+      "MA-274",
+      "MA-276",
+      "MA-278",
+      "MA-282",
+      "MA-286",
+      "MA-288",
+      "MA-292",
+      "MA-296",
+      "MA-299"
+    ],
+    "selected": "MA-292",
+    "live_conflict_check": "git fetch origin --prune; no remote MA-292 branch found"
+  },
+  "hypothesis": "For task deltas on a fixed-radius shared two-direction orbit, two shared physical vectors plus one per-task Mirror angle preserve individual task functions and signed task arithmetic with fewer incremental bytes than native two-coefficient rank-2 SVD; unrelated deltas require private state.",
+  "physical_object": "Shared pretrained linear weight vector and SVD-discovered rank-2 task-delta basis",
+  "mirror_coordinate": "One angle code per task in the shared two-dimensional task-vector subspace",
+  "logical_multiplicity": "Eight new task deltas represented by one physical rank-2 basis",
+  "prior_art_refs": [
+    "PA26",
+    "PA16"
+  ],
+  "controls": [
+    "shared-only zero task delta",
+    "ordinary rank-2 SVD basis with two coefficients per task",
+    "rank-1 SVD basis",
+    "rank-2 SVD with float16 task coefficients (same coefficient payload bytes as one float32 Mirror angle)",
+    "independent full task vectors"
+  ],
+  "stream": "Per world, eight support task deltas discover the shared basis; eight new task deltas are encoded and evaluated. Aligned task deltas use a fixed-radius circular orbit in the support-discovered rank-2 subspace. Independent deltas are isotropic and unrelated. Each task is f(x)=x^T(theta0+delta) on held-out isotropic x. Also evaluate pairwise positive and negative task-vector compositions.",
+  "development": {
+    "worlds_or_seeds": [
+      29201,
+      29202
+    ],
+    "support_task_candidates": [
+      4,
+      8
+    ],
+    "selection_metric": "mean held-out per-task and signed-pair output MSE across methods and both task families; actual incremental bytes and coordinate-path throughput as preregistered tie-breakers",
+    "held_out_input_examples": 512,
+    "selected_support_task_count": 8,
+    "selection_result_mean_task_mse": {
+      "4": 0.036428041646273196,
+      "8": 0.03492166709560126
+    }
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      29211,
+      29212,
+      29213
+    ],
+    "locked_before_access": true,
+    "held_out_input_examples": 512,
+    "support_task_count": 8
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "codec": "deterministic binary tensor records charging field names, method/task metadata, dtype, shape and raw bytes",
+    "paid_objects": [
+      "shared pretrained weight",
+      "discovered task-vector basis",
+      "Mirror angles",
+      "SVD coefficients",
+      "task IDs",
+      "independent vectors",
+      "all tensor metadata and codec headers"
+    ],
+    "support_vectors": "not retained at inference; information retained in the paid basis"
+  },
+  "compute": {
+    "report_task_vectors": true,
+    "report_optimizer_updates": true,
+    "report_active_MAC_proxy": true,
+    "report_compression_wall_time": true,
+    "report_coordinate_path_inference_throughput": true,
+    "optimizer_updates": 0
+  },
+  "success_gate": "On every fresh aligned world, Mirror per-task held-out MSE <=1.10x rank-2 FP32 SVD, pairwise signed-composition MSE <=1.10x, incremental task bytes <=0.90x FP32 SVD, and coordinate-path inference throughput >=0.5x FP32 SVD. Mirror-specific value additionally requires a better actual-byte/quality/compute frontier than the matched-byte-or-smaller FP16 SVD control.",
+  "failure_gate": "Mirror misses any aligned quality/storage/runtime gate or is Pareto-dominated by the same-basis FP16 SVD control at actual serialized bytes and compute.",
+  "boundaries": [
+    "Synthetic linear task vectors",
+    "Fixed compression screen, not capacity",
+    "Eight support vectors per world discover the basis and are not evaluated task instances",
+    "No Transformer or natural-task result"
+  ],
+  "amendments": [
+    {
+      "id": "A1",
+      "fixed_before_fresh_access": true,
+      "change": "Add rank-2 SVD with float16 task coefficients as a matched/cheaper-byte native control; select and freeze eight support task vectors.",
+      "reason": "Before fresh access, code-size inspection showed two fp16 coefficients use the same raw task-code bytes as the float32 Mirror angle, while Mirror additionally stores a shared radius. Development selected eight support deltas (mean final MSE 0.034922 vs 0.036428 for four) using the registered metric."
+    }
+  ]
+}
