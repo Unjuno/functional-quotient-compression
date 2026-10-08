@@ -40,7 +40,7 @@ def meta_train(w,seed,method,outer_lr):
  for update in range(META_UPDATES):
   losses=[]
   for j in range(TASKS_PER_BATCH):
-   task=(update*TASKS_PER_BATCH+j)%128;x,y=samples(w,task,16,update);qx,qy=samples(w,task,32,update+9001)
+   task=1000+(update*TASKS_PER_BATCH+j)%128;x,y=samples(w,task,16,update);qx,qy=samples(w,task,32,update+9001)
    code=adapt(method,base,encoder,basis,x,y,5,INNER_LR);losses.append(((qx@eff(method,base,code,basis)-qy).square().mean()))
   loss=torch.stack(losses).mean();opt.zero_grad();loss.backward();opt.step()
  return base.detach(),{k:v.detach() for k,v in encoder.state_dict().items()} if not isinstance(encoder,nn.Identity) else {},basis.detach(),time.perf_counter()-st
@@ -76,7 +76,8 @@ def main():
      if encoder_path:
       torch.save({'method':method,'world':w,'state':enc},encoder_path);eb=encoder_path.stat().st_size;eh=hashlib.sha256(encoder_path.read_bytes()).hexdigest()
      else: eb=0;eh='';encoder_path=None
-     for task in range(20):
+     for task_offset in range(20):
+      task=2000+task_offset
       for steps in STEPS:
        path=PAY/f'fresh_{w}_{seed}_{task}_{method}_{steps}.pt'
        err,wall,nbytes,h,p=evaluate(base,enc,basis,method,w,task,seed+100,steps,INNER_LR,path)

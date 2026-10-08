@@ -16,7 +16,7 @@ PA75 supplies gradient adaptation from a shared initialization; PA76 supplies a 
 
 ## Protocol
 
-Use the same 8D Givens-orbit regression family as MA-442 for paired comparison. Compare zero-init Mirror gradient adaptation, support-encoder initialized Mirror adaptation, encoder-only code, full-vector MAML, and rank-two LEO-style latent decoder. Development worlds 44300/44301 choose encoder/code LR and refinement steps; fresh worlds 44310/44311/44312 with 20 held-out tasks each. Report query NRMSE at 0/1/3/5 refinement steps, encoder support-set FLOPs, actual serialized payload bytes per task and amortized per-task bytes at N=1/20/100 tasks.
+Use the same 8D Givens-orbit regression family as MA-442 for paired comparison. Compare zero-init Mirror gradient adaptation, support-encoder initialized Mirror adaptation, encoder-only code, full-vector MAML, and rank-two LEO-style latent decoder. Development worlds 44300/44301 choose encoder/code LR and refinement steps; fresh worlds 44310/44311/44312 with 20 held-out tasks each. Task IDs are disjoint: meta-train 1000..1127, development 0..11, fresh 2000..2019. Report query NRMSE at 0/1/3/5 refinement steps, encoder support-set FLOPs, actual serialized payload bytes per task and amortized per-task bytes at N=1/20/100 tasks.
 
 PASS: encoder-initialized Mirror matches full MAML within 1.10x NRMSE and beats zero-init Mirror in at least 2/3 fresh worlds, with lower total amortized bytes at N=20 and no higher query compute. FAIL if the encoder does not improve over zero-init or loses after encoder bytes are amortized.
 
@@ -27,6 +27,10 @@ A generic latent encoder or one direct gradient step may give the same initializ
 ## U — unresolved
 
 Natural task sets, nonlinear neural backbones, and support-set distribution shifts remain untested.
+
+### Amendment A1
+
+An audit after the initial run found meta-training task IDs 0..127 overlapped development IDs 0..11 and fresh IDs 0..19. Those results are invalidated and are not used for selection or claims. A1 assigns disjoint train (1000..1127), development (0..11), and fresh (2000..2019) task IDs; all seeds, methods, update budgets, and gates remain unchanged. The invalidated summary is in `artifacts/audit_amendment_A1.json`.
 
 ## Results and decision
 

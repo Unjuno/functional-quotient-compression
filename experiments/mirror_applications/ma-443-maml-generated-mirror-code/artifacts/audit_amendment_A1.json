@@ -1,0 +1,28 @@
+{
+  "amendment": "A1",
+  "reason": "Meta-training sampled task IDs 0..127, overlapping development task IDs 0..11 and fresh IDs 0..19. Fresh tasks were therefore not held out at the task-function level.",
+  "handling": "All prior results invalidated; rerun meta-training on task IDs 1000..1127, development evaluation on IDs 0..11, and fresh evaluation on IDs 2000..2019. Seeds, methods, update budgets, and gates unchanged.",
+  "invalidated_fresh_rows": 3600,
+  "invalidated_step5_summary": {
+    "mirror_zero": {
+      "mean_step5_nrmse": 0.3889354657795694,
+      "mean_task_payload_bytes": 2507.5
+    },
+    "mirror_encoder": {
+      "mean_step5_nrmse": 0.2746083049310578,
+      "mean_task_payload_bytes": 2566.5
+    },
+    "encoder_only": {
+      "mean_step5_nrmse": 0.3848251687983672,
+      "mean_task_payload_bytes": 2548.5
+    },
+    "full": {
+      "mean_step5_nrmse": 0.27594026091198126,
+      "mean_task_payload_bytes": 2348.5
+    },
+    "leo": {
+      "mean_step5_nrmse": 0.1451828238657779,
+      "mean_task_payload_bytes": 2435.5
+    }
+  }
+}

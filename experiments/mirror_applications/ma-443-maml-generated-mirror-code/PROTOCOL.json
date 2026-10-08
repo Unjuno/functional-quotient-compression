@@ -1,14 +1,104 @@
 {
- "experiment_id":"MA-443","title":"MAML-generated Mirror code initialization","status":"SCREENING","evidence_lane":"FEW_SHOT/ADAPTATION/STORAGE","base_commit":"1914ab0",
- "hypothesis":"A support-set encoder initializing a Mirror code, followed by low-dimensional refinement, improves few-shot query quality over zero-init Mirror and matches full MAML at lower amortized bytes.",
- "physical_object":"shared meta-trained 8D linear backbone","mirror_coordinate":"2D per-task Mirror code initialized by support-set encoder","logical_multiplicity":"fast adapted functions over task distribution",
- "prior_art_refs":[75,76],"controls":["zero-init Mirror plus gradient adaptation","support encoder Mirror init plus refinement","encoder-only Mirror code","full-vector MAML","rank-two LEO-style latent decoder"],
- "task":{"type":"paired few-shot 8D Givens-orbit regression as MA-442","support_examples":8,"query_examples":128,"refinement_steps":[0,1,3,5]},
- "development":{"worlds_or_seeds":[44300,44301],"tasks_per_world":20,"selection_metric":"query NRMSE under amortized bytes"},
- "fresh":{"worlds_or_seeds":[44310,44311,44312],"tasks_per_world":20,"locked_before_access":true},
- "storage":{"authority":"actual serialized inference payload bytes","paid_objects":["shared base","support encoder","encoder basis/decoder","task code","optimizer state if needed"]},
- "compute":{"report_support_encoder_FLOPs":true,"report_refinement_steps":true,"report_query_compute":true,"report_wall":true},
- "success_gate":"Encoder-init Mirror matches full MAML within 1.10x NRMSE, beats zero-init Mirror in >=2/3 fresh worlds, and lowers amortized bytes at N=20 without higher query compute.",
- "failure_gate":"No quality gain over zero-init Mirror or encoder amortization removes storage benefit.",
- "boundaries":["Same aligned linear task family as MA-442 for paired comparison.","No natural task or nonlinear-network evidence.","Encoder bytes are amortized explicitly at N=1,20,100."]
+  "experiment_id": "MA-443",
+  "title": "MAML-generated Mirror code initialization",
+  "status": "SCREENING",
+  "evidence_lane": "FEW_SHOT/ADAPTATION/STORAGE",
+  "base_commit": "1914ab0",
+  "hypothesis": "A support-set encoder initializing a Mirror code, followed by low-dimensional refinement, improves few-shot query quality over zero-init Mirror and matches full MAML at lower amortized bytes.",
+  "physical_object": "shared meta-trained 8D linear backbone",
+  "mirror_coordinate": "2D per-task Mirror code initialized by support-set encoder",
+  "logical_multiplicity": "fast adapted functions over task distribution",
+  "prior_art_refs": [
+    75,
+    76
+  ],
+  "controls": [
+    "zero-init Mirror plus gradient adaptation",
+    "support encoder Mirror init plus refinement",
+    "encoder-only Mirror code",
+    "full-vector MAML",
+    "rank-two LEO-style latent decoder"
+  ],
+  "task": {
+    "type": "paired few-shot 8D Givens-orbit regression as MA-442",
+    "support_examples": 8,
+    "query_examples": 128,
+    "refinement_steps": [
+      0,
+      1,
+      3,
+      5
+    ],
+    "task_id_partition": {
+      "meta_train": [
+        1000,
+        1127
+      ],
+      "development_evaluation": [
+        0,
+        11
+      ],
+      "fresh_evaluation": [
+        2000,
+        2019
+      ]
+    }
+  },
+  "development": {
+    "worlds_or_seeds": [
+      44300,
+      44301
+    ],
+    "tasks_per_world": 20,
+    "selection_metric": "query NRMSE under amortized bytes",
+    "seeds": [
+      0,
+      1,
+      2
+    ]
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      44310,
+      44311,
+      44312
+    ],
+    "tasks_per_world": 20,
+    "locked_before_access": true,
+    "seeds": [
+      0,
+      1,
+      2
+    ]
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "shared base",
+      "support encoder",
+      "encoder basis/decoder",
+      "task code",
+      "optimizer state if needed"
+    ]
+  },
+  "compute": {
+    "report_support_encoder_FLOPs": true,
+    "report_refinement_steps": true,
+    "report_query_compute": true,
+    "report_wall": true
+  },
+  "success_gate": "Encoder-init Mirror matches full MAML within 1.10x NRMSE, beats zero-init Mirror in >=2/3 fresh worlds, and lowers amortized bytes at N=20 without higher query compute.",
+  "failure_gate": "No quality gain over zero-init Mirror or encoder amortization removes storage benefit.",
+  "boundaries": [
+    "Same aligned linear task family as MA-442 for paired comparison.",
+    "No natural task or nonlinear-network evidence.",
+    "Encoder bytes are amortized explicitly at N=1,20,100."
+  ],
+  "amendments": [
+    {
+      "id": "A1",
+      "date": "2026-10-08",
+      "reason": "Audit found train/dev/fresh task IDs overlapped, invalidating fresh task holdout. Partition task IDs into train 1000..1127, development 0..11, fresh 2000..2019. No other condition or gate changes."
+    }
+  ]
 }
