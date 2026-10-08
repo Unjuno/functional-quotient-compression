@@ -290,7 +290,7 @@ The current next experiment remains **MA-255**; these are future hypotheses, not
 
 ### MA-1116..1155 sixteenth research intake: KG, ISP, robotics, acoustic rooms
 
-Load `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_SIXTEENTH_SWEEP.md` and the selected PA382..413 items **only if your selected ID lies in this family**.
+Load the **per-ID plan** `docs/phase2/MIRROR_APPLICATION_EXPERIMENT_BLUEPRINTS_MA1116_1155.md` plus `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_SIXTEENTH_SWEEP.md` and the selected PA382..413 items **only if your selected ID lies in this family**.
 
 - **Knowledge graphs MA1116..1125:** relation rotation, two-sided modulation and shared tensor relation cores already exist in RotatE, PairRE, QuatE, TuckER and CompGCN. For a genuinely new `m`, target relation×domain/time, independently fitted natural operators, or fewer private relation maps; compare filtered MRR/Hits@10, full entity+relation tensor bytes and scoring runtime. An exact triple-score-preserving gauge change is **zero new independent function**. KrausKGE's channel-rank/fan-out is a strong direct baseline.
 - **Camera/optics MA1126..1135:** ParamISP uses ISO/exposure EXIF metadata; Uni-ISP already learns shared camera-specific forward/inverse transforms; PQDynamicISP and modular ISP have locally controllable stages. A new `m` must win over these native controllers or MetaISP/OmniLens++ PSF code with held-out actual devices, paired RAW/sRGB, DeltaE/PSNR/LPIPS, codec/state bytes and true ISP FPS. Clipping destroys information; never promise exact inverse sRGB->RAW.
