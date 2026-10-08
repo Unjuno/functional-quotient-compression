@@ -3959,3 +3959,25 @@ https://arxiv.org/abs/2609.17109
 **Native prior/control:** Reused numerical standard-LoRA cache prefixes can still be physically copied; quality need not be equivalent to the specialist's native prefill. Add to MA-1112 controls.
 
 **Mirror delta:** Demonstrate marginal m utility over native at real serialized bytes, active compute, and held-out quality. Paper results are not Mirror claims.
+
+## PA434 — Pre-gated MoE: An Algorithm-System Co-Design for Fast and Scalable Mixture-of-Expert Inference
+
+**Ranggi Hwang et al.** ISCA 2024. DOI: 10.1109/ISCA59077.2024.00078.
+https://arxiv.org/abs/2308.12066
+https://doi.org/10.1109/ISCA59077.2024.00078
+
+**Established prior:** A pre-gating architecture predicts expert requirements early enough to overlap CPU→GPU expert migration with preceding compute. Early expert transfer and transfer/compute pipelining are **not** a new Mirror invention. Mirror-specific delta must beat this predictor at matched VRAM, latency, and useful quality.
+
+## PA435 — SpecPrefetch: Parameter-Efficient Expert Prefetching for Sparse MoE Foundation Models
+
+**Jinwei Kong et al.** arXiv:2607.24787 (2026 preprint).
+https://arxiv.org/abs/2607.24787
+
+**Established prior:** A lightweight shared predictive adapter prefetches possible future experts while the original router still decides executed experts. Prediction accuracy, bytes sent unnecessarily, and real overlap must be used as direct controls for a Mirror grouped scheduler.
+
+## PA436 — SPICE: Speculative Prefetching with Low-Rank Expert Surrogates and Heterogeneous Orchestration for MoE Inference Acceleration
+
+**Yongxiang Lyu, Ning Li, Bonian Jia.** arXiv:2608.21240 (2026 preprint).
+https://arxiv.org/abs/2608.21240
+
+**Established prior:** Speculative expert prediction, lightweight low-rank surrogate fallback, and CPU/GPU asynchronous orchestration for unloaded experts. Mirror must surpass an equivalently costed low-rank surrogate, and do not count hidden exact CPU residual compute as free.

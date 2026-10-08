@@ -2,15 +2,15 @@
 
 Updated: 2026-10-08 JST
 Canonical worker branch remains `research/mirror-application-worker-ready-20261007` (unchanged).
-This is an ISOLATED RESEARCH branch `research/mirror-isolated-protocols-rebased-20261008`, NOT the worker authoritative queue.
+This is an ISOLATED RESEARCH branch `research/mirror-single-forward-prefetch-20261008`, NOT the worker authoritative queue.
 
-## Program totals (reconciled from authoritative 1174-row **isolated staging** registry)
+## Program totals (reconciled from authoritative 1176-row **isolated staging** registry)
 
-- Registered candidates: **1174**
-- P0: **643** (35 completed; 608 UNTESTED)
+- Registered candidates: **1176**
+- P0: **645** (35 completed; 610 UNTESTED)
 - P1: **428** (12 completed; 416 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1127 UNTESTED, 29 PROMISING, 18 FAIL**
+- Current MA statuses: **1129 UNTESTED, 29 PROMISING, 18 FAIL**
 - 47 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -105,3 +105,9 @@ The isolated branch adds MA-1165..1170 (six UNTESTED; four P0, two P1), PA425..4
 ## 2026-10-08 internal formula cross-over — isolated branch only
 
 Four new design-only MA-1171..MA-1174, all UNTESTED (3 P0, 1 P1), cross-linking original FQC codec, RA-Mirror, MS, SRM and TM mathematical identities to application tests. No external PA is invented. [Formula ledger](research_intake/formula_crossovers_20261008/FORMULA_LEDGER.md), [cross-over plans](research_intake/formula_crossovers_20261008/README.md). The authoritative worker-ready branch and current next MA-255 are unchanged; avoid automatic queue insertion.
+
+## Single-forward reuse and predictive grouped prefetch — isolated intake 2026-10-08
+
+- Added **MA-1175** (one shared forward / multi-output View factorization) and **MA-1176** (CPU-GPU grouped physical block prefetch) as UNTESTED hypotheses, with PA434..PA436.
+- Stage-0 and separately seeded folded CPU mechanics are in [SFM001/002 research](research_intake/single_forward_prefetch_20261008/README.md). Mathematical output-only exactness, hidden-view obstruction, and synthetic preactivation sharing do **not** establish a native-LM Mirror performance gain.
+- No worker queue/active experimental conditions/main were modified. Promote only after checking moving canonical worker ID/PA allocation.
