@@ -1,0 +1,70 @@
+{
+  "experiment_id": "MA-369",
+  "title": "Once-for-All subnetwork Mirror correction",
+  "status": "PROTOCOL_FROZEN_BEFORE_DEVELOPMENT",
+  "base_commit": "ab95e5d",
+  "canonical_parent": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY/COMPUTE/RUNTIME",
+  "prior_art_refs": ["PA51", "PA52"],
+  "hypothesis": "Four per-subnetwork Givens angles over a frozen shared OFA-style slimmable MLP recover width/depth sharing interference on held-out digits at lower complete payload than independent subnetworks; equal-budget FiLM may explain the effect.",
+  "physical_object": "one nested 64-wide two-hidden-layer MLP with shared ten-class output head",
+  "mirror_coordinate": "four task-specific Givens angles applied to hidden coordinates 0-7 immediately before the shared classifier",
+  "logical_multiplicity": "six subnets from widths [16,32,64] x depths [1,2]",
+  "data": {
+    "dataset": "sklearn.datasets.load_digits",
+    "sklearn_version": "1.8.0",
+    "raw_data_sha256": "faf2d98f61250c1cdc0b114323133d3c58da04f5c5d28bb78e4bde3c936a75b1",
+    "normalization": "float32 pixel values divided by 16",
+    "split": "stratified 60/20/20 train/validation/test, independently seeded by world",
+    "worlds": {"development": [36900,36901], "fresh": [36910,36911,36912]}
+  },
+  "model": {
+    "input_dim": 64,
+    "max_width": 64,
+    "max_depth": 2,
+    "classes": 10,
+    "architectures": [[16,1],[16,2],[32,1],[32,2],[64,1],[64,2]],
+    "supernet_training": "sandwich rule: largest and smallest subnet plus one sampled subnet each update; smaller logits distill from largest",
+    "updates": 500,
+    "batch_size": 64,
+    "optimizer": "AdamW",
+    "learning_rate_candidates": [0.003,0.01],
+    "weight_decay": 0.0001,
+    "correction_updates_per_architecture": 100,
+    "correction_learning_rate": 0.01
+  },
+  "controls": [
+    "shared OFA-style supernet without correction",
+    "shared supernet plus four-angle Givens Mirror coordinate per subnet",
+    "shared supernet plus four-value grouped diagonal FiLM per subnet",
+    "shared supernet plus rank-1 output LoRA per subnet",
+    "six independently trained subnetworks"
+  ],
+  "development": {
+    "worlds_or_seeds": [36900,36901],
+    "selection_metric": "mean validation NLL over all six architectures and methods",
+    "allowed_changes": "select only the shared/independent training learning rate from the frozen two-value grid"
+  },
+  "fresh": {
+    "worlds_or_seeds": [36910,36911,36912],
+    "locked_before_access": true,
+    "required_cli_guard": "--phase fresh --confirm-fresh",
+    "selection_artifact": "DEV_SELECTION.json"
+  },
+  "storage": {
+    "authority": "actual torch.save inference bundle bytes plus canonical metadata, reloaded before evaluation",
+    "paid_objects": ["shared supernet or independent subnet weights", "all per-subnet Mirror/FiLM/LoRA state", "architecture table", "normalization metadata", "classifier biases", "serialization headers"]
+  },
+  "compute": {
+    "cpu_threads": 1,
+    "report_train_example_views": true,
+    "report_optimizer_updates": true,
+    "report_forward_MAC_proxy_by_architecture": true,
+    "report_adaptation_MAC_proxy": true,
+    "report_training_wall_time": true,
+    "report_inference_examples_per_second": true
+  },
+  "success_gate": "For all three fresh worlds, Mirror mean accuracy improves >=1 percentage point over uncorrected shared supernet, stays within 2 points of independent subnetworks, and complete serialized bytes <=50% of independent. Mirror-specific: also beats FiLM by >=1 point at byte-near cost (within 15%) or saves >=10% bytes at <=0.5-point accuracy loss.",
+  "failure_gate": "Miss shared/independent quality-storage gate in >=2 fresh worlds, or a simpler FiLM/LoRA control matches or dominates at equal/lower bytes and active compute.",
+  "boundaries": ["sklearn digits only", "small OFA-style slimmable MLP, not published OFA reproduction", "fixed-update evidence is not capacity", "no device-specific latency claim", "architecture count is not independent capacity"]
+}
