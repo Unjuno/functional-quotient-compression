@@ -1,6 +1,6 @@
 # Worker queue
 
-**Current operational pointer (2026-10-08): MA-436/437.** MA-434 Mirror improved synthetic sequence quality but failed actual-byte and unfused runtime comparisons. Continue with logical SSM experts/S4 views.
+**Current operational pointer (2026-10-08): MA-437.** MA-436 is PROMISING only for a synthetic quality/storage Pareto point; its 17% byte reduction came with 50% more recurrent MAC and 1.56× batched inference time. Continue with native structured S4 Views.
 
 The queue is derived from `IDEA_REGISTRY.csv`. The registry is authoritative.
 
@@ -156,7 +156,7 @@ High-information P0:
 11. MA-427 — DEQ conditioned fixed-point map (completed FAIL)
 12. MA-429 — Universal Transformer depth view (completed FAIL); MA-431 deferred pending depth-family redesign
 13. MA-434 — Mamba selective-state Mirror roles (completed FAIL)
-14. MA-436/437 — logical SSM experts and S4 structured Views — current candidates
+14. MA-436 — logical SSM experts (completed PROMISING, synthetic quality/storage only); MA-437 — S4 structured transition Views (current)
 15. MA-442 — MAML with Mirror-only inner-loop adaptation
 16. MA-444 — LEO latent decoder versus structured Mirror
 17. MA-446 — learned optimizer for Mirror coordinates

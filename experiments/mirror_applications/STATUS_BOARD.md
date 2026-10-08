@@ -6,10 +6,10 @@ Integration branch: `research/mirror-application-current-evidence-20261008`; can
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (125 completed; 505 UNTESTED)
+- P0: **630** (126 completed; 504 UNTESTED)
 - P1: **422** (12 completed; 410 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1018 UNTESTED, 42 PROMISING, 95 FAIL**
+- Current MA statuses: **1017 UNTESTED, 43 PROMISING, 95 FAIL**
 - 48 experiment directories, complete with status/protocol/results/verification files, are represented in the current evidence set.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-268 is next.
@@ -53,6 +53,8 @@ Integration branch: `research/mirror-application-current-evidence-20261008`; can
 
 **MA-434 FAIL:** synthetic selective SSM Mirror quality improved (NRMSE 0.02235 vs independent 0.03894), but actual bytes were larger (2,837B vs 2,649B) and unfused training wall time was 9.026s vs 0.873s. **Next: MA-436/437.**
 
+**MA-436 PROMISING (synthetic quality/storage Pareto only):** token-wise logical SSM roles achieved fresh NRMSE 0.00047 vs independent 0.00074 at 2,529B vs 3,045B (-17.0%). It uses 50% more recurrent MAC and 1.56× batch inference time; strict compute gate missed. Oracle roles and Givens-aligned transitions limit scope. **Next: MA-437, S4-native structured Views.**
+
 MA-366 is reconciled as FAIL: direct pair coefficients match Mirror outputs and bytes, and PA02 factorization is smaller. The runner accidentally generated the registered fresh IDs before the gate; those rows are excluded and fresh integrity is invalid. MA-367 and MA-368 are also recorded FAIL. MA-369 is completed FAIL on its dedicated branch; next executable P0 is MA-371.
 
 **MA-371 — MatFormer granularity Mirror views (P0; PA53)**
@@ -81,7 +83,7 @@ MA-327 FAIL: ordinary rank-2 coefficient products match Mirror exactly and both 
 
 ## Active experiment
 
-MA-434 is completed FAIL and committed on its dedicated branch. Next is MA-436/437.
+MA-434 is completed FAIL and committed on its dedicated branch. MA-436 is PROMISING only for synthetic quality/storage (Mirror 2,529B vs independent 3,045B, but 192 vs 128 MAC/token and 1.56× measured inference time). Next is MA-437, S4-native structured transition Views.
 
 ## Verified status index
 
