@@ -94,3 +94,7 @@ Six new UNTESTED MA-1165..1170, PA425..433 controls; [implementation and dedupli
 ### Independent current-state preflight
 
 `python experiments/mirror_applications/research_intake/isolated_geometry_rebased_20261008/selfcheck.py` verifies 1170 MA rows, 433 PA entries, all 15 frozen designs, claim/status agreement and isolation markers on a complete local checkout. This script does not change the worker and needs no GPU/network. No synthetic result counts as native-paper reproduction.
+
+## KQ-SVD audit-algebra Stage-0 negative-control evidence
+
+The [preregistered MA-1166 control study](pilots/kqsvd_controls_stage0/REPORT.md), its [complete source](pilots/kqsvd_controls_stage0/source/run_stage0.py), [four unit tests](pilots/kqsvd_controls_stage0/source/test_stage0.py), [development/fresh CSV](pilots/kqsvd_controls_stage0/results/fresh_raw.csv) and [verification](pilots/kqsvd_controls_stage0/results/VERIFICATION.json) are preserved here. Native optimal score-aware rank-4 oracle mean error was 0.416 vs 0.902 key-only SVD on five fresh synthetic worlds; ordinary linear code bank 12,580 B vs full projected bank 15,886 B. **This does NOT certify any structured Mirror benefit** and leaves all MA statuses unchanged.
