@@ -20,3 +20,9 @@ def test_every_relation_is_one_to_one():
  for _,pairs in m.TASKS:
   assert len({x for x,_ in pairs})==16
   assert len({y for _,y in pairs})==16
+
+
+def test_rank_one_mirror_is_compressed_not_explicit():
+ assert m.representation_kind('mirror_r1',1)==(2,1)
+ assert m.representation_kind('native_pca_r1',-1)==(2,1)
+ assert m.representation_kind('explicit_fv',1)==(1,0)

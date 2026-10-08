@@ -2,14 +2,14 @@
 
 - Status: SCREENING
 - Branch: research/ma-516-function-vector-mirror-compression-20261008
-- Protocol/source/tests frozen before development: pending freeze commit
+- Protocol frozen before development: yes (freeze commit 75a80cd); Amendment 1 corrected only rank-1 method dispatch and added a regression test
 - Development seeds 51601/51602: not run
 - Fresh seeds 51611–51613: sealed
 - Registry/status board: SCREENING
 
 ## Next action
 
-Freeze the protocol and source hashes, then run only the frozen dev seeds with the pinned local model artifact.
+Run the amended frozen code on the same development seeds only; preserve the initial rank-1 dispatch bug outputs.
 
 ## Blockers
 

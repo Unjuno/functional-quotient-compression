@@ -1,0 +1,8 @@
+{
+  "experiment_id": "MA-516",
+  "amendment": 1,
+  "reason": "Review of the first development sweep found rank-1 Mirror dispatch was interpreted as the explicit-FV method because both used the integer parameter 1. This affected only the rank-1 point; all rank-2/4/8/12 results and the primary rank-4 gate were unaffected.",
+  "change": "Method representation selection now dispatches on the registered method label, so mirror_r1 and native_pca_r1 serialize/decode an actual rank-1 basis. Added a regression test. No task, model, prompt, metric, seed, rank grid, primary gate, or fresh rule changed.",
+  "preserved_initial_outputs": "runs/pre_amendment_1_rank1_dispatch_bug/",
+  "fresh_accessed": false
+}

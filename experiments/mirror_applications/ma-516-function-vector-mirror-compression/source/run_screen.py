@@ -133,6 +133,12 @@ def pca_fit(vecs,rank):
  decoded=mean+codes@basis.T
  return mean,basis,codes,decoded.astype(np.float32)
 
+
+def representation_kind(label,param):
+ if label=='none': return 0,0
+ if label=='explicit_fv': return 1,0
+ return 2,abs(param)
+
 def save_payload(path,kind,vecs,rank=0,parts=None):
  meta=dict(task_ids=np.arange(16,dtype=np.int16),layer=np.array([LAYER_OUT],np.int16),
            model_revision=np.frombuffer(REVISION.encode(),dtype='S40'),model_sha256=np.frombuffer(MODEL_SHA.encode(),dtype='S64'),
@@ -156,11 +162,11 @@ def run(seed,model_dir,out):
  rows=[]
  methods=[('none',0),('explicit_fv',1)]+[(f'mirror_r{r}',r) for r in RANKS]+[(f'native_pca_r{r}',-r) for r in RANKS]
  for label,param in methods:
-  rank=abs(param) if abs(param)>1 else 0
-  if param==0: decoded=np.zeros_like(vecs);kind=0;parts=None;rank_payload=0
-  elif param==1: decoded=vecs.copy();kind=1;parts=None;rank_payload=0
+  kind,rank=representation_kind(label,param)
+  if kind==0: decoded=np.zeros_like(vecs);parts=None;rank_payload=0
+  elif kind==1: decoded=vecs.copy();parts=None;rank_payload=0
   else:
-   rank=abs(param);mean,basis,codes,decoded=pca_fit(vecs,rank);parts=(mean,basis,codes);kind=2;rank_payload=rank
+   mean,basis,codes,decoded=pca_fit(vecs,rank);parts=(mean,basis,codes);rank_payload=rank
   path=out/(label+'.npz')
   nbytes=save_payload(path,kind,vecs,rank_payload,parts) if kind else 0
   start=time.perf_counter();metrics=evaluate(model,tok,torch,vecs,decoded,manifest);infer_s=time.perf_counter()-start
