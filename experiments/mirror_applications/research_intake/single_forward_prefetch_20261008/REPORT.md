@@ -123,9 +123,9 @@ A high K increases the available overlap window but also increases compute, memo
 ## 6. Provenance and files
 
 - [Original preregistration](FROZEN_PROTOCOL.json) and [follow-up pre-folded preregistration](FROZEN_FOLDED_CONTROL_AMENDMENT.json) (paths relative to study root in repository; see top directory).
-- Source: `source/run_experiment.py`, `source/test_experiment.py`, `source/run_folded_control.py`, `source/test_folded_control.py`, `source/build_report.py`. No external checkpoint.
-- All dev/fresh algebra, function-fit, eager benchmark and virtual prefetch CSVs in `results/`, plus follow-up `dev_folded_control.csv`, `fresh_folded_control.csv` and this `RESULTS_CORE.csv`.
-- SHA-256 results and backend in `results/VERIFICATION.json`, `results/FOLDED_VERIFICATION.json` and `results/RESULTS_CORE_VERIFICATION.json`.
+- Original full source/test scripts are in the linked conversation ZIP; an independent subset algebra preflight is in [pilots/sfm001/source/algebra_reference.py](pilots/sfm001/source/algebra_reference.py). No external checkpoint.
+- All original dev/fresh algebra, function-fit, CPU timing, virtual prefetch and folded control CSVs are in the reproducibility ZIP. The Git research directory preserves the [summary RESULTS_CORE.csv](RESULTS_CORE.csv) and [verification summary](VERIFICATION_SUMMARY.json).
+- SHA-256 hashes and backend details for every original CSV/source are inside ZIP's `results/VERIFICATION.json`, `results/FOLDED_VERIFICATION.json` and `results/RESULTS_CORE_VERIFICATION.json`; Git has `VERIFICATION_SUMMARY.json`.
 - Original required tests: 10/10 SFM001, 2/2 SFM002. Post-hoc independent formula/checker tests replay selected untouched numerical rows; CPU wall-clock microbenchmarks are not byte-identical across executions and are not described as such.
 
 **Prior art**: [Parameter Superposition](https://arxiv.org/abs/1902.05522), [MIMO](https://arxiv.org/abs/2010.06610), [GVA](https://arxiv.org/abs/2609.13285), [Pre-gated MoE (ISCA 2024)](https://doi.org/10.1109/ISCA59077.2024.00078), [SpecPrefetch](https://arxiv.org/abs/2607.24787), [SPICE](https://arxiv.org/abs/2608.21240).

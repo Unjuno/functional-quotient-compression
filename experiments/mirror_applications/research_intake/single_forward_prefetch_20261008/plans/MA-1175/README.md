@@ -36,7 +36,7 @@ Output-only case: f_m(x)=f_0(x)R_m. Internal nonlinear case: with row vectors z=
 2. Repeat source shared-forward only vs per-view full recompute vs cached-preactivation exact vs output-only learned readout, ordinary linear/FiLM/IA3, MIMO and independent folded full experts. Fix task trainer, source calibration, per-task support budget and same optimizer updates.
 3. Train all Views jointly or accumulate gradients serially and compare ∇shared numerically; do NOT confuse packed execution with reduced arithmetic.
 4. On development seeds 11–13 select code breadth r, Mirror count M and decoder capacity; fresh seeds 101–105 test full heldout task identities. Independent deployment replication >=10 new seeds required before adoption.
-5. Measure task NLL, worst-task quality, output functional independence (heldout output Jacobian rank), old-task retention, softmax/cache provenance, actual serialized NPZ/safetensors bytes, P50/P95 real CPU/GPU throughput and MAC/FLOP proxy. Stage-0 source/metrics in [report](../REPORT.md).
+5. Measure task NLL, worst-task quality, output functional independence (heldout output Jacobian rank), old-task retention, softmax/cache provenance, actual serialized NPZ/safetensors bytes, P50/P95 real CPU/GPU throughput and MAC/FLOP proxy. Stage-0 source/metrics in [report](../../REPORT.md).
 6. Before deployment, compute exact output-only collision witness, invalid key-only attention transformation counterexample, RoPE commutant check, and memory alias/copy checks. Never call these extra functional capacity.
 
 ## D — decisions
@@ -57,4 +57,4 @@ u_c=sqrt(u_seed²+u_eval²+u_num²) only for uncorrelated quality estimates; inc
 
 ## Evidence and required next action
 
-Read [Stage-0 report](../REPORT.md), source archive and two frozen protocols, then implement an independent learned multitask specialist teacher. Do not change worker status based only on source-aligned toy.
+Read [Stage-0 report](../../REPORT.md), source archive and two frozen protocols, then implement an independent learned multitask specialist teacher. Do not change worker status based only on source-aligned toy.

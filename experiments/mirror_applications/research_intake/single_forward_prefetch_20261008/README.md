@@ -9,7 +9,7 @@
 - [Stage-0 report and exact proof](REPORT.md) — algebra PASS where factorization exists; hidden nonlinear output-only generality FAIL; K4/K5 timing results; hypothetical transfer simulator; full provenance.
 - Full standalone [MA-1175 plan](plans/MA-1175/README.md) and [MA-1176 plan](plans/MA-1176/README.md).
 - [MA-231/MA-691/MA-253 cross-over safeguards](existing/README.md) avoid duplicating historical folded-weight, KV, and final-FFN placement evidence.
-- [Ten + two algebra/control unit tests](pilots/sfm001/source/test_experiment.py) are included in conversation ZIP and shall be mirrored into git with the source when the text transfer is available.
+- [Reproducibility and original 10+2 unit tests are in the [experiment ZIP/runbook](REPRODUCE.md); the repository has a directly runnable [algebra preflight](pilots/sfm001/source/algebra_reference.py).
 
 The authoritative live-worker branch remains `research/mirror-application-worker-ready-20261007` with its pre-existing next candidate MA-255. Its queue, claims and main were not modified.
 

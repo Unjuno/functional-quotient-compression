@@ -30,8 +30,8 @@ Do not assume a router's choice can always be predicted from W or previous m. A 
 
 ## T — full GPU/CPU worker-free protocol
 
-1. Stage-0 virtual two-buffer simulator: N=12 group accesses, capacity two physical buffers, staged group size 16/64/256 MiB, nominal PCIe bandwidth 4/12/24 decimal GB/s and setup latency 0.25 ms. Compute window C(M)=1.0+0.18M ms is an **assumption**, not hardware measurement; hit probabilities 0.5/0.9/1.0. See frozen [protocol](../FROZEN_PROTOCOL.json).
-2. Stage-1 physically pre-fold each known View into plain FFN weights and measure CPU RAM/NPZ bytes vs shared runtime Mirror from independent seeds 201–205. Folded weights are tied derived copies, not arbitrary independent experts. See [amendment](../FROZEN_FOLDED_CONTROL_AMENDMENT.json).
+1. Stage-0 virtual two-buffer simulator: N=12 group accesses, capacity two physical buffers, staged group size 16/64/256 MiB, nominal PCIe bandwidth 4/12/24 decimal GB/s and setup latency 0.25 ms. Compute window C(M)=1.0+0.18M ms is an **assumption**, not hardware measurement; hit probabilities 0.5/0.9/1.0. See frozen [protocol](../../FROZEN_PROTOCOL.json).
+2. Stage-1 physically pre-fold each known View into plain FFN weights and measure CPU RAM/NPZ bytes vs shared runtime Mirror from independent seeds 201–205. Folded weights are tied derived copies, not arbitrary independent experts. See [amendment](../../FROZEN_FOLDED_CONTROL_AMENDMENT.json).
 3. GPU Stage-2 only on actual accessible CUDA hardware: allocate pinned host memory, a separate transfer stream, two GPU staging slots, and synchronize via CUDA events. Populate realistic expert groups by natural router traces, not generated oracle next addresses. Precompute a small predictor from source-only routing traces; freeze predictor and all ranks before fresh prompt sequences.
 4. Exact native controls: Pre-gated MoE with independent experts and the same predictor budget, native ordinary packed/linear LoRA expert group + same two buffers, SPICE low-rank surrogate fallback, output-only linear code and selective pre-folded hot-cache policy. Cache misses use exact native fallback and pay all bytes/time; no hidden CPU recovery.
 5. Sweep 2/4/5/8 logical Views per block, resident cap 8/12/24 GiB if hardware supports, batch=1/8, context length 128/512/2048, hit@1/hit@4, block dwell length, and feature precision FP16/BF16/INT4 (zero-point and scales paid).
@@ -59,4 +59,4 @@ Paired seed/task bootstrap; predictor accuracy and miss cost variation; clock fr
 
 ## Evidence and next action
 
-[CPU exactness and virtual scheduler report](../REPORT.md). A truthful deployment experiment cannot be marked PASS without a GPU. A hot-fold cache may be worth further testing, but its memory residency must be charged.
+[CPU exactness and virtual scheduler report](../../REPORT.md). A truthful deployment experiment cannot be marked PASS without a GPU. A hot-fold cache may be worth further testing, but its memory residency must be charged.
