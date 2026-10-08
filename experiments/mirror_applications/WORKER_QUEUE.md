@@ -157,7 +157,7 @@ High-information P0:
 11. MA-473 — MEMIT edit basis + Mirror memory codes (**FAIL; see status above**)
 12. MA-475 — SERAC memory values as Mirror codes (**FAIL for Mirror-specific attribution; 44,483 B vs 99,513 B explicit values and 51,648 B int8 with <=1.1e-7 RMSE, but exact native PCA alias; no-edit serializer correction and rerun preserved; fresh sealed**). MA-476 — GRACE codebook value compression is screening next.
 13. MA-478 — compact View first, explicit edit fallback (**FAIL for Mirror-specific attribution; 16/256 private values restored heldout RMSE from 0.055 to 0 at 49,350 B vs 99,485 B explicit/51,618 B int8; exact native PCA+fallback alias; fresh sealed**)
-14. MA-481/482 — VQ and residual-VQ Mirror addresses (next P0; PA91/PA92)
+14. MA-481/482 — VQ and residual-VQ Mirror addresses (next P0; PA91/PA92; separate logical-function family from external edit-value storage; see [edit-memory diagnostic](../../docs/phase2/EDIT_MEMORY_SHARED_CODE_DIAGNOSTIC_2026-10-08.md))
 
 **PathNet path × role pause (2026-10-08):** MA-451/452 are verified FAILs with a repeated exact native Givens-conditioning alias; do not continue unchanged variants. See [family diagnostic](../../docs/phase2/PATHNET_MIRROR_PATH_ROLE_FAMILY_DIAGNOSTIC_2026-10-08.md). MA-453 Routing Networks is a distinct dynamic-routing candidate requiring its own native router controls.
 15. MA-484 — VQ logical expert codebook
