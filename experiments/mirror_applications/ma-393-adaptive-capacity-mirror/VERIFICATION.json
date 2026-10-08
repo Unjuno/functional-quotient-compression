@@ -1,19 +1,106 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-393",
+  "status": "FAIL",
+  "protocol_commit": "828d59f92e4bf3a36ce701e4812c3d3f534396dd",
+  "development_seeds": [
+    {
+      "seed": 39301,
+      "checks": [
+        {
+          "method": "full16",
+          "bytes_match": true,
+          "sha256_match": true,
+          "metadata_match": true,
+          "finite": true,
+          "metrics_match": true
+        },
+        {
+          "method": "adaptive4",
+          "bytes_match": true,
+          "sha256_match": true,
+          "metadata_match": true,
+          "finite": true,
+          "metrics_match": true
+        },
+        {
+          "method": "adaptive5",
+          "bytes_match": true,
+          "sha256_match": true,
+          "metadata_match": true,
+          "finite": true,
+          "metrics_match": true
+        },
+        {
+          "method": "mirror_angle",
+          "bytes_match": true,
+          "sha256_match": true,
+          "metadata_match": true,
+          "finite": true,
+          "metrics_match": true
+        },
+        {
+          "method": "scalar_gate",
+          "bytes_match": true,
+          "sha256_match": true,
+          "metadata_match": true,
+          "finite": true,
+          "metrics_match": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "seed": 39302,
+      "checks": [
+        {
+          "method": "full16",
+          "bytes_match": true,
+          "sha256_match": true,
+          "metadata_match": true,
+          "finite": true,
+          "metrics_match": true
+        },
+        {
+          "method": "adaptive4",
+          "bytes_match": true,
+          "sha256_match": true,
+          "metadata_match": true,
+          "finite": true,
+          "metrics_match": true
+        },
+        {
+          "method": "adaptive5",
+          "bytes_match": true,
+          "sha256_match": true,
+          "metadata_match": true,
+          "finite": true,
+          "metrics_match": true
+        },
+        {
+          "method": "mirror_angle",
+          "bytes_match": true,
+          "sha256_match": true,
+          "metadata_match": true,
+          "finite": true,
+          "metrics_match": true
+        },
+        {
+          "method": "scalar_gate",
+          "bytes_match": true,
+          "sha256_match": true,
+          "metadata_match": true,
+          "finite": true,
+          "metrics_match": true
+        }
+      ],
+      "passed": true
+    }
+  ],
+  "fresh_seeds": "SEALED: development gates failed",
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "PYTHONDONTWRITEBYTECODE=1 python -m unittest discover -s experiments/mirror_applications/ma-393-adaptive-capacity-mirror/tests -v",
+    "passed": 3
   },
-  "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
-  },
-  "metric_replay": {
-    "checked": false,
-    "max_difference": null
-  },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "payloads": "10 actual ZIP/NPY FP16 payloads; bytes, SHA256, metadata, finite arrays and test/validation metrics rechecked after serialized-state reload",
+  "protocol_frozen_before_development": true
 }
