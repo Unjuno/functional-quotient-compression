@@ -14,13 +14,9 @@ Use:
 
 ## Selection rule
 
-Pick the first candidate satisfying all of:
-1. status is UNTESTED;
-2. highest available priority;
-3. no other active experiment directory already claims the ID;
-4. its closest prior-art controls can be implemented in the current harness.
+Use one fresh uniform draw per experiment from the latest worker-ready baseline P0/UNTESTED rows. Exclude IDs with live remote `research/ma-*` branches or MA experiment directories in that baseline. Record baseline commit, ordered eligible pool and its hash, cryptographic seed, pool size, index and selected row before development/audit. Do not reserve IDs. Numeric and family queues below are prior-art maps only.
 
-Do not skip to a visually interesting P1/P2 idea while an executable P0 remains, unless the skipped candidate has a recorded blocker.
+Draw 10 selected MA-446; its protocol is frozen before development. Full pool/hash/seed/index: `ma-446-learned-optimizer-mirror/source/random_draw.json`.
 
 ## Literature-derived cross-over queue
 
@@ -302,7 +298,7 @@ Operational rule:
 
 ## Eleventh literature expansion — cross-model state, scenes, audio, generators and stitching
 
-**MA-876..935 are new UNTESTED candidates and are appended behind the already-selected MA-255 crossover.** Do not interrupt active experiments.
+**MA-876..935 are new UNTESTED candidates.** Do not interrupt active experiments. Random draws govern candidate selection.
 
 High-information P0 applications by domain:
 1. **Cross-model caches MA-876..890:** MA-876 shared ridge translator basis versus native per-pair ridge; MA-878 head-matched CacheBridge; MA-880 ordered source×target factorization; MA-881 MoT translator bank; MA-887 exact-versus-approximate boundary; MA-889 confidence fallback.
@@ -315,11 +311,11 @@ Every experiment must isolate the extra Mirror parameter `m` beyond its strong n
 
 Read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08.md`, PA236..PA265 and the selected MA registry row.
 
-**MA-255 remains the canonical next worker candidate.** This queue must not preempt it or supersede its frozen protocol.
+MA-255 is a historical queue recommendation. Random draws govern selection; frozen protocols on other branches remain untouched.
 
 ## Twelfth research expansion — video, equivariance, spiking, physical optics, wireless and spatial audio
 
-**MA-936..995 are UNTESTED research candidates** appended after the already queued crossovers and prior MA-876..935 intake. No active or frozen run may be interrupted to work on these. **Canonical next remains MA-255**.
+**MA-936..995 are UNTESTED research candidates** appended after prior literature intake. No active or frozen run may be interrupted to work on these. Random draws govern candidate selection.
 
 Recommended representative P0 order *within this new family only*:
 
@@ -359,7 +355,7 @@ Read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_THIRTEENTH_SWEEP.
 
 **MA-1046..1095 are 50 new UNTESTED hypotheses** appended after earlier literature intakes and the original locked direct-prior queue. All comparisons study the marginal value of the extra Mirror parameter `m`; no new source-paper result is a Mirror result.
 
-**Current canonical next candidate: MA-255** (Parameter Superposition). Do not interrupt its frozen protocol, claim or branch.
+MA-255 is a historical queue recommendation. Random draws govern selection. Do not interrupt frozen protocols on other branches.
 
 Recommended high-information P0 studies **within this new family**:
 
@@ -398,7 +394,7 @@ Read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_FOURTEENTH_SWEEP.
 
 L0/L1 outcomes alone never justify MA PROMISING as a deployable compression claim. Pre-trained base SVD and shared bases may cost storage/calibration, and heldout test-task weight deltas cannot be used to fit a deployable code at inference.
 
-**Next candidate remains MA-255; no existing status or frozen protocol changed.**
+MA-255 is a historical recommendation; random draws govern selection. No existing status or frozen protocol changed.
 
 ## Supplemental function-space falsification (no newly allocated MA IDs)
 
@@ -408,7 +404,7 @@ Pilot: BOLT-like shared orthogonal basis plus 6 diagonal m coefficients averaged
 
 When selecting MA-1096/1099/1102/1105/1114/1115, include BOLT (PA372), function-space/curvature metric (CG-LoRA PA373, Fora PA374), SVD+CUR localized task residual (PA376), task-vector bases PA375, information filtering PA377, and a gauge-invariant functional/OOD check (PA378..381) where applicable. Do not inflate the MA backlog with duplicated new rows for these existing questions. A task-code success must survive *actual held-out task outcomes and serializer/runtime*, not just weight reconstruction.
 
-**MA-255 remains next**. Do not interrupt active/frozen jobs to consume this support intake.
+MA-255 was a historical recommendation; randomized draws govern selection. Do not interrupt active/frozen jobs to consume this support intake.
 
 ## Sixteenth research intake — KG relation operators, cameras, robotics and acoustic rooms
 
@@ -424,7 +420,7 @@ For the individually scoped 40 hypotheses, consult **`docs/phase2/MIRROR_APPLICA
 
 Read **`docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_SIXTEENTH_SWEEP.md`** and only the cited PA382..413 for the selected MA. Every new experiment must identify `B(theta) -> B(theta,m)` beyond an **already-existing relation/EXIF/robot/room native code**, use a byte-near cheap control and an independent/private reference, and report real task quality instead of counting logical addresses. Keep aligned feasibility and natural/off-orbit results distinct.
 
-**Canonical next remains MA-255.** The registered 47 outcomes, the separate two-seed natural-digit negative pilot, and ongoing worker-owned branches are not touched by this appended research.
+MA-255 is a historical recommendation; random draws govern selection. The registered outcomes, separate natural-digit pilot, and ongoing worker-owned branches remain untouched.
 
 ## Historical P0 family sequence (completed screens; not current queue)
 

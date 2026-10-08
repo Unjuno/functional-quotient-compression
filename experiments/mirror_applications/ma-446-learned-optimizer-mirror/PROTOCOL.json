@@ -1,0 +1,114 @@
+{
+  "experiment_id": "MA-446",
+  "title": "Learned optimizer restricted to Mirror coordinates",
+  "status": "FROZEN_DEVELOPMENT",
+  "base_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
+  "branch": "research/ma-446-learned-optimizer-mirror-20261008",
+  "draw_record": "source/random_draw.json",
+  "evidence_lane": "MECHANISM/ADAPTATION/STORAGE/COMPUTE",
+  "hypothesis": "On related few-shot linear tasks represented by one shared physical basis plus a 3-value Mirror code, a shared learned recurrent optimizer updating only m reaches lower held-out query error after four support updates than tuned SGD, Adam, and Meta-SGD on that same m, while staying within 5% of a full-weight learned optimizer and using at least 30% fewer actual serialized restartable library bytes for eight tasks.",
+  "mirror_insertion": {
+    "native": "Shared linear function map W0 with task-specific adaptation of its full 12 weights.",
+    "exact": "W(x;theta,m)=x@(W0+sum_j m_j B_j), where theta={W0,B_1..B_3}; all task adaptation updates m only.",
+    "physical_object": "One shared W0 and three shared orthonormal matrix basis tensors.",
+    "coordinate": "Three float32 coefficients m plus optimizer recurrent state.",
+    "logical_multiplicity": "Eight related task-specific linear predictors from the same physical W0 and B bank.",
+    "persistent": "m and optimizer state retained per task; learned optimizer weights shared across tasks."
+  },
+  "task_family": {
+    "input_dim": 4,
+    "output_dim": 3,
+    "weight_dimension": 12,
+    "mirror_rank": 3,
+    "tasks_per_library": 8,
+    "basis": "Seeded orthonormal basis in R^(3x4), fixed per meta-training world and serialized/charged.",
+    "teacher": "W_t=W0+sum_j z_tj B_j; z_j independently distributed N(0,sigma_j^2), sigma=(0.2,0.5,1.0).",
+    "support_per_update": 16,
+    "support_updates": 4,
+    "query_examples": 128,
+    "observation_noise_std": 0.05,
+    "development_world_seeds": [
+      44601,
+      44602
+    ],
+    "meta_train_task_draws_per_outer_update": 16,
+    "meta_optimizer_outer_updates": 256,
+    "meta_unroll_updates": 4,
+    "meta_optimizer": "Adam lr=1e-3 over recurrent learned-optimizer weights",
+    "outer_training": "Each meta-update samples a fresh batch of task identities and support/query examples from the development task family; held-out development task identities are separate."
+  },
+  "learned_optimizer": {
+    "architecture": "Coordinate-shared LSTMCell with input [sign(g)*log1p(abs(g)), log1p(abs(g))], hidden width 8, scalar delta head initialized to zero; one recurrent state per optimized scalar.",
+    "mirror_variant": "Same optimizer architecture updates only three m coordinates; W0/B are frozen.",
+    "full_variant": "Same-size optimizer architecture updates all 12 W coordinates from W0; this is the independent full-weight upper control.",
+    "trained_separately": true,
+    "optimizer_state": "Persist LSTM h,c per task and charge their bytes."
+  },
+  "controls": [
+    "Hard shared W0, m=0",
+    "Mirror code + SGD; tune lr in {0.03,0.1,0.3,1.0} on development only",
+    "Mirror code + Adam; tune lr in {0.03,0.1,0.3,1.0} on development only",
+    "Mirror code + Meta-SGD (meta-learned initialization and per-coordinate step sizes; 256 outer updates at lr=1e-3)",
+    "Mirror code + learned recurrent optimizer (primary)",
+    "Full 12-weight Adam; tune same lr grid on development only",
+    "Full 12-weight learned recurrent optimizer (same learned optimizer architecture, separately meta-trained)"
+  ],
+  "development": {
+    "world_seeds": [
+      44601,
+      44602
+    ],
+    "tuning": "Only the Adam/SGD learning-rate grid may select settings on development tasks; learned optimizer architecture and outer-loop update count are frozen.",
+    "report": "Per-task query MSE by update 0..4; four-update quality, actual bytes for eight-task resumable libraries, optimizer forward/backward compute proxy, wall-clock and per-task adaptation state."
+  },
+  "fresh": {
+    "worlds_or_seeds": "Generate new task-family seeds only if every predeclared gate passes on both development worlds.",
+    "locked_before_access": true,
+    "accessed": false
+  },
+  "storage": {
+    "authority": "Actual serialized inference/adaptation payload bytes.",
+    "paid_objects": [
+      "W0",
+      "all three basis tensors",
+      "learned optimizer weights",
+      "per-task m",
+      "per-task LSTM h/c or SGD/Adam moments",
+      "task IDs and serializer metadata"
+    ],
+    "library_size": "Eight task states plus one shared model/basis/optimizer payload; serialize and reload exact bytes."
+  },
+  "compute": {
+    "examples_per_task": 192,
+    "support_examples": 64,
+    "query_examples": 128,
+    "optimizer_updates_per_task": 4,
+    "meta_updates": 256,
+    "report_active_compute_proxy": true,
+    "report_wall_clock": true
+  },
+  "gates": {
+    "pass": [
+      "Across both development worlds, learned Mirror optimizer mean four-update query MSE is at least 15% lower than the best of Mirror SGD, Adam, and Meta-SGD.",
+      "Across both development worlds, learned Mirror optimizer mean query MSE is no more than 1.05x full-weight learned optimizer.",
+      "Eight-task restartable Mirror learned-optimizer payload is at least 30% smaller than full-weight learned-optimizer payload by actual serialized bytes.",
+      "All gates hold in each development world; no fresh tasks opened before this decision."
+    ],
+    "fail": "Any PASS clause fails on either development world, the learned optimizer is unstable/nonfinite, or serialization roundtrip changes results.",
+    "not_established": "Implementation/hardware/dependency blocker; incomplete or corrupted controls; or inability to run the frozen development protocol."
+  },
+  "boundaries": [
+    "Synthetic linear function family only.",
+    "Fixed four-update learning-efficiency screen; no capacity claim.",
+    "No natural-language task, production learned optimizer, GPU or hardware claim.",
+    "Full learned optimizer is an upper control, not a Mirror-specific win by itself."
+  ],
+  "meta_sgd": {
+    "method": "Meta-learn initial m and one per-coordinate update scale using the same 256 outer meta-updates and training task batches; apply the learned update rule for four support steps.",
+    "purpose": "Simpler learned update control: isolates whether recurrent gradient/history learning adds value over static learned update geometry."
+  },
+  "prior_art_refs": [
+    "PA77",
+    "PA151"
+  ]
+}
