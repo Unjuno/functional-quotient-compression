@@ -1,0 +1,86 @@
+{
+  "experiment_id": "MA-1141",
+  "title": "Quadruped embodiment × locomotion skill composition",
+  "status": "SCREENING",
+  "evidence_lane": "ROBOTICS/COMPOSITION/GENERALIZATION",
+  "base_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
+  "hypothesis": "Factorized per-embodiment and per-skill Givens views on a shared policy retain locomotion quality on held-out embodiment × speed pairs with lower serialized inference bytes than a native condition-input policy and are not dominated by same-budget FiLM.",
+  "draw": {
+    "number": 27,
+    "eligible_rule": "uniform P0 + UNTESTED IDs, excluding IDs with live remote origin/research/ma-* branches or pre-existing ma-* experiment directories",
+    "eligible_count": 523,
+    "pool_sha256": "fec75cf8e9d13179c7d9f01f09fc4b3da8069fe592622ee93e282adb328d07ce",
+    "seed_hex": "3dfbc2d8626873dadae674290c01672d0a10b0a6c1ad444b3f4d5ec54b3a0c3f",
+    "selection_digest_sha256": "0467a7810690fcfde60da5e3e731d622576d82fb01a3becedb662fbba60452e5",
+    "selection_index_zero_based": 512,
+    "selected_id": "MA-1141",
+    "replay": "source/draw27_exclusions.json"
+  },
+  "prior_art": {
+    "refs": ["PA401", "PA405"],
+    "rma_boundary": "RMA already uses a shared policy with inferred extrinsics; this screen tests only factorized morphology × skill coordinates against native conditioning, not RMA adaptation or real robot transfer.",
+    "morphology_world_model_boundary": "Morphology-conditioned dynamics are prior art; no novelty claim is made for morphology conditioning itself."
+  },
+  "simulator": {
+    "environment": "Gymnasium Ant-v5 / MuJoCo",
+    "simulator_source": "Pinned Gymnasium Ant MJCF and MuJoCo runtime; exact package versions and model file hash recorded before trajectory generation.",
+    "hardware": "CPU only; no GPU and no physical robot",
+    "morphologies": [
+      {"id": 0, "name": "reference", "torso_mass_scale": 1.0, "leg_length_scale": 1.0, "actuator_scale": 1.0},
+      {"id": 1, "name": "light_short", "torso_mass_scale": 0.8, "leg_length_scale": 0.85, "actuator_scale": 1.0},
+      {"id": 2, "name": "heavy_long", "torso_mass_scale": 1.2, "leg_length_scale": 1.15, "actuator_scale": 1.0},
+      {"id": 3, "name": "heavy_weak", "torso_mass_scale": 1.2, "leg_length_scale": 0.9, "actuator_scale": 0.75}
+    ],
+    "skills": [
+      {"id": 0, "target_forward_velocity": 0.15},
+      {"id": 1, "target_forward_velocity": 0.30},
+      {"id": 2, "target_forward_velocity": 0.45},
+      {"id": 3, "target_forward_velocity": 0.60}
+    ],
+    "pair_split": "Train/dev demonstrations only on pairs where (morphology_id + skill_id) mod 2 = 0; audit only on odd-parity pairs. Every morphology and every skill occurs in both partitions. No held-out pair demonstration is used for training or checkpoint selection.",
+    "episode_seeds": {"development": [101, 211], "audit": [307, 401, 503]},
+    "rollout_horizon_steps": 1000,
+    "control_timestep_seconds": 0.01,
+    "domain_randomization": "Only the four declared morphology parameter sets; randomized initial-state seed per episode. No undisclosed physics randomization."
+  },
+  "teacher": {
+    "type": "deterministic phase-based torque controller used only to produce training targets",
+    "controller": "Eight ant torques are sinusoidal functions of a shared gait phase with fixed leg phase offsets; amplitude is scaled by target forward velocity and declared actuator scale. Policy input contains ant observation and morphology/skill condition only; test-time teacher access is prohibited.",
+    "tuning_boundary": "Any teacher stability or amplitude adjustment uses development pairs and seeds only, is logged as an amendment before audit rollouts, and cannot inspect held-out pair scores."
+  },
+  "models": {
+    "common_policy": "Observation MLP with 2 hidden layers of width 128, ReLU, tanh action head, 8 torque outputs.",
+    "native_conditioned": "Common policy receives proprioceptive observation plus four-dimensional morphology one-hot and four-dimensional skill one-hot.",
+    "no_code": "Common policy receives proprioceptive observation only.",
+    "film": "Observation-only shared policy; learned 2D code for each morphology and each skill is projected through shared learned gamma/beta bases to hidden width 128.",
+    "mirror": "Observation-only shared policy; each morphology has 2 Givens angles and each skill has 2 Givens angles. Apply the two fixed pairwise rotations sequentially to the first hidden activation; no other private parameters.",
+    "independent_upper": "Omitted: no training examples exist for the held-out pair-specific policies. Seen-pair specialists may be reported only as non-comparable diagnostics."
+  },
+  "training": {
+    "objective": "behavior cloning MSE against teacher torques on train trajectories",
+    "optimizer": "AdamW",
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "batch_size": 256,
+    "max_updates": 3000,
+    "checkpoint_selection": "lowest mean development-pair action MSE; patience 150 validation checks at 20-update intervals",
+    "fresh_world_seeds": [23, 47, 71],
+    "model_init_seeds": [31, 47, 59],
+    "torch_threads": 1,
+    "audit_tuning": "No architecture, teacher, optimizer, checkpoint, or threshold changes after audit pair rollout metrics are read."
+  },
+  "metrics": {
+    "primary": ["audit mean normalized forward-speed tracking return", "fall fraction", "absolute target-speed error"],
+    "return_definition": "Per step while upright: exp(-abs(vx-target_velocity)/max(target_velocity,0.15)) - 0.1*abs(vy) - 0.001*sum(action^2); after a fall, reward -1 for all remaining steps. Report episode mean and aggregate over held-out pairs/seeds.",
+    "structure_audit": "Report each of eight held-out morphology × skill pairs separately and paired changes versus native and FiLM.",
+    "storage": "Actual safetensors inference payload bytes, including policy, codes/bases and metadata needed to map morphology/skill IDs. Report shared server and registered factor-code payload and per-pair reconstruction payload.",
+    "compute": "Training examples, optimizer updates, action MAC proxy, CPU train wall time, MuJoCo rollout wall time, and measured policy batch-one latency."
+  },
+  "gates": {
+    "mirror_quality": "Mean held-out return no more than 0.05 below native and fall fraction no more than 0.02 above native in at least 2/3 world seeds.",
+    "storage": "Mirror shared+registered factor state <=80% of native policy payload; per-pair factor download <=25% of an independently serialized policy.",
+    "mirror_specificity": "Mirror is not weakly Pareto-dominated by FiLM on held-out return, fall fraction, total payload bytes and measured adaptation/inference time.",
+    "decision": "PROMISING only if all gates pass; FAIL if a valid simulator/controller screen runs and a quality/storage gate fails; NOT ESTABLISHED if simulator, teacher stability, or control validity prevents a decision."
+  },
+  "limitations": ["Synthetic morphology/speed grid and phase-controller teacher.", "Behavior cloning and simulator rollouts are not RMA, PPO, real robot or safety evidence.", "No claim of near-converged policy capacity; this is a fixed-data/fixed-update composition screen."]
+}
