@@ -25,6 +25,10 @@ This is a small state-space mechanism screen, not an S4 language-model benchmark
 
 PA74 establishes S4's normal-plus-low-rank structured transition and efficient recurrent/convolutional forms. MA-434 tested views in selective Mamba-style dynamics. Here we isolate Mirror in native structured factors and explicitly audit stability. The teacher is aligned to the specified structured-factor View, so evidence is mechanism-only.
 
+### Amendment A1
+
+A post-fresh audit found that the initial generator rotated the full matrix, including its diagonal, while the registered insertion rotates only the rank-one factors. Those initial fresh rows were invalidated and overwritten; their summary is recorded in `artifacts/audit_amendment_A1.json`. Development and fresh were rerun under the corrected factor-only teacher with the same IDs, seeds, steps, and gates. No gate or model choice was changed.
+
 ## Controls
 
 Shared structured SSM; role scalar/diagonal gate; tied S4 plus Mirror coordinates; equal-budget rank-one residual; independent structured SSM upper control.
@@ -50,3 +54,17 @@ S4's low-rank factors may not be closed under the chosen rotations, so the Mirro
 ## U — boundaries
 
 Small state dimension and synthetic aligned dynamics only. No FFT kernel, long-range language benchmark, GPU efficiency, or learned routing evidence.
+
+## Results and decision
+
+**D — FAIL under the preregistered quality/storage gates.** Corrected fresh means across three worlds and three seeds at length 64: Mirror NRMSE 0.000035, 2,591B, 40 MAC/step; independent structured transitions 0.000106, 2,691B, 32 MAC/step; simple rank-one residual 0.000009, 2,973B, 40 MAC/step. Mirror beats independent quality with a 3.7% payload reduction, but misses the required 40% payload reduction. The rank-one control is more accurate at 14.7% more bytes than Mirror. All max spectral radii were below 0.624. The same ordering holds at length 32.
+
+**FACT:** all methods remained stable; Mirror payload bytes are only 96.3% of independent; Mirror MAC proxy is 1.25× independent; rank-one residual is more accurate than Mirror. 90 amended fresh rows replay exactly within the verification tolerance, with payload hashes/lengths checked.
+
+**INTERPRETATION:** the aligned factor View recovers most of the independent transition quality but does not yield meaningful storage compression in this small structured model. The direct rank-one residual is a stronger quality control. Torch serialization overhead makes the small factor savings harder to realize in bytes.
+
+**HYPOTHESIS:** larger S4 state dimensions might amortize fixed metadata and factor costs, but this screen provides no evidence that the byte frontier reaches the preregistered target.
+
+**C — strongest counter-hypothesis:** this is an intentionally aligned four-dimensional teacher with fixed role routing; the measured quality advantage does not establish transfer to naturally trained S4 kernels, and a native rank-one residual may be the more efficient specialization mechanism.
+
+**U — unresolved:** FFT/convolution implementation, long-range language modeling, larger dimensions, learned routing, accelerator throughput, and natural-model variation.

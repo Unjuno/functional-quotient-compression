@@ -8,15 +8,93 @@
   "physical_object": "stable diagonal-plus-rank-one state transition factors",
   "mirror_coordinate": "per-role 2D Givens coordinate acting on shared low-rank factors",
   "logical_multiplicity": "four role-specific long-range transition dynamics",
-  "prior_art_refs": [74],
-  "controls": ["shared structured SSM", "per-role scalar/diagonal gate", "tied structured SSM plus Mirror", "equal-budget rank-one residual", "independent structured SSM"],
-  "task": {"type": "synthetic long-sequence state trajectory regression", "state_dim": 4, "roles": 4, "train_length": 32, "evaluation_lengths": [32, 64], "structure": "stable negative diagonal plus rank-one correction", "teacher": "one shared S4-style transition conjugated by role-specific known 2D Givens rotations in a fixed state subspace"},
-  "development": {"worlds_or_seeds": [43700, 43701], "training_seeds": [0, 1, 2], "learning_rates": [0.003, 0.01], "selection_metric": "mean validation trajectory NRMSE at length 32"},
-  "fresh": {"worlds_or_seeds": [43710, 43711, 43712], "training_seeds": [0, 1, 2], "locked_before_access": true},
-  "training": {"updates": 500, "batch_size": 96, "optimizer": "AdamW", "same_updates_for_all_methods": true},
-  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["diagonal and low-rank factors", "Mirror coordinates", "gate/residual control parameters", "metadata", "serialization overhead"]},
-  "compute": {"report_examples": true, "report_optimizer_updates": true, "report_active_MAC_proxy": true, "report_training_wall_clock": true, "report_recurrent_rollout_wall_clock": true, "same_recurrent_steps_across_methods": true},
+  "prior_art_refs": [
+    74
+  ],
+  "controls": [
+    "shared structured SSM",
+    "per-role scalar/diagonal gate",
+    "tied structured SSM plus Mirror",
+    "equal-budget rank-one residual",
+    "independent structured SSM"
+  ],
+  "task": {
+    "type": "synthetic long-sequence state trajectory regression",
+    "state_dim": 4,
+    "roles": 4,
+    "train_length": 32,
+    "evaluation_lengths": [
+      32,
+      64
+    ],
+    "structure": "stable negative diagonal plus rank-one correction",
+    "teacher": "fixed shared negative diagonal plus rank-one correction; each role rotates only the rank-one u/v factors in the first two state coordinates; any stability scaling applies to each generated structured transition"
+  },
+  "development": {
+    "worlds_or_seeds": [
+      43700,
+      43701
+    ],
+    "training_seeds": [
+      0,
+      1,
+      2
+    ],
+    "learning_rates": [
+      0.003,
+      0.01
+    ],
+    "selection_metric": "mean validation trajectory NRMSE at length 32"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      43710,
+      43711,
+      43712
+    ],
+    "training_seeds": [
+      0,
+      1,
+      2
+    ],
+    "locked_before_access": true
+  },
+  "training": {
+    "updates": 500,
+    "batch_size": 96,
+    "optimizer": "AdamW",
+    "same_updates_for_all_methods": true
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "diagonal and low-rank factors",
+      "Mirror coordinates",
+      "gate/residual control parameters",
+      "metadata",
+      "serialization overhead"
+    ]
+  },
+  "compute": {
+    "report_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_MAC_proxy": true,
+    "report_training_wall_clock": true,
+    "report_recurrent_rollout_wall_clock": true,
+    "same_recurrent_steps_across_methods": true
+  },
   "success_gate": "On every fresh world, Mirror length-64 trajectory NRMSE <=1.10x independent; actual serialized bytes <=60% independent; all transitions stable; MAC proxy <=1.25x independent.",
   "failure_gate": "Any fresh world misses the quality or byte gate, any transition is unstable, or a simpler gate/residual control matches at lower actual bytes.",
-  "boundaries": ["Synthetic teacher is aligned to Givens rotations of the low-rank factor subspace.", "No S4 FFT implementation or language-model quality claim.", "Small state dimension; compute is a proxy plus CPU rollout timing."]
+  "boundaries": [
+    "Synthetic teacher is aligned to Givens rotations of the low-rank factor subspace.",
+    "No S4 FFT implementation or language-model quality claim.",
+    "Small state dimension; compute is a proxy plus CPU rollout timing."
+  ],
+  "amendments": [
+    {
+      "id": "A1",
+      "reason": "Initial teacher generator conjugated the full structured matrix including diagonal terms, inconsistent with the frozen low-rank-factor-only insertion. Caught by post-fresh audit before result selection. Discard initial fresh rows and rerun development/fresh with corrected teacher; all worlds/seeds and gates unchanged.",
+      "date": "2026-10-08"
+    }
+  ]
 }
