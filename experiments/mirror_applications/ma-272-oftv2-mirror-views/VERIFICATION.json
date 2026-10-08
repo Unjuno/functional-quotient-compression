@@ -1,0 +1,34 @@
+{
+  "experiment_id": "MA-272",
+  "commit": "1e949b6b0981900c4e41d3b36efbebd06998e1ff",
+  "tests": {
+    "command": "python tests/test_roundtrip.py && python tests/test_scalar_control_audit.py",
+    "passed": 2,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "method": "independent skew lower-triangle coordinates; shared control and Mirror packed identically"
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_seeds": [
+    149,
+    251,
+    353,
+    457
+  ],
+  "notes": [
+    "Initial fresh seeds 133/241/337/449 are retained in fresh_metrics_v1_buggy.json but excluded due runtime accounting bug.",
+    "Corrected fresh audit was locked to new seeds before rerun.",
+    "Materialized inference now performs x@(QW); input-side inference executes transform and W multiply; Neumann recurrence is included in timing.",
+    "Mirror equals simple scalar-times-shared-skew control in function and bytes.",
+    "CPU timing is a microbenchmark and not production latency evidence.",
+    "Added audit test confirming scalar-times-shared-skew equals Mirror in metrics and bytes across corrected fresh seeds, and corrected exact input-side runtime misses the materialized latency gate."
+  ],
+  "source_branch": "research/ma-272-oftv2-mirror-views-20261008"
+}
