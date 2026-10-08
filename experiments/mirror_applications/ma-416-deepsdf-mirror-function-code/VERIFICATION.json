@@ -1,9 +1,33 @@
 {
   "experiment_id": "MA-416",
-  "status": "NOT_RUN",
-  "protocol_sha256": "PENDING",
-  "metric_replay": "NOT_RUN",
-  "payload_replay": "NOT_RUN",
+  "status": "VERIFIED_DEVELOPMENT_FAIL",
+  "protocol_sha256": "62ddc777437c4fab8af7a08f1b16f0ec37c181898e9178c688b4cfd6a215c2bf",
+  "metric_replay": "PASS",
+  "payload_replay": "PASS",
   "fresh_accessed": false,
-  "checks": []
+  "development_gate_passed": false,
+  "checks": [
+    {
+      "seed": 41601,
+      "metric_replay": "PASS",
+      "payload_replay": "PASS",
+      "methods": [
+        "mirror",
+        "native_affine",
+        "deepsdf",
+        "analytic_oracle"
+      ]
+    },
+    {
+      "seed": 41602,
+      "metric_replay": "PASS",
+      "payload_replay": "PASS",
+      "methods": [
+        "mirror",
+        "native_affine",
+        "deepsdf",
+        "analytic_oracle"
+      ]
+    }
+  ]
 }

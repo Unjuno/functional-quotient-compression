@@ -114,7 +114,9 @@ def run(out,seeds=(41601,41602),n=1024,query_n=2048):
         mm=nrmse(mp,yq);nm=nrmse(npred,yq);dm=nrmse(dp,yq)
         # Interpolate held-out code pairs and target geometric parameters 50/50.
         ip=(held_p[::2]+held_p[1::2])*.5;ix,iy=sample_fields(ip,query_n,g)
-        mi=(mcode[::2]+mcode[1::2])*.5;di=(dcode[::2]+dcode[1::2])*.5
+        with np.load(io.BytesIO(mraw),allow_pickle=False) as a: mpaid=torch.tensor(a['instance_codes'].astype(np.float32))
+        with np.load(io.BytesIO(draw),allow_pickle=False) as a: dpaid=torch.tensor(a['instance_codes'].astype(np.float32))
+        mi=(mpaid[::2]+mpaid[1::2])*.5;di=(dpaid[::2]+dpaid[1::2])*.5
         mpi=replay(pack_model(base,mi,'mirror_interpolated'),ix,'mirror');dpi=replay(pack_model(deep,di,'deepsdf_interpolated'),ix,'deepsdf')
         im=nrmse(mpi,iy);idp=nrmse(dpi,iy)
         oracle_payload=io.BytesIO();np.savez_compressed(oracle_payload,geometry_codes=held_p.numpy().astype(np.float32),metadata_utf8=np.frombuffer(b'analytic_ellipse_sdf',dtype=np.uint8));oraw=oracle_payload.getvalue();(out/f'dev{seed}_analytic_oracle.npz').write_bytes(oraw)
