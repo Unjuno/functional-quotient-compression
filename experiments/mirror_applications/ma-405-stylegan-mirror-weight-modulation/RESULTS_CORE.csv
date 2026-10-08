@@ -1,0 +1,7 @@
+condition,world_or_seed,method,serialized_bytes,train_tokens_or_examples,optimizer_updates,active_compute_proxy,wall_time_s,primary_metric,primary_value,secondary_metric,secondary_value,status_note
+fresh_mean,40510-40512,shared,9829,25600,200,4032 MAC/example,0.069,accuracy,0.5712,cross_entropy,1.1962,FAIL baseline
+fresh_mean,40510-40512,style_mod_demod,10845,25600,200,5568 MAC/example,0.217,accuracy,0.6328,cross_entropy,1.0533,FAIL native modulation stronger than Mirror
+fresh_mean,40510-40512,mirror_givens,10081,25600,200,5568 MAC/example,0.342,accuracy,0.5764,cross_entropy,1.1803,FAIL misses quality gate and FiLM dominates quality
+fresh_mean,40510-40512,film,11741,25600,200,4128 MAC/example,0.098,accuracy,0.7237,cross_entropy,0.8152,FAIL stronger simple control
+fresh_mean,40510-40512,rank1,11485,25600,200,5568 MAC/example,0.161,accuracy,0.6860,cross_entropy,0.9250,FAIL stronger simple control
+fresh_mean,40510-40512,independent,34021,25600,200,4032 MAC/example,0.167,accuracy,0.8983,cross_entropy,0.3178,upper control

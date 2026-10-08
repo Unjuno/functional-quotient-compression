@@ -10,3 +10,7 @@ This is a synthetic mechanism screen, not a Transformer or StyleGAN reproduction
 
 The goal is to test whether orthogonal geometry adds value beyond the known modulation mechanism, not to claim modulation itself as novel.
 
+## Result
+
+**FAIL.** Fresh accuracy was 57.64% Mirror vs 63.28% StyleGAN-style modulation, 72.37% FiLM, and 89.83% independent FFNs. See `STATUS.md` for H/T/D/C/U and `artifacts/runs.jsonl` for all individual rows.
+
