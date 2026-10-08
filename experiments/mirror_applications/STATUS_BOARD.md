@@ -6,11 +6,11 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (163 completed; 466 UNTESTED; 1 SCREENING)
+- P0: **630** (164 completed; 466 UNTESTED)
 - P1: **422** (13 completed; 409 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **120 FAIL, 11 NOT ESTABLISHED, 45 PROMISING, 978 UNTESTED, 1 SCREENING**
-- 47 baseline experiment directories remain present; 129 additional per-ID outcomes are linked to their dedicated research branches in `LIVE_BRANCH_RECONCILIATION.csv`.
+- Current MA statuses: **121 FAIL, 11 NOT ESTABLISHED, 45 PROMISING, 978 UNTESTED**
+- 47 baseline experiment directories remain present; 130 additional per-ID outcomes are linked to their dedicated research branches in `LIVE_BRANCH_RECONCILIATION.csv`.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This was the intake-time queue; current selection follows the live-branch reconciliation at the top of this board.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed at intake time; later live-branch outcomes are indexed above.
 - Thirteenth literature sweep added MA-996..1045 (50 UNTESTED; 40 P0/10 P1) and PA296..PA325. IDs MA-1000+ use four digits; consult `check_registry_integrity.py`. No new experiment results.
@@ -23,21 +23,21 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-434 — Mamba selective-state Mirror roles (P0; PA73)** — active; protocol frozen, development screen pending. The continuous-depth family MA-424..433 remains paused.
+**Pending live branch refresh.** MA-434 completed its fixed synthetic mechanism screen as FAIL. The next P0 will be selected outside paused families after refetch and reconciliation.
 
-Live branches were fetched after MA-424; no competing MA-434/436/437 branch was present. MA-434 is the next P0 outside the paused families. It uses a minimal selective diagonal recurrence only; it is not a full Mamba or language-model experiment. The continuous-depth family MA-424..433 remains paused after the repeated native-conditioning alias; see [continuous-depth diagnostic](../../docs/phase2/NEURAL_ODE_MIRROR_FAMILY_DIAGNOSTIC_2026-10-08.md). MA-416..421 remain paused. MA-325 remains NOT ESTABLISHED because the frozen task was unlearnable even for the independent control. MA-369/371/372 remain paused under the documented family rule. The conditional-modulation family MA-401/403/405 and MA-407/408/411/413 remains paused pending a fused-kernel redesign.
+MA-434 finished with strong synthetic role differentiation but missed actual-byte savings versus compressed full copies (0.930x) and exactly aliased the native log-decay bias control. This is not full Mamba evidence. The next P0 selection waits for a live branch refresh. The continuous-depth family MA-424..433 remains paused after the repeated native-conditioning alias; see [continuous-depth diagnostic](../../docs/phase2/NEURAL_ODE_MIRROR_FAMILY_DIAGNOSTIC_2026-10-08.md). MA-416..421 remain paused. MA-325 remains NOT ESTABLISHED because the frozen task was unlearnable even for the independent control. MA-369/371/372 remain paused under the documented family rule. The conditional-modulation family MA-401/403/405 and MA-407/408/411/413 remains paused pending a fused-kernel redesign.
 
 
 ## Active experiment
 
-MA-416 through MA-419 and MA-424 are verified development-screen FAILs, with fresh seeds sealed. MA-424 saved 84.5% payload bytes versus independent fields but exactly aliased a native generated-weight control and missed one seed's runtime gate. Two continuous-depth candidates now share this native-conditioning failure cause, so MA-424..433 are paused. MA-434 is the current active P0 with a fixed selective-SSM role-decay protocol. See [MA-424 report](ma-424-neural-ode-mirror-modes/README.md), [verification](ma-424-neural-ode-mirror-modes/VERIFICATION.json), [continuous-depth diagnostic](../../docs/phase2/NEURAL_ODE_MIRROR_FAMILY_DIAGNOSTIC_2026-10-08.md), [MA-419 report](ma-419-modulated-periodic-activations/README.md), and [latent-code diagnostic](../../docs/phase2/LATENT_CODE_MIRROR_FAMILY_DIAGNOSTIC_2026-10-08.md).
+MA-416 through MA-419, MA-424 and MA-434 are verified development-screen FAILs, with fresh seeds sealed. MA-434's role code improved synthetic NRMSE from 0.20–0.22 to 0.00021–0.00024, but saved only 7.0% actual bytes and exactly aliased a native SSM log-decay bias. See [MA-434 report](ma-434-selective-ssm-mirror-roles/README.md), [verification](ma-434-selective-ssm-mirror-roles/VERIFICATION.json), [MA-424 report](ma-424-neural-ode-mirror-modes/README.md), [continuous-depth diagnostic](../../docs/phase2/NEURAL_ODE_MIRROR_FAMILY_DIAGNOSTIC_2026-10-08.md), and [latent-code diagnostic](../../docs/phase2/LATENT_CODE_MIRROR_FAMILY_DIAGNOSTIC_2026-10-08.md).
 
 
 ## Verified status index
 
 - **PROMISING (45):** MA-001, MA-002, MA-003, MA-004, MA-005, MA-006, MA-007, MA-008, MA-012, MA-014, MA-015, MA-041, MA-076, MA-079, MA-111, MA-121, MA-156, MA-160, MA-171, MA-173, MA-181, MA-189, MA-241, MA-244, MA-245, MA-249, MA-250, MA-251, MA-257, MA-258, MA-268, MA-276, MA-282, MA-312, MA-314, MA-330, MA-344, MA-346, MA-374, MA-381, MA-603, MA-691, MA-771, MA-841, MA-879.
 - **NOT ESTABLISHED (11):** MA-325, MA-643, MA-899, MA-971, MA-998, MA-1010, MA-1066, MA-1069, MA-1091, MA-1138, MA-1141.
-- **FAIL (120):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-255, MA-260, MA-261, MA-265, MA-266, MA-271, MA-272, MA-273, MA-274, MA-278, MA-286, MA-288, MA-292, MA-296, MA-297, MA-299, MA-301, MA-303, MA-304, MA-307, MA-309, MA-311, MA-315, MA-318, MA-319, MA-320, MA-322, MA-327, MA-331, MA-332, MA-333, MA-335, MA-337, MA-338, MA-341, MA-342, MA-349, MA-351, MA-353, MA-355, MA-356, MA-357, MA-359, MA-360, MA-361, MA-364, MA-366, MA-367, MA-368, MA-375, MA-379, MA-383, MA-385, MA-389, MA-391, MA-392, MA-393, MA-395, MA-397, MA-399, MA-401, MA-403, MA-405, MA-416, MA-417, MA-418, MA-419, MA-424, MA-427, MA-446, MA-462, MA-464, MA-492, MA-504, MA-669, MA-674, MA-707, MA-715, MA-721, MA-732, MA-742, MA-753, MA-760, MA-767, MA-783, MA-784, MA-790, MA-818, MA-824, MA-840, MA-921, MA-932, MA-945, MA-951, MA-962, MA-981, MA-990, MA-1018, MA-1064, MA-1075, MA-1097, MA-1120.
+- **FAIL (121):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-255, MA-260, MA-261, MA-265, MA-266, MA-271, MA-272, MA-273, MA-274, MA-278, MA-286, MA-288, MA-292, MA-296, MA-297, MA-299, MA-301, MA-303, MA-304, MA-307, MA-309, MA-311, MA-315, MA-318, MA-319, MA-320, MA-322, MA-327, MA-331, MA-332, MA-333, MA-335, MA-337, MA-338, MA-341, MA-342, MA-349, MA-351, MA-353, MA-355, MA-356, MA-357, MA-359, MA-360, MA-361, MA-364, MA-366, MA-367, MA-368, MA-375, MA-379, MA-383, MA-385, MA-389, MA-391, MA-392, MA-393, MA-395, MA-397, MA-399, MA-401, MA-403, MA-405, MA-416, MA-417, MA-418, MA-419, MA-424, MA-427, MA-434, MA-446, MA-462, MA-464, MA-492, MA-504, MA-669, MA-674, MA-707, MA-715, MA-721, MA-732, MA-742, MA-753, MA-760, MA-767, MA-783, MA-784, MA-790, MA-818, MA-824, MA-840, MA-921, MA-932, MA-945, MA-951, MA-962, MA-981, MA-990, MA-1018, MA-1064, MA-1075, MA-1097, MA-1120.
 
 All per-ID evidence is retained in the local experiment directories and in `CLAIM_LEDGER.csv`. Consult [the evidence integration audit](../../docs/phase2/MIRROR_MA_EVIDENCE_INTEGRATION_2026-10-08.md) for linked reports, verifications, provenance and claim boundaries.
 
