@@ -18,3 +18,4 @@ def test_native_generated_control_matches_view_payload_and_outputs():
 def test_full_expert_copies_load_all_recurrence_matrices():
  base,theta,x=make_world(43601);v=load(pack(base,theta,'independent'),'independent')
  assert v['A'].shape==(E,D,D) and v['B'].shape==v['C'].shape==(E,D)
+ assert simulate(pack(base,theta,'independent'),x,'independent').shape==x.shape

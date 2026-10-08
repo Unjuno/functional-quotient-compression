@@ -43,7 +43,7 @@ def load(raw,method):
 def simulate_values(v,x,method):
     h=torch.zeros(E,NSEQ,D);ys=[]
     for t in range(LENGTH):
-        xt=x[:,:,t];u=torch.sigmoid(v['wg']*xt+v['bg'])*xt
+        xt=x[:,:,t];wg=v['wg'][:,None] if method=='independent' else v['wg'];bg=v['bg'][:,None] if method=='independent' else v['bg'];u=torch.sigmoid(wg*xt+bg)*xt
         if method=='mirror':
             q=v['Q'];hv=torch.einsum('eij,enj->eni',q,h);hn=torch.einsum('ij,enj->eni',v['A'],hv)+v['B'][None,None,:]*u[:,:,None];h=torch.einsum('eji,enj->eni',q,hn);y=torch.einsum('i,eni->en',v['C'],hn)
         elif method=='native':
