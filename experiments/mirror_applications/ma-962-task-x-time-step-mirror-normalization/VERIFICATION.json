@@ -1,33 +1,178 @@
 {
   "experiment_id": "MA-962",
-  "status": "FROZEN_PRE_DATA",
+  "status": "VERIFIED_FAIL_DEVELOPMENT",
   "base_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
   "protocol_frozen_before_data": true,
-  "data_accessed": false,
-  "audit_accessed": false,
+  "protocol_amendments_before_data": 4,
+  "dataset_manifest_sha256": "e63bac8417328d936c792c1e6bebfa2c12ace8b4d3c1ba33569615c6bd6ebc14",
+  "dataset_access": {
+    "train_files_downloaded": true,
+    "train_hashes_recorded": true,
+    "development_split_accessed": true,
+    "audit_test_files_downloaded": false,
+    "audit_test_files_decoded": false,
+    "audit_accessed": false
+  },
+  "development_rows": 10,
+  "expected_development_rows": 10,
+  "gates": {
+    "quality_storage_pass": true,
+    "mirror_specific_pass": false,
+    "decision": "FAIL"
+  },
   "draw_replay": {
     "command": "python experiments/mirror_applications/ma-962-task-x-time-step-mirror-normalization/source/verify_draw.py",
     "pool_size": 553,
+    "index": 405,
     "selected_id": "MA-962",
     "status": "PASS"
   },
-  "prior_art_refs": [
-    "PA283"
-  ],
-  "tests": {
+  "preflight_tests": {
     "passed": 4,
     "failed": 0,
-    "command": "python -m unittest discover -s experiments/mirror_applications/ma-962-task-x-time-step-mirror-normalization/tests -v",
-    "status": "passed before data acquisition"
+    "status": "PASS before data"
   },
-  "protocol_amendment_before_data": {
-    "payload_gate_changed_to_0.98x": true,
-    "basis": "pre-data architecture-shape accounting; full shared synaptic weights dominate complete inference payload",
-    "data_accessed": false
+  "serialized_payload_verification": {
+    "count": 10,
+    "status": "PASS",
+    "payloads": [
+      {
+        "seed": 96201,
+        "condition": "shared_no_task_gain",
+        "bytes": 414162,
+        "sha256": "79a6b693d33f7286b4c41e89fd36c4716d1b0fd0a4789990325ea2b113a72859",
+        "strict_reload": "PASS"
+      },
+      {
+        "seed": 96201,
+        "condition": "native_task_time_tebn",
+        "bytes": 426532,
+        "sha256": "51c3f5f85a0bee8057588062c009ad2fe05cf921fb6abb5ab3bbb6b692a5dbf1",
+        "strict_reload": "PASS"
+      },
+      {
+        "seed": 96201,
+        "condition": "mirror_cyclic_phase",
+        "bytes": 414436,
+        "sha256": "c11628689f1e4ccb0dbfb1ef9f4506f50bf2a481428453259998a701c403124a",
+        "strict_reload": "PASS"
+      },
+      {
+        "seed": 96201,
+        "condition": "rank1_task_scalar_gate_on_shared_tebn_profile",
+        "bytes": 414888,
+        "sha256": "89ef1998b436b22e60bdc29dc22a5af989b3bab893017e16b2426fd6e818cbb9",
+        "strict_reload": "PASS"
+      },
+      {
+        "seed": 96201,
+        "condition": "independent_snn_per_task",
+        "bytes": 1652450,
+        "sha256": "3276cdba5db46dd3b6462afd17cad684a2252d8639a16951c29ee55459976ed4",
+        "strict_reload": "PASS"
+      },
+      {
+        "seed": 96202,
+        "condition": "shared_no_task_gain",
+        "bytes": 414162,
+        "sha256": "ee35e9f51dcc9d47b94ca6f8c6fa53c63e143bd723091a705706ced92568e173",
+        "strict_reload": "PASS"
+      },
+      {
+        "seed": 96202,
+        "condition": "native_task_time_tebn",
+        "bytes": 426532,
+        "sha256": "116768d41fe29e399f5df94782c1c46651f64b2d2ee58f52fbf8f94793537ba5",
+        "strict_reload": "PASS"
+      },
+      {
+        "seed": 96202,
+        "condition": "mirror_cyclic_phase",
+        "bytes": 414436,
+        "sha256": "ec8ed43e9f71de9ad5dfb2d6b6d5cd55750f3a4c0396ad39a36e5f6ddbb1c84b",
+        "strict_reload": "PASS"
+      },
+      {
+        "seed": 96202,
+        "condition": "rank1_task_scalar_gate_on_shared_tebn_profile",
+        "bytes": 414888,
+        "sha256": "f165ff34056fe865873ddbc4ae80e3cc7b61264561b1a8a9e0318a6d95c69c0e",
+        "strict_reload": "PASS"
+      },
+      {
+        "seed": 96202,
+        "condition": "independent_snn_per_task",
+        "bytes": 1652450,
+        "sha256": "2eec9ef65dd8b2403004dfdc3b1a2e7899fd749ab41fe21383ec70f2b792bcbb",
+        "strict_reload": "PASS"
+      }
+    ]
   },
-  "pre_data_amendments": {
-    "equal_byte_task_scalar_gate": true,
-    "fixed_development_images_per_world": 2048,
-    "data_accessed": false
-  }
+  "world_metrics": {
+    "96201": {
+      "shared_no_task_gain": {
+        "accuracy": 0.9158935546875,
+        "loss": 0.2894604374305345,
+        "spikes_per_example": 411.06982421875,
+        "payload_bytes": 414162
+      },
+      "native_task_time_tebn": {
+        "accuracy": 0.915771484375,
+        "loss": 0.2918256672564894,
+        "spikes_per_example": 404.8099365234375,
+        "payload_bytes": 426532
+      },
+      "mirror_cyclic_phase": {
+        "accuracy": 0.9163818359375,
+        "loss": 0.2887708612252027,
+        "spikes_per_example": 413.4920654296875,
+        "payload_bytes": 414436
+      },
+      "rank1_task_scalar_gate_on_shared_tebn_profile": {
+        "accuracy": 0.9193115234375,
+        "loss": 0.2801104298850987,
+        "spikes_per_example": 441.93603515625,
+        "payload_bytes": 414888
+      },
+      "independent_snn_per_task": {
+        "accuracy": 0.9190673828125,
+        "loss": 0.29311864080955274,
+        "spikes_per_example": 406.0699462890625,
+        "payload_bytes": 1652450
+      }
+    },
+    "96202": {
+      "shared_no_task_gain": {
+        "accuracy": 0.911865234375,
+        "loss": 0.2991503905504942,
+        "spikes_per_example": 385.1051025390625,
+        "payload_bytes": 414162
+      },
+      "native_task_time_tebn": {
+        "accuracy": 0.9107666015625,
+        "loss": 0.3145163974550087,
+        "spikes_per_example": 379.7926025390625,
+        "payload_bytes": 426532
+      },
+      "mirror_cyclic_phase": {
+        "accuracy": 0.9114990234375,
+        "loss": 0.31143148662522435,
+        "spikes_per_example": 386.959716796875,
+        "payload_bytes": 414436
+      },
+      "rank1_task_scalar_gate_on_shared_tebn_profile": {
+        "accuracy": 0.91357421875,
+        "loss": 0.29158872811240144,
+        "spikes_per_example": 414.073486328125,
+        "payload_bytes": 414888
+      },
+      "independent_snn_per_task": {
+        "accuracy": 0.91455078125,
+        "loss": 0.29718320388928987,
+        "spikes_per_example": 391.1396484375,
+        "payload_bytes": 1652450
+      }
+    }
+  },
+  "limitations": "Two fixed-budget development worlds; audit unopened; CPU MAC proxy only; no capacity or neuromorphic hardware claim."
 }

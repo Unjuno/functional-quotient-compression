@@ -1,0 +1,284 @@
+{
+  "experiment_id": "MA-962",
+  "dataset_manifest": {
+    "source_url": "https://storage.googleapis.com/cvdf-datasets/mnist/",
+    "files": {
+      "train-images-idx3-ubyte.gz": {
+        "compressed_bytes": 9912422,
+        "compressed_sha256": "440fcabf73cc546fa21475e81ea370265605f56be210a4024d2ca8f203523609",
+        "decoded_bytes": 47040016
+      },
+      "train-labels-idx1-ubyte.gz": {
+        "compressed_bytes": 28881,
+        "compressed_sha256": "3552534a0a558bbed6aed32b30c495cca23d567ec52cac8be1a0730e8010255c",
+        "decoded_bytes": 60008
+      }
+    },
+    "train_split": [
+      0,
+      50000
+    ],
+    "development_split": [
+      50000,
+      60000
+    ],
+    "audit_test_files_downloaded": false,
+    "audit_test_files_decoded": false
+  },
+  "world_seeds": [
+    96201,
+    96202
+  ],
+  "conditions": [
+    "shared_no_task_gain",
+    "native_task_time_tebn",
+    "mirror_cyclic_phase",
+    "rank1_task_scalar_gate_on_shared_tebn_profile",
+    "independent_snn_per_task"
+  ],
+  "per_seed": {
+    "96201": {
+      "shared_no_task_gain": {
+        "seed": 96201,
+        "condition": "shared_no_task_gain",
+        "best_step": 800,
+        "development": {
+          "accuracy": 0.9158935546875,
+          "loss": 0.2894604374305345,
+          "spikes_per_example": 411.06982421875,
+          "evaluation_wall_seconds": 0.594491805000871,
+          "inference_examples_per_second": 13779.836712783615
+        },
+        "updates": 800,
+        "train_examples": 25600,
+        "train_wall_seconds": 8.676210767000157,
+        "active_macs_per_example": 813056,
+        "training_forward_backward_macs_proxy": 62442700800,
+        "payload": {
+          "path": "source/artifacts/seed96201_shared_no_task_gain.pt",
+          "bytes": 414162,
+          "sha256": "79a6b693d33f7286b4c41e89fd36c4716d1b0fd0a4789990325ea2b113a72859"
+        }
+      },
+      "native_task_time_tebn": {
+        "seed": 96201,
+        "condition": "native_task_time_tebn",
+        "best_step": 800,
+        "development": {
+          "accuracy": 0.915771484375,
+          "loss": 0.2918256672564894,
+          "spikes_per_example": 404.8099365234375,
+          "evaluation_wall_seconds": 0.5945107509978698,
+          "inference_examples_per_second": 13779.397573971464
+        },
+        "updates": 800,
+        "train_examples": 25600,
+        "train_wall_seconds": 8.60464551900077,
+        "active_macs_per_example": 813056,
+        "training_forward_backward_macs_proxy": 62442700800,
+        "payload": {
+          "path": "source/artifacts/seed96201_native_task_time_tebn.pt",
+          "bytes": 426532,
+          "sha256": "51c3f5f85a0bee8057588062c009ad2fe05cf921fb6abb5ab3bbb6b692a5dbf1"
+        }
+      },
+      "mirror_cyclic_phase": {
+        "seed": 96201,
+        "condition": "mirror_cyclic_phase",
+        "best_step": 800,
+        "development": {
+          "accuracy": 0.9163818359375,
+          "loss": 0.2887708612252027,
+          "spikes_per_example": 413.4920654296875,
+          "evaluation_wall_seconds": 0.6157837640021171,
+          "inference_examples_per_second": 13303.371213879285
+        },
+        "updates": 800,
+        "train_examples": 25600,
+        "train_wall_seconds": 8.902993552997941,
+        "active_macs_per_example": 813056,
+        "training_forward_backward_macs_proxy": 62442700800,
+        "payload": {
+          "path": "source/artifacts/seed96201_mirror_cyclic_phase.pt",
+          "bytes": 414436,
+          "sha256": "c11628689f1e4ccb0dbfb1ef9f4506f50bf2a481428453259998a701c403124a"
+        }
+      },
+      "rank1_task_scalar_gate_on_shared_tebn_profile": {
+        "seed": 96201,
+        "condition": "rank1_task_scalar_gate_on_shared_tebn_profile",
+        "best_step": 800,
+        "development": {
+          "accuracy": 0.9193115234375,
+          "loss": 0.2801104298850987,
+          "spikes_per_example": 441.93603515625,
+          "evaluation_wall_seconds": 0.5963490950016421,
+          "inference_examples_per_second": 13736.920318420945
+        },
+        "updates": 800,
+        "train_examples": 25600,
+        "train_wall_seconds": 8.700807143999555,
+        "active_macs_per_example": 813056,
+        "training_forward_backward_macs_proxy": 62442700800,
+        "payload": {
+          "path": "source/artifacts/seed96201_rank1_task_scalar_gate_on_shared_tebn_profile.pt",
+          "bytes": 414888,
+          "sha256": "89ef1998b436b22e60bdc29dc22a5af989b3bab893017e16b2426fd6e818cbb9"
+        }
+      },
+      "independent_snn_per_task": {
+        "seed": 96201,
+        "condition": "independent_snn_per_task",
+        "best_step": 700,
+        "best_step_by_task": [
+          700,
+          800,
+          800,
+          800
+        ],
+        "development": {
+          "accuracy": 0.9190673828125,
+          "loss": 0.29311864080955274,
+          "spikes_per_example": 406.0699462890625,
+          "evaluation_wall_seconds": 0.6001205169995956,
+          "inference_examples_per_second": 13650.591452792341
+        },
+        "updates": 3200,
+        "train_examples": 102400,
+        "train_wall_seconds": 20.436278187000426,
+        "active_macs_per_example": 813056,
+        "training_forward_backward_macs_proxy": 249770803200,
+        "payload": {
+          "path": "source/artifacts/seed96201_independent_snn_per_task.pt",
+          "bytes": 1652450,
+          "sha256": "3276cdba5db46dd3b6462afd17cad684a2252d8639a16951c29ee55459976ed4"
+        }
+      }
+    },
+    "96202": {
+      "shared_no_task_gain": {
+        "seed": 96202,
+        "condition": "shared_no_task_gain",
+        "best_step": 800,
+        "development": {
+          "accuracy": 0.911865234375,
+          "loss": 0.2991503905504942,
+          "spikes_per_example": 385.1051025390625,
+          "evaluation_wall_seconds": 0.612070228002267,
+          "inference_examples_per_second": 13384.085069351975
+        },
+        "updates": 800,
+        "train_examples": 25600,
+        "train_wall_seconds": 8.759785377998924,
+        "active_macs_per_example": 813056,
+        "training_forward_backward_macs_proxy": 62442700800,
+        "payload": {
+          "path": "source/artifacts/seed96202_shared_no_task_gain.pt",
+          "bytes": 414162,
+          "sha256": "ee35e9f51dcc9d47b94ca6f8c6fa53c63e143bd723091a705706ced92568e173"
+        }
+      },
+      "native_task_time_tebn": {
+        "seed": 96202,
+        "condition": "native_task_time_tebn",
+        "best_step": 600,
+        "development": {
+          "accuracy": 0.9107666015625,
+          "loss": 0.3145163974550087,
+          "spikes_per_example": 379.7926025390625,
+          "evaluation_wall_seconds": 0.624503476999962,
+          "inference_examples_per_second": 13117.621120947735
+        },
+        "updates": 800,
+        "train_examples": 25600,
+        "train_wall_seconds": 8.767403616999218,
+        "active_macs_per_example": 813056,
+        "training_forward_backward_macs_proxy": 62442700800,
+        "payload": {
+          "path": "source/artifacts/seed96202_native_task_time_tebn.pt",
+          "bytes": 426532,
+          "sha256": "116768d41fe29e399f5df94782c1c46651f64b2d2ee58f52fbf8f94793537ba5"
+        }
+      },
+      "mirror_cyclic_phase": {
+        "seed": 96202,
+        "condition": "mirror_cyclic_phase",
+        "best_step": 600,
+        "development": {
+          "accuracy": 0.9114990234375,
+          "loss": 0.31143148662522435,
+          "spikes_per_example": 386.959716796875,
+          "evaluation_wall_seconds": 0.6310577629992622,
+          "inference_examples_per_second": 12981.379012066092
+        },
+        "updates": 800,
+        "train_examples": 25600,
+        "train_wall_seconds": 9.180681945003016,
+        "active_macs_per_example": 813056,
+        "training_forward_backward_macs_proxy": 62442700800,
+        "payload": {
+          "path": "source/artifacts/seed96202_mirror_cyclic_phase.pt",
+          "bytes": 414436,
+          "sha256": "ec8ed43e9f71de9ad5dfb2d6b6d5cd55750f3a4c0396ad39a36e5f6ddbb1c84b"
+        }
+      },
+      "rank1_task_scalar_gate_on_shared_tebn_profile": {
+        "seed": 96202,
+        "condition": "rank1_task_scalar_gate_on_shared_tebn_profile",
+        "best_step": 800,
+        "development": {
+          "accuracy": 0.91357421875,
+          "loss": 0.29158872811240144,
+          "spikes_per_example": 414.073486328125,
+          "evaluation_wall_seconds": 0.5949441400007345,
+          "inference_examples_per_second": 13769.35992678218
+        },
+        "updates": 800,
+        "train_examples": 25600,
+        "train_wall_seconds": 8.71816091599976,
+        "active_macs_per_example": 813056,
+        "training_forward_backward_macs_proxy": 62442700800,
+        "payload": {
+          "path": "source/artifacts/seed96202_rank1_task_scalar_gate_on_shared_tebn_profile.pt",
+          "bytes": 414888,
+          "sha256": "f165ff34056fe865873ddbc4ae80e3cc7b61264561b1a8a9e0318a6d95c69c0e"
+        }
+      },
+      "independent_snn_per_task": {
+        "seed": 96202,
+        "condition": "independent_snn_per_task",
+        "best_step": 700,
+        "best_step_by_task": [
+          700,
+          700,
+          800,
+          800
+        ],
+        "development": {
+          "accuracy": 0.91455078125,
+          "loss": 0.29718320388928987,
+          "spikes_per_example": 391.1396484375,
+          "evaluation_wall_seconds": 0.5936994650000997,
+          "inference_examples_per_second": 13798.227020465016
+        },
+        "updates": 3200,
+        "train_examples": 102400,
+        "train_wall_seconds": 20.320012509000662,
+        "active_macs_per_example": 813056,
+        "training_forward_backward_macs_proxy": 249770803200,
+        "payload": {
+          "path": "source/artifacts/seed96202_independent_snn_per_task.pt",
+          "bytes": 1652450,
+          "sha256": "2eec9ef65dd8b2403004dfdc3b1a2e7899fd749ab41fe21383ec70f2b792bcbb"
+        }
+      }
+    }
+  },
+  "development_only": true,
+  "audit_accessed": false,
+  "total_wall_seconds": 117.64534596500016,
+  "quality_storage_gate_pass": true,
+  "mirror_specific_gate_pass": false,
+  "all_development_gates_pass": false,
+  "decision": "FAIL"
+}
