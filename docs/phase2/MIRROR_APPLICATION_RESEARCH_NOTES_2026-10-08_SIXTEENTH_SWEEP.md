@@ -145,6 +145,8 @@ On the **Real Acoustic Fields** benchmark or licensed measured-RIR rooms:
 
 **High-value follow-ups:** MA1150 multipole-basis sharing under actual pruning, MA1151 direction-aware Ambisonic room View, MA1152 same-NFE flow model, MA1153 physics/causality audit.
 
+Every individual MA1116..1155 also has an [exact insertion / native comparator / natural holdout / metric blueprint](MIRROR_APPLICATION_EXPERIMENT_BLUEPRINTS_MA1116_1155.md). Treat those as design-intake prescriptions, not frozen `PROTOCOL.json` or fresh results.
+
 ## 6. Four-domain protocol rule and triage priority
 
 Across all candidates, follow the project's **native + m** marginal value principle:
