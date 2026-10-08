@@ -1,0 +1,62 @@
+{
+  "schema_version": 3,
+  "experiment_id": "MA-1193",
+  "title": "DR-MGF task-route Mirror compression under gradient-deconflict controls",
+  "status": "UNTESTED",
+  "stage": "DESIGN_ONLY",
+  "worker_claim": false,
+  "isolated": true,
+  "branch": "research/mirror-lime-output-view-20261009",
+  "priority": "P1",
+  "ma_original_worker_next": "MA-255",
+  "nearest_existing": [
+    "MA-1175",
+    "MA-1173",
+    "MA-299",
+    "MA-844"
+  ],
+  "prior_art_refs": [
+    "PA468",
+    "PA469",
+    "PA470",
+    "PA463"
+  ],
+  "native_physical_object": "native DR-MGF multi-output backbone with task-preferred filter routes/importance variables",
+  "mirror_insertion": "short per-task m compressing trained filter-importance/path coordinates on the native route selection, not a new gradient optimizer",
+  "logical_multiplicity": "K conflict-aware useful output functions from one physical network with compact task-specific path control",
+  "hypothesis": "A compact structured m for native DR-MGF task-preferred inference routes preserves multi-task learning conflict reduction while using fewer paid route coordinates and faster one-shared-forward outputs than native full per-filter routing and equal-byte lowrank gates.",
+  "implementation_steps": "Small d64 shared multitask model with 5 independent binary targets on same x, plus deliberately contradictory label/missing shared feature worlds. Native DR-MGF task-filter importance variables and its meta-weighted gradient fusion must be retained and verified before insertion. Fit source-only route dictionary, per-task m dim 4/8 with lowrank/Givens structured path factors and an ordinary same-byte linear gate; compare native full DR-MGF, PCGrad projection and CAGrad, static task heads, fixed-route and random equal-byte gates. Hold out entire label-task/data-generation families, not merely random samples, and measure loss, route saliency, signed per-task shared-parameter gradient dot product and backprop time. For DR-MGF natural stage verify original TPAMI source and CIFAR/NYUv2 benchmark; record task gradient fusion overhead and CUDA kernel performance. Do not call reduced gradient conflicts independent model capacity.",
+  "mandatory_native_controls": "native DR-MGF per-filter route variables and native gradient fusion, PCGrad, CAGrad, naive equal-weight MTL with ordinary multihead, same-byte low-rank task gates, Dense task heads",
+  "measurements": "per-task NLL/worst task, signed gradient-cosine conflict fraction, number of active filter paths and route diversity, retention, paid bytes, active per-task CPU/GPU P95",
+  "counterhypothesis": "Task-preferred paths and meta-weighted gradient fusion are DR-MGF's established contributions. The remaining route code may contain little redundancy and task interference is an optimization issue, not a Mirror coordinate deficiency.",
+  "uncertainty": "Gradient norms/rank, correlation of task labels, different task classes and optimization steps; group by independently generated entire tasks/datasets and report loss/bytes/runtime separately.",
+  "splits": {
+    "development": {
+      "seeds": [
+        11,
+        12,
+        13
+      ],
+      "allowed": "source fit and hparams only"
+    },
+    "fresh": {
+      "seeds": [
+        101,
+        102,
+        103,
+        104,
+        105
+      ],
+      "locked_before_access": true,
+      "all_worlds": true,
+      "whole_tasks": true,
+      "require_new_freeze_if_reused": true
+    }
+  },
+  "gates": {
+    "PASS": "At least 4/5 independent fresh task-worlds within +0.02 nat/sample and <=2 percentage point worst-task accuracy of native DR-MGF, route-state bytes <=0.85 native, whole model <=0.97 native, P95<=1.10, and a strict quality-byte Pareto improvement vs PCGrad/CAGrad+ordinary rank4 route code.",
+    "FAIL": "PCGrad, CAGrad or native full DR-MGF/PFN task gate performs as well or better; m causes worse task interference and forgotten tasks or route code basis leaks target task audit labels.",
+    "UNCERTAIN": "missing strong native reproduction, real bytes or credible natural heldout quality / intervals"
+  },
+  "adoption": "independent natural >=10 task-world replications; no historical scientific status changed"
+}

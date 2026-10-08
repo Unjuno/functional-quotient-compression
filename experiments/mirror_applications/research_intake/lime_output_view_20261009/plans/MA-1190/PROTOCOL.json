@@ -1,0 +1,62 @@
+{
+  "schema_version": 3,
+  "experiment_id": "MA-1190",
+  "title": "M3LoRA task-mixer Mirror coordinate compression",
+  "status": "UNTESTED",
+  "stage": "DESIGN_ONLY",
+  "worker_claim": false,
+  "isolated": true,
+  "branch": "research/mirror-lime-output-view-20261009",
+  "priority": "P0",
+  "ma_original_worker_next": "MA-255",
+  "nearest_existing": [
+    "MA-1099",
+    "MA-1167",
+    "MA-1179",
+    "MA-1105"
+  ],
+  "prior_art_refs": [
+    "PA464",
+    "PA465",
+    "PA443",
+    "PA428"
+  ],
+  "native_physical_object": "Native M3LoRA multiple low-rank A_i/B_j subspace factors initialized in minor singular components of pretrained W",
+  "mirror_insertion": "short task-specific m on native learnable M3LoRA subspace mixing matrix L, with optional rank1 genuinely private residual",
+  "logical_multiplicity": "multiple useful task deltas from a shared paid M3LoRA low-SV bank",
+  "hypothesis": "After M3LoRA's genuine multi-subspace and minor-SV initialization are retained, low-description structured Mirror mixing codes compress multiple L_t mixers more efficiently than native low-rank PCA coefficient banks, without removing independently useful task directions.",
+  "implementation_steps": "Native M3LoRA stage: freeze same pretrained 64x64 W, construct source-only SVD and minor singular bases, 4 pairs rank4 each, native mixed update ΔW_t=Σ_ij L_t,ij B_i A_j with source-bank train; hold out entire new tasks and source-covariate shifts. Train native independent L_t, source-trained plain tensor/SVD mixing code, 4-angle Givens Q(m) L0 Q(m)^{-1}, low-rank/simple diagonal code and rank1/2 private residual; use exactly same original W/base, labels, optimizer steps and initialization. Sweep learned task count 4/8/16 with actual shared-bank amortization, true float32 end-to-end task NLL and generalization and function-space projection; prohibit using target test LoRA deltas for m fitting. Compare to M3LoRA official released natural benchmark separately, or label native BLOCKED. Gauge-invariant task function values instead of raw factor differences; count all singular basis storage and source construction time.",
+  "mandatory_native_controls": "full native M3LoRA task-specific mixing L, equal-byte ordinary SVD/linear task mixers, native minor-SV LoRA, RanLoRA/VeRA, LoDA shared/private, independent LoRA",
+  "measurements": "per-task OOD NLL/CE, old-task retention, task gradient conflict and subspace angles, total source-trained A/B/L/code and private bytes, actual P95",
+  "counterhypothesis": "The learnable subspace mixture and low-SV adaptation are M3LoRA native. Mirror may merely constrain the same mixer and lose function directions, while minor singular modes can be task-useful despite low magnitude.",
+  "uncertainty": "Singular-value degeneracy/gauge, optimizer/old-task interference, correlated tasks; source-only eigenspaces, paired whole task-world bootstrap; report off-orbit failures.",
+  "splits": {
+    "development": {
+      "seeds": [
+        11,
+        12,
+        13
+      ],
+      "allowed": "source fit and hparams only"
+    },
+    "fresh": {
+      "seeds": [
+        101,
+        102,
+        103,
+        104,
+        105
+      ],
+      "locked_before_access": true,
+      "all_worlds": true,
+      "whole_tasks": true,
+      "require_new_freeze_if_reused": true
+    }
+  },
+  "gates": {
+    "PASS": "For >=4/5 fresh whole task worlds, task NLL <= native M3LoRA+0.02 nat/label, whole adapter-bank bytes <=0.85 native, P95<=1.10 native and paired strictly better quality/byte Pareto than ordinary same-byte SVD/linear L code and native minor-SV LoRA.",
+    "FAIL": "Native learned mixing L or compressed simple tensor-code beats Mirror, interference/old-task loss worsens, basis source/target leaks, source-bank build outweighs actual saved state at tested K.",
+    "UNCERTAIN": "missing strong native reproduction, real bytes or credible natural heldout quality / intervals"
+  },
+  "adoption": "independent natural >=10 task-world replications; no historical scientific status changed"
+}

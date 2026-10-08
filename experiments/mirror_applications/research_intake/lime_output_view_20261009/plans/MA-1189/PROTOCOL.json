@@ -1,0 +1,61 @@
+{
+  "schema_version": 3,
+  "experiment_id": "MA-1189",
+  "title": "LiME-native shared-adapter output View chart",
+  "status": "UNTESTED",
+  "stage": "DESIGN_ONLY",
+  "worker_claim": false,
+  "isolated": true,
+  "branch": "research/mirror-lime-output-view-20261009",
+  "priority": "P0",
+  "ma_original_worker_next": "MA-255",
+  "nearest_existing": [
+    "MA-1175",
+    "MA-1178",
+    "MA-1169",
+    "MA-351"
+  ],
+  "prior_art_refs": [
+    "PA463",
+    "PA468",
+    "PA469"
+  ],
+  "native_physical_object": "Native LiME frozen base and one paid PEFT module delta(x), with its original zero-parameter routing and Auto Top-K",
+  "mirror_insertion": "K small m_e selecting a structured block-Givens/shear/orthogonal-Mirror transform of the already computed shared PEFT output, optionally compressing native p_e",
+  "logical_multiplicity": "K useful task/expert functions from one physical PEFT pass beyond native LiME modulation",
+  "hypothesis": "Replacing or augmenting native LiME's per-expert p_e with a short structured m improves useful heldout task loss or total adapter-bank storage beyond an identical-code-count ordinary diagonal/linear compression at no more than 10% P95 overhead. Native LiME's shared PEFT, parameter-free router, ngram and AutoTopK are not Mirror novelties.",
+  "implementation_steps": "CPU source-only fixture: 64->128->32 shared feature extractor + one 32->8->32 PEFT, K=5 different binary labels per image, native explicit 32-vector p_e, 4-vector linear p_e and 4-vector structured Givens/shear m; train 350 AdamW updates, batch128, same init and data stream, 3 dev and 5 fresh independent digit partitions. Pin one-PEFT call counter; preserve ordinary independent multihead, independent per-expert PEFT upper baseline, native full LiME-style p_e. Source role is explicitly known in CPU preflight: **not** original LiME zero-param routing. Natural stage reproduce official Kowsher/LiME MMT47 code/router and its task modality tokenizer, freezing source/tag and matched VRAM before fresh. Sweep K 2/5/8/16 under new protocol, orbit-private mixing, m dimensionality 2/4/8 and rank-k matched linear native. Count routing/model/code+shared decoder and private state in exact serializer. No source model/oracle task test leak.",
+  "mandatory_native_controls": "native LiME full p_e, native LiME plus ordinary same-byte linear/diagonal p-code, frozen-base LoRA/VeRA/IA3, independent MoE-PEFT, MIMO one-trunk heads",
+  "measurements": "MMT-47 or matched 5-task NLL, worst task, router entropy/precision, actual paid adapter+code bytes, P95 TPOT, one shared-adapter forward count",
+  "counterhypothesis": "LiME already performs all heavy PEFT sharing, and its direct per-expert vectors can be cheaper/faster at useful quality than rotating the whole adapter output. A short orthogonal rotation cannot encode arbitrary independent tasks.",
+  "uncertainty": "Same-digit partitions are correlated, non-native role router in Stage0, task identity/feature confounding, optimization steps and output calibration. CI by whole world/independent task, not token; use measured bytes and seconds separately.",
+  "splits": {
+    "development": {
+      "seeds": [
+        11,
+        12,
+        13
+      ],
+      "allowed": "source fit and hparams only"
+    },
+    "fresh": {
+      "seeds": [
+        101,
+        102,
+        103,
+        104,
+        105
+      ],
+      "locked_before_access": true,
+      "all_worlds": true,
+      "whole_tasks": true,
+      "require_new_freeze_if_reused": true
+    }
+  },
+  "gates": {
+    "PASS": "In >=4/5 independent fresh task-world units Mirror NLL <= native LiME+0.02 nat/label, complete per-expert bytes <=0.85 native and whole model bytes <=0.97 native, P95<=1.10 native, with strict paired mean NLL <= same-byte ordinary linear/diagonal code minus 0.01. Natural benchmark + 10 independent worlds needed for ADOPTED.",
+    "FAIL": "Same-four-code native linear/diagonal or original LiME/one-trunk multihead dominates, role outputs collapse, speedup assumes K repeated native trunk runs, or Mirror simply reparameterizes ordinary Givens/IA3.",
+    "UNCERTAIN": "missing strong native reproduction, real bytes or credible natural heldout quality / intervals"
+  },
+  "adoption": "independent natural >=10 task-world replications; no historical scientific status changed"
+}

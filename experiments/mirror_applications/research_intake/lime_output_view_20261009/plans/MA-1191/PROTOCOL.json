@@ -1,0 +1,61 @@
+{
+  "schema_version": 3,
+  "experiment_id": "MA-1191",
+  "title": "FAAR task-spectrum View code under native rank shrinking",
+  "status": "UNTESTED",
+  "stage": "DESIGN_ONLY",
+  "worker_claim": false,
+  "isolated": true,
+  "branch": "research/mirror-lime-output-view-20261009",
+  "priority": "P1",
+  "ma_original_worker_next": "MA-255",
+  "nearest_existing": [
+    "MA-1185",
+    "MA-1081",
+    "MA-1172",
+    "MA-314"
+  ],
+  "prior_art_refs": [
+    "PA466",
+    "PA470",
+    "PA468"
+  ],
+  "native_physical_object": "native FAAR pretrained Swin backbone, native Performance-Driven Rank Shrinking (PDRS) adapter ranks and Task-Spectral Pyramidal Decoder (TS-PD)",
+  "mirror_insertion": "task × frequency-band × feature-scale small m used only in TS-PD spatial residual readout after native PDRS allocation",
+  "logical_multiplicity": "multiple dense image tasks or scales with fewer stored task spectral head residuals",
+  "hypothesis": "Replacing only FAAR's task-by-band residual decoder coefficients with a low-description m preserves task-specific dense prediction quality at fewer total bytes than FAAR's already dynamic-rank native optimizer and a same-byte simple spectral code.",
+  "implementation_steps": "First synthetic FFT mechanism: 32x32 images of mixed smooth/edge/textures, four tasks with distinct segmentation/normal/depth targets, 3 train-worlds dev and 5 fresh unseen image-generator worlds. Keep native fixed PDRS-like rank masks under source-only calibration, then learn a paid common FFT-band decoder, per-task Mirror m (block/signed/Givens) and same-parameter plain diagonal/FiLM/spectral-linear code; measure all task-native metrics separately, not one pooled RMSE. Stage natural: reproduce official FAAR TS-PD and PDRS using PASCAL-Context fixed train/val splits, same batch/rank budget and kernel; freeze feature pyramid, native task-specific adaptation and full decoder. Benchmark complete actual saved checkpoint bytes (decoder, rank lists, m, positional features, FFT basis if paid), activation bytes and GPU wall. Different tasks must use same input image; no oracle target spatial map to choose m.",
+  "mandatory_native_controls": "full native FAAR PDRS+TS-PD, native FAAR with smaller rank, byte-matched ordinary FiLM/linear spectral readout, shared Swin independent task decoders, adaptive rank LoRA, no frequency View",
+  "measurements": "PASCAL-Context semantic/human segmentation mIoU, depth RMSE, normals angular error, actual decoder+basis bytes, GPU P95, old-task interference",
+  "counterhypothesis": "FAAR already compresses ranks and learns spatially aware fusion; additional m may only encode the remaining tiny task head, giving negligible whole-model saving.",
+  "uncertainty": "Different target units, class imbalance, spatial correlation and benchmark preprocessing, GPU fused kernels; stratify by independent image family.",
+  "splits": {
+    "development": {
+      "seeds": [
+        11,
+        12,
+        13
+      ],
+      "allowed": "source fit and hparams only"
+    },
+    "fresh": {
+      "seeds": [
+        101,
+        102,
+        103,
+        104,
+        105
+      ],
+      "locked_before_access": true,
+      "all_worlds": true,
+      "whole_tasks": true,
+      "require_new_freeze_if_reused": true
+    }
+  },
+  "gates": {
+    "PASS": "On >=4/5 fresh task/data-generating worlds all task-native metrics within 2% relative native FAAR, total model+decoder bytes <=0.95 native, P95<=1.10 native, and strict gain over byte-matched native frequency/FiLM code.",
+    "FAIL": "FAAR rank shrinking or ordinary spectral task adapter outperforms Mirror, task-specific dense decoder capacity/geometry absent, or quality claims conflate mIoU/RMSE and reduce task fidelity.",
+    "UNCERTAIN": "missing strong native reproduction, real bytes or credible natural heldout quality / intervals"
+  },
+  "adoption": "independent natural >=10 task-world replications; no historical scientific status changed"
+}
