@@ -1,0 +1,25 @@
+{
+  "experiment_id": "MA-356",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-356-factorized-mirror-code-composition/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "development_payloads_checked": 8
+  },
+  "metric_replay": {
+    "command": "python experiments/mirror_applications/ma-356-factorized-mirror-code-composition/source/verify.py",
+    "checked": true,
+    "development_rows_replayed": 8,
+    "fresh_rows": 0,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Fresh seeds 35611\u201335613 remain sealed after direct coefficient control matched Mirror within 1B."
+  ]
+}
