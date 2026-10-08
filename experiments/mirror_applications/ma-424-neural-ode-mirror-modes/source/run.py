@@ -55,6 +55,7 @@ def field_eval(v,h,kind):
         a=torch.einsum('mhd,mnd->mnh',v['w1'],h)+v['b1'][:,None,:];return torch.einsum('mdh,mnh->mnd',v['w2'],a.tanh())+v['b2'][:,None,:]
     return v['field'](h.reshape(-1,D)).reshape(M,N0,D)
 
+@torch.no_grad()
 def simulate_loaded(v,x0,kind,steps=EULER,integrator='euler'):
     h=x0[None,:,:].expand(M,-1,-1).clone();states=[h.clone()];dt=1/steps
     if integrator=='euler':

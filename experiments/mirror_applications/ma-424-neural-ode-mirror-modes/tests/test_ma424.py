@@ -15,6 +15,7 @@ def test_native_generated_control_is_exact_payload_and_trajectory_alias():
  assert a==b
  ya=simulate(a,x0,'mirror');yb=simulate(b,x0,'native')
  assert torch.max(torch.abs(ya-yb))<1e-6
+ assert not ya.requires_grad and not yb.requires_grad
 
 def test_independent_transformed_fields_load_all_mode_biases():
  f,theta,x0=make_world(42401);raw=pack(f,theta,'independent');v=load(raw)
