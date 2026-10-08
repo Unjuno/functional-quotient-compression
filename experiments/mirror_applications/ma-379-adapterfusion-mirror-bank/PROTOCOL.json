@@ -1,0 +1,55 @@
+{
+  "experiment_id": "MA-379",
+  "title": "Mirror-compressed AdapterFusion source bank",
+  "status": "FROZEN_DEVELOPMENT_COMPLETED",
+  "base_commit": "ad51e99",
+  "evidence_lane": "QUALITY/STORAGE/COMPUTE/ADAPTER_FUSION",
+  "hypothesis": "One shared adapter matrix plus a small per-source Givens coordinate can retain useful multi-source target fusion quality with fewer serialized bytes than a full AdapterFusion bank, and outperform an equal-byte direct scalar source code.",
+  "prior_art_refs": ["PA54"],
+  "physical_object": "one shared 16x16 source adapter basis versus four independently trained source adapters",
+  "mirror_coordinate": "one Givens angle per source adapter, conjugating the shared matrix by a 16D channel rotation",
+  "logical_multiplicity": "four source-task adapter functions fused into four target-task functions",
+  "model": {
+    "input_dim": 16,
+    "adapter_dim": 16,
+    "source_tasks": 4,
+    "target_tasks": 4,
+    "train_examples": 8192,
+    "validation_examples": 2048,
+    "test_examples": 4096,
+    "batch_size": 64,
+    "optimizer_updates": 1600,
+    "optimizer": "Adam",
+    "learning_rate": 0.001,
+    "development_seeds": [37901, 37902],
+    "fresh_seeds": [37911, 37912, 37913],
+    "data": "Synthetic linear feature-task bank. Four independent random source matrices define frozen source adapters; four target matrices are fixed mixtures of them. Train source adapter fit plus target fusion coefficients jointly on train examples; validate/test on new examples."
+  },
+  "controls": [
+    "AdapterFusion reference: four independent source adapter matrices plus learned target fusion coefficients; all bytes charged",
+    "one shared source adapter matrix with one direct scalar per source task",
+    "one shared source adapter matrix with one Givens angle per source task",
+    "hard-shared source adapter with no source code"
+  ],
+  "development_gate_before_fresh": "Both development seeds: independent bank target-test MSE <0.02; Mirror mean target-test MSE no more than 1.10x independent and no more than 1.05x scalar; Mirror actual payload <=0.60x independent and <=1.10x scalar-code payload; source-task MSE finite; target fusion coefficients and adapter source errors reported. Otherwise fresh remains sealed.",
+  "success_gate": "All three fresh seeds satisfy quality and byte gates; Mirror improves quality/byte frontier over scalar control or independent AdapterFusion while reporting compute/runtime; exact payload reload/replay.",
+  "failure_gate": "Mirror target MSE exceeds 1.10x independent or 1.05x scalar in both development worlds, or byte gate fails.",
+  "storage": {
+    "authority": "actual deterministic ZIP/NPY FP16 inference payload bytes after reload",
+    "paid_objects": ["all independent adapters or shared basis", "all Mirror angles or direct scalar source codes", "all target fusion coefficients", "task/path indices, metadata, and archive headers"]
+  },
+  "compute": {
+    "report_updates_and_examples": true,
+    "report_active_macs": true,
+    "report_fit_wall_clock": true,
+    "report_target_inference_throughput": true,
+    "charge_mirror_reconstruction_and_rotation_operations": true
+  },
+  "boundaries": [
+    "synthetic linear task-composition screen only; no NLP or AdapterFusion benchmark claim",
+    "target mixtures are held fixed across methods and are not counted as Mirror-created tasks",
+    "parameter count is secondary; serialized payload bytes are authoritative",
+    "fixed-update results are learning-efficiency evidence, not near-converged capacity",
+    "fresh seeds remain sealed until the full development gate passes"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "experiment_id": "MA-379",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-379-adapterfusion-mirror-bank/tests",
+    "passed": 4,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Both development seeds generated and tested independent, hard-tied, scalar-shared, and Givens-shared adapter banks.",
+    "All eight ZIP/NPY FP16 payloads were size/hash checked, reloaded, and source/target MSE plus fusion coefficients replayed exactly.",
+    "The target matrix is a fixed mixture of four source-task matrices in every method; the coefficients and all learned target fusion values are retained in the result artifacts.",
+    "Both development seeds failed the registered independent-quality and 0.60x payload gates; fresh IDs 37911, 37912, 37913 were not run."
+  ]
+}
