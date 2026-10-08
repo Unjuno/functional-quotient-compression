@@ -413,7 +413,7 @@ Pilot: BOLT-like shared orthogonal basis plus 6 diagonal m coefficients averaged
 
 When selecting MA-1096/1099/1102/1105/1114/1115, include BOLT (PA372), function-space/curvature metric (CG-LoRA PA373, Fora PA374), SVD+CUR localized task residual (PA376), task-vector bases PA375, information filtering PA377, and a gauge-invariant functional/OOD check (PA378..381) where applicable. Do not inflate the MA backlog with duplicated new rows for these existing questions. A task-code success must survive *actual held-out task outcomes and serializer/runtime*, not just weight reconstruction.
 
-MA-320 is complete. MA-322, MA-303 and MA-304 are complete; MA-303/304 trigger a pause for the factorized/supermask subfamily; MA-305 is paused. MA-309 tested a distinct MIMO mechanism and is complete; **MA-318 is next P0**. Do not interrupt active/frozen jobs to consume supplemental intake.
+MA-320 is complete. MA-322, MA-303 and MA-304 are complete; MA-303/304 trigger a pause for the factorized/supermask subfamily; MA-305 is paused. MA-309 tested a distinct MIMO mechanism and is complete; MA-318 is complete; **MA-325 is next P0**. Do not interrupt active/frozen jobs to consume supplemental intake.
 
 ## Sixteenth research intake — KG relation operators, cameras, robotics and acoustic rooms
 
@@ -485,3 +485,6 @@ MA-303 and MA-304 are consecutive P0 FAILs with the same structural result: ordi
 
 
 MA-309 is complete FAIL after FP16 payload reload: Mirror reduced serialized bytes by 25.6% but missed MIMO accuracy/diversity margins in all three fresh seeds. See A1 reconciliation and report. Next P0: MA-318.
+
+
+MA-318 is complete FAIL for Mirror storage/compute: six validation-triggered growth events retained all skills, but Mirror payload was 22.9% larger than direct coefficients and fit proxy ~324x. See report and exact replay. Next P0: MA-325.

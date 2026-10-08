@@ -1,19 +1,24 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-318",
+  "commit": "PENDING",
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "python -m pytest -q experiments/mirror_applications/ma-318-continual-coordinate-first/tests",
+    "passed": 4,
+    "failed": 0
   },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "roundtrip_checked": true,
+    "byte_exact": true
   },
   "metric_replay": {
-    "checked": false,
-    "max_difference": null
+    "checked": true,
+    "max_difference": 0.0
   },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "144 fresh stream-step payloads reloaded and matched lengths and SHA-256.",
+    "All 144 summary rows replayed exactly across three fresh streams.",
+    "Prior-skill retention was re-evaluated after each stream step.",
+    "No optimizer updates; planted synthetic linear skill families."
+  ]
 }
