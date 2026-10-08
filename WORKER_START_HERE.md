@@ -243,6 +243,15 @@ Before starting an experiment in MA-936..995:
 8. Factorized codes require unseen task×time, scene×chunk, listener×direction, site×user or hardware task×configuration pairings. Prefer natural/out-of-family variation to more aligned-only tests.
 9. The new MA-936..995 ideas are UNTESTED. Existing completed experiments and MA-255 next-candidate selection are unchanged.
 
+### Function-space evidence and native basis controls (PA372..381)
+
+Read `docs/phase2/MIRROR_FUNCTION_SPACE_FALSIFICATION_2026-10-08.md` **only** for natural adapter/low-description m/function-space questions, especially MA1096/1098/1099/1102/1105/1114/1115.
+
+- **BOLT** already trains low-description diagonal coefficients on a common spectral basis extracted from learned task vectors; it is a direct baseline, not a novel Mirror result.
+- **CG-LoRA** evaluates function-space prediction/curvature; **Fora** uses activation-derived capability projectors; **SVD+CUR** distinguishes common versus localized/private learned updates. Compare actual held-out task NLL/accuracy and retention rather than optimizing weight Frobenius alone.
+- An independent *real-digit image-shift pilot* used rank-6 common bases and four held-out adaptation conditions, seeds 41/42. Structured m had 52.19% mean accuracy at 4694 B versus diagonal 49.79% at 4662 B, but dense core scored 69.97% and independent rank-4 LoRA 86.98%; structured m was slower. It failed its preregistered gate; **do not** treat this as a completed MA, LM result, or a reason to retune opened fresh seeds.
+- New tests must fit m from permitted new-task data (no target-oracle LoRA delta), hold out whole tasks and ideally model families, preserve rank/gauge invariance, report function-space and weight-space diagnostics separately, and charge all shared basis, task-code, private residual, source adapter development and runtime costs.
+
 ### MA-1096..1115 natural-LoRA gauge, adapter bank and cache crossovers
 
 For a selected MA1096..1115 (and as supplemental context if a compatible experiment is **not yet frozen**):
@@ -289,4 +298,4 @@ MA-247 showed that even an aligned Givens teacher can fail a fixed-budget recurr
 
 For MA-003, inspect shared-projection fusion, sign-View gate/bypass equivalence and antipodal cancellation. For KV candidates, inspect common-map value fusion, original key-width temperature after latent absorption, missing-information counterexamples and source-token cache provenance.
 
-Do not interrupt frozen runs or change audit seeds/gates. **Historical note:** 47 verified MA experiment directories were reconciled on 2026-10-08. The authoritative registry currently contains 1095 candidates, and MA-255 is still next. Never overwrite the expanded registry with the old 254-row worker checkout. PR #27 uses local CR subtest IDs, not new global MA IDs.
+Do not interrupt frozen runs or change audit seeds/gates. **Historical note:** 47 verified MA experiment directories were reconciled on 2026-10-08. The authoritative registry currently contains 1115 candidates, and MA-255 is still next. Never overwrite the expanded registry with the old 254-row worker checkout. PR #27 uses local CR subtest IDs, not new global MA IDs.
