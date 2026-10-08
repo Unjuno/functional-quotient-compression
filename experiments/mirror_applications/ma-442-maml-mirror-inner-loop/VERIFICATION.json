@@ -1,19 +1,41 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-442",
+  "status": "VERIFIED_DEVELOPMENT_SCREEN",
+  "protocol_sha256": "f761e2f12edb72cf30a97b28d617632598317f63fe36831d8cbff6162d17bf40",
+  "metric_replay": "PASS",
+  "payload_replay": "PASS",
+  "native_alias_replay": "PASS",
+  "fresh_accessed": false,
+  "development_gate_passed": false,
+  "serialization_roundtrip_checked": true,
+  "payload_byte_exact": true,
+  "metric_replay_checked": true,
+  "checks": [
+    {
+      "mirror_bytes": 1132,
+      "mirror_native_parameter_max_difference": 0.0,
+      "mirror_native_query_rmse_difference": 0.0,
+      "native_bytes": 1132,
+      "seed": 44201
+    },
+    {
+      "mirror_bytes": 1132,
+      "mirror_native_parameter_max_difference": 0.0,
+      "mirror_native_query_rmse_difference": 0.0,
+      "native_bytes": 1132,
+      "seed": 44202
+    }
+  ],
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "pytest -q experiments/mirror_applications/ma-442-maml-mirror-inner-loop/tests",
+    "passed": 3,
+    "failed": 0
   },
-  "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
-  },
-  "metric_replay": {
-    "checked": false,
-    "max_difference": null
-  },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "notes": [
+    "Mirror and native Givens payload hashes, task codes, query RMSE are exactly equal in both seeds.",
+    "Relative-MAML quality and bytes gates pass, LoRA comparison quality/bytes pass, but runtime gate and Mirror-specificity fail.",
+    "Actual Mirror payload is 1132 bytes; independent LS task vector payload is 1098 bytes.",
+    "Fresh seeds 44211-44213 were not accessed.",
+    "Initial timing/count artifacts are preserved separately and excluded."
+  ]
 }

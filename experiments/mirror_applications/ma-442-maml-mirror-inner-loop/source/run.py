@@ -111,6 +111,7 @@ def train(method: str, seed: int, split: str) -> tuple[torch.Tensor, torch.Tenso
             ys, yq = y[:SUPPORT_N], y[SUPPORT_N:]
             if method == "full":
                 adapted = inner_full(base, xs, ys)
+                adapted = adapted.detach().requires_grad_(True)
                 g, = torch.autograd.grad(mse(xq, yq, adapted), adapted)
                 gradients[0] += g.detach()
             elif method in ("mirror", "native_givens"):
@@ -135,9 +136,11 @@ def train(method: str, seed: int, split: str) -> tuple[torch.Tensor, torch.Tenso
         else:
             base = _meta_update([base], gradients, outer_lr)[0]
     elapsed = time.perf_counter() - start
+    factor = 2 if method in ("mirror", "native_givens", "lora") else 1
+    train_ops = OUTER_STEPS * TASKS_PER_UPDATE * (SUPPORT_N * INNER_STEPS * D * factor + QUERY_N * D)
     return base, basis, {"outer_updates": OUTER_STEPS, "inner_updates": OUTER_STEPS * TASKS_PER_UPDATE * INNER_STEPS,
                          "train_examples": OUTER_STEPS * TASKS_PER_UPDATE * (SUPPORT_N + QUERY_N),
-                         "train_wall_s": elapsed}
+                         "train_wall_s": elapsed, "training_active_ops_proxy": train_ops}
 
 
 def fit_independent(xs: torch.Tensor, ys: torch.Tensor) -> torch.Tensor:
@@ -155,7 +158,7 @@ def serialize_payload(arrays: dict[str, np.ndarray], metadata: dict) -> bytes:
 def evaluate(method: str, base: torch.Tensor | None, basis: torch.Tensor | None,
              seed: int, split: str) -> tuple[dict, dict[str, np.ndarray], bytes]:
     rng = task_rng(seed + 901, split)
-    scores, vectors, codes, angles, fit_times = [], [], [], [], []
+    scores, vectors, codes, fit_times, query_times = [], [], [], [], []
     for _ in range(16):
         true_angles, x, y = sample_task(rng, SUPPORT_N + QUERY_N)
         xs, xq = x[:SUPPORT_N], x[SUPPORT_N:]
@@ -164,7 +167,6 @@ def evaluate(method: str, base: torch.Tensor | None, basis: torch.Tensor | None,
         if method in ("mirror", "native_givens"):
             code = inner_mirror(base, xs, ys)
             w = prediction_weight(method, base, code)
-            angles.append(code.detach().numpy())
             codes.append(code.detach().numpy())
         elif method == "lora":
             code = inner_lora(base, basis, xs, ys)
@@ -182,7 +184,9 @@ def evaluate(method: str, base: torch.Tensor | None, basis: torch.Tensor | None,
         else:
             raise ValueError(method)
         fit_times.append(time.perf_counter() - st)
+        qt = time.perf_counter()
         scores.append(float(torch.sqrt(mse(xq, yq, w))))
+        query_times.append(time.perf_counter() - qt)
         vectors.append(w.detach().numpy())
     arrays: dict[str, np.ndarray] = {"task_vectors": np.stack(vectors)}
     if method in ("mirror", "native_givens", "no_adapt", "full"):
@@ -201,16 +205,35 @@ def evaluate(method: str, base: torch.Tensor | None, basis: torch.Tensor | None,
         arrays["task_vectors"] = np.stack(codes)
     if method == "no_adapt":
         arrays = {"shared_init": base.detach().numpy()[None, :]}
-    elapsed = float(sum(fit_times))
+    adaptation_elapsed = float(sum(fit_times))
+    query_elapsed = float(sum(query_times))
+    if method == "no_adapt":
+        adaptation_elapsed = 0.0
+    method_train = method in ("full", "mirror", "native_givens", "lora")
+    method_adaptation_examples = 0 if method == "no_adapt" else 16 * SUPPORT_N
+    method_outer_updates = OUTER_STEPS if method_train else 0
+    method_inner_updates = OUTER_STEPS * TASKS_PER_UPDATE * INNER_STEPS if method_train else 0
+    method_train_examples = OUTER_STEPS * TASKS_PER_UPDATE * (SUPPORT_N + QUERY_N) if method_train else 0
+    method_train_wall = 0.0 if method == "no_adapt" else None
+    if method == "independent":
+        method_train_wall = 0.0
+    ops = 16 * QUERY_N * D
+    if method in ("full", "mirror", "native_givens", "lora"):
+        ops += 16 * SUPPORT_N * INNER_STEPS * D * (2 if method in ("mirror", "native_givens", "lora") else 1)
+    elif method == "independent":
+        ops += 16 * (SUPPORT_N * D * D)
     family = "angle-conditioned-linear-v1" if method in ("mirror", "native_givens") else method
     metadata = {"method_family": family, "format": "MA442-inference-npz-v1", "task_count": 16,
                 "dtype": "float32", "dimensions": D, "inner_steps": INNER_STEPS,
                 "inner_lr": INNER_LR, "code_dim": 2 if method in ("mirror", "native_givens", "lora") else D}
     payload = serialize_payload(arrays, metadata)
     metrics = {"query_rmse": float(np.mean(scores)), "query_rmse_sd": float(np.std(scores, ddof=1)),
-               "payload_bytes": len(payload), "inference_wall_s": elapsed,
-               "query_examples": 16 * QUERY_N, "adaptation_examples": 16 * SUPPORT_N,
-               "active_ops_proxy": 16 * (SUPPORT_N * INNER_STEPS * D * (2 if method in ("mirror", "native_givens", "lora") else 1) + QUERY_N * D),
+               "payload_bytes": len(payload), "adaptation_wall_s": adaptation_elapsed,
+               "inference_wall_s": query_elapsed, "end_to_end_wall_s": adaptation_elapsed + query_elapsed,
+               "query_examples": 16 * QUERY_N, "adaptation_examples": method_adaptation_examples,
+               "outer_updates": method_outer_updates, "inner_updates": method_inner_updates,
+               "train_examples": method_train_examples, "train_wall_s": method_train_wall,
+               "evaluation_active_ops_proxy": ops,
                "payload_sha256": __import__("hashlib").sha256(payload).hexdigest()}
     return metrics, arrays, payload
 
@@ -223,12 +246,17 @@ def run(seed: int, split: str, out: Path) -> dict:
         base, basis, train_metrics = train(method, seed, split)
         states[method] = (base, basis, train_metrics)
         eval_metrics, arrays, payload = evaluate(method, base, basis, seed, split)
-        results[method] = {**train_metrics, **eval_metrics}
+        merged = {**eval_metrics, **train_metrics}
+        merged["active_ops_proxy"] = merged["training_active_ops_proxy"] + merged["evaluation_active_ops_proxy"]
+        results[method] = merged
         (out / f"{method}_payload.npz").write_bytes(payload)
-    base, _, no_train = states["full"]
+    base = states["full"][0]
     for method in ("no_adapt", "independent"):
         eval_metrics, arrays, payload = evaluate(method, base, None, seed, split)
-        results[method] = {**no_train, **eval_metrics}
+        results[method] = {**eval_metrics, "outer_updates": 0, "inner_updates": 0,
+                           "train_examples": 0, "train_wall_s": 0.0,
+                           "training_active_ops_proxy": 0,
+                           "active_ops_proxy": eval_metrics["evaluation_active_ops_proxy"]}
         (out / f"{method}_payload.npz").write_bytes(payload)
     # Native conditioning is deliberately the same map, optimizer, initialization and episodes.
     # Its equality is checked in verify.py; report output hashes expose the exact alias.

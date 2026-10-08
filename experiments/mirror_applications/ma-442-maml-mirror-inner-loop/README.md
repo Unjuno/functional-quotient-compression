@@ -22,6 +22,43 @@ This is a mechanism screen, not evidence about neural backbones or natural tasks
 
 Full MAML is the quality/storage upper control; shared/no-adapt is the lower control; rank-2 LoRA is the low-rank adaptation baseline; native Givens conditioning tests whether the chosen `m` is an ordinary native parameter. A 16-task inference bank is serialized as an uncompressed `.npz` containing all arrays and schema metadata. The complete frozen gates are in `PROTOCOL.json`.
 
-## Results
+Protocol Amendment 1 preserves the initial artifacts under `runs/initial_invalid_timing_accounting/`. Those files incorrectly labeled adaptation-plus-query duration as inference time and copied training counts onto non-meta-trained controls; amended development artifacts separate adaptation, query-only, and end-to-end time and report zero meta-training for nontraining controls. No model/data setting, quality score, or payload definition changed.
 
-Facts, interpretation, and hypothesis will be added after the frozen development run and verification.
+## H — Hypothesis
+
+The frozen hypothesis and exact gates are stated above and in `PROTOCOL.json`: a two-angle inner-loop coordinate should approach full FOMAML query quality with a smaller paid task bank, and beat rank-2 LoRA at matched bytes/compute. An exact native Givens alias invalidates Mirror-specific attribution.
+
+## T — What ran
+
+Two development seeds, each with 160 outer updates × 8 training tasks (51,200 support/query examples), four support updates per task (5,120 inner updates plus 160 outer updates), 8 support and 32 query examples per held-out task, and a 16-task deployment bank. Controls were shared/no-adapt, six-weight first-order MAML, rank-2 LoRA, two-angle Mirror, the native Givens conditioner, and independent least-squares task fits. Fresh seeds 44211–44213 were not opened. Each payload is the exact measured uncompressed `.npz` archive including schema metadata. `RESULTS_CORE.csv` contains per-seed examples, updates, operation proxies, wall times, byte counts and hashes.
+
+## D — Result: FAIL
+
+| Method | Seed 44201 RMSE / bytes | Seed 44202 RMSE / bytes | End-to-end ms (44201 / 44202) |
+|---|---:|---:|---:|
+| Shared no-adapt | 0.6984 / 733 | 0.7944 / 733 | 0.33 / 0.36 |
+| Full first-order MAML | 0.4325 / 2,005 | 0.5290 / 2,005 | 9.93 / 5.50 |
+| Rank-2 LoRA | 0.5534 / 1,399 | 0.5896 / 1,399 | 9.27 / 6.58 |
+| Mirror angles | 0.3359 / 1,132 | 0.4243 / 1,132 | 32.67 / 55.92 |
+| Native Givens control | 0.3359 / 1,132 | 0.4243 / 1,132 | 36.79 / 37.76 |
+| Independent least squares | 0.0385 / 1,098 | 0.0373 / 1,098 | 1.68 / 1.84 |
+
+Mirror meets the predeclared relative-to-MAML quality and byte gates (0.78/0.80× MAML RMSE; 0.565× its payload) and improves on rank-2 LoRA RMSE by 39%/28% with 19% fewer payload bytes. However it is 3.5×/8.5× slower end-to-end than LoRA in these small CPU runs; more decisively, the native Givens control has exactly the same saved parameters, payload bytes and query RMSE in both seeds. Mirror's 1,132-byte bank is also 34 bytes larger than the independent task-vector archive despite storing fewer learned coefficients, because archive/schema overhead dominates this 16-task toy bank. Independent task fits are 8.7×/11.4× more accurate than Mirror at this support budget.
+
+**Fact:** The Mirror/native parameter arrays and serialized payload hashes are equal for both seeds; metric replay passes with zero RMSE difference. Both task-conditioned methods trail independent least squares by a large margin, and Mirror adaptation is slower than rank-2 LoRA in the measured eager CPU implementation. The full MAML learner itself reaches only 0.43–0.53 RMSE while its independent fit control reaches ≤0.039.
+
+**Interpretation:** The aligned task geometry can be expressed with two angles and gives a better result than the trained rank-2 affine adapter here, but the added freedom is an ordinary native Givens conditioner. This is M0/no Mirror-specific value; the bank's theoretical coefficient reduction does not translate to smaller serialized bytes at this small bank size.
+
+**Hypothesis:** On this task family the two-angle form may be useful only as a chosen native nonlinear adapter geometry; it has not shown a Mirror-specific Pareto improvement, natural task generalization, or efficient adaptation. A larger bank or packed runtime format could change byte amortization but is outside this frozen screen.
+
+### Worker report
+
+- **H:** Two Mirror angles can adapt a meta-trained shared prototype to held-out tasks close to full MAML while reducing actual bank bytes and beating rank-2 LoRA.
+- **T:** Frozen first-order meta-training and four-step adaptation on two development task seeds; all six controls; verified payloads and query replay; fresh seeds sealed.
+- **D:** **FAIL** (exact native alias and end-to-end runtime miss; actual small-bank bytes do not beat independent vectors).
+- **C:** The apparent advantage comes from the task distribution's known nonlinear Givens orbit, a native conditioner; furthermore independent support-set least squares is much more accurate.
+- **U:** Larger task banks, stronger/second-order MAML, learned nonlinear adapter controls, natural few-shot tasks, and optimized kernels.
+
+## Verification and preserved execution record
+
+The amended verifier reopens every saved payload and replays its 16 query tasks; both seeds pass serialization, byte/hash, payload replay, and exact Mirror/native equality checks. `pytest` reports 3 passed. The first successful-run instrumentation version is preserved under `runs/initial_invalid_timing_accounting/`; two implementation exceptions are also recorded in `runs/implementation_failure_20261008.json` and excluded from results. No fresh artifacts exist.

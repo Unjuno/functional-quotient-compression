@@ -1,0 +1,99 @@
+{
+  "experiment_id": "MA-442",
+  "methods": {
+    "full": {
+      "active_ops_proxy": 6144,
+      "adaptation_examples": 128,
+      "inference_wall_s": 0.008125671985908411,
+      "inner_updates": 5120,
+      "outer_updates": 160,
+      "payload_bytes": 2005,
+      "payload_sha256": "bf02d824a08fd108ca3a80acbe47c4d5e840a10878e7ae6ba64e7e061abd9bc0",
+      "query_examples": 512,
+      "query_rmse": 0.4325104053132236,
+      "query_rmse_sd": 0.1473167786606087,
+      "train_examples": 51200,
+      "train_wall_s": 1.008949709997978
+    },
+    "independent": {
+      "active_ops_proxy": 6144,
+      "adaptation_examples": 128,
+      "inference_wall_s": 0.001980059954803437,
+      "inner_updates": 5120,
+      "outer_updates": 160,
+      "payload_bytes": 1098,
+      "payload_sha256": "f3999500038ef8e24370fbc8b6e0e08f0013ed19198833dfe2354884a1d042b9",
+      "query_examples": 512,
+      "query_rmse": 0.03854907548520714,
+      "query_rmse_sd": 0.0149058121698482,
+      "train_examples": 51200,
+      "train_wall_s": 1.008949709997978
+    },
+    "lora": {
+      "active_ops_proxy": 9216,
+      "adaptation_examples": 128,
+      "inference_wall_s": 0.006090976021368988,
+      "inner_updates": 5120,
+      "outer_updates": 160,
+      "payload_bytes": 1399,
+      "payload_sha256": "88ab7e999aa62f85441b2117fe1aa2d347fa26c35ffa8aa824c30283a91232b1",
+      "query_examples": 512,
+      "query_rmse": 0.5534415496513247,
+      "query_rmse_sd": 0.21988527476646844,
+      "train_examples": 51200,
+      "train_wall_s": 0.98837808900862
+    },
+    "mirror": {
+      "active_ops_proxy": 9216,
+      "adaptation_examples": 128,
+      "inference_wall_s": 0.024462440982460976,
+      "inner_updates": 5120,
+      "outer_updates": 160,
+      "payload_bytes": 1132,
+      "payload_sha256": "dfa87af6e5eb51ecb0189c0eebbd9e3ea7aca2c3685d1ef63c9f1d10caa16058",
+      "query_examples": 512,
+      "query_rmse": 0.33586602099239826,
+      "query_rmse_sd": 0.12458273608149316,
+      "train_examples": 51200,
+      "train_wall_s": 4.4219062570045935
+    },
+    "native_givens": {
+      "active_ops_proxy": 9216,
+      "adaptation_examples": 128,
+      "inference_wall_s": 0.026886263032793067,
+      "inner_updates": 5120,
+      "outer_updates": 160,
+      "payload_bytes": 1132,
+      "payload_sha256": "dfa87af6e5eb51ecb0189c0eebbd9e3ea7aca2c3685d1ef63c9f1d10caa16058",
+      "query_examples": 512,
+      "query_rmse": 0.33586602099239826,
+      "query_rmse_sd": 0.12458273608149316,
+      "train_examples": 51200,
+      "train_wall_s": 2.86931912
+    },
+    "no_adapt": {
+      "active_ops_proxy": 6144,
+      "adaptation_examples": 128,
+      "inference_wall_s": 0.00011911003093700856,
+      "inner_updates": 5120,
+      "outer_updates": 160,
+      "payload_bytes": 733,
+      "payload_sha256": "8e1119fdeaf3c60302a0516988aa0d9f1adeb678087de1c69eac62c2234e8b97",
+      "query_examples": 512,
+      "query_rmse": 0.6984466565772891,
+      "query_rmse_sd": 0.22281319481602846,
+      "train_examples": 51200,
+      "train_wall_s": 1.008949709997978
+    }
+  },
+  "seed": 44201,
+  "split": "dev",
+  "task": {
+    "dimension": 6,
+    "inner_steps": 4,
+    "outer_updates": 160,
+    "query": 32,
+    "support": 8,
+    "tasks_per_update": 8
+  }
+}
