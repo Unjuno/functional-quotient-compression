@@ -31,3 +31,8 @@ This is a small linear synthetic ensemble, not a deep neural ensemble or natural
 - **Fact:** Mirror is smaller than BatchEnsemble and has competitive aligned quality/calibration, but one fresh aligned seed fails the diversity gate; unrelated quality collapses.
 - **Interpretation:** A compact orthogonal view can recover aligned member functions, but member usefulness depends on the function family and optimization retains sufficient diversity only inconsistently here.
 - **Hypothesis:** A richer per-member Mirror coordinate or a diversity regularizer may improve the frontier, but requires a new experiment and must be tested against rank-one factors.
+
+
+## Existing canonical MA-260 evidence
+
+An earlier dedicated/reconciled branch (`research/ma-260-batchensemble-reconciled-20261008`, commit `8436d73948ce6561ed1cfc96ff604af2ca4c2731`) also tested four fresh rotation-aligned worlds. It reported Mirror accuracy 0.8302/ECE 0.0226 at 890 B versus BatchEnsemble 1,226 B and independent 926 B, missing its <=25% byte-reduction gate; unrelated accuracy fell to 0.6018 versus 0.8332 controls. This supports the same scoped FAIL disposition while using a different one-layer post-fit protocol. Neither protocol is a deep BatchEnsemble or natural-data result.
