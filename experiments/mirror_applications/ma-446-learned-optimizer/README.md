@@ -2,20 +2,22 @@
 
 ## H — Hypothesis
 
-A learned per-step diagonal update schedule acting only on a 2D Mirror coordinate will reach at least 10% lower fresh query NRMSE than development-tuned Adam and SGD after four updates.
+A learned per-step diagonal update schedule on only a 2D functional coordinate improves held-out few-shot quality by at least 10% over tuned Adam and SGD at four updates, without larger serialized inference state.
 
-## T — Planned test
+## T — Test
 
-Synthetic 2D linear regression tasks with four support examples and 128 query examples. Compare zero code, tuned SGD, tuned Adam, and a learned coordinatewise step schedule. Development IDs 100–199 and worlds 44600–44601 select all settings; fresh IDs 2000–2059 and worlds 44610–44612 remain sealed until freeze. Actual serialized policy and task-code bytes are measured.
+2D latent linear regression, four support and 128 query samples. Development worlds 44600–44601 selected SGD lr 0.3 and Adam lr 0.1 and trained an 8-step coordinatewise schedule. Fresh worlds 44610–44612, seeds 0–2, 20 tasks/world/seed, evaluated 1/2/4/8 steps.
 
-## D — Pending
+## D — FAIL
 
-Protocol frozen; no numerical result yet.
+Step-4 mean NRMSE was 0.4062 learned, 0.4882 Adam, 0.5697 SGD. Learned beats Adam on average, but misses the per-world 0.90x criterion in world 44612 (0.5042 vs 0.5122). Exact serialized N=20 package was 101.25B/task learned vs 91.65B/task Adam.
 
 ## C — Strongest counter-hypothesis
 
-For a convex two-dimensional least-squares objective, ordinary tuned SGD/Adam already provide a strong update rule; a short learned schedule may only repackage a learning-rate choice.
+The learned schedule overfits the development distribution; the slight third-world gain does not justify increased policy bytes.
 
 ## U — Unknown
 
-Whether learned coordinatewise update rates improve held-out adaptation quality, and whether that advantage survives policy-byte accounting.
+No recurrent learned optimizer, nonlinear task, or natural-data evidence.
+
+See protocol, fresh run artifacts, payload files and verification record.
