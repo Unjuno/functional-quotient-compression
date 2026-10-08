@@ -33,7 +33,9 @@ MA-278 is **FAIL on this unaligned task-factor screen**: Mirror and scalar modul
 
 MA-282 is **PROMISING on a deliberately aligned synthetic Monarch FFN family**: four scalar Views reproduced exact outputs 3/3 at 925B, vs 1,145B free-angle Monarch and 3,279B independent FFNs, with 13.6M vs 10.7M examples/s. Unrelated task maps collapse to hard-tie quality; runtime workspace is 1,024B. Seven tests and all 42 fresh rows replayed exactly. No learned Transformer, language, capacity or runtime-RAM claim.
 
-**The next candidate is MA-286.** MA-275/277/279–281 remain P1 UNTESTED. MA-876..1115 remain appended research-intake hypotheses and must not preempt the registered P0 crossovers. Natural variation and benchmark-level runtime remain unproven; aligned synthetic PROMISING must not be described as real-world Mirror adoption.
+MA-286 is **FAIL for its Mirror-specific margin**, while preserving a strong shared-basis result. Eight aligned functions plus two private fallbacks used 4,412B vs 6,580B task-local Cheap-LoRA and 41,279B independent full, but functionally identical one-hot shared-B was 4,490B; the 78B (1.74%) index saving missed the frozen 10% threshold. Five tests and 24 fresh metric/hash replays passed.
+
+**The next candidate is MA-288.** MA-275/277/279–281 remain P1 UNTESTED. MA-876..1115 remain appended research-intake hypotheses and must not preempt the registered P0 crossovers. Natural variation and benchmark-level runtime remain unproven; aligned synthetic PROMISING must not be described as real-world Mirror adoption.
 
 ## MA-241 — layer-specific Mirror views over tied experts
 

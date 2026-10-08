@@ -1,0 +1,232 @@
+{
+  "experiment_id": "MA-286",
+  "title": "Cheap-LoRA Mirror column-subspace views",
+  "status": "FAIL",
+  "evidence_lane": "MECHANISM/STORAGE/COMPUTE/RUNTIME",
+  "base_commit": "28194ea",
+  "random_selection": {
+    "date_utc": "2026-10-08",
+    "method": "Python secrets.randbelow(2)",
+    "draw_index_zero_based": 0,
+    "candidate_pool": [
+      "MA-286",
+      "MA-296"
+    ],
+    "selected": "MA-286",
+    "live_conflict_check": "git fetch origin --prune; no MA-286 branch found"
+  },
+  "selection_history": [
+    {
+      "pool": [
+        "MA-274",
+        "MA-278",
+        "MA-282",
+        "MA-286",
+        "MA-296",
+        "MA-299"
+      ],
+      "index": 2,
+      "selected": "MA-282",
+      "result": "PROMISING on isolated branch"
+    },
+    {
+      "pool": [
+        "MA-274",
+        "MA-278",
+        "MA-286",
+        "MA-296",
+        "MA-299"
+      ],
+      "index": 1,
+      "selected": "MA-278",
+      "result": "competing completed FAIL selectively adopted"
+    },
+    {
+      "pool": [
+        "MA-274",
+        "MA-286",
+        "MA-296",
+        "MA-299"
+      ],
+      "index": 3,
+      "selected": "MA-299",
+      "result": "FAIL; SETA shared-angle family paused"
+    },
+    {
+      "pool": [
+        "MA-274",
+        "MA-286",
+        "MA-296"
+      ],
+      "index": 0,
+      "selected": "MA-274",
+      "result": "competing completed FAIL selectively adopted; task/expert BOFT angle family paused"
+    },
+    {
+      "pool": [
+        "MA-286",
+        "MA-296"
+      ],
+      "method": "secrets.randbelow(2)",
+      "index": 0,
+      "selected": "MA-286",
+      "result": "active"
+    }
+  ],
+  "hypothesis": "One shared low-rank output factor plus one compact subspace address per task can reproduce many logical adapters with fewer actual bytes than task-local Cheap-LoRA factors; unrelated maps need private low-rank factors.",
+  "physical_object": "One shared B matrix of shape 16x32 over a fixed 32x16 Walsh input basis",
+  "mirror_coordinate": "One uint8 m_t selects one of eight four-column subsets; selector dictionary and every task code are charged",
+  "logical_multiplicity": "Eight distinct aligned task maps plus two unrelated rank-four task maps",
+  "prior_art_refs": [
+    "PA29"
+  ],
+  "teacher": "Aligned maps W_t=U[:,S[m_t]] B_star[S[m_t],:] for m_t=0..7. Two unrelated rank-four maps use independent A_t C_t. No teacher weights are copied into student fits.",
+  "codebook": {
+    "subspace_count": 8,
+    "rank": 4,
+    "selectors": [
+      [
+        0,
+        1,
+        2,
+        3
+      ],
+      [
+        4,
+        5,
+        6,
+        7
+      ],
+      [
+        8,
+        9,
+        10,
+        11
+      ],
+      [
+        12,
+        13,
+        14,
+        15
+      ],
+      [
+        0,
+        4,
+        8,
+        12
+      ],
+      [
+        1,
+        5,
+        9,
+        13
+      ],
+      [
+        2,
+        6,
+        10,
+        14
+      ],
+      [
+        3,
+        7,
+        11,
+        15
+      ]
+    ],
+    "aligned_codes": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "addresses": "Given task descriptors, stored in each inference payload. This tests representation/storage, not task-code learning."
+  },
+  "task": {
+    "input_dim": 32,
+    "rank": 4,
+    "output_dim": 32,
+    "tasks": 10,
+    "aligned_tasks": 8,
+    "unrelated_tasks": 2,
+    "examples_per_task": {
+      "train": 256,
+      "validation": 128,
+      "test": 512
+    },
+    "quality": "per-task normalized held-out MSE"
+  },
+  "controls": [
+    "hard shared fixed subspace",
+    "fixed common-subspace Cheap-LoRA with task-local B",
+    "random per-task fixed-subspace Cheap-LoRA with task-local B",
+    "matched-subspace task-local Cheap-LoRA",
+    "shared B plus one-hot subspace gate",
+    "Mirror shared B plus compact integer address",
+    "independent full matrices"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      28601,
+      28602
+    ],
+    "private_fallback_validation_threshold": 0.0001,
+    "fitting": "Pooled least squares for shared B; task-local least squares for B_t; truncated SVD rank 4 for private A_t C_t; full least squares for independent upper",
+    "optimizer_updates": 0,
+    "review": {
+      "mirror_index_mean_bytes": 4412,
+      "onehot_shared_B_mean_bytes": 4490,
+      "matched_task_local_Cheap_LoRA_mean_bytes": 6580,
+      "independent_full_mean_bytes": 41279,
+      "quality": "all normalized heldout MSE below 2e-15 for index, onehot, matched cLA and full controls",
+      "decision": "No hyperparameter tuning; fixed 1e-4 private fallback. Fresh checks stability and per-task private boundary."
+    }
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      28611,
+      28612,
+      28613
+    ],
+    "locked_before_access": true,
+    "private_fallback_validation_threshold": 0.0001,
+    "threshold_frozen": 0.0001
+  },
+  "storage": {
+    "authority": "actual deterministic serialized inference payload bytes",
+    "codec": "typed binary tensor records charge codebook, shared/private tensors, task codes/gates, method metadata, names, shapes and headers",
+    "paid_objects": [
+      "shared B",
+      "eight selector index lists",
+      "integer codes",
+      "one-hot code vectors",
+      "task-local Cheap-LoRA B_t",
+      "private A_t and C_t",
+      "full matrices",
+      "metadata",
+      "codec headers"
+    ]
+  },
+  "compute": {
+    "report_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_MAC_proxy": true,
+    "report_isolated_wall_time": true,
+    "report_inference_throughput": true,
+    "report_operator_workspace": true,
+    "optimizer_updates": 0
+  },
+  "success_gate": "On every fresh world, Mirror aligned-task normalized MSE <=1e-5 and unrelated private rank-four MSE <=1e-5; payload <=0.75x matched task-local Cheap-LoRA and <=0.5x independent full. Mirror-specific PROMISING additionally requires >=10% fewer bytes than the shared-B one-hot gate at matched quality, with fit compute <=2x and inference latency <=1.25x.",
+  "failure_gate": "Mirror quality/private boundary fails, or the one-hot shared-B control reaches the same function quality at within 10% payload bytes and no worse compute/runtime.",
+  "boundaries": [
+    "Synthetic known-task low-rank maps",
+    "Addresses supplied by task metadata and charged; no learned router or code inference",
+    "Fixed Walsh basis and selector dictionary",
+    "No optimizer updates; not learning-efficiency or capacity evidence",
+    "No Transformer or language-model claim"
+  ]
+}
