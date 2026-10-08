@@ -1,0 +1,103 @@
+{
+  "name": "GVA shared-cache role-switch exactness and Mirror marginal cost, mechanism pilot",
+  "target_ma": "MA-1162",
+  "study_type": "SYNTHETIC_ALGEBRA_PILOT_NOT_MA_COMPLETION",
+  "created": "2026-10-08",
+  "status": "FROZEN_BEFORE_FRESH",
+  "canonical_worker_unchanged": true,
+  "scope": "Single frozen final attention readout with identical prefix/cache is an exact sharing case; upstream changed states are incompatible. This does NOT demonstrate target-model KV sharing, task NLL, or Mirror-specific compression.",
+  "assumptions": [
+    "all q, V, positional K are finite torch float32",
+    "roles differ only by reconstruction matrix/readout m for the safe case; same V/Kpos prefix",
+    "no training, no heldout labels, no externally trained checkpoint",
+    "native GVA full-M and shared factorized M are strong controls",
+    "reconstructing full M on each call is unfused CPU overhead"
+  ],
+  "shapes": {
+    "batch": 1,
+    "heads": 4,
+    "groups": 1,
+    "d_value": 16,
+    "d_content_key": 16,
+    "d_position": 8,
+    "prefix_length": 128,
+    "role_count": 8,
+    "code_dimension": 3
+  },
+  "worlds": {
+    "development_seeds": [
+      11,
+      12,
+      13
+    ],
+    "fresh_seeds": [
+      101,
+      102,
+      103,
+      104,
+      105
+    ],
+    "all_fresh_run_once": true,
+    "hyperparameter_search": false
+  },
+  "generator": {
+    "distribution": "independent seeded torch.randn",
+    "scale_q": 0.25,
+    "scale_v": 0.35,
+    "scale_kpos": 0.3,
+    "scale_map": 0.4,
+    "scale_basis": 0.2,
+    "scale_code": 0.5,
+    "upstream_change_delta": 0.4,
+    "upstream_change": "V_bad = V+0.4*tanh(V @ random_orthogonallike), Kpos_bad=Kpos+0.4*tanh(Kpos), q same",
+    "centered_baseline": "M_role=M0+sum_j code[role,j]*basis[j]"
+  },
+  "cases": {
+    "A": "explicit materialized K_content versus algebraically absorbed qM^T with shared prefix",
+    "B": "successive role switches over exact same physically aliased V_cache,Kpos including native precomputed matrix and reconstructed basis-code views",
+    "C": "counterexample: upstream different V/Kpos during prefill, intentionally incorrect reused previous prefix vs true modified-prefill reference",
+    "D": "RoPE-valid complex-plane commuting transform and invalid noncommuting shear"
+  },
+  "baselines": [
+    "independent per-role cloned native caches",
+    "single canonical native GVA cache with full per-role matrices (strong cache control)",
+    "single canonical native factorized basis plus task codes (same cost as candidate)",
+    "Mirror basis-plus-code recomposition (candidate)"
+  ],
+  "measurements": [
+    "max score and output error float32",
+    "pointer equality/physical untyped_storage nbytes and explicit clone bytes",
+    "true logit/output discrepancy for unsafe case",
+    "serialized named NPZ inference map bank bytes",
+    "CPU per-call P50/P95 native precomposed M vs Mirror recomposition, 20 warmup 100 measured iterations",
+    "source/protocol hash"
+  ],
+  "gates": {
+    "algebra_PASS": "max absolute score error <=3e-5 and context readout output error <=3e-5 over all 5 worlds; pointer identity and no new canonical cache allocation for safe switches",
+    "unsafe_PASS": "all 5 incompatible changed-prefill worlds yield output discrepancy >1e-4 vs incorrect reuse; unsafe labeled incompatible",
+    "Mirror_specific_PASS": "candidate improves quality/storage/runtime Pareto versus both native single-cache GVA and native same-basis factorized code, with >=10% actual persistent state saving and <=10% P95 overhead; any exact parity with native code is M0",
+    "FAIL": "safe algebra error exceeds limits, any invalid clone called physical alias, or unsafe change is misclassified as safe",
+    "UNCERTAIN": "timing short or changed prefix too small to detect; report exact axes and do not claim statistical capacity proof"
+  },
+  "inference_accounting": {
+    "byte_authority": "np.savez actual serialized file size with consistent dtype naming",
+    "cache_authority": "torch storage nbytes and data_ptr plus explicit cloned scenario",
+    "metadata": "same frozen JSON metadata included or disclosed separately",
+    "latency": "CPU torch float32, threads=1, batch1, prefix128, warmup20 measure100; GPU not available; clock may vary"
+  },
+  "units": {
+    "m": "dimensionless vector length3",
+    "M": "dimensionless 16x16 real matrix",
+    "V": "dimensionless 1x128x16 tensor",
+    "Q": "dimensionless 1x4x16 tensor",
+    "time": "seconds",
+    "bytes": "actual NPZ byte count (non-SI practical)",
+    "errors": "dimensionless absolute diff"
+  },
+  "hard_boundaries": [
+    "No natural LM task, no NLL, no trained capacity and no GPU throughput",
+    "Native factorized code mathematically matches Mirror when same basis; zero novel functionality",
+    "All five fresh worlds must be reported even when FAIL",
+    "Existing MA-1162 remains UNTESTED, this is predeclared Stage-0 exploratory research"
+  ]
+}
