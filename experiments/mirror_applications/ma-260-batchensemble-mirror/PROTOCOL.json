@@ -1,0 +1,101 @@
+{
+  "experiment_id": "MA-260",
+  "title": "BatchEnsemble rank-one Mirror ensemble",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/RUNTIME",
+  "base_commit": "f7f76de193063950d28b7834f337840b1e86f0ce",
+  "prior_art_refs": [
+    "PA17"
+  ],
+  "hypothesis": "Shared hidden map with learned Givens member coordinates yields higher ensemble diversity/quality per actual byte than native BatchEnsemble rank-one member factors while approaching independent ensemble quality.",
+  "physical_object": "shared 16x16 feature map and 16x4 output head",
+  "mirror_coordinate": "four learned hidden-space Givens member views",
+  "logical_multiplicity": "four ensemble members",
+  "task": {
+    "input_dim": 16,
+    "hidden_dim": 16,
+    "classes": 4,
+    "members": 4,
+    "metric": "ensemble NLL, accuracy, ECE, pairwise disagreement"
+  },
+  "controls": [
+    "independent member MLPs",
+    "one shared predictor replicated as four members",
+    "native BatchEnsemble rank-one fast factors",
+    "shared hidden map plus Givens Mirror members"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      {
+        "world": 26000,
+        "init_seed": 260000
+      },
+      {
+        "world": 26001,
+        "init_seed": 260001
+      }
+    ],
+    "learning_rate_candidates": [
+      0.003,
+      0.01
+    ],
+    "updates": 1000,
+    "selection_metric": "mean ensemble NLL across worlds"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      {
+        "world": 26002,
+        "init_seed": 260002
+      },
+      {
+        "world": 26003,
+        "init_seed": 260003
+      },
+      {
+        "world": 26004,
+        "init_seed": 260004
+      }
+    ],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual torch.save inference payload plus metadata",
+    "paid_objects": [
+      "all member or shared learned weights",
+      "BatchEnsemble rank-one factors",
+      "Mirror angles",
+      "normalization and metadata"
+    ]
+  },
+  "compute": {
+    "report_examples": true,
+    "report_updates": true,
+    "report_MAC_proxy": true,
+    "report_wall_time": true,
+    "report_throughput": true
+  },
+  "success_gate": "Mirror ensemble NLL <=1.10x independent; ECE <= independent + 0.03; bytes <=60% independent; and beats BatchEnsemble by >=10% NLL or >=20% disagreement at byte-near cost.",
+  "failure_gate": "Mirror quality/storage gate missed or BatchEnsemble matches at equal/lower bytes.",
+  "boundaries": [
+    "synthetic classification only",
+    "no OOD calibration claim",
+    "no capacity proof from fixed updates"
+  ],
+  "amendments": [
+    {
+      "date": "2026-10-08",
+      "before_fresh_access": true,
+      "reason": "Initial development classifier was not learnable within the fixed update budget: independent control remained near chance with high NLL on both development worlds.",
+      "change": "Development teacher changed to four well-separated Gaussian class prototypes with label determined by nearest prototype; retain the same model methods, update budget, rates, dev seeds, selection rule, gates and sealed fresh worlds.",
+      "scope": "Task generator only; all candidate comparisons rerun from scratch on the amended dev protocol."
+    },
+    {
+      "date": "2026-10-08",
+      "before_fresh_access": true,
+      "reason": "Code audit found training and evaluation data seeds depended on method-specific initialization seed, invalidating cross-method comparisons.",
+      "change": "All methods at a given development world now use identical train/dev examples; model initialization seeds remain separate and deterministic. Rerun every method/LR/world from scratch.",
+      "scope": "Seed plumbing correction only; teacher, methods, updates, LR grid, selection metric, gates, and sealed fresh worlds unchanged."
+    }
+  ]
+}

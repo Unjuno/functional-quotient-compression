@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-260",
+  "commit": null,
+  "tests": {
+    "command": "PYTHONPATH=experiments/mirror_applications/ma-260-batchensemble-mirror/source python -m pytest -q experiments/mirror_applications/ma-260-batchensemble-mirror/tests",
+    "passed": 2,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": false,
+    "max_difference": null
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Fresh worlds were not opened.",
+    "The original task/data-seed implementation was invalidated and its values are retained in INVALIDATED_INITIAL_RESULTS.csv.",
+    "Corrected development still showed zero member disagreement for Mirror and BatchEnsemble and high cross-world instability; no frontier conclusion established."
+  ]
+}
