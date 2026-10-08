@@ -1,0 +1,22 @@
+{
+  "experiment_id": "MA-278",
+  "title": "Compacter fast-factor Mirror adapter views",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/COMPUTE",
+  "base_commit": "f7f76de",
+  "hypothesis": "On held-out adapter regression tasks generated from a shared Kronecker slow basis, per-task compact rotation coordinates over shared rank-one fast factors reach independent-adapter quality at lower payload than native Compacter and beat a byte-matched scalar-coefficient control.",
+  "physical_object": "shared linear map with Compacter-style Kronecker slow basis",
+  "mirror_coordinate": "one 2D Givens angle per task applied to paired shared rank-one fast-factor channels",
+  "logical_multiplicity": "six task-specific adapter functions from shared slow and fast factors",
+  "prior_art_refs": ["PA23"],
+  "controls": ["hard tied shared adapter", "native Compacter with task-specific rank-one fast factors", "shared fast-factor bank plus scalar task coefficients", "Mirror rotated shared fast-factor pairs", "independent full adapter upper reference"],
+  "task": {"input_dim": 16, "output_dim": 16, "tasks": 6, "metric": "held-out per-task output MSE", "teacher": "shared Kronecker slow atoms combined with task-local rank-one fast factors; no teacher values copied into student initialization"},
+  "development": {"worlds": [27800, 27801], "learning_rates": [0.003, 0.01], "updates": 500, "batch_size": 128, "selection_metric": "mean held-out MSE across methods and development worlds"},
+  "fresh": {"worlds": [27802, 27803, 27804], "locked_before_access": true, "access_condition": "development Mirror MSE <= 1.10x independent upper reference and actual payload <= native Compacter payload"},
+  "training": {"optimizer": "Adam", "dtype": "float32", "matched_updates": true, "matched_batches_within_world": true, "threads": 1},
+  "storage": {"authority": "actual serialized inference payload bytes", "serialization": "torch.save complete CPU state_dict plus JSON config", "paid_objects": ["all trainable model tensors", "task coordinates", "shared slow and fast bases", "biases", "metadata"]},
+  "compute": {"report_examples": true, "report_updates": true, "report_active_MAC_proxy": true, "report_training_wall_time": true, "report_inference_throughput": true},
+  "gates": {"promising": "3/3 fresh worlds: Mirror MSE <=1.10x independent upper reference; bytes <= native Compacter and <=0.80x independent; and Mirror MSE at least 10% below scalar-control at equal/lower bytes.", "fail": "development gate misses or two fresh worlds show Mirror >1.25x independent error, or scalar control matches within 10% at equal/lower bytes.", "not_established": "invalid data split, serialization mismatch, or incomplete runs"},
+  "boundaries": ["synthetic linear adapter regression", "fixed 500-update screen is not a capacity claim", "no language-model or GPU inference claim"],
+  "protocol_frozen_before_development": true
+}
