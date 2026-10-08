@@ -1,0 +1,43 @@
+{
+  "experiment_id": "MA-007",
+  "commit": "877e22589af90afb3ddd0e7f422977034831bab7",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-007-token-choice-mirror/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "runs_checked": 96,
+    "fresh_payload_bytes_by_method": {
+      "full_ec": 23341,
+      "full_token": 23277,
+      "full_rank2_token": 23530,
+      "tied_token": 7509,
+      "film_token": 8909,
+      "residual2_token": 8909,
+      "mirror_token": 7761,
+      "mirror_ec": 7761
+    }
+  },
+  "metric_replay": {
+    "checked": true,
+    "fresh_rows_checked": 48,
+    "deterministic_fields_exact": true,
+    "max_difference": 0.0,
+    "timing_fields_excluded": [
+      "training_wall_seconds",
+      "inference_examples_per_second"
+    ]
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_freeze_manifest_hashes_checked_before_access": true,
+  "notes": [
+    "Fresh configuration, source and selected LR were hash-checked before access; README was expanded after fresh to report results.",
+    "Token-choice Mirror coverage was 1.0 in all worlds; expert-choice Mirror coverage was 0.818\u20130.827.",
+    "Useful-sharing quality/storage gate passed 3/3. The Mirror-specific byte condition failed against hard tying by 252B.",
+    "Independent role functions were not fully reproduced by the Givens view bank.",
+    "Eager CPU throughput is a single-host implementation measurement."
+  ]
+}

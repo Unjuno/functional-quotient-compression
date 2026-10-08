@@ -1,0 +1,111 @@
+{
+  "experiment_id": "MA-249",
+  "title": "one physical future head + Mirror future-offset views",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/RUNTIME",
+  "base_commit": "4fe9b5fe51bfcd488ddff9a9702f8cb9bee4b08a",
+  "prior_art_refs": [
+    "PA09"
+  ],
+  "hypothesis": "When future-offset teachers share one output matrix under low-dimensional hidden-space Givens transforms, one physical MTP head plus offset-specific Mirror coordinates can recover the independently parameterized heads with lower actual serialized model bytes; on unaligned offset heads, it should fail or require private residuals.",
+  "physical_object": "one shared future-token output projection over a common frozen trunk representation",
+  "mirror_coordinate": "per-future-offset Givens angles applied to the shared hidden vector before the shared output head",
+  "logical_multiplicity": "four offset-specific output functions from one output matrix",
+  "teacher": "four categorical future-offset distributions from a shared teacher output matrix with per-offset Givens rotations; a second mode uses independently sampled offset matrices as a structural negative control",
+  "task": {
+    "hidden_dim": 16,
+    "vocabulary": 12,
+    "future_offsets": 4,
+    "metric": "teacher-to-student categorical KL and top-1 distribution agreement"
+  },
+  "controls": [
+    "ordinary four-head MTP",
+    "one hard-tied output head",
+    "tied head plus per-offset scalar logit gates",
+    "tied head plus per-offset rank-1 output residual",
+    "one shared head plus Mirror Givens views",
+    "ordinary MTP is the independent-head quality upper control"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      {
+        "world": 24900,
+        "init_seed": 249000
+      }
+    ],
+    "modes": [
+      "aligned_shared_base",
+      "independent_offset_heads"
+    ],
+    "learning_rate_candidates": [
+      0.003,
+      0.01
+    ],
+    "selection_metric": "mean teacher-to-student KL over methods and modes"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      {
+        "world": 24901,
+        "init_seed": 249001
+      },
+      {
+        "world": 24902,
+        "init_seed": 249002
+      },
+      {
+        "world": 24903,
+        "init_seed": 249003
+      }
+    ],
+    "modes": [
+      "aligned_shared_base",
+      "independent_offset_heads"
+    ],
+    "locked_before_access": true
+  },
+  "training": {
+    "updates": 1200,
+    "batch_size": 64,
+    "optimizer": "AdamW",
+    "weight_decay": 0.0001,
+    "dtype": "float32",
+    "matched_minibatches_across_methods": true
+  },
+  "storage": {
+    "authority": "actual serialized full inference model payload bytes",
+    "serialization": "torch.save state_dict plus deterministic config JSON",
+    "paid_objects": [
+      "shared frozen trunk feature map",
+      "all output heads or shared head",
+      "Mirror angles",
+      "scalar gates",
+      "LoRA residuals",
+      "metadata"
+    ]
+  },
+  "compute": {
+    "report_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_MAC_proxy": true,
+    "report_wall_time": true,
+    "report_inference_throughput": true,
+    "cpu_threads": 1
+  },
+  "success_gate": "In all three fresh aligned worlds, Mirror teacher-KL <=1.10x ordinary MTP, offset top-1 agreement >=99%, and full model payload <=0.75x ordinary MTP. It must improve the quality/byte frontier over hard tying, scalar gate and rank-1 residual. The independent-offset condition is a registered negative control, not required to pass.",
+  "failure_gate": "Mirror misses any aligned quality gate in two or more fresh worlds, or a simpler tied/gate/low-rank method matches its quality with equal or lower actual payload. Report independent-mode failure as the point where private offset parameters are needed.",
+  "boundaries": [
+    "synthetic frozen features, not a language model",
+    "teacher aligned mode is an optimistic mechanism test",
+    "fixed 1,200-update screen; no capacity claim",
+    "throughput on CPU only"
+  ],
+  "protocol_amendments": [
+    {
+      "date": "2026-10-07",
+      "stage": "development only; before fresh access",
+      "reason": "The preregistered <=0.40 full-payload ratio was incompatible with the paid common feature trunk and serializer overhead: the shared trunk is charged identically to all methods and imposes a substantial fixed byte floor.",
+      "change": "Set the full-model payload threshold to <=0.75x MTP, still requiring at least 25% actual serialized byte reduction. Preserve all methods, seeds, rates, updates and quality gates."
+    }
+  ]
+}

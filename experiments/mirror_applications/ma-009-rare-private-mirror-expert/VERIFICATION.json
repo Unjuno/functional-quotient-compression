@@ -1,0 +1,39 @@
+{
+  "experiment_id": "MA-009",
+  "commit": "pending result commit",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-009-rare-private-mirror-expert/tests",
+    "passed": 4,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "rows": 30,
+    "max_abs_delta": {
+      "natural_mse": 4.700317912664786e-10,
+      "rare_role_mse": 4.975584388944299e-10,
+      "balanced_mse": 4.431148781236516e-10,
+      "serialized_bytes": 0
+    },
+    "replay_artifact": "VERIFICATION_REPLAY.json"
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_worlds_opened": true,
+  "fresh_worlds": [
+    90001,
+    90002,
+    90003
+  ],
+  "notes": [
+    "Pre-fresh amended payload gate was 0.80x based on development serialized bytes; actual 0.774x passed all worlds.",
+    "Natural-frequency and rare-role MSE gates missed in two of three aligned fresh worlds, meeting the predeclared failure gate.",
+    "All-Mirror failed badly on the independent rare role; private-rare Mirror substantially reduced error versus shared controls but was inconsistent against full MoE.",
+    "Independent-all mode showed one private matrix is insufficient; rank-1 residual control had better MSE than Mirror-private in all three worlds.",
+    "Mirror CPU throughput was ~0.061x full MoE aligned and median training wall time 3.6x; current eager view implementation is costly.",
+    "Fixed-budget synthetic linear task; result is not a capacity or language-model claim."
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "experiment_id": "MA-116",
+  "title": "Mirror-RoPE across positional domains",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM",
+  "base_commit": "68775c5784f0954adcf72147535a8569adfd8bd9",
+  "hypothesis": "A small learned domain address and shared per-frequency direction can generate distinct rotary frequency schedules from one physical base, extrapolate beyond observed positions, and use less serialized state than independent domain frequencies while beating scalar RoPE scaling.",
+  "physical_object": "One base RoPE frequency vector shared across four positional domains",
+  "mirror_coordinate": "One learned scalar address per domain, combined with one shared learned direction over frequency bands",
+  "logical_multiplicity": "Four domain-specific rotary frequency schedules",
+  "prior_art_refs": ["PA13"],
+  "controls": ["fixed standard RoPE", "learned per-domain scalar frequency scaling", "independent per-domain frequencies"],
+  "development": {"worlds_or_seeds": [11601, 11602], "selection_metric": "held-out long-position sin/cos reconstruction MSE after 800 Adam updates at LR 0.02"},
+  "fresh": {"worlds_or_seeds": [11611, 11612, 11613], "locked_before_access": true},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["base RoPE config/state", "domain addresses", "shared frequency direction", "independent frequency tables", "method metadata"]},
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true},
+  "success_gate": "In all three fresh worlds, Mirror held-out position MSE <=1.10x the independent-frequency control and <=0.10x scalar-scaled RoPE MSE, with at least 1% fewer serialized bytes than independent frequencies. This is a positional reconstruction mechanism gate, not language-model quality.",
+  "failure_gate": "Both development worlds miss either the quality comparison to scalar/independent controls or the actual-byte saving against independent frequencies. Keep fresh worlds sealed after a failure.",
+  "boundaries": ["Synthetic sin/cos positional reconstruction", "Teacher frequency deviations follow the shared address-direction form", "Observed positions 0-15; held-out positions 16-127", "No attention, language, cache, or perplexity claim"]
+}

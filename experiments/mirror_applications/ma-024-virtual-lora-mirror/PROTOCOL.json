@@ -1,0 +1,102 @@
+{
+  "experiment_id": "MA-024",
+  "title": "one LoRA to many virtual LoRAs",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/RUNTIME",
+  "base_commit": "e16fdfc79e62b28c336d19de9db5c447aed261eb",
+  "prior_art_refs": [
+    "PA04",
+    "PA05",
+    "PA06"
+  ],
+  "hypothesis": "One rank-2 LoRA basis plus per-task rank-space Mirror rotations can recover multiple virtual adapter functions from one physical low-rank update at lower payload than independent LoRAs; generic shared-basis coefficient generation is the decisive control.",
+  "physical_object": "shared LoRA factors A (16x2) and B (2x12)",
+  "mirror_coordinate": "per-task 2D latent rotation angle",
+  "logical_multiplicity": "eight task-specific LoRA update functions",
+  "task": {
+    "input_dim": 16,
+    "output_dim": 12,
+    "rank": 2,
+    "tasks": 8,
+    "task_address": "oracle task id derived from signs of first three input dimensions",
+    "teacher_modes": {
+      "shared_rotated_lora": "all task deltas are A R(theta_i) B for shared A,B",
+      "independent_lora": "eight unrelated rank-2 A_i B_i updates"
+    },
+    "primary_metric": "held-out task-conditioned output MSE",
+    "structure_audit": "worst per-task MSE"
+  },
+  "controls": [
+    "independent rank-2 LoRA per task",
+    "one shared rank-2 LoRA for every task",
+    "two generic shared rank-2 LoRA bases with learned per-task coefficients",
+    "small task-embedding hypernetwork that emits two shared-basis coefficients",
+    "shared rank-2 LoRA with one Mirror angle per task"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      {
+        "world": 240000,
+        "init_seed": 2400000
+      }
+    ],
+    "learning_rate_candidates": [
+      0.003,
+      0.01
+    ],
+    "selection_metric": "mean held-out MSE pooled across methods and teacher modes"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      {
+        "world": 240001,
+        "init_seed": 2400001
+      },
+      {
+        "world": 240002,
+        "init_seed": 2400002
+      },
+      {
+        "world": 240003,
+        "init_seed": 2400003
+      }
+    ],
+    "locked_before_access": true
+  },
+  "training": {
+    "updates": 1200,
+    "batch_size": 64,
+    "optimizer": "AdamW",
+    "weight_decay": 0.0001,
+    "dtype": "float32",
+    "matched_minibatches_across_methods": true,
+    "task_address": "oracle task id; no learned routing"
+  },
+  "storage": {
+    "authority": "actual serialized full inference payload bytes",
+    "serialization": "torch.save state_dict plus deterministic config JSON",
+    "paid_objects": [
+      "LoRA factors",
+      "Mirror angles",
+      "task coefficients/embeddings",
+      "generator weights",
+      "metadata"
+    ]
+  },
+  "compute": {
+    "report_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_MAC_proxy": true,
+    "report_wall_time": true,
+    "report_inference_throughput": true,
+    "cpu_threads": 1
+  },
+  "success_gate": "In all three fresh shared-rotated-Lora worlds, Mirror MSE <=1.10x independent LoRA-bank MSE and actual payload <=0.40x LoRA bank; it must beat generic shared-basis/hypernetwork controls by >=10% in bytes at <=5% MSE cost. Independent mode is a private-capacity boundary.",
+  "failure_gate": "Mirror misses full-LoRA quality/storage in at least two fresh worlds or a simpler shared-basis/hypernetwork control matches quality with equal/lower payload and compute. Independent-mode failure alone is a structural boundary.",
+  "boundaries": [
+    "linear adapter deltas over frozen features only",
+    "teacher deliberately aligned to rank-space rotation",
+    "oracle task IDs, no routing claim",
+    "fixed-update synthetic screen, no language/capacity claim"
+  ]
+}

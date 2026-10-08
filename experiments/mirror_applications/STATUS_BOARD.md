@@ -1,54 +1,55 @@
 # Mirror Application Status Board
 
-Updated: 2026-10-08
+Updated: 2026-10-08 JST
+Canonical branch: `research/mirror-application-worker-ready-20261007`
 
-## Program totals
+## Program totals (reconciled from authoritative 875-row registry)
 
 - Registered candidates: **875**
-- P0: **408**
-- P1: **364**
-- P2: **103**
-- Current MA statuses: **869 UNTESTED, 4 PROMISING, 2 FAIL**
-- Historical evidence lanes SRM/TM are not MA statuses.
+- P0: **408** (35 completed; 373 UNTESTED)
+- P1: **364** (12 completed; 352 UNTESTED)
+- P2: **103** (0 completed; 103 UNTESTED)
+- Current MA statuses: **828 UNTESTED, 29 PROMISING, 18 FAIL**
+- 47 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
+- PROMISING is **not** ADOPTED. Treat reports with strict-gate misses or exploratory protocol deviations at their documented scope.
+- SRM/TM and prior Phase I results are not MA statuses.
 
 ## Next candidate
 
-**MA-248 — PTP random variable represented as packet Mirror code**
+**MA-255 — Mirror context superposition for task models (P0; PA16)**
 
-Why next:
-- MA-247 failed its development screen and did not open fresh data;
-- MA-248 is the next pre-existing cross-over P0 candidate;
-- PA10 provides the packet-level stochastic-conditioning control.
+Reason:
+- all previously locked MA-241/244/245/247–251/253 and subsequent old-chain P0 screens have completed;
+- the original P0 cross-over queue is exhausted among checked candidates;
+- MA-255 is the first untested P0 in the earlier high-information literature cross-over queue;
+- direct Parameter Superposition prior art gives a strong nearest control for insertion of the extra Mirror parameter `m`.
 
-If MA-248 is blocked, continue:
-MA-249 -> MA-250 -> MA-251 -> MA-003, then follow WORKER_QUEUE.md.
+Required controls: native Parameter Superposition, naive/shared task-code basis, matched byte-near low-rank or VeRA-style modulation, independent-model upper reference where practical. Do not claim the superposition concept itself as a Mirror invention.
 
-## Active experiments
+If blocked by a documented reproducibility or harness issue, record it and resume at MA-260 (BatchEnsemble), then MA-261/265/268 in the registered literature priority sequence. Do not jump to P1/novelty-picked topics before P0.
 
-No active experiment is registered on this baseline at the time of this update.
+## Active experiment
 
-A worker may create a dedicated branch immediately after this commit. Before another worker claims the same ID, search existing `research/ma-*` branches.
+No active experiment was declared on either inspected baseline/status chain at reconciliation. Before claiming MA-255, check live research/ma-* branches again; this statement is not a realtime worker lock.
 
-## Recently completed
+## Verified status index
 
-- **MA-691 — PROMISING**: exact lazy canonical-cache algebra passed 3/3 fresh seeds; max lazy/materialized error 3.13e-7, RoPE-plane commutation and MLA absorption passed. Dedicated branch `research/ma-691-lazy-kv-mirror-20261007`; verification `3643118351eb026c31fc00802e47381e8cdfba93`.
-- **MA-247 — FAIL** at development screen: depth Givens View was worse than hard tying, scalar gate and static LoRA; fresh worlds remained unopened. Dedicated branch `research/ma-247-recursive-depth-view-20261007`; verified result `62f0acf3f680ff3bbab8e0e20e194f4065f026e5`.
+- **PROMISING (29):** MA-001, MA-002, MA-003, MA-004, MA-005, MA-006, MA-007, MA-008, MA-012, MA-014, MA-015, MA-041, MA-076, MA-079, MA-111, MA-121, MA-156, MA-160, MA-171, MA-173, MA-181, MA-189, MA-241, MA-244, MA-245, MA-249, MA-250, MA-251, MA-691.
+- **FAIL (18):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253.
 
-- **MA-245 — PROMISING**: aligned MLKV layer/role views; 50% cache-state saving vs two-group MLKV, 11.3% serialized model saving (missed 25% gate), eager CPU slowdown. Verified commit `76d91b7a662b4227e7f25e4733e06d6735cf1cd2`.
-- **MA-244 — PROMISING**: aligned K/V role/head views; 50% cache-state saving vs MQA, 10.6% serialized model saving (missed 20% gate), eager CPU slowdown. Verified commit `85de2fd65618d72bd0bf6a091b558a0dda57b741`.
-- **MA-253 — FAIL** for Mirror expert replacement; cache-safe final-FFN placement PASS. Verified commit `1891cbc36d3a99b4dd63517b469f8b246dbf0be0`.
-- **MA-241 — PROMISING**: aligned tied-expert layer views passed 3/3 synthetic quality/storage gates; runtime regressed. Verified commit `0ee183668285231d825e853c69c4791b9d252bf2`.
+All per-ID evidence is retained in the local experiment directories and in `CLAIM_LEDGER.csv`. Consult [the evidence integration audit](../../docs/phase2/MIRROR_MA_EVIDENCE_INTEGRATION_2026-10-08.md) for linked reports, verifications, provenance and claim boundaries.
 
-See `docs/phase2/LATEST_WORKER_FINDINGS.md` for the shared interpretation and mandatory next-design rules.
+## Main scientific findings
 
-## Blocked
+- Aligned functional variation often admits a compact Mirror View, including experts, QKV, future heads, depth and structured codecs.
+- Arbitrary unrelated functions are not made independent by cheap address combinatorics; private residuals are often necessary.
+- In many cases a simple baseline (MQA, broadcast, FiLM, rank-1/2) wins or dominates the Mirror candidate.
+- Many promising byte points have unfavorable eager runtime.
+- MA-691 establishes an exact canonical KV-cache reuse algebra within specified transform conditions; optimized end-to-end cache switching is not yet established.
 
-None.
+## Concurrency and truth policy
 
-## Concurrency rule
-
-Before allocating a new MA ID, re-read the live registry and use max existing ID + 1. After editing, re-read and verify zero duplicate IDs.
-
-## Status policy
-
-The registry row is authoritative for scientific status. This board is an operational cache. If they disagree, fix the board from the registry.
+- The **875-row** `IDEA_REGISTRY.csv` is authoritative for status and candidate identity. Do not merge or overwrite it with an older 254-row experiment checkout.
+- `CLAIM_LEDGER.csv` and each experiment's `VERIFICATION.json` are the evidence index; `STATUS_BOARD.md` is an operational cache.
+- Before allocating an ID or starting work, re-read the live registry and search for experiment branches.
+- Preserve old branches, failed results, exploratory data and locked protocols. No automatic merge to main.

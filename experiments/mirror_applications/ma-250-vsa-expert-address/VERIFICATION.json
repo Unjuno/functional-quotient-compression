@@ -1,0 +1,27 @@
+{
+  "experiment_id": "MA-250",
+  "commit": "05ad4f7efb92a3b7bbe8f4f0674377223d6bc768",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-250-vsa-expert-address/tests",
+    "passed": 4,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "all_payload_bytes_match": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "rows": 48,
+    "max_mse_difference": 4.7644022060922e-10,
+    "max_r2_difference": 4.893341065681511e-09
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_worlds_opened": true,
+  "notes": [
+    "Mirror passed aligned quality/storage gates in all three fresh worlds.",
+    "MAP/Hadamard/HRR used deterministic fixed codes reconstructed from paid seed/algorithm metadata; they were not learned or searched.",
+    "Independent role matrices required untied experts in this linear task; no universal rank claim."
+  ]
+}

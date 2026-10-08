@@ -1,0 +1,17 @@
+{
+  "experiment_id": "MA-171",
+  "amendment_id": "A1",
+  "fixed_before_corrected_fresh_access": true,
+  "issue": "The development selection file selected common learning rate 0.003 by the preregistered aggregate metric. The first fresh command was mistakenly invoked at 0.01.",
+  "exploratory_only": {
+    "seeds": [17111, 17112, 17113],
+    "learning_rate": 0.01,
+    "excluded_from_decision": true
+  },
+  "corrected_qualifying_fresh": {
+    "seeds": [17121, 17122, 17123],
+    "learning_rate": 0.003,
+    "basis": "Selected using development outcomes only; no value was changed in response to the exploratory fresh outputs."
+  },
+  "decision_rule": "Apply the original success and failure gates to the corrected fresh seeds only. Preserve and disclose the exploratory run."
+}

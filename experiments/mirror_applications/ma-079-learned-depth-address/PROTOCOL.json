@@ -1,0 +1,20 @@
+{
+  "experiment_id": "MA-079",
+  "title": "continuous learned depth address",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM",
+  "base_commit": "a761cc84422c323e78ad8290a2ff6581bc39723a",
+  "hypothesis": "A compact polynomial depth address driving a shared Givens view can recover unobserved intermediate layer functions from endpoint and sparse-depth supervision, at lower serialized bytes than independent layers and better held-out quality than tying, static step LoRA, and generated diagonal modulation.",
+  "physical_object": "One shared 8x8 linear block reused at eight logical depths",
+  "mirror_coordinate": "Normalized depth address [z,z^2] mapped to one learned Givens angle",
+  "logical_multiplicity": "Eight depth-specific maps, with only depths 0,2,5,7 supervised during training",
+  "prior_art_refs": ["PA01", "PA06"],
+  "controls": ["ordinary tying", "static per-step rank-1 LoRA", "depth-addressed shared diagonal gain", "untied matrices"],
+  "development": {"worlds_or_seeds": [79001, 79002], "selection_metric": "held-out intermediate-depth test MSE after 600 Adam updates at LR 0.01"},
+  "fresh": {"worlds_or_seeds": [79011, 79012, 79013], "locked_before_access": true},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["shared/untied weights", "address generator coefficients", "LoRA factors", "generated gains", "method metadata"]},
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true},
+  "success_gate": "For the aligned teacher, Mirror held-out-depth MSE <=1.10x the best among tied and generated-address controls and <=1.10x the all-depth untied oracle in 3/3 fresh worlds; payload <=0.80x untied. Report independent teacher as boundary. This remains a fixed-budget interpolation/learning-efficiency screen.",
+  "failure_gate": "On both development worlds, Mirror held-out MSE is >1.10x the best generalizing simple control, or the aligned quality/byte gate is missed. Do not open fresh worlds after failure.",
+  "boundaries": ["Synthetic linear blocks", "Only four of eight depths supervised", "Normalized polynomial address fixed in advance", "CPU screen; not a capacity or language claim"]
+}

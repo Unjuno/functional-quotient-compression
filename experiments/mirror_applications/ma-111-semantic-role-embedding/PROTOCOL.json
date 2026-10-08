@@ -1,0 +1,124 @@
+{
+  "experiment_id": "MA-111",
+  "title": "semantic-role Mirror embedding",
+  "status": "FROZEN_FOR_FRESH",
+  "evidence_lane": "EMBEDDING/ROLE_TRANSFER/STORAGE/QUALITY/RUNTIME",
+  "base_commit": "6e0ed10a094f9a082a144a2d8d86f508fd4cbad6",
+  "hypothesis": "One shared token embedding table and output readout plus one small Givens coordinate per semantic role can preserve role-conditioned next-token distributions on unseen lexical fillers with lower actual inference payload than private role maps; unrelated role transforms need richer or private maps.",
+  "physical_object": "One frozen 32x16 token embedding table and one frozen 16x8 next-symbol readout, shared across four roles",
+  "mirror_coordinate": "One learned float32 Givens angle for each of roles patient, instrument, and location; agent is the base role",
+  "logical_multiplicity": "Four role-conditioned input token embedding functions",
+  "prior_art_refs": [
+    "PA13",
+    "arXiv:2608.29034",
+    "arXiv:2603.26663",
+    "arXiv:2605.29459",
+    "arXiv:2509.17737"
+  ],
+  "targeted_literature": [
+    "Attention as Binding: A Vector-Symbolic Perspective on Transformer Reasoning (arXiv:2512.14709)",
+    "A Unifying Perspective on Language Model Representations: From Filler-Role Structure to Mechanistic Interpretability (arXiv:2608.29034)",
+    "Weight Tying Biases Token Embeddings Towards the Output Space (arXiv:2603.26663)",
+    "Kronecker Embeddings: Byte-Level Structured Token Representations for Parameter-Efficient Language Models (arXiv:2605.29459)",
+    "Aggregate Semantic Grouping (arXiv:2509.17737)"
+  ],
+  "task": {
+    "filler_vocabulary": 32,
+    "roles": [
+      "agent",
+      "patient",
+      "instrument",
+      "location"
+    ],
+    "hidden_dim": 16,
+    "next_token_classes": 8,
+    "train_filler_ids": "0..23",
+    "heldout_filler_ids": "24..31",
+    "aligned_teacher": "Shared base embedding/readout with one role-conditioned Givens rotation of the first two embedding coordinates",
+    "independent_teacher": "Independent random orthogonal input transform for each role",
+    "objective": "Temperature-2 forward KL teacher/student next-token distributions multiplied by T^2"
+  },
+  "controls": [
+    "hard tied role embeddings",
+    "additive role vectors",
+    "role FiLM scale/shift",
+    "per-role rank-2 input LoRA",
+    "per-role rank-2 output-head LoRA",
+    "per-role full output-head/unbinding map",
+    "fixed VSA sign-binding role codes",
+    "learned full per-role input maps",
+    "exact teacher function upper reference"
+  ],
+  "development": {
+    "seeds": [
+      11101,
+      11102
+    ],
+    "learning_rate_candidates": [
+      0.003,
+      0.01
+    ],
+    "examples_per_role_per_update": 128,
+    "updates_per_role": 300,
+    "selection_metric": "mean held-out teacher KL over all methods, teacher families, and both development seeds; top-1, payload, then runtime are tie-breakers"
+  },
+  "fresh": {
+    "seeds": [
+      11111,
+      11112,
+      11113
+    ],
+    "locked_before_access": true,
+    "learning_rate": 0.01
+  },
+  "storage": {
+    "authority": "actual deterministic serialized inference payload bytes",
+    "serialization": "packed records charge shared embedding/readout, all role transforms/codes, role IDs, method, tensor names/dtype/shapes, dimensions and header",
+    "resume": "torch.save inference state plus optimizer moments and counters, reported separately",
+    "paid_objects": [
+      "shared token embeddings",
+      "shared output readout and bias",
+      "role coordinates or alternative role maps",
+      "task/role IDs and metadata",
+      "all codebooks or role binding vectors if stored"
+    ]
+  },
+  "metrics": [
+    "held-out soft-target next-token NLL",
+    "held-out teacher/student KL",
+    "teacher/student top-1 agreement",
+    "ECE against teacher argmax",
+    "per-role transfer to held-out filler IDs",
+    "actual total and incremental serialized bytes",
+    "resume bytes",
+    "examples/updates/MAC proxy/wall time",
+    "inference throughput"
+  ],
+  "inference_benchmark": "Final role, batch 2048, 5 warm-ups and 50 timed CPU forwards with torch threads fixed to one",
+  "compute_proxy": "per-example readout D*C MACs plus an implementation-independent operation-equivalent estimate for each role transform; report wall time and measured CPU throughput separately",
+  "success_gate": "Each of three fresh aligned worlds: held-out KL <=1e-4, top-1 agreement >=0.99, ECE <= full-map ECE +0.02, actual total payload <=0.60x full per-role maps, and Mirror KL <= rank-2 output-LoRA KL +1e-4. A simpler control matching quality at lower/equal bytes and compute precludes Mirror-specific advantage.",
+  "failure_gate": "Both development worlds miss either the absolute KL/top-1 quality requirement or <=0.60x full-map total-payload requirement; fresh stays sealed.",
+  "boundaries": [
+    "Synthetic one-step next-symbol distribution, not natural-text language modeling",
+    "Teacher role address is provided",
+    "Aligned family is generated from the candidate Givens transform",
+    "Fixed 300-update learning-efficiency screen, not near-convergence capacity evidence",
+    "Independent random orthogonal maps test need for private role functions"
+  ],
+  "development_selection_result": {
+    "selected_learning_rate": 0.01,
+    "aggregate_mean_heldout_kl": {
+      "0.003": 0.0033399584677267307,
+      "0.01": 0.0032245844103399924
+    },
+    "selection_rule": "registered mean across all methods, both teacher families and both development seeds",
+    "fresh_config_frozen_before_access": true
+  },
+  "amendments": [
+    {
+      "date": "2026-10-07",
+      "timing": "after development and before fresh access",
+      "change": "Freeze registered development-selected LR 0.01 for all fresh runs; no model, seed, data, update, metric, or success-gate changes."
+    }
+  ]
+}

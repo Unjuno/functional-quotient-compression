@@ -1,0 +1,63 @@
+{
+  "decision": "PROMISING",
+  "deterministic_fields_exact": true,
+  "development_rows": 36,
+  "experiment_id": "MA-015",
+  "fresh_config_freeze_commit": "7be4b69d5fc2346f68ad5f47920a7c451f40a2fb",
+  "fresh_freeze_hashes_checked_before_access": true,
+  "fresh_freeze_hashes_matched_frozen_commit": true,
+  "fresh_mirror_to_independent_mse_ratio": [
+    0.5561366318855903,
+    0.50252378844705,
+    0.6211022059977186
+  ],
+  "fresh_mirror_to_rank2_mse_ratio": [
+    0.959,
+    0.945,
+    0.939
+  ],
+  "fresh_mirror_to_tied_mse_ratio": [
+    0.394,
+    0.404,
+    0.625
+  ],
+  "fresh_payload_ratio_to_independent": 0.3668,
+  "fresh_payload_ratio_to_tied": 1.0278,
+  "fresh_rows": 36,
+  "fresh_rows_replayed": 36,
+  "independent_teacher_mirror_mse": [
+    0.0247043,
+    0.0233547,
+    0.0252372
+  ],
+  "notes": [
+    "Aligned quality/storage and hard-tie gates passed all three fresh worlds.",
+    "Mirror traded more eager runtime for lower payload and quality.",
+    "Independent domain-expert functions needed private state.",
+    "Synthetic fixed-update factorized teacher only; no capacity or language claim."
+  ],
+  "protocol_freeze_commit": "14facb3c072228129945d925200a3a4eacc95a77",
+  "result_commit": "65e006d1f4b2fac64c4b89d89437e36f481f6ea9",
+  "selected_learning_rate": 0.003,
+  "serialization": {
+    "all_rows_bytes_measured": true,
+    "authority": "actual torch.save state_dict plus deterministic compact config bytes",
+    "payload_bytes_by_method": {
+      "gate": 18409,
+      "independent": 51060,
+      "mirror": 18727,
+      "rank1": 20966,
+      "rank2": 23270,
+      "tied": 18221
+    }
+  },
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-015-domain-factorized-experts/tests",
+    "failed": 0,
+    "passed": 3
+  },
+  "timing_fields_excluded": [
+    "train_wall_seconds",
+    "inference_examples_per_second"
+  ]
+}

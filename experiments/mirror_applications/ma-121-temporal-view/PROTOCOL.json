@@ -1,0 +1,20 @@
+{
+  "experiment_id": "MA-121",
+  "title": "packet phase-slot Mirror head",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM",
+  "base_commit": "e04e131926978fada98129d52e2146534a8db6e9",
+  "hypothesis": "One shared packet-token head plus small per-slot phase coordinates can recover four correlated future-token functions with lower actual payload than independent MTP heads while retaining joint packet accuracy and beating a low-rank PTP-style shared control.",
+  "physical_object": "One shared 8-to-8 token prediction head",
+  "mirror_coordinate": "One learned Givens phase per future slot",
+  "logical_multiplicity": "Four logical future-token slot functions from one physical head",
+  "prior_art_refs": ["PA09", "PA10"],
+  "controls": ["hard tied shared head", "rank-2 shared packet-conditioned/slot-code control", "independent MTP heads", "small sequential token-feedback decoder"],
+  "development": {"worlds_or_seeds": [12101, 12102], "selection_metric": "joint slot NLL and exact packet accuracy after 500 Adam updates at LR 0.02"},
+  "fresh": {"worlds_or_seeds": [12111, 12112, 12113], "locked_before_access": true},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["shared or per-slot heads", "phase angles", "slot-code basis and coefficients", "AR slot/token embeddings", "method metadata"]},
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true},
+  "success_gate": "On aligned fresh worlds, Mirror joint NLL <=1.10x MTP, exact packet accuracy within 0.01 of MTP, payload <=0.80x MTP and no larger than the rank-2 slot-code control. Report generated tokens/s. This is a synthetic packet mechanism gate only.",
+  "failure_gate": "Both development worlds miss either quality/packet-consistency or actual-byte gates, or Mirror loses to the simple rank-2 shared control on both quality and bytes. Keep fresh worlds sealed after failure.",
+  "boundaries": ["Synthetic four-slot classification, not a language model", "Aligned teacher uses per-slot Givens rotations", "Sequential control has token feedback but no Transformer KV cache", "No end-to-end speculative decoding claim"]
+}

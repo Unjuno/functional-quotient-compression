@@ -1,0 +1,38 @@
+{
+  "experiment_id": "MA-048",
+  "commit": "pending result commit",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-048-physical4-logical16-attention/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "rows": 24,
+    "max_abs_delta": {
+      "attention_output_mse": 4.881515330845687e-12,
+      "worst_logical_head_mse": 1.4183619556629168e-12,
+      "r2": 4.959106458812812e-09,
+      "serialized_bytes": 0
+    },
+    "replay_artifact": "VERIFICATION_REPLAY.json"
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_worlds_opened": true,
+  "fresh_worlds": [
+    48001,
+    48002,
+    48003
+  ],
+  "notes": [
+    "All frozen protocol/source/test/selection/dev-row hashes verified before fresh access.",
+    "Payload gate passed 3/3 (10,401B vs 18,405B = 0.565x), but aggregate attention-output MSE gate failed 3/3.",
+    "Worst logical-head contribution MSE was lower for Mirror than full MHA in all three aligned worlds, despite worse aggregate output MSE.",
+    "Mirror compute proxy was 20.0M vs full MHA 32.9M, but CPU throughput was 0.189x on aligned path due eager Givens transforms.",
+    "Independent16 mode was not represented by four shared QKV sets. Fixed 600-update synthetic attention only."
+  ]
+}

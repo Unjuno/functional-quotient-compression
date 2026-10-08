@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-013",
+  "title": "multiplicative Mirror-MoE",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/COMPUTE",
+  "base_commit": "62a801584be2cf504e5142b9e7689f6ee44b5ea5",
+  "hypothesis": "A product of two low-description hidden-channel scale views can create four useful logical experts from one shared FFN, with lower payload than independent experts and better quality than hard tying.",
+  "physical_object": "one 16x32x16 GELU FFN",
+  "mirror_coordinate": "two binary role coordinates that multiply shared hidden scale factors channelwise",
+  "logical_multiplicity": "four expert functions from s_r=(1+a_(r//2)u) elementwise-multiplied by (1+b_(r%2)v)",
+  "prior_art_refs": ["PA01", "PA02", "PA03"],
+  "controls": ["four independent full experts", "hard-tied shared FFN", "per-role FiLM hidden scales", "shared FFN plus rank-2 output residual", "factorized multiplicative Mirror hidden scales"],
+  "task": {"input_dim":16,"hidden_dim":32,"output_dim":16,"experts":4,"activation":"GELU","routing":"balanced oracle top-1 roles supplied to all methods","teacher_modes":{"aligned":"shared FFN with hidden multiplier (1+a_i u) elementwise-multiplied by (1+b_j v), i=r//2,j=r%2","independent":"four unrelated full MLP experts"},"primary_metric":"held-out routed MSE","structure_audit":"per-role MSE and hidden multiplier dispersion"},
+  "development": {"worlds":[130000],"teacher_seeds":[1300000],"initialization_seeds":[13000000],"learning_rate_candidates":[0.001,0.003,0.01],"updates":1200,"batch_size":64,"selection_metric":"mean held-out MSE across five methods and both teacher modes"},
+  "fresh": {"worlds":[130001,130002,130003],"teacher_seeds":[1300001,1300002,1300003],"initialization_seeds":[13000001,13000002,13000003],"locked_before_access":true,"access_condition":"At selected learning rate, multiplicative Mirror aligned MSE <=1.25x full independent and payload <=0.80x independent; otherwise fresh remains sealed."},
+  "training":{"optimizer":"AdamW","weight_decay":0.0001,"dtype":"float32","matched_minibatches_across_methods":true,"all_methods_same_updates":true,"threads":1},
+  "storage":{"authority":"actual serialized inference payload bytes","serialization":"torch.save CPU state_dict plus deterministic compact JSON config","paid_objects":["full/shared matrices","FiLM scales","rank-2 residual factors","multiplicative basis vectors and role scalars","metadata"]},
+  "compute":{"report_examples":true,"report_updates":true,"report_active_MAC_proxy":true,"report_wall_time":true,"report_inference_throughput":true,"inference_batch_size":1024,"inference_repetitions":20},
+  "success_gate":"All three fresh aligned worlds: multiplicative Mirror MSE <=1.10x full independent, payload <=0.75x independent, and at least 10% lower MSE than hard tying with <=10% extra bytes. Compare explicitly to full FiLM and rank-2 residual; this is not Mirror-specific if either matches at equal/lower bytes.",
+  "failure_gate":"Development access gate misses; or at least two fresh aligned worlds miss quality or bytes; or hard tie/FiLM/rank-2 matches Mirror within 10% quality at equal/lower bytes in at least two worlds.",
+  "boundaries":["synthetic balanced roles","teacher deliberately contains factorized multiplicative scale interaction","independent teacher marks private-function boundary","fixed-update screen, not capacity","oracle routing only","no language claim"],
+  "protocol_frozen_before_development":true
+}

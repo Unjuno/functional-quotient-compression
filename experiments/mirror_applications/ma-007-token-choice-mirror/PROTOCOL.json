@@ -1,0 +1,132 @@
+{
+  "experiment_id": "MA-007",
+  "title": "token-choice nonlinear Mirror with expert-choice crossover",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/COMPUTE/RUNTIME",
+  "base_commit": "a556e63",
+  "hypothesis": "On balanced overlapping role clouds, token-choice Mirror routes every example to one shared-FFN view and recovers full token-choice quality at lower bytes, avoiding the no-route loss from expert-choice Mirror; simple tied/gate/residual controls must be beaten for Mirror-specific value.",
+  "scope_delta": "MA-001 tested nonlinear top-1 on sign quadrants. This is a paired router-policy crossover on balanced noisy class clouds motivated by MA-006: token-choice Mirror vs expert-choice Mirror under the same task distribution and expert family.",
+  "physical_object": "one 16x32x16 GELU FFN",
+  "mirror_coordinate": "four role-specific four-angle Givens input/output views",
+  "logical_multiplicity": "four roles; exactly one token-choice role active per token",
+  "prior_art_refs": [
+    "PA01",
+    "PA02",
+    "PA03"
+  ],
+  "controls": [
+    "full independent expert-choice",
+    "full independent token-choice top-1",
+    "full rank-2-router token-choice",
+    "hard-tied token-choice",
+    "tied+FiLM token-choice",
+    "tied+rank-2 residual token-choice",
+    "token-choice Mirror",
+    "expert-choice Mirror crossover"
+  ],
+  "task": {
+    "input_dim": 16,
+    "hidden_dim": 32,
+    "output_dim": 16,
+    "experts": 4,
+    "activation": "GELU",
+    "balanced_batch": {
+      "batch_size": 64,
+      "examples_per_role": 16
+    },
+    "input": "overlapping Gaussian role clouds with fixed class centers",
+    "primary_metric": "held-out routed MSE",
+    "structure_audit": "token coverage, role recall, dominant-role accuracy"
+  },
+  "teacher": {
+    "aligned": "one frozen nonlinear FFN conjugated by per-role Givens views",
+    "independent": "four independently initialized FFNs",
+    "routing_target": "balanced role label supplied by synthetic data generator"
+  },
+  "development": {
+    "world": 70000,
+    "teacher_seed": 700000,
+    "initialization_seed": 7000000,
+    "learning_rate_candidates": [
+      0.001,
+      0.003,
+      0.01
+    ],
+    "selection_metric": "mean held-out MSE across eight methods and both teacher modes",
+    "updates": 1200,
+    "batch_size": 64
+  },
+  "fresh": {
+    "worlds": [
+      70001,
+      70002,
+      70003
+    ],
+    "teacher_seeds": [
+      700001,
+      700002,
+      700003
+    ],
+    "initialization_seeds": [
+      7000001,
+      7000002,
+      7000003
+    ],
+    "locked_before_access": true,
+    "access_condition": "At selected LR, aligned token-choice Mirror MSE <=1.25x full token-choice MSE and payload <=0.65x full token-choice payload; otherwise FAIL and keep fresh sealed."
+  },
+  "training": {
+    "optimizer": "AdamW",
+    "weight_decay": 0.0001,
+    "router_weight_decay": 0.0,
+    "router_auxiliary_cross_entropy_weight": 1.0,
+    "dtype": "float32",
+    "matched_minibatches_across_methods": true,
+    "threads": 1,
+    "all_methods_same_updates": true
+  },
+  "routing": {
+    "token_choice": "Each token chooses argmax router expert; one active expert and full token coverage.",
+    "expert_choice": "Each expert selects batch_size/experts tokens; overlaps/no-route remain unchanged for paired comparison.",
+    "no_fallback": true
+  },
+  "storage": {
+    "authority": "actual serialized full inference payload bytes",
+    "serialization": "torch.save CPU state dict and deterministic compact config",
+    "paid_objects": [
+      "router",
+      "all expert/shared FFN tensors",
+      "Mirror angles",
+      "FiLM/residual control tensors",
+      "metadata"
+    ]
+  },
+  "compute": {
+    "report_examples": true,
+    "report_updates": true,
+    "report_active_FFN_calls": true,
+    "report_MAC_proxy": true,
+    "report_coordinate_FLOPs": true,
+    "report_coverage": true,
+    "report_training_wall": true,
+    "report_inference_throughput": true,
+    "inference_batch_size": 1024,
+    "inference_repetitions": 20
+  },
+  "gates": {
+    "development_open_fresh": "Aligned token-choice Mirror MSE <=1.25x full token-choice and payload <=0.65x; otherwise FAIL and fresh sealed.",
+    "fresh_useful_sharing": "All three fresh aligned worlds: token-choice Mirror MSE <=1.10x full token-choice, full coverage, and payload <=0.65x full token-choice.",
+    "mirror_specific": "All aligned worlds: Mirror MSE at least 10% below tied, FiLM and rank-2 residual at no more than 10% greater payload or active compute.",
+    "fail": "Development gate misses; or fresh token-choice quality/storage fails in at least two worlds; or simple controls match within 10% at equal/lower bytes and compute in at least two worlds.",
+    "promising": "Useful-sharing passes in >=2/3 worlds, or 3/3 while a Pareto/simple-control limitation is identified.",
+    "not_established": "Invalid/missing worlds, split leak, or irreproducible serialization."
+  },
+  "boundaries": [
+    "synthetic balanced role clouds",
+    "single layer and four roles",
+    "aligned teacher favors Givens views",
+    "fixed updates not capacity proof",
+    "no language model, large-scale balance or optimized GPU claim"
+  ],
+  "protocol_frozen_before_development": true
+}

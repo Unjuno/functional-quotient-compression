@@ -1,0 +1,34 @@
+{
+  "experiment_id": "MA-181",
+  "commit": "09fadf2f2908ce81742d2de09ea6ffa42b40cc30",
+  "tests": {
+    "command": "PYTHONPATH=experiments/mirror_applications/ma-181-block-circulant-mirror/source python -m pytest -q experiments/mirror_applications/ma-181-block-circulant-mirror/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "notes": "Each method payload restores identical outputs; block-shift buffer is stored as 64 int8 indices. Kernel bank, biases, method, dimensions, shifts, seeds, and metadata are included in torch.save payloads."
+  },
+  "metric_replay": {
+    "checked": true,
+    "report_records": 162,
+    "distinct_training_rows_replayed": 126,
+    "max_mse_difference": 4.865112757101997e-10,
+    "max_r2_difference": 4.972686762361178e-09,
+    "payload_bytes_and_compute_exact": true,
+    "replay_artifact": ["RESULTS_CORE.csv", "DEV_SELECTION_GRID.csv"],
+    "command": "PYTHONPATH=experiments/mirror_applications/ma-181-block-circulant-mirror/source python experiments/mirror_applications/ma-181-block-circulant-mirror/source/verify_replay.py experiments/mirror_applications/ma-181-block-circulant-mirror/RESULTS_CORE.csv experiments/mirror_applications/ma-181-block-circulant-mirror/RESULTS_EXPLORATORY.csv experiments/mirror_applications/ma-181-block-circulant-mirror/DEV_SELECTION_GRID.csv"
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_worlds_opened": true,
+  "notes": [
+    "Targeted prior-art search covered BCA, generalized structured matrices, compact spectral circulant/BCCB layers, MAP, and Hadamard binding.",
+    "Learning rate 0.01 was selected on both development seeds by the preregistered all-method/all-condition mean-MSE metric before fresh access.",
+    "Block-shift Mirror passed registered quality and actual-byte gates in all three fresh aligned worlds.",
+    "The independent block-circulant baseline was a strong storage/quality control; block-shift used 21% fewer bytes with similar quality.",
+    "Measured eager runtime was substantially slower. MAC proxy assumes FFT block execution and does not establish actual latency improvement.",
+    "Fixed-update aligned synthetic evidence; no capacity or language-model claim."
+  ]
+}
