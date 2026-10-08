@@ -151,7 +151,7 @@ High-information P0:
 5. MA-461/462/463 — HyperFormer versus generated Mirror adapters (**MA-461/462 FAIL on repeated code-vs-seen-fit/attribution causes; pause MA-463 unchanged variants; see family diagnostic**)
 6. MA-464 — AdaMix over logical Mirror adaptations
 7. MA-466 — UniPELT components as Mirror axes (**FAIL; useful factorized gates but only 15.8% byte reduction, 19% more MAC proxy, and exact native CP alias; fresh sealed**)
-8. MA-468 — Polytropon shared/private skill bank + Views
+8. MA-468 — Polytropon shared/private skill bank + Views (**NOT ESTABLISHED; independent upper missed frozen quality validity bound; exact native low-rank alias and bytes worse; fresh sealed**)
 9. MA-469/470 — MEND-generated Mirror edit codes
 10. MA-471 — ROME rank-one edit as Mirror coordinate
 11. MA-473 — MEMIT edit basis + Mirror memory codes

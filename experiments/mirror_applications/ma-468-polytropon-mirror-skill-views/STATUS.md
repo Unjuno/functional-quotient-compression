@@ -6,9 +6,9 @@
 - Protocol frozen: yes; SHA-256 b3414014b770b6cd5e599c96f37e8d71c64b1c647915d5f897fcacae4ef7d4f8
 - Development complete: yes; seeds 46801, 46802
 - Fresh/audit opened: no; sealed because independent upper missed its validity threshold
-- Results committed: pending
-- Verification committed: pending
-- Registry row: SCREENING until terminal metadata update
+- Results committed: a389a6bf43811bf8ece39cf4a0e26853d24afd47
+- Verification record: points to result commit a389a6bf43811bf8ece39cf4a0e26853d24afd47
+- Registry row: NOT ESTABLISHED
 
 ## Decision
 
