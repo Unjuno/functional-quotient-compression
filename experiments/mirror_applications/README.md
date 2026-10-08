@@ -32,6 +32,8 @@ Before starting an MA experiment, read:
 - [fourteenth sweep: time-series forecasting, DLRM embeddings and Earth-observation sensors](../../docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_FOURTEENTH_SWEEP.md)
 - [fifteenth sweep: natural LoRA banks, gauge invariance and cache sharing](../../docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_FIFTEENTH_SWEEP.md)
 - [runnable gauge-invariant adapter orbit intake](research_intake/natural_lora_orbit_20261008/README.md) — mathematics/manifest tests; not a completed MA experiment
+- [function-space/marginal m research](../../docs/phase2/MIRROR_FUNCTION_SPACE_FALSIFICATION_2026-10-08.md) — PA372..381 direct controls and a negative real-image functional code pilot
+- [real-digit real-image adaptation pilot](research_intake/natural_digit_function_20261008/RESULTS.md) — frozen protocol, runnable source, 48-row results, replay; NOT an MA status
 - [run registry integrity check](check_registry_integrity.py) — supports MA-1000 and beyond
 - [worker queue](WORKER_QUEUE.md)
 - [experiment template](TEMPLATE/)
