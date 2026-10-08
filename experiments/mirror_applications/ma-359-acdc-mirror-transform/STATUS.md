@@ -3,7 +3,7 @@
 - Status: FAIL for Mirror-specific value
 - Branch: `research/ma-359-acdc-mirror-transform-20261008`
 - Base commit: `c935a90`
-- Last verified commit: pending
+- Last verified commit: `4908f2c2118e1856a8df738e30e844a6afde80af`
 - Development complete: yes
 - Fresh/audit opened: no; seeds 35911–35913 remain sealed
 - Results committed: yes
