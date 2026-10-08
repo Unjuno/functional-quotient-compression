@@ -1,9 +1,25 @@
 {
   "experiment_id": "MA-331",
-  "commit": "pending",
-  "tests": {"command": "python -m pytest -q experiments/mirror_applications/ma-331-rebasin-mirror-task-deltas/tests", "passed": 4, "failed": 0},
-  "serialization": {"roundtrip_checked": true, "byte_exact": true, "payloads_checked": 8, "max_abs_metric_replay_difference": 0.0},
-  "metric_replay": {"checked": true, "max_difference": 0.0},
+  "commit": "207d8360c71f0d4103f9c9b3c35b7f044676a4d0",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-331-rebasin-mirror-task-deltas/tests",
+    "passed": 4,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "payloads_checked": 8,
+    "max_abs_metric_replay_difference": 0.0
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
   "fresh_split_integrity_checked": false,
-  "notes": ["Fresh seeds 33111-33113 remained sealed because the fixed-shape development payload missed the preregistered 10% byte margin: 2,562B Mirror vs 2,574B direct.", "Development payload byte/hash and FP16-reloaded function metrics replayed exactly for all eight rows.", "Scope: synthetic post-fit ReLU functions with oracle-known permutation symmetry and task coordinates."]
+  "notes": [
+    "Fresh seeds 33111-33113 remained sealed because the fixed-shape development payload missed the preregistered 10% byte margin: 2,562B Mirror vs 2,574B direct.",
+    "Development payload byte/hash and FP16-reloaded function metrics replayed exactly for all eight rows.",
+    "Scope: synthetic post-fit ReLU functions with oracle-known permutation symmetry and task coordinates."
+  ]
 }
