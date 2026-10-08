@@ -1,0 +1,9 @@
+{
+  "experiment_id": "MA-341",
+  "commit": "<RESULT_COMMIT>",
+  "tests": {"command": "python -m pytest -q experiments/mirror_applications/ma-341-federated-mirror-vs-pfedhn/tests", "passed": 3, "failed": 0},
+  "serialization": {"roundtrip_checked": true, "byte_exact": true, "development_payloads_checked": 14, "mirror_native_phase_hashes_identical": true, "max_metric_replay_difference": 0.0},
+  "metric_replay": {"command": "python experiments/mirror_applications/ma-341-federated-mirror-vs-pfedhn/source/verify.py", "checked": true, "development_rows_replayed": 14, "fresh_rows": 0, "max_difference": 0.0},
+  "fresh_split_integrity_checked": true,
+  "notes": ["Development seeds 34101 and 34102 were the only task worlds accessed; fresh seeds 34111–34113 remain sealed.", "Mirror and ordinary scalar-phase control inference payloads had identical bytes and SHA-256 hashes.", "Linear synthetic client-regression mechanism only; not a nonlinear pFedHN training reproduction."]
+}
