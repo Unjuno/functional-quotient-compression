@@ -1,0 +1,54 @@
+{
+  "experiment_id": "MA-304",
+  "title": "Supermask plus Mirror transform inside active edges",
+  "status": "PROTOCOL_FROZEN_BEFORE_DEVELOPMENT",
+  "base_commit": "a9eeb0e",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY/COMPUTE/RUNTIME",
+  "hypothesis": "With active edge count fixed at 256 of 1024 per task, a one-phase Mirror transform on a shared sparse edge basis will recover aligned task functions at test nMSE<=0.02 and reduce actual serialized bytes by >=10% versus direct two-coefficient modulation, with no additional private fallbacks; unrelated tasks will quantify where private sparse weights are needed.",
+  "prior_art_refs": ["PA31"],
+  "physical_object": "single 32x32 linear backbone with a fixed 25%-density shared support for aligned tasks",
+  "mirror_coordinate": "one task phase rotates between two learned shared sparse edge-weight bases, with exactly 256 active edges",
+  "logical_multiplicity": "128 aligned task functions from one sparse support plus 16 unrelated private fallback tasks",
+  "world": {
+    "input_dim": 32,
+    "output_dim": 32,
+    "aligned_tasks": 128,
+    "unrelated_tasks": 16,
+    "active_edges_per_task": 256,
+    "support_examples_per_task": 64,
+    "validation_examples_per_task": 32,
+    "test_examples_per_task": 64,
+    "phase_search_grid": 512,
+    "private_fallback_threshold": 0.02,
+    "development_seeds": [30401, 30402],
+    "fresh_seeds": [30411, 30412, 30413],
+    "optimizer_updates": 0
+  },
+  "controls": [
+    "dense shared random linear backbone without task mask/view",
+    "SupSup/Piggyback-style task-specific binary mask over one dense random backbone with 256 active edges",
+    "hard-tied shared sparse backbone",
+    "shared sparse basis plus one free scalar gate",
+    "shared sparse two-basis modulation with two free coefficients/task and identical private fallback",
+    "shared sparse two-basis modulation with one Mirror phase/task and identical private fallback",
+    "independent FP16 full task matrices as upper control"
+  ],
+  "storage": {
+    "authority": "actual deterministic serialized inference payload bytes after reload",
+    "format": "fixed-timestamp ZIP of sorted NPY arrays",
+    "paid_objects": ["shared dense/sparse backbone", "shared sparse edge indices", "both shared sparse bases", "gate/direct/Mirror task codes", "binary supermasks", "private sparse residuals or full matrices", "task IDs and metadata"],
+    "private_rule": "validation nMSE > 0.02 stores the task's 256 active target edge values and indices in both direct and Mirror variants"
+  },
+  "compute": {
+    "report_examples_and_updates": true,
+    "report_active_edge_MAC_proxy": true,
+    "report_phase_search_operation_proxy_and_wall_time": true,
+    "report_serialization_reload_and_eager_CPU_throughput": true
+  },
+  "gates": {
+    "promising": "All 3 fresh seeds: Mirror max aligned test nMSE<=0.02; Mirror total payload <=0.90x direct-pair payload and <=0.90x SupSup mask payload; no additional private fallbacks; active edges exactly 256/task.",
+    "fail": "Mirror quality gate missed in >=2 fresh seeds, or Mirror payload >= direct-pair payload in >=2 seeds, or private fallbacks remove the byte advantage in >=2 seeds.",
+    "not_established": "serialization/hash replay mismatch, split leakage, or active edge counts differ across compared methods"
+  },
+  "boundaries": ["synthetic post-fit linear function screen; no optimizer updates", "teacher aligned functions intentionally occupy a shared sparse phase orbit", "oracle task IDs and fixed active support", "independent full control is not a trained SupSup reproduction", "no natural task or learned capacity claim"]
+}
