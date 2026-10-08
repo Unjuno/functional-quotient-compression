@@ -1,0 +1,10 @@
+condition,world_or_seed,method,serialized_bytes,train_tokens_or_examples,optimizer_updates,active_compute_proxy,wall_time_s,primary_metric,primary_value,secondary_metric,secondary_value,status_note
+fresh_mean,41710-41712,continuous2,3161,128000,500,128 MAC/query,0.216,normalized_rmse,0.7099,unique_codes,16,continuous latent reference
+fresh_mean,41710-41712,mirror2,2905,128000,500,72 MAC/query,0.375,normalized_rmse,0.8620,unique_codes,16,more compact but lower quality
+fresh_mean,41710-41712,mirror_cb4,3093,128000,500,72 MAC/query,0.420,normalized_rmse,0.9348,unique_codes,4,matched latent cb4 is better
+fresh_mean,41710-41712,mirror_cb8,3093,128000,500,72 MAC/query,0.418,normalized_rmse,0.9007,unique_codes,7.1,matched latent cb8 is better
+fresh_mean,41710-41712,mirror_cb16,3157,128000,500,72 MAC/query,0.396,normalized_rmse,0.9032,unique_codes,9.6,FAIL; 13% worse than continuous latent2
+fresh_mean,41710-41712,latent_cb4,3349,128000,500,128 MAC/query,0.264,normalized_rmse,0.8657,unique_codes,4,ordinary matched codebook control
+fresh_mean,41710-41712,latent_cb8,3349,128000,500,128 MAC/query,0.286,normalized_rmse,0.8646,unique_codes,6.6,ordinary matched codebook control
+fresh_mean,41710-41712,latent_cb16,3413,128000,500,128 MAC/query,0.279,normalized_rmse,0.7994,unique_codes,10,ordinary matched codebook control
+fresh_mean,41710-41712,independent,8349,128000,500,64 MAC/query,0.269,normalized_rmse,0.5569,unique_codes,16,quality upper control
