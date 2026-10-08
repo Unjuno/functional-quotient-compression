@@ -29,7 +29,9 @@ MA-274 is **FAIL (development screen)**. Across two fixed-update dev worlds with
 
 MA-276 is **PROMISING only for aligned serialized-state compression**: the 3 fresh seeds reconstructed the four-step butterfly-aligned depth map at 396B vs 1,193B untied. The 2,048B prepared-operator workspace exceeds the untied serialized payload; unrelated layer maps fail, and no language/training/capacity claim is established. Five tests and exact replay passed.
 
-**The next candidate is MA-278.** MA-275/277 remain UNTESTED at P1. MA-876..1115 remain appended research-intake hypotheses and must not preempt the registered P0 crossovers. Natural variation and benchmark-level runtime remain unproven; aligned synthetic PROMISING must not be described as real-world Mirror adoption.
+MA-278 is **FAIL on this unaligned task-factor screen**: Mirror and scalar modulation both serialized to 2,525B, but Mirror had higher MSE in all four development world/LR pairs; native Compacter also beat Mirror. Fresh worlds stayed sealed. This does not test an aligned Compacter task family.
+
+**The next candidate is MA-282.** MA-275/277/279–281 remain P1 UNTESTED. MA-876..1115 remain appended research-intake hypotheses and must not preempt the registered P0 crossovers. Natural variation and benchmark-level runtime remain unproven; aligned synthetic PROMISING must not be described as real-world Mirror adoption.
 
 ## MA-241 — layer-specific Mirror views over tied experts
 
