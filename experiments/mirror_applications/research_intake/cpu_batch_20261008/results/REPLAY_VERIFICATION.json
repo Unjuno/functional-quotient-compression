@@ -1,0 +1,39 @@
+{
+  "MA-1171": {
+    "replayed_fresh_rows": 180,
+    "deterministic_columns": 18,
+    "clock_columns_excluded": [
+      "cold_decode_p95_ms"
+    ],
+    "deterministic_replay_pass": true,
+    "mismatched_columns": [],
+    "raw_sha256": {
+      "dev_raw.csv": "60836f2b6395ce6a5eb27f205f12d773d0924992c75bdac05a52d1f3b1d65202",
+      "fresh_raw.csv": "65ae15ece0e9f48bb53d8951192b3cd658895b4264489d67c7566eeb97cc52e2"
+    },
+    "stdout": [
+      "{\"phase\": \"fresh\", \"world\": 104, \"rows\": 36, \"elapsed_s\": 0.48}",
+      "{\"phase\": \"fresh\", \"world\": 105, \"rows\": 36, \"elapsed_s\": 0.6}",
+      "{\"fresh_compared\": 45, \"aligned_budget_1_mean_gain\": 0.0, \"out\": \"/mnt/data/mirror_cpu_batch_20261008/replay/MA1171\"}"
+    ]
+  },
+  "MA-1183": {
+    "replayed_fresh_rows": 75,
+    "deterministic_columns": 23,
+    "clock_columns_excluded": [
+      "cpu_p50_ms",
+      "cpu_p95_ms"
+    ],
+    "deterministic_replay_pass": true,
+    "mismatched_columns": [],
+    "raw_sha256": {
+      "dev_raw.csv": "f388c7cfeb1fea64dec35359746fa7c3b487a34aa04450fd14f285d3bad8d312",
+      "fresh_raw.csv": "cb53c8c48917a17f6c7c85765e51e7fbca71c17f7388b40c2a0509c7b0d7811b"
+    },
+    "stdout": [
+      "{\"phase\": \"fresh\", \"seed\": 103, \"done\": 15, \"elapsed_s\": 17.45}",
+      "{\"phase\": \"fresh\", \"seed\": 104, \"done\": 15, \"elapsed_s\": 22.96}",
+      "{\"phase\": \"fresh\", \"seed\": 105, \"done\": 15, \"elapsed_s\": 28.86}"
+    ]
+  }
+}
