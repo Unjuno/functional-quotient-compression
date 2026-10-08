@@ -1,6 +1,6 @@
 {
   "experiment_id": "MA-257",
-  "commit": "pending",
+  "commit": "8d557ee",
   "tests": {
     "command": "pytest -q experiments/mirror_applications/ma-257-compositional-context/tests",
     "passed": 3,
@@ -19,11 +19,18 @@
     "all_methods_replayed": true
   },
   "fresh_split_integrity_checked": true,
-  "development_seeds": [25701, 25702],
-  "fresh_seeds": [25711, 25712, 25713],
+  "development_seeds": [
+    25701,
+    25702
+  ],
+  "fresh_seeds": [
+    25711,
+    25712,
+    25713
+  ],
   "fresh_status": "OPENED_AFTER_BOTH_DEVELOPMENT_GATES_PASSED",
   "gates": {
-    "heldout_accuracy_min": 0.90,
+    "heldout_accuracy_min": 0.9,
     "within_accuracy_of_additive_control_max_gap": 0.03,
     "mirror_payload_strictly_smaller_than_additive_control": true,
     "factorized_mirror_heldout_accuracy": {
@@ -40,7 +47,10 @@
       "25712": 0.982421875,
       "25713": 0.989501953125
     },
-    "serialized_bytes_mirror_vs_additive": [819, 827]
+    "serialized_bytes_mirror_vs_additive": [
+      819,
+      827
+    ]
   },
   "notes": [
     "The synthetic task family is constructed from two composing orthogonal rotations; no natural-task generality is established.",

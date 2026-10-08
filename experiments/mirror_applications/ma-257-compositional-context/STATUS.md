@@ -5,8 +5,8 @@
 - Base commit: `c0a232b`
 - Development complete: yes (25701, 25702)
 - Fresh/audit opened: yes (25711, 25712, 25713)
-- Results committed: pending
-- Verification committed: pending
+- Results committed: yes
+- Verification committed: yes
 - Registry row updated: pending
 
 ## Next action
