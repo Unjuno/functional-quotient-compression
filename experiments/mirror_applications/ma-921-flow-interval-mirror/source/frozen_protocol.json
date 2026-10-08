@@ -1,7 +1,7 @@
 {
   "experiment_id": "MA-921",
   "title": "Factorized endpoint Views for reusable flow maps",
-  "status": "FAIL",
+  "status": "SCREENING",
   "evidence_lane": "MECHANISM/STORAGE/COMPUTE/RUNTIME",
   "base_commit": "16807a7d6dc17a834a44ed3cc793ccc28b615691",
   "hypothesis": "Factorized Mirror endpoint coordinates over one shared two-time flow-map basis can recover held-out interval maps and preserve semigroup composition with lower actual inference bytes than native Flow Map Matching time conditioning, while outperforming a byte-matched additive endpoint factor control.",
@@ -40,8 +40,7 @@
       92103
     ],
     "locked_before_access": true,
-    "locked_interval_pairs": "same 12 held-out endpoint pairs as development",
-    "opened": false
+    "locked_interval_pairs": "same 12 held-out endpoint pairs as development"
   },
   "data": {
     "generator": "Synthetic non-autonomous linear ODE dx/dt=(A0+sin(2*pi*t)*A1)x, with noncommuting 2x2 matrices drawn per world; true interval maps are integrated with fixed RK4 step 0.002. Time grid has 21 endpoints from 0 through 1 at spacing 0.05.",
@@ -206,11 +205,5 @@
       "reason": "The first MAC proxy omitted the native shared-basis coefficient network MACs. The proxy now includes its full 6\u219232\u219232\u21924 coefficient MLP and shared-basis application; model/data/quality gates/settings are unchanged. Re-run both permitted development budgets with corrected accounting.",
       "protocol_effect": "Compute reporting formula correction only; quality values and thresholds unchanged."
     }
-  ],
-  "decision": {
-    "status": "FAIL",
-    "stage": "development",
-    "reason": "No rank/update-budget candidate passed the mirror-specific additive-control quality gate on both development worlds; fresh seeds remain unopened."
-  },
-  "posthoc_outcome_record": "Only final status, fresh-opened state and decision were added after development. Frozen settings are preserved verbatim in source/frozen_protocol.json."
+  ]
 }

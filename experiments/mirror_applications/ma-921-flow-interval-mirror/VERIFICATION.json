@@ -3,19 +3,24 @@
   "commit": "pending",
   "tests": {
     "command": "python -m unittest discover -s experiments/mirror_applications/ma-921-flow-interval-mirror/tests -v",
-    "passed": null,
-    "failed": null
+    "passed": 4,
+    "failed": 0
   },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "payloads_in_memory_verified": 36,
+    "sha256_recorded": 36
   },
   "metric_replay": {
     "checked": false,
     "max_difference": null
   },
   "fresh_split_integrity_checked": false,
+  "fresh_accessed": false,
   "notes": [
-    "Random draw provenance saved before implementation."
+    "Source, frozen protocol and both development-result hashes are checked by source/verify_and_export.py.",
+    "No development candidate passed all quality gates in both worlds; the protocol kept fresh seeds unopened.",
+    "Native shared-basis control is reported as a diagnostic control; Mirror-specific gate is evaluated against native direct FMM and additive factors."
   ]
 }
