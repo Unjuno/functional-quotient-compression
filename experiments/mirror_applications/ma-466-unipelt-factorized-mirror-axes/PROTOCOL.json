@@ -1,0 +1,20 @@
+{
+  "experiment_id": "MA-466",
+  "title": "UniPELT components as factorized Mirror axes",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY/COMPUTE",
+  "base_commit": "7cf891f",
+  "hypothesis": "For 128 task×layer contexts composed from shared LoRA, bottleneck-adapter and prefix components, rank-two factorized component gates will retain mean held-out output RMSE <=0.03 while using <=0.75x the actual inference bytes of a learned full UniPELT gate table; per-component ablations identify which axes carry useful function.",
+  "physical_object": "shared layer base matrices plus shared LoRA, bottleneck-adapter and prefix function components",
+  "mirror_coordinate": "rank-two task, layer and component factors whose CP product generates three component gate logits",
+  "logical_multiplicity": "128 task×layer composite adaptations from one shared PEFT component bank",
+  "prior_art_refs": ["PA84"],
+  "controls": ["UniPELT-style learned full task×layer×component gate table", "shared global component gates", "rank-two CP gate factors as direct native factorized-gate alias", "Mirror with each of LoRA, bottleneck adapter, and prefix component ablated one at a time"],
+  "task": {"type": "synthetic 4D regression over 16 tasks × 8 layer positions; target gates are seeded rank-two CP logits over three shared PEFT-like components", "dimension": 4, "tasks": 16, "layers": 8, "components": ["rank-one LoRA linear update", "two-wide nonlinear bottleneck adapter", "prefix-like layer bias"], "support_examples_per_context": 64, "query_examples_per_context": 64, "noise_sigma": 0.02, "outer_updates": 2500, "batch_size": 32, "optimizer": "Adam; learning rate 0.01", "mirror_rank": 2},
+  "development": {"worlds_or_seeds": [46601, 46602], "selection_metric": "mean query output RMSE across 128 contexts; report each component ablation, active-component count, bytes and MAC proxy", "hyperparameter_changes_after_run": "prohibited without numbered amendment"},
+  "fresh": {"worlds_or_seeds": [46611, 46612, 46613], "locked_before_access": true, "opened": false},
+  "storage": {"authority": "actual uncompressed .npz inference payload bytes", "paid_objects": ["all shared base matrices", "LoRA factors", "adapter weights", "prefix vectors", "full gate table or all Mirror CP factors", "shape/dtype/component metadata"]},
+  "compute": {"report_examples_seen": true, "report_optimizer_updates": true, "report_training_ops_proxy": true, "report_inference_ops_per_example": true, "report_training_wall_time": true, "report_query_wall_time": true, "query_timing_boundary": "128 contexts × 64 query vectors; includes gate evaluation and shared component evaluation"},
+  "gates": {"PROMISING": "Both seeds: mean query RMSE <=0.03, actual payload <=0.75x full UniPELT, Mirror MAC proxy <=1.25x UniPELT, at least two component ablations increase RMSE by >=20%, and direct CP gate control does not exactly match Mirror payload/output.", "FAIL": "Either seed misses a PROMISING clause or the direct native CP gate control exactly aliases Mirror.", "NOT ESTABLISHED": "Full UniPELT gate control has mean query RMSE >0.03 in either seed, or payload/metric replay fails."},
+  "boundaries": ["Synthetic component-composition screen, not a UniPELT Transformer reproduction or language-model claim.", "The native CP gate control uses the same factorization and directly tests Mirror attribution.", "The three shared component functions are fixed within each world and all their weights are fully charged.", "Fresh seeds remain sealed unless every frozen PROMISING gate passes."]
+}
