@@ -4,7 +4,7 @@
 - Branch: `research/ma-297-seta-mirror-subspace-20261008`
 - Base commit: `e259f27`
 - Last verified commit: pending
-- Development complete: no
+- Development complete: yes
 - Fresh/audit opened: no
 - Results committed: no
 - Verification committed: no
@@ -12,7 +12,7 @@
 
 ## Next action
 
-Implement and run development conditions; freeze hyperparameters before fresh worlds.
+Commit the frozen one-pair setting, then run fresh seeds 29711–29713.
 
 ## Blockers
 
