@@ -4,12 +4,12 @@
 - Branch: `research/ma-981-sector-beam-mirror-20261008`
 - Base commit: `c935a903daca5c7d1d48aa50d05b5bd50f239cba`
 - Draw: 23; uniform from 534 eligible P0/UNTESTED rows, index 401
-- Last verified commit: pre-data freeze `72cf06f`; result commit follows
+- Last verified commit: `e84c757`
 - Development complete: yes (2 seeds)
 - Fresh/audit opened: fresh yes; no separate audit
-- Results committed: pending result commit
-- Verification committed: pending result commit
-- Registry row updated: pending result commit
+- Results committed: yes (this branch)
+- Verification committed: yes (this branch)
+- Registry row updated: yes (this branch)
 
 ## Next action
 
