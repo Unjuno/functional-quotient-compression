@@ -40,7 +40,7 @@ def pack(f,theta,kind):
 def load(raw):
     a=np.load(io.BytesIO(raw),allow_pickle=False);meta=json.loads(bytes(a['metadata_utf8'].tolist()).decode());kind=meta['kind'];v={'kind':kind}
     if kind=='independent_transformed_fields':
-        v.update(w1=torch.tensor(a['w1'].astype(np.float32)),w2=torch.tensor(a['w2'].astype(np.float32)),b1=torch.tensor(a['b1'].astype(np.float32)),b2=torch.tensor(a['b2'].astype(np.float32)))
+        v.update(w1=torch.tensor(a['w1'].astype(np.float32)),w2=torch.tensor(a['w2'].astype(np.float32)),b1=torch.tensor(a['b1'].astype(np.float32))[None,:].expand(M,-1),b2=torch.tensor(a['b2'].astype(np.float32)))
     else:
         f=Field();f.load_state_dict({'l1.weight':torch.tensor(a['l1w'].astype(np.float32)),'l1.bias':torch.tensor(a['l1b'].astype(np.float32)),'l2.weight':torch.tensor(a['l2w'].astype(np.float32)),'l2.bias':torch.tensor(a['l2b'].astype(np.float32))});v['field']=f
         if 'theta' in a.files:
