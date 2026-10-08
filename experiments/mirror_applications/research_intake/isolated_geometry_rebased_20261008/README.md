@@ -72,3 +72,7 @@ All learned weights/activations in these neural models are dimensionless after n
 ## Recorded exploratory negative result: GVA role switching
 
 The frozen [MA-1162 GVA Stage-0 protocol](pilots/gva_alias_stage0/PROTOCOL.json) and [five-world result](pilots/gva_alias_stage0/REPORT.md) confirm exact cache alias under identical prefix/readout-only changes, and a failure counterexample when upstream prefix states differ. The native same-basis factorized control matches Mirror's 4,936-B serialized code state, while Mirror recomposition increases eager CPU P95 latency (median ratio 1.248); therefore **Mirror-specific M0/FAIL at this narrow synthetic scope**. This is **not** MA-1162 completion and does not change its UNTESTED status. Full executed source is now checked into `pilots/gva_alias_stage0/source/run_stage0.py` and also preserved in a companion conversation ZIP; inspect SHA256 in verification.
+
+## Recorded gauge rank audit: MA-1156 Stage-0
+
+[Precommitted protocol](pilots/gauge_rank_stage0/PROTOCOL.json) and [fresh five-world result](pilots/gauge_rank_stage0/REPORT.md): a generic 4x2 Q/K bare-score Jacobian has rank 12 (four gauge-only null directions); adding one nontrivial RoPE rotation yields joint rank 14 (two commuting gauge directions). Both predictions held in 5/5 fresh worlds with exact invalid-shear counterexamples. This is a **negative control for false logical functional multiplicity**, not evidence of improved Mirror task quality/bytes; MA-1156 stays UNTESTED for its planned learned-code hypothesis.
