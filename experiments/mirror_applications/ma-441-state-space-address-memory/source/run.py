@@ -17,7 +17,7 @@ class Memory(nn.Module):
   super().__init__();self.method=method
   if method=='external':
    self.register_buffer('table',torch.eye(D));return
-  d=dimension(method);self.code=nn.Parameter(torch.randn(D,d)*.15);self.noise=nn.Parameter(torch.zeros(d,D));self.decay=nn.Parameter(torch.tensor(-4.0));self.read=nn.Linear(d,D)
+  d=dimension(method);self.code=nn.Parameter(torch.randn(D,d)*.15);self.noise=nn.Parameter(torch.zeros(d,D));self.decay=nn.Parameter(torch.tensor(6.0));self.read=nn.Linear(d,D)
  def state(self,role,noise,L):
   a=torch.sigmoid(self.decay);d=self.code.shape[1];b=self.code[role]
   # Closed-form recurrent register: h_t=a*h_{t-1}+W*x_t, with L distractor tokens.
