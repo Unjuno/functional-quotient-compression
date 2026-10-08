@@ -1,0 +1,3 @@
+# Pre-amendment 4-task screen
+
+This development-only variant used four tasks and `torch.save` ZIP serialization. Actual payloads for Mirror and packed binary masks were both 2,149 bytes because fixed archive overhead obscured the 8-byte coordinate difference. The preregistered 0.80x binary-mask access gate therefore failed; no fresh worlds were opened under this variant. Before any fresh access, the protocol was amended to 32 tasks and a deterministic compact binary payload codec so that complete serialized bytes could resolve the intended bits-per-task hypothesis. These rows remain preserved and are excluded from the amended protocol result table.
