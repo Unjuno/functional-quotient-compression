@@ -1,0 +1,70 @@
+{
+  "experiment_id": "MA-1097",
+  "title": "Asymmetric natural adapter views",
+  "status": "SCREENING",
+  "evidence_lane": "STORAGE / MECHANISM",
+  "base_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
+  "draw": {
+    "number": 24,
+    "eligible_rule": "registry priority=P0 and status=UNTESTED, excluding IDs with a live origin/research/ma-* branch or pre-existing experiments/mirror_applications/ma-* directory",
+    "eligible_count": 532,
+    "pool_sha256": "46e27c9dba61cd00113e3c385ecd1b60f7ca03dbad79fdda5a355a9906866abe",
+    "seed_hex": "5349b37014f408ac170c08c2cc22fa201e824659adda893d0aba9d409d678e4c",
+    "selection_index_zero_based": 485,
+    "selected_id": "MA-1097",
+    "exclusion_snapshot": "source/draw24_exclusions.json"
+  },
+  "hypothesis": "Across independently fine-tuned rank-1 BERT adapters, a shared output-side (LoRA B) subspace retains held-out task updates better than a byte-matched shared input-side (LoRA A) subspace and uses <=80% of independent LoRA payload bytes at <=10% relative update error.",
+  "physical_object": "Per-layer BERT query/value LoRA rank-1 weight updates from three public tweet_eval adapters",
+  "mirror_coordinate": "Per-task coefficients in a train-task-only shared factor subspace",
+  "logical_multiplicity": "Three task-specific learned updates represented through shared output or input bases",
+  "prior_art_refs": ["PA357", "PA351", "PA358"],
+  "data": {
+    "tasks": ["tweet_eval_irony", "tweet_eval_emotion", "tweet_eval_hate"],
+    "repositories": [
+      {"id": "TransferGraph/bert-base-uncased-finetuned-lora-tweet_eval_irony", "revision": "f6c41fb203794d60cd59774a1915de4634f2613e"},
+      {"id": "TransferGraph/bert-base-uncased-finetuned-lora-tweet_eval_emotion", "revision": "b9c641011e65a06c1f2034c5302c0a7a5df261f1"},
+      {"id": "TransferGraph/bert-base-uncased-finetuned-lora-tweet_eval_hate", "revision": "8001cb4a514a6f8b5b94eda72161f921dedd7a59"}
+    ],
+    "base_model_id": "bert-base-uncased",
+    "base_training_revision": "unreported by adapter cards; cannot be independently verified",
+    "adapter_base_claim": "all three cards name bert-base-uncased; model card does not pin base commit",
+    "lora_rank": 1,
+    "lora_alpha": 1,
+    "target_modules": ["query", "value"],
+    "layers": 12,
+    "source_artifacts": "SHA-256 values, file lengths and exact task mapping recorded in source/artifact_manifest.json"
+  },
+  "controls": [
+    "Independent exact rank-1 LoRA factors",
+    "Shared output-side basis with per-task code and private input factor",
+    "Shared input-side basis with per-task code and private output factor",
+    "Two-sided shared U/V bases with dense per-task core (native shared-core control)"
+  ],
+  "development": {
+    "worlds_or_seeds": [],
+    "selection_metric": "No development tuning; k in {1,2} and all three whole-task leave-one-out folds are fixed before numerical analysis."
+  },
+  "fresh": {
+    "worlds_or_seeds": ["holdout irony", "holdout emotion", "holdout hate"],
+    "locked_before_access": true,
+    "split_unit": "whole adapter task",
+    "basis_fit": "two non-held-out task deltas only"
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "format": "safetensors; exact file size on disk",
+    "paid_objects": ["all factor arrays", "shared bases", "per-task codes/cores", "task-specific classifier heads", "task/layer metadata", "reconstruction state"]
+  },
+  "compute": {
+    "report_tokens_or_examples": "No task examples used; three checkpoints, 24 matched matrices each",
+    "report_optimizer_updates": "0",
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true,
+    "compute_proxy": "SVD/projection MAC estimates plus decoder matrix multiply MACs"
+  },
+  "success_gate": "B-side median held-out error is at least 10% lower than A-side; every fold error <=0.10; serialized payload <=80% of independent LoRA; and no dense-core domination at matched error.",
+  "failure_gate": "Any success gate fails or a gauge perturbation changes the verdict beyond 1e-8 projector/error tolerance.",
+  "boundaries": ["Oracle update reconstruction is not downstream task quality.", "No new code was learned from examples.", "No capacity claim.", "Base adapter cards do not provide training-time base commit SHA.", "Three related tweet_eval tasks do not establish generality or Mirror-specific novelty."],
+  "protocol_frozen_before_numeric_tensor_analysis": true
+}
