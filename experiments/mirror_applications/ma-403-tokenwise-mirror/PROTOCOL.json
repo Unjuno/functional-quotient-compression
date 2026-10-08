@@ -1,0 +1,138 @@
+{
+  "id": "MA-403",
+  "version": "cpu_causal_token_distillation_v1",
+  "created_utc": "2026-10-08T20:36:12.517297+00:00",
+  "question": "Does causal token-generated pair-rotation modulation outperform simpler conditioning at useful marginal storage and measured runtime?",
+  "insertion": "A generated Mirror angle rotates consecutive residual-channel pairs before the FFN of one shared frozen causal Transformer block. A fresh angle is generated at each token from an observed causal prefix; no task/expert ID or teacher angle is supplied.",
+  "scope": "Controlled synthetic teacher-distribution distillation, not natural-language training, not post-fit oracle delta reconstruction, not capacity or general compression proof.",
+  "source_ref": "research/ma-401-film-mirror-feature-conditioning-20261008",
+  "selection": "Source STATUS_BOARD selects MA-403; live ma-4 branch search found no MA-403 before a dedicated branch was created.",
+  "architecture": {
+    "vocab": 24,
+    "width": 24,
+    "heads": 4,
+    "ffn": 48,
+    "sequence_length": 12,
+    "generator_hidden": 8,
+    "rank": 2,
+    "dtype": "float32",
+    "device": "cpu",
+    "threads": 1,
+    "dropout": 0.0,
+    "backbone": "shared frozen random causal attention + residual FFN + output head",
+    "context": "exclusive prefix normalized sum of attention residuals; strictly causal",
+    "positional": "fixed sinusoidal, generated deterministically"
+  },
+  "worlds": [
+    "rotation",
+    "affine",
+    "dense"
+  ],
+  "methods": [
+    "none",
+    "static_mirror",
+    "local_mirror",
+    "mirror",
+    "film",
+    "complex_coeff",
+    "pair_linear",
+    "rank2",
+    "full_matrix"
+  ],
+  "native_controls": [
+    "film",
+    "complex_coeff",
+    "pair_linear",
+    "rank2"
+  ],
+  "upper_control": "full_matrix",
+  "data": {
+    "train_sequences": 1024,
+    "iid_sequences": 256,
+    "ood_sequences": 512,
+    "forbidden_train_adjacent_groups": [
+      [
+        0,
+        1
+      ],
+      [
+        2,
+        3
+      ]
+    ],
+    "groups_modulus": 4,
+    "ood_score_only_forbidden_transitions": true,
+    "teacher_targets": "full categorical distributions; shared by all methods and charged as distillation supervision",
+    "no_teacher_parameter_access": true
+  },
+  "dev_seeds": [
+    40301,
+    40302
+  ],
+  "fresh_seeds": [
+    40311,
+    40312,
+    40313
+  ],
+  "train": {
+    "updates": 800,
+    "batch_sequences": 32,
+    "optimizer": "AdamW",
+    "learning_rate": 0.008,
+    "weight_decay": 0.0,
+    "clip_grad_norm": 1.0,
+    "schedule": "cosine to 10% initial rate",
+    "checkpoint": "final only",
+    "seed_pairing": "identical backbone, datasets and minibatch indices within world; initial adapter first-layer weights paired where shapes agree",
+    "frozen_prefix_cache": "allowed for all training methods; end-to-end inference timing includes recomputation"
+  },
+  "evaluation": {
+    "quality": [
+      "cross_entropy_nat_per_token",
+      "excess_kl_nat_per_token",
+      "teacher_top1_agreement"
+    ],
+    "train_nll_interpretation": "fixed-update learning/representability evidence only",
+    "storage": "actual custom lossless inference files containing all frozen backbone state, learned adapter/generator state, metadata, dtype and shapes",
+    "incremental_storage": "actual full file bytes minus actual same-backbone no-adapter file bytes; distinct from a total-model compression ratio"
+  },
+  "timing": {
+    "batches": [
+      1,
+      64
+    ],
+    "warmup_calls": 15,
+    "repeats": 7,
+    "calls_per_repeat": 10,
+    "operation": "end-to-end sequence forward; not KV-cached decoding",
+    "summary": "median, min, max across repeats; interleave method order deterministically",
+    "clock": "observed snapshot, not locked",
+    "cpu_threads": 1
+  },
+  "gates": {
+    "upper_learnability_max_kl": 0.03,
+    "quality_tolerance_vs_best_native_nat_per_token": 0.01,
+    "absolute_max_kl": 0.03,
+    "minimum_gain_vs_static_nat_per_token": 0.005,
+    "maximum_full_bytes_ratio": 1.0,
+    "maximum_incremental_bytes_ratio": 0.8,
+    "maximum_latency_ratio": 1.25,
+    "all_dev_world_seed_split_pass_required_before_fresh": true,
+    "runtime_reference": "fastest quality-qualified native control at each batch",
+    "storage_reference": "smallest quality-qualified native control; quality-qualified means within 0.01 nat/token of best native on both splits",
+    "nonlearnable_upper": "NOT_ESTABLISHED for that world; never evidence that Mirror universally fails"
+  },
+  "stopping": "Run the entire preregistered development matrix. If any required gate fails or is unestablished, stop before generating any fresh world. No gate or seed retuning.",
+  "uncertainty": "Report paired world-seed ranges, not population CI. Timing repeat SD/sqrt(7) is repeat-only standard uncertainty, k=2 is a descriptive expansion with no coverage claim. Scheduling/systematic error unquantified.",
+  "prior_art": {
+    "PA63": "arXiv:1709.07871v2 (FiLM feature-wise affine conditioning)",
+    "PA64": "arXiv:1903.07291 (SPADE spatially adaptive affine normalization); inspiration only, no reproduction of image synthesis"
+  },
+  "limitations": [
+    "Shared random frozen backbone and deliberately controlled teacher families",
+    "Teacher soft targets are extra supervision",
+    "No GPU or natural-language claim",
+    "Known paired rotation/complex phase is not a novel mathematical operation",
+    "No pretrained checkpoint or external data download"
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "id": "MA-403",
+  "verified_utc": "2026-10-08T20:46:47.743745+00:00",
+  "primary_verdict": "FAIL",
+  "scope": "54-configuration CPU synthetic development screen; not an external natural-language replication",
+  "protocol_sha256": "7f4f0e6516dc96467d72e311df04a01ea5b47cf82b0e4463b4e0cd84f11b6605",
+  "measured_source_sha256": "a7baa0ae59acc7d0699c7b6d55a327dc8a12990c2d860fb030bf0704a483a5a6",
+  "protocol_source_and_prerun_tests_unchanged": true,
+  "unit_tests": {
+    "passed": 10,
+    "failed": 0,
+    "command": "python -m pytest -q experiments/mirror_applications/ma-403-tokenwise-mirror/tests",
+    "log": "logs/tests_green.txt"
+  },
+  "primary_rows": 54,
+  "trained_primary_models": 48,
+  "primary_optimizer_updates": 38400,
+  "primary_payloads_reloaded_and_verified": 54,
+  "primary_metric_scalars_verified": 810,
+  "primary_max_abs_metric_replay_error": 0.0,
+  "full_training_replays_exact": 2,
+  "training_replay_cases": [
+    {
+      "seed": 40301,
+      "world": "rotation",
+      "method": "mirror",
+      "sha256": "11a1d5f4efd3f13b66c2ae9c602e723c74f9b668d3c040a4271f3ca570d70368"
+    },
+    {
+      "seed": 40302,
+      "world": "rotation",
+      "method": "mirror",
+      "sha256": "454021abc881c27eb60a6b4395d054c6aaf7443318b9dba58d01a0c2be99e721"
+    }
+  ],
+  "timing_samples": 756,
+  "timing_reproducibility": "not exact; medians and repeat dispersion only",
+  "post_hoc_diagnostic": {
+    "new_training_runs": 2,
+    "updates_each": 3200,
+    "payloads_reloaded": 2,
+    "metric_scalars_verified": 30,
+    "max_abs_metric_error": 0.0,
+    "result": "both OOD KL values below 0.03",
+    "effect_on_primary_verdict": "none"
+  },
+  "fresh_seeds_generated": [],
+  "fresh_seeds_sealed": [
+    40311,
+    40312,
+    40313
+  ],
+  "full_historical_repository_tests_rerun": false,
+  "source_ref": "research/ma-401-film-mirror-feature-conditioning-20261008",
+  "source_commit": "5ffe49d3207694000e45f6dc22005b63ff871db7",
+  "storage": "Actual self-describing lossless inference files; full frozen backbone and metadata counted; no quantization",
+  "known_scope_limits": [
+    "soft-teacher supervision",
+    "fixed random frozen backbone",
+    "two development seeds only",
+    "one Transformer block and small dimensions",
+    "CPU uncached full-sequence forward, not autoregressive generation",
+    "same-width full-matrix conditioner is not a mathematical superset of nonlinear angle parameterization"
+  ],
+  "global_registry": "Unmodified; STATUS_DELTA.csv contains only the proposed per-ID update, avoiding unrelated status overwrites."
+}
