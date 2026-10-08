@@ -5,7 +5,7 @@
 - Base commit: `c935a90`
 - Development: 2 seeds x 5 methods rerun after A1; exact replay passed
 - Fresh/audit: not opened; 36011–36012 remain sealed
-- Result bundle: pending commit
+- Result bundle: 4b496f78eab63f0beae726bdcc6025669cc6f5f3
 - Registry row: pending update
 
 ## Decision
