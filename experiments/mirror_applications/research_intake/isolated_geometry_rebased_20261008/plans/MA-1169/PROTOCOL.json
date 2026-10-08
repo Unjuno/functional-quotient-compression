@@ -1,0 +1,80 @@
+{
+  "schema_version": 2,
+  "experiment_id": "MA-1169",
+  "title": "MoLoRA per-token physical specialist-bank compression",
+  "status": "UNTESTED",
+  "plan_only": true,
+  "worker_claim": false,
+  "isolated_branch": "research/mirror-isolated-protocols-rebased-20261008",
+  "priority": "P0",
+  "prior_art_refs": [
+    "PA430",
+    "PA433",
+    "PA364"
+  ],
+  "existing_overlaps": "MA-258, MA-259, MA-403, MA-697, MA-1112",
+  "hypothesis": "At fixed original per-token router, a shared specialist m bank preserves at least 99% of native mixed-skill quality or <=1 percentage point drop (use stricter relevant threshold), reduces total specialist+router serialized inference bytes >=15% and P95 decode latency <=1.10 native, while beating a byte-matched ordinary SVD bank and identifying all prefix-cache incompatibilities.",
+  "physical_object": "frozen MoLoRA per-token router and independently trained LoRA specialist bank",
+  "mirror_coordinate": "small per-expert Mirror m decoding one shared LoRA update basis only on tokens routed to its expert",
+  "native_control": "MoLoRA independent-LoRA per-token routing and native cached-prefix semantics",
+  "controls": [
+    "original MoLoRA router with independent LoRAs",
+    "MoLoRA router with SVD-compressed adapter bank at matched total bytes",
+    "MoLoRA with native task-group shared LoRA",
+    "FiLM/rank-one cheap expert code",
+    "reference target-adapter re-prefill and cache-copy controls"
+  ],
+  "development": {
+    "seeds": [
+      11,
+      12,
+      13
+    ],
+    "selection": "source dev only"
+  },
+  "fresh": {
+    "seeds": [
+      101,
+      102,
+      103,
+      104,
+      105
+    ],
+    "whole_tasks_heldout": true,
+    "locked_before_access": true,
+    "no_audit_tuning": true,
+    "run_all_five": true
+  },
+  "screen": {
+    "fixture": "Toy 2-layer d=64 causal Transformer, 4 separate specialists and 4-skill token streams with heldout combinations/switches; native MoLoRA official benchmark later if available. Source banks can be aligned or independently trained, evaluated separately.",
+    "steps": [
+      "Freeze base revision, specialist training data, token routing and MoLoRA original top-k semantics.",
+      "Train four native per-token LoRA experts, split whole task/domain identities into source/dev/fresh.",
+      "Construct plain shared linear factor bank and signed/orthogonal m bank at matched bytes; do not fit heldout oracle deltas.",
+      "Run same frozen learned token router on all methods; never give audit task ID or oracle route.",
+      "Verify target-native fresh prefix on each switched token path; explicit safe alias vs copied or upstream-different invalid state.",
+      "Measure mixed-domain token loss, per-task quality, physical cache bytes, adapter-bank serialized size, router MAC/FLOP and batch P95."
+    ],
+    "hardware": "CPU torch float32 synthetic; optionally CUDA GPU with kernel details, true token routing, B=1/8 context=128/512, GPU clock and synchronized P95."
+  },
+  "gates": {
+    "PASS": "At least 4 of 5 fresh worlds quality >=0.99 native and <=1pp absolute decline when native near chance, total incremental bytes <=0.85 native, P95 <=1.10 native, no cache provenance violations, with strict benefit over same-byte ordinary factorization.",
+    "FAIL": "Native compressed bank dominates m, router includes audit labels, incompatible prefix reuse called exact, or hidden re-prefill overhead eliminates runtime savings.",
+    "UNCERTAIN": "Missing native reproduction or physical bytes/timing and fresh task evidence"
+  },
+  "metrics": [
+    "task loss",
+    "retention",
+    "bytes",
+    "active compute",
+    "P95",
+    "cache provenance"
+  ],
+  "uncertainty": {
+    "n_min": 5,
+    "k_cov": 2,
+    "bootstrap_group": "whole task",
+    "covariance": "include if correlated"
+  },
+  "conclusion": "not evaluated"
+}

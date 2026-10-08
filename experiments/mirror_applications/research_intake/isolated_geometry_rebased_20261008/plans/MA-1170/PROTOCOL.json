@@ -1,0 +1,80 @@
+{
+  "schema_version": 2,
+  "experiment_id": "MA-1170",
+  "title": "NeuroLoRA dynamic gate versus structured Mirror online coordinate",
+  "status": "UNTESTED",
+  "plan_only": true,
+  "worker_claim": false,
+  "isolated_branch": "research/mirror-isolated-protocols-rebased-20261008",
+  "priority": "P1",
+  "prior_art_refs": [
+    "PA431",
+    "PA429",
+    "PA19"
+  ],
+  "existing_overlaps": "MA-288, MA-401, MA-403, MA-849",
+  "hypothesis": "On unseen hidden-domain switch sequences, a signed/orthogonal m conditioned on only allowed causal history improves fresh-domain cross-entropy at least 1% relative to the best same-byte non-Mirror extension for >=4/5 worlds, while preserving old-domain retention, total state bytes <=1.05 native NeuroLoRA and P95 <=1.10 native.",
+  "physical_object": "native NeuroLoRA frozen sparse random feature projections, original contextual modulator, and contrastive orthogonality loss",
+  "mirror_coordinate": "additional history-generated small signed/permutation/Givens m after the native gate in a shared frozen projection space",
+  "native_control": "NeuroLoRA context gate + orthogonality, and FlyLoRA-style fixed projection",
+  "controls": [
+    "fully native NeuroLoRA with original learned dynamic scale and contrastive loss",
+    "FlyLoRA sparse projection without context",
+    "native gate plus byte-matched diagonal/IA3 extension",
+    "small generic low-rank context head",
+    "independent task LoRAs upper reference"
+  ],
+  "development": {
+    "seeds": [
+      11,
+      12,
+      13
+    ],
+    "selection": "source dev only"
+  },
+  "fresh": {
+    "seeds": [
+      101,
+      102,
+      103,
+      104,
+      105
+    ],
+    "whole_tasks_heldout": true,
+    "locked_before_access": true,
+    "no_audit_tuning": true,
+    "run_all_five": true
+  },
+  "screen": {
+    "fixture": "Source six nonidentical synthetic online domains on a 32- or 64-dimensional frozen MLP, 4 source train domains and 2 unseen; transitions at 32/64 events, 5 fresh hidden switch patterns. No test-time oracle domain ID or privileged target label.",
+    "steps": [
+      "Reproduce fixed sparse random feature projection with the original contextual neuromodulation gate and contrastive orthogonality loss.",
+      "Freeze source/new domain identities and all hidden switches; no audit task identity at inference.",
+      "Compare native gate, FiLM/IA3 diagonal, generic low-rank conditional head and structured short signed/Givens m at exact byte budgets.",
+      "Select m dimension k in {2,4,8} on source/dev only, frozen before fresh.",
+      "Run five fresh switch patterns, log steps to recover CE, old-domain retention, online state write bytes and compute.",
+      "Report a negative result if native gate or same-byte ordinary extension matches task utility and P95."
+    ],
+    "hardware": "CPU torch float32 mechanism first; optional CUDA real MMLU/GSM8K/ScienceQA once authors' code/checkpoints confirmed. Record batch, hardware clock, live writes."
+  },
+  "gates": {
+    "PASS": "At least four of five fresh streams show >=1% relative cross-entropy reduction versus best same-byte ordinary dynamic gate and native NeuroLoRA, no retention loss, total resident+writeable bytes <=1.05 native, P95 <=1.10 native, no future domain oracle.",
+    "FAIL": "Native dynamic diagonal gate matches, context/weights leak true task ID, old-task forgetting increases, or generator/online write cost uncounted.",
+    "UNCERTAIN": "Missing native reproduction or physical bytes/timing and fresh task evidence"
+  },
+  "metrics": [
+    "task loss",
+    "retention",
+    "bytes",
+    "active compute",
+    "P95",
+    "cache provenance"
+  ],
+  "uncertainty": {
+    "n_min": 5,
+    "k_cov": 2,
+    "bootstrap_group": "whole task",
+    "covariance": "include if correlated"
+  },
+  "conclusion": "not evaluated"
+}
