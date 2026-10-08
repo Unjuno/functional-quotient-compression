@@ -3,11 +3,11 @@
 - Status: FAIL (Mirror-specific gate; aligned composition itself works)
 - Branch: `research/ma-266-composed-vera-mirror-views-20261008`
 - Base commit: `af1d096cae5057098f60f91d74be9d382cb598ad`
-- Last verified commit:
+- Last verified commit: `c1b3aac3d36fec00d7ed9d7d2e5d1d2f10fe45e6`
 - Development complete: yes
 - Fresh/audit opened: no
-- Results committed: no
-- Verification committed: no
+- Results committed: yes (`c1b3aac3d36fec00d7ed9d7d2e5d1d2f10fe45e6`)
+- Verification committed: yes (this record binds to the result commit above)
 - Registry row updated: yes (FAIL; MA-267 paused pending redesign)
 
 ## Next action

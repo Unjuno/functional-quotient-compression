@@ -1,6 +1,6 @@
 {
   "experiment_id": "MA-266",
-  "commit": "pending",
+  "commit": "c1b3aac3d36fec00d7ed9d7d2e5d1d2f10fe45e6",
   "tests": {
     "command": "pytest -q experiments/mirror_applications/ma-266-composed-vera-mirror-views/tests",
     "passed": 4,
@@ -17,5 +17,11 @@
     "payload_hashes_exact": true
   },
   "fresh_split_integrity_checked": true,
-  "notes": ["Three development seeds 26601-26603; all 60 support/held-out control rows replayed exactly with payload hashes.", "Fresh seeds 26611-26613 remain unopened because the non-Mirror coefficient-product control matches function quality within the frozen 10% byte margin.", "The first code run used an incomplete product expansion and was superseded before its metrics were examined; the recorded development run uses the corrected six-plane rotation implementation, checked by a function-equivalence test.", "Exact support matrices, factor IDs and teacher angles are supplied; the screen is post-fit, with zero optimizer updates.", "Python 3.12.14 and NumPy 2.3.5; CPU timing is a small batched NumPy harness, not deployed-kernel evidence."]
+  "notes": [
+    "Three development seeds 26601-26603; all 60 support/held-out control rows replayed exactly with payload hashes.",
+    "Fresh seeds 26611-26613 remain unopened because the non-Mirror coefficient-product control matches function quality within the frozen 10% byte margin.",
+    "The first code run used an incomplete product expansion and was superseded before its metrics were examined; the recorded development run uses the corrected six-plane rotation implementation, checked by a function-equivalence test.",
+    "Exact support matrices, factor IDs and teacher angles are supplied; the screen is post-fit, with zero optimizer updates.",
+    "Python 3.12.14 and NumPy 2.3.5; CPU timing is a small batched NumPy harness, not deployed-kernel evidence."
+  ]
 }

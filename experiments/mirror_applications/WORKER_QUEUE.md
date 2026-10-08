@@ -14,7 +14,7 @@ Use:
 
 ## Live selection snapshot — 2026-10-08
 
-The latest canonical baseline and reconciled result branches have been merged into the current worker chain. MA-255/260/261/265/268 and the second research-expansion sequence through MA-299 have recorded outcomes. MA-257 is FAIL against its exact PA16 rotation-context control; MA-258 is PROMISING only for an aligned post-fit expert-bank codec, with unrelated functions requiring richer/private state. The next executable untested P0 in registry order is **MA-266**. MA-297/299 SETA allocation is paused for family redesign. The appended MA-1116..1155 intake remains behind P0 work. This snapshot supersedes older queue paragraphs below that still name MA-255, MA-260, or MA-265 as next. Recheck the live registry and branch list before each new experiment.
+The latest canonical baseline and reconciled result branches have been merged into the current worker chain. MA-255/260/261/265/266/268 and the second research-expansion sequence through MA-299 have recorded outcomes. MA-257 is FAIL against its exact PA16 rotation-context control; MA-258 is PROMISING only for an aligned post-fit expert-bank codec, with unrelated functions requiring richer/private state. MA-266 is FAIL because the non-Mirror coefficient-product control matched within 2.1% bytes; together with MA-265, pause MA-267 pending family redesign. The next executable untested P0 is **MA-301**. MA-297/299 SETA allocation is separately paused. The appended MA-1116..1155 intake remains behind P0 work. This snapshot supersedes older queue paragraphs below that still name MA-255, MA-260, or MA-265 as next. Recheck the live registry and branch list before each new experiment.
 
 ## Selection rule
 
