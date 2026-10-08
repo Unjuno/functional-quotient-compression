@@ -3,11 +3,11 @@
 - Status: PROMISING (aligned post-fit synthetic expert-bank screen only)
 - Branch: `research/ma-258-psp-mirror-expert-bank-20261008`
 - Base commit: `54abf8c2f768e20f071c3e62d6b5a5108bebc313`
-- Last verified commit: pending
+- Last verified commit: `82263f49d4d0d5af96f4ee715ac7a6622b60da71`
 - Development complete: yes
 - Fresh/audit opened: yes (after frozen development gate passed)
-- Results committed: pending
-- Verification committed: pending
+- Results committed: yes (`82263f49d4d0d5af96f4ee715ac7a6622b60da71`)
+- Verification committed: yes (this record binds to the result commit above)
 - Registry row updated: yes
 
 ## Next action

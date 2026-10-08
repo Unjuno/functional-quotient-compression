@@ -6,11 +6,11 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (54 completed; 576 UNTESTED)
+- P0: **630** (55 completed; 575 UNTESTED)
 - P1: **422** (12 completed; 410 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1089 UNTESTED, 33 PROMISING, 33 FAIL**
-- 66 experiment directories, complete with status/protocol/results/verification files, are indexed in this branch.
+- Current MA statuses: **1088 UNTESTED, 34 PROMISING, 33 FAIL**
+- 67 experiment directories, complete with status/protocol/results/verification files, are indexed in this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-276 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-276 is next; MA-275 remains UNTESTED (P1).
 - Thirteenth literature sweep added MA-996..1045 (50 UNTESTED; 40 P0/10 P1) and PA296..PA325. IDs MA-1000+ use four digits; consult `check_registry_integrity.py`. No new experiment results.
@@ -21,7 +21,7 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-258 — parameter-superposed expert bank with Mirror unbinding (P0; PA16; PA01)**
+**MA-266 — composed VeRA Mirror views (P0; PA18; PA26)**
 
 MA-255 is reconciled as PROMISING only for its aligned post-fit representation screen; a distinct 1,200-update protocol variant failed at development and remains sealed on fresh worlds. See `experiments/mirror_applications/ma-255-mirror-context-superposition/RECONCILIATION.md`.
 
@@ -43,11 +43,11 @@ MA-274 is complete FAIL on a two-world fixed-update development screen: at 5,430
 
 ## Active experiment
 
-No active experiment declared. MA-258 is the next untested P0 after MA-257; check live branches before creating its protocol. MA-255 through MA-299 have verified status records. MA-257 failed against the exact native PA16 rotational-context control; see its scoped report. MA-297/299 SETA shared/private family remains paused. Next by the registered P0 queue: MA-258; MA-266 follows if no blocker.
+No active experiment declared. MA-258 has a narrow PROMISING post-fit aligned codec result; unrelated experts required private/richer state. MA-255 through MA-299 now have verified status records. MA-257 failed against the exact native PA16 rotational-context control; see its scoped report. MA-297/299 SETA shared/private family remains paused. Next by the registered P0 queue: MA-266.
 
 ## Verified status index
 
-- **PROMISING (33):** MA-001, MA-002, MA-003, MA-004, MA-005, MA-006, MA-007, MA-008, MA-012, MA-014, MA-015, MA-041, MA-076, MA-079, MA-111, MA-121, MA-156, MA-160, MA-171, MA-173, MA-181, MA-189, MA-241, MA-244, MA-245, MA-249, MA-250, MA-251, MA-255, MA-268, MA-276, MA-282, MA-691.
+- **PROMISING (34):** MA-001, MA-002, MA-003, MA-004, MA-005, MA-006, MA-007, MA-008, MA-012, MA-014, MA-015, MA-041, MA-076, MA-079, MA-111, MA-121, MA-156, MA-160, MA-171, MA-173, MA-181, MA-189, MA-241, MA-244, MA-245, MA-249, MA-250, MA-251, MA-255, MA-258, MA-268, MA-276, MA-282, MA-691.
 - **FAIL (33):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-257, MA-260, MA-261, MA-265, MA-271, MA-272, MA-273, MA-274, MA-278, MA-286, MA-288, MA-292, MA-296, MA-297, MA-299.
 
 All per-ID evidence is retained in the local experiment directories and in `CLAIM_LEDGER.csv`. Consult [the evidence integration audit](../../docs/phase2/MIRROR_MA_EVIDENCE_INTEGRATION_2026-10-08.md) for linked reports, verifications, provenance and claim boundaries.
@@ -125,4 +125,9 @@ The latest canonical baseline added MA-1116..1155 (40 UNTESTED; 33 P0 / 7 P1) an
 
 ## MA-257 — FAIL for Mirror-specific value
 
-On three development worlds, the smallest selected support (64/512 factor combinations) composed the aligned teacher at 296B and mean test normalized MSE 6.58e-9. Native PA16 factorized rotational contexts produced the exact same functions, bytes and errors, so the registered Mirror-specific gate failed; fresh seeds remain sealed. The FP16 free-coefficient table used 348B, but it is a weaker control than native rotational context. On independent maps Mirror mean error was 8.64, while coefficient pairs reached 1.036 and independent full weights were near zero. Seven tests and 54 selected-support development metric/byte/compute/workspace/hash replays passed. Next P0: MA-258.
+On three development worlds, the smallest selected support (64/512 factor combinations) composed the aligned teacher at 296B and mean test normalized MSE 6.58e-9. Native PA16 factorized rotational contexts produced the exact same functions, bytes and errors, so the registered Mirror-specific gate failed; fresh seeds remain sealed. The FP16 free-coefficient table used 348B, but it is a weaker control than native rotational context. On independent maps Mirror mean error was 8.64, while coefficient pairs reached 1.036 and independent full weights were near zero. Seven tests and 54 selected-support development metric/byte/compute/workspace/hash replays passed. Next P0: MA-266.
+
+
+## MA-258 — PROMISING only for aligned post-fit expert-bank coding
+
+On three fresh aligned worlds, an eight-expert Givens family used 1,514B Mirror payload at normalized MSE 8.99e-10–1.07e-9; rank-2 shared SVD reached near-zero error at 3,822B, and independent maps used 8,440B. Native binary-context PSP used 1,766B but had normalized MSE 4.62–5.46. This passed the preregistered development gate and replicated on 3/3 fresh worlds. On unrelated experts, Mirror normalized MSE was 0.848–0.889, essentially hard tying; independent weights were needed for near-zero error. Mirror had no measured throughput gain (11.16M examples/s fresh aligned vs 17.88M independent). Four tests and 60 metric/byte/hash replays passed. Oracle expert IDs and zero training updates; synthetic linear screen only. Next P0: MA-266.
