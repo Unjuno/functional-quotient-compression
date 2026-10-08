@@ -2158,3 +2158,274 @@ https://arxiv.org/abs/2404.07150
 Shows rapid in-context behavioral adaptation in gain-modulated recurrent networks with stable synaptic weights, using input segregation and dendritic/gain modulation rather than changing model parameters online.
 
 **Mirror implication:** Level-3 functional state need not be a writable weight matrix. Gain/context state is a lower-cost control for dynamic Mirror adaptation and should be compared against Hebbian/DeltaNet fast-weight mechanisms.
+
+## PA236 — Cross-Model KV Cache Transfer
+
+**Cross-Model KV Cache Transfer in LLM Families: A Closed-Form Linear Mapping for Prefill Reuse**  
+https://arxiv.org/abs/2608.03893
+
+Fits per-head closed-form ridge maps between source/target KV states using layer selection and RoPE removal. Reported transfer accuracy varies materially by model pair; some pairs fail sharply.
+
+**Mirror implication:** The map is direct prior art for cache translation. Mirror must compress a family of maps or provide exact identity-orbit handling and cannot claim cross-model KV reuse itself.
+
+## PA237 — CacheBridge
+
+**CacheBridge: Efficient Cross-Model KV Cache Transfer**  
+https://arxiv.org/abs/2609.00891
+
+Uses matched head support, causal-attention-weighted calibration, and fused sufficient-statistic accumulation for compact closed-form cross-model cache transfer.
+
+**Mirror implication:** Match mapper bytes, calibration budget, attention-weighted errors, construction cost and GPU application time before claiming an additional Mirror advantage.
+
+## PA238 — Mixture-of-Translators
+
+**Mixture-of-Translators: Translating KV Caches Across Heterogeneous Large Language Models**  
+https://arxiv.org/abs/2607.28979
+
+Uses multiple translation modules plus target-side context correction to bridge heterogeneous source/target LLM cache spaces, and reports early/late injection failure modes.
+
+**Mirror implication:** Mirror translator codes must beat or complement MoT's native mixture; track target trajectory quality and all translator/router bytes.
+
+## PA239 — Universal cross-model context layer
+
+**A Universal Context-Reuse Layer for Cross-Model KV Sharing**  
+https://arxiv.org/abs/2608.30963
+
+Studies KV handoff even across different model scales, architectures, tokenizer settings and families, with end-to-end prefill/latency and quality measurements.
+
+**Mirror implication:** Cross-family transfer and source-target token provenance are live comparators, not speculative benefits. Mirror must preserve token semantics and count source execution.
+
+## PA240 — StitchLLM
+
+**StitchLLM: Serving LLMs, One Block at a Time**  
+https://aclanthology.org/2025.acl-long.1305/
+
+Routes across pretrained LLM blocks using trainable stitching layers while choosing computation under a serving cost-quality tradeoff.
+
+**Mirror implication:** Cross-model block connectors already exist. Test a shared connector basis plus tiny Mirror codes against independent stitching layers and native routing.
+
+## PA241 — Stitching validity counterexample
+
+**Functional Alignment Can Mislead: Examining Model Stitching**  
+https://proceedings.mlr.press/v267/smith25a.html
+
+Shows that successful functional stitching can occur between representations with substantially different information or even distinct task/data biases.
+
+**Mirror implication:** Functional output matching is insufficient evidence of shared knowledge or semantic equivalence. Include information-preservation and counterfactual transfer diagnostics.
+
+## PA242 — Cross-model residual feature transport
+
+**Transferring Linear Features Across Language Models With Model Stitching**  
+https://proceedings.neurips.cc/paper_files/paper/2025/file/4569a868e7aa891248832ec08445d071-Paper-Conference.pdf
+
+Uses affine maps between residual streams of different language models to transfer SAE features, probes and steering directions; semantic and structural features transfer differently.
+
+**Mirror implication:** Mirror cross-model transport must outperform a per-pair affine connector and audit feature-specific loss, not only aggregate task scores.
+
+## PA243 — Continual multi-scene C-NGP
+
+**Incremental Multi-Scene Modeling via Continual Neural Graphics Primitives**  
+https://arxiv.org/abs/2411.19903
+
+Uses a shared continually trained neural graphics primitive model and scene pseudo-labels with replay for multiple 3D scenes without one full model per scene.
+
+**Mirror implication:** Scene conditioning alone is established. Mirror must improve code cost, compositional variation, retention, or shared/private scene capacity over C-NGP.
+
+## PA244 — ReFiNe multi-scene field
+
+**ReFiNe: Recursive Field Networks for Cross-modal Multi-scene Representation**  
+https://arxiv.org/abs/2406.04309
+
+Uses a shared recursive hierarchical field representation to pack multiple shapes/scenes into one network with compact latent features.
+
+**Mirror implication:** Mirror hierarchical scene coordinates must beat native ReFiNe latent codes and count node/structure storage and ray-query runtime.
+
+## PA245 — Instant-NGP hash-grid fields
+
+**Instant Neural Graphics Primitives with a Multiresolution Hash Encoding**  
+https://research.nvidia.com/publication/2022-07_instant-neural-graphics-primitives-multiresolution-hash-encoding
+
+Uses trainable multiresolution spatial hash grids plus a small fused neural network for efficient high-fidelity neural graphics primitives.
+
+**Mirror implication:** Hash tables are paid physical parameters. A Mirror multi-scene decoder must beat one-scene-per-grid and ordinary shared-decoder+scene-code controls.
+
+## PA246 — TensoRF tensor field decomposition
+
+**TensoRF: Tensorial Radiance Fields**  
+https://arxiv.org/abs/2203.09517
+
+Represents scene radiance features with low-rank CP or vector-matrix tensor factors, cutting field storage compared with dense voxel features.
+
+**Mirror implication:** Tensor factors and their ranks are a strong baseline for Mirror modulation of scene/time/material fields; count all factors as bytes.
+
+## PA247 — K-Planes space-time field
+
+**K-Planes: Explicit Radiance Fields in Space, Time, and Appearance**  
+https://arxiv.org/abs/2301.10241
+
+Factorizes high-dimensional radiance fields into pairs of coordinate planes, including distinct spatial and space-time factors and linear decoder.
+
+**Mirror implication:** Mirror time/appearance addresses must improve over native plane factorization or permit extra useful functions at low marginal bytes.
+
+## PA248 — 4D Gaussian Splatting
+
+**4D Gaussian Splatting for Real-Time Dynamic Scene Rendering**  
+https://openaccess.thecvf.com/content/CVPR2024/html/Wu_4D_Gaussian_Splatting_for_Real-Time_Dynamic_Scene_Rendering_CVPR_2024_paper.html
+
+Combines canonical 3D Gaussians, decomposed 4D neural voxels and a compact deformation decoder for real-time dynamic rendering.
+
+**Mirror implication:** Native shared canonical geometry+deformation is mandatory. Mirror must share multiple logical motions or actors without merely restating 4DGS.
+
+## PA249 — Anchor-driven dynamic Gaussian codec
+
+**ADC-GS: Anchor-Driven Deformable and Compressed Gaussian Splatting for Dynamic Scene Reconstruction**  
+https://www.ijcai.org/proceedings/2025/132
+
+Uses anchors, hierarchical deformation and rate-distortion objectives to remove neighboring Gaussian motion redundancy.
+
+**Mirror implication:** Mirror anchor/motion codes need to improve the native anchor-driven storage/rendering frontier and preserve temporal continuity.
+
+## PA250 — CC-4DGS compressed deformation
+
+**CC-4DGS: Computational Deformation and Point-Cloud Compression for Storage-Efficient Dynamic Gaussian Splatting**  
+https://arxiv.org/abs/2609.02184
+
+Uses computational deformation with compact decoders instead of large learned hash tables, plus conditional Gaussian attribute coding and quantized residual codebooks.
+
+**Mirror implication:** Compare against this already-compressed baseline; count all decoders/codebooks/appearance streams and actual rendering FPS.
+
+## PA251 — P-4DGS predictive Gaussian coding
+
+**P-4DGS: Predictive 4D Gaussian Splatting with 90x Compression**  
+https://arxiv.org/abs/2510.10030
+
+Applies spatial-temporal anchor prediction and context-adaptive entropy coding to compress dynamic Gaussian sequences.
+
+**Mirror implication:** Prediction and entropy coding are strong direct controls for temporal Mirror codes; record actual bitstream size and random-access latency.
+
+## PA252 — Object-centric Gaussian world model
+
+**Learning Action-Conditional and Object-Centric Gaussian Splatting World Models for Rigid Objects**  
+https://arxiv.org/abs/2606.01950
+
+Represents objects with canonical-frame Gaussians and predicts action-conditioned rigid transformations using a spatial-temporal transformer.
+
+**Mirror implication:** Mirror object identity, SE(3) motion and action roles separately; preserve rigid geometry and real rollout/OOD interaction metrics.
+
+## PA253 — NanoVoice shared speaker adaptation
+
+**NanoVoice: Efficient Speaker-Adaptive Text-to-Speech for Multiple Speakers**  
+https://arxiv.org/abs/2409.15760
+
+Performs multi-speaker batch adaptation with shared parameters and a trainable scale matrix to limit per-speaker adapter growth.
+
+**Mirror implication:** The learned speaker scale is strong direct prior for speaker Mirror coordinates. Compare speaker identity quality and actual bytes/voice, not only trainable counts.
+
+## PA254 — HyperTTS generated adapters
+
+**HyperTTS: Parameter Efficient Adaptation in Text to Speech using Hypernetworks**  
+https://aclanthology.org/2024.lrec-main.747/
+
+Conditions adapter-weight generation on speaker representations using a learned hypernetwork for dynamic TTS adaptation.
+
+**Mirror implication:** Mirror codes must reduce generated adapter state/generator cost or improve compositional voice quality beyond native HyperTTS.
+
+## PA255 — Lightweight TTS mixture of adapters
+
+**Lightweight Zero-shot Text-to-Speech with Mixture of Adapters**  
+https://arxiv.org/abs/2407.01291
+
+Selects speaker-conditioned mixtures of lightweight adapters inside a TTS decoder and variance adapter.
+
+**Mirror implication:** Speaker-conditioned selection already exists. Mirror must compress adapter bank or improve voice diversity per byte without additional routing cost.
+
+## PA256 — Hyper-MoA multi-speaker adaptation
+
+**Hyper-MoA: Achieving high quality and parameter efficiency in few-shot multi-speaker TTS**  
+https://doi.org/10.1016/j.apacoust.2025.111118
+
+Combines a hypernetwork and mixture of adapters to adapt multiple new TTS speakers within one module.
+
+**Mirror implication:** This is an especially close shared-speaker adaptation prior; compare native shared Hyper-MoA rather than separate speaker LoRAs only.
+
+## PA257 — Interventional speech disentanglement
+
+**Learning task-specific subspaces via interventional post-training of speech foundation models**  
+https://arxiv.org/abs/2606.17967
+
+Learns transformations separating speaker and content subspaces in speech representations through interventional contrastive training.
+
+**Mirror implication:** Speaker/content Mirror factorization must be causally checked via swaps, cross-speaker/phonetic held-outs and OOD speaker verification.
+
+## PA258 — StableVC timbre-style factorization
+
+**StableVC: Style Controllable Zero-Shot Voice Conversion with Conditional Flow Matching**  
+https://arxiv.org/abs/2412.04724
+
+Separates content, speaker timbre and style for zero-shot voice conversion via conditional flow matching and adaptive gated dual attention.
+
+**Mirror implication:** Mirror must improve the content/timbre/style coordinate or adapter size while preserving prosody and linguistic fidelity.
+
+## PA259 — HybridCodec semantic-acoustic streams
+
+**HybridCodec: Fast Dual-Stream, Semantically Enhanced Neural Audio Codec**  
+https://arxiv.org/abs/2606.06743
+
+Combines separate semantic and acoustic branches, distilling speech SSL semantics into a dual-stream neural audio codec.
+
+**Mirror implication:** A Mirror semantic/acoustic state must beat native stream-specific codebooks and report bitrate plus reconstruction, speaker and content accuracy.
+
+## PA260 — Flow Map Matching
+
+**Flow map matching with stochastic interpolants: A mathematical framework for consistency models**  
+https://arxiv.org/abs/2406.07507
+
+Learns a two-time flow map, unifying few-step consistency/diffusion trajectory learning and enabling variable sampling budgets.
+
+**Mirror implication:** A Mirror time-interval/path code must outperform ordinary FMM time conditioning, including flow-map composition errors and end-to-end NFE.
+
+## PA261 — Consistency Models
+
+**Consistency Models**  
+https://proceedings.mlr.press/v202/song23a.html
+
+Learns mappings from noisy states to data, allowing one/few-step diffusion generation with different compute budgets.
+
+**Mirror implication:** Mirror step/condition views need a quality-per-byte and NFE advantage over native consistency-model conditioning and distillation.
+
+## PA262 — S4S learned diffusion solvers
+
+**S4S: Solving for a Fast Diffusion Model Solver**  
+https://proceedings.mlr.press/v267/frankel25a.html
+
+Directly optimizes a lightweight diffusion solver and optionally its discretization schedule to match teacher-sampler outputs.
+
+**Mirror implication:** A Mirror solver coordinate is only useful if it outperforms learned native solver coefficients/schedules and counts all NFEs.
+
+## PA263 — LoRA.rar subject-style hypermerge
+
+**LoRA.rar: Learning to Merge LoRAs via Hypernetworks for Subject-Style Conditioned Image Generation**  
+https://arxiv.org/abs/2412.05148
+
+Learns a hypernetwork that composes subject and style LoRAs for held-out pairs, avoiding expensive per-combination optimization.
+
+**Mirror implication:** Factorized Mirror subject/style codes must beat native LoRA.rar composition at equal storage and generation fidelity.
+
+## PA264 — EST-LoRA timestep style selection
+
+**Subject or Style: Adaptive and Training-Free Mixture of LoRAs**  
+https://arxiv.org/abs/2508.02165
+
+Applies timestep-dependent adaptive layerwise selection of subject and style LoRAs via energy/style-discrepancy heuristics.
+
+**Mirror implication:** Temporal Mirror style/subject mixing must beat this cheap training-free baseline before claiming a special dynamic code benefit.
+
+## PA265 — GenSplatCodec one-step Gaussian decoding
+
+**GenSplatCodec: Feed-Forward Gaussian Splatting Compression via One-Step Diffusion**  
+https://arxiv.org/abs/2607.24403
+
+Combines compact structural Gaussian and reference-appearance streams with geometry-guided one-step generative decoding.
+
+**Mirror implication:** Mirror scene/appearance code must preserve cross-view consistency while improving bits and latency against this native codec.
+
