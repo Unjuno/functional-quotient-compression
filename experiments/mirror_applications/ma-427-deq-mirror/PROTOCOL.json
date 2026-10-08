@@ -1,0 +1,22 @@
+{
+  "experiment_id": "MA-427",
+  "title": "Task-conditioned Deep Equilibrium maps",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/COMPUTE",
+  "base_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
+  "draw_id": "Draw41",
+  "hypothesis": "A shared contractive DEQ operator plus a compact rank-1 task coordinate can realize multiple stable fixed-point functions at lower actual inference bytes than per-task full maps, while maintaining fixed-point quality and solve effort.",
+  "physical_object": "one shared contractive DEQ map h=tanh(Wh+Ux+b)",
+  "mirror_coordinate": "one scalar per-task coordinate along a development-estimated shared task-bias direction",
+  "logical_multiplicity": "task-specific equilibrium functions",
+  "prior_art_refs": ["PA71"],
+  "controls": ["shared DEQ without code", "shared DEQ with rank-1 native task bias residual", "rank-1 Mirror task coordinate", "independent per-task full bias upper control"],
+  "task": "Synthetic 4D contractive tanh fixed point with task-specific bias. Infer task coordinates from support fixed points; evaluate heldout inputs, fixed-point residual, solver iterations, stability, bytes.",
+  "development": {"worlds_or_seeds": [42701], "selection_metric": "Estimate a single task-bias direction from four development tasks; no architecture/code-rank changes."},
+  "fresh": {"worlds_or_seeds": [42711, 42712, 42713], "locked_before_access": true, "split": "Each world has four development tasks defining the shared direction; eight aligned fresh task functions plus four full-vector out-of-span boundary functions. Each fresh task uses 128 support and 64 heldout inputs."},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["shared W,U,b", "rank-1 direction", "task codes", "full task bias residuals", "headers/metadata"]},
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true},
+  "success_gate": "For aligned fresh tasks in >=2/3 worlds, Mirror fixed-point output MSE <=1.05x full-bias control, max residual <=1e-6, spectral radius <=1, actual task-bank payload <=60% full-bias bank, and median solve iterations <= full control +1. Mirror-specific value additionally requires a measurable quality/byte/solve advantage over the matched native rank-1 task-bias residual.",
+  "failure_gate": "FAIL if aligned quality/stability/storage gates fail in >=2/3 worlds, or Mirror is not better than the rank-1 native bias control on any relevant Pareto axis. Report out-of-span boundary separately.",
+  "boundaries": ["synthetic 4D DEQ only", "teacher aligned for four development tasks and separately perturbed out-of-span tasks", "no language model or learned optimizer evidence", "rank-1 code count is not independent capacity"]
+}
