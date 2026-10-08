@@ -1,19 +1,19 @@
 # MA-932 status
 
-- Status: SCREENING — protocol frozen before generator/training implementation
+- Status: FAIL — information diagnostic passed; storage and Mirror-specific gates failed
 - Branch: `research/ma-932-stitching-information-validity-20261008`
 - Base commit: `c935a903daca5c7d1d48aa50d05b5bd50f239cba`
 - Draw: 21; uniform from 537 eligible P0/UNTESTED rows, index 369
-- Last verified commit: pre-data freeze follows
-- Development complete: no
-- Fresh/audit opened: no
-- Results committed: no
-- Verification committed: no
-- Registry row updated: no
+- Last verified commit: `3e704f3` (pre-data freeze); result records pending commit
+- Development complete: yes (2 seeds)
+- Fresh/audit opened: fresh yes; audit no
+- Results committed: pending result commit
+- Verification committed: pending result commit
+- Registry row updated: pending result commit
 
 ## Next action
 
-Implement fixed encoders, shared and independent connectors, linear information probes, and actual payload serialization; run the frozen dev/fresh seeds.
+Record the result, update the registry and claim ledger, then continue with another uniform draw.
 
 ## Blockers
 
@@ -24,3 +24,5 @@ None identified. The controlled linear task is CPU-feasible.
 - PA241 is a direct warning that stitching accuracy alone can coexist with substantially different information contents.
 - Draw21 pool and exclusion snapshot are preserved under `source/`.
 - The selected branch and directory were created after the draw and are excluded from its recorded pre-draw snapshot.
+- One first launch raised a split-name `KeyError` before any optimizer update or metric evaluation; only the development/fresh generator split argument was corrected. The corrected frozen run completed all 60 model rows.
+- All three fresh seeds passed the task0-match/task1-loss and linear-probe information diagnostic. All three failed the Mirror payload ratio. One also failed the byte-matched FiLM margin; audit remained unopened.

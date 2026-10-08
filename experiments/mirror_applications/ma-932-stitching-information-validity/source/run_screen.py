@@ -21,7 +21,7 @@ def fit(seed,rep,mode,phase):
         y=train_y[idx,task];pred=model(x[idx],task);loss=F.mse_loss(pred,y)
         opt.zero_grad(set_to_none=True);loss.backward();opt.step()
     wall=time.perf_counter()-t
-    hold,targets=make_split(seed,phase,4096);hx=hold[rep];model.eval()
+    hold,targets=make_split(seed,'dev' if phase=='development' else 'fresh',4096);hx=hold[rep];model.eval()
     mse=[];r2=[]
     with torch.no_grad():
         for task in (0,1):
@@ -45,7 +45,7 @@ def main():
     torch.set_num_threads(1);rows=[];probe_rows=[]
     for phase,seeds in [('development',DEV),('fresh',FRESH)]:
       for seed in seeds:
-       train,train_y=make_split(seed,'train',16384);hold,hold_y=make_split(seed,phase,4096)
+       train,train_y=make_split(seed,'train',16384);hold,hold_y=make_split(seed,'dev' if phase=='development' else 'fresh',4096)
        for rep in REPS:
         probes=ridge_probe(train[rep],train_y)
         # Evaluate closed-form probe on same declared holdout.
@@ -58,11 +58,13 @@ def main():
     fresh_gate=[]
     for seed in FRESH:
       by={(r['representation'],r['mode']):r for r in rows if r['seed']==seed and r['split']=='fresh'}
+      probes={r['representation']:r for r in probe_rows if r['seed']==seed and r['split']=='fresh'}
       full=by[('full','mirror')];ind=by[('full','independent')];film=by[('full','film')]
       byte_match=abs(full['payload']['bytes']-film['payload']['bytes'])<=.05*full['payload']['bytes']
       fresh_gate.append({'seed':seed,
         'task0_only_matches_task0':abs(by[('full','mirror')]['mse_task0']-by[('task0_only','mirror')]['mse_task0'])<=.05,
         'task1_loss_reveals_missing_information':by[('task0_only','mirror')]['mse_task1']>=by[('full','mirror')]['mse_task1']+.5,
+        'linear_probes_confirm_missing_information':probes['full']['probe_v_mse']<.05 and probes['task0_only']['probe_v_mse']>=.5 and probes['task0_only']['probe_u_mse']<.05 and probes['unrelated_noise']['probe_u_mse']>=.5 and probes['unrelated_noise']['probe_v_mse']>=.5,
         'mirror_quality_vs_independent':full['mse_task0']<=1.1*ind['mse_task0'] and full['mse_task1']<=1.1*ind['mse_task1'],
         'mirror_bytes_vs_independent':full['payload']['bytes']<=.8*ind['payload']['bytes'],
         'mirror_film_bytes_matched':byte_match,
