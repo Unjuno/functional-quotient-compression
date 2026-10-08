@@ -74,6 +74,11 @@ The table below tells workers where to try the same extra low-description functi
 | Multispectral Earth observation | shared DOFA wavelength hypernet / AnySat encoder | sensor×wavelength×resolution×time `m` | physical multisensor transfer at lower incremental state? | DOFA, AnySat, SatMAE, CROMA, Prithvi |
 | Multimodal EO translation | TerraMind multimodal tokenizer/decoder and CROMA fusion | source modality×target modality `m` | cheaper verified cross-sensor functions than native any-to-any? | TerraMind, CROMA, missing-modality controls |
 
+| Natural LoRA adapter bank | actual trained `D_t=B_t A_t` per same-base task | gauge-invariant task code `m` over shared U/V, structured core, private residual | natural heldout task variation representable below CtS/EigenLoRAx cost? | CtS, CtM, EigenLoRAx, VB-LoRA, MetaTT, native LoRA, GLoRA |
+| Spectral pretrained base | singular basis of the *original* pretrained W | task core/diagonal/sparse `m` | pretrained W basis useful for task deltas at paid SVD/basis cost? | trained spectral coefficient adapter, W-SVD control, shared trained delta basis |
+| Many-LoRA serving | shared multi-adapter basis/cluster and GPU pager | per-adapter structured `m` with cluster/private exception | lower useful adapter bytes/TTFT than optimized serving? | Compress then Serve clusters, S-LoRA, Punica, LoRDBA |
+| Multi-agent low-rank KV | base/neutral KV cache plus task LR cache | agent m over already low-rank cache or exact read-path transform | true cache alias and target quality gain beyond native LR kernel? | LRAgent Flash-LoRA-Attention, PReCache, aLoRA, MA691 |
+
 ## Required variants after a direct screen
 
 A family that passes a first mechanism screen should usually be expanded in this order:
