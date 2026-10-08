@@ -1,8 +1,33 @@
 {
- "experiment_id":"MA-261","commit":"pending",
- "tests":{"command":"python experiments/mirror_applications/ma-261-batchensemble-logical-experts/tests/test_roundtrip.py","passed":1,"failed":0},
- "serialization":{"roundtrip_checked":true,"byte_exact":true,"method":"uncompressed NumPy NPZ; every condition stores complete deterministic reconstruction state"},
- "metric_replay":{"checked":true,"max_difference":0.0},
- "fresh_split_integrity_checked":true,"fresh_seeds":[107,227,311,419],
- "notes":["Development seeds 17 and 31; fresh seeds locked in PROTOCOL before fresh evaluation.","Fixed sign-based role routing is an oracle and is not included as trained router bytes.","Aligned teacher is generated from the Givens Mirror family.","Independent-expert condition tests the private-parameter boundary.","No optimizer updates; this is a post-fit representation screen.","No neural-language, learned routing, runtime or capacity claim."]
+  "experiment_id": "MA-261",
+  "commit": "95ed3c9",
+  "tests": {
+    "command": "python experiments/mirror_applications/ma-261-batchensemble-logical-experts/tests/test_roundtrip.py",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "method": "uncompressed NumPy NPZ; every condition stores complete deterministic reconstruction state"
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_seeds": [
+    107,
+    227,
+    311,
+    419
+  ],
+  "notes": [
+    "Development seeds 17 and 31; fresh seeds locked in PROTOCOL before fresh evaluation.",
+    "Fixed sign-based role routing is an oracle and is not included as trained router bytes.",
+    "Aligned teacher is generated from the Givens Mirror family.",
+    "Independent-expert condition tests the private-parameter boundary.",
+    "No optimizer updates; this is a post-fit representation screen.",
+    "No neural-language, learned routing, runtime or capacity claim."
+  ]
 }
