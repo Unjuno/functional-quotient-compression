@@ -1,0 +1,83 @@
+{
+  "experiment_id": "MA-371",
+  "title": "MatFormer granularity Mirror views",
+  "status": "PROTOCOL_FROZEN_BEFORE_DEVELOPMENT",
+  "base_commit": "abadf4b",
+  "prior_art_refs": [
+    "PA53",
+    "PA107"
+  ],
+  "hypothesis": "A tiny per-layer/per-granularity orthogonal View fitted after nested-width supernet training improves held-out quality of every nested granularity over vanilla nested sharing, while using <=50% of independent-model payload; this improvement must exceed equal-budget FiLM and rank-1 LoRA controls to count as Mirror-specific.",
+  "physical_object": "Two-layer nested-width MLP with width 64 supernetwork and 10-class output; active channels are prefixes at widths 16,32,64.",
+  "mirror_coordinate": "Per-layer, per-granularity 4-angle Givens transform over the first 8 active hidden coordinates immediately before each layer output/head; layer codes are stored per selected width.",
+  "logical_multiplicity": "Three nested-width models (16,32,64) from one physical supernetwork.",
+  "dataset": {
+    "name": "sklearn digits",
+    "version": "1.8.0",
+    "sha256": "faf2d98f61250c1cdc0b114323133d3c58da04f5c5d28bb78e4bde3c936a75b1",
+    "split": "stratified 60/20/20, per-world"
+  },
+  "model": {
+    "input": 64,
+    "hidden_width": 64,
+    "depth": 2,
+    "classes": 10,
+    "widths": [
+      16,
+      32,
+      64
+    ],
+    "training": "sandwich rule + in-place distillation",
+    "updates": 700,
+    "batch_size": 64,
+    "optimizer": "AdamW",
+    "learning_rates": [
+      0.003,
+      0.01
+    ],
+    "code_updates_per_width": 120
+  },
+  "controls": [
+    "vanilla nested supernet",
+    "per-width Givens Mirror coordinate",
+    "same-size per-width diagonal FiLM",
+    "per-width rank-1 output LoRA",
+    "independent width-specific MLP upper control"
+  ],
+  "development": {
+    "worlds": [
+      37100,
+      37101
+    ],
+    "selection": "minimum mean validation NLL over all widths and methods",
+    "allowed_tuning": "select only base learning rate in frozen grid"
+  },
+  "fresh": {
+    "worlds": [
+      37110,
+      37111,
+      37112
+    ],
+    "locked_before_access": true,
+    "requires": "--phase fresh --confirm-fresh and DEV_SELECTION.json"
+  },
+  "storage": {
+    "authority": "actual torch.save full inference-bank payload bytes",
+    "paid": [
+      "all supernet weights",
+      "per-width codes",
+      "independent model bank when applicable",
+      "classifier bias",
+      "architecture and normalization metadata",
+      "serialization overhead"
+    ]
+  },
+  "success_gate": "In all three fresh worlds, Mirror improves mean accuracy over vanilla nested baseline by >=1pp, remains within 2pp of independent, and payload <=50% independent; Mirror-specific requires >=1pp over FiLM at byte-near cost (within 15%) or >=10% fewer bytes than FiLM at <=0.5pp loss.",
+  "failure_gate": "Miss shared-vs-independent quality/storage gate in >=2 fresh worlds, or FiLM/LoRA matches/dominates Mirror at equal/lower payload and correction compute.",
+  "boundaries": [
+    "small nested MLP mechanism screen, not MatFormer transformer reproduction",
+    "fixed updates are not capacity evidence",
+    "no hardware latency claim",
+    "no unseen mixed-granularity configurations; these belong to MA-372"
+  ]
+}
