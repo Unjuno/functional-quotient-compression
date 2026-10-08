@@ -4009,3 +4009,132 @@ Code: https://github.com/hjdw2/NFE
 https://proceedings.mlr.press/v306/hoang26d.html
 
 **Native claim:** SpecMD benchmarks expert caching and prefetch on realistic memory/hardware budgets, including a Least-Stale eviction strategy. This is a direct scheduler/memory-control baseline for MA-1176 after the primary multi-output mechanism is validated. Do not attribute generic prefetch/caching gains to Mirror.
+
+## PA440 — A Unified Sparse Attention via Multi-Granularity Compression
+
+**A Unified Sparse Attention via Multi-Granularity Compression** — Siran Liu, Zane Cao, Yongchao He. ICML 2026, PMLR 306:75532-75548.  
+https://proceedings.mlr.press/v306/liu26h.html
+
+**Established method / mandatory native control:** UniSparse builds multi-granularity composite token summaries and a block sparse selector. It is an existing optimized sparse attention algorithm. Mirror must not claim its token-selection or full-attention speedups.
+
+**Mirror delta:** Only a source-calibrated small m giving an incremental heldout task-quality/paid-byte/active-compute benefit beyond this native source is a Mirror-specific positive result. Native results are not registered as Mirror results.
+
+## PA441 — The Sparse Frontier: Sparse Attention Trade-offs in Transformer LLMs
+
+**The Sparse Frontier: Sparse Attention Trade-offs in Transformer LLMs** — Piotr Nawrot et al.. Findings of ACL 2026, 38667–38701.  
+https://aclanthology.org/2026.findings-acl.1926/
+
+Native implementation/code: https://github.com/PiotrNawrot/sparse-frontier
+
+**Established method / mandatory native control:** Large-scale methodological audit of training-free sparse attention, identifying granularity/routing and GPU-kernel bottlenecks. Requires measured wall-clock sparsity with native kernels and longer-context task splits.
+
+**Mirror delta:** Only a source-calibrated small m giving an incremental heldout task-quality/paid-byte/active-compute benefit beyond this native source is a Mirror-specific positive result. Native results are not registered as Mirror results.
+
+## PA442 — LoRA on the Go: Instance-level Dynamic LoRA Selection and Merging
+
+**LoRA on the Go: Instance-level Dynamic LoRA Selection and Merging** — Seungeon Lee, Soumi Das, Manish Gupta, Krishna P. Gummadi. ACL 2026 long papers, 39583-39601.  
+https://aclanthology.org/2026.acl-long.1837/
+
+**Established method / mandatory native control:** LoGo uses signals from a single pass through LoRA adapters to perform training-free instance-level adapter selection and merging. This native ability, not Mirror, explains adaptive composition.
+
+**Mirror delta:** Only a source-calibrated small m giving an incremental heldout task-quality/paid-byte/active-compute benefit beyond this native source is a Mirror-specific positive result. Native results are not registered as Mirror results.
+
+## PA443 — RanLoRA: Residual-aware Nonlinear Low-Rank Adaptation
+
+**RanLoRA: Residual-aware Nonlinear Low-Rank Adaptation** — Xu Luo, Yongbin Liu, Chunping Ouyang, Ying Yu. Findings of ACL 2026, 17243-17258.  
+https://aclanthology.org/2026.findings-acl.852/
+
+**Established method / mandatory native control:** RanLoRA freezes principal pretrained SVD modes and adapts residual subspaces using nonlinear activation and Hadamard vector modulation. Nonlinearity and factor reuse are native, not Mirror innovations.
+
+**Mirror delta:** Only a source-calibrated small m giving an incremental heldout task-quality/paid-byte/active-compute benefit beyond this native source is a Mirror-specific positive result. Native results are not registered as Mirror results.
+
+## PA444 — Efficient inference, training, and fine-tuning of protein language models
+
+**Efficient inference, training, and fine-tuning of protein language models** — Muhammed Hasan Çelik, Xiaohui Xie. iScience 28(10):113495 (2025).  
+https://doi.org/10.1016/j.isci.2025.113495
+
+Native implementation/code: https://github.com/uci-cbcl/esm-efficient
+
+**Established method / mandatory native control:** ESME optimizes ESM-like protein model execution, packing, quantization and task-specific parameter-efficient adaptation. Protein property heads and native optimized sequence encoding are direct baselines.
+
+**Mirror delta:** Only a source-calibrated small m giving an incremental heldout task-quality/paid-byte/active-compute benefit beyond this native source is a Mirror-specific positive result. Native results are not registered as Mirror results.
+
+## PA445 — Protein Circuit Tracing via Cross-layer Transcoders
+
+**Protein Circuit Tracing via Cross-layer Transcoders** — Darin Tsui, Kunal Talreja, Daniel Saeedi, Amirali Aghazadeh. ICML 2026, PMLR 306:122371-122402.  
+https://proceedings.mlr.press/v306/tsui26a.html
+
+Native implementation/code: https://github.com/amirgroup-codes/ProtoMech
+
+**Established method / mandatory native control:** ProtoMech already learns sparse cross-layer transcoders and retrieves property-specific circuits in ESM2. Compare its native full/windowed CLT and PLT, not a weak independent transcoder.
+
+**Mirror delta:** Only a source-calibrated small m giving an incremental heldout task-quality/paid-byte/active-compute benefit beyond this native source is a Mirror-specific positive result. Native results are not registered as Mirror results.
+
+## PA446 — CellFM: a large-scale foundation model pre-trained on transcriptomics of 100 million human cells
+
+**CellFM: a large-scale foundation model pre-trained on transcriptomics of 100 million human cells** — Yuansong Zeng et al.. Nature Communications 16, 4679 (2025).  
+https://www.nature.com/articles/s41467-025-59926-5
+
+Native implementation/code: https://github.com/biomed-AI/CellFM
+
+**Established method / mandatory native control:** CellFM trains a RetNet-based single-cell encoder with LoRA and downstream perturbation/function prediction. It is not new to condition a shared expression model on perturbation/task. Check the authors' correction before using figure values.
+
+**Mirror delta:** Only a source-calibrated small m giving an incremental heldout task-quality/paid-byte/active-compute benefit beyond this native source is a Mirror-specific positive result. Native results are not registered as Mirror results.
+
+## PA447 — RegFormer: a single-cell foundation model powered by gene regulatory hierarchies
+
+**RegFormer: a single-cell foundation model powered by gene regulatory hierarchies** — Luni Hu, Hua Qin et al.. Nature Communications 17, 6432 (2026).  
+https://www.nature.com/articles/s41467-026-72198-x
+
+Native implementation/code: https://github.com/BGIResearch/RegFormer
+
+**Established method / mandatory native control:** GRN-guided gene sequence ordering and Mamba-based cell embedding are native RegFormer. Mirror must only test extra factorized perturbation coordinates beyond this biology-specific learned representation.
+
+**Mirror delta:** Only a source-calibrated small m giving an incremental heldout task-quality/paid-byte/active-compute benefit beyond this native source is a Mirror-specific positive result. Native results are not registered as Mirror results.
+
+## PA448 — Deep-learning-based gene perturbation effect prediction does not yet outperform simple linear baselines
+
+**Deep-learning-based gene perturbation effect prediction does not yet outperform simple linear baselines** — Constantin Ahlmann-Eltze, Wolfgang Huber, Simon Anders. Nature Methods 22, 1657–1661 (2025).  
+https://www.nature.com/articles/s41592-025-02772-6
+
+**Established method / mandatory native control:** Empirical negative benchmark finding that single-cell foundation models did not outperform simple mean/linear perturbation predictors on studied settings. Those baselines are mandatory for Mirror.
+
+**Mirror delta:** Only a source-calibrated small m giving an incremental heldout task-quality/paid-byte/active-compute benefit beyond this native source is a Mirror-specific positive result. Native results are not registered as Mirror results.
+
+## PA449 — Deep learning perturbation models can outperform baselines on calibrated metrics
+
+**Deep learning perturbation models can outperform baselines on calibrated metrics** — Henry E. Miller, Gabriel M. Mejia, Francis J. A. Leblanc et al.. Nature Biotechnology, 1 October 2026.  
+https://www.nature.com/articles/s41587-026-03307-w
+
+**Established method / mandatory native control:** Shows evaluation metric calibration/positive controls can change the apparent performance of perturbation predictors. Treat as complementary methodological perspective to PA448, not as a guarantee models always win.
+
+**Mirror delta:** Only a source-calibrated small m giving an incremental heldout task-quality/paid-byte/active-compute benefit beyond this native source is a Mirror-specific positive result. Native results are not registered as Mirror results.
+
+## PA450 — ExpertFlow: Efficient Mixture-of-Experts Inference via Predictive Expert Caching and Token Scheduling
+
+**ExpertFlow: Efficient Mixture-of-Experts Inference via Predictive Expert Caching and Token Scheduling** — Xin He et al.. DAC 2026, DOI 10.1145/3770743.3804292.  
+https://doi.org/10.1145/3770743.3804292
+
+Native implementation/code: https://github.com/expertflow-dac/expertflow
+
+**Established method / mandatory native control:** Native predictive routing path, token batch scheduling and expert caching/offload are an end-to-end system control. Credit only additional Mirror grouped physical storage or hot-view coding, not generic prefetch.
+
+**Mirror delta:** Only a source-calibrated small m giving an incremental heldout task-quality/paid-byte/active-compute benefit beyond this native source is a Mirror-specific positive result. Native results are not registered as Mirror results.
+
+## PA451 — DyMoE: Dynamic Expert Orchestration with Mixed-Precision Quantization for Efficient MoE Inference on Edge
+
+**DyMoE: Dynamic Expert Orchestration with Mixed-Precision Quantization for Efficient MoE Inference on Edge** — Yuegui Huang, Zhiyuan Fang, Weiqi Luo, Ruoyu Wu, Wuhui Chen, Zibin Zheng. arXiv:2603.19172 (2026 preprint).  
+https://arxiv.org/abs/2603.19172
+
+**Established method / mandatory native control:** Importance/depth-aware mixed-bit expert scheduling with look-ahead prefetch. Required matched-bit edge deployment control for Mirror prefetch, quantization, and resident HBM claims.
+
+**Mirror delta:** Only a source-calibrated small m giving an incremental heldout task-quality/paid-byte/active-compute benefit beyond this native source is a Mirror-specific positive result. Native results are not registered as Mirror results.
+
+## PA452 — Evaluating the Utilities of Foundation Models in Single-Cell Data Analysis
+
+**Evaluating the Utilities of Foundation Models in Single-Cell Data Analysis** — Liu et al.. Advanced Science (2026), DOI 10.1002/advs.202514490.  
+https://doi.org/10.1002/advs.202514490
+
+**Established method / mandatory native control:** Multi-model single-cell evaluation across annotation, embedding, perturbation and other tasks. Hold out perturbation/cell identities and compare native model with strong conventional baselines.
+
+**Mirror delta:** Only a source-calibrated small m giving an incremental heldout task-quality/paid-byte/active-compute benefit beyond this native source is a Mirror-specific positive result. Native results are not registered as Mirror results.

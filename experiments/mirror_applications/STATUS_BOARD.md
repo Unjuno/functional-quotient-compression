@@ -4,13 +4,13 @@ Updated: 2026-10-08 JST
 Canonical worker branch remains `research/mirror-application-worker-ready-20261007` (unchanged).
 This is an ISOLATED RESEARCH branch `research/mirror-single-forward-prefetch-20261008`, NOT the worker authoritative queue.
 
-## Program totals (reconciled from authoritative 1176-row **isolated staging** registry)
+## Program totals (reconciled from authoritative 1182-row **isolated staging** registry)
 
-- Registered candidates: **1176**
-- P0: **645** (35 completed; 610 UNTESTED)
-- P1: **428** (12 completed; 416 UNTESTED)
+- Registered candidates: **1182**
+- P0: **647** (35 completed; 612 UNTESTED)
+- P1: **432** (12 completed; 420 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1129 UNTESTED, 29 PROMISING, 18 FAIL**
+- Current MA statuses: **1135 UNTESTED, 29 PROMISING, 18 FAIL**
 - 47 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -114,7 +114,11 @@ Four new design-only MA-1171..MA-1174, all UNTESTED (3 P0, 1 P1), cross-linking 
 
 ## Research-only focus: single-forward multiple useful outputs (2026-10-08)
 
-**MA-1175 is the FIRST research-priority experiment inside this isolated branch**, with its MA priority **P0/UNTESTED unchanged**. The focus is learning useful separate logical functions from exactly one heavy shared trunk call plus small m, not counting cache/offload savings as the primary result. Frozen SFM003 task-head study and raw dev/fresh measurements are in [SFM003](research_intake/single_forward_prefetch_20261008/SFM003_REPORT.md). The favorable beta=0 synthetic output-orbit mechanism was recovered at K4/K5 in 5/5 fresh worlds. Native ordinary Givens heads have the identical functional model (M0) and standard shared-trunk linear heads are a stronger, faster CPU competitor with a larger output-head footprint. With independent private nonlinear target variation the Mirror-only task model degrades substantially. No full MA status change or learned-LM adoption is claimed.
+**MA-1175 is one of several equal-standing research hypotheses; there is no special first-priority assignment**, with its MA priority **P0/UNTESTED unchanged**. The focus is learning useful separate logical functions from exactly one heavy shared trunk call plus small m, not counting cache/offload savings as the primary result. Frozen SFM003 task-head study and raw dev/fresh measurements are in [SFM003](research_intake/single_forward_prefetch_20261008/SFM003_REPORT.md). The favorable beta=0 synthetic output-orbit mechanism was recovered at K4/K5 in 5/5 fresh worlds. Native ordinary Givens heads have the identical functional model (M0) and standard shared-trunk linear heads are a stronger, faster CPU competitor with a larger output-head footprint. With independent private nonlinear target variation the Mirror-only task model degrades substantially. No full MA status change or learned-LM adoption is claimed.
 
 New native source controls PA437 MIMMO, PA438 Network Fission Ensembles, and PA439 SpecMD were registered without new MA numbers. Research priority [focus queue](research_intake/single_forward_prefetch_20261008/RESEARCH_FOCUS_QUEUE.md) is **not** the canonical worker queue; live worker MA-255 remains next.
 
+
+## Breadth-first scientific intake, no special focus (2026-10-08)
+
+Following the user's instruction, the previous MA-1175 first-priority assignment is **withdrawn**; MA-1175 remains P0/UNTESTED on a research branch but has no preferential work scheduling. Six additional candidate families MA-1177..1182 (2 P0, 4 P1), PA440..PA452 native literature, and method-control supplements are staged on `research/mirror-breadth-method-sweep-20261008` only. No active worker queue or original worker branch was touched. See [breadth sweep](research_intake/breadth_native_20261008/SWEEP.md). Main remains unchanged.
