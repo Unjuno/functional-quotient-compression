@@ -1,0 +1,617 @@
+{
+  "condition": "development",
+  "seed": 37501,
+  "summaries": [
+    {
+      "condition": "development",
+      "seed": 37501,
+      "method": "independent",
+      "serialized_bytes": 39783,
+      "payload_sha256": "ed31062c2883bd6d4c66da730da77fcaed45c63f25a185d87faa6a2817e21d61",
+      "optimizer_updates": 1200,
+      "examples_seen": 153600,
+      "model_example_exposures": 1228800,
+      "examples_per_independent_child": 153600,
+      "train_wall_s": 5.244120893003128,
+      "validation": {
+        "paths": [
+          {
+            "path": 0,
+            "active_nodes": 0,
+            "nll": 0.22598637640476227,
+            "accuracy": 0.9267578125,
+            "macs_per_example": 320,
+            "examples_per_s": 7261690.36043079
+          },
+          {
+            "path": 1,
+            "active_nodes": 1,
+            "nll": 0.20729486644268036,
+            "accuracy": 0.923828125,
+            "macs_per_example": 832,
+            "examples_per_s": 6754862.456509901
+          },
+          {
+            "path": 2,
+            "active_nodes": 1,
+            "nll": 0.21134063601493835,
+            "accuracy": 0.92431640625,
+            "macs_per_example": 832,
+            "examples_per_s": 6685098.517202537
+          },
+          {
+            "path": 3,
+            "active_nodes": 2,
+            "nll": 0.21619921922683716,
+            "accuracy": 0.921875,
+            "macs_per_example": 1344,
+            "examples_per_s": 5038601.386006286
+          },
+          {
+            "path": 4,
+            "active_nodes": 1,
+            "nll": 0.19561707973480225,
+            "accuracy": 0.93017578125,
+            "macs_per_example": 832,
+            "examples_per_s": 3738925.12898155
+          },
+          {
+            "path": 5,
+            "active_nodes": 2,
+            "nll": 0.21163718402385712,
+            "accuracy": 0.9228515625,
+            "macs_per_example": 1344,
+            "examples_per_s": 4279693.005316246
+          },
+          {
+            "path": 6,
+            "active_nodes": 2,
+            "nll": 0.2119465470314026,
+            "accuracy": 0.921875,
+            "macs_per_example": 1344,
+            "examples_per_s": 4906235.281478677
+          },
+          {
+            "path": 7,
+            "active_nodes": 3,
+            "nll": 0.21136216819286346,
+            "accuracy": 0.9248046875,
+            "macs_per_example": 1856,
+            "examples_per_s": 3550482.532793242
+          }
+        ],
+        "mean_nll": 0.21142300963401794,
+        "mean_accuracy": 0.924560546875
+      },
+      "test": {
+        "paths": [
+          {
+            "path": 0,
+            "active_nodes": 0,
+            "nll": 0.2376173585653305,
+            "accuracy": 0.91455078125,
+            "macs_per_example": 320,
+            "examples_per_s": 13015735.791692905
+          },
+          {
+            "path": 1,
+            "active_nodes": 1,
+            "nll": 0.2187395989894867,
+            "accuracy": 0.912841796875,
+            "macs_per_example": 832,
+            "examples_per_s": 6281293.395364913
+          },
+          {
+            "path": 2,
+            "active_nodes": 1,
+            "nll": 0.21891602873802185,
+            "accuracy": 0.91259765625,
+            "macs_per_example": 832,
+            "examples_per_s": 4360457.39254798
+          },
+          {
+            "path": 3,
+            "active_nodes": 2,
+            "nll": 0.22631578147411346,
+            "accuracy": 0.909912109375,
+            "macs_per_example": 1344,
+            "examples_per_s": 4960747.5993205905
+          },
+          {
+            "path": 4,
+            "active_nodes": 1,
+            "nll": 0.21002796292304993,
+            "accuracy": 0.91650390625,
+            "macs_per_example": 832,
+            "examples_per_s": 7535867.034354788
+          },
+          {
+            "path": 5,
+            "active_nodes": 2,
+            "nll": 0.22252538800239563,
+            "accuracy": 0.910888671875,
+            "macs_per_example": 1344,
+            "examples_per_s": 4213783.676561271
+          },
+          {
+            "path": 6,
+            "active_nodes": 2,
+            "nll": 0.22308672964572906,
+            "accuracy": 0.91015625,
+            "macs_per_example": 1344,
+            "examples_per_s": 3742929.4625208164
+          },
+          {
+            "path": 7,
+            "active_nodes": 3,
+            "nll": 0.22431407868862152,
+            "accuracy": 0.911865234375,
+            "macs_per_example": 1856,
+            "examples_per_s": 2239662.4824632346
+          }
+        ],
+        "mean_nll": 0.22269286587834358,
+        "mean_accuracy": 0.91241455078125
+      }
+    },
+    {
+      "condition": "development",
+      "seed": 37501,
+      "method": "supernet",
+      "serialized_bytes": 8499,
+      "payload_sha256": "6de914b6ac12b49672aa629fd5b940778f942a286157b9c1c04cd2618549e179",
+      "optimizer_updates": 1200,
+      "examples_seen": 153600,
+      "model_example_exposures": 153600,
+      "examples_per_independent_child": null,
+      "train_wall_s": 0.9936786659964127,
+      "validation": {
+        "paths": [
+          {
+            "path": 0,
+            "active_nodes": 0,
+            "nll": 0.32421159744262695,
+            "accuracy": 0.9140625,
+            "macs_per_example": 320,
+            "examples_per_s": 10204437.403847925
+          },
+          {
+            "path": 1,
+            "active_nodes": 1,
+            "nll": 0.2188681960105896,
+            "accuracy": 0.92529296875,
+            "macs_per_example": 832,
+            "examples_per_s": 3106390.848977997
+          },
+          {
+            "path": 2,
+            "active_nodes": 1,
+            "nll": 0.22442854940891266,
+            "accuracy": 0.92529296875,
+            "macs_per_example": 832,
+            "examples_per_s": 3728293.3334765974
+          },
+          {
+            "path": 3,
+            "active_nodes": 2,
+            "nll": 0.19954939186573029,
+            "accuracy": 0.92919921875,
+            "macs_per_example": 1344,
+            "examples_per_s": 3015511.9049833254
+          },
+          {
+            "path": 4,
+            "active_nodes": 1,
+            "nll": 0.22347217798233032,
+            "accuracy": 0.92529296875,
+            "macs_per_example": 832,
+            "examples_per_s": 5940691.74014797
+          },
+          {
+            "path": 5,
+            "active_nodes": 2,
+            "nll": 0.1975685954093933,
+            "accuracy": 0.9267578125,
+            "macs_per_example": 1344,
+            "examples_per_s": 4232139.5009320555
+          },
+          {
+            "path": 6,
+            "active_nodes": 2,
+            "nll": 0.19904708862304688,
+            "accuracy": 0.9267578125,
+            "macs_per_example": 1344,
+            "examples_per_s": 4755966.424972074
+          },
+          {
+            "path": 7,
+            "active_nodes": 3,
+            "nll": 0.22225648164749146,
+            "accuracy": 0.927734375,
+            "macs_per_example": 1856,
+            "examples_per_s": 3653880.483842954
+          }
+        ],
+        "mean_nll": 0.22617525979876518,
+        "mean_accuracy": 0.925048828125
+      },
+      "test": {
+        "paths": [
+          {
+            "path": 0,
+            "active_nodes": 0,
+            "nll": 0.3305343985557556,
+            "accuracy": 0.914306640625,
+            "macs_per_example": 320,
+            "examples_per_s": 14402706.28706163
+          },
+          {
+            "path": 1,
+            "active_nodes": 1,
+            "nll": 0.22681911289691925,
+            "accuracy": 0.91796875,
+            "macs_per_example": 832,
+            "examples_per_s": 6594868.059649805
+          },
+          {
+            "path": 2,
+            "active_nodes": 1,
+            "nll": 0.23078995943069458,
+            "accuracy": 0.91455078125,
+            "macs_per_example": 832,
+            "examples_per_s": 6532924.613111016
+          },
+          {
+            "path": 3,
+            "active_nodes": 2,
+            "nll": 0.21099141240119934,
+            "accuracy": 0.915283203125,
+            "macs_per_example": 1344,
+            "examples_per_s": 4904649.13835481
+          },
+          {
+            "path": 4,
+            "active_nodes": 1,
+            "nll": 0.2308024913072586,
+            "accuracy": 0.914794921875,
+            "macs_per_example": 832,
+            "examples_per_s": 7554380.147542404
+          },
+          {
+            "path": 5,
+            "active_nodes": 2,
+            "nll": 0.21031978726387024,
+            "accuracy": 0.916748046875,
+            "macs_per_example": 1344,
+            "examples_per_s": 3359844.6058540093
+          },
+          {
+            "path": 6,
+            "active_nodes": 2,
+            "nll": 0.20954877138137817,
+            "accuracy": 0.917236328125,
+            "macs_per_example": 1344,
+            "examples_per_s": 4076851.037690022
+          },
+          {
+            "path": 7,
+            "active_nodes": 3,
+            "nll": 0.242627814412117,
+            "accuracy": 0.9150390625,
+            "macs_per_example": 1856,
+            "examples_per_s": 3160742.5880036238
+          }
+        ],
+        "mean_nll": 0.2365542184561491,
+        "mean_accuracy": 0.915740966796875
+      },
+      "validation_to_independent_test_spearman": 0.04761904761904763
+    },
+    {
+      "condition": "development",
+      "seed": 37501,
+      "method": "scalar_path",
+      "serialized_bytes": 8737,
+      "payload_sha256": "28436915f2e8b7985f218dcd5cff47d1bdc855c012e88a9588d7de6d9dbce29a",
+      "optimizer_updates": 1200,
+      "examples_seen": 153600,
+      "model_example_exposures": 153600,
+      "examples_per_independent_child": null,
+      "train_wall_s": 1.0613948309983243,
+      "validation": {
+        "paths": [
+          {
+            "path": 0,
+            "active_nodes": 0,
+            "nll": 0.28661882877349854,
+            "accuracy": 0.91015625,
+            "macs_per_example": 320,
+            "examples_per_s": 9064955.348651174
+          },
+          {
+            "path": 1,
+            "active_nodes": 1,
+            "nll": 0.21824224293231964,
+            "accuracy": 0.91748046875,
+            "macs_per_example": 832,
+            "examples_per_s": 6934685.926161375
+          },
+          {
+            "path": 2,
+            "active_nodes": 1,
+            "nll": 0.21819230914115906,
+            "accuracy": 0.92236328125,
+            "macs_per_example": 832,
+            "examples_per_s": 6933746.722636609
+          },
+          {
+            "path": 3,
+            "active_nodes": 2,
+            "nll": 0.20447573065757751,
+            "accuracy": 0.92822265625,
+            "macs_per_example": 1344,
+            "examples_per_s": 2717636.5207380713
+          },
+          {
+            "path": 4,
+            "active_nodes": 1,
+            "nll": 0.21805399656295776,
+            "accuracy": 0.92333984375,
+            "macs_per_example": 832,
+            "examples_per_s": 6938209.95008176
+          },
+          {
+            "path": 5,
+            "active_nodes": 2,
+            "nll": 0.2070508897304535,
+            "accuracy": 0.923828125,
+            "macs_per_example": 1344,
+            "examples_per_s": 3707277.1483793827
+          },
+          {
+            "path": 6,
+            "active_nodes": 2,
+            "nll": 0.2078244835138321,
+            "accuracy": 0.92333984375,
+            "macs_per_example": 1344,
+            "examples_per_s": 2518402.2926231516
+          },
+          {
+            "path": 7,
+            "active_nodes": 3,
+            "nll": 0.21604986488819122,
+            "accuracy": 0.92578125,
+            "macs_per_example": 1856,
+            "examples_per_s": 2627278.0066636493
+          }
+        ],
+        "mean_nll": 0.22206354327499866,
+        "mean_accuracy": 0.92181396484375
+      },
+      "test": {
+        "paths": [
+          {
+            "path": 0,
+            "active_nodes": 0,
+            "nll": 0.293592631816864,
+            "accuracy": 0.910888671875,
+            "macs_per_example": 320,
+            "examples_per_s": 9643569.453762313
+          },
+          {
+            "path": 1,
+            "active_nodes": 1,
+            "nll": 0.2281590849161148,
+            "accuracy": 0.916259765625,
+            "macs_per_example": 832,
+            "examples_per_s": 6944103.024190262
+          },
+          {
+            "path": 2,
+            "active_nodes": 1,
+            "nll": 0.22613850235939026,
+            "accuracy": 0.913818359375,
+            "macs_per_example": 832,
+            "examples_per_s": 6427679.154359548
+          },
+          {
+            "path": 3,
+            "active_nodes": 2,
+            "nll": 0.21679159998893738,
+            "accuracy": 0.911865234375,
+            "macs_per_example": 1344,
+            "examples_per_s": 4428639.518297654
+          },
+          {
+            "path": 4,
+            "active_nodes": 1,
+            "nll": 0.2259150892496109,
+            "accuracy": 0.914306640625,
+            "macs_per_example": 832,
+            "examples_per_s": 6461607.367765476
+          },
+          {
+            "path": 5,
+            "active_nodes": 2,
+            "nll": 0.21942460536956787,
+            "accuracy": 0.9130859375,
+            "macs_per_example": 1344,
+            "examples_per_s": 4819634.390110101
+          },
+          {
+            "path": 6,
+            "active_nodes": 2,
+            "nll": 0.217764213681221,
+            "accuracy": 0.91259765625,
+            "macs_per_example": 1344,
+            "examples_per_s": 3872388.9251890234
+          },
+          {
+            "path": 7,
+            "active_nodes": 3,
+            "nll": 0.2285982370376587,
+            "accuracy": 0.9130859375,
+            "macs_per_example": 1856,
+            "examples_per_s": 2882714.4740709476
+          }
+        ],
+        "mean_nll": 0.23204799555242062,
+        "mean_accuracy": 0.913238525390625
+      },
+      "validation_to_independent_test_spearman": -0.1666666666666667
+    },
+    {
+      "condition": "development",
+      "seed": 37501,
+      "method": "mirror_path",
+      "serialized_bytes": 8737,
+      "payload_sha256": "69a2780a96d4bd0ec012d78cd703b6d8f76df5864da005e463f36d71add84ab5",
+      "optimizer_updates": 1200,
+      "examples_seen": 153600,
+      "model_example_exposures": 153600,
+      "examples_per_independent_child": null,
+      "train_wall_s": 1.2280127740013995,
+      "validation": {
+        "paths": [
+          {
+            "path": 0,
+            "active_nodes": 0,
+            "nll": 0.3384650647640228,
+            "accuracy": 0.9052734375,
+            "macs_per_example": 336,
+            "examples_per_s": 6224034.771160615
+          },
+          {
+            "path": 1,
+            "active_nodes": 1,
+            "nll": 0.2339547723531723,
+            "accuracy": 0.9208984375,
+            "macs_per_example": 848,
+            "examples_per_s": 3633499.1351587954
+          },
+          {
+            "path": 2,
+            "active_nodes": 1,
+            "nll": 0.2312338799238205,
+            "accuracy": 0.92041015625,
+            "macs_per_example": 848,
+            "examples_per_s": 4661962.232705961
+          },
+          {
+            "path": 3,
+            "active_nodes": 2,
+            "nll": 0.20598861575126648,
+            "accuracy": 0.92529296875,
+            "macs_per_example": 1360,
+            "examples_per_s": 3690415.894541691
+          },
+          {
+            "path": 4,
+            "active_nodes": 1,
+            "nll": 0.22965438663959503,
+            "accuracy": 0.92138671875,
+            "macs_per_example": 848,
+            "examples_per_s": 2759966.4749539164
+          },
+          {
+            "path": 5,
+            "active_nodes": 2,
+            "nll": 0.20694047212600708,
+            "accuracy": 0.927734375,
+            "macs_per_example": 1360,
+            "examples_per_s": 2475840.0015053037
+          },
+          {
+            "path": 6,
+            "active_nodes": 2,
+            "nll": 0.20645762979984283,
+            "accuracy": 0.9267578125,
+            "macs_per_example": 1360,
+            "examples_per_s": 3165295.515046122
+          },
+          {
+            "path": 7,
+            "active_nodes": 3,
+            "nll": 0.22857989370822906,
+            "accuracy": 0.92724609375,
+            "macs_per_example": 1872,
+            "examples_per_s": 1909918.607371823
+          }
+        ],
+        "mean_nll": 0.23515933938324451,
+        "mean_accuracy": 0.921875
+      },
+      "test": {
+        "paths": [
+          {
+            "path": 0,
+            "active_nodes": 0,
+            "nll": 0.3447834551334381,
+            "accuracy": 0.912353515625,
+            "macs_per_example": 336,
+            "examples_per_s": 8013993.155260792
+          },
+          {
+            "path": 1,
+            "active_nodes": 1,
+            "nll": 0.24203018844127655,
+            "accuracy": 0.91357421875,
+            "macs_per_example": 848,
+            "examples_per_s": 5593229.176901956
+          },
+          {
+            "path": 2,
+            "active_nodes": 1,
+            "nll": 0.2384309619665146,
+            "accuracy": 0.911865234375,
+            "macs_per_example": 848,
+            "examples_per_s": 4607553.630523489
+          },
+          {
+            "path": 3,
+            "active_nodes": 2,
+            "nll": 0.22042019665241241,
+            "accuracy": 0.913330078125,
+            "macs_per_example": 1360,
+            "examples_per_s": 2999831.5597840208
+          },
+          {
+            "path": 4,
+            "active_nodes": 1,
+            "nll": 0.23634053766727448,
+            "accuracy": 0.910888671875,
+            "macs_per_example": 848,
+            "examples_per_s": 5440550.467793267
+          },
+          {
+            "path": 5,
+            "active_nodes": 2,
+            "nll": 0.21897295117378235,
+            "accuracy": 0.9140625,
+            "macs_per_example": 1360,
+            "examples_per_s": 3179516.956591036
+          },
+          {
+            "path": 6,
+            "active_nodes": 2,
+            "nll": 0.21756184101104736,
+            "accuracy": 0.912353515625,
+            "macs_per_example": 1360,
+            "examples_per_s": 4095754.2490593623
+          },
+          {
+            "path": 7,
+            "active_nodes": 3,
+            "nll": 0.2515081465244293,
+            "accuracy": 0.91357421875,
+            "macs_per_example": 1872,
+            "examples_per_s": 2888903.4554521786
+          }
+        ],
+        "mean_nll": 0.2462560348212719,
+        "mean_accuracy": 0.912750244140625
+      },
+      "validation_to_independent_test_spearman": -0.19047619047619052
+    }
+  ]
+}

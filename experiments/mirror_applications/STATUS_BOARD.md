@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (38 completed; 592 UNTESTED)
+- P0: **630** (39 completed; 591 UNTESTED)
 - P1: **422** (12 completed; 410 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1105 UNTESTED, 30 PROMISING, 20 FAIL**
+- Current MA statuses: **1104 UNTESTED, 30 PROMISING, 21 FAIL**
 - 47 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -23,22 +23,22 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-375 — One-shot supernet + Mirror subgraph correction (P0; PA62)**
+**MA-379 — Mirror-compressed AdapterFusion bank (P0; PA54)**
 
-MA-374 is PROMISING only for final-depth prediction on the registered synthetic recurrence worlds; the multi-depth gate missed in one seed, so fresh remains sealed. Continue with the one-shot subgraph-rank-bias candidate. MA-369/371/372 remain UNTESTED and paused pending width/depth output-code family redesign.
+MA-375 completed as FAIL: per-path Givens correction did not improve ranking agreement or mean child NLL over native one-shot sharing and scalar control. Continue to the next P0 candidate, AdapterFusion source-bank compression. MA-369/371/372 remain UNTESTED and paused pending width/depth output-code family redesign.
 
-Required controls: native one-shot shared supernet, the exact Mirror architecture-class correction, a byte-matched scalar/gate control, and independently trained children. Measure child ranking agreement and actual child quality/bytes.
+Required controls: full independent frozen adapter bank and native AdapterFusion, shared adapter bases, matched low-rank/gate control, and Mirror source-task codes. Charge adapter bytes and fusion compute.
 
-Prior art: PA62 ENAS/one-shot architecture search. Correct any supernet ranking bias against independent child training; do not infer capacity from subgraph count.
+Prior art: PA54 AdapterFusion. Test Mirror codes beyond ordinary learned adapter attention/fusion; task quality and total deployed bank bytes decide.
 
 ## Active experiment
 
-MA-375 is next on its dedicated research branch. MA-367/368 fresh worlds remained unopened; MA-374 fresh worlds also remain sealed because the multi-depth development gate missed.
+MA-379 is next on its dedicated research branch. MA-367/368/374/375 fresh worlds remain unopened under their registered gates.
 
 ## Verified status index
 
 - **PROMISING (30):** MA-001, MA-002, MA-003, MA-004, MA-005, MA-006, MA-007, MA-008, MA-012, MA-014, MA-015, MA-041, MA-076, MA-079, MA-111, MA-121, MA-156, MA-160, MA-171, MA-173, MA-181, MA-189, MA-241, MA-244, MA-245, MA-249, MA-250, MA-251, MA-374, MA-691.
-- **FAIL (20):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-367, MA-368.
+- **FAIL (21):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-367, MA-368, MA-375.
 
 All per-ID evidence is retained in the local experiment directories and in `CLAIM_LEDGER.csv`. Consult [the evidence integration audit](../../docs/phase2/MIRROR_MA_EVIDENCE_INTEGRATION_2026-10-08.md) for linked reports, verifications, provenance and claim boundaries.
 

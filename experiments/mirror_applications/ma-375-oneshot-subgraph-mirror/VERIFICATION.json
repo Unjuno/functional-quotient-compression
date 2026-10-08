@@ -1,0 +1,24 @@
+{
+  "experiment_id": "MA-375",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-375-oneshot-subgraph-mirror/tests",
+    "passed": 4,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Both development seeds ran eight independent children with 1,200 updates each, plus one-shot shared, scalar, and Mirror variants with 1,200 sampled-path updates each.",
+    "All eight payloads had size/hash verification and loaded validation/test child metrics replayed exactly; ranking correlations were recomputed from stored validation NLL and independent test NLL.",
+    "The initial implementation collided with torch.nn.Module.children; this was caught before accepting any results, corrected, and both locked development seeds were rerun. Only the corrected outputs are stored.",
+    "The rank-gain gate failed, so fresh seeds 37511, 37512, 37513 were not run."
+  ]
+}

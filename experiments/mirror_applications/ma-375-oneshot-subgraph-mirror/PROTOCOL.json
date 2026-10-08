@@ -1,0 +1,56 @@
+{
+  "experiment_id": "MA-375",
+  "title": "One-shot supernet with architecture-path Mirror correction",
+  "status": "FROZEN_DEVELOPMENT_COMPLETED",
+  "base_commit": "4e75142",
+  "evidence_lane": "QUALITY/STORAGE/COMPUTE/RANK_CORRELATION",
+  "hypothesis": "A small architecture-path-specific Givens coordinate will reduce one-shot weight-sharing rank bias: validation quality rankings of shared children will correlate better with independently trained child test rankings than plain shared weights and a byte-matched path scalar.",
+  "prior_art_refs": ["PA62"],
+  "physical_object": "one shared three-node DAG supernet with a learned residual transform at each node",
+  "mirror_coordinate": "one learned Givens angle per architecture path, applied after selected DAG nodes and before the shared readout",
+  "logical_multiplicity": "eight child models encoded by three binary path decisions",
+  "model": {
+    "input_dim": 16,
+    "hidden_dim": 16,
+    "classes": 4,
+    "dag_nodes": 3,
+    "paths": "all eight binary masks over the three nodes; bit=1 activates that node's residual MLP",
+    "train_examples": 8192,
+    "validation_examples": 2048,
+    "test_examples": 4096,
+    "batch_size": 128,
+    "optimizer_updates": 1200,
+    "optimizer": "Adam",
+    "learning_rate": 0.001,
+    "development_seeds": [37501, 37502],
+    "fresh_seeds": [37511, 37512, 37513],
+    "path_sampling": "one path per update, uniformly sampled with the same minibatch/path sequence for all shared variants"
+  },
+  "controls": [
+    "eight independently trained child models, one per DAG path; all weights charged",
+    "one-shot shared DAG supernet with no path correction",
+    "shared supernet plus one direct scalar hidden gain per path (8 learned values)",
+    "shared supernet plus one Givens angle per path (8 learned values)"
+  ],
+  "development_gate_before_fresh": "Both development seeds: independent path quality has nontrivial spread (test NLL range >=0.02 nat); Mirror improves validation-to-independent-test Spearman rank correlation by >=0.20 versus both plain shared and scalar path code; Mirror mean validation NLL is within 0.03 nat of independent path mean; Mirror payload <=1.10x scalar payload and <=0.50x independent bank; all eight child test scores are reported. Otherwise fresh remains sealed.",
+  "success_gate": "All three fresh seeds reproduce rank-correlation gain >=0.20 over both controls, Mirror mean test NLL within 0.03 nat of independent, payload <=0.50x independent, and exact reload/replay.",
+  "failure_gate": "Mirror rank correlation does not improve by >=0.20 over plain and scalar in both development seeds, or misses quality/byte gates.",
+  "storage": {
+    "authority": "actual deterministic ZIP/NPY FP16 inference payload bytes after reload",
+    "paid_objects": ["all shared DAG and output weights", "all independent child weights", "all eight path scalars or Mirror angles", "path masks and metadata", "archive and per-array headers"]
+  },
+  "compute": {
+    "report_examples_and_updates": true,
+    "report_active_macs_per_path": true,
+    "report_training_wall_time": true,
+    "report_inference_throughput_per_path": true,
+    "rank_metric": "Spearman correlation between each shared method's validation child NLL ranking and independent children test NLL ranking"
+  },
+  "boundaries": [
+    "synthetic DAG classification screening only; no NAS benchmark or deployment claim",
+    "ranking agreement is distinct from child quality; report both",
+    "eight path combinations are not eight independent capacities",
+    "fixed update evidence is not a near-converged capacity claim",
+    "fresh IDs remain sealed until the full development gate passes"
+  ]
+}
