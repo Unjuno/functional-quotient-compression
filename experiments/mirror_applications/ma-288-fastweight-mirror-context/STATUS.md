@@ -1,17 +1,17 @@
 # MA-288 status
 
-- Status: SCREENING
+- Status: PROMISING (aligned state/quality; strict direct-path runtime gate missed)
 - Branch: `research/ma-288-fastweight-mirror-context-20261008`
 - Base commit: `e259f27`
 - Development complete: yes
-- Fresh/audit opened: no
-- Results committed: no
-- Verification committed: no
+- Fresh/audit opened: yes, locked seeds only
+- Results committed: pending
+- Verification committed: pending
 - Registry row updated: no
 
 ## Next action
 
-Protocol and rank 4 are frozen; commit them before fresh seeds.
+Record result, verification, registry and claim-ledger changes; push dedicated branch.
 
 ## Blockers
 
@@ -20,4 +20,5 @@ None. NumPy/SciPy CPU execution can assess this small mechanism; GPU is unnecess
 ## Decisions / rulings
 
 - Candidate pool, entropy-backed selection, and live branch check are recorded in PROTOCOL.json.
+- Aligned state/quality result is strong; registered eager per-query throughput missed in all fresh worlds. Long-session cache diagnostic is supplementary and requires 1,024 B workspace for four cached contexts.
 - Each active context's float32 coordinate and session record are included in inference bytes.

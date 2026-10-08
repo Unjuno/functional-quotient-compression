@@ -23,4 +23,5 @@ class MA288Tests(unittest.TestCase):
  def test_reconstruction(self):
   rows=engine.run(28811,'fresh',2)
   self.assertTrue(all(r['reconstruction_max_abs_diff']<1e-6 for r in rows if r['method']=='fwp_independent'))
+  self.assertTrue(all(r['runtime_path_max_abs_diff']<3e-7 for r in rows))
 if __name__=='__main__':unittest.main()

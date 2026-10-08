@@ -102,20 +102,21 @@ def infer(method,x,records,context):
  raise ValueError(method)
 
 def run_world(seed,condition,rank,split):
- base,angles,teachers,queries=make_world(seed,condition);rows=[]
+ base,angles,teachers,queries=make_world(seed,condition);base_state=learn_fwp(teachers[0]);rows=[]
  for method in METHODS:
-  start=time.perf_counter();payload=serialize(method,base,angles,teachers,rank);states=restore(payload,rank);elapsed=time.perf_counter()-start
+  start=time.perf_counter();payload=serialize(method,base_state,angles,teachers,rank);states=restore(payload,rank);elapsed=time.perf_counter()-start
   assert pack(unpack(payload))==payload
   errors=[float(np.mean((x@t-x@w)**2)) for x,t,w in zip(queries,teachers,states)]
   ops={'shared_fwp':WRITES*CONTEXTS*D*D*2,'hard_tie':WRITES*D*D*2,'mirror':WRITES*D*D*2+CONTEXTS*D*8,'film_scalar':WRITES*D*D*2+CONTEXTS*D*D,'lowrank_residual':WRITES*D*D*2+CONTEXTS*D*D*rank*2,'fwp_independent':WRITES*CONTEXTS*D*D*2}[method]
   # Time inference through the implementation path for each session.
   decoded=dict(unpack(payload))
+  runtime_path_diff=max(float(np.max(np.abs(infer(method,queries[c],decoded,c)-queries[c]@states[c]))) for c in range(CONTEXTS))
   t0=time.perf_counter()
   for _ in range(100):
    for c in range(CONTEXTS): _=infer(method,queries[c],decoded,c)
   infer_s=time.perf_counter()-t0
   ips=100*CONTEXTS*N_QUERY/max(infer_s,1e-12)
-  rows.append(dict(split=split,seed=seed,condition=condition,method=method,rank=rank,contexts=CONTEXTS,writes=WRITES*(CONTEXTS if method in ('shared_fwp','film_scalar','lowrank_residual','fwp_independent') else 1),optimizer_updates=0,task_output_mse=float(np.mean(errors)),max_context_mse=max(errors),serialized_bytes=len(payload),context_state_bytes=(0 if method in ('shared_fwp','hard_tie') else len(payload)-len(pack([('method',method)] if method=='fwp_independent' else [('method',method),('base',base)]))),active_compute_proxy=ops,wall_time_s=elapsed,inference_examples_per_s=ips,payload_sha256=hashlib.sha256(payload).hexdigest(),reconstruction_max_abs_diff=max(float(np.max(np.abs(t-w))) for t,w in zip(teachers,states))))
+  rows.append(dict(split=split,seed=seed,condition=condition,method=method,rank=rank,contexts=CONTEXTS,writes=WRITES*(CONTEXTS if method in ('shared_fwp','film_scalar','lowrank_residual','fwp_independent') else 1),optimizer_updates=0,task_output_mse=float(np.mean(errors)),max_context_mse=max(errors),serialized_bytes=len(payload),context_state_bytes=(0 if method in ('shared_fwp','hard_tie') else len(payload)-len(pack([('method',method)] if method=='fwp_independent' else [('method',method),('base',base)]))),active_compute_proxy=ops,wall_time_s=elapsed,inference_examples_per_s=ips,payload_sha256=hashlib.sha256(payload).hexdigest(),reconstruction_max_abs_diff=max(float(np.max(np.abs(t-w))) for t,w in zip(teachers,states)),runtime_path_max_abs_diff=runtime_path_diff))
  return rows
 
 def run(seed,split,rank):

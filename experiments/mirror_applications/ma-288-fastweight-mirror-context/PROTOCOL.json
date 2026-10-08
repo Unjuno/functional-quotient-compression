@@ -1,7 +1,7 @@
 {
   "experiment_id": "MA-288",
   "title": "Mirror fast-weight programmer context code",
-  "status": "SCREENING",
+  "status": "PROMISING",
   "evidence_lane": "MECHANISM/MEMORY/STORAGE/RUNTIME",
   "base_commit": "e259f27",
   "random_selection": {
@@ -100,8 +100,14 @@
     {
       "id": "A1",
       "fixed_before_fresh_access": true,
-      "change": "Set the independent condition base memory equal to session 0, matching the registered shared slow/base memory learned from the first context; freeze residual rank 4 selected on corrected development worlds.",
-      "reason": "An initial development implementation sampled an extra unused base matrix for independent worlds, contrary to the protocol statement that session 0 establishes the shared base. Those development tables are retained invalidated. Recomputed development score selected rank 4 (mean held-out MSE 0.079991; rank 2: 0.085457; rank 1: 0.091619)."
+      "change": "Fix the independent condition base memory to session 0, as preregistered; freeze residual rank 4 selected on corrected development worlds.",
+      "reason": "The first development implementation created an unused random base for the independent condition, contrary to the defined session-0 base. Invalid tables are retained; corrected development selected rank 4."
+    },
+    {
+      "id": "A2",
+      "fixed_before_fresh_access": false,
+      "change": "Add an exploratory post-audit per-session materialized-cache timing diagnostic with explicit workspace accounting; the registered per-call coordinate-path throughput and decision remain unchanged.",
+      "reason": "Mirror state and aligned accuracy were favorable but the registered eager coordinate path missed its throughput gate. The diagnostic isolates session-cache amortization without changing model state or tuning any result."
     }
   ]
 }

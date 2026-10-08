@@ -1,9 +1,34 @@
 {
   "experiment_id": "MA-288",
-  "commit": null,
-  "tests": {"command": "python -m unittest discover -s experiments/mirror_applications/ma-288-fastweight-mirror-context/tests -v", "passed": null, "failed": null},
-  "serialization": {"roundtrip_checked": false, "byte_exact": false, "maximum_reconstruction_abs_difference": null},
-  "metric_replay": {"checked": false, "max_difference": null},
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "commit": "bb67e25c0773384281c94bb4e36a24446bb84316",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-288-fastweight-mirror-context/tests -v",
+    "passed": 5,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "maximum_reconstruction_abs_difference": 2.58066208846941e-07,
+    "state_sha256_replay": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "development_seeds": [
+    28801,
+    28802
+  ],
+  "fresh_seeds": [
+    28811,
+    28812,
+    28813
+  ],
+  "notes": [
+    "Fresh raw metrics, actual payload lengths and SHA256 hashes replay exactly.",
+    "Coordinate-path outputs match reconstructed matrices within 3e-7 absolute error.",
+    "Post-audit cached-session runtime diagnostic is supplementary; it does not replace the registered per-call throughput result."
+  ]
 }
