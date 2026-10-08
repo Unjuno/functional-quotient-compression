@@ -436,3 +436,6 @@ If two consecutive candidates in a family fail for the same demonstrated structu
 ## 2026-10-08 randomized worker selection log
 
 - Draw 3: P0/UNTESTED baseline registry candidates without remote `research/ma-*` branches (N=532); pool SHA-256 `1b3db07d7808291c738bb1af93595f97a486455a78438ce058ff8ac232bd3f21`; seed `cf1ced50eaa989e911b662796dc52d2d1db1a19e78320ab4ee903fdfcf75bd06`; zero-based index 382 selected MA-921. Protocol: `experiments/mirror_applications/ma-921-flow-interval-mirror/PROTOCOL.json`.
+
+
+- Draw 3 outcome: MA-921 FAIL at development. No rank/update candidate beat additive endpoint factors in both development worlds; semigroup/storage gates passed, and fresh seeds remained unopened. Report and verification: `experiments/mirror_applications/ma-921-flow-interval-mirror/`. Continue with randomized Draw 4.
