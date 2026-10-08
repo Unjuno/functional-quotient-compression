@@ -3,16 +3,16 @@
 - Status: PROMISING (narrow aligned adaptive-dimension storage/quality point; no compute win)
 - Branch: `research/ma-314-adaptive-intrinsic-mirror-20261008`
 - Base commit: `9ca5c968b5ec9a285b11140f08a0f573c8e07cf3`
-- Last verified commit: pending final experiment commit
+- Last verified commit: `4bd89532bb79d9639bb02d29fa608e16236b2f71`
 - Development complete: yes (all 3 gates passed)
 - Fresh/audit opened: yes (after development gates passed; all 3 gates passed)
-- Results committed: pending
-- Verification committed: pending
-- Registry row updated: pending
+- Results committed: yes (`4bd89532bb79d9639bb02d29fa608e16236b2f71`)
+- Verification committed: yes (provenance binding is in the follow-up commit)
+- Registry row updated: yes
 
 ## Next action
 
-Commit the result bundle, then update the registry, claim ledger and status board with the verified commit provenance.
+Push the dedicated research branch; MA-315 is the next queue candidate.
 
 ## Blockers
 
