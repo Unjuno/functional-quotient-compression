@@ -1,0 +1,74 @@
+{
+  "experiment_id": "MA-395",
+  "title": "ALBERT factorized embedding plus domain Mirror views",
+  "status": "PROTOCOL_FROZEN_BEFORE_DEVELOPMENT",
+  "base_commit": "194aa9d",
+  "prior_art_refs": [
+    "PA61"
+  ],
+  "evidence_lane": "QUALITY/STORAGE/HELD_OUT_TRANSFER/COMPUTE",
+  "hypothesis": "A single per-domain Givens phase applied inside ALBERT-style low-dimensional token embeddings will generalize to held-out token-domain pairs under cyclic domain shifts, exceed hard shared factorized embeddings by at least 0.05 accuracy, and approach post-embedding rank-4 adapters at lower serialized bytes than independent factorized domain tables.",
+  "physical_object": "one shared 256x8 token embedding matrix and one shared 8x16 projection",
+  "mirror_coordinate": "one per-domain Givens angle rotating the 8D token representation before projection",
+  "logical_multiplicity": "eight domain-specific embedding functions from one physical factorized table",
+  "model": {
+    "vocabulary_size": 256,
+    "domains": 8,
+    "classes": 8,
+    "embedding_dim": 8,
+    "model_dim": 16,
+    "train_fraction_of_token_domain_pairs": 0.75,
+    "train_examples": 32768,
+    "validation_examples": 8192,
+    "test_examples_per_all_pairs": 8192,
+    "batch_size": 512,
+    "optimizer_updates": 1600,
+    "optimizer": "Adam",
+    "learning_rate": 0.01,
+    "development_seeds": [
+      39501,
+      39502
+    ],
+    "fresh_seeds": [
+      39511,
+      39512,
+      39513
+    ],
+    "target": "class=(token_id mod 8 + domain_id) mod 8",
+    "held_out_split": "seeded 25% token-domain pairs; every token and domain occurs in train",
+    "domain_identity": "observed input shared by every method"
+  },
+  "controls": [
+    "independent per-domain factorized ALBERT embeddings with shared projection",
+    "hard shared factorized embedding with no domain conditioning",
+    "post-embedding rank-4 domain adapter in model dimension",
+    "post-embedding full domain map upper control",
+    "Mirror phase applied inside 8D embedding bottleneck before projection"
+  ],
+  "development_gate_before_fresh": "For both seeds on held-out pairs: Mirror >=0.05 accuracy above hard-shared factorized baseline; within 0.03 accuracy and 0.10 NLL of the post-embedding rank-4 adapter; actual payload <=0.85x independent per-domain factorized embedding; and no more than 0.02 seen-pair accuracy loss relative to rank-4. Otherwise fresh remains sealed.",
+  "success_gate": "All three fresh seeds pass held-out quality/NLL/bytes and exact payload replay; report seen/heldout transfer, serialized bytes, compute and throughput.",
+  "failure_gate": "Any development gate misses in either seed; fresh remains unopened.",
+  "storage": {
+    "authority": "actual deterministic ZIP/NPY FP16 inference payload after reload",
+    "paid_objects": [
+      "shared or independent factorized token tables",
+      "embedding-to-model projection",
+      "domain adapters/maps or Mirror angles",
+      "classifier",
+      "domain/vocabulary metadata",
+      "archive headers"
+    ]
+  },
+  "compute": {
+    "report_training_updates_examples_wall": true,
+    "report_embedding_and_view_operator_macs": true,
+    "report_test_throughput": true
+  },
+  "boundaries": [
+    "synthetic cyclic domain shift; not natural ALBERT or multilingual evidence",
+    "held-out token-domain combinations are primary",
+    "domain identity is an observed input equally available to all methods",
+    "factorization and domain role are distinct insertion points",
+    "fresh data remain sealed until all development gates pass"
+  ]
+}

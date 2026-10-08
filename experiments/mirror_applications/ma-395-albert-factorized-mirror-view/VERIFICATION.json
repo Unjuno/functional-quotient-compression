@@ -1,0 +1,159 @@
+{
+  "experiment_id": "MA-395",
+  "commit": "PENDING_COMMIT",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-395-albert-factorized-mirror-view/tests",
+    "passed": 4,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "payload_count": 10,
+    "payloads": [
+      {
+        "seed": 39501,
+        "method": "independent",
+        "bytes": 34486,
+        "sha256": "30ee3a43b0a73161892ae41ec49f760b5e383d859a84ad3c61b4cd4b4fd98c87",
+        "arrays": [
+          "classifier.bias",
+          "classifier.weight",
+          "emb",
+          "proj"
+        ]
+      },
+      {
+        "seed": 39501,
+        "method": "shared",
+        "bytes": 5814,
+        "sha256": "99ab21acb72dd5af8f83da41fae9686adb50a1fbe9424c49d32b3db43acd47e9",
+        "arrays": [
+          "classifier.bias",
+          "classifier.weight",
+          "emb",
+          "proj"
+        ]
+      },
+      {
+        "seed": 39501,
+        "method": "post_rank4",
+        "bytes": 8808,
+        "sha256": "c1103e5c9aac26fcaee89c8e771475333d8169ca1b2b9e9091c8974762876751",
+        "arrays": [
+          "a",
+          "b",
+          "bias",
+          "classifier.bias",
+          "classifier.weight",
+          "emb",
+          "proj"
+        ]
+      },
+      {
+        "seed": 39501,
+        "method": "post_full",
+        "bytes": 10638,
+        "sha256": "af46054da69682e1aee265ff89a63ec1425a1bad643b2a318b6c2944c358b4b7",
+        "arrays": [
+          "bias",
+          "classifier.bias",
+          "classifier.weight",
+          "emb",
+          "matrix",
+          "proj"
+        ]
+      },
+      {
+        "seed": 39501,
+        "method": "mirror",
+        "bytes": 6066,
+        "sha256": "a6e94d9ae148963fcae832a5b60c3037aa689c78ef4c3b8926b33c639f6f35f6",
+        "arrays": [
+          "classifier.bias",
+          "classifier.weight",
+          "emb",
+          "phase",
+          "proj"
+        ]
+      },
+      {
+        "seed": 39502,
+        "method": "independent",
+        "bytes": 34486,
+        "sha256": "20d96c7ad01c0d1fac507ebd3abe73ee1f61f2436c50a14d978e4955d0a6058d",
+        "arrays": [
+          "classifier.bias",
+          "classifier.weight",
+          "emb",
+          "proj"
+        ]
+      },
+      {
+        "seed": 39502,
+        "method": "shared",
+        "bytes": 5814,
+        "sha256": "0c0007f20aa73d1de9b2419ac521c879112f6d1197f6af6a71fdd2a8ad93b9fe",
+        "arrays": [
+          "classifier.bias",
+          "classifier.weight",
+          "emb",
+          "proj"
+        ]
+      },
+      {
+        "seed": 39502,
+        "method": "post_rank4",
+        "bytes": 8808,
+        "sha256": "1164712544aed32641fd16d121c2e7f98ee0fd8c16f33120eb5bd89f945a2e64",
+        "arrays": [
+          "a",
+          "b",
+          "bias",
+          "classifier.bias",
+          "classifier.weight",
+          "emb",
+          "proj"
+        ]
+      },
+      {
+        "seed": 39502,
+        "method": "post_full",
+        "bytes": 10638,
+        "sha256": "385691ed2a7e0f50d5978bdd73148db91a337f43cc4df7fabe134138e54ec976",
+        "arrays": [
+          "bias",
+          "classifier.bias",
+          "classifier.weight",
+          "emb",
+          "matrix",
+          "proj"
+        ]
+      },
+      {
+        "seed": 39502,
+        "method": "mirror",
+        "bytes": 6066,
+        "sha256": "b3a4a530512942b39b985a79e42b5f2fafdf4c93e362f370824739b6000acd3c",
+        "arrays": [
+          "classifier.bias",
+          "classifier.weight",
+          "emb",
+          "phase",
+          "proj"
+        ]
+      }
+    ],
+    "FP16_payload_bytes_authoritative": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "all_seen_and_heldout_accuracy_nll_replayed_exactly": true
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Two seeds with 25% held-out token-domain pairs; all five registered controls.",
+    "Mirror storage gate passed, held-out quality/NLL gates failed in both seeds.",
+    "Independent per-domain table is near chance on held-out pairs, while post-rank4 is near perfect.",
+    "Fresh seeds 39511, 39512 and 39513 remain unopened."
+  ]
+}
