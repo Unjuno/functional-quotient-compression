@@ -1,0 +1,77 @@
+{
+  "experiment_id": "MA-273",
+  "title": "BOFT butterfly bank with Mirror task addresses",
+  "status": "FAIL",
+  "evidence_lane": "MECHANISM/STORAGE/RUNTIME",
+  "base_commit": "f7f76de193063950d28b7834f337840b1e86f0ce",
+  "hypothesis": "A shared butterfly angle vector plus task addresses represents aligned orthogonal task transforms at lower bytes than independent BOFT; simple rank-one parameter factorization may match exactly.",
+  "physical_object": "One frozen 8x8 linear block with three butterfly stages",
+  "mirror_coordinate": "Six scalar task addresses applied to one shared 12-angle butterfly template",
+  "logical_multiplicity": "Six butterfly-orthogonal task transforms",
+  "prior_art_refs": [
+    "PA21"
+  ],
+  "controls": [
+    "independent BOFT angle banks",
+    "ordinary factorized task-code x shared-angle template",
+    "shared single BOFT",
+    "independent dense task maps"
+  ],
+  "task": {
+    "dimension": 8,
+    "stages": 3,
+    "angles_per_transform": 12,
+    "tasks": 6,
+    "train_examples_per_task": 512,
+    "test_examples_per_task": 1024,
+    "conditions": [
+      "aligned_angle_orbit",
+      "independent_angle_stress"
+    ]
+  },
+  "development": {
+    "worlds_or_seeds": [
+      35,
+      53
+    ],
+    "selection_metric": "MSE, bytes, orthogonality/cycle error, transform time"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      163,
+      269,
+      367,
+      463
+    ],
+    "locked_before_access": true
+  },
+  "optimization": {
+    "fit": "post-fit least squares and nonlinear least squares over BOFT angles",
+    "optimizer_updates": 0
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "serializer": "uncompressed NumPy NPZ; equivalent factor controls use identical packed state",
+    "paid_objects": [
+      "shared W",
+      "independent BOFT angles",
+      "shared angle vector and task codes",
+      "dense task matrices"
+    ]
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_time": true,
+    "active_compute_proxy": "butterfly stage applications plus W projection"
+  },
+  "success_gate": "At least 3/4 fresh aligned: Mirror within 1.10x independent BOFT MSE, <=80% bytes, geometry errors <1e-10, and lower bytes than simple factorized-angle control.",
+  "failure_gate": "No byte-quality Pareto improvement over simple factorized-angle control or >1.25x independent BOFT MSE on >=3/4.",
+  "boundaries": [
+    "synthetic linear transform screen",
+    "no language/diffusion/capacity claim",
+    "CPU microbenchmark only"
+  ],
+  "accounting_amendment": "Roundtrip test found factorized control returned pre-optimization initial coordinates while evaluated outputs used optimized coordinates. Preserve original fresh rows as invalid, return optimized state, and use new audit seeds 163/269/367/463."
+}

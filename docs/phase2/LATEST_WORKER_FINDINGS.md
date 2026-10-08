@@ -23,7 +23,9 @@ MA-271 is **FAIL for Mirror-specific value**. A trained aligned cross-over repor
 
 MA-272 is **FAIL for Mirror-specific/runtime Pareto value**. The corrected post-fit audit found that scalar-times-shared-skew exactly matches the Mirror function and 3,786B payload; exact input-side execution averaged 0.335ms vs 0.138ms materialized. A separate trained screen improved bytes/quality against dense OFTv2 but had slower CPU throughput. See `experiments/mirror_applications/ma-272-oftv2-mirror-views/RECONCILIATION.md`.
 
-**The next candidate is MA-273.** MA-876..1115 remain appended research-intake hypotheses and must not preempt the registered P0 crossovers. Natural variation and benchmark-level runtime remain unproven; aligned synthetic PROMISING must not be described as real-world Mirror adoption.
+MA-273 is **FAIL for Mirror-specific value**. A corrected post-fit fresh audit (163/269/367/463) found Mirror identical in function and 1,150B payload to ordinary scalar-times-shared-angle factorization; the aligned orbit used 27.3% fewer bytes than independent BOFT but the stress family required independent angle state. A distinct neutral-initialization trained screen failed development (3,593B vs BOFT 3,787B, lower quality) and kept fresh worlds sealed. See `experiments/mirror_applications/ma-273-boft-mirror-bank/RECONCILIATION.md`.
+
+**The next candidate is MA-274.** MA-876..1115 remain appended research-intake hypotheses and must not preempt the registered P0 crossovers. Natural variation and benchmark-level runtime remain unproven; aligned synthetic PROMISING must not be described as real-world Mirror adoption.
 
 ## MA-241 — layer-specific Mirror views over tied experts
 
