@@ -19,7 +19,9 @@ MA-265 is **FAIL**: four fresh aligned rotation worlds had numerical-zero task e
 
 MA-268 is **PROMISING only for its trained nonlinear aligned task screen**: it passed the frozen quality/byte gate in 3/3 fresh worlds at 4,167B versus 4,273B IA3 and 7,933B independent, but used 1.5x IA3 active MACs and had about 0.29–0.34x IA3 eager CPU throughput. A separate post-fit linear orbit screen saved 15.7% versus IA3, below its 20% byte gate. See `experiments/mirror_applications/ma-268-ia3-mirror-views/`.
 
-**The next candidate is MA-271.** MA-876..1115 remain appended research-intake hypotheses and must not preempt the registered P0 crossovers. Natural variation and benchmark-level runtime remain unproven; aligned synthetic PROMISING must not be described as real-world Mirror adoption.
+MA-271 is **FAIL for Mirror-specific value**. A trained aligned cross-over reported 3,309B vs 7,253B dense OFT on 3/3 fresh worlds, but it omitted the exact simple control. A second four-seed screen found that ordinary rank-one task-code × shared-angle factorization matches the Mirror's functions and 1,086B payload exactly. See `experiments/mirror_applications/ma-271-oft-mirror-views/RECONCILIATION.md`.
+
+**The next candidate is MA-272.** MA-876..1115 remain appended research-intake hypotheses and must not preempt the registered P0 crossovers. Natural variation and benchmark-level runtime remain unproven; aligned synthetic PROMISING must not be described as real-world Mirror adoption.
 
 ## MA-241 — layer-specific Mirror views over tied experts
 
