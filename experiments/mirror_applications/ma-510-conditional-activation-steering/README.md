@@ -1,36 +1,38 @@
 # MA-510 — Conditional activation steering with factorized condition and behavior Views
 
-Status: SCREENING; development not run yet.
+Status: **FAIL** (conditional quality gates and Mirror-specific attribution).
 Branch: research/ma-510-conditional-activation-steering-20261008
 Prior art: PA101, Conditional Activation Steering.
-Base commit: c03c1da669b812d74f19b606c3264750b1edf42b.
+Protocol freeze commit: 36c60f0afec1a452b0304959c5e035994ffba444.
 
 ## H — Hypothesis
 
 On two frozen synthetic contextual-activation worlds with 16 condition classes and 8 reusable behaviors, a rank-4 factorized condition/behavior Mirror will preserve conditional outputs (event recall >=.95, conditional behavior accuracy >=.95), hold hard-negative false-trigger rate <=.01, and use <=.65x the actual serialized bytes of explicit CAST condition and behavior vectors.
 
-Mirror insertion: factor condition and behavior intervention vectors into two shared bases, and let a condition address choose a behavior code only when the condition score passes a calibrated gate. All basis, code, address, threshold and serialization state is paid.
+**Mirror insertion:** factor condition and behavior intervention vectors into two shared bases, and let a condition address choose a behavior code only when the condition score passes a calibrated gate. All basis, code, address, threshold and serialization state is paid.
 
-The strongest attribution control is native PCA/SVD of those same banks. It has the same function class and may alias exactly. Explicit CAST is the native condition-vector similarity gate and explicit intervention bank; independent condition-behavior vectors are an upper storage control.
+The strongest attribution control is native PCA/SVD of those same banks. Explicit CAST is the native condition-vector similarity gate and behavior bank; independent condition-behavior vectors are the storage upper control.
 
-## T — Frozen protocol
+## T — Executed protocol
 
-See PROTOCOL.json and hashes in freeze.json. Two dev seeds (51001/51002), 64 dimensions, 16 conditions, 8 behaviors, 128 support contexts per condition, separate gate-calibration data, and 256 positive plus 8,192 hard-negative evaluation contexts per condition world. The fixed rank grid is condition {2,4,8,16} × behavior {2,4,8}; the primary point is rank4/rank4. Thresholds use calibration negatives only. Fresh seeds 51011–51013 are locked and unopened.
+The frozen protocol used dev seeds 51001/51002; 64 dimensions, 16 conditions, 8 behaviors, 128 support contexts per condition, separate calibration with 1,024 positives and 2,048 hard negatives, and evaluation with 4,096 positives and 8,192 hard negatives per world. Full fixed rank grid condition {2,4,8,16} × behavior {2,4,8}; primary point rank4/rank4. Calibration chose each method's threshold at <=1% calibration FPR. Actual uncompressed NPZ payloads include bases/vectors, all codes, addresses, threshold and schema. Three tests passed. Dev-only replay verified all 52 payload hashes and metrics; fresh seeds 51011–51013 remain unopened.
 
-## D — Decision
+## D — FAIL
 
-Pending frozen development run.
+At rank4/rank4, Mirror payload was 4,334 B vs 7,532 B explicit CAST (0.575x); compute proxy 640 vs 1,088 operations/example. However, heldout event recall was .145/.071, conditional behavior accuracy .944/.830, and hard-negative false-trigger rate .0173/.0105 across the two seeds. All miss the frozen gates (recall >=.95, accuracy >=.95, FPR <=.01). Conditional-output relative RMSE was .934/.977.
+
+Native PCA/SVD exactly matched Mirror payload sizes and output metrics at every rank pair and seed. Therefore rank-four byte/compute improvement is ordinary basis compression and cannot be attributed to Mirror. Fresh stayed sealed.
 
 ## C — Strongest counter-hypothesis
 
-Native condition-vector similarity plus ordinary PCA of intervention banks already provides the same routing and factorization. Apparent conditional-view gains may therefore be standard shared-basis compression, while false triggers and low-rank reconstruction error erase the apparent benefit.
+Hard negatives are activation mixtures near condition prototypes, and prototype cosine scores do not separate them from true condition contexts at the required recall/FPR point. The same router and intervention bases are standard CAST/PCA algebra. A natural LM activation distribution or a different condition representation could behave differently.
 
 ## U — Scope limits
 
-No pretrained LM checkpoint is present in this checkout. This screen uses a synthetic frozen activation mechanism, not natural-language prompts or a semantic reproduction of CAST. Even a positive screen would require a separately registered natural-prompt/frozen-LM experiment before making language or safety claims.
+No pretrained LM checkpoint is present in this checkout. This was a synthetic frozen-activation mechanism screen, not a natural-language or semantic CAST reproduction. It says nothing about prompt meaning, safety, human preference, or language-model quality. A future language claim needs a separately preregistered natural-prompt/frozen-LM experiment.
 
 ## Evidence classification
 
-- Facts: to be populated from deterministic payload replay and the frozen development seeds.
-- Interpretation: conditional gate and storage/compute tradeoffs are mechanism-level evidence only.
-- Hypothesis: learned condition/behavior codes may compose useful logical behaviors beyond explicit CAST vectors; native PCA or ordinary gates may explain the full effect.
+- **Facts:** rank curves, byte counts, timing, hashes, test outcomes and deterministic replay are in RESULTS_CORE.csv, runs/ and VERIFICATION.json.
+- **Interpretation:** factorizing condition and behavior banks reduces synthetic payload and operation counts, but the task quality gate fails; native PCA fully explains the representation result.
+- **Hypothesis:** learned semantic condition detectors on real model activations may improve false-trigger/recall tradeoffs, but these data do not test that possibility.
