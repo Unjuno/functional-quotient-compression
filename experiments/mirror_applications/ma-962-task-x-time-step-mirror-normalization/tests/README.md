@@ -1,0 +1,1 @@
+Preflight tests will cover forward/backward for each condition, phase interpolation at integer task offsets, and byte accounting. No dataset values will be read before these checks and the protocol commit.

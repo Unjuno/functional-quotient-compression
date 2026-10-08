@@ -1,0 +1,122 @@
+{
+  "experiment_id": "MA-962",
+  "title": "Task \u00d7 time-step Mirror normalization View",
+  "status": "FROZEN_PRE_DATA",
+  "base_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
+  "branch": "research/ma-962-task-time-mirror-tebn-20261008",
+  "selection_draw": 15,
+  "prior_art_refs": [
+    "PA283"
+  ],
+  "hypothesis": "For four task-specific temporal encodings of MNIST, a shared SNN with one learned temporal-gain profile and one scalar cyclic phase code per task will retain test accuracy within 1.5 percentage points of native task\u00d7time TEBN while using at most 75% of its actual serialized inference bytes, and exceed a byte-near rank-1 task\u00d7time factor control by at least 1 percentage point.",
+  "mirror_insertion": {
+    "physical_object": "one shared input and recurrent synaptic SNN across tasks",
+    "coordinate": "one continuous cyclic phase m per task, shifting the shared learned T\u00d7H temporal normalization-gain profile by periodic linear interpolation",
+    "logical_function": "task-specific temporal gain trajectories on shared synapses",
+    "native_before_m": "one shared LIF network with native TEBN gains for each task and time step",
+    "simple_control": "rank-1 additive task\u00d7time\u00d7hidden gain factorization, matched to Mirror payload within 5%"
+  },
+  "dataset": {
+    "name": "MNIST",
+    "source": "official Yann LeCun IDX gzip files; URLs in source/acquire_mnist.py",
+    "train_split": "official training images indices 0:50000",
+    "development_split": "official training images indices 50000:60000",
+    "audit_split": "official test IDX files, unopened until both development gates pass",
+    "audit_access": "gated; no test IDX acquisition/decode before development decision"
+  },
+  "task_transform": {
+    "tasks": 4,
+    "timesteps": 8,
+    "base_rate_envelope": [
+      0.25,
+      0.4,
+      0.75,
+      1.2,
+      1.5,
+      1.1,
+      0.55,
+      0.25
+    ],
+    "task_phase_offsets_steps": [
+      0,
+      2,
+      4,
+      6
+    ],
+    "input_encoding": "For pixel intensity x\u2208[0,1], sample Bernoulli spikes with p=min(0.9,0.65*x*envelope[(t-offset) mod 8]); labels are unchanged MNIST digit classes. Equal cyclic shifts preserve total expected spike count."
+  },
+  "model": {
+    "type": "single-hidden-layer leaky integrate-and-fire SNN with fast-sigmoid surrogate gradient",
+    "input_width": 784,
+    "hidden_width": 128,
+    "classes": 10,
+    "timesteps": 8,
+    "leak": 0.5,
+    "threshold": 1.0,
+    "reset": "subtract detached threshold after a spike",
+    "readout": "sum output logits across timesteps",
+    "normalization": "positive multiplicative hidden-current gain; no task-specific synapses"
+  },
+  "conditions": [
+    "shared_no_task_gain",
+    "native_task_time_tebn",
+    "mirror_cyclic_phase",
+    "lowrank_rank1_task_time_gain",
+    "independent_snn_per_task"
+  ],
+  "training": {
+    "development_world_seeds": [
+      96201,
+      96202
+    ],
+    "updates_per_shared_condition_per_seed": 800,
+    "independent_updates_per_task_per_seed": 800,
+    "batch_size": 32,
+    "optimizer": "AdamW",
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "checkpoint_rule": "best development accuracy among fixed checkpoints every 100 updates; ties choose lower dev loss",
+    "hyperparameter_tuning": "none; fixed-budget mechanism screen"
+  },
+  "gates": {
+    "quality_storage": "in each development seed, Mirror test-on-development accuracy must be no more than 1.5 percentage points below native task\u00d7time TEBN and actual serialized payload must be <=0.75x native TEBN.",
+    "mirror_specific": "in each development seed, Mirror accuracy must exceed the byte-near rank-1 task\u00d7time gain control by >=1.0 percentage point; otherwise no Mirror-specific value is established.",
+    "audit": "Open official MNIST test files only if both development gates pass in both seeds; apply identical accuracy gates and no tuning."
+  },
+  "fresh": {
+    "audit_world_seeds": [
+      96203,
+      96204
+    ],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "all shared synaptic and membrane-related learned tensors",
+      "all TEBN gains or Mirror temporal profile and phase codes",
+      "low-rank control factors",
+      "task/phase mapping and model configuration",
+      "vocabulary/class metadata",
+      "serialization metadata"
+    ]
+  },
+  "compute": {
+    "record": [
+      "examples and updates",
+      "spike events per example",
+      "active MAC proxy",
+      "isolated CPU wall-clock",
+      "inference examples per second"
+    ],
+    "energy": "No hardware energy claim; CPU operation proxy only."
+  },
+  "boundaries": [
+    "Synthetic temporal modulation of MNIST, not a neuromorphic sensor benchmark.",
+    "Fixed-budget screen is learning-efficiency/mechanism evidence, not capacity evidence.",
+    "Task IDs are known to task-conditioned variants and their code/index overhead is charged.",
+    "No hardware-energy or specialized neuromorphic-runtime claim.",
+    "Classification has identical label mapping across tasks; this isolates temporal normalization sharing."
+  ],
+  "amendments": []
+}
