@@ -1,0 +1,85 @@
+{
+  "experiment_id": "MA-1064",
+  "title": "DHE dynamic rare-ID private fallback",
+  "status": "SCREENING",
+  "evidence_lane": "QUALITY/STORAGE/RUNTIME",
+  "base_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
+  "hypothesis": "On a temporal MovieLens-100K audit, adding a learned rare-item Givens View coordinate plus rank-1 private residual to a deterministic multi-hash model improves rare-item AUC by >=0.01 over a byte-near rank-2 ordinary residual control, while overall AUC drops <=0.003, logloss increases <=0.01, serialized bytes stay <=80% of a full item table, and P95 lookup latency stays <=1.2x native DHE.",
+  "physical_object": "Shared deterministic multi-hash item embedding decoder plus common user embedding table",
+  "mirror_coordinate": "One learned Givens angle m_i per train-rare item, acting on a learned shared 2D output plane",
+  "logical_multiplicity": "Item-specific logical views for IDs with 1-5 training interactions",
+  "prior_art_refs": ["PA337", "PA338", "PA339", "PA340"],
+  "draw": {
+    "number": 25,
+    "candidate_rule": "registry priority=P0 and status=UNTESTED; exclude IDs with live origin/research/ma-* branches or existing experiments/mirror_applications/ma-* directories",
+    "eligible_count": 529,
+    "pool_sha256": "0a2088e9f5ad7282cdfac269098c5ed6f21b90b8a0446d2c11f66c08b17678b3",
+    "seed_hex": "5645fedf3a25b2cc69853445d625868e16ff34e006424710df76d7c8a2595e28",
+    "selection_index_zero_based": 459,
+    "selected_id": "MA-1064",
+    "record": "source/draw25_exclusions.json"
+  },
+  "data": {
+    "dataset": "MovieLens-100K",
+    "source": "https://files.grouplens.org/datasets/movielens/ml-100k.zip",
+    "target": "binary feedback: rating >= 4",
+    "split": "global timestamp order; first 70% train, next 10% development, final 20% fresh audit",
+    "tail_definition": "computed from training interactions only: rare 1-5, cold 0, common >=6",
+    "download_hash": "recorded after download in source/data_manifest.json",
+    "user_count": 943,
+    "item_count": 1682,
+    "event_count": 100000
+  },
+  "model": {
+    "embedding_dim": 32,
+    "dhe_style": {
+      "hash_functions": 4,
+      "hash_buckets_per_function": 128,
+      "hash_embedding_dim": 16,
+      "decoder": [64, 64, 32],
+      "hash": "deterministic BLAKE2b-64 with four fixed seeds"
+    },
+    "mirror": "orthonormal 32x2 shared output plane plus one per-rare-item Givens angle",
+    "private_residual": "candidate shared rank-1 basis and one coefficient per rare item; separate rank-2 ordinary residual and full 32D rare-item residual controls"
+  },
+  "controls": [
+    "Full learned item table upper control",
+    "Deterministic multi-hash DHE-style shared decoder, no item codes",
+    "DHE plus per-rare-item Givens Mirror angle only",
+    "DHE plus ordinary rank-2 additive residual for train-rare IDs",
+    "DHE plus Mirror angle and rank-1 private residual for train-rare IDs",
+    "DHE plus full private residual for train-rare IDs (frequency-truncated lookup control)"
+  ],
+  "training": {
+    "optimizer": "AdamW",
+    "learning_rate": 0.003,
+    "weight_decay": 0.0001,
+    "batch_size": 512,
+    "max_epochs": 20,
+    "checkpoint_selection": "lowest development logloss with patience 3",
+    "fresh_model_seeds": [31, 47, 59],
+    "data_shuffle_seed": "same as model seed",
+    "torch_threads": 1,
+    "optimizer_updates": "record actual per model"
+  },
+  "fresh": {
+    "locked_before_access": true,
+    "worlds_or_seeds": [31, 47, 59],
+    "audit_access": "only after all model checkpoints are selected using development data"
+  },
+  "metrics": [
+    "binary logloss and ROC-AUC overall",
+    "binary logloss and ROC-AUC on train-rare, cold, and common item audit strata",
+    "actual safetensors inference payload bytes including all state and rare-ID mapping",
+    "active MAC proxy, adapter/decode operations, CPU examples/s and P95 batch-1 latency",
+    "training updates, tokens/events seen, train and wall-clock"
+  ],
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "format": "safetensors plus metadata embedded in its header",
+    "paid_objects": ["user vectors", "hash tables", "decoder", "full or private item vectors", "Mirror plane", "angles/codes", "residual bases", "rare item IDs", "biases", "architecture and hash metadata"]
+  },
+  "success_gate": "Mean rare-item AUC gain >=0.01 vs rank-2 residual control, positive in >=2/3 seeds; overall AUC drop <=0.003; logloss increase <=0.01; actual payload <=80% full table; P95 <=1.2x DHE; not dominated by byte-near ordinary residual control.",
+  "failure_gate": "Any success gate fails.",
+  "boundaries": ["The DHE-style implementation is not the optimized paper kernel.", "Fixed budget or one dataset is not a general capacity claim.", "A Mirror-specific claim requires the matched ordinary rank-2 residual control.", "No optimized GPU serving claim."]
+}
