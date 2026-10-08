@@ -1,0 +1,74 @@
+{
+  "study": "Gauge and RoPE commutant: independent functional dimensions of Q/K attention",
+  "ma": "MA-1156",
+  "scope": "EXPLORATORY ALGEBRA/FUNCTION-JACOBIAN audit; no natural tasks, no storage/latency benefit claim",
+  "status": "FROZEN_BEFORE_AUDIT",
+  "registered_date": "2026-10-08",
+  "prior_art": [
+    "PA414 Transformer gauge complete characterization",
+    "PA415 gauge fiber geometry",
+    "PA424 RoPE position-sensitive attention equivalence"
+  ],
+  "h": "For generic full-column-rank 4x2 Q and K matrices, the Jacobian of the bare score operator C0=Q K^T has rank12 and nullity4; augmenting with a nondegenerate RoPE-rotated score C1=Q R K^T gives rank14 and nullity2. Pure gauge directions never count as new logical functions. This is only a local linearized audit.",
+  "data": {
+    "generation": "torch.randn seeded double matrices; reject near-singular Q/K only on dev if necessary",
+    "d_model": 4,
+    "d_k": 2,
+    "rotation_theta": 0.63,
+    "probe": "all 16 output entries per C0 and C1, not a subset",
+    "development_seeds": [
+      11,
+      12,
+      13
+    ],
+    "fresh_seeds": [
+      101,
+      102,
+      103,
+      104,
+      105
+    ],
+    "fresh_once": true
+  },
+  "transform": {
+    "G": "GL(2) random invertible and 2x2 basis directions",
+    "Qprime": "Q @ G",
+    "Kprime": "K @ inverse(G).T",
+    "allowed_RoPE": "G=aI+bJ with J=[[0,-1],[1,0]], commute with R(theta)",
+    "invalid_RoPE": "noncommuting shear"
+  },
+  "implementation": {
+    "backend": "NumPy 2.3.5 float64 CPU",
+    "finite_difference_h": 0.00001,
+    "rank_threshold_relative": 0.00001,
+    "svd_recovery": "finite difference parameter-to-score Jacobian size16x16 (no RoPE) and 32x16 (with RoPE)",
+    "exact_tangent": "dQ=QX, dK=-K X.T",
+    "conditioning": "record cond2(Q),cond2(K), smallest nonzero SV and largest discarded SV"
+  },
+  "baselines": [
+    "no RoPE gauge full GL2 tangent dimension4",
+    "RoPE commutant tangent dimension2",
+    "invalid shear full pre-RoPE symmetry but not RoPE"
+  ],
+  "gates": {
+    "PASS": "all 5 fresh worlds satisfy Jacobian rank 12 and 14 at frozen threshold, all noRoPE four Lie tangents score-error norm <=1e-10, two commuting RoPE tangents <=1e-10, noncommuting RoPE tangents have norm>=1e-3; exact finite GL gauge outputs agree within 1e-10 for C0",
+    "FAIL": "any pure symmetry counted as new functional state, or correct commuting and invalid noncommuting classes not distinguished, or fresh rank outside thresholds",
+    "UNCERTAIN": "Q/K ill-conditioned, singular value gap ambiguous, insufficient numerical precision, or reference gauges apply to network variants not actually tested"
+  },
+  "sequential_stop": "No early stopping; fixed five fresh seeds after 3 development; fresh never tunes h or rank threshold",
+  "uncertainty": {
+    "conditioning": "float64 finite difference truncation/roundoff; compare analytic tangent checks",
+    "u_c": "if combining independent uncertainties of a dimensionless observable, sqrt(u_seed^2+u_probe^2+u_num^2); otherwise include covariance",
+    "coverage_factor": "k=2 indicative with only 5 seeds"
+  },
+  "dimensional_contract": {
+    "Q": "4x2 dimensionless real",
+    "K": "4x2 dimensionless real",
+    "C": "4x4 dimensionless real",
+    "R": "2x2 dimensionless real",
+    "G": "2x2 invertible real, GL(2)",
+    "h": "1e-5 dimensionless",
+    "rank": "dimensionless integer",
+    "latency": "none"
+  }
+}
