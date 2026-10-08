@@ -11,6 +11,16 @@ Read `experiments/mirror_applications/STATUS_BOARD.md` and `docs/phase2/MIRROR_M
 
 **The next candidate remains MA-255.** MA-876..1115 are research-intake candidates and must not preempt previously registered P0 crossovers. Natural variation and benchmark-level runtime remain unproven; aligned synthetic PROMISING must not be described as real-world Mirror adoption.
 
+## Scoped real-image functional-code pilot — 2026-10-08
+
+**Research intake, not an MA status result.** A code-based 2-seed×4-heldout-condition real handwritten-digit shift pilot was run under [the frozen protocol](../../experiments/mirror_applications/research_intake/natural_digit_function_20261008/PROTOCOL.md); [source](../../experiments/mirror_applications/research_intake/natural_digit_function_20261008/source/run_pilot.py), [48-row results](../../experiments/mirror_applications/research_intake/natural_digit_function_20261008/RESULTS_CORE.csv) and [replay verification](../../experiments/mirror_applications/research_intake/natural_digit_function_20261008/VERIFICATION.json) are retained.
+
+Heldout test accuracy: **49.79%** for BOLT-like shared rank-6 basis+6 diagonal scalars/task (4662 B for four-task bank), **52.19%** for same basis+2 fixed Givens angles/task (4694 B), **69.97%** for same basis+dense core (5142 B) and **86.98%** for independent rank-4 LoRA (10222 B). Mirror's eager CPU forward latency averaged 0.197 ms versus diagonal 0.124 ms. Structured m beat diagonal accuracy in 4/4 target shifts for seed 41 but only 2/4 for seed 42; **pre-registered Pareto gate FAILED**. Deterministic numeric replay: 48 rows×14 fields exact; timing excluded.
+
+**Scientific insight:** dense-core mean weight-Frobenius error versus separate LoRA was **higher** than Mirror's (1.341 vs 1.302), yet dense core had much better task accuracy (69.97% vs 52.19%). Function-space/task-utility metrics must accompany weight-space orbit/projection diagnostics. PA372..381 supply new BOLT, CG-LoRA, Fora, SVD+CUR, StructLoRA, task-vector and NTK controls. See `docs/phase2/MIRROR_FUNCTION_SPACE_FALSIFICATION_2026-10-08.md`.
+
+Not natural LLM adapters or proof of Mirror impossibility. **Existing 1115 candidates, 29 PROMISING, 18 FAIL, and next MA-255 remain unchanged.**
+
 ## MA-241 — layer-specific Mirror views over tied experts
 
 Branch: `research/ma-241-expert-tying-mirror-20261007`
