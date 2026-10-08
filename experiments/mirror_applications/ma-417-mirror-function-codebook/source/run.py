@@ -100,8 +100,15 @@ def run(out,seeds=(41701,41702),support_n=256,query_n=2048):
         z_by={'deep':zheld_hat,'vq':vqz,'native_vq':vqz,'pca':pcaz,'oracle':zheld}
         decoded={name:decode_payload(raw,xtest,name if name in ('deep','pca','oracle') else 'vq')[0] for name,raw in payloads.items()}
         interp_truth=(zheld[::2]+zheld[1::2])*.5;xi=sample(seed+5,HELD//2,query_n);yi=dec(xi,interp_truth[:,None,:])
-        interp_z={name:(z_by[name][::2]+z_by[name][1::2])*.5 for name in z_by}
-        interp_score={name:nrmse((dec.features(xi)*z[:,None,:]).sum(-1),yi) for name,z in interp_z.items()}
+        interp_z={}
+        for name,raw in payloads.items():
+            _,paid_z=decode_payload(raw,xtest,name if name in ('deep','pca','oracle') else 'vq');interp_z[name]=(paid_z[::2]+paid_z[1::2])*.5
+        interp_score={}
+        pair_levels=[levels[i] for i in range(0,HELD,2)]
+        for name,raw in payloads.items():
+            paid_dec,_=read_payload(raw);z=interp_z[name]
+            with torch.no_grad():pred=(paid_dec.features(xi)*z[:,None,:]).sum(-1)
+            interp_score[name]={rho:nrmse(pred[[i for i,v in enumerate(pair_levels) if v==rho]],yi[[i for i,v in enumerate(pair_levels) if v==rho]]) for rho in RHOS}
         for name,raw in payloads.items():
             score=nrmse(decoded[name],yquery);digest=hashlib.sha256(raw).hexdigest();rate=inference_rate(dec,z_by[name],xtest,name)
             if name=='oracle': examples=0;updates=0;wall=0.0
@@ -110,7 +117,7 @@ def run(out,seeds=(41701,41702),support_n=256,query_n=2048):
             else: examples=(TRAIN+HELD)*support_n;updates=600;wall=ttrain+theld
             for rho in RHOS:
                 ix=[i for i,r in enumerate(levels) if r==rho]
-                rows.append({'condition':f'residual_std={rho}','world_or_seed':seed,'method':name,'serialized_bytes':len(raw),'train_tokens_or_examples':examples,'optimizer_updates':updates,'active_compute_proxy':(2*32*2+2*32*D+D*2),'wall_time_s':round(wall,6),'primary_metric':'query_NRMSE','primary_value':float(np.mean([((decoded[name][ix]-yquery[ix]).pow(2).mean(1).sqrt()/((yquery[ix]-yquery[ix].mean(1,keepdim=True)).pow(2).mean(1).sqrt().clamp_min(1e-8))).mean().item()])), 'secondary_metric':'interpolation_NRMSE','secondary_value':interp_score[name],'status_note':digest+f'; rate={rate:.6f}'})
+                rows.append({'condition':f'residual_std={rho}','world_or_seed':seed,'method':name,'serialized_bytes':len(raw),'train_tokens_or_examples':examples,'optimizer_updates':updates,'active_compute_proxy':(2*32*2+2*32*D+D*2),'wall_time_s':round(wall,6),'primary_metric':'query_NRMSE','primary_value':float(np.mean([((decoded[name][ix]-yquery[ix]).pow(2).mean(1).sqrt()/((yquery[ix]-yquery[ix].mean(1,keepdim=True)).pow(2).mean(1).sqrt().clamp_min(1e-8))).mean().item()])), 'secondary_metric':'interpolation_NRMSE','secondary_value':interp_score[name][rho],'status_note':digest+f'; rate={rate:.6f}'})
         # Aggregate strict low-residual gate and saved state metrics.
         vq_bytes=len(payloads['vq']);deep_bytes=len(payloads['deep']);seedrows=[r for r in rows if r['world_or_seed']==seed]
         checks=[]

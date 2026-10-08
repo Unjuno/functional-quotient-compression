@@ -1,9 +1,81 @@
 {
   "experiment_id": "MA-417",
-  "status": "NOT_RUN",
-  "protocol_sha256": "PENDING",
-  "metric_replay": "NOT_RUN",
-  "payload_replay": "NOT_RUN",
+  "status": "VERIFIED_DEVELOPMENT_FAIL",
+  "protocol_sha256": "f64fea5c8905491e66193ce2abfebc01037ab5902b40a0ac860c9570490f7d95",
+  "metric_replay": "PASS",
+  "payload_replay": "PASS",
   "fresh_accessed": false,
-  "checks": []
+  "development_gate_passed": false,
+  "checks": [
+    {
+      "seed": 41701,
+      "method": "deep",
+      "payload_bytes": 2986,
+      "sha256": "4014464212b1b036ffde94495e83e950885f61becb4bd734e1dcaa92c0f2e8d9",
+      "metric_replay": "PASS"
+    },
+    {
+      "seed": 41701,
+      "method": "vq",
+      "payload_bytes": 2323,
+      "sha256": "db9b4392c9be3e1c7e3613ca326e5609f83b82029f3552ea26f1d50a534453cb",
+      "metric_replay": "PASS"
+    },
+    {
+      "seed": 41701,
+      "method": "native_vq",
+      "payload_bytes": 2333,
+      "sha256": "0f6721ad45833134df8bd436e67824ee752e7a226f8b3944d270234392886cd5",
+      "metric_replay": "PASS"
+    },
+    {
+      "seed": 41701,
+      "method": "pca",
+      "payload_bytes": 2973,
+      "sha256": "90e76ec1ec20186c88ab6fc6f058fa1e18af3fbebfbccc4efffa00e9cd547807",
+      "metric_replay": "PASS"
+    },
+    {
+      "seed": 41701,
+      "method": "oracle",
+      "payload_bytes": 2880,
+      "sha256": "654682ae59da2fc733b196cf1dec3e9c85233f3903aec281d9d424f3877a877e",
+      "metric_replay": "PASS"
+    },
+    {
+      "seed": 41702,
+      "method": "deep",
+      "payload_bytes": 2977,
+      "sha256": "606921d1062c92cc139895838f44e3546be15bfc7d8b2b8136b5a472706dd7da",
+      "metric_replay": "PASS"
+    },
+    {
+      "seed": 41702,
+      "method": "vq",
+      "payload_bytes": 2323,
+      "sha256": "ffa4f92762e4e5b20be63d33193f0a70091ae30674929b58837adae84562fb54",
+      "metric_replay": "PASS"
+    },
+    {
+      "seed": 41702,
+      "method": "native_vq",
+      "payload_bytes": 2333,
+      "sha256": "5e2ca05394ba6b7f74ccc2538cae358b06fdb05d6a44cf31cc04bbf8c9620ef8",
+      "metric_replay": "PASS"
+    },
+    {
+      "seed": 41702,
+      "method": "pca",
+      "payload_bytes": 2966,
+      "sha256": "44414c243a048b06f3aefbd30d7deb91800d9def15084042536786b1afc00327",
+      "metric_replay": "PASS"
+    },
+    {
+      "seed": 41702,
+      "method": "oracle",
+      "payload_bytes": 2878,
+      "sha256": "9c8dc68b3e072f7d5857a88689d7d59534b36f31edaf0415fb443cda4815b0ea",
+      "metric_replay": "PASS"
+    }
+  ]
 }
