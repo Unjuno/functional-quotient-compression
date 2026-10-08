@@ -1,0 +1,80 @@
+{
+  "schema_version": 2,
+  "experiment_id": "MA-1181",
+  "title": "CellFM-RegFormer perturbation Mirror function and combo codes",
+  "status": "UNTESTED",
+  "stage": "DESIGN_ONLY",
+  "worker_claim": false,
+  "plan_only": true,
+  "execution_priority": "no special research priority; candidate status only",
+  "priority": "P1",
+  "worker_branch": "research/mirror-application-worker-ready-20261007",
+  "isolated_branch": "research/mirror-breadth-method-sweep-20261008",
+  "prior_art_refs": [
+    "PA446",
+    "PA447",
+    "PA448",
+    "PA449",
+    "PA452"
+  ],
+  "nearest_existing": [
+    "MA-835",
+    "MA-851",
+    "MA-1081",
+    "MA-1173"
+  ],
+  "hypothesis": "On heldout entire gene perturbations/pairs and cell lines, Mirror factors generate useful perturbation-response functions at >=15% less per-perturbation trained state than a native individually fitted response bank, without worse than +0.03 calibrated relative RMSE or -0.02 calibrated Pearson on novel gene pairs, beating an ordinary linear factor and simple mean/linear baselines.",
+  "native_method": "native CellFM/RegFormer expression encoder with official perturbation prediction head and simple calibrated single/double perturbation regression; no asserted superiority from published task scores alone",
+  "shared_physical_object": "one frozen cell-state embedding and one source-trainable perturbation-response predictor shared across cell types and perturbation roles",
+  "mirror_insertion": "compact factorized gene1 × gene2 × cell-context Mirror m encoding perturbation-specific response corrections, with optional measured out-of-orbit private residual",
+  "synthetic_fixture": "CPU stage: synthetic 64-gene regulatory stable dynamical system W (spectral radius<0.9), 4 cell types, 12 perturbation genes and 16 heldout ordered/symmetric 2-gene combinations, source-only no future conditions; generate paired unperturbed/perturbed expression from stable linear dynamics plus mild nonlinear saturation and independent private interactions. Natural stage: Norman/Adamson/Replogle perturb-seq benchmark data with perturbation-identity and cell-type held-out splits, consistent gene universe/normalization; no donor or sequencing-batch leakage.",
+  "method": "(1) On source splits train ordinary mean response, standard ridge/linear gene-embedding regression and native GEARS/CellFM/RegFormer adapters where their official checkpoints/code are available. (2) Freeze native cell embedding pre/post processing with source training only. (3) Decode perturbation m(g1,g2,c)=u_g1+u_g2+pair_delta or tensor-factor product, and attach low-description signed/diagonal/short Givens View to the original native predictor; make order/symmetry assumptions explicit and verify them. (4) Compare plain sum/product of perturbation codes, mean change, ridge, tensor factor, full private tasks and Mirror+private residual. (5) Freeze normalization, nonzero gene masks, dropout and allowed source examples; audit truly unseen gene pairs and different cell lines. (6) Report per-gene differential response, sign accuracy, calibrated positive controls and uncertainty; do not claim biological causality from random splits.",
+  "controls": [
+    "Strong mean expression change, OLS/ridge and calibration-aware empirical simple baselines from PA448/PA449",
+    "native CellFM/RegFormer official perturbation setup or BLOCKED with reason",
+    "GEARS/CPA standard perturbation model",
+    "same-byte ordinary gene-factor/tensor-factor and linear-MLP predictor",
+    "per-perturbation private head (quality upper reference)",
+    "identity-only and shuffled-gene negative controls"
+  ],
+  "splits": {
+    "development": {
+      "seeds": [
+        11,
+        12,
+        13
+      ],
+      "allowed": "rank/learning hyperparameters only"
+    },
+    "fresh": {
+      "seeds": [
+        101,
+        102,
+        103,
+        104,
+        105
+      ],
+      "locked_before_access": true,
+      "whole_domain_task_identities": true,
+      "never_tune": true,
+      "run_all": true
+    },
+    "natural_data_requires_new_freeze": true
+  },
+  "metrics": "calibrated relative error vs positive control, per-differential-expression-gene Pearson, sign agreement, dose/line heldout, top perturbation ranking, cell-level and gene-level RMSE, actual trained state and inference time",
+  "hardware": "CPU 64-gene synthetic; official CellFM MindSpore/RegFormer Mamba real model needs released pretrained weights, authorized data and compatible NPU/GPU. Mark native reproduction BLOCKED if unavailable.",
+  "gates": {
+    "PASS": "In >=4/5 independent fresh unseen-perturbation-group worlds, meet quality Δrelative RMSE<=+0.03 and Δcalibrated Pearson>=-0.02 versus strongest available native method, total task-specific bytes <=0.85 reference, P95<=1.10, and a strict advantage over simple mean/ridge and matched-byte linear code.",
+    "FAIL": "Any simple mean/linear method matches or beats the Mirror frontier, leakage of heldout perturbation identity/target expression into m, target data normalization mismatch, or calibrated positive control shows benchmark metric insensitive to meaningful output quality.",
+    "UNCERTAIN": "missing reproducible native baseline, real bytes, runtime, clean split or decisive confidence"
+  },
+  "counter": "Gene perturbation response may be mostly captured by simple cell-line mean effects and gene embedding factors. A structural code may simply interpolate non-causal correlations; strong baselines can dominate claimed foundation-model benefits.",
+  "uncertainty": "Large sample dependence within same perturbation/cell type, RNA dropout/normalization, compositional perturbation asymmetry, metric calibration (PA448 vs PA449), donor/tissue batch and OOD noise; bootstrap whole perturbation identities, not cells.",
+  "accounting": {
+    "function_metric": "task-specific quality, no weight-only claims",
+    "storage": "all serialized base/task adapter bytes, decoder, tokenization, task mapping and private residual",
+    "compute": "wall CPU/GPU P50/P95, active MAC and offline setup"
+  },
+  "result_files_present": false,
+  "claimed_measurements": 0
+}

@@ -1,0 +1,77 @@
+{
+  "schema_version": 2,
+  "experiment_id": "MA-1182",
+  "title": "ProtoMech cross-layer protein-circuit Mirror address bank",
+  "status": "UNTESTED",
+  "stage": "DESIGN_ONLY",
+  "worker_claim": false,
+  "plan_only": true,
+  "execution_priority": "no special research priority; candidate status only",
+  "priority": "P1",
+  "worker_branch": "research/mirror-application-worker-ready-20261007",
+  "isolated_branch": "research/mirror-breadth-method-sweep-20261008",
+  "prior_art_refs": [
+    "PA445",
+    "PA444"
+  ],
+  "nearest_existing": [
+    "MA-526",
+    "MA-533",
+    "MA-537",
+    "MA-1165"
+  ],
+  "hypothesis": "For multiple heldout protein function/family predictions from the same ESM2/ProtoMech cross-layer latent state, a tiny m circuit selector compresses the bank of per-function sparse circuit coefficients >=15% without reducing probe AUPRC by >0.02 absolute or CLT feature-fidelity by >5% versus native per-task circuit selection, and beats native same-byte sparse linear factor bank at <=1.10 P95.",
+  "native_method": "ProtoMech native top-k cross-layer transcoders (CLT), windowed CLT and separate per-layer transcoders with sparse circuit discovery, starting from ESM2-8M/35M",
+  "shared_physical_object": "one original trained cross-layer sparse latent/circuit decoder bank, explicitly retaining its cross-layer graph dependencies",
+  "mirror_insertion": "small motif/protein-family task m selecting a signed/structured subspace or low-rank coefficient chart over already identified ProtoMech circuit nodes",
+  "synthetic_fixture": "Synthetic 4-layer width-32 causal feature network, 64 sparse latents/layer with 4 source motif tasks and 4 heldout motif/family labels drawn from reused atom families plus independent private motifs, no pretrained protein claims. Natural lane: ESM2-8M ProtoMech official weights/data and family classification/fitness benchmarks, frozen labels and protein-family-disjoint test, not natural ESM2-35M by default.",
+  "method": "(1) Verify released ProtoMech CLT top-k activation, cross-layer decoder and AuxK configuration at one checked code revision. (2) Train/reuse a source CLT on ESM2 activations or synthetic source features; freeze it. (3) Obtain native function circuits and their sparse latent coefficients from source task support only; target readouts require *only support labels*, not fresh test labels. (4) Fit shared signed/linear/Givens low-code bank over function circuit coefficient vectors m, keeping sparse top-k routing and layer dependencies unchanged; compare native per-function sparse circuit, PLT, windowed CLT and shared linear code. (5) Score all heldout task probes, feature reconstruction, OOD protein family and per-latent code bytes/FLOPs. (6) For perturbation/steering, require independently measured sequence fitness and never treat the paper's recovered accuracy or design-rate as Mirror reproduction.",
+  "controls": [
+    "Original ProtoMech cross-layer transcoder and native per-function circuit selection",
+    "Windowed CLT and independent per-layer PLT",
+    "plain shared sparse dictionary with per-function linear coefficients, byte matched",
+    "ordinary ridge/linear probe on frozen ESM2 embeddings",
+    "random sparse circuit with identical number of active latents",
+    "full ESM2 task head quality reference"
+  ],
+  "splits": {
+    "development": {
+      "seeds": [
+        11,
+        12,
+        13
+      ],
+      "allowed": "rank/learning hyperparameters only"
+    },
+    "fresh": {
+      "seeds": [
+        101,
+        102,
+        103,
+        104,
+        105
+      ],
+      "locked_before_access": true,
+      "whole_domain_task_identities": true,
+      "never_tune": true,
+      "run_all": true
+    },
+    "natural_data_requires_new_freeze": true
+  },
+  "metrics": "family AUROC/AUPRC, fitness Spearman (if measured), per-layer latent activation overlap/faithfulness, sparse top-k error, actual serialized circuit IDs+dictionary/code bytes, active decoding FLOPs and P95",
+  "hardware": "CPU 4-layer sparse synthetic first. Official ProtoMech supports ESM2-8M/35M; full natural reproduction requires GPU, released code/data, checkpoint SHA and model license.",
+  "gates": {
+    "PASS": "At least four of five fresh entire protein-family worlds within -0.02 AUPRC native and <=1.05x feature reconstruct error, per-function circuit trained state <=0.85 of native, total CLT+code bytes decrease at least 3%, P95<=1.10 native and gain beyond same-byte simple sparse linear code.",
+    "FAIL": "PLT/native sparse CLT or plain linear task probes Pareto-dominate; low-description m destroys functional circuit fidelity, or circuit interpretation is asserted from feature activation correlation without task intervention.",
+    "UNCERTAIN": "missing reproducible native baseline, real bytes, runtime, clean split or decisive confidence"
+  },
+  "counter": "ProtoMech already builds compressed sparse cross-layer circuits; Mirror transformation of circuit coefficients may merely rename task-specific sparse selection. Different protein motifs may require disjoint atoms and expensive exceptions.",
+  "uncertainty": "Protein sequence homology, latent top-k ties, sparse support instability, ESM2 layer normalization, binding-site localization vs family labels, true model fidelity vs feature proxy; bootstrap by protein family.",
+  "accounting": {
+    "function_metric": "task-specific quality, no weight-only claims",
+    "storage": "all serialized base/task adapter bytes, decoder, tokenization, task mapping and private residual",
+    "compute": "wall CPU/GPU P50/P95, active MAC and offline setup"
+  },
+  "result_files_present": false,
+  "claimed_measurements": 0
+}

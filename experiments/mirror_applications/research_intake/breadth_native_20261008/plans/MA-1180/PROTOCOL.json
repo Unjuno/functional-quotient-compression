@@ -1,0 +1,76 @@
+{
+  "schema_version": 2,
+  "experiment_id": "MA-1180",
+  "title": "ESME protein multi-property Mirror readout library",
+  "status": "UNTESTED",
+  "stage": "DESIGN_ONLY",
+  "worker_claim": false,
+  "plan_only": true,
+  "execution_priority": "no special research priority; candidate status only",
+  "priority": "P1",
+  "worker_branch": "research/mirror-application-worker-ready-20261007",
+  "isolated_branch": "research/mirror-breadth-method-sweep-20261008",
+  "prior_art_refs": [
+    "PA444",
+    "PA445"
+  ],
+  "nearest_existing": [
+    "MA-351",
+    "MA-416",
+    "MA-1175"
+  ],
+  "hypothesis": "Across naturally independent protein-property prediction tasks with identical encoder/checkpoint and matched labeled support, a compact Mirror property code bank reduces the entire multi-task inference head state >=15% versus native separate PEFT heads while preserving mean/worst AUROC/AUPRC or correlation within 0.02 absolute at <=1.10 P95 of a strong one-pass shared-encoder multihead.",
+  "native_method": "ESME efficiency-optimized native ESM2 inference/fine-tuning (packing, FlashAttention and per-property parameter-efficient heads), plus a standard frozen ESM2 encoder",
+  "shared_physical_object": "one native pretrained or frozen ESM2-8M/ESME protein sequence encoder and one shared property-readout basis",
+  "mirror_insertion": "short property/motif/assay m that changes the readout of a single encoder output without running the full protein encoder per property",
+  "synthetic_fixture": "CPU first: 20-symbol amino-acid alphabet, length 64 sequences, 5 planted motifs and 3 non-motif private functions; generate 4 source assays and 4 heldout assay/motif combinations, with truly independent off-orbit rules. IMPORTANT: synthetic motif classification is not evidence on real proteins. Natural stage: frozen ESM2-8M/ESME original source (pin revision) and published protein family/thermostability/missense effect datasets with shared protein IDs; isolate assay-specific labels, keep biochemical measures in native units and report missing label masking.",
+  "method": "(1) Freeze source ESM2/ESME encoder/tokenizer and record sequence pooling and input length. (2) Fit native property-specific linear/MLP and official LoRA/fine-tuned heads using their labeled source support only. (3) Fit a shared output/readout dictionary with k={2,4,8,16} property codes m, compare signed/permutation/Givens code to plain linear diagonal codes and multihead. (4) Evaluate identical protein encodings cached once and a true single-forward sequence processor, not different forward calls hidden in a wrapper. (5) Split real sequences by protein family and <=30% sequence identity where feasible; derive identity clusters only from training/source and freeze splits. (6) Test all property tasks and reporting units separately; no conversion of Pearson/AUPRC into one artificial score.",
+  "controls": [
+    "Original ESME/ESM2 property-wise fine-tuned LoRA/head (native, with its optimized encoder)",
+    "one frozen ESM2/ESME trunk + ordinary independent property linear/MLP heads computed in one forward",
+    "same byte-size shared low-rank linear/head dictionary, FiLM and IA3",
+    "multi-input MIMO/MIMMO where comparable function target",
+    "independent encoder per property upper quality cost",
+    "one classifier with task one-hot code, same parameter bytes"
+  ],
+  "splits": {
+    "development": {
+      "seeds": [
+        11,
+        12,
+        13
+      ],
+      "allowed": "rank/learning hyperparameters only"
+    },
+    "fresh": {
+      "seeds": [
+        101,
+        102,
+        103,
+        104,
+        105
+      ],
+      "locked_before_access": true,
+      "whole_domain_task_identities": true,
+      "never_tune": true,
+      "run_all": true
+    },
+    "natural_data_requires_new_freeze": true
+  },
+  "metrics": "per-property AUROC/AUPRC, Matthews correlation for imbalanced function labels, Spearman or Pearson for continuous stability, worst-property drop, identity leakage, all serialized heads+encoder bytes, CPU/GPU P50/P95, encoder call count, source training operations",
+  "hardware": "CPU torch ESM2 8M inference where supported; ESME original source uses GPU optimized kernels for true speed measurement; document amino acid tokenizer, model revision, ESM2/ESME differences.",
+  "gates": {
+    "PASS": "At least 4/5 fresh full-protein/assay worlds match native one-pass shared encoder+linear heads within 0.02 absolute relevant task metric, save >=15% per-property *paid* readout state and >=3% whole total model state, P95 <=1.10, and strict Pareto advantage over byte-matched ordinary linear output bank; otherwise M0.",
+    "FAIL": "One-pass standard multi-head is as good as Mirror at equal bytes/quality, protein family or homology leaks across splits, native ESME packing/FlashAttention disabled in runtime comparison, or private assay labels require an independent feature extractor.",
+    "UNCERTAIN": "missing reproducible native baseline, real bytes, runtime, clean split or decisive confidence"
+  },
+  "counter": "ESM2 pretrained representation is itself the expensive state, and ordinary task-specific linear classifiers already have cheap one-forward multiplicity. Mirror may only compress tiny output heads with negligible whole-model rate gain.",
+  "uncertainty": "Protein-family identity sharing, imbalance, assay/lab batch confounders, uncensored vs censored melting point, tokenizer special tokens, inverse correlation signs; report clustered bootstrap by sequence family and independent task worlds.",
+  "accounting": {
+    "function_metric": "task-specific quality, no weight-only claims",
+    "storage": "all serialized base/task adapter bytes, decoder, tokenization, task mapping and private residual",
+    "compute": "wall CPU/GPU P50/P95, active MAC and offline setup"
+  },
+  "result_files_present": false,
+  "claimed_measurements": 0
+}
