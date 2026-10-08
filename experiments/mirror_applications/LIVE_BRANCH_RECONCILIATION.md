@@ -11,3 +11,5 @@ No fresh data were opened during reconciliation.
 - MA-469 — NOT ESTABLISHED, research branch `research/ma-469-mend-mirror-edit-code-20261008`: frozen synthetic global matrix edits made the independent support-fit upper violate the locality validity bound in both development seeds; Mirror missed both edit/locality gates and exactly matched native low-rank. Fresh seeds sealed.
 
 - MA-470 — NOT ESTABLISHED, research branch `research/ma-470-shared-edit-basis-20261008`: key-locality and edit quality for Mirror/MEND passed in the two toy worlds, but the independent full-update support-fit upper missed edit validity (0.248/0.630). Mirror saved bytes/MAC versus MEND but exactly aliased native low-rank; fresh sealed.
+
+- MA-471 — FAIL for Mirror-specific attribution, research branch `research/ma-471-rome-mirror-coordinate-20261008`: the aligned resident angle bank was 6,430 bytes versus 9,726 for explicit ROME factors (edit RMSE 0.0056–0.0100 vs 0.0007), but exact native Givens had identical output and bank hash. Including online editor raised the system payload to 81,754 bytes. Independent upper passed; fresh sealed after attribution failure.

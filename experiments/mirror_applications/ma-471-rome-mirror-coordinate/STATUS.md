@@ -1,20 +1,10 @@
 # MA-471 status
 
-- Status: SCREENING
+- Status: FAIL (Mirror-specific gate; aligned shared-template result recorded)
 - Branch: `research/ma-471-rome-mirror-coordinate-20261008`
-- Base commit: `6ec0dba14a99624d7cf1221a9a4bce468ff60969`
-- Protocol frozen: no
-- Development complete: no
-- Fresh/audit opened: no
+- Frozen protocol SHA-256: `e1e289efcd4f4820d7c8980f46431fe535249ba4d093105d7eb905c6f9c90c99`
+- Development seeds: 47101, 47102 (complete)
+- Fresh/audit seeds 47111–47113: sealed, never accessed
+- Verification replay: exact (maximum metric difference 0)
 
-## Next action
-
-Freeze protocol/source and registry state, then run development seeds 47101 and 47102.
-
-## Blockers
-
-None.
-
-## Decisions / rulings
-
-Inference-bank and online editor state are measured separately. The editor is excluded from already materialized-bank inference only because every stored angle is sufficient to reconstruct its edit deterministically.
+The resident bank passes frozen aligned quality/storage gates versus explicit ROME factors, but exactly aliases native Givens. Online editor bytes erase the resident-bank savings. Fresh is sealed because the Mirror-specific attribution gate failed.

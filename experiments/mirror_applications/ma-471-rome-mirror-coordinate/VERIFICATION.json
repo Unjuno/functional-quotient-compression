@@ -1,0 +1,13 @@
+{
+  "experiment_id": "MA-471",
+  "protocol_sha256": "e1e289efcd4f4820d7c8980f46431fe535249ba4d093105d7eb905c6f9c90c99",
+  "commit": "pending-result-commit",
+  "tests": {"command": "pytest -q experiments/mirror_applications/ma-471-rome-mirror-coordinate/tests", "passed": 3, "failed": 0},
+  "serialization": {"roundtrip_checked": true, "byte_exact": true},
+  "metric_replay": {"checked": true, "max_difference": 0.0},
+  "fresh_split_integrity_checked": true,
+  "fresh_accessed": false,
+  "native_givens_alias": true,
+  "disposition": "FAIL for Mirror-specific attribution; aligned shared-template bank passes quality/storage gate against ROME factors, but exactly matches native Givens and online editor bytes exceed ROME bank",
+  "notes": ["Actual inference-bank and editor payload bytes are separately serialized and counted.", "Fresh seeds 47111-47113 remained sealed.", "Synthetic Givens-orbit mechanism only; not factual editing evidence."]
+}
