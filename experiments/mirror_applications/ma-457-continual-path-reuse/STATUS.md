@@ -27,3 +27,5 @@ Implementation note: the first preflight attempt stopped before complete metrics
 A second invalid preflight stopped before metrics because the accepted-query dictionary was not initialized. Partial PathNet/shared payloads are preserved in `runs/invalid_preflight_45701_02/`; this attempt also was not used for tuning.
 
 A third invalid preflight caught the same accepted-query dictionary initialization ordering defect; partial PathNet/shared payloads are preserved in `runs/invalid_preflight_45701_03/`. None of the three invalid preflights produced complete metrics or influenced tuning.
+
+Compute metadata correction: an initial completed run wrote 0.0 s for closed-form shared/independent control fitting and mislabeled independent module births. Original outputs are preserved under `runs/superseded_initial_compute_reporting_*`; same frozen seeds are rerun to measure those fields. The original quality outputs were not used for tuning.

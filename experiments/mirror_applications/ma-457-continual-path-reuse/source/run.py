@@ -103,20 +103,20 @@ def evaluate(method,state,seed,train_meta):
     mac={'pathnet':D*D,'shared':D*D,'mirror':D*D+2*D,'native_rank1':D*D+2*D,'independent':D*D}[method]
     evalops=NTASK*QUERY*mac
     births=(len(state['births'])+1 if method in ('mirror','native_rank1') else train_meta['module_births']) if method!='shared' else 1
-    m={'per_task_query_rmse':scores,'mean_query_rmse':float(np.mean(scores)),'max_early_task_retention_increase':float(max((scores[i]-state['accepted_query_rmse'][i] for i in range(min(4,NTASK))),default=0.0)) if isinstance(state,dict) and 'accepted_query_rmse' in state else 0.0,'activation_output_std_ratio':max(outs)/min(outs),'payload_bytes':len(raw),'payload_sha256':hashlib.sha256(raw).hexdigest(),'physical_modules_total':births,'module_births_after_initial':(len(state['births']) if method in ('mirror','native_rank1') else max(0,train_meta['module_births']-1) if method=='pathnet' else 0),'query_examples':NTASK*QUERY,'query_wall_s':query_wall,'inference_ops_per_example_proxy':mac,'evaluation_ops_proxy':evalops}
+    m={'per_task_query_rmse':scores,'mean_query_rmse':float(np.mean(scores)),'max_early_task_retention_increase':float(max((scores[i]-state['accepted_query_rmse'][i] for i in range(min(4,NTASK))),default=0.0)) if isinstance(state,dict) and 'accepted_query_rmse' in state else 0.0,'activation_output_std_ratio':max(outs)/min(outs),'payload_bytes':len(raw),'payload_sha256':hashlib.sha256(raw).hexdigest(),'physical_modules_total':births,'module_births_after_initial':(len(state['births']) if method in ('mirror','native_rank1') else max(0,train_meta['module_births']-1) if method in ('pathnet','independent') else 0),'query_examples':NTASK*QUERY,'query_wall_s':query_wall,'inference_ops_per_example_proxy':mac,'evaluation_ops_proxy':evalops}
     m.update(train_meta);m['active_ops_proxy']=int(evalops+train_meta['sampled_examples']*mac*3)
     return m,raw
 
 def run(seed,out):
     out.mkdir(parents=True,exist_ok=True);result={}
     p,t=pathnet(seed);result['pathnet'],raw=evaluate('pathnet',p,seed,t);(out/'pathnet_payload.npz').write_bytes(raw)
-    s=pooled_shared(seed);meta={'optimizer_updates':0,'sampled_examples':8*SUPPORT,'training_wall_s':0.0,'module_births':1};result['shared'],raw=evaluate('shared',s,seed,meta);(out/'shared_payload.npz').write_bytes(raw)
+    t0=time.perf_counter();s=pooled_shared(seed);swall=time.perf_counter()-t0;meta={'optimizer_updates':0,'sampled_examples':8*SUPPORT,'training_wall_s':swall,'module_births':1};result['shared'],raw=evaluate('shared',s,seed,meta);(out/'shared_payload.npz').write_bytes(raw)
     m,mt=train_rank1(seed)
     for name in ('mirror','native_rank1'):
         result[name],raw=evaluate(name,m,seed,mt);(out/f'{name}_payload.npz').write_bytes(raw)
-    mats=[]
+    t0=time.perf_counter();mats=[]
     for task in range(NTASK):x,y=task_data(seed,task,'support');mats.append(fit_matrix(x,y))
-    ind=torch.stack(mats);it={'optimizer_updates':0,'sampled_examples':NTASK*SUPPORT,'training_wall_s':0.0,'module_births':NTASK};result['independent'],raw=evaluate('independent',ind,seed,it);(out/'independent_payload.npz').write_bytes(raw)
+    ind=torch.stack(mats);iwall=time.perf_counter()-t0;it={'optimizer_updates':0,'sampled_examples':NTASK*SUPPORT,'training_wall_s':iwall,'module_births':NTASK};result['independent'],raw=evaluate('independent',ind,seed,it);(out/'independent_payload.npz').write_bytes(raw)
     assert result['mirror']['payload_sha256']==result['native_rank1']['payload_sha256']
     assert result['mirror']['per_task_query_rmse']==result['native_rank1']['per_task_query_rmse']
     d={'experiment_id':'MA-457','seed':seed,'split':'dev','task':{'dimension':D,'count':NTASK,'aligned_tasks':6,'outliers':2,'support_per_task':SUPPORT,'query_per_task':QUERY},'methods':result};(out/'metrics.json').write_text(json.dumps(d,indent=2,sort_keys=True)+'\n');return d
