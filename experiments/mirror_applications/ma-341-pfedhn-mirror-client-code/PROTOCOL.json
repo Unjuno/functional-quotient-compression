@@ -1,0 +1,74 @@
+{
+  "experiment_id": "MA-341",
+  "title": "Client Mirror code versus pFedHN full-model generation",
+  "status": "SCREENING",
+  "evidence_lane": "PERSONALIZATION/STORAGE/COMMUNICATION",
+  "base_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
+  "hypothesis": "On held-out non-IID client partitions of sklearn Digits, a shared classifier with four per-client Givens View angles reaches within 2 accuracy points of a pFedHN-style full-model generator after 20 support updates, with lower actual server/client bytes and client download volume, and is not dominated by byte-near FiLM codes.",
+  "physical_object": "One shared 64-32-10 MLP classifier",
+  "mirror_coordinate": "Four per-client Givens angles on four fixed hidden-unit pairs (0,1),(2,3),(4,5),(6,7)",
+  "logical_multiplicity": "Personalized client classifiers",
+  "prior_art_refs": ["PA40"],
+  "draw": {
+    "number": 26,
+    "eligible_rule": "P0 + UNTESTED; exclude IDs with live origin/research/ma-* branches or pre-existing experiments/mirror_applications/ma-* directories",
+    "eligible_count": 526,
+    "pool_sha256": "e3b982bf493455e868b393bd5cc497c1c0175f724e83c134e3598edc23bebe88",
+    "seed_hex": "22e18d547c678ecb8c63d20315388d09ef08077a59e2db7b2ce593c0a9a91fde",
+    "selection_index_zero_based": 8,
+    "selected_id": "MA-341",
+    "record": "source/draw26_exclusions.json"
+  },
+  "data": {
+    "dataset": "sklearn.datasets.load_digits",
+    "version": "pinned in source/data_manifest.json after protocol freeze",
+    "features": "64 normalized pixels from 8x8 greyscale images",
+    "target": "10-way digit classification",
+    "clients": 12,
+    "client_distribution": "per-class Dirichlet assignment alpha=0.5; all samples assigned once per world",
+    "train_clients": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+    "unseen_clients": [10, 11],
+    "within_client_split": "train clients: 60% train, 20% dev, 20% audit; unseen clients: 60% support, 40% audit query",
+    "world_seeds": [23, 47, 71]
+  },
+  "model": {
+    "architecture": "input 64, hidden 32 ReLU, output 10",
+    "pFedHN_style": "client embedding z in R^8 -> shared 2-layer hypernetwork -> all 2410 client MLP parameters",
+    "mirror": "shared MLP plus four Givens angles per client, rotating four fixed hidden activation pairs",
+    "film_control": "shared MLP plus client code in R^4 projected to hidden gamma/beta by shared learned bases",
+    "global_control": "one MLP shared by all clients, no client code",
+    "independent_control": "one local MLP per client"
+  },
+  "training": {
+    "optimizer": "AdamW",
+    "learning_rate": 0.003,
+    "weight_decay": 0.0001,
+    "max_epochs": 80,
+    "checkpoint_selection": "lowest mean development cross-entropy on the ten training clients; patience 8",
+    "local_adaptation": "20 support-set Adam steps; report fixed checkpoints at 0, 5, 20 steps",
+    "fresh_world_seeds": [23, 47, 71],
+    "model_init_seeds": [31, 47, 59],
+    "torch_threads": 1
+  },
+  "controls": [
+    "pFedHN-style central hypernetwork and client embeddings",
+    "Shared MLP with four-angle Mirror client views",
+    "Byte-near shared MLP plus four-dimensional FiLM code",
+    "Shared global MLP, no personalization",
+    "Independent local MLP upper control"
+  ],
+  "metrics": [
+    "seen-client and unseen-client query accuracy and cross-entropy",
+    "actual serialized central/server model and client-code bytes",
+    "one-time shared-base and per-client download bytes",
+    "local adaptation updates and client model-generation MACs",
+    "CPU batch-1 latency, client personalization wall time"
+  ],
+  "storage": {
+    "authority": "actual serialized safetensors bytes",
+    "paid_objects": ["shared models", "hypernetwork", "client embeddings/codes", "FiLM or Mirror bases", "independent client models", "client ID maps", "decoder metadata"]
+  },
+  "success_gate": "Mirror is within 2 accuracy points of pFedHN after 20 support updates on both unseen clients in >=2/3 worlds; central model plus registered-client payload <=80% of pFedHN; per-client code download after base cached <=25% of a generated full model; and Mirror is not dominated by byte-near FiLM.",
+  "failure_gate": "Any success condition fails.",
+  "boundaries": ["Client partitions are simulated from one small dataset.", "The pFedHN-style control is a direct compact-code-to-full-MLP reimplementation, not a reproduction of every paper detail.", "No privacy, secure aggregation, real-user or production federated claim."]
+}
