@@ -199,8 +199,14 @@ def adapt_native(model, m, s, anchors, biases, target_coeff, world_seed, checkpo
 def serialize_model(model, method, anchors, biases, coefficient_world, world, init_seed):
     ART.mkdir(parents=True,exist_ok=True)
     stem=f"{coefficient_world}_w{world}_s{init_seed}_{method}"
+    def packed(tensors):
+        items=sorted(tensors.items())
+        flat=torch.cat([v.reshape(-1) for _,v in items]).to(torch.float32)
+        layout={k:list(v.shape) for k,v in items}
+        return flat,layout
     anchor_path=ART/f"{stem}_anchors.safetensors"
-    save_file({"weights":torch.as_tensor(anchors),"biases":torch.as_tensor(biases)},str(anchor_path),metadata={"experiment":"MA-790","kind":"shared_physical_anchors"})
+    anchor_flat,anchor_layout=packed({"weights":torch.as_tensor(anchors),"biases":torch.as_tensor(biases)})
+    save_file({"p":anchor_flat},str(anchor_path),metadata={"schema":"MA790-PAYLOAD-V1","group":"anchors"})
     sd={k:v.detach().cpu().contiguous() for k,v in model.state_dict().items()}
     if method=="mirror_factorized":
         code_keys={k:v for k,v in sd.items() if "radius" in k or "angle" in k}
@@ -212,15 +218,18 @@ def serialize_model(model, method, anchors, biases, coefficient_world, world, in
         code_keys={}
         gen=sd
     gen_path=ART/f"{stem}_generator.safetensors"
-    save_file(gen,str(gen_path),metadata={"experiment":"MA-790","kind":"shared_coeff_generator"})
+    gen_flat,gen_layout=packed(gen)
+    save_file({"p":gen_flat},str(gen_path),metadata={"schema":"MA790-PAYLOAD-V1","group":"generator"})
     code_bytes=0
     if code_keys:
-        cp=ART/f"{stem}_factor_codes.safetensors";save_file(code_keys,str(cp),metadata={"experiment":"MA-790","kind":"registered_factor_codes"});code_bytes=cp.stat().st_size
-    meta={"method":method,"coefficient_world":coefficient_world,"task_grid":"4x4","top_k":3}
+        cp=ART/f"{stem}_factor_codes.safetensors";code_flat,code_layout=packed(code_keys);save_file({"p":code_flat},str(cp),metadata={"schema":"MA790-PAYLOAD-V1","group":"factor_codes"});code_bytes=cp.stat().st_size
+    else:
+        code_layout={}
+    meta={"method":method,"coefficient_world":coefficient_world,"task_grid":"4x4","top_k":3,"anchor_layout":anchor_layout,"generator_layout":gen_layout,"factor_code_layout":code_layout}
     mp=ART/f"{stem}_metadata.json";mp.write_text(json.dumps(meta,sort_keys=True,separators=(",",":"))+"\n")
     anchor_bytes=anchor_path.stat().st_size;generator_bytes=gen_path.stat().st_size+mp.stat().st_size
     full16=ART/f"{stem}_free16_coefficient_reference.safetensors"
-    save_file({"coefficients":torch.zeros(16,K)},str(full16),metadata={"experiment":"MA-790","kind":"free_16_task_coefficient_storage_reference"})
+    save_file({"p":torch.zeros(16*K)},str(full16),metadata={"schema":"MA790-PAYLOAD-V1","group":"free16_coefficients"})
     return anchor_bytes,generator_bytes,code_bytes,anchor_bytes+generator_bytes+code_bytes,full16.stat().st_size
 
 

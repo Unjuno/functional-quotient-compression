@@ -54,7 +54,7 @@
   "metrics": {
     "primary": ["held-out query MSE", "per-task query MSE", "actual serialized inference payload bytes"],
     "secondary": ["seen-task dev MSE", "native support adaptation curve", "coefficient reconstruction error", "optimizer updates", "CPU train and inference wall-clock", "coefficient-generation MACs"],
-    "storage": "Actual safetensors bytes including shared anchors, generators, all registered factor codes, independent coefficient rows, and metadata. Report shared state plus registered factor state, per-task code download, and 16-row free SIMoE storage reference.",
+    "storage": "Actual safetensors bytes including shared anchors, generators, all registered factor codes, independent coefficient rows, and metadata. State tensors are packed into one flat vector per payload group; exact tensor shapes/order and schema metadata are serialized and charged. Report shared state plus registered factor state and the 16-row free SIMoE storage reference.",
     "compute": "Record examples, optimizer updates, coefficient generation operations and measured CPU batch-1 latency."
   },
   "gates": {
@@ -64,5 +64,8 @@
     "off_orbit": "Report off-orbit degradation and the adapted SIMoE gap; do not require Mirror to represent arbitrary coefficient tables.",
     "decision": "PROMISING only if aligned quality/bytes pass and Mirror improves on ordinary low-rank at matched budgets; FAIL if valid runs fail the aligned quality or storage gates; NOT ESTABLISHED for implementation or split invalidity."
   },
+  "amendments": [
+    {"number": 1, "reason": "A development payload audit showed per-tensor safetensors key headers dominated this tiny coefficient model. Before full development/fresh audit runs, use one flat vector per anchor/generator/code payload and serialize the deterministic shape/order map in charged metadata. This is an inference serialization format change only; model parameterization, seeds, data, optimizer and gates are unchanged.", "after_audit": false}
+  ],
   "limitations": ["Synthetic fixed linear anchors, not a full SIMoE reproduction.", "No LLM natural-language loss, sparse routing runtime, distributed upcycling, or full expert-network training claim.", "Aligned worlds are designed to test compositional coefficient structure; off-orbit worlds test its boundary."]
 }
