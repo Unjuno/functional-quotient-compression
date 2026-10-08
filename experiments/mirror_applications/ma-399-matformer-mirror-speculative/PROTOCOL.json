@@ -1,0 +1,77 @@
+{
+  "experiment_id": "MA-399",
+  "title": "MatFormer nested drafter with Mirror granularity code for exact speculative decoding",
+  "status": "PROTOCOL_FROZEN_BEFORE_DEVELOPMENT",
+  "base_commit": "2d686f0",
+  "prior_art_refs": [
+    "PA53",
+    "PA15"
+  ],
+  "evidence_lane": "DISTRIBUTION_ALIGNMENT/EXACTNESS/ACCEPTED_TOKENS/END_TO_END_LATENCY/STORAGE",
+  "hypothesis": "A nested-width draft from one shared supernetwork, augmented by a per-context Mirror angle over a rank-2 residual basis, will raise expected accepted proposals over plain width-16 nesting by >=0.05 and come within 0.05 of a width-32 routed slim verifier, while preserving exact target sampling and improving end-to-end generated tokens/sec over verifier-only sampling by >=10%.",
+  "physical_object": "one jointly trained nested supernetwork with widths 16/32/64; width64 is the full verifier",
+  "mirror_coordinate": "one per-context angle selecting a view in a shared rank-2 verifier-minus-drafter residual basis",
+  "logical_multiplicity": "nested width16 drafter, width32 slim verifier, full width64 verifier and a Mirror corrected drafter from one physical model",
+  "model": {
+    "context_states": 64,
+    "vocabulary_size": 16,
+    "hidden_width": 64,
+    "nested_widths": [
+      16,
+      32,
+      64
+    ],
+    "train_examples": 32768,
+    "validation_examples": 8192,
+    "batch_size": 256,
+    "optimizer_updates": 1600,
+    "optimizer": "Adam",
+    "learning_rate": 0.003,
+    "speculative_draft_block": 4,
+    "development_seeds": [
+      39901,
+      39902
+    ],
+    "fresh_seeds": [
+      39911,
+      39912,
+      39913
+    ],
+    "target": "seeded stochastic context-to-next-token table generated before training; supernetwork jointly distills its distributions at widths 16/32/64",
+    "residual_fit": "rank-1 scalar, rank-2 coefficients and rank-2 Mirror angle are fitted from verifier-minus-width16 logits on development training contexts only"
+  },
+  "controls": [
+    "verifier-only width64 exact sampling baseline",
+    "plain nested width16 draft",
+    "width32 routed slim verifier/draft control (PA15)",
+    "independently trained width16 distillation draft",
+    "width16 plus one scalar per-context rank-1 residual gate",
+    "width16 plus ordinary rank-2 residual coefficients",
+    "width16 plus shared rank-2 residual basis and one Mirror angle per context"
+  ],
+  "development_gate_before_fresh": "For both seeds: exact corrected next-token distribution max TV < 1e-6 for every method; Mirror expected accepted proposals per 4-token block >=0.05 above nested16 and within 0.05 of routed width32; Mirror end-to-end tokens/sec >=1.10x verifier-only; Mirror serialized inference payload <=1.05x shared nested supernetwork payload. Otherwise fresh remains unopened.",
+  "success_gate": "All three fresh worlds meet exactness, acceptance, latency and storage gates. Report quality/distribution divergence, accepted tokens, compute, wall time and actual payload bytes.",
+  "failure_gate": "Any registered development gate misses in either seed; fresh remains sealed.",
+  "storage": {
+    "authority": "actual deterministic ZIP/NPY FP16 inference payload after reload",
+    "paid_objects": [
+      "full shared verifier/supernetwork weights counted once",
+      "independent draft if used",
+      "residual bases and scalar/rank-2/Mirror codes",
+      "metadata and archive headers"
+    ]
+  },
+  "compute": {
+    "report_optimizer_examples_updates": true,
+    "report_draft_and_verifier_calls": true,
+    "report_end_to_end_wall_latency": true,
+    "report_tokens_per_second_and_acceptance": true
+  },
+  "boundaries": [
+    "small synthetic stochastic next-token model, not MatFormer/LLM benchmark evidence",
+    "rejection correction must preserve verifier distribution exactly",
+    "accepted token count is not quality unless exactness passes",
+    "all routing/view computation is charged in measured wall time",
+    "fresh seeds unopened until all development gates pass"
+  ]
+}

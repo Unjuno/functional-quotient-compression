@@ -6,11 +6,11 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (49 completed; 581 UNTESTED)
+- P0: **630** (50 completed; 580 UNTESTED)
 - P1: **422** (12 completed; 410 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1094 UNTESTED, 31 PROMISING, 30 FAIL**
-- 47 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
+- Current MA statuses: **1093 UNTESTED, 31 PROMISING, 31 FAIL**
+- 48 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
 - Thirteenth literature sweep added MA-996..1045 (50 UNTESTED; 40 P0/10 P1) and PA296..PA325. IDs MA-1000+ use four digits; consult `check_registry_integrity.py`. No new experiment results.
@@ -23,22 +23,20 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-399 — MatFormer speculative drafter via Mirror (P0; PA53/PA15)**
+**MA-255 — Mirror context superposition for task models (P0; PA16)**
 
-MA-397 FAIL: one angle per token resolved all four-way product-address collision classes at 1.0 accuracy, matching native Hash Embeddings with 59.1% of their bytes. It had much better NLL than scalar codes, but the strict +0.05 accuracy-over-scalar gate missed (margins +0.0015/+0.0305). Fresh remains sealed. This is a synthetic collision mechanism test only. MA-369/371/372 remain UNTESTED and paused pending width/depth output-code family redesign.
+MA-397 and MA-399 are recorded FAIL. MA-399’s nested16 Mirror angular drafter missed acceptance (+0.05) and payload (1.05x) gates in both development seeds; fresh and end-to-end latency remain sealed. MA-369/371/372 remain UNTESTED and paused pending width/depth output-code family redesign.
 
-Required controls: plain MatFormer nested-width drafter, routed slim verifier (VIA-SD), independent width-matched drafter, temperature/gate or low-rank residual control, and Mirror granularity code. Measure exact rejection sampling, accepted tokens/block, verifier and drafter compute, end-to-end latency, and actual serialized bytes.
-
-Prior art: PA53 MatFormer nested widths and PA15 routed slim verification. Compare distribution alignment and end-to-end exact speculative decoding; draft/verifier model copies are not a useful claim by themselves.
+Next: read PA16 and freeze the MA-255 control set before development.
 
 ## Active experiment
 
-MA-383, MA-385, MA-389, MA-391, MA-392, MA-393, MA-395 and MA-397 are FAIL and recorded on dedicated research branches. MA-399 is next. MA-367/368/374/375/379/381/383/385/389/391/392/393/395/397 fresh worlds remain unopened under their registered gates.
+MA-383, MA-385, MA-389, MA-391, MA-392, MA-393, MA-395, MA-397 and MA-399 are FAIL and recorded on dedicated research branches. MA-255 is next. MA-367/368/374/375/379/381/383/385/389/391/392/393/395/397/399 fresh worlds remain unopened under their registered gates.
 
 ## Verified status index
 
 - **PROMISING (31):** MA-001, MA-002, MA-003, MA-004, MA-005, MA-006, MA-007, MA-008, MA-012, MA-014, MA-015, MA-041, MA-076, MA-079, MA-111, MA-121, MA-156, MA-160, MA-171, MA-173, MA-181, MA-189, MA-241, MA-244, MA-245, MA-249, MA-250, MA-251, MA-374, MA-381, MA-691.
-- **FAIL (30):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-367, MA-368, MA-375, MA-379, MA-383, MA-385, MA-389, MA-391, MA-392, MA-393, MA-395, MA-397.
+- **FAIL (31):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-367, MA-368, MA-375, MA-379, MA-383, MA-385, MA-389, MA-391, MA-392, MA-393, MA-395, MA-397, MA-399.
 
 All per-ID evidence is retained in the local experiment directories and in `CLAIM_LEDGER.csv`. Consult [the evidence integration audit](../../docs/phase2/MIRROR_MA_EVIDENCE_INTEGRATION_2026-10-08.md) for linked reports, verifications, provenance and claim boundaries.
 
