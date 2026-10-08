@@ -174,7 +174,7 @@ Added after the ReFT/function-vector/sparse-feature sweep. Do not interrupt acti
 
 High-information P0:
 1. MA-501/502 — shared LoReFT basis + Mirror task codes (MA-501 **FAIL**: rho=0 saves 84.4% versus per-task rank-four but exactly aliases native shared coefficients; rho=.25 misses heldout quality. MA-502 **FAIL**: 256 aligned functions fit in 6,005 B vs 201,837 B independent rank-four, but exact native shared-coefficient alias; fresh sealed. Pause unchanged static-code variants under `LOREFT_SHARED_MIRROR_CODE_FAMILY_DIAGNOSTIC_2026-10-08.md`.)
-2. MA-503 — factorized layer x task representation code (**next candidate**; held-out combinations and direct native factorized controls required)
+2. MA-503 — factorized layer x task representation code (**ACTIVE SCREENING**, frozen protocol; held-out combinations and direct native factorized controls; PA96)
 3. MA-504 — token-conditioned Mirror ReFT
 4. MA-508 — activation-addition Mirror basis
 5. MA-510/511 — conditional condition x behavior View codes
