@@ -74,6 +74,8 @@ The fourteenth 2026-10-08 literature sweep added MA-1046..1095 (50 new UNTESTED 
 
 The fifteenth 2026-10-08 sweep added MA1096..1115 (20 new UNTESTED: 16 P0, 4 P1) and PA351..371, extending the registry to **1115**, with **1068 UNTESTED**. The focus is natural learned LoRA weight-delta representability, GL(r) gauge-invariant subspaces, marginal compressed adapter-bank serving and LRAgent/PReCache low-rank cache reuse. A mathematical intake harness passed four CPU unit tests, but **no natural checkpoint or trained Mirror gain was measured**. MA-255 remains next.
 
+**Post-sweep function-space support (same 1115 registry):** PA372..381 add direct BOLT shared spectral task-code prior art, CG-LoRA function-space curvature, Fora activation subspaces, task-vector bases and SVD+CUR shared/private controls. A preregistered **real handwritten-digit image-shift** pilot used five separately trained source LoRAs and four held-out adaptation conditions. Mirror's 8-scalar/task code reached 52.19% test accuracy versus a BOLT-like diagonal 6-scalar/task code's 49.79%, but dense shared core and native rank-4 LoRA scored 69.97%/86.98%, with Mirror slower. The **Mirror-specific Pareto gate FAILED**; 48 rows×14 deterministic fields replayed exactly. This is neither real LLM adaptation nor a completed MA; **29 PROMISING / 18 FAIL and MA-255 next are unchanged**. Read [function-space falsification review](MIRROR_FUNCTION_SPACE_FALSIFICATION_2026-10-08.md) and [pilot evidence](../../experiments/mirror_applications/research_intake/natural_digit_function_20261008/RESULTS.md).
+
 This registry is a hypothesis backlog, not evidence. Each candidate must use actual serialized bytes and the relevant simple control. Mirror-specific value requires beating a simpler non-Mirror shared/low-rank alternative.
 
 A compact nanoGPT-derived baseline is stored under `third_party/nanoGPT/` for common A/B experiments. The original user-supplied archive SHA-256 and license provenance are recorded there.
@@ -116,6 +118,8 @@ Primary scientific adoption gate: **FAIL**. Pruning hardware/byte mechanics: ver
 - [Fourteenth sweep: forecasting, recommender embeddings and Earth observation](MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_FOURTEENTH_SWEEP.md)
 - [Fifteenth sweep: natural LoRA geometry, shared bases, real cache reuse](MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_FIFTEENTH_SWEEP.md)
 - [Gauge-invariant natural-LoRA screening intake](../../experiments/mirror_applications/research_intake/natural_lora_orbit_20261008/README.md)
+- [Function-space evidence and BOLT/CG-LoRA controls](MIRROR_FUNCTION_SPACE_FALSIFICATION_2026-10-08.md)
+- [Frozen real handwritten-digit shifted-task code pilot](../../experiments/mirror_applications/research_intake/natural_digit_function_20261008/RESULTS.md)
 - [Autonomous worker goal](../../GOAL.md)
 - [Mirror application roadmap](../../roadmap/MIRROR_APPLICATION_ROADMAP.md)
 - [TM001 report](TM001_PARALLEL_PERIOD_TOKEN_MIXING.md)
