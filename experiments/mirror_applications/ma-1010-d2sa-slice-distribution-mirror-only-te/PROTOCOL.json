@@ -1,0 +1,32 @@
+{
+  "experiment_id": "MA-1010",
+  "title": "D2SA slice-distribution Mirror code",
+  "status": "BLOCKED_BEFORE_PROTOCOL_FREEZE",
+  "base_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
+  "branch": "research/ma-1010-d2sa-mirror-scan-code-20261008",
+  "selection_draw": 14,
+  "prior_art_refs": [
+    "PA305"
+  ],
+  "registered_hypothesis": "Replace part of per-slice MRI test-time adaptation state with a compact scan/slice Mirror coordinate while preserving reconstruction quality and physical data consistency.",
+  "protocol_frozen": false,
+  "data_accessed": false,
+  "training_run": false,
+  "decision": "NOT_ESTABLISHED",
+  "required_native_control": "D2SA patient-wise MR-INR distribution adaptation plus single-slice learnable anisotropic-diffusion refinement using a pretrained MRI reconstruction model.",
+  "blockers": [
+    "No D2SA implementation or source-code repository identified in the paper source.",
+    "No pretrained MRI reconstruction checkpoint or MRI data in this checkout.",
+    "A phantom-only implementation without the registered native D2SA control would not establish the Mirror-specific comparison."
+  ],
+  "environment": {
+    "pytorch": "2.6.0+cpu",
+    "cuda_available": false
+  },
+  "prior_art_source": "https://arxiv.org/src/2503.20815",
+  "boundaries": [
+    "No negative Mirror result is claimed.",
+    "Registry remains UNTESTED.",
+    "No MRI data were downloaded or inspected."
+  ]
+}

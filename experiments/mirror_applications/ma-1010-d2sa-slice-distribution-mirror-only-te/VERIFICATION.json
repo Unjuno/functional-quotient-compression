@@ -1,0 +1,27 @@
+{
+  "experiment_id": "MA-1010",
+  "status": "NOT_ESTABLISHED_PRE_PROTOCOL_BLOCKER",
+  "base_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
+  "draw_replay": {
+    "command": "python experiments/mirror_applications/ma-1010-d2sa-slice-distribution-mirror-only-te/source/verify_draw.py",
+    "pool_size": 554,
+    "selected_id": "MA-1010",
+    "status": "PASS"
+  },
+  "prior_art_review": {
+    "PA305_read": true,
+    "arxiv_source_read": true,
+    "code_repository_url_in_source_bundle": false
+  },
+  "asset_check": {
+    "D2SA_source_implementation_in_checkout": false,
+    "MRI_reconstruction_checkpoint_in_checkout": false,
+    "MRI_dataset_in_checkout": false,
+    "cuda_available": false
+  },
+  "protocol_frozen": false,
+  "data_accessed": false,
+  "training_run": false,
+  "registry_status": "UNTESTED",
+  "decision_reason": "Required native D2SA comparison is not reproducible from currently available implementation/checkpoint/data assets. A phantom-only comparison would not test the registered native control."
+}
