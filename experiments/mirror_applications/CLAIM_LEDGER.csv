@@ -148,3 +148,7 @@ MA-438,PROMISING,MECHANISM/STORAGE/COMPUTE,"Fresh 8-pole S4D timescale screen: M
 MA-439,FAIL,MECHANISM/STORAGE/COMPUTE,"Fresh synthetic packet SSM: Mirror NRMSE 0.000225 vs independent 0.000068 at 2,125B vs 2,485B (85.5%); shared recurrence 0.134059, ordinary latent 0.006033. Better than tied/latent but misses independent quality and <=60% bytes. Stable; sequential rollout, no parallel latency evidence.",branch research/ma-439-packet-plan-ssm-mirror-20261008: experiments/mirror_applications/ma-439-packet-plan-ssm-mirror/README.md,branch research/ma-439-packet-plan-ssm-mirror-20261008: experiments/mirror-applications/ma-439-packet-plan-ssm-mirror/VERIFICATION.json,c6c1c4c794949939a149bc5d18e05ff3c7743218,36 fresh metrics replayed from 12 actual payloads; 2 tests pass. Synthetic aligned mechanism only.
 
 
+
+MA-440,FAIL,CONTINUAL/STORAGE/RETENTION,"Fresh continual synthetic SSM: Mirror final mean NRMSE 0.000092 vs independent 0.000058; mean forgetting 0.256 vs 0.052; payload 2,125B vs 2,485B (85.5%, misses <=60%). Slight forgetting improvement over shared-only only; all stable. No mask/SETA or natural LM evidence.",branch research/ma-440-continual-ssm-skill-codes-20261008: experiments/mirror_applications/ma-440-continual-ssm-skill-codes/README.md,branch research/ma-440-continual-ssm-skill-codes-20261008: experiments/mirror_applications/ma-440-continual-ssm-skill-codes/VERIFICATION.json,62740d3802fec3e400bdb203cf5ba5c36f042992,144 skill-stage metrics replayed from 36 final payloads; 2 tests pass; synthetic only.
+
+
