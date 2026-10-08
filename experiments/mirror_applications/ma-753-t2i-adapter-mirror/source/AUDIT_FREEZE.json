@@ -1,0 +1,45 @@
+{
+  "experiment_id": "MA-753",
+  "phase": "pre_audit_freeze",
+  "files": {
+    "PROTOCOL.json": "8f0d53232b9ea5094fd7a1f4dbef50acdd8aa64e62e0bfba3362c4899c64bec8",
+    "source/run_ma753.py": "152a688ba83e5332a61fbbb9d69e47cd6f5632039a187e1f84d67ae4bf0778b4",
+    "artifacts/metrics_development.csv": "0f8ec025f427934e68c76ebb379d54384592c9be0ff55891f2234dc4caa9981d",
+    "artifacts/development_curve.csv": "7a427d732f78180a0a00bc5f73d47cf34314abb8cdaa5d48f47c369040802fb6",
+    "source/DEVELOPMENT_FREEZE.json": "43745cfc35049c6a20b2ebed420c877c27b3db3662139760bba43e22c9ee77de"
+  },
+  "selected_updates": {
+    "independent_adapters": {
+      "updates": 1000,
+      "mean_dev_mse": 6.586792119198588e-15
+    },
+    "mirror_givens": {
+      "updates": 100,
+      "mean_dev_mse": 0.30905631447020215
+    },
+    "basis_mix2": {
+      "updates": 625,
+      "mean_dev_mse": 0.17875508964062112
+    },
+    "film_controls": {
+      "updates": 850,
+      "mean_dev_mse": 0.31639011452595395
+    },
+    "hard_shared": {
+      "updates": 100,
+      "mean_dev_mse": 0.4510757674773534
+    }
+  },
+  "audit_world_seeds": [
+    11,
+    17,
+    23
+  ],
+  "model_seeds": [
+    29,
+    41,
+    53
+  ],
+  "audit_query_accessed": false,
+  "selection_frozen": true
+}
