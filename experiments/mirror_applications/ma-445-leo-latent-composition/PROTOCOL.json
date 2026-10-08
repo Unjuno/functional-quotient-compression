@@ -1,9 +1,9 @@
 {
   "experiment_id": "MA-445",
   "title": "LEO latent composition of known skills",
-  "status": "SCREENING",
+  "status": "COMPLETED_FAIL",
   "evidence_lane": "HELD_OUT_COMPOSITION/QUALITY/BYTES",
-  "base_commit": "5896232",
+  "base_commit": "811b0527",
   "hypothesis": "For additive task families with independently trained skill factors, composing two learned 2D latent task codes and decoding once matches direct task-vector addition within 1.10x held-out query NRMSE, and is smaller in actual amortized inference bytes at N=20.",
   "physical_object": "shared meta-trained base function plus reusable skill latent factors",
   "mirror_coordinate": "sum of two learned 2D skill coordinates, decoded through shared structured Mirror map",
@@ -73,12 +73,17 @@
         5059
       ]
     },
-    "fresh_tasks_per_world": 20
+    "fresh_task_count": 162,
+    "fresh_tasks_per_world": 54,
+    "replicates_per_task": 3,
+    "all_skill_ids_covered_by_training_pairs": true,
+    "teacher_rank": 2,
+    "teacher_space": "first two coordinates of the 8D vector, fixed before experiments"
   },
   "development": {
     "worlds_or_seeds": [
-      44500,
-      44501
+      44520,
+      44521
     ],
     "seeds": [
       0,
@@ -93,9 +98,9 @@
   },
   "fresh": {
     "worlds_or_seeds": [
-      44510,
-      44511,
-      44512
+      44530,
+      44531,
+      44532
     ],
     "seeds": [
       0,
@@ -103,13 +108,16 @@
       2
     ],
     "locked_before_access": true,
-    "task_ids_disjoint": true
+    "task_ids_disjoint": true,
+    "worlds_or_seeds_locked_before_access": true,
+    "fresh_total_evaluated_compositions": 54,
+    "replicates_per_composition": 3
   },
   "meta_training": {
     "updates": 300,
     "tasks_per_batch": 8,
     "first_order": true,
-    "skill_train_pairs": "all non-held-out pairs only"
+    "skill_train_pairs": "all non-held-out pairs only; verified each skill ID appears at least once"
   },
   "storage": {
     "authority": "actual serialized inference payload bytes",
@@ -139,5 +147,41 @@
     "Skill pair identities are held out from all meta-training and development.",
     "Combinatorial count is not claimed as independent capacity.",
     "Task-vector arithmetic and any decoder, index, or composition state are fully charged."
+  ],
+  "amendments": [
+    {
+      "id": "A1",
+      "status": "invalidated before valid rerun",
+      "reason": "Initial pilot revealed task count/replicate mismatch and failed to cover skill factorization adequately; all A1 fresh measurements excluded.",
+      "replacement_worlds": [
+        44520,
+        44521,
+        44530,
+        44531,
+        44532
+      ]
+    },
+    {
+      "id": "A2",
+      "status": "active before rerun",
+      "reason": "Teacher skill vectors were full-rank 8D while Mirror/LEO shared decoder rank was 2, confounding composition with representational rank. Teacher is now generated in a fixed 2D subspace shared across skills; new development and fresh IDs avoid reuse.",
+      "teacher_skill_rank": 2,
+      "development_worlds": [
+        44520,
+        44521
+      ],
+      "fresh_worlds": [
+        44530,
+        44531,
+        44532
+      ]
+    },
+    {
+      "id": "A3",
+      "status": "active post-run accounting correction",
+      "reason": "Initial per-task payload serialized shared banks redundantly, invalidating amortized-byte comparison. Recover shared state from frozen fresh payloads, serialize each shared bank once and each task address separately, and charge exact concatenated shared plus address bytes. No model, seed, hyperparameter, task, or quality score changes.",
+      "fresh_quality_rerun": "not required; no training or task change",
+      "serialization_format": "ma445-shared-v1 plus ma445-view-v1"
+    }
   ]
 }
