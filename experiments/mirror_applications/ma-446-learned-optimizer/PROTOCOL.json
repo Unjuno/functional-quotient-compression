@@ -1,0 +1,109 @@
+{
+  "experiment_id": "MA-446",
+  "title": "Learned optimizer for Mirror coordinates only",
+  "status": "SCREENING",
+  "evidence_lane": "FEW_SHOT/OPTIMIZER/QUALITY/BYTES",
+  "base_commit": "e5995c5d",
+  "hypothesis": "A learned per-step diagonal update schedule acting only on a 2D Mirror code reaches at least 10% lower fresh query NRMSE than development-tuned Adam and SGD after four updates on held-out linear tasks.",
+  "physical_object": "fixed identity shared linear map",
+  "mirror_coordinate": "2D task vector m updated by learned coordinatewise step-size schedule",
+  "logical_multiplicity": "few-shot linear functions adapted through two Mirror coordinates",
+  "prior_art_refs": [
+    77
+  ],
+  "controls": [
+    "zero code / shared model",
+    "development-tuned SGD on same 2D code",
+    "development-tuned Adam on same 2D code",
+    "learned per-coordinate gradient schedule on same code"
+  ],
+  "task": {
+    "type": "2D latent linear regression",
+    "input_dim": 2,
+    "output_dim": 1,
+    "support_examples": 4,
+    "query_examples": 128,
+    "target_code_distribution": "independent Normal(0,0.5) coordinates",
+    "refinement_steps": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "task_id_partition": {
+      "development": [
+        100,
+        199
+      ],
+      "fresh": [
+        2000,
+        2059
+      ]
+    }
+  },
+  "development": {
+    "worlds": [
+      44600,
+      44601
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "sgd_lrs": [
+      0.03,
+      0.1,
+      0.3,
+      1.0
+    ],
+    "adam_lrs": [
+      0.01,
+      0.03,
+      0.1,
+      0.3
+    ],
+    "learned_schedule_initial_lr": 0.1,
+    "learned_schedule_outer_updates": 200
+  },
+  "fresh": {
+    "worlds": [
+      44610,
+      44611,
+      44612
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "tasks_per_world": 20,
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "learned optimizer schedule or Adam/SGD hyperparameter serialization",
+      "2D runtime code",
+      "metadata"
+    ],
+    "report_amortization_N": [
+      1,
+      20,
+      100
+    ]
+  },
+  "compute": {
+    "report_inner_steps": true,
+    "report_update_MAC": true,
+    "report_query_wall": true,
+    "report_development_optimizer_training_wall": true
+  },
+  "success_gate": "Every fresh world at step4: learned schedule query NRMSE <= 0.90x best development-tuned standard optimizer, with exact serialized policy+code bytes no larger than Adam policy+code.",
+  "failure_gate": "Any world misses quality/byte gate or learned schedule is matched by tuned SGD/Adam.",
+  "boundaries": [
+    "Synthetic linear few-shot mechanism test only.",
+    "The optimizer learns only update multipliers; it does not change model weights or task code dimension.",
+    "No natural task, nonlinear model, or capacity claim."
+  ]
+}
