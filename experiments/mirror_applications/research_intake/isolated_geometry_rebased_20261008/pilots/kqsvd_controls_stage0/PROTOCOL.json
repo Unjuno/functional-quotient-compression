@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "name": "Native KQ-SVD vs key-only SVD and source-trained linear-code negative control",
+  "associated_ma": "MA-1166",
+  "status": "FROZEN_BEFORE_DATA",
+  "pilot_only": true,
+  "not_ma_completion": true,
+  "date": "2026-10-08",
+  "aim": "Validate strong query-aware native baseline and same-byte linear-code falsifier, not prove any Mirror-specific benefit.",
+  "limitations": [
+    "synthetic keys/queries only, no LM NLL",
+    "score-space rank-r SVD oracle is not directly deployable without counting projector/state",
+    "target-role support exact scores constitute expensive oracle calibration, never free",
+    "target audit query scores cannot train projector/code"
+  ],
+  "environment": {
+    "numpy": "2.3.5",
+    "backend": "numpy.linalg.svd",
+    "device": "CPU",
+    "dtype": "float64",
+    "threads": "1",
+    "cache_shared_across_roles": true,
+    "token_length": 128,
+    "d": 16,
+    "q_support": 12,
+    "q_audit": 96,
+    "rank": 4,
+    "source_roles": 6,
+    "code_dimension": 2,
+    "model": "one head linear pre-softmax score proxy"
+  },
+  "split": {
+    "development": [
+      11,
+      12,
+      13
+    ],
+    "fresh": [
+      101,
+      102,
+      103,
+      104,
+      105
+    ],
+    "no_audit_tuning": true,
+    "all_fresh_mandatory": true
+  },
+  "generator": "For each world: a fixed random orthogonal feature frame V; K=Z diag(linspace(4.0,0.12,d)) V.T (128x16); each role Q sampled in the same V coordinate frame with scale biased toward lower K singular directions; disjoint support and audit queries. Source 6 roles have different mixtures, target is unseen role mixture. Exact scores Q K.T are allowed for support-based code fitting only, not for audit fitting.",
+  "methods": [
+    "K-only SVD of K with rank-r right projector",
+    "per-role truncated SVD of Q_audit K.T as an AUDIT ORACLE LOWER BOUND (never used to tune deployable model)",
+    "source-only native KQ-score rank-r projector calibrated on 96 independent source queries per role",
+    "source-only shared flattened projector dictionary + target-code fit on 12 permitted support queries",
+    "same dictionary linear m control is native and makes no Mirror specific claim"
+  ],
+  "measurements": [
+    "relative Frobenius attention-score error on heldout audit query",
+    "oracle SVD error <= any rank-r approximation",
+    "full-column-rank check",
+    "least-squares projector shape and numerical residual",
+    "actual named NPZ serialized inference projector-basis bytes",
+    "per-world results and reproducible hashes"
+  ],
+  "gates": {
+    "algebra_PASS": "every fresh role projector is rank<=r (+ numerical tolerance) and its calibration score matches truncated SVD within 1e-7 relative, assuming full column rank",
+    "native_OPTIMALITY_PASS": "oracle rank-r SVD audit Frobenius error <= K-only score error + 1e-10 in all fresh worlds",
+    "Mirror_specific_PASS": "Not evaluated by this pilot. Ordinary linear m is a mandatory null, no innovation claim.",
+    "FAIL": "oracle bound is exceeded in the wrong direction or implementation does not correctly calibrate/deploy source-only projector",
+    "UNCERTAIN": "rank deficient calibration, invalid source/audit split, poor numerical condition, or serializer not measured"
+  },
+  "units": {
+    "K": "dimensionless real128x16",
+    "Q": "dimensionless real n×16",
+    "P": "dimensionless 16x16 rank<=4",
+    "m": "dimensionless real2 vector",
+    "error": "dimensionless Frobenius ratio",
+    "storage": "actual serialized NPZ bytes",
+    "time": "seconds"
+  },
+  "fresh_use": "Run dev 3 and all 5 fresh once; report all rows; no results used to revise preregistered gates.",
+  "prior_art": [
+    "PA426 https://proceedings.mlr.press/v300/lesens26a.html",
+    "PA432 https://arxiv.org/abs/2604.11501"
+  ],
+  "worker_affect": false
+}
