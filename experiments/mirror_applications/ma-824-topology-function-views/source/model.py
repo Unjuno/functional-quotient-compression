@@ -47,7 +47,8 @@ def payload_for(method,seed,bank):
         programs=[]
         for topology in TOPOLOGIES:
             for fid,name in enumerate(FUNCS):
-                nodes=[{'function_name':name,'function_weights':bank[fid]} for _ in range(2)]
+                # Each node is a distinct physical object in the independent control.
+                nodes=[{'function_name':name,'function_weights':{k:v.clone() for k,v in bank[fid].items()}} for _ in range(2)]
                 programs.append({'topology':topology,'nodes':nodes,
                     'edges':[[0,1],[1,2]] if topology=='chain' else [[0,2],[1,2]]})
         body={'independent_programs':programs}

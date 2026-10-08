@@ -5,11 +5,11 @@ import torch
 from model import METHODS,TOPOLOGIES,FUNCS,function_bank,make_inputs,payload_for,save_payload,execute,execute_payload
 
 ROOT=Path(__file__).resolve().parents[1];ART=ROOT/'source'/'artifacts';ART.mkdir(exist_ok=True)
-DEV=(82401,82402);FRESH=(82403,82404,82405)
+DEV=(82401,82402);FRESH=(82406,82407,82408)
 
 
 def run_one(seed,split,method):
-    bank=function_bank(seed);x=make_inputs(seed,split);path=ART/f'{split}_{seed}_{method}.pt'
+    bank=function_bank(seed);x=make_inputs(seed,split);path=ART/f'amended_{split}_{seed}_{method}.pt'
     payload_info=save_payload(path,method,seed,bank);payload_info['path']=str(path.relative_to(ROOT))
     payload=torch.load(path,map_location='cpu',weights_only=False)
     errors={};throughput={};start=time.perf_counter()

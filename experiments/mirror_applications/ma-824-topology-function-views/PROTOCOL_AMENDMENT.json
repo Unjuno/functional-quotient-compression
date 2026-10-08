@@ -1,0 +1,18 @@
+{
+  "experiment_id": "MA-824",
+  "amendment": 1,
+  "status": "FROZEN_BEFORE_AMENDED_FRESH_RUN",
+  "date": "2026-10-08",
+  "reason": "Post-run payload audit found the independent-program control reused identical tensor objects for its two physical nodes. PyTorch serialization deduplicated shared tensor storage, so its measured payload did not charge the declared duplicated program state.",
+  "invalidated_attempt": {
+    "files": ["source/attempt1_invalid_storage_aliasing.json", "ATTEMPT1_INVALID_SERIALIZATION.csv"],
+    "decision_use": "None; retain as an invalid serialization attempt, not as scientific outcome or gate evidence.",
+    "fresh_seeds_previously_viewed": [82403, 82404, 82405]
+  },
+  "changes": [
+    "Independent program node weights are deep-copied into physically distinct tensor storages before serialization.",
+    "Amended fresh seeds are 82406, 82407, and 82408 so no previously viewed fresh result is reused.",
+    "Development seeds, generated functions, execution methods, metrics, and decision gates remain unchanged. No hyperparameter or model selection is based on the invalid attempt."
+  ],
+  "amendment_commit": "pending"
+}

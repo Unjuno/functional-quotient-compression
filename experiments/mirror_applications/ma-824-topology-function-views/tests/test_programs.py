@@ -1,5 +1,6 @@
 import sys,unittest
 from pathlib import Path
+import tempfile
 import torch
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'source'))
 from model import FUNCS,TOPOLOGIES,execute,function_bank,make_inputs,payload_for,execute_payload
@@ -20,5 +21,18 @@ class ProgramTests(unittest.TestCase):
         self.assertEqual(len(p['representation']['topology_codes']),2)
         self.assertEqual(len(p['representation']['function_codes']),2)
         self.assertNotIn('program_signatures',p['representation'])
+
+    def test_independent_control_uses_distinct_serialized_storages(self):
+        bank=function_bank(82403)
+        p=payload_for('independent_programs',82403,bank)
+        nodes=p['representation']['independent_programs'][0]['nodes']
+        for key in ('w1','b1','w2','b2'):
+            self.assertNotEqual(nodes[0]['function_weights'][key].untyped_storage().data_ptr(),
+                                nodes[1]['function_weights'][key].untyped_storage().data_ptr())
+        with tempfile.NamedTemporaryFile(suffix='.pt') as f:
+            torch.save(p,f.name);loaded=torch.load(f.name,map_location='cpu',weights_only=False)
+            nodes=loaded['representation']['independent_programs'][0]['nodes']
+            self.assertNotEqual(nodes[0]['function_weights']['w1'].untyped_storage().data_ptr(),
+                                nodes[1]['function_weights']['w1'].untyped_storage().data_ptr())
 
 if __name__=='__main__':unittest.main()
