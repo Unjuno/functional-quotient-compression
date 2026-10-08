@@ -1,0 +1,36 @@
+{
+  "seed": 38502,
+  "condition": "development",
+  "repeats": 100,
+  "runtime": "CPU one torch thread",
+  "rows": [
+    {
+      "method": "dualprompt_explicit",
+      "payload_bytes": 1352,
+      "examples": 409600,
+      "wall_seconds": 0.039117950000218116,
+      "examples_per_second": 10470896.35315031
+    },
+    {
+      "method": "hard_shared",
+      "payload_bytes": 1126,
+      "examples": 409600,
+      "wall_seconds": 0.03952412299986463,
+      "examples_per_second": 10363291.299376912
+    },
+    {
+      "method": "rank2_coeff",
+      "payload_bytes": 1424,
+      "examples": 409600,
+      "wall_seconds": 0.05163664800056722,
+      "examples_per_second": 7932350.68231967
+    },
+    {
+      "method": "mirror_angle",
+      "payload_bytes": 1396,
+      "examples": 409600,
+      "wall_seconds": 0.05219744599889964,
+      "examples_per_second": 7847127.233172188
+    }
+  ]
+}

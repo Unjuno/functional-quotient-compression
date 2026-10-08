@@ -1,19 +1,34 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-385",
+  "evidence_commit": "pending-result-commit",
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "python -m pytest -q experiments/mirror_applications/ma-385-dualprompt-mirror-expert-views/tests",
+    "passed": 3,
+    "failed": 0
   },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "final_inference_payloads": 8,
+    "diagnostic_retention_snapshots": 64,
+    "format": "deterministic ZIP/NPY FP16",
+    "size_and_sha256_checked": true
   },
   "metric_replay": {
-    "checked": false,
-    "max_difference": null
+    "final_and_retention_snapshots_checked": true,
+    "max_difference": 0.0,
+    "method": "source/verify.py"
   },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "runtime": {
+    "benchmarked_from_serialized_payloads": true,
+    "file": "RUNTIME_AUDIT.csv",
+    "repeats_per_method_seed": 100,
+    "runtime": "CPU, one torch thread"
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_opened": false,
+  "notes": [
+    "Both development seeds miss the explicit-quality, 0.65x payload, and 5-point hard-sharing improvement gates; fresh seeds 38511, 38512, 38513 remain sealed.",
+    "Mirror saves only 28 bytes against the direct two-coefficient control while staying about 3.2 percentage points below explicit DualPrompt accuracy.",
+    "The total final inference payload includes general prompt, basis/task codes and router centroids. Intermediate retention snapshots are diagnostic training artifacts and are not added to final inference payload bytes.",
+    "This is an aligned synthetic task screen at fixed updates and does not establish near-converged capacity or natural DualPrompt performance."
+  ]
 }

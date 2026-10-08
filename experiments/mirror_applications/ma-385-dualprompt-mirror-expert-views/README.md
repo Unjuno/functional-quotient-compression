@@ -1,6 +1,6 @@
 # MA-385 — DualPrompt general prompt + Mirror expert views
 
-Status: SCREENING  
+Status: FAIL — development gates missed in both worlds  
 Evidence lane: MECHANISM / STORAGE / RUNTIME / RETENTION  
 Base commit: `0c3580b` (MA-383 result + MA-374 replay audit)  
 Prior art: PA57 (DualPrompt)
@@ -59,3 +59,21 @@ Actual deterministic ZIP/NPY FP16 payload bytes are authoritative. Count the gen
 ## Scope
 
 This is a synthetic continual-task prompt mechanism screen. It does not establish natural image accuracy, class-incremental robustness, or production DualPrompt behavior.
+
+## Report
+
+**H:** A shared rank-two expert basis and one task angle can retain explicit DualPrompt task quality and reduce stored expert prompt bytes around a shared general prompt.
+
+**T:** Two development worlds (38501, 38502), eight sequential tasks per world, 100 optimizer updates per task, 102,400 examples seen per method. Compared explicit general+expert prompts, hard-shared expert, direct rank-two coefficients, and Mirror-angle views. Fresh seeds 38511–38513 were not opened.
+
+**FACT:** Actual serialized bytes were 1,352 B for explicit DualPrompt, 1,126 B for hard sharing, 1,424 B for direct rank-two coefficients, and 1,396 B for Mirror in both worlds. Mirror test accuracy was 0.8425/0.8425 versus 0.8730/0.8721 explicit, 0.8057/0.8015 hard-shared, and 0.8108/0.8074 direct-coefficient. Retrieval was 0.9993/1.0000. Mirror forgetting proxy was 0.093/0.095 versus 0.062/0.056 explicit and 0.113/0.128 hard-shared. The Mirror payload is 3.3% larger than explicit and 28 B smaller than the direct coefficient control. Serialized-state CPU throughput was below explicit in both seeds and close to direct coefficients.
+
+**D: FAIL.** Mirror missed the 0.65x explicit byte gate, the 2-point explicit-quality margin, and the 5-point gain over hard sharing in both development worlds. Fresh remains sealed.
+
+**C:** The shared general prompt and hard sharing already capture much of this aligned family. The rank-two expert view recovers some task accuracy, but the general prompt, router, and archive costs erase storage savings at eight tasks.
+
+**U:** The data are synthetic and deliberately aligned. This screen does not test real images, natural class-incremental forgetting, or larger prompt pools, and fixed updates are not a near-convergence capacity result.
+
+**INTERPRETATION:** This result does not establish useful prompt compression beyond ordinary shared-basis coding. Mirror slightly improves test accuracy over the direct coefficient screen with 28 fewer bytes, but remains below independent quality and exceeds the explicit bank size.
+
+**HYPOTHESIS:** Larger task banks may amortize the basis and router cost; they require another registered test and cannot be inferred from this eight-task result.

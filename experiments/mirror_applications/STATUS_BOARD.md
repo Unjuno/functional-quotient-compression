@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (41 completed; 589 UNTESTED)
+- P0: **630** (42 completed; 588 UNTESTED)
 - P1: **422** (12 completed; 410 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1101 UNTESTED, 31 PROMISING, 23 FAIL**
+- Current MA statuses: **1100 UNTESTED, 31 PROMISING, 24 FAIL**
 - 47 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -23,22 +23,22 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-385 — DualPrompt general prompt + Mirror expert prompt views (P0; PA57)**
+**MA-389 — Hash Embedding Mirror importance codes (P0; PA58)**
 
-MA-374 original replay limitation: A1 found the original twelve payloads absent and 0/12 original hashes reproducible under the current runtime; its new variant replays exactly against its own metrics. MA-383 FAILED its synthetic aligned prompt screen: the Mirror payload was 1,034 B versus 838 B for explicit prompts and lost 8–10 percentage points of task accuracy; fresh remains sealed. MA-381 remains PROMISING only for an aligned synthetic Givens-orbit bank and missed strict byte/quality gates. Continue with the DualPrompt general/expert prompt decomposition and keep the same retrieval protocol across controls. MA-369/371/372 remain UNTESTED and paused pending width/depth output-code family redesign.
+MA-385 FAILED both development gates: the 1,396 B Mirror prompt was larger than the 1,352 B explicit DualPrompt bank, and accuracy was about 3 points lower. Fresh remains sealed. MA-383 also failed its synthetic prompt compression screen. Continue with Hash Embeddings: compare native hash-selected shared components and token importance weights against the exact same bank with a Mirror importance code. MA-374's original replay limitation remains documented: its current-runtime replay variant is exact, but the original twelve payload hashes are unreproducible. MA-369/371/372 remain UNTESTED and paused pending width/depth output-code family redesign.
 
-Required controls: DualPrompt explicit general plus per-task expert prompts, shared expert prompt basis, direct low-rank coefficients, and Mirror views. Measure task accuracy, bytes per task, forgetting, retrieval, generation cost, and compare to the native explicit expert prompt bank.
+Required controls: the native Hash Embedding implementation with its hash-selected component pool and learned per-token importance weights, an identical fixed component pool with direct scalar importance controls, and a Mirror-coded importance view. Use the same token distribution, collisions, and lookup protocol. Measure next-token quality, actual table/code bytes, collision sensitivity, and lookup throughput.
 
-Prior art: PA57 DualPrompt. Mirror must reduce stored expert prompts beyond the native general/expert split while retaining continual-task quality; code count is not task capacity.
+Prior art: PA58 Hash Embeddings. Learned token-specific importance weights are established prior art; Mirror must add a useful or smaller functional coordinate beyond those weights and must pay hash state, indices, and code metadata.
 
 ## Active experiment
 
-MA-385 is next on its dedicated research branch. MA-367/368/374/375/379/381/383 fresh worlds remain unopened under their registered gates.
+MA-389 is next on its dedicated research branch. MA-367/368/374/375/379/381/383/385 fresh worlds remain unopened under their registered gates.
 
 ## Verified status index
 
 - **PROMISING (31):** MA-001, MA-002, MA-003, MA-004, MA-005, MA-006, MA-007, MA-008, MA-012, MA-014, MA-015, MA-041, MA-076, MA-079, MA-111, MA-121, MA-156, MA-160, MA-171, MA-173, MA-181, MA-189, MA-241, MA-244, MA-245, MA-249, MA-250, MA-251, MA-374, MA-381, MA-691.
-- **FAIL (23):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-367, MA-368, MA-375, MA-379, MA-383.
+- **FAIL (24):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-367, MA-368, MA-375, MA-379, MA-383, MA-385.
 
 All per-ID evidence is retained in the local experiment directories and in `CLAIM_LEDGER.csv`. Consult [the evidence integration audit](../../docs/phase2/MIRROR_MA_EVIDENCE_INTEGRATION_2026-10-08.md) for linked reports, verifications, provenance and claim boundaries.
 
