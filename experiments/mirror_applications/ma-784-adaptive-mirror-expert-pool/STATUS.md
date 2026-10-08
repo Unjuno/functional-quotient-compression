@@ -3,11 +3,11 @@
 - Status: FAIL — development gates completed; audit unopened by preregistered rule
 - Branch: `research/ma-784-adaptive-mirror-pool-20261008`
 - Base commit: `c935a903daca5c7d1d48aa50d05b5bd50f239cba`
-- Last verified commit: pending result verification commit
+- Last verified commit: `1ead3f8`
 - Development complete: yes (7 conditions × 2 seeds, 1,200 updates each; plus one logged serialization attempt)
 - Fresh/audit opened: no
-- Results committed: pending
-- Verification committed: pending
+- Results committed: yes
+- Verification committed: yes
 - Registry row updated: pending
 
 ## Next action
