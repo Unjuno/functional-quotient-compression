@@ -1,0 +1,27 @@
+{
+  "experiment_id": "MA-312",
+  "commit": "c487e1c3b519eb43eb30b58ca31d8d7763c7c9fd",
+  "tests": {
+    "command": "pytest -q experiments/mirror_applications/ma-312-shared-intrinsic-mirror-codes/tests",
+    "passed": 4,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "rows": 60,
+    "max_difference": 0.0,
+    "payload_hashes_exact": true
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Development seeds 31201\u201331203 passed every frozen quality/actual-byte gate before fresh seeds 31211\u201331213 were opened.",
+    "All 60 development/fresh rows replayed with exact bytes, metric values and payload hashes; independently rerun during this audit.",
+    "Four tests passed; 0 gradient optimizer updates. Fit uses a fixed 720-point angle search.",
+    "Python 3.12.14, NumPy 2.3.5; CPU throughput is a small batched NumPy calibration.",
+    "PROMISING is limited to the aligned synthetic task-code storage/quality point; no compute, natural-task or capacity improvement is claimed."
+  ]
+}
