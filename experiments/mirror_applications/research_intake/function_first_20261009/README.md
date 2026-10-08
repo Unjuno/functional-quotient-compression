@@ -32,15 +32,19 @@ Accuracies are seed/task means; **two seeds are not a confidence interval**. 003
 
 **Conclusion:** source-supervised basis learning helped relative to unsupervised weight or activation-SVD in this restricted family. Low-description codes have a capacity-storage frontier, and cheap native FiLM/LoRA are strong controls. Ordinary shared U,C,V is already a native tensor factorization (CtS-like) and is **not** a novel Mirror operator. All three strict gates failed; fresh seeds stayed sealed.
 
+### Separately labeled post-hoc function diversity probe (FF-003 only)
+
+Switching four task codes on the **same clean development images** changed predicted classes on average for 12.23% of pairs with shared rank2, 21.01% with rank4, 26.02% with rank6, and 26.97% with rank8. Native LoRA2: 25.51%; four identical frozen functions: 0%. This confirms nontrivial function differences on a common probe, **not independent capacity, accuracy, or Mirror-specific novelty**. This probe was performed after development gates failed and does not change any verdict.
+
 ## Provenance / verification / caveats
 
 - FF-001 seeds 5201–5202; 80 metric rows; 20 inference files; developer-only post-hoc oracle diagnostic is segregated and never trains an inference candidate.
 - FF-002 seeds 5301–5302; 72 metric rows; 18 files. An impossible all-model 10%-saving draft gate was corrected to 2% **before opening either new development seed**; the correction is retained in the local evidence archive.
 - FF-003 seeds 5401–5402; 96 metric rows; 24 files. Rank-specific private correction is paid in storage and compute; unfolded and folded CPU execution are measured separately.
 - Python 3.13.5, PyTorch 2.10.0+cpu, scikit-learn 1.8.0, NumPy 2.3.5, SciPy 1.17, AMD EPYC 9V74, CPU quota 4, 1 Torch intra-op thread, FP32 eager, no GPU.
-- **17/17 local unit tests passed** across the three studies. All 62 NPZ inference files were reread with exact size/hash checks; **248 evaluation rows** were replayed from saved weights (FF-001 and FF-002 exact CE/accuracy, FF-003 max CE difference 1.79e-7, accuracy exact).
+- **19/19 local unit tests passed** across the three studies. All 62 NPZ inference files were reread with exact size/hash checks; **248 evaluation rows** were replayed from saved weights (FF-001 and FF-002 exact CE/accuracy, FF-003 max CE difference 1.79e-7, accuracy exact).
 - No MA status was changed; fresh worlds 5211–5213, 5311–5313, 5411–5413 remained unopened.
-- Complete source, exact full protocols, pretrained inference payloads, CSVs, run logs, and hashes were created in the **2026-10-09 conversation evidence archive**, SHA-256 `ce2e4518adb65056451e469843f7eeb2b530d9efb22fb34828b473f356e81232`. A smaller source/report archive SHA-256 is `cb31d0ac24b6589c7e7100a019a260dbc5440e232d1eb8c35bd60036ae6df01c`. These are conversation artifacts, **not yet GitHub-hosted source archives**; this branch stores the verified summary/provenance, not a complete runnable checkout.
+- Complete source, exact full protocols, pretrained inference payloads, CSVs, run logs, and hashes were created in the **2026-10-09 conversation evidence archive**, SHA-256 `ba69c61e9a08d358240a4f8143ce52e1ab4664e1c8c85fedd7688f0e6e270c7d`. A smaller source/report archive SHA-256 is `4134c196293c75b80dd971ad44899e7d68ba7cd80880639254b9f398d133479b`. These are conversation artifacts, **not yet GitHub-hosted source archives**; this branch stores the verified summary/provenance, not a complete runnable checkout.
 
 ## Next investigation
 
