@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (35 completed; 595 UNTESTED)
+- P0: **630** (36 completed; 594 UNTESTED)
 - P1: **422** (12 completed; 410 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1108 UNTESTED, 29 PROMISING, 18 FAIL**
+- Current MA statuses: **1107 UNTESTED, 29 PROMISING, 19 FAIL**
 - 47 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -90,3 +90,8 @@ KG relation rotations (RotatE, TuckER, QuatE, PairRE), EXIF/device-aware ISPs (P
 - `CLAIM_LEDGER.csv` and each experiment's `VERIFICATION.json` are the evidence index; `STATUS_BOARD.md` is an operational cache.
 - Before allocating an ID or starting work, re-read the live registry and search for experiment branches.
 - Preserve old branches, failed results, exploratory data and locked protocols. No automatic merge to main.
+
+
+## MA-360 — FAIL for Mirror-specific reversible block value
+
+Across two synthetic CPU worlds, custom reversible tied coupling reduced peak live saved activations 41.1% (139,264B to 81,956B) at ~1.8× wall time and matched tied task MSE. Mirror and direct scalar views had identical hashes and outputs. Reversible payload was ~2.4KB versus untied ~19.1KB. Fresh seeds remained sealed. Ten rows replayed exactly; three tests passed. Synthetic CPU only. Dedicated branch: `research/ma-360-reversible-mirror-block-20261008`.
