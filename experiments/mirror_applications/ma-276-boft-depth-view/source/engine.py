@@ -123,6 +123,7 @@ def run_world(seed,condition,rank,split):
   decoded=dict(unpack(payload));prepare_start=time.perf_counter();prepared=prepare_runtime(method,decoded);prepare_s=time.perf_counter()-prepare_start;layer_mse=float(np.mean([np.mean((x@a-x@b)**2) for a,b in zip(teachers,states)]))
   comp_mse=float(np.mean((_composition(teachers,x)-_composition(states,x))**2))
   pathdiff=max(float(np.max(np.abs(apply_runtime(method,x,decoded,l,prepared)-x@states[l]))) for l in range(DEPTH))
+  workspace_bytes=(len(prepared)*D*D*8 if prepared is not None else 0)
   # A compact MAC estimate; butterfly rotation overhead is charged in mirror/BOFT paths.
   ops={'hard_tie':DEPTH*D*D,'mirror_boft':DEPTH*(D*D+24*D),'scalar_gate':DEPTH*D*D,'static_lora_rank2':DEPTH*(D*D+4*D),'generated_basis':DEPTH*(D*D+2*rank*D),'boft_per_depth':DEPTH*(D*D+24*D),'untied_full':DEPTH*D*D}[method]
   it=time.perf_counter()
@@ -130,7 +131,7 @@ def run_world(seed,condition,rank,split):
    y=x
    for l in range(DEPTH):y=apply_runtime(method,y,decoded,l,prepared)
   infer_s=time.perf_counter()-it;ips=100*N*DEPTH/max(infer_s,1e-12)
-  rows.append(dict(split=split,seed=seed,condition=condition,method=method,rank=rank,depth=DEPTH,layer_output_mse=layer_mse,composed_output_mse=comp_mse,serialized_bytes=len(payload),optimizer_updates=0,active_compute_proxy=ops,operator_prepare_s=prepare_s,wall_time_s=elapsed,inference_examples_per_s=ips,payload_sha256=hashlib.sha256(payload).hexdigest(),reconstruction_max_abs_diff=max(float(np.max(np.abs(a-b))) for a,b in zip(teachers,states)),runtime_path_max_abs_diff=pathdiff))
+  rows.append(dict(split=split,seed=seed,condition=condition,method=method,rank=rank,depth=DEPTH,layer_output_mse=layer_mse,composed_output_mse=comp_mse,serialized_bytes=len(payload),optimizer_updates=0,active_compute_proxy=ops,operator_prepare_s=prepare_s,operator_workspace_bytes=workspace_bytes,wall_time_s=elapsed,inference_examples_per_s=ips,payload_sha256=hashlib.sha256(payload).hexdigest(),reconstruction_max_abs_diff=max(float(np.max(np.abs(a-b))) for a,b in zip(teachers,states)),runtime_path_max_abs_diff=pathdiff))
  return rows
 
 def run(seed,split,rank):return run_world(seed,'aligned',rank,split)+run_world(seed,'independent',rank,split)

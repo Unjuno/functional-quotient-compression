@@ -12,6 +12,7 @@ class MA276Tests(unittest.TestCase):
   self.assertLess(a['mirror_boft']['composed_output_mse'],1e-12)
   self.assertTrue(all(r['runtime_path_max_abs_diff']<3e-7 for r in rows))
   self.assertGreater(a['mirror_boft']['inference_examples_per_s'],1e6)
+  self.assertEqual(a['mirror_boft']['operator_workspace_bytes'],4*engine.D*engine.D*8)
  def test_full_upper_control_recovers_independent_layers(self):
   rows=engine.run(27611,'fresh',2);a={r['method']:r for r in rows if r['condition']=='independent'}
   self.assertLess(a['untied_full']['composed_output_mse'],1e-12)

@@ -1,43 +1,55 @@
 # MA-276 — BOFT depth views over a tied block
 
-Status: SCREENING  
-Evidence lane: MECHANISM / DEPTH / STORAGE / RUNTIME  
-Base commit: `19f0b5a`
+Status: **PROMISING, serialized-state compression scope**  
+Branch: `research/ma-276-boft-depth-view-20261008`  
+Evidence lane: MECHANISM / DEPTH / STORAGE / RUNTIME
 
 ## H — hypothesis
 
-One physical nonlinear/linear block plus a single butterfly-angle coordinate per depth step can recover a family of distinct logical depth operators with less state than untied blocks. The view must beat static per-step LoRA and generated shared-basis modulation on a useful quality/byte/compute frontier; unrelated operators should locate the need for private residuals.
+One physical block plus one butterfly coordinate per depth step can recover several logical layer operators with less serialized inference state than untied blocks. The additional Mirror form must compare to BOFT, static per-step LoRA, and generated shared-basis modulation; unrelated operators should require private state.
 
 ## Selection
 
-The eligible pool was `[MA-274, MA-276, MA-278, MA-282, MA-286, MA-296, MA-299]`. `secrets.randbelow(7)` returned index 1, selecting MA-276. Remote branch check found no MA-276 branch.
+The pool was `[MA-274, MA-276, MA-278, MA-282, MA-286, MA-296, MA-299]`. `secrets.randbelow(7)` returned index 1, selecting MA-276. No live remote MA-276 branch was found.
 
-## T — protocol
+## T — execution
 
-The CPU screen uses a tied 8×8 linear block across four depth steps. Each aligned teacher layer is a Givens-butterfly conjugation `B(m_l) W B(m_l)^T`, where a single scalar `m_l` controls all 12 pair rotations in the three butterfly stages. The independent condition uses unrelated layer matrices. We measure each layer output and the composed four-step map on held-out Gaussian inputs.
+The NumPy CPU screen shares one 8×8 linear block over four depth steps. Aligned teachers conjugate it by `B(m_l)`, a three-stage butterfly transform with twelve sparse Givens rotations controlled by one scalar per step. Independent teachers use unrelated layer matrices. Quality measures layer outputs and the full four-step composition on held-out inputs.
 
-Controls: hard tying, scalar per-step gate, static rank-2 per-step LoRA, input-conditioned generated shared residual basis, independent per-depth BOFT factors, and untied full matrices. All physical weights, butterfly addresses, residual bases, depth codes, tensor metadata and headers are included in deterministic serialized inference payloads. The exact serialized-state operators drive quality and runtime.
+Controls are hard tying, scalar gates, static rank-2 LoRA per step, a generated shared residual basis, independent per-depth BOFT factors, and untied full matrices. Development seeds 27601/27602 selected generated-basis rank 4 by mean composed-map MSE (0.014618, versus 0.014648 at rank 2 and 0.014699 at rank 1). Fresh seeds 27611–27613 used that frozen setting. Actual serialized payloads include all state and metadata. The input-side runtime prepares each fixed BOFT operator once per depth, records that preparation time, then applies the transform to query activations.
 
-Development seeds 27601/27602 selected generated residual-basis rank 4 (mean composed MSE 0.014618 vs 0.014648 at rank 2 and 0.014699 at rank 1). Fresh seeds 27611–27613 use the locked rank. Initial timings that regenerated the BOFT matrices per query are retained as invalidated diagnostics; the corrected path prepares each fixed depth operator once, then applies it input-side.
-
-## Gates
-
-PASS for the aligned screen if all fresh worlds have composed-map MSE <=1e-5, Mirror actual payload <=0.5× untied full blocks, and coordinate-path throughput >=0.5× generated shared-residual control. Mirror-specific value additionally requires a better quality/byte/compute frontier than static per-step LoRA and generated modulation. Independent layers locate the private-parameter boundary. This is a fixed linear operator screen, not Transformer language-model or capacity evidence.
+The first development timing regenerated the butterfly matrices inside every query batch. Those values are retained in `DEV_RANK*_UNCACHED_TRANSFORM_INVALIDATED.csv`; they are not used for conclusions. After fresh access, runtime workspace for the prepared operators was added to the report without changing payloads or quality.
 
 ## D — decision
 
-Pending development and fresh results.
+**PROMISING for the aligned serialized-state quality/storage frontier.** Mirror matched the teacher's four logical layers in all fresh worlds at 396 B, 0.332× the untied full-block payload. It also beat rank-2 static LoRA and generated rank-4 residuals on payload size at essentially the same aligned quality. Independent layer maps did not fit the Mirror orbit.
+
+| Method | Aligned composed MSE | Payload | Prepared operator workspace | Inference examples/s |
+|---|---:|---:|---:|---:|
+| Hard tied | 0.00353 | 321 B | 0 B | 164.2M |
+| Mirror butterfly view | 8.21e-16 | 396 B | 2,048 B | 44.8M |
+| Scalar gate | 0.00326 | 388 B | 0 B | 125.5M |
+| Static rank-2 LoRA | 0.00113 | 1,046 B | 0 B | 50.2M |
+| Generated rank-4 residual basis | 8.49e-16 | 1,511 B | 0 B | 16.9M |
+| Independent BOFT per depth | 8.25e-16 | 577 B | 2,048 B | 38.9M |
+| Untied full blocks | 3.16e-16 | 1,193 B | 0 B | 155.4M |
+
+The registered aligned quality/payload/throughput gates passed in 3/3 worlds; Mirror throughput was 2.6× the generated residual control. The independent BOFT control was also exact on aligned teachers at 577 B, so the one-scalar Mirror code saved 181 B across four steps while running at similar throughput. On unrelated layers, Mirror composed MSE rose to 0.0473; generated rank-4 residual and untied full blocks reached near-zero error.
+
+**Runtime-memory boundary:** the current prepared input-side kernel uses four derived 8×8 float64 butterfly matrices (2,048 B workspace). These matrices are reconstructible from the serialized angles and are not included in the authoritative payload bytes, but the working set is larger than the 1,193 B untied payload. Therefore this screen does not establish runtime-RAM compression. A matrix-free butterfly kernel could reduce workspace and must be evaluated separately.
 
 ## Fact / interpretation / hypothesis
 
-**Fact:** pending.  
-**Interpretation:** limited to this butterfly-conjugated linear block family.  
-**Hypothesis:** one scalar phase per depth may span a useful tied-block orbit, while arbitrary layer maps need residual state.
+**Fact.** Fresh Mirror composed MSEs were 7.72e-16, 1.13e-15, and 5.63e-16. Its payload was 396 B in all worlds; the independent full payload was 1,193 B. Mirror runtime matched its query-coordinate reconstruction within 3e-7. The prepared operators occupied 2,048 B and took about 0.22 ms to construct.
+
+**Interpretation.** The shared physical block plus a scalar depth coordinate is a compact representation of this butterfly-aligned family. It does not reduce inference workspace with the current prepared-matrix implementation, and independent functions still need richer or private state.
+
+**Hypothesis.** A matrix-free input-side butterfly implementation may preserve the payload/quality point while reducing workspace, at a possible throughput cost.
 
 ## C — strongest counter-hypothesis
 
-The aligned teacher is constructed directly from the chosen butterfly coordinate; the result may show only that the transform reproduces its own generator. Static or generated low-rank controls may reach the same function with lower runtime.
+The teacher was generated by the exact one-angle-per-depth butterfly family being tested. This is a narrow alignment demonstration. The independent BOFT control remains a simpler structured alternative with only 181 B extra payload, and untied full layers are substantially faster.
 
 ## U — unresolved
 
-No nonlinear block, optimizer training, learned depth controller, natural text, long-sequence memory, or GPU fused butterfly kernel is tested. The prior MA-247 Givens-depth failure remains relevant evidence but does not substitute for this structured BOFT screen.
+No nonlinear Transformer block, optimizer training, learned depth controller, language-model data, long sequence, or GPU kernel was evaluated. Prior MA-247 Givens depth results showed a separate trained student could fail even on an aligned teacher; this screen tests operator representation, not learning efficiency or converged capacity.
