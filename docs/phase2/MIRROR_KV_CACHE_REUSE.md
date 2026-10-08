@@ -292,6 +292,26 @@ Only after the mechanics pass:
 - measure validation NLL;
 - compare native specialist prefill, aLoRA-style compatibility, direct shared-prefix reuse, learned translator, and exact Mirror lazy reuse.
 
+## New 2026 cross-model KV prior art — distinguish exact and approximate lanes
+
+The original MA-691 lazy canonical-cache result is an **exact known-View algebra** on a compatible shared state. It does not imply that KV caches from independently trained models are equivalent or exactly transformable.
+
+New direct controls:
+- PA236: per-head ridge cache transfer between different-size family members, with source-layer selection and position-free RoPE removal;
+- PA237: CacheBridge head-matched attention-sensitive ridge mapping with compact mapper construction;
+- PA238: Mixture-of-Translators with context correction to reduce target trajectory shift;
+- PA239: heterogeneous context reuse across model sizes/families/tokenizer regimes.
+
+The Mirror-specific research question is whether a *family* of source-to-target, layer-to-layer and head-to-head maps can share one physical translator basis addressed by small `m_source, m_target, m_layer, m_head`, instead of keeping an entire map for each ordered model pair. See MA-876..890 and `MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08.md`.
+
+Before screening these candidates classify the proposed transform:
+
+1. **Exact algebraic:** identical/compatible original hidden state, known invertible or appropriately absorbable View operations; certify attention output equality numerically.
+2. **Approximate within-family:** separately trained layers/heads are mapped by calibrated regression; report target NLL, attention sensitivity and failed model pairs.
+3. **Approximate cross-family:** model size, tokenizer and head/layer layout may differ; require explicit token/source-cache provenance and nonlinear/fallback controls.
+
+Charge source prefill, calibration and mapper construction, model/cache bytes, translator execution, metadata/token alignment and target decode. Benchmark end-to-end handoff versus native target re-prefill at multiple lengths/dwell times. Never substitute cache tensor MSE or an algebraic coordinate change for target quality and latency.
+
 ## Adoption condition
 
 The important target is not merely smaller cache.
