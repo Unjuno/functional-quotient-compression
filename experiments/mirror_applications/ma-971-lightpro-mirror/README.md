@@ -1,8 +1,8 @@
 # MA-971 — LightPro physical coupler bank with sparse Mirror task code
 
-Status: **NOT ESTABLISHED — hardware blocker before experiment**  
-Branch: `research/ma-971-lightpro-mirror-20261008`  
-Baseline: `c935a903daca5c7d1d48aa50d05b5bd50f239cba`  
+Status: **NOT ESTABLISHED — hardware blocker before experiment**
+Branch: `research/ma-971-lightpro-mirror-20261008`
+Baseline: `c935a903daca5c7d1d48aa50d05b5bd50f239cba`
 Selection draw: 9; see `source/random_draw.json` and the complete frozen pool `source/selection_pool.csv`.
 
 ## H — falsifiable hypothesis
