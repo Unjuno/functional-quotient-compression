@@ -3,11 +3,11 @@
 - Status: PROMISING only for aligned synthetic candidate banks; registered strict gates missed.
 - Branch: `research/ma-381-lorahub-mirror-basis-20261008`
 - Base commit: `bc86da2`
-- Last verified commit: pending
+- Last verified commit: `1bedcb9`
 - Development complete: yes (seeds 38101, 38102)
 - Fresh/audit opened: no
-- Results committed: pending
-- Verification committed: pending
+- Results committed: yes
+- Verification committed: yes
 - Registry row updated: yes (PROMISING)
 
 ## Next action
