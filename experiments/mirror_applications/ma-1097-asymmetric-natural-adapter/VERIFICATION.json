@@ -1,7 +1,16 @@
 {
-  "status": "pending",
+  "status": "verified_fail_screening",
   "protocol_frozen": true,
   "base_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
-  "checks": [],
-  "notes": ["Results not yet recorded."]
+  "environment": {"device": "CPU", "torch": "2.6.0+cpu", "numpy": "2.3.5", "safetensors": "0.6.2"},
+  "checks": [
+    {"name": "protocol precedes numerical tensor analysis", "result": "pass", "evidence": "protocol freeze commit ad8ac51 precedes result run"},
+    {"name": "pinned adapter payloads", "result": "pass", "evidence": "all three safetensors size and SHA-256 values match source/artifact_manifest.json"},
+    {"name": "unit tests", "result": "pass", "evidence": "4 focused tests pass"},
+    {"name": "gauge invariance", "result": "pass", "evidence": "maximum update/projector drift 4.86e-17"},
+    {"name": "serialized replay", "result": "pass", "evidence": "19 payloads have identical size, keys and tensor values across two runs; safetensors header key order makes whole-file SHA-256 vary"},
+    {"name": "frozen success gate", "result": "fail", "evidence": "B-side heldout error exceeds 0.10 in every fold and is worse than A-side"},
+    {"name": "actual payload accounting", "result": "pass", "evidence": "safetensors on-disk byte length includes all learned tensors and metadata; classifier heads and codes/bases are charged"}
+  ],
+  "notes": ["No downstream task quality, trained-code adaptation, capacity, or accelerator runtime claim.", "The adapter cards do not report their exact training-time base model commit."]
 }

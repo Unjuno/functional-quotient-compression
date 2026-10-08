@@ -37,3 +37,9 @@ Any observed output/input asymmetry is task-bank-specific and is explained by or
 Exact training-time base revision, downstream task scores after decoding, training a new task code from examples, natural task diversity beyond this three-task family, runtime on accelerator hardware, and marginal Mirror value over CtS/EigenLoRAx are not established here.
 
 See `PROTOCOL.json`, `STATUS.md`, `RESULTS_CORE.csv`, and `VERIFICATION.json` for frozen details and measurements.
+
+## Result
+
+**FAIL at the frozen oracle update-reconstruction gate.** B-side k=1 saved 29.9% bytes but had 0.969–0.985 held-out relative error; k=2 saved 14.6% and had 0.962–0.977 error. A-side sharing was better in all three folds (0.898–0.938), contrary to the B-side hypothesis, but still unusable by the ≤0.10 threshold. The two-sided dense-core control compressed further but had 0.991–0.999 error. Independent serialized payload was 482,216 bytes; original adapters plus config files were 489,110 bytes.
+
+This result is an oracle weight-space screen only. Adapter cards provide a common base model name, but not the exact training-time base revision. No task examples, optimization, downstream score or accelerator throughput were measured. Safetensors header metadata key order varies on replay; serialized byte lengths and all 19 payload tensor values/keys replayed exactly, while whole-file SHA-256 did not.
