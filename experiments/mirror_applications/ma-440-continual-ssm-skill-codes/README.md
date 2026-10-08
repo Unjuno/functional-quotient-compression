@@ -27,3 +27,19 @@ Task-specific Mirror coordinates may not protect earlier functions when the shar
 ## U — unresolved
 
 Natural continual LM tasks, sparse subspace discovery, long streams, and accelerator runtime remain untested.
+
+## Results and decision
+
+**D — FAIL.** Final fresh-stage mean NRMSE: Mirror 0.000092 vs independent 0.000058; shared 0.000093; rank-one residual 0.000094. Mean stage forgetting: Mirror 0.256 vs independent 0.052 (shared 0.275). Mirror payload 2,125B vs independent 2,485B (85.5%), failing the <=60% gate. Stability passed (all spectral radii <0.781).
+
+**FACT:** Mirror only slightly improves forgetting over shared-only and is no better in final error; independent transitions have substantially lower forgetting and final error. Mirror uses 14.5% fewer bytes than independent, not the registered 40% reduction.
+
+**INTERPRETATION:** shared transition adaptation interferes with earlier tasks, and per-skill angles do not isolate the old dynamics enough. The small byte saving does not offset the retention deficit.
+
+**H:** tested whether continual per-skill Views can delay private transition allocation while retaining prior dynamics.
+
+**T:** four sequential related 4D stable skills, 250 updates per skill × batch 64, no old-task replay; LR 0.01 Mirror / 0.003 other methods selected on development; fresh worlds 44010/44011/44012, seeds 0/1/2; final per-skill quality, forgetting, actual payload bytes and stability.
+
+**C:** the task family is a synthetic Givens orbit. A mask-based SETA/Piggyback/PackNet control may preserve skills better and must be tested before any continual-learning conclusion.
+
+**U:** sparse subspace discovery/masks, natural task streams, token-selective Mamba and real continual LM retention remain untested.
