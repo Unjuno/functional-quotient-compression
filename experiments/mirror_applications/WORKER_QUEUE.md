@@ -1,6 +1,6 @@
 # Worker queue
 
-**Current operational pointer (2026-10-08): MA-375.** MA-366 is a verified development-only FAIL; MA-367/368 and MA-369/371/372/374 are FAIL. Re-read the live registry and research branches before starting MA-375.
+**Current operational pointer (2026-10-08): MA-379.** MA-369/371/372/374 are consecutive supernet/depth-family FAILs against simpler controls. MA-375 is deferred until family redesign; it remains UNTESTED. Continue with the separate AdapterFusion family, MA-379.
 
 The queue is derived from `IDEA_REGISTRY.csv`. The registry is authoritative.
 
@@ -107,10 +107,12 @@ High-information P0:
 6. MA-371 — MatFormer granularity Mirror views (completed FAIL; 2026-10-08)
 7. MA-372 — Mix'n'Match Views (completed FAIL; 2026-10-08)
 8. MA-374 — ALBERT shared layers + depth Mirror (completed FAIL; 2026-10-08)
-9. MA-375 — one-shot supernet + Mirror correction
+9. MA-375 — one-shot supernet + Mirror correction (deferred UNTESTED; family redesign required)
+10. MA-379 — Mirror-compressed AdapterFusion bank
 7. MA-372 — Mix'n'Match Views (completed FAIL; 2026-10-08)
 8. MA-374 — ALBERT shared layers + depth Mirror (completed FAIL; 2026-10-08)
-9. MA-375 — one-shot supernet + Mirror correction
+9. MA-375 — one-shot supernet + Mirror correction (deferred UNTESTED; family redesign required)
+10. MA-379 — Mirror-compressed AdapterFusion bank
 7. MA-374 — ALBERT shared layers + depth Mirror
 8. MA-375 — one-shot supernet + Mirror correction
 9. MA-379 — Mirror-compressed AdapterFusion bank

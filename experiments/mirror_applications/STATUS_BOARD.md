@@ -23,7 +23,7 @@ Integration branch: `research/mirror-application-current-evidence-20261008`; can
 
 ## Next candidate
 
-**MA-375 — one-shot supernet + Mirror correction (P0; PA62)**
+**MA-379 — Mirror-compressed AdapterFusion bank (P0; PA54)**
 
 MA-366 is reconciled as FAIL: direct pair coefficients match Mirror outputs and bytes, and PA02 factorization is smaller. The runner accidentally generated the registered fresh IDs before the gate; those rows are excluded and fresh integrity is invalid. MA-367 and MA-368 are also recorded FAIL. MA-369 is completed FAIL on its dedicated branch; next executable P0 is MA-371.
 
@@ -34,6 +34,8 @@ MA-369 FAIL: on fresh digits worlds the OFA-style supernet + four-angle View imp
 **MA-371 — MatFormer granularity Mirror views (P0; PA53): FAIL.** Fresh mean accuracy was 95.28% vs 94.85% nested baseline (+0.43pp), below the +1pp gate; 40,063B was 65.4% of the independent bank, above the 50% limit. Equal-byte FiLM was close. The screen is a nested MLP, not a Transformer reproduction. **Next: MA-372**, a separate held-out Mix'n'Match question.
 
 **MA-372 — MatFormer Mix'n'Match factorized Mirror codes (P0; PA53): FAIL.** Across 24 held-out mixed-width configurations and three fresh worlds, factorized Mirror gained 0.16pp over nested sharing, below the 1pp gate; equal-byte FiLM was more accurate and factor codes were 77.5% of direct-bank bytes versus the 60% limit. This is a digits MLP screen. **Next: MA-374.**
+
+**Supernet/depth family ruling:** MA-369/371/372/374 all failed Mirror-specific gates against FiLM/partial sharing or native shared baselines. Per WORKER_QUEUE stop condition, defer MA-375 until the family is redesigned; retain it UNTESTED. Continue with a different family.
 
 **MA-374 — ALBERT shared layers + depth Mirror (P0; PA61): FAIL.** On a digits residual-block proxy, tied+Mirror scored 96.39% vs tied 96.48%, and equal-byte FiLM 96.67%; partial FFN sharing scored 97.50%. Storage reduction vs untied came from shared parameters. Not ALBERT language-model evidence. **Next: MA-375.**
 
