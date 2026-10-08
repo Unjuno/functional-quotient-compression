@@ -64,7 +64,9 @@ Interpretation: period-token parallelism is viable for conditionally determined 
 
 A new explicit exploration lane treats the Mirror/View coordinate as a reusable design freedom rather than one fixed architecture. The question is whether an existing physically repeated object can be replaced by one shared object plus low-description addresses while retaining useful logical multiplicity.
 
-The current registry contains **875 MA-xxx candidates** across MoE experts, LoRA/adapters, attention heads, KV/GQA, depth tying, FFNs, embeddings/position, packet decoding, memory/retrieval, quantization, holographic binding, continual learning/optimization, ensembles/distillation, SSM/runtime mechanisms, structured transforms, model merging, neural operators, relational graph models, diffusion control, neural cellular automata, invertible activation/flow views, global/reused expert pools, compositional latent dynamics, robot/action policies, matrix memories, programmable neural graphs, KAN edge functions, tangent/information geometry, causal engram memory, plastic/fast state, learned model manifolds, and collective inference protocols.
+The current registry contains **935 MA-xxx candidates** across MoE experts, LoRA/adapters, attention heads, KV/GQA, depth tying, FFNs, embeddings/position, packet decoding, memory/retrieval, quantization, holographic binding, continual learning/optimization, ensembles/distillation, SSM/runtime mechanisms, structured transforms, model merging, neural operators, relational graph models, diffusion control, neural cellular automata, invertible activation/flow views, global/reused expert pools, compositional latent dynamics, robot/action policies, matrix memories, programmable neural graphs, KAN edge functions, tangent/information geometry, causal engram memory, plastic/fast state, learned model manifolds, collective inference protocols, cross-model KV cache translators, multi-scene neural fields/4D Gaussian assets, speaker-adaptive TTS and audio codecs, generative flow maps/solvers, and model stitching.
+
+The eleventh 2026-10-08 literature sweep added MA-876..935 and PA236..265; all 60 new hypotheses are UNTESTED. Previously consolidated 47 MA evidence items remain 29 PROMISING and 18 FAIL. The next planned worker is still MA-255.
 
 This registry is a hypothesis backlog, not evidence. Each candidate must use actual serialized bytes and the relevant simple control. Mirror-specific value requires beating a simpler non-Mirror shared/low-rank alternative.
 
@@ -101,7 +103,8 @@ Primary scientific adoption gate: **FAIL**. Pruning hardware/byte mechanics: ver
 - [Mirror application design space](MIRROR_APPLICATION_DESIGN_SPACE.md)
 - [Mirror application prior-art map](MIRROR_APPLICATION_PRIOR_ART.md)
 - [Mirror KV cache reuse design](MIRROR_KV_CACHE_REUSE.md)
-- [Mirror application research notes](MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-07.md)
+- [Mirror application research notes through 2026-10-07](MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-07.md)
+- [Research notes 2026-10-08: cross-model cache, dynamic scenes, speech, generators, stitching](MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08.md)
 - [Autonomous worker goal](../../GOAL.md)
 - [Mirror application roadmap](../../roadmap/MIRROR_APPLICATION_ROADMAP.md)
 - [TM001 report](TM001_PARALLEL_PERIOD_TOKEN_MIXING.md)
