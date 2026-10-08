@@ -36,12 +36,12 @@ def train_rank1(seed):
     for _ in range(META_UPDATES):
         task=int(rng.integers(4));idx=rng.integers(SUPPORT,size=BATCH);x,y=task_data(seed,task,'support');xb=x[idx];yb=y[idx]
         pred=code_output(xb,params[0],params[1],params[2],params[3][task]);loss=((pred-yb)**2).mean();opt.zero_grad();loss.backward();opt.step()
-    updates=META_UPDATES;seen=META_UPDATES*BATCH
+    updates=META_UPDATES;seen=META_UPDATES*BATCH;accepted={}
     # The first four tasks are accepted together at the end of the frozen meta stage.
     for task in range(4):
         xq,yq=task_data(seed,task,'query');accepted[task]=float(torch.sqrt(((code_output(xq,params[0].detach(),params[1].detach(),params[2].detach(),params[3][task].detach())-yq)**2).mean()))
     # Sequential task arrival: preserve meta-task codes, fit each new scalar from support.
-    learned={i:float(params[3][i].detach()) for i in range(4)}; births={}; accepted={};per_task=[]
+    learned={i:float(params[3][i].detach()) for i in range(4)};births={};per_task=[]
     for task in range(4,NTASK):
         x,y=task_data(seed,task,'support');c=torch.nn.Parameter(torch.zeros(()));o=torch.optim.Adam([c],lr=.02)
         for _ in range(CODE_UPDATES):
