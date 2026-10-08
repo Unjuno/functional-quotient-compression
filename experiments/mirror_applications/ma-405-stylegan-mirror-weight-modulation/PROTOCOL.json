@@ -1,0 +1,32 @@
+{
+  "experiment_id": "MA-405",
+  "title": "StyleGAN-style FFN weight modulation versus Mirror and simple controls",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM",
+  "base_commit": "58019ec2f08513a7f7cfe6aa24ade3f7394c65cf",
+  "hypothesis": "On context-conditioned feature-permutation classification, a 4-angle Givens transform of shared FFN weights recovers context-specific teacher behavior with >=1.0 percentage point over native StyleGAN-style input modulation/demodulation at no more than 1.1x its actual payload bytes, and remains competitive with equal-byte FiLM and rank-one residual controls.",
+  "physical_object": "one shared two-layer ReLU classifier",
+  "mirror_coordinate": "four context-specific Givens angles applied as an orthogonal effective-weight view",
+  "logical_multiplicity": "four context-specific functions from one shared FFN",
+  "prior_art_refs": ["PA65"],
+  "controls": ["shared unconditioned MLP", "native per-context input-channel weight modulation plus output-channel demodulation", "FiLM conditioning", "rank-one context-specific weight residual", "independent per-context MLP upper control"],
+  "task": {
+    "type": "synthetic context-conditioned classification",
+    "contexts": 4,
+    "input_dim": 32,
+    "hidden_dim": 48,
+    "classes": 10,
+    "teacher": "fixed random two-layer ReLU MLP with context-specific seeded feature permutations",
+    "examples_per_world": 4096,
+    "train_examples": 3072,
+    "evaluation_examples": 1024
+  },
+  "development": {"worlds_or_seeds": [40500, 40501], "learning_rates": [0.003, 0.01], "selection_metric": "mean validation accuracy; ties resolved by lower validation cross entropy"},
+  "fresh": {"worlds_or_seeds": [40510, 40511, 40512], "locked_before_access": true},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["all learned weights", "context modulation codes or generators", "Mirror angles", "FiLM parameters", "rank-one factors", "independent context weights", "metadata"]},
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true, "report_effective_weight_pairwise_distance": true},
+  "training": {"updates": 200, "batch_size": 128, "optimizer": "AdamW", "seeds": [0, 1, 2]},
+  "success_gate": "On all three fresh worlds, Mirror accuracy exceeds native modulation by >=1.0pp and Mirror bytes <=1.1x native modulation bytes, while Mirror is not dominated by FiLM or rank-one residual at comparable bytes.",
+  "failure_gate": "Mirror misses the quality/byte gate or a simpler control weakly dominates it on fresh mean accuracy and payload bytes.",
+  "boundaries": ["Synthetic mechanism screen only; not a Transformer/LM result.", "Fixed-update results are learning-efficiency evidence, not capacity claims.", "Effective weight diversity is descriptive and does not itself establish useful logical capacity."]
+}
