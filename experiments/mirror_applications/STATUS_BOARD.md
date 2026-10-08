@@ -3,14 +3,15 @@
 Updated: 2026-10-08 JST
 Canonical branch: `research/mirror-application-worker-ready-20261007`
 
-## Program totals (reconciled from authoritative 875-row registry)
+## Program totals (reconciled from authoritative 935-row registry)
 
-- Registered candidates: **875**
-- P0: **408** (35 completed; 373 UNTESTED)
-- P1: **364** (12 completed; 352 UNTESTED)
+- Registered candidates: **935**
+- P0: **454** (35 completed; 419 UNTESTED)
+- P1: **378** (12 completed; 366 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **828 UNTESTED, 29 PROMISING, 18 FAIL**
+- Current MA statuses: **888 UNTESTED, 29 PROMISING, 18 FAIL**
 - 47 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
+- New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - PROMISING is **not** ADOPTED. Treat reports with strict-gate misses or exploratory protocol deviations at their documented scope.
 - SRM/TM and prior Phase I results are not MA statuses.
 
@@ -38,6 +39,10 @@ No active experiment was declared on either inspected baseline/status chain at r
 - **FAIL (18):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253.
 
 All per-ID evidence is retained in the local experiment directories and in `CLAIM_LEDGER.csv`. Consult [the evidence integration audit](../../docs/phase2/MIRROR_MA_EVIDENCE_INTEGRATION_2026-10-08.md) for linked reports, verifications, provenance and claim boundaries.
+
+## 2026-10-08 research sweep
+
+New directions are cross-model cache translators, neural graphics and 4D Gaussian fields, speaker-adaptive synthesis, generative flow/solver coordinates, and cross-model stitching. They are **UNTESTED**. See [current research notes](../../docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08.md). The new cross-model cache lane distinguishes exact MA-691 algebra from approximate learned transfer.
 
 ## Main scientific findings
 
