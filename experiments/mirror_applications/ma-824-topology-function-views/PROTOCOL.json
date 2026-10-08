@@ -1,0 +1,39 @@
+{
+  "experiment_id": "MA-824",
+  "title": "factorized topology x node-function Mirror code",
+  "status": "FROZEN_PRE_DATA",
+  "base_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
+  "selection_draw": 22,
+  "prior_art_refs": ["PA220", "PA128"],
+  "hypothesis": "A shared small node-function bank plus independent topology and node-function Mirror factors will exactly execute four topology/function combinations, including held-out combinations, at lower serialized bytes than duplicating each program; a native Neural Interpreter-style signature is the strongest control and determines whether this is Mirror-specific.",
+  "mirror_insertion": {
+    "physical_object": "one shared two-function MLP basis and a two-node graph substrate",
+    "coordinate": "factorized topology ID and node-function ID select graph wiring and the shared node operator",
+    "logical_functions": "four compositions from two topologies crossed with two node-function types",
+    "controls": ["independent full program nodes", "native explicit graph plus Neural Interpreter signatures", "shared node bank with hard topology/function indices"]
+  },
+  "task": {
+    "type": "synthetic compositional program execution",
+    "input": "two-dimensional real-valued examples",
+    "node_functions": "two deterministic one-hidden-layer 1-to-4-to-1 tanh MLPs with frozen generated weights",
+    "topologies": {"chain": "f(f(x0))", "parallel": "f(x0)+f(x1)"},
+    "programs": "Cartesian product of two topologies and two node-function IDs; one pair is held out from the training/signature manifest and evaluated compositionally",
+    "dev_seeds": [82401, 82402],
+    "fresh_seeds": [82403, 82404, 82405],
+    "examples_per_split_seed_program": 8192,
+    "learning": "no parameter learning; exact execution and serialization screen isolates code-factorization cost"
+  },
+  "metrics": ["per-program fresh output MSE versus generated node graph", "held-out topology/function composition MSE", "actual complete torch.save payload bytes for every object", "active affine/nonlinearity operation proxy", "wall-clock program execution and throughput"],
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": ["all shared or duplicated node weights", "topology graph code", "node-function codes", "program signatures", "configuration and metadata"]
+  },
+  "gates": {
+    "compositional_quality": "All four programs, including the held-out factor pair, must have fresh-seed MSE <=1e-10 for Mirror and each control.",
+    "compression": "Mirror complete payload <=0.80x independent duplicated-program payload in all three fresh worlds.",
+    "mirror_specific": "Mirror must use <=0.90x the native interpreter signature payload with equal quality; an equal native factorization makes any compression non-Mirror-specific.",
+    "failure": "Any quality failure or compression/Mirror-specific byte gate miss in at least two fresh seeds.",
+    "audit": "No separate audit span is opened; fresh program inputs are the locked holdout."
+  },
+  "boundaries": ["four exact synthetic programs only", "function nodes are fixed and deliberately shared", "no learned node-library claim", "four logical combinations are counted only as tested outputs, not capacity", "runtime reflects eager CPU execution"]
+}

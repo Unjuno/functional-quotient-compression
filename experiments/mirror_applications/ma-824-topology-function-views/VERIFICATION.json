@@ -1,0 +1,31 @@
+{
+  "experiment_id": "MA-824",
+  "commit": "pending",
+  "selection_draw": {
+    "draw": 22,
+    "pool_size": 536,
+    "uniform_index": 289,
+    "selected_id": "MA-824",
+    "pool_sha256": "aa932d86d8cb138c46365c243238888671a5d56d18c2fca206f3034822d9dab3",
+    "baseline_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
+    "replay_checked": true
+  },
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-824-topology-function-views/tests -v",
+    "passed": 2,
+    "failed": 0
+  },
+  "serialization": {
+    "actual_payloads_measured": false
+  },
+  "metric_replay": {
+    "checked": false,
+    "max_difference": null
+  },
+  "audit_opened": false,
+  "notes": [
+    "Draw22 pool/index replay passed.",
+    "Pre-data tests show exact output equality for all four topology/function compositions across all methods; native interpreter manifest omits held-out pair.",
+    "No optimizer training or dev/fresh evaluation has run."
+  ]
+}
