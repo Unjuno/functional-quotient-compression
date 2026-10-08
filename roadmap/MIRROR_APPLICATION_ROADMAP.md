@@ -5,7 +5,7 @@ Status: active backlog roadmap
 
 ## Goal
 
-Systematically test whether the extra low-description Mirror parameter m can replace duplicated physical state or improve logical functional freedom in strong existing methods. The registry now has **1115** candidate experiments; MA-876..935 were added as UNTESTED research targets on 2026-10-08.
+Systematically test whether the extra low-description Mirror parameter m can replace duplicated physical state or improve logical functional freedom in strong existing methods. The registry now has **1155** candidate experiments; MA-876..935 were added as UNTESTED research targets on 2026-10-08.
 
 The unit of work is an MA-xxx entry from:
 `experiments/mirror_applications/IDEA_REGISTRY.csv`.
@@ -331,6 +331,22 @@ MA1096/1099/1102/1105/1114/1115 should now read `docs/phase2/MIRROR_FUNCTION_SPA
 A two-seed real-digit image-shift exploratory pilot was performed with a precommitted protocol; 8-value structured Mirror codes outperformed 6-value diagonal BOLT-like codes in mean CE but failed the stricter accuracy, dense-core and CPU runtime Pareto gates. Results are in `experiments/mirror_applications/research_intake/natural_digit_function_20261008/` and do **not** change MA statuses.
 
 Next preregister new natural task families and compare (a) weight-SVD basis, (b) BOLT task-spectral basis, (c) CG-LoRA/Fora-inspired activation/curvature-aware basis, (d) a simple FiLM/rank-one code, (e) dense shared task core, (f) structured Mirror m and optional sparse CUR private residual, and (g) independent LoRA. Freeze tasks/seeds before opening held-out task scores; count all source-adapter training, basis construction, serialized bytes and measured inference. Distinguish exact rank/representation capacity from fixed-update optimization and protect previously learned functions.
+
+### AU. KG relation operators, beyond existing relational phases
+
+MA1116..1125 compare native RotatE complex rotations, QuatE noncommutative multiplication, PairRE paired vectors, TuckER tensor shared core, ComplEx, TNTComplEx temporal factors, CompGCN and KrausKGE with an *additional* compact Mirror relation×domain/time `m`. A rotation per relation is established, not new. Highest-value MA1123 tests independently learned relation-space natural/private frontier. Count full KG entity/relation/core state, report filtered MRR/Hits and gauge invariance. PA382..390.
+
+### AV. Camera ISP controls and optical point spread functions
+
+MA1126..1135 target existing ParamISP EXIF camera controller, Uni-ISP joint multi-device pipeline, MetaISP target appearance, PQDynamicISP local control, Modular ISP and lens PSF learned latent. A Mirror device×ISO×exposure/stage `m` must beat native conditions on unseen cameras with real RAW/sRGB, DeltaE/PSNR and FPS. Exact inverse after clipping is information-theoretically impossible. MA1127 and MA1131 first. PA391..399.
+
+### AW. Deployable robot morphology and friction conditioning
+
+MA1136..1145 compare UP-OSI/RMA/CoRMA, A-NC and morphology world-model priors. One shared policy + estimated extrinsics is existing prior art; Mirror `m` adds value only if it improves OOD rollouts or adaptation per paid byte/latency **without test-time privileged mass/friction**. Use held-out body/terrain/contact combinations and count online writes; MA1136 is first. PA400..406.
+
+### AX. Acoustic room-transfer function banks
+
+MA1146..1155 compare NAF, retrieval-pretrained NAF, topology-aware TA-RIR, NAMS, direction-aware Ambisonic NAF and few-shot acoustic flow. Test whether a shared physical sound-field plus room/source/receiver `m` saves useful per-room adaptation state on real recorded RIRs, while preserving waveform/phase, RT60/DRR and renderer latency. MA1147 and MA1150 first. PA407..413.
 
 ## KV-cache transformation lane
 
