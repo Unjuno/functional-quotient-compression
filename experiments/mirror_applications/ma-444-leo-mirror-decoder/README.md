@@ -27,3 +27,19 @@ The Givens map may be too restrictive even for the aligned task, while a generic
 ## U — unresolved
 
 Natural tasks, nonlinear network backbones, and support distribution shift remain untested.
+
+## Results and decision
+
+**D — FAIL.** At five refinement steps, fresh means: structured Mirror NRMSE 0.5805 at 2,181B/task; generic LEO NRMSE 0.2037 at 2,157B/task plus a 1,892B decoder checkpoint, or 2,251B amortized at N=20; full-vector update NRMSE 0.4061 at 2,165B/task. Mirror's N=20 payload was slightly smaller than LEO, but its query error was about 2.85x higher. Measured adaptation/query wall was 0.001276s for Mirror vs 0.000467s LEO (about 2.7x). The shared no-adaptation baseline was NRMSE 0.5734.
+
+**FACT:** matched 2D latent size does not make the structured decoder sufficiently expressive in this task, even though its storage is a little lower. LEO and full-vector adaptation both improved as refinement steps increased; Mirror drifted slightly worse.
+
+**INTERPRETATION:** the generic latent decoder's modest basis cost buys a large quality improvement. The Mirror map does not meet the registered quality/byte frontier.
+
+**H:** tested whether the structured map could replace LEO's generic decoder at equal code dimension.
+
+**T:** disjoint task IDs (meta-train 1000–1127, dev 0–11, fresh 2000–2019); 3 fresh worlds × 3 seeds × 20 tasks; 2D latent; 0/1/3/5 updates; development chose outer LR 0.03 for Mirror/LEO/full and 0.01 shared; actual task and decoder bytes charged.
+
+**C:** the 8D linear Givens task may not capture LEO's intended nonlinear embedding-space regime; this is a narrow decoder screen.
+
+**U:** nonlinear backbones, natural tasks, encoder-initialized latents, and deployed decoder kernels remain untested.
