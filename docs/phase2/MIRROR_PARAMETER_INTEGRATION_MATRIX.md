@@ -68,6 +68,12 @@ The table below tells workers where to try the same extra low-description functi
 | Video object segmentation | SAM2 temporal memory and mask decoder with per-object states | object×time×memory-path m | more tracked objects per physical memory with stable masks? | SAM2, SAM2Long, MoPEFT |
 | ANN retrieval index | shared codebooks, late-interaction centroids, disk graph index | task×query×shard×budget m | useful ranking change without rebuilding index? | RaBitQ, ScaNN, ColBERTv2, PLAID, QINCo, DiskANN |
 
+| Universal time-series forecasting | shared Chronos/TimesFM/Moirai/PatchTST backbone | frequency×variate×horizon×regime `m` | meaningful calibrated forecasts without private heads? | native foundation/TRACE, PatchTST, DLinear, seasonal-naive |
+| Categorical recommendation embeddings | DLRM table, DHE generator or TT-Rec tensor cores | field×domain×rare-ID `m` | quality per bit beyond table-free/TT embeddings? | DHE, QR, TT-Rec, VQ-Rec and dense table |
+| Multi-objective recommendation | MMoE/HSTU shared expert and history model | task×region×session `m` | new logical objective functions beyond native task gates? | MMoE, HSTU, rank-1 gates |
+| Multispectral Earth observation | shared DOFA wavelength hypernet / AnySat encoder | sensor×wavelength×resolution×time `m` | physical multisensor transfer at lower incremental state? | DOFA, AnySat, SatMAE, CROMA, Prithvi |
+| Multimodal EO translation | TerraMind multimodal tokenizer/decoder and CROMA fusion | source modality×target modality `m` | cheaper verified cross-sensor functions than native any-to-any? | TerraMind, CROMA, missing-modality controls |
+
 ## Required variants after a direct screen
 
 A family that passes a first mechanism screen should usually be expanded in this order:
