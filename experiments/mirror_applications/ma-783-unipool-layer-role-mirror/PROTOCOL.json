@@ -1,0 +1,99 @@
+{
+  "experiment_id": "MA-783",
+  "title": "UniPool global expert pool + Mirror layer role",
+  "status": "FROZEN_PRE_DATA",
+  "base_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
+  "branch": "research/ma-783-unipool-layer-role-mirror-20261008",
+  "selection_draw": 13,
+  "prior_art_refs": [
+    "PA205",
+    "PA204"
+  ],
+  "hypothesis": "On held-out character-language sequences, a shared global MoE expert pool with compact layer-specific orthogonal Mirror input views can recover useful layer specialization with near-Untied NLL while using fewer actual serialized inference bytes than layer-owned experts, and outperform byte-near simple input gates or native depth-conditioning controls.",
+  "mirror_insertion": {
+    "physical_object": "four global FFN experts shared across all four Transformer layers",
+    "coordinate": "eight fixed-pair Givens rotation angles per layer applied to the expert input",
+    "logical_function": "layer-specific realization of the same physical expert bank",
+    "coordinates_per_layer": 8
+  },
+  "dataset": {
+    "name": "Tiny Shakespeare character corpus",
+    "source": "Karpathy char-rnn public-domain Shakespeare input.txt (raw URL recorded in data acquisition script)",
+    "split": "After download, SHA-256 and character count are logged. For N characters: train [0,floor(.8N)), development [floor(.8N),floor(.9N)), audit [floor(.9N),N). Windows never cross a split boundary. Vocabulary is derived from training characters only; unseen development/audit characters map to one fixed UNK symbol.",
+    "audit_access": "only after both development gates pass; audit span indices sealed in pre-run manifest",
+    "source_url": "https://raw.githubusercontent.com/karpathy/char-rnn/master/data/tinyshakespeare/input.txt"
+  },
+  "model": {
+    "type": "small causal character Transformer",
+    "layers": 4,
+    "width": 64,
+    "attention_heads": 4,
+    "experts_per_layer": 4,
+    "expert_hidden_width": 128,
+    "routing": "per-layer top-1 softmax routing with global pool load-balancing auxiliary loss",
+    "sequence_length": 128
+  },
+  "conditions": [
+    "dense one-FFN-per-layer GPT control",
+    "untied 4-expert-per-layer top-1 MoE upper control",
+    "UniPool: one global 4-expert pool with independent layer routers",
+    "UniPool + 8-angle/layer Givens Mirror view",
+    "UniPool + byte-matched 8-group/layer FiLM scale gate",
+    "UniPool + 8D/layer depth embedding through a shared projection (MoRE-style control)"
+  ],
+  "training": {
+    "development_seeds": [
+      78301,
+      78302
+    ],
+    "updates_per_condition_per_seed": 1200,
+    "batch_size": 16,
+    "tokens_per_update": 2048,
+    "optimizer": "AdamW",
+    "learning_rate": 0.0006,
+    "weight_decay": 0.1,
+    "checkpoint_rule": "best development NLL among fixed checkpoints every 100 updates",
+    "hyperparameter_tuning": "none after protocol freeze; the fixed schedule is a mechanism screen, not a capacity claim"
+  },
+  "gates": {
+    "quality_storage": "Across both development seeds, Mirror validation NLL must be <= untied MoE +0.10 nats and complete serialized inference payload <=0.70x untied MoE.",
+    "mirror_specific": "At matched payload within +/-5%, Mirror must improve validation NLL by >=0.02 nats over both UniPool+FiLM and UniPool+depth-embedding; otherwise no Mirror-specific benefit is established.",
+    "audit": "Only if both gates pass in both development seeds; no audit tuning."
+  },
+  "metrics": [
+    "development and audit next-character NLL and bits/character",
+    "actual serialized inference payload bytes including token vocabulary/config/view codes",
+    "training tokens, updates, wall time, active expert MAC proxy",
+    "router load balance and entropy",
+    "pairwise layer-role expert-output distance on a shared held-out activation batch"
+  ],
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "all model tensors",
+      "router state",
+      "Givens or FiLM/depth code state",
+      "depth embedding projection for its control",
+      "configuration and character vocabulary",
+      "serialization metadata"
+    ]
+  },
+  "compute": {
+    "measure": "single-thread CPU wall time per update and inference pass; analytic active-MAC proxy",
+    "caveat": "short CPU mechanism screen only, no optimized serving claim"
+  },
+  "fresh": {
+    "audit_seeds": [
+      78303,
+      78304
+    ],
+    "meaning": "Fixed RNG seeds to sample evaluation windows from the locked audit span; trained weights remain unchanged.",
+    "locked_before_access": true
+  },
+  "boundaries": [
+    "small character language model only; no general Transformer or large-language-model claim",
+    "fixed 1200-update schedule cannot establish asymptotic capacity",
+    "expert combination counts are not independent capacity",
+    "softmax/top-1 implementation and CPU runtime must be reported exactly"
+  ]
+}
