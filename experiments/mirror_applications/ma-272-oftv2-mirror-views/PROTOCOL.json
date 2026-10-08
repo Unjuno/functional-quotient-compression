@@ -1,0 +1,86 @@
+{
+  "experiment_id": "MA-272",
+  "title": "OFTv2 input-side Mirror transform",
+  "status": "FAIL",
+  "evidence_lane": "MECHANISM/STORAGE/RUNTIME",
+  "base_commit": "f7f76de193063950d28b7834f337840b1e86f0ce",
+  "hypothesis": "A shared skew generator plus task addresses can compress multiple exact input-side orthogonal Views; finite Cayley-Neumann truncations trade transform compute for bounded error.",
+  "physical_object": "One shared 16x16 linear block and skew generator",
+  "mirror_coordinate": "Six scalar task addresses applied to one shared skew-symmetric S",
+  "logical_multiplicity": "Six orthogonal input-side task transforms",
+  "prior_art_refs": [
+    "PA22"
+  ],
+  "controls": [
+    "independent OFTv2 skew matrices",
+    "ordinary scalar-times-shared-skew generation",
+    "materialized QW",
+    "exact input-side Cayley",
+    "Neumann orders 2/4/8"
+  ],
+  "task": {
+    "dimension": 16,
+    "tasks": 6,
+    "train_examples_per_task": 512,
+    "test_examples_per_task": 2048,
+    "conditions": [
+      "shared_generator_orbit",
+      "independent_skew_stress"
+    ],
+    "spectral_norm_cap": 0.2
+  },
+  "development": {
+    "worlds_or_seeds": [
+      33,
+      47
+    ],
+    "selection_metric": "relative output error, actual bytes, transform latency"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      157,
+      263,
+      359,
+      461
+    ],
+    "locked_before_access": true
+  },
+  "optimization": {
+    "method": "post-fit least-squares map recovery; no optimizer updates",
+    "neumann_orders": [
+      2,
+      4,
+      8
+    ]
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "serializer": "uncompressed NumPy NPZ; skew-symmetric matrices stored only as independent lower-triangle values, reconstructed deterministically before fresh access",
+    "paid_objects": [
+      "W",
+      "independent skew matrices or shared S",
+      "task addresses",
+      "metadata"
+    ]
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_time": true,
+    "active_compute_proxy": "Q application plus W multiplication; dense materialized baseline separately counted"
+  },
+  "success_gate": "At least 3/4 fresh: shared View relative MSE <=1e-5, <=80% bytes and >=10% lower transform latency than materialized weights.",
+  "failure_gate": "No byte/runtime Pareto gain over simple scalar-shared-skew control, or K=8 truncation relative error >1e-3.",
+  "boundaries": [
+    "synthetic small-matrix screen",
+    "CPU microbenchmark, no production claim",
+    "post-fit, no capacity evidence"
+  ],
+  "development_amendment": "Development audit found redundant upper-triangle skew storage in native OFTv2 control. All methods now serialize only independent skew coordinates; exact reconstruction is tested. This is a storage implementation correction made before fresh access.",
+  "accounting_amendment": "After initial fresh metrics were viewed, audit found materialized control was evaluated input-side and Neumann iterations were precomputed outside timing. Preserve v1 as invalid; corrected runtime code evaluates x@(QW) for materialized, executes Neumann recurrence per input, and uses new seeds 149/251/353/457 for corrected audit.",
+  "accounting_amendment_2": "A second audit found native independent OFTv2 stored repeated S plus amplitudes instead of independent task skew A_t. Preserve v2 metrics, store each task A_t lower-triangle directly, and use new corrected audit seeds 157/263/359/461.",
+  "result_source_branch": "research/ma-272-oftv2-mirror-views-20261008",
+  "result_source_commit": "1e949b6b0981900c4e41d3b36efbebd06998e1ff",
+  "protocol_variant_note": "A separate trained dense-OFTv2 input-side cross-over is retained under protocol_variants/trained_input_crossover and is not pooled with this corrected post-fit audit."
+}

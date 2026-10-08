@@ -21,7 +21,9 @@ MA-268 is **PROMISING only for its trained nonlinear aligned task screen**: it p
 
 MA-271 is **FAIL for Mirror-specific value**. A trained aligned cross-over reported 3,309B vs 7,253B dense OFT on 3/3 fresh worlds, but it omitted the exact simple control. A second four-seed screen found that ordinary rank-one task-code × shared-angle factorization matches the Mirror's functions and 1,086B payload exactly. See `experiments/mirror_applications/ma-271-oft-mirror-views/RECONCILIATION.md`.
 
-**The next candidate is MA-272.** MA-876..1115 remain appended research-intake hypotheses and must not preempt the registered P0 crossovers. Natural variation and benchmark-level runtime remain unproven; aligned synthetic PROMISING must not be described as real-world Mirror adoption.
+MA-272 is **FAIL for Mirror-specific/runtime Pareto value**. The corrected post-fit audit found that scalar-times-shared-skew exactly matches the Mirror function and 3,786B payload; exact input-side execution averaged 0.335ms vs 0.138ms materialized. A separate trained screen improved bytes/quality against dense OFTv2 but had slower CPU throughput. See `experiments/mirror_applications/ma-272-oftv2-mirror-views/RECONCILIATION.md`.
+
+**The next candidate is MA-273.** MA-876..1115 remain appended research-intake hypotheses and must not preempt the registered P0 crossovers. Natural variation and benchmark-level runtime remain unproven; aligned synthetic PROMISING must not be described as real-world Mirror adoption.
 
 ## MA-241 — layer-specific Mirror views over tied experts
 
