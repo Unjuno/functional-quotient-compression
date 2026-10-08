@@ -1,0 +1,97 @@
+{
+  "experiment_id": "MA-784",
+  "title": "Adaptive global expert pool with logical Mirror views",
+  "status": "FROZEN_PRE_DATA",
+  "base_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
+  "branch": "research/ma-784-adaptive-mirror-pool-20261008",
+  "selection_draw": 18,
+  "prior_art_refs": ["PA205"],
+  "hypothesis": "A two-physical-expert global pool with layer/logical-route Givens views can represent four logical top-1 routes at lower actual bytes and lower NLL than native four-expert UniPool, hard aliases, and byte-matched FiLM.",
+  "mirror_insertion": {
+    "physical_object": "global expert FFN weights shared across four Transformer layers",
+    "coordinate": "eight Givens angles for each of four layers and four logical routes",
+    "logical_function": "four route-specific functions over two physical experts",
+    "routing": "per-layer NormRouter selects one of four logical routes; logical route maps to physical expert route_id mod 2; Givens acts only on selected expert input after routing; router sees unmodified hidden state",
+    "route_parameterization": "view codes are learned per layer and logical route; no per-layer private expert weights"
+  },
+  "data": {
+    "name": "Tiny Shakespeare character corpus",
+    "source": "https://raw.githubusercontent.com/karpathy/char-rnn/master/data/tinyshakespeare/input.txt",
+    "acquisition": "download only after preregistration; save SHA-256 and corpus length",
+    "split": "raw bytes/chars [0,80%) train; [80%,90%) development; [90%,100%) audit; train/dev token windows cannot cross boundaries; vocabulary derived only from training characters, unseen characters map to one fixed UNK",
+    "audit_access": "do not decode/tokenize/open audit span unless all development gates pass for both seeds"
+  },
+  "model": {
+    "layers": 4,
+    "width": 64,
+    "attention_heads": 4,
+    "expert_hidden_width": 128,
+    "logical_routes": 4,
+    "top_k": 1,
+    "router": "PA205 NormRouter with deterministic Appendix-L Monte Carlo calibration separately for logical route counts 2 and 4; independent per-layer router; global-pool conditions use aggregate pool-level balancing coefficient 0.01",
+    "view": "8 learned Givens angles rotate channel pairs (0,1)..(14,15) of the routed expert input",
+    "film_control": "8 learned group scales per layer and logical route over width 64; initialized to one"
+  },
+  "conditions": [
+    "dense one-FFN-per-layer baseline",
+    "untied standard MoE: four experts owned by each of four layers",
+    "native UniPool: four physical experts, four logical routes",
+    "small UniPool: two physical experts, two logical routes",
+    "two-physical/four-logical hard aliases with no input view",
+    "two-physical/four-logical Mirror Givens views",
+    "two-physical/four-logical byte-near FiLM gate control"
+  ],
+  "training": {
+    "development_seeds": [78401, 78402],
+    "updates_per_condition_per_seed": 1200,
+    "batch_size": 16,
+    "tokens_per_update": 2048,
+    "sequence_length": 128,
+    "optimizer": "AdamW",
+    "learning_rate": 0.0006,
+    "weight_decay": 0.1,
+    "checkpoint_rule": "best development NLL among checkpoints every 100 updates",
+    "hyperparameter_tuning": "none after freeze"
+  },
+  "gates": {
+    "quality_storage": "In both development seeds, Mirror NLL <= native four-expert UniPool +0.10 nats AND complete serialized inference payload <=0.95x native four-expert UniPool.",
+    "mirror_specific": "In both development seeds, Mirror NLL improves by >=0.02 nats over both hard-alias and FiLM controls; payloads of controls must be within +/-5% of Mirror or report that comparison as unmatched and fail Mirror-specific gate.",
+    "physical_pool": "Mirror expert-bank serialized bytes must be lower than native four-expert UniPool; report whole-model bytes separately.",
+    "audit": "Open only if every development gate passes in both seeds. Apply the same quality and control gates on the locked audit span; no tuning."
+  },
+  "metrics": [
+    "development/audit next-character NLL and bits per character",
+    "actual serialized inference payload bytes and SHA-256",
+    "expert-bank-only bytes",
+    "training characters, examples, optimizer updates and tokens",
+    "single-thread CPU training/evaluation wall time",
+    "active expert MAC proxy and throughput",
+    "physical expert loads and router entropy"
+  ],
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": ["all trunk tensors", "all physical expert tensors", "routers and scales", "Givens or FiLM parameters", "vocabulary", "configuration", "serialization metadata"]
+  },
+  "compute": {
+    "measure": "single-thread CPU wall time and analytic active-MAC proxy",
+    "report": ["training examples/tokens", "optimizer updates", "train wall seconds", "evaluation wall seconds", "inference tokens per second"]
+  },
+  "fresh": {
+    "audit_seeds": [78403, 78404],
+    "locked_before_access": true,
+    "audit_window_seeds_are_not_training_seeds": true
+  },
+  "boundaries": [
+    "This is a fixed-update mechanism screen, not a capacity result.",
+    "Four logical routes are not four independent experts; count useful quality and actual bytes.",
+    "Small character-LM results do not establish production-scale expert reuse.",
+    "No optimized inference kernel is evaluated."
+  ],
+  "selection_provenance": {
+    "pool_size": 549,
+    "pool_sha256": "753bd189a0b8cc500e4a5057103f646509240834d5f3d63d6b0ad8a4a64077cc",
+    "cryptographic_seed_hex": "89253d001af66ade263038b97d2e3e75167e1f8cbc9b91e61540174cf75f51cf",
+    "uniform_index": 269,
+    "selected_id": "MA-784"
+  }
+}

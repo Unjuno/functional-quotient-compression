@@ -3,6 +3,13 @@
 Updated: 2026-10-08 JST
 Canonical branch: `research/mirror-application-worker-ready-20261007`
 
+## Randomized worker execution override (active from Draw17)
+
+The numeric “Next candidate” and deterministic queue listings below are historical navigation only. Active workers uniformly sample one eligible `P0 + UNTESTED` registry row after excluding IDs already claimed by a live remote `research/ma-*` branch or an existing experiment directory in the workspace. Each draw stores the ordered pool, exclusions, SHA-256, cryptographic seed, selected index, and replay method. A pre-protocol blocker remains `UNTESTED` and triggers a fresh draw. This override changes execution order only; it does not change evidence requirements or merge research branches.
+
+- Draw17 selected MA-1091 (pool 550, index 499); blocked before protocol freeze. See `research/ma-1091-seasonal-mirror-prithvi-20261008`.
+- Draw18 selected MA-784 (pool 549, index 269); replay proof is stored in the MA-784 experiment directory.
+
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
@@ -21,7 +28,7 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 - PROMISING is **not** ADOPTED. Treat reports with strict-gate misses or exploratory protocol deviations at their documented scope.
 - SRM/TM and prior Phase I results are not MA statuses.
 
-## Next candidate
+## Historical default candidate (superseded for randomized execution)
 
 **MA-255 — Mirror context superposition for task models (P0; PA16)**
 
