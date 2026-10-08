@@ -2,12 +2,13 @@
 
 - Status: PROMISING (aligned serialized-state frontier; no runtime-RAM compression claim)
 - Branch: `research/ma-276-boft-depth-view-20261008`
+- Last verified commit: `aeb0291385499d2e8be5ad850365bb788daa684a`
 - Base commit: `19f0b5a`
 - Development complete: yes
 - Fresh/audit opened: yes, locked seeds only
-- Results committed: pending
-- Verification committed: pending
-- Registry row updated: pending
+- Results committed: yes
+- Verification committed: yes
+- Registry row updated: yes
 
 ## Next action
 
