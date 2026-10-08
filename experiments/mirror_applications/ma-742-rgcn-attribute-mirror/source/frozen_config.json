@@ -1,0 +1,30 @@
+{
+  "experiment_id": "MA-742",
+  "status": "FROZEN_BEFORE_FRESH",
+  "selected_rank": 2,
+  "optimizer_updates": 600,
+  "fresh_world_seeds": [
+    74201,
+    74202,
+    74203
+  ],
+  "source_sha256": "7124ed4d9215c40db5c25d47c2261073b09bdf0daaa9d62fad12683518ac0535",
+  "protocol_sha256": "671a77ed4d6268f46b1ba24bddf6636dcfc9db9a639b646ff416482ec3f37727",
+  "development_results_sha256": "c1f397151c5067f51f53dbaefd70f3baf5eb3f3a3cbb30752dd763b347944d59",
+  "selection_reason": "Lowest equal optimizer-update budget then rank meeting the preregistered development gates. At 150 updates no rank met both gates; at 600 updates rank 2 passed both in each development world.",
+  "development_gate_readout": {
+    "mirror_rank2_mean_heldout_mse": 0.00022764816094422713,
+    "additive_rank2_mean_heldout_mse": 0.2226312169805169,
+    "heldout_ratio": 0.0010225347731183147,
+    "mirror_rank2_mean_seen_mse": 0.00022378165158443153,
+    "native_basis_mean_seen_mse": 0.0002248914970550686,
+    "seen_ratio": 0.9950649736198549,
+    "mirror_coordinate_bytes": 104,
+    "native_relation_coeff_bytes": 264,
+    "coordinate_byte_ratio": 0.3939393939393939,
+    "mirror_complete_payload_bytes": 1128,
+    "native_complete_payload_bytes": 1288,
+    "complete_byte_ratio": 0.8757763975155279
+  },
+  "fresh_rules": "No rank, update count, optimizer, data or metric changes after accessing any fresh metric. Execute all three frozen seeds once."
+}

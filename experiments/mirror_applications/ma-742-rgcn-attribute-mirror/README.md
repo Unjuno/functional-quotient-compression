@@ -30,9 +30,9 @@ Doctrine: `docs/phase2/MIRROR_PARAMETER_INTEGRATION_DOCTRINE.md`
 ## Gates
 
 ### PASS
-On all three fresh worlds, Mirror held-out-combination MSE is at least 20% below additive control, within 10% of free per-relation basis control on seen combinations, and serialized marginal relation-coordinate payload (excluding the shared basis common to all methods) is at most 60% of the native free coefficient-table payload. Full inference payload bytes are also reported and must be lower than the free-coefficient model. Runtime is reported as a separate axis.
+On all three fresh worlds, Mirror held-out-combination MSE is at least 20% below additive control, within 10% of free per-relation basis control on seen combinations, and serialized marginal relation-coordinate payload (excluding the shared basis common to all methods) is at most 60% of the native free coefficient-table payload. Full inference payload bytes are also reported and must be lower than the free-coefficient model. Payload v1 charges its full eight-byte header and every FP32 tensor byte; reconstruction is checked exactly. Runtime is reported as a separate axis.
 
-Pre-fresh amendments clarify the storage denominator and permit a 600-update equal-budget development option after the initial 150-update screen exposed a potential optimization confound. No fresh data were accessed. The storage amendment states: the shared basis is common to all models, so the compression gate is on the separately serialized marginal relation-coordinate payload. No model, data, optimizer or quality threshold changed.
+Pre-fresh amendments (1) clarified marginal relation-code storage alongside complete payload bytes, (2) permitted an equal-budget 600-update development check after the initial 150-update screen exposed a possible optimization confound, and (3) replaced generic pickle serialization with a compact, versioned inference format after pickle metadata dominated the small payload comparison. All methods use the same format and its complete header is charged. No fresh data were accessed; seeds, model, data, quality gates and the selected equal training budget are unchanged.
 
 ### FAIL
 Mirror does not improve on additive factors on held-out combinations, exceeds the seen-relation quality tolerance, or fails to reduce actual serialized bytes against free per-relation coefficients. If additive factors match Mirror, the result is not Mirror-specific.
@@ -43,7 +43,7 @@ Synthetic mechanism only; no real-KG or link-prediction claim.
 ## Tuning boundary
 
 - Development worlds: seeds 7421 and 7422. Ranks `(2, 4, 8)` and equal optimizer updates `(150, 600)` are dev-only choices; choose the lowest-compute setting meeting both predeclared seen-quality and held-out-combination gates.
-- Fresh worlds: seeds 74201, 74202 and 74203. Rank and update count freeze before evaluation.
+- Fresh worlds: seeds 74201, 74202 and 74203. Rank 2 and 600 updates freeze before evaluation; settings and hashes are in `source/frozen_config.json`.
 
 ## Random selection provenance
 
@@ -51,10 +51,14 @@ Draw 2 selected MA-742 from 533 P0 UNTESTED IDs without a remote `research/ma-*`
 
 ## Decision
 
-FACT: pending.
+### Development facts (fresh still unopened)
 
-INTERPRETATION: pending.
+Across seeds 7421/7422, rank-2 Mirror mean held-out MSE was 0.00022764816 versus 0.22263122 for additive factors; seen MSE was 0.00022378165 versus 0.0002248915 for native basis coefficients. The serialized marginal coordinate was 104 B versus 264 B; full payload was 1128 B versus 1288 B.
 
-HYPOTHESIS: pending.
+FACT: fresh pending.
 
-BOUNDARY: synthetic relation-conditioned message operator only; no natural-graph evidence.
+INTERPRETATION: developmental evidence meets both quality selection gates; fresh confirmation is required.
+
+HYPOTHESIS: compositional multiplicative relation coordinates may improve unseen attribute-combination behavior with a smaller marginal code state.
+
+BOUNDARY: development-only synthetic relation-conditioned message operator; no natural-graph evidence.

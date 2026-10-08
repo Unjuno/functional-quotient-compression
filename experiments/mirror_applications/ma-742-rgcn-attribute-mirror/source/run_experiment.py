@@ -4,11 +4,11 @@ from __future__ import annotations
 import argparse
 import csv
 import hashlib
-import io
 import json
 import math
 import os
 import random
+import struct
 import time
 from pathlib import Path
 
@@ -136,28 +136,83 @@ def evaluate(model, world_seed: int, data_seed: int):
         pred = model(x, rels)
         elapsed = time.perf_counter() - t0
     errs = (pred - y).square().mean(dim=1)
-    return float(errs[held_mask].mean()), float(errs[seen_mask].mean()), elapsed
+    held_metric = None if model.method in ("native", "independent") else float(errs[held_mask].mean())
+    return held_metric, float(errs[seen_mask].mean()), elapsed
+
+
+def _named_arrays(model, method: str, segment: int):
+    """Return tensors in the versioned on-disk order; segment 0=whole, 1=common, 2=coordinate."""
+    if method == "independent":
+        return [("weights", model.weights.detach().cpu())] if segment in (0, 2) else []
+    if segment == 1:
+        return [("basis", model.basis.detach().cpu())]
+    if segment == 2:
+        if method == "native":
+            return [("coefficients", model.coefficients.detach().cpu())]
+        return [("attr_a", model.attr_a.detach().cpu()),
+                ("attr_b", model.attr_b.detach().cpu()),
+                ("decode", model.decode.detach().cpu())]
+    return _named_arrays(model, method, 1) + _named_arrays(model, method, 2)
+
+
+_METHOD_CODE = {"independent": 1, "native": 2, "additive": 3, "mirror": 4}
+_MAGIC = b"MA74"
+
+
+def pack_payload(model, method: str, segment: int = 0) -> bytes:
+    """Compact inference payload. Header (magic, version, method, rank, segment) is charged."""
+    header = struct.pack(">4sBBBB", _MAGIC, 1, _METHOD_CODE[method], model.rank, segment)
+    chunks = [header]
+    for _, tensor in _named_arrays(model, method, segment):
+        array = tensor.detach().cpu().numpy().astype("<f4", copy=False)
+        chunks.append(array.tobytes(order="C"))
+    return b"".join(chunks)
+
+
+def unpack_payload(blob: bytes):
+    """Reconstruct exact FP32 model tensors using the format-version architecture contract."""
+    header_size = struct.calcsize(">4sBBBB")
+    magic, version, method_id, rank, segment = struct.unpack(">4sBBBB", blob[:header_size])
+    if magic != _MAGIC or version != 1 or method_id not in _METHOD_CODE.values():
+        raise ValueError("unsupported MA-742 payload header")
+    method = next(k for k, v in _METHOD_CODE.items() if v == method_id)
+    shape_specs = {
+        "independent": {"weights": (N_REL, D_IN, D_OUT)},
+        "native": {"basis": (N_BASIS, D_IN, D_OUT), "coefficients": (N_REL, N_BASIS)},
+        "additive": {"basis": (N_BASIS, D_IN, D_OUT), "attr_a": (A_VALUES, rank), "attr_b": (B_VALUES, rank), "decode": (rank, N_BASIS)},
+        "mirror": {"basis": (N_BASIS, D_IN, D_OUT), "attr_a": (A_VALUES, rank), "attr_b": (B_VALUES, rank), "decode": (rank, N_BASIS)},
+    }
+    order = {"independent": ["weights"], "native": ["basis", "coefficients"],
+             "additive": ["basis", "attr_a", "attr_b", "decode"],
+             "mirror": ["basis", "attr_a", "attr_b", "decode"]}
+    if segment == 1:
+        names = ["basis"]
+    elif segment == 2:
+        names = [n for n in order[method] if n != "basis"]
+    elif segment == 0:
+        names = order[method]
+    else:
+        raise ValueError("unsupported payload segment")
+    offset, tensors = header_size, {}
+    for name in names:
+        shape = shape_specs[method][name]
+        size = math.prod(shape) * 4
+        if offset + size > len(blob):
+            raise ValueError("truncated MA-742 payload")
+        array = torch.frombuffer(bytearray(blob[offset:offset+size]), dtype=torch.float32).clone().reshape(shape)
+        tensors[name] = array
+        offset += size
+    if offset != len(blob):
+        raise ValueError("trailing MA-742 payload bytes")
+    return method, rank, segment, tensors
 
 
 def state_payload(model, method: str):
-    sd = model.state_dict()
-    if method == "independent":
-        marginal = {"weights": sd["weights"]}
-        common = {}
-    else:
-        common = {"basis": sd["basis"]}
-        marginal = {k: v for k, v in sd.items() if k != "basis"}
-    metadata = {"method": method, "rank": model.rank, "n_relations": N_REL,
-                "input_dim": D_IN, "output_dim": D_OUT, "n_basis": N_BASIS,
-                "heldout_relation_ids": sorted(N_HOLDOUT), "format": "MA-742-v1"}
-    def dump(obj):
-        bio = io.BytesIO()
-        torch.save(obj, bio)
-        return bio.getvalue()
-    whole_bytes = dump({"metadata": metadata, "state_dict": sd})
-    marginal_bytes = dump({"metadata": metadata, "coordinate_state": marginal})
-    common_bytes = dump({"metadata": metadata, "shared_state": common}) if common else b""
-    return whole_bytes, marginal_bytes, common_bytes, hashlib.sha256(whole_bytes).hexdigest()
+    whole = pack_payload(model, method, 0)
+    marginal = pack_payload(model, method, 2)
+    common = pack_payload(model, method, 1) if method != "independent" else b""
+    digest = hashlib.sha256(whole).hexdigest()
+    return whole, marginal, common, digest
 
 
 def mac_proxy(method: str, rank: int, batch: int):
@@ -188,6 +243,16 @@ def run_stage(stage: str, seeds: list[int], ranks: list[int]):
             # deterministic evaluation dataset seed is separate from training seed
             held_mse, seen_mse, infer_wall = evaluate(model, world_seed, world_seed + 2)
             whole, marginal, common, digest = state_payload(model, method)
+            restored_method, restored_rank, restored_segment, restored = unpack_payload(whole)
+            expected = {k: v.detach().cpu() for k, v in model.state_dict().items()}
+            if restored_method != method or restored_rank != rank or restored_segment != 0 or set(restored) != set(expected):
+                raise RuntimeError("serialized payload metadata mismatch")
+            if any(not torch.equal(restored[k], expected[k]) for k in expected):
+                raise RuntimeError("serialized payload failed exact tensor reconstruction")
+            if stage == "fresh":
+                payload_dir = OUT / "payloads"
+                payload_dir.mkdir(exist_ok=True)
+                (payload_dir / f"fresh_{world_seed}_{method}.bin").write_bytes(whole)
             row = {'world_seed':world_seed,'method':method,'latent_rank':rank,'serialized_bytes':len(whole),
                    'marginal_coordinate_bytes':len(marginal),'shared_basis_bytes':len(common),
                    'payload_sha256':digest,'train_examples':seen_exposures,'optimizer_updates':UPDATES,
@@ -205,6 +270,10 @@ def main():
     ap=argparse.ArgumentParser()
     ap.add_argument('--stage',choices=['development','fresh'],required=True)
     args=ap.parse_args()
+    global UPDATES
+    if args.stage == 'fresh':
+        frozen = json.loads((OUT / "frozen_config.json").read_text())
+        UPDATES = int(frozen["optimizer_updates"])
     seeds = [7421,7422] if args.stage=='development' else [74201,74202,74203]
     ranks=[2,4,8]
     rows=run_stage(args.stage,seeds,ranks)

@@ -30,7 +30,7 @@
       7421,
       7422
     ],
-    "selection_metric": "mean held-out-combination MSE; tie break by serialized inference bytes",
+    "selection_metric": "Mean held-out-combination MSE across seeds 7421 and 7422, subject to both mean quality gates; select smallest optimizer update count, then smallest rank.",
     "allowed_tuning": "Mirror/additive rank in {2,4,8} and equal optimizer update budget in {150,600}; choose the lowest-compute setting meeting the held-out and seen-quality gate. All methods receive the same selected update budget."
   },
   "fresh": {
@@ -43,7 +43,7 @@
     "selection_metric": "MSE on held-out attribute combinations and seen relation held-out examples"
   },
   "data": {
-    "generator": "Synthetic relation-conditioned linear message operator. Four values for each of two semantic relation attributes; 16 ordered pairs, with pairs (0,0),(1,2),(2,3),(3,1) excluded from training and development fit. Inputs/outputs and true relation coefficients generated per world seed.",
+    "generator": "Synthetic relation-conditioned linear message operator with four values for each of two semantic relation attributes; true coefficient vectors are generated compositionally from rank-2 Hadamard products. Relations (0,0),(1,2),(2,3),(3,1) are excluded from train fitting and used as held-out combination evaluation.",
     "train_examples_per_seen_relation": 256,
     "dev_examples_per_relation": 128,
     "fresh_examples_per_relation": 256
@@ -56,7 +56,8 @@
       "coefficient decoder",
       "all model buffers and inference metadata"
     ],
-    "marginal_state_comparison": "Report whole inference payload bytes and actual serialized marginal relation-code payload bytes separately. Shared basis is common state; the relation coefficient table or attribute factor tables plus coefficient decoder are serialized as independent marginal payloads. No parameter-count proxy."
+    "marginal_state_comparison": "Report complete packed inference payload, separately packed coordinate segment, and shared-basis segment. The relation coefficient table or attribute factors plus decoder are serialized with the same 8-byte charged header. The payload loader must reconstruct all tensors exactly.",
+    "format": "Versioned fixed-architecture binary inference payload: 8-byte header (magic, format version, method code, coordinate rank, segment) plus little-endian FP32 tensor blobs in specified order. All header and tensor bytes are charged. Dims and tensor ordering are defined by the versioned experiment inference runtime."
   },
   "compute": {
     "report_examples": true,
@@ -70,7 +71,8 @@
     "Synthetic mechanism screen only; no real KG/link-prediction claim.",
     "Mirror coordinates do not count as independent relation capacity.",
     "If ordinary additive factors match, no Mirror-specific claim.",
-    "Fresh results cannot change selected rank or any protocol setting."
+    "Fresh results cannot change selected rank or any protocol setting.",
+    "Native per-relation coefficient and independent full-relation controls have no learned parameters for held-out relation combinations; their held-out metric is not applicable and is not reported. They are seen-relation quality controls and payload baselines only."
   ],
   "amendments": [
     {
@@ -82,6 +84,11 @@
       "after": "initial development-only screen, before fresh access",
       "reason": "The rank-2 Mirror point showed a large held-out gain but missed seen-relation quality at 150 updates; distinguish optimization undertraining from representational failure using a predeclared equal-budget 600-update dev option.",
       "protocol_effect": "Development may select 150 or 600 updates, equally for every method. Fresh inherits the selected rank and update count. No quality thresholds or fresh seeds changed."
+    },
+    {
+      "after": "development-only 600-update results; before fresh access",
+      "reason": "torch.save pickle metadata dominated these small payloads and made the 24-float Mirror coordinate look larger than the 64-float native coefficient table. Use a versioned compact binary inference format applied identically to all methods; count the 8-byte header and all tensor bytes and verify exact reconstruction.",
+      "protocol_effect": "Only the serializer and its charged metadata format changed. Model, data, seeds, training budget, metrics and quality gates are unchanged; initial torch.save bytes remain archived as non-authoritative implementation diagnostics."
     }
   ],
   "selection_gate": "Development selects the lowest update count then rank that meets both: Mirror seen-relation MSE <= 1.10x native basis MSE, and Mirror held-out-combination MSE <= 0.80x additive-factor MSE. If no candidate meets both, freeze the dev candidate with lowest held-out MSE and classify the development screen as a gate failure; do not open fresh."

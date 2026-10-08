@@ -30,8 +30,13 @@ class ProtocolTests(unittest.TestCase):
         for method in ('native','additive','mirror','independent'):
             model=ma742.RelationModel(method,2,11)
             whole,marginal,common,digest=ma742.state_payload(model,method)
-            self.assertGreater(len(whole),len(marginal))
+            self.assertGreaterEqual(len(whole),len(marginal))
             self.assertEqual(len(digest),64)
             self.assertGreater(len(common),0) if method!='independent' else self.assertEqual(common,b'')
+            restored_method,rank,segment,tensors=ma742.unpack_payload(whole)
+            self.assertEqual((restored_method,rank,segment),(method,2,0))
+            self.assertEqual(set(tensors),set(model.state_dict()))
+            for key,value in model.state_dict().items():
+                self.assertTrue(torch.equal(tensors[key],value.detach().cpu()))
 
 if __name__=='__main__': unittest.main()
