@@ -3,7 +3,7 @@
 - Status: SCREENING — protocol frozen; preflight passed before corpus access
 - Branch: `research/ma-464-adamix-mirror-20261008`
 - Base commit: `c935a903daca5c7d1d48aa50d05b5bd50f239cba`
-- Last verified code/protocol commit: pending pre-data freeze
+- Last verified code/protocol commit: `7ae90fc`
 - Development complete: no
 - Fresh/audit opened: no
 - Results committed: no
