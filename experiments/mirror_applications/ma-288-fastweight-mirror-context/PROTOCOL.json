@@ -1,0 +1,113 @@
+{
+  "experiment_id": "MA-288",
+  "title": "Mirror fast-weight programmer context code",
+  "status": "FAIL",
+  "evidence_lane": "MECHANISM/MEMORY/STORAGE/RUNTIME",
+  "base_commit": "e259f27",
+  "random_selection": {
+    "date_utc": "2026-10-08",
+    "method": "Python secrets.randbelow(8)",
+    "draw_index_zero_based": 5,
+    "candidate_pool": [
+      "MA-274",
+      "MA-276",
+      "MA-278",
+      "MA-282",
+      "MA-286",
+      "MA-288",
+      "MA-296",
+      "MA-299"
+    ],
+    "selected": "MA-288",
+    "live_conflict_check": "git fetch origin --prune; no remote MA-288 branch found"
+  },
+  "hypothesis": "Four context-dependent fast memories related by Givens conjugation can be represented by one physical fast-weight matrix plus one dynamic session angle, while unrelated contexts require private memory state.",
+  "physical_object": "One shared 8x8 fast-weight memory matrix",
+  "mirror_coordinate": "One dynamic float32 Givens angle supplied by each session cue",
+  "logical_multiplicity": "Four session-specific linear memory functions",
+  "prior_art_refs": [
+    "PA25"
+  ],
+  "controls": [
+    "ordinary shared FWP without context code",
+    "hard-tied base memory",
+    "one-scalar context FiLM",
+    "per-session rank-r residual over base memory",
+    "independent per-session FWP state"
+  ],
+  "stream": "Four sessions; each session receives eight one-hot key/value writes to a fast-weight matrix using the delta rule. Context cues supply continuous angles. Aligned session teachers are W_c=R(m_c) W_0 R(m_c)^T. Independent teachers are unrelated random matrices and cues do not encode their function.",
+  "development": {
+    "worlds_or_seeds": [
+      28801,
+      28802
+    ],
+    "residual_rank_candidates": [
+      1,
+      2,
+      4
+    ],
+    "selection_metric": "mean held-out output MSE across methods and aligned/independent conditions",
+    "writes_per_session": 8,
+    "held_out_queries_per_session": 512,
+    "selected_residual_rank": 4,
+    "selection_result_mean_mse": {
+      "1": 0.09161895497421235,
+      "2": 0.0854574074801309,
+      "4": 0.07999058856698585
+    }
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      28811,
+      28812,
+      28813
+    ],
+    "locked_before_access": true,
+    "writes_per_session": 8,
+    "held_out_queries_per_session": 512
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "codec": "deterministic binary tensor records charging field names, context codes/IDs, dtype, shape, learned state and headers",
+    "paid_objects": [
+      "slow/base memory",
+      "fast-weight state",
+      "Mirror coordinates",
+      "context records",
+      "FiLM scalars",
+      "low-rank factors",
+      "independent memories",
+      "all codec metadata"
+    ]
+  },
+  "compute": {
+    "report_writes": true,
+    "report_optimizer_updates": true,
+    "report_active_MAC_proxy": true,
+    "report_wall_time": true,
+    "report_coordinate_path_inference_throughput": true,
+    "optimizer_updates": 0
+  },
+  "success_gate": "On all three fresh aligned worlds, Mirror output MSE <=1e-5, actual total state <=0.5x independent per-session FWP, and coordinate-path inference throughput >=0.5x selected low-rank residual control. Mirror-specific value also requires a better quality/byte/compute frontier than both one-scalar FiLM and selected low-rank residual control.",
+  "failure_gate": "Mirror misses any aligned quality/storage/runtime gate or is Pareto-dominated by FiLM or a low-rank residual control.",
+  "boundaries": [
+    "Synthetic 8x8 linear memory",
+    "Four known session contexts",
+    "Exact one-hot support writes",
+    "Not a realistic long-stream or Transformer result"
+  ],
+  "amendments": [
+    {
+      "id": "A1",
+      "fixed_before_fresh_access": true,
+      "change": "Fix the independent condition base memory to session 0, as preregistered; freeze residual rank 4 selected on corrected development worlds.",
+      "reason": "The first development implementation created an unused random base for the independent condition, contrary to the defined session-0 base. Invalid tables are retained; corrected development selected rank 4."
+    },
+    {
+      "id": "A2",
+      "fixed_before_fresh_access": false,
+      "change": "Add an exploratory post-audit per-session materialized-cache timing diagnostic with explicit workspace accounting; the registered per-call coordinate-path throughput and decision remain unchanged.",
+      "reason": "Mirror state and aligned accuracy were favorable but the registered eager coordinate path missed its throughput gate. The diagnostic isolates session-cache amortization without changing model state or tuning any result."
+    }
+  ]
+}

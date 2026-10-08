@@ -302,7 +302,7 @@ Operational rule:
 
 ## Eleventh literature expansion — cross-model state, scenes, audio, generators and stitching
 
-**MA-876..935 remain UNTESTED behind the registered P0 queue. MA-255 is narrow PROMISING; MA-260/261/265/271/272/273/274/278/286 are FAIL within their documented scopes; MA-268/276/282 are narrow PROMISING. MA-273/274 pause the task/expert scalar-angle BOFT insertion, while MA-276 depth views remain separately PROMISING. Current next candidate: MA-288.**
+**MA-876..935 remain UNTESTED behind registered P0 work. Scoped PROMISING: MA-255/268/276/282. FAIL in documented scope: MA-260/261/265/271/272/273/274/278/286/288. The current fast-weight context screen misses its registered direct-path runtime gate; its cached diagnostic is supplemental. Current next candidate: MA-292.**
 
 High-information P0 applications by domain:
 1. **Cross-model caches MA-876..890:** MA-876 shared ridge translator basis versus native per-pair ridge; MA-878 head-matched CacheBridge; MA-880 ordered source×target factorization; MA-881 MoT translator bank; MA-887 exact-versus-approximate boundary; MA-889 confidence fallback.
@@ -315,7 +315,7 @@ Every experiment must isolate the extra Mirror parameter `m` beyond its strong n
 
 Read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08.md`, PA236..PA265 and the selected MA registry row.
 
-**MA-255 is narrow PROMISING; MA-260/261/265 and MA-271/272/273/274/278/286 are FAIL in their documented scopes; MA-268/276/282 are narrow PROMISING. The next P0 candidate is MA-288 (fast-weight context code).**
+**Current evidence:** MA-255/268/276/282 are narrow PROMISING; MA-260/261/265/271/272/273/274/278/286/288 are FAIL in their documented scopes. The next P0 candidate is MA-292 (task-vector Mirror basis).
 
 ## Twelfth research expansion — video, equivariance, spiking, physical optics, wireless and spatial audio
 
@@ -359,7 +359,7 @@ Read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_THIRTEENTH_SWEEP.
 
 **MA-1046..1095 are 50 new UNTESTED hypotheses** appended after earlier literature intakes and the original locked direct-prior queue. All comparisons study the marginal value of the extra Mirror parameter `m`; no new source-paper result is a Mirror result.
 
-**Current evidence:** MA-255 narrow PROMISING; MA-260/261/265/271/272/273/274/278/286 FAIL; MA-268/276/282 narrow PROMISING. **Current canonical next candidate: MA-288** (fast-weight programmer context code). MA-275/277/279–281 remain P1 UNTESTED.
+**Current evidence:** MA-255/268/276/282 are narrow PROMISING; MA-260/261/265/271/272/273/274/278/286/288 are FAIL. **Current canonical next candidate: MA-292** (task-vector Mirror basis). MA-275/277/279–281 remain P1 UNTESTED.
 
 Recommended high-information P0 studies **within this new family**:
 
@@ -379,7 +379,7 @@ Read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_FOURTEENTH_SWEEP.
 
 ## Historical P0 family sequence (completed screens; not current queue)
 
-The historical A–F lists below record previously screened experiments and must not override `STATUS_BOARD.md` (MA-288 next; see scoped MA-286 failure).
+The historical A–F lists below record previously screened experiments and must not override `STATUS_BOARD.md` (MA-292 next).
 
 ### Family A — FFN / MoE / adapter
 MA-003 -> MA-005 -> MA-009 -> MA-019 -> MA-024
