@@ -1,0 +1,51 @@
+{
+  "amendment_id": "SFM002_FOLDED_CONTROL",
+  "status": "FROZEN_BEFORE_RUNNING_SECOND_CONTROL",
+  "parent_protocol": "FROZEN_PROTOCOL.json",
+  "date": "2026-10-08",
+  "purpose": "Address strongest alternative: pre-folded ordinary independent/tied expert weights may be faster than runtime Mirror while costing more resident bytes. First experiment must not be revised by this follow-up.",
+  "scientific_question": "At K=4 and K=5, compare precomputed per-view folded ordinary FFN (matmul->GELU->matmul) with packed shared-preactivation Mirror, duplicated unreduced full, and exact output-only readout. Track physical RAM bytes and actual serialized NPZ cost.",
+  "hypothesis": "Pre-folded experts may achieve lower P95 inference latency than runtime Givens Mirror at larger resident RAM; a mere reduction in matrix MACs does not guarantee a faster eager kernel.",
+  "math_spec": "For row-vector convention f_m(x)=Wdown * Qm^{-1} GELU(Qm Wup x) adjusted to row orientation: z=x@Wup; y=GELU(z@Tm) @ (Tm^-1@Wdown); folded U_m=Wup@Tm, D_m=Tm^-1@Wdown.",
+  "dataset": "Frozen random weights, no training, batch 16/128, din=64 hidden=256 dout=64, K in {4,5} independently seeded worlds; full function equivalence checked FP32 max abs <=3e-5 before timing.",
+  "split": {
+    "dev_seeds": [
+      21,
+      22,
+      23
+    ],
+    "fresh_seeds": [
+      201,
+      202,
+      203,
+      204,
+      205
+    ],
+    "fresh_locked_before_access": true,
+    "no_tuning": true
+  },
+  "hardware": {
+    "device": "CPU AMD EPYC 9V74",
+    "threads": 1,
+    "torch": "2.10.0+cpu",
+    "dtype": "FP32",
+    "backend": "eager",
+    "warmup": 20,
+    "timed_calls": 100,
+    "clock": "perf_counter_ns",
+    "GPU_transfer": "not measured"
+  },
+  "compared": [
+    "folded independent per-view matrices precomputed offline/at load, both packed and loop",
+    "non-folded full packed baseline",
+    "one-input-projection cached packed Mirror",
+    "output-only exact orbit (different task family)"
+  ],
+  "storage": "Serialize same named NPZ shared weights+angles versus per-role Wup_folded/Wdown_folded using float32, header and metadata in actual npz bytes; report tensor RAM bytes separately.",
+  "decision": {
+    "PASS_mechanism": "exact folded predictions match runtime Mirror <=3e-5 every world; indicate Pareto CPU milliseconds vs NPZ/RAM bytes",
+    "FAIL_Mirror_specific": "If pre-folded or ordinary factorized cache dominates Mirror performance on same task quality and physical resident constraints, reject Mirror-specific runtime claim.",
+    "UNCERTAIN": "No real GPU, fused kernels, transfer measurements or natural specialist quality; this is a CPU speed/size tradeoff."
+  },
+  "notes": "Do not pool fresh seed 201-205 with earlier 101-105 as preplanned joint confirmatory audit; report independent follow-up control. No status changes to MA-1175/1176."
+}
