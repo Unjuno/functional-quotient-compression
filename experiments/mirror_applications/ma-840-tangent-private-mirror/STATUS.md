@@ -6,7 +6,7 @@
 - Development complete: yes
 - Fresh/audit opened: yes
 - Results committed: yes, pending result commit
-- Verification committed: pending final check
+- Verification committed: pending registry verification commit
 
 ## Next action
 
