@@ -1,0 +1,73 @@
+{
+  "experiment_id": "MA-510",
+  "title": "Conditional activation steering with factorized condition and behavior Views",
+  "status": "SCREENING",
+  "evidence_lane": "CONDITIONAL_STEERING/FALSE_TRIGGER/QUALITY/STORAGE/COMPUTE",
+  "base_commit": "c03c1da669b812d74f19b606c3264750b1edf42b",
+  "hypothesis": "On two frozen synthetic contextual-activation worlds with 16 condition classes and 8 reusable behaviors, a rank-4 factorized condition/behavior Mirror will preserve conditional outputs (event recall >=0.95, conditional behavior accuracy >=0.95), hold hard-negative false-trigger rate <=0.01, and use <=0.65x actual serialized bytes of explicit CAST condition and behavior vectors.",
+  "physical_object": "A frozen 64-dimensional identity activation map, condition-prototype bank and eight behavior-addition vectors.",
+  "mirror_coordinate": "A condition code and a behavior code over separately learned shared orthonormal bases; a condition-to-behavior address table selects the behavior View when the condition score clears a calibrated gate.",
+  "logical_multiplicity": "Sixteen context-conditional functions composed from sixteen condition addresses and eight reusable behavior vectors; only directly measured condition IDs count.",
+  "prior_art_refs": ["PA101"],
+  "controls": [
+    "Explicit CAST-style condition prototypes plus behavior vectors with cosine-similarity gating",
+    "Native PCA/SVD compression of the same condition and behavior banks, with codes and calibrated gate",
+    "Independent condition-behavior action vectors as a storage/quality upper control",
+    "No-intervention baseline"
+  ],
+  "task": {
+    "type": "synthetic frozen contextual-activation steering mechanism screen",
+    "dimension": 64,
+    "conditions": 16,
+    "behaviors": 8,
+    "shared_condition_dimension": 4,
+    "shared_behavior_dimension": 4,
+    "support_examples_per_condition": 128,
+    "calibration_positive_per_condition": 64,
+    "calibration_hard_negatives": 2048,
+    "evaluation_positive_per_condition": 256,
+    "evaluation_hard_negatives": 8192,
+    "condition_ranks": [2, 4, 8, 16],
+    "behavior_ranks": [2, 4, 8],
+    "development_seeds": [51001, 51002],
+    "fresh_seeds": [51011, 51012, 51013],
+    "construction": "Condition means lie in a random four-dimensional orthonormal subspace with a small private component. Each behavior addition lies in an independent four-dimensional orthonormal subspace. Hard negatives are midpoint mixtures of distinct nearby condition means plus activation noise and have no target behavior. Eight behavior vectors are assigned cyclically to sixteen conditions.",
+    "primary_metrics": ["hard-negative false-trigger rate at threshold calibrated to <=1% on a separate calibration set", "event recall", "conditional behavior accuracy"],
+    "secondary_metrics": ["trigger precision", "conditional-output relative RMSE", "unique event-conditioned outputs", "actual serialized payload bytes", "active operation proxy", "fit and inference wall time"]
+  },
+  "development": {
+    "seeds": [51001, 51002],
+    "selection": "Report full frozen rank grid. Primary point is condition rank 4 and behavior rank 4. Gate is chosen independently per method using only calibration examples: lowest score threshold with calibration FPR <=0.01.",
+    "optimizer_updates": 0,
+    "hyperparameter_changes_after_run": "Prohibited without numbered amendment; source and tests must be frozen first."
+  },
+  "fresh": {
+    "seeds": [51011, 51012, 51013],
+    "locked_before_access": true,
+    "opened": false,
+    "opening_rule": "Open only if the primary rank-4 point passes every false-trigger, recall, behavior-accuracy and actual-byte gate and beats native PCA in function, bytes or compute by at least 10% at equal quality."
+  },
+  "storage": {
+    "authority": "actual uncompressed NPZ inference payload bytes",
+    "paid_objects": ["condition/behavior prototypes or bases and codes", "condition-to-behavior addresses", "thresholds", "decoder metadata and schema"],
+    "common_frozen_identity_activation_map": "parameter-free identity and excluded from incremental payload; same for all methods"
+  },
+  "compute": {
+    "report_examples": true,
+    "optimizer_updates": 0,
+    "active_operation_proxy": "CAST cosine score uses conditions*dimension products per input; low-rank gate uses dimension*condition_rank + conditions*condition_rank, plus dimension*behavior_rank decode and one dimension-sized addition; action gathering and shared bookkeeping reported separately.",
+    "report_wall_time": true,
+    "isolated_wall_clock": "single process, NumPy CPU, fixed five-thread limit; report per-method fit and inference wall time"
+  },
+  "gates": {
+    "PROMISING": "At condition rank 4 and behavior rank 4 in both dev seeds, test FPR <=0.01, recall >=0.95, conditional behavior accuracy >=0.95 and payload <=0.65x CAST; also native PCA must fail to match the Mirror result by at least 10% on a useful quality/storage/compute dimension at equal quality.",
+    "FAIL": "Frozen conditional-quality/byte gate fails, or native PCA/CAST/ordinary shared gate exactly explains the Mirror result with no >=10% useful margin.",
+    "NOT_ESTABLISHED": "A control cannot be fit/replayed or serialized inference outputs fail deterministic replay."
+  },
+  "boundaries": [
+    "This is a synthetic activation mechanism screen, not a language-model or semantic CAST reproduction. No claim about prompt meaning, safety, natural false triggers or user preference is allowed.",
+    "Condition and behavior supports are matched across methods; calibration examples are disjoint from evaluation examples.",
+    "A condition-behavior combination count is not independent capacity; only measured event behavior, errors and actual bytes count.",
+    "Fresh worlds remain sealed unless all gates and a useful Mirror-specific margin pass."
+  ]
+}
