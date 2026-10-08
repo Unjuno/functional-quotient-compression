@@ -1,28 +1,44 @@
 {
   "experiment_id": "MA-312",
   "title": "one shared intrinsic basis, many Mirror task coordinates",
-  "status": "SCREENING",
+  "status": "PROMISING",
   "evidence_lane": "MECHANISM/STORAGE/QUALITY/COMPUTE/RUNTIME",
   "base_commit": "3837e9bf9842d9aae4a0b83dd5a6f8d5e11ebdf4",
   "hypothesis": "A shared random intrinsic basis plus one Mirror angle per task gives a useful byte/quality frontier across 256 aligned tasks versus independent SAID codes and direct two-coefficient codes; unrelated task codes need richer state.",
   "physical_object": "shared 32D linear predictor and an 8D random orthonormal task-update basis",
   "mirror_coordinate": "one FP16 angle/task on a fixed-radius circle in two paid basis columns",
   "logical_multiplicity": "256 task-conditioned functions; task count is not interpreted as independent capacity",
-  "prior_art_refs": ["PA33", "MA-311"],
-  "controls": ["hard tie", "PA33 SAID-8 with per-task FP32 intrinsic vectors", "direct 2-coefficient FP16 codes", "independent full 32D task vectors"],
+  "prior_art_refs": [
+    "PA33",
+    "MA-311"
+  ],
+  "controls": [
+    "hard tie",
+    "PA33 SAID-8 with per-task FP32 intrinsic vectors",
+    "direct 2-coefficient FP16 codes",
+    "independent full 32D task vectors"
+  ],
   "data": {
     "input_dimension": 32,
     "intrinsic_dimension": 8,
     "task_count": 256,
     "support_examples_per_task": 64,
     "test_examples_per_task": 128,
-    "development_seeds": [31201, 31202, 31203],
-    "fresh_seeds_locked_unopened": [31211, 31212, 31213],
+    "development_seeds": [
+      31201,
+      31202,
+      31203
+    ],
     "optimizer_updates": 0,
     "task_id_supplied": true,
     "radius": 0.25,
     "aligned_teacher": "theta_t = theta0 + P[:,0:2] @ [r*cos(m_t), r*sin(m_t)]",
-    "unrelated_teacher": "theta_t = theta0 + P @ z_t, z_t iid Gaussian in R^8"
+    "unrelated_teacher": "theta_t = theta0 + P @ z_t, z_t iid Gaussian in R^8",
+    "fresh_seeds_locked_before_access": [
+      31211,
+      31212,
+      31213
+    ]
   },
   "selection": {
     "development_only": true,
@@ -32,7 +48,15 @@
   "storage": {
     "authority": "actual serialized inference payload bytes after reload",
     "format": "NPZ-compatible fixed-timestamp ZIP",
-    "paid_objects": ["shared predictor", "basis columns used by method", "shared radius", "all per-task codes", "SAID vectors", "independent task vectors", "array metadata and ZIP/NPY headers"]
+    "paid_objects": [
+      "shared predictor",
+      "basis columns used by method",
+      "shared radius",
+      "all per-task codes",
+      "SAID vectors",
+      "independent task vectors",
+      "array metadata and ZIP/NPY headers"
+    ]
   },
   "compute": {
     "report_support_examples": true,
@@ -48,8 +72,20 @@
   "failure_gate": "Any aligned nearest-control quality/byte gate fails, or unrelated codes require richer state without an aligned actual-byte frontier point.",
   "fresh": {
     "locked_before_access": true,
-    "seeds": [31211, 31212, 31213],
-    "open_condition": "only if every development world passes all aligned quality and actual-byte gates"
+    "seeds": [
+      31211,
+      31212,
+      31213
+    ],
+    "open_condition": "only if every development world passes all aligned quality and actual-byte gates",
+    "opened_after_development_gate": true
   },
-  "boundaries": ["synthetic post-fit linear task bank", "teacher uses the Mirror circular chart", "zero gradient optimizer updates", "task IDs supplied; no learned router", "not capacity or language evidence"]
+  "boundaries": [
+    "synthetic post-fit linear task bank",
+    "teacher uses the Mirror circular chart",
+    "zero gradient optimizer updates",
+    "task IDs supplied; no learned router",
+    "not capacity or language evidence"
+  ],
+  "decision_note": "Narrow PROMISING status applies only to the aligned synthetic 256-task serialized storage/quality point; fit compute and throughput are worse, and unrelated tasks require richer codes."
 }
