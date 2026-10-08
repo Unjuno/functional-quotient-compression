@@ -152,7 +152,7 @@ High-information P0:
 6. MA-464 — AdaMix over logical Mirror adaptations
 7. MA-466 — UniPELT components as Mirror axes (**FAIL; useful factorized gates but only 15.8% byte reduction, 19% more MAC proxy, and exact native CP alias; fresh sealed**)
 8. MA-468 — Polytropon shared/private skill bank + Views (**NOT ESTABLISHED; independent upper missed frozen quality validity bound; exact native low-rank alias and bytes worse; fresh sealed**)
-9. MA-469 — MEND-generated Mirror edit codes (**NOT ESTABLISHED; global-update synthetic task failed the frozen independent upper locality validity bound; native low-rank exactly aliased Mirror; fresh sealed**). MA-470 is screening: shared Mirror edit basis + MEND coefficient generator with a common frozen nearest-key router.
+9. MA-469 — MEND-generated Mirror edit codes (**NOT ESTABLISHED; global-update synthetic task failed the frozen independent upper locality validity bound; native low-rank exactly aliased Mirror; fresh sealed**). MA-470 — shared Mirror edit basis + MEND coefficient generator (**NOT ESTABLISHED; locality/route passed and Mirror beat MEND on bytes/MAC, but the independent full-update upper failed edit validity; Mirror exactly aliased native low-rank; fresh sealed**). MA-471 is next: ROME rank-one update encoded as Mirror coordinate.
 10. MA-471 — ROME rank-one edit as Mirror coordinate
 11. MA-473 — MEMIT edit basis + Mirror memory codes
 12. MA-475/476 — SERAC/GRACE edit-memory compression

@@ -9,3 +9,5 @@ MA-369/371/372 remain paused after the documented consecutive width/depth family
 No fresh data were opened during reconciliation.
 
 - MA-469 — NOT ESTABLISHED, research branch `research/ma-469-mend-mirror-edit-code-20261008`: frozen synthetic global matrix edits made the independent support-fit upper violate the locality validity bound in both development seeds; Mirror missed both edit/locality gates and exactly matched native low-rank. Fresh seeds sealed.
+
+- MA-470 — NOT ESTABLISHED, research branch `research/ma-470-shared-edit-basis-20261008`: key-locality and edit quality for Mirror/MEND passed in the two toy worlds, but the independent full-update support-fit upper missed edit validity (0.248/0.630). Mirror saved bytes/MAC versus MEND but exactly aliased native low-rank; fresh sealed.
