@@ -6,9 +6,9 @@
 - Protocol frozen: yes; SHA-256 9cc4a011eef6cab32c4d5a32366e70db0d0845e10201f3b95b75648ed8a5a356
 - Development complete: yes; seeds 46601, 46602
 - Fresh/audit opened: no; sealed by frozen gate
-- Results committed: pending
-- Verification committed: pending
-- Registry row: SCREENING until terminal metadata update
+- Results committed: baff25a0e596e28321ae531191648d2cd1bb0a8b
+- Verification record: points to result commit baff25a0e596e28321ae531191648d2cd1bb0a8b
+- Registry row: FAIL
 
 ## Decision
 
