@@ -1,0 +1,42 @@
+{
+  "experiment_id": "MA-297",
+  "title": "SETA shared sparse subspace + Mirror views",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/CONTINUAL/STORAGE",
+  "base_commit": "e259f27",
+  "random_selection": {
+    "date_utc": "2026-10-08",
+    "method": "Python secrets.randbelow(10)",
+    "draw_index_zero_based": 8,
+    "candidate_pool": ["MA-274", "MA-276", "MA-278", "MA-282", "MA-286", "MA-288", "MA-292", "MA-296", "MA-297", "MA-299"],
+    "selected": "MA-297",
+    "live_conflict_check": "git fetch origin --prune; no MA-297 branch found"
+  },
+  "hypothesis": "After a fixed shared-sparse-subspace discovery step, a per-task Mirror coordinate over retained shared atoms preserves aligned tasks with lower serialized inference bytes than matched task-specific shared-basis coefficients; unrelated tasks require private residual capacity.",
+  "physical_object": "One frozen shared linear map plus one discovered frozen sparse feature basis",
+  "mirror_coordinate": "One learned rotation angle per task over a pair of shared sparse atoms",
+  "logical_multiplicity": "Four sequential task-specific linear functions sharing the same sparse atoms",
+  "prior_art_refs": ["PA30", "PA16"],
+  "controls": ["shared discovered basis without task code (SETA-style shared-only)", "ordinary per-task coefficients on the exact same shared atom pairs", "matched low-rank residual", "independent full task weights"],
+  "task_stream": "Five known tasks: task 0 establishes shared physical weights; four sequential tasks train with frozen base and frozen discovered basis. Aligned teachers are rotations of paired shared atoms; independent teachers have independently sampled maps. Task IDs supplied at inference and charged.",
+  "development": {
+    "worlds_or_seeds": [29701, 29702],
+    "learning_rate_candidates": [0.003, 0.01],
+    "support_pair_candidates": [1, 2, 4],
+    "selection_metric": "mean held-out task MSE at final task across methods and both task families; bytes and retention are preregistered tie-breakers",
+    "examples_per_task": 64,
+    "updates_per_new_task": 200,
+    "batch_size": 64
+  },
+  "fresh": {"worlds_or_seeds": [29711, 29712, 29713], "locked_before_access": true, "examples_per_task": 64, "updates_per_new_task": 200},
+  "storage": {
+    "authority": "actual deterministic serialized inference payload bytes",
+    "codec": "binary tensor-record codec charges field names, method/task metadata, dtype, shape and raw bytes",
+    "paid_objects": ["shared weights", "shared sparse basis", "Mirror angle codes", "ordinary shared-basis coefficients", "residual factors", "private full weights", "task IDs", "indices", "codec headers and metadata"],
+    "optimizer_state": "reported separately as resumable checkpoint bytes"
+  },
+  "compute": {"report_examples": true, "report_optimizer_updates": true, "report_active_MAC_proxy": true, "report_wall_time": true, "report_inference_throughput": true},
+  "success_gate": "On every fresh aligned world, Mirror mean seen-task MSE <=1.10x matched ordinary shared-basis coefficient control, prior-task MSE increase <=0.01, and incremental inference bytes <=0.5x coefficient control. Mirror-specific result additionally requires a quality/byte frontier improvement over that native coefficient control.",
+  "failure_gate": "Mirror misses the aligned quality/retention gate or is not better than the same-basis ordinary coefficient control at matched bytes/compute.",
+  "boundaries": ["Synthetic known-task sparse-linear stream", "Fixed-update screen, not capacity", "Does not reproduce SETA routing or its full sparse discovery algorithm", "Independent tasks test the private-parameter boundary" ]
+}
