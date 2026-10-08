@@ -47,7 +47,7 @@ def meta_train(w,seed,method,outer_lr):
 def build_encoder(state):
  e=nn.Sequential(nn.Linear(D,16),nn.Tanh(),nn.Linear(16,2));e.load_state_dict(state);return e
 def payload(method,w,task,base,enc_state,basis,code):
- return {'experiment':'MA-443','method':method,'world':w,'task':task,'base':base,'encoder_state':enc_state,'basis':basis if method=='leo' else torch.empty(0),'code':code if code is not None else torch.empty(0),'format':'ma443-task-payload-v1'}
+ return {'experiment':'MA-443','method':method,'world':w,'task':task,'base':base,'basis':basis if method=='leo' else torch.empty(0),'code':code if code is not None else torch.empty(0),'format':'ma443-task-payload-v1'}
 def evaluate(base,enc_state,basis,method,w,task,seed,steps,lr,save_path=None):
  encoder=build_encoder(enc_state) if enc_state else nn.Identity();sx,sy=samples(w,task,8,seed+311);qx,qy=samples(w,task,128,seed+771);t0=time.perf_counter();code=adapt(method,base,encoder,basis,sx,sy,steps,lr)
  with torch.no_grad():err=((qx@eff(method,base,code,basis)-qy).square().mean().sqrt()/(qy.square().mean().sqrt()+1e-12)).item()
@@ -72,12 +72,18 @@ def main():
      selected[method]=min(OUTER_LRS,key=lambda lr:sum(scores[lr])/len(scores[lr]))
     else:
      base,enc,basis,meta_wall=meta_train(w,seed,method,selected[method])
+     encoder_path=PAY/f'meta_{w}_{seed}_{method}_encoder.pt' if enc else None
+     if encoder_path:
+      torch.save({'method':method,'world':w,'state':enc},encoder_path);eb=encoder_path.stat().st_size;eh=hashlib.sha256(encoder_path.read_bytes()).hexdigest()
+     else: eb=0;eh='';encoder_path=None
      for task in range(20):
       for steps in STEPS:
-       path=PAY/f'fresh_{w}_{seed}_{task}_{method}.pt' if steps==5 else None
+       path=PAY/f'fresh_{w}_{seed}_{task}_{method}_{steps}.pt'
        err,wall,nbytes,h,p=evaluate(base,enc,basis,method,w,task,seed+100,steps,INNER_LR,path)
-       enc_bytes=sum(t.numel()*t.element_size() for t in enc.values()); amortized={n:round(nbytes+enc_bytes/max(1,n)) for n in [1,20,100]}
-       rows.append({'condition':'fresh','world_or_seed':f'{w}-{seed}-{task}-{steps}','method':method,'serialized_bytes':nbytes,'train_tokens_or_examples':META_UPDATES*TASKS_PER_BATCH*16,'optimizer_updates':META_UPDATES,'active_compute_proxy':f'{steps*D*2} MAC/inner-adapt + encoder','wall_time_s':round(wall,6),'primary_metric':'query_NRMSE','primary_value':err,'secondary_metric':'refinement_steps','secondary_value':steps,'status_note':f'outer_lr={selected[method]}; inner_lr={INNER_LR}; amortized_bytes={amortized}; encoder_bytes={enc_bytes}; meta_wall={meta_wall:.4f}; hash={h}; payload={p}' if h else f'outer_lr={selected[method]}; inner_lr={INNER_LR}; amortized_bytes={amortized}; encoder_bytes={enc_bytes}; meta_wall={meta_wall:.4f}'})
+       amortized={n:round(nbytes+eb/max(1,n)) for n in [1,20,100]}
+       note=f'outer_lr={selected[method]}; inner_lr={INNER_LR}; amortized_bytes={amortized}; encoder_bytes={eb}; meta_wall={meta_wall:.4f}; hash={h}; payload={p}'
+       if encoder_path: note+=f'; encoder_hash={eh}; encoder_path={encoder_path.relative_to(REPO)}'
+       rows.append({'condition':'fresh','world_or_seed':f'{w}-{seed}-{task}-{steps}','method':method,'serialized_bytes':nbytes,'train_tokens_or_examples':META_UPDATES*TASKS_PER_BATCH*16,'optimizer_updates':META_UPDATES,'active_compute_proxy':f'{steps*D*2} MAC/inner-adapt + encoder','wall_time_s':round(wall,6),'primary_metric':'query_NRMSE','primary_value':err,'secondary_metric':'refinement_steps','secondary_value':steps,'status_note':note})
  if a.phase=='development':
   selected['inner_lr']=INNER_LR;(OUT/'development_selection.json').write_text(json.dumps({'outer_lr_by_method':selected,'inner_lr':INNER_LR,'rule':'lowest mean query NRMSE across development tasks and 0/1/3/5 updates','fresh_worlds_not_accessed':True},indent=2)+'\n')
  (OUT/f'{a.phase}_runs.jsonl').write_text(''.join(json.dumps(r)+'\n' for r in rows));print(json.dumps({'phase':a.phase,'selected':selected,'rows':len(rows)},indent=2))
