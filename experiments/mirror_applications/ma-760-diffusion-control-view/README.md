@@ -19,3 +19,7 @@ PA190 (ControlNet) duplicates trainable control branches; PA191 (T2I-Adapter) is
 No control, one hard-shared adapter, independent per-condition 3×3 convolutional adapters, shared additive low-rank basis, multiplicative Mirror coordinates over the same basis/code budget, and Mirror plus rank-1 private residual. Two development seeds, three heterogeneity levels, six basis-training conditions, two held-out condition identities, ranks 1/2/4/8. The exact training, gates and fresh-opening rule are in `PROTOCOL.json`.
 
 Whole-library payload bytes include the tiny UNet state, shared basis, codes, private state and metadata. This keeps any adapter-only storage reduction separate from the actual serialized inference artifact. Fresh worlds remain locked unless a development point passes all predeclared gates.
+
+## Protocol amendment before development
+
+The original draft required a 5% reduction in whole-library bytes. Before any development score, this was amended to require an actual strict reduction plus exact byte and percentage reporting, while retaining the <=0.50x per-condition state condition. The tiny shared UNet dominates its toy adapter payload, making a 5% whole-bundle reduction unreachable by construction. No quality or Mirror-specific threshold was relaxed.

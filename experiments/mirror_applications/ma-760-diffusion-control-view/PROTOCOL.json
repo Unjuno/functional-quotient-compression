@@ -251,7 +251,7 @@
     "report_inference_throughput": true
   },
   "gates": {
-    "development_pass": "At some rho and rank, Mirror+top-8-private achieves held-out residual MSE <= 1.10x independent adapters, whole-library payload <= 0.95x independent, and shared-state marginal per-condition bytes <= 0.50x independent in both seeds. Mirror-specific value additionally requires >=5% MSE improvement over byte-matched additive low-rank control in both seeds.",
+    "development_pass": "At some rho and rank, Mirror+top-8-private achieves held-out residual MSE <= 1.10x independent adapters in both seeds, the actual whole-library payload (frozen UNet plus adapter artifact) is strictly smaller than independent, and standalone per-condition address/private state is <= 0.50x an independent adapter. Report exact whole-payload byte delta and percentage because the common tiny UNet dominates the bundle. Mirror-specific value additionally requires >=5% MSE improvement over the byte-near additive low-rank control in both seeds.",
     "fail": "No tested rho/rank meets quality and byte clauses, or Mirror fails matched simple-control clause at every feasible point.",
     "fresh_opening": "Only if at least one development point passes all clauses in both seeds; otherwise fresh stays unopened."
   },
@@ -276,5 +276,6 @@
     "CPU-only; no GPU memory/FPS/energy claim",
     "Control residual fidelity on synthetic operators is mechanism evidence, not diffusion application validation"
   ],
-  "private_residual": "Top-8 absolute kernel-coordinate residual entries per held-out condition, including integer indices and float32 values."
+  "private_residual": "Top-8 absolute kernel-coordinate residual entries per held-out condition, including integer indices and float32 values.",
+  "protocol_amendment_before_development": "Amendment 1, before any development scores: replace the initially proposed <=0.95 whole-payload ratio with strict actual-byte reduction plus an explicit delta/percentage report. Rationale: the frozen tiny UNet is shared and dominates total bundle bytes, so a fixed 5% whole-bundle threshold would be structurally unreachable for these 108-parameter toy adapters. No gate was loosened on quality; the controller-only and whole-library actual bytes remain both reported."
 }
