@@ -6,11 +6,11 @@ Prior art: PA191 — T2I-Adapter
 
 ## H — falsifiable hypothesis
 
-A shared adapter matrix with a small control-specific Givens coordinate can represent multiple aligned control adapters and held-out additive compositions with less actual serialized state than independent adapters. Compare with an equal-size unrestricted basis mixture before making a Mirror-specific claim.
+A shared adapter matrix with a small control-specific Givens coordinate can represent multiple aligned control adapters and held-out additive compositions with less actual serialized state than independent adapters. Compare with unrestricted two-basis synthesis before making a Mirror-specific claim.
 
 ## T — frozen scope
 
-This first screen isolates the adapter mechanism in a synthetic 8D latent regression because the available container is CPU-only and no pretrained diffusion checkpoint is provisioned. Four control types are trained individually; all six two-control sums are held out for audit. The aligned world uses four Givens views of one matrix; the boundary world uses four independent matrices. Controls are independent adapters, an equal-size two-matrix basis mixture, per-control FiLM, and hard sharing. Exact conditions/seeds/gates are in `PROTOCOL.json`; Draw30 replay is in `source/draw30_exclusions.json`.
+This first screen isolates the adapter mechanism in a synthetic 8D latent regression because the available container is CPU-only and no pretrained diffusion checkpoint is provisioned. Four control types are trained individually; all six two-control sums are held out for audit. The aligned world uses four Givens views of one matrix; the boundary world uses four independent matrices. Controls are independent adapters, unrestricted two-matrix basis mixing, per-control FiLM, and hard sharing. Exact conditions/seeds/gates are in `PROTOCOL.json`; Draw30 replay is in `source/draw30_exclusions.json`.
 
 ## D — decision
 
