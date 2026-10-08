@@ -1,0 +1,80 @@
+{
+  "experiment_id": "MA-403",
+  "title": "Token-wise Mirror modulation generator",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/RUNTIME",
+  "base_commit": "5ffe49d",
+  "hypothesis": "A shared frozen feature block with a token-position-generated 8-angle Givens View can represent held-out token-dependent transforms with lower payload bytes and error than token-wise FiLM, while the full-affine generator provides a higher-cost control.",
+  "physical_object": "One shared frozen nonlinear 16D feature block applied at every token.",
+  "mirror_coordinate": "Eight rotation angles generated as affine functions of scalar token position p; 16 generator coefficients total.",
+  "logical_multiplicity": "A continuum of token-specific logical feature transforms from one shared feature block.",
+  "prior_art_refs": [
+    "PA63",
+    "PA64"
+  ],
+  "controls": [
+    "global FiLM scale+bias (32 coefficients)",
+    "token-wise affine FiLM generator: scale and bias each affine in p (64 coefficients)",
+    "token-wise rank-one residual with u(p),v(p) affine in p (64 coefficients)",
+    "Mirror Givens angle generator (16 coefficients)",
+    "full-affine generator: matrix and bias affine in p (544 coefficients)"
+  ],
+  "task": {
+    "feature_dimension": 16,
+    "input_dimension": 16,
+    "angles": 8,
+    "position_train_range": [
+      0,
+      0.8
+    ],
+    "position_test_range": [
+      0.8,
+      1.0
+    ],
+    "target": "For each token, apply a product of eight adjacent-pair Givens rotations with angle_j(p)=intercept_j+slope_j*p to the shared frozen nonlinear feature vector."
+  },
+  "development": {
+    "worlds_or_seeds": [
+      40301,
+      40302
+    ],
+    "examples_per_seed": 4096,
+    "updates": 400,
+    "batch_size": 1024,
+    "selection_metric": "held-out-position normalized RMSE; all methods use same token positions and inputs."
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      40311,
+      40312,
+      40313
+    ],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "format": "deterministic NPZ with FP16 weights/coefficients plus UTF-8 metadata",
+    "paid_objects": [
+      "shared feature block",
+      "all conditional generator coefficients or residual factors",
+      "metadata and reconstruction state"
+    ],
+    "replay_required": true
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true,
+    "report_inference_throughput": true,
+    "measurement": "Eager CPU single-thread; 10 warmup and 25 timed calls on batch 1024; include code generation and transform."
+  },
+  "success_gate": "Both development seeds: Mirror held-out NRMSE <=0.02 and <=0.10x token-wise FiLM NRMSE; payload <=0.75x token-wise FiLM and <=0.10x full-affine generator; throughput >=0.80x token-wise FiLM. Pass qualifies only for fresh confirmation.",
+  "failure_gate": "FAIL if any full success gate criterion is missed in either seed, or if global/token-wise FiLM matches quality within 5% at byte ratio <=1.10.",
+  "boundaries": [
+    "Synthetic mechanism screen only; no natural language or Transformer claim.",
+    "Held-out positions test extrapolation, not random interpolation.",
+    "The teacher is structured to vary smoothly with token position; no arbitrary token-wise function capacity claim.",
+    "Fresh remains sealed unless both development seeds pass."
+  ]
+}
