@@ -1,0 +1,76 @@
+{
+  "schema_version": 3,
+  "experiment_id": "MA-1188",
+  "status": "UNTESTED",
+  "stage": "DESIGN_ONLY",
+  "plan_only": true,
+  "worker_claim": false,
+  "title": "Aurora shared latent multi-field Mirror decoder-bank compression",
+  "priority": "P1",
+  "execution_priority": "neutral-breadth; no queue rank",
+  "branch": "research/mirror-crossdomain-method-sweep-20261008",
+  "canonical_worker_branch": "research/mirror-application-worker-ready-20261007",
+  "native_reference": "https://www.nature.com/articles/s41586-025-09005-y",
+  "official_native_implementation": "https://github.com/microsoft/aurora",
+  "native_method": "Nature2025 Aurora pretrained heterogeneous geophysical 3D encoder + Swin processor + task-specific Perceiver decoder/fine-tune; Aurora already supports multiple forecast domains and autoregressive rollouts",
+  "prior_art_refs": [
+    "PA460",
+    "PA459",
+    "PA461"
+  ],
+  "nearest_existing_MA": [
+    "MA-1053",
+    "MA-1081",
+    "MA-1139",
+    "MA-1175"
+  ],
+  "hypothesis": "For multiple simultaneously available Earth-system fields at the same forecast lead step, Mirror-coded decoder bank reduces task-specific adaptation bytes while retaining native forecast quality at P95<=1.10; separate forecast horizons requiring autoregression must still pay their actual steps and cannot be counted as single-forward outputs.",
+  "shared_physical_object": "one native Aurora pretrained encoder+processor with field-specific decoders for atmosphere/waves/air quality and calibrated physical variable masks",
+  "mirror_insertion": "small field/pressure-level/horizon data-source role m on a shared, source-learned decoder basis; preserve per-variable physical unit scaling and missing-data masks",
+  "fixture": "CPU 16×16 shallow-water/advection diffusion fields (u,v,temperature,synthetic chemical tracer) over 4 regimes and K=4 target variables, 256 source patches, 128 dev and 256 fresh per independent weather regime; spatial train/dev/fresh and calendar-year holdout. Native stage uses AuroraSmallPretrained for API/memory debugging only; publication-grade lane pinned AuroraPretrained with ERA5/CAMS/HRES-WAM licensed data.",
+  "implementation_steps": "1. Reproduce native Aurora variable/pressure-level input channel masks and one-step output with author code; record no hidden rollout. 2. Train native per-variable original Perceiver decoder heads or official pretrained fine-tunes from identical source parent. 3. Fit a shared decoder basis and low-description m for each field (optionally grid cell class), with genuinely paid output projection, calibrations and physical unit conversions. 4. Compare native Aurora individual task heads/fine-tuned adapters, same-byte ordinary linear/FiLM/spectral shared heads, source-only low-rank LoRA, and structured m plus private correction. 5. Stress heldout years, source/data domain shifts, extreme events and missing variables. 6. Count full autoregressive calls for lead-time trajectories, real model HBM/offload and IO bottlenecks, one physical shared one-step processing path for simultaneous fields.",
+  "native_and_simple_controls": [
+    "Official native AuroraPretrained and original task fine-tuned domain-specific decoder",
+    "AuroraSmallPretrained only as debug, never strong full-model native comparison",
+    "Single unmodified pretrained Aurora processor + K ordinary native task-specific Perceiver heads",
+    "Same-byte ordinary linear/spectral shared decoder dictionary with FiLM/IA3",
+    "Simple climatology/persistence or numerical PDE solver per variable for skill score",
+    "Separate full per-field fine-tunes quality upper bound and quantized native adapter bank"
+  ],
+  "splits": {
+    "development": {
+      "seeds": [
+        11,
+        12,
+        13
+      ],
+      "purpose": "rank/LR only"
+    },
+    "fresh": {
+      "seeds": [
+        101,
+        102,
+        103,
+        104,
+        105
+      ],
+      "locked_before_use": true,
+      "never_tune": true,
+      "whole_task_units": true,
+      "run_all": true
+    },
+    "real_benchmark_requires_separate_frozen_split": true
+  },
+  "measurements": "temperature RMSE (K), wind RMSE (m/s), significant-wave-height RMSE (m), NO2/PM forecast errors (µg/m³), extreme event skill, lead-specific rollout error, total resident/serialized decoder+model bytes, GPU/CPU seconds and IO bytes",
+  "compute_resources": "CPU small PDE smoke only; official Aurora pretrain/fine-tune released with package microsoft-aurora; full 0.25° models require substantial accelerator RAM; honest BLOCKED if unavailable.",
+  "gates": {
+    "PASS": "In >=4/5 independent heldout physical regimes, Mirror joint decoder meets native per-variable quality within 5% relative native-metric tolerance on all primary fields, saves >=20% paid decoder bank bytes at <=1.10 P95 and improves over same-byte linear shared decoders; no misleading reuse of autoregressive steps.",
+    "FAIL": "Native Perceiver multi-field decoding already saturates quality-byte Pareto, converting field units artificially improves aggregate score, distinct horizons wrongly counted as same forward, or GPU IO dominates and Mirror introduces instability.",
+    "UNCERTAIN": "native unverified, missing performance data, contaminating test data or threshold uncertainty spans zero"
+  },
+  "counterexample": "Aurora already shares most expensive encoder/processor and has heterogeneous decoders. Mirror may compress a small adapter only, with negligible whole checkpoint reduction and no forecast speed gain; strong atmospheric physics may require separate output channels.",
+  "uncertainty": "Temporal autocorrelation and cross-field covariance, ERA5 assimilation leakage, climatological nonstationarity, pressure levels, missing masks, target physical units and autoregressive error accumulation; bootstrap whole yearly regime events.",
+  "actual_training": false,
+  "existing_model_perf_claims": "none",
+  "dedup_checked": true
+}

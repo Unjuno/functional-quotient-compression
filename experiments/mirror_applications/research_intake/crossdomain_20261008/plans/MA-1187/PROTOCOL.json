@@ -1,0 +1,78 @@
+{
+  "schema_version": 3,
+  "experiment_id": "MA-1187",
+  "status": "UNTESTED",
+  "stage": "DESIGN_ONLY",
+  "plan_only": true,
+  "worker_claim": false,
+  "title": "DISCO neural-operator splitting with low-description Mirror composition codes",
+  "priority": "P0",
+  "execution_priority": "neutral-breadth; no queue rank",
+  "branch": "research/mirror-crossdomain-method-sweep-20261008",
+  "canonical_worker_branch": "research/mirror-application-worker-ready-20261007",
+  "native_reference": "https://proceedings.mlr.press/v306/serrano26a.html",
+  "official_native_implementation": "https://github.com/LouisSerrano/neural-operator-splitting",
+  "native_method": "DISCO ICML2025 learns small evolution operators emitted from trajectory using a hypernetwork; ICML2026 neural operator splitting already searches test-time operator compositions without weight updates. 'Compose learned physics rules' is native; Mirror must improve code storage/execution at equal dynamics fidelity",
+  "prior_art_refs": [
+    "PA458",
+    "PA462",
+    "PA459",
+    "PA461"
+  ],
+  "nearest_existing_MA": [
+    "MA-731",
+    "MA-732",
+    "MA-818",
+    "MA-1160",
+    "MA-1173"
+  ],
+  "hypothesis": "A Mirror-structured compact operator dictionary could reduce paid per-equation evolution/operator code without losing native DISCО/test-time-splitting PDE rollout fidelity, and beat ordinary same-byte low-rank operator codes and Strang splitting under noncommuting physics; exact group symmetries alone cannot create unseen dynamics.",
+  "shared_physical_object": "native DISCO source-trained dictionary of small learned physical update operators plus its original test-time search/splitting method",
+  "mirror_insertion": "small compositional m encoding source operator coefficients or operator-pair condition and schedule in a shared decoder, explicitly preserving operator *order* and nonlinear solver steps",
+  "fixture": "1D periodic spatial state n=16/64, source advection A, diffusion B and spatial heterogeneous reaction C, operators with explicit units 1/s; 8 source coefficient combinations and heldout unseen A+B+C regimes, dt={0.05,0.1,0.2}s and 1/10/100 steps. Start with MCX Stage0's exact expm Lie/Strang/BCH controls and add learned low-rank operator decoder code (K={2,4,8}); freeze train PDE trajectories and fresh equations by coefficient family. Natural stage official DISCO dataset/code, ERA5 not conflated.",
+  "implementation_steps": "1. Reproduce native DISCO operator hypernetwork output and 2026 test-time beam/ODE operator split with same operator source and beam width; source trajectory identities separated from future test dynamics. 2. Compress native learned dictionary with source-trained low-rank/structured Mirror m and identical native search. 3. Compare full native model, ordinary low-rank operator dictionary, direct operator-code quantization, parallel additive mixing, exact native Strang/Lie splitting, learned task-conditioned FNO/GEPS/MPP/ZEBRA where released. 4. Evaluate unseen coefficients, complete physical rollouts, conservation/stability (when appropriate), task error versus true solver and active evaluation steps, actual serialized operator dictionary+hypernet+code bytes. 5. Prohibit claiming single forward when K sequential nonlinear physics steps remain.",
+  "native_and_simple_controls": [
+    "Original DISCO native hypernetwork operator and dictionary",
+    "Native 2026 neural-operator test-time splitting method incl beam search",
+    "Lie and stronger Strang/symmetric splitting and BCH/commutator corrected reference where solvable",
+    "Ordinary same-byte tensor/SVD linear code dictionary and grouped decoder",
+    "FNO/GEPS/MPP/Zebra native PDE prediction with comparable task/prompt data",
+    "Independent trained per-PDE operator and full numerical solver upper fidelity reference"
+  ],
+  "splits": {
+    "development": {
+      "seeds": [
+        11,
+        12,
+        13
+      ],
+      "purpose": "rank/LR only"
+    },
+    "fresh": {
+      "seeds": [
+        101,
+        102,
+        103,
+        104,
+        105
+      ],
+      "locked_before_use": true,
+      "never_tune": true,
+      "whole_task_units": true,
+      "run_all": true
+    },
+    "real_benchmark_requires_separate_frozen_split": true
+  },
+  "measurements": "relative L2 state/rollout error vs true PDE, conserved mass/energy residual with original SI physical units, extrapolation at heldout PDE coefficients, actual dictionary/model/code bytes and beam search compute, latency P50/P95 and stability through 100 steps",
+  "compute_resources": "CPU numpy/scipy exact linear n16 stage0 done; CPU small torch learned operator stage1; full DISCO neural operator GPU and released datasets stage2. Benchmark GPU synchronously if claiming acceleration.",
+  "gates": {
+    "PASS": "At >=4/5 heldout PDE families, <=1.05x native test-time splitting true solver relative error, total model+operator bank bytes <=0.85 native (or >=20% operator-bank saving with honestly small whole-model improvement), <=1.10x P95, and strict superiority over Strang+ordinary low-rank code at matched accuracy and compute.",
+    "FAIL": "Native symmetric splitting or ordinary low-rank dictionary dominates, order effects ignored or new dynamics inferred from target audit trajectory, conservation fails, step count/memory hidden; synthetic commutator correction alone is not a PASS.",
+    "UNCERTAIN": "native unverified, missing performance data, contaminating test data or threshold uncertainty spans zero"
+  },
+  "counterexample": "Operator splitting and dictionary composition are mature numerical/learning methods; a Mirror code may be only an inconvenient coordinate of the original dictionary, while noncommuting dynamics demand more active operator evaluations than a compact code suggests.",
+  "uncertainty": "PDE solver discretization error, stability, spatial boundary conditions, learned operator inductive bias, choice of time step, noncommuting residual, extrapolation outside training coefficients; statistical unit is a PDE family, not grid cells.",
+  "actual_training": false,
+  "existing_model_perf_claims": "none",
+  "dedup_checked": true
+}

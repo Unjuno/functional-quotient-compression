@@ -1,0 +1,76 @@
+{
+  "schema_version": 3,
+  "experiment_id": "MA-1184",
+  "status": "UNTESTED",
+  "stage": "DESIGN_ONLY",
+  "plan_only": true,
+  "worker_claim": false,
+  "title": "TabPFN dataset-context functional Mirror post-calibration code",
+  "priority": "P1",
+  "execution_priority": "neutral-breadth; no queue rank",
+  "branch": "research/mirror-crossdomain-method-sweep-20261008",
+  "canonical_worker_branch": "research/mirror-application-worker-ready-20261007",
+  "native_reference": "https://www.nature.com/articles/s41586-024-08328-6",
+  "official_native_implementation": "https://github.com/PriorLabs/TabPFN",
+  "native_method": "Nature 2025 TabPFN original prior-data fitted transformer, in-context dataset posterior predictive inference and default native ensemble/preprocessing; native TabPFN can already predict across unseen datasets without retraining",
+  "prior_art_refs": [
+    "PA454",
+    "PA455",
+    "PA453"
+  ],
+  "nearest_existing_MA": [
+    "MA-416",
+    "MA-624",
+    "MA-1159",
+    "MA-1175"
+  ],
+  "hypothesis": "A learned low-description context m can improve calibrated heldout tabular predictions without per-dataset fine-tuning or extra backbone copies, relative to native TabPFN preprocessing/ensembling and equally compact temperature/vector/Dirichlet calibration. A posterior-only View cannot recover dataset information erased in the native logits.",
+  "shared_physical_object": "one already trained TabPFN checkpoint with context-dependent in-context posterior and readout (model from pinned release; no copying the checkpoint per dataset)",
+  "mirror_insertion": "tiny dataset/support-conditioned Mirror calibration/readout code m applied to native posterior logits or permitted intermediate features; no unaccounted second TabPFN context forward",
+  "fixture": "Source-conditioned 24-feature binary tasks with 10 distinct synthetic likelihood/shift families, 256 labeled support, 256 development and 1024 fresh samples per task; permute features and inject unobserved confounders. Train support-to-code generator only on allowed source tasks; freeze before five fresh entire tasks. For real tasks, use OpenML IDs with group/time splits and mandatory CatBoost/XGBoost.",
+  "implementation_steps": "1. Lock TabPFN model checkpoint, native preprocessing and in-context classifier/regressor API. 2. Run official native context prediction once per task; cache logits and optionally legally exposed feature summaries. 3. Train dataset-level m from support-only features/labels and original outputs, with tiny rank/diagonal/orthogonal charts. 4. Compare to native TabPFN native ensembles and repeated context fit, temperature scaling, Platt, vector/Dirichlet calibration, isotonic, and fine-tuned low-rank readout where authorized. 5. Measure ECE/Brier/NLL/accuracy on entirely heldout datasets and task variants and count all dataset embeddings, calibration generator, predictor workload.",
+  "native_and_simple_controls": [
+    "Official native TabPFN default classifier/ensemble and preprocessing",
+    "Native TabPFN per-dataset temperature, Platt, vector and Dirichlet calibration",
+    "Same-byte linear or low-rank logit calibration and feature-conditioned gate",
+    "CatBoost/XGBoost strong tabular predictor without the foundation checkpoint",
+    "Native TabM efficient tabular ensemble with chronological holdout",
+    "TabPFN identical logits with shuffled task context; target-label leakage null"
+  ],
+  "splits": {
+    "development": {
+      "seeds": [
+        11,
+        12,
+        13
+      ],
+      "purpose": "rank/LR only"
+    },
+    "fresh": {
+      "seeds": [
+        101,
+        102,
+        103,
+        104,
+        105
+      ],
+      "locked_before_use": true,
+      "never_tune": true,
+      "whole_task_units": true,
+      "run_all": true
+    },
+    "real_benchmark_requires_separate_frozen_split": true
+  },
+  "measurements": "dataset-weighted NLL, ECE, Brier, AUROC and worst-dataset shift; support count, amortized permanent task code bytes, paid generator size, input/context forward count, P95 and OOD",
+  "compute_resources": "TabPFN official release/version licensed checkpoint. CPU only tiny tasks, real TabPFN checkpoint may need GPU; mark BLOCKED when checkpoint/access incompatible. Record any model version drift.",
+  "gates": {
+    "PASS": "On >=4/5 unseen datasets, Mirror m beats strongest native TabPFN calibration at same allowed support, improves paired NLL >=0.01 nat/example without >0.005 AUROC regression and source-model plus generator+K codes remains smaller than K independently tuned native adapters; no in-context extra forward.",
+    "FAIL": "Temperature/vector/Dirichlet or ordinary linear head matches or dominates, m trained using heldout task labels or dataset ID leak, TabPFN native in-context output already optimal or raw posterior erases needed information.",
+    "UNCERTAIN": "native unverified, missing performance data, contaminating test data or threshold uncertainty spans zero"
+  },
+  "counterexample": "TabPFN is already an amortized conditional predictor. A new 'Mirror' temperature parameter is just ordinary calibration, not extra independent function. Its heavy in-context attention may depend on entire support and cannot generally be reused across different datasets.",
+  "uncertainty": "Small tabular dataset sampling error, label prevalence, support/test contamination and model calibration, hyperparameter search/posterior logit degeneracy; confidence group by whole datasets.",
+  "actual_training": false,
+  "existing_model_perf_claims": "none",
+  "dedup_checked": true
+}

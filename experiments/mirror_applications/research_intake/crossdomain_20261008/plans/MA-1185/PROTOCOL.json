@@ -1,0 +1,75 @@
+{
+  "schema_version": 3,
+  "experiment_id": "MA-1185",
+  "status": "UNTESTED",
+  "stage": "DESIGN_ONLY",
+  "plan_only": true,
+  "worker_claim": false,
+  "title": "DINOv3 multi-dense-task compressed Mirror head bank",
+  "priority": "P1",
+  "execution_priority": "neutral-breadth; no queue rank",
+  "branch": "research/mirror-crossdomain-method-sweep-20261008",
+  "canonical_worker_branch": "research/mirror-application-worker-ready-20261007",
+  "native_reference": "https://arxiv.org/abs/2508.10104",
+  "official_native_implementation": "https://github.com/facebookresearch/dinov3",
+  "native_method": "DINOv3 (Meta 2025) frozen high-quality image patch features, Gram anchoring and native linear or Mask2Former segmentation decoder; official segmentation and depth heads are meaningful controls",
+  "prior_art_refs": [
+    "PA456",
+    "PA455"
+  ],
+  "nearest_existing_MA": [
+    "MA-351",
+    "MA-1100",
+    "MA-1024",
+    "MA-1081"
+  ],
+  "hypothesis": "After source-family learning of one shared dense readout basis over frozen DINOv3 features, learned m can replace much of the stored per-task decoder state while preserving useful independent segmentation/depth/normal outputs; cheaper simple native linear decoder basis is mandatory null.",
+  "shared_physical_object": "one unmodified frozen DINOv3 ConvNeXt-Tiny or ViT-small feature pyramid evaluated once for each image; task decoder family for semantic classes, depth bins, surface normals or cloud masks",
+  "mirror_insertion": "tiny task/scale-specific Mirror m operating in shared dense feature/readout basis with separate **paid** output-shape projection per task; not a rotation of incompatible semantic outputs",
+  "fixture": "CPU 16×16 synthetic images with geometric shape segmentation labels, depth ramps and oriented normal regression; 4/5 independent target tasks with overlap alpha in {0,.5,1}; 128 source scenes, 256 dev, 512 fresh, whole scene-grammar split. Use one shared 32-channel 4-level feature encoder; no pretrained-image claim. Natural stage pinned DINOv3 ConvNeXt Tiny and four real dense-label domains with scene/site-disjoint splits.",
+  "implementation_steps": "1. Verify official frozen DINOv3 multi-layer features and original linear/Mask2Former decoder exactly. 2. Train native per-task decoder and DPT-style depth head under allowed source/task budget, no Mirror. 3. Learn a source-only common feature decoder dictionary and tiny task m (sign/Householder/Givens/diagonal) with task-specific final linear map and units declared. 4. Compare full native outputs, ordinary same-byte low-rank/tensorized heads, one shared trunk K independent native linear heads, task-conditioning FiLM, and proposed m+private residual. 5. Evaluate spatial heldout scenes, segmentation boundaries, depth ranking and normal angles; count all image encoder/decoder bytes and actual single-backbone calls.",
+  "native_and_simple_controls": [
+    "DINOv3 original frozen backbone with independently trained native linear segmentation/depth heads",
+    "Native DINOv3 Mask2Former and dense decoder when official runnable",
+    "Shared feature pyramid with ordinary K linear readouts (single encoder forward)",
+    "Same-byte rank-k/tensorized low-rank native head dictionary, FiLM and IA3",
+    "Independent task decoders and a full per-task fine-tuned backbone as upper reference",
+    "Random feature code, shuffled task labels and segmentation-only ablation"
+  ],
+  "splits": {
+    "development": {
+      "seeds": [
+        11,
+        12,
+        13
+      ],
+      "purpose": "rank/LR only"
+    },
+    "fresh": {
+      "seeds": [
+        101,
+        102,
+        103,
+        104,
+        105
+      ],
+      "locked_before_use": true,
+      "never_tune": true,
+      "whole_task_units": true,
+      "run_all": true
+    },
+    "real_benchmark_requires_separate_frozen_split": true
+  },
+  "measurements": "segmentation mIoU/Dice, depth AbsRel/RMSE, normal cosine/angle (rad), worst task, genuine extra function diversity, total model+head bytes, GPU/CPU P50/P95 and actual backbone calls",
+  "compute_resources": "CPU synthetic first; official DINOv3 code and licensed pretrained checkpoints required for natural; e.g. ConvNeXt Tiny to fit limited GPU; record license and pretrained hash.",
+  "gates": {
+    "PASS": "In >=4/5 fresh disjoint scene worlds, preserve task quality within <=0.02 mIoU or +0.02 relative depth RMSE of best native one-backbone multihead, reduce paid task-decoder payload >=20% with <=1.10x P95 and a Pareto win over ordinary equal-byte decoder basis.",
+    "FAIL": "Native shared-backbone independent heads are faster/more accurate at same bytes, m only moves a semantic class color/coordinate without improving heldout prediction, feature normalization/preprocessing differs across methods, or dense native decoder GPU dominates.",
+    "UNCERTAIN": "native unverified, missing performance data, contaminating test data or threshold uncertainty spans zero"
+  },
+  "counterexample": "DINOv3 already supports frozen single-backbone multipurpose predictions, so one heavy vision forward itself is not new. Task-specific output geometry varies; code may only compress a small head while baseline encoder dominates physical storage.",
+  "uncertainty": "Class imbalance, spatially correlated pixels and scenes, geometry-specific target units, image patch resolution and augmentation leakage. Bootstrap by whole scene and sensor domain.",
+  "actual_training": false,
+  "existing_model_perf_claims": "none",
+  "dedup_checked": true
+}

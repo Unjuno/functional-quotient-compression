@@ -1,0 +1,75 @@
+{
+  "schema_version": 3,
+  "experiment_id": "MA-1186",
+  "status": "UNTESTED",
+  "stage": "DESIGN_ONLY",
+  "plan_only": true,
+  "worker_claim": false,
+  "title": "Caduceus parity-aware task Mirror codes beyond RC symmetry orbit",
+  "priority": "P1",
+  "execution_priority": "neutral-breadth; no queue rank",
+  "branch": "research/mirror-crossdomain-method-sweep-20261008",
+  "canonical_worker_branch": "research/mirror-application-worker-ready-20261007",
+  "native_reference": "https://proceedings.mlr.press/v235/schiff24a.html",
+  "official_native_implementation": "https://github.com/kuleshov-group/caduceus",
+  "native_method": "Caduceus ICML2024 bidirectional reverse-complement equivariant MambaDNA; native RC parameter sharing and strand-consistency already built into model, so orientation transform is NOT new functional multiplicity",
+  "prior_art_refs": [
+    "PA457",
+    "PA453"
+  ],
+  "nearest_existing_MA": [
+    "MA-335",
+    "MA-332",
+    "MA-1175",
+    "MA-546"
+  ],
+  "hypothesis": "By separating group-symmetry-equivalent orientation Views from task-different signed even/odd functional codes, one RC equivariant representation can support multiple biological outputs with smaller task-specific bank than native independent task heads without breaking required RC parity. Generic unsigned global rotation may violate DNA orientation labels.",
+  "shared_physical_object": "one frozen native Caduceus/biMambaDNA feature state with RC symmetry representation rho(C) and separate permitted functional readout task dimensions",
+  "mirror_insertion": "short assay/task m restricted to RC-even/RC-odd feature blocks to generate genuinely different motif/variant outputs; symmetry-only m_rc is explicit M0",
+  "fixture": "DNA length 256 over A/C/G/T (16-base RC pilot tests already completed). Generate 4 motif presence assays (RC-invariant), 2 strand-specific orientation assays (RC-odd sign/change), 2 independent off-orbit motif interaction assays. 3 development genome families and 5 fresh entirely unseen motif/genome backgrounds. Distinct chromosome/family split for real ENCODE/GTEx sequence tasks; reverse complement doublets remain within same split.",
+  "implementation_steps": "1. Unit-test RC map R²=I, native equivariant feature rho(R), parity of each task label. 2. Create trainable tiny bidirectional conv/SSM source, then apply official Caduceus frozen encoder when authorized. 3. Learn source-only shared even/odd circuit bank and small task m per motif/assay; compare exact RC orbit only, random latent m, same-byte linear task readouts, native RC-equivalent classifier, post-hoc reverse-complement augmentation/conjoining and independent per-task heads. 4. Audit both forward and RC test sequences, wrong-strand negative controls, heldout chromosome accuracy, NLL, true physical bytes and actual forward count. 5. Any RC-equivalent output is not counted as a distinct useful task.",
+  "native_and_simple_controls": [
+    "Native Caduceus equivariant model and task-specific classifier",
+    "Native RCPS or reverse-complement augmentation plus post-hoc conjoining",
+    "One RC equivariant shared encoder with ordinary K linear assay heads",
+    "Same-byte source-only task-feature PCA/SVD factorization, diagonal/FiLM m",
+    "Non-equivariant BiMamba/ConvDNA classifier with RC test-time averaging",
+    "Shuffled antisymmetric label parity and false RC input reference as negative controls"
+  ],
+  "splits": {
+    "development": {
+      "seeds": [
+        11,
+        12,
+        13
+      ],
+      "purpose": "rank/LR only"
+    },
+    "fresh": {
+      "seeds": [
+        101,
+        102,
+        103,
+        104,
+        105
+      ],
+      "locked_before_use": true,
+      "never_tune": true,
+      "whole_task_units": true,
+      "run_all": true
+    },
+    "real_benchmark_requires_separate_frozen_split": true
+  },
+  "measurements": "assay AUROC/AUPRC, motif/variant effect rank, per-assay worst, orientation equivariance error (FP64 and deploy dtype), correctly distinct task Jacobian rank, bytes and P95 per DNA sequence",
+  "compute_resources": "CPU numpy preliminary parity Stage-0, then official Caduceus code/pretrained checkpoints. No checkpoint duplication in storage numerator; input length/tokenizer/model size pinned.",
+  "gates": {
+    "PASS": "In >=4/5 independent fresh sequence families, exact native symmetry error <=1e-5 (trained float32) and assay AUPRC not worse than native single-encoder multihead by >0.02, task-code bytes <=0.85 native and measured gain over same-byte ordinary linear parity head. RC orbit-only is always M0, never enough.",
+    "FAIL": "All apparent extra outputs are just RC permutations/sign reindexing, native single-head/RCPS controls are strictly better, strand-specific assay parity violated, source motif identity leaked into fresh or task-specific private paths are uncounted.",
+    "UNCERTAIN": "native unverified, missing performance data, contaminating test data or threshold uncertainty spans zero"
+  },
+  "counterexample": "RC equivariance naturally gives cheap transformed output but no new independent model, exactly the naive Single-Forward Multi-Mirror trap. Non-palindromic strands have orientation-specific function labels that require new information outside the invariant quotient.",
+  "uncertainty": "Genome sequence homology, reverse-complement duplicate leakage, strand orientation assay convention, class imbalance, extreme 1kb dependencies and SSM runtime. Count independently sampled genomes not sliding-window tokens.",
+  "actual_training": false,
+  "existing_model_perf_claims": "none",
+  "dedup_checked": true
+}
