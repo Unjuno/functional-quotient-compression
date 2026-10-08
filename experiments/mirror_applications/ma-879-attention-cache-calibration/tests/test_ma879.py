@@ -16,3 +16,7 @@ def test_aligned_teacher_is_deterministic():
 def test_draw32_replay():
     d=json.loads((ROOT/'source'/'draw32_exclusions.json').read_text());pool=d['pool_ids'];ph=bytes.fromhex(d['pool_sha256']);seed=bytes.fromhex(d['seed_hex']);h=hashlib.sha256(seed+ph+d['rejection_counter'].to_bytes(4,'big')).digest();n=len(pool);v=int.from_bytes(h,'big');lim=(1<<256)-((1<<256)%n)
     assert len(pool)==d['eligible_count'] and hashlib.sha256('\n'.join(pool).encode()).hexdigest()==d['pool_sha256'];assert v<lim and v%n==d['selection_index_zero_based'];assert pool[v%n]=='MA-879'
+def test_actual_payload_roundtrip(tmp_path):
+    from safetensors.torch import load_file
+    model=ma.Translator('mirror_attention');path=tmp_path/'kv.safetensors';n,sha=ma.payload(model,path);state=load_file(str(path))
+    assert state['p'].numel()==sum(p.numel() for p in model.state_dict().values());assert path.stat().st_size==n and len(sha)==64
