@@ -44,7 +44,7 @@ Added from the second literature sweep. **Do not interrupt an already-started ex
 
 Direct/high-information P0 order:
 1. MA-255 — Mirror context superposition vs Parameter Superposition
-2. MA-260 — BatchEnsemble rank-one Mirror ensemble
+2. MA-260 — BatchEnsemble rank-one Mirror ensemble (completed FAIL; narrow linear screen)
 3. MA-261 — BatchEnsemble-style logical experts
 4. MA-265 — VeRA Mirror scaling code bank
 5. MA-268 — IA3 Mirror activation views
