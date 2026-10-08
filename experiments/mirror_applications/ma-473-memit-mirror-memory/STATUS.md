@@ -9,7 +9,7 @@
 
 ## Next action
 
-Preflight test passed (3 tests); freeze implementation/protocol and then run seeds 47301 and 47302.
+Run only development seeds 47301 and 47302; fresh stays sealed.
 
 ## Blockers
 
