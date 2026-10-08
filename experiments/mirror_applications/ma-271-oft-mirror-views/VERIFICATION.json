@@ -1,1 +1,31 @@
-{"experiment_id":"MA-271","commit":"pending","tests":{"command":"python experiments/mirror_applications/ma-271-oft-mirror-views/tests/test_roundtrip.py","passed":1,"failed":0},"serialization":{"roundtrip_checked":true,"byte_exact":true,"method":"uncompressed NumPy NPZ; shared rank-one and Mirror controls use identical packed parameter arrays"},"metric_replay":{"checked":true,"max_difference":0.0},"fresh_split_integrity_checked":true,"fresh_seeds":[127,239,331,443],"notes":["Development seeds 27 and 41; fresh seeds fixed before fresh evaluation.","Mirror is mathematically identical to ordinary rank-one factorization of task-by-plane angles.","Full and blockwise orthogonal controls preserve Q^T Q and inverse cycle to numerical precision.","CPU transform microbenchmark only; no optimized-kernel or diffusion claim."]}
+{
+  "experiment_id": "MA-271",
+  "commit": "eb9211c",
+  "tests": {
+    "command": "python experiments/mirror_applications/ma-271-oft-mirror-views/tests/test_roundtrip.py",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "method": "uncompressed NumPy NPZ; shared rank-one and Mirror controls use identical packed parameter arrays"
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_seeds": [
+    127,
+    239,
+    331,
+    443
+  ],
+  "notes": [
+    "Development seeds 27 and 41; fresh seeds fixed before fresh evaluation.",
+    "Mirror is mathematically identical to ordinary rank-one factorization of task-by-plane angles.",
+    "Full and blockwise orthogonal controls preserve Q^T Q and inverse cycle to numerical precision.",
+    "CPU transform microbenchmark only; no optimized-kernel or diffusion claim."
+  ]
+}
