@@ -1,1 +1,35 @@
-{"experiment_id":"MA-440","protocol_commit":null,"tests":{"passed":0,"failed":0},"serialization":{"roundtrip_checked":false,"byte_exact":false,"payload_rows":0},"metric_replay":{"checked":false},"fresh_split_integrity_checked":false,"fresh_worlds":[],"notes":[]}
+{
+  "experiment_id": "MA-440",
+  "protocol_commit": "74d4de3",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-440-continual-ssm-skill-codes/tests -v",
+    "passed": 2,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "payload_rows": 36,
+    "payload_hashes_replayed": true,
+    "actual_payload_bytes_authoritative": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "tolerance": 1e-08,
+    "notes": [
+      "144 fresh per-skill rows replayed from 36 final payloads.",
+      "All maximum spectral radii are below 0.781.",
+      "Mirror misses retention and byte gates."
+    ]
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_worlds": [
+    44010,
+    44011,
+    44012
+  ],
+  "notes": [
+    "Four sequential synthetic skills; no rehearsal of old skill data.",
+    "No SETA/mask baseline, natural continual task, or LM evidence."
+  ]
+}
