@@ -124,3 +124,34 @@ The total MA registry now contains **1095** entries with **1048 UNTESTED**, **29
 **Do not preempt MA-255.** The new rows follow the already-locked worker and cross-domain research queues. The report is the new literature-intake context, not permission to treat source-paper performance as Mirror results.
 
 See `docs/phase2/MIRROR_PARAMETER_INTEGRATION_DOCTRINE.md`, `docs/phase2/MIRROR_PARAMETER_INTEGRATION_MATRIX.md`, `experiments/mirror_applications/WORKER_QUEUE.md` and `experiments/mirror_applications/STATUS_BOARD.md`.
+
+## CH. Mirror marginal-state break-even: a mandatory pre-screen
+
+For each native method, denote:
+- `B_native`: all physically serialized native inference state;
+- `B_replaced`: native state actually removed by the proposed Mirror insertion;
+- `B_basis_extra`: new shared View basis/decoder/generator state that did not exist in the native method;
+- `K * B_m`: all per-logical-function persistent codes, including their own headers and indexes;
+- `B_metadata`: algorithm, mapping, calibration, routing and manifest state newly required by Mirror.
+
+Then the proposed serialized state is
+
+`B_Mirror = B_native - B_replaced + B_basis_extra + K * B_m + B_metadata`.
+
+A **storage-only Mirror advantage over the native method** requires
+
+`B_replaced > B_basis_extra + K * B_m + B_metadata`.
+
+This is not a theorem about task quality or runtime; it is an accounting identity under the chosen complete serialization format. It prevents a common false-positive failure mode:
+
+- **DHE:** if the native architecture already has no table and m only adds one learned code per ID, `B_replaced` may be zero. There is no storage saving unless m removes part of the native generator or another paid state. An accuracy/latency benefit is still possible but must be demonstrated.
+- **TT-Rec:** do not compare Mirror against the original dense embedding size once native TT cores and cache are the actual serving baseline. Count the portions of TT state truly eliminated.
+- **DOFA:** if the native wavelength hypernetwork continues running unchanged, a separate spectral code/generator increases state and compute unless it replaces existing filters or measurably improves quality. Report both newly stored basis and any generated-filter latency.
+- **TimesFM/Moirai/PatchTST:** if the native method already uses a single shared backbone and no per-domain head, adding K task codes cannot be called weight-copy replacement. It might be complementary functional freedom, which must be evaluated as such.
+
+There is also a **compute/latency break-even**: the removed native lookup/generation/copy/forecast work must outweigh View decoding, code generation, extra kernel launches, memory traffic and any materialization. Report empirical latency and source-architecture-specific throughput, never infer it from FLOP proxies alone.
+
+**Causal non-gauge check:** hold `x` and shared `theta` fixed and intervene on `m`. Show that changed `m` produces distinct useful target functions, and check whether the effect is already available through known input relabeling, time normalization, group symmetry, metadata passthrough or a cheap native gate. Combinatorial numbers of possible addresses do not prove independently stored capacity.
+
+A worker who cannot identify `B_replaced` or the intended complementary accuracy/compute utility should not claim Mirror-specific storage value. Negative outcomes remain first-class evidence.
+
