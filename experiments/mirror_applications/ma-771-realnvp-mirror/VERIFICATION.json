@@ -1,10 +1,35 @@
 {
   "experiment_id": "MA-771",
   "draw_id": "Draw34",
-  "protocol_sha256": "",
-  "draw_record_sha256": "",
-  "results_sha256": "",
-  "audit_replay": "pending",
-  "serialized_payload_replay": "pending",
-  "checks": []
+  "audit_replay": "passed: deterministic replay reproduced MSE and payload sizes for all five methods across three fresh seeds",
+  "serialized_payload_replay": "passed: safetensors size/hash and tensor count validated",
+  "protocol_sha256": "3cb4982f404a162d4ac01c0d9fc85329319f49cf6e1a1abbed01fe38c4f11cab",
+  "draw_record_sha256": "f96fd38b3feece3a428c65ae1f4837fbc20eafd123c70a6786660cda114854f7",
+  "results_sha256": "30655f0a6822f79ea3e5948788114b36b9117389010d024309a0f73c24bfa5bd",
+  "core_csv_sha256": "6c049459c45330c14ef582d34430a4dac43323565ac12c56191d0d47f93c8b73",
+  "replay_log_sha256": "3daa96e42da18f24d7e10b88385adf6b9f81dfaab433236438852d504ad3ec66",
+  "development_fit_sha256": "43990a43c842dda68de50172ccb5e8908d16c394e7213573ae1b8d00704a4db0",
+  "audit_seeds": [
+    77111,
+    77112,
+    77113
+  ],
+  "audit_tasks_per_seed": 6,
+  "methods": [
+    "mirror",
+    "shift",
+    "affine",
+    "mlp",
+    "independent"
+  ],
+  "audit_rows": 90,
+  "tests": "5 passed",
+  "registry_integrity": "pending final check",
+  "checks": [
+    "teacher and fitted Mirror inverse cycle < 1e-6",
+    "analytic inverse-logdet consistency < 1e-6",
+    "all 3 fresh seeds pass query-MSE and payload gates",
+    "actual safetensors payloads include shared chart and task states",
+    "teacher family is explicitly aligned; claim scoped to synthetic mechanism"
+  ]
 }

@@ -1,3 +1,5 @@
+> **User-directed selection override (2026-10-08):** Select each next candidate by a uniform draw over eligible P0 + UNTESTED IDs, excluding existing local experiment directories and active local/remote MA branches. Preserve the 256-bit seed, pool, exclusions, digest and selected index. Do not follow this file sequentially for selection.
+
 # Worker queue
 
 The queue is derived from `IDEA_REGISTRY.csv`. The registry is authoritative.
