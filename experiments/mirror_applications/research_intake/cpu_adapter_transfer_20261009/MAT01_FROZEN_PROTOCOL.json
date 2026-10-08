@@ -1,0 +1,130 @@
+{
+  "protocol_id": "MAT01-20261009",
+  "associated_MA": "MA-1178",
+  "status": "IMMUTABLE_PREREGISTERED_BEFORE_DATA",
+  "branch": "research/mirror-cpu-adapter-transfer-20261009",
+  "created_date": "2026-10-09",
+  "base_commit": "5dd7198c8c8e9acf6b938661d94b1783a38d7ffe",
+  "hypothesis": "For 4 heldout digit-image corruption tasks from one frozen base, a tiny structured Mirror task code fitted from each task's labeled support may preserve native independent rank-4 LoRA classification accuracy/NLL with less inference-bank storage and no more than 10% P95 overhead relative to a *same-byte ordinary source-trained linear code*. This is a stringent incremental-Mirror test and not reproduction of native LoGo algorithm.",
+  "study_class": "natural sklearn digits classification task shifts + trained independent LoRA source family; tiny CPU trained models, not published LoGo/LLM",
+  "object": "Frozen source-pretrained MLP 64->64 GELU->10 with no task ID, same weights across all tasks. Adapt final linear projection with LoRA rank4 / other code.",
+  "geometry": {
+    "U": "Shared source delta left singular subspace 64x4",
+    "V": "Shared source delta right singular subspace 4x10",
+    "mean_core": "U.T @ mean(source LoRA deltas) @ V.T, 4x4",
+    "mirror": "Delta_j=U @ [Q(m_j) C Q(m_j)^T] @ V, Q product of Givens pairs [(0,1),(2,3),(0,2),(1,3)]",
+    "linear4": "Delta_j=U @ [sum_{a=1}^4 c_j[a] C_source[a]] @ V; source cores from top rank4 SVD of independently trained source task core matrices, same learned task code count",
+    "diagonal4": "Delta_j=U @ diag(s_j) @ V, 4 coeff/task",
+    "fullcore16": "Delta_j=U @ C_j @ V, full 16 coeff/task (strong upper-capacity shared basis control)",
+    "native_lora4": "Delta_j=A_j @ B_j, A_j 64x4, B_j 4x10, same support optimization budget; no source basis calibration used",
+    "base": "Delta_j=0",
+    "physical_byte_contract": "Actual named np.savez byte lengths including frozen base weights, U/V/C/orbit or plain 4-core dictionary and all 4 task codes, plus JSON metadata. Exclude source training optimizer state from inference size but report source training steps and 6 source LoRA support calls separately."
+  },
+  "data": {
+    "dataset": "scikit-learn load_digits 1797 grayscale 8x8 with fixed original digit classes; no external download",
+    "full_original_split": "one train/test stratified random split of original image IDs per seed: 75% train/25% audit, never use audit labels for base or source/support.",
+    "base_training": "Unshifted training originals, Gaussian minibatches; preprocessing mean/std from base train only.",
+    "source_roles": [
+      "left1",
+      "right1",
+      "up1",
+      "down1",
+      "gaussian_blur_sigma_0.65",
+      "contrast_0.7"
+    ],
+    "heldout_roles": [
+      "upper_left1",
+      "lower_right1",
+      "gaussian_noise_sd_0.25",
+      "pixel_dropout_p_0.20"
+    ],
+    "dev_seeds": [
+      11,
+      12,
+      13
+    ],
+    "fresh_seeds": [
+      101,
+      102,
+      103,
+      104,
+      105
+    ],
+    "split_policy": "exact same original train/test IDs per method, different independent per-role corruptions, same source role labels. Fresh worlds are repeated dataset partitions, NOT independent new natural task datasets.",
+    "fresh_locked": true,
+    "grouped_task_split": true,
+    "support_original_examples": "up to 300 training originals per target role, stratified by label; source training gets full train originals; audit uses only heldout test originals.",
+    "preprocessing": "raw image pixels scale /16. Source & target task transforms applied before standardization; normalize with original TRAIN-only pixel mean/std+0.15 stabilizer. No test adaptation."
+  },
+  "optimization": {
+    "shared_base": {
+      "hidden": 64,
+      "optimizer": "AdamW",
+      "steps": 320,
+      "lr": 0.003,
+      "batch": 128,
+      "weight_decay": 0.0001
+    },
+    "source_lora": {
+      "source_tasks": 6,
+      "rank": 4,
+      "steps": 145,
+      "lr": 0.01,
+      "batch": 128,
+      "seeded_parameters": "A random small, B zero, fixed base",
+      "updates_are_per_task": true
+    },
+    "target_support": {
+      "per_role_max": 300,
+      "steps": 175,
+      "optimizer": "AdamW",
+      "lr": 0.045,
+      "batch": 96,
+      "weight_decay": 0.0001,
+      "conditions": [
+        "base",
+        "native_lora4",
+        "mirror4",
+        "linear4",
+        "diag4",
+        "fullcore16"
+      ],
+      "all_same_target_support_and_iteration_stream": true
+    },
+    "preselection": "No hyperparameter sweep; fixed globally before development/fresh. No fresh tuning.",
+    "learning_precision": "FP32 trained, FP64 source SVD and numeric verification"
+  },
+  "evaluation": {
+    "per_role": "Fresh test cross-entropy nat/example, top1 accuracy, worst target role, paired NLL difference vs native source linear-bank and independent native LoRA4",
+    "router": "None. Data role explicitly supplied; native LoGo input-conditioned selection/merge NOT implemented. This is stored adapter-bank compression only.",
+    "comparison": "At full inference bank bytes: Mirror vs native independent LoRA, same-code ordinary linear4 and diag4; fullcore16 as quality reference.",
+    "compute": "Batch128 four outputs one shared base, dense group GEMM/tiny tensor ops, CPU 1 thread, 20 warmups/100 repeats P50/P95, record torch version.",
+    "small_seed_n": "5 fresh are correlated dataset splits, use descriptive mean/min/max and n=5 paired, not 95% intervals."
+  },
+  "gates": {
+    "PASS_MIRROR_SPECIFIC": "For >=4/5 fresh worlds: mirror bank mean NLL<=native LoRA mean NLL +0.02 nat/example, mirror total bank serialized bytes<=0.85 native LoRA bank, Mirror mean NLL <= same-byte ordinary linear4 mean NLL-0.01, Mirror P95<=1.10x same-byte native linear4. Entirely separate >10 task-world study needed for ADOPTED.",
+    "FAIL": "Mirror fails native LoRA quality, is dominated by same-byte simple linear/diag or fullcore, or latency exceeds 10% relative to simple code; source-only low-rank basis is insufficient for off-orbit shift functions.",
+    "UNCERTAIN": "No independently trained *natural* model family beyond shifted digits, fresh overlaps in underlying images, runtime not CUDA, strong native LoGo not reproduced; so full MA-1178 remains UNTESTED even if conditional mechanism passes."
+  },
+  "unit_tests": [
+    "train/test image IDs never overlap",
+    "all methods identical train/support examples and fixed base",
+    "source and target role transform properties change inputs",
+    "functional output changes for nonzero rank code",
+    "source independent LoRA deltas and U/V correctly shaped and decoder same as direct",
+    "serializer roundtrip exact NPZ bytes and complete state",
+    "mirror and simple source core code correctly differentiable",
+    "negative oracle delta cannot leak into m training"
+  ],
+  "output_contract": [
+    "source/run_mat01.py",
+    "source/test_mat01.py",
+    "results/dev_raw.csv",
+    "results/fresh_raw.csv",
+    "results/RESULTS_CORE.csv",
+    "results/VERIFICATION.json",
+    "REPORT.md"
+  ],
+  "hardware": "CPU AMD EPYC 9V74/PyTorch2.10/NumPy2.3/sklearn1.8 where current container; torch.set_num_threads(1), OPENBLAS_NUM_THREADS=1",
+  "scientific_boundary": "This is NOT native LoGo instance-selection/merging reproduction and NOT an LLM. Aligned or off-orbit effect must survive native baselines; false claims prohibited. Do not modify original registry status or worker queue."
+}
