@@ -6,8 +6,8 @@
 - Last verified commit:
 - Development complete: yes
 - Fresh/audit opened: yes
-- Results committed: pending commit
-- Verification committed: pending commit
+- Results committed: yes (`9fa77c4`)
+- Verification committed: pending registry check commit
 - Registry row updated: no
 
 ## Next action
