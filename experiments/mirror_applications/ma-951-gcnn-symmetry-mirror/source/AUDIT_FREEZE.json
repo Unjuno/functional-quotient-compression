@@ -1,0 +1,45 @@
+{
+  "experiment_id": "MA-951",
+  "phase": "pre_audit_freeze",
+  "files": {
+    "PROTOCOL.json": "9015cb304ccabecef470ff43e64dca4b3b7ecbcd2360d475b11804677b9e76a3",
+    "source/run_ma951.py": "ee887d09d8124a6da98615e34fa778f17dbead89f0949ea6d854a7526643b7da",
+    "artifacts/metrics_development.csv": "e55f1cb8ecf169d124924bf4da403b99a9df9ecc9107e6fc6d3863982dd7305f",
+    "artifacts/development_curve.csv": "83910d6123d461c90b838d3fe9c7b772b0db165dd46233e419c3ca2feba11141",
+    "source/DEVELOPMENT_FREEZE.json": "d575bfd7b360cdabc67b4717c114c5fadaecbcd54c1c909ae124168da8e2fa09"
+  },
+  "selected_updates": {
+    "equivariant_only": {
+      "updates": 625,
+      "mean_dev_mse": 0.6154868192970753
+    },
+    "mirror_exception": {
+      "updates": 975,
+      "mean_dev_mse": 0.21376494081017938
+    },
+    "basis2_exception": {
+      "updates": 950,
+      "mean_dev_mse": 0.11327932219887771
+    },
+    "independent_maps": {
+      "updates": 450,
+      "mean_dev_mse": 1.2178184783033025e-06
+    },
+    "hard_shared_residual": {
+      "updates": 150,
+      "mean_dev_mse": 0.32996073209991056
+    }
+  },
+  "audit_world_seeds": [
+    19,
+    29,
+    43
+  ],
+  "model_seeds": [
+    31,
+    47,
+    59
+  ],
+  "audit_query_accessed": false,
+  "selection_frozen": true
+}
