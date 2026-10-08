@@ -1,8 +1,32 @@
 {
- "experiment_id":"MA-268","commit":"pending",
- "tests":{"command":"python experiments/mirror_applications/ma-268-ia3-mirror-activation/tests/test_roundtrip.py","passed":1,"failed":0},
- "serialization":{"roundtrip_checked":true,"byte_exact":true,"method":"actual uncompressed NumPy NPZ; packed shared gain and task angles reconstruct activation operators exactly"},
- "metric_replay":{"checked":true,"max_difference":0.0},
- "fresh_split_integrity_checked":true,"fresh_seeds":[111,233,317,431],
- "notes":["Development seeds 21 and 39; fresh seeds fixed in protocol before evaluation.","Aligned teacher was generated from the tested pair-rotation family.","Fresh aligned quality matched IA3 but the 20% byte-reduction gate was missed.","Arbitrary gain condition retained a sizable gap from IA3.","Post-fit synthetic linear block only; no training or LM result."]
+  "experiment_id": "MA-268",
+  "commit": "ee13312",
+  "tests": {
+    "command": "python experiments/mirror_applications/ma-268-ia3-mirror-activation/tests/test_roundtrip.py",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "method": "actual uncompressed NumPy NPZ; packed shared gain and task angles reconstruct activation operators exactly"
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_seeds": [
+    111,
+    233,
+    317,
+    431
+  ],
+  "notes": [
+    "Development seeds 21 and 39; fresh seeds fixed in protocol before evaluation.",
+    "Aligned teacher was generated from the tested pair-rotation family.",
+    "Fresh aligned quality matched IA3 but the 20% byte-reduction gate was missed.",
+    "Arbitrary gain condition retained a sizable gap from IA3.",
+    "Post-fit synthetic linear block only; no training or LM result."
+  ]
 }
