@@ -4,13 +4,13 @@ Updated: 2026-10-08 JST
 Canonical worker branch remains `research/mirror-application-worker-ready-20261007` (unchanged).
 This is an ISOLATED RESEARCH branch `research/mirror-single-forward-prefetch-20261008`, NOT the worker authoritative queue.
 
-## Program totals (reconciled from authoritative 1182-row **isolated staging** registry)
+## Program totals (reconciled from authoritative 1188-row **isolated staging** registry)
 
-- Registered candidates: **1182**
-- P0: **647** (35 completed; 612 UNTESTED)
-- P1: **432** (12 completed; 420 UNTESTED)
+- Registered candidates: **1188**
+- P0: **649** (35 completed; 614 UNTESTED)
+- P1: **436** (12 completed; 424 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1135 UNTESTED, 29 PROMISING, 18 FAIL**
+- Current MA statuses: **1141 UNTESTED, 29 PROMISING, 18 FAIL**
 - 47 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -122,3 +122,10 @@ New native source controls PA437 MIMMO, PA438 Network Fission Ensembles, and PA4
 ## Breadth-first scientific intake, no special focus (2026-10-08)
 
 Following the user's instruction, the previous MA-1175 first-priority assignment is **withdrawn**; MA-1175 remains P0/UNTESTED on a research branch but has no preferential work scheduling. Six additional candidate families MA-1177..1182 (2 P0, 4 P1), PA440..PA452 native literature, and method-control supplements are staged on `research/mirror-breadth-method-sweep-20261008` only. No active worker queue or original worker branch was touched. See [breadth sweep](research_intake/breadth_native_20261008/SWEEP.md). Main remains unchanged.
+
+## Cross-domain Mirror native-method literature sweep — 2026-10-08
+
+- Independent staged six MA-1183..1188: TabM rank-one member charts, TabPFN in-context calibration, DINOv3 dense feature banks, Caduceus RC parity beyond an exact symmetry orbit, DISCO operator splitting, Aurora multi-variable decoder modes. Two interest P0 and four P1; **no research or worker scheduling priority override**.
+- Added primary/reference sources PA453..462; six full H/T/D/C/U standalone protocols and CPU-only exact algebraic Stage-0 (7 tests, 5 fresh worlds; no native neural task reproduction). Details [crossdomain research intake](research_intake/crossdomain_20261008/README.md).
+- Repeated original negatives: input-side member fast weights cannot necessarily be reconstructed from base logits, symmetry-only RC Views are not independent capacity, and native Strang can dominate simplistic commutator corrections.
+- Worker-ready branch, WORKER_QUEUE and main untouched; existing verified 29 PROMISING / 18 FAIL remain unchanged.

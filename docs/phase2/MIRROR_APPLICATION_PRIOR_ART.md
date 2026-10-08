@@ -4138,3 +4138,107 @@ https://doi.org/10.1002/advs.202514490
 **Established method / mandatory native control:** Multi-model single-cell evaluation across annotation, embedding, perturbation and other tasks. Hold out perturbation/cell identities and compare native model with strong conventional baselines.
 
 **Mirror delta:** Only a source-calibrated small m giving an incremental heldout task-quality/paid-byte/active-compute benefit beyond this native source is a Mirror-specific positive result. Native results are not registered as Mirror results.
+
+## PA453 — TabM: Advancing Tabular Deep Learning With Parameter-Efficient Ensembling
+
+**TabM: Advancing Tabular Deep Learning With Parameter-Efficient Ensembling** — Yury Gorishniy, Akim Kotelnikov, Artem Babenko. ICLR 2025.  
+https://proceedings.iclr.cc/paper_files/paper/2025/hash/c1ba41c694834aeef91ae161711d4939-Abstract-Conference.html
+
+Official/author implementation: https://github.com/yandex-research/tabm
+
+**Native method / direct baseline:** Original TabM uses shared MLP weights and BatchEnsemble rank-one member fast weights, with actual parallel member execution. Multiple member predictions and weight sharing are native; an additional Mirror m must beat native TabM/TabM-mini and an equally low-description ordinary r/s code.
+
+**Mirror-specific delta:** Evaluate a small structured m on top of the actual native physical method. Judge heldout useful function quality, whole real serialized bytes and active compute versus the best same-byte linear/diagonal/basis and original-native controls. The published native result is not a Mirror experiment.
+
+## PA454 — Accurate predictions on small data with a tabular foundation model
+
+**Accurate predictions on small data with a tabular foundation model** — Noah Hollmann, Samuel Müller, Lennart Purucker et al.. Nature 637:319–326 (2025).  
+https://www.nature.com/articles/s41586-024-08328-6
+
+Official/author implementation: https://github.com/PriorLabs/TabPFN
+
+**Native method / direct baseline:** TabPFN is a pretrained in-context tabular posterior predictive model. Multi-dataset conditional prediction is native, not evidence that an output-only Mirror adds information. Temperature, vector, Dirichlet calibration and native TabPFN ensemble are direct null baselines.
+
+**Mirror-specific delta:** Evaluate a small structured m on top of the actual native physical method. Judge heldout useful function quality, whole real serialized bytes and active compute versus the best same-byte linear/diagonal/basis and original-native controls. The published native result is not a Mirror experiment.
+
+## PA455 — TabReD: Analyzing Pitfalls and Filling the Gaps in Tabular Deep Learning Benchmarks
+
+**TabReD: Analyzing Pitfalls and Filling the Gaps in Tabular Deep Learning Benchmarks** — Ivan Rubachev, Nikolay Kartashev, Yury Gorishniy, Artem Babenko. ICLR 2025.  
+https://research.yandex.com/publications/tabred-analyzing-pitfalls-and-filling-the-gaps-in-tabular-deep-learning-benchmarks
+
+Official/author implementation: https://research.yandex.com/datasets/TabReD
+
+**Native method / direct baseline:** TabReD uses chronological rather than random train-test splits and high-dimensional engineered industrial tables. Native TabM/TabPFN and Mirror claims should be checked under whole time/dataset drift, not only random toy data.
+
+**Mirror-specific delta:** Evaluate a small structured m on top of the actual native physical method. Judge heldout useful function quality, whole real serialized bytes and active compute versus the best same-byte linear/diagonal/basis and original-native controls. The published native result is not a Mirror experiment.
+
+## PA456 — DINOv3
+
+**DINOv3** — Oriane Siméoni, Huy V. Vo, Maximilian Seitzer et al.. arXiv:2508.10104, August 2025 Meta technical report.  
+https://arxiv.org/abs/2508.10104
+
+Official/author implementation: https://github.com/facebookresearch/dinov3
+
+**Native method / direct baseline:** The DINOv3 frozen SSL backbone already supports dense feature maps and native linear/Mask2Former segmentation heads. One encoder with multiple output heads and Gram anchoring are native; Mirror only adds incremental useful readout-code compression beyond these baselines. Official license must be honored.
+
+**Mirror-specific delta:** Evaluate a small structured m on top of the actual native physical method. Judge heldout useful function quality, whole real serialized bytes and active compute versus the best same-byte linear/diagonal/basis and original-native controls. The published native result is not a Mirror experiment.
+
+## PA457 — Caduceus: Bi-Directional Equivariant Long-Range DNA Sequence Modeling
+
+**Caduceus: Bi-Directional Equivariant Long-Range DNA Sequence Modeling** — Yair Schiff, Chia Hsiang Kao, Aaron Gokaslan, Tri Dao, Albert Gu, Volodymyr Kuleshov. ICML 2024, PMLR 235:43632–43648.  
+https://proceedings.mlr.press/v235/schiff24a.html
+
+Official/author implementation: https://github.com/kuleshov-group/caduceus
+
+**Native method / direct baseline:** Caduceus is naturally reverse-complement equivariant, using native MambaDNA. The cheap reverse-complement orbit is NOT an independent functional-capacity expansion. Mirror parity-coded tasks must improve over native RCPS/augmentation and ordinary same-byte task classifiers.
+
+**Mirror-specific delta:** Evaluate a small structured m on top of the actual native physical method. Judge heldout useful function quality, whole real serialized bytes and active compute versus the best same-byte linear/diagonal/basis and original-native controls. The published native result is not a Mirror experiment.
+
+## PA458 — Test-time Generalization for Physics through Neural Operator Splitting
+
+**Test-time Generalization for Physics through Neural Operator Splitting** — Louis Serrano, Jiequn Han, Edouard Oyallon, Shirley Ho, Rudy Morel. ICML 2026, PMLR 306:109205–109235.  
+https://proceedings.mlr.press/v306/serrano26a.html
+
+Official/author implementation: https://github.com/LouisSerrano/neural-operator-splitting
+
+**Native method / direct baseline:** Native method already searches test-time compositions of pretrained operator dictionaries. An extra Mirror m must reduce dictionary/schedule state or improve rollout quality over native operator splitting and standard Strang splitting; the composition itself is not new.
+
+**Mirror-specific delta:** Evaluate a small structured m on top of the actual native physical method. Judge heldout useful function quality, whole real serialized bytes and active compute versus the best same-byte linear/diagonal/basis and original-native controls. The published native result is not a Mirror experiment.
+
+## PA459 — Learning Physical Operators using Neural Operators
+
+**Learning Physical Operators using Neural Operators** — Vignesh Gopakumar, Ander Gray, Daniel Giles, Lorenzo Zanisi, Matt J. Kusner et al.. AISTATS 2026, PMLR 300:3223–3231.  
+https://proceedings.mlr.press/v300/gopakumar26a.html
+
+**Native method / direct baseline:** Native physical-operator splitting and fixed finite differences already separate linear and learned nonlinear physics operators. Any Mirror-compressed shared operator must match physical conservation and long-horizon quality at real time-step and stored byte cost.
+
+**Mirror-specific delta:** Evaluate a small structured m on top of the actual native physical method. Judge heldout useful function quality, whole real serialized bytes and active compute versus the best same-byte linear/diagonal/basis and original-native controls. The published native result is not a Mirror experiment.
+
+## PA460 — A foundation model for the Earth system
+
+**A foundation model for the Earth system** — Cristian Bodnar, Wessel P. Bruinsma, Ana Lucic et al.. Nature 641:1180–1187 (2025).  
+https://www.nature.com/articles/s41586-025-09005-y
+
+Official/author implementation: https://github.com/microsoft/aurora
+
+**Native method / direct baseline:** Aurora already has shared heterogeneous 3D Perceiver encoder, Swin processor and domain-specific decoder/fine-tunes; forecast horizons are typically autoregressive. One processor step and full long-horizon rollouts must be counted separately, with meteorological variable units and native Perceiver controls.
+
+**Mirror-specific delta:** Evaluate a small structured m on top of the actual native physical method. Judge heldout useful function quality, whole real serialized bytes and active compute versus the best same-byte linear/diagonal/basis and original-native controls. The published native result is not a Mirror experiment.
+
+## PA461 — Learning Data-Efficient and Generalizable Neural Operators via Fundamental Physics Knowledge
+
+**Learning Data-Efficient and Generalizable Neural Operators via Fundamental Physics Knowledge** — Siying Ma, Mehrdad Momeni Zadeh, Mauricio Soroco, Wuyang Chen, Jiguo Cao, Vijay Ganesh. ICLR 2026.  
+https://proceedings.iclr.cc/paper_files/paper/2026/hash/1b6554ab420ad26328d73e3387613f4e-Abstract-Conference.html
+
+**Native method / direct baseline:** Native physics-informed multiphysics training reuses simplified PDE models and fundamental operators. Mirror code experiments must not re-label known physical decomposition or fixed solver kernels as an independent Mirror gain.
+
+**Mirror-specific delta:** Evaluate a small structured m on top of the actual native physical method. Judge heldout useful function quality, whole real serialized bytes and active compute versus the best same-byte linear/diagonal/basis and original-native controls. The published native result is not a Mirror experiment.
+
+## PA462 — DISCO: learning to DISCover an evolution Operator for multi-physics-agnostic prediction
+
+**DISCO: learning to DISCover an evolution Operator for multi-physics-agnostic prediction** — Rudy Morel, Jiequn Han, Edouard Oyallon. ICML 2025, PMLR 267:44750–44774.  
+https://proceedings.mlr.press/v267/morel25a.html
+
+**Native method / direct baseline:** DISCO already uses a hypernetwork to produce a small evolution operator from a short trajectory. The operator generator and its physical-parameter inference are native. Add m only to compact the paid source-trained operator bank or support new ordered useful compositions beyond simple coefficient codes.
+
+**Mirror-specific delta:** Evaluate a small structured m on top of the actual native physical method. Judge heldout useful function quality, whole real serialized bytes and active compute versus the best same-byte linear/diagonal/basis and original-native controls. The published native result is not a Mirror experiment.
