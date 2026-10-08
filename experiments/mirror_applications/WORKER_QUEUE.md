@@ -410,6 +410,20 @@ When selecting MA-1096/1099/1102/1105/1114/1115, include BOLT (PA372), function-
 
 **MA-255 remains next**. Do not interrupt active/frozen jobs to consume this support intake.
 
+## Sixteenth research intake — KG relation operators, cameras, robotics and acoustic rooms
+
+**MA-1116..1155 are 40 newly registered UNTESTED candidates**, appended after the existing MA-255 direct-prior sequence and all already accepted intake. This is an experiment *planning* list, not an instruction to preempt an existing worker or change any locked fresh split.
+
+Recommended P0 order **within this new family only**:
+1. **KG relations MA1116..1125:** MA-1123 naturally fitted RotatE/PairRE/TuckER relation orbit versus private bank, then MA-1121 KrausKGE relation-rank and MA-1120 native time-relation factors. Native relation phase/core, CompGCN and 5starE are direct prior art; compare filtered link-prediction MRR, link ranking and full physical entity+relation bytes. Exact scoring gauge relabeling does not add independent task information.
+2. **Camera ISP and optics MA1126..1135:** MA-1127 Uni-ISP incremental per-device View, MA-1126 native ParamISP EXIF state, MA-1131 OmniLens++ PSF correction. Use paired held-out camera/ISO/lighting/lens, native ParamISP/Uni-ISP/MetaISP/PQDynamicISP/Modular ISP. Report color DeltaE, PSNR, true ISP state and device-specific runtime. Clipping destroys RAW information and cannot be inverted by coordinate change.
+3. **Robot dynamics MA1136..1145:** MA-1136 RMA deployable extrinsics View, MA-1137 UP-OSI physics factor, MA-1138 CoRMA contact adaptation, MA-1140 physical morphology code. **No oracle mass/friction at inference** when native policy receives only causal observation history. Report held-out physics/morphology rollouts, returns/fall rate, time-to-adapt, online state/write costs, latency and private residual share.
+4. **Acoustic fields MA1146..1155:** MA-1147 retrieval-augmented Neural Acoustic Fields adaptation, MA-1146 per-room field m, MA-1150 multipole bank versus NAMS and MA-1151 direction-aware Ambisonic RIR. Hold out real measured rooms and source/receiver positions. Compare NAF/retrieval NAF/TA-RIR/NAMS and native few-shot LoRA. Report RIR phase, RT60, DRR, spectral error, room geometry/retrieval bytes, enrollment cost and generation speed.
+
+Read **`docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_SIXTEENTH_SWEEP.md`** and only the cited PA382..413 for the selected MA. Every new experiment must identify `B(theta) -> B(theta,m)` beyond an **already-existing relation/EXIF/robot/room native code**, use a byte-near cheap control and an independent/private reference, and report real task quality instead of counting logical addresses. Keep aligned feasibility and natural/off-orbit results distinct.
+
+**Canonical next remains MA-255.** The registered 47 outcomes, the separate two-seed natural-digit negative pilot, and ongoing worker-owned branches are not touched by this appended research.
+
 ## Historical P0 family sequence (completed screens; not current queue)
 
 The historical A–F lists below record previously screened experiments and must not override `STATUS_BOARD.md` (MA-255 next).
