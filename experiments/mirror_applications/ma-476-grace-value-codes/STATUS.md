@@ -1,20 +1,10 @@
 # MA-476 status
 
-- Status: SCREENING
+- Status: FAIL (discrete VQ misses quality; continuous PCA aliases native PCA)
 - Branch: `research/ma-476-grace-value-codes-20261008`
-- Base commit: `38b263fcb3c6af5b8dd681b2a6814252d546b114`
-- Protocol frozen: yes; hash in freeze metadata
-- Development complete: no
-- Fresh/audit opened: no
+- Frozen protocol SHA-256: `19403eb095aab7702146d2ef2596e32d47b470cf89c4da94a1da9ea85e3167f6`
+- Development seeds: 47601, 47602 (complete)
+- Fresh/audit seeds 47611–47613: sealed, never accessed
+- Metric/serialization replay: exact
 
-## Next action
-
-Run only development seeds 47601 and 47602; fresh stays sealed.
-
-## Blockers
-
-None.
-
-## Decisions / rulings
-
-Only stored value representation varies. GRACE key/radius routing is held fixed and charged in each payload.
+VQ16/64/128 fail heldout quality; latent int8 is the stronger simple compression control. Continuous PCA is lossless on this aligned task but exactly equals native PCA.

@@ -17,3 +17,5 @@ No fresh data were opened during reconciliation.
 - MA-473 — FAIL for Mirror-specific attribution, research branch `research/ma-473-memit-mirror-memory-20261008`: shared per-layer rank-two codes passed heldout quality and reduced actual bank bytes versus MEMIT full and per-edit rank-two factors, with a valid independent upper. Native CP exactly matched the bank/output; online editor state erased bank savings. Fresh sealed.
 
 - MA-475 — FAIL for Mirror-specific attribution, research branch `research/ma-475-serac-memory-values-20261008`: shared rank-eight values used 44,483 actual bytes versus 99,513 explicit and 51,648 per-value int8; heldout RMSE <=1.1e-7 with zero routing errors. Native PCA exactly aliased the code bank. Fresh sealed; no-edit serialization correction/amended reruns preserved.
+
+- MA-476 — FAIL, research branch `research/ma-476-grace-value-codes-20261008`: fixed-route VQ16/64/128 used 37.3–40.9 KB but heldout RMSE 0.111–0.142; latent int8 used 38.6 KB/RMSE <=0.0119. Continuous PCA was exact but identical to native PCA. Fresh sealed.

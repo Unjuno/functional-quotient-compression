@@ -1,0 +1,11 @@
+{
+  "experiment_id":"MA-476",
+  "protocol_sha256":"19403eb095aab7702146d2ef2596e32d47b470cf89c4da94a1da9ea85e3167f6",
+  "commit":"pending-result-commit",
+  "tests":{"command":"pytest -q experiments/mirror_applications/ma-476-grace-value-codes/tests","passed":4,"failed":0},
+  "serialization":{"roundtrip_checked":true,"byte_exact":true},
+  "metric_replay":{"checked":true,"max_difference":0.0},
+  "fresh_split_integrity_checked":true,"fresh_accessed":false,"native_pca_alias":true,
+  "disposition":"FAIL: VQ16/64/128 miss the frozen 0.02 heldout RMSE gate; continuous basis codes exactly alias native PCA; latent int8 is smaller and more accurate than VQ64/128",
+  "notes":["All methods share and pay identical key/radius state.","Fresh seeds 47611-47613 remained sealed.","Synthetic rank-eight value memory only."]
+}
