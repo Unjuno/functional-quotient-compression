@@ -1,7 +1,7 @@
 {
   "experiment_id": "MA-767",
   "title": "Online task adaptation in Mirror-code space for cellular automata",
-  "status": "SCREENING",
+  "status": "FAIL",
   "evidence_lane": "MECHANISM/STORAGE/RUNTIME",
   "base_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
   "draw_id": "Draw36",
@@ -60,5 +60,6 @@
     "no natural data or learned autonomous self-organization claim"
   ],
   "amendment_1": "Before audit: expand each fresh world from 4+4 to 32 in-subspace and 32 independent rules. For only eight tasks, actual safetensors metadata and shared basis overhead dominate, and the theoretical code-bank byte ratio is near the 60% gate; 64 task views provide a meaningful payload test. Add a single overwritten full-rule state as a direct retention control. No audit observations were accessed.",
-  "amendment_2": "After the first audit serialization, found that storing each task view as a separately named tensor made safetensors metadata dominate. Before interpreting the result, encode both Mirror codes and full-rule snapshots as one contiguous tensor bank (same for both methods). Also report explicit accuracy retention from the stored bank after all task adaptations. No model, optimizer, seed, or quality metric changed; the initial per-key serialization is archived."
+  "amendment_2": "After the first audit serialization, found that storing each task view as a separately named tensor made safetensors metadata dominate. Before interpreting the result, encode both Mirror codes and full-rule snapshots as one contiguous tensor bank (same for both methods). Also report explicit accuracy retention from the stored bank after all task adaptations. No model, optimizer, seed, or quality metric changed; the initial per-key serialization is archived.",
+  "outcome_note": "The easy-rule quality/storage/retention gates technically pass, but Mirror accuracy at 64 online examples is essentially unchanged from the frozen shared rule (about 0.7302 vs 0.7294). Thus the added m has no demonstrated useful task-quality gain over the cheapest shared control. On hard rules, full-rule adaptation reaches 0.7566 accuracy at 256 examples vs 0.7124 for Mirror. Negative utility finding retained; no post-audit tuning."
 }

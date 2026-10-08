@@ -75,5 +75,6 @@ def main():
     q=[r for r in per if r['stratum']==st and r['method']==meth and (r['online_examples']==64 if meth in ('mirror','full_rule_bank') else True)]
     if q:print(meth,'acc',float(np.mean([x['accuracy'] for x in q])),'bytes',q[0].get('serialized_bytes',''),flush=True)
  (ROOT/'source'/'audit_results.json').write_text(json.dumps(rows,indent=2)+'\n')
- with (ROOT/'RESULTS_CORE.csv').open('w',newline='') as f:w=csv.DictWriter(f,fieldnames=list(rows[0]));w.writeheader();w.writerows(rows)
+ with (ROOT/'RESULTS_CORE.csv').open('w',newline='') as f:
+  fields=sorted(set().union(*(r.keys() for r in rows)));w=csv.DictWriter(f,fieldnames=fields);w.writeheader();w.writerows(rows)
 if __name__=='__main__':main()
