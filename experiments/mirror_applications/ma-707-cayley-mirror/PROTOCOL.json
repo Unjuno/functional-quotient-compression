@@ -23,7 +23,7 @@
     "worlds_or_seeds": [
       70701
     ],
-    "selection_metric": "development one-step support fit and 32-step query rollout; rank fixed at 2"
+    "selection_metric": "Fit four fixed development task transitions to estimate the shared transition/generator span and choose only scalar normalization; fit task coordinates with frozen rank 2. No fresh data used for method selection."
   },
   "fresh": {
     "worlds_or_seeds": [
@@ -32,7 +32,7 @@
       70713
     ],
     "locked_before_access": true,
-    "split": "four development task matrices determine shared base/generator span; each fresh world includes 6 low-angle and 6 high-angle task dynamics, 128 support transitions and 32 held-out 32-step trajectories per task"
+    "split": "Four development task matrices determine the shared base/generator span; each fresh world includes 6 low-angle and 6 high-angle task dynamics, 128 support transitions and 32 held-out 32-step trajectories per task."
   },
   "storage": {
     "authority": "actual serialized inference payload bytes",

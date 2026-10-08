@@ -1,10 +1,28 @@
 {
   "experiment_id": "MA-707",
   "draw_id": "Draw39",
-  "protocol_sha256": "",
-  "draw_record_sha256": "",
-  "results_sha256": "",
+  "protocol_sha256": "74d952020441a85d9033c813d5af67ba236dbeee74e19a2773563d92195758bb",
+  "draw_record_sha256": "746fa2b5d9ba3d251b2a30b9431b65e714888a888a7bd096da6b3ec9666049d2",
+  "results_sha256": "18add09120aa72cf8b221302381423fc8bade50c4fc2853776c1a0f45a7ee821",
   "audit_replay": "pending",
   "serialized_payload_replay": "pending",
-  "checks": []
+  "checks": [
+    {
+      "name": "focused unit tests",
+      "command": "pytest -q experiments/mirror_applications/ma-707-cayley-mirror/tests",
+      "passed": 3,
+      "failed": 0
+    },
+    {
+      "name": "fresh worlds fixed seeds",
+      "command": "python experiments/mirror_applications/ma-707-cayley-mirror/source/run_experiment.py --seeds 70711 70712 70713",
+      "passed": 3,
+      "failed": 0
+    },
+    {
+      "name": "actual NPZ serialization measured",
+      "passed": true,
+      "notes": "Mirror shared payload 1090 bytes; independent orthogonal bank 1054 bytes each fresh world"
+    }
+  ]
 }

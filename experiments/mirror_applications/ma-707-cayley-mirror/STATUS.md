@@ -1,16 +1,12 @@
 # MA-707 status
 
-- Status: SCREENING
+- Status: FAIL
 - Branch: `research/ma-707-cayley-mirror-20261008`
 - Base commit: `c935a903daca5c7d1d48aa50d05b5bd50f239cba`
-- Development complete: no
-- Fresh/audit opened: no
-- Results committed: no
-- Verification committed: no
-
-## Next action
-
-Implement exact Cayley recurrence controls, validate stability identities on development tasks, then run frozen fresh worlds.
+- Development run: seed 70701
+- Fresh worlds: 70711, 70712, 70713; audit was not accessed before freeze
+- Results: low-angle fit/stability passed, storage gate failed; high-angle boundary was measured
+- Verification: 3 focused unit tests passed; deterministic protocol replay pending
 
 ## Blockers
 
