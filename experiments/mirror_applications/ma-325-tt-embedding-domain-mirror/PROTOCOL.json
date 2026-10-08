@@ -1,0 +1,50 @@
+{
+  "experiment_id": "MA-325",
+  "title": "Tensorized embedding domain Mirror views",
+  "status": "PROTOCOL_FROZEN_BEFORE_DEVELOPMENT",
+  "base_commit": "1edb52e",
+  "evidence_lane": "LANGUAGE/STORAGE/QUALITY/COMPUTE",
+  "hypothesis": "In a tiny tied-embedding language-model analogue, one shared TT embedding with domain Mirror phase codes will match independent TT domain tables within 0.05 nat/token on two aligned domains while reducing actual inference bytes by >=15% versus the matched shared-TT/direct-coefficient control. An unrelated domain will reveal whether private embedding state is needed. This protocol is NOT ESTABLISHED because development confirmed the fixed teacher produces near-uniform transitions that all methods fail to learn; no fresh seeds were accessed.",
+  "prior_art_refs": ["PA34"],
+  "physical_object": "16-token x 16-dimensional embedding matrix represented by order-4 TT cores with ranks 4 and tied as the output softmax matrix",
+  "mirror_coordinate": "one domain phase on a selected shared TT core, with two shared core directions U/V",
+  "logical_multiplicity": "three domain-conditioned bigram language models; two planted on one TT-core phase orbit and one unrelated",
+  "model": {
+    "vocab_size": 16,
+    "embedding_dim": 16,
+    "tt_tensor_shape": [4, 4, 4, 4],
+    "tt_ranks": [4, 4, 4],
+    "domains": 3,
+    "aligned_domains": 2,
+    "unrelated_domains": 1,
+    "train_pairs_per_domain": 32768,
+    "validation_pairs_per_domain": 4096,
+    "test_pairs_per_domain": 8192,
+    "batch_per_domain": 128,
+    "optimizer_updates": 600,
+    "development_seeds": [32501, 32502],
+    "fresh_seeds": [32511, 32512, 32513],
+    "optimizer": "Adam",
+    "learning_rate": 0.01
+  },
+  "controls": [
+    "hard-tied shared TT embedding with tied softmax head",
+    "independent TT embedding table per domain with tied head (PA34 native control)",
+    "shared TT cores plus two free direct coefficients per aligned domain on the selected core",
+    "shared TT cores plus one Mirror phase per aligned domain on that core",
+    "shared TT plus one private TT table for the unrelated domain as a shared/private upper control",
+    "independent full FP16 embedding table per domain with tied softmax head"
+  ],
+  "metrics": ["per-domain test NLL and accuracy", "per-domain validation NLL", "actual reloaded inference payload bytes", "tied-head parameter bytes", "optimizer updates and pairs seen", "TT fit/train/inference operation proxy", "CPU examples per second"],
+  "storage": {
+    "authority": "actual deterministic fixed-timestamp ZIP/NPY inference payload bytes after reload",
+    "paid_objects": ["TT cores or full embedding tables", "U/V core directions", "domain codes/phases", "private unrelated-domain table", "metadata and archive headers"],
+    "head_tying": "input embedding and output softmax share the same domain-specific effective table; count the table once and report this tied-head assumption"
+  },
+  "gates": {
+    "promising": "All 3 fresh seeds: each aligned-domain NLL within 0.05 nat/token of independent TT; Mirror payload <=0.85x shared direct-coefficient payload; no worse unrelated-domain NLL than hard-tied; reloaded payload metrics exact.",
+    "fail": "Mirror misses the aligned NLL margin in >=2 seeds, or payload >=direct in >=2 seeds, or unrelated-domain error requires more private state than the frozen private-TT control.",
+    "not_established": "payload reload/hash mismatch, train/test transition leakage, or changed settings after fresh access"
+  },
+  "boundaries": ["tiny synthetic bigram LM analogue, not nanoGPT or natural-language evidence", "two domains deliberately share a planted TT-core orbit", "third domain deliberately unrelated", "fixed-update learning efficiency is not capacity", "tied output head assumption is charged and explicit", "development implementation has a corrected third-domain phase index; teacher task itself was too weak for useful learning at the frozen settings; exploratory teacher scaling changes were not used to access fresh data and are excluded from confirmatory evidence"]
+}

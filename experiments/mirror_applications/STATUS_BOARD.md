@@ -23,7 +23,7 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-325 — tensorized embedding domain Mirror views (P0; PA34)**
+**MA-327 — factorized layer x expert Tucker (P0; PA37)**
 
 MA-255 is reconciled PROMISING only for its aligned post-fit screen; its separate fixed-update variant failed. MA-260, MA-261 and MA-265 are reconciled FAIL. Their dedicated evidence branches are cited in `CLAIM_LEDGER.csv`.
 
