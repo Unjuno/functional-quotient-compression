@@ -1,92 +1,40 @@
 # MA-327 — Factorized layer x expert Tucker address
 
-Status: DEVELOPMENT COMPLETE; amended paired-control protocol frozen before fresh
-Evidence lane: MECHANISM / STORAGE / QUALITY / COMPUTE
-Base commit: <sha>
-Doctrine: `docs/phase2/MIRROR_PARAMETER_INTEGRATION_DOCTRINE.md`
-Integration map: `docs/phase2/MIRROR_PARAMETER_INTEGRATION_MATRIX.md`
+Status: FAIL for Mirror-specific byte/quality value. Dedicated branch: `research/ma-327-factorized-layer-expert-tucker-20261008`.
 
 ## H — hypothesis
 
-For a planted low-rank Tucker matrix bank of logical layer-expert transforms, factorized layer and expert codes will recover held-out combinations at test nMSE <= 1e-5 while saving at least 20% actual bytes over flat pair codes and at least 10% over the nearest ordinary coefficient-product control.
+For a planted rank-2 layer x expert coefficient product over a shared two-matrix Tucker bank, a factorized coordinate would recover held-out combinations with test nMSE <= 1e-5 while saving >=20% actual bytes versus flat pair coefficients and >=10% versus the ordinary coefficient-product control.
 
-## Mirror insertion
+## T — task and execution
 
-> **Mirror insertion:** this experiment adds `m` to <exact object/interface> so that <claimed logical variation> can be expressed without <targeted physical duplication/cost>.
+Synthetic regression task: 4 layers x 4 experts, each maps 16-D inputs to 16-D outputs. A shared bank of two 16x16 matrices is addressed by either flat pair coefficients or layer/expert rank-2 products. Four diagonal layer-expert combinations are withheld from coefficient fitting for the product rows. Controls were hard tying, flat pair coefficients, ordinary product coefficients, Mirror product coefficients, and independent full matrices. Each condition received 500 Adam updates. Development seeds were 32701/32702. Fresh seeds were 32711/32712/32713. Fresh quality used models reloaded from serialized FP16 payloads.
 
-- Native method before adding `m`: PA35-style shared Tucker bank with coefficients per layer-expert pair.
-- Exact insertion point for `m`: coefficient tensor is represented as a product of layer and expert coordinates.
-- Persistent or dynamic `m`: persistent task coordinates.
-- Mirror resources: fixed rank-2 coefficient product; no fresh tuning of rank.
-- Cheapest ordinary parameter that might provide the same freedom: direct rank-2 factorized coefficient product.
+The protocol was amended before fresh access to pair identical initialization and minibatch seeds between ordinary-product and Mirror-product rows. This isolates whether their apparent difference is only optimizer noise. The gates and seeds did not change. See `PROTOCOL.json`.
 
-## Physical-to-logical claim
+## D — decision
 
-- Physical object being shared:
-- Mirror/View coordinate:
-- Claimed logical multiplicity:
-- Why this could save storage:
-- Why it might fail:
+**FAIL for the Mirror-specific claim.** The ordinary coefficient product matched Mirror exactly in all three fresh worlds: same 1,978-byte payload, same SHA-256, and identical test/held-out metrics. Both product forms were 10.6% larger than the flat pair control (1,788 bytes), so neither saved bytes under the actual archive format. The frozen success gate required Mirror to be at least 10% smaller than the ordinary product and <=80% of flat-pair bytes; it failed both storage requirements.
 
-## Prior-art delta
+## C — strongest counter-hypothesis
 
-Read the registry row and referenced PA items first.
+“Factorized layer x expert addressing” here is ordinary rank-2 coefficient factorization. The Mirror label introduces no additional function or compression beyond that native parameterization. Splitting the two factor arrays into separate NPY members also adds archive overhead, making the factorized form larger than the flat code at this small scale.
 
-- Closest prior art:
-- What prior art already establishes:
-- Exact Mirror-specific delta tested here:
-- Cheapest simpler control that could explain the result:
+## U — unresolved
 
-## Comparisons
+This is a small synthetic linear bank, not a trained MoE or transformer. The equal analytical MAC proxy is not an implementation-level operation count; inference throughput was not benchmarked. Larger dimensions may amortize factor-array/archive overhead. No claim about all Tucker deployments is made.
 
-Primary:
-1. ordinary baseline;
-2. existing non-Mirror method being replaced;
-3. byte-near low-rank/gate/shared-basis control;
-4. Mirror candidate;
-5. unrestricted independent-object upper control when practical.
+## Fact / interpretation / hypothesis
 
-## Gates
+**Fact:** Fresh ordinary/Mirror product payloads were 1,978 bytes each, hash-identical within each seed, and metric-identical. All three seeds show +10.6% bytes versus flat coefficients. Product held-out nMSE was 7.02e-5, 1.85e-7, 1.74e-7 in the three worlds, exactly the same for both product rows. Fifteen FP16 payload/hash/metric rows replayed exactly; five tests pass.
 
-### PASS
-All three fresh seeds pass held-out nMSE <=1e-5, Mirror bytes <=0.80x flat pair control, and Mirror is at least 10% smaller than ordinary product coefficients at comparable quality.
+**Interpretation:** The tested factorized address is a re-expression of ordinary low-rank coefficient factorization and did not improve the measured storage frontier.
 
-### FAIL
-Any two fresh seeds miss quality or 20% flat-control byte reduction, ordinary product control comes within 10% bytes, or fit compute exceeds 10x flat coefficients.
+**Hypothesis:** If an alternate Mirror coordinate is useful here, it must add a function or byte-amortization property absent from direct coefficient products; this run provides no evidence for that.
 
-### NOT ESTABLISHED
-Task/control implementation failure, serialization replay mismatch, or fresh data access before protocol/source freeze.
+## Results and verification
 
-## Tuning boundary
-
-Development:
-- worlds/seeds: 32701, 32702.
-- hyperparameters allowed to change: training and numerical settings only if report amendment is committed before fresh access.
-
-Fresh/audit:
-- worlds/seeds:
-- seeds 32711, 32712, 32713; never used for tuning.
-
-## Storage contract
-
-List every paid inference object. Actual serialized payload is authoritative.
-
-## Compute contract
-
-Record tokens/examples, optimizer updates, active-compute proxy, isolated wall-clock, and inference throughput if relevant.
-
-## Results
-
-Do not write conclusions until RESULTS_CORE.csv and VERIFICATION.json exist.
-
-## Decision
-
-FACT: pending.
-INTERPRETATION: pending.
-HYPOTHESIS: pending.
-BOUNDARY: synthetic linear Tucker screen only.
-
-
-## Protocol amendment before fresh access
-
-Development showed the ordinary coefficient product and Mirror coefficient product are the same mathematical family. The final fresh run pairs identical initialization and minibatch seeds across those two rows, and fixes the shared bank to two basis matrices, matching the rank-2 address. This amendment was committed before any fresh seed was opened; all gates and fresh seeds stayed fixed.
+- `RESULTS_CORE.csv`: all fresh method rows.
+- `artifacts/fresh/`: 15 serialized payloads and three metrics records.
+- `source/verify.py`: payload byte/hash and FP16-reloaded metric replay.
+- `VERIFICATION.json`: verification record.

@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (69 completed; 561 UNTESTED)
+- P0: **630** (70 completed; 560 UNTESTED)
 - P1: **422** (12 completed; 410 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1074 UNTESTED, 36 PROMISING, 45 FAIL**
+- Current MA statuses: **1073 UNTESTED, 36 PROMISING, 46 FAIL**
 - 73 local experiment directories are complete; MA-301 and MA-307 are additional completed experiments linked to their dedicated research branches.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-276 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-276 is next; MA-275 remains UNTESTED (P1).
@@ -21,7 +21,9 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-325 — tensorized embedding domain Mirror views (P0; PA34)**
+**MA-330 — tensorized KV cache/view reconstruction (P0; PA35/PA08)**
+
+MA-325 was attempted on development seeds but is **NOT ESTABLISHED**: all methods, including independent full tables, remained at uniform NLL (~ln 16). Fresh seeds stayed sealed; a learnable task requires a separately versioned protocol. See its report on `research/ma-325-tt-embedding-domain-mirror-20261008`.
 
 MA-255 is reconciled as PROMISING only for its aligned post-fit representation screen; a distinct 1,200-update protocol variant failed at development and remains sealed on fresh worlds. See `experiments/mirror_applications/ma-255-mirror-context-superposition/RECONCILIATION.md`.
 
@@ -45,12 +47,12 @@ MA-274 is complete FAIL on a two-world fixed-update development screen: at 5,430
 
 ## Active experiment
 
-No active experiment declared. MA-312 is PROMISING only for the aligned 256-task storage/quality point; its fit compute proxy was over 1,000x the direct coefficient control and throughput lower. MA-258 has a narrow PROMISING aligned codec result; unrelated experts required private/richer state. MA-266 is FAIL for Mirror-specific value: factorized views generalized on an aligned task cross-product, but the ordinary coefficient-product control matched within 2.1% payload bytes. Together with MA-265 this pauses VeRA family follow-up MA-267 pending redesign. MA-255 through MA-299 now have verified status records. MA-257 failed against the exact native PA16 rotational-context control; MA-297/299 SETA remains paused. Next by the registered P0 queue: MA-315.
+No active experiment declared. MA-312 is PROMISING only for the aligned 256-task storage/quality point; its fit compute proxy was over 1,000x the direct coefficient control and throughput lower. MA-258 has a narrow PROMISING aligned codec result; unrelated experts required private/richer state. MA-266 is FAIL for Mirror-specific value: factorized views generalized on an aligned task cross-product, but the ordinary coefficient-product control matched within 2.1% payload bytes. Together with MA-265 this pauses VeRA family follow-up MA-267 pending redesign. MA-255 through MA-299 now have verified status records. MA-257 failed against the exact native PA16 rotational-context control; MA-297/299 SETA remains paused. Next by the registered P0 queue: MA-330.
 
 ## Verified status index
 
 - **PROMISING (35):** MA-001, MA-002, MA-003, MA-004, MA-005, MA-006, MA-007, MA-008, MA-012, MA-014, MA-015, MA-041, MA-076, MA-079, MA-111, MA-121, MA-156, MA-160, MA-171, MA-173, MA-181, MA-189, MA-241, MA-244, MA-245, MA-249, MA-250, MA-251, MA-255, MA-258, MA-268, MA-276, MA-282, MA-312, MA-314, MA-691.
-- **FAIL (37):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-257, MA-260, MA-261, MA-265, MA-266, MA-271, MA-272, MA-273, MA-274, MA-278, MA-286, MA-288, MA-292, MA-296, MA-297, MA-299, MA-301, MA-307, MA-311.
+- **FAIL (38):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-257, MA-260, MA-261, MA-265, MA-266, MA-271, MA-272, MA-273, MA-274, MA-278, MA-286, MA-288, MA-292, MA-296, MA-297, MA-299, MA-301, MA-307, MA-311, MA-327.
 
 All per-ID evidence is retained in the local experiment directories and in `CLAIM_LEDGER.csv`. Consult [the evidence integration audit](../../docs/phase2/MIRROR_MA_EVIDENCE_INTEGRATION_2026-10-08.md) for linked reports, verifications, provenance and claim boundaries.
 
@@ -204,4 +206,9 @@ After A1 reloaded the actual FP16 inference payload, three fresh seeds gave stan
 
 ## MA-318 — FAIL for Mirror storage/compute
 
-Across three fresh 12-skill streams, validation-triggered basis growth added six directions: two for a second 2D skill orbit and one for each unrelated skill. No growth occurred for the first four aligned tasks. Direct evolving-basis coefficients retained all prior tasks at max test nMSE <=2.34e-7 and used 2,160B. Mirror retained all tasks at <=9.70e-6 with the same growth events but used 2,654B (+22.9% vs direct and +18.0% vs independent vectors at 2,250B). Mirror fit proxy was ~324x direct. All 144 fresh checkpoints and metrics replayed exactly; four tests pass. Synthetic post-fit stream; no online learning/capacity claim. Dedicated branch `research/ma-318-continual-coordinate-first-20261008`. Next P0: MA-325.
+Across three fresh 12-skill streams, validation-triggered basis growth added six directions: two for a second 2D skill orbit and one for each unrelated skill. No growth occurred for the first four aligned tasks. Direct evolving-basis coefficients retained all prior tasks at max test nMSE <=2.34e-7 and used 2,160B. Mirror retained all tasks at <=9.70e-6 with the same growth events but used 2,654B (+22.9% vs direct and +18.0% vs independent vectors at 2,250B). Mirror fit proxy was ~324x direct. All 144 fresh checkpoints and metrics replayed exactly; four tests pass. Synthetic post-fit stream; no online learning/capacity claim. Dedicated branch `research/ma-318-continual-coordinate-first-20261008`. Next P0: MA-330; MA-325 was attempted but NOT ESTABLISHED as summarized above.
+
+
+## MA-327 — FAIL for Mirror-specific byte/quality value
+
+On three fresh synthetic 4x4 layer-expert worlds, ordinary rank-2 coefficient product and Mirror product were hash-identical at 1,978B and had exactly equal test/held-out metrics in every seed. Both were 10.6% larger than flat pair codes (1,788B), so the frozen byte gates failed. Fifteen FP16 payloads and metric rows replayed exactly; five tests passed. This is a synthetic linear Tucker screen, not trained MoE evidence. Dedicated branch `research/ma-327-factorized-layer-expert-tucker-20261008`. Next P0: MA-330.
