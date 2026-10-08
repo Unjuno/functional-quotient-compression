@@ -8,6 +8,7 @@ def test_givens_codes_form_orthogonal_views():
  base,theta,x=make_world(43601);q=rotations(theta)
  assert q.shape==(E,D,D) and x.shape==(E,NSEQ,LENGTH)
  assert torch.max(torch.abs(q.transpose(1,2)@q-torch.eye(D)[None]))<1e-6
+ assert torch.max(torch.abs(x-x[:1].expand_as(x)))==0
 
 def test_native_generated_control_matches_view_payload_and_outputs():
  base,theta,x=make_world(43601);a=pack(base,theta,'mirror');b=pack(base,theta,'native')
@@ -18,4 +19,6 @@ def test_native_generated_control_matches_view_payload_and_outputs():
 def test_full_expert_copies_load_all_recurrence_matrices():
  base,theta,x=make_world(43601);v=load(pack(base,theta,'independent'),'independent')
  assert v['A'].shape==(E,D,D) and v['B'].shape==v['C'].shape==(E,D)
- assert simulate(pack(base,theta,'independent'),x,'independent').shape==x.shape
+ y=simulate(pack(base,theta,'independent'),x,'independent')
+ assert y.shape==x.shape
+ assert torch.stack([(y[i]-y[0]).square().mean().sqrt() for i in range(1,E)]).mean()>.01

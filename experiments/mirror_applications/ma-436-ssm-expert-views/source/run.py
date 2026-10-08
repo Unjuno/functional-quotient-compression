@@ -9,8 +9,9 @@ def make_world(seed):
     g=torch.Generator().manual_seed(seed);gx=torch.Generator().manual_seed(seed+1)
     a=torch.randn(D,D,generator=g);a=a*(.65/torch.linalg.matrix_norm(a,ord=2));b=torch.randn(D,generator=g)*.2;c=torch.randn(D,generator=g)*.3;wg=torch.tensor(.8);bg=torch.tensor(-.3)
     theta=(torch.rand(E,D//2,generator=g)-.5)*1.6
-    x=torch.randn(E,NSEQ,LENGTH,generator=gx)
-    for t in range(11,LENGTH,29):x[:,:,t]+=torch.where(torch.rand(E,NSEQ,generator=gx)>.5,1.7,-1.7)
+    x=torch.randn(NSEQ,LENGTH,generator=gx)
+    for t in range(11,LENGTH,29):x[:,t]+=torch.where(torch.rand(NSEQ,generator=gx)>.5,1.7,-1.7)
+    x=x[None,:,:].expand(E,-1,-1).clone()
     return {'A':a,'B':b,'C':c,'wg':wg,'bg':bg},theta,x
 
 def rotations(theta):
@@ -20,7 +21,7 @@ def rotations(theta):
     return q
 
 def transformed(base,theta):
-    q=rotations(theta);a=torch.einsum('eij,jk,ekl->eil',q.transpose(1,2),base['A'],q);b=torch.einsum('eij,j->ei',q.transpose(1,2),base['B']);c=torch.einsum('eij,j->ei',q.transpose(1,2),base['C']);return a,b,c
+    q=rotations(theta);return torch.einsum('eij,jk,ekl->eil',q.transpose(1,2),base['A'],q)
 
 def metadata(kind):return np.frombuffer(json.dumps({'kind':kind,'experts':E,'state_dim':D,'dtype':'float16'},sort_keys=True,separators=(',',':')).encode(),dtype=np.uint8)
 def pack(base,theta,kind):
@@ -28,7 +29,7 @@ def pack(base,theta,kind):
     if kind in ('mirror','native'):
         arr={k:v.detach().cpu().numpy().astype(np.float16) for k,v in base.items()};arr['theta']=theta.numpy().astype(np.float16);arr['route_ids']=ids;tag='shared_ssm_plus_expert_view_code'
     elif kind=='independent':
-        a,b,c=transformed(base,theta);arr={'A':a.detach().numpy().astype(np.float16),'B':b.detach().numpy().astype(np.float16),'C':c.detach().numpy().astype(np.float16),'wg':np.full(E,float(base['wg']),dtype=np.float16),'bg':np.full(E,float(base['bg']),dtype=np.float16),'route_ids':ids};tag='independent_full_ssm_experts'
+        a=transformed(base,theta);arr={'A':a.detach().numpy().astype(np.float16),'B':np.broadcast_to(base['B'].numpy().astype(np.float16),(E,D)).copy(),'C':np.broadcast_to(base['C'].numpy().astype(np.float16),(E,D)).copy(),'wg':np.full(E,float(base['wg']),dtype=np.float16),'bg':np.full(E,float(base['bg']),dtype=np.float16),'route_ids':ids};tag='independent_full_ssm_experts'
     else:
         arr={k:v.detach().cpu().numpy().astype(np.float16) for k,v in base.items()};arr['route_ids']=ids;tag='single_shared_ssm'
     arr['metadata_utf8']=metadata(tag);f=io.BytesIO();np.savez_compressed(f,**arr);return f.getvalue()
@@ -36,7 +37,7 @@ def pack(base,theta,kind):
 def load(raw,method):
     a=np.load(io.BytesIO(raw),allow_pickle=False);v={k:torch.tensor(a[k].astype(np.float32)) for k in a.files if k not in ('metadata_utf8','route_ids')};v['route_ids']=torch.tensor(a['route_ids'].astype(np.int64))
     if method=='mirror':v['Q']=rotations(v['theta'])
-    elif method=='native':v['A_e'],v['B_e'],v['C_e']=transformed(v,v['theta'])
+    elif method=='native':v['A_e']=transformed(v,v['theta'])
     return v
 
 @torch.no_grad()
@@ -45,9 +46,9 @@ def simulate_values(v,x,method):
     for t in range(LENGTH):
         xt=x[:,:,t];wg=v['wg'][:,None] if method=='independent' else v['wg'];bg=v['bg'][:,None] if method=='independent' else v['bg'];u=torch.sigmoid(wg*xt+bg)*xt
         if method=='mirror':
-            q=v['Q'];hv=torch.einsum('eij,enj->eni',q,h);hn=torch.einsum('ij,enj->eni',v['A'],hv)+v['B'][None,None,:]*u[:,:,None];h=torch.einsum('eji,enj->eni',q,hn);y=torch.einsum('i,eni->en',v['C'],hn)
+            q=v['Q'];hv=torch.einsum('eij,enj->eni',q,h);hn=torch.einsum('ij,enj->eni',v['A'],hv);h=torch.einsum('eji,enj->eni',q,hn)+v['B'][None,None,:]*u[:,:,None];y=torch.einsum('i,eni->en',v['C'],h)
         elif method=='native':
-            h=torch.einsum('eij,enj->eni',v['A_e'],h)+v['B_e'][:,None,:]*u[:,:,None];y=torch.einsum('ei,eni->en',v['C_e'],h)
+            h=torch.einsum('eij,enj->eni',v['A_e'],h)+v['B'][None,None,:]*u[:,:,None];y=torch.einsum('i,eni->en',v['C'],h)
         elif method=='independent':
             h=torch.einsum('eij,enj->eni',v['A'],h)+v['B'][:,None,:]*u[:,:,None];y=torch.einsum('ei,eni->en',v['C'],h)
         else:
