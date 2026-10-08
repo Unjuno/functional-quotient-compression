@@ -1,0 +1,10 @@
+{
+  "experiment_id": "MA-427",
+  "protocol_commit": "147d152",
+  "tests": {"command": "python -m unittest discover -s experiments/mirror_applications/ma-427-deq-conditioned-fixedpoint/tests -v", "passed": 2, "failed": 0},
+  "serialization": {"roundtrip_checked": true, "byte_exact": true, "payload_rows": 105, "payload_hashes_replayed": true, "actual_payload_bytes_authoritative": true},
+  "metric_replay": {"checked": true, "max_difference": 0.0, "notes": ["Every serialized payload size and SHA-256 verified.", "Fresh per-code residual convergence and spectral norms replay from run records.", "All fresh solves converged; Mirror misses quality and storage gates against independent matrices."]},
+  "fresh_split_integrity_checked": true,
+  "fresh_worlds": [42710, 42711, 42712],
+  "notes": ["Development worlds selected LR before fresh execution.", "Projection enforced spectral norm <=0.8 for all learned methods."]
+}
