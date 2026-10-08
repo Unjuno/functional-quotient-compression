@@ -1,0 +1,62 @@
+{
+  "experiment_id": "MA-389",
+  "title": "Hash Embedding Mirror importance codes",
+  "status": "FROZEN_DEVELOPMENT",
+  "base_commit": "f3f9240",
+  "evidence_lane": "MECHANISM/STORAGE/RUNTIME/COLLISION_SENSITIVITY",
+  "prior_art_refs": ["PA58"],
+  "hypothesis": "For functions aligned to a pair of hash-selected component tables, one angular importance coordinate per token can replace two native per-token scalar weights at no material quality loss and fewer actual serialized bytes.",
+  "physical_object": "two shared hash component tables and a shared output classifier",
+  "mirror_coordinate": "one persisted angle m_i per token; e_i=cos(m_i)e[h1(i)]+sin(m_i)e[h2(i)]",
+  "logical_multiplicity": "128 token-specific embedding/readout functions",
+  "model": {
+    "vocabulary": 128,
+    "hash_tables": 2,
+    "hash_bucket_count_each": 16,
+    "embedding_dim": 16,
+    "classes": 8,
+    "train_examples": 131072,
+    "validation_examples": 32768,
+    "test_examples": 32768,
+    "batch_size": 256,
+    "optimizer_updates": 512,
+    "optimizer": "Adam",
+    "learning_rate": 0.003,
+    "development_seeds": [38901, 38902],
+    "fresh_seeds": [38911, 38912, 38913],
+    "data": "Synthetic token-to-next-class lookup. Each seed creates two fixed hash buckets per token and two teacher component banks; a task-specific unit-norm two-coordinate importance vector combines the selected component embeddings, followed by a fixed teacher readout to produce hard class labels. Training/validation/test examples are disjoint token draws; the same 128-token vocabulary is evaluated in each split."
+  },
+  "controls": [
+    "independent per-token embedding table plus shared classifier",
+    "native two-table Hash Embedding with two direct importance coefficients per token",
+    "shared two-table Hash Embedding with fixed equal importance weights",
+    "shared two-table Hash Embedding with one Mirror angle per token"
+  ],
+  "development_gate_before_fresh": "Both development seeds: independent accuracy >=0.80; Mirror within 0.02 absolute accuracy and 0.05 NLL of native Hash Embedding; Mirror serialized bytes <=0.60x independent and <=0.90x native hash; collided-token accuracy within 0.02 of native; serialized-state CPU throughput >=0.90x native; direct coefficient control must not match the Mirror point at lower/equal bytes. Otherwise fresh remains sealed.",
+  "success_gate": "All three fresh seeds satisfy quality, byte, collision and runtime gates and Mirror improves the native Hash Embedding quality-byte frontier; exact payload hash/load/replay.",
+  "failure_gate": "Either development seed misses any registered gate or native two-scalar importance matches Mirror at comparable/lower bytes. Fresh remains sealed.",
+  "storage": {
+    "authority": "actual deterministic ZIP/NPY FP16 inference payload after reload",
+    "paid_objects": [
+      "independent embedding table or both hashed component tables",
+      "output classifier and bias",
+      "all per-token scalar weights or Mirror angles",
+      "hash seeds, table size, and lookup metadata",
+      "archive headers"
+    ]
+  },
+  "compute": {
+    "report_examples_and_updates": true,
+    "report_train_wall_clock": true,
+    "report_embedding_lookup_ops": true,
+    "report_active_macs_proxy": true,
+    "report_collision_rate_and_quality": true,
+    "report_serialized_state_cpu_throughput": true
+  },
+  "boundaries": [
+    "synthetic two-hash aligned teacher only",
+    "no natural language or realistic large-vocabulary claim",
+    "token count and possible hash combinations are not independent capacity",
+    "fresh seeds remain sealed unless every development gate passes"
+  ]
+}
