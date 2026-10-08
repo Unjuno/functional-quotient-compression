@@ -1,0 +1,24 @@
+{
+  "experiment_id": "MA-381",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-381-lorahub-mirror-basis/tests",
+    "passed": 4,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Both development seeds evaluated aligned Givens-orbit and unrelated candidate LoRA banks across four methods.",
+    "All sixteen actual ZIP/NPY FP16 payloads passed byte-size and SHA-256 checks; loaded source/target MSE, fusion coefficients, and compute metrics replayed exactly.",
+    "Few-shot LoRAHub composition uses the same 32 support examples per target and ridge least-squares solve for all candidate methods.",
+    "The aligned quality and byte thresholds missed in both development seeds; fresh IDs 38111, 38112, 38113 remain unopened."
+  ]
+}

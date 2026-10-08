@@ -1,0 +1,58 @@
+{
+  "experiment_id": "MA-381",
+  "title": "LoRAHub over Mirror-compressed candidate basis",
+  "status": "FROZEN_DEVELOPMENT_COMPLETED",
+  "base_commit": "bc86da2",
+  "evidence_lane": "QUALITY/STORAGE/COMPUTE/LOW_RANK_COMPOSITION",
+  "hypothesis": "For candidate LoRA updates that share a Givens-conjugacy orbit, one rank-2 physical adapter basis plus one angle per candidate can preserve few-shot signed LoRAHub composition quality with fewer bytes than the full candidate bank and outperform a scalar shared-basis control; unrelated candidates should require private modules.",
+  "prior_art_refs": ["PA55"],
+  "physical_object": "one rank-2 16x16 adapter basis versus eight independently trained candidate LoRA updates",
+  "mirror_coordinate": "one Givens angle per candidate; each candidate update is a conjugated view of the shared rank-2 update",
+  "logical_multiplicity": "eight candidate LoRA modules composed into four few-shot target task updates",
+  "model": {
+    "input_dim": 16,
+    "output_dim": 16,
+    "rank": 2,
+    "source_candidates": 8,
+    "target_tasks": 4,
+    "few_shot_examples_per_target": 32,
+    "source_train_examples": 8192,
+    "validation_examples": 2048,
+    "test_examples": 4096,
+    "optimizer_updates": 1600,
+    "optimizer": "Adam",
+    "learning_rate": 0.001,
+    "development_seeds": [38101, 38102],
+    "fresh_seeds": [38111, 38112, 38113],
+    "candidate_conditions": ["aligned Givens orbit", "unrelated independent rank-2 updates"],
+    "composition": "four fixed signed mixtures of the same eight candidate updates; infer composition coefficients from 32 support examples by ridge least squares"
+  },
+  "controls": [
+    "LoRAHub reference: all eight independent rank-2 candidate modules, with signed few-shot composition",
+    "one shared rank-2 basis plus one direct scalar per candidate",
+    "one shared rank-2 basis plus one Givens angle per candidate",
+    "hard-shared single rank-2 update with no candidate code"
+  ],
+  "development_gate_before_fresh": "For the aligned condition in both seeds: full-bank target test MSE <1e-4; Mirror target MSE <=1.10x full-bank and <=0.80x scalar shared basis; actual Mirror bytes <=0.60x full bank; and Mirror source-task residuals finite. Report unrelated condition as a boundary test; fresh remains sealed if aligned gate fails.",
+  "success_gate": "All three fresh aligned worlds meet the registered quality and byte gates; unrelated candidate condition shows and records any private-capacity requirement; include one-time decode MACs and few-shot search cost; exact reload/replay.",
+  "failure_gate": "Mirror misses aligned-condition quality or byte gate in both development seeds, or scalar matches within the registered quality margin.",
+  "storage": {
+    "authority": "actual deterministic ZIP/NPY FP16 inference payload bytes after reload",
+    "paid_objects": ["independent LoRA A/B factors or shared basis factors", "all candidate scalar/angle codes", "all few-shot target composition coefficients", "task IDs, metadata, archive headers"]
+  },
+  "compute": {
+    "report_source_training_updates_and_examples": true,
+    "report_few_shot_support_examples": true,
+    "report_ridge_composition_solve_cost": true,
+    "report_candidate_encode_macs": true,
+    "report_one_time_view_decode_macs": true,
+    "report_fit_wall_clock_and_target_throughput": true
+  },
+  "boundaries": [
+    "synthetic linear low-rank task bank only; no NLP or LoRAHub benchmark claim",
+    "target mixture count is fixed across methods and not counted as Mirror capacity",
+    "aligned and unrelated candidate families are both preregistered; do not tune on fresh",
+    "fixed-update result is learning-efficiency evidence, not a near-converged capacity result",
+    "fresh IDs remain sealed until aligned development gates pass"
+  ]
+}
