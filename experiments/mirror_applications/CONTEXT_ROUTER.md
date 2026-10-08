@@ -229,6 +229,16 @@ Read PA337..343. DHE requires no per-ID embedding table, TT-Rec has tensor-train
 
 Read PA344..350. DOFA is a direct dynamic wavelength-to-filter hypernetwork; AnySat/SatMAE, CROMA, Prithvi, TerraMind and AlphaEarth provide multisensor conditioning and task baselines. Report sensor-response/calibration metadata, generated filters, pixel/GSD/band counts, OOD sensor/held-out wavelength combinations, geographic/time-separated land cover/change/segmentation metrics, bytes and GPU inference wall-time. SAR and optical sensors cannot be assumed information-equivalent. Require actual functional advantage beyond one sensor ID or ordinary spectral mask.
 
+### Gauge-aware natural LoRA banks and physical cache reuse (MA-1096..1115)
+
+Read PA351–371, the fifteenth research notes and `research_intake/natural_lora_orbit_20261008/README.md` **only if** selected MA requires them. First classify: weight-space oracle check, trainable new-task m, merged-model generation, multiple logical adapters, or cache/state runtime test.
+
+Natural adapter audits must hold **base model revision and layer path fixed**, split whole task adapters before fitting basis, compare `D=B@A` row/column projectors and apply an invertible GL(r) gauge perturbation test. Stable pretrained W singular vectors do not imply natural update deltas align. Controls: CtS, CtM, EigenLoRAx, VB-LoRA, MetaTT, Pico/GLoRA or native basic LoRA depending on the target, plus simple m controls and shared+private residual.
+
+For KV reuse, LRAgent Flash-LoRA-Attention and PReCache are mandatory when the hypothesis involves multi-LoRA shared base cache and adapter LR contributions. aLoRA and normal re-prefill remain controls. Measure physical pointer alias/copy, honest cache provenance, prefill and neutral-reconstruction work, TTFT/VRAM and target NLL. The MA691 exact right-View result cannot certify cross-adapter exact equivalence.
+
+Do not report L0 mathematical unit tests or L1 oracle heldout weight-reconstruction as L2 task ability or L3 deployment gains. Count shared U/V storage and actual per-task code bytes.
+
 ## Historical result loading rule
 
 Do **not** load every SRM/MS/MN document.
