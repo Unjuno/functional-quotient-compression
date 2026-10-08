@@ -3,12 +3,12 @@
 - Status: PROMISING
 - Branch: `research/ma-255-mirror-context-superposition-20261008`
 - Base commit: `f7f76de193063950d28b7834f337840b1e86f0ce`
-- Last verified commit: pending
+- Last verified commit: eb357a5
 - Development complete: yes (task-code rank 2 selected)
 - Fresh/audit opened: yes (seeds 101, 211, 307, 401; rank 2 locked)
-- Results committed: no
-- Verification committed: no
-- Registry row updated: pending
+- Results committed: yes
+- Verification committed: yes
+- Registry row updated: yes
 
 ## Next action
 
