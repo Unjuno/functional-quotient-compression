@@ -1,0 +1,35 @@
+{
+  "experiment_id": "MA-301",
+  "commit": "e88d11b",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-301-continuous-mirror-supermask/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": false,
+    "notes": "Custom compact payload decode reproduces inference state within specified angle/gate quantization; primary metrics are evaluated from decoded payload. Payload lengths count the complete serialized header and tensor bytes."
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0,
+    "rows_replayed": 35
+  },
+  "fresh_split_integrity_checked": true,
+  "development_worlds": [
+    30110,
+    30111
+  ],
+  "fresh_worlds": [
+    30112,
+    30113,
+    30114
+  ],
+  "notes": [
+    "Fresh settings were frozen before access: amended 32-task protocol, LR 0.003, int8 angle codec.",
+    "Initial four-task torch.save screen is retained separately and not pooled with amended results.",
+    "The throughput field is only precomputed-effective-weight throughput and excludes coordinate construction; no direct-view runtime claim is made.",
+    "The aligned fresh quality gate passed only 1/3 worlds; status FAIL."
+  ]
+}
