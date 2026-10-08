@@ -16,7 +16,8 @@
     "exact closed-form AI Engram trace bank",
     "matched rank-4 PCA reconstruction without Mirror naming",
     "random rank-4 basis least-squares coefficients",
-    "small private residual fallback if basis error exceeds development threshold"
+    "small private residual fallback if basis error exceeds development threshold",
+    "Mirror coefficient bank with oracle-measured full private residuals where reconstruction MSE > 1e-4 (diagnostic allocation upper bound)"
   ],
   "task": "Synthetic key-value memory binding; report sufficiency MSE, reactivation cosine, specificity leakage, necessity ablation effect, actual serialized bytes and per-memory bytes.",
   "development": {
@@ -56,5 +57,6 @@
     "PCA-equivalent control directly tests Mirror specificity",
     "no natural continual-learning or language model claim",
     "number of addresses is not independent capacity absent causal tests"
-  ]
+  ],
+  "amendment_1": "Before audit: define the private fallback threshold numerically. If development trace reconstruction MSE exceeds 1e-4, use and charge that memory's full residual; otherwise store only its code. Fresh trace counts and gates are unchanged. This makes the shared/private allocation diagnostic reproducible."
 }
