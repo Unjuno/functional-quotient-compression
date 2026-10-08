@@ -1,0 +1,22 @@
+{
+  "experiment_id": "MA-674",
+  "title": "Sparse top-k Mirror LoRA atoms",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/COMPUTE",
+  "base_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
+  "draw_id": "Draw43",
+  "hypothesis": "A small bank of shared low-rank update atoms plus sparse task codes can reconstruct multiple LoRA functions at lower actual bytes and active adapter compute than storing each task delta independently.",
+  "physical_object": "shared matrix-update atoms (rank-1 factors)",
+  "mirror_coordinate": "sparse top-2 atom indices and coefficients per task",
+  "logical_multiplicity": "composed task-specific low-rank updates",
+  "prior_art_refs": ["PA149"],
+  "controls": ["MoLE-style direct top-2 mixture of the same shared atoms", "independent full task delta matrices", "shared atom bank with dense coefficients", "private residual for out-of-span tasks"],
+  "task": "Synthetic matrix-delta bank: discover a rank-6 shared atom span on development task identities, encode fresh low-rank compositions, and measure heldout matrix reconstruction, serialized bytes, active atoms and compute proxy.",
+  "development": {"worlds_or_seeds": [67401], "selection_metric": "Fit rank-6 shared span from development task matrices; rank and top-k frozen at 6 and 2."},
+  "fresh": {"worlds_or_seeds": [67411, 67412, 67413], "locked_before_access": true, "split": "Each world uses 12 development tasks to fit the shared basis, then 12 in-span and 4 out-of-span fresh task matrices. Fresh identities are disjoint; oracle matrix coding is evaluated separately from learning m from examples."},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["shared atom factors", "task indices and coefficients", "dense task coefficients", "independent full deltas", "private residuals", "metadata"]},
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true},
+  "success_gate": "On >=2/3 worlds, in-span reconstruction MSE <=1e-8 and shared atom bank actual bytes <=60% of full delta bank, with top-2 active atoms; Mirror-specific value also requires a quality/storage/active-compute advantage over matched MoLE-style direct atom mixing.",
+  "failure_gate": "FAIL if in-span quality or storage gate fails on >=2/3 worlds, or if direct MoLE-style mixing matches Mirror on the Pareto axes. Out-of-span failures and private-residual costs must be reported.",
+  "boundaries": ["synthetic matrix deltas only", "atoms are aligned to the synthetic generative family", "fresh task code is oracle-fit from full delta matrices, not learned from examples", "no pretrained model or end-to-end adapter training claim", "LoRA gauge invariance is addressed by comparing full functional delta matrices, not raw factor coordinates"]
+}
