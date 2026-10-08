@@ -2429,3 +2429,273 @@ Combines compact structural Gaussian and reference-appearance streams with geome
 
 **Mirror implication:** Mirror scene/appearance code must preserve cross-view consistency while improving bits and latency against this native codec.
 
+## PA266 — NeRV video INR
+
+**NeRV: Neural Representations for Videos**  
+https://proceedings.neurips.cc/paper/2021/hash/b44182379bf9fae976e6ae5996e13cd8-Abstract.html
+
+Represents frame sequence as a neural function queried by a frame/time index, storing video-specific information in decoder weights.
+
+**Mirror implication:** A frame code/time address and implicit video decoding are prior art; Mirror must compress a bank of video/segment-specific decoders or add useful functional differences beyond simple embeddings.
+
+## PA267 — HNeRV hybrid video INR
+
+**HNeRV: A Hybrid Neural Representation for Videos**  
+https://arxiv.org/abs/2304.02633
+
+Uses content-adaptive encoded frame embeddings fed to a neural video decoder rather than only fixed frame indices.
+
+**Mirror implication:** Content-aware per-frame latent is a direct control for Mirror temporal Views; count encoder and per-frame embeddings/bitstream, not just decoder weights.
+
+## PA268 — NerVast segment parameter sharing
+
+**NerVast: Compression-Efficient Scaling of Implicit Neural Video Representations via Scene-based Parameter-sharing**  
+https://openaccess.thecvf.com/content/WACV2026/html/Lee_NerVast_Compression-Efficient_Scaling_of_Implicit_Neural_Video_Representations_via_Scene-based_WACV_2026_paper.html
+
+Groups temporally related video chunks, selects parameter-sharing masks using a Fisher-like sensitivity proxy and jointly optimizes shared/nonshared INR weights.
+
+**Mirror implication:** This is a very close direct prior for selecting shared physical video parameters. Mirror must replace part of the remaining chunk-private state with small m and improve actual bitrate/decoder FPS beyond NerVast.
+
+## PA269 — DCVC-UF chunk-parallel neural video
+
+**Ultra-Fast Neural Video Compression**  
+https://openaccess.thecvf.com/content/CVPR2026/html/Li_Ultra-Fast_Neural_Video_Compression_CVPR_2026_paper.html
+
+Encodes multiple adjacent video frames into one chunk latent and reconstructs frames in parallel using cross-frame interaction and frame-specific decoders with streamlined entropy coding.
+
+**Mirror implication:** The chunk latent and frame-parallel decoder are native prior art. Test Mirror frame-offset Views as a lower-byte alternative to frame-specific decoder state; measure actual coded bits and decode FPS.
+
+## PA270 — DCVC-RT practical neural video
+
+**Towards Practical Real-Time Neural Video Compression**  
+https://arxiv.org/abs/2502.20762
+
+Optimizes real-time neural video coding by reducing function-call and memory-I/O costs, using implicit temporal modeling and rate-control module banks.
+
+**Mirror implication:** A small Mirror transform is not useful if it increases kernel launches or memory traffic. Compare native real-time codec, rate-control bank, true latency and coding bitstream.
+
+## PA271 — DCMVC temporal context modulation
+
+**Neural Video Compression with Context Modulation**  
+https://arxiv.org/abs/2505.14541
+
+Uses flow orientation and reference-driven context compensation to modulate propagated temporal features in a conditional video codec.
+
+**Mirror implication:** Mirror temporal context modulation must beat existing oriented context and compensation, not simply beat unmodulated propagation.
+
+## PA272 — CoANeRV shared coordinate decoder
+
+**CoANeRV: Coordinate-Aware Token-Space Neural Video Representation**  
+https://arxiv.org/abs/2608.13938
+
+Forms per-video tokens in a feed-forward pass and reconstructs spatiotemporal coordinates through a shared coordinate-conditioned decoder.
+
+**Mirror implication:** This already uses one decoder plus compact video-specific representations. Mirror can target factorized time/video/region codes only if it improves native token rate-distortion and memory.
+
+## PA273 — S-NVRC prefix video codec
+
+**Scalable Neural Video Representation Compression**  
+https://arxiv.org/abs/2609.04273
+
+Uses prefix-nested feature grids and decoder layers for one embedded scalable video bitstream with adjustable bitrate and decoding complexity.
+
+**Mirror implication:** Variable code/rank/width for video is prior art. Mirror m must improve the coded rate-distortion-complexity frontier over native nested prefixes.
+
+## PA274 — SIEDD shared implicit video encoder
+
+**SIEDD: Shared-Implicit Encoder with Discrete Decoders**  
+https://arxiv.org/abs/2506.23382
+
+Combines a coordinate-based encoder shared across frame groups with parallel lightweight discrete decoders, emphasizing encoding speed.
+
+**Mirror implication:** Mirror can compress the remaining group-specific decoders into shared Views, but must account for shared-encoder training and coding/decoding latency.
+
+## PA275 — G-CNN exact group equivariance
+
+**Group Equivariant Convolutional Networks**  
+https://proceedings.mlr.press/v48/cohenc16.html
+
+Uses group convolution/parameter tying so transformed features follow known group actions.
+
+**Mirror implication:** A group element as View m is not independently novel. Exact equivariant group orbits often add no independent functional information; compare group convolution and gauge invariance.
+
+## PA276 — Steerable CNN irreducible feature types
+
+**Steerable CNNs**  
+https://arxiv.org/abs/1612.08498
+
+Constructs steerable feature representations from group-theoretic elementary types and equivariant filter bases.
+
+**Mirror implication:** The steerable basis and group action are direct controls. Mirror-specific value requires task-dependent useful symmetry breaking, code factorization or lower actual storage/compute.
+
+## PA277 — EGNN geometric equivariance
+
+**E(n) Equivariant Graph Neural Networks**  
+https://proceedings.mlr.press/v139/satorras21a.html
+
+Constructs geometric message passing equivariant to rotations/translations/reflections/permutations without expensive higher-order features.
+
+**Mirror implication:** Mirror task/geometry code must beat native EGNN and demonstrate more than coordinate-equivalent outputs; geometric frame changes alone are not added logical capacity.
+
+## PA278 — e3nn tensor products and irreps
+
+**e3nn: Euclidean Neural Networks**  
+https://arxiv.org/abs/2207.09453
+
+Provides E(3)-equivariant tensor-product and spherical-harmonic operators over irreducible geometric feature types.
+
+**Mirror implication:** Any irrep-channel Mirror code must count tensor-product basis and Wigner/CG computation and preserve exact or bounded equivariance error.
+
+## PA279 — Learned symmetry stochastic weight sharing
+
+**Learning Symmetries via Weight-Sharing with Doubly Stochastic Tensors**  
+https://arxiv.org/abs/2412.04594
+
+Learns soft data-dependent symmetry structures through trainable approximately weight-sharing doubly stochastic tensors.
+
+**Mirror implication:** Learned soft equivariance is prior art. Mirror should compress task-specific learned symmetry choices beyond native stochastic sharing and measure off-orbit task benefit.
+
+## PA280 — SEMoLA discovered symmetry
+
+**Learning equivariant models by discovering symmetries with learnable augmentations**  
+https://arxiv.org/abs/2506.03914
+
+Discovers data-relevant symmetry transformations using learned augmentations jointly with equivariant modeling rather than requiring a fixed known group.
+
+**Mirror implication:** Mirror cannot claim symmetry discovery itself. Test whether compact m encodes learned group selection per task or domain more efficiently than SEMoLA/native augmentation.
+
+## PA281 — TACOS spiking continual learner
+
+**TACOS: Task Agnostic Continual Learning in Spiking Neural Networks**  
+https://arxiv.org/abs/2409.00021
+
+Combines synaptic consolidation, neuromodulation and metaplasticity to mitigate continual interference without explicit task labels and without growing stored state.
+
+**Mirror implication:** TACOS is a strong continual spiking control; Mirror task labels are unfair when unavailable natively. Report synaptic/plastic state, spike operations, energy and forgetting.
+
+## PA282 — STL-SNN learned thresholds
+
+**A Synapse-Threshold Synergistic Learning Approach for Spiking Neural Networks**  
+https://arxiv.org/abs/2206.06129
+
+Jointly learns synaptic weights and spike thresholds, showing neuronal threshold parameters can modify effective spiking computation.
+
+**Mirror implication:** Threshold-based functional modulation is prior art. Mirror adds value only by sharing/modulating multiple task- or time-specific thresholds at lower cost or higher accuracy/energy efficiency.
+
+## PA283 — TEBN temporal spiking normalization
+
+**Temporal Effective Batch Normalization in Spiking Neural Networks**  
+https://proceedings.neurips.cc/paper_files/paper/2022/hash/de2ad3ed44ee4e675b3be42aa0b615d0-Abstract-Conference.html
+
+Uses per-time-step normalization scaling to improve SNN training dynamics and low-time-step performance.
+
+**Mirror implication:** A temporal gain table is not Mirror-specific novelty; structured m must beat per-step TEBN coefficients at equal state and spike throughput.
+
+## PA284 — EAS-SNN event sampling
+
+**EAS-SNN: End-to-End Adaptive Sampling and Representation for Event-based Detection with Recurrent Spiking Neural Networks**  
+https://arxiv.org/abs/2403.12574
+
+Co-designs adaptive event sampling and recurrent spiking representations for event camera detection.
+
+**Mirror implication:** Mirror time-bin or sensor-event coordinates must preserve event timing and detect quality beyond native adaptive sampling at actual event operations and energy.
+
+## PA285 — Event temporal hyperacuity
+
+**Temporal coding enables hyperacuity in event-based vision**  
+https://www.nature.com/articles/s41467-026-76878-6
+
+Shows that precise event timing under controlled sensor motion carries subpixel discrimination information often lost in frame aggregation.
+
+**Mirror implication:** Do not let temporal Mirror token/phase grouping discard event timing essential for target decisions; test fine-timing ablations and comparable latency/energy.
+
+## PA286 — LightPro programmable photonic couplers
+
+**LightPro: a linear photonic processor with full programmability**  
+https://www.nature.com/articles/s44172-026-00707-3
+
+Develops programmable photonic matrix-vector multiplication using phase-change tunable directional couplers plus architecture search and pruning.
+
+**Mirror implication:** Programmable optical hardware already exists. Mirror must reduce number of configured devices, programming bits, switch latency and total energy relative to full LightPro reconfiguration.
+
+## PA287 — MDR-HDONN physically reconfigurable diffraction
+
+**Multi-Dimensional Reconfigurable, Physically Composable Hybrid Diffractive Optical Neural Network**  
+https://arxiv.org/abs/2411.05748
+
+Reuses physically fabricated diffractive elements by differentiably adapting system variables and composing optical/photonic modules.
+
+**Mirror implication:** Optical physical reuse via tunable geometry is prior art. Mirror should test smaller phase/program codes at preserved optical task quality and switching energy.
+
+## PA288 — Neural network beam codebooks
+
+**Neural Codebook Design for Network Beam Management**  
+https://arxiv.org/abs/2403.03053
+
+Learns joint access/beam/CSI codebooks across sectors for efficient wireless beam management.
+
+**Mirror implication:** Beam codebooks are direct prior for physical antenna elements with logical beam roles; Mirror must improve limited-feedback bits, spectral efficiency or codebook state beyond a learned beam codebook.
+
+## PA289 — Site-specific Type-II CSI subspace
+
+**Bridging Standardized Codebook and Site-Specific Beamforming: A Unified Limited-Feedback Framework**  
+https://arxiv.org/abs/2604.14524
+
+Uses low-overhead site fingerprints to infer a dominant beam subspace then feeds back its low-dimensional effective channel coefficients.
+
+**Mirror implication:** Small subspace feedback codes are already known. Mirror task/site m must reduce feedback and preserve spectral efficiency beyond this direct baseline.
+
+## PA290 — RIS joint beamforming
+
+**Low-Complexity Joint Beamforming for RIS-Assisted MU-MISO Systems Based on Model-Driven Deep Learning**  
+https://arxiv.org/abs/2311.15313
+
+Jointly optimizes configurable intelligent-surface phases and access-point beamforming via model-driven learning.
+
+**Mirror implication:** RIS phase state is a controllable physical operator, not automatically a new Mirror parameter. Compare native WMMSE/model-driven beamforming, CSI signaling and switch costs.
+
+## PA291 — CsiNet feedback codec
+
+**Deep Learning for Massive MIMO CSI Feedback**  
+https://arxiv.org/abs/1712.08919
+
+Encodes/downsamples MIMO channel-state information to low-dimensional feedback codewords and reconstructs useful channel estimates.
+
+**Mirror implication:** Mirror CSI codes must be evaluated against native CSI feedback compressed rate, beamforming quality and calibration, not only reconstruction MSE.
+
+## PA292 — RANF spatial-audio personalization
+
+**Retrieval-Augmented Neural Field for HRTF Upsampling and Personalization**  
+https://arxiv.org/abs/2501.13017
+
+Retrieves acoustically similar listeners and uses their head-related transfer functions with a neural field to reconstruct dense spatial HRTF maps from sparse directions.
+
+**Mirror implication:** Listener-specific neural fields and retrieval are prior art. Mirror must reduce per-listener code/measurements while preserving spatial audio perception and frequency response.
+
+## PA293 — Anthropometric HRTF latent personalization
+
+**Head-Related Transfer Function Individualization Using Anthropometric Features and Spatially Independent Latent Representation**  
+https://arxiv.org/abs/2508.16176
+
+Predicts personalized head-related transfer-function latents using listener anthropometric features and direction-conditioned decoder.
+
+**Mirror implication:** A person latent and direction coordinate already exist; Mirror should test compact factorized listener×direction function Views against the native latent decoder.
+
+## PA294 — Parameter-free approximate equivariance
+
+**Parameter-free approximate equivariance for tasks with finite group symmetry**  
+https://arxiv.org/abs/2506.08244
+
+Imposes approximate equivariance with no new learnable group parameter by using a latent-symmetry consistency constraint.
+
+**Mirror implication:** A zero-parameter symmetry regularizer is a very strong cost control; Mirror symmetry m needs additional useful functionality or generalization beyond this constraint.
+
+## PA295 — Coherent nanophotonic programmable MZI
+
+**Deep learning with coherent nanophotonic circuits**  
+https://www.nature.com/articles/nphoton.2017.93
+
+Experimentally demonstrated a programmable silicon-photonic processor using a mesh of Mach-Zehnder interferometers as an optical matrix-computation substrate.
+
+**Mirror implication:** Optical phase-programming is established hardware; count configuration bits, calibration drift, insertion loss and measured reconfiguration cost before identifying Mirror-specific benefits.
+
