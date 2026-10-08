@@ -6,10 +6,10 @@ Integration branch: `research/mirror-application-current-evidence-20261008`; can
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (112 completed; 518 UNTESTED)
+- P0: **630** (113 completed; 517 UNTESTED)
 - P1: **422** (12 completed; 410 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1031 UNTESTED, 40 PROMISING, 84 FAIL**
+- Current MA statuses: **1030 UNTESTED, 40 PROMISING, 85 FAIL**
 - 48 experiment directories, complete with status/protocol/results/verification files, are represented in the current evidence set.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-268 is next.
@@ -26,6 +26,8 @@ Integration branch: `research/mirror-application-current-evidence-20261008`; can
 **MA-405 — StyleGAN2-like FFN weight modulation (P0; PA65)**
 
 **MA-405 FAIL:** on a synthetic context-permutation MLP, four-angle Mirror scored 57.64% vs native modulation 63.28%, FiLM 72.37%, and independent FFNs 89.83%. Mirror used 10,081 actual bytes; the quality gain over shared was only 0.52pp. Payload hashes and serialization replay verified. **Next: MA-407, demodulated Mirror-MoE.**
+
+**MA-407 FAIL:** raw and row-norm-demodulated Givens Mirror both scored 66.45% in the fresh synthetic expert screen; activation RMS CV matched within 1e-7. The orthogonal input rotations preserve the weight norms being normalized, making demodulation functionally null here. **Next: MA-408, CondConv-style synthesized FFN.**
 
 MA-366 is reconciled as FAIL: direct pair coefficients match Mirror outputs and bytes, and PA02 factorization is smaller. The runner accidentally generated the registered fresh IDs before the gate; those rows are excluded and fresh integrity is invalid. MA-367 and MA-368 are also recorded FAIL. MA-369 is completed FAIL on its dedicated branch; next executable P0 is MA-371.
 
@@ -55,7 +57,7 @@ MA-327 FAIL: ordinary rank-2 coefficient products match Mirror exactly and both 
 
 ## Active experiment
 
-MA-405 is completed FAIL and committed on its dedicated branch. Next is MA-407.
+MA-407 is completed FAIL and committed on its dedicated branch. Next is MA-408.
 
 ## Verified status index
 

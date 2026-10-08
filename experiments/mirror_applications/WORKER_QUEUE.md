@@ -145,8 +145,8 @@ High-information P0:
 1. MA-401 — FiLM versus Mirror feature conditioning
 2. MA-403 — token-wise generated Mirror modulation
 3. MA-405 — StyleGAN2-like FFN weight modulation
-4. MA-407 — demodulated Mirror-MoE
-5. MA-408 — CondConv-style synthesized FFN
+4. MA-407 — demodulated Mirror-MoE (completed FAIL; orthogonal Givens makes demodulation a null)
+5. MA-408 — CondConv-style synthesized FFN — current candidate
 6. MA-411 — canonical transform + sparse Mirror refinement
 7. MA-413 — factorized concept Mirror coordinates
 8. MA-416/417 — shared decoder + Mirror function codes
