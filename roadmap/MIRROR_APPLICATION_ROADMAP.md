@@ -5,7 +5,7 @@ Status: active backlog roadmap
 
 ## Goal
 
-Systematically test whether the extra low-description Mirror parameter m can replace duplicated physical state or improve logical functional freedom in strong existing methods. The registry now has **935** candidate experiments; MA-876..935 were added as UNTESTED research targets on 2026-10-08.
+Systematically test whether the extra low-description Mirror parameter m can replace duplicated physical state or improve logical functional freedom in strong existing methods. The registry now has **995** candidate experiments; MA-876..935 were added as UNTESTED research targets on 2026-10-08.
 
 The unit of work is an MA-xxx entry from:
 `experiments/mirror_applications/IDEA_REGISTRY.csv`.
@@ -253,6 +253,30 @@ Flow Map Matching, Consistency Models, S4S, LoRA.rar and EST-LoRA define already
 ### AA. Cross-model block and feature stitching
 
 StitchLLM and cross-model residual-stream SAE feature transfer provide native affine connectors; functional alignment can mislead about shared information. MA-929..935 test source×target×layer View codes over a shared bridge with held-out pair and informational counterexamples.
+
+### AB. Neural video: frame/chunk logical roles and predictive coding
+
+MA-936..950 tests the extra Mirror parameter `m` around **already-shared** video INR and codec structures. NerVast (Fisher-selected partial sharing) and DCVC-UF (one chunk latent with parallel frame-specific decoders) are the closest native baselines; DCVC-RT and DCMVC test operational speed/context costs. Research question: can the remaining chunk/frame-private function state become a compact m at comparable video RD, real coded bits and decode FPS?
+
+### AC. Soft-equivariant logical functions with a symmetry/gauge audit
+
+MA-951..960 tests real task-specific functional differences over G-CNN/steerable/e3nn/EGNN group representations. Learnable symmetry constraints and parameter-free equivariance are existing controls. Exact transformed copies or gauge-equivalent parameterizations **do not** constitute additional independent learned capacity.
+
+### AD. Spiking neural function coordinates
+
+MA-961..970 tests neuron threshold, temporal normalization, leak and neuromodulatory Mirror codes around a common synaptic physical network. STL-SNN, TEBN, TACOS and event-sampling SNNs are direct controls. Target true spike/energy/latency per useful task and no oracle task labels in task-agnostic continual setups.
+
+### AE. Reconfigurable optical matrix hardware as a physical W
+
+MA-971..980 treats an optical MZI/PCM/diffractive substrate as the physical object and a small phase/program configuration m as a candidate shared logical function code. Phase programming itself is prior art (LightPro, coherent nanophotonic MZI, hybrid diffractive architectures). Mirror adoption needs fewer control bits/devices and lower measured switch+compute energy at preserved optical quality.
+
+### AF. Wireless and physical beam-state factorization
+
+MA-981..989 tests site×user×frequency/channel Mirror coordinates over shared physical beamformers, learned beam codebooks, RIS phase surfaces and CSI codecs. Existing NBL, Type-II, CsiNet and RIS optimizers are required controls. Count actual feedback/pilot/control bits, net spectral efficiency, reconfiguration and power.
+
+### AG. Spatial-audio head transfer functions
+
+MA-990..995 tests one shared HRTF neural spectral basis with listener/direction/head-pose m. RANF retrieval and anthropometric listener latents are closest prior methods. Target listener held-outs and physical binaural transfer quality (spectral distortion, ITD/ILD/localization) per stored bit and head-motion update time.
 
 ## KV-cache transformation lane
 
