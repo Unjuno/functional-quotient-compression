@@ -1,0 +1,49 @@
+{
+  "experiment_id": "MA-879",
+  "phase": "pre_audit_freeze",
+  "files": {
+    "PROTOCOL.json": "d77eb21d920eb6d8c17add215d88c410c5a705e488b4137855408397fd0a0fc7",
+    "source/run_ma879.py": "608be8d2235a65a3a9d0b25b7d2c030dbe243a97719619e28b260cd224eb77bb",
+    "artifacts/metrics_development.csv": "5583c792466fba6405c63d4edb206bbe1385e372ce3c5f1ed1e25aa9c3bf26f7",
+    "artifacts/development_curve.csv": "8f62997e102e75d1ad6ff5516b1ca4bc4146174cea50400945f635ce64b97b46",
+    "source/DEVELOPMENT_FREEZE.json": "4cf84af3f1cee4dda1715a07f82fd679c4d5f8f31c3a7ab539f05aa835fa9a0a"
+  },
+  "selected_updates": {
+    "cachebridge_weighted_ridge": {
+      "updates": 0,
+      "mean_dev_attention_mse": 0.0
+    },
+    "mirror_raw": {
+      "updates": 400,
+      "mean_dev_attention_mse": 0.12024942546356114
+    },
+    "mirror_attention": {
+      "updates": 450,
+      "mean_dev_attention_mse": 0.12150462731045315
+    },
+    "basis2_attention": {
+      "updates": 500,
+      "mean_dev_attention_mse": 0.06591458084140293
+    },
+    "shared_attention": {
+      "updates": 450,
+      "mean_dev_attention_mse": 0.22003224944152558
+    },
+    "independent_attention": {
+      "updates": 500,
+      "mean_dev_attention_mse": 0.00021346671593747146
+    }
+  },
+  "audit_worlds": [
+    11,
+    17,
+    23
+  ],
+  "model_seeds": [
+    31,
+    47,
+    59
+  ],
+  "audit_query_accessed": false,
+  "settings_frozen": true
+}
