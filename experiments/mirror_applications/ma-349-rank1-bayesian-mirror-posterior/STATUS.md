@@ -5,3 +5,5 @@
 Three tests pass; ten development payload/hash/metric rows replay exactly. See README for H/T/D/C/U and fact/interpretation/hypothesis.
 
 Next eligible P0: check the live registry after MA-349.
+
+Last verified commit: `1c7791fda55db44f53496b6a3ba776d3bd958f2d`.
