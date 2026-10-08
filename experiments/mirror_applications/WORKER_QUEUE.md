@@ -413,7 +413,7 @@ Pilot: BOLT-like shared orthogonal basis plus 6 diagonal m coefficients averaged
 
 When selecting MA-1096/1099/1102/1105/1114/1115, include BOLT (PA372), function-space/curvature metric (CG-LoRA PA373, Fora PA374), SVD+CUR localized task residual (PA376), task-vector bases PA375, information filtering PA377, and a gauge-invariant functional/OOD check (PA378..381) where applicable. Do not inflate the MA backlog with duplicated new rows for these existing questions. A task-code success must survive *actual held-out task outcomes and serializer/runtime*, not just weight reconstruction.
 
-MA-320 is complete. MA-322, MA-303 and MA-304 are complete; MA-305 is P1 and **MA-309 is next P0** by registry order. Do not interrupt active/frozen jobs to consume supplemental intake.
+MA-320 is complete. MA-322, MA-303 and MA-304 are complete; MA-303/304 trigger the consecutive-failure family pause; MA-305 is paused. **MA-309 is the next unrelated P0**. Do not interrupt active/frozen jobs to consume supplemental intake.
 
 ## Sixteenth research intake — KG relation operators, cameras, robotics and acoustic rooms
 
@@ -477,3 +477,8 @@ MA-303 is complete FAIL for Mirror-specific storage margin: 34,892B Mirror vs 34
 
 
 MA-304 is complete FAIL: 256-edge Mirror quality passed, but total payload was only 0.141% below the direct coefficient control and phase fitting used ~3x operations with slower eager CPU throughput. See report and verification. MA-305 is P1. Next P0: MA-309.
+
+
+## Family pause: masks and subnetworks
+
+MA-303 and MA-304 are consecutive P0 FAILs with the same structural result: ordinary direct codes reproduce Mirror functions while total archive bytes improve by less than 0.15%. Pause MA-305 and related mask-family candidates until a redesign adds a distinct quality/compute mechanism or materially changes amortization. Continue unrelated P0 families; MA-309 is next.
