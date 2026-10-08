@@ -1,6 +1,6 @@
 # Worker queue
 
-**Current operational pointer (2026-10-08): MA-416/417.** MA-413 is completed FAIL: factorized Mirror missed the held-out-combination margin against direct-table and FiLM controls. Continue with the shared-decoder/View candidates.
+**Current operational pointer (2026-10-08): MA-417.** MA-416 is completed FAIL: two-angle hidden Views missed the ordinary latent2 reconstruction-quality gate at similar bytes. Continue with the function-codebook candidate.
 
 The queue is derived from `IDEA_REGISTRY.csv`. The registry is authoritative.
 
@@ -149,7 +149,7 @@ High-information P0:
 5. MA-408 — CondConv-style synthesized FFN (completed PROMISING in bounded synthetic control)
 6. MA-411 — canonical transform + sparse Mirror refinement (completed PROMISING for aligned shared-support operators)
 7. MA-413 — factorized concept Mirror coordinates (completed FAIL; missed >=5pp margin over FiLM/direct table)
-8. MA-416/417 — shared decoder + Mirror function codes
+8. MA-416 — shared decoder + Mirror function codes (completed FAIL); MA-417 — Mirror codebook for multiple neural functions — current candidate
 9. MA-418/419 — compositional/modulated neural-function codes
 10. MA-424/425 — continuous-depth Mirror dynamics
 11. MA-427 — DEQ conditioned fixed-point map
