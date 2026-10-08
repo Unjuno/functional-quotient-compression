@@ -1,25 +1,19 @@
 # MA-461 status
 
-- Status: SCREENING
+- Status: FAIL
 - Branch: `research/ma-461-hyperformer-mirror-codes-20261008`
 - Base commit: `a211269`
 - Protocol frozen: yes; SHA-256 4dc721b28bb7ef1a816b796b160b6aed084ea1a1094b2c10090efb83ad704447
-- Development complete: no
-- Fresh/audit opened: no
-- Results committed: no
-- Verification committed: no
-- Registry row: SCREENING
+- Development complete: yes; seeds 46101, 46102
+- Fresh/audit opened: no; sealed by frozen gate
+- Results committed: pending
+- Verification committed: pending
+- Registry row: SCREENING until terminal metadata update
 
-## Next action
+## Decision
 
-Protocol/source are frozen; next run only development seeds 46101 and 46102.
+FAIL: Mirror uses 3,286 vs 3,854 actual bytes and 160 vs 352 MAC proxy/input, but misses the storage threshold, exceeds the quality bound on seed 46102, and exactly matches the native low-rank control on both seeds.
 
-## Blockers
+## Preserved implementation records
 
-None.
-
-## Decisions / rulings
-
-PA82 reviewed. The native low-rank generator is an exact functional-form attribution control. Independent per-pair matrices are evaluated only on training pairs to avoid audit leakage.
-
-Evaluation correction: initial development files used delta-only RMSE despite serializing the common identity base. The shared base cancels exactly in this output RMSE, but corrected runs explicitly replay `base + adapter`; original files are preserved under `runs/superseded_delta_only_metric_*` and excluded from the terminal report. This changed neither training nor thresholds and used no new/fresh data.
+Initial delta-only evaluation metrics were superseded and preserved under `runs/superseded_delta_only_metric_*`. The common identity base cancels in RMSE, but the corrected runs and verifier explicitly apply `base + adapter`. No model setting or threshold changed; fresh data stayed sealed.

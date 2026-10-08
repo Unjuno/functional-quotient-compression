@@ -1,19 +1,25 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-461",
+  "commit": "pending result commit",
   "tests": {
-    "command": "<command>",
+    "command": "pytest -q -p no:cacheprovider experiments/mirror_applications/ma-461-hyperformer-mirror-codes/tests",
     "passed": null,
     "failed": null
   },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "roundtrip_checked": true,
+    "byte_exact": true
   },
   "metric_replay": {
-    "checked": false,
-    "max_difference": null
+    "checked": true,
+    "max_difference": 0.0
   },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Native low-rank generator payload/hash and heldout output exactly alias Mirror in both development seeds.",
+    "Full function replay includes the common identity base plus generated adapter; corrected metrics replay exactly.",
+    "Independent table is fit only on observed pairs and is not a heldout predictor.",
+    "Fresh seeds 46111, 46112, 46113 remained sealed after frozen FAIL gates.",
+    "Superseded delta-only evaluations are preserved and excluded from terminal metrics."
+  ]
 }

@@ -30,9 +30,9 @@ def verify(root):
             if len(raw)!=rec['payload_bytes'] or hashlib.sha256(raw).hexdigest()!=rec['payload_sha256']:errors.append(f'{seed}/{method}: payload mismatch')
             rng=np.random.default_rng(seed+46121);hs=[];ss=[]
             for t,l in HELD:
-                x=torch.tensor(rng.normal(size=(NEVAL,D)).astype(np.float32));y=x@targets[t,l].T;xhat=x@predict(method,a,t,l).T;hs.append(float(torch.sqrt(((y-xhat)**2).mean())))
+                x=torch.tensor(rng.normal(size=(NEVAL,D)).astype(np.float32));y=x@(torch.eye(D)+targets[t,l]).T;xhat=x@predict(method,a,t,l).T;hs.append(float(torch.sqrt(((y-xhat)**2).mean())))
             for t,l in TRAIN:
-                x=torch.tensor(rng.normal(size=(NEVAL,D)).astype(np.float32));y=x@targets[t,l].T;xhat=x@predict(method,a,t,l).T;ss.append(float(torch.sqrt(((y-xhat)**2).mean())))
+                x=torch.tensor(rng.normal(size=(NEVAL,D)).astype(np.float32));y=x@(torch.eye(D)+targets[t,l]).T;xhat=x@predict(method,a,t,l).T;ss.append(float(torch.sqrt(((y-xhat)**2).mean())))
             # independent table consumes the same random query stream but has no valid audit prediction; only seen pairs are authoritative.
             if method!='independent_seen':
                 diff=max(abs(x-y) for x,y in zip(hs,rec['heldout_pair_rmse']));maxdiff=max(maxdiff,diff)
