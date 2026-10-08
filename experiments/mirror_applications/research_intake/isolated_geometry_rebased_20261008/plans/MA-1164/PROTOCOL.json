@@ -77,5 +77,46 @@
     "aligned teacher not natural capacity",
     "P95 measured only with valid kernels",
     "arxiv preprint native control"
-  ]
+  ],
+  "split": {
+    "development": {
+      "seeds": [
+        11,
+        12,
+        13
+      ],
+      "selection_metric": "native LRKV dev cross entropy (no audit tuning)"
+    },
+    "fresh": {
+      "seeds": [
+        101,
+        102,
+        103,
+        104,
+        105
+      ],
+      "locked_before_access": true
+    },
+    "disjoint_task_identities": true,
+    "no_target_oracle_deltas": true
+  },
+  "gates": {
+    "PASS": "4/5 fresh worlds NLL difference <=+0.02 nat/token and median serialized bytes <=0.85 native byte-near LRKV, P95 decode <=1.10 and no head collapse",
+    "FAIL": "native byte-near LRKV/linear code dominates, NLL fails >=2/5, or storage/runtime overhead eliminates gains",
+    "UNCERTAIN": "Native LRKV faithful comparator or real runtime missing; insufficient true task diversity; do not promote aligned synthetic-only result."
+  },
+  "uncertainty_model": {
+    "quality_metric": "mean cross entropy (nat/token)",
+    "n_min_fresh": 5,
+    "components": [
+      "u_seed",
+      "u_eval",
+      "u_num"
+    ],
+    "combined_standard": "u_c=sqrt(sum component variances) only if independent; otherwise covariance",
+    "coverage_factor": 2,
+    "sequential_stop": "run all 5 fresh seeds once after 3 dev, no audit tuning",
+    "storage": "actual serialized inference bytes",
+    "runtime": "seconds or ms with hardware batch/context and GPU synchronization"
+  }
 }
