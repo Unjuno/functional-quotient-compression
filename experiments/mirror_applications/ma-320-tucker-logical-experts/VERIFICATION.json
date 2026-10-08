@@ -1,9 +1,28 @@
 {
   "experiment_id": "MA-320",
-  "commit": "protocol 3f23869; pre-fresh source/result commit pending",
-  "tests": {"command": "python -m pytest -q experiments/mirror_applications/ma-320-tucker-logical-experts/tests", "passed": 5, "failed": 0},
-  "serialization": {"roundtrip_checked": true, "byte_exact": true, "payload_hashes_exact": true},
-  "metric_replay": {"checked": false, "max_difference": null},
-  "fresh_split_integrity_checked": false,
-  "notes": ["Development results only. Frozen fresh seeds 32011, 32012, 32013 have not been opened.", "Mirror phase codes preserve aligned experts below the quality threshold; all 16 unrelated experts are assigned private full matrices by the frozen validation fallback rule."]
+  "commit": "7612211 (pre-fresh source/result freeze); final evidence commit pending",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-320-tucker-logical-experts/tests",
+    "passed": 5,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "payload_hashes_exact": true,
+    "package_count": 45
+  },
+  "metric_replay": {
+    "checked": true,
+    "summary_rows": 45,
+    "allocation_events": 2240,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Fresh seeds 32011, 32012, 32013 were opened only after commit 7612211 froze source/results.",
+    "Mirror payload was 3.20% smaller than matched rank-16 Tucker+fallback in 3/3, missing 10% promotion gate; quality <=1e-4 in every task.",
+    "All 16 off-orbit experts allocated private full matrices.",
+    "Mirror phase fit proxy ~32x direct Tucker; synthetic post-fit screen only, no router or capacity claim."
+  ]
 }

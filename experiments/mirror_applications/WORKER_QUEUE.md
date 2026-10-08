@@ -402,7 +402,7 @@ Read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_FOURTEENTH_SWEEP.
 
 L0/L1 outcomes alone never justify MA PROMISING as a deployable compression claim. Pre-trained base SVD and shared bases may cost storage/calibration, and heldout test-task weight deltas cannot be used to fit a deployable code at inference.
 
-MA-255 through MA-319 have now been reconciled or completed on dedicated branches. The current next candidate is **MA-320**; the supplemental intake does not reorder the registered queue.
+MA-255 through MA-319 have now been reconciled or completed on dedicated branches. The current next candidate is **MA-322** after MA-320 completed; the supplemental intake does not reorder the registered queue.
 
 ## Supplemental function-space falsification (no newly allocated MA IDs)
 
@@ -412,7 +412,7 @@ Pilot: BOLT-like shared orthogonal basis plus 6 diagonal m coefficients averaged
 
 When selecting MA-1096/1099/1102/1105/1114/1115, include BOLT (PA372), function-space/curvature metric (CG-LoRA PA373, Fora PA374), SVD+CUR localized task residual (PA376), task-vector bases PA375, information filtering PA377, and a gauge-invariant functional/OOD check (PA378..381) where applicable. Do not inflate the MA backlog with duplicated new rows for these existing questions. A task-code success must survive *actual held-out task outcomes and serializer/runtime*, not just weight reconstruction.
 
-**MA-320 is next** after reconciliation of MA-255 through MA-319. Do not interrupt active/frozen jobs to consume supplemental intake.
+MA-320 is complete. **MA-322 is next** after reconciliation of MA-255 through MA-319. Do not interrupt active/frozen jobs to consume supplemental intake.
 
 ## Sixteenth research intake — KG relation operators, cameras, robotics and acoustic rooms
 
