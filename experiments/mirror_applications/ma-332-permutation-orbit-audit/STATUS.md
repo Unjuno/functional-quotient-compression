@@ -1,17 +1,12 @@
 # MA-332 status
 
-- Status: PROTOCOL FROZEN BEFORE DEVELOPMENT
+- Status: FAIL as additional functional capacity; symmetry audit passed
 - Branch: `research/ma-332-permutation-orbit-audit-20261008`
-- Base commit: `16578db`
-- Development complete: no
-- Fresh/audit opened: no
-- Results committed: no
-- Verification committed: no
+- Protocol frozen: `231bbaa`
+- Fresh seeds 33211/33212/33213: complete
+- Results committed: pending
+- Verification committed: pending
 
-## Next action
+## Ruling
 
-Implement and test exact function-preserving hidden-unit permutations on development seeds.
-
-## Blockers
-
-None known.
+Hidden-unit permutation views are function-preserving gauge variants. Shared checkpoint plus paid permutation codes saves duplicate storage, but all variants count as one logical function.
