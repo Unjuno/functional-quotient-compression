@@ -35,3 +35,24 @@ A recurrent address is an ordinary persistent register; external storage is alre
 ## U — unresolved
 
 Natural Mamba states, learned selective scans, long contexts beyond 512, online task switching, and accelerator memory bandwidth remain untested.
+
+## Results and decision
+
+**D — FAIL.** Corrected fresh Mirror accuracy remained 100% through delay 512, but probability NRMSE rose from 0.00419 at delay 8 to 0.01559 at delay 512. The external exact address had zero error at every delay. Actual payload was 2,920B for Mirror vs 1,938B external; recurrent address state was 8B vs 4B. Equal-width 4D register also retained 100% accuracy and had lower NRMSE than Mirror, while rank-one fast-weight memory degraded to 94.4% accuracy at delay 512.
+
+**FACT:** Mirror retained the correct role decision for every tested example at every delay, but confidence drift increased. It used more state bytes and more serialized bytes than the external route control. The ordinary register was a stronger recurrent-memory control.
+
+**INTERPRETATION:** recurrent `m` can serve as persistent address memory in this synthetic task, but it does not compress the exact external address or outperform a generic same-purpose register. This is a negative storage/retention Pareto result despite perfect hard-decision recall.
+
+**H:** tested whether address `m` can live in recurrent state through distractors at lower total state bytes than an external route table.
+
+**T:** 4 logical functions, delays 8/32/128/512, 500 updates × batch64 for learned methods; development worlds 44100/44101 selected LR 0.01 for Mirror/register/fastweight; fresh worlds 44110/44111/44112, three seeds; amended primary probability NRMSE with accuracy secondary. External exact route is a deterministic no-training baseline.
+
+**C:** this is a short synthetic role-recall task and does not test Mamba selective state or learned online routing. A custom two-coordinate code may underperform a discrete ID/register by construction.
+
+**U:** natural recurrent state, online task changes, longer delays, non-oracle cue extraction, and accelerator memory bandwidth.
+
+### Protocol amendments
+
+- **A1:** retention initialized at alpha=0.018 erased cues; changed initial retention to alpha=0.9975, keeping worlds/seeds/gates fixed. Initial fresh rows invalidated.
+- **A2:** corrected primary metric from an accidental NLL implementation to the registered probability-vector NRMSE; NLL/accuracy remain diagnostics. Initial A1 fresh rows invalidated and rerun. See both `artifacts/audit_amendment_A*.json` records.
