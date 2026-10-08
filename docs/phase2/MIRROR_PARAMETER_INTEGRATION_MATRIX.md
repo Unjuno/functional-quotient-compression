@@ -44,6 +44,16 @@ The table below tells workers where to try the same extra low-description functi
 | Quantization / gauge | quantized shared weight | gauge/codebook `m` | lower rate/error through addressable gauge? | QuaRot / codebook quantization |
 | Supernets / elastic models | shared supernetwork | width/depth/architecture `m` | cheap correction for many submodels? | OFA, MatFormer, US-Net |
 
+| Cross-model KV translation | source-target head/layer translator maps | model-pair/head/layer `m` over shared translator basis | reduce N-by-N handoff map storage with target quality? | Heo ridge, CacheBridge, MoT, native re-prefill |
+| Multi-scene NeRF | per-scene hash/tensor fields and decoder | scene/time `m` on shared field basis | more useful rendered scenes per physical field? | C-NGP, ReFiNe, Instant-NGP, TensoRF |
+| 4D Gaussian assets | canonical Gaussian anchors and deformers | scene/time/appearance/SE3 `m` | dynamic logical assets from shared geometry? | 4DGS, ADC-GS, CC-4DGS, P-4DGS |
+| Multi-speaker TTS | speaker scales / hypernetwork / MoA adapters | speaker×layer×content×style `m` | new voices with small marginal state? | NanoVoice, HyperTTS, MoA, Hyper-MoA |
+| Neural speech codec | semantic and acoustic streams/codebooks | stream/speaker `m` | shared codec functions at fixed bitrate/fidelity? | HybridCodec, SoundStream/EnCodec |
+| Flow-map generator | two-time transport operator | start-time×end-time `m` | many flow maps from one backbone? | Flow Map Matching, Consistency Models |
+| Diffusion solver | optimized solver coefficient/schedule | sampler/budget/state `m` | multiple useful fast samplers at low code cost? | S4S, S4S-Alt |
+| Image personalization | subject/style LoRA banks and merger | subject×style×timestep `m` | adaptive composition without per-pair adapters? | LoRA.rar, EST-LoRA |
+| Cross-model stitching | pretrained model blocks/affine feature maps | source×target×layer/feature `m` | portable functions with fewer paid connectors? | StitchLLM, affine feature stitching, information audit |
+
 ## Required variants after a direct screen
 
 A family that passes a first mechanism screen should usually be expanded in this order:
