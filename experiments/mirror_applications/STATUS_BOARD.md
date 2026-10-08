@@ -25,7 +25,7 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 **MA-385 — DualPrompt general prompt + Mirror expert prompt views (P0; PA57)**
 
-MA-383 FAILED its synthetic aligned prompt screen: the Mirror payload was 1,034 B versus 838 B for explicit prompts and lost 8–10 percentage points of task accuracy; fresh remains sealed. MA-381 remains PROMISING only for an aligned synthetic Givens-orbit bank and missed strict byte/quality gates. Continue with the DualPrompt general/expert prompt decomposition and keep the same retrieval protocol across controls. MA-369/371/372 remain UNTESTED and paused pending width/depth output-code family redesign.
+MA-374 original replay limitation: A1 found the original twelve payloads absent and 0/12 original hashes reproducible under the current runtime; its new variant replays exactly against its own metrics. MA-383 FAILED its synthetic aligned prompt screen: the Mirror payload was 1,034 B versus 838 B for explicit prompts and lost 8–10 percentage points of task accuracy; fresh remains sealed. MA-381 remains PROMISING only for an aligned synthetic Givens-orbit bank and missed strict byte/quality gates. Continue with the DualPrompt general/expert prompt decomposition and keep the same retrieval protocol across controls. MA-369/371/372 remain UNTESTED and paused pending width/depth output-code family redesign.
 
 Required controls: DualPrompt explicit general plus per-task expert prompts, shared expert prompt basis, direct low-rank coefficients, and Mirror views. Measure task accuracy, bytes per task, forgetting, retrieval, generation cost, and compare to the native explicit expert prompt bank.
 

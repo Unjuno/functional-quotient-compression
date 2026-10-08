@@ -1,24 +1,31 @@
 {
   "experiment_id": "MA-374",
-  "commit": "52fd6b6",
+  "commit": "4e75142d1848ad4e7f51de9fa1dbda0bd02990a7",
+  "historical_verification": {
+    "reported_commit": "52fd6b6",
+    "preserved_claim": "The original verification reported 4 tests passed, 12 payloads byte-exact and metrics replayed with max difference 0.0.",
+    "independently_reproduced": false,
+    "reason": "The original NPZ payloads are absent from the canonical branch. Regeneration from the frozen source/seeds in the current runtime produced 0/12 matching original hashes and material metric drift in some controls."
+  },
+  "current_runtime_replay": {
+    "variant": "protocol_variants/runtime_replay_20261008",
+    "runtime": "Python 3.12.14; PyTorch 2.10.0+cpu; NumPy 2.3.5; Linux x86_64",
+    "payloads_archived": 12,
+    "payload_hashes_match_variant_json": true,
+    "metric_replay": "exact for both development seeds using source/verify.py",
+    "original_hashes_matched": 0,
+    "fresh_opened": false
+  },
   "tests": {
     "command": "python -m pytest -q experiments/mirror_applications/ma-374-albert-shared-depth-mirror/tests",
     "passed": 4,
     "failed": 0
   },
-  "serialization": {
-    "roundtrip_checked": true,
-    "byte_exact": true
-  },
-  "metric_replay": {
-    "checked": true,
-    "max_difference": 0.0
-  },
   "fresh_split_integrity_checked": true,
   "notes": [
     "Two development worlds used distinct recurrence coefficients and fresh randomized sequences.",
-    "All 12 serialized payloads were sized, SHA-256 checked, loaded from ZIP/NPY FP16, and every prefix's validation/test NLL, accuracy, and MAC count replayed exactly.",
+    "The original verification stated that all 12 payloads replayed exactly, but those payload files were missing from the canonical branch; this claim could not be reproduced in the current runtime. The separate runtime replay variant archives its 12 actual payloads and replays them exactly against its own metrics.",
     "Prefix throughput was initially measured while computing the full four-layer prefix stack. The evaluator was corrected to stop at each requested depth; the locked development seeds were rerun. Stored payload hashes and quality metrics remained exact; throughput values now correspond to the requested depth.",
-    "The preregistered multi-depth gate failed in seed 37401, so fresh seeds 37411, 37412, 37413 remain unopened."
+    "The preregistered multi-depth gate failed in development; fresh seeds 37411, 37412, 37413 remain unopened."
   ]
 }
