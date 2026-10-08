@@ -1,0 +1,81 @@
+{
+  "experiment_id": "MA-1164",
+  "title": "LRKV residual head basis with Mirror codes",
+  "status": "UNTESTED",
+  "plan_only": true,
+  "worker_claim": false,
+  "isolated_research_branch": "research/mirror-isolated-protocols-rebased-20261008",
+  "base_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
+  "evidence_lane": "MECHANISM",
+  "hypothesis": "Beat native LRKV residual map bank by >=15% actual incremental serialized bytes with <=0.02 nat/token NLL loss and <=10% P95 decode latency overhead on >=4/5 fresh worlds",
+  "physical_object": "native LRKV shared full-rank K/V maps with independently low-rank head residuals",
+  "mirror_coordinate": "head/task/view m selecting source-trained residual basis factors with signed scaling and optional Givens",
+  "prior_art_refs": [
+    "PA423",
+    "PA424",
+    "PA385",
+    "PA115"
+  ],
+  "controls": [
+    "native LRKV residual per head",
+    "shared-only LRKV",
+    "byte-matched low-rank coefficient bank",
+    "GQA/MLA",
+    "independent MHA upper bound"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      11,
+      12,
+      13
+    ],
+    "selection_metric": "source/dev NLL"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      101,
+      102,
+      103,
+      104,
+      105
+    ],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "shared KV base",
+      "shared residual basis",
+      "m code bank",
+      "decoder",
+      "metadata",
+      "private residuals"
+    ]
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true,
+    "report_batch_dtype_gpu_clock": true
+  },
+  "success_gate": "4/5 fresh worlds NLL difference <=+0.02 nat/token and median serialized bytes <=0.85 native byte-near LRKV, P95 decode <=1.10 and no head collapse",
+  "failure_gate": "native byte-near LRKV/linear code dominates, NLL fails >=2/5, or storage/runtime overhead eliminates gains",
+  "uncertainty": {
+    "components": [
+      "u_seed",
+      "u_eval",
+      "u_num"
+    ],
+    "combined": "u_c=sqrt(sum(u_i^2)) if independent; covariance otherwise",
+    "coverage_factor": 2,
+    "minimum_fresh": 5,
+    "sequential_stop": "no audit tuning/early favorable stop"
+  },
+  "boundaries": [
+    "native LRKV already solves key/value sharing",
+    "aligned teacher not natural capacity",
+    "P95 measured only with valid kernels",
+    "arxiv preprint native control"
+  ]
+}
