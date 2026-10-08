@@ -21,6 +21,7 @@
   },
   "controls": [
     "Native FMM two-time conditioned flow-map MLP receiving state x and endpoints (s,t)",
+    "Native shared-basis FMM coefficient network: direct two-time conditioning of the same shared flow-map basis",
     "Additive endpoint factors U[s]+V[t] decoded into the same shared flow-map basis",
     "Independent full 2x2 matrix per interval (seen-interval upper control; held-out score N/A)"
   ],
@@ -187,5 +188,12 @@
     "NFE counts one learned interval-map call; the map is not compared with a native ODE solver at equal NFE.",
     "Independent interval matrices have no learned held-out relation map; their heldout metric is N/A.",
     "The time grid and endpoint indices are shared schema; the full time grid metadata is included in every serialized payload."
+  ],
+  "amendments": [
+    {
+      "before": "development data access",
+      "reason": "Implementation audit added the native shared-basis coefficient-conditioning control so Mirror is compared both with a direct state-conditioned FMM map and an ordinary two-time coefficient network over the same physical basis.",
+      "protocol_effect": "Adds a native conditioning control only; data, held-out intervals, metrics, tuning space, thresholds and fresh seeds unchanged."
+    }
   ]
 }

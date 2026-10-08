@@ -13,12 +13,13 @@ Factorized Mirror endpoint coordinates over one shared two-time flow-map basis c
 
 ## Prior-art delta and controls
 
-PA260 learns a two-time transport map and frames consistency-model formulations. This experiment tests the marginal representation of the endpoint pair. Native FMM conditioning is the strongest registered control; additive endpoint factors test whether multiplicative Mirror composition adds anything beyond simpler factorization.
+PA260 learns a two-time transport map and frames consistency-model formulations. This experiment tests the marginal representation of the endpoint pair. Native FMM conditioning is the strongest registered control; a second native control conditions a shared flow-map basis directly on both endpoints. Additive endpoint factors test whether multiplicative Mirror composition adds anything beyond simpler factorization. A pre-development amendment added the shared-basis native control; no data, settings or gates changed.
 
 1. Native FMM-conditioned map `F(x,s,t)` (two-time endpoint input).
-2. Shared flow-map basis with additive `U[s]+V[t]` coefficient control.
-3. Shared basis with multiplicative Mirror `U[s]⊙V[t]` code and learned coefficient decoder.
-4. Independent full 2×2 matrix per interval, as a seen-pair upper control.
+2. Native shared-basis coefficient network conditioned directly on `(s,t)`.
+3. Shared flow-map basis with additive `U[s]+V[t]` coefficient control.
+4. Shared basis with multiplicative Mirror `U[s]⊙V[t]` code and learned coefficient decoder.
+5. Independent full 2×2 matrix per interval, as a seen-pair upper control.
 
 ## Protocol
 
