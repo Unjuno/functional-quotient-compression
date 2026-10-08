@@ -1,0 +1,10 @@
+{
+  "experiment_id": "MA-425",
+  "protocol_commit": "2b5a444",
+  "tests": {"command": "python -m unittest discover -s experiments/mirror_applications/ma-425-continuous-depth-views/tests -v", "passed": 2, "failed": 0},
+  "serialization": {"roundtrip_checked": true, "byte_exact": true, "payload_rows": 84, "payload_hashes_replayed": true, "actual_payload_bytes_authoritative": true},
+  "metric_replay": {"checked": true, "max_difference": 0.0, "notes": ["All saved payload sizes and hashes replay.", "Fresh trajectory errors and NFE replay from run records.", "Mirror passes t=2 quality ratio but fails <=90% byte gate."]},
+  "fresh_split_integrity_checked": true,
+  "fresh_worlds": [42510, 42511, 42512],
+  "notes": ["Development settings locked before fresh runs.", "Teacher matches the continuous rotation family; aligned evidence only."]
+}
