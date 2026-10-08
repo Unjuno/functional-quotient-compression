@@ -2,20 +2,20 @@
 
 ## H — Hypothesis
 
-A compact domain Mirror code can condition one shared learned update policy to provide distinct adaptation behavior across two task families, improving over a single unconditioned schedule while using fewer policy bytes than two independent schedules.
+A compact domain Mirror code conditions one shared update policy to outperform an unconditioned schedule by 10%, match separate per-domain schedules within 5%, and reduce policy bytes.
 
-## T — Planned test
+## T — Test
 
-Two 2D linear-regression support-design families (isotropic and axis-anisotropic), with held-out task IDs and three fresh worlds. Compare tuned Adam, one learned schedule, two independent learned schedules, and one shared schedule conditioned by a paid domain code.
+Two 2D linear-regression support-design families, three fresh worlds, three seeds, 10 tasks per domain, and 1/2/4/8 updates. Compare tuned Adam, unconditioned learned schedule, independent schedules, and conditioned schedule. A1 charges the complete shared basis; quality measurements were unchanged.
 
-## D — Pending
+## D — FAIL
 
-Protocol frozen; implementation and results pending.
+Step-4 mean NRMSE: Adam 0.5008, unconditioned 0.7708, conditioned 0.6020, separate 0.6370. The conditioned policy loses to Adam and misses the separate-schedule quality gate in domain 0. Exact N=20 serialized bytes/task: conditioned 151.65B, separate 139.05B, Adam 113.85B.
 
 ## C — Strongest counter-hypothesis
 
-A domain-specific scalar learning rate may capture the full benefit without a learned conditioned optimizer.
+The task family does not need learned conditional optimization; tuned Adam performs better with fewer bytes.
 
 ## U — Unknown
 
-Whether conditioning helps across fresh domains and whether the policy-code byte savings survive serialization.
+No natural-task or nonlinear evidence.
