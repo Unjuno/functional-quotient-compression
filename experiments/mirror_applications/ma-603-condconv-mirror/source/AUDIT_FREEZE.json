@@ -1,0 +1,46 @@
+{
+  "experiment_id": "MA-603",
+  "phase": "pre_audit_freeze",
+  "base_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
+  "files": {
+    "PROTOCOL.json": "9d6aa6207621f3a11c3b867bc84678ecf37f1cfad619a16d531c21f3723a1a4d",
+    "source/run_ma603.py": "7d73ad9835a050a852838451758ebee10123a2b169b13962af140ed22c44787f",
+    "artifacts/metrics_development.csv": "fc3dae2bba722187c232d3a64fb85d7c99a0a7864ab802204fd142e5cc7be192",
+    "artifacts/development_curve.csv": "272d79f49e455c7e80b6c9591bbea2a60863388697f54d0c3044dca38c53586b",
+    "source/DEVELOPMENT_FREEZE.json": "61a9df5d7302addfc37cac80012526af800515f2c092e5b7f91c1127e087547a"
+  },
+  "selected_updates": {
+    "mirror_givens": {
+      "updates": 1500,
+      "mean_dev_mse": 1.2844528934389624e-05
+    },
+    "condconv4": {
+      "updates": 1500,
+      "mean_dev_mse": 0.00276516837766394
+    },
+    "film8": {
+      "updates": 1500,
+      "mean_dev_mse": 0.11239936947822571
+    },
+    "full_dynamic8": {
+      "updates": 1500,
+      "mean_dev_mse": 0.002978572156280279
+    },
+    "static_linear": {
+      "updates": 1250,
+      "mean_dev_mse": 0.3203718115886052
+    }
+  },
+  "audit_world_seeds": [
+    11,
+    17,
+    23
+  ],
+  "model_seeds": [
+    31,
+    47,
+    59
+  ],
+  "query_accessed": false,
+  "no_changes_after_freeze": true
+}
