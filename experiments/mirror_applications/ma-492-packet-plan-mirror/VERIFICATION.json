@@ -1,10 +1,28 @@
 {
   "experiment_id": "MA-492",
   "draw_id": "Draw40",
-  "protocol_sha256": "",
-  "draw_record_sha256": "",
-  "results_sha256": "",
-  "audit_replay": "pending",
-  "serialized_payload_replay": "pending",
-  "checks": []
+  "protocol_sha256": "1ca298ebd17ff8efa9b02f29655b9a8c2300c2f3c53670f23b2b4514e83c66de",
+  "draw_record_sha256": "bb2fd4fd1c8322600a1f6aa25cda05d53d79d793cb29da66c29569047d52c43b",
+  "results_sha256": "d0b2beb3a3cc5d09eac2ee6eca24b1d7819975df512ace22f4dbd30787ffa6ad",
+  "audit_replay": "passed; fresh metrics and serialized payloads reproduced; wall time excluded from equality comparison",
+  "serialized_payload_replay": "passed; 817 B Mirror/VQ, 603 B shared, 822 B independent, 1023 B continuous for each fresh seed",
+  "checks": [
+    {
+      "name": "focused tests",
+      "command": "pytest -q experiments/mirror_applications/ma-492-packet-plan-mirror/tests",
+      "passed": 2,
+      "failed": 0
+    },
+    {
+      "name": "fixed-seed fresh replay",
+      "command": "python experiments/mirror_applications/ma-492-packet-plan-mirror/source/run_experiment.py --seeds 49211 49212 49213",
+      "passed": true,
+      "notes": "quality and bytes stable; wall time is runtime calibration and varies"
+    },
+    {
+      "name": "protocol freeze",
+      "passed": true,
+      "notes": "protocol commit c1bb453 predates fresh runs"
+    }
+  ]
 }
