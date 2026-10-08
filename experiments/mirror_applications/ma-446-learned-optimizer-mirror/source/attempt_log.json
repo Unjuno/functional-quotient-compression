@@ -1,1 +1,9 @@
-[]
+[
+  {
+    "attempt": 1,
+    "phase": "pre-development unit test only",
+    "failure": "CoordinateLSTM test supplied gradients with shape [batch, coordinates, 1], while the declared interface takes [batch, coordinates].",
+    "data_or_scores_accessed": false,
+    "correction": "Fixed the test and call sites to use [batch, coordinates]; reran the full preflight test suite successfully. No protocol setting changed."
+  }
+]

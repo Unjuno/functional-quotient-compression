@@ -2,13 +2,14 @@
   "experiment_id": "MA-446",
   "status": "PROTOCOL_FROZEN_PRE_DEVELOPMENT",
   "base_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
-  "random_draw_replay": "pending",
+  "random_draw_replay": "passed",
   "protocol_frozen_before_scores": true,
   "development_scores_inspected": false,
   "fresh_accessed": false,
   "tests": {
-    "passed": 0,
+    "command": "PYTHONDONTWRITEBYTECODE=1 python -m unittest discover -s experiments/mirror_applications/ma-446-learned-optimizer-mirror/tests -v",
+    "passed": 4,
     "failed": 0,
-    "status": "not yet run"
+    "status": "passed"
   }
 }
