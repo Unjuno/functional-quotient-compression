@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "study_id": "SFM003",
+  "title": "Single forward K useful outputs with learned tiny Mirror codes",
+  "stage": "FROZEN_BEFORE_DEV_FRESH",
+  "status": "SYNTHETIC_STAGE0",
+  "ma_ref": "MA-1175",
+  "branch": "research/mirror-single-forward-prefetch-20261008",
+  "purpose": "Prioritize one expensive trunk forward -> 4/5 distinct useful task outputs via cheap code, not generic KV or offload. Evaluate native equivalent Givens head fairly.",
+  "teacher": {
+    "dim_in": 16,
+    "dim_hidden": 64,
+    "dim_out": 8,
+    "task_counts": [
+      4,
+      5
+    ],
+    "betas": [
+      0,
+      0.3,
+      0.8
+    ],
+    "base": "z(x)=GELU(x @ U) @ D (fixed source teacher shared trunk); U 16x64 and D 64x8",
+    "target": "y_m(x)=pairwise_rotate(z(x), true_angles_m) + beta * (tanh(x @ P_m) @ R_m); P_m 16x32, R_m 32x8 independent task-specific private teacher. Scale private component to comparable amplitude using source-training-only standard deviation.",
+    "angles": "independent uniform [-0.8,0.8] radians per pair; 4 coefficients per task",
+    "split": {
+      "train": 768,
+      "development_test": 256,
+      "fresh_test": 512,
+      "seeds_development": [
+        11,
+        12,
+        13
+      ],
+      "seeds_fresh": [
+        101,
+        102,
+        103,
+        104,
+        105
+      ],
+      "whole_world_holdout": true
+    },
+    "train": {
+      "optimizer": "Adam",
+      "learning_rate": 0.04,
+      "steps": 350,
+      "batch": "full 768 examples",
+      "trainable": "only lightweight role output readout, shared trunk frozen",
+      "no_fresh_tuning": true
+    }
+  },
+  "controls": [
+    "no-view same-output shared",
+    "mirror output Givens 4 scalars per task",
+    "ordinary Givens head same model class, bytes, FLOPs (M0)",
+    "diagonal scale+bias 16 scalars per task",
+    "unrestricted task linear readout+bias 72 scalars per task",
+    "K independent heavy-trunk recomputations of same canonical statistic as deliberately redundant CPU upper cost"
+  ],
+  "evaluation": [
+    "mean/worst per-task heldout NMSE",
+    "pairwise learned output separation normalized by teacher target separation",
+    "raw serialized named NPZ bytes including shared U/D and all m versus native head",
+    "P50/P95 CPU inference B128 K4/5, 20 warmups,100 measured",
+    "exact algebraic 1-forward vs individual output-only computation equality",
+    "off-orbit beta=0.8 failure"
+  ],
+  "gates": {
+    "PASS_mechanism": "beta0 mirror NMSE<0.01 and noncollapsed outputs in >=4/5 fresh seeds for K4 and5",
+    "FAIL_scope": "beta0.8 may require private path; no claim if exceeds NMSE0.1",
+    "M0_native_equivalence": "ordinary Givens heads identical mathematical class and storage; cannot claim novelty over native multi-head",
+    "PASS_cpu_vs_redundant": "one heavy forward >=1.5x faster than repeated-K heavy forward in >=4/5 fresh CPU seeds; is not win over native shared trunk linear heads",
+    "UNCERTAIN": "no GPU/LLM; unknown end-to-end trained shared trunk"
+  },
+  "protocol_notes": [
+    "Do not use fresh data or task teacher weight matrices to fit role codes; use train outputs only.",
+    "Aligned beta0 synthetic teacher intentionally favors Givens; include beta 0.3,0.8 failure and strong linear head.",
+    "A single shared heavy trunk with K independent linear heads is already a baseline capable of one forward; main claims relate to code bytes/function.",
+    "Timings are CPU eager, no actual GPU PCIe overlap, no ML model quality generalization.",
+    "Never change official worker MA status based on stage0 pilot."
+  ],
+  "units": {
+    "angles": "rad (SI dimensionless)",
+    "nmse": "dimensionless",
+    "storage": "actual NPZ byte",
+    "time": "s",
+    "K": "dimensionless integer"
+  }
+}
