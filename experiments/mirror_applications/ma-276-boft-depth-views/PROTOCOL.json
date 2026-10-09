@@ -1,0 +1,14 @@
+{
+  "experiment_id":"MA-276","title":"Tied recurrent block with depth-specific BOFT views","status":"SCREENING","base_commit":"12928de7","evidence_lane":"LOGICAL_DEPTH/QUALITY/ACTUAL_BYTES/COMPUTE","prior_art_refs":[6,21],
+  "hypothesis":"A shared physical block plus small depth-step orthogonal coordinates can recover distinct useful depth functions more efficiently than hard tying, while a static per-step low-rank modulation may match or exceed the view at similar bytes.",
+  "physical_object":"one shared 16×16 residual block reused for four steps","mirror_coordinate":"one learned Givens angle per depth step on a fixed channel plane","logical_multiplicity":"four distinct depth-step operators from one physical block",
+  "model":{"dimension":16,"depth_steps":4,"tasks":1},"task":{"train_examples":1024,"audit_examples":512,"strata":["aligned step-specific rotations","independent step-specific linear targets"]},
+  "controls":["hard tied block","independent untied blocks upper","tied plus per-step rank-one residual","tied plus static per-step LoRA residual","tied plus one-plane Mirror view","tied plus generic scalar plane control"],
+  "development":{"worlds":[27600,27601],"seeds":[0,1,2],"allowed":"validate recurrence, geometry, per-step utility, serialization and fit budget"},
+  "fresh":{"worlds":[27610,27611,27612],"seeds":[0,1,2],"locked_before_access":true},
+  "storage":{"authority":"actual serialized inference payload bytes including shared block and all per-step codes/private deltas","paid_objects":["shared block","depth coordinates","residuals","metadata"]},
+  "compute":{"report_updates":true,"report_train_seconds":true,"report_apply_macs":true,"report_depth_ablation":true,"report_actual_bytes":true},
+  "success_gate":"Aligned: Mirror per-step output NRMSE <=0.01 and uses <=70% payload of independent blocks; it must improve over static LoRA/generic plane by >=10% at matched bytes to claim Mirror-specific value.",
+  "failure_gate":"Mirror NRMSE >0.05 or depth-step ablation shows no utility; generic simple control match means no Mirror-specific advantage.",
+  "boundaries":["Synthetic recurrent linear block only","No transformer language quality claim","Depth identities are explicit; no router","Independent target stratum is only a boundary probe"]
+}
