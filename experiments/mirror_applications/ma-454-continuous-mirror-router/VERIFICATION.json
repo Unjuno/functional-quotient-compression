@@ -1,0 +1,61 @@
+{
+  "experiment_id": "MA-454",
+  "status": "COMPLETED_FAIL",
+  "protocol_commit": "10c9928d",
+  "exploratory_excluded_worlds": [
+    45410,
+    45411,
+    45412
+  ],
+  "fresh_worlds": [
+    45420,
+    45421,
+    45422
+  ],
+  "fresh_seeds": [
+    0,
+    1,
+    2
+  ],
+  "aggregate_rows": 135,
+  "checks": [
+    {
+      "name": "artifact_tests",
+      "command": "python -m pytest -q experiments/mirror_applications/ma-454-continuous-mirror-router/tests",
+      "result": "2 passed"
+    },
+    {
+      "name": "fresh_payload_replay",
+      "result": "All 135 valid result rows point to serialized payloads checked for exact byte length and SHA256 by tests."
+    },
+    {
+      "name": "mirror_hypernetwork_equivalence",
+      "result": "For all worlds, seeds, and N values, Mirror and hypernetwork have identical output metrics and serialized payload bytes/hashes."
+    },
+    {
+      "name": "registered_gate",
+      "result": "FAIL: continuous router loses at the registered byte budget and has an exact generic hypernetwork equivalent."
+    }
+  ],
+  "key_metrics": {
+    "N20": {
+      "shared_nrmse": 0.278749,
+      "shared_bytes_per_task": 66.25,
+      "discrete_nrmse": 0.098306,
+      "discrete_bytes_per_task": 97.85,
+      "mirror_nrmse": 0.095534,
+      "mirror_bytes_per_task": 126.45,
+      "hypernetwork_nrmse": 0.095534,
+      "hypernetwork_bytes_per_task": 126.45,
+      "independent_oracle_nrmse": 0.0,
+      "independent_oracle_bytes_per_task": 91.65
+    },
+    "N64": {
+      "discrete_nrmse": 0.09659,
+      "discrete_bytes_per_task": 31.58,
+      "mirror_nrmse": 0.085242,
+      "mirror_bytes_per_task": 50.52
+    }
+  },
+  "scope": "Synthetic support-summary nonlinear regression only; first invalid fresh attempt excluded; independent teacher coefficient is an oracle ceiling."
+}
