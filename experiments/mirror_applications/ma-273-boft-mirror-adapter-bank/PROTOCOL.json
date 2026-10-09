@@ -1,0 +1,15 @@
+{
+  "experiment_id":"MA-273","title":"BOFT independent factors versus shared Mirror adapter bank","status":"SCREENING","base_commit":"ccaaff61","evidence_lane":"BOFT_ADAPTER_BANK/QUALITY/ACTUAL_BYTES/RUNTIME","prior_art_refs":[21],
+  "hypothesis":"Butterfly-factorized orthogonal task transforms can encode aligned low-complexity task functions with far less state than independent BOFT banks; a shared butterfly basis plus small task coordinates should be tested against generic coefficient controls. Independent maps define where private factors become necessary.",
+  "physical_object":"one frozen 32×32 linear map","mirror_coordinate":"per-task butterfly layer angles on one shared plane schedule","logical_multiplicity":"eight task-specific orthogonal functions",
+  "model":{"dimension":32,"tasks":8,"butterfly_stages":5},"task":{"support_examples":256,"audit_examples":1024,"strata":["aligned shared butterfly-generator orbit","independent random orthogonal maps"]},
+  "controls":["shared baseline","independent full OFT matrix upper control","support-fitted independent BOFT butterfly angles","shared-basis Mirror angle codes","generic shared-generator scalar control"],
+  "development":{"worlds":[27300,27301],"seeds":[0,1,2],"allowed":"validate butterfly orthogonality, fit recovery, payload serialization, MAC counts and runtime; choose factorization only before fresh"},
+  "fresh":{"worlds":[27310,27311,27312],"seeds":[0,1,2],"locked_before_access":true},
+  "storage":{"authority":"actual canonical serialized inference payload bytes","paid_objects":["shared W","all learned butterfly factors or addresses","basis/schedule metadata"]},
+  "compute":{"report_fit_seconds":true,"report_apply_seconds":true,"report_apply_macs":true,"report_dense_materialization_seconds":true},
+  "success_gate":"Aligned Mirror/generic shared-basis code reaches NRMSE <=1e-4 and uses <=50% bytes of independent BOFT; runtime is reported separately.",
+  "failure_gate":"Aligned reconstruction error >0.01, or <=20% byte saving at matched quality; no Mirror-specific claim if generic coefficients match.",
+  "amendments":["Development audit found independent-task condition was initially represented by a dense oracle mislabeled as BOFT. Replaced it before fresh with support-fitted butterfly angles. Slow Python searches were interrupted before fresh; finalized a fixed 30-step scalar fit and one bounded coordinate pass with three candidates per factor angle. Full OFT remains an oracle upper."],
+  "boundaries":["Synthetic frozen linear map only","No NLP or vision quality claim","BOFT is established prior art; butterfly factorization itself is not a Mirror novelty claim","No routing tested"]
+}
