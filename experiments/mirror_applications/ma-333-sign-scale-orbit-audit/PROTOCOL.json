@@ -1,0 +1,15 @@
+{
+  "experiment_id":"MA-333","title":"Sign/scale orbit across activations and normalization","status":"PROTOCOL_FROZEN_BEFORE_DEVELOPMENT","base_commit":"71029aa1","evidence_lane":"MECHANISM/SYMMETRY_AUDIT/ACTUAL_BYTES",
+  "hypothesis":"Hidden-unit permutation is exact across tested elementwise activations and LayerNorm when norm affine parameters are permuted; positive nonuniform scaling with inverse outgoing compensation is exact only for ReLU; sign flips with inverse outgoing compensation are exact for tanh but not ReLU/GELU/LayerNorm+ReLU.",
+  "physical_object":"one fixed 16-24-8 MLP per activation condition","mirror_coordinate":"hidden-unit permutation or signed scale applied to first-layer coordinates with outgoing compensation","logical_multiplicity":"count functionally distinct outputs only","prior_art_refs":[47],
+  "model":{"input":16,"hidden":24,"output":8,"activations":["relu","gelu","tanh","layernorm_relu"],"layernorm_affine":true},
+  "controls":["base network","hidden permutation with all associated affine parameters permuted","positive log-uniform per-unit scale plus inverse outgoing weight","signed per-unit scale plus inverse outgoing weight","independent full parameter payload"],
+  "data":{"inputs_per_world":4096,"distribution":"standard Gaussian","metrics":["output NRMSE","maximum absolute difference"]},
+  "development":{"worlds":[33321,33322],"optimizer_updates":0,"selection_metric":"equivalence NRMSE and serialized bytes"},
+  "fresh":{"worlds":[33331,33332,33333],"locked_before_access":true,"optimizer_updates":0},
+  "storage":{"authority":"actual serialized inference payload bytes","paid_objects":["base weights and biases","LayerNorm affine parameters","view coordinates","metadata"]},
+  "compute":{"report_examples":true,"optimizer_updates":0,"active_compute_proxy":true,"isolated_wall_clock":true},
+  "success_gate":"Permutation NRMSE <=1e-6 in all conditions; ReLU positive-scale and tanh sign-flip NRMSE <=1e-6; nonmatching activation/scale pairs NRMSE >1e-3.",
+  "failure_gate":"Any preregistered exactness prediction fails or a purported non-symmetry remains <=1e-3 across fresh worlds.",
+  "boundaries":["random synthetic MLP only","no trained task quality or task utility","no claim of compression benefit","LayerNorm is applied before ReLU"]
+}
