@@ -1,7 +1,7 @@
 # MA-367 status
 
 - Status: FAIL; frozen development gate did not pass.
-- Dedicated branch: `research/ma-367-universally-slimmable-width-mirror-20261008`
+- Dedicated branch: `research/ma-367-universally-slimmable-width-mirror-20261009`
 - Base: worker-ready baseline `research/mirror-application-worker-ready-20261007`
 - Development seeds: 36701, 36702
 - Fresh seeds: 36711, 36712, 36713 (sealed)

@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-367.** MA-366 failed the Mirror-specific gate: PA02 factorization was smaller, direct coefficients matched Mirror, and accidental fresh-ID generation invalidated the fresh split. Proceed to MA-367, universally slimmable network with Mirror width corrections (P0).
+**Current operational pointer (2026-10-09): MA-368.** MA-367 failed the narrow-width quality and Mirror-specific byte gates; the width code matched ordinary scalar gating and added compute. Proceed to MA-368, factorized width × depth Mirror code (P0).
 
 # Worker queue
 

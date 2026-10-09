@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (100 completed; 530 UNTESTED)
+- P0: **630** (101 completed; 529 UNTESTED)
 - P1: **422** (15 completed; 407 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1038 UNTESTED, 46 PROMISING, 71 FAIL**
+- Current MA statuses: **1037 UNTESTED, 46 PROMISING, 72 FAIL**
 - 68 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -335,3 +335,9 @@ KG relation rotations (RotatE, TuckER, QuatE, PairRE), EXIF/device-aware ISPs (P
 
 - **FAIL for Mirror-specific value:** all 16 oracle paths reconstructed exactly, but PA02-style factorization used fewer bytes (3,353–3,359B) than Mirror (3,713–3,719B), and direct pair coefficients matched Mirror. Flat paths used 7,941–7,967B.
 - **Protocol deviation:** runner inadvertently generated fresh IDs 36611–36613 before the development gate; these rows are preserved separately, excluded from analysis, and invalidate fresh integrity. Eight development rows replay and three tests pass. No learned-router or capacity claim.
+
+
+## Completed: MA-367 — Universally slimmable network with width Mirror corrections
+
+- **FAIL at development:** Mirror failed the registered narrow-width improvement over US-Net, tied the scalar gate at 4,179B, used 5.6% more nominal MACs than US-Net and took about 1.4× its training time. One seed missed the independent-width quality margin.
+- Two development worlds were replayed: all 10 payload hashes/bytes and non-timing metrics matched; only wall/throughput calibration varied. Three tests pass. Fresh stayed sealed; synthetic nested-width MLP only.
