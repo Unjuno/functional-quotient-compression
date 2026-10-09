@@ -2,7 +2,7 @@
 
 - Status: FAIL for registered K<=8 >=95% joint-mode-coverage gate; K16 scoped positive result
 - Branch: `research/ma-492-quantized-packet-plan-20261009`
-- Base: `7ff75963`; A1 amendment before authoritative fresh evaluation
+- Base: `7ff75963`; verification commit `3bdd02d2`; A1 amendment before authoritative fresh evaluation
 - Fresh: 49220-49222 × seeds 0-2
 
 H: Discrete shared packet-plan codes preserve joint modes with fewer actual bytes than independent marginals.
