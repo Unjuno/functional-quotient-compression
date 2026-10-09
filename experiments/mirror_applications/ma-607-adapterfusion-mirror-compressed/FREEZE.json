@@ -1,0 +1,25 @@
+{
+  "experiment_id": "MA-607",
+  "protocol_source_hashes": {
+    "PROTOCOL.json": "3ee1a3316bb6ecc4bc0ec71a56ae3fa7e18165958d9fd2e52d6e1857fdd59f2c",
+    "README.md": "56d466b29e4ff83fd331241dc75c7c200c05a5cd9f66ba41c74293f9c2369cd7",
+    "source/run_experiment.py": "c02f3382b79c50c7afb70e7ea48f6e194f63ad8b1fc858a5987285e82dcc39f7",
+    "tests/test_ma607.py": "8f68841709864472d04b46c997484b354f0b25341cf14d4a3496a0d0e87ba4c9"
+  },
+  "frozen_before_development": true,
+  "fresh_worlds_sealed": true,
+  "amendments": [
+    {
+      "reason": "implementation lacked teacher composition callable",
+      "scope": "development implementation defect only; task, splits, optimizer, metrics and gates unchanged"
+    },
+    {
+      "reason": "fusion optimizer reused graph-connected fixed source outputs across updates",
+      "scope": "development implementation defect only; no data, model, optimizer settings, metrics or gates changed"
+    },
+    {
+      "reason": "oracle reference output mislabeled teacher evaluations as optimizer updates/examples",
+      "scope": "reporting correction only; learned methods, weights, worlds, seeds, metrics, gates unchanged"
+    }
+  ]
+}

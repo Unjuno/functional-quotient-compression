@@ -1,0 +1,16 @@
+{
+  "experiment_id":"MA-607",
+  "decision":"FAIL",
+  "phase":"development mechanism screen; fresh sealed",
+  "base_commit":"a5ba4d93",
+  "environment":{"python":"3.12.14","torch":"2.14.1+cpu","device":"cpu"},
+  "frozen_protocol":"PROTOCOL.json; dev 60701/60702; fresh 60711/60712 not accessed",
+  "checks":[
+    {"command":"pytest -q experiments/mirror_applications/ma-607-adapterfusion-mirror-compressed/tests","result":"3 passed"},
+    {"command":"python experiments/mirror_applications/ma-607-adapterfusion-mirror-compressed/source/verify_results.py","result":"8/8 payload sizes and SHA-256 hashes match; exact reload error 0.0"}
+  ],
+  "metrics":"runs/dev_metrics.json and RESULTS_CORE.csv",
+  "payloads":"runs/dev_payloads; actual torch.save payloads for inference state",
+  "decision_basis":"Mirror misses the preregistered 10% byte saving versus shared unrestricted coefficient matrices (7.5% observed); inference proxy and source fitting time also exceed that simple control.",
+  "limitations":["Teacher adapters are intentionally aligned to an orthogonal Givens orbit.","No natural task transfer or language-model claim."]
+}
