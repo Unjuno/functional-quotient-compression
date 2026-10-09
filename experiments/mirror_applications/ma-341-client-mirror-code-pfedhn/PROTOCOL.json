@@ -1,0 +1,14 @@
+{
+  "experiment_id":"MA-341","title":"Client Mirror code versus pFedHN-style full model generation","status":"PROTOCOL_FROZEN_BEFORE_DEVELOPMENT","base_commit":"24050284","evidence_lane":"MECHANISM/UNSEEN_CLIENT_QUALITY/ACTUAL_BYTES/COMPUTE",
+  "hypothesis":"For synthetic client predictors on a shared circular rank-2 task orbit, phase-coded shared parameters generalize to held-out client identities with fewer bytes than a pFedHN-style full-weight hypernetwork; compare against direct two-coefficient controls.",
+  "physical_object":"shared 8x4 linear predictor base plus two shared task-direction matrices","mirror_coordinate":"one scalar client phase phi, mapped to cos(phi),sin(phi)","logical_multiplicity":"client-specific predictors for unseen client identities","prior_art_refs":[40],
+  "task":{"input_dim":8,"output_dim":4,"train_clients":16,"heldout_clients":8,"train_examples_per_client":64,"heldout_test_examples":256,"teacher":"W(phi)=W0+cos(phi)A+sin(phi)B plus Gaussian label noise std 0.01","train_phases":"16 equally spaced points on [0,2pi)","heldout_phases":"8 cell-midpoints, unseen to all training methods"},
+  "controls":["single shared predictor","Mirror phase plus shared W0,A,B","generic two-coefficient shared basis plus W0,A,B","pFedHN-style MLP 2->32->32 generating full predictor weights","independent supervised heldout-client linear regression upper reference"],
+  "development":{"worlds":[34121,34122],"selection":"fixed 1000 Adam updates for shared basis and hypernetwork; development assesses convergence only; no fresh tuning"},
+  "fresh":{"worlds":[34131,34132,34133],"locked_before_access":true,"optimizer_updates":1000},
+  "storage":{"authority":"actual deterministic serialized inference payload bytes","paid_objects":["shared basis or hypernetwork parameters","per-client phase or 2D coefficient/descriptor","metadata","independent reference weights"]},
+  "compute":{"report_examples":true,"optimizer_updates":true,"active_compute_proxy":true,"isolated_wall_clock":true,"client_communication_bytes":true},
+  "success_gate":"Mirror and pFedHN heldout MSE <=1e-3; Mirror uses <=0.80x pFedHN payload and <=0.90x generic two-coefficient payload at comparable heldout error.",
+  "failure_gate":"Mirror misses quality or generic coefficient control is within 5% of Mirror bytes and quality; pFedHN comparison alone cannot establish Mirror-specific value.",
+  "boundaries":["synthetic known circular task orbit","client descriptor supplied at inference and charged","independent upper reference uses heldout support examples","no privacy or real federated deployment claim"]
+}
