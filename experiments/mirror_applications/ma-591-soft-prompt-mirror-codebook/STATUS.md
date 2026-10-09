@@ -1,18 +1,19 @@
 # MA-591 status
 
-- Status: SCREENING
+- Status: FAIL (Mirror-specific attribution)
 - Branch: `research/ma-591-soft-prompt-mirror-codebook-20261009`
 - Base commit: `bfbb761d`
-- Development complete: no
-- Fresh/audit opened: no
-- Results committed: no
-- Verification committed: no
-- Registry row updated: yes (SCREENING)
+- Evidence commit: pending
+- Development complete: yes (59101/59102; amended source; same-seed replay exact)
+- Fresh/audit opened: no (native low-rank alias is decisive)
+- Results committed: pending
+- Verification committed: pending
+- Registry row updated: pending
 
 ## Next action
 
-Implement article parsing, soft-prompt tuning and the frozen rank-4 code path; then freeze source before registered dev.
+Commit verified result and continue to MA-592.
 
-## Blockers
+## Decisions / rulings
 
-None.
+Amendment 1 added the preregistered inference timing omitted by the first implementation. It did not change model, data, training, hyperparameters or gates. Pre-amendment outputs remain preserved but are superseded.

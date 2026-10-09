@@ -497,3 +497,6 @@ MA-582 is closed **FAIL** on `research/ma-582-mla-layer-mirror-reconstruction-20
 
 
 MA-589 is closed **FAIL** on `research/ma-589-prefix-bank-mirror-basis-20261009`: 16-context text KV prefix state drops from 12,595,424 B FP16 to 4,012,226 B, but NLL misses +0.05 by +0.150/+0.334 nat/token and the shared residual payload exactly aliases native coding. This tests KV context-cache compression, not learned Prefix-Tuning. Same-seed replay exact; fresh sealed. Next P0: MA-591 soft prompt Mirror codebook (PA117).
+
+
+MA-591 is closed **FAIL for Mirror-specific attribution** on `research/ma-591-soft-prompt-mirror-codebook-20261009`: rank4 prompt bank meets quality/storage gates in two dev seeds (35.6% fewer bytes; NLL +.0246/+.0135 nat), but serialized prompts exactly alias native shared-basis PCA. Amended replay exact; fresh sealed. Next P0: MA-592 prompt pool + Mirror composition (PA119).
