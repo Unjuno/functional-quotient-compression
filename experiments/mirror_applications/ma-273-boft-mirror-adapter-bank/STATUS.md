@@ -1,8 +1,9 @@
 # MA-273 status
 
-- Status: SCREENING
+- Status: FAIL for registered gates; broad BOFT capacity NOT ESTABLISHED due fitting/schedule limitations.
 - Branch: `research/ma-273-boft-mirror-adapter-bank-20261009`
-- Base: `ccaaff61`
-- Prior art: PA21 BOFT
-- Development audit corrected the mislabeled independent control and optimized the butterfly implementation. Slow loops were stopped before fresh; final fit budget is fixed at 30 scalar iterations and one bounded factor-coordinate pass. All amendments preceded fresh access.
-- Fresh locked.
+- Frozen source/protocol: `f354fc5a`
+- Fresh: 576 rows, worlds 27310–27312 × seeds 0–2.
+- Aligned Mirror max NRMSE 0.1366; independent BOFT support-fit near no-view baseline.
+- Fresh data remains untouched after observation.
+- See `VERIFICATION.json`.

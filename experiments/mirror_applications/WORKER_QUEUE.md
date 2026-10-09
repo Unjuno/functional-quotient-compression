@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-273.** MA-272 confirmed input-centric/materialized OFT equivalence but roughly doubled batch-1024 CPU latency. Aligned Mirror angle saved ~49.4% task-state bytes versus full Q, while generic scalar matched exactly. Continue to MA-273 with native BOFT factor controls.
+**Current operational pointer (2026-10-09): MA-274.** MA-273 bounded BOFT implementation failed its gates; the noncanonical schedule and weak factor search mean broad BOFT capacity is NOT ESTABLISHED. Mirror and generic scalar matched. Continue to MA-274 with BOFT logical expert and standard expert controls.
 
 # Worker queue
 
