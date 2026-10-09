@@ -1,0 +1,14 @@
+{
+  "experiment_id":"MA-292","title":"Task arithmetic versus shared task-vector Mirror basis","status":"SCREENING","base_commit":"fdeb7d7a","evidence_lane":"TASK_VECTOR_COMPOSITION/QUALITY/ACTUAL_BYTES/INTERFERENCE","prior_art_refs":[26],
+  "hypothesis":"A shared task-delta basis with compact Mirror coordinates can reconstruct and compose task functions at lower bytes and less interference than raw independent task vectors; PCA/SVD and ordinary coefficient controls may explain the result.",
+  "physical_object":"one shared base linear model and task-delta basis","mirror_coordinate":"per-task/combination coefficient address over basis vectors","logical_multiplicity":"multiple task edits and held-out compositions",
+  "model":{"dimension":256,"tasks":16,"basis_rank":4},"task":{"train_tasks":12,"heldout_tasks":4,"composition_pairs":8,"examples_per_task":256},
+  "controls":["raw independent task vectors","PCA/SVD shared basis","Mirror basis coordinates","generic low-rank coefficient table","ordinary task-vector addition","independent composition upper"],
+  "development":{"worlds":[29200,29201],"seeds":[0,1,2],"allowed":"validate held-out task split, composition rules, interference and exact payload bytes"},
+  "fresh":{"worlds":[29210,29211,29212],"seeds":[0,1,2],"locked_before_access":true},
+  "storage":{"authority":"actual serialized base+basis+codes or raw vectors","paid_objects":["base model","basis vectors","task coefficients","metadata"]},
+  "compute":{"report_fit_seconds":true,"report_composition_seconds":true,"report_quality":true,"report_interference":true,"report_bytes":true},
+  "success_gate":"Held-out task and composition NRMSE <=0.05 with <=70% bytes vs raw vectors; Mirror-specific claim requires beating PCA/generic coefficient control at matched bytes.",
+  "failure_gate":"Held-out NRMSE >0.20, composition interference >0.25, or generic coefficients match Mirror.",
+  "boundaries":["Synthetic task-vector functions only","No language-model task arithmetic claim","Hold out whole task identities/combinations","Combination count is not independent capacity"]
+}
