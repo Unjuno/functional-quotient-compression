@@ -1,0 +1,21 @@
+{
+  "experiment_id":"MA-606",
+  "title":"Dynamic Mirror-MoE without discrete expert routing",
+  "status":"SCREENING",
+  "evidence_lane":"MECHANISM/STORAGE/COMPUTE",
+  "base_commit":"9fc15d0b",
+  "hypothesis":"One input-conditioned Givens-view FFN can approximate four-output soft-MoE while using fewer stored bytes and active FFN compute, and can improve on a parameter-near FiLM control.",
+  "physical_object":"one shared 16->12->10 FFN plus a three-angle code generator",
+  "mirror_coordinate":"m(x) is three input-generated Givens angles rotating hidden preactivation coordinates in the shared FFN",
+  "logical_multiplicity":"one input-specific logical FFN per example, executed once",
+  "prior_art_refs":["PA121"],
+  "controls":["static shared FFN","standard soft-MoE with four full experts and input gate","single shared FFN with input-conditioned FiLM scale/bias","oracle teacher"],
+  "teacher":"softmax gate over four FFNs; experts share a random common initialization with independent fixed Gaussian perturbations of scale 0.15; gate is input-dependent",
+  "development":{"worlds_or_seeds":[60601,60602],"train_examples":4096,"dev_examples":1024,"steps":1200,"batch_size":128,"optimizer":"AdamW lr=0.003, weight_decay=0","selection_metric":"held-out MSE normalized by target variance, evaluated on both fixed dev worlds"},
+  "fresh":{"worlds_or_seeds":[60611,60612],"train_examples":4096,"dev_examples":1024,"steps":1200,"locked_before_access":true,"run_only_if":"development quality, byte and compute gates all pass"},
+  "storage":{"authority":"actual serialized inference payload bytes","format":"torch.save state_dict + method metadata","paid_objects":["all expert/shared FFN weights and biases","all gates/codes and modulation generators","method/dimension metadata"]},
+  "compute":{"report_tokens_or_examples":true,"report_optimizer_updates":true,"report_active_compute_proxy":true,"report_isolated_wall_clock":true,"proxy":"MAC proxy for router/code/FiLM generation, Givens application, and active FFN evaluations; soft-MoE counts four FFNs"},
+  "success_gate":"In each fresh world, Mirror normalized MSE <=1.25x soft-MoE and <=1.15x FiLM, payload <=0.60x soft-MoE, compute <=0.50x soft-MoE.",
+  "failure_gate":"Any development quality/bytes/compute gate misses; fresh remains sealed.",
+  "boundaries":["Synthetic teacher and fixed-update screen only.","No language or capacity claim.","Soft-MoE evaluates all four experts; compute proxy includes all four forward paths."]
+}

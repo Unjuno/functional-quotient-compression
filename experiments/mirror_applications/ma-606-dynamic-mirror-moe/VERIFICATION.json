@@ -1,0 +1,16 @@
+{
+  "experiment_id":"MA-606",
+  "decision":"FAIL",
+  "phase":"development mechanism screen; fresh sealed",
+  "base_commit":"9fc15d0b",
+  "environment":{"python":"3.12.14","torch":"2.14.1+cpu","device":"cpu"},
+  "frozen_protocol":"PROTOCOL.json; development worlds 60601/60602; fresh worlds 60611/60612 not accessed",
+  "checks":[
+    {"command":"pytest -q experiments/mirror_applications/ma-606-dynamic-mirror-moe/tests","result":"2 passed"},
+    {"command":"python experiments/mirror_applications/ma-606-dynamic-mirror-moe/source/verify_results.py","result":"10/10 payload sizes and SHA-256 hashes matched; exact reload replay error 0.0"}
+  ],
+  "payloads":"runs/dev_payloads; exact torch.save payloads including all model, code, and router state",
+  "metrics":"runs/dev_metrics.json and RESULTS_CORE.csv",
+  "decision_basis":"Mirror quality gate failed against both soft-MoE and FiLM in both development worlds. Storage and MAC proxy improved against soft-MoE, but measured CPU runtime did not.",
+  "limitations":["Synthetic fixed-update regression fixture only.","No language-model or near-convergence capacity claim."]
+}
