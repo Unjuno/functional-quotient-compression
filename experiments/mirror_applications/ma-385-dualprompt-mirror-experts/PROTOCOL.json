@@ -1,0 +1,83 @@
+{
+  "experiment_id": "MA-385",
+  "title": "DualPrompt expert prompt bank with Mirror views",
+  "status": "PROTOCOL_FROZEN_BEFORE_DEVELOPMENT",
+  "base_commit": "c389dfe3",
+  "prior_art_refs": ["PA57"],
+  "hypothesis": "A shared expert-prompt basis plus one Mirror coordinate per task can preserve task-incremental output quality and old-task retention while using <=60% of independently stored expert prompts, on top of one common general prompt.",
+  "physical_object": "One common frozen general prompt plus eight task-specific expert prompt vectors of length 64 decoded into 8x8 residual operators over frozen 8D features.",
+  "mirror_coordinate": "One SO(2) Givens angle per task selects a functional expert prompt from a shared two-vector basis; the common general prompt is separate, identical and paid in every method.",
+  "logical_multiplicity": "Eight task-specific expert prompt functions plus a common general prompt.",
+  "prior_art_delta": "PA57 DualPrompt separates task-invariant general prompts from task-specific expert prompts. This task-incremental synthetic screen retains the common general prompt and tests compression/retention of expert values only.",
+  "model": {
+    "input_feature_dim": 8,
+    "prompt_vector_dim": 64,
+    "prompt_decoder": "reshape each length-64 prompt to an 8x8 linear residual map; fixed no-parameter synthetic decoder",
+    "tasks": 8,
+    "train_examples_per_task": 1024,
+    "test_examples_per_task": 1024,
+    "source_optimizer_updates_per_task": 1200,
+    "batch_size": 64,
+    "optimizer": "Adam",
+    "learning_rate": 0.01,
+    "development_seeds": [38501, 38502],
+    "fresh_seeds": [38511, 38512, 38513],
+    "task_identity": "task ID is supplied at evaluation (task-incremental setting); retrieval is not part of this experiment.",
+    "methods": [
+      "one common general prompt + eight independent expert prompts",
+      "one common general prompt + one hard-tied expert prompt",
+      "one common general prompt + one shared expert vector with task scalar gates",
+      "one common general prompt + shared 64x2 expert basis and two generic task coefficients",
+      "one common general prompt + shared 64x2 expert basis and one Givens Mirror angle per task"
+    ],
+    "continual_schedule": "Task order is fixed per world. Independent expert prompts train sequentially, one new prompt per task. The scalar expert vector trains on task 0 and is then frozen; later tasks train only their scalar. Generic and Mirror bases train jointly on tasks 0 and 1 for 1,200 updates, then freeze; tasks 2..7 train only their own new code for 1,200 updates. The hard-tied expert is updated sequentially on each task. Evaluate every seen task after each task stage to measure retention."
+  },
+  "teacher": {
+    "general_prompt": "One deterministic world-specific frozen length-64 vector, shared and charged in every payload.",
+    "expert_prompts": "Flattened B0 @ R(theta_i) @ A0 residual operators, where the eight task experts share a rank-2 basis and SO(2) angles. Deliberately aligned prompt-view feasibility fixture.",
+    "data": "Per-task Gaussian frozen features; task target is common general-prompt output plus that task's expert-prompt residual output."
+  },
+  "controls": [
+    "independent expert prompt bank, mandatory full DualPrompt storage/quality control",
+    "hard-tied single expert prompt",
+    "shared expert vector plus scalar task gates",
+    "shared expert basis plus unrestricted two-value task coefficients",
+    "shared expert basis plus one Givens angle per task",
+    "common general prompt is identical and charged in every method"
+  ],
+  "development": {
+    "worlds_or_seeds": [38501, 38502],
+    "selection_metric": "mean test output NRMSE on all seen tasks after each task stage; report per-task retention, old-task forgetting, total actual payload bytes and compute",
+    "allowed_tuning": "No hyperparameter search planned. Task order and schedule are fixed in this protocol; any implementation correction reruns development only before fresh access."
+  },
+  "fresh": {
+    "worlds_or_seeds": [38511, 38512, 38513],
+    "locked_before_access": true,
+    "open_gate": "Both development worlds: independent mean expert NRMSE <=0.03; Mirror final mean test NRMSE <= independent +0.02 and <=0.10; Mirror old-task forgetting is no more than independent +0.01; Mirror complete payload <=0.60x independent; Mirror improves over scalar by >=0.01 at <=1.10x scalar bytes; unrestricted two-value coefficients do not match within 0.005 NRMSE at <=Mirror bytes. Otherwise fresh remains sealed."
+  },
+  "storage": {
+    "authority": "actual serialized compressed NPZ inference payload bytes after reload",
+    "paid_objects": [
+      "common general prompt in every method",
+      "all independent/shared expert prompt values or basis",
+      "every Mirror angle, scalar gate, or generic task coefficient",
+      "dimensions, task map, decoder metadata and NPZ names/headers/compression overhead"
+    ]
+  },
+  "compute": {
+    "report_examples_and_updates_per_task": true,
+    "report_expert_prompt_reconstruction_mac_proxy": true,
+    "report_task_prompt_forward_mac_proxy": true,
+    "report_training_wall_time": true,
+    "report_inference_examples_per_second": true
+  },
+  "success_gate": "All three fresh worlds pass final quality, old-task retention, <=60% complete payload, scalar and generic-coordinate comparisons with exact serialized replay.",
+  "failure_gate": "Mirror misses task quality, retention or <=60% payload gate, scalar gate matches at comparable bytes, or generic coefficients match within 0.005 NRMSE at no greater bytes.",
+  "boundaries": [
+    "synthetic frozen-feature task-incremental prompt screen, not a pretrained DualPrompt reproduction",
+    "the general prompt is fixed/shared; only expert-prompt compression is tested",
+    "task ID is supplied, so no task-free retrieval claim is made",
+    "expert task functions are deliberately generated on the same SO(2) orbit as Mirror",
+    "fixed training budgets do not establish near-converged capacity"
+  ]
+}
