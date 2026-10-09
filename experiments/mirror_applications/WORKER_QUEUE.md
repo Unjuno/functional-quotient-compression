@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-473.** MA-470/471 are recorded as scoped edit-basis and aligned ROME-coordinate results; continue the editing family with MEMIT and compare actual changed-weight bytes.
+**Current operational pointer (2026-10-09): MA-475.** MA-470/471/473 are recorded as scoped edit-basis, aligned ROME-coordinate, and layerwise MEMIT-style storage results. Continue with native SERAC memory controls; MA-474 is P1 and remains queued.
 
 # Worker queue
 

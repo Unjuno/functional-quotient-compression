@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (35 completed; 595 UNTESTED)
+- P0: **630** (38 completed; 592 UNTESTED)
 - P1: **422** (12 completed; 410 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1106 UNTESTED, 31 PROMISING, 18 FAIL**
+- Current MA statuses: **1105 UNTESTED, 32 PROMISING, 18 FAIL**
 - 49 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -23,13 +23,13 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-473 — MEMIT update basis + Mirror memory codes (P0; PA88)**
+**MA-475 — SERAC memory values as Mirror codes (P0; PA89)**
 
 Reason:
-- MA-470 and MA-471 resumed the model-editing evidence chain on dedicated branches; their scoped reports are cross-linked in the claim ledger;
-- MA-471 is the current aligned rank-one edit screen; MA-473 is the next executable P0 edit-family candidate after the P1 composition item MA-472.
+- MA-470/471/473 are completed on dedicated branches and cross-linked in the claim ledger;
+- MA-472 and MA-474 are P1 composition/factorization follow-ups; MA-475 is the next P0 knowledge-editing integration target.
 
-Required controls: native MEMIT edited weights/deltas, shared low-rank edit basis, and independent update upper reference. Count all layerwise deltas and compare factual efficacy, specificity, interference and bytes.
+Required controls: native SERAC retrieval and counterfactual memory, explicit stored edit values, and shared-basis Mirror values. Keep retrieval separate from representation compression; count all model, classifier, memory and code bytes, and measure false triggers and latency.
 
 If blocked by a documented reproducibility or harness issue, record it and resume at MA-260 (BatchEnsemble), then MA-261/265/268 in the registered literature priority sequence. Do not jump to P1/novelty-picked topics before P0.
 
@@ -93,3 +93,6 @@ KG relation rotations (RotatE, TuckER, QuatE, PairRE), EXIF/device-aware ISPs (P
 **MA-470 PROMISING (scoped, synthetic shared-basis storage):** at N64 Mirror+private reproduced edits at 3,793B vs MEND-style per-edit rank-two factors at 54,847B, but the generic independent four-atom basis was smaller (3,165B) at equal quality. No Mirror-specific gain; oracle least-squares coefficients, not learned MEND. **Next: MA-471.**
 
 **MA-471 PROMISING (aligned analytic ROME coordinate screen):** at N64 the angle-coded shared-plane representation used 2,909B vs ROME factors 5,925B and generic Cartesian coefficients 3,421B; max edit efficacy NRMSE 1.07e-7 and specificity drift 4.43e-8. N20 missed the <=80% byte gate. Known fixed-norm orbit only; private residual control and natural factual edits remain untested. **Next: MA-473.**
+
+
+**MA-473 PROMISING for aligned edit-bank storage only:** at N64, four-layer Mirror codes used 5,973B vs direct per-layer rank-one factors 35,105B and generic Cartesian shared-plane coefficients 8,021B. Standalone edit NRMSE stayed below 2e-7 and locality near zero; merged-bank NRMSE reached 4.80, identically across representations. This compresses a known synthetic orbit but does not establish useful simultaneous factual editing or learned MEMIT. **Next: MA-475 (P0); MA-474 remains P1.**
