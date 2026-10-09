@@ -1,19 +1,112 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
-  "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+  "experiment_id": "MA-314",
+  "decision": "PROMISING narrowly for aligned variable-rank tasks; independent tasks require private intrinsic state",
+  "protocol_commit": "b313de17",
+  "fresh_worlds": [
+    31410,
+    31411,
+    31412
+  ],
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "fresh_rows": 72,
+  "strata": {
+    "aligned": {
+      "direct_adaptive_intrinsic": {
+        "query_nrmse": 3.183972094373328e-07,
+        "payload_bytes": 9110.0,
+        "task_code_bytes": 867.0,
+        "active_dimension_mean": 15.0,
+        "private_split_tasks": 0.0,
+        "private_values": 0.0,
+        "fit_seconds": 0.001601917444430809
+      },
+      "generic_pca_adaptive_rank": {
+        "query_nrmse": 5.795865926453795e-07,
+        "payload_bytes": 9352.0,
+        "task_code_bytes": 1109.0,
+        "active_dimension_mean": 15.0,
+        "private_split_tasks": 0.0,
+        "private_values": 0.0,
+        "fit_seconds": 0.0002610029995493177
+      },
+      "mirror_adaptive_view": {
+        "query_nrmse": 3.778526433961815e-07,
+        "payload_bytes": 8557.0,
+        "task_code_bytes": 314.0,
+        "active_dimension_mean": 15.0,
+        "private_split_tasks": 0.0,
+        "private_values": 0.0,
+        "fit_seconds": 0.002382935336855654
+      },
+      "mirror_view_no_private": {
+        "query_nrmse": 3.778526433961815e-07,
+        "payload_bytes": 8519.0,
+        "task_code_bytes": 276.0,
+        "active_dimension_mean": 15.0,
+        "private_split_tasks": 0.0,
+        "private_values": 0.0,
+        "fit_seconds": 0.002382935336855654
+      }
+    },
+    "independent": {
+      "direct_adaptive_intrinsic": {
+        "query_nrmse": 3.530299118715953e-07,
+        "payload_bytes": 9926.0,
+        "task_code_bytes": 1683.0,
+        "active_dimension_mean": 32.0,
+        "private_split_tasks": 0.0,
+        "private_values": 0.0,
+        "fit_seconds": 0.001596184665686451
+      },
+      "generic_pca_adaptive_rank": {
+        "query_nrmse": 8.450930156161323e-07,
+        "payload_bytes": 11146.0,
+        "task_code_bytes": 2903.0,
+        "active_dimension_mean": 32.0,
+        "private_split_tasks": 0.0,
+        "private_values": 0.0,
+        "fit_seconds": 0.00030026666516075947
+      },
+      "mirror_adaptive_view": {
+        "query_nrmse": 3.549329253221206e-07,
+        "payload_bytes": 12978.0,
+        "task_code_bytes": 4734.0,
+        "active_dimension_mean": 32.0,
+        "private_split_tasks": 23.0,
+        "private_values": 736.0,
+        "fit_seconds": 0.0028423640000659767
+      },
+      "mirror_view_no_private": {
+        "query_nrmse": 1.2179902924431696,
+        "payload_bytes": 8519.0,
+        "task_code_bytes": 276.0,
+        "active_dimension_mean": 32.0,
+        "private_split_tasks": 0.0,
+        "private_values": 0.0,
+        "fit_seconds": 0.0028423640000659767
+      }
+    }
   },
-  "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
-  },
-  "metric_replay": {
-    "checked": false,
-    "max_difference": null
-  },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "facts": [
+    "Aligned tasks: Mirror 8,557 B / query NRMSE 3.78e-7; direct adaptive intrinsic 9,110 B / 3.18e-7; generic adaptive PCA 9,352 B / 5.80e-7.",
+    "Shared U costs 8,192 B. Mirror task code state is 314 B versus direct 867 B and PCA 1,109 B in aligned stratum.",
+    "Aligned active dimension average is 15/32; no private split events.",
+    "Independent tasks select full dimension; 23/24 tasks trigger private residual allocation. Mirror+private uses 12,978 B vs direct 9,926 B. No-private Mirror has NRMSE 1.218."
+  ],
+  "interpretation": "Adaptive dimension plus shared Givens view improves total storage by ~6% versus direct adaptive intrinsic coordinates and ~8.5% versus generic PCA for this aligned low-rank task family at near-equal quality. Independent tasks erase the gain and require private state. This is a limited functional feasibility result, not a general intrinsic-learning claim.",
+  "hypothesis": "Supported narrowly on aligned variable-rank tasks; private residual allocation is necessary for independent task vectors.",
+  "counter_hypothesis": "The teacher is generated from the same Givens orbit and uses a full-rank anchor to recover the shared vector. The advantage may disappear on learned or shifted task families; total saving is modest because U dominates bytes.",
+  "limitations": [
+    "Synthetic linear regression only",
+    "Random projection basis, not pretrained model",
+    "Teacher uses known Givens family and anchor phase",
+    "Only 24 tasks and four dimensions",
+    "No optimization-based learning of the shared basis or real task quality"
+  ],
+  "fresh_data_used_for_tuning": false,
+  "source_sha256": "bca171dbe5e538ab0549a1ee4eed19ebcb70ca97e042b00449265d0804c8d8dc"
 }
