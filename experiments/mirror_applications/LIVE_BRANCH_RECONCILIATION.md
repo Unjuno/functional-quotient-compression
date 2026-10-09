@@ -21,3 +21,5 @@ No fresh data were opened during reconciliation.
 - MA-476 — FAIL, research branch `research/ma-476-grace-value-codes-20261008`: fixed-route VQ16/64/128 used 37.3–40.9 KB but heldout RMSE 0.111–0.142; latent int8 used 38.6 KB/RMSE <=0.0119. Continuous PCA was exact but identical to native PCA. Fresh sealed.
 
 - MA-478 — FAIL for Mirror-specific attribution, research branch `research/ma-478-view-first-private-fallback-20261008`: shared-only RMSE 0.055; residual gate sent 16/256 private values to full-value storage, restoring heldout RMSE to zero with 49,350 actual bytes versus 99,485 explicit and 51,618 int8. Native PCA plus identical fallback exactly matched; fresh sealed.
+
+MA-517 completed as a verified development FAIL: the no-intervention baseline was already high, product Views missed the frozen +0.10-vs-sum-and-difference gate, and native PCA products exactly matched all tested ranks. The 26 payload replay, metrics, split and extracted vectors are exact; fresh seeds remain sealed.
