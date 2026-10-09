@@ -1,0 +1,79 @@
+{
+  "experiment_id": "MA-297",
+  "title": "SETA shared sparse subspace + Mirror views",
+  "status": "SCREENING",
+  "evidence_lane": "CONTINUAL_SHARED_PRIVATE/QUALITY/ACTUAL_BYTES",
+  "base_commit": "2f4d01ba",
+  "prior_art_refs": [
+    30
+  ],
+  "hypothesis": "After shared coordinates are discovered from prior tasks, a compact task-coordinate basis inside that shared sparse region reduces payload growth without increasing held-out task error compared with SETA-style shared/private storage; generic PCA may explain it.",
+  "physical_object": "one shared sparse coordinate region plus task-specific sparse residuals",
+  "mirror_coordinate": "low-rank task code over shared-coordinate weight matrix",
+  "logical_multiplicity": "eight linear task functions with a common sparse support and private coordinates",
+  "model": {
+    "dimension": 128,
+    "tasks": 8,
+    "shared_coordinates": 16,
+    "private_coordinates_per_task": 4,
+    "shared_rank": 3,
+    "evaluation": "oracle task deltas encoded then reconstructed; 128 held-out random query inputs assess functional reconstruction"
+  },
+  "controls": [
+    "independent sparse task vectors",
+    "SETA-style shared support plus private sparse residual",
+    "Mirror shared basis and task code",
+    "generic PCA shared basis"
+  ],
+  "development": {
+    "worlds": [
+      29700,
+      29701
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "selection_metric": "shared-support recovery, query NRMSE, actual serialized bytes"
+  },
+  "fresh": {
+    "worlds": [
+      29710,
+      29711,
+      29712
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "locked_before_access": true,
+    "selection_metric": "frozen reconstruction error and serialized bytes"
+  },
+  "storage": {
+    "authority": "actual serialized bytes; sparse index and value payloads, basis and codes all charged",
+    "paid_objects": [
+      "shared indices",
+      "shared coefficients or basis",
+      "task codes",
+      "private indices and values",
+      "metadata"
+    ]
+  },
+  "success_gate": "At least 20% byte reduction vs SETA-style shared/private storage at query NRMSE <=0.05; Mirror-specific value additionally requires beating generic PCA.",
+  "failure_gate": "No byte reduction at matched quality, or Mirror is matched by generic PCA; support discovery errors make result NOT ESTABLISHED.",
+  "compute": {
+    "report_support_examples": true,
+    "report_updates": 0,
+    "report_wall_time": true,
+    "report_query_quality": true,
+    "report_actual_bytes": true
+  },
+  "boundaries": [
+    "Synthetic sparse linear task functions only",
+    "SETA mechanism is approximated, not a faithful continual-learning reproduction",
+    "No catastrophic forgetting or routing evidence",
+    "Task vectors are given to encoder; this is compression/reconstruction, not task learning"
+  ]
+}
