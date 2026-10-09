@@ -1,0 +1,14 @@
+{
+  "experiment_id":"MA-351","title":"MIMO multi-input/output heads versus shared Mirror member views","status":"PROTOCOL_FROZEN_BEFORE_DEVELOPMENT","base_commit":"e5c24dd9","evidence_lane":"MECHANISM/ENSEMBLE_QUALITY/DIVERSITY/ACTUAL_BYTES/RUNTIME",
+  "hypothesis":"For member tasks with rotation-aligned linear heads, a shared head plus per-member Mirror phase preserves MIMO member quality/diversity with fewer bytes and one batched evaluation; generic low-rank coefficient coding may match it.",
+  "physical_object":"one shared 8D logistic head or MIMO member-head bank","mirror_coordinate":"one learned planar angle per member acting on first two head coordinates","logical_multiplicity":"eight member-specific binary classifiers evaluated in one batched call","prior_art_refs":[42],
+  "task":{"members":8,"features":8,"train_examples_per_member":256,"test_examples_per_member":1024,"teacher":"rotate first two coordinates of one shared logistic weight vector by evenly spaced member phases","label_noise":"Bernoulli logistic sampling"},
+  "controls":["one shared head","MIMO-style independent member heads trained/evaluated as one stacked batch","shared Mirror head plus per-member learned phases","shared generic rank-2 basis plus two coefficients/member"],
+  "development":{"worlds":[35121,35122],"optimizer_updates":1000,"selection_metric":"member NLL/ECE/accuracy, pairwise disagreement/correlation, actual bytes and batch throughput"},
+  "fresh":{"worlds":[35131,35132,35133],"locked_before_access":true,"optimizer_updates":1000},
+  "storage":{"authority":"actual deterministic serialized inference payload bytes","paid_objects":["shared head or all member heads","Mirror phases or generic basis/codes","metadata"]},
+  "compute":{"report_examples":true,"optimizer_updates":true,"active_compute_proxy":true,"isolated_wall_clock":true,"one_batched_call":true},
+  "success_gate":"Mirror mean NLL within .02 and disagreement within .02 of MIMO; payload <=.80x MIMO and <=.90x generic coefficient control; one-batch inference retained.",
+  "failure_gate":"Mirror misses NLL/diversity or generic coefficient control is within 10% bytes and quality.",
+  "boundaries":["synthetic known rotation orbit","linear MIMO analogue, not deep PA42 reproduction","fixed update evidence is not capacity","no natural diversity or uncertainty claim"]
+}
