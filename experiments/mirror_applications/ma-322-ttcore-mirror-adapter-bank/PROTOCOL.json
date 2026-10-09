@@ -1,0 +1,15 @@
+{
+ "experiment_id":"MA-322","title":"TT-core Mirror adapter bank","status":"SCREENING","base_commit":"d7178b8e","prior_art_refs":[36],"evidence_lane":"TENSOR_TRAIN_ADAPTER/QUALITY/ACTUAL_BYTES/COMPUTE",
+ "hypothesis":"For adapters whose task variation lies in a low-dimensional symmetry of one shared TT core, a per-task Mirror angle can replace independent task-specific TT cores with lower serialized bytes; LoRETTA independent factors and generic PCA are controls.",
+ "physical_object":"shared TT cores for 16×16 linear adapters, with rank-2 bonds and 64 logical tasks","mirror_coordinate":"one Givens angle modulating the second TT core per task","logical_multiplicity":"64 adapter matrices",
+ "model":{"matrix_shape":[16,16],"tt_modes":[2,2,2,2],"bond_rank":2,"tasks":64},
+ "strata":["one-core Givens-aligned tasks","independent TT core per task"],
+ "controls":["independent full adapter matrices","LoRETTA-style shared outer cores plus independent task-specific middle TT core","shared TT core plus Mirror angle codes","generic rank-2 PCA factorization of middle TT cores"],
+ "development":{"worlds":[32200,32201],"seeds":[0,1,2],"selection_metric":"matrix/function NRMSE, actual serialized fp16 bytes, code fitting wall time"},
+ "fresh":{"worlds":[32210,32211,32212],"seeds":[0,1,2],"locked_before_access":true},
+ "storage":{"authority":"actual serialized inference payload bytes after deterministic fp16 decode","paid_objects":["shared TT cores fp16","independent task TT cores or Mirror angles","PCA mean/basis/codes","full adapter matrices","metadata"]},
+ "success_gate":"Aligned function NRMSE <=0.01 and at least 20% fewer bytes than LoRETTA independent TT factors; generic PCA matching Mirror means no Mirror-specific result. Independent tasks test private-factor boundary.",
+ "failure_gate":"Mirror misses aligned quality/storage gate or generic PCA matches/improves it; independent cores outperforming Mirror is the boundary condition.",
+ "compute":{"report_optimizer_updates":0,"report_code_fit_seconds":true,"report_quality":true,"report_actual_bytes":true},
+ "boundaries":["Synthetic TT matrices only","Aligned teacher is generated from the same Givens core action","No LoRETTA training or language-model task evidence","All serialized cores decoded from fp16 for evaluation"]
+}
