@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-481.** MA-478 tested View-first/private fallback and failed its byte gate; off-orbit private values erased most savings. Continue with VQ address-codebook controls; MA-479 remains P1.
+**Current operational pointer (2026-10-09): MA-482.** MA-481 found substantial continuous-address byte savings but failed the paraphrase recall gate on a crowded orbit; VQ alternatives collided. Continue with residual-code composition and full rate-distortion controls.
 
 # Worker queue
 
