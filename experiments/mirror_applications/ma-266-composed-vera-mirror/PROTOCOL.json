@@ -1,0 +1,104 @@
+{
+  "experiment_id": "MA-266",
+  "title": "Composed VeRA Mirror views and task arithmetic",
+  "status": "FROZEN_SCREENING",
+  "base_commit": "ad8eb901",
+  "evidence_lane": "ADAPTER_COMPOSITION/COMPOSITIONAL_TRANSFER/ACTUAL_BYTES/COMPUTE",
+  "prior_art_refs": [
+    18,
+    26
+  ],
+  "model": {
+    "input_dim": 32,
+    "shared_adapter_basis": "one normalized rank-1 projection K=u u^T, so K^2=K",
+    "adapter": "T(alpha)=I+alpha K"
+  },
+  "task": {
+    "type": "compose two linear adapter functions",
+    "pairs_per_bank": 1,
+    "coefficient_range": [
+      -0.6,
+      1.0
+    ],
+    "heldout_inputs": 1024,
+    "metrics": [
+      "composed function NRMSE",
+      "payload bytes",
+      "decode seconds",
+      "one-step vs two-step apply latency"
+    ]
+  },
+  "hypothesis": "A one-coordinate Mirror composition law alpha_comp=alpha1+alpha2+alpha1*alpha2 can represent sequential composition of two shared-basis VeRA views more compactly and accurately than ordinary task-vector/scaling addition alpha1+alpha2.",
+  "physical_object": "one shared rank-1 projection basis u and deterministic identity base",
+  "mirror_coordinate": "one composed scalar address over the shared operator",
+  "logical_multiplicity": "one composed adapter function from two VeRA task views",
+  "controls": [
+    "no-adapter identity",
+    "ordinary task arithmetic / sum of VeRA scales",
+    "sequential application of both VeRA views",
+    "Mirror nonlinear scalar composition law",
+    "independent explicit composed matrix upper control",
+    "generic scalar product-law control (Mirror-specificity check)"
+  ],
+  "development": {
+    "worlds": [
+      26600,
+      26601
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "allowed": "validate algebraic identity, task/data shapes, serializer and timing; no hyperparameter selection"
+  },
+  "fresh": {
+    "worlds": [
+      26610,
+      26611,
+      26612
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "Canonical packed little-endian binary inference payload, including fixed 8-byte header, shared basis vector, task code(s), or explicit matrix."
+  },
+  "compute": {
+    "report_decode_seconds": true,
+    "report_one_step_and_two_step_apply_seconds": true,
+    "report_CPU_wall_clock": true
+  },
+  "success_gate": "Mirror composed NRMSE <=1e-6 and uses <=80% of two separate VeRA codes+sequential path payload bytes in every fresh world; report generic product-law equality, which if matched prevents Mirror-specific novelty claim.",
+  "failure_gate": "Ordinary scale addition is within 5% NRMSE of exact composition or generic scalar product law matches Mirror without a byte/compute penalty, for Mirror-specific value.",
+  "boundaries": [
+    "One rank-1 idempotent basis and scalar coefficients only; no general multi-adapter or NLP composition claim.",
+    "This tests function composition algebra; composition count is not independent capacity.",
+    "The generic scalar product-law control is intentionally the cheapest alternative."
+  ],
+  "amendment_before_fresh": {
+    "reason": "torch.save overhead erased the one-vs-two scalar byte distinction in development.",
+    "change": "Use fixed-header packed binary payload and decode each stored artifact before evaluation.",
+    "fresh_not_accessed": true
+  },
+  "development_summary": {
+    "nrmse_mean": {
+      "scale_sum": 0.0218378,
+      "mirror_composed": 1.3e-07,
+      "generic_product_law": 1.3e-07,
+      "sequential_vera": 2.1e-07
+    },
+    "payload_bytes": {
+      "scale_sum": 140,
+      "mirror_composed": 140,
+      "generic_product_law": 140,
+      "sequential_vera": 144,
+      "explicit_matrix": 4104
+    },
+    "interpretation": "Composed law restores exact sequential behavior, but generic product-law control is identical; 1-code payload is only 2.8% smaller than two-scale sequential."
+  }
+}
