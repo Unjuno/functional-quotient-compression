@@ -217,3 +217,5 @@ KG relation rotations (RotatE, TuckER, QuatE, PairRE), EXIF/device-aware ISPs (P
 **MA-486 FAIL:** 32D synthetic vectors with 64 charged atoms / 128 functions: top-4 sparse codes used 12,769B (70.8% dense) at NRMSE .1093; top-8 reached .0258 but 15,329B (85.0%). No point met <=.05 error and <=50% bytes. Dictionary/index overhead dominates this bank size. **Next: MA-487.**
 
 **MA-487 FAIL:** on 9 fresh synthetic banks, OMP top-8 had NRMSE .0269 at 15,329B. LISTA errors were .821/.742/.644/.358 at depths 1/2/4/8 and each serialized router was 214,613B. No depth met .05 NRMSE; dense router state cost ~14x OMP. **Next: MA-488.**
+
+**MA-488 FAIL:** for 25/50/75% off-manifold function banks, adaptive private residuals exactly restored targets but payload/dense ratios were 62.7% / 83.6% / 104.4%; the registered <=80% gate had to pass at every heterogeneity level. Shared-only errors were .480/.605/.667. As heterogeneity rises, private vectors erase storage savings. **Next: highest-priority queued discrete-code candidate.**
