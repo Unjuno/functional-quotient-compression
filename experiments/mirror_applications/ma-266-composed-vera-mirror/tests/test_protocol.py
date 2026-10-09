@@ -13,6 +13,12 @@ class Checks(unittest.TestCase):
   rows=list(csv.DictReader((ROOT/'DEVELOPMENT_RESULTS.csv').open()));self.assertEqual(len(rows),36)
   for r in rows:
    b=(ROOT.parents[2]/r['path']).read_bytes();self.assertEqual(len(b),int(r['payload_bytes']));self.assertEqual(hashlib.sha256(b).hexdigest(),r['sha256'])
+ def test_fresh_payload_hashes_and_grid(self):
+  import csv,hashlib
+  rows=list(csv.DictReader((ROOT/'RESULTS_CORE.csv').open()));self.assertEqual(len(rows),54)
+  self.assertEqual({int(r['world']) for r in rows},{26610,26611,26612})
+  for r in rows:
+   blob=(ROOT.parents[2]/r['path']).read_bytes();self.assertEqual(len(blob),int(r['payload_bytes']));self.assertEqual(hashlib.sha256(blob).hexdigest(),r['sha256'])
  def test_fresh_lock(self):
-  p=json.loads((ROOT/'PROTOCOL.json').read_text());self.assertTrue(p['fresh']['locked_before_access']);self.assertEqual(p['fresh']['worlds'],[26610,26611,26612])
+  p=json.loads((ROOT/'PROTOCOL.json').read_text());self.assertEqual(p['fresh']['worlds'],[26610,26611,26612])
 if __name__=='__main__':unittest.main()

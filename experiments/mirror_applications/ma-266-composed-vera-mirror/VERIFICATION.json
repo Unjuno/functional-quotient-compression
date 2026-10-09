@@ -1,0 +1,26 @@
+{
+  "experiment_id": "MA-266",
+  "commit": "pending final result commit",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-266-composed-vera-mirror/tests -v",
+    "passed": 6,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "note": "Custom binary decoder roundtrip and 54 payload hashes/lengths checked."
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0,
+    "note": "NRMSE recomputed from decoded payloads and fresh result CSV."
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Fresh worlds 26610-26612 \u00d7 seeds 0-2; 54 rows.",
+    "Simple scale addition NRMSE 0.03670; composed Mirror/generic/sequential approximately 1e-7.",
+    "Mirror/generic 140B; sequential 144B; explicit matrix 4104B.",
+    "One-step application around 15us vs sequential 31us. Generic product law matches Mirror exactly."
+  ]
+}

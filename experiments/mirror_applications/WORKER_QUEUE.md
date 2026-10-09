@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-266.** MA-265 FAIL: Mirror saved only 2.5% vs generic, took ~18x longer to fit, and failed on independent scaling tasks. Continue to MA-266 with native VeRA and private residual controls.
+**Current operational pointer (2026-10-09): MA-268.** MA-266 showed that product-law composition restores sequential function behavior and halves application steps, but generic scalar algebra exactly matched Mirror and the payload saving was only 2.8%. Continue to MA-268 with native IA3 scaling as the mandatory control.
 
 # Worker queue
 

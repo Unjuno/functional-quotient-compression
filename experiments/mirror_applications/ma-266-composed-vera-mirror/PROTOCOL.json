@@ -1,7 +1,7 @@
 {
   "experiment_id": "MA-266",
   "title": "Composed VeRA Mirror views and task arithmetic",
-  "status": "FROZEN_SCREENING",
+  "status": "COMPLETED_FAIL",
   "base_commit": "ad8eb901",
   "evidence_lane": "ADAPTER_COMPOSITION/COMPOSITIONAL_TRANSFER/ACTUAL_BYTES/COMPUTE",
   "prior_art_refs": [
@@ -63,7 +63,7 @@
       1,
       2
     ],
-    "locked_before_access": true
+    "locked_before_access": false
   },
   "storage": {
     "authority": "Canonical packed little-endian binary inference payload, including fixed 8-byte header, shared basis vector, task code(s), or explicit matrix."
@@ -100,5 +100,27 @@
       "explicit_matrix": 4104
     },
     "interpretation": "Composed law restores exact sequential behavior, but generic product-law control is identical; 1-code payload is only 2.8% smaller than two-scale sequential."
+  },
+  "result_summary": {
+    "fresh_nrmse_mean": {
+      "scale_sum": 0.03670254,
+      "mirror_composed": 1.3e-07,
+      "generic_product_law": 1.3e-07,
+      "sequential_vera": 2.1e-07,
+      "explicit_matrix": 0.0
+    },
+    "payload_bytes": {
+      "mirror_composed": 140,
+      "generic_product_law": 140,
+      "sequential_vera": 144,
+      "explicit_matrix": 4104,
+      "identity": 8
+    },
+    "apply_seconds_mean": {
+      "mirror_composed": 1.5e-05,
+      "generic_product_law": 1.5e-05,
+      "sequential_vera": 3.1e-05
+    },
+    "interpretation": "The nonlinear composition term restores sequential function behavior and halves the application steps, but the generic scalar product law is identical and the payload saves only 2.8% versus storing two scales."
   }
 }

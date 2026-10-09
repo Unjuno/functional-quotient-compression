@@ -1,7 +1,9 @@
 # MA-266 status
 
-- Status: SCREENING
-- Branch: `research/ma-266-composed-vera-mirror-20261009`
-- Base: `ad8eb901`
-- Prior art: PA18 VeRA; PA26 Task Arithmetic
-- Fresh remains locked
+- Status: FAIL for Mirror-specific claim; scalar composition law works
+- Branch: research/ma-266-composed-vera-mirror-20261009
+- Fresh: 3 worlds × 3 seeds; 54 rows
+- Scale sum NRMSE: 0.03670; composed Mirror/generic: ~1.3e-7
+- Payload: 140 B Mirror/generic vs 144 B sequential two-code VeRA
+- Application: ~15 μs one-step vs ~31 μs sequential
+- Verification pending final commit
