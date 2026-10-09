@@ -1,7 +1,16 @@
 condition,world_or_seed,method,serialized_bytes,train_tokens_or_examples,optimizer_updates,active_compute_proxy,wall_time_s,primary_metric,primary_value,secondary_metric,secondary_value,status_note
-monomial_compensated,54601,monomial_compensated,231772,128,0,810,0.524161,local_max_delta_or_uncompensated_full_logit_delta,2.2351741790771484e-06,full_top1_agreement,1.0,amendment 1 corrected dev; fresh sealed
-hadamard_compensated,54601,hadamard_compensated,15268,128,0,810,0.694155,local_max_delta_or_uncompensated_full_logit_delta,2.4437904357910156e-06,full_top1_agreement,1.0,amendment 1 corrected dev; fresh sealed
-monomial_uncompensated,54601,monomial_uncompensated,231772,128,0,810,0.498704,local_max_delta_or_uncompensated_full_logit_delta,16.8572998046875,full_top1_agreement,0.953125,amendment 1 corrected dev; fresh sealed
-monomial_compensated,54602,monomial_compensated,231772,128,0,806,0.514632,local_max_delta_or_uncompensated_full_logit_delta,2.0563602447509766e-06,full_top1_agreement,1.0,amendment 1 corrected dev; fresh sealed
-hadamard_compensated,54602,hadamard_compensated,15268,128,0,806,0.506534,local_max_delta_or_uncompensated_full_logit_delta,2.7418136596679688e-06,full_top1_agreement,1.0,amendment 1 corrected dev; fresh sealed
-monomial_uncompensated,54602,monomial_uncompensated,231772,128,0,806,0.454638,local_max_delta_or_uncompensated_full_logit_delta,21.191162109375,full_top1_agreement,0.2109375,amendment 1 corrected dev; fresh sealed
+monomial_compensated,54601,monomial_compensated,231772,128,0,810,0.524161,local_max_delta,2.2351741790771484e-06,mean_kl_from_base,1.2955726447216875e-07,corrected dev
+hadamard_compensated,54601,hadamard_compensated,15268,128,0,810,0.694155,local_max_delta,2.4437904357910156e-06,mean_kl_from_base,2.1052599663562432e-07,corrected dev
+monomial_uncompensated,54601,monomial_uncompensated,231772,128,0,810,0.498704,full_max_logit_delta,16.8572998046875,top1_agreement,0.953125,corrected dev
+monomial_compensated,54602,monomial_compensated,231772,128,0,806,0.514632,local_max_delta,2.0563602447509766e-06,mean_kl_from_base,7.312083027954941e-08,corrected dev
+hadamard_compensated,54602,hadamard_compensated,15268,128,0,806,0.506534,local_max_delta,2.7418136596679688e-06,mean_kl_from_base,2.2975579838657723e-07,corrected dev
+monomial_uncompensated,54602,monomial_uncompensated,231772,128,0,806,0.454638,full_max_logit_delta,21.191162109375,top1_agreement,0.2109375,corrected dev
+monomial_compensated,54611,monomial_compensated,231772,128,0,808,0.507535,local_max_delta,2.3245811462402344e-06,mean_kl_from_base,1.5348827275829535e-07,fresh; frozen settings
+hadamard_compensated,54611,hadamard_compensated,15268,128,0,808,0.566555,local_max_delta,2.9802322387695312e-06,mean_kl_from_base,1.3558054945406184e-07,fresh; frozen settings
+monomial_uncompensated,54611,monomial_uncompensated,231772,128,0,808,0.455257,full_max_logit_delta,16.50341796875,top1_agreement,0.8046875,fresh; frozen settings
+monomial_compensated,54612,monomial_compensated,231772,128,0,807,0.598051,local_max_delta,2.4437904357910156e-06,mean_kl_from_base,2.4416081600975303e-07,fresh; frozen settings
+hadamard_compensated,54612,hadamard_compensated,15268,128,0,807,0.509695,local_max_delta,2.9206275939941406e-06,mean_kl_from_base,1.86042953487231e-07,fresh; frozen settings
+monomial_uncompensated,54612,monomial_uncompensated,231772,128,0,807,0.493846,full_max_logit_delta,26.71728515625,top1_agreement,0.703125,fresh; frozen settings
+monomial_compensated,54613,monomial_compensated,231772,128,0,808,0.519493,local_max_delta,2.205371856689453e-06,mean_kl_from_base,2.2229303908716247e-07,fresh; frozen settings
+hadamard_compensated,54613,hadamard_compensated,15268,128,0,808,0.498637,local_max_delta,2.9802322387695312e-06,mean_kl_from_base,2.266963576857961e-07,fresh; frozen settings
+monomial_uncompensated,54613,monomial_uncompensated,231772,128,0,808,0.437799,full_max_logit_delta,28.0810546875,top1_agreement,0.0234375,fresh; frozen settings

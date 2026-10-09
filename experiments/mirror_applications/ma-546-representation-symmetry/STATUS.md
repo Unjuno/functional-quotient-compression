@@ -1,23 +1,20 @@
 # MA-546 status
 
-- Status: SCREENING
+- Status: FAIL for additional functional multiplicity; symmetry audit PASS
 - Branch: `research/ma-546-representation-symmetry-20261009`
 - Base commit: `ac1c3e1814aada23eb99254b841faa31b4bb0ffb`
-- Protocol frozen: yes
-- Development complete: yes (amendment 1 corrected rerun)
-- Fresh opened: yes (54611–54613 after dev gate commit 76edfc82)
-- Results committed: no
-- Verification committed: no
-- Registry row updated: pending
+- Development worlds: complete
+- Fresh worlds 54611–54613: complete; settings frozen
+- Results committed: pending integration
+- Verification committed: pending integration
+- Registry row updated: pending integration
 
 ## Next action
 
-Run fresh seeds 54611, 54612 and 54613 under the unchanged freeze.
+Commit the verified gauge result and proceed to MA-547.
 
-## Blockers
+## Decisions
 
-None.
-
-## Amendment 1
-
-First dev 54601 exposed the reversed dense compensation multiplication and a floating-point max-logit gate that overreacts to rare-token tail logits. Initial output is preserved under `results/pre_amendment_1/`. Dense compensation and distribution-level gate are corrected; rerun dev before fresh, which remains sealed.
+FACT: Compensated views preserve outputs; unpaired monomial views alter outputs.
+INTERPRETATION: Address count is not function count; the compensated family is a reparameterization orbit.
+HYPOTHESIS: Other activation insertion points may support nontrivial task-conditioned functions, but need separate tests.

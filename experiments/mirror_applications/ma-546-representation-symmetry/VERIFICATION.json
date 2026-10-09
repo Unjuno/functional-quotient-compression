@@ -9,7 +9,8 @@
   "serialization": {
     "roundtrip_checked": true,
     "byte_exact": true,
-    "actual_npz_byte_sizes": true
+    "actual_npz_byte_sizes": true,
+    "all_five_worlds_checked": true
   },
   "metric_replay": {
     "checked": true,
@@ -19,14 +20,21 @@
     "wall_clock_excluded": true,
     "replayed_seed": 54601
   },
-  "fresh_split_integrity_checked": false,
+  "fresh_split_integrity_checked": true,
   "fresh_accessed": true,
+  "fresh_seeds_completed": [
+    54611,
+    54612,
+    54613
+  ],
   "protocol_hash_matches_freeze": true,
   "notes": [
-    "Amendment 1 preserves the first development output and reruns corrected dense inverse compensation; no fresh data was accessed.",
-    "Both corrected dev worlds pass local projection delta <=1e-5, 100% top-1 and full-model max KL <=1e-4 for compensated monomial and dense orthogonal views.",
-    "Uncompensated monomial changes logits substantially; it is a changed function, not a symmetry.",
-    "The exact seed-54601 replay matches metrics, prompts, serialized code arrays and byte counts; wall timings are excluded.",
-    "Fresh seeds 54611\u201354613 opened after the corrected development gate was committed at 76edfc82; evaluation is in progress without further tuning."
+    "Corrected dev gates pass in both seeds and all three fresh seeds.",
+    "16 monomial views and one dense Hadamard view have compensated local delta <=2.99e-6, full-model top1 100%, max KL <=7.91e-6.",
+    "Uncompensated control changes outputs: fresh mean KL .88\u20132.18, top-1 agreement .023\u2013.805.",
+    "Actual code payloads: 231,772 B monomial bank, 15,268 B dense address, plus 168,144,624 B shared model.",
+    "The 16 view addresses are function-equivalent gauge choices, not additional capacity.",
+    "Corrected dev seed 54601 exact replay matched all non-timing artifacts.",
+    "Initial pre-amendment run and protocol amendment are preserved."
   ]
 }
