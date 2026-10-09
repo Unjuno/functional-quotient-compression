@@ -6,13 +6,13 @@
 - Protocol freeze: `2a8d0407`
 - Development complete: yes
 - Fresh/audit opened: yes, after protocol freeze
-- Results committed: yes (pending report commit SHA)
-- Verification committed: yes (pending report commit SHA)
-- Registry row updated: yes (same report commit)
+- Results committed: yes (`6c82b0aa`)
+- Verification committed: yes (`6c82b0aa`)
+- Registry row updated: yes
 
 ## Next action
 
-Run payload replay tests, update MA-473 status/claim, verify registry integrity, and push this branch.
+MA-473 is complete; continue with MA-475 on a dedicated branch.
 
 ## Limitations
 
