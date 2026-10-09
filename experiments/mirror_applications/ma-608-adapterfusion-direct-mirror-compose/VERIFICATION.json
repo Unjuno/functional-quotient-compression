@@ -1,16 +1,31 @@
 {
-  "experiment_id":"MA-608",
-  "decision":"PROMISING",
-  "phase":"deterministic algebra/runtime screen",
-  "base_commit":"4c935606",
-  "environment":{"python":"3.12.14","torch":"2.14.1+cpu","device":"cpu"},
-  "frozen_protocol":"PROTOCOL.json; fixed seeds 60801/60802; no fresh data or optimization",
-  "checks":[
-    {"command":"pytest -q experiments/mirror_applications/ma-608-adapterfusion-direct-mirror-compose/tests","result":"2 passed"},
-    {"command":"python experiments/mirror_applications/ma-608-adapterfusion-direct-mirror-compose/source/verify_results.py","result":"6/6 payload file sizes and SHA-256 hashes match; reloaded output errors <=1e-6; linear identities within tolerance"}
+  "experiment_id": "MA-608",
+  "decision": "PROMISING",
+  "phase": "deterministic algebra/runtime screen",
+  "base_commit": "4c935606",
+  "environment": {
+    "python": "3.12.14",
+    "torch": "2.14.1+cpu",
+    "device": "cpu"
+  },
+  "frozen_protocol": "PROTOCOL.json; fixed seeds 60801/60802; no fresh data or optimization",
+  "checks": [
+    {
+      "command": "pytest -q experiments/mirror_applications/ma-608-adapterfusion-direct-mirror-compose/tests",
+      "result": "2 passed"
+    },
+    {
+      "command": "python experiments/mirror_applications/ma-608-adapterfusion-direct-mirror-compose/source/verify_results.py",
+      "result": "6/6 payload file sizes and SHA-256 hashes match; reloaded output errors <=1e-6; linear identities within tolerance"
+    }
   ],
-  "metrics":"runs/dev_metrics.json and RESULTS_CORE.csv",
-  "payloads":"runs/dev_payloads; actual torch.save payloads; reconstructed resident transform cache reported separately",
-  "decision_basis":"All deterministic screen gates passed in both seeded worlds: linear max error <=2.4e-7; Mirror bytes 5,529 vs 15,645 full and 6,233 generic shared matrix; compute proxy 1,220 vs 2,528; nonlinear normalized MSE 0.0123/0.00663.",
-  "limitations":["No learned adapters or task-level optimization.","Synthetic low-rank shared-basis functions only.","Nonlinear stress uses small random activations and may be near-linear."]
+  "metrics": "runs/dev_metrics.json and RESULTS_CORE.csv",
+  "payloads": "runs/dev_payloads; actual torch.save payloads; reconstructed resident transform cache reported separately",
+  "decision_basis": "All deterministic screen gates passed in both seeded worlds: linear max error <=2.4e-7; Mirror bytes 5,529 vs 15,645 full and 6,233 generic shared matrix; compute proxy 1,220 vs 2,528; nonlinear normalized MSE 0.0123/0.00663.",
+  "limitations": [
+    "No learned adapters or task-level optimization.",
+    "Synthetic low-rank shared-basis functions only.",
+    "Nonlinear stress uses small random activations and may be near-linear."
+  ],
+  "result_commit": "526266d2"
 }
