@@ -1,0 +1,26 @@
+{
+  "experiment_id": "MA-527",
+  "protocol_sha256_unchanged": "63ea2cee5e40b5428070ef683a51de64a99c50617f67e81161c2554563b13af2",
+  "events": [
+    {
+      "stage": "pre-metric preflight",
+      "issue": "PyTorch autograd rejected in-place pairwise-gain slice writes.",
+      "repair": "Replaced in-place slice writes with stack-based differentiable pair transforms.",
+      "data_accessed": "Development seed 52701 support vectors only; no metrics emitted; fresh untouched."
+    },
+    {
+      "stage": "pre-metric preflight",
+      "issue": "An extra broadcast dimension expanded the OMP dictionary normalization into a 2048x2048x512 temporary and triggered the 16 GiB cgroup OOM killer.",
+      "repair": "Removed the redundant axis and verified the normalized dictionary and OMP output shapes.",
+      "data_accessed": "Development seed 52701 support vectors only; no metrics emitted; fresh untouched."
+    },
+    {
+      "stage": "post-development accounting correction",
+      "issue": "Initial report code assigned aggregate fit wall time and a common compute proxy to every method.",
+      "repair": "Added per-method measured pool, optimizer/assignment, OMP coding and inference timing and method-specific operation proxies; reran both development seeds before finalizing results.",
+      "data_accessed": "Development seeds 52701 and 52702 only; fresh untouched."
+    }
+  ],
+  "protocol_or_hypothesis_changed": false,
+  "fresh_accessed": false
+}

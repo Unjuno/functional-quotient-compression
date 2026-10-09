@@ -1,0 +1,114 @@
+{
+  "experiment_id": "MA-527",
+  "title": "Function-specific Givens Views over a shared SAE feature vector",
+  "status": "SCREENING",
+  "evidence_lane": "SAE_FEATURE_TRANSFORM/LOGICAL_FUNCTION_VIEWS/SPARSITY/CAUSAL_QUALITY/ACTUAL_BYTES",
+  "base_commit": "e0b32adac87226fe41f16544f2aae1f33e9ee18f",
+  "hypothesis": "On four held-out relation tasks in pinned Pythia-70m, one shared 16-feature SAE code plus eight task-specific Givens angles will preserve explicit-FV causal quality within .10 gold-logprob nats and .05 accuracy, use <=0.50x explicit-FV incremental bytes, and beat both an equal-code-size pairwise-gain control and global OMP-16 by >=.10 gold-logprob nats in both development seeds.",
+  "physical_object": "Pinned Pythia-70m plus pretrained tied 2048-atom layer-3 SAE and one shared 16-value feature vector over a fit-selected atom pool.",
+  "mirror_coordinate": "Eight angles per task rotate four fixed pairs of the shared 16-dimensional SAE feature vector using block-diagonal 2D Givens matrices.",
+  "logical_multiplicity": "Sixteen relation-task residual interventions generated from one shared SAE feature vector and small task-specific angle codes; tasks 12-15 are withheld from pool/shared-vector fitting.",
+  "prior_art_refs": [
+    "PA96",
+    "PA102"
+  ],
+  "artifacts": {
+    "model": "EleutherAI/pythia-70m-deduped revision e93a9faa9c77e5d09219f6c868bfc7a1bd65593c, weights SHA-256 3da388330e4549156d76b58d6d268c63cd005e9336b4f4d2d378421e7b7a33fd.",
+    "sae": "Elriggs/pythia-70M-deduped-sae revision 36c2027509efad69836aa4231999c9b717848ecd, layer3.pt SHA-256 85b57dfe34d19769e2df0e208e38fda8815da8493c56b703a99ff74cc610dbf4, 4,204,391 B.",
+    "tasks": "Reuse MA-516 task sets, support splits, layer-4 FVs and causal evaluator."
+  },
+  "task": {
+    "fit_task_ids": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "heldout_task_ids": [
+      12,
+      13,
+      14,
+      15
+    ],
+    "support_examples_per_task": 8,
+    "primary_metric": "mean held-out gold candidate log probability",
+    "secondary_metrics": [
+      "top-1 accuracy",
+      "gold margin",
+      "FV reconstruction cosine/RMSE",
+      "SAE feature sparsity",
+      "actual code and full deployment bytes",
+      "compute proxy",
+      "compile and inference wall time"
+    ]
+  },
+  "view": {
+    "pool_selection": "Top sixteen aggregate positive SAE encoder activations across task FVs 0-11; deterministic stable sort.",
+    "shared_vector": "One learned FP32 c in R16; decoder atoms are the selected tied-SAE encoder rows.",
+    "mirror_code": "For task t, apply four Givens rotations to fixed pairs (0,1),(2,3),(4,5),(6,7) and (8,9),(10,11),(12,13),(14,15), with one FP32 angle per pair. Decode W_pool^T Q(m_t)c.",
+    "fit": "Jointly minimize vector MSE for c and angle codes on tasks 0-11; Adam full-batch, lr=.01, exactly 2000 updates, zero weight decay.",
+    "heldout_compile": "Hold c and pool fixed; fit only eight angles per held-out task to its offline FV target with Adam lr=.01 for exactly 500 updates. Teacher vectors are discarded from inference state.",
+    "selection": "No rank/pool/pair/angle scale tuning."
+  },
+  "controls": [
+    "No intervention",
+    "Explicit FP32 FV bank",
+    "Shared SAE vector without transform (m=0)",
+    "Equal-size native pairwise gain control: one independent gain per Givens pair and task",
+    "Global signed OMP-16 over all 2048 SAE atoms"
+  ],
+  "development": {
+    "seeds": [
+      52701,
+      52702
+    ],
+    "changes_after_run": "prohibited without numbered amendment"
+  },
+  "fresh": {
+    "seeds": [
+      52711,
+      52712,
+      52713
+    ],
+    "locked_before_access": true,
+    "opened": false,
+    "opening_rule": "Only if both seeds pass causal-quality and byte gates and beat equal-size native gains and global OMP-16 by >=.10 nats."
+  },
+  "storage": {
+    "authority": "actual uncompressed NPZ bytes",
+    "paid_objects": [
+      "16 selected feature IDs",
+      "shared vector c",
+      "all sixteen eight-angle codes",
+      "task and model/SAE metadata",
+      "full SAE artifact for standalone deployment",
+      "explicit FV bank and native-control coefficients"
+    ],
+    "accounting": "Report incremental codes on a preloaded SAE system and standalone Pythia+SAE+View total, versus Pythia+explicit FVs. No decoded residual vectors are cached."
+  },
+  "compute": {
+    "hardware": "CPU, fixed five-thread limit",
+    "optimizer_updates": "2000 shared fit plus 4x500 heldout angle assignment per seed",
+    "report_support_and_query_tokens": true,
+    "active_compute_proxy": "report SAE activation/pool selection, angle fitting over 16-dimensional decoder, and transformer query sequences separately"
+  },
+  "gates": {
+    "PASS": "Both seeds: within .05 accuracy/.10 gold-logprob nats of explicit FVs, code payload <=0.50x explicit FV bank, and >=.10 gold-logprob nats better than both equal-size pairwise gains and global OMP-16.",
+    "FAIL": "Any frozen causal, byte, or native-control gate is missed.",
+    "NOT_ESTABLISHED": "Artifact hash, split integrity, or deterministic replay fails."
+  },
+  "boundaries": [
+    "One pretrained 4x SAE and four held-out relation tasks; not broad steering evidence.",
+    "Full SAE bytes are charged to standalone deployment.",
+    "Givens views must be compared to ordinary pairwise gains and native sparse coding.",
+    "Fresh seeds stay sealed unless every gate passes."
+  ]
+}
