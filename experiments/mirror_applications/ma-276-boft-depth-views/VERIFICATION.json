@@ -1,6 +1,8 @@
 {
   "experiment_id": "MA-276",
   "status": "FAIL",
+  "completion_branch": "research/ma-276-complete-record-20261009",
+  "completion_commit": "pending",
   "fresh_amendment": "A1",
   "original_fresh_worlds": [
     27610,
@@ -15,7 +17,7 @@
   "a1_rows": 432,
   "tests": "3 passed pre-freeze",
   "hardware": "CPU only",
-  "provenance_issue": "A1 execution overwrote original FRESH_RESULTS.csv; original fresh payloads remain, row-level metrics not recovered; no rerun of viewed worlds.",
+  "provenance_issue": "A1 initially overwrote the original fresh result path; original development rows, original fresh aggregate and A1 fresh rows are preserved in separate CSVs after reconciliation. No rerun of viewed worlds.",
   "limitations": [
     "Synthetic linear recurrence",
     "Teacher exactly aligned to Givens orbit",
