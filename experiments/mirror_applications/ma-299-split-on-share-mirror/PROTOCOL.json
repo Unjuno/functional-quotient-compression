@@ -1,0 +1,76 @@
+{
+  "experiment_id": "MA-299",
+  "title": "Split-on-Share Mirror code allocation",
+  "status": "SCREENING",
+  "base_commit": "5408b693",
+  "evidence_lane": "CONTINUAL_ALLOCATION/QUALITY/ACTUAL_BYTES",
+  "prior_art_refs": [
+    30
+  ],
+  "hypothesis": "Allocating a compact shared-basis View first and adding private residuals only when reconstruction error exceeds a frozen threshold delays physical growth while retaining task quality versus always-private storage.",
+  "physical_object": "shared rank-3 linear task basis with sequentially arriving task deltas",
+  "mirror_coordinate": "per-task coefficients over the shared basis; private sparse residual allocated on threshold crossing",
+  "logical_multiplicity": "ten task functions, including four later tasks with novel sparse directions",
+  "model": {
+    "dimension": 256,
+    "tasks": 10,
+    "initial_shared_tasks": 6,
+    "late_novel_tasks": 4,
+    "shared_rank": 3,
+    "split_threshold_relative_residual": 0.15,
+    "numerical_residual_storage_cutoff": 1e-06
+  },
+  "controls": [
+    "always-private independent sparse task vectors",
+    "never-split shared basis",
+    "adaptive Mirror plus private residual",
+    "generic PCA with same split policy"
+  ],
+  "development": {
+    "worlds": [
+      29900,
+      29901
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "selection_metric": "query NRMSE, split count and actual payload bytes"
+  },
+  "fresh": {
+    "worlds": [
+      29910,
+      29911,
+      29912
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual serialized payload bytes; indices, values, shared basis, codes and metadata charged",
+    "paid_objects": [
+      "shared basis float32",
+      "task coordinates float32",
+      "private residual indices int16 and values float32",
+      "metadata"
+    ]
+  },
+  "success_gate": "Adaptive policy retains query NRMSE <=0.05, splits all four novel tasks, and saves >=20% bytes versus always-private task vectors.",
+  "failure_gate": "Threshold misses late novel tasks or adaptive payload fails to improve bytes at matched quality; equality with generic PCA means no Mirror-specific result.",
+  "compute": {
+    "report_split_count": true,
+    "report_query_quality": true,
+    "report_actual_bytes": true,
+    "report_optimizer_updates": 0
+  },
+  "boundaries": [
+    "Synthetic linear task functions only",
+    "No continual optimization, forgetting, routing or natural task evidence",
+    "Threshold fixed at 0.15 before fresh evaluation"
+  ]
+}
