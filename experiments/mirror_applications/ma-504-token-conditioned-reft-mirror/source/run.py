@@ -38,8 +38,11 @@ def unpack(payload):
 
 def train(method,basis,data,seed,lr):
  seed_all(seed+METHODS.index(method)*43)
- model=InterventionModel(method,basis);opt=torch.optim.AdamW(model.parameters(),lr=lr,weight_decay=1e-4)
+ model=InterventionModel(method,basis)
  h,u,d,_=data['train'];g=torch.Generator().manual_seed(seed+119)
+ if method == 'shared':
+  return model.eval(), 0.0
+ opt=torch.optim.AdamW(model.parameters(),lr=lr,weight_decay=1e-4)
  start=time.perf_counter();model.train()
  for _ in range(UPDATES):
   ids=torch.randint(len(h),(BATCH,),generator=g)
