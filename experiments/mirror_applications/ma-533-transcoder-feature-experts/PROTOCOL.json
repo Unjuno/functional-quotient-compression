@@ -1,0 +1,86 @@
+{
+  "experiment_id": "MA-533",
+  "title": "Native skip-transcoder MLP approximation fidelity",
+  "status": "SCREENING",
+  "evidence_lane": "TRANSCODER_FIDELITY/QUALITY/SPARSITY/ACTUAL_BYTES/COMPUTE",
+  "base_commit": "c07cba1d",
+  "hypothesis": "For the pinned SmolLM2-135M layer-8 MLP, the released 128x top-k skip-transcoder will reconstruct the original MLP output with held-out relative MSE <=0.10 and cosine >=0.95 while activating <=128 of 73,728 features; its serialized standalone payload cost will be reported against the native dense MLP.",
+  "physical_object": "Pinned HuggingFaceTB/SmolLM2-135M layer-8 MLP plus its released skip-transcoder checkpoint.",
+  "mirror_coordinate": "Native sparse latent activation vector (top-k 128); MA-533 evaluates whether this atom basis faithfully represents the original layer before adding any Mirror-view parameter.",
+  "logical_multiplicity": "One MLP function expressed through sparse transcoder features; no multiplicity claim in this screen.",
+  "prior_art_refs": [
+    "PA103"
+  ],
+  "controls": [
+    "Original layer-8 MLP output (reference)",
+    "Released transcoder skip + decoded sparse feature output",
+    "A zero-residual/skip-only control",
+    "Truncated-SVD rank-128 projection fitted on development activations as a generic compression control"
+  ],
+  "task": {
+    "model": "HuggingFaceTB/SmolLM2-135M",
+    "model_revision": "resolved and recorded in source before evaluation",
+    "layer": 8,
+    "hook": "input/output of model.layers.8.mlp",
+    "dataset": "Salesforce/wikitext wikitext-2-raw-v1 train split streamed in fixed order; deterministic seed-selected 128-token windows; dataset script/config pinned via captured metadata.",
+    "primary_metrics": [
+      "relative MSE ||y_hat-y||^2/(||y||^2+eps)",
+      "cosine similarity per token, then mean"
+    ],
+    "secondary_metrics": [
+      "p50/p95 per-token relative error",
+      "active features",
+      "serialized payload bytes",
+      "forward wall time"
+    ]
+  },
+  "development": {
+    "seeds": [
+      53301
+    ],
+    "examples": 32,
+    "tokens": 4096,
+    "sequence_length": 128,
+    "svd_fit_tokens": 2048,
+    "selection_metric": "single fixed checkpoint evaluation; no tuning or fresh-based selection",
+    "optimizer_updates": 0,
+    "task_scope": "Use 16 fixed-order seeded windows (2048 tokens) to fit the rank-128 linear control and 16 disjoint windows (2048 tokens) for evaluation; training split only."
+  },
+  "fresh": {
+    "seeds": [
+      53311,
+      53312
+    ],
+    "examples": 32,
+    "tokens": 4096,
+    "sequence_length": 128,
+    "locked_before_access": true,
+    "access_condition": "Open only if dev relative MSE <=0.10 and cosine >=0.95."
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "serialization": "safetensors raw checkpoint plus canonical JSON config and required adapter code; report incremental and standalone deployment bytes",
+    "paid_objects": [
+      "base model",
+      "native MLP layer weights",
+      "transcoder encoder/decoder/bias/skip matrices",
+      "config and metadata"
+    ],
+    "shared_base_model_charged_once": true
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true,
+    "report_inference_latency": true
+  },
+  "success_gate": "On each fresh seed, transcoder held-out relative MSE <=0.10 and mean token cosine >=0.95; report actual serialized bytes and latency. Passing establishes only this checkpoint/layer approximation, not Mirror benefit.",
+  "failure_gate": "Development held-out relative MSE >0.10 or mean cosine <0.95; keep fresh sealed.",
+  "boundaries": [
+    "Single released checkpoint, model and layer.",
+    "This screen establishes transcoder faithfulness only; it does not establish logical MLP multiplicity or Mirror-specific gains.",
+    "Test data must remain unopened until protocol and source commits are pushed.",
+    "CPU-constrained development uses 4,096 tokens; no broad generalization claim."
+  ]
+}
