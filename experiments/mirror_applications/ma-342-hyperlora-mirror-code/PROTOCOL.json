@@ -1,0 +1,15 @@
+{
+  "experiment_id":"MA-342","title":"HyperLoRA full factor generation versus Mirror code over shared LoRA factors","status":"PROTOCOL_FROZEN_BEFORE_DEVELOPMENT","base_commit":"0b01897f","evidence_lane":"MECHANISM/UNSEEN_CLIENT_QUALITY/ACTUAL_BYTES/COMPUTE",
+  "hypothesis":"For client LoRA updates on a shared rank-2 modulation orbit, a one-phase Mirror code over shared U,V factors matches client-conditioned full LoRA generation at lower bytes; generic two-coefficient controls may explain the result.",
+  "physical_object":"shared base W0 and rank-2 LoRA factor bank U,V","mirror_coordinate":"one client phase phi producing diagonal coefficients cos(phi),sin(phi)","logical_multiplicity":"client-specific low-rank updates for unseen clients","prior_art_refs":[38],
+  "task":{"input_dim":8,"output_dim":8,"rank":2,"train_clients":16,"heldout_clients":8,"train_examples_per_client":64,"test_examples_per_client":256,"teacher":"W(phi)=W0+U diag(cos(phi),sin(phi)) V^T","train_phases":"16 equally spaced points on [0,2pi)","heldout_phases":"8 midpoints between alternating train clients"},
+  "controls":["base W0 only","shared U,V plus Mirror phase","shared U,V plus direct two coefficients","HyperLoRA-style MLP 2->32->32 outputs full A and B factors","independent per-client rank-2 LoRA fitted using support data"],
+  "gauge_rule":"Compare effective delta D=A@B and function outputs; never compare raw factor coordinates as unique task codes.",
+  "development":{"worlds":[34221,34222],"optimizer_updates":1000,"selection_metric":"held-out prediction MSE, effective delta MSE, actual bytes and compute"},
+  "fresh":{"worlds":[34231,34232,34233],"locked_before_access":true,"optimizer_updates":1000},
+  "storage":{"authority":"actual deterministic serialized inference payload bytes","paid_objects":["base weights","shared LoRA factors or hypernetwork parameters","per-client phase or coefficient/descriptor","metadata","independent adapter factors"]},
+  "compute":{"report_examples":true,"optimizer_updates":true,"active_compute_proxy":true,"isolated_wall_clock":true,"client_code_communication_bytes":true},
+  "success_gate":"Mirror test MSE <=1e-3, <=0.80x HyperLoRA payload and <=0.90x generic coefficient payload at comparable quality.",
+  "failure_gate":"Generic coefficient control is within 5% bytes and quality, or Mirror misses the quality gate.",
+  "boundaries":["synthetic circular rank-2 LoRA update orbit","no real federated framework or privacy evaluation","no natural task-delta evidence","fixed-update evidence is not capacity"]
+}
