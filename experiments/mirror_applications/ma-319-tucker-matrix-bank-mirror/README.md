@@ -1,6 +1,6 @@
 # MA-319 — Tucker matrix-bank Mirror layer coefficients
 
-Status: SCREENING. Prior art: PA35 Tucker/matrix-bank parameterization.
+Status: FAIL. Prior art: PA35 Tucker/matrix-bank parameterization.
 
 ## H
 
@@ -12,7 +12,7 @@ Synthetic bank: K=8 matrices of 32×32, shared by L=64 logical layers. Compare f
 
 ## D
 
-Pending development/fresh runs.
+FAIL. Fresh aligned Mirror is 16,699 B / functional NRMSE 5.03e-4 vs free Tucker 17,559 B / 2.93e-4, a 4.9% saving that misses the 10% gate. Generic PCA is 16,887 B / 3.56e-4. Independent coefficients require free Tucker; Mirror NRMSE is 1.036.
 
 ## C
 
@@ -23,3 +23,7 @@ The aligned coefficients are generated from the same Givens orbit; generic PCA m
 Synthetic matrices only; no natural Transformer layer weights or language-model quality.
 
 Development: on aligned orbit coefficients, Mirror uses 16,699 B / functional NRMSE 5.2e-4 vs free Tucker 17,559 B / 2.8e-4 (4.9% fewer bytes, below the 10% gate) and generic PCA 16,887 B / 3.6e-4. The common bank dominates payload. Mirror code fitting takes ~3 ms vs PCA ~0.3 ms. Independent coefficients are represented accurately by free Tucker (NRMSE ~2.9e-4), while Mirror (1.07) and PCA (~0.79) fail. Fresh tests frozen conditions.
+
+## Fresh result / decision
+
+FAIL. Fresh aligned results reproduce a 4.9% byte saving versus free Tucker, below the 10% gate; generic PCA is slightly larger but more accurate. Independent coefficients need free Tucker state. The shared matrix bank dominates total serialized bytes.

@@ -1,19 +1,87 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
-  "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+  "experiment_id": "MA-319",
+  "decision": "FAIL: total-byte saving misses gate, generic PCA is smaller/more accurate; independent coefficients need free state",
+  "protocol_commit": "196c2649",
+  "fresh_worlds": [
+    31910,
+    31911,
+    31912
+  ],
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "fresh_rows": 72,
+  "strata": {
+    "aligned": {
+      "generic_pca_rank2_coefficients": {
+        "matrix_nrmse": 0.0003558365214202139,
+        "functional_nrmse": 0.00035588380544342927,
+        "payload_bytes": 16887.0,
+        "fit_seconds": 0.0002700696641113609
+      },
+      "independent_full_matrices": {
+        "matrix_nrmse": 0.0002074112514189134,
+        "functional_nrmse": 0.00020750061311345134,
+        "payload_bytes": 131202.0,
+        "fit_seconds": 0.0
+      },
+      "mirror_givens_coefficients": {
+        "matrix_nrmse": 0.0005025030501807729,
+        "functional_nrmse": 0.0005025546803760031,
+        "payload_bytes": 16699.0,
+        "fit_seconds": 0.0021168971094690883
+      },
+      "tucker_free_coefficients": {
+        "matrix_nrmse": 0.0002923898411811226,
+        "functional_nrmse": 0.0002926307044819825,
+        "payload_bytes": 17559.0,
+        "fit_seconds": 0.0
+      }
+    },
+    "independent": {
+      "generic_pca_rank2_coefficients": {
+        "matrix_nrmse": 0.7803472280502319,
+        "functional_nrmse": 0.7805232935481601,
+        "payload_bytes": 16887.0,
+        "fit_seconds": 0.0002700351097802114
+      },
+      "independent_full_matrices": {
+        "matrix_nrmse": 0.00020730950604451614,
+        "functional_nrmse": 0.00020735264762252983,
+        "payload_bytes": 131202.0,
+        "fit_seconds": 0.0
+      },
+      "mirror_givens_coefficients": {
+        "matrix_nrmse": 1.036417007446289,
+        "functional_nrmse": 1.0363591114679973,
+        "payload_bytes": 16699.0,
+        "fit_seconds": 0.0020872007783812783
+      },
+      "tucker_free_coefficients": {
+        "matrix_nrmse": 0.0002918903353727526,
+        "functional_nrmse": 0.00029201877704407606,
+        "payload_bytes": 17559.0,
+        "fit_seconds": 0.0
+      }
+    }
   },
-  "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
-  },
-  "metric_replay": {
-    "checked": false,
-    "max_difference": null
-  },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "facts": [
+    "Aligned orbit: Mirror 16,699 B / functional NRMSE 5.03e-4; free Tucker 17,559 B / 2.93e-4; generic PCA 16,887 B / 3.56e-4.",
+    "Mirror saves 4.9% vs free Tucker, below the preregistered 10% gate; generic PCA is 1.1% larger than Mirror and more accurate.",
+    "Independent coefficients: free Tucker NRMSE 2.92e-4; Mirror NRMSE 1.036 and PCA 0.781.",
+    "Shared K\u00d732\u00d732 bank is included in all payloads and dominates total bytes. Mirror angle fit ~2.1 ms vs PCA ~0.27 ms."
+  ],
+  "interpretation": "A structured Givens coefficient code compresses the task state but adds little to total Tucker storage because the shared bank dominates. Generic PCA is more accurate at near-equal payload; unrelated layer coefficients require free task-specific coefficients.",
+  "hypothesis": "Rejected for the registered >=10% total storage improvement and for independent layer functions.",
+  "counter_hypothesis": "A larger layer count or smaller bank could increase amortized coefficient savings; not tested here.",
+  "limitations": [
+    "Synthetic matrix bank, no real Transformer layer weights",
+    "Aligned teacher coefficients generated from Givens orbit",
+    "Only rank-2 generic PCA control",
+    "No downstream language loss or fused inference kernel"
+  ],
+  "fresh_data_used_for_tuning": false,
+  "source_sha256": "3cc58895cd0411a4fed3d393b6ed309dd90d6068ef924915290ded53bf968895"
 }
