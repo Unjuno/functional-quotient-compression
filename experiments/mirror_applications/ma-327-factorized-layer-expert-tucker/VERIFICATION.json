@@ -1,19 +1,87 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
-  "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+  "experiment_id": "MA-327",
+  "decision": "FAIL: Mirror misses 20% byte gate and matches generic free factorization; independent experts need free factors",
+  "protocol_commit": "d4b87549",
+  "fresh_worlds": [
+    32710,
+    32711,
+    32712
+  ],
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "fresh_rows": 72,
+  "strata": {
+    "aligned": {
+      "factorized_free_layer_expert": {
+        "heldout_output_nrmse": 0.00029829528971782164,
+        "observed_output_nrmse": 0.0002977604809631076,
+        "heldout_matrix_nrmse": 0.00029826195613067184,
+        "payload_bytes": 1745.0
+      },
+      "flat_tucker_coefficients": {
+        "heldout_output_nrmse": 1.0,
+        "observed_output_nrmse": 0.0002977604809631076,
+        "heldout_matrix_nrmse": 1.0,
+        "payload_bytes": 5305.0
+      },
+      "independent_full_matrices": {
+        "heldout_output_nrmse": 0.00020828009292017668,
+        "observed_output_nrmse": 0.00020775296757670326,
+        "heldout_matrix_nrmse": 0.00020895714664624797,
+        "payload_bytes": 32932.0
+      },
+      "mirror_factorized_address": {
+        "heldout_output_nrmse": 0.00029829528971782164,
+        "observed_output_nrmse": 0.0002977604809631076,
+        "heldout_matrix_nrmse": 0.00029826195613067184,
+        "payload_bytes": 1552.0
+      }
+    },
+    "independent": {
+      "factorized_free_layer_expert": {
+        "heldout_output_nrmse": 0.00028556471806950867,
+        "observed_output_nrmse": 0.0002880261777641459,
+        "heldout_matrix_nrmse": 0.0002857128048263904,
+        "payload_bytes": 1745.0
+      },
+      "flat_tucker_coefficients": {
+        "heldout_output_nrmse": 1.0,
+        "observed_output_nrmse": 0.0002880261777641459,
+        "heldout_matrix_nrmse": 1.0,
+        "payload_bytes": 5305.0
+      },
+      "independent_full_matrices": {
+        "heldout_output_nrmse": 0.0002072485804092139,
+        "observed_output_nrmse": 0.00020700898797561726,
+        "heldout_matrix_nrmse": 0.00020707823568955064,
+        "payload_bytes": 32932.0
+      },
+      "mirror_factorized_address": {
+        "heldout_output_nrmse": 1.07283616065979,
+        "observed_output_nrmse": 1.0278037654028997,
+        "heldout_matrix_nrmse": 1.0761763983302646,
+        "payload_bytes": 1552.0
+      }
+    }
   },
-  "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
-  },
-  "metric_replay": {
-    "checked": false,
-    "max_difference": null
-  },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "facts": [
+    "60 held-out layer\u00d7expert combinations per replicate.",
+    "Aligned: Mirror and generic factorization both held-out output NRMSE ~2.98e-4; Mirror 1,552 B vs generic 1,745 B (11% smaller, below 20% gate).",
+    "Flat Tucker per-combination coefficients have held-out NRMSE 1.0 because unseen coefficients are zero; payload 5,305 B.",
+    "Independent expert factors: generic free factorization NRMSE ~2.86e-4; Mirror NRMSE ~1.073."
+  ],
+  "interpretation": "Factorizing layer\u00d7expert Tucker coefficients generalizes held-out combinations well, but the generic free A\u00d7B factorization matches Mirror and exceeds its registered storage gate. Mirror is unnecessary for this factorized family; independent expert bases remain private.",
+  "hypothesis": "Rejected for Mirror-specific value; generic factorization accounts for held-out combination gains.",
+  "counter_hypothesis": "Larger coefficient banks or varying factor ranks could change the relative code size; outside this fixed K=8 protocol.",
+  "limitations": [
+    "Synthetic linear matrices only",
+    "Coefficient values observed directly for training pairs; no network optimization",
+    "No learned router or real Transformer",
+    "Fixed balanced deterministic basis and factorization"
+  ],
+  "fresh_data_used_for_tuning": false,
+  "source_sha256": "a1078f04916fc22075e0a4509c0d0712ca931a1ba3caecb84b57d1ebc53eb0d2"
 }
