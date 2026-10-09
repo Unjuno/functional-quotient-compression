@@ -6,9 +6,9 @@
 - Protocol frozen before development/fresh: yes (`5fcf1006`)
 - Development complete: yes; 800 Adam steps selected
 - Fresh/audit opened: yes; 3 worlds × 3 seeds × 2 rho × 5 methods
-- Results committed: pending
-- Verification committed: pending
-- Registry row updated: pending
+- Results committed: yes (`9efdc4c2`)
+- Verification committed: yes
+- Registry row updated: yes after verification
 
 ## Decision
 
@@ -24,7 +24,7 @@
 
 ## Next action
 
-Commit result and verification, update registry/claim/board, run integrity checks, then continue to MA-516/517.
+Continue with MA-516; MA-517 will test composition separately.
 
 ## Blockers
 

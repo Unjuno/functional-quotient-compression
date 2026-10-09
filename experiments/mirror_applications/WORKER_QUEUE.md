@@ -1,8 +1,8 @@
-**Current operational pointer (2026-10-09): MA-511.** MA-510 failed its development miss-rate gate and generic FP16 behavior coefficients dominated Mirror. Continue with hierarchical condition x behavior code composition; hold out combinations.
+**Current operational pointer (2026-10-09): MA-516.** MA-511 showed a scoped held-out composition/storage result on a Givens-aligned condition×behavior family, with a CPU decode penalty. Continue to function-vector compression against explicit vectors and simple bases.
 
 # Worker queue
 
-**Current operational pointer (2026-10-09): MA-511.** MA-436/438 and MA-482/503/504 show scoped synthetic quality/storage points; MA-508/510 did not establish Mirror-specific advantage. Continue with held-out condition-behavior composition.
+**Current operational pointer (2026-10-09): MA-516.** MA-436/438, MA-482/503/504/511 show scoped synthetic quality/storage points; MA-508/510 failed Mirror-specific gates. Continue with function-vector activation methods.
 
 The queue is derived from `IDEA_REGISTRY.csv`. The registry is authoritative.
 
