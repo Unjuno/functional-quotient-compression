@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-518.** MA-516 tested support-delta activation vectors on a pinned GPT-2 and found no held-out accuracy improvement; continue within the Function Vectors family with MA-517 raw arithmetic vs structured composition controls. LoReFT candidates remain deferred for redesign after MA-501/502.
+**Current operational pointer (2026-10-09): MA-519.** MA-516–518 prompt-delta activation interventions failed task-utility gates; MA-518 also had a factor-decoder defect, so its factorization comparison is not established. Continue at MA-519 with context routing and explicit ICL/native router controls. LoReFT candidates remain deferred for redesign after MA-501/502.
 
 # Worker queue
 
