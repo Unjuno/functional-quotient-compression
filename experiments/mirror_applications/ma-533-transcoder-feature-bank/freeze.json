@@ -1,0 +1,28 @@
+{
+  "experiment_id": "MA-533",
+  "frozen_before_development": true,
+  "protocol_path": "experiments/mirror_applications/ma-533-transcoder-feature-bank/PROTOCOL.json",
+  "protocol_sha256": "29208e278d9d5573fe17979b0125ca6ace6d689e1d2afe9243d41d4c63d12671",
+  "development_seeds": [
+    53301,
+    53302
+  ],
+  "fresh_seeds": [
+    53311,
+    53312,
+    53313
+  ],
+  "fresh_opened": false,
+  "transcoder_features": 2048,
+  "training_topk": 32,
+  "shared_pool_size": 16,
+  "code_rank": 16,
+  "training_updates": 1000,
+  "fixed_controls": [
+    "none",
+    "explicit_fv",
+    "global_transcoder_omp16",
+    "global_sae_omp16",
+    "shared_transcoder_pool16"
+  ]
+}

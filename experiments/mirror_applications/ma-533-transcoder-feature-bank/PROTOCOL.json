@@ -1,0 +1,117 @@
+{
+  "experiment_id": "MA-533",
+  "title": "Trained transcoder decoder atoms as shared functional experts",
+  "status": "SCREENING",
+  "evidence_lane": "TRANSCODER_ATOM_SOURCE/FEATURE_BANK/FV_CAUSAL_QUALITY/ACTUAL_DICTIONARY_BYTES",
+  "base_commit": "8f645224f0c1ba96d2661d42387da9504b3bbc2e",
+  "hypothesis": "A 16-atom basis selected from a task-trained sparse transcoder's 2048 decoder atoms can express the 16 relation-task FVs within .10 gold-logprob nats/.05 accuracy of explicit FVs using <=.99x their serialized bytes, while a full transcoder dictionary and SAE remain charged as dictionary controls.",
+  "physical_object": "Pinned Pythia-70m layer-3 MLP and a 2048-feature ReLU top-32 transcoder trained on support-only MLP input/output activations from tasks 0-11.",
+  "mirror_coordinate": "Task-specific FP32 coefficients over one shared 16-row slice of the transcoder output decoder; each View is a logical activation intervention decoded at layer 3.",
+  "logical_multiplicity": "Sixteen support-derived relation-task interventions, represented by coefficients over one shared learned decoder-atom basis. This is measured task coverage, not independent capacity from code combinations.",
+  "prior_art_refs": [
+    "PA103",
+    "PA102"
+  ],
+  "artifacts": {
+    "model_revision": "e93a9faa9c77e5d09219f6c868bfc7a1bd65593c",
+    "model_sha256": "3da388330e4549156d76b58d6d268c63cd005e9336b4f4d2d378421e7b7a33fd",
+    "SAE_revision": "36c2027509efad69836aa4231999c9b717848ecd",
+    "SAE_sha256": "85b57dfe34d19769e2df0e208e38fda8815da8493c56b703a99ff74cc610dbf4"
+  },
+  "task": {
+    "fit_task_ids": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "heldout_task_ids": [
+      12,
+      13,
+      14,
+      15
+    ],
+    "support_examples_per_task": 8,
+    "primary_metric": "mean heldout gold candidate log probability",
+    "secondary_metrics": [
+      "candidate accuracy and margin",
+      "transcoder MLP reconstruction MSE/FVU",
+      "feature activation sparsity",
+      "FV reconstruction RMSE/cosine",
+      "actual decoder and code payload bytes",
+      "training/coding/inference compute and time"
+    ]
+  },
+  "transcoder": {
+    "layer": 3,
+    "input": "post-attention layer norm output (512D)",
+    "target": "same block MLP output (512D)",
+    "architecture": "affine 512-to-2048 encoder plus ReLU, top-32 latent values per token, affine 2048-to-512 decoder",
+    "objective": "full-batch-token minibatch MSE plus 0.001 times mean absolute latent activation",
+    "training_data": "All token positions from prompt/input sequences constructed only from the eight support pairs of fit tasks 0-11; no task 12-15 or evaluation-query sequence is used.",
+    "optimization": "Adam lr=.001, 1000 updates, batch size 128, deterministic seed 0; no parameter or threshold tuning.",
+    "pool": "Residual-correlation greedy selection of 16 decoder rows using fit-task FVs 0-11 only; stable lowest-index ties.",
+    "behavior_code": "OMP16 over the shared 16 decoder rows for each of all 16 support-derived task FVs, FP32 coefficients."
+  },
+  "controls": [
+    "No intervention",
+    "Explicit FP32 FV bank",
+    "Global OMP16 over all 2048 learned transcoder decoder rows (full decoder dictionary charged)",
+    "Global SAE OMP16 (full SAE decoder dictionary charged)",
+    "Shared residual-selected 16-row transcoder pool with 16 coefficients per task (Mirror candidate)"
+  ],
+  "development": {
+    "seeds": [
+      53301,
+      53302
+    ],
+    "changes_after_run": "prohibited without numbered amendment"
+  },
+  "fresh": {
+    "seeds": [
+      53311,
+      53312,
+      53313
+    ],
+    "locked_before_access": true,
+    "opened": false,
+    "opening_rule": "Only if both seeds pass FV causal-quality and actual-payload gates."
+  },
+  "storage": {
+    "authority": "actual uncompressed NPZ bytes",
+    "paid_objects": [
+      "selected 16 decoder rows plus global feature IDs",
+      "all per-task FP32 code vectors",
+      "global transcoder dictionary for its OMP control",
+      "full SAE dictionary for SAE control",
+      "task/model/dictionary metadata",
+      "explicit FP32 FV bank"
+    ],
+    "accounting": "Candidate inference uses only selected decoder rows and codes; no encoder, optimizer, or decoded-vector cache is needed at inference. Report actual NPZ candidate bytes and separate full global-dictionary control bytes. Charge the full SAE for standalone SAE deployment."
+  },
+  "compute": {
+    "hardware": "CPU, fixed five-thread limit",
+    "optimizer_updates": 1000,
+    "report_tokens_and_examples": true,
+    "active_compute_proxy": "Report support-sequence MLP capture, 1000-step transcoder fit, pool residual-correlation, OMP coding, dictionary/code decode, and candidate transformer sequences separately."
+  },
+  "gates": {
+    "PASS": "Both dev seeds: within .05 accuracy and .10 gold-logprob nats of explicit FV; actual complete selected-basis plus code NPZ <=.99x explicit FV; deterministic artifact/split checks pass.",
+    "FAIL": "Any frozen quality or serialized-byte gate is missed.",
+    "NOT_ESTABLISHED": "Pinned artifact, support/eval split integrity or replay fails."
+  },
+  "boundaries": [
+    "One trained small transcoder, one 70M model and four heldout relation tasks only.",
+    "Training efficiency is not capacity; training is fixed-update support-only evidence.",
+    "Native global OMP and SAE controls are mandatory.",
+    "Transcoder training state not required to reconstruct the selected decoder basis at inference; selected decoder rows are fully charged."
+  ]
+}
