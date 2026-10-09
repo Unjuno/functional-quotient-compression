@@ -2,20 +2,20 @@
 
 ## H — Hypothesis
 
-A shared rank-4 state basis plus per-task Mirror coordinates can reduce task-specific Adam resume state while preserving five-step continuation quality.
+A shared rank-4 basis and 4D code can compress task-specific Adam state while keeping five-step continuation within 1.10x exact Adam and matching PCA.
 
-## T — Planned test
+## T — Test
 
-16D linear tasks with four latent skill factors. Store model theta plus Adam first/second moments at step 20, then resume for five updates. Compare exact independent states, shared-only, rank-4 PCA, and learned shared basis plus 4D task code. Development and fresh task IDs are disjoint. Exact serialized payloads include model state, basis/codes, counters, and indices.
+16D linear regression with four latent task factors; 32 tasks per seed and 3 seeds/world. Exact moments captured after 20 Adam updates; continue for five updates. Compare independent state, zero/shared state, rank-4 PCA, and learned basis plus Mirror coordinates. Invalid runs (44810–12 and 44820–22) are excluded after nonnegative-second-moment implementation corrections; compact canonical serialization A3 removes oversized tensor-view storage. Valid fresh worlds are 44830–32.
 
-## D — Pending
+## D — FAIL
 
-Protocol frozen; no numerical results.
+Mean continuation NRMSE: exact 0.175, shared reset 0.131, PCA 0.665, Mirror 0.822. N=32 actual bytes/task: exact 639.0B, shared 243.3B, PCA 328.9B, Mirror 328.9B. Compression reduces storage, but quality fails badly; shared reset beats both PCA and Mirror, and PCA equals Mirror bytes with better quality.
 
 ## C — Strongest counter-hypothesis
 
-The learned state family is already rank-4, so standard PCA or direct task arithmetic should match Mirror with fewer or equal bytes.
+A low-rank approximation discards optimizer-state detail that affects continuation; resetting state works better in this stationary toy task.
 
 ## U — Unknown
 
-Whether compressed moment state preserves actual optimizer continuation and whether state bytes materially dominate task storage.
+No natural model, nonstationary task, or production checkpoint evidence.

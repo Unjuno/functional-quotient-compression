@@ -1,7 +1,7 @@
 {
   "experiment_id": "MA-448",
   "title": "Optimizer-state Mirror superposition across tasks",
-  "status": "SCREENING",
+  "status": "COMPLETED_FAIL",
   "evidence_lane": "STATE_COMPRESSION/CONTINUATION_QUALITY/BYTES",
   "base_commit": "cd024526",
   "hypothesis": "A shared learned rank-4 state basis plus per-task Mirror coordinates reconstructs task-specific Adam state well enough that five-step continuation NRMSE is within 1.10x of exact Adam state, while reducing serialized task payload bytes versus independent state and matching rank-4 PCA control.",
@@ -52,9 +52,9 @@
   },
   "fresh": {
     "worlds": [
-      44810,
-      44811,
-      44812
+      44830,
+      44831,
+      44832
     ],
     "seeds": [
       0,
@@ -62,7 +62,9 @@
       2
     ],
     "tasks_per_world": 32,
-    "locked_before_access": true
+    "locked_before_access": true,
+    "tasks_per_seed_per_world": 32,
+    "total_tasks_per_world": 96
   },
   "storage": {
     "authority": "actual serialized inference/resume payload bytes",
@@ -90,5 +92,32 @@
     "Synthetic task-state compression mechanism test only.",
     "Optimizer state is a target for compression only if serialized m/v bytes exceed task routing metadata.",
     "No natural optimizer-state or model-capacity claim."
+  ],
+  "amendments": [
+    {
+      "id": "A1",
+      "status": "invalidated before valid rerun",
+      "reason": "PCA/Mirror reconstruction yielded negative second-moment values; Adam requires nonnegative exp_avg_sq and initial continuation produced NaN. All initial worlds 44810..44812 excluded. Clamp reconstructed second moments at zero and rerun on new fresh worlds.",
+      "new_fresh_worlds": [
+        44820,
+        44821,
+        44822
+      ]
+    },
+    {
+      "id": "A2",
+      "status": "invalidated before valid rerun",
+      "reason": "A1 edit clamped learned Mirror v but missed the PCA branch; PCA remains invalid. All A1 worlds 44820..44822 excluded. Apply the identical nonnegative projection to both PCA and Mirror second moments and use new fresh worlds.",
+      "new_fresh_worlds": [
+        44830,
+        44831,
+        44832
+      ]
+    },
+    {
+      "id": "A3",
+      "status": "active post-run byte correction",
+      "reason": "The learned Mirror code rows were noncontiguous views backed by an oversized least-squares workspace. Repack task codes into compact contiguous tensors and serialize the exact shared basis+codes. Quality values are unchanged; this corrects serializer allocation overhead only."
+    }
   ]
 }

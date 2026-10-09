@@ -1,6 +1,41 @@
 {
   "experiment_id": "MA-448",
-  "status": "SCREENING",
-  "protocol_commit": "pending",
-  "checks": []
+  "status": "FAIL",
+  "protocol_commit": "db048dac",
+  "amendments": [
+    "A1/A2 invalidated runs 44810\u201312 and 44820\u201322 due negative reconstructed Adam second moments/NaNs. A3 packs code matrices contiguously and reserializes compact canonical payloads; no quality changes."
+  ],
+  "valid_fresh_worlds": [
+    44830,
+    44831,
+    44832
+  ],
+  "tasks_per_world": 96,
+  "valid_result_rows": 12,
+  "mean_continuation_nrmse": {
+    "exact": 0.1753283708,
+    "shared_reset": 0.1314485332,
+    "pca": 0.6650995489,
+    "mirror": 0.8223304571
+  },
+  "serialized_N32_bytes_per_task": {
+    "exact": 639.03125,
+    "shared_reset": 243.28125,
+    "pca": 328.90625,
+    "mirror": 328.90625
+  },
+  "mean_mirror_state_reconstruction_nrmse": 0.8528,
+  "mean_pca_state_reconstruction_nrmse": 0.8495,
+  "compute": "Median continuation wall ~0.94ms Mirror vs ~0.95ms exact; decode/reconstruct cost 256 MAC/task, no runtime benefit established.",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-448-optimizer-state-superposition/tests",
+    "passed": 2,
+    "failed": 0
+  },
+  "checks": [
+    "fresh payload SHA256 and actual lengths replayed",
+    "invalid fresh world payloads removed/excluded",
+    "exact, PCA, Mirror and shared-reset controls included"
+  ],
+  "decision": "FAIL: Mirror misses continuation quality, and PCA matches bytes with better quality while shared reset is smaller and better."
 }
