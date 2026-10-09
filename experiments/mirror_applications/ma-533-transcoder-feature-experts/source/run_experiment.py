@@ -109,13 +109,22 @@ def main():
  # Hash revision manifests to enable exact provenance; actual model payload bytes are independently fetched and charged.
  from huggingface_hub import snapshot_download
  snap=snapshot_download(MODEL,revision=model_rev,allow_patterns=['*.safetensors','*.bin','*.json'])
- files=[]; model_bytes=0
+ files=[]; model_bytes=0; other_bytes=0
  for p in Path(snap).rglob('*'):
-  if p.is_file(): model_bytes+=p.stat().st_size; files.append({'path':str(p.relative_to(snap)),'bytes':p.stat().st_size,'sha256':sha(p)})
- summary['model_base_bytes']=model_bytes; summary['model_files']=files
- summary['transcoder_standalone_total_bytes']=model_bytes+payload_bytes+cfg_bytes
+  if p.is_file():
+   model_bytes+=p.stat().st_size
+   if p.name!='model.safetensors': other_bytes+=p.stat().st_size
+   files.append({'path':str(p.relative_to(snap)),'bytes':p.stat().st_size,'sha256':sha(p)})
+ base_state_path=Path(snap)/'model.safetensors'; removed_prefix=f'model.layers.{LAYER}.mlp.'
+ with safe_open(str(base_state_path),framework='pt',device='cpu') as sf:
+  keys=list(sf.keys()); base_without={k:sf.get_tensor(k) for k in keys if not k.startswith(removed_prefix)}; removed={k:sf.get_tensor(k) for k in keys if k.startswith(removed_prefix)}
+ if len(removed)!=3: raise RuntimeError(f'expected 3 replaced MLP weights; got {list(removed)}')
+ stripped=out/'base_without_layer8_mlp.safetensors'; save_file(base_without,str(stripped)); stripped_bytes=stripped.stat().st_size; stripped_sha=sha(stripped); stripped.unlink()
+ deploy_base_bytes=stripped_bytes+other_bytes
+ summary['model_base_bytes']=model_bytes; summary['model_without_layer8_mlp_bytes']=deploy_base_bytes; summary['removed_native_mlp_tensors']={k:{'shape':list(v.shape),'dtype':str(v.dtype),'bytes':v.numel()*v.element_size()} for k,v in removed.items()}; summary['model_without_layer8_mlp_safetensors_bytes']=stripped_bytes; summary['model_without_layer8_mlp_safetensors_sha256']=stripped_sha; summary['model_files']=files
+ summary['transcoder_standalone_total_bytes']=deploy_base_bytes+payload_bytes+cfg_bytes
  summary['method_incremental_bytes']={'native_mlp':0,'skip_only':skip_bytes,'transcoder_top128':payload_bytes+cfg_bytes,'rank128_cross_covariance_svd':rank_bytes}
- summary['method_standalone_bytes']={'native_mlp':model_bytes,'skip_only':model_bytes+skip_bytes,'transcoder_top128':model_bytes+payload_bytes+cfg_bytes,'rank128_cross_covariance_svd':model_bytes+rank_bytes}
+ summary['method_standalone_bytes']={'native_mlp':model_bytes,'skip_only':deploy_base_bytes+skip_bytes,'transcoder_top128':deploy_base_bytes+payload_bytes+cfg_bytes,'rank128_cross_covariance_svd':deploy_base_bytes+rank_bytes}
  summary['method_payload_sha256']={'skip_only':sha(skip_payload),'transcoder_top128':sha(payload),'rank128_cross_covariance_svd':sha(rank_payload)}
  (out/'summary.json').write_text(json.dumps(summary,indent=2)+'\n')
  print(json.dumps(summary,indent=2))
