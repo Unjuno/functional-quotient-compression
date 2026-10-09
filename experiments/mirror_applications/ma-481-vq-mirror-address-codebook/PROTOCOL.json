@@ -1,0 +1,94 @@
+{
+  "experiment_id": "MA-481",
+  "title": "VQ Mirror address codebook",
+  "status": "FROZEN_SCREENING",
+  "base_commit": "3bc48dec",
+  "evidence_lane": "ADDRESS_COMPRESSION/RETRIEVAL_COLLISIONS/STORAGE/LATENCY",
+  "hypothesis": "For key addresses on a known continuous 2D rotation orbit, shared basis plus one continuous Mirror angle per key will preserve exact/paraphrase retrieval at lower total serialized bytes than full key vectors and fixed-size VQ codebooks; collision rate and address-density failure must be measured as logical address count grows.",
+  "physical_object": "one shared D=32 key plane; explicit per-key radii and values remain paid",
+  "mirror_coordinate": "one continuous key angle per logical address",
+  "logical_multiplicity": "up to 128 independently retrievable keys/addresses",
+  "prior_art_refs": [
+    91,
+    92
+  ],
+  "controls": [
+    "no memory / base fallback",
+    "full explicit GRACE-style key vectors with fixed radius and explicit output values",
+    "generic Cartesian coefficients over the same shared key plane",
+    "uniform VQ address codebooks K=8/16/32/64/128 with per-key indices",
+    "continuous Mirror angle addresses"
+  ],
+  "task": {
+    "type": "synthetic 32D address bank with 4D explicit values",
+    "key_orbit": "unit vectors at near-uniform angles on a known 2D plane with small deterministic jitter",
+    "query": "exact address; four Gaussian paraphrases sigma .01 per address; 512 unrelated random queries",
+    "scope": "cosine threshold .95, identical for all methods",
+    "bank_sizes": [
+      8,
+      32,
+      64,
+      128
+    ],
+    "metrics": [
+      "exact/paraphrase correct-address recall",
+      "false trigger rate and output error",
+      "unique decoded address/collision rate",
+      "actual total payload bytes and bytes/address",
+      "address decode MAC and bank/query latency"
+    ]
+  },
+  "development": {
+    "worlds": [
+      48100,
+      48101
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "allowed": "fixed deterministic address construction and predeclared VQ K sweep; no fresh-dependent parameter changes"
+  },
+  "fresh": {
+    "worlds": [
+      48110,
+      48111,
+      48112
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "all explicit output values",
+      "full key vectors or shared key basis plus Mirror/Cartesian codes or full VQ codebook and indices",
+      "per-key scope radii",
+      "IDs and metadata"
+    ],
+    "amortization_N": [
+      8,
+      32,
+      64,
+      128
+    ]
+  },
+  "compute": {
+    "report_retrieval_MAC_per_query": true,
+    "report_address_decode_MAC_per_key": true,
+    "report_measured_bank_decode_latency": true,
+    "report_measured_query_latency": true
+  },
+  "success_gate": "Every fresh world at N64: Mirror exact/paraphrase correct-address recall>=99%, false triggers<=1%, output NRMSE<=1e-5, payload<=70% full explicit address bank; compare with generic coefficients and VQ Pareto. At N128 report crowding even if the gate fails.",
+  "failure_gate": "Mirror fails N64 retrieval/quality/byte gates or simpler address control matches/beats it at equal recall; also report collision-driven capacity boundary.",
+  "boundaries": [
+    "Synthetic address-code mechanism, not GRACE/VQ-VAE reproduction.",
+    "Continuous orbit and basis are hand known; no learned address encoder.",
+    "Output values remain explicit and identical across address methods to isolate address compression."
+  ]
+}
