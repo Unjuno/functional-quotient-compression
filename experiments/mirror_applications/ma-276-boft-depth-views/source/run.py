@@ -25,7 +25,7 @@ def pack(method,base,codes):
 def fit(method,x,base,teachers,seed):
  torch.manual_seed(seed);pars=[]
  if method=='tied':p={'base':nn.Parameter(base.clone())}
- elif method=='mirror':p={'base':nn.Parameter(base.clone()),'a':nn.Parameter(torch.zeros(K))}
+ elif method in ('mirror','generic_plane'):p={'base':nn.Parameter(base.clone()),'a':nn.Parameter(torch.zeros(K))}
  elif method=='rank1':p={'base':nn.Parameter(base.clone()),'u':nn.Parameter(torch.zeros(K,D)),'v':nn.Parameter(torch.randn(D)*.01)}
  elif method=='lora':p={'base':nn.Parameter(base.clone()),'A':nn.Parameter(torch.randn(K,D,2)*.01),'B':nn.Parameter(torch.zeros(K,2,D))}
  else:p={'W':nn.Parameter(teachers.clone())}
@@ -34,7 +34,7 @@ def fit(method,x,base,teachers,seed):
   opt.zero_grad();ws=[]
   for i in range(K):
    if method=='tied':w=p['base']
-   elif method=='mirror':w=p['base']@rot(p['a'][i])
+   elif method in ('mirror','generic_plane'):w=p['base']@rot(p['a'][i])
    elif method=='rank1':w=p['base']+torch.outer(p['u'][i],p['v'])
    elif method=='lora':w=p['base']+p['A'][i]@p['B'][i]
    else:w=p['W'][i]
@@ -43,7 +43,7 @@ def fit(method,x,base,teachers,seed):
  return {k:v.detach() for k,v in p.items()},time.perf_counter()-t
 def decode(method,p):
  if method=='tied':return [p['base']]*K
- if method=='mirror':return [p['base']@rot(p['a'][i]) for i in range(K)]
+ if method in ('mirror','generic_plane'):return [p['base']@rot(p['a'][i]) for i in range(K)]
  if method=='rank1':return [p['base']+torch.outer(p['u'][i],p['v']) for i in range(K)]
  if method=='lora':return [p['base']+p['A'][i]@p['B'][i] for i in range(K)]
  return [p['W'][i] for i in range(K)]
@@ -53,7 +53,7 @@ def run(phase):
   for seed in SEEDS:
    x,xv,base,angles,aligned,ind=make(world,seed)
    for stratum,teachers in [('aligned_rotations',aligned),('independent',ind)]:
-    for method in ['tied','rank1','lora','mirror','untied']:
+    for method in ['tied','rank1','lora','mirror','generic_plane','untied']:
      p,sec=fit(method,x,base,teachers,world*31+seed);Ws=decode(method,p)
      # Deterministic inference payload charges shared base and method-specific codes/deltas.
      parts=[v.flatten() for k,v in p.items() if k!='base'];codes=torch.cat(parts) if parts else torch.empty(0)

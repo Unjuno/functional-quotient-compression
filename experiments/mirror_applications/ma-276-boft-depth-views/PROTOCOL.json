@@ -10,5 +10,6 @@
   "compute":{"report_updates":true,"report_train_seconds":true,"report_apply_macs":true,"report_depth_ablation":true,"report_actual_bytes":true},
   "success_gate":"Aligned: Mirror per-step output NRMSE <=0.01 and uses <=70% payload of independent blocks; it must improve over static LoRA/generic plane by >=10% at matched bytes to claim Mirror-specific value.",
   "failure_gate":"Mirror NRMSE >0.05 or depth-step ablation shows no utility; generic simple control match means no Mirror-specific advantage.",
+  "amendments":["After original fresh results were sealed, audit noted generic scalar plane control was preregistered but omitted by the runner. It is algebraically the same per-step scalar Givens parameterization. A1 uses new worlds 27620–27622 × seeds 0–2 and does not modify or retune original fresh outputs."],
   "boundaries":["Synthetic recurrent linear block only","No transformer language quality claim","Depth identities are explicit; no router","Independent target stratum is only a boundary probe"]
 }
