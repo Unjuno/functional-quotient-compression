@@ -1,0 +1,15 @@
+{
+ "experiment_id":"MA-314","title":"Adaptive intrinsic dimension Mirror allocation","status":"SCREENING","base_commit":"eed4d4a1","prior_art_refs":[33],"evidence_lane":"INTRINSIC_DIMENSION/QUALITY/ACTUAL_BYTES/PRIVATE_ALLOCATION",
+ "hypothesis":"Choosing per-task intrinsic dimension from a shared Mirror orbit, then allocating sparse private residuals only when necessary, improves the quality-bytes frontier over fixed full-dimensional intrinsic task vectors; unrelated tasks should trigger private allocation.",
+ "physical_object":"frozen random projection U, D=128 to intrinsic d=32, shared across 24 tasks","mirror_coordinate":"shared intrinsic vector, per-task Givens angle, per-task active dimension and optional sparse residual","logical_multiplicity":"24 tasks with four intrinsic complexity levels (4, 8, 16, 32)",
+ "model":{"input_dim":128,"intrinsic_dim":32,"tasks":24,"support_examples_per_task":96,"query_examples_per_task":128,"active_dimension_candidates":[4,8,16,32],"dimension_selection_tail_fraction":0.01,"private_split_relative_error":0.05},
+ "strata":["shared Givens orbit with variable prefix dimensions","independent task vectors with variable prefix dimensions"],
+ "controls":["direct per-task adaptive intrinsic coordinates","Mirror orbit with variable active dimension and sparse private fallback","Mirror orbit without private fallback","generic PCA with smallest rank meeting 5% training-coordinate error"],
+ "development":{"worlds":[31400,31401],"seeds":[0,1,2],"selection_metric":"query NRMSE, actual bytes, active dimensions, private values and split events"},
+ "fresh":{"worlds":[31410,31411,31412],"seeds":[0,1,2],"locked_before_access":true},
+ "storage":{"authority":"actual serialized inference payload bytes","paid_objects":["U fp16","direct active task coordinates or Mirror shared vector/angles/dimensions","sparse private residual indices int16 and values fp16","PCA mean/basis/codes","metadata"]},
+ "success_gate":"On aligned variable-rank tasks, adaptive Mirror reaches query NRMSE <=0.05 and improves total serialized quality-bytes over direct adaptive coordinates; independent tasks must be reported as a private-capacity boundary.",
+ "failure_gate":"Mirror misses aligned quality or provides no total-payload advantage at matched error; generic/adaptive direct controls matching it means no Mirror-specific result.",
+ "compute":{"report_support_examples":true,"report_optimizer_updates":0,"report_query_quality":true,"report_actual_bytes":true,"report_active_dimension":true,"report_private_split_events":true},
+ "boundaries":["Synthetic linear functions only","Random U, not pretrained network","Aligned stratum is teacher-generated from shared Givens orbit","Dimension is inferred from support-fitted coordinates and target tolerance"]
+}
