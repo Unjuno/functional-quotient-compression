@@ -1,0 +1,21 @@
+{
+  "experiment_id":"MA-296",
+  "title":"Orthogonalized task-vector Mirror superposition",
+  "status":"SCREENING",
+  "evidence_lane":"TASK_VECTOR_COMPOSITION/INTERFERENCE/ACTUAL_BYTES",
+  "base_commit":"66f551ec",
+  "hypothesis":"A compact task address can retrieve correlated task deltas from a shared superposition with lower interference and fewer serialized bytes than independent task deltas; an ordinary orthogonal basis may explain any gain.",
+  "physical_object":"one shared tensor encoding N linear task deltas",
+  "mirror_coordinate":"per-task normalized context/address vector",
+  "logical_multiplicity":"N task-specific linear functions",
+  "prior_art_refs":[16,26],
+  "model":{"dimension":512,"tasks":8,"support_examples_per_task":640,"query_examples_per_task":128},
+  "controls":["unbound summed task vectors","raw independent task vectors","random-context PSP binding","Hadamard Mirror address binding","generic QR orthogonal task basis"],
+  "development":{"worlds":[29600,29601],"seeds":[0,1,2],"selection_metric":"query NRMSE, off-diagonal task interference, serialized payload bytes"},
+  "fresh":{"worlds":[29610,29611,29612],"seeds":[0,1,2],"locked_before_access":true},
+  "storage":{"authority":"actual serialized payload bytes including address/basis and metadata","paid_objects":["encoded task vectors","address vectors or orthogonal basis","metadata"]},
+  "compute":{"report_fit_seconds":true,"report_examples":true,"report_quality":true,"report_interference":true,"report_bytes":true},
+  "success_gate":"Address-bound method has query NRMSE <=0.05 and at least 30% fewer bytes than raw independent deltas, with lower interference than unbound sum.",
+  "failure_gate":"Address-bound method fails query NRMSE <=0.20 or does not reduce bytes versus raw; generic basis matching Mirror means no Mirror-specific finding.",
+  "boundaries":["Synthetic linear task functions only","No language-model task arithmetic claim","Task count is not independent capacity","Generic orthogonal basis and PSP are controls"]
+}
