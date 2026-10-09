@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-258.** MA-257 FAIL: factorized coordinatewise unbinding used fewer bytes than explicit task vectors but had held-out NRMSE 2.54; generic factor tables were exact and smaller. MA-255 and MA-260 remain NOT ESTABLISHED due implementation defects. Continue at MA-258, the next available P0 in registry order; preserve native PSP as the required control.
+**Current operational pointer (2026-10-09): MA-261.** MA-258 found a scoped aligned Givens feasibility case (82.8% fewer serialized bytes than untied at NRMSE 0.00041), while independent rank-2 experts needed private factors and native PSP unbinding failed. Continue to MA-261 with native BatchEnsemble factors and standard MoE as controls; do not generalize the aligned result.
 
 # Worker queue
 

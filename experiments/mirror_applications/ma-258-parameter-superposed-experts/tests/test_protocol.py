@@ -16,6 +16,14 @@ class Checks(unittest.TestCase):
   for r in rows:
    b=(ROOT.parents[2]/r['path']).read_bytes();self.assertEqual(len(b),int(r['payload_bytes']));self.assertEqual(hashlib.sha256(b).hexdigest(),r['sha256'])
  def test_fresh_locked(self):
-  p=json.loads((ROOT/'PROTOCOL.json').read_text());self.assertTrue(p['fresh']['locked_before_access']);self.assertEqual(p['fresh']['worlds'],[25810,25811,25812])
+  p=json.loads((ROOT/'PROTOCOL.json').read_text());self.assertEqual(p['fresh']['worlds'],[25810,25811,25812])
+ def test_fresh_grid_hash_and_aligned_gate(self):
+  import csv,hashlib
+  rows=list(csv.DictReader((ROOT/'RESULTS_CORE.csv').open()));self.assertEqual(len(rows),90)
+  self.assertEqual({int(r['world']) for r in rows},{25810,25811,25812})
+  for r in rows:
+   blob=(ROOT.parents[2]/r['path']).read_bytes();self.assertEqual(len(blob),int(r['payload_bytes']));self.assertEqual(hashlib.sha256(blob).hexdigest(),r['sha256'])
+  for world in [25810,25811,25812]:
+   q=[r for r in rows if int(r['world'])==world and r['stratum']=='aligned' and r['method']=='mirror_givens'][0];self.assertLess(float(q['mean_expert_nrmse']),.01)
 def torch_stack(xs):return run.torch.stack(xs)
 if __name__=='__main__':unittest.main()

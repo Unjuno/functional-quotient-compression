@@ -24,20 +24,31 @@ def rank2(base,W):
  d=W-base;u,s,v=torch.linalg.svd(d,full_matrices=False);return u[:,:2]*s[:2],v[:2].T
 def nrmse(pred,target):return float((pred-target).square().mean().sqrt()/target.square().mean().sqrt())
 def serialize(o):b=io.BytesIO();torch.save(o,b);return b.getvalue()
+def radem(shape,seed):
+ g=torch.Generator().manual_seed(seed);return torch.randint(0,2,shape,generator=g).float()*2-1
 def run(phase):
  rows=[];worlds=DEV if phase=='development' else FRESH
  for w in worlds:
   for seed in SEEDS:
    for stratum in ['aligned','random_rank2']:
     base,W=make_tasks(w,seed,'aligned' if stratum=='aligned' else 'random');xt,yt,xv,yv=data(w,seed,'aligned' if stratum=='aligned' else 'random',W)
-    t=time.perf_counter();ang=torch.stack([fit_angle(base,xt[e],yt[e]) for e in range(E)]);mt=time.perf_counter()-t;M=torch.stack([rotate(base,a) for a in ang])
-    t=time.perf_counter();fac=[rank2(base,W[e]) for e in range(E)];rt=time.perf_counter()-t;LR=torch.stack([base+u@v.T for u,v in fac])
-    C=torch.randint(0,2,(E,D,D),generator=torch.Generator().manual_seed(w*100+seed+55)).float()*2-1;S=(C*W).sum(0);PSP=C*S;tied=W.mean(0).expand(E,-1,-1)
-    objs={'untied':(W,{'experts':W,'metadata':{'E':E}}),'hard_tied':(tied,{'expert':W.mean(0),'metadata':{'E':E}}),'native_psp':(PSP,{'superposed_tensor':S,'contexts':C,'metadata':{'E':E,'unbinding':'hadamard'}}),'mirror_givens':(M,{'shared_expert':base,'angles':ang,'metadata':{'plane':[0,1],'E':E}}),'rank2_private':(LR,{'shared_expert':base,'factors':fac,'metadata':{'rank':2,'E':E}})}
-    for name,(pred,obj) in objs.items():
-     blob=serialize(obj);p=ROOT/'artifacts'/'payloads'/f'{w}_{seed}_{stratum}_{name}.pt';p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(blob);errs=[nrmse(xv[e]@pred[e],yv[e]) for e in range(E)]
-     rows.append({'world':w,'seed':seed,'stratum':stratum,'method':name,'mean_expert_nrmse':sum(errs)/E,'max_expert_nrmse':max(errs),'payload_bytes':len(blob),'sha256':hashlib.sha256(blob).hexdigest(),'path':str(p.relative_to(ROOT.parents[2])),'fit_seconds':mt if name=='mirror_givens' else rt if name=='rank2_private' else 0.,'experts':E})
- with (ROOT/f'{phase.upper()}_RESULTS.csv').open('w',newline='') as f:w=csv.DictWriter(f,fieldnames=rows[0]);w.writeheader();w.writerows(rows)
+    t=time.perf_counter();ang=torch.stack([fit_angle(base,xt[e],yt[e]) for e in range(E)]);fitmirror=time.perf_counter()-t
+    t=time.perf_counter();M=torch.stack([rotate(base,a) for a in ang]);dec_mirror=time.perf_counter()-t
+    t=time.perf_counter();fac=[rank2(base,W[e]) for e in range(E)];fitrank=time.perf_counter()-t
+    t=time.perf_counter();U=torch.stack([u for u,v in fac]);V=torch.stack([v for u,v in fac]);LR=base[None,:,:]+torch.stack([u@v.T for u,v in fac]);dec_rank=time.perf_counter()-t
+    ctx_seed=w*100+seed+55;C=radem((E,D,D),ctx_seed);S=(C*W).sum(0)
+    t=time.perf_counter();Cdec=radem((E,D,D),ctx_seed);PSP=Cdec*S;dec_psp=time.perf_counter()-t
+    tied=W.mean(0).expand(E,-1,-1)
+    objs={'untied':(W,{'experts':W,'metadata':{'E':E}},0.,0.),'hard_tied':(tied,{'expert':W.mean(0),'metadata':{'E':E}},0.,0.),'native_psp':(PSP,{'superposed_tensor':S,'context_seed':ctx_seed,'metadata':{'E':E,'prng':'torch-radem-v1','unbinding':'hadamard'}},0.,dec_psp),'mirror_givens':(M,{'shared_expert':base,'angles':ang,'metadata':{'plane':[0,1],'E':E}},fitmirror,dec_mirror),'rank2_private':(LR,{'shared_expert':base,'u_factors':U,'v_factors':V,'metadata':{'rank':2,'E':E}},fitrank,dec_rank)}
+    for name,(pred,obj,fitsec,decsec) in objs.items():
+     blob=serialize(obj);p=ROOT/'artifacts'/'payloads'/f'{w}_{seed}_{stratum}_{name}.pt';p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(blob);predictions=[xv[e]@pred[e] for e in range(E)]
+     for _ in range(5):_= [xv[e]@pred[e] for e in range(E)]
+     timings=[]
+     for _ in range(20):
+      ta=time.perf_counter();_= [xv[e]@pred[e] for e in range(E)];timings.append(time.perf_counter()-ta)
+     applysec=sorted(timings)[len(timings)//2];errs=[nrmse(predictions[e],yv[e]) for e in range(E)]
+     rows.append({'world':w,'seed':seed,'stratum':stratum,'method':name,'mean_expert_nrmse':sum(errs)/E,'max_expert_nrmse':max(errs),'payload_bytes':len(blob),'sha256':hashlib.sha256(blob).hexdigest(),'path':str(p.relative_to(ROOT.parents[2])),'fit_seconds':fitsec,'decode_seconds':decsec,'apply_seconds':applysec,'experts':E})
+ with (ROOT/f'{phase.upper()}_RESULTS.csv').open('w',newline='') as f:wri=csv.DictWriter(f,fieldnames=rows[0]);wri.writeheader();wri.writerows(rows)
  print(json.dumps({'phase':phase,'rows':len(rows)}))
 if __name__=='__main__':
  import argparse;p=argparse.ArgumentParser();p.add_argument('--phase',choices=['development','fresh'],required=True);run(p.parse_args().phase)

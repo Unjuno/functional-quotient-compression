@@ -1,0 +1,27 @@
+{
+  "experiment_id": "MA-258",
+  "commit": "pending final result commit",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-258-parameter-superposed-experts/tests -v",
+    "passed": 7,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": false,
+    "byte_exact": true,
+    "note": "All 90 fresh payload lengths and SHA-256 values matched RESULTS_CORE.csv. PSP contexts regenerate from stored seed; rank-2 factors packed contiguously."
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0,
+    "note": "A1 timing and A2 serializer/decode replay preserved all expert NRMSE values relative to the pre-amendment CSV."
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Fresh worlds 25810-25812 \u00d7 seeds 0-2; two fixed strata; 90 rows.",
+    "Aligned Mirror mean NRMSE 0.00041, max-expert mean 0.00302, 5925B; untied 34409B; exact rank-2 10209B.",
+    "Random rank-2 Mirror NRMSE 0.23828; exact private rank-2 factors NRMSE 0.",
+    "Apply time uses 5 warmup + 20 timing repeats; measured median ~0.11-0.12ms per 8-expert bank on this CPU.",
+    "A2 accounting replay: packed seeded PSP context and rank-2 factor tensors; quality values unchanged."
+  ]
+}

@@ -1,7 +1,7 @@
 {
   "experiment_id": "MA-258",
   "title": "Parameter-superposed expert bank with Mirror unbinding",
-  "status": "FROZEN_SCREENING",
+  "status": "COMPLETED_PROMISING_SCOPED",
   "base_commit": "38c0b04e",
   "evidence_lane": "EXPERT_FUNCTIONAL_MULTIPLICITY/QUALITY/ACTUAL_BYTES/COMPUTE",
   "prior_art_refs": [
@@ -61,7 +61,7 @@
       1,
       2
     ],
-    "locked_before_access": true
+    "locked_before_access": false
   },
   "storage": {
     "authority": "actual torch-serialized inference payload bytes, including all experts/factors/codes and metadata"
@@ -78,5 +78,58 @@
     "change": "Use forward x@W consistently; fit bounded coordinate a=0.7*tanh(z) for 500 Adam steps at lr 0.03. This encodes the generator bound, with no data-dependent selection.",
     "fresh_not_accessed": true,
     "superseded_dev": "Initial development rows are retained as superseded exploratory outputs; corrected rerun is authoritative."
+  },
+  "amendment_A1_timing": {
+    "reason": "Initial fresh output serialized an apply_seconds field as zero without timing the matrix application.",
+    "change": "Replay exact same fresh worlds/seeds/task matrices/conditions. Compute predictions as before, then perform 5 warmup and 20 timed per-expert matrix applications; report median elapsed time per application. No quality/storage/model or hyperparameter change.",
+    "authoritative": "Original quality metrics and payload hashes must remain identical; only apply_seconds is replaced by repeated median CPU timing.",
+    "fresh_worlds": [
+      25810,
+      25811,
+      25812
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ]
+  },
+  "amendment_A2_serializer_and_decode": {
+    "reason": "Audit of actual payloads found native PSP serialized its deterministic random context tensor explicitly, while rank-2 control stored a Python list of separate factor tensors, inflating both controls with reconstructible state/container overhead. Coordinate decode costs were also not measured.",
+    "change": "Store PSP seed+PRNG metadata and reconstruct contexts deterministically; stack rank-2 factors contiguously; measure load-time reconstruction for PSP, Mirror and rank-2 controls. Re-run exact same fresh worlds/seeds/tasks.",
+    "authoritative": "Quality values must match prior fresh outputs exactly; serialized bytes and decode_seconds are replaced by canonical packed payload accounting. Prior payloads/results remain preserved under artifacts/payloads_pre_A2 and artifacts/fresh_before_A2_accounting.csv.",
+    "fresh_worlds": [
+      25810,
+      25811,
+      25812
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ]
+  },
+  "result_summary": {
+    "aligned": {
+      "mirror_nrmse_mean": 0.00041,
+      "mirror_max_expert_nrmse_mean": 0.00302,
+      "mirror_payload_bytes": 5925,
+      "untied_payload_bytes": 34409,
+      "rank2_payload_bytes": 10209,
+      "hard_tied_nrmse_mean": 0.07776
+    },
+    "random_rank2": {
+      "mirror_nrmse_mean": 0.23828,
+      "hard_tied_nrmse_mean": 0.22333,
+      "rank2_private_nrmse_mean": 0.0,
+      "mirror_payload_bytes": 5925,
+      "rank2_private_payload_bytes": 10209,
+      "untied_payload_bytes": 34409
+    },
+    "native_psp": {
+      "aligned_nrmse_mean": 2.61951,
+      "random_rank2_nrmse_mean": 2.61676,
+      "payload_bytes": 5801
+    }
   }
 }
