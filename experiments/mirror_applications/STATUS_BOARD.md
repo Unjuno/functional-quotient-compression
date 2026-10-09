@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (75 completed; 555 UNTESTED)
+- P0: **630** (76 completed; 554 UNTESTED)
 - P1: **422** (13 completed; 409 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1067 UNTESTED, 37 PROMISING, 51 FAIL**
+- Current MA statuses: **1066 UNTESTED, 38 PROMISING, 51 FAIL**
 - 68 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -70,9 +70,9 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-301 — continuous Mirror supermask (P0; PA31/PA32)**
+**MA-307 — Mirror code before PackNet physical allocation (P0; PA32)**
 
-MA-299 found adaptive split allocation versus independent storage, but generic PCA matched the Mirror code. Next compare a continuous task view against binary SupSup/Piggyback masks at actual serialized bits.
+MA-301 produced a narrow aligned synthetic mask result: about 49% fewer bytes than binary masks, while byte-matched logistic factorization had higher error. Next test whether a View delays PackNet physical allocation.
 
 ## Active experiment
 
@@ -156,16 +156,22 @@ KG relation rotations (RotatE, TuckER, QuatE, PairRE), EXIF/device-aware ISPs (P
 ## Completed: MA-296 — orthogonalized task-vector Mirror superposition
 
 - **FAIL** on fresh synthetic linear tasks: Hadamard address and generic QR both reconstruct at ~2e-6 query NRMSE, but use 16,735/16,744 B versus 16,473 B raw task vectors. Unbound sum uses 2,131 B but query NRMSE is ~2.52. No Mirror-specific gain; random PSP unbinding control also has substantial crosstalk. See claim ledger.
-- Next P0 candidate: MA-301 — continuous Mirror supermask.
+- Next P0 candidate: MA-307 — Mirror code before PackNet physical allocation.
 
 
 ## Completed: MA-297 — SETA shared sparse subspace + Mirror views
 
 - **FAIL for Mirror-specific value; shared-subspace compression signal observed.** Fresh synthetic sparse task vectors recovered shared support at 100%; Mirror code used 836 B and generic PCA 841 B at query NRMSE ~3.31e-7, versus SETA-style shared/private 1,055 B. Task deltas were given to the encoder; this is not a faithful SETA continual-learning reproduction.
-- Next P0 candidate: MA-301 — continuous Mirror supermask.
+- Next P0 candidate: MA-307 — Mirror code before PackNet physical allocation.
 
 
 ## Completed: MA-299 — Split-on-Share Mirror code allocation
 
 - **FAIL for Mirror-specific value; adaptive allocation signal observed.** On a synthetic stream, threshold split all four novel tasks; adaptive storage used ~11.54 KB versus 20.59 KB independent sparse vectors with query NRMSE ~2.09e-7. Never-split was 3.30 KB but quality collapsed (NRMSE ~0.88). Generic PCA matched Mirror.
 - Next P0 candidate: MA-301 — continuous Mirror supermask versus binary SupSup/Piggyback masks.
+
+
+## Completed: MA-301 — continuous Mirror supermask
+
+- **PROMISING, narrowly scoped:** on intentionally rank-2-aligned synthetic masks, Mirror used 16,750 B vs packed binary masks 32,847 B (~49% less) at query NRMSE 0.00854. A byte-matched generic logistic factorization had NRMSE 0.04798; PCA used more bytes and had NRMSE 0.158. Since the teacher masks were generated from the same rank-2 basis Mirror stores, this is not general SupSup/Piggyback or learned-task evidence.
+- Next P0 candidate: MA-307 — Mirror code before PackNet physical allocation.

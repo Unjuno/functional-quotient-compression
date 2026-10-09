@@ -1,16 +1,22 @@
 # MA-301 status
 
-- Status: SCREENING
+- Status: PROMISING (aligned synthetic mechanism only)
 - Branch: `research/ma-301-continuous-mirror-supermask-20261009`
-- Base commit: `4046ee8f`
-- Development complete: yes (worlds 30100–30101 × seeds 0–2)
-- Fresh/audit opened: no
-- Protocol locked: after this commit, before fresh
+- Frozen protocol commit: `6f70b52c`
+- Fresh: complete, 3 worlds × 3 seeds; 36 rows
+- Verification: complete
 
-## Next action
+## H
+A continuous task-view mask code can preserve subnetwork function quality at lower payload than independent packed binary masks.
 
-Run frozen fresh worlds 30110–30112.
+## T
+D=4096, 64 synthetic tasks whose binary masks are thresholded rank-2 shared scores. Controls: packed binary masks, Mirror basis+codes, PCA, and fixed-step generic logistic factorization. Fresh worlds 30110–30112 × seeds 0–2. Actual serialized bytes include all stored factors/codes or packed bits.
 
-## Development notes
+## D
+PROMISING, narrowly. Mirror uses 16,750 B vs binary masks 32,847 B (~49% reduction), with mask agreement 0.999963 and query NRMSE 0.00854. Byte-matched logistic factorization (16,755 B) has NRMSE 0.04798; PCA uses more bytes and has NRMSE 0.158.
 
-Added fitted rank-2 logistic factorization after development showed PCA alone was too weak. The logistic control uses fixed 250 Adam updates at lr=0.04 and is serialized in fp16. This condition is frozen before fresh evaluation.
+## C
+The teacher is directly generated from the same rank-2 score view Mirror stores. The generic logistic fit may be optimization-limited at 250 steps.
+
+## U
+No trained SupSup/Piggyback, natural tasks, generalization across task families, learned Mirror coordinates, or inference-latency evidence. Treat this as an aligned representation feasibility result only.

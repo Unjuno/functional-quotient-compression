@@ -1,19 +1,62 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
-  "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+  "experiment_id": "MA-301",
+  "decision": "PROMISING, narrowly scoped to teacher-aligned synthetic mask family",
+  "protocol_commit": "6f70b52c",
+  "fresh_worlds": [
+    30110,
+    30111,
+    30112
+  ],
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "fresh_rows": 36,
+  "means": {
+    "continuous_mirror": {
+      "mask_accuracy": 0.9999627007378472,
+      "query_nrmse": 0.008534964950134357,
+      "payload_bytes": 16750.0,
+      "generic_fit_seconds": 0.0
+    },
+    "generic_logistic_rank2": {
+      "mask_accuracy": 0.9988250732421875,
+      "query_nrmse": 0.04798412654134962,
+      "payload_bytes": 16755.0,
+      "generic_fit_seconds": 0.7121042206644133
+    },
+    "generic_pca_mask": {
+      "mask_accuracy": 0.9873580932617188,
+      "query_nrmse": 0.15755502465698454,
+      "payload_bytes": 24964.0,
+      "generic_fit_seconds": 0.0
+    },
+    "packed_binary_mask": {
+      "mask_accuracy": 1.0,
+      "query_nrmse": 0.0,
+      "payload_bytes": 32847.0,
+      "generic_fit_seconds": 0.0
+    }
   },
-  "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
-  },
-  "metric_replay": {
-    "checked": false,
-    "max_difference": null
-  },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "facts": [
+    "Packed binary mask payload averaged 32847 B with exact function outputs.",
+    "Continuous Mirror payload averaged 16750 B, 48.97% smaller than packed binary masks; mask agreement ~0.999963 and query NRMSE ~0.00854.",
+    "Generic rank-2 logistic factorization used 16755 B (byte-matched) and query NRMSE ~0.04798; mean fit time ~0.712 s per seeded world/task bank.",
+    "Rank-2 PCA used 24964 B and query NRMSE ~0.158.",
+    "All basis, task codes, mean vectors, metadata, or packed mask bits were included in actual serialized bytes.",
+    "Mirror decode is approximately D\u00d7R=8192 MAC per task before mask application; same shared mask multiplication work is 524288 elementwise multiplies/task."
+  ],
+  "interpretation": "A shared continuous task-view representation improves the storage-quality frontier over independent packed binary masks on this intentionally Mirror-aligned teacher family. At essentially equal bytes it also outperforms the fixed-step generic logistic factorization in function error, but this may reflect access to the generating coordinates and does not establish a general Mirror advantage.",
+  "hypothesis": "Supported only as aligned representational feasibility; broad task-mask compression and learned-view claims are not established.",
+  "counter_hypothesis": "Teacher masks are generated directly from the same rank-2 score basis and codes that Mirror stores; generic logistic fitting receives only thresholded masks and may be optimization-limited at the frozen 250 updates.",
+  "limitations": [
+    "Teacher family is aligned to Mirror rank-2 view",
+    "Synthetic mask-only functions on fixed coordinates",
+    "No trained SupSup/Piggyback optimization or natural task accuracy",
+    "Generic factorization fixed at 250 Adam updates; longer convergence untested",
+    "No wall-clock inference benchmark; operation counts are analytical"
+  ],
+  "fresh_data_used_for_tuning": false,
+  "source_sha256": "838a2c9d91172df12545edbaa06e95ccbe674120eb23f592c1ddf67db597307a"
 }

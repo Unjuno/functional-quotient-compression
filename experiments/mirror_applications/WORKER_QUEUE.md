@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-301.** MA-299 showed adaptive low-rank split allocation saved ~44% versus independent sparse task vectors, while generic PCA matched Mirror. Continue to MA-301 continuous Mirror supermask versus SupSup/Piggyback binary masks.
+**Current operational pointer (2026-10-09): MA-307.** MA-301 showed ~49% fewer bytes than independent packed binary masks on a teacher-aligned rank-2 mask family; a byte-matched generic logistic factorization was weaker at fixed 250 updates. Scope is narrow and not natural SupSup evidence. Continue to MA-307, Mirror code before PackNet physical allocation.
 
 # Worker queue
 
