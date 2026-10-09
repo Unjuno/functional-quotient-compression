@@ -14,7 +14,7 @@
   "development": {"allowed": ["choose one shared context normalization variant among raw and per-world standardized", "select ridge coefficient from [0.001, 0.01, 0.1, 1.0]"], "selection_metric": "mean dev query NRMSE subject to serialized bytes and query compute reported"},
   "fresh": {"locked_before_access": true, "task_ids": [4000, 4063]},
   "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["shared block or prototype bank", "context normalizer", "router matrix and bias", "per-task context/code when persistent", "metadata"] , "amortization_N": [1, 20, 64]},
-  "compute": {"report_support_feature_MAC", "report_router_MAC", "report_block_MAC", "report_query_wall", "report_training_updates"},
+  "compute": {"report_support_feature_MAC": true, "report_router_MAC": true, "report_block_MAC": true, "report_query_wall": true, "report_training_updates": true},
   "success_gate": "On every fresh world, continuous Mirror routing improves NRMSE by at least 10% over discrete K=8 routing, and at N=20 payload is no larger than both discrete routing and generic hypernetwork; report independent fit as upper control.",
   "failure_gate": "Generic hypernetwork matches/beats Mirror at equal or fewer bytes, discrete routing matches at equal/fewer bytes, Mirror misses per-world quality gate, or learned router fails to beat the no-adaptation baseline.",
   "boundaries": ["Fixed synthetic context-to-function screen only.", "Context contains support-derived summary features; no task ID or teacher coefficients exposed.", "Does not establish transformer or natural multi-task performance."]
