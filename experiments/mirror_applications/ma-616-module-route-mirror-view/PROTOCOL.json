@@ -1,0 +1,63 @@
+{
+  "experiment_id": "MA-616",
+  "title": "Mirror route + module-view joint factorization",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/COMPUTE/ROUTING",
+  "base_commit": "d82c227f",
+  "hypothesis": "Route IDs plus one phase per stage reproduce aligned tasks using less serialized state than direct coefficients; unrelated tasks expose private fallback cost.",
+  "physical_object": "four 2x2 modules at each of two stages",
+  "mirror_coordinate": "per-task route IDs x one Givens phase per stage; exact private fallback for unrelated tasks",
+  "logical_multiplicity": "32 functions from an 8-module bank plus two stage codes or private matrices",
+  "prior_art_refs": [
+    "PA127"
+  ],
+  "controls": [
+    "route-only PathNet selection",
+    "direct sine/cosine coefficients for each route-stage view",
+    "independent per-task two-stage matrices"
+  ],
+  "fixture": "24 aligned tasks use route-selected matrices conjugated by task-specific phases; 8 unrelated tasks use independent matrices. Input/output dimension 2 with ReLU between linear stages.",
+  "development": {
+    "worlds_or_seeds": [
+      61601,
+      61602
+    ],
+    "optimizer_updates": 0,
+    "selection_metric": "normalized task-output MSE, actual serialized bytes, decode+forward MAC proxy, CPU latency"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      61611,
+      61612,
+      61613
+    ],
+    "locked_before_access": true,
+    "selection_metric": "same frozen gates; no retuning",
+    "opened": false,
+    "run_only_if": "do not run: development payload and Mirror-attribution gates failed"
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "format": "torch.save exact payload",
+    "paid_objects": [
+      "module banks",
+      "route IDs",
+      "Mirror phases or direct coefficients",
+      "private matrices",
+      "metadata"
+    ]
+  },
+  "compute": {
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true,
+    "timing_boundary": "decode routes/views, materialize matrices, and run 256 queries"
+  },
+  "success_gate": "All fresh aligned tasks nMSE<=1e-6; Mirror payload<=0.90x direct coefficient payload and <=0.75x independent payload; Mirror MAC proxy<=1.5x direct coefficients.",
+  "failure_gate": "Any quality or payload gate miss, or exact native-control function/byte alias.",
+  "boundaries": [
+    "Synthetic analytic task family, no training or learned router.",
+    "Oracle task IDs are charged as route-table bytes; no routing-quality claim.",
+    "Task count is not independent-capacity evidence."
+  ]
+}
