@@ -19,6 +19,7 @@ def test_givens_coordinate_preserves_embedding_norm():
 
 def test_projection_seed_reconstructs_exactly():
     torch.testing.assert_close(projection(12,1,8),projection(12,1,8),atol=0,rtol=0)
+    torch.testing.assert_close(projection(12,1,8),projection(12,1,9)[:,:8],atol=0,rtol=0)
     assert projection(12,1,8).shape==(16,8)
 
 

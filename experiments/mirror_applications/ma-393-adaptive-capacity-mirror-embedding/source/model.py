@@ -17,8 +17,11 @@ def band_ids()->torch.Tensor:
 
 
 def projection(seed:int,band:int,width:int)->torch.Tensor:
-    g=torch.Generator().manual_seed(seed+1009*(band+1)+97*width)
-    return torch.randn(DIM,width,generator=g)/width**0.5
+    g=torch.Generator().manual_seed(seed+1009*(band+1))
+    # Nested projection columns make the k+1-coordinate control retain the
+    # standard k-dimensional adaptive subspace before adding one coordinate.
+    master=torch.randn(DIM,max(BAND_WIDTHS)+1,generator=g)/(max(BAND_WIDTHS)+1)**0.5
+    return master[:,:width]
 
 
 def rotate_first_pair(x:torch.Tensor,angle:torch.Tensor)->torch.Tensor:
