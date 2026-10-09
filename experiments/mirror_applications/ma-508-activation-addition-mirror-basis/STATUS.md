@@ -8,7 +8,7 @@
 - Fresh/audit opened: yes; 3 worlds × 3 seeds × 2 residual regimes × 5 methods
 - Results committed: yes (`a35a1413`)
 - Verification committed: yes
-- Registry row updated: yes after verification
+- Registry row updated: yes after verification; payload replay test passed (1/1)
 
 ## Decision
 
