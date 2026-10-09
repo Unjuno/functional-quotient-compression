@@ -1,12 +1,219 @@
 {
   "experiment_id": "MA-540",
-  "status": "PENDING",
-  "protocol_sha256": "pending",
+  "status": "FAIL",
+  "protocol_sha256": "3385dda7bb4b50b7e2ba188d4668b1178f1698fe12ee5a3e2efb4f51c8f96da5",
   "fresh_accessed": false,
-  "checks": [],
-  "payload_hashes": {},
+  "dev_gate": {
+    "worlds": [
+      54001,
+      54002
+    ],
+    "quality_passed": true,
+    "byte_passed": false,
+    "result": "FAIL; fresh remains sealed"
+  },
+  "accounting_amendment": "Initial run payload/MAC accounting errors retained under runs/dev_initial_metrics_undercharged. Identical seed/update runs repeated after adding ID-order metadata and counting two execution steps plus support-encoder operations. No data/model/settings/quality outcomes changed.",
+  "checks": [
+    {
+      "path": "experiments/mirror_applications/ma-540-sequential-fv-executor/PROTOCOL.json",
+      "bytes": 6682,
+      "sha256": "3385dda7bb4b50b7e2ba188d4668b1178f1698fe12ee5a3e2efb4f51c8f96da5"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-540-sequential-fv-executor/README.md",
+      "bytes": 8120,
+      "sha256": "9cfb44fd5645b16060f6dc4bbd4f5da2e2fc9f92049dc122ac6a0f94ff47f85d"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-540-sequential-fv-executor/RESULTS_CORE.csv",
+      "bytes": 3983,
+      "sha256": "2d3f00152adac202519ecd7608c845636bfb49a1be734588b4c3b774d2c0789b"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-540-sequential-fv-executor/STATUS.md",
+      "bytes": 1566,
+      "sha256": "10a772d85a55a0b83792d22c4c6f78a64b7a61fa42f53273f8952ce9d2aedfe9"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-540-sequential-fv-executor/runs/dev/world_54001/exact_table_upper.npz",
+      "bytes": 668,
+      "sha256": "e933f25fc51075fbbc407685748cb41c102ed74c2a2f427e920b4b631e0ccf85"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-540-sequential-fv-executor/runs/dev/world_54001/fv_one_shot.npz",
+      "bytes": 30493,
+      "sha256": "c95752bbf3d1ac01f6682b6340e30d4d752303330fb5dec2ff324a648a7bd6e2"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-540-sequential-fv-executor/runs/dev/world_54001/fv_tied.npz",
+      "bytes": 27441,
+      "sha256": "c9b3d25bee19c10f5207536166cd9ca02238129ccb9634ad396017f568376f16"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-540-sequential-fv-executor/runs/dev/world_54001/metrics.json",
+      "bytes": 5822,
+      "sha256": "ac01754fbaa7249cc6e6da063e4ebbf8cea36deb4e0f121201d67c24f207b209"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-540-sequential-fv-executor/runs/dev/world_54001/native_tied.npz",
+      "bytes": 23865,
+      "sha256": "0149a9b137b8900573b07f42cd5148989387af9f28f18de8d120b34b76e544ac"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-540-sequential-fv-executor/runs/dev/world_54001/native_untied.npz",
+      "bytes": 44523,
+      "sha256": "76b6c7cac5a0e6fedfa5b8d4a8c586a5a88d7f67c9725b0786214bc9111c4760"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-540-sequential-fv-executor/runs/dev/world_54001/world_inputs.npz",
+      "bytes": 1330,
+      "sha256": "511220366c75fe6d2ad9f5abdee9209182047396959be4b47363dfde871e8248"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-540-sequential-fv-executor/runs/dev/world_54002/exact_table_upper.npz",
+      "bytes": 668,
+      "sha256": "7176b2ff7d7ed10fed67ec87d3ace8c3afefb057bd6d44fa0cae3cebb0fae218"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-540-sequential-fv-executor/runs/dev/world_54002/fv_one_shot.npz",
+      "bytes": 30493,
+      "sha256": "f8a0f7a199eafbc22174107cec31247571a0f28f9093d5601dcf9802bcf36a67"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-540-sequential-fv-executor/runs/dev/world_54002/fv_tied.npz",
+      "bytes": 27441,
+      "sha256": "887d2434ee3f90479ffee83994df53d3f32d7ef18fad185c7e4961055d04a6cc"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-540-sequential-fv-executor/runs/dev/world_54002/metrics.json",
+      "bytes": 5822,
+      "sha256": "fd8799db89182df13f7e22a7afc198e2978681898f0ad6adf1eeddda659f9873"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-540-sequential-fv-executor/runs/dev/world_54002/native_tied.npz",
+      "bytes": 23865,
+      "sha256": "ee67a00fe220f6e812fb67551551225a760d673fdade3f3edaad3c615398767d"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-540-sequential-fv-executor/runs/dev/world_54002/native_untied.npz",
+      "bytes": 44523,
+      "sha256": "d2bb1d240e18fd68db36eba83fbe4504e43b4e71828a9741badb23de4f485278"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-540-sequential-fv-executor/runs/dev/world_54002/world_inputs.npz",
+      "bytes": 1330,
+      "sha256": "bf338bea0f77a5a83f08b666e93b45ab2347077f6f3ca5f2b97bb39447b726e6"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-540-sequential-fv-executor/runs/dev_initial_metrics_undercharged/world_54001/exact_table_upper.npz",
+      "bytes": 668,
+      "sha256": "e933f25fc51075fbbc407685748cb41c102ed74c2a2f427e920b4b631e0ccf85"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-540-sequential-fv-executor/runs/dev_initial_metrics_undercharged/world_54001/fv_one_shot.npz",
+      "bytes": 30219,
+      "sha256": "5a98ab437b18e33e59bc89181c57ede066bc9affc19698b4be25ecf05e9d4abb"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-540-sequential-fv-executor/runs/dev_initial_metrics_undercharged/world_54001/fv_tied.npz",
+      "bytes": 27167,
+      "sha256": "f374385594afd246fc93a0d7e9d52a2364d9e7102b6f79fc932dba076c5087bf"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-540-sequential-fv-executor/runs/dev_initial_metrics_undercharged/world_54001/metrics.json",
+      "bytes": 5140,
+      "sha256": "871181f4d52a9925a0e9705854234c0e51c4bad8698a62fee17af926056f5783"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-540-sequential-fv-executor/runs/dev_initial_metrics_undercharged/world_54001/native_tied.npz",
+      "bytes": 23591,
+      "sha256": "48b530beabdacd02491c7e7b814f3fab1b3d95aee9c571f945b623c47798bfbd"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-540-sequential-fv-executor/runs/dev_initial_metrics_undercharged/world_54001/native_untied.npz",
+      "bytes": 44249,
+      "sha256": "27b0ff83c86121bfd829377b50a83870764b104dfb13d1fb26d1c03d063a49a6"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-540-sequential-fv-executor/runs/dev_initial_metrics_undercharged/world_54001/world_inputs.npz",
+      "bytes": 1330,
+      "sha256": "511220366c75fe6d2ad9f5abdee9209182047396959be4b47363dfde871e8248"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-540-sequential-fv-executor/runs/dev_initial_metrics_undercharged/world_54002/exact_table_upper.npz",
+      "bytes": 668,
+      "sha256": "7176b2ff7d7ed10fed67ec87d3ace8c3afefb057bd6d44fa0cae3cebb0fae218"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-540-sequential-fv-executor/runs/dev_initial_metrics_undercharged/world_54002/fv_one_shot.npz",
+      "bytes": 30219,
+      "sha256": "d86c8491e8122e5c9c352117fe96df67b38f33217afa7f2749ccd11813a393db"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-540-sequential-fv-executor/runs/dev_initial_metrics_undercharged/world_54002/fv_tied.npz",
+      "bytes": 27167,
+      "sha256": "4c4765def28ee540065d88219cb27bb7f635cc3f898016b9000892a8813b94f6"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-540-sequential-fv-executor/runs/dev_initial_metrics_undercharged/world_54002/metrics.json",
+      "bytes": 5138,
+      "sha256": "c5757c755e43cf84594694bc5bc2b56805fa887f2bb428624488cfcb3440df8f"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-540-sequential-fv-executor/runs/dev_initial_metrics_undercharged/world_54002/native_tied.npz",
+      "bytes": 23591,
+      "sha256": "4ba1285e1f4c0b6efb65029f66e895228438481b40fab4d01d662e649be0db7a"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-540-sequential-fv-executor/runs/dev_initial_metrics_undercharged/world_54002/native_untied.npz",
+      "bytes": 44249,
+      "sha256": "3a609ce0320cb32f5724d98473edf389578c611ebea118c0aea8f38d83d903c3"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-540-sequential-fv-executor/runs/dev_initial_metrics_undercharged/world_54002/world_inputs.npz",
+      "bytes": 1330,
+      "sha256": "bf338bea0f77a5a83f08b666e93b45ab2347077f6f3ca5f2b97bb39447b726e6"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-540-sequential-fv-executor/source/__init__.py",
+      "bytes": 67,
+      "sha256": "5df2663fe5764f9266db71dc0a8bf993afaabb5b86bb80a5bb5e933ddf075b65"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-540-sequential-fv-executor/source/run_experiment.py",
+      "bytes": 17668,
+      "sha256": "b38751aa039e72634bca5e61c2793fd4f81364099764dacda617cec0f225f865"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-540-sequential-fv-executor/tests/__init__.py",
+      "bytes": 56,
+      "sha256": "4dcedb55c6d0e26adfee59d1eed26720cdf5a25bb21c4bc312645b9b8244de76"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-540-sequential-fv-executor/tests/test_executor.py",
+      "bytes": 1146,
+      "sha256": "21111405753c1fc16a5e9091a1adf6974c6bbf9db2204d2c2ebaf5abc611f0f1"
+    }
+  ],
+  "tests": {
+    "command": "pytest -q experiments/mirror_applications/ma-540-sequential-fv-executor/tests",
+    "result": "2 passed"
+  },
+  "deterministic_replay": {
+    "worlds": [
+      54001,
+      54002
+    ],
+    "result": "all serialized payload hashes and non-timing metrics reproduced exactly; fit and latency timings excluded"
+  },
+  "fresh_guard": {
+    "attempted": true,
+    "result": "refused before world generation after dev byte gate failed; no fresh metrics/data generated"
+  },
   "provenance": {
     "base_commit": "c0d474a2",
-    "branch": "research/ma-540-sequential-fv-executor-20261009"
+    "protocol_freeze_commit": "64e20e6d",
+    "branch": "research/ma-540-sequential-fv-executor-20261009",
+    "result_commit": "pending"
   }
 }

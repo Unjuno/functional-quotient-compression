@@ -67,5 +67,17 @@
   "failure_gate": "Either development world misses a quality threshold or FV payload exceeds 0.90x native-code tied control; fresh remains sealed.",
   "boundaries": ["Synthetic algebraic function family only; no natural-language result.", "Support extraction and the code retrieval address are charged; support/query composition targets remain disjoint.", "A sequential unroll is not parallel token generation and may add inference compute.", "A direct lookup table is an upper reference, not a learned-FV result.", "A pass would establish only this bounded synthetic execution mechanism, not independent capacity."],
   "frozen_at": "2026-10-09",
-  "amendments": []
+  "amendments": [
+    {
+      "id": "amendment-1",
+      "after_development_measurement": true,
+      "reason": "The first development metrics undercounted active inference MACs by counting one transition instead of both sequential steps and omitted the deterministic operator-ID ordering metadata from the payload.",
+      "changes": [
+        "Preserve initial run artifacts under runs/dev_initial_metrics_undercharged/.",
+        "Repeat identical fixed-seed and fixed-update development runs with the ordered-ID metadata serialized.",
+        "Recompute active MAC proxies as two transition applications plus the support-pair encoder cost; no model, optimizer, data, setting, or quality metric changed.",
+        "Fresh-world gate remains frozen and is not relaxed."
+      ]
+    }
+  ]
 }
