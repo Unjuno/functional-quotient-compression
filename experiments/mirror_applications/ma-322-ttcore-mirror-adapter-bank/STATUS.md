@@ -1,16 +1,22 @@
 # MA-322 status
 
-- Status: SCREENING
+- Status: PROMISING narrowly for aligned TT-core task views
 - Branch: `research/ma-322-ttcore-mirror-adapter-bank-20261009`
-- Base commit: `d7178b8e`
-- Development complete: yes (worlds 32200–32201 × seeds 0–2)
-- Fresh/audit opened: no
-- Protocol locked: after this commit, before fresh
+- Frozen protocol: `ed79caf9`
+- Fresh: complete, 3 worlds × 3 seeds × 2 strata; 72 rows
+- Verification: complete
 
-## Next action
+## H
+A Mirror angle on one shared TT core can replace independent task-specific middle cores when updates lie on a shared Givens orbit.
 
-Run frozen fresh worlds 32210–32212.
+## T
+Synthetic 16×16 TT adapters, four modes, bond rank 2, 64 tasks. Compared full matrices, LoRETTA-style independent middle cores, Mirror view, PCA. Fresh worlds 32210–32212 × seeds 0–2; fp16 decode evaluated.
 
-## Development finding
+## D
+PROMISING narrowly. Aligned: Mirror 509 B / NRMSE 5.90e-4 vs independent TT cores 2,355 B / 4.05e-4 and PCA 625 B / 4.05e-4. Independent cores remain accurate; Mirror NRMSE 1.145 and PCA 0.872.
 
-Mirror gives a compact aligned TT-core code and a nearby storage-quality Pareto point vs PCA. Independent task cores are necessary outside the Givens orbit.
+## C
+Teacher updates follow the same Givens action as Mirror; PCA is a nearby, more accurate point.
+
+## U
+No real adapter, pretrained model, downstream quality or language-task evidence.

@@ -1,19 +1,87 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
-  "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+  "experiment_id": "MA-322",
+  "decision": "PROMISING narrowly on aligned one-core Givens tasks; independent TT cores required outside orbit",
+  "protocol_commit": "ed79caf9",
+  "fresh_worlds": [
+    32210,
+    32211,
+    32212
+  ],
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "fresh_rows": 72,
+  "strata": {
+    "aligned": {
+      "generic_pca_tt_core": {
+        "matrix_nrmse": 0.0004055059204498927,
+        "functional_nrmse": 0.00040485903931160766,
+        "payload_bytes": 625.0,
+        "fit_seconds": 0.0022664453345997673
+      },
+      "independent_full_adapter": {
+        "matrix_nrmse": 0.00020696435725161186,
+        "functional_nrmse": 0.00020690226261245293,
+        "payload_bytes": 32864.0,
+        "fit_seconds": 0.0
+      },
+      "loretta_independent_tt_core": {
+        "matrix_nrmse": 0.0004054669827585005,
+        "functional_nrmse": 0.00040481991082843806,
+        "payload_bytes": 2355.0,
+        "fit_seconds": 0.0
+      },
+      "mirror_tt_core_view": {
+        "matrix_nrmse": 0.0005897092503598995,
+        "functional_nrmse": 0.000589686775735269,
+        "payload_bytes": 509.0,
+        "fit_seconds": 0.0038483534444822
+      }
+    },
+    "independent": {
+      "generic_pca_tt_core": {
+        "matrix_nrmse": 0.8708578944206238,
+        "functional_nrmse": 0.8715540170669556,
+        "payload_bytes": 625.0,
+        "fit_seconds": 0.0020788053338441793
+      },
+      "independent_full_adapter": {
+        "matrix_nrmse": 0.00020709183202901235,
+        "functional_nrmse": 0.0002064516011159867,
+        "payload_bytes": 32864.0,
+        "fit_seconds": 0.0
+      },
+      "loretta_independent_tt_core": {
+        "matrix_nrmse": 0.00040066691387134296,
+        "functional_nrmse": 0.00040052914603923756,
+        "payload_bytes": 2355.0,
+        "fit_seconds": 0.0
+      },
+      "mirror_tt_core_view": {
+        "matrix_nrmse": 1.1461940738889906,
+        "functional_nrmse": 1.145117892159356,
+        "payload_bytes": 509.0,
+        "fit_seconds": 0.003946586445737112
+      }
+    }
   },
-  "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
-  },
-  "metric_replay": {
-    "checked": false,
-    "max_difference": null
-  },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "facts": [
+    "Aligned tasks: Mirror 509 B / functional NRMSE 5.90e-4; LoRETTA-style independent middle TT cores 2,355 B / 4.05e-4; generic PCA 625 B / 4.05e-4.",
+    "Mirror payload is ~78% smaller than independent TT core control and ~19% below generic PCA, with slightly higher but still low function error.",
+    "Independent TT cores remain accurate (NRMSE 4.01e-4); Mirror NRMSE 1.145 and PCA 0.872.",
+    "Mirror coefficient fit takes ~3.85 ms; PCA ~2.27 ms. All factors serialized fp16 and decoded before evaluation."
+  ],
+  "interpretation": "A Givens address on one TT core yields a distinct storage-quality Pareto point for a teacher-aligned adapter family. Generic PCA is near and more accurate; independent tasks require private TT cores. This is a synthetic feasibility result only.",
+  "hypothesis": "Supported narrowly for aligned task variation inside one shared TT core; not established for general LoRETTA adapters or natural tasks.",
+  "counter_hypothesis": "The aligned teacher is constructed from the same Givens action; nonlinear learned low-rank codes or longer PCA may match the Mirror byte/quality point.",
+  "limitations": [
+    "Synthetic 16x16 matrices, not pretrained adapters",
+    "Teacher is Givens-aligned",
+    "Only rank-2 PCA control",
+    "No optimizer training or downstream language quality"
+  ],
+  "fresh_data_used_for_tuning": false,
+  "source_sha256": "0b43ab64db19ebddd1107e3a24c3c62f0d288d1d4da84a1908abcd267f5e2cb6"
 }

@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (82 completed; 548 UNTESTED)
+- P0: **630** (83 completed; 547 UNTESTED)
 - P1: **422** (13 completed; 409 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1060 UNTESTED, 41 PROMISING, 54 FAIL**
+- Current MA statuses: **1059 UNTESTED, 42 PROMISING, 54 FAIL**
 - 68 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -70,9 +70,9 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-322 — TT-core Mirror adapter bank (P0)**
+**MA-325 — tensorized embedding domain views (P0)**
 
-MA-320 showed aligned logical expert storage gains over free Tucker with a nearby PCA Pareto point; independent experts needed private state. Next test Mirror coordinates inside a Tensor-Train adapter bank at MA-322.
+MA-322 showed a narrow aligned TT-core storage-quality frontier; independent adapters needed private TT cores. Continue with tensorized embedding domain views in MA-325.
 
 ## Active experiment
 
@@ -156,58 +156,64 @@ KG relation rotations (RotatE, TuckER, QuatE, PairRE), EXIF/device-aware ISPs (P
 ## Completed: MA-296 — orthogonalized task-vector Mirror superposition
 
 - **FAIL** on fresh synthetic linear tasks: Hadamard address and generic QR both reconstruct at ~2e-6 query NRMSE, but use 16,735/16,744 B versus 16,473 B raw task vectors. Unbound sum uses 2,131 B but query NRMSE is ~2.52. No Mirror-specific gain; random PSP unbinding control also has substantial crosstalk. See claim ledger.
-- Next P0 candidate: MA-322 — TT-core Mirror adapter bank.
+- Next P0 candidate: MA-325 — tensorized embedding domain views.
 
 
 ## Completed: MA-297 — SETA shared sparse subspace + Mirror views
 
 - **FAIL for Mirror-specific value; shared-subspace compression signal observed.** Fresh synthetic sparse task vectors recovered shared support at 100%; Mirror code used 836 B and generic PCA 841 B at query NRMSE ~3.31e-7, versus SETA-style shared/private 1,055 B. Task deltas were given to the encoder; this is not a faithful SETA continual-learning reproduction.
-- Next P0 candidate: MA-322 — TT-core Mirror adapter bank.
+- Next P0 candidate: MA-325 — tensorized embedding domain views.
 
 
 ## Completed: MA-299 — Split-on-Share Mirror code allocation
 
 - **FAIL for Mirror-specific value; adaptive allocation signal observed.** On a synthetic stream, threshold split all four novel tasks; adaptive storage used ~11.54 KB versus 20.59 KB independent sparse vectors with query NRMSE ~2.09e-7. Never-split was 3.30 KB but quality collapsed (NRMSE ~0.88). Generic PCA matched Mirror.
-- Next P0 candidate: MA-322 — TT-core Mirror adapter bank.
+- Next P0 candidate: MA-325 — tensorized embedding domain views.
 
 
 ## Completed: MA-301 — continuous Mirror supermask
 
 - **PROMISING, narrowly scoped:** on intentionally rank-2-aligned synthetic masks, Mirror used 16,750 B vs packed binary masks 32,847 B (~49% less) at query NRMSE 0.00854. A byte-matched generic logistic factorization had NRMSE 0.04798; PCA used more bytes and had NRMSE 0.158. Since the teacher masks were generated from the same rank-2 basis Mirror stores, this is not general SupSup/Piggyback or learned-task evidence.
-- Next P0 candidate: MA-322 — TT-core Mirror adapter bank.
+- Next P0 candidate: MA-325 — tensorized embedding domain views.
 
 
 ## Completed: MA-307 — Mirror code before PackNet physical allocation
 
 - **PROMISING, narrowly scoped synthetic screen:** Mirror with sparse fallback used 1,658 B and query NRMSE 0.000394 vs PackNet-style independent sparse storage at 9,358 B exact. It split four novel tasks; total physical values including shared basis/codes were ~482 vs 1,536. Robust generic shared-basis fit was close at 1,959 B / 0.000891. Teacher tasks were exactly generated from Mirror's basis with known codes; no trained PackNet or natural continual task evidence.
-- Next P0 candidate: MA-322 — TT-core Mirror adapter bank.
+- Next P0 candidate: MA-325 — tensorized embedding domain views.
 
 
 ## Completed: MA-311 — Mirror task code in random intrinsic subspace
 
 - **FAIL for practical gain:** aligned fresh tasks: Mirror 4,314 B / NRMSE 1.97e-5; generic PCA 4,424 B / 2.90e-7; direct intrinsic codes 4,510 B / 2.80e-7. Mirror's task-state bytes fall 81%, but total payload only 4.3% after charging U; fitting costs ~0.915 s / 800 updates vs <0.5 ms direct. On independent tasks, Mirror NRMSE ~0.843 while direct remains near exact.
-- Next P0 candidate: MA-322 — TT-core Mirror adapter bank.
+- Next P0 candidate: MA-325 — tensorized embedding domain views.
 
 
 ## Completed: MA-312 — shared intrinsic basis + many Mirror task coordinates
 
 - **FAIL:** on 64 aligned tasks, Mirror used 16,727 B / NRMSE 7.39e-6 vs direct intrinsic 20,624 B / 3.90e-7 and PCA 17,018 B / 2.89e-7. Total saving 18.9%, below the 20% gate; fitting cost ~0.463 s vs ~0.0036 s direct. Independent tasks require private coordinates (Mirror NRMSE ~0.971).
-- Next P0 candidate: MA-322 — TT-core Mirror adapter bank.
+- Next P0 candidate: MA-325 — tensorized embedding domain views.
 
 
 ## Completed: MA-314 — adaptive intrinsic-dimension allocation
 
 - **PROMISING narrowly:** fresh aligned variable-rank tasks: Mirror 8,557 B / NRMSE 3.78e-7 vs direct adaptive 9,110 B and PCA 9,352 B, with mean active dimension 15/32 and no private splits. Independent tasks triggered private fallback in 23/24 tasks; Mirror+private cost 12,978 B vs direct 9,926 B. Teacher is a constructed Givens orbit; random U dominates total bytes.
-- Next P0 candidate: MA-322 — TT-core Mirror adapter bank.
+- Next P0 candidate: MA-325 — tensorized embedding domain views.
 
 
 ## Completed: MA-319 — Tucker matrix-bank Mirror layer coefficients
 
 - **FAIL:** aligned Mirror used 16,699 B / NRMSE 5.03e-4 vs free Tucker 17,559 B / 2.93e-4 (4.9% saving, below gate); generic PCA used 16,887 B / 3.56e-4. Independent coefficients required free Tucker; Mirror NRMSE was 1.036. Shared bank dominated storage.
-- Next P0 candidate: MA-322 — TT-core Mirror adapter bank.
+- Next P0 candidate: MA-325 — tensorized embedding domain views.
 
 
 ## Completed: MA-320 — Tucker logical experts
 
 - **PROMISING, narrowly:** fresh aligned 128-expert bank: Mirror 4,555 B / routed NRMSE 4.95e-4 vs free Tucker 6,313 B / 2.97e-4 (~28% fewer bytes); generic PCA 4,867 B / 3.52e-4. Independent coefficients require free Tucker; Mirror NRMSE 1.037. Teacher is Givens-aligned; fixed router and no natural MoE evidence.
-- Next P0 candidate: MA-322 — TT-core Mirror adapter bank.
+- Next P0 candidate: MA-325 — tensorized embedding domain views.
+
+
+## Completed: MA-322 — TT-core Mirror adapter bank
+
+- **PROMISING narrowly:** aligned TT adapters: Mirror 509 B / NRMSE 5.90e-4 vs LoRETTA-style independent middle cores 2,355 B / 4.05e-4 and PCA 625 B / 4.05e-4. Independent cores are needed outside the Givens orbit; Mirror NRMSE 1.145. Synthetic only.
+- Next P0 candidate: MA-325 — tensorized embedding domain views.
