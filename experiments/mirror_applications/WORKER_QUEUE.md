@@ -315,7 +315,7 @@ Every experiment must isolate the extra Mirror parameter `m` beyond its strong n
 
 Read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08.md`, PA236..PA265 and the selected MA registry row.
 
-**MA-255 remains the canonical next worker candidate.** This queue must not preempt it or supersede its frozen protocol.
+**MA-616 is the next executable P0 after branch reconciliation.** MA-255–614 evidence is retained on dedicated branches; do not rerun completed candidates. Recheck the live registry and remote branches before selection.
 
 ## Twelfth research expansion — video, equivariance, spiking, physical optics, wireless and spatial audio
 
@@ -359,7 +359,7 @@ Read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_THIRTEENTH_SWEEP.
 
 **MA-1046..1095 are 50 new UNTESTED hypotheses** appended after earlier literature intakes and the original locked direct-prior queue. All comparisons study the marginal value of the extra Mirror parameter `m`; no new source-paper result is a Mirror result.
 
-**Current canonical next candidate: MA-255** (Parameter Superposition). Do not interrupt its frozen protocol, claim or branch.
+**Current executable next candidate: MA-616** (module-route × Mirror-view factorization; PA127), after checking dedicated branches through MA-614 and recording MA-594/596 outcomes. Do not rerun completed/paused candidates.
 
 Recommended high-information P0 studies **within this new family**:
 
