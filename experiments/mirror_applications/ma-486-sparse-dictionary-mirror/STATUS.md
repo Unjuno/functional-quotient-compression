@@ -5,7 +5,7 @@
 - Base commit: `7754a91f`
 - Protocol frozen: yes; development/fresh completed
 - Fresh: 3 worlds × 3 seeds
-- Verification: pending commit
+- Verification: yes (`2e8c9202`)
 
 H: Sparse shared-dictionary codes should reconstruct useful function vectors with substantially fewer actual bytes than dense functions.
 
