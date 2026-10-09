@@ -1,0 +1,62 @@
+{
+  "experiment_id": "MA-598",
+  "title": "Four hash-addressed logical experts over shared HashedNet buckets",
+  "status": "FROZEN_BEFORE_DEVELOPMENT",
+  "evidence_lane": "HASHEDNET_MOE/PA120_PA02/EXPERT_USEFULNESS/ROUTING/ACTUAL_BYTES",
+  "base_commit": "42faa8d4",
+  "dataset": "scikit-learn load_digits, fixed 8x8 grayscale digit features and labels",
+  "dataset_package_version": "1.8.0",
+  "dataset_tensor_sha256": "faf2d98f61250c1cdc0b114323133d3c58da04f5c5d28bb78e4bde3c936a75b1",
+  "task_construction": "Four expert roles use class group = digit_label mod 4; each expert is trained only on its group's examples and emits logits only for classes in that group. A supervised shared linear router predicts the group from the 64 input features. End-to-end quality uses router-selected top-1 expert; oracle-expert quality is reported separately.",
+  "model": "Four logical 64->128 ReLU->10 experts plus a shared 64->4 router; compression is restricted to expert first-layer matrices unless the method explicitly uses independent dense experts.",
+  "hypothesis": "One shared 2,048-bucket physical table plus small per-expert Mirror input Views can provide four useful logical expert functions at much lower actual bytes than independent hashed/dense experts, while improving quality over ordinary tied experts and native salted shared hashing.",
+  "physical_object": "Shared 2,048-value hash bucket vector, shared output projection, and router; independent experts have separate tables/weights",
+  "mirror_coordinate": "Thirty-two learned adjacent-pair Givens angles per expert, applied before the same shared hashed FFN",
+  "methods": [
+    "independent dense experts",
+    "independent 2,048-bucket expert tables with shared output projection",
+    "ordinary tied shared HashedNet expert",
+    "shared hash table with expert-specific native hash salts",
+    "shared hash table with expert-specific learned Givens Views (Mirror)",
+    "shared hash table with expert-specific diagonal input gates",
+    "shared hash table with expert-specific rank-one residuals"
+  ],
+  "hashing": {
+    "logical_matrix_shape": [64, 128],
+    "bucket_count": 2048,
+    "mapping": "Uniform bucket and independent +/-1 sign from NumPy PCG64. Shared-map methods use one deterministic map; salted and independent-table methods use deterministic expert-specific map seeds regenerated from paid 32-bit seeds.",
+    "collision_and_diversity_metrics": ["per-expert collision rate", "cross-expert bucket-map overlap", "expert first-layer cosine", "pre-mask expert-logit cosine"]
+  },
+  "training": {
+    "optimizer": "AdamW, lr 0.01, weight_decay 0",
+    "updates": 800,
+    "batch_size": 128,
+    "router_loss": "Cross entropy to y mod 4 on each full minibatch",
+    "expert_loss": "Sum of cross entropy for each expert on minibatch examples assigned to that expert; other classes masked from that expert's logits",
+    "input_scale": "digits pixels divided by 16",
+    "initialization": "Same frozen initialization code for all methods; expert-specific Givens start at zero, gates at one, rank-one factors at Gaussian std 0.01"
+  },
+  "development": {
+    "seeds": [59801, 59802],
+    "data_splits": "Stratified 75/25 train_test_split; random_state=run seed",
+    "selection": "No hyperparameter grid. Architecture, bucket count, training schedule and gates frozen before training."
+  },
+  "fresh": {
+    "seeds": [59811, 59812, 59813],
+    "data_splits": "Independent stratified splits of the same fixed load_digits corpus",
+    "locked_before_access": true,
+    "open_rule": "Run fresh splits only if both dev seeds satisfy the complete Mirror quality, byte and expert-usefulness gate."
+  },
+  "storage": {
+    "authority": "actual uncompressed NPZ inference payload bytes after load/serialize roundtrip",
+    "paid_objects": ["all physical hash tables or dense expert tensors", "shared output projection/biases", "router weights", "per-expert angles/gates/residuals", "per-expert hash seeds", "shape and method metadata"],
+    "deterministic_reconstruction": "Bucket indices/signs are regenerated from paid seeds and committed deterministic hash code; seed, method code, and schema are paid metadata."
+  },
+  "compute": {
+    "report": ["optimizer updates and examples", "active FFN/router MAC proxy", "hash expansion lookups", "number of experts executed at inference", "training wall time", "serialized inference wall time/examples per second", "CPU threads/device"]
+  },
+  "primary_metrics": ["router-selected top-1 accuracy and cross entropy", "oracle-expert accuracy", "router accuracy", "per-expert conditional accuracy/use", "actual payload bytes", "expert ablation and diversity"],
+  "success_gate": "Both dev seeds: Mirror top-1 accuracy is >=+1.0 percentage point over ordinary tied hash and salted shared-hash controls, within 2.0 points of independent dense experts, all four oracle experts have >=0.80 conditional accuracy and router uses each expert on >=10% of examples, Mirror bytes <=1.05x salted shared hash bytes, and no diagonal/rank-one control matches or beats Mirror within 1.0 point at <=1.10x Mirror bytes.",
+  "failure_gate": "Any quality/byte/usefulness gate miss or byte-near simple control matching Mirror is FAIL for the Mirror claim; fresh remains sealed.",
+  "boundaries": ["Four class-group experts over one small image task are not broad MoE capacity evidence", "Expert count is not independent capacity; conditional quality, routing, bytes, and compute decide usefulness", "One shared-table vs salt/view screen is mechanism evidence only", "Fixed-update training is not near-convergence capacity", "Learned Givens must beat the native per-expert salt and simple gate/residual controls"]
+}
