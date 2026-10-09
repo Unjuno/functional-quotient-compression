@@ -88,7 +88,7 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 **MA-334 — canonical-orbit storage + Mirror address (P1)**
 
-MA-333 confirms scale/sign transformations are activation-specific gauges. MA-334 tests the narrow coordinate-storage use case by measuring canonical representative recovery, bytes, and runtime.
+MA-332 and MA-333 consecutively found that gauge Views add no function and paid addresses add bytes. The weight-symmetry family is paused under the stop rule; see [family diagnostic](../../docs/phase2/MA332_333_WEIGHT_SYMMETRY_FAMILY_DIAGNOSTIC.md). Continue with **MA-341 — federated personalization Mirror code vs pFedHN full-model generation (P0)**.
 
 ## Active experiment
 

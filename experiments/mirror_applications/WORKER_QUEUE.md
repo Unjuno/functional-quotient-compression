@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-334.** MA-330 was PROMISING narrowly for synthetic aligned cache roles. MA-331 missed its Mirror-specific byte gate; MA-332 found permutation/positive-scale gauge views; MA-333 found positive scaling exact only for ReLU and sign flips exact only for tanh. Proceed to MA-334, canonical-orbit storage with a paid address.
+**Current operational pointer (2026-10-09): MA-341.** MA-332 and MA-333 consecutively found the same symmetry limitation: gauge Views do not add functions and paid addresses add bytes. The weight-symmetry family is paused pending a concrete coordinate consumer or useful non-gauge task result. Diagnostic: `docs/phase2/MA332_333_WEIGHT_SYMMETRY_FAMILY_DIAGNOSTIC.md`. Continue with MA-341, federated personalization.
 
 # Worker queue
 
