@@ -1,0 +1,27 @@
+{
+  "experiment_id": "MA-483",
+  "title": "Adaptive number of Mirror codebooks",
+  "status": "FROZEN_SCREENING",
+  "base_commit": "21c52609",
+  "evidence_lane": "ADAPTIVE_RATE_DISTORTION/ACTUAL_BYTES/ACTIVE_DEPTH/LATENCY",
+  "hypothesis": "A development-selected residual stopping rule can assign shorter Mirror code sequences to lower-complexity functions and preserve quality at lower aggregate serialized bytes than fixed-depth codes; a native RVQ stopping rule is the direct control.",
+  "physical_object": "one shared 16D basis and 4-stage additive decoder",
+  "mirror_coordinate": "per-function active residual stage count and one quantized phase index per active stage",
+  "logical_multiplicity": "128 functions with heterogeneous component counts",
+  "prior_art_refs": [92],
+  "controls": ["fixed-depth Mirror R=1,2,4", "adaptive Mirror depth selected by a development-only residual threshold", "native learned full-vector residual VQ with fixed and adaptive depth", "generic coefficient-table adaptive codes", "dense full vectors"],
+  "task": {
+    "type": "synthetic 16D function vectors with heterogeneous residual complexity",
+    "targets_per_bank": 128,
+    "teacher": "targets have 1, 2, or 4 nonzero orthogonal 2D phase components in a balanced shuffled mixture; amplitudes [1,.5,.25,.125]",
+    "sweeps": {"K": [8,16,32], "max_stages": [4], "thresholds": [0.0,0.01,0.03,0.06,0.1]},
+    "metrics": ["normalized reconstruction error", "serialized payload bytes", "per-function active stages", "stage-use distribution", "quality-rate curve", "encode/decode operations and latency"]
+  },
+  "development": {"worlds": [48300,48301], "seeds": [0,1,2], "allowed": "select one residual threshold per method from the registered sweep by minimum bytes subject to mean NRMSE <= 0.08; no fresh-dependent changes"},
+  "fresh": {"worlds": [48310,48311,48312], "seeds": [0,1,2], "locked_before_access": true},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["shared decoder/basis and scales", "all code indices and per-function active-depth metadata", "native/generic codebooks", "serializer metadata"]},
+  "compute": {"report_active_stage_MAC": true, "report_encoder_ops": true, "report_measured_encode_decode_latency": true},
+  "success_gate": "On every fresh world, adaptive Mirror mean NRMSE <=0.08 and <=80% of fixed-depth R4 Mirror bytes, with lower mean active stages than 4; compare against adaptive native RVQ at the same quality and generic coefficient control.",
+  "failure_gate": "Adaptive code savings fail the byte/quality gate, threshold does not select heterogeneous depths, or native/generic adaptive control matches or beats Mirror on quality-byte-compute frontier.",
+  "boundaries": ["Synthetic known orthogonal basis with heterogeneous component count only.", "This tests rate allocation, not independent capacity or natural audio codec performance.", "Threshold selected only on development worlds before fresh access."]
+}

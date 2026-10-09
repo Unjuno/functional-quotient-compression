@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-483",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-483-adaptive-rvq-depth/tests",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "18 payload rows cover 3 fresh worlds x 3 seeds x 2 methods.",
+    "Adaptive stored flat active codes plus per-function depth; all depth tensors and metadata included in serialized size.",
+    "Threshold sweep tied on development because all registered thresholds were below the smallest active component magnitude."
+  ]
+}
