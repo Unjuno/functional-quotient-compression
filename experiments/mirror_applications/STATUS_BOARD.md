@@ -1,6 +1,6 @@
 # Mirror Application Status Board
 
-Updated: 2026-10-08 JST
+Updated: 2026-10-09 UTC
 Integration branch: `research/mirror-application-current-evidence-20261008`; canonical baseline: `research/mirror-application-worker-ready-20261007`
 
 ## Program totals (reconciled from authoritative 1155-row registry)
@@ -9,7 +9,7 @@ Integration branch: `research/mirror-application-current-evidence-20261008`; can
 - P0: **630** (142 completed; 488 UNTESTED)
 - P1: **422** (22 completed; 400 UNTESTED)
 - P2: **103** (1 completed; 102 UNTESTED)
-- Current MA statuses: **990 UNTESTED, 44 PROMISING, 121 FAIL**
+- Current MA statuses: **989 UNTESTED, 45 PROMISING, 121 FAIL**
 - 48 experiment directories, complete with status/protocol/results/verification files, are represented in the current evidence set.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-268 is next.
@@ -194,4 +194,6 @@ KG relation rotations (RotatE, TuckER, QuatE, PairRE), EXIF/device-aware ISPs (P
 **MA-468 FAIL under quality/byte gates; private boundary measured:** in a four-skill bank, Mirror improved N6 held-out task NRMSE vs hard tying (0.375 vs 0.511) but was larger and much less accurate than the four-module bank (2,461B / 0.375 vs 2,209B / 8.98e-8). A private residual reduced error to 0.00101 but raised payload to 2,713B. View search used 184,832 MAC. A1 corrected the serialized full-bank routing map; initial worlds are excluded. **Next: MA-469.**
 
 
-**MA-469 FAIL:** for analytic rank-one edits, polar Mirror preserved edit and locality metrics but N64 serialized bytes were 3,105B vs 2,853B MEND factors (48.52 vs 44.58B/edit), missing the <=80% gate. Half-precision factors were smaller at 2,661B with 1.86e-4 edit error. The Mirror code re-encodes the same two-dimensional delta; no neural MEND evidence. **Next: MA-470.**
+**MA-469 FAIL:** for analytic rank-one edits, polar Mirror preserved edit and locality metrics but N64 serialized bytes were 3,105B vs 2,853B MEND factors (48.52 vs 44.58B/edit), missing the <=80% gate. Half-precision factors were smaller at 2,661B with 1.86e-4 edit error. The Mirror code re-encodes the same two-dimensional delta; no neural MEND evidence.
+
+**MA-470 PROMISING (scoped shared-basis storage only):** across three fresh worlds × three seeds, N64 Mirror+private reached mean edit NRMSE 2.0e-7 at 3,793B versus MEND-style per-edit rank-two factors at 54,847B. Mirror Views alone had mean NRMSE 0.324 on off-orbit edits. Generic independent four-atom basis matched quality at only 3,165B, so Mirror-specific value is not established. Coefficients were oracle least-squares projections in an analytic 8×8 screen, not learned MEND. **Next: MA-471, ROME rank-one update encoded as a View.**
