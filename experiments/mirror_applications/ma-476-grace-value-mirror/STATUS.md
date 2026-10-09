@@ -6,13 +6,13 @@
 - Protocol freeze: `5b178cdd`
 - Development complete: yes
 - Fresh/audit opened: yes, after protocol freeze
-- Results committed: yes (pending report commit SHA)
-- Verification committed: yes (pending report commit SHA)
+- Results committed: yes (`581bae90`)
+- Verification committed: yes (`581bae90`)
 - Registry row updated: yes (same report commit)
 
 ## Next action
 
-Run replay tests, update the registry and claim ledger, verify integrity, and push this branch.
+MA-476 is complete; continue with MA-478 on its dedicated branch.
 
 ## Limitations
 
