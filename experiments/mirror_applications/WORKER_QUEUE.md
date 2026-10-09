@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-312.** MA-307 showed an aligned synthetic allocation delay versus PackNet-style private storage; robust generic shared-basis fitting was close, and the teacher supplied Mirror latent codes. Continue to MA-312, shared intrinsic basis + many Mirror task coordinates.
+**Current operational pointer (2026-10-09): MA-314.** MA-307 showed an aligned synthetic allocation delay versus PackNet-style private storage; robust generic shared-basis fitting was close, and the teacher supplied Mirror latent codes. Continue to MA-314, adaptive intrinsic-dimension allocation.
 
 # Worker queue
 

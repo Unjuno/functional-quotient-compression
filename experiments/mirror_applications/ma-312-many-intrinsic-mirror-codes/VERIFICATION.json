@@ -1,19 +1,87 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
-  "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+  "experiment_id": "MA-312",
+  "decision": "FAIL: total-byte gate missed; generic PCA matches; compute regression and independent-task boundary",
+  "protocol_commit": "b8b3fb81",
+  "fresh_worlds": [
+    31210,
+    31211,
+    31212
+  ],
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "fresh_rows": 54,
+  "strata": {
+    "aligned": {
+      "generic_intrinsic_pca_rank2": {
+        "query_nrmse": 2.89025952800633e-07,
+        "total_payload_bytes": 17018.0,
+        "task_adaptation_bytes": 600.0,
+        "fit_seconds": 0.00032727211429220106,
+        "optimizer_updates": 0.0,
+        "examples_seen": 4096.0
+      },
+      "mirror_many_codes": {
+        "query_nrmse": 7.390523702750013e-06,
+        "total_payload_bytes": 16727.0,
+        "task_adaptation_bytes": 309.0,
+        "fit_seconds": 0.46343153433311574,
+        "optimizer_updates": 800.0,
+        "examples_seen": 3276800.0
+      },
+      "random_intrinsic_independent": {
+        "query_nrmse": 3.8980151531278454e-07,
+        "total_payload_bytes": 20624.0,
+        "task_adaptation_bytes": 4206.0,
+        "fit_seconds": 0.003571797333683612,
+        "optimizer_updates": 0.0,
+        "examples_seen": 4096.0
+      }
+    },
+    "independent": {
+      "generic_intrinsic_pca_rank2": {
+        "query_nrmse": 0.909702996412913,
+        "total_payload_bytes": 17018.0,
+        "task_adaptation_bytes": 600.0,
+        "fit_seconds": 0.0003891062240452609,
+        "optimizer_updates": 0.0,
+        "examples_seen": 4096.0
+      },
+      "mirror_many_codes": {
+        "query_nrmse": 0.9708727465735542,
+        "total_payload_bytes": 16727.0,
+        "task_adaptation_bytes": 309.0,
+        "fit_seconds": 0.459182483553175,
+        "optimizer_updates": 800.0,
+        "examples_seen": 3276800.0
+      },
+      "random_intrinsic_independent": {
+        "query_nrmse": 3.938749115503823e-07,
+        "total_payload_bytes": 20624.0,
+        "task_adaptation_bytes": 4206.0,
+        "fit_seconds": 0.003641969998069625,
+        "optimizer_updates": 0.0,
+        "examples_seen": 4096.0
+      }
+    }
   },
-  "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
-  },
-  "metric_replay": {
-    "checked": false,
-    "max_difference": null
-  },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "facts": [
+    "Aligned: Mirror 16,727 B, NRMSE 7.39e-6; direct independent coordinates 20,624 B / 3.90e-7; generic PCA 17,018 B / 2.89e-7.",
+    "Mirror total-payload saving vs direct is 18.9%, below frozen 20% gate; task adaptation state is 309 B vs 4,206 B direct (~92.7% smaller).",
+    "Mirror fit uses 800 updates / 3,276,800 example presentations and ~0.463 s; direct coordinate fitting uses 4,096 support examples once and ~0.00357 s.",
+    "Independent tasks: direct NRMSE ~3.94e-7, Mirror ~0.971, PCA ~0.910."
+  ],
+  "interpretation": "Amortizing the shared U over 64 aligned tasks makes task-code savings substantial but total bytes still miss the gate because U dominates. Generic PCA is nearly as compact and slightly more accurate with no iterative optimization. The Mirror orbit does not represent independent task coordinates.",
+  "hypothesis": "Not supported as a practical Mirror-specific Pareto improvement under the preregistered thresholds. Task-state compression alone does not deliver enough total storage savings here, and compute worsens markedly.",
+  "counter_hypothesis": "Larger task counts or a smaller/preexisting U amortization could move the total-byte frontier; an analytic fit could remove optimization cost. Not tested in this candidate.",
+  "limitations": [
+    "Synthetic linear tasks and random frozen projection",
+    "Aligned teacher generated from Givens orbit",
+    "N=64 only; no larger scaling curve",
+    "No pretrained LM, natural task, inference latency or training convergence study"
+  ],
+  "fresh_data_used_for_tuning": false,
+  "source_sha256": "b5122f8674ade0264e95263b5504f3d94bbc108175290ae8e17e637b87caa690"
 }

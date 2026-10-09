@@ -1,6 +1,6 @@
 # MA-312 — Shared intrinsic basis + many Mirror task coordinates
 
-Status: SCREENING. Prior art: PA33 intrinsic-dimensional fine-tuning.
+Status: FAIL. Prior art: PA33 intrinsic-dimensional fine-tuning.
 
 ## H
 
@@ -12,7 +12,7 @@ Synthetic regression, D=256, intrinsic d=32, 64 tasks; 64 support and 128 query 
 
 ## D
 
-Pending development/fresh runs.
+FAIL: fresh aligned tasks reproduce 18.9% total-payload savings, below the 20% gate. Mirror has NRMSE 7.39e-6 at 16,727 B; direct coordinates 3.90e-7 at 20,624 B; generic PCA 2.89e-7 at 17,018 B. Mirror fit is ~0.463 s / 800 updates versus ~0.0036 s direct. On independent tasks, Mirror NRMSE is ~0.971 and direct remains ~3.94e-7. Task-state bytes compress strongly but U dominates total bytes.
 
 ## C
 
@@ -23,3 +23,7 @@ Shared basis amortization can reduce task-state bytes while generic PCA matches 
 Synthetic linear regression only; no pretrained model or natural tasks.
 
 Development: on aligned tasks, Mirror query NRMSE is ~3.85e-6 and total payload 16,727 B vs independent coordinates 20,624 B (18.9% lower, just below the 20% gate); generic PCA is 17,018 B with similar quality. Marginal task state is 309 B Mirror vs 4,206 B direct, but shared U dominates total bytes. Mirror fit takes ~0.48 s / 800 updates versus ~3.8 ms direct. On independent tasks, Mirror NRMSE ~0.98, PCA ~0.91, while direct remains near exact. Fresh uses the locked conditions.
+
+## Fresh result / decision
+
+FAIL under the registered gate. Fresh total-payload saving is 18.9%, below 20%; generic PCA is nearly as compact and more accurate, and Mirror fit is about 126× slower than direct coefficients. The task-state reduction does not overcome shared-U bytes and optimization cost. Independent tasks need private intrinsic coordinates.
