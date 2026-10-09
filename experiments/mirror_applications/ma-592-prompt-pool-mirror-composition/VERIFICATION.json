@@ -1,1 +1,23 @@
-{"experiment_id":"MA-592","commit":null,"tests":{"command":null,"passed":null,"failed":null},"serialization":{"roundtrip_checked":false,"byte_exact":false},"metric_replay":{"checked":false,"max_difference":null},"fresh_split_integrity_checked":false,"notes":[]}
+{
+  "experiment_id": "MA-592",
+  "commit": null,
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-592-prompt-pool-mirror-composition/tests",
+    "passed": 2,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Same-seed full replay exactly reproduced NLL, route choices, metrics, and serialized pool/key payloads.",
+    "Mirror top-2 and native L2P top-2 share the exact weighted prompt array and identical NLL.",
+    "All NPZ payloads reopen; test file hash verified without loading examples."
+  ]
+}

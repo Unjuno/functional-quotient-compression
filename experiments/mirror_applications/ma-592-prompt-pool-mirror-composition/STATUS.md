@@ -1,18 +1,18 @@
 # MA-592 status
 
-- Status: SCREENING
+- Status: FAIL
 - Branch: `research/ma-592-prompt-pool-mirror-composition-20261009`
 - Base commit: `e6e7ddc8`
-- Development complete: no
-- Fresh/audit opened: no
-- Results committed: no
-- Verification committed: no
-- Registry row updated: yes (SCREENING)
+- Development complete: yes (both banks; same-seed replay exact)
+- Fresh/audit opened: no (composition misses quality/improvement gate and aliases native L2P)
+- Results committed: pending
+- Verification committed: pending
+- Registry row updated: pending
 
 ## Next action
 
-Freeze the implementation and run the two registered bank seeds; inspect routing and exact native equivalence before any fresh access.
+Commit verified FAIL and continue to next P0, MA-594.
 
-## Blockers
+## Decisions / rulings
 
-None.
+MA-591 prompt banks are reused as frozen inputs. Per-query weights/indices are transient and charged as 6 B/query. No fresh examples were loaded.
