@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-257.** MA-517 failed its ICL viability gate; MA-255 development metrics were invalidated by a broadcasting bug (fresh remained locked); MA-260 fresh metrics are exploratory because the runner trained every fresh evaluation on a hardcoded world. Continue at MA-257, the next executable P0 by registry order, with native Parameter Superposition as mandatory control. LoReFT remains deferred after MA-501/502 pending redesign.
+**Current operational pointer (2026-10-09): MA-258.** MA-257 FAIL: factorized coordinatewise unbinding used fewer bytes than explicit task vectors but had held-out NRMSE 2.54; generic factor tables were exact and smaller. MA-255 and MA-260 remain NOT ESTABLISHED due implementation defects. Continue at MA-258, the next available P0 in registry order; preserve native PSP as the required control.
 
 # Worker queue
 

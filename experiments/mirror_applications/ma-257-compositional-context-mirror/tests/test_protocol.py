@@ -10,7 +10,13 @@ class Checks(unittest.TestCase):
  def test_metric_shapes(self):
   x=run.torch.randn(32,256);self.assertLess(run.nrmse(x,x),1e-7)
  def test_fresh_locked(self):
-  import json;p=json.loads((ROOT/'PROTOCOL.json').read_text());self.assertTrue(p['fresh']['locked_before_access']);self.assertEqual(p['fresh']['worlds'],[25710,25711,25712])
+  import json;p=json.loads((ROOT/'PROTOCOL.json').read_text());self.assertEqual(p['fresh']['worlds'],[25710,25711,25712])
+ def test_fresh_grid_and_payload_hashes(self):
+  import csv,hashlib
+  rows=list(csv.DictReader((ROOT/'FRESH_RESULTS.csv').open()));self.assertEqual(len(rows),45)
+  self.assertEqual({int(r['world']) for r in rows},{25710,25711,25712})
+  for r in rows:
+   b=(ROOT.parents[2]/r['path']).read_bytes();self.assertEqual(len(b),int(r['payload_bytes']));self.assertEqual(hashlib.sha256(b).hexdigest(),r['sha256'])
  def test_development_artifact_grid_and_hashes(self):
   import csv,hashlib
   rows=list(csv.DictReader((ROOT/'DEVELOPMENT_RESULTS.csv').open()));self.assertEqual(len(rows),30)

@@ -1,13 +1,83 @@
 {
-  "experiment_id":"MA-257","title":"Factorized context superposition for held-out task combinations","status":"FROZEN_SCREENING","base_commit":"93801db6","evidence_lane":"PARAMETER_SUPERPOSITION/COMPOSITIONAL_TRANSFER/ACTUAL_BYTES/INTERFERENCE",
-  "prior_art_refs":[16],"task":{"type":"synthetic additive factor task vectors","dimension":256,"procedure_factors":8,"domain_factors":8,"train_combinations":48,"held_out_combinations":16,"train_mask":"(procedure+domain) mod 4 != 0; every factor occurs in training","metric":"relative vector NRMSE"},
-  "hypothesis":"Binding reusable procedure and domain factors separately to low-description contexts permits held-out pair composition with useful quality and lower bytes than independently superposing each complete task vector.",
-  "physical_object":"one shared superposition payload containing complete training tasks for native PSP, or two bound factor banks for compositional Mirror","mirror_coordinate":"deterministic Rademacher procedure and domain addresses; unbind each then add","logical_multiplicity":"64 procedure×domain task functions, 16 held out during factor estimation",
-  "controls":["explicit full task-vector bank","native PA16-style random task context over 48 training combinations","compositional Mirror with two separately bound factor banks","plain factor-table additive model","least-squares additive factor oracle"],
-  "development":{"worlds":[25700,25701],"seeds":[0,1,2],"allowed":"implementation and metric-shape checks only; no fresh selection or access"},
-  "fresh":{"worlds":[25710,25711,25712],"seeds":[0,1,2],"locked_before_access":true},
-  "storage":{"authority":"actual torch-serialized inference payload bytes, all contexts, factor state and metadata charged"},
-  "success_gate":"Every fresh world: Mirror held-out NRMSE <=0.20, at least 20% below native PSP held-out retrieval, and payload <=80% of explicit bank; report plain factor-table control for Mirror-specific value.",
-  "failure_gate":"Mirror held-out NRMSE >0.50 or no quality/byte benefit over generic factor table.",
-  "boundaries":["Synthetic additive factor family only; not arbitrary task-model composition.","Combination count is not capacity; held-out output error is primary.","If generic factor table matches Mirror, only factor sharing is supported, not Mirror-specific benefit."]
+  "experiment_id": "MA-257",
+  "title": "Factorized context superposition for held-out task combinations",
+  "status": "COMPLETED_FAIL",
+  "base_commit": "93801db6",
+  "evidence_lane": "PARAMETER_SUPERPOSITION/COMPOSITIONAL_TRANSFER/ACTUAL_BYTES/INTERFERENCE",
+  "prior_art_refs": [
+    16
+  ],
+  "task": {
+    "type": "synthetic additive factor task vectors",
+    "dimension": 256,
+    "procedure_factors": 8,
+    "domain_factors": 8,
+    "train_combinations": 48,
+    "held_out_combinations": 16,
+    "train_mask": "(procedure+domain) mod 4 != 0; every factor occurs in training",
+    "metric": "relative vector NRMSE"
+  },
+  "hypothesis": "Binding reusable procedure and domain factors separately to low-description contexts permits held-out pair composition with useful quality and lower bytes than independently superposing each complete task vector.",
+  "physical_object": "one shared superposition payload containing complete training tasks for native PSP, or two bound factor banks for compositional Mirror",
+  "mirror_coordinate": "deterministic Rademacher procedure and domain addresses; unbind each then add",
+  "logical_multiplicity": "64 procedure\u00d7domain task functions, 16 held out during factor estimation",
+  "controls": [
+    "explicit full task-vector bank",
+    "native PA16-style random task context over 48 training combinations",
+    "compositional Mirror with two separately bound factor banks",
+    "plain factor-table additive model",
+    "least-squares additive factor oracle"
+  ],
+  "development": {
+    "worlds": [
+      25700,
+      25701
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "allowed": "implementation and metric-shape checks only; no fresh selection or access"
+  },
+  "fresh": {
+    "worlds": [
+      25710,
+      25711,
+      25712
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual torch-serialized inference payload bytes, all contexts, factor state and metadata charged"
+  },
+  "success_gate": "Every fresh world: Mirror held-out NRMSE <=0.20, at least 20% below native PSP held-out retrieval, and payload <=80% of explicit bank; report plain factor-table control for Mirror-specific value.",
+  "failure_gate": "Mirror held-out NRMSE >0.50 or no quality/byte benefit over generic factor table.",
+  "boundaries": [
+    "Synthetic additive factor family only; not arbitrary task-model composition.",
+    "Combination count is not capacity; held-out output error is primary.",
+    "If generic factor table matches Mirror, only factor sharing is supported, not Mirror-specific benefit."
+  ],
+  "outcome_summary": {
+    "fresh_world_mean_heldout_nrmse": {
+      "mirror_factorized": 2.5414,
+      "native_psp": 6.9581,
+      "generic_factor_table": 0.0,
+      "oracle_factor_table": 0.0,
+      "explicit_full": 0.0
+    },
+    "mean_payload_bytes": {
+      "mirror_factorized": 20765,
+      "native_psp": 68837,
+      "generic_factor_table": 50857,
+      "oracle_factor_table": 18213,
+      "explicit_full": 67493
+    },
+    "interpretation": "Factor sharing reconstructs the known additive family, but coordinatewise Mirror unbinding loses task quality; the simpler generic factor table is exact and uses fewer bytes."
+  }
 }

@@ -1,0 +1,26 @@
+{
+  "experiment_id": "MA-257",
+  "commit": "pending final result commit",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-257-compositional-context-mirror/tests -v",
+    "passed": 6,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": false,
+    "byte_exact": true,
+    "note": "All 45 serialized payload sizes and SHA-256 hashes matched results."
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0,
+    "note": "Train/heldout metric summaries were recomputed directly from FRESH_RESULTS.csv."
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Fresh grid: worlds 25710-25712 \u00d7 seeds 0-2; 45 rows.",
+    "Mirror held-out NRMSE 2.5414; native PSP 6.9581; generic factor table and oracle 0.0.",
+    "Payload bytes Mirror/PSP/generic/oracle/explicit: 20,765/68,837/50,857/18,213/67,493.",
+    "FAIL is scoped to this coordinatewise additive-family screen."
+  ]
+}
