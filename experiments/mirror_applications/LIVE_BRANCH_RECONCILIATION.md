@@ -25,3 +25,5 @@ No fresh data were opened during reconciliation.
 MA-517 completed as a verified development FAIL: the no-intervention baseline was already high, product Views missed the frozen +0.10-vs-sum-and-difference gate, and native PCA products exactly matched all tested ranks. The 26 payload replay, metrics, split and extracted vectors are exact; fresh seeds remain sealed.
 
 MA-520 is a verified FAIL: rank-four FV distillation reduced FP32 storage but missed causal log-probability preservation and matched native PCA; per-vector int8 FVs were smaller and preserved quality. Amendment 1 corrected a bookkeeping error and retained pre-amendment outputs. Eight payloads replayed byte-exactly, metrics and teacher splits replayed exactly, and fresh seeds remained sealed.
+
+MA-521 completed as a verified development FAIL: the tanh compiler reduced query tokens by about 90%, but failed causal quality, storage and same-rank linear attribution gates. The direct-ICL token bank was smaller in bytes and had better held-out gold likelihood. Eight payload hashes and all metrics/splits/features replay exactly; fresh seeds remain sealed.
