@@ -23,3 +23,5 @@ No fresh data were opened during reconciliation.
 - MA-478 — FAIL for Mirror-specific attribution, research branch `research/ma-478-view-first-private-fallback-20261008`: shared-only RMSE 0.055; residual gate sent 16/256 private values to full-value storage, restoring heldout RMSE to zero with 49,350 actual bytes versus 99,485 explicit and 51,618 int8. Native PCA plus identical fallback exactly matched; fresh sealed.
 
 MA-517 completed as a verified development FAIL: the no-intervention baseline was already high, product Views missed the frozen +0.10-vs-sum-and-difference gate, and native PCA products exactly matched all tested ranks. The 26 payload replay, metrics, split and extracted vectors are exact; fresh seeds remain sealed.
+
+MA-520 is a verified FAIL: rank-four FV distillation reduced FP32 storage but missed causal log-probability preservation and matched native PCA; per-vector int8 FVs were smaller and preserved quality. Amendment 1 corrected a bookkeeping error and retained pre-amendment outputs. Eight payloads replayed byte-exactly, metrics and teacher splits replayed exactly, and fresh seeds remained sealed.
