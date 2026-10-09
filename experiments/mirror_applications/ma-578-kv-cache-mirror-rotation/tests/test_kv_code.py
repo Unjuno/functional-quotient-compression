@@ -21,3 +21,9 @@ def test_role_index_decodes_layer_head_and_kv_slot():
                 role=layer*16+head*2+slot
                 got=m.cache_role(caches,role)
                 assert np.all(got[0]==100*layer+slot)
+
+def test_signed_permutation_before_hadamard_is_nontrivial():
+    r=np.random.default_rng(11);x=r.normal(size=(4,64)).astype(np.float32);a=m.new_code(r);b=m.new_code(r)
+    qa,sa=m.qint4(m.rotate(x,a));qb,sb=m.qint4(m.rotate(x,b))
+    da=m.unrotate(m.dqint4(qa,sa),a);db=m.unrotate(m.dqint4(qb,sb),b)
+    assert not np.array_equal(da,db)

@@ -23,8 +23,9 @@ def fwht(x):
  return y
 def new_code(rng):return rng.choice(np.array([-1,1],np.int8),(BLOCKS,GROUP)),np.stack([rng.permutation(GROUP).astype(np.uint8) for _ in range(BLOCKS)])
 def rotate(x,code):
- s,p=code;z=fwht(x.reshape(*x.shape[:-1],BLOCKS,GROUP))*(1/np.sqrt(GROUP));z*=s
- return np.take_along_axis(z,np.broadcast_to(p,z.shape),axis=-1).reshape(x.shape)
+ s,p=code;z=x.reshape(*x.shape[:-1],BLOCKS,GROUP)*s
+ z=np.take_along_axis(z,np.broadcast_to(p,z.shape),axis=-1)
+ return (fwht(z)*(1/np.sqrt(GROUP))).reshape(x.shape)
 def basis(code):
  eye=np.eye(DIM,dtype=np.float32);return rotate(eye,code)
 def unrotate(x,code):return x@basis(code).T

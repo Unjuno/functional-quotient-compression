@@ -9,20 +9,84 @@
   "model_sha256": "3da388330e4549156d76b58d6d268c63cd005e9336b4f4d2d378421e7b7a33fd",
   "tokenizer_sha256": "c24618a1b3e6a38167beff1c72cffd126c3a66254347304b50547d12c5f25624",
   "dataset": "WikiText-2 raw from pytorch/examples word_language_model/data/wikitext-2",
-  "dataset_sha256": {"train.txt":"9e9fa1ad55b1c2c95b08e37dd8e653f638fac2c6de904b79e813611eefbc985f","valid.txt":"f0737ed31fc1329026e95cb8b98e19c2a182c39c240ab909dc31abf2f8af58e8","test.txt":"d790b833ef8cf03a90db7bf1271b7520b83c45ce07ba3c1a9699df81e239eca0"},
+  "dataset_sha256": {
+    "train.txt": "9e9fa1ad55b1c2c95b08e37dd8e653f638fac2c6de904b79e813611eefbc985f",
+    "valid.txt": "f0737ed31fc1329026e95cb8b98e19c2a182c39c240ab909dc31abf2f8af58e8",
+    "test.txt": "d790b833ef8cf03a90db7bf1271b7520b83c45ce07ba3c1a9699df81e239eca0"
+  },
   "hypothesis": "A four-entry shared codebook of exact orthogonal views can reduce the paid per-session int4 KV-cache payload versus independent role rotations while preserving next-token quality on held-out text.",
   "physical_object": "6-layer, 8-head Pythia KV cache; each evaluation cache stores a 64-token prefix for both K and V",
   "mirror_coordinate": "Layer x head x K/V role ID selecting an exact 64D block-Hadamard/sign/permutation rotation from a small codebook",
   "logical_multiplicity": "Different quantization coordinate roles for each layer/head/KV tensor using shared physical rotation codes",
-  "quantization": {"bits":4,"symmetric_levels":15,"group_size":32,"scale_storage":"FP16 per token/head/group"},
-  "calibration": {"split":"four 64-token prefixes sampled from WikiText-2 train per development seed","objective":"mean per-role relative K/V cache reconstruction error across calibration prefixes","candidate_count":16,"codebook_size":4,"selection":"greedy four-code fit then per-role nearest candidate assignment; held-out text is not used"},
-  "evaluation": {"dev_file":"valid.txt","fresh_file":"test.txt","prefix_tokens":64,"query_target_pairs_per_seed":16,"metric":"mean next-token NLL after one query token using the quantized cached prefix; report NLL delta versus FP16 and int4 identity"},
-  "development": {"worlds_or_seeds":[57801,57802],"selection_metric":"NLL delta, actual serialized one-session cache bytes, cache encode/decode time, online view operation proxy"},
-  "fresh": {"worlds_or_seeds":[57811,57812,57813],"locked_before_access":true},
-  "controls": ["FP16 KV cache","identity int4 KV cache","one global QuaRot code","independent best-of-16 code per layer/head/KV role","fitted shared codebook-4","random codebook-4","native shared codebook-4 selection"],
-  "storage": {"authority":"actual serialized one-session inference cache payload bytes","paid_objects":["all packed int4 K/V cache values for the 64-token prefix","all FP16 cache quantization scales","selected rotation code arrays or codebook","all layer/head/KV role IDs","cache shape, dtype, method and schema metadata"]},
-  "compute": {"optimizer_updates":0,"report_model_load_seconds":true,"report_calibration_prefill_and_code_search_seconds":true,"report_per-session_cache_encode_and_query_seconds":true,"report_added_online_rotation_operations":true,"report_total_wall_seconds":true},
-  "success_gate":"Both dev seeds: codebook-4 NLL delta <=0.05 nat/token versus FP16 and >=0.01 nat/token better than identity int4; NLL no more than 0.02 nat/token worse than independent best-of-16; serialized cache bytes <=0.90x independent; no exact native codebook alias.",
-  "failure_gate":"Any quality/storage miss or exact native shared-codebook parameter/output alias.",
-  "boundaries":["Prefix KV cache is quantized; the one-token query cache is not retained or quantized","Evaluation is next-token NLL for one query after a cached prefix, not full-sequence perplexity","CPU timing and operation proxy only; no optimized serving kernel or GPU latency claim","Fresh test.txt windows stay sealed after any dev gate miss or exact native alias"]
+  "quantization": {
+    "bits": 4,
+    "symmetric_levels": 15,
+    "group_size": 32,
+    "scale_storage": "FP16 per token/head/group",
+    "rotation_order": "apply per-block sign and permutation before the Hadamard transform; otherwise post-Hadamard signed permutations are quantizer symmetries and cannot alter error"
+  },
+  "calibration": {
+    "split": "four 64-token prefixes sampled from WikiText-2 train per development seed",
+    "objective": "mean per-role relative K/V cache reconstruction error across calibration prefixes",
+    "candidate_count": 16,
+    "codebook_size": 4,
+    "selection": "greedy four-code fit then per-role nearest candidate assignment; held-out text is not used"
+  },
+  "evaluation": {
+    "dev_file": "valid.txt",
+    "fresh_file": "test.txt",
+    "prefix_tokens": 64,
+    "query_target_pairs_per_seed": 16,
+    "metric": "mean next-token NLL after one query token using the quantized cached prefix; report NLL delta versus FP16 and int4 identity"
+  },
+  "development": {
+    "worlds_or_seeds": [
+      57801,
+      57802
+    ],
+    "selection_metric": "NLL delta, actual serialized one-session cache bytes, cache encode/decode time, online view operation proxy"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      57811,
+      57812,
+      57813
+    ],
+    "locked_before_access": true
+  },
+  "controls": [
+    "FP16 KV cache",
+    "identity int4 KV cache",
+    "one global QuaRot code",
+    "independent best-of-16 code per layer/head/KV role",
+    "fitted shared codebook-4",
+    "random codebook-4",
+    "native shared codebook-4 selection"
+  ],
+  "storage": {
+    "authority": "actual serialized one-session inference cache payload bytes",
+    "paid_objects": [
+      "all packed int4 K/V cache values for the 64-token prefix",
+      "all FP16 cache quantization scales",
+      "selected rotation code arrays or codebook",
+      "all layer/head/KV role IDs",
+      "cache shape, dtype, method and schema metadata"
+    ]
+  },
+  "compute": {
+    "optimizer_updates": 0,
+    "report_model_load_seconds": true,
+    "report_calibration_prefill_and_code_search_seconds": true,
+    "report_per-session_cache_encode_and_query_seconds": true,
+    "report_added_online_rotation_operations": true,
+    "report_total_wall_seconds": true
+  },
+  "success_gate": "Both dev seeds: codebook-4 NLL delta <=0.05 nat/token versus FP16 and >=0.01 nat/token better than identity int4; NLL no more than 0.02 nat/token worse than independent best-of-16; serialized cache bytes <=0.90x independent; no exact native codebook alias.",
+  "failure_gate": "Any quality/storage miss or exact native shared-codebook parameter/output alias.",
+  "boundaries": [
+    "Prefix KV cache is quantized; the one-token query cache is not retained or quantized",
+    "Evaluation is next-token NLL for one query after a cached prefix, not full-sequence perplexity",
+    "CPU timing and operation proxy only; no optimized serving kernel or GPU latency claim",
+    "Fresh test.txt windows stay sealed after any dev gate miss or exact native alias"
+  ]
 }
