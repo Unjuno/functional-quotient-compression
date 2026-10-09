@@ -2,7 +2,7 @@
 
 - Status: FAIL
 - Branch: `research/ma-502-loreft-task-mirror-codes-20261009`
-- Base: `807d8c15`; development and fresh complete
+- Base: `807d8c15`; verification commit `5f8f7947`; development and fresh complete
 
 H: Clustered LoReFT interventions can use compact discrete task codes.
 
