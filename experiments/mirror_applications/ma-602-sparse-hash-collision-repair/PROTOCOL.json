@@ -1,0 +1,86 @@
+{
+  "experiment_id": "MA-602",
+  "title": "Sparse private exception repair for harmful HashedNet collisions",
+  "status": "FROZEN_BEFORE_DEVELOPMENT",
+  "evidence_lane": "HASHEDNET/PA120/COLLISION_REPAIR/SPARSE_PRIVATE_STATE/ACTUAL_BYTES/CPU",
+  "base_commit": "c935a903",
+  "dataset": "sklearn.load_digits 1.8.0, normalized 8x8 pixel vectors; fixed tensor SHA-256 faf2d98f61250c1cdc0b114323133d3c58da04f5c5d28bb78e4bde3c936a75b1",
+  "model": "64->128 ReLU->10 MLP; compressed first-layer matrix only",
+  "hypothesis": "Allocating one private residual to each duplicate logical connection caused by 2,048-bucket hashing, optionally with a 32-angle Givens Mirror View, recovers most of the quality of a native 4,096-bucket HashedNet at no more actual bytes, and beats same-count random exception placement.",
+  "methods": [
+    "dense independent upper control",
+    "native hash2048",
+    "native hash4096",
+    "hash2048 plus 32-angle Givens only",
+    "hash2048 plus collision-selected private residuals",
+    "hash2048 plus collision residuals and Givens",
+    "hash2048 plus same-count random residuals and Givens",
+    "hash2048 plus rank-one residual"
+  ],
+  "exception_selection": "For each deterministic 2,048 map, within each bucket keep the first row-major logical connection in the shared table and allocate a private value for every subsequent connection. Index positions are serialized as uint16 and charged; residual values are FP16. Random control uses the exact same count, deterministic seed, and serialized index dtype.",
+  "mirror_coordinate": "Learned 32-angle adjacent-pair Givens input View, identity initialized, applied before hashed first-layer projection.",
+  "training": {
+    "optimizer": "AdamW",
+    "learning_rate": 0.01,
+    "updates": 800,
+    "batch_size": 128,
+    "weight_decay": 0,
+    "input_scale": "pixels / 16",
+    "initialization": "fixed per-seed/method; matched batches per seed and method index",
+    "batch_order": "Same deterministic minibatch index sequence for every method within a seed."
+  },
+  "development": {
+    "seeds": [
+      60201,
+      60202
+    ],
+    "selection": "No tuning grid; exception selection, model, optimizer, updates and gates fixed before training."
+  },
+  "fresh": {
+    "seeds": [
+      60211,
+      60212,
+      60213
+    ],
+    "locked_before_access": true,
+    "open_rule": "Only if both dev seeds pass all quality, bytes and random-exception gates."
+  },
+  "storage": {
+    "authority": "actual NPZ inference payload bytes after serialization and reload",
+    "paid_objects": [
+      "hash bucket vector",
+      "exception positions and residual values",
+      "Givens angles or rank-one factors",
+      "second layer and biases",
+      "hash seed, shapes, method/schema metadata"
+    ],
+    "deterministic_reconstruction": "Only hashed bucket maps are regenerated from paid seed and committed code; exception indices are explicitly serialized and charged."
+  },
+  "compute": {
+    "report": [
+      "optimizer updates/examples",
+      "base matmul MAC proxy",
+      "hash map expansion lookup count",
+      "exception scatter count",
+      "Givens operations",
+      "training wall time",
+      "serialized inference throughput",
+      "CPU threads"
+    ]
+  },
+  "primary_metrics": [
+    "heldout accuracy and cross entropy",
+    "actual serialized bytes",
+    "exception count and bytes",
+    "comparison to random same-count exceptions and hash4096",
+    "training and inference compute"
+  ],
+  "success_gate": "Both dev seeds: collision-residual+Givens accuracy >= hash2048 +1.0pp and >= same-count random-residual+Givens +1.0pp; within 1.0pp of hash4096; payload <= hash4096; no-view collision residual is reported separately for Mirror attribution.",
+  "failure_gate": "Any quality or byte gate miss is FAIL; fresh remains sealed. If no-view collision residual matches the Givens variant within 0.5pp, sparse-repair may be useful but the Mirror-specific contribution is not established.",
+  "boundaries": [
+    "Small digits classification screen",
+    "Exception count is not logical capacity",
+    "Fixed-update learning efficiency is not near-convergence capacity",
+    "No language-model/GPU-kernel claim"
+  ]
+}
