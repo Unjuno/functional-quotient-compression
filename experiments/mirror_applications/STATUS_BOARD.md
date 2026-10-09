@@ -9,7 +9,7 @@ Integration branch: `research/ma-470-mend-shared-mirror-edit-basis-reconciled-20
 - P0: **630** (155 completed; 475 UNTESTED)
 - P1: **422** (23 completed; 399 UNTESTED)
 - P2: **103** (1 completed; 102 UNTESTED)
-- Current MA statuses: **974 UNTESTED, 51 PROMISING, 130 FAIL**
+- Current MA statuses: **973 UNTESTED, 51 PROMISING, 131 FAIL**
 - 48 experiment directories, complete with status/protocol/results/verification files, are represented in the current evidence set.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-268 is next.
