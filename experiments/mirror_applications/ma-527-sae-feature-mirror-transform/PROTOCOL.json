@@ -22,6 +22,8 @@
   "physical_object": "one pinned Pythia-70m and its shared 2048-atom layer-3 SAE",
   "mirror_insertion": "Apply a fixed sparse pairwise Givens transform to each sparse SAE activation vector before tied-decoder reconstruction; only angles and sparse activation codes vary by task.",
   "mirror_coordinate": "up to 16 FP16 Givens angles in a 32-dimensional active feature subspace; all transformed nonzeros, indices, angles, and metadata are charged.",
+  "mirror_angle_pattern": "For scale s, shared angle theta_j=s*sin(2*pi*(j+1)/17), j=0..15. Pairwise rotate consecutive coordinates of the fit-selected 32-feature code bank. Apply to each task's SAE code, then retain the 8 largest absolute rotated coefficients and decode with original bank atoms. No held-out vector fits the shared angles.",
+  "feature_bank": "Select the 32 SAE feature IDs with the largest aggregate positive encoder activations across fit task IDs 0-11 only. The untransformed shared-bank control uses top-eight absolute activations over this same bank.",
   "logical_multiplicity": "four held-out relation-function residual interventions",
   "controls": [
     "No intervention",
@@ -42,7 +44,7 @@
     "fresh_open_rule": "Open only after both dev seeds meet the quality, sparsity, and byte gates; freeze all transform and scale settings before opening. Fresh IDs and seeds are fixed here."
   },
   "development": {
-    "allowed_selection": ["Givens angle scale in {0.05,0.1,0.2,0.4}", "intervention scale in {0.25,0.5,1.0}"],
+    "allowed_selection": ["Givens pattern scale in {0.05,0.1,0.2,0.4}", "intervention scale in {0.25,0.5,1.0}"],
     "optimizer_updates": 0,
     "selection_metric": "mean dev gold-token log-probability uplift subject to sparsity and byte gates",
     "changes_after_run": "prohibited without numbered amendment"

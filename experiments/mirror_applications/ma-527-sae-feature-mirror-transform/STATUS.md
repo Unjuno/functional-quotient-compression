@@ -3,7 +3,7 @@
 - Status: SCREENING
 - Branch: `research/ma-527-sae-mirror-transform-20261009`
 - Base commit: `c935a903`
-- Protocol frozen before development: yes
+- Protocol frozen before development: yes; angle pattern and bank selection clarified before any data extraction
 - Development complete: no
 - Fresh/audit opened: no
 - Results committed: no
