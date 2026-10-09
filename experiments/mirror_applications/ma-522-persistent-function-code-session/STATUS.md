@@ -3,6 +3,7 @@
 - Status: SCREENING
 - Branch: `research/ma-522-persistent-function-code-session-20261009`
 - Base: `04de540c`
+- Development accounting complete: yes
 - Fresh opened: no
 
 ## H / T / D / C / U
