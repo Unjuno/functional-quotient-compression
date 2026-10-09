@@ -1,0 +1,24 @@
+{
+  "experiment_id": "MA-368",
+  "commit": "4db10d4",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-368-factorized-width-depth-mirror/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Both development seeds produced actual deterministic ZIP/NPY FP16 inference payloads for four methods.",
+    "All eight payload sizes and SHA-256 digests were verified; reloaded validation/test metrics replayed exactly over all 16 configurations.",
+    "The initial seed 36801 implementation had an empty held-out metric aggregation due list-versus-tuple comparison; the defect was caught by replay verification before the run was accepted, fixed, and seed 36801 rerun with the preregistered protocol. Only the corrected run is stored.",
+    "Fresh IDs 36811, 36812, 36813 were not executed because the development gate failed."
+  ]
+}
