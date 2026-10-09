@@ -6,9 +6,9 @@
 - Protocol frozen before fresh: yes (`8701d3b2`)
 - Development complete: yes; 400 common optimizer steps selected
 - Fresh/audit opened: yes; A1 timing-only rerun across 3 worlds × 3 seeds × 2 residual regimes
-- Results committed: pending
-- Verification committed: pending
-- Registry row updated: pending
+- Results committed: yes (`96b6cad5`)
+- Verification committed: yes
+- Registry row updated: yes after verification
 
 ## Decision
 
@@ -24,7 +24,7 @@
 
 ## Next action
 
-Commit report and verification, update the MA-503 registry/claim/board, run registry integrity, then continue to MA-504.
+Continue to MA-504 on its own dedicated research branch.
 
 ## Blockers
 

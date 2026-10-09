@@ -6,10 +6,10 @@ Integration branch: `research/ma-470-mend-shared-mirror-edit-basis-reconciled-20
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (155 completed; 475 UNTESTED)
+- P0: **630** (160 completed; 470 UNTESTED)
 - P1: **422** (23 completed; 399 UNTESTED)
 - P2: **103** (1 completed; 102 UNTESTED)
-- Current MA statuses: **973 UNTESTED, 51 PROMISING, 131 FAIL**
+- Current MA statuses: **971 UNTESTED, 52 PROMISING, 132 FAIL**
 - 48 experiment directories, complete with status/protocol/results/verification files, are represented in the current evidence set.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-268 is next.
@@ -23,7 +23,7 @@ Integration branch: `research/ma-470-mend-shared-mirror-edit-basis-reconciled-20
 
 ## Next candidate
 
-**MA-503 — factorized layer x task representation code (P0)**
+**MA-504 — token-conditioned Mirror ReFT (P0)**
 
 **MA-494 PROMISING (scoped synthetic noisy-address robustness):** with 32 expert IDs at bit-flip p=.1, binary accuracy was .591, ECOC-11 .816, and 3x repetition .868. Payloads were 2,149B / 2,277B vs 1,957B binary, with noiseless accuracy 1.0. Repetition beats ECOC; no Mirror-specific advantage or task-level routing benefit is established. **Next: MA-498 (P0).**
 
@@ -233,3 +233,6 @@ KG relation rotations (RotatE, TuckER, QuatE, PairRE), EXIF/device-aware ISPs (P
 
 
 **MA-502 FAIL:** in 64D synthetic tasks, shared FP16 codes used 3,809B at NRMSE .00018; VQ Mirror used 3,677B but error was .0927 (> .05); dense used 18,025B exact. A 132B saving did not justify quality loss. Pretrained-model downstream quality is untested.
+
+
+**MA-503 PROMISING (aligned synthetic representation-space orbit only):** at rho=0, layer Givens View + task code used 3,617B with mean heldout NRMSE 1.6e-6 (max 1.21e-5), versus 6,949B direct LoReFT pair coefficients and 4,065B generic full layer matrices (NRMSE 2.22e-5). At rho=.1, Mirror error rose to .171-.201. CPU decode was ~3.2x slower than generic; no pretrained/natural ReFT evidence. **Next: MA-504.**

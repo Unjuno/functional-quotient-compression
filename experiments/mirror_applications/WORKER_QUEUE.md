@@ -1,8 +1,8 @@
-**Current operational pointer (2026-10-09): MA-503.** MA-501 and MA-502 failed their synthetic representation-space quality thresholds. Continue with factorized layer x task codes and native controls.
+**Current operational pointer (2026-10-09): MA-504.** MA-501/502 failed their synthetic quality thresholds; MA-503 showed scoped storage/quality gains on a Givens-aligned orbit but slower CPU decode. Continue with token-conditioned ReFT and simple conditional-affine controls.
 
 # Worker queue
 
-**Current operational pointer (2026-10-09): MA-503.** MA-436/438 and MA-482 show scoped synthetic quality/storage Pareto points; findings remain bounded by their controls and tasks. Continue with factorized LoReFT layer/task codes.
+**Current operational pointer (2026-10-09): MA-504.** MA-436/438, MA-482 and MA-503 show scoped synthetic quality/storage Pareto points; findings remain bounded by their controls and tasks. Continue with token-conditioned representation Views.
 
 The queue is derived from `IDEA_REGISTRY.csv`. The registry is authoritative.
 
