@@ -6,7 +6,7 @@
 - Protocol frozen before fresh: yes
 - Development complete: yes; tau=0 selected (threshold sweep tied)
 - Fresh complete: yes; 3 worlds × 3 seeds
-- Results/verification: yes (`529b4348`)
+- Results/verification: yes (`529b4348`); artifact replay test passed (1/1)
 
 ## Decision
 
@@ -22,4 +22,4 @@ U: Native adaptive RVQ, entropy coding, larger N, and unknown residual structure
 
 ## Next action
 
-Run artifact tests, record FAIL in registry/claim ledger/board, integrity check, push this branch, then start the next untested P0 in registry order.
+Complete. Next: MA-484 — VQ logical expert codebook, on its dedicated branch.

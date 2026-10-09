@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-482.** MA-481 found substantial continuous-address byte savings but failed the paraphrase recall gate on a crowded orbit; VQ alternatives collided. Continue with residual-code composition and full rate-distortion controls.
+**Current operational pointer (2026-10-09): MA-484.** MA-482 established a scoped synthetic residual-code rate-distortion result; MA-483 missed its fixed-depth byte gate (96% of fixed payload). Continue with the VQ logical expert codebook and actual collision/quality controls.
 
 # Worker queue
 
