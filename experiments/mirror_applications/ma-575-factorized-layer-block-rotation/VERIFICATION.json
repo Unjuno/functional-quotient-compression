@@ -1,11 +1,30 @@
 {
-  "status": "PENDING",
+  "status": "FAIL",
   "base_commit": "b892d78e",
+  "final_source_commit": "3e95be00",
   "protocol_frozen_before_registered_worlds": true,
-  "fresh_opened": false,
+  "amendments": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "final_source_sha256": "0cc73df55feefa0ffb625a2e41ea20a07ed1da8d309e1f401840a538bf5a2bec",
+  "final_source_matches_amendment_4": true,
+  "registered_dev_seeds": [
+    57501,
+    57502
+  ],
+  "fresh_seeds_opened": false,
   "checks": {
-    "unit_tests": "pending",
-    "registered_dev_seeds": "unopened",
-    "fresh_opened": false
-  }
+    "unit_tests": "4 passed",
+    "actual_serialized_bytes": "verified against NPZ stat sizes for all methods/seeds",
+    "native_factor_alias": "exact numerical payload arrays and factor IDs; method-label metadata differs",
+    "registry_integrity": "0 errors; 1155 candidates; 228 claims"
+  },
+  "notes": [
+    "Independent quality and code-byte gates pass in both dev seeds.",
+    "Mirror-specific gate fails due exact native BOFT-style factor-control alias; random factor quality is equal for 9 fewer bytes.",
+    "Four documented amendments preserve the fixed hypothesis, data split, gates, and registered seeds; earlier incomplete/invalid attempts are excluded."
+  ]
 }

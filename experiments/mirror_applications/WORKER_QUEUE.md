@@ -472,4 +472,7 @@ The 1155-row worker-ready registry was reconciled against fetched `origin/resear
 
 ## Current handoff — 2026-10-09
 
-MA-574 is **NOT ESTABLISHED** because its recorded frozen source digest mismatch the committed source (the protocol digest matches) and same-seed diagnostic replays select different codebook IDs than the artifacts labeled registered development. Fresh stayed sealed. See `ma-574-spinquant-rotation-codebook/RESULTS.md` and `ARTIFACT_PROVENANCE.json`. MA-575 is now active on research/ma-575-factorized-layer-block-rotation-20261009 (factorized layer × block rotation code; PA113/PA21); protocol/source frozen before dev.
+MA-574 is **NOT ESTABLISHED** because its recorded frozen source digest mismatch the committed source (the protocol digest matches) and same-seed diagnostic replays select different codebook IDs than the artifacts labeled registered development. Fresh stayed sealed. See `ma-574-spinquant-rotation-codebook/RESULTS.md` and `ARTIFACT_PROVENANCE.json`. MA-575 closed FAIL on research/ma-575-factorized-layer-block-rotation-20261009 (factorized layer × block rotation; PA113/PA21): independent quality/bytes passed, but native factor selection aliases exactly and random factors tie quality for 9 B fewer. Fresh sealed; see report.
+
+
+MA-575 is closed **FAIL**: factorized layer×block code saves 10,914 B versus independent with equal dev heldout NRMSE, but aliases native BOFT-style factor selection; random factor ties quality at 9 B fewer. Fresh sealed. Next executable P0: MA-576 SmoothQuant scaling + residual Mirror rotation (PA114/PA112).

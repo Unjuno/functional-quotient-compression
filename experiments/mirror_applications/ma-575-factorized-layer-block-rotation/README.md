@@ -1,6 +1,6 @@
 # MA-575 — Factorized layer × block rotation code
 
-Status: SCREENING
+Status: FAIL
 Prior art: PA113 SpinQuant; PA21 BOFT
 
 ## H

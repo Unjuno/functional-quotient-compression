@@ -1,1 +1,1 @@
-SCREENING — protocol and source are frozen; registered development pending; fresh seeds sealed.
+FAIL — both registered dev seeds pass quality/bytes against independent matrix×block storage, but fitted factor state exactly aliases native BOFT-style shared-factor control; random factors tie quality and use 9 B fewer. Fresh sealed. See `RESULTS.md`.
