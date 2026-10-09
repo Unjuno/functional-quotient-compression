@@ -1,0 +1,104 @@
+{
+  "experiment_id": "MA-454",
+  "title": "Context router predicts continuous Mirror code",
+  "status": "FROZEN_A1",
+  "evidence_lane": "CONTINUOUS_ROUTING/QUALITY/BYTES/COMPUTE",
+  "base_commit": "70d8c1bd",
+  "hypothesis": "A learned linear context-to-code router over one shared nonlinear block will recover held-out task functions with less actual payload than a same-dimension generic hypernetwork and a discrete prototype router, without worse query quality.",
+  "physical_object": "one fixed shared tanh nonlinear block",
+  "mirror_coordinate": "two continuous coefficients (scale, shift) predicted from a fixed four-value context sketch",
+  "logical_multiplicity": "one logical nonlinear function per context",
+  "prior_art_refs": [
+    81,
+    82
+  ],
+  "controls": [
+    "shared block without adaptation",
+    "discrete K=8 prototype router from MA-453",
+    "linear 4-to-2 generic hypernetwork",
+    "independent two-parameter per-task fit"
+  ],
+  "task": {
+    "type": "synthetic nonlinear regression y=tanh(a*x+b)",
+    "support_examples": 32,
+    "query_examples": 256,
+    "context": "mean(x), mean(y), mean(x*y), mean(y^2) from support only",
+    "worlds_development": [
+      45400,
+      45401
+    ],
+    "worlds_fresh": [
+      45410,
+      45411,
+      45412
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "tasks_per_world_seed": 64
+  },
+  "development": {
+    "allowed": [
+      "compare raw and standardized context normalization",
+      "select ridge coefficient from [0.001,0.01,0.1,1.0]"
+    ],
+    "selection_metric": "minimum dev code RMSE; all candidates logged before fresh access"
+  },
+  "fresh": {
+    "locked_before_access": true,
+    "task_ids": [
+      5000,
+      5063
+    ],
+    "worlds": [
+      45420,
+      45421,
+      45422
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "exploratory_excluded": {
+      "worlds": [
+        45410,
+        45411,
+        45412
+      ],
+      "reason": "Initial script skipped preregistered development comparison over context normalization and ridge choices; those outputs are retained but excluded from the decision."
+    }
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "shared block or prototype bank",
+      "context normalizer",
+      "router matrix and bias",
+      "per-task context/code when persistent",
+      "metadata"
+    ],
+    "amortization_N": [
+      1,
+      20,
+      64
+    ]
+  },
+  "compute": {
+    "report_support_feature_MAC": true,
+    "report_router_MAC": true,
+    "report_block_MAC": true,
+    "report_query_wall": true,
+    "report_training_updates": true
+  },
+  "success_gate": "On every fresh world, continuous Mirror routing improves NRMSE by at least 10% over discrete K=8 routing, and at N=20 payload is no larger than both discrete routing and generic hypernetwork; report independent fit as upper control.",
+  "failure_gate": "Generic hypernetwork matches/beats Mirror at equal or fewer bytes, discrete routing matches at equal/fewer bytes, Mirror misses per-world quality gate, or learned router fails to beat the no-adaptation baseline.",
+  "boundaries": [
+    "Fixed synthetic context-to-function screen only.",
+    "Context contains support-derived summary features; no task ID or teacher coefficients exposed.",
+    "Does not establish transformer or natural multi-task performance."
+  ],
+  "amendment_A1": "After discovering the first fresh run did not execute the registered development selection, excluded worlds 45410-45412 as exploratory. Implemented and froze the full normalization/ridge sweep before opening replacement fresh worlds."
+}
