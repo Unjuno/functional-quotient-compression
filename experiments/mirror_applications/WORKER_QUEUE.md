@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-297.** MA-296 failed: Hadamard address and generic QR matched raw task deltas but did not reduce actual payload bytes; unbound sum was smaller but had high query error. Continue to MA-299, Split-on-Share Mirror code allocation.
+**Current operational pointer (2026-10-09): MA-299.** MA-297 showed shared-subspace compression versus shared/private storage, but generic PCA matched the Mirror code. Continue to MA-299, Split-on-Share Mirror code allocation.
 
 # Worker queue
 

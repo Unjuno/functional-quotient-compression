@@ -156,7 +156,7 @@ KG relation rotations (RotatE, TuckER, QuatE, PairRE), EXIF/device-aware ISPs (P
 ## Completed: MA-296 — orthogonalized task-vector Mirror superposition
 
 - **FAIL** on fresh synthetic linear tasks: Hadamard address and generic QR both reconstruct at ~2e-6 query NRMSE, but use 16,735/16,744 B versus 16,473 B raw task vectors. Unbound sum uses 2,131 B but query NRMSE is ~2.52. No Mirror-specific gain; random PSP unbinding control also has substantial crosstalk. See claim ledger.
-- Next P0 candidate: MA-297 — SETA shared sparse subspace + Mirror views.
+- Next P0 candidate: MA-299 — Split-on-Share Mirror code allocation.
 
 
 ## Completed: MA-297 — SETA shared sparse subspace + Mirror views
