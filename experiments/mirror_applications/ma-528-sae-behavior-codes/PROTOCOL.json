@@ -1,0 +1,111 @@
+{
+  "experiment_id": "MA-528",
+  "title": "Residual-selected shared SAE basis with behavior-specific sparse codes",
+  "status": "SCREENING",
+  "evidence_lane": "SAE_FEATURE_DICTIONARY_SELECTION/BEHAVIOR_CODES/CAUSAL_QUALITY/SPARSE_LIST_BYTES",
+  "base_commit": "58a1d5f27353c5f45910e1de83567e840fe37fe7",
+  "hypothesis": "On four held-out relation behaviors in pinned Pythia-70m, a shared 64-atom SAE basis selected by residual reduction on tasks 0-11 and 16-coefficient behavior codes will preserve explicit-FV quality within .10 gold-logprob nats/.05 accuracy, use <=.95x the actual bytes of global per-behavior SAE OMP16 lists, and beat the same-size aggregate-activation pool OMP16 control by >=.10 nats on both development seeds.",
+  "physical_object": "Pinned Pythia-70m and pretrained tied 2048-atom layer-3 SAE dictionary.",
+  "mirror_coordinate": "Per-behavior 16-term sparse coefficient code indexed into one shared fit-selected 64-atom SAE pool.",
+  "logical_multiplicity": "Sixteen support-derived relation interventions represented as sparse behavior codes over one shared feature pool; heldout behaviors 12-15 were excluded from pool selection.",
+  "prior_art_refs": [
+    "PA102"
+  ],
+  "artifacts": {
+    "model": "EleutherAI/pythia-70m-deduped revision e93a9faa9c77e5d09219f6c868bfc7a1bd65593c, weights SHA-256 3da388330e4549156d76b58d6d268c63cd005e9336b4f4d2d378421e7b7a33fd.",
+    "sae": "Elriggs/pythia-70M-deduped-sae revision 36c2027509efad69836aa4231999c9b717848ecd, layer3.pt SHA-256 85b57dfe34d19769e2df0e208e38fda8815da8493c56b703a99ff74cc610dbf4, 4,204,391 B.",
+    "tasks": "Reuse MA-516 task sets, support splits, layer-4 FVs and causal evaluator."
+  },
+  "task": {
+    "fit_task_ids": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "heldout_task_ids": [
+      12,
+      13,
+      14,
+      15
+    ],
+    "support_examples_per_task": 8,
+    "primary_metric": "mean held-out gold candidate log probability",
+    "secondary_metrics": [
+      "top-1 accuracy",
+      "gold margin",
+      "FV relative RMSE/cosine",
+      "active nonzero coefficients",
+      "actual incremental and standalone bytes",
+      "compute proxy",
+      "coding and inference wall time"
+    ]
+  },
+  "view": {
+    "shared_pool_size": 64,
+    "pool_selection": "Initialize residuals to the 12 fit-task FVs. For 64 rounds choose the SAE encoder atom with maximum summed absolute normalized correlation to current residuals over tasks 0-11; stable lowest-index tie break; greedily subtract each task's projection. No heldout vectors contribute.",
+    "behavior_code": "Run deterministic signed matching pursuit for exactly 16 distinct atoms from the selected 64-atom pool for each task; coefficients are FP32. Stable argmax tie break. Decode as the sum of selected SAE atom rows times coefficients.",
+    "selection": "No rank, pool size, atom count or threshold tuning."
+  },
+  "controls": [
+    "No intervention",
+    "Explicit FP32 FV bank",
+    "Per-behavior global SAE signed OMP16 sparse lists over all 2048 atoms",
+    "Aggregate positive SAE-activation top64 pool plus OMP16 (MA-526 selection baseline at matched code sparsity)",
+    "Independent full-FV upper reference"
+  ],
+  "development": {
+    "seeds": [
+      52801,
+      52802
+    ],
+    "changes_after_run": "prohibited without numbered amendment"
+  },
+  "fresh": {
+    "seeds": [
+      52811,
+      52812,
+      52813
+    ],
+    "locked_before_access": true,
+    "opened": false,
+    "opening_rule": "Only if both dev seeds meet explicit-FV quality, actual-byte and aggregate-pool attribution gates."
+  },
+  "storage": {
+    "authority": "actual uncompressed NPZ bytes",
+    "paid_objects": [
+      "64 shared global feature IDs",
+      "per-behavior local code indices",
+      "all FP32 sparse coefficients",
+      "task/model/SAE metadata",
+      "full SAE artifact for standalone deployment",
+      "all explicit and native sparse control lists"
+    ],
+    "accounting": "Report code bytes over preloaded SAE and standalone Pythia+SAE totals versus Pythia+explicit FV and Pythia+global SAE OMP16. No decoded vectors are cached."
+  },
+  "compute": {
+    "hardware": "CPU, fixed five-thread limit",
+    "optimizer_updates": 0,
+    "report_support_and_candidate_tokens": true,
+    "active_compute_proxy": "Report shared-basis residual correlation/subtraction, per-task OMP16 over pool vs global SAE dictionary and transformer query sequences separately."
+  },
+  "gates": {
+    "PASS": "Both seeds: within .05 accuracy/.10 gold-logprob nats of explicit FV, shared-pool payload <=.95x global OMP16 sparse-list payload, and >=.10 gold-logprob nats better than aggregate-top64 OMP16.",
+    "FAIL": "Any frozen quality, byte, or attribution gate is missed.",
+    "NOT_ESTABLISHED": "Pinned artifact, split integrity, or deterministic replay fails."
+  },
+  "boundaries": [
+    "One SAE checkpoint and four heldout relation tasks only.",
+    "This is a fixed-support code/representation screen, not a capacity claim.",
+    "Charge full SAE bytes for standalone use.",
+    "The global and aggregate-pool sparse lists are required direct controls."
+  ]
+}
