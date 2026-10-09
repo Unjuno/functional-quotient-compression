@@ -1,0 +1,21 @@
+{
+  "experiment_id":"MA-462",
+  "title":"Mirror decoder vs HyperFormer adapter decoder under fixed embeddings",
+  "status":"FROZEN_SCREENING",
+  "base_commit":"10487ec4",
+  "evidence_lane":"ADAPTER_DECODER/QUALITY/PARAMETERS/EXTRAPOLATION",
+  "hypothesis":"With identical fixed four-value task/layer/position embeddings, a shared-matrix Mirror decoder will use at least 30% fewer actual N=32 payload bytes than a generic HyperFormer MLP decoder while staying within 10% held-out adapter NRMSE.",
+  "physical_object":"one shared 2x2 matrix W decoded with two fixed embedding angles",
+  "mirror_coordinate":"fixed embedding c=(theta1,theta2,r1,r2); decoder returns R(theta1) W R(theta2)",
+  "logical_multiplicity":"per-context logical adapters from the same embedding table",
+  "prior_art_refs":[82],
+  "controls":["generic HyperFormer MLP decoder 4->16->4 using identical fixed embeddings","affine full-matrix decoder using identical embeddings","rank-two shared-basis decoder using identical embeddings","independent per-context adapter upper control"],
+  "task":{"type":"synthetic mixed adapter family","context_dimension":4,"fixed_embeddings":"first two coordinates are angles; last two are zero for aligned contexts and nonzero for off-orbit contexts","teacher":"aligned R(c0)W*R(c1), with 25% off-orbit contexts adding c2 D1+c3 D2","train_contexts":64,"heldout_contexts":32,"support_examples_per_context":64,"query_examples_per_context":256},
+  "development":{"worlds":[46200,46201],"seeds":[0,1,2],"context_ids":[100,163],"mlp_update_candidates":[300,800,1500],"selection":"choose MLP updates by dev held-out NRMSE; Mirror fits W on same training targets"},
+  "fresh":{"worlds":[46210,46211,46212],"seeds":[0,1,2],"train_context_ids":[2000,2063],"heldout_context_ids":[3000,3031],"locked_before_access":true},
+  "storage":{"authority":"actual serialized inference payload bytes","paid_objects":["same fixed embeddings for all methods","decoder weights","Mirror shared matrix","normalization and metadata"],"amortization_N":[1,16,32]},
+  "compute":{"report_decoder_MAC":true,"report_optimizer_updates":true,"report_fit_wall":true,"report_query_wall":true},
+  "success_gate":"Every fresh world: Mirror NRMSE <=1.10x generic MLP and actual N=32 payload <=0.70x generic MLP; report controls at matched embedding bytes.",
+  "failure_gate":"Mirror misses either quality or byte gate, or affine/rank-two decoder matches it at equal/fewer bytes.",
+  "boundaries":["Synthetic 2x2 adapter decoder screen, not Transformer fine-tuning.","Embeddings are fixed and byte-matched across decoders; no method may change code values.","The off-orbit subgroup is included to test private/general decoder needs."]
+}
