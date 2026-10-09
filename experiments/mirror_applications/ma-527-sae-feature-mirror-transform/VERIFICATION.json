@@ -2,18 +2,29 @@
   "experiment_id": "MA-527",
   "commit": "pending",
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "python -m pytest -q experiments/mirror_applications/ma-527-sae-feature-mirror-transform/tests",
+    "passed": 5,
+    "failed": 0
   },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "payload_bytes_compared_to_metrics": true
   },
   "metric_replay": {
-    "checked": false,
-    "max_difference": null
+    "checked": true,
+    "max_difference": 0.0,
+    "note": "Two deterministic development runs reproduced all reported causal metrics exactly."
   },
   "fresh_split_integrity_checked": false,
-    "notes": ["Protocol-only checkpoint. No development or fresh data accessed; no experiment outcome is claimed."]
+  "fresh_opened": false,
+  "fresh_task_identities_accessed": [14, 15],
+  "model_sha256_checked": true,
+  "sae_sha256_checked": true,
+  "notes": [
+    "Both development seeds failed the frozen quality gate; no fresh causal metrics were computed and seeds 52711-52713 were never run.",
+    "The dev extraction loop did construct and serialize task identities 14-15, invalidating those identities as sealed audit tasks; protocol amendment 2 records the split leak.",
+    "An initial development implementation used different explicit-FV amplitude; retained as runs/preflight_scale_mismatch/summary.json and superseded by amendment 1 before any fresh-seed evaluation.",
+    "Incremental bytes improve sharply, but standalone deployment includes the full SAE and exceeds the explicit-FV deployment size."
+  ]
 }

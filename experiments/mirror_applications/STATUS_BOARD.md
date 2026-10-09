@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (36 completed; 593 UNTESTED; 1 SCREENING)
+- P0: **630** (37 completed; 593 UNTESTED)
 - P1: **422** (12 completed; 410 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1106 UNTESTED, 29 PROMISING, 19 FAIL, 1 SCREENING**
+- Current MA statuses: **1106 UNTESTED, 29 PROMISING, 20 FAIL**
 - 47 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -23,18 +23,18 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-527 — Mirror transform over SAE feature space (P0; PA102/PA96)**
+**MA-533 — Transcoder feature bank as functional expert atoms (P0; PA103)**
 
 Reason:
-- MA-526 has a verified FAIL on its dedicated live research branch: shared SAE-pool codes miss the explicit-FV quality gate, lose to global sparse coding on one seed, and add 4.17 MB when the SAE payload is charged;
-- MA-527 tests a separate intervention point: a structured transform over sparse SAE feature activations, with native sparse and LoReFT controls;
-- protocol and development/fresh split are frozen on the dedicated MA-527 branch before data access.
+- MA-526 and MA-527 both failed their development quality gates under the pretrained SAE feature representation; MA-527 dev extraction exposed task IDs 14–15, with no fresh-seed evaluation. The family is paused under `docs/phase2/SAE_FEATURE_FAMILY_REDESIGN_2026-10-09.md`;
+- MA-528/530 are deferred until the SAE alignment premise is redesigned;
+- MA-533 uses a trained transcoder as a distinct physical object and remains a separate P0 experiment target.
 
-Required controls are in `experiments/mirror_applications/ma-527-sae-feature-mirror-transform/PROTOCOL.json`.
+MA-533 controls and protocol must be frozen on its dedicated branch before development or fresh data access.
 
 ## Active experiment
 
-MA-527 protocol is frozen; implementation and dev run are pending. Its fresh split remains unopened.
+MA-527 is a verified development FAIL; no fresh-seed metrics were computed and task IDs 14–15 cannot be reused as audit identities. MA-533 is the next experiment to protocol-freeze.
 
 ## Verified status index
 

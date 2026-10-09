@@ -1,0 +1,360 @@
+{
+  "alpha": 0.5,
+  "angle_scale": 0.1,
+  "angles_radians": [
+    0.03612416610121727,
+    0.06736956536769867,
+    0.08951632678508759,
+    0.09957341849803925,
+    0.09618256241083145,
+    0.07980172336101532,
+    0.05264321714639664,
+    0.01837495155632496,
+    -0.01837495155632496,
+    -0.05264321714639664,
+    -0.07980172336101532,
+    -0.09618256241083145,
+    -0.09957341849803925,
+    -0.08951632678508759,
+    -0.06736956536769867,
+    -0.03612416610121727
+  ],
+  "bank_feature_ids": [
+    517,
+    1214,
+    1942,
+    1336,
+    1022,
+    1300,
+    45,
+    1462,
+    1135,
+    1848,
+    1502,
+    137,
+    583,
+    786,
+    1688,
+    1422,
+    907,
+    1127,
+    792,
+    1525,
+    486,
+    1368,
+    1199,
+    1078,
+    1043,
+    1337,
+    389,
+    1598,
+    721,
+    1491,
+    1519,
+    1372
+  ],
+  "evaluated_task_ids": [
+    12,
+    13
+  ],
+  "evaluation_seconds": 7.259288497007219,
+  "experiment_id": "MA-527",
+  "explicit_reference": {
+    "by_task": [
+      {
+        "accuracy": 0.125,
+        "mean_gold_logprob": -14.858205825090408,
+        "mean_gold_margin": -3.484784632921219,
+        "name": "english_french",
+        "task_id": 12
+      },
+      {
+        "accuracy": 0.125,
+        "mean_gold_logprob": -8.384668081998825,
+        "mean_gold_margin": -1.4134673178195953,
+        "name": "french_english",
+        "task_id": 13
+      }
+    ],
+    "candidate_forward_calls": 128,
+    "candidate_input_tokens": 1008,
+    "candidate_sequences": 128,
+    "heldout_accuracy": 0.125,
+    "mean_gold_candidate_logprob": -11.621436953544617,
+    "mean_gold_vs_best_negative_margin": -2.449125975370407,
+    "queries": 16
+  },
+  "explicit_wall_seconds": 0.9714341959916055,
+  "model_bytes": 168144624,
+  "no_intervention": {
+    "by_task": [
+      {
+        "accuracy": 0.125,
+        "mean_gold_logprob": -16.724478840827942,
+        "mean_gold_margin": -3.72338604927063,
+        "name": "english_french",
+        "task_id": 12
+      },
+      {
+        "accuracy": 0.125,
+        "mean_gold_logprob": -10.311245143413544,
+        "mean_gold_margin": -1.308258056640625,
+        "name": "french_english",
+        "task_id": 13
+      }
+    ],
+    "candidate_forward_calls": 128,
+    "candidate_input_tokens": 1008,
+    "candidate_sequences": 128,
+    "heldout_accuracy": 0.125,
+    "mean_gold_candidate_logprob": -13.517861992120743,
+    "mean_gold_vs_best_negative_margin": -2.5158220529556274,
+    "queries": 16
+  },
+  "no_intervention_wall_seconds": 1.1250235089974012,
+  "phase": "dev",
+  "rows": [
+    {
+      "active_compute_proxy": 69632,
+      "alpha": 0.5,
+      "candidate_input_tokens": 1008,
+      "candidate_sequences": 128,
+      "explicit_payload_bytes": 34742,
+      "method": "native_sae_top8",
+      "metrics": {
+        "by_task": [
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -16.68924480676651,
+            "mean_gold_margin": -3.737341821193695,
+            "name": "english_french",
+            "task_id": 12
+          },
+          {
+            "accuracy": 0.375,
+            "mean_gold_logprob": -10.385140717029572,
+            "mean_gold_margin": -1.3507232069969177,
+            "name": "french_english",
+            "task_id": 13
+          }
+        ],
+        "candidate_forward_calls": 128,
+        "candidate_input_tokens": 1008,
+        "candidate_sequences": 128,
+        "heldout_accuracy": 0.25,
+        "mean_gold_candidate_logprob": -13.53719276189804,
+        "mean_gold_vs_best_negative_margin": -2.5440325140953064,
+        "queries": 16
+      },
+      "model_bytes": 168144624,
+      "nonzeros_per_task": 8,
+      "optimizer_updates": 0,
+      "payload_bytes": 2860,
+      "sae_bytes": 4204391,
+      "seed": 52702,
+      "shared_base_bytes": 172349015,
+      "standalone_total_bytes": 172351875,
+      "support_examples": 128,
+      "support_input_tokens": 9380,
+      "wall_eval_seconds": 1.1199379719910212,
+      "wall_method_seconds": 1.1199379719910212
+    },
+    {
+      "active_compute_proxy": 69632,
+      "alpha": 0.5,
+      "candidate_input_tokens": 1008,
+      "candidate_sequences": 128,
+      "explicit_payload_bytes": 34742,
+      "method": "shared_bank_sparse",
+      "metrics": {
+        "by_task": [
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -15.902357786893845,
+            "mean_gold_margin": -4.425840467214584,
+            "name": "english_french",
+            "task_id": 12
+          },
+          {
+            "accuracy": 0.375,
+            "mean_gold_logprob": -10.130027651786804,
+            "mean_gold_margin": -1.4224852919578552,
+            "name": "french_english",
+            "task_id": 13
+          }
+        ],
+        "candidate_forward_calls": 128,
+        "candidate_input_tokens": 1008,
+        "candidate_sequences": 128,
+        "heldout_accuracy": 0.25,
+        "mean_gold_candidate_logprob": -13.016192719340324,
+        "mean_gold_vs_best_negative_margin": -2.92416287958622,
+        "queries": 16
+      },
+      "model_bytes": 168144624,
+      "nonzeros_per_task": 8,
+      "optimizer_updates": 0,
+      "payload_bytes": 3184,
+      "sae_bytes": 4204391,
+      "seed": 52702,
+      "shared_base_bytes": 172349015,
+      "standalone_total_bytes": 172352199,
+      "support_examples": 128,
+      "support_input_tokens": 9380,
+      "wall_eval_seconds": 1.2048288109945133,
+      "wall_method_seconds": 1.2048288109945133
+    },
+    {
+      "active_compute_proxy": 69632,
+      "alpha": 0.5,
+      "candidate_input_tokens": 1008,
+      "candidate_sequences": 128,
+      "explicit_payload_bytes": 34742,
+      "method": "mirror_givens",
+      "metrics": {
+        "by_task": [
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -15.87063130736351,
+            "mean_gold_margin": -4.4174021780490875,
+            "name": "english_french",
+            "task_id": 12
+          },
+          {
+            "accuracy": 0.375,
+            "mean_gold_logprob": -9.990570664405823,
+            "mean_gold_margin": -1.4193267226219177,
+            "name": "french_english",
+            "task_id": 13
+          }
+        ],
+        "candidate_forward_calls": 128,
+        "candidate_input_tokens": 1008,
+        "candidate_sequences": 128,
+        "heldout_accuracy": 0.25,
+        "mean_gold_candidate_logprob": -12.930600985884666,
+        "mean_gold_vs_best_negative_margin": -2.9183644503355026,
+        "queries": 16
+      },
+      "model_bytes": 168144624,
+      "nonzeros_per_task": 8,
+      "optimizer_updates": 0,
+      "payload_bytes": 3474,
+      "sae_bytes": 4204391,
+      "seed": 52702,
+      "shared_base_bytes": 172349015,
+      "standalone_total_bytes": 172352489,
+      "support_examples": 128,
+      "support_input_tokens": 9380,
+      "wall_eval_seconds": 0.998630560003221,
+      "wall_method_seconds": 0.998630560003221
+    },
+    {
+      "active_compute_proxy": 69632,
+      "alpha": 0.5,
+      "candidate_input_tokens": 1008,
+      "candidate_sequences": 128,
+      "explicit_payload_bytes": 34742,
+      "method": "global_omp8",
+      "metrics": {
+        "by_task": [
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -15.83993884921074,
+            "mean_gold_margin": -3.594225436449051,
+            "name": "english_french",
+            "task_id": 12
+          },
+          {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -9.850392699241638,
+            "mean_gold_margin": -1.3724517822265625,
+            "name": "french_english",
+            "task_id": 13
+          }
+        ],
+        "candidate_forward_calls": 128,
+        "candidate_input_tokens": 1008,
+        "candidate_sequences": 128,
+        "heldout_accuracy": 0.1875,
+        "mean_gold_candidate_logprob": -12.845165774226189,
+        "mean_gold_vs_best_negative_margin": -2.4833386093378067,
+        "queries": 16
+      },
+      "model_bytes": 168144624,
+      "nonzeros_per_task": 8,
+      "optimizer_updates": 0,
+      "payload_bytes": 2988,
+      "sae_bytes": 4204391,
+      "seed": 52702,
+      "shared_base_bytes": 172349015,
+      "standalone_total_bytes": 172352003,
+      "support_examples": 128,
+      "support_input_tokens": 9380,
+      "wall_eval_seconds": 0.8925089660042431,
+      "wall_method_seconds": 0.8925089660042431
+    },
+    {
+      "active_compute_proxy": 69632,
+      "alpha": 0.5,
+      "candidate_input_tokens": 1008,
+      "candidate_sequences": 128,
+      "explicit_payload_bytes": 34742,
+      "method": "loreft_rank8",
+      "metrics": {
+        "by_task": [
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -15.125293254852295,
+            "mean_gold_margin": -3.704863727092743,
+            "name": "english_french",
+            "task_id": 12
+          },
+          {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -8.843974173069,
+            "mean_gold_margin": -1.4667816162109375,
+            "name": "french_english",
+            "task_id": 13
+          }
+        ],
+        "candidate_forward_calls": 128,
+        "candidate_input_tokens": 1008,
+        "candidate_sequences": 128,
+        "heldout_accuracy": 0.1875,
+        "mean_gold_candidate_logprob": -11.984633713960648,
+        "mean_gold_vs_best_negative_margin": -2.58582267165184,
+        "queries": 16
+      },
+      "model_bytes": 168144624,
+      "nonzeros_per_task": 8,
+      "optimizer_updates": 0,
+      "payload_bytes": 21388,
+      "sae_bytes": 0,
+      "seed": 52702,
+      "shared_base_bytes": 168144624,
+      "standalone_total_bytes": 168166012,
+      "support_examples": 128,
+      "support_input_tokens": 9380,
+      "wall_eval_seconds": 0.946904454001924,
+      "wall_method_seconds": 0.946904454001924
+    }
+  ],
+  "sae_bytes": 4204391,
+  "seed": 52702,
+  "support_seconds": 13.007274625997525,
+  "train_fit_task_ids": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+  ]
+}

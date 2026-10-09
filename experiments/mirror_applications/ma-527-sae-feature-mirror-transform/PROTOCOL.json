@@ -4,8 +4,14 @@
   "status": "SCREENING_AMENDED",
   "amendment_1": {
     "date": "2026-10-09",
-    "reason": "The first development implementation applied the frozen alpha=0.5 to compressed interventions but evaluated the explicit-FV reference at alpha=1.0. This amplitude mismatch invalidates that gate comparison. Preserve the initial run as a superseded diagnostic, and apply the same alpha to explicit FV and all intervention controls on rerun. No fresh examples were accessed and no configuration or data split changes.",
+    "reason": "The first development implementation applied the frozen alpha=0.5 to compressed interventions but evaluated the explicit-FV reference at alpha=1.0. This amplitude mismatch invalidates that gate comparison. Preserve the initial run as a superseded diagnostic, and apply the same alpha to explicit FV and all intervention controls on rerun. No fresh-seed causal outcomes (seeds 52711-52713) were accessed; no configuration or declared split changes. A later harness audit disclosed task-ID extraction leakage in post_run_amendment_2.",
     "supersedes": "Initial development summary with unmatched explicit-FV scale; retained under runs/preflight_scale_mismatch/"
+  },
+  "post_run_amendment_2": {
+    "date": "2026-10-09",
+    "reason": "Split audit found the inherited extraction harness constructs and serializes FVs/codes for all task IDs 0-15 during each dev run, although only task IDs 12-13 were evaluated. Therefore task identities 14-15 were accessed under dev seeds and cannot be called sealed. Fresh seeds 52711-52713 were never run and no fresh causal metrics were computed. The development FAIL remains valid for IDs 12-13; do not reuse IDs 14-15 for a later fresh audit.",
+    "metrics_reclassified": "development-only evidence; no fresh/audit evidence",
+    "future_fresh_requirement": "Use new unseen task identities and ensure extraction/serialization excludes audit identities until the development gate passes."
   },
   "evidence_lane": "SAE_FEATURE_STEERING/QUALITY/SPARSITY/ACTUAL_BYTES/COMPUTE",
   "base_commit": "c935a903",
@@ -46,7 +52,8 @@
     "fresh_task_ids": [14, 15],
     "development_seeds": [52701, 52702],
     "fresh_seeds": [52711, 52712, 52713],
-    "fresh_open_rule": "Open only after both dev seeds meet the quality, sparsity, and byte gates; freeze all transform and scale settings before opening. Fresh IDs and seeds are fixed here."
+    "fresh_open_rule": "Open only after both dev seeds meet the quality, sparsity, and byte gates; freeze all transform and scale settings before opening. Fresh IDs and seeds are fixed here.",
+    "integrity_status": "Task identities 14-15 were accidentally extracted/serialized by the dev harness; seeds 52711-52713 were not run and no fresh metrics were calculated. New identities are required for confirmatory audit."
   },
   "development": {
     "fixed_configuration": {"givens_pattern_scale": 0.1, "intervention_scale": 0.5},

@@ -1,6 +1,6 @@
 # MA-527 — Mirror transform over SAE feature space
 
-Status: SCREENING. Protocol frozen before data extraction. Prior art: PA102 and PA96.
+Status: **FAIL (development gate; no fresh metrics).** Protocol frozen before data extraction. Prior art: PA102 and PA96.
 
 ## H — falsifiable hypothesis
 
@@ -16,8 +16,12 @@ Controls and fixed split are listed in [PROTOCOL.json](PROTOCOL.json). The pinne
 
 ## Data discipline
 
-Fit tasks choose the shared SAE coordinate support. Development tasks choose only the registered angle and intervention scale grids. Fresh task IDs and seeds remain unopened unless both development seeds meet every gate. Fresh results cannot change the frozen configuration.
+Fit tasks choose the shared SAE coordinate support. Development tasks used one fixed angle/scale configuration. The run had no fresh-seed causal evaluation. A harness audit found that task IDs 14–15 were nevertheless extracted and serialized during development; do not treat them as sealed audit identities.
 
 ## Evidence limits
 
 This experiment tests four relation interventions on one model and layer. A positive result would establish only scoped feature-space steering, not arbitrary behavior capacity or routing.
+
+## Development result
+
+Status: **FAIL; no fresh causal metrics.** With alpha=0.5 matched for explicit and compressed codes, Mirror gold-logprob was 2.094 and 1.309 nats below explicit FV across seeds 52701/52702, missing the frozen 0.10-nat gate. The serialized Mirror code used 3,474 B versus 34,742 B for explicit FVs and retained eight nonzeros/task. Standalone Mirror deployment was 172,352,489 B after charging the 4,204,391 B SAE; explicit-FV deployment was 168,179,366 B. The dev harness inadvertently extracted and serialized task IDs 14–15 but never evaluated them; fresh seeds 52711–52713 were not run. Do not reuse those task identities for audit. Per-seed measurements and payloads are under `runs/dev/`; their actual bytes and SHA-256 values are recorded in [PAYLOAD_MANIFEST.json](PAYLOAD_MANIFEST.json). See [STATUS.md](STATUS.md) for H/T/D/C/U, controls and limitations.

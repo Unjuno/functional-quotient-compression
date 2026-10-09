@@ -115,10 +115,10 @@ def run_seed(seed,phase,model_dir,sae_path,angle_scale=None,alpha=None):
     task_ids=DEV if phase=="dev" else FRESH
     results=[];t_eval=time.perf_counter()
     for name,(decoded,parts) in methods.items():
-        scale=float(alpha or 1.0);metrics=h.evaluate(model,tok,torchmod,vectors,decoded*scale,manifest,task_ids=task_ids)
-        results.append({"method":name,"alpha":scale,"metrics":metrics,"decoded":decoded,"parts":parts})
-    explicit_metrics=h.evaluate(model,tok,torchmod,vectors,vectors*float(alpha or 1.0),manifest,task_ids=task_ids)
-    none_metrics=h.evaluate(model,tok,torchmod,vectors,np.zeros_like(vectors),manifest,task_ids=task_ids)
+        scale=float(alpha or 1.0);tm=time.perf_counter();metrics=h.evaluate(model,tok,torchmod,vectors,decoded*scale,manifest,task_ids=task_ids);method_s=time.perf_counter()-tm
+        results.append({"method":name,"alpha":scale,"metrics":metrics,"decoded":decoded,"parts":parts,"wall_method_seconds":method_s})
+    te=time.perf_counter();explicit_metrics=h.evaluate(model,tok,torchmod,vectors,vectors*float(alpha or 1.0),manifest,task_ids=task_ids);explicit_s=time.perf_counter()-te
+    tn=time.perf_counter();none_metrics=h.evaluate(model,tok,torchmod,vectors,np.zeros_like(vectors),manifest,task_ids=task_ids);none_s=time.perf_counter()-tn
     eval_s=time.perf_counter()-t_eval
     outdir=ART/phase/f"seed_{seed}";outdir.mkdir(parents=True,exist_ok=True)
     basefiles=["model.safetensors","config.json","tokenizer.json","tokenizer_config.json","special_tokens_map.json"]
@@ -137,12 +137,12 @@ def run_seed(seed,phase,model_dir,sae_path,angle_scale=None,alpha=None):
         rowout.update({"seed":seed,"payload_bytes":nbytes,"model_bytes":model_bytes,"sae_bytes":Path(sae_path).stat().st_size if uses_sae else 0,
           "standalone_total_bytes":common+nbytes,"explicit_payload_bytes":explicit_bytes,"shared_base_bytes":common,
           "nonzeros_per_task":int(np.count_nonzero(row["parts"]["coefficients"] if "coefficients" in row["parts"] else row["parts"].get("task_codes",[]))/16) if name!="loreft_rank8" else 8,
-          "wall_eval_seconds":eval_s,"candidate_input_tokens":row["metrics"]["candidate_input_tokens"],"candidate_sequences":row["metrics"]["candidate_sequences"],
+          "wall_eval_seconds":row["wall_method_seconds"],"candidate_input_tokens":row["metrics"]["candidate_input_tokens"],"candidate_sequences":row["metrics"]["candidate_sequences"],
           "support_examples":128,"support_input_tokens":support["input_tokens"],"optimizer_updates":0,"active_compute_proxy":row["metrics"]["candidate_sequences"]*512+16*BANK*RANK})
         rows.append(rowout)
     report={"experiment_id":"MA-527","phase":phase,"seed":seed,"angle_scale":angle_scale,"alpha":alpha,
       "bank_feature_ids":bank.tolist(),"angles_radians":angles.tolist(),"train_fit_task_ids":FIT.tolist(),"evaluated_task_ids":list(task_ids),
-      "support_seconds":extract_s,"evaluation_seconds":eval_s,"explicit_reference":explicit_metrics,"no_intervention":none_metrics,
+      "support_seconds":extract_s,"evaluation_seconds":eval_s,"explicit_reference":explicit_metrics,"explicit_wall_seconds":explicit_s,"no_intervention":none_metrics,"no_intervention_wall_seconds":none_s,
       "rows":rows,"model_bytes":model_bytes,"sae_bytes":Path(sae_path).stat().st_size}
     (outdir/"metrics.json").write_text(json.dumps(report,indent=2,sort_keys=True)+"\n")
     return report
@@ -184,10 +184,11 @@ def main():
               x["metrics"]["heldout_accuracy"]>=m["metrics"]["heldout_accuracy"] for x in controls)
             passed=bool(byte_gate and qgate and m["nonzeros_per_task"]<=16 and not dominated);ok &= passed
             checks.append({"seed":report["seed"],"gold_logprob_loss_nats":delta,"accuracy_loss":acc_gap,"mirror_bytes":m["payload_bytes"],"explicit_bytes":m["explicit_payload_bytes"],"quality_gate":qgate,"byte_gate":byte_gate,"dominated_by_simple_control":dominated,"passed":passed})
-        freeze={"experiment_id":"MA-527","decision":"OPEN_FRESH" if ok else "FAIL_DEV_KEEP_FRESH_SEALED",
+        freeze={"experiment_id":"MA-527","decision":"OPEN_FRESH" if ok else "FAIL_DEV_NO_FRESH_METRICS",
           "givens_pattern_scale":0.1,"intervention_scale":0.5,"dev_checks":checks,
           "dev_summary_sha256":sha(ART/"dev/summary.json"),"fresh_seeds":[52711,52712,52713],
-          "note":"No parameter selection: one fixed configuration; fresh can open only when every dev seed passes."}
+          "note":"No parameter selection: one fixed configuration. Inherited extraction computes codes for task IDs 0-15; when the dev gate fails, do not evaluate fresh seeds.",
+          "fresh_task_identity_exposure":"Task IDs 14-15 are represented in dev-seed extraction artifacts; no fresh seeds or fresh causal evaluations were run."}
         freeze_path.write_text(json.dumps(freeze,indent=2,sort_keys=True)+"\n")
         print(json.dumps({"development_decision":freeze["decision"],"checks":checks},indent=2))
 if __name__=="__main__": main()

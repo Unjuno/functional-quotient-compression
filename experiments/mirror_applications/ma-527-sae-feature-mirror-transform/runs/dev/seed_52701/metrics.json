@@ -1,0 +1,360 @@
+{
+  "alpha": 0.5,
+  "angle_scale": 0.1,
+  "angles_radians": [
+    0.03612416610121727,
+    0.06736956536769867,
+    0.08951632678508759,
+    0.09957341849803925,
+    0.09618256241083145,
+    0.07980172336101532,
+    0.05264321714639664,
+    0.01837495155632496,
+    -0.01837495155632496,
+    -0.05264321714639664,
+    -0.07980172336101532,
+    -0.09618256241083145,
+    -0.09957341849803925,
+    -0.08951632678508759,
+    -0.06736956536769867,
+    -0.03612416610121727
+  ],
+  "bank_feature_ids": [
+    517,
+    1214,
+    1022,
+    1942,
+    1336,
+    1300,
+    1848,
+    45,
+    1502,
+    1462,
+    583,
+    1368,
+    137,
+    1688,
+    1422,
+    1135,
+    1127,
+    786,
+    1199,
+    907,
+    792,
+    1525,
+    486,
+    1372,
+    1491,
+    1337,
+    389,
+    721,
+    1078,
+    1043,
+    530,
+    1519
+  ],
+  "evaluated_task_ids": [
+    12,
+    13
+  ],
+  "evaluation_seconds": 6.892345848988043,
+  "experiment_id": "MA-527",
+  "explicit_reference": {
+    "by_task": [
+      {
+        "accuracy": 0.125,
+        "mean_gold_logprob": -14.608745217323303,
+        "mean_gold_margin": -3.6444140672683716,
+        "name": "english_french",
+        "task_id": 12
+      },
+      {
+        "accuracy": 0.25,
+        "mean_gold_logprob": -8.439631283283234,
+        "mean_gold_margin": -1.3892516493797302,
+        "name": "french_english",
+        "task_id": 13
+      }
+    ],
+    "candidate_forward_calls": 128,
+    "candidate_input_tokens": 1008,
+    "candidate_sequences": 128,
+    "heldout_accuracy": 0.1875,
+    "mean_gold_candidate_logprob": -11.524188250303268,
+    "mean_gold_vs_best_negative_margin": -2.516832858324051,
+    "queries": 16
+  },
+  "explicit_wall_seconds": 0.9781425350229256,
+  "model_bytes": 168144624,
+  "no_intervention": {
+    "by_task": [
+      {
+        "accuracy": 0.125,
+        "mean_gold_logprob": -16.471199840307236,
+        "mean_gold_margin": -3.8827626407146454,
+        "name": "english_french",
+        "task_id": 12
+      },
+      {
+        "accuracy": 0.25,
+        "mean_gold_logprob": -10.344885766506195,
+        "mean_gold_margin": -1.9866332411766052,
+        "name": "french_english",
+        "task_id": 13
+      }
+    ],
+    "candidate_forward_calls": 128,
+    "candidate_input_tokens": 1008,
+    "candidate_sequences": 128,
+    "heldout_accuracy": 0.1875,
+    "mean_gold_candidate_logprob": -13.408042803406715,
+    "mean_gold_vs_best_negative_margin": -2.9346979409456253,
+    "queries": 16
+  },
+  "no_intervention_wall_seconds": 1.0545994930143934,
+  "phase": "dev",
+  "rows": [
+    {
+      "active_compute_proxy": 69632,
+      "alpha": 0.5,
+      "candidate_input_tokens": 1008,
+      "candidate_sequences": 128,
+      "explicit_payload_bytes": 34742,
+      "method": "native_sae_top8",
+      "metrics": {
+        "by_task": [
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -16.39490169286728,
+            "mean_gold_margin": -3.977070927619934,
+            "name": "english_french",
+            "task_id": 12
+          },
+          {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -10.224334418773651,
+            "mean_gold_margin": -1.9107513427734375,
+            "name": "french_english",
+            "task_id": 13
+          }
+        ],
+        "candidate_forward_calls": 128,
+        "candidate_input_tokens": 1008,
+        "candidate_sequences": 128,
+        "heldout_accuracy": 0.1875,
+        "mean_gold_candidate_logprob": -13.309618055820465,
+        "mean_gold_vs_best_negative_margin": -2.943911135196686,
+        "queries": 16
+      },
+      "model_bytes": 168144624,
+      "nonzeros_per_task": 8,
+      "optimizer_updates": 0,
+      "payload_bytes": 2860,
+      "sae_bytes": 4204391,
+      "seed": 52701,
+      "shared_base_bytes": 172349015,
+      "standalone_total_bytes": 172351875,
+      "support_examples": 128,
+      "support_input_tokens": 9427,
+      "wall_eval_seconds": 0.9864188730134629,
+      "wall_method_seconds": 0.9864188730134629
+    },
+    {
+      "active_compute_proxy": 69632,
+      "alpha": 0.5,
+      "candidate_input_tokens": 1008,
+      "candidate_sequences": 128,
+      "explicit_payload_bytes": 34742,
+      "method": "shared_bank_sparse",
+      "metrics": {
+        "by_task": [
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -16.12806612253189,
+            "mean_gold_margin": -4.434768974781036,
+            "name": "english_french",
+            "task_id": 12
+          },
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -10.956157445907593,
+            "mean_gold_margin": -1.5737457275390625,
+            "name": "french_english",
+            "task_id": 13
+          }
+        ],
+        "candidate_forward_calls": 128,
+        "candidate_input_tokens": 1008,
+        "candidate_sequences": 128,
+        "heldout_accuracy": 0.125,
+        "mean_gold_candidate_logprob": -13.542111784219742,
+        "mean_gold_vs_best_negative_margin": -3.0042573511600494,
+        "queries": 16
+      },
+      "model_bytes": 168144624,
+      "nonzeros_per_task": 8,
+      "optimizer_updates": 0,
+      "payload_bytes": 3184,
+      "sae_bytes": 4204391,
+      "seed": 52701,
+      "shared_base_bytes": 172349015,
+      "standalone_total_bytes": 172352199,
+      "support_examples": 128,
+      "support_input_tokens": 9427,
+      "wall_eval_seconds": 0.9577465759939514,
+      "wall_method_seconds": 0.9577465759939514
+    },
+    {
+      "active_compute_proxy": 69632,
+      "alpha": 0.5,
+      "candidate_input_tokens": 1008,
+      "candidate_sequences": 128,
+      "explicit_payload_bytes": 34742,
+      "method": "mirror_givens",
+      "metrics": {
+        "by_task": [
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -16.286022305488586,
+            "mean_gold_margin": -4.455112934112549,
+            "name": "english_french",
+            "task_id": 12
+          },
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -10.94975858926773,
+            "mean_gold_margin": -1.58349609375,
+            "name": "french_english",
+            "task_id": 13
+          }
+        ],
+        "candidate_forward_calls": 128,
+        "candidate_input_tokens": 1008,
+        "candidate_sequences": 128,
+        "heldout_accuracy": 0.125,
+        "mean_gold_candidate_logprob": -13.617890447378159,
+        "mean_gold_vs_best_negative_margin": -3.0193045139312744,
+        "queries": 16
+      },
+      "model_bytes": 168144624,
+      "nonzeros_per_task": 8,
+      "optimizer_updates": 0,
+      "payload_bytes": 3474,
+      "sae_bytes": 4204391,
+      "seed": 52701,
+      "shared_base_bytes": 172349015,
+      "standalone_total_bytes": 172352489,
+      "support_examples": 128,
+      "support_input_tokens": 9427,
+      "wall_eval_seconds": 0.9910875729983672,
+      "wall_method_seconds": 0.9910875729983672
+    },
+    {
+      "active_compute_proxy": 69632,
+      "alpha": 0.5,
+      "candidate_input_tokens": 1008,
+      "candidate_sequences": 128,
+      "explicit_payload_bytes": 34742,
+      "method": "global_omp8",
+      "metrics": {
+        "by_task": [
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -15.569050431251526,
+            "mean_gold_margin": -3.6143194437026978,
+            "name": "english_french",
+            "task_id": 12
+          },
+          {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -10.022937834262848,
+            "mean_gold_margin": -1.8898468017578125,
+            "name": "french_english",
+            "task_id": 13
+          }
+        ],
+        "candidate_forward_calls": 128,
+        "candidate_input_tokens": 1008,
+        "candidate_sequences": 128,
+        "heldout_accuracy": 0.1875,
+        "mean_gold_candidate_logprob": -12.795994132757187,
+        "mean_gold_vs_best_negative_margin": -2.752083122730255,
+        "queries": 16
+      },
+      "model_bytes": 168144624,
+      "nonzeros_per_task": 8,
+      "optimizer_updates": 0,
+      "payload_bytes": 2988,
+      "sae_bytes": 4204391,
+      "seed": 52701,
+      "shared_base_bytes": 172349015,
+      "standalone_total_bytes": 172352003,
+      "support_examples": 128,
+      "support_input_tokens": 9427,
+      "wall_eval_seconds": 0.9981982829922345,
+      "wall_method_seconds": 0.9981982829922345
+    },
+    {
+      "active_compute_proxy": 69632,
+      "alpha": 0.5,
+      "candidate_input_tokens": 1008,
+      "candidate_sequences": 128,
+      "explicit_payload_bytes": 34742,
+      "method": "loreft_rank8",
+      "metrics": {
+        "by_task": [
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -14.901914089918137,
+            "mean_gold_margin": -3.6323648393154144,
+            "name": "english_french",
+            "task_id": 12
+          },
+          {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -8.591958701610565,
+            "mean_gold_margin": -1.619064450263977,
+            "name": "french_english",
+            "task_id": 13
+          }
+        ],
+        "candidate_forward_calls": 128,
+        "candidate_input_tokens": 1008,
+        "candidate_sequences": 128,
+        "heldout_accuracy": 0.1875,
+        "mean_gold_candidate_logprob": -11.746936395764351,
+        "mean_gold_vs_best_negative_margin": -2.6257146447896957,
+        "queries": 16
+      },
+      "model_bytes": 168144624,
+      "nonzeros_per_task": 8,
+      "optimizer_updates": 0,
+      "payload_bytes": 21388,
+      "sae_bytes": 0,
+      "seed": 52701,
+      "shared_base_bytes": 168144624,
+      "standalone_total_bytes": 168166012,
+      "support_examples": 128,
+      "support_input_tokens": 9427,
+      "wall_eval_seconds": 0.9261315460025799,
+      "wall_method_seconds": 0.9261315460025799
+    }
+  ],
+  "sae_bytes": 4204391,
+  "seed": 52701,
+  "support_seconds": 13.252938692021417,
+  "train_fit_task_ids": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+  ]
+}

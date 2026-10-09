@@ -1,0 +1,38 @@
+{
+  "decision": "FAIL_DEV_NO_FRESH_METRICS",
+  "dev_checks": [
+    {
+      "accuracy_loss": 0.0625,
+      "byte_gate": true,
+      "dominated_by_simple_control": true,
+      "explicit_bytes": 34742,
+      "gold_logprob_loss_nats": 2.09370219707489,
+      "mirror_bytes": 3474,
+      "passed": false,
+      "quality_gate": false,
+      "seed": 52701
+    },
+    {
+      "accuracy_loss": -0.125,
+      "byte_gate": true,
+      "dominated_by_simple_control": false,
+      "explicit_bytes": 34742,
+      "gold_logprob_loss_nats": 1.3091640323400497,
+      "mirror_bytes": 3474,
+      "passed": false,
+      "quality_gate": false,
+      "seed": 52702
+    }
+  ],
+  "dev_summary_sha256": "c3e61ea25ce0ef53d6a3297e265d51b0fa3608f5078928c9a8f1c5cef57ac5a9",
+  "experiment_id": "MA-527",
+  "fresh_seeds": [
+    52711,
+    52712,
+    52713
+  ],
+  "fresh_task_identity_exposure": "Task IDs 14-15 were extracted and serialized by the inherited dev harness; they are not sealed for audit.",
+  "givens_pattern_scale": 0.1,
+  "intervention_scale": 0.5,
+  "note": "No parameter selection: one fixed configuration. Dev gate failed; fresh seeds were not evaluated."
+}

@@ -1,6 +1,6 @@
 # Worker queue
 
-**Operational pointer (2026-10-09): MA-527 SCREENING.** MA-526 is already a verified FAIL on its dedicated live research branch and has been reconciled into the registry. MA-527's SAE-coordinate transform protocol is frozen on branch `research/ma-527-sae-mirror-transform-20261009`; implement controls and development evaluation next.
+**Operational pointer (2026-10-09): MA-533 next.** MA-526/527 both failed on the pretrained SAE-feature alignment assumption; pause MA-528/530 pending redesign (`docs/phase2/SAE_FEATURE_FAMILY_REDESIGN_2026-10-09.md`). MA-533 is the next P0 with a different physical object (trained transcoder); freeze its controls/protocol before touching data.
 
 The queue is derived from `IDEA_REGISTRY.csv`. The registry is authoritative.
 
