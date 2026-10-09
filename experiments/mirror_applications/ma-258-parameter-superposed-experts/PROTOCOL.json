@@ -1,0 +1,82 @@
+{
+  "experiment_id": "MA-258",
+  "title": "Parameter-superposed expert bank with Mirror unbinding",
+  "status": "FROZEN_SCREENING",
+  "base_commit": "38c0b04e",
+  "evidence_lane": "EXPERT_FUNCTIONAL_MULTIPLICITY/QUALITY/ACTUAL_BYTES/COMPUTE",
+  "prior_art_refs": [
+    1,
+    16
+  ],
+  "model": {
+    "type": "linear expert maps",
+    "input_dim": 32,
+    "output_dim": 32,
+    "experts": 8,
+    "expert_id": "oracle provided to isolate storage from routing"
+  },
+  "task": {
+    "strata": [
+      "aligned single-plane Givens orbit around shared base",
+      "independent rank-2 expert residuals around shared base"
+    ],
+    "heldout_inputs_per_expert": 512,
+    "metrics": [
+      "per-expert output NRMSE",
+      "actual serialized payload bytes",
+      "coordinate-fit time"
+    ]
+  },
+  "hypothesis": "A shared expert tensor plus one per-expert Givens coordinate can preserve aligned expert behavior at lower serialized bytes than independent experts and native PSP; independent expert residuals may require private state.",
+  "physical_object": "one 32x32 shared expert matrix",
+  "mirror_coordinate": "per-expert one-plane Givens angle plus expert address",
+  "logical_multiplicity": "8 expert functions from one physical matrix plus codes",
+  "controls": [
+    "independent untied expert matrices",
+    "one hard-tied shared expert",
+    "native PA16 random-sign parameter superposition and unbinding",
+    "one-angle Givens Mirror view",
+    "rank-2 private residual control"
+  ],
+  "development": {
+    "worlds": [
+      25800,
+      25801
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "allowed": "validate deterministic task generation, metric shapes, serialization and coordinate fitting; no architecture selection"
+  },
+  "fresh": {
+    "worlds": [
+      25810,
+      25811,
+      25812
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual torch-serialized inference payload bytes, including all experts/factors/codes and metadata"
+  },
+  "success_gate": "Aligned stratum: Mirror NRMSE <=0.01, payload <=50% untied and at least 20% smaller than rank-2 control at <=0.01 NRMSE across each fresh world.",
+  "failure_gate": "Mirror aligned NRMSE >0.05, no byte improvement over rank-2 at matched quality, or native PSP fails useful recovery.",
+  "boundaries": [
+    "Synthetic linear experts only; no language quality or learned router claim.",
+    "Expert IDs are supplied and do not test routing.",
+    "Aligned orbit is feasibility; random rank-2 residual stratum maps the private-state frontier."
+  ],
+  "amendment_before_fresh": {
+    "reason": "Pre-fresh implementation audit found a linear map transpose error and unconstrained angle optimization outside the generator\u2019s known [-0.7,0.7] range. Untied exact-reference test caught the orientation error.",
+    "change": "Use forward x@W consistently; fit bounded coordinate a=0.7*tanh(z) for 500 Adam steps at lr 0.03. This encodes the generator bound, with no data-dependent selection.",
+    "fresh_not_accessed": true,
+    "superseded_dev": "Initial development rows are retained as superseded exploratory outputs; corrected rerun is authoritative."
+  }
+}
