@@ -27,6 +27,10 @@ def frommat(x):
  y=x.reshape(x.shape[0],H,KV,D).transpose(1,2,0,3);return torch.from_numpy(y[:,0][None].copy()),torch.from_numpy(y[:,1][None].copy())
 def pca(x,r):
  mu=x.mean(0,dtype=np.float64).astype(np.float32);_,_,vt=np.linalg.svd((x-mu).astype(np.float32),full_matrices=False);return mu,vt[:r].T.astype(np.float32)
+def encode_residual(res,basis):
+ return np.stack([res[:,r]@basis[r] for r in range(ROLE)],axis=1).astype(np.float16).astype(np.float32)
+def decode_residual(codes,basis):
+ return np.stack([codes[:,r]@basis[r].T for r in range(ROLE)],axis=1)
 def dump(p,**kw):np.savez(p,**kw);return p.stat().st_size
 def score(m,q,y,past):
  t=time.perf_counter()
@@ -63,8 +67,8 @@ def run(seed,split,model_dir,data_dir,out):
      z=((x-means[l])@comps[l]).astype(np.float16).astype(np.float32);z=z.astype(np.float16).astype(np.float32);base=z@comps[l].T+means[l]
      if method=='shared_mla128':rec=base
      else:
-      res=(x-base).reshape(-1,ROLE,D);c=np.stack([res[:,r]@bases[l,r] for r in range(ROLE)],axis=1).astype(np.float16).astype(np.float32)
-      rec=base+np.stack([c[:,r]@bases[l,r].T for r in range(ROLE)],axis=1).reshape(x.shape);codes.append(c.astype(np.float16))
+      res=(x-base).reshape(-1,ROLE,D);c=encode_residual(res,bases[l])
+      rec=base+decode_residual(c,bases[l]).reshape(x.shape);codes.append(c.astype(np.float16))
      zs.append(z.astype(np.float16))
     mses.append(float(np.mean((rec-x)**2)));layers.append(frommat(rec))
    enc_s=time.perf_counter()-tt;decoded[method]=tuple(layers);tt=time.perf_counter()

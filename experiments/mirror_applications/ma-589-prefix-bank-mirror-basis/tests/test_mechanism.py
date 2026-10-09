@@ -13,3 +13,11 @@ def test_rank_four_shared_view_reconstructs_native_representation():
   c=np.stack([rr[:,r]@bases[r] for r in range(m.ROLE)],1).astype(np.float16).astype(np.float32)
   return base+np.stack([c[:,r]@bases[r].T for r in range(m.ROLE)],1).reshape(x.shape)
  assert np.array_equal(decode(),decode())
+
+
+def test_residual_encoder_handles_role_bases():
+ rng=np.random.default_rng(590);res=rng.normal(size=(11,m.ROLE,m.D)).astype(np.float32)
+ basis=np.stack([m.pca(res[:,r],2)[1] for r in range(m.ROLE)])
+ codes=m.encode_residual(res,basis);recon=m.decode_residual(codes,basis)
+ assert codes.shape==(11,m.ROLE,2)
+ assert recon.shape==res.shape and np.isfinite(recon).all()
