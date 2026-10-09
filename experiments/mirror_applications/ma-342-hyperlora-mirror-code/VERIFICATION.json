@@ -1,1 +1,26 @@
-{"experiment_id":"MA-342","commit":"pending","tests":{"command":"PYTHONDONTWRITEBYTECODE=1 pytest -q -p no:cacheprovider experiments/mirror_applications/ma-342-hyperlora-mirror-code/tests","passed":null,"failed":null},"serialization":{"roundtrip_checked":false,"byte_exact":false},"metric_replay":{"checked":false,"max_difference":null},"fresh_split_integrity_checked":false,"notes":[]}
+{
+  "experiment_id": "MA-342",
+  "commit": "pending-results-commit",
+  "tests": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 pytest -q -p no:cacheprovider experiments/mirror_applications/ma-342-hyperlora-mirror-code/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "payloads_checked": 15
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Protocol frozen 67d2f478; implementation frozen 5bb5410e before fresh access.",
+    "Fresh worlds 34231-34233, 15 rows across five methods.",
+    "Payload hashes/lengths and heldout MSE replay exactly.",
+    "Effective low-rank update/prediction metric used; raw LoRA factors not compared as unique coordinates.",
+    "Synthetic task orbit; no federated deployment evidence."
+  ]
+}

@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-342.** The weight-symmetry family is paused after MA-332/333. MA-341 phase codes beat a pFedHN-style generator in payload size on planted circular clients, but a generic coefficient code was only 7.2% larger at identical quality, below the frozen Mirror-specific gate. Continue to MA-342, HyperLoRA generator outputs Mirror code.
+**Current operational pointer (2026-10-09): MA-349.** Federated personalization is paused after MA-341/342; both same-orbit screens found direct coefficients within 7.2% bytes of phase Mirror at identical quality, missing the 10% margin. Diagnostic: `docs/phase2/MA341_342_FEDERATED_MIRROR_FAMILY_DIAGNOSTIC.md`. Continue with MA-349, rank-1 Bayesian Mirror posterior.
 
 # Worker queue
 
