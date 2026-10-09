@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-360.** MA-359 shared ACDC factors compressed an oracle aligned operator bank, but ordinary coefficients matched within 8 B and compute was unchanged. Proceed to MA-360, reversible Mirror block for storage and activation-memory compression.
+**Current operational pointer (2026-10-09): MA-361.** MA-360 showed a narrow reversible tied-block activation-memory reduction, but the Mirror scalar duplicated the ordinary direct gate exactly. Proceed to MA-361, Mixture-of-Depths plus Mirror block-role view.
 
 # Worker queue
 

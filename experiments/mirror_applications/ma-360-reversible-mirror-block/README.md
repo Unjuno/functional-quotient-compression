@@ -1,7 +1,7 @@
 # MA-360 — Reversible shared block with Mirror depth views
 
 Status: SCREENING; protocol frozen before development  
-Branch: `research/ma-360-reversible-mirror-block-20261008`  
+Branch: `research/ma-360-reversible-mirror-block-20261009`
 Base: `c935a90`  
 Prior art: PA48 reversible PEFT.
 
