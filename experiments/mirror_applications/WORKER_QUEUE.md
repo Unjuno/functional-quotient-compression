@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-518.** MA-516 tested support-delta activation vectors on a pinned GPT-2 and found no held-out accuracy improvement; continue within the Function Vectors family with MA-517 raw arithmetic vs structured composition controls. LoReFT candidates remain deferred for redesign after MA-501/502.
+**Current operational pointer (2026-10-09): MA-518.** MA-516 found no held-out task utility from extracted support-delta vectors; MA-517 direct ICL and all composition controls scored 0% on the synthetic held-out targets, so structured composition did not establish utility. Continue with factorized function × domain vectors, while requiring a direct-ICL-positive task control.
 
 # Worker queue
 
