@@ -2,20 +2,20 @@
 
 ## H — Hypothesis
 
-A separate discrete path factor and support-inferred Mirror role coordinate will compose on held-out path-role pairs, using less serialized state than a flat full-module table.
+A factorized path ID plus support-inferred Mirror role generalizes to held-out path-role combinations and beats both flat tables and routing controls on storage/quality.
 
-## T — Planned test
+## T — Test
 
-Synthetic two-layer regression with four paths and six role angles. Compare PathNet path-only, Routing Networks-style selection, factorized Mirror addressing, flat per-combination modules, and independent task matrices. Fresh held-out pair worlds are locked; payloads include all routes, codes, bases and metadata.
+Two-layer 4D regression with four paths × six roles. Eight combinations held out. Fresh worlds 45210–12, three seeds, 64 tasks/seed. Path IDs are provided; Mirror infers role from support. Compare PathNet, Routing Networks-style role index, factorized Mirror, and full per-task matrices. Actual N=1/20/64 payloads include modules and addresses.
 
-## D — Pending
+## D — FAIL for Mirror-specific claim
 
-Protocol frozen; implementation pending.
+At N=20, Mirror and Routing both achieved effectively zero NRMSE on held-out combinations, while PathNet-only scored 0.197. Mirror used 145.45B/task; Routing used 139.05B. Routing matches the function with the same physical modules and role search, but the integer role index is smaller than a float Mirror angle.
 
 ## C — Strongest counter-hypothesis
 
-Routing Networks already factorizes function composition by selecting reusable blocks; Mirror coordinates may only re-encode the same route and role.
+This is ordinary discrete role selection over reusable modules; Mirror adds no unique behavior beyond Routing Networks.
 
 ## U — Unknown
 
-Whether unseen path-role pairs compose at useful quality and byte cost beyond explicit routing.
+No learned path router, continuous role family, or natural-data evidence.

@@ -1,6 +1,41 @@
 {
   "experiment_id": "MA-452",
-  "status": "SCREENING",
-  "protocol_commit": "pending",
-  "checks": []
+  "status": "FAIL",
+  "protocol_commit": "1ac33a9d",
+  "fresh_worlds": [
+    45210,
+    45211,
+    45212
+  ],
+  "fresh_aggregates": 324,
+  "heldout_path_role_pairs": 8,
+  "n20_mean_nrmse": {
+    "pathnet": 0.1974425351385165,
+    "mirror": 0.0,
+    "routing": 0.0,
+    "flat": 1.91767064729844e-07
+  },
+  "n20_actual_serialized_bytes_per_task": {
+    "pathnet": 142.25,
+    "mirror": 145.45,
+    "routing": 139.05,
+    "flat": 146.05
+  },
+  "n64_actual_serialized_bytes_per_task": {
+    "pathnet": 44.453125,
+    "mirror": 48.453125,
+    "routing": 44.453125,
+    "flat": 89.640625
+  },
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-452-factorized-path-view/tests",
+    "passed": 2,
+    "failed": 0
+  },
+  "checks": [
+    "all fresh payload SHA256 and actual sizes replayed",
+    "inferred Mirror role equals teacher role for held-out combos",
+    "Routing Networks control uses same six-candidate role search and physical bank"
+  ],
+  "decision": "FAIL for Mirror-specific value: held-out factorized address generalizes, but Routing Networks has the same quality/compute and lower N20 bytes via compact integer role index."
 }
