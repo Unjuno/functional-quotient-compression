@@ -1,0 +1,68 @@
+{
+  "audit_rows": 40244,
+  "calibration_rows": 10060,
+  "candidate_count": 16,
+  "compute": {
+    "model_load_seconds": 0.10215179700753652,
+    "optimizer_updates": 0,
+    "quantized_matvec_flops_per_token": 51511296,
+    "random_view_quantize_total_seconds": 28.757292362017324,
+    "smoothquant_encode_seconds": 0.7385956800135318,
+    "view_transform_fraction_of_quantized_matvec": 5.963740458015267e-05,
+    "view_transform_ops_per_token": 3072
+  },
+  "exact_full_precision_max_abs_error": 1.2639151032445284e-06,
+  "experiment_id": "MA-573",
+  "methods": {
+    "identity_int4": {
+      "calibration_nrmse": 0.05595607576341023,
+      "encode_seconds": 0.0,
+      "heldout_nrmse": 0.055980560017595236,
+      "payload_bytes": 14490256,
+      "transform_ops_per_token": 0
+    },
+    "mirror_sweep": {
+      "calibration_nrmse": 0.10157131980025068,
+      "encode_seconds": 28.757292362017324,
+      "heldout_nrmse": 0.10157946478907716,
+      "payload_bytes": 14491782,
+      "transform_ops_per_token": 3072
+    },
+    "native_quarot_sweep": {
+      "calibration_nrmse": 0.10157131980025068,
+      "encode_seconds": 28.757292362017324,
+      "heldout_nrmse": 0.10157946478907716,
+      "payload_bytes": 14491789,
+      "transform_ops_per_token": 3072
+    },
+    "quarot_single": {
+      "calibration_nrmse": 0.10157131980025147,
+      "encode_seconds": 1.706918851006776,
+      "heldout_nrmse": 0.10157946478908338,
+      "payload_bytes": 14491783,
+      "transform_ops_per_token": 3072
+    },
+    "smoothquant": {
+      "calibration_nrmse": 0.056558113943967245,
+      "encode_seconds": 0.7385956800135318,
+      "heldout_nrmse": 0.056562934441575716,
+      "payload_bytes": 14491551,
+      "transform_ops_per_token": 512
+    }
+  },
+  "model_revision": "e93a9faa9c77e5d09219f6c868bfc7a1bd65593c",
+  "model_sha256": "3da388330e4549156d76b58d6d268c63cd005e9336b4f4d2d378421e7b7a33fd",
+  "native_sweep_alias": {
+    "metrics_equal": false,
+    "mirror_and_native_code_equal": true,
+    "payload_arrays_equal": true
+  },
+  "output_weight_sha256": "15d6ee9bb2bf6249fbb67ab3d157d81b799b30adb992f87246878a0abfdee18c",
+  "seed": 57302,
+  "selected_candidate_index": 6,
+  "split": "dev",
+  "weight_shape": [
+    50304,
+    512
+  ]
+}
