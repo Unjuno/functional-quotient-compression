@@ -7,3 +7,4 @@
 - Maximum input/materialized relative error: 2.13e-7.
 - CPU-only batch-1024 runtime: input ~35 μs, materialized ~18 μs, one-time materialization ~16 μs.
 - See `VERIFICATION.json`; no Mirror-specific advantage.
+- Verification rerun: 3 tests pass, 576 fresh rows and 960 payload size/SHA-256 manifest entries verified.
