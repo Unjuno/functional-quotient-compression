@@ -55,9 +55,14 @@ def run(phase):
    for stratum in ['aligned','independent']:
     pack,W=tasks(w,seed,stratum);W0,A,B,a0,a1,a2,b0,b1,b2,theta,aa,bb=pack;shared=(W0,A,B,a0,a1,a2,b0,b1,b2);xt,yt,xv,yv=data(w,seed,stratum,W)
     for m in ['vera','mirror','generic','independent_lora']:
-     p,fitsec=fit(m,xt,yt,shared,seed+w);t=time.perf_counter();Wh=weights(m,p,shared);dec=time.perf_counter()-t;pred=torch.einsum('ntd,ndh->nth',xv,Wh);err=nrmse(pred,yv)
+     p,fitsec=fit(m,xt,yt,shared,seed+w);t=time.perf_counter();Wh=weights(m,p,shared);dec=time.perf_counter()-t;pred=torch.einsum('ntd,ndh->nth',xv,Wh);
+     for _ in range(5):_=torch.einsum('ntd,ndh->nth',xv,Wh)
+     app=[]
+     for _ in range(20):
+      ta=time.perf_counter();_=torch.einsum('ntd,ndh->nth',xv,Wh);app.append(time.perf_counter()-ta)
+     applysec=sorted(app)[len(app)//2];err=nrmse(pred,yv)
      obj={'method':m,'base':W0,'shared_A':A if m!='independent_lora' else torch.empty(0),'shared_B':B if m!='independent_lora' else torch.empty(0),'scale_basis':[a0,a1,a2,b0,b1,b2] if m!='independent_lora' else [],'task_state':p,'metadata':{'N':N,'rank':R,'stratum':stratum,'world':w,'seed':seed}};blob=ser(obj);path=ROOT/'artifacts'/'payloads'/f'{w}_{seed}_{stratum}_{m}.pt';path.parent.mkdir(parents=True,exist_ok=True);path.write_bytes(blob)
-     rows.append({'world':w,'seed':seed,'stratum':stratum,'method':m,'nrmse':err,'payload_bytes':len(blob),'sha256':hashlib.sha256(blob).hexdigest(),'path':str(path.relative_to(ROOT.parents[2])),'fit_seconds':fitsec,'decode_seconds':dec,'updates':STEPS,'tasks':N})
+     rows.append({'world':w,'seed':seed,'stratum':stratum,'method':m,'nrmse':err,'payload_bytes':len(blob),'sha256':hashlib.sha256(blob).hexdigest(),'path':str(path.relative_to(ROOT.parents[2])),'fit_seconds':fitsec,'decode_seconds':dec,'apply_seconds':applysec,'updates':STEPS,'tasks':N})
  with (ROOT/f'{phase.upper()}_RESULTS.csv').open('w',newline='') as f:wri=csv.DictWriter(f,fieldnames=rows[0]);wri.writeheader();wri.writerows(rows)
  print(json.dumps({'phase':phase,'rows':len(rows)}))
 if __name__=='__main__':

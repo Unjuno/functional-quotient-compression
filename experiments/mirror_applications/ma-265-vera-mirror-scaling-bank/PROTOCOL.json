@@ -1,7 +1,7 @@
 {
   "experiment_id": "MA-265",
   "title": "VeRA shared scaling bases with Mirror task coordinates",
-  "status": "FROZEN_SCREENING",
+  "status": "COMPLETED_FAIL",
   "base_commit": "2f5c11f9",
   "evidence_lane": "VERA_ADAPTER_BANK/QUALITY/ACTUAL_BYTES/DECODE_COMPUTE",
   "prior_art_refs": [
@@ -61,7 +61,7 @@
       1,
       2
     ],
-    "locked_before_access": true
+    "locked_before_access": false
   },
   "storage": {
     "authority": "actual torch-serialized deployed bank bytes including base, shared A/B, shared scale basis, task codes or full scales and metadata"
@@ -110,5 +110,46 @@
       "independent_lora": 0.0028
     },
     "decision": "Continue fixed protocol to fresh despite development storage gate miss to map fresh failure and private-scale boundary."
+  },
+  "amendment_A1_timing": {
+    "reason": "Initial fresh results contained fit and reconstruction time but omitted the preregistered task-batch application latency.",
+    "change": "Replay identical worlds, seeds, task scales, fitted codes, and payloads; time 5 warmup plus 20 repeated held-out task-bank applications and report median.",
+    "authoritative": "Quality values and serialized payload hashes must remain identical; only apply_seconds is added.",
+    "fresh_worlds": [
+      26510,
+      26511,
+      26512
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ]
+  },
+  "result_summary": {
+    "aligned_nrmse": {
+      "mirror": 0.0,
+      "generic": 0.0,
+      "vera": 0.0,
+      "independent_lora": 0.0016
+    },
+    "aligned_bytes": {
+      "mirror": 9925,
+      "generic": 10178,
+      "vera": 10690,
+      "independent_lora": 23001
+    },
+    "aligned_fit_seconds": {
+      "mirror": 4.89,
+      "generic": 0.27,
+      "vera": 0.34
+    },
+    "independent_nrmse": {
+      "mirror": 0.3335,
+      "generic": 0.3049,
+      "vera": 0.0002,
+      "independent_lora": 0.0021
+    },
+    "interpretation": "Mirror missed the preregistered 70% VeRA-byte gate; generic two-coefficient codes were nearly as compact, exact on the aligned orbit, and about 18x faster to fit."
   }
 }

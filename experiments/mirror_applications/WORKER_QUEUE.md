@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-265.** MA-261 FAIL: the generic rank-one coefficient control matched Mirror at identical bytes, and standard MoE had better routed quality at equal bytes. Continue to MA-265 with native VeRA shared bases and independent scaling vectors as the required baseline.
+**Current operational pointer (2026-10-09): MA-266.** MA-265 FAIL: Mirror saved only 2.5% vs generic, took ~18x longer to fit, and failed on independent scaling tasks. Continue to MA-266 with native VeRA and private residual controls.
 
 # Worker queue
 

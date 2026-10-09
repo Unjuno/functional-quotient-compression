@@ -1,0 +1,25 @@
+{
+  "experiment_id": "MA-265",
+  "commit": "pending final result commit",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-265-vera-mirror-scaling-bank/tests -v",
+    "passed": 5,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": false,
+    "byte_exact": true,
+    "note": "All fresh payload sizes and hashes checked; A1 replay preserved payload hashes."
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0,
+    "note": "A1 replay preserved every NRMSE value against pre-timing fresh CSV."
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Fresh: worlds 26510-26512 \u00d7 seeds 0-2, aligned and independent strata; 72 rows.",
+    "Mirror aligned: 9,925B and NRMSE 0; generic: 10,178B and NRMSE 0; VeRA: 10,690B and NRMSE 0.",
+    "Mirror fitting ~4.89s/bank vs generic ~0.27s; independent tasks require VeRA/private scales."
+  ]
+}
