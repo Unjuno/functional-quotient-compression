@@ -1,0 +1,69 @@
+{
+  "date_jst": "2026-10-09",
+  "branch": "research/function-first-shared-private-fresh-20261009",
+  "comparison": "source-aware native LoRA rank4 versus source-only shared rank10 core + rank1 private, 64x96 nonlinear MLP FFN",
+  "science_status": {
+    "FF_NL_004": "FAIL_DEVELOPMENT_GATE",
+    "FF_NL_005": "FAIL_DEVELOPMENT_GATE",
+    "FF_NL_006": "FAIL_DEVELOPMENT_GATE",
+    "FF_NL_007_dev": "PROMISING_DEVELOPMENT_ONLY",
+    "FF_NL_007_fresh": "PROMISING_FRESH_REPLICATED_NARROW"
+  },
+  "verification": {
+    "tests_passed": 28,
+    "tests_failed": 0,
+    "rows_replayed": 944,
+    "serialization_banks_reloaded": 236,
+    "ce_max_abs_error": 9.5367431640625e-7,
+    "accuracy_max_abs_error": 0,
+    "fresh_seeds_opened": [
+      6911,
+      6912,
+      6913
+    ],
+    "initial_retried_payloads_exact": 48
+  },
+  "ffnl007": {
+    "seeds_dev": [
+      6901,
+      6902,
+      6903,
+      6904,
+      6905,
+      6906
+    ],
+    "seeds_fresh": [
+      6911,
+      6912,
+      6913
+    ],
+    "fresh_candidate_accuracy": 0.8494661152362823,
+    "fresh_native_accuracy": 0.8555013909935951,
+    "fresh_ce_gap": -0.023169829199711483,
+    "dev_paired_ce_gap": 0.004184061971803506,
+    "dev_paired_CE_90_percent_bootstrap": [
+      -0.008893756506343683,
+      0.01635619904845953
+    ],
+    "dev_paired_acc_gap": -0.004932679235935211,
+    "fresh_full_bank8_bytes": {
+      "shared_private_rank1": 77830,
+      "native_warm_lora4": 80436
+    }
+  },
+  "hashes": {
+    "science_source_sha256": "244d7aecb349d70fbc4787a5b08732f391b9bd71106996d292f9266065febea7",
+    "development_protocol_sha256": "6afdb97781d2718388548c50e8f5de341069ad2dd1b38ce3a28deef35fc561be",
+    "fresh_protocol_sha256": "250250d782d73443e23bad8a00830954f1aad4ba7a8f6e83dcacde0bd653ee76",
+    "complete_archive_sha256": "bb7ea18f9fb3d8835dab6dd2b43ee00d58bd5d5ff4465fb2be9ca4d13d892ea2",
+    "source_reports_archive_sha256": "ef8b95bec48e59033911a5c7103b901cc164815210fafb991795c9d06edd27e4"
+  },
+  "limits": [
+    "Source-only basis training and preparation cost is not free",
+    "Tested domain shifts are synthetic transforms of one real digit-image dataset",
+    "Bootstrap intervals across splits are not valid confidence intervals for an independent target distribution",
+    "Shared/private core is native/prior-art-adjacent; no Mirror-specific innovation established",
+    "GitHub contains summary/hash only; raw evidence and executable source archive are conversation artifacts",
+    "main is untouched"
+  ]
+}
