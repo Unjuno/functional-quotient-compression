@@ -10,6 +10,11 @@ class RoleOpsTest(unittest.TestCase):
         y=givens_view(x,a)
         self.assertTrue(torch.allclose(x.norm(dim=-1),y.norm(dim=-1),atol=2e-6))
         self.assertTrue(torch.allclose(givens_view(y,-a),x,atol=2e-6))
+    def test_sparse_decode_backpropagates_to_view_angles(self):
+        torch.manual_seed(7); code=torch.rand(6,32); angles=torch.nn.Parameter(torch.zeros(16)); dec=torch.randn(32,6); x=torch.randn(6,6);skip=torch.randn(6,6);bias=torch.randn(6)
+        viewed=givens_view(code,angles); y,_,_=sparse_decode(viewed,dec,bias,skip,x,8); y.square().mean().backward()
+        self.assertIsNotNone(angles.grad); self.assertGreater(float(angles.grad.abs().sum()),0.0)
+
     def test_sparse_decode_uses_exactly_k_atoms(self):
         torch.manual_seed(3); x=torch.randn(5,6); code=torch.rand(5,32); dec=torch.randn(32,6); b=torch.randn(6); skip=torch.randn(6,6)
         y,ids,vals=sparse_decode(code,dec,b,skip,x,8)
