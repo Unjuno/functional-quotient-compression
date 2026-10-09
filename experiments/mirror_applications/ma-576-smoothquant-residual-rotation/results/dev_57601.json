@@ -1,0 +1,179 @@
+{
+  "candidate_count": 16,
+  "compute": {
+    "candidate_calibration_seconds": 16.04979301500134,
+    "model_load_seconds": 0.03953032399294898,
+    "optimizer_updates": 0,
+    "per_token_view_ops_per_module": 3072,
+    "total_wall_seconds": 21.9180445309903
+  },
+  "evaluation": "calibration/audit output-row split per matrix; no held-out layer claim",
+  "experiment_id": "MA-576",
+  "file_sizes": {
+    "identity_int4": {
+      "channel_scale_bytes": 0,
+      "files": [
+        "identity_int4_weights.npz"
+      ],
+      "rotation_code_bytes": 0,
+      "total_payload_bytes": 4425842,
+      "weight_payload_bytes": 4425842
+    },
+    "native_smoothquant_quarot": {
+      "channel_scale_bytes": 13074,
+      "files": [
+        "native_smoothquant_quarot_weights.npz",
+        "native_smoothquant_quarot_channel_scales.npz",
+        "native_smoothquant_quarot_rotation_codes.npz"
+      ],
+      "rotation_code_bytes": 2058,
+      "total_payload_bytes": 4440974,
+      "weight_payload_bytes": 4425842
+    },
+    "quarot_global": {
+      "channel_scale_bytes": 0,
+      "files": [
+        "quarot_global_weights.npz",
+        "quarot_global_rotation_codes.npz"
+      ],
+      "rotation_code_bytes": 1354,
+      "total_payload_bytes": 4427196,
+      "weight_payload_bytes": 4425842
+    },
+    "smoothquant_only": {
+      "channel_scale_bytes": 13074,
+      "files": [
+        "smoothquant_only_weights.npz",
+        "smoothquant_only_channel_scales.npz"
+      ],
+      "rotation_code_bytes": 0,
+      "total_payload_bytes": 4438916,
+      "weight_payload_bytes": 4425842
+    },
+    "smoothquant_quarot_global": {
+      "channel_scale_bytes": 13074,
+      "files": [
+        "smoothquant_quarot_global_weights.npz",
+        "smoothquant_quarot_global_channel_scales.npz",
+        "smoothquant_quarot_global_rotation_codes.npz"
+      ],
+      "rotation_code_bytes": 1354,
+      "total_payload_bytes": 4440270,
+      "weight_payload_bytes": 4425842
+    },
+    "smoothquant_random_residual": {
+      "channel_scale_bytes": 13074,
+      "files": [
+        "smoothquant_random_residual_weights.npz",
+        "smoothquant_random_residual_channel_scales.npz",
+        "smoothquant_random_residual_rotation_codes.npz"
+      ],
+      "rotation_code_bytes": 1354,
+      "total_payload_bytes": 4440270,
+      "weight_payload_bytes": 4425842
+    },
+    "smoothquant_residual_mirror": {
+      "channel_scale_bytes": 13074,
+      "files": [
+        "smoothquant_residual_mirror_weights.npz",
+        "smoothquant_residual_mirror_channel_scales.npz",
+        "smoothquant_residual_mirror_rotation_codes.npz"
+      ],
+      "rotation_code_bytes": 2058,
+      "total_payload_bytes": 4440974,
+      "weight_payload_bytes": 4425842
+    }
+  },
+  "global_code_id": 9,
+  "methods": {
+    "identity_int4": {
+      "channel_scale_bytes": 0,
+      "encode_seconds": 0.27478771400637925,
+      "max_heldout_matrix_nrmse": 0.09897106623050532,
+      "mean_audit_nrmse": 0.09731253736281183,
+      "mean_calibration_nrmse": 0.09729845254399345,
+      "rotation_code_bytes": 0,
+      "total_payload_bytes": 4425842,
+      "weight_payload_bytes": 4425842
+    },
+    "native_smoothquant_quarot": {
+      "channel_scale_bytes": 13074,
+      "encode_seconds": 0.9788108660141006,
+      "max_heldout_matrix_nrmse": 0.10952806792397418,
+      "mean_audit_nrmse": 0.09954078464727274,
+      "mean_calibration_nrmse": 0.10008060697931757,
+      "rotation_code_bytes": 2058,
+      "total_payload_bytes": 4440974,
+      "weight_payload_bytes": 4425842
+    },
+    "quarot_global": {
+      "channel_scale_bytes": 0,
+      "encode_seconds": 1.0179046599951107,
+      "max_heldout_matrix_nrmse": 0.09739667230156245,
+      "mean_audit_nrmse": 0.0969456023895247,
+      "mean_calibration_nrmse": 0.09707358783831567,
+      "rotation_code_bytes": 1354,
+      "total_payload_bytes": 4427196,
+      "weight_payload_bytes": 4425842
+    },
+    "smoothquant_only": {
+      "channel_scale_bytes": 13074,
+      "encode_seconds": 0.23116764501901343,
+      "max_heldout_matrix_nrmse": 0.12325723681926892,
+      "mean_audit_nrmse": 0.10337599372302565,
+      "mean_calibration_nrmse": 0.1055694590654585,
+      "rotation_code_bytes": 0,
+      "total_payload_bytes": 4438916,
+      "weight_payload_bytes": 4425842
+    },
+    "smoothquant_quarot_global": {
+      "channel_scale_bytes": 13074,
+      "encode_seconds": 1.1249063319992274,
+      "max_heldout_matrix_nrmse": 0.10952806792397417,
+      "mean_audit_nrmse": 0.09954078464727274,
+      "mean_calibration_nrmse": 0.10008060697931757,
+      "rotation_code_bytes": 1354,
+      "total_payload_bytes": 4440270,
+      "weight_payload_bytes": 4425842
+    },
+    "smoothquant_random_residual": {
+      "channel_scale_bytes": 13074,
+      "encode_seconds": 1.0279628899879754,
+      "max_heldout_matrix_nrmse": 0.10952806792397415,
+      "mean_audit_nrmse": 0.09954078464727274,
+      "mean_calibration_nrmse": 0.10008060697931759,
+      "rotation_code_bytes": 1354,
+      "total_payload_bytes": 4440270,
+      "weight_payload_bytes": 4425842
+    },
+    "smoothquant_residual_mirror": {
+      "channel_scale_bytes": 13074,
+      "encode_seconds": 0.9714190379891079,
+      "max_heldout_matrix_nrmse": 0.10952806792397418,
+      "mean_audit_nrmse": 0.09954078464727274,
+      "mean_calibration_nrmse": 0.10008060697931757,
+      "rotation_code_bytes": 2058,
+      "total_payload_bytes": 4440974,
+      "weight_payload_bytes": 4425842
+    }
+  },
+  "model_revision": "e93a9faa9c77e5d09219f6c868bfc7a1bd65593c",
+  "model_sha256": "3da388330e4549156d76b58d6d268c63cd005e9336b4f4d2d378421e7b7a33fd",
+  "native_alias": true,
+  "per_matrix_code_ids": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    2,
+    0,
+    0,
+    9,
+    0,
+    0,
+    0
+  ],
+  "seed": 57601,
+  "split": "dev"
+}

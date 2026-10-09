@@ -1,6 +1,6 @@
 # MA-576 — SmoothQuant + residual rotation
 
-Status: SCREENING
+Status: FAIL
 Prior art: PA114 SmoothQuant; PA112 QuaRot
 
 ## H
