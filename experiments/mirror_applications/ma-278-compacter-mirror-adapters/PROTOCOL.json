@@ -1,0 +1,15 @@
+{
+  "experiment_id":"MA-278","title":"Compacter shared fast factors versus Mirror modulation","status":"SCREENING","base_commit":"79c4595c","evidence_lane":"HYPERCOMPLEX_ADAPTER/QUALITY/ACTUAL_BYTES/INTERFERENCE","prior_art_refs":[23],
+  "hypothesis":"Mirror codes over shared Compacter slow weights and fast-factor bases can represent aligned multi-task adapter updates with fewer bytes while preserving task quality; independent task updates may require native per-task fast factors.",
+  "physical_object":"one frozen 16×16 linear map plus shared Compacter slow basis","mirror_coordinate":"per-task scalar modulation of shared rank-one/Kronecker fast-factor atoms","logical_multiplicity":"eight task adapter functions",
+  "model":{"input_dim":16,"output_dim":16,"tasks":8,"shared_atoms":4},"task":{"support_examples":256,"audit_examples":512,"strata":["shared factor-combination tasks","independent low-rank task updates"]},
+  "controls":["no adapter","native Compacter shared slow + per-task fast factors","shared atom basis plus Mirror scalar codes","generic coefficient code over same atoms","independent rank-2 LoRA upper"],
+  "development":{"worlds":[27800,27801],"seeds":[0,1,2],"allowed":"validate Kronecker factor shapes, support fitting, task interference and serialized payload accounting"},
+  "fresh":{"worlds":[27810,27811,27812],"seeds":[0,1,2],"locked_before_access":true},
+  "storage":{"authority":"actual serialized inference payload bytes including shared bases and all task coefficients/factors","paid_objects":["shared slow weights","fast atoms","task codes","metadata"]},
+  "compute":{"report_fit_updates":true,"report_fit_seconds":true,"report_apply_macs":true,"report_task_interference":true},
+  "success_gate":"Aligned tasks: Mirror/generic atom code NRMSE <=0.01 and payload <=70% of native Compacter; Mirror-specific value additionally requires >=10% quality/byte improvement over generic coefficients.",
+  "failure_gate":"Mirror NRMSE >0.05 or independent-task cross-task interference >0.25; generic coefficient match means no Mirror-specific gain.",
+  "amendments":["Development revealed that the initial serializer double-counted W and aligned targets used four independent atom coefficients while Mirror used one. Before fresh access, aligned targets were fixed to one scalar over one shared atom direction and serialization was corrected to charge W/bases/codes once. Earlier development rows are exploratory and retained."],
+  "boundaries":["Synthetic linear adapters only","No language-model quality claim","Compacter is prior art and mandatory direct control","Logical combinations are not capacity without measured held-out quality"]
+}
