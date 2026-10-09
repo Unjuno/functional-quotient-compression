@@ -8,15 +8,88 @@
   "physical_object": "one fixed 16-24-8 two-layer ReLU MLP",
   "mirror_coordinate": "a hidden-unit permutation, positive scaling, or Givens rotation code",
   "logical_multiplicity": "count only functionally distinct outputs; gauge-equivalent coordinates count as one",
-  "prior_art_refs": [37, 47],
-  "controls": ["canonical baseline", "permutation-reindexed hidden units", "positive scaling with inverse outgoing compensation", "negative scaling with inverse compensation", "uncompensated Givens activation view", "Givens parameter transform with compensation", "independent full weights as storage reference"],
-  "model": {"input": 16, "hidden": 24, "output": 8, "relu": true},
-  "data": {"inputs_per_world": 4096, "distribution": "fixed-seed standard Gaussian", "metrics": ["output NRMSE", "max absolute output difference"]},
-  "development": {"worlds": [33201, 33202], "optimizer_updates": 0, "selection_metric": "symmetry output NRMSE and actual serialized bytes"},
-  "fresh": {"worlds": [33211, 33212, 33213], "locked_before_access": true, "optimizer_updates": 0},
-  "storage": {"authority": "actual serialized deterministic inference payload bytes", "paid_objects": ["shared weights and biases", "per-view transform code", "metadata"]},
-  "compute": {"report_examples": true, "optimizer_updates": 0, "active_compute_proxy": true, "isolated_wall_clock": true},
+  "prior_art_refs": [
+    37,
+    47
+  ],
+  "controls": [
+    "canonical baseline",
+    "permutation-reindexed hidden units",
+    "positive scaling with inverse outgoing compensation",
+    "negative scaling with inverse compensation",
+    "uncompensated Givens activation view",
+    "Givens parameter transform with compensation",
+    "independent full weights as storage reference"
+  ],
+  "model": {
+    "input": 16,
+    "hidden": 24,
+    "output": 8,
+    "relu": true
+  },
+  "data": {
+    "inputs_per_world": 4096,
+    "distribution": "fixed-seed standard Gaussian",
+    "metrics": [
+      "output NRMSE",
+      "max absolute output difference"
+    ]
+  },
+  "development": {
+    "worlds": [
+      33221,
+      33222
+    ],
+    "optimizer_updates": 0,
+    "selection_metric": "symmetry output NRMSE and actual serialized bytes"
+  },
+  "fresh": {
+    "worlds": [
+      33231,
+      33232,
+      33233
+    ],
+    "locked_before_access": true,
+    "optimizer_updates": 0
+  },
+  "storage": {
+    "authority": "actual serialized deterministic inference payload bytes",
+    "paid_objects": [
+      "shared weights and biases",
+      "per-view transform code",
+      "metadata"
+    ]
+  },
+  "compute": {
+    "report_examples": true,
+    "optimizer_updates": 0,
+    "active_compute_proxy": true,
+    "isolated_wall_clock": true
+  },
   "success_gate": "Exact permutation, positive rescaling and compensated transform output NRMSE <=1e-6; uncompensated Givens output NRMSE >1e-3; gauge class has one unique logical output within tolerance.",
   "failure_gate": "An asserted exact symmetry exceeds 1e-6 or uncompensated Givens is <=1e-3 NRMSE.",
-  "boundaries": ["fixed random synthetic ReLU MLP", "no trained model or task quality", "audit/control only, not a compression win", "no extrapolation to arbitrary architectures"]
+  "boundaries": [
+    "fixed random synthetic ReLU MLP",
+    "no trained model or task quality",
+    "audit/control only, not a compression win",
+    "no extrapolation to arbitrary architectures"
+  ],
+  "amendment_A1": {
+    "reason": "The first implementation promoted random weight matrices to float64 while the serializer declared float32; payload reload verification exposed a dtype/byte-layout mismatch after initial fresh access. The A0 fresh rows are quarantined and excluded.",
+    "changes": [
+      "Cast generated model weights explicitly to float32 before evaluation and serialization.",
+      "Add payload decoder and fresh hash/metric replay verification.",
+      "Use disjoint A1 development worlds 33221-33222 and fresh worlds 33231-33233; do not reuse A0 fresh worlds."
+    ],
+    "frozen_before_A1_access": true,
+    "development_worlds": [
+      33221,
+      33222
+    ],
+    "fresh_worlds": [
+      33231,
+      33232,
+      33233
+    ]
+  }
 }
