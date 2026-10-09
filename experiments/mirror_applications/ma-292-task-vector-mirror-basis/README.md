@@ -6,7 +6,7 @@ A shared basis and compact task coordinates can reconstruct held-out task functi
 
 ## T — Conditions
 
-Synthetic 256-dimensional linear task deltas from a shared rank-4 basis. Twelve task identities expose 64 support examples; four identities are held out; eight composition pairs are evaluated on separate queries. Fresh worlds 29210–29212 × seeds 0–2; 72 rows. Compared PCA basis, Mirror coordinates, generic coefficients, raw task vectors, ordinary vector addition and independent upper. Basis fitting uses train task deltas; held-out coefficients use only support input/output examples. Fresh protocol/source commit `5cfa9d2b` preceded fresh. CPU only.
+Synthetic 256-dimensional linear task deltas from a shared rank-4 basis. Twelve task identities expose 64 support examples; four identities are held out; eight composition pairs are evaluated on separate queries. Fresh worlds 29210–29212 × seeds 0–2; 108 rows (54 held-out-task and 54 held-out-composition rows). Compared PCA basis, Mirror coordinates, generic coefficients, raw task vectors, ordinary vector addition and independent upper. Basis fitting uses train task deltas; held-out coefficients use only support input/output examples. Fresh protocol/source commit `5cfa9d2b` preceded fresh. CPU only.
 
 ## D — FAIL for Mirror-specific claim; shared-basis compression replicated
 
