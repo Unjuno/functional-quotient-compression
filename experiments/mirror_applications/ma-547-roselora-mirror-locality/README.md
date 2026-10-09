@@ -11,7 +11,7 @@ A key-routed residual-space edit vector can transfer a synthetic counterfactual 
 
 ## T — Execution
 
-Pending. The screen uses a pinned Pythia-70M model, 16 synthetic key/value relabelings, four support and four held-out paraphrases per key, and dev seeds 54701/54702. Fresh seeds 54711–54713 remain locked until the development result and artifacts are committed. The key router, target margin, controls and analytic edit constructions are fixed; no parameter learning or hyperparameter tuning.
+Pending. The screen uses a pinned Pythia-70M model, 16 synthetic key/value relabelings, four support and four held-out paraphrases per key, and dev seeds 54701/54702. Amendment 1 replaces the failing BPE subsequence matcher with the frozen exact UTF-8 key matcher. Initial output is preserved under `results/pre_amendment_1/`; rerun dev before fresh access. The key router, target margin, controls and analytic edit constructions are fixed; no parameter learning or hyperparameter tuning.
 
 ## D — Decision
 

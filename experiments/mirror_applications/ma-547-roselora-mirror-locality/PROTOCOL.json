@@ -42,7 +42,7 @@
     ]
   },
   "edit_rule": {
-    "key": "slot-00 through slot-15, tokenized and matched as exact subsequences in the prompt; store padded key token IDs, lengths and edit indices.",
+    "key": "KEY-00 through KEY-15; router performs exact UTF-8 substring matching on the key string in the prompt. Serialize padded UTF-8 keys, byte lengths and edit indices.",
     "answers": "Per seed, sample 32 distinct ordinary token IDs; pair into old/new labels for 16 edits. Score the two answer-token logits only.",
     "target_margin_gain": 2.0,
     "mirror_vector": "At final-layernorm hidden h, m_i=2*(W_new-W_old)/||W_new-W_old||^2, so linear unembedding raises target-minus-old margin by exactly 2 when routed.",
@@ -73,7 +73,7 @@
       "all Mirror residual vectors",
       "all sparse RoseLoRA output-row factors/indices",
       "all gated scalar biases and answer IDs",
-      "key token sequences, lengths, edit indices and schema",
+      "UTF-8 key strings, byte lengths and edit indices and schema",
       "model/task metadata and deterministic edit seed"
     ],
     "reporting": "Report exact NPZ sizes for each edit system, incremental state and standalone Pythia total. No support text is required at inference and is not charged as state."
@@ -84,7 +84,7 @@
     "report_optimizer_updates": false,
     "report_active_compute_proxy": true,
     "report_isolated_wall_clock": true,
-    "active_compute_proxy": "Report support/query model forwards, one 512D vector add, sparse output-row dot products, key-token comparisons, scalar bias operations, scored prompts/tokens and all stage timings."
+    "active_compute_proxy": "Report support/query model forwards, one 512D vector add, sparse output-row dot products, UTF-8 key-string comparisons, scalar bias operations, scored prompts/tokens and all stage timings."
   },
   "success_gate": "Both dev seeds and all three fresh seeds: Mirror held-out edit success >=.75 and mean margin gain >=1.5; non-target mean KL <=.01; and at the measured quality/locality point Mirror improves over both same-router RoseLoRA and gated scalar bias on a byte/quality Pareto dimension. Fresh stays locked until dev thresholds and provenance pass.",
   "failure_gate": "Mirror misses efficacy or locality in any fresh world, or the same-key gated bias/RoseLoRA control matches or dominates its edit/locality outcome at lower or equal actual bytes.",
