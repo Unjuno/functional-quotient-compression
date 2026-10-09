@@ -4,7 +4,7 @@
 - Branch: `research/ma-522-persistent-function-code-session-20261009`
 - Model: pinned GPT-2 revision `607a30d783dfa663caf39e06633721c8d4cfcd7e`, CPU float32
 - Fresh: 52210–52212 × seeds 0–2 (9 banks; 45 rows)
-- Tests: 2 passed; state/context bytes and hashes verified
+- Result commit: `42b813e2`; tests: 2 passed; state/context bytes and hashes verified
 
 ## H / T / D / C / U
 

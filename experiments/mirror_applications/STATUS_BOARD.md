@@ -27,7 +27,7 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 Reason:
 - MA-470/471/473/475/476/478/481/482, MA-483, MA-484, MA-486, MA-487, MA-488, MA-492, MA-494, MA-498, MA-501, MA-502 and MA-516 are completed on dedicated branches and cross-linked in the claim ledger;
-- MA-501 and MA-502 both found that VQ coordinates add substantial distortion over compact FP16 shared coordinates. The LoReFT representation-view family is temporarily deferred for redesign; skipped registry candidates remain UNTESTED. MA-516–519 now have checked scoped failures; MA-519 routed identities at 95.83% mean but FVs had 0% task accuracy and cost more bytes. Proceed to MA-520 with native per-task vectors and simple shared-code controls. Other completed candidates remain cross-linked in the claim ledger.
+- MA-501 and MA-502 both found that VQ coordinates add substantial distortion over compact FP16 shared coordinates. The LoReFT representation-view family is temporarily deferred for redesign; skipped registry candidates remain UNTESTED. MA-516–522 now have checked scoped failures. Their common prompt-delta extraction did not yield executable functions, even where direct ICL passed. The Function Vector family is paused pending causal/head-specific extraction gates; MA-523 remains UNTESTED. Other completed candidates remain cross-linked in the claim ledger.
 
 Required controls: explicit extracted function vectors, shared PCA/Mirror basis codes, randomized/signed coefficient control, and function-vector ablation; actual serialized vector bytes and held-out function accuracy are primary.
 
@@ -115,19 +115,19 @@ KG relation rotations (RotatE, TuckER, QuatE, PairRE), EXIF/device-aware ISPs (P
 **MA-517 FAIL (scoped synthetic composition):** Direct ICL, query-only, raw vector sum, layer-factorized application and single-vector ablations all scored 0% in 9 fresh world-seed banks. Factorized placement lowered mean target NLL slightly (9.878 vs 9.967) at identical 99,945B payload, but did not recover exact behavior. Direct ICL itself missed the preregistered gate. **Next: MA-518 (P0).**
 
 
-**MA-518 FAIL (scoped prompt-delta quality failure; factorization not established):** direct ICL was 31.25%, but explicit/generic/factorized interventions scored 0% across 9 fresh banks. The factorized decoder ignored stored function/domain codes and used a flat rank-2 projection, so its apparent byte advantage is invalid. See MA-518 report. **Next: MA-519 (P1).**
+**MA-518 FAIL (scoped prompt-delta quality failure; factorization not established):** direct ICL was 31.25%, but explicit/generic/factorized interventions scored 0% across 9 fresh banks. The factorized decoder ignored stored function/domain codes and used a flat rank-2 projection, so its apparent byte advantage is invalid. See MA-518 report. **Next: MA-523 deferred pending family redesign gates.**
 
 
-**MA-519 FAIL (context routing):** cosine router identity accuracy averaged 95.83%, but oracle/routed FV task accuracy was 0%; router+FV bytes were 75,685B vs explicit bank+IDs 50,921B. The symbolic-router control was omitted, so no Mirror-specific routing claim. **Next: MA-520 (P0).**
+**MA-519 FAIL (context routing):** cosine router identity accuracy averaged 95.83%, but oracle/routed FV task accuracy was 0%; router+FV bytes were 75,685B vs explicit bank+IDs 50,921B. The symbolic-router control was omitted, so no Mirror-specific routing claim. **Next: MA-523 deferred pending the family redesign gates.**
 
 
-**MA-520 FAIL (FV code distillation):** K8 PQ reduced intervention payload from 50,921B to 14,117B, but accuracy remained 0% and NLL worsened versus explicit vectors. This is storage-only compression of a nonfunctional prompt-delta representation. Runtime not measured. **Next: MA-521 (P0).**
+**MA-520 FAIL (FV code distillation):** K8 PQ reduced intervention payload from 50,921B to 14,117B, but accuracy remained 0% and NLL worsened versus explicit vectors. This is storage-only compression of a nonfunctional prompt-delta representation. Runtime not measured. **Next: MA-523 deferred pending the family redesign gates.**
 
 
-**MA-521 FAIL (demo-to-code):** 4D code prediction reached 25% identity accuracy, but direct ICL was 37.5% and oracle/compiled FVs 0%; compiled bytes were 61,017B vs 50,921B explicit. Context savings/runtime and HyperFormer control omitted. **Next: MA-522 (P1).**
+**MA-521 FAIL (demo-to-code):** 4D code prediction reached 25% identity accuracy, but direct ICL was 37.5% and oracle/compiled FVs 0%; compiled bytes were 61,017B vs 50,921B explicit. Context savings/runtime and HyperFormer control omitted. **Next: MA-523 deferred pending the family redesign gates.**
 
 
-**MA-522 FAIL (persistent session code):** at 8 turns, repeated ICL scored 42.19% versus 1.56% for explicit/PCA/PQ FV states. PCA/PQ combined state+context bytes were 23,118B/32,018B versus 14,957B repeated ICL; context tokens and CPU time decreased but utility and total-byte gates failed. **Next: MA-523 (P1).**
+**MA-522 FAIL (persistent session code):** at 8 turns, repeated ICL scored 42.19% versus 1.56% for explicit/PCA/PQ FV states. PCA/PQ combined state+context bytes were 23,118B/32,018B versus 14,957B repeated ICL; context tokens and CPU time decreased but utility and total-byte gates failed. **MA-523 remains UNTESTED and deferred pending causal/head-specific FV resume gates.**
 
 
 **Function Vector family paused before MA-523:** MA-516–522 share the structural failure that explicit prompt-minus-query deltas do not execute the task; routing/compression/persistence do not repair it. MA-518 also had a separate factor-decoder defect. Resume only after a preregistered causal head-specific extraction passes direct-ICL and explicit-vector utility gates. See [redesign criteria](../../docs/phase2/FUNCTION_VECTOR_FAMILY_REDESIGN_2026-10-09.md). MA-523 remains UNTESTED.
