@@ -24,7 +24,7 @@ H: A shared rank-4 activation-steering basis plus a per-behavior low-description
 - D=64, rank=4, 64 behavior vectors; 20% of behavior IDs are held out from any basis/seed fitting.
 - Fresh worlds: 50820/50821/50822 × seeds 0/1/2. Development worlds: 50800/50801 × seeds 0/1/2.
 - Two regimes: fixed-norm two-plane Givens orbit (`rho=0`) and 10% coefficient-space private residual (`rho=.1`).
-- `B` is a known shared synthetic basis charged in each low-rank payload. The seed code is fitted using development behaviors only. Fresh test behavior angles are not used to tune anything; their compact codes are their stored intervention state.
+- `B` is a known shared synthetic basis charged in each low-rank payload. The shared basis and seed are fixed by a public deterministic synthetic construction and charged in every payload. Development validates the encoder; fresh behavior angles are not used to tune anything and their compact codes are paid inference state.
 - A fixed random set of 32 unit readout probes is frozen per world. Efficacy is target-readout activation change relative to the explicit-vector teacher. Off-target drift is RMS change under 31 non-target probes. Also report vector NRMSE and exact payload bytes.
 
 ## Methods
@@ -45,3 +45,8 @@ H: A shared rank-4 activation-steering basis plus a per-behavior low-description
 ## Boundaries
 
 This is a controlled synthetic Activation Addition screen, not a pretrained-language-model behavior-steering result. The aligned orbit is deliberately favorable to Mirror. Codes for the 64 test behavior directions are paid inference state. Logical behavior count is not capacity.
+
+
+### Amendment A1 (before development/fresh)
+
+The protocol now fixes one shared basis/seed across development and fresh banks instead of fitting a separate basis per world. This prevents per-world shared-model changes from being confused with behavior-code storage. Both tensors are included in every applicable serialized payload. No fresh data has been opened.

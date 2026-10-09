@@ -36,7 +36,7 @@
   "development": {
     "worlds": [50800, 50801],
     "seeds": [0, 1, 2],
-    "allowed": "Fit shared rank-4 basis/seed and verify deterministic decoder only; no fresh angle or residual tuning."
+    "allowed": "No hyperparameter selection; run development only to validate deterministic encode/decode and the common fixed shared object."
   },
   "fresh": {
     "worlds": [50820, 50821, 50822],
@@ -62,6 +62,11 @@
   },
   "success_gate": "For every rho=0 fresh world: vector NRMSE <=0.01, efficacy >=0.99, off-target drift <=0.01, and actual bytes <=80% of both explicit vectors and the cheapest generic coefficient control.",
   "failure_gate": "Aligned quality/byte gate fails or a generic coefficient control dominates.",
+  "amendment_A1": {
+    "reason": "A shared physical basis/seed must be the same object across independent development/fresh behavior banks; fitting a new basis per world would confound behavior-code compression with per-world model storage.",
+    "change": "Use a deterministic shared synthetic basis and seed vector generated from a fixed public construction seed. Charge both in every payload. Development validates the encoder; no fitting or tuning is performed on fresh behavior vectors.",
+    "locked_before_development": true
+  },
   "boundaries": [
     "Synthetic fixed-norm Givens steering orbit only.",
     "No pretrained language model or natural behavior steering claim.",

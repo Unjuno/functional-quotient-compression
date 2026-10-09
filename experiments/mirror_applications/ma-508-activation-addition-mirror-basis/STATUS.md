@@ -19,4 +19,4 @@ None.
 
 ## Decisions / rulings
 
-Aligned `rho=0` functions are generated from the registered Givens family; the generic FP16 coefficient table is the mandatory nearest simple control. The `rho=.1` regime measures private-state needs.
+Aligned `rho=0` functions are generated from the registered Givens family; the generic FP16 coefficient table is the mandatory nearest simple control. The `rho=.1` regime measures private-state needs. Amendment A1 (before development) fixes one deterministic shared basis/seed across all banks and charges it in every payload.
