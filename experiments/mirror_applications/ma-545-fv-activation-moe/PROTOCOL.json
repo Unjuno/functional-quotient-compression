@@ -70,6 +70,7 @@
     "APPLICATION_SCREEN": "Oracle FV clears the no-intervention quality threshold and query-context top-1 routing stays within frozen quality margins in both dev seeds; activation state is reported against the actual 16-copy MLP payload.",
     "FRESH_OPEN": "Both dev seeds meet the frozen oracle/routed quality thresholds. Otherwise fresh remains sealed.",
     "MIRROR_ATTRIBUTION": "A Mirror-specific claim requires a >=0.02 absolute accuracy or >=0.10-nat gold-logprob margin over the same-router per-task output-bias expert at comparable actual bytes. Exact equality is FAIL for Mirror-specific value even if FV interventions help over no intervention.",
+    "NUMERICAL_ALIAS_TOLERANCE": "Compare activation addition after the Transformer block with a query-position-gated delta to the block MLP output bias. These are algebraically identical in real arithmetic but differ by floating-point addition order; maximum absolute candidate-score difference <=0.01 is considered the expected native alias.",
     "FAIL": "Oracle task vectors do not improve the base, the router cannot preserve that gain, or a claimed Mirror-specific benefit is exactly reproduced by the native output-bias expert.",
     "NOT_ESTABLISHED": "Pinned artifacts, support/query isolation, or serialized payload verification fails."
   },
@@ -81,5 +82,12 @@
     "Sixteen task codes do not constitute 16 independent capacities without held-out task quality and retention evidence."
   ],
   "frozen_at": "2026-10-09",
-  "amendments": []
+  "amendments": [
+    {
+      "id": "amendment-1",
+      "before_measurement": true,
+      "reason": "A read-only pinned-model operator check confirmed that equivalent activation-output and MLP-output bias hooks differ slightly from floating-point addition order.",
+      "change": "Define the already intended native-attribution equality as max absolute candidate-score difference <=0.01; no task, model, methods, setting, quality gate, or fresh rule changed."
+    }
+  ]
 }

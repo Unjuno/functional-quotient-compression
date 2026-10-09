@@ -14,7 +14,7 @@ PA99 reports function identity in attention-head activation vectors and partial 
 
 Pinned EleutherAI/pythia-70m-deduped revision `e93a9faa9c77e5d09219f6c868bfc7a1bd65593c`, hidden dimension 512, intervention after block 3 (hidden-state output index 4). All 16 fixed relation directions are used. Per relation, eight examples form the FV extraction support, four disjoint examples calibrate a content router, and four disjoint examples are audit queries. Router centroids are average normalized hidden states at the final `Output` delimiter; inference receives the prompt, not its task ID. The top-2 router is fixed to temperature .05.
 
-Controls: no intervention; oracle task-ID FV; query-context top-1 and top-2 routed FVs; oracle per-task output-bias experts; same-router output-bias experts; 16 full layer-3 MLP copies as a bytes-only structural reference. The output-bias control selects the exact same vector at the same layer, so functional output equality is expected and tests native attribution.
+Controls: no intervention; oracle task-ID FV; query-context top-1 and top-2 routed FVs; oracle per-task output-bias experts; same-router output-bias experts; 16 full layer-3 MLP copies as a bytes-only structural reference. The bias control gates a per-task MLP output-projection bias delta at the query position. It is algebraically identical to the residual intervention; maximum absolute candidate-score difference <=.01 allows for floating-point addition order.
 
 ## Mirror insertion and paid state
 
