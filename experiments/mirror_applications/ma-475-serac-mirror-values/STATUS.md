@@ -6,13 +6,13 @@
 - Protocol freeze: `510715fb`
 - Development complete: yes
 - Fresh/audit opened: yes, after protocol freeze
-- Results committed: yes (pending report commit SHA)
-- Verification committed: yes (pending report commit SHA)
-- Registry row updated: yes (same report commit)
+- Results committed: yes (`4ff1c6f0`)
+- Verification committed: yes (`4ff1c6f0`)
+- Registry row updated: yes
 
 ## Next action
 
-Run payload replay tests, update the registry and claim ledger, verify integrity, and push the dedicated branch.
+MA-475 is complete; proceed with MA-476 on its dedicated branch.
 
 ## Limitations
 
