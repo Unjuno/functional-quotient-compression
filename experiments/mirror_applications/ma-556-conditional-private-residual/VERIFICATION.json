@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-556",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m pytest -q -p no:cacheprovider experiments/mirror_applications/ma-556-conditional-private-residual/tests",
+    "passed": 2,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "80 development rows replayed over two seeds/four heterogeneity levels.",
+    "All private residual values and indices charged in NPZ payload.",
+    "No fresh worlds opened after storage gate miss."
+  ]
+}
