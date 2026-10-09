@@ -1,0 +1,494 @@
+{
+  "experiment_id": "MA-534",
+  "split": "dev",
+  "seed": 53401,
+  "model": "HuggingFaceTB/SmolLM2-135M",
+  "model_revision": "93efa2f097d58c2a74874c7e644dbc9b0cee75a2",
+  "transcoder_revision": "651f51421f2e1aa8fbd907e02ef421d3da55ff6d",
+  "transcoder_file_sha256": "07f811a32b7c0deb5cb15ad3f1e8529bb38265768eafba0713b3c208b4bc02e5",
+  "dataset": "closji/wikitext__wikitext-2-raw-v1",
+  "dataset_revision": "d575192455c5e98b8daed777574046264579cb09",
+  "dataset_split": "train",
+  "tokens_sha256": "629188f983ac74f22bc62505afe45c183950b765f7403a3f89102b6291d97acb",
+  "fit_tokens": 2048,
+  "eval_tokens": 2048,
+  "role_counts": [
+    890,
+    216,
+    214,
+    728
+  ],
+  "updates": 200,
+  "bank_indices": [
+    29359,
+    15697,
+    51118,
+    29931,
+    5588,
+    33389,
+    15450,
+    36749,
+    47262,
+    28781,
+    20803,
+    42351,
+    39683,
+    4407,
+    29927,
+    15137,
+    23429,
+    24192,
+    51162,
+    49052,
+    67519,
+    47697,
+    42752,
+    52398,
+    21004,
+    66854,
+    16710,
+    20792,
+    69155,
+    38897,
+    38096,
+    38882
+  ],
+  "role_supports": [
+    [
+      0,
+      3,
+      5,
+      9,
+      21,
+      8,
+      4,
+      1
+    ],
+    [
+      16,
+      5,
+      0,
+      12,
+      8,
+      2,
+      20,
+      6
+    ],
+    [
+      5,
+      12,
+      21,
+      15,
+      27,
+      6,
+      23,
+      3
+    ],
+    [
+      1,
+      6,
+      4,
+      7,
+      11,
+      21,
+      13,
+      27
+    ]
+  ],
+  "gates": {
+    "shared_bank_top8": {
+      "role_balanced_relative_mse": 0.9585592746734619,
+      "worst_role_relative_mse": 0.9756428003311157,
+      "mean_cosine": 0.4154175743460655,
+      "per_role": [
+        {
+          "role": 0,
+          "n": 890,
+          "relative_mse": 0.9581249356269836,
+          "cosine": 0.4319482147693634
+        },
+        {
+          "role": 1,
+          "n": 216,
+          "relative_mse": 0.9404047727584839,
+          "cosine": 0.511681079864502
+        },
+        {
+          "role": 2,
+          "n": 214,
+          "relative_mse": 0.9600645899772644,
+          "cosine": 0.41952893137931824
+        },
+        {
+          "role": 3,
+          "n": 728,
+          "relative_mse": 0.9756428003311157,
+          "cosine": 0.2985120713710785
+        }
+      ]
+    },
+    "role_sparse_gate": {
+      "role_balanced_relative_mse": 0.9597200453281403,
+      "worst_role_relative_mse": 0.9790122509002686,
+      "mean_cosine": 0.40934325009584427,
+      "per_role": [
+        {
+          "role": 0,
+          "n": 890,
+          "relative_mse": 0.959251344203949,
+          "cosine": 0.43674349784851074
+        },
+        {
+          "role": 1,
+          "n": 216,
+          "relative_mse": 0.941001296043396,
+          "cosine": 0.5212532877922058
+        },
+        {
+          "role": 2,
+          "n": 214,
+          "relative_mse": 0.9596152901649475,
+          "cosine": 0.4308312237262726
+        },
+        {
+          "role": 3,
+          "n": 728,
+          "relative_mse": 0.9790122509002686,
+          "cosine": 0.24854499101638794
+        }
+      ]
+    },
+    "role_diagonal_gain": {
+      "role_balanced_relative_mse": 0.9402159601449966,
+      "worst_role_relative_mse": 0.9549499154090881,
+      "mean_cosine": 0.3216480687260628,
+      "per_role": [
+        {
+          "role": 0,
+          "n": 890,
+          "relative_mse": 0.9421662092208862,
+          "cosine": 0.33055225014686584
+        },
+        {
+          "role": 1,
+          "n": 216,
+          "relative_mse": 0.9121631979942322,
+          "cosine": 0.36173567175865173
+        },
+        {
+          "role": 2,
+          "n": 214,
+          "relative_mse": 0.95158451795578,
+          "cosine": 0.34203827381134033
+        },
+        {
+          "role": 3,
+          "n": 728,
+          "relative_mse": 0.9549499154090881,
+          "cosine": 0.2522660791873932
+        }
+      ]
+    },
+    "role_givens_mirror": {
+      "role_balanced_relative_mse": 0.9558034986257553,
+      "worst_role_relative_mse": 0.9743435978889465,
+      "mean_cosine": 0.42926952987909317,
+      "per_role": [
+        {
+          "role": 0,
+          "n": 890,
+          "relative_mse": 0.9551812410354614,
+          "cosine": 0.44169488549232483
+        },
+        {
+          "role": 1,
+          "n": 216,
+          "relative_mse": 0.9351170659065247,
+          "cosine": 0.5345143675804138
+        },
+        {
+          "role": 2,
+          "n": 214,
+          "relative_mse": 0.9585720896720886,
+          "cosine": 0.4345659613609314
+        },
+        {
+          "role": 3,
+          "n": 728,
+          "relative_mse": 0.9743435978889465,
+          "cosine": 0.30630290508270264
+        }
+      ]
+    }
+  },
+  "metrics": {
+    "native_mlp": {
+      "role_balanced_relative_mse": 0.0,
+      "worst_role_relative_mse": 0.0,
+      "mean_cosine": 1.0,
+      "per_role": [
+        {
+          "role": 0,
+          "n": 890,
+          "relative_mse": 0.0,
+          "cosine": 1.0
+        },
+        {
+          "role": 1,
+          "n": 216,
+          "relative_mse": 0.0,
+          "cosine": 1.0
+        },
+        {
+          "role": 2,
+          "n": 214,
+          "relative_mse": 0.0,
+          "cosine": 1.0
+        },
+        {
+          "role": 3,
+          "n": 728,
+          "relative_mse": 0.0,
+          "cosine": 1.0
+        }
+      ]
+    },
+    "full_transcoder_top128": {
+      "role_balanced_relative_mse": 0.7963427305221558,
+      "worst_role_relative_mse": 0.8227901458740234,
+      "mean_cosine": 0.7203783243894577,
+      "per_role": [
+        {
+          "role": 0,
+          "n": 890,
+          "relative_mse": 0.7883185744285583,
+          "cosine": 0.7401469349861145
+        },
+        {
+          "role": 1,
+          "n": 216,
+          "relative_mse": 0.7692079544067383,
+          "cosine": 0.7162418961524963
+        },
+        {
+          "role": 2,
+          "n": 214,
+          "relative_mse": 0.805054247379303,
+          "cosine": 0.7172793745994568
+        },
+        {
+          "role": 3,
+          "n": 728,
+          "relative_mse": 0.8227901458740234,
+          "cosine": 0.7078450918197632
+        }
+      ]
+    },
+    "shared_bank_top8": {
+      "role_balanced_relative_mse": 0.9585592746734619,
+      "worst_role_relative_mse": 0.9756428003311157,
+      "mean_cosine": 0.4154175743460655,
+      "per_role": [
+        {
+          "role": 0,
+          "n": 890,
+          "relative_mse": 0.9581249356269836,
+          "cosine": 0.4319482147693634
+        },
+        {
+          "role": 1,
+          "n": 216,
+          "relative_mse": 0.9404047727584839,
+          "cosine": 0.511681079864502
+        },
+        {
+          "role": 2,
+          "n": 214,
+          "relative_mse": 0.9600645899772644,
+          "cosine": 0.41952893137931824
+        },
+        {
+          "role": 3,
+          "n": 728,
+          "relative_mse": 0.9756428003311157,
+          "cosine": 0.2985120713710785
+        }
+      ]
+    },
+    "role_sparse_gate": {
+      "role_balanced_relative_mse": 0.9597200453281403,
+      "worst_role_relative_mse": 0.9790122509002686,
+      "mean_cosine": 0.40934325009584427,
+      "per_role": [
+        {
+          "role": 0,
+          "n": 890,
+          "relative_mse": 0.959251344203949,
+          "cosine": 0.43674349784851074
+        },
+        {
+          "role": 1,
+          "n": 216,
+          "relative_mse": 0.941001296043396,
+          "cosine": 0.5212532877922058
+        },
+        {
+          "role": 2,
+          "n": 214,
+          "relative_mse": 0.9596152901649475,
+          "cosine": 0.4308312237262726
+        },
+        {
+          "role": 3,
+          "n": 728,
+          "relative_mse": 0.9790122509002686,
+          "cosine": 0.24854499101638794
+        }
+      ]
+    },
+    "role_diagonal_gain": {
+      "role_balanced_relative_mse": 0.9402159601449966,
+      "worst_role_relative_mse": 0.9549499154090881,
+      "mean_cosine": 0.3216480687260628,
+      "per_role": [
+        {
+          "role": 0,
+          "n": 890,
+          "relative_mse": 0.9421662092208862,
+          "cosine": 0.33055225014686584
+        },
+        {
+          "role": 1,
+          "n": 216,
+          "relative_mse": 0.9121631979942322,
+          "cosine": 0.36173567175865173
+        },
+        {
+          "role": 2,
+          "n": 214,
+          "relative_mse": 0.95158451795578,
+          "cosine": 0.34203827381134033
+        },
+        {
+          "role": 3,
+          "n": 728,
+          "relative_mse": 0.9549499154090881,
+          "cosine": 0.2522660791873932
+        }
+      ]
+    },
+    "role_givens_mirror": {
+      "role_balanced_relative_mse": 0.9558034986257553,
+      "worst_role_relative_mse": 0.9743435978889465,
+      "mean_cosine": 0.42926952987909317,
+      "per_role": [
+        {
+          "role": 0,
+          "n": 890,
+          "relative_mse": 0.9551812410354614,
+          "cosine": 0.44169488549232483
+        },
+        {
+          "role": 1,
+          "n": 216,
+          "relative_mse": 0.9351170659065247,
+          "cosine": 0.5345143675804138
+        },
+        {
+          "role": 2,
+          "n": 214,
+          "relative_mse": 0.9585720896720886,
+          "cosine": 0.4345659613609314
+        },
+        {
+          "role": 3,
+          "n": 728,
+          "relative_mse": 0.9743435978889465,
+          "cosine": 0.30630290508270264
+        }
+      ]
+    }
+  },
+  "model_full_bytes": 272437465,
+  "model_without_native_mlp_bytes": 267128681,
+  "base_without_mlp_safetensors_bytes": 263751768,
+  "base_without_mlp_sha256": "9fffcb4a7cfd7506ee23eeafa364eb6228462b0ee51daa0e2115df9f8e63776b",
+  "independent_mlp_extra_bytes": 21235032,
+  "independent_mlp_sha256": "79775af00d6a9befe1af0545cf4d14bfd036b3f49280280db945f781258bff2b",
+  "full_transcoder_incremental_bytes": 341363524,
+  "full_transcoder_standalone_bytes": 608492205,
+  "full_transcoder_file_sha256": "07f811a32b7c0deb5cb15ad3f1e8529bb38265768eafba0713b3c208b4bc02e5",
+  "method_payloads": {
+    "shared_bank_top8": {
+      "bytes": 1477592,
+      "sha256": "34c5142562c6567f5854e0eddcb30ac635d61d43fa076d151e0a1e5f5984ffd7",
+      "config_bytes": 36
+    },
+    "role_sparse_gate": {
+      "bytes": 1487096,
+      "sha256": "a28a883520b8049f8c7303688a9e665a791577bc23f0c9716c3ffb3d7df005df",
+      "config_bytes": 48
+    },
+    "role_diagonal_gain": {
+      "bytes": 1487472,
+      "sha256": "ae716cdd2a05f61f133a727feb54159ddf34ae7e30b24ba1059f36354e93cd90",
+      "config_bytes": 46
+    },
+    "role_givens_mirror": {
+      "bytes": 1487216,
+      "sha256": "0cdd2f2ec7d57d97ce52db3c7622091e0778f26b5be65402e39d5a382dc9f33f",
+      "config_bytes": 46
+    }
+  },
+  "method_standalone_bytes": {
+    "shared_bank_top8": 268606309,
+    "role_sparse_gate": 268615825,
+    "role_diagonal_gain": 268616199,
+    "role_givens_mirror": 268615943
+  },
+  "four_independent_mlp_standalone_bytes": 288363713,
+  "compute_macs_per_token": {
+    "selected_bank_encoder": 18432,
+    "skip": 331776,
+    "top8_decoder": 4608,
+    "givens_rotation_scalar_ops_proxy": 32,
+    "full_transcoder_encoder": 42467328,
+    "full_transcoder_decoder": 73728,
+    "native_mlp_linear": 2654208
+  },
+  "wall_seconds": {
+    "full_model_capture": 15.913298856990878,
+    "per_method_eval": {
+      "native_mlp": 0.12312897099764086,
+      "full_transcoder_top128": 3.507743936002953,
+      "shared_bank_top8": 0.03871286698267795,
+      "role_sparse_gate": 0.031992890988476574,
+      "role_diagonal_gain": 0.03334738401463255,
+      "role_givens_mirror": 0.03477601599297486
+    },
+    "optimizer_training_total": 2.3213687999814283
+  },
+  "learned_views": {
+    "givens_angle_stats": {
+      "mean_abs": 0.509498119354248,
+      "max_abs": 1.5609945058822632,
+      "l2": 5.6740031242370605,
+      "per_role_l2": [
+        2.5914652347564697,
+        3.9380991458892822,
+        2.804487705230713,
+        1.4508060216903687
+      ]
+    },
+    "diagonal_gain_stats": {
+      "min": 0.299583375453949,
+      "max": 13.230512619018555,
+      "mean": 3.374199628829956
+    }
+  },
+  "optimizer_updates": {
+    "role_diagonal_gain": 200,
+    "role_givens_mirror": 200
+  },
+  "active_features_per_token": 8
+}

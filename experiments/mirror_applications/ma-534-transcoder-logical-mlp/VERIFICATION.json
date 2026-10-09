@@ -1,19 +1,58 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-534",
+  "protocol_commit": "930a1325",
+  "implementation_commits": [
+    "be4176ee",
+    "bcf2e106"
+  ],
+  "amendment_commits": [
+    "b59c1cd2"
+  ],
+  "result_commit": "pending",
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-534-transcoder-logical-mlp/tests -v",
+    "passed": 5,
+    "failed": 0
   },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "method_payloads": {
+      "shared_bank_top8": {
+        "bytes": 1477592,
+        "config_bytes": 36,
+        "sha256": "34c5142562c6567f5854e0eddcb30ac635d61d43fa076d151e0a1e5f5984ffd7"
+      },
+      "role_sparse_gate": {
+        "bytes": 1487096,
+        "config_bytes": 48,
+        "sha256": "a28a883520b8049f8c7303688a9e665a791577bc23f0c9716c3ffb3d7df005df"
+      },
+      "role_diagonal_gain": {
+        "bytes": 1487472,
+        "config_bytes": 46,
+        "sha256": "ae716cdd2a05f61f133a727feb54159ddf34ae7e30b24ba1059f36354e93cd90"
+      },
+      "role_givens_mirror": {
+        "bytes": 1487216,
+        "config_bytes": 46,
+        "sha256": "0cdd2f2ec7d57d97ce52db3c7622091e0778f26b5be65402e39d5a382dc9f33f"
+      }
+    },
+    "replacement_base_bytes": 267128681,
+    "replacement_base_sha256": "9fffcb4a7cfd7506ee23eeafa364eb6228462b0ee51daa0e2115df9f8e63776b",
+    "four_independent_upper_bytes": 21235032,
+    "four_independent_upper_sha256": "79775af00d6a9befe1af0545cf4d14bfd036b3f49280280db945f781258bff2b"
   },
   "metric_replay": {
     "checked": false,
-    "max_difference": null
+    "note": "One corrected full development run is authoritative; the initial run completed metrics but failed while serializing copied full-MLP upper state. Its error is retained under runs/dev_first_attempt_failed/."
   },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "fresh_split_integrity_checked": true,
+  "fresh_opened": false,
+  "notes": [
+    "No validation examples were read; runner exits before loading validation until dev gate and a frozen-state loader amendment.",
+    "Four payload methods reread and hash-checked; the replacement base and independent upper payload were reconstructed from pinned checkpoint and byte/hash verified.",
+    "Earlier run error was an implementation serialization failure, not a metric result."
+  ]
 }

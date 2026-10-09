@@ -181,7 +181,7 @@ High-information P0:
 7. MA-520/521 — FV-to-code distillation and demonstration-to-code compilation
 8. MA-526/527/528 — SAE feature atoms and Mirror transforms
 9. MA-530 — SAE feature logical experts
-10. MA-533/534 — transcoder feature experts / logical MLPs
+10. MA-533/534 — transcoder feature experts / logical MLPs (completed screens; family paused after two related FAILs)
 11. MA-539/540 — packet/executor use of function vectors
 12. MA-545 — function-vector MoE without weight experts
 13. MA-546 — representation-space symmetry audit

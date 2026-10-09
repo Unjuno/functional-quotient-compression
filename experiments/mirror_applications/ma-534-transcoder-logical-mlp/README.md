@@ -1,13 +1,7 @@
 # MA-534 — Role-specific logical MLP views over a shared transcoder bank
 
-## H — Hypothesis
+**Result: FAIL.** On 2,048 held-out Wikitext-2 train tokens, the four-role Givens Mirror's role-balanced MLP-output relative MSE was 0.955803; plain per-role sparse gating was 0.959720 and diagonal gains were 0.940216. Mirror improved only 0.41% versus plain gating (gate requires >=10%) and was 1.66% worse than the diagonal control. Fresh validation was not opened.
 
-Four fit-derived context roles can use role-specific 16-angle Givens views over one shared 32-atom transcoder bank to reduce held-out raw layer-8 MLP output error by at least 10% relative to both plain role-specific top-8 sparse gates and diagonal per-atom gain controls.
+The selected 32-atom bank gave a fast, slightly smaller replacement: Mirror deployment 268,615,943 B vs native model 272,437,465 B, a 1.40% reduction. Bank methods used about 354,816 MAC/token vs native MLP 2,654,208; measured Mirror inference was 0.035s vs 0.123s for 2,048 vectors. The quality loss is large (Mirror MSE 0.956). A full top-128 transcoder was more accurate (0.796) but used 608,492,205 standalone bytes and 16.2x native MLP MACs.
 
-## T — Frozen setup
-
-Pinned SmolLM2-135M and EleutherAI layer-8 skip-transcoder, Wikitext-2 raw train split, 32 non-overlapping 128-token blocks, 16 fit and 16 evaluation. Four nearest-centroid roles are learned on fit inputs only. A shared 32-feature bank is chosen on fit activations. Every method uses the same bank and top-8 decode. Only Mirror angles and the diagonal control's gains receive 200 fit updates. See `PROTOCOL.json` for all fixed details.
-
-## D — Pending
-
-The development run has not started. Fresh validation remains sealed until every frozen development gate passes.
+The Givens code was learned (mean absolute angle 0.509 rad), so the negative result does not come from an untrained zero View. Plain sparse features still did not represent the dense MLP well, and the simpler diagonal control did better. See [protocol](PROTOCOL.json), [status](STATUS.md), [results](RESULTS_CORE.csv), [payload manifest](runs/dev/seed_53401/PAYLOAD_MANIFEST.json), and [verification](VERIFICATION.json).
