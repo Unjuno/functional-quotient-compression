@@ -1,0 +1,65 @@
+{
+  "experiment_id": "MA-372",
+  "title": "MatFormer Mix'n'Match factorized Mirror codes",
+  "status": "DEVELOPMENT_ONLY_FAIL_MIRROR_SPECIFIC",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY/COMPUTE",
+  "base_commit": "0eded323",
+  "hypothesis": "Factorized layer x granularity Mirror coordinates recover held-out mixed-width functions with fewer bytes than flat configuration storage and better storage/quality than native MatFormer or direct factorized coefficients.",
+  "physical_object": "shared 4-layer nested-width FFN operator bank",
+  "mirror_coordinate": "factorized layer and granularity code product",
+  "logical_multiplicity": "12 layer x width configurations; six withheld compositions",
+  "prior_art_refs": [
+    "PA53"
+  ],
+  "controls": [
+    "native width-only shared prefix",
+    "flat per-configuration coefficients",
+    "factorized Mirror coordinates",
+    "ordinary direct factorized coefficients"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      37201,
+      37202
+    ],
+    "layers": 4,
+    "granularities": [
+      2,
+      4,
+      8
+    ],
+    "training_combinations": 6,
+    "heldout_combinations": 6,
+    "selection_metric": "heldout nMSE, distinct functions, actual serialized bytes"
+  },
+  "fresh": {
+    "worlds_or_seeds": [],
+    "locked_before_access": true,
+    "open_only_if_development_passes": false,
+    "reason": "Direct factorized coefficients are algebraically the same code; specificity gate is development-decidable."
+  },
+  "storage": {
+    "authority": "actual deterministic NPZ inference payload bytes",
+    "paid_objects": [
+      "shared operator",
+      "layer factors",
+      "granularity factors",
+      "flat table where applicable",
+      "indices",
+      "metadata"
+    ]
+  },
+  "compute": {
+    "report_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true
+  },
+  "success_gate": "Exact held-out recovery, >=10% fewer bytes than flat configuration storage, >=10% byte advantage over direct factorized coefficients at equal quality.",
+  "failure_gate": "Direct coefficients match Mirror function/bytes, or held-out function quality fails.",
+  "boundaries": [
+    "oracle synthetic composition",
+    "not MatFormer training",
+    "no language model or hardware throughput claim"
+  ]
+}
