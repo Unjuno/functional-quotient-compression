@@ -11,7 +11,7 @@
 
 ## Next action
 
-Record FAIL from the registered miss-rate gate and weaker generic-code control; update registry/claim/board, then continue to MA-511.
+Continue to MA-511; its held-out factor-composition hypothesis is distinct from this noisy cosine-gate screen.
 
 ## Blockers
 

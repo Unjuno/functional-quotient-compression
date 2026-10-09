@@ -1,8 +1,8 @@
-**Current operational pointer (2026-10-09): MA-510.** MA-508 showed generic shared-basis activation steering compresses explicit vectors, but Mirror angles did not beat FP16 coefficients by the registered margin and were slower. Continue with conditional activation steering; false-trigger rate is primary.
+**Current operational pointer (2026-10-09): MA-511.** MA-510 failed its development miss-rate gate and generic FP16 behavior coefficients dominated Mirror. Continue with hierarchical condition x behavior code composition; hold out combinations.
 
 # Worker queue
 
-**Current operational pointer (2026-10-09): MA-510.** MA-436/438 and MA-482/503/504 show scoped synthetic quality/storage points; MA-508 failed Mirror-specific compression over generic FP16 coefficients. Continue with conditional behavior Views and false-trigger controls.
+**Current operational pointer (2026-10-09): MA-511.** MA-436/438 and MA-482/503/504 show scoped synthetic quality/storage points; MA-508/510 did not establish Mirror-specific advantage. Continue with held-out condition-behavior composition.
 
 The queue is derived from `IDEA_REGISTRY.csv`. The registry is authoritative.
 
