@@ -74,7 +74,7 @@ def score_method(model,tok,torch,manifest,vectors,method_vectors):
              candidate_forward_calls=total,candidate_sequences=total*8,candidate_input_tokens=tokens,by_composition=bypair)
 
 def serialize(path,kind,vectors,rank,parts,operator_code):
- if kind=='none':return 0
+ if kind==0:return 0
  pair_ids=np.asarray(PAIR_IDS,np.int16)
  base=dict(pair_ids=pair_ids,model_sha256=np.frombuffer(MODEL_SHA.encode(),dtype='S64'),
            model_revision=np.frombuffer(REVISION.encode(),dtype='S40'),layer=np.array([4],np.int16),

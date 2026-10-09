@@ -1,0 +1,15 @@
+The `GPTNeoXSdpaAttention` class is deprecated in favor of simply modifying the `config._attn_implementation`attribute of the `GPTNeoXAttention` class! It will be removed in v4.48
+Traceback (most recent call last):
+  File "/workspace/ma517-function-vector-composition/experiments/mirror_applications/ma-517-function-vector-composition/source/run_screen.py", line 138, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/workspace/ma517-function-vector-composition/experiments/mirror_applications/ma-517-function-vector-composition/source/run_screen.py", line 137, in main
+    ap=argparse.ArgumentParser();ap.add_argument('--seed',type=int,required=True);ap.add_argument('--model-dir',required=True);ap.add_argument('--out',required=True);a=ap.parse_args();run(a.seed,a.model_dir,a.out)
+                                                                                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/ma517-function-vector-composition/experiments/mirror_applications/ma-517-function-vector-composition/source/run_screen.py", line 113, in run
+    payload=serialize(out/(label+'.npz'),0 if kind==0 else 1 if payload_kind=='explicit' else 2,vectors,rank,parts,operator_code)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/ma517-function-vector-composition/experiments/mirror_applications/ma-517-function-vector-composition/source/run_screen.py", line 84, in serialize
+    mean,basis,codes=parts
+    ^^^^^^^^^^^^^^^^
+TypeError: cannot unpack non-iterable NoneType object

@@ -33,3 +33,10 @@ def test_heldout_path_is_hidden_from_both_inverse_supports():
    assert not (sa&qa)
    assert not ({y for x,y in manifest[a]['evaluation']} & sb)
    assert {y for x,y in manifest[a]['evaluation']}==qb
+
+
+def test_no_intervention_serializes_no_payload(tmp_path):
+ c=m.load_common()
+ size=m.serialize(tmp_path/'no_state.npz',0,np.zeros((16,512),np.float32),0,None,0)
+ assert size==0
+ assert not (tmp_path/'no_state.npz').exists()
