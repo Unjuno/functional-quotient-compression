@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-516.** MA-501/502 found that VQ task coordinates incur substantial distortion relative to compact shared FP16 LoReFT coordinates. Per the experimenter's same-family consecutive-failure rule, MA-503/504 and the remaining LoReFT representation-view candidates are temporarily deferred for redesign; they remain UNTESTED. The worker moved to the distinct Function Vectors family, starting with MA-516. Resume deferred candidates after specifying a representation-aware code or a stronger task-quality control.
+**Current operational pointer (2026-10-09): MA-517.** MA-516 tested support-delta activation vectors on a pinned GPT-2 and found no held-out accuracy improvement; continue within the Function Vectors family with MA-517 raw arithmetic vs structured composition controls. LoReFT candidates remain deferred for redesign after MA-501/502.
 
 # Worker queue
 

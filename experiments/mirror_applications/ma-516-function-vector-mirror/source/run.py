@@ -56,7 +56,7 @@ def evaluate_bank(model,tok,w,s,devstate):
    query_prompts.append(f"Task mapping:\nIf the object is {k}, its tag is");icl_prompts.append(f"Task mapping:\n{d}If the object is {k}, its tag is");targets.append(tok(' '+c,add_special_tokens=False)['input_ids'][0]);task_ix.append(i)
  target=torch.tensor(targets);task_ix=torch.tensor(task_ix);results=[]
  t0=time.perf_counter();direct=logits(model,tok,icl_prompts);elapsed_icl=time.perf_counter()-t0
- t0=time.perf_counter();base=logits(model,tok,query_prompts);elapsed_base=time.perf_counter()
+ t0=time.perf_counter();base=logits(model,tok,query_prompts);elapsed_base=time.perf_counter()-t0
  def acc(x):
   p=x.softmax(-1);return float((x.argmax(-1)==target).float().mean()),float(-p[torch.arange(len(target)),target].log().mean())
  for name,x,r in [('query_only',base,0),('direct_icl',direct,0)]:
@@ -79,6 +79,16 @@ def evaluate_bank(model,tok,w,s,devstate):
 def run(phase):
  ART.mkdir(exist_ok=True);PAY.mkdir(exist_ok=True);model,tok=load()
  if phase=='development':fit_dev(model,tok);print('development task vectors and PCA basis saved');return
+ if phase=='profile':
+  state=torch.load(ART/'development_basis.pt',map_location='cpu',weights_only=False);profile={}
+  for w in FRESH:
+   for s in SEEDS:
+    tasks=examples(w,s);t0=time.perf_counter();vecs=torch.stack([hidden_delta(model,tok,d) for d,_,_ in tasks]);extract=time.perf_counter()-t0
+    proj={}
+    for r in RANKS:
+     t0=time.perf_counter();basis=state['basis'][:,:r];coords=(vecs-state['mean'])@basis;_ = state['mean']+coords@basis.T;proj[str(r)]=time.perf_counter()-t0
+    profile[f'{w}_{s}']={'function_vector_extraction_seconds':extract,'pca_projection_seconds':proj,'task_count':len(tasks)}
+  (ART/'compute_profile.json').write_text(json.dumps(profile,indent=2)+'\n');print(json.dumps({'banks':len(profile)}));return
  state=torch.load(ART/'development_basis.pt',map_location='cpu',weights_only=False);rows=[];base_model_dir=snapshot_download(MODEL_ID,revision=REV);base_names=['model.safetensors','config.json','generation_config.json','tokenizer.json','tokenizer_config.json','vocab.json','merges.txt','special_tokens_map.json'];base_bytes=sum((Path(base_model_dir)/n).stat().st_size for n in base_names if (Path(base_model_dir)/n).is_file())
  for w in FRESH:
   for s in SEEDS:
@@ -90,4 +100,4 @@ def run(phase):
  with (ROOT/'RESULTS_CORE.csv').open('w',newline='') as f:wr=csv.DictWriter(f,fieldnames=list(rows[0]));wr.writeheader();wr.writerows(rows)
  (ART/'fresh_runs.jsonl').write_text(''.join(json.dumps(r)+'\n' for r in rows));print(json.dumps({'rows':len(rows),'base_model_bytes':base_bytes}))
 if __name__=='__main__':
- import argparse;p=argparse.ArgumentParser();p.add_argument('--phase',choices=['development','fresh'],required=True);run(p.parse_args().phase)
+ import argparse;p=argparse.ArgumentParser();p.add_argument('--phase',choices=['development','fresh','profile'],required=True);run(p.parse_args().phase)

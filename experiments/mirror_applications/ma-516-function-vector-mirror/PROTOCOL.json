@@ -102,5 +102,20 @@
     "Single small GPT-2 checkpoint and synthetic arbitrary word mappings; not a reproduction of GPT-J Function Vectors or a broad NLP benchmark.",
     "Function vectors are extracted from support activations with a fixed contrastive prompt; no model weight updates.",
     "Causal function accuracy, not code combination count, determines usefulness."
-  ]
+  ],
+  "amendment_A1_latency": {
+    "reason": "After A1 fresh, inspection found query_only latency recorded absolute perf_counter rather than elapsed time; quality/payload results unaffected. Preserve pre-fix output as exploratory.",
+    "change": "Correct elapsed-time subtraction and replay identical frozen worlds/seeds/inputs; no model, task, rank, or selection changes.",
+    "fresh_worlds": [
+      51610,
+      51611,
+      51612
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "authoritative": "Corrected timing only; predictions and serialized payloads are deterministic and expected identical."
+  }
 }
