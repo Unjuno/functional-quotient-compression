@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (97 completed; 533 UNTESTED)
+- P0: **630** (98 completed; 532 UNTESTED)
 - P1: **422** (15 completed; 407 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1041 UNTESTED, 46 PROMISING, 68 FAIL**
+- Current MA statuses: **1040 UNTESTED, 46 PROMISING, 69 FAIL**
 - 68 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -317,3 +317,9 @@ KG relation rotations (RotatE, TuckER, QuatE, PairRE), EXIF/device-aware ISPs (P
 
 - **FAIL for Mirror-specific value; narrow reversible-memory result:** reversible tied execution retained tied-block task MSE and cut peak saved activations 41.1% at about 1.8× training wall time. Mirror and direct scalar gates had identical payload hashes and MSE.
 - Two development seeds only; fresh remained sealed after the Mirror-specific gate failed. Three tests pass. CPU synthetic coupling block; no Transformer/GPU scaling evidence.
+
+
+## Completed: MA-361 — Mixture-of-Depths with Mirror block-role views
+
+- **FAIL for Mirror-specific value and frozen quality margin:** shared tied MoD used about 5.3KB versus native MoD about 11.1KB at equal routing capacity, but direct scalar gates matched Mirror exactly in payload hash and quality. One development seed missed the native-MoD NLL margin.
+- Fresh seeds remained sealed. Three tests and eight payload replays pass. The screen uses a fixed router and synthetic token classification; no learned-routing or language-model evidence.

@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-361.** MA-360 showed a narrow reversible tied-block activation-memory reduction, but the Mirror scalar duplicated the ordinary direct gate exactly. Proceed to MA-361, Mixture-of-Depths plus Mirror block-role view.
+**Current operational pointer (2026-10-09): MA-362.** MA-361 shared MoD reduced storage, but the direct scalar control matched Mirror exactly and one seed missed the quality margin. Proceed to MA-362, the next eligible P0 candidate after the Mixture-of-Depths screen.
 
 # Worker queue
 

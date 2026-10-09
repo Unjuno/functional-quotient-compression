@@ -1,7 +1,7 @@
 # MA-361 — Mixture-of-Depths with Mirror block-role views
 
 Status: SCREENING; frozen before development  
-Branch: `research/ma-361-mixture-depths-mirror-role-20261008`  
+Branch: `research/ma-361-mixture-depths-mirror-role-20261009`
 Base: `c935a90`  
 Prior art: PA49 Mixture-of-Depths.
 

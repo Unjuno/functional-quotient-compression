@@ -1,9 +1,9 @@
 # MA-361 status
 
 - Status: FAIL at development gate
-- Branch: `research/ma-361-mixture-depths-mirror-role-20261008`
+- Branch: `research/ma-361-mixture-depths-mirror-role-20261009`
 - Base commit: `c935a90`
-- Last verified commit: `fb7c8ec6f0df0c9678e58b6bc766d2f8b0037cba`
+- Last verified commit: `44e4cce1`
 - Development complete: yes
 - Fresh/audit opened: no; 36111–36113 remain sealed
 - Results committed: yes
