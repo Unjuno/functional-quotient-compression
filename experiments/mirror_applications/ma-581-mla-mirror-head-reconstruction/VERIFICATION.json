@@ -1,7 +1,17 @@
 {
-  "status":"PENDING",
-  "base_commit":"01a9483b",
-  "protocol_frozen_before_registered_worlds":false,
-  "fresh_opened":false,
-  "checks":{"unit_tests":"pending","registered_dev":"unopened","fresh_opened":false}
+  "status": "FAIL",
+  "base_commit": "01a9483b",
+  "protocol_frozen_before_registered_worlds": true,
+  "source_matches_freeze": true,
+  "registered_dev_seeds": [
+    58101,
+    58102
+  ],
+  "fresh_opened": false,
+  "checks": {
+    "unit_tests": "3 passed",
+    "actual_state_and_cache_bytes": "verified against all NPZ stats",
+    "native_shared_dictionary_alias": "exact session arrays and identical model state",
+    "registry_integrity": "pending"
+  }
 }

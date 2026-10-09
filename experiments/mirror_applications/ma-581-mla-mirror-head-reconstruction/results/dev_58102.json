@@ -1,0 +1,120 @@
+{
+  "calibration_prefixes": 4,
+  "compute": {
+    "SVD_fit_seconds": 0.9849927739996929,
+    "added_encode_project_ops_per_token": 1572864,
+    "calibration_prefill_seconds": 0.20638089400017634,
+    "latent_decode_ops_per_cached_token": 1572864,
+    "model_load_seconds": 0.08883797901216894,
+    "optimizer_updates": 0,
+    "total_wall_seconds": 20.408379275992047
+  },
+  "dataset": "valid.txt",
+  "dataset_sha256": "f0737ed31fc1329026e95cb8b98e19c2a182c39c240ab909dc31abf2f8af58e8",
+  "deployment_frontier": {
+    "fp16_kv": {
+      "model_state_bytes": 0,
+      "total_bytes_for_1_session": 787214,
+      "total_bytes_for_4_sessions": 3148856,
+      "total_bytes_for_8_sessions": 6297712
+    },
+    "mirror_shared_resid4": {
+      "model_state_bytes": 1590068,
+      "total_bytes_for_1_session": 1738598,
+      "total_bytes_for_4_sessions": 2184188,
+      "total_bytes_for_8_sessions": 2778308
+    },
+    "mla_rank128": {
+      "model_state_bytes": 1586216,
+      "total_bytes_for_1_session": 1685302,
+      "total_bytes_for_4_sessions": 1982560,
+      "total_bytes_for_8_sessions": 2378904
+    },
+    "native_shared_resid4": {
+      "model_state_bytes": 1590068,
+      "total_bytes_for_1_session": 1738598,
+      "total_bytes_for_4_sessions": 2184188,
+      "total_bytes_for_8_sessions": 2778308
+    },
+    "private_head_resid4": {
+      "model_state_bytes": 1636152,
+      "total_bytes_for_1_session": 1784682,
+      "total_bytes_for_4_sessions": 2230272,
+      "total_bytes_for_8_sessions": 2824392
+    }
+  },
+  "experiment_id": "MA-581",
+  "methods": {
+    "fp16_kv": {
+      "mean_cache_reconstruction_mse": 1.383447714816318e-05,
+      "mean_encode_seconds": 0.02094730019234703,
+      "mean_nll": 4.923417809652165,
+      "mean_query_seconds": 0.07418881068588234,
+      "mean_reconstruct_seconds": 0.002718781875955756,
+      "nll_delta_vs_fp16": 0.0,
+      "session_cache_bytes": 787214,
+      "std_nll": 3.6937954304785157
+    },
+    "mirror_shared_resid4": {
+      "mean_cache_reconstruction_mse": 0.15361829684115946,
+      "mean_encode_seconds": 0.01836892900064413,
+      "mean_nll": 5.335056707728654,
+      "mean_query_seconds": 0.06660878343427612,
+      "mean_reconstruct_seconds": 0.00016527031402802095,
+      "nll_delta_vs_fp16": 0.41163889807648957,
+      "session_cache_bytes": 148530,
+      "std_nll": 4.0995150211266775
+    },
+    "mla_rank128": {
+      "mean_cache_reconstruction_mse": 0.17014967797634503,
+      "mean_encode_seconds": 0.01615587305968802,
+      "mean_nll": 5.197566058253869,
+      "mean_query_seconds": 0.08528642824967392,
+      "mean_reconstruct_seconds": 3.742149783647619e-05,
+      "nll_delta_vs_fp16": 0.27414824860170484,
+      "session_cache_bytes": 99086,
+      "std_nll": 4.237953684233467
+    },
+    "native_shared_resid4": {
+      "mean_cache_reconstruction_mse": 0.15361829684115946,
+      "mean_encode_seconds": 0.022428997754104785,
+      "mean_nll": 5.335056707728654,
+      "mean_query_seconds": 0.062115412061757524,
+      "mean_reconstruct_seconds": 0.00015087718384165782,
+      "nll_delta_vs_fp16": 0.41163889807648957,
+      "session_cache_bytes": 148530,
+      "std_nll": 4.0995150211266775
+    },
+    "private_head_resid4": {
+      "mean_cache_reconstruction_mse": 0.14894299511797726,
+      "mean_encode_seconds": 0.02419931305666978,
+      "mean_nll": 5.167808352736756,
+      "mean_query_seconds": 0.09580229975472321,
+      "mean_reconstruct_seconds": 0.00015653887385269627,
+      "nll_delta_vs_fp16": 0.24439054308459163,
+      "session_cache_bytes": 148530,
+      "std_nll": 4.214839031747723
+    }
+  },
+  "model_revision": "e93a9faa9c77e5d09219f6c868bfc7a1bd65593c",
+  "model_sha256": "3da388330e4549156d76b58d6d268c63cd005e9336b4f4d2d378421e7b7a33fd",
+  "model_state_bytes": {
+    "fp16_kv": 0,
+    "mirror_shared_resid4": 1590068,
+    "mla_rank128": 1586216,
+    "native_shared_resid4": 1590068,
+    "private_head_resid4": 1636152
+  },
+  "model_state_files": {
+    "mla_pca_state.npz": 1586216,
+    "private_head_residual_bases.npz": 49936,
+    "shared_residual_dictionary.npz": 3852
+  },
+  "note": "PCA compresses K/V states after the original model generated them; projection/reconstruction bases are charged as added model state.",
+  "pca_rank": 128,
+  "prefix_tokens": 64,
+  "query_target_pairs": 16,
+  "residual_rank": 4,
+  "seed": 58102,
+  "split": "dev"
+}

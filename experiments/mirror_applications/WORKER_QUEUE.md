@@ -490,4 +490,4 @@ MA-578 is closed **FAIL** on `research/ma-578-kv-cache-mirror-rotation-20261009`
 
 ## Current MA-581 handoff — 2026-10-09
 
-MA-581 is active on `research/ma-581-mla-mirror-head-reconstruction-20261009`. Protocol/source frozen before dev 58101/02. Fresh WikiText test windows 58111–13 are sealed. PA115 MLA baseline is part of the control set.
+MA-581 is closed **FAIL** on `research/ma-581-mla-mirror-head-reconstruction-20261009`: eight-session basis+cache state is 44.1% of FP16 bytes, but NLL misses gate by +1.036/+0.412 nat and shared residual exact-aliases native dictionary. Fresh sealed. Next P0: MA-582 MLA latent + layer Mirror reconstruction (PA115/PA08).
