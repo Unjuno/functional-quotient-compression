@@ -1,0 +1,86 @@
+{
+  "experiment_id": "MA-391",
+  "title": "Quotient-remainder compositional embedding Mirror address",
+  "status": "PROTOCOL_FROZEN_BEFORE_DEVELOPMENT",
+  "base_commit": "78ec2d76",
+  "prior_art_refs": ["PA59"],
+  "hypothesis": "For a collision-free quotient/remainder vocabulary whose embeddings lie on a unit-circle orbit over two complementary table rows, one token-specific Givens coordinate can recover vector/task quality while using materially fewer complete inference bytes than independent embeddings and direct two-coefficient composition, and improve over fixed addition, multiplication, and concatenation-projection operators.",
+  "physical_object": "Two fixed shared 32x16 component tables indexed by q=floor(token/32) and r=token mod 32; every one of 1024 token IDs has a unique quotient/remainder pair.",
+  "mirror_coordinate": "One learned angle theta_i per token; E_i=cos(theta_i)Q[q_i]+sin(theta_i)R[r_i]. The angle code is the only trained Mirror-specific state; component tables are fixed and charged.",
+  "logical_multiplicity": "1024 distinct token embedding functions represented by two shared complementary 32x16 tables plus one angle coordinate per token.",
+  "prior_art_delta": "PA59 quotient-remainder/complementary partitions provide unique addresses and compact factor tables. This experiment holds the address and component tables fixed and tests whether a small learned functional coordinate over the two addressed rows beats fixed addition/product/concatenation-projection while compressing the two native free coefficients per token.",
+  "model": {
+    "vocabulary_size": 1024,
+    "embedding_dim": 16,
+    "quotient_table_rows": 32,
+    "remainder_table_rows": 32,
+    "hashing": "none; exact quotient and remainder address, no address collisions",
+    "updates": 2000,
+    "batch_size": 128,
+    "optimizer": "Adam",
+    "learning_rate": 0.02,
+    "development_seeds": [39101, 39102],
+    "fresh_seeds": [39111, 39112, 39113],
+    "methods": [
+      "independent full 1024x16 embedding",
+      "fixed quotient/remainder addition",
+      "fixed elementwise product",
+      "concatenation followed by a fixed seeded 32x16 projection",
+      "shared quotient/remainder tables plus two learned direct coefficients per token",
+      "shared quotient/remainder tables plus one learned Mirror Givens angle per token"
+    ]
+  },
+  "teacher": {
+    "tables": "Seeded fixed shared Q and R component matrices are paid in every compositional method and are not optimized.",
+    "embedding": "For each token, a seeded teacher angle generates E_i=cos(theta_i)Q[q_i]+sin(theta_i)R[r_i]. This is a deliberately aligned coordinate-feasibility fixture.",
+    "task_quality": "A fixed seeded 16x16 decoder maps the teacher embedding to one of 16 classes; labels are frozen and shared across methods. Report embedding NRMSE, decoder NLL and top-1 accuracy.",
+    "address_audit": "Report number of unique (q,r) pairs and prove zero address collisions."
+  },
+  "controls": [
+    "independent full embedding upper control",
+    "fixed addition Q[q]+R[r]",
+    "fixed elementwise product Q[q]*R[r]",
+    "fixed seeded projection of concatenated [Q[q];R[r]]",
+    "direct unconstrained per-token coefficients alpha_i*Q[q]+beta_i*R[r]",
+    "Mirror per-token Givens angles cos(theta_i)*Q[q]+sin(theta_i)*R[r]"
+  ],
+  "development": {
+    "worlds_or_seeds": [39101, 39102],
+    "selection_metric": "Embedding NRMSE is primary; decoder NLL/top-1, complete serialized payload bytes, unique-address count, and active compute/wall time are secondary.",
+    "allowed_tuning": "No tuning planned. Tables, teacher, projection, optimizer, schedule and seeds are fixed. Correctness fixes may rerun development only before fresh access."
+  },
+  "fresh": {
+    "worlds_or_seeds": [39111, 39112, 39113],
+    "locked_before_access": true,
+    "open_gate": "Both development worlds: full and direct-coefficient embedding NRMSE <=0.03; Mirror NRMSE <=0.03 and decoder NLL within 0.02 nat/top-1 within 1pp of direct coefficients; Mirror complete payload <=0.60x full embedding; Mirror beats each fixed addition/product/concat-projection NRMSE by >=0.01 at <=1.10x each payload; Mirror matches direct coefficients within 0.005 NRMSE while using <=0.90x their actual payload; all 1024 addresses unique and exact serialized replay. Otherwise fresh stays sealed.",
+    "fresh_success": "All three fresh worlds meet the same quality, fixed-composition margin, direct-coefficient bytes and full-table bytes gates with exact payload/metric replay."
+  },
+  "storage": {
+    "authority": "actual compressed NPZ inference payload bytes after reload",
+    "paid_objects": [
+      "independent embedding table or both shared quotient/remainder component tables",
+      "each token's two direct coefficients or Mirror angle",
+      "fixed classifier decoder",
+      "concat projection matrix and its seed for the concatenation control",
+      "vocabulary/table dimensions, method metadata, serialization names and archive overhead"
+    ],
+    "deterministic_reconstruction": "Quotient/remainder addresses are derived exactly from token ID and table dimensions. No learned address list is stored."
+  },
+  "compute": {
+    "report_tokens_and_updates": true,
+    "report_component_vector_lookups": true,
+    "report_elementwise_or_projection_MAC_proxy": true,
+    "report_angle_reconstruction_ops": true,
+    "report_fixed_decoder_MAC_proxy": true,
+    "report_training_wall_time": true,
+    "report_inference_tokens_per_second": true
+  },
+  "success_gate": "All development and fresh quality, fixed-operator margin, direct-coefficient bytes, full-table bytes, uniqueness and exact-replay criteria pass.",
+  "failure_gate": "Any frozen development gate fails, or Mirror is matched by direct coefficients/fixed operators within thresholds without the required byte reduction.",
+  "boundaries": [
+    "aligned synthetic quotient/remainder embedding screen; not natural language or recommendation evidence",
+    "shared component tables are fixed to isolate code/composition representability, not end-to-end table learning",
+    "one fixed 16-class decoder is a proxy task and embedding NRMSE remains primary",
+    "fixed update budget is not a capacity or near-convergence claim"
+  ]
+}
