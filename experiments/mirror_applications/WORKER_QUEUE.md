@@ -189,7 +189,7 @@ High-information P0:
 14. MA-547 — RoseLoRA versus Mirror edit locality (**FAIL; fresh remained sealed after dev gate miss**)
 15. MA-550 — adaptive allocation between weight-space and activation-space Views (**FAIL for Mirror-specific attribution; synthetic mixed allocation passes; native sparse-bias + ReFT control exactly explains result**)
 16. MA-551 — FiLM-to-Mirror hierarchy (**FAIL; fused runtime gate miss and exact native Givens alias; family paused**)
-17. MA-573 — QuaRot Mirror coordinate sweep (**next P0 outside paused families**)
+17. MA-573 — QuaRot Mirror coordinate sweep (**SCREENING; frozen protocol; dev pending; fresh sealed**)
 
 ## KV-cache transformation research lane
 

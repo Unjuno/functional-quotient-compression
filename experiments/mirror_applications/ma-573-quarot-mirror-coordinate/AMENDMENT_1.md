@@ -1,0 +1,3 @@
+# Amendment 1 — excluded implementation smoke
+
+Before protocol/source freeze, nonregistered seed 1 was used only to execute the safetensors parser, int4 packer, matrix FWHT, payload serialization and exact-function check. It selected candidate 7 but showed no calibration/held-out improvement over the first QuaRot draw; identity and SmoothQuant had lower reconstruction error. No registered development/fresh seed or gate was changed, and no implementation choice was selected based on this result. The smoke output remains at `/workspace/artifacts/ma573_smoke_seed1` and is excluded from all registered summaries.
