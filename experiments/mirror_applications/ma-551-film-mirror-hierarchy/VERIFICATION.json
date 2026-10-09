@@ -1,17 +1,40 @@
 {
-  "status": "PENDING",
   "base_commit": "3d2e12a7",
-  "protocol_frozen_before_results": true,
-  "source_sha256": "23eb735da95be2ec82d066fe97dcbbedc84dd0d78517cea257622c9b77dc95f7",
   "checks": {
-    "unit_tests": "3 passed",
-    "nonregistered_smoke_seed1": "compiled C control kernels; all 6 serialized controls produced output; excluded from registered dev/fresh",
+    "55101_replay": "all six NPZ payloads SHA256-identical",
+    "development_payload_sha256": {
+      "55101": {
+        "full_affine.npz": "7f2ed7dba5b8f5a24906734812791fc566ace7e5dae6adc277b017629120d225",
+        "independent_film.npz": "c9362947c2c98bcb10abca2f36cd2b765b4775b58d49ea239017c16b431f3609",
+        "lowrank_r4.npz": "cdd183c464aa83420ee5c533757c43a332523024ea6b41963522a1bc73bd31ba",
+        "mirror_hierarchy.npz": "1ddd6214bddef390da95cd91d8ff06290550282059255895747220dd987c2c31",
+        "native_givens.npz": "1ddd6214bddef390da95cd91d8ff06290550282059255895747220dd987c2c31",
+        "tied_film.npz": "a8966aae08f3e64ae0c569b2858ddfa40e37997e24007b5ec8b07a35d4403114"
+      },
+      "55102": {
+        "full_affine.npz": "61bbc9c819912cc7cf1e5122dd76cfcc4768a563300a4b9e71f060256a4dcca4",
+        "independent_film.npz": "8b9f3aae4d6a554863f3137ba64d07dfc013a5dad3fdbb41eede8dfc00910312",
+        "lowrank_r4.npz": "00503082f443954a24593ef3e5347350d194639537729efa085fbe317e889187",
+        "mirror_hierarchy.npz": "0678f176ab4bb49f9272b53c4a8f1b9f63a3aca0ec6e971eb6ccd4641b7640cc",
+        "native_givens.npz": "0678f176ab4bb49f9272b53c4a8f1b9f63a3aca0ec6e971eb6ccd4641b7640cc",
+        "tied_film.npz": "5710d44b605e3312eb38ee83a0d3da18c2bf71a1e89fe1aa63bf6a0bafd3aada"
+      }
+    },
     "development_seeds": "unopened",
-    "fresh_opened": false
+    "development_worlds": "both meet quality/byte; both miss >=0.80 throughput gate",
+    "fresh": "sealed; not opened",
+    "fresh_opened": false,
+    "native_givens_alias": "parameter arrays and output metrics exactly equal",
+    "nonregistered_smoke_seed1": "compiled C control kernels; all 6 serialized controls produced output; excluded from registered dev/fresh",
+    "unit_tests": "3 passed"
   },
   "fresh_opened": false,
   "notes": [
     "AMENDMENT_1 records exploratory pilot, N_FUNC increase from 8 to 32, and rank-4 ctypes repair before registered development."
   ],
-  "protocol_sha256": "e20274f2bff507672d0d03715a31e8d2b82e8e2eb4238619b3f30893ba874a27"
+  "protocol_frozen_before_results": true,
+  "protocol_sha256": "e20274f2bff507672d0d03715a31e8d2b82e8e2eb4238619b3f30893ba874a27",
+  "result_commit": "pending",
+  "source_sha256": "23eb735da95be2ec82d066fe97dcbbedc84dd0d78517cea257622c9b77dc95f7",
+  "status": "FAIL_RUNTIME_GATE"
 }

@@ -1,3 +1,3 @@
 # MA-551 status
 
-SCREENING — protocol frozen after an excluded seed-1 smoke and Amendment 1. The protocol responds to the prior conditional-modulation family finding by using fused C kernels. Preregistered development worlds 55101/55102 have not been generated. Fresh seeds remain sealed.
+FAIL — shared FiLM plus Givens Views passes synthetic quality/storage but fails fused-kernel runtime in both development seeds; exact native Givens alias. Fresh seeds 55111–55113 remained sealed. See `RESULTS.md` and the conditional-modulation family diagnostic.
