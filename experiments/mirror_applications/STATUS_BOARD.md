@@ -7,10 +7,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 - Registered candidates: **1155**
 - P0: **630** (43 completed; 587 UNTESTED)
-- P1: **422** (12 completed; 410 UNTESTED)
+- P1: **422** (13 completed; 409 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1100 UNTESTED, 35 PROMISING, 20 FAIL**
-- 54 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
+- Current MA statuses: **1099 UNTESTED, 35 PROMISING, 21 FAIL**
+- 55 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
 - Thirteenth literature sweep added MA-996..1045 (50 UNTESTED; 40 P0/10 P1) and PA296..PA325. IDs MA-1000+ use four digits; consult `check_registry_integrity.py`. No new experiment results.
@@ -23,13 +23,13 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-483 — adaptive number of Mirror codebooks (P1; PA92)**
+**MA-484 — VQ logical expert codebook (P0; PA91)**
 
 Reason:
-- MA-470/471/473/475/476/478/481/482 are completed on dedicated branches and cross-linked in the claim ledger;
-- MA-482's A1 confirms a scoped rate-distortion result on a known synthetic residual-phase family, with A0 oracle-phase evidence excluded.
+- MA-470/471/473/475/476/478/481/482 and MA-483 are completed on dedicated branches and cross-linked in the claim ledger;
+- MA-483's adaptive depth reduced active stages but missed its preregistered byte gate (96% of fixed-rate storage).
 
-Required controls: fixed-rate residual codebooks vs adaptive depth, shared decoder, full private fallback, all routing/index state charged; measure bytes, rate-distortion, active stages and latency.
+Required controls: independent logical experts, shared physical expert with VQ address codes, simple low-rank/gate control, and actual serialized codebook/index bytes; measure held-out task quality and collisions.
 
 This is the next registry candidate by ID; the remaining P0 candidates after MA-482 proceed in registry order. Do not drop negative outcomes or treat synthetic PROMISING evidence as adoption.
 
