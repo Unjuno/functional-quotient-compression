@@ -63,6 +63,11 @@
   },
   "success_gate": "At rho=0, every fresh world has held-out NRMSE <=0.05, Mirror actual bytes <=80% of direct LoReFT coefficient-table bytes, and Mirror lies on a useful quality/byte Pareto point against shared-task tying and generic full-matrix factorization.",
   "failure_gate": "Held-out quality or byte gate fails, or a simpler control matches quality at equal/fewer actual bytes.",
+  "amendment_A1": {
+    "reason": "Code review found that initial decode timing measured only basis application and omitted generation of coefficients from stored factor/angle codes.",
+    "change": "End-to-end decode timing now includes factor/View coefficient generation plus shared-basis application. No quality, storage, optimizer-step, or model-selection rule changes.",
+    "fresh_rerun": "Repeat the same locked worlds/seeds/settings; preserve initial runtime records as exploratory A0 and use A1 for runtime conclusions."
+  },
   "boundaries": [
     "Synthetic frozen representation screen only; shared basis is known by construction.",
     "rho=0.1 maps private-residual need and is not a required pass condition.",

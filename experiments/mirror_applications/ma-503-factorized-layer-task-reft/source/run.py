@@ -150,10 +150,10 @@ def evaluate(method, state, basis, coeff, targets, held, steps, fit_s, world, se
         return float(torch.linalg.norm(delta) / (torch.linalg.norm(ref) + eps))
     # Decode latency is measured over a complete layer x task batch after warmup.
     for _ in range(3):
-        _ = pred_c @ basis.T
+        _ = predict_coeff(state) @ basis.T
     ts = time.perf_counter()
     for _ in range(30):
-        _ = pred_c @ basis.T
+        _ = predict_coeff(state) @ basis.T
     decode_s = (time.perf_counter() - ts) / 30
     digest = hashlib.sha256(payload).hexdigest()
     mac = L * T * (D * R + (2 * R if method == "mirror_givens" else R * R if method == "generic_full_layer" else 2 * R if method == "diag_layer_factor" else R))

@@ -36,7 +36,7 @@ H: In a shared rank-4 representation intervention space, a per-layer two-angle M
 4. Generic full layer matrix `A_l` × task code `q_t` (strong native factorized control).
 5. Mirror Givens layer View × task code (candidate).
 
-Report held-out and observed-pair NRMSE, exact serialized inference payload bytes, bytes/task, transform/application MAC proxy, optimizer steps, fitting wall time, and decode wall time. All tensors and metadata in the serialized payload are charged. The common fixed basis is serialized in every method.
+Report held-out and observed-pair NRMSE, exact serialized inference payload bytes, bytes/task, transform/application MAC proxy, optimizer steps, fitting wall time, and end-to-end decode wall time including code-to-coefficient generation and shared-basis application. A1 corrects an initial timing omission; initial fresh metrics are retained as exploratory. All tensors and metadata in the serialized payload are charged. The common fixed basis is serialized in every method.
 
 ## Decision gates
 
