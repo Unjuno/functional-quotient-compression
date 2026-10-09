@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-567",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m pytest -q -p no:cacheprovider experiments/mirror_applications/ma-567-mod-mirror-routing/tests",
+    "passed": 2,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Eight rows replay across two development seeds.",
+    "Router and active block MAC proxies match all methods.",
+    "Mirror/direct controls match and fresh remains sealed."
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "experiment_id": "MA-567",
+  "title": "Mixture-of-Depths with Mirror compute/function routing",
+  "status": "DEVELOPMENT_ONLY_FAIL",
+  "evidence_lane": "MECHANISM/QUALITY/STORAGE/COMPUTE/ROUTING",
+  "base_commit": "a84cc98a",
+  "hypothesis": "At identical token routing and compute budget, a small role-conditioned Mirror view improves function quality over vanilla MoD while using fewer bytes than independent role blocks.",
+  "physical_object": "shared 8x8 routed token block",
+  "mirror_coordinate": "token role-conditioned Givens rotation view",
+  "logical_multiplicity": "two routed token roles plus residual bypass",
+  "prior_art_refs": [
+    "PA111"
+  ],
+  "controls": [
+    "vanilla MoD shared block",
+    "Mirror role view",
+    "direct two-basis coefficients",
+    "independent role blocks"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      56701,
+      56702
+    ],
+    "tokens": 1024,
+    "train_tokens": 512,
+    "test_tokens": 512,
+    "route_fraction": 0.5,
+    "selection_metric": "routed output nMSE, bytes, router and active block MACs"
+  },
+  "fresh": {
+    "worlds_or_seeds": [],
+    "locked_before_access": true,
+    "open_only_if_development_passes": false,
+    "reason": "Direct coefficient view is exact specificity control."
+  },
+  "storage": {
+    "authority": "actual deterministic NPZ bytes",
+    "paid_objects": [
+      "shared block",
+      "role codes",
+      "direct bases/coefficients",
+      "independent blocks",
+      "router metadata"
+    ]
+  },
+  "compute": {
+    "report_tokens": true,
+    "report_optimizer_updates": true,
+    "report_router_MACs": true,
+    "report_active_block_MACs": true,
+    "report_wall_time": true
+  },
+  "success_gate": "Routed-token nMSE <=1e-4; >=20% fewer bytes than independent role blocks; >=10% fewer bytes than direct coefficient control.",
+  "failure_gate": "Direct coefficients match Mirror or routed quality gate fails.",
+  "boundaries": [
+    "fixed oracle router",
+    "synthetic linear token regression",
+    "no learned routing or Transformer claim"
+  ]
+}
