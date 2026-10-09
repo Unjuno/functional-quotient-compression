@@ -1,19 +1,82 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
-  "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+  "experiment_id": "MA-311",
+  "decision": "FAIL for practical Mirror-specific gain; aligned coordinate-compression signal is small in total payload and compute-inefficient",
+  "protocol_commit": "c272f746",
+  "fresh_worlds": [
+    31110,
+    31111,
+    31112
+  ],
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "fresh_rows": 54,
+  "strata": {
+    "aligned": {
+      "generic_intrinsic_pca_rank2": {
+        "query_nrmse": 2.897574249674209e-07,
+        "payload_bytes": 4424.0,
+        "fit_seconds": 0.00020201344644495597,
+        "optimizer_updates": 0.0,
+        "examples_seen": 1024.0
+      },
+      "mirror_intrinsic_orbit": {
+        "query_nrmse": 1.9654870461257207e-05,
+        "payload_bytes": 4314.0,
+        "fit_seconds": 0.915287168774133,
+        "optimizer_updates": 800.0,
+        "examples_seen": 819200.0
+      },
+      "random_intrinsic_independent": {
+        "query_nrmse": 2.8007174377206764e-07,
+        "payload_bytes": 4510.0,
+        "fit_seconds": 0.00047328866720716987,
+        "optimizer_updates": 0.0,
+        "examples_seen": 1024.0
+      }
+    },
+    "independent": {
+      "generic_intrinsic_pca_rank2": {
+        "query_nrmse": 0.6143082645204332,
+        "payload_bytes": 4424.0,
+        "fit_seconds": 0.00018109611280831613,
+        "optimizer_updates": 0.0,
+        "examples_seen": 1024.0
+      },
+      "mirror_intrinsic_orbit": {
+        "query_nrmse": 0.8432893090777926,
+        "payload_bytes": 4314.0,
+        "fit_seconds": 0.923486739222426,
+        "optimizer_updates": 800.0,
+        "examples_seen": 819200.0
+      },
+      "random_intrinsic_independent": {
+        "query_nrmse": 2.854864552167176e-07,
+        "payload_bytes": 4510.0,
+        "fit_seconds": 0.0004904265547843857,
+        "optimizer_updates": 0.0,
+        "examples_seen": 1024.0
+      }
+    }
   },
-  "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
-  },
-  "metric_replay": {
-    "checked": false,
-    "max_difference": null
-  },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "facts": [
+    "Aligned stratum: Mirror query NRMSE 1.97e-5 at 4,314 B; generic PCA 2.90e-7 at 4,424 B; direct random intrinsic codes 2.80e-7 at 4,510 B.",
+    "Mirror total-payload saving vs direct is ~4.3% after charging shared random projection U; task-code-only bytes are 48 B vs 256 B direct (~81% lower).",
+    "Mirror takes ~0.915 s and 800 updates / 819,200 task-example presentations; direct intrinsic least-squares takes ~0.00047 s with 1,024 support examples.",
+    "Independent stratum: direct coordinates remain ~2.85e-7; Mirror ~0.843 and PCA ~0.614 at similar total payload."
+  ],
+  "interpretation": "The known Givens orbit can be encoded by a shared vector and angles, reducing only the task-specific coordinate state. Once the mandatory shared random projection is included, total storage savings are small. Generic PCA matches quality more closely; Mirror optimization is far slower; unrelated task vectors require private intrinsic coordinates.",
+  "hypothesis": "Not supported as a practical Mirror application under this protocol. A task-code compression signal exists only for the aligned orbit, while quality/compute Pareto is not improved against direct intrinsic tuning and PCA.",
+  "counter_hypothesis": "More tasks would amortize the shared projection and could improve total-byte savings; more efficient or analytic angle fitting could reduce compute. These were outside the frozen protocol.",
+  "limitations": [
+    "Synthetic linear regression, random U rather than pretrained model",
+    "Aligned teacher generated from exact Givens orbit",
+    "Only eight tasks; shared projection dominates total bytes",
+    "Independent task stratum shows severe Mirror capacity limitation",
+    "No neural finetuning or real-world task evidence"
+  ],
+  "fresh_data_used_for_tuning": false,
+  "source_sha256": "7259ae45e7a082d800c244ee5cc68905348aa23d8eb1308fbf8e7e8014fcf907"
 }
