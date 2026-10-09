@@ -1,0 +1,97 @@
+{
+  "experiment_id": "MA-478",
+  "title": "View-first knowledge storage with private memory fallback",
+  "status": "FROZEN_SCREENING",
+  "base_commit": "fb8567f7",
+  "evidence_lane": "ADAPTIVE_SHARED_PRIVATE_ALLOCATION/EDIT_SUCCESS/BYTES/FALLBACK",
+  "hypothesis": "An encoder can store edits on a shared Mirror value orbit as compact angles and allocate full private values only when a per-edit projection residual exceeds a development-selected threshold, preserving SERAC/GRACE output quality with fewer bytes than always-private memory; compare the same fallback policy using generic Cartesian coefficients.",
+  "physical_object": "one shared 16D counterfactual value plane plus explicit keys/radii",
+  "mirror_coordinate": "per-edit value angle; private full-value fallback flag/index for off-orbit edits",
+  "logical_multiplicity": "64 independently retrievable edit behaviors with adaptive shared/private allocation",
+  "prior_art_refs": [
+    89,
+    90
+  ],
+  "controls": [
+    "always-private SERAC/GRACE key-radius-value memory",
+    "Mirror-only view with no private fallback",
+    "View-first Mirror with threshold-triggered private full-value entries",
+    "generic Cartesian shared-basis code with the same threshold/private fallback",
+    "oracle on-orbit labels as a fallback upper control"
+  ],
+  "task": {
+    "type": "synthetic 16D external edit memory",
+    "edits_per_world": 64,
+    "value_mix": "70% fixed-norm 2D-orbit values; 30% values with orthogonal off-orbit component alpha=0.35",
+    "keys_and_radii": "random unit keys and explicit per-key radii sampled [0.87,0.93], identical across methods",
+    "fallback_rule": "relative residual ||v - BB^T v||/||v|| > tau stores the entire value privately; otherwise store Mirror angle or Cartesian coefficients",
+    "threshold_candidates": [
+      0.05,
+      0.1,
+      0.2,
+      0.3
+    ],
+    "query_audit": "exact key, four paraphrases sigma .03 per edit, 256 unrelated random queries",
+    "metrics": [
+      "on-scope output NRMSE and hit recall",
+      "unrelated false triggers/locality",
+      "actual payload bytes and fallback fraction at N=1/8/32/64",
+      "threshold selection on dev only",
+      "query/decode compute and latency"
+    ]
+  },
+  "development": {
+    "worlds": [
+      47800,
+      47801
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "selection": "choose largest tau meeting NRMSE <=1e-5 and recall>=99%; fixed tie rule favors largest tau for fewer false fallbacks"
+  },
+  "fresh": {
+    "worlds": [
+      47810,
+      47811,
+      47812
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "all keys and radii",
+      "shared basis",
+      "per-edit codes and flags/indices",
+      "all private full values",
+      "metadata"
+    ],
+    "amortization_N": [
+      1,
+      8,
+      32,
+      64
+    ]
+  },
+  "compute": {
+    "report_projection_MAC_per_new_edit": true,
+    "report_value_decode_MAC_per_hit": true,
+    "report_retrieval_MAC_per_query": true,
+    "report_measured_lookup_latency": true
+  },
+  "success_gate": "Frozen tau must meet dev NRMSE/recall gate. Every fresh world at N64: adaptive Mirror recall>=99%, value NRMSE<=1e-5, false triggers<=1%, fallback fraction approximates off-orbit share, and actual bytes<=80% always-private. Compare generic adaptive basis at equal quality and oracle fallback.",
+  "failure_gate": "No threshold satisfies dev gate, or fresh misses quality/retrieval/bytes; if generic adaptive coefficients match or beat Mirror bytes at equal quality, no Mirror-specific gain is claimed.",
+  "boundaries": [
+    "Synthetic known mixture of aligned and off-orbit values, not natural factual editing.",
+    "Fallback stores full private output values, not residuals; all private state is charged.",
+    "SERAC/GRACE retrieval keys and radii remain explicit and unchanged."
+  ]
+}
