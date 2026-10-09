@@ -1,0 +1,30 @@
+{
+  "experiment_id": "MA-503",
+  "commit": "results and report commit recorded in git history",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-503-factorized-layer-task-reft/tests/test_artifacts.py",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "payload_count": 108,
+    "payload_file_sizes_match_results": true,
+    "sha256_recorded_for_every_payload": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_design": "A1 repeated the same locked worlds/seeds after a decode-timing-only correction; A0 timing rows are preserved as exploratory.",
+  "protocol_amendments": [
+    "A1 corrected end-to-end decode timing to include code/View coefficient generation; quality, storage, training-step, and model-selection rules were unchanged."
+  ],
+  "notes": [
+    "108 A1 rows: rho in {0.0, 0.1} x 3 worlds x 3 seeds x 6 methods.",
+    "All payload hashes, actual serialized byte sizes, and replay metrics are recorded in RESULTS_CORE.csv/artifacts/fresh_runs.jsonl.",
+    "Fresh data was used only for evaluation; the common 400-step setting was selected on development worlds before fresh evaluation."
+  ]
+}

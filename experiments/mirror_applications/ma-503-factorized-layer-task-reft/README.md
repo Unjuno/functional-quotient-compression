@@ -48,3 +48,32 @@ Report held-out and observed-pair NRMSE, exact serialized inference payload byte
 ## Boundaries
 
 Synthetic frozen representation vectors only. The shared basis is supplied by construction; this is not a pretrained-model LoReFT reproduction, downstream-language test, capacity proof, or claim that the number of combinations is independent capacity. Any oracle target/basis use is disclosed and charged where serialized.
+
+## Results
+
+### H / T / D / C / U
+
+**H:** A layer-specific Givens View over per-task LoReFT coordinates can encode aligned layer-task interventions more compactly than a direct pair table and the generic full layer-matrix control, while extrapolating to held-out pairs.
+
+**T:** One shared synthetic 64×4 basis, 8 layers, 32 tasks, 20% held-out pairs, two target regimes (`rho=0` and `rho=0.1`), three fresh worlds × three seeds per regime. Development selected 400 common optimizer steps. Controls were full independent vectors, direct LoReFT coefficient table, layer-shared task codes, diagonal layer factors, and generic full 4×4 layer matrices × task codes. The A1 timing rerun includes coefficient generation and basis application.
+
+**D: PROMISING, narrowly scoped to the aligned synthetic orbit.** At `rho=0`, Mirror had held-out NRMSE 1.6e-6 mean (maximum 1.21e-5) at 3,617B. The direct pair coefficient table was exact at 6,949B; Mirror used 52.1% of its bytes. Generic full layer matrices were near-exact (2.22e-5 mean) at 4,065B, 12.4% more bytes than Mirror. Shared-task tying and diagonal factors were much smaller/weaker in quality (NRMSE .596/.560). Mirror's MAC proxy was 264 per pair vs 272 generic, but measured CPU batch decode was 0.063 ms vs 0.020 ms, about 3.2× slower. At `rho=0.1`, Mirror and generic factorization both missed the .05 quality target (mean .185 and .201); exact direct pair codes remained 6,949B. Private per-pair state is needed to recover that off-orbit residual, which returns to the direct-table payload scale.
+
+**C:** The teacher was generated from exactly the two-plane Givens family used by Mirror. The generic matrix control also fit it nearly exactly; the 448B Mirror saving may depend on this known orbit and the small CPU timing may reflect unfused tensor-operation overhead.
+
+**U:** A trained/pretrained Transformer, learned basis cost, natural task-conditioned interventions, more layers/tasks, deployment GPU kernels, and whether private residuals can be allocated sparsely without full-table growth are untested.
+
+### Facts
+
+- Fresh A1 results contain 108 rows: 2 residual regimes × 3 worlds × 3 seeds × 6 methods. All serialized replay maximum absolute errors are 0.
+- At `rho=0`, all nine Mirror held-out results are ≤1.21e-5; payload sizes are 3,617B Mirror, 4,065B generic full matrix, 6,949B direct LoReFT table, and 67,177B independent vectors.
+- At `rho=0.1`, Mirror held-out NRMSE ranges .1715–.2012 and generic full matrix .1864–.2174.
+- Timings were measured on Linux x86_64 with PyTorch 2.14.1 CPU; no CUDA device was available.
+
+### Interpretation
+
+Mirror shows a real storage/quality point on this prealigned orbit relative to the registered full-matrix factorization and direct pair table. It is not a general representation-space compression claim. End-to-end CPU decode latency is unfavorable; the lower MAC proxy did not translate to faster execution in the unfused implementation.
+
+### Hypothesis boundary
+
+The evidence supports only the hypothesis that a structured low-description layer coordinate can reduce the stored layer transform for a known rotational family. The quality loss at `rho=0.1` identifies a private-state boundary, but this screen did not optimize a sparse private residual allocator.

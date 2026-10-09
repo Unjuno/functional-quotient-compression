@@ -7,6 +7,6 @@ def test_results_and_serialized_payloads():
     assert len(rows)==108
     assert {r['phase'] for r in rows}=={'fresh'}
     for r in rows:
-        p=ROOT/r['payload_path']
+        p=ROOT.parents[2]/r['payload_path']
         assert p.exists() and p.stat().st_size==int(r['serialized_payload_bytes'])
         assert float(r['max_serialized_replay_abs_error'])==0.0
