@@ -1,0 +1,14 @@
+{
+  "experiment_id":"MA-352","title":"Compress MIMO output boundary heads while retaining shared trunk and multi-input training","status":"PROTOCOL_FROZEN_BEFORE_DEVELOPMENT","base_commit":"84410895","evidence_lane":"MECHANISM/MIMO_MEMBER_QUALITY/DIVERSITY/ACTUAL_BYTES/RUNTIME",
+  "hypothesis":"A per-member Mirror phase can replace MIMO member-specific binary output heads over a shared trunk with lower total serialized payload while retaining member NLL/diversity and one batched inference.",
+  "physical_object":"shared frozen 16x64 ReLU trunk plus per-member MIMO output heads","mirror_coordinate":"one angle per member rotating two coordinates of the shared 64D output head","logical_multiplicity":"eight member-specific classifiers","prior_art_refs":[42],
+  "task":{"input_dim":16,"hidden_dim":64,"members":8,"train_examples_per_member":256,"test_examples_per_member":1024,"teacher":"member heads are planar rotations of one shared head; labels sampled Bernoulli logistic"},
+  "controls":["shared trunk plus full MIMO member-head bank","shared trunk plus Mirror phase head views","shared trunk plus generic rank-2 basis/coefficient heads","shared trunk plus one shared output head"],
+  "development":{"worlds":[35221,35222],"optimizer_updates":1000,"metric":"total payload, head payload, member NLL/ECE/accuracy/disagreement, one-batch latency including trunk/view reconstruction"},
+  "fresh":{"worlds":[35231,35232,35233],"locked_before_access":true,"optimizer_updates":1000},
+  "storage":{"authority":"actual deterministic serialized inference payload bytes","paid_objects":["shared trunk in all methods","full head bank or shared basis/head","all member codes","metadata"]},
+  "compute":{"report_examples":true,"optimizer_updates":true,"active_compute_proxy":true,"isolated_wall_clock":true,"single_batched_forward":true},
+  "success_gate":"Mirror NLL within .02 and disagreement within .02 of MIMO; total payload <=0.80x MIMO and <=0.90x generic coefficients; retain one batch call.",
+  "failure_gate":"Total payload gate misses, quality/diversity misses, or generic control matches within 10% bytes and quality.",
+  "boundaries":["frozen random shared trunk","teacher heads deliberately rotation aligned","linear output-head screen, not deep MIMO reproduction","no capacity claim"]
+}
