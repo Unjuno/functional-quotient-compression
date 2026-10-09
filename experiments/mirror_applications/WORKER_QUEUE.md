@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-375.** MA-374 failed on its preregistered fresh digits protocol: partial attention/FFN sharing beat full tying, while Mirror matched equal-byte FiLM. A duplicate development-only sequence screen is archived separately and does not alter the decision. Proceed to MA-375, one-shot supernet + Mirror subgraph correction (P0).
+**Current operational pointer (2026-10-09): MA-379.** MA-375 failed its exploratory development rank/quality gate: Givens per one-shot path did not beat plain sharing or scalar control. Stored dev runs replayed; fresh remained sealed, and no independent pre-development freeze commit is evidenced. Proceed to MA-379, Mirror-compressed AdapterFusion bank (P0).
 
 # Worker queue
 
