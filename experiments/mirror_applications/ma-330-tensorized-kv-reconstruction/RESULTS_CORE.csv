@@ -1,1 +1,9 @@
 condition,world_or_seed,method,serialized_bytes,train_tokens_or_examples,optimizer_updates,active_compute_proxy,wall_time_s,primary_metric,primary_value,secondary_metric,secondary_value,status_note
+fresh_aligned_mean,33010-33012x3,mirror_role_views,2287,9,0,32768,0.000846,attention_context_nrmse,0.000602,kv_nrmse,0.000427,"PROMISING narrow synthetic Givens-aligned cache roles; 64.8% fewer bytes than PCA/Tucker, materialization slower"
+fresh_aligned_mean,33010-33012x3,generic_tucker_pca_rank2,6502,9,0,32768,0.000051,attention_context_nrmse,0.000427,kv_nrmse,0.000296,"Generic control, faster materialization"
+fresh_aligned_mean,33010-33012x3,full_independent_kv,32909,9,0,0,0.0,attention_context_nrmse,0.000312,kv_nrmse,0.000209,"Independent full cache reference"
+fresh_aligned_mean,33010-33012x3,mlkv_single_shared_state,2188,9,0,0,0.0,attention_context_nrmse,0.999311,kv_nrmse,0.996414,"Hard sharing fails quality"
+fresh_independent_mean,33010-33012x3,mirror_role_views,2287,9,0,32768,0.000867,attention_context_nrmse,1.366144,kv_nrmse,1.333406,"Off-orbit failure; private cache state needed"
+fresh_independent_mean,33010-33012x3,generic_tucker_pca_rank2,6502,9,0,32768,0.000051,attention_context_nrmse,0.937512,kv_nrmse,0.880886,"Off-orbit low-rank failure"
+fresh_independent_mean,33010-33012x3,full_independent_kv,32909,9,0,0,0.0,attention_context_nrmse,0.000300,kv_nrmse,0.000208,"Independent full cache reference"
+fresh_independent_mean,33010-33012x3,mlkv_single_shared_state,2188,9,0,0,0.0,attention_context_nrmse,0.984475,kv_nrmse,0.968251,"Hard sharing fails quality"

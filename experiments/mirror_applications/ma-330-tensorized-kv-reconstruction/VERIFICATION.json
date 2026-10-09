@@ -1,19 +1,25 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-330",
+  "commit": "to-be-filled-after-commit",
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "PYTHONDONTWRITEBYTECODE=1 pytest -q -p no:cacheprovider experiments/mirror_applications/ma-330-tensorized-kv-reconstruction/tests",
+    "passed": 2,
+    "failed": 0
   },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "roundtrip_checked": true,
+    "byte_exact": true
   },
   "metric_replay": {
-    "checked": false,
-    "max_difference": null
+    "checked": true,
+    "max_difference": 0.0
   },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Frozen split from protocol commit 61760a6b: fresh worlds 33010-33012, seeds 0-2.",
+    "72 fresh rows, 9 rows per stratum/method; source payload hashes recorded per row.",
+    "Fresh aggregation was independently calculated from FRESH_RESULTS.csv. The report uses its means.",
+    "Synthetic aligned cache teachers use the same Givens orbit as Mirror. Independent cache controls expose the boundary.",
+    "No autoregressive LM or hardware throughput evidence."
+  ]
 }

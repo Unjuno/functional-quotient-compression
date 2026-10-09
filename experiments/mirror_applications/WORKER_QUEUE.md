@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-330.** MA-307 showed an aligned synthetic allocation delay versus PackNet-style private storage; robust generic shared-basis fitting was close, and the teacher supplied Mirror latent codes. Continue to MA-330, tensorized KV reconstruction.
+**Current operational pointer (2026-10-09): MA-331.** MA-330 is completed PROMISING narrowly for synthetic Givens-aligned KV role caches; independent states need private storage and Mirror materialization is slower than PCA/Tucker. Proceed to MA-331, Re-Basin-aligned Mirror task deltas.
 
 # Worker queue
 

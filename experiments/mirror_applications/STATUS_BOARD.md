@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (83 completed; 547 UNTESTED)
+- P0: **630** (84 completed; 546 UNTESTED)
 - P1: **422** (13 completed; 409 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1057 UNTESTED, 43 PROMISING, 55 FAIL**
+- Current MA statuses: **1056 UNTESTED, 44 PROMISING, 55 FAIL**
 - 68 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -68,11 +68,15 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 - **FAIL** for Mirror-specific value. Shared rank-4 basis reconstructed held-out tasks/compositions, but PCA and generic coefficients matched or slightly beat Mirror with marginally lower bytes.
 
+## Completed: MA-330 — tensorized KV reconstruction
+
+- **PROMISING, narrowly:** fresh aligned synthetic cache views: Mirror 2,287 B/context NRMSE .000602 vs rank-2 PCA/Tucker 6,502 B/.000427 and full 32,909 B/.000312. Hard-shared MLKV used 2,188 B but context error was .999. Mirror materialization .846 ms vs PCA/Tucker .051 ms at the same 32,768 MAC proxy. Independent cache states fail (Mirror context error 1.366), requiring private state off-orbit. No autoregressive or LM evidence.
+
 ## Next candidate
 
-**MA-330 — tensorized KV reconstruction (P0)**
+**MA-331 — Re-Basin-aligned Mirror task deltas (P0)**
 
-MA-327 found generic free factorization matched Mirror on held-out layer×expert combinations; Mirror missed the byte gate. Continue to tensorized KV reconstruction at MA-330.
+MA-330 establishes only an aligned synthetic cache orbit and shows a materialization-time penalty; proceed to the registered symmetry alignment candidate.
 
 ## Active experiment
 
