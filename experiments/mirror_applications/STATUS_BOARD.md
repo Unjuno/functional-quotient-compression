@@ -6,11 +6,11 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (41 completed; 589 UNTESTED)
+- P0: **630** (42 completed; 588 UNTESTED)
 - P1: **422** (12 completed; 410 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1102 UNTESTED, 34 PROMISING, 19 FAIL**
-- 52 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
+- Current MA statuses: **1101 UNTESTED, 34 PROMISING, 20 FAIL**
+- 53 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
 - Thirteenth literature sweep added MA-996..1045 (50 UNTESTED; 40 P0/10 P1) and PA296..PA325. IDs MA-1000+ use four digits; consult `check_registry_integrity.py`. No new experiment results.
@@ -23,13 +23,13 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-481 — VQ Mirror address codebook (P0; PA91)**
+**MA-482 — residual-VQ Mirror code composition (P0; PA92)**
 
 Reason:
-- MA-470/471/473/475/476/478 are completed on dedicated branches and cross-linked in the claim ledger;
-- MA-472/474/477/479 are P1 editing follow-ups; MA-481 is the next P0 address-codebook candidate.
+- MA-470/471/473/475/476/478/481 are completed on dedicated branches and cross-linked in the claim ledger;
+- MA-472/474/477/479 remain P1 editing follow-ups; MA-482 is the next P0 residual-code composition candidate.
 
-Required controls: learned/native VQ-VAE codebook with index bits, continuous key coordinates, generic vector quantization and an uncompressed address. Isolate retrieval-address compression from edit-value compression; measure collision/false-trigger rate, retrieval recall, bytes and lookup cost.
+Required controls: residual VQ codebooks, direct additive residual vectors, generic Cartesian/Mirror residual codes, and an uncompressed output residual. Count every stage/codebook and test rate-distortion, address locality, stage ablation, and actual serialized bytes.
 
 If blocked by a documented reproducibility or harness issue, record it and resume at MA-260 (BatchEnsemble), then MA-261/265/268 in the registered literature priority sequence. Do not jump to P1/novelty-picked topics before P0.
 
@@ -105,3 +105,6 @@ KG relation rotations (RotatE, TuckER, QuatE, PairRE), EXIF/device-aware ISPs (P
 
 
 **MA-478 FAIL for the preregistered <=80% storage gate:** development selected tau=0.30; N64 retained exact outputs with 19/64 private values but used 9,485B vs 10,973B explicit (86.4%). View-only had 0.194 mean NRMSE. Generic adaptive coefficients used 9,741B, so the Mirror saving was only 2.6%. Full private vectors restore quality but erase much of the compression. **Next: MA-481 (P0); MA-479 remains P1.**
+
+
+**MA-481 FAIL for the registered N64 address-quality gate:** Mirror used 4,505B vs explicit keys/values 11,997B (37.6%) with 100% exact recall and zero key collisions, but mean paraphrase correct-address recall was 98.35% (<99%) and output NRMSE 0.180. Full explicit storage had the same retrieval failure, so this is crowded-address geometry, not a Mirror-specific regression. Generic Cartesian codes were only 5.4% larger; VQ K=8–64 collided heavily and K=128 exceeded explicit bytes. **Next: MA-482 (P0).**

@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-481",
+  "commit": "pending",
+  "tests": {
+    "command": "pytest -q experiments/mirror_applications/ma-481-vq-mirror-address-codebook/tests",
+    "passed": 2,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Protocol frozen at 2f9d8213 before fresh outputs were opened.",
+    "N64 paraphrase recall also misses the 99% gate for the full explicit baseline; this failure is reported, not tuned away.",
+    "All address codebooks, indices and explicit values are included in byte totals."
+  ]
+}
