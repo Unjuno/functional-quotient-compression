@@ -1,0 +1,66 @@
+{
+  "experiment_id": "MA-565",
+  "title": "LayerDrop surviving-layer Mirror roles",
+  "status": "DEVELOPMENT_ONLY_FAIL",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY/COMPUTE",
+  "base_commit": "0ff3df2f",
+  "hypothesis": "Depth-specific Mirror roles on surviving residual blocks recover shallow LayerDrop functions with fewer bytes than independent shallow models and better storage than ordinary gates.",
+  "physical_object": "four shared 8x8 residual linear blocks",
+  "mirror_coordinate": "depth-config-specific scalar role on each surviving block",
+  "logical_multiplicity": "depth-2, depth-3, depth-4 submodels",
+  "prior_art_refs": [
+    "PA110"
+  ],
+  "controls": [
+    "plain LayerDrop masks",
+    "Mirror scalar roles",
+    "direct scalar gates",
+    "independent shallow operators"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      56501,
+      56502
+    ],
+    "input_dim": 8,
+    "block_count": 4,
+    "depths": [
+      2,
+      3,
+      4
+    ],
+    "train_probes": 512,
+    "test_probes": 512,
+    "selection_metric": "output nMSE, actual bytes, MAC proxy"
+  },
+  "fresh": {
+    "worlds_or_seeds": [],
+    "locked_before_access": true,
+    "open_only_if_development_passes": false,
+    "reason": "Direct gate is exact specificity control."
+  },
+  "storage": {
+    "authority": "actual deterministic NPZ payload bytes",
+    "paid_objects": [
+      "all shared blocks",
+      "depth codes",
+      "gates",
+      "independent shallow matrices",
+      "indices",
+      "metadata"
+    ]
+  },
+  "compute": {
+    "report_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_wall_time": true
+  },
+  "success_gate": "Depth-2/3 nMSE <=1e-3, >=20% fewer bytes than independent shallow models and >=10% fewer than direct gates.",
+  "failure_gate": "Direct gates match Mirror or shallow quality gate fails.",
+  "boundaries": [
+    "synthetic linear residual stack",
+    "no LayerDrop pretraining or LM claim",
+    "fresh sealed if specificity gate fails"
+  ]
+}

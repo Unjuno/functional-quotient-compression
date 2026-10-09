@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-565",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m pytest -q -p no:cacheprovider experiments/mirror_applications/ma-565-layerdrop-surviving-layer-mirror/tests",
+    "passed": 2,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "24 rows replayed over two seeds and three depths.",
+    "Mirror/direct gate payload size exact alias.",
+    "Fresh remains sealed."
+  ]
+}
