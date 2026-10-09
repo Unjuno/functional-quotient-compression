@@ -1,0 +1,68 @@
+{
+  "experiment_id": "MA-546",
+  "title": "Activation View hidden-coordinate symmetry audit",
+  "status": "SCREENING",
+  "base_commit": "3fab7355",
+  "prior_art_refs": [
+    "PA97",
+    "PA47"
+  ],
+  "hypothesis": "For a two-layer residual linear block f(x)=x+W2 W1 x, an invertible hidden coordinate G preserves the exact input-output function if W1 becomes G W1 and W2 becomes W2 G^-1. Such a reparameterization is a gauge orbit, not an additional logical function. Changing only W1 should change outputs.",
+  "physical_object": "One deterministic two-layer residual linear block with input/output width 32 and hidden width 64 in FP32.",
+  "mirror_coordinate": "Invertible hidden-coordinate transform G, tested as permutation/sign, positive diagonal scale, and dense orthogonal QR transform.",
+  "logical_multiplicity": "Count only output-distinct functions; invariance is zero new functions.",
+  "controls": [
+    "baseline W1/W2",
+    "paired native reparameterization G W1 and W2 G^-1",
+    "unpaired transform G W1 with W2 fixed",
+    "identity"
+  ],
+  "development": {
+    "seeds": [
+      54601,
+      54602
+    ],
+    "inputs_per_seed": 256,
+    "optimizer_updates": 0,
+    "metrics": [
+      "relative RMS and max absolute output difference",
+      "condition number",
+      "actual serialized bytes with G and inverse",
+      "unpaired output change",
+      "MAC proxy"
+    ]
+  },
+  "fresh": {
+    "seeds": [
+      54611,
+      54612,
+      54613
+    ],
+    "locked_before_access": true,
+    "opening_rule": "Open if both development seeds show paired relative RMS <=1e-5, unpaired functional change >1e-5, and condition number >=0.25."
+  },
+  "storage": {
+    "authority": "actual serialized uncompressed NPZ bytes",
+    "paid_objects": [
+      "both transformed matrices",
+      "G and inverse",
+      "schema, seed, and view metadata"
+    ]
+  },
+  "compute": {
+    "hardware": "CPU",
+    "report": "matrix MAC count and per-artifact serialization time; no training"
+  },
+  "gates": {
+    "gauge_invariance": "paired max absolute error <=1e-5",
+    "functional_view": "unpaired relative RMS >1e-5",
+    "NOT_ESTABLISHED": "The exact gauge mechanism can be demonstrated, but no useful Mirror application or capacity/compression claim is supported by this fixed linear screen."
+  },
+  "boundaries": [
+    "Synthetic linear mechanism only; no trained Transformer or semantic task.",
+    "A function-preserving symmetry is not additional functional capacity.",
+    "Transformed maps are fully serialized; no free reconstruction state."
+  ],
+  "frozen_at": "2026-10-09",
+  "amendments": []
+}

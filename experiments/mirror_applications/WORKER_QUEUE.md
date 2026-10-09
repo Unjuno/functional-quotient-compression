@@ -184,8 +184,8 @@ High-information P0:
 9. MA-530 — SAE feature logical experts
 10. MA-533/534 — transcoder feature experts / logical MLPs
 11. MA-539/540 — packet/executor use of function vectors
-12. MA-545 — function-vector MoE without weight experts
-13. MA-546 — representation-space symmetry audit
+12. MA-545 — function-vector MoE without weight experts (completed FAIL; native output-bias alias; report on its research branch)
+13. MA-546 — representation-space symmetry audit (completed NOT ESTABLISHED; exact gauge transformations preserve a fixed linear function, but no compression/quality evidence; result on dedicated branch) (completed NOT ESTABLISHED; paired GL(64) gauge transformations preserve outputs on a fixed linear block; no compression/quality evidence; report on its research branch)
 14. MA-547 — RoseLoRA versus Mirror edit locality
 15. MA-550 — adaptive allocation between weight-space and activation-space Views
 
