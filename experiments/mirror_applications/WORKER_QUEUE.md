@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-478.** MA-470/471/473/475/476 document scoped edit-basis, ROME, MEMIT-style layerwise, SERAC value-memory, and GRACE value-codebook results. Continue with a predeclared View-first/private-memory fallback allocation policy; MA-477 remains P1.
+**Current operational pointer (2026-10-09): MA-481.** MA-478 tested View-first/private fallback and failed its byte gate; off-orbit private values erased most savings. Continue with VQ address-codebook controls; MA-479 remains P1.
 
 # Worker queue
 
