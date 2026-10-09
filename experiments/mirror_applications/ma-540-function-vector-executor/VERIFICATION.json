@@ -1,19 +1,64 @@
 {
   "experiment_id": "MA-540",
-  "status": "SCREENING",
-  "frozen_protocol_sha256": "a48b2c5c1e088931c2742b58ea0dd68c7894ad9446834b8303b517f3b427ec46",
-  "fresh_opened": false,
-  "tests": {
-    "command": "python -m pytest -q experiments/mirror_applications/ma-540-function-vector-executor/tests",
-    "passed": null,
-    "failed": null
-  },
-  "metric_replay": {
-    "checked": false
-  },
-  "notes": [],
+  "status": "FAIL",
+  "base_commit": "c0d474a2082654c760d777445ed8c2461bfb5296",
+  "result_commit": "",
+  "frozen_protocol_sha256": "be231befac73c981eca1907fea83da5f894e09b4f6db3ffa0539e91d969ba527",
   "amendments": [
     "IMPLEMENTATION_AMENDMENT_1.json",
-    "IMPLEMENTATION_AMENDMENT_2.json"
+    "IMPLEMENTATION_AMENDMENT_2.json",
+    "IMPLEMENTATION_AMENDMENT_3.json"
+  ],
+  "development_seeds": [
+    54001,
+    54002
+  ],
+  "selected_setting": {
+    "updates": 1600,
+    "learning_rate": 0.003
+  },
+  "fresh_seeds": {
+    "seeds": [
+      54011,
+      54012,
+      54013
+    ],
+    "opened": false,
+    "reason": "World 54001 misses 0.99 pair accuracy and candidate exactly aliases native tied-ID/external two-call outputs; Mirror-specific gate fails."
+  },
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-540-function-vector-executor/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "format": "uncompressed NPZ",
+    "final_payload_inventory": "payload_hashes.json",
+    "actual_serialized_bytes_measured": true
+  },
+  "replay": {
+    "checked": true,
+    "final_vs_corrected_pre_timing_worlds": [
+      54001,
+      54002
+    ],
+    "payload_arrays_exact": true,
+    "payload_sizes_exact": true,
+    "pair_quality_exact": true,
+    "all_settings_replayed": true,
+    "timing_exact": false
+  },
+  "gate_summary": {
+    "pair_accuracy_ge_0_99_both_dev": false,
+    "within_0_01_external_two_call": true,
+    "bytes_save_ge_35_percent_vs_untied": true,
+    "beats_native_tied_operator_id": false,
+    "atomic_accuracy_high_both_seeds": true
+  },
+  "notes": [
+    "FV/native logits differ by at most 2.9e-6 and their pair metrics are identical; native payload is 14 B smaller.",
+    "Untied two-block control uses independent initializations and charges both models.",
+    "Endpoint sum misses ordered composition; exact affine lookup is a low-byte perfect upper.",
+    "Fresh worlds remain sealed."
   ]
 }

@@ -1,23 +1,24 @@
 # MA-540 status
 
-- Status: SCREENING
+- Status: FAIL
 - Branch: `research/ma-540-function-vector-executor-20261009`
-- Base commit:
-- Last verified commit:
-- Development complete: no
+- Base commit: `c0d474a2082654c760d777445ed8c2461bfb5296`
+- Development complete: yes (two dev seeds; four settings)
 - Fresh/audit opened: no
-- Results committed: no
-- Verification committed: no
-- Registry row updated: no
+- Results committed: pending
+- Verification committed: pending
+- Registry row updated: pending
 
 ## Next action
 
-Implement the frozen affine operator data generator and shared executor controls.
+Update registry and claim ledger, run integrity checks, then push the checked research branch.
 
 ## Blockers
 
-None.
+None. Frozen pair-quality and Mirror-attribution gates fail.
 
 ## Decisions / rulings
 
-Record deviations from the original protocol here.
+- Amendment 1 specifies FV extraction as mean pre-activation delta over eight support states; native operator IDs remain an explicit alias control.
+- Amendment 2 replaces duplicated untied weights with independently trained step blocks and paired minibatch indices; pre-amendment outputs are retained.
+- Amendment 3 adds atomic exact accuracy and evaluation timing only; model weights, metrics gates and selected setting are unchanged.
