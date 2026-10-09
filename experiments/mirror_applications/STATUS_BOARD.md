@@ -7,9 +7,9 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 - Registered candidates: **1155**
 - P0: **630** (55 completed; 575 UNTESTED)
-- P1: **422** (13 completed; 409 UNTESTED)
+- P1: **422** (14 completed; 408 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1087 UNTESTED, 36 PROMISING, 32 FAIL**
+- Current MA statuses: **1086 UNTESTED, 36 PROMISING, 33 FAIL**
 - 65 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -23,11 +23,11 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-519 — function-vector routing from context (P1; PA99)**
+**MA-520 — Function Vector → Mirror code distillation (P0; PA99)**
 
 Reason:
 - MA-470/471/473/475/476/478/481/482, MA-483, MA-484, MA-486, MA-487, MA-488, MA-492, MA-494, MA-498, MA-501, MA-502 and MA-516 are completed on dedicated branches and cross-linked in the claim ledger;
-- MA-501 and MA-502 both found that VQ coordinates add substantial distortion over compact FP16 shared coordinates. The LoReFT representation-view family is temporarily deferred for redesign; skipped registry candidates remain UNTESTED. MA-516/517/518 now have checked scoped failures; proceed to MA-519 with native task-context routing as the control. Other completed candidates remain cross-linked in the claim ledger.
+- MA-501 and MA-502 both found that VQ coordinates add substantial distortion over compact FP16 shared coordinates. The LoReFT representation-view family is temporarily deferred for redesign; skipped registry candidates remain UNTESTED. MA-516–519 now have checked scoped failures; MA-519 routed identities at 95.83% mean but FVs had 0% task accuracy and cost more bytes. Proceed to MA-520 with native per-task vectors and simple shared-code controls. Other completed candidates remain cross-linked in the claim ledger.
 
 Required controls: explicit extracted function vectors, shared PCA/Mirror basis codes, randomized/signed coefficient control, and function-vector ablation; actual serialized vector bytes and held-out function accuracy are primary.
 
@@ -116,3 +116,6 @@ KG relation rotations (RotatE, TuckER, QuatE, PairRE), EXIF/device-aware ISPs (P
 
 
 **MA-518 FAIL (scoped prompt-delta quality failure; factorization not established):** direct ICL was 31.25%, but explicit/generic/factorized interventions scored 0% across 9 fresh banks. The factorized decoder ignored stored function/domain codes and used a flat rank-2 projection, so its apparent byte advantage is invalid. See MA-518 report. **Next: MA-519 (P1).**
+
+
+**MA-519 FAIL (context routing):** cosine router identity accuracy averaged 95.83%, but oracle/routed FV task accuracy was 0%; router+FV bytes were 75,685B vs explicit bank+IDs 50,921B. The symbolic-router control was omitted, so no Mirror-specific routing claim. **Next: MA-520 (P0).**

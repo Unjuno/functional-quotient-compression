@@ -1,0 +1,19 @@
+{
+  "experiment_id":"MA-519","title":"Function-vector routing from context","status":"FROZEN_SCREENING","base_commit":"2c60f7c7","evidence_lane":"CONTEXT_ROUTING/FV_EXECUTION/ACTUAL_BYTES",
+  "model":{"id":"openai-community/gpt2","revision":"607a30d783dfa663caf39e06633721c8d4cfcd7e","parameters":124439808,"dtype":"float32","device":"CPU"},
+  "hypothesis":"A context-derived Mirror router selects a stored function-vector code with >=95% accuracy and retains downstream task utility within 5pp of oracle task-ID routing, with less actual payload than per-task vectors plus explicit IDs.",
+  "physical_object":"one frozen GPT-2 and a bank of 16 task function vectors",
+  "mirror_coordinate":"content-derived context address selecting one stored FV; separate router and execution errors",
+  "logical_multiplicity":"16 procedure x token-domain functions selected without an external task ID",
+  "prior_art_refs":[99],
+  "controls":["query-only","direct ICL","oracle explicit task ID + FV","cosine prototype router","symbolic keyword router","per-task vector plus explicit IDs"],
+  "task":{"type":"synthetic deterministic procedure/domain instructions","procedures":["prepend","append","reverse","rotate"],"domains":["fruit","shape","color","vehicle"],"metrics":["router accuracy and confusion","target accuracy and NLL","oracle-routed vs content-routed delta","serialized router+FV payload bytes","runtime"]},
+  "development":{"worlds":[51900,51901],"seeds":[0,1,2],"allowed":"tokenization and code sanity; fixed block 6 and cosine routing, no fresh-informed tuning"},
+  "fresh":{"worlds":[51910,51911,51912],"seeds":[0,1,2],"locked_before_access":true},
+  "storage":{"authority":"actual serialized inference payload bytes","paid_objects":["all function vectors","prototype vectors","router weights/centroids","task IDs","indices and metadata","decoder state"]},
+  "compute":{"report_tokens_or_examples":true,"report_updates":0,"report_active_compute_proxy":true,"report_wall_clock":true},
+  "success_gate":"Direct ICL exceeds 12.5% in every fresh world; routed identity accuracy >=95%; routed target accuracy within 5 percentage points of oracle; router+FV bytes below explicit per-task vectors plus IDs.",
+  "failure_gate":"Direct ICL valid and routed accuracy <95%, or routed target quality >5pp below oracle, or no byte advantage.",
+  "not_established_gate":"Direct ICL or oracle-FV target accuracy is at/below chance; routing accuracy alone cannot establish useful functional routing.",
+  "boundaries":["Synthetic GPT-2 task only; not natural-language or causal-head Function Vector evidence.","Task combinations and address count are not capacity claims.","MA-518 factorized decoder defect is not reused; this protocol tests content routing as a distinct degree of freedom."]
+}

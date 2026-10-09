@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-519.** MA-516–518 prompt-delta activation interventions failed task-utility gates; MA-518 also had a factor-decoder defect, so its factorization comparison is not established. Continue at MA-519 with context routing and explicit ICL/native router controls. LoReFT candidates remain deferred for redesign after MA-501/502.
+**Current operational pointer (2026-10-09): MA-520.** MA-516–518 prompt-delta activation interventions failed task-utility gates; MA-518 also had a factor-decoder defect, so its factorization comparison is not established. MA-519 context routing was mostly accurate but did not execute useful functions and increased bytes. Continue at MA-520 to distill FVs into compact codes against native vector storage and generic shared-code controls. LoReFT candidates remain deferred for redesign after MA-501/502.
 
 # Worker queue
 

@@ -1,0 +1,33 @@
+{
+  "experiment_id": "MA-519",
+  "status": "FAIL",
+  "fresh_split_integrity_checked": true,
+  "result_rows": 45,
+  "fresh_worlds": [
+    51910,
+    51911,
+    51912
+  ],
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "tests": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 python -m unittest discover -s experiments/mirror_applications/ma-519-function-vector-context-routing/tests",
+    "passed": 2,
+    "failed": 0
+  },
+  "serialization": {
+    "hash_size_replay": true
+  },
+  "protocol_deviations": [
+    "Symbolic keyword router was preregistered but not implemented; this prevents Mirror-specific router claim.",
+    "Runtime profiling was not emitted by the runner."
+  ],
+  "notes": [
+    "Direct ICL mean accuracy 25%; oracle/routed FV 0%.",
+    "Mean cosine router accuracy 95.83%; six banks 93.75%.",
+    "Routed bank 75,685B vs explicit vector bank plus IDs 50,921B."
+  ]
+}
