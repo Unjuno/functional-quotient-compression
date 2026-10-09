@@ -1,0 +1,24 @@
+{
+  "experiment_id": "MA-470",
+  "commit": "a6bf0978",
+  "tests": {
+    "command": "pytest -q experiments/mirror_applications/ma-470-mend-shared-mirror-edit-basis/tests",
+    "passed": 2,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Protocol frozen in d3edd370 before reading fresh outputs.",
+    "Fresh set is 3 worlds x 3 seeds; no tuning was performed on these rows.",
+    "Fresh payload generation was rerun with identical frozen data to measure encoding latency; quality and byte gates were unchanged.",
+    "Least-squares coefficient generation is oracle-assisted and limits the claim to an analytic upper-bound screen."
+  ]
+}

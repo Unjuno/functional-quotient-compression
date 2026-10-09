@@ -1,0 +1,86 @@
+{
+  "experiment_id": "MA-471",
+  "title": "ROME rank-one updates encoded by factual Mirror coordinates",
+  "status": "COMPLETED_PROMISING_SCOPED",
+  "evidence_lane": "EDIT_SUCCESS/SPECIFICITY/STORAGE/COMPUTE",
+  "base_commit": "c935a903",
+  "hypothesis": "For facts whose ROME keys and output deltas lie on fixed two-dimensional rotation orbits, shared key/value bases plus two angles per fact will preserve rank-one edit efficacy and specificity while using fewer actual serialized bytes than storing each ROME key/value factor; arbitrary off-orbit facts will require private residual state.",
+  "physical_object": "one shared key plane and one shared output-delta plane",
+  "mirror_coordinate": "per-fact key angle and output angle generating the ROME rank-one factors",
+  "logical_multiplicity": "64 standalone factual rank-one edits addressed by distinct View coordinates",
+  "prior_art_refs": [
+    87,
+    135
+  ],
+  "controls": [
+    "unedited shared base",
+    "ROME per-fact full-precision key and value factors",
+    "generic shared two-plane basis with per-fact coefficients",
+    "Mirror angle codes",
+    "Mirror angle codes with explicitly charged off-orbit residual"
+  ],
+  "task": {
+    "type": "8D analytic linear association editing",
+    "edits_per_world": 64,
+    "update": "DeltaW = value * key^T / ||key||^2",
+    "aligned": "key and value each have fixed norm and rotate in preregistered 2D planes",
+    "specificity": "edited-key target error and random/orthogonal query drift"
+  },
+  "development": {
+    "worlds": [
+      47100,
+      47101
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "allowed": "choose rotation-plane construction and numerical tolerances only; no fresh access"
+  },
+  "fresh": {
+    "worlds": [
+      47110,
+      47111,
+      47112
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "ROME key/value factors",
+      "shared key/value bases",
+      "per-fact angles or coefficients",
+      "indices",
+      "private residuals",
+      "metadata"
+    ],
+    "amortization_N": [
+      1,
+      20,
+      64
+    ]
+  },
+  "compute": {
+    "report_factor_decode_MAC": true,
+    "report_rank_one_apply_MAC": true,
+    "report_serialization_generation_latency": true,
+    "report_query_latency": true
+  },
+  "success_gate": "Every fresh world: Mirror aligned edit error <=1e-5, specificity drift <=1e-5, and N64 actual payload <=80% of full ROME factors; generic basis is compared for Mirror-specific value.",
+  "failure_gate": "Mirror misses any efficacy/specificity/byte gate, or generic coefficient control is equal/fewer bytes at equal quality.",
+  "boundaries": [
+    "Analytic linear ROME mechanism screen, not a Transformer or factual language evaluation.",
+    "Mirror coordinates use the known aligned orbit; no claim of discovering factual structure.",
+    "Each edit is evaluated as a selected standalone update; cumulative multi-edit interference is deferred to MA-472."
+  ],
+  "deviations": [
+    "The listed off-orbit private-residual control was not implemented in this screening run; no off-orbit factual behavior is claimed. The aligned-orbit gate and all three measured controls were run as frozen."
+  ]
+}

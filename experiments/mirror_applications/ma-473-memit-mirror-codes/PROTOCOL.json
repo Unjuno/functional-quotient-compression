@@ -1,0 +1,88 @@
+{
+  "experiment_id": "MA-473",
+  "title": "MEMIT layerwise edit bank with Mirror memory coordinates",
+  "status": "COMPLETED_PROMISING_SCOPED",
+  "evidence_lane": "MULTILAYER_EDIT_STORAGE/FACT_EFFICACY/LOCALITY/INTERFERENCE",
+  "base_commit": "2e394171",
+  "hypothesis": "For fact updates whose per-layer key/value factors lie on fixed-norm two-dimensional orbits, layer-shared bases plus angle codes will store a multi-fact MEMIT-style edit bank more compactly than direct per-layer rank-one factors and generic Cartesian basis coefficients while preserving per-fact efficacy, specificity, and merged-bank interference.",
+  "physical_object": "one key plane and one value plane per mediating layer (four layers)",
+  "mirror_coordinate": "per-fact per-layer key and value angles; optional fact index selects each edit code",
+  "logical_multiplicity": "64 fact-specific rank-one updates distributed over four mediating layers",
+  "prior_art_refs": [
+    88,
+    136
+  ],
+  "controls": [
+    "unedited base",
+    "direct MEMIT-style per-layer rank-one update factors",
+    "generic Cartesian coefficients over the same layerwise shared planes",
+    "layerwise Mirror angle codes"
+  ],
+  "task": {
+    "type": "synthetic 16D four-layer linear edit-bank screen",
+    "layers": 4,
+    "edits_per_world": 64,
+    "per_layer_update": "DeltaW[f,l] = v[f,l] k[f,l]^T / ||k[f,l]||^2",
+    "orbit": "per-layer unit keys and fixed-norm values lie in known 2D Givens planes",
+    "metrics": [
+      "standalone target efficacy",
+      "orthogonal-key locality drift",
+      "N=1/8/32/64 serialized bank bytes",
+      "merged-update cross-edit interference"
+    ]
+  },
+  "development": {
+    "worlds": [
+      47300,
+      47301
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "allowed": "fixed orbit construction and exact reconstruction; no fresh result access"
+  },
+  "fresh": {
+    "worlds": [
+      47310,
+      47311,
+      47312
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "direct rank-one factors or shared per-layer key/value planes",
+      "angle or Cartesian codes",
+      "fact IDs",
+      "per-layer scale values",
+      "metadata"
+    ],
+    "amortization_N": [
+      1,
+      8,
+      32,
+      64
+    ]
+  },
+  "compute": {
+    "report_per_layer_decode_MAC": true,
+    "report_update_apply_MAC": true,
+    "report_payload_generation_latency": true,
+    "report_selected_and_merged_query_latency": true
+  },
+  "success_gate": "Every fresh world at N64: Mirror standalone efficacy NRMSE <=1e-5, specificity drift <=1e-5, serialized payload <=80% direct MEMIT-style factor bank and <=90% generic Cartesian basis; merged-bank interference differs from direct factor bank by <=1% relative.",
+  "failure_gate": "Any fresh world misses quality/storage gates or Mirror merged interference differs from exact direct-factor bank by >1%; report the N-dependent frontier regardless.",
+  "boundaries": [
+    "Analytic linear multi-layer MEMIT-style update-bank representation, not a learned MEMIT implementation or Transformer factual benchmark.",
+    "All layerwise edit factors are known and lie on hand-specified orbits; this is an upper-bound factor-storage screen.",
+    "Merged-bank cross-edit interference is measured as a representation-preservation audit; no claim that additive edits are semantically safe."
+  ]
+}

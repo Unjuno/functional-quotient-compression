@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-478",
+  "commit": "28397956",
+  "tests": {
+    "command": "pytest -q experiments/mirror_applications/ma-478-view-first-private-fallback/tests",
+    "passed": 2,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Protocol frozen at fe2ffb3c; dev selected tau=0.30 before fresh access.",
+    "Fresh worlds are 47810-47812 with seeds 0-2; no fresh tuning was performed.",
+    "Full private vectors and all routing/address state are charged in the inference payload."
+  ]
+}

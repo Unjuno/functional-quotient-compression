@@ -1,0 +1,79 @@
+{
+  "experiment_id": "MA-463",
+  "status": "COMPLETED_FAIL",
+  "protocol_commit": "f5f9485a",
+  "initial_protocol_commit": "905eed28",
+  "exploratory_excluded_worlds": [
+    46310,
+    46311,
+    46312
+  ],
+  "fresh_worlds": [
+    46320,
+    46321,
+    46322
+  ],
+  "fresh_seeds": [
+    0,
+    1,
+    2
+  ],
+  "aggregate_rows": 135,
+  "checks": [
+    {
+      "name": "artifact_tests",
+      "command": "python -m pytest -q experiments/mirror_applications/ma-463-factorized-task-layer-position/tests",
+      "result": "2 passed"
+    },
+    {
+      "name": "payload_replay",
+      "result": "All 135 fresh packages replay exact serialized byte lengths and SHA256."
+    },
+    {
+      "name": "mirror_cp_equivalence",
+      "result": "Mirror and generic CP outputs, bytes, and payload hashes are identical for all fresh seeds and N values."
+    },
+    {
+      "name": "registered_gate",
+      "result": "FAIL: quality gate misses in one fresh world and aggregate N96 bytes are 60.4% of HyperFormer vs <=60% target."
+    }
+  ],
+  "N96": {
+    "mirror": {
+      "heldout_nrmse": 0.306436793823407,
+      "bytes_per_combo": 33.552083333333336,
+      "payload_bytes": 3221.0,
+      "fit_wall_seconds": 0.20072323733378047,
+      "query_wall_seconds_mean": 1.5539328968669805e-05
+    },
+    "cp": {
+      "heldout_nrmse": 0.306436793823407,
+      "bytes_per_combo": 33.552083333333336,
+      "payload_bytes": 3221.0,
+      "fit_wall_seconds": 0.20072323733378047,
+      "query_wall_seconds_mean": 1.2164129185731764e-05
+    },
+    "hyper": {
+      "heldout_nrmse": 0.15585461164031317,
+      "bytes_per_combo": 55.59375,
+      "payload_bytes": 5337.0,
+      "fit_wall_seconds": 0.8140816648891713,
+      "query_wall_seconds_mean": 1.911305938577883e-05
+    },
+    "affine": {
+      "heldout_nrmse": 0.3774651824219122,
+      "bytes_per_combo": 25.71875,
+      "payload_bytes": 2469.0,
+      "fit_wall_seconds": 0.0,
+      "query_wall_seconds_mean": 1.235053679448794e-05
+    },
+    "independent": {
+      "heldout_nrmse": 1.7457333241745455e-07,
+      "bytes_per_combo": 39.052083333333336,
+      "payload_bytes": 3749.0,
+      "fit_wall_seconds": 0.0,
+      "query_wall_seconds_mean": 1.0794879320504453e-05
+    }
+  },
+  "scope": "Synthetic rank-one factor tensor completion only."
+}

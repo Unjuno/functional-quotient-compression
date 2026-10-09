@@ -1,0 +1,66 @@
+{
+  "experiment_id": "MA-469",
+  "status": "COMPLETED_FAIL",
+  "protocol_commit": "5f1f18c4",
+  "fresh_worlds": [
+    46910,
+    46911,
+    46912
+  ],
+  "fresh_seeds": [
+    0,
+    1,
+    2
+  ],
+  "aggregate_rows": 108,
+  "checks": [
+    {
+      "name": "artifact_tests",
+      "command": "python -m pytest -q experiments/mirror_applications/ma-469-mend-mirror-edit-code/tests",
+      "result": "pending final run"
+    },
+    {
+      "name": "payload_integrity",
+      "result": "All 108 packages replay exact bytes and SHA256."
+    },
+    {
+      "name": "registered_gate",
+      "result": "FAIL: Mirror equals MEND rank-one edit quality/locality but actual N64 payload exceeds 80% threshold and is larger than factor control."
+    }
+  ],
+  "N64": {
+    "mend": {
+      "bytes_per_edit": 44.578125,
+      "payload_bytes": 2853.0,
+      "edit_error": 9.985929849378985e-08,
+      "paraphrase_error": 4.2132859957855207e-08,
+      "locality_drift": 5.606970236253043e-07,
+      "generation_wall_seconds_per_edit": 1.4798590402481043e-08
+    },
+    "mirror": {
+      "bytes_per_edit": 48.515625,
+      "payload_bytes": 3105.0,
+      "edit_error": 1.1811634854456503e-07,
+      "paraphrase_error": 6.649975436053464e-08,
+      "locality_drift": 5.605940387700928e-07,
+      "generation_wall_seconds_per_edit": 1.7526822880932336e-06
+    },
+    "dense": {
+      "bytes_per_edit": 52.578125,
+      "payload_bytes": 3365.0,
+      "edit_error": 9.985929849378985e-08,
+      "paraphrase_error": 4.2132859957855207e-08,
+      "locality_drift": 5.606970236253043e-07,
+      "generation_wall_seconds_per_edit": 1.503644853073638e-08
+    },
+    "quantized": {
+      "bytes_per_edit": 41.578125,
+      "payload_bytes": 2661.0,
+      "edit_error": 0.00018616634853193167,
+      "paraphrase_error": 0.00016212152719556153,
+      "locality_drift": 5.606978221593827e-07,
+      "generation_wall_seconds_per_edit": 2.7521524417453395e-07
+    }
+  },
+  "scope": "Analytic rank-one linear editing only; not MEND neural-network evidence."
+}

@@ -1,0 +1,93 @@
+{
+  "experiment_id": "MA-466",
+  "title": "UniPELT components as factorized Mirror axes",
+  "status": "COMPLETED_FAIL",
+  "base_commit": "e8bdd67d",
+  "evidence_lane": "MULTI_PEFT_COMPONENTS/FACTOR_GATES/ABLATIONS/BYTES",
+  "hypothesis": "Factorized Mirror codes over LoRA, prefix, and adapter components will match a learned UniPELT gate composition on held-out task/layer/position combinations with fewer actual bytes, while each axis remains causally useful under ablation.",
+  "physical_object": "shared base plus three component basis functions corresponding to LoRA, prefix, and adapter mechanisms",
+  "mirror_coordinate": "per-component product code from task, layer, and position scalar factors",
+  "logical_multiplicity": "composite PEFT adaptations across task/layer/position combinations",
+  "prior_art_refs": [
+    84
+  ],
+  "controls": [
+    "UniPELT-style per-combination learned component gates",
+    "concatenated-ID HyperFormer gate generator",
+    "ordinary CP factorization of each gate axis",
+    "each component ablated separately",
+    "independent gate upper control"
+  ],
+  "task": {
+    "type": "synthetic nonlinear scalar regression",
+    "components": {
+      "lora": "x1*x2",
+      "prefix": "constant 1",
+      "adapter": "tanh(x1)"
+    },
+    "factors": {
+      "task": 6,
+      "layer": 3,
+      "position": 2
+    },
+    "total_combinations": 36,
+    "heldout": "(task+layer+position) mod 4 == 0",
+    "support_examples_per_combo": 64,
+    "query_examples_per_combo": 256,
+    "teacher": "sum of component functions weighted by rank-one task x layer x position gates"
+  },
+  "development": {
+    "worlds": [
+      46600,
+      46601
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "updates": 1500,
+    "selection": "fixed update budget; no fresh tuning"
+  },
+  "fresh": {
+    "worlds": [
+      46610,
+      46611,
+      46612
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "all component bases",
+      "gate generators or factor tables",
+      "combination indices",
+      "metadata"
+    ],
+    "amortization_N": [
+      1,
+      12,
+      36
+    ]
+  },
+  "compute": {
+    "report_active_components": true,
+    "report_decoder_MAC": true,
+    "report_optimizer_updates": true,
+    "report_fit_wall": true,
+    "report_query_wall": true
+  },
+  "success_gate": "Every fresh world: Mirror held-out NRMSE <=1.10x UniPELT and N36 payload <=70% UniPELT; ablation of each factor axis increases error by at least 10%.",
+  "failure_gate": "Mirror misses quality/byte gate, CP control matches it exactly, or any proposed axis is causally inactive under ablation.",
+  "boundaries": [
+    "Synthetic component mixture only; no PEFT fine-tuning of a pretrained Transformer.",
+    "All three component basis functions are explicitly paid.",
+    "Report generic CP equivalence and component ablations before claiming Mirror-specific value."
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "experiment_id": "MA-461",
+  "status": "COMPLETED_FAIL",
+  "protocol_commit": "682f9588",
+  "fresh_worlds": [
+    46110,
+    46111,
+    46112
+  ],
+  "fresh_seeds": [
+    0,
+    1,
+    2
+  ],
+  "aggregate_rows": 108,
+  "checks": [
+    {
+      "name": "artifact_tests",
+      "command": "python -m pytest -q experiments/mirror_applications/ma-461-hyperformer-mirror-codes/tests",
+      "result": "pending final run"
+    },
+    {
+      "name": "fresh_payload_replay",
+      "result": "All 108 fresh payloads are checked for exact bytes and SHA256."
+    },
+    {
+      "name": "registered_gate",
+      "result": "FAIL: Mirror misses both quality and N20 byte gates; rank-2 generic basis matches Mirror bytes and is more accurate."
+    }
+  ],
+  "N20": {
+    "hyper": {
+      "nrmse_mean": 5.511014210596915e-07,
+      "bytes_per_context": 174.25,
+      "generator_MAC_per_context": 20.0,
+      "decoder_MAC_per_query": 4.0,
+      "fit_wall_seconds": 0.0,
+      "query_wall_seconds_mean": 1.7750033243323236e-05
+    },
+    "mirror": {
+      "nrmse_mean": 0.9082094695703644,
+      "bytes_per_context": 180.45,
+      "generator_MAC_per_context": 10.0,
+      "decoder_MAC_per_query": 16.0,
+      "fit_wall_seconds": 0.6871730450010445,
+      "query_wall_seconds_mean": 6.003840139278004e-05
+    },
+    "rank2": {
+      "nrmse_mean": 0.3637842527807354,
+      "bytes_per_context": 180.45,
+      "generator_MAC_per_context": 18.0,
+      "decoder_MAC_per_query": 4.0,
+      "fit_wall_seconds": 0.188844041222991,
+      "query_wall_seconds_mean": 2.718077083348665e-05
+    },
+    "independent": {
+      "nrmse_mean": 0.0,
+      "bytes_per_context": 222.25,
+      "generator_MAC_per_context": 0.0,
+      "decoder_MAC_per_query": 4.0,
+      "fit_wall_seconds": 0.0,
+      "query_wall_seconds_mean": 1.68610280929392e-05
+    }
+  },
+  "scope": "Synthetic context-conditioned 2x2 adapters only; no Transformer evidence."
+}

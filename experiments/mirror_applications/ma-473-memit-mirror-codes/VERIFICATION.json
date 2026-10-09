@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-473",
+  "commit": "6c82b0aa",
+  "tests": {
+    "command": "pytest -q experiments/mirror_applications/ma-473-memit-mirror-codes/tests",
+    "passed": 2,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Protocol frozen at 2a8d0407 before fresh runs.",
+    "The initial query timing implementation error terminated before writing rows; the complete frozen fresh split was rerun after correction.",
+    "Analytic update bank, not learned MEMIT or natural factual data."
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "experiment_id": "MA-482",
+  "commit": "cac6f3a8",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-482-residual-vq-mirror/tests",
+    "passed": 2,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "432 A1 payload rows replayed by tests; fresh IDs are only 48220-48222.",
+    "A0 oracle-phase outputs retained as exploratory and excluded; no A0 row is in authoritative RESULTS_CORE.csv."
+  ]
+}
