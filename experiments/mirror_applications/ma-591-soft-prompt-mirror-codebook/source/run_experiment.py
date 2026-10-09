@@ -76,16 +76,16 @@ def run(seed,split,model_dir,data_dir,outdir):
  state['full_prompt']=serialize(outdir/'full_prompt_bank.npz',prompts=full16,task_titles=np.asarray([t for t,_ in tasks]),shape=np.asarray([TASKS,PROMPT_LEN,HIDDEN],np.int32),schema=np.asarray([591,2],np.int32))
  compfile=outdir/'mirror_rank4_bank.npz';state['mirror_rank4']=serialize(compfile,mean=mean16,basis=basis16,codes=codes16,task_titles=np.asarray([t for t,_ in tasks]),shape=np.asarray([TASKS,PROMPT_LEN,HIDDEN,RANK],np.int32),schema=np.asarray([591,3],np.int32))
  state['native_rank4']=serialize(outdir/'native_rank4_bank.npz',mean=mean16,basis=basis16,codes=codes16,task_titles=np.asarray([t for t,_ in tasks]),shape=np.asarray([TASKS,PROMPT_LEN,HIDDEN,RANK],np.int32),schema=np.asarray([591,3],np.int32))
- methods={m:[] for m in METHODS};reconstruct_s=[]
+ methods={m:[] for m in METHODS};runtime={m:[] for m in METHODS};reconstruct_s=[]
  for ti in range(TASKS):
   # Include code reconstruction wall time, then score four held-out windows.
   t0=time.perf_counter();decoded_task=decode_task_prompt(mean16,basis16,codes16,ti).reshape(PROMPT_LEN,HIDDEN);decode_sec=time.perf_counter()-t0
   pbank={'zero_prompt':np.zeros((PROMPT_LEN,HIDDEN),np.float32),'full_prompt':full16[ti].astype(np.float32),'mirror_rank4':decoded_task,'native_rank4':decoded_task};reconstruct_s.append(decode_sec)
   for method,prompt in pbank.items():
-   p=torch.tensor(prompt,dtype=torch.float32);losses=[eval_nll(model,embed,p,w) for w in task_eval[ti]]
-   methods[method].append(float(np.mean(losses)))
+   p=torch.tensor(prompt,dtype=torch.float32);tin=time.perf_counter();losses=[eval_nll(model,embed,p,w) for w in task_eval[ti]]
+   runtime[method].append(time.perf_counter()-tin);methods[method].append(float(np.mean(losses)))
  result={}
- for method,vals in methods.items():result[method]={'mean_nll':float(np.mean(vals)),'std_task_nll':float(np.std(vals,ddof=1)),'nll_delta_vs_full_prompt':float(np.mean(vals)-np.mean(methods['full_prompt'])),'serialized_prompt_bank_bytes':state[method],'per_task_prompt_tokens':PROMPT_LEN,'mean_reconstruction_seconds':float(np.mean(reconstruct_s)) if method in ('mirror_rank4','native_rank4') else 0.0}
+ for method,vals in methods.items():result[method]={'mean_nll':float(np.mean(vals)),'std_task_nll':float(np.std(vals,ddof=1)),'nll_delta_vs_full_prompt':float(np.mean(vals)-np.mean(methods['full_prompt'])),'serialized_prompt_bank_bytes':state[method],'per_task_prompt_tokens':PROMPT_LEN,'mean_reconstruction_seconds':float(np.mean(reconstruct_s)) if method in ('mirror_rank4','native_rank4') else 0.0,'mean_inference_seconds_per_task':float(np.mean(runtime[method])),'total_inference_seconds':float(np.sum(runtime[method]))}
  rep={'experiment_id':'MA-591','seed':seed,'split':split,'model_revision':REV,'model_sha256':MODEL_SHA,'dataset':'train.txt articles with within-article suffix split','dataset_sha256':DATA_SHA['train.txt'],'task_titles':[t for t,_ in tasks],'task_ranges':task_train,'task_count':TASKS,'prompt_length':PROMPT_LEN,'hidden_size':HIDDEN,'prompt_updates':updates,'steps_per_task':8,'windows_per_update':4,'methods':result,'actual_serialized_bytes':state,'compute':{'model_load_seconds':load_s,'mean_training_seconds_per_task':float(np.mean(train_s)),'total_prompt_training_seconds':float(np.sum(train_s)),'total_wall_seconds':time.perf_counter()-wall,'virtual_tokens_per_inference':PROMPT_LEN,'added_token_embedding_operations_per_example':PROMPT_LEN*HIDDEN},'note':'Model weights are frozen; only task prompts are trained. Compressed prompts are decoded from serialized FP16 PCA coordinates before evaluation.'}
  (outdir/'metrics.json').write_text(json.dumps(rep,indent=2,sort_keys=True)+'\n');print(json.dumps(rep,indent=2))
 def main():
