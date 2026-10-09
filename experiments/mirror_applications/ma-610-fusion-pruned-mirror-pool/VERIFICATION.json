@@ -1,0 +1,15 @@
+{
+  "experiment_id":"MA-610",
+  "decision":"FAIL",
+  "phase":"development; fresh sealed",
+  "base_commit":"84687450",
+  "environment":{"python":"3.12.14","torch":"2.14.1+cpu","device":"cpu"},
+  "frozen_protocol":"PROTOCOL.json; dev 61001/61002; fresh 61011/61012 not accessed",
+  "checks":[
+    {"command":"pytest -q experiments/mirror_applications/ma-610-fusion-pruned-mirror-pool/tests","result":"2 passed"},
+    {"command":"python experiments/mirror_applications/ma-610-fusion-pruned-mirror-pool/source/verify_results.py","result":"16/16 saved payload byte lengths and hashes match; reload max absolute error 0.0"}
+  ],
+  "metrics":"runs/dev_metrics.json and RESULTS_CORE.csv",
+  "decision_basis":"Usage-pruned Mirror misses all quality gates relative to overcomplete and small-from-start models, and serialized usage-pruned payload exceeds unpruned payload.",
+  "limitations":["Synthetic teacher with four active behaviors and four unused slots.","No post-prune recovery was permitted by protocol.","No natural task or language evaluation."]
+}

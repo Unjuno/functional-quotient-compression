@@ -1,0 +1,21 @@
+{
+  "experiment_id":"MA-610",
+  "title":"Fusion-guided pruning of an overcomplete Mirror adapter pool",
+  "status":"SCREENING",
+  "evidence_lane":"MECHANISM/STORAGE/COMPUTE",
+  "base_commit":"84687450",
+  "hypothesis":"Training an eight-view Mirror adapter pool and pruning by training fusion usage retains target composition better than random four-view pruning while matching a four-view-from-start model at lower actual payload bytes.",
+  "physical_object":"shared rank-2 input/output factors with eight logical adapter Views and a learned input-conditioned fusion router",
+  "mirror_coordinate":"one learned Givens angle per logical adapter in the shared rank-2 latent basis",
+  "logical_multiplicity":"eight trained adapter Views, compacted to four selected Views after fusion training",
+  "prior_art_refs":["PA125","PA126"],
+  "controls":["eight independent rank-2 adapters","eight-view shared-factor Mirror pool","usage-pruned top-4 Views","ten deterministic random top-4 masks","four-view-from-start models for both full and Mirror parameterizations"],
+  "teacher":"softmax mixture of four active Givens-view adapter functions; four additional pool slots are unused distractor Views",
+  "development":{"worlds_or_seeds":[61001,61002],"train_examples":4096,"dev_examples":1024,"steps":1200,"batch_size":128,"optimizer":"AdamW lr=0.003, weight_decay=0","selection_metric":"held-out normalized MSE; prune top-4 by mean train-set fusion probability only; no fine-tuning after pruning"},
+  "fresh":{"worlds_or_seeds":[61011,61012],"train_examples":4096,"dev_examples":1024,"steps":1200,"locked_before_access":true,"run_only_if":"all development quality, random-prune and byte gates pass"},
+  "storage":{"authority":"actual serialized inference payload bytes","format":"torch.save full and compact model states, indices and metadata","paid_objects":["shared or independent adapter factors","all active View angles/codes","fusion router and retained indices","metadata"]},
+  "compute":{"report_tokens_or_examples":true,"report_optimizer_updates":true,"report_active_compute_proxy":true,"report_isolated_wall_clock":true,"proxy":"count active rank-2 adapter projections and router per input before and after pruning"},
+  "success_gate":"Both fresh worlds: usage-pruned Mirror NRMSE2 <=1.10x four-view-from-start Mirror and <=1.10x full overcomplete bank; <=0.50x mean random-prune NRMSE2; compact payload <=0.75x eight-view Mirror.",
+  "failure_gate":"Any development gate misses; fresh remains sealed.",
+  "boundaries":["Synthetic teacher with four active functions and four unused views.","Pruned models are not fine-tuned after selection.","No natural task or language claim."]
+}
