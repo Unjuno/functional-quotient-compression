@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (107 completed; 523 UNTESTED)
+- P0: **630** (108 completed; 522 UNTESTED)
 - P1: **422** (15 completed; 407 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1033 UNTESTED, 46 PROMISING, 76 FAIL**
+- Current MA statuses: **1032 UNTESTED, 46 PROMISING, 77 FAIL**
 - 68 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -375,3 +375,15 @@ An earlier same-ID branch (`ma-374-albert-shared-depth-mirror`) tested a differe
 - **FAIL on frozen development storage gate:** Mirror target-fusion NRMSE matched independent adapters and unrestricted shared-basis coefficients (.00062/.00083), and beat scalar gates (.868/.746), but actual total payload was 4,634/4,642B (60.8%/61.0% of independent), above the <=60% requirement. Mirror used ~3.7% more bytes than scalar and ~6.7% fewer than generic coefficients.
 - Two development worlds; 10 serialized payloads replay byte/hash/source/fusion metrics; four tests pass. Fresh worlds stayed sealed after the total-payload gate miss. This is a deliberately aligned synthetic frozen-feature proxy, not a natural-language AdapterFusion result.
 - Next P0 candidate in the operational queue: MA-381 — LoRAHub over Mirror-compressed LoRA basis.
+
+
+## Completed: MA-381 — LoRAHub over a Mirror-compressed candidate basis
+
+- **FAIL on frozen total-payload gate:** across two aligned synthetic worlds, Mirror matched independent LoRAHub composition test error (~2e-7) and generic 2x2 coefficients, while scalar gates had NRMSE .712/.537. Actual Mirror payload was 2,396B, 60.9%/61.1% of independent (3,935/3,922B), narrowly missing <=60%. It saved ~4.1% versus generic coefficients at matched quality; source-bank MAC proxy was 352 versus independent 512.
+- Ten actual payloads replay bytes, hashes, source/test outputs and composition metrics; the non-orthogonal LoRA gauge audit changed D/predictions by <=3.6e-15; three tests pass. Fresh 38111–38113 remained sealed. Aligned frozen-feature screen only.
+
+## Paused subfamily: small shared adapter-bank compression
+
+MA-379 and MA-381 both narrowly missed the complete-payload gate at 60.8–61.1% with eight sources. Their shared factors and target-side fusion/composition state dilute total savings, even though Mirror preserves aligned quality and beats scalar gates. Pause MA-380 and MA-382 pending a new frozen N=8/16/32 bank-scale protocol with source-only and complete payloads. MA-383 is a distinct retrieved prompt-pool experiment and proceeds. See [family diagnostic](../../docs/phase2/MA379_381_ADAPTER_COMPOSITION_MIRROR_FAMILY_DIAGNOSTIC.md).
+
+- Next P0 candidate: MA-383 — L2P prompt pool + Mirror prompt generator.

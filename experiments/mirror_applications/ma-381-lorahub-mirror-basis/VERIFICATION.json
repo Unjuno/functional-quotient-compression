@@ -1,10 +1,192 @@
 {
   "experiment_id": "MA-381",
-  "status": "PROTOCOL_FROZEN_PRE_DEVELOPMENT",
-  "protocol_commit": "pending",
-  "tests": {"command": "", "passed": 0, "failed": 0},
-  "serialization": {"actual_bytes_measured": false, "roundtrip_checked": false},
-  "metric_replay": {"checked": false},
-  "gauge_invariance": {"checked": false, "max_output_delta": null},
-  "fresh": {"worlds": [38111, 38112, 38113], "opened": false}
+  "status": "FAIL_DEVELOPMENT_GATE",
+  "protocol_commit": "4a20efd1",
+  "result_commit": "pending-result-commit",
+  "tests": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 pytest -q -p no:cacheprovider experiments/mirror_applications/ma-381-lorahub-mirror-basis/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "actual_npz_payloads": 10,
+    "all_sizes_checked": true,
+    "all_sha256_checked": true,
+    "all_reloaded": true
+  },
+  "metric_replay": {
+    "source_and_target_test_metrics_checked": true,
+    "max_absolute_delta": 0.0,
+    "tolerance": 1e-07
+  },
+  "gauge_invariance": {
+    "nonorthogonal_gl2_audit_checked": true,
+    "max_matrix_output_or_composed_delta": 3.552713678800501e-15,
+    "tolerance": 1e-06,
+    "applies_to": "independent candidate factors; full D=B@A and source/target predictions"
+  },
+  "fresh": {
+    "worlds": [
+      38111,
+      38112,
+      38113
+    ],
+    "opened": false,
+    "reason": "Mirror total payload was 60.89% and 61.09% of independent; frozen limit was <=60%."
+  },
+  "notes": [
+    "Fresh results are sealed; the source teacher is deliberately generated from the same SO(2) orbit as the Mirror view.",
+    "No raw factor-space similarity is used as evidence; the gauge audit verifies functional invariance.",
+    "Inference throughput is single-pass CPU measurement only."
+  ],
+  "payloads": [
+    {
+      "seed": 38101,
+      "method": "independent",
+      "bytes": 3935,
+      "sha256": "f619016eb4d0b025eaf5a5fe4e1e2c534058b3ed69f2673b5c4e001a8f3c0d1f",
+      "source_test_nrmse": 1.318227873525757e-07,
+      "target_test_nrmse_by_task": [
+        2.031339363384177e-07,
+        2.3124151482534216e-07,
+        2.6987882506546157e-07,
+        2.1370873071191454e-07
+      ],
+      "gauge_audit": {
+        "max_delta_matrix": 1.1102230246251565e-16,
+        "max_delta_output": 6.661338147750939e-16,
+        "max_delta_composed": 3.552713678800501e-15
+      }
+    },
+    {
+      "seed": 38101,
+      "method": "tied",
+      "bytes": 2059,
+      "sha256": "e59ed5db48ecaf86bc26351534dea49ea1bd23f59c926b3c5841015212d9c4ec",
+      "source_test_nrmse": 0.7471709251403809,
+      "target_test_nrmse_by_task": [
+        0.7447203993797302,
+        0.3143288791179657,
+        0.6729156970977783,
+        0.9973780512809753
+      ],
+      "gauge_audit": null
+    },
+    {
+      "seed": 38101,
+      "method": "scalar",
+      "bytes": 2355,
+      "sha256": "3ee47c9298c1cf2065667726763b5baade9a6a18f3d89aeda371c469b24d7a48",
+      "source_test_nrmse": 0.5637310743331909,
+      "target_test_nrmse_by_task": [
+        0.979137659072876,
+        0.744833767414093,
+        0.22197525203227997,
+        0.903326153755188
+      ],
+      "gauge_audit": null
+    },
+    {
+      "seed": 38101,
+      "method": "coeff",
+      "bytes": 2497,
+      "sha256": "8da651953209f2fe1da1809977ab8a1edae4cf242782e0dddc75f0ec3980865e",
+      "source_test_nrmse": 1.340968083241023e-07,
+      "target_test_nrmse_by_task": [
+        2.0611369677681068e-07,
+        2.4622289629405714e-07,
+        2.733092969720019e-07,
+        2.1325509180769586e-07
+      ],
+      "gauge_audit": null
+    },
+    {
+      "seed": 38101,
+      "method": "mirror",
+      "bytes": 2396,
+      "sha256": "ff561ef4c42f8f5f0a03be16a54416f923fa6a527be027dde840c6c288638cbd",
+      "source_test_nrmse": 2.3528106396497606e-07,
+      "target_test_nrmse_by_task": [
+        2.1139129557923297e-07,
+        2.435336341477523e-07,
+        2.683164268546534e-07,
+        2.033435180237575e-07
+      ],
+      "gauge_audit": null
+    },
+    {
+      "seed": 38102,
+      "method": "independent",
+      "bytes": 3922,
+      "sha256": "7fea9e6da268c7c553b57c84d4a4898637cc7513e0129db2101ee96620f354db",
+      "source_test_nrmse": 1.3761942341261602e-07,
+      "target_test_nrmse_by_task": [
+        1.4374444390341523e-07,
+        1.3260856235319807e-07,
+        1.778222298298715e-07,
+        1.202460424565288e-07
+      ],
+      "gauge_audit": {
+        "max_delta_matrix": 8.326672684688674e-17,
+        "max_delta_output": 8.881784197001252e-16,
+        "max_delta_composed": 1.5543122344752192e-15
+      }
+    },
+    {
+      "seed": 38102,
+      "method": "tied",
+      "bytes": 2059,
+      "sha256": "3c46e45c9ebb1834078699ef88ecc5d93310cb2838291d2d3060504014aedf60",
+      "source_test_nrmse": 0.9992188215255737,
+      "target_test_nrmse_by_task": [
+        0.8977454304695129,
+        0.921074628829956,
+        0.48908156156539917,
+        0.5358451008796692
+      ],
+      "gauge_audit": null
+    },
+    {
+      "seed": 38102,
+      "method": "scalar",
+      "bytes": 2362,
+      "sha256": "69b9383c4d4becd1e78a3eefbe6cabb752b47f33db5c8b68482c2e039103b2cc",
+      "source_test_nrmse": 0.5791381001472473,
+      "target_test_nrmse_by_task": [
+        0.10102894902229309,
+        0.6935955286026001,
+        0.6422436833381653,
+        0.7093415260314941
+      ],
+      "gauge_audit": null
+    },
+    {
+      "seed": 38102,
+      "method": "coeff",
+      "bytes": 2500,
+      "sha256": "117ae78cc5bf50e06c33cfd19e8590a7532b5347a51ed10f934a12b50aeec4ff",
+      "source_test_nrmse": 2.083723700252449e-07,
+      "target_test_nrmse_by_task": [
+        1.4441441464896343e-07,
+        1.4272961834649323e-07,
+        1.524402080121945e-07,
+        1.7840990551576397e-07
+      ],
+      "gauge_audit": null
+    },
+    {
+      "seed": 38102,
+      "method": "mirror",
+      "bytes": 2396,
+      "sha256": "84e647354d39a99ebc4174a4415f2df8105a314ce5f8c3d7557de7b6b13e3390",
+      "source_test_nrmse": 3.2241808867183863e-07,
+      "target_test_nrmse_by_task": [
+        1.3852208269327093e-07,
+        1.8861577188999945e-07,
+        2.164113936942158e-07,
+        1.797410931203558e-07
+      ],
+      "gauge_audit": null
+    }
+  ]
 }

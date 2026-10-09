@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-381.** MA-379 failed the frozen total-payload gate by about one percentage point: the aligned synthetic Mirror bank matched independent/generic-coefficient fusion quality at 60.8-61.0% of independent bytes, while scalar gates had much worse quality. Fresh remained sealed. Proceed to MA-381, LoRAHub over a Mirror-compressed LoRA basis (P0).
+**Current operational pointer (2026-10-09): MA-383.** MA-381 also narrowly missed the frozen full-payload gate (60.9-61.1% of independent bytes) despite near-exact aligned LoRAHub composition and a passing factor-gauge audit. Together with MA-379, this pauses the small shared adapter-bank subfamily: MA-380/382 await a new bank-scale protocol. MA-383 tests the distinct L2P retrieved-prompt pool and proceeds (P0).
 
 # Worker queue
 

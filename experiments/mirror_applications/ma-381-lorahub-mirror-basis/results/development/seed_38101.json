@@ -1,0 +1,186 @@
+{
+  "experiment_id": "MA-381",
+  "condition": "development",
+  "seed": 38101,
+  "source_updates": 1200,
+  "composition_updates_per_target": 300,
+  "support_examples_per_target": 64,
+  "learning_rate": 0.01,
+  "batch_size": 64,
+  "results": [
+    {
+      "method": "independent",
+      "payload_path": "development_38101_independent.npz",
+      "serialized_bytes": 3935,
+      "payload_sha256": "f619016eb4d0b025eaf5a5fe4e1e2c534058b3ed69f2673b5c4e001a8f3c0d1f",
+      "source_train_nrmse": 1.3090691197703563e-07,
+      "source_validation_nrmse": 1.3162231482510833e-07,
+      "source_test_nrmse": 1.318227873525757e-07,
+      "target_support_nrmse_by_task": [
+        1.9285890573428333e-07,
+        2.190962220538495e-07,
+        2.7392053425501217e-07,
+        2.2262845789100538e-07
+      ],
+      "target_support_nrmse": 2.271260299835376e-07,
+      "target_test_nrmse_by_task": [
+        2.031339363384177e-07,
+        2.3124151482534216e-07,
+        2.6987882506546157e-07,
+        2.1370873071191454e-07
+      ],
+      "target_test_nrmse": 2.29490751735284e-07,
+      "source_mac_proxy": 512,
+      "composition_mac_proxy_per_example": 128,
+      "composition_search_mac_proxy_per_update": 8192,
+      "optimizer_updates": 1500,
+      "source_examples_seen": 614400,
+      "target_support_examples_seen": 76800,
+      "source_training_wall_s": 0.6019490320031764,
+      "composition_wall_s": 0.09066786499170121,
+      "total_training_wall_s": 1.5917410450056195,
+      "inference_examples_per_s": 11730272.380120952,
+      "gauge_audit": {
+        "max_delta_matrix": 1.1102230246251565e-16,
+        "max_delta_output": 6.661338147750939e-16,
+        "max_delta_composed": 3.552713678800501e-15
+      }
+    },
+    {
+      "method": "tied",
+      "payload_path": "development_38101_tied.npz",
+      "serialized_bytes": 2059,
+      "payload_sha256": "e59ed5db48ecaf86bc26351534dea49ea1bd23f59c926b3c5841015212d9c4ec",
+      "source_train_nrmse": 0.7506160736083984,
+      "source_validation_nrmse": 0.7489821910858154,
+      "source_test_nrmse": 0.7471709251403809,
+      "target_support_nrmse_by_task": [
+        0.7213443517684937,
+        0.31259122490882874,
+        0.6805567741394043,
+        0.9959354996681213
+      ],
+      "target_support_nrmse": 0.677606962621212,
+      "target_test_nrmse_by_task": [
+        0.7447203993797302,
+        0.3143288791179657,
+        0.6729156970977783,
+        0.9973780512809753
+      ],
+      "target_test_nrmse": 0.6823357567191124,
+      "source_mac_proxy": 64,
+      "composition_mac_proxy_per_example": 128,
+      "composition_search_mac_proxy_per_update": 8192,
+      "optimizer_updates": 1500,
+      "source_examples_seen": 614400,
+      "target_support_examples_seen": 76800,
+      "source_training_wall_s": 0.4654321770067327,
+      "composition_wall_s": 0.1011537890008185,
+      "total_training_wall_s": 0.5729341390106129,
+      "inference_examples_per_s": 15608655.644811016,
+      "gauge_audit": null
+    },
+    {
+      "method": "scalar",
+      "payload_path": "development_38101_scalar.npz",
+      "serialized_bytes": 2355,
+      "payload_sha256": "3ee47c9298c1cf2065667726763b5baade9a6a18f3d89aeda371c469b24d7a48",
+      "source_train_nrmse": 0.5691518187522888,
+      "source_validation_nrmse": 0.5609521269798279,
+      "source_test_nrmse": 0.5637310743331909,
+      "target_support_nrmse_by_task": [
+        0.9669483304023743,
+        0.7498995065689087,
+        0.2280864119529724,
+        0.9099422693252563
+      ],
+      "target_support_nrmse": 0.7137191295623779,
+      "target_test_nrmse_by_task": [
+        0.979137659072876,
+        0.744833767414093,
+        0.22197525203227997,
+        0.903326153755188
+      ],
+      "target_test_nrmse": 0.7123182080686092,
+      "source_mac_proxy": 72,
+      "composition_mac_proxy_per_example": 128,
+      "composition_search_mac_proxy_per_update": 8192,
+      "optimizer_updates": 1500,
+      "source_examples_seen": 614400,
+      "target_support_examples_seen": 76800,
+      "source_training_wall_s": 0.5157977240014588,
+      "composition_wall_s": 0.08252816200547386,
+      "total_training_wall_s": 0.6043759869935457,
+      "inference_examples_per_s": 9345016.052800216,
+      "gauge_audit": null
+    },
+    {
+      "method": "coeff",
+      "payload_path": "development_38101_coeff.npz",
+      "serialized_bytes": 2497,
+      "payload_sha256": "8da651953209f2fe1da1809977ab8a1edae4cf242782e0dddc75f0ec3980865e",
+      "source_train_nrmse": 1.3330347314877145e-07,
+      "source_validation_nrmse": 1.3249261598957673e-07,
+      "source_test_nrmse": 1.340968083241023e-07,
+      "target_support_nrmse_by_task": [
+        1.885780420707306e-07,
+        2.2491951767733553e-07,
+        2.766643660834234e-07,
+        2.2492645257443655e-07
+      ],
+      "target_support_nrmse": 2.287720946014815e-07,
+      "target_test_nrmse_by_task": [
+        2.0611369677681068e-07,
+        2.4622289629405714e-07,
+        2.733092969720019e-07,
+        2.1325509180769586e-07
+      ],
+      "target_test_nrmse": 2.347252454626414e-07,
+      "source_mac_proxy": 352,
+      "composition_mac_proxy_per_example": 128,
+      "composition_search_mac_proxy_per_update": 8192,
+      "optimizer_updates": 1500,
+      "source_examples_seen": 614400,
+      "target_support_examples_seen": 76800,
+      "source_training_wall_s": 0.6395527249987936,
+      "composition_wall_s": 0.07938913199177478,
+      "total_training_wall_s": 0.7257528129994171,
+      "inference_examples_per_s": 11350536.605938492,
+      "gauge_audit": null
+    },
+    {
+      "method": "mirror",
+      "payload_path": "development_38101_mirror.npz",
+      "serialized_bytes": 2396,
+      "payload_sha256": "ff561ef4c42f8f5f0a03be16a54416f923fa6a527be027dde840c6c288638cbd",
+      "source_train_nrmse": 2.3544407667941414e-07,
+      "source_validation_nrmse": 2.339121891736795e-07,
+      "source_test_nrmse": 2.3528106396497606e-07,
+      "target_support_nrmse_by_task": [
+        2.0080159401913988e-07,
+        2.3101566171135346e-07,
+        2.5285280003117805e-07,
+        1.9969596110058774e-07
+      ],
+      "target_support_nrmse": 2.2109150421556478e-07,
+      "target_test_nrmse_by_task": [
+        2.1139129557923297e-07,
+        2.435336341477523e-07,
+        2.683164268546534e-07,
+        2.033435180237575e-07
+      ],
+      "target_test_nrmse": 2.3164621865134905e-07,
+      "source_mac_proxy": 352,
+      "composition_mac_proxy_per_example": 128,
+      "composition_search_mac_proxy_per_update": 8192,
+      "optimizer_updates": 1500,
+      "source_examples_seen": 614400,
+      "target_support_examples_seen": 76800,
+      "source_training_wall_s": 0.7187749669974437,
+      "composition_wall_s": 0.08459037699503824,
+      "total_training_wall_s": 0.8108202929870458,
+      "inference_examples_per_s": 4847624.150500508,
+      "gauge_audit": null
+    }
+  ]
+}
