@@ -7,9 +7,9 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 - Registered candidates: **1155**
 - P0: **630** (57 completed; 573 UNTESTED)
-- P1: **422** (14 completed; 408 UNTESTED)
+- P1: **422** (15 completed; 407 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1084 UNTESTED, 36 PROMISING, 35 FAIL**
+- Current MA statuses: **1083 UNTESTED, 36 PROMISING, 36 FAIL**
 - 65 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -23,7 +23,7 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-522 — persistent function code across conversation (P1; PA99/PA25)**
+**MA-523 — function-vector residual private correction (P1; PA99)**
 
 Reason:
 - MA-470/471/473/475/476/478/481/482, MA-483, MA-484, MA-486, MA-487, MA-488, MA-492, MA-494, MA-498, MA-501, MA-502 and MA-516 are completed on dedicated branches and cross-linked in the claim ledger;
@@ -125,3 +125,6 @@ KG relation rotations (RotatE, TuckER, QuatE, PairRE), EXIF/device-aware ISPs (P
 
 
 **MA-521 FAIL (demo-to-code):** 4D code prediction reached 25% identity accuracy, but direct ICL was 37.5% and oracle/compiled FVs 0%; compiled bytes were 61,017B vs 50,921B explicit. Context savings/runtime and HyperFormer control omitted. **Next: MA-522 (P1).**
+
+
+**MA-522 FAIL (persistent session code):** at 8 turns, repeated ICL scored 42.19% versus 1.56% for explicit/PCA/PQ FV states. PCA/PQ combined state+context bytes were 23,118B/32,018B versus 14,957B repeated ICL; context tokens and CPU time decreased but utility and total-byte gates failed. **Next: MA-523 (P1).**

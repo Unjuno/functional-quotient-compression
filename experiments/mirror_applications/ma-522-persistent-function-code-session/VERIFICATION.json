@@ -1,1 +1,32 @@
-{"experiment_id":"MA-522","status":"development_complete","protocol_frozen_before_fresh":true,"fresh_opened":false,"development_smoke":"artifacts/development_smoke.json","tests":{"command":"PYTHONDONTWRITEBYTECODE=1 python -m unittest discover -s experiments/mirror_applications/ma-522-persistent-function-code-session/tests","passed":null,"failed":null},"notes":["PCA rank 4 / PQ K=8 fixed from MA-520 development artifact.","Development session token accounting completed before fresh evaluation."]}
+{
+  "experiment_id": "MA-522",
+  "status": "FAIL",
+  "commit": "pending",
+  "fresh_split_integrity_checked": true,
+  "result_rows": 45,
+  "fresh_worlds": [
+    52210,
+    52211,
+    52212
+  ],
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "tests": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 python -m unittest discover -s experiments/mirror_applications/ma-522-persistent-function-code-session/tests",
+    "passed": 2,
+    "failed": 0
+  },
+  "serialized_state_and_context_hash_size_replay": true,
+  "model_payload_bytes": 550959861,
+  "protocol_deviations": [
+    "Fresh runner rerun with unchanged seeds to complete baseline wall-time and context artifact recording."
+  ],
+  "notes": [
+    "Repeat ICL 42.19% vs all persistent FV methods 1.56%.",
+    "8-turn total state+context bytes: repeat ICL 14,957; PCA 23,118; PQ 32,018.",
+    "Context tokens reduced 4,864 to 1,312, but task quality gate failed."
+  ]
+}

@@ -62,20 +62,24 @@ def fresh():
     for turn in range(TURNS):directprompts.append('Task mapping:\n'+demos(task,seed)+query(task,turn))
    targetids=torch.tensor([t(' '+target(task,turn),add_special_tokens=False)['input_ids'][0] for task in TASKS for turn in range(TURNS)])
    metrics=[]
-   for name,z in [('repeat_icl',logits(m,t,directprompts)),('query_only',logits(m,t,prompts))]:
-    prob=z.softmax(-1);metrics.append((name,z,float((z.argmax(-1)==targetids).float().mean()),float(-prob[torch.arange(len(targetids)),targetids].log().mean()),0.))
+   for name,ps in [('repeat_icl',directprompts),('query_only',prompts)]:
+    tic=time.perf_counter();z=logits(m,t,ps);elapsed=time.perf_counter()-tic;prob=z.softmax(-1);metrics.append((name,z,float((z.argmax(-1)==targetids).float().mean()),float(-prob[torch.arange(len(targetids)),targetids].log().mean()),elapsed))
    state_methods=[('explicit_session_fv',vs,{'method':'explicit','vectors':vs.float().contiguous(),'task_labels':TASKS,'layer':LAYER}),('pca_session_code',pca,{'method':'pca','mean':mean,'basis':basis,'codes':coeff.half(),'task_labels':TASKS,'layer':LAYER}),('pq_session_code',pq,{'method':'pq','centers':dev['centers'].float(),'codes':ids.byte(),'task_labels':TASKS,'layer':LAYER})]
    for name,v,state in state_methods:
     start=time.perf_counter();z=logits(m,t,prompts,v.repeat_interleave(TURNS,dim=0));elapsed=time.perf_counter()-start;prob=z.softmax(-1);metrics.append((name,z,float((z.argmax(-1)==targetids).float().mean()),float(-prob[torch.arange(len(targetids)),targetids].log().mean()),elapsed))
    # Serialize each state bank once; charge all task/session codes and shared decoder/codebook.
    qctx=blob({'input_ids':context_tokens(t,TASKS,seed,False),'turns':TURNS});ictx=blob({'input_ids':context_tokens(t,TASKS,seed,True),'turns':TURNS})
+   cdir=ART/'contexts';cdir.mkdir(exist_ok=True);(cdir/f'{world}_{seed}_query_context.pt').write_bytes(qctx);(cdir/f'{world}_{seed}_icl_context.pt').write_bytes(ictx)
    for name,z,acc,nll,elapsed in metrics:
     st=next((blob(state) for sn,v,state in state_methods if sn==name),b'')
     if st:
      f=PAY/f'{world}_{seed}_{name}.pt';f.parent.mkdir(parents=True,exist_ok=True);f.write_bytes(st);sha=hashlib.sha256(st).hexdigest();rel=str(f.relative_to(ROOT.parents[2]))
     else:sha='';rel=''
     ctxt=len(ictx) if name=='repeat_icl' else len(qctx)
-    rows.append({'world':world,'seed':seed,'method':name,'accuracy':acc,'mean_target_nll':nll,'turns':TURNS,'session_state_bytes':len(st),'cumulative_context_bytes':ctxt,'total_state_plus_context_bytes':len(st)+ctxt,'cumulative_context_tokens':sum(map(len,context_tokens(t,TASKS,seed,name=='repeat_icl'))),'fv_extraction_seconds':extract,'session_inference_seconds':elapsed,'base_model_bytes':basebytes,'hash':sha,'path':rel})
+    zz=z.reshape(len(TASKS),TURNS,-1);tt=targetids.reshape(len(TASKS),TURNS);turn_acc=[];turn_nll=[]
+    for ti in range(TURNS):
+     pp=zz[:,ti,:].softmax(-1);turn_acc.append(float((zz[:,ti,:].argmax(-1)==tt[:,ti]).float().mean()));turn_nll.append(float(-pp[torch.arange(len(TASKS)),tt[:,ti]].log().mean()))
+    rows.append({'world':world,'seed':seed,'method':name,'accuracy':acc,'mean_target_nll':nll,'turns':TURNS,'turn_accuracy_json':json.dumps(turn_acc),'turn_nll_json':json.dumps(turn_nll),'session_state_bytes':len(st),'cumulative_context_bytes':ctxt,'total_state_plus_context_bytes':len(st)+ctxt,'cumulative_context_tokens':sum(map(len,context_tokens(t,TASKS,seed,name=='repeat_icl'))),'context_payload_hash':hashlib.sha256(ictx if name=='repeat_icl' else qctx).hexdigest(),'fv_extraction_seconds':extract,'session_inference_seconds':elapsed,'base_model_bytes':basebytes,'hash':sha,'path':rel})
  with (ROOT/'RESULTS_CORE.csv').open('w',newline='') as f:w=csv.DictWriter(f,fieldnames=list(rows[0]),lineterminator='\n');w.writeheader();w.writerows(rows)
  (ART/'fresh_runs.jsonl').write_text(''.join(json.dumps(r)+'\n' for r in rows));print(json.dumps({'rows':len(rows),'base_model_bytes':basebytes}))
 if __name__=='__main__':
