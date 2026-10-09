@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (110 completed; 520 UNTESTED)
+- P0: **630** (111 completed; 519 UNTESTED)
 - P1: **422** (15 completed; 407 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1030 UNTESTED, 46 PROMISING, 79 FAIL**
+- Current MA statuses: **1029 UNTESTED, 46 PROMISING, 80 FAIL**
 - 68 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -401,3 +401,10 @@ MA-379 and MA-381 both narrowly missed the complete-payload gate at 60.8–61.1%
 - **FAIL on frozen quality/storage gates:** independent experts reached final mean NRMSE <1.5e-7. Mirror was .0509/.2692 and used 2,238/2,241B (64.9%/65.2% of independent, above the <=60% limit). Generic two-value coefficients matched independent quality at only 21–29B more than Mirror. Hard tying forgot previous tasks; Mirror forgetting was zero but its new expert functions were not reliably fitted.
 - Ten actual payloads replay bytes, hashes, final task metrics and every sequential retention stage; maximum replay delta 0; three tests pass. Fresh remained sealed. Synthetic task-incremental proxy with known task IDs only.
 - Next P0 candidate: MA-389 — Hash Embedding Mirror importance codes.
+
+
+## Completed: MA-389 — Hash Embedding token-importance Mirror codes
+
+- **FAIL at the frozen vector-quality gate:** in two deliberately aligned synthetic worlds, Mirror payload was 7,662/7,648B (43.4% of the independent table, and 11.2% smaller than native Hash), but embedding NRMSE was .0949/.0639 versus native Hash .00578/.00540 and required <=.03. Decoder top-1 remained 98.44%/98.05%; collision-only error did not explain the miss.
+- Ten serialized payloads replayed bytes, hashes and all metrics exactly; four tests pass. Fresh worlds remained sealed. This is an aligned unit-circle importance screen, not natural vocabulary or language-model evidence.
+- Next P0 candidate: MA-391 — quotient-remainder compositional embedding Mirror addresses.

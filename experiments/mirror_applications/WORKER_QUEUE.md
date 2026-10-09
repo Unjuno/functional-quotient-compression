@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-389.** MA-385 showed zero old-task forgetting with frozen Mirror codes, but final expert quality varied across worlds (.0509/.2692 NRMSE) and full payload was 64.9-65.2% of independent; generic coefficients fit the aligned teacher. Fresh remained sealed. Proceed to MA-389, Hash Embedding Mirror importance codes (P0).
+**Current operational pointer (2026-10-09): MA-391.** MA-389 compressed the independent embedding payload to 43.4%, but the frozen Mirror vector-fidelity gate failed in both development worlds (.0949/.0639 versus <=.03); fresh remained sealed. Proceed to MA-391/392, starting with MA-391 quotient-remainder compositional embeddings (P0).
 
 # Worker queue
 
