@@ -40,18 +40,19 @@ def givens_rotate(x,angles):
     return out
 
 
-def method_salt_mode(method):return 1 if method=='salted_shared_hash' else 0
+def method_salt_mode(method):return 1 if method in ('salted_shared_hash','independent_hash_tables') else 0
 
-def maps_for(method,hash_seed):
-    return [hash_map(BUCKETS,hash_seed+e+1 if method_salt_mode(method) else hash_seed) for e in range(N_EXPERTS)]
+def maps_for(method,hash_salts):
+    salts=np.asarray(hash_salts,dtype=np.uint32).reshape(-1)
+    return [hash_map(BUCKETS,int(salts[e] if len(salts)==N_EXPERTS else salts[0])) for e in range(N_EXPERTS)]
 
 
-def init_params(method,seed):
+def init_params(method,router_seed,weight_seed):
     # The router starts identically across methods and sees the same batches/labels.
-    rr=np.random.default_rng(seed+1000003)
+    rr=np.random.default_rng(router_seed+1000003)
     p={'router_w':torch.nn.Parameter(torch.as_tensor(rr.normal(0,.02,(INPUT,N_EXPERTS)),dtype=torch.float32)),
        'router_b':torch.nn.Parameter(torch.zeros(N_EXPERTS))}
-    torch.manual_seed(seed*1009)
+    torch.manual_seed(weight_seed*1009)
     if method=='dense_independent':
         p['w1']=torch.nn.Parameter(torch.empty(N_EXPERTS,INPUT,HIDDEN));p['b1']=torch.nn.Parameter(torch.zeros(N_EXPERTS,HIDDEN))
         p['w2']=torch.nn.Parameter(torch.empty(N_EXPERTS,HIDDEN,OUTPUT));p['b2']=torch.nn.Parameter(torch.zeros(N_EXPERTS,OUTPUT))
@@ -94,7 +95,9 @@ def mask_logits(logits,e):
 
 
 def train(method,xtr,ytr,seed,mi,hash_seed):
-    p=init_params(method,seed*100+mi);maps=maps_for(method,hash_seed)
+    p=init_params(method,seed,seed*100+mi)
+    salts=[(hash_seed+e+1)&0xFFFFFFFF for e in range(N_EXPERTS)] if method_salt_mode(method) else [hash_seed]
+    maps=maps_for(method,salts)
     opt=torch.optim.AdamW(list(p.values()),lr=LR,weight_decay=0.)
     rng=np.random.default_rng(seed*1000)
     xt=torch.as_tensor(xtr,dtype=torch.float32);yt=torch.as_tensor(ytr,dtype=torch.long);groups=yt%N_EXPERTS
@@ -112,9 +115,10 @@ def train(method,xtr,ytr,seed,mi,hash_seed):
 
 
 def state_arrays(p,method,seed,hash_seed):
+    salts=[(hash_seed+e+1)&0xFFFFFFFF for e in range(N_EXPERTS)] if method_salt_mode(method) else [hash_seed]
     a={k:v.detach().cpu().numpy().astype(np.float16) for k,v in p.items()}
     a.update({'method_ascii':np.frombuffer(method.encode('ascii'),dtype=np.uint8),
-              'bucket_count':np.asarray([BUCKETS],np.int32),'hash_seed':np.asarray([hash_seed],np.uint32),
+              'bucket_count':np.asarray([BUCKETS],np.int32),'hash_salts':np.asarray(salts,np.uint32),
               'salt_mode':np.asarray([method_salt_mode(method)],np.uint8),'run_seed':np.asarray([seed],np.uint32),
               'shape':np.asarray([N_EXPERTS,INPUT,HIDDEN,OUTPUT],np.int32),'schema':np.asarray([598,1],np.int32)})
     return a
@@ -126,8 +130,8 @@ def save_payload(path,p,method,seed,hash_seed):
 
 def load_payload(path):
     with np.load(path,allow_pickle=False) as z:a={k:z[k].copy() for k in z.files}
-    method=bytes(a.pop('method_ascii').tolist()).decode('ascii');seed=int(a.pop('run_seed')[0]);hs=int(a.pop('hash_seed')[0]);a.pop('bucket_count');a.pop('salt_mode');a.pop('shape');a.pop('schema')
-    p={k:torch.as_tensor(v,dtype=torch.float32) for k,v in a.items()};maps=maps_for(method,hs)
+    method=bytes(a.pop('method_ascii').tolist()).decode('ascii');seed=int(a.pop('run_seed')[0]);salts=a.pop('hash_salts');a.pop('bucket_count');a.pop('salt_mode');a.pop('shape');a.pop('schema')
+    p={k:torch.as_tensor(v,dtype=torch.float32) for k,v in a.items()};maps=maps_for(method,salts)
     return method,seed,p,maps
 
 
@@ -136,14 +140,23 @@ def evaluate(path,xte,yte):
     x=torch.as_tensor(xte,dtype=torch.float32);y=torch.as_tensor(yte,dtype=torch.long);trueg=y%N_EXPERTS
     router_logits=x@p['router_w']+p['router_b'];route=router_logits.argmax(1)
     predlog=torch.full((len(x),OUTPUT),-1e9);oraclelog=torch.full_like(predlog,-1e9)
-    raw_all=[];start=time.perf_counter()
+    start=time.perf_counter()
+    with torch.inference_mode():
+        for e in range(N_EXPERTS):
+            predsel=route==e;oraclesel=trueg==e
+            if predsel.any():
+                raw=raw_expert_logits(p,method,e,x[predsel],maps)
+                predlog[predsel]=mask_logits(raw,e)
+        pred=predlog.argmax(1)
+    infer_s=time.perf_counter()-start
+    # Oracle and diversity/ablation audits are offline diagnostics, excluded from top-1 throughput.
+    start_diag=time.perf_counter();raw_all=[]
     with torch.inference_mode():
         for e in range(N_EXPERTS):
             raw=raw_expert_logits(p,method,e,x,maps);raw_all.append(raw)
-            predsel=route==e;oraclesel=trueg==e
-            if predsel.any():predlog[predsel]=mask_logits(raw[predsel],e)
+            oraclesel=trueg==e
             if oraclesel.any():oraclelog[oraclesel]=mask_logits(raw[oraclesel],e)
-        pred=predlog.argmax(1);oracle=oraclelog.argmax(1)
+        oracle=oraclelog.argmax(1)
         nll=float(F.cross_entropy(predlog,y));oracle_nll=float(F.cross_entropy(oraclelog,y))
         acc=float((pred==y).float().mean());oracle_acc=float((oracle==y).float().mean())
         route_acc=float((route==trueg).float().mean())
@@ -157,9 +170,23 @@ def evaluate(path,xte,yte):
                 ai=raw_all[i].reshape(-1);aj=raw_all[j].reshape(-1)
                 pair_cos.append(float(F.cosine_similarity(ai[None],aj[None]).item()))
                 pair_pred_disagree.append(float((raw_all[i].argmax(1)!=raw_all[j].argmax(1)).float().mean()))
-    infer_s=time.perf_counter()-start
+        # Expert ablation: replace the router's top choice with its runner-up when that expert is removed.
+        route2=router_logits.argsort(dim=1,descending=True)[:,:2]
+        ablation_acc=[]
+        for disabled in range(N_EXPERTS):
+            alt=route.clone();mask=route==disabled;alt[mask]=route2[mask,1]
+            ablated=torch.full((len(x),OUTPUT),-1e9)
+            for e in range(N_EXPERTS):
+                sel=alt==e
+                if sel.any():ablated[sel]=mask_logits(raw_all[e][sel],e)
+            ablation_acc.append(float((ablated.argmax(1)==y).float().mean()))
+    diag_s=time.perf_counter()-start_diag
     weights=[]
-    for e in range(N_EXPERTS):weights.append(expert_w1(p,method,e,maps).detach().numpy())
+    for e in range(N_EXPERTS):
+        w=expert_w1(p,method,e,maps)
+        if method=='mirror_givens':w=givens_rotate(w.T,-p['angles'][e]).T
+        elif method=='diagonal_gate':w=p['scale'][e][:,None]*w
+        weights.append(w.detach().numpy())
     wcos=[]
     for i in range(N_EXPERTS):
         for j in range(i+1,N_EXPERTS):
@@ -173,6 +200,7 @@ def evaluate(path,xte,yte):
             'pairwise_raw_logit_cosine_mean':float(np.mean(pair_cos)),'pairwise_raw_argmax_disagreement_mean':float(np.mean(pair_pred_disagree)),
             'pairwise_first_layer_weight_cosine_mean':float(np.mean(wcos)),'pairwise_hash_map_overlap_mean':float(np.mean(overlap)),
             'per_expert_collision':collision,'inference_seconds':infer_s,'inference_examples_per_second':len(x)/infer_s,
+            'expert_ablation_accuracy':ablation_acc,'expert_diagnostic_seconds':diag_s,
             'active_experts_per_example':1,'route_confusion':_confusion(route.cpu().numpy(),trueg.cpu().numpy())}
 
 
@@ -193,9 +221,9 @@ def run(seed,split,outdir):
         payload=outdir/f'{method}.npz';nbytes=save_payload(payload,p,method,seed,hash_seed);ev=evaluate(payload,xte,yte)
         dense_macs=INPUT*HIDDEN+HIDDEN*OUTPUT+INPUT*N_EXPERTS
         extra_ops=0
-        if method=='mirror_givens':extra_ops=N_EXPERTS*(INPUT//2)*6
-        elif method=='diagonal_gate':extra_ops=N_EXPERTS*INPUT
-        elif method=='rank1_residual':extra_ops=N_EXPERTS*(INPUT+HIDDEN)
+        if method=='mirror_givens':extra_ops=(INPUT//2)*6
+        elif method=='diagonal_gate':extra_ops=INPUT
+        elif method=='rank1_residual':extra_ops=INPUT+HIDDEN
         lookups=INPUT*HIDDEN*(N_EXPERTS if method=='independent_hash_tables' else 1)
         rows.append({'method':method,'serialized_bytes':nbytes,'payload_sha256':hashlib.sha256(payload.read_bytes()).hexdigest(),
                      'train_examples':len(xtr),'test_examples':len(xte),'optimizer_updates':UPDATES,'examples_seen':UPDATES*BATCH,

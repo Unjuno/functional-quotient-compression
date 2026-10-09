@@ -1,0 +1,21 @@
+{
+  "experiment_id": "MA-598",
+  "amendment": 1,
+  "timing": "after code freeze and unit tests, before any registered dev training or metrics",
+  "findings": [
+    "The initial harness seeded the router differently across methods, although protocol requires the same router controls.",
+    "The initial timing path evaluated all experts for diagnostics while labeling the result top-1 inference throughput.",
+    "Salted expert maps were derived from one seed but not serialized as explicit per-expert paid seeds.",
+    "First-layer cosine omitted the learned Givens/diagonal coordinate, and the planned ablation diagnostic was absent."
+  ],
+  "changes": [
+    "Initialize the router from the same frozen router seed for every method and use identical minibatch order.",
+    "Time only router plus selected top-1 expert; report all-expert oracle/diversity/ablation as diagnostic time.",
+    "Serialize all expert-specific salt seeds for salted shared hashing and independent hash tables; charge the bytes.",
+    "Measure effective first-layer weights after the View and report leave-one-expert-out runner-up accuracy."
+  ],
+  "registered_metrics_generated": false,
+  "payloads_generated": false,
+  "fresh_data_accessed": false,
+  "protocol_gates_changed": false
+}
