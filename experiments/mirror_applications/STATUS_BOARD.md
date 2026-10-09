@@ -219,3 +219,5 @@ KG relation rotations (RotatE, TuckER, QuatE, PairRE), EXIF/device-aware ISPs (P
 **MA-487 FAIL:** on 9 fresh synthetic banks, OMP top-8 had NRMSE .0269 at 15,329B. LISTA errors were .821/.742/.644/.358 at depths 1/2/4/8 and each serialized router was 214,613B. No depth met .05 NRMSE; dense router state cost ~14x OMP. **Next: MA-488.**
 
 **MA-488 FAIL:** for 25/50/75% off-manifold function banks, adaptive private residuals exactly restored targets but payload/dense ratios were 62.7% / 83.6% / 104.4%; the registered <=80% gate had to pass at every heterogeneity level. Shared-only errors were .480/.605/.667. As heterogeneity rises, private vectors erase storage savings. **Next: highest-priority queued discrete-code candidate.**
+
+**MA-492 FAIL for registered K<=8 mode-coverage gate; K16 scoped positive result:** in the A1 synthetic 16-mode task, K8 covered 50% of joint modes (NLL 10.662), missing the >=95% gate. K16 reached 100% coverage/valid packets and NLL .693 at 3,173B vs continuous 18,469B and independent 18,213B; independent validity was 59.5%. A0 invalid coverage results are preserved and excluded. Synthetic packet modes only; no LM claim.
