@@ -1,0 +1,105 @@
+{
+  "experiment_id": "MA-462",
+  "status": "COMPLETED_FAIL",
+  "protocol_commit": "7af3b858",
+  "initial_protocol_commit": "008712e4",
+  "original_fresh_worlds": [
+    46210,
+    46211,
+    46212
+  ],
+  "A1_fresh_worlds": [
+    46220,
+    46221,
+    46222
+  ],
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "original_rows": 135,
+  "A1_rows": 162,
+  "checks": [
+    {
+      "name": "artifact_tests",
+      "command": "python -m pytest -q experiments/mirror_applications/ma-462-mirror-vs-hyperformer-decoder/tests",
+      "result": "2 passed"
+    },
+    {
+      "name": "payload_integrity",
+      "result": "Fresh payload lengths and SHA256 are checked for both original and A1 result sets."
+    },
+    {
+      "name": "A1_gate",
+      "result": "FAIL: Mirror beats the fixed-budget MLP but fails quality versus the generic Fourier decoder; its payload is 94.8% of Fourier rather than <=70%."
+    }
+  ],
+  "original_N32": {
+    "hyper": {
+      "nrmse_mean": 0.19910476912304553,
+      "bytes_per_context": 110.78125
+    },
+    "mirror": {
+      "nrmse_mean": 0.0691487625760298,
+      "bytes_per_context": 73.15625
+    },
+    "affine": {
+      "nrmse_mean": 1.003079932389988,
+      "bytes_per_context": 77.15625
+    },
+    "rank2": {
+      "nrmse_mean": 0.9986597752819458,
+      "bytes_per_context": 81.03125
+    },
+    "private": {
+      "nrmse_mean": 0.0,
+      "bytes_per_context": 91.15625
+    }
+  },
+  "A1_N32": {
+    "hyper": {
+      "nrmse_mean": 0.1639562867866415,
+      "bytes_per_context": 110.78125,
+      "decoder_MAC_per_context": 128.0,
+      "fit_wall_seconds": 0.8783564750014597,
+      "query_wall_seconds_mean": 2.0980156023142627e-05
+    },
+    "mirror": {
+      "nrmse_mean": 0.0662786918514434,
+      "bytes_per_context": 73.15625,
+      "decoder_MAC_per_context": 16.0,
+      "fit_wall_seconds": 0.3762917158908547,
+      "query_wall_seconds_mean": 1.4270301259481736e-05
+    },
+    "fourier": {
+      "nrmse_mean": 2.5454121051667517e-07,
+      "bytes_per_context": 77.15625,
+      "decoder_MAC_per_context": 28.0,
+      "fit_wall_seconds": 0.0,
+      "query_wall_seconds_mean": 1.4317086879600538e-05
+    },
+    "affine": {
+      "nrmse_mean": 1.0108655035081837,
+      "bytes_per_context": 77.15625,
+      "decoder_MAC_per_context": 20.0,
+      "fit_wall_seconds": 0.0,
+      "query_wall_seconds_mean": 1.300159045866975e-05
+    },
+    "rank2": {
+      "nrmse_mean": 1.0090119293373492,
+      "bytes_per_context": 81.03125,
+      "decoder_MAC_per_context": 18.0,
+      "fit_wall_seconds": 0.31240970144345837,
+      "query_wall_seconds_mean": 1.6004121840119802e-05
+    },
+    "private": {
+      "nrmse_mean": 0.0,
+      "bytes_per_context": 91.15625,
+      "decoder_MAC_per_context": 4.0,
+      "fit_wall_seconds": 0.0,
+      "query_wall_seconds_mean": 0.00010464273256932049
+    }
+  },
+  "scope": "Synthetic 2x2 fixed-embedding adapter decoder only; no Transformer evidence."
+}

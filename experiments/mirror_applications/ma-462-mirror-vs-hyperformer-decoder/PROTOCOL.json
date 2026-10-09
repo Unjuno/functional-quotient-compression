@@ -1,7 +1,7 @@
 {
   "experiment_id": "MA-462",
   "title": "Mirror decoder vs HyperFormer adapter decoder under fixed embeddings",
-  "status": "FROZEN_A1",
+  "status": "COMPLETED_FAIL",
   "base_commit": "10487ec4",
   "evidence_lane": "ADAPTER_DECODER/QUALITY/PARAMETERS/EXTRAPOLATION",
   "hypothesis": "With identical fixed four-value task/layer/position embeddings, a shared-matrix Mirror decoder will use at least 30% fewer actual N=32 payload bytes than a generic HyperFormer MLP decoder while staying within 10% held-out adapter NRMSE.",
