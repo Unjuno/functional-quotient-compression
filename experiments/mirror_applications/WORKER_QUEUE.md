@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-349.** Federated personalization is paused after MA-341/342; both same-orbit screens found direct coefficients within 7.2% bytes of phase Mirror at identical quality, missing the 10% margin. Diagnostic: `docs/phase2/MA341_342_FEDERATED_MIRROR_FAMILY_DIAGNOSTIC.md`. Continue with MA-349, rank-1 Bayesian Mirror posterior.
+**Current operational pointer (2026-10-09): MA-350.** MA-349 Mirror posterior matched Rank-1-style NLL/ECE within 0.02 but saved only 8.9% bytes, below the frozen 20% gate. Continue with MA-350, multimodal Mirror posterior codebook versus matched rank-one mixture.
 
 # Worker queue
 

@@ -1,1 +1,26 @@
-{"experiment_id":"MA-349","commit":"pending","tests":{"command":"PYTHONDONTWRITEBYTECODE=1 pytest -q -p no:cacheprovider experiments/mirror_applications/ma-349-rank1-bayesian-mirror-posterior/tests","passed":null,"failed":null},"serialization":{"roundtrip_checked":false,"byte_exact":false},"metric_replay":{"checked":false,"max_difference":null},"fresh_split_integrity_checked":false,"notes":[]}
+{
+  "experiment_id": "MA-349",
+  "commit": "pending-results-commit",
+  "tests": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 pytest -q -p no:cacheprovider experiments/mirror_applications/ma-349-rank1-bayesian-mirror-posterior/tests",
+    "passed": 2,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "payloads_checked": 9
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Protocol frozen 409d7638; implementation frozen dd56eb40 before fresh access.",
+    "Fresh worlds 34931-34933, 18 rows across IID/OOD and three posterior types.",
+    "Payload hashes/bytes and NLL/Brier/ECE/accuracy replay exactly.",
+    "Comparator is a toy rank-one Gaussian variational approximation, not full PA41 reproduction.",
+    "Measured inference wall time excludes posterior sample construction."
+  ]
+}
