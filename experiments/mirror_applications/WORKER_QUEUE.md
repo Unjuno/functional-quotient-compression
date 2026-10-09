@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-395.** MA-393 restored rare-band function with Mirror (.0124/.0154 NRMSE versus .536/.442 adaptive) at near-full task quality, but total payload was 60.43-60.46% of full (frozen limit <=60%) and compute was higher. Fresh remained sealed. Proceed to MA-395, ALBERT factorized embedding + Mirror domain views (P0); MA-394 is P1.
+**Current operational pointer (2026-10-09): MA-397.** MA-395 latent Mirror recovered held-out ALBERT-style domain embeddings at near-zero NRMSE, versus .003-.015 dense and .30-.32 hard/FiLM, but total payload was 81.3% of dense (frozen limit <=80%). Fresh remained sealed. Proceed to MA-397, product-address Mirror vocabulary (P0); MA-394 is P1.
 
 # Worker queue
 

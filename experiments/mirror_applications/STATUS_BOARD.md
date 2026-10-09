@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (114 completed; 516 UNTESTED)
+- P0: **630** (115 completed; 515 UNTESTED)
 - P1: **422** (15 completed; 407 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1026 UNTESTED, 46 PROMISING, 83 FAIL**
+- Current MA statuses: **1025 UNTESTED, 46 PROMISING, 84 FAIL**
 - 68 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -429,3 +429,10 @@ MA-379 and MA-381 both narrowly missed the complete-payload gate at 60.8–61.1%
 - **FAIL narrowly on frozen full-payload gate, with a strong aligned rare-band result:** corrected Mirror weighted NRMSE was .00301/.00407 and rare-band .0124/.0154; the nested byte-matched +1-coordinate control was .128/.133 weighted and .536/.408 rare. Mirror payload was 15,427/15,404B (60.46%/60.43% of full, slightly above <=60%). Training was ~4.3× full and inference throughput lower.
 - Eight corrected payloads replayed hashes, bytes and metrics; four tests pass. The initial non-nested-control probe is preserved but excluded. Fresh remained sealed. Synthetic aligned frequency bands only.
 - Next P0 candidate: MA-395 — ALBERT factorized embedding + Mirror domain views.
+
+
+## Completed: MA-395 — ALBERT factorized embedding + latent Mirror domain view
+
+- **FAIL narrowly on frozen dense-comparator total-payload gate, with near-exact held-out recovery:** Mirror NRMSE was 0/3.1e-8, matching/besting dense transforms (.0152/.0031) and strongly outperforming hard sharing/FiLM (.30-.32). Mirror used 7,293/7,268B versus 8,975/8,942B dense (81.3%, required <=80%) and ~63KB full oracle.
+- Ten serialized payloads replayed bytes, hashes and observed/held-out metrics; four tests pass. Fresh remained sealed. Fixed low-dimensional ALBERT-style proxy only, not a pretrained model.
+- Next P0 candidate: MA-397 — product-address Mirror vocabulary.
