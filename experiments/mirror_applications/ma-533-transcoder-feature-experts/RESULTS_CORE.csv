@@ -1,1 +1,8 @@
-condition,world_or_seed,method,serialized_bytes,train_tokens_or_examples,optimizer_updates,active_compute_proxy,wall_time_s,primary_metric,primary_value,secondary_metric,secondary_value,status_note
+condition,world_or_seed,method,serialized_incremental_bytes,standalone_total_bytes,train_tokens_or_examples,optimizer_updates,active_compute_proxy_macs_per_eval,wall_time_s_per_eval,primary_metric,primary_value,secondary_metric,secondary_value,status_note
+dev,53301,native dense reference,0,272437465,4096,0,5435817984,0.1580587740172632,relative_mse,0.0,mean_cosine,1.0,native MLP is in full base
+dev,53301,skip_only,1327223,268455904,4096,0,679477248,0.01499891298590228,relative_mse,0.9783239364624023,mean_cosine,0.332000732421875,control
+dev,53301,rank128_cross_covariance_svd,592381,267721062,4096,0,301989888,0.00998977100243792,relative_mse,0.8174886107444763,mean_cosine,0.4796406328678131,control
+dev,53301,transcoder_top128,341363524,608492205,4096,0,87803559936,3.319973692006897,relative_mse,0.8060083389282227,mean_cosine,0.738074541091919,FAIL raw fidelity gate; fresh sealed
+dev,53301,transcoder_global_rms_normalized,341363732,608492413,4096,0,87803559936,,relative_mse,3.392346143722534,mean_cosine,0.6116687655448914,fit-only global RMS diagnostic; fails
+dev,53301,transcoder_direction_plus_fit_norm_head,341370737,608499418,4096,0,87807100928,3.3235797270026524,relative_mse,0.14861655235290527,mean_cosine,0.9561607837677002,fit-only norm head; raw MSE fails gate
+dev,53301,transcoder_token_l2_direction_only,,,4096,0,,,relative_mse,0.08673477172851562,mean_cosine,0.956160843372345,target norm used; non-deployable direction diagnostic

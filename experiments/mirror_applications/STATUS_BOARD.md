@@ -6,42 +6,42 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (37 completed; 593 UNTESTED)
+- P0: **630** (38 completed; 592 UNTESTED)
 - P1: **422** (12 completed; 410 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1106 UNTESTED, 29 PROMISING, 20 FAIL**
+- Current MA statuses: **1105 UNTESTED, 29 PROMISING, 21 FAIL**
 - 47 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
 - Thirteenth literature sweep added MA-996..1045 (50 UNTESTED; 40 P0/10 P1) and PA296..PA325. IDs MA-1000+ use four digits; consult `check_registry_integrity.py`. No new experiment results.
 - Fourteenth sweep added **MA-1046..1095** (50 UNTESTED; 40 P0 / 10 P1) and **PA326..PA350**. Focus: time-series foundation forecasting, recommender embedding tables, and Earth-observation multi-sensor networks. No new experiment results; MA-255 remains next.
 - Fifteenth direct-prior sweep added **MA-1096..1115** (20 UNTESTED, 16 P0 / 4 P1) and **PA351..371**. A gauge-invariant LoRA audit harness is present; its unit tests are **not** trained-model evidence. MA-255 remains next.
-- Research support PA372..381 and a **separate 48-row / two-seed real-digit shifted-task code pilot** have been added. Structured 8-value Mirror m improved average CE versus 6-value diagonal code but FAILED the preregistered full quality/bytes/runtime gate. This is an **exploratory negative pilot**, not an MA-1096/1099/1115 completed experiment. Existing 29 PROMISING / 18 FAIL and MA-255 next are unchanged. See [function-space review](../../docs/phase2/MIRROR_FUNCTION_SPACE_FALSIFICATION_2026-10-08.md) and [pilot results](research_intake/natural_digit_function_20261008/RESULTS.md).
+- Research support PA372..381 and a **separate 48-row / two-seed real-digit shifted-task code pilot** have been added. Structured 8-value Mirror m improved average CE versus 6-value diagonal code but FAILED the preregistered full quality/bytes/runtime gate. This is an **exploratory negative pilot**, not an MA-1096/1099/1115 completed experiment. At that historical checkpoint, 29 PROMISING / 18 FAIL and MA-255 next were unchanged; subsequent registered experiments changed the current counts shown above. See [function-space review](../../docs/phase2/MIRROR_FUNCTION_SPACE_FALSIFICATION_2026-10-08.md) and [pilot results](research_intake/natural_digit_function_20261008/RESULTS.md).
 - Sixteenth literature sweep added **MA-1116..1155** (40 UNTESTED; 33 P0 / 7 P1) and **PA382..413** (32 primary sources): knowledge graph relation operators, camera ISP/lens optics, robot dynamics and room neural acoustic fields. No new MA measurements. See [sixteenth research notes](../../docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_SIXTEENTH_SWEEP.md) and [40 per-ID test blueprints](../../docs/phase2/MIRROR_APPLICATION_EXPERIMENT_BLUEPRINTS_MA1116_1155.md); next remains MA-255.
 - PROMISING is **not** ADOPTED. Treat reports with strict-gate misses or exploratory protocol deviations at their documented scope.
 - SRM/TM and prior Phase I results are not MA statuses.
 
 ## Next candidate
 
-**MA-533 — Transcoder feature bank as functional expert atoms (P0; PA103)**
+**MA-534 — Mirror logical MLPs over shared transcoder (P0; PA103)**
 
 Reason:
 - MA-526 and MA-527 both failed their development quality gates under the pretrained SAE feature representation; MA-527 dev extraction exposed task IDs 14–15, with no fresh-seed evaluation. The family is paused under `docs/phase2/SAE_FEATURE_FAMILY_REDESIGN_2026-10-09.md`;
 - MA-528/530 are deferred until the SAE alignment premise is redesigned;
-- MA-533 uses a trained transcoder as a distinct physical object and remains a separate P0 experiment target.
+- MA-533 is now a scoped development FAIL: the pinned layer-8 transcoder raw MSE is 0.806/cosine 0.738; token-L2 direction is strong but non-deployable, and a fit-only output-norm head still has raw MSE 0.149. Rank-128 affine MSE is 0.817 at 592 KB vs 341 MB transcoder state; the transcoder uses 16.2x native MLP MACs. MA-534 tests a separate task-level sparse-role hypothesis with dense MLP, plain sparse gates and byte-near low-rank controls.
 
-MA-533 controls and protocol must be frozen on its dedicated branch before development or fresh data access.
+MA-534 controls and protocol must be frozen on its dedicated branch before development or fresh data access.
 
 ## Active experiment
 
-MA-527 is a verified development FAIL; no fresh-seed metrics were computed and task IDs 14–15 cannot be reused as audit identities. MA-533 is the next experiment to protocol-freeze.
+MA-527 is a verified development FAIL; no fresh-seed metrics were computed and task IDs 14–15 cannot be reused as audit identities. MA-533 is a verified development FAIL with fresh still sealed. MA-534 is next to protocol-freeze.
 
 ## Verified status index
 
 - **PROMISING (29):** MA-001, MA-002, MA-003, MA-004, MA-005, MA-006, MA-007, MA-008, MA-012, MA-014, MA-015, MA-041, MA-076, MA-079, MA-111, MA-121, MA-156, MA-160, MA-171, MA-173, MA-181, MA-189, MA-241, MA-244, MA-245, MA-249, MA-250, MA-251, MA-691.
-- **FAIL (18):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253.
+- **FAIL (21):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-526, MA-527, MA-533.
 
-All per-ID evidence is retained in the local experiment directories and in `CLAIM_LEDGER.csv`. Consult [the evidence integration audit](../../docs/phase2/MIRROR_MA_EVIDENCE_INTEGRATION_2026-10-08.md) for linked reports, verifications, provenance and claim boundaries.
+MA-526, MA-527 and MA-533 scoped failures are now recorded in their dedicated branches/directories and in `CLAIM_LEDGER.csv`. All per-ID evidence is retained in the experiment directories and ledger. Consult [the evidence integration audit](../../docs/phase2/MIRROR_MA_EVIDENCE_INTEGRATION_2026-10-08.md) for linked reports, verifications, provenance and claim boundaries.
 
 ## 2026-10-08 research sweep
 

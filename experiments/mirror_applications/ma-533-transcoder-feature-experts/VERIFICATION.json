@@ -1,19 +1,63 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-533",
+  "protocol_commit": "81639629",
+  "amendment_commits": [
+    "730f943c",
+    "16987738",
+    "e704f09b",
+    "08116c26",
+    "d4082132",
+    "7fec8674",
+    "d2f8880e",
+    "e6347ca6",
+    "be4980fa",
+    "d27abfd5",
+    "3c7f06c7"
+  ],
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-533-transcoder-feature-experts/tests -v",
+    "passed": 2,
+    "failed": 0
   },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "payload_bytes": 341363360,
+    "payload_sha256": "07f811a32b7c0deb5cb15ad3f1e8529bb38265768eafba0713b3c208b4bc02e5",
+    "config_bytes": 164,
+    "payload_saved_for_git": false,
+    "note": "Reconstructed safetensors from pinned source tensors and verified byte count plus SHA-256 exactly; large artifact removed after check.",
+    "per_method_incremental_bytes": {
+      "native_mlp": 0,
+      "skip_only": 1327223,
+      "transcoder_top128": 341363524,
+      "rank128_cross_covariance_svd": 592381,
+      "transcoder_global_rms_normalized": 341363732,
+      "transcoder_direction_plus_fit_norm_head": 341370737
+    },
+    "standalone_bytes": {
+      "native_mlp": 272437465,
+      "skip_only": 268455904,
+      "transcoder_top128": 608492205,
+      "rank128_cross_covariance_svd": 267721062,
+      "transcoder_global_rms_normalized": 608492413,
+      "transcoder_direction_plus_fit_norm_head": 608499418
+    },
+    "payload_manifest": "runs/dev/seed_53301/PAYLOAD_MANIFEST.json"
   },
   "metric_replay": {
-    "checked": false,
-    "max_difference": null
+    "checked": true,
+    "max_difference": 0.0,
+    "note": "Nonoverlapping development token hash and every method metric reproduced exactly in a second run; serialized payload byte/hash checks passed."
   },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "fresh_split_integrity_checked": true,
+  "fresh_opened": false,
+  "notes": [
+    "Dev fit/eval windows use unique aligned 128-token blocks with zero overlap.",
+    "Fresh validation split was not accessed because raw-output gate failed.",
+    "Tokenwise L2 result is direction-only and uses target norm; non-deployable.",
+    "Official SparseCoder formula unit-tested.",
+    "All per-method payloads and stripped base serialized, reread, byte/hash verified, then removed.",
+    "An earlier overlapping-window run is preserved under runs/dev_superseded/ and is not final evidence."
+  ]
 }

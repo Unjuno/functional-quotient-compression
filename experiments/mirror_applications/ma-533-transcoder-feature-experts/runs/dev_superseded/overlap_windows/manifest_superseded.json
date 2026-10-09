@@ -1,0 +1,60 @@
+{
+  "base_checkpoint_revision": "93efa2f097d58c2a74874c7e644dbc9b0cee75a2",
+  "native_full_base_bytes": 272437465,
+  "base_after_removing_layer8_mlp_bytes": 267128681,
+  "base_model_safetensors_bytes": 263751768,
+  "base_model_safetensors_sha256": "9fffcb4a7cfd7506ee23eeafa364eb6228462b0ee51daa0e2115df9f8e63776b",
+  "removed_native_mlp_tensors": {
+    "model.layers.8.mlp.down_proj.weight": {
+      "shape": [
+        576,
+        1536
+      ],
+      "dtype": "torch.bfloat16",
+      "bytes": 1769472
+    },
+    "model.layers.8.mlp.gate_proj.weight": {
+      "shape": [
+        1536,
+        576
+      ],
+      "dtype": "torch.bfloat16",
+      "bytes": 1769472
+    },
+    "model.layers.8.mlp.up_proj.weight": {
+      "shape": [
+        1536,
+        576
+      ],
+      "dtype": "torch.bfloat16",
+      "bytes": 1769472
+    }
+  },
+  "method_payloads": {
+    "transcoder_top128": {
+      "payload_bytes": 341363360,
+      "config_bytes": 164,
+      "incremental_bytes": 341363524,
+      "standalone_bytes": 608492205,
+      "sha256": "07f811a32b7c0deb5cb15ad3f1e8529bb38265768eafba0713b3c208b4bc02e5",
+      "tensor_count": 5
+    },
+    "skip_only": {
+      "payload_bytes": 1327184,
+      "config_bytes": 39,
+      "incremental_bytes": 1327223,
+      "standalone_bytes": 268455904,
+      "sha256": "efa3cb09c9a99d4005bfbf3049010df0c902592c47a22fa7b026d61ab25ac63d",
+      "tensor_count": 1
+    },
+    "rank128_cross_covariance_svd": {
+      "payload_bytes": 592344,
+      "config_bytes": 37,
+      "incremental_bytes": 592381,
+      "standalone_bytes": 267721062,
+      "sha256": "df2bcefd354384dad4f7e9ffdb6332887fc4a98886e2abd66d51f58469dca307",
+      "tensor_count": 3
+    }
+  },
+  "note": "All method payloads and stripped base were reconstructed, reread, size/hash verified, and removed after measurements."
+}

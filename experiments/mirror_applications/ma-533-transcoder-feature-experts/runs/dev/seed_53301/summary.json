@@ -1,0 +1,187 @@
+{
+  "experiment_id": "MA-533",
+  "split": "dev",
+  "seed": 53301,
+  "n_sequences": 32,
+  "tokens": 4096,
+  "activation_vectors": 2048,
+  "fit_vectors": 2048,
+  "model": "HuggingFaceTB/SmolLM2-135M",
+  "model_revision": "93efa2f097d58c2a74874c7e644dbc9b0cee75a2",
+  "model_repo_files": {},
+  "transcoder_repo": "EleutherAI/skip-transcoder-SmolLM2-135M-128x",
+  "transcoder_revision": "651f51421f2e1aa8fbd907e02ef421d3da55ff6d",
+  "transcoder_sha256": "07f811a32b7c0deb5cb15ad3f1e8529bb38265768eafba0713b3c208b4bc02e5",
+  "transcoder_file_bytes": 341363360,
+  "transcoder_payload_sha256": "07f811a32b7c0deb5cb15ad3f1e8529bb38265768eafba0713b3c208b4bc02e5",
+  "config_bytes": 164,
+  "transcoder_incremental_bytes": 341363524,
+  "active_nonzeros_per_vector": 128,
+  "optimizer_updates": 0,
+  "data": "closji/wikitext__wikitext-2-raw-v1 train parquet, revision d575192455c5e98b8daed777574046264579cb09",
+  "input_tokens_sha256": "db806506ce595a04300fe2b5c1e0748eee5942928ba5f13d73b26eafbb2d86f8",
+  "full_model_capture_wall_seconds": 16.88501160099986,
+  "native_dense_mlp_wall_seconds": 0.1580587740172632,
+  "transcoder_encode_decode_wall_seconds": 3.319973692006897,
+  "rank128_svd_fit_wall_seconds": 0.10982230000081472,
+  "rank128_inference_wall_seconds": 0.00998977100243792,
+  "skip_only_inference_wall_seconds": 0.01499891298590228,
+  "fit_norm_head_inference_wall_seconds": 0.0036060349957551807,
+  "compute_proxy": {
+    "vectors": 2048,
+    "transcoder_encoder_dense_macs": 86973087744,
+    "transcoder_decoder_sparse_macs": 150994944,
+    "transcoder_skip_macs": 679477248,
+    "rank128_linear_macs": 301989888,
+    "fit_norm_head_macs": 3540992,
+    "native_mlp_linear_macs": 5435817984
+  },
+  "methods": {
+    "skip_only": {
+      "relative_mse": 0.9783239364624023,
+      "mean_token_relative_mse": 0.9678409695625305,
+      "mean_cosine": 0.332000732421875,
+      "p50_token_relative_error": 0.9849518537521362,
+      "p95_token_relative_error": 0.9991711974143982
+    },
+    "transcoder_top128": {
+      "relative_mse": 0.8060083389282227,
+      "mean_token_relative_mse": 0.7744655609130859,
+      "mean_cosine": 0.738074541091919,
+      "p50_token_relative_error": 0.8808186054229736,
+      "p95_token_relative_error": 0.9311745166778564
+    },
+    "rank128_cross_covariance_svd": {
+      "relative_mse": 0.8174886107444763,
+      "mean_token_relative_mse": 0.7893601655960083,
+      "mean_cosine": 0.4796406328678131,
+      "p50_token_relative_error": 0.8985999226570129,
+      "p95_token_relative_error": 0.9904947876930237
+    },
+    "transcoder_global_rms_normalized": {
+      "relative_mse": 3.392346143722534,
+      "mean_token_relative_mse": 5.124779224395752,
+      "mean_cosine": 0.6116687655448914,
+      "p50_token_relative_error": 2.077664375305176,
+      "p95_token_relative_error": 3.3744752407073975
+    },
+    "transcoder_token_l2_direction_only": {
+      "relative_mse": 0.08673477172851562,
+      "mean_token_relative_mse": 0.08673477172851562,
+      "mean_cosine": 0.956160843372345,
+      "p50_token_relative_error": 0.2748652994632721,
+      "p95_token_relative_error": 0.4323435127735138
+    },
+    "transcoder_direction_plus_fit_norm_head": {
+      "relative_mse": 0.14861655235290527,
+      "mean_token_relative_mse": 0.18295235931873322,
+      "mean_cosine": 0.9561607837677002,
+      "p50_token_relative_error": 0.35395801067352295,
+      "p95_token_relative_error": 0.6751411557197571
+    }
+  },
+  "normalization_scales": {
+    "fit_input_rms": 0.12902948260307312,
+    "fit_output_rms": 1.4537283182144165,
+    "global_rms_incremental_bytes": 341363732,
+    "token_l2_variant_is_deployable": false,
+    "fit_norm_head_incremental_bytes": 341370737,
+    "fit_norm_head_added_parameters": 1729
+  },
+  "model_base_bytes": 272437465,
+  "model_without_layer8_mlp_bytes": 267128681,
+  "removed_native_mlp_tensors": {
+    "model.layers.8.mlp.down_proj.weight": {
+      "shape": [
+        576,
+        1536
+      ],
+      "dtype": "torch.bfloat16",
+      "bytes": 1769472
+    },
+    "model.layers.8.mlp.gate_proj.weight": {
+      "shape": [
+        1536,
+        576
+      ],
+      "dtype": "torch.bfloat16",
+      "bytes": 1769472
+    },
+    "model.layers.8.mlp.up_proj.weight": {
+      "shape": [
+        1536,
+        576
+      ],
+      "dtype": "torch.bfloat16",
+      "bytes": 1769472
+    }
+  },
+  "model_without_layer8_mlp_safetensors_bytes": 263751768,
+  "model_without_layer8_mlp_safetensors_sha256": "9fffcb4a7cfd7506ee23eeafa364eb6228462b0ee51daa0e2115df9f8e63776b",
+  "model_files": [
+    {
+      "path": "tokenizer.json",
+      "bytes": 2104556,
+      "sha256": "9ca9acddb6525a194ec8ac7a87f24fbba7232a9a15ffa1af0c1224fcd888e47c"
+    },
+    {
+      "path": "tokenizer_config.json",
+      "bytes": 3658,
+      "sha256": "4bb9af56a342753d39374f4016a16574cab299fe088e896f425ce3c433f61424"
+    },
+    {
+      "path": "model.safetensors",
+      "bytes": 269060552,
+      "sha256": "80521b40281d6ce74e35c9282c22539e75aa0ac8578892b2a59955ef78d55da1"
+    },
+    {
+      "path": "vocab.json",
+      "bytes": 800662,
+      "sha256": "82b84012e3add4d01d12ba14442026e49b8cbbaead1f79ecf3d919784f82dc79"
+    },
+    {
+      "path": "special_tokens_map.json",
+      "bytes": 831,
+      "sha256": "e786b595b9a23148bf1630df78d9037a048ea671e48bfd3549a1e3c233742bb3"
+    },
+    {
+      "path": "config.json",
+      "bytes": 704,
+      "sha256": "1d556eab73b69c7f11f64c557a2f9c6f440bd4c6b89bb2584a6b498c92603843"
+    },
+    {
+      "path": "merges.txt",
+      "bytes": 466391,
+      "sha256": "0b54e8aa4e53d5383e2e4bc635a56b43f9647f7b13832d5d9ecd8f82dac4f510"
+    },
+    {
+      "path": "generation_config.json",
+      "bytes": 111,
+      "sha256": "2056c988e990b0d13670f63f2f3b87b3b6d07edaf7a3416998ba27dab2d8a059"
+    }
+  ],
+  "transcoder_standalone_total_bytes": 608492205,
+  "method_incremental_bytes": {
+    "native_mlp": 0,
+    "skip_only": 1327223,
+    "transcoder_top128": 341363524,
+    "rank128_cross_covariance_svd": 592381,
+    "transcoder_global_rms_normalized": 341363732,
+    "transcoder_direction_plus_fit_norm_head": 341370737
+  },
+  "method_standalone_bytes": {
+    "native_mlp": 272437465,
+    "skip_only": 268455904,
+    "transcoder_top128": 608492205,
+    "rank128_cross_covariance_svd": 267721062,
+    "transcoder_global_rms_normalized": 608492413,
+    "transcoder_direction_plus_fit_norm_head": 608499418
+  },
+  "method_payload_sha256": {
+    "skip_only": "efa3cb09c9a99d4005bfbf3049010df0c902592c47a22fa7b026d61ab25ac63d",
+    "transcoder_top128": "07f811a32b7c0deb5cb15ad3f1e8529bb38265768eafba0713b3c208b4bc02e5",
+    "rank128_cross_covariance_svd": "7f60c16ccb092ca1382b2ec8243b9c187f46299c244a06e8c7f73e25e4e350a6",
+    "global_rms_scales": "295870c773793fd0c38bc6edcb16dd1034da37ac9707429d98f10f945f42c4e5",
+    "fit_norm_head": "16be1ccd3ac01bedd404a86b3d89380f868ca7190bbec9bed43897f0e8a21d30"
+  }
+}

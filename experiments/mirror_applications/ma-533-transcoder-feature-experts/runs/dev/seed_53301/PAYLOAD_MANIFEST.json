@@ -1,0 +1,78 @@
+{
+  "base_checkpoint_revision": "93efa2f097d58c2a74874c7e644dbc9b0cee75a2",
+  "native_full_base_bytes": 272437465,
+  "base_after_removing_layer8_mlp_bytes": 267128681,
+  "base_model_safetensors_bytes": 263751768,
+  "base_model_safetensors_sha256": "9fffcb4a7cfd7506ee23eeafa364eb6228462b0ee51daa0e2115df9f8e63776b",
+  "removed_native_mlp_tensors": {
+    "model.layers.8.mlp.down_proj.weight": {
+      "shape": [
+        576,
+        1536
+      ],
+      "dtype": "torch.bfloat16",
+      "bytes": 1769472
+    },
+    "model.layers.8.mlp.gate_proj.weight": {
+      "shape": [
+        1536,
+        576
+      ],
+      "dtype": "torch.bfloat16",
+      "bytes": 1769472
+    },
+    "model.layers.8.mlp.up_proj.weight": {
+      "shape": [
+        1536,
+        576
+      ],
+      "dtype": "torch.bfloat16",
+      "bytes": 1769472
+    }
+  },
+  "method_payloads": {
+    "transcoder_top128": {
+      "payload_bytes": 341363360,
+      "config_bytes": 164,
+      "incremental_bytes": 341363524,
+      "standalone_bytes": 608492205,
+      "sha256": "07f811a32b7c0deb5cb15ad3f1e8529bb38265768eafba0713b3c208b4bc02e5",
+      "tensor_count": 5
+    },
+    "skip_only": {
+      "payload_bytes": 1327184,
+      "config_bytes": 39,
+      "incremental_bytes": 1327223,
+      "standalone_bytes": 268455904,
+      "sha256": "efa3cb09c9a99d4005bfbf3049010df0c902592c47a22fa7b026d61ab25ac63d",
+      "tensor_count": 1
+    },
+    "rank128_cross_covariance_svd": {
+      "payload_bytes": 592344,
+      "config_bytes": 37,
+      "incremental_bytes": 592381,
+      "standalone_bytes": 267721062,
+      "sha256": "7f60c16ccb092ca1382b2ec8243b9c187f46299c244a06e8c7f73e25e4e350a6",
+      "tensor_count": 3
+    },
+    "transcoder_global_rms_normalized": {
+      "shared_transcoder_bytes": 341363524,
+      "extra_payload_bytes": 144,
+      "extra_config_bytes": 64,
+      "incremental_bytes": 341363732,
+      "standalone_bytes": 608492413,
+      "extra_payload_sha256": "295870c773793fd0c38bc6edcb16dd1034da37ac9707429d98f10f945f42c4e5",
+      "tensor_count_extra": 2
+    },
+    "transcoder_direction_plus_fit_norm_head": {
+      "shared_transcoder_bytes": 341363524,
+      "extra_payload_bytes": 7132,
+      "extra_config_bytes": 81,
+      "incremental_bytes": 341370737,
+      "standalone_bytes": 608499418,
+      "extra_payload_sha256": "16be1ccd3ac01bedd404a86b3d89380f868ca7190bbec9bed43897f0e8a21d30",
+      "tensor_count_extra": 3
+    }
+  },
+  "note": "Each state/config was serialized and reread; hashes/byte lengths recorded. Normalized methods reuse the full transcoder plus a small additional scale/head state. Large payloads removed after verification; token-L2 direction-only is not deployable."
+}

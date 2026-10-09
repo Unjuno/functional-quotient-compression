@@ -1,0 +1,1 @@
+INVALIDATED before interpretation: initial source used per-token input/output norm scaling and had W_skip orientation inconsistent with EleutherAI/sparsify. The corrected result is under ../dev/seed_53301. This record is retained only to disclose the implementation correction.

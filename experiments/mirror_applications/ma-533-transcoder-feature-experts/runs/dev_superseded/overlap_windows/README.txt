@@ -1,0 +1,1 @@
+SUPERSEDED, NOT FINAL EVIDENCE: these development runs sampled random token offsets and did not enforce non-overlap between fit/eval windows. They are preserved for provenance only. Amendment 8 changed to seeded unique 128-token blocks; the final evidence is runs/dev/seed_53301/summary.json.

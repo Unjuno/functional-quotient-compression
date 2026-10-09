@@ -1,19 +1,11 @@
 # MA-533 — Native skip-transcoder MLP approximation fidelity
 
-## H — Hypothesis
+**Result: FAIL under the preregistered raw-output gate.** On 2,048 held-out, non-overlapping Wikitext-2 train-token activation vectors, the pinned SmolLM2-135M layer-8 top-k=128 skip-transcoder had raw relative MSE 0.80601 and mean cosine 0.73807, missing gates <=0.10 and >=0.95. Fresh validation seeds stayed sealed.
 
-The released 128x top-k skip-transcoder for SmolLM2-135M layer 8 approximates the native MLP output on held-out natural text activations with relative MSE at most 0.10 and mean token cosine at least 0.95. This is a prerequisite screen for MA-534, not evidence of Mirror benefit or logical multiplicity.
+The tokenwise L2 direction diagnostic reaches relative MSE 0.08673/cosine 0.95616, but uses each target output norm and is not deployable. A fit-only linear output-norm head makes it deployable but raw MSE is 0.14862, still above gate. Fit-only global RMS normalization performs worse (MSE 3.392).
 
-## T — Protocol
+The closest simple control is a rank-128 affine map: raw MSE 0.81749, cosine 0.47964, at 592,381 incremental bytes. The raw transcoder is only 0.0115 MSE better but costs 341,363,524 bytes (576x the rank control) and 16.2x native-MLP MACs.
 
-The experiment uses the pinned public checkpoint `EleutherAI/skip-transcoder-SmolLM2-135M-128x` at revision `651f51421f2e1aa8fbd907e02ef421d3da55ff6d`, model `HuggingFaceTB/SmolLM2-135M`, layer 8, and deterministic 128-token windows from the Wikitext-2 training split. Sixteen windows fit a rank-128 linear cross-covariance SVD control; sixteen disjoint windows evaluate native MLP vs transcoder. Development is CPU-only, one thread, no gradient updates. Fresh seeds 53311–53312 stay sealed unless development passes.
+Actual standalone serialization removes the replaced native layer-8 MLP weights before charging the replacement: native model 272,437,465 B, rank-128 replacement 267,721,062 B, raw transcoder replacement 608,492,205 B. Transcoder CPU evaluation took 3.320s vs native MLP 0.158s over 2,048 vectors.
 
-Controls are native MLP target, transcoder skip-only, native top-128 transcoder and rank-128 linear low-rank control. Exact safetensors and config byte lengths are recorded; base-model files are charged for standalone deployment. Active top-k, token count, wall time, and MAC proxy are reported.
-
-## Current result
-
-SCREENING; protocol/source are being frozen before data evaluation.
-
-## Scope
-
-A successful screen validates one released transcoder checkpoint/layer only. MA-534 must still show functional-role quality over plain sparse feature gating and strong low-rank/gating controls.
+See [protocol](PROTOCOL.json), [status](STATUS.md), [results](RESULTS_CORE.csv), and [verification](VERIFICATION.json).
