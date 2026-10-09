@@ -1,0 +1,123 @@
+{
+  "experiment_id": "MA-526",
+  "title": "Represent relation function vectors with shared pretrained SAE atoms",
+  "status": "SCREENING",
+  "evidence_lane": "SAE_FEATURE_STEERING/SPARSE_FUNCTION_CODES/QUALITY/ACTUAL_BYTES/ATTRIBUTION",
+  "base_commit": "b1938e3a0813c9e6d448f01081b2cdc2141074ff",
+  "hypothesis": "On four held-out relation tasks in pinned Pythia-70m, selecting an SAE atom pool of 64 features from task IDs 0-11 and representing each task FV with eight signed sparse coefficients will preserve explicit-FV causal quality within .10 gold-logprob nats and .05 accuracy, use <=0.50x the explicit-FV incremental payload, and beat both native SAE top-8 activation and global-dictionary OMP-8 by >=.10 nats in both dev seeds.",
+  "physical_object": "Pinned Pythia-70m plus pretrained tied SAE dictionary with 2048 atoms over the layer-3 residual stream (512 dimensions).",
+  "mirror_coordinate": "A shared 64-feature atom pool selected from fit-task SAE activations plus eight signed coefficients/indices per function.",
+  "logical_multiplicity": "Sixteen support-derived relation function interventions represented over shared SAE atoms; task IDs 12-15 are held out from pool selection.",
+  "prior_art_refs": [
+    "PA102"
+  ],
+  "task": {
+    "type": "pretrained causal-LM relation recall with residual-stream interventions",
+    "model": "EleutherAI/pythia-70m-deduped",
+    "revision": "e93a9faa9c77e5d09219f6c868bfc7a1bd65593c",
+    "model_weight_sha256": "3da388330e4549156d76b58d6d268c63cd005e9336b4f4d2d378421e7b7a33fd",
+    "sae_repo": "Elriggs/pythia-70M-deduped-sae",
+    "sae_revision": "36c2027509efad69836aa4231999c9b717848ecd",
+    "sae_file": "pythia-70m-deduped_r4_gpt_neox.layers.3.pt",
+    "sae_sha256": "85b57dfe34d19769e2df0e208e38fda8815da8493c56b703a99ff74cc610dbf4",
+    "sae_bytes": 4204391,
+    "sae_shape": "tied encoder [2048,512] with 2048 encoder biases; decoder atoms are encoder rows",
+    "hook": "MA-516 layer output 4 / GPT-NeoX layer 3 output",
+    "data_and_fv_extraction": "Frozen MA-516 tasks, support/evaluation splits, and layer-4 function-vector extraction.",
+    "fit_task_ids": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "heldout_task_ids": [
+      12,
+      13,
+      14,
+      15
+    ],
+    "support_examples_per_task": 8,
+    "heldout_queries_per_task": 8,
+    "primary_metric": "mean held-out gold candidate log probability on tasks 12-15",
+    "secondary_metrics": [
+      "held-out top-1 accuracy",
+      "gold margin",
+      "FV reconstruction cosine and RMSE",
+      "sparse feature count",
+      "actual code payload bytes",
+      "SAE total deployment bytes",
+      "operation proxy and inference time"
+    ]
+  },
+  "mirror_method": {
+    "pool_selection": "For each of the 12 fit-task teacher FVs, compute ReLU(v @ W.T + bias); sum activations over fit tasks; select the 64 largest aggregate-activation feature IDs. Held-out teacher FVs never select pool atoms.",
+    "encoding": "For each task teacher vector, run eight-step signed matching pursuit over the selected 64 normalized SAE decoder atoms. Store eight within-pool uint8 IDs and eight FP32 coefficients.",
+    "decoding": "Sum the eight chosen coefficients times their selected original SAE decoder atoms. No reconstructed vector is cached.",
+    "sparse_budget": 8,
+    "optimizer_updates": 0
+  },
+  "controls": [
+    "No intervention",
+    "Explicit support-derived FP32 FV bank",
+    "Native SAE encoder activations: top eight positive feature activations and tied decoder reconstruction",
+    "Global-dictionary signed matching pursuit with eight atoms over all 2048 SAE features",
+    "Mirror shared-pool 64-atom signed matching pursuit with eight atoms"
+  ],
+  "development": {
+    "seeds": [
+      52601,
+      52602
+    ],
+    "selection": "No task, layer, pool-size, sparse-budget or scale tuning; fixed 64 pool atoms and 8 coefficients.",
+    "optimizer_updates": 0,
+    "changes_after_run": "prohibited without numbered amendment"
+  },
+  "fresh": {
+    "seeds": [
+      52611,
+      52612,
+      52613
+    ],
+    "locked_before_access": true,
+    "opened": false,
+    "opening_rule": "Open only if both dev seeds preserve explicit-FV causal quality, meet the incremental byte cap, and beat both native SAE top-eight and global OMP by the frozen margin."
+  },
+  "storage": {
+    "authority": "actual uncompressed NPZ inference payload bytes",
+    "paid_objects": [
+      "selected SAE feature IDs",
+      "per-task coefficient indices and FP32 values",
+      "explicit FV control vectors",
+      "native SAE activation feature indices and values",
+      "model/layer/revision/dtype/schema metadata",
+      "the full pretrained SAE artifact when computing standalone deployment bytes"
+    ],
+    "common_base": "Report both incremental codes on top of a preloaded SAE system and standalone Pythia+SAE+code deployment bytes. Compare standalone total against Pythia+explicit-FV total; the SAE is not free in the standalone system.",
+    "reconstruction": "No per-task reconstructed residual vector is stored or cached."
+  },
+  "compute": {
+    "hardware": "CPU, fixed five-thread limit, no GPU",
+    "report_support_and_query_tokens": true,
+    "active_compute_proxy": "report SAE encoding operations for pool selection, eight-step pursuit dot products/subtractions, sparse decode multiplies, residual adds, and transformer candidate sequences",
+    "wall_clock": "separate FV extraction, SAE pool selection/coding, and held-out query evaluation"
+  },
+  "gates": {
+    "PASS": "In both dev seeds, shared-pool reconstruction is within .05 accuracy and .10 mean gold-logprob nats of explicit FVs; incremental code payload <=0.50x explicit-FV bank bytes; and causal gold-logprob exceeds both native top-8 SAE and global OMP-8 by >=.10 nats.",
+    "FAIL": "Any frozen causal-quality, incremental-byte, or native-control attribution gate is missed. Report standalone SAE+code total even if incremental code is small.",
+    "NOT_ESTABLISHED": "External SAE/model hash, task split, or deterministic replay fails."
+  },
+  "boundaries": [
+    "A single pretrained 4x SAE on one 70M model and four held-out constrained relation tasks; not a broad SAE steering benchmark.",
+    "SAE dictionary bytes are charged in standalone deployment and shared only in the incremental SAE-system comparison.",
+    "SAE sparse coding is an ordinary native baseline; a matching sparse representation is not Mirror-specific evidence.",
+    "Fresh seeds remain unopened unless all frozen gates pass."
+  ]
+}
