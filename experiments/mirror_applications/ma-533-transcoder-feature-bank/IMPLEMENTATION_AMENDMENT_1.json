@@ -1,0 +1,10 @@
+{
+  "experiment_id": "MA-533",
+  "protocol_sha256_unchanged": "29208e278d9d5573fe17979b0125ca6ace6d689e1d2afe9243d41d4c63d12671",
+  "stage": "post-development accounting correction before finalization",
+  "issue": "The global SAE OMP control serialized the full SAE decoder matrix inside its NPZ and also charged the pinned SAE checkpoint, double-counting the same dictionary bytes.",
+  "repair": "The global SAE control NPZ now stores only sparse IDs, coefficients and metadata; its complete dictionary is paid once as the pinned SAE checkpoint. Its full deployment bytes include model + SAE checkpoint + sparse-code payload.",
+  "preserved_pre_amendment_evidence": "metrics.json and SHA-256 hashes for all five seed payloads are preserved under pre_amendment_1/seed_53301 and seed_53302. Initial byte totals are superseded; model quality was unchanged.",
+  "rerun": "Both development seeds rerun with corrected serialization/accounting before final decision. Fresh seeds were not accessed.",
+  "hypothesis_or_gate_changed": false
+}
