@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-341.** MA-332 and MA-333 consecutively found the same symmetry limitation: gauge Views do not add functions and paid addresses add bytes. The weight-symmetry family is paused pending a concrete coordinate consumer or useful non-gauge task result. Diagnostic: `docs/phase2/MA332_333_WEIGHT_SYMMETRY_FAMILY_DIAGNOSTIC.md`. Continue with MA-341, federated personalization.
+**Current operational pointer (2026-10-09): MA-342.** The weight-symmetry family is paused after MA-332/333. MA-341 phase codes beat a pFedHN-style generator in payload size on planted circular clients, but a generic coefficient code was only 7.2% larger at identical quality, below the frozen Mirror-specific gate. Continue to MA-342, HyperLoRA generator outputs Mirror code.
 
 # Worker queue
 

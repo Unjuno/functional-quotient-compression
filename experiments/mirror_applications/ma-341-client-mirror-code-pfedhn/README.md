@@ -23,3 +23,24 @@ Input dimension 8, output dimension 4, 16 seen training clients and 8 held-out c
 ## C / U
 
 The teacher is intentionally aligned to a two-direction circular orbit. Results cannot establish natural federated personalization. No client privacy, non-IID distribution shift, communication protocol or real federated hardware is tested.
+
+
+## Results
+
+**H:** phase-coded shared basis may generalize to held-out client phases more compactly than a pFedHN-style model generator; a direct coefficient control determines whether the gain is Mirror-specific.
+
+**T:** three fresh worlds, 16 seen clients × 64 training examples and 8 held-out midpoint clients × 256 test examples. Each task is a linear predictor on a planted circular rank-2 orbit. Mirror, direct coefficient basis, pFedHN-style 2→32→32 generator and single shared predictor each received 1,000 Adam updates; the independent reference used held-out support data by least squares. Client phase/descriptor bytes are included.
+
+**D — FAIL for Mirror-specific gain:** fresh mean held-out MSE: Mirror 1.016e-4 at 516 B; generic two-coefficient basis 1.016e-4 at 556 B; pFedHN-style generator 1.184e-4 at 4,783 B; shared single predictor .2696 at 281 B; independent support-fit 1.130e-4 at 1,124 B. Mirror uses 89.2% fewer payload bytes than this pFedHN-style generator, but only 7.2% fewer bytes than the functionally identical coefficient control, missing the preregistered 10% threshold. Mean training wall time was .371 s Mirror, .351 s generic coefficients, .415 s hypernetwork.
+
+**C:** all tasks are deliberately planted on the same circular rank-2 orbit, which favors the phase and coefficient basis. The hypernetwork is a small synthetic pFedHN-style MLP, not a reproduced federated system.
+
+**U:** natural client heterogeneity, local training/communication rounds, privacy, robustness, distribution shift and real federated datasets are untested.
+
+### Fact / interpretation / hypothesis
+
+**Fact:** 15 fresh rows across three worlds. Metric and payload hash replay difference is zero; two tests pass.
+
+**Interpretation:** the structured client code is compact versus full model generation, but its marginal advantage over direct coefficients is too small to call Mirror-specific under the fixed gate.
+
+**Hypothesis:** on natural clients, private residuals or a native conditional hypernetwork may erase the phase basis advantage; this synthetic orbit provides no evidence either way.

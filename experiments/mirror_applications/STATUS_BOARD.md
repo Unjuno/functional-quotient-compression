@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (87 completed; 543 UNTESTED)
+- P0: **630** (88 completed; 542 UNTESTED)
 - P1: **422** (13 completed; 409 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1053 UNTESTED, 44 PROMISING, 58 FAIL**
+- Current MA statuses: **1052 UNTESTED, 44 PROMISING, 59 FAIL**
 - 68 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -84,11 +84,19 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 - **FAIL for general sign/scale functional multiplicity:** fresh permutation is exact across ReLU, GELU, tanh and LayerNorm+ReLU. Positive scaling is exact only for ReLU; sign flip is exact only for tanh. GELU and LayerNorm+ReLU break those nonmatching transforms. Exact gauge codes cost 83–147 B; changed functions have no task-utility evidence. Synthetic MLP only.
 
+## Paused family: Weight symmetry / group actions
+
+MA-332 and MA-333 consecutively found that gauge Views add no function and paid addresses add bytes. This family is paused under the stop rule; see [family diagnostic](../../docs/phase2/MA332_333_WEIGHT_SYMMETRY_FAMILY_DIAGNOSTIC.md).
+
+## Completed: MA-341 — client Mirror code vs pFedHN
+
+- **FAIL for Mirror-specific byte gate:** fresh synthetic held-out MSE: Mirror 516 B / 1.016e-4; pFedHN-style generator 4,783 B / 1.184e-4; direct coefficient basis 556 B / 1.016e-4. Mirror saves 89.2% vs the generator but only 7.2% vs the simple coefficient control. No natural federated or privacy evidence.
+
 ## Next candidate
 
-**MA-334 — canonical-orbit storage + Mirror address (P1)**
+**MA-342 — HyperLoRA generator outputs Mirror code (P0)**
 
-MA-332 and MA-333 consecutively found that gauge Views add no function and paid addresses add bytes. The weight-symmetry family is paused under the stop rule; see [family diagnostic](../../docs/phase2/MA332_333_WEIGHT_SYMMETRY_FAMILY_DIAGNOSTIC.md). Continue with **MA-341 — federated personalization Mirror code vs pFedHN full-model generation (P0)**.
+Test whether a trained client-conditioned generator can output a compact code instead of a full adapter.
 
 ## Active experiment
 
