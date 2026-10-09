@@ -1,0 +1,71 @@
+{
+  "experiment_id": "MA-540",
+  "title": "Sequential function-vector executor over a shared recurrent block",
+  "status": "SCREENING",
+  "evidence_lane": "ORDERED_FUNCTION_EXECUTION/GENERALIZATION/ACTUAL_BYTES/COMPUTE",
+  "base_commit": "c0d474a2",
+  "hypothesis": "For a learnable noncommutative operator family, applying a support-extracted function vector at each step of one shared transition block will execute held-out ordered operator pairs with high exact accuracy and preserve ordered intermediate states, while matching a same-width native learned operator-code control at <=90% of its actual serialized inference bytes.",
+  "physical_object": "One shared state transition block recurrently applied twice.",
+  "mirror_coordinate": "A support-extracted 16-dimensional function vector for each operator, addressed in the order requested by the two-step program and supplied to the same recurrent block at each step.",
+  "logical_multiplicity": "Eight logical operators and held-out ordered two-operator programs executed by one physical transition block.",
+  "prior_art_refs": ["PA99", "PA72", "SRM003"],
+  "task": {
+    "type": "synthetic affine bijections over four-bit states",
+    "worlds": "Eight random invertible GF(2) affine maps x -> A x XOR b per world, with operator maps and pair programs generated from world seed.",
+    "state_count": 16,
+    "operators_per_world": 8,
+    "support_examples_per_operator": 8,
+    "program": "Two ordered operator applications; f_second(f_first(x)).",
+    "training_examples": "All 8*16 atomic mappings and all 12 non-held-out ordered operator pairs on all 16 input states.",
+    "heldout_pairs": [[0, 1], [1, 0], [2, 3], [3, 2]],
+    "evaluation": "All 16 start states for each of four held-out ordered pairs; additionally audit all atomic maps and intermediate-state correctness.",
+    "support_query_boundary": "The per-operator support pair sets are extraction inputs. Held-out composition targets are never used for code extraction, training or model selection."
+  },
+  "methods": [
+    "support-extracted FV with one tied recurrent transition block (candidate)",
+    "same-width directly learned native operator-code bank with one tied recurrent block (strong simple control)",
+    "support-extracted FV with a one-shot two-operator decoder and no explicit state passing",
+    "native operator codes with untied depth-specific transition blocks (independent-depth upper control)",
+    "external two-call execution of the candidate's shared transition block, feeding the predicted first intermediate into the second call",
+    "exact stored operator lookup tables (quality upper; complete tables charged)"
+  ],
+  "development": {
+    "worlds": [54001, 54002],
+    "training_updates": 2500,
+    "batch_size": 64,
+    "optimizer": "AdamW",
+    "learning_rate": 0.002,
+    "weight_decay": 0.0001,
+    "training_loss": "Endpoint cross entropy for atomic and ordered pair examples; no oracle intermediate-state labels or recurrent data augmentation.",
+    "sampling": "Paired deterministic minibatch stream; equal atomic and pair example probability, fixed by world seed and update index.",
+    "selection_metric": "No tuning or selection; one fixed configuration.",
+    "settings_frozen_before_run": true
+  },
+  "fresh": {
+    "worlds": [54011, 54012, 54013],
+    "locked_before_access": true,
+    "access_condition": "Open only if both development worlds have FV held-out pair exact accuracy >=90%, intermediate-valid path rate >=90%, FV accuracy no more than 5 percentage points below the native-code tied control, and actual FV inference payload <=0.90x that control."
+  },
+  "metrics": {
+    "primary": ["held-out ordered-pair exact accuracy", "intermediate-valid path rate"],
+    "secondary": ["atomic exact accuracy", "held-out token NLL", "reversed-order audit accuracy", "actual serialized inference payload bytes", "active MAC proxy", "fit wall time", "internal unroll vs external two-call latency"]
+  },
+  "storage": {
+    "authority": "Actual uncompressed deterministic NPZ inference payload bytes plus canonical configuration, with all state needed by each method included.",
+    "paid_objects": ["shared transition weights", "operator-code extractor and support examples for FV at inference", "precomputed function vectors if cached", "native operator code bank for the control", "state and step embeddings", "depth-specific blocks for untied control", "exact operator tables for upper control", "all method metadata and code ordering"],
+    "common_state_charged_once": true
+  },
+  "compute": {
+    "hardware": "CPU, one intra-op thread",
+    "report_examples_and_support_pairs": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true,
+    "runtime": "Measure batch-1 internal two-step unroll and external two-call execution separately; exclude compilation and warm up consistently."
+  },
+  "success_gate": "On every fresh world, FV held-out ordered-pair exact accuracy >=90%, intermediate-valid path >=90%, within 5 percentage points of native-code tied control, and serialized FV payload <=0.90x native-code control. Report external two-call results separately; no capacity claim from operator count.",
+  "failure_gate": "Either development world misses a quality threshold or FV payload exceeds 0.90x native-code tied control; fresh remains sealed.",
+  "boundaries": ["Synthetic algebraic function family only; no natural-language result.", "Support extraction and the code retrieval address are charged; support/query composition targets remain disjoint.", "A sequential unroll is not parallel token generation and may add inference compute.", "A direct lookup table is an upper reference, not a learned-FV result.", "A pass would establish only this bounded synthetic execution mechanism, not independent capacity."],
+  "frozen_at": "2026-10-09",
+  "amendments": []
+}
