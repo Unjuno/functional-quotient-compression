@@ -1,1 +1,24 @@
-{"experiment_id":"MA-589","commit":null,"tests":{"command":null,"passed":null,"failed":null},"serialization":{"roundtrip_checked":false,"byte_exact":false},"metric_replay":{"checked":false,"max_difference":null},"fresh_split_integrity_checked":false,"notes":[]}
+{
+  "experiment_id": "MA-589",
+  "commit": null,
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-589-prefix-bank-mirror-basis/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "58901 same-seed replay reproduced every method NLL and serialized cache byte count exactly; timings excluded.",
+    "Mirror and native shared-residual cache archives are byte-identical in both registered dev seeds.",
+    "All serialized NPZ arrays reopen successfully; fresh test SHA-256 was checked but no test tokens were loaded.",
+    "Initial seed 58901 crash is excluded; Amendment 1 fixed basis indexing before the registered run was retained."
+  ]
+}

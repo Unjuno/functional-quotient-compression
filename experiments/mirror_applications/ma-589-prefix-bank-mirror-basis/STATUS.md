@@ -1,17 +1,18 @@
 # MA-589 status
 
-- Status: SCREENING
+- Status: FAIL
 - Branch: `research/ma-589-prefix-bank-mirror-basis-20261009`
 - Base commit: `f6bdb727`
-- Development complete: no
-- Fresh/audit opened: no
-- Results committed: no
-- Verification committed: no
-- Registry row updated: yes (SCREENING)
+- Source/protocol frozen and amended before registered dev; see `FREEZE.json` and `AMENDMENTS.md`.
+- Development complete: yes (58901/58902; same-seed replay exact for core metrics)
+- Fresh/audit opened: no (quality and native-alias gates failed)
+- Results committed: pending
+- Verification committed: pending
+- Registry row updated: pending
 
 ## Next action
 
-Freeze source and protocol, then run registered development seeds 58901 and 58902.
+Commit verified FAIL and continue with next P0, MA-591.
 
 ## Blockers
 
@@ -19,4 +20,4 @@ None.
 
 ## Decisions / rulings
 
-This screen measures text-derived KV prefix-cache compression, not training continuous Prefix-Tuning parameters. The limitation is preregistered in the protocol.
+This experiment measures text-derived KV prefix-cache compression, not trained continuous Prefix-Tuning. The first failed seed invocation is excluded; one source amendment corrected nested basis indexing before registered results were retained.

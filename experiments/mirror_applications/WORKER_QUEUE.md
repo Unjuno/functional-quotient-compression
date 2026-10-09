@@ -494,3 +494,6 @@ MA-581 is closed **FAIL** on `research/ma-581-mla-mirror-head-reconstruction-202
 
 
 MA-582 is closed **FAIL** on `research/ma-582-mla-layer-mirror-reconstruction-20261009`: group-shared rank128 MLA saves 44.4% versus per-layer MLA at eight sessions, but NLL degrades +2.255/+1.964 nat/token; the rank4 layer View is unstable and exactly aliases the native group residual representation. Same-seed replay matched core metrics, fresh sealed. MA-583, MA-585 and MA-586 remain UNTESTED but are paused under `docs/phase2/MLA_KV_LATENT_FAMILY_DIAGNOSTIC_2026-10-09.md`. Next executable P0 outside that family: MA-589 prefix bank compressed by Mirror basis (PA116).
+
+
+MA-589 is closed **FAIL** on `research/ma-589-prefix-bank-mirror-basis-20261009`: 16-context text KV prefix state drops from 12,595,424 B FP16 to 4,012,226 B, but NLL misses +0.05 by +0.150/+0.334 nat/token and the shared residual payload exactly aliases native coding. This tests KV context-cache compression, not learned Prefix-Tuning. Same-seed replay exact; fresh sealed. Next P0: MA-591 soft prompt Mirror codebook (PA117).
