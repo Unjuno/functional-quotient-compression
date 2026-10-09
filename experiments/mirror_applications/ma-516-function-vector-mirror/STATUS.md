@@ -6,7 +6,7 @@
 - Model: pinned GPT-2, CPU float32; model/tokenizer provenance is recorded separately
 - Development complete: yes; PCA basis fitted on worlds 51600/51601 × seeds 0-2
 - Fresh opened: no; locked worlds 51610-51612 × seeds 0-2
-- Protocol/source freeze commit: pending
+- Protocol/source freeze commit: `529558be`
 
 ## Next action
 
