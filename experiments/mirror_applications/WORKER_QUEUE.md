@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-397.** MA-395 latent Mirror recovered held-out ALBERT-style domain embeddings at near-zero NRMSE, versus .003-.015 dense and .30-.32 hard/FiLM, but total payload was 81.3% of dense (frozen limit <=80%). Fresh remained sealed. Proceed to MA-397, product-address Mirror vocabulary (P0); MA-394 is P1.
+**Current operational pointer (2026-10-09): MA-399.** MA-397 created distinct outputs for tokens sharing product addresses and compressed payload to 11.25% of full/64.9% of direct coefficients, but Mirror NRMSE .131/.136 and pair-separation error .128/.128 failed the frozen quality gates. Fresh remained sealed. Proceed to MA-399, MatFormer speculative drafter via View (P0).
 
 # Worker queue
 
