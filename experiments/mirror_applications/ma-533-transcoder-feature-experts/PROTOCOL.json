@@ -66,7 +66,8 @@
       "base model",
       "native MLP layer weights",
       "transcoder encoder/decoder/bias/skip matrices",
-      "config and metadata"
+      "config and metadata",
+      "method-specific serialized state and config for each control; report per-method incremental and standalone payload"
     ],
     "shared_base_model_charged_once": true
   },
@@ -98,6 +99,10 @@
     {
       "id": "amendment-3",
       "before_metric_rerun": "Audit found initial compute proxy counted sparse decoder MACs but omitted dense encoder and skip-connection MACs; it also timed full-model capture but not isolated sublayer inference. Final source reports all three operation proxies and isolated native/transcoder layer timings. Fidelity metric formula and split are unchanged."
+    },
+    {
+      "id": "amendment-4",
+      "before_final_result": "The previous control byte column incorrectly reused transcoder bytes for skip-only and rank-128 controls. Each method now has its own serialized safetensors state and method config; both incremental and standalone payload sizes/hashes are reported. The quality metrics and data split are unchanged."
     }
   ]
 }

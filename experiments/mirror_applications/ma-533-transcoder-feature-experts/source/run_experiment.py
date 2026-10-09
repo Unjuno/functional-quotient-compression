@@ -108,6 +108,9 @@ def main():
   if p.is_file(): model_bytes+=p.stat().st_size; files.append({'path':str(p.relative_to(snap)),'bytes':p.stat().st_size,'sha256':sha(p)})
  summary['model_base_bytes']=model_bytes; summary['model_files']=files
  summary['transcoder_standalone_total_bytes']=model_bytes+payload_bytes+cfg_bytes
+ summary['method_incremental_bytes']={'native_mlp':0,'skip_only':skip_bytes,'transcoder_top128':payload_bytes+cfg_bytes,'rank128_cross_covariance_svd':rank_bytes}
+ summary['method_standalone_bytes']={'native_mlp':model_bytes,'skip_only':model_bytes+skip_bytes,'transcoder_top128':model_bytes+payload_bytes+cfg_bytes,'rank128_cross_covariance_svd':model_bytes+rank_bytes}
+ summary['method_payload_sha256']={'skip_only':sha(skip_payload),'transcoder_top128':sha(payload),'rank128_cross_covariance_svd':sha(rank_payload)}
  (out/'summary.json').write_text(json.dumps(summary,indent=2)+'\n')
  print(json.dumps(summary,indent=2))
 if __name__=='__main__': main()
