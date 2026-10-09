@@ -1,0 +1,10 @@
+{
+  "experiment_id": "MA-520",
+  "amendment": 1,
+  "frozen_development_already_seen": true,
+  "reason": "The shared result emitter accidentally labeled the explicit_fp32 inference control as 2,000 optimizer updates and charged it the learner training operation proxy. The protocol and model outputs were unchanged.",
+  "scope": "Reporting/accounting correction only. explicit_fp32 optimizer_updates corrected from 2000 to 0; the learned decoder retains exactly 2000 updates. Quality targets, model, task splits, fit method, controls, acceptance thresholds, and seeds are unchanged.",
+  "preservation": "All initial development output, payloads, and metrics are preserved under runs/pre_amendment_1_explicit_update_counter/. The same registered development seeds are rerun into runs/dev_52001 and runs/dev_52002.",
+  "corrected_source_sha256": "9ed71f99ce8845a5e7922c489b90349f9c8652b287e78821fc528272ce6f32e6",
+  "fresh_accessed": false
+}

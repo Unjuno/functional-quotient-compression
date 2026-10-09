@@ -1,0 +1,347 @@
+{
+  "common_base_bytes": 168144624,
+  "decoder_fit_task_ids": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+  ],
+  "dimension": 512,
+  "experiment_id": "MA-520",
+  "extraction_seconds": 11.076229348982451,
+  "heldout_task_ids": [
+    12,
+    13,
+    14,
+    15
+  ],
+  "model": "EleutherAI/pythia-70m-deduped",
+  "model_sha256": "3da388330e4549156d76b58d6d268c63cd005e9336b4f4d2d378421e7b7a33fd",
+  "revision": "e93a9faa9c77e5d09219f6c868bfc7a1bd65593c",
+  "rows": [
+    {
+      "active_compute_proxy": 0,
+      "code_assignment_seconds": 0.0,
+      "common_base_bytes": 168144624,
+      "extraction_seconds": 11.076229348982451,
+      "fit_seconds": 0.0,
+      "inference_seconds": 2.3023361779924016,
+      "method": "none",
+      "metrics": {
+        "by_task": [
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -16.154897838830948,
+            "mean_gold_margin": -3.423923045396805,
+            "name": "english_french",
+            "task_id": 12
+          },
+          {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -10.227493822574615,
+            "mean_gold_margin": -2.0083922743797302,
+            "name": "french_english",
+            "task_id": 13
+          },
+          {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -15.338669255375862,
+            "mean_gold_margin": -4.107122614979744,
+            "name": "english_spanish",
+            "task_id": 14
+          },
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -10.081670761108398,
+            "mean_gold_margin": -2.1512756943702698,
+            "name": "spanish_english",
+            "task_id": 15
+          }
+        ],
+        "candidate_forward_calls": 256,
+        "candidate_input_tokens": 2024,
+        "candidate_sequences": 256,
+        "heldout_accuracy": 0.1875,
+        "mean_gold_candidate_logprob": -12.950682919472456,
+        "mean_gold_vs_best_negative_margin": -2.922678407281637,
+        "queries": 32
+      },
+      "optimizer_updates": 0,
+      "payload_bytes": 0,
+      "rank": 0,
+      "seed": 52002,
+      "support_examples": 128,
+      "support_forward_calls": 256,
+      "support_input_tokens": 9397,
+      "total_deployment_bytes": 168144624,
+      "vector_metrics": {}
+    },
+    {
+      "active_compute_proxy": 49283072,
+      "code_assignment_seconds": 0.0,
+      "common_base_bytes": 168144624,
+      "extraction_seconds": 11.076229348982451,
+      "fit_seconds": 0.0,
+      "inference_seconds": 1.9945629030116834,
+      "method": "explicit_fp32",
+      "metrics": {
+        "by_task": [
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -13.027402192354202,
+            "mean_gold_margin": -2.9619562327861786,
+            "name": "english_french",
+            "task_id": 12
+          },
+          {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -7.133887350559235,
+            "mean_gold_margin": -1.1039124727249146,
+            "name": "french_english",
+            "task_id": 13
+          },
+          {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -12.371511623263359,
+            "mean_gold_margin": -4.501178786158562,
+            "name": "english_spanish",
+            "task_id": 14
+          },
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -7.547466695308685,
+            "mean_gold_margin": -1.7328034043312073,
+            "name": "spanish_english",
+            "task_id": 15
+          }
+        ],
+        "candidate_forward_calls": 256,
+        "candidate_input_tokens": 2024,
+        "candidate_sequences": 256,
+        "heldout_accuracy": 0.1875,
+        "mean_gold_candidate_logprob": -10.02006696537137,
+        "mean_gold_vs_best_negative_margin": -2.5749627240002155,
+        "queries": 32
+      },
+      "optimizer_updates": 1,
+      "payload_bytes": 34454,
+      "rank": 0,
+      "seed": 52002,
+      "support_examples": 128,
+      "support_forward_calls": 256,
+      "support_input_tokens": 9397,
+      "total_deployment_bytes": 168179078,
+      "vector_metrics": {}
+    },
+    {
+      "active_compute_proxy": 131072,
+      "code_assignment_seconds": 0.0,
+      "common_base_bytes": 168144624,
+      "extraction_seconds": 11.076229348982451,
+      "fit_seconds": 0.0,
+      "inference_seconds": 2.556448557996191,
+      "method": "explicit_int8",
+      "metrics": {
+        "by_task": [
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -13.02483144402504,
+            "mean_gold_margin": -2.974415570497513,
+            "name": "english_french",
+            "task_id": 12
+          },
+          {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -7.11944454908371,
+            "mean_gold_margin": -1.0918273329734802,
+            "name": "french_english",
+            "task_id": 13
+          },
+          {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -12.380538538098335,
+            "mean_gold_margin": -4.501401677727699,
+            "name": "english_spanish",
+            "task_id": 14
+          },
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -7.554487586021423,
+            "mean_gold_margin": -1.743988037109375,
+            "name": "spanish_english",
+            "task_id": 15
+          }
+        ],
+        "candidate_forward_calls": 256,
+        "candidate_input_tokens": 2024,
+        "candidate_sequences": 256,
+        "heldout_accuracy": 0.1875,
+        "mean_gold_candidate_logprob": -10.019825529307127,
+        "mean_gold_vs_best_negative_margin": -2.577908154577017,
+        "queries": 32
+      },
+      "optimizer_updates": 0,
+      "payload_bytes": 10188,
+      "rank": 0,
+      "seed": 52002,
+      "support_examples": 128,
+      "support_forward_calls": 256,
+      "support_input_tokens": 9397,
+      "total_deployment_bytes": 168154812,
+      "vector_metrics": {
+        "heldout_cosine_mean": 0.9998806497099016,
+        "heldout_cosine_min": 0.9998428672542822,
+        "heldout_relative_rmse": 0.015452208159209299
+      }
+    },
+    {
+      "active_compute_proxy": 139264,
+      "code_assignment_seconds": 0.0,
+      "common_base_bytes": 168144624,
+      "extraction_seconds": 11.076229348982451,
+      "fit_seconds": 0.0010489120031706989,
+      "inference_seconds": 2.6262491300003603,
+      "method": "native_pca_r4",
+      "metrics": {
+        "by_task": [
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -13.595104664564133,
+            "mean_gold_margin": -3.268049269914627,
+            "name": "english_french",
+            "task_id": 12
+          },
+          {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -8.091231524944305,
+            "mean_gold_margin": -1.6385193467140198,
+            "name": "french_english",
+            "task_id": 13
+          },
+          {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -12.965445473790169,
+            "mean_gold_margin": -4.258197501301765,
+            "name": "english_spanish",
+            "task_id": 14
+          },
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -8.865836679935455,
+            "mean_gold_margin": -2.2126464247703552,
+            "name": "spanish_english",
+            "task_id": 15
+          }
+        ],
+        "candidate_forward_calls": 256,
+        "candidate_input_tokens": 2024,
+        "candidate_sequences": 256,
+        "heldout_accuracy": 0.1875,
+        "mean_gold_candidate_logprob": -10.879404585808516,
+        "mean_gold_vs_best_negative_margin": -2.844353135675192,
+        "queries": 32
+      },
+      "optimizer_updates": 0,
+      "payload_bytes": 12692,
+      "rank": 4,
+      "seed": 52002,
+      "support_examples": 128,
+      "support_forward_calls": 256,
+      "support_input_tokens": 9397,
+      "total_deployment_bytes": 168157316,
+      "vector_metrics": {
+        "heldout_cosine_mean": 0.8607690900159453,
+        "heldout_cosine_min": 0.8513271930809596,
+        "heldout_relative_rmse": 0.5170036650669796
+      }
+    },
+    {
+      "active_compute_proxy": 49291264,
+      "code_assignment_seconds": 0.0004111599992029369,
+      "common_base_bytes": 168144624,
+      "extraction_seconds": 11.076229348982451,
+      "fit_seconds": 1.1351932639954612,
+      "inference_seconds": 2.5307468849932775,
+      "method": "mirror_learned_r4",
+      "metrics": {
+        "by_task": [
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -13.595405220985413,
+            "mean_gold_margin": -3.2675400376319885,
+            "name": "english_french",
+            "task_id": 12
+          },
+          {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -8.092020094394684,
+            "mean_gold_margin": -1.6393433809280396,
+            "name": "french_english",
+            "task_id": 13
+          },
+          {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -12.965552002191544,
+            "mean_gold_margin": -4.257770925760269,
+            "name": "english_spanish",
+            "task_id": 14
+          },
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -8.865151226520538,
+            "mean_gold_margin": -2.2123871445655823,
+            "name": "spanish_english",
+            "task_id": 15
+          }
+        ],
+        "candidate_forward_calls": 256,
+        "candidate_input_tokens": 2024,
+        "candidate_sequences": 256,
+        "heldout_accuracy": 0.1875,
+        "mean_gold_candidate_logprob": -10.879532136023045,
+        "mean_gold_vs_best_negative_margin": -2.84426037222147,
+        "queries": 32
+      },
+      "optimizer_updates": 2000,
+      "payload_bytes": 12692,
+      "rank": 4,
+      "seed": 52002,
+      "support_examples": 128,
+      "support_forward_calls": 256,
+      "support_input_tokens": 9397,
+      "total_deployment_bytes": 168157316,
+      "vector_metrics": {
+        "heldout_cosine_mean": 0.8607694595764953,
+        "heldout_cosine_min": 0.8513273008342656,
+        "heldout_relative_rmse": 0.5170028752381862
+      }
+    }
+  ],
+  "seed": 52002,
+  "task_ids": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ]
+}

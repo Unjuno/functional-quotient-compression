@@ -1,10 +1,51 @@
 {
   "experiment_id": "MA-520",
   "commit": null,
-  "tests": {"command": "PYTHONDONTWRITEBYTECODE=1 python -m pytest -q experiments/mirror_applications/ma-520-function-vector-distillation/tests", "passed": null, "failed": null},
-  "serialization": {"format": "uncompressed NPZ", "roundtrip_checked": false, "byte_exact": false},
-  "metric_replay": {"checked": false, "max_difference": null},
-  "fresh_split_integrity_checked": false,
+  "protocol_freeze_commit": "21dec52a72048558fa739785f618b02991c5441e",
+  "protocol_sha256": "645b27e667a394175e99c26a76c7156edab4dcbb02d9d20c9bdc2dba5f12a8cf",
+  "final_source_sha256": "9ed71f99ce8845a5e7922c489b90349f9c8652b287e78821fc528272ce6f32e6",
+  "shared_harness_sha256": "a6efcff225c4fea194ed86ce12903c2893412dffdc77674f1b3347a7df08bc88",
+  "amendments": [
+    {
+      "id": 1,
+      "file": "PROTOCOL_AMENDMENT_1.json",
+      "sha256": "ec0729690e770773659f5b1655ac91da99477a4df055f464ed0d18309ff9e98a",
+      "scope": "Corrected explicit FP32 control accounting from 2000 updates to zero; same seeds rerun and original outputs retained."
+    }
+  ],
+  "external_model": {
+    "repo": "EleutherAI/pythia-70m-deduped",
+    "revision": "e93a9faa9c77e5d09219f6c868bfc7a1bd65593c",
+    "weight_sha256": "3da388330e4549156d76b58d6d268c63cd005e9336b4f4d2d378421e7b7a33fd",
+    "config_sha256": "002050231a9b1ec3ac77aa6b9b3bbdc4d923f4068a7dd33b8da72a9bd6ad9a43",
+    "tokenizer_sha256": "c24618a1b3e6a38167beff1c72cffd126c3a66254347304b50547d12c5f25624",
+    "integrity_checked": true,
+    "common_model_bytes": 168144624
+  },
+  "tests": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=/tmp/ma516-pkgs python -m pytest -q experiments/mirror_applications/ma-520-function-vector-distillation/tests",
+    "passed": 4,
+    "failed": 0
+  },
+  "serialization": {
+    "format": "uncompressed NPZ",
+    "roundtrip_checked": true,
+    "canonical_payloads_replayed": 8,
+    "byte_hash_identical": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0,
+    "task_splits_identical": true,
+    "teacher_vectors_identical": true
+  },
+  "fresh_split_integrity_checked": true,
   "fresh_seeds_accessed": [],
-  "notes": ["Pinned model checkpoint remains outside Git."]
+  "notes": [
+    "Frozen protocol predates all implementation and development.",
+    "Amendment 1 is a reporting correction only; the previous output is retained in the pre-amendment directory.",
+    "Native PCA and learned decoder payloads are equal in size; held-out causal metrics differ by at most 0.000159 nats.",
+    "Frozen quality/attribution gate failed, so fresh seeds remained unopened.",
+    "Checkpoint weights remain outside Git."
+  ]
 }
