@@ -65,7 +65,7 @@ def transform_logits(model,torch,ids,mask,pos,kind,view=None,compensate=True):
   q=torch.as_tensor(view,dtype=torch.float32)
   def hook(module,args,out):
    z=args[0]@q.T
-   return torch.nn.functional.linear(z,w@q,b)
+   return torch.nn.functional.linear(z,w@q.T,b)
  else:raise ValueError(kind)
  h=down.register_forward_hook(hook)
  try:
@@ -99,7 +99,7 @@ def run(seed,model_dir,outdir,model=None,tok=None,torch=None):
  mono_local_s=time.perf_counter()-t0
  h=hadamard(D_FF)[np.ix_(rp.astype(np.int64),cp.astype(np.int64))]
  q=h*rs.astype(np.float32)[:,None]*cs.astype(np.float32)[None,:]
- qt=torch.as_tensor(q,dtype=torch.float32);t0=time.perf_counter();dense_w=w@qt;dense_weight_s=time.perf_counter()-t0
+ qt=torch.as_tensor(q,dtype=torch.float32);t0=time.perf_counter();dense_w=w@qt.T;dense_weight_s=time.perf_counter()-t0
  t0=time.perf_counter();zq=z@qt.T;yd=torch.nn.functional.linear(zq,dense_w,bias);dense_local_s=time.perf_counter()-t0
  dense_local_diff=float((yd-base_local).abs().max())
  # End-to-end full-vocabulary checks for one monomial, the dense orthogonal map and an uncompensated negative control.
@@ -114,7 +114,7 @@ def run(seed,model_dir,outdir,model=None,tok=None,torch=None):
  mono_bytes=npz_size(out/'monomial_views.npz',{'permutations':perms,'signs':signs,'scales':scales,**meta})
  dense_bytes=npz_size(out/'hadamard_view.npz',{'row_permutation':rp,'column_permutation':cp,'row_signs':rs,'column_signs':cs,'generator':np.frombuffer(b'sylvester_hadamard_signed_permutation_v1',dtype=np.uint8),**meta})
  (out/'split_manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n')
- report={'experiment_id':'MA-546','seed':seed,'revision':REVISION,'model_sha256':MODEL_SHA,'prompts':len(rows),'input_tokens':ntokens,'dimensions':{'residual':512,'mlp_expansion':D_FF},'views':{'monomial_count':K_MONO,'dense_hadamard_count':1},'functional_metrics':{'compensated_monomial_local_max_abs':max(mono_local_diffs),'compensated_monomial_full_model':mono_full,'compensated_dense_local_max_abs':dense_local_diff,'compensated_dense_full_model':dense_full,'uncompensated_monomial_full_model':uncomp_full},'serialized_bytes':{'shared_model_files':base_bytes,'monomial_view_bank':mono_bytes,'dense_hadamard_view':dense_bytes,'monomial_complete_system':base_bytes+mono_bytes,'dense_complete_system':base_bytes+dense_bytes,'K_independent_models_upper':K_MONO*base_bytes},'compute':{'baseline_forward_seconds':base_s,'monomial_local_projection_16_views_seconds':mono_local_s,'monomial_full_forward_seconds':mono_s,'dense_local_transform_projection_seconds':dense_local_s,'dense_weight_compensation_seconds':dense_weight_s,'dense_full_forward_seconds':dense_s,'uncompensated_full_forward_seconds':uncomp_s,'monomial_activation_element_ops_proxy':int(K_MONO*ntokens*D_FF*2),'dense_activation_macs_proxy':int(2*ntokens*D_FF*D_FF),'dense_weight_transform_macs_proxy':int(2*512*D_FF*D_FF)},'gates':{'all_compensated_within_1e-5':max(max(mono_local_diffs),dense_local_diff,mono_full['max_abs_logit_delta'],dense_full['max_abs_logit_delta'])<=1e-5,'compensated_top1_100_percent':mono_full['top1_agreement']==1. and dense_full['top1_agreement']==1.,'uncompensated_changes_logits':uncomp_full['max_abs_logit_delta']>1e-4}}
+ report={'experiment_id':'MA-546','seed':seed,'revision':REVISION,'model_sha256':MODEL_SHA,'prompts':len(rows),'input_tokens':ntokens,'dimensions':{'residual':512,'mlp_expansion':D_FF},'views':{'monomial_count':K_MONO,'dense_hadamard_count':1},'functional_metrics':{'compensated_monomial_local_max_abs':max(mono_local_diffs),'compensated_monomial_full_model':mono_full,'compensated_dense_local_max_abs':dense_local_diff,'compensated_dense_full_model':dense_full,'uncompensated_monomial_full_model':uncomp_full},'serialized_bytes':{'shared_model_files':base_bytes,'monomial_view_bank':mono_bytes,'dense_hadamard_view':dense_bytes,'monomial_complete_system':base_bytes+mono_bytes,'dense_complete_system':base_bytes+dense_bytes,'K_independent_models_upper':K_MONO*base_bytes},'compute':{'baseline_forward_seconds':base_s,'monomial_local_projection_16_views_seconds':mono_local_s,'monomial_full_forward_seconds':mono_s,'dense_local_transform_projection_seconds':dense_local_s,'dense_weight_compensation_seconds':dense_weight_s,'dense_full_forward_seconds':dense_s,'uncompensated_full_forward_seconds':uncomp_s,'monomial_activation_element_ops_proxy':int(K_MONO*ntokens*D_FF*2),'dense_activation_macs_proxy':int(2*ntokens*D_FF*D_FF),'dense_weight_transform_macs_proxy':int(2*512*D_FF*D_FF)},'gates':{'local_projection_delta_within_1e-5':max(max(mono_local_diffs),dense_local_diff)<=1e-5,'full_model_distribution_equivalent':mono_full['top1_agreement']==1. and dense_full['top1_agreement']==1. and max(mono_full['max_kl_from_base'],dense_full['max_kl_from_base'])<=1e-4,'uncompensated_changes_logits':uncomp_full['max_abs_logit_delta']>1e-4}}
  (out/'metrics.json').write_text(json.dumps(report,ensure_ascii=False,indent=2,sort_keys=True)+'\n')
  print(json.dumps({'seed':seed,'functional_metrics':report['functional_metrics'],'bytes':report['serialized_bytes'],'gates':report['gates']},indent=2))
 

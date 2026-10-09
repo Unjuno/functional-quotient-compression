@@ -17,3 +17,7 @@ Implement the seeded monomial/dense orthogonal gauge transforms and run developm
 ## Blockers
 
 None.
+
+## Amendment 1
+
+First dev 54601 exposed the reversed dense compensation multiplication and a floating-point max-logit gate that overreacts to rare-token tail logits. Initial output is preserved under `results/pre_amendment_1/`. Dense compensation and distribution-level gate are corrected; rerun dev before fresh, which remains sealed.

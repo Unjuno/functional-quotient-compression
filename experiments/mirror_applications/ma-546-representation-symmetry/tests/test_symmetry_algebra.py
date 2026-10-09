@@ -32,7 +32,7 @@ def test_dense_orthogonal_inverse_compensation_preserves_linear_output():
     w=torch.tensor(rng.normal(size=(6,16)),dtype=torch.float32)
     q=torch.tensor(hadamard(16),dtype=torch.float32)
     expected=torch.nn.functional.linear(z,w)
-    actual=torch.nn.functional.linear(z@q.T,w@q)
+    actual=torch.nn.functional.linear(z@q.T,w@q.T)
     assert torch.max(torch.abs(expected-actual)).item()<2e-5
 
 
