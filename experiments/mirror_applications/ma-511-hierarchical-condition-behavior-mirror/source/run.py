@@ -35,7 +35,7 @@ def fit(method,target,held,steps,seed):
  if method=='pair_table':return {'method':method,'basis':BASIS,'coefficients':target.clone()},0.0
  gen=torch.Generator().manual_seed(seed+METHODS.index(method)*77)
  z=torch.nn.Parameter(torch.randn(B,R,generator=gen)*.1);params=[z]
- state={'method':method,'basis':BASIS}
+ state={'method':method,'basis':BASIS,'behavior_codes':z}
  if method=='mirror_givens':
   ang=torch.nn.Parameter(torch.zeros(C,2));params.append(ang);state['condition_angles']=ang
  elif method=='generic_full':
