@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (65 completed; 565 UNTESTED)
+- P0: **630** (66 completed; 564 UNTESTED)
 - P1: **422** (13 completed; 409 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1077 UNTESTED, 37 PROMISING, 41 FAIL**
+- Current MA statuses: **1076 UNTESTED, 37 PROMISING, 42 FAIL**
 - 68 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -40,15 +40,19 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 - **FAIL / broad capacity NOT ESTABLISHED:** bounded implementation missed aligned quality and storage gates; generic scalar matched Mirror, independent fitting remained near no-view. The butterfly schedule/fitting is not a validated canonical BOFT control. Fresh worlds are closed; see claim ledger.
 
+## Completed: MA-274 — BOFT logical expert views
+
+- **FAIL** for BOFT-specific adoption. A shared view bank used ~60% fewer bytes than untied MoE at similar synthetic quality, but one-plane Givens was better/slimmer and ~9× faster to fit. Router accuracy remained ≥0.997. Teacher is intentionally Givens-aligned; no natural expert-capacity claim.
+
 ## Next candidate
 
-**MA-274 — BOFT logical expert views (P0; PA21)**
+**MA-276 — BOFT depth views for tied blocks (P0; PA21/PA06)**
 
 Reason:
 - MA-470/471/473/475/476/478/481/482, MA-483, MA-484, MA-486, MA-487, MA-488, MA-492, MA-494, MA-498, MA-501, MA-502 and MA-516 are completed on dedicated branches and cross-linked in the claim ledger;
 - MA-501 and MA-502 both found that VQ coordinates add substantial distortion over compact FP16 shared coordinates. The LoReFT representation-view family is temporarily deferred for redesign; skipped registry candidates remain UNTESTED. Work moves to the separate Function Vectors family at MA-516. Other completed candidates remain cross-linked in the claim ledger.
 
-Required controls: ordinary shared expert, BOFT-parameterized logical experts, low-rank/gate control and full independent experts; measure routed quality, task state bytes and active compute.
+Required controls: hard tied block, per-depth BOFT view, per-depth low-rank control and untied depth upper; measure quality, depth contribution, bytes and runtime.
 
 The LoReFT family remains deferred after MA-501/502. MA-255’s PSP screen was not established because the development metric broadcasted incorrectly; MA-260’s fresh screen was not established because its training world was hardcoded. Both records and limitations are preserved.
 
