@@ -16,3 +16,6 @@ C: FP16 coefficients outperform coarse VQ coordinates; discrete codes are poorly
 U: Pretrained Transformer, task-level quality and private residual improvements.
 
 A0 non-contiguous basis payloads are exploratory/excluded; A1 materializes rank-4 storage contiguously.
+
+
+Artifact replay test passed (1/1). Next: MA-502 — shared LoReFT basis + many Mirror task codes, on its dedicated branch.

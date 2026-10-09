@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-482.** MA-481 found substantial continuous-address byte savings but failed the paraphrase recall gate on a crowded orbit; VQ alternatives collided. Continue with residual-code composition and full rate-distortion controls.
+**Current operational pointer (2026-10-09): MA-502.** MA-501 FP16 LoReFT was 21.1% of dense bytes but narrowly missed the NRMSE gate (.0595 vs .05); VQ Mirror codes were much less accurate. Continue with shared LoReFT basis and task-code bank, charging all code and basis bytes.
 
 # Worker queue
 
