@@ -1,0 +1,30 @@
+{
+  "experiment_id": "MA-534",
+  "frozen_before_development": true,
+  "protocol_path": "experiments/mirror_applications/ma-534-transcoder-mirror-mlps/PROTOCOL.json",
+  "protocol_sha256": "8c52133ae75fc9e313b579986f2db6485cfbca10fa7c7cfebe7fd539b9f07410",
+  "development_seeds": [
+    53401,
+    53402
+  ],
+  "fresh_seeds": [
+    53411,
+    53412,
+    53413
+  ],
+  "fresh_opened": false,
+  "transcoder_features": 2048,
+  "topk_activations": 32,
+  "shared_feature_pool": 16,
+  "givens_angles_per_role": 8,
+  "per_role_code_updates": 500,
+  "transcoder_updates": 1000,
+  "fixed_controls": [
+    "none",
+    "explicit_mean_mlp_delta",
+    "unmodulated_shared_delta",
+    "pairwise_gains8",
+    "elementwise_gates16",
+    "givens_views8"
+  ]
+}

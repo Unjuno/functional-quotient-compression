@@ -1,0 +1,141 @@
+{
+  "experiment_id": "MA-534",
+  "title": "Role-conditioned logical MLPs through a shared transcoder feature basis",
+  "status": "SCREENING",
+  "evidence_lane": "TRANSCODER_FUNCTION_VIEWS/FEATURE_GATES/ROLE_SPECIALIZATION/CAUSAL_QUALITY/ACTUAL_BYTES/COMPUTE",
+  "base_commit": "2386e1e03d8590d95590c2bce90a5373dece5bd3",
+  "hypothesis": "For 16 relation-task roles, task-specific Givens coordinates over selected sparse transcoder activations can produce input-dependent MLP residual Views that preserve explicit support-derived MLP-delta quality within .20 gold-logprob nats/.05 accuracy, stay within 2x explicit-delta payload bytes, and beat equal-size pairwise gains and a stronger per-feature gate by >=.10 gold-logprob nats on both development seeds.",
+  "physical_object": "Pinned Pythia-70m layer-3 MLP plus a 2048-feature top-32 transcoder trained only on support prompt tokens from tasks0-11.",
+  "mirror_coordinate": "Eight Givens angles per task rotate eight fixed pairs of a shared 16-feature transcoder activation slice before decoding through shared transcoder output atoms.",
+  "logical_multiplicity": "Sixteen relation-task-specific nonlinear MLP delta functions selected by an externally supplied task-role ID. Role selection is oracle-addressed and evaluated separately from learned routing; 16 codes do not imply 16 independent capacities.",
+  "prior_art_refs": [
+    "PA103",
+    "PA102"
+  ],
+  "artifacts": {
+    "model_revision": "e93a9faa9c77e5d09219f6c868bfc7a1bd65593c",
+    "model_sha256": "3da388330e4549156d76b58d6d268c63cd005e9336b4f4d2d378421e7b7a33fd"
+  },
+  "task": {
+    "fit_dictionary_task_ids": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "role_ids": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "support_examples_per_role": 8,
+    "heldout_query_ids": [
+      12,
+      13,
+      14,
+      15
+    ],
+    "primary_metric": "heldout gold candidate log probability under role-conditioned MLP delta",
+    "secondary_metrics": [
+      "candidate accuracy/margin",
+      "MLP-delta reconstruction MSE/cosine",
+      "active transcoder features",
+      "Givens/gain code fit error",
+      "actual basis/code/explicit bytes",
+      "optimizer updates and compute proxy",
+      "capture/fit/inference wall time"
+    ]
+  },
+  "transcoder": {
+    "architecture": "512-to-2048 affine ReLU encoder, per-token top-32 activations, 2048-to-512 affine decoder",
+    "training_target": "same layer-3 MLP output from post-attention layernorm input",
+    "training_data": "All sequence-token positions from support demonstration prompts of tasks0-11 only; no heldout query prompt is used.",
+    "optimizer": "Adam lr=.001, exactly 1000 updates, batch128, MSE + .001 mean absolute top-32 latent activation; seed0.",
+    "selected_basis": "Pool of 16 transcoder latent IDs selected by residual correlation to support-derived MLP-output delta targets from tasks0-11 only; stable tie breaks. Store only selected encoder rows+biases and decoder rows at inference."
+  },
+  "support_targets": {
+    "input": "For each support query, the query-only bare prompt provides x at layer3 MLP input.",
+    "target": "The layer3 MLP output at the same final prefix position under the prompt with the other seven support demonstrations minus the output under the bare prompt.",
+    "role_adaptation": "Fit a separate role code for each task using its eight support input/target pairs; task IDs12-15 support may fit their codes, but their eight evaluation queries stay withheld."
+  },
+  "views": {
+    "givens": "For pooled top-32 transcoder activations z(x), rotate fixed pairs (0,1),(2,3),...,(14,15) with eight task angles, then multiply by the selected shared decoder rows to form an additive layer3 MLP-output delta.",
+    "pairwise_gains": "Equal-size native control: one learned scalar per fixed feature pair, same eight FP32 values/task and same optimizer updates.",
+    "elementwise_feature_gates": "Strong native control: one independently learned scalar for each of the 16 selected latent features, 16 FP32 values/task.",
+    "fit": "Fit each role-specific code by MSE to its eight support MLP-delta vectors; Adam lr=.01, exactly 500 updates/task, no tuning."
+  },
+  "controls": [
+    "No MLP intervention",
+    "Explicit per-role mean MLP-delta bank (upper/activation-vector control)",
+    "Unmodulated shared transcoder feature delta",
+    "Task-specific pairwise gains (equal-size native control)",
+    "Task-specific per-feature multiplicative gates (strong sparse-gating control)",
+    "Task-specific Givens Views (Mirror candidate)"
+  ],
+  "development": {
+    "seeds": [
+      53401,
+      53402
+    ],
+    "changes_after_run": "prohibited without numbered amendment"
+  },
+  "fresh": {
+    "seeds": [
+      53411,
+      53412,
+      53413
+    ],
+    "locked_before_access": true,
+    "opened": false,
+    "opening_rule": "Only if both development seeds pass heldout causal-quality, bytes, and both native feature-gate margins."
+  },
+  "storage": {
+    "authority": "actual uncompressed NPZ bytes",
+    "paid_objects": [
+      "selected transcoder encoder rows+bias and decoder rows",
+      "all task Givens/gain/per-feature-gate codes",
+      "explicit MLP-delta vector bank",
+      "role IDs and reconstruction metadata"
+    ],
+    "accounting": "Candidate contains only the selected input/output basis required for feature encoding/decoding plus task codes; no full 2048-feature transcoder or decoded delta cache. Report standalone Pythia+View and explicit-delta totals."
+  },
+  "compute": {
+    "hardware": "CPU, fixed five-thread limit",
+    "optimizer_updates": "1000 transcoder + 500 updates per role for each of three code controls",
+    "report_tokens_and_examples": true,
+    "active_compute_proxy": "Report support MLP capture; transcoder fit; per-role support gate optimization; selected-feature encode/rotate/decode; original transformer candidate sequences."
+  },
+  "gates": {
+    "PASS": "Both dev seeds: Givens within .05 accuracy/.20 gold-logprob nats of explicit MLP-delta bank; Givens total payload <=2.0x explicit bank; Givens beats pairwise and per-feature gates by >=.10 gold-logprob nats on both seeds; replay exact.",
+    "FAIL": "Any frozen quality, byte or native-control gate fails.",
+    "NOT_ESTABLISHED": "Pinned model, support/query integrity, deterministic replay or payload accounting fails."
+  },
+  "boundaries": [
+    "Task role IDs are externally supplied; learned query routing is not tested.",
+    "Only one small LM, layer, transcoder and 16 relation tasks.",
+    "Role-specific gains are support-adapted interventions, not separate trained dense MLPs.",
+    "Do not call the 16 roles independent expert capacity.",
+    "Fresh seeds stay sealed if any frozen gate misses."
+  ]
+}
