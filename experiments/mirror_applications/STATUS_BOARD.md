@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (85 completed; 545 UNTESTED)
+- P0: **630** (86 completed; 544 UNTESTED)
 - P1: **422** (13 completed; 409 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1055 UNTESTED, 44 PROMISING, 56 FAIL**
+- Current MA statuses: **1054 UNTESTED, 44 PROMISING, 57 FAIL**
 - 68 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -81,6 +81,16 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 **MA-332 — Mirror permutation-orbit audit (P0)**
 
 MA-331 was imported from its dedicated research branch; move to the next registry candidate and test whether candidate Views are function-preserving symmetries or add function diversity.
+
+## Completed: MA-332 — Mirror permutation-orbit audit
+
+- **FAIL for symmetry-as-functional-multiplicity (audit gate confirmed):** fresh A1 exact permutation, positive scale plus compensation, and compensated Givens outputs all had NRMSE <1e-6; each paid View added bytes while representing the same function. Uncompensated Givens (NRMSE .183) and negative scale (.899) changed outputs. Synthetic fixed ReLU MLP only; no task utility. A0 rows were quarantined for a serializer dtype defect.
+
+## Next candidate
+
+**MA-333 — Mirror sign/scale orbit audit (P0)**
+
+MA-332 verifies permutation and positive-homogeneity gauge behavior for this ReLU MLP. MA-333 separately tests sign/scale views across activation and normalization types.
 
 ## Active experiment
 

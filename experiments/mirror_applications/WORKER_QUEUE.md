@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-332.** MA-330 is PROMISING narrowly for synthetic Givens-aligned KV role caches. MA-331 FAILed its fixed Mirror-specific byte gate at development; fresh remained sealed. Proceed to MA-332, Mirror permutation-orbit audit.
+**Current operational pointer (2026-10-09): MA-333.** MA-330 was PROMISING narrowly for synthetic aligned cache roles. MA-331 FAILed its Mirror-specific byte gate at development. MA-332 FAILed for functional multiplicity: permutation and compensated positive scale were exact symmetries, while uncompensated views changed functions but had no task utility evidence. Proceed to MA-333, sign/scale orbit audit.
 
 # Worker queue
 

@@ -23,3 +23,24 @@ A 16-input, 24-hidden, 8-output ReLU MLP with fixed random weights is evaluated 
 ## C / U
 
 ReLU admits hidden permutations and positive diagonal rescalings with inverse outgoing compensation. Negative scaling is not generally a symmetry. The result covers this MLP and transformations only; no transformer, trained network, data task, or deployment inference is tested.
+
+
+## A1 results
+
+**H:** hidden permutation and positive scale with inverse compensation preserve a ReLU MLP function and add no distinct logical function; uncompensated Givens changes it.
+
+**T:** A1 used development worlds 33221–33222 and fresh worlds 33231–33233, 4,096 Gaussian inputs/world, a fixed 16-24-8 ReLU MLP, seven methods, no optimizer updates. A0 fresh was quarantined after the serializer dtype defect; see `A0_IMPLEMENTATION_BUG.md`.
+
+**D — FAIL for symmetry-as-functional-multiplicity:** fresh means: baseline 2,528 B; permutation View 2,618 B / output NRMSE 9.03e-8; positive scale plus compensation 2,682 B / 7.18e-8; compensated Givens 2,570 B / 2.70e-8. These are one function within 1e-6. Uncompensated Givens is 2,572 B / NRMSE 0.183; negative scale plus inverse compensation is 2,680 B / 0.899. The extra address bytes buy no new function for exact gauge transforms.
+
+**C:** only one small random MLP and Gaussian input distribution; numerical equality on these probes does not prove equivalence for all inputs, though the permutation and positive-homogeneity cases follow exact ReLU algebra.
+
+**U:** trained networks, other activations/norm layers, task quality and whether useful task-specific functions can be learned from functional Givens-type Views remain untested.
+
+### Fact / interpretation / hypothesis
+
+**Fact:** 21 A1 fresh rows across three worlds; all exact-gauge NRMSE values were below 1e-6. Payload hashes and byte lengths decoded/replayed exactly; metric replay max difference was zero. Three tests pass.
+
+**Interpretation:** permutation and compensated positive scaling are parameter-coordinate changes, not logical functional multiplicity. A functional view must change outputs, and the extra coordinate is paid.
+
+**Hypothesis:** this audit rule should be applied before counting hidden-unit symmetry views as experts in larger architectures.
