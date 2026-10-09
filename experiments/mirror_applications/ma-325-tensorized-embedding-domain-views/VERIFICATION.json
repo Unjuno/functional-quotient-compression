@@ -1,19 +1,86 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
-  "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+  "experiment_id": "MA-325",
+  "decision": "PROMISING narrowly for Givens-aligned synthetic embedding domains; unrelated domains require private TT cores",
+  "protocol_commit": "d1e7665b",
+  "fresh_worlds": [
+    32510,
+    32511,
+    32512
+  ],
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "fresh_rows": 72,
+  "strata": {
+    "aligned": {
+      "generic_pca_domain_core": {
+        "embedding_nrmse": 0.00042009964818134904,
+        "lookup_nrmse": 0.00041963005140941177,
+        "payload_bytes": 981.0,
+        "fit_seconds": 0.0003595073358155787
+      },
+      "independent_full_embeddings": {
+        "embedding_nrmse": 0.00020727615467169217,
+        "lookup_nrmse": 0.00020724550833822123,
+        "payload_bytes": 4194405.0,
+        "fit_seconds": 0.0
+      },
+      "mirror_domain_view": {
+        "embedding_nrmse": 0.0005771445188050469,
+        "lookup_nrmse": 0.0005781047059119575,
+        "payload_bytes": 636.0,
+        "fit_seconds": 0.0004620214490892573
+      },
+      "tt_independent_domain_core": {
+        "embedding_nrmse": 0.00042010580849212903,
+        "lookup_nrmse": 0.0004196423914335254,
+        "payload_bytes": 4530.0,
+        "fit_seconds": 0.0
+      }
+    },
+    "independent": {
+      "generic_pca_domain_core": {
+        "embedding_nrmse": 0.9014551175965203,
+        "lookup_nrmse": 0.9007663130760193,
+        "payload_bytes": 981.0,
+        "fit_seconds": 0.00043425811195953027
+      },
+      "independent_full_embeddings": {
+        "embedding_nrmse": 0.0002072390327359446,
+        "lookup_nrmse": 0.0002072375500574708,
+        "payload_bytes": 4194405.0,
+        "fit_seconds": 0.0
+      },
+      "mirror_domain_view": {
+        "embedding_nrmse": 1.2881207995944552,
+        "lookup_nrmse": 1.2878116634156969,
+        "payload_bytes": 636.0,
+        "fit_seconds": 0.0004482553308157043
+      },
+      "tt_independent_domain_core": {
+        "embedding_nrmse": 0.0004201959624576072,
+        "lookup_nrmse": 0.00042005044653908245,
+        "payload_bytes": 4530.0,
+        "fit_seconds": 0.0
+      }
+    }
   },
-  "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
-  },
-  "metric_replay": {
-    "checked": false,
-    "max_difference": null
-  },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "facts": [
+    "Aligned domain embeddings: Mirror 636 B / lookup NRMSE 5.78e-4; generic PCA 981 B / 4.20e-4; independent TT domain core 4,530 B / 4.20e-4; full tables 4,194,405 B.",
+    "Mirror uses 86% fewer bytes than TT independent-core control and 35% fewer than PCA, with slightly higher but low lookup error.",
+    "Independent domains: TT independent cores 4.20e-4; Mirror 1.288 and PCA 0.901."
+  ],
+  "interpretation": "Tensorized domain tables can share physical TT cores while a small Givens coordinate creates many aligned logical embedding functions, yielding a strong storage-quality point. The gain depends on domains sharing the exact core orbit; unrelated domain tables need private cores.",
+  "hypothesis": "Supported narrowly for aligned synthetic TT embedding views; no general embedding or language-model claim.",
+  "counter_hypothesis": "The task family is constructed from the same Givens core action, and generic PCA remains close in quality.",
+  "limitations": [
+    "Synthetic 256x256 tables; no real vocabulary or LM training",
+    "Aligned teacher uses the same Givens transform",
+    "No NLL, transfer or downstream evaluation",
+    "No real inference latency measurements"
+  ],
+  "fresh_data_used_for_tuning": false,
+  "source_sha256": "5d9b2053968761f66e52c32df1e9fd67e5af03c0043769f2d74b12a52e477e8e"
 }

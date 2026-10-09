@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-325.** MA-307 showed an aligned synthetic allocation delay versus PackNet-style private storage; robust generic shared-basis fitting was close, and the teacher supplied Mirror latent codes. Continue to MA-325, tensorized embedding domain views.
+**Current operational pointer (2026-10-09): MA-327.** MA-307 showed an aligned synthetic allocation delay versus PackNet-style private storage; robust generic shared-basis fitting was close, and the teacher supplied Mirror latent codes. Continue to MA-327, factorized layer × expert Tucker address.
 
 # Worker queue
 
