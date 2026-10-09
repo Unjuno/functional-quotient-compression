@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-399.** MA-397 created distinct outputs for tokens sharing product addresses and compressed payload to 11.25% of full/64.9% of direct coefficients, but Mirror NRMSE .131/.136 and pair-separation error .128/.128 failed the frozen quality gates. Fresh remained sealed. Proceed to MA-399, MatFormer speculative drafter via View (P0).
+**Current operational pointer (2026-10-09): MA-401.** MA-399 residual correction preserved exact output, but Mirror increased nested width-8 overlap by only .0016-.0028, lost to FiLM/width-12, and delivered .64-.65x full-only throughput with ~4.3x FiLM training time. Fresh remained sealed. Proceed to MA-401, FiLM versus Mirror feature conditioning (P0).
 
 # Worker queue
 

@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (116 completed; 514 UNTESTED)
+- P0: **630** (117 completed; 513 UNTESTED)
 - P1: **422** (15 completed; 407 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1024 UNTESTED, 46 PROMISING, 85 FAIL**
+- Current MA statuses: **1023 UNTESTED, 46 PROMISING, 86 FAIL**
 - 68 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -443,3 +443,10 @@ MA-379 and MA-381 both narrowly missed the complete-payload gate at 60.8–61.1%
 - **FAIL on frozen embedding/collision gates:** all 1,024 product addresses had two tokens. Mirror used 13,941/13,964B (11.25% of full and 64.9% of direct coefficients), but embedding NRMSE was .131/.136 and collision-pair separation error .128/.128. Direct coefficients reached ~.008/.007; pure addition resolved no pairs (error 1.0).
 - Eight actual payloads replayed bytes, hashes and metrics; four tests pass. Fresh remained sealed. Aligned collision-heavy synthetic screen only.
 - Next P0 candidate: MA-399 — MatFormer speculative drafter via View.
+
+
+## Completed: MA-399 — MatFormer nested speculative drafter via Mirror view
+
+- **FAIL on frozen acceptance, training-cost and runtime gates:** Mirror overlap was .8441/.8432, barely above nested width-8 (.8413/.8416) and below FiLM/width-12; corrected full-verifier distributions stayed exact to <=1.5e-7. Expected speculative throughput was .642/.652× full-only, while nested width-8 reached 1.042/1.056×. Mirror used fewer bytes than an independent pair but more than the shared nested model and trained ~4.3× slower than FiLM.
+- Twelve payloads replayed bytes, hashes and exactness/overlap metrics; four tests pass. Fresh remained sealed. One-step synthetic next-token MLP only.
+- Next P0 candidate: MA-401 — FiLM versus Mirror feature conditioning.
