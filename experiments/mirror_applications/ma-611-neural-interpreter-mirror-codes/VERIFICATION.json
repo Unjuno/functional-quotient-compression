@@ -1,16 +1,31 @@
 {
-  "experiment_id":"MA-611",
-  "decision":"FAIL",
-  "phase":"deterministic adaptation/algebra screen",
-  "base_commit":"5fd9a420",
-  "environment":{"python":"3.12.14","torch":"2.14.1+cpu","device":"cpu"},
-  "frozen_protocol":"PROTOCOL.json; seeds 61101/61102; no optimization or fresh data",
-  "checks":[
-    {"command":"pytest -q experiments/mirror_applications/ma-611-neural-interpreter-mirror-codes/tests","result":"2 passed"},
-    {"command":"python experiments/mirror_applications/ma-611-neural-interpreter-mirror-codes/source/verify_results.py","result":"4/4 payload sizes and hashes match; reloaded code outputs exact"}
+  "experiment_id": "MA-611",
+  "decision": "FAIL",
+  "phase": "deterministic adaptation/algebra screen",
+  "base_commit": "5fd9a420",
+  "environment": {
+    "python": "3.12.14",
+    "torch": "2.14.1+cpu",
+    "device": "cpu"
+  },
+  "frozen_protocol": "PROTOCOL.json; seeds 61101/61102; no optimization or fresh data",
+  "checks": [
+    {
+      "command": "pytest -q experiments/mirror_applications/ma-611-neural-interpreter-mirror-codes/tests",
+      "result": "2 passed"
+    },
+    {
+      "command": "python experiments/mirror_applications/ma-611-neural-interpreter-mirror-codes/source/verify_results.py",
+      "result": "4/4 payload sizes and hashes match; reloaded code outputs exact"
+    }
   ],
-  "metrics":"runs/dev_metrics.json and RESULTS_CORE.csv",
-  "payloads":"runs/dev_payloads; actual torch.save code banks include signatures and base/composed codes",
-  "decision_basis":"Mirror fails the 1e-5 composed NRMSE2 threshold in both seeds and has larger support search/inference cost despite 11.9% smaller payload.",
-  "limitations":["Analytic Fourier interpreter only; no learned Neural Interpreter.","Fixed frequency signature family.","Mirror support code is selected from a 720-point angle grid."]
+  "metrics": "runs/dev_metrics.json and RESULTS_CORE.csv",
+  "payloads": "runs/dev_payloads; actual torch.save code banks include signatures and base/composed codes",
+  "decision_basis": "Mirror fails the 1e-5 composed NRMSE2 threshold in both seeds and has larger support search/inference cost despite 11.9% smaller payload.",
+  "limitations": [
+    "Analytic Fourier interpreter only; no learned Neural Interpreter.",
+    "Fixed frequency signature family.",
+    "Mirror support code is selected from a 720-point angle grid."
+  ],
+  "result_commit": "50a2dd42"
 }
