@@ -213,3 +213,5 @@ KG relation rotations (RotatE, TuckER, QuatE, PairRE), EXIF/device-aware ISPs (P
 **MA-483 FAIL for the preregistered storage gate:** across 9 synthetic fresh banks, adaptive K32 Mirror used mean depth 2.32 at the same NRMSE .05615 as fixed R4, but 4,637B vs 4,829B (96.0% of fixed; gate <=80%). Threshold sweep values fell below the smallest active amplitude and tied. At N=128 per-function depth/metadata erased savings. **Next: MA-484.**
 
 **MA-484 FAIL:** on 9 fresh synthetic rank-four expert banks, K64 Mirror VQ used 3,933B but NRMSE was .3068 and collision fraction .863; shared FP32 low-rank coordinates were exact at 3,681B. No K met quality/collision/byte gates; generic full-vector VQ error exceeded 1.2 NRMSE. **Next: MA-485.**
+
+**MA-486 FAIL:** 32D synthetic vectors with 64 charged atoms / 128 functions: top-4 sparse codes used 12,769B (70.8% dense) at NRMSE .1093; top-8 reached .0258 but 15,329B (85.0%). No point met <=.05 error and <=50% bytes. Dictionary/index overhead dominates this bank size. **Next: MA-487.**
