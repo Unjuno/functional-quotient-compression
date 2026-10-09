@@ -1,0 +1,15 @@
+{
+ "experiment_id":"MA-319","title":"Tucker matrix-bank Mirror layer coefficients","status":"SCREENING","base_commit":"ef322e33","prior_art_refs":[35],"evidence_lane":"TUCKER_BANK/QUALITY/ACTUAL_BYTES/COMPUTE",
+ "hypothesis":"When layer coefficients over a shared Tucker matrix bank follow a compact Givens orbit, replacing free per-layer coefficients with a shared vector and angle addresses reduces total model payload while preserving layer functions; generic rank-2 PCA is the mandatory control.",
+ "physical_object":"shared bank of K=8 matrices of shape 32x32 used across L=64 logical layers","mirror_coordinate":"one shared 8-vector and one Givens angle per layer","logical_multiplicity":"64 logical layer matrices",
+ "model":{"matrix_dim":32,"bank_size":8,"layers":64,"evaluation_tokens_per_layer":128},
+ "strata":["aligned Givens-orbit layer coefficients","independent random layer coefficients"],
+ "controls":["independent full layer matrices","Tucker shared bank plus free layer coefficients","shared Mirror vector and per-layer angle","generic rank-2 PCA coefficient bank"],
+ "development":{"worlds":[31900,31901],"seeds":[0,1,2],"selection_metric":"matrix and functional NRMSE, actual total serialized bytes, code fitting wall time"},
+ "fresh":{"worlds":[31910,31911,31912],"seeds":[0,1,2],"locked_before_access":true},
+ "storage":{"authority":"actual serialized inference payload bytes","paid_objects":["shared matrix bank fp16","full matrices fp16 or coefficient codes/factors fp16","metadata"]},
+ "success_gate":"Aligned functional NRMSE <=0.01 with >=10% lower total bytes than free Tucker coefficients; generic PCA matching Mirror means no Mirror-specific value. Independent coefficients measure the boundary.",
+ "failure_gate":"Mirror misses aligned quality/byte gate or does not improve the fixed-byte frontier; independent tasks requiring private coefficients are a boundary result.",
+ "compute":{"report_updates":0,"report_code_fit_seconds":true,"report_quality":true,"report_actual_bytes":true},
+ "boundaries":["Synthetic linear matrix bank only","Teacher aligned stratum is generated from Givens orbit","No pretrained Transformer or natural layer weights","All methods evaluated after fp16 serialization and deterministic decode"]
+}
