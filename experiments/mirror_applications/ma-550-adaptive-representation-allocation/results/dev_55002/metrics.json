@@ -1,0 +1,158 @@
+{
+  "activation_functions": 8,
+  "compute": {
+    "basis_factor_seconds": 0.18414847902022302,
+    "code_fit_seconds": 0.2007682530384045,
+    "input_examples": 256,
+    "model_load_seconds": 0.6082086270034779,
+    "optimizer_updates": 0,
+    "per_function_code_fit_flops_proxy": 832569344,
+    "shared_gram_flops_proxy": 26373783552,
+    "wall_seconds": 1.1442489830078557
+  },
+  "experiment_id": "MA-550",
+  "heldout_observations": 8,
+  "methods": {
+    "activation_code": {
+      "heldout_relative_rmse": 0.4974193329424857,
+      "max_heldout_relative_rmse": 0.9978866927475737,
+      "max_support_relative_rmse": 0.9978874697434591,
+      "payload_bytes": 34496,
+      "support_relative_rmse": 0.49761877766479234
+    },
+    "adaptive": {
+      "heldout_relative_rmse": 2.900306988927625e-05,
+      "max_heldout_relative_rmse": 0.00010068526991815109,
+      "max_support_relative_rmse": 0.003990506287664175,
+      "payload_bytes": 19682,
+      "support_relative_rmse": 0.0022099965498174287
+    },
+    "weight_dense": {
+      "heldout_relative_rmse": 0.002211156368957745,
+      "max_heldout_relative_rmse": 0.003990599419921637,
+      "max_support_relative_rmse": 1.1920604947590618e-07,
+      "payload_bytes": 3220842,
+      "support_relative_rmse": 4.093486675495195e-08
+    },
+    "weight_sparse": {
+      "heldout_relative_rmse": 0.4999653287231922,
+      "max_heldout_relative_rmse": 0.9999823570251465,
+      "max_support_relative_rmse": 0.9999822974205017,
+      "payload_bytes": 1760,
+      "support_relative_rmse": 0.5019465041405056
+    }
+  },
+  "model_revision": "e93a9faa9c77e5d09219f6c868bfc7a1bd65593c",
+  "model_sha256": "3da388330e4549156d76b58d6d268c63cd005e9336b4f4d2d378421e7b7a33fd",
+  "output_weight_sha256": "15d6ee9bb2bf6249fbb67ab3d157d81b799b30adb992f87246878a0abfdee18c",
+  "quality_gates": {
+    "activation_code": false,
+    "adaptive": true,
+    "weight_dense": true,
+    "weight_sparse": false
+  },
+  "seed": 55002,
+  "selection": [
+    {
+      "function_id": 0,
+      "generated_family": "sparse",
+      "selected_family": "weight_sparse",
+      "support_relative_rmse": 0.003955272492021322
+    },
+    {
+      "function_id": 1,
+      "generated_family": "sparse",
+      "selected_family": "weight_sparse",
+      "support_relative_rmse": 0.003978556487709284
+    },
+    {
+      "function_id": 2,
+      "generated_family": "sparse",
+      "selected_family": "weight_sparse",
+      "support_relative_rmse": 0.003973205108195543
+    },
+    {
+      "function_id": 3,
+      "generated_family": "sparse",
+      "selected_family": "weight_sparse",
+      "support_relative_rmse": 0.003986732102930546
+    },
+    {
+      "function_id": 4,
+      "generated_family": "sparse",
+      "selected_family": "weight_sparse",
+      "support_relative_rmse": 0.003990506287664175
+    },
+    {
+      "function_id": 5,
+      "generated_family": "sparse",
+      "selected_family": "weight_sparse",
+      "support_relative_rmse": 0.003970106597989798
+    },
+    {
+      "function_id": 6,
+      "generated_family": "sparse",
+      "selected_family": "weight_sparse",
+      "support_relative_rmse": 0.00398227758705616
+    },
+    {
+      "function_id": 7,
+      "generated_family": "sparse",
+      "selected_family": "weight_sparse",
+      "support_relative_rmse": 0.003969855606555939
+    },
+    {
+      "function_id": 8,
+      "generated_family": "activation",
+      "selected_family": "activation_code",
+      "support_relative_rmse": 0.000991958027037277
+    },
+    {
+      "function_id": 9,
+      "generated_family": "activation",
+      "selected_family": "activation_code",
+      "support_relative_rmse": 0.00051588507172489
+    },
+    {
+      "function_id": 10,
+      "generated_family": "activation",
+      "selected_family": "activation_code",
+      "support_relative_rmse": 0.00021263615993802722
+    },
+    {
+      "function_id": 11,
+      "generated_family": "activation",
+      "selected_family": "activation_code",
+      "support_relative_rmse": 0.00019893348209646723
+    },
+    {
+      "function_id": 12,
+      "generated_family": "activation",
+      "selected_family": "activation_code",
+      "support_relative_rmse": 0.0002058555401487801
+    },
+    {
+      "function_id": 13,
+      "generated_family": "activation",
+      "selected_family": "activation_code",
+      "support_relative_rmse": 8.526475150392654e-05
+    },
+    {
+      "function_id": 14,
+      "generated_family": "activation",
+      "selected_family": "activation_code",
+      "support_relative_rmse": 0.0009954484390191122
+    },
+    {
+      "function_id": 15,
+      "generated_family": "activation",
+      "selected_family": "activation_code",
+      "support_relative_rmse": 0.00034745105548760906
+    }
+  ],
+  "sparse_functions": 8,
+  "split": "dev",
+  "support_observations": 8,
+  "vocab_size": 50304,
+  "width": 512
+}
