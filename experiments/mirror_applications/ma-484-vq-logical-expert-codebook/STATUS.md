@@ -5,7 +5,7 @@
 - Base commit: `5dff91c2`
 - Protocol frozen before fresh: yes
 - Development and fresh: complete; 3 fresh worlds × 3 seeds
-- Results and verification: pending commit
+- Results and verification: yes (`7a703f10`)
 
 H: VQ Mirror expert codes preserve useful functions under actual-byte compression.
 
