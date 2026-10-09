@@ -1,0 +1,15 @@
+{
+  "experiment_id":"MA-350","title":"Multimodal Mirror posterior codebook versus direct and independent modes","status":"PROTOCOL_FROZEN_BEFORE_DEVELOPMENT","base_commit":"32d2f605","evidence_lane":"MECHANISM/MULTIMODAL_POSTERIOR/QUALITY/DIVERSITY/ACTUAL_BYTES",
+  "hypothesis":"A phase codebook over a shared 16D logistic weight vector represents an equal-weight mixture of K=32 distinct modes with matched predictive NLL/diversity and lower bytes than direct coefficients or independent mode vectors.",
+  "physical_object":"one shared 16-dimensional logistic weight vector","mirror_coordinate":"K scalar rotation phases over a fixed 2D subspace","logical_multiplicity":"K distinct posterior predictive classifier modes, counted only by output diversity/quality","prior_art_refs":[41],
+  "task":{"features":16,"modes":32,"mode_phases":"uniformly spaced on [0,2pi)","mixture_weights":"uniform; explicitly serialized","train_examples":0,"iid_test_examples":4096,"ood_test_examples":4096,"ood":"input feature 1 shifted +0.5; feature 2 scaled 1.5","labels":"Bernoulli sampled from equal-weight mixture of mode probabilities"},
+  "controls":["phase Mirror codebook plus one shared vector","direct two-coefficient codebook plus same shared state","independent full 16D vector per mode","single shared classifier"],
+  "development":{"worlds":[35021,35022],"optimizer_updates":0,"selection":"fixed K and code serializer; development only validates task and metrics"},
+  "fresh":{"worlds":[35031,35032,35033],"locked_before_access":true,"optimizer_updates":0},
+  "metrics":["posterior predictive NLL","Brier","ECE","accuracy","pairwise mode disagreement","payload bytes","mixture evaluation time"],
+  "storage":{"authority":"actual deterministic serialized inference payload bytes","paid_objects":["shared vector or independent mode vectors","all phase/direct coefficients","uniform mixture weights","metadata"]},
+  "compute":{"report_examples":true,"optimizer_updates":0,"active_compute_proxy":true,"isolated_wall_clock":true},
+  "success_gate":"Mirror NLL within .01 of independent exact mixture, pairwise disagreement within .02, and payload <=.80x direct coefficients.",
+  "failure_gate":"Quality/diversity gate misses or byte reduction is less than 20% versus direct coefficients.",
+  "boundaries":["oracle-known rotation-aligned modes","no posterior training or mode discovery","K logical modes are not independent capacity","synthetic binary classification only"]
+}
