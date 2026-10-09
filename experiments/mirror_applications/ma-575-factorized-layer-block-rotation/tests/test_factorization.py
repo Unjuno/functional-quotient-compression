@@ -10,3 +10,10 @@ def test_signed_permutation_composition_matches_sequential_application():
     np.testing.assert_array_equal(sequential,combined)
 def test_factor_code_count_is_small():
     assert 16*33+6+16 < 6*16*33
+
+def test_int4_unpack_restores_original_width():
+    x=np.random.default_rng(3).normal(size=(5,512)).astype(np.float32)
+    packed,scales=m.quant_int4(x)
+    decoded=m.unpack(packed,scales)
+    assert packed.shape==(5,256)
+    assert decoded.shape==x.shape
