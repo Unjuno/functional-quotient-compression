@@ -1,7 +1,7 @@
 {
   "experiment_id": "MA-449",
   "title": "Concept-coordinate meta-learning with held-out factor combinations",
-  "status": "SCREENING",
+  "status": "COMPLETED_FAIL",
   "evidence_lane": "FEW_SHOT/CONCEPT_EXTRAPOLATION/IDENTIFIABILITY/BYTES",
   "base_commit": "f05260a5",
   "hypothesis": "A support-set encoder that emits two factor-specific Mirror coordinates generalizes to held-out joint concept combinations, achieving query NRMSE within 1.10x additive task-vector composition and lower actual serialized N=20 payload bytes than an unstructured LEO latent encoder.",
@@ -14,10 +14,10 @@
     79
   ],
   "controls": [
-    "MAML/shared initialization with gradient adaptation",
-    "LEO unstructured 2D latent",
-    "direct additive task-vector composition",
-    "factorized concept Mirror encoder/decoder"
+    "direct additive task-vector composition from single-factor interventions",
+    "LEO unstructured 2D latent decoded through calibrated basis with gradient adaptation",
+    "factorized Mirror coordinates inferred from held-out support via least squares",
+    "full-space support least squares upper control"
   ],
   "task": {
     "type": "synthetic compositional linear regression",
@@ -60,7 +60,19 @@
         3000,
         3059
       ]
-    }
+    },
+    "calibration_factor_combinations": [
+      [
+        1,
+        0
+      ],
+      [
+        0,
+        1
+      ]
+    ],
+    "calibration_support_examples_per_factor": 64,
+    "heldout_support_examples": 8
   },
   "development": {
     "worlds": [
@@ -75,7 +87,8 @@
     "outer_lrs": [
       0.01,
       0.03
-    ]
+    ],
+    "selection_metric": "LEO query NRMSE on held-out joint composition; select gradient step size only"
   },
   "fresh": {
     "worlds": [
@@ -110,11 +123,26 @@
     "report_adaptation_MAC": true,
     "report_query_wall": true
   },
-  "success_gate": "Every fresh world: Mirror held-out joint-combination NRMSE <=1.10x additive task-vector control; actual N=20 payload bytes below unstructured LEO; both concept factors are independently identifiable under intervention on each factor.",
+  "success_gate": "Every fresh world: Mirror query NRMSE <=1.10x direct task-vector composition and actual N=20 serialized bytes lower than LEO; both factor interventions recovered independently.",
   "failure_gate": "Any quality/bytes/identifiability gate miss, or additive task vectors match Mirror at equal/fewer bytes.",
   "boundaries": [
     "Synthetic aligned linear concept test only.",
     "Do not treat combination count as independent capacity.",
     "No natural concept, language, or nonlinear task claim."
+  ],
+  "amendments": [
+    {
+      "id": "A1",
+      "status": "active before fresh",
+      "reason": "To make factor identifiability testable without leaking held-out combinations, each world provides paid single-factor intervention examples that recover the shared decoder; the held-out joint task is inferred only from its own support set. This is a mechanism-level concept-coordinate screen, not full neural MAML/LEO reproduction. Controls are direct additive task-vector composition, gradient-adapted LEO latent, and full-space support least squares.",
+      "changed_before_fresh_access": true,
+      "calibration_support_examples_per_factor": 64,
+      "heldout_support_examples": 8,
+      "fresh_worlds_unchanged": [
+        44910,
+        44911,
+        44912
+      ]
+    }
   ]
 }
