@@ -5,9 +5,9 @@
 - Base commit: `52a11e2f79b626865a78274bbbd5dd682d428c00`
 - Corrected development: complete (54701/54702)
 - Fresh seeds: sealed; efficacy gate failed on dev 54701 and gated bias dominates bytes
-- Results committed: pending status integration
-- Verification committed: pending status integration
-- Registry row updated: pending status integration
+- Results committed: yes (`ee8e9406a9d9df7c69e61a3a146d62b2dc8e6db8`)
+- Verification committed: yes
+- Registry row updated: yes; FAIL
 
 ## Next action
 
