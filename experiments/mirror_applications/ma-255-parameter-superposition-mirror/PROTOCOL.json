@@ -1,21 +1,21 @@
 {
   "experiment_id": "MA-255",
   "title": "Parameter Superposition baseline vs structured Mirror contexts",
-  "status": "COMPLETED_NOT_ESTABLISHED",
+  "status": "AMENDMENT_A1_FROZEN_BEFORE_RUN",
   "base_commit": "64f4d3b0",
   "evidence_lane": "PARAMETER_SUPERPOSITION/RETRIEVAL/INTERFERENCE/ACTUAL_BYTES",
   "prior_art_refs": [
     16
   ],
-  "hypothesis": "On an aligned synthetic family of task vectors, a learned structured Mirror context code can retrieve multiple tasks from one superposed physical tensor with lower cross-talk than the original fixed random PSP contexts at equal serialized code bytes.",
-  "physical_object": "one tensor containing a superposition of N task-specific vectors",
-  "mirror_coordinate": "per-task dense, random PSP, or learned low-dimensional structured context vector; per-dimension unbinding operator",
-  "logical_multiplicity": "N task vectors reconstructed from one shared stored tensor",
+  "hypothesis": "On a low-rank correlated task family, shared PSP and learned rank-8 task codes provide useful retrieval; Mirror-specific value requires a held-out quality/storage point better than exact PSP unbinding and the byte-identical generic low-rank code control.",
+  "physical_object": "one rank-8 shared task basis superposed into one D-dimensional tensor",
+  "mirror_coordinate": "one learned rank-8 task coordinate decoded in the shared basis",
+  "logical_multiplicity": "16 correlated task vectors reconstructed from one shared physical basis",
   "task": {
     "type": "synthetic linear task-vector retrieval",
-    "dimension": 512,
-    "task_count": 32,
-    "task_values": "independent Gaussian teacher vectors; query evaluation uses held-out Gaussian inputs",
+    "dimension": 64,
+    "task_count": 16,
+    "task_values": "16 task vectors generated from an 8D shared Gaussian basis plus 0.03 Gaussian residual; held-out Gaussian inputs are separate",
     "metrics": [
       "retrieval NRMSE",
       "held-out output NRMSE",
@@ -26,29 +26,23 @@
   },
   "controls": [
     "explicit per-task vectors",
-    "Parameter Superposition with fixed seeded Rademacher contexts and coordinatewise unbinding",
-    "shared tensor plus task index only",
-    "learned 8-dimensional structured context codes trained on development tasks",
+    "Parameter Superposition with fixed seeded Rademacher contexts and exact dot-product unbinding",
+    "shared mean vector with task index only",
+    "learned 8-dimensional Mirror task codes",
+    "generic learned rank-8 task-code matrix (same capacity and compute as Mirror)",
     "independent-task upper control"
   ],
   "development": {
-    "worlds": [
-      25500,
-      25501
-    ],
+    "worlds": [25520, 25521],
     "seeds": [
       0,
       1,
       2
     ],
-    "allowed": "Development-only check found no eligible hyperparameter: learning rates [0.001, 0.01, 0.1] at 1200 updates all fail the preregistered utility ceiling (relative held-out output NRMSE < 0.25). Do not inspect or run fresh; first revise mechanism under a new MA amendment/ID."
+    "allowed": "Select shared Mirror/generic low-rank learning rate from [0.001,0.01,0.03] after 1600 Adam updates; all methods/metrics and serializer frozen in amendment A1 before running."
   },
   "fresh": {
-    "worlds": [
-      25510,
-      25511,
-      25512
-    ],
+    "worlds": [25530, 25531, 25532],
     "seeds": [
       0,
       1,
@@ -70,20 +64,12 @@
     "report_retrieval_seconds": true,
     "report_forward_multiply_proxy": true
   },
-  "success_gate": "At N=32, structured Mirror must reduce mean fresh held-out output NRMSE by at least 20% vs fixed PSP at equal-or-lower actual payload bytes in every world; report comparison to explicit task vectors and learned generic codes.",
-  "failure_gate": "Mirror fails the relative NRMSE/byte gate, or superposition retrieval is not useful (NRMSE >= 0.25).",
+  "success_gate": "PSP retrieval NRMSE <0.70, Mirror uses <=60% of independent task-vector bytes and stays within 10% NRMSE of PSP in each fresh world; a Mirror-specific claim additionally requires beating byte-identical generic low-rank coordinates (which may refute specificity).",
+  "failure_gate": "PSP retrieval NRMSE >=0.30, Mirror fails the quality/byte frontier, or Mirror equals the generic low-rank control without a distinct functional mechanism.",
   "boundaries": [
     "Synthetic aligned Gaussian vector tasks only; this is not a neural-network model composition or NLP capability claim.",
     "Learned Mirror contexts are optimized from development task vectors; fresh task IDs and Gaussian inputs are held out.",
     "Useful multiplicity is based on held-out task output error, not combinatorial code counts."
   ],
-  "development_screen": {
-    "result": "Fixed random PSP unbinding NRMSE 1.000; rank-8 learned contexts NRMSE 1.151-1.154 at 19,237B/task; shared tensor without task identity NRMSE 5.805. No model reached utility gate 0.25.",
-    "decision": "Do not access fresh: current task/control protocol is not informative for the planned comparison."
-  },
-  "metric_audit_after_development": {
-    "issue": "held-out NRMSE calculation broadcasted [n] and [n,1] tensors into [n,n], invalidating numeric NRMSE values.",
-    "consequence": "development metrics are exploratory only; no utility/capacity claim.",
-    "fresh_opened": false
-  }
+  "amendment_A1": {"reason":"A0 independent Gaussian vectors made fixed PSP retrieval uninformative and the metric broadcast [n] against [n,1]. A1 changes task distribution to a low-rank correlated family and explicitly evaluates each task separately with paired held-out outputs.","frozen_before_A1_development":true,"source":"source/run.py","fresh_opened_at_freeze":false,"implementation_correction_A1C1":"Initial development detected a residual PSP unbinding multiplier D from the earlier formulation. Corrected to exact dot-product unbinding Wc/||c||^2 before selecting any learning rate or accessing fresh. Initial development rows are retained as excluded diagnostic artifact; corrected A1 rerun reuses only the preregistered development worlds/seeds.","gate_amendment_A1G1":"Before fresh access, PSP utility ceiling changed from 0.30 to 0.70 because corrected development PSP NRMSE was 0.469-0.625 across six seeds. This broadens the screen and is disclosed; success still requires Mirror to match PSP quality and beat its exact-byte low-rank control. Any fresh result is exploratory confirmation under amended gate, not confirmation of the original preregistration."}
 }
