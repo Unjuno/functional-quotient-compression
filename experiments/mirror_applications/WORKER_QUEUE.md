@@ -481,3 +481,8 @@ MA-575 is closed **FAIL**: factorized layer×block code saves 10,914 B versus in
 ## Current MA-576 handoff — 2026-10-09
 
 MA-576 is closed **FAIL** on `research/ma-576-smoothquant-residual-rotation-20261009`: residual rotation is 2.68% worse than QuaRot-only, adds 13,778 B, and exactly aliases native sequential SmoothQuant+QuaRot. Fresh sealed. Next P0: MA-578 KV-cache Mirror rotation code (PA112/PA113).
+
+
+## Current MA-578 handoff — 2026-10-09
+
+MA-578 is active on `research/ma-578-kv-cache-mirror-rotation-20261009`. Protocol/source are frozen; registered dev seeds 57801/02 pending; fresh test windows 57811–13 remain sealed. PA112/PA113 controls are included.
