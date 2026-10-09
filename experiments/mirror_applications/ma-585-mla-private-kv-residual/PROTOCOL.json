@@ -1,0 +1,75 @@
+{
+  "experiment_id": "MA-585",
+  "title": "MLA shared latent with sparse private KV residual",
+  "status": "DEVELOPMENT_ONLY_FAIL_STORAGE_FRONTIER",
+  "evidence_lane": "KV_STORAGE/ATTENTION_QUALITY/PRIVATE_FRONTIER/COMPUTE",
+  "base_commit": "b115cb3a",
+  "hypothesis": "Shared latent Mirror reconstruction plus sparse private KV residual preserves attention-output quality across heterogeneous roles at lower cache bytes than independent KV states.",
+  "physical_object": "shared rank-2 latent K/V basis",
+  "mirror_coordinate": "head x layer latent code with sparse role-private K/V residual",
+  "logical_multiplicity": "12 head-layer KV roles",
+  "prior_art_refs": [
+    "PA115"
+  ],
+  "controls": [
+    "native shared MLA latent",
+    "rank-2 Mirror/direct coefficients",
+    "sparse private residual fractions",
+    "independent full KV states"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      58501,
+      58502
+    ],
+    "heads": 4,
+    "layers": 3,
+    "sequence_length": 4,
+    "kv_dim": 4,
+    "heterogeneity": [
+      0.0,
+      0.1,
+      0.3,
+      0.6
+    ],
+    "private_fractions": [
+      0,
+      0.05,
+      0.1,
+      0.25,
+      0.5,
+      1.0
+    ],
+    "query_probes_per_role": 64,
+    "selection_metric": "attention output nMSE vs actual serialized bytes"
+  },
+  "fresh": {
+    "worlds_or_seeds": [],
+    "locked_before_access": true,
+    "open_only_if_development_passes": false,
+    "reason": "Direct coefficients exactly match shared latent code; frozen byte/quality gate uses development."
+  },
+  "storage": {
+    "authority": "actual deterministic NPZ bytes",
+    "paid_objects": [
+      "shared K/V basis",
+      "role codes",
+      "private residual values and indices",
+      "independent K/V states",
+      "metadata"
+    ]
+  },
+  "compute": {
+    "report_optimizer_updates": true,
+    "report_attention_MACs": true,
+    "report_reconstruction_MACs": true,
+    "report_wall_time": true
+  },
+  "success_gate": "Attention-output nMSE <=1e-3 at <=25% private fraction, >=20% fewer bytes than independent cache at heterogeneity <=0.3, and Mirror-specific advantage over direct coefficients.",
+  "failure_gate": "Private state erases byte savings or direct coefficients match Mirror.",
+  "boundaries": [
+    "synthetic attention cache screen",
+    "oracle SVD/top-k residuals",
+    "no real MLA kernel or LM claim"
+  ]
+}
