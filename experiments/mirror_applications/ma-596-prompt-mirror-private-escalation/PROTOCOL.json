@@ -1,0 +1,63 @@
+{
+  "experiment_id": "MA-596",
+  "title": "Continual soft-prompt then shared Mirror residual then private prompt escalation",
+  "status": "FROZEN_BEFORE_DEVELOPMENT",
+  "evidence_lane": "PROMPT_TUNING/CONTINUAL_RETENTION/SHARED_PRIVATE_FRONTIER/ACTUAL_BYTES/PA117_PA119",
+  "base_commit": "cb0188e8",
+  "model": "EleutherAI/pythia-70m-deduped",
+  "model_revision": "e93a9faa9c77e5d09219f6c868bfc7a1bd65593c",
+  "model_sha256": "3da388330e4549156d76b58d6d268c63cd005e9336b4f4d2d378421e7b7a33fd",
+  "tokenizer_sha256": "c24618a1b3e6a38167beff1c72cffd126c3a66254347304b50547d12c5f25624",
+  "dataset": "WikiText-2 raw, sequential article tasks; train split for development tasks and test split for fresh tasks",
+  "dataset_sha256": {
+    "train.txt": "9e9fa1ad55b1c2c95b08e37dd8e653f638fac2c6de904b79e813611eefbc985f",
+    "test.txt": "d790b833ef8cf03a90db7bf1271b7520b83c45ce07ba3c1a9699df81e239eca0"
+  },
+  "hypothesis": "A continual prompt system can preserve per-task held-out continuation quality by first sharing a common prompt, then adding rank-4 shared-basis task coordinates, and allocating private prompt residuals only when the frozen validation gate requires them; this should use fewer actual bytes than independent prompts while making escalation frequency explicit.",
+  "physical_object": "Frozen Pythia-70M with eight sequentially learned 8-token virtual prompts",
+  "mirror_coordinate": "Per-task rank-4 coordinate over the shared centered-PCA basis of prompt residuals around the current shared prompt mean",
+  "task_construction": "For each bank, deterministically sample eight distinct WikiText articles with at least 2048 tokens. Fit each task prompt on article tokens 0:1024. Use four fixed 64-token windows from suffix tokens 1024:2048 for validation/evaluation. Process tasks in seeded order. The fresh bank uses only test.txt articles; it is not used for development choices.",
+  "prompt_training": {
+    "prompt_length": 8,
+    "hidden_size": 512,
+    "optimizer": "AdamW on prompt embeddings only; frozen Pythia weights",
+    "updates_per_task": 8,
+    "windows_per_update": 4,
+    "window_tokens": 64,
+    "learning_rate": 0.05,
+    "initialization": "Gaussian std 0.02, seed derived deterministically from bank seed and task index"
+  },
+  "continual_encoding": {
+    "order": "seeded task order fixed before training",
+    "shared_prompt": "running mean of all prompt vectors seen so far",
+    "mirror_rank": 4,
+    "basis": "centered PCA of seen prompt residuals around the running mean; signs canonicalized by largest-magnitude loading",
+    "recode_policy": "After each task, recompute the seen-task shared basis/codes and re-evaluate retention for all seen tasks; report the cumulative re-encoding time.",
+    "private_escalation": "If rank-4 reconstruction is more than 0.05 nat/token worse than that task's independent full-prompt score on the fixed validation suffix, store the FP16 private prompt residual target-minus-decoded-prompt. The decoder adds this residual at inference.",
+    "controls": ["zero prompt", "independent full prompts", "shared running-mean prompt only", "native rank-4 PCA residual codes", "Mirror rank-4 residual codes", "Mirror rank-4 codes plus rule-triggered private residual"]
+  },
+  "development": {
+    "seeds": [59601, 59602],
+    "article_source": "train.txt",
+    "selection": "No hyperparameter sweep. Rank 4, 0.05 nat/token escalation threshold, prompt training schedule, and serialization are fixed by protocol. Report both development banks separately."
+  },
+  "fresh": {
+    "seeds": [59611, 59612, 59613],
+    "article_source": "test.txt",
+    "locked_before_access": true,
+    "open_rule": "Run all three fresh banks only after both registered development banks complete. Do not alter the frozen rule after inspecting fresh results."
+  },
+  "storage": {
+    "authority": "actual uncompressed NPZ inference payload bytes after load/serialize round trip",
+    "paid_objects": ["shared prompt mean", "shared PCA basis", "all task coefficients", "private residuals", "task/order/schema metadata"],
+    "common_backbone": "Report separately and exclude only from incremental prompt-bank comparisons; do not claim full-system bytes smaller than the frozen backbone."
+  },
+  "compute": {
+    "report": ["prompt-training updates and seconds", "cumulative re-encoding time", "PCA/encode/decode MAC proxy", "per-task inference seconds", "virtual prompt token overhead", "CPU/GPU device"],
+    "no_free_reconstruction": "Charge basis decoding and private residual addition as inference compute."
+  },
+  "primary_metrics": ["held-out next-token NLL delta versus independent prompt", "actual serialized bytes", "number/fraction of private escalations", "old-task NLL drift after each new task"],
+  "success_gate": "Both development banks: escalation system is within +0.05 nat/token of independent prompts on every task, uses <=0.75x independent prompt bytes, and Mirror's bytes or quality strictly improves on the matched native rank-4 code control. Fresh banks are opened after this gate for confirmation.",
+  "decision_rule": "Any quality or byte miss is FAIL. Exact equality with native rank-4 coding is FAIL for Mirror-specific attribution, but continue the preregistered fresh screen if tiered private escalation itself meets both development quality and byte gates; report the tiering result separately from the Mirror claim.",
+  "boundaries": ["This is a small continual text-prompt bank screen, not broad continual-learning capacity evidence", "Prompt residual escalation is an input-space private adapter surrogate, not a LoRA weight adapter", "No task router is studied; task identity is supplied", "A rank-4 code count is not independent functional capacity", "Family MA-594 remains deferred under the existing MA-461/462 HyperFormer family diagnostic"]
+}

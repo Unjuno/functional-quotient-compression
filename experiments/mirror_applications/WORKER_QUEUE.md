@@ -503,3 +503,8 @@ MA-591 is closed **FAIL for Mirror-specific attribution** on `research/ma-591-so
 
 
 MA-592 is closed **FAIL** on `research/ma-592-prompt-pool-mirror-composition-20261009`: top-2 composition is exactly native L2P soft weighting and worsens NLL versus top-1 by +.0165/+.0101 nat; bank 59101 misses oracle tolerance. Route top-1 accuracy is 65.6%/53.1%. Replay exact; fresh sealed. Next P0: MA-594 HyperFormer generator replaced by Mirror basis (PA118).
+
+
+## Current handoff — 2026-10-09
+
+MA-594 is deferred under `HYPERFORMER_MIRROR_CODE_FAMILY_DIAGNOSTIC_2026-10-08.md`: its registered task×layer×position generator replacement repeats the shared low-rank code-output family already paused after MA-461/462. Registry remains UNTESTED pending a materially different insertion. MA-596 is active on `research/ma-596-prompt-mirror-private-escalation-20261009`; its frozen protocol tests a tiered shared-prompt → rank-4 task code → private prompt residual frontier, with native PCA and independent prompts as controls.
