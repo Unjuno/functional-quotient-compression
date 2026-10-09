@@ -6,8 +6,8 @@
 - Protocol frozen: yes
 - Development complete: yes; 60 rows across 2 worlds × 3 seeds × 2 rho regimes × 5 methods
 - Fresh/audit opened: no; stopped by preregistered development failure
-- Results committed: no
-- Verification committed: no
+- Results committed: yes (`22fb7d42`)
+- Verification committed: yes; development artifact replay test passed (1/1)
 
 ## Next action
 
