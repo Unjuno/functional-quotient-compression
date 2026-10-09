@@ -6,13 +6,13 @@
 - Protocol freeze: `d3edd370`
 - Development complete: yes
 - Fresh/audit opened: yes, only after protocol freeze
-- Results committed: pending
-- Verification committed: pending
-- Registry row updated: pending
+- Results committed: yes (`a6bf0978`)
+- Verification committed: yes (`a6bf0978`)
+- Registry row updated: yes (branch tip `e5279c1a`)
 
 ## Next action
 
-Finish replay tests, update registry/status/claim ledger, verify integrity, and push the dedicated branch.
+MA-470 is complete and pushed; proceed to MA-471 on its own branch.
 
 ## Blockers
 
