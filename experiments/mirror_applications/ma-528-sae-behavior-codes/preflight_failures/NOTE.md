@@ -1,0 +1,1 @@
+Pre-development unit test initially compared two FP32 reconstruction accumulation orders bitwise; the mathematically equivalent sums differed by at most floating-point rounding. Updated the unit assertion to a 2e-7 absolute/relative tolerance. No model, task-vector, development or fresh data was accessed.

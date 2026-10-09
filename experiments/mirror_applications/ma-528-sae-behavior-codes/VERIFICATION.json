@@ -1,19 +1,36 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-528",
+  "commit": "PENDING_RESULT_COMMIT",
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=/tmp/ma516-pkgs python -m pytest -q experiments/mirror_applications/ma-528-sae-behavior-codes/tests",
+    "passed": 4,
+    "failed": 0
   },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "format": "uncompressed NPZ",
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "development_payloads": 8
   },
   "metric_replay": {
-    "checked": false,
-    "max_difference": null
+    "checked": true,
+    "max_difference": 0.0,
+    "core_metrics_exact": true,
+    "payload_sha256_exact": true,
+    "task_splits_exact": true,
+    "pool_selection_exact": true
   },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Fresh seeds 52811\u201352813 remained sealed because frozen explicit-FV quality and actual-byte gates failed.",
+    "The protocol was frozen before implementation/development.",
+    "All eight paid development NPZ payloads, metrics, splits and pools are retained under artifacts/development/."
+  ],
+  "fresh_seeds_accessed": [],
+  "artifacts": {
+    "model_revision": "e93a9faa9c77e5d09219f6c868bfc7a1bd65593c",
+    "model_sha256": "3da388330e4549156d76b58d6d268c63cd005e9336b4f4d2d378421e7b7a33fd",
+    "sae_revision": "36c2027509efad69836aa4231999c9b717848ecd",
+    "sae_sha256": "85b57dfe34d19769e2df0e208e38fda8815da8493c56b703a99ff74cc610dbf4"
+  }
 }
