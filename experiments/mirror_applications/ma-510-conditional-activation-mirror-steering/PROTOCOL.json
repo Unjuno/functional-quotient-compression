@@ -1,0 +1,72 @@
+{
+  "experiment_id": "MA-510",
+  "title": "Conditional activation Mirror steering",
+  "status": "FROZEN_SCREENING",
+  "base_commit": "48990a5a",
+  "evidence_lane": "MECHANISM/STORAGE/FALSE_TRIGGER",
+  "hypothesis": "A shared rank-4 activation basis plus per-behavior Givens codes reduces CAST behavior-vector storage while preserving conditional efficacy and false-trigger rate on held-out condition-behavior pairs.",
+  "physical_object": "Shared synthetic 64x4 steering basis plus rank-4 seed, and CAST condition prototypes/keys",
+  "mirror_coordinate": "Two FP16 Givens angles per behavior; optional FP16 private residual",
+  "logical_multiplicity": "16 behavior activations selected by 32 continuous conditions",
+  "prior_art_refs": [101],
+  "controls": [
+    "CAST with explicit FP32 behavior vectors and cosine condition gate",
+    "Shared basis with FP16 behavior coefficient table",
+    "Shared basis plus seed and per-behavior FP16 Givens angles",
+    "Mirror plus FP16 private residual per behavior"
+  ],
+  "task": {
+    "type": "synthetic continuous condition x behavior activation steering",
+    "hidden_dim": 64,
+    "rank": 4,
+    "conditions": 32,
+    "behaviors": 16,
+    "context_dim": 8,
+    "query_noise_sigma": 0.2,
+    "cosine_trigger_threshold": 0.35,
+    "held_out_pair_fraction": 0.2,
+    "private_residual_levels": [0.0, 0.1],
+    "primary_metric": "false-trigger rate on negative held-out pairs",
+    "metrics": [
+      "false-trigger rate",
+      "miss rate",
+      "on-target efficacy",
+      "off-target readout drift",
+      "behavior-vector NRMSE",
+      "actual serialized payload bytes",
+      "decoder/application MAC and wall time"
+    ]
+  },
+  "development": {
+    "worlds": [50800, 50801],
+    "seeds": [0, 1, 2],
+    "allowed": "No hyperparameter tuning; validate deterministic encoding and condition gate."
+  },
+  "fresh": {
+    "worlds": [50820, 50821, 50822],
+    "seeds": [0, 1, 2],
+    "locked_before_access": true,
+    "tuning_prohibited": true
+  },
+  "storage": {
+    "authority": "actual torch-serialized inference payload bytes",
+    "paid_objects": [
+      "condition prototypes and behavior condition keys",
+      "shared activation basis and seed",
+      "explicit behavior vectors or compact behavior codes",
+      "private residuals",
+      "trigger threshold and metadata"
+    ]
+  },
+  "compute": {
+    "report_application_mac_proxy": true,
+    "report_end_to_end_decoder_wall_time": true
+  },
+  "success_gate": "For every rho=0 fresh world: false-trigger <=.05, miss <=.05, efficacy >=.99, off-target drift <=.01, and Mirror bytes <=80% of cheapest generic coefficient control.",
+  "failure_gate": "Conditional quality fails or Mirror misses the 20% byte advantage over generic FP16 coefficient storage.",
+  "boundaries": [
+    "Synthetic Givens-aligned activation bank only.",
+    "Same CAST condition gate is used by every representation method; routing and vector reconstruction are reported separately.",
+    "No pretrained language behavior or capacity claim."
+  ]
+}
