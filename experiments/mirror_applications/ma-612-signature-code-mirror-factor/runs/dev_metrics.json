@@ -1,0 +1,101 @@
+{
+  "experiment_id": "MA-612",
+  "phase": "deterministic exhaustive pairing screen",
+  "python": "3.12.14",
+  "torch": "2.14.1+cpu",
+  "device": "cpu",
+  "worlds": {
+    "61201": {
+      "unfactorized": {
+        "payload_bytes": 2533,
+        "payload_sha256": "17de86b78b9057e6d26cb7c7c9fff4cd3bc49e55f8613b5bdccccda176e907a0",
+        "payload_file": "runs/dev_payloads/61201_unfactorized.pt",
+        "max_abs_error": 5.364418029785156e-07,
+        "heldout_nrmse2": 2.3419715371033782e-14,
+        "routing_accuracy": 1.0,
+        "heldout_pairings": 16,
+        "examples": 16384,
+        "optimizer_updates": 0,
+        "query_arithmetic_proxy_per_example": 3,
+        "query_trig_ops_per_example": 2
+      },
+      "factor_coeff": {
+        "payload_bytes": 2465,
+        "payload_sha256": "e834a28d0d524f8c7287ec0c560324f12b3f0834b0791bc37e2244d70e602fb3",
+        "payload_file": "runs/dev_payloads/61201_factor_coeff.pt",
+        "max_abs_error": 5.364418029785156e-07,
+        "heldout_nrmse2": 2.3419715371033782e-14,
+        "routing_accuracy": 1.0,
+        "heldout_pairings": 16,
+        "examples": 16384,
+        "optimizer_updates": 0,
+        "query_arithmetic_proxy_per_example": 3,
+        "query_trig_ops_per_example": 2
+      },
+      "mirror": {
+        "payload_bytes": 2401,
+        "payload_sha256": "3c430376e30c4484782c498ec5671ac2852fbf8aea4efd3f83ac3f858df0068a",
+        "payload_file": "runs/dev_payloads/61201_mirror.pt",
+        "max_abs_error": 0.0,
+        "heldout_nrmse2": 0.0,
+        "routing_accuracy": 1.0,
+        "heldout_pairings": 16,
+        "examples": 16384,
+        "optimizer_updates": 0,
+        "query_arithmetic_proxy_per_example": 2,
+        "query_trig_ops_per_example": 1
+      },
+      "latency_ms_per_16384": {
+        "unfactorized": 1.1879213003946159,
+        "factor_coeff": 1.3242757665769507,
+        "mirror": 0.8928419333339358
+      }
+    },
+    "61202": {
+      "unfactorized": {
+        "payload_bytes": 2533,
+        "payload_sha256": "bc43bcdbbb4c504a2e7d14fc2e0e3e6c012b100692418d8b091b06d68b0a4a30",
+        "payload_file": "runs/dev_payloads/61202_unfactorized.pt",
+        "max_abs_error": 5.364418029785156e-07,
+        "heldout_nrmse2": 2.3419715371033782e-14,
+        "routing_accuracy": 1.0,
+        "heldout_pairings": 16,
+        "examples": 16384,
+        "optimizer_updates": 0,
+        "query_arithmetic_proxy_per_example": 3,
+        "query_trig_ops_per_example": 2
+      },
+      "factor_coeff": {
+        "payload_bytes": 2465,
+        "payload_sha256": "0250e43ebde38a4387f8e60c16aed53b27be4de001333482285979e219a47b04",
+        "payload_file": "runs/dev_payloads/61202_factor_coeff.pt",
+        "max_abs_error": 5.364418029785156e-07,
+        "heldout_nrmse2": 2.3419715371033782e-14,
+        "routing_accuracy": 1.0,
+        "heldout_pairings": 16,
+        "examples": 16384,
+        "optimizer_updates": 0,
+        "query_arithmetic_proxy_per_example": 3,
+        "query_trig_ops_per_example": 2
+      },
+      "mirror": {
+        "payload_bytes": 2401,
+        "payload_sha256": "21865f10111b09fdf06bcb8cff18dee0a9c7214986f4929a5496ca6fd31dee30",
+        "payload_file": "runs/dev_payloads/61202_mirror.pt",
+        "max_abs_error": 0.0,
+        "heldout_nrmse2": 0.0,
+        "routing_accuracy": 1.0,
+        "heldout_pairings": 16,
+        "examples": 16384,
+        "optimizer_updates": 0,
+        "query_arithmetic_proxy_per_example": 2,
+        "query_trig_ops_per_example": 1
+      },
+      "latency_ms_per_16384": {
+        "unfactorized": 1.1363481331500225,
+        "factor_coeff": 1.3161438003104802,
+        "mirror": 0.7654280333857363
+      }
+    }
+  }
+}

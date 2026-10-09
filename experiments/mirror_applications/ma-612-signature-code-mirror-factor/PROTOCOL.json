@@ -1,0 +1,21 @@
+{
+  "experiment_id":"MA-612",
+  "title":"Factorized function signature and execution View codes",
+  "status":"SCREENING",
+  "evidence_lane":"MECHANISM/STORAGE/ROUTING",
+  "base_commit":"4532f4b8",
+  "hypothesis":"Factorizing discrete function signatures from reusable Mirror execution codes supports held-out cross-pairings with lower serialized bytes than per-function codes, and Mirror phase angles save bytes over factorized coefficient codes.",
+  "physical_object":"one shared interpreter with four frequency-signature basis pairs",
+  "mirror_coordinate":"one Givens phase angle reused across signatures; signature and execution View are independently addressed",
+  "logical_multiplicity":"four signatures x sixteen phase Views = 64 logical functions",
+  "prior_art_refs":["PA128"],
+  "controls":["unfactorized full per-pair two-coefficient function codes","factorized signature ids plus ordinary two-value phase codes","factorized signature ids plus one-angle Mirror phase codes"],
+  "fixture":"f(x;s,phi)=sin(omega_s*x+phi), omega_s={1,2,3,4}; 64 pairings; 16 held-out pairings withheld from the explicit pair table but reconstructed from reusable signatures and phase codes",
+  "development":{"worlds_or_seeds":[61201,61202],"logical_functions":64,"query_examples_per_function":256,"optimizer_updates":0,"selection_metric":"held-out max absolute routing error, NRMSE2, and actual payload bytes"},
+  "fresh":{"worlds_or_seeds":[],"locked_before_access":true,"run_only_if":"not applicable; deterministic exhaustive pairing screen"},
+  "storage":{"authority":"actual serialized inference payload bytes","format":"torch.save exact inference state including all IDs, codes and metadata","paid_objects":["signature values/indices","per-function or reusable phase codes","pair references","metadata"]},
+  "compute":{"report_tokens_or_examples":true,"report_optimizer_updates":true,"report_active_compute_proxy":true,"report_isolated_wall_clock":true,"proxy":"count shared basis evaluation, code decode and pair lookup; report signature/code table sizes and measured query latency"},
+  "success_gate":"Both seeds: 100% exact held-out routing; held-out NRMSE2 <=1e-6; factorized Mirror payload smaller than both unfactorized table and factorized ordinary coefficient-code bank.",
+  "failure_gate":"Any routing, held-out quality or actual-byte gate misses.",
+  "boundaries":["Analytic Fourier family only; no learned Neural Interpreter weights.","No natural task or language generalization claim.","All cross-pair functions are generated from predeclared signature and code sets."]
+}

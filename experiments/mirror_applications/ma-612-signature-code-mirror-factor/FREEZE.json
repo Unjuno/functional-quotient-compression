@@ -1,0 +1,25 @@
+{
+  "experiment_id": "MA-612",
+  "protocol_source_hashes": {
+    "PROTOCOL.json": "54d7753d208d6498e5173a3d8a94f8ef6dbaa376fba9b48224ce3d5b489e7730",
+    "README.md": "fce4dc522575627bd93733b79c259a58de3a8d26912323241cf358bfd86ac364",
+    "source/run_experiment.py": "607c55d4cd6d2185ef4fa993c1b81f5658c85b0b61557b043cfac5f070b707d3",
+    "tests/test_ma612.py": "114fc9eda5a0d9b94b0da34bcb090ccb51c980e42aa0d2703c9393d315c8313e"
+  },
+  "frozen_before_measurement": true,
+  "fresh_worlds_sealed": true,
+  "amendments": [
+    {
+      "reason": "unfactorized code bank route-replay bookkeeping omitted implicit phase index",
+      "scope": "implementation correction before valid development results; protocol and gates unchanged"
+    },
+    {
+      "reason": "measure comparable latency for all serialized code representations, not only Mirror",
+      "scope": "measurement instrumentation only; same fixed pairing set and payloads, no data/model/gate change"
+    },
+    {
+      "reason": "replace ambiguous operation count with separate arithmetic and transcendental-operation proxies",
+      "scope": "reporting correction only; exact fixture, serialized payloads, metric/gates unchanged"
+    }
+  ]
+}

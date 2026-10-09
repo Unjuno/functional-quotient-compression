@@ -1,0 +1,16 @@
+{
+  "experiment_id":"MA-612",
+  "decision":"PROMISING",
+  "phase":"deterministic exhaustive pairing screen",
+  "base_commit":"4532f4b8",
+  "environment":{"python":"3.12.14","torch":"2.14.1+cpu","device":"cpu"},
+  "frozen_protocol":"PROTOCOL.json; deterministic seeds 61201/61202; no training or fresh data",
+  "checks":[
+    {"command":"pytest -q experiments/mirror_applications/ma-612-signature-code-mirror-factor/tests","result":"2 passed"},
+    {"command":"python experiments/mirror_applications/ma-612-signature-code-mirror-factor/source/verify_results.py","result":"6/6 actual payload sizes and SHA-256 match; full-pair output/routing checks pass"}
+  ],
+  "metrics":"runs/dev_metrics.json and RESULTS_CORE.csv",
+  "payloads":"runs/dev_payloads; exact torch.save payload state",
+  "decision_basis":"All 64 signature/View pairings have exact routing and held-out NRMSE2 <2.4e-14; Mirror payload 2,401 B vs 2,465 B factorized ordinary codes and 2,533 B per-function codes; latency 0.77–0.89 ms vs 1.32 ms and 1.14–1.19 ms respectively.",
+  "limitations":["Analytic Fourier fixture, not learned Neural Interpreter.","Seed labels repeat the same exhaustive grid and are not independent replications.","Mirror byte advantage over ordinary factorized codes is only 64 B in this payload."]
+}
