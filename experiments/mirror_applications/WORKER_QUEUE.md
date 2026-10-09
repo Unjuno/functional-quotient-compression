@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-364.** MA-361 shared MoD reduced storage, but the direct scalar control matched Mirror exactly and one seed missed the quality margin. MA-362 and MA-363 are P1; proceed to MA-364, early-exit Mirror readout views (P0).
+**Current operational pointer (2026-10-09): MA-366.** MA-364 found ordinary coefficient sharing matched the Mirror readout exactly; a fixed policy gave no Mirror compute advantage. MA-365 is P1, so proceed to MA-366 depth × expert factorized Mirror routing (P0).
 
 # Worker queue
 

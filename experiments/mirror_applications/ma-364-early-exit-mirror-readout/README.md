@@ -1,7 +1,7 @@
 # MA-364 — Early-exit Mirror readout views
 
 Status: SCREENING; frozen before development  
-Branch: `research/ma-364-early-exit-mirror-readout-20261008`  
+Branch: `research/ma-364-early-exit-mirror-readout-20261009`
 Base: `c935a90`  
 Prior art: PA50 DeeBERT / Depth-adaptive Transformer.
 
