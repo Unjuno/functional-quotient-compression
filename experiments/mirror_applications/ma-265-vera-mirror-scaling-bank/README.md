@@ -4,11 +4,17 @@
 
 **T:** Frozen linear base plus shared VeRA random A/B factors and scale basis; compare full VeRA scales, one-angle Mirror, generic two-coefficient code and independent LoRA upper control. Aligned and independent task strata. Fresh worlds 26510–26512 × seeds 0–2; actual serialized state charged.
 
-**D:** Pending.
+**D:** FAIL against the registered >=30% byte saving over VeRA and Mirror-specific quality/storage gates. Fresh aligned tasks: Mirror, generic two-coefficient basis, and VeRA all had NRMSE 0; payloads were 9,925 B, 10,178 B, and 10,690 B. Mirror saved 7.2% vs VeRA and 2.5% vs generic. Mirror fit took 4.89 s/bank versus 0.27 s generic and 0.34 s VeRA. On independent scaling tasks, Mirror NRMSE was 0.3335, generic 0.3049, VeRA 0.0002, independent LoRA 0.0021. Fresh worlds 26510–26512 × 3 seeds; 72 rows.
 
 **C:** The generic two-coefficient basis is the simpler control and may match all Mirror behavior; per-task fitting noise may dominate tiny code savings.
 
-**U:** Fresh output quality, serialized bank bytes and fit/decode/apply compute.
+**U:** Natural task checkpoints, learned shared bases, transformer-scale throughput, quantized scales, and private-residual allocation.
+
+## Fact / interpretation / hypothesis
+
+- **Fact:** On an aligned scale orbit, Mirror fits at zero NRMSE but is only 2.5% smaller than generic low-rank codes and fits ~18× slower. Independent task scales require native/private state.
+- **Interpretation:** One-angle Mirror is a compact encoding of an aligned known orbit, not a useful general VeRA replacement or Mirror-specific frontier.
+- **Hypothesis:** A larger structured task bank may amortize coordinate metadata, but generic factor controls remain required.
 
 ## Results
 
