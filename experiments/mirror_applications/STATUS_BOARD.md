@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (44 completed; 586 UNTESTED)
+- P0: **630** (45 completed; 585 UNTESTED)
 - P1: **422** (15 completed; 407 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1096 UNTESTED, 30 PROMISING, 29 FAIL**
+- Current MA statuses: **1095 UNTESTED, 30 PROMISING, 30 FAIL**
 - 47 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -23,9 +23,9 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-611 — Neural-Interpreter Mirror function codes (P0; PA128)**
+**MA-612 — Mirror function signature + code factorization (P0; PA128)**
 
-MA-597–599 are verified FAILs for learned hash-bucket Views; unchanged variants are paused. MA-600 is a verified FAIL: hashed adapter views lose badly to private rank-2 LoRA. MA-601 is a verified FAIL: attention head diversity rises, but teacher CE is >1 nat worse than independent heads, worse than MQA/simple controls, and above the salted byte cap. MA-602 is a verified FAIL: repairing all duplicates requires 75.4% private entries, costs 34,995 B versus 13,791 B for hash4096, and random exception placement matches or beats it. MA-603 is a verified development FAIL: the two-angle coefficient View loses to native CondConv and a parameter-near nonlinear coefficient MLP; fresh remained sealed. MA-604 is a verified development FAIL: three-angle dynamic filter code cuts bytes and compute versus a full-filter hypernetwork but has 6.9×/7.9× worse held-out normalized MSE than native shared basis; fresh remained sealed. MA-606 is a verified development FAIL: one Givens-view FFN saves 49% bytes and 70% MAC proxy versus soft-MoE, but held-out normalized MSE is 11.2×/13.4× worse and FiLM also wins; fresh remained sealed. MA-607 is a verified development FAIL under its strict Mirror-specific gate: aligned AdapterFusion quality matches independent adapters with 47% fewer bytes, but generic shared-basis control is only 7.5% larger and faster; fresh remained sealed. MA-608 is PROMISING at the deterministic mechanism level: direct code fusion exactly preserves linear adapters, uses 64.7% fewer bytes than independent adapters and 11.3% fewer than generic shared matrices, with 51.7% lower compute proxy; no trained task adapters were tested. MA-610 is a verified development FAIL: usage pruning beats random selection by ~18×, but remains >100× worse than the overcomplete Mirror model, loses badly to four-view-from-start, and its actual compact payload is larger than the unpruned pool after charging indices. Next P0 is MA-611, structured Mirror function codes for a shared Neural Interpreter (PA128).
+MA-597–599 are verified FAILs for learned hash-bucket Views; unchanged variants are paused. MA-600 is a verified FAIL: hashed adapter views lose badly to private rank-2 LoRA. MA-601 is a verified FAIL: attention head diversity rises, but teacher CE is >1 nat worse than independent heads, worse than MQA/simple controls, and above the salted byte cap. MA-602 is a verified FAIL: repairing all duplicates requires 75.4% private entries, costs 34,995 B versus 13,791 B for hash4096, and random exception placement matches or beats it. MA-603 is a verified development FAIL: the two-angle coefficient View loses to native CondConv and a parameter-near nonlinear coefficient MLP; fresh remained sealed. MA-604 is a verified development FAIL: three-angle dynamic filter code cuts bytes and compute versus a full-filter hypernetwork but has 6.9×/7.9× worse held-out normalized MSE than native shared basis; fresh remained sealed. MA-606 is a verified development FAIL: one Givens-view FFN saves 49% bytes and 70% MAC proxy versus soft-MoE, but held-out normalized MSE is 11.2×/13.4× worse and FiLM also wins; fresh remained sealed. MA-607 is a verified development FAIL under its strict Mirror-specific gate: aligned AdapterFusion quality matches independent adapters with 47% fewer bytes, but generic shared-basis control is only 7.5% larger and faster; fresh remained sealed. MA-608 is PROMISING at the deterministic mechanism level: direct code fusion exactly preserves linear adapters, uses 64.7% fewer bytes than independent adapters and 11.3% fewer than generic shared matrices, with 51.7% lower compute proxy; no trained task adapters were tested. MA-610 is a verified development FAIL: usage pruning beats random selection by ~18×, but remains >100× worse than the overcomplete Mirror model, loses badly to four-view-from-start, and its actual compact payload is larger than the unpruned pool after charging indices. MA-611 is a verified FAIL: the analytic phase code bank is 11.9% smaller than two-value codes, but misses the composition threshold and costs much more support-search/query compute; this is not a learned Neural Interpreter. Next P0 is MA-612, factorized function signature and execution View codes (PA128).
 
 ## Active experiment
 
@@ -34,7 +34,7 @@ No active experiment was declared on either inspected baseline/status chain at r
 ## Verified status index
 
 - **PROMISING (30):** MA-001, MA-002, MA-003, MA-004, MA-005, MA-006, MA-007, MA-008, MA-012, MA-014, MA-015, MA-041, MA-076, MA-079, MA-111, MA-121, MA-156, MA-160, MA-171, MA-173, MA-181, MA-189, MA-241, MA-244, MA-245, MA-249, MA-250, MA-251, MA-608, MA-691.
-- **FAIL (29):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-597, MA-598, MA-599, MA-600, MA-601, MA-602, MA-603, MA-604, MA-606, MA-607, MA-610.
+- **FAIL (30):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-597, MA-598, MA-599, MA-600, MA-601, MA-602, MA-603, MA-604, MA-606, MA-607, MA-610, MA-611.
 
 All per-ID evidence is retained in the local experiment directories and in `CLAIM_LEDGER.csv`. Consult [the evidence integration audit](../../docs/phase2/MIRROR_MA_EVIDENCE_INTEGRATION_2026-10-08.md) for linked reports, verifications, provenance and claim boundaries.
 

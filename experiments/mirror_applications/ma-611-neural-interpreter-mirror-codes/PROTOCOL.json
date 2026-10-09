@@ -1,0 +1,21 @@
+{
+  "experiment_id":"MA-611",
+  "title":"Neural Interpreter Mirror function codes",
+  "status":"SCREENING",
+  "evidence_lane":"MECHANISM/STORAGE/COMPUTE",
+  "base_commit":"5fd9a420",
+  "hypothesis":"A one-angle Givens code on a shared sine/cosine interpreter matches a two-value unconstrained function code on held-out tasks and code composition while reducing actual serialized code-bank bytes.",
+  "physical_object":"one shared phase-basis interpreter with four frequency signatures",
+  "mirror_coordinate":"one phase angle per logical function; frequency is a shared-executor signature index",
+  "logical_multiplicity":"many phase-shifted functions executed by one interpreter",
+  "prior_art_refs":["PA128"],
+  "controls":["ordinary two-coefficient function code on same shared basis","Mirror one-angle code","teacher analytic function oracle"],
+  "fixture":"f(x;s,phi)=sin(omega_s*x+phi), omega_s in {1,2,3,4}; adapt codes from 32 support points and evaluate held-out x; compose same-signature phase pairs",
+  "development":{"worlds_or_seeds":[61101,61102],"logical_functions":64,"support_points_per_function":32,"query_points_per_function":256,"optimizer_updates":0,"selection_metric":"mean query NRMSE2 across phase-adapted logical functions and composed pairs"},
+  "fresh":{"worlds_or_seeds":[],"locked_before_access":true,"run_only_if":"not applicable; deterministic code adaptation/algebra screen"},
+  "storage":{"authority":"actual serialized inference payload bytes","format":"torch.save signature ids and adapted Mirror angles or coefficient vectors","paid_objects":["all function codes","signature indices","format metadata"]},
+  "compute":{"report_tokens_or_examples":true,"report_optimizer_updates":true,"report_active_compute_proxy":true,"report_isolated_wall_clock":true,"proxy":"report 720-angle support search per function separately from two-coefficient least squares; report query basis and code decode MAC proxies"},
+  "success_gate":"Both worlds: Mirror and ordinary-code mean query NRMSE2 differ by <=1e-4; composition NRMSE2 <=1e-5 for both; Mirror serialized code payload is smaller.",
+  "failure_gate":"Any development algebra, quality, or actual-byte gate misses.",
+  "boundaries":["Analytic Fourier interpreter, not a learned Neural Interpreter.","Only phase-shifted functions are represented; signature family is fixed.","No language or broad task-composition claim."]
+}

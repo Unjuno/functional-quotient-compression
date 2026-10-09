@@ -1,0 +1,91 @@
+{
+  "experiment_id": "MA-611",
+  "phase": "deterministic adaptation/algebra screen",
+  "python": "3.12.14",
+  "torch": "2.14.1+cpu",
+  "device": "cpu",
+  "worlds": {
+    "61101": {
+      "logical_functions": 64,
+      "composed_functions": 32,
+      "support_examples": 2048,
+      "query_examples": 16384,
+      "compose_query_examples": 8192,
+      "optimizer_updates": 0,
+      "query_mirror_nrmse2_mean": 7.452748631231465e-06,
+      "query_coeff_nrmse2_mean": 5.051947070124512e-14,
+      "compose_mirror_nrmse2_mean": 1.7971114676079702e-05,
+      "compose_coeff_nrmse2_mean": 9.106826730782791e-14,
+      "payload_bytes": {
+        "mirror": 2845,
+        "coeff": 3229
+      },
+      "payload_sha256": {
+        "mirror": "0681c1d203c6a40e56f93caa637c3eac3eca966eb2ada4f6ef97e72b8385b1a1",
+        "coeff": "73e706580a8e52a66609175baa83e0267ff7855ff5cda86de0f680146d68f170"
+      },
+      "payload_files": {
+        "mirror": "runs/dev_payloads/61101_mirror.pt",
+        "coeff": "runs/dev_payloads/61101_coeff.pt"
+      },
+      "payload_replay_max_abs": {
+        "mirror": 0.0,
+        "coeff": 0.0
+      },
+      "support_compute_proxy": {
+        "mirror_grid_search_candidates": 1474560,
+        "ordinary_code_lstsq_examples": 2048
+      },
+      "query_compute_proxy_per_example": {
+        "mirror": 6,
+        "coeff": 3
+      },
+      "latency_ms_per_16384": {
+        "mirror": 1.435701366669188,
+        "coeff": 0.906716433140294
+      },
+      "world_seed": 61101
+    },
+    "61102": {
+      "logical_functions": 64,
+      "composed_functions": 32,
+      "support_examples": 2048,
+      "query_examples": 16384,
+      "compose_query_examples": 8192,
+      "optimizer_updates": 0,
+      "query_mirror_nrmse2_mean": 7.240232581473549e-06,
+      "query_coeff_nrmse2_mean": 4.829822253164609e-14,
+      "compose_mirror_nrmse2_mean": 1.4198069170162642e-05,
+      "compose_coeff_nrmse2_mean": 8.31647202307659e-14,
+      "payload_bytes": {
+        "mirror": 2845,
+        "coeff": 3229
+      },
+      "payload_sha256": {
+        "mirror": "a8969bb25b3c2ae47db9818fd5e108b07a7482315caac52932a4491b4f623a23",
+        "coeff": "b327b8a41ab7ccddd195b75306ade07cc0042a4a7c84296ac459d836f9231e73"
+      },
+      "payload_files": {
+        "mirror": "runs/dev_payloads/61102_mirror.pt",
+        "coeff": "runs/dev_payloads/61102_coeff.pt"
+      },
+      "payload_replay_max_abs": {
+        "mirror": 0.0,
+        "coeff": 0.0
+      },
+      "support_compute_proxy": {
+        "mirror_grid_search_candidates": 1474560,
+        "ordinary_code_lstsq_examples": 2048
+      },
+      "query_compute_proxy_per_example": {
+        "mirror": 6,
+        "coeff": 3
+      },
+      "latency_ms_per_16384": {
+        "mirror": 1.3225058666042362,
+        "coeff": 0.9145780335529707
+      },
+      "world_seed": 61102
+    }
+  }
+}
