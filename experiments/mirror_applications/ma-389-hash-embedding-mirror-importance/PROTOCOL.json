@@ -1,0 +1,82 @@
+{
+  "experiment_id": "MA-389",
+  "title": "Hash Embedding token-importance Mirror codes",
+  "status": "PROTOCOL_FROZEN_BEFORE_DEVELOPMENT",
+  "base_commit": "a32256fc",
+  "prior_art_refs": ["PA58"],
+  "hypothesis": "For a collision-heavy hashed vocabulary whose token importance pairs lie on a shared unit-circle orbit, one per-token Givens angle can preserve embedding/task quality while reducing the native Hash Embedding importance state and complete payload.",
+  "physical_object": "Two shared 32x16 component embedding tables addressed by deterministic independent hashes; 256 logical token embeddings combine the two looked-up rows.",
+  "mirror_coordinate": "One angle per token generates its two component importance weights as (cos(theta_i), sin(theta_i)); it replaces the native Hash Embedding's two learned per-token importance scalars, while both shared component tables and hash functions remain unchanged.",
+  "logical_multiplicity": "256 distinct token embedding functions backed by two shared hash component tables and token-specific importance coordinates.",
+  "prior_art_delta": "PA58 Hash Embeddings combine vectors from shared pools selected by hash functions with token-specific importance weights. The native hash tables and two independent learned weights per token are mandatory controls; only the importance vector representation changes.",
+  "model": {
+    "vocabulary_size": 256,
+    "embedding_dim": 16,
+    "hash_tables": 2,
+    "bucket_count_per_table": 32,
+    "hash_function": "two deterministic seeded 64-bit mixing functions; seeds are serialized as metadata",
+    "source_train_tokens": 256,
+    "updates": 1500,
+    "batch_size": 64,
+    "optimizer": "Adam",
+    "learning_rate": 0.01,
+    "development_seeds": [38901, 38902],
+    "fresh_seeds": [38911, 38912, 38913],
+    "methods": [
+      "full independent 256x16 embedding table",
+      "native Hash Embedding with two shared 32x16 tables + two learned importance weights per token",
+      "shared hash tables + one tied common importance pair for every token",
+      "shared hash tables + one common vector multiplied by one scalar per token",
+      "shared hash tables + one learned Givens angle per token (Mirror importance code)"
+    ]
+  },
+  "teacher": {
+    "hash_embedding": "E_i = cos(theta_i) * T0[h0(i)] + sin(theta_i) * T1[h1(i)] with independent random shared tables T0/T1 and per-token angles. This is a deliberately aligned importance-orbit feasibility fixture.",
+    "task_quality": "A fixed 16x16 decoder maps embeddings to token classes; labels and soft targets are generated from teacher embeddings and are held fixed for all methods.",
+    "collision_sensitivity": "Report token embedding and decoder quality separately for token IDs sharing a hash pair versus unique pairs."
+  },
+  "controls": [
+    "independent full embedding table",
+    "native Hash Embedding with unrestricted two per-token importance weights",
+    "shared hash tables with common tied importance weights",
+    "shared hash tables with scalar token gates",
+    "shared hash tables with per-token Givens Mirror angles"
+  ],
+  "development": {
+    "worlds_or_seeds": [38901, 38902],
+    "selection_metric": "test token-class NLL/top-1 accuracy and embedding NRMSE, with actual payload bytes and collision-stratified errors",
+    "allowed_tuning": "No tuning planned; fixed tables, vocabulary, training schedule and teacher are run once. Implementation corrections rerun development only before fresh access."
+  },
+  "fresh": {
+    "worlds_or_seeds": [38911, 38912, 38913],
+    "locked_before_access": true,
+    "open_gate": "Both development worlds: full-table and native-Hash NRMSE <=0.03; Mirror embedding NRMSE <=0.03 and decoder NLL within 0.02 nat / top-1 within 1pp of native Hash; Mirror complete payload <=0.60x full table; Mirror improves NRMSE over tied/scalar controls by >=0.01 at <=1.10x their bytes; native Hash coefficients do not match Mirror within 0.005 NRMSE at <=Mirror bytes; both collision and noncollision strata satisfy quality gate. Otherwise fresh remains sealed."
+  },
+  "storage": {
+    "authority": "actual serialized compressed NPZ inference payload bytes after reload",
+    "paid_objects": [
+      "full table or both shared hash component tables",
+      "every per-token importance weight, scalar gate or Mirror angle",
+      "hash seeds and bucket/vocabulary dimensions",
+      "fixed decoder used for task-quality evaluation, included in each method payload",
+      "NPZ names, headers and compression overhead"
+    ]
+  },
+  "compute": {
+    "report_tokens_and_updates": true,
+    "report_component_lookup_MAC_proxy": true,
+    "report_hash_integer_ops_proxy": true,
+    "report_importance_reconstruction_ops": true,
+    "report_fixed_decoder_MAC_proxy": true,
+    "report_training_wall_time": true,
+    "report_inference_tokens_per_second": true
+  },
+  "success_gate": "All three fresh worlds meet embedding/task/collision quality, <=60% complete full-table bytes, simpler controls, and exact payload replay.",
+  "failure_gate": "Mirror misses the complete-payload or quality gate, tied/scalar controls match at comparable bytes, or native Hash importance weights match within 0.005 NRMSE at no greater payload.",
+  "boundaries": [
+    "aligned synthetic vocabulary and frozen decoder only; no language-model or recommender claim",
+    "importance teacher is generated from the same unit-circle family as the Mirror code",
+    "all shared hash tables, token codes, decoder and hash metadata are charged",
+    "256 tokens and fixed updates are not a capacity or scaling claim"
+  ]
+}
