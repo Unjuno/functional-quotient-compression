@@ -1,0 +1,105 @@
+{
+  "experiment_id": "MA-534",
+  "title": "Role-specific logical MLP views over a shared transcoder bank",
+  "status": "SCREENING",
+  "evidence_lane": "ROLE_CONDITIONED_MLP/TRANSCODER_FEATURES/QUALITY/ACTUAL_BYTES/COMPUTE",
+  "base_commit": "5105a229",
+  "hypothesis": "For four context roles defined from fit-only residual-input clusters, a shared 32-atom transcoder feature bank with role-specific 16-angle Givens Views and top-8 decoding reduces held-out role-conditioned native-MLP output error by at least 10% versus both ordinary per-role sparse feature gates and a byte-near role-diagonal gain control, without increasing shared physical transcoder state.",
+  "physical_object": "Pinned SmolLM2-135M layer-8 skip-transcoder, shared 32-atom decoder bank selected from fit activations.",
+  "mirror_coordinate": "Per-role 16-angle Givens transform over the 32-dimensional sparse feature code before retaining top-8 coefficients and decoding with the shared feature atoms.",
+  "logical_multiplicity": "Four residual-input cluster roles; each has its own small coordinate/view code but shares one transcoder bank.",
+  "prior_art_refs": [
+    "PA103"
+  ],
+  "controls": [
+    "Native dense layer-8 MLP output (zero-error reference)",
+    "Released full top-128 transcoder output",
+    "Hard-tied shared 32-atom transcoder bank with top-8 coefficients",
+    "Role-specific frozen sparse feature gates: per-role support is the 8 atoms with highest mean positive fit activation",
+    "Role-specific learned diagonal gains on the same 32 atoms then top-8 decode (simple FiLM/gate control)",
+    "Role-specific learned Givens Mirror views on the same 32 atoms then top-8 decode",
+    "Four independent dense MLP copies (storage/quality upper reference; no training)"
+  ],
+  "task": {
+    "model": "HuggingFaceTB/SmolLM2-135M",
+    "model_revision": "93efa2f097d58c2a74874c7e644dbc9b0cee75a2",
+    "transcoder_repo": "EleutherAI/skip-transcoder-SmolLM2-135M-128x",
+    "transcoder_revision": "651f51421f2e1aa8fbd907e02ef421d3da55ff6d",
+    "layer": 8,
+    "dataset": "closji/wikitext__wikitext-2-raw-v1",
+    "dataset_revision": "d575192455c5e98b8daed777574046264579cb09",
+    "primary_metric": "mean role-balanced raw MLP-output relative MSE on held-out tokens",
+    "secondary_metrics": [
+      "worst-role relative MSE",
+      "cosine similarity",
+      "actual serialized incremental and standalone bytes",
+      "active decoder MACs",
+      "dense encoder MACs",
+      "isolated wall-clock"
+    ],
+    "bank_deployment": "Store only the selected 32 encoder rows, selected 32 decoder rows, their biases, and the skip matrix; charge these actual serialized bytes rather than charging unused full checkpoint tensors.",
+    "transcoder_sha256": "07f811a32b7c0deb5cb15ad3f1e8529bb38265768eafba0713b3c208b4bc02e5"
+  },
+  "development": {
+    "split": "train",
+    "seeds": [
+      53401
+    ],
+    "num_sequences": 32,
+    "sequence_length": 128,
+    "fit_eval_windows": "16 fit and 16 evaluation unique aligned 128-token blocks; no overlap",
+    "roles": 4,
+    "role_assignment": "Fit K=4 centroids on fit-half layer-8 MLP input vectors; assign each token by nearest centroid. Centroids fit on development data only.",
+    "feature_bank": "On fit half, rank all 73,728 features by summed positive top-128 encoder activation and retain 32. At inference serialize/use only those 32 encoder/decoder rows, bias entries, and the shared skip matrix.",
+    "sparse_k": 8,
+    "mirror_angles_per_role": 16,
+    "givens_pattern": "Pair consecutive coordinates; initialize zero angles and learn on fit only.",
+    "optimization": "Optimize only Givens angles and diagonal gains with fixed Adam settings, 200 updates, batch size 256, lr 0.01, one CPU thread. Plain per-role supports are deterministic fit-only selections. No settings chosen using evaluation.",
+    "selection_metric": "Mean role-balanced held-out raw output relative MSE; no fresh access before the gate.",
+    "plain_gate": "For each role, freeze support to 8 bank atoms with highest mean positive fit activation in that role; all other bank activations are zeroed."
+  },
+  "fresh": {
+    "split": "validation",
+    "seeds": [
+      53411,
+      53412
+    ],
+    "num_sequences": 32,
+    "sequence_length": 128,
+    "eval_windows": "32 unique aligned 128-token validation blocks, all used as evaluation; no fit/calibration on validation. Use frozen development centroids, bank, supports, diagonal gains, and Mirror angles.",
+    "locked_before_access": true,
+    "access_condition": "Open only if dev Mirror improves mean relative MSE by >=10% over both per-role plain sparse gates and diagonal gain control, worst-role MSE <=1.25x mean, and actual payloads/compute are measured."
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "serialization": "Safetensors for transcoder state, bank indices, role centroids, Givens angles and diagonal gains; canonical JSON configs; serialize native MLP replacement base with layer-8 MLP removed.",
+    "paid_objects": [
+      "base model excluding replaced native MLP",
+      "only selected shared 32 encoder/decoder atom rows, biases, and skip matrix",
+      "shared atom-bank indices",
+      "role centroids/router",
+      "per-role sparse gates",
+      "per-role Givens angles",
+      "per-role diagonal gains",
+      "all configs and metadata",
+      "role centroids are charged only for role-conditioned methods; hard-tied shared-bank control has no router state"
+    ],
+    "shared_base_and_transcoder_charged_once": true
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true,
+    "report_inference_latency": true
+  },
+  "success_gate": "On each fresh seed, Mirror role-balanced relative MSE must be at least 10% below both per-role plain sparse gate and diagonal gain control, with worst-role MSE <=1.25x average. Report the full serialized replacement payload and compute; no capacity claim from role count alone.",
+  "failure_gate": "Development Mirror fails to beat either cheap control by the frozen 10% margin, or worst-role MSE >1.25x mean; fresh remains sealed.",
+  "boundaries": [
+    "Role clusters are fit-derived input distribution groups, not independent semantic experts.",
+    "Output reconstruction is a mechanism/quality screen, not end-task language-model quality or independent capacity.",
+    "The previous MA-533 failed generic transcoder fidelity; MA-534 tests whether role-specific views improve approximations over a shared sparse feature bank.",
+    "Single model/checkpoint/layer and one 32-atom bank only.",
+    "The full 73,728-feature source checkpoint is needed during bank selection but unused rows are not in the inference payload; the exact selected-bank payload is serialized and charged."
+  ]
+}
