@@ -3,9 +3,10 @@
 - Status: **FAIL** (development gate).
 - Branch: `research/ma-533-transcoder-feature-experts-20261009`
 - Base commit: `c07cba1d`.
-- Protocol frozen: `81639629`; numbered amendments through `3c7f06c7`.
+- Protocol frozen: `81639629`; amendments 1–9 and final source committed through `3c7f06c7`.
+- Result commit: `06d74b8b` (pushed).
 - Development complete: yes; fresh/audit opened: no.
-- Results committed: pending final report commit.
+- Results committed: yes.
 
 ## H — Hypothesis
 
