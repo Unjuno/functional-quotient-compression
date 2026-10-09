@@ -59,16 +59,17 @@
   },
   "fresh": {
     "worlds": [
-      48210,
-      48211,
-      48212
+      48220,
+      48221,
+      48222
     ],
     "seeds": [
       0,
       1,
       2
     ],
-    "locked_before_access": true
+    "locked_before_access": true,
+    "A0_excluded": "exploratory only due to oracle phase leakage"
   },
   "storage": {
     "authority": "actual serialized inference payload bytes",
@@ -94,5 +95,21 @@
     "Synthetic product-of-circles residual functions with known orthogonal planes, not natural model edits or learned task functions.",
     "Native RVQ codebooks train on development data only; fresh targets only assign codes and measure.",
     "Logical code combinations are not counted as capacity; only measured quality, bytes, code usage and stage ablations matter."
-  ]
+  ],
+  "amendment_A1": {
+    "reason": "A0 source code passed the synthetic teacher phase theta directly to Mirror and generic coefficient assignment, allowing oracle latent access and omitting inference-side code derivation. A0 fresh artifacts/results are preserved as exploratory and excluded from confirmatory claims.",
+    "change": "Mirror and generic coefficient codes now infer phase from each observed target 2D component with atan2(y[2j+1], y[2j]); no teacher theta is used. Explicitly charge/report phase-encode operations. No model, sweep, threshold, or hyperparameter change.",
+    "fresh_worlds": [
+      48220,
+      48221,
+      48222
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "locked_before_A1_access": true,
+    "authoritative": "A1 only; protocol frozen before A1 fresh execution."
+  }
 }
