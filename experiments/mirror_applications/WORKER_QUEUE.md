@@ -1,6 +1,6 @@
 # Worker queue
 
-**Current operational pointer (2026-10-09): MA-470.** MA-436/438 show scoped synthetic quality/storage Pareto points; MA-437/439/440/441/442/443/444/445/446/447/448/449/450/451/452 failed their registered Mirror-specific gates. Continue with the next registered validation item.
+**Current operational pointer (2026-10-09): MA-471.** MA-436/438 show scoped synthetic quality/storage Pareto points; MA-437/439/440/441/442/443/444/445/446/447/448/449/450/451/452 failed their registered Mirror-specific gates. Continue with the next registered validation item.
 
 The queue is derived from `IDEA_REGISTRY.csv`. The registry is authoritative.
 
