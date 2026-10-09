@@ -1,7 +1,9 @@
 # MA-286 status
 
-- Status: SCREENING
+- Status: FAIL for Mirror-specific advantage; aligned shared-subspace result replicated.
 - Branch: `research/ma-286-cheap-lora-mirror-columns-20261009`
-- Base: `4e9ef276`
-- Prior art: PA29 Cheap-LoRA / structured LoRA
-- Fresh locked.
+- Frozen protocol/source commit: `352f9ce5`
+- Fresh: 108 rows, worlds 28610–28612 × seeds 0–2.
+- Aligned Mirror/generic: NRMSE 2.99e-8 at ~5.34 KB; Cheap-LoRA 0.0125 at 12.38 KB.
+- Independent tasks: shared code near no-adapter; full LoRA near exact.
+- See `VERIFICATION.json`.

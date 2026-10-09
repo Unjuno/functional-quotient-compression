@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-286.** MA-282 found an aligned Monarch scalar orbit compressed ~38% vs per-task Monarch, but generic coefficients matched exactly; independent codes needed private state. Continue to MA-286 with native Cheap-LoRA controls.
+**Current operational pointer (2026-10-09): MA-288.** MA-286 replicated an aligned shared-column compression signal (~57% fewer bytes than Cheap-LoRA), but generic coefficients matched Mirror exactly; independent task subspaces required private LoRA. Continue to MA-288 with fast-weight programmer controls.
 
 # Worker queue
 
