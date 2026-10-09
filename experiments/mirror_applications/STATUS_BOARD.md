@@ -6,10 +6,10 @@ Integration branch: `research/mirror-application-current-evidence-20261008`; can
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (135 completed; 495 UNTESTED)
+- P0: **630** (136 completed; 494 UNTESTED)
 - P1: **422** (22 completed; 400 UNTESTED)
 - P2: **103** (1 completed; 102 UNTESTED)
-- Current MA statuses: **997 UNTESTED, 44 PROMISING, 114 FAIL**
+- Current MA statuses: **996 UNTESTED, 44 PROMISING, 115 FAIL**
 - 48 experiment directories, complete with status/protocol/results/verification files, are represented in the current evidence set.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-268 is next.
@@ -174,3 +174,6 @@ KG relation rotations (RotatE, TuckER, QuatE, PairRE), EXIF/device-aware ISPs (P
 
 
 **MA-457 FAIL; scoped module-birth reduction:** on a 32-task synthetic stream with 24 rotated tasks and eight off-orbit tasks, Mirror had 7.11 module births vs PathNet 24.22 and NRMSE 0.00769 vs 0.01522. Payload was 71.82B/task vs 80.27B PathNet (only 10.5% savings; registered gate <=75%) and private quality was 1.42e-7 at 69.28B/task. Mirror path search cost 4.99M MAC/sequence vs 0.10M. Aligned synthetic evidence only. **Next: MA-461 (P0).**
+
+
+**MA-461 FAIL:** for synthetic context-conditioned 2x2 adapters, a Mirror angle decoder scored NRMSE 0.908 vs 5.51e-7 full HyperFormer and 0.364 generic rank-2 basis. Actual N20 payload was 180.45B/context vs 174.25B HyperFormer; the rank-2 basis matched Mirror bytes and had much better quality. Mirror geometry did not fit general affine matrix variation. No Transformer evidence. **Next: MA-462.**
