@@ -1,0 +1,11 @@
+{
+  "experiment_id": "MA-599",
+  "amendment": 1,
+  "timing": "During first dev process, before metrics.json or registered payloads were generated",
+  "finding": "Factorized bucket lookup multiplied a trainable Torch tensor by its NumPy sign array; Torch attempted an invalid NumPy conversion.",
+  "change": "Convert the deterministic hash sign array to a Torch tensor at the factorized bucket lookup, matching the other hash methods.",
+  "registered_metrics_generated": false,
+  "payloads_generated": false,
+  "fresh_accessed": false,
+  "protocol_gates_changed": false
+}

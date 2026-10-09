@@ -1,0 +1,40 @@
+{
+  "development_seeds": [
+    59901,
+    59902
+  ],
+  "experiment_id": "MA-599",
+  "fresh_artifacts_present": false,
+  "fresh_seeds_accessed": [],
+  "gate_decision": "FAIL: misses +1pp control gate; 27,651 B is 2.576x salted; native dense rank-4 residual matches within 1pp at fewer bytes.",
+  "metric_replay_checked": true,
+  "payloads_replayed": 14,
+  "protocol_sha256": "c6f0086041328be8441bf1b4fe77e1ab6d5ba305f9f1223d63b30cc17382f0db",
+  "results": {
+    "59901": {
+      "rank4_accuracy": 0.9133333563804626,
+      "rank4_bytes": 17337,
+      "salted_accuracy": 0.9111111164093018,
+      "salted_bytes": 10735,
+      "seven_payloads_byte_exact": true,
+      "view_accuracy": 0.9133333563804626,
+      "view_bytes": 27651
+    },
+    "59902": {
+      "rank4_accuracy": 0.9111111164093018,
+      "rank4_bytes": 17337,
+      "salted_accuracy": 0.9133333563804626,
+      "salted_bytes": 10735,
+      "seven_payloads_byte_exact": true,
+      "view_accuracy": 0.9133333563804626,
+      "view_bytes": 27651
+    }
+  },
+  "serialization_roundtrip_checked": true,
+  "source_sha256": "dec11aeda9dcac0e0ddbbdfc0cd57aab4cf68190bb6ae758b51dc733c8c9e953",
+  "status": "FAIL",
+  "tests": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 python -m pytest -q experiments/mirror_applications/ma-599-factorized-hash-mirror-code/tests",
+    "expected_passed": 3
+  }
+}

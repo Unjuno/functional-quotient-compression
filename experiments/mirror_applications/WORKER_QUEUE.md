@@ -457,3 +457,13 @@ A worker may batch implementation work across a family, but scientific status is
 ## Stop rule
 
 If two consecutive candidates in a family fail for the same demonstrated structural reason, stop that family and write a family diagnostic before continuing.
+
+
+## MA-599 family diagnostic and handoff — 2026-10-09
+
+MA-597, MA-598 and MA-599 all failed to show a useful gain from learned Mirror structure over native hash addressing / simple controls: MA-597 input Givens missed native HashedNet and larger buckets; MA-598 expert Givens missed salted hashing and cost more; MA-599 rank-4 bucket-basis codes used 2.576x salted bytes and were matched by a cheaper dense rank-4 residual. Pause unchanged collision-correction and expert bucket-View variants pending a materially different mechanism. This does not pause all hashed parameters: MA-600 adapter deltas and MA-601 attention-head projections change the target object and should be evaluated separately with matched native controls. MA-599 replay exact, fresh sealed. Next: MA-600 hash-compressed adapter bank.
+
+
+## MA-599 family diagnostic and handoff — 2026-10-09
+
+MA-597, MA-598 and MA-599 all failed to show a useful gain from learned Mirror structure over native hash addressing / simple controls: MA-597 input Givens missed native HashedNet and larger buckets; MA-598 expert Givens missed salted hashing and cost more; MA-599 rank-4 bucket-basis codes used 2.576x salted bytes and were matched by a cheaper dense rank-4 residual. Pause unchanged collision-correction and expert bucket-View variants pending a materially different mechanism. This does not pause all hashed parameters: MA-600 adapter deltas and MA-601 attention-head projections change the target object and should be evaluated separately with matched native controls. MA-599 replay exact, fresh sealed. Next: MA-600 hash-compressed adapter bank.

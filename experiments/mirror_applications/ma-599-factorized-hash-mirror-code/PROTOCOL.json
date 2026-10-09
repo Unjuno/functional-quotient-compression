@@ -1,0 +1,88 @@
+{
+  "experiment_id": "MA-599",
+  "title": "Factorized hash-bucket View codes for logical specialists",
+  "status": "FROZEN_BEFORE_DEVELOPMENT",
+  "protocol_frozen": true,
+  "base_source_commit": "2d55c1a0",
+  "evidence_lane": "HASHEDNET_MOE/PA120_PA02/FACTORIZED_VIEW/ACTUAL_BYTES",
+  "base_commit": "c935a903",
+  "dataset": "scikit-learn load_digits 1.8.0; fixed tensor hash faf2d98f61250c1cdc0b114323133d3c58da04f5c5d28bb78e4bde3c936a75b1",
+  "task": "Four conditional specialists keyed by label mod 4, class-masked expert logits and shared linear router; 64\u2192128 ReLU\u219210",
+  "hypothesis": "A shared rank-4 bucket-space basis with four small expert coefficient vectors can produce four useful specialist functions from one shared 2,048-bucket HashedNet table, exceeding tied/salted hash quality by \u22651pp at \u22641.05x salted bytes and matching or beating a native low-rank dense residual control.",
+  "physical_object": "One shared 2,048-value hash table, shared expert output layer, and shared router",
+  "mirror_coordinate": "Four expert-specific rank-4 coefficients over one learned rank-4 vector basis in hash-bucket space. Effective bucket vector e = theta + U @ c_e. Hash map/sign is shared and deterministic.",
+  "controls": [
+    "ordinary tied shared hash",
+    "expert-salted shared hash",
+    "independent per-expert hash tables",
+    "factorized hash-bucket View (rank 4)",
+    "shared hash plus per-expert dense rank-4 matrix residual",
+    "shared hash plus per-expert diagonal gate",
+    "independent dense experts"
+  ],
+  "training": {
+    "optimizer": "AdamW",
+    "learning_rate": 0.01,
+    "updates": 800,
+    "batch_size": 128,
+    "weight_decay": 0,
+    "router_init_and_batches": "matched across methods",
+    "initialization": "expert code coefficients zero; shared bases normal std 0.01; other parameters matched by frozen code"
+  },
+  "development": {
+    "seeds": [
+      59901,
+      59902
+    ],
+    "split": "stratified train_test_split 75/25 keyed by seed",
+    "selection": "No tuning grid; all architecture/optimizer/gates fixed before training."
+  },
+  "fresh": {
+    "seeds": [
+      59911,
+      59912,
+      59913
+    ],
+    "locked_before_access": true,
+    "open_rule": "Only if both dev seeds meet every quality, useful-expert, byte, and control gate."
+  },
+  "storage": {
+    "authority": "actual serialized inference NPZ bytes after loading and evaluation",
+    "paid_objects": [
+      "all hash bucket values/bases/codes/residuals",
+      "output projections and biases",
+      "router weights",
+      "hash seeds",
+      "method/schema/shape metadata"
+    ],
+    "deterministic_reconstruction": "Shared indices/signs regenerated from paid seed and frozen code."
+  },
+  "compute": {
+    "report": [
+      "optimizer updates/examples",
+      "active MAC proxy",
+      "hash expansion lookups",
+      "training wall time",
+      "router-selected serialized inference examples/s",
+      "CPU device and threads"
+    ]
+  },
+  "primary_metrics": [
+    "router-selected accuracy and cross entropy on finite full-logit task scores",
+    "per-expert oracle accuracy",
+    "router accuracy/use",
+    "actual payload bytes",
+    "expert ablation",
+    "compute"
+  ],
+  "success_gate": "Both dev seeds: factorized hash View is \u22651pp above tied and salted controls; within 2pp of independent dense experts; all expert oracle accuracy \u22650.80 and router use \u226510%; payload \u22641.05x salted; no diagonal or dense rank-4 residual control matches/beats within 1pp at \u22641.10x View bytes.",
+  "failure_gate": "Any dev gate miss or a native/simple control matching View quality is FAIL; fresh remains sealed.",
+  "known_metric_guard": "For end-to-end selected CE, evaluate full expert logits with a -1e9 group mask and then scatter only the selected expert's allowed class logits into a common 10-class tensor. Never compute CE after filling all non-selected classes with -1e9 without preserving other experts' logits. Oracle CE is separately on each true group's allowed classes.",
+  "boundaries": [
+    "Small digits conditional-specialist screen, not language-model capacity",
+    "Logical expert count alone is not capacity",
+    "Fixed updates are not near-convergence evidence",
+    "Rank-4 coefficient composition must beat native salted and low-rank controls to support Mirror-specific attribution"
+  ],
+  "implementation_amendment": "IMPLEMENTATION_AMENDMENT_1.json"
+}

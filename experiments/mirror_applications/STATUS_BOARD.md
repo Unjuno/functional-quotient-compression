@@ -1,15 +1,15 @@
 # Mirror Application Status Board
 
-Updated: 2026-10-08 JST
+Updated: 2026-10-09 UTC
 Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (35 completed; 595 UNTESTED)
-- P1: **422** (12 completed; 410 UNTESTED)
+- P0: **630** (37 completed; 593 UNTESTED)
+- P1: **422** (13 completed; 409 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1108 UNTESTED, 29 PROMISING, 18 FAIL**
+- Current MA statuses: **1105 UNTESTED, 29 PROMISING, 21 FAIL**
 - 47 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -23,7 +23,9 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-255 — Mirror context superposition for task models (P0; PA16)**
+**MA-600 — Hash-compressed adapter bank (P1; PA120/PA18)**
+
+MA-597, MA-598 and MA-599 are now indexed as verified FAILs from their dedicated branches. Learned Givens/hash-bucket additions did not beat native hashing or simple low-rank controls; unchanged collision-repair and expert bucket-View variants are paused. MA-600 targets adapter deltas and MA-601 targets attention projections, which are distinct objects and remain eligible.
 
 Reason:
 - all previously locked MA-241/244/245/247–251/253 and subsequent old-chain P0 screens have completed;
