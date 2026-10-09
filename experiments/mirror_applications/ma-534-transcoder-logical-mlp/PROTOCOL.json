@@ -91,7 +91,7 @@
     "report_optimizer_updates": true,
     "report_active_compute_proxy": true,
     "report_isolated_wall_clock": true,
-    "report_inference_latency": true
+    "report_inference_latency": "Per-method inference wall time includes role routing when needed, bank encoding, selected top-8 decode, and the shared skip path; report full-transcoder and native MLP references."
   },
   "success_gate": "On each fresh seed, Mirror role-balanced relative MSE must be at least 10% below both per-role plain sparse gate and diagonal gain control, with worst-role MSE <=1.25x average. Report the full serialized replacement payload and compute; no capacity claim from role count alone.",
   "failure_gate": "Development Mirror fails to beat either cheap control by the frozen 10% margin, or worst-role MSE >1.25x mean; fresh remains sealed.",
@@ -101,5 +101,11 @@
     "The previous MA-533 failed generic transcoder fidelity; MA-534 tests whether role-specific views improve approximations over a shared sparse feature bank.",
     "Single model/checkpoint/layer and one 32-atom bank only.",
     "The full 73,728-feature source checkpoint is needed during bank selection but unused rows are not in the inference payload; the exact selected-bank payload is serialized and charged."
+  ],
+  "amendments": [
+    {
+      "id": "amendment-1",
+      "before-measurement-rerun": "The first development run completed its quality metrics but the frozen results did not include isolated per-method wall times. Repeat the identical seed, windows, feature bank, optimizer and 200 updates solely to add isolated inference/training timing and learned-coordinate summaries. No setting or gate may change; fresh validation remains sealed."
+    }
   ]
 }

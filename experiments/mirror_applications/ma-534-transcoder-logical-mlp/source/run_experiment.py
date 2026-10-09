@@ -64,6 +64,8 @@ def main():
   mask=role_fit==r; supports.append(cfit[mask].mean(0).topk(K).indices)
  supports=torch.stack(supports)
  def role_predict(code,xx,roles,kind,params=None):
+  if kind=='shared':
+   yp,ii,v=sparse_decode(code,dec,bias,skip,xx,K);return yp,[(ii,v)]
   pred=torch.empty_like(xx);active=[]
   for r in range(ROLES):
    m=roles==r
@@ -84,17 +86,19 @@ def main():
  diag=torch.nn.Parameter(torch.zeros(ROLES,BANK));opt_d=torch.optim.Adam([diag],lr=.01)
  angles=torch.nn.Parameter(torch.zeros(ROLES,BANK//2));opt_m=torch.optim.Adam([angles],lr=.01)
  rng=np.random.default_rng(args.seed+1);updates=200;batch=256
+ training_t0=time.perf_counter()
  for step in range(updates):
   ids_b=torch.as_tensor(rng.choice(len(xfit),size=batch,replace=True),dtype=torch.long);xb=xfit[ids_b];cb=cfit[ids_b];yb=yfit[ids_b];rb=role_fit[ids_b]
   opt_d.zero_grad();pd,_=role_predict(cb,xb,rb,'diag',diag);ld=(pd-yb).square().mean();ld.backward();opt_d.step()
   opt_m.zero_grad();pm,_=role_predict(cb,xb,rb,'mirror',angles);lm=(pm-yb).square().mean();lm.backward();opt_m.step()
+ training_wall=time.perf_counter()-training_t0
  with torch.inference_mode():pd_eval,_=role_predict(ceval,xeval,role_eval,'diag',diag);pm_eval,active=role_predict(ceval,xeval,role_eval,'mirror',angles)
  # Full transcoder reference on eval and native MLP metrics.
- fullpred=[]
+ fullpred=[];full_trans_t=time.perf_counter()
  with torch.inference_mode():
   for st in range(0,len(xeval),64):
    xx=xeval[st:st+64];p=xx@w['encoder.weight'].T+w['encoder.bias'];v,i=p.topk(FULL_K,dim=-1);v=v.clamp_min(0);o=(v.unsqueeze(-1)*w['W_dec'][i]).sum(1)+w['b_dec']+xx@w['W_skip'].T;fullpred.append(o)
- full=torch.cat(fullpred)
+ full=torch.cat(fullpred);full_trans_wall=time.perf_counter()-full_trans_t
  def metric(pred,target):
   rows=[]
   for r in range(ROLES):
@@ -103,6 +107,19 @@ def main():
    err=(pred[m]-target[m]).square().sum();den=target[m].square().sum()+1e-12;cos=torch.nn.functional.cosine_similarity(pred[m],target[m],dim=-1).mean();rows.append({'role':r,'n':int(m.sum()),'relative_mse':float(err/den),'cosine':float(cos)})
   present=[z for z in rows if z['n']]
   return {'role_balanced_relative_mse':float(np.mean([z['relative_mse'] for z in present])),'worst_role_relative_mse':float(max(z['relative_mse'] for z in present)),'mean_cosine':float(np.mean([z['cosine'] for z in present])),'per_role':rows}
+ # Isolated inference timing includes each method's own role routing/encoding and decode.
+ def timed_bank(kind,params=None):
+  t=time.perf_counter()
+  with torch.inference_mode():
+   rr=assign_roles(xeval,centroids) if kind!='shared' else role_eval
+   cc=torch.relu(xeval@enc.T+eb)
+   yy,_=role_predict(cc,xeval,rr,kind,params)
+  return time.perf_counter()-t
+ timing={'native_mlp':None,'full_transcoder_top128':full_trans_wall,'shared_bank_top8':timed_bank('shared'),'role_sparse_gate':timed_bank('gate'),'role_diagonal_gain':timed_bank('diag',diag),'role_givens_mirror':timed_bank('mirror',angles)}
+ with torch.inference_mode():
+  t=time.perf_counter();_native=block(xeval);timing['native_mlp']=time.perf_counter()-t
+ angle_stats={'mean_abs':float(angles.detach().abs().mean()),'max_abs':float(angles.detach().abs().max()),'l2':float(angles.detach().norm()),'per_role_l2':angles.detach().norm(dim=1).tolist()}
+ gain_stats={'min':float(diag.detach().exp().min()),'max':float(diag.detach().exp().max()),'mean':float(diag.detach().exp().mean())}
  metrics={'native_mlp':metric(yeval,yeval),'full_transcoder_top128':metric(full,yeval),'shared_bank_top8':metric(shared,yeval),'role_sparse_gate':metric(gated,yeval),'role_diagonal_gain':metric(pd_eval,yeval),'role_givens_mirror':metric(pm_eval,yeval)}
  # Actual replacement base bytes, with native layer-8 MLP weights removed.
  model_dir=Path(snapshot_download(MODEL,revision=model_rev,allow_patterns=['*.safetensors','*.bin','*.json','*.txt'])); mf=model_dir/'model.safetensors';other=sum(p.stat().st_size for p in model_dir.rglob('*') if p.is_file() and p.name!='model.safetensors')
@@ -123,6 +140,6 @@ def main():
  role_mlp={f'role{r}.{k}':v.clone().contiguous() for r in range(ROLES) for k,v in native_mlp.items()}; independent_file=out/'four_full_mlps.safetensors';save_file(role_mlp,str(independent_file));independent_extra_bytes=independent_file.stat().st_size;independent_hash=sha(independent_file);independent_bytes=base_bytes+independent_extra_bytes;independent_file.unlink();basefile.unlink()
  # Compute proxies per token: selected bank encoder + skip + active decoder; Mirror adds 16 rotations.
  enc_macs=D*BANK;skip_macs=D*D;dec_macs=K*D;full_encoder_macs=D*73728;full_decoder_macs=FULL_K*D; native_macs=sum(p.numel() for n,p in block.named_parameters() if n.endswith('weight'))
- summary={'experiment_id':'MA-534','split':args.split,'seed':args.seed,'model':MODEL,'model_revision':model_rev,'transcoder_revision':TC_REV,'transcoder_file_sha256':sha(tcfile),'dataset':DATA,'dataset_revision':DATA_REV,'dataset_split':ds_split,'tokens_sha256':hashlib.sha256(seq.numpy().tobytes()).hexdigest(),'fit_tokens':len(xfit),'eval_tokens':len(xeval),'role_counts':torch.bincount(role_eval,minlength=ROLES).tolist(),'updates':updates,'bank_indices':bank.tolist(),'role_supports':supports.tolist(),'gates':{'shared_bank_top8':metrics['shared_bank_top8'],'role_sparse_gate':metrics['role_sparse_gate'],'role_diagonal_gain':metrics['role_diagonal_gain'],'role_givens_mirror':metrics['role_givens_mirror']},'metrics':metrics,'model_full_bytes':full_base_bytes,'model_without_native_mlp_bytes':base_bytes,'base_without_mlp_safetensors_bytes':base_safetensors_bytes,'base_without_mlp_sha256':base_hash,'independent_mlp_extra_bytes':independent_extra_bytes,'independent_mlp_sha256':independent_hash,'full_transcoder_incremental_bytes':341363524,'full_transcoder_standalone_bytes':base_bytes+341363524,'full_transcoder_file_sha256':TC_SHA,'method_payloads':payloads,'method_standalone_bytes':standalone,'four_independent_mlp_standalone_bytes':independent_bytes,'compute_macs_per_token':{'selected_bank_encoder':enc_macs,'skip':skip_macs,'top8_decoder':dec_macs,'givens_rotation_scalar_ops_proxy':BANK,'full_transcoder_encoder':full_encoder_macs,'full_transcoder_decoder':full_decoder_macs,'native_mlp_linear':native_macs},'wall_seconds':{'full_model_capture':capture_wall},'optimizer_updates':{'role_diagonal_gain':updates,'role_givens_mirror':updates},'active_features_per_token':K}
+ summary={'experiment_id':'MA-534','split':args.split,'seed':args.seed,'model':MODEL,'model_revision':model_rev,'transcoder_revision':TC_REV,'transcoder_file_sha256':sha(tcfile),'dataset':DATA,'dataset_revision':DATA_REV,'dataset_split':ds_split,'tokens_sha256':hashlib.sha256(seq.numpy().tobytes()).hexdigest(),'fit_tokens':len(xfit),'eval_tokens':len(xeval),'role_counts':torch.bincount(role_eval,minlength=ROLES).tolist(),'updates':updates,'bank_indices':bank.tolist(),'role_supports':supports.tolist(),'gates':{'shared_bank_top8':metrics['shared_bank_top8'],'role_sparse_gate':metrics['role_sparse_gate'],'role_diagonal_gain':metrics['role_diagonal_gain'],'role_givens_mirror':metrics['role_givens_mirror']},'metrics':metrics,'model_full_bytes':full_base_bytes,'model_without_native_mlp_bytes':base_bytes,'base_without_mlp_safetensors_bytes':base_safetensors_bytes,'base_without_mlp_sha256':base_hash,'independent_mlp_extra_bytes':independent_extra_bytes,'independent_mlp_sha256':independent_hash,'full_transcoder_incremental_bytes':341363524,'full_transcoder_standalone_bytes':base_bytes+341363524,'full_transcoder_file_sha256':TC_SHA,'method_payloads':payloads,'method_standalone_bytes':standalone,'four_independent_mlp_standalone_bytes':independent_bytes,'compute_macs_per_token':{'selected_bank_encoder':enc_macs,'skip':skip_macs,'top8_decoder':dec_macs,'givens_rotation_scalar_ops_proxy':BANK,'full_transcoder_encoder':full_encoder_macs,'full_transcoder_decoder':full_decoder_macs,'native_mlp_linear':native_macs},'wall_seconds':{'full_model_capture':capture_wall,'per_method_eval':timing,'optimizer_training_total':training_wall},'learned_views':{'givens_angle_stats':angle_stats,'diagonal_gain_stats':gain_stats},'optimizer_updates':{'role_diagonal_gain':updates,'role_givens_mirror':updates},'active_features_per_token':K}
  (out/'summary.json').write_text(json.dumps(summary,indent=2)+'\n');print(json.dumps(summary,indent=2))
 if __name__=='__main__':main()
