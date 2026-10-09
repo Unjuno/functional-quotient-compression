@@ -1,7 +1,7 @@
 {
   "experiment_id": "MA-450",
   "title": "Meta-learned decision: View vs private residual allocation",
-  "status": "SCREENING",
+  "status": "COMPLETED_FAIL",
   "evidence_lane": "PRIVATE_ALLOCATION/QUALITY/BYTES/IDENTIFICATION",
   "base_commit": "59cb9098",
   "hypothesis": "A development-selected residual-validation controller allocates private residuals only to tasks outside the shared Mirror subspace, achieving at least 95% of always-private query quality while using fewer exact serialized N=20 bytes; it must improve over always-Mirror on out-of-subspace tasks and match the simple validation-threshold control.",
@@ -40,7 +40,9 @@
         3000,
         3119
       ]
-    }
+    },
+    "fresh_tasks_per_world_per_seed": 40,
+    "fresh_total_tasks_per_world": 120
   },
   "development": {
     "worlds": [
@@ -74,7 +76,9 @@
       2
     ],
     "tasks_per_world": 40,
-    "locked_before_access": true
+    "locked_before_access": true,
+    "tasks_per_seed_per_world": 40,
+    "total_tasks_per_world": 120
   },
   "storage": {
     "authority": "actual serialized inference payload bytes",
@@ -105,5 +109,21 @@
     "Synthetic linear allocation mechanism only.",
     "No claim about natural continual learning or language models.",
     "SETA decomposition is conceptually relevant but not reproduced."
+  ],
+  "amendments": [
+    {
+      "id": "A1",
+      "status": "active before numerical work",
+      "reason": "Clarify counts: 40 held-out task IDs per seed/world, 3 seeds, for 120 task instances per fresh world. No condition or threshold changed."
+    },
+    {
+      "id": "A2",
+      "status": "active before fresh",
+      "reason": "Development found no threshold meeting near-private quality under the initial residual-only refit, exposing that private allocation must permit a full per-task vector to repair biased Mirror coordinates. When selected, private mode now fits and stores the full 16D task vector. The learned controller is trained on development validation-residual features to predict whether full private fitting improves query loss; threshold fallback rule is explicit if no dev threshold meets the quality constraint.",
+      "changed_before_fresh_access": true,
+      "private_representation": "full 16D task vector replaces 2D View code when selected",
+      "threshold_fallback": "if no threshold meets dev 1.05x private quality, choose threshold with lowest dev adaptive query error and record infeasibility",
+      "controller_training": "development-only logistic classifier on validation residual to predict private-fit improvement"
+    }
   ]
 }

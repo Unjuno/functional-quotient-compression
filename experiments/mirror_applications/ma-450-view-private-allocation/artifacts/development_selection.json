@@ -1,0 +1,49 @@
+{
+  "threshold": 0.01,
+  "threshold_gate_infeasible": false,
+  "development_thresholds": {
+    "0.01": {
+      "quality": 2.3608075390701978e-07,
+      "private_quality": 3.040844994324961e-07,
+      "values_per_task": 9
+    },
+    "0.03": {
+      "quality": 2.3608075390701978e-07,
+      "private_quality": 3.040844994324961e-07,
+      "values_per_task": 9
+    },
+    "0.05": {
+      "quality": 2.3608075390701978e-07,
+      "private_quality": 3.040844994324961e-07,
+      "values_per_task": 9
+    },
+    "0.1": {
+      "quality": 2.3608075390701978e-07,
+      "private_quality": 3.040844994324961e-07,
+      "values_per_task": 9
+    },
+    "0.2": {
+      "quality": 2.3608075390701978e-07,
+      "private_quality": 3.040844994324961e-07,
+      "values_per_task": 9
+    },
+    "0.4": {
+      "quality": 0.0013110703833886738,
+      "private_quality": 3.040844994324961e-07,
+      "values_per_task": 8.970833333333333
+    },
+    "0.8": {
+      "quality": 0.06459552145629477,
+      "private_quality": 3.040844994324961e-07,
+      "values_per_task": 7.891666666666667
+    }
+  },
+  "controller_weight": [
+    8.830301284790039
+  ],
+  "controller_bias": [
+    -3.686688184738159
+  ],
+  "controller_label": "private improves dev query NRMSE by >0.02",
+  "rule": "min bytes under 1.05x private dev quality; if none, lowest quality; fresh untouched"
+}

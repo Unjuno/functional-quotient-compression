@@ -2,20 +2,20 @@
 
 ## H — Hypothesis
 
-A development-selected controller can keep related tasks in a shared Mirror subspace and allocate private residuals only where validation indicates the shared view is insufficient, retaining near-full quality with lower serialized storage.
+A learned controller will allocate private residuals only when a compact View fails, preserving always-private quality with fewer serialized bytes and outperforming a simple validation rule.
 
-## T — Planned test
+## T — Test
 
-Mixed in-subspace and out-of-subspace 16D linear tasks. Compare always-Mirror, always-private, a simple validation threshold, a learned validation controller, and oracle allocation. Development task IDs select the rule before fresh worlds; complete serialized payloads include controller, indices, flags, codes, residuals and metadata.
+Synthetic 16D linear tasks, half in the shared rank-2 subspace and half with orthogonal residuals. Three fresh worlds × three seeds × 40 tasks; development-only threshold and logistic controller selection. Compare always Mirror, always private, simple threshold, learned controller, and oracle allocation. Full payload serializers include codes, private weights, flags, controller and metadata.
 
-## D — Pending
+## D — FAIL (controller), useful allocation evidence
 
-Protocol frozen; numerical execution pending.
+Adaptive quality was essentially exact (2.35e-07 NRMSE) with 50% private allocation. Simple threshold used 372.3B/task vs 404.3B always-private, an 8% reduction. Learned controller matched quality but used 380.2B/task, 7.9B more than the simple rule.
 
 ## C — Strongest counter-hypothesis
 
-A simple validation-error threshold may fully explain allocation behavior; the learned controller may add bytes and compute without improving the storage-quality frontier.
+The validation threshold is enough; the meta-controller only adds bytes.
 
 ## U — Unknown
 
-Whether support validation reliably predicts the value of private residuals on fresh task families and whether the byte savings survive serialization.
+Natural task complexity and nonlinear models remain untested.
