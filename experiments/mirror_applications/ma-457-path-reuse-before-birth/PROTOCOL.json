@@ -1,21 +1,96 @@
 {
-  "experiment_id":"MA-457",
-  "title":"Path reuse before physical module birth",
-  "status":"FROZEN_SCREENING",
-  "base_commit":"0f3b102c",
-  "evidence_lane":"CONTINUAL_PATH_REUSE/RETENTION/MODULE_BIRTHS/BYTES/COMPUTE",
-  "hypothesis":"On sequential tasks with a recurring rotated function plus occasional off-orbit functions, a support-selected Givens View of a frozen PathNet module can avoid physical module births while preserving per-task query quality and retention better than path-only reuse.",
-  "physical_object":"frozen 2x2 linear modules learned from task support",
-  "mirror_coordinate":"one per-task output Givens angle applied to a selected module",
-  "logical_multiplicity":"task-specific linear maps from reused physical module paths and Views",
-  "prior_art_refs":[80],
-  "controls":["PathNet-style path-only module reuse with birth on failed validation","Mirror-view reuse then private module birth on failed validation","always-private one module per task"],
-  "task":{"type":"sequential 2D linear regression","tasks_per_sequence":32,"support_examples":32,"route_validation_examples":32,"query_examples":256,"distribution":"task0 is canonical A0; tasks1-23 are output rotations of A0; tasks24-31 are rotated off-orbit perturbations with changed singular values","adaptation":"least-squares module fit on support; route against frozen modules; birth a private matrix if validation NRMSE exceeds threshold","retention":"re-evaluate all prior task paths after the sequence, with frozen modules"},
-  "development":{"worlds":[45700,45701],"seeds":[0,1,2],"task_ids":[100,131],"threshold_candidates":[0.01,0.03,0.1],"selection":"choose highest threshold with <=0.03 mean query NRMSE for both path-only and Mirror on dev"},
-  "fresh":{"worlds":[45710,45711,45712],"seeds":[0,1,2],"task_ids":[300,331],"locked_before_access":true},
-  "storage":{"authority":"actual serialized inference payload bytes","paid_objects":["all born module matrices","task route indices","Mirror angles","threshold and metadata"],"amortization_N":[1,8,16,32]},
-  "compute":{"report_module_birth_count":true,"report_route_search_MAC":true,"report_query_MAC":true,"report_wall_clock":true,"report_retention_after_sequence":true},
-  "success_gate":"Every fresh world: Mirror retains >=95% query quality of always-private (NRMSE <=1.05x), has no worse prior-task retention, and births <=50% as many modules as PathNet while using <=75% of PathNet actual payload bytes at N=32.",
-  "failure_gate":"Mirror fails quality/retention, module births exceed half the PathNet count, N32 payload exceeds 75% of PathNet, or improvement is matched by path-only routing.",
-  "boundaries":["Aligned synthetic rotation reuse plus controlled off-orbit module birth; not natural continual learning.","Task sequence and boundaries are provided, but module/path identity is not.","All support, route, and private matrix state is serialized and charged."]
+  "experiment_id": "MA-457",
+  "title": "Path reuse before physical module birth",
+  "status": "COMPLETED_FAIL",
+  "base_commit": "0f3b102c",
+  "evidence_lane": "CONTINUAL_PATH_REUSE/RETENTION/MODULE_BIRTHS/BYTES/COMPUTE",
+  "hypothesis": "On sequential tasks with a recurring rotated function plus occasional off-orbit functions, a support-selected Givens View of a frozen PathNet module can avoid physical module births while preserving per-task query quality and retention better than path-only reuse.",
+  "physical_object": "frozen 2x2 linear modules learned from task support",
+  "mirror_coordinate": "one per-task output Givens angle applied to a selected module",
+  "logical_multiplicity": "task-specific linear maps from reused physical module paths and Views",
+  "prior_art_refs": [
+    80
+  ],
+  "controls": [
+    "PathNet-style path-only module reuse with birth on failed validation",
+    "Mirror-view reuse then private module birth on failed validation",
+    "always-private one module per task"
+  ],
+  "task": {
+    "type": "sequential 2D linear regression",
+    "tasks_per_sequence": 32,
+    "support_examples": 32,
+    "route_validation_examples": 32,
+    "query_examples": 256,
+    "distribution": "task0 is canonical A0; tasks1-23 are output rotations of A0; tasks24-31 are rotated off-orbit perturbations with changed singular values",
+    "adaptation": "least-squares module fit on support; route against frozen modules; birth a private matrix if validation NRMSE exceeds threshold",
+    "retention": "re-evaluate all prior task paths after the sequence, with frozen modules"
+  },
+  "development": {
+    "worlds": [
+      45700,
+      45701
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "task_ids": [
+      100,
+      131
+    ],
+    "threshold_candidates": [
+      0.01,
+      0.03,
+      0.1
+    ],
+    "selection": "choose highest threshold with <=0.03 mean query NRMSE for both path-only and Mirror on dev"
+  },
+  "fresh": {
+    "worlds": [
+      45710,
+      45711,
+      45712
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "task_ids": [
+      300,
+      331
+    ],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "all born module matrices",
+      "task route indices",
+      "Mirror angles",
+      "threshold and metadata"
+    ],
+    "amortization_N": [
+      1,
+      8,
+      16,
+      32
+    ]
+  },
+  "compute": {
+    "report_module_birth_count": true,
+    "report_route_search_MAC": true,
+    "report_query_MAC": true,
+    "report_wall_clock": true,
+    "report_retention_after_sequence": true
+  },
+  "success_gate": "Every fresh world: Mirror retains >=95% query quality of always-private (NRMSE <=1.05x), has no worse prior-task retention, and births <=50% as many modules as PathNet while using <=75% of PathNet actual payload bytes at N=32.",
+  "failure_gate": "Mirror fails quality/retention, module births exceed half the PathNet count, N32 payload exceeds 75% of PathNet, or improvement is matched by path-only routing.",
+  "boundaries": [
+    "Aligned synthetic rotation reuse plus controlled off-orbit module birth; not natural continual learning.",
+    "Task sequence and boundaries are provided, but module/path identity is not.",
+    "All support, route, and private matrix state is serialized and charged."
+  ]
 }

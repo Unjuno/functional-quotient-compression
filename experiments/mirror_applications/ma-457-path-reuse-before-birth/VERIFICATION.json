@@ -1,0 +1,61 @@
+{
+  "experiment_id": "MA-457",
+  "status": "COMPLETED_FAIL",
+  "protocol_commit": "b89b64fd",
+  "fresh_worlds": [
+    45710,
+    45711,
+    45712
+  ],
+  "fresh_seeds": [
+    0,
+    1,
+    2
+  ],
+  "aggregate_rows": 108,
+  "checks": [
+    {
+      "name": "artifact_tests",
+      "command": "python -m pytest -q experiments/mirror_applications/ma-457-path-reuse-before-birth/tests",
+      "result": "2 passed"
+    },
+    {
+      "name": "payload_replay",
+      "result": "All 108 result packages have exact byte length and SHA256 replayed by tests."
+    },
+    {
+      "name": "registered_gate",
+      "result": "FAIL: Mirror misses both the <=75% PathNet N32 byte gate and <=1.05x private quality gate; routing compute also increases substantially."
+    }
+  ],
+  "N32": {
+    "mirror": {
+      "nrmse_mean": 0.007687614081658227,
+      "bytes_per_task": 71.82291666666667,
+      "module_births_cumulative": 7.111111111111111,
+      "route_search_MAC_sequence": 4990464.0,
+      "support_route_wall_seconds": 0.6100403778885569,
+      "query_wall_seconds_mean": 0.00013146835787362457,
+      "prior_task_retention_nrmse": 0.004241681134402828
+    },
+    "path": {
+      "nrmse_mean": 0.01521606452099712,
+      "bytes_per_task": 80.26736111111111,
+      "module_births_cumulative": 24.22222222222222,
+      "route_search_MAC_sequence": 100152.88888888889,
+      "support_route_wall_seconds": 0.012723756669503119,
+      "query_wall_seconds_mean": 2.411630278705464e-05,
+      "prior_task_retention_nrmse": 0.017762879931833127
+    },
+    "private": {
+      "nrmse_mean": 1.4230313611424745e-07,
+      "bytes_per_task": 69.28125,
+      "module_births_cumulative": 32.0,
+      "route_search_MAC_sequence": 0.0,
+      "support_route_wall_seconds": 0.002957316105797266,
+      "query_wall_seconds_mean": 1.4813017514825333e-05,
+      "prior_task_retention_nrmse": 1.4076908595162796e-07
+    }
+  },
+  "scope": "Synthetic rotation-aligned task stream with off-orbit perturbations; no natural continual-learning claim."
+}
