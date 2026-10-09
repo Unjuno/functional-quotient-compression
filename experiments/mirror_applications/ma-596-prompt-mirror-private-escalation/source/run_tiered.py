@@ -44,8 +44,10 @@ def articles(path: Path, tok):
 
 def canonical_pca(prompts: np.ndarray, rank: int = RANK):
     """Centered PCA; deterministic sign convention, returned as float32."""
-    mean = prompts.mean(axis=0)
-    centered = prompts - mean
+    original_shape = prompts.shape[1:]
+    flat = prompts.reshape(len(prompts), -1)
+    mean = flat.mean(axis=0)
+    centered = flat - mean
     _, _, vh = np.linalg.svd(centered, full_matrices=False)
     basis = vh[:rank].T.copy()
     if basis.shape[1] < rank:
@@ -55,7 +57,7 @@ def canonical_pca(prompts: np.ndarray, rank: int = RANK):
         if basis[pivot, j] < 0:
             basis[:, j] *= -1
     codes = centered @ basis
-    recon = mean + codes @ basis.T
+    recon = (mean + codes @ basis.T).reshape((len(prompts),) + original_shape)
     return mean.astype(np.float32), basis.astype(np.float32), codes.astype(np.float32), recon.astype(np.float32)
 
 
@@ -128,7 +130,7 @@ def replay_sequence(targets, scores_full, windows, model, embed, outdir: Path):
         mean = mean.astype(np.float16).astype(np.float32)
         basis = basis.astype(np.float16).astype(np.float32)
         codes = codes.astype(np.float16).astype(np.float32)
-        recon = mean + codes @ basis.T
+        recon = (mean + codes @ basis.T).reshape((seen, PROMPT_LEN, HIDDEN))
         cumulative_encode_s += time.perf_counter() - t0
         # Count one dense projection and one decode per seen task; SVD fit cost is separately approximated.
         total_macs_proxy += 2 * seen * PROMPT_LEN * HIDDEN * RANK + 2 * HIDDEN * PROMPT_LEN * RANK * RANK
@@ -172,14 +174,15 @@ def replay_sequence(targets, scores_full, windows, model, embed, outdir: Path):
     basis_inf = basis.astype(np.float16).astype(np.float32)
     codes_inf = codes.astype(np.float16).astype(np.float32)
     private_inf = private.astype(np.float16).astype(np.float32)
-    mirror_prompts = mean_inf + codes_inf @ basis_inf.T
+    mirror_prompts = (mean_inf + codes_inf @ basis_inf.T).reshape((n, PROMPT_LEN, HIDDEN))
     mirror_nll_final = [eval_prompt(model, embed, mirror_prompts[i], windows[i]) for i in range(n)]
     mirror_inference_s = time.perf_counter() - t0
     t0 = time.perf_counter()
     tiered_nll_final = [eval_prompt(model, embed, decoded[i], windows[i]) for i in range(n)]
     tiered_inference_s = time.perf_counter() - t0
     t0 = time.perf_counter()
-    shared_nll_final = [eval_prompt(model, embed, mean_inf, w) for w in windows]
+    shared_prompt = mean_inf.reshape(PROMPT_LEN, HIDDEN)
+    shared_nll_final = [eval_prompt(model, embed, shared_prompt, w) for w in windows]
     shared_inference_s = time.perf_counter() - t0
     return {
         'trace': trace,

@@ -1,0 +1,11 @@
+{
+  "experiment_id": "MA-596",
+  "amendment": 1,
+  "timing": "after protocol/source freeze and first registered dev invocation, before any metric row or inference payload was written",
+  "cause": "The first dev invocation reached prompt training, then failed in PCA because the implementation passed an 8x512 prompt matrix to a 2D flattened-vector PCA routine.",
+  "change": "Flatten each complete prompt to 4096 dimensions for PCA; reshape reconstructed prompts to 8x512 for model inference. Preserve the frozen rank, thresholds, seeds, data split, optimizer, and gates.",
+  "registered_metrics_generated": false,
+  "payloads_generated": false,
+  "fresh_data_accessed": false,
+  "rerun_policy": "Rerun the same development seeds 59601 and 59602 under the unchanged frozen protocol."
+}

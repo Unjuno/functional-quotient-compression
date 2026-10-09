@@ -1,0 +1,6 @@
+MA-596 dev seed 59601 pre-metric failure.
+
+Training completed, then replay_sequence failed in canonical_pca:
+ValueError: matmul: Input operand 1 has a mismatch in its core dimension 0 (size 8 is different from 512).
+
+Cause: prompt tensors were not flattened before PCA. No metrics or inference payloads were written. See AMENDMENT_1.json.
