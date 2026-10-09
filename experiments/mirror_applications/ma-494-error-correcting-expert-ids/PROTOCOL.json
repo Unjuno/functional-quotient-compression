@@ -1,0 +1,98 @@
+{
+  "experiment_id": "MA-494",
+  "title": "Error-correcting Mirror expert IDs",
+  "status": "FROZEN_SCREENING",
+  "base_commit": "f5e5311d",
+  "evidence_lane": "ROBUST_ROUTING/ADDRESS_REDUNDANCY/ACTUAL_BYTES",
+  "hypothesis": "Redundant ECOC-style expert addresses will reduce expert misrouting under controlled bit noise, at a quantifiable serialized codebook cost compared with ordinary binary IDs.",
+  "physical_object": "one shared expert decoder with 32 logical expert slots",
+  "mirror_coordinate": "binary or error-correcting codeword address decoded by nearest codeword",
+  "logical_multiplicity": "32 logical experts addressable under noisy route transmission",
+  "prior_art_refs": [
+    95
+  ],
+  "controls": [
+    "ordinary 5-bit binary expert IDs",
+    "3x repeated binary ID",
+    "ECOC codewords of length 7/9/11 bits"
+  ],
+  "task": {
+    "type": "synthetic expert routing address transmission",
+    "experts": 32,
+    "noise_flip_probabilities": [
+      0,
+      0.02,
+      0.05,
+      0.1,
+      0.2
+    ],
+    "metrics": [
+      "expert ID recovery accuracy",
+      "misroute rate",
+      "codebook serialized bytes",
+      "total bits/address",
+      "decode operations"
+    ]
+  },
+  "development": {
+    "worlds": [
+      49400,
+      49401
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "allowed": "select ECOC codebook generation seed using minimum distance on dev only; no fresh-dependent selection"
+  },
+  "fresh": {
+    "worlds": [
+      49420,
+      49421,
+      49422
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "locked_before_access": true,
+    "A0_excluded": "exploratory without registered 3x repetition control"
+  },
+  "storage": {
+    "authority": "actual serialized routing payload bytes",
+    "paid_objects": [
+      "all explicit codewords/codebook",
+      "expert-to-code map",
+      "metadata"
+    ]
+  },
+  "compute": {
+    "report_hamming_distance_ops": true,
+    "report_decode_latency": true
+  },
+  "success_gate": "At flip probability .1, ECOC reduces misroute rate by >=50% relative to binary IDs, and total serialized routing payload stays <=2x binary control; no noiseless accuracy loss.",
+  "failure_gate": "Redundancy cost exceeds 2x without robust accuracy gain, or learned/nearest decoding fails to correct injected noise.",
+  "boundaries": [
+    "Synthetic address channel only; no real MoE router or task quality claim.",
+    "Codebook bits and decoder metadata are fully charged.",
+    "Robustness under injected bit flips is not expert capacity."
+  ],
+  "amendment_A1": {
+    "reason": "Initial run omitted the preregistered 3x repeated-ID control, so robustness frontier against the strongest simple redundancy control was incomplete. Initial fresh artifacts retained as exploratory.",
+    "change": "Add explicit 15-bit 3x repetition code control; no gates/hyperparameters changed.",
+    "fresh_worlds": [
+      49420,
+      49421,
+      49422
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "locked_before_A1_access": true,
+    "authoritative": "A1 only"
+  }
+}

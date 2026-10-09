@@ -6,11 +6,11 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (48 completed; 582 UNTESTED)
+- P0: **630** (49 completed; 581 UNTESTED)
 - P1: **422** (13 completed; 409 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1094 UNTESTED, 35 PROMISING, 26 FAIL**
-- 60 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
+- Current MA statuses: **1093 UNTESTED, 36 PROMISING, 26 FAIL**
+- 61 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
 - Thirteenth literature sweep added MA-996..1045 (50 UNTESTED; 40 P0/10 P1) and PA296..PA325. IDs MA-1000+ use four digits; consult `check_registry_integrity.py`. No new experiment results.
@@ -23,11 +23,11 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-494 — error-correcting Mirror expert IDs (P0)**
+**MA-498 — learned code distance regularizer for Mirror bank (P0)**
 
 Reason:
-- MA-470/471/473/475/476/478/481/482, MA-483, MA-484, MA-486, MA-487, MA-488 and MA-492 are completed on dedicated branches and cross-linked in the claim ledger;
-- MA-492 K<=8 missed packet-mode coverage; K16 had a scoped storage/validity gain. MA-488 private fallback exceeded the byte gate above 25% heterogeneity; MA-487 LISTA missed quality/storage; MA-486 sparse codes missed rate-distortion; MA-484 VQ experts failed quality/collision; MA-483 adaptive depth missed its byte gate.
+- MA-470/471/473/475/476/478/481/482, MA-483, MA-484, MA-486, MA-487, MA-488, MA-492 and MA-494 are completed on dedicated branches and cross-linked in the claim ledger;
+- MA-494 ECOC and repetition codes improved noisy-address routing under synthetic bit flips; simple repetition beat the Mirror-style ECOC. MA-492 K<=8 missed packet-mode coverage; K16 had a scoped storage/validity gain. MA-488 private fallback exceeded the byte gate above 25% heterogeneity; MA-487 LISTA missed quality/storage; MA-486 sparse codes missed rate-distortion; MA-484 VQ experts failed quality/collision; MA-483 adaptive depth missed its byte gate.
 
 Required controls: ordinary expert IDs vs error-correcting codewords with same decoder and code entropy; compare noisy-route accuracy, false dispatch, code distance and serialized bytes.
 

@@ -1,0 +1,21 @@
+{
+  "experiment_id": "MA-494",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-494-error-correcting-expert-ids/tests",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": false,
+    "max_difference": null
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "A1 includes 225 payload rows across 3 fresh worlds x 3 seeds x 5 code lengths x 5 noise rates. A0 without repetition control retained/excluded."
+  ]
+}
