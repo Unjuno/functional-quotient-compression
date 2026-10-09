@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (113 completed; 517 UNTESTED)
+- P0: **630** (114 completed; 516 UNTESTED)
 - P1: **422** (15 completed; 407 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1027 UNTESTED, 46 PROMISING, 82 FAIL**
+- Current MA statuses: **1026 UNTESTED, 46 PROMISING, 83 FAIL**
 - 68 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -422,3 +422,10 @@ MA-379 and MA-381 both narrowly missed the complete-payload gate at 60.8–61.1%
 - **FAIL on frozen complete-payload gate; strong held-out mechanism result:** Mirror held-out NRMSE was 1.41e-7/3.33e-8, matching/beating dense transforms (.0162/.0143) and strongly improving on FiLM and hard sharing. Its actual payload was 10,291/10,275B (60.4%/60.3% of dense; required <=50%) and 16.3% of the full independent oracle.
 - Two observed/held-out splits (819/205 and 815/209); all ten payloads replayed bytes, hashes and metrics; four tests pass. Fresh remained sealed after the storage miss. Aligned synthetic rotations over a fixed token table only.
 - Next P0 candidate: MA-393 — adaptive-capacity embedding + View.
+
+
+## Completed: MA-393 — Adaptive-capacity embedding + token Mirror view
+
+- **FAIL narrowly on frozen full-payload gate, with a strong aligned rare-band result:** corrected Mirror weighted NRMSE was .00301/.00407 and rare-band .0124/.0154; the nested byte-matched +1-coordinate control was .128/.133 weighted and .536/.408 rare. Mirror payload was 15,427/15,404B (60.46%/60.43% of full, slightly above <=60%). Training was ~4.3× full and inference throughput lower.
+- Eight corrected payloads replayed hashes, bytes and metrics; four tests pass. The initial non-nested-control probe is preserved but excluded. Fresh remained sealed. Synthetic aligned frequency bands only.
+- Next P0 candidate: MA-395 — ALBERT factorized embedding + Mirror domain views.

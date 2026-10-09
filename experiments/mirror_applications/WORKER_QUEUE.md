@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-393.** MA-392 Mirror generalized across held-out token-domain pairs at near-zero NRMSE and used 16.3% of full-table bytes, but its complete payload was 60.3-60.4% of the dense-transform control, above the frozen <=50% gate. Fresh remained sealed. Proceed to MA-393, adaptive-capacity embedding + View (P0).
+**Current operational pointer (2026-10-09): MA-395.** MA-393 restored rare-band function with Mirror (.0124/.0154 NRMSE versus .536/.442 adaptive) at near-full task quality, but total payload was 60.43-60.46% of full (frozen limit <=60%) and compute was higher. Fresh remained sealed. Proceed to MA-395, ALBERT factorized embedding + Mirror domain views (P0); MA-394 is P1.
 
 # Worker queue
 
