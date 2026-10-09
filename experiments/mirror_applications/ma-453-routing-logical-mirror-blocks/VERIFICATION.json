@@ -1,6 +1,46 @@
 {
   "experiment_id": "MA-453",
-  "status": "SCREENING",
-  "protocol_commit": "pending",
-  "checks": []
+  "status": "COMPLETED_FAIL",
+  "protocol_commit": "3e4cd9aa",
+  "fresh_worlds": [45310, 45311, 45312],
+  "fresh_seeds": [0, 1, 2],
+  "aggregate_rows": 108,
+  "checks": [
+    {
+      "name": "artifact_tests",
+      "command": "python -m pytest -q experiments/mirror_applications/ma-453-routing-logical-mirror-blocks/tests",
+      "result": "2 passed"
+    },
+    {
+      "name": "fresh_payload_replay",
+      "result": "All 108 result rows point to serialized payloads whose SHA256 and byte length were replayed by the artifact tests."
+    },
+    {
+      "name": "registered_gate",
+      "result": "FAIL: Mirror exactly matches independent per-task block quality and bytes at N=20 and N=64; Mirror adaptation compute and query wall time exceed the finite router."
+    }
+  ],
+  "key_metrics": {
+    "N20": {
+      "mirror_nrmse": 0.0021833745159609763,
+      "mirror_bytes_per_task": 91.65,
+      "mirror_compute_MAC_per_task": 5120,
+      "mirror_query_wall_seconds": 0.019192111016875263,
+      "independent_nrmse": 0.0021833745159609763,
+      "independent_bytes_per_task": 91.65,
+      "router8_nrmse": 0.08374172503309739,
+      "router8_bytes_per_task": 97.85,
+      "router8_compute_MAC_per_task": 256,
+      "router8_query_wall_seconds": 0.0001832541167257457
+    },
+    "N64": {
+      "mirror_nrmse": 0.002243254796010458,
+      "mirror_bytes_per_task": 34.640625,
+      "independent_nrmse": 0.002243254796010458,
+      "independent_bytes_per_task": 34.640625,
+      "router8_nrmse": 0.09636091601755147,
+      "router8_bytes_per_task": 31.578125
+    }
+  },
+  "scope": "Synthetic scalar nonlinear regression only; no large-model or natural-task claim."
 }
