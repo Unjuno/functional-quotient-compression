@@ -1,0 +1,21 @@
+{
+  "experiment_id":"MA-603",
+  "title":"CondConv-style Mirror weight synthesis",
+  "status":"SCREENING",
+  "evidence_lane":"MECHANISM/STORAGE/COMPUTE",
+  "base_commit":"8fd9f119",
+  "hypothesis":"An input-conditioned structured Givens View over coefficients of a shared FFN basis improves held-out quality per serialized byte and synthesis compute over native linear CondConv and a parameter-matched nonlinear coefficient generator.",
+  "physical_object":"K=4 shared two-layer FFN expert weight/bias bases, each mapping 12 features through width 8 to 8 outputs",
+  "mirror_coordinate":"two input-generated Givens angles applied to four CondConv coefficients; all angle generator parameters are charged",
+  "logical_multiplicity":"per-input effective FFN weights",
+  "prior_art_refs":["PA121"],
+  "controls":["single static shared FFN","native linear CondConv coefficients over K=4 FFN bases","non-Mirror two-layer nonlinear coefficient generator, parameter-matched to Mirror within 10%","oracle teacher basis and coefficient function (upper reference only)"],
+  "teacher":"Four fixed random FFN basis functions mixed by softmax of a 12->4 tanh MLP; teacher and data seeds are recorded in results.",
+  "development":{"worlds_or_seeds":[60301,60302],"train_examples":4096,"dev_examples":1024,"steps":1200,"batch_size":128,"optimizer":"AdamW lr=0.003, weight_decay=0","selection_metric":"mean held-out normalized MSE across both development worlds; one fixed configuration, no tuning across worlds"},
+  "fresh":{"worlds_or_seeds":[60311,60312],"train_examples":4096,"dev_examples":1024,"steps":1200,"batch_size":128,"locked_before_access":true,"run_only_if":"Mirror improves dev MSE by >=10% versus both controls, actual bytes <=1.25x better control, compute proxy <=1.25x"},
+  "storage":{"authority":"actual serialized inference payload bytes","format":"torch.save state_dict to in-memory BytesIO, exact byte length","paid_objects":["all basis FFN weights and biases","coefficient generator weights and biases","Mirror angle generator weights and biases","method/config metadata"]},
+  "compute":{"report_tokens_or_examples":true,"report_optimizer_updates":true,"report_active_compute_proxy":true,"report_isolated_wall_clock":true,"proxy":"count scalar multiply-adds for coefficient generation, 2D Givens rotations, effective FFN weight synthesis, and FFN evaluation per input"},
+  "success_gate":"Fresh Mirror MSE >=10% lower than both native linear CondConv and parameter-matched nonlinear coefficient generator; serialized bytes and compute proxy each <=1.25x the better control.",
+  "failure_gate":"Development fails either quality or byte/compute gate; do not access fresh worlds.",
+  "boundaries":["Synthetic mechanism screen only; no natural language or capacity claim.","Oracle teacher reference is privileged and not a deployable control.","All methods receive identical input/output data and optimizer budget."]
+}

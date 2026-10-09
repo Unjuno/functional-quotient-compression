@@ -1,0 +1,21 @@
+{
+  "experiment_id": "MA-603",
+  "protocol_and_initial_source_hashes": {
+    "PROTOCOL.json": "e8ce21bc1506a285b878881ecdc78ee84c993d772834e2bfe3d5cf51a695c7ed",
+    "README.md": "e194a04ee55f1d310c3f02d72daffbff2f4d9b68d324621f7d936cc886afd91e",
+    "source/run_experiment.py": "ecfd618dfb036b92325e97429eddacd69b8094be65779ce3beda0885379eaac0",
+    "tests/test_ma603.py": "9a02ff30199c87ec1f7f4f72085ee025d08f58f281a2fd17fc40e1240453af5b"
+  },
+  "frozen_before_development": true,
+  "fresh_worlds_sealed": true,
+  "amendments": [
+    {
+      "reason": "development implementation defect: oracle compute proxy key absent",
+      "scope": "development only; protocol and gates unchanged"
+    },
+    {
+      "reason": "add persisted exact inference payloads and deterministic load/replay verification",
+      "scope": "verification instrumentation only; no method, data, optimizer, metric or gate changes"
+    }
+  ]
+}
