@@ -1,0 +1,30 @@
+{
+  "experiment_id": "MA-520",
+  "status": "FAIL",
+  "fresh_split_integrity_checked": true,
+  "result_rows": 45,
+  "fresh_worlds": [
+    52010,
+    52011,
+    52012
+  ],
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "tests": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 python -m unittest discover -s experiments/mirror_applications/ma-520-function-vector-mirror-distillation/tests",
+    "passed": 2,
+    "failed": 0
+  },
+  "payload_hash_size_replay": true,
+  "protocol_deviations": [
+    "The initial fresh pass omitted explicit payload accounting; corrected and rerun identically before finalization.",
+    "Runtime/decoder latency was not recorded."
+  ],
+  "notes": [
+    "Direct ICL 25%; query-only 6.25%; all intervention qualities 0%.",
+    "PQ 14,117B vs explicit 50,921B but utility failed."
+  ]
+}

@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (55 completed; 575 UNTESTED)
+- P0: **630** (56 completed; 574 UNTESTED)
 - P1: **422** (14 completed; 408 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1086 UNTESTED, 36 PROMISING, 33 FAIL**
+- Current MA statuses: **1085 UNTESTED, 36 PROMISING, 34 FAIL**
 - 65 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -23,7 +23,7 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-520 — Function Vector → Mirror code distillation (P0; PA99)**
+**MA-521 — Mirror code extraction from demonstrations (P0; PA99/PA82)**
 
 Reason:
 - MA-470/471/473/475/476/478/481/482, MA-483, MA-484, MA-486, MA-487, MA-488, MA-492, MA-494, MA-498, MA-501, MA-502 and MA-516 are completed on dedicated branches and cross-linked in the claim ledger;
@@ -119,3 +119,6 @@ KG relation rotations (RotatE, TuckER, QuatE, PairRE), EXIF/device-aware ISPs (P
 
 
 **MA-519 FAIL (context routing):** cosine router identity accuracy averaged 95.83%, but oracle/routed FV task accuracy was 0%; router+FV bytes were 75,685B vs explicit bank+IDs 50,921B. The symbolic-router control was omitted, so no Mirror-specific routing claim. **Next: MA-520 (P0).**
+
+
+**MA-520 FAIL (FV code distillation):** K8 PQ reduced intervention payload from 50,921B to 14,117B, but accuracy remained 0% and NLL worsened versus explicit vectors. This is storage-only compression of a nonfunctional prompt-delta representation. Runtime not measured. **Next: MA-521 (P0).**
