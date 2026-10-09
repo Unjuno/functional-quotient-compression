@@ -1,0 +1,28 @@
+{
+  "experiment_id": "MA-504",
+  "commit": "fresh result commit recorded in git history",
+  "tests": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 python -m pytest -q experiments/mirror_applications/ma-504-token-conditioned-reft-mirror/tests/test_artifacts.py",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "payload_count": 45,
+    "payload_file_sizes_match_results": true,
+    "sha256_recorded_for_every_payload": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Fresh: 3 locked worlds x 3 seeds x 5 methods at development-selected LR 0.01.",
+    "Shared no-op baseline performed no optimizer updates; train token/update counts are explicitly 0 for that method.",
+    "All other learned methods used 1,000 updates and 128,000 training tokens per fresh world/seed/method.",
+    "CPU environment only; no CUDA device was available.",
+    "Synthetic teacher uses the same Givens-conditioned low-rank structure as Mirror; no natural-task generalization claim."
+  ]
+}
