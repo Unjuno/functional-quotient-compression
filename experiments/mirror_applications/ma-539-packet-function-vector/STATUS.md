@@ -3,16 +3,16 @@
 - Status: FAIL
 - Branch: `research/ma-539-packet-function-vector-20261009`
 - Base commit: `c734cb35bd63897fb3b08192423178bb1c35bd0f`
-- Last verified commit: pending result commit
+- Last verified commit: `0b622d9`
 - Development complete: yes (worlds 53901, 53902; four frozen settings)
 - Fresh/audit opened: no
-- Results committed: pending
-- Verification committed: pending
-- Registry row updated: pending
+- Results committed: yes
+- Verification committed: yes
+- Registry row updated: yes
 
 ## Next action
 
-Run registry integrity and test checks, then commit and push the result branch.
+Run the final registry integrity check, then push the result branch.
 
 ## Blockers
 
