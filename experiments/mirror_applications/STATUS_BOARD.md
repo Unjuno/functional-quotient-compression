@@ -29,7 +29,7 @@ Reason:
 - MA-470/471/473/475/476/478/481/482, MA-483, MA-484, MA-486, MA-487, MA-488, MA-492 and MA-494 are completed on dedicated branches and cross-linked in the claim ledger;
 - MA-494 ECOC and repetition codes improved noisy-address routing under synthetic bit flips; simple repetition beat the Mirror-style ECOC. MA-492 K<=8 missed packet-mode coverage; K16 had a scoped storage/validity gain. MA-488 private fallback exceeded the byte gate above 25% heterogeneity; MA-487 LISTA missed quality/storage; MA-486 sparse codes missed rate-distortion; MA-484 VQ experts failed quality/collision; MA-483 adaptive depth missed its byte gate.
 
-Required controls: ordinary expert IDs vs error-correcting codewords with same decoder and code entropy; compare noisy-route accuracy, false dispatch, code distance and serialized bytes.
+Required controls: ordinary codes vs same-entropy code-distance regularization; compare minimum distance, noisy confusion, task quality and actual codebook bytes.
 
 This is the next registry candidate by ID; the remaining P0 candidates after MA-482 proceed in registry order. Do not drop negative outcomes or treat synthetic PROMISING evidence as adoption.
 
