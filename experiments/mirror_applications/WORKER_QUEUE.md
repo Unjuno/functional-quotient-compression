@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-482.** MA-481 found substantial continuous-address byte savings but failed the paraphrase recall gate on a crowded orbit; VQ alternatives collided. Continue with residual-code composition and full rate-distortion controls.
+**Current operational pointer (2026-10-09): MA-498.** MA-494 redundant codes improved noisy routing under a synthetic bit-flip channel, but simple 3x repetition beat ECOC. Continue with learned code-distance regularization and matched random-code controls.
 
 # Worker queue
 

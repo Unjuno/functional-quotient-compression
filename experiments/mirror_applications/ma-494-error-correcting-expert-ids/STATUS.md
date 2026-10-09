@@ -14,3 +14,6 @@ D: PROMISING. At p=.1, binary accuracy .591; ECOC-11 .816 and repetition .868. P
 C: Independent synthetic bit-flip channel is not a trained router or task metric.
 
 U: Real router confusion and task-level consequences.
+
+
+Artifact replay test passed (1/1). Next: MA-498 — learned code-distance regularizer, on its dedicated branch.
