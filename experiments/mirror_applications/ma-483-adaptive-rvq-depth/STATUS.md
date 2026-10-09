@@ -6,7 +6,7 @@
 - Protocol frozen before fresh: yes
 - Development complete: yes; tau=0 selected (threshold sweep tied)
 - Fresh complete: yes; 3 worlds × 3 seeds
-- Results/verification: pending commit
+- Results/verification: yes (`529b4348`)
 
 ## Decision
 
