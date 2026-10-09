@@ -1,19 +1,34 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-547",
+  "commit": "pending",
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "PYTHONPATH=/tmp/ma534-python-deps python -m pytest -q experiments/mirror_applications/ma-547-roselora-mirror-locality/tests",
+    "passed": 3,
+    "failed": 0
   },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "actual_npz_byte_sizes": true,
+    "both_dev_worlds_checked": true
   },
   "metric_replay": {
-    "checked": false,
-    "max_difference": null
+    "checked": true,
+    "max_difference": 0.0,
+    "arrays_exact": true,
+    "split_manifest_exact": true,
+    "wall_clock_excluded": true,
+    "replayed_seed": 54701
   },
   "fresh_split_integrity_checked": false,
-  "notes": []
+  "fresh_accessed": false,
+  "protocol_hash_matches_freeze": true,
+  "notes": [
+    "Amendment 1 preserves the failed BPE-token router run and uses charged exact UTF-8 key matching for the corrected development results.",
+    "Corrected route accuracy is 1.0 in both dev worlds; Mirror edit success is .6406/.7500, so dev 54701 misses the fixed .75 gate.",
+    "Gated scalar bias exactly matches the Mirror +2 margin, success rate and zero non-target KL at 3,026 B vs 35,990 B. Same-gated RoseLoRA costs 35,982 B with comparable quality.",
+    "Fresh worlds remain sealed by protocol after the dev efficacy miss and control dominance.",
+    "Corrected seed 54701 replay matches metrics, split, NPZ arrays and byte sizes exactly.",
+    "This screen uses synthetic random token labels and does not establish natural knowledge editing."
+  ]
 }
