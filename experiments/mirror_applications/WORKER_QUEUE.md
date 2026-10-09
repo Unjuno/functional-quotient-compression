@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-359.** MA-357 showed no storage reduction over explicit Hamming addresses; Hopfield soft retrieval degraded decoded functions and cost 25% more query MACs. Proceed to MA-359, ACDC/AFDF Mirror transform family.
+**Current operational pointer (2026-10-09): MA-360.** MA-359 shared ACDC factors compressed an oracle aligned operator bank, but ordinary coefficients matched within 8 B and compute was unchanged. Proceed to MA-360, reversible Mirror block for storage and activation-memory compression.
 
 # Worker queue
 

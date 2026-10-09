@@ -1,7 +1,7 @@
 # MA-359 — ACDC structured Mirror transform
 
 Status: **FAIL for Mirror-specific value; fresh sealed**  
-Branch: `research/ma-359-acdc-mirror-transform-20261008`  
+Branch: `research/ma-359-acdc-mirror-transform-20261009`
 Base: `c935a90`  
 Prior art: PA45 ACDC structured transforms.
 
