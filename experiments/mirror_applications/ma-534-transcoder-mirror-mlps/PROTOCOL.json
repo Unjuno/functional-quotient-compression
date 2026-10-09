@@ -126,7 +126,8 @@
     "hardware": "CPU, fixed five-thread limit",
     "optimizer_updates": "1000 transcoder + 500 updates per role for each of three code controls",
     "report_tokens_and_examples": true,
-    "active_compute_proxy": "Report support MLP capture; transcoder fit; per-role support gate optimization; selected-feature encode/rotate/decode; original transformer candidate sequences."
+    "active_compute_proxy": "Report support MLP capture; transcoder fit; per-role support gate optimization; selected-feature encode/rotate/decode; original transformer candidate sequences.",
+    "report_wall_clock": "Record per-method candidate evaluation_seconds, stage-specific capture/transcoder/role-fit times, and total_wall_seconds."
   },
   "gates": {
     "PASS": "Both dev seeds: Givens within .05 accuracy/.20 gold-logprob nats of explicit MLP-delta bank; Givens total payload <=2.0x explicit bank; Givens beats pairwise and per-feature gates by >=.10 gold-logprob nats on both seeds; replay exact.",

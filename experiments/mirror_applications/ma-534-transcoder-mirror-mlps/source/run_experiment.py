@@ -17,7 +17,7 @@ def sparse_encode(x,E,eb):
  out=np.zeros_like(z,dtype=np.float32);np.put_along_axis(out,ix,np.take_along_axis(z,ix,axis=-1),axis=-1)
  return out
 
-def decode(z,D,db): return z@D.T+db
+def decode(z,D,db): return z@D+db
 
 def apply_view(z,code,kind):
  q=z[..., :POOL].copy()
@@ -74,7 +74,7 @@ def fit_roles(examples,E,eb,D,db,kind,updates=500):
  outputs=[];codes=[];seconds=[];losses=[]
  for role,items in enumerate(examples):
   x=torch.tensor(np.stack([q[0] for q in items]),dtype=torch.float32);y=torch.tensor(np.stack([q[1] for q in items]),dtype=torch.float32)
-  Et=torch.tensor(E);ebt=torch.tensor(eb);Dt=torch.tensor(D);dbt=torch.tensor(db)
+  Et=torch.tensor(E);ebt=torch.tensor(eb);Dt=torch.tensor(D.T.copy());dbt=torch.tensor(db)
   with torch.no_grad():
    # Exact deployment slice: selected 16 encoder rows only, with direct ReLU activations.
    z=torch.relu(torch.nn.functional.linear(x,Et,ebt))
@@ -109,7 +109,8 @@ def score_one(model,tok,torchmod,query,candidates,role,method,params):
  else:E,eb,D,db,codes=params
  def hook(mod,ins,out):
   xx=ins[0];yy=out[0] if isinstance(out,tuple) else out;yy=yy.clone();pos=len(pids)-1
-  if method=='explicit_mean':delta=means[role]
+  if method=='none':delta=np.zeros((1,yy.shape[-1]),dtype=np.float32)
+  elif method=='explicit_mean':delta=means[role]
   elif method=='unmodulated':delta=decode(sparse_encode(xx[:,pos,:].detach().cpu().numpy(),E,eb),D,db)
   else:delta=delta_from_code(xx[:,pos,:].detach().cpu().numpy(),E,eb,D,db,codes[role],method)
   yy[:,pos,:]+=torch.as_tensor(delta,dtype=yy.dtype,device=yy.device)
@@ -144,7 +145,7 @@ def payload(path,arrays):
  return Path(path).stat().st_size
 
 def run(seed,model_dir,outdir):
- out=Path(outdir);out.mkdir(parents=True,exist_ok=True);model,tok,tm=h.load_model(model_dir)
+ run_started=time.perf_counter();out=Path(outdir);out.mkdir(parents=True,exist_ok=True);model,tok,tm=h.load_model(model_dir)
  manifest=[]
  for i,(name,_) in enumerate(h.TASKS):
   sup,ev=h.split_task(i,seed);manifest.append({'task_id':i,'name':name,'support':sup,'evaluation':ev})
@@ -174,15 +175,15 @@ def run(seed,model_dir,outdir):
    c=codes
    arr={'codes':c,**meta}
    b=payload(out/(method+'.npz'),arr);params=(E,eb,D,db,c);evalmethod=method
+  eval_started=time.perf_counter()
   if method=='none':
-   # Zero decoder is an exact no-intervention control.
-   old=D.copy();D[:]=0
-   params=(E,eb,D,db,codes);m=evaluate_method(model,tok,tm,manifest,'unmodulated',params);D[:]=old
+   params=(E,eb,D,db,codes);m=evaluate_method(model,tok,tm,manifest,'none',params)
   else:m=evaluate_method(model,tok,tm,manifest,evalmethod,params)
+  eval_seconds=time.perf_counter()-eval_started
   charged_basis=(E.nbytes+eb.nbytes+D.nbytes+db.nbytes if method not in ('none','explicit_mean') else 0)
   codebytes=(b-charged_basis if b else 0)
-  rows.append({'seed':seed,'method':method,'payload_bytes':b,'basis_bytes':int(charged_basis),'code_bytes':int(codebytes),'model_bytes':model_bytes,'total_deployment_bytes':model_bytes+b,'explicit_total_bytes':model_bytes+explicit_b,'support_examples':128,'support_capture_tokens':forward_tokens,'transcoder_training_tokens':tokens_basis,'transcoder_optimizer_updates':1000,'role_optimizer_updates':8000 if method in fitdata else 0,'active_feature_compute_proxy':int((32*512*2048*1000*3 if method not in ('none','explicit_mean') else 0)+(16*8*512*2048*500 if method in fitdata else 0)),'transcoder_capture_seconds':capture_s,'transcoder_fit_seconds':fit_s,'role_fit_seconds':fitdata.get(method,(None,[0]*16,None))[1],'metrics':m})
- report={'experiment_id':'MA-534','seed':seed,'revision':h.REVISION,'model_sha256':h.MODEL_SHA,'transcoder_encoder_sha256':hashlib.sha256(E.tobytes()+eb.tobytes()).hexdigest(),'transcoder_decoder_sha256':hashlib.sha256(Dfull.tobytes()+db.tobytes()).hexdigest(),'pool_ids':pool.tolist(),'basis_training_tokens':tokens_basis,'transcoder_fvu':None,'rows':rows}
+  rows.append({'seed':seed,'method':method,'payload_bytes':b,'basis_bytes':int(charged_basis),'code_bytes':int(codebytes),'model_bytes':model_bytes,'total_deployment_bytes':model_bytes+b,'explicit_total_bytes':model_bytes+explicit_b,'support_examples':128,'support_capture_tokens':forward_tokens,'transcoder_training_tokens':tokens_basis,'transcoder_optimizer_updates':1000,'role_optimizer_updates':8000 if method in fitdata else 0,'active_feature_compute_proxy':int((32*512*2048*1000*3 if method not in ('none','explicit_mean') else 0)+(16*8*512*2048*500 if method in fitdata else 0)),'transcoder_capture_seconds':capture_s,'transcoder_fit_seconds':fit_s,'role_fit_seconds':fitdata.get(method,(None,[0]*16,None))[1],'evaluation_seconds':eval_seconds,'metrics':m})
+ report={'experiment_id':'MA-534','seed':seed,'total_wall_seconds':time.perf_counter()-run_started,'revision':h.REVISION,'model_sha256':h.MODEL_SHA,'transcoder_encoder_sha256':hashlib.sha256(E.tobytes()+eb.tobytes()).hexdigest(),'transcoder_decoder_sha256':hashlib.sha256(Dfull.tobytes()+db.tobytes()).hexdigest(),'pool_ids':pool.tolist(),'basis_training_tokens':tokens_basis,'transcoder_fvu':None,'rows':rows}
  (out/'split_manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n');(out/'metrics.json').write_text(json.dumps(report,ensure_ascii=False,indent=2,sort_keys=True)+'\n')
  print(json.dumps({'seed':seed,'pool':pool.tolist(),'rows':[{'method':r['method'],'bytes':r['payload_bytes'],'acc':r['metrics']['heldout_accuracy'],'gold':r['metrics']['mean_gold_candidate_logprob']} for r in rows]},indent=2),flush=True)
 
