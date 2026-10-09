@@ -14,3 +14,6 @@ D: FAIL. At p=.1, selected and random both accuracy .667, minimum distance 1, pa
 C: No improvement in minimum distance was available at this 8-bit/32-ID code pool.
 
 U: Structured ECC and task-level router errors.
+
+
+Artifact replay test passed (1/1). Next: MA-501 — LoReFT subspace + Mirror coordinate, on its dedicated branch.

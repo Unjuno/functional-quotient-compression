@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-482.** MA-481 found substantial continuous-address byte savings but failed the paraphrase recall gate on a crowded orbit; VQ alternatives collided. Continue with residual-code composition and full rate-distortion controls.
+**Current operational pointer (2026-10-09): MA-501.** MA-498 distance-optimized codes tied random unique IDs at equal bit length; extra redundancy improves noisy routing but max-min regularization adds no benefit here. Continue with LoReFT subspace plus Mirror coordinates and same-rank controls.
 
 # Worker queue
 
