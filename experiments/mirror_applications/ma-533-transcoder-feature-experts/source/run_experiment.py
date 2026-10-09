@@ -68,11 +68,17 @@ def main():
  cfg_path=hf_hub_download(TC,f'model.layers.{LAYER}.mlp/cfg.json',revision=TC_REV)
  with safe_open(tc_path,framework='pt',device='cpu') as f: w={k:f.get_tensor(k).float() for k in f.keys()}
  # Match EleutherAI/sparsify SparseCoder.forward: top-k encoder, decoder plus x @ W_skip.T.
- preact=x @ w['encoder.weight'].T + w['encoder.bias']
- vals,idx=preact.topk(K,dim=-1); acts=vals.clamp_min(0)
- decoded=(acts.unsqueeze(-1)*w['W_dec'][idx]).sum(dim=1)+w['b_dec']
- skip=x @ w['W_skip'].T
- yhat=decoded+skip
+ tc_t=time.perf_counter()
+ with torch.inference_mode():
+  preact=x @ w['encoder.weight'].T + w['encoder.bias']
+  vals,idx=preact.topk(K,dim=-1); acts=vals.clamp_min(0)
+  decoded=(acts.unsqueeze(-1)*w['W_dec'][idx]).sum(dim=1)+w['b_dec']
+  skip=x @ w['W_skip'].T
+  yhat=decoded+skip
+ transcoder_wall=time.perf_counter()-tc_t
+ dense_t=time.perf_counter()
+ with torch.inference_mode(): dense_pred=block(x)
+ dense_layer_wall=time.perf_counter()-dense_t
  # Baseline zero-residual estimate and rank-128 linear SVD fit on a fixed development prefix.
  zero=torch.zeros_like(y)
  fit_n=min(2048,len(x_fit)); xf=x_fit[:fit_n]; yf=y_fit[:fit_n]
@@ -90,7 +96,7 @@ def main():
  payload=out/'transcoder.safetensors'; save_file(w,str(payload))
  cfg=json.loads(Path(cfg_path).read_text()); (out/'config.json').write_text(json.dumps(cfg,sort_keys=True,separators=(',',':'))+'\n')
  cfg_bytes=(out/'config.json').stat().st_size; payload_bytes=payload.stat().st_size
- summary={'experiment_id':'MA-533','split':a.split,'seed':a.seed,'n_sequences':len(chunks),'tokens':int(len(chunks)*128),'activation_vectors':int(x.shape[0]),'fit_vectors':int(x_fit.shape[0]),'model':MODEL,'model_revision':model_rev,'model_repo_files':{},'transcoder_repo':TC,'transcoder_revision':TC_REV,'transcoder_sha256':sha(tc_path),'transcoder_file_bytes':payload_bytes,'config_bytes':cfg_bytes,'transcoder_incremental_bytes':payload_bytes+cfg_bytes,'base_model_bytes':None,'active_nonzeros_per_vector':int(K),'optimizer_updates':0,'data':'closji/wikitext__wikitext-2-raw-v1 train parquet, revision d575192455c5e98b8daed777574046264579cb09','input_tokens_sha256':hashlib.sha256(chunks.numpy().tobytes()).hexdigest(),'mlp_forward_wall_seconds':wall,'rank128_svd_wall_seconds':svd_wall,'compute_proxy':{'mlp_vectors':int(x.shape[0]),'transcoder_mac_proxy':int(x.shape[0]*K*x.shape[-1]),'dense_mlp_vectors':int(x.shape[0])},'methods':{'skip_only':metrics(skip),'transcoder_top128':metrics(yhat),'rank128_cross_covariance_svd':metrics(low)}}
+ summary={'experiment_id':'MA-533','split':a.split,'seed':a.seed,'n_sequences':len(chunks),'tokens':int(len(chunks)*128),'activation_vectors':int(x.shape[0]),'fit_vectors':int(x_fit.shape[0]),'model':MODEL,'model_revision':model_rev,'model_repo_files':{},'transcoder_repo':TC,'transcoder_revision':TC_REV,'transcoder_sha256':sha(tc_path),'transcoder_file_bytes':payload_bytes,'config_bytes':cfg_bytes,'transcoder_incremental_bytes':payload_bytes+cfg_bytes,'base_model_bytes':None,'active_nonzeros_per_vector':int(K),'optimizer_updates':0,'data':'closji/wikitext__wikitext-2-raw-v1 train parquet, revision d575192455c5e98b8daed777574046264579cb09','input_tokens_sha256':hashlib.sha256(chunks.numpy().tobytes()).hexdigest(),'full_model_capture_wall_seconds':wall,'native_dense_mlp_wall_seconds':dense_layer_wall,'transcoder_encode_decode_wall_seconds':transcoder_wall,'rank128_svd_fit_wall_seconds':svd_wall,'compute_proxy':{'vectors':int(x.shape[0]),'transcoder_encoder_dense_macs':int(x.shape[0]*w['encoder.weight'].numel()),'transcoder_decoder_sparse_macs':int(x.shape[0]*K*x.shape[-1]),'transcoder_skip_macs':int(x.shape[0]*w['W_skip'].numel()),'native_mlp_linear_macs':int(x.shape[0]*sum(p.numel() for n,p in block.named_parameters() if n.endswith('weight')))},'methods':{'skip_only':metrics(skip),'transcoder_top128':metrics(yhat),'rank128_cross_covariance_svd':metrics(low)}}
  # Hash revision manifests to enable exact provenance; actual model payload bytes are independently fetched and charged.
  from huggingface_hub import snapshot_download
  snap=snapshot_download(MODEL,revision=model_rev,allow_patterns=['*.safetensors','*.bin','*.json'])

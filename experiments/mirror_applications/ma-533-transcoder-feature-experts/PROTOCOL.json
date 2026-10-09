@@ -73,7 +73,7 @@
   "compute": {
     "report_tokens_or_examples": true,
     "report_optimizer_updates": true,
-    "report_active_compute_proxy": true,
+    "report_active_compute_proxy": "Report dense encoder MACs, sparse decoder MACs, skip MACs and native MLP linear MACs separately; report isolated native and transcoder wall time.",
     "report_isolated_wall_clock": true,
     "report_inference_latency": true
   },
@@ -94,6 +94,10 @@
     {
       "id": "amendment-2",
       "before_rerun": "Original Salesforce dataset script is no longer served, so its loader raised 404 before evaluating any metrics. Use the immutable parquet mirror `closji/wikitext__wikitext-2-raw-v1` revision d575192455c5e98b8daed777574046264579cb09 with the same Wikitext-2 raw train split and window protocol. No test data opened."
+    },
+    {
+      "id": "amendment-3",
+      "before_metric_rerun": "Audit found initial compute proxy counted sparse decoder MACs but omitted dense encoder and skip-connection MACs; it also timed full-model capture but not isolated sublayer inference. Final source reports all three operation proxies and isolated native/transcoder layer timings. Fidelity metric formula and split are unchanged."
     }
   ]
 }
