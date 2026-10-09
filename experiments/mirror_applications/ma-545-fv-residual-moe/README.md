@@ -27,7 +27,7 @@ Initial ambient-RNG runs are retained in `results/pre_amendment_1/`. Amendment 1
 
 Development-only result: both held-out route accuracies are 1.00. Routed FV equals oracle FV in candidate accuracy and gold likelihood. Mean gold-logprob improves over same-prompt ICL by 0.259 and 0.320 nats; accuracy changes are -0.0078 and 0.0000. With the charged manifest, FV router+expert payload is 86,951 B vs 119,943 B rank-one weight expert payload (0.725x). The development thresholds therefore authorize fresh evaluation, but do not establish robust generalization. See `RESULTS_CORE.csv` and per-seed metrics under `results/`.
 
-Fresh seeds remain sealed until the verified dev gate is committed. Data, model and intermediate artifacts remain under `results/`; do not delete negative results.
+Fresh seeds 54511–54513 were opened at `2026-10-09 02:37:18 UTC` after development gate commit `958497414260beafda407bc8adc928d525298dec`; evaluation is in progress without tuning. Data, model and intermediate artifacts remain under `results/`; do not delete negative results.
 
 ## Decision
 

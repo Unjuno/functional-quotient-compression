@@ -20,11 +20,12 @@
     "wall_clock_excluded": true
   },
   "fresh_split_integrity_checked": false,
-  "fresh_accessed": false,
+  "fresh_accessed": true,
   "protocol_hash_matches_freeze": true,
   "notes": [
     "Development 54501 was rerun exactly: metrics, splits, all serialized arrays and byte sizes matched.",
     "Amendment 2 added the support/query manifest bytes to all inference NPZ payloads and recomputed development actual byte counts without changing quality metrics.",
-    "Amended development passes the frozen gates to open fresh data: held-out route accuracy 1.00 on both seeds; routed FV exactly equals oracle FV; mean gold-logprob improvement over ICL is 0.289 nats; complete FV payload is 0.72494x the rank-one weight control."
+    "Amended development passes the frozen gates to open fresh data: held-out route accuracy 1.00 on both seeds; routed FV exactly equals oracle FV; mean gold-logprob improvement over ICL is 0.289 nats; complete FV payload is 0.72494x the rank-one weight control.",
+    "Fresh seeds 54511\u201354513 were opened only after development gate commit 958497414260beafda407bc8adc928d525298dec; evaluation is in progress with frozen settings."
   ]
 }

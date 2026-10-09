@@ -5,14 +5,14 @@
 - Base commit: `a37cb993d0a9bef5c7a9bb39e86abca39ed30bf6`
 - Protocol frozen: yes
 - Development complete: no
-- Fresh/audit opened: no (development gates passed; settings frozen)
+- Fresh/audit opened: yes (54511–54513 opened after committed gate)
 - Results committed: no
 - Verification committed: no
 - Registry row updated: pending
 
 ## Next action
 
-Open and run frozen fresh seed 54511. Repeat for 54512 and 54513 without tuning.
+Run frozen fresh seeds 54511, 54512 and 54513 without tuning; currently in progress.
 
 ## Blockers
 
