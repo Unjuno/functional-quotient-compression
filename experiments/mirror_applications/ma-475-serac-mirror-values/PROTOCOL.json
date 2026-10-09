@@ -1,0 +1,89 @@
+{
+  "experiment_id": "MA-475",
+  "title": "SERAC external memory values with Mirror code compression",
+  "status": "FROZEN_SCREENING",
+  "base_commit": "69c70957",
+  "evidence_lane": "MEMORY_VALUE_STORAGE/RETRIEVAL/QUALITY/LATENCY",
+  "hypothesis": "With SERAC retrieval keys and scope classifier held fixed, shared counterfactual value basis plus one Mirror angle per edit will retain on-scope target behavior and off-scope deferral while reducing actual memory payload bytes versus explicit values; retrieval errors must be measured separately from value reconstruction.",
+  "physical_object": "shared 16D counterfactual value plane and SERAC key memory",
+  "mirror_coordinate": "one per-edit value angle and shared value basis",
+  "logical_multiplicity": "64 separately retrievable counterfactual edit behaviors",
+  "prior_art_refs": [
+    89,
+    138
+  ],
+  "controls": [
+    "unedited base / zero counterfactual",
+    "SERAC explicit per-edit key and value vectors with exact shared scope classifier",
+    "generic Cartesian value coefficients over the same shared plane",
+    "Mirror angle-coded values with identical key retrieval"
+  ],
+  "task": {
+    "type": "synthetic 16D key-value counterfactual memory",
+    "edits_per_world": 64,
+    "query": "exact key, 4 paraphrases key+Gaussian noise sigma 0.03, and 256 unrelated random queries",
+    "retrieval": "nearest cosine key with fixed threshold 0.90; identical for all methods",
+    "value": "fixed-norm counterfactual vector on a known 2D plane",
+    "metrics": [
+      "exact/paraphrase retrieval recall",
+      "on-scope output NRMSE",
+      "unrelated false-trigger rate and output drift",
+      "actual bytes N=1/8/32/64",
+      "value decode MAC and measured lookup latency"
+    ]
+  },
+  "development": {
+    "worlds": [
+      47500,
+      47501
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "allowed": "fixed value orbit and 0.90 scope threshold; no fresh-dependent changes"
+  },
+  "fresh": {
+    "worlds": [
+      47510,
+      47511,
+      47512
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "SERAC retrieval keys",
+      "scope threshold/classifier metadata",
+      "explicit output values or shared value basis",
+      "angles or Cartesian coefficients",
+      "fact IDs and serialization metadata"
+    ],
+    "amortization_N": [
+      1,
+      8,
+      32,
+      64
+    ]
+  },
+  "compute": {
+    "report_lookup_MAC_per_query": true,
+    "report_value_decode_MAC": true,
+    "report_measured_retrieval_latency": true,
+    "report_edit_serialization_latency": true
+  },
+  "success_gate": "Every fresh world at N64: exact and paraphrase hit recall >=99%, unrelated false-trigger rate <=1%, on-scope NRMSE <=1e-5, actual Mirror payload <=80% SERAC; compare actual bytes and quality with generic Cartesian shared-plane code.",
+  "failure_gate": "Any fresh world misses retrieval, value-quality or N64 storage gates; if generic coefficients match or beat Mirror bytes at equal quality, no Mirror-specific advantage is claimed.",
+  "boundaries": [
+    "Synthetic external-memory mechanism screen, not a SERAC model reproduction.",
+    "Scope retrieval is intentionally identical and oracle-simple for every method; retrieval and value-code effects are reported separately.",
+    "Counterfactual values are hand-aligned to a fixed-norm 2D orbit; no natural edit generation or learned basis discovery."
+  ]
+}
