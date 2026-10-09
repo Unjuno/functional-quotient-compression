@@ -6,9 +6,9 @@
 - Protocol freeze: `9dbb08b0`
 - Development complete: yes
 - Fresh/audit opened: yes, after protocol freeze
-- Results committed: yes (pending report commit SHA)
-- Verification committed: yes (pending report commit SHA)
-- Registry row updated: yes (same report commit)
+- Results committed: yes (`da35c744`)
+- Verification committed: yes (`da35c744`)
+- Registry row updated: yes (`da35c744`)
 
 ## Next action
 
