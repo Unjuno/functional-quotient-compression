@@ -1,0 +1,13 @@
+{
+  "experiment_id":"MA-260","title":"BatchEnsemble rank-one Mirror ensemble","status":"FROZEN_SCREENING","base_commit":"64f4d3b0","evidence_lane":"ENSEMBLE_QUALITY/CALIBRATION/ACTUAL_BYTES/THROUGHPUT",
+  "model":{"type":"2-layer MLP","input_dim":20,"hidden_dim":64,"classes":4,"members":4},
+  "task":{"type":"synthetic 4-class Gaussian mixture","train_examples_per_world":4096,"test_examples_per_world":2048,"metrics":["accuracy","NLL","ECE","serialized bytes","CPU wall-clock"]},
+  "hypothesis":"A small structured orthogonal Mirror modulation bank applied to shared hidden weights yields higher ensemble quality-per-byte than native BatchEnsemble rank-one factors at equal member count.","prior_art_refs":[17],
+  "controls":["single shared MLP","native BatchEnsemble rank-one member factors","Givens rotation plus member-specific phase Mirror","independent four-member upper control (declared infeasible in this minimal harness)"],
+  "development":{"worlds":[26000,26001],"seeds":[0,1,2],"allowed":"fixed 500 optimizer updates and lr 0.003; no fresh access until development summary frozen"},
+  "fresh":{"worlds":[26010,26011,26012],"seeds":[0,1,2],"locked_before_access":true},
+  "storage":{"authority":"actual torch.save payload bytes including full state_dict and metadata","paid_objects":["shared/base weights","all member-specific factors or coordinates","member count and dimensions"]},
+  "success_gate":"At equal-or-lower serialized bytes than BatchEnsemble, Mirror improves ensemble mean accuracy by >=2 percentage points or reduces NLL >=5% in every fresh world; ECE regression <=0.02.",
+  "failure_gate":"Mirror fails both accuracy and NLL gates across fresh worlds or has no member diversity beyond the shared model.",
+  "boundaries":["Synthetic task only; no natural-data or broad calibration claims.","Four outputs from the same trained shared model are not independent ensemble members; interpretation is a view-quality screen.","Actual deployment comparison charges the entire serialized model state for every method."]
+}

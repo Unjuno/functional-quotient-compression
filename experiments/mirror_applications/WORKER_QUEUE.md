@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-255.** MA-517 completed FAIL: the direct ICL viability control itself had 0% accuracy on the synthetic two-hop task, so function composition is NOT ESTABLISHED; all extracted vector methods also had 0% accuracy and task vectors had mean cosine 0.99968. Continue to MA-255, the first available P0 by authoritative registry order, with Parameter Superposition as the required direct control. LoReFT candidates remain deferred for redesign after MA-501/502.
+**Current operational pointer (2026-10-09): MA-257.** MA-517 failed its ICL viability gate; MA-255 development metrics were invalidated by a broadcasting bug (fresh remained locked); MA-260 fresh metrics are exploratory because the runner trained every fresh evaluation on a hardcoded world. Continue at MA-257, the next executable P0 by registry order, with native Parameter Superposition as mandatory control. LoReFT remains deferred after MA-501/502 pending redesign.
 
 # Worker queue
 

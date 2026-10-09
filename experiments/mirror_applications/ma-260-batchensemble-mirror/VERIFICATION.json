@@ -1,0 +1,24 @@
+{
+  "experiment_id": "MA-260",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-260-batchensemble-mirror/tests -v",
+    "passed": 0,
+    "failed": 1
+  },
+  "serialization": {
+    "roundtrip_checked": false,
+    "byte_exact": true,
+    "note": "torch.save byte lengths and hashes are available for each checkpoint payload."
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0,
+    "note": "Aggregate values replayed from FRESH_RESULTS.csv; semantics invalid for preregistered fresh generalization due train world fixed to 26000."
+  },
+  "fresh_split_integrity_checked": false,
+  "notes": [
+    "All FRESH_RESULTS are preserved as exploratory only. The runner calls train(kind,s,500), whose data call hardcodes world=26000, for every fresh evaluation world.",
+    "The pre-registered metric gate is therefore NOT ESTABLISHED; no retuning or rerun on viewed fresh worlds."
+  ]
+}

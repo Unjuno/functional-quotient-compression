@@ -6,11 +6,11 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (53 completed; 577 UNTESTED)
+- P0: **630** (56 completed; 574 UNTESTED)
 - P1: **422** (13 completed; 409 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1088 UNTESTED, 36 PROMISING, 31 FAIL**
-- 65 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
+- Current MA statuses: **1086 UNTESTED, 36 PROMISING, 33 FAIL**
+- 68 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
 - Thirteenth literature sweep added MA-996..1045 (50 UNTESTED; 40 P0/10 P1) and PA296..PA325. IDs MA-1000+ use four digits; consult `check_registry_integrity.py`. No new experiment results.
@@ -23,19 +23,19 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-517 — Mirror composition of function vectors (P0; PA99)**
+**MA-257 — compositional Mirror context group (P0; PA16)**
 
 Reason:
 - MA-470/471/473/475/476/478/481/482, MA-483, MA-484, MA-486, MA-487, MA-488, MA-492, MA-494, MA-498, MA-501, MA-502 and MA-516 are completed on dedicated branches and cross-linked in the claim ledger;
 - MA-501 and MA-502 both found that VQ coordinates add substantial distortion over compact FP16 shared coordinates. The LoReFT representation-view family is temporarily deferred for redesign; skipped registry candidates remain UNTESTED. Work moves to the separate Function Vectors family at MA-516. Other completed candidates remain cross-linked in the claim ledger.
 
-Required controls: explicit extracted function vectors, shared PCA/Mirror basis codes, randomized/signed coefficient control, and function-vector ablation; actual serialized vector bytes and held-out function accuracy are primary.
+Required controls: explicit task vectors, native fixed-random PSP contexts, factorized compositional context operators, generic shared-basis coefficients, and oracle additive-factor upper control; held-out unseen factor combinations and actual serialized bytes are primary.
 
-This temporary pointer skips the deferred LoReFT family; return to its remaining UNTESTED P0 candidates after a family redesign. Do not drop negative outcomes or treat synthetic PROMISING evidence as adoption.
+The LoReFT family remains deferred after MA-501/502. MA-255’s PSP screen was not established because the development metric broadcasted incorrectly; MA-260’s fresh screen was not established because its training world was hardcoded. Both records and limitations are preserved.
 
 ## Active experiment
 
-MA-517 completed FAIL on `research/ma-517-function-vector-composition-20261009`; next is MA-255, the first available P0 under the queue. CUDA was unavailable; pinned GPT-2 ran on CPU. MA-517 direct ICL failed the minimum baseline viability gate (0% exact accuracy), so task composition quality is NOT ESTABLISHED. All methods scored 0%; mean inter-task vector cosine was 0.99968.
+MA-517 is FAIL; MA-255 and MA-260 are NOT ESTABLISHED for implementation defects. Current next candidate is MA-257 on its dedicated research branch.
 
 The LoReFT representation-view family remains temporarily deferred for redesign after two consecutive VQ-vs-FP16 distortion failures.
 
