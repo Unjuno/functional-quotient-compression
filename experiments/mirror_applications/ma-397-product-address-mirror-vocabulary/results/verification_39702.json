@@ -1,0 +1,64 @@
+{
+  "experiment_id": "MA-397",
+  "seed": 39702,
+  "condition": "development",
+  "unique_addresses": 1024,
+  "collision_count": 1024,
+  "occupancy": 2,
+  "payloads_checked": 4,
+  "all_exact": true,
+  "payloads": [
+    {
+      "method": "full",
+      "bytes": 123930,
+      "sha256": "45cc070c3b1cbfdecbfa6f7c7f6ba3bae22d1d7c161f00628ca8196d3029f361",
+      "metrics": {
+        "embedding_nrmse": 0.004235617816448212,
+        "collision_pair_separation_nrmse": 0.0041804383508861065,
+        "decoder_nll": 2.4630496501922607,
+        "decoder_top1_accuracy": 0.99951171875,
+        "mean_predicted_collision_separation": 2.068352699279785,
+        "mean_teacher_collision_separation": 2.0683834552764893
+      }
+    },
+    {
+      "method": "product",
+      "bytes": 6310,
+      "sha256": "dbcdb37911b33990a1a81afbc9a1eeefb3fd58d2d97f88faed1222707d9ec808",
+      "metrics": {
+        "embedding_nrmse": 1.7222633361816406,
+        "collision_pair_separation_nrmse": 1.0,
+        "decoder_nll": 2.7923402786254883,
+        "decoder_top1_accuracy": 0.22412109375,
+        "mean_predicted_collision_separation": 0.0,
+        "mean_teacher_collision_separation": 2.0683834552764893
+      }
+    },
+    {
+      "method": "coeff",
+      "bytes": 21483,
+      "sha256": "ef826c4e47cb788c2d167c98bc80c08923648859d7cbaf68551cad997b78165e",
+      "metrics": {
+        "embedding_nrmse": 0.00738777918741107,
+        "collision_pair_separation_nrmse": 0.007345049642026424,
+        "decoder_nll": 2.463083028793335,
+        "decoder_top1_accuracy": 0.9990234375,
+        "mean_predicted_collision_separation": 2.0682830810546875,
+        "mean_teacher_collision_separation": 2.0683834552764893
+      }
+    },
+    {
+      "method": "mirror",
+      "bytes": 13964,
+      "sha256": "75f946c7cfd2f317f2477fe9e477b7282186511d2e2a85485b0aec7b21457365",
+      "metrics": {
+        "embedding_nrmse": 0.1355639100074768,
+        "collision_pair_separation_nrmse": 0.12820549309253693,
+        "decoder_nll": 2.4672982692718506,
+        "decoder_top1_accuracy": 0.9892578125,
+        "mean_predicted_collision_separation": 2.074227809906006,
+        "mean_teacher_collision_separation": 2.0683834552764893
+      }
+    }
+  ]
+}
