@@ -1,0 +1,16 @@
+{
+ "experiment_id":"MA-522","title":"Persistent function code across conversation","status":"FROZEN_SCREENING","base_commit":"04de540c","evidence_lane":"PERSISTENT_SESSION_CODE/TASK_RETENTION/STATE_AND_CONTEXT_BYTES",
+ "model":{"id":"openai-community/gpt2","revision":"607a30d783dfa663caf39e06633721c8d4cfcd7e","parameters":124439808,"dtype":"float32","device":"CPU"},
+ "hypothesis":"A session-stored Mirror code reuses a task function over multiple turns with no more than 5pp quality loss vs repeating direct ICL and a lower total of serialized state plus prompt-context bytes.",
+ "physical_object":"one frozen GPT-2 session with persistent code state","mirror_coordinate":"m_session written once from task demonstrations and reused over turns","logical_multiplicity":"persistent task behavior across a multi-turn session without repeating demonstrations",
+ "prior_art_refs":[99,25],"controls":["query-only","repeat direct ICL every turn","explicit FV stored once","compact PCA/PQ code stored once","session reset/drift probe"],
+ "task":{"type":"synthetic multi-turn procedure x domain queries","turns":8,"metrics":["per-turn exact accuracy and NLL","retention/drift over turns","serialized session bytes","cumulative prompt-context tokens and bytes","compute per turn"]},
+ "development":{"worlds":[52200,52201],"seeds":[0,1,2],"allowed":"test session reset and accounting only; code rank fixed from MA520 (rank4/K8)"},
+ "fresh":{"worlds":[52210,52211,52212],"seeds":[0,1,2],"locked_before_access":true},
+ "storage":{"authority":"actual serialized persistent state plus cumulative prompt context bytes","paid_objects":["session code","decoder","FV or codebook","session/task metadata","all prompt tokens repeated or amortized"]},
+ "compute":{"report_per_turn_forward_passes":true,"report_total_context_tokens":true,"report_per_turn_latency":true},
+ "success_gate":"Direct ICL and explicit-FV execution above chance; session-code mean accuracy within 5pp of repeated ICL over all 8 turns; total state+context bytes lower than repeated ICL.",
+ "failure_gate":"Valid ICL task but persistent code fails quality, retention, or total byte gate.",
+ "not_established_gate":"Direct ICL or explicit-FV execution at/below chance; persistent utility cannot be judged.",
+ "boundaries":["Synthetic GPT-2 session task only; not persistent natural skills.","Include every saved code and repeated prompt byte.","Session longevity is measured by 8 turns only."]
+}
