@@ -1,9 +1,9 @@
 # MA-357 status
 
 - Status: FAIL at development
-- Branch: `research/ma-357-hopfield-mirror-address-reservoir-20261008`
+- Branch: `research/ma-357-hopfield-mirror-address-reservoir-20261009`
 - Base commit: `c935a90`
-- Last verified commit: `dd10a811caae56111dd2d88494f31dbb7d39df81`
+- Last verified commit: `b383738e`
 - Development complete: yes
 - Fresh/audit opened: no; 35711–35713 remain sealed
 - Results committed: yes

@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-357.** MA-356 reconstructed an oracle bilinear 64-function bank with factorized codes, but ordinary direct coefficients were only 1 B larger, below the Mirror-specific gate; fresh stayed sealed. Proceed to MA-357, Hopfield reservoir for Mirror addresses.
+**Current operational pointer (2026-10-09): MA-359.** MA-357 showed no storage reduction over explicit Hamming addresses; Hopfield soft retrieval degraded decoded functions and cost 25% more query MACs. Proceed to MA-359, ACDC/AFDF Mirror transform family.
 
 # Worker queue
 

@@ -1,7 +1,7 @@
 # MA-357 — Hopfield reservoir for Mirror addresses
 
 Status: **FAIL at development; fresh sealed**  
-Branch: `research/ma-357-hopfield-mirror-address-reservoir-20261008`  
+Branch: `research/ma-357-hopfield-mirror-address-reservoir-20261009`
 Base: `c935a90`  
 Prior art: PA44 modern Hopfield networks; PA31 explicit code/mask banks.
 

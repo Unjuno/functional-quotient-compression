@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (94 completed; 536 UNTESTED)
+- P0: **630** (95 completed; 535 UNTESTED)
 - P1: **422** (15 completed; 407 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1044 UNTESTED, 46 PROMISING, 65 FAIL**
+- Current MA statuses: **1043 UNTESTED, 46 PROMISING, 66 FAIL**
 - 68 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -299,3 +299,9 @@ KG relation rotations (RotatE, TuckER, QuatE, PairRE), EXIF/device-aware ISPs (P
 
 - **FAIL for Mirror-specific value:** an oracle bilinear bank of 64 linear operators was reconstructed exactly at 2,628–2,631B, but the ordinary direct coefficient control was only 1B larger, below the frozen 10% margin. Flat/Product-Key tables used 15,523–15,915B.
 - Fresh seeds remained sealed after the development gate failed. Eight amended development payloads replay exactly; three tests pass. This is a planted factorization screen, not learned compositional generalization or independent capacity.
+
+
+## Completed: MA-357 — Hopfield reservoir for Mirror addresses
+
+- **FAIL at development:** Hopfield retrieval cost the same packed address/code bytes as explicit Hamming retrieval, which matched or beat it. Soft mixtures degraded decoded-view quality (K64 nMSE .183–.200; K256 .416–.426) and used 25% more query MACs.
+- Three development seeds and 27 rows replay exactly; three tests pass. Fresh seeds remained sealed after the gate failed. Random binary codes/fixed decoder only; no learned memory or natural task claim.
