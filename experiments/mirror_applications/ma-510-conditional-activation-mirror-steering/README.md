@@ -41,3 +41,29 @@ H: Replacing explicit CAST behavior vectors with a shared rank-4 basis and compa
 - FAIL if Mirror violates conditional quality or does not beat generic coefficients by the 20% byte margin.
 
 All condition prototypes, behavior keys, vectors/codes, bases, seeds, residuals and metadata are serialized and charged. The synthetic behavior geometry is intentionally aligned to the Mirror family; no pretrained-LM claim is made.
+
+## Development screen and early decision
+
+### H / T / D / C / U
+
+**H:** Shared condition/behavior factor codes plus Mirror behavior Views reduce CAST activation-state bytes while preserving held-out condition efficacy and false-trigger rate.
+
+**T:** Fixed 64D rank-4 behavior-vector bank, 16 behaviors, 32 continuous condition prototypes, 8D behavior keys, cosine threshold .35, query noise sigma .2, 20% pair holdout; two development worlds × three seeds × two residual regimes; explicit CAST vectors, generic FP16/FP32 coefficients, Mirror FP16 angles, and Mirror plus private residual.
+
+**D: FAIL at the development gate; fresh was not opened.** On `rho=0` held-out pairs, all representations had false-trigger 4.68% (within 5%) but miss rate 28.88% (gate ≤5%), giving on-target efficacy 71.12%. Mirror used 5,145B vs generic FP16 coefficients 4,957B and had slightly higher NRMSE (.000357 vs .000214); the generic control is both smaller and more accurate. Explicit CAST vectors used 7,713B. At `rho=.1`, Mirror-only NRMSE was .1458; private residuals reduced it to .000405 at 5,525B. Development failure is sufficient under the frozen stop rule; no fresh results are claimed.
+
+**C:** The native cosine gate is brittle to context noise for near-threshold positives; because every representation shares that gate, the 28.9% miss rate is not caused by Mirror. Generic FP16 coefficients also dominate Mirror on the aligned behavior bank.
+
+**U:** Fresh replication, a calibrated CAST threshold/gate, natural conditions, pretrained-LM behavior scores, and learned condition/behavior code factorization remain untested.
+
+### Facts
+
+- 60 development rows: 2 worlds × 3 seeds × 2 residual regimes × 5 methods.
+- `rho=0`: FPR .0468, miss .2888, efficacy .7112 for all methods because the gate is shared.
+- At `rho=0`, generic FP16 coefficient payload 4,957B / NRMSE .000214; Mirror 5,145B / .000357; explicit CAST 7,713B.
+- `rho=.1`: Mirror-only NRMSE .1458; private residual variant .000405 at 5,525B.
+- All development payload hashes, lengths and replay outputs verified exactly.
+
+### Interpretation
+
+A development-only gate failure means this protocol cannot support a passing conditional-steering claim. The representation comparison separately shows no Mirror-specific byte advantage over generic FP16 coefficients. The failure is preserved and the queue advances.
