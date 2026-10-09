@@ -1,0 +1,27 @@
+{
+  "experiment_id": "MA-511",
+  "commit": "fresh results commit recorded in git history",
+  "tests": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 python -m pytest -q experiments/mirror_applications/ma-511-hierarchical-condition-behavior-mirror/tests/test_artifacts.py",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "payload_count": 90,
+    "payload_file_sizes_match_results": true,
+    "sha256_recorded_for_every_payload": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Development selected 800 Adam steps using development held-out NRMSE before fresh worlds were evaluated.",
+    "Fresh contains 3 worlds x 3 seeds x 2 rho settings x 5 methods.",
+    "All actual serialized payloads are preserved; 90 hashes and replay metrics checked.",
+    "This is a synthetic Givens-aligned composition task only."
+  ]
+}
