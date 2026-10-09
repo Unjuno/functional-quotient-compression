@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-482.** MA-481 found substantial continuous-address byte savings but failed the paraphrase recall gate on a crowded orbit; VQ alternatives collided. Continue with residual-code composition and full rate-distortion controls.
+**Current operational pointer (2026-10-09): MA-487.** MA-484 VQ expert codes failed quality/collision gates; MA-486 sparse dictionary codes missed the quality/byte frontier (top-4 is smaller but too inaccurate; top-8 is accurate but too large). Continue with LISTA inference against the same sparse dictionary and sparsity controls.
 
 # Worker queue
 
