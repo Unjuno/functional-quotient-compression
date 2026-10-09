@@ -6,11 +6,11 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (38 completed; 592 UNTESTED)
+- P0: **630** (39 completed; 591 UNTESTED)
 - P1: **422** (12 completed; 410 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1105 UNTESTED, 32 PROMISING, 18 FAIL**
-- 49 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
+- Current MA statuses: **1104 UNTESTED, 33 PROMISING, 18 FAIL**
+- 50 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
 - Thirteenth literature sweep added MA-996..1045 (50 UNTESTED; 40 P0/10 P1) and PA296..PA325. IDs MA-1000+ use four digits; consult `check_registry_integrity.py`. No new experiment results.
@@ -23,13 +23,13 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-475 — SERAC memory values as Mirror codes (P0; PA89)**
+**MA-476 — GRACE codebook value compression via shared Mirror basis (P0; PA90)**
 
 Reason:
-- MA-470/471/473 are completed on dedicated branches and cross-linked in the claim ledger;
-- MA-472 and MA-474 are P1 composition/factorization follow-ups; MA-475 is the next P0 knowledge-editing integration target.
+- MA-470/471/473/475 are completed on dedicated branches and cross-linked in the claim ledger;
+- MA-472 and MA-474 are P1 composition/factorization follow-ups; MA-476 is the next P0 memory-value compression target.
 
-Required controls: native SERAC retrieval and counterfactual memory, explicit stored edit values, and shared-basis Mirror values. Keep retrieval separate from representation compression; count all model, classifier, memory and code bytes, and measure false triggers and latency.
+Required controls: native GRACE key/radius/value codebook, explicit values and shared-basis Mirror values. Keep key retrieval separate from value compression; count keys, radii, codebooks and decoder bytes, and measure edit retention, false triggers, bytes/edit and latency.
 
 If blocked by a documented reproducibility or harness issue, record it and resume at MA-260 (BatchEnsemble), then MA-261/265/268 in the registered literature priority sequence. Do not jump to P1/novelty-picked topics before P0.
 
@@ -96,3 +96,6 @@ KG relation rotations (RotatE, TuckER, QuatE, PairRE), EXIF/device-aware ISPs (P
 
 
 **MA-473 PROMISING for aligned edit-bank storage only:** at N64, four-layer Mirror codes used 5,973B vs direct per-layer rank-one factors 35,105B and generic Cartesian shared-plane coefficients 8,021B. Standalone edit NRMSE stayed below 2e-7 and locality near zero; merged-bank NRMSE reached 4.80, identically across representations. This compresses a known synthetic orbit but does not establish useful simultaneous factual editing or learned MEMIT. **Next: MA-475 (P0); MA-474 remains P1.**
+
+
+**MA-475 PROMISING for synthetic value-memory storage only:** at N64 Mirror used 7,069B vs SERAC explicit key/value 10,529B; generic shared Cartesian coefficients used 7,261B. Exact/paraphrase recall was 100%, unrelated false triggers 0. The incremental Mirror saving over generic was only 2.6%; known fixed-norm 2D value orbit, not a SERAC reproduction. **Next: MA-476 (GRACE value compression).**
