@@ -1,0 +1,79 @@
+{
+  "experiment_id": "MA-576",
+  "title": "SmoothQuant scaling plus residual Mirror rotation",
+  "status": "SCREENING",
+  "evidence_lane": "QUANTIZATION/SMOOTHQUANT_RESIDUAL/ACTUAL_BYTES/RECONSTRUCTION/NATIVE_ATTRIBUTION",
+  "base_commit": "a4b0b0a3",
+  "model_revision": "e93a9faa9c77e5d09219f6c868bfc7a1bd65593c",
+  "model_sha256": "3da388330e4549156d76b58d6d268c63cd005e9336b4f4d2d378421e7b7a33fd",
+  "hypothesis": "After a SmoothQuant-style diagonal scale, a residual block-Hadamard rotation can improve held-out int4 reconstruction over either component alone at a small actual byte and compute cost.",
+  "physical_object": "12 Pythia-70M attention-dense and MLP-up matrices in layers 0-5, width 512",
+  "mirror_coordinate": "Per-matrix selection among 16 exact block-Hadamard/sign/permutation gauges applied after SmoothQuant scaling",
+  "logical_multiplicity": "Alternative residual quantization gauges of a single shared weight set; no functional capacity claim",
+  "prior_art_refs": [
+    "PA114",
+    "PA112"
+  ],
+  "split": {
+    "evaluation_units": "output rows of each of 12 matrices",
+    "calibration_fraction": 0.2,
+    "row_partition_seed": 57600,
+    "audit_rows": "complementary 80% output rows per matrix",
+    "global_code_fit": "calibration rows across all matrices; no audit rows used"
+  },
+  "quantization": {
+    "bits": 4,
+    "group_size": 32,
+    "scale_storage": "FP16 per output-row/group",
+    "smooth_scale": "FP16 per input channel; derived from calibration output rows only"
+  },
+  "development": {
+    "worlds_or_seeds": [
+      57601,
+      57602
+    ],
+    "selection_metric": "mean audit-row relative Frobenius NRMSE across all 12 matrices, actual total/code/scale bytes, elapsed calibration/encode and operation proxies"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      57611,
+      57612,
+      57613
+    ],
+    "locked_before_access": true
+  },
+  "controls": [
+    "identity int4",
+    "SmoothQuant-style scale only",
+    "QuaRot residual only with one shared selected code",
+    "SmoothQuant plus one shared residual code",
+    "SmoothQuant plus per-matrix best-of-16 residual code",
+    "random residual code after SmoothQuant",
+    "native sequential SmoothQuant+QuaRot per-matrix selection"
+  ],
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "packed int4 weights",
+      "FP16 quantization scales",
+      "SmoothQuant channel scales",
+      "all selected rotation sign/permutation arrays and IDs",
+      "metadata"
+    ]
+  },
+  "compute": {
+    "optimizer_updates": 0,
+    "report_candidate_calibration_seconds": true,
+    "report_per_method_encode_seconds": true,
+    "report_view_operations": true,
+    "report_total_wall_seconds": true
+  },
+  "success_gate": "Both dev seeds: SmoothQuant+residual rotation improves held-out NRMSE by >=2% versus SmoothQuant alone and >=1% versus rotation alone; total serialized payload <=1.01x the best single component; no exact native sequential alias.",
+  "failure_gate": "Any quality or byte gate miss, or exact native sequential SmoothQuant+QuaRot alias.",
+  "boundaries": [
+    "Small Pythia weight-matrix reconstruction screen; output-row audit, not held-out layer generalization",
+    "No NLL/perplexity claim",
+    "Natural-text task quality and full-model inference remain untested",
+    "Fresh remains sealed after any development gate miss or exact native alias"
+  ]
+}

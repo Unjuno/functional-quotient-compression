@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (215 completed; 415 UNTESTED; 0 SCREENING)
+- P0: **630** (215 completed; 414 UNTESTED; 1 SCREENING)
 - P1: **422** (13 completed; 409 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **168 FAIL, 15 NOT ESTABLISHED, 45 PROMISING, 927 UNTESTED, 0 SCREENING**
+- Current MA statuses: **168 FAIL, 15 NOT ESTABLISHED, 45 PROMISING, 926 UNTESTED, 1 SCREENING**
 - 47 baseline experiment directories remain present; 171 additional per-ID outcomes are linked to their dedicated research branches in `LIVE_BRANCH_RECONCILIATION.csv`.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This was the intake-time queue; current selection follows the live-branch reconciliation at the top of this board.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed at intake time; later live-branch outcomes are indexed above.
@@ -23,7 +23,7 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-MA-545 is a verified **FAIL** on `research/ma-545-fv-residual-moe-20261009`: few-shot route accuracy and oracle FV quality pass, and routed FVs improve gold likelihood, but shared-mean FV has higher held-out candidate accuracy in all five seeds at 8.27x lower fresh payload. MA-546 is a verified symmetry-audit PASS and capacity FAIL on `research/ma-546-representation-symmetry-20261009`: all compensated post-GELU views preserve Pythia outputs while uncompensated views alter them. The 16 addresses are gauge choices, not logical functions. MA-547 is a verified **FAIL** on `research/ma-547-roselora-mirror-locality-20261009`: dev edit success .641/.750; gated scalar bias matches efficacy/locality at 3,026 B vs 35,990 B. Fresh stayed sealed. **MA-550 is a verified FAIL for Mirror-specific attribution** on `research/ma-550-adaptive-representation-allocation-20261009`: adaptive mix passes all five synthetic worlds at 19,682 B with fresh max per-function RMSE 1.05e-4, but exactly aliases native sparse output-bias plus shared-basis/ReFT selection; decode proxy 412.1M FLOPs/bank. MA-574 is NOT ESTABLISHED: frozen source hash mismatch; protocol hash matches and same-seed replay selects different codebook IDs; fresh sealed. MA-575 FAIL: factorized rotation saved 10,914 B versus independent codes with equal held-out NRMSE, but exactly aliases native BOFT-style factor selection; random factors tie quality at 9 B fewer. Next P0: MA-576 SmoothQuant scaling plus residual Mirror rotation.
+MA-545 is a verified **FAIL** on `research/ma-545-fv-residual-moe-20261009`: few-shot route accuracy and oracle FV quality pass, and routed FVs improve gold likelihood, but shared-mean FV has higher held-out candidate accuracy in all five seeds at 8.27x lower fresh payload. MA-546 is a verified symmetry-audit PASS and capacity FAIL on `research/ma-546-representation-symmetry-20261009`: all compensated post-GELU views preserve Pythia outputs while uncompensated views alter them. The 16 addresses are gauge choices, not logical functions. MA-547 is a verified **FAIL** on `research/ma-547-roselora-mirror-locality-20261009`: dev edit success .641/.750; gated scalar bias matches efficacy/locality at 3,026 B vs 35,990 B. Fresh stayed sealed. **MA-550 is a verified FAIL for Mirror-specific attribution** on `research/ma-550-adaptive-representation-allocation-20261009`: adaptive mix passes all five synthetic worlds at 19,682 B with fresh max per-function RMSE 1.05e-4, but exactly aliases native sparse output-bias plus shared-basis/ReFT selection; decode proxy 412.1M FLOPs/bank. MA-574 is NOT ESTABLISHED: frozen source hash mismatch; protocol hash matches and same-seed replay selects different codebook IDs; fresh sealed. MA-575 FAIL: factorized rotation saved 10,914 B versus independent codes with equal held-out NRMSE, but exactly aliases native BOFT-style factor selection; random factors tie quality at 9 B fewer. MA-576 SmoothQuant scaling plus residual Mirror rotation is active; frozen dev 57601/02 pending.
 
 ## Active experiment
 

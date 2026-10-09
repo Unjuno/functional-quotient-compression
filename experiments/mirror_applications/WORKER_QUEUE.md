@@ -476,3 +476,8 @@ MA-574 is **NOT ESTABLISHED** because its recorded frozen source digest mismatch
 
 
 MA-575 is closed **FAIL**: factorized layer×block code saves 10,914 B versus independent with equal dev heldout NRMSE, but aliases native BOFT-style factor selection; random factor ties quality at 9 B fewer. Fresh sealed. Next executable P0: MA-576 SmoothQuant scaling + residual Mirror rotation (PA114/PA112).
+
+
+## Current MA-576 handoff — 2026-10-09
+
+MA-576 is active on `research/ma-576-smoothquant-residual-rotation-20261009`. Protocol/source are frozen; registered dev seeds 57601/02 remain pending. Fresh 57611–13 are sealed. PA114 and PA112 controls were reviewed.
