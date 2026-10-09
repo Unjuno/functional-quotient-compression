@@ -1,5 +1,7 @@
 # MA-374 status
 
+- Last verified commit: `44a169d0`
+
 - Status: **FAIL** (bounded digits residual-block proxy)
 - Branch: `research/ma-374-albert-depth-mirror-20261009`
 - Protocol frozen before development: yes; selected LR 0.003 on worlds 37400/37401

@@ -1,6 +1,6 @@
 {
   "experiment_id": "MA-374",
-  "commit": null,
+  "commit": "44a169d0",
   "protocol_frozen_before_development": true,
   "tests": {
     "passed": 3,
@@ -73,13 +73,19 @@
     "payload_hashes_checked": true
   },
   "metric_replay": {
+    "checked": true,
     "rows": 42,
-    "max_metric_difference": 4.6304321488221944e-09
+    "max_metric_difference": 4.6304321488221944e-09,
+    "max_roundtrip_diff": 0.0,
+    "payload_hashes_checked": true
   },
   "decision": "FAIL",
   "notes": [
     "Digits residual-block proxy only, not ALBERT/Transformer evidence.",
     "Full tied+depth Mirror does not improve over full tied baseline; partial sharing provides better quality.",
-    "Equal-payload FiLM is slightly more accurate than Mirror."
-  ]
+    "Equal-payload FiLM is slightly more accurate than Mirror.",
+    "Replayed from the committed development/fresh torch.save inference payloads in this branch: 42 rows, exact hashes/bytes, max metric difference 4.63e-9, zero logit roundtrip difference. Three experiment tests passed.",
+    "An earlier duplicate-ID synthetic recurrence screen is archived under protocol_variants/unregistered_sequence_probe; it is development-only and does not alter this registered protocol decision."
+  ],
+  "fresh_split_integrity_checked": true
 }

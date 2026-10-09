@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-374.** MA-367/368 consecutively failed for the same post-output width/depth correction limitation; MA-369/371/372 are paused pending redesign. Proceed to MA-374, ALBERT shared layers with a Mirror depth coordinate (P0).
+**Current operational pointer (2026-10-09): MA-375.** MA-374 failed on its preregistered fresh digits protocol: partial attention/FFN sharing beat full tying, while Mirror matched equal-byte FiLM. A duplicate development-only sequence screen is archived separately and does not alter the decision. Proceed to MA-375, one-shot supernet + Mirror subgraph correction (P0).
 
 # Worker queue
 

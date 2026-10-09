@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (102 completed; 528 UNTESTED)
+- P0: **630** (103 completed; 527 UNTESTED)
 - P1: **422** (15 completed; 407 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1036 UNTESTED, 46 PROMISING, 73 FAIL**
+- Current MA statuses: **1035 UNTESTED, 46 PROMISING, 74 FAIL**
 - 68 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -351,3 +351,13 @@ KG relation rotations (RotatE, TuckER, QuatE, PairRE), EXIF/device-aware ISPs (P
 ## Paused family: post-output width/depth Mirror codes
 
 MA-367 and MA-368 consecutively failed for the same insertion limitation: a post-activation Givens correction did not recover width/depth truncation, while matched ordinary scalar controls captured the same or better behavior. Pause MA-369, MA-371 and MA-372 pending a redesign that inserts `m` within repeated blocks or changes the training objective; any continuation needs a new amendment/MA and matched ordinary control. See [family diagnostic](../../docs/phase2/MA367_368_SLIMMABLE_OUTPUT_CODE_FAMILY_DIAGNOSTIC.md).
+
+
+## Completed: MA-374 — ALBERT shared layers + depth Mirror
+
+- **FAIL on the registered, pre-frozen digits residual-block protocol:** fresh mean accuracy was 97.22% untied, 96.48% tied, 97.13% attention-shared, 97.50% FFN-shared, 96.39% Mirror, and 96.67% FiLM. Mirror and FiLM used equal 89,282B; Mirror did not recover a useful quality frontier. The untied payload was 257,447B.
+- Fresh worlds 37410/37411/37412 were evaluated once at development-selected LR 0.003. All 42 payload rows, bytes and hashes replay; max metric delta 4.63e-9, zero logit roundtrip error; three tests pass. CPU digits proxy only.
+
+## MA-374 duplicate branch adjudication
+
+An earlier same-ID branch (`ma-374-albert-shared-depth-mirror`) tested a different synthetic recurrence Transformer and reported a development-only final-depth NLL signal, while missing its multi-depth gate. Its protocol/result were committed together after the run, without a separate pre-development freeze. It is retained under the registered experiment's `protocol_variants/unregistered_sequence_probe/`; it does not supersede the frozen MA-374 protocol or contribute fresh evidence.
