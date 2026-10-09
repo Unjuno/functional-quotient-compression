@@ -31,3 +31,9 @@ def test_group_view_and_native_control_are_same_shared_basis_path():
         return base+np.stack([code[:,r]@role_basis[r].T for r in range(m.ROLE)],axis=1).reshape(x.shape)
     mirror=view_decode();native=view_decode()
     assert np.array_equal(mirror,native)
+
+
+def test_kv_matrix_layout_has_sequence_rows():
+    k=np.zeros((1,m.H,7,m.D),np.float32);v=np.ones_like(k)
+    x=m.tomat([[k,v] for _ in range(m.L)],0)
+    assert x.shape==(7,m.F)

@@ -25,7 +25,7 @@ def getcache(m,w):
  with torch.inference_mode():return m(input_ids=torch.tensor(w[:PFX][None,:],dtype=torch.long),use_cache=True,return_dict=True).past_key_values
 def cache_np(p):return [[t.detach().cpu().numpy().astype(np.float32,copy=False) for t in lay] for lay in p]
 def tomat(c,l):
- k,v=c[l];return np.stack((k[0],v[0]),axis=1).transpose(2,0,1,3).reshape(k.shape[1],F)
+ k,v=c[l];return np.stack((k[0],v[0]),axis=1).transpose(2,0,1,3).reshape(k.shape[2],F)
 def frommat(x):
  y=x.reshape(x.shape[0],H,KV,D).transpose(1,2,0,3)
  return torch.from_numpy(y[:,0][None].copy()),torch.from_numpy(y[:,1][None].copy())
