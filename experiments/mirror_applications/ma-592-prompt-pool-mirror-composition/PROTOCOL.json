@@ -1,0 +1,88 @@
+{
+  "experiment_id": "MA-592",
+  "title": "Input-conditioned Mirror composition over a learned soft-prompt pool",
+  "status": "SCREENING",
+  "evidence_lane": "PROMPT_POOL/PA119/L2P_ROUTING/COMPOSITION/NLL/ACTUAL_BYTES",
+  "base_commit": "e6e7ddc8",
+  "model": "EleutherAI/pythia-70m-deduped",
+  "model_revision": "e93a9faa9c77e5d09219f6c868bfc7a1bd65593c",
+  "model_sha256": "3da388330e4549156d76b58d6d268c63cd005e9336b4f4d2d378421e7b7a33fd",
+  "task_prompt_sources": {
+    "MA-591 seed 59101 bank": "sha256:c7c7102308d43cfa6b79822660dc3dc4f25aa7148b3d9406a5488e2fd7267185",
+    "MA-591 seed 59102 bank": "sha256:83f5733ee3f81b0217c8a8ce1d2860b55e1f0ecf2eb84003c76e1cd6209c41dd"
+  },
+  "dataset": "WikiText-2 raw, eight source articles per prompt bank; held-out suffix queries",
+  "dataset_sha256": {
+    "train.txt": "9e9fa1ad55b1c2c95b08e37dd8e653f638fac2c6de904b79e813611eefbc985f",
+    "test.txt": "d790b833ef8cf03a90db7bf1271b7520b83c45ce07ba3c1a9699df81e239eca0"
+  },
+  "hypothesis": "An input-conditioned rank-2 coefficient View that composes a shared soft-prompt pool can match per-task oracle prompt quality with no private prompt duplication and outperform native top-1 L2P retrieval on held-out article queries.",
+  "physical_object": "Eight learned 8-token Pythia soft prompts reused across query contexts",
+  "mirror_coordinate": "For each query, m is the two-element softmax similarity code over the top-2 prompt keys; the logical prompt is the weighted sum of those pool entries",
+  "controls": [
+    "zero prompt",
+    "oracle correct per-task prompt (quality upper bound)",
+    "native L2P-style top-1 key/query selection",
+    "native L2P-style top-2 softmax-weighted prompt composition",
+    "Mirror top-2 composition with the same fixed coordinate equation"
+  ],
+  "routing": {
+    "query_feature": "mean final hidden state of frozen Pythia over the 64-token query context",
+    "pool_key": "mean final hidden state over the first 64 content tokens of each source article",
+    "similarity": "cosine",
+    "top_k": 2,
+    "temperature": 0.1,
+    "mirror_m": "softmax of the two selected cosine similarities divided by temperature"
+  },
+  "evaluation": {
+    "seeds": [
+      59101,
+      59102
+    ],
+    "queries_per_task": 4,
+    "tasks_per_seed": 8,
+    "context_tokens": 64,
+    "target_tokens": 64,
+    "metric": "target-token NLL; also report top-1 routing accuracy and top-2 target containment"
+  },
+  "development": {
+    "bank_seeds": [
+      59101,
+      59102
+    ],
+    "selection_metric": "NLL, routing accuracy, actual prompt+key bank bytes, per-query m bytes, routing/composition/inference time"
+  },
+  "fresh": {
+    "seeds": [
+      59211,
+      59212,
+      59213
+    ],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual serialized NPZ bytes",
+    "paid_objects": [
+      "eight full prompt vectors once per bank",
+      "eight FP16 query keys",
+      "task identifiers and shape/schema metadata",
+      "any persistent router state; none is trained in this protocol"
+    ]
+  },
+  "compute": {
+    "optimizer_updates": 0,
+    "prompt_training_cost": "prior MA-591 bank training; reported separately and not recharged as new optimization",
+    "report_key_extraction_seconds": true,
+    "report_query_routing_and_mixing_seconds": true,
+    "report_inference_seconds": true,
+    "report_virtual_prompt_tokens": 8
+  },
+  "success_gate": "Both bank seeds: Mirror NLL within +0.05 nat/token of oracle prompt and at least 0.02 nat better than native top-1; actual payload <=1.05x one full prompt pool plus keys; no exact native weighted-prompt alias.",
+  "failure_gate": "Any quality/byte miss or exact native top-2 weighted-composition alias.",
+  "boundaries": [
+    "The prompt pool is inherited from the already completed MA-591 development banks; no task prompt is retrained here",
+    "This is an eight-article text routing screen, not class-incremental vision evaluation",
+    "Top-2 softmax weighting is explicitly compared as the native composition control",
+    "Fresh task queries remain sealed after any gate miss or exact native alias"
+  ]
+}
