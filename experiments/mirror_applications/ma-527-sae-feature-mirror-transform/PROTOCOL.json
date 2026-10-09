@@ -1,0 +1,65 @@
+{
+  "experiment_id": "MA-527",
+  "title": "Mirror transform over SAE feature space",
+  "status": "SCREENING",
+  "evidence_lane": "SAE_FEATURE_STEERING/QUALITY/SPARSITY/ACTUAL_BYTES/COMPUTE",
+  "base_commit": "c935a903",
+  "prior_art_refs": ["PA102", "PA96"],
+  "hypothesis": "On four held-out relation tasks in pinned Pythia-70m, a small orthogonal Givens View applied to sparse SAE feature activations can retain explicit-FV causal quality, keep post-transform activations sparse, and improve the quality/byte frontier over native SAE top-k, global sparse coding, and LoReFT at comparable intervention dimension.",
+  "task": {
+    "type": "pretrained causal-LM relation recall with residual-stream interventions",
+    "model": "EleutherAI/pythia-70m-deduped",
+    "revision": "e93a9faa9c77e5d09219f6c868bfc7a1bd65593c",
+    "model_weight_sha256": "3da388330e4549156d76b58d6d268c63cd005e9336b4f4d2d378421e7b7a33fd",
+    "sae_repo": "Elriggs/pythia-70M-deduped-sae",
+    "sae_revision": "36c2027509efad69836aa4231999c9b717848ecd",
+    "sae_file": "pythia-70m-deduped_r4_gpt_neox.layers.3.pt",
+    "sae_sha256": "85b57dfe34d19769e2df0e208e38fda8815da8493c56b703a99ff74cc610dbf4",
+    "sae_bytes": 4204391,
+    "sae_shape": "tied encoder [2048,512] with decoder atoms equal to encoder rows",
+    "hook": "GPT-NeoX layer 3 output"
+  },
+  "physical_object": "one pinned Pythia-70m and its shared 2048-atom layer-3 SAE",
+  "mirror_insertion": "Apply a fixed sparse pairwise Givens transform to each sparse SAE activation vector before tied-decoder reconstruction; only angles and sparse activation codes vary by task.",
+  "mirror_coordinate": "up to 16 FP16 Givens angles in a 32-dimensional active feature subspace; all transformed nonzeros, indices, angles, and metadata are charged.",
+  "logical_multiplicity": "four held-out relation-function residual interventions",
+  "controls": [
+    "No intervention",
+    "Explicit support-derived FP32 function-vector bank",
+    "Native SAE encoder activations with top-eight positive features",
+    "Global-dictionary signed matching pursuit with eight atoms",
+    "Untransformed shared SAE sparse code with matched active dimension",
+    "Mirror Givens transform over the sparse feature code",
+    "LoReFT-style rank-8 residual intervention",
+    "Dense residual steering upper reference"
+  ],
+  "split": {
+    "fit_task_ids": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+    "dev_task_ids": [12, 13],
+    "fresh_task_ids": [14, 15],
+    "development_seeds": [52701, 52702],
+    "fresh_seeds": [52711, 52712, 52713],
+    "fresh_open_rule": "Open only after both dev seeds meet the quality, sparsity, and byte gates; freeze all transform and scale settings before opening. Fresh IDs and seeds are fixed here."
+  },
+  "development": {
+    "allowed_selection": ["Givens angle scale in {0.05,0.1,0.2,0.4}", "intervention scale in {0.25,0.5,1.0}"],
+    "optimizer_updates": 0,
+    "selection_metric": "mean dev gold-token log-probability uplift subject to sparsity and byte gates",
+    "changes_after_run": "prohibited without numbered amendment"
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": ["model", "SAE", "SAE feature IDs", "sparse coefficients", "Givens angles", "LoReFT factors", "scale", "metadata"],
+    "shared_model_and_SAE_counted_once": true
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true,
+    "report_inference_latency": true
+  },
+  "success_gate": "On every fresh task and seed: retain at least 90% of explicit-FV uplift, lose at most 0.05 accuracy, stay within 2x native top-eight SAE active features, and use <=0.5x explicit incremental bytes. Mirror must outperform untransformed sparse and LoReFT controls at byte-near cost or show a distinct Pareto point.",
+  "failure_gate": "Dev cannot satisfy the quality/sparsity/byte gates, or Mirror is dominated by native sparse coding or LoReFT at byte-near cost.",
+  "boundaries": ["Four relation tasks and one pinned model/layer only.", "No router evaluation.", "Fresh task IDs/seeds cannot tune settings.", "Sparse activations and task-aligned function vectors do not establish broad behavior capacity."]
+}

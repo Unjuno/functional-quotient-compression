@@ -1,5 +1,7 @@
 # Worker queue
 
+**Operational pointer (2026-10-09): MA-527 SCREENING.** MA-526 is already a verified FAIL on its dedicated live research branch and has been reconciled into the registry. MA-527's SAE-coordinate transform protocol is frozen on branch `research/ma-527-sae-mirror-transform-20261009`; implement controls and development evaluation next.
+
 The queue is derived from `IDEA_REGISTRY.csv`. The registry is authoritative.
 
 ## Queue interpretation invariant

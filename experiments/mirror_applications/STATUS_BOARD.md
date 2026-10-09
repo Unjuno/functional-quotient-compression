@@ -1,15 +1,15 @@
 # Mirror Application Status Board
 
-Updated: 2026-10-08 JST
+Updated: 2026-10-09 JST
 Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (35 completed; 595 UNTESTED)
+- P0: **630** (36 completed; 593 UNTESTED; 1 SCREENING)
 - P1: **422** (12 completed; 410 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1108 UNTESTED, 29 PROMISING, 18 FAIL**
+- Current MA statuses: **1106 UNTESTED, 29 PROMISING, 19 FAIL, 1 SCREENING**
 - 47 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -23,21 +23,18 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-255 — Mirror context superposition for task models (P0; PA16)**
+**MA-527 — Mirror transform over SAE feature space (P0; PA102/PA96)**
 
 Reason:
-- all previously locked MA-241/244/245/247–251/253 and subsequent old-chain P0 screens have completed;
-- the original P0 cross-over queue is exhausted among checked candidates;
-- MA-255 is the first untested P0 in the earlier high-information literature cross-over queue;
-- direct Parameter Superposition prior art gives a strong nearest control for insertion of the extra Mirror parameter `m`.
+- MA-526 has a verified FAIL on its dedicated live research branch: shared SAE-pool codes miss the explicit-FV quality gate, lose to global sparse coding on one seed, and add 4.17 MB when the SAE payload is charged;
+- MA-527 tests a separate intervention point: a structured transform over sparse SAE feature activations, with native sparse and LoReFT controls;
+- protocol and development/fresh split are frozen on the dedicated MA-527 branch before data access.
 
-Required controls: native Parameter Superposition, naive/shared task-code basis, matched byte-near low-rank or VeRA-style modulation, independent-model upper reference where practical. Do not claim the superposition concept itself as a Mirror invention.
-
-If blocked by a documented reproducibility or harness issue, record it and resume at MA-260 (BatchEnsemble), then MA-261/265/268 in the registered literature priority sequence. Do not jump to P1/novelty-picked topics before P0.
+Required controls are in `experiments/mirror_applications/ma-527-sae-feature-mirror-transform/PROTOCOL.json`.
 
 ## Active experiment
 
-No active experiment was declared on either inspected baseline/status chain at reconciliation. Before claiming MA-255, check live research/ma-* branches again; this statement is not a realtime worker lock.
+MA-527 protocol is frozen; implementation and dev run are pending. Its fresh split remains unopened.
 
 ## Verified status index
 
