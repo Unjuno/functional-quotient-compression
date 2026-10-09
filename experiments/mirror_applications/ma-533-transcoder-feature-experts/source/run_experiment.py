@@ -93,19 +93,28 @@ def main():
  skip_t=time.perf_counter()
  with torch.inference_mode(): skip=x@w['W_skip'].T
  skip_inference_wall=time.perf_counter()-skip_t
- def metrics(pred):
-  err=(pred-y).square().sum(-1); den=y.square().sum(-1)+1e-12
-  cos=torch.nn.functional.cosine_similarity(pred,y,dim=-1)
+ def metrics(pred,target=None):
+  target=y if target is None else target
+  err=(pred-target).square().sum(-1); den=target.square().sum(-1)+1e-12
+  cos=torch.nn.functional.cosine_similarity(pred,target,dim=-1)
   return {'relative_mse':float(err.sum()/den.sum()),'mean_token_relative_mse':float((err/den).mean()),'mean_cosine':float(cos.mean()),'p50_token_relative_error':float((err/den).sqrt().median()),'p95_token_relative_error':float(torch.quantile((err/den).sqrt(),.95))}
+ # Development-only normalization diagnostics motivated by the checkpoint model card.
+ x_rms=x_fit.square().mean().sqrt(); y_rms=y_fit.square().mean().sqrt()
+ with torch.inference_mode():
+  yhat_global,_,_=transcoder_forward(x/x_rms,w,K); yhat_global=yhat_global*y_rms
+  x_unit=x/(x.norm(dim=-1,keepdim=True)+1e-12); y_unit=y/(y.norm(dim=-1,keepdim=True)+1e-12)
+  yhat_unit,_,_=transcoder_forward(x_unit,w,K)
  # Serialize each method's exact inference state; charge its own code/state and config bytes.
  payload=out/'transcoder.safetensors'; save_file(w,str(payload))
  skip_payload=out/'skip_only.safetensors'; save_file({'W_skip':w['W_skip']},str(skip_payload))
+ norm_payload=out/'global_rms_scales.safetensors'; save_file({'input_rms':x_rms.reshape(1),'output_rms':y_rms.reshape(1)},str(norm_payload))
  rank_payload=out/'rank128.safetensors'; save_file({'left':left.contiguous(),'right':right.contiguous(),'bias':bias.contiguous()},str(rank_payload))
  cfg=json.loads(Path(cfg_path).read_text()); (out/'config.json').write_text(json.dumps(cfg,sort_keys=True,separators=(',',':'))+'\n')
  cfg_bytes=(out/'config.json').stat().st_size; payload_bytes=payload.stat().st_size
+ (out/'global_rms_scales.json').write_text('{"kind":"fit_global_rms_normalized_transcoder","input_dim":576}\n')
  (out/'skip_only.json').write_text('{"kind":"linear_skip","input_dim":576}\n'); (out/'rank128.json').write_text('{"kind":"rank128_affine","rank":128}\n')
- skip_bytes=skip_payload.stat().st_size+(out/'skip_only.json').stat().st_size; rank_bytes=rank_payload.stat().st_size+(out/'rank128.json').stat().st_size
- summary={'experiment_id':'MA-533','split':a.split,'seed':a.seed,'n_sequences':len(chunks),'tokens':int(len(chunks)*128),'activation_vectors':int(x.shape[0]),'fit_vectors':int(x_fit.shape[0]),'model':MODEL,'model_revision':model_rev,'model_repo_files':{},'transcoder_repo':TC,'transcoder_revision':TC_REV,'transcoder_sha256':sha(tc_path),'transcoder_file_bytes':payload_bytes,'transcoder_payload_sha256':sha(payload),'config_bytes':cfg_bytes,'transcoder_incremental_bytes':payload_bytes+cfg_bytes,'active_nonzeros_per_vector':int(K),'optimizer_updates':0,'data':'closji/wikitext__wikitext-2-raw-v1 train parquet, revision d575192455c5e98b8daed777574046264579cb09','input_tokens_sha256':hashlib.sha256(chunks.numpy().tobytes()).hexdigest(),'full_model_capture_wall_seconds':wall,'native_dense_mlp_wall_seconds':dense_layer_wall,'transcoder_encode_decode_wall_seconds':transcoder_wall,'rank128_svd_fit_wall_seconds':svd_wall,'rank128_inference_wall_seconds':rank_inference_wall,'skip_only_inference_wall_seconds':skip_inference_wall,'compute_proxy':{'vectors':int(x.shape[0]),'transcoder_encoder_dense_macs':int(x.shape[0]*w['encoder.weight'].numel()),'transcoder_decoder_sparse_macs':int(x.shape[0]*K*x.shape[-1]),'transcoder_skip_macs':int(x.shape[0]*w['W_skip'].numel()),'rank128_linear_macs':int(x.shape[0]*2*rank*x.shape[-1]),'native_mlp_linear_macs':int(x.shape[0]*sum(p.numel() for n,p in block.named_parameters() if n.endswith('weight')))},'methods':{'skip_only':metrics(skip),'transcoder_top128':metrics(yhat),'rank128_cross_covariance_svd':metrics(low)}}
+ skip_bytes=skip_payload.stat().st_size+(out/'skip_only.json').stat().st_size; rank_bytes=rank_payload.stat().st_size+(out/'rank128.json').stat().st_size; norm_bytes=payload_bytes+cfg_bytes+norm_payload.stat().st_size+(out/'global_rms_scales.json').stat().st_size
+ summary={'experiment_id':'MA-533','split':a.split,'seed':a.seed,'n_sequences':len(chunks),'tokens':int(len(chunks)*128),'activation_vectors':int(x.shape[0]),'fit_vectors':int(x_fit.shape[0]),'model':MODEL,'model_revision':model_rev,'model_repo_files':{},'transcoder_repo':TC,'transcoder_revision':TC_REV,'transcoder_sha256':sha(tc_path),'transcoder_file_bytes':payload_bytes,'transcoder_payload_sha256':sha(payload),'config_bytes':cfg_bytes,'transcoder_incremental_bytes':payload_bytes+cfg_bytes,'active_nonzeros_per_vector':int(K),'optimizer_updates':0,'data':'closji/wikitext__wikitext-2-raw-v1 train parquet, revision d575192455c5e98b8daed777574046264579cb09','input_tokens_sha256':hashlib.sha256(chunks.numpy().tobytes()).hexdigest(),'full_model_capture_wall_seconds':wall,'native_dense_mlp_wall_seconds':dense_layer_wall,'transcoder_encode_decode_wall_seconds':transcoder_wall,'rank128_svd_fit_wall_seconds':svd_wall,'rank128_inference_wall_seconds':rank_inference_wall,'skip_only_inference_wall_seconds':skip_inference_wall,'compute_proxy':{'vectors':int(x.shape[0]),'transcoder_encoder_dense_macs':int(x.shape[0]*w['encoder.weight'].numel()),'transcoder_decoder_sparse_macs':int(x.shape[0]*K*x.shape[-1]),'transcoder_skip_macs':int(x.shape[0]*w['W_skip'].numel()),'rank128_linear_macs':int(x.shape[0]*2*rank*x.shape[-1]),'native_mlp_linear_macs':int(x.shape[0]*sum(p.numel() for n,p in block.named_parameters() if n.endswith('weight')))},'methods':{'skip_only':metrics(skip),'transcoder_top128':metrics(yhat),'rank128_cross_covariance_svd':metrics(low),'transcoder_global_rms_normalized':metrics(yhat_global),'transcoder_token_l2_direction_only':metrics(yhat_unit,y_unit)},'normalization_scales':{'fit_input_rms':float(x_rms),'fit_output_rms':float(y_rms),'global_rms_incremental_bytes':norm_bytes,'token_l2_variant_is_deployable':False}}
  # Hash revision manifests to enable exact provenance; actual model payload bytes are independently fetched and charged.
  from huggingface_hub import snapshot_download
  snap=snapshot_download(MODEL,revision=model_rev,allow_patterns=['*.safetensors','*.bin','*.json'])

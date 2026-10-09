@@ -112,6 +112,14 @@
     {
       "id": "amendment-6",
       "before_final_result": "For standalone deployment comparisons, serialize the pinned base model after removing the replaced native layer-8 MLP weights, then add each method payload and required config. Keep the untouched full model as the native reference. This avoids charging both the original MLP and its replacement."
+    },
+    {
+      "id": "amendment-7",
+      "before-final-decision": "Model card states the checkpoint was trained with normalized input and output without specifying the precise normalization. Add two development-only normalization diagnostics using the fit split to select layer-wide RMS scales and, separately, tokenwise unit-L2 normalization. No fresh data is accessed; tokenwise target scaling is direction-only and is not considered deployable unless a paid inference scale is available."
     }
-  ]
+  ],
+  "normalization_diagnostics": {
+    "global_rms": "Compute scalar input/output RMS from fit half only; normalize input, run frozen transcoder, rescale output by fit-only output RMS. Charge scale state/config.",
+    "tokenwise_l2_direction_only": "Normalize each evaluation input and reference output to unit L2; report direction fidelity only. This uses target norm for comparison and is not considered a deployable replacement metric."
+  }
 }
