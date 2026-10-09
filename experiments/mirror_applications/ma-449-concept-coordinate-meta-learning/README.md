@@ -2,20 +2,20 @@
 
 ## H — Hypothesis
 
-A support-set encoder that emits factor-specific Mirror coordinates will generalize to an unseen joint concept combination and use fewer serialized bytes than an unstructured LEO latent code.
+Support-inferred factorized Mirror coordinates will extrapolate to a held-out joint concept combination within 1.10x additive task-vector quality and use fewer serialized bytes than LEO.
 
-## T — Planned test
+## T — Test
 
-Two concept factors define a synthetic linear task family. Meta-training observes the null and each single-factor task; the joint combination is held out. Compare MAML adaptation, LEO latent encoding, direct task-vector addition, and factorized Mirror codes. Fresh worlds are locked, actual bytes include encoder/model/coordinates/metadata, and interventions vary each factor independently.
+Two-factor synthetic linear tasks. Fresh worlds 44910–44912, three seeds, 20 held-out joint tasks/world-seed. Each world provides single-factor interventions to identify the shared decoder. Compare direct vector composition, gradient-adapted LEO code, least-squares Mirror code, and full-space least squares. A1 scopes this as a mechanism test rather than a full neural MAML/LEO reproduction.
 
-## D — Pending
+## D — FAIL
 
-Protocol frozen; no results.
+Mirror NRMSE 2.91e-07 matched direct task-vector 2.94e-07; LEO was 0.352. Mirror actual serialized payload was 107.45B/task, exactly the same as task-vector and LEO. It passes factor identifiability but fails the registered Mirror-specific byte gate.
 
 ## C — Strongest counter-hypothesis
 
-The teacher is additive, so ordinary task-vector addition is exact and any support encoder adds cost without improving extrapolation.
+The factors are additive, so ordinary task-vector composition already provides the useful function.
 
 ## U — Unknown
 
-Whether inferred coordinates identify independent factors and generalize to held-out joint combinations across fresh worlds.
+No natural concept or nonlinear model evidence.

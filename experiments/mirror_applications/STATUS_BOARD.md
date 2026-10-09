@@ -7,9 +7,9 @@ Integration branch: `research/mirror-application-current-evidence-20261008`; can
 
 - Registered candidates: **1155**
 - P0: **630** (130 completed; 500 UNTESTED)
-- P1: **422** (19 completed; 403 UNTESTED)
+- P1: **422** (20 completed; 402 UNTESTED)
 - P2: **103** (1 completed; 102 UNTESTED)
-- Current MA statuses: **1005 UNTESTED, 44 PROMISING, 106 FAIL**
+- Current MA statuses: **1004 UNTESTED, 44 PROMISING, 107 FAIL**
 - 48 experiment directories, complete with status/protocol/results/verification files, are represented in the current evidence set.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-268 is next.
@@ -77,7 +77,9 @@ Integration branch: `research/mirror-application-current-evidence-20261008`; can
 
 **MA-447 FAIL:** conditioned learned policy step4 mean NRMSE 0.6020 vs Adam 0.5008 and separate schedules 0.6370; full serialized basis costs 151.65B/task at N=20 vs 139.05B separate and 113.85B Adam.
 
-**MA-448 FAIL:** rank-4 Mirror state compression reached continuation NRMSE 0.822 vs exact Adam 0.175 and used 328.9B/task vs 639.0B. PCA uses the same bytes with better quality (0.665); shared reset is cheaper (243.3B/task) and better (0.131). Initial NaN runs excluded; A3 canonical payload accounting applied. **Next: MA-449.**
+**MA-448 FAIL:** rank-4 Mirror state compression reached continuation NRMSE 0.822 vs exact Adam 0.175 and used 328.9B/task vs 639.0B. PCA uses the same bytes with better quality (0.665); shared reset is cheaper (243.3B/task) and better (0.131). Initial NaN runs excluded; A3 canonical payload accounting applied.
+
+**MA-449 FAIL:** on the held-out linear concept combination, Mirror NRMSE 2.9e-7 matched direct task-vector composition, with both factors independently identified. N=20 serialized bytes/task were identical at 107.45B for Mirror, task-vector, and LEO; no Mirror-specific gain. A1 mechanism-screen scope, natural concepts untested. **Next: MA-450.**
 
 MA-366 is reconciled as FAIL: direct pair coefficients match Mirror outputs and bytes, and PA02 factorization is smaller. The runner accidentally generated the registered fresh IDs before the gate; those rows are excluded and fresh integrity is invalid. MA-367 and MA-368 are also recorded FAIL. MA-369 is completed FAIL on its dedicated branch; next executable P0 is MA-371.
 

@@ -1,6 +1,38 @@
 {
   "experiment_id": "MA-449",
-  "status": "SCREENING",
-  "protocol_commit": "pending",
-  "checks": []
+  "status": "FAIL",
+  "protocol_commit": "4191cd9b",
+  "amendments": [
+    "A1 mechanism-screen scope, support interventions and matched direct/LEO controls set before fresh execution."
+  ],
+  "fresh_worlds": [
+    44910,
+    44911,
+    44912
+  ],
+  "fresh_rows": 36,
+  "tasks_per_world_seed": 20,
+  "mean_nrmse": {
+    "mirror": 2.9136775299636813e-07,
+    "taskvec": 2.93625934667653e-07,
+    "leo": 0.35150042503244344,
+    "full": 2.4762351805583826e-06
+  },
+  "mean_serialized_N20_bytes_per_task": {
+    "mirror": 107.45,
+    "taskvec": 107.45,
+    "leo": 107.45,
+    "full": 120.45
+  },
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-449-concept-coordinate-meta-learning/tests",
+    "passed": 2,
+    "failed": 0
+  },
+  "checks": [
+    "fresh payload hashes and lengths replayed",
+    "both isolated factors recovered under intervention",
+    "fresh task IDs/w worlds disjoint from development"
+  ],
+  "decision": "FAIL: held-out additive concept composition and identifiability pass, but Mirror ties direct task vectors/LEO on actual bytes; Mirror-specific gate fails."
 }
