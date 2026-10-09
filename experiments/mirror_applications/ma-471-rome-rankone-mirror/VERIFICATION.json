@@ -1,0 +1,24 @@
+{
+  "experiment_id": "MA-471",
+  "commit": "pending-report-commit",
+  "tests": {
+    "command": "pytest -q experiments/mirror_applications/ma-471-rome-rankone-mirror/tests",
+    "passed": 2,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Protocol frozen in 9dbb08b0 before fresh results were opened.",
+    "Only cloned, ownership-isolated payload tensors are included in reported fresh rows.",
+    "Analytic known-orbit task; no natural language factual editing is represented.",
+    "The protocol-listed off-orbit private-residual control was not executed; explicitly excluded from the result claim."
+  ]
+}

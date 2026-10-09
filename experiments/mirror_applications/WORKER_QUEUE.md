@@ -1,3 +1,5 @@
+**Current operational pointer (2026-10-09): MA-473.** MA-470/471 are recorded as scoped edit-basis and aligned ROME-coordinate results; continue the editing family with MEMIT and compare actual changed-weight bytes.
+
 # Worker queue
 
 **Current operational pointer (2026-10-09): MA-471.** MA-436/438 show scoped synthetic quality/storage Pareto points; MA-437/439/440/441/442/443/444/445/446/447/448/449/450/451/452 failed their registered Mirror-specific gates. Continue with the next registered validation item.
