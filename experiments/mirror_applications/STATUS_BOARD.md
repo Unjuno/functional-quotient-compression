@@ -6,10 +6,10 @@ Integration branch: `research/mirror-application-current-evidence-20261008`; can
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (141 completed; 489 UNTESTED)
+- P0: **630** (142 completed; 488 UNTESTED)
 - P1: **422** (22 completed; 400 UNTESTED)
 - P2: **103** (1 completed; 102 UNTESTED)
-- Current MA statuses: **991 UNTESTED, 44 PROMISING, 120 FAIL**
+- Current MA statuses: **990 UNTESTED, 44 PROMISING, 121 FAIL**
 - 48 experiment directories, complete with status/protocol/results/verification files, are represented in the current evidence set.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-268 is next.
@@ -192,3 +192,6 @@ KG relation rotations (RotatE, TuckER, QuatE, PairRE), EXIF/device-aware ISPs (P
 
 
 **MA-468 FAIL under quality/byte gates; private boundary measured:** in a four-skill bank, Mirror improved N6 held-out task NRMSE vs hard tying (0.375 vs 0.511) but was larger and much less accurate than the four-module bank (2,461B / 0.375 vs 2,209B / 8.98e-8). A private residual reduced error to 0.00101 but raised payload to 2,713B. View search used 184,832 MAC. A1 corrected the serialized full-bank routing map; initial worlds are excluded. **Next: MA-469.**
+
+
+**MA-469 FAIL:** for analytic rank-one edits, polar Mirror preserved edit and locality metrics but N64 serialized bytes were 3,105B vs 2,853B MEND factors (48.52 vs 44.58B/edit), missing the <=80% gate. Half-precision factors were smaller at 2,661B with 1.86e-4 edit error. The Mirror code re-encodes the same two-dimensional delta; no neural MEND evidence. **Next: MA-470.**

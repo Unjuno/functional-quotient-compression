@@ -1,21 +1,81 @@
 {
-  "experiment_id":"MA-469",
-  "title":"MEND-style gradient factors generate Mirror edit codes",
-  "status":"FROZEN_SCREENING",
-  "base_commit":"e5d94559",
-  "evidence_lane":"MODEL_EDITING/EDIT_SUCCESS/LOCALITY/CODE_BYTES/LATENCY",
-  "hypothesis":"Encoding rank-one edit deltas as compact Mirror coordinates over one shared output basis will preserve edit success, paraphrase generalization, and locality while reducing actual edit-bank bytes versus a MEND-style factor-to-update control.",
-  "physical_object":"shared 2x2 output basis for edit updates",
-  "mirror_coordinate":"per-edit polar code (magnitude, angle) decoded to output delta, paired with input key",
-  "logical_multiplicity":"many rank-one model edits",
-  "prior_art_refs":[86],
-  "controls":["MEND-style rank-one update factors (input key and output delta)","MEND-style dense update matrix plus key","Mirror polar code plus shared decoder basis","quantized/simple delta vector control"],
-  "task":{"type":"2D linear model editing","base_model":"identity map","edit":"key k maps to target y; update is rank-one d k^T / ||k||^2","edits_per_world":64,"paraphrases":"key plus Gaussian perturbation sigma 0.05","locality":"random keys with cosine similarity <0.1 to edited key"},
-  "development":{"worlds":[46900,46901],"seeds":[0,1,2],"selection":"shared basis is identity; polar code is exact coordinate transform; no tuning"},
-  "fresh":{"worlds":[46910,46911,46912],"seeds":[0,1,2],"locked_before_access":true},
-  "storage":{"authority":"actual serialized inference payload bytes","paid_objects":["edit keys","output delta factors or dense updates","Mirror codes","shared decoder basis","normalization and metadata"],"amortization_N":[1,20,64]},
-  "compute":{"report_edit_generation_MAC":true,"report_update_apply_MAC":true,"report_edit_latency":true,"report_query_latency":true},
-  "success_gate":"Every fresh world: Mirror exact-edit success >=99%, paraphrase error <=1.10x MEND, locality drift <=1.10x MEND, and actual N64 payload <=80% MEND factor payload.",
-  "failure_gate":"Mirror misses quality/locality or N64 bytes fail to improve over rank-one factors; dense matrix comparisons are secondary.",
-  "boundaries":["Analytic rank-one linear edit screen, not MEND neural-network reproduction.","Key, target delta and decoder state are fully charged.","No factual knowledge or paraphrase-language generalization claim."]
+  "experiment_id": "MA-469",
+  "title": "MEND-style gradient factors generate Mirror edit codes",
+  "status": "COMPLETED_FAIL",
+  "base_commit": "e5d94559",
+  "evidence_lane": "MODEL_EDITING/EDIT_SUCCESS/LOCALITY/CODE_BYTES/LATENCY",
+  "hypothesis": "Encoding rank-one edit deltas as compact Mirror coordinates over one shared output basis will preserve edit success, paraphrase generalization, and locality while reducing actual edit-bank bytes versus a MEND-style factor-to-update control.",
+  "physical_object": "shared 2x2 output basis for edit updates",
+  "mirror_coordinate": "per-edit polar code (magnitude, angle) decoded to output delta, paired with input key",
+  "logical_multiplicity": "many rank-one model edits",
+  "prior_art_refs": [
+    86
+  ],
+  "controls": [
+    "MEND-style rank-one update factors (input key and output delta)",
+    "MEND-style dense update matrix plus key",
+    "Mirror polar code plus shared decoder basis",
+    "quantized/simple delta vector control"
+  ],
+  "task": {
+    "type": "2D linear model editing",
+    "base_model": "identity map",
+    "edit": "key k maps to target y; update is rank-one d k^T / ||k||^2",
+    "edits_per_world": 64,
+    "paraphrases": "key plus Gaussian perturbation sigma 0.05",
+    "locality": "random keys with cosine similarity <0.1 to edited key"
+  },
+  "development": {
+    "worlds": [
+      46900,
+      46901
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "selection": "shared basis is identity; polar code is exact coordinate transform; no tuning"
+  },
+  "fresh": {
+    "worlds": [
+      46910,
+      46911,
+      46912
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "edit keys",
+      "output delta factors or dense updates",
+      "Mirror codes",
+      "shared decoder basis",
+      "normalization and metadata"
+    ],
+    "amortization_N": [
+      1,
+      20,
+      64
+    ]
+  },
+  "compute": {
+    "report_edit_generation_MAC": true,
+    "report_update_apply_MAC": true,
+    "report_edit_latency": true,
+    "report_query_latency": true
+  },
+  "success_gate": "Every fresh world: Mirror exact-edit success >=99%, paraphrase error <=1.10x MEND, locality drift <=1.10x MEND, and actual N64 payload <=80% MEND factor payload.",
+  "failure_gate": "Mirror misses quality/locality or N64 bytes fail to improve over rank-one factors; dense matrix comparisons are secondary.",
+  "boundaries": [
+    "Analytic rank-one linear edit screen, not MEND neural-network reproduction.",
+    "Key, target delta and decoder state are fully charged.",
+    "No factual knowledge or paraphrase-language generalization claim."
+  ]
 }
