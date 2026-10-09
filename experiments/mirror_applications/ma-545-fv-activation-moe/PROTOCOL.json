@@ -1,0 +1,85 @@
+{
+  "experiment_id": "MA-545",
+  "title": "Function-vector activation MoE without weight experts",
+  "status": "SCREENING",
+  "evidence_lane": "FROZEN_LM_ACTIVATION_MOE/ROUTING/ACTUAL_BYTES/COMPUTE/NATIVE_ATTRIBUTION",
+  "base_commit": "b71e64a9",
+  "hypothesis": "On held-out in-context relation queries, a content router over support-extracted residual-stream function vectors will preserve most oracle-routed FV quality, with much smaller actual state than 16 full feed-forward expert copies. A same-router per-task output-bias expert is the cheapest weight-space/native control and must be included to test whether the apparent activation expert is only an ordinary bias update.",
+  "physical_object": "Pinned frozen EleutherAI/pythia-70m-deduped with one shared residual stream and no task-specific MLP or attention weights.",
+  "mirror_coordinate": "One support-extracted 512-dimensional residual-stream function vector per relation task; router selects top-1 or composes top-2 vectors from query-context activations.",
+  "logical_multiplicity": "Sixteen relation behaviors addressed by a content router and represented as residual-stream interventions.",
+  "prior_art_refs": ["PA99", "PA100"],
+  "adjacent_experiment_refs": ["MA-516", "MA-539"],
+  "task": {
+    "model": "EleutherAI/pythia-70m-deduped",
+    "revision": "e93a9faa9c77e5d09219f6c868bfc7a1bd65593c",
+    "model_sha256": "3da388330e4549156d76b58d6d268c63cd005e9336b4f4d2d378421e7b7a33fd",
+    "config_sha256": "002050231a9b1ec3ac77aa6b9b3bbdc4d923f4068a7dd33b8da72a9bd6ad9a43",
+    "tokenizer_sha256": "c24618a1b3e6a38167beff1c72cffd126c3a66254347304b50547d12c5f25624",
+    "hidden_dimension": 512,
+    "intervention_layer_output_index": 4,
+    "hook_layer_index": 3,
+    "relation_tasks": "The same 16 fixed relation directions in MA-516 (capital, currency, postal code, element, number, animal sound, French, Spanish and inverses).",
+    "per_task_split": "16 pairs/task: 8 support examples for FV extraction, 4 disjoint router calibration queries, and 4 disjoint evaluation queries.",
+    "evaluation": "All 16 tasks x 4 audit queries. Score the correct output against the 16 distinct outputs for that relation task by summed teacher-forced log probability.",
+    "fresh_boundary": "New deterministic support/calibration/evaluation split seeds; task facts and model revision stay fixed. Router calibration examples and audit queries are disjoint."
+  },
+  "methods": [
+    "No activation intervention",
+    "Oracle task-ID explicit FV (quality upper; task ID is charged)",
+    "Query-context top-1 prototype-routed FV bank (candidate)",
+    "Query-context top-2 softmax-composed FV bank, temperature 0.05",
+    "Oracle task-ID per-task residual output-bias expert bank",
+    "Same-router per-task residual output-bias expert bank (native weight-space control)",
+    "16 independent layer-3 MLP copies, bytes-only structural reference; quality is not inferred"
+  ],
+  "router": {
+    "feature": "Frozen Pythia hidden state at the final Output delimiter for a prompt containing the support pairs and current query input.",
+    "training": "No gradient-trained router. For each task, average and L2-normalize the four router-calibration hidden vectors to form one centroid. Classify by maximum cosine similarity.",
+    "top2": "Softmax of the two largest cosine similarities divided by fixed temperature 0.05; combine their two FV codes.",
+    "task_id_boundary": "Task IDs label calibration examples for centroid grouping and evaluation strata, but are never passed to the routed inference methods."
+  },
+  "development": {
+    "seeds": [54501, 54502],
+    "settings_frozen_before_measurement": true,
+    "hyperparameter_tuning": "None; one intervention layer, alpha=1, top-1 cosine router, top-2 temperature=0.05, fixed prompt template and candidate set.",
+    "selection_metric": "Report every registered method and each relation task; no method selection or alpha sweep."
+  },
+  "fresh": {
+    "seeds": [54511, 54512, 54513],
+    "locked_before_access": true,
+    "opening_rule": "Open only if in both development seeds oracle FV improves over no intervention by >=0.05 absolute top-1 accuracy or >=0.15 mean gold log-probability nats, and routed top-1 is within 0.05 accuracy and 0.15 nats of oracle FV. Report the same-router bias control regardless; its expected exact alias is not a reason to alter the gate."
+  },
+  "metrics": {
+    "primary": ["held-out top-1 accuracy", "mean gold candidate log probability", "router top-1 accuracy"],
+    "secondary": ["per-task results", "gold-vs-best-negative margin", "actual serialized intervention bytes", "full deployment bytes including model/tokenizer", "active router/vector operations", "FV vs output-bias exact behavior equality", "support extraction and query latency"]
+  },
+  "storage": {
+    "authority": "Actual uncompressed deterministic NPZ payload bytes plus measured pinned common base files.",
+    "paid_objects": ["all 16 FP32 function vectors", "all 16 router centroids", "task IDs", "layer/router/temperature metadata", "full per-task MLP weights for the bytes-only structural reference", "pinned model weights, config and tokenizer in full deployment totals"],
+    "support_examples": "Report support examples and extraction compute; they are not inference payload after the vectors are extracted and persisted.",
+    "shared_base_counted_once": true
+  },
+  "compute": {
+    "hardware": "CPU only, PyTorch five-thread limit, no GPU",
+    "support_examples_and_forward_calls": true,
+    "inference": "Report router MAC proxy (16 x 512 cosine products), one or two 512-d vector additions, candidate forwards and measured per-method wall time.",
+    "training_updates": 0
+  },
+  "gates": {
+    "APPLICATION_SCREEN": "Oracle FV clears the no-intervention quality threshold and query-context top-1 routing stays within frozen quality margins in both dev seeds; activation state is reported against the actual 16-copy MLP payload.",
+    "FRESH_OPEN": "Both dev seeds meet the frozen oracle/routed quality thresholds. Otherwise fresh remains sealed.",
+    "MIRROR_ATTRIBUTION": "A Mirror-specific claim requires a >=0.02 absolute accuracy or >=0.10-nat gold-logprob margin over the same-router per-task output-bias expert at comparable actual bytes. Exact equality is FAIL for Mirror-specific value even if FV interventions help over no intervention.",
+    "FAIL": "Oracle task vectors do not improve the base, the router cannot preserve that gain, or a claimed Mirror-specific benefit is exactly reproduced by the native output-bias expert.",
+    "NOT_ESTABLISHED": "Pinned artifacts, support/query isolation, or serialized payload verification fails."
+  },
+  "boundaries": [
+    "A fixed 70M model and constrained relation ranking are a mechanism screen, not open-ended language quality.",
+    "The relation tasks are fixed prior-art fixtures; fresh seeds vary disjoint example assignments, not the set of semantic relations.",
+    "The output-bias expert control is mathematically equivalent to adding the same vector at the same residual-stream site; it tests native attribution, not an independent full-MLP quality upper.",
+    "The full MLP expert bank is a bytes-only structural reference, not a trained quality result.",
+    "Sixteen task codes do not constitute 16 independent capacities without held-out task quality and retention evidence."
+  ],
+  "frozen_at": "2026-10-09",
+  "amendments": []
+}
