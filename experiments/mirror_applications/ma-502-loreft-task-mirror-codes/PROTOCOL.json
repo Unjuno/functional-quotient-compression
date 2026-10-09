@@ -1,0 +1,17 @@
+{
+  "experiment_id":"MA-502","title":"Shared LoReFT basis + many Mirror task codes","status":"FROZEN_SCREENING","base_commit":"807d8c15","evidence_lane":"TASK_CODEBOOK/INTERVENTION_QUALITY/ACTUAL_BYTES/INTERFERENCE",
+  "hypothesis":"When task interventions cluster around a small number of shared representation-space modes, one shared LoReFT basis plus per-task Mirror mode codes will preserve intervention behavior with fewer actual bytes than independent low-rank interventions.",
+  "physical_object":"one frozen 64D representation space and shared rank-4 LoReFT basis",
+  "mirror_coordinate":"one discrete mode ID per task plus a shared intervention codebook",
+  "logical_multiplicity":"64 task-specific interventions generated from 8 latent intervention modes",
+  "prior_art_refs":[96],
+  "controls":["independent FP16 rank-4 LoReFT coordinates per task","shared FP16 coordinate per task","shared 8-mode Mirror codebook plus task IDs","dense intervention vectors"],
+  "task":{"type":"synthetic clustered frozen-representation interventions","tasks":64,"hidden_dim":64,"rank":4,"modes":8,"metrics":["held-out NRMSE","serialized payload bytes","task-code collisions/interference","mode retrieval accuracy"]},
+  "development":{"worlds":[50200,50201],"seeds":[0,1,2],"allowed":"fit basis and 8-mode intervention codebook on development only; no fresh-dependent changes"},
+  "fresh":{"worlds":[50210,50211,50212],"seeds":[0,1,2],"locked_before_access":true},
+  "storage":{"authority":"actual serialized inference payload bytes","paid_objects":["shared mean/basis","8-mode codebook","per-task IDs or LoReFT coordinates","metadata"]},
+  "compute":{"report_code_lookup_ops":true,"report_intervention_MAC_per_token":true,"report_inference_latency":true},
+  "success_gate":"On every fresh world, Mirror NRMSE <=0.05 and total payload <=50% independent dense interventions, with no task-ID collisions that alter target function.",
+  "failure_gate":"Discrete task codes collide or lose intervention quality, or FP16 shared coordinates match/better bytes at equal quality.",
+  "boundaries":["Synthetic clustered interventions only; no pretrained Transformer or downstream NLP evidence.","Logical mode count is not capacity; task-wise function quality and interference determine utility."]
+}

@@ -1,8 +1,8 @@
-**Current operational pointer (2026-10-09): MA-502.** MA-501 failed its synthetic representation-space quality threshold; continue with shared LoReFT basis and multiple task codes, retaining native controls.
+**Current operational pointer (2026-10-09): MA-503.** MA-501 and MA-502 failed their synthetic representation-space quality thresholds. Continue with factorized layer x task codes and native controls.
 
 # Worker queue
 
-**Current operational pointer (2026-10-09): MA-502.** MA-436/438 and MA-482 show scoped synthetic quality/storage Pareto points; findings remain bounded by their controls and tasks. Continue with shared LoReFT task codes.
+**Current operational pointer (2026-10-09): MA-503.** MA-436/438 and MA-482 show scoped synthetic quality/storage Pareto points; findings remain bounded by their controls and tasks. Continue with factorized LoReFT layer/task codes.
 
 The queue is derived from `IDEA_REGISTRY.csv`. The registry is authoritative.
 
