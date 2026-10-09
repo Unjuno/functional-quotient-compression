@@ -14,7 +14,7 @@
   "controls":["shared baseline","weight-centric materialized OFT","input-centric activation OFT","input-centric Mirror angle","generic scalar plane control"],
   "development":{"worlds":[27200,27201],"seeds":[0,1,2],"allowed":"check forward equivalence, layout, matrix orientation, timing instrumentation and payload accounting"},
   "fresh":{"worlds":[27210,27211,27212],"seeds":[0,1,2],"locked_before_access":true},
-  "storage":{"authority":"canonical serialized inference payload bytes","paid_objects":["shared weight", "all task transforms/codes", "metadata"]},
+  "storage":{"authority":"canonical serialized inference payload bytes","paid_objects":["shared weight", "all task transforms/codes", "metadata"],"derived_materialized_weights":"not charged separately when deterministically reconstructed from the paid shared weight and task transform; weight-centric transform construction time is reported separately"},
   "compute":{"report_forward_equivalence_error":true,"report_weight_materialization_seconds":true,"report_input_transform_seconds":true,"report_apply_latency":true,"report_macs":true},
   "success_gate":"Input-centric output matches weight-centric OFT within 1e-6 relative error; aligned one-angle code <=50% per-task transform bytes and does not add more than 10% measured forward latency at batch 64.",
   "failure_gate":"Function mismatch >1e-4, or view payload reduction <20% at matched quality, or input-centric transform adds >25% latency.",
