@@ -1,15 +1,15 @@
 # Mirror Application Status Board
 
 Updated: 2026-10-09 UTC
-Integration branch: `research/mirror-application-current-evidence-20261008`; canonical baseline: `research/mirror-application-worker-ready-20261007`
+Integration branch: `research/ma-470-mend-shared-mirror-edit-basis-reconciled-20261009`; canonical baseline: `research/mirror-application-worker-ready-20261007`
 
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (142 completed; 488 UNTESTED)
-- P1: **422** (22 completed; 400 UNTESTED)
+- P0: **630** (155 completed; 475 UNTESTED)
+- P1: **422** (23 completed; 399 UNTESTED)
 - P2: **103** (1 completed; 102 UNTESTED)
-- Current MA statuses: **989 UNTESTED, 45 PROMISING, 121 FAIL**
+- Current MA statuses: **976 UNTESTED, 50 PROMISING, 129 FAIL**
 - 48 experiment directories, complete with status/protocol/results/verification files, are represented in the current evidence set.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-268 is next.
@@ -23,9 +23,9 @@ Integration branch: `research/mirror-application-current-evidence-20261008`; can
 
 ## Next candidate
 
-**MA-405 — StyleGAN2-like FFN weight modulation (P0; PA65)**
+**MA-494 — Error-correcting Mirror expert IDs (P0; PA95)**
 
-**MA-405 FAIL:** on a synthetic context-permutation MLP, four-angle Mirror scored 57.64% vs native modulation 63.28%, FiLM 72.37%, and independent FFNs 89.83%. Mirror used 10,081 actual bytes; the quality gain over shared was only 0.52pp. Payload hashes and serialization replay verified. **Next: MA-407, demodulated Mirror-MoE.**
+**MA-494 PROMISING (scoped synthetic noisy-address robustness):** with 32 expert IDs at bit-flip p=.1, binary accuracy was .591, ECOC-11 .816, and 3x repetition .868. Payloads were 2,149B / 2,277B vs 1,957B binary, with noiseless accuracy 1.0. Repetition beats ECOC; no Mirror-specific advantage or task-level routing benefit is established. **Next: MA-498 (P0).**
 
 **MA-407 FAIL:** raw and row-norm-demodulated Givens Mirror both scored 66.45% in the fresh synthetic expert screen; activation RMS CV matched within 1e-7. The orthogonal input rotations preserve the weight norms being normalized, making demodulation functionally null here. **Next: MA-408, CondConv-style synthesized FFN.**
 
@@ -221,3 +221,6 @@ KG relation rotations (RotatE, TuckER, QuatE, PairRE), EXIF/device-aware ISPs (P
 **MA-488 FAIL:** for 25/50/75% off-manifold function banks, adaptive private residuals exactly restored targets but payload/dense ratios were 62.7% / 83.6% / 104.4%; the registered <=80% gate had to pass at every heterogeneity level. Shared-only errors were .480/.605/.667. As heterogeneity rises, private vectors erase storage savings. **Next: highest-priority queued discrete-code candidate.**
 
 **MA-492 FAIL for registered K<=8 mode-coverage gate; K16 scoped positive result:** in the A1 synthetic 16-mode task, K8 covered 50% of joint modes (NLL 10.662), missing the >=95% gate. K16 reached 100% coverage/valid packets and NLL .693 at 3,173B vs continuous 18,469B and independent 18,213B; independent validity was 59.5%. A0 invalid coverage results are preserved and excluded. Synthetic packet modes only; no LM claim.
+
+
+**MA-492 FAIL at K<=8; K16 scoped positive:** on the A1 synthetic 16-mode packet task, K8 covered 50% of joint modes; K16 achieved 100% coverage and NLL .693 at 3,173B vs continuous 18,469B. No natural packet prediction claim. **MA-494 PROMISING only for noisy synthetic IDs:** ECOC/repetition improve accuracy under bit flips, with 3x repetition stronger than ECOC and modest extra bytes.
