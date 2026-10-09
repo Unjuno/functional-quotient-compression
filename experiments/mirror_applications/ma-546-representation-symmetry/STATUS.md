@@ -5,14 +5,14 @@
 - Base commit: `ac1c3e1814aada23eb99254b841faa31b4bb0ffb`
 - Protocol frozen: yes
 - Development complete: yes (amendment 1 corrected rerun)
-- Fresh opened: no
+- Fresh opened: yes (54611–54613 after dev gate commit 76edfc82)
 - Results committed: no
 - Verification committed: no
 - Registry row updated: pending
 
 ## Next action
 
-Commit corrected development, replay and source freeze; then open fresh 54611–54613.
+Run fresh seeds 54611, 54612 and 54613 under the unchanged freeze.
 
 ## Blockers
 

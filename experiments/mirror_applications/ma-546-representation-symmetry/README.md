@@ -17,7 +17,7 @@ At layer 3, transform the 2048D activation after GELU by a monomial or dense ort
 
 Pinned Pythia-70M-deduped revision `e93a9faa9c77e5d09219f6c868bfc7a1bd65593c`; layer-3 MLP post-GELU width 2048; 128 held-out prompts per world. Sixteen monomial views (permutation, sign and log-uniform positive scale) and one signed/permuted Hadamard basis are tested with paired inverse compensation. One representative full-model forward for each family plus an uncompensated monomial negative control. No parameter learning.
 
-Amendment 1 corrects the dense inverse multiplication and replaces a raw max-logit-only full-model gate with predeclared top-1/KL gates. The first dev output is preserved at `results/pre_amendment_1/`. Corrected dev seeds 54601 and 54602 passed local projection and full-model distribution gates; seed 54601 replay matched metrics, splits and actual serialized codes exactly. Fresh seeds 54611–54613 remain sealed.
+Amendment 1 corrects the dense inverse multiplication and replaces a raw max-logit-only full-model gate with predeclared top-1/KL gates. The first dev output is preserved at `results/pre_amendment_1/`. Corrected dev seeds 54601 and 54602 passed local projection and full-model distribution gates; seed 54601 replay matched metrics, splits and actual serialized codes exactly. Fresh seeds 54611–54613 were opened after development gate commit `76edfc82`; settings remain frozen.
 
 ## D — Decision
 

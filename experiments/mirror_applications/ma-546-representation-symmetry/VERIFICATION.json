@@ -20,12 +20,13 @@
     "replayed_seed": 54601
   },
   "fresh_split_integrity_checked": false,
-  "fresh_accessed": false,
+  "fresh_accessed": true,
   "protocol_hash_matches_freeze": true,
   "notes": [
     "Amendment 1 preserves the first development output and reruns corrected dense inverse compensation; no fresh data was accessed.",
     "Both corrected dev worlds pass local projection delta <=1e-5, 100% top-1 and full-model max KL <=1e-4 for compensated monomial and dense orthogonal views.",
     "Uncompensated monomial changes logits substantially; it is a changed function, not a symmetry.",
-    "The exact seed-54601 replay matches metrics, prompts, serialized code arrays and byte counts; wall timings are excluded."
+    "The exact seed-54601 replay matches metrics, prompts, serialized code arrays and byte counts; wall timings are excluded.",
+    "Fresh seeds 54611\u201354613 opened after the corrected development gate was committed at 76edfc82; evaluation is in progress without further tuning."
   ]
 }
