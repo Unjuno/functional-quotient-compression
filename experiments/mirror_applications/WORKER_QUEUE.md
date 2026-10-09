@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-292.** MA-288 dynamic rank-2 context codes generalized on a synthetic held-out rule but generic low-rank matched; fast outer update was cheaper but poor and static IDs failed. Continue to MA-292 with task-vector addition and shared-basis controls.
+**Current operational pointer (2026-10-09): MA-296.** MA-292 shared rank-4 task basis reconstructed held-out tasks and additive compositions, but PCA and generic coefficients matched or slightly beat Mirror at marginally lower bytes. Continue to MA-296 with orthogonalized task-vector controls.
 
 # Worker queue
 

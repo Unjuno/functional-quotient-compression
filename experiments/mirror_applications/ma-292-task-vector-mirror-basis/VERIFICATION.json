@@ -1,1 +1,917 @@
-{"experiment_id":"MA-292","status":"SCREENING","fresh_accessed":false,"checks":[]}
+{
+  "experiment_id": "MA-292",
+  "status": "FAIL",
+  "frozen_commit": "5cfa9d2b",
+  "fresh_rows": 108,
+  "payload_files": 180,
+  "all_fresh_payloads_match_csv": true,
+  "tests": "3 passed before freeze",
+  "hardware": "CPU only",
+  "limitations": [
+    "synthetic exactly rank-4 task family",
+    "additive compositions by construction",
+    "PCA/generic coefficients match or slightly beat Mirror"
+  ],
+  "payload_manifest": [
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29200_0_heldout_tasks_raw_vectors.bin",
+      "bytes": 4159,
+      "sha256": "38f7ea8b640875ff797c9c9d14a90ef03c7e459f846c528e8011221295856240"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29201_2_heldout_tasks_pca_basis.bin",
+      "bytes": 4356,
+      "sha256": "bdd95425ad3917e89e784a8adf10f5e05f15b3796de67a2eb6f079f2a8bb9aa4"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29210_2_heldout_tasks_pca_basis.bin",
+      "bytes": 4356,
+      "sha256": "bdc028e625f74316e61dfb499c4d537716f0c6a33f167f02c5d3fcb2634c809b"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29210_2_heldout_compositions_generic_coeff.bin",
+      "bytes": 4360,
+      "sha256": "3b582a6076980512c0a0f6729647cad5418b8cc4bcd6ac35407b48536c32a9ce"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29200_2_heldout_tasks_pca_basis.bin",
+      "bytes": 4356,
+      "sha256": "da02cc6f0369bc25043e804caf0fa5a72760a8ef9b08d32da4a441b6441f82bd"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29200_1_heldout_compositions_independent_upper.bin",
+      "bytes": 8261,
+      "sha256": "273457ef6aecf8dcb6480db36016aa80988a98c22d01ae7239f91f6669afe645"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29212_1_heldout_compositions_mirror_basis.bin",
+      "bytes": 4359,
+      "sha256": "362c236b2dd4fccd23c027d04091dbe6335474a023ebd0aebf26fc84152a9cc3"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29201_1_heldout_compositions_generic_coeff.bin",
+      "bytes": 4360,
+      "sha256": "2ff55bcf06da13cb1a2871d46302e51fda0a6ba2210b2dc6b39dd2212a226f4b"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29200_0_heldout_tasks_generic_coeff.bin",
+      "bytes": 4360,
+      "sha256": "e335ec8fbb766afe7ccd9971c0f117e5ecb0ba6f0bbf37f90be8ea81c93cfd60"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29210_2_heldout_compositions_task_addition.bin",
+      "bytes": 12354,
+      "sha256": "43e591211dfaa8c22a4130af0e37db5d065b6bacc23ae03178176f73fbd794ab"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29211_0_heldout_compositions_independent_upper.bin",
+      "bytes": 8261,
+      "sha256": "f7c3f609e0aef4a8d939aae07a9b1ff11ea17180025a3ef9c2b9867a738022c3"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29210_0_heldout_tasks_task_addition.bin",
+      "bytes": 12354,
+      "sha256": "95e0a6f1121981dc9c52d72d0d5331bc47ee02cad07c95ac4c305e2b7d687bec"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29211_0_heldout_tasks_generic_coeff.bin",
+      "bytes": 4360,
+      "sha256": "9c23802c1bd926f84914a7344eb9a58326c2f80b57faf78cc5e73c5a31a13b1f"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29212_2_heldout_tasks_pca_basis.bin",
+      "bytes": 4356,
+      "sha256": "789fc7d83e680fd6fa784e246840e3f85c83fdbda00c2b5cfd7e75752f03baa9"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29200_2_heldout_tasks_generic_coeff.bin",
+      "bytes": 4360,
+      "sha256": "7e305f56613dc9e8c2a943120a571605c64e83607811e79548ded7f4e32e83ac"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29211_1_heldout_tasks_independent_upper.bin",
+      "bytes": 4165,
+      "sha256": "d11847db50d4a1fb9a3f5f279ada22a0b1d8db85b6808ce29513ebf83283ebe7"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29210_2_heldout_tasks_task_addition.bin",
+      "bytes": 12354,
+      "sha256": "43e591211dfaa8c22a4130af0e37db5d065b6bacc23ae03178176f73fbd794ab"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29211_2_heldout_compositions_task_addition.bin",
+      "bytes": 12354,
+      "sha256": "eac129ba1bf1b2f2039b8faad9ff3cb017ee6f0b9c12a12167324b6f264afda0"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29210_2_heldout_compositions_mirror_basis.bin",
+      "bytes": 4359,
+      "sha256": "eb68644165f0a7ac113e02b6614e12efb6c9f6edd4ee924bd13b9fd45b557f49"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29211_0_heldout_tasks_independent_upper.bin",
+      "bytes": 4165,
+      "sha256": "76397b4727eba11a168619a73a305b26e70abbc0ce5ffc72ca129cdb8076c197"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29211_0_heldout_compositions_pca_basis.bin",
+      "bytes": 4356,
+      "sha256": "9ee5eca49e4a5d861d530272da87950764c5ab28230ec968056e70afb3ae0a72"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29201_1_heldout_tasks_task_addition.bin",
+      "bytes": 12354,
+      "sha256": "cce6117f1d07d18b447bac783303df4e4126294f9a5626d799fb760957819198"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29210_1_heldout_tasks_raw_vectors.bin",
+      "bytes": 4159,
+      "sha256": "959486a6ae43bb4af9d2ecd8fce0954d75385b4ddff1203e80215dd3deb9bb49"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29210_1_heldout_compositions_mirror_basis.bin",
+      "bytes": 4359,
+      "sha256": "87d4337d44f7f4d45a2ce12ec5510de43660fb5b572c6c52960381b09d83e761"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29212_2_heldout_compositions_independent_upper.bin",
+      "bytes": 8261,
+      "sha256": "eb38fc76fdac53fbf5352dec3f1bad44563c39494d5ad9d83d3d33236f66a8cb"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29212_0_heldout_compositions_pca_basis.bin",
+      "bytes": 4356,
+      "sha256": "fa4674c9b0f122e2511a95f939d84088e5d62a69940cc2c75963c037c7198f68"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29200_0_heldout_compositions_independent_upper.bin",
+      "bytes": 8261,
+      "sha256": "e638409acc0851f5ce5c7109c04a6b37ddb73701459f4d7b8304d2ac9d7b1b6f"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29201_1_heldout_tasks_raw_vectors.bin",
+      "bytes": 4159,
+      "sha256": "055770e12c4b18ee034a2fb25e46af337e516bb381b7bd5fa5d1d99a42403475"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29212_0_heldout_tasks_mirror_basis.bin",
+      "bytes": 4359,
+      "sha256": "63866bd3ee53a395548d6a54913d8eadb1abb69f856ecef959b465d600864618"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29200_1_heldout_tasks_pca_basis.bin",
+      "bytes": 4356,
+      "sha256": "23f82efefe62c70db9da473a745f1301d6a44de11e292bc97d6b17c303e4b64e"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29212_2_heldout_compositions_pca_basis.bin",
+      "bytes": 4356,
+      "sha256": "789fc7d83e680fd6fa784e246840e3f85c83fdbda00c2b5cfd7e75752f03baa9"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29201_2_heldout_tasks_mirror_basis.bin",
+      "bytes": 4359,
+      "sha256": "cb133b2262d3bd52ff38a9992110fe3ab6702b47139c1a5a4dad4a59198ab252"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29210_1_heldout_compositions_pca_basis.bin",
+      "bytes": 4356,
+      "sha256": "4bfc5d93d0609582ec8edf91236368e9adb773600a68d73ee81f995f83d6c704"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29212_1_heldout_compositions_independent_upper.bin",
+      "bytes": 8261,
+      "sha256": "1a256d305bd5eedb62aafbf41aeb5748ce80678d23e91af970ccfe5b13df3520"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29211_1_heldout_tasks_raw_vectors.bin",
+      "bytes": 4159,
+      "sha256": "3a188a5a01ae36423acfbf91b90ffbef2ff4db78085fcd09fe706b2b65c6d956"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29200_0_heldout_compositions_task_addition.bin",
+      "bytes": 12354,
+      "sha256": "b7211d211987508d2dfb002d32bdb4bb8302c29f5fa83f627e582ac8845e496c"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29211_0_heldout_compositions_raw_vectors.bin",
+      "bytes": 8255,
+      "sha256": "976a805e6e77ccf318bde29f3df556e99b39cefb5d431c4336d3cb18b2e91885"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29200_1_heldout_tasks_raw_vectors.bin",
+      "bytes": 4159,
+      "sha256": "f16fed8bb5068e4a85fdf0200058e277db2ca18f73eb14d5865a08193f77f6e2"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29210_0_heldout_tasks_pca_basis.bin",
+      "bytes": 4356,
+      "sha256": "b8efd96307a1231b0f866896479d1947c5351af3081a0ef8187d6aa9c5297c63"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29212_1_heldout_compositions_pca_basis.bin",
+      "bytes": 4356,
+      "sha256": "bc882f59d083e423eb7681550b71bba30971533ddf8c03774160e2ef3121cada"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29211_2_heldout_tasks_task_addition.bin",
+      "bytes": 12354,
+      "sha256": "eac129ba1bf1b2f2039b8faad9ff3cb017ee6f0b9c12a12167324b6f264afda0"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29212_0_heldout_tasks_independent_upper.bin",
+      "bytes": 4165,
+      "sha256": "87c3c8637c918f76408dd53646a0e76f3a432410c6efea10652ac58f550a86ce"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29210_0_heldout_compositions_mirror_basis.bin",
+      "bytes": 4359,
+      "sha256": "dee798c99e0fe9ce5a64ded2aa953380edc781738c45b87dcbdf0ef16ff292a7"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29200_0_heldout_compositions_mirror_basis.bin",
+      "bytes": 4359,
+      "sha256": "3df16ab6a87107b78f9aa7ca8a5c21e86f7a6ac0d1b3a14889ab71563b5edcb4"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29212_1_heldout_tasks_task_addition.bin",
+      "bytes": 12354,
+      "sha256": "ae15b43a109345d6ece88bd573d5ceeaeb12ef9089b9b2fd54b6c9201eb3e93a"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29201_2_heldout_compositions_generic_coeff.bin",
+      "bytes": 4360,
+      "sha256": "ffa7a8df73b461c5260360a91aa79c52f43fe7edc274a3f9d40ca7e253d48829"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29211_1_heldout_compositions_task_addition.bin",
+      "bytes": 12354,
+      "sha256": "56f3558458c055fd50a15e10038696eca8ad4b702fde53610efcee1a9959a6a0"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29211_2_heldout_tasks_mirror_basis.bin",
+      "bytes": 4359,
+      "sha256": "8d4cd09b77279c7f8f983c3b401931817f6eaf870bec038880fff83c8be932fe"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29210_2_heldout_tasks_raw_vectors.bin",
+      "bytes": 4159,
+      "sha256": "7c0eb9087cf6d1e2f83b5c73932a1f007e7890c35830af53a3cf011449e41b33"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29212_1_heldout_compositions_generic_coeff.bin",
+      "bytes": 4360,
+      "sha256": "986ba14c4ba5bac93d9016f57344643f95ad3449fb8b2f446ef11d118e8341c3"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29212_2_heldout_tasks_raw_vectors.bin",
+      "bytes": 4159,
+      "sha256": "67e7a2a603d5f2208f55f75d010c4003ce23ce9e77fdeff77a3bd0189cfc7b7c"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29200_2_heldout_compositions_independent_upper.bin",
+      "bytes": 8261,
+      "sha256": "b5c5086b2c7f0d4f87da84339f56df8169218f9850a3f305d6c30cb15faebf51"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29212_1_heldout_compositions_task_addition.bin",
+      "bytes": 12354,
+      "sha256": "ae15b43a109345d6ece88bd573d5ceeaeb12ef9089b9b2fd54b6c9201eb3e93a"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29212_0_heldout_tasks_task_addition.bin",
+      "bytes": 12354,
+      "sha256": "228878b967d67c0965f493697e8c45c78596578bf5f2a6e85e7b423aecab790d"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29201_1_heldout_tasks_independent_upper.bin",
+      "bytes": 4165,
+      "sha256": "6d0433fab2e3d27a391691353ff42f23ed5fb42077c8bbd1b4243cf1d12f95d5"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29211_2_heldout_tasks_pca_basis.bin",
+      "bytes": 4356,
+      "sha256": "2054073e85e840a3343a5d840ef9e516c0c04321ba66e89e180500f9d98d0608"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29212_2_heldout_tasks_generic_coeff.bin",
+      "bytes": 4360,
+      "sha256": "ebbaa6f3d7f5a28d111a43edd39cd97b441ef77b4cd1e8306549256c112a9349"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29210_0_heldout_compositions_pca_basis.bin",
+      "bytes": 4356,
+      "sha256": "b8efd96307a1231b0f866896479d1947c5351af3081a0ef8187d6aa9c5297c63"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29201_0_heldout_tasks_generic_coeff.bin",
+      "bytes": 4360,
+      "sha256": "9af5f68cbe33a97fa45f76071c412ca678e4f8f3f87850b8ffb686d06d2f55f6"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29201_1_heldout_compositions_raw_vectors.bin",
+      "bytes": 8255,
+      "sha256": "45717c8b6e7c891dcc05a8ff4b87b87525e97086c105a78449846fc32a0013dd"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29211_1_heldout_compositions_independent_upper.bin",
+      "bytes": 8261,
+      "sha256": "faea30c68287100e16dd232ec1e1fba0f9aa023c19338cecfb81e5a6ffdb000f"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29210_1_heldout_tasks_mirror_basis.bin",
+      "bytes": 4359,
+      "sha256": "87d4337d44f7f4d45a2ce12ec5510de43660fb5b572c6c52960381b09d83e761"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29200_1_heldout_compositions_task_addition.bin",
+      "bytes": 12354,
+      "sha256": "3dd8565e32ec5ca27136619d6c3bb368f4e16eebf0607db00ff902977b356991"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29212_0_heldout_tasks_pca_basis.bin",
+      "bytes": 4356,
+      "sha256": "fa4674c9b0f122e2511a95f939d84088e5d62a69940cc2c75963c037c7198f68"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29211_0_heldout_tasks_raw_vectors.bin",
+      "bytes": 4159,
+      "sha256": "1e7ff31b6f8f3dc37ca377ad64d11804c58b24d270c97cfa638faf3b107ab39a"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29200_2_heldout_compositions_mirror_basis.bin",
+      "bytes": 4359,
+      "sha256": "95b559206b8c5a5526efd55214232b70ac15f9bdebe3f7da83a0fc71cdb0dcf9"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29212_0_heldout_compositions_mirror_basis.bin",
+      "bytes": 4359,
+      "sha256": "63866bd3ee53a395548d6a54913d8eadb1abb69f856ecef959b465d600864618"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29201_1_heldout_compositions_pca_basis.bin",
+      "bytes": 4356,
+      "sha256": "b1c95193d4701be5a877b48aca3199cb67b4425c6681e9b90fa60353d330db8b"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29200_2_heldout_tasks_independent_upper.bin",
+      "bytes": 4165,
+      "sha256": "2703b1ba4604083b855f67bb072ce9bf3dac50de2c8de06a9267c88e5805a808"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29201_2_heldout_compositions_independent_upper.bin",
+      "bytes": 8261,
+      "sha256": "d4f1d3ffc287b193de4a2d6404ed7c2d1e12cf95ff5a76825e33d16fa5d2cbee"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29201_2_heldout_compositions_raw_vectors.bin",
+      "bytes": 8255,
+      "sha256": "ef1d6213987e9f7e87d5f6a3111fbe98e3a44f3ebddbadc38cb69241451b6c14"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29211_1_heldout_tasks_pca_basis.bin",
+      "bytes": 4356,
+      "sha256": "67e1c5904f77c096a745d217e954f6a1fd6cb58ddf440e999e86c96dbac377f2"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29210_2_heldout_tasks_mirror_basis.bin",
+      "bytes": 4359,
+      "sha256": "eb68644165f0a7ac113e02b6614e12efb6c9f6edd4ee924bd13b9fd45b557f49"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29200_2_heldout_compositions_generic_coeff.bin",
+      "bytes": 4360,
+      "sha256": "7e305f56613dc9e8c2a943120a571605c64e83607811e79548ded7f4e32e83ac"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29211_0_heldout_tasks_pca_basis.bin",
+      "bytes": 4356,
+      "sha256": "9ee5eca49e4a5d861d530272da87950764c5ab28230ec968056e70afb3ae0a72"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29201_0_heldout_compositions_raw_vectors.bin",
+      "bytes": 8255,
+      "sha256": "ac1f4e07d1e888893c03a5fe50e05e01c2823fe9935789c631379739bbe7d265"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29212_2_heldout_compositions_raw_vectors.bin",
+      "bytes": 8255,
+      "sha256": "b5587db2af9aa2652a14b68f82b5af51fb56f2365992bf35beee3344bf21113c"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29212_2_heldout_compositions_mirror_basis.bin",
+      "bytes": 4359,
+      "sha256": "17183d431f5d504636c12fe648028e5408819b6e003e57edd529f5d55736fb8f"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29210_2_heldout_tasks_generic_coeff.bin",
+      "bytes": 4360,
+      "sha256": "3b582a6076980512c0a0f6729647cad5418b8cc4bcd6ac35407b48536c32a9ce"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29210_2_heldout_tasks_independent_upper.bin",
+      "bytes": 4165,
+      "sha256": "2c20a203add9ffb5d4e4e91ecb8ba7b7ade970eaaae76fd473771e2a6a2ea49c"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29201_0_heldout_compositions_pca_basis.bin",
+      "bytes": 4356,
+      "sha256": "0d6ccae34f0203311f6018374ed313fb54f92e5f427f5eb0e29947320d3b252d"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29201_0_heldout_compositions_task_addition.bin",
+      "bytes": 12354,
+      "sha256": "c48ce41d7140248c0b3aa7870017bf80f5d577756cd466258a1298db2f80ea67"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29210_0_heldout_tasks_raw_vectors.bin",
+      "bytes": 4159,
+      "sha256": "d2276135e96ebf5fbb217d94c690385a77e242da0977d82879fee59e4061b820"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29211_2_heldout_compositions_generic_coeff.bin",
+      "bytes": 4360,
+      "sha256": "816352bf37c71d4f54c67892d15e0896e7945bbbc3bdc5a9e6c77b25607f4e9c"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29200_1_heldout_compositions_generic_coeff.bin",
+      "bytes": 4360,
+      "sha256": "fcc5954350c4939509530b18f8e2d47ac0d64ba57e781a683ca8952c4d5b028f"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29210_0_heldout_compositions_generic_coeff.bin",
+      "bytes": 4360,
+      "sha256": "4e4ab40d8e8ad920d9cdf9e470a6bc4cf7a1f42572ae1511c28141037bafdbf0"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29212_1_heldout_tasks_pca_basis.bin",
+      "bytes": 4356,
+      "sha256": "bc882f59d083e423eb7681550b71bba30971533ddf8c03774160e2ef3121cada"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29212_0_heldout_compositions_generic_coeff.bin",
+      "bytes": 4360,
+      "sha256": "195a153075901b58f20f40f23a6de323f56c5ee0befe437569b3029a756897bb"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29211_2_heldout_tasks_independent_upper.bin",
+      "bytes": 4165,
+      "sha256": "ece456b525d37d9ccf3e13c6332196aae487d3f2afacfe9a69da6d59cfc080f8"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29212_2_heldout_tasks_task_addition.bin",
+      "bytes": 12354,
+      "sha256": "b3ff16445ee644075abc648b81801cc2bb464a1b46927bf464599b8536aebff5"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29210_0_heldout_compositions_task_addition.bin",
+      "bytes": 12354,
+      "sha256": "95e0a6f1121981dc9c52d72d0d5331bc47ee02cad07c95ac4c305e2b7d687bec"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29211_1_heldout_compositions_pca_basis.bin",
+      "bytes": 4356,
+      "sha256": "67e1c5904f77c096a745d217e954f6a1fd6cb58ddf440e999e86c96dbac377f2"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29211_2_heldout_compositions_independent_upper.bin",
+      "bytes": 8261,
+      "sha256": "a3a2ff4047ab2cca6154a8afd0d76564045fe5c8820519da1ce030e09d9426b9"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29210_2_heldout_compositions_raw_vectors.bin",
+      "bytes": 8255,
+      "sha256": "0a3b49e77cf8976b0ed18b631c6177601bd62f2d7d72bfc433b1d8eb01fa02bc"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29211_1_heldout_compositions_generic_coeff.bin",
+      "bytes": 4360,
+      "sha256": "0b7d88ff1900019c0ac8698b4317f20afedd2be73851c7ce8185129bf7c1c9ae"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29200_0_heldout_compositions_raw_vectors.bin",
+      "bytes": 8255,
+      "sha256": "04d19b66ea087e36cc50b5ef2f18adb668a6a33c00fb173d2b5ad88dfb448cc0"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29200_0_heldout_tasks_task_addition.bin",
+      "bytes": 12354,
+      "sha256": "b7211d211987508d2dfb002d32bdb4bb8302c29f5fa83f627e582ac8845e496c"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29212_1_heldout_tasks_raw_vectors.bin",
+      "bytes": 4159,
+      "sha256": "3afb8c8c75a10702b58083cfaef0cb851a17d76f80d7162811494fac60892abe"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29201_0_heldout_tasks_mirror_basis.bin",
+      "bytes": 4359,
+      "sha256": "95eeafff8c2f74f647325ea112a7671d2ce16ad4fa72512a6da07e4cbbfba0b4"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29211_0_heldout_compositions_mirror_basis.bin",
+      "bytes": 4359,
+      "sha256": "602a2d16242a61c96444b2db1d409f9e1d7aa4473343328131c5dda66d056e4d"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29200_0_heldout_tasks_independent_upper.bin",
+      "bytes": 4165,
+      "sha256": "3b1b1a426655a8d7a2dda75b59fd5b31e37ededc3af6d11278f9ffd1523d069c"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29210_1_heldout_compositions_independent_upper.bin",
+      "bytes": 8261,
+      "sha256": "d2b397e2b30499e21fc4463a62d8768bb1ee25772374c680941feeab7a2328ae"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29200_1_heldout_tasks_task_addition.bin",
+      "bytes": 12354,
+      "sha256": "3dd8565e32ec5ca27136619d6c3bb368f4e16eebf0607db00ff902977b356991"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29211_2_heldout_compositions_raw_vectors.bin",
+      "bytes": 8255,
+      "sha256": "3c9344746c5beb432f499aa0b0d00ea5c106188f1b5eee14f6f7655cc8576d95"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29200_0_heldout_compositions_generic_coeff.bin",
+      "bytes": 4360,
+      "sha256": "e335ec8fbb766afe7ccd9971c0f117e5ecb0ba6f0bbf37f90be8ea81c93cfd60"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29200_1_heldout_compositions_pca_basis.bin",
+      "bytes": 4356,
+      "sha256": "23f82efefe62c70db9da473a745f1301d6a44de11e292bc97d6b17c303e4b64e"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29210_1_heldout_tasks_task_addition.bin",
+      "bytes": 12354,
+      "sha256": "720ea2b3fa9a9358891fb277be72018b098000655bed2fc918ba9c017a2df748"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29201_2_heldout_compositions_mirror_basis.bin",
+      "bytes": 4359,
+      "sha256": "cb133b2262d3bd52ff38a9992110fe3ab6702b47139c1a5a4dad4a59198ab252"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29211_1_heldout_tasks_task_addition.bin",
+      "bytes": 12354,
+      "sha256": "56f3558458c055fd50a15e10038696eca8ad4b702fde53610efcee1a9959a6a0"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29201_1_heldout_compositions_mirror_basis.bin",
+      "bytes": 4359,
+      "sha256": "55fad4cbae8a27418f718a57e82f03bcc8ca779f7ef2b821ed73f0597db019a1"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29211_0_heldout_tasks_task_addition.bin",
+      "bytes": 12354,
+      "sha256": "9369f89248bbbad16e13b601d94b7510c043f1a44bd7748a520d02624bfec96f"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29210_0_heldout_tasks_generic_coeff.bin",
+      "bytes": 4360,
+      "sha256": "4e4ab40d8e8ad920d9cdf9e470a6bc4cf7a1f42572ae1511c28141037bafdbf0"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29212_1_heldout_tasks_independent_upper.bin",
+      "bytes": 4165,
+      "sha256": "4cbbb50abcdc35553687e57d29db23e41a81ed33d9351d829d44d5d03ccc03ff"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29211_1_heldout_tasks_generic_coeff.bin",
+      "bytes": 4360,
+      "sha256": "0b7d88ff1900019c0ac8698b4317f20afedd2be73851c7ce8185129bf7c1c9ae"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29210_1_heldout_tasks_pca_basis.bin",
+      "bytes": 4356,
+      "sha256": "4bfc5d93d0609582ec8edf91236368e9adb773600a68d73ee81f995f83d6c704"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29212_2_heldout_compositions_generic_coeff.bin",
+      "bytes": 4360,
+      "sha256": "ebbaa6f3d7f5a28d111a43edd39cd97b441ef77b4cd1e8306549256c112a9349"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29200_1_heldout_compositions_mirror_basis.bin",
+      "bytes": 4359,
+      "sha256": "f27ce865ec4afe7602279a702a1aa14b3d1b5906f7313e7878bad32a48914c89"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29210_1_heldout_tasks_generic_coeff.bin",
+      "bytes": 4360,
+      "sha256": "6a79b0ab22e9e5beee1e0a391b983c171117969ff2b28d27b4f8bd1fff9b4ffb"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29212_0_heldout_tasks_raw_vectors.bin",
+      "bytes": 4159,
+      "sha256": "914cc104bf029aca3659567f0df764e0c7748aaaa48a1831f55cc9c2b907e02d"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29212_1_heldout_compositions_raw_vectors.bin",
+      "bytes": 8255,
+      "sha256": "e4ed8dd22997bc7ed9e23ca92ba9d1aef7240a0cec6d043fc4757babb7d6e853"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29211_1_heldout_tasks_mirror_basis.bin",
+      "bytes": 4359,
+      "sha256": "627389d68695c062202f24a68dbea06758f7cc867404d437581ec4144d114e88"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29201_1_heldout_tasks_generic_coeff.bin",
+      "bytes": 4360,
+      "sha256": "2ff55bcf06da13cb1a2871d46302e51fda0a6ba2210b2dc6b39dd2212a226f4b"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29211_2_heldout_tasks_generic_coeff.bin",
+      "bytes": 4360,
+      "sha256": "816352bf37c71d4f54c67892d15e0896e7945bbbc3bdc5a9e6c77b25607f4e9c"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29201_1_heldout_tasks_pca_basis.bin",
+      "bytes": 4356,
+      "sha256": "b1c95193d4701be5a877b48aca3199cb67b4425c6681e9b90fa60353d330db8b"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29201_0_heldout_compositions_mirror_basis.bin",
+      "bytes": 4359,
+      "sha256": "95eeafff8c2f74f647325ea112a7671d2ce16ad4fa72512a6da07e4cbbfba0b4"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29212_1_heldout_tasks_mirror_basis.bin",
+      "bytes": 4359,
+      "sha256": "362c236b2dd4fccd23c027d04091dbe6335474a023ebd0aebf26fc84152a9cc3"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29200_0_heldout_compositions_pca_basis.bin",
+      "bytes": 4356,
+      "sha256": "439f80412187180a0e1ae1508d2ed8221ae6ea38d18f3be39d0d571e4a4b5e19"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29200_1_heldout_compositions_raw_vectors.bin",
+      "bytes": 8255,
+      "sha256": "122226dea735e63df87b0b2b8ecba587f2a169e6559bae979aef0aa6de854957"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29212_0_heldout_compositions_raw_vectors.bin",
+      "bytes": 8255,
+      "sha256": "51e2908d70581204b542cc3630e49f25294a8dde0c9b397d1b32c0a8820a41ec"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29201_0_heldout_tasks_task_addition.bin",
+      "bytes": 12354,
+      "sha256": "c48ce41d7140248c0b3aa7870017bf80f5d577756cd466258a1298db2f80ea67"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29212_0_heldout_compositions_task_addition.bin",
+      "bytes": 12354,
+      "sha256": "228878b967d67c0965f493697e8c45c78596578bf5f2a6e85e7b423aecab790d"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29200_2_heldout_compositions_raw_vectors.bin",
+      "bytes": 8255,
+      "sha256": "acfbd066c3530e412354aff4f61751bf0e2a9f903d8ba7eb57d118dfc9789e36"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29210_0_heldout_compositions_raw_vectors.bin",
+      "bytes": 8255,
+      "sha256": "9183b296216e4bbff68a95ff6136fb7919c68e3c701cb9a4e3589f1dff2392a4"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29212_2_heldout_tasks_mirror_basis.bin",
+      "bytes": 4359,
+      "sha256": "17183d431f5d504636c12fe648028e5408819b6e003e57edd529f5d55736fb8f"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29210_0_heldout_tasks_mirror_basis.bin",
+      "bytes": 4359,
+      "sha256": "dee798c99e0fe9ce5a64ded2aa953380edc781738c45b87dcbdf0ef16ff292a7"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29211_2_heldout_tasks_raw_vectors.bin",
+      "bytes": 4159,
+      "sha256": "7badca2a5498178666e2f622c53e72932f846d1e9df4a8c4c85ee36f5a19db10"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29201_0_heldout_compositions_generic_coeff.bin",
+      "bytes": 4360,
+      "sha256": "9af5f68cbe33a97fa45f76071c412ca678e4f8f3f87850b8ffb686d06d2f55f6"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29200_2_heldout_tasks_raw_vectors.bin",
+      "bytes": 4159,
+      "sha256": "95843c1f90d9b74ef204765018bb740167652797684bd1ffd68ac7dfc8b1547a"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29201_2_heldout_compositions_task_addition.bin",
+      "bytes": 12354,
+      "sha256": "f1ac9e6b9de5550b9c8ca51ae4997c670d042119f126ca98fe2019d9c68cdcd9"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29201_1_heldout_compositions_independent_upper.bin",
+      "bytes": 8261,
+      "sha256": "c629f68c7e04965c19fd37c7e30f426e5af0affa1af89c75eb61f49048a21b36"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29210_2_heldout_compositions_independent_upper.bin",
+      "bytes": 8261,
+      "sha256": "66ee8497c4c42842320990396cc44a732b2bee1a9acf5ed75a0cf31718a95df6"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29200_2_heldout_tasks_task_addition.bin",
+      "bytes": 12354,
+      "sha256": "c1f48a41f7d1816a82c376bbd48b8e570b407f817b2dd302591636d505784520"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29200_2_heldout_compositions_task_addition.bin",
+      "bytes": 12354,
+      "sha256": "c1f48a41f7d1816a82c376bbd48b8e570b407f817b2dd302591636d505784520"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29211_1_heldout_compositions_raw_vectors.bin",
+      "bytes": 8255,
+      "sha256": "c3fe30b2911ab87b138fc7dfd90d64f53e3f12633ac4b1082083ef989632426c"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29201_0_heldout_compositions_independent_upper.bin",
+      "bytes": 8261,
+      "sha256": "7d362687cb53cddad728a8c4c9ce19bc00f42a088083af56261f52c955682527"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29211_0_heldout_compositions_generic_coeff.bin",
+      "bytes": 4360,
+      "sha256": "9c23802c1bd926f84914a7344eb9a58326c2f80b57faf78cc5e73c5a31a13b1f"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29200_1_heldout_tasks_generic_coeff.bin",
+      "bytes": 4360,
+      "sha256": "fcc5954350c4939509530b18f8e2d47ac0d64ba57e781a683ca8952c4d5b028f"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29200_0_heldout_tasks_mirror_basis.bin",
+      "bytes": 4359,
+      "sha256": "3df16ab6a87107b78f9aa7ca8a5c21e86f7a6ac0d1b3a14889ab71563b5edcb4"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29200_0_heldout_tasks_pca_basis.bin",
+      "bytes": 4356,
+      "sha256": "439f80412187180a0e1ae1508d2ed8221ae6ea38d18f3be39d0d571e4a4b5e19"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29212_1_heldout_tasks_generic_coeff.bin",
+      "bytes": 4360,
+      "sha256": "986ba14c4ba5bac93d9016f57344643f95ad3449fb8b2f446ef11d118e8341c3"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29210_0_heldout_compositions_independent_upper.bin",
+      "bytes": 8261,
+      "sha256": "db88c673ad0896ce746315dad4fafa6f57b6014b2e1b131e91a42f24f922233e"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29201_2_heldout_tasks_generic_coeff.bin",
+      "bytes": 4360,
+      "sha256": "ffa7a8df73b461c5260360a91aa79c52f43fe7edc274a3f9d40ca7e253d48829"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29212_2_heldout_compositions_task_addition.bin",
+      "bytes": 12354,
+      "sha256": "b3ff16445ee644075abc648b81801cc2bb464a1b46927bf464599b8536aebff5"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29200_2_heldout_tasks_mirror_basis.bin",
+      "bytes": 4359,
+      "sha256": "95b559206b8c5a5526efd55214232b70ac15f9bdebe3f7da83a0fc71cdb0dcf9"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29201_0_heldout_tasks_independent_upper.bin",
+      "bytes": 4165,
+      "sha256": "85b07966c2ecd098e1a8e9b9eee9ab4c2e6f59a1f30a27ea56eb2da286fc78c4"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29201_0_heldout_tasks_raw_vectors.bin",
+      "bytes": 4159,
+      "sha256": "c73370dbda4a0ee2da162c43d1cbd4d4004b3b086ef3189a4aa63dd7bc67aa60"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29201_2_heldout_tasks_task_addition.bin",
+      "bytes": 12354,
+      "sha256": "f1ac9e6b9de5550b9c8ca51ae4997c670d042119f126ca98fe2019d9c68cdcd9"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29201_1_heldout_tasks_mirror_basis.bin",
+      "bytes": 4359,
+      "sha256": "55fad4cbae8a27418f718a57e82f03bcc8ca779f7ef2b821ed73f0597db019a1"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29211_2_heldout_compositions_pca_basis.bin",
+      "bytes": 4356,
+      "sha256": "2054073e85e840a3343a5d840ef9e516c0c04321ba66e89e180500f9d98d0608"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29210_1_heldout_tasks_independent_upper.bin",
+      "bytes": 4165,
+      "sha256": "e9ff5589a6349f918f184243ab7ec59c6e29a1295031e506dc755e5573204bfc"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29201_1_heldout_compositions_task_addition.bin",
+      "bytes": 12354,
+      "sha256": "cce6117f1d07d18b447bac783303df4e4126294f9a5626d799fb760957819198"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29211_2_heldout_compositions_mirror_basis.bin",
+      "bytes": 4359,
+      "sha256": "8d4cd09b77279c7f8f983c3b401931817f6eaf870bec038880fff83c8be932fe"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29200_2_heldout_compositions_pca_basis.bin",
+      "bytes": 4356,
+      "sha256": "da02cc6f0369bc25043e804caf0fa5a72760a8ef9b08d32da4a441b6441f82bd"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29201_2_heldout_tasks_independent_upper.bin",
+      "bytes": 4165,
+      "sha256": "e4c65e8bb4909db57ba389601967a2352f28063a33b75186b0db9e9bfcd8b49f"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29211_1_heldout_compositions_mirror_basis.bin",
+      "bytes": 4359,
+      "sha256": "627389d68695c062202f24a68dbea06758f7cc867404d437581ec4144d114e88"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29212_2_heldout_tasks_independent_upper.bin",
+      "bytes": 4165,
+      "sha256": "8daf7ec88b722020567bd7d730345fae6eb2e01f433dc37a463bb0b0ca4102d4"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29212_0_heldout_tasks_generic_coeff.bin",
+      "bytes": 4360,
+      "sha256": "195a153075901b58f20f40f23a6de323f56c5ee0befe437569b3029a756897bb"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29200_1_heldout_tasks_independent_upper.bin",
+      "bytes": 4165,
+      "sha256": "2d9d48869a084a65169a8b8aa5795a74f1665aec2ca136714f2c19312b5db346"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29200_1_heldout_tasks_mirror_basis.bin",
+      "bytes": 4359,
+      "sha256": "f27ce865ec4afe7602279a702a1aa14b3d1b5906f7313e7878bad32a48914c89"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29211_0_heldout_compositions_task_addition.bin",
+      "bytes": 12354,
+      "sha256": "9369f89248bbbad16e13b601d94b7510c043f1a44bd7748a520d02624bfec96f"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29201_2_heldout_compositions_pca_basis.bin",
+      "bytes": 4356,
+      "sha256": "bdd95425ad3917e89e784a8adf10f5e05f15b3796de67a2eb6f079f2a8bb9aa4"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29210_0_heldout_tasks_independent_upper.bin",
+      "bytes": 4165,
+      "sha256": "f456a5e5f88ee82258055dd8dc04d9e1dd10773bf076dc34ea6d8f4b7fba1815"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29210_1_heldout_compositions_raw_vectors.bin",
+      "bytes": 8255,
+      "sha256": "e068cdd9de11eb87ed90b0bb5b453f052ab13afa68c1fa13de09683b284de02b"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29201_0_heldout_tasks_pca_basis.bin",
+      "bytes": 4356,
+      "sha256": "0d6ccae34f0203311f6018374ed313fb54f92e5f427f5eb0e29947320d3b252d"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29210_1_heldout_compositions_task_addition.bin",
+      "bytes": 12354,
+      "sha256": "720ea2b3fa9a9358891fb277be72018b098000655bed2fc918ba9c017a2df748"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29212_0_heldout_compositions_independent_upper.bin",
+      "bytes": 8261,
+      "sha256": "60e2694420191cf2c46e3fa640ab8e32d6f194ebee5661fef8ff816942d0a207"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29210_2_heldout_compositions_pca_basis.bin",
+      "bytes": 4356,
+      "sha256": "bdc028e625f74316e61dfb499c4d537716f0c6a33f167f02c5d3fcb2634c809b"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29211_0_heldout_tasks_mirror_basis.bin",
+      "bytes": 4359,
+      "sha256": "602a2d16242a61c96444b2db1d409f9e1d7aa4473343328131c5dda66d056e4d"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29201_2_heldout_tasks_raw_vectors.bin",
+      "bytes": 4159,
+      "sha256": "9d43afd9b6bf819e2580213d36303c64e8b5ee15abbe462caf6b562ba546c885"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-292-task-vector-mirror-basis/artifacts/payloads/29210_1_heldout_compositions_generic_coeff.bin",
+      "bytes": 4360,
+      "sha256": "6a79b0ab22e9e5beee1e0a391b983c171117969ff2b28d27b4f8bd1fff9b4ffb"
+    }
+  ]
+}
