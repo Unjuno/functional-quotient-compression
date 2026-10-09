@@ -1,0 +1,726 @@
+{
+  "architecture": [
+    4,
+    64,
+    128,
+    10
+  ],
+  "common_compute": {
+    "device": "cpu",
+    "input_examples_seen_per_method": 102400,
+    "torch_threads": 1,
+    "total_wall_seconds": 11.782505916999071,
+    "updates_per_method": 800
+  },
+  "dataset": "sklearn.load_digits",
+  "dataset_tensor_sha256": "faf2d98f61250c1cdc0b114323133d3c58da04f5c5d28bb78e4bde3c936a75b1",
+  "experiment_id": "MA-598",
+  "hash_seed": 473564239,
+  "methods": [
+    {
+      "active_experts_per_example": 1,
+      "base_macs_per_example": 9728,
+      "examples_seen": 102400,
+      "expert_ablation_accuracy": [
+        0.6711111068725586,
+        0.6822222471237183,
+        0.7444444298744202,
+        0.7400000095367432
+      ],
+      "expert_diagnostic_seconds": 0.00258387099893298,
+      "expert_route_fractions": [
+        0.3022222222222222,
+        0.31333333333333335,
+        0.19333333333333333,
+        0.19111111111111112
+      ],
+      "extra_view_ops_per_example": 0,
+      "hash_expansion_lookups_per_model_load": 8192,
+      "inference_examples_per_second": 678773.9728718818,
+      "inference_seconds": 0.0006629600102314726,
+      "initial_and_final_train_loss": [
+        5.851203441619873,
+        0.18221095204353333
+      ],
+      "method": "dense_independent",
+      "optimizer_updates": 800,
+      "oracle_expert_accuracy": 0.995555579662323,
+      "oracle_expert_cross_entropy": 0.009671727195382118,
+      "pairwise_first_layer_weight_cosine_mean": 0.007105131594774623,
+      "pairwise_hash_map_overlap_mean": 1.0,
+      "pairwise_raw_argmax_disagreement_mean": 0.9762962957223257,
+      "pairwise_raw_logit_cosine_mean": -0.03049364034086466,
+      "payload_sha256": "1aaff35a9b1d11e9a046350d388b2ec97b367d255b8067b27a3b48b401358df3",
+      "per_expert_collision": [
+        {
+          "collision_pair_count": 16285,
+          "collision_rate": 0.75439453125,
+          "max_bucket_load": 13,
+          "unique_bucket_count": 2012
+        },
+        {
+          "collision_pair_count": 16285,
+          "collision_rate": 0.75439453125,
+          "max_bucket_load": 13,
+          "unique_bucket_count": 2012
+        },
+        {
+          "collision_pair_count": 16285,
+          "collision_rate": 0.75439453125,
+          "max_bucket_load": 13,
+          "unique_bucket_count": 2012
+        },
+        {
+          "collision_pair_count": 16285,
+          "collision_rate": 0.75439453125,
+          "max_bucket_load": 13,
+          "unique_bucket_count": 2012
+        }
+      ],
+      "per_expert_oracle_accuracy": [
+        1.0,
+        0.985401451587677,
+        1.0,
+        1.0
+      ],
+      "route_confusion": [
+        [
+          124,
+          8,
+          1,
+          0
+        ],
+        [
+          8,
+          126,
+          2,
+          1
+        ],
+        [
+          2,
+          3,
+          84,
+          0
+        ],
+        [
+          2,
+          4,
+          0,
+          85
+        ]
+      ],
+      "router_accuracy": 0.9311110973358154,
+      "router_selected_accuracy": 0.9266666769981384,
+      "router_selected_cross_entropy": 68888880.0,
+      "serialized_bytes": 80664,
+      "test_examples": 450,
+      "train_examples": 1347,
+      "training_seconds": 1.3118913860089378
+    },
+    {
+      "active_experts_per_example": 1,
+      "base_macs_per_example": 9728,
+      "examples_seen": 102400,
+      "expert_ablation_accuracy": [
+        0.6733333468437195,
+        0.6822222471237183,
+        0.746666669845581,
+        0.742222249507904
+      ],
+      "expert_diagnostic_seconds": 0.0025817569985520095,
+      "expert_route_fractions": [
+        0.3022222222222222,
+        0.31333333333333335,
+        0.19333333333333333,
+        0.19111111111111112
+      ],
+      "extra_view_ops_per_example": 0,
+      "hash_expansion_lookups_per_model_load": 32768,
+      "inference_examples_per_second": 619021.2921645408,
+      "inference_seconds": 0.0007269539928529412,
+      "initial_and_final_train_loss": [
+        5.399014472961426,
+        0.18221521377563477
+      ],
+      "method": "independent_hash_tables",
+      "optimizer_updates": 800,
+      "oracle_expert_accuracy": 0.9977777600288391,
+      "oracle_expert_cross_entropy": 0.01396060548722744,
+      "pairwise_first_layer_weight_cosine_mean": -0.005712876988885303,
+      "pairwise_hash_map_overlap_mean": 0.0003255208333333333,
+      "pairwise_raw_argmax_disagreement_mean": 0.8944444358348846,
+      "pairwise_raw_logit_cosine_mean": 0.1549411602318287,
+      "payload_sha256": "c61667a555d8f86dd8cbaeb3ab07e4238ff00101ad1709bb186ede0ef6588b81",
+      "per_expert_collision": [
+        {
+          "collision_pair_count": 16186,
+          "collision_rate": 0.7540283203125,
+          "max_bucket_load": 14,
+          "unique_bucket_count": 2015
+        },
+        {
+          "collision_pair_count": 16547,
+          "collision_rate": 0.755126953125,
+          "max_bucket_load": 11,
+          "unique_bucket_count": 2006
+        },
+        {
+          "collision_pair_count": 16398,
+          "collision_rate": 0.7550048828125,
+          "max_bucket_load": 14,
+          "unique_bucket_count": 2007
+        },
+        {
+          "collision_pair_count": 16495,
+          "collision_rate": 0.7548828125,
+          "max_bucket_load": 13,
+          "unique_bucket_count": 2008
+        }
+      ],
+      "per_expert_oracle_accuracy": [
+        1.0,
+        0.9927007555961609,
+        1.0,
+        1.0
+      ],
+      "route_confusion": [
+        [
+          124,
+          8,
+          1,
+          0
+        ],
+        [
+          8,
+          126,
+          2,
+          1
+        ],
+        [
+          2,
+          3,
+          84,
+          0
+        ],
+        [
+          2,
+          4,
+          0,
+          85
+        ]
+      ],
+      "router_accuracy": 0.9311110973358154,
+      "router_selected_accuracy": 0.9288889169692993,
+      "router_selected_cross_entropy": 68888880.0,
+      "serialized_bytes": 23028,
+      "test_examples": 450,
+      "train_examples": 1347,
+      "training_seconds": 1.382863744001952
+    },
+    {
+      "active_experts_per_example": 1,
+      "base_macs_per_example": 9728,
+      "examples_seen": 102400,
+      "expert_ablation_accuracy": [
+        0.6733333468437195,
+        0.6755555272102356,
+        0.7444444298744202,
+        0.7400000095367432
+      ],
+      "expert_diagnostic_seconds": 0.0027284539974061772,
+      "expert_route_fractions": [
+        0.3022222222222222,
+        0.31333333333333335,
+        0.19333333333333333,
+        0.19111111111111112
+      ],
+      "extra_view_ops_per_example": 0,
+      "hash_expansion_lookups_per_model_load": 8192,
+      "inference_examples_per_second": 539618.1680511225,
+      "inference_seconds": 0.0008339229971170425,
+      "initial_and_final_train_loss": [
+        5.562763690948486,
+        0.18255740404129028
+      ],
+      "method": "tied_shared_hash",
+      "optimizer_updates": 800,
+      "oracle_expert_accuracy": 0.9911110997200012,
+      "oracle_expert_cross_entropy": 0.022110315039753914,
+      "pairwise_first_layer_weight_cosine_mean": 0.9999998807907104,
+      "pairwise_hash_map_overlap_mean": 1.0,
+      "pairwise_raw_argmax_disagreement_mean": 0.0,
+      "pairwise_raw_logit_cosine_mean": 0.9999999403953552,
+      "payload_sha256": "047471329a0d7e5bd6a36b04af6861badb2df1bf0cd8c8c81ccbcfe031c24e17",
+      "per_expert_collision": [
+        {
+          "collision_pair_count": 16285,
+          "collision_rate": 0.75439453125,
+          "max_bucket_load": 13,
+          "unique_bucket_count": 2012
+        },
+        {
+          "collision_pair_count": 16285,
+          "collision_rate": 0.75439453125,
+          "max_bucket_load": 13,
+          "unique_bucket_count": 2012
+        },
+        {
+          "collision_pair_count": 16285,
+          "collision_rate": 0.75439453125,
+          "max_bucket_load": 13,
+          "unique_bucket_count": 2012
+        },
+        {
+          "collision_pair_count": 16285,
+          "collision_rate": 0.75439453125,
+          "max_bucket_load": 13,
+          "unique_bucket_count": 2012
+        }
+      ],
+      "per_expert_oracle_accuracy": [
+        0.9849624037742615,
+        0.9927007555961609,
+        0.9887640476226807,
+        1.0
+      ],
+      "route_confusion": [
+        [
+          124,
+          8,
+          1,
+          0
+        ],
+        [
+          8,
+          126,
+          2,
+          1
+        ],
+        [
+          2,
+          3,
+          84,
+          0
+        ],
+        [
+          2,
+          4,
+          0,
+          85
+        ]
+      ],
+      "router_accuracy": 0.9311110973358154,
+      "router_selected_accuracy": 0.9266666769981384,
+      "router_selected_cross_entropy": 68888880.0,
+      "serialized_bytes": 10721,
+      "test_examples": 450,
+      "train_examples": 1347,
+      "training_seconds": 1.444758297991939
+    },
+    {
+      "active_experts_per_example": 1,
+      "base_macs_per_example": 9728,
+      "examples_seen": 102400,
+      "expert_ablation_accuracy": [
+        0.6733333468437195,
+        0.6822222471237183,
+        0.746666669845581,
+        0.742222249507904
+      ],
+      "expert_diagnostic_seconds": 0.00247185499756597,
+      "expert_route_fractions": [
+        0.3022222222222222,
+        0.31333333333333335,
+        0.19333333333333333,
+        0.19111111111111112
+      ],
+      "extra_view_ops_per_example": 0,
+      "hash_expansion_lookups_per_model_load": 8192,
+      "inference_examples_per_second": 431397.28629454446,
+      "inference_seconds": 0.001043121999828145,
+      "initial_and_final_train_loss": [
+        5.243745803833008,
+        0.18255721032619476
+      ],
+      "method": "salted_shared_hash",
+      "optimizer_updates": 800,
+      "oracle_expert_accuracy": 0.9977777600288391,
+      "oracle_expert_cross_entropy": 0.00785246305167675,
+      "pairwise_first_layer_weight_cosine_mean": 0.005289395174865301,
+      "pairwise_hash_map_overlap_mean": 0.0003255208333333333,
+      "pairwise_raw_argmax_disagreement_mean": 0.9148148198922476,
+      "pairwise_raw_logit_cosine_mean": 0.2489210587615768,
+      "payload_sha256": "4651cba22412968c64bdcffe96edf5259c1264169add1e0488a5b2b37cc67463",
+      "per_expert_collision": [
+        {
+          "collision_pair_count": 16186,
+          "collision_rate": 0.7540283203125,
+          "max_bucket_load": 14,
+          "unique_bucket_count": 2015
+        },
+        {
+          "collision_pair_count": 16547,
+          "collision_rate": 0.755126953125,
+          "max_bucket_load": 11,
+          "unique_bucket_count": 2006
+        },
+        {
+          "collision_pair_count": 16398,
+          "collision_rate": 0.7550048828125,
+          "max_bucket_load": 14,
+          "unique_bucket_count": 2007
+        },
+        {
+          "collision_pair_count": 16495,
+          "collision_rate": 0.7548828125,
+          "max_bucket_load": 13,
+          "unique_bucket_count": 2008
+        }
+      ],
+      "per_expert_oracle_accuracy": [
+        1.0,
+        0.9927007555961609,
+        1.0,
+        1.0
+      ],
+      "route_confusion": [
+        [
+          124,
+          8,
+          1,
+          0
+        ],
+        [
+          8,
+          126,
+          2,
+          1
+        ],
+        [
+          2,
+          3,
+          84,
+          0
+        ],
+        [
+          2,
+          4,
+          0,
+          85
+        ]
+      ],
+      "router_accuracy": 0.9311110973358154,
+      "router_selected_accuracy": 0.9288889169692993,
+      "router_selected_cross_entropy": 68888880.0,
+      "serialized_bytes": 10735,
+      "test_examples": 450,
+      "train_examples": 1347,
+      "training_seconds": 1.6056734870071523
+    },
+    {
+      "active_experts_per_example": 1,
+      "base_macs_per_example": 9728,
+      "examples_seen": 102400,
+      "expert_ablation_accuracy": [
+        0.6733333468437195,
+        0.6800000071525574,
+        0.746666669845581,
+        0.742222249507904
+      ],
+      "expert_diagnostic_seconds": 0.0034625090047484264,
+      "expert_route_fractions": [
+        0.3022222222222222,
+        0.31333333333333335,
+        0.19333333333333333,
+        0.19111111111111112
+      ],
+      "extra_view_ops_per_example": 192,
+      "hash_expansion_lookups_per_model_load": 8192,
+      "inference_examples_per_second": 376475.46729046205,
+      "inference_seconds": 0.0011952970089623705,
+      "initial_and_final_train_loss": [
+        5.391572952270508,
+        0.18248867988586426
+      ],
+      "method": "mirror_givens",
+      "optimizer_updates": 800,
+      "oracle_expert_accuracy": 0.995555579662323,
+      "oracle_expert_cross_entropy": 0.00920028891414404,
+      "pairwise_first_layer_weight_cosine_mean": 0.9569029907385508,
+      "pairwise_hash_map_overlap_mean": 1.0,
+      "pairwise_raw_argmax_disagreement_mean": 0.1648148149251938,
+      "pairwise_raw_logit_cosine_mean": 0.9787802596886953,
+      "payload_sha256": "87cb2c9478d8f42e3f3e4e96a2be05115204d9f1bc3ca7518224540fa722796f",
+      "per_expert_collision": [
+        {
+          "collision_pair_count": 16285,
+          "collision_rate": 0.75439453125,
+          "max_bucket_load": 13,
+          "unique_bucket_count": 2012
+        },
+        {
+          "collision_pair_count": 16285,
+          "collision_rate": 0.75439453125,
+          "max_bucket_load": 13,
+          "unique_bucket_count": 2012
+        },
+        {
+          "collision_pair_count": 16285,
+          "collision_rate": 0.75439453125,
+          "max_bucket_load": 13,
+          "unique_bucket_count": 2012
+        },
+        {
+          "collision_pair_count": 16285,
+          "collision_rate": 0.75439453125,
+          "max_bucket_load": 13,
+          "unique_bucket_count": 2012
+        }
+      ],
+      "per_expert_oracle_accuracy": [
+        1.0,
+        0.9927007555961609,
+        0.9887640476226807,
+        1.0
+      ],
+      "route_confusion": [
+        [
+          124,
+          8,
+          1,
+          0
+        ],
+        [
+          8,
+          126,
+          2,
+          1
+        ],
+        [
+          2,
+          3,
+          84,
+          0
+        ],
+        [
+          2,
+          4,
+          0,
+          85
+        ]
+      ],
+      "router_accuracy": 0.9311110973358154,
+      "router_selected_accuracy": 0.9288889169692993,
+      "router_selected_cross_entropy": 68888880.0,
+      "serialized_bytes": 11218,
+      "test_examples": 450,
+      "train_examples": 1347,
+      "training_seconds": 2.1114786230027676
+    },
+    {
+      "active_experts_per_example": 1,
+      "base_macs_per_example": 9728,
+      "examples_seen": 102400,
+      "expert_ablation_accuracy": [
+        0.6711111068725586,
+        0.6822222471237183,
+        0.7444444298744202,
+        0.7400000095367432
+      ],
+      "expert_diagnostic_seconds": 0.0024773229961283505,
+      "expert_route_fractions": [
+        0.3022222222222222,
+        0.31333333333333335,
+        0.19333333333333333,
+        0.19111111111111112
+      ],
+      "extra_view_ops_per_example": 64,
+      "hash_expansion_lookups_per_model_load": 8192,
+      "inference_examples_per_second": 632464.8437493768,
+      "inference_seconds": 0.0007115019980119541,
+      "initial_and_final_train_loss": [
+        5.781130790710449,
+        0.1823398917913437
+      ],
+      "method": "diagonal_gate",
+      "optimizer_updates": 800,
+      "oracle_expert_accuracy": 0.995555579662323,
+      "oracle_expert_cross_entropy": 0.009981642477214336,
+      "pairwise_first_layer_weight_cosine_mean": 0.9779025018215179,
+      "pairwise_hash_map_overlap_mean": 1.0,
+      "pairwise_raw_argmax_disagreement_mean": 0.18259259313344955,
+      "pairwise_raw_logit_cosine_mean": 0.9702277084191641,
+      "payload_sha256": "a37bbe95337373d97ca4bc6d6a1041c71e7319bc75b842163906791e81ebfe39",
+      "per_expert_collision": [
+        {
+          "collision_pair_count": 16285,
+          "collision_rate": 0.75439453125,
+          "max_bucket_load": 13,
+          "unique_bucket_count": 2012
+        },
+        {
+          "collision_pair_count": 16285,
+          "collision_rate": 0.75439453125,
+          "max_bucket_load": 13,
+          "unique_bucket_count": 2012
+        },
+        {
+          "collision_pair_count": 16285,
+          "collision_rate": 0.75439453125,
+          "max_bucket_load": 13,
+          "unique_bucket_count": 2012
+        },
+        {
+          "collision_pair_count": 16285,
+          "collision_rate": 0.75439453125,
+          "max_bucket_load": 13,
+          "unique_bucket_count": 2012
+        }
+      ],
+      "per_expert_oracle_accuracy": [
+        1.0,
+        0.985401451587677,
+        1.0,
+        1.0
+      ],
+      "route_confusion": [
+        [
+          124,
+          8,
+          1,
+          0
+        ],
+        [
+          8,
+          126,
+          2,
+          1
+        ],
+        [
+          2,
+          3,
+          84,
+          0
+        ],
+        [
+          2,
+          4,
+          0,
+          85
+        ]
+      ],
+      "router_accuracy": 0.9311110973358154,
+      "router_selected_accuracy": 0.9266666769981384,
+      "router_selected_cross_entropy": 68888880.0,
+      "serialized_bytes": 11472,
+      "test_examples": 450,
+      "train_examples": 1347,
+      "training_seconds": 1.5598130430007586
+    },
+    {
+      "active_experts_per_example": 1,
+      "base_macs_per_example": 9728,
+      "examples_seen": 102400,
+      "expert_ablation_accuracy": [
+        0.6733333468437195,
+        0.6800000071525574,
+        0.7444444298744202,
+        0.7400000095367432
+      ],
+      "expert_diagnostic_seconds": 0.0027030769997509196,
+      "expert_route_fractions": [
+        0.3022222222222222,
+        0.31333333333333335,
+        0.19333333333333333,
+        0.19111111111111112
+      ],
+      "extra_view_ops_per_example": 192,
+      "hash_expansion_lookups_per_model_load": 8192,
+      "inference_examples_per_second": 465829.34842444723,
+      "inference_seconds": 0.0009660189971327782,
+      "initial_and_final_train_loss": [
+        5.719330787658691,
+        0.18221771717071533
+      ],
+      "method": "rank1_residual",
+      "optimizer_updates": 800,
+      "oracle_expert_accuracy": 0.995555579662323,
+      "oracle_expert_cross_entropy": 0.010977435857057571,
+      "pairwise_first_layer_weight_cosine_mean": 0.9360265930493673,
+      "pairwise_hash_map_overlap_mean": 1.0,
+      "pairwise_raw_argmax_disagreement_mean": 0.5625925958156586,
+      "pairwise_raw_logit_cosine_mean": 0.6991926431655884,
+      "payload_sha256": "3790002771c8e469adb1e80c899be41432a19f726eae6da1c52d9c1cccd38866",
+      "per_expert_collision": [
+        {
+          "collision_pair_count": 16285,
+          "collision_rate": 0.75439453125,
+          "max_bucket_load": 13,
+          "unique_bucket_count": 2012
+        },
+        {
+          "collision_pair_count": 16285,
+          "collision_rate": 0.75439453125,
+          "max_bucket_load": 13,
+          "unique_bucket_count": 2012
+        },
+        {
+          "collision_pair_count": 16285,
+          "collision_rate": 0.75439453125,
+          "max_bucket_load": 13,
+          "unique_bucket_count": 2012
+        },
+        {
+          "collision_pair_count": 16285,
+          "collision_rate": 0.75439453125,
+          "max_bucket_load": 13,
+          "unique_bucket_count": 2012
+        }
+      ],
+      "per_expert_oracle_accuracy": [
+        0.9924812316894531,
+        0.9927007555961609,
+        1.0,
+        1.0
+      ],
+      "route_confusion": [
+        [
+          124,
+          8,
+          1,
+          0
+        ],
+        [
+          8,
+          126,
+          2,
+          1
+        ],
+        [
+          2,
+          3,
+          84,
+          0
+        ],
+        [
+          2,
+          4,
+          0,
+          85
+        ]
+      ],
+      "router_accuracy": 0.9311110973358154,
+      "router_selected_accuracy": 0.9266666769981384,
+      "router_selected_cross_entropy": 68888880.0,
+      "serialized_bytes": 12723,
+      "test_examples": 450,
+      "train_examples": 1347,
+      "training_seconds": 1.4863482069922611
+    }
+  ],
+  "seed": 59801,
+  "sklearn_version": "1.8.0",
+  "split": "dev",
+  "split_random_state": 59801,
+  "stratified": true
+}

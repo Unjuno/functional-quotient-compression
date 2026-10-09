@@ -1,11 +1,37 @@
 {
+  "development_seeds": [
+    59801,
+    59802
+  ],
   "experiment_id": "MA-598",
-  "status": "FROZEN_BEFORE_DEVELOPMENT",
-  "protocol_frozen": true,
+  "fresh_artifacts_present": false,
   "fresh_seeds_accessed": [],
-  "serialization_roundtrip_checked": false,
-  "metric_replay_checked": false,
-  "notes": [
-    "Amendment 1 corrected router match, top-1 timing, salt accounting, and expert diagnostics before any metrics."
-  ]
+  "gate_decision": "FAIL: Mirror misses +1pp versus tied/salted controls in both dev seeds. It passes the 1.05x salted byte cap, but byte-near diagonal/rank-one controls and native salt match its quality.",
+  "metric_replay_checked": true,
+  "payloads_replayed": 14,
+  "protocol_sha256": "f40783934fac31a9c4fca23d0ebc1e71cab8ce69823a511bb795f8f809f8f179",
+  "replay_results": {
+    "59801": {
+      "all_seven_payloads_byte_exact": true,
+      "mirror_accuracy": 0.9288889169692993,
+      "mirror_bytes": 11218,
+      "salted_accuracy": 0.9288889169692993,
+      "salted_bytes": 10735
+    },
+    "59802": {
+      "all_seven_payloads_byte_exact": true,
+      "mirror_accuracy": 0.9333333373069763,
+      "mirror_bytes": 11218,
+      "salted_accuracy": 0.9311110973358154,
+      "salted_bytes": 10735
+    }
+  },
+  "router_selected_cross_entropy": "NOT USABLE: all non-expert classes are masked to -1e9 before CE; identical huge values across all methods",
+  "serialization_roundtrip_checked": true,
+  "source_sha256": "a3bb0ef08d690045bbd2f1702f3fad75c976b9bda0e7c03a0e6979dbbdc6428d",
+  "status": "FAIL",
+  "tests": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 python -m pytest -q experiments/mirror_applications/ma-598-hash-addressed-logical-experts/tests",
+    "expected_passed": 3
+  }
 }
