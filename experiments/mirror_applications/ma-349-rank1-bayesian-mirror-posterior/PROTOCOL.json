@@ -1,0 +1,15 @@
+{
+  "experiment_id":"MA-349","title":"Bayesian posterior over Mirror angle versus Rank-1 weight posterior","status":"PROTOCOL_FROZEN_BEFORE_DEVELOPMENT","base_commit":"0a4e7cb7","evidence_lane":"MECHANISM/UNCERTAINTY/CALIBRATION/ACTUAL_BYTES",
+  "hypothesis":"A scalar posterior over a functional Mirror angle can match rank-one Gaussian weight posterior predictive quality/calibration with fewer posterior bytes on a low-dimensional logistic task.",
+  "physical_object":"shared 2D logistic classifier with fixed-radius directional weight orbit","mirror_coordinate":"posterior q(m)=Normal(mu_m,sigma_m) over rotation angle","logical_multiplicity":"sampled probabilistic classifiers from one shared physical vector","prior_art_refs":[41],
+  "task":{"features":2,"outputs":2,"train_examples":64,"iid_test_examples":1024,"ood_test_examples":1024,"teacher":"Bernoulli logistic with weight radius 1.2 and angle uniform in [0.2,0.8]; OOD inputs shifted by +1.0 on feature 1 and scaled 1.5 on feature 2"},
+  "controls":["deterministic MAP logistic model","Mirror angle Gaussian posterior","Rank-1 BNN-style Gaussian perturbation w=mu+a*z, z scalar Gaussian"],
+  "development":{"worlds":[34921,34922],"optimizer_updates":1500,"mc_samples_per_update":16,"inference_samples":64},
+  "fresh":{"worlds":[34931,34932,34933],"locked_before_access":true,"optimizer_updates":1500,"mc_samples_per_update":16,"inference_samples":64},
+  "metrics":["predictive NLL","Brier score","ECE 10 bins","accuracy","OOD NLL","sampled forward operations","inference wall time"],
+  "storage":{"authority":"actual deterministic serialized inference payload bytes","paid_objects":["shared base/radius or posterior mean","Mirror posterior parameters or Rank-1 factor/posterior parameters","metadata"]},
+  "compute":{"report_examples":true,"optimizer_updates":true,"active_compute_proxy":true,"isolated_wall_clock":true,"equal_posterior_samples":true},
+  "success_gate":"Mirror NLL within 0.02 of Rank-1 on IID and OOD; ECE within 0.02; at least 20% fewer actual posterior bytes.",
+  "failure_gate":"Quality/calibration misses or payload reduction below 20%.",
+  "boundaries":["synthetic two-feature logistic task","not a Rank-1 BNN reproduction or natural-data evaluation","posterior fit on train data only","no broad Bayesian capacity claim"]
+}
