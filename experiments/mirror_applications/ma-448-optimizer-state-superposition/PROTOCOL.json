@@ -1,0 +1,94 @@
+{
+  "experiment_id": "MA-448",
+  "title": "Optimizer-state Mirror superposition across tasks",
+  "status": "SCREENING",
+  "evidence_lane": "STATE_COMPRESSION/CONTINUATION_QUALITY/BYTES",
+  "base_commit": "cd024526",
+  "hypothesis": "A shared learned rank-4 state basis plus per-task Mirror coordinates reconstructs task-specific Adam state well enough that five-step continuation NRMSE is within 1.10x of exact Adam state, while reducing serialized task payload bytes versus independent state and matching rank-4 PCA control.",
+  "physical_object": "one shared 16D linear model plus shared optimizer-state basis",
+  "mirror_coordinate": "4D task code addresses concatenated Adam first/second moment state",
+  "logical_multiplicity": "many resumable task-specific optimizer states",
+  "prior_art_refs": [
+    77,
+    16
+  ],
+  "controls": [
+    "independent exact Adam states",
+    "mean/shared state only",
+    "rank-4 PCA state basis",
+    "learned shared basis plus 4D Mirror state code"
+  ],
+  "task": {
+    "type": "16D linear regression with four latent task factors",
+    "dimension": 16,
+    "latent_rank": 4,
+    "tasks_per_world": 32,
+    "support_examples": 64,
+    "query_examples": 256,
+    "adam_steps_before_checkpoint": 20,
+    "continuation_steps": 5,
+    "task_id_partition": {
+      "development": [
+        100,
+        131
+      ],
+      "fresh": [
+        2000,
+        2031
+      ]
+    }
+  },
+  "development": {
+    "worlds": [
+      44800,
+      44801
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "basis_rank": 4
+  },
+  "fresh": {
+    "worlds": [
+      44810,
+      44811,
+      44812
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "tasks_per_world": 32,
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual serialized inference/resume payload bytes",
+    "paid_objects": [
+      "task theta",
+      "Adam m and v or shared state basis and task code",
+      "task routing index",
+      "step counters",
+      "metadata"
+    ],
+    "report_amortization_N": [
+      1,
+      20,
+      100
+    ]
+  },
+  "compute": {
+    "report_state_encode_wall": true,
+    "report_continuation_wall": true,
+    "report_state_reconstruction_MAC": true
+  },
+  "success_gate": "Every fresh world: Mirror continuation NRMSE <=1.10x exact Adam state; actual N=20 bytes lower than independent state; Mirror quality and bytes within 5% of rank-4 PCA control.",
+  "failure_gate": "Any quality/byte gate miss, or PCA/PSP matches Mirror at equal or fewer bytes.",
+  "boundaries": [
+    "Synthetic task-state compression mechanism test only.",
+    "Optimizer state is a target for compression only if serialized m/v bytes exceed task routing metadata.",
+    "No natural optimizer-state or model-capacity claim."
+  ]
+}
