@@ -22,7 +22,7 @@
     "model_revision": "resolved and recorded in source before evaluation",
     "layer": 8,
     "hook": "input/output of model.layers.8.mlp",
-    "dataset": "Salesforce/wikitext wikitext-2-raw-v1 train split streamed in fixed order; deterministic seed-selected 128-token windows; dataset script/config pinned via captured metadata.",
+    "dataset": "closji/wikitext__wikitext-2-raw-v1, train parquet, immutable revision d575192455c5e98b8daed777574046264579cb09; source is a public parquet mirror of Wikitext-2 raw.",
     "primary_metrics": [
       "relative MSE ||y_hat-y||^2/(||y||^2+eps)",
       "cosine similarity per token, then mean"
@@ -44,7 +44,8 @@
     "svd_fit_tokens": 2048,
     "selection_metric": "single fixed checkpoint evaluation; no tuning or fresh-based selection",
     "optimizer_updates": 0,
-    "task_scope": "Use 16 fixed-order seeded windows (2048 tokens) to fit the rank-128 linear control and 16 disjoint windows (2048 tokens) for evaluation; training split only."
+    "task_scope": "Use 16 fixed-order seeded windows (2048 tokens) to fit the rank-128 linear control and 16 disjoint windows (2048 tokens) for evaluation; training split only.",
+    "dataset_revision": "d575192455c5e98b8daed777574046264579cb09"
   },
   "fresh": {
     "seeds": [
@@ -55,7 +56,8 @@
     "tokens": 4096,
     "sequence_length": 128,
     "locked_before_access": true,
-    "access_condition": "Open only if dev relative MSE <=0.10 and cosine >=0.95."
+    "access_condition": "Open only if dev relative MSE <=0.10 and cosine >=0.95.",
+    "dataset_revision": "d575192455c5e98b8daed777574046264579cb09"
   },
   "storage": {
     "authority": "actual serialized inference payload bytes",
@@ -82,5 +84,16 @@
     "This screen establishes transcoder faithfulness only; it does not establish logical MLP multiplicity or Mirror-specific gains.",
     "Test data must remain unopened until protocol and source commits are pushed.",
     "CPU-constrained development uses 4,096 tokens; no broad generalization claim."
+  ],
+  "amendments": [
+    {
+      "id": "amendment-1",
+      "before_rerun": "Initial development output was invalidated before interpretation after audit found incorrect skip matrix orientation and per-token norm scaling. Frozen implementation is corrected to match EleutherAI/sparsify SparseCoder.forward exactly: W_skip transpose, raw input, no output rescaling. Prior dev artifact is retained in runs/dev_initial_invalid/ as a non-result.",
+      "evidence": "Official EleutherAI/sparsify source at commit resolved during audit; source URL https://github.com/EleutherAI/sparsify/blob/main/sparsify/sparse_coder.py (forward computes decode(...) + x @ W_skip.mT)."
+    },
+    {
+      "id": "amendment-2",
+      "before_rerun": "Original Salesforce dataset script is no longer served, so its loader raised 404 before evaluating any metrics. Use the immutable parquet mirror `closji/wikitext__wikitext-2-raw-v1` revision d575192455c5e98b8daed777574046264579cb09 with the same Wikitext-2 raw train split and window protocol. No test data opened."
+    }
   ]
 }
