@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-482.** MA-481 found substantial continuous-address byte savings but failed the paraphrase recall gate on a crowded orbit; VQ alternatives collided. Continue with residual-code composition and full rate-distortion controls.
+**Current operational pointer (2026-10-09): MA-503.** MA-501 FP16 LoReFT narrowly missed its distortion threshold; MA-502 VQ codes saved only 132B over FP16 while exceeding the quality gate. Continue with factorized layer × task ReFT codes and matched generic controls.
 
 # Worker queue
 

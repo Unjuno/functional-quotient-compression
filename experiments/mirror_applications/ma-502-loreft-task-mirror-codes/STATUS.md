@@ -13,3 +13,6 @@ D: FAIL. Shared FP16: 3,809B / NRMSE .00018. Mirror VQ: 3,677B / .0927. Dense: 1
 C: FP16 coordinates already compress well; VQ quality is inadequate for marginal bytes saved.
 
 U: Pretrained model, downstream quality, label-aware codebook and larger banks. Mode-ID accuracy is not used because codebook labels are permutation invariant.
+
+
+Artifact replay test passed (1/1). Next: MA-503 — factorized layer × task ReFT code, on its dedicated branch.
