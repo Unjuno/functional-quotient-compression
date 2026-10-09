@@ -1,0 +1,10 @@
+{
+  "experiment_id": "MA-413",
+  "protocol_commit": "58fa86b",
+  "tests": {"command": "python -m unittest discover -s experiments/mirror_applications/ma-413-factorized-concept-mirror/tests -v", "passed": 2, "failed": 0},
+  "serialization": {"roundtrip_checked": true, "byte_exact": true, "payload_rows": 126, "payload_hashes_replayed": true, "actual_payload_bytes_authoritative": true},
+  "metric_replay": {"checked": true, "max_difference": 0.0, "notes": ["All payload lengths and SHA-256 values replay against the 126 saved inference payloads.", "Fresh per-combination metrics replay from JSONL.", "Fresh held-out margins were below the preregistered 5pp threshold."]},
+  "fresh_split_integrity_checked": true,
+  "fresh_worlds": [41310, 41311, 41312],
+  "notes": ["Combination 11 was excluded from non-oracle training and development.", "Oracle independent control did train on combination 11 and underfit.", "Teacher itself is aligned to Givens composition; natural semantic generalization is not established."]
+}

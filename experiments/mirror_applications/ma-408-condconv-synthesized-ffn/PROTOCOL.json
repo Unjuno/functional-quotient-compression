@@ -1,0 +1,22 @@
+{
+  "experiment_id": "MA-408",
+  "title": "CondConv-style synthesized FFN versus output-mixture experts",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/COMPUTE",
+  "base_commit": "81b3634",
+  "hypothesis": "On context-conditioned classification with teacher logits formed by a two-expert output mixture, synthesizing effective weights from the same two-expert basis and running one FFN remains within 1.0pp accuracy of output-mixture execution while using <=70% its active MAC proxy and <=1.1x its payload bytes.",
+  "physical_object": "two shared two-layer FFN expert basis weights",
+  "mirror_coordinate": "none; native CondConv coefficient address is evaluated as prior-art control for MA-409",
+  "logical_multiplicity": "context-specific synthesized effective FFNs",
+  "prior_art_refs": ["PA66", "PA67"],
+  "controls": ["shared single FFN", "CondConv linear weight synthesis then one FFN pass", "output mixture of two FFN experts", "rank-one context residual", "independent per-context FFNs"],
+  "task": {"type": "synthetic four-context classification", "contexts": 4, "input_dim": 32, "hidden_dim": 48, "classes": 10, "teacher": "context-specific convex mixtures of logits from two fixed random FFNs", "examples_per_world": 4096, "train_examples": 3072, "evaluation_examples": 1024},
+  "development": {"worlds_or_seeds": [40800, 40801], "learning_rates": [0.003, 0.01], "selection_metric": "mean validation accuracy; ties resolved by lower cross entropy"},
+  "fresh": {"worlds_or_seeds": [40810, 40811, 40812], "locked_before_access": true},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["all basis weights", "context mixture coefficients", "rank-one factors", "context metadata", "independent weights"]},
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true, "count_weight_synthesis_macs": true, "report_per_context_quality": true},
+  "training": {"updates": 200, "batch_size": 128, "optimizer": "AdamW", "seeds": [0, 1, 2]},
+  "success_gate": "CondConv is within 1.0pp mean fresh accuracy of output-mixture and uses <=70% active MAC proxy with <=1.1x actual bytes.",
+  "failure_gate": "CondConv misses quality or either resource threshold.",
+  "boundaries": ["Known context coefficients; input-conditioned routing not tested.", "Synthetic control benchmark only; no Mirror-specific advantage claimed.", "Fixed-update results are not capacity claims."]
+}

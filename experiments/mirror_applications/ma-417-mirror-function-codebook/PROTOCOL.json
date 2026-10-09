@@ -1,0 +1,81 @@
+{
+  "experiment_id": "MA-417",
+  "title": "Mirror codebook for multiple neural functions",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY/INTERPOLATION",
+  "base_commit": "9f8e26d",
+  "prior_art_refs": [
+    "PA68"
+  ],
+  "hypothesis": "When many functions share clustered latent states in a fixed neural decoder, a compact learned codebook plus per-function addresses reduces actual decoder-plus-code bytes while preserving held-out function quality and interpolation better than unconstrained DeepSDF latent vectors.",
+  "physical_object": "One fixed shared neural coordinate decoder mapping x\u2208R\u00b2 and latent z\u2208R\u2078 through a 2\u219232\u21928 tanh feature MLP and feature/latent inner product.",
+  "mirror_coordinate": "Eight learned codebook vectors in R\u2078 and one uint8 codebook address per function; codebook trained only on training functions.",
+  "logical_multiplicity": "128 distinct neural functions from one shared decoder: 64 training functions and 64 held-out functions across four private-residual levels.",
+  "controls": [
+    "unconstrained DeepSDF latent vector per function (8 FP16 values)",
+    "rank-4 PCA latent basis with four per-function coefficients (native low-rank control)",
+    "nearest-centroid vector quantization using the same eight-entry codebook (algebraically equivalent native codebook control)",
+    "oracle full latent vectors"
+  ],
+  "task": {
+    "decoder": "Fixed random seeded neural coordinate decoder \u03c6\u03b8(x)\u00b7z, with \u03c6\u03b8(x)=tanh(W2 tanh(W1x+b1)+b2); identical frozen \u03b8 in all methods.",
+    "latent_dimension": 8,
+    "codebook_size": 8,
+    "train_functions": 64,
+    "heldout_functions": 64,
+    "heldout_private_residual_std": [
+      0.0,
+      0.05,
+      0.15,
+      0.3
+    ],
+    "target_codes": "Each target latent is one of eight random prototypes plus Gaussian private residual at the declared standard deviation; prototypes are shared across train and held-out functions but held-out task residuals are independent.",
+    "support_queries_per_function": 256,
+    "evaluation_queries_per_function": 2048,
+    "interpolation": "Average pairs of held-out task codes and reconstruct the midpoint function; report by residual level."
+  },
+  "development": {
+    "worlds_or_seeds": [
+      41701,
+      41702
+    ],
+    "latent_support_updates": 300,
+    "codebook_fit": "K-means on training-task latents inferred only from training support queries; 50 iterations.",
+    "selection_metric": "held-out query NRMSE, 50/50 interpolation NRMSE and actual serialized payload bytes by residual level."
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      41711,
+      41712,
+      41713
+    ],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "format": "deterministic NPZ with FP16 decoder/codebook/basis/latent tensors, uint8 addresses and metadata",
+    "paid_objects": [
+      "shared decoder \u03b8",
+      "all codebook vectors or PCA basis",
+      "every function address/latent/coefficient",
+      "metadata and reconstruction state"
+    ],
+    "replay_required": true
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true,
+    "report_inference_throughput": true,
+    "report": "Include per-task support-query latent fitting and assignment search separately from stored-code inference."
+  },
+  "success_gate": "On both development seeds at residual std 0 and 0.05, codebook held-out NRMSE <=0.05, <=DeepSDF NRMSE, interpolation NRMSE <=0.10, and actual payload <=0.80x DeepSDF. Passing opens fresh confirmation only. Native vector-quantization equivalence must be reported; it precludes Mirror-specific novelty if outputs match.",
+  "failure_gate": "FAIL if either low-residual gate misses in either seed or if native vector quantization exactly matches the Mirror codebook without a separate Mirror-specific benefit.",
+  "boundaries": [
+    "This tests code storage on synthetic latent-cluster functions, not decoder capacity; \u03b8 is frozen and identical.",
+    "No capacity claim from latent address combinatorics; assess held-out query and interpolation quality.",
+    "High-residual tasks expose when private full latent state becomes necessary.",
+    "Fresh remains sealed unless both development seeds pass."
+  ]
+}

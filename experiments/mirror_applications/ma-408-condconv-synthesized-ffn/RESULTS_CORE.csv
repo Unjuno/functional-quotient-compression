@@ -1,0 +1,6 @@
+condition,world_or_seed,method,serialized_bytes,train_tokens_or_examples,optimizer_updates,active_compute_proxy,wall_time_s,primary_metric,primary_value,secondary_metric,secondary_value,status_note
+fresh_mean,40810-40812,shared,9829,25600,200,4032 MAC/example,0.069,accuracy,0.5837,cross_entropy,1.1670,baseline
+fresh_mean,40810-40812,condconv,18081,25600,200,4037.25 MAC/example,0.237,accuracy,0.6609,cross_entropy,1.0006,PASS 0.50pp behind output mixture; half MAC proxy; equal bytes
+fresh_mean,40810-40812,output_mix,18081,25600,200,8064 MAC/example,0.115,accuracy,0.6659,cross_entropy,0.9662,matched native output-mixture reference
+fresh_mean,40810-40812,rank1,11485,25600,200,5568 MAC/example,0.146,accuracy,0.6181,cross_entropy,1.1407,simple low-rank control
+fresh_mean,40810-40812,independent,34021,25600,200,4032 MAC/example,0.158,accuracy,0.6265,cross_entropy,1.2442,short-screen upper control underfit

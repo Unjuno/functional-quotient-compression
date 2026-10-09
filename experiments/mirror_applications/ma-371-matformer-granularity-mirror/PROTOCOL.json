@@ -1,0 +1,94 @@
+{
+  "experiment_id": "MA-371",
+  "title": "MatFormer granularity Mirror views",
+  "status": "AMENDED_DEVELOPMENT_ONLY_SCREEN",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY/COMPUTE",
+  "base_commit": "bccbc91a",
+  "hypothesis": "Per-layer, per-granularity Mirror gains on a shared nested FFN recover useful unseen mixed-width configurations beyond native nested-width selection, with fewer bytes than independent FFNs and better storage/quality than ordinary gains.",
+  "physical_object": "shared maximum-width two-layer residual FFN",
+  "mirror_coordinate": "granularity and layer-indexed diagonal hidden activation gain",
+  "logical_multiplicity": "three homogeneous trained granularities and three locked unseen mixed granularities",
+  "prior_art_refs": [
+    "PA53"
+  ],
+  "controls": [
+    "native nested-prefix shared FFN",
+    "direct diagonal per-layer gain",
+    "Mirror diagonal per-layer gain",
+    "independent per-configuration FFNs"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      37101,
+      37102
+    ],
+    "granularities": [
+      2,
+      4,
+      8
+    ],
+    "train_configurations": [
+      [
+        2,
+        2
+      ],
+      [
+        4,
+        4
+      ],
+      [
+        8,
+        8
+      ]
+    ],
+    "heldout_untrained_mixes": [
+      [
+        2,
+        8
+      ],
+      [
+        4,
+        2
+      ],
+      [
+        8,
+        4
+      ]
+    ],
+    "train_examples": 1024,
+    "test_examples": 1024,
+    "optimizer": "SGD",
+    "updates": 1000,
+    "selection_metric": "heldout mix accuracy/NLL, actual serialized bytes, MAC proxy"
+  },
+  "fresh": {
+    "worlds_or_seeds": [],
+    "locked_before_access": true,
+    "open_only_if_development_passes": false,
+    "reason": "Direct coefficient control uses the same diagonal function and serialized state; mirror-specific gate is development-decidable."
+  },
+  "storage": {
+    "authority": "actual deterministic NPZ inference payload bytes",
+    "paid_objects": [
+      "shared FFN weights",
+      "granularity gain codes",
+      "indices",
+      "metadata",
+      "independent FFNs where applicable"
+    ]
+  },
+  "compute": {
+    "report_examples": true,
+    "report_optimizer_updates": true,
+    "report_matrix_MACs": true,
+    "report_isolated_wall_clock": true
+  },
+  "success_gate": "Mirror unseen-mix accuracy within 2pp of independent bank, >=10% fewer bytes than independent bank, and >=10% byte advantage over direct coefficient at equal quality.",
+  "failure_gate": "Direct coefficient and Mirror function/payload equivalent, or no held-out mix quality benefit over native nested selection.",
+  "boundaries": [
+    "synthetic screen",
+    "no actual MatFormer pretraining",
+    "no language-model or GPU runtime claim",
+    "Amendment A1: initial label task was near-uniform/unlearnable; replaced with learnable random linear teacher before adjudication. No fresh results opened."
+  ]
+}

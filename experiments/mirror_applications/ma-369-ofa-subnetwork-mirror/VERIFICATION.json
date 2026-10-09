@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-369",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-369-ofa-subnetwork-mirror/tests/test_run.py",
+    "passed": 2,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "24 development rows across two seeds and three widths replay.",
+    "Direct coefficient and Mirror payloads are exact aliases.",
+    "No fresh worlds were opened."
+  ]
+}

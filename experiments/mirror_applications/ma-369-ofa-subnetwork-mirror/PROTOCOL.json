@@ -1,0 +1,20 @@
+{
+  "experiment_id": "MA-369",
+  "title": "Once-for-All subnetwork Mirror correction",
+  "status": "FROZEN_DEVELOPMENT_SCREEN",
+  "evidence_lane": "MECHANISM/STORAGE/COMPUTE",
+  "base_commit": "ab95e5d0",
+  "hypothesis": "A small width-addressed Mirror gate on shared supernet channels can recover three width-specific linear target functions with lower actual payload bytes than independent subnetworks and outperform byte-matched ordinary coefficient views.",
+  "physical_object": "one shared maximum-width linear matrix",
+  "mirror_coordinate": "per-width diagonal gain vector on selected nested-prefix channels",
+  "logical_multiplicity": "three width-specific linear functions",
+  "prior_art_refs": ["PA52"],
+  "controls": ["shared nested prefix", "direct per-width diagonal coefficients", "Mirror diagonal coefficients", "independent per-width matrices"],
+  "development": {"worlds_or_seeds": [36901, 36902], "widths": [4, 8, 12], "input_dim": 12, "output_dim": 8, "train_examples_per_width": 512, "test_examples_per_width": 512, "optimizer": "SGD", "updates": 300, "selection_metric": "mean test nMSE, actual serialized bytes, matrix MAC proxy"},
+  "fresh": {"worlds_or_seeds": [], "locked_before_access": true, "open_only_if_development_passes": false, "reason": "Mirror and direct coefficient control are algebraically identical parameterizations; the registered direct-control gate adjudicates specificity."},
+  "storage": {"authority": "actual deterministic NPZ payload bytes including metadata", "paid_objects": ["all matrices or shared matrix", "all width coefficients", "width indices", "metadata"]},
+  "compute": {"report_examples": true, "report_optimizer_updates": true, "report_matrix_MACs": true, "report_isolated_wall_clock": true},
+  "success_gate": "All widths mean nMSE <= 1e-3, Mirror uses >=10% fewer bytes than independent specialization, and >=10% fewer bytes than direct coefficient at matched quality.",
+  "failure_gate": "Direct coefficient control matches Mirror within 1% bytes and quality, or target quality threshold fails.",
+  "boundaries": ["synthetic linear mechanism screen", "not actual OFA progressive shrinking", "no hardware latency or task capacity claim", "aligned nested-width targets only"]
+}

@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-372",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-372-matformer-mix-mirror/tests",
+    "passed": 2,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Eight development rows replay across two seeds.",
+    "Mirror and direct coefficient payloads/outputs match exactly.",
+    "No fresh data opened."
+  ]
+}

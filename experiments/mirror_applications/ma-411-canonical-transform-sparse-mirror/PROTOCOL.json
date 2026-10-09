@@ -1,0 +1,22 @@
+{
+  "experiment_id": "MA-411",
+  "title": "Fixed Hadamard basis plus sparse conditioned Mirror refinement",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/STABILITY",
+  "base_commit": "fb02971",
+  "hypothesis": "For four context transforms generated as a fixed Hadamard matrix plus eight shared-support sparse perturbations, sparse Mirror codes recover >=90% of dense residual held-out operator fit quality with <40% dense residual payload bytes and condition number <=2 in every context.",
+  "physical_object": "fixed normalized 32x32 Hadamard transform",
+  "mirror_coordinate": "four context-specific value vectors on eight shared sparse matrix coordinates",
+  "logical_multiplicity": "four context-indexed refined linear operators",
+  "prior_art_refs": ["PA78"],
+  "controls": ["canonical-only Hadamard", "sparse Mirror refinement without conditioning", "sparse Mirror refinement projected to condition number <=2", "per-context rank-2 dense residual", "per-context dense residual", "independent full transform matrices"],
+  "task": {"type": "aligned synthetic linear operator reconstruction", "contexts": 4, "dimension": 32, "shared_sparse_support_size": 8, "teacher": "fixed normalized Hadamard plus context-specific small values at shared sparse coordinates", "train_examples_per_world": 3072, "evaluation_examples_per_world": 1024},
+  "development": {"worlds_or_seeds": [41100, 41101], "learning_rates": [0.003, 0.01], "selection_metric": "lowest validation normalized RMSE subject to condition number <=2"},
+  "fresh": {"worlds_or_seeds": [41110, 41111, 41112], "locked_before_access": true},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["all learned residual values or factors", "shared sparse support indices", "independent matrices", "required metadata"]},
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true, "report_condition_number_per_context": true},
+  "training": {"updates": 200, "batch_size": 128, "optimizer": "AdamW", "seeds": [0, 1, 2]},
+  "success_gate": "Conditioned sparse Mirror fresh mean normalized RMSE <=10% of dense-residual normalized RMSE, actual bytes <40% of dense residual bytes, and max condition number <=2; compare with rank-2 residual at its actual bytes.",
+  "failure_gate": "Any quality, byte, or stability gate misses, or a simpler control weakly dominates Mirror at comparable bytes.",
+  "boundaries": ["Aligned support shared across contexts and worlds; natural sparse support discovery is not tested.", "Synthetic operator reconstruction, not a neural network task.", "No natural-model capacity claim."]
+}

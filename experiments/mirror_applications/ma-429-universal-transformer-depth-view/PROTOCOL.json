@@ -1,0 +1,22 @@
+{
+  "experiment_id": "MA-429",
+  "title": "Continuous timestep Mirror view on a shared recurrent block",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/GENERALIZATION",
+  "base_commit": "8c7dbe8",
+  "hypothesis": "A shared 2D recurrent transition conditioned by a continuous Givens depth coordinate, trained on depths 1-4, achieves mean depth-5..8 normalized state error <=1.1x a simple linear timestep embedding at <=90% its actual bytes with identical recurrence count.",
+  "physical_object": "one shared recurrent 2x2 transition matrix",
+  "mirror_coordinate": "continuous angle omega*depth conjugating the shared transition",
+  "logical_multiplicity": "depth-specific roles from one physical recurrent block",
+  "prior_art_refs": ["PA72"],
+  "controls": ["static shared recurrent block", "continuous Givens Mirror depth view", "linear timestep embedding A+dB", "four independent depth-step matrices with last-step hold beyond depth 4"],
+  "task": {"type": "synthetic recurrent state trajectory prediction", "state_dim": 2, "teacher": "stable transition Q(0.12*d) A Q(0.12*d)^T repeated by depth", "train_depths": [1,2,3,4], "evaluation_depths": [1,2,3,4,5,6,7,8], "initial_states": 256},
+  "development": {"worlds_or_seeds": [42900,42901], "learning_rates": [0.003,0.01], "selection_metric": "mean normalized state error on trained depths 1-4"},
+  "fresh": {"worlds_or_seeds": [42910,42911,42912], "locked_before_access": true},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["shared transition", "Mirror depth rate", "time embedding matrix", "discrete step matrices", "metadata"]},
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true, "same_recurrence_count_across_methods": true, "report_error_by_depth": true},
+  "training": {"updates": 400, "batch_size": 128, "optimizer": "AdamW", "spectral_norm_projection": 0.95, "seeds": [0,1,2]},
+  "success_gate": "On each fresh world, mean depth-5..8 normalized state error <=1.1x linear timestep embedding, bytes <=90% embedding bytes, identical recurrence count, and stable transition norms.",
+  "failure_gate": "Mirror misses extrapolation quality or byte threshold, or ordinary time embedding dominates at comparable bytes.",
+  "boundaries": ["Teacher uses a continuously rotating transition; aligned feasibility only.", "Small 2D recurrent dynamics proxy, not a Transformer reproduction.", "No language-model capacity claim."]
+}

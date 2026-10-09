@@ -1,0 +1,10 @@
+{
+  "experiment_id": "MA-407",
+  "protocol_commit": "2a1a6f6",
+  "tests": {"command": "python -m unittest discover -s experiments/mirror_applications/ma-407-demodulated-mirror-moe/tests -v", "passed": 2, "failed": 0},
+  "serialization": {"roundtrip_checked": true, "byte_exact": true, "payload_rows": 126, "payload_hashes_replayed": true, "actual_payload_bytes_authoritative": true},
+  "metric_replay": {"checked": true, "max_difference": 0.0000001, "notes": ["Per-run serialized bytes and SHA-256 values verified against every retained payload.", "Mirror raw vs demod fresh accuracy exactly matches for each paired run; activation RMS CV differs by <1e-7 from floating point normalization."]},
+  "fresh_split_integrity_checked": true,
+  "fresh_worlds": [40710, 40711, 40712],
+  "notes": ["Development worlds 40700/40701 selected LR 0.01 before fresh runs.", "Demodulation is a functional null for orthogonal input-plane Givens in this architecture; see report boundary."]
+}

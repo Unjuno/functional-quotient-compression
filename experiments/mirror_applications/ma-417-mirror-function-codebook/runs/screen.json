@@ -1,0 +1,55 @@
+{
+  "experiment_id": "MA-417",
+  "protocol_frozen": true,
+  "fresh_accessed": false,
+  "development_gate_passed": false,
+  "seed_results": [
+    {
+      "seed": 41701,
+      "checks": [
+        {
+          "rho": 0.0,
+          "vq_nrmse": 0.05379897728562355,
+          "deep_nrmse": 0.042736634612083435,
+          "vq_bytes": 2323,
+          "deep_bytes": 2986,
+          "interp_nrmse": 0.04913290962576866
+        },
+        {
+          "rho": 0.05,
+          "vq_nrmse": 0.23367169499397278,
+          "deep_nrmse": 0.043605949729681015,
+          "vq_bytes": 2323,
+          "deep_bytes": 2986,
+          "interp_nrmse": 0.17467164993286133
+        }
+      ],
+      "pass": false,
+      "native_vq_exact_same": true
+    },
+    {
+      "seed": 41702,
+      "checks": [
+        {
+          "rho": 0.0,
+          "vq_nrmse": 0.06596286594867706,
+          "deep_nrmse": 0.060631752014160156,
+          "vq_bytes": 2323,
+          "deep_bytes": 2977,
+          "interp_nrmse": 0.051970403641462326
+        },
+        {
+          "rho": 0.05,
+          "vq_nrmse": 0.2005225270986557,
+          "deep_nrmse": 0.061708301305770874,
+          "vq_bytes": 2323,
+          "deep_bytes": 2977,
+          "interp_nrmse": 0.2682797908782959
+        }
+      ],
+      "pass": false,
+      "native_vq_exact_same": true
+    }
+  ],
+  "note": "Per-residual interpolation scores were corrected to use serialized FP16 decoder/code states and are now reported separately; first pass is retained in initial_pre_serializer_results.csv."
+}
