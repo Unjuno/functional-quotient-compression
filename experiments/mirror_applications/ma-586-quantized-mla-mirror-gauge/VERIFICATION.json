@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-586",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m pytest -q -p no:cacheprovider experiments/mirror_applications/ma-586-quantized-mla-mirror-gauge/tests",
+    "passed": 2,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Eight rows replayed across two seeds.",
+    "Gauge selected using first 32 queries; score uses disjoint second 32.",
+    "Givens direct control exactly matches Mirror; no fresh opened."
+  ]
+}

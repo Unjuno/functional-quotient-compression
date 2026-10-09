@@ -1,0 +1,65 @@
+{
+  "experiment_id": "MA-586",
+  "title": "Quantized MLA latent with Mirror gauge",
+  "status": "DEVELOPMENT_ONLY_FAIL",
+  "evidence_lane": "QUANTIZATION/ATTENTION_QUALITY/STORAGE/COMPUTE",
+  "base_commit": "99351d0b",
+  "hypothesis": "Compact Mirror gauge selection before int4 quantization lowers MLA latent cache attention distortion beyond identity, Hadamard and direct matched rotation controls.",
+  "physical_object": "shared MLA latent K/V cache",
+  "mirror_coordinate": "block-Givens gauge selected before int4 quantization",
+  "logical_multiplicity": "eight role-specific quantized cache reconstructions",
+  "prior_art_refs": [
+    "PA112",
+    "PA115"
+  ],
+  "controls": [
+    "identity int4 latent",
+    "QuaRot-style Hadamard int4",
+    "Mirror block-Givens int4",
+    "direct same-budget block-Givens sweep",
+    "int4 reconstructed KV matrices"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      58601,
+      58602
+    ],
+    "roles": 8,
+    "sequence_length": 4,
+    "latent_dim": 16,
+    "bits": 4,
+    "angle_grid": 64,
+    "query_probes_per_role": 64,
+    "selection_metric": "attention-output nMSE, actual serialized bytes"
+  },
+  "fresh": {
+    "worlds_or_seeds": [],
+    "locked_before_access": true,
+    "open_only_if_development_passes": false,
+    "reason": "Direct rotation control gets identical angle search budget."
+  },
+  "storage": {
+    "authority": "actual deterministic packed int4 payload bytes",
+    "paid_objects": [
+      "packed codes",
+      "scales",
+      "rotation metadata or indices",
+      "latent cache",
+      "reconstruction state"
+    ]
+  },
+  "compute": {
+    "report_angle_search_evaluations": true,
+    "report_reconstruction_MACs": true,
+    "report_attention_MACs": true,
+    "report_wall_time": true
+  },
+  "success_gate": "Mirror lowers attention-output nMSE >=10% vs identity and Hadamard at <=5% byte overhead and beats direct rotation control.",
+  "failure_gate": "No quality/storage frontier improvement or direct matched control ties Mirror.",
+  "boundaries": [
+    "synthetic heavy-tailed cache",
+    "no real MLA or GPU kernel claim",
+    "fresh sealed on direct alias",
+    "Query probes were split 32/32; angle selection used only the first half and reported metric uses held-out queries."
+  ]
+}
