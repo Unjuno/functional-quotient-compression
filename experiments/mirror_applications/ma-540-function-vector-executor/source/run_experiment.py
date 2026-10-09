@@ -44,14 +44,14 @@ def make_pair_examples(table,pairs):
  for a,b in pairs:
   for x in range(N):xs.append(x);ys.append(table[b,table[a,x]]);aa.append(a);bb.append(b)
  return np.asarray(xs),np.asarray(aa),np.asarray(bb),np.asarray(ys)
-def train_atom(table,updates,lr,seed):
- torch.manual_seed(seed);m=StepNet();opt=torch.optim.AdamW(m.parameters(),lr=lr,weight_decay=1e-4);xs=np.tile(np.arange(N),R);ops=np.repeat(np.arange(R),N);ys=table.reshape(-1);g=np.random.default_rng(seed+19);start=time.perf_counter()
+def train_atom(table,updates,lr,seed,data_seed=None):
+ torch.manual_seed(seed);m=StepNet();opt=torch.optim.AdamW(m.parameters(),lr=lr,weight_decay=1e-4);xs=np.tile(np.arange(N),R);ops=np.repeat(np.arange(R),N);ys=table.reshape(-1);g=np.random.default_rng(seed+19 if data_seed is None else data_seed);start=time.perf_counter()
  for _ in range(updates):
   ix=g.integers(len(xs),size=96);x=torch.tensor(xs[ix]);o=torch.tensor(ops[ix]);y=torch.tensor(ys[ix]);loss=F.cross_entropy(m.forward_ids(x,o),y);opt.zero_grad(set_to_none=True);loss.backward();opt.step()
  return m,time.perf_counter()-start
 
-def train_endpoint(table,pairs,updates,lr,seed):
- torch.manual_seed(seed);m=EndpointNet();opt=torch.optim.AdamW(m.parameters(),lr=lr,weight_decay=1e-4);x,a,b,y=make_pair_examples(table,pairs);g=np.random.default_rng(seed+29);start=time.perf_counter()
+def train_endpoint(table,pairs,updates,lr,seed,data_seed=None):
+ torch.manual_seed(seed);m=EndpointNet();opt=torch.optim.AdamW(m.parameters(),lr=lr,weight_decay=1e-4);x,a,b,y=make_pair_examples(table,pairs);g=np.random.default_rng(seed+29 if data_seed is None else data_seed);start=time.perf_counter()
  for _ in range(updates):
   ix=g.integers(len(x),size=96);tx=torch.tensor(x[ix]);ta=torch.tensor(a[ix]);tb=torch.tensor(b[ix]);ty=torch.tensor(y[ix]);loss=F.cross_entropy(m(tx,ta,tb),ty);opt.zero_grad(set_to_none=True);loss.backward();opt.step()
  return m,time.perf_counter()-start
@@ -70,6 +70,14 @@ def evaluate_seq(net,table,pairs,support_states,kind):
    else:p=net.forward_ids(x,torch.full_like(x,b)).argmax(-1);pred=net.forward_ids(p,torch.full_like(p,a)).argmax(-1)
    rev_ok+=int((pred.numpy()==target).sum())
  return {'ordered_pair_exact_accuracy':correct/total,'reverse_order_exact_accuracy':rev_ok/total,'heldout_ordered_pairs':len(pairs),'evaluated_states':total}
+
+def evaluate_untied(first,second,table,pairs):
+ states=np.arange(N);correct=rev=total=0;first.eval();second.eval()
+ with torch.no_grad():
+  for a,b in pairs:
+   x=torch.tensor(states);target=table[b,table[a,states]];p1=first.forward_ids(x,torch.full_like(x,int(a))).argmax(-1);pred=second.forward_ids(p1,torch.full_like(p1,int(b))).argmax(-1);correct+=int((pred.numpy()==target).sum())
+   rt=table[a,table[b,states]];q1=second.forward_ids(x,torch.full_like(x,int(b))).argmax(-1);q2=first.forward_ids(q1,torch.full_like(q1,int(a))).argmax(-1);rev+=int((q2.numpy()==rt).sum());total+=N
+ return {'ordered_pair_exact_accuracy':correct/total,'reverse_order_exact_accuracy':rev/total,'heldout_ordered_pairs':len(pairs),'evaluated_states':total}
 
 def evaluate_endpoint(m,table,pairs):
  x,a,b,y=make_pair_examples(table,pairs);m.eval();ok=rev=0
@@ -90,18 +98,20 @@ def save_step_payload(path,net,support,table,mode):
   fv=net.extract_fv(support);sd={'state.weight':sd['state.weight'],'head.0.weight':sd['head.0.weight'],'head.0.bias':sd['head.0.bias'],'head.2.weight':sd['head.2.weight'],'head.2.bias':sd['head.2.bias'],'function_vectors':fv.numpy()}
  sd.update({'support_states':support.astype(np.uint8),'schema':np.array([540,2,N,D],np.int32)})
  return save_npz(path,sd)
+def idx_seed(seed,updates,lr,step):return updates*1009+int(lr*100000)*17+step*65537
 def run(seed,outdir,settings):
  out=Path(outdir);out.mkdir(parents=True,exist_ok=True);table,train_pairs,test_pairs,rules=make_world(seed);rng=np.random.default_rng(seed+101);support=np.stack([rng.choice(N,8,replace=False) for _ in range(R)]);np.savez(out/'world.npz',table=table.astype(np.uint8),rules=rules.astype(np.uint8),support_states=support.astype(np.uint8),train_pairs=train_pairs,test_pairs=test_pairs)
  rows=[]
  for updates,lr in settings:
-  net,atom_s=train_atom(table,updates,lr,seed+updates+int(lr*100000));endpoint,endpoint_s=train_endpoint(table,train_pairs,updates,lr,seed+updates+int(lr*100000)+301)
+  common_seed=seed+updates+int(lr*100000);net,atom_s=train_atom(table,updates,lr,common_seed,common_seed+19);endpoint,endpoint_s=train_endpoint(table,train_pairs,updates,lr,common_seed+301,common_seed+19)
   # Verify FV extraction exactly substitutes for ordinary op embeddings before scoring.
   fv=net.extract_fv(support);xx=torch.arange(N).repeat(R);oo=torch.arange(R).repeat_interleave(N);base=torch.max(torch.abs(net.forward_ids(xx,oo)-net.forward_fv(xx,fv[oo]))).item()
   controls={'fv_tied_sequential':('fv',net,atom_s),'native_operator_id_tied':('ids',net,atom_s),'external_two_call':('ids',net,atom_s)}
   for name,(mode,model,sec) in controls.items():
    metrics=evaluate_seq(model,table,test_pairs,support,mode);payload=save_step_payload(out/f'{name}_u{updates}_lr{lr}.npz',model,support,table,mode);rows.append({'world':seed,'method':name,'updates':updates,'lr':lr,'payload_bytes':payload,'steps_per_pair':2,'fit_seconds':sec,'compute_proxy':int(updates*96*R*N*D*3),'metrics':metrics,'fv_id_max_logit_difference':base if mode=='fv' else None})
-  # Two untied copies, initialized from the same atomic solution, represent step-specific storage.
-  states={k:v.detach().cpu().numpy() for k,v in net.state_dict().items()};untied_bytes=save_npz(out/f'untied_two_step_u{updates}_lr{lr}.npz',{'step1_'+k:v for k,v in states.items()}|{'step2_'+k:v for k,v in states.items()}|{'schema':np.array([540,2,N,D],np.int32)});um=evaluate_seq(net,table,test_pairs,support,'ids');rows.append({'world':seed,'method':'untied_two_step','updates':updates,'lr':lr,'payload_bytes':untied_bytes,'steps_per_pair':2,'fit_seconds':2*atom_s,'compute_proxy':2*updates*96*R*N*D*3,'metrics':um,'fv_id_max_logit_difference':None})
+  # Independent step-specific atomic executors are trained from distinct initializations.
+  step1,t1=train_atom(table,updates,lr,common_seed+idx_seed(seed,updates,lr,1),common_seed+19);step2,t2=train_atom(table,updates,lr,common_seed+idx_seed(seed,updates,lr,2),common_seed+19)
+  states1={k:v.detach().cpu().numpy() for k,v in step1.state_dict().items()};states2={k:v.detach().cpu().numpy() for k,v in step2.state_dict().items()};untied_bytes=save_npz(out/f'untied_two_step_u{updates}_lr{lr}.npz',{'step1_'+k:v for k,v in states1.items()}|{'step2_'+k:v for k,v in states2.items()}|{'schema':np.array([540,2,N,D],np.int32)});um=evaluate_untied(step1,step2,table,test_pairs);rows.append({'world':seed,'method':'untied_two_step','updates':updates,'lr':lr,'payload_bytes':untied_bytes,'steps_per_pair':2,'fit_seconds':t1+t2,'compute_proxy':2*updates*96*R*N*D*3,'metrics':um,'fv_id_max_logit_difference':None})
   em=evaluate_endpoint(endpoint,table,test_pairs);epbytes=save_npz(out/f'endpoint_sum_u{updates}_lr{lr}.npz',{**{k:v.detach().cpu().numpy() for k,v in endpoint.state_dict().items()},'schema':np.array([540,1,N,D],np.int32)});rows.append({'world':seed,'method':'endpoint_sum','updates':updates,'lr':lr,'payload_bytes':epbytes,'steps_per_pair':1,'fit_seconds':endpoint_s,'compute_proxy':int(updates*96*R*R*N*D*3),'metrics':em,'fv_id_max_logit_difference':None})
  # Exact structured table upper, charged as a complete 24x16 map bank.
  upper=save_npz(out/'exact_affine_table_upper.npz',{'function_tables':table.astype(np.uint8),'rules':rules.astype(np.uint8),'schema':np.array([540,R,N],np.int32)});rows.append({'world':seed,'method':'exact_affine_table_upper','updates':0,'lr':0,'payload_bytes':upper,'steps_per_pair':2,'fit_seconds':0,'compute_proxy':0,'metrics':{'ordered_pair_exact_accuracy':1.,'reverse_order_exact_accuracy':1.,'heldout_ordered_pairs':len(test_pairs),'evaluated_states':len(test_pairs)*N},'fv_id_max_logit_difference':None})
