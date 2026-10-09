@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-276.** MA-274 showed a shared view bank can approach untied-MoE quality at ~60% lower bytes on a Givens-aligned synthetic task, but simpler Givens was better/slimmer and ~9× faster to fit; no BOFT-specific value. Continue to MA-276 with tied-block and depth-view controls.
+**Current operational pointer (2026-10-09): MA-278.** MA-276 initial fresh showed a compact aligned depth-orbit result, but an A1 control on new worlds found generic scalar exactly equals Mirror. Independent tasks needed private capacity. Original fresh row CSV was overwritten by A1; original payloads and recorded aggregates preserved, no rerun. Continue to MA-278 with native Compacter controls.
 
 # Worker queue
 
