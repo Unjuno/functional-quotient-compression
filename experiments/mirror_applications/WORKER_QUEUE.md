@@ -1,8 +1,8 @@
-**Current operational pointer (2026-10-09): MA-516.** MA-511 showed a scoped held-out composition/storage result on a Givens-aligned condition×behavior family, with a CPU decode penalty. Continue to function-vector compression against explicit vectors and simple bases.
+**Current operational pointer (2026-10-09): MA-517.** MA-511 showed a scoped held-out composition/storage result on a Givens-aligned condition×behavior family, with a CPU decode penalty. MA-516 failed task-utility preservation for extracted support-delta vectors despite PCA byte reduction. Continue with held-out function-vector composition against raw addition/subtraction.
 
 # Worker queue
 
-**Current operational pointer (2026-10-09): MA-516.** MA-436/438, MA-482/503/504/511 show scoped synthetic quality/storage points; MA-508/510 failed Mirror-specific gates. Continue with function-vector activation methods.
+**Current operational pointer (2026-10-09): MA-517.** MA-436/438, MA-482/503/504/511 show scoped synthetic quality/storage points; MA-508/510 failed Mirror-specific gates. Continue with function-vector activation methods.
 
 The queue is derived from `IDEA_REGISTRY.csv`. The registry is authoritative.
 

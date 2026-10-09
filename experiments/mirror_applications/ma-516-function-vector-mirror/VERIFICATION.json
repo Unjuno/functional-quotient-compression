@@ -1,9 +1,23 @@
 {
   "experiment_id": "MA-516",
-  "commit": "pending protocol freeze",
-  "tests": {"command": "python -m unittest discover -s experiments/mirror_applications/ma-516-function-vector-mirror/tests", "passed": null, "failed": null},
-  "serialization": {"roundtrip_checked": false, "byte_exact": false},
-  "metric_replay": {"checked": false, "max_difference": null},
-  "fresh_split_integrity_checked": false,
-  "notes": ["Fresh worlds 51610-51612 remain unopened at protocol freeze.", "Pinned GPT-2 model and runtime file sizes/hashes are in artifacts/model_provenance.json."]
+  "commit": "pending",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-516-function-vector-mirror/tests",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 1e-06
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "54 result rows from 3 fresh worlds x 3 seeds; intervention payloads hash/size verified and PCA vector NRMSE replayed against explicit vectors.",
+    "A0/pre-latency-fix outputs are preserved but excluded for runtime; corrected timing replay did not alter predictions or payloads.",
+    "GPT-2 revision and checkpoint SHA256/base bytes are recorded in artifacts/model_provenance.json."
+  ]
 }

@@ -23,7 +23,9 @@ Integration branch: `research/ma-470-mend-shared-mirror-edit-basis-reconciled-20
 
 ## Next candidate
 
-**MA-516 — function-vector Mirror compression basis (P0)**
+**MA-517 — Mirror composition of function vectors (P0; PA99)**
+
+MA-516 FAIL: pinned GPT-2 arbitrary mappings gave direct ICL 13.5–18.8% (chance 12.5%); query-only, explicit activation-delta vectors, and PCA ranks 4/8/16 all had 0% accuracy. Rank-4 PCA reduced explicit vector bytes 50,793B→17,569B at NRMSE .00946 but preserved no task utility. The support-delta extraction/injection failed; this is a narrow task-level negative, not evidence against all function vectors. See experiment report.
 
 **MA-494 PROMISING (scoped synthetic noisy-address robustness):** with 32 expert IDs at bit-flip p=.1, binary accuracy was .591, ECOC-11 .816, and 3x repetition .868. Payloads were 2,149B / 2,277B vs 1,957B binary, with noiseless accuracy 1.0. Repetition beats ECOC; no Mirror-specific advantage or task-level routing benefit is established. **Next: MA-498 (P0).**
 
@@ -247,4 +249,4 @@ KG relation rotations (RotatE, TuckER, QuatE, PairRE), EXIF/device-aware ISPs (P
 **MA-510 FAIL at development gate (fresh not opened):** held-out CAST cosine gate FPR was .0468 but miss rate .2888 (> .05). All methods share this router. Generic FP16 behavior coefficients were 4,957B / .000214 NRMSE versus Mirror 5,145B / .000357; explicit vectors 7,713B. At rho=.1 Mirror-only error .1458; private residuals restore .000405 at 5,525B. **Next: MA-511.**
 
 
-**MA-511 PROMISING (synthetic held-out condition×behavior composition):** at rho=0, Mirror held-out NRMSE mean 9e-6 (max 7.9e-5) at 3,297B vs exact pair table 4,773B and generic full matrices 4,001B / 2.8e-5. CPU decode was ~3x slower than generic. At rho=.1 Mirror error rose to .216. No natural CAST evidence. **Next: MA-516.**
+**MA-511 PROMISING (synthetic held-out condition×behavior composition):** at rho=0, Mirror held-out NRMSE mean 9e-6 (max 7.9e-5) at 3,297B vs exact pair table 4,773B and generic full matrices 4,001B / 2.8e-5. CPU decode was ~3x slower than generic. At rho=.1 Mirror error rose to .216. No natural CAST evidence. **Next: MA-517.**
