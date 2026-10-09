@@ -1,0 +1,27 @@
+{
+  "experiment_id": "MA-530",
+  "frozen_before_development": true,
+  "protocol_path": "experiments/mirror_applications/ma-530-sae-feature-experts/PROTOCOL.json",
+  "protocol_sha256": "b2fd285bc2c905e9f9da74fc9de1a6c4214fae0d60b6af97677f1b249124c7ae",
+  "development_seeds": [
+    53001,
+    53002
+  ],
+  "fresh_seeds": [
+    53011,
+    53012,
+    53013
+  ],
+  "fresh_opened": false,
+  "shared_pool_size": 64,
+  "active_features_per_expert": 16,
+  "router": "standardized single affine 512-to-16 softmax, support mean/std charged; 1000 Adam updates",
+  "fixed_controls": [
+    "none",
+    "mean intervention",
+    "oracle-routed explicit FVs",
+    "learned-router explicit FVs",
+    "learned-router global OMP16",
+    "learned-router residual-pool64 OMP16"
+  ]
+}

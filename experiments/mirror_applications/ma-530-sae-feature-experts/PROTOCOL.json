@@ -1,0 +1,104 @@
+{
+  "experiment_id": "MA-530",
+  "title": "Top-k SAE feature logical experts with a learned input router",
+  "status": "SCREENING",
+  "evidence_lane": "FEATURE_EXPERTS/INPUT_ROUTING/CAUSAL_QUALITY/ACTUAL_BYTES/ACTIVE_FEATURES",
+  "base_commit": "69332e305ad8e35bc6dc7aadd6ef51d22b366f42",
+  "hypothesis": "For 16 relation behaviors on pinned Pythia-70m, a learned router selecting one of 16 task-specific OMP16 SAE feature experts from the input-token hidden state can approach the same-router explicit-FV expert bank within .10 gold-logprob nats/.05 accuracy while using <=.60x its total router-plus-expert payload and no more than global per-expert SAE OMP16 bytes.",
+  "physical_object": "Pinned Pythia-70m and pretrained tied 2048-atom layer-3 SAE dictionary.",
+  "mirror_coordinate": "Input-conditioned expert address selecting one sparse 16-feature SAE intervention code; one residual feature pool of 64 SAE atoms is shared across 16 logical experts.",
+  "logical_multiplicity": "Sixteen relation-task intervention experts, top-1 routed per query; this is task coverage, not independent capacity inferred from address combinations.",
+  "prior_art_refs": [
+    "PA102"
+  ],
+  "artifacts": {
+    "model_revision": "e93a9faa9c77e5d09219f6c868bfc7a1bd65593c",
+    "model_sha256": "3da388330e4549156d76b58d6d268c63cd005e9336b4f4d2d378421e7b7a33fd",
+    "sae_revision": "36c2027509efad69836aa4231999c9b717848ecd",
+    "sae_sha256": "85b57dfe34d19769e2df0e208e38fda8815da8493c56b703a99ff74cc610dbf4",
+    "sae_bytes": 4204391
+  },
+  "task": {
+    "relation_tasks": "Reuse the 16 MA-516 relation tasks.",
+    "support_examples_per_task": 8,
+    "query_examples_per_task": 8,
+    "primary_metric": "mean held-out gold candidate log probability after routing",
+    "secondary_metrics": [
+      "top-1 candidate accuracy",
+      "task-router accuracy/macro-F1/confusion matrix",
+      "gold margin",
+      "active feature count",
+      "router and expert payload bytes",
+      "standalone deployment bytes",
+      "route/code/inference compute and wall time"
+    ]
+  },
+  "router": {
+    "input": "Layer-4 final hidden state at the prompt prefix `Input: {x}\\nOutput:` with no demonstrations; inference uses only the query input.",
+    "fit_data": "Eight support source inputs per task from the same development seed; support examples remain disjoint from evaluator queries.",
+    "architecture": "Single affine 512-to-16 softmax classifier over standardized features; training mean/std are fit on support inputs, stored FP32 with the affine weights/biases; argmax top-1 expert.",
+    "optimization": "Full-batch cross-entropy Adam, lr=.01, exactly 1000 updates, zero weight decay; no tuning."
+  },
+  "experts": {
+    "pool_selection": "Residual-correlation greedy shared pool of 64 SAE atoms over 16 support-derived task FVs; deterministic stable ties.",
+    "code": "Deterministic signed OMP16 over the selected pool for each task; FP32 coefficients, uint8 local indices and uint16 global pool IDs.",
+    "execution": "Decode only the router-selected task code to one 512D intervention vector before applying it to the query; do not store decoded vectors."
+  },
+  "controls": [
+    "No intervention",
+    "One shared mean intervention with the same router-independent evaluator",
+    "Oracle-task-routed explicit FP32 FV expert bank (upper routing quality)",
+    "Learned-router explicit FP32 FV expert bank",
+    "Learned-router global SAE OMP16 per-task sparse expert lists (native sparse experts)",
+    "Learned-router residual-selected shared-pool64 OMP16 feature experts (Mirror candidate)"
+  ],
+  "development": {
+    "seeds": [
+      53001,
+      53002
+    ],
+    "post-run_changes": "prohibited without numbered amendment"
+  },
+  "fresh": {
+    "seeds": [
+      53011,
+      53012,
+      53013
+    ],
+    "locked_before_access": true,
+    "opened": false,
+    "opening_rule": "Only if both dev seeds pass router, causal-quality and actual total-payload gates."
+  },
+  "storage": {
+    "authority": "actual uncompressed NPZ inference payload bytes",
+    "paid_objects": [
+      "router FP32 matrix and bias",
+      "task-to-code/feature IDs",
+      "shared SAE atom IDs",
+      "all per-task code indices and coefficients",
+      "task/model/SAE/schema metadata",
+      "full SAE artifact for standalone SAE deployment",
+      "explicit FV bank and global sparse expert lists",
+      "router support-feature mean and standard deviation"
+    ],
+    "reporting": "Compare complete router+expert state, expert-only state, incremental-over-preloaded-SAE bytes, and standalone Pythia+SAE+expert system. Count all routing metadata."
+  },
+  "compute": {
+    "hardware": "CPU, fixed five-thread limit",
+    "optimizer_updates": 1000,
+    "report_tokens_and_examples": true,
+    "active_compute_proxy": "Report router 512x16 fit/prediction, pool construction and OMP coding, selected expert decode, and transformer candidate-sequence work separately."
+  },
+  "gates": {
+    "PASS": "Both dev seeds: router accuracy >=.75; learned-router Mirror within .05 candidate accuracy and .10 gold-logprob nats of learned-router explicit-FV expert bank; full router+expert payload <=.60x learned-router explicit-FV total and <= global OMP16 total; fresh remains unopened until then.",
+    "FAIL": "Any frozen route, causal-quality or payload gate fails.",
+    "NOT_ESTABLISHED": "Pinned artifact/split integrity or deterministic replay fails."
+  },
+  "boundaries": [
+    "One Pythia-70m model, one SAE checkpoint and 16 relation tasks only.",
+    "Router accuracy is reported separately from conditional expert quality.",
+    "Oracle routing is an upper control, not a deployable claim.",
+    "Full SAE bytes are charged for standalone deployment.",
+    "No claim of 16 independent experts follows from 16 route labels or code combinations."
+  ]
+}
