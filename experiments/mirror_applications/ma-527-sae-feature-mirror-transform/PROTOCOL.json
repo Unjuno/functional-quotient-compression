@@ -61,7 +61,7 @@
     "report_isolated_wall_clock": true,
     "report_inference_latency": true
   },
-  "success_gate": "On every fresh task and seed: retain at least 90% of explicit-FV uplift, lose at most 0.05 accuracy, stay within 2x native top-eight SAE active features, and use <=0.5x explicit incremental bytes. Mirror must outperform untransformed sparse and LoReFT controls at byte-near cost or show a distinct Pareto point.",
+  "success_gate": "On every fresh task and seed, mean gold-candidate log-probability must be within 0.10 nats and accuracy within 0.05 absolute of explicit FVs; Mirror must preserve <=16 nonzeros/task after code transform, use <=0.50x explicit incremental payload bytes, and not be dominated by either untransformed shared-bank sparse code or LoReFT at byte-near cost. Report standalone total bytes with the SAE charged.",
   "failure_gate": "Dev cannot satisfy the quality/sparsity/byte gates, or Mirror is dominated by native sparse coding or LoReFT at byte-near cost.",
   "boundaries": ["Four relation tasks and one pinned model/layer only.", "No router evaluation.", "Fresh task IDs/seeds cannot tune settings.", "Sparse activations and task-aligned function vectors do not establish broad behavior capacity."]
 }
