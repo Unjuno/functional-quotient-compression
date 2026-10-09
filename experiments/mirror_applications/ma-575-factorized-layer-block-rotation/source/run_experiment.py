@@ -78,16 +78,20 @@ def payload(out,method,seed,items,weights,codes,ids,meta=None):
     return {'total_payload_bytes':wpath.stat().st_size+cbytes,'weight_payload_bytes':wpath.stat().st_size,'rotation_code_bytes':cbytes,'weights_file':wpath.name,'codes_file':cfile}
 
 def run(seed,split,model_dir,out):
+    total_t0=time.perf_counter()
     out.mkdir(parents=True,exist_ok=True); mp=model_dir/'model.safetensors'
     if sha(mp)!=MODEL_SHA: raise ValueError('pinned checkpoint hash mismatch')
+    load_t0=time.perf_counter()
     items=[]
     for layer in LAYERS:
         for short,key in [('attn',f'gpt_neox.layers.{layer}.attention.dense.weight'),('mlp_up',f'gpt_neox.layers.{layer}.mlp.dense_h_to_4h.weight')]:
             w=read_tensor(mp,key); cal,audit=row_split(w.shape[0],57500+len(items)); items.append({'id':f'L{layer}_{short}','layer':layer,'w':w,'cal':cal,'audit':audit})
+    model_load_seconds=time.perf_counter()-load_t0
     rng=np.random.default_rng(seed); bank=[new_code(rng) for _ in range(K)]
     # Precompute held-out/calibration reconstruction error for every factor pair per matrix and block.
     ec=np.empty((len(items),BLOCKS,K,K),np.float32); ea=np.empty_like(ec)
     edc=np.empty((len(items),BLOCKS,K),np.float32); eda=np.empty_like(edc)
+    error_table_t0=time.perf_counter()
     for i,it in enumerate(items):
       for b in range(BLOCKS):
        wb=it['w'][:,b*GROUP:(b+1)*GROUP]
@@ -99,6 +103,7 @@ def run(seed,split,model_dir,out):
          c=compose_codes(bank[a],bank[z]); v=fwht(wb)*(1/np.sqrt(GROUP)); v=v[:,c[1]]*c[0][None,:]
          d=quant_group(v)
          ec[i,b,a,z]=err(d,v,it['cal']); ea[i,b,a,z]=err(d,v,it['audit'])
+    error_table_seconds=time.perf_counter()-error_table_t0
     train=[i for i,x in enumerate(items) if x['layer']<4]; held=[i for i,x in enumerate(items) if x['layer']>=4]
     # Fit only training layers. Fixed two coordinate-descent sweeps are part of the frozen protocol.
     t0=time.perf_counter(); lid=np.zeros(6,np.uint8); bid=np.zeros(BLOCKS,np.uint8)
@@ -121,6 +126,7 @@ def run(seed,split,model_dir,out):
     # Independent and layer-shared states store selected exact per-block codes; factored state stores only bank+IDs.
     methods={}; state={}
     for method in ('identity_int4','independent_matrix_block','layer_shared','random_factorized','factorized_layer_block','native_boft_factorized'):
+      method_t0=time.perf_counter()
       quant=[]; calerr=[]; auditerr=[]; saved_codes=[]; saved_ids=[]
       for i,it in enumerate(items):
        cs=[]
@@ -140,10 +146,10 @@ def run(seed,split,model_dir,out):
       elif method=='random_factorized': cstore=bank; ids=np.concatenate([random_lid,random_bid]); meta={'layer_ids':random_lid,'block_ids':random_bid,'mode':np.array([b'random-factor'])}
       else: cstore=bank; ids=np.concatenate([lid,bid]); meta={'layer_ids':lid,'block_ids':bid,'mode':np.array([method.encode()])}
       sz=payload(out,method,seed,items,quant,cstore,ids,meta)
-      methods[method]={'total_payload_bytes':sz['total_payload_bytes'],'weight_payload_bytes':sz['weight_payload_bytes'],'rotation_code_bytes':sz['rotation_code_bytes'],'train_layer_nrmse':float(np.mean([calerr[i] for i in train])),'heldout_layer_nrmse':float(np.mean([auditerr[i] for i in held])),'max_heldout_matrix_nrmse':float(max(auditerr[i] for i in held)),'encode_seconds':0.0}
+      methods[method]={'total_payload_bytes':sz['total_payload_bytes'],'weight_payload_bytes':sz['weight_payload_bytes'],'rotation_code_bytes':sz['rotation_code_bytes'],'train_layer_nrmse':float(np.mean([calerr[i] for i in train])),'heldout_layer_nrmse':float(np.mean([auditerr[i] for i in held])),'max_heldout_matrix_nrmse':float(max(auditerr[i] for i in held)),'encode_seconds':time.perf_counter()-method_t0}
       state[method]=sz
     alias=(methods['factorized_layer_block']['heldout_layer_nrmse']==methods['native_boft_factorized']['heldout_layer_nrmse'] and state['factorized_layer_block']['rotation_code_bytes']==state['native_boft_factorized']['rotation_code_bytes'])
-    report={'experiment_id':'MA-575','seed':seed,'split':split,'model_revision':MODEL_REV,'model_sha256':MODEL_SHA,'layers_train':[0,1,2,3],'layers_heldout':[4,5],'candidate_count':K,'fitted_layer_ids':lid.tolist(),'fitted_block_ids':bid.tolist(),'methods':methods,'file_sizes':state,'native_factor_alias':alias,'compute':{'factor_fit_seconds':fit_seconds,'view_ops_per_module_token':BLOCKS*GROUP*5+WIDTH,'optimizer_updates':0}}
+    report={'experiment_id':'MA-575','seed':seed,'split':split,'model_revision':MODEL_REV,'model_sha256':MODEL_SHA,'layers_train':[0,1,2,3],'layers_heldout':[4,5],'candidate_count':K,'fitted_layer_ids':lid.tolist(),'fitted_block_ids':bid.tolist(),'methods':methods,'file_sizes':state,'native_factor_alias':alias,'compute':{'model_load_seconds':model_load_seconds,'candidate_error_table_seconds':error_table_seconds,'factor_fit_seconds':fit_seconds,'total_wall_seconds':time.perf_counter()-total_t0,'view_ops_per_module_token':BLOCKS*GROUP*5+WIDTH,'optimizer_updates':0}}
     (out/'metrics.json').write_text(json.dumps(report,indent=2,sort_keys=True)+'\n'); print(json.dumps({'seed':seed,'fit_layer_ids':lid.tolist(),'fit_block_ids':bid.tolist(),'metrics':methods,'native_alias':alias},indent=2))
 
 def main():
