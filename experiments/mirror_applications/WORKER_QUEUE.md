@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-392.** MA-391 used a compact angle code (10,461B; 16.5% of full and 73.6% of direct-coefficient payload) and beat fixed composition operators, but missed the frozen vector-fidelity gate (.1248/.1391 versus <=.03); fresh remained sealed. Proceed to MA-392, token × domain factorized Mirror embedding addresses (P0).
+**Current operational pointer (2026-10-09): MA-393.** MA-392 Mirror generalized across held-out token-domain pairs at near-zero NRMSE and used 16.3% of full-table bytes, but its complete payload was 60.3-60.4% of the dense-transform control, above the frozen <=50% gate. Fresh remained sealed. Proceed to MA-393, adaptive-capacity embedding + View (P0).
 
 # Worker queue
 
