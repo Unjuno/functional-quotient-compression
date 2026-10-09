@@ -1,0 +1,66 @@
+{
+  "experiment_id": "MA-466",
+  "status": "COMPLETED_FAIL",
+  "protocol_commit": "f2255673",
+  "fresh_worlds": [
+    46610,
+    46611,
+    46612
+  ],
+  "fresh_seeds": [
+    0,
+    1,
+    2
+  ],
+  "aggregate_rows": 108,
+  "checks": [
+    {
+      "name": "artifact_tests",
+      "command": "python -m pytest -q experiments/mirror_applications/ma-466-unipelt-mirror-axes/tests",
+      "result": "pending final run"
+    },
+    {
+      "name": "payload_integrity",
+      "result": "All 108 serialized outputs checked for exact byte size and SHA256."
+    },
+    {
+      "name": "component_ablations",
+      "result": "Ablating each of the three PEFT axes increased held-out NRMSE by >10% in every fresh world."
+    },
+    {
+      "name": "mirror_specific_gate",
+      "result": "FAIL: ordinary CP parameterization exactly matches Mirror outputs, bytes, and hashes."
+    }
+  ],
+  "N36": {
+    "mirror": {
+      "heldout_nrmse": 0.00020323197854176122,
+      "bytes_per_combo": 73.69444444444444,
+      "payload_bytes": 2653.0,
+      "fit_wall_seconds": 0.4047916129978451,
+      "query_wall_seconds_mean": 2.6236179716458235e-05
+    },
+    "cp": {
+      "heldout_nrmse": 0.00020323197854176122,
+      "bytes_per_combo": 73.69444444444444,
+      "payload_bytes": 2653.0,
+      "fit_wall_seconds": 0.4047916129978451,
+      "query_wall_seconds_mean": 1.9385222508895418e-05
+    },
+    "hyper": {
+      "heldout_nrmse": 2.4381269717899463,
+      "bytes_per_combo": 126.91666666666667,
+      "payload_bytes": 4569.0,
+      "fit_wall_seconds": 0.7593775425516974,
+      "query_wall_seconds_mean": 2.460304191724087e-05
+    },
+    "unipelt": {
+      "heldout_nrmse": 0.0,
+      "bytes_per_combo": 68.58333333333333,
+      "payload_bytes": 2469.0,
+      "fit_wall_seconds": 0.0,
+      "query_wall_seconds_mean": 1.883554169681803e-05
+    }
+  },
+  "scope": "Synthetic three-component PEFT gate family only."
+}

@@ -6,10 +6,10 @@ Integration branch: `research/mirror-application-current-evidence-20261008`; can
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (139 completed; 491 UNTESTED)
+- P0: **630** (140 completed; 490 UNTESTED)
 - P1: **422** (22 completed; 400 UNTESTED)
 - P2: **103** (1 completed; 102 UNTESTED)
-- Current MA statuses: **993 UNTESTED, 44 PROMISING, 118 FAIL**
+- Current MA statuses: **992 UNTESTED, 44 PROMISING, 119 FAIL**
 - 48 experiment directories, complete with status/protocol/results/verification files, are represented in the current evidence set.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-268 is next.
@@ -186,3 +186,6 @@ KG relation rotations (RotatE, TuckER, QuatE, PairRE), EXIF/device-aware ISPs (P
 
 
 **MA-464 FAIL for routed Mirror mixture:** across four synthetic skills, N4 AdaMix reached NRMSE 3.04e-6 / 1,957B, while Mirror was 0.2235 / 2,209B. Merged models were similar (0.5931 vs 0.5966) at identical 1,705B; shared-only was 0.5962 / 1,641B. The off-orbit skill required private state. **Next: MA-466.**
+
+
+**MA-466 FAIL for Mirror-specific value; factor composition PROMISING within the synthetic task family:** factorized Mirror/CP achieved NRMSE 0.000203 at 2,653B N36, beating the trained HyperFormer MLP (2.438/4,569B); CP was exactly hash/output-equivalent. Per-combination support-fit gates were exact and smaller (2,469B). Component ablations confirmed all three mechanisms were active. No natural PEFT evidence. **Next: MA-468.**
