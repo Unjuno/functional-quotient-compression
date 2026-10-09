@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-366.** MA-364 found ordinary coefficient sharing matched the Mirror readout exactly; a fixed policy gave no Mirror compute advantage. MA-365 is P1, so proceed to MA-366 depth × expert factorized Mirror routing (P0).
+**Current operational pointer (2026-10-09): MA-367.** MA-366 failed the Mirror-specific gate: PA02 factorization was smaller, direct coefficients matched Mirror, and accidental fresh-ID generation invalidated the fresh split. Proceed to MA-367, universally slimmable network with Mirror width corrections (P0).
 
 # Worker queue
 

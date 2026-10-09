@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (99 completed; 531 UNTESTED)
+- P0: **630** (100 completed; 530 UNTESTED)
 - P1: **422** (15 completed; 407 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1039 UNTESTED, 46 PROMISING, 70 FAIL**
+- Current MA statuses: **1038 UNTESTED, 46 PROMISING, 71 FAIL**
 - 68 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -329,3 +329,9 @@ KG relation rotations (RotatE, TuckER, QuatE, PairRE), EXIF/device-aware ISPs (P
 
 - **FAIL for Mirror-specific value:** shared-basis readouts reduced payload versus independent heads, but ordinary direct coefficients matched Mirror bytes and predictions exactly. Hard sharing was smaller but worsened mixed-policy NLL by about .04. Exit fractions and average MACs were fixed and identical, so no adaptive compute benefit was tested.
 - Fresh seeds remained sealed after the development gate failed. Eight payloads replay exactly; three tests pass. Synthetic readout bank only; no trained early-exit policy or LM evidence.
+
+
+## Completed: MA-366 — Depth × expert factorized Mirror routing
+
+- **FAIL for Mirror-specific value:** all 16 oracle paths reconstructed exactly, but PA02-style factorization used fewer bytes (3,353–3,359B) than Mirror (3,713–3,719B), and direct pair coefficients matched Mirror. Flat paths used 7,941–7,967B.
+- **Protocol deviation:** runner inadvertently generated fresh IDs 36611–36613 before the development gate; these rows are preserved separately, excluded from analysis, and invalidate fresh integrity. Eight development rows replay and three tests pass. No learned-router or capacity claim.

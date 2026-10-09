@@ -1,7 +1,7 @@
 # MA-366 — Depth × expert factorized Mirror routing
 
 Status: **FAIL for Mirror-specific value** (development only; fresh split invalid)  
-Branch: `research/ma-366-depth-expert-factorized-routing-20261008`  
+Branch: `research/ma-366-depth-expert-factorized-routing-20261009`
 Base: `c935a90`  
 Prior art: PA02 shared/path-constrained MoE routing; PA49 Mixture-of-Depths.
 
