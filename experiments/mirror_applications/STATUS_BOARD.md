@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (90 completed; 540 UNTESTED)
+- P0: **630** (91 completed; 539 UNTESTED)
 - P1: **422** (14 completed; 408 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1049 UNTESTED, 45 PROMISING, 61 FAIL**
+- Current MA statuses: **1048 UNTESTED, 46 PROMISING, 61 FAIL**
 - 68 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -112,9 +112,15 @@ MA-341 and MA-342 consecutively missed the Mirror-specific byte gate because one
 
 ## Next candidate
 
-**MA-351 — MIMO + Mirror view diversity (P0)**
+## Completed: MA-351 — MIMO + Mirror view diversity
 
-Test whether explicit small Views add useful member diversity while preserving MIMO single-forward efficiency.
+- **PROMISING narrowly for storage/quality:** fresh linear rotation-orbit screen: Mirror 154 B vs generic rank-2 261 B and MIMO heads 342 B; NLL .5366 vs .5439/.5480, disagreement within .02. Batched latency is slower (110.9 μs Mirror vs 92.7 μs MIMO), and member correlation is higher. No speedup or natural capacity claim.
+
+## Next candidate
+
+**MA-352 — MIMO boundary-head compression with Mirror (P1)**
+
+Continue by compressing only MIMO's member-specific output heads while retaining its multi-input training setup.
 
 ## Active experiment
 

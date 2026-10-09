@@ -1,1 +1,26 @@
-{"experiment_id":"MA-351","commit":"pending","tests":{"command":"PYTHONDONTWRITEBYTECODE=1 pytest -q -p no:cacheprovider experiments/mirror_applications/ma-351-mimo-mirror-view-diversity/tests","passed":null,"failed":null},"serialization":{"roundtrip_checked":false,"byte_exact":false},"metric_replay":{"checked":false,"max_difference":null},"fresh_split_integrity_checked":false,"notes":[]}
+{
+  "experiment_id": "MA-351",
+  "commit": "pending-results-commit",
+  "tests": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 pytest -q -p no:cacheprovider experiments/mirror_applications/ma-351-mimo-mirror-view-diversity/tests",
+    "passed": 2,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "payloads_checked": 12
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Protocol frozen b50e32b0; implementation frozen 604ca1f4 before fresh access.",
+    "Fresh worlds 35131-35133; 12 rows for four methods.",
+    "Payload hash/bytes, NLL/Brier/ECE/accuracy/correlation/disagreement replay exactly.",
+    "Mirror inference is one batched call but measured slower than MIMO; no runtime gain.",
+    "Linear rotation-aligned synthetic tasks only; no capacity claim."
+  ]
+}

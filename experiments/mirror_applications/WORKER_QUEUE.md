@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-351.** MA-350 phase codebook reached identical mixture NLL/diversity with 429 B vs 564 B direct coefficients (24% saving) on oracle-planted K=32 modes; this is only aligned storage evidence. Proceed to MA-351, MIMO plus Mirror view diversity.
+**Current operational pointer (2026-10-09): MA-352.** MA-351 was PROMISING narrowly for storage/quality on a synthetic linear rotation orbit (154 B Mirror vs 342 B MIMO), but Mirror batched inference was slower and member correlation higher. Proceed to MA-352, compress MIMO boundary heads while retaining multi-input training.
 
 # Worker queue
 
