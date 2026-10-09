@@ -12,7 +12,7 @@
   "controls":["HyperFormer-style linear generator outputs all four adapter entries","rank-two shared-basis adapter hypernetwork","independent per-context full matrices as upper control"],
   "task":{"type":"synthetic context-conditioned linear adapters","context":"four standardized values encoding two task attributes, layer, and adapter position","adapter_target":"A(c)=A0+sum_j c_j H_j, randomized per world","input_dimension":2,"support_examples_per_context":64,"query_examples_per_context":256,"contexts_per_world":64,"heldout":"fresh task-attribute/layer/position combinations"},
   "development":{"worlds":[46100,46101],"seeds":[0,1,2],"context_ids":[100,163],"mirror_update_candidates":[200,500,1000],"selection":"select update count by minimum dev query NRMSE; no fresh tuning"},
-  "fresh":{"worlds":[46110,46111,46112],"seeds":[0,1,2],"context_ids":[3000,3063],"locked_before_access":true},
+  "fresh":{"worlds":[46110,46111,46112],"seeds":[0,1,2],"train_context_ids":[2000,2063],"heldout_context_ids":[3000,3063],"locked_before_access":true},
   "storage":{"authority":"actual serialized inference payload bytes","paid_objects":["full or factorized generator weights","shared Mirror decoder matrix","context normalization","per-context metadata and context values"],"amortization_N":[1,20,64]},
   "compute":{"report_generator_MAC":true,"report_decoder_MAC":true,"report_optimizer_updates":true,"report_fit_wall":true,"report_query_wall":true},
   "success_gate":"Every fresh world: Mirror NRMSE <=1.10x full HyperFormer generator and actual N=20 bytes <=0.70x full generator; Mirror must beat the rank-two basis control or be marked generic-control-equivalent.",
