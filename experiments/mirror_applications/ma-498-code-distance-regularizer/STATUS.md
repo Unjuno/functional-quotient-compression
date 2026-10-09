@@ -2,7 +2,7 @@
 
 - Status: FAIL
 - Branch: `research/ma-498-code-distance-regularizer-20261009`
-- Base: `eb5c7a1b`; A1 excludes duplicate-code A0
+- Base: `eb5c7a1b`; A1 excludes duplicate-code A0; verification commit `90610457`
 - Fresh: 49820-49822 × seeds 0-2
 
 H: Max-min distance selection improves noisy routing at equal 8-bit budget.
