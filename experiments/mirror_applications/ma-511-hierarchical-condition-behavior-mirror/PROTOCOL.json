@@ -1,0 +1,54 @@
+{
+  "experiment_id": "MA-511",
+  "title": "Hierarchical condition x behavior Mirror codes",
+  "status": "FROZEN_SCREENING",
+  "base_commit": "25c4f935",
+  "evidence_lane": "MECHANISM/STORAGE/HELD_OUT_COMPOSITION",
+  "hypothesis": "A condition-specific Givens View composed with shared behavior codes predicts held-out condition-behavior interventions at lower bytes than pair-specific activations and competes with generic full-matrix factorization.",
+  "physical_object": "Fixed shared 64x4 intervention basis plus per-behavior rank-4 code bank",
+  "mirror_coordinate": "Per-condition two-angle Givens View",
+  "logical_multiplicity": "12 conditions x 10 behaviors with 20% held-out pair combinations",
+  "prior_art_refs": [101],
+  "controls": [
+    "Explicit pair coefficient table (oracle storage upper control)",
+    "One shared behavior code reused across conditions",
+    "Diagonal condition x behavior factorization",
+    "Generic full 4x4 condition matrix x rank-4 behavior code",
+    "Mirror per-condition Givens View x behavior code"
+  ],
+  "task": {
+    "type": "synthetic condition x behavior intervention composition",
+    "hidden_dim": 64,
+    "rank": 4,
+    "conditions": 12,
+    "behaviors": 10,
+    "target": "c[c,b] = R(theta_c) z_b + rho*e[c,b]",
+    "rho_values": [0.0, 0.1],
+    "held_out_pair_fraction": 0.2,
+    "metrics": ["held-out NRMSE", "observed NRMSE", "serialized payload bytes", "MAC proxy", "fit time", "decode latency"]
+  },
+  "development": {
+    "worlds": [51100, 51101],
+    "seeds": [0, 1, 2],
+    "allowed": "Choose common Adam optimizer steps from {400,800} by mean Mirror held-out NRMSE; no architecture changes."
+  },
+  "fresh": {
+    "worlds": [51120, 51121, 51122],
+    "seeds": [0, 1, 2],
+    "locked_before_access": true,
+    "tuning_prohibited": true
+  },
+  "storage": {
+    "authority": "actual torch-serialized inference payload bytes",
+    "paid_objects": ["shared basis", "behavior codes", "condition Views/matrices", "pair table where used", "metadata"]
+  },
+  "compute": {
+    "report_optimizer_updates": true,
+    "report_fit_wall_time": true,
+    "report_decode_latency": true,
+    "report_mac_proxy": true
+  },
+  "success_gate": "For every rho=0 fresh world: held-out NRMSE <=.05, Mirror bytes <=80% explicit pair table, and Mirror has a useful quality/byte point over generic full-matrix factorization.",
+  "failure_gate": "Held-out quality or byte gate fails, or a simpler factorization dominates.",
+  "boundaries": ["Synthetic Givens-aligned only; no pretrained LM or natural behavior-composition claim.", "Combination count is not capacity.", "rho=.1 maps the private-state boundary."]
+}
