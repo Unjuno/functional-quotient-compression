@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-583",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m pytest -q -p no:cacheprovider experiments/mirror_applications/ma-583-factorized-mla-mirror/tests",
+    "passed": 2,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Eight rows replayed across two seeds.",
+    "Mirror and direct factorized payloads and outputs match exactly.",
+    "Native shared map collapses held-out roles; no fresh opened."
+  ]
+}

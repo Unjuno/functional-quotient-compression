@@ -1,0 +1,60 @@
+{
+  "experiment_id": "MA-583",
+  "title": "Factorized head x layer MLA Mirror code",
+  "status": "DEVELOPMENT_ONLY_FAIL_MIRROR_SPECIFIC",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY/COMPUTE/ROLE_DIVERSITY",
+  "base_commit": "0d4c52ff",
+  "hypothesis": "Factorized head x layer Mirror coordinates reconstruct held-out MLA KV roles from one shared latent basis with fewer bytes than flat tables without role collapse.",
+  "physical_object": "shared 8D MLA latent-to-4D KV basis",
+  "mirror_coordinate": "factorized head and layer scalar address",
+  "logical_multiplicity": "12 KV role maps; six held out",
+  "prior_art_refs": [
+    "PA115"
+  ],
+  "controls": [
+    "native repeated MLA map",
+    "flat role table",
+    "factorized Mirror",
+    "direct factorized coefficients"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      58301,
+      58302
+    ],
+    "heads": 4,
+    "layers": 3,
+    "latent_dim": 8,
+    "kv_dim": 4,
+    "train_roles": 6,
+    "heldout_roles": 6,
+    "selection_metric": "heldout map nMSE, distinct functions, actual bytes"
+  },
+  "fresh": {
+    "worlds_or_seeds": [],
+    "locked_before_access": true,
+    "open_only_if_development_passes": false,
+    "reason": "Direct coefficients are exact specificity control."
+  },
+  "storage": {
+    "authority": "actual deterministic NPZ inference payload",
+    "paid_objects": [
+      "shared latent map",
+      "head/layer factors",
+      "flat role maps",
+      "indices",
+      "metadata"
+    ]
+  },
+  "compute": {
+    "report_optimizer_updates": true,
+    "report_reconstruction_MACs": true,
+    "report_wall_time": true
+  },
+  "success_gate": "Heldout nMSE <=1e-6, all six heldout roles distinct, >=20% fewer bytes than flat and >=10% fewer than direct coefficients.",
+  "failure_gate": "Direct coefficient alias, heldout quality miss or role collapse.",
+  "boundaries": [
+    "oracle aligned KV operator bank",
+    "no attention-weighted metric or real MLA claim"
+  ]
+}
