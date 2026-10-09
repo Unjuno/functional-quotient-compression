@@ -4,7 +4,7 @@
 - Branch: `research/ma-519-function-vector-context-routing-20261009`
 - Model: pinned GPT-2 revision `607a30d783dfa663caf39e06633721c8d4cfcd7e`, CPU float32
 - Fresh: 51910–51912 × seeds 0–2; 9 banks; 45 rows
-- Tests: 2 passed; serialized payload hash/size checks passed
+- Result commit: `10195e6b`; verification replay tests: 2 passed; serialized payload hash/size checks passed
 
 ## H / T / D / C / U
 
