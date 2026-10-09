@@ -6,10 +6,10 @@ Integration branch: `research/mirror-application-current-evidence-20261008`; can
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (133 completed; 497 UNTESTED)
+- P0: **630** (134 completed; 496 UNTESTED)
 - P1: **422** (22 completed; 400 UNTESTED)
 - P2: **103** (1 completed; 102 UNTESTED)
-- Current MA statuses: **999 UNTESTED, 44 PROMISING, 112 FAIL**
+- Current MA statuses: **998 UNTESTED, 44 PROMISING, 113 FAIL**
 - 48 experiment directories, complete with status/protocol/results/verification files, are represented in the current evidence set.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-268 is next.
@@ -168,3 +168,6 @@ KG relation rotations (RotatE, TuckER, QuatE, PairRE), EXIF/device-aware ISPs (P
 - `CLAIM_LEDGER.csv` and each experiment's `VERIFICATION.json` are the evidence index; `STATUS_BOARD.md` is an operational cache.
 - Before allocating an ID or starting work, re-read the live registry and search for experiment branches.
 - Preserve old branches, failed results, exploratory data and locked protocols. No automatic merge to main.
+
+
+**MA-455 FAIL:** on noncommuting 2D rotation/shear products, two-angle Mirror reduced NRMSE to 1.54e-5 vs tied 6.17e-4 in mean, but independent was 3.11e-8; N20 payload was 177.65B/task vs 193.85B independent (8.4% savings, missing <=75% gate). Tied used 133.25B/task; rank-one step residual was more accurate than Mirror but 273.25B/task. Mean order commutator 0.534 and swapped-order NRMSE 0.327 confirm noncommutative probe. Initial fresh run excluded after zero/zero residual initialization; valid replacement worlds in A1. **Next: MA-457 (P0).**
