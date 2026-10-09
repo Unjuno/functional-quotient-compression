@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-482.** MA-481 found substantial continuous-address byte savings but failed the paraphrase recall gate on a crowded orbit; VQ alternatives collided. Continue with residual-code composition and full rate-distortion controls.
+**Current operational pointer (2026-10-09): MA-516.** MA-501/502 found that VQ task coordinates incur substantial distortion relative to compact shared FP16 LoReFT coordinates. Per the experimenter's same-family consecutive-failure rule, MA-503/504 and the remaining LoReFT representation-view candidates are temporarily deferred for redesign; they remain UNTESTED. The worker moved to the distinct Function Vectors family, starting with MA-516. Resume deferred candidates after specifying a representation-aware code or a stronger task-quality control.
 
 # Worker queue
 

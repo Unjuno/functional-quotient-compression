@@ -23,19 +23,21 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-503 — factorized layer x task ReFT code (P0)**
+**MA-516 — function-vector Mirror compression basis (P0; PA99)**
 
 Reason:
 - MA-470/471/473/475/476/478/481/482, MA-483, MA-484, MA-486, MA-487, MA-488, MA-492, MA-494, MA-498, MA-501 and MA-502 are completed on dedicated branches and cross-linked in the claim ledger;
-- MA-502 VQ codes saved only 132B over FP16 coordinates while failing the distortion gate; MA-501 FP16 LoReFT narrowly missed its distortion threshold; MA-498 max-min distance selection did not beat random IDs; MA-494 redundancy helped only in synthetic channel. MA-492 K<=8 missed packet-mode coverage; K16 had a scoped storage/validity gain. MA-488 private fallback exceeded the byte gate above 25% heterogeneity; MA-487 LISTA missed quality/storage; MA-486 sparse codes missed rate-distortion; MA-484 VQ experts failed quality/collision; MA-483 adaptive depth missed its byte gate.
+- MA-501 and MA-502 both found that VQ coordinates add substantial distortion over compact FP16 shared coordinates. The LoReFT representation-view family is temporarily deferred for redesign; skipped registry candidates remain UNTESTED. Work moves to the separate Function Vectors family at MA-516. Other completed candidates remain cross-linked in the claim ledger.
 
-Required controls: ordinary codes vs same-entropy code-distance regularization; compare minimum distance, noisy confusion, task quality and actual codebook bytes.
+Required controls: explicit extracted function vectors, shared PCA/Mirror basis codes, randomized/signed coefficient control, and function-vector ablation; actual serialized vector bytes and held-out function accuracy are primary.
 
-This is the next registry candidate by ID; the remaining P0 candidates after MA-482 proceed in registry order. Do not drop negative outcomes or treat synthetic PROMISING evidence as adoption.
+This temporary pointer skips the deferred LoReFT family; return to its remaining UNTESTED P0 candidates after a family redesign. Do not drop negative outcomes or treat synthetic PROMISING evidence as adoption.
 
 ## Active experiment
 
-No active experiment was declared on either inspected baseline/status chain at reconciliation. Before claiming MA-255, check live research/ma-* branches again; this statement is not a realtime worker lock.
+**MA-516 — frozen GPT-2 function-vector compression** is active on `research/ma-516-function-vector-mirror-compression-20261009`. Protocol/source are frozen before fresh evaluation. CUDA is unavailable; the pinned 124M GPT-2 runs on CPU.
+
+The next registry P0 candidate is temporarily deferred because the LoReFT representation-view family needs redesign after two consecutive VQ-vs-FP16 distortion failures. Resume its UNTESTED candidates after the separate Function Vectors screen.
 
 ## Verified status index
 

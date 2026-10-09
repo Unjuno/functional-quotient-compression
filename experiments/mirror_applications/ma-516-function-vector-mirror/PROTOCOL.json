@@ -1,0 +1,106 @@
+{
+  "experiment_id": "MA-516",
+  "title": "Function-vector Mirror compression basis",
+  "status": "FROZEN_SCREENING",
+  "base_commit": "873dd449",
+  "evidence_lane": "FROZEN_LM_FUNCTION_VECTORS/ICL_ACCURACY/ACTUAL_BYTES/INTERFERENCE",
+  "model": {
+    "id": "openai-community/gpt2",
+    "revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+    "parameters": 124439808,
+    "dtype": "float32",
+    "device": "CPU",
+    "checkpoint_file_bytes": 548105171,
+    "inference_runtime_files_bytes": 550959861
+  },
+  "hypothesis": "Function vectors extracted as hidden-state deltas from support demonstrations can be compressed into a shared PCA Mirror basis while preserving held-out in-context mapping accuracy, at lower intervention payload bytes than explicit per-task vectors.",
+  "physical_object": "one frozen GPT-2 LM and one shared layer-6 residual-stream intervention site",
+  "mirror_coordinate": "task-specific coefficient vector over a development-fitted shared function-vector basis",
+  "logical_multiplicity": "8 arbitrary object-to-color mapping tasks per world, with four held-out queries each",
+  "prior_art_refs": [
+    99
+  ],
+  "controls": [
+    "query-only frozen LM baseline",
+    "direct in-context demonstrations",
+    "explicit full-precision function vector per task",
+    "PCA Mirror coordinates ranks 4/8/16"
+  ],
+  "task": {
+    "type": "few-shot arbitrary object-to-color mapping with GPT-2",
+    "support_keys": [
+      "apple",
+      "banana",
+      "cherry",
+      "lemon"
+    ],
+    "query_keys": [
+      "orange",
+      "peach",
+      "pear",
+      "plum"
+    ],
+    "colors": [
+      "red",
+      "blue",
+      "green",
+      "yellow",
+      "purple",
+      "black",
+      "white",
+      "pink"
+    ],
+    "tasks_per_world": 8,
+    "metrics": [
+      "held-out target-token accuracy",
+      "mean target log probability",
+      "function-vector reconstruction NRMSE",
+      "actual serialized intervention bytes",
+      "task interference and ablation"
+    ]
+  },
+  "development": {
+    "worlds": [
+      51600,
+      51601
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "allowed": "fit PCA basis from development function vectors only; fixed layer 6 and ranks 4/8/16; no fresh-dependent changes"
+  },
+  "fresh": {
+    "worlds": [
+      51610,
+      51611,
+      51612
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual serialized intervention payload bytes; separately charge the exact GPT-2 safetensors checkpoint plus root tokenizer/config files used at inference (not duplicate ONNX/TF/TFLite/Flax exports)",
+    "paid_objects": [
+      "explicit task vectors or shared PCA mean/basis and task coefficients",
+      "all metadata and reconstruction state"
+    ]
+  },
+  "compute": {
+    "report_model_forward_passes": true,
+    "report_vector_extraction_and_projection_ops": true,
+    "report_CPU_wall_clock": true
+  },
+  "success_gate": "Direct ICL baseline must exceed chance (12.5%) in every fresh world; at least one PCA rank must retain >=90% of explicit-vector accuracy and use <=50% of explicit-vector payload bytes in every fresh world.",
+  "failure_gate": "Direct ICL baseline is not above chance, explicit function vectors do not improve held-out target accuracy over query-only, or PCA compression loses >10% explicit-vector accuracy / misses the byte gate.",
+  "boundaries": [
+    "Single small GPT-2 checkpoint and synthetic arbitrary word mappings; not a reproduction of GPT-J Function Vectors or a broad NLP benchmark.",
+    "Function vectors are extracted from support activations with a fixed contrastive prompt; no model weight updates.",
+    "Causal function accuracy, not code combination count, determines usefulness."
+  ]
+}
