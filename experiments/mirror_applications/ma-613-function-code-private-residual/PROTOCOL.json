@@ -1,0 +1,21 @@
+{
+  "experiment_id":"MA-613",
+  "title":"Shared function code basis with sparse private residuals",
+  "status":"SCREENING",
+  "evidence_lane":"MECHANISM/STORAGE",
+  "base_commit":"50d9c1f1",
+  "hypothesis":"A shared signature/phase Mirror code plus sparse private residuals preserves off-orbit functions when exceptions are rare and is smaller than full per-function codes up to a measurable private-fraction boundary.",
+  "physical_object":"one shared Fourier interpreter with four phase-view signatures",
+  "mirror_coordinate":"one Givens phase per function; sparse private residual coefficients for off-orbit frequency-5 behavior",
+  "logical_multiplicity":"64 functions, each either on the shared phase orbit or carrying a private residual",
+  "prior_art_refs":["PA128"],
+  "controls":["shared Mirror signatures/angles with no private residual","partial private residual recovery at 0%, 50%, and 100% of private functions","full per-function ten-coefficient Fourier code"],
+  "fixture":"64 functions; base sin(omega_s*x+phase) over four signatures; private tasks add 0.35*sin(5*x+psi); sweep private fractions 0, 1/8, 1/4, 1/2, 1",
+  "development":{"worlds_or_seeds":[61301,61302],"query_examples_per_function":512,"optimizer_updates":0,"selection_metric":"mean function NRMSE2 and actual serialized payload bytes across private fractions/residual counts"},
+  "fresh":{"worlds_or_seeds":[],"locked_before_access":true,"run_only_if":"not applicable; deterministic code-algebra sweep"},
+  "storage":{"authority":"actual serialized inference payload bytes","format":"torch.save exact code banks","paid_objects":["all signature IDs and Mirror angles","every private residual index and value","full code matrices and metadata"]},
+  "compute":{"report_tokens_or_examples":true,"report_optimizer_updates":true,"report_active_compute_proxy":true,"report_isolated_wall_clock":true,"proxy":"report shared phase decode plus active residual additions; full code decodes ten Fourier coefficients per function"},
+  "success_gate":"At private fractions <=0.25, full residual recovery has NRMSE2 <=1e-6 and payload <=0.85x full per-function code; report the measured fraction where this stops holding.",
+  "failure_gate":"No <=25% private point meets exact quality and byte ratio.",
+  "boundaries":["Analytic Fourier function family, not a learned interpreter.","Private residuals are known deterministic target coefficients; no training or selection model.","No language or general task-capacity claim."]
+}
