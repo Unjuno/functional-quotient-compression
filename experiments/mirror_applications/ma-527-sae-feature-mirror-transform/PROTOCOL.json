@@ -1,7 +1,12 @@
 {
   "experiment_id": "MA-527",
   "title": "Mirror transform over SAE feature space",
-  "status": "SCREENING",
+  "status": "SCREENING_AMENDED",
+  "amendment_1": {
+    "date": "2026-10-09",
+    "reason": "The first development implementation applied the frozen alpha=0.5 to compressed interventions but evaluated the explicit-FV reference at alpha=1.0. This amplitude mismatch invalidates that gate comparison. Preserve the initial run as a superseded diagnostic, and apply the same alpha to explicit FV and all intervention controls on rerun. No fresh examples were accessed and no configuration or data split changes.",
+    "supersedes": "Initial development summary with unmatched explicit-FV scale; retained under runs/preflight_scale_mismatch/"
+  },
   "evidence_lane": "SAE_FEATURE_STEERING/QUALITY/SPARSITY/ACTUAL_BYTES/COMPUTE",
   "base_commit": "c935a903",
   "prior_art_refs": ["PA102", "PA96"],
@@ -44,9 +49,10 @@
     "fresh_open_rule": "Open only after both dev seeds meet the quality, sparsity, and byte gates; freeze all transform and scale settings before opening. Fresh IDs and seeds are fixed here."
   },
   "development": {
-    "allowed_selection": ["Givens pattern scale in {0.05,0.1,0.2,0.4}", "intervention scale in {0.25,0.5,1.0}"],
+    "fixed_configuration": {"givens_pattern_scale": 0.1, "intervention_scale": 0.5},
+    "selection": "No hyperparameter selection; evaluate one preregistered configuration for both development seeds.",
     "optimizer_updates": 0,
-    "selection_metric": "mean dev gold-token log-probability uplift subject to sparsity and byte gates",
+    "selection_metric": "dev gold-token log-probability, candidate accuracy, post-transform nonzeros, and actual serialized bytes; dev is a gate only",
     "changes_after_run": "prohibited without numbered amendment"
   },
   "storage": {
