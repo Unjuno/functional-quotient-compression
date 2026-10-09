@@ -1,0 +1,15 @@
+{
+ "experiment_id":"MA-325","title":"Tensorized embedding domain Mirror views","status":"SCREENING","base_commit":"2bd30fc2","prior_art_refs":[34],"evidence_lane":"TENSORIZED_EMBEDDING/QUALITY/ACTUAL_BYTES/DOMAIN_TRANSFER",
+ "hypothesis":"A shared Tensor-Train embedding bank with a low-description Mirror view on one core can express multiple domain-specific embedding tables using fewer bytes than independent domain cores, while preserving held-out token lookups; generic PCA is the control.",
+ "physical_object":"shared TT embedding cores representing 256x256 tables with rank-2 bonds","mirror_coordinate":"one Givens angle per domain acting on a shared middle TT core","logical_multiplicity":"32 domain-specific embedding tables",
+ "model":{"vocabulary_rows":256,"embedding_dim":256,"tt_modes":[4,4,4,4],"bond_rank":2,"domains":32,"lookups_per_domain":64},
+ "strata":["aligned domain core rotations","independent domain-specific cores"],
+ "controls":["independent full domain embedding tables","shared outer TT cores plus independent domain middle core","shared TT core plus Mirror domain angles","generic rank-2 PCA over domain middle cores"],
+ "development":{"worlds":[32500,32501],"seeds":[0,1,2],"selection_metric":"actual serialized bytes, table NRMSE, held-out token lookup NRMSE, code fitting time"},
+ "fresh":{"worlds":[32510,32511,32512],"seeds":[0,1,2],"locked_before_access":true},
+ "storage":{"authority":"actual serialized inference payload bytes after fp16 decode","paid_objects":["full embedding tables or shared TT cores","domain core factors or Mirror angles","PCA mean/basis/codes","metadata"]},
+ "success_gate":"Aligned lookup NRMSE <=0.01 and at least 20% fewer bytes than independent domain TT cores; generic PCA matching Mirror means no Mirror-specific claim. Independent cores test domain-private boundary.",
+ "failure_gate":"Mirror misses lookup quality/storage gate or generic PCA matches/improves; independent domains requiring private cores mark the boundary.",
+ "compute":{"report_token_lookups":true,"report_code_fit_seconds":true,"report_optimizer_updates":0,"report_actual_bytes":true},
+ "boundaries":["Synthetic embedding tables only","Aligned teacher domains are generated from the same Givens core action","No token language modeling, NLL, or transfer training","All methods serialized fp16 and decoded before lookup evaluation"]
+}
