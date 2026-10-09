@@ -6,11 +6,11 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (40 completed; 590 UNTESTED)
+- P0: **630** (41 completed; 589 UNTESTED)
 - P1: **422** (12 completed; 410 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1103 UNTESTED, 34 PROMISING, 18 FAIL**
-- 51 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
+- Current MA statuses: **1102 UNTESTED, 34 PROMISING, 19 FAIL**
+- 52 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
 - Thirteenth literature sweep added MA-996..1045 (50 UNTESTED; 40 P0/10 P1) and PA296..PA325. IDs MA-1000+ use four digits; consult `check_registry_integrity.py`. No new experiment results.
@@ -23,13 +23,13 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-478 — edit View first, private memory fallback (P0; PA89/PA90)**
+**MA-481 — VQ Mirror address codebook (P0; PA91)**
 
 Reason:
-- MA-470/471/473/475/476 are completed on dedicated branches and cross-linked in the claim ledger;
-- MA-472/474/477 are P1 composition/factorization follow-ups; MA-478 is the next P0 shared/private allocation test.
+- MA-470/471/473/475/476/478 are completed on dedicated branches and cross-linked in the claim ledger;
+- MA-472/474/477/479 are P1 editing follow-ups; MA-481 is the next P0 address-codebook candidate.
 
-Required controls: native GRACE/SERAC explicit edit memory, shared View-only with no fallback, shared/private allocation, and always-private storage. Freeze the fallback threshold before fresh; measure edit success, fallback fraction, actual bytes/edit, false triggers and query latency.
+Required controls: learned/native VQ-VAE codebook with index bits, continuous key coordinates, generic vector quantization and an uncompressed address. Isolate retrieval-address compression from edit-value compression; measure collision/false-trigger rate, retrieval recall, bytes and lookup cost.
 
 If blocked by a documented reproducibility or harness issue, record it and resume at MA-260 (BatchEnsemble), then MA-261/265/268 in the registered literature priority sequence. Do not jump to P1/novelty-picked topics before P0.
 
@@ -102,3 +102,6 @@ KG relation rotations (RotatE, TuckER, QuatE, PairRE), EXIF/device-aware ISPs (P
 
 
 **MA-476 PROMISING for aligned GRACE value compression:** at N64 Mirror used 7,449B vs explicit GRACE key/radius/value 10,973B, generic shared Cartesian coefficients 7,705B, and VQ K=8/16/32/64 at 7,641/8,153/9,177/11,225B. Recall was 100%, false triggers 0 and Mirror NRMSE <1.3e-7; VQ errors ranged 0.249–0.031. The incremental saving over generic coefficients is 3.3%; fixed-norm synthetic orbit only. **Next: MA-478 (P0); MA-477 remains P1.**
+
+
+**MA-478 FAIL for the preregistered <=80% storage gate:** development selected tau=0.30; N64 retained exact outputs with 19/64 private values but used 9,485B vs 10,973B explicit (86.4%). View-only had 0.194 mean NRMSE. Generic adaptive coefficients used 9,741B, so the Mirror saving was only 2.6%. Full private vectors restore quality but erase much of the compression. **Next: MA-481 (P0); MA-479 remains P1.**
