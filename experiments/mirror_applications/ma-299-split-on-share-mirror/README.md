@@ -23,3 +23,7 @@ This may only reproduce generic low-rank compression plus an ordinary residual t
 Synthetic linear task storage screen only; no faithful SETA training, routing, or retention.
 
 Development: the fixed threshold split all four later novel tasks and no initial shared tasks. Adaptive Mirror payload was 11,543 B vs 20,590 B for independent sparse vectors (about 44% lower), with query NRMSE ~1.9e-7. Generic PCA split was effectively identical at 11,539 B. Never-split was smaller but query NRMSE ~0.89. Sparse residual indices use int16 and values float32; numerical residuals below 1e-6 are omitted as reconstruction tolerance.
+
+## Fresh result / decision
+
+FAIL for Mirror-specific value. Fresh worlds reproduced all four threshold split events and ~44% payload savings versus independent sparse tasks at query NRMSE ~2.09e-7. Never-split remained much smaller but had NRMSE ~0.88. Generic PCA with the same residual threshold matched the Mirror result.

@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-299.** MA-297 showed shared-subspace compression versus shared/private storage, but generic PCA matched the Mirror code. Continue to MA-299, Split-on-Share Mirror code allocation.
+**Current operational pointer (2026-10-09): MA-301.** MA-299 showed adaptive low-rank split allocation saved ~44% versus independent sparse task vectors, while generic PCA matched Mirror. Continue to MA-301 continuous Mirror supermask versus SupSup/Piggyback binary masks.
 
 # Worker queue
 

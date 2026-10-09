@@ -1,19 +1,59 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
-  "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+  "experiment_id": "MA-299",
+  "decision": "FAIL for Mirror-specific value; adaptive allocation signal observed",
+  "protocol_commit": "64695862",
+  "fresh_worlds": [
+    29910,
+    29911,
+    29912
+  ],
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "fresh_rows": 36,
+  "means": {
+    "adaptive_mirror_split": {
+      "split_count": 4.0,
+      "novel_split_count": 4.0,
+      "query_nrmse": 2.0861065921609327e-07,
+      "payload_bytes": 11542.111111111111
+    },
+    "generic_pca_split": {
+      "split_count": 4.0,
+      "novel_split_count": 4.0,
+      "query_nrmse": 2.0861065921609327e-07,
+      "payload_bytes": 11538.111111111111
+    },
+    "independent_private": {
+      "split_count": 10.0,
+      "novel_split_count": 10.0,
+      "query_nrmse": 0.0,
+      "payload_bytes": 20590.0
+    },
+    "never_split": {
+      "split_count": 0.0,
+      "novel_split_count": 0.0,
+      "query_nrmse": 0.8807848625712924,
+      "payload_bytes": 3295.0
+    }
   },
-  "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
-  },
-  "metric_replay": {
-    "checked": false,
-    "max_difference": null
-  },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "facts": [
+    "Threshold splits all four later novel tasks in every fresh run.",
+    "Adaptive Mirror payload ~11542 B, independent private ~20590 B, never-split ~3295 B.",
+    "Adaptive and generic PCA query NRMSE both ~2.09e-7; never-split query NRMSE ~0.88.",
+    "Sparse residual indices are int16; values and basis/code are float32; payload includes metadata."
+  ],
+  "interpretation": "Split-on-share delays storage growth versus independent private tasks while retaining quality on this synthetic stream, but generic PCA plus the same residual threshold is equivalent. No Mirror-specific advantage is established.",
+  "hypothesis": "Physical split can be delayed by low-rank shared task representation; Mirror-specific version fails against generic PCA.",
+  "counter_hypothesis": "The stream is constructed to have six low-rank tasks followed by sparse outliers, making the threshold decision easy; no learned task overlap or forgetting is present.",
+  "limitations": [
+    "Synthetic linear sequence only",
+    "No faithful SETA or SupSup baseline",
+    "No optimizer, router or catastrophic forgetting",
+    "No inference throughput measure"
+  ],
+  "fresh_data_used_for_tuning": false,
+  "source_sha256": "8893c4520a6e4707222a4639b3571f659282a9a4d3640650d1c1ba1c201bd8e2"
 }
