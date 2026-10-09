@@ -7,9 +7,9 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 - Registered candidates: **1155**
 - P0: **630** (91 completed; 539 UNTESTED)
-- P1: **422** (14 completed; 408 UNTESTED)
+- P1: **422** (15 completed; 407 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1048 UNTESTED, 46 PROMISING, 61 FAIL**
+- Current MA statuses: **1047 UNTESTED, 46 PROMISING, 62 FAIL**
 - 68 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -118,9 +118,15 @@ MA-341 and MA-342 consecutively missed the Mirror-specific byte gate because one
 
 ## Next candidate
 
-**MA-352 — MIMO boundary-head compression with Mirror (P1)**
+## Completed: MA-352 — MIMO boundary-head compression with Mirror
 
-Continue by compressing only MIMO's member-specific output heads while retaining its multi-input training setup.
+- **FAIL for diversity preservation:** fresh Mirror total payload 4,744 B vs MIMO 6,500 B, but member disagreement collapsed to .00003 and correlation reached 1.000, nearly identical to single shared head (4,708 B, zero disagreement). Storage savings removed MIMO member diversity; no capacity claim.
+
+## Next candidate
+
+**MA-353 — Bayesian distribution over Mirror coordinates (P0)**
+
+Test posterior uncertainty over a low-description View code against posterior uncertainty over shared weights.
 
 ## Active experiment
 

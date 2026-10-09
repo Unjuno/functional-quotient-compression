@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-352.** MA-351 was PROMISING narrowly for storage/quality on a synthetic linear rotation orbit (154 B Mirror vs 342 B MIMO), but Mirror batched inference was slower and member correlation higher. Proceed to MA-352, compress MIMO boundary heads while retaining multi-input training.
+**Current operational pointer (2026-10-09): MA-353.** MA-352 reduced payload to 4,744 B vs MIMO 6,500 B but collapsed member disagreement to .00003 (correlation 1.0), nearly the single shared head. It fails diversity preservation. Proceed to MA-353, Bayesian distribution over Mirror coordinates.
 
 # Worker queue
 
