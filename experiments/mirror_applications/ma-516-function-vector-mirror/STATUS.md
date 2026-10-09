@@ -2,7 +2,7 @@
 
 - Status: FAIL
 - Branch: `research/ma-516-function-vector-mirror-compression-20261009`
-- Protocol/source freeze: `e6d6dd31`
+- Protocol/source freeze: `e6d6dd31`; result commit `349c9c20`
 - Model: pinned GPT-2 124,439,808 parameters, CPU float32; inference runtime files 550,959,861B
 - Fresh: worlds 51610-51612 × seeds 0-2; corrected timing replay completed
 
