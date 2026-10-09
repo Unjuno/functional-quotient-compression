@@ -188,7 +188,7 @@ High-information P0:
 13. MA-546 — representation-space symmetry audit (**FAIL for added functional multiplicity; invariance established**)
 14. MA-547 — RoseLoRA versus Mirror edit locality (**FAIL; fresh remained sealed after dev gate miss**)
 15. MA-550 — adaptive allocation between weight-space and activation-space Views (**FAIL for Mirror-specific attribution; synthetic mixed allocation passes; native sparse-bias + ReFT control exactly explains result**)
-16. MA-551 — FiLM-to-Mirror hierarchy (**next P0**)
+16. MA-551 — FiLM-to-Mirror hierarchy (**SCREENING; fused-kernel protocol frozen; dev pending; fresh sealed**)
 
 ## KV-cache transformation research lane
 

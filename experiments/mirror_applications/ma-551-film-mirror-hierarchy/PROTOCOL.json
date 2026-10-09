@@ -1,0 +1,22 @@
+{
+  "experiment_id": "MA-551",
+  "title": "FiLM-to-Mirror hierarchy with fused Givens inference",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/RUNTIME",
+  "base_commit": "3d2e12a7",
+  "hypothesis": "Shared FiLM state plus small per-function Givens views will recover hierarchical context-specific affine functions with lower bytes than independent FiLM/full affine while fused-kernel throughput remains at least 0.80x independent FiLM.",
+  "physical_object": "Shared 16-dimensional feature-space affine transformation",
+  "mirror_coordinate": "Eight disjoint pairwise Givens angles per logical function",
+  "logical_multiplicity": "Eight context-specific affine functions from one shared FiLM state",
+  "prior_art_refs": ["PA106", "PA63", "PA65"],
+  "controls": ["tied FiLM", "independent FiLM", "shared FiLM + Mirror Givens", "native shared FiLM + Givens angle adapter", "shared FiLM + rank-4 private residual", "independent full affine upper control"],
+  "world": {"width": 16, "functions": 32, "disjoint_rotations_per_function": 8, "heldout_vectors_per_function": 1024, "theta_range_radians": [-0.6, 0.6], "operator_codes": "oracle teacher codes; no task adaptation is claimed"},
+  "development": {"worlds_or_seeds": [55101, 55102], "selection_metric": "max per-function NRMSE, actual serialized bytes, fused-kernel throughput ratio"},
+  "fresh": {"worlds_or_seeds": [55111, 55112, 55113], "locked_before_access": true},
+  "training": {"optimizer_updates": 0, "state_construction": "closed-form teacher codes, oracle diagonal least-squares projection, rank-4 SVD residual"},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["NPZ arrays and metadata per method/world", "shared FiLM state for tied methods", "per-function angles or private residuals", "context/function IDs"], "free_state": "Givens sin/cos derived from saved angles during model load; no cached table is serialized"},
+  "compute": {"kernel": "compiled C; fused FiLM + disjoint Givens", "warmup_calls": 10, "timed_calls": 30, "examples_per_timed_bank_call": 32768, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true},
+  "success_gate": "Both development worlds: Mirror max per-function NRMSE <= 0.01, payload <= 0.75x independent FiLM and <= 0.10x full affine, and fused Mirror throughput >= 0.80x independent FiLM.",
+  "failure_gate": "Any development quality/storage/runtime gate misses, or a native ordinary control exactly aliases Mirror code/output.",
+  "boundaries": ["Synthetic Givens-aligned mechanism only", "Fresh worlds remain sealed after any dev gate miss", "Native Givens adapter is a direct alias counter-control", "No neural-language or natural task capacity claim"]
+}
