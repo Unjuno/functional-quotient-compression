@@ -1,0 +1,46 @@
+{
+  "development_seeds": [
+    59601,
+    59602
+  ],
+  "experiment_id": "MA-596",
+  "fresh_data_artifacts_present": false,
+  "fresh_seeds_accessed": [],
+  "gate_decision": "FAIL: tiered quality passes, but both byte ratios exceed 0.75; rank-4 alone misses per-task quality and exactly aliases native PCA.",
+  "method": "deterministic replay of all registered dev seeds; verify payload bytes/hashes, FP16 roundtrip, exact native PCA alias, quality and byte gates",
+  "protocol_sha256": "9c497db83d03a5c58f248c35ff4416de1d32e58421e116c7c070c809d3929628",
+  "results": {
+    "59601": {
+      "mean_tiered_max_delta_nll": 0.02087491750717163,
+      "mirror_max_delta_nll": 0.07793211936950684,
+      "payload_replay_exact": true,
+      "payload_sha256": {
+        "independent_payload.npz": "e35a6cd8239af5636c671467e796269bfb87bdbe4df9cea4386a2308e756a24b",
+        "native_rank4_payload.npz": "ec458c0a128819f5630227fdcfa87e48b5e488089b9e44f3f50b22ffed981b69",
+        "shared_only_payload.npz": "a76ba660f26a2e6f78ae96a55a40914bfec0cd6c46f556375bf8f9289ffcafdf",
+        "tiered_payload.npz": "90c3518b801ebae4d3d432afc4c07359e5a3c7205a9b01f48259675b44f070a7"
+      },
+      "private_count": 1,
+      "tiered_byte_ratio": 0.7700693756194251
+    },
+    "59602": {
+      "mean_tiered_max_delta_nll": 0.020183444023132324,
+      "mirror_max_delta_nll": 0.08963769674301147,
+      "payload_replay_exact": true,
+      "payload_sha256": {
+        "independent_payload.npz": "534c611f1e6eca1c3ed835963003afaed17c273f3f6963dbc15cf2ddd782fdeb",
+        "native_rank4_payload.npz": "63cfeba73d1e3ab7c6d2dc5c66ea7996f4e65279f535bdc2c2068ded8071650f",
+        "shared_only_payload.npz": "5884762b685d74ac0a57c3dcff247367b7351deee841af9ec4d36f37085f2084",
+        "tiered_payload.npz": "35f4673b924967cdae8a9fb040b36c50238552b099ae6a28bcf067e6bd044080"
+      },
+      "private_count": 2,
+      "tiered_byte_ratio": 0.8931435264438238
+    }
+  },
+  "source_sha256": "2a4a9eaf081a42a2d2259ff157bae6af713568cc6b9d6d6c98fdfd65d0527382",
+  "status": "FAIL",
+  "tests": {
+    "failed": 0,
+    "passed": 2
+  }
+}

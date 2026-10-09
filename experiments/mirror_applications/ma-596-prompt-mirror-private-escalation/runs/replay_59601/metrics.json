@@ -1,0 +1,196 @@
+{
+  "common_backbone_bytes": 166029852,
+  "compute": {
+    "added_prompt_embedding_ops_per_example": 4096,
+    "device": "cpu",
+    "full_prompt_inference_seconds": 2.6978617100103293,
+    "torch_threads": 4,
+    "total_wall_seconds": 84.64869563101092,
+    "virtual_tokens_per_example": 8
+  },
+  "cumulative_reencode_seconds": 0.08330652699805796,
+  "dataset_file": "train.txt",
+  "dataset_sha256": "9e9fa1ad55b1c2c95b08e37dd8e653f638fac2c6de904b79e813611eefbc985f",
+  "experiment_id": "MA-596",
+  "full_deployment_bytes": 166081134,
+  "full_prompt_eval_seconds": 2.6978626210038783,
+  "hidden_size": 512,
+  "independent_full_deployment_bytes": 166096446,
+  "mean_task_training_seconds": 3.8438651516262325,
+  "model_load_seconds": 0.07204697700217366,
+  "model_revision": "e93a9faa9c77e5d09219f6c868bfc7a1bd65593c",
+  "model_sha256": "3da388330e4549156d76b58d6d268c63cd005e9336b4f4d2d378421e7b7a33fd",
+  "optimizer_updates": 64,
+  "private_threshold_nat_per_token": 0.05,
+  "prompt_length": 8,
+  "rank": 4,
+  "retention_trace": [
+    {
+      "cumulative_reencode_seconds": 0.0006909910007379949,
+      "max_tiered_delta_nll": 0.0,
+      "mean_rank4_delta_nll": 0.0,
+      "old_task_max_drift": 0.0,
+      "private_count": 0,
+      "private_task_indices": [],
+      "tasks_seen": 1
+    },
+    {
+      "cumulative_reencode_seconds": 0.0015659640048397705,
+      "max_tiered_delta_nll": -7.253885269165039e-05,
+      "mean_rank4_delta_nll": -7.784366607666016e-05,
+      "old_task_max_drift": -8.314847946166992e-05,
+      "private_count": 0,
+      "private_task_indices": [],
+      "tasks_seen": 2
+    },
+    {
+      "cumulative_reencode_seconds": 0.002399887001956813,
+      "max_tiered_delta_nll": -1.5020370483398438e-05,
+      "mean_rank4_delta_nll": -3.250439961751302e-05,
+      "old_task_max_drift": -1.5020370483398438e-05,
+      "private_count": 0,
+      "private_task_indices": [],
+      "tasks_seen": 3
+    },
+    {
+      "cumulative_reencode_seconds": 0.0178884439956164,
+      "max_tiered_delta_nll": 7.343292236328125e-05,
+      "mean_rank4_delta_nll": -2.0235776901245117e-05,
+      "old_task_max_drift": 2.288818359375e-05,
+      "private_count": 0,
+      "private_task_indices": [],
+      "tasks_seen": 4
+    },
+    {
+      "cumulative_reencode_seconds": 0.04427857398695778,
+      "max_tiered_delta_nll": -3.707408905029297e-05,
+      "mean_rank4_delta_nll": -4.621744155883789e-05,
+      "old_task_max_drift": -3.707408905029297e-05,
+      "private_count": 0,
+      "private_task_indices": [],
+      "tasks_seen": 5
+    },
+    {
+      "cumulative_reencode_seconds": 0.04553086499799974,
+      "max_tiered_delta_nll": 0.02255302667617798,
+      "mean_rank4_delta_nll": 0.01028535763422648,
+      "old_task_max_drift": 0.020260155200958252,
+      "private_count": 0,
+      "private_task_indices": [],
+      "tasks_seen": 6
+    },
+    {
+      "cumulative_reencode_seconds": 0.06033298998954706,
+      "max_tiered_delta_nll": 0.020629167556762695,
+      "mean_rank4_delta_nll": 0.016339259488242015,
+      "old_task_max_drift": 0.020629167556762695,
+      "private_count": 1,
+      "private_task_indices": [
+        6
+      ],
+      "tasks_seen": 7
+    },
+    {
+      "cumulative_reencode_seconds": 0.08330652699805796,
+      "max_tiered_delta_nll": 0.02087491750717163,
+      "mean_rank4_delta_nll": 0.016745805740356445,
+      "old_task_max_drift": 0.02087491750717163,
+      "private_count": 1,
+      "private_task_indices": [
+        6
+      ],
+      "tasks_seen": 8
+    }
+  ],
+  "seed": 59601,
+  "sequence": {
+    "delta_vs_full": [
+      0.002571702003479004,
+      0.005327820777893066,
+      -0.007993757724761963,
+      0.002202451229095459,
+      0.01883518695831299,
+      0.02087491750717163,
+      4.76837158203125e-07,
+      0.014216005802154541
+    ],
+    "full_nll": [
+      3.956295430660248,
+      3.8182778358459473,
+      4.264524579048157,
+      3.6960134506225586,
+      3.9300254583358765,
+      4.241020441055298,
+      4.777583718299866,
+      3.968698561191559
+    ],
+    "independent_bytes": 66594,
+    "independent_sha256": "e35a6cd8239af5636c671467e796269bfb87bdbe4df9cea4386a2308e756a24b",
+    "max_old_task_drift": 0.02087491750717163,
+    "mirror_bytes": 51282,
+    "mirror_delta_vs_full": [
+      0.002571702003479004,
+      0.005327820777893066,
+      -0.007993757724761963,
+      0.002202451229095459,
+      0.01883518695831299,
+      0.02087491750717163,
+      0.07793211936950684,
+      0.014216005802154541
+    ],
+    "mirror_inference_payload_bytes_per_task": 6410.25,
+    "mirror_rank4_inference_seconds": 2.65925950500241,
+    "mirror_rank4_nll": [
+      3.958867132663727,
+      3.8236056566238403,
+      4.256530821323395,
+      3.698215901851654,
+      3.9488606452941895,
+      4.2618953585624695,
+      4.855515837669373,
+      3.9829145669937134
+    ],
+    "mirror_sha256": "90c3518b801ebae4d3d432afc4c07359e5a3c7205a9b01f48259675b44f070a7",
+    "native_rank4_bytes": 42564,
+    "native_rank4_sha256": "ec458c0a128819f5630227fdcfa87e48b5e488089b9e44f3f50b22ffed981b69",
+    "private_count": 1,
+    "private_fraction": 0.125,
+    "reencode_macs_proxy": 2228224,
+    "shared_only_bytes": 9244,
+    "shared_only_inference_seconds": 2.8438410950038815,
+    "shared_only_nll": [
+      3.9981199502944946,
+      3.870089590549469,
+      4.283869445323944,
+      3.7402002215385437,
+      4.0043511390686035,
+      4.262857556343079,
+      4.872179746627808,
+      3.979561507701874
+    ],
+    "tiered_inference_seconds": 2.6837476340006106,
+    "tiered_nll": [
+      3.958867132663727,
+      3.8236056566238403,
+      4.256530821323395,
+      3.698215901851654,
+      3.9488606452941895,
+      4.2618953585624695,
+      4.777584195137024,
+      3.9829145669937134
+    ]
+  },
+  "split": "dev",
+  "task_count": 8,
+  "task_titles": [
+    "Tales of Destiny 2",
+    "History of Braathens SAFE ( 1946 \u2013 93 )",
+    "Simon Bradstreet",
+    "LiSA ( Japanese musician , born 1987 )",
+    "Pattycake ( gorilla )",
+    "Skye",
+    "Norman Finkelstein",
+    "The Stolen Eagle"
+  ],
+  "total_task_training_seconds": 30.75092121300986
+}

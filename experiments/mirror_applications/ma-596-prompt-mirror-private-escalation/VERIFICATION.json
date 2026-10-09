@@ -1,11 +1,31 @@
 {
   "experiment_id": "MA-596",
-  "status": "FROZEN_BEFORE_DEVELOPMENT",
+  "status": "FAIL",
   "protocol_frozen": true,
   "fresh_seeds_accessed": [],
-  "payload_replay_checked": false,
+  "payload_replay_checked": true,
   "notes": [
     "Protocol and thresholds were fixed before any MA-596 task prompt training or fresh data access.",
-    "Amendment 1 repaired prompt flattening before any metrics or inference payloads; original failure is preserved under runs/preflight_failures/."
-  ]
+    "Amendment 1 repaired prompt flattening before any metrics or inference payloads; original failure is preserved under runs/preflight_failures/.",
+    "Both dev banks miss the frozen <=0.75x tiered byte gate; fresh remained unopened.",
+    "Rank-4 Mirror and native PCA payload arrays/output are identical.",
+    "Same-seed replay regenerated all four inference payloads per bank with byte-identical SHA-256; core metrics, escalation counts, task order, and retention values matched exactly. Wall-clock fields were excluded.",
+    "Fresh test articles remained unopened because both development byte ratios exceeded 0.75."
+  ],
+  "development_seeds": [
+    59601,
+    59602
+  ],
+  "tests": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=experiments/mirror_applications/ma-596-prompt-mirror-private-escalation/source python -m pytest -q experiments/mirror_applications/ma-596-prompt-mirror-private-escalation/tests",
+    "passed": 2,
+    "failed": 0
+  },
+  "protocol_sha256": "9c497db83d03a5c58f248c35ff4416de1d32e58421e116c7c070c809d3929628",
+  "source_sha256": "2a4a9eaf081a42a2d2259ff157bae6af713568cc6b9d6d6c98fdfd65d0527382",
+  "mirror_native_core_arrays_identical": true,
+  "quality_gate_passed": true,
+  "byte_gate_passed": false,
+  "mirror_specific_attribution": "FAIL: rank-4 Mirror coordinates exactly match native PCA",
+  "replay_summary": "verification_report.json"
 }

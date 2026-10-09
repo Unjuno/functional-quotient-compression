@@ -1,0 +1,197 @@
+{
+  "common_backbone_bytes": 166029852,
+  "compute": {
+    "added_prompt_embedding_ops_per_example": 4096,
+    "device": "cpu",
+    "full_prompt_inference_seconds": 3.7210542489920044,
+    "torch_threads": 4,
+    "total_wall_seconds": 106.10539735999191,
+    "virtual_tokens_per_example": 8
+  },
+  "cumulative_reencode_seconds": 0.07215559700853191,
+  "dataset_file": "train.txt",
+  "dataset_sha256": "9e9fa1ad55b1c2c95b08e37dd8e653f638fac2c6de904b79e813611eefbc985f",
+  "experiment_id": "MA-596",
+  "full_deployment_bytes": 166089330,
+  "full_prompt_eval_seconds": 3.7210553600016283,
+  "hidden_size": 512,
+  "independent_full_deployment_bytes": 166096446,
+  "mean_task_training_seconds": 4.617544099748557,
+  "model_load_seconds": 0.06074357600300573,
+  "model_revision": "e93a9faa9c77e5d09219f6c868bfc7a1bd65593c",
+  "model_sha256": "3da388330e4549156d76b58d6d268c63cd005e9336b4f4d2d378421e7b7a33fd",
+  "optimizer_updates": 64,
+  "private_threshold_nat_per_token": 0.05,
+  "prompt_length": 8,
+  "rank": 4,
+  "retention_trace": [
+    {
+      "cumulative_reencode_seconds": 0.0007816659926902503,
+      "max_tiered_delta_nll": 0.0,
+      "mean_rank4_delta_nll": 0.0,
+      "old_task_max_drift": 0.0,
+      "private_count": 0,
+      "private_task_indices": [],
+      "tasks_seen": 1
+    },
+    {
+      "cumulative_reencode_seconds": 0.0018557239964138716,
+      "max_tiered_delta_nll": 8.183717727661133e-05,
+      "mean_rank4_delta_nll": 1.9431114196777344e-05,
+      "old_task_max_drift": -4.297494888305664e-05,
+      "private_count": 0,
+      "private_task_indices": [],
+      "tasks_seen": 2
+    },
+    {
+      "cumulative_reencode_seconds": 0.0026396030007163063,
+      "max_tiered_delta_nll": 4.500150680541992e-05,
+      "mean_rank4_delta_nll": 1.2735525767008463e-05,
+      "old_task_max_drift": 4.500150680541992e-05,
+      "private_count": 0,
+      "private_task_indices": [],
+      "tasks_seen": 3
+    },
+    {
+      "cumulative_reencode_seconds": 0.019250034005381167,
+      "max_tiered_delta_nll": 5.799531936645508e-05,
+      "mean_rank4_delta_nll": 2.9653310775756836e-05,
+      "old_task_max_drift": 5.125999450683594e-05,
+      "private_count": 0,
+      "private_task_indices": [],
+      "tasks_seen": 4
+    },
+    {
+      "cumulative_reencode_seconds": 0.04476541301119141,
+      "max_tiered_delta_nll": 9.208917617797852e-05,
+      "mean_rank4_delta_nll": 3.224611282348633e-05,
+      "old_task_max_drift": 9.208917617797852e-05,
+      "private_count": 0,
+      "private_task_indices": [],
+      "tasks_seen": 5
+    },
+    {
+      "cumulative_reencode_seconds": 0.0687619870150229,
+      "max_tiered_delta_nll": 0.04237496852874756,
+      "mean_rank4_delta_nll": 0.013031403223673502,
+      "old_task_max_drift": 0.04237496852874756,
+      "private_count": 0,
+      "private_task_indices": [],
+      "tasks_seen": 6
+    },
+    {
+      "cumulative_reencode_seconds": 0.07025550601247232,
+      "max_tiered_delta_nll": 0.04597318172454834,
+      "mean_rank4_delta_nll": 0.01821521350315639,
+      "old_task_max_drift": 0.04597318172454834,
+      "private_count": 1,
+      "private_task_indices": [
+        1
+      ],
+      "tasks_seen": 7
+    },
+    {
+      "cumulative_reencode_seconds": 0.07215559700853191,
+      "max_tiered_delta_nll": 0.020183444023132324,
+      "mean_rank4_delta_nll": 0.021250255405902863,
+      "old_task_max_drift": 0.020183444023132324,
+      "private_count": 2,
+      "private_task_indices": [
+        0,
+        1
+      ],
+      "tasks_seen": 8
+    }
+  ],
+  "seed": 59602,
+  "sequence": {
+    "delta_vs_full": [
+      1.3113021850585938e-06,
+      -3.5762786865234375e-06,
+      0.017118334770202637,
+      0.020183444023132324,
+      0.004192829132080078,
+      0.002130746841430664,
+      -0.01674199104309082,
+      0.003143012523651123
+    ],
+    "full_nll": [
+      3.921642005443573,
+      3.9472360610961914,
+      4.075387895107269,
+      4.22946161031723,
+      3.9980227947235107,
+      4.272979497909546,
+      4.16706919670105,
+      4.031943738460541
+    ],
+    "independent_bytes": 66594,
+    "independent_sha256": "534c611f1e6eca1c3ed835963003afaed17c273f3f6963dbc15cf2ddd782fdeb",
+    "max_old_task_drift": 0.04597318172454834,
+    "mirror_bytes": 59478,
+    "mirror_delta_vs_full": [
+      0.05033797025680542,
+      0.08963769674301147,
+      0.017118334770202637,
+      0.020183444023132324,
+      0.004192829132080078,
+      0.002130746841430664,
+      -0.01674199104309082,
+      0.003143012523651123
+    ],
+    "mirror_inference_payload_bytes_per_task": 7434.75,
+    "mirror_rank4_inference_seconds": 3.2544917380000697,
+    "mirror_rank4_nll": [
+      3.9719799757003784,
+      4.036873757839203,
+      4.092506229877472,
+      4.2496450543403625,
+      4.002215623855591,
+      4.275110244750977,
+      4.150327205657959,
+      4.035086750984192
+    ],
+    "mirror_sha256": "35f4673b924967cdae8a9fb040b36c50238552b099ae6a28bcf067e6bd044080",
+    "native_rank4_bytes": 42564,
+    "native_rank4_sha256": "63cfeba73d1e3ab7c6d2dc5c66ea7996f4e65279f535bdc2c2068ded8071650f",
+    "private_count": 2,
+    "private_fraction": 0.25,
+    "reencode_macs_proxy": 2228224,
+    "shared_only_bytes": 9244,
+    "shared_only_inference_seconds": 3.211717083991971,
+    "shared_only_nll": [
+      3.9979177117347717,
+      4.059970915317535,
+      4.206042945384979,
+      4.245299816131592,
+      4.058719754219055,
+      4.313918769359589,
+      4.170977830886841,
+      4.03047788143158
+    ],
+    "tiered_inference_seconds": 2.8627232980070403,
+    "tiered_nll": [
+      3.921643316745758,
+      3.947232484817505,
+      4.092506229877472,
+      4.2496450543403625,
+      4.002215623855591,
+      4.275110244750977,
+      4.150327205657959,
+      4.035086750984192
+    ]
+  },
+  "split": "dev",
+  "task_count": 8,
+  "task_titles": [
+    "Pattycake ( gorilla )",
+    "Jeremi Wi\u015bniowiecki",
+    "Rhode Island Route 4",
+    "Action of 13 September 1810",
+    "Tessa No\u00ebl",
+    "Charmbracelet",
+    "Hurricane Ingrid",
+    "Track and field"
+  ],
+  "total_task_training_seconds": 36.94035279798845
+}
