@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (35 completed; 595 UNTESTED)
-- P1: **422** (12 completed; 410 UNTESTED)
+- P0: **630** (37 completed; 593 UNTESTED)
+- P1: **422** (15 completed; 407 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1108 UNTESTED, 29 PROMISING, 18 FAIL**
+- Current MA statuses: **1103 UNTESTED, 29 PROMISING, 23 FAIL**
 - 47 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -23,17 +23,12 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-255 — Mirror context superposition for task models (P0; PA16)**
+**MA-602 — Learned sparse collision repair (P0; PA120)**
 
-Reason:
-- all previously locked MA-241/244/245/247–251/253 and subsequent old-chain P0 screens have completed;
-- the original P0 cross-over queue is exhausted among checked candidates;
-- MA-255 is the first untested P0 in the earlier high-information literature cross-over queue;
-- direct Parameter Superposition prior art gives a strong nearest control for insertion of the extra Mirror parameter `m`.
+MA-597–599 are verified FAILs for unchanged learned hash Views; those variants are paused. MA-600 is a verified FAIL: 3,314 B shared hash+Givens has NRMSE .408–.504 versus 4,318 B rank-2 LoRA at .003–.014. MA-601 is a verified FAIL: Givens reduces head-context cosine but teacher CE remains >1 nat worse than independent heads, and payload exceeds the salted-hash cap. Fresh seeds stayed sealed. MA-602 tests sparse private exceptions at harmful collisions, a structurally different mechanism from the paused global Views.
+Required controls: native HashedNet at the frozen bucket count, a larger-bucket hash model, shared hash without exceptions, sparse private exception tables, and an ordinary low-rank residual with matched bytes. Charge every exception index and value. Do not infer capacity from virtual weight count.
 
-Required controls: native Parameter Superposition, naive/shared task-code basis, matched byte-near low-rank or VeRA-style modulation, independent-model upper reference where practical. Do not claim the superposition concept itself as a Mirror invention.
-
-If blocked by a documented reproducibility or harness issue, record it and resume at MA-260 (BatchEnsemble), then MA-261/265/268 in the registered literature priority sequence. Do not jump to P1/novelty-picked topics before P0.
+If the sparse-exception mechanism is not executable with the available CPU environment, record the specific blocker; otherwise run dev worlds and stop fresh if any frozen gate fails.
 
 ## Active experiment
 

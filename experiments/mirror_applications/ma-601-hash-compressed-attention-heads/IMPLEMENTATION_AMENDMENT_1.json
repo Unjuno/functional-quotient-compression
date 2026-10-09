@@ -1,0 +1,9 @@
+{
+  "experiment_id":"MA-601",
+  "amendment":1,
+  "timing":"Pre-development implementation audit; no metrics or artifacts generated",
+  "findings":["Independent-head control was initialized from teacher weights, which would leak the target function into the control.","Hash seed metadata was serialized for non-hash controls that do not use maps.","GQA/MQA MAC proxy did not account for their reduced KV projection count."],
+  "changes":["Independent Q/K/V student weights now use random initialization independent of teacher weights.","Only hashed methods serialize map seeds.","QKV MAC proxy now uses the actual number of Q and KV heads."],
+  "registered_metrics_generated":false,
+  "protocol_gates_changed":false
+}

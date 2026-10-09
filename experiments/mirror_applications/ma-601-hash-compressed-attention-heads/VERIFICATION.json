@@ -1,0 +1,43 @@
+{
+  "development_world_seeds": [
+    60101,
+    60102
+  ],
+  "experiment_id": "MA-601",
+  "fresh_artifacts_present": false,
+  "fresh_worlds_accessed": [],
+  "gate_decision": "FAIL: Givens View fails teacher-quality control and exceeds the 1.05x salted byte cap; head activations are diverse but quality is worse than MQA/diagonal/rank1 controls.",
+  "metric_replay_checked": true,
+  "payloads_replayed": 16,
+  "protocol_sha256": "27ada298c3449626a2226d1f395d6db785ad96bc2f2480dbf9dad593e17c59a9",
+  "results": {
+    "60101": {
+      "eight_method_payloads_byte_exact": true,
+      "independent_ce": 2.137636661529541,
+      "mirror_bytes": 5006,
+      "mirror_ce": 3.236203908920288,
+      "mirror_context_cosine": 0.34033511206507683,
+      "mqa_ce": 3.152333974838257,
+      "rank1_ce": 3.140747547149658,
+      "salted_bytes": 4627
+    },
+    "60102": {
+      "eight_method_payloads_byte_exact": true,
+      "independent_ce": 2.120224952697754,
+      "mirror_bytes": 5006,
+      "mirror_ce": 3.2822470664978027,
+      "mirror_context_cosine": 0.16940017168720564,
+      "mqa_ce": 3.2346553802490234,
+      "rank1_ce": 3.1353201866149902,
+      "salted_bytes": 4627
+    }
+  },
+  "serialization_roundtrip_checked": true,
+  "source_sha256": "ce7e7ca5ac9fae502ab097b4301ac1a470ddcf15e717cdee2c35f25511c8896e",
+  "status": "FAIL",
+  "tests": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 python -m pytest -q experiments/mirror_applications/ma-601-hash-compressed-attention-heads/tests",
+    "failed": 0,
+    "passed": 3
+  }
+}

@@ -457,3 +457,8 @@ A worker may batch implementation work across a family, but scientific status is
 ## Stop rule
 
 If two consecutive candidates in a family fail for the same demonstrated structural reason, stop that family and write a family diagnostic before continuing.
+
+
+## MA-601 result and handoff — 2026-10-09
+
+MA-601 is a verified FAIL on `research/ma-601-hash-compressed-attention-heads-20261009`: Givens hash heads reduce output-context cosine to .340/.169 vs 1.0 tied, but teacher CE 3.236/3.282 is >1 nat above independent heads, worse than MQA/diagonal/rank1, and 5,006 B exceeds the salted 4,627 B cap (1.082x). Fresh sealed; replay exact. MA-602's sparse private collision exceptions are structurally distinct from the paused global bucket-View variants and remain eligible. Next: MA-602.
