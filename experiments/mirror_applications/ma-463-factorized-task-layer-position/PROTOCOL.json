@@ -1,21 +1,111 @@
 {
-  "experiment_id":"MA-463",
-  "title":"Factorized task x layer x position Mirror codes",
-  "status":"FROZEN_SCREENING",
-  "base_commit":"add72cbe",
-  "evidence_lane":"FACTOR_COMPOSITION/HELDOUT_COMBINATIONS/QUALITY/BYTES",
-  "hypothesis":"Factorized task, layer, and adapter-position Mirror scalars composed through a shared basis will reconstruct held-out combinations with no more than 10% NRMSE penalty vs a full HyperFormer MLP and <=60% of its actual N=96 payload.",
-  "physical_object":"one shared 2x2 adapter offset basis and intercept",
-  "mirror_coordinate":"three learned categorical scalar codes m_task, m_layer, m_position, composed by product",
-  "logical_multiplicity":"task x layer x position adapter combinations",
-  "prior_art_refs":[82],
-  "controls":["HyperFormer MLP over concatenated one-hot task/layer/position IDs","ordinary rank-one CP factorization with same scalar factor widths","additive linear hypernetwork","independent per-combination matrices"],
-  "task":{"type":"synthetic 2x2 adapter tensor completion","factor_cardinalities":{"task":8,"layer":4,"position":3},"total_combinations":96,"teacher":"A0 + (u_task*v_layer*w_position) B; all factors and basis vary by world","train_split":"combinations with (task+2*layer+position) mod 4 != 0","heldout_split":"combinations with (task+2*layer+position) mod 4 == 0","support_examples_per_combo":64,"query_examples_per_combo":256},
-  "development":{"worlds":[46300,46301],"seeds":[0,1,2],"update_candidates":[500,1500,3000],"selection":"choose Mirror update count using held-out combination NRMSE"},
-  "fresh":{"worlds":[46310,46311,46312],"seeds":[0,1,2],"locked_before_access":true},
-  "storage":{"authority":"actual serialized inference payload bytes","paid_objects":["factor code tables","shared basis and intercept","MLP generator weights","combo factor indices","metadata"],"amortization_N":[1,32,96]},
-  "compute":{"report_decoder_MAC":true,"report_optimizer_updates":true,"report_fit_wall":true,"report_query_wall":true},
-  "success_gate":"Every fresh world: Mirror held-out NRMSE <=1.10x HyperFormer and N96 payload <=60% HyperFormer; report equivalence or dominance by ordinary CP factorization.",
-  "failure_gate":"Mirror misses quality/bytes, ordinary CP matches it at equal bytes, or held-out factor combinations fail.",
-  "boundaries":["Synthetic low-rank tensor interaction only; not a natural adapter task.","The product factorization has a generic CP equivalent; no Mirror-specific claim if that control matches.","Factor indices and code tables are paid in serialized payload."]
+  "experiment_id": "MA-463",
+  "title": "Factorized task x layer x position Mirror codes",
+  "status": "FROZEN_A1",
+  "base_commit": "add72cbe",
+  "evidence_lane": "FACTOR_COMPOSITION/HELDOUT_COMBINATIONS/QUALITY/BYTES",
+  "hypothesis": "Factorized task, layer, and adapter-position Mirror scalars composed through a shared basis will reconstruct held-out combinations with no more than 10% NRMSE penalty vs a full HyperFormer MLP and <=60% of its actual N=96 payload.",
+  "physical_object": "one shared 2x2 adapter offset basis and intercept",
+  "mirror_coordinate": "three learned categorical scalar codes m_task, m_layer, m_position, composed by product",
+  "logical_multiplicity": "task x layer x position adapter combinations",
+  "prior_art_refs": [
+    82
+  ],
+  "controls": [
+    "HyperFormer MLP over concatenated one-hot task/layer/position IDs",
+    "ordinary rank-one CP factorization with same scalar factor widths",
+    "additive linear hypernetwork",
+    "independent per-combination matrices"
+  ],
+  "task": {
+    "type": "synthetic 2x2 adapter tensor completion",
+    "factor_cardinalities": {
+      "task": 8,
+      "layer": 4,
+      "position": 3
+    },
+    "total_combinations": 96,
+    "teacher": "A0 + (u_task*v_layer*w_position) B; all factors and basis vary by world",
+    "train_split": "combinations with (task+2*layer+position) mod 4 != 0",
+    "heldout_split": "combinations with (task+2*layer+position) mod 4 == 0",
+    "support_examples_per_combo": 64,
+    "query_examples_per_combo": 256
+  },
+  "development": {
+    "worlds": [
+      46300,
+      46301
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "update_candidates": [
+      500,
+      1500,
+      3000
+    ],
+    "selection": "choose Mirror update count using held-out combination NRMSE"
+  },
+  "fresh": {
+    "worlds": [
+      46310,
+      46311,
+      46312
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "factor code tables",
+      "shared basis and intercept",
+      "MLP generator weights",
+      "combo factor indices",
+      "metadata"
+    ],
+    "amortization_N": [
+      1,
+      32,
+      96
+    ]
+  },
+  "compute": {
+    "report_decoder_MAC": true,
+    "report_optimizer_updates": true,
+    "report_fit_wall": true,
+    "report_query_wall": true
+  },
+  "success_gate": "Every fresh world: Mirror held-out NRMSE <=1.10x HyperFormer and N96 payload <=60% HyperFormer; report equivalence or dominance by ordinary CP factorization.",
+  "failure_gate": "Mirror misses quality/bytes, ordinary CP matches it at equal bytes, or held-out factor combinations fail.",
+  "boundaries": [
+    "Synthetic low-rank tensor interaction only; not a natural adapter task.",
+    "The product factorization has a generic CP equivalent; no Mirror-specific claim if that control matches.",
+    "Factor indices and code tables are paid in serialized payload."
+  ],
+  "fresh_A1": {
+    "worlds": [
+      46320,
+      46321,
+      46322
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "locked_before_access": true,
+    "excluded_exploratory_worlds": [
+      46310,
+      46311,
+      46312
+    ]
+  },
+  "amendment_A1": "Initial fresh results are retained as exploratory. The factor embedding optimizer initialization was not explicitly keyed to world/seed, so seed labels did not define reproducible per-run initial states. Added deterministic world/seed initialization, reran the frozen development update sweep, and fixed A1 before opening replacement worlds."
 }
