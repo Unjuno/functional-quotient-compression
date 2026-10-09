@@ -1,0 +1,22 @@
+{
+  "experiment_id": "MA-550",
+  "title": "Adaptive allocation between weight-space and activation-space views",
+  "status": "SCREENING",
+  "evidence_lane": "STORAGE",
+  "base_commit": "6e1f5f7e",
+  "hypothesis": "A per-function selector over weight-space and activation-space encodings lowers actual bytes versus either fixed allocation at the same preregistered output reconstruction tolerance.",
+  "physical_object": "Pinned Pythia-70M-deduped output projection W with 512 input coordinates",
+  "mirror_coordinate": "Per-function representation family and its serialized code",
+  "logical_multiplicity": "Sixteen synthetic output-delta functions per world",
+  "prior_art_refs": ["PA96"],
+  "controls": ["fixed dense output-weight delta", "fixed activation coordinate solved through W", "sparse output-bias coordinate", "native shared output basis W plus private activation code"],
+  "development": {"worlds_or_seeds": [55001, 55002], "selection_metric": "minimum actual serialized payload among methods with support relative RMSE <= 0.01"},
+  "fresh": {"worlds_or_seeds": [55011, 55012, 55013], "locked_before_access": true},
+  "world": {"functions": 16, "sparse_functions": 8, "activation_functions": 8, "support_observations_per_function": 8, "heldout_observations_per_function": 8, "observation_noise_sd": 0.0001, "activation_code_sd": 0.05},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["all NPZ arrays and metadata per function/world", "function-family tags", "common Pythia base checkpoint exactly once; its output basis W is already paid state"]},
+  "numerics": "Read the pinned safetensors F16 output projection exactly and cast to F32/F64 for deterministic arithmetic; no checkpoint tensor is modified.",
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true, "examples_per_world": 256, "optimizer_updates": 0},
+  "success_gate": "On every fresh world, adaptive payload is at least 10% smaller than each fixed all-weight and all-activation payload, while heldout relative RMSE <= 0.01 and support relative RMSE <= 0.01.",
+  "failure_gate": "Any fresh world misses quality, or adaptive fails to beat both fixed allocations by 10% actual NPZ bytes.",
+  "boundaries": ["Synthetic linear output-delta mechanism assay only", "No natural LM quality or capacity claim", "Native basis/low-rank coding may fully explain any result", "No fresh result may affect protocol or thresholds"]
+}

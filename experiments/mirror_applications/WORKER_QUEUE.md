@@ -187,7 +187,7 @@ High-information P0:
 12. MA-545 — function-vector MoE without weight experts (**FAIL; see verified result above**)
 13. MA-546 — representation-space symmetry audit (**FAIL for added functional multiplicity; invariance established**)
 14. MA-547 — RoseLoRA versus Mirror edit locality (**FAIL; fresh remained sealed after dev gate miss**)
-15. MA-550 — adaptive allocation between weight-space and activation-space Views
+15. MA-550 — adaptive allocation between weight-space and activation-space Views (**SCREENING; frozen protocol, development pending, fresh sealed**)
 
 ## KV-cache transformation research lane
 
