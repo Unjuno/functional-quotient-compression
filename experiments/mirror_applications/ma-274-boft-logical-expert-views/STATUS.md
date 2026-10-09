@@ -7,3 +7,4 @@
 - Router accuracy min: 0.9971.
 - BOFT: NRMSE 0.00879, 1,716 B, 4.158s fit; Givens: 0.00868, 1,218 B, 0.454s.
 - See `VERIFICATION.json`; synthetic CPU-only evidence.
+- Verification rerun: 3 tests pass; 63 fresh rows and 105 payload size/SHA-256 entries verified.
