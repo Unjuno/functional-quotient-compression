@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-517.** MA-516 tested support-delta activation vectors on a pinned GPT-2 and found no held-out accuracy improvement; continue within the Function Vectors family with MA-517 raw arithmetic vs structured composition controls. LoReFT candidates remain deferred for redesign after MA-501/502.
+**Current operational pointer (2026-10-09): MA-255.** MA-517 completed FAIL: the direct ICL viability control itself had 0% accuracy on the synthetic two-hop task, so function composition is NOT ESTABLISHED; all extracted vector methods also had 0% accuracy and task vectors had mean cosine 0.99968. Continue to MA-255, the first available P0 by authoritative registry order, with Parameter Superposition as the required direct control. LoReFT candidates remain deferred for redesign after MA-501/502.
 
 # Worker queue
 
