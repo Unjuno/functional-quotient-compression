@@ -1,0 +1,9 @@
+{
+  "experiment_id": "MA-617",
+  "amendment": 1,
+  "recorded_before_any_fresh_access": true,
+  "reason": "The initial active-MAC proxy divided position-module materialization by the number of modules rather than by the 27 evaluated orders, overstating decode compute.",
+  "change": "Use 24 forward MAC/order plus (3 positions × 3 modules × 16 MAC per conjugation)/27 orders = 29.33 MAC/order for phase and direct-coefficient methods; route-only and pre-materialized independent controls are 24 MAC/order.",
+  "scope": "Metric accounting correction only; no model, task, quality metric, thresholds, or payload layout changed.",
+  "action": "Re-run the same frozen development seeds 61701/61702. Fresh remains sealed because the exact native-code alias and byte gate failure are already present."
+}

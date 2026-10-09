@@ -315,7 +315,7 @@ Every experiment must isolate the extra Mirror parameter `m` beyond its strong n
 
 Read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08.md`, PA236..PA265 and the selected MA registry row.
 
-**MA-617 is the next executable P0** after MA-616 failed its Mirror-specific byte gate and exactly aliased direct coefficients. MA-255–616 evidence is retained on dedicated branches; do not rerun completed candidates. Recheck the live registry and remote branches before selection.
+**MA-618 is the next executable P0** after MA-616/617 both exactly aliased direct coefficient controls; pause unchanged route × position Givens variants. MA-255–617 evidence is retained on dedicated branches; do not rerun completed candidates. Recheck the live registry and remote branches before selection.
 
 ## Twelfth research expansion — video, equivariance, spiking, physical optics, wireless and spatial audio
 
@@ -359,7 +359,7 @@ Read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_THIRTEENTH_SWEEP.
 
 **MA-1046..1095 are 50 new UNTESTED hypotheses** appended after earlier literature intakes and the original locked direct-prior queue. All comparisons study the marginal value of the extra Mirror parameter `m`; no new source-paper result is a Mirror result.
 
-**Current executable next candidate: MA-617** (factorized module × position View code; PA127). Do not rerun completed/paused candidates.
+**Current executable next candidate: MA-618** (add-new-function by Mirror code; PA128). The MA-616/617 route × position Givens family is paused after two same-cause native-control aliases.
 
 Recommended high-information P0 studies **within this new family**:
 

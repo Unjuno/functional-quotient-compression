@@ -1,0 +1,61 @@
+{
+  "experiment_id": "MA-617",
+  "title": "Factorized module x position Mirror code",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/COMPOSITION/COMPUTE",
+  "base_commit": "c8793175",
+  "hypothesis": "One shared phase per composition position lets a small module bank implement held-out ordered module compositions with less state than direct position coefficients and independent per-sequence modules.",
+  "physical_object": "three 2x2 matrices reused at three ordered positions",
+  "mirror_coordinate": "position-specific Givens phase shared across module identities",
+  "logical_multiplicity": "27 ordered triples, with held-out route combinations",
+  "prior_art_refs": [
+    "PA127"
+  ],
+  "controls": [
+    "route-only ordered module sequence",
+    "direct sine/cosine coefficient pair per position",
+    "independent three-matrix payload per sequence"
+  ],
+  "fixture": "All 27 ordered triples from three modules at three positions; hold out triples whose (a+2*b+3*c) mod 3 == 0. Shared target bank applies position-specific Givens conjugation; ReLU between stages makes order noncommutative.",
+  "development": {
+    "worlds_or_seeds": [
+      61701,
+      61702
+    ],
+    "optimizer_updates": 0,
+    "selection_metric": "held-out-order normalized MSE, actual bytes, MAC proxy and CPU decode+forward latency"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      61711,
+      61712,
+      61713
+    ],
+    "locked_before_access": true,
+    "run_only_if": "not run: the development Mirror-specific byte and attribution gates failed"
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "format": "torch.save exact payload",
+    "paid_objects": [
+      "physical modules",
+      "all ordered route IDs",
+      "position phases or coefficients",
+      "independent matrices",
+      "metadata"
+    ]
+  },
+  "compute": {
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true,
+    "timing_boundary": "decode position Views and evaluate 27 orders on the same query batch"
+  },
+  "success_gate": "Held-out order nMSE<=1e-6; Mirror payload<=0.90x direct coefficient payload and <=0.50x independent payload; decode+forward compute<=1.5x direct coefficient.",
+  "failure_gate": "Any development quality/storage miss or exact direct-control alias.",
+  "boundaries": [
+    "Synthetic fixed module bank; no learned router or training.",
+    "Ordered routes are serialized and charged; no routing-learning claim.",
+    "Do not call the 27 triples independent capacity."
+  ]
+}
