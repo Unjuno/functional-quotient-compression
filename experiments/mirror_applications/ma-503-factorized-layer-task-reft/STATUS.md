@@ -8,7 +8,7 @@
 - Fresh/audit opened: yes; A1 timing-only rerun across 3 worlds × 3 seeds × 2 residual regimes
 - Results committed: yes (`96b6cad5`)
 - Verification committed: yes
-- Registry row updated: yes after verification
+- Registry row updated: yes after verification; artifact replay test passed (1/1)
 
 ## Decision
 
