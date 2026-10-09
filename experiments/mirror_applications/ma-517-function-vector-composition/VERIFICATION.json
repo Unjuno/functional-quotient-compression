@@ -1,0 +1,35 @@
+{
+  "experiment_id": "MA-517",
+  "commit": "1c45e3b428b20f38f827852b862daac2699a5bbf",
+  "protocol_freeze_commit": "e2e1ef94af370d50c7498ad8746925b41fe560fd",
+  "amendment_commits": [
+    "9dc451a7d66dd369c671481bbf303ca601e0bc7",
+    "099cf71b64b3db59e1fec42c30a7a3f4430d10cd"
+  ],
+  "tests": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 python -m pytest -q experiments/mirror_applications/ma-517-function-vector-composition/tests",
+    "passed": 5,
+    "failed": 0
+  },
+  "serialization": {
+    "format": "uncompressed NPZ",
+    "roundtrip_checked": true,
+    "canonical_payloads_replayed": 26,
+    "byte_hash_identical": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0,
+    "task_splits_identical": true,
+    "extracted_function_vectors_identical": true,
+    "native_pca_exact_output_alias_all_ranks": true
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_seeds_accessed": [],
+  "notes": [
+    "Amendment 1 corrected the no-state serializer; failed initial run is preserved.",
+    "Amendment 2 added composition-build timing; pre-amendment timing-omission runs are preserved.",
+    "No checkpoint weights are committed; pinned model remains an external artifact.",
+    "Frozen quality and attribution gates failed; fresh seeds remain unopened."
+  ]
+}

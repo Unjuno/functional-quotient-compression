@@ -1,0 +1,7 @@
+{
+  "amendment_id": "AMENDMENT_3",
+  "experiment_id": "MA-486",
+  "date": "2026-10-08",
+  "reason": "Sparse atom IDs range from 0 to 31 but the initial NPZ serializer stored them as int64. This charged an avoidable dtype expansion and did not reflect the compact inference payload.",
+  "scope": "Serialization-only: sparse atom indices are stored as uint8, which losslessly represents the frozen dictionary size. Coefficients, dictionary dtype, model behavior, train/test data, optimizer, gates and metrics are unchanged. The previous complete outputs are preserved under runs/pre_amendment_compact_index_dev_*. Rerun frozen development seeds; fresh remains sealed."
+}

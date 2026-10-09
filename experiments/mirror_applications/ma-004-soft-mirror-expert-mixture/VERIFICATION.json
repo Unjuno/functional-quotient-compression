@@ -1,0 +1,41 @@
+{
+  "experiment_id": "MA-004",
+  "commit": "e8fea8ef10f876835c4683bad0203ec7fdc91e16",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-004-soft-mirror-expert-mixture/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "runs_checked": 72,
+    "fresh_payload_bytes_by_method": {
+      "full_dense": 23277,
+      "full_rank2": 23466,
+      "tied": 7445,
+      "film": 8845,
+      "residual2": 8845,
+      "mirror": 7697
+    }
+  },
+  "metric_replay": {
+    "checked": true,
+    "fresh_rows_checked": 36,
+    "deterministic_fields_exact": true,
+    "max_difference": 0.0,
+    "timing_fields_excluded": [
+      "training_wall_seconds",
+      "inference_examples_per_second"
+    ]
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_freeze_manifest_hashes_checked_before_access": true,
+  "notes": [
+    "All three fresh worlds and both teacher modes completed.",
+    "Frozen protocol, source, test and selected configuration hashes were checked before fresh access; README was expanded after access to report results.",
+    "The aligned teacher was generated from a shared nonlinear FFN with Givens role views.",
+    "Useful-sharing quality/storage gate passed 3/3; Mirror-specific Pareto gate failed vs hard tying because tying is 252B smaller and uses about one quarter of the active MAC proxy.",
+    "Eager CPU timings are descriptive and single-host."
+  ]
+}

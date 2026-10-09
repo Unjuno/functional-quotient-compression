@@ -5,14 +5,34 @@ This repository contains several historical research lanes. Do not infer the cur
 ## 1. Read in this order
 
 1. `docs/phase2/CURRENT_STATE_2026-10-07.md`
-2. `docs/phase2/MIRROR_APPLICATION_DESIGN_SPACE.md`
-3. `docs/phase2/MIRROR_APPLICATION_PRIOR_ART.md`
-4. `experiments/mirror_applications/IDEA_REGISTRY.csv`
-5. `experiments/mirror_applications/FIRST_QUEUE.md`
-6. `experiments/mirror_applications/EXPERIMENT_CONTRACT.md`
-7. `roadmap/MIRROR_APPLICATION_ROADMAP.md`
+2. `docs/phase2/MIRROR_PARAMETER_INTEGRATION_DOCTRINE.md`
+3. `docs/phase2/MIRROR_PARAMETER_INTEGRATION_MATRIX.md`
+4. `docs/phase2/MIRROR_APPLICATION_DESIGN_SPACE.md`
+5. `docs/phase2/LATEST_WORKER_FINDINGS.md`
+6. `experiments/mirror_applications/CONTEXT_ROUTER.md`
+7. `docs/phase2/MIRROR_APPLICATION_PRIOR_ART.md`
+8. `experiments/mirror_applications/IDEA_REGISTRY.csv`
+9. `experiments/mirror_applications/FIRST_QUEUE.md`
+10. `experiments/mirror_applications/EXPERIMENT_CONTRACT.md`
+11. `roadmap/MIRROR_APPLICATION_ROADMAP.md`
 
 Read historical reports only when the selected MA experiment points to them.
+
+## 1.5 Core Mirror parameter rule
+
+The application program is explicitly about stress-testing the added low-description functional parameter `m` across established methods.
+
+For every selected MA candidate, preserve the native method as a baseline and identify the smallest interface where
+
+`F(x; theta) -> F(x; theta, m)`
+
+is introduced.
+
+Do not let generic manifold discovery, model merging, PEFT, MoE compression, or another adjacent method replace this question. Those methods are controls, insertion targets, or ways to discover a better parameterization of `m`.
+
+Every experiment README must include:
+
+> **Mirror insertion:** this experiment adds `m` to [exact object/interface] so that [claimed logical variation] can be expressed without [targeted physical duplication/cost].
 
 ## 2. Select exactly one MA ID
 
@@ -133,3 +153,159 @@ Not allowed without evidence:
 - "free compute";
 - "general LLM compression";
 - "proves natural-language rule reuse".
+
+
+## Concurrent registry edits
+
+Before adding a new MA candidate, re-read `IDEA_REGISTRY.csv` from the current branch and allocate IDs starting at **max existing MA ID + 1**. Never reserve an ID from memory or an older checkout. After writing, re-read the registry and verify zero duplicate IDs. If concurrent additions collide, preserve both hypotheses and renumber the later addition rather than deleting either one.
+
+
+## 11. Candidate-specific context
+
+### KV-cache candidates
+
+For MA-691..700 and any later cache-transform candidate, read:
+`docs/phase2/MIRROR_KV_CACHE_REUSE.md`.
+
+Before coding, classify the hypothesis as one of:
+1. identical-cache placement;
+2. exact analytical cache transform;
+3. canonical latent/cache with View-specific readout;
+4. approximate learned cache translation.
+
+Do not mix these four evidence classes. Measure physical cache aliasing/storage separately from prefill/switch latency and attention compute.
+
+### MA-701..770 cross-domain expansion
+
+Before implementing any MA-701..770 candidate:
+1. read the exact registry row and all referenced PA entries;
+2. read the "Eighth literature sweep" section in `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-07.md`;
+3. use the native domain metric/harness when the candidate is not a language-model mechanism — do not force FNO/DeepONet, GNN, diffusion or NCA hypotheses through nanoGPT merely for uniformity;
+4. preserve the common evidence contract: actual serialized bytes, active compute, wall-clock calibration, strongest simple control, and fresh/audit split;
+5. for factorized coordinates, hold out combinations rather than only evaluating seen IDs;
+6. for Bayesian/ensemble candidates, report calibration and member diversity;
+7. for dynamical/NCA candidates, report stability and rollout/recovery failure modes;
+8. treat MA-770 as a cross-domain benchmark only after representative component mechanisms have been screened.
+
+### MA-771..825 invertible/reuse/dynamics expansion
+
+Before implementing any MA-771..825 candidate:
+1. read every referenced PA item and identify whether the candidate changes physical storage, logical multiplicity, routing, state rank or only coordinates;
+2. for invertible Views, report forward quality, inverse/cycle numerical error, transform latency and any convergence/Lipschitz constraint;
+3. for MoE reuse/upcycling, report physical expert count, logical expert count, router bytes, load balance, active K, continued-pretraining compute and expert similarity/diversity;
+4. when using merge/prune results as a physical basis, compare against merge-only/prune-only and small-from-start controls;
+5. for low-rank recurrent/Koopman candidates, report latent/effective rank, stability spectrum where meaningful and long-horizon error;
+6. for Vector-Network/dynamic-atom candidates, count per-input inference iterations and active atoms;
+7. for robot/control candidates, report hardware, rollout horizon, inference latency, bytes per added skill and OOD composition;
+8. for matrix-memory candidates, do not interpret failure below a proven/known rank threshold as evidence against optimization alone;
+9. for programmable graphs, count topology/program metadata and dynamic execution cost as part of the Mirror state.
+
+### MA-826..875 edge/tangent/adaptive-state expansion
+
+Before implementing any MA-826..875 candidate:
+1. KAN candidates must count stored basis/function parameters and actual function-evaluation runtime; coefficient count alone is insufficient.
+2. NTK/tangent candidates must measure the relevant linearization or kernel approximation error before interpreting representational failure.
+3. AI-engram candidates must retain causal specificity, reactivation, sufficiency and necessity checks; weight similarity is not enough.
+4. online-state candidates must separate persistent bytes, writable state bytes, write FLOPs and reset/restore cost.
+5. DeltaNet/fast-memory candidates must include long-context retrieval and state-drift tests.
+6. learned-subspace/manifold candidates must count all endpoints, basis vectors and Bezier/control parameters as physical storage.
+7. Mesh candidates must preserve the observation-only boundary and include communication latency/message bytes.
+8. structural-composition candidates require held-out module/rule combinations and sample-efficiency measurements.
+9. stable-synapse controls are mandatory when a claimed fast-weight benefit might be achievable by gain/context modulation alone.
+
+### MA-876..935 cross-model KV, neural graphics, speech, generation and stitching
+
+Before starting a candidate in this range:
+
+1. Read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08.md`, the selected MA registry row, and PA236..PA265 as referenced. State exactly where `m` is inserted into the native method.
+2. Do not claim the native cross-model cache translator, NeRF scene label, Gaussian deformer, speaker adapter, diffusion sampler, or stitching layer as a novel Mirror operator. The test is the **marginal benefit of `m`**.
+3. Cross-model caches: separate MA-691-style **exact shared-state View algebra** from **approximate model-to-model cache transfer**; compare Heo ridge, CacheBridge, MoT and target re-prefill; report target NLL, RoPE/token provenance, calibration and mapper cost, physical cache bytes, and real handoff latency.
+4. Neural graphics/4D Gaussian: report rendered PSNR/LPIPS and temporal consistency, actual coded scene/appearance/hash/anchor/decoder bytes, random-access cost, FPS and VRAM. Compare C-NGP, ReFiNe, TensoRF, 4DGS, ADC-GS and CC-4DGS where relevant.
+5. Multi-speaker audio: compare NanoVoice/HyperTTS/MoA/Hyper-MoA, not merely per-speaker LoRA; report intelligibility, speaker identity, prosody, marginal bytes/voice, real-time factor and data/consent conditions.
+6. Generative functions: match FMM/Consistency Models, learned S4S/S4S-Alt solvers, LoRA.rar and EST-LoRA as relevant; count actual NFEs, solver/controller overhead and measured GPU latency.
+7. Cross-model stitching: compare native StitchLLM and affine feature transfer; measure target NLL, feature semantics, all bridge/router bytes and information-alignment counterexamples (PA241).
+8. Factorized Mirror claims require held-out ordered model pairs, scene-time, content-style or speaker-layer cross-products. Independently trained or out-of-family functions are the misalignment controls.
+9. All MA-876..935 remain UNTESTED. Do not change verified scientific status without frozen protocol, results, and verification.
+
+Current next candidate stays **MA-255**, regardless of this appended research queue.
+
+### MA-936..995 twelfth-sweep video/symmetry/SNN/hardware applications
+
+Before starting an experiment in MA-936..995:
+
+1. Read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_TWELFTH_SWEEP.md`, the exact MA row and its PA266..PA295 references. State the physical object, the insertion interface for extra low-description `m`, and the strongest native parameter-sharing control.
+2. Video: compare native **NerVast** (Fisher-guided partial shared weights), **DCVC-UF** (chunk latent + frame-specific parallel decoders), **DCVC-RT**, HNeRV or the relevant video codec at identical bitrates. Record actual bitstream bits, PSNR/MS-SSIM, peak memory, encoding time, decode FPS and random access. No free frame-slot or QP codes.
+3. Group-equivariant methods: compare G-CNN/Steerable CNN/EGNN/e3nn and parameter-free approximate equivariance where relevant. Count transformed copies and function-preserving gauges as **zero additional independently learned functions**. Any Mirror gain must be task-specific functional freedom beyond known group action.
+4. Spiking methods: compare native STL-SNN learnable thresholds, per-time TEBN and TACOS task-agnostic plasticity. Separate synaptic bytes, neuron-threshold/membrane state, spike operations, event timing, energy and forgetting. Do not provide oracle task IDs unless the native control also receives them.
+5. Photonic: compare programmable LightPro/MZI/diffractive controls at realistic coupler/phase resolution, optical noise, insertion loss and thermal/calibration drift. Count physically changed devices, programming/config bits, switch/settling latency, and full energy including control/ADC/DAC. **Clearly label simulations**; never infer hardware gains from tensor FLOPs alone.
+6. Wireless: native neural beam codebook, site-specific Type-II CSI, CsiNet and RIS joint phase optimization are direct controls. Count feedback/probing/signaling bits, RF hardware constraints, spectral efficiency, device switch delay and energy.
+7. Spatial audio: compare RANF and anthropometric HRTF latents. Hold out actual listeners and directions; measure frequency/spectral distortion, ITD/ILD/localization error, listener code bytes, measurement count and update latency.
+8. Factorized codes require unseen task×time, scene×chunk, listener×direction, site×user or hardware task×configuration pairings. Prefer natural/out-of-family variation to more aligned-only tests.
+9. The new MA-936..995 ideas are UNTESTED. Existing completed experiments and MA-255 next-candidate selection are unchanged.
+
+### Function-space evidence and native basis controls (PA372..381)
+
+Read `docs/phase2/MIRROR_FUNCTION_SPACE_FALSIFICATION_2026-10-08.md` **only** for natural adapter/low-description m/function-space questions, especially MA1096/1098/1099/1102/1105/1114/1115.
+
+- **BOLT** already trains low-description diagonal coefficients on a common spectral basis extracted from learned task vectors; it is a direct baseline, not a novel Mirror result.
+- **CG-LoRA** evaluates function-space prediction/curvature; **Fora** uses activation-derived capability projectors; **SVD+CUR** distinguishes common versus localized/private learned updates. Compare actual held-out task NLL/accuracy and retention rather than optimizing weight Frobenius alone.
+- An independent *real-digit image-shift pilot* used rank-6 common bases and four held-out adaptation conditions, seeds 41/42. Structured m had 52.19% mean accuracy at 4694 B versus diagonal 49.79% at 4662 B, but dense core scored 69.97% and independent rank-4 LoRA 86.98%; structured m was slower. It failed its preregistered gate; **do not** treat this as a completed MA, LM result, or a reason to retune opened fresh seeds.
+- New tests must fit m from permitted new-task data (no target-oracle LoRA delta), hold out whole tasks and ideally model families, preserve rank/gauge invariance, report function-space and weight-space diagnostics separately, and charge all shared basis, task-code, private residual, source adapter development and runtime costs.
+
+### MA-1096..1115 natural-LoRA gauge, adapter bank and cache crossovers
+
+For a selected MA1096..1115 (and as supplemental context if a compatible experiment is **not yet frozen**):
+
+1. Read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_FIFTEENTH_SWEEP.md`, PA351..371 and `experiments/mirror_applications/research_intake/natural_lora_orbit_20261008/README.md`. The included code is a gauge/weight-space screening harness, **not a natural-model outcome or a Mirror trained model**.
+2. For LoRA `D=B@A`, compare only gauge-invariant `D` singular spectra and row/column projectors. Verify the same `D` under `B->B G, A->G^-1 A`, even for nonorthogonal invertible `G`. Raw B/A elementwise similarity is not a valid independent-functional-similarity claim.
+3. Pretrained `W` singular-axis stability is separate from task-delta alignment. Compare pretrained-W basis, a train-task-only discovered basis, CtS native shared U/V with k×k task cores, CtM where merging is the task, EigenLoRAx, VB-LoRA, MetaTT, diagonal/FiLM, structured Mirror m and private residuals.
+4. Train the **new-task** Mirror m from examples for L2 performance; oracle projection of an already-trained audit LoRA delta is only L1 weight-space representability. Separate train-task and audit-task identities; enforce identical base model revision and layer shapes.
+5. Count full shared basis, all task codes, private residual, optimizer/resume state and metadata; serving cost includes adapter bank/paging/compiled kernels. A small core can cost more than native LoRA if there are few tasks.
+6. In multi-LoRA cache tests use **LRAgent** fused low-rank attention and **PReCache** neutral-base reconstruction as strong controls. Distinguish exact MA691 compatible-state algebra from approximate cached states across differently adapted prefixes. Count physically aliased bytes, model/source prefill, TTFT, prefix provenance and decoder task quality.
+7. The entire new range is UNTESTED. **Next is still MA-255.** Do not reopen frozen world IDs or change gates to apply this intake.
+
+### MA-1046..1095 fourteenth research intake: temporal forecasting, DLRM, Earth sensors
+
+If a selected MA experiment is in MA-1046..1095, **read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_FOURTEENTH_SWEEP.md` and its PA326..PA350 entries**, but do not load this new research lane when the selected MA is unrelated.
+
+- **Time series (MA1046..1061):** use native Chronos/TimesFM/Moirai/PatchTST/TimeMixer/iTransformer/MOMENT/TRACE as relevant, plus DLinear/seasonal-naive; isolate the new `m` beyond already shared variate encoders, task-head conditioning and LoRA. Freeze chronological future tests and leave entire series, frequencies and forecast horizons out for factorized-code claims. Report MASE/sMAPE, CRPS/WQL/coverage as applicable, payload bytes and measured decode throughput.
+- **Recommender embeddings (MA1062..1078):** DHE is an existing **table-free** embedding generator, QR composes partition tables, and TT-Rec has highly optimized compressed lookup kernels; these are mandatory direct controls. An ID-specific `m_i` that grows with item count must be fully accounted. Report AUC/logloss, cold/hot IDs, ranking, raw/serialized tables+code+hash+generator+cache bytes, actual QPS/latency/memory traffic and privacy-safe time splits.
+- **Earth observation (MA1079..1095):** DOFA already emits dynamic spectral filters from wavelengths and AnySat already shares across sensors and scales. Test (m_sensor, m_wavelength, m_resolution, m_time) only for extra measured benefit beyond these and CROMA/Prithvi/TerraMind/AlphaEarth native conditioning. Preserve true sensor band response, SAR vs optical non-equivalence, geographic/season/time held-outs, missing-band/OOD-sensor tests, all generated-filter storage and runtime.
+- In all three families, differentiate a cheap existing label/embedding/generator from Mirror-specific function change; compare to a byte-near scalar/FiLM/rank-one/LoRA and private upper control. Naturally learned/off-orbit variation is mandatory before any general applicability claim.
+- This is **research intake only**. All new rows are UNTESTED; **MA-255 remains the next queued worker**, and old frozen runs, branches and statuses are unaffected.
+
+### MA-996..1045 material/MRI/quantum/vision/retrieval expansion
+
+Always read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_THIRTEENTH_SWEEP.md`, the exact selected MA row and PA296..PA325 references. All these hypotheses are initially UNTESTED.
+
+1. **Atomistic potential (MA-996..1005):** start from MACE/MACE-MP/NequIP and native sparse/frozen equivariant fine-tuning; preserve scalar energy invariance and vector force equivariance; compute forces from negative energy derivative and measure long-rollout MD drift, OOD chemistry, atomic throughput and adapter bytes.
+2. **MRI reconstruction (MA-1006..1015):** native VarNet/MoDL/DUNE/D2SA/SSDU baselines mandatory as applicable; preserve multicoil acquisition operator/data consistency, separate acquired k-space and test-time self-supervised validation splits, and report PSNR/SSIM, k-space residual, wall time and bytes. Do not claim clinical adequacy from synthetic phantoms.
+3. **Quantum circuits (MA-1016..1023):** compare native data reuploading/TensorHyper-VQC/superposed circuits; count classical generator, circuit angle/code bytes, compiled native gates, entanglers, noisy device shot counts, qRAM/postselection success and training reliability. Simulation != physical hardware.
+4. **Vision/memory (MA-1024..1034):** compare CoOp, CoCoOp, MaPLe, SAM2, SAM2Long and MoPEFT. Measure held-out base-to-new transfer, video J&F, mask correction/occlusion, prompt and per-object memory state, inference FPS, and all generators.
+5. **ANN/retrieval (MA-1035..1045):** compare ScaNN, RaBitQ, Matryoshka prefixes, ColBERTv2, PLAID, QINCo, DiskANN, PGM as applicable; count encoded physical index plus generators, recall/nDCG/MRR, P95/P99, SSD reads and update costs. Gauge/isometric rotations that leave exact rankings unchanged count as zero additional independent retrieval function.
+
+**MA-1000+ IDs use four digits.** Never parse with a 3-digit exact regex or truncate an ID to six characters. Use numeric max existing + 1 and run `python experiments/mirror_applications/check_registry_integrity.py` at a safe commit boundary.
+
+The current next experiment remains **MA-255**; these are future hypotheses, not a new active worker priority.
+
+### MA-1116..1155 sixteenth research intake: KG, ISP, robotics, acoustic rooms
+
+Load the **per-ID plan** `docs/phase2/MIRROR_APPLICATION_EXPERIMENT_BLUEPRINTS_MA1116_1155.md` plus `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_SIXTEENTH_SWEEP.md` and the selected PA382..413 items **only if your selected ID lies in this family**.
+
+- **Knowledge graphs MA1116..1125:** relation rotation, two-sided modulation and shared tensor relation cores already exist in RotatE, PairRE, QuatE, TuckER and CompGCN. For a genuinely new `m`, target relation×domain/time, independently fitted natural operators, or fewer private relation maps; compare filtered MRR/Hits@10, full entity+relation tensor bytes and scoring runtime. An exact triple-score-preserving gauge change is **zero new independent function**. KrausKGE's channel-rank/fan-out is a strong direct baseline.
+- **Camera/optics MA1126..1135:** ParamISP uses ISO/exposure EXIF metadata; Uni-ISP already learns shared camera-specific forward/inverse transforms; PQDynamicISP and modular ISP have locally controllable stages. A new `m` must win over these native controllers or MetaISP/OmniLens++ PSF code with held-out actual devices, paired RAW/sRGB, DeltaE/PSNR/LPIPS, codec/state bytes and true ISP FPS. Clipping destroys information; never promise exact inverse sRGB->RAW.
+- **Robotics MA1136..1145:** UP-OSI and RMA already use small dynamics codes with one physical policy. CoRMA, A-NC and morphology world models are direct controls. Policy Mirror `m` must provide additional benefit at **equal deployable sensor history**; mass/friction/privileged ground truth is *not* a fair test-time input. Test held-out physics and within-rollout changes, policy returns/falls, writable adaptation state, update FLOPs and latency. Simulation does not prove robot safety.
+- **Acoustic MA1146..1155:** NAF, retrieval-adapted NAF, TA-RIR, NAMS and few-shot direction-aware neural acoustic fields already use source/receiver/room conditioning. Mirror `m` must reduce per-room model state or improve sparse enrollment on real measured rooms. Report RIR waveform/phase/RT60/DRR/C50 and stored field+retrieval bytes, not magnitude-only match; hold out complete rooms and source/receiver pairs.
+- New candidates are **UNTESTED**. Preserve original 47 MA result statuses, the exploratory negative shifted-digit pilot and any precommitted worker experiments. **MA-255 remains the current next worker.**
+
+### Recurrent/depth candidates
+
+MA-247 showed that even an aligned Givens teacher can fail a fixed-budget recurrent optimization screen. Include a scalar/static-LoRA optimization control and do not infer representational impossibility from failed convergence.
+
+## 12. Research support intake — use at the next safe boundary
+
+[PR #27: computation reuse and correctness guards](https://github.com/Unjuno/functional-quotient-compression/pull/27) adds 16 follow-up subtests for existing MA-003/672/691..700, with proofs, 19 unit tests and a 200-check numerical replay. The package is on `research/mirror-compute-reuse-support-20261007`, under `experiments/mirror_applications/research_intake/compute_reuse_20261007/`. It is not a language-quality or runtime result.
+
+For MA-003, inspect shared-projection fusion, sign-View gate/bypass equivalence and antipodal cancellation. For KV candidates, inspect common-map value fusion, original key-width temperature after latent absorption, missing-information counterexamples and source-token cache provenance.
+
+Do not interrupt frozen runs or change audit seeds/gates. **Historical note:** 47 verified MA experiment directories were reconciled on 2026-10-08. The authoritative registry currently contains 1155 candidates, and MA-255 is still next. Never overwrite the expanded registry with the old 254-row worker checkout. PR #27 uses local CR subtest IDs, not new global MA IDs.

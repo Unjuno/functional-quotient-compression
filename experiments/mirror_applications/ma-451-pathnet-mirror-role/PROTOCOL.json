@@ -1,0 +1,20 @@
+{
+  "experiment_id": "MA-451",
+  "title": "PathNet path with Mirror module-role views",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/RUNTIME",
+  "base_commit": "1569029",
+  "hypothesis": "On tasks formed by selecting one module per PathNet layer and applying a two-angle role transformation, a shared 2x2 module bank plus path IDs and two adapted Mirror angles will improve held-out query RMSE by at least 20% over PathNet path-only while staying within 1.25x its actual bytes and no more than 1.25x rank-2 adapter adaptation time; a direct Givens control tests attribution.",
+  "physical_object": "two physical four-weight linear modules in each of two PathNet layers (four modules total)",
+  "mirror_coordinate": "two per-task angles, support-adapted after the PathNet route selects one module from each layer",
+  "logical_multiplicity": "eight task functions from four module paths, each with two role orientations",
+  "prior_art_refs": ["PA80"],
+  "controls": ["PathNet path-only with one route per task and no role adaptation (mandatory)", "shared module path plus two-angle Mirror view", "same shared path plus rank-2 additive residual per route", "direct native Givens view alias", "independent least-squares task vectors"],
+  "task": {"type": "four-dimensional linear regression; teacher has two modules in each of two layers and each task target rotates their selected module-sum by two angles; noise sigma=0.02", "train_tasks_per_outer_update": 8, "support_examples": 12, "query_examples": 40, "inner_updates": 4, "inner_learning_rate": 0.06, "outer_updates": 160, "evaluation_bank_size": 8},
+  "development": {"worlds_or_seeds": [45101, 45102], "selection_metric": "mean query RMSE over the same eight path-role tasks", "hyperparameter_changes_after_run": "prohibited without a numbered amendment"},
+  "fresh": {"worlds_or_seeds": [45111, 45112, 45113], "locked_before_access": true, "opened": false},
+  "storage": {"authority": "actual uncompressed .npz inference payload bytes", "paid_objects": ["all shared PathNet module tensors", "per-task two-layer route indices", "per-task view or adapter codes", "rank-2 route basis where applicable", "independent task vectors", "schema metadata"]},
+  "compute": {"report_training_examples": true, "report_outer_and_inner_updates": true, "report_training_and_evaluation_active_compute_proxy": true, "report_training_wall_time": true, "report_support_adaptation_wall_time": true, "report_query_wall_time": true, "report_end_to_end_wall_time": true},
+  "gates": {"PROMISING": "Both seeds: Mirror query RMSE <=0.80x PathNet path-only, actual bytes <=1.25x PathNet path-only and <= independent task-vector payload, end-to-end time <=1.25x rank-2, and native Givens outputs/bytes differ from Mirror.", "FAIL": "Either seed misses a success gate or direct native Givens control matches Mirror functions and serialized payload, or path-only equals/beats Mirror within 5% RMSE at lower/equal bytes.", "NOT ESTABLISHED": "Independent least-squares query RMSE exceeds 0.08 in both seeds, or serialized output replay fails."},
+  "boundaries": ["Synthetic aligned mechanism screen, not a PathNet reproduction, natural multitask benchmark, or neural-network capacity claim.", "PathNet path-only is mandatory and reports route indices as paid inference bytes.", "A direct native Givens parameterization is a strong simple control and exact alias check.", "Fresh seeds remain sealed unless both development seeds pass all success gates."]
+}

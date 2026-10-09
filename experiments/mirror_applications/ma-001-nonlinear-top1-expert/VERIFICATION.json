@@ -1,0 +1,41 @@
+{
+  "experiment_id": "MA-001",
+  "commit": "60ca242afcce0ff78b5116ce57dbe454a9dc4629",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-001-nonlinear-top1-expert/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "runs_checked": 72,
+    "fresh_payload_bytes_by_method": {
+      "full_dense": 23277,
+      "full_rank2": 23466,
+      "tied": 7445,
+      "film": 8845,
+      "residual2": 8845,
+      "mirror": 7697
+    }
+  },
+  "metric_replay": {
+    "checked": true,
+    "fresh_rows_checked": 36,
+    "deterministic_fields_exact": true,
+    "max_difference": 0.0,
+    "timing_fields_excluded": [
+      "training_wall_seconds",
+      "inference_examples_per_second"
+    ]
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_freeze_manifest_hashes_checked": true,
+  "notes": [
+    "Fresh configuration and seeds were frozen before access.",
+    "The teacher, initialization, data-generation, development-selection and inference seeds match the frozen manifest/protocol.",
+    "CPU wall time and throughput vary between runs and are descriptive only.",
+    "Mirror-specific byte gate failed versus ordinary tying by 252B; overall status PROMISING because the preregistered useful-sharing gate passed 3/3 aligned worlds.",
+    "README results and interpretation sections were filled after fresh access; the frozen pre-access README hash is preserved in FRESH_FREEZE_MANIFEST.json and was checked before the run."
+  ]
+}

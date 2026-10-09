@@ -1,0 +1,27 @@
+{
+  "experiment_id": "MA-129",
+  "commit": "35cd8bb9fa638006828bdd61ae9511df11dc8af1",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-129-temporal-view/tests",
+    "passed": 2,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "rows": 50,
+    "max_difference": 4.95e-11,
+    "replay_artifact": "VERIFICATION_REPLAY.json"
+  },
+  "fresh_split_integrity_checked": false,
+  "fresh_worlds_opened": true,
+  "notes": [
+    "The preregistered byte failure occurred in both development worlds. Seeds 12911-12913 were nevertheless opened in error and must be treated as exploratory, not confirmatory.",
+    "The result status is assigned from development only: Mirror 1,957B vs MTP 1,833B missed the 0.80x actual-byte requirement.",
+    "All 50 rows were replayed with exact payload lengths; 20 dev rows are protocol-valid and 30 opened-after-failure rows are retained with explicit exploratory marks.",
+    "The sequential branch-scoring control is not a Transformer KV-cache implementation."
+  ]
+}

@@ -1,0 +1,133 @@
+{
+  "experiment_id": "MA-006",
+  "title": "capacity-balanced nonlinear expert-choice Mirror",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/COMPUTE/RUNTIME",
+  "base_commit": "eca36e2",
+  "hypothesis": "With per-expert fixed token capacity, one nonlinear FFN plus role-specific Givens views retains full expert-choice routed quality at lower actual bytes than a full bank and beats tied FiLM/rank-2 residual controls; unrelated role functions require private weights.",
+  "physical_object": "one 16x32x16 GELU FFN",
+  "mirror_coordinate": "four role-specific four-angle Givens input/output views",
+  "logical_multiplicity": "four capacity-balanced expert-choice functions",
+  "prior_art_refs": [
+    "PA01",
+    "PA02",
+    "PA03"
+  ],
+  "scope_delta": "Changes routing from token-choice (MA001/002/004) to expert-choice: each expert independently selects its top capacity tokens, causing overlap and no-route cases.",
+  "controls": [
+    "full experts with dense expert-choice routing",
+    "full experts with dense token-choice top-1 routing",
+    "full experts with rank-2 factorized expert-choice router",
+    "full experts with rank-2 factorized token-choice router",
+    "ordinary hard-tied expert with expert-choice routing",
+    "tied expert plus role FiLM with expert-choice routing",
+    "tied expert plus rank-2 output residual with expert-choice routing",
+    "tied expert plus Mirror views with expert-choice routing"
+  ],
+  "task": {
+    "input_dim": 16,
+    "hidden_dim": 32,
+    "output_dim": 16,
+    "experts": 4,
+    "activation": "GELU",
+    "batch_size": 64,
+    "expert_choice_capacity_per_expert": 16,
+    "data": "balanced Gaussian role clouds: exactly 16 examples/role each batch; nonzero overlap between role distributions",
+    "primary_metric": "held-out routed MSE",
+    "structure_audit": "expert-choice coverage, expert loads, role recall, dominant-token router accuracy"
+  },
+  "teacher": {
+    "aligned": "one frozen nonlinear FFN conjugated by per-role Givens input/output views",
+    "independent": "four independently initialized FFNs",
+    "router_targets": "supervised balanced role IDs from the synthetic data generator"
+  },
+  "development": {
+    "world": 60000,
+    "teacher_seed": 600000,
+    "initialization_seed": 6000000,
+    "learning_rate_candidates": [
+      0.001,
+      0.003,
+      0.01
+    ],
+    "selection_metric": "mean held-out MSE across eight methods and both teacher modes",
+    "updates": 1200,
+    "batch_size": 64
+  },
+  "fresh": {
+    "worlds": [
+      60001,
+      60002,
+      60003
+    ],
+    "teacher_seeds": [
+      600001,
+      600002,
+      600003
+    ],
+    "initialization_seeds": [
+      6000001,
+      6000002,
+      6000003
+    ],
+    "locked_before_access": true,
+    "access_condition": "At selected LR, aligned Mirror MSE <=1.25x full dense expert-choice MSE and payload <=0.65x full expert-choice payload; otherwise FAIL and fresh stays sealed."
+  },
+  "routing": {
+    "expert_choice": "Each expert selects exactly batch_size/4 tokens by its score; overlaps are allowed, unselected tokens have zero MoE output. Selected expert logits are softmax-normalized per token.",
+    "token_choice": "Each token selects its single highest-scoring expert.",
+    "no_oracle_fallback": true,
+    "batch_capacity_exact": true
+  },
+  "training": {
+    "optimizer": "AdamW",
+    "weight_decay": 0.0001,
+    "router_weight_decay": 0.0,
+    "router_auxiliary_cross_entropy_weight": 1.0,
+    "dtype": "float32",
+    "matched_minibatches_across_methods": true,
+    "threads": 1,
+    "updates": 1200
+  },
+  "storage": {
+    "authority": "actual serialized full inference payload bytes",
+    "serialization": "torch.save CPU state dict plus deterministic compact JSON config",
+    "paid_objects": [
+      "router",
+      "full/shared FFN tensors",
+      "all Mirror angles",
+      "FiLM state",
+      "residual state",
+      "metadata"
+    ]
+  },
+  "compute": {
+    "report_examples": true,
+    "report_updates": true,
+    "report_active_FFN_assignments": true,
+    "report_MAC_proxy": true,
+    "report_coordinate_FLOPs": true,
+    "report_coverage_and_load": true,
+    "report_wall_time": true,
+    "report_CPU_throughput": true,
+    "inference_batch_size": 1024,
+    "inference_repetitions": 20
+  },
+  "gates": {
+    "development_open_fresh": "Aligned Mirror MSE <=1.25x full dense expert-choice MSE and payload <=0.65x; otherwise FAIL, fresh sealed.",
+    "fresh_useful_sharing": "All three fresh aligned worlds: Mirror MSE <=1.10x full expert-choice, coverage/role-recall within 1 percentage point of full expert-choice, payload <=0.65x full expert-choice.",
+    "mirror_specific": "All aligned fresh worlds: at least 10% MSE improvement over hard tying, FiLM and rank-2 residual at no more than 10% extra bytes or active compute vs each.",
+    "fail": "Development access gate misses; or fresh useful-sharing gate misses in at least two worlds; or simpler controls match within 10% MSE at equal/lower bytes and compute in at least two worlds.",
+    "promising": "Fresh useful-sharing passes at least 2/3, or passes 3/3 while Mirror-specific Pareto gate misses due to simpler-control/storage/runtime tradeoff.",
+    "not_established": "Invalid split, missing runs, or irreproducible serialization/training."
+  },
+  "boundaries": [
+    "small synthetic balanced role clouds",
+    "one layer and four experts",
+    "fixed capacity is batch dependent",
+    "unselected tokens receive zero MoE branch output",
+    "fixed updates not capacity evidence",
+    "no natural language or large-scale load-balancing claim"
+  ],
+  "protocol_frozen_before_development": true
+}

@@ -1,0 +1,33 @@
+{
+  "experiment_id": "MA-173",
+  "commit": "20adace6cbc1e149265da9d8626897b8d47ddbb4",
+  "tests": {
+    "command": "PYTHONPATH=experiments/mirror_applications/ma-173-fft-phase-mirror/source python -m pytest -q experiments/mirror_applications/ma-173-fft-phase-mirror/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "notes": "All nine inference methods serialize and restore with exactly identical deterministic outputs. Learned phase parameters and fixed-control seeds are included in torch.save payloads."
+  },
+  "metric_replay": {
+    "checked": true,
+    "report_records": 162,
+    "distinct_training_rows_replayed": 126,
+    "max_mse_difference": 4.919433749250857e-10,
+    "max_r2_difference": 4.999237079861274e-09,
+    "payload_bytes_and_compute_exact": true,
+    "replay_artifact": ["RESULTS_CORE.csv", "DEV_SELECTION_GRID.csv"],
+    "command": "PYTHONPATH=experiments/mirror_applications/ma-173-fft-phase-mirror/source python experiments/mirror_applications/ma-173-fft-phase-mirror/source/verify_replay.py experiments/mirror_applications/ma-173-fft-phase-mirror/RESULTS_CORE.csv experiments/mirror_applications/ma-173-fft-phase-mirror/RESULTS_EXPLORATORY.csv experiments/mirror_applications/ma-173-fft-phase-mirror/DEV_SELECTION_GRID.csv"
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_worlds_opened": true,
+  "notes": [
+    "The alignment bug in the initial phase-matrix test was corrected and the exact reconstruction test passed before development runs.",
+    "Development compared 0.003 and 0.01 on both seeds, both conditions, and all nine methods. Aggregate selection chose 0.01 before fresh access.",
+    "Learned FFT-phase quality and actual-byte gates passed in all three registered fresh aligned worlds.",
+    "Independent role matrices were a misspecification diagnostic and showed a large need for private parameters.",
+    "Fixed update evidence is a learning-efficiency/storage screen; no capacity or near-convergence claim is made."
+  ]
+}

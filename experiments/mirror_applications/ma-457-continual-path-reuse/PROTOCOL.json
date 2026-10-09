@@ -1,0 +1,20 @@
+{
+  "experiment_id": "MA-457",
+  "title": "Continual path reuse before module birth",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/CONTINUAL_TRANSFER",
+  "base_commit": "2264c54",
+  "hypothesis": "On a continual task stream with six functions sharing a rank-one update direction and two unrelated outliers, a shared module plus one scalar task View should meet held-out RMSE <=0.035 with at most three physical modules and <=0.75x actual bytes of a PathNet-style reuse-then-birth policy, while retaining early-task quality after later tasks; the direct rank-one native control tests Mirror attribution.",
+  "physical_object": "shared 4x4 linear module and a shared rank-one update basis",
+  "mirror_coordinate": "one scalar per-task coefficient on a shared rank-one update basis; birth a private full module only when support RMSE exceeds 0.05",
+  "logical_multiplicity": "continual task functions first share existing path/module state and only outliers receive private modules",
+  "prior_art_refs": ["PA80"],
+  "controls": ["PathNet-style frozen path/module reuse followed by full-module birth when support RMSE exceeds 0.05", "one shared full module with no task View", "shared module plus scalar rank-one task coordinate (direct native rank-one/LoRA-equivalent alias control)", "independent full matrix per task upper control"],
+  "task": {"type": "continual 4D linear regression stream, six tasks share one seeded rank-one update direction and two tasks are independent outliers", "dimension": 4, "task_count": 8, "aligned_task_coefficients": [0.0, 0.7, -0.7, 1.1, -1.1, 1.6], "outlier_tasks": [6, 7], "examples_per_task_support": 256, "examples_per_task_query": 256, "noise_sigma": 0.01, "meta_updates": 1600, "meta_batch_size": 32, "per_task_code_updates": 300, "private_birth_threshold_support_rmse": 0.05, "optimizer": "Adam; learning rate 0.02"},
+  "development": {"worlds_or_seeds": [45701, 45702], "selection_metric": "mean query RMSE over all eight tasks after the complete stream; also report per-task RMSE, early-task retention, module births and payload bytes", "hyperparameter_changes_after_run": "prohibited without numbered amendment"},
+  "fresh": {"worlds_or_seeds": [45711, 45712, 45713], "locked_before_access": true, "opened": false},
+  "storage": {"authority": "actual uncompressed .npz inference payload bytes", "paid_objects": ["shared module", "rank-one basis vectors", "per-task coordinates", "path/module indices", "private born modules", "task count and dtype/shape metadata"]},
+  "compute": {"report_training_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_training_wall_time": true, "report_query_wall_time": true, "report_inference_ops_per_example": true, "retention_metric": "query RMSE on all earlier tasks recomputed after the final task; report maximum absolute increase relative to the task's first accepted state"},
+  "gates": {"PROMISING": "Both seeds: mean query RMSE across all tasks <=0.035, every aligned task <=0.035, at most three physical modules total, actual payload <=0.75x PathNet, and maximum early-task RMSE increase <=0.01. Native rank-one control must not exactly match Mirror function and payload.", "FAIL": "Either seed misses a PROMISING gate, native rank-one control exactly matches Mirror, or independent full modules are both more accurate and no more than 1.25x Mirror actual bytes.", "NOT ESTABLISHED": "Independent upper control has mean query RMSE >0.025, or actual serialization/metric replay fails."},
+  "boundaries": ["Synthetic task stream with an intentionally shared rank-one subspace; no natural continual-learning claim.", "The native rank-one control is the same mathematical map W + m u v^T and is expected to test exact functional attribution.", "The independent bank is a quality upper bound, not a capacity comparison at matched bytes.", "Fresh seeds remain sealed unless every frozen PROMISING gate passes."]
+}

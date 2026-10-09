@@ -1,0 +1,36 @@
+{
+  "experiment_id": "MA-452",
+  "status": "VERIFIED_DEVELOPMENT_SCREEN",
+  "protocol_sha256": "cf9ecab4220ef623dc2d0d64daa8f9ab25ae3811cbb43dba948ee567f97036cc",
+  "development_gate_passed": false,
+  "fresh_accessed": false,
+  "serialization_roundtrip_checked": true,
+  "metric_replay_checked": true,
+  "native_alias_replay": "PASS",
+  "checks": [
+    {
+      "seed": 45201,
+      "mirror_bytes": 1766,
+      "native_bytes": 1766,
+      "mirror_native_rmse_difference": 0.0
+    },
+    {
+      "seed": 45202,
+      "mirror_bytes": 1766,
+      "native_bytes": 1766,
+      "mirror_native_rmse_difference": 0.0
+    }
+  ],
+  "tests": {
+    "command": "pytest -q -p no:cacheprovider experiments/mirror_applications/ma-452-factorized-path-view/tests",
+    "passed": 4,
+    "failed": 0
+  },
+  "notes": [
+    "Mirror generalized to four heldout path-role pairs: RMSE 0.2532/0.2680 vs path-only 1.0623/1.2528.",
+    "Actual Mirror payload 1766 bytes exceeded path-only 1468 and independent fit 1234 bytes.",
+    "Native Givens codebook payload hashes and heldout outputs matched exactly in both seeds.",
+    "Independent support fits were learnable, RMSE 0.0226/0.0318; fresh seeds sealed.",
+    "PathNet path × role family paused with MA-451 after repeated native Givens alias."
+  ]
+}

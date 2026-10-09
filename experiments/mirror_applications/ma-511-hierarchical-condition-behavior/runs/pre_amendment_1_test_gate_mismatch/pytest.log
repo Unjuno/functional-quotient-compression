@@ -1,0 +1,14 @@
+.F.                                                                      [100%]
+=================================== FAILURES ===================================
+__________________ test_additive_fit_generalizes_zero_private __________________
+
+    def test_additive_fit_generalizes_zero_private():
+     w=m.make_world(51101); f=m.fit(w,4,4,0)
+     x=m.eval_metrics(w,f,0)
+>    assert x['heldout_relative_rmse']<1e-5
+E    assert 0.0244310162961483 < 1e-05
+
+experiments/mirror_applications/ma-511-hierarchical-condition-behavior/tests/test_screen.py:14: AssertionError
+=========================== short test summary info ============================
+FAILED experiments/mirror_applications/ma-511-hierarchical-condition-behavior/tests/test_screen.py::test_additive_fit_generalizes_zero_private
+1 failed, 2 passed in 0.16s

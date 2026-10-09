@@ -1,0 +1,33 @@
+{
+  "experiment_id": "MA-171",
+  "commit": "4025b477f666bb7369531296eb4807c206799b88",
+  "tests": {
+    "command": "PYTHONPATH=experiments/mirror_applications/ma-171-circular-convolution-mirror/source python -m pytest -q experiments/mirror_applications/ma-171-circular-convolution-mirror/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "notes": "All eight method payloads reconstruct a model with exactly identical deterministic outputs. Payload is one torch.save checkpoint containing state and inference configuration/address seed."
+  },
+  "metric_replay": {
+    "checked": true,
+    "report_records": 192,
+    "distinct_training_rows_replayed": 160,
+    "max_mse_difference": 4.874265435717007e-10,
+    "max_r2_difference": 4.989471447114369e-09,
+    "replay_artifact": ["RESULTS_CORE.csv", "RESULTS_EXPLORATORY.csv", "DEV_SELECTION_GRID.csv"],
+    "command": "PYTHONPATH=experiments/mirror_applications/ma-171-circular-convolution-mirror/source python experiments/mirror_applications/ma-171-circular-convolution-mirror/source/verify_replay.py experiments/mirror_applications/ma-171-circular-convolution-mirror/RESULTS_CORE.csv experiments/mirror_applications/ma-171-circular-convolution-mirror/RESULTS_EXPLORATORY.csv experiments/mirror_applications/ma-171-circular-convolution-mirror/DEV_SELECTION_GRID.csv"
+  },
+  "fresh_split_integrity_checked": false,
+  "amendment_a1_split_integrity_checked": true,
+  "fresh_worlds_opened": true,
+  "notes": [
+    "Development grid compared learning rates 0.003 and 0.01 across two seeds, both task conditions and all eight methods. The registered aggregate metric selected 0.003 before fresh access.",
+    "The original fresh command was mistakenly invoked at 0.01; seeds 17111-17113 are retained separately as exploratory and excluded from the decision.",
+    "Amendment A1 fixed learning rate 0.003 and new seeds 17121-17123 before their access. No setting was changed based on either fresh result.",
+    "Corrected fresh HRR gate passed in all three deliberately HRR-aligned worlds: MSE was below untied and payload was 0.533x untied.",
+    "This is fixed-update synthetic evidence, not capacity or general neural-network evidence. Independent role matrices strongly require private weights."
+  ]
+}

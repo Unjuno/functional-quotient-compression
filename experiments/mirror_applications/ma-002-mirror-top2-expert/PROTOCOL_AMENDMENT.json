@@ -1,0 +1,17 @@
+{
+  "experiment_id": "MA-002",
+  "stage": "post-result documentation correction; no data or configuration change",
+  "original_protocol_sha256": "see FREEZE_MANIFEST.json and FRESH_FREEZE_MANIFEST.json; original PROTOCOL.json remains unchanged",
+  "corrections": [
+    {
+      "field": "base_commit",
+      "recorded_value": "4236bb6f4f177936cb24ac0d4a9527172df0cda2",
+      "correct_value": "4236bb640e1f52fd2abd80fb966c0588eb2ff950",
+      "evidence": "git rev-list --parents -n 1 5da5d7ed1367c731c0f892b860ffb8a22979c71e shows this as the parent of the frozen protocol commit"
+    }
+  ],
+  "clarifications": [
+    "The frozen engine derives per-method initialization seeds as the world initialization seed plus 100 times method index. The source hash was frozen before development and checked before fresh access.",
+    "No training data, split, learning-rate selection, gate, or fresh result changed."
+  ]
+}

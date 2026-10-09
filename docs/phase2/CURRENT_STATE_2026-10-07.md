@@ -8,6 +8,18 @@ The hypothesis is a canonical shared backbone plus multiple reusable specialist 
 
 **SRM003 was executed, but the scientific adoption gate failed.** A small causal decoder learned all atomic mappings but did not reliably compose them from endpoint-token loss. More residual experts and validation-based pruning did not resolve this. TM001 then tested temporal packetization directly: multiple future tokens can be emitted in one forward when the information determining the packet is already available, but factorized parallel slots fail when a packet-level latent is still unresolved.
 
+## Mirror program invariant
+
+The application program is centered on the extra low-description functional parameter `m`, not on any one transform family.
+
+Operationally:
+
+`F(x; theta) -> F(x; theta, m)`.
+
+The current mandate is to insert and stress-test `m` across as many strong existing mechanisms as practical, with the native method retained as a control. Manifold/quotient discovery, expert merging, KAN bases, tangent spaces, fast states, and other newer research lanes are supporting tools for choosing where and how `m` should act; they do not supersede the Mirror parameter as the program's central experimental variable.
+
+See [MIRROR_PARAMETER_INTEGRATION_DOCTRINE.md](MIRROR_PARAMETER_INTEGRATION_DOCTRINE.md).
+
 ## What the latest evidence actually says
 
 ### SRM001: decomposable synthetic tasks
@@ -52,11 +64,23 @@ Interpretation: period-token parallelism is viable for conditionally determined 
 
 A new explicit exploration lane treats the Mirror/View coordinate as a reusable design freedom rather than one fixed architecture. The question is whether an existing physically repeated object can be replaced by one shared object plus low-description addresses while retaining useful logical multiplicity.
 
-The current registry contains **254 MA-xxx candidates** across MoE experts, LoRA/adapters, attention heads, KV/GQA, depth tying, FFNs, embeddings/position, packet decoding, memory/retrieval, quantization, holographic binding, continual learning/optimization, ensembles/distillation, and SSM/runtime mechanisms.
+The current registry contains **1155 MA-xxx candidates** across MoE experts, LoRA/adapters, attention heads, KV/GQA, depth tying, FFNs, embeddings/position, packet decoding, memory/retrieval, quantization, holographic binding, continual learning/optimization, ensembles/distillation, SSM/runtime mechanisms, structured transforms, model merging, neural operators, relational graph models, diffusion control, neural cellular automata, invertible activation/flow views, global/reused expert pools, compositional latent dynamics, robot/action policies, matrix memories, programmable neural graphs, KAN edge functions, tangent/information geometry, causal engram memory, plastic/fast state, learned model manifolds, collective inference protocols, cross-model KV cache translators, multi-scene neural fields/4D Gaussian assets, speaker-adaptive TTS and audio codecs, generative flow maps/solvers, model stitching, video-chunk/frame reconstruction, learned equivariance, spiking threshold/time modulation, photonic physical operators, wireless beam/CSI/RIS configurations, personalized HRTF spatial audio, material interatomic potentials, physics-consistent MRI reconstruction, programmable quantum ansatz, visual-language prompt and streaming segmentation memory, ANN/late-interaction index functions, universal time-series forecasting, high-cardinality recommender embeddings/experts and wavelength-conditioned Earth-observation sensors, knowledge graph relation-channel/rotation maps, physically conditioned camera RAW ISP and lens optical PSFs, online robot system-identification policy functions and room-source-receiver acoustic fields.
+
+The eleventh 2026-10-08 literature sweep added MA-876..935 and PA236..265; all 60 new hypotheses are UNTESTED. Previously consolidated 47 MA evidence items remain 29 PROMISING and 18 FAIL. The next planned worker is still MA-255.
+
+The twelfth 2026-10-08 research sweep added MA-936..995 and PA266..295 (60 further UNTESTED candidates, 47 P0 and 13 P1). The thirteenth 2026-10-08 sweep added MA-996..1045 and PA296..325 (50 additional UNTESTED, 40 P0 and 10 P1), taking the registry to **1045**, with **998 UNTESTED**. No new Mirror model training occurred during these literature sweeps; MA-255 remains the next worker.
+
+The fourteenth 2026-10-08 literature sweep added MA-1046..1095 (50 new UNTESTED proposals, 40 P0/10 P1) and PA326..350, extending the backlog to **1095**, with **1048 UNTESTED**. New focus: universal time-series forecasts, recommendation embeddings and multi-sensor EO. Prior verified 29 PROMISING / 18 FAIL and MA-255 next priority are unchanged.
+
+The fifteenth 2026-10-08 sweep added MA1096..1115 (20 new UNTESTED: 16 P0, 4 P1) and PA351..371, extending the registry to **1115**, with **1068 UNTESTED**. The focus is natural learned LoRA weight-delta representability, GL(r) gauge-invariant subspaces, marginal compressed adapter-bank serving and LRAgent/PReCache low-rank cache reuse. A mathematical intake harness passed four CPU unit tests, but **no natural checkpoint or trained Mirror gain was measured**. MA-255 remains next.
+
+**Post-sweep function-space support (same 1115 registry):** PA372..381 add direct BOLT shared spectral task-code prior art, CG-LoRA function-space curvature, Fora activation subspaces, task-vector bases and SVD+CUR shared/private controls. A preregistered **real handwritten-digit image-shift** pilot used five separately trained source LoRAs and four held-out adaptation conditions. Mirror's 8-scalar/task code reached 52.19% test accuracy versus a BOLT-like diagonal 6-scalar/task code's 49.79%, but dense shared core and native rank-4 LoRA scored 69.97%/86.98%, with Mirror slower. The **Mirror-specific Pareto gate FAILED**; 48 rows×14 deterministic fields replayed exactly. This is neither real LLM adaptation nor a completed MA; **29 PROMISING / 18 FAIL and MA-255 next are unchanged**. Read [function-space falsification review](MIRROR_FUNCTION_SPACE_FALSIFICATION_2026-10-08.md) and [pilot evidence](../../experiments/mirror_applications/research_intake/natural_digit_function_20261008/RESULTS.md).
 
 This registry is a hypothesis backlog, not evidence. Each candidate must use actual serialized bytes and the relevant simple control. Mirror-specific value requires beating a simpler non-Mirror shared/low-rank alternative.
 
 A compact nanoGPT-derived baseline is stored under `third_party/nanoGPT/` for common A/B experiments. The original user-supplied archive SHA-256 and license provenance are recorded there.
+
+The sixteenth research sweep on 2026-10-08 added **MA1116..1155 (40 UNTESTED, 33 P0/7 P1)** and **PA382..413**, bringing the registry to **1155 candidates and 1108 UNTESTED**. The new native comparator lanes are RotatE/TuckER/QuatE relation operators; ParamISP/Uni-ISP camera EXIF/device modulations; UP-OSI/RMA/CoRMA robot dynamic conditioning; and NAF/TA-RIR/NAMS acoustic room fields. All are **research/plan** only: 29 PROMISING and 18 FAIL prior MA results and the separate shifted-digit negative pilot remain unchanged. The planned next worker remains MA-255. See [sixteenth research notes](MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_SIXTEENTH_SWEEP.md).
 
 ## Interpretation and open hypotheses
 
@@ -88,7 +112,17 @@ Primary scientific adoption gate: **FAIL**. Pruning hardware/byte mechanics: ver
 
 - [Mirror application design space](MIRROR_APPLICATION_DESIGN_SPACE.md)
 - [Mirror application prior-art map](MIRROR_APPLICATION_PRIOR_ART.md)
-- [Mirror application research notes](MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-07.md)
+- [Mirror KV cache reuse design](MIRROR_KV_CACHE_REUSE.md)
+- [Mirror application research notes through 2026-10-07](MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-07.md)
+- [Research notes 2026-10-08: cross-model cache, dynamic scenes, speech, generators, stitching](MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08.md)
+- [Twelfth sweep: video, equivariance, spiking, photonic, wireless and HRTF research](MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_TWELFTH_SWEEP.md)
+- [Thirteenth sweep: materials, MRI, quantum circuits, visual prompts and search](MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_THIRTEENTH_SWEEP.md)
+- [Fourteenth sweep: forecasting, recommender embeddings and Earth observation](MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_FOURTEENTH_SWEEP.md)
+- [Fifteenth sweep: natural LoRA geometry, shared bases, real cache reuse](MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_FIFTEENTH_SWEEP.md)
+- [Gauge-invariant natural-LoRA screening intake](../../experiments/mirror_applications/research_intake/natural_lora_orbit_20261008/README.md)
+- [Function-space evidence and BOLT/CG-LoRA controls](MIRROR_FUNCTION_SPACE_FALSIFICATION_2026-10-08.md)
+- [Sixteenth sweep: KG relation, camera ISP, robot dynamics and room acoustics](MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_SIXTEENTH_SWEEP.md)
+- [Frozen real handwritten-digit shifted-task code pilot](../../experiments/mirror_applications/research_intake/natural_digit_function_20261008/RESULTS.md)
 - [Autonomous worker goal](../../GOAL.md)
 - [Mirror application roadmap](../../roadmap/MIRROR_APPLICATION_ROADMAP.md)
 - [TM001 report](TM001_PARALLEL_PERIOD_TOKEN_MIXING.md)

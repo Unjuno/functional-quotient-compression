@@ -1,0 +1,29 @@
+{
+  "experiment_id": "MA-481",
+  "protocol_sha256": "63315e59bf749460df094b6bf5505649f596a272b0102a3c20643651f6d4161a",
+  "commit": "12405cb6b19ac08ae0a3753a56b6f8e96589ea82",
+  "tests": {
+    "command": "pytest -q experiments/mirror_applications/ma-481-vq-mirror-functions/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_accessed": false,
+  "native_vq_alias": true,
+  "disposition": "FAIL: VQ16/64/128 miss heldout function-quality and distinct-address gates in both development seeds; int8 is much higher quality for a small byte increase; native VQ exactly aliases Mirror.",
+  "notes": [
+    "Actual full NPZ inference payload bytes include arrays, indices and schema metadata.",
+    "Both frozen development seeds replay with zero metric difference; mirror/native VQ payload hashes are equal for every K.",
+    "Fresh seeds 48111-48113 remained sealed.",
+    "Synthetic rank-four linear function bank only; no neural language-model claim.",
+    "Accounting-only AMENDMENT_1 records additional decode/index operation fields; initial outputs are retained."
+  ]
+}

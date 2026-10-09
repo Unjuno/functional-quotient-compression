@@ -1,0 +1,28 @@
+{
+  "phase": "fresh",
+  "selected_lr": 0.003,
+  "rows": 30,
+  "worlds": [
+    41001,
+    41002,
+    41003
+  ],
+  "modes": [
+    "shared_qkv_views",
+    "independent_qkv"
+  ],
+  "methods": [
+    "full_mha",
+    "tied_qkv",
+    "head_gain",
+    "rank1_residual",
+    "mirror_view"
+  ],
+  "max_abs_delta": {
+    "attention_output_mse": 4.9274820335121206e-12,
+    "worst_head_contribution_mse": 4.86047660452904e-12,
+    "r2": 4.873657255544117e-09,
+    "serialized_bytes": 0
+  },
+  "payload_bytes_exact": true
+}

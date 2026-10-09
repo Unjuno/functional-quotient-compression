@@ -20,6 +20,22 @@ The compression question is whether one physical object plus small addresses can
 
 This does NOT imply independent information or independent-model capacity. Every claim must be measured at actual serialized bytes and useful quality.
 
+## Program invariant: stress-test `m` across methods
+
+The design-space expansion does not change the central experimental variable.
+
+The program's Mirror-specific move is always to add a low-description functional parameter:
+
+`F(x; theta) -> F(x; theta, m)`.
+
+New literature families primarily supply:
+- places to insert `m`;
+- stronger controls for `m`;
+- better parameterizations of `m`;
+- evidence about which variation cannot fit `m`.
+
+Do not turn the application program into a generic survey of adjacent architectures. The purpose of breadth is to test the same extra functional degree of freedom in many mechanisms.
+
 ## What can be multiplied logically?
 
 The registry treats any repeated object as a candidate:
@@ -36,7 +52,52 @@ The registry treats any repeated object as a candidate:
 - holographic binding roles;
 - continual-learning skills / update geometries;
 - ensembles / students;
-- SSM states and execution kernels.
+- SSM states and execution kernels;
+- structured orthogonal / low-displacement matrix families;
+- task-delta and model-merging capability directions;
+- Bayesian posterior / ensemble subspaces;
+- neural operators over PDE/function families;
+- relation-specific graph message transforms;
+- diffusion control branches/adapters;
+- neural-cellular-automata local update rules and goal states;
+- invertible activation charts / flow coupling transforms;
+- globally reused or merged expert pools;
+- latent dynamical / Koopman operators and rank-1 weight atoms;
+- robot-policy skills and motor-option adapters;
+- matrix-memory rank budgets;
+- programmable graph topology / executable architecture state;
+- KAN edge functions and shared parent nonlinearities;
+- tangent/NTK/Fisher-geometric task coordinates;
+- causal engram memory traces;
+- plasticity rules and writable fast-weight state;
+- learned low-loss model-manifold coordinates;
+- collective admission/communication protocols;
+- module-reuse and recombination-rule structure.
+- source-target cross-model KV cache translators and shared attention-sensitive mappings;
+- multi-scene radiance fields and dynamic Gaussian deformation/appearance;
+- multi-speaker adapters, voice timbre/style functions and semantic/acoustic codec roles;
+- generative flow-map intervals, solver coefficients, subject/style LoRA merging;
+- cross-model block, residual-stream, and SAE feature stitching connectors.
+- neural video chunk/scene latent with frame-offset and bitrate-control Views;
+- group-equivariant tensor/filter banks and task-specific symmetry-breaking;
+- spiking synapse/threshold/membrane/neuromodulatory functions;
+- programmable optical MZI/PCM/diffractive physical operators;
+- wireless antenna beamforming, RIS phase and CSI-feedback subspaces;
+- individualized HRTF spatial-audio fields and head-pose coordinates;
+- conservative materials potentials and sparse domain-conditioned equivariant forces;
+- physics-constrained multicoil MRI reconstruction and scan adaptation;
+- quantum variational circuits with paid gate/shot/program resource budgets;
+- coupled vision-language prompts and per-object streaming segmentation memories;
+- task-aware retrieval index, generated residual codebooks and ANN search policies.
+- shared universal time-series forecasting models with horizon, variable, frequency and regime Views;
+- high-cardinality recommender categorical tables/generators with field, task, domain and rare-ID coordinates;
+- physically calibrated multi-sensor Earth-observation networks with wavelength, modality, scale and season Views.
+- relational KG transformations (complex rotations, quaternion, Tucker and Kraus relation operators) with domain/time coordinates;
+- camera ISP/PSF physical sensor families modulated by device, ISO, exposure and lens optics;
+- deployable robot control policies using online mass/friction/contact estimates and morphology codes;
+- continuous room-acoustic source/receiver neural fields with per-room spectral and reflection parameters;
+- natural, independently trained LoRA adapter banks with gauge-invariant shared subspaces, compact task cores and private residuals;
+- low-rank multi-agent KV cache states with neutral base-cache reconstruction beyond LRAgent/PReCache.
 
 ## Four mechanism classes
 
@@ -75,6 +136,8 @@ For every candidate report separately:
 10. strongest simple control.
 
 Never convert the number of possible addresses or combinations into a capacity claim by itself.
+
+For low-rank adapter comparisons, do not confuse raw factor-coordinate similarity with shared learned function: ΔW=B A has GL(r) gauge freedom. Use gauge-invariant projectors and natural heldout tasks. Shared-basis+per-task-core itself is existing work (Compress then Serve, CtM, EigenLoRAx and MetaTT), so a Mirror-specific claim requires marginal gains beyond these strong controls.
 
 ## Experiment progression
 

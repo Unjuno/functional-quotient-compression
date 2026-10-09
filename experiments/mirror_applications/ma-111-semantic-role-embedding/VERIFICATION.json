@@ -1,0 +1,35 @@
+{
+  "experiment_id": "MA-111",
+  "commit": "865c8f1f842db934b94564ed0c1d97f688879740",
+  "tests": {
+    "command": "OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m pytest -q experiments/mirror_applications/ma-111-semantic-role-embedding/tests",
+    "passed": 2,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "notes": "All ten method payload variants parse and reserialize byte-identically after adaptation. Packed records charge shared embedding/readout/bias, all role state, role IDs, method/tensor names, shapes, dtypes, dimensions and headers. Resume state separately charges optimizer records."
+  },
+  "metric_replay": {
+    "checked": true,
+    "report_records": 1400,
+    "fresh_records_replayed": 600,
+    "max_difference": 0.0,
+    "payload_bytes_and_compute_exact": true,
+    "replay_artifact": [
+      "RESULTS_CORE.csv"
+    ],
+    "command": "OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python experiments/mirror_applications/ma-111-semantic-role-embedding/source/run.py --seeds 11111,11112,11113 --conditions aligned,independent --lrs 0.01 --out /tmp/ma111-fresh-replay.csv",
+    "notes": "All NLL, KL, top-1, ECE, actual payload/resume bytes, training examples/updates, and active-compute metrics replayed exactly. Wall time and throughput excluded."
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Initial protocol was frozen at 03c101d1c9f37d0322283d053036a797766230f6 before development.",
+    "Registered development mean KL selected LR .01 (.00322458 versus .00333996 at .003); fresh LR was frozen at b9aca4126c348c02d16237c79f40f119fbac3998 before accessing seeds 11111–11113.",
+    "The aligned fresh gate passed 3/3. Mirror payload was 2,770B versus 5,839B full per-role maps (0.474x); rank-2 output LoRA reached similar quality at 3,411B but faster throughput.",
+    "Independent teacher roles did not transfer with Mirror; full role maps performed better.",
+    "This is a synthetic one-step task with teacher transformations deliberately in the candidate Givens family; it is not evidence of natural semantic-role or language-model capability."
+  ],
+  "fresh_worlds_opened": true
+}

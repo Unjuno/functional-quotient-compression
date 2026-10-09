@@ -1,0 +1,30 @@
+{
+  "experiment_id": "MA-510",
+  "commit": null,
+  "protocol_freeze_commit": "36c60f0afec1a452b0304959c5e035994ffba444",
+  "protocol_sha256": "f5883497812918c2ccb6688fc5a9bf32771807c422b743e0190de5c4e85fe4a1",
+  "source_sha256": "f79fa862bf083aa1a90684473c4e87f20757c95c5cf99d6334881eb698ee304e",
+  "tests_sha256": "85c627486abf032967458f14e2307dda19ea51ea300a73218f0ebb613f86fb1d",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-510-conditional-activation-steering/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "format": "uncompressed NPZ",
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "payloads_replayed": 52
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0,
+    "native_pca_mirror_alias_all_ranks_and_seeds": true
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_seeds_accessed": [],
+  "notes": [
+    "Two development seeds only (51001, 51002); seeds 51011-51013 were not opened and no fresh run directories exist.",
+    "Synthetic frozen activation mechanism screen only; no language-model semantic claim."
+  ]
+}

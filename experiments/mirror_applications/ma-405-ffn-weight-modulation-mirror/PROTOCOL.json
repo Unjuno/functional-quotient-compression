@@ -1,0 +1,81 @@
+{
+  "experiment_id": "MA-405",
+  "title": "StyleGAN2-like conditional FFN weight modulation versus Mirror Views",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/RUNTIME",
+  "base_commit": "b3b363e",
+  "prior_art_refs": [
+    "PA65"
+  ],
+  "hypothesis": "A compact context-specific product of hidden-channel Givens rotations provides a useful non-diagonal FFN function view beyond StyleGAN2-style per-input-channel weight modulation/demodulation on rotation-dominated contexts, while using less actual serialized state than independent context FFNs.",
+  "physical_object": "One shared 32x32 FFN output projection W and one common frozen 32D nonlinear feature block.",
+  "mirror_coordinate": "16 fixed adjacent-pair Givens angles per context/target family (16 FP16 coordinates). Apply h\u2192R(m)h before the shared W.",
+  "logical_multiplicity": "40 context-specific effective FFNs: 8 contexts \u00d7 five target-mixture alpha points, all sharing the same physical feature block and W.",
+  "controls": [
+    "shared unmodulated FFN",
+    "StyleGAN2 modulate/demodulate W by per-input-channel scale (32 coordinates/task)",
+    "Mirror Givens hidden View (16 coordinates/task)",
+    "rank-one context matrix residual over W",
+    "independent full 32x32 affine matrix per task as upper control"
+  ],
+  "task": {
+    "width": 32,
+    "contexts": 8,
+    "alphas": [
+      0,
+      0.25,
+      0.5,
+      0.75,
+      1.0
+    ],
+    "alpha_definition": "alpha=1 target exactly uses StyleGAN2 weight modulation/demodulation; alpha=0 target exactly uses W@R(m); intermediate effective matrices linearly mix these two endpoint target functions.",
+    "feature": "Frozen shared 32D ReLU MLP features; targets are linear effective-FFN outputs.",
+    "train_examples_per_context_alpha": 4096,
+    "heldout_examples_per_context_alpha": 4096,
+    "input_split": "Independent randomly generated train and heldout inputs; all methods use the same seed-specific arrays."
+  },
+  "development": {
+    "worlds_or_seeds": [
+      40501,
+      40502
+    ],
+    "updates": 400,
+    "batch_size": 1024,
+    "selection_metric": "mean held-out normalized RMSE per alpha; report endpoints and all mixtures separately."
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      40511,
+      40512,
+      40513
+    ],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "format": "deterministic compressed NPZ with FP16 shared and task tensors plus UTF-8 metadata",
+    "paid_objects": [
+      "shared feature block",
+      "shared projection W",
+      "all context/alpha modulation parameters",
+      "metadata and reconstruction state"
+    ],
+    "replay_required": true
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true,
+    "report_inference_throughput": true,
+    "benchmark": "eager single-thread CPU; 10 warmup and 25 timed calls on 512 feature vectors; measure modulation plus FFN projection; include modulation/generator ops."
+  },
+  "success_gate": "At alpha=0 in both development seeds, Mirror NRMSE <=0.02, <=0.10x StyleGAN2 modulation NRMSE; serialized bytes <=0.95x StyleGAN2 payload and <=0.10x independent upper payload; throughput >=0.80x StyleGAN2. Must also report alpha=1 to show native StyleGAN2 behavior; passing only opens fresh confirmation.",
+  "failure_gate": "FAIL if any alpha=0 development gate is missed in either seed, or if Mirror fails to provide lower NRMSE than StyleGAN2 at comparable or lower total bytes in the rotation-target endpoint.",
+  "boundaries": [
+    "Synthetic mechanism task only; not language-model NLL or natural Transformer quality.",
+    "Alpha endpoints deliberately isolate known diagonal modulation from non-diagonal rotation geometry.",
+    "An alpha=0 win is only evidence on this aligned rotation family, not arbitrary FFN capacity.",
+    "Fresh remains sealed unless both development seeds pass the complete gate."
+  ]
+}

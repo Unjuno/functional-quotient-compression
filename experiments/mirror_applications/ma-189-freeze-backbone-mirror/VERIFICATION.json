@@ -1,0 +1,33 @@
+{
+  "experiment_id": "MA-189",
+  "commit": "ba9639983b09eb75237a6732d1f3c75ad8d75b8a",
+  "tests": {
+    "command": "PYTHONPATH=experiments/mirror_applications/ma-189-freeze-backbone-mirror/source python -m pytest -q experiments/mirror_applications/ma-189-freeze-backbone-mirror/tests",
+    "passed": 4,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "notes": "All seven methods restored identical predictions and reserialized to byte-identical payloads. The inference codec charges task ID, method, dimensions, each name/dtype/shape, and every tensor byte. Resume payloads include optimizer state in torch.save."
+  },
+  "metric_replay": {
+    "checked": true,
+    "report_records": 294,
+    "distinct_training_rows_replayed": 294,
+    "max_mse_difference": 0.0,
+    "payload_bytes_and_compute_exact": true,
+    "replay_artifact": ["RESULTS_CORE.csv", "DEV_LR003.csv", "DEV_LR010.csv"],
+    "command": "PYTHONPATH=experiments/mirror_applications/ma-189-freeze-backbone-mirror/source python experiments/mirror_applications/ma-189-freeze-backbone-mirror/source/verify_replay.py experiments/mirror_applications/ma-189-freeze-backbone-mirror/RESULTS_CORE.csv experiments/mirror_applications/ma-189-freeze-backbone-mirror/DEV_LR003.csv experiments/mirror_applications/ma-189-freeze-backbone-mirror/DEV_LR010.csv",
+    "notes": "All held-out MSE, Task-0 retention, payload-byte, example/update and active-compute fields replayed exactly. Wall-clock and throughput were omitted from exact replay because they are timing measurements."
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_worlds_opened": true,
+  "notes": [
+    "Protocol and source were committed at 08b8c7b89d38edafe48d1e25b5aeba93a485c7c6 before the first fresh run.",
+    "Development seeds 18901-18902 selected LR 0.01 before fresh seeds 18911-18913; no fresh-based tuning occurred.",
+    "The two-sided Mirror quality, incremental-byte and Task-0 retention gates passed at 64 examples in all three fresh aligned worlds.",
+    "The task family is exactly generated from the two candidate view operations; rank-4 LoRA and byte-matched generic shared-basis controls remain untested.",
+    "Independent task maps were not recovered by the shared two-angle view; fixed-update synthetic evidence only, no capacity or language-model claim."
+  ]
+}

@@ -1,0 +1,671 @@
+{
+  "dimension": 512,
+  "experiment_id": "MA-516",
+  "extraction_seconds": 12.337792690988863,
+  "model": "EleutherAI/pythia-70m-deduped",
+  "model_sha256": "3da388330e4549156d76b58d6d268c63cd005e9336b4f4d2d378421e7b7a33fd",
+  "revision": "e93a9faa9c77e5d09219f6c868bfc7a1bd65593c",
+  "rows": [
+    {
+      "common_base_bytes": 168144624,
+      "evaluation_queries": 32,
+      "extra_compute_proxy": 0,
+      "extraction_seconds": 12.337792690988863,
+      "inference_seconds": 2.7360069580026902,
+      "method": "none",
+      "metrics": {
+        "by_task": [
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -17.191913276910782,
+            "mean_gold_margin": -1.5285387933254242,
+            "name": "english_french",
+            "task_id": 12
+          },
+          {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -9.984204947948456,
+            "mean_gold_margin": -1.4556121230125427,
+            "name": "french_english",
+            "task_id": 13
+          },
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -17.690443977713585,
+            "mean_gold_margin": -2.838127538561821,
+            "name": "english_spanish",
+            "task_id": 14
+          },
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -10.378680229187012,
+            "mean_gold_margin": -1.74676513671875,
+            "name": "spanish_english",
+            "task_id": 15
+          }
+        ],
+        "candidate_forward_calls": 256,
+        "candidate_input_tokens": 2040,
+        "candidate_sequences": 256,
+        "heldout_accuracy": 0.15625,
+        "mean_gold_candidate_logprob": -13.811310607939959,
+        "mean_gold_vs_best_negative_margin": -1.8922608979046345,
+        "queries": 32
+      },
+      "native_alias": false,
+      "payload_bytes": 0,
+      "rank": 0,
+      "seed": 51601,
+      "support_examples": 128,
+      "support_forward_calls": 256,
+      "support_input_tokens": 625,
+      "total_deployment_bytes": 168144624
+    },
+    {
+      "common_base_bytes": 168144624,
+      "evaluation_queries": 32,
+      "extra_compute_proxy": 131072,
+      "extraction_seconds": 12.337792690988863,
+      "inference_seconds": 2.2802664719929453,
+      "method": "explicit_fv",
+      "metrics": {
+        "by_task": [
+          {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -13.933814704418182,
+            "mean_gold_margin": -1.6370469778776169,
+            "name": "english_french",
+            "task_id": 12
+          },
+          {
+            "accuracy": 0.375,
+            "mean_gold_logprob": -7.235067546367645,
+            "mean_gold_margin": -1.1242066025733948,
+            "name": "french_english",
+            "task_id": 13
+          },
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -15.17108628153801,
+            "mean_gold_margin": -2.655744791030884,
+            "name": "english_spanish",
+            "task_id": 14
+          },
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -7.020820379257202,
+            "mean_gold_margin": -0.7454833984375,
+            "name": "spanish_english",
+            "task_id": 15
+          }
+        ],
+        "candidate_forward_calls": 256,
+        "candidate_input_tokens": 2040,
+        "candidate_sequences": 256,
+        "heldout_accuracy": 0.21875,
+        "mean_gold_candidate_logprob": -10.84019722789526,
+        "mean_gold_vs_best_negative_margin": -1.5406204424798489,
+        "queries": 32
+      },
+      "native_alias": false,
+      "payload_bytes": 34454,
+      "rank": 0,
+      "seed": 51601,
+      "support_examples": 128,
+      "support_forward_calls": 256,
+      "support_input_tokens": 625,
+      "total_deployment_bytes": 168179078
+    },
+    {
+      "common_base_bytes": 168144624,
+      "evaluation_queries": 32,
+      "extra_compute_proxy": 131072,
+      "extraction_seconds": 12.337792690988863,
+      "inference_seconds": 2.2583381260046735,
+      "method": "mirror_r1",
+      "metrics": {
+        "by_task": [
+          {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -13.933814704418182,
+            "mean_gold_margin": -1.6370469778776169,
+            "name": "english_french",
+            "task_id": 12
+          },
+          {
+            "accuracy": 0.375,
+            "mean_gold_logprob": -7.235067546367645,
+            "mean_gold_margin": -1.1242066025733948,
+            "name": "french_english",
+            "task_id": 13
+          },
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -15.17108628153801,
+            "mean_gold_margin": -2.655744791030884,
+            "name": "english_spanish",
+            "task_id": 14
+          },
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -7.020820379257202,
+            "mean_gold_margin": -0.7454833984375,
+            "name": "spanish_english",
+            "task_id": 15
+          }
+        ],
+        "candidate_forward_calls": 256,
+        "candidate_input_tokens": 2040,
+        "candidate_sequences": 256,
+        "heldout_accuracy": 0.21875,
+        "mean_gold_candidate_logprob": -10.84019722789526,
+        "mean_gold_vs_best_negative_margin": -1.5406204424798489,
+        "queries": 32
+      },
+      "native_alias": false,
+      "payload_bytes": 34454,
+      "rank": 0,
+      "seed": 51601,
+      "support_examples": 128,
+      "support_forward_calls": 256,
+      "support_input_tokens": 625,
+      "total_deployment_bytes": 168179078
+    },
+    {
+      "common_base_bytes": 168144624,
+      "evaluation_queries": 32,
+      "extra_compute_proxy": 135168,
+      "extraction_seconds": 12.337792690988863,
+      "inference_seconds": 2.6583735710009933,
+      "method": "mirror_r2",
+      "metrics": {
+        "by_task": [
+          {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -15.080721646547318,
+            "mean_gold_margin": -1.8395883738994598,
+            "name": "english_french",
+            "task_id": 12
+          },
+          {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -8.275476336479187,
+            "mean_gold_margin": -1.2883147597312927,
+            "name": "french_english",
+            "task_id": 13
+          },
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -16.020788729190826,
+            "mean_gold_margin": -3.172687292098999,
+            "name": "english_spanish",
+            "task_id": 14
+          },
+          {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -8.165772795677185,
+            "mean_gold_margin": -0.9911040663719177,
+            "name": "spanish_english",
+            "task_id": 15
+          }
+        ],
+        "candidate_forward_calls": 256,
+        "candidate_input_tokens": 2040,
+        "candidate_sequences": 256,
+        "heldout_accuracy": 0.21875,
+        "mean_gold_candidate_logprob": -11.885689876973629,
+        "mean_gold_vs_best_negative_margin": -1.8229236230254173,
+        "queries": 32
+      },
+      "native_alias": false,
+      "payload_bytes": 8464,
+      "rank": 2,
+      "seed": 51601,
+      "support_examples": 128,
+      "support_forward_calls": 256,
+      "support_input_tokens": 625,
+      "total_deployment_bytes": 168153088
+    },
+    {
+      "common_base_bytes": 168144624,
+      "evaluation_queries": 32,
+      "extra_compute_proxy": 139264,
+      "extraction_seconds": 12.337792690988863,
+      "inference_seconds": 2.482208799017826,
+      "method": "mirror_r4",
+      "metrics": {
+        "by_task": [
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -14.660157561302185,
+            "mean_gold_margin": -1.8164246827363968,
+            "name": "english_french",
+            "task_id": 12
+          },
+          {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -7.692630231380463,
+            "mean_gold_margin": -1.4066162705421448,
+            "name": "french_english",
+            "task_id": 13
+          },
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -15.74162545800209,
+            "mean_gold_margin": -2.842909425497055,
+            "name": "english_spanish",
+            "task_id": 14
+          },
+          {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -7.688560366630554,
+            "mean_gold_margin": -0.9580078125,
+            "name": "spanish_english",
+            "task_id": 15
+          }
+        ],
+        "candidate_forward_calls": 256,
+        "candidate_input_tokens": 2040,
+        "candidate_sequences": 256,
+        "heldout_accuracy": 0.1875,
+        "mean_gold_candidate_logprob": -11.445743404328823,
+        "mean_gold_vs_best_negative_margin": -1.7559895478188992,
+        "queries": 32
+      },
+      "native_alias": false,
+      "payload_bytes": 12688,
+      "rank": 4,
+      "seed": 51601,
+      "support_examples": 128,
+      "support_forward_calls": 256,
+      "support_input_tokens": 625,
+      "total_deployment_bytes": 168157312
+    },
+    {
+      "common_base_bytes": 168144624,
+      "evaluation_queries": 32,
+      "extra_compute_proxy": 147456,
+      "extraction_seconds": 12.337792690988863,
+      "inference_seconds": 2.1487516409833916,
+      "method": "mirror_r8",
+      "metrics": {
+        "by_task": [
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -14.443882554769516,
+            "mean_gold_margin": -1.8495450168848038,
+            "name": "english_french",
+            "task_id": 12
+          },
+          {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -7.4784786105155945,
+            "mean_gold_margin": -1.2771148085594177,
+            "name": "french_english",
+            "task_id": 13
+          },
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -15.509118467569351,
+            "mean_gold_margin": -2.8129394352436066,
+            "name": "english_spanish",
+            "task_id": 14
+          },
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -7.424151062965393,
+            "mean_gold_margin": -0.9632567763328552,
+            "name": "spanish_english",
+            "task_id": 15
+          }
+        ],
+        "candidate_forward_calls": 256,
+        "candidate_input_tokens": 2040,
+        "candidate_sequences": 256,
+        "heldout_accuracy": 0.15625,
+        "mean_gold_candidate_logprob": -11.213907673954964,
+        "mean_gold_vs_best_negative_margin": -1.7257140092551708,
+        "queries": 32
+      },
+      "native_alias": false,
+      "payload_bytes": 21136,
+      "rank": 8,
+      "seed": 51601,
+      "support_examples": 128,
+      "support_forward_calls": 256,
+      "support_input_tokens": 625,
+      "total_deployment_bytes": 168165760
+    },
+    {
+      "common_base_bytes": 168144624,
+      "evaluation_queries": 32,
+      "extra_compute_proxy": 155648,
+      "extraction_seconds": 12.337792690988863,
+      "inference_seconds": 2.126892811997095,
+      "method": "mirror_r12",
+      "metrics": {
+        "by_task": [
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -14.500354051589966,
+            "mean_gold_margin": -1.9773926585912704,
+            "name": "english_french",
+            "task_id": 12
+          },
+          {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -7.437929391860962,
+            "mean_gold_margin": -1.2772675156593323,
+            "name": "french_english",
+            "task_id": 13
+          },
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -15.427534759044647,
+            "mean_gold_margin": -2.7850361466407776,
+            "name": "english_spanish",
+            "task_id": 14
+          },
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -7.3650181889534,
+            "mean_gold_margin": -0.972564697265625,
+            "name": "spanish_english",
+            "task_id": 15
+          }
+        ],
+        "candidate_forward_calls": 256,
+        "candidate_input_tokens": 2040,
+        "candidate_sequences": 256,
+        "heldout_accuracy": 0.15625,
+        "mean_gold_candidate_logprob": -11.182709097862244,
+        "mean_gold_vs_best_negative_margin": -1.7530652545392513,
+        "queries": 32
+      },
+      "native_alias": false,
+      "payload_bytes": 29584,
+      "rank": 12,
+      "seed": 51601,
+      "support_examples": 128,
+      "support_forward_calls": 256,
+      "support_input_tokens": 625,
+      "total_deployment_bytes": 168174208
+    },
+    {
+      "common_base_bytes": 168144624,
+      "evaluation_queries": 32,
+      "extra_compute_proxy": 133120,
+      "extraction_seconds": 12.337792690988863,
+      "inference_seconds": 2.087455744011095,
+      "method": "native_pca_r1",
+      "metrics": {
+        "by_task": [
+          {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -15.126996219158173,
+            "mean_gold_margin": -1.8636353313922882,
+            "name": "english_french",
+            "task_id": 12
+          },
+          {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -8.278983473777771,
+            "mean_gold_margin": -1.2472534775733948,
+            "name": "french_english",
+            "task_id": 13
+          },
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -16.017219617962837,
+            "mean_gold_margin": -3.1742609590291977,
+            "name": "english_spanish",
+            "task_id": 14
+          },
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -8.319659292697906,
+            "mean_gold_margin": -1.0539245009422302,
+            "name": "spanish_english",
+            "task_id": 15
+          }
+        ],
+        "candidate_forward_calls": 256,
+        "candidate_input_tokens": 2040,
+        "candidate_sequences": 256,
+        "heldout_accuracy": 0.1875,
+        "mean_gold_candidate_logprob": -11.935714650899172,
+        "mean_gold_vs_best_negative_margin": -1.8347685672342777,
+        "queries": 32
+      },
+      "native_alias": false,
+      "payload_bytes": 6352,
+      "rank": 1,
+      "seed": 51601,
+      "support_examples": 128,
+      "support_forward_calls": 256,
+      "support_input_tokens": 625,
+      "total_deployment_bytes": 168150976
+    },
+    {
+      "common_base_bytes": 168144624,
+      "evaluation_queries": 32,
+      "extra_compute_proxy": 135168,
+      "extraction_seconds": 12.337792690988863,
+      "inference_seconds": 3.995526039012475,
+      "method": "native_pca_r2",
+      "metrics": {
+        "by_task": [
+          {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -15.080721646547318,
+            "mean_gold_margin": -1.8395883738994598,
+            "name": "english_french",
+            "task_id": 12
+          },
+          {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -8.275476336479187,
+            "mean_gold_margin": -1.2883147597312927,
+            "name": "french_english",
+            "task_id": 13
+          },
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -16.020788729190826,
+            "mean_gold_margin": -3.172687292098999,
+            "name": "english_spanish",
+            "task_id": 14
+          },
+          {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -8.165772795677185,
+            "mean_gold_margin": -0.9911040663719177,
+            "name": "spanish_english",
+            "task_id": 15
+          }
+        ],
+        "candidate_forward_calls": 256,
+        "candidate_input_tokens": 2040,
+        "candidate_sequences": 256,
+        "heldout_accuracy": 0.21875,
+        "mean_gold_candidate_logprob": -11.885689876973629,
+        "mean_gold_vs_best_negative_margin": -1.8229236230254173,
+        "queries": 32
+      },
+      "native_alias": true,
+      "payload_bytes": 8464,
+      "rank": 2,
+      "seed": 51601,
+      "support_examples": 128,
+      "support_forward_calls": 256,
+      "support_input_tokens": 625,
+      "total_deployment_bytes": 168153088
+    },
+    {
+      "common_base_bytes": 168144624,
+      "evaluation_queries": 32,
+      "extra_compute_proxy": 139264,
+      "extraction_seconds": 12.337792690988863,
+      "inference_seconds": 2.1488322090008296,
+      "method": "native_pca_r4",
+      "metrics": {
+        "by_task": [
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -14.660157561302185,
+            "mean_gold_margin": -1.8164246827363968,
+            "name": "english_french",
+            "task_id": 12
+          },
+          {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -7.692630231380463,
+            "mean_gold_margin": -1.4066162705421448,
+            "name": "french_english",
+            "task_id": 13
+          },
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -15.74162545800209,
+            "mean_gold_margin": -2.842909425497055,
+            "name": "english_spanish",
+            "task_id": 14
+          },
+          {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -7.688560366630554,
+            "mean_gold_margin": -0.9580078125,
+            "name": "spanish_english",
+            "task_id": 15
+          }
+        ],
+        "candidate_forward_calls": 256,
+        "candidate_input_tokens": 2040,
+        "candidate_sequences": 256,
+        "heldout_accuracy": 0.1875,
+        "mean_gold_candidate_logprob": -11.445743404328823,
+        "mean_gold_vs_best_negative_margin": -1.7559895478188992,
+        "queries": 32
+      },
+      "native_alias": true,
+      "payload_bytes": 12688,
+      "rank": 4,
+      "seed": 51601,
+      "support_examples": 128,
+      "support_forward_calls": 256,
+      "support_input_tokens": 625,
+      "total_deployment_bytes": 168157312
+    },
+    {
+      "common_base_bytes": 168144624,
+      "evaluation_queries": 32,
+      "extra_compute_proxy": 147456,
+      "extraction_seconds": 12.337792690988863,
+      "inference_seconds": 2.1996845259855036,
+      "method": "native_pca_r8",
+      "metrics": {
+        "by_task": [
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -14.443882554769516,
+            "mean_gold_margin": -1.8495450168848038,
+            "name": "english_french",
+            "task_id": 12
+          },
+          {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -7.4784786105155945,
+            "mean_gold_margin": -1.2771148085594177,
+            "name": "french_english",
+            "task_id": 13
+          },
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -15.509118467569351,
+            "mean_gold_margin": -2.8129394352436066,
+            "name": "english_spanish",
+            "task_id": 14
+          },
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -7.424151062965393,
+            "mean_gold_margin": -0.9632567763328552,
+            "name": "spanish_english",
+            "task_id": 15
+          }
+        ],
+        "candidate_forward_calls": 256,
+        "candidate_input_tokens": 2040,
+        "candidate_sequences": 256,
+        "heldout_accuracy": 0.15625,
+        "mean_gold_candidate_logprob": -11.213907673954964,
+        "mean_gold_vs_best_negative_margin": -1.7257140092551708,
+        "queries": 32
+      },
+      "native_alias": true,
+      "payload_bytes": 21136,
+      "rank": 8,
+      "seed": 51601,
+      "support_examples": 128,
+      "support_forward_calls": 256,
+      "support_input_tokens": 625,
+      "total_deployment_bytes": 168165760
+    },
+    {
+      "common_base_bytes": 168144624,
+      "evaluation_queries": 32,
+      "extra_compute_proxy": 155648,
+      "extraction_seconds": 12.337792690988863,
+      "inference_seconds": 2.0283205960004125,
+      "method": "native_pca_r12",
+      "metrics": {
+        "by_task": [
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -14.500354051589966,
+            "mean_gold_margin": -1.9773926585912704,
+            "name": "english_french",
+            "task_id": 12
+          },
+          {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -7.437929391860962,
+            "mean_gold_margin": -1.2772675156593323,
+            "name": "french_english",
+            "task_id": 13
+          },
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -15.427534759044647,
+            "mean_gold_margin": -2.7850361466407776,
+            "name": "english_spanish",
+            "task_id": 14
+          },
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -7.3650181889534,
+            "mean_gold_margin": -0.972564697265625,
+            "name": "spanish_english",
+            "task_id": 15
+          }
+        ],
+        "candidate_forward_calls": 256,
+        "candidate_input_tokens": 2040,
+        "candidate_sequences": 256,
+        "heldout_accuracy": 0.15625,
+        "mean_gold_candidate_logprob": -11.182709097862244,
+        "mean_gold_vs_best_negative_margin": -1.7530652545392513,
+        "queries": 32
+      },
+      "native_alias": true,
+      "payload_bytes": 29584,
+      "rank": 12,
+      "seed": 51601,
+      "support_examples": 128,
+      "support_forward_calls": 256,
+      "support_input_tokens": 625,
+      "total_deployment_bytes": 168174208
+    }
+  ],
+  "seed": 51601
+}

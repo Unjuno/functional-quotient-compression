@@ -1,0 +1,34 @@
+{
+  "experiment_id": "MA-063",
+  "commit": "pending result commit",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-063-causal-mirror-mqa/tests",
+    "passed": 4,
+    "failed": 0
+  },
+  "serialization": {
+    "model_bytes_exact": true,
+    "cache_bytes_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "rows": 20,
+    "max_abs_delta": {
+      "mse": 4.276561743621343e-12,
+      "worst_head": 4.9620429293240065e-12,
+      "r2": 4.988708446340695e-09,
+      "model_bytes": 0,
+      "cache_bytes": 0
+    },
+    "replay_artifact": "VERIFICATION_REPLAY.json"
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_worlds_opened": false,
+  "notes": [
+    "Development world 63000 only; fresh worlds 63001\u201363003 stayed sealed after MQA dominated Mirror under both candidate LRs.",
+    "Vectorized rotations removed the Python pair loop but did not change the cache/model-storage or MQA-quality dominance.",
+    "At LR 0.003, MQA had 3.27e-6 MSE, 4,893B model and 512B cache; Mirror had 1.34e-5 MSE, 5,333B model and the same 512B cache.",
+    "This confirms the same KV-family structural issue as MA-061: view metadata does not compress MQA cache state and MQA is already cheaper.",
+    "Causal synthetic task only; bandwidth remains a proxy."
+  ]
+}

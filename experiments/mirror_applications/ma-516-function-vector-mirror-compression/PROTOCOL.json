@@ -1,0 +1,78 @@
+{
+  "experiment_id": "MA-516",
+  "title": "Compress task function vectors extracted from a small pretrained causal LM",
+  "status": "SCREENING",
+  "evidence_lane": "FUNCTION_VECTOR/ICL_TASK_QUALITY/STORAGE/COMPUTE/INTERFERENCE",
+  "base_commit": "bb79494f4a3dcb9d5f7e7c998e7088630e8faeb1",
+  "hypothesis": "On four held-out in-context relation functions in Pythia-70m-deduped, projecting support-extracted function vectors into a rank-4 shared basis will preserve held-out query accuracy within 5 percentage points and mean gold-candidate log-probability within 0.10 nats of explicit vectors, using <=0.50x their actual vector payload bytes in both development worlds.",
+  "physical_object": "Frozen EleutherAI/pythia-70m-deduped causal LM at pinned Hugging Face revision e93a9faa9c77e5d09219f6c868bfc7a1bd65593c; 6 layers, hidden size 512.",
+  "mirror_coordinate": "One rank-r shared hidden-state basis fitted to function vectors from task IDs 0-11, plus a per-function coefficient code m_t for each of 16 functions; held-out task IDs 12-15 are coded from their own support extraction but never affect the shared basis.",
+  "logical_multiplicity": "Sixteen ICL relation functions, with four relation directions excluded from shared-basis fitting and evaluated on eight disjoint key/value queries each.",
+  "prior_art_refs": ["PA99"],
+  "controls": [
+    "No activation intervention",
+    "Explicit full hidden-state function vector per task from support demonstrations",
+    "Native centered PCA basis and per-task coefficients using identical fit tasks and decoder",
+    "Random/task-ID metadata and model/tokenizer common payload accounting"
+  ],
+  "task": {
+    "type": "pretrained-small-LM in-context relation retrieval with support-extracted task vectors",
+    "model": "EleutherAI/pythia-70m-deduped",
+    "revision": "e93a9faa9c77e5d09219f6c868bfc7a1bd65593c",
+    "model_weight_sha256": "3da388330e4549156d76b58d6d268c63cd005e9336b4f4d2d378421e7b7a33fd",
+    "config_sha256": "002050231a9b1ec3ac77aa6b9b3bbdc4d923f4068a7dd33b8da72a9bd6ad9a43",
+    "tokenizer_sha256": "c24618a1b3e6a38167beff1c72cffd126c3a66254347304b50547d12c5f25624",
+    "hidden_dimension": 512,
+    "intervention_layer_output_index": 4,
+    "intervention_hook_layer_index": 3,
+    "relation_task_ids": {
+      "basis_fit": [0,1,2,3,4,5,6,7,8,9,10,11],
+      "basis_heldout": [12,13,14,15]
+    },
+    "support_examples_per_task": 8,
+    "evaluation_examples_per_task": 8,
+    "condition": "Each task is a fixed 16-entry one-to-one relation. A seeded split selects eight support pairs and eight disjoint evaluation queries, so each held-out task has exactly eight distinct answer candidates. Function vectors are the mean activation difference at the final Output delimiter between leave-one-support-pair-out demonstration prompts and the corresponding query-only prompts.",
+    "query_metric": "For each held-out query, score the eight evaluation answer candidates by summed teacher-forced token log probability; report top-1 accuracy, gold candidate log probability, and mean gold-vs-best-negative margin.",
+    "rank_grid": [1,2,4,8,12],
+    "development_seeds": [51601,51602],
+    "fresh_seeds": [51611,51612,51613],
+    "construction": "Sixteen relation tasks are fixed in source: country-capital and inverse; country-currency and inverse; state-postal-code and inverse; element-symbol and inverse; number-word-digit and inverse; animal-sound and inverse; English-French and inverse; English-Spanish and inverse. Tasks 0-11 fit the basis. Tasks 12-15 are held out from basis fitting. Model weights remain frozen; no gradient updates."
+  },
+  "development": {
+    "seeds": [51601,51602],
+    "selection": "Report every fixed rank and every task; primary rank4 on basis-heldout task IDs 12-15. Do not tune prompts, layer, alpha or task lists after seeing results.",
+    "optimizer_updates": 0,
+    "hyperparameter_changes_after_run": "Prohibited without numbered amendment."
+  },
+  "fresh": {
+    "seeds": [51611,51612,51613],
+    "locked_before_access": true,
+    "opened": false,
+    "opening_rule": "Open only if explicit FV gains at least .05 held-out accuracy or .15 mean gold log-probability over no intervention, rank4 passes both preservation gates and actual bytes, and Mirror has a useful >=10% margin over native PCA."
+  },
+  "storage": {
+    "authority": "actual uncompressed NPZ bytes for intervention state",
+    "paid_objects": ["explicit vectors or basis and all task codes", "task IDs", "layer and schema metadata", "pinned base-model digest in each payload"],
+    "common_base": "Also report actual total deployment bytes including all pinned model weights, config and tokenizer. Common base bytes are identical across methods and are not omitted from the absolute total."
+  },
+  "compute": {
+    "report_support_and_query_examples": true,
+    "optimizer_updates": 0,
+    "report_model_forward_count_and_tokens": true,
+    "report_extra_activation_ops": "Count 512 additions for each of 256 held-out candidate sequences, plus one 512*r basis decode per each of four held-out function IDs; explicit-vector control pays the same additions without code decode.",
+    "report_fit_time_and_per-method_query_wall_time": true,
+    "hardware": "CPU only, fixed five-thread limit; no GPU."
+  },
+  "gates": {
+    "LEARNABILITY": "Explicit task vectors must exceed no-intervention held-out top-1 accuracy by >=0.05 absolute or held-out mean gold candidate log-probability by >=0.15 nats in both worlds; otherwise NOT ESTABLISHED for this task set.",
+    "PROMISING": "If learnability passes, rank4 Mirror held-out top-1 accuracy is no more than .05 below explicit FV, mean gold log-probability no more than .10 nats lower, and intervention payload <=0.50x explicit FV bytes in both worlds; native PCA must also leave >=10% useful margin.",
+    "FAIL": "Learnability passes but any frozen rank4 quality/storage gate fails, or native PCA exactly matches the function payload/output without a Mirror-specific margin.",
+    "NOT_ESTABLISHED": "Explicit FVs do not clear the frozen task-learnability gate, pinned model artifacts fail integrity checks, or deterministic payload/output replay fails."
+  },
+  "boundaries": [
+    "One 70M pretrained model and controlled relation tasks; not a broad language benchmark or production-scale LLM result.",
+    "Candidate answer sets are supplied to all methods for constrained ranking; this evaluates relation retrieval, not open-ended generation.",
+    "A fixed model task vector is estimated from eight demonstrations; support extraction cost is reported, not hidden.",
+    "A compression result that is exactly ordinary PCA is not Mirror-specific evidence. Fresh remains sealed if native attribution fails."
+  ]
+}

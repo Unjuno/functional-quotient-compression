@@ -1,0 +1,14 @@
+{
+  "experiment_id": "MA-470",
+  "protocol_sha256": "83a6a00a68351bae2dd0992895b3a0484cbe3f01aa226716183f6030a691cca3",
+  "amendment": "AMENDMENT_1.json (implementation-only flatten fix before development; task/gates unchanged)",
+  "commit": "ac85cb67138e6b6dbff23d53979af3aa373bff5f",
+  "tests": {"command": "pytest -q experiments/mirror_applications/ma-470-shared-mirror-edit-basis/tests", "passed": 4, "failed": 0},
+  "serialization": {"roundtrip_checked": true, "byte_exact": true},
+  "metric_replay": {"checked": true, "max_difference": 0.0},
+  "fresh_split_integrity_checked": true,
+  "fresh_accessed": false,
+  "native_lowrank_alias": true,
+  "disposition": "NOT ESTABLISHED: independent full-update support-fit upper fails the frozen edit RMSE validity bound in both development seeds",
+  "notes": ["Actual inference payload bytes and method metrics were replayed from serialized NPZ files.", "All conditions share a nearest-key router; no locality route fired in either world.", "Fresh seeds 47011-47013 remained sealed."]
+}

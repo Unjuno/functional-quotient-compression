@@ -1,0 +1,13 @@
+{
+  "experiment_id":"MA-503",
+  "amendment":1,
+  "reason":"Both frozen development launches stopped before metrics because the runner only cached the factorized Mirror method, then raised KeyError for dense_pair_table. This is an implementation bookkeeping defect, not a protocol or hypothesis change.",
+  "preserved_attempt":"runs/pre_amendment_1_cachebug/",
+  "changes":["Cache every method's fitted object, serialized bytes and fit-time record before moving to the next method; the native bilinear alias reuses the shared factor object."],
+  "unchanged":["hypothesis","task construction","development seeds","fresh seeds","fit optimizer and updates","metric definitions","gates","native controls","storage accounting"],
+  "original_protocol_sha256":"7850fa9854f784a9a15f96c375a7637744d8dae19f4bf110ee68c0d78e2fa04e",
+  "original_source_sha256":"91bce42917a3a3a4597b1146da24172c37acc07743bce03e1300b239ce66d9fa",
+  "amended_source_sha256":"827ac45de185ac6af0d8342b192027ad5d4619a4ae832fcaf693b32204c6f1aa",
+  "rerun_same_development_seeds":true,
+  "fresh_accessed":false
+}

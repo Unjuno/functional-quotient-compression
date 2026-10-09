@@ -1,0 +1,76 @@
+{
+  "aligned_metrics_selected_lr": {
+    "independent": {
+      "bytes": 3684,
+      "mse": 0.0006771695916540921
+    },
+    "mirror": {
+      "bytes": 2647,
+      "mse": 9.443859016755596e-05
+    },
+    "rank2": {
+      "bytes": 3606,
+      "mse": 0.00029842890216968954
+    },
+    "scalar": {
+      "bytes": 2331,
+      "mse": 0.0008552418439649045
+    },
+    "tied": {
+      "bytes": 2141,
+      "mse": 0.0009054979891516268
+    }
+  },
+  "decision": "FAIL_DEVELOPMENT_PAYLOAD_GATE",
+  "development": {
+    "fresh_accessed": false,
+    "methods": [
+      "independent",
+      "tied",
+      "rank2",
+      "scalar",
+      "mirror"
+    ],
+    "rows": 30,
+    "selected_learning_rate": 0.01,
+    "teacher_modes": [
+      "aligned",
+      "independent"
+    ],
+    "world": 110000
+  },
+  "experiment_id": "MA-011",
+  "fresh_freeze_manifest_hashes_checked_before_access": true,
+  "fresh_worlds_sealed": [
+    110001,
+    110002,
+    110003
+  ],
+  "gate": {
+    "aligned_mirror_mse_ratio": 0.139492,
+    "aligned_mirror_payload_ratio": 0.718784,
+    "max_allowed_mse_ratio": 1.25,
+    "max_allowed_payload_ratio": 0.65,
+    "passed": false
+  },
+  "independent_teacher": {
+    "independent_mse": 6.350373005226118e-11,
+    "mirror_mse": 0.005342725198715925
+  },
+  "notes": [
+    "Aligned quality and Mirror-vs-rank2 development quality passed, but actual-payload gate failed.",
+    "Fresh worlds were not accessed.",
+    "Synthetic fixed-update experiment; not capacity evidence."
+  ],
+  "protocol_freeze_commit": "b3775bbf233392ca276f2e9659a2816a3b6eb5d9",
+  "result_commit": "5ae711ee4e6721ef1cee6e78e666b7f760f609d9",
+  "serialization": {
+    "authority": "actual torch.save state_dict plus compact config bytes",
+    "payload_bytes_recorded_all_runs": true
+  },
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-011-product-mirror-experts/tests",
+    "failed": 0,
+    "passed": 3
+  }
+}

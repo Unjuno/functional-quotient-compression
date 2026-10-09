@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-468",
+  "commit": "a389a6bf43811bf8ece39cf4a0e26853d24afd47",
+  "tests": {
+    "command": "pytest -q -p no:cacheprovider experiments/mirror_applications/ma-468-polytropon-mirror-skill-views/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Mirror/native low-rank skill-view payloads and query outputs are byte-identical for both development seeds.",
+    "The independent task upper control missed the frozen <=0.025 RMSE validity threshold in both worlds.",
+    "Fresh seeds 46811, 46812, 46813 stayed sealed under the frozen NOT ESTABLISHED gate."
+  ]
+}

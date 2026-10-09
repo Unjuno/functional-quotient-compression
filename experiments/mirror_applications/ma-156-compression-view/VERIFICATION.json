@@ -1,0 +1,27 @@
+{
+  "experiment_id": "MA-156",
+  "commit": "c21413fbfd4c4280aee6103a711105f54359638c",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-156-compression-view/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "rows": 60,
+    "max_difference": 0,
+    "replay_artifact": "VERIFICATION_REPLAY.json"
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_worlds_opened": true,
+  "notes": [
+    "Development aligned quality versus independent int4 and 0.60 payload ratio passed in both seeds before fresh access.",
+    "The separate stricter hard-tie MSE ratio gate (Mirror <=0.10x tied) was not met; observed ratio was 0.235x. Result is recorded as PROMISING, not full PASS.",
+    "All six custom binary inference payload formats round-trip to exactly the matrices measured; all 60 rows have exact actual payload byte lengths.",
+    "Independent matrix teacher is a boundary test; Mirror does not reproduce unrelated logical weights."
+  ]
+}

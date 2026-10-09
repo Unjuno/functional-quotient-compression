@@ -1,0 +1,3 @@
+# Preserved pre-Amendment 1 runs
+
+The frozen development seeds 50801/50802 completed under the frozen protocol. The output quality, storage, uniqueness and compute metrics were valid. During independent verification, the supplementary `max_output_change_when_code_zeroed` metric was found to subtract the zero-code output from the input rather than from the active-code output, reporting zero for every shared code. The hypothesis gate requires causal code checks, so canonical runs are repeated after a metric-only correction. All prior metrics and serialized payloads are retained here. No task data, methods, ranks, gates or seeds change.

@@ -1,0 +1,29 @@
+{
+  "experiment_id": "MA-248",
+  "commit": "433a2229362db23bcd43b3830358e674799c6247",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-248-packet-mirror-code/tests",
+    "passed": 4,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "fresh_payload_rows_replayed": 36,
+    "all_payload_bytes_match": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "rows": 36,
+    "max_nll_difference": 4.613036619360855e-10,
+    "max_secondary_metric_difference": 4.999999997368221e-09
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_worlds_opened": true,
+  "notes": [
+    "Final development selection used only world 24800, architecture v3, with minibatches matched across methods/rates.",
+    "Fresh worlds 24801-24803 were opened only after freeze-manifest hashes were validated.",
+    "Mirror met the correlated >=99% joint accuracy gate in 2/3 worlds; broadcast shared code met it 3/3 and used 378 fewer serialized bytes.",
+    "Independent mode was weak for all controls; no entropy boundary is established."
+  ]
+}

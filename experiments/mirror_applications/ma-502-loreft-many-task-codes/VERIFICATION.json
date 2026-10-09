@@ -1,0 +1,12 @@
+{
+  "experiment_id":"MA-502",
+  "protocol_sha256":"4cfc1f5047e6eb3074d09de0fae0f34d70b517c2d577ecff92ed71be8469ecf7",
+  "tested_code_commit":"7befda698182a9fea3c743f588fc640930e2a1c5",
+  "tests":{"command":"python -m pytest -q experiments/mirror_applications/ma-502-loreft-many-task-codes/tests","passed":3,"failed":0},
+  "serialization":{"roundtrip_checked":true,"actual_lengths_and_sha256_checked":true,"shared_native_payload_byte_identical":true},
+  "metric_replay":{"checked":true,"max_difference":0.0,"all_task_counts_checked":[1,2,4,8,16,32,64,128,256],"full_matrix_upper_valid":true},
+  "logical_functions":{"actual_task_codes_all_unique":true,"unique_function_count_equals_evaluated_task_count":true,"code_zeroing_changes_output":true},
+  "fresh_split_integrity_checked":true,
+  "fresh_accessed":false,
+  "notes":["Two frozen development seeds, each across all nine registered task counts.","Actual aligned function outputs replay with relative RMSE <=3.6e-6; payload at 256 tasks is 6,005 B vs 201,837 B for independent rank four.","The native shared-subspace coefficient implementation exactly matches Mirror payload/output at every count; fresh seeds 50211-50213 remain sealed."]
+}

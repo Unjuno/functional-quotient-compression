@@ -1,0 +1,106 @@
+{
+  "experiment_id": "MA-061",
+  "title": "one KV head to many logical KV heads",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/RUNTIME",
+  "base_commit": "6268d95aba0fe84e711e847c522b4524df2125d8",
+  "prior_art_refs": [
+    "PA07",
+    "PA08"
+  ],
+  "hypothesis": "One physical K/V projection and one stored K/V cache per token, expanded through per-query-head Mirror coordinates at read time, can recover a shared-view four-head attention teacher with lower actual cache bytes than MQA/GQA/full MHA; arbitrary K/V roles should require more physical/private state.",
+  "physical_object": "one shared K/V projection pair and one persistent K/V cache stream",
+  "mirror_coordinate": "per-query-head Givens coordinates on projected K and V head channels",
+  "logical_multiplicity": "four query heads with four distinct logical K/V views from one cached physical K/V head",
+  "task": {
+    "d_model": 16,
+    "query_heads": 4,
+    "head_dim": 4,
+    "sequence_length": 8,
+    "attention": "full self-attention, shared output projection",
+    "teacher_modes": {
+      "shared_kv_views": "one physical K/V pair plus four fixed head views",
+      "independent_kv": "four unrelated K/V projection pairs"
+    },
+    "primary_metric": "held-out attention-output MSE",
+    "storage_metric": "actual persistent KV cache bytes per sequence, plus serialized model payload bytes",
+    "structure_audit": "worst per-head output contribution MSE"
+  },
+  "controls": [
+    "full MHA with four K/V projection pairs",
+    "GQA with two K/V pairs",
+    "MQA with one repeated K/V pair",
+    "MQA plus per-head rank-1 K/V residuals",
+    "MQA cache plus per-head Mirror K/V views"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      {
+        "world": 61000,
+        "init_seed": 610000
+      }
+    ],
+    "learning_rate_candidates": [
+      0.001,
+      0.003
+    ],
+    "selection_metric": "mean held-out attention-output MSE pooled across methods and teacher modes"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      {
+        "world": 61001,
+        "init_seed": 610001
+      },
+      {
+        "world": 61002,
+        "init_seed": 610002
+      },
+      {
+        "world": 61003,
+        "init_seed": 610003
+      }
+    ],
+    "locked_before_access": true
+  },
+  "training": {
+    "updates": 700,
+    "batch_size": 8,
+    "optimizer": "AdamW",
+    "weight_decay": 0.0001,
+    "dtype": "float32",
+    "matched_minibatches_across_methods": true,
+    "router": "all four query heads active"
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes and exact tensor cache bytes",
+    "cache_dtype": "float32",
+    "cache_formula": "2 * physical KV heads * head_dim * cached sequence length * bytes per element",
+    "paid_objects": [
+      "query projections",
+      "physical or full K/V projections",
+      "Mirror angles or low-rank residuals",
+      "output projection",
+      "cache tensors",
+      "metadata"
+    ]
+  },
+  "compute": {
+    "report_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_wall_time": true,
+    "report_inference_throughput": true,
+    "report_cache_read_proxy": true,
+    "cpu_threads": 1
+  },
+  "success_gate": "In all three fresh shared-KV-view worlds, Mirror output MSE <=1.10x full MHA, actual model payload and persistent cache bytes are both below full MHA, and it beats MQA/GQA on output MSE at lower combined model+cache bytes. Report cache read/compute and runtime separately.",
+  "failure_gate": "Mirror misses output-quality gate in two or more fresh aligned worlds, or ordinary MQA/GQA achieves same quality with equal/lower combined storage and compute. Independent K/V failure alone is a structural boundary.",
+  "boundaries": [
+    "synthetic attention only",
+    "teacher is deliberately generated from shared K/V plus views",
+    "no language NLL claim",
+    "fixed-update screen, not capacity near convergence",
+    "cache bandwidth is a proxy, not measured GPU memory traffic"
+  ]
+}

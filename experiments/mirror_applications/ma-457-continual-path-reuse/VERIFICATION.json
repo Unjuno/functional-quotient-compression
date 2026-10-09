@@ -1,0 +1,24 @@
+{
+  "experiment_id": "MA-457",
+  "commit": "c770221e79e6973fa16c3aff64ce8902ba98569d",
+  "tests": {
+    "command": "pytest -q -p no:cacheprovider experiments/mirror_applications/ma-457-continual-path-reuse/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Mirror and native rank-one payloads, hashes and outputs are identical for both development seeds.",
+    "PathNet-style and independent controls were fitted by closed-form least squares; fitting wall time and module births were measured in the corrected run.",
+    "Fresh seeds 45711, 45712, 45713 remained sealed after frozen FAIL gates.",
+    "Invalid preflights and superseded incomplete-compute metrics are preserved separately and excluded."
+  ]
+}

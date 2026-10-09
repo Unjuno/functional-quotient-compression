@@ -1,0 +1,87 @@
+{
+  "experiment_id": "MA-001",
+  "title": "nonlinear top-1 Mirror expert views",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/COMPUTE/RUNTIME",
+  "base_commit": "fa635d0f4b3f98528ac2f731b316e2a664289d3e",
+  "hypothesis": "For a four-role top-1 MoE teacher with one nonlinear FFN conjugated by role-specific orthogonal coordinates, one shared FFN plus four paid Mirror addresses recovers held-out routed quality with fewer serialized bytes than untied FFNs and beats simple tied FiLM/residual controls; independent role FFNs require private state.",
+  "scope_delta": "Extends MA-003 linear top-1 experts to a two-layer GELU FFN; differs from MA-241, which tied nonlinear experts across depth and used soft routing. Single MoE layer and hard top-1 dispatch.",
+  "physical_object": "one 16x32x16 GELU FFN",
+  "mirror_coordinate": "four learned four-angle Givens codes on four fixed adjacent pairs within the 16D input/output; rotate input before shared FFN and inverse-rotate output; other channels unchanged",
+  "logical_multiplicity": "four router-addressable nonlinear FFN behaviors from one physical expert",
+  "prior_art_refs": ["PA01", "PA02", "PA03"],
+  "controls": [
+    "untied standard top-1 MoE with dense router",
+    "untied standard top-1 MoE with PA03-style rank-2 factorized router",
+    "ordinary hard expert tying with dense router",
+    "tied expert plus per-role hidden FiLM",
+    "tied expert plus per-role rank-2 output residual",
+    "tied expert plus per-role Mirror views"
+  ],
+  "teacher": {
+    "aligned": "One frozen random nonlinear FFN, conjugated by independent per-role Givens input/output views. Router target is the sign quadrant of x[0:2].",
+    "independent": "Four frozen independently initialized nonlinear FFNs, with same quadrant routing. This is a private-parameter boundary probe.",
+    "sample_distribution": "Standard normal 16D inputs; route labels are four quadrants from the first two coordinates. Train/validation/test examples are independently generated from world-seeded generators."
+  },
+  "task": {
+    "input_dim": 16,
+    "hidden_dim": 32,
+    "output_dim": 16,
+    "experts": 4,
+    "top_k": 1,
+    "activation": "GELU",
+    "primary_metric": "held-out routed MSE",
+    "structure_audit": "expert route accuracy and per-role held-out MSE"
+  },
+  "development": {
+    "world": 10000,
+    "teacher_seed": 100000,
+    "initialization_seed": 1000000,
+    "learning_rate_candidates": [0.001, 0.003, 0.01],
+    "selection_metric": "arithmetic mean of held-out MSE across all six methods and both teacher modes; common selected LR for all methods",
+    "updates": 1200,
+    "batch_size": 64
+  },
+  "fresh": {
+    "worlds": [10001, 10002, 10003],
+    "teacher_seeds": [100001, 100002, 100003],
+    "initialization_seeds": [1000001, 1000002, 1000003],
+    "locked_before_access": true,
+    "access_condition": "After development LR is selected, aligned Mirror MSE <=1.25x untied full-MoE MSE and Mirror payload <=0.65x untied payload in the selected development configuration. All other fresh fields are descriptive and cannot independently open fresh access. If the screen fails, retain development evidence, mark FAIL, and do not run fresh worlds."
+  },
+  "training": {
+    "optimizer": "AdamW",
+    "weight_decay": 0.0001,
+    "router_weight_decay": 0.0,
+    "auxiliary_router_cross_entropy_weight": 1.0,
+    "dtype": "float32",
+    "matched_minibatches_across_methods": true,
+    "threads": 1,
+    "all_methods_same_updates": true
+  },
+  "storage": {
+    "authority": "actual serialized full inference payload bytes",
+    "serialization": "torch.save complete CPU state dict plus deterministic compact JSON model config",
+    "paid_objects": ["router weights", "expert FFN weights and biases", "all Mirror angles", "all FiLM scales and shifts", "all residual factors", "method/config metadata"]
+  },
+  "compute": {
+    "report_examples": true,
+    "report_optimizer_updates": true,
+    "report_top1_active_MAC_proxy": true,
+    "report_router_and_coordinate_operation_proxies": true,
+    "report_training_wall_time": true,
+    "report_cpu_inference_throughput": true,
+    "inference_repetitions": 20,
+    "inference_batch_size": 1024
+  },
+  "gates": {
+    "development_open_fresh": "At selected LR, aligned Mirror MSE <=1.25x dense untied top-1 MoE MSE and Mirror actual serialized payload <=0.65x dense untied payload. Otherwise status FAIL and fresh data remains sealed.",
+    "fresh_useful_sharing_pass": "All three aligned fresh worlds: Mirror MSE <=1.10x dense untied full-MoE MSE; router accuracy no more than 1 percentage point below dense untied; payload <=0.65x dense untied.",
+    "mirror_specific": "All three aligned fresh worlds: Mirror MSE at least 10% lower than each of hard tying, FiLM, and rank-2 residual, while its actual payload is no larger than each control and its active MAC proxy no more than 1.10x each control.",
+    "fail": "Development access gate fails; or after fresh access the useful-sharing gate misses in at least two worlds; or a simple control is within 10% MSE at equal/lower bytes and <=1.10x active MACs in at least two worlds.",
+    "promising": "Fresh quality/storage passes in 2/3 worlds or useful-sharing passes but the Mirror-specific gate fails due an identified simple-control or compute/runtime tradeoff.",
+    "not_established": "Missing/reproducibly invalid worlds, non-deterministic payload, training divergence, or invalid split integrity."
+  },
+  "boundaries": ["synthetic routed regression only", "aligned mode is deliberately favorable to a Givens-view model", "fixed 1,200-update screen is not near-convergence capacity", "independent mode probes but does not define all private-parameter boundaries", "one MoE layer; no path-constrained multi-layer routing", "no language-model or optimized-kernel claim"],
+  "protocol_frozen_before_development": true
+}

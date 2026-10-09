@@ -1,0 +1,72 @@
+{
+  "experiment_id": "MA-245",
+  "commit": "76d91b7a662b4227e7f25e4733e06d6735cf1cd2",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-245-mlkv-layer-views/tests",
+    "passed": 4,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "notes": [
+      "Mirror parameter state includes every layer/role angle and state-dict tests reproduce outputs exactly.",
+      "All 15 fresh result payload-byte measurements replayed exactly.",
+      "Cache state was materialized by group and counted from tensor numel \u00d7 element_size; all 15 cache-byte measurements replayed exactly."
+    ]
+  },
+  "metric_replay": {
+    "checked": true,
+    "fresh_rows_replayed": 15,
+    "max_difference": 3.4513850111217437e-12,
+    "tolerance": 1e-09,
+    "command": "CPU one-thread replay through source/engine.py with frozen worlds and LR 0.003"
+  },
+  "fresh_split_integrity_checked": true,
+  "cache_bytes": {
+    "mha_8_tokens": 1024,
+    "mlkv2_8_tokens": 512,
+    "mlkv1_8_tokens": 256,
+    "mirror_8_tokens": 256,
+    "measured_tensor_audit": "CACHE_BYTES_AUDIT.json"
+  },
+  "source_freeze": {
+    "freeze_commit": "0d79d4f",
+    "fresh_worlds": [
+      24501,
+      24502,
+      24503
+    ],
+    "source_hashes_match": true,
+    "fresh_data_used_for_tuning": false
+  },
+  "runtime": {
+    "device": "CPU only; Intel Xeon Platinum 8573C; one thread",
+    "inference_benchmark": "batch 4096, 10 forward passes after 2 warmups",
+    "median_mirror_to_mlkv2_throughput_ratio": 0.8487464898756372,
+    "training_wall_mirror_seconds": [
+      2.89,
+      2.94,
+      2.77
+    ],
+    "training_wall_mlkv2_seconds": [
+      1.38,
+      1.32,
+      1.28
+    ],
+    "notes": [
+      "Small synthetic CPU benchmark only.",
+      "Givens transforms use eager Python/PyTorch operations."
+    ]
+  },
+  "environment": {
+    "python": "3.12.14",
+    "torch": "2.10.0+cpu",
+    "cuda_available": false
+  },
+  "notes": [
+    "Teacher deliberately shares one K/V base pair under layer/role Givens transformations.",
+    "Same memory hidden state is used at every synthetic layer.",
+    "Serialized model payload savings versus MLKV-2 were 11.3%, below the preregistered 25% threshold; measured cache reduction was 50%."
+  ]
+}

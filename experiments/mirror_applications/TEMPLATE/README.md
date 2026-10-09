@@ -3,10 +3,22 @@
 Status: SCREENING
 Evidence lane: <MECHANISM | LANGUAGE | STORAGE | RUNTIME | CAPACITY>
 Base commit: <sha>
+Doctrine: `docs/phase2/MIRROR_PARAMETER_INTEGRATION_DOCTRINE.md`
+Integration map: `docs/phase2/MIRROR_PARAMETER_INTEGRATION_MATRIX.md`
 
 ## Hypothesis
 
 H: <one falsifiable sentence>
+
+## Mirror insertion
+
+> **Mirror insertion:** this experiment adds `m` to <exact object/interface> so that <claimed logical variation> can be expressed without <targeted physical duplication/cost>.
+
+- Native method before adding `m`:
+- Exact insertion point for `m`:
+- Persistent or dynamic `m`:
+- Mirror resources to sweep (`d_m`, `K`, `rho`, factorization, private residual as applicable):
+- Cheapest ordinary parameter that might provide the same freedom:
 
 ## Physical-to-logical claim
 

@@ -1,0 +1,39 @@
+{
+  "experiment_id": "MA-005",
+  "commit": "pending result commit",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-005-signed-mirror-mixture/tests",
+    "passed": 4,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "rows": 30,
+    "max_abs_delta": {
+      "mse": 3.270264059551664e-10,
+      "r2": 4.595336888790769e-09,
+      "worst_pattern_mse": 4.3945291849922796e-10,
+      "serialized_bytes": 0
+    },
+    "replay_artifact": "VERIFICATION_REPLAY.json"
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_worlds_opened": true,
+  "fresh_worlds": [
+    50001,
+    50002,
+    50003
+  ],
+  "notes": [
+    "All frozen source, test, protocol, selection and development-row hashes verified before fresh access.",
+    "Common LR 0.01 selected only on development world 50000.",
+    "Aligned quality and payload gates passed 3/3; Mirror beat all shared controls on aligned quality.",
+    "Independent teacher exposed private-parameter need; full expert MSE was near numerical zero and shared methods were far worse.",
+    "CPU Mirror implementation is compute/runtime expensive: proxy +7.8% vs full MoE; median inference throughput about 0.085x.",
+    "Fixed 1,200-update synthetic screen; no general capacity or language claim."
+  ]
+}

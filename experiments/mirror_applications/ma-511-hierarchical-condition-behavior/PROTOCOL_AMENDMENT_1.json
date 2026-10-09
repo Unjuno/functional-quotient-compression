@@ -1,0 +1,8 @@
+{
+  "experiment_id": "MA-511",
+  "amendment": 1,
+  "reason": "The pre-run unit test asserted relative RMSE < 1e-5, while the already-frozen protocol permits the rank-4 primary point up to 0.05. Seed 51101 produced 0.024431 in the test helper, so the test did not match the registered criterion.",
+  "change": "Change only the helper test assertion from <1e-5 to <=0.05. No runner, protocol, task, rank, seed, fitting method, success gate, or analysis metric changed.",
+  "preserved_pre_amendment_failure": "runs/pre_amendment_1_test_gate_mismatch/",
+  "fresh_accessed": false
+}

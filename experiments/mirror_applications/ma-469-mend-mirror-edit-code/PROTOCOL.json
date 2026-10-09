@@ -1,0 +1,22 @@
+{
+  "experiment_id": "MA-469",
+  "title": "MEND generates Mirror edit codes",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/EDIT_SUCCESS/LOCALITY/RUNTIME",
+  "base_commit": "b92524d",
+  "hypothesis": "For edit requests whose weight updates lie in a shared two-matrix subspace, an editor that maps low-rank gradient signals to two Mirror coordinates will retain held-out edit RMSE <=0.05 and locality RMSE <=0.05 while using <=0.75x actual edit-system bytes of a MEND-style full-update generator; direct native low-rank generation and analytic rank-one edit controls test attribution.",
+  "physical_object": "one frozen 6x6 linear model plus two shared edit-update basis matrices",
+  "mirror_coordinate": "two-value edit code generated from a low-rank support-gradient signal",
+  "logical_multiplicity": "20 logical edited models from one shared base and compact edit addresses; 4 edit requests are held out from editor training",
+  "prior_art_refs": ["PA86", "PA87"],
+  "controls": ["MEND-style editor maps flattened support gradient to full 6x6 update", "same two-code generator plus shared update basis as direct native low-rank alias", "analytic rank-one ROME-style update from the edit support", "independent full update fit from each edit support as quality upper", "frozen base with no edits"],
+  "task": {"type": "synthetic linear model editing with support keys and residual targets; target updates lie in a seeded shared two-matrix subspace", "dimension": 6, "edit_requests": 20, "editor_train_edits": 16, "heldout_edits": 4, "support_examples_per_edit": 24, "query_examples_per_edit": 128, "locality_examples_per_edit": 256, "noise_sigma": 0.01, "outer_updates": 2200, "batch_size": 8, "optimizer": "Adam; learning rate 0.01"},
+  "development": {"worlds_or_seeds": [46901, 46902], "selection_metric": "heldout edit RMSE plus locality RMSE, actual full edit-system bytes and edit-generation latency", "hyperparameter_changes_after_run": "prohibited without numbered amendment"},
+  "fresh": {"worlds_or_seeds": [46911, 46912, 46913], "locked_before_access": true, "opened": false},
+  "storage": {"authority": "actual uncompressed .npz edit-system payload bytes", "paid_objects": ["frozen base matrix", "editor weights", "MEND full per-edit updates or Mirror per-edit codes/shared basis", "per-edit key/context vectors", "ROME update factors or independent matrices", "shape/dtype/format metadata"]},
+  "compute": {"report_support_examples_seen": true, "report_optimizer_updates": true, "report_training_ops_proxy": true, "report_edit_generation_ops_proxy": true, "report_edit_generation_wall_time": true,
+    "report_edit_query_wall_time": true,
+    "mac_proxy_formula": "Application D^2; learned editor D^2*32 + 32*out_dim; Mirror additionally 2*D^2 basis decode; out_dim=36 for MEND and 2 for Mirror/native-lowrank. Generation proxy includes editor/decode plus one application. Support-derived controls include only one application per generated edit; their support-fit operation proxy is separately recorded.", "report_edit_query_wall_time": true, "report_inference_ops_per_example": true},
+  "gates": {"PROMISING": "Both seeds: heldout edit RMSE <=0.05, locality RMSE <=0.05, Mirror actual payload <=0.75x MEND, edit MAC proxy <=1.25x MEND, and direct native low-rank control does not exactly match Mirror payload/output.", "FAIL": "Either seed misses a PROMISING clause or direct native low-rank generation exactly aliases Mirror.", "NOT ESTABLISHED": "Independent support-fit upper has heldout edit RMSE >0.025 or locality RMSE >0.05 in either seed, or payload/metric replay fails."},
+  "boundaries": ["Synthetic linear edit mechanism, not a MEND reproduction or factual language-model editing result.", "Sixteen requests train the editor; four heldout edit requests are generated from support only and do not tune the editor.", "The independent support-fit upper must pass a strict quality validity check before capacity or edit-quality conclusions.", "Fresh seeds remain sealed unless every frozen PROMISING gate passes."]
+}

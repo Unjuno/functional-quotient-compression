@@ -18,7 +18,7 @@ For autonomous / worker execution:
 1. [**GOAL.md**](GOAL.md) — autonomous iteration loop and stop rules
 2. [**WORKER_START_HERE.md**](WORKER_START_HERE.md) — repository navigation and evidence rules
 3. [**Mirror Application Status Board**](experiments/mirror_applications/STATUS_BOARD.md) — exact next MA candidate
-4. [**254-candidate registry**](experiments/mirror_applications/IDEA_REGISTRY.csv)
+4. [**550-candidate registry**](experiments/mirror_applications/IDEA_REGISTRY.csv)
 
 For research context:
 
@@ -39,7 +39,7 @@ SRM001 showed strong fixed-update signals on explicitly factorized synthetic tas
 
 This is evidence for separating **rule storage**, **rule selection**, and **ordered execution**. It is not a natural-language capacity or same-compute result.
 
-The project now has a second explicit lane: systematically apply the Mirror/View coordinate to existing multiplicities (experts, adapters, heads, KV, layers, packet slots, quantizers, memory, etc.) and measure whether physical duplication can be replaced by low-description logical multiplicity. The machine-readable registry currently contains 254 MA-xxx candidates.
+The project now has a second explicit lane: systematically apply the Mirror/View coordinate to existing multiplicities (experts, adapters, heads, KV, layers, packet slots, quantizers, memory, etc.) and measure whether physical duplication can be replaced by low-description logical multiplicity. The machine-readable registry currently contains 550 MA-xxx candidates.
 
 The research hypothesis remains:
 
@@ -78,7 +78,7 @@ experiments/
   token_mixing/
     tm001_20261007/
   mirror_applications/
-    IDEA_REGISTRY.csv             254 candidate applications
+    IDEA_REGISTRY.csv             550 candidate applications
     FIRST_QUEUE.md                first 25 P0 candidates
 third_party/
   nanoGPT/                       compact shared A/B baseline

@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-455",
+  "commit": "04ddb2ad8ece2823ba5d636853d309d2deaba625",
+  "tests": {
+    "command": "pytest -q -p no:cacheprovider experiments/mirror_applications/ma-455-sequential-mirror-program/tests",
+    "passed": 4,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Mirror and native Givens payloads are byte-identical in both development seeds.",
+    "Held-out metric replay and payload hashes are checked by source/verify.py.",
+    "Fresh seeds 45511, 45512, 45513 stayed sealed after frozen FAIL gates."
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "experiment_id": "MA-511",
+  "title": "Hierarchical condition x behavior code composition on held-out pairs",
+  "status": "SCREENING",
+  "evidence_lane": "CONDITIONAL_FUNCTION_COMPOSITION/UNSEEN_PAIRS/STORAGE/COMPUTE",
+  "base_commit": "60b364329f5140e25d9d73a971bff2dcfb4121ec",
+  "hypothesis": "On two frozen synthetic activation-function worlds, a rank-4 condition code plus rank-4 behavior code fitted from 48 of 64 pairs will predict all 16 held-out condition-behavior activation functions at relative RMSE <=0.05, use <=0.50x actual bytes of an explicit 64-pair function table, and provide at least a 10% useful margin over CAST/native additive factorization at equal quality.",
+  "physical_object": "One frozen 64-dimensional activation function chart with 8 condition factors, 8 behavior factors and 64 possible conditional functions.",
+  "mirror_coordinate": "A learned condition address code and a learned behavior address code decoded through separately shared bases, composed additively for each requested pair.",
+  "logical_multiplicity": "64 indexed condition-then-behavior functions, of which 16 whole pair identities are withheld from fitting and evaluated zero-shot.",
+  "prior_art_refs": ["PA101"],
+  "controls": [
+    "Explicit CAST-style condition vectors plus behavior vectors added for a requested pair",
+    "Unrestricted explicit 64-entry condition-behavior function table",
+    "Ordinary native additive two-factor regression with PCA/SVD compression of its factor vectors",
+    "No-composition baseline that has no output for held-out pairs"
+  ],
+  "task": {
+    "type": "synthetic activation-function pair-composition mechanism screen",
+    "dimension": 64,
+    "conditions": 8,
+    "behaviors": 8,
+    "whole_pair_split": "Deterministic 48/16 pair split with every condition and behavior ID represented among visible training pairs; held-out pair list is generated and saved before fitting.",
+    "support_pairs": 48,
+    "heldout_pairs": 16,
+    "condition_component_rank": 4,
+    "behavior_component_rank": 4,
+    "private_pair_residual_ratios": [0.0, 0.1, 0.25],
+    "basis_rank_grid": [2, 4, 8],
+    "development_seeds": [51101, 51102],
+    "fresh_seeds": [51111, 51112, 51113],
+    "construction": "A requested pair (c,b) has target activation delta u_c + v_b + rho*p_cb, where u and v live in independent four-dimensional orthonormal subspaces, each component has unit norm, and p_cb is a seeded unit private vector. The visible-pair least-squares additive fit uses only the 48 visible vectors. Whole held-out pair IDs are never used for fitting or basis construction.",
+    "primary_metric": "Relative Frobenius RMSE of predicted versus target activation deltas over all held-out pairs.",
+    "secondary_metrics": ["per-pair RMSE", "unique held-out outputs", "actual serialized bytes", "active operation proxy", "fit/decode wall time"]
+  },
+  "development": {
+    "seeds": [51101, 51102],
+    "selection": "Report fixed private-rho and matched basis-rank grid. Primary gate is rank4/rank4 at rho=0; rho=.1/.25 are private-frontier diagnostics only.",
+    "optimizer_updates": 0,
+    "hyperparameter_changes_after_run": "Prohibited without numbered amendment; source/tests freeze first."
+  },
+  "fresh": {
+    "seeds": [51111, 51112, 51113],
+    "locked_before_access": true,
+    "opened": false,
+    "opening_rule": "Open only if rank4/rank4 passes quality and actual-byte gates and shows >=10% useful function/storage/compute margin versus native additive factorization."
+  },
+  "storage": {
+    "authority": "actual uncompressed NPZ inference payload bytes",
+    "paid_objects": ["all condition/behavior factors or full pair functions", "both shared bases and all factor codes", "global bias", "pair/address metadata and decoder schema"],
+    "common_pair_query": "Condition and behavior indices arrive as the function request and are common to all methods."
+  },
+  "compute": {
+    "report_examples": true,
+    "optimizer_updates": 0,
+    "active_operation_proxy": "CAST additive lookup uses 2D element reads plus D additions; rank-r Mirror/native decode uses 2Dr multiplies for the two factors plus D additions; explicit function table uses D element reads.",
+    "report_fit_and_decode_wall_time": true
+  },
+  "gates": {
+    "PROMISING": "In both development seeds at rho=0/rank4, held-out relative RMSE <=0.05 and actual payload <=0.50x explicit full-pair table, plus >=10% useful margin versus native additive/PCA control at equal quality.",
+    "FAIL": "Quality or actual-byte gate misses, or native additive/PCA exactly explains Mirror functions/storage/compute without the required useful margin.",
+    "NOT_ESTABLISHED": "The visible pair graph omits a condition/behavior factor or explicit full-table outputs cannot replay exactly."
+  },
+  "boundaries": [
+    "Synthetic vector-function composition only; not an LM, language task, semantic CAST, or user-preference result.",
+    "Only the 16 evaluated held-out pair outputs count; the 64 address combinations do not by themselves count as independent capacity.",
+    "The native additive factorization is a mandatory direct control and is expected to be algebraically equivalent; report an exact alias as a Mirror attribution failure.",
+    "Fresh worlds remain sealed unless every frozen gate including native attribution passes."
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "experiment_id": "MA-253",
+  "title": "cache-safe final-layer Mirror-MoE",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/RUNTIME",
+  "base_commit": "01b515cf8d0603481cb00ff1d5be45541411eebb",
+  "prior_art_refs": ["PA14"],
+  "hypothesis": "A final-layer shared matrix plus four per-domain Givens angles will approach independent rank-2 LoRA domain updates with lower bytes, while final-layer-only placement preserves all prompt K/V caches and early-layer placement does not.",
+  "physical_object": "shared final-FFN matrix W0",
+  "mirror_coordinate": "four per-domain Givens angles, function R_d^-1 (R_d x W0)",
+  "logical_multiplicity": "four domain-specific knowledge mappings",
+  "controls": [
+    "shared base with no domain update",
+    "DMoE-style independent rank-2 per-domain LoRA updates",
+    "final-layer Mirror view",
+    "final-layer Mirror view plus per-domain rank-1 private residual",
+    "independent full-rank per-domain private updates",
+    "two-layer causal K/V cache probe with final-only vs early+final placement"
+  ],
+  "task": {
+    "input_dim": 16,
+    "output_dim": 16,
+    "domains": 4,
+    "teacher": "y=x W0 + x A_d B_d, with independently sampled rank-2 A_d B_d for each domain",
+    "domain_address": "explicit input to all methods; no router is trained; this is disclosed and router bytes/compute are outside scope",
+    "train_dev_fresh_examples": {"train": 8192, "dev": 2048, "fresh_test": 4096}
+  },
+  "development": {
+    "worlds_or_seeds": [{"world": 25300, "init_seed": 253000}],
+    "selection_metric": "mean dev MSE across all five prediction methods",
+    "learning_rate_candidates": [0.003, 0.01]
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      {"world": 25301, "init_seed": 253001},
+      {"world": 25302, "init_seed": 253002},
+      {"world": 25303, "init_seed": 253003}
+    ],
+    "locked_before_access": true
+  },
+  "training": {
+    "updates": 1500,
+    "batch_size": 128,
+    "optimizer": "AdamW",
+    "weight_decay": 0.0001,
+    "adapter_rank": 2,
+    "private_rank": 1
+  },
+  "cache_probe": {
+    "decoder_layers": 2,
+    "hidden_dim": 16,
+    "attention_heads": 1,
+    "prefix_tokens": 8,
+    "address_pair": [0, 1],
+    "success_final_only": "max absolute difference across every layer's prefix K and V is exactly 0",
+    "multi_layer_control": "layer 0 and layer 1 views active; layer 0 K/V unchanged, layer 1 K/V differs by >1e-7"
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "serialization": "torch.save state_dict plus deterministic config JSON",
+    "paid_objects": ["shared W0", "LoRA factors", "Mirror angles", "private residuals", "architecture metadata"]
+  },
+  "compute": {
+    "report_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true,
+    "report_cpu_cache_probe_latency": true,
+    "cpu_threads": 1
+  },
+  "success_gate": "In each 3 fresh worlds Mirror MSE <=1.10x rank-2 LoRA and Mirror bytes <=0.80x rank-2 LoRA; final-only cache difference is exactly zero; early+final control changes layer-1 K/V by >1e-7.",
+  "failure_gate": "Mirror misses quality/bytes gate while LoRA control fits, or final-only placement changes any cached K/V; rank-1 residual recovery is reported as a private-state boundary.",
+  "boundaries": ["synthetic linear low-rank update task", "domain address supplied to all methods", "no uncertainty-aware router", "cache audit uses a tiny causal decoder and does not measure production inference", "no natural-language quality or throughput claim"]
+}

@@ -1,0 +1,7 @@
+{
+  "amendment_id": "AMENDMENT_1",
+  "experiment_id": "MA-486",
+  "date": "2026-10-08",
+  "reason": "The initial runner classified dense_float as sparse due to a boolean precedence/guard bug and terminated before writing complete metrics. Only a partial independent payload was produced for seed 48601.",
+  "scope": "Implementation-only correction: classify sparse controls by method family prefix; no task, target, seed, method, serializer, gate or metric definition changed. Partial output retained under runs/pre_amendment_partial_dev_48601. Rerun both frozen development seeds 48601 and 48602; fresh remains sealed."
+}

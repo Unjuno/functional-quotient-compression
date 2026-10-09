@@ -1,0 +1,74 @@
+{
+  "experiment_id": "MA-253",
+  "commit": "1891cbc36d3a99b4dd63517b469f8b246dbf0be0",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-253-cache-safe-final-moe/tests",
+    "passed": 4,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "notes": [
+      "Strict state-dict serialization roundtrip yields exactly equal outputs across all five prediction methods.",
+      "All 15 fresh replay payload byte counts exactly match the original measurement.",
+      "Payload counts include shared base, all learned view/adapter/private tensors, and deterministic config metadata."
+    ]
+  },
+  "metric_replay": {
+    "checked": true,
+    "fresh_rows_replayed": 15,
+    "max_difference": 4.309844148231434e-12,
+    "tolerance": 1e-10,
+    "command": "CPU 1-thread replay through source/engine.py using the frozen world/init seeds and LR 0.003"
+  },
+  "fresh_split_integrity_checked": true,
+  "cache_probe": {
+    "final_only_max_all_layer_kv_abs_difference": 0.0,
+    "early_and_final_layer0_kv_abs_difference": 0.0,
+    "early_and_final_layer1_kv_abs_difference": 0.34942394495010376,
+    "protocol_gate_pass": true,
+    "artifact": "CACHE_AUDIT.json"
+  },
+  "source_freeze": {
+    "freeze_commit": "8ca3418",
+    "fresh_seeds": [
+      25301,
+      25302,
+      25303
+    ],
+    "source_hashes_match": true,
+    "fresh_data_used_for_tuning": false
+  },
+  "runtime": {
+    "device": "CPU only; Intel Xeon Platinum 8573C; one thread",
+    "training_wall_time_mirror_seconds": [
+      11.899296,
+      10.14863,
+      9.559191
+    ],
+    "training_wall_time_lora_r2_seconds": [
+      1.330306,
+      1.315111,
+      1.337281
+    ],
+    "inference_benchmark": "CPU 1 thread, batch 4096, 12 measured forward passes after 2 warmups",
+    "inference_throughput_ratio_mirror_to_lora_by_world": [
+      0.5167751959150122,
+      0.4933767318266339,
+      1.0645324990974845
+    ],
+    "interpretation": "Single-host throughput is variable and not a general runtime claim; measured training wall time was consistently much higher for the unfused Givens implementation."
+  },
+  "environment": {
+    "python": "3.12.14",
+    "torch": "2.10.0+cpu",
+    "cuda_available": false
+  },
+  "notes": [
+    "Prediction quality task is synthetic vector regression with a supplied domain address; no uncertainty-aware router was trained.",
+    "Teacher updates are independently sampled per-domain rank-2 LoRA matrices, a task aligned to the DMoE control rather than to Mirror.",
+    "Cache probe is a tiny deterministic causal decoder; no nanoGPT integration or production cache benchmark was performed.",
+    "An initial verification inference benchmark omitted the one-thread setting and was discarded; the saved replay benchmark uses one thread as preregistered."
+  ]
+}

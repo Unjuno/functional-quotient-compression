@@ -1,0 +1,8 @@
+{
+  "seed": 44201,
+  "split": "dev",
+  "invalid_for_scientific_claim": true,
+  "error": "FOMAML query gradient requested on the detached full-adaptation vector; no metric or payload artifact was produced.",
+  "resolution": "Re-enabled autograd on the adapted full parameter solely for the first-order query gradient; support adaptation and all frozen protocol settings are unchanged.",
+  "amendment_1_instrumentation_failure": "A stale unused angle-list append caused a NameError after meta-training and before metrics or payload output. Removed; no artifacts from that attempt were used."
+}

@@ -1,0 +1,94 @@
+{
+  "experiment_id": "MA-208",
+  "title": "distill expert functions into a Mirror view bank",
+  "status": "FROZEN_BEFORE_DEVELOPMENT",
+  "evidence_lane": "DISTILLATION/STORAGE/QUALITY/CALIBRATION/RUNTIME",
+  "base_commit": "621dec2ffdf55c3f0503dd75695ea27fdc68544c",
+  "hypothesis": "A shared student MLP with one learned hidden-pair Givens coordinate per specialist can distill a family of view-related teacher experts at the quality of ordinary multi-head distillation using substantially fewer actual inference bytes; unrelated teachers will require private weights.",
+  "physical_object": "One shared 12x16x4 student MLP, initialized from the Task-0 teacher and frozen except for method-specific adaptation state",
+  "mirror_coordinate": "One learned float32 Givens angle per teacher/task, rotating the first two post-ReLU hidden activations before the shared output projection",
+  "logical_multiplicity": "Five task-conditioned student predictors backed by one shared trunk/output weight and task ID",
+  "prior_art_refs": [
+    "PA09",
+    "PA10"
+  ],
+  "targeted_literature": [
+    "Pruning and Distilling Mixture-of-Experts into Dense Language Models (arXiv:2605.28207)",
+    "Rethinking Self-Distillation for Multi-Teacher Capability Merging (arXiv:2610.04272)",
+    "Who Teaches Which Token? Verifier-Gated Multi-Expert On-Policy Distillation for Scientific Reasoning (arXiv:2609.15404)",
+    "PA09 multi-token prediction with shared trunk/future heads",
+    "PA10 parallel token prediction"
+  ],
+  "teachers": "Five teacher MLPs produce four-class soft targets for five task IDs. The common Task-0 teacher has hidden width 16. Aligned tasks are exactly the same MLP with one hidden-pair Givens view before the shared output projection. Independent tasks use separately sampled MLP weights. The task ID is provided to the student.",
+  "controls": [
+    "frozen single shared student with no task state",
+    "one shared output head sequentially fine-tuned (ordinary single-student KD)",
+    "shared trunk with a private per-task output head (ordinary multi-head KD)",
+    "per-task rank-2 LoRA on the shared output projection",
+    "Mirror hidden-view student",
+    "independent full student per teacher/task as upper control",
+    "teacher functions themselves as the quality/storage upper reference"
+  ],
+  "distillation": {
+    "objective": "temperature-2 forward KL between teacher and student softmax logits, multiplied by T^2",
+    "examples_per_task": 128,
+    "updates_per_task": 300,
+    "development_seeds": [
+      20801,
+      20802
+    ],
+    "learning_rate_candidates": [
+      0.003,
+      0.01
+    ],
+    "selection_metric": "mean held-out teacher/student KL at final stage across all methods and both teacher families, with accuracy and bytes as preregistered tie-breakers"
+  },
+  "fresh": {
+    "seeds": [
+      20811,
+      20812,
+      20813
+    ],
+    "locked_before_access": true,
+    "selected_learning_rate": 0.003
+  },
+  "storage": {
+    "authority": "actual deterministic serialized inference payload bytes",
+    "serialization": "packed tensor records charging every shared/student/private weight, Mirror angle, task ID, method, tensor name, dtype, shape, dimensions and header",
+    "resume": "torch.save inference state plus optimizer moments and step state, reported separately",
+    "paid_objects": [
+      "all student shared weights and biases",
+      "all task-specific Givens angles",
+      "all private output heads or LoRA factors",
+      "all independent student weights",
+      "task IDs and metadata",
+      "optimizer moments and step counters"
+    ]
+  },
+  "metrics": [
+    "held-out forward KL to each teacher",
+    "teacher/student top-1 agreement",
+    "student ECE against teacher argmax labels",
+    "per-task retention after each stage",
+    "actual total and incremental inference bytes",
+    "resume checkpoint bytes",
+    "examples/updates/MAC proxy/wall time/inference throughput"
+  ],
+  "success_gate": "On all three fresh aligned worlds, final Mirror mean teacher KL <=1.10x ordinary multi-head KD and <=1e-4 absolute, teacher/student top-1 agreement at least 0.99, ECE no more than 0.02 worse than multi-head, and actual total inference payload <=0.50x multi-head. Compare against rank-2 LoRA; if it matches at lower/equal bytes and compute, Mirror-specific advantage is not established.",
+  "failure_gate": "Both development worlds miss either Mirror's KL/accuracy gate or <=0.50x multi-head total-inference-byte gate; keep fresh sealed.",
+  "boundaries": [
+    "Synthetic four-class MLP teacher distributions",
+    "Aligned teachers are generated from the same view operation used by the candidate",
+    "Independent MLP teachers define the private-function boundary",
+    "Fixed 300-update distillation screen; no near-convergence capacity claim",
+    "No language-model, open-ended expert reasoning, or production ensemble claim"
+  ],
+  "amendments": [
+    {
+      "date": "2026-10-07",
+      "after": "initial development screen, before any fresh seed access",
+      "reason": "operational metric clarification only: clamp sub-precision negative KL estimates to zero; define final-stage inference throughput as 5 warm-up forwards then 50 timed forwards on a 2048-example batch with one CPU thread; do not change model, optimizer, updates, seeds, gates, or candidate selection rule",
+      "development_selection_result": "learning_rate 0.003 selected by the registered mean held-out KL across methods, conditions, and development seeds"
+    }
+  ]
+}

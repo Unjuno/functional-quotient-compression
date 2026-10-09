@@ -1,0 +1,62 @@
+{
+  "experiment_id": "MA-012",
+  "title": "residual Mirror-MoE",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/COMPUTE",
+  "base_commit": "099fae1d2e66d940ad9a6b451889242ea7e81d9a",
+  "hypothesis": "A small per-role output residual added to a shared nonlinear expert with Mirror input/output views can recover aligned expert behavior more accurately than either Mirror-only sharing or an equally small residual on a hard-tied expert, while using far fewer actual bytes than independent experts.",
+  "physical_object": "one 16x32x16 GELU expert (input and output matrices)",
+  "mirror_coordinate": "per-role 2D Givens input and output angles",
+  "logical_multiplicity": "four balanced oracle-routed nonlinear expert functions",
+  "prior_art_refs": ["PA01", "PA02", "PA03"],
+  "controls": [
+    "four independent full experts",
+    "one hard-tied expert",
+    "hard-tied expert plus per-role rank-1 output residual",
+    "hard-tied expert plus per-role rank-2 output residual",
+    "shared Mirror expert with no private residual",
+    "shared Mirror expert plus per-role rank-1 output residual",
+    "shared Mirror expert plus per-role rank-2 output residual"
+  ],
+  "task": {
+    "input_dim": 16,
+    "hidden_dim": 32,
+    "output_dim": 16,
+    "experts": 4,
+    "activation": "GELU",
+    "routing": "balanced oracle top-1 labels supplied to all methods; router learning excluded",
+    "teacher_modes": {
+      "aligned_private_rank1": "one shared frozen MLP under per-role 2D input/output Givens views plus per-role rank-1 output residuals",
+      "independent": "four independently sampled full MLP experts"
+    },
+    "primary_metric": "held-out routed output MSE",
+    "structure_audit": "per-role MSE and role accuracy under supplied routes"
+  },
+  "development": {
+    "worlds": [120000],
+    "teacher_seeds": [1200000],
+    "initialization_seeds": [12000000],
+    "learning_rate_candidates": [0.001, 0.003, 0.01],
+    "updates": 1200,
+    "batch_size": 64,
+    "selection_metric": "mean held-out MSE across all methods and teacher modes; choose LR, then Mirror private rank by aligned held-out MSE (rank-1 wins ties)"
+  },
+  "fresh": {
+    "worlds": [120001, 120002, 120003],
+    "teacher_seeds": [1200001, 1200002, 1200003],
+    "initialization_seeds": [12000001, 12000002, 12000003],
+    "locked_before_access": true,
+    "access_condition": "At selected LR, the development-selected Mirror residual rank must achieve aligned MSE <=1.25x independent and payload <=0.80x independent; otherwise leave fresh sealed."
+  },
+  "training": {"optimizer":"AdamW","weight_decay":0.0001,"dtype":"float32","matched_minibatches_across_methods":true,"all_methods_same_updates":true,"threads":1},
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "serialization": "torch.save CPU state_dict plus deterministic compact JSON config",
+    "paid_objects": ["shared or independent MLP matrices", "all Givens angles", "all private residual factors", "metadata"]
+  },
+  "compute": {"report_examples":true,"report_updates":true,"report_active_MAC_proxy":true,"report_wall_time":true,"report_inference_throughput":true,"inference_batch_size":1024,"inference_repetitions":20},
+  "success_gate": "All three fresh aligned worlds: selected Mirror-residual rank MSE <=1.10x full independent, payload <=0.75x independent, and at least 10% lower MSE than the matched-rank hard-tied residual control at <=10% additional bytes. Report independent-teacher quality as the private-function boundary.",
+  "failure_gate": "Development access gate misses; or in at least two fresh aligned worlds selected Mirror misses quality/bytes; or matched-rank hard-tied residual matches Mirror within 10% MSE at equal/lower payload in at least two worlds.",
+  "boundaries": ["synthetic balanced roles", "teacher deliberately contains Mirror-aligned shared function plus rank-1 private output component", "fixed-update screen, not capacity", "oracle routes only", "one hidden width and four experts", "no language claim"],
+  "protocol_frozen_before_development": true
+}

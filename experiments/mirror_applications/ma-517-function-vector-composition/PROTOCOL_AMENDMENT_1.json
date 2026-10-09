@@ -1,0 +1,8 @@
+{
+  "experiment_id": "MA-517",
+  "amendment": 1,
+  "reason": "The first frozen development launch stopped at the no-intervention serialization control because serializer kind 0 was compared with the string 'none' and fell through to code-state unpacking.",
+  "change": "Handle integer serializer kind 0 by returning zero state bytes. Add a unit regression asserting no file is emitted for no state. No tasks, split, model, rank, metric, control, seed, gate or fresh rule changed.",
+  "preserved_failed_launch": "runs/pre_amendment_1_serializer_bug/",
+  "fresh_accessed": false
+}

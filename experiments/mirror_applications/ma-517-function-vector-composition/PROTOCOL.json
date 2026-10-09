@@ -1,0 +1,81 @@
+{
+  "experiment_id": "MA-517",
+  "title": "Composition of inverse in-context functions with explicit FV arithmetic and product Views",
+  "status": "SCREENING",
+  "evidence_lane": "FUNCTION_VECTOR_COMPOSITION/HELDOUT_QUERY/ARITHMETIC/STORAGE/COMPUTE",
+  "base_commit": "22eebb566aced5a0bcb6567929640c0b97ae11d1",
+  "hypothesis": "On six known-composable inverse relation pairs in pinned Pythia-70m, a per-task shared-PCA product View (m_a elementwise-product m_b decoded through a common basis) will improve held-out identity-composition accuracy by >=0.10 absolute over both raw FV sum and difference in both dev worlds, while using <=0.50x explicit FV bank bytes. Native code-product is a mandatory attribution control.",
+  "physical_object": "Frozen Pythia-70m-deduped at revision e93a9faa9c77e5d09219f6c868bfc7a1bd65593c plus sixteen support-extracted residual-stream function vectors.",
+  "mirror_coordinate": "Each function ID has a code m_t in a centered shared PCA basis; composition of inverse relation functions (a,b) uses coordinate product m_a elementwise-product m_b and basis decoding.",
+  "logical_multiplicity": "Six known-composable inverse function pairs across capitals, state abbreviations, element symbols, number words, and English/French and English/Spanish relations; 48 held-out queries per world.",
+  "prior_art_refs": ["PA99"],
+  "controls": [
+    "No intervention",
+    "First operand FV and second operand FV separately",
+    "Explicit FV sum and difference",
+    "Explicit raw-coordinate Hadamard product",
+    "Centered native PCA code Hadamard product with the same basis/decoder as Mirror"
+  ],
+  "task": {
+    "type": "pretrained causal-LM inverse-relation function composition",
+    "model": "EleutherAI/pythia-70m-deduped",
+    "revision": "e93a9faa9c77e5d09219f6c868bfc7a1bd65593c",
+    "model_weight_sha256": "3da388330e4549156d76b58d6d268c63cd005e9336b4f4d2d378421e7b7a33fd",
+    "config_sha256": "002050231a9b1ec3ac77aa6b9b3bbdc4d923f4068a7dd33b8da72a9bd6ad9a43",
+    "tokenizer_sha256": "c24618a1b3e6a38167beff1c72cffd126c3a66254347304b50547d12c5f25624",
+    "shared_extractor_commit": "22eebb566aced5a0bcb6567929640c0b97ae11d1",
+    "shared_extractor_source_sha256": "a6efcff225c4fea194ed86ce12903c2893412dffdc77674f1b3347a7df08bc88",
+    "hidden_dimension": 512,
+    "intervention_layer_output_index": 4,
+    "function_vector_extraction": "Reuse the frozen MA-516 implementation: average leave-one-support-pair-out demonstration activation minus query-only activation over eight support pairs for each relation task.",
+    "composition_pairs": [[0,1],[4,5],[6,7],[8,9],[12,13],[14,15]],
+    "composition_target": "Each listed pair is an inverse relation pair. Sequential function composition is identity on the first relation's eight held-out query keys; the candidate set is those eight keys.",
+    "basis_fit_task_ids": [0,1,2,3,4,5,6,7,8,9,10,11],
+    "basis_heldout_task_ids": [12,13,14,15],
+    "support_examples_per_function": 8,
+    "inverse_pair_split": "Shared underlying relation-entry IDs are assigned to support/evaluation together for both forward and inverse operand functions, preventing a held-out composed path from leaking through the inverse task supports.",
+    "heldout_queries_per_composition": 8,
+    "basis_rank_grid": [2,4,8,12],
+    "development_seeds": [51701,51702],
+    "fresh_seeds": [51711,51712,51713],
+    "primary_metric": "top-1 identity-composition accuracy across 48 held-out queries",
+    "secondary_metrics": ["gold candidate log probability", "gold-vs-best-negative margin", "actual serialized payload bytes", "extra activation operation proxy", "support extraction and inference wall time"],
+    "construction": "The six fixed inverse task pairs are IDs 0/1 capitals; 4/5 state/postal codes; 6/7 element/symbol; 8/9 number/digit; 12/13 English/French; 14/15 English/Spanish. For each inverse pair, use the same underlying eight relation entries as support/evaluation splits in both directions; thus a held-out composition path appears in neither operand FV support. For each query-only prompt to the first function, score the original query key against the eight held-out keys using the composed intervention."
+  },
+  "development": {
+    "seeds": [51701,51702],
+    "selection": "Report all operand controls and fixed ranks. Do not tune task pairs, basis rank, layer or intervention scale after accessing development scores.",
+    "optimizer_updates": 0,
+    "hyperparameter_changes_after_run": "Prohibited without numbered amendment."
+  },
+  "fresh": {
+    "seeds": [51711,51712,51713],
+    "locked_before_access": true,
+    "opened": false,
+    "opening_rule": "Open only if product composition exceeds both raw sum and raw difference by >=.10 accuracy, preserves a useful positive composition result, fits <=.50x bytes, and has >=10% margin over native code-product."
+  },
+  "storage": {
+    "authority": "actual uncompressed NPZ bytes",
+    "paid_objects": ["explicit method: all sixteen operand FVs, pair IDs, operator and model/layer schema", "product method: basis, mean, all sixteen codes, pair IDs, operator and model/layer schema"],
+    "common_base": "Include pinned model/config/tokenizer actual bytes in total deployment; common across methods. No reconstructed vectors are persistently cached."
+  },
+  "compute": {
+    "report_support_forward_calls_and_tokens": true,
+    "report_candidate_forward_calls_and_tokens": true,
+    "extra_compute_proxy": "There are 48 queries x 8 candidate sequences x 512 activation additions. Explicit arithmetic also pays one 512-vector sum/difference/product per requested composition. Code product pays r coordinate multiplies plus a 512xr decode once for each of six requested pair views, plus activation additions. Report the product-vector build time separately from query forward time.",
+    "optimizer_updates": 0,
+    "report_fit_and_inference_wall_time": true,
+    "hardware": "CPU, fixed five-thread limit, no GPU."
+  },
+  "gates": {
+    "PROMISING": "In both seeds, code-product top-1 accuracy exceeds raw sum and raw difference by >=.10 absolute and explicit FV single-operand controls, while native-control comparison shows >=10% useful Mirror-specific margin and payload <=.50x explicit operand-bank bytes.",
+    "FAIL": "Frozen composition quality/storage gate misses or native code-product exactly matches Mirror without the required margin.",
+    "NOT_ESTABLISHED": "The fixed inverse pair does not produce an identity target, external model artifact fails integrity, or result replay fails."
+  },
+  "boundaries": [
+    "A small constrained-ranking screen on one 70M model; not broad language reasoning or open-ended generation.",
+    "The inverse function pairs are mathematically composable; whether activation-vector arithmetic realizes their composition is measured, not assumed.",
+    "A product code that equals native PCA code arithmetic is not Mirror-specific evidence.",
+    "Fresh seeds remain sealed unless all quality, byte and attribution gates pass."
+  ]
+}

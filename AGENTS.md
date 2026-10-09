@@ -8,6 +8,8 @@ This repository studies whether low-description Mirror/View coordinates can turn
 
 Read `WORKER_START_HERE.md` before making research changes.
 
+Then read `docs/phase2/MIRROR_PARAMETER_INTEGRATION_DOCTRINE.md` and `docs/phase2/MIRROR_PARAMETER_INTEGRATION_MATRIX.md`. The Mirror application program is centered on the extra low-description functional parameter `m`; new external methods are primarily targets/controls for inserting and stress-testing that parameter, not replacements for the Mirror question.
+
 ## Current active program
 
 The systematic backlog is `experiments/mirror_applications/IDEA_REGISTRY.csv`.
@@ -31,3 +33,8 @@ SRM and TM reports are evidence, not the current task queue. Use them when refer
 ## Output discipline
 
 Every experiment needs a protocol, result table, verification record, and a scoped conclusion stating what is and is not established.
+
+
+## Concurrent registry edits
+
+Before adding a new MA candidate, re-read `IDEA_REGISTRY.csv` from the current branch and allocate IDs starting at **max existing MA ID + 1**. IDs now extend past MA-999; parse with `^MA-[0-9]{3,}$` and use complete IDs in paths (`ma-1000-...`). Run `python experiments/mirror_applications/check_registry_integrity.py` after registry/status/claim edits. Never reserve an ID from memory or an older checkout. After writing, re-read the registry and verify zero duplicate IDs. If concurrent additions collide, preserve both hypotheses and renumber the later addition rather than deleting either one.

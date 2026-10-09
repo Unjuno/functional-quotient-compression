@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-466",
+  "commit": "baff25a0e596e28321ae531191648d2cd1bb0a8b",
+  "tests": {
+    "command": "pytest -q -p no:cacheprovider experiments/mirror_applications/ma-466-unipelt-factorized-mirror-axes/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Native CP gate state/payload/hash and all context outputs exactly alias Mirror for both seeds.",
+    "LoRA, bottleneck-adapter and prefix ablation metrics replay from serialized shared components.",
+    "Fresh seeds 46611, 46612, 46613 stayed sealed after frozen FAIL gates."
+  ]
+}

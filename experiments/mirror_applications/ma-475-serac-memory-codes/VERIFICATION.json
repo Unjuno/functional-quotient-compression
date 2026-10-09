@@ -1,0 +1,12 @@
+{
+  "experiment_id":"MA-475",
+  "protocol_sha256":"5cc97784154a0cc9049bf63df3c1665a0d5c18937af72e43420ff244b31aeed1",
+  "amendment":"AMENDMENT_1.json; no-edit serializer stores no edit-value array; both development seeds rerun",
+  "commit":"cfd2ad02d4c4bb5ab165b3626cad08b8b0000a27",
+  "tests":{"command":"pytest -q experiments/mirror_applications/ma-475-serac-memory-codes/tests","passed":5,"failed":0},
+  "serialization":{"roundtrip_checked":true,"byte_exact":true},
+  "metric_replay":{"checked":true,"max_difference":0.0},
+  "fresh_split_integrity_checked":true,"fresh_accessed":false,"native_pca_alias":true,
+  "disposition":"FAIL for Mirror-specific attribution; aligned shared-PCA memory passes frozen quality/storage gates, but exactly aliases native PCA",
+  "notes":["The pre-amendment no-edit serializer run is preserved separately and excluded from canonical results.","Actual keys, values/codes/basis/scales, and metadata are charged.","Fresh seeds 47511-47513 remained sealed."]
+}

@@ -1,0 +1,38 @@
+{
+  "experiment_id": "MA-003",
+  "commit": "pending result commit",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-003-mirror-topk-expert/tests",
+    "passed": 4,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "rows": 36,
+    "max_abs_delta": {
+      "routed_mse": 4.753415439040509e-10,
+      "router_accuracy": 4.999999969612645e-09,
+      "r2": 4.854736279646943e-09,
+      "serialized_bytes": 0
+    },
+    "replay_artifact": "VERIFICATION_REPLAY.json"
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_worlds_opened": true,
+  "fresh_worlds": [
+    30001,
+    30002,
+    30003
+  ],
+  "notes": [
+    "Frozen v3 protocol and source hash manifest verified before fresh run.",
+    "Selected LR 0.01.",
+    "Aligned routed-MSE gate passed in 2/3 worlds; router-relative and payload gates passed 3/3. Overall PROMISING, not PASS.",
+    "Independent-expert mode needs private degrees of freedom; shared methods were far below full MoE.",
+    "Fixed 1,200-update synthetic screen; no near-convergence capacity claim."
+  ]
+}

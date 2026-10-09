@@ -1,0 +1,30 @@
+{
+  "experiment_id": "MA-160",
+  "commit": "pending",
+  "tests": {
+    "command": "PYTHONPATH=experiments/mirror_applications/ma-160-compression-view/source python -m pytest -q experiments/mirror_applications/ma-160-compression-view/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "notes": "The custom payload was deserialized to reconstruct each reported matrix; tensor names, dtypes, shapes, scales, angles and residual coefficients are serialized. Exact deterministic roundtrip is tested."
+  },
+  "metric_replay": {
+    "checked": true,
+    "rows": 70,
+    "max_difference": 0.0,
+    "replay_artifact": "RESULTS_CORE.csv",
+    "command": "PYTHONPATH=experiments/mirror_applications/ma-160-compression-view/source python experiments/mirror_applications/ma-160-compression-view/source/verify_replay.py experiments/mirror_applications/ma-160-compression-view/RESULTS_CORE.csv"
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_worlds_opened": true,
+  "notes": [
+    "Development seeds 16001 and 16002 passed the preregistered 1.10x activation-MSE and 0.65x byte gates before fresh access.",
+    "Fresh seeds 16011, 16012 and 16013 had shared-residual Mirror MSE ratios 1.106, 0.982 and 0.976 to independent int4. The first seed misses the strict all-seed 1.10 gate; no gate pass is claimed.",
+    "Shared-residual payload was 393B versus 607B independent int4, including all declared inference state. The actual-byte ratio is 0.647.",
+    "Independent-role condition is a misspecification diagnostic; shared Mirror quality degrades sharply while private int4 residuals recover quality at higher bytes.",
+    "The result is synthetic fixed-weight evidence with zero optimizer updates; no language-model capacity claim is made."
+  ]
+}

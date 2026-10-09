@@ -1,0 +1,28 @@
+{
+  "experiment_id": "MA-488",
+  "protocol_sha256": "d5a2bc14550efc31b8fee459bbcd287582ee5726fa84fc4b1fe4cb898a13f0ac",
+  "commit": "2f90a7bacf1cb7df65b18e0b5e84ff219c6c9873",
+  "tests": {
+    "command": "pytest -q experiments/mirror_applications/ma-488-shared-private-dictionary/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_accessed": false,
+  "native_shared_private_exact_alias": true,
+  "disposition": "FAIL for Mirror-specific attribution; exact native shared/private alias. Frontier shows exact quality and 33.6% fewer bytes than global int8 at p=.125, but above int8 bytes at p=.25 and p=.5.",
+  "notes": [
+    "Every private residual vector and row index is charged; no private state is free.",
+    "Two seeds \u00d7 four heterogeneity rates replayed, including overall and private-only heldout RMSE, with zero maximum metric difference.",
+    "Fresh seeds 48811-48813 remained sealed.",
+    "Known synthetic shared dictionary only; natural transfer is untested."
+  ]
+}

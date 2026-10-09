@@ -1,0 +1,610 @@
+{
+  "dimensions": {
+    "heldout_examples_per_task": 256,
+    "hidden": 24,
+    "rank": 4,
+    "tasks": 16,
+    "train_examples_per_task": 128
+  },
+  "experiment_id": "MA-501",
+  "rhos": {
+    "0.0": {
+      "activation_add": {
+        "active_compute_proxy_all_eval_examples": 98304,
+        "active_compute_proxy_per_example": 24,
+        "all_task_relative_rmse": 1.0018078088760376,
+        "calibration_examples": 2048,
+        "fit_wall_s": 0.015300839993869886,
+        "heldout_task_count": 4,
+        "heldout_task_relative_rmse": 1.0061484575271606,
+        "inference_payload_bytes": 2170,
+        "inference_wall_s": 0.0002465080178808421,
+        "m_causal_max_output_change": 0.0,
+        "optimizer_updates": 0,
+        "payload_sha256": "083e02919d47337a4ff52a6355ebb27de2e09b3a8a0451a72fa2af754e9d57c5",
+        "per_heldout_task_relative_rmse": {
+          "12": 1.0060017108917236,
+          "13": 1.0076818466186523,
+          "14": 1.0039364099502563,
+          "15": 1.0129752159118652
+        },
+        "task_basis_training_examples": 1536
+      },
+      "full_matrix": {
+        "active_compute_proxy_all_eval_examples": 2359296,
+        "active_compute_proxy_per_example": 576,
+        "all_task_relative_rmse": 7.580825354125409e-07,
+        "calibration_examples": 2048,
+        "fit_wall_s": 3.1189993023872375e-06,
+        "heldout_task_count": 4,
+        "heldout_task_relative_rmse": 9.31134934489819e-07,
+        "inference_payload_bytes": 37497,
+        "inference_wall_s": 0.00039391499012708664,
+        "m_causal_max_output_change": 0.0,
+        "optimizer_updates": 0,
+        "payload_sha256": "6b3e7b39087ffe598b106a1efe8021626852063783327aa7589a999f2c15a239",
+        "per_heldout_task_relative_rmse": {
+          "12": 9.5061756155701e-07,
+          "13": 1.1006121667378466e-06,
+          "14": 7.413228786390391e-07,
+          "15": 1.266296408175549e-06
+        },
+        "task_basis_training_examples": 1536
+      },
+      "identity": {
+        "active_compute_proxy_all_eval_examples": 0,
+        "active_compute_proxy_per_example": 0,
+        "all_task_relative_rmse": 1.0,
+        "calibration_examples": 2048,
+        "fit_wall_s": 1.9319995772093534e-06,
+        "heldout_task_count": 4,
+        "heldout_task_relative_rmse": 1.0,
+        "inference_payload_bytes": 388,
+        "inference_wall_s": 6.656799814663827e-05,
+        "m_causal_max_output_change": 0.0,
+        "optimizer_updates": 0,
+        "payload_sha256": "c0032f334667d6783200feb56860eaee74fe7ea85c09bc601563252e55570817",
+        "per_heldout_task_relative_rmse": {
+          "12": 1.0,
+          "13": 1.0,
+          "14": 1.0,
+          "15": 1.0
+        },
+        "task_basis_training_examples": 1536
+      },
+      "native_shared_code": {
+        "active_compute_proxy_all_eval_examples": 802816,
+        "active_compute_proxy_per_example": 196,
+        "all_task_relative_rmse": 1.790628289199958e-06,
+        "calibration_examples": 2048,
+        "fit_wall_s": 0.0013799179869238287,
+        "heldout_task_count": 4,
+        "heldout_task_relative_rmse": 1.7792674498195993e-06,
+        "inference_payload_bytes": 2138,
+        "inference_wall_s": 0.0004862709902226925,
+        "m_causal_max_output_change": 0.3443174362182617,
+        "optimizer_updates": 0,
+        "payload_sha256": "6ea021ea661367bdb564ec0c28f7843fe1afb8a1c63ac2baae3bb9d446714a0a",
+        "per_heldout_task_relative_rmse": {
+          "12": 2.001409029617207e-06,
+          "13": 1.8333050775254378e-06,
+          "14": 1.5333951068896567e-06,
+          "15": 2.1682644728571177e-06
+        },
+        "task_basis_training_examples": 1536
+      },
+      "shared_mirror": {
+        "active_compute_proxy_all_eval_examples": 802816,
+        "active_compute_proxy_per_example": 196,
+        "all_task_relative_rmse": 1.790628289199958e-06,
+        "calibration_examples": 2048,
+        "fit_wall_s": 0.0013799179869238287,
+        "heldout_task_count": 4,
+        "heldout_task_relative_rmse": 1.7792674498195993e-06,
+        "inference_payload_bytes": 2138,
+        "inference_wall_s": 0.0004616270016413182,
+        "m_causal_max_output_change": 0.3443174362182617,
+        "optimizer_updates": 0,
+        "payload_sha256": "6ea021ea661367bdb564ec0c28f7843fe1afb8a1c63ac2baae3bb9d446714a0a",
+        "per_heldout_task_relative_rmse": {
+          "12": 2.001409029617207e-06,
+          "13": 1.8333050775254378e-06,
+          "14": 1.5333951068896567e-06,
+          "15": 2.1682644728571177e-06
+        },
+        "task_basis_training_examples": 1536
+      },
+      "task_loreft_r1": {
+        "active_compute_proxy_all_eval_examples": 200704,
+        "active_compute_proxy_per_example": 49,
+        "all_task_relative_rmse": 0.6365415453910828,
+        "calibration_examples": 2048,
+        "fit_wall_s": 0.002396369003690779,
+        "heldout_task_count": 4,
+        "heldout_task_relative_rmse": 0.47764652967453003,
+        "inference_payload_bytes": 4260,
+        "inference_wall_s": 0.18377657601376995,
+        "m_causal_max_output_change": 0.0,
+        "optimizer_updates": 0,
+        "payload_sha256": "9af161353eb9b977b7039ce8070d3bec6cae3a683b30b8cb09029b1014c8f78d",
+        "per_heldout_task_relative_rmse": {
+          "12": 0.5624780058860779,
+          "13": 0.5087984204292297,
+          "14": 0.3741302490234375,
+          "15": 0.6219296455383301
+        },
+        "task_basis_training_examples": 1536
+      },
+      "task_loreft_r4": {
+        "active_compute_proxy_all_eval_examples": 802816,
+        "active_compute_proxy_per_example": 196,
+        "all_task_relative_rmse": 8.64421338064858e-07,
+        "calibration_examples": 2048,
+        "fit_wall_s": 0.0021632649877574295,
+        "heldout_task_count": 4,
+        "heldout_task_relative_rmse": 9.578833441992174e-07,
+        "inference_payload_bytes": 13668,
+        "inference_wall_s": 0.004866920993663371,
+        "m_causal_max_output_change": 0.0,
+        "optimizer_updates": 0,
+        "payload_sha256": "3856414cad26f48ecd2854ce1f32fc2f643dbcca984fe3ddec08f655e0d4ea49",
+        "per_heldout_task_relative_rmse": {
+          "12": 1.0573082818154944e-06,
+          "13": 1.0620749435474863e-06,
+          "14": 7.1095689690992e-07,
+          "15": 1.3855852785127354e-06
+        },
+        "task_basis_training_examples": 1536
+      }
+    },
+    "0.25": {
+      "activation_add": {
+        "active_compute_proxy_all_eval_examples": 98304,
+        "active_compute_proxy_per_example": 24,
+        "all_task_relative_rmse": 1.0018519163131714,
+        "calibration_examples": 2048,
+        "fit_wall_s": 0.016879080008948222,
+        "heldout_task_count": 4,
+        "heldout_task_relative_rmse": 1.0060163736343384,
+        "inference_payload_bytes": 2170,
+        "inference_wall_s": 0.00023641198640689254,
+        "m_causal_max_output_change": 0.0,
+        "optimizer_updates": 0,
+        "payload_sha256": "49ea1fc5ce00d0c374a2596da75c5fa77c612a806d64575e779f10eaff6f2110",
+        "per_heldout_task_relative_rmse": {
+          "12": 1.0059773921966553,
+          "13": 1.0076476335525513,
+          "14": 1.0038813352584839,
+          "15": 1.0116106271743774
+        },
+        "task_basis_training_examples": 1536
+      },
+      "full_matrix": {
+        "active_compute_proxy_all_eval_examples": 2359296,
+        "active_compute_proxy_per_example": 576,
+        "all_task_relative_rmse": 7.345492463173287e-07,
+        "calibration_examples": 2048,
+        "fit_wall_s": 2.689979737624526e-06,
+        "heldout_task_count": 4,
+        "heldout_task_relative_rmse": 9.41048369895725e-07,
+        "inference_payload_bytes": 37497,
+        "inference_wall_s": 0.0006246109842322767,
+        "m_causal_max_output_change": 0.0,
+        "optimizer_updates": 0,
+        "payload_sha256": "748ef9c23a84fabf3988943b927e6e252324d0fab90bc24d4da7a6d705e31330",
+        "per_heldout_task_relative_rmse": {
+          "12": 9.218881018568936e-07,
+          "13": 1.1379555644452921e-06,
+          "14": 7.265202270900772e-07,
+          "15": 1.3103233413858106e-06
+        },
+        "task_basis_training_examples": 1536
+      },
+      "identity": {
+        "active_compute_proxy_all_eval_examples": 0,
+        "active_compute_proxy_per_example": 0,
+        "all_task_relative_rmse": 1.0,
+        "calibration_examples": 2048,
+        "fit_wall_s": 2.034998033195734e-06,
+        "heldout_task_count": 4,
+        "heldout_task_relative_rmse": 1.0,
+        "inference_payload_bytes": 388,
+        "inference_wall_s": 5.79390034545213e-05,
+        "m_causal_max_output_change": 0.0,
+        "optimizer_updates": 0,
+        "payload_sha256": "c0032f334667d6783200feb56860eaee74fe7ea85c09bc601563252e55570817",
+        "per_heldout_task_relative_rmse": {
+          "12": 1.0,
+          "13": 1.0,
+          "14": 1.0,
+          "15": 1.0
+        },
+        "task_basis_training_examples": 1536
+      },
+      "native_shared_code": {
+        "active_compute_proxy_all_eval_examples": 802816,
+        "active_compute_proxy_per_example": 196,
+        "all_task_relative_rmse": 0.2312772125005722,
+        "calibration_examples": 2048,
+        "fit_wall_s": 0.001005764992441982,
+        "heldout_task_count": 4,
+        "heldout_task_relative_rmse": 0.17294690012931824,
+        "inference_payload_bytes": 2138,
+        "inference_wall_s": 0.0004855850129388273,
+        "m_causal_max_output_change": 0.34431755542755127,
+        "optimizer_updates": 0,
+        "payload_sha256": "5a03819a04fecf48bee788e6c19e57054881f0d2706d512f0acc06858a8c72c5",
+        "per_heldout_task_relative_rmse": {
+          "12": 0.0789903849363327,
+          "13": 0.14117497205734253,
+          "14": 0.1321113109588623,
+          "15": 0.3438926935195923
+        },
+        "task_basis_training_examples": 1536
+      },
+      "shared_mirror": {
+        "active_compute_proxy_all_eval_examples": 802816,
+        "active_compute_proxy_per_example": 196,
+        "all_task_relative_rmse": 0.2312772125005722,
+        "calibration_examples": 2048,
+        "fit_wall_s": 0.001005764992441982,
+        "heldout_task_count": 4,
+        "heldout_task_relative_rmse": 0.17294690012931824,
+        "inference_payload_bytes": 2138,
+        "inference_wall_s": 0.0006031809898559004,
+        "m_causal_max_output_change": 0.34431755542755127,
+        "optimizer_updates": 0,
+        "payload_sha256": "5a03819a04fecf48bee788e6c19e57054881f0d2706d512f0acc06858a8c72c5",
+        "per_heldout_task_relative_rmse": {
+          "12": 0.0789903849363327,
+          "13": 0.14117497205734253,
+          "14": 0.1321113109588623,
+          "15": 0.3438926935195923
+        },
+        "task_basis_training_examples": 1536
+      },
+      "task_loreft_r1": {
+        "active_compute_proxy_all_eval_examples": 200704,
+        "active_compute_proxy_per_example": 49,
+        "all_task_relative_rmse": 0.6610600352287292,
+        "calibration_examples": 2048,
+        "fit_wall_s": 0.002339670987566933,
+        "heldout_task_count": 4,
+        "heldout_task_relative_rmse": 0.50123131275177,
+        "inference_payload_bytes": 4260,
+        "inference_wall_s": 0.17553345000487752,
+        "m_causal_max_output_change": 0.0,
+        "optimizer_updates": 0,
+        "payload_sha256": "8d6ad01cb9cfb2bf29f121e00f0447509324933d0a57065238b07cdc0a5fdcb7",
+        "per_heldout_task_relative_rmse": {
+          "12": 0.566257119178772,
+          "13": 0.5231125354766846,
+          "14": 0.3936798572540283,
+          "15": 0.6777280569076538
+        },
+        "task_basis_training_examples": 1536
+      },
+      "task_loreft_r4": {
+        "active_compute_proxy_all_eval_examples": 802816,
+        "active_compute_proxy_per_example": 196,
+        "all_task_relative_rmse": 0.18426214158535004,
+        "calibration_examples": 2048,
+        "fit_wall_s": 0.0021084479812998325,
+        "heldout_task_count": 4,
+        "heldout_task_relative_rmse": 0.16125215590000153,
+        "inference_payload_bytes": 13668,
+        "inference_wall_s": 0.0039411110046785325,
+        "m_causal_max_output_change": 0.0,
+        "optimizer_updates": 0,
+        "payload_sha256": "4c9fcbd6024c202fb3056a659a192e0ce7825761e7ace9bf20f07b1a668b1759",
+        "per_heldout_task_relative_rmse": {
+          "12": 0.0789903849363327,
+          "13": 0.14117498695850372,
+          "14": 0.1321113258600235,
+          "15": 0.30137887597084045
+        },
+        "task_basis_training_examples": 1536
+      }
+    },
+    "0.5": {
+      "activation_add": {
+        "active_compute_proxy_all_eval_examples": 98304,
+        "active_compute_proxy_per_example": 24,
+        "all_task_relative_rmse": 1.0019601583480835,
+        "calibration_examples": 2048,
+        "fit_wall_s": 0.01170618599280715,
+        "heldout_task_count": 4,
+        "heldout_task_relative_rmse": 1.005663514137268,
+        "inference_payload_bytes": 2170,
+        "inference_wall_s": 0.0002095300005748868,
+        "m_causal_max_output_change": 0.0,
+        "optimizer_updates": 0,
+        "payload_sha256": "1d5ef08213f9806bc1b09229335f3e966cd43595793984af5880f31bdf321166",
+        "per_heldout_task_relative_rmse": {
+          "12": 1.0059057474136353,
+          "13": 1.007553219795227,
+          "14": 1.0037269592285156,
+          "15": 1.0089411735534668
+        },
+        "task_basis_training_examples": 1536
+      },
+      "full_matrix": {
+        "active_compute_proxy_all_eval_examples": 2359296,
+        "active_compute_proxy_per_example": 576,
+        "all_task_relative_rmse": 7.098880132616614e-07,
+        "calibration_examples": 2048,
+        "fit_wall_s": 1.7030106391757727e-06,
+        "heldout_task_count": 4,
+        "heldout_task_relative_rmse": 9.184758482660982e-07,
+        "inference_payload_bytes": 37497,
+        "inference_wall_s": 0.0003474569821264595,
+        "m_causal_max_output_change": 0.0,
+        "optimizer_updates": 0,
+        "payload_sha256": "91239173a5efeaede31d9726b9e9ca3adba64c1c411939747314f463a4334b1c",
+        "per_heldout_task_relative_rmse": {
+          "12": 1.029999566526385e-06,
+          "13": 1.1037211606890196e-06,
+          "14": 7.074469294821029e-07,
+          "15": 1.0967528396577109e-06
+        },
+        "task_basis_training_examples": 1536
+      },
+      "identity": {
+        "active_compute_proxy_all_eval_examples": 0,
+        "active_compute_proxy_per_example": 0,
+        "all_task_relative_rmse": 1.0,
+        "calibration_examples": 2048,
+        "fit_wall_s": 2.649991074576974e-06,
+        "heldout_task_count": 4,
+        "heldout_task_relative_rmse": 1.0,
+        "inference_payload_bytes": 388,
+        "inference_wall_s": 5.681399488821626e-05,
+        "m_causal_max_output_change": 0.0,
+        "optimizer_updates": 0,
+        "payload_sha256": "c0032f334667d6783200feb56860eaee74fe7ea85c09bc601563252e55570817",
+        "per_heldout_task_relative_rmse": {
+          "12": 1.0,
+          "13": 1.0,
+          "14": 1.0,
+          "15": 1.0
+        },
+        "task_basis_training_examples": 1536
+      },
+      "native_shared_code": {
+        "active_compute_proxy_all_eval_examples": 802816,
+        "active_compute_proxy_per_example": 196,
+        "all_task_relative_rmse": 0.4293844997882843,
+        "calibration_examples": 2048,
+        "fit_wall_s": 0.0006929239898454398,
+        "heldout_task_count": 4,
+        "heldout_task_relative_rmse": 0.33134695887565613,
+        "inference_payload_bytes": 2138,
+        "inference_wall_s": 0.021803289011586457,
+        "m_causal_max_output_change": 0.3443176746368408,
+        "optimizer_updates": 0,
+        "payload_sha256": "ada259943be82eeb97df8565a8570f942309a034255a99c5533354d24c802350",
+        "per_heldout_task_relative_rmse": {
+          "12": 0.15652261674404144,
+          "13": 0.27426955103874207,
+          "14": 0.25756558775901794,
+          "15": 0.5909048318862915
+        },
+        "task_basis_training_examples": 1536
+      },
+      "shared_mirror": {
+        "active_compute_proxy_all_eval_examples": 802816,
+        "active_compute_proxy_per_example": 196,
+        "all_task_relative_rmse": 0.4293844997882843,
+        "calibration_examples": 2048,
+        "fit_wall_s": 0.0006929239898454398,
+        "heldout_task_count": 4,
+        "heldout_task_relative_rmse": 0.33134695887565613,
+        "inference_payload_bytes": 2138,
+        "inference_wall_s": 0.0004260059795342386,
+        "m_causal_max_output_change": 0.3443176746368408,
+        "optimizer_updates": 0,
+        "payload_sha256": "ada259943be82eeb97df8565a8570f942309a034255a99c5533354d24c802350",
+        "per_heldout_task_relative_rmse": {
+          "12": 0.15652261674404144,
+          "13": 0.27426955103874207,
+          "14": 0.25756558775901794,
+          "15": 0.5909048318862915
+        },
+        "task_basis_training_examples": 1536
+      },
+      "task_loreft_r1": {
+        "active_compute_proxy_all_eval_examples": 200704,
+        "active_compute_proxy_per_example": 49,
+        "all_task_relative_rmse": 0.7114620804786682,
+        "calibration_examples": 2048,
+        "fit_wall_s": 0.002047429996309802,
+        "heldout_task_count": 4,
+        "heldout_task_relative_rmse": 0.5593644976615906,
+        "inference_payload_bytes": 4260,
+        "inference_wall_s": 0.0005664399941451848,
+        "m_causal_max_output_change": 0.0,
+        "optimizer_updates": 0,
+        "payload_sha256": "508b2aa0e4df6a3ceee9802bdb2a83185e56c7ab194c9a2709cd5360299e3f7f",
+        "per_heldout_task_relative_rmse": {
+          "12": 0.5771739482879639,
+          "13": 0.5609153509140015,
+          "14": 0.4438779354095459,
+          "15": 0.7751824259757996
+        },
+        "task_basis_training_examples": 1536
+      },
+      "task_loreft_r4": {
+        "active_compute_proxy_all_eval_examples": 802816,
+        "active_compute_proxy_per_example": 196,
+        "all_task_relative_rmse": 0.28596529364585876,
+        "calibration_examples": 2048,
+        "fit_wall_s": 0.0018740129889920354,
+        "heldout_task_count": 4,
+        "heldout_task_relative_rmse": 0.24101760983467102,
+        "inference_payload_bytes": 13668,
+        "inference_wall_s": 0.004616644990164787,
+        "m_causal_max_output_change": 0.0,
+        "optimizer_updates": 0,
+        "payload_sha256": "44dde7747bdac00a659ec75fffc39738d3ae26aa2e36a68271e2a15abfbb9ee7",
+        "per_heldout_task_relative_rmse": {
+          "12": 0.15652261674404144,
+          "13": 0.2502615749835968,
+          "14": 0.2045765072107315,
+          "15": 0.3662290871143341
+        },
+        "task_basis_training_examples": 1536
+      }
+    },
+    "1.0": {
+      "activation_add": {
+        "active_compute_proxy_all_eval_examples": 98304,
+        "active_compute_proxy_per_example": 24,
+        "all_task_relative_rmse": 1.0022000074386597,
+        "calibration_examples": 2048,
+        "fit_wall_s": 4.59970033261925e-05,
+        "heldout_task_count": 4,
+        "heldout_task_relative_rmse": 1.0046886205673218,
+        "inference_payload_bytes": 2170,
+        "inference_wall_s": 0.00033855397487059236,
+        "m_causal_max_output_change": 0.0,
+        "optimizer_updates": 0,
+        "payload_sha256": "5eb4d663c5ddae620e68966ef18b15efeba6f09da8a1a1cffc786a5fe151e4a8",
+        "per_heldout_task_relative_rmse": {
+          "12": 1.0056438446044922,
+          "13": 1.0072622299194336,
+          "14": 1.003237247467041,
+          "15": 1.0050791501998901
+        },
+        "task_basis_training_examples": 1536
+      },
+      "full_matrix": {
+        "active_compute_proxy_all_eval_examples": 2359296,
+        "active_compute_proxy_per_example": 576,
+        "all_task_relative_rmse": 6.033731665411324e-07,
+        "calibration_examples": 2048,
+        "fit_wall_s": 1.353997504338622e-06,
+        "heldout_task_count": 4,
+        "heldout_task_relative_rmse": 7.809482553966518e-07,
+        "inference_payload_bytes": 37497,
+        "inference_wall_s": 0.00028771799406968057,
+        "m_causal_max_output_change": 0.0,
+        "optimizer_updates": 0,
+        "payload_sha256": "f77a12da06c60fac8986ba97fb8cae2158305540a49cbb60b8d1d66ee1d33b3a",
+        "per_heldout_task_relative_rmse": {
+          "12": 9.16930218863854e-07,
+          "13": 9.665939160186099e-07,
+          "14": 6.400130700967566e-07,
+          "15": 7.900181344666635e-07
+        },
+        "task_basis_training_examples": 1536
+      },
+      "identity": {
+        "active_compute_proxy_all_eval_examples": 0,
+        "active_compute_proxy_per_example": 0,
+        "all_task_relative_rmse": 1.0,
+        "calibration_examples": 2048,
+        "fit_wall_s": 2.4530163500458e-06,
+        "heldout_task_count": 4,
+        "heldout_task_relative_rmse": 1.0,
+        "inference_payload_bytes": 388,
+        "inference_wall_s": 6.202899385243654e-05,
+        "m_causal_max_output_change": 0.0,
+        "optimizer_updates": 0,
+        "payload_sha256": "c0032f334667d6783200feb56860eaee74fe7ea85c09bc601563252e55570817",
+        "per_heldout_task_relative_rmse": {
+          "12": 1.0,
+          "13": 1.0,
+          "14": 1.0,
+          "15": 1.0
+        },
+        "task_basis_training_examples": 1536
+      },
+      "native_shared_code": {
+        "active_compute_proxy_all_eval_examples": 802816,
+        "active_compute_proxy_per_example": 196,
+        "all_task_relative_rmse": 0.6890881657600403,
+        "calibration_examples": 2048,
+        "fit_wall_s": 0.004777968017151579,
+        "heldout_task_count": 4,
+        "heldout_task_relative_rmse": 0.5747640132904053,
+        "inference_payload_bytes": 2138,
+        "inference_wall_s": 0.004985382984159514,
+        "m_causal_max_output_change": 0.34431731700897217,
+        "optimizer_updates": 0,
+        "payload_sha256": "1aea26465a3925d5bba89375142944d3f026eceef0eae5e7273e8e265c6161e8",
+        "per_heldout_task_relative_rmse": {
+          "12": 0.3021388053894043,
+          "13": 0.49547362327575684,
+          "14": 0.4704403579235077,
+          "15": 0.8259143233299255
+        },
+        "task_basis_training_examples": 1536
+      },
+      "shared_mirror": {
+        "active_compute_proxy_all_eval_examples": 802816,
+        "active_compute_proxy_per_example": 196,
+        "all_task_relative_rmse": 0.6890881657600403,
+        "calibration_examples": 2048,
+        "fit_wall_s": 0.004777968017151579,
+        "heldout_task_count": 4,
+        "heldout_task_relative_rmse": 0.5747640132904053,
+        "inference_payload_bytes": 2138,
+        "inference_wall_s": 0.0004056250036228448,
+        "m_causal_max_output_change": 0.34431731700897217,
+        "optimizer_updates": 0,
+        "payload_sha256": "1aea26465a3925d5bba89375142944d3f026eceef0eae5e7273e8e265c6161e8",
+        "per_heldout_task_relative_rmse": {
+          "12": 0.3021388053894043,
+          "13": 0.49547362327575684,
+          "14": 0.4704403579235077,
+          "15": 0.8259143233299255
+        },
+        "task_basis_training_examples": 1536
+      },
+      "task_loreft_r1": {
+        "active_compute_proxy_all_eval_examples": 200704,
+        "active_compute_proxy_per_example": 49,
+        "all_task_relative_rmse": 0.7470900416374207,
+        "calibration_examples": 2048,
+        "fit_wall_s": 0.005984880001051351,
+        "heldout_task_count": 4,
+        "heldout_task_relative_rmse": 0.6503278017044067,
+        "inference_payload_bytes": 4260,
+        "inference_wall_s": 0.0006191119900904596,
+        "m_causal_max_output_change": 0.0,
+        "optimizer_updates": 0,
+        "payload_sha256": "40827213f397f8ad68c26d5fc4eb7ec7b018820ae813d265c3240f668c353b4e",
+        "per_heldout_task_relative_rmse": {
+          "12": 0.6154572367668152,
+          "13": 0.6639408469200134,
+          "14": 0.5747255682945251,
+          "15": 0.7644584774971008
+        },
+        "task_basis_training_examples": 1536
+      },
+      "task_loreft_r4": {
+        "active_compute_proxy_all_eval_examples": 802816,
+        "active_compute_proxy_per_example": 196,
+        "all_task_relative_rmse": 0.3606806993484497,
+        "calibration_examples": 2048,
+        "fit_wall_s": 0.006167062005260959,
+        "heldout_task_count": 4,
+        "heldout_task_relative_rmse": 0.3347877860069275,
+        "inference_payload_bytes": 13668,
+        "inference_wall_s": 0.0004911759751848876,
+        "m_causal_max_output_change": 0.0,
+        "optimizer_updates": 0,
+        "payload_sha256": "d280fe7cdd5a6ca7ddf805b24ed6440e7467ee444f9529732a19c66efc1a4514",
+        "per_heldout_task_relative_rmse": {
+          "12": 0.31010180711746216,
+          "13": 0.39842504262924194,
+          "14": 0.30850711464881897,
+          "15": 0.3511195182800293
+        },
+        "task_basis_training_examples": 1536
+      }
+    }
+  },
+  "seed": 50102,
+  "split": "dev"
+}

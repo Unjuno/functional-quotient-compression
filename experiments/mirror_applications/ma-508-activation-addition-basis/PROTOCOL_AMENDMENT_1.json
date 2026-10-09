@@ -1,0 +1,12 @@
+{
+  "experiment_id":"MA-508",
+  "amendment":1,
+  "reason":"The frozen run's secondary code-causality metric subtracted the zero-code output from the input instead of comparing active-code output with zero-code output, so it incorrectly reported zero change.",
+  "preserved_attempt":"runs/pre_amendment_1_causality_bug/",
+  "change":"Correct only the code-zero causal output comparison and add a unit assertion that shared codes change outputs.",
+  "unchanged":["protocol and hypothesis","task seeds and examples","steering vectors and probes","rank/rho sweep","actual payload serialization","quality/storage gates","fresh seeds"],
+  "original_protocol_sha256":"44c396a0647bede8edd9a2d9c4e2dcee7a4066b079f8d05f19bd5f174a493d58",
+  "original_runner_sha256":"7c5947b78cc329d6a4a9e446f2f334414621468437838f04a8d0b1e98624a4cd",
+  "amended_runner_sha256":"0d23ecd9cbcdc6edbb9027b3dcc50339688a72e0a4bc561eb266496f9e49dc2a",
+  "fresh_accessed":false
+}

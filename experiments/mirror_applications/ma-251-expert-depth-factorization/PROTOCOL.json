@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-251",
+  "title": "factorized expert x depth Mirror coordinate",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/RUNTIME",
+  "base_commit": "809f9d50ef85d470d8bac045db291349e264dcba",
+  "prior_art_refs": ["PA01", "PA06"],
+  "hypothesis": "Factorized expert and depth Mirror coordinates can express a Cartesian family of logical role-depth functions from one shared expert matrix with fewer actual bytes than a per-pair coordinate table, when teacher roles factor across expert and depth; independent pair functions should expose the need for private/table parameters.",
+  "physical_object": "one shared linear expert matrix W",
+  "mirror_coordinate": "separate expert code m_e and depth code m_l, applied on disjoint hidden coordinate subspaces",
+  "logical_multiplicity": "4 x 4 logical expert-depth functions from separately coded expert and depth axes",
+  "teacher": "aligned mode uses disjoint Givens views for expert identity and depth; independent mode uses unrelated matrix for each expert-depth pair",
+  "task": {"input_dim": 16, "output_dim": 12, "experts": 4, "depth_steps": 4, "metric": "held-out role-depth MSE"},
+  "controls": ["16 untied pair-specific matrices", "hard tied shared matrix", "expert-tied matrices", "expert tying plus static per-depth rank-1 LoRA", "depth-tied matrices", "expert-only Mirror coordinate", "depth-only Mirror coordinate", "factorized expert x depth Mirror", "Cartesian per-pair Mirror angle table"],
+  "development": {"worlds_or_seeds": [{"world": 25100, "init_seed": 251000}], "learning_rate_candidates": [0.003, 0.01], "selection_metric": "mean held-out MSE across all methods and both teacher modes"},
+  "fresh": {"worlds_or_seeds": [{"world": 25101, "init_seed": 251001}, {"world": 25102, "init_seed": 251002}, {"world": 25103, "init_seed": 251003}], "locked_before_access": true},
+  "training": {"updates": 1200, "batch_size": 64, "optimizer": "AdamW", "weight_decay": 0.0001, "dtype": "float32", "matched_minibatches_across_methods": true},
+  "storage": {"authority": "actual serialized inference payload bytes", "serialization": "torch.save state_dict plus deterministic config JSON", "paid_objects": ["shared or private matrices", "biases", "expert/depth Mirror coordinates", "static LoRA residuals", "Cartesian coordinate table", "metadata"]},
+  "compute": {"report_examples": true, "report_optimizer_updates": true, "report_active_MAC_proxy": true, "report_wall_time": true, "report_inference_throughput": true, "cpu_threads": 1},
+  "success_gate": "In all three fresh aligned worlds, factorized Mirror MSE <=1.10x the 16-matrix upper control, <=0.10x hard tying and <=1.10x Cartesian Mirror; actual payload <=0.65x untied and <= Cartesian Mirror payload. Report how independent-pair quality degrades without treating 4x4 combinations as independent capacity.",
+  "failure_gate": "Factorized Mirror misses two or more aligned fresh quality gates, or static per-depth LoRA / simpler expert tying matches it with equal or fewer bytes. Independent-mode failure alone maps the private-parameter boundary.",
+  "boundaries": ["linear synthetic experts only", "aligned teacher is an optimistic separability case", "fixed 1,200-update mechanism screen, not capacity", "no router, tokens, or natural-language evaluation", "logical combination count is not independent capacity"]
+}

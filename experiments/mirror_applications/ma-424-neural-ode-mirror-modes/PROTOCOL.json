@@ -1,0 +1,61 @@
+{
+  "experiment_id": "MA-424",
+  "title": "Givens-coordinate views of a shared Neural ODE vector field",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/RUNTIME/STABILITY",
+  "base_commit": "5be49f0e7d50f9ea3843e405d1bb97ac86e77dfe",
+  "prior_art_refs": ["PA70", "PA71"],
+  "hypothesis": "A single contractive neural vector field viewed through small orthogonal state-coordinate codes can represent multiple continuous dynamics with lower actual payload than independent mode-specific vector fields while retaining solver accuracy and throughput.",
+  "physical_object": "One fixed tanh MLP vector field f0:R^8->R^8 (8-32-8), shared across 16 logical dynamics modes.",
+  "mirror_coordinate": "One scalar angle per mode applies four equal-angle Givens rotations Q(theta); the viewed field is f_theta(h)=Q(theta)^T f0(Q(theta)h).",
+  "logical_multiplicity": "Sixteen mode-specific ODE trajectories from one physical neural vector field; initial states are shared across modes.",
+  "task": {
+    "state_dimension": 8,
+    "hidden_dimension": 32,
+    "mode_count": 16,
+    "view": "Four orthogonal 2D Givens blocks with a common angle theta in [-0.75,0.75].",
+    "initial_conditions_per_mode": 32,
+    "horizon": 1.0,
+    "candidate_solver": "64-step explicit Euler; count 64 vector-field evaluations (NFEs) per trajectory.",
+    "reference_solver": "256-step RK4 on the same field and view; reference state is not part of inference payload.",
+    "field_generation": "Per-seed deterministic random tanh MLP, weights scaled to produce contractive, non-stiff trajectories. No model training occurs; this is a frozen mechanism/storage/runtime screen."
+  },
+  "controls": [
+    "one shared unconditioned vector field",
+    "native generated-weight control: from the same base MLP and angle, deterministically materialize W1(theta)=W1 Q(theta), W2(theta)=Q(theta)^T W2 and b2(theta)=Q(theta)^T b2 once at load; this is an exact algebraic control for coordinate-view inference",
+    "independent full transformed MLP weights stored for every mode"
+  ],
+  "development": {
+    "worlds_or_seeds": [42401, 42402],
+    "optimizer_updates": 0,
+    "selection_metric": "mean relative trajectory RMSE against RK4 reference, actual serialized payload bytes, mode diversity, and steady-state vector-field evaluations/s",
+    "runtime_protocol": "one-time payload load/materialization measured separately; warm up five trajectory batches, then time 15 repeats on one CPU thread."
+  },
+  "fresh": {
+    "worlds_or_seeds": [42411, 42412, 42413],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "format": "compressed NPZ, FP16 vector-field weights/angles and uint8 mode IDs",
+    "paid_objects": ["all persistent vector-field weights or per-mode transformed weights", "all mode angles/codes and IDs", "metadata", "deterministic reconstruction recipe state"],
+    "reconstruction": "Materialized native per-mode matrices are deterministically computed from paid shared weights and mode angles; report materialization latency but do not double-charge reconstructed matrices as stored payload.",
+    "replay_required": true
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true,
+    "report_inference_throughput": true,
+    "include": "Report zero training updates, simulated initial-condition examples, 64 NFEs/trajectory, one-time matrix materialization, and steady-state CPU evaluations/s. The arithmetic proxy counts MLP MAC-like operations and coordinate rotation arithmetic; empirical runtime includes tanh and solver overhead."
+  },
+  "success_gate": "Both development seeds: Mirror trajectory relative RMSE <=1e-3 and <=1.05x independent networks, actual payload <=0.80x independent networks, throughput >=0.80x the exact native generated-weight control, and distinct useful mode trajectories. Any exact native alias without an incremental benefit blocks a Mirror-specific PASS and fresh access.",
+  "failure_gate": "FAIL if either seed misses quality, bytes or throughput, or if the native generated-weight control reproduces Mirror predictions and paid state with no incremental Mirror-specific benefit.",
+  "boundaries": [
+    "This uses a deterministic synthetic contractive neural field and does not establish learned Neural ODE task quality.",
+    "No parameter fitting or near-convergence claim is made.",
+    "The native weight-generation control is expected to be algebraically equivalent; its runtime and reconstruction costs are measured explicitly.",
+    "Fresh worlds stay sealed unless both development seeds pass all gates."
+  ]
+}
