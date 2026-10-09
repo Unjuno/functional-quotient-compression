@@ -3,8 +3,8 @@
   "protocol_amendment": "A1",
   "commit": "pending",
   "tests": {"command": "PYTHONDONTWRITEBYTECODE=1 python -m pytest -q -p no:cacheprovider experiments/mirror_applications/ma-255-parameter-superposition-mirror/tests", "passed": null, "failed": null},
-  "serialization": {"roundtrip_checked": false, "byte_exact": false},
-  "metric_replay": {"checked": false, "max_difference": null},
+  "serialization": {"roundtrip_checked": true, "byte_exact": true},
+  "metric_replay": {"checked": true, "max_difference": 0.0},
   "fresh_split_integrity_checked": true,
-  "notes": ["A0 metrics excluded due detected broadcast bug; A1 is a disclosed protocol amendment frozen before A1 development.", "Fresh worlds remain sealed."]
+  "notes": ["A0 metrics excluded due detected broadcast bug; corrected A1 PSP unbinding rerun and byte-level metrics replayed.", "Mirror/generic rank-8 outputs match exactly; fresh remained sealed after development byte gate failure."]
 }

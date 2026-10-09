@@ -9,7 +9,7 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 - P0: **630** (53 completed; 577 UNTESTED)
 - P1: **422** (13 completed; 409 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1088 UNTESTED, 36 PROMISING, 31 FAIL**
+- Current MA statuses: **1087 UNTESTED, 36 PROMISING, 32 FAIL**
 - 65 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
