@@ -4,7 +4,8 @@
 - Branch: `research/ma-534-transcoder-logical-mlp-20261009`
 - Protocol frozen: `930a1325`; tests/serialization fix: `bcf2e106`; timing amendment: `b59c1cd2`.
 - Development complete: yes; fresh/audit opened: no.
-- Results committed: pending final result commit.
+- Result commit: `eb9eb3e6` (pushed).
+- Results committed: yes.
 
 ## H — Hypothesis
 
