@@ -1,1 +1,24 @@
-{"experiment_id":"MA-582","commit":null,"tests":{"command":null,"passed":null,"failed":null},"serialization":{"roundtrip_checked":false,"byte_exact":false},"metric_replay":{"checked":false,"max_difference":null},"fresh_split_integrity_checked":false,"notes":[]}
+{
+  "experiment_id": "MA-582",
+  "commit": null,
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-582-mla-layer-mirror-reconstruction/tests",
+    "passed": 4,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Mirror/native serialized session cache NPZ files have identical bytes and SHA-256 in both dev seeds.",
+    "58201 deterministic replay exactly reproduces all method NLLs and serialized byte counts; timing fields are excluded.",
+    "Fresh test file SHA-256 verified; no test examples were loaded.",
+    "MA-582 amendment 1 cache-shape fix was committed before registered runs."
+  ]
+}

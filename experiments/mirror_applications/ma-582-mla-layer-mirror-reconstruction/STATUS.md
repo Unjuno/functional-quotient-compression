@@ -1,18 +1,18 @@
 # MA-582 status
 
-- Status: SCREENING
+- Status: FAIL
 - Branch: `research/ma-582-mla-layer-mirror-reconstruction-20261009`
 - Base commit: `6574132b`
-- Last verified commit: pending
-- Development complete: no
-- Fresh/audit opened: no
-- Results committed: no
-- Verification committed: no
-- Registry row updated: yes (SCREENING)
+- Source/protocol frozen before registered dev; see `FREEZE.json` and `AMENDMENTS.md`.
+- Development complete: yes (58201, 58202; same-seed replay exact for core metrics)
+- Fresh/audit opened: no (sealed after quality and native-alias gates failed)
+- Results committed: pending
+- Verification committed: pending
+- Registry row updated: pending
 
 ## Next action
 
-Freeze source and protocol in a commit, then run the two registered development seeds.
+Commit the verified FAIL record and continue with next P0, MA-583.
 
 ## Blockers
 
@@ -20,4 +20,4 @@ None.
 
 ## Decisions / rulings
 
-The fixed layer groups are [0,1,2] and [3,4,5]. No fresh split is opened before the development gate and native-control comparison.
+Amendment 1 fixed the KV sequence-row reshape defect before any registered result was retained. Failed invocation excluded. No protocol gates or seeds changed.

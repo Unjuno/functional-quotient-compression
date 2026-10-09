@@ -491,3 +491,6 @@ MA-578 is closed **FAIL** on `research/ma-578-kv-cache-mirror-rotation-20261009`
 ## Current MA-581 handoff — 2026-10-09
 
 MA-581 is closed **FAIL** on `research/ma-581-mla-mirror-head-reconstruction-20261009`: eight-session basis+cache state is 44.1% of FP16 bytes, but NLL misses gate by +1.036/+0.412 nat and shared residual exact-aliases native dictionary. Fresh sealed. Next P0: MA-582 MLA latent + layer Mirror reconstruction (PA115/PA08).
+
+
+MA-582 is closed **FAIL** on `research/ma-582-mla-layer-mirror-reconstruction-20261009`: group-shared rank128 MLA saves 44.4% versus per-layer MLA at eight sessions, but NLL degrades +2.255/+1.964 nat/token; the rank4 layer View is unstable and exactly aliases the native group residual representation. Same-seed replay matched core metrics, fresh sealed. Next P0: MA-583 factorized head × layer MLA Mirror code (PA115).
