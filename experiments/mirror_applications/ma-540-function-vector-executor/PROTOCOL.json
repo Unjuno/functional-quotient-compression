@@ -1,0 +1,104 @@
+{
+  "experiment_id": "MA-540",
+  "title": "Ordered sequential execution of per-step function vectors",
+  "status": "SCREENING",
+  "evidence_lane": "FUNCTION_VECTOR_COMPOSITION/ORDERED_EXECUTION/ACTUAL_BYTES/COMPUTE/NATIVE_ATTRIBUTION",
+  "base_commit": "c0d474a2082654c760d777445ed8c2461bfb5296",
+  "hypothesis": "On held-out ordered compositions of structured state permutations, one shared neural executor conditioned on a different support-derived function vector at each step will match an external two-call executor and exceed an endpoint-only sum-of-vectors control, while using at least 35% fewer actual bytes than two untied step executors; it must also show a benefit over the same tied block with ordinary operator-ID embeddings to earn Mirror-specific credit.",
+  "physical_object": "One shared width-32 neural state-transition block reused at every execution step.",
+  "mirror_coordinate": "A support-derived 16-dimensional function vector for each primitive operator, supplied in ordered sequence to the shared block; hidden state is passed from one step to the next.",
+  "logical_multiplicity": "Ordered compositions of two primitive functions from a shared library without storing a separate composed operator.",
+  "prior_art_refs": [
+    "PA99",
+    "PA72"
+  ],
+  "related_evidence": [
+    "SRM003",
+    "MA-539"
+  ],
+  "world": {
+    "state_bits": 4,
+    "states": 16,
+    "primitive_functions": 24,
+    "function_family": "Affine bit permutations x -> permutation(x) XOR mask, closed under composition.",
+    "heldout_pair_split": "Hash split ordered pairs; both orders are kept together in one split; atomic functions and all 16 states remain available for fitting.",
+    "dev_seeds": [
+      54001,
+      54002
+    ],
+    "fresh_seeds": [
+      54011,
+      54012,
+      54013
+    ]
+  },
+  "model": {
+    "primitive_executor": "Shared MLP receives one-hot 16-state input and a 16d function vector; width 32 with one hidden layer, predicts next state.",
+    "function_vectors": "Extract by averaging frozen shared hidden activation deltas over 8 support state-output pairs per primitive; task/function identity is not fed as a learned operator-ID embedding to candidate executor.",
+    "execution": "Two ordered applications of the same block, with predicted intermediate argmax state passed to the second invocation and a distinct FV at each step.",
+    "native_tied_control": "Same shared executor and update budget, conditioned on ordinary learned operator-ID embeddings instead of extracted FVs.",
+    "untied_control": "Two independent step-specific transition blocks with the same function code interface.",
+    "endpoint_control": "One-pass predictor conditioned on summed two FVs and initial state; no intermediate state feedback.",
+    "external_two_call_control": "One-step shared block called twice by the host loop with explicit operator IDs and predicted intermediate state; count both calls and address inputs.",
+    "upper": "Exact affine-function composition in structured code; charge serialized primitive parameters and executor metadata."
+  },
+  "controls": [
+    "FV tied sequential executor",
+    "native operator-ID tied executor",
+    "untied two-step executor",
+    "one-pass sum-of-FVs endpoint predictor",
+    "external two-call executor",
+    "exact affine-code composition upper"
+  ],
+  "training": {
+    "optimizer": "AdamW",
+    "updates": [
+      800,
+      1600
+    ],
+    "batch": 96,
+    "learning_rates": [
+      0.001,
+      0.003
+    ],
+    "selection": "Select common update/LR on dev by held-out ordered-pair accuracy for FV tied executor; apply it to every control.",
+    "paired_data": "Same primitive support pairs, ordered pair split, minibatches and initialization seed streams across methods."
+  },
+  "metrics": [
+    "atomic exact accuracy",
+    "held-out ordered-pair exact accuracy",
+    "reversed-order consistency",
+    "actual serialized inference bytes",
+    "calls/steps per composed function",
+    "active MAC proxy",
+    "fit and inference wall time"
+  ],
+  "gates": {
+    "PASS": "All three fresh worlds and both dev worlds: FV tied executor reaches >=0.99 held-out pair exact accuracy, is within 0.01 of external two-call, saves >=35% actual bytes vs untied, and beats native operator-ID tied control by >=0.02 accuracy or >=20% bytes at equal quality.",
+    "FAIL": "Any quality, byte, or native-attribution gate fails.",
+    "NOT_ESTABLISHED": "Data split, execution order, replay, or payload accounting is invalid."
+  },
+  "storage": {
+    "authority": "Actual uncompressed serialized inference payload bytes.",
+    "paid_objects": [
+      "shared/untied transition weights",
+      "all per-primitive FVs or native operator-ID embeddings",
+      "support activation extractor where used",
+      "composition code/order metadata",
+      "exact affine control representation"
+    ]
+  },
+  "compute": {
+    "hardware": "CPU fixed 5 threads",
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true
+  },
+  "boundaries": [
+    "Synthetic affine rules only; no natural language or general task composition claim.",
+    "Two-step explicit execution is not a one-forward generation result.",
+    "Do not call ordered code counts independent capacity.",
+    "Fresh evaluation remains sealed unless all development conditions pass."
+  ]
+}
