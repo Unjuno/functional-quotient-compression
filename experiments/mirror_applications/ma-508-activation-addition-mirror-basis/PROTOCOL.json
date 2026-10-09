@@ -1,0 +1,70 @@
+{
+  "experiment_id": "MA-508",
+  "title": "Activation-addition Mirror basis",
+  "status": "FROZEN_SCREENING",
+  "base_commit": "f85b2963",
+  "evidence_lane": "MECHANISM/STORAGE/FUNCTIONALITY",
+  "hypothesis": "A shared rank-4 activation-steering basis plus per-behavior low-description Givens Views stores fixed-norm steering behaviors with fewer actual bytes than explicit vectors and generic rank-4 coefficients while preserving on-target efficacy and off-target specificity.",
+  "physical_object": "One shared synthetic 64x4 orthonormal activation basis and one rank-4 seed vector",
+  "mirror_coordinate": "Two per-behavior Givens angles over the seed vector; optional charged private residual",
+  "logical_multiplicity": "64 additive activation-steering behaviors",
+  "prior_art_refs": [97, 98],
+  "controls": [
+    "Explicit 64D steering vector bank",
+    "Shared basis plus FP32 rank-4 coefficient table",
+    "Shared basis plus FP16 rank-4 coefficient table",
+    "Shared basis plus seed vector and two FP16 Givens angles per behavior",
+    "Mirror plus per-behavior FP16 rank-4 private residual"
+  ],
+  "task": {
+    "type": "synthetic activation-addition behavior bank",
+    "dimension": 64,
+    "rank": 4,
+    "behaviors": 64,
+    "held_out_behavior_fraction": 0.2,
+    "regimes": [0.0, 0.1],
+    "readout_probes": 32,
+    "metrics": [
+      "vector NRMSE",
+      "on-target efficacy ratio",
+      "off-target readout drift",
+      "private residual fraction",
+      "actual serialized payload bytes",
+      "decode/application wall time and MAC proxy"
+    ]
+  },
+  "development": {
+    "worlds": [50800, 50801],
+    "seeds": [0, 1, 2],
+    "allowed": "Fit shared rank-4 basis/seed and verify deterministic decoder only; no fresh angle or residual tuning."
+  },
+  "fresh": {
+    "worlds": [50820, 50821, 50822],
+    "seeds": [0, 1, 2],
+    "locked_before_access": true,
+    "tuning_prohibited": true,
+    "fresh_behavior_codes_are_paid_state": true
+  },
+  "storage": {
+    "authority": "actual torch-serialized inference payload bytes",
+    "paid_objects": [
+      "shared basis",
+      "shared seed code",
+      "all per-behavior codes or coefficients",
+      "private residuals",
+      "readout/decoder metadata"
+    ]
+  },
+  "compute": {
+    "report_application_mac_proxy": true,
+    "report_decode_wall_time": true,
+    "report_payload_bytes": true
+  },
+  "success_gate": "For every rho=0 fresh world: vector NRMSE <=0.01, efficacy >=0.99, off-target drift <=0.01, and actual bytes <=80% of both explicit vectors and the cheapest generic coefficient control.",
+  "failure_gate": "Aligned quality/byte gate fails or a generic coefficient control dominates.",
+  "boundaries": [
+    "Synthetic fixed-norm Givens steering orbit only.",
+    "No pretrained language model or natural behavior steering claim.",
+    "All fresh behavior codes are serialized and charged; combination count is not capacity."
+  ]
+}
