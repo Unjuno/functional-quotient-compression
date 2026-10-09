@@ -1,0 +1,15 @@
+{
+ "experiment_id":"MA-320","title":"Tucker expert bank + Mirror expert coefficients","status":"SCREENING","base_commit":"eb9b214f","prior_art_refs":[35],"evidence_lane":"MOE_LOGICAL_EXPERTS/QUALITY/ACTUAL_BYTES/ACTIVE_COMPUTE",
+ "hypothesis":"A shared Tucker matrix bank plus a compact Mirror address can represent many routed logical experts at lower total bytes than free Tucker expert coefficients, while preserving top-1 routed outputs; generic PCA and independent experts are controls.",
+ "physical_object":"shared bank of K=8 matrices of shape 16x16 for E=128 logical experts","mirror_coordinate":"one shared 8-vector and one Givens angle per expert","logical_multiplicity":"128 expert functions under deterministic balanced top-1 dispatch",
+ "model":{"matrix_dim":16,"bank_size":8,"logical_experts":128,"tokens_per_expert":32,"dispatch":"fixed balanced cyclic hash, identical across methods"},
+ "strata":["Givens-aligned expert coefficient vectors","independent random expert coefficients"],
+ "controls":["independent full expert matrices","Tucker bank plus free expert coefficients","shared Mirror vector plus per-expert Givens angle","generic rank-2 PCA expert coefficients"],
+ "development":{"worlds":[32000,32001],"seeds":[0,1,2],"selection_metric":"routed output NRMSE, expert matrix NRMSE, actual payload bytes and materialization compute"},
+ "fresh":{"worlds":[32010,32011,32012],"seeds":[0,1,2],"locked_before_access":true},
+ "storage":{"authority":"actual serialized inference payload bytes","paid_objects":["shared matrix bank fp16","independent matrices or expert coefficients/factors fp16","metadata"],"router":"fixed balanced hash; no learned router state"},
+ "success_gate":"Aligned routed output NRMSE <=0.01 and >=20% fewer bytes than free Tucker expert coefficients; generic PCA matching Mirror means no Mirror-specific result. Independent coefficients test need for private experts.",
+ "failure_gate":"Mirror misses quality/byte gate or generic PCA matches/improves Mirror; independent coefficients requiring free expert state are the capacity boundary.",
+ "compute":{"report_router_tokens":true,"report_expert_forward_macs_per_token":true,"report_one_time_materialization_macs":true,"report_actual_bytes":true},
+ "boundaries":["Synthetic linear experts only","Fixed dispatch; no learned router or load balancing optimization","Aligned experts generated from the same Givens family","No language-model or MoE training evidence"]
+}
