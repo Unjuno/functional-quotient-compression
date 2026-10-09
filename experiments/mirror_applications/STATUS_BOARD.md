@@ -7,9 +7,9 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 - Registered candidates: **1155**
 - P0: **630** (90 completed; 540 UNTESTED)
-- P1: **422** (13 completed; 409 UNTESTED)
+- P1: **422** (14 completed; 408 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1050 UNTESTED, 44 PROMISING, 61 FAIL**
+- Current MA statuses: **1049 UNTESTED, 45 PROMISING, 61 FAIL**
 - 68 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -106,9 +106,15 @@ MA-341 and MA-342 consecutively missed the Mirror-specific byte gate because one
 
 ## Next candidate
 
-**MA-350 — multimodal Mirror posterior codebook (P1)**
+## Completed: MA-350 — multimodal Mirror posterior codebook
 
-Test whether a mixture over View codes adds useful posterior modes beyond a matched rank-one posterior mixture.
+- **PROMISING, narrowly:** oracle-aligned K=32 mixture used 429 B versus direct two-coefficient coding 564 B (24.0% fewer) and independent mode vectors 2,357 B. NLL, calibration and member disagreement matched exactly. Modes were planted on a known rotation orbit; no posterior learning or independent capacity claim.
+
+## Next candidate
+
+**MA-351 — MIMO + Mirror view diversity (P0)**
+
+Test whether explicit small Views add useful member diversity while preserving MIMO single-forward efficiency.
 
 ## Active experiment
 

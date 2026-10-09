@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-350.** MA-349 Mirror posterior matched Rank-1-style NLL/ECE within 0.02 but saved only 8.9% bytes, below the frozen 20% gate. Continue with MA-350, multimodal Mirror posterior codebook versus matched rank-one mixture.
+**Current operational pointer (2026-10-09): MA-351.** MA-350 phase codebook reached identical mixture NLL/diversity with 429 B vs 564 B direct coefficients (24% saving) on oracle-planted K=32 modes; this is only aligned storage evidence. Proceed to MA-351, MIMO plus Mirror view diversity.
 
 # Worker queue
 
