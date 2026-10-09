@@ -6,11 +6,11 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (51 completed; 579 UNTESTED)
+- P0: **630** (52 completed; 578 UNTESTED)
 - P1: **422** (13 completed; 409 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1091 UNTESTED, 36 PROMISING, 28 FAIL**
-- 63 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
+- Current MA statuses: **1090 UNTESTED, 36 PROMISING, 29 FAIL**
+- 64 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
 - Thirteenth literature sweep added MA-996..1045 (50 UNTESTED; 40 P0/10 P1) and PA296..PA325. IDs MA-1000+ use four digits; consult `check_registry_integrity.py`. No new experiment results.
@@ -23,11 +23,11 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-502 — shared LoReFT basis + many Mirror task codes (P0; PA96)**
+**MA-503 — factorized layer x task ReFT code (P0)**
 
 Reason:
-- MA-470/471/473/475/476/478/481/482, MA-483, MA-484, MA-486, MA-487, MA-488, MA-492, MA-494, MA-498 and MA-501 are completed on dedicated branches and cross-linked in the claim ledger;
-- MA-501 FP16 LoReFT narrowly missed intervention distortion gate while VQ codes had high error; MA-498 max-min distance selection did not beat random IDs; MA-494 redundancy helped only in synthetic channel. MA-492 K<=8 missed packet-mode coverage; K16 had a scoped storage/validity gain. MA-488 private fallback exceeded the byte gate above 25% heterogeneity; MA-487 LISTA missed quality/storage; MA-486 sparse codes missed rate-distortion; MA-484 VQ experts failed quality/collision; MA-483 adaptive depth missed its byte gate.
+- MA-470/471/473/475/476/478/481/482, MA-483, MA-484, MA-486, MA-487, MA-488, MA-492, MA-494, MA-498, MA-501 and MA-502 are completed on dedicated branches and cross-linked in the claim ledger;
+- MA-502 VQ codes saved only 132B over FP16 coordinates while failing the distortion gate; MA-501 FP16 LoReFT narrowly missed its distortion threshold; MA-498 max-min distance selection did not beat random IDs; MA-494 redundancy helped only in synthetic channel. MA-492 K<=8 missed packet-mode coverage; K16 had a scoped storage/validity gain. MA-488 private fallback exceeded the byte gate above 25% heterogeneity; MA-487 LISTA missed quality/storage; MA-486 sparse codes missed rate-distortion; MA-484 VQ experts failed quality/collision; MA-483 adaptive depth missed its byte gate.
 
 Required controls: ordinary codes vs same-entropy code-distance regularization; compare minimum distance, noisy confusion, task quality and actual codebook bytes.
 
