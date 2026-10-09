@@ -2,7 +2,7 @@
 
 - Status: FAIL
 - Branch: `research/ma-501-loreft-mirror-coordinate-20261009`
-- Base: `0ea7c36c`; A1 corrects non-contiguous basis storage
+- Base: `0ea7c36c`; verification commit `d38b911d`; A1 corrects non-contiguous basis storage
 - Fresh: 50120-50122 × seeds 0-2
 
 H: Shared representation basis plus Mirror coordinates compress task interventions at <=.05 NRMSE.
