@@ -1,0 +1,14 @@
+{
+  "experiment_id":"MA-286","title":"Cheap-LoRA fixed columns versus shared Mirror subspace views","status":"SCREENING","base_commit":"4e9ef276","evidence_lane":"COLUMN_SUBSPACE/QUALITY/ACTUAL_BYTES/COMPUTE","prior_art_refs":[29],
+  "hypothesis":"A shared learned column basis with compact per-task Mirror coordinates can recover aligned adapter deltas more efficiently than fixed/random Cheap-LoRA columns, while independent task subspaces may require private factors.",
+  "physical_object":"one frozen 32×32 weight matrix and shared column basis","mirror_coordinate":"per-task address selecting/weighting one or more shared basis columns","logical_multiplicity":"eight task LoRA updates",
+  "model":{"dimension":32,"rank":4,"tasks":8},"task":{"support_examples":256,"audit_examples":512,"strata":["shared aligned column subspace","independent task subspaces"]},
+  "controls":["no adapter","fixed random cLA columns","native per-task Cheap-LoRA factors","shared basis generic coefficients","Mirror column address","full rank-4 LoRA upper"],
+  "development":{"worlds":[28600,28601],"seeds":[0,1,2],"allowed":"validate subspace generation, fit, payload serialization and task-interference measures"},
+  "fresh":{"worlds":[28610,28611,28612],"seeds":[0,1,2],"locked_before_access":true},
+  "storage":{"authority":"actual serialized inference payload bytes","paid_objects":["shared W","fixed or learned bases","task codes/private factors","indices/metadata"]},
+  "compute":{"report_fit_seconds":true,"report_apply_macs":true,"report_actual_bytes":true,"report_transfer_error":true},
+  "success_gate":"Aligned: Mirror NRMSE <=0.01 and <=70% bytes of per-task Cheap-LoRA, with >=10% improvement over generic shared coefficients at matched bytes to claim Mirror-specific value.",
+  "failure_gate":"Mirror NRMSE >0.05, no reduction over fixed cLA at matched quality, or generic coefficient equivalence.",
+  "boundaries":["Synthetic linear adapter task only","No language-model quality claim","PA29 Cheap-LoRA is mandatory direct prior-art control","Subspace combination count is not capacity"]
+}
