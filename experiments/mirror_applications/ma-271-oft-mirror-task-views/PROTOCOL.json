@@ -11,12 +11,13 @@
   "logical_multiplicity": "eight task-specific orthogonal output functions",
   "model": {"input_dim": 16, "hidden_dim": 32, "output_dim": 8, "tasks": 8},
   "task": {"support_examples_per_task": 128, "audit_examples_per_task": 512, "strata": ["aligned one-plane rotation family", "independent orthogonal matrices"]},
-  "controls": ["no task transform", "independent native OFT dense orthogonal transform per task", "one-angle Mirror view", "shared random one-plane view", "independent dense upper control"],
+  "controls": ["no task transform", "support-fitted native OFT dense orthogonal transform per task", "oracle-projected independent OFT upper control", "one-angle Mirror view", "generic fixed-plane scalar control"],
   "development": {"worlds": [27100, 27101], "seeds": [0, 1, 2], "allowed": "validate parameterization, matrix orientation, task generation, fitting, serialization and metrics; select only before fresh"},
   "fresh": {"worlds": [27110, 27111, 27112], "seeds": [0, 1, 2], "locked_before_access": true},
   "storage": {"authority": "canonical serialized inference payload bytes", "paid_objects": ["shared network", "all per-task transform state", "basis/plane metadata", "decoder metadata"]},
   "compute": {"report_fit_seconds": true, "report_updates": true, "report_apply_seconds": true, "report_transform_apply_macs": true},
-  "success_gate": "Aligned family: Mirror output NRMSE <=1e-4 and total payload <=50% of independent OFT payload in every fresh world. Generic orthogonal stratum maps private-state boundary.",
+  "success_gate": "Aligned family: Mirror output NRMSE <=1e-4 and total payload <=50% of support-fitted native OFT payload in every fresh world. Independent stratum uses oracle-projected OFT only as a capacity/bytes upper control; support-fitted OFT quality is reported separately and is not treated as a valid boundary without fit adequacy.",
   "failure_gate": "Mirror aligned NRMSE >0.01 or payload >80% of OFT at matched quality. No Mirror-specific claim if fixed-plane native coefficient control matches it.",
+  "amendments": ["Before fresh access, support-only Cayley OFT fitting showed material optimization residual on independent maps during development (2000 updates still NRMSE about 0.23). To prevent fit failure from masquerading as a task-view capacity boundary, report oracle-projected independent OFT as upper control, preserve support-fit OFT as an adaptation result, and do not claim independent-stratum necessity absent fit adequacy."],
   "boundaries": ["Synthetic frozen feature network only", "No text-to-image or natural task quality claim", "OFT is prior art; orthogonality itself is not a novelty claim", "Task identity is provided; no router tested"]
 }
