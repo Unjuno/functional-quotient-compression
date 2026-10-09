@@ -1,1 +1,918 @@
-{"experiment_id":"MA-282","status":"SCREENING","fresh_accessed":false,"checks":[]}
+{
+  "experiment_id": "MA-282",
+  "status": "FAIL",
+  "frozen_commit": "eccf2891",
+  "fresh_rows": 108,
+  "payload_files": 180,
+  "all_fresh_payloads_match_csv": true,
+  "tests": "3 passed before freeze",
+  "hardware": "CPU only",
+  "limitations": [
+    "synthetic linear map",
+    "aligned orbit exactly matches scalar factor code",
+    "generic coefficient identical to Mirror",
+    "no end-to-end FFN quality"
+  ],
+  "payload_manifest": [
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28201_1_independent_dense_upper.bin",
+      "bytes": 9343,
+      "sha256": "17ef3e7550626a94d8224366269b643d6316bfbb863e30bffd9d00eb82043bba"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28200_0_independent_monarch_native.bin",
+      "bytes": 3202,
+      "sha256": "d996a956f15092bd7be1777c9a7f1629f9fe459116b552e0b63f2fa4f051e702"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28210_2_independent_shared.bin",
+      "bytes": 1136,
+      "sha256": "ecaa5c4ab8e0833d9dbc7c93cac0babdca2d2d7b827cb973b11d34c4d24722bc"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28212_1_independent_monarch_native.bin",
+      "bytes": 3202,
+      "sha256": "1ce9ae5cfb72362c302342ee72d87062d3ac0699b7e15715b24a1ce6f9599d5d"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28201_2_aligned_monarch_dense_upper.bin",
+      "bytes": 9343,
+      "sha256": "da0753dd1dd4e7f21d6b283b6678420cea08fd7f7923cc6c5e1320474e766388"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28200_0_independent_shared.bin",
+      "bytes": 1136,
+      "sha256": "687212cba806a5464b03287cf891a89f0b2f07a60947f3deb6bdf97b6d281712"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28212_2_independent_shared.bin",
+      "bytes": 1136,
+      "sha256": "461e2afb25d4470f5e0fc5fc654e0c549909df17bd4a005a08e0be95a48d5006"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28200_0_aligned_monarch_generic_scalar.bin",
+      "bytes": 1972,
+      "sha256": "a5c9b270856b0d1edecb76820d477f75cace155e1508700b88aa0635a850a6e3"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28211_0_independent_dense_upper.bin",
+      "bytes": 9343,
+      "sha256": "d92f3a613505a400d36323cc525fad4e458b28320d81e9ebeedb93f606f5dddb"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28210_0_independent_monarch_native.bin",
+      "bytes": 3202,
+      "sha256": "eab6a9a7d3e0c1eb41e3f53704c4f752b4ca248ec348dd2f60db97bd86479d57"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28212_1_independent_mirror_scalar.bin",
+      "bytes": 1971,
+      "sha256": "6dbb4dc4bb367ba53ed6deb2e13dde5a467cfcb7433fe57d622cbd0b7f24a9b1"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28210_0_aligned_monarch_monarch_native.bin",
+      "bytes": 3202,
+      "sha256": "dc3f301a5c55dfafc442723b2382ff0fd88647a213aabbd88cd744b015517ba2"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28212_1_aligned_monarch_lora2.bin",
+      "bytes": 3201,
+      "sha256": "0985c90269b12871d0e2361da4dccb81c98996e53a4ea5ea6f54cf540e4c3464"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28210_0_aligned_monarch_lora2.bin",
+      "bytes": 3201,
+      "sha256": "e0bc9c3281c00e73ef2617811549ca0eb24d17c4d6159f658b3cb3cea59c4404"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28212_0_independent_lora2.bin",
+      "bytes": 3201,
+      "sha256": "cfb4b6967443581d0bbd0e36597ef4c4ca830b7f2f198bc409e59089bf7f74e7"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28211_1_independent_shared.bin",
+      "bytes": 1136,
+      "sha256": "f443ccde3d18606f99b3c519824ef0b91e9553ccced42ad1b7290bfc236ef148"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28201_1_aligned_monarch_lora2.bin",
+      "bytes": 3201,
+      "sha256": "ce4929df81003a403bdba898edd99d59ff1b18c6e57a4357c9d17a10d767a061"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28201_1_independent_monarch_native.bin",
+      "bytes": 3202,
+      "sha256": "742419866b15dd5442104ecbcbd20ed9cb739c1869cfb2cfe0729ccf70b50a24"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28212_2_independent_monarch_native.bin",
+      "bytes": 3202,
+      "sha256": "743922784416b2590582fbade9d618cb10a821669c4cffadd7cc140122610fb4"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28212_2_aligned_monarch_shared.bin",
+      "bytes": 1136,
+      "sha256": "461e2afb25d4470f5e0fc5fc654e0c549909df17bd4a005a08e0be95a48d5006"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28201_1_independent_mirror_scalar.bin",
+      "bytes": 1971,
+      "sha256": "9f0497c76dbd9cff66f81d8dddea86c1a0f0262da57a856c1b9daeb709934921"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28211_2_independent_lora2.bin",
+      "bytes": 3201,
+      "sha256": "04555a422687b95b83cc991501b03e1f97611ea1e78b6c4fdaf22690ea57e8d8"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28200_0_independent_mirror_scalar.bin",
+      "bytes": 1971,
+      "sha256": "799bbd2bcae25369bd41ce6f2c79a890375d180d046daa44eceacaf9bd7e59e6"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28211_1_aligned_monarch_generic_scalar.bin",
+      "bytes": 1972,
+      "sha256": "e8ec9e8b785ffd7aefe25e02f6e73f15915c267f489923461b8b1111dee2ef60"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28211_0_aligned_monarch_dense_upper.bin",
+      "bytes": 9343,
+      "sha256": "59d8e45ced6e00870dfce741efc7780bd823cdf4d4f4bedfa5b8ff135bfde9da"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28200_1_independent_mirror_scalar.bin",
+      "bytes": 1971,
+      "sha256": "a9126e9fef1990521b91b2a0151f143bdaa8fa5daac4bb832a20705b09485d63"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28212_2_aligned_monarch_monarch_native.bin",
+      "bytes": 3202,
+      "sha256": "c8b075fa3cd2e50fcd50a51df42bd430fbd490377f7837143c8362cb29f18974"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28211_2_aligned_monarch_monarch_native.bin",
+      "bytes": 3202,
+      "sha256": "516a4aafe6b97d1f73521ad28f4390f816b8b47f85c07ba2212882b1c7df5853"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28200_2_aligned_monarch_shared.bin",
+      "bytes": 1136,
+      "sha256": "279547159df4852dff0a5a832e0732d4f542db7ebff60c7c78d484e8b62bedf0"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28210_1_aligned_monarch_dense_upper.bin",
+      "bytes": 9343,
+      "sha256": "8c40c092e84ee7388063773fe094791962ffc0730daa1fd009b3e75ea06ae268"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28212_2_aligned_monarch_generic_scalar.bin",
+      "bytes": 1972,
+      "sha256": "f99a2488bc6b02407c0380acdf0265458fbb010245e080f4fe33cf91f8330e1f"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28201_1_aligned_monarch_dense_upper.bin",
+      "bytes": 9343,
+      "sha256": "6ffd8216e4ac482ddcedeaff946fe90d4c9807be48c9ca63d0ddadf8db372899"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28201_0_aligned_monarch_mirror_scalar.bin",
+      "bytes": 1971,
+      "sha256": "445a7eca9a0cae0bf8b64be78131d7d8b4f6388e814997d87d5dadf2b900820e"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28210_0_independent_lora2.bin",
+      "bytes": 3201,
+      "sha256": "eeaa679c86f021882c8a7a8a9c8366f8e16478617f79e09ad6f06ce5d5caf3dc"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28200_0_independent_dense_upper.bin",
+      "bytes": 9343,
+      "sha256": "73ec48aa21e3c7a40da4219365ef777ab69f98c71ef0bef50a1cdf94d70e39d8"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28201_0_independent_dense_upper.bin",
+      "bytes": 9343,
+      "sha256": "e440153f6e63560a3a8254b8e2c63b8d782068c3953b5f66ae9a22126defc7a7"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28212_0_independent_mirror_scalar.bin",
+      "bytes": 1971,
+      "sha256": "ae8e6fa82e58451e51635ce6e5950ca87dfe3e43e347b11238c4647bf8fc7fe6"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28210_1_independent_shared.bin",
+      "bytes": 1136,
+      "sha256": "2ba19dd09bfc8b0b9a1bcec3f055c025631f43d1e1a106c21cb0042b08684c91"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28201_0_aligned_monarch_monarch_native.bin",
+      "bytes": 3202,
+      "sha256": "7fefb3b79fc1b2a65883caf696d7ce647a7264e60d4a98f2891c1ac438654040"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28210_1_independent_mirror_scalar.bin",
+      "bytes": 1971,
+      "sha256": "db35960aabcce8f4dfc1bb80edddadf16b69926b8f12fe174f2acda01ecd05b8"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28201_2_independent_shared.bin",
+      "bytes": 1136,
+      "sha256": "06297cbdc6e153ba49cc599e44f27ac4741a4387b733da6175fee22c063abf2a"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28210_2_aligned_monarch_monarch_native.bin",
+      "bytes": 3202,
+      "sha256": "3afb50849c7176b74e37f96cfa3077dff62a08d33aac385b9c95df1d5f7fa18c"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28212_2_aligned_monarch_lora2.bin",
+      "bytes": 3201,
+      "sha256": "d80219096dc04e7c3717ad25bdf1d1cf498a19aab324bb512b16eeef3a6218f9"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28201_0_aligned_monarch_shared.bin",
+      "bytes": 1136,
+      "sha256": "fb5387a295c32b2b0d58b1f3ac8b56dc8bb3c3c775b14d3e913b835d288cb95e"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28201_0_independent_monarch_native.bin",
+      "bytes": 3202,
+      "sha256": "8e1e61320fb618f032fd45529beb1e6d2fedcba03d6e4f5282479ea014c5b9bf"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28200_2_independent_dense_upper.bin",
+      "bytes": 9343,
+      "sha256": "cd11e8823c380e6260832da302fbda9ea395fbdcc5245ac1f742a8a1e1a14ecd"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28201_0_independent_generic_scalar.bin",
+      "bytes": 1972,
+      "sha256": "fcfe123f4da918b4967f3fd4e8d99ac8f9cdbd7fe057bf705719aad913663f93"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28200_1_independent_monarch_native.bin",
+      "bytes": 3202,
+      "sha256": "f3cc57abeb126b1258baf18e901bced6dcf8b6d2bfb109693235ef4c4592c314"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28201_1_aligned_monarch_generic_scalar.bin",
+      "bytes": 1972,
+      "sha256": "90b00839104c234ab995e087fbc3a6b9da71f836fb679c421901af90c30188b9"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28211_0_independent_lora2.bin",
+      "bytes": 3201,
+      "sha256": "008af03fd5200c88237afe650c0e886bfe4220549b52e0fe8faf9c00af2b5b52"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28212_1_aligned_monarch_monarch_native.bin",
+      "bytes": 3202,
+      "sha256": "803b7a104bdbc690f626f27e0eeadcd4ab51a5f21e7fe42af0cb021ddc0afa45"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28200_0_aligned_monarch_mirror_scalar.bin",
+      "bytes": 1971,
+      "sha256": "26a1c544f6e7740fd08774dacfbfa9815d5134198be9ad3acb51a39b3fb26607"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28201_1_aligned_monarch_mirror_scalar.bin",
+      "bytes": 1971,
+      "sha256": "efa3cabe4a6a65fa688a1caa29bb9ee8bb81af0d85903db5d69f75d226982067"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28200_2_aligned_monarch_dense_upper.bin",
+      "bytes": 9343,
+      "sha256": "4391feedfcb8a313475510c8dc54cfe3621b87015ecd7917c4f286f2e355310a"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28201_0_independent_mirror_scalar.bin",
+      "bytes": 1971,
+      "sha256": "28e03df5253795cc3a994869d1b07d4094876e7c238c81964bdbb5e7a1038339"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28210_1_independent_monarch_native.bin",
+      "bytes": 3202,
+      "sha256": "989a663186f91f5c93cbffee41f96d1c48ddfd8f2c2c917a17359850f6701a26"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28200_2_independent_monarch_native.bin",
+      "bytes": 3202,
+      "sha256": "b338698266763be0e33328ecd57657fc92bfd75cb842990e9810b2cb5167ac95"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28200_0_aligned_monarch_dense_upper.bin",
+      "bytes": 9343,
+      "sha256": "a95d2c77ab505f73f613cbef9e4bb9c78cfb3995f1d94df86f07eb14d7c221a2"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28210_1_aligned_monarch_lora2.bin",
+      "bytes": 3201,
+      "sha256": "6c09afe3e0578dc74b0689acef957c61edd0c07bd85c6cba5e65428be190f0a8"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28200_1_aligned_monarch_lora2.bin",
+      "bytes": 3201,
+      "sha256": "2cb43f6aaa91dbb65097a9e7948bfcc78b6c4faa64c3a8eda795df003a6d7301"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28210_1_aligned_monarch_mirror_scalar.bin",
+      "bytes": 1971,
+      "sha256": "04deee733a242f0ac2c9a8bc2045dcbcd90c7c45b089d6a82383ac797f4b1bb8"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28210_0_independent_mirror_scalar.bin",
+      "bytes": 1971,
+      "sha256": "be13adf2c396d5bc743cf71e654c79212f3ef60d1d239978cd979915b9e6bb9e"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28210_2_independent_generic_scalar.bin",
+      "bytes": 1972,
+      "sha256": "9e97ca38a9685e0a8432a14542d52e4dfeebd3c79dc195ef198ac1c065992ef3"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28201_1_aligned_monarch_monarch_native.bin",
+      "bytes": 3202,
+      "sha256": "a66337fd051dc39d822cfda4d95ecede244d876323447586f9efa1076342f150"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28211_1_aligned_monarch_lora2.bin",
+      "bytes": 3201,
+      "sha256": "fe70358f7a6a245bbc96849d9d2d2bb0f440a2db919b2d1e9676ea5a35f94b88"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28211_0_independent_generic_scalar.bin",
+      "bytes": 1972,
+      "sha256": "70ae3a8f32ccab3d6d7d712049dfe7da70ac9d00fe415adceeeb909d34d1a52d"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28201_0_aligned_monarch_generic_scalar.bin",
+      "bytes": 1972,
+      "sha256": "272ce3f995b2cfef7a494a6f0ee590ef3d516737cf848c1917ab69e4b410a541"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28211_0_aligned_monarch_lora2.bin",
+      "bytes": 3201,
+      "sha256": "cf1cf5324891992ba26d1ae9668f318edbfffdfa278b6d9d4eaacb38e6f2fe37"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28212_0_aligned_monarch_lora2.bin",
+      "bytes": 3201,
+      "sha256": "dac16d484b964f5c6a1f6f53840591211c26b7b9a95edf6828cfc8ea26a78fe8"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28200_1_independent_shared.bin",
+      "bytes": 1136,
+      "sha256": "6efab26ba539b1e68757a2adbb3cd3b73d27c7b5a2f37cd0dcc16fc429e727d3"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28210_2_independent_mirror_scalar.bin",
+      "bytes": 1971,
+      "sha256": "5467419b6fe03c1aeb31945bd9b88b3799e3e0e5dae40d7771390a1e53ccaf58"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28210_2_aligned_monarch_dense_upper.bin",
+      "bytes": 9343,
+      "sha256": "4030ac95afeafefb19d18ccf5350f9d4f77989bc235f7accfcf3bdb0a2829f0a"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28212_1_aligned_monarch_dense_upper.bin",
+      "bytes": 9343,
+      "sha256": "81f91842eec0d7dfb287c28564d604f64f990f67d4c3a5b574ff862eac176b31"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28210_2_independent_monarch_native.bin",
+      "bytes": 3202,
+      "sha256": "fb92093014970cd0ea5379d87c0cf765485c923dc518cc7a8dd18a70af2ad368"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28210_2_aligned_monarch_mirror_scalar.bin",
+      "bytes": 1971,
+      "sha256": "f731a559a7f996ea259914ccd8350fc85bdf1594c3d594f479a06947b64f3307"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28212_0_independent_shared.bin",
+      "bytes": 1136,
+      "sha256": "28fe8a412760d4d969989abc473b023819898e41ba376dd0c74142bc6e964d61"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28212_0_aligned_monarch_monarch_native.bin",
+      "bytes": 3202,
+      "sha256": "579bf8a78921b3ce36711395fe8dde97e73467afce9aa3cadd2784efbde30a1f"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28211_1_independent_mirror_scalar.bin",
+      "bytes": 1971,
+      "sha256": "0fba5c494c5c30468487303ae713133c7c7a0b841e455289deefbdff54a7d0ef"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28211_0_independent_shared.bin",
+      "bytes": 1136,
+      "sha256": "463c0a1ed237d0a170ce50d78bdf07165b3033105e8d1ebc61a3e158f5074ab9"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28210_1_aligned_monarch_monarch_native.bin",
+      "bytes": 3202,
+      "sha256": "c138b114ee2bc802365ad36133f251b84b924d26e33fb56cc9a277fb904c0afa"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28201_2_independent_lora2.bin",
+      "bytes": 3201,
+      "sha256": "1a164e1d559cc89711739bd5cd06c2ca204f6a4a36a4cc8db593ae2150864f67"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28210_2_independent_lora2.bin",
+      "bytes": 3201,
+      "sha256": "7fd6c0645ace6e61167e968ac0fccd1b5c6b87976e4343529e9701e37dbe8095"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28201_2_aligned_monarch_monarch_native.bin",
+      "bytes": 3202,
+      "sha256": "bf5fecbde9495d51fdf71b69bcd8d29ae1ab774c87e991b22c9645d47c13b640"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28211_1_aligned_monarch_dense_upper.bin",
+      "bytes": 9343,
+      "sha256": "349e21a6b1fd9d0ba322aea9a74e60651dee0677e4b4efa1f4c7611e9a93c122"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28211_1_aligned_monarch_monarch_native.bin",
+      "bytes": 3202,
+      "sha256": "ac555a65a508152df17d3b7eac65b5235ed7b8efb0f8553c69b55002fd506453"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28211_2_aligned_monarch_mirror_scalar.bin",
+      "bytes": 1971,
+      "sha256": "16bbde42724712b8438228f1d305e9fcd7f342486ded19fc44a67736ff513ece"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28201_2_independent_monarch_native.bin",
+      "bytes": 3202,
+      "sha256": "f191a0cccf605923502494f027876251b14c1ce203dd319ef52265741a1697ba"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28211_0_aligned_monarch_shared.bin",
+      "bytes": 1136,
+      "sha256": "463c0a1ed237d0a170ce50d78bdf07165b3033105e8d1ebc61a3e158f5074ab9"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28210_2_independent_dense_upper.bin",
+      "bytes": 9343,
+      "sha256": "af851e46317575c1de6b086dac2f5fc3cd9c2e23fdf52ff705a36aed290d238a"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28200_1_aligned_monarch_shared.bin",
+      "bytes": 1136,
+      "sha256": "6efab26ba539b1e68757a2adbb3cd3b73d27c7b5a2f37cd0dcc16fc429e727d3"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28200_1_independent_generic_scalar.bin",
+      "bytes": 1972,
+      "sha256": "aae6748dae0bb355e61739b74835e755eb9a578e559cfc8203bcf47a8e51338a"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28200_2_aligned_monarch_generic_scalar.bin",
+      "bytes": 1972,
+      "sha256": "0302dc566ba9ac8d850f101dcacf3f0cfc54ce9b11cb063774456d118febfefb"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28211_0_aligned_monarch_mirror_scalar.bin",
+      "bytes": 1971,
+      "sha256": "227195dcd6abdec061f6f09282a125353bb4fbf8b25ced7b49cbf8f386941ea5"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28201_2_aligned_monarch_shared.bin",
+      "bytes": 1136,
+      "sha256": "06297cbdc6e153ba49cc599e44f27ac4741a4387b733da6175fee22c063abf2a"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28211_2_independent_shared.bin",
+      "bytes": 1136,
+      "sha256": "a89e483e8284876a82c9c878a3e8b459fecdbdd8e2f4c38a55984c6700c22657"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28211_1_independent_generic_scalar.bin",
+      "bytes": 1972,
+      "sha256": "f6ade0f0578e67b3e4639878d16e118a78b51b920e38cc907c178a11a9a8d0cd"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28212_2_aligned_monarch_dense_upper.bin",
+      "bytes": 9343,
+      "sha256": "afb45a6d75d4332b90b06a3344ec419b34b6e0b70236a431dea4934b49f3ca76"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28200_1_aligned_monarch_generic_scalar.bin",
+      "bytes": 1972,
+      "sha256": "cec4a4469705aadc3e0a13b282cd2a7cb6b10fc32b1d641c918700eda4f8eef8"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28212_0_independent_dense_upper.bin",
+      "bytes": 9343,
+      "sha256": "71c08fb569bb4d26de3c8abb194b2b7b108a930b65e3e9b4e2636a1f6a52a9ef"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28212_0_aligned_monarch_shared.bin",
+      "bytes": 1136,
+      "sha256": "28fe8a412760d4d969989abc473b023819898e41ba376dd0c74142bc6e964d61"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28211_1_aligned_monarch_shared.bin",
+      "bytes": 1136,
+      "sha256": "f443ccde3d18606f99b3c519824ef0b91e9553ccced42ad1b7290bfc236ef148"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28212_2_independent_lora2.bin",
+      "bytes": 3201,
+      "sha256": "91bcf9e9d422853b2e52f0fdce757f5ef71185af2815c8b96608041448c9d470"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28200_1_independent_lora2.bin",
+      "bytes": 3201,
+      "sha256": "10840c1c71788238e456d3755e9b67d1e1a4cf03e5147f2b21224d82b7ebd394"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28212_0_aligned_monarch_dense_upper.bin",
+      "bytes": 9343,
+      "sha256": "5a9bdfa4e621e65a8bd039764d7be2dab89e5ae514dba194bcd0f33b386f98a2"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28210_1_independent_lora2.bin",
+      "bytes": 3201,
+      "sha256": "e944753a18f401c5d026d8bb48a1e5dfa511c4938b5cb9fcb9a2bcccb6a35c07"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28200_1_aligned_monarch_dense_upper.bin",
+      "bytes": 9343,
+      "sha256": "b85912ac870d03d312ab077077215ace8f946ebd293b8133d13e46088b6b5b84"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28212_0_aligned_monarch_mirror_scalar.bin",
+      "bytes": 1971,
+      "sha256": "d580b672186e9222a0621d87acc3745fb2dc66576cf40ebd429886d90b2264ba"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28211_0_aligned_monarch_generic_scalar.bin",
+      "bytes": 1972,
+      "sha256": "909970542d0a6bf5bb294a730dfd2f439fa16f31341ccfab0f689dd673b1e005"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28200_2_aligned_monarch_mirror_scalar.bin",
+      "bytes": 1971,
+      "sha256": "4aa15113cb0eda404399a9eaf5a0a53e2907e28eeed4d6a770d6cc21bfee7fed"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28200_2_aligned_monarch_lora2.bin",
+      "bytes": 3201,
+      "sha256": "a19147f252f28072967da8b8bbf1a5a8a9c6f97a1c1db203b42ff67efff75e99"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28200_1_independent_dense_upper.bin",
+      "bytes": 9343,
+      "sha256": "2ccc434ffd2a3c9da44885f45231d7fb1cc6d9e9fe310a16d011c5b2c10f9c6e"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28200_0_aligned_monarch_lora2.bin",
+      "bytes": 3201,
+      "sha256": "037d78bf3d846e9f772ff4af4ae857b2d6bd62f764be333b80998c5161d8892c"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28210_0_aligned_monarch_generic_scalar.bin",
+      "bytes": 1972,
+      "sha256": "041bb872e90ce7218a5f8c29286cafcce115791615ead0993233f2239dd7a4c4"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28211_0_independent_monarch_native.bin",
+      "bytes": 3202,
+      "sha256": "c23bbf6171ae2959c47616ca59630c2203563e69ea839ca66986d1a909949ed5"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28211_2_aligned_monarch_shared.bin",
+      "bytes": 1136,
+      "sha256": "a89e483e8284876a82c9c878a3e8b459fecdbdd8e2f4c38a55984c6700c22657"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28210_1_independent_generic_scalar.bin",
+      "bytes": 1972,
+      "sha256": "01e322f4c6093ab68a7738fc015e516f49ebb55a9df990d90488d3d9c330d840"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28211_1_aligned_monarch_mirror_scalar.bin",
+      "bytes": 1971,
+      "sha256": "1745e3bc647c3256aa1a5b9213ea4d8f34cb8331b32b7bb5a3d4139fe1c8b3c7"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28211_0_aligned_monarch_monarch_native.bin",
+      "bytes": 3202,
+      "sha256": "0dcd21665303c2fb264d437e530206b0b58be6f8f3ec15180e0521a08ad6acbb"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28210_1_aligned_monarch_generic_scalar.bin",
+      "bytes": 1972,
+      "sha256": "16a61f6a09377ac495ba65340869f26aa41536f481461bc3f46b44db121a5377"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28210_1_aligned_monarch_shared.bin",
+      "bytes": 1136,
+      "sha256": "2ba19dd09bfc8b0b9a1bcec3f055c025631f43d1e1a106c21cb0042b08684c91"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28212_2_independent_mirror_scalar.bin",
+      "bytes": 1971,
+      "sha256": "22fed3e42e5ff1099e9057052a7b55acb4203e57fc082a33a7e40b2a32c89437"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28210_0_aligned_monarch_mirror_scalar.bin",
+      "bytes": 1971,
+      "sha256": "67a3eb0e4c338cc25cc74d292e0af5846749985b0f83b315428a8cf9debfee9a"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28200_1_aligned_monarch_mirror_scalar.bin",
+      "bytes": 1971,
+      "sha256": "d5878cacf5a7f3ac2b6cfaa54c8f6ed66169893f9c80000b30f2b3a8564d579c"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28211_2_independent_mirror_scalar.bin",
+      "bytes": 1971,
+      "sha256": "66e74b0e18b5558e146ed79299dc74c614bbc98f90e9208e2ec475fab1631e70"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28200_0_independent_lora2.bin",
+      "bytes": 3201,
+      "sha256": "24968d79e04ac61d1c7ecba614898dc8afda5a3cf17f118b16fd3d29b4197e77"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28210_2_aligned_monarch_lora2.bin",
+      "bytes": 3201,
+      "sha256": "15f031139aed7b731a60e52011aadc47af1a202d94a5f257d3dd79b7a4a0b020"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28212_2_independent_generic_scalar.bin",
+      "bytes": 1972,
+      "sha256": "746a5bd24caf694b9ce598a403ba9cfcc26bf1fb73cbc469f681827939214458"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28212_1_aligned_monarch_generic_scalar.bin",
+      "bytes": 1972,
+      "sha256": "02f0625377b9229a8e5d7729791abf11e4336cfe27295f94b1e7e57b6f1c7bd6"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28201_1_independent_generic_scalar.bin",
+      "bytes": 1972,
+      "sha256": "2c5fb2cd4611b23ee3009f51649fad78842934a3fdc15aba517db480685e7257"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28201_2_independent_dense_upper.bin",
+      "bytes": 9343,
+      "sha256": "ea5e22eaf6bee7e128c9b0a6f0708a38c98abfeda0d07c2ced141546cd0a138e"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28212_1_aligned_monarch_mirror_scalar.bin",
+      "bytes": 1971,
+      "sha256": "1de5b79ab2bd1907db77f7bf4786529caef11808b5b33ba0bd14161037ecf4e6"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28201_2_independent_mirror_scalar.bin",
+      "bytes": 1971,
+      "sha256": "dbf560789b85048d06edc439750852d052249c03a96319481c87c0336a4050de"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28201_2_aligned_monarch_mirror_scalar.bin",
+      "bytes": 1971,
+      "sha256": "54ab0c140260bad47b753c8e07dcf53a33fb20926d3bc5cbb6f9707a51984b22"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28212_2_aligned_monarch_mirror_scalar.bin",
+      "bytes": 1971,
+      "sha256": "caee4038073a8b68524a1f99f81c36af8d1564fe6acb8a7f2ed78f3c0d031b90"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28212_0_independent_generic_scalar.bin",
+      "bytes": 1972,
+      "sha256": "5e97b3b60ba157e62bb47235355ffddf11b0864f60d5b1401f86e4b5195240c3"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28211_1_independent_lora2.bin",
+      "bytes": 3201,
+      "sha256": "0590da950b213a5acd564a0c332be39ebb1d821d922c6e5836014a6bc7adc5ca"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28212_1_aligned_monarch_shared.bin",
+      "bytes": 1136,
+      "sha256": "a17bd89d3366c11808b2ad2452d02f68dcaafcdf1fb679da6d583d6beaf694d5"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28201_1_independent_lora2.bin",
+      "bytes": 3201,
+      "sha256": "62760d7b90bb41677d2d5567021f7099e768a4f007b8f2944d13c3244dbffb0c"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28201_0_aligned_monarch_lora2.bin",
+      "bytes": 3201,
+      "sha256": "08974791ba1361f9f7d655472561769031bb931f2b50d3c2b260ff0a1e4eaf0e"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28210_0_aligned_monarch_shared.bin",
+      "bytes": 1136,
+      "sha256": "2930edabb3f1a707a01762d8f408f3fbee0016f1b5d3d5a5c0a3264abab878ad"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28211_2_independent_monarch_native.bin",
+      "bytes": 3202,
+      "sha256": "fe64777fd20a2f147bfc585c5c77c95c761cdff70bc5269484a4cd3e74d06c41"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28212_0_aligned_monarch_generic_scalar.bin",
+      "bytes": 1972,
+      "sha256": "5105365227f79f7b60a4bdc7a3e2472f554316b8ac3323325ba912549feb47d0"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28211_0_independent_mirror_scalar.bin",
+      "bytes": 1971,
+      "sha256": "681067fc183ac9f64a901656f07063977a9bc7e7677f84f6c216bbbdea19850c"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28201_0_independent_lora2.bin",
+      "bytes": 3201,
+      "sha256": "f5e4595009d306d5f9c607143b9dbb062a97382026dc414e6fa4a2f3e65e6c7a"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28201_2_aligned_monarch_generic_scalar.bin",
+      "bytes": 1972,
+      "sha256": "f0b90f7a20ec4343f62ad45861a5257487df14e1832d61037deb25a54501d5db"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28201_2_independent_generic_scalar.bin",
+      "bytes": 1972,
+      "sha256": "a1cae8041ed39d0051e1ae01b35721a6cce2b97435fab3e5e80cb76866cbf030"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28201_0_independent_shared.bin",
+      "bytes": 1136,
+      "sha256": "fb5387a295c32b2b0d58b1f3ac8b56dc8bb3c3c775b14d3e913b835d288cb95e"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28211_2_aligned_monarch_dense_upper.bin",
+      "bytes": 9343,
+      "sha256": "bc85056a8420d1d7a4664a9826d53da8d43975f5cd255396571efb6c563eb345"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28210_1_independent_dense_upper.bin",
+      "bytes": 9343,
+      "sha256": "339e5fe970a6f25c4206d3bc5c8e5ae3f767e10553fc6c53229fa0290388db12"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28211_2_independent_generic_scalar.bin",
+      "bytes": 1972,
+      "sha256": "b57af02d4743a5fca4572501c7b290b323cc3a82f28cad30ae1b641be8b124e8"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28211_2_independent_dense_upper.bin",
+      "bytes": 9343,
+      "sha256": "f7ac8a5753a384cdff23d757b67e363c8e51701797cc11f6979b7fb745db0278"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28200_2_independent_mirror_scalar.bin",
+      "bytes": 1971,
+      "sha256": "5d880ccf2a3914a1c7b9a34f6490abb83b9bebd7111f32a2c36135a78fc1b314"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28211_2_aligned_monarch_generic_scalar.bin",
+      "bytes": 1972,
+      "sha256": "c0a3b3322e554ef31a449458c341a660eaaf44c08c9b6626171718531e80fdac"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28212_1_independent_lora2.bin",
+      "bytes": 3201,
+      "sha256": "4ff664fb72bed771f20f79cb53060f455535bb6fad35975e5b38cf91ba26742e"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28201_2_aligned_monarch_lora2.bin",
+      "bytes": 3201,
+      "sha256": "213289f1f352d95ea628bfa68bde01e7fd2053fc15cf825348f48a9be37b6322"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28212_1_independent_shared.bin",
+      "bytes": 1136,
+      "sha256": "a17bd89d3366c11808b2ad2452d02f68dcaafcdf1fb679da6d583d6beaf694d5"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28212_2_independent_dense_upper.bin",
+      "bytes": 9343,
+      "sha256": "3622d8e2e19d0c92633fa32ad6c8adc61893714658b1ba79da5142a609fe4b86"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28200_2_aligned_monarch_monarch_native.bin",
+      "bytes": 3202,
+      "sha256": "f7c9a1347ebaaaeb0bd92617ffdd0cf42eeb4aa545eb6b176e5264e926628604"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28211_1_independent_monarch_native.bin",
+      "bytes": 3202,
+      "sha256": "17440c93d991720cb6fd46c6a4483ed30a354ff9b42b2f8110bc76aac4c3ad3b"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28210_2_aligned_monarch_shared.bin",
+      "bytes": 1136,
+      "sha256": "ecaa5c4ab8e0833d9dbc7c93cac0babdca2d2d7b827cb973b11d34c4d24722bc"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28200_0_aligned_monarch_monarch_native.bin",
+      "bytes": 3202,
+      "sha256": "e7adeaad9c2eea0e5147a5a81f56038936b4c109b7c8c925310fbe873bf7bf2a"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28201_0_aligned_monarch_dense_upper.bin",
+      "bytes": 9343,
+      "sha256": "41a5c202666ee44c84db57d5ff03a42c367128803ccc84ad8e0b39cf77a9db95"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28210_0_independent_generic_scalar.bin",
+      "bytes": 1972,
+      "sha256": "7e69ad919087dc192f4c77a2f47c7862f56cfb80d5135e6c54efe21a9dc6ee12"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28211_2_aligned_monarch_lora2.bin",
+      "bytes": 3201,
+      "sha256": "a3f2172e36b3940744e1d732a4e9849dfb9bb255a1b55666a64bbea907cfea3b"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28200_2_independent_generic_scalar.bin",
+      "bytes": 1972,
+      "sha256": "d4ab6f5a1521076e81c46bb7705e05c03965e2593ac1a61335eea36fbead17eb"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28212_1_independent_generic_scalar.bin",
+      "bytes": 1972,
+      "sha256": "ffdab8b3559d8215854741183ea38678c7ddeb345c6cb454df1f19082626e0d6"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28210_0_aligned_monarch_dense_upper.bin",
+      "bytes": 9343,
+      "sha256": "83c83e54b2fc7aeb2ed89a39834024ce5c6c3c27a885f26e5a35b505bf12260c"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28201_1_independent_shared.bin",
+      "bytes": 1136,
+      "sha256": "3887eea98efa892f24733ff834803211586c69c15bb2c9ccafa376502b1e88cc"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28200_1_aligned_monarch_monarch_native.bin",
+      "bytes": 3202,
+      "sha256": "98fddef894d410df366d80db9cb069742711eab5a00e441540c30a2fab1ea226"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28211_1_independent_dense_upper.bin",
+      "bytes": 9343,
+      "sha256": "ca181cd3209380bbf6303b6a675c2929847edfab1936b42b7bd2bc3e003407b6"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28210_0_independent_shared.bin",
+      "bytes": 1136,
+      "sha256": "2930edabb3f1a707a01762d8f408f3fbee0016f1b5d3d5a5c0a3264abab878ad"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28201_1_aligned_monarch_shared.bin",
+      "bytes": 1136,
+      "sha256": "3887eea98efa892f24733ff834803211586c69c15bb2c9ccafa376502b1e88cc"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28212_1_independent_dense_upper.bin",
+      "bytes": 9343,
+      "sha256": "e6efaa8a322a2fcb06d7e332f71c2d34abef57c85987892e5e07d3e2f87576e2"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28200_2_independent_shared.bin",
+      "bytes": 1136,
+      "sha256": "279547159df4852dff0a5a832e0732d4f542db7ebff60c7c78d484e8b62bedf0"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28210_0_independent_dense_upper.bin",
+      "bytes": 9343,
+      "sha256": "448f0a1fb6e8b8aa335b2f5b8358613b4e17c2345222fd50bf51c105b9bb9c30"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28210_2_aligned_monarch_generic_scalar.bin",
+      "bytes": 1972,
+      "sha256": "2321b596f67ca779399c2d4a9b388276b5eb922c614f527a7141a65efca796d0"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28200_0_independent_generic_scalar.bin",
+      "bytes": 1972,
+      "sha256": "b51bd2a58cc7a8135b321ad32820a139e1997cbb36f614388a7d50e697f1079b"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28200_0_aligned_monarch_shared.bin",
+      "bytes": 1136,
+      "sha256": "687212cba806a5464b03287cf891a89f0b2f07a60947f3deb6bdf97b6d281712"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28212_0_independent_monarch_native.bin",
+      "bytes": 3202,
+      "sha256": "c585739d1ed90b49a14db29150615be3db85d79e8cb55df4b4aea00f2b58b3f5"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-282-monarch-mirror-ffn/artifacts/payloads/28200_2_independent_lora2.bin",
+      "bytes": 3201,
+      "sha256": "0944594152d75b6ab776a176ff7c7def908c037663228791219ac2d1e78ad753"
+    }
+  ]
+}

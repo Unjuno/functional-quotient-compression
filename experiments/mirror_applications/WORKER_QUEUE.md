@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-282.** MA-278 found aligned shared atom codes saved only 5.4% vs Compacter and generic scalar matched Mirror; independent task updates required private LoRA. Continue to MA-282 with native Monarch controls.
+**Current operational pointer (2026-10-09): MA-286.** MA-282 found an aligned Monarch scalar orbit compressed ~38% vs per-task Monarch, but generic coefficients matched exactly; independent codes needed private state. Continue to MA-286 with native Cheap-LoRA controls.
 
 # Worker queue
 
