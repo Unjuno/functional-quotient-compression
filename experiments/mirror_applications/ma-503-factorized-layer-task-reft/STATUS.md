@@ -4,14 +4,14 @@
 - Branch: `research/ma-503-factorized-layer-task-reft-20261009`
 - Base commit: `49e86eb0`
 - Protocol frozen: yes
-- Development complete: no
+- Development complete: yes; selected common steps = 400 on development-only held-out NRMSE
 - Fresh/audit opened: no
 - Results committed: no
 - Verification committed: no
 
 ## Next action
 
-Implement the deterministic synthetic generator and development-only model fitting; choose only the preregistered common step count before opening fresh worlds.
+Freeze the development-selected 400-step setting, then run the locked fresh worlds/seeds.
 
 ## Blockers
 
