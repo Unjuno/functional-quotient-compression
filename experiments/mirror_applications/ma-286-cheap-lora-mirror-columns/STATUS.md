@@ -7,3 +7,4 @@
 - Aligned Mirror/generic: NRMSE 2.99e-8 at ~5.34 KB; Cheap-LoRA 0.0125 at 12.38 KB.
 - Independent tasks: shared code near no-adapter; full LoRA near exact.
 - See `VERIFICATION.json`.
+- Verification rerun: 2 tests pass; all 108 fresh rows and 180 payload size/SHA-256 entries checked.
