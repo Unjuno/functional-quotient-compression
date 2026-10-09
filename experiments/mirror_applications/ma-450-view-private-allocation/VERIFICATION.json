@@ -1,6 +1,49 @@
 {
   "experiment_id": "MA-450",
-  "status": "SCREENING",
-  "protocol_commit": "pending",
-  "checks": []
+  "status": "FAIL",
+  "protocol_commit": "68359246",
+  "amendments": [
+    "A1 task counts clarified before runs. A2 full private vector representation and dev-trained logistic decision specified before fresh."
+  ],
+  "fresh_worlds": [
+    45010,
+    45011,
+    45012
+  ],
+  "rows": 45,
+  "tasks_per_world": 120,
+  "mean_nrmse": {
+    "always_mirror": 0.48192066008765655,
+    "always_private": 3.0536782919594117e-07,
+    "simple_threshold": 2.3518693833422966e-07,
+    "learned_controller": 2.3518693833422966e-07,
+    "oracle": 2.3518693833422966e-07
+  },
+  "mean_serialized_N20_bytes_per_task": {
+    "always_mirror": 340.275,
+    "always_private": 404.275,
+    "simple_threshold": 372.275,
+    "learned_controller": 380.2,
+    "oracle": 372.275
+  },
+  "private_fraction": {
+    "always_mirror": 0.0,
+    "always_private": 1.0,
+    "simple_threshold": 0.5,
+    "learned_controller": 0.5,
+    "oracle": 0.5
+  },
+  "runtime_summary_csv": "artifacts/runtime.csv",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-450-view-private-allocation/tests",
+    "passed": 2,
+    "failed": 0
+  },
+  "checks": [
+    "all fresh payload sizes and hashes replayed",
+    "threshold and logistic controller selected on development only",
+    "oracle and always-private upper controls included",
+    "controller compared directly to simple threshold"
+  ],
+  "decision": "FAIL for meta-learned controller: simple threshold matches quality and allocation at lower bytes. Useful synthetic result: threshold allocation retains private quality with 7.9% fewer bytes than always-private."
 }

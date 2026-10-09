@@ -7,9 +7,9 @@ Integration branch: `research/mirror-application-current-evidence-20261008`; can
 
 - Registered candidates: **1155**
 - P0: **630** (130 completed; 500 UNTESTED)
-- P1: **422** (20 completed; 402 UNTESTED)
+- P1: **422** (21 completed; 401 UNTESTED)
 - P2: **103** (1 completed; 102 UNTESTED)
-- Current MA statuses: **1004 UNTESTED, 44 PROMISING, 107 FAIL**
+- Current MA statuses: **1003 UNTESTED, 44 PROMISING, 108 FAIL**
 - 48 experiment directories, complete with status/protocol/results/verification files, are represented in the current evidence set.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-268 is next.
@@ -79,7 +79,9 @@ Integration branch: `research/mirror-application-current-evidence-20261008`; can
 
 **MA-448 FAIL:** rank-4 Mirror state compression reached continuation NRMSE 0.822 vs exact Adam 0.175 and used 328.9B/task vs 639.0B. PCA uses the same bytes with better quality (0.665); shared reset is cheaper (243.3B/task) and better (0.131). Initial NaN runs excluded; A3 canonical payload accounting applied.
 
-**MA-449 FAIL:** on the held-out linear concept combination, Mirror NRMSE 2.9e-7 matched direct task-vector composition, with both factors independently identified. N=20 serialized bytes/task were identical at 107.45B for Mirror, task-vector, and LEO; no Mirror-specific gain. A1 mechanism-screen scope, natural concepts untested. **Next: MA-450.**
+**MA-449 FAIL:** on the held-out linear concept combination, Mirror NRMSE 2.9e-7 matched direct task-vector composition, with both factors independently identified. N=20 serialized bytes/task were identical at 107.45B for Mirror, task-vector, and LEO; no Mirror-specific gain. A1 mechanism-screen scope, natural concepts untested.
+
+**MA-450 FAIL (meta-controller):** a simple validation threshold allocated full private vectors to 50% of mixed tasks, matching oracle quality and reducing bytes 8% vs always-private (372.3B vs 404.3B/task). The learned controller had equal quality but cost 380.2B/task, 7.9B more than the threshold. Synthetic linear allocation evidence only. **Next: MA-451.**
 
 MA-366 is reconciled as FAIL: direct pair coefficients match Mirror outputs and bytes, and PA02 factorization is smaller. The runner accidentally generated the registered fresh IDs before the gate; those rows are excluded and fresh integrity is invalid. MA-367 and MA-368 are also recorded FAIL. MA-369 is completed FAIL on its dedicated branch; next executable P0 is MA-371.
 
