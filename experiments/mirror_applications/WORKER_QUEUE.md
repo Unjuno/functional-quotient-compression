@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-288.** MA-286 replicated an aligned shared-column compression signal (~57% fewer bytes than Cheap-LoRA), but generic coefficients matched Mirror exactly; independent task subspaces required private LoRA. Continue to MA-288 with fast-weight programmer controls.
+**Current operational pointer (2026-10-09): MA-292.** MA-288 dynamic rank-2 context codes generalized on a synthetic held-out rule but generic low-rank matched; fast outer update was cheaper but poor and static IDs failed. Continue to MA-292 with task-vector addition and shared-basis controls.
 
 # Worker queue
 
