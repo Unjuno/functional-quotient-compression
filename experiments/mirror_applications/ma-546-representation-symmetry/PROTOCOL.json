@@ -1,0 +1,94 @@
+{
+  "experiment_id": "MA-546",
+  "title": "Functional invariance of hidden activation View symmetries",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/SYMMETRY/OUTPUT_INVARIANCE/ACTUAL_BYTES/COMPUTE",
+  "base_commit": "ac1c3e1814aada23eb99254b841faa31b4bb0ffb",
+  "hypothesis": "At the layer-3 Pythia-70M MLP expansion, any invertible coordinate transform applied after GELU and compensated by the inverse down-projection is a representation gauge: model logits remain invariant within numerical tolerance and no logical functions are added. Uncompensated transforms change outputs and therefore cannot be counted as equivalent Views.",
+  "physical_object": "Pinned Pythia-70M-deduped shared model and layer-3 MLP down-projection.",
+  "mirror_coordinate": "Invertible address m on the 2048D post-GELU MLP activation; paired reparameterization replaces z by Mz and W_down by W_down M^-1.",
+  "logical_multiplicity": "K coordinate encodings of one function if compensated; count distinct logits only when function behavior changes.",
+  "prior_art_refs": [
+    "PA47",
+    "PA97"
+  ],
+  "controls": [
+    "Canonical frozen Pythia output",
+    "Compensated monomial activation View (permutation, sign, positive scale) plus inverse down-projection",
+    "Compensated dense orthogonal activation View plus inverse down-projection",
+    "Uncompensated monomial activation transform (negative functional control)",
+    "Independent checkpoint byte upper: K copies of actual pinned model file bytes"
+  ],
+  "artifacts": {
+    "model_revision": "e93a9faa9c77e5d09219f6c868bfc7a1bd65593c",
+    "model_sha256": "3da388330e4549156d76b58d6d268c63cd005e9336b4f4d2d378421e7b7a33fd",
+    "config_sha256": "002050231a9b1ec3ac77aa6b9b3bbdc4d923f4068a7dd33b8da72a9bd6ad9a43",
+    "tokenizer_sha256": "c24618a1b3e6a38167beff1c72cffd126c3a66254347304b50547d12c5f25624",
+    "hook_layer": 3,
+    "post_gelu_width": 2048
+  },
+  "task": {
+    "source": "Fixed relation input/output prompts from MA-530 task harness; values are only neutral language prompts, not learned labels.",
+    "prompts_per_world": 128,
+    "primary_metric": "max absolute next-token logit difference between canonical and compensated view",
+    "secondary_metrics": [
+      "top-1 logit agreement",
+      "mean/max KL from canonical distribution",
+      "uncompensated max logit difference",
+      "serialized code bytes for K=16 monomial views and K=16 dense-orthogonal views",
+      "monomial/dense transform and compensation operation proxies",
+      "isolated load/forward wall time"
+    ]
+  },
+  "transforms": {
+    "monomial": "Seeded random permutations, independent ±1 signs, and positive log-uniform scales in [0.5,2]; 16 views per world. Apply after GELU and pair inverse in the layer-3 dense_4h_to_h projection.",
+    "dense_orthogonal": "One dense signed/permuted normalized Hadamard basis per world, reconstructed from its row/column permutations and signs; apply z @ Q^T and pair W_down @ Q^-1. One dense address per world.",
+    "negative_control": "Apply the same monomial activation coordinate change but keep canonical down-projection; outputs are expected to differ.",
+    "numeric_gate": "For every compensated view: max absolute logit delta <=1e-5 and top-1 agreement 100%. Report KL; never interpret equivalent addresses as distinct capacity."
+  },
+  "development": {
+    "seeds": [
+      54601,
+      54602
+    ],
+    "selection_metric": "No tuning; characterize exact invariant and numeric threshold."
+  },
+  "fresh": {
+    "seeds": [
+      54611,
+      54612,
+      54613
+    ],
+    "locked_before_access": true,
+    "opened": false,
+    "opening_rule": "Open after code and protocol commit; the algebra and transform families are fixed, no hyperparameter selection."
+  },
+  "storage": {
+    "authority": "Actual uncompressed NPZ inference payload bytes.",
+    "paid_objects": [
+      "canonical model files for shared deployment",
+      "all monomial permutations, signs and scales",
+      "dense orthogonal Hadamard row/column permutations and signs needed for deterministic reconstruction",
+      "task/model/layer/schema metadata",
+      "generator seeds and transform descriptors"
+    ],
+    "reporting": "Report view-state bytes separately and combined with one pinned model; compare K independent model payloads using actual model file bytes."
+  },
+  "compute": {
+    "hardware": "CPU, fixed five-thread limit.",
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": false,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true,
+    "active_compute_proxy": "Report transformed activation elements; monomial gathers/scales and compensation column gathers/scales; dense Q activation MACs and W_down compensation MACs; baseline/view forward seconds."
+  },
+  "success_gate": "On both dev and all three fresh worlds, all 16 compensated monomial addresses and the one compensated dense orthogonal address stay within max logit delta 1e-5 and have 100% top-1 agreement. Actual code payload and K-copy upper are reported. This is an invariance result, not a capacity success.",
+  "failure_gate": "Any compensated family exceeds the output tolerance or changes top-1 predictions on any world; or artifact/split/replay integrity fails.",
+  "boundaries": [
+    "One Pythia-70M model, one layer, one MLP expansion interface.",
+    "No task training or capacity claim.",
+    "The coordinate transform is paired with its inverse before hidden output returns to residual stream.",
+    "Uncompensated outputs are a changed function, not proof of useful specialization.",
+    "Results do not establish every activation-space view is a symmetry."
+  ]
+}
