@@ -1,8 +1,8 @@
-**Current operational pointer (2026-10-09): MA-498.** MA-481..492 are recorded, including failures and scoped synthetic rate-distortion results. MA-494 shows redundancy can improve synthetic noisy-ID robustness, but 3x repetition beats ECOC; continue with the next registered P0 and native controls.
+**Current operational pointer (2026-10-09): MA-501.** MA-481..498 are recorded, including failures and scoped synthetic rate-distortion/noisy-ID results. Continue with the representation-space LoReFT family using native controls.
 
 # Worker queue
 
-**Current operational pointer (2026-10-09): MA-498.** MA-436/438 and MA-482 show scoped synthetic quality/storage Pareto points; findings remain bounded by their controls and tasks. Continue with the next registered P0 validation item.
+**Current operational pointer (2026-10-09): MA-501.** MA-436/438 and MA-482 show scoped synthetic quality/storage Pareto points; findings remain bounded by their controls and tasks. Continue with the registered LoReFT representation-space family.
 
 The queue is derived from `IDEA_REGISTRY.csv`. The registry is authoritative.
 

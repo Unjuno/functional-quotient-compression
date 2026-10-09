@@ -23,7 +23,7 @@ Integration branch: `research/ma-470-mend-shared-mirror-edit-basis-reconciled-20
 
 ## Next candidate
 
-**MA-498 — Learned code distance regularizer for Mirror bank (P0)**
+**MA-501 — LoReFT subspace + Mirror coordinate (P0)**
 
 **MA-494 PROMISING (scoped synthetic noisy-address robustness):** with 32 expert IDs at bit-flip p=.1, binary accuracy was .591, ECOC-11 .816, and 3x repetition .868. Payloads were 2,149B / 2,277B vs 1,957B binary, with noiseless accuracy 1.0. Repetition beats ECOC; no Mirror-specific advantage or task-level routing benefit is established. **Next: MA-498 (P0).**
 
@@ -224,3 +224,6 @@ KG relation rotations (RotatE, TuckER, QuatE, PairRE), EXIF/device-aware ISPs (P
 
 
 **MA-492 FAIL at K<=8; K16 scoped positive:** on the A1 synthetic 16-mode packet task, K8 covered 50% of joint modes; K16 achieved 100% coverage and NLL .693 at 3,173B vs continuous 18,469B. No natural packet prediction claim. **MA-494 PROMISING only for noisy synthetic IDs:** ECOC/repetition improve accuracy under bit flips, with 3x repetition stronger than ECOC and modest extra bytes.
+
+
+**MA-498 FAIL:** with 32 IDs and 8-bit codes under p=.1 bit flips, selected and random unique IDs both reached .667 accuracy (minimum distance 1) at 2,085B; binary IDs reached .595 at 1,957B. Distance regularization added no benefit over random codes.
