@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (111 completed; 519 UNTESTED)
+- P0: **630** (112 completed; 518 UNTESTED)
 - P1: **422** (15 completed; 407 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1029 UNTESTED, 46 PROMISING, 80 FAIL**
+- Current MA statuses: **1028 UNTESTED, 46 PROMISING, 81 FAIL**
 - 68 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -408,3 +408,10 @@ MA-379 and MA-381 both narrowly missed the complete-payload gate at 60.8–61.1%
 - **FAIL at the frozen vector-quality gate:** in two deliberately aligned synthetic worlds, Mirror payload was 7,662/7,648B (43.4% of the independent table, and 11.2% smaller than native Hash), but embedding NRMSE was .0949/.0639 versus native Hash .00578/.00540 and required <=.03. Decoder top-1 remained 98.44%/98.05%; collision-only error did not explain the miss.
 - Ten serialized payloads replayed bytes, hashes and all metrics exactly; four tests pass. Fresh worlds remained sealed. This is an aligned unit-circle importance screen, not natural vocabulary or language-model evidence.
 - Next P0 candidate: MA-391 — quotient-remainder compositional embedding Mirror addresses.
+
+
+## Completed: MA-391 — Quotient-remainder compositional embedding Mirror address
+
+- **FAIL on frozen embedding-fidelity gate:** Mirror NRMSE was .1248/.1391 against <=.03, while direct coefficients reached .00943/.01505. Decoder NLL/top-1 stayed close to direct coefficients, but the primary vector gate failed. Mirror payload was 10,461B (16.5% of full and 73.6% of direct coefficients); fixed add/product/concat were much worse.
+- Twelve serialized payloads replayed sizes, hashes and metrics; all 1,024 quotient/remainder addresses were unique; four tests pass. Fresh remained sealed. Fixed-table, aligned synthetic screen only.
+- Next P0 candidate: MA-392 — token × domain factorized Mirror embedding address.

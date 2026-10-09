@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-391.** MA-389 compressed the independent embedding payload to 43.4%, but the frozen Mirror vector-fidelity gate failed in both development worlds (.0949/.0639 versus <=.03); fresh remained sealed. Proceed to MA-391/392, starting with MA-391 quotient-remainder compositional embeddings (P0).
+**Current operational pointer (2026-10-09): MA-392.** MA-391 used a compact angle code (10,461B; 16.5% of full and 73.6% of direct-coefficient payload) and beat fixed composition operators, but missed the frozen vector-fidelity gate (.1248/.1391 versus <=.03); fresh remained sealed. Proceed to MA-392, token × domain factorized Mirror embedding addresses (P0).
 
 # Worker queue
 
