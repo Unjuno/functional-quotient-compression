@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-476.** MA-470/471/473/475 are recorded as scoped edit-basis, ROME-coordinate, MEMIT-style layerwise storage, and SERAC value-memory results. Continue with native GRACE key/radius/value-codebook controls; MA-474 remains P1.
+**Current operational pointer (2026-10-09): MA-478.** MA-470/471/473/475/476 document scoped edit-basis, ROME, MEMIT-style layerwise, SERAC value-memory, and GRACE value-codebook results. Continue with a predeclared View-first/private-memory fallback allocation policy; MA-477 remains P1.
 
 # Worker queue
 

@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-476",
+  "commit": "pending",
+  "tests": {
+    "command": "pytest -q experiments/mirror_applications/ma-476-grace-value-mirror/tests",
+    "passed": 2,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Protocol frozen at 5b178cdd before fresh data access.",
+    "Uniform K=8/16/32/64 VQ controls were fixed in protocol and all reported.",
+    "Synthetic fixed-norm value orbit; actual keys, per-key radii and all codebook values are charged."
+  ]
+}
