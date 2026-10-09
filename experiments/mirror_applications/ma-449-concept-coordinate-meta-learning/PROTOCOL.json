@@ -1,0 +1,120 @@
+{
+  "experiment_id": "MA-449",
+  "title": "Concept-coordinate meta-learning with held-out factor combinations",
+  "status": "SCREENING",
+  "evidence_lane": "FEW_SHOT/CONCEPT_EXTRAPOLATION/IDENTIFIABILITY/BYTES",
+  "base_commit": "f05260a5",
+  "hypothesis": "A support-set encoder that emits two factor-specific Mirror coordinates generalizes to held-out joint concept combinations, achieving query NRMSE within 1.10x additive task-vector composition and lower actual serialized N=20 payload bytes than an unstructured LEO latent encoder.",
+  "physical_object": "shared conditional linear model and shared concept decoder",
+  "mirror_coordinate": "two support-inferred factor coordinates, one per concept axis",
+  "logical_multiplicity": "held-out combinations of independently observed concepts",
+  "prior_art_refs": [
+    75,
+    76,
+    79
+  ],
+  "controls": [
+    "MAML/shared initialization with gradient adaptation",
+    "LEO unstructured 2D latent",
+    "direct additive task-vector composition",
+    "factorized concept Mirror encoder/decoder"
+  ],
+  "task": {
+    "type": "synthetic compositional linear regression",
+    "input_dim": 8,
+    "output_dim": 1,
+    "concept_count": 2,
+    "support_examples": 8,
+    "query_examples": 128,
+    "train_factor_combinations": [
+      [
+        0,
+        0
+      ],
+      [
+        1,
+        0
+      ],
+      [
+        0,
+        1
+      ]
+    ],
+    "held_out_factor_combinations": [
+      [
+        1,
+        1
+      ]
+    ],
+    "fresh_tasks_per_world": 20,
+    "task_id_partition": {
+      "meta_train": [
+        1000,
+        1199
+      ],
+      "development": [
+        100,
+        119
+      ],
+      "fresh": [
+        3000,
+        3059
+      ]
+    }
+  },
+  "development": {
+    "worlds": [
+      44900,
+      44901
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "outer_lrs": [
+      0.01,
+      0.03
+    ]
+  },
+  "fresh": {
+    "worlds": [
+      44910,
+      44911,
+      44912
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "shared model",
+      "concept decoder",
+      "encoder",
+      "two factor coordinates",
+      "task metadata"
+    ],
+    "report_amortization_N": [
+      1,
+      20,
+      100
+    ]
+  },
+  "compute": {
+    "report_support_encoder_wall": true,
+    "report_adaptation_MAC": true,
+    "report_query_wall": true
+  },
+  "success_gate": "Every fresh world: Mirror held-out joint-combination NRMSE <=1.10x additive task-vector control; actual N=20 payload bytes below unstructured LEO; both concept factors are independently identifiable under intervention on each factor.",
+  "failure_gate": "Any quality/bytes/identifiability gate miss, or additive task vectors match Mirror at equal/fewer bytes.",
+  "boundaries": [
+    "Synthetic aligned linear concept test only.",
+    "Do not treat combination count as independent capacity.",
+    "No natural concept, language, or nonlinear task claim."
+  ]
+}
