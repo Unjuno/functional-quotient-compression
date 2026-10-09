@@ -1,0 +1,26 @@
+{
+  "experiment_id": "MA-261",
+  "commit": "pending final result commit",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-261-batchensemble-rankone-mirror-experts/tests -v",
+    "passed": 5,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": false,
+    "byte_exact": true,
+    "note": "All 45 fresh flat serialized payload lengths and hashes checked."
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0,
+    "note": "Aggregate values recomputed from RESULTS_CORE.csv."
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Fresh worlds 26110-26112 \u00d7 seeds 0-2; 45 rows.",
+    "Mirror and generic rank-one methods use same bytes (2149B) and equal aggregate routed NRMSE (0.0595).",
+    "Standard MoE reached lower routed NRMSE 0.0394 at 2149B.",
+    "Router accuracy was 0.9978. No Mirror-specific improvement."
+  ]
+}

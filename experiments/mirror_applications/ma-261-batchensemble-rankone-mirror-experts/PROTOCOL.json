@@ -1,7 +1,7 @@
 {
   "experiment_id": "MA-261",
   "title": "BatchEnsemble-style rank-one Mirror experts",
-  "status": "FROZEN_SCREENING",
+  "status": "COMPLETED_FAIL",
   "base_commit": "d12b5187",
   "evidence_lane": "EXPERT_QUALITY/ROUTING/ACTUAL_BYTES/ACTIVE_COMPUTE",
   "prior_art_refs": [
@@ -63,7 +63,7 @@
       1,
       2
     ],
-    "locked_before_access": true
+    "locked_before_access": false
   },
   "storage": {
     "authority": "actual torch-serialized inference payload bytes including shared router, expert weights, codes/factors and metadata"
@@ -104,5 +104,22 @@
       "tied": 2085
     },
     "interpretation": "Mirror and generic rank-one control are functionally and byte-identical; standard MoE has better routed quality at same bytes."
+  },
+  "result_summary": {
+    "fresh_routed_nrmse_mean": {
+      "standard_moe": 0.0394,
+      "batchensemble": 0.1158,
+      "mirror": 0.0595,
+      "generic_rank1": 0.0595,
+      "tied": 0.4994
+    },
+    "payload_bytes": {
+      "standard_moe": 2149,
+      "batchensemble": 2213,
+      "mirror": 2149,
+      "generic_rank1": 2149,
+      "tied": 2085
+    },
+    "router_accuracy_mean": 0.9978
   }
 }

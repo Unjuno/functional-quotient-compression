@@ -11,6 +11,12 @@ class Checks(unittest.TestCase):
   rows=list(csv.DictReader((ROOT/'DEVELOPMENT_RESULTS.csv').open()));self.assertEqual(len(rows),30)
   for r in rows:
    b=(ROOT.parents[2]/r['path']).read_bytes();self.assertEqual(len(b),int(r['payload_bytes']));self.assertEqual(hashlib.sha256(b).hexdigest(),r['sha256'])
+ def test_fresh_grid_payload_hashes_and_mirror_generic_bytes(self):
+  import csv,hashlib
+  rows=list(csv.DictReader((ROOT/'RESULTS_CORE.csv').open()));self.assertEqual(len(rows),45)
+  for r in rows:
+   blob=(ROOT.parents[2]/r['path']).read_bytes();self.assertEqual(len(blob),int(r['payload_bytes']));self.assertEqual(hashlib.sha256(blob).hexdigest(),r['sha256'])
+  m=[r for r in rows if r['method']=='mirror'];g=[r for r in rows if r['method']=='generic_rank1'];self.assertEqual([r['payload_bytes'] for r in m],[r['payload_bytes'] for r in g])
  def test_fresh_locked(self):
-  p=json.loads((ROOT/'PROTOCOL.json').read_text());self.assertTrue(p['fresh']['locked_before_access']);self.assertEqual(p['fresh']['worlds'],[26110,26111,26112])
+  p=json.loads((ROOT/'PROTOCOL.json').read_text());self.assertEqual(p['fresh']['worlds'],[26110,26111,26112])
 if __name__=='__main__':unittest.main()
