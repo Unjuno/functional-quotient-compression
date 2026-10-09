@@ -1,0 +1,22 @@
+{
+  "experiment_id":"MA-600",
+  "title":"Hash-compressed task adapter bank on digit features",
+  "status":"FROZEN_BEFORE_DEVELOPMENT",
+  "evidence_lane":"ADAPTER_BANK/PA120_PA18/SHARED_HASH/PRIVATE_PARAMETER_BOUNDARY/ACTUAL_BYTES",
+  "base_commit":"c935a903",
+  "input_data":"sklearn load_digits 1.8.0 normalized 8x8 pixel vectors; stratified split by world seed",
+  "task_construction":"Eight task-specific continuous adapter targets y_t=x@A_t@B_t where A_t(64x2), B_t(2x16) are independently generated per world from frozen Gaussian seeds. The input examples are real digit images; targets are synthetic independent low-rank task functions. No natural-task or language claim.",
+  "hypothesis":"A single 512-value hash table plus task-specific 32-angle Givens codes can represent eight useful task adapters at lower actual payload than independent hash/LoRA banks while reaching normalized held-out MSE <=0.10 and staying within +0.02 held-out RMSE of independent rank-2 LoRA.",
+  "physical_object":"Shared 512-bucket adapter parameter vector (or per-task tables in independent controls); all targets are task-specific adapter matrices 64x16.",
+  "mirror_coordinate":"One 32-angle adjacent-pair input rotation per task before the same shared hash-expanded 64x16 adapter matrix.",
+  "controls":["independent dense task matrices","independent rank-2 LoRA factors","independent per-task hash tables (512 buckets each)","shared hash table with task-specific deterministic hash salts","shared hash table plus task-specific Givens views","VeRA-style shared random rank-2 A/B basis plus learned per-task scaling vectors","generic shared task-matrix basis rank-8 with learned per-task coefficients"],
+  "training":{"optimizer":"AdamW","learning_rate":0.01,"updates":1200,"batch_size":128,"weight_decay":0,"loss":"mean squared error over batch, all 8 tasks and 16 outputs","initialization":"deterministic per world/method; Givens identity; VeRA bases frozen random seed paid in payload metadata and actual bases serialized; shared basis learned"},
+  "development":{"world_seeds":[60001,60002,60003],"selection":"No hyperparameter search. Rank, buckets, updates, optimizer and gates fixed before running."},
+  "fresh":{"world_seeds":[60011,60012,60013],"locked_before_access":true,"open_rule":"Run only if all three development worlds meet the complete quality/storage/native-control gate."},
+  "storage":{"authority":"actual serialized inference NPZ bytes after reload and evaluation","paid_objects":["all adapter tensors/tables/bases/codes", "Givens task angles", "hash seeds", "shapes/schema/method metadata"],"deterministic_reconstruction":"Hash maps regenerated from charged uint32 seeds and frozen algorithm; all learned codes and bases serialized in FP16."},
+  "compute":{"report":["updates and examples", "adapter MACs per task-example", "hash expansion lookups", "Givens ops", "training wall time", "serialized inference throughput", "CPU threads"]},
+  "primary_metrics":["held-out normalized MSE and RMSE by task and aggregate","actual adapter payload bytes","per-task and aggregate training/compute","pairwise adapter function cosine"],
+  "success_gate":"Across all three dev worlds: Mirror aggregate normalized MSE <=0.10; aggregate RMSE <= independent rank-2 LoRA RMSE +0.02; Mirror payload <=0.75x independent per-task 512-bucket hash bank; Mirror RMSE must beat shared salted hash and VeRA control by >=0.01; no per-task NRMSE >0.20.",
+  "failure_gate":"Any dev quality, storage, per-task, or native-control gate miss is FAIL; fresh remains sealed.",
+  "boundaries":["Synthetic independent task operators on real digit inputs; mechanism screen only","The number of tasks is not independent capacity","No natural pretrained-backbone or real PEFT task claim","Fixed-budget learning efficiency is not near-convergence capacity"]
+}

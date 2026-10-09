@@ -457,3 +457,8 @@ A worker may batch implementation work across a family, but scientific status is
 ## Stop rule
 
 If two consecutive candidates in a family fail for the same demonstrated structural reason, stop that family and write a family diagnostic before continuing.
+
+
+## MA-600 result and handoff — 2026-10-09
+
+MA-600 is a verified FAIL on `research/ma-600-hash-compressed-adapter-bank-20261009`: across three independent rank-2 operator worlds, shared hash+Givens uses 3,314 B but NRMSE .408–.504; independent rank-2 LoRA uses 4,318 B and reaches .0027–.0139. Shared salted hash uses 2,586 B but NRMSE .497–.594. The 1,004 B saved versus LoRA does not recover quality; private per-task factors are needed for this target family. Fresh sealed; 21/21 payloads replay exact. Next: MA-601 hash-compressed attention heads (new object; compare native multi-head sharing and per-head low-rank controls).

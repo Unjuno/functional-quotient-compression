@@ -1,0 +1,51 @@
+{
+  "development_world_seeds": [
+    60001,
+    60002,
+    60003
+  ],
+  "experiment_id": "MA-600",
+  "fresh_artifacts_present": false,
+  "fresh_worlds_accessed": [],
+  "gate_decision": "FAIL: Mirror normalized MSE gate misses in all three worlds; it is far worse than independent rank-2 LoRA and fails the frozen native-control RMSE margin. Its payload is 0.340x independent hash.",
+  "metric_replay_checked": true,
+  "payloads_replayed": 21,
+  "protocol_sha256": "9306a3b528fe5e9eef9d3c4d509bb1e3a64f4c9d684bc30561d0160a72adc1d4",
+  "results": {
+    "60001": {
+      "lora_bytes": 4318,
+      "lora_nrmse": 0.002676454568823577,
+      "mirror_bytes": 3314,
+      "mirror_nrmse": 0.504362434118534,
+      "seven_payloads_byte_exact": true,
+      "shared_hash_bytes": 2586,
+      "shared_hash_nrmse": 0.5935721302303281
+    },
+    "60002": {
+      "lora_bytes": 4318,
+      "lora_nrmse": 0.010499136010661018,
+      "mirror_bytes": 3314,
+      "mirror_nrmse": 0.42041653188040207,
+      "seven_payloads_byte_exact": true,
+      "shared_hash_bytes": 2586,
+      "shared_hash_nrmse": 0.5195507891028137
+    },
+    "60003": {
+      "lora_bytes": 4318,
+      "lora_nrmse": 0.013946921090011173,
+      "mirror_bytes": 3314,
+      "mirror_nrmse": 0.40830107715761466,
+      "seven_payloads_byte_exact": true,
+      "shared_hash_bytes": 2586,
+      "shared_hash_nrmse": 0.4969947794119593
+    }
+  },
+  "serialization_roundtrip_checked": true,
+  "source_sha256": "f2cda7d3f73549aa62a891599f910ddd8f139836cead3b889d8628add54a112b",
+  "status": "FAIL",
+  "tests": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 python -m pytest -q experiments/mirror_applications/ma-600-hash-compressed-adapter-bank/tests",
+    "failed": 0,
+    "passed": 3
+  }
+}

@@ -1,15 +1,15 @@
 # Mirror Application Status Board
 
-Updated: 2026-10-08 JST
+Updated: 2026-10-09 UTC
 Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (35 completed; 595 UNTESTED)
-- P1: **422** (12 completed; 410 UNTESTED)
+- P0: **630** (37 completed; 593 UNTESTED)
+- P1: **422** (14 completed; 408 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1108 UNTESTED, 29 PROMISING, 18 FAIL**
+- Current MA statuses: **1104 UNTESTED, 29 PROMISING, 22 FAIL**
 - 47 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -23,13 +23,14 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-255 — Mirror context superposition for task models (P0; PA16)**
+**MA-601 — Hash-compressed attention heads (P1; PA120)**
+
+MA-597–599 are verified FAILs: learned Givens/bucket Views did not beat native hashing, byte-near low-rank controls, or larger tables. Pause unchanged collision-repair and expert bucket-View variants. MA-600 is a verified FAIL for adapter functions: 3,314 B shared hash+View has .408–.504 NRMSE, while 4,318 B independent rank-2 LoRA reaches .003–.014. This identifies a private-parameter boundary for independent task operators. Fresh worlds sealed. Next MA-601 tests head projections, a different target object.
 
 Reason:
-- all previously locked MA-241/244/245/247–251/253 and subsequent old-chain P0 screens have completed;
-- the original P0 cross-over queue is exhausted among checked candidates;
-- MA-255 is the first untested P0 in the earlier high-information literature cross-over queue;
-- direct Parameter Superposition prior art gives a strong nearest control for insertion of the extra Mirror parameter `m`.
+- MA-597–600 are integrated as dedicated-branch FAIL evidence; the unchanged hash collision/expert-view subfamily is paused;
+- MA-601 changes the target from FFN/adapter weights to attention-head projections and tests useful head multiplicity under shared physical projections;
+- the protocol must compare native GQA/MQA or hard-shared heads, independent heads, per-head low-rank/gate controls, and Mirror Views with actual full model payload bytes and measured attention quality.
 
 Required controls: native Parameter Superposition, naive/shared task-code basis, matched byte-near low-rank or VeRA-style modulation, independent-model upper reference where practical. Do not claim the superposition concept itself as a Mirror invention.
 
