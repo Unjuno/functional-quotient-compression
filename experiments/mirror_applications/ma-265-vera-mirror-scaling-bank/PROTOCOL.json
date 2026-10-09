@@ -1,0 +1,114 @@
+{
+  "experiment_id": "MA-265",
+  "title": "VeRA shared scaling bases with Mirror task coordinates",
+  "status": "FROZEN_SCREENING",
+  "base_commit": "2f5c11f9",
+  "evidence_lane": "VERA_ADAPTER_BANK/QUALITY/ACTUAL_BYTES/DECODE_COMPUTE",
+  "prior_art_refs": [
+    18
+  ],
+  "model": {
+    "input_dim": 32,
+    "output_dim": 32,
+    "rank": 8,
+    "tasks_per_bank": 8,
+    "frozen_base_and_random_A_B": true
+  },
+  "task": {
+    "strata": [
+      "shared angular orbit of VeRA scaling vectors",
+      "independent VeRA scaling vectors"
+    ],
+    "support_examples_per_task": 64,
+    "audit_examples_per_task": 256,
+    "metrics": [
+      "held-out output NRMSE",
+      "actual serialized bank bytes",
+      "per-task code bytes",
+      "fit/decode time"
+    ]
+  },
+  "hypothesis": "A one-angle Mirror code bank over shared VeRA scaling bases can reduce per-task adapter storage while preserving held-out output quality on aligned scaling orbits; independent scale vectors may require private state.",
+  "physical_object": "one frozen base matrix and one shared VeRA random A/B basis plus shared scale-code basis",
+  "mirror_coordinate": "one per-task angle decoded into both VeRA scaling vectors",
+  "logical_multiplicity": "8 functional adapters from one physical basis",
+  "controls": [
+    "explicit full per-task VeRA scaling vectors",
+    "Mirror one-angle code",
+    "generic two-coefficient shared scaling basis",
+    "independent full rank-8 LoRA delta upper control"
+  ],
+  "development": {
+    "worlds": [
+      26500,
+      26501
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "allowed": "fixed support fitting with 300 Adam updates, lr 0.03; verify serializer, task shapes and fit only"
+  },
+  "fresh": {
+    "worlds": [
+      26510,
+      26511,
+      26512
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual torch-serialized deployed bank bytes including base, shared A/B, shared scale basis, task codes or full scales and metadata"
+  },
+  "compute": {
+    "report_fit_updates": true,
+    "report_fit_seconds": true,
+    "report_decode_seconds": true,
+    "report_task_batch_apply_seconds": true
+  },
+  "success_gate": "Aligned stratum: Mirror mean audit NRMSE <=0.01 and <=70% VeRA full-scaling bank bytes in every fresh world. Compare to generic two-coefficient control; matching quality at lower/equal bytes or compute precludes Mirror-specific claim.",
+  "failure_gate": "Mirror audit NRMSE >0.05, or generic coefficient control matches Mirror at equal-or-lower bytes/compute, or independent scaling stratum shows the view cannot represent useful tasks.",
+  "boundaries": [
+    "Synthetic adapter outputs only; not NLP transfer or natural VeRA benchmark.",
+    "Shared scale basis is an intentionally aligned feasibility condition; independent scale tasks measure boundary.",
+    "Task ID is supplied; routing is not studied."
+  ],
+  "amendment_before_fresh": {
+    "reason": "Single zero initialization for a periodic angle code converged to local minima on development data (aligned NRMSE ~0.27) despite the known low-dimensional orbit.",
+    "change": "Use a fixed 9-point start grid over [-3,3] per task and 200 Adam steps per start at lr 0.03; select the lowest support loss. This is a development-only optimizer robustness amendment, before any fresh access.",
+    "fresh_not_accessed": true
+  },
+  "development_summary": {
+    "aligned_nrmse_mean": {
+      "vera": 0.0,
+      "mirror": 0.0,
+      "generic": 0.0,
+      "independent_lora": 0.0014
+    },
+    "aligned_payload_bytes": {
+      "vera": 10690,
+      "mirror": 9925,
+      "generic": 10178,
+      "independent_lora": 23001
+    },
+    "aligned_fit_seconds": {
+      "vera": 0.41,
+      "mirror": 4.93,
+      "generic": 0.28,
+      "independent_lora": 0.21
+    },
+    "independent_nrmse_mean": {
+      "vera": 0.0002,
+      "mirror": 0.4144,
+      "generic": 0.3643,
+      "independent_lora": 0.0028
+    },
+    "decision": "Continue fixed protocol to fresh despite development storage gate miss to map fresh failure and private-scale boundary."
+  }
+}
