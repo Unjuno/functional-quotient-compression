@@ -1,10 +1,216 @@
 {
   "experiment_id": "MA-385",
-  "status": "PROTOCOL_FROZEN_PRE_DEVELOPMENT",
-  "protocol_commit": "pending",
-  "tests": {"command": "", "passed": 0, "failed": 0},
-  "serialization": {"actual_bytes_measured": false, "roundtrip_checked": false},
-  "metric_replay": {"checked": false},
-  "continual_retention": {"per_task_rechecked_after_each_stage": true, "checked": false},
-  "fresh": {"worlds": [38511, 38512, 38513], "opened": false}
+  "status": "FAIL_DEVELOPMENT_GATE",
+  "protocol_commit": "0e099ad8",
+  "result_commit": "pending-result-commit",
+  "tests": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 pytest -q -p no:cacheprovider experiments/mirror_applications/ma-385-dualprompt-mirror-experts/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "actual_npz_payloads": 10,
+    "all_sizes_checked": true,
+    "all_sha256_checked": true,
+    "all_final_payloads_reloaded": true
+  },
+  "metric_replay": {
+    "final_per_task_output_metrics_checked": true,
+    "retention_stages_retrained_and_checked": true,
+    "maximum_stage_metric_delta": 0.0,
+    "tolerance": 1e-07
+  },
+  "continual_retention": {
+    "every_seen_task_rechecked_after_each_stage": true,
+    "mirror_old_task_forgetting": [
+      0.0,
+      0.0
+    ]
+  },
+  "fresh": {
+    "worlds": [
+      38511,
+      38512,
+      38513
+    ],
+    "opened": false,
+    "reason": "Mirror missed final quality margin and <=60% full payload gate in development."
+  },
+  "notes": [
+    "Task ID is supplied at evaluation; no retrieval score is part of this DualPrompt task-incremental proxy.",
+    "Common general prompt is stored and charged in every method.",
+    "Expert teacher is deliberately aligned to a shared SO(2) basis; no pretrained DualPrompt or natural image task was run."
+  ],
+  "payloads": [
+    {
+      "seed": 38501,
+      "method": "independent",
+      "bytes": 3447,
+      "sha256": "d8c86b084b5839cf26556c653aaad96a75dd5f6c1bd8c55a0a89ae36e7f2c1cc",
+      "final_task_nrmse": [
+        2.2624953999184072e-07,
+        8.762042114085489e-08,
+        1.4391262936896965e-07,
+        1.71480067479024e-07,
+        2.0203709993893426e-07,
+        1.3125691111781634e-07,
+        9.52052232605638e-08,
+        9.534333145211349e-08
+      ],
+      "max_retention_stage_replay_delta": 0.0
+    },
+    {
+      "seed": 38501,
+      "method": "tied",
+      "bytes": 1737,
+      "sha256": "75e22636f3db43d54772f9b2f30385f4433e9ec7b82ac69626b49265723ddc8c",
+      "final_task_nrmse": [
+        0.9802277684211731,
+        1.3185206651687622,
+        0.9158624410629272,
+        1.4716062545776367,
+        1.42109215259552,
+        0.7126976251602173,
+        1.6500680446624756,
+        2.6715247258835007e-07
+      ],
+      "max_retention_stage_replay_delta": 0.0
+    },
+    {
+      "seed": 38501,
+      "method": "scalar",
+      "bytes": 1967,
+      "sha256": "aec513bae57d88a28b7031a55fcdc76649ff25729f419c8c4e1425b3db802e3b",
+      "final_task_nrmse": [
+        8.672714812973936e-08,
+        0.421322226524353,
+        0.0774591937661171,
+        0.4539625942707062,
+        0.33186596632003784,
+        0.34122392535209656,
+        0.8146818280220032,
+        0.7146758437156677
+      ],
+      "max_retention_stage_replay_delta": 0.0
+    },
+    {
+      "seed": 38501,
+      "method": "coeff",
+      "bytes": 2267,
+      "sha256": "ea427e04fee5519b65a394c97fe2811a02ece934efe26a80e5c2b89982af41b1",
+      "final_task_nrmse": [
+        1.1153525036888823e-07,
+        1.2890113509911316e-07,
+        1.643981875076861e-07,
+        3.8621951148343214e-07,
+        3.170133879848436e-07,
+        3.1413529200108314e-07,
+        3.4305460872019466e-07,
+        3.326370290324121e-07
+      ],
+      "max_retention_stage_replay_delta": 0.0
+    },
+    {
+      "seed": 38501,
+      "method": "mirror",
+      "bytes": 2238,
+      "sha256": "57bb82053f98f3881d6307816b2bcfb66239f6f2ada4b6b0ba674acaf95a9c02",
+      "final_task_nrmse": [
+        1.2391049608595495e-07,
+        9.291004232636624e-08,
+        0.009102641604840755,
+        0.09352749586105347,
+        0.0568263977766037,
+        0.06928103417158127,
+        0.08967585861682892,
+        0.08849649131298065
+      ],
+      "max_retention_stage_replay_delta": 0.0
+    },
+    {
+      "seed": 38502,
+      "method": "independent",
+      "bytes": 3437,
+      "sha256": "4aa6bfe9a481ed6ee9a12e12e28f35281a6a14378b23f06b59e3fdebaaa8ad01",
+      "final_task_nrmse": [
+        8.396294504109392e-08,
+        8.358301073485563e-08,
+        8.501078241351934e-08,
+        7.76432926841153e-08,
+        9.773510356581028e-08,
+        9.41074418392418e-08,
+        8.499918635607173e-08,
+        8.136248652590439e-08
+      ],
+      "max_retention_stage_replay_delta": 0.0
+    },
+    {
+      "seed": 38502,
+      "method": "tied",
+      "bytes": 1739,
+      "sha256": "f1ba4ebc45c10b8206a96489e11d623b980476e441e8a8fd0b9ea9242c90f655",
+      "final_task_nrmse": [
+        1.1580181121826172,
+        0.3406834304332733,
+        0.14426474273204803,
+        1.0186625719070435,
+        1.0598680973052979,
+        0.1710314005613327,
+        0.7185927629470825,
+        7.61400400506318e-08
+      ],
+      "max_retention_stage_replay_delta": 0.0
+    },
+    {
+      "seed": 38502,
+      "method": "scalar",
+      "bytes": 1968,
+      "sha256": "338989cda3590a0923d3b4ed2f490218dfe1cdce0db0bdf76a32f683a25cf68c",
+      "final_task_nrmse": [
+        7.949066826995477e-08,
+        0.25237059593200684,
+        0.05265863612294197,
+        0.45021501183509827,
+        0.5956356525421143,
+        0.07850643992424011,
+        0.5460056662559509,
+        0.09236373752355576
+      ],
+      "max_retention_stage_replay_delta": 0.0
+    },
+    {
+      "seed": 38502,
+      "method": "coeff",
+      "bytes": 2262,
+      "sha256": "4bdd428a47e6075341664a109ac41f7aa9a70a65d289a70bd113066a8d3c75ca",
+      "final_task_nrmse": [
+        8.475547019770602e-08,
+        1.0613521794766712e-07,
+        8.036401055733222e-08,
+        3.351088366798649e-07,
+        3.3010084621309943e-07,
+        9.25059850942489e-08,
+        3.180346936915157e-07,
+        1.595307850266181e-07
+      ],
+      "max_retention_stage_replay_delta": 0.0
+    },
+    {
+      "seed": 38502,
+      "method": "mirror",
+      "bytes": 2241,
+      "sha256": "9778a5e6156b10da916f618e7d4c0897af2983c21069b25a752af0233bb593e3",
+      "final_task_nrmse": [
+        7.939009805113528e-08,
+        8.39604510360914e-08,
+        0.208139106631279,
+        0.37470048666000366,
+        0.6629029512405396,
+        0.18506327271461487,
+        0.37072569131851196,
+        0.352138876914978
+      ],
+      "max_retention_stage_replay_delta": 0.0
+    }
+  ]
 }

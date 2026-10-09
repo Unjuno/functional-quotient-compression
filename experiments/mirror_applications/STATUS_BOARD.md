@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (109 completed; 521 UNTESTED)
+- P0: **630** (110 completed; 520 UNTESTED)
 - P1: **422** (15 completed; 407 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1031 UNTESTED, 46 PROMISING, 78 FAIL**
+- Current MA statuses: **1030 UNTESTED, 46 PROMISING, 79 FAIL**
 - 68 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -394,3 +394,10 @@ MA-379 and MA-381 both narrowly missed the complete-payload gate at 60.8–61.1%
 - **FAIL on frozen task-validity and storage gates:** top-1 prompt retrieval was identical for all methods and below threshold (89.45%/89.70%, required >=90%). Mirror payload was 2,424/2,423B, 66.8% of explicit prompt pool. Mirror oracle prompt NRMSE was .601 in one development world and 3.3e-5 in the other; retrieved NRMSE .6635/.4251 versus explicit .4567/.4251.
 - Ten actual payloads replay key identity, retrieval, bytes, hashes and output metrics; three tests pass. Fresh remained sealed. The independent retrieval channel itself missed validity, so downstream compression quality is not isolated. Synthetic frozen-feature prompt pool only.
 - Next P0 candidate: MA-385 — DualPrompt expert prompts as Views.
+
+
+## Completed: MA-385 — DualPrompt expert prompts as Views
+
+- **FAIL on frozen quality/storage gates:** independent experts reached final mean NRMSE <1.5e-7. Mirror was .0509/.2692 and used 2,238/2,241B (64.9%/65.2% of independent, above the <=60% limit). Generic two-value coefficients matched independent quality at only 21–29B more than Mirror. Hard tying forgot previous tasks; Mirror forgetting was zero but its new expert functions were not reliably fitted.
+- Ten actual payloads replay bytes, hashes, final task metrics and every sequential retention stage; maximum replay delta 0; three tests pass. Fresh remained sealed. Synthetic task-incremental proxy with known task IDs only.
+- Next P0 candidate: MA-389 — Hash Embedding Mirror importance codes.

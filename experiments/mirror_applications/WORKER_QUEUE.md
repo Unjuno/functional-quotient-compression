@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-385.** MA-383 failed the frozen screen: common nearest-key retrieval reached only 89.45-89.70% (below the 90% task-validity gate); Mirror also used 66.8% of explicit pool bytes and failed to fit one development prompt bank. Fresh remained sealed. Proceed to MA-385, DualPrompt expert prompts as Views (P0).
+**Current operational pointer (2026-10-09): MA-389.** MA-385 showed zero old-task forgetting with frozen Mirror codes, but final expert quality varied across worlds (.0509/.2692 NRMSE) and full payload was 64.9-65.2% of independent; generic coefficients fit the aligned teacher. Fresh remained sealed. Proceed to MA-389, Hash Embedding Mirror importance codes (P0).
 
 # Worker queue
 
