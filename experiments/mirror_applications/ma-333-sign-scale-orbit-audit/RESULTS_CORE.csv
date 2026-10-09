@@ -1,1 +1,17 @@
 condition,world_or_seed,method,serialized_bytes,train_tokens_or_examples,optimizer_updates,active_compute_proxy,wall_time_s,primary_metric,primary_value,secondary_metric,secondary_value,status_note
+fresh_mean,33331-33333:gelu,baseline,2548,4096,0,98304,0.00681810933262265,output_nrmse,0,max_abs_difference,0,functional change or non-symmetry
+fresh_mean,33331-33333:gelu,permutation_view,2631,4096,0,98304,0.00846152499919602,output_nrmse,2.07618418311e-16,max_abs_difference,1.7763568394e-15,symmetry
+fresh_mean,33331-33333:gelu,positive_scale_compensated,2695,4096,0,98304,0.011161690330482088,output_nrmse,0.0890193268978,max_abs_difference,0.275875716358,functional change or non-symmetry
+fresh_mean,33331-33333:gelu,sign_flip_compensated,2680,4096,0,98304,0.007025836671042877,output_nrmse,0.962179993032,max_abs_difference,4.43069221085,functional change or non-symmetry
+fresh_mean,33331-33333:layernorm_relu,baseline,2760,4096,0,98304,0.0009732133282038072,output_nrmse,0,max_abs_difference,0,functional change or non-symmetry
+fresh_mean,33331-33333:layernorm_relu,permutation_view,2843,4096,0,98304,0.0008229673355041692,output_nrmse,1.07145666561e-07,max_abs_difference,9.53674316406e-07,symmetry
+fresh_mean,33331-33333:layernorm_relu,positive_scale_compensated,2907,4096,0,98304,0.0011435156678392862,output_nrmse,0.186350325743,max_abs_difference,0.97121155262,functional change or non-symmetry
+fresh_mean,33331-33333:layernorm_relu,sign_flip_compensated,2892,4096,0,98304,0.0076314996695145965,output_nrmse,1.09304304918,max_abs_difference,3.57013893127,functional change or non-symmetry
+fresh_mean,33331-33333:relu,baseline,2548,4096,0,98304,0.00024374399799853563,output_nrmse,0,max_abs_difference,0,functional change or non-symmetry
+fresh_mean,33331-33333:relu,permutation_view,2631,4096,0,98304,0.0004484100063564256,output_nrmse,8.3755490247e-08,max_abs_difference,7.15255737305e-07,symmetry
+fresh_mean,33331-33333:relu,positive_scale_compensated,2695,4096,0,98304,0.0003347416592684264,output_nrmse,6.65644345569e-08,max_abs_difference,7.15255737305e-07,symmetry
+fresh_mean,33331-33333:relu,sign_flip_compensated,2680,4096,0,98304,0.00032494766734695685,output_nrmse,1.04329399268,max_abs_difference,4.60436248779,functional change or non-symmetry
+fresh_mean,33331-33333:tanh,baseline,2548,4096,0,98304,0.0003341109938143442,output_nrmse,0,max_abs_difference,0,functional change or non-symmetry
+fresh_mean,33331-33333:tanh,permutation_view,2631,4096,0,98304,0.0003884980008782198,output_nrmse,1.18284233963e-07,max_abs_difference,7.15255737305e-07,symmetry
+fresh_mean,33331-33333:tanh,positive_scale_compensated,2695,4096,0,98304,0.00025941400478283566,output_nrmse,0.193452050289,max_abs_difference,0.6249345541,functional change or non-symmetry
+fresh_mean,33331-33333:tanh,sign_flip_compensated,2680,4096,0,98304,0.0002170576675174137,output_nrmse,0,max_abs_difference,0,symmetry

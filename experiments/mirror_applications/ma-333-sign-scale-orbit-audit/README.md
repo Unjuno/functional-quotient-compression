@@ -23,3 +23,24 @@ PASS: permutation exact in all four conditions; positive scale exact for ReLU on
 ## Boundary
 
 Fixed random synthetic networks; no learned tasks, utility, model merging or deployment. Approximate invariance and trainability are not assessed.
+
+
+## Results
+
+**H:** ReLU permits positive hidden rescaling with inverse outgoing scaling; tanh permits sign flips; permutation is exact for all tested conditions. GELU and LayerNorm+ReLU generally break the nonmatching scale/sign transforms.
+
+**T:** Development worlds 33321–33322 and fresh worlds 33331–33333; each world tested 4 activation conditions × 4 views on 4,096 inputs. Base network fixed at 16-24-8; LayerNorm affine parameters are included and permuted. No optimizer updates. Payload bytes include model state, View code and metadata.
+
+**D — FAIL for general sign/scale functional multiplicity:** Fresh mean output NRMSE by condition: permutation is <=1.1e-7 throughout. ReLU positive scale 6.66e-8 (exact gauge), ReLU sign flip 1.043. Tanh sign flip 0 (exact gauge), tanh positive scale .193. GELU positive scale .089 and sign flip .962. LayerNorm+ReLU positive scale .186 and sign flip 1.093. Exact gauges increase payload over baseline: permutation 83 B; positive scale 147 B; sign code 132 B.
+
+**C:** The function-changing cases were not trained or tested for useful task behavior. Numerical behavior depends on the chosen random weights and activation implementation.
+
+**U:** Other norms, learned task deltas, quality/utility, and inference kernels remain untested. The CPU wall-clock measurements are noisy and not used to claim a runtime gain.
+
+### Fact / interpretation / hypothesis
+
+**Fact:** 48 fresh rows, 12 worlds/activation/method combinations; exact payload hash/length and metric replay across all rows, max difference 0; 2 tests passed.
+
+**Interpretation:** activation homogeneity and oddness determine whether these monomial addresses are gauge-only. Counting them as logical functions is incorrect where they are exact. Where they change functions, this screen does not show utility.
+
+**Hypothesis:** task-specific functional views will require either a non-symmetry code with measured quality value or private residual parameters.

@@ -1,1 +1,25 @@
-{"experiment_id":"MA-333","commit":"pending","tests":{"command":"PYTHONDONTWRITEBYTECODE=1 pytest -q -p no:cacheprovider experiments/mirror_applications/ma-333-sign-scale-orbit-audit/tests","passed":null,"failed":null},"serialization":{"roundtrip_checked":false,"byte_exact":false},"metric_replay":{"checked":false,"max_difference":null},"fresh_split_integrity_checked":false,"notes":[]}
+{
+  "experiment_id": "MA-333",
+  "commit": "pending-results-commit",
+  "tests": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 pytest -q -p no:cacheprovider experiments/mirror_applications/ma-333-sign-scale-orbit-audit/tests",
+    "passed": 2,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "payloads_checked": 48
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Protocol frozen 38ba4810; implementation frozen 7da345b5; verifier frozen 63442626.",
+    "A1 fresh worlds 33331-33333, 48 rows across four activations and four methods.",
+    "Fresh payload hashes/byte lengths decoded and replayed exactly; maximum metric replay difference 0.",
+    "Synthetic random MLP only; no task utility evidence."
+  ]
+}

@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-333.** MA-330 was PROMISING narrowly for synthetic aligned cache roles. MA-331 FAILed its Mirror-specific byte gate at development. MA-332 FAILed for functional multiplicity: permutation and compensated positive scale were exact symmetries, while uncompensated views changed functions but had no task utility evidence. Proceed to MA-333, sign/scale orbit audit.
+**Current operational pointer (2026-10-09): MA-334.** MA-330 was PROMISING narrowly for synthetic aligned cache roles. MA-331 missed its Mirror-specific byte gate; MA-332 found permutation/positive-scale gauge views; MA-333 found positive scaling exact only for ReLU and sign flips exact only for tanh. Proceed to MA-334, canonical-orbit storage with a paid address.
 
 # Worker queue
 
