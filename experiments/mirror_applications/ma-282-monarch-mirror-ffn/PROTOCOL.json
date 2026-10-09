@@ -1,0 +1,15 @@
+{
+  "experiment_id":"MA-282","title":"Monarch structured FFN views over shared weights","status":"SCREENING","base_commit":"d1b2a0d8","evidence_lane":"MONARCH_FFN/QUALITY/ACTUAL_BYTES/RUNTIME","prior_art_refs":[24],
+  "hypothesis":"A small Monarch factor code over one shared FFN can represent aligned task functions at lower serialized bytes than independent dense maps; simple factor coefficients may fully explain any Mirror effect, and independent maps test private-state need.",
+  "physical_object":"one frozen 16×16 shared linear FFN map","mirror_coordinate":"per-task coefficient on shared Monarch block-diagonal/permutation factor direction","logical_multiplicity":"eight task functions",
+  "model":{"dimension":16,"tasks":8,"block_size":4},"task":{"support_examples":256,"audit_examples":512,"strata":["aligned Monarch factor orbit","independent dense task maps"]},
+  "controls":["shared map baseline","native per-task Monarch factors","Mirror factor-direction code","generic scalar factor coefficient","independent dense upper","rank-2 LoRA residual"],
+  "development":{"worlds":[28200,28201],"seeds":[0,1,2],"allowed":"validate exact structured decode, fit, serialization, runtime and fresh freeze"},
+  "fresh":{"worlds":[28210,28211,28212],"seeds":[0,1,2],"locked_before_access":true},
+  "storage":{"authority":"actual serialized inference payload bytes","paid_objects":["shared FFN","all Monarch factors/permutations","task addresses/private residuals"]},
+  "compute":{"report_fit_seconds":true,"report_forward_seconds":true,"report_apply_macs":true,"report_materialization_seconds":true},
+  "success_gate":"Aligned task NRMSE <=0.01 and payload <=70% of native per-task Monarch; Mirror-specific claim requires >=10% improvement over generic scalar at matched bytes.",
+  "failure_gate":"NRMSE >0.05 or <20% byte saving at matched quality; generic scalar equivalence means no Mirror-specific gain.",
+  "amendments":["Development audit found the teacher shared a common Monarch transform plus task scalar, while the physical baseline omitted the common transform. Before fresh, incorporated the common factor into the paid shared W and retained only the task variation in the scalar code. The code fit is closed-form support-only least squares and identical for Mirror/generic controls."],
+  "boundaries":["Synthetic linear FFN only","No language model claim","Monarch is prior art","Logical code combinations do not imply independent capacity"]
+}
