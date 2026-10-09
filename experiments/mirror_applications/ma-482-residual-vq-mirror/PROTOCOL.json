@@ -1,0 +1,98 @@
+{
+  "experiment_id": "MA-482",
+  "title": "Residual-VQ Mirror code composition",
+  "status": "FROZEN_SCREENING",
+  "base_commit": "69027d28",
+  "evidence_lane": "RATE_DISTORTION/RESIDUAL_CODE_COMPOSITION/ACTUAL_BYTES/USAGE",
+  "hypothesis": "For logical functions decomposable into staged low-dimensional residual views, a single shared physical basis plus stage-specific Mirror phase indices will reproduce the native residual-VQ rate-distortion frontier with fewer actual bytes than independent vector codebooks; generic coefficient tables test whether savings are just deterministic codebook generation.",
+  "physical_object": "one shared 16D two-vector basis used by all residual stages",
+  "mirror_coordinate": "per-target discrete phase index at each residual stage plus stage plane/scale metadata",
+  "logical_multiplicity": "128 target functions represented as sums of 1, 2 or 4 quantized residual views",
+  "prior_art_refs": [
+    92,
+    91,
+    93
+  ],
+  "controls": [
+    "dense 16D target vectors",
+    "native learned residual VQ with independently stored full-vector codebooks",
+    "generic shared-plane residual VQ with explicit Cartesian coefficient codebooks",
+    "Mirror residual VQ with one shared basis and deterministic uniform phase grids"
+  ],
+  "task": {
+    "type": "synthetic 16D function vector rate-distortion",
+    "targets_per_bank": 128,
+    "teacher": "four orthogonal 2D residual planes with amplitudes [1,.5,.25,.125] and independent uniform phases",
+    "sweeps": {
+      "stages": [
+        1,
+        2,
+        4
+      ],
+      "K": [
+        4,
+        8,
+        16,
+        32
+      ]
+    },
+    "metrics": [
+      "normalized reconstruction error",
+      "actual serialized total bytes and bytes/function",
+      "number of used codes per stage",
+      "per-stage ablation error",
+      "decoder and encoding compute"
+    ]
+  },
+  "development": {
+    "worlds": [
+      48200,
+      48201
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "native_training": "fit native full-vector RVQ codebooks on development functions only; fixed Lloyd updates/initialization",
+    "allowed": "predeclared stage and K sweep; no fresh-dependent codebook training"
+  },
+  "fresh": {
+    "worlds": [
+      48210,
+      48211,
+      48212
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "native full-vector residual codebooks or shared basis/plane metadata and stage scales",
+      "all target code indices",
+      "generic coefficient codebook tables",
+      "metadata and reconstruction state"
+    ],
+    "amortization_N": [
+      128
+    ]
+  },
+  "compute": {
+    "report_codebook_training_updates": true,
+    "report_code_assignment_MAC": true,
+    "report_decode_MAC_per_function": true,
+    "report_measured_encode_and_decode_latency": true
+  },
+  "success_gate": "For every fresh world at a matched rate point, Mirror normalized error <=1.05x native RVQ and payload <=80% native RVQ; each used stage must lower held-out error under ablation. Compare generic coefficient-table frontier for Mirror-specific value.",
+  "failure_gate": "Mirror misses matched rate-distortion/byte gates, stages fail to add useful held-out functions, or generic coefficient control matches the Mirror frontier at equal/fewer bytes.",
+  "boundaries": [
+    "Synthetic product-of-circles residual functions with known orthogonal planes, not natural model edits or learned task functions.",
+    "Native RVQ codebooks train on development data only; fresh targets only assign codes and measure.",
+    "Logical code combinations are not counted as capacity; only measured quality, bytes, code usage and stage ablations matter."
+  ]
+}
