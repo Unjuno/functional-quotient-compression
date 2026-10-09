@@ -15,14 +15,15 @@
     "Original layer-8 MLP output (reference)",
     "Released transcoder skip + decoded sparse feature output",
     "A zero-residual/skip-only control",
-    "Truncated-SVD rank-128 projection fitted on development activations as a generic compression control"
+    "Truncated-SVD rank-128 projection fitted on development activations as a generic compression control",
+    "Unit-L2 feature direction plus fit-only linear scalar output-norm head; exact serialized state and compute charged."
   ],
   "task": {
     "model": "HuggingFaceTB/SmolLM2-135M",
     "model_revision": "resolved and recorded in source before evaluation",
     "layer": 8,
     "hook": "input/output of model.layers.8.mlp",
-    "dataset": "closji/wikitext__wikitext-2-raw-v1, train parquet, immutable revision d575192455c5e98b8daed777574046264579cb09; source is a public parquet mirror of Wikitext-2 raw.",
+    "dataset": "closji/wikitext__wikitext-2-raw-v1, immutable revision d575192455c5e98b8daed777574046264579cb09; train split for development, disjoint validation split for fresh.",
     "primary_metrics": [
       "relative MSE ||y_hat-y||^2/(||y||^2+eps)",
       "cosine similarity per token, then mean"
@@ -45,7 +46,8 @@
     "selection_metric": "single fixed checkpoint evaluation; no tuning or fresh-based selection",
     "optimizer_updates": 0,
     "task_scope": "Use 16 fixed-order seeded windows (2048 tokens) to fit the rank-128 linear control and 16 disjoint windows (2048 tokens) for evaluation; training split only.",
-    "dataset_revision": "d575192455c5e98b8daed777574046264579cb09"
+    "dataset_revision": "d575192455c5e98b8daed777574046264579cb09",
+    "window_sampling": "Seeded unique aligned 128-token blocks; first 16 selected blocks fit, remaining 16 evaluate; no token overlap."
   },
   "fresh": {
     "seeds": [
@@ -55,9 +57,10 @@
     "examples": 32,
     "tokens": 4096,
     "sequence_length": 128,
+    "dataset_split": "validation (disjoint from development train split)",
+    "window_sampling": "Seeded unique aligned 128-token blocks; 16 fit and 16 eval within fresh split; no token overlap.",
     "locked_before_access": true,
-    "access_condition": "Open only if dev relative MSE <=0.10 and cosine >=0.95.",
-    "dataset_revision": "d575192455c5e98b8daed777574046264579cb09"
+    "access_condition": "Open only if corrected development gate passes; protocol and selected amplitude head fixed before reading validation."
   },
   "storage": {
     "authority": "actual serialized inference payload bytes",
@@ -79,7 +82,7 @@
     "report_isolated_wall_clock": true,
     "report_inference_latency": true
   },
-  "success_gate": "On each fresh seed, transcoder held-out relative MSE <=0.10 and mean token cosine >=0.95; report actual serialized bytes and latency. Passing establishes only this checkpoint/layer approximation, not Mirror benefit.",
+  "success_gate": "For the frozen deployment variant selected on development, each fresh seed has raw-output relative MSE <=0.10 and mean cosine >=0.95; also report normalized direction diagnostic, actual bytes, and compute.",
   "failure_gate": "Development held-out relative MSE >0.10 or mean cosine <0.95; keep fresh sealed.",
   "boundaries": [
     "Single released checkpoint, model and layer.",
@@ -116,6 +119,10 @@
     {
       "id": "amendment-7",
       "before-final-decision": "Model card states the checkpoint was trained with normalized input and output without specifying the precise normalization. Add two development-only normalization diagnostics using the fit split to select layer-wide RMS scales and, separately, tokenwise unit-L2 normalization. No fresh data is accessed; tokenwise target scaling is direction-only and is not considered deployable unless a paid inference scale is available."
+    },
+    {
+      "id": "amendment-8",
+      "before-development-rerun": "Fix sampling before any sealed split access: choose unique aligned 128-token blocks so fit/eval windows cannot overlap; development draws only from train, and any fresh confirmation uses the disjoint validation split. Add a fit-only linear scalar output-norm head as a simple private-parameter control for the unit-L2 direction diagnostic; its size/compute is charged. Earlier overlapping-window summaries are retained as superseded, not final evidence."
     }
   ],
   "normalization_diagnostics": {

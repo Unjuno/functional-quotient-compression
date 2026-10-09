@@ -13,7 +13,7 @@ from safetensors import safe_open
 from safetensors.torch import save_file
 from huggingface_hub import hf_hub_download, model_info
 from datasets import load_dataset
-from transcoder_ops import forward as transcoder_forward
+from transcoder_ops import forward as transcoder_forward, nonoverlap_starts
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 MODEL='HuggingFaceTB/SmolLM2-135M'
@@ -36,7 +36,8 @@ def main():
  model=AutoModelForCausalLM.from_pretrained(MODEL,revision=model_rev,torch_dtype=torch.float32).eval()
  tok=AutoTokenizer.from_pretrained(MODEL,revision=model_rev)
  # Stream a deterministic prefix of the pinned training split only. Fresh uses distinct seed offset.
- ds=load_dataset('closji/wikitext__wikitext-2-raw-v1',split='train',streaming=True,revision='d575192455c5e98b8daed777574046264579cb09')
+ dataset_split='train' if a.split=='dev' else 'validation'
+ ds=load_dataset('closji/wikitext__wikitext-2-raw-v1',split=dataset_split,streaming=True,revision='d575192455c5e98b8daed777574046264579cb09')
  texts=[]
  for row in ds:
   t=row['text'].strip()
@@ -45,9 +46,8 @@ def main():
  joined='\n'.join(texts)
  enc=tok(joined,return_tensors='pt',truncation=False).input_ids[0]
  # Seeded offset into the same training token stream, enough tokens for non-overlapping sequences.
- span=min(a.max_tokens, len(enc)-128)
- rng=np.random.default_rng(a.seed)
- starts=np.sort(rng.choice(max(1,len(enc)-128),size=max(1,min(a.examples,span//128)),replace=False))
+ starts=nonoverlap_starts(len(enc),a.examples,a.seed,128)
+ if len(starts)<a.examples: raise RuntimeError(f'need {a.examples} nonoverlapping windows, got {len(starts)} from {len(enc)} tokens')
  chunks=torch.stack([enc[int(s):int(s)+128] for s in starts])
  block=model.model.layers[LAYER].mlp
  captured={}
@@ -104,17 +104,29 @@ def main():
   yhat_global,_,_=transcoder_forward(x/x_rms,w,K); yhat_global=yhat_global*y_rms
   x_unit=x/(x.norm(dim=-1,keepdim=True)+1e-12); y_unit=y/(y.norm(dim=-1,keepdim=True)+1e-12)
   yhat_unit,_,_=transcoder_forward(x_unit,w,K)
+ head_mean=x_fit.mean(0); head_std=x_fit.std(0,unbiased=False).clamp_min(1e-6)
+ xfit_std=(x_fit-head_mean)/head_std; xeval_std=(x-head_mean)/head_std
+ xfit_aug=torch.cat([xfit_std,torch.ones((len(xfit_std),1))],dim=1); xeval_aug=torch.cat([xeval_std,torch.ones((len(xeval_std),1))],dim=1)
+ y_norm_fit=y_fit.norm(dim=-1)
+ gram=xfit_aug.T@xfit_aug; reg=torch.eye(gram.shape[0]); reg[-1,-1]=0.0
+ norm_head=torch.linalg.solve(gram+1e-3*reg,xfit_aug.T@y_norm_fit)
+ with torch.inference_mode():
+  direction=yhat_unit/(yhat_unit.norm(dim=-1,keepdim=True)+1e-12)
+  predicted_norm=(xeval_aug@norm_head).clamp_min(1e-8)
+  yhat_direction_norm=direction*predicted_norm[:,None]
  # Serialize each method's exact inference state; charge its own code/state and config bytes.
  payload=out/'transcoder.safetensors'; save_file(w,str(payload))
  skip_payload=out/'skip_only.safetensors'; save_file({'W_skip':w['W_skip']},str(skip_payload))
  norm_payload=out/'global_rms_scales.safetensors'; save_file({'input_rms':x_rms.reshape(1),'output_rms':y_rms.reshape(1)},str(norm_payload))
+ head_payload=out/'direction_norm_head.safetensors'; save_file({'input_mean':head_mean.contiguous(),'input_std':head_std.contiguous(),'norm_head':norm_head.contiguous()},str(head_payload))
  rank_payload=out/'rank128.safetensors'; save_file({'left':left.contiguous(),'right':right.contiguous(),'bias':bias.contiguous()},str(rank_payload))
  cfg=json.loads(Path(cfg_path).read_text()); (out/'config.json').write_text(json.dumps(cfg,sort_keys=True,separators=(',',':'))+'\n')
  cfg_bytes=(out/'config.json').stat().st_size; payload_bytes=payload.stat().st_size
+ (out/'direction_norm_head.json').write_text('{"kind":"unit_l2_transcoder_plus_fit_linear_norm_head","rank":1,"input_dim":576}\n')
  (out/'global_rms_scales.json').write_text('{"kind":"fit_global_rms_normalized_transcoder","input_dim":576}\n')
  (out/'skip_only.json').write_text('{"kind":"linear_skip","input_dim":576}\n'); (out/'rank128.json').write_text('{"kind":"rank128_affine","rank":128}\n')
- skip_bytes=skip_payload.stat().st_size+(out/'skip_only.json').stat().st_size; rank_bytes=rank_payload.stat().st_size+(out/'rank128.json').stat().st_size; norm_bytes=payload_bytes+cfg_bytes+norm_payload.stat().st_size+(out/'global_rms_scales.json').stat().st_size
- summary={'experiment_id':'MA-533','split':a.split,'seed':a.seed,'n_sequences':len(chunks),'tokens':int(len(chunks)*128),'activation_vectors':int(x.shape[0]),'fit_vectors':int(x_fit.shape[0]),'model':MODEL,'model_revision':model_rev,'model_repo_files':{},'transcoder_repo':TC,'transcoder_revision':TC_REV,'transcoder_sha256':sha(tc_path),'transcoder_file_bytes':payload_bytes,'transcoder_payload_sha256':sha(payload),'config_bytes':cfg_bytes,'transcoder_incremental_bytes':payload_bytes+cfg_bytes,'active_nonzeros_per_vector':int(K),'optimizer_updates':0,'data':'closji/wikitext__wikitext-2-raw-v1 train parquet, revision d575192455c5e98b8daed777574046264579cb09','input_tokens_sha256':hashlib.sha256(chunks.numpy().tobytes()).hexdigest(),'full_model_capture_wall_seconds':wall,'native_dense_mlp_wall_seconds':dense_layer_wall,'transcoder_encode_decode_wall_seconds':transcoder_wall,'rank128_svd_fit_wall_seconds':svd_wall,'rank128_inference_wall_seconds':rank_inference_wall,'skip_only_inference_wall_seconds':skip_inference_wall,'compute_proxy':{'vectors':int(x.shape[0]),'transcoder_encoder_dense_macs':int(x.shape[0]*w['encoder.weight'].numel()),'transcoder_decoder_sparse_macs':int(x.shape[0]*K*x.shape[-1]),'transcoder_skip_macs':int(x.shape[0]*w['W_skip'].numel()),'rank128_linear_macs':int(x.shape[0]*2*rank*x.shape[-1]),'native_mlp_linear_macs':int(x.shape[0]*sum(p.numel() for n,p in block.named_parameters() if n.endswith('weight')))},'methods':{'skip_only':metrics(skip),'transcoder_top128':metrics(yhat),'rank128_cross_covariance_svd':metrics(low),'transcoder_global_rms_normalized':metrics(yhat_global),'transcoder_token_l2_direction_only':metrics(yhat_unit,y_unit)},'normalization_scales':{'fit_input_rms':float(x_rms),'fit_output_rms':float(y_rms),'global_rms_incremental_bytes':norm_bytes,'token_l2_variant_is_deployable':False}}
+ skip_bytes=skip_payload.stat().st_size+(out/'skip_only.json').stat().st_size; rank_bytes=rank_payload.stat().st_size+(out/'rank128.json').stat().st_size; norm_bytes=payload_bytes+cfg_bytes+norm_payload.stat().st_size+(out/'global_rms_scales.json').stat().st_size; head_bytes=payload_bytes+cfg_bytes+head_payload.stat().st_size+(out/'direction_norm_head.json').stat().st_size
+ summary={'experiment_id':'MA-533','split':a.split,'seed':a.seed,'n_sequences':len(chunks),'tokens':int(len(chunks)*128),'activation_vectors':int(x.shape[0]),'fit_vectors':int(x_fit.shape[0]),'model':MODEL,'model_revision':model_rev,'model_repo_files':{},'transcoder_repo':TC,'transcoder_revision':TC_REV,'transcoder_sha256':sha(tc_path),'transcoder_file_bytes':payload_bytes,'transcoder_payload_sha256':sha(payload),'config_bytes':cfg_bytes,'transcoder_incremental_bytes':payload_bytes+cfg_bytes,'active_nonzeros_per_vector':int(K),'optimizer_updates':0,'data':f'closji/wikitext__wikitext-2-raw-v1 {dataset_split} parquet, revision d575192455c5e98b8daed777574046264579cb09','input_tokens_sha256':hashlib.sha256(chunks.numpy().tobytes()).hexdigest(),'full_model_capture_wall_seconds':wall,'native_dense_mlp_wall_seconds':dense_layer_wall,'transcoder_encode_decode_wall_seconds':transcoder_wall,'rank128_svd_fit_wall_seconds':svd_wall,'rank128_inference_wall_seconds':rank_inference_wall,'skip_only_inference_wall_seconds':skip_inference_wall,'compute_proxy':{'vectors':int(x.shape[0]),'transcoder_encoder_dense_macs':int(x.shape[0]*w['encoder.weight'].numel()),'transcoder_decoder_sparse_macs':int(x.shape[0]*K*x.shape[-1]),'transcoder_skip_macs':int(x.shape[0]*w['W_skip'].numel()),'rank128_linear_macs':int(x.shape[0]*2*rank*x.shape[-1]),'native_mlp_linear_macs':int(x.shape[0]*sum(p.numel() for n,p in block.named_parameters() if n.endswith('weight')))},'methods':{'skip_only':metrics(skip),'transcoder_top128':metrics(yhat),'rank128_cross_covariance_svd':metrics(low),'transcoder_global_rms_normalized':metrics(yhat_global),'transcoder_token_l2_direction_only':metrics(yhat_unit,y_unit),'transcoder_direction_plus_fit_norm_head':metrics(yhat_direction_norm)},'normalization_scales':{'fit_input_rms':float(x_rms),'fit_output_rms':float(y_rms),'global_rms_incremental_bytes':norm_bytes,'global_rms_incremental_bytes':norm_bytes,'token_l2_variant_is_deployable':False,'fit_norm_head_incremental_bytes':head_bytes,'fit_norm_head_added_parameters':int(norm_head.numel()+head_mean.numel()+head_std.numel())}}
  # Hash revision manifests to enable exact provenance; actual model payload bytes are independently fetched and charged.
  from huggingface_hub import snapshot_download
  snap=snapshot_download(MODEL,revision=model_rev,allow_patterns=['*.safetensors','*.bin','*.json'])
@@ -132,8 +144,8 @@ def main():
  deploy_base_bytes=stripped_bytes+other_bytes
  summary['model_base_bytes']=model_bytes; summary['model_without_layer8_mlp_bytes']=deploy_base_bytes; summary['removed_native_mlp_tensors']={k:{'shape':list(v.shape),'dtype':str(v.dtype),'bytes':v.numel()*v.element_size()} for k,v in removed.items()}; summary['model_without_layer8_mlp_safetensors_bytes']=stripped_bytes; summary['model_without_layer8_mlp_safetensors_sha256']=stripped_sha; summary['model_files']=files
  summary['transcoder_standalone_total_bytes']=deploy_base_bytes+payload_bytes+cfg_bytes
- summary['method_incremental_bytes']={'native_mlp':0,'skip_only':skip_bytes,'transcoder_top128':payload_bytes+cfg_bytes,'rank128_cross_covariance_svd':rank_bytes}
- summary['method_standalone_bytes']={'native_mlp':model_bytes,'skip_only':deploy_base_bytes+skip_bytes,'transcoder_top128':deploy_base_bytes+payload_bytes+cfg_bytes,'rank128_cross_covariance_svd':deploy_base_bytes+rank_bytes}
+ summary['method_incremental_bytes']={'native_mlp':0,'skip_only':skip_bytes,'transcoder_top128':payload_bytes+cfg_bytes,'rank128_cross_covariance_svd':rank_bytes,'transcoder_direction_plus_fit_norm_head':head_bytes}
+ summary['method_standalone_bytes']={'native_mlp':model_bytes,'skip_only':deploy_base_bytes+skip_bytes,'transcoder_top128':deploy_base_bytes+payload_bytes+cfg_bytes,'rank128_cross_covariance_svd':deploy_base_bytes+rank_bytes,'transcoder_direction_plus_fit_norm_head':deploy_base_bytes+head_bytes}
  summary['method_payload_sha256']={'skip_only':sha(skip_payload),'transcoder_top128':sha(payload),'rank128_cross_covariance_svd':sha(rank_payload)}
  (out/'summary.json').write_text(json.dumps(summary,indent=2)+'\n')
  print(json.dumps(summary,indent=2))
