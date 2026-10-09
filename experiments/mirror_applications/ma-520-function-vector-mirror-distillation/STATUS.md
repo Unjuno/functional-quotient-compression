@@ -4,7 +4,7 @@
 - Branch: `research/ma-520-function-vector-mirror-distillation-20261009`
 - Model: pinned GPT-2 revision `607a30d783dfa663caf39e06633721c8d4cfcd7e`, CPU float32
 - Fresh: worlds 52010–52012 × seeds 0–2 (9 banks; 45 rows)
-- Verification: 2 tests pass; payload byte/hash replay passes
+- Result commit: `3d7c2ff7`; verification: 2 tests pass; payload byte/hash replay passes
 
 ## H / T / D / C / U
 
