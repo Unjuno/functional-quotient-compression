@@ -6,11 +6,11 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (110 completed; 520 UNTESTED)
+- P0: **630** (111 completed; 519 UNTESTED)
 - P1: **422** (15 completed; 407 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1028 UNTESTED, 46 PROMISING, 81 FAIL**
-- 75 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
+- Current MA statuses: **1027 UNTESTED, 46 PROMISING, 82 FAIL**
+- 76 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
 - Thirteenth literature sweep added MA-996..1045 (50 UNTESTED; 40 P0/10 P1) and PA296..PA325. IDs MA-1000+ use four digits; consult `check_registry_integrity.py`. No new experiment results.
@@ -146,6 +146,8 @@ MA-565 FAIL: surviving-layer scalar role gates barely recover shallow residual-s
 
 MA-567 FAIL: same fixed compute routing produced exact Mirror/direct alias; only 2.5% byte reduction against independent roles. Vanilla MoD is smaller but loses quality. Fresh sealed.
 
+MA-569 FAIL: step-angle Mirror reconstructs aligned held-out recurrence functions in 1207B vs 2510B untied, but direct time-angle code is identical. Fresh sealed.
+
 ## Active experiment
 
 MA-517, MA-257, MA-261, MA-265 and MA-266 are FAIL; MA-255 and MA-260 are NOT ESTABLISHED due implementation defects; MA-258 is PROMISING only on its aligned synthetic orbit. Next is MA-271.
@@ -155,7 +157,7 @@ The LoReFT representation-view family remains temporarily deferred for redesign 
 ## Verified status index
 
 - **PROMISING (29):** MA-001, MA-002, MA-003, MA-004, MA-005, MA-006, MA-007, MA-008, MA-012, MA-014, MA-015, MA-041, MA-076, MA-079, MA-111, MA-121, MA-156, MA-160, MA-171, MA-173, MA-181, MA-189, MA-241, MA-244, MA-245, MA-249, MA-250, MA-251, MA-691.
-- **FAIL (18):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-553, MA-554, MA-556, MA-557, MA-558, MA-565, MA-567.
+- **FAIL (82):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-553, MA-554, MA-556, MA-557, MA-558, MA-565, MA-567, MA-569.
 
 All per-ID evidence is retained in the local experiment directories and in `CLAIM_LEDGER.csv`. Consult [the evidence integration audit](../../docs/phase2/MIRROR_MA_EVIDENCE_INTEGRATION_2026-10-08.md) for linked reports, verifications, provenance and claim boundaries.
 

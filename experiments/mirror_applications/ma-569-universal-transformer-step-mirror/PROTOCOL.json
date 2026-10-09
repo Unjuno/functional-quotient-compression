@@ -1,0 +1,73 @@
+{
+  "experiment_id": "MA-569",
+  "title": "Universal Transformer step Mirror code",
+  "status": "DEVELOPMENT_ONLY_FAIL_MIRROR_SPECIFIC",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY/COMPUTE/DEPTH",
+  "base_commit": "dc505c56",
+  "hypothesis": "A compact step coordinate differentiates a recurrent shared block across logical depth and generalizes to held-out steps with lower storage than untied blocks and better frontier than ordinary step codes.",
+  "physical_object": "one shared 8x8 recurrent transition",
+  "mirror_coordinate": "smooth step-indexed Givens angle",
+  "logical_multiplicity": "eight recurrent step functions, odd steps held out",
+  "prior_art_refs": [
+    "PA123"
+  ],
+  "controls": [
+    "hard tied transition",
+    "Mirror Givens step coordinate",
+    "direct scalar time embedding",
+    "per-step rank-1 residual",
+    "untied per-step matrices"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      56901,
+      56902
+    ],
+    "steps": 8,
+    "dimension": 8,
+    "train_steps": [
+      0,
+      2,
+      4,
+      6
+    ],
+    "heldout_steps": [
+      1,
+      3,
+      5,
+      7
+    ],
+    "probes_per_step": 512,
+    "selection_metric": "held-out step output nMSE, distinct functions, actual bytes"
+  },
+  "fresh": {
+    "worlds_or_seeds": [],
+    "locked_before_access": true,
+    "open_only_if_development_passes": false,
+    "reason": "Direct angle/time code is matched specificity control."
+  },
+  "storage": {
+    "authority": "actual deterministic NPZ bytes",
+    "paid_objects": [
+      "shared transition",
+      "Givens basis",
+      "step codes",
+      "LoRA residuals",
+      "untied transitions",
+      "metadata"
+    ]
+  },
+  "compute": {
+    "report_probes": true,
+    "report_optimizer_updates": true,
+    "report_recurrent_MACs": true,
+    "report_wall_time": true
+  },
+  "success_gate": "Held-out step nMSE <=1e-4; >=20% fewer bytes than untied; >=10% fewer than direct time/LoRA controls.",
+  "failure_gate": "Direct step code matches Mirror or held-out quality threshold fails.",
+  "boundaries": [
+    "aligned linear recurrence",
+    "no Transformer training or algorithmic generalization claim",
+    "no adaptive halting"
+  ]
+}
