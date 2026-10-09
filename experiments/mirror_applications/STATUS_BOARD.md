@@ -30,11 +30,11 @@ Reason:
 - MA-528/530 are deferred until the SAE alignment premise is redesigned;
 - MA-533 is now a scoped development FAIL: the pinned layer-8 transcoder raw MSE is 0.806/cosine 0.738; token-L2 direction is strong but non-deployable, and a fit-only output-norm head still has raw MSE 0.149. Rank-128 affine MSE is 0.817 at 592 KB vs 341 MB transcoder state; the transcoder uses 16.2x native MLP MACs. MA-534 tests a separate task-level sparse-role hypothesis with dense MLP, plain sparse gates and byte-near low-rank controls.
 
-MA-534 controls and protocol must be frozen on its dedicated branch before development or fresh data access.
+MA-534 protocol is frozen on dedicated branch `research/ma-534-transcoder-logical-mlp-20261009` at `be4176ee`; development is next and validation stays sealed.
 
 ## Active experiment
 
-MA-527 is a verified development FAIL; no fresh-seed metrics were computed and task IDs 14–15 cannot be reused as audit identities. MA-533 is a verified development FAIL with fresh still sealed. MA-534 is next to protocol-freeze.
+MA-527 is a verified development FAIL; no fresh-seed metrics were computed and task IDs 14–15 cannot be reused as audit identities. MA-533 is a verified development FAIL with fresh still sealed. MA-534 protocol is frozen; development is next, validation remains sealed.
 
 ## Verified status index
 

@@ -1,6 +1,6 @@
 # Worker queue
 
-**Operational pointer (2026-10-09): MA-534 next.** MA-526/527 failed on the pretrained SAE-feature alignment assumption; pause MA-528/530 pending redesign (`docs/phase2/SAE_FEATURE_FAMILY_REDESIGN_2026-10-09.md`). MA-533 also failed its scoped layer-8 transcoder fidelity gate (report: `ma-533-transcoder-feature-experts/README.md`); fresh stayed sealed. MA-534 tests a separate downstream task-level sparse-role hypothesis and needs its own frozen controls/protocol.
+**Operational pointer (2026-10-09): MA-534 next.** MA-526/527 failed on the pretrained SAE-feature alignment assumption; pause MA-528/530 pending redesign (`docs/phase2/SAE_FEATURE_FAMILY_REDESIGN_2026-10-09.md`). MA-533 also failed its scoped layer-8 transcoder fidelity gate (report: `ma-533-transcoder-feature-experts/README.md`); fresh stayed sealed. MA-534 tests a separate role-conditioned sparse-feature hypothesis. Its protocol is frozen at `be4176ee`; development can run, validation remains sealed.
 
 The queue is derived from `IDEA_REGISTRY.csv`. The registry is authoritative.
 
