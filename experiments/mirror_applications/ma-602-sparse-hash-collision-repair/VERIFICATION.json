@@ -1,0 +1,45 @@
+{
+  "development_seeds": [
+    60201,
+    60202
+  ],
+  "experiment_id": "MA-602",
+  "fresh_artifacts_present": false,
+  "fresh_seeds_accessed": [],
+  "gate_decision": "FAIL: collision+Givens misses +1pp versus native hash2048 and random exceptions; payload 34,995/34,991 B exceeds hash4096 at 13,791 B; no-view residual is within 0.5pp.",
+  "metric_replay_checked": true,
+  "payloads_replayed": 16,
+  "protocol_sha256": "291fb4ae7e13c8865d471d108de92cef6f17946639c06d4c90b1a9b6ddc5b3f9",
+  "results": {
+    "60201": {
+      "collision_givens_accuracy": 0.9822222222222222,
+      "collision_givens_bytes": 34995,
+      "duplicate_exception_count": 6181,
+      "eight_payloads_byte_exact": true,
+      "hash2048_accuracy": 0.98,
+      "hash4096_accuracy": 0.98,
+      "hash4096_bytes": 13791,
+      "no_view_accuracy": 0.9777777777777777,
+      "random_givens_accuracy": 0.9844444444444445
+    },
+    "60202": {
+      "collision_givens_accuracy": 0.98,
+      "collision_givens_bytes": 34991,
+      "duplicate_exception_count": 6180,
+      "eight_payloads_byte_exact": true,
+      "hash2048_accuracy": 0.98,
+      "hash4096_accuracy": 0.9777777777777777,
+      "hash4096_bytes": 13791,
+      "no_view_accuracy": 0.98,
+      "random_givens_accuracy": 0.98
+    }
+  },
+  "serialization_roundtrip_checked": true,
+  "source_sha256": "73c6ca7ce63bdd23437dc8f1bd7f3f6ef62fc10046673b598ac96cc1c5dc78a0",
+  "status": "FAIL",
+  "tests": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 python -m pytest -q experiments/mirror_applications/ma-602-sparse-hash-collision-repair/tests",
+    "failed": 0,
+    "passed": 3
+  }
+}

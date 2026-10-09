@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (35 completed; 595 UNTESTED)
-- P1: **422** (12 completed; 410 UNTESTED)
+- P0: **630** (38 completed; 592 UNTESTED)
+- P1: **422** (15 completed; 407 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1108 UNTESTED, 29 PROMISING, 18 FAIL**
+- Current MA statuses: **1102 UNTESTED, 29 PROMISING, 24 FAIL**
 - 47 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -23,17 +23,12 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-255 — Mirror context superposition for task models (P0; PA16)**
+**MA-603 — CondConv-style Mirror weight synthesis (P0; PA121)**
 
-Reason:
-- all previously locked MA-241/244/245/247–251/253 and subsequent old-chain P0 screens have completed;
-- the original P0 cross-over queue is exhausted among checked candidates;
-- MA-255 is the first untested P0 in the earlier high-information literature cross-over queue;
-- direct Parameter Superposition prior art gives a strong nearest control for insertion of the extra Mirror parameter `m`.
+MA-597–599 are verified FAILs for learned hash-bucket Views; unchanged variants are paused. MA-600 is a verified FAIL: hashed adapter views lose badly to private rank-2 LoRA. MA-601 is a verified FAIL: attention head diversity rises, but teacher CE is >1 nat worse than independent heads, worse than MQA/simple controls, and above the salted byte cap. MA-602 is a verified FAIL: repairing all duplicates requires 75.4% private entries, costs 34,995 B versus 13,791 B for hash4096, and random exception placement matches or beats it. Fresh remained sealed. Next MA-603 studies input-dependent CondConv-style weight synthesis, a different mechanism.
+Required controls for MA-603: native CondConv expert-basis mixing, shared static basis, direct input-conditioned linear coefficients, and independent full experts. Count generator and router state and measure active inference compute.
 
-Required controls: native Parameter Superposition, naive/shared task-code basis, matched byte-near low-rank or VeRA-style modulation, independent-model upper reference where practical. Do not claim the superposition concept itself as a Mirror invention.
-
-If blocked by a documented reproducibility or harness issue, record it and resume at MA-260 (BatchEnsemble), then MA-261/265/268 in the registered literature priority sequence. Do not jump to P1/novelty-picked topics before P0.
+If MA-603 is executable on CPU, preregister its conditions and proceed; do not access fresh worlds after a development gate miss.
 
 ## Active experiment
 

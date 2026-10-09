@@ -457,3 +457,8 @@ A worker may batch implementation work across a family, but scientific status is
 ## Stop rule
 
 If two consecutive candidates in a family fail for the same demonstrated structural reason, stop that family and write a family diagnostic before continuing.
+
+
+## MA-602 result and handoff — 2026-10-09
+
+MA-602 is a verified FAIL on `research/ma-602-sparse-hash-collision-repair-20261009`: collision-selected private values cover 6,181/6,180 connections (75.4%) and collision+Givens costs 34,995/34,991 B versus hash4096 at 13,791 B; accuracy misses +1pp versus hash2048/random same-count exceptions. No-view repair matches within .5pp, so the View contribution is not established. Fresh sealed; 16/16 payloads replay exact. Next P0: MA-603 CondConv-style Mirror weight synthesis.
