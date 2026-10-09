@@ -1,6 +1,6 @@
 # MA-545 — Function-vector activation MoE without weight experts
 
-Status: SCREENING; frozen protocol, no development metrics yet.
+Status: **FAIL** for Mirror-specific attribution (frozen development and three fresh seeds completed).
 
 ## H — Falsifiable hypothesis
 
@@ -35,3 +35,29 @@ Mirror attribution requires routed FV to beat the same-router output-bias expert
 ## C / U
 
 Strong counter-hypothesis: the vectors are ordinary residual biases, and routing is just task classification; the output-bias control reproduces the full function with identical state. Unconfirmed: open-ended generation, broader task families, longer contexts, modern larger models, learned/soft routing, and whether a shared nonlinear intervention basis beats native low-rank weight adapters.
+
+## Results and decision
+
+### H / T / D / C / U
+
+- **H:** Test whether 16 support-derived activation views plus a query-context router provide useful held-out relation behavior without 16 copies of layer-3 MLP weights, and whether that gain is specific to Mirror activation views rather than a native output-bias expert.
+- **T:** Frozen Pythia-70M, 16 relation tasks, 8 support + 4 router-calibration + 4 audit pairs per task, 2 development seeds and 3 sealed fresh split seeds. Compared no intervention, shared mean FV, oracle/task-routed top-1 and top-2 FVs, and algebraically matched oracle/same-router output-bias controls. The 16-copy MLP comparison is bytes-only, not a quality result.
+- **D:** **FAIL for Mirror-specific attribution.** Top-1 routing identified the task in 100% of calibration/audit queries and exactly matched the oracle FV's measured task-ranking outputs. But the native bias control matched the activation FV within the frozen 0.01 numerical tolerance on all five seeds. Top-1 accuracy fell relative to no intervention in all five seeds, while mean gold log-probability improved by 3.39–3.65 nats on every fresh seed. Top-2 and shared-mean variants did not reverse the attribution result.
+- **C:** The vector is simply a position-gated residual/output bias, and the router is a task classifier; the activation-space parameterization adds no distinct function beyond the native bias control. Improved gold likelihood alongside lower exact-choice accuracy also shows that likelihood gain does not imply better decisions here.
+- **U:** This is a small fixed relation-ranking screen. It does not establish open-ended generation, broader task transfer, larger-model effects, or learned routing. Per-method latency is not isolated; only complete seven-method evaluation wall time and extraction wall time are reported.
+
+### Facts
+
+- Across five seeds, query-context top-1 router task accuracy and top-2 task inclusion were both 1.0. Routed top-1 FV metrics exactly equal oracle FV metrics.
+- Fresh mean held-out accuracy: no intervention **0.4063**; routed/oracle FV and matched bias **0.3750**; top-2 FV **0.3802**; shared mean FV **0.4063**. Accuracy fell by 1.6–4.7 percentage points for routed top-1 FVs on every fresh seed.
+- Fresh mean gold log-probability: no intervention **−10.4791**; routed/oracle FV and matched bias **−6.9884**; top-2 FV **−7.0791**; shared mean FV **−8.6904**. Routed top-1 FV improved gold log-probability by 3.43–3.65 nats per seed.
+- On each fresh seed FV vs same-router bias maximum candidate-score difference was 0.00143–0.00301, within the preregistered 0.01 tolerance. Their serialized state differs by 4 bytes (68,396 B FV, 68,400 B bias); the bias path is algebraically equivalent and does not need more compute.
+- Fresh FV payload is 68,396 B (full deployment 168,213,020 B including the common model/tokenizer); 16 full layer-3 MLP copies are 134,400,454 B incremental bytes, but are only a storage reference without trained quality. Support extraction used 256 FV forward calls and 64 router-calibration forward calls per seed. Total seven-method audit evaluation took 49.47–50.94 s; support extraction took 16.31–20.12 s on the recorded CPU setup. Each seed evaluated 64 audit prompts and made 448 model calls across methods. Each scored method costs 16 cosine dot products of width 512 for query routing plus a full candidate-batch model pass; top-2 also adds a second vector and softmax mixing. Per-method wall time is not isolated.
+
+### Interpretation
+
+Support-derived function vectors are useful for improving the assigned gold answer's likelihood on this fixture, with a compact stored intervention bank. This is an activation-intervention utility result, not a Mirror-specific gain: the direct native bias control reproduces it. The bank is substantially smaller than the bytes-only 16-MLP reference, but no quality comparison against trained independent MLP experts was made. Accuracy loss means the intervention cannot be described as an unqualified quality improvement.
+
+### Hypothesis for follow-up
+
+A nonlinear, input-dependent shared activation basis may escape the output-bias alias, but must beat matched native low-rank/adapter or gated-weight controls on actual payload bytes, compute and held-out task quality before being called Mirror-specific.

@@ -1,7 +1,7 @@
 {
   "experiment_id": "MA-545",
   "title": "Function-vector activation MoE without weight experts",
-  "status": "SCREENING",
+  "status": "FAIL",
   "evidence_lane": "FROZEN_LM_ACTIVATION_MOE/ROUTING/ACTUAL_BYTES/COMPUTE/NATIVE_ATTRIBUTION",
   "base_commit": "b71e64a9",
   "hypothesis": "On held-out in-context relation queries, a content router over support-extracted residual-stream function vectors will preserve most oracle-routed FV quality, with much smaller actual state than 16 full feed-forward expert copies. A same-router per-task output-bias expert is the cheapest weight-space/native control and must be included to test whether the apparent activation expert is only an ordinary bias update.",
@@ -88,6 +88,12 @@
       "before_measurement": true,
       "reason": "A read-only pinned-model operator check confirmed that equivalent activation-output and MLP-output bias hooks differ slightly from floating-point addition order.",
       "change": "Define the already intended native-attribution equality as max absolute candidate-score difference <=0.01; no task, model, methods, setting, quality gate, or fresh rule changed."
+    },
+    {
+      "id": "amendment-2",
+      "before_measurement": false,
+      "reason": "Post-run reporting amendment to record the frozen five-seed outcome, actual measured serialized payloads, complete evaluation wall times, status, and scope limitations without changing the protocol or any measured method.",
+      "change": "Added results summary and CSV rows, verified serialized artifact hashes and model hash, and recorded that per-method latency and trained independent-MLP quality were not measured. No data, settings, gates, or claims were changed."
     }
   ]
 }
