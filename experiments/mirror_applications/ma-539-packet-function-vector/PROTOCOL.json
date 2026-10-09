@@ -1,0 +1,106 @@
+{
+  "experiment_id": "MA-539",
+  "title": "Support-extracted function vector as a shared packet plan",
+  "status": "SCREENING",
+  "evidence_lane": "FUNCTION_VECTOR_EXTRACTION/PACKET_JOINT_QUALITY/GENERIC_LATENT_CONTROL/ACTUAL_BYTES/COMPUTE",
+  "base_commit": "c734cb35bd63897fb3b08192423178bb1c35bd0f",
+  "hypothesis": "On held-out inputs for 16 synthetic state-transition functions, a support-extracted 16-dimensional function vector broadcast to all four packet slots will preserve joint packet accuracy within 0.03 and token NLL within 0.05 of an equal-width learned generic packet latent, while using at least 10% fewer actual serialized inference bytes and outperforming independent per-slot function codes in valid-path rate.",
+  "physical_object": "One shared 2-layer MLP packet decoder and one support-pair encoder shared by all functions.",
+  "mirror_coordinate": "Mean 16-dimensional hidden function vector extracted from the eight support input-output examples for the selected function; the same vector is supplied to all four packet slots.",
+  "logical_multiplicity": "Sixteen support-adapted functions, each applied jointly to a four-input packet. Function identity is addressed by its support examples; no independent decoder weights are stored.",
+  "prior_art_refs": [
+    "PA99",
+    "PA10"
+  ],
+  "world": {
+    "functions_per_world": 16,
+    "states": 32,
+    "function_definition": "Each of 16 functions is an independently sampled permutation over 32 states. A packet applies one selected function to four distinct input states.",
+    "support_inputs_per_function": 8,
+    "query_inputs_per_function": 24,
+    "packet_slots": 4,
+    "dev_worlds": [
+      53901,
+      53902
+    ],
+    "fresh_worlds": [
+      53911,
+      53912,
+      53913
+    ],
+    "packet_sampling": "All 4-state query subsets and function IDs are generated from the world seed; no query input enters support encoding or training."
+  },
+  "model": {
+    "support_pair_encoder": "Shared MLP: concatenate learned 16d input-state and output-state embeddings, project to 16d tanh vector; average the eight support pair vectors to obtain one FV per function.",
+    "packet_decoder": "Shared MLP receives a learned 16d input-state embedding, the function code, and a learned 4-slot phase embedding; 2-layer hidden width 32, predicts one of 32 output states per slot.",
+    "generic_packet_latent_control": "Same decoder and 16d width; per-function latent vectors optimized directly on support packets, with no support-pair encoder.",
+    "ptp_control": "Same decoder with four independent per-slot function-code inputs; at inference, each slot receives the same function identity auxiliary, as in a PTP-style slot-addressed control. Charge the complete slot-code path and report repeated address bits per packet.",
+    "independent_upper": "Serialized direct function lookup table over all 16x32 input-state pairs; actual int8 mapping bytes plus metadata."
+  },
+  "controls": [
+    "No function code shared decoder",
+    "Support-extracted function vectors broadcast to all four slots (Mirror candidate)",
+    "Equal-width learned generic packet latent bank",
+    "PTP-style per-slot function auxiliaries",
+    "Independent function-table upper"
+  ],
+  "training": {
+    "optimizer": "AdamW",
+    "development_updates": [
+      800,
+      1200
+    ],
+    "batch_packets": 64,
+    "learning_rates": [
+      0.001,
+      0.003
+    ],
+    "selection": "Choose one common update count and LR minimizing mean held-out packet joint NLL for the Mirror candidate across both dev worlds; same selection applied to all methods. If candidate is not viable under explicit gate at either setting, select by candidate NLL only and classify FAIL; fresh remains sealed.",
+    "shared_rng": "Within each world and setting, methods receive identical generated support/query packets and minibatch stream."
+  },
+  "metrics": {
+    "primary": [
+      "joint packet exact accuracy",
+      "valid path rate",
+      "token NLL"
+    ],
+    "secondary": [
+      "token accuracy",
+      "actual serialized bytes including code extractor/code bank/decoder/metadata",
+      "packet address bits per example",
+      "optimizer updates",
+      "active MAC proxy",
+      "per-method fit/inference/total wall seconds"
+    ]
+  },
+  "gates": {
+    "PASS": "On both development worlds, FV is within 0.03 joint accuracy and 0.05 token NLL of generic latent, uses <=0.90x generic latent serialized payload, and is no worse than PTP in valid-path rate; deterministic replay exact.",
+    "FAIL": "Any quality, actual-byte, or native attribution gate fails.",
+    "NOT_ESTABLISHED": "Integrity, support/query isolation, deterministic replay, or payload accounting fails."
+  },
+  "storage": {
+    "authority": "Actual uncompressed NPZ bytes of complete deterministic inference state.",
+    "paid_objects": [
+      "shared packet decoder weights",
+      "support pair encoder weights for FV",
+      "all per-function extracted vectors or learned latent codes",
+      "state/phase embedding tables",
+      "serialized direct function table for upper",
+      "function and slot address metadata"
+    ]
+  },
+  "compute": {
+    "hardware": "CPU fixed 5 threads",
+    "report_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true
+  },
+  "boundaries": [
+    "Synthetic permutation functions only; no natural language result.",
+    "Function codes are support-derived and supplied to the packet decoder; routing/retrieval is not evaluated.",
+    "One four-slot shared-function packet does not establish arbitrary joint sequence modeling.",
+    "A function vector is not credited for code multiplicity; quality, bytes and valid-path controls determine the result.",
+    "Fresh worlds remain sealed unless all frozen gates pass on both development worlds."
+  ]
+}
