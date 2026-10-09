@@ -1,11 +1,222 @@
 {
   "experiment_id": "MA-393",
-  "status": "PROTOCOL_FROZEN_PRE_DEVELOPMENT",
-  "protocol_commit": "pending",
+  "status": "FAIL_DEVELOPMENT_STORAGE_GATE",
+  "protocol_commit": "4a06a30b",
+  "implementation_commit": "d07256bd",
+  "initial_implementation_commit": "19e041c7",
   "result_commit": "pending",
-  "tests": {"command": "", "passed": 0, "failed": 0},
-  "band_accounting": {"token_counts_checked": false, "total_tokens": 384},
-  "serialization": {"actual_bytes_measured": false, "roundtrip_checked": false},
-  "metric_replay": {"checked": false},
-  "fresh": {"worlds": [39311, 39312, 39313], "opened": false}
+  "tests": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 pytest -q -p no:cacheprovider experiments/mirror_applications/ma-393-adaptive-capacity-mirror-embedding/tests",
+    "passed": 4,
+    "failed": 0
+  },
+  "correctness_amendment": {
+    "changed_nested_projection_control": true,
+    "commit": "d07256bd",
+    "pre_correction_probe_retained": true,
+    "pre_correction_probe_in_analysis": false
+  },
+  "band_accounting": {
+    "token_counts_checked": true,
+    "total_tokens": 384,
+    "counts": [
+      64,
+      128,
+      192
+    ],
+    "dimensions": [
+      16,
+      8,
+      4
+    ],
+    "sampling_masses": [
+      0.7,
+      0.22,
+      0.08
+    ]
+  },
+  "serialization": {
+    "corrected_actual_npz_payloads": 8,
+    "all_sizes_checked": true,
+    "all_sha256_checked": true,
+    "all_payloads_reloaded_before_scoring": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "maximum_delta": 0.0,
+    "tolerance": 1e-07
+  },
+  "fresh": {
+    "worlds": [
+      39311,
+      39312,
+      39313
+    ],
+    "opened": false,
+    "reason": "Mirror payload was 60.43-60.46% of full embeddings, slightly above the frozen <=60% gate."
+  },
+  "development_worlds": [
+    {
+      "seed": 39301,
+      "payloads": [
+        {
+          "method": "full",
+          "bytes": 25512,
+          "sha256": "dd65f4de3ba2d46015a7412b4d720702eee4ca51ca4a8533062133368a337cd1",
+          "metrics": {
+            "uniform_embedding_nrmse": 0.011169145815074444,
+            "weighted_embedding_nrmse": 0.0037351700011640787,
+            "uniform_decoder_nll": 2.339371919631958,
+            "weighted_decoder_nll": 2.135455846786499,
+            "uniform_decoder_top1_accuracy": 0.9895833134651184,
+            "weighted_decoder_top1_accuracy": 0.9983332753181458,
+            "band_0_embedding_nrmse": 2.1892965378356166e-05,
+            "band_0_decoder_top1_accuracy": 1.0,
+            "band_1_embedding_nrmse": 0.005133187863975763,
+            "band_1_decoder_top1_accuracy": 1.0,
+            "band_2_embedding_nrmse": 0.02067602053284645,
+            "band_2_decoder_top1_accuracy": 0.9791666865348816
+          }
+        },
+        {
+          "method": "adaptive",
+          "bytes": 13830,
+          "sha256": "595ffb72449f43de3a27304d0a9ff141fc1f2c0b8ee4b22bb69e2422073b4017",
+          "metrics": {
+            "uniform_embedding_nrmse": 0.34567683935165405,
+            "weighted_embedding_nrmse": 0.15001724660396576,
+            "uniform_decoder_nll": 2.384922981262207,
+            "weighted_decoder_nll": 2.147386074066162,
+            "uniform_decoder_top1_accuracy": 0.7473958134651184,
+            "weighted_decoder_top1_accuracy": 0.9374479055404663,
+            "band_0_embedding_nrmse": 0.004449479281902313,
+            "band_0_decoder_top1_accuracy": 1.0,
+            "band_1_embedding_nrmse": 0.33469265699386597,
+            "band_1_decoder_top1_accuracy": 0.8671875,
+            "band_2_embedding_nrmse": 0.5368149876594543,
+            "band_2_decoder_top1_accuracy": 0.5833333134651184
+          }
+        },
+        {
+          "method": "byte_control",
+          "bytes": 15289,
+          "sha256": "6fd23ea045a3aa315933978e1e906c4fee0631dd32a2afc5e38274bc31814f97",
+          "metrics": {
+            "uniform_embedding_nrmse": 0.32109156250953674,
+            "weighted_embedding_nrmse": 0.12836329638957977,
+            "uniform_decoder_nll": 2.3837952613830566,
+            "weighted_decoder_nll": 2.146397590637207,
+            "uniform_decoder_top1_accuracy": 0.7239583134651184,
+            "weighted_decoder_top1_accuracy": 0.9297915697097778,
+            "band_0_embedding_nrmse": 0.001163903740234673,
+            "band_0_decoder_top1_accuracy": 1.0,
+            "band_1_embedding_nrmse": 0.2623155415058136,
+            "band_1_decoder_top1_accuracy": 0.84375,
+            "band_2_embedding_nrmse": 0.5362566709518433,
+            "band_2_decoder_top1_accuracy": 0.5520833134651184
+          }
+        },
+        {
+          "method": "mirror",
+          "bytes": 15427,
+          "sha256": "52236192c172baf3637d8fcf3dae6e4e65e15ef6daa7c823cb92fcd4803d5e44",
+          "metrics": {
+            "uniform_embedding_nrmse": 0.00701809162274003,
+            "weighted_embedding_nrmse": 0.0030120746232569218,
+            "uniform_decoder_nll": 2.339371681213379,
+            "weighted_decoder_nll": 2.1355559825897217,
+            "uniform_decoder_top1_accuracy": 1.0,
+            "weighted_decoder_top1_accuracy": 0.9999999403953552,
+            "band_0_embedding_nrmse": 0.001851038308814168,
+            "band_0_decoder_top1_accuracy": 1.0,
+            "band_1_embedding_nrmse": 0.004250021651387215,
+            "band_1_decoder_top1_accuracy": 1.0,
+            "band_2_embedding_nrmse": 0.012391195632517338,
+            "band_2_decoder_top1_accuracy": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "seed": 39302,
+      "payloads": [
+        {
+          "method": "full",
+          "bytes": 25491,
+          "sha256": "62cdc745e84260c227e6a1d1efd3f7bb5e7acd2675d312dc522eff08c0948e85",
+          "metrics": {
+            "uniform_embedding_nrmse": 0.008183185011148453,
+            "weighted_embedding_nrmse": 0.002469149883836508,
+            "uniform_decoder_nll": 2.303863763809204,
+            "weighted_decoder_nll": 2.139281749725342,
+            "uniform_decoder_top1_accuracy": 0.9895833134651184,
+            "weighted_decoder_top1_accuracy": 0.9983332753181458,
+            "band_0_embedding_nrmse": 4.793789048562758e-05,
+            "band_0_decoder_top1_accuracy": 1.0,
+            "band_1_embedding_nrmse": 0.001068518147803843,
+            "band_1_decoder_top1_accuracy": 1.0,
+            "band_2_embedding_nrmse": 0.015439926646649837,
+            "band_2_decoder_top1_accuracy": 0.9791666865348816
+          }
+        },
+        {
+          "method": "adaptive",
+          "bytes": 13789,
+          "sha256": "9a0c418f5fe0fe182d216f2467761a835a25043a871aff49765136e89d5df441",
+          "metrics": {
+            "uniform_embedding_nrmse": 0.3131866157054901,
+            "weighted_embedding_nrmse": 0.14549587666988373,
+            "uniform_decoder_nll": 2.3542802333831787,
+            "weighted_decoder_nll": 2.1534271240234375,
+            "uniform_decoder_top1_accuracy": 0.7135416865348816,
+            "weighted_decoder_top1_accuracy": 0.9018750190734863,
+            "band_0_embedding_nrmse": 0.01867562159895897,
+            "band_0_decoder_top1_accuracy": 0.96875,
+            "band_1_embedding_nrmse": 0.3466504216194153,
+            "band_1_decoder_top1_accuracy": 0.8125,
+            "band_2_embedding_nrmse": 0.44183531403541565,
+            "band_2_decoder_top1_accuracy": 0.5625
+          }
+        },
+        {
+          "method": "byte_control",
+          "bytes": 15254,
+          "sha256": "a8c7650431d0b361b6ed3cecb2a708bf7118d6620132a443000d0eb4f1dcc563",
+          "metrics": {
+            "uniform_embedding_nrmse": 0.2881866693496704,
+            "weighted_embedding_nrmse": 0.13317862153053284,
+            "uniform_decoder_nll": 2.3470091819763184,
+            "weighted_decoder_nll": 2.1512670516967773,
+            "uniform_decoder_top1_accuracy": 0.7317708134651184,
+            "weighted_decoder_top1_accuracy": 0.9126040935516357,
+            "band_0_embedding_nrmse": 0.012805436737835407,
+            "band_0_decoder_top1_accuracy": 0.96875,
+            "band_1_embedding_nrmse": 0.3177122175693512,
+            "band_1_decoder_top1_accuracy": 0.859375,
+            "band_2_embedding_nrmse": 0.40805649757385254,
+            "band_2_decoder_top1_accuracy": 0.5677083134651184
+          }
+        },
+        {
+          "method": "mirror",
+          "bytes": 15404,
+          "sha256": "17f3a89790256e40f6268f9edf1e37332f62d732da579d574b057f279cf8d8ae",
+          "metrics": {
+            "uniform_embedding_nrmse": 0.008981590159237385,
+            "weighted_embedding_nrmse": 0.004074931610375643,
+            "uniform_decoder_nll": 2.303990125656128,
+            "weighted_decoder_nll": 2.1393771171569824,
+            "uniform_decoder_top1_accuracy": 0.9973958134651184,
+            "weighted_decoder_top1_accuracy": 0.9995833039283752,
+            "band_0_embedding_nrmse": 0.002730542328208685,
+            "band_0_decoder_top1_accuracy": 1.0,
+            "band_1_embedding_nrmse": 0.005773416720330715,
+            "band_1_decoder_top1_accuracy": 1.0,
+            "band_2_embedding_nrmse": 0.015368382446467876,
+            "band_2_decoder_top1_accuracy": 0.9947916865348816
+          }
+        }
+      ]
+    }
+  ]
 }
