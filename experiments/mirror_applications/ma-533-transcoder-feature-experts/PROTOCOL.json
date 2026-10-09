@@ -123,6 +123,10 @@
     {
       "id": "amendment-8",
       "before-development-rerun": "Fix sampling before any sealed split access: choose unique aligned 128-token blocks so fit/eval windows cannot overlap; development draws only from train, and any fresh confirmation uses the disjoint validation split. Add a fit-only linear scalar output-norm head as a simple private-parameter control for the unit-L2 direction diagnostic; its size/compute is charged. Earlier overlapping-window summaries are retained as superseded, not final evidence."
+    },
+    {
+      "id": "amendment-9",
+      "before-final-rerun": "Add exact per-method payload/standalone byte accounting and isolated inference timing/compute proxy for the RMS-normalized and scalar norm-head variants."
     }
   ],
   "normalization_diagnostics": {
