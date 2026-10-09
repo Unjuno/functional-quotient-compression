@@ -1,8 +1,8 @@
-**Current operational pointer (2026-10-09): MA-508.** MA-501/502 failed synthetic thresholds; MA-503/504 found scoped representation-space benefits on Givens-aligned tasks. Continue with activation-addition controls and natural representation directions.
+**Current operational pointer (2026-10-09): MA-510.** MA-508 showed generic shared-basis activation steering compresses explicit vectors, but Mirror angles did not beat FP16 coefficients by the registered margin and were slower. Continue with conditional activation steering; false-trigger rate is primary.
 
 # Worker queue
 
-**Current operational pointer (2026-10-09): MA-508.** MA-436/438, MA-482 and MA-503/504 show scoped synthetic quality/storage Pareto points; findings remain bounded by their controls and tasks. Continue with the activation-addition representation-space queue.
+**Current operational pointer (2026-10-09): MA-510.** MA-436/438 and MA-482/503/504 show scoped synthetic quality/storage points; MA-508 failed Mirror-specific compression over generic FP16 coefficients. Continue with conditional behavior Views and false-trigger controls.
 
 The queue is derived from `IDEA_REGISTRY.csv`. The registry is authoritative.
 

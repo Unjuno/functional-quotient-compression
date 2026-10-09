@@ -6,9 +6,9 @@
 - Protocol frozen: yes; A1 basis/seed clarification committed before development
 - Development complete: yes; deterministic encoder validation, 2 worlds × 3 seeds
 - Fresh/audit opened: yes; 3 worlds × 3 seeds × 2 residual regimes × 5 methods
-- Results committed: pending
-- Verification committed: pending
-- Registry row updated: pending
+- Results committed: yes (`a35a1413`)
+- Verification committed: yes
+- Registry row updated: yes after verification
 
 ## Decision
 
@@ -24,7 +24,7 @@
 
 ## Next action
 
-Commit results and verification, update registry/claim/status board, run integrity verification, then continue to MA-510/511.
+Continue with MA-510; then evaluate MA-511 for held-out condition-behavior composition.
 
 ## Blockers
 
