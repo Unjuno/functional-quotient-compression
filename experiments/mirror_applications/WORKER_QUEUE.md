@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-355.** MA-353 failed its development storage/Mirror-specific gate: the 1,525 B Mirror posterior matched an ordinary Gaussian scalar byte-for-byte and exceeded the 1,493 B rank-1 posterior. Fresh stayed sealed. Proceed to MA-355, product-key Mirror expert/address routing.
+**Current operational pointer (2026-10-09): MA-356.** MA-355 factorized an oracle additive 16×16 map bank at 5.1 KB, but direct two-index coefficients were only 12 B larger, below the preregistered Mirror margin; fresh stayed sealed after the development gate failed. Proceed to MA-356, product-key factorized Mirror code composition.
 
 # Worker queue
 

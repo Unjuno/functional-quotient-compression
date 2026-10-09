@@ -1,7 +1,7 @@
 # MA-355 — Product-Key Mirror address lookup
 
 Status: **FAIL for Mirror-specific gate; PROMISING only as an oracle factorized-basis storage point; fresh sealed**  
-Branch: `research/ma-355-product-key-mirror-address-20261008`  
+Branch: `research/ma-355-product-key-mirror-address-20261009`
 Base: `research/mirror-application-worker-ready-20261007` (`c935a90`)  
 Prior art: PA43 Product Key Memory.
 
