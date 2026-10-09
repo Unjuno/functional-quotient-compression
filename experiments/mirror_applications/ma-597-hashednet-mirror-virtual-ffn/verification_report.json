@@ -1,0 +1,41 @@
+{
+  "development_seeds": [
+    59701,
+    59702
+  ],
+  "experiment_id": "MA-597",
+  "fresh_artifacts_present": false,
+  "fresh_seeds_accessed": [],
+  "gate_decision": "FAIL: Mirror misses +1.0 percentage point versus native hash on both dev seeds; diagonal/rank-one controls match or beat it within the byte cap.",
+  "max_accuracy_difference": 0.0,
+  "max_cross_entropy_difference": 0.0,
+  "metric_replay_checked": true,
+  "protocol_sha256": "6ee6d81579a3a5027cc23ae53f7f75004aa5cc7bf2eea5c3f699723a817e4bce",
+  "results": {
+    "59701": {
+      "all_six_payloads_replayed_byte_exact": true,
+      "diagonal_accuracy": 0.9755555555555555,
+      "mirror_accuracy": 0.9755555555555555,
+      "mirror_bytes": 9753,
+      "native_accuracy": 0.9755555555555555,
+      "native_bytes": 9441,
+      "rank1_accuracy": 0.98
+    },
+    "59702": {
+      "all_six_payloads_replayed_byte_exact": true,
+      "diagonal_accuracy": 0.9844444444444445,
+      "mirror_accuracy": 0.9822222222222222,
+      "mirror_bytes": 9753,
+      "native_accuracy": 0.9866666666666667,
+      "native_bytes": 9441,
+      "rank1_accuracy": 0.9822222222222222
+    }
+  },
+  "serialization_roundtrip_checked": true,
+  "source_sha256": "28abd6c2f4dbb00e08595753b75f02eb1330ad262923e5446f76fd2778e6e114",
+  "status": "FAIL",
+  "tests": {
+    "failed": 0,
+    "passed": 2
+  }
+}

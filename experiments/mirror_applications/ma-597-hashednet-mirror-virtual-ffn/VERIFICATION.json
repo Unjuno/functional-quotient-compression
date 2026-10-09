@@ -1,9 +1,21 @@
 {
   "experiment_id": "MA-597",
-  "status": "FROZEN_BEFORE_DEVELOPMENT",
+  "status": "FAIL",
   "protocol_frozen": true,
   "fresh_seeds_accessed": [],
-  "serialization_roundtrip_checked": false,
-  "metric_replay_checked": false,
-  "notes": []
+  "serialization_roundtrip_checked": true,
+  "metric_replay_checked": true,
+  "notes": [
+    "All six serialized payloads and core metrics replay exactly for dev seeds 59701 and 59702.",
+    "Fresh splits stayed unopened after the registered Mirror quality/control gate failed."
+  ],
+  "byte_exact": true,
+  "max_difference": 0.0,
+  "fresh_split_integrity_checked": true,
+  "tests": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=experiments/mirror_applications/ma-597-hashednet-mirror-virtual-ffn/source python -m pytest -q experiments/mirror_applications/ma-597-hashednet-mirror-virtual-ffn/tests",
+    "passed": 2,
+    "failed": 0
+  },
+  "verification_script": "source/verify_results.py"
 }

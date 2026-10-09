@@ -1,0 +1,204 @@
+{
+  "architecture": [
+    64,
+    128,
+    10
+  ],
+  "common_compute": {
+    "device": "cpu",
+    "input_examples_seen_per_method": 102400,
+    "torch_threads": 1,
+    "total_wall_seconds": 4.682035360994632,
+    "updates_per_method": 800
+  },
+  "dataset": "sklearn.load_digits",
+  "dataset_tensor_sha256": "faf2d98f61250c1cdc0b114323133d3c58da04f5c5d28bb78e4bde3c936a75b1",
+  "experiment_id": "MA-597",
+  "methods": [
+    {
+      "base_macs_per_example": 9472,
+      "bucket_count": null,
+      "collision": {},
+      "dense_teacher_projection_rmse": null,
+      "examples_seen": 102400,
+      "extra_view_ops_per_example": 0,
+      "hash_expansion_lookups_per_model_load": 0,
+      "inference_examples_per_second": 666521.5211359455,
+      "inference_seconds": 0.0006751469918526709,
+      "initial_and_final_train_loss": [
+        2.3439226150512695,
+        0.0008093631477095187
+      ],
+      "method": "dense",
+      "optimizer_updates": 800,
+      "payload_sha256": "687bd6a449cb10036bb898a7e706e4360b1f32446e48c3739d0a125f93ad93c2",
+      "serialized_bytes": 21719,
+      "test_accuracy": 0.9844444444444445,
+      "test_cross_entropy": 0.04799827893575032,
+      "test_examples": 450,
+      "train_examples": 1347,
+      "training_seconds": 0.49045104600372724
+    },
+    {
+      "base_macs_per_example": 9472,
+      "bucket_count": 2048,
+      "collision": {
+        "bucket_pair_count": 16118,
+        "collision_rate": 0.75439453125,
+        "maximum_bucket_load": 11,
+        "unique_bucket_count": 2012,
+        "unique_bucket_fraction": 0.24560546875
+      },
+      "dense_teacher_best_hash_projection_rmse": 0.2651549130791642,
+      "dense_teacher_projection_rmse": 0.4647505581378937,
+      "examples_seen": 102400,
+      "extra_view_ops_per_example": 0,
+      "hash_expansion_lookups_per_model_load": 8192,
+      "inference_examples_per_second": 660243.2420726492,
+      "inference_seconds": 0.0006815669912612066,
+      "initial_and_final_train_loss": [
+        2.440584421157837,
+        0.001741875777952373
+      ],
+      "method": "hash_2048",
+      "optimizer_updates": 800,
+      "payload_sha256": "74bf4ae4237b185475a5e6854c88463713e10e921a390049fa944995a77101e9",
+      "serialized_bytes": 9441,
+      "test_accuracy": 0.9866666666666667,
+      "test_cross_entropy": 0.046754937966664634,
+      "test_examples": 450,
+      "train_examples": 1347,
+      "training_seconds": 0.6140523190115346
+    },
+    {
+      "base_macs_per_example": 9472,
+      "bucket_count": 4096,
+      "collision": {
+        "bucket_pair_count": 8081,
+        "collision_rate": 0.5672607421875,
+        "maximum_bucket_load": 8,
+        "unique_bucket_count": 3545,
+        "unique_bucket_fraction": 0.4327392578125
+      },
+      "dense_teacher_best_hash_projection_rmse": 0.22940566189162867,
+      "dense_teacher_projection_rmse": 0.46300655603408813,
+      "examples_seen": 102400,
+      "extra_view_ops_per_example": 0,
+      "hash_expansion_lookups_per_model_load": 8192,
+      "inference_examples_per_second": 668275.4729061764,
+      "inference_seconds": 0.0006733750051353127,
+      "initial_and_final_train_loss": [
+        2.3747026920318604,
+        0.0005600042059086263
+      ],
+      "method": "hash_4096",
+      "optimizer_updates": 800,
+      "payload_sha256": "67f1a96e2d800cb50b4add408cecf8005f57c181cbc88d520267b73a12441c79",
+      "serialized_bytes": 13537,
+      "test_accuracy": 0.9866666666666667,
+      "test_cross_entropy": 0.03854122002919515,
+      "test_examples": 450,
+      "train_examples": 1347,
+      "training_seconds": 0.6225689059938304
+    },
+    {
+      "base_macs_per_example": 9472,
+      "bucket_count": 2048,
+      "collision": {
+        "bucket_pair_count": 16118,
+        "collision_rate": 0.75439453125,
+        "maximum_bucket_load": 11,
+        "unique_bucket_count": 2012,
+        "unique_bucket_fraction": 0.24560546875
+      },
+      "dense_teacher_best_hash_projection_rmse": 0.2651549130791642,
+      "dense_teacher_projection_rmse": 0.47591403126716614,
+      "examples_seen": 102400,
+      "extra_view_ops_per_example": 192,
+      "hash_expansion_lookups_per_model_load": 8192,
+      "inference_examples_per_second": 415874.19281141646,
+      "inference_seconds": 0.0010820580064319074,
+      "initial_and_final_train_loss": [
+        2.6817362308502197,
+        0.0011827064445242286
+      ],
+      "method": "mirror_givens",
+      "optimizer_updates": 800,
+      "payload_sha256": "07b804ea39116d79e73d8a2da5dd0eba506be8eb0809eb0dcbfdf8fd72ffc06f",
+      "serialized_bytes": 9753,
+      "test_accuracy": 0.9822222222222222,
+      "test_cross_entropy": 0.04445517010158963,
+      "test_examples": 450,
+      "train_examples": 1347,
+      "training_seconds": 0.7608942099905107
+    },
+    {
+      "base_macs_per_example": 9472,
+      "bucket_count": 2048,
+      "collision": {
+        "bucket_pair_count": 16118,
+        "collision_rate": 0.75439453125,
+        "maximum_bucket_load": 11,
+        "unique_bucket_count": 2012,
+        "unique_bucket_fraction": 0.24560546875
+      },
+      "dense_teacher_best_hash_projection_rmse": 0.2651549130791642,
+      "dense_teacher_projection_rmse": 0.5568555593490601,
+      "examples_seen": 102400,
+      "extra_view_ops_per_example": 64,
+      "hash_expansion_lookups_per_model_load": 8192,
+      "inference_examples_per_second": 527098.1103889981,
+      "inference_seconds": 0.0008537310059182346,
+      "initial_and_final_train_loss": [
+        2.5283877849578857,
+        0.00038811308331787586
+      ],
+      "method": "diagonal_gate",
+      "optimizer_updates": 800,
+      "payload_sha256": "07d8db9a533f887d8617b28204cc91e04a84f44dac3d3ab3589fc228fab2782e",
+      "serialized_bytes": 9815,
+      "test_accuracy": 0.9844444444444445,
+      "test_cross_entropy": 0.04471949074003431,
+      "test_examples": 450,
+      "train_examples": 1347,
+      "training_seconds": 0.6321755509998184
+    },
+    {
+      "base_macs_per_example": 9472,
+      "bucket_count": 2048,
+      "collision": {
+        "bucket_pair_count": 16118,
+        "collision_rate": 0.75439453125,
+        "maximum_bucket_load": 11,
+        "unique_bucket_count": 2012,
+        "unique_bucket_fraction": 0.24560546875
+      },
+      "dense_teacher_best_hash_projection_rmse": 0.2651549130791642,
+      "dense_teacher_projection_rmse": 0.48590028285980225,
+      "examples_seen": 102400,
+      "extra_view_ops_per_example": 192,
+      "hash_expansion_lookups_per_model_load": 8192,
+      "inference_examples_per_second": 639021.1893675107,
+      "inference_seconds": 0.0007042020006338134,
+      "initial_and_final_train_loss": [
+        2.2860114574432373,
+        0.001046447199769318
+      ],
+      "method": "rank1_residual",
+      "optimizer_updates": 800,
+      "payload_sha256": "27ebcfb572f1767aea0de209fb3dcf5747e85475981bae8ea6f01b58b4ba820d",
+      "serialized_bytes": 10298,
+      "test_accuracy": 0.9822222222222222,
+      "test_cross_entropy": 0.05891310638851589,
+      "test_examples": 450,
+      "train_examples": 1347,
+      "training_seconds": 0.6989267329918221
+    }
+  ],
+  "run_hash_seed": 472780258,
+  "seed": 59702,
+  "sklearn_version": "1.8.0",
+  "split": "dev",
+  "split_random_state": 59702,
+  "stratified": true
+}

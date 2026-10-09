@@ -1,23 +1,25 @@
 # MA-597 — HashedNet Mirror virtual FFN
 
-Status: **FROZEN_BEFORE_DEVELOPMENT**. Prior art PA120. The protocol tests whether a small learned Givens input coordinate changes the quality/storage frontier of a hash-compressed FFN.
+Status: **FAIL**. PA120. Dedicated branch: `research/ma-597-hashednet-mirror-virtual-ffn-20261009`.
 
 ## H — Hypothesis
 
-Thirty-two Givens angles can make a 2,048-bucket HashedNet's virtual FFN less sensitive to collisions, improving held-out digit accuracy over ordinary hashing at near-equal actual bytes and beating diagonal and rank-one controls.
+Thirty-two learned input Givens angles should reduce harmful collisions in a 2,048-bucket HashedNet FFN, giving ≥1.0 percentage point test-accuracy gain over native hashing at ≤1.10× native bytes and beating byte-near diagonal and rank-one controls.
 
-## T — Planned execution
+## T — Execution
 
-Train 64→128→10 MLPs on stratified scikit-learn digits splits with 800 AdamW updates. Compare dense first-layer weights, 2,048/4,096-bucket native HashedNets, 2,048 buckets plus Mirror Givens, diagonal gate, and rank-one residual. Development seeds 59701/59702; fresh seeds 59711–59713 are locked. Payloads charge all learned tensors, hash seed, metadata, and reconstruction state. Collision counts, teacher projection RMSE, actual bytes, inference compute, and wall time are reported.
+Train a 64→128 ReLU→10 MLP on sklearn digits 1.8.0. Development seeds 59701/59702 use stratified 75/25 splits. Dense, 2,048/4,096 bucket HashedNet, Givens Mirror, diagonal gate, and rank-one residual each receive 800 AdamW updates. Inference loads serialized FP16 NPZ payloads; all learned tensors, hash seed, schema and shapes are charged. Fresh seeds 59711–59713 were sealed.
 
 ## D — Decision
 
-Pending frozen execution.
+**FAIL.** Mirror accuracy was 97.56%/98.22% at 9,753 B; native 2,048-bucket accuracy was 97.56%/98.67% at 9,441 B. The Mirror misses the +1-point gate on both splits. A byte-near diagonal gate tied/beat it, and rank-one residual tied/beat it within 1.10× bytes. The 4,096-bucket native control was 98.44%/98.67% at 13,537 B and reduced collision rate. Mirror training was slower than native hash; short CPU inference timings are noisy.
 
-## C — Strongest counter-hypothesis
+## C — Counter-hypothesis
 
-The observed benefit may be ordinary extra conditioning, diagonal input scaling, a low-rank residual, or the hash bucket count itself; a learned rotation may add compute without reducing functional collision loss.
+Native bucket expansion and ordinary diagonal or rank-one conditioning explain the observed performance. The rotation is an extra learned coordinate without demonstrated Pareto gain.
 
-## U — Boundaries
+## U — Limits
 
-One small handwritten-digit dataset and one FFN layer do not establish language-model capacity or natural neural-network compression.
+One small image dataset, one FFN matrix, two development splits, and fixed-update training do not establish language-model capacity or near-convergence behavior. Fresh splits remained unopened after the gate miss.
+
+See `RESULTS.md` and `verification_report.json` for facts, interpretation, hypothesis, actual payload sizes, collision diagnostics, and exact replay provenance.
