@@ -1,0 +1,84 @@
+{
+  "experiment_id": "MA-392",
+  "title": "Token x domain factorized embedding Mirror address",
+  "status": "PROTOCOL_FROZEN_BEFORE_DEVELOPMENT",
+  "base_commit": "9cc1259c",
+  "prior_art_refs": ["PA59"],
+  "hypothesis": "For domain-conditioned embeddings formed by applying a small orthogonal view to one shared token table, domain-level Mirror angles preserve held-out token-domain combinations and require materially fewer complete payload bytes than per-domain dense transforms and independent tables, while outperforming simple FiLM and hard sharing.",
+  "physical_object": "One fixed 128x16 shared token embedding table. Eight domains use one domain address and one functional transformation to form 1,024 logical domain-token embeddings.",
+  "mirror_coordinate": "Eight disjoint 2D Givens angles per domain, learned only on observed token-domain pairs; apply the resulting orthogonal transform to the shared token vector.",
+  "logical_multiplicity": "Eight domain-specific functions over 128 token embeddings (1,024 logical embedding outputs) reconstructed from one shared table plus 64 domain angles.",
+  "prior_art_delta": "PA59 compositional embeddings factor addresses into shared components. This experiment fixes the token table and tests the domain factor as an additional functional Mirror view; it audits unseen token-domain combinations and compares with hard sharing, FiLM, dense linear domain transforms and independent embeddings.",
+  "model": {
+    "vocabulary_size": 128,
+    "domain_count": 8,
+    "embedding_dim": 16,
+    "rotation_planes": 8,
+    "train_fraction_of_token_domain_pairs": 0.8,
+    "updates": 2000,
+    "batch_size": 256,
+    "optimizer": "Adam",
+    "learning_rate": 0.02,
+    "development_seeds": [39201, 39202],
+    "fresh_seeds": [39211, 39212, 39213],
+    "methods": [
+      "independent per-domain per-token embedding oracle (all pairs; storage upper bound, not held-out generalization evidence)",
+      "hard shared token embedding with no domain view",
+      "shared token embedding plus per-domain FiLM scale and shift",
+      "shared token embedding plus one dense 16x16 linear transform per domain",
+      "shared token embedding plus eight learned Givens Mirror angles per domain"
+    ]
+  },
+  "teacher": {
+    "shared_table": "A fixed seeded 128x16 token table is charged in all shared-table methods.",
+    "domain_functions": "Eight-domain teacher applies eight disjoint 2D Givens rotations to each token vector. The first domain is the identity anchor; remaining teacher angles are seeded random values. No private token-domain residual is present.",
+    "split": "A deterministic seeded 80/20 split of token-domain pairs, stratified to retain at least one observed domain per token and at least one observed token per domain. Train only shared-table methods on observed pairs; report train and held-out separately.",
+    "task_quality": "A fixed seeded 16x16 decoder maps teacher embeddings to 16 classes. Report embedding NRMSE and classifier NLL/top-1 separately on observed and held-out pairs.",
+    "oracle_boundary": "The independent per-domain embedding oracle stores all teacher pairs and is a full-quality storage upper control only. It is not used as evidence of held-out generalization and receives no role in model selection."
+  },
+  "controls": [
+    "full independent domain-token embedding oracle, all targets",
+    "hard shared token table",
+    "FiLM domain scale and shift",
+    "generic dense per-domain 16x16 linear maps",
+    "domain-level Givens Mirror coordinates"
+  ],
+  "development": {
+    "worlds_or_seeds": [39201, 39202],
+    "selection_metric": "Held-out token-domain embedding NRMSE is primary; held-out decoder NLL/top-1, observed-pair quality, exact payload bytes, active compute and wall-clock are secondary.",
+    "allowed_tuning": "No tuning planned. Fixed table, teacher, split rule, optimizer and schedule. Any implementation correction may rerun development only before fresh access."
+  },
+  "fresh": {
+    "worlds_or_seeds": [39211, 39212, 39213],
+    "locked_before_access": true,
+    "open_gate": "Both development worlds: Mirror held-out NRMSE <=0.03; dense-transform held-out NRMSE <=0.03; Mirror within 0.005 held-out NRMSE of dense control; Mirror payload <=0.50x dense-transform payload and <=0.25x full oracle payload; Mirror improves held-out NRMSE over FiLM by >=0.01 and hard sharing by >=0.05; no quality collapse on observed pairs; all methods' saved state replays exact metrics. Otherwise fresh remains sealed.",
+    "fresh_success": "All three fresh worlds meet held-out fidelity, dense-comparator, simple-control, payload and exact-replay gates."
+  },
+  "storage": {
+    "authority": "actual compressed NPZ inference payload bytes after reload",
+    "paid_objects": [
+      "shared 128x16 token table or full 8x128x16 oracle table",
+      "domain Givens angles, FiLM scales/shifts or dense transforms",
+      "fixed decoder",
+      "vocabulary/domain/dimension metadata and archive overhead"
+    ],
+    "deterministic_reconstruction": "Domain/token indices and the eight Givens plane locations are determined by dimensions and fixed order; no learned pair-address table is stored."
+  },
+  "compute": {
+    "report_observed_pairs_and_updates": true,
+    "report_active_transform_MAC_proxy": true,
+    "report_mirror_trigonometric_ops": true,
+    "report_fixed_decoder_MAC_proxy": true,
+    "report_training_wall_time": true,
+    "report_inference_pairs_per_second": true
+  },
+  "success_gate": "All fresh held-out quality, dense comparator, simple-control improvement, complete-payload and replay requirements pass.",
+  "failure_gate": "Any development held-out quality, dense-comparator, simplicity or payload gate fails.",
+  "boundaries": [
+    "synthetic domain-conditioned embedding screen; no recommendation or language-model evidence",
+    "shared token table is fixed to isolate the domain-view effect",
+    "no private token-domain residuals or domain retrieval are evaluated",
+    "the independent all-pair oracle is a storage/quality upper control and is excluded from held-out generalization claims",
+    "fixed update budget is not a capacity claim"
+  ]
+}
