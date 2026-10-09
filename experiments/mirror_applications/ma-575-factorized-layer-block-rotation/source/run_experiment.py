@@ -131,7 +131,7 @@ def run(seed,split,model_dir,out):
         elif method=='random_factorized': c=compose_codes(bank[int(random_lid[it['layer']])],bank[int(random_bid[b])])
         else: c=compose_codes(bank[int(lid[it['layer']])],bank[int(bid[b])])
         cs.append(c)
-       v=transform(it['w'],cs); p,s=quant_int4(v); d=unpack(p,s); quant.append((p.astype(np.uint8),s))
+       v=it['w'] if method=='identity_int4' else transform(it['w'],cs); p,s=quant_int4(v); d=unpack(p,s); quant.append((p.astype(np.uint8),s))
        if method=='identity_int4': target=it['w']
        else: target=v
        calerr.append(err(d,target,it['cal'])); auditerr.append(err(d,target,it['audit']))

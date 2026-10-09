@@ -17,3 +17,9 @@ def test_int4_unpack_restores_original_width():
     decoded=m.unpack(packed,scales)
     assert packed.shape==(5,256)
     assert decoded.shape==x.shape
+
+def test_identity_int4_reconstruction_is_close():
+    x=np.random.default_rng(5).normal(size=(7,512)).astype(np.float32)
+    packed,scales=m.quant_int4(x)
+    decoded=m.unpack(packed,scales)
+    assert np.linalg.norm(decoded-x)/np.linalg.norm(x)<0.11
