@@ -13,3 +13,5 @@ D: Adaptive exactly restores outputs. Payload/dense ratios: 62.7%, 83.6%, 104.4%
 C: Full private vectors erase savings as heterogeneity grows.
 
 U: Learned dictionaries, private low-rank codes, natural functions.
+
+Next: MA-492 — quantized packet-plan Mirror latent, on its dedicated branch.

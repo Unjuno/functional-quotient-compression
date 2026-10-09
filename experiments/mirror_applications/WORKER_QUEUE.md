@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-482.** MA-481 found substantial continuous-address byte savings but failed the paraphrase recall gate on a crowded orbit; VQ alternatives collided. Continue with residual-code composition and full rate-distortion controls.
+**Current operational pointer (2026-10-09): MA-492.** MA-488 adaptive private allocation restored quality but exceeded the <=80% byte gate at 50% and 75% heterogeneity. The prior P0s MA-484, MA-486 and MA-487 also missed their quality/byte controls. Continue with quantized packet-plan codes and ordinary latent controls.
 
 # Worker queue
 
