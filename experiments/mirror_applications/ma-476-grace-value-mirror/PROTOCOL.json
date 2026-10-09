@@ -1,0 +1,90 @@
+{
+  "experiment_id": "MA-476",
+  "title": "GRACE key/radius memory with Mirror-compressed values",
+  "status": "FROZEN_SCREENING",
+  "base_commit": "7b1ae9f6",
+  "evidence_lane": "CODEBOOK_VALUE_COMPRESSION/RETENTION/LOCALITY/BYTES/LATENCY",
+  "hypothesis": "Holding GRACE keys and per-key deferral radii fixed, one shared value basis plus a continuous Mirror angle per edit will preserve memory hits and output quality while reducing actual serialized bytes versus explicit GRACE values and fixed-size value codebooks; a generic shared-basis coefficient code tests whether the gain is Mirror-specific.",
+  "physical_object": "GRACE key/radius memory plus one shared 16D value basis",
+  "mirror_coordinate": "continuous per-entry value angle; key and radius state remain fully explicit",
+  "logical_multiplicity": "64 retained edit values selected by the unchanged GRACE memory key",
+  "prior_art_refs": [
+    90,
+    139,
+    91
+  ],
+  "controls": [
+    "no edit",
+    "GRACE explicit key/radius/value entries",
+    "generic Cartesian coefficients on the same value basis",
+    "uniform K=8,16,32,64 value codebooks with per-entry indices",
+    "Mirror continuous angle values"
+  ],
+  "task": {
+    "type": "synthetic 16D GRACE memory value bank",
+    "edits_per_world": 64,
+    "key_and_radius": "random unit keys plus explicitly stored per-key radius 0.87-0.93; same for all methods",
+    "value_orbit": "fixed-norm 1.2 values on one known 2D plane",
+    "queries": "exact keys; four Gaussian-noise paraphrases sigma .03 per key; 256 unrelated random queries",
+    "metrics": [
+      "exact/paraphrase memory hit recall",
+      "reconstructed value NRMSE and retention vs edit count",
+      "false-trigger rate and unrelated output drift",
+      "actual N=1/8/32/64 payload bytes",
+      "measured lookup plus selected-value decode latency"
+    ]
+  },
+  "development": {
+    "worlds": [
+      47600,
+      47601
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "allowed": "fixed radius distribution and predetermined K codebook sweep; no fresh-dependent selection"
+  },
+  "fresh": {
+    "worlds": [
+      47610,
+      47611,
+      47612
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "all GRACE keys and per-key radii",
+      "explicit values or shared basis plus Mirror/generic coordinates",
+      "all VQ codebook values and per-entry indices",
+      "fact IDs, scales, metadata"
+    ],
+    "amortization_N": [
+      1,
+      8,
+      32,
+      64
+    ]
+  },
+  "compute": {
+    "report_key_lookup_MAC_per_query": true,
+    "report_value_decode_MAC_per_hit": true,
+    "report_measured_lookup_and_decode_latency": true,
+    "report_edit_encoding_latency": true
+  },
+  "success_gate": "Every fresh world at N64: exact/paraphrase hit recall >=99%, unrelated false triggers <=1%, continuous Mirror value NRMSE <=1e-5, and payload <=80% explicit GRACE. Compare K-codebook and generic shared-basis Pareto frontiers; no Mirror-specific gain if a simpler control matches at equal/fewer bytes.",
+  "failure_gate": "Continuous Mirror misses quality/retrieval/byte gates, or a fixed codebook/generic control matches or beats its bytes at equal quality; preserve N-dependent results.",
+  "boundaries": [
+    "Synthetic GRACE-style key/value mechanism screen, not a GRACE or model-editing reproduction.",
+    "Value basis and orbit are known by construction. Retrieval key/radius state is unchanged and fully charged.",
+    "No sequential lifelong update training; N sweeps measure stored-bank growth only."
+  ]
+}
