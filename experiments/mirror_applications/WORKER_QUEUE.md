@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-271.** MA-268 found a structure-matched one-angle Givens activation view that recovered aligned synthetic tasks, but saved only 3.5% over IA3 and failed the preregistered 80% byte gate; IA3 handled independent diagonal tasks. Continue to MA-271 with native OFT as the mandatory control.
+**Current operational pointer (2026-10-09): MA-272.** MA-271 found exact one-plane orbit recovery, but generic fixed-plane scalar was identical and storage saved only 7.5% versus OFT, missing the preregistered gate. Independent OFT support fitting did not converge; oracle upper was exact. Continue to MA-272 with input-centric OFTv2 as the mandatory control.
 
 # Worker queue
 

@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (62 completed; 568 UNTESTED)
+- P0: **630** (63 completed; 567 UNTESTED)
 - P1: **422** (13 completed; 409 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1080 UNTESTED, 37 PROMISING, 38 FAIL**
+- Current MA statuses: **1079 UNTESTED, 37 PROMISING, 39 FAIL**
 - 68 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -26,15 +26,20 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 - **FAIL** against the registered ≤80% IA3 payload gate: aligned Givens view reached fresh NRMSE <5.3e-8 at 3,167 B vs IA3 3,283 B (3.5% reduction); IA3 remained nearly exact on independent diagonal task views.
 - Scoped synthetic orbit feasibility only; no language-model or Mirror-specific novelty claim. Full report and verification are linked in the claim ledger.
 
+## Completed: MA-271 — OFT Mirror task views
+
+- **FAIL** against the registered storage gate. Aligned Mirror matched the generic fixed-plane scalar control exactly and saved only 7.5% versus support-fitted independent OFT; the 50% gate was missed. Independent oracle OFT is exact, but support-fit did not converge enough to establish the learning boundary.
+- Synthetic CPU-only; no natural task or Mirror-specific claim. See claim ledger.
+
 ## Next candidate
 
-**MA-271 — OFT Mirror task views (P0; PA20)**
+**MA-272 — input-centric OFTv2 Mirror views (P0; PA22)**
 
 Reason:
 - MA-470/471/473/475/476/478/481/482, MA-483, MA-484, MA-486, MA-487, MA-488, MA-492, MA-494, MA-498, MA-501, MA-502 and MA-516 are completed on dedicated branches and cross-linked in the claim ledger;
 - MA-501 and MA-502 both found that VQ coordinates add substantial distortion over compact FP16 shared coordinates. The LoReFT representation-view family is temporarily deferred for redesign; skipped registry candidates remain UNTESTED. Work moves to the separate Function Vectors family at MA-516. Other completed candidates remain cross-linked in the claim ledger.
 
-Required controls: native OFT orthogonal transforms, shared/tied transform controls, Mirror task views, and compact parameterization controls; measure task quality, transform bytes and geometry retention.
+Required controls: native input-centric OFTv2 transforms, weight-centric OFT baseline, Mirror input-side views and runtime controls; measure quality, materialization cost, bytes and runtime.
 
 The LoReFT family remains deferred after MA-501/502. MA-255’s PSP screen was not established because the development metric broadcasted incorrectly; MA-260’s fresh screen was not established because its training world was hardcoded. Both records and limitations are preserved.
 

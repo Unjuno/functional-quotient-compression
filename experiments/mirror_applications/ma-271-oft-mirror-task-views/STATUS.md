@@ -1,8 +1,9 @@
 # MA-271 status
 
-- Status: SCREENING
+- Status: FAIL (registered aligned storage gate missed; Mirror-specific value not established).
 - Branch: `research/ma-271-oft-mirror-task-views-20261009`
-- Base: `db09ec4d` (includes MA-268 evidence)
-- Prior art: PA20, Orthogonal Finetuning
-- Development found support-only Cayley OFT fitting residual on independent maps (NRMSE ~0.23 after a 2,000-update diagnostic). Protocol amended before fresh to add an oracle-projected OFT upper control; independent-fit quality will not be used as capacity evidence.
-- Fresh worlds remain locked.
+- Base: `db09ec4d`
+- Frozen amended protocol/source commit: `c75e6a8c`
+- Fresh: 576 rows, worlds 27110–27112 × seeds 0–2.
+- Independent support-fitted OFT is under-optimized; only oracle upper is used as capacity control.
+- See `VERIFICATION.json`; synthetic CPU-only evidence.
