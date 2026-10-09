@@ -1,0 +1,82 @@
+{
+  "experiment_id": "MA-520",
+  "title": "Distill support-derived function vectors into a rank-four shared Mirror decoder",
+  "status": "SCREENING",
+  "evidence_lane": "FUNCTION_VECTOR/DISTILLATION/CAUSAL_QUALITY/ACTUAL_BYTES/COMPUTE",
+  "base_commit": "ccf4d5c4e83992d70ccdc5db6032e428f6532380",
+  "hypothesis": "For held-out tasks in pinned Pythia-70m, a rank-four shared linear decoder trained by FV reconstruction on task IDs 0-11 and held-out task codes fit to their FV teacher targets will preserve causal held-out task effect within 0.10 mean gold-logprob nats and 0.05 accuracy of explicit FVs, use <=0.50x explicit FV-bank bytes, and beat native rank-four PCA by >=0.10 gold-logprob nats in both development seeds.",
+  "physical_object": "Frozen EleutherAI/pythia-70m-deduped at revision e93a9faa9c77e5d09219f6c868bfc7a1bd65593c; support-derived layer-4 task FVs for sixteen relation tasks.",
+  "mirror_coordinate": "One four-scalar code per relation task decoded by a learned shared mean-plus-linear basis trained with FV teacher reconstruction loss.",
+  "logical_multiplicity": "Sixteen relation functions represented by one shared decoder and sixteen compact codes, with tasks 12-15 withheld from decoder fitting.",
+  "prior_art_refs": ["PA99"],
+  "controls": [
+    "No intervention",
+    "Explicit FP32 FV bank",
+    "Explicit int8 FV bank with per-vector scale",
+    "Native centered PCA rank-four basis fit to task IDs 0-11, with held-out codes by least squares",
+    "Mirror rank-four learned shared linear decoder trained on task IDs 0-11"
+  ],
+  "task": {
+    "type": "pretrained causal-LM in-context relation recall",
+    "model": "EleutherAI/pythia-70m-deduped",
+    "revision": "e93a9faa9c77e5d09219f6c868bfc7a1bd65593c",
+    "model_weight_sha256": "3da388330e4549156d76b58d6d268c63cd005e9336b4f4d2d378421e7b7a33fd",
+    "config_sha256": "002050231a9b1ec3ac77aa6b9b3bbdc4d923f4068a7dd33b8da72a9bd6ad9a43",
+    "tokenizer_sha256": "c24618a1b3e6a38167beff1c72cffd126c3a66254347304b50547d12c5f25624",
+    "shared_extractor": "MA-516 frozen function-vector extraction implementation, support split and evaluator",
+    "hidden_dimension": 512,
+    "intervention_layer_output_index": 4,
+    "task_ids": "0-15 from frozen MA-516 task manifest",
+    "basis_fit_task_ids": [0,1,2,3,4,5,6,7,8,9,10,11],
+    "basis_heldout_task_ids": [12,13,14,15],
+    "support_examples_per_function": 8,
+    "queries_per_heldout_task": 8,
+    "candidate_set": "all distinct held-out target strings for each task",
+    "primary_metric": "mean held-out gold candidate log probability across task IDs 12-15",
+    "secondary_metrics": ["held-out top-1 accuracy", "gold-vs-best-negative margin", "relative FV reconstruction RMSE", "cosine similarity", "actual serialized inference bytes", "support and query tokens", "optimizer updates", "fit/decode/inference wall time"]
+  },
+  "distillation": {
+    "decoder": "v_hat = mean_train + W m, where W is 512x4 and each function address m has four FP32 scalars",
+    "training_targets": "the twelve extracted task FV teachers for IDs 0-11",
+    "loss": "mean squared error over all 512 dimensions and 12 task vectors",
+    "optimizer": "Adam, full-batch, learning rate 0.01, zero weight decay, exactly 2000 updates",
+    "initialization": "NumPy and Torch RNG seeded by the registered development seed; W and training codes iid Normal(0, 1/sqrt(512))",
+    "heldout_code_assignment": "least-squares projection of each held-out teacher FV onto the frozen learned decoder; teacher vectors are discarded after code serialization",
+    "selection": "no hyperparameter or seed selection; one frozen rank and fixed update count"
+  },
+  "development": {
+    "seeds": [52001,52002],
+    "optimizer_updates": 2000,
+    "changes_after_run": "prohibited without numbered amendment"
+  },
+  "fresh": {
+    "seeds": [52011,52012,52013],
+    "locked_before_access": true,
+    "opened": false,
+    "opening_rule": "Open only if both dev seeds preserve held-out causal quality within the explicit-FV tolerances, beat native PCA by >=0.10 mean gold-logprob nats, and fit <=0.50x explicit FV bytes."
+  },
+  "storage": {
+    "authority": "actual uncompressed NPZ file bytes",
+    "paid_objects": ["decoder mean and W", "all sixteen four-scalar codes", "task IDs", "model/layer/revision/dtype/schema metadata", "int8 per-vector scales for quantized control"],
+    "common_base": "Include pinned model/config/tokenizer actual bytes in total deployment; common across methods. No task FV or reconstructed vector is cached."
+  },
+  "compute": {
+    "hardware": "CPU, fixed five-thread limit, no GPU",
+    "support_forward_calls_and_tokens": true,
+    "candidate_forward_calls_and_tokens": true,
+    "optimizer_updates": 2000,
+    "active_compute_proxy": "report FV training multiplies (2000*12*512*4), held-out code projection multiplies (4*512*4), and intervention-vector adds per scored candidate sequence",
+    "wall_clock": "separately report extraction, fitting, code assignment, and query evaluation"
+  },
+  "gates": {
+    "PASS": "In both dev seeds: <=0.05 absolute held-out top-1 drop and <=0.10 nat mean gold-logprob drop from explicit FVs; <=0.50x explicit FP32 bank bytes; and >=0.10 nat mean gold-logprob improvement over native PCA rank-four at matched rank and comparable bytes.",
+    "FAIL": "Any frozen quality or byte gate is missed, or learned decoder does not beat native PCA by the registered margin in both seeds.",
+    "NOT_ESTABLISHED": "Pinned artifact integrity, task split alignment, or deterministic result replay fails."
+  },
+  "boundaries": [
+    "Sixteen constrained relation tasks and four decoder-held-out tasks on one 70M model; not broad reasoning or open-ended generation.",
+    "FV teacher targets are used to assign held-out codes, and their acquisition cost is reported; only codes and decoder are inference state.",
+    "A low-rank learned decoder is also a standard low-rank shared basis; native PCA is the attribution control.",
+    "Fresh seeds remain unopened unless all frozen quality, byte, and attribution gates pass."
+  ]
+}

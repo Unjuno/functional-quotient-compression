@@ -1,0 +1,25 @@
+{
+  "experiment_id": "MA-520",
+  "frozen_before_development": true,
+  "protocol_path": "experiments/mirror_applications/ma-520-function-vector-distillation/PROTOCOL.json",
+  "protocol_sha256": "645b27e667a394175e99c26a76c7156edab4dcbb02d9d20c9bdc2dba5f12a8cf",
+  "development_seeds": [
+    52001,
+    52002
+  ],
+  "fresh_seeds": [
+    52011,
+    52012,
+    52013
+  ],
+  "fresh_opened": false,
+  "fixed_rank": 4,
+  "fixed_optimizer_updates": 2000,
+  "fixed_controls": [
+    "none",
+    "explicit_fp32",
+    "explicit_int8",
+    "native_pca_rank4",
+    "mirror_learned_rank4"
+  ]
+}
