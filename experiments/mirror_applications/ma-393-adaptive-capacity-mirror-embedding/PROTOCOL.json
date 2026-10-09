@@ -1,0 +1,79 @@
+{
+  "experiment_id": "MA-393",
+  "title": "Adaptive-capacity embedding plus token Mirror view",
+  "status": "PROTOCOL_FROZEN_BEFORE_DEVELOPMENT",
+  "base_commit": "25c81a28",
+  "prior_art_refs": ["PA60"],
+  "hypothesis": "A per-token Mirror angle can restore useful function variation in frequency-banded low-dimensional embeddings, especially for rare tokens, while using no more complete bytes than an adaptive embedding with one additional physical latent coordinate per token.",
+  "physical_object": "One frequency-banded token embedding code table with latent widths 16 for 64 frequent tokens, 8 for 128 medium tokens and 4 for 192 rare tokens, projected into a fixed 16-dimensional representation.",
+  "mirror_coordinate": "One learned token-specific Givens angle rotates the first output feature pair after the shared band projection; it adds one scalar/token while retaining the original adaptive latent widths.",
+  "logical_multiplicity": "384 token embeddings with frequency-dependent physical widths and one additional functional view coordinate per token.",
+  "prior_art_delta": "PA60 establishes adaptive capacity allocation by frequency. This experiment tests whether a token-level Mirror coordinate recovers useful function lost in the low-width bands, compared both to standard adaptive widths and to a byte-matched control that adds one ordinary latent coordinate per token.",
+  "model": {
+    "vocabulary_size": 384,
+    "embedding_dim": 16,
+    "frequency_bands": {"frequent": {"tokens": 64, "latent_dim": 16, "sampling_mass": 0.70}, "medium": {"tokens": 128, "latent_dim": 8, "sampling_mass": 0.22}, "rare": {"tokens": 192, "latent_dim": 4, "sampling_mass": 0.08}},
+    "updates": 2000,
+    "batch_size": 256,
+    "optimizer": "Adam",
+    "learning_rate": 0.02,
+    "development_seeds": [39301, 39302],
+    "fresh_seeds": [39311, 39312, 39313],
+    "methods": [
+      "independent full 384x16 embedding upper control",
+      "standard adaptive embedding with widths 16/8/4",
+      "byte-matched adaptive embedding with widths 17/9/5 and no Mirror view",
+      "adaptive 16/8/4 codes plus one learned Mirror angle per token"
+    ]
+  },
+  "teacher": {
+    "basis": "Each frequency band has a fixed seeded projection from its latent width to 16 output dimensions. Projection seeds are paid and deterministically reconstruct the projection matrices.",
+    "target": "For each token, sample a latent vector at its registered band width and a seeded angle; project the vector and rotate its first 2D feature plane by that token angle. Teacher target labels use one fixed 16x16 decoder.",
+    "sampling": "Train token examples from the registered band masses, uniform within each frequency band. Evaluate all tokens both uniformly and with registered sampling-mass weights.",
+    "purpose": "Aligned feasibility probe: tests an explicitly frequency-dependent low-capacity embedding where the Mirror coordinate matches the teacher's functional orbit."
+  },
+  "controls": [
+    "full independent embedding upper control",
+    "adaptive 16/8/4 latent widths without per-token View",
+    "byte-matched simple adaptive 17/9/5 latent widths without View",
+    "adaptive 16/8/4 plus per-token Givens Mirror angle"
+  ],
+  "development": {
+    "worlds_or_seeds": [39301, 39302],
+    "selection_metric": "Frequency-mass-weighted embedding NRMSE is primary; uniform/per-band embedding NRMSE, weighted decoder NLL/top-1, actual complete bytes, compute proxy and wall time are secondary.",
+    "allowed_tuning": "No tuning planned; bands, teacher, optimizer and training schedule are fixed. Correctness-only changes rerun development before fresh access."
+  },
+  "fresh": {
+    "worlds_or_seeds": [39311, 39312, 39313],
+    "locked_before_access": true,
+    "open_gate": "Both development worlds: full NRMSE <=0.03; Mirror weighted NRMSE <=0.05 and weighted decoder NLL within .02 nat/top-1 within 1pp of full; Mirror actual payload <=0.60x full table; Mirror beats standard adaptive rare-band NRMSE by >=.05 and byte-matched adaptive weighted NRMSE by >=.01 at <=1.10x its actual payload; frequent-band Mirror degradation <=.03 NRMSE; exact serialized replay. Otherwise fresh stays sealed.",
+    "fresh_success": "All three worlds meet all weighted, band-specific, byte-matched-control, full-table and replay gates."
+  },
+  "storage": {
+    "authority": "actual compressed NPZ inference payload bytes after reload",
+    "paid_objects": [
+      "full embedding or each band-specific latent code",
+      "each per-token Mirror angle or additional adaptive coordinates",
+      "fixed decoder",
+      "band boundaries, dimensions, sampling metadata and deterministic projection seeds",
+      "archive names, headers and compression overhead"
+    ],
+    "deterministic_reconstruction": "Projection matrices are regenerated from stored seeds and fixed algorithm; seed metadata is charged."
+  },
+  "compute": {
+    "report_examples_and_updates": true,
+    "report_band_projection_MAC_proxy": true,
+    "report_view_rotation_ops": true,
+    "report_decoder_MAC_proxy": true,
+    "report_training_wall_time": true,
+    "report_inference_tokens_per_second": true
+  },
+  "success_gate": "All three fresh worlds satisfy weighted quality, rare-band recovery, byte-matched adaptive comparison, full-table compression and exact replay gates.",
+  "failure_gate": "Any development quality, rare-band, byte-matched control, full-table storage or replay gate fails.",
+  "boundaries": [
+    "synthetic frequency-banded embedding screen, not a language model or real Zipf corpus",
+    "projection bases are fixed random matrices, not learned frequency embeddings",
+    "the Mirror teacher is aligned to a 2D rotation orbit",
+    "fixed update budget is not near-convergence or capacity evidence"
+  ]
+}
