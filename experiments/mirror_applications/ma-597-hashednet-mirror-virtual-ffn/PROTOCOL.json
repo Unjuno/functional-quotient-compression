@@ -1,0 +1,61 @@
+{
+  "experiment_id": "MA-597",
+  "title": "HashedNet virtual FFN with a learned Givens input View",
+  "status": "FROZEN_BEFORE_DEVELOPMENT",
+  "evidence_lane": "HASHEDNET/PA120/FFN_COLLISION_INTERFERENCE/ACTUAL_BYTES/CPU_RUNTIME",
+  "base_commit": "dd2c8fdb",
+  "dataset": "scikit-learn load_digits, fixed 8x8 grayscale digit features and labels",
+  "dataset_package_version": "1.8.0",
+  "dataset_tensor_sha256": "faf2d98f61250c1cdc0b114323133d3c58da04f5c5d28bb78e4bde3c936a75b1",
+  "model": "Two-layer MLP: 64 inputs -> 128 ReLU hidden units -> 10 logits; compressed object is first FFN weight matrix",
+  "hypothesis": "A 32-angle block-Givens coordinate on the input features will reduce harmful parameter collisions in a 4x HashedNet FFN enough to improve test accuracy over ordinary hashing, while using no more than 1.10x the native hash payload and outperforming byte-near diagonal and rank-one residual controls.",
+  "physical_object": "One 2,048-value hashed parameter table for an 8,192-weight first-layer FFN matrix; second layer and biases are shared/paid normally",
+  "mirror_coordinate": "Thirty-two learned adjacent-pair Givens angles applied to the input feature coordinates before the hashed FFN matrix",
+  "task": "Ten-class supervised handwritten digit recognition; each run uses a stratified 75/25 train/test split",
+  "methods": [
+    "dense independent first-layer upper control",
+    "native HashedNet with 2,048 buckets",
+    "HashedNet with 4,096 buckets",
+    "HashedNet plus 32 learned Givens input angles (Mirror)",
+    "HashedNet plus 64 learned diagonal input scales",
+    "HashedNet plus rank-one first-layer residual"
+  ],
+  "hashing": {
+    "logical_matrix_shape": [64, 128],
+    "native_bucket_count": 2048,
+    "larger_bucket_control": 4096,
+    "mapping": "Uniform bucket and independent +/-1 sign sampled from NumPy PCG64 using a deterministic run-derived seed; mapping is regenerated from the paid 32-bit seed and fixed implementation.",
+    "collision_metrics": ["unique_bucket_fraction", "collision_rate", "pairwise_collision_count", "maximum_bucket_load", "dense-teacher bucket projection RMSE"]
+  },
+  "training": {
+    "optimizer": "AdamW",
+    "learning_rate": 0.01,
+    "updates": 800,
+    "batch_size": 128,
+    "input_scale": "digits pixels divided by 16",
+    "training_examples": "Stratified 75% split; deterministic minibatch sampling per method/run seed",
+    "initialization": "Dense Kaiming; hash table Kaiming-equivalent normal; Mirror angles zero; diagonal scales one; rank-one factors small Gaussian"
+  },
+  "development": {
+    "seeds": [59701, 59702],
+    "data_splits": "Stratified train_test_split, test_size=0.25; random_state=run seed",
+    "selection": "No hyperparameter grid. Architecture, bucket counts, 800 updates, optimizer and success thresholds are fixed before training."
+  },
+  "fresh": {
+    "seeds": [59711, 59712, 59713],
+    "data_splits": "Same fixed dataset, independent stratified partitions keyed by fresh seeds",
+    "locked_before_access": true,
+    "open_rule": "Run all fresh splits only if both development seeds satisfy the complete frozen Mirror quality/storage/control gate. No fresh results may select or alter settings."
+  },
+  "storage": {
+    "authority": "actual uncompressed NPZ inference payload bytes after load/serialize roundtrip",
+    "paid_objects": ["dense or hashed first-layer parameters", "second-layer weights and biases", "Mirror angles or diagonal/low-rank controls", "hash seed", "shape/schema/method metadata"],
+    "deterministic_reconstruction": "Hash indices/signs are regenerated from the paid seed and the committed hash algorithm; only the seed and code/schema are free-standing paid state."
+  },
+  "compute": {
+    "report": ["optimizer updates", "examples and tokens", "active matmul MAC proxy", "hash expansion lookups", "Givens/diagonal/low-rank operations", "training wall time", "serialized-model inference wall time and examples/s", "CPU device/thread count"]
+  },
+  "success_gate": "Both dev seeds: Mirror accuracy is at least +1.0 percentage point over 2,048-bucket HashedNet and within 2.0 points of dense; Mirror payload <=1.10x native 2,048-bucket bytes; and neither diagonal-gate nor rank-one-residual control matches/beats Mirror within 1.0 point at <=1.10x Mirror bytes. Fresh splits confirm only after this gate.",
+  "failure_gate": "Any dev quality/byte/control miss or any Mirror gain explained by a byte-near simple control is FAIL for the registered Mirror claim. Fresh remains sealed unless the complete dev gate passes.",
+  "boundaries": ["One small image dataset and one compressed FFN matrix; not language-model capacity evidence", "A 2,048-bucket table creates hash collisions; virtual connections are not counted as independent capacity", "Weight projection error is diagnostic; held-out accuracy is the primary functional quality", "Fixed-update learning efficiency is not a near-convergence capacity claim", "A Mirror view is only credited if the matched native gate and low-rank controls do not explain it"]
+}
