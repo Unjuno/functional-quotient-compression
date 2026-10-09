@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-362.** MA-361 shared MoD reduced storage, but the direct scalar control matched Mirror exactly and one seed missed the quality margin. Proceed to MA-362, the next eligible P0 candidate after the Mixture-of-Depths screen.
+**Current operational pointer (2026-10-09): MA-364.** MA-361 shared MoD reduced storage, but the direct scalar control matched Mirror exactly and one seed missed the quality margin. MA-362 and MA-363 are P1; proceed to MA-364, early-exit Mirror readout views (P0).
 
 # Worker queue
 
