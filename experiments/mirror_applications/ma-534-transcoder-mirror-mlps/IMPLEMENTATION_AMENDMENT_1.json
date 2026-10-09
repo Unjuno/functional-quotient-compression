@@ -1,0 +1,8 @@
+{
+  "amendment": 1,
+  "recorded_before_any_model_run_or_metric_access": true,
+  "reason": "The original protocol simultaneously required a full-dictionary global top-32 activation mask and charged only selected encoder rows, which is not executable from paid inference state.",
+  "change": "The transcoder is still trained with top-32 over 2048 features; the 16-feature inference view now directly evaluates ReLU on its selected paid encoder rows. The complete 16-row encoder/decoder and biases are charged in every view payload.",
+  "claim_boundary": "Results concern selected 16-atom feature views, not a global top-32 mask reconstructed from the full dictionary. All quality, byte, compute and native-control gates remain unchanged.",
+  "fresh_seeds_remain_sealed": true
+}

@@ -83,7 +83,8 @@
     "givens": "For pooled top-32 transcoder activations z(x), rotate fixed pairs (0,1),(2,3),...,(14,15) with eight task angles, then multiply by the selected shared decoder rows to form an additive layer3 MLP-output delta.",
     "pairwise_gains": "Equal-size native control: one learned scalar per fixed feature pair, same eight FP32 values/task and same optimizer updates.",
     "elementwise_feature_gates": "Strong native control: one independently learned scalar for each of the 16 selected latent features, 16 FP32 values/task.",
-    "fit": "Fit each role-specific code by MSE to its eight support MLP-delta vectors; Adam lr=.01, exactly 500 updates/task, no tuning."
+    "fit": "Fit each role-specific code by MSE to its eight support MLP-delta vectors; Adam lr=.01, exactly 500 updates/task, no tuning.",
+    "feature_input": "Selected 16 paid encoder rows are evaluated directly with ReLU at inference. Givens/gain/gate operations act on these selected activations. The full 2048-row dictionary is not used or needed by the deployed view."
   },
   "controls": [
     "No MLP intervention",
@@ -113,12 +114,13 @@
   "storage": {
     "authority": "actual uncompressed NPZ bytes",
     "paid_objects": [
-      "selected transcoder encoder rows+bias and decoder rows",
+      "selected 16 transcoder encoder rows+bias and decoder rows+bias",
       "all task Givens/gain/per-feature-gate codes",
-      "explicit MLP-delta vector bank",
+      "explicit MLP-delta vector bank for the explicit upper control",
       "role IDs and reconstruction metadata"
     ],
-    "accounting": "Candidate contains only the selected input/output basis required for feature encoding/decoding plus task codes; no full 2048-feature transcoder or decoded delta cache. Report standalone Pythia+View and explicit-delta totals."
+    "accounting": "Candidate contains only the selected input/output basis required for feature encoding/decoding plus task codes; no full 2048-feature transcoder or decoded delta cache. Report standalone Pythia+View and explicit-delta totals.",
+    "selected_basis": "The support-trained 2048-feature top-32 transcoder selects 16 encoder/decoder atom pairs. Deployment directly evaluates ReLU on those 16 paid encoder rows (all selected coordinates are available); it does not claim to reconstruct the full-dictionary global top-32 mask. Training still uses global top-32 sparsity. This is the executable 16-atom functional view."
   },
   "compute": {
     "hardware": "CPU, fixed five-thread limit",
