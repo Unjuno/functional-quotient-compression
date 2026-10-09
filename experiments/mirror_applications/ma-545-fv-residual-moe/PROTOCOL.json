@@ -1,0 +1,71 @@
+{
+  "experiment_id": "MA-545",
+  "title": "Few-shot-routed function-vector experts without weight experts",
+  "status": "SCREENING",
+  "evidence_lane": "LANGUAGE/REPRESENTATION_ROUTING/CAUSAL_QUALITY/ACTUAL_BYTES",
+  "base_commit": "a37cb993d0a9bef5c7a9bb39e86abca39ed30bf6",
+  "hypothesis": "On 16 held-out Pythia-70M relation tasks, a router that reads the few-shot demonstration context can select support-derived residual-stream function-vector experts with at least 0.75 task-route accuracy, and the routed activation experts will retain task quality within 0.05 candidate accuracy and 0.10 gold-logprob nats of oracle FV routing while costing at most 0.75x the complete learned-router rank-one MLP-output expert bank.",
+  "physical_object": "Pinned Pythia-70M-deduped revision e93a9faa9c77e5d09219f6c868bfc7a1bd65593c.",
+  "mirror_coordinate": "A task address selects one support-derived additive residual-stream function vector at layer 3 query-final position; router uses the complete few-shot prompt context.",
+  "logical_multiplicity": "Sixteen relation-task activation experts, top-1 routed per query. Task-count is coverage, not independent capacity.",
+  "prior_art_refs": ["PA99", "PA100", "PA101", "PA17"],
+  "controls": [
+    "No activation intervention with the same four-shot prompt (native ICL baseline)",
+    "Oracle-task-routed explicit FP32 FV bank (conditional quality upper)",
+    "Learned-router explicit FP32 FV bank",
+    "Learned-router rank-one task-specific MLP-output LoRA residual bank fitted from support activation pairs (weight-space control)",
+    "Shared mean FV with no routing (shared behavior control)"
+  ],
+  "artifacts": {
+    "model_revision": "e93a9faa9c77e5d09219f6c868bfc7a1bd65593c",
+    "model_sha256": "3da388330e4549156d76b58d6d268c63cd005e9336b4f4d2d378421e7b7a33fd",
+    "config_sha256": "use pinned MA-530 harness",
+    "tokenizer_sha256": "use pinned MA-530 harness"
+  },
+  "task": {
+    "source": "Frozen 16 relation tasks and split routine copied from MA-530 shared_fv_harness.py.",
+    "support_examples_per_task": 8,
+    "query_examples_per_task": 8,
+    "router_context": "Four fixed support demonstrations in task order, then query; no answer from query is included.",
+    "fv_extraction": "Mean layer-3 residual hidden-state difference at query-final position between prompt with all other seven support demonstrations and the same query without demonstrations.",
+    "primary_metric": "Held-out candidate accuracy over all task queries",
+    "secondary_metrics": ["mean gold candidate log probability", "route accuracy/macro-F1/confusion", "gold margin", "payload bytes", "candidate sequences/tokens", "active compute proxy", "wall time"]
+  },
+  "router": {
+    "input": "Layer-4 final hidden state at the query-final position with four support demonstrations.",
+    "fit_data": "Eight support queries per task on development seeds only; support/query inputs disjoint.",
+    "architecture": "Single affine 512-to-16 softmax classifier; standardization mean/std and weights/bias stored FP32; argmax top-1.",
+    "optimization": "Full-batch cross-entropy Adam, lr=.01, exactly 1000 updates, zero weight decay. Fixed, no tuning. If it cannot fit or route, record that result.",
+    "context_demonstrations": "Select the first four support rows under split order for each routed example; support prompt includes query input removed from demo list if duplicated."
+  },
+  "weight_control": {
+    "insertion": "Per-task rank-one LoRA residual on layer-3 MLP output: y += (x @ A) @ B, rank 1.",
+    "fit": "Use support examples only; regress observed layer-3 MLP inputs to target residual-stream FV deltas with ridge=1e-3, take best rank-one SVD approximation. Same learned router addresses the task-specific factors.",
+    "cost": "Store all A/B factors, router, normalization and metadata; report fit/decode compute."
+  },
+  "development": {
+    "seeds": [54501, 54502],
+    "selection_metric": "Mean accuracy, then gold log probability; there are no tunable hyperparameters.",
+    "post_run_changes": "Prohibited without numbered amendment."
+  },
+  "fresh": {
+    "seeds": [54511, 54512, 54513],
+    "locked_before_access": true,
+    "opened": false,
+    "opening_rule": "Open only if both development seeds pass route, FV-vs-oracle quality, and FV-vs-LoRA byte gates."
+  },
+  "storage": {
+    "authority": "Actual uncompressed NPZ serialized inference payload bytes.",
+    "paid_objects": ["router weights/bias and standardization", "all FV expert vectors", "all LoRA A/B factors", "task ids, model revision, layer and schema metadata", "support split/router manifest", "pinned model files for standalone deployment"],
+    "reporting": "Expert-only, router+expert, incremental-over-preloaded-model, and standalone Pythia deployment totals; serialize independently for each method."
+  },
+  "compute": {
+    "hardware": "CPU, fixed five-thread limit.",
+    "optimizer_updates": 1000 router updates per seed; weight control is deterministic SVD/ridge fit without gradient updates.",
+    "report_tokens_or_examples": true,
+    "active_compute_proxy": "Report candidate transformer sequences/tokens, affine route MACs, FV add dimensions, LoRA rank-one MACs, extraction/ridge fit work, and isolated extraction/evaluation wall time."
+  },
+  "success_gate": "Both development seeds: learned router route accuracy >=.75; learned-router FV is within .05 accuracy and .10 gold-logprob nats of oracle FV; complete learned-router FV payload <=.75x the same-router rank-one weight bank; and FV improves over ICL by >=.05 accuracy or >=.10 gold-logprob nats on average. Fresh remains unopened until all gates pass.",
+  "failure_gate": "Any development seed misses route/quality/byte gate, or the intervention has no consistent held-out gain over ICL. Exact/native-control ties count against Mirror-specific attribution.",
+  "boundaries": ["One pinned Pythia-70M model and 16 relation tasks.", "This is a few-shot contextual routing test, distinct from MA-530 query-only routing.", "Support-derived FV extraction has support examples available at task setup; no fresh query labels are used.", "Task label routing is not independent expert capacity.", "No general language-model, scaling, or capacity claim."]
+}
