@@ -1,0 +1,72 @@
+{
+  "experiment_id": "MA-468",
+  "status": "COMPLETED_FAIL",
+  "protocol_commit": "2f26575d",
+  "initial_protocol_commit": "ea565246",
+  "exploratory_excluded_worlds": [
+    46810,
+    46811,
+    46812
+  ],
+  "A1_fresh_worlds": [
+    46820,
+    46821,
+    46822
+  ],
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "aggregate_rows": 108,
+  "checks": [
+    {
+      "name": "artifact_tests",
+      "command": "python -m pytest -q experiments/mirror_applications/ma-468-polytropon-mirror-skill-views/tests",
+      "result": "pending final run"
+    },
+    {
+      "name": "payload_integrity_and_reconstruction",
+      "result": "All 108 payload hashes/lengths replayed; serialized skill routing maps checked."
+    },
+    {
+      "name": "registered_gate",
+      "result": "FAIL: Mirror NRMSE misses full four-module bank and payload exceeds 75% gate; private residual nearly closes quality gap but increases bytes."
+    }
+  ],
+  "N6": {
+    "no_view": {
+      "heldout_pair_nrmse": 0.5107051150666343,
+      "bytes_per_task_pair": 368.1666666666667,
+      "payload_bytes": 2209.0,
+      "view_search_MAC": 0.0,
+      "view_search_wall_seconds": 0.0,
+      "query_wall_seconds_mean": 1.5579834224707964e-05
+    },
+    "mirror": {
+      "heldout_pair_nrmse": 0.375022260679139,
+      "bytes_per_task_pair": 410.1666666666667,
+      "payload_bytes": 2461.0,
+      "view_search_MAC": 184832.0,
+      "view_search_wall_seconds": 0.011546196666636711,
+      "query_wall_seconds_mean": 1.541155426012766e-05
+    },
+    "mirror_private": {
+      "heldout_pair_nrmse": 0.0010080616381477922,
+      "bytes_per_task_pair": 452.1666666666667,
+      "payload_bytes": 2713.0,
+      "view_search_MAC": 184832.0,
+      "view_search_wall_seconds": 0.011546196666636711,
+      "query_wall_seconds_mean": 1.5577388694509864e-05
+    },
+    "full": {
+      "heldout_pair_nrmse": 8.980151693865284e-08,
+      "bytes_per_task_pair": 368.1666666666667,
+      "payload_bytes": 2209.0,
+      "view_search_MAC": 0.0,
+      "view_search_wall_seconds": 0.0,
+      "query_wall_seconds_mean": 2.1161332066791754e-05
+    }
+  },
+  "scope": "Synthetic four-skill linear bank; A1 corrected serialized full-bank routing metadata; initial run excluded."
+}
