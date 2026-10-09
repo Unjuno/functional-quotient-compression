@@ -1,0 +1,84 @@
+{
+  "experiment_id": "MA-399",
+  "title": "MatFormer nested speculative drafter with Mirror granularity view",
+  "status": "PROTOCOL_FROZEN_BEFORE_DEVELOPMENT",
+  "base_commit": "f7cabacf",
+  "prior_art_refs": ["PA53", "PA15"],
+  "hypothesis": "A small Mirror coordinate on a narrow nested drafter improves its distributional alignment with the full shared verifier enough to increase exact speculative-decoding throughput, while using fewer complete bytes than an independently parameterized drafter/verifier pair.",
+  "physical_object": "One frozen width-16 MLP supermodel. Width-8 and width-12 nested children use prefixes of the same hidden layer and output matrix.",
+  "mirror_coordinate": "Four learned Givens angles rotate pairs of width-8 draft hidden activations before the shared output projection. The verifier remains the unmodified width-16 model.",
+  "logical_multiplicity": "One physical supermodel provides width-8 draft, width-12 nested reference and width-16 verifier roles; the Mirror code changes only the width-8 draft role.",
+  "prior_art_delta": "PA53 MatFormer already provides nested child models; PA15 uses a routed slim verifier for hierarchical verification. This screen tests a tiny role-specific Mirror correction to the nested draft distribution, with width-12 as a stronger nested compute reference and full-width exact verifier. It does not claim to reproduce PA15's routed rejection hierarchy.",
+  "model": {
+    "input_dimension": 8,
+    "hidden_widths": [8, 12, 16],
+    "vocabulary_size": 16,
+    "mirror_planes": 4,
+    "training_contexts": 2048,
+    "evaluation_contexts": 2048,
+    "updates": 1200,
+    "batch_size": 128,
+    "optimizer": "Adam",
+    "learning_rate": 0.01,
+    "development_seeds": [39901, 39902],
+    "fresh_seeds": [39911, 39912, 39913],
+    "methods": [
+      "full width-16 verifier only",
+      "shared nested width-8 draft without view",
+      "shared nested width-12 draft reference",
+      "shared width-8 draft plus four Mirror angles",
+      "shared width-8 draft plus FiLM scale/shift",
+      "independent width-8 draft alongside full verifier"
+    ]
+  },
+  "teacher_and_task": {
+    "teacher": "A seeded frozen width-16 tanh MLP defines next-token distributions over 16 classes for Gaussian contexts. Width-8/12 logits are prefix subnetworks from the same supermodel.",
+    "adaptation": "Mirror angles, FiLM parameters and independent width-8 weights are fitted to the full teacher softmax on training contexts only; the full verifier and shared supermodel stay frozen.",
+    "speculative_metric": "For each held-out context, report draft/full overlap sum_v min(q(v),p(v)) as expected one-token acceptance. Then construct the standard exact residual-corrected speculative output distribution and report its max deviation from p_full.",
+    "latency_metric": "Measure draft and full-verifier CPU forward times separately and calculate expected emitted tokens per cycle divided by draft-plus-verifier time; compare with full-only token throughput. Also report measured draft tokens/s."
+  },
+  "controls": [
+    "hard nested width-8 MatFormer draft",
+    "nested width-12 draft as higher-compute shared reference",
+    "FiLM correction on width-8 draft hidden state",
+    "independent width-8 draft trained against the same teacher",
+    "full width-16 verifier as exact quality/runtime reference"
+  ],
+  "development": {
+    "worlds_or_seeds": [39901, 39902],
+    "selection_metric": "Held-out draft/full overlap and expected exact speculative tokens/s are primary; corrected-distribution exactness, draft KL/NLL, actual payload bytes, training cost and latency are required.",
+    "allowed_tuning": "No tuning planned. Fixed teacher, widths, data sizes, update schedule and optimizer. Correctness fixes may rerun development before fresh access."
+  },
+  "fresh": {
+    "worlds_or_seeds": [39911, 39912, 39913],
+    "locked_before_access": true,
+    "open_gate": "Both development worlds: corrected speculative output max absolute distribution error <=1e-6; Mirror held-out overlap improves over nested width-8 by >=0.05 and is within 0.03 of width-12; expected exact speculative tokens/s >=1.05x full-only; Mirror complete payload <=0.80x independent-pair payload; Mirror training wall time <=1.5x FiLM; exact payload replay. Otherwise fresh remains sealed.",
+    "fresh_success": "All three fresh worlds satisfy acceptance, exactness, measured throughput, training cost, bytes and replay gates."
+  },
+  "storage": {
+    "authority": "actual compressed NPZ inference payload bytes after reload",
+    "paid_objects": [
+      "full shared width-16 verifier/supermodel weights",
+      "Mirror angles or FiLM correction parameters, when used",
+      "full independent width-8 drafter weights in the independent control",
+      "model widths, activation/decoder metadata and archive overhead"
+    ],
+    "deterministic_reconstruction": "Nested width slices are exact prefixes of the paid supermodel; no second copy of shared weights is stored."
+  },
+  "compute": {
+    "report_width_specific_MAC_proxy": true,
+    "report_training_contexts_and_updates": true,
+    "report_training_wall_time": true,
+    "measure_draft_and_verifier_latency": true,
+    "report_expected_acceptance_and_tokens_per_second": true
+  },
+  "success_gate": "All fresh acceptance, exactness, actual-payload, expected-throughput, training-cost and replay criteria pass.",
+  "failure_gate": "A frozen development acceptance, throughput, training-cost, storage or exactness gate fails.",
+  "boundaries": [
+    "one-step synthetic next-token distributions, not autoregressive language generation",
+    "teacher is a frozen small MLP and no GPU is required",
+    "exactness applies to residual-corrected one-token speculative sampling against the full verifier",
+    "fixed update budget is not a capacity or language-model result",
+    "PA15 hierarchical routed verification is cited but not implemented in this screen"
+  ]
+}
