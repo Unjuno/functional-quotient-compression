@@ -1,24 +1,63 @@
 {
-  "status": "PENDING",
   "base_commit": "6e1f5f7e",
-  "protocol_frozen_before_development": true,
-  "source_sha256": "4135e529b9d72ef2557841afbf7887c498bc2a78cdf25ab642adc9431cbe7c62",
   "checks": {
-    "unit_tests": "4 passed",
-    "registry_integrity": "0 errors",
-    "git_diff_check": "clean",
-    "development_worlds": "55001/55002 both pass adaptive quality and byte gates",
-    "dev_55001_replay_npz_sha256": {
-      "weight_dense.npz": "a4c190ff4e82c61c015fe37dc8976f8059d10d647354917449fbb9eb72f204fc",
-      "activation_code.npz": "6bb9c19163927d0d5ac275e6ee1f5e299c25db57ca19a09f6b221a2c298353ff",
-      "weight_sparse.npz": "45046dc783a65ea50830183ad28377a4a4908ad81af1ab32012be444e021767a",
-      "adaptive.npz": "353196429294a823e0252b36858d019ad8da7f6f955c2c0b08892bdc6568f7a9"
+    "actual_model_payload_bytes": 168144624,
+    "all_npz_sha256": {
+      "dev_55001": {
+        "activation_code.npz": "6bb9c19163927d0d5ac275e6ee1f5e299c25db57ca19a09f6b221a2c298353ff",
+        "adaptive.npz": "353196429294a823e0252b36858d019ad8da7f6f955c2c0b08892bdc6568f7a9",
+        "weight_dense.npz": "a4c190ff4e82c61c015fe37dc8976f8059d10d647354917449fbb9eb72f204fc",
+        "weight_sparse.npz": "45046dc783a65ea50830183ad28377a4a4908ad81af1ab32012be444e021767a"
+      },
+      "dev_55002": {
+        "activation_code.npz": "6537cfc09d0d0b6cc4b3b501f5d74597196212f2af8d3f28013dea606dc6eabd",
+        "adaptive.npz": "72433c42c2f17ffb957af8c094482ac932e597e6808dffbb2fc9df4f5b3fb77c",
+        "weight_dense.npz": "b974d1dbb0247d05a34954940050ceb8478442b240d986980cbeaeb1bed57051",
+        "weight_sparse.npz": "87fa10a8caf5cf83ce8f4881837450a2f11f36aac595947eedac97f703cf9f91"
+      },
+      "fresh_55011": {
+        "activation_code.npz": "d200e5231c8ddd66038a177f34ceeba681d5695f7c71043f6b9d24bd8eeddd17",
+        "adaptive.npz": "2e0b36c5d26e85fd39ef8a380c998264a402a2b31f2f6bb4c8c964c11afe32d2",
+        "weight_dense.npz": "68cd63f26eb80c4323a4374efe162b9e057fe294d9276651870ffc78d4eb8f78",
+        "weight_sparse.npz": "398bd50529ae38bd60b6175cbc180bca7ca0f0e08dcd083872a680f87a963b4d"
+      },
+      "fresh_55012": {
+        "activation_code.npz": "a45456e36b7f7d229b8081b981b4c8ec72edde62b88a0ea187430a1ab278a2c4",
+        "adaptive.npz": "d0fb17ccf0d411fa6912f2f1656b246733a78ae6877e69a15261b32369057fd7",
+        "weight_dense.npz": "365770104922c56e7b9fa864abc04b61d4ed43d1f4ce0305fcece8c208782647",
+        "weight_sparse.npz": "af7361a48c031962542d82da7d28d9054dd7ffd1438d23a0f9d78ad8ea868c3e"
+      },
+      "fresh_55013": {
+        "activation_code.npz": "ebd4e1a1b66b915d0762c51587eedf33b069492abeded4fe7642f12deeefa30a",
+        "adaptive.npz": "3e8851e609676f055a95df6d7eba5471243a5742d06a7d523d52c3115c4f661d",
+        "weight_dense.npz": "8f870c466420505b3847070053e23bc6d3c4b8daeeab61090d4a577ba625c151",
+        "weight_sparse.npz": "7de25fcd6b2491332254373446a2afbb7e019d13b81e0910c912c6f9d412a9d4"
+      }
     },
-    "fresh_opened": false
+    "all_worlds_family_selection": "8 activation codes + 8 sparse bias entries in each world",
+    "byte_identical_development_replay": "all 4 NPZ payloads for 55001 match",
+    "dev_55001_replay_npz_sha256": {
+      "activation_code.npz": "6bb9c19163927d0d5ac275e6ee1f5e299c25db57ca19a09f6b221a2c298353ff",
+      "adaptive.npz": "353196429294a823e0252b36858d019ad8da7f6f955c2c0b08892bdc6568f7a9",
+      "weight_dense.npz": "a4c190ff4e82c61c015fe37dc8976f8059d10d647354917449fbb9eb72f204fc",
+      "weight_sparse.npz": "45046dc783a65ea50830183ad28377a4a4908ad81af1ab32012be444e021767a"
+    },
+    "development_seeds": "55001 and 55002 pass adaptive support/held-out/byte gates",
+    "development_worlds": "55001/55002 both pass adaptive quality and byte gates",
+    "fresh_gates": "all pass; status remains FAIL for Mirror-specific attribution",
+    "fresh_opened": false,
+    "fresh_seeds": "55011, 55012, 55013 all pass adaptive support/held-out/byte gates",
+    "git_diff_check": "clean",
+    "native_control_attribution": "adaptive state equals ordinary sparse output-bias + ReFT/shared output-basis code selector",
+    "registry_integrity": "0 errors",
+    "unit_tests": "4 passed"
   },
   "fresh_opened": true,
   "notes": [
     "Development gate passed and DEVELOPMENT_DECISION.md was committed before fresh metrics were accessed."
   ],
-  "protocol_sha256": "c6a76cf8fe982f933bd542da83a0bf2f0e40693005e10c764772b1b9f7a20617"
+  "protocol_frozen_before_development": true,
+  "protocol_sha256": "c6a76cf8fe982f933bd542da83a0bf2f0e40693005e10c764772b1b9f7a20617",
+  "source_sha256": "4135e529b9d72ef2557841afbf7887c498bc2a78cdf25ab642adc9431cbe7c62",
+  "status": "FAIL_MIRROR_SPECIFIC_ATTRIBUTION"
 }

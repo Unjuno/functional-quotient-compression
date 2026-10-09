@@ -1,8 +1,8 @@
 {
   "activation_functions": 8,
   "compute": {
-    "basis_factor_seconds": 0.18414847902022302,
-    "code_fit_seconds": 0.2007682530384045,
+    "basis_factor_seconds": 0.15569410801981576,
+    "code_fit_seconds": 0.1982493110699579,
     "decode_flops_proxy_by_method": {
       "activation_code": 824180736,
       "adaptive": 412090376,
@@ -16,11 +16,11 @@
       "weight_sparse": 0
     },
     "input_examples": 256,
-    "model_load_seconds": 0.6082086270034779,
+    "model_load_seconds": 0.3449269809934776,
     "optimizer_updates": 0,
     "per_function_code_fit_flops_proxy": 832569344,
     "shared_gram_flops_proxy": 26373783552,
-    "wall_seconds": 1.1442489830078557
+    "wall_seconds": 1.1168422490009107
   },
   "experiment_id": "MA-550",
   "family_counts_selected": {
@@ -31,32 +31,32 @@
   "heldout_observations": 8,
   "methods": {
     "activation_code": {
-      "heldout_relative_rmse": 0.4974193329424857,
-      "max_heldout_relative_rmse": 0.9978866927475737,
-      "max_support_relative_rmse": 0.9978874697434591,
+      "heldout_relative_rmse": 0.49616187532439304,
+      "max_heldout_relative_rmse": 0.9947472249050043,
+      "max_support_relative_rmse": 0.994746636473194,
       "payload_bytes": 34496,
-      "support_relative_rmse": 0.49761877766479234
+      "support_relative_rmse": 0.4963181752015112
     },
     "adaptive": {
-      "heldout_relative_rmse": 2.900306988927625e-05,
-      "max_heldout_relative_rmse": 0.00010068526991815109,
-      "max_support_relative_rmse": 0.003990506287664175,
+      "heldout_relative_rmse": 2.4357277379177323e-05,
+      "max_heldout_relative_rmse": 6.908906702480238e-05,
+      "max_support_relative_rmse": 0.003959035500884056,
       "payload_bytes": 19682,
-      "support_relative_rmse": 0.0022099965498174287
+      "support_relative_rmse": 0.002150438463379001
     },
     "weight_dense": {
-      "heldout_relative_rmse": 0.002211156368957745,
-      "max_heldout_relative_rmse": 0.003990599419921637,
-      "max_support_relative_rmse": 1.1920604947590618e-07,
+      "heldout_relative_rmse": 0.002151381531803054,
+      "max_heldout_relative_rmse": 0.003959132358431816,
+      "max_support_relative_rmse": 1.1920715792257397e-07,
       "payload_bytes": 3220842,
-      "support_relative_rmse": 4.093486675495195e-08
+      "support_relative_rmse": 3.7383766377657723e-08
     },
     "weight_sparse": {
-      "heldout_relative_rmse": 0.4999653287231922,
-      "max_heldout_relative_rmse": 0.9999823570251465,
-      "max_support_relative_rmse": 0.9999822974205017,
+      "heldout_relative_rmse": 0.4999742954969406,
+      "max_heldout_relative_rmse": 0.9999727606773376,
+      "max_support_relative_rmse": 0.9999727010726929,
       "payload_bytes": 1760,
-      "support_relative_rmse": 0.5019465041405056
+      "support_relative_rmse": 0.5019441860786173
     }
   },
   "model_revision": "e93a9faa9c77e5d09219f6c868bfc7a1bd65593c",
@@ -68,107 +68,107 @@
     "weight_dense": true,
     "weight_sparse": false
   },
-  "seed": 55002,
+  "seed": 55012,
   "selection": [
     {
       "function_id": 0,
       "generated_family": "sparse",
       "selected_family": "weight_sparse",
-      "support_relative_rmse": 0.003955272492021322
+      "support_relative_rmse": 0.003956206608563662
     },
     {
       "function_id": 1,
       "generated_family": "sparse",
       "selected_family": "weight_sparse",
-      "support_relative_rmse": 0.003978556487709284
+      "support_relative_rmse": 0.003952356055378914
     },
     {
       "function_id": 2,
       "generated_family": "sparse",
       "selected_family": "weight_sparse",
-      "support_relative_rmse": 0.003973205108195543
+      "support_relative_rmse": 0.0039482335560023785
     },
     {
       "function_id": 3,
       "generated_family": "sparse",
       "selected_family": "weight_sparse",
-      "support_relative_rmse": 0.003986732102930546
+      "support_relative_rmse": 0.003950868267565966
     },
     {
       "function_id": 4,
       "generated_family": "sparse",
       "selected_family": "weight_sparse",
-      "support_relative_rmse": 0.003990506287664175
+      "support_relative_rmse": 0.00394971901550889
     },
     {
       "function_id": 5,
       "generated_family": "sparse",
       "selected_family": "weight_sparse",
-      "support_relative_rmse": 0.003970106597989798
+      "support_relative_rmse": 0.003951162099838257
     },
     {
       "function_id": 6,
       "generated_family": "sparse",
       "selected_family": "weight_sparse",
-      "support_relative_rmse": 0.00398227758705616
+      "support_relative_rmse": 0.00395426107570529
     },
     {
       "function_id": 7,
       "generated_family": "sparse",
       "selected_family": "weight_sparse",
-      "support_relative_rmse": 0.003969855606555939
+      "support_relative_rmse": 0.003959035500884056
     },
     {
       "function_id": 8,
       "generated_family": "activation",
       "selected_family": "activation_code",
-      "support_relative_rmse": 0.000991958027037277
+      "support_relative_rmse": 0.00016434462402875922
     },
     {
       "function_id": 9,
       "generated_family": "activation",
       "selected_family": "activation_code",
-      "support_relative_rmse": 0.00051588507172489
+      "support_relative_rmse": 0.00014495808094777435
     },
     {
       "function_id": 10,
       "generated_family": "activation",
       "selected_family": "activation_code",
-      "support_relative_rmse": 0.00021263615993802722
+      "support_relative_rmse": 0.0006614318182905108
     },
     {
       "function_id": 11,
       "generated_family": "activation",
       "selected_family": "activation_code",
-      "support_relative_rmse": 0.00019893348209646723
+      "support_relative_rmse": 0.00042253749584982063
     },
     {
       "function_id": 12,
       "generated_family": "activation",
       "selected_family": "activation_code",
-      "support_relative_rmse": 0.0002058555401487801
+      "support_relative_rmse": 0.00048058678824664295
     },
     {
       "function_id": 13,
       "generated_family": "activation",
       "selected_family": "activation_code",
-      "support_relative_rmse": 8.526475150392654e-05
+      "support_relative_rmse": 0.00030946647191957514
     },
     {
       "function_id": 14,
       "generated_family": "activation",
       "selected_family": "activation_code",
-      "support_relative_rmse": 0.0009954484390191122
+      "support_relative_rmse": 0.00039687946538648417
     },
     {
       "function_id": 15,
       "generated_family": "activation",
       "selected_family": "activation_code",
-      "support_relative_rmse": 0.00034745105548760906
+      "support_relative_rmse": 0.00020496848994703968
     }
   ],
   "sparse_functions": 8,
-  "split": "dev",
+  "split": "fresh",
   "support_observations": 8,
   "vocab_size": 50304,
   "width": 512
