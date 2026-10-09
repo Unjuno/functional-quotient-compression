@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (73 completed; 557 UNTESTED)
+- P0: **630** (74 completed; 556 UNTESTED)
 - P1: **422** (13 completed; 409 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1069 UNTESTED, 37 PROMISING, 49 FAIL**
+- Current MA statuses: **1068 UNTESTED, 37 PROMISING, 50 FAIL**
 - 68 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -70,9 +70,9 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-297 — SETA shared sparse subspace + Mirror views (P0; PA30)**
+**MA-299 — Split-on-Share Mirror code allocation (P0)**
 
-MA-296 failed: Hadamard address and generic QR match raw task deltas but use slightly more payload bytes; unbound sum compresses while losing task quality. Continue with SETA's shared sparse subspace and test whether Mirror coordinates help inside it.
+MA-297 found a shared-subspace storage signal, but generic PCA matched the Mirror code. Continue to MA-299 to test adaptive code/private allocation.
 
 ## Active experiment
 
@@ -157,3 +157,9 @@ KG relation rotations (RotatE, TuckER, QuatE, PairRE), EXIF/device-aware ISPs (P
 
 - **FAIL** on fresh synthetic linear tasks: Hadamard address and generic QR both reconstruct at ~2e-6 query NRMSE, but use 16,735/16,744 B versus 16,473 B raw task vectors. Unbound sum uses 2,131 B but query NRMSE is ~2.52. No Mirror-specific gain; random PSP unbinding control also has substantial crosstalk. See claim ledger.
 - Next P0 candidate: MA-297 — SETA shared sparse subspace + Mirror views.
+
+
+## Completed: MA-297 — SETA shared sparse subspace + Mirror views
+
+- **FAIL for Mirror-specific value; shared-subspace compression signal observed.** Fresh synthetic sparse task vectors recovered shared support at 100%; Mirror code used 836 B and generic PCA 841 B at query NRMSE ~3.31e-7, versus SETA-style shared/private 1,055 B. Task deltas were given to the encoder; this is not a faithful SETA continual-learning reproduction.
+- Next P0 candidate: MA-299 — Split-on-Share Mirror code allocation.

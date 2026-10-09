@@ -1,19 +1,60 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
-  "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+  "experiment_id": "MA-297",
+  "decision": "FAIL for Mirror-specific value; shared-subspace compression signal observed",
+  "scope": "synthetic sparse linear task-vector storage/reconstruction",
+  "protocol_commit": "1eb488ce",
+  "fresh_worlds": [
+    29710,
+    29711,
+    29712
+  ],
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "fresh_rows": 36,
+  "means": {
+    "generic_pca_shared_code": {
+      "support_recall": 1.0,
+      "query_nrmse": 3.3132219812159747e-07,
+      "payload_bytes": 841.0,
+      "wall_seconds": 0.0011686338871691583
+    },
+    "independent_sparse": {
+      "support_recall": 1.0,
+      "query_nrmse": 0.0,
+      "payload_bytes": 2004.0,
+      "wall_seconds": 0.0005835346657679313
+    },
+    "mirror_shared_code": {
+      "support_recall": 1.0,
+      "query_nrmse": 3.3132219812159747e-07,
+      "payload_bytes": 836.0,
+      "wall_seconds": 0.0009789538857552947
+    },
+    "seta_shared_private": {
+      "support_recall": 1.0,
+      "query_nrmse": 0.0,
+      "payload_bytes": 1055.0,
+      "wall_seconds": 0.0008048371091717854
+    }
   },
-  "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
-  },
-  "metric_replay": {
-    "checked": false,
-    "max_difference": null
-  },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "facts": [
+    "Shared support recovery 100% in all fresh observations.",
+    "Mirror code payload 836 B and generic PCA 841 B, versus SETA-style shared/private 1055 B and independent sparse 2004 B.",
+    "Mirror and generic PCA both query NRMSE ~3.31e-7.",
+    "Task-delta payloads, indices, values, basis/codes and metadata serialized and byte counted."
+  ],
+  "interpretation": "Low-rank compression within a discovered sparse shared region reduces payload relative to the chosen shared/private and independent representations, but generic PCA matches the Mirror reconstruction; this is not a Mirror-specific gain.",
+  "hypothesis": "Mirror-specific advantage is not established and fails the criterion requiring improvement beyond generic PCA.",
+  "counter_hypothesis": "The rank-3 aligned synthetic task family favors low-rank PCA and omits continual optimization, routing, and distribution shift.",
+  "limitations": [
+    "SETA mechanism approximated, not faithful reproduction",
+    "Task deltas supplied to encoder; no learning or sequential retention",
+    "Synthetic linear task functions only",
+    "No runtime inference benchmark"
+  ],
+  "fresh_data_used_for_tuning": false,
+  "source_sha256": "e537ac144056d72f61ed09fffc6a3b6541b77ff59b5ebef36b8cf354558a965a"
 }

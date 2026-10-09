@@ -23,3 +23,7 @@ Low-rank PCA over discovered shared coefficients provides the same compression a
 ## U / limits
 
 Synthetic linear tasks only; no language-model or continual-retention claim.
+
+## Fresh result / decision
+
+FAIL for Mirror-specific value. Fresh worlds 29710–29712 reproduced 100% shared-support recovery. Mirror used 836 B and generic PCA 841 B at query NRMSE ~3.31e-7; SETA-style shared/private used 1,055 B. This synthetic representation shows a shared-subspace compression signal, but PCA matches Mirror. It is not a faithful SETA or continual-learning result.
