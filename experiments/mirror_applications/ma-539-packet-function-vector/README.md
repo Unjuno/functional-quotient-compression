@@ -1,27 +1,30 @@
 # MA-539 — Support-extracted function vector as a shared packet plan
 
-Status: SCREENING. Evidence scope is a synthetic function execution screen.
+Status: FAIL. Scope: synthetic function execution with four-slot packets.
 
 ## H — falsifiable hypothesis
 
-Across two development worlds, a 16-dimensional function vector extracted from eight support input-output examples and shared across four packet slots will match an equal-width learned generic latent within 0.03 joint accuracy and 0.05 token NLL, use at least 10% fewer serialized inference bytes, and retain PTP-control valid-path rate.
+A 16d behavior vector extracted from eight support pairs and broadcast to four slots will match an equal-width generic latent and PTP slot-code control on jointly correct packets while using at least 10% less serialized state.
 
-## T — frozen protocol
+## T — protocol and execution
 
-PA99 motivates behavior-bearing activation vectors; PA10 and TM001/MA-248 motivate joint packet consistency. Each world contains 16 independent random permutations over 32 states. Eight support examples identify each function; held-out states form four-slot packets evaluated under the same function. Dev worlds: 53901/53902. Fresh worlds: 53911–53913, locked.
+PA99 motivated support-extracted behavior vectors; PA10 and the TM001/MA-248 evidence motivated packet-level consistency checks. Two development worlds each contain 16 independent random permutations over 32 states. Eight input-output pairs per function form support; the other 24 inputs form disjoint held-out queries grouped into 96 four-slot packets.
 
-One shared two-layer width-32 MLP decoder predicts each slot. The candidate obtains a 16d function vector by averaging a shared support-pair encoder over eight demonstrations, then broadcasts that vector to all four slots. Controls are no function code, a directly optimized equal-width generic latent bank, four independent PTP-style slot-code inputs, and the explicit function table upper. All model, address, and metadata bytes are charged from actual uncompressed serialized inference payloads. The protocol selects a common development setting from updates {800,1200} and learning rates {.001,.003}; fresh opens only if every frozen gate passes on both worlds.
+The shared width-32 MLP packet decoder was trained at all four frozen settings (800/1200 updates × LR .001/.003), using shared packet minibatches. The support-FV model averages an encoded representation of its eight support pairs. Controls were no function code, a directly learned generic latent bank, four independent PTP-style slot codes, and a serialized exact function table. Settings were selected by mean held-out token NLL of the FV candidate; 800 updates/LR .001 was selected. Fresh worlds 53911–53913 remain sealed because the absolute packet quality and byte gates fail.
 
-The complete protocol and SHA-256 freeze record were committed before code, world generation, or metrics.
+All controls’ actual uncompressed NPZ payloads, world splits, mapping hashes, optimizer counts, matrix-operation proxy and wall times are retained under `results/`. Development and deterministic replay matched every metric and payload array exactly. Serialized payload byte sizes and hashes are in `payload_hashes.json`.
 
-## D — decision
+## D — FAIL
 
-Pending.
+At the selected setting, the support FV had 0/96 exact packets in both worlds and 1.56–3.13% token accuracy. The generic latent and PTP slot-code controls also had 0/96 exact packets. The exact serialized table upper had 96/96 exact packets in 1,052 B. FV payload was 23,784 B versus 21,094 B for generic latent (1.127x; frozen maximum 0.90x). The FV token NLL was lower than generic latent by 0.353 and 1.583 nats, but this did not translate to any exactly correct packet.
 
-## C — strongest counter-hypothesis
+## Fact / interpretation / hypothesis
 
-The generic latent is already the cheapest function address; averaging support-pair activations may add encoder weights without reducing code or decoder state. PTP slot conditioning may achieve equivalent quality with less fragile optimization.
+- **Fact:** The neural methods had zero joint-packet accuracy in both worlds across the selected setting; the table upper was exact. FV payload exceeded generic latent payload by 2,690 B. The FV’s selected-setting token NLL was lower than generic latent in both worlds.
+- **Interpretation:** Support-extracted function vectors did not establish a useful packet function representation or a storage win. The small NLL improvement is a fixed-budget signal on a task where all learned methods fail exact packet execution.
+- **Strongest counter-hypothesis:** The random permutation task is information-limited: eight examples cannot identify the remaining 24 arbitrary mappings. The learned models’ near-zero performance says little about smoother/compositional functions.
+- **U — limits:** Synthetic arbitrary permutations only; one packet width, one state count, one MLP scale; no natural text, compositional rule family, or optimized inference. Fresh worlds stayed sealed.
 
-## U — boundaries
+## Verification
 
-Synthetic permutations only; externally supplied support examples; one packet width and one decoder scale. No natural-language generation, learned retrieval, or production throughput claim.
+Tests: `python -m pytest -q experiments/mirror_applications/ma-539-packet-function-vector/tests` (2 passed). Deterministic replay reproduced split arrays, all model arrays, selected and unselected metrics, and serialized sizes exactly. See `VERIFICATION.json`.

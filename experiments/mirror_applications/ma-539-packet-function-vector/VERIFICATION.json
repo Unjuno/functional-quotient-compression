@@ -2,18 +2,57 @@
   "experiment_id": "MA-539",
   "commit": "<sha>",
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "python -m pytest -q experiments/mirror_applications/ma-539-packet-function-vector/tests",
+    "passed": 2,
+    "failed": 0
   },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "format": "uncompressed NPZ",
+    "actual_payloads_committed": true,
+    "hash_inventory": "payload_hashes.json"
   },
   "metric_replay": {
-    "checked": false,
-    "max_difference": null
+    "checked": true,
+    "worlds": [
+      53901,
+      53902
+    ],
+    "world_splits_exact": true,
+    "serialized_arrays_exact": true,
+    "quality_metrics_exact": true,
+    "serialized_sizes_exact": true
   },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "All learned methods miss exact packet generalization on arbitrary random permutations; exact lookup table upper reaches 1.0.",
+    "FV lowers selected-setting token NLL relative to generic latent by .353 and 1.583 nats, but joint accuracy remains zero.",
+    "Fresh worlds remain unopened."
+  ],
+  "status": "FAIL",
+  "base_commit": "c734cb35bd63897fb3b08192423178bb1c35bd0f",
+  "frozen_protocol_sha256": "8c41126818862d56732f290361e2e99772147bc2556f8979373b6b58d98e1934",
+  "result_commit": "",
+  "development_worlds": [
+    53901,
+    53902
+  ],
+  "selected_setting": {
+    "updates": 800,
+    "learning_rate": 0.001
+  },
+  "fresh_worlds": {
+    "worlds": [
+      53911,
+      53912,
+      53913
+    ],
+    "opened": false,
+    "reason": "FV/generic token NLL tolerance and 0.90x payload gate failed; all learned methods had zero joint packet accuracy."
+  },
+  "gate_summary": {
+    "within_generic_token_nll_0_05": false,
+    "within_generic_joint_accuracy_0_03": true,
+    "payload_le_0_90_generic": false,
+    "valid_path_not_below_ptp": true
+  }
 }

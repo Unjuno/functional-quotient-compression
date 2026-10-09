@@ -1,0 +1,21 @@
+{
+  "experiment_id": "MA-539",
+  "frozen_selection_rule": "minimize candidate heldout token NLL across both dev worlds; apply common setting to every method",
+  "mean_candidate_token_nll": {
+    "800:0.001": 12.498507059404801,
+    "800:0.003": 16.269506279172976,
+    "1200:0.001": 14.5986123651237,
+    "1200:0.003": 18.239842546558826
+  },
+  "selected_setting": {
+    "updates": 800,
+    "learning_rate": 0.001
+  },
+  "fresh_worlds": [
+    53911,
+    53912,
+    53913
+  ],
+  "fresh_opened": false,
+  "reason": "Frozen joint/quality and <=0.90x generic-latent byte gates fail at selected setting; all neural methods have 0 joint packet accuracy."
+}
