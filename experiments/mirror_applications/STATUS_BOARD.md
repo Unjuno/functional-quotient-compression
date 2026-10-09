@@ -23,7 +23,7 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-523 — function-vector residual private correction (P1; PA99), deferred pending family redesign**
+**MA-526 — SAE feature bank as Mirror atoms (P0; PA102)**
 
 Reason:
 - MA-470/471/473/475/476/478/481/482, MA-483, MA-484, MA-486, MA-487, MA-488, MA-492, MA-494, MA-498, MA-501, MA-502 and MA-516 are completed on dedicated branches and cross-linked in the claim ledger;
@@ -31,7 +31,7 @@ Reason:
 
 Required controls: explicit extracted function vectors, shared PCA/Mirror basis codes, randomized/signed coefficient control, and function-vector ablation; actual serialized vector bytes and held-out function accuracy are primary.
 
-This temporary pointer skips the deferred LoReFT family; return to its remaining UNTESTED P0 candidates after a family redesign. Do not drop negative outcomes or treat synthetic PROMISING evidence as adoption.
+MA-523–525 remain UNTESTED and deferred pending causal/head-specific Function Vector resume gates. Continue with MA-526 in a separate SAE feature family. Do not drop negative outcomes or treat synthetic PROMISING evidence as adoption.
 
 ## Active experiment
 
