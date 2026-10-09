@@ -1,0 +1,15 @@
+{
+ "experiment_id":"MA-311","title":"Mirror task code in random intrinsic subspace","status":"SCREENING","base_commit":"881dd4f3","prior_art_refs":[33],"evidence_lane":"INTRINSIC_TASK_CODE/LEARNING_EFFICIENCY/QUALITY/ACTUAL_BYTES",
+ "hypothesis":"On task updates expressed in a shared low-dimensional intrinsic subspace, a shared code vector plus task-specific Givens angle can reduce stored task coordinates while retaining query quality; independent random-subspace tuning and generic PCA are mandatory controls.",
+ "physical_object":"frozen random projection U from D=128 to intrinsic dimension d=16","mirror_coordinate":"one shared intrinsic vector z plus one per-task Givens angle","logical_multiplicity":"eight linear task functions per world",
+ "model":{"input_dim":128,"intrinsic_dim":16,"tasks":8,"support_examples_per_task":128,"query_examples_per_task":256,"mirror_updates":800},
+ "strata":["aligned Givens-orbit task vectors","independent random intrinsic task vectors"],
+ "controls":["independent coefficients in the same frozen random intrinsic subspace (PA33)","shared Mirror orbit code learned jointly","generic rank-2 PCA over independently fitted intrinsic task vectors"],
+ "development":{"worlds":[31100,31101],"seeds":[0,1,2],"selection_metric":"fresh-independent support and query NRMSE, actual serialized bytes, fit updates and wall time"},
+ "fresh":{"worlds":[31110,31111,31112],"seeds":[0,1,2],"locked_before_access":true},
+ "storage":{"authority":"actual serialized inference payload bytes","paid_objects":["random projection U in fp16","independent intrinsic task coordinates or shared Mirror z and angles","generic PCA mean/basis/task codes","metadata"]},
+ "success_gate":"Aligned stratum query NRMSE <=0.05 with at least 20% fewer total payload bytes than independent intrinsic coordinates; Mirror-specific claim requires better quality-per-byte than generic rank-2 PCA. Independent stratum must document private-capacity boundary.",
+ "failure_gate":"Mirror misses quality on aligned tasks or fails to reduce bytes; generic PCA matching Mirror means no Mirror-specific advantage. Independent tasks are not a Mirror failure if they show the predeclared boundary.",
+ "compute":{"report_support_examples":true,"report_optimizer_updates":true,"report_fit_seconds":true,"report_query_quality":true,"report_actual_bytes":true},
+ "boundaries":["Synthetic linear regression only","U is a random frozen projection, not a pretrained model","Aligned stratum is teacher-generated from the Givens orbit","No language model or natural task claim"]
+}
