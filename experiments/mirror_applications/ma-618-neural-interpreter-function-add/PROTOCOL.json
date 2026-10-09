@@ -1,0 +1,63 @@
+{
+  "experiment_id": "MA-618",
+  "title": "Add-new-function by Mirror code only",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/FEW_SHOT/ACTUAL_BYTES/COMPUTE",
+  "base_commit": "7be93443",
+  "hypothesis": "A frozen function interpreter can add phase-orbit functions from support examples via compact signature+phase codes and sparse private residuals, with lower complete payload than direct coefficients or independent function modules.",
+  "physical_object": "fixed Fourier interpreter over frequencies 1..5",
+  "mirror_coordinate": "signature index plus one phase per function; sparse two-value fifth-harmonic residual for off-orbit functions",
+  "logical_multiplicity": "32 new functions per world from support examples only",
+  "prior_art_refs": [
+    "PA128"
+  ],
+  "controls": [
+    "frozen interpreter without task code",
+    "direct sine/cosine coefficient fitting plus same private residual",
+    "independent 10-coefficient Fourier function code"
+  ],
+  "fixture": "32 functions: 24 targets sin(freq*x+phase), freq in {1,2,3}; 8 targets add 0.25*sin(5*x+psi). 16 support x/y examples per function; 512 heldout query x values.",
+  "development": {
+    "worlds_or_seeds": [
+      61801,
+      61802
+    ],
+    "optimizer_updates": 0,
+    "selection_metric": "on-orbit/off-orbit normalized MSE, actual serialized bytes per bank/function, code-discovery operations and wall time"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      61811,
+      61812,
+      61813
+    ],
+    "locked_before_access": true,
+    "run_only_if": "not run: development byte/compute gates failed"
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "format": "torch.save exact payloads",
+    "paid_objects": [
+      "frequency interpreter metadata",
+      "all signature IDs",
+      "Mirror phases or direct coefficient pairs",
+      "private residual indices and coefficients",
+      "full independent function codes",
+      "metadata"
+    ]
+  },
+  "compute": {
+    "report_support_examples": true,
+    "report_optimizer_updates": true,
+    "report_code_discovery_proxy": true,
+    "report_query_compute_proxy": true,
+    "report_fit_and_query_wall_time": true
+  },
+  "success_gate": "Both development worlds: Mirror on-orbit nMSE<=1e-5, off-orbit nMSE<=1e-4, Mirror payload<=0.80x direct coefficients, and phase-search compute<=10x direct fitting; fresh uses same gates.",
+  "failure_gate": "Any quality/byte/compute gate miss or exact direct-control output/byte alias.",
+  "boundaries": [
+    "Analytic Fourier function family; no learned interpreter or natural tasks.",
+    "Support phase search is charged; no oracle task ID beyond provided examples.",
+    "No capacity or convergence claim."
+  ]
+}

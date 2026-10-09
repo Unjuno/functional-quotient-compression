@@ -315,7 +315,7 @@ Every experiment must isolate the extra Mirror parameter `m` beyond its strong n
 
 Read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08.md`, PA236..PA265 and the selected MA registry row.
 
-**MA-618 is the next executable P0** after MA-616/617 both exactly aliased direct coefficient controls; pause unchanged route × position Givens variants. MA-255–617 evidence is retained on dedicated branches; do not rerun completed candidates. Recheck the live registry and remote branches before selection.
+MA-616/617 unchanged route × position Givens variants are paused after exact aliases to direct coefficient controls. MA-618 completed as a verified development FAIL: quality passed, but byte margin was only 2.3% versus direct coefficients, full coefficients were smaller, and fit proxy was ~270x. Its fresh split remains sealed. MA-255 is already reconciled PROMISING on `research/ma-255-context-superposition-reconciled-20261008`; MA-260 is already a verified FAIL on `research/ma-260-batchensemble-mirror-20261008`. Reconcile MA-260 and advance to MA-261; do not rerun completed candidates.
 
 ## Twelfth research expansion — video, equivariance, spiking, physical optics, wireless and spatial audio
 
@@ -359,7 +359,7 @@ Read `docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_THIRTEENTH_SWEEP.
 
 **MA-1046..1095 are 50 new UNTESTED hypotheses** appended after earlier literature intakes and the original locked direct-prior queue. All comparisons study the marginal value of the extra Mirror parameter `m`; no new source-paper result is a Mirror result.
 
-**Current executable next candidate: MA-618** (add-new-function by Mirror code; PA128). The MA-616/617 route × position Givens family is paused after two same-cause native-control aliases.
+**MA-618** (add-new-function by Mirror code; PA128) is complete as a verified development FAIL, with fresh sealed. MA-616/617 route × position Givens variants remain paused after two same-cause native-control aliases. MA-260 is already complete on its dedicated branch; reconcile its result before proceeding to MA-261.
 
 Recommended high-information P0 studies **within this new family**:
 

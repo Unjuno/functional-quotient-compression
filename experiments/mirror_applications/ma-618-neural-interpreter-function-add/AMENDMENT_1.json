@@ -1,0 +1,9 @@
+{
+  "experiment_id": "MA-618",
+  "amendment": 1,
+  "recorded_before_any_fresh_access": true,
+  "reason": "Initial development revealed omitted-variable bias: fitting the base phase or direct coefficients before the private fifth-harmonic residual distorted both components on held-out x values.",
+  "change": "For each candidate Mirror phase, jointly least-squares fit the private sin(5x)/cos(5x) residual on support points and choose the phase by the resulting joint support error. For the direct coefficient control, jointly fit base sine/cosine and fifth-harmonic residual columns, then serialize the same split. Increase the predeclared fit-compute proxy to include residual scoring.",
+  "scope": "Development-only support-fit correction; target family, support/query split, thresholds, payload formats, and fresh seeds unchanged. Initial outputs and payloads are retained under runs/amendment_0_*.",
+  "action": "Rerun development seeds 61801/61802. Fresh remains sealed until amended development gates pass."
+}
