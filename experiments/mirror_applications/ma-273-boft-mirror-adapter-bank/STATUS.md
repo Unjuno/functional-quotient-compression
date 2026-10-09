@@ -6,4 +6,5 @@
 - Fresh: 576 rows, worlds 27310–27312 × seeds 0–2.
 - Aligned Mirror max NRMSE 0.1366; independent BOFT support-fit near no-view baseline.
 - Fresh data remains untouched after observation.
+- Verification rerun: 3 tests pass; all 576 rows and 1,008 payload size/SHA-256 records checked.
 - See `VERIFICATION.json`.
