@@ -1,0 +1,21 @@
+{
+  "experiment_id":"MA-455",
+  "title":"Sequential Mirror program over one shared block",
+  "status":"FROZEN_SCREENING",
+  "base_commit":"130db6b0",
+  "evidence_lane":"SEQUENTIAL_COMPOSITION/ORDER_SENSITIVITY/QUALITY/BYTES/COMPUTE",
+  "hypothesis":"Reusing one learned 2x2 physical block at two sequential depths with separate one-angle Givens Views will approximate held-out noncommuting two-block linear functions with at least 25% lower actual N=20 payload and no more than 10% relative NRMSE penalty versus two independent blocks.",
+  "physical_object":"one learned 2x2 matrix W reused at both sequential steps",
+  "mirror_coordinate":"per-step Givens angle theta_1, theta_2; step map is R(theta_s)W",
+  "logical_multiplicity":"two ordered logical functions/steps from one physical matrix",
+  "prior_art_refs":[81],
+  "controls":["ordinary tied W repeated twice","two independent 2x2 blocks / Routing Networks upper control","shared W plus per-step rank-one residuals"],
+  "task":{"type":"2D linear regression y=A2 A1 x","teacher":"A_s=R(phi_s)S(k_s), S(k)=[[1,k],[0,1]]; independently sampled angles and shears","support_examples":64,"query_examples":512,"tasks_per_world":64,"noncommuting_audit":"report mean ||A2A1-A1A2||_F and order-swapped query NRMSE"},
+  "development":{"worlds":[45500,45501],"seeds":[0,1,2],"task_ids":[100,163],"selection":"fixed Adam lr=0.03, 500 updates; no fresh tuning"},
+  "fresh":{"worlds":[45510,45511,45512],"seeds":[0,1,2],"task_ids":[3000,3063],"locked_before_access":true},
+  "storage":{"authority":"actual serialized inference payload bytes","paid_objects":["all learned W or step matrices","both Mirror angles","rank-one residual factors","metadata"],"amortization_N":[1,20,64]},
+  "compute":{"report_optimizer_updates":true,"report_parameter_count":true,"report_forward_MAC_per_example":true,"report_support_fit_wall":true,"report_query_wall":true},
+  "success_gate":"Every fresh world has Mirror NRMSE <=1.10x independent blocks and N20 Mirror actual payload <=0.75x independent payload; Mirror must be better than tied baseline on all worlds.",
+  "failure_gate":"Any per-world quality gate misses, Mirror is not better than tied, N20 payload ratio exceeds 0.75, or order-sensitivity audit shows teacher is effectively commuting.",
+  "boundaries":["Synthetic 2D linear composition screen only.","No nonlinear or natural task evidence.","Private rank-one residual is a simple control and may exceed independent storage; report honestly."]
+}
