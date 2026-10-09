@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-482.** MA-481 found substantial continuous-address byte savings but failed the paraphrase recall gate on a crowded orbit; VQ alternatives collided. Continue with residual-code composition and full rate-distortion controls.
+**Current operational pointer (2026-10-09): MA-494.** MA-492 K<=8 packet-plan codes missed full mode coverage; K16 gave a scoped 100%-valid synthetic result with fewer bytes than continuous and independent controls. Continue with error-correcting expert IDs under injected routing noise.
 
 # Worker queue
 

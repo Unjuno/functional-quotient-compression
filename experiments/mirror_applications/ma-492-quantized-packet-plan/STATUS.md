@@ -15,4 +15,6 @@ C: Single codebook K<=8 cannot cover 16 equally represented legal modes under th
 
 U: Natural packet prediction, learned plan codes and real decoder latency.
 
+Next: MA-494 — error-correcting Mirror expert IDs, on its dedicated branch.
+
 A0 used an invalid mode/coverage construction and is preserved as exploratory only. A1 uses 16 unique legal token pairs and corrected joint-mode coverage/NLL calculations.
