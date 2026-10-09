@@ -1,0 +1,82 @@
+{
+  "experiment_id": "MA-464",
+  "status": "COMPLETED_FAIL",
+  "protocol_commit": "7b0839ca",
+  "fresh_worlds": [
+    46410,
+    46411,
+    46412
+  ],
+  "fresh_seeds": [
+    0,
+    1,
+    2
+  ],
+  "aggregate_rows": 108,
+  "checks": [
+    {
+      "name": "artifact_tests",
+      "command": "python -m pytest -q experiments/mirror_applications/ma-464-adamix-mirror-adaptations/tests",
+      "result": "pending final run"
+    },
+    {
+      "name": "payload_integrity",
+      "result": "All 108 fresh payloads have exact length and SHA256 checked by tests."
+    },
+    {
+      "name": "registered_gate",
+      "result": "FAIL: routed Mirror is worse quality and larger than AdaMix; merged Mirror is within the merged quality gate but matches merged AdaMix without extra benefit."
+    }
+  ],
+  "N4": {
+    "adamix_routed": {
+      "nrmse": 3.039746511982836e-06,
+      "bytes_per_skill": 489.25,
+      "payload_bytes": 1957.0,
+      "fit_wall_seconds": 0.4791245443338994,
+      "query_wall_seconds_mean": 2.7176279723385556e-05,
+      "active_MAC_per_example": 8.0
+    },
+    "mirror_routed": {
+      "nrmse": 0.22350915542079342,
+      "bytes_per_skill": 552.25,
+      "payload_bytes": 2209.0,
+      "fit_wall_seconds": 0.4791245443338994,
+      "query_wall_seconds_mean": 1.0128388870119428e-05,
+      "active_MAC_per_example": 12.0
+    },
+    "adamix_merged": {
+      "nrmse": 0.5931278868681855,
+      "bytes_per_skill": 426.25,
+      "payload_bytes": 1705.0,
+      "fit_wall_seconds": 0.4791245443338994,
+      "query_wall_seconds_mean": 1.4405749728515124e-05,
+      "active_MAC_per_example": 8.0
+    },
+    "mirror_merged": {
+      "nrmse": 0.5965613424777985,
+      "bytes_per_skill": 426.25,
+      "payload_bytes": 1705.0,
+      "fit_wall_seconds": 0.4791245443338994,
+      "query_wall_seconds_mean": 1.6737776604713872e-05,
+      "active_MAC_per_example": 12.0
+    },
+    "shared": {
+      "nrmse": 0.5962283346388075,
+      "bytes_per_skill": 410.25,
+      "payload_bytes": 1641.0,
+      "fit_wall_seconds": 0.4791245443338994,
+      "query_wall_seconds_mean": 1.5564305714279828e-05,
+      "active_MAC_per_example": 8.0
+    },
+    "independent": {
+      "nrmse": 0.0,
+      "bytes_per_skill": 489.25,
+      "payload_bytes": 1957.0,
+      "fit_wall_seconds": 0.4791245443338994,
+      "query_wall_seconds_mean": 2.400722264105247e-05,
+      "active_MAC_per_example": 8.0
+    }
+  },
+  "scope": "Synthetic four-skill linear adapter mixture only."
+}

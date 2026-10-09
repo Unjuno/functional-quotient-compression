@@ -6,10 +6,10 @@ Integration branch: `research/mirror-application-current-evidence-20261008`; can
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (138 completed; 492 UNTESTED)
+- P0: **630** (139 completed; 491 UNTESTED)
 - P1: **422** (22 completed; 400 UNTESTED)
 - P2: **103** (1 completed; 102 UNTESTED)
-- Current MA statuses: **994 UNTESTED, 44 PROMISING, 117 FAIL**
+- Current MA statuses: **993 UNTESTED, 44 PROMISING, 118 FAIL**
 - 48 experiment directories, complete with status/protocol/results/verification files, are represented in the current evidence set.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-268 is next.
@@ -183,3 +183,6 @@ KG relation rotations (RotatE, TuckER, QuatE, PairRE), EXIF/device-aware ISPs (P
 
 
 **MA-463 FAIL:** for a rank-one 8×4×3 adapter tensor, factorized Mirror and generic CP matched exactly (N96 NRMSE 0.3064; 33.55B/combo), while HyperFormer was more accurate at 0.1559 / 55.59B. Mirror is 60.4% of HyperFormer bytes, just above the <=60% gate; additive control was smaller. One fresh world exposed severe factor-fit seed sensitivity. Initial unseeded run excluded in A1. **Next: MA-464.**
+
+
+**MA-464 FAIL for routed Mirror mixture:** across four synthetic skills, N4 AdaMix reached NRMSE 3.04e-6 / 1,957B, while Mirror was 0.2235 / 2,209B. Merged models were similar (0.5931 vs 0.5966) at identical 1,705B; shared-only was 0.5962 / 1,641B. The off-orbit skill required private state. **Next: MA-466.**
