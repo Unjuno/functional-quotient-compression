@@ -1,16 +1,30 @@
 {
-  "experiment_id":"MA-603",
-  "decision":"FAIL",
-  "phase":"development mechanism screen; fresh sealed",
-  "base_commit":"8fd9f119",
-  "environment":{"python":"3.12.14","torch":"2.14.1+cpu","device":"cpu"},
-  "frozen_protocol":"PROTOCOL.json; development seeds 60301/60302; fresh seeds 60311/60312 were not accessed",
-  "checks":[
-    {"command":"pytest -q experiments/mirror_applications/ma-603-condconv-mirror-weight-synthesis/tests","result":"2 passed"},
-    {"command":"python experiments/mirror_applications/ma-603-condconv-mirror-weight-synthesis/source/verify_results.py","result":"10/10 payload sizes and SHA-256 hashes matched; all reloaded-output max absolute errors were 0.0"}
+  "experiment_id": "MA-603",
+  "decision": "FAIL",
+  "phase": "development mechanism screen; fresh sealed",
+  "base_commit": "8fd9f119",
+  "environment": {
+    "python": "3.12.14",
+    "torch": "2.14.1+cpu",
+    "device": "cpu"
+  },
+  "frozen_protocol": "PROTOCOL.json; development seeds 60301/60302; fresh seeds 60311/60312 were not accessed",
+  "checks": [
+    {
+      "command": "pytest -q experiments/mirror_applications/ma-603-condconv-mirror-weight-synthesis/tests",
+      "result": "2 passed"
+    },
+    {
+      "command": "python experiments/mirror_applications/ma-603-condconv-mirror-weight-synthesis/source/verify_results.py",
+      "result": "10/10 payload sizes and SHA-256 hashes matched; all reloaded-output max absolute errors were 0.0"
+    }
   ],
-  "payloads":"runs/dev_payloads/; actual inference payloads serialized with torch.save and charged in RESULTS_CORE.csv",
-  "metrics":"runs/dev_metrics.json and RESULTS_CORE.csv",
-  "decision_basis":"Mirror missed the predeclared development quality gate against both CondConv and MLP coefficient generator in both worlds; it also exceeded both controls in bytes and compute proxy. Fresh remained sealed.",
-  "limitations":["Synthetic task and fixed update budget only.","No language-model, near-convergence capacity, or broad dynamic-weight claim."]
+  "payloads": "runs/dev_payloads/; actual inference payloads serialized with torch.save and charged in RESULTS_CORE.csv",
+  "metrics": "runs/dev_metrics.json and RESULTS_CORE.csv",
+  "decision_basis": "Mirror missed the predeclared development quality gate against both CondConv and MLP coefficient generator in both worlds; it also exceeded both controls in bytes and compute proxy. Fresh remained sealed.",
+  "limitations": [
+    "Synthetic task and fixed update budget only.",
+    "No language-model, near-convergence capacity, or broad dynamic-weight claim."
+  ],
+  "result_commit": "b3ba100e"
 }
