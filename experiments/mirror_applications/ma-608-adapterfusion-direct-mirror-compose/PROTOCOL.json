@@ -1,0 +1,21 @@
+{
+  "experiment_id":"MA-608",
+  "title":"Direct Mirror composition versus AdapterFusion",
+  "status":"SCREENING",
+  "evidence_lane":"MECHANISM/STORAGE/COMPUTE",
+  "base_commit":"4c935606",
+  "hypothesis":"Fusion of shared low-rank source adapters can occur in Mirror code space before adapter execution, preserving the linear case and reducing active compute, but nonlinear bottlenecks may prevent exact collapse.",
+  "physical_object":"shared rank-6 input/output adapter factors with four logical source transforms and one shared fusion gate",
+  "mirror_coordinate":"fifteen Givens angles per source transform; gate-weighted codes combine into an effective rank-space operator",
+  "logical_multiplicity":"four source adapters composed into one effective adapter per input",
+  "prior_art_refs":["PA125"],
+  "controls":["four independent rank-6 adapters with AdapterFusion output mixing","shared Mirror-coded source adapters executed separately","direct Mirror code-space composition","direct generic full 6x6 coefficient-matrix composition"],
+  "fixture":"32-dimensional input/output, rank 6, four source adapters, input-dependent softmax fusion gate; measure linear adapters and a tanh-bottleneck stress case",
+  "development":{"worlds_or_seeds":[60801,60802],"examples_per_world":4096,"optimizer_updates":0,"selection_metric":"linear exactness max absolute error, nonlinear normalized MSE, actual serialized bytes, per-example MAC proxy and measured CPU latency"},
+  "fresh":{"worlds_or_seeds":[],"locked_before_access":true,"run_only_if":"not applicable; deterministic algebraic screen with fixed seeds and no tuning"},
+  "storage":{"authority":"actual serialized inference payload bytes","format":"torch.save payloads with all factors, source codes/matrices, and fusion gate","paid_objects":["full adapter factors or shared factors","Mirror angles or generic coefficient matrices","fusion gate state","metadata"]},
+  "compute":{"report_tokens_or_examples":true,"report_optimizer_updates":true,"report_active_compute_proxy":true,"report_isolated_wall_clock":true,"proxy":"count per-example MACs for adapter paths, code fusion, and output projection; report angle-to-matrix setup work and resident reconstructed matrix bytes separately"},
+  "success_gate":"Both worlds: linear max abs error <=1e-6; payload <=0.75x full adapters; direct per-example compute <=0.60x shared AdapterFusion; nonlinear bottleneck NRMSE <=0.05.",
+  "failure_gate":"Any broad replacement gate misses; report exact linear result separately.",
+  "boundaries":["Deterministic low-rank algebra fixture; no learned quality or language claim.","The fusion gate is shared and identical across execution variants.","A broad PASS requires the nonlinear stress case; exactness for linear maps alone is scoped evidence."]
+}

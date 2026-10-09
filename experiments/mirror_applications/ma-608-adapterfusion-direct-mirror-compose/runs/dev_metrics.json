@@ -1,0 +1,97 @@
+{
+  "experiment_id": "MA-608",
+  "phase": "deterministic algebra/runtime screen",
+  "python": "3.12.14",
+  "torch": "2.14.1+cpu",
+  "device": "cpu",
+  "worlds": {
+    "60801": {
+      "examples": 4096,
+      "optimizer_updates": 0,
+      "payload_bytes": {
+        "full": 15645,
+        "mirror": 5529,
+        "matrix": 6233
+      },
+      "payload_sha256": {
+        "full": "7d0c53b4b96ca66f03da05e331f0c4656fab35853d95162d58f7a6b90ff0991b",
+        "mirror": "f89ed2914082d0f8cb32cf2bbef4b0bbc62cd5bee5b7d64a878fb6801bff8430",
+        "matrix": "cc1fc119046ea70c1258f9fec711ba3c6d6763e569a79b74690c3461246d417c"
+      },
+      "payload_files": {
+        "full": "runs/dev_payloads/60801_full.pt",
+        "mirror": "runs/dev_payloads/60801_mirror.pt",
+        "matrix": "runs/dev_payloads/60801_matrix.pt"
+      },
+      "payload_replay_max_abs": {
+        "full": 1.7881393432617188e-07,
+        "mirror": 2.384185791015625e-07,
+        "matrix": 2.384185791015625e-07
+      },
+      "compute_proxy_per_example": {
+        "full_adapterfusion": 3584,
+        "shared_adapterfusion": 2528,
+        "mirror_direct": 1220,
+        "generic_code_direct": 1220
+      },
+      "resident_reconstructed_matrices_bytes": 1152,
+      "angle_reconstruction_startup_givens": 120,
+      "latency": {
+        "full_adapterfusion_ms_per_4096": 4.434151812529308,
+        "shared_adapterfusion_ms_per_4096": 4.174335925017658,
+        "mirror_direct_ms_per_4096": 1.2717788249574369,
+        "nonlinear_reference_ms_per_4096": 4.841494375068578,
+        "nonlinear_direct_ms_per_4096": 1.3486672125509358
+      },
+      "errors": {
+        "shared_direct_max_abs": 2.384185791015625e-07,
+        "full_vs_shared_max_abs": 1.7881393432617188e-07,
+        "nonlinear_direct_nrmse2": 0.012272366423888546
+      }
+    },
+    "60802": {
+      "examples": 4096,
+      "optimizer_updates": 0,
+      "payload_bytes": {
+        "full": 15645,
+        "mirror": 5529,
+        "matrix": 6233
+      },
+      "payload_sha256": {
+        "full": "173bf123aba9d922fc060c311dfa7c745655309597fefacaf4512e5e75372dc0",
+        "mirror": "3b21120d0db7a328a755162f999017d6f7a16c8cb533bd642830b7d91fd37282",
+        "matrix": "545f603cf8e5788e867d78003aa1704e0114c17c7fa688bba102f26730215b86"
+      },
+      "payload_files": {
+        "full": "runs/dev_payloads/60802_full.pt",
+        "mirror": "runs/dev_payloads/60802_mirror.pt",
+        "matrix": "runs/dev_payloads/60802_matrix.pt"
+      },
+      "payload_replay_max_abs": {
+        "full": 2.384185791015625e-07,
+        "mirror": 2.384185791015625e-07,
+        "matrix": 2.384185791015625e-07
+      },
+      "compute_proxy_per_example": {
+        "full_adapterfusion": 3584,
+        "shared_adapterfusion": 2528,
+        "mirror_direct": 1220,
+        "generic_code_direct": 1220
+      },
+      "resident_reconstructed_matrices_bytes": 1152,
+      "angle_reconstruction_startup_givens": 120,
+      "latency": {
+        "full_adapterfusion_ms_per_4096": 4.3378700749599375,
+        "shared_adapterfusion_ms_per_4096": 4.064507362454606,
+        "mirror_direct_ms_per_4096": 1.232620062364731,
+        "nonlinear_reference_ms_per_4096": 4.850749812612776,
+        "nonlinear_direct_ms_per_4096": 1.3261496749692014
+      },
+      "errors": {
+        "shared_direct_max_abs": 2.384185791015625e-07,
+        "full_vs_shared_max_abs": 2.384185791015625e-07,
+        "nonlinear_direct_nrmse2": 0.006634462980728709
+      }
+    }
+  }
+}
