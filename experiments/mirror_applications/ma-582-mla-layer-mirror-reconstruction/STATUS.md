@@ -6,9 +6,9 @@
 - Source/protocol frozen before registered dev; see `FREEZE.json` and `AMENDMENTS.md`.
 - Development complete: yes (58201, 58202; same-seed replay exact for core metrics)
 - Fresh/audit opened: no (sealed after quality and native-alias gates failed)
-- Results committed: pending
-- Verification committed: pending
-- Registry row updated: pending
+- Results committed: yes
+- Verification committed: yes
+- Registry row updated: yes
 
 ## Next action
 
