@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-255",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-255-parameter-superposition-mirror/tests -v",
+    "passed": 0,
+    "failed": 1
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "note": "Exploratory payload bytes emitted by torch.save."
+  },
+  "metric_replay": {
+    "checked": false,
+    "max_difference": null,
+    "note": "Audit found [n] vs [n,1] broadcast to [n,n]; stored NRMSE values invalid."
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Fresh remained locked. NOT ESTABLISHED because metric implementation is invalid."
+  ]
+}

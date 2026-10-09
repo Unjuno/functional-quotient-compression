@@ -1,0 +1,89 @@
+{
+  "experiment_id": "MA-255",
+  "title": "Parameter Superposition baseline vs structured Mirror contexts",
+  "status": "COMPLETED_NOT_ESTABLISHED",
+  "base_commit": "64f4d3b0",
+  "evidence_lane": "PARAMETER_SUPERPOSITION/RETRIEVAL/INTERFERENCE/ACTUAL_BYTES",
+  "prior_art_refs": [
+    16
+  ],
+  "hypothesis": "On an aligned synthetic family of task vectors, a learned structured Mirror context code can retrieve multiple tasks from one superposed physical tensor with lower cross-talk than the original fixed random PSP contexts at equal serialized code bytes.",
+  "physical_object": "one tensor containing a superposition of N task-specific vectors",
+  "mirror_coordinate": "per-task dense, random PSP, or learned low-dimensional structured context vector; per-dimension unbinding operator",
+  "logical_multiplicity": "N task vectors reconstructed from one shared stored tensor",
+  "task": {
+    "type": "synthetic linear task-vector retrieval",
+    "dimension": 512,
+    "task_count": 32,
+    "task_values": "independent Gaussian teacher vectors; query evaluation uses held-out Gaussian inputs",
+    "metrics": [
+      "retrieval NRMSE",
+      "held-out output NRMSE",
+      "cross-talk",
+      "serialized payload bytes",
+      "encode/decode compute"
+    ]
+  },
+  "controls": [
+    "explicit per-task vectors",
+    "Parameter Superposition with fixed seeded Rademacher contexts and coordinatewise unbinding",
+    "shared tensor plus task index only",
+    "learned 8-dimensional structured context codes trained on development tasks",
+    "independent-task upper control"
+  ],
+  "development": {
+    "worlds": [
+      25500,
+      25501
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "allowed": "Development-only check found no eligible hyperparameter: learning rates [0.001, 0.01, 0.1] at 1200 updates all fail the preregistered utility ceiling (relative held-out output NRMSE < 0.25). Do not inspect or run fresh; first revise mechanism under a new MA amendment/ID."
+  },
+  "fresh": {
+    "worlds": [
+      25510,
+      25511,
+      25512
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual torch-serialized inference payload bytes including superposed tensor, context codes, scale, indices, and metadata",
+    "paid_objects": [
+      "shared superposed tensor",
+      "all task-specific context vectors or structured codes",
+      "unbinding metadata"
+    ]
+  },
+  "compute": {
+    "report_updates": true,
+    "report_encode_seconds": true,
+    "report_retrieval_seconds": true,
+    "report_forward_multiply_proxy": true
+  },
+  "success_gate": "At N=32, structured Mirror must reduce mean fresh held-out output NRMSE by at least 20% vs fixed PSP at equal-or-lower actual payload bytes in every world; report comparison to explicit task vectors and learned generic codes.",
+  "failure_gate": "Mirror fails the relative NRMSE/byte gate, or superposition retrieval is not useful (NRMSE >= 0.25).",
+  "boundaries": [
+    "Synthetic aligned Gaussian vector tasks only; this is not a neural-network model composition or NLP capability claim.",
+    "Learned Mirror contexts are optimized from development task vectors; fresh task IDs and Gaussian inputs are held out.",
+    "Useful multiplicity is based on held-out task output error, not combinatorial code counts."
+  ],
+  "development_screen": {
+    "result": "Fixed random PSP unbinding NRMSE 1.000; rank-8 learned contexts NRMSE 1.151-1.154 at 19,237B/task; shared tensor without task identity NRMSE 5.805. No model reached utility gate 0.25.",
+    "decision": "Do not access fresh: current task/control protocol is not informative for the planned comparison."
+  },
+  "metric_audit_after_development": {
+    "issue": "held-out NRMSE calculation broadcasted [n] and [n,1] tensors into [n,n], invalidating numeric NRMSE values.",
+    "consequence": "development metrics are exploratory only; no utility/capacity claim.",
+    "fresh_opened": false
+  }
+}
