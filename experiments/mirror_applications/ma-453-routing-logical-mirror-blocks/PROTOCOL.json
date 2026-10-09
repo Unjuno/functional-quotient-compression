@@ -1,0 +1,106 @@
+{
+  "experiment_id": "MA-453",
+  "title": "Routing Networks with logical Mirror blocks",
+  "status": "SCREENING",
+  "evidence_lane": "LOGICAL_BLOCKS/QUALITY/ROUTING/BYTES",
+  "base_commit": "02e4c8eb",
+  "hypothesis": "A shared canonical nonlinear block plus two continuous Mirror coordinates recovers held-out task functions more accurately than a finite prototype-block Routing Network while using no more N=20 bytes than independent per-task blocks.",
+  "physical_object": "one canonical tanh function block with fixed deterministic activation",
+  "mirror_coordinate": "continuous input scale and shift (a,b) applied before the shared block",
+  "logical_multiplicity": "continuous logical function blocks from one physical canonical block",
+  "prior_art_refs": [
+    81
+  ],
+  "controls": [
+    "Routing Networks with K=4 prototype blocks",
+    "Routing Networks with K=8 prototype blocks",
+    "one shared block with no Mirror coordinates",
+    "shared block plus two Mirror coordinates",
+    "independent per-task affine-tanh blocks"
+  ],
+  "task": {
+    "type": "1D nonlinear regression, y=tanh(a*x+b)",
+    "input_range": [
+      -2,
+      2
+    ],
+    "a_range": [
+      0.5,
+      2.0
+    ],
+    "b_range": [
+      -0.5,
+      0.5
+    ],
+    "support_examples": 32,
+    "query_examples": 256,
+    "fresh_tasks_per_world_per_seed": 64,
+    "task_id_partition": {
+      "development": [
+        100,
+        163
+      ],
+      "fresh": [
+        3000,
+        3063
+      ]
+    }
+  },
+  "development": {
+    "worlds": [
+      45300,
+      45301
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "router_K_candidates": [
+      4,
+      8
+    ],
+    "router_selection": "minimum mean dev query NRMSE"
+  },
+  "fresh": {
+    "worlds": [
+      45310,
+      45311,
+      45312
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "prototype module parameters",
+      "router path indices",
+      "Mirror scale/shift codes",
+      "independent module parameters",
+      "metadata"
+    ],
+    "report_amortization_N": [
+      1,
+      20,
+      64
+    ]
+  },
+  "compute": {
+    "report_support_router_MAC": true,
+    "report_mirror_fit_compute": true,
+    "report_active_block_MAC": true,
+    "report_query_wall": true
+  },
+  "success_gate": "Every fresh world: Mirror quality beats selected Routing Network by >=10% and N=20 actual bytes are <= independent full per-task blocks; report the Pareto comparison with K=4 and K=8.",
+  "failure_gate": "Routing Network matches Mirror at equal/fewer bytes, Mirror has no quality gain over independent blocks, or any per-world quality/byte gate misses.",
+  "boundaries": [
+    "Scalar nonlinear regression mechanism screen only.",
+    "The activation block is deterministic and shared; scale/shift inputs are paid task codes.",
+    "No large-network or natural task claim."
+  ]
+}
