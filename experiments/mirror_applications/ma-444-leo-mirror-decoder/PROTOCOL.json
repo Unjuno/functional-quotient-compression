@@ -1,0 +1,15 @@
+{
+ "experiment_id":"MA-444","title":"LEO latent decoder replaced by structured Mirror map","status":"SCREENING","evidence_lane":"FEW_SHOT/DECODER_STORAGE/QUALITY","base_commit":"76327f1",
+ "hypothesis":"At matched 2D latent dimension and adaptation budget, structured Mirror decoding matches LEO within 1.10x query NRMSE and uses fewer amortized bytes at N=20.",
+ "physical_object":"shared meta-trained 8D base function","mirror_coordinate":"2D latent m interpreted as Givens angle plus structured offset","logical_multiplicity":"task-specific decoded linear functions",
+ "prior_art_refs":[76],"controls":["shared no adaptation","structured Mirror map","generic LEO linear latent decoder","full-vector adaptation"],
+ "task":{"type":"8D Givens-orbit regression","support_examples":8,"query_examples":128,"latent_dim":2,"refinement_steps":[0,1,3,5],"task_id_partition":{"meta_train":[1000,1127],"development":[0,11],"fresh":[2000,2019]}},
+ "development":{"worlds_or_seeds":[44400,44401],"seeds":[0,1,2],"outer_lrs":[0.01,0.03]},
+ "fresh":{"worlds_or_seeds":[44410,44411,44412],"seeds":[0,1,2],"tasks_per_world":20,"locked_before_access":true},
+ "meta_training":{"updates":300,"tasks_per_batch":8,"first_order":true},
+ "storage":{"authority":"actual serialized inference payload bytes","paid_objects":["shared base","Mirror map or LEO basis","task code","metadata"],"report_amortization_N":[1,20,100]},
+ "compute":{"report_inner_steps":true,"report_query_wall":true,"report_adaptation_MAC":true,"report_outer_wall":true},
+ "success_gate":"Every fresh world: Mirror NRMSE <=1.10x LEO and amortized bytes at N=20 lower than LEO.",
+ "failure_gate":"Quality/byte gate misses or generic decoder wins at similar bytes.",
+ "boundaries":["Same aligned linear task family as MA-442/443.","No natural task or nonlinear backbone claim.","Train/dev/fresh task IDs are disjoint."]
+}

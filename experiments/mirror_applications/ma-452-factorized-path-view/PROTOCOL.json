@@ -1,0 +1,140 @@
+{
+  "experiment_id": "MA-452",
+  "title": "Factorized path \u00d7 Mirror address",
+  "status": "COMPLETED_FAIL",
+  "evidence_lane": "HELD_OUT_PATH_ROLE_COMPOSITION/QUALITY/BYTES",
+  "base_commit": "c8cf65ba",
+  "hypothesis": "A factorized path identity plus support-inferred Mirror role generalizes to held-out path-role pairs and uses fewer actual serialized N=20 bytes than storing independent modules for each combination, while matching a Routing Networks composition control.",
+  "physical_object": "shared 2-layer modular graph with four physical modules per layer",
+  "mirror_coordinate": "path factor (discrete route ID) \u00d7 support-inferred role angle factor",
+  "logical_multiplicity": "unseen combinations of known module paths and role views",
+  "prior_art_refs": [
+    80,
+    81
+  ],
+  "controls": [
+    "PathNet path-only with development-selected default role",
+    "Routing Networks style path and role selection among existing transforms",
+    "factorized path \u00d7 Mirror code",
+    "flat per-combination full module table",
+    "independent per-task full matrix upper reference"
+  ],
+  "task": {
+    "type": "4D two-layer regression over 4 paths \u00d7 6 roles",
+    "input_dim": 4,
+    "hidden_dim": 4,
+    "output_dim": 4,
+    "physical_modules_per_layer": 4,
+    "role_angles": [
+      0.0,
+      0.2,
+      0.4,
+      0.6,
+      0.8,
+      1.0
+    ],
+    "held_out_path_role_pairs": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        3
+      ],
+      [
+        1,
+        0
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        1
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        0
+      ],
+      [
+        3,
+        2
+      ]
+    ],
+    "support_examples": 32,
+    "query_examples": 256,
+    "fresh_tasks_per_world": 64,
+    "task_id_partition": {
+      "development": [
+        100,
+        163
+      ],
+      "fresh": [
+        3000,
+        3063
+      ]
+    }
+  },
+  "development": {
+    "worlds": [
+      45200,
+      45201
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "path_default_role_selection": "min dev query MSE per path",
+    "role_inference": "select among six candidates using support MSE"
+  },
+  "fresh": {
+    "worlds": [
+      45210,
+      45211,
+      45212
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "locked_before_access": true,
+    "heldout_only_primary": true
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "physical module bank",
+      "path identity",
+      "role code/index",
+      "router or selector",
+      "flat task modules",
+      "metadata"
+    ],
+    "report_amortization_N": [
+      1,
+      20,
+      64
+    ]
+  },
+  "compute": {
+    "report_active_module_MAC": true,
+    "report_role_search_MAC": true,
+    "report_routing_wall": true,
+    "report_query_wall": true
+  },
+  "success_gate": "Every fresh world on held-out pairs: factorized Mirror NRMSE <=1.10x Routing Networks control; actual N=20 bytes below flat per-combination full modules; intervention recovers path and role factors independently.",
+  "failure_gate": "Any quality/byte/identifiability miss, or Routing Networks matches Mirror at equal/fewer bytes and compute.",
+  "boundaries": [
+    "Synthetic aligned modular regression only.",
+    "Do not treat 24 path-role combinations as independent capacity.",
+    "No learned router training or natural task claim."
+  ]
+}

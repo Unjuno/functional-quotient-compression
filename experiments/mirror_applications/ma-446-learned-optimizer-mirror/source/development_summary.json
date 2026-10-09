@@ -1,0 +1,624 @@
+{
+  "experiment_id": "MA-446",
+  "status": "DEVELOPMENT_COMPLETE_PENDING_GATE",
+  "seeds": [
+    44601,
+    44602
+  ],
+  "selected_learning_rates": {
+    "sgd": 1.0,
+    "adam": 0.3,
+    "full_adam": 0.1
+  },
+  "development_tasks_per_world": 32,
+  "support_examples_per_update": 16,
+  "updates": 4,
+  "query_examples": 128,
+  "meta_training_outer_updates": 256,
+  "meta_training_batch_tasks": 16,
+  "meta_training_wall_seconds": {
+    "44601": {
+      "lstm_mirror": 1.0404412520001642,
+      "lstm_full": 0.8745593090025068,
+      "meta_sgd_mirror": 0.5859941499984416
+    },
+    "44602": {
+      "lstm_mirror": 0.9887184999970486,
+      "lstm_full": 0.9165318660016055,
+      "meta_sgd_mirror": 0.6837424810000812
+    }
+  },
+  "meta_training_final_outer_loss": {
+    "44601": {
+      "lstm_mirror": 0.22280703485012054,
+      "lstm_full": 0.18178324401378632,
+      "meta_sgd_mirror": 0.3468712866306305
+    },
+    "44602": {
+      "lstm_mirror": 0.18008363246917725,
+      "lstm_full": 0.2708487808704376,
+      "meta_sgd_mirror": 0.4243920147418976
+    }
+  },
+  "serialized_payloads": {
+    "44601": {
+      "hard_shared": {
+        "path": "source/artifacts/seed44601_hard_shared_K8.pt",
+        "bytes": 1436,
+        "sha256": "112835da420caa126636284090783fc9500329c60969c2000ffce34352cba421",
+        "roundtrip_max_prediction_difference": 0.0,
+        "inference_payload": {
+          "path": "source/artifacts/seed44601_hard_shared_K8_inference.pt",
+          "bytes": 1372,
+          "sha256": "d100d71d8182f51843588c65436684e854b787cc02339cd933495a36066541d8",
+          "roundtrip_max_prediction_difference": 0.0
+        },
+        "per_task_state_bytes_mean": 0,
+        "per_task_state_bytes": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "curve_mean": [
+          0.35621199011802673,
+          0.35621199011802673,
+          0.35621199011802673,
+          0.35621199011802673,
+          0.35621199011802673
+        ]
+      },
+      "mirror_sgd": {
+        "path": "source/artifacts/seed44601_mirror_sgd_K8.pt",
+        "bytes": 2516,
+        "sha256": "a9c222d59b8e85e3601d20c1781dcd64621f58e4c82aeca8af48e491ffe9d3dd",
+        "roundtrip_max_prediction_difference": 0.0,
+        "inference_payload": {
+          "path": "source/artifacts/seed44601_mirror_sgd_K8_inference.pt",
+          "bytes": 2388,
+          "sha256": "9ea22b18b7455f5152b2c24a9ad8f119ed3ed736581f8646e754342775e1baca",
+          "roundtrip_max_prediction_difference": 0.0
+        },
+        "per_task_state_bytes_mean": 1628,
+        "per_task_state_bytes": [
+          1628,
+          1628,
+          1628,
+          1628,
+          1628,
+          1628,
+          1628,
+          1628
+        ],
+        "curve_mean": [
+          0.35621199011802673,
+          0.3424747884273529,
+          0.32848113775253296,
+          0.3152492046356201,
+          0.3032093644142151
+        ]
+      },
+      "mirror_adam": {
+        "path": "source/artifacts/seed44601_mirror_adam_K8.pt",
+        "bytes": 3660,
+        "sha256": "be1aa50b4695a69101b9f1019d2048d4d9395611ed693f493fafd09d493d817b",
+        "roundtrip_max_prediction_difference": 0.0,
+        "inference_payload": {
+          "path": "source/artifacts/seed44601_mirror_adam_K8_inference.pt",
+          "bytes": 2388,
+          "sha256": "042ba9d0c987dd5964688df84277f11ac384559cbc168488408247b3f35f3da4",
+          "roundtrip_max_prediction_difference": 0.0
+        },
+        "per_task_state_bytes_mean": 2772,
+        "per_task_state_bytes": [
+          2772,
+          2772,
+          2772,
+          2772,
+          2772,
+          2772,
+          2772,
+          2772
+        ],
+        "curve_mean": [
+          0.35621199011802673,
+          0.2080526053905487,
+          0.11002699285745621,
+          0.06829307973384857,
+          0.059746596962213516
+        ]
+      },
+      "meta_sgd_mirror": {
+        "path": "source/artifacts/seed44601_meta_sgd_mirror_K8.pt",
+        "bytes": 2956,
+        "sha256": "01301edae182a8e4787a706a2a4105bae0f9506189dc8efab68da84d6d04efbb",
+        "roundtrip_max_prediction_difference": 0.0,
+        "inference_payload": {
+          "path": "source/artifacts/seed44601_meta_sgd_mirror_K8_inference.pt",
+          "bytes": 2388,
+          "sha256": "3cee5151a49c661d2fa21a1a3515f51e5c57614821b32dac8c4d09970f707ed8",
+          "roundtrip_max_prediction_difference": 0.0
+        },
+        "per_task_state_bytes_mean": 1628,
+        "per_task_state_bytes": [
+          1628,
+          1628,
+          1628,
+          1628,
+          1628,
+          1628,
+          1628,
+          1628
+        ],
+        "curve_mean": [
+          0.3560575246810913,
+          0.3525695204734802,
+          0.34890657663345337,
+          0.3453359603881836,
+          0.3419792652130127
+        ]
+      },
+      "lstm_mirror": {
+        "path": "source/artifacts/seed44601_lstm_mirror_K8.pt",
+        "bytes": 11957,
+        "sha256": "44cf8097c45398140ae13c3f01a9611415f3e0b2b7e347b1e16d9f14ffa8a7cf",
+        "roundtrip_max_prediction_difference": 0.0,
+        "inference_payload": {
+          "path": "source/artifacts/seed44601_lstm_mirror_K8_inference.pt",
+          "bytes": 2388,
+          "sha256": "0a7026bec9f75bab26fda4ea2fb08f648fbc21b560190502959a9ad6578e29aa",
+          "roundtrip_max_prediction_difference": 0.0
+        },
+        "per_task_state_bytes_mean": 8148,
+        "per_task_state_bytes": [
+          8148,
+          8148,
+          8148,
+          8148,
+          8148,
+          8148,
+          8148,
+          8148
+        ],
+        "curve_mean": [
+          0.35621199011802673,
+          0.35277917981147766,
+          0.34115269780158997,
+          0.31510740518569946,
+          0.2690085172653198
+        ]
+      },
+      "full_adam": {
+        "path": "source/artifacts/seed44601_full_adam_K8.pt",
+        "bytes": 6484,
+        "sha256": "41e9578a311d41ca6da4137d745eac71e45523b132361f0716418ee728006fee",
+        "roundtrip_max_prediction_difference": 0.0,
+        "inference_payload": {
+          "path": "source/artifacts/seed44601_full_adam_K8_inference.pt",
+          "bytes": 2908,
+          "sha256": "11839a92b801448c46c4340430e998e9d983a9a79ed6e823dbd1ba1c14c04ba8",
+          "roundtrip_max_prediction_difference": 0.0
+        },
+        "per_task_state_bytes_mean": 6228,
+        "per_task_state_bytes": [
+          6228,
+          6228,
+          6228,
+          6228,
+          6228,
+          6228,
+          6228,
+          6228
+        ],
+        "curve_mean": [
+          0.35621199011802673,
+          0.23891493678092957,
+          0.16356009244918823,
+          0.1145923063158989,
+          0.08541525155305862
+        ]
+      },
+      "lstm_full": {
+        "path": "source/artifacts/seed44601_lstm_full_K8.pt",
+        "bytes": 30908,
+        "sha256": "36ac3e163c7514d7336d156201f555a8308b988b22f98d86d6e7cb56d79b5106",
+        "roundtrip_max_prediction_difference": 0.0,
+        "inference_payload": {
+          "path": "source/artifacts/seed44601_lstm_full_K8_inference.pt",
+          "bytes": 2908,
+          "sha256": "05b09aa2c33ca2868ef4df53070035f9e8d0290ead6ea474c862d2f5fe514cf6",
+          "roundtrip_max_prediction_difference": 0.0
+        },
+        "per_task_state_bytes_mean": 27732,
+        "per_task_state_bytes": [
+          27732,
+          27732,
+          27732,
+          27732,
+          27732,
+          27732,
+          27732,
+          27732
+        ],
+        "curve_mean": [
+          0.35621199011802673,
+          0.3556199073791504,
+          0.3517110049724579,
+          0.32196927070617676,
+          0.24502328038215637
+        ]
+      }
+    },
+    "44602": {
+      "hard_shared": {
+        "path": "source/artifacts/seed44602_hard_shared_K8.pt",
+        "bytes": 1436,
+        "sha256": "febae61e97f872e6b1b171a37de67f902e06d567f7f796860d44daf4198d921f",
+        "roundtrip_max_prediction_difference": 0.0,
+        "inference_payload": {
+          "path": "source/artifacts/seed44602_hard_shared_K8_inference.pt",
+          "bytes": 1372,
+          "sha256": "0696a2939f179613848783895f2b9300ddf36b16bc9958f1fc61b958c9602673",
+          "roundtrip_max_prediction_difference": 0.0
+        },
+        "per_task_state_bytes_mean": 0,
+        "per_task_state_bytes": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "curve_mean": [
+          0.4062764644622803,
+          0.4062764644622803,
+          0.4062764644622803,
+          0.4062764644622803,
+          0.4062764644622803
+        ]
+      },
+      "mirror_sgd": {
+        "path": "source/artifacts/seed44602_mirror_sgd_K8.pt",
+        "bytes": 2516,
+        "sha256": "564da2968bcd134dd8f7a56114eb4a0ceecd324c022cbdb9563d7c18860c0245",
+        "roundtrip_max_prediction_difference": 0.0,
+        "inference_payload": {
+          "path": "source/artifacts/seed44602_mirror_sgd_K8_inference.pt",
+          "bytes": 2388,
+          "sha256": "b24ba8b9fb520ee3779886b617376eb56a5c0046e1011efe327fca4b759dcf06",
+          "roundtrip_max_prediction_difference": 0.0
+        },
+        "per_task_state_bytes_mean": 1628,
+        "per_task_state_bytes": [
+          1628,
+          1628,
+          1628,
+          1628,
+          1628,
+          1628,
+          1628,
+          1628
+        ],
+        "curve_mean": [
+          0.4062764644622803,
+          0.3874482810497284,
+          0.3706779479980469,
+          0.3557358384132385,
+          0.3418571352958679
+        ]
+      },
+      "mirror_adam": {
+        "path": "source/artifacts/seed44602_mirror_adam_K8.pt",
+        "bytes": 3660,
+        "sha256": "9ef3121c0dfb2423b8bbd6914220b4b419a32d60616180aaf7da9c5acd356167",
+        "roundtrip_max_prediction_difference": 0.0,
+        "inference_payload": {
+          "path": "source/artifacts/seed44602_mirror_adam_K8_inference.pt",
+          "bytes": 2388,
+          "sha256": "2477b8ba3ec30fdf130b64e699e3e6e3e54f05d907f4a954b72c4a5116af19fc",
+          "roundtrip_max_prediction_difference": 0.0
+        },
+        "per_task_state_bytes_mean": 2772,
+        "per_task_state_bytes": [
+          2772,
+          2772,
+          2772,
+          2772,
+          2772,
+          2772,
+          2772,
+          2772
+        ],
+        "curve_mean": [
+          0.4062764644622803,
+          0.2457665055990219,
+          0.14788347482681274,
+          0.10136791318655014,
+          0.0814829170703888
+        ]
+      },
+      "meta_sgd_mirror": {
+        "path": "source/artifacts/seed44602_meta_sgd_mirror_K8.pt",
+        "bytes": 2956,
+        "sha256": "ec20fc89306406468128b1546ceb4a32235abd5939a106ad0bcc0c640eebfb9f",
+        "roundtrip_max_prediction_difference": 0.0,
+        "inference_payload": {
+          "path": "source/artifacts/seed44602_meta_sgd_mirror_K8_inference.pt",
+          "bytes": 2388,
+          "sha256": "7ae9bfcf25df3e50ae23e2897537f9d7e18dbf293d565455db71118981028276",
+          "roundtrip_max_prediction_difference": 0.0
+        },
+        "per_task_state_bytes_mean": 1628,
+        "per_task_state_bytes": [
+          1628,
+          1628,
+          1628,
+          1628,
+          1628,
+          1628,
+          1628,
+          1628
+        ],
+        "curve_mean": [
+          0.4061165452003479,
+          0.40130820870399475,
+          0.39686962962150574,
+          0.3927913010120392,
+          0.3888794481754303
+        ]
+      },
+      "lstm_mirror": {
+        "path": "source/artifacts/seed44602_lstm_mirror_K8.pt",
+        "bytes": 11957,
+        "sha256": "70ed650ebe88f1b47ddc2695567404c3a96575b1a53d7c26479daaa719a46c51",
+        "roundtrip_max_prediction_difference": 0.0,
+        "inference_payload": {
+          "path": "source/artifacts/seed44602_lstm_mirror_K8_inference.pt",
+          "bytes": 2388,
+          "sha256": "4dbb26af7ca8ce5dbc0037f4738aeb54108d4fdc8bbcfe552cfdfad0c1a4d8fb",
+          "roundtrip_max_prediction_difference": 0.0
+        },
+        "per_task_state_bytes_mean": 8148,
+        "per_task_state_bytes": [
+          8148,
+          8148,
+          8148,
+          8148,
+          8148,
+          8148,
+          8148,
+          8148
+        ],
+        "curve_mean": [
+          0.4062764644622803,
+          0.3984474241733551,
+          0.3761235773563385,
+          0.3292345106601715,
+          0.24450699985027313
+        ]
+      },
+      "full_adam": {
+        "path": "source/artifacts/seed44602_full_adam_K8.pt",
+        "bytes": 6484,
+        "sha256": "fe09165b40a0550db407de0c1b2ced77d0a0c07c0c076ffeeb529a2b2509d0c7",
+        "roundtrip_max_prediction_difference": 0.0,
+        "inference_payload": {
+          "path": "source/artifacts/seed44602_full_adam_K8_inference.pt",
+          "bytes": 2908,
+          "sha256": "37e23337a8208cbc8723b56038d538708ad335b2d45fa086c68b402c1adce32d",
+          "roundtrip_max_prediction_difference": 0.0
+        },
+        "per_task_state_bytes_mean": 6228,
+        "per_task_state_bytes": [
+          6228,
+          6228,
+          6228,
+          6228,
+          6228,
+          6228,
+          6228,
+          6228
+        ],
+        "curve_mean": [
+          0.4062764644622803,
+          0.28075110912323,
+          0.1916554570198059,
+          0.1323578655719757,
+          0.09381357580423355
+        ]
+      },
+      "lstm_full": {
+        "path": "source/artifacts/seed44602_lstm_full_K8.pt",
+        "bytes": 30908,
+        "sha256": "cc19fe0e7bc05365550d6c930be8661f844fd0727b15ca612bc6b861fd92c7b4",
+        "roundtrip_max_prediction_difference": 0.0,
+        "inference_payload": {
+          "path": "source/artifacts/seed44602_lstm_full_K8_inference.pt",
+          "bytes": 2908,
+          "sha256": "09fcd9d4561bb15dd5a823d80373a1b055be5b0d017191314c679e418cfd4261",
+          "roundtrip_max_prediction_difference": 0.0
+        },
+        "per_task_state_bytes_mean": 27732,
+        "per_task_state_bytes": [
+          27732,
+          27732,
+          27732,
+          27732,
+          27732,
+          27732,
+          27732,
+          27732
+        ],
+        "curve_mean": [
+          0.4062764644622803,
+          0.39763134717941284,
+          0.38206708431243896,
+          0.3540164530277252,
+          0.30506834387779236
+        ]
+      }
+    }
+  },
+  "storage_metrics": {
+    "44601": {
+      "hard_shared": {
+        "inference_payload_bytes": 1372,
+        "restartable_payload_bytes": 1436,
+        "inference_sha256": "d100d71d8182f51843588c65436684e854b787cc02339cd933495a36066541d8",
+        "restartable_sha256": "112835da420caa126636284090783fc9500329c60969c2000ffce34352cba421"
+      },
+      "mirror_sgd": {
+        "inference_payload_bytes": 2388,
+        "restartable_payload_bytes": 2516,
+        "inference_sha256": "9ea22b18b7455f5152b2c24a9ad8f119ed3ed736581f8646e754342775e1baca",
+        "restartable_sha256": "a9c222d59b8e85e3601d20c1781dcd64621f58e4c82aeca8af48e491ffe9d3dd"
+      },
+      "mirror_adam": {
+        "inference_payload_bytes": 2388,
+        "restartable_payload_bytes": 3660,
+        "inference_sha256": "042ba9d0c987dd5964688df84277f11ac384559cbc168488408247b3f35f3da4",
+        "restartable_sha256": "be1aa50b4695a69101b9f1019d2048d4d9395611ed693f493fafd09d493d817b"
+      },
+      "meta_sgd_mirror": {
+        "inference_payload_bytes": 2388,
+        "restartable_payload_bytes": 2956,
+        "inference_sha256": "3cee5151a49c661d2fa21a1a3515f51e5c57614821b32dac8c4d09970f707ed8",
+        "restartable_sha256": "01301edae182a8e4787a706a2a4105bae0f9506189dc8efab68da84d6d04efbb"
+      },
+      "lstm_mirror": {
+        "inference_payload_bytes": 2388,
+        "restartable_payload_bytes": 11957,
+        "inference_sha256": "0a7026bec9f75bab26fda4ea2fb08f648fbc21b560190502959a9ad6578e29aa",
+        "restartable_sha256": "44cf8097c45398140ae13c3f01a9611415f3e0b2b7e347b1e16d9f14ffa8a7cf"
+      },
+      "full_adam": {
+        "inference_payload_bytes": 2908,
+        "restartable_payload_bytes": 6484,
+        "inference_sha256": "11839a92b801448c46c4340430e998e9d983a9a79ed6e823dbd1ba1c14c04ba8",
+        "restartable_sha256": "41e9578a311d41ca6da4137d745eac71e45523b132361f0716418ee728006fee"
+      },
+      "lstm_full": {
+        "inference_payload_bytes": 2908,
+        "restartable_payload_bytes": 30908,
+        "inference_sha256": "05b09aa2c33ca2868ef4df53070035f9e8d0290ead6ea474c862d2f5fe514cf6",
+        "restartable_sha256": "36ac3e163c7514d7336d156201f555a8308b988b22f98d86d6e7cb56d79b5106"
+      }
+    },
+    "44602": {
+      "hard_shared": {
+        "inference_payload_bytes": 1372,
+        "restartable_payload_bytes": 1436,
+        "inference_sha256": "0696a2939f179613848783895f2b9300ddf36b16bc9958f1fc61b958c9602673",
+        "restartable_sha256": "febae61e97f872e6b1b171a37de67f902e06d567f7f796860d44daf4198d921f"
+      },
+      "mirror_sgd": {
+        "inference_payload_bytes": 2388,
+        "restartable_payload_bytes": 2516,
+        "inference_sha256": "b24ba8b9fb520ee3779886b617376eb56a5c0046e1011efe327fca4b759dcf06",
+        "restartable_sha256": "564da2968bcd134dd8f7a56114eb4a0ceecd324c022cbdb9563d7c18860c0245"
+      },
+      "mirror_adam": {
+        "inference_payload_bytes": 2388,
+        "restartable_payload_bytes": 3660,
+        "inference_sha256": "2477b8ba3ec30fdf130b64e699e3e6e3e54f05d907f4a954b72c4a5116af19fc",
+        "restartable_sha256": "9ef3121c0dfb2423b8bbd6914220b4b419a32d60616180aaf7da9c5acd356167"
+      },
+      "meta_sgd_mirror": {
+        "inference_payload_bytes": 2388,
+        "restartable_payload_bytes": 2956,
+        "inference_sha256": "7ae9bfcf25df3e50ae23e2897537f9d7e18dbf293d565455db71118981028276",
+        "restartable_sha256": "ec20fc89306406468128b1546ceb4a32235abd5939a106ad0bcc0c640eebfb9f"
+      },
+      "lstm_mirror": {
+        "inference_payload_bytes": 2388,
+        "restartable_payload_bytes": 11957,
+        "inference_sha256": "4dbb26af7ca8ce5dbc0037f4738aeb54108d4fdc8bbcfe552cfdfad0c1a4d8fb",
+        "restartable_sha256": "70ed650ebe88f1b47ddc2695567404c3a96575b1a53d7c26479daaa719a46c51"
+      },
+      "full_adam": {
+        "inference_payload_bytes": 2908,
+        "restartable_payload_bytes": 6484,
+        "inference_sha256": "37e23337a8208cbc8723b56038d538708ad335b2d45fa086c68b402c1adce32d",
+        "restartable_sha256": "fe09165b40a0550db407de0c1b2ced77d0a0c07c0c076ffeeb529a2b2509d0c7"
+      },
+      "lstm_full": {
+        "inference_payload_bytes": 2908,
+        "restartable_payload_bytes": 30908,
+        "inference_sha256": "09fcd9d4561bb15dd5a823d80373a1b055be5b0d017191314c679e418cfd4261",
+        "restartable_sha256": "cc19fe0e7bc05365550d6c930be8661f844fd0727b15ca612bc6b861fd92c7b4"
+      }
+    }
+  },
+  "mean_query_mse_by_world": {
+    "44601": {
+      "hard_shared": 0.35621199011802673,
+      "mirror_sgd": 0.3032093644142151,
+      "mirror_adam": 0.059746596962213516,
+      "meta_sgd_mirror": 0.3419792652130127,
+      "lstm_mirror": 0.2690085172653198,
+      "full_adam": 0.08541525155305862,
+      "lstm_full": 0.24502328038215637
+    },
+    "44602": {
+      "hard_shared": 0.4062764644622803,
+      "mirror_sgd": 0.3418571352958679,
+      "mirror_adam": 0.0814829170703888,
+      "meta_sgd_mirror": 0.3888794481754303,
+      "lstm_mirror": 0.24450699985027313,
+      "full_adam": 0.09381357580423355,
+      "lstm_full": 0.30506834387779236
+    }
+  },
+  "mean_query_mse_pooled": {
+    "hard_shared": 0.3812442272901535,
+    "mirror_sgd": 0.3225332498550415,
+    "mirror_adam": 0.07061475701630116,
+    "meta_sgd_mirror": 0.3654293566942215,
+    "lstm_mirror": 0.2567577585577965,
+    "full_adam": 0.08961441367864609,
+    "lstm_full": 0.27504581212997437
+  },
+  "compute_proxy_per_task": {
+    "hard_shared": 0,
+    "mirror_sgd": 1836,
+    "mirror_adam": 1944,
+    "meta_sgd_mirror": 1836,
+    "lstm_mirror": 5760,
+    "full_adam": 2016,
+    "lstm_full": 17280
+  },
+  "torch_num_threads": 1,
+  "total_run_wall_seconds": 5.727133899999899,
+  "fresh_accessed": false,
+  "gates_by_world": {
+    "44601": {
+      "learned_mirror_beats_simple_by_15pct": false,
+      "within_5pct_full_learned_quality": false,
+      "at_least_30pct_payload_saving_vs_full_learned": true,
+      "best_simple_mse": 0.059746596962213516,
+      "mirror_lstm_mse": 0.2690085172653198,
+      "full_lstm_mse": 0.24502328038215637,
+      "mirror_bytes": 11957,
+      "full_bytes": 30908
+    },
+    "44602": {
+      "learned_mirror_beats_simple_by_15pct": false,
+      "within_5pct_full_learned_quality": true,
+      "at_least_30pct_payload_saving_vs_full_learned": true,
+      "best_simple_mse": 0.0814829170703888,
+      "mirror_lstm_mse": 0.24450699985027313,
+      "full_lstm_mse": 0.30506834387779236,
+      "mirror_bytes": 11957,
+      "full_bytes": 30908
+    }
+  },
+  "all_pass": false,
+  "decision": "FAIL"
+}

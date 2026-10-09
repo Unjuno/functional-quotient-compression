@@ -1,0 +1,57 @@
+{
+  "experiment_id": "MA-368",
+  "title": "Factorized width × depth Mirror code in a slimmable supernet",
+  "status": "FROZEN_DEVELOPMENT_COMPLETED",
+  "base_commit": "research/ma-367-universally-slimmable-width-mirror-20261008",
+  "evidence_lane": "QUALITY/STORAGE/COMPUTE/UNSEEN_CONFIG_GENERALIZATION",
+  "hypothesis": "A shared elastic MLP plus additive width/depth Givens codes will improve held-out width-depth configuration quality over ordinary supernet training and a byte-matched factorized scalar gain, without per-configuration private weights.",
+  "prior_art_refs": ["PA51", "PA52"],
+  "physical_object": "one max-width, max-depth MLP with nested channel slices and a shared layer bank",
+  "mirror_coordinate": "four width angles plus four depth angles; their sum parameterizes one final hidden-state Givens rotation",
+  "logical_multiplicity": "16 width-depth architectures from one shared physical parameter set, with four cross-combinations withheld from code training",
+  "model": {
+    "input_dim": 32,
+    "classes": 4,
+    "widths": [8, 16, 24, 32],
+    "depths": [1, 2, 3, 4],
+    "train_examples": 8192,
+    "validation_examples": 2048,
+    "test_examples": 4096,
+    "batch_size": 128,
+    "optimizer_updates": 1200,
+    "optimizer": "Adam",
+    "learning_rate": 0.001,
+    "development_seeds": [36801, 36802],
+    "fresh_seeds": [36811, 36812, 36813],
+    "held_out_configurations": [[8, 3], [16, 4], [24, 1], [32, 2]],
+    "architecture_sampling": "US-Net/OFA sandwich: always train minimum (8,1) and maximum (32,4), plus one uniformly sampled non-held-out configuration; same minibatches and configurations for shared variants"
+  },
+  "task": "Fixed synthetic 32-input, four-class teacher MLP supplies the same classification target to every width/depth subnetwork; holdout is by architecture configuration, not examples.",
+  "controls": [
+    "independent full model for each width-depth configuration; all 16 payloads paid, trained on all configurations",
+    "ordinary shared elastic supernet with nested widths and variable depth",
+    "shared supernet plus additive factorized scalar gain: one value per width and depth (8 total)",
+    "shared supernet plus additive factorized Mirror Givens angle: one value per width and depth (8 total)"
+  ],
+  "development_gate_before_fresh": "Both development seeds: independent macro validation accuracy >=0.70; on the four held-out configurations, factorized Mirror reduces mean NLL by >=5% vs plain supernet and >=5% vs factorized scalar control; no seen-configuration mean NLL regression >0.02 nat vs plain; held-out mean NLL within 0.05 nat of independent; and Mirror actual bytes <=1.10x factorized scalar payload with active MACs <=1.10x plain supernet. Otherwise record FAIL/NOT ESTABLISHED and keep fresh sealed.",
+  "success_gate": "All three fresh seeds reproduce the held-out quality gates; Mirror payload <=0.90x independent-configuration payload; all 16 configurations meet held-out/test quality limits; active MACs <=1.10x plain supernet; serialized replay exact.",
+  "failure_gate": "Mirror fails the held-out NLL improvement over plain supernet or matched scalar in both development seeds; or unseen configurations degrade >0.05 nat versus independent; or storage/compute budget fails.",
+  "storage": {
+    "authority": "actual deterministic ZIP/NPY FP16 inference payload bytes after reload",
+    "paid_objects": ["shared max width/depth weights and biases", "all width/depth Mirror angles or scalar gains", "all independent configuration weights", "architecture IDs and metadata", "archive and per-array headers"]
+  },
+  "compute": {
+    "report_examples_and_optimizer_updates": true,
+    "report_active_macs_per_configuration": true,
+    "report_training_wall_clock": true,
+    "report_inference_examples_per_second": true,
+    "mac_equivalent_convention": "one multiply-accumulate per linear weight; one MAC equivalent per multiply-then-add elementwise op"
+  },
+  "boundaries": [
+    "small synthetic MLP screening only; no image, language, or production supernet claim",
+    "held-out means architecture combinations omitted from training code updates; the shared base still sees related widths and depths",
+    "logical configuration count is not independent capacity; report all 16 measured functions",
+    "fixed-update results are learning-efficiency evidence, not a near-converged capacity claim",
+    "fresh seeds remain sealed until the full development gate passes"
+  ]
+}

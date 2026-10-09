@@ -1,0 +1,54 @@
+{
+  "experiment_id": "MA-451",
+  "status": "FAIL",
+  "protocol_commit": "64849729",
+  "amendments": [
+    "A1 clarified task counts before fresh. A2 adjusted serialized frontier to actual N=64 fresh task bank. A3 added deterministic MAC accounting; no quality values changed."
+  ],
+  "fresh_worlds": [
+    45110,
+    45111,
+    45112
+  ],
+  "fresh_aggregates": 324,
+  "n20_mean_nrmse": {
+    "pathnet": 0.18565073017444875,
+    "mirror": 0.0,
+    "independent": 1.8820810541658123e-07
+  },
+  "n20_actual_bytes_per_task": {
+    "pathnet": 155.05,
+    "mirror": 158.25,
+    "independent": 146.05
+  },
+  "n64_actual_bytes_per_task": {
+    "pathnet": 59.453125,
+    "mirror": 63.453125,
+    "independent": 89.640625
+  },
+  "module_count": {
+    "pathnet": 8,
+    "mirror": 8
+  },
+  "compute": {
+    "pathnet_active_module_MAC_per_task": 8192,
+    "mirror_active_module_MAC_per_task": 8192,
+    "mirror_role_search_MAC_per_task": 3840,
+    "n64_query_wall_ms": {
+      "pathnet": 0.10548791306064231,
+      "mirror": 0.39251134363540685
+    }
+  },
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-451-pathnet-mirror-role/tests",
+    "passed": 2,
+    "failed": 0
+  },
+  "checks": [
+    "fresh payload sizes/hashes replayed",
+    "all inferred role angles match teacher grid",
+    "N20 strict byte gate applied",
+    "actual N64 frontier serialized"
+  ],
+  "decision": "FAIL at preregistered N20 byte gate; support-inferred role improves quality and crosses below independent storage at N64, but incurs support-search compute and uses more bytes at N20."
+}

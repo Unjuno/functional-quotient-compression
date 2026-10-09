@@ -1,0 +1,64 @@
+{
+  "experiment_id": "MA-455",
+  "status": "COMPLETED_FAIL",
+  "protocol_commit": "eb08b0fd",
+  "initial_protocol_commit": "08eb750e",
+  "exploratory_excluded_worlds": [
+    45510,
+    45511,
+    45512
+  ],
+  "fresh_worlds": [
+    45520,
+    45521,
+    45522
+  ],
+  "fresh_seeds": [
+    0,
+    1,
+    2
+  ],
+  "aggregate_rows": 108,
+  "checks": [
+    {
+      "name": "artifact_tests",
+      "command": "python -m pytest -q experiments/mirror_applications/ma-455-sequential-mirror-program/tests",
+      "result": "2 passed"
+    },
+    {
+      "name": "serialized_payload_replay",
+      "result": "All 108 valid rows replay exact serialized byte lengths and SHA256 through tests."
+    },
+    {
+      "name": "order_sensitivity",
+      "result": "N64 average commutator Frobenius norm 0.5339 and swapped-order NRMSE 0.3272."
+    },
+    {
+      "name": "registered_gate",
+      "result": "FAIL: N20 Mirror payload is 91.6% of independent (vs <=75% gate) and Mirror quality misses <=1.10x independent."
+    }
+  ],
+  "key_metrics": {
+    "N20": {
+      "tied_nrmse": 0.0006167959,
+      "tied_bytes_per_task": 133.25,
+      "mirror_nrmse": 1.54305e-05,
+      "mirror_bytes_per_task": 177.65,
+      "rank1_residual_nrmse": 5.505e-06,
+      "rank1_residual_bytes_per_task": 273.25,
+      "independent_nrmse": 3.115e-08,
+      "independent_bytes_per_task": 193.85
+    },
+    "order_audit": {
+      "mean_commutator_fro": 0.5339076,
+      "order_swapped_nrmse": 0.3272405
+    },
+    "compute": {
+      "mirror_fit_wall_seconds_per_64_task_batch": 0.26358,
+      "independent_fit_wall_seconds_per_64_task_batch": 0.16923,
+      "mirror_MAC_per_example": 16,
+      "independent_MAC_per_example": 8
+    }
+  },
+  "scope": "Synthetic 2D linear composition. Initial fresh worlds were excluded after rank-one control zero-initialization flaw."
+}

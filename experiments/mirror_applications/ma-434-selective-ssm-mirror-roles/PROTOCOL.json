@@ -1,0 +1,59 @@
+{
+  "experiment_id": "MA-434",
+  "title": "Low-description role codes for selective state-space decay",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/RUNTIME",
+  "base_commit": "6f574e9585356829a5f70cd6ec1c375a5331b97c",
+  "prior_art_refs": ["PA73"],
+  "hypothesis": "A small role coordinate that shifts shared selective-SSM log-decay can realize multiple token-selective dynamics with lower actual payload than full per-role SSM copies.",
+  "physical_object": "One fixed Mamba-like selective diagonal SSM with state dimension 16; token input controls delta, B_t and C_t through shared scalar/vector gates.",
+  "mirror_coordinate": "One scalar m_r per role shifts all shared log decay rates: A_log(r)=A_log+m_r. The rest of the selective recurrence is physically shared.",
+  "logical_multiplicity": "Twelve role-specific recurrent functions process independent input sequences through one shared SSM state transition structure.",
+  "task": {
+    "roles": 12,
+    "state_dimension": 16,
+    "sequences_per_role": 32,
+    "sequence_length": 256,
+    "role_codes": "Fixed evenly spaced m values in [-0.6,0.6]; each role code is explicit paid inference state.",
+    "recurrence": "delta_t=softplus(w_delta*x_t+b_delta); B_t=B*sigmoid(w_B*x_t+b_B); C_t=C*sigmoid(w_C*x_t+b_C); h_t=exp(-exp(A_log+m_r)*delta_t)*h_(t-1)+B_t*x_t; y_t=C_t*h_t.",
+    "input": "Per seed, independent standard-normal inputs with deterministic sparse impulses; the recurrence and input values are shared across methods.",
+    "scope": "Minimal Mamba-like selective SSM mechanism only; not a full Mamba block, language model, or trained task benchmark. No learning occurs."
+  },
+  "controls": [
+    "one unconditioned shared selective SSM (m=0)",
+    "native per-role decay-bias conditioning, algebraically identical to adding m_r to A_log",
+    "independent full per-role copies of A/B/C and all selective gate parameters"
+  ],
+  "development": {
+    "worlds_or_seeds": [43401, 43402],
+    "optimizer_updates": 0,
+    "selection_metric": "serialized-output NRMSE to the FP32 reference, actual compressed inference payload bytes, role diversity, and steady-state tokens/s",
+    "runtime_protocol": "deserialize once; warm up five full batches; time ten repeats on one CPU thread. Report one-time deserialization separately."
+  },
+  "fresh": {
+    "worlds_or_seeds": [43411, 43412, 43413],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "format": "compressed NPZ, FP16 parameters/role codes and uint8 role IDs",
+    "paid_objects": ["all shared or independent recurrent parameters", "every role code or per-role parameter copy", "role IDs and metadata", "reconstruction state"],
+    "replay_required": true
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true,
+    "report_inference_throughput": true,
+    "include": "Report zero training examples/updates, processed inference tokens, recurrence operations per token, one-time deserialize time, and steady-state tokens/s."
+  },
+  "success_gate": "Both development seeds: role-conditioned NRMSE <=0.01, actual bytes <=0.80x independent full SSM copies, throughput >=0.80x native decay-bias control, and role diversity RMS >=0.01. No exact native-control alias may explain the result. Passing only qualifies for fresh confirmation.",
+  "failure_gate": "FAIL if any seed misses quality, bytes, runtime or meaningful diversity gate, or if the native per-role decay-bias control exactly reproduces the paid state and outputs with no incremental Mirror-specific benefit.",
+  "boundaries": [
+    "This only screens a minimal selective diagonal recurrence, not Mamba quality or sequence-model performance.",
+    "All weights are fixed random deterministic vectors; no learned-task claim is made.",
+    "Role-dependent decay is a conventional native SSM conditioning axis and is expected to have an exact alias control.",
+    "Fresh seeds stay sealed unless both development seeds pass every gate."
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "draw": 10,
+  "baseline_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
+  "eligible_rule": "P0 and UNTESTED rows in latest worker-ready baseline; exclude any MA ID with a live origin/research/ma-* branch or an MA experiment directory in that baseline",
+  "remote_ma_branch_count": 113,
+  "remote_ma_ids": 86,
+  "baseline_ma_experiment_directory_count": 47,
+  "p0_untested_before_exclusions": 595,
+  "eligible_pool_size": 558,
+  "pool_csv_sha256": "5b8966b31a602687281a9fb962848f0d87445376d1c35fe209137dd6c72da147",
+  "seed_hex": "4d3f452738dfe7c524cb8f0be1b1f36560d6eae466ee36249a52ed0bb1ccb260",
+  "sampling": "Rejection sampling: SHA256(seed_bytes || counter_u32_be), reject values >= floor(2^256/n)*n, index=value mod n",
+  "rejection_counter": 0,
+  "index_zero_based": 78,
+  "selected_row": {
+    "id": "MA-446",
+    "family": "Meta-learning / adaptation",
+    "proposal": "learned optimizer for Mirror coordinates only",
+    "shared_object": "shared model and optimizer",
+    "mirror_coordinate": "optimizer updates small m state from gradients/history",
+    "logical_multiplicity": "fast-adapting logical functions",
+    "cheapest_control": "learned optimizer",
+    "first_metric": "adaptation quality / steps / optimizer bytes",
+    "priority": "P0",
+    "status": "UNTESTED",
+    "prior_art_level": "DIRECT",
+    "prior_art_refs": "PA77",
+    "mirror_delta": "Restrict learned update policy to low-dimensional functional coordinates.",
+    "worker_note": "Compare Adam/SGD on same code space."
+  }
+}

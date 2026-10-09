@@ -1,0 +1,33 @@
+{
+  "experiment_id": "MA-431",
+  "commit": "0b45894d",
+  "protocol_sha256": "c7b716913e042a65bea73a3293796687eddb5758e4dcd32b4acbcc3c98f1ab0c",
+  "tests": {
+    "command": "python -m pytest experiments/mirror_applications/ma-431-compositional-depth-view/tests -q",
+    "passed": 4,
+    "failed": 0
+  },
+  "serialization": {
+    "method": "torch.save of full inference state plus metadata/config",
+    "actual_payload_bytes_recorded": true,
+    "sha256_recorded_for_all_45_fresh_rows": true,
+    "payload_reconstruction_roundtrip_tested": true,
+    "note": "Fresh payload bytes and hashes were computed directly from each in-memory serialized payload; test round-trips the serialization format and verifies paid metadata is present. Payload blobs are not committed."
+  },
+  "metric_replay": {
+    "command": "python experiments/mirror_applications/ma-431-compositional-depth-view/source/verify_results.py",
+    "checked": true,
+    "fresh_rows": 45,
+    "worlds": [43110, 43111, 43112],
+    "seeds": [0, 1, 2],
+    "all_world_quality_gate": true,
+    "all_world_actual_byte_gate": true
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Fresh configuration was frozen in DEV_SELECTION.json before opening the fresh worlds.",
+    "After fresh evaluation, payload-capture instrumentation was added without changing model computation, optimizer settings or metric calculations.",
+    "No fresh-informed hyperparameter or protocol changes were made.",
+    "CPU wall-clock is descriptive only; one measured batch per model has substantial timing variance."
+  ]
+}

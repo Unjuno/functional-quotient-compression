@@ -1,0 +1,138 @@
+{
+  "experiment_id": "MA-431",
+  "protocol_sha256": "c7b716913e042a65bea73a3293796687eddb5758e4dcd32b4acbcc3c98f1ab0c",
+  "fresh_locked_before_access": true,
+  "fresh_worlds": [
+    43110,
+    43111,
+    43112
+  ],
+  "fresh_seeds": [
+    0,
+    1,
+    2
+  ],
+  "selected_hyperparameters": {
+    "static": {
+      "learning_rate": 0.001,
+      "coordinate_scale": null
+    },
+    "rank1": {
+      "learning_rate": 0.001,
+      "coordinate_scale": null
+    },
+    "universal_lowrank": {
+      "learning_rate": 0.001,
+      "coordinate_scale": null
+    },
+    "mirror": {
+      "learning_rate": 0.001,
+      "coordinate_scale": 1.0
+    },
+    "independent": {
+      "learning_rate": 0.001,
+      "coordinate_scale": null
+    }
+  },
+  "selection_basis": "Development-only mean held-out length-6 relative MSE; LR=0.001 was best for each method, and Mirror scale 1.0 passed while 0.5 did not.",
+  "development_summary": {
+    "static": {
+      "relative_mse": 0.0016116460125582914,
+      "payload_bytes": 2921.0,
+      "active_macs_proxy": 1536.0,
+      "train_seconds": 2.9820284359981692,
+      "inference_seconds": 0.0010213231677577521,
+      "examples_per_second": 378487.4041863243
+    },
+    "rank1": {
+      "relative_mse": 0.0005164114457632726,
+      "payload_bytes": 3425.0,
+      "active_macs_proxy": 3264.0,
+      "train_seconds": 3.7817718038325743,
+      "inference_seconds": 0.0012657158319295074,
+      "examples_per_second": 307237.5303010966
+    },
+    "universal_lowrank": {
+      "relative_mse": 3.729833215023367e-06,
+      "payload_bytes": 3993.0,
+      "active_macs_proxy": 8064.0,
+      "train_seconds": 4.411509455339304,
+      "inference_seconds": 0.0016694093283149414,
+      "examples_per_second": 243328.7944828753
+    },
+    "mirror": {
+      "relative_mse": 6.0672357828176855e-06,
+      "payload_bytes": 2921.0,
+      "active_macs_proxy": 2304.0,
+      "train_seconds": 5.131495526666792,
+      "inference_seconds": 0.0017570344959191668,
+      "examples_per_second": 235026.80974764508
+    },
+    "independent": {
+      "relative_mse": 5.8520114407656365e-06,
+      "payload_bytes": 3945.0,
+      "active_macs_proxy": 1536.0,
+      "train_seconds": 3.04433984066903,
+      "inference_seconds": 0.0010343718337632406,
+      "examples_per_second": 372271.0290013311
+    }
+  },
+  "development_by_world": {
+    "43100": {
+      "static": {
+        "relative_mse": 0.0014674051975210507,
+        "payload_bytes": 2921.0,
+        "active_macs_proxy": 1536.0
+      },
+      "rank1": {
+        "relative_mse": 0.0004725060716737062,
+        "payload_bytes": 3425.0,
+        "active_macs_proxy": 3264.0
+      },
+      "universal_lowrank": {
+        "relative_mse": 5.0755831845587336e-06,
+        "payload_bytes": 3993.0,
+        "active_macs_proxy": 8064.0
+      },
+      "mirror": {
+        "relative_mse": 6.58496719552204e-06,
+        "payload_bytes": 2921.0,
+        "active_macs_proxy": 2304.0
+      },
+      "independent": {
+        "relative_mse": 7.604855303119014e-06,
+        "payload_bytes": 3945.0,
+        "active_macs_proxy": 1536.0
+      }
+    },
+    "43101": {
+      "static": {
+        "relative_mse": 0.001755886827595532,
+        "payload_bytes": 2921.0,
+        "active_macs_proxy": 1536.0
+      },
+      "rank1": {
+        "relative_mse": 0.0005603168198528389,
+        "payload_bytes": 3425.0,
+        "active_macs_proxy": 3264.0
+      },
+      "universal_lowrank": {
+        "relative_mse": 2.384083245488e-06,
+        "payload_bytes": 3993.0,
+        "active_macs_proxy": 8064.0
+      },
+      "mirror": {
+        "relative_mse": 5.54950437011333e-06,
+        "payload_bytes": 2921.0,
+        "active_macs_proxy": 2304.0
+      },
+      "independent": {
+        "relative_mse": 4.099167578412259e-06,
+        "payload_bytes": 3945.0,
+        "active_macs_proxy": 1536.0
+      }
+    }
+  },
+  "decision": "Open the locked fresh screen: Mirror mean relative MSE is within 1.05x independent, serialized bytes are 26% lower, and Mirror dominates the simple rank-1 control in quality/bytes/MAC. Universal low-rank remains a distinct higher-quality, higher-byte/higher-MAC point.",
+  "fresh_settings": "All methods LR=0.001; Mirror angle scale=1.0; 1500 updates; no fresh-informed changes."
+}

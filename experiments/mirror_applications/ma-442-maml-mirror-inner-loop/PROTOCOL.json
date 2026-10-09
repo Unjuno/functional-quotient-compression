@@ -1,0 +1,15 @@
+{
+ "experiment_id":"MA-442","title":"MAML initialization with Mirror-only inner loop","status":"SCREENING","evidence_lane":"FEW_SHOT/STORAGE/COMPUTE","base_commit":"2ca8143",
+ "hypothesis":"For Givens-orbit linear tasks, a shared meta-initialization plus two-coordinate Mirror inner loop reaches heldout query NRMSE within 1.10x full MAML at <=60% per-task inference bytes and matches rank-two LoRA.",
+ "physical_object":"meta-trained shared linear function initialization","mirror_coordinate":"two-dimensional task-specific Givens code","logical_multiplicity":"few-shot adapted functions across tasks",
+ "prior_art_refs":[75],"controls":["shared no adaptation","Mirror-only inner loop","full-vector MAML","rank-two LoRA inner-loop code"],
+ "task":{"type":"few-shot linear regression","input_dim":8,"support_examples":8,"query_examples":128,"teacher":"shared vector with random Givens rotation in fixed 2D subspace"},
+ "development":{"worlds_or_seeds":[44200,44201],"inner_learning_rates":[0.01,0.03],"inner_updates":5,"selection_metric":"mean query NRMSE over dev tasks"},
+ "fresh":{"worlds_or_seeds":[44210,44211,44212],"tasks_per_world":20,"seeds":[0,1,2],"locked_before_access":true},
+ "meta_training":{"updates":300,"tasks_per_batch":16,"optimizer":"AdamW","first_order":true},
+ "storage":{"authority":"actual serialized inference payload bytes","paid_objects":["shared initialization","Mirror code","LoRA basis and code","full task weights","metadata"]},
+ "compute":{"report_support_examples":true,"report_inner_updates":true,"report_adaptation_MAC":true,"report_wall":true},
+ "success_gate":"Every fresh world Mirror query NRMSE <=1.10x full MAML; per-task bytes <=60% full MAML; Mirror <=1.10x rank2 LoRA quality at no greater bytes.",
+ "failure_gate":"Any quality/byte gate fails or LoRA matches Mirror at lower total bytes.",
+ "boundaries":["Teacher is aligned to the Mirror orbit.","Small linear task only; no natural task or neural-network transfer claim.","Basis and decoder bytes are charged."]
+}

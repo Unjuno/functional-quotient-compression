@@ -1,0 +1,143 @@
+{
+  "experiment_id": "MA-451",
+  "title": "PathNet path plus Mirror module role",
+  "status": "COMPLETED_FAIL",
+  "evidence_lane": "MODULAR_PATH/QUALITY/PHYSICAL_MODULES/BYTES",
+  "base_commit": "2a6f28c0",
+  "hypothesis": "At matched physical module bytes, adding a small layer-specific Mirror role coordinate to a PathNet-selected shared module improves fresh held-out path-task quality by at least 1 percentage point over PathNet path selection alone, while using fewer bytes than independent per-task modules.",
+  "physical_object": "shared 2-layer modular linear supernetwork with 4 physical modules per layer",
+  "mirror_coordinate": "per-task Givens role coordinate applied to selected module output",
+  "logical_multiplicity": "held-out task pathways with distinct functional module roles",
+  "prior_art_refs": [
+    80
+  ],
+  "controls": [
+    "PathNet path only (mandatory native baseline)",
+    "PathNet path plus Mirror module role",
+    "independent per-task full modules",
+    "shared module without path or Mirror"
+  ],
+  "task": {
+    "type": "synthetic 4D two-layer regression with modular target pathways",
+    "input_dim": 4,
+    "hidden_dim": 4,
+    "output_dim": 4,
+    "layers": 2,
+    "physical_modules_per_layer": 4,
+    "support_examples": 32,
+    "query_examples": 256,
+    "tasks_per_world": 32,
+    "held_out_paths": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        0
+      ]
+    ],
+    "task_id_partition": {
+      "development": [
+        100,
+        163
+      ],
+      "fresh": [
+        2000,
+        2063
+      ]
+    },
+    "tasks_per_world_per_seed": 64
+  },
+  "development": {
+    "worlds": [
+      45100,
+      45101
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "mirror_angles": [
+      0.0,
+      0.2,
+      0.4,
+      0.6,
+      0.8,
+      1.0
+    ]
+  },
+  "fresh": {
+    "worlds": [
+      45110,
+      45111,
+      45112
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "tasks_per_world": 64,
+    "locked_before_access": true,
+    "tasks_per_world_per_seed": 64,
+    "total_task_instances_per_world": 192
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "physical modules",
+      "path indices",
+      "Mirror angles",
+      "router or selector",
+      "metadata"
+    ],
+    "report_amortization_N": [
+      1,
+      20,
+      64
+    ]
+  },
+  "compute": {
+    "report_active_module_MAC": true,
+    "report_path_selection_wall": true,
+    "report_mirror_transform_MAC": true,
+    "report_query_wall": true,
+    "active_module_MAC_definition": "256 query examples * 2 active 4x4 module transforms = 8192 MAC/task",
+    "mirror_role_search_MAC_definition": "6 candidates * (2 4x4 matrix compositions + 32 support-example 4x4 forwards) = 3840 MAC/task"
+  },
+  "success_gate": "Every fresh world: path+Mirror quality improves by >=1pp over path-only on held-out paths; N=20 actual bytes below independent per-task modules; must report physical module count and compute.",
+  "failure_gate": "Quality margin missed, simple path selection matches Mirror at equal/fewer bytes, or role coordinates collapse across held-out paths.",
+  "boundaries": [
+    "Synthetic modular regression mechanism test only.",
+    "No language model or generic routing claim.",
+    "Path count alone is not capacity evidence.",
+    "Path IDs are supplied task route labels (charged in payload); learned route discovery is not tested."
+  ],
+  "amendments": [
+    {
+      "id": "A1",
+      "status": "active before numerical work",
+      "reason": "Clarified the fresh count as 64 task IDs per seed and 3 seeds per world (192 instances/world). PathNet-only default role angles are selected on development; Mirror role angles are inferred from support using the registered six-angle grid. No fresh results accessed."
+    },
+    {
+      "id": "A2",
+      "status": "active post-fresh storage-grid correction",
+      "reason": "The implementation serialized N=1,20,64, matching the 64 task support set, while the frozen storage list said N=1,20,100. This records the actual serialized frontier at N=64 rather than fabricating 100 task addresses; fresh quality and N=20 gate remain unchanged."
+    },
+    {
+      "id": "A3",
+      "status": "active post-run compute accounting correction",
+      "reason": "Record active forward-module and six-candidate Mirror role-search MAC using the implemented 4D operators. This is deterministic accounting only and does not change fresh settings or quality."
+    }
+  ]
+}

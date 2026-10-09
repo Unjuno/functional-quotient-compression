@@ -1,0 +1,46 @@
+{
+  "experiment_id": "MA-446",
+  "status": "FAIL",
+  "protocol_commit": "51712d3a",
+  "fresh_worlds": [
+    44610,
+    44611,
+    44612
+  ],
+  "fresh_rows": 144,
+  "step4_mean_nrmse": {
+    "learned": 0.40616626317043686,
+    "adam": 0.48822050135220507,
+    "sgd": 0.5696988872511105
+  },
+  "step4_nrmse_by_world": {
+    "44610": {
+      "learned": 0.3739,
+      "adam": 0.4767
+    },
+    "44611": {
+      "learned": 0.3403,
+      "adam": 0.4758
+    },
+    "44612": {
+      "learned": 0.5042,
+      "adam": 0.5122
+    }
+  },
+  "n20_bytes_per_task": {
+    "learned": 101.25,
+    "adam": 91.65
+  },
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-446-learned-optimizer/tests",
+    "passed": 2,
+    "failed": 0
+  },
+  "checks": [
+    "fresh payload SHA256 and byte lengths replayed",
+    "fresh worlds disjoint from development worlds",
+    "development-only optimizer selection",
+    "registered per-world and payload gates applied"
+  ],
+  "decision": "FAIL: mean quality improves versus Adam, but one fresh world misses the 10% margin and serialized learned policy exceeds Adam bytes."
+}

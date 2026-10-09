@@ -1,0 +1,35 @@
+{
+  "experiment_id": "MA-444",
+  "status": "VERIFIED_DEVELOPMENT_SCREEN",
+  "protocol_sha256": "d7a23b6be5ff1cef4179344c1103216df42a4522dba83c4fce913ca0bb0574a4",
+  "development_gate_passed": false,
+  "fresh_accessed": false,
+  "serialization_roundtrip_checked": true,
+  "payload_replay_checked": true,
+  "native_alias_replay": "PASS",
+  "checks": [
+    {
+      "seed": 44401,
+      "mirror_bytes": 1206,
+      "native_bytes": 1206,
+      "mirror_native_rmse_difference": 0.0
+    },
+    {
+      "seed": 44402,
+      "mirror_bytes": 1206,
+      "native_bytes": 1206,
+      "mirror_native_rmse_difference": 0.0
+    }
+  ],
+  "tests": {
+    "command": "pytest -q -p no:cacheprovider experiments/mirror_applications/ma-444-leo-structured-mirror/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "notes": [
+    "Mirror met quality/payload gates against learned LEO and outperformed rank-3 additive control in both aligned seeds, but failed end-to-end runtime gate.",
+    "Native Givens conditioner exactly matched Mirror task codes, payload hashes and output RMSE in both seeds.",
+    "Independent least-squares fit reached <0.08 query RMSE in both seeds; it used 1282 bytes versus 1206 Mirror bytes.",
+    "Fresh seeds 44411-44413 remain sealed."
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "experiment_id": "MA-444",
+  "protocol_commit": "454372c",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-444-leo-mirror-decoder/tests -v",
+    "passed": 2,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "fresh_task_payloads": 2880,
+    "LEO_decoder_checkpoints": 9,
+    "payload_hashes_checked": true,
+    "actual_bytes_authoritative": true,
+    "N1_N20_N100_amortization_checked": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "tolerance": 1e-08,
+    "notes": [
+      "All 2,880 task/step/method rows replay from serialized task payloads.",
+      "Nine shared LEO decoder checkpoints checked by size and SHA256.",
+      "Mirror misses quality gate despite slightly fewer amortized bytes."
+    ]
+  },
+  "fresh_split_integrity_checked": true,
+  "task_id_partition": {
+    "meta_train": [
+      1000,
+      1127
+    ],
+    "development": [
+      0,
+      11
+    ],
+    "fresh": [
+      2000,
+      2019
+    ]
+  },
+  "fresh_worlds": [
+    44410,
+    44411,
+    44412
+  ],
+  "notes": [
+    "Synthetic linear Givens task only.",
+    "No natural task or nonlinear LEO evidence."
+  ]
+}

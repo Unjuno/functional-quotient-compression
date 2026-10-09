@@ -1,0 +1,67 @@
+{
+  "experiment_id": "MA-431",
+  "title": "Compositional Mirror views over recurrent depth",
+  "status": "SCREENING",
+  "base_commit": "c935a903daca5c7d1d48aa50d05b5bd50f239cba",
+  "evidence_lane": "MECHANISM/STORAGE/RUNTIME",
+  "prior_art_refs": ["PA72"],
+  "hypothesis": "For sequences of noncommuting depth operations, a shared recurrent block with a compact Mirror coordinate per step recovers held-out ordered compositions at lower serialized bytes than independent step matrices and improves the quality/byte frontier over a simple low-rank gate.",
+  "mirror_insertion": "A scalar angle m_t selects a Givens-conjugated view R(m_t) W R(-m_t) of one shared recurrent transition.",
+  "physical_object": "one learned 16x16 recurrent transition matrix shared across steps",
+  "mirror_coordinate": "a deterministic scalar Givens-angle code selected by each step operation ID, fully charged with metadata",
+  "logical_multiplicity": "ordered programs formed from two noncommuting operator views",
+  "task": {
+    "type": "synthetic ordered linear-operator composition",
+    "state_dimension": 16,
+    "operation_symbols": 2,
+    "teacher": "two noncommuting 2D shears embedded in a 16D identity map",
+    "training_program_lengths": [1, 2, 3],
+    "primary_test_program_length": 6,
+    "primary_metric": "held-out relative MSE on unseen ordered programs and inputs"
+  },
+  "controls": [
+    "static shared recurrent transition with no coordinate",
+    "Universal Transformer-style shared transition with learned depth embeddings and shared low-rank FiLM/gate",
+    "generic rank-one residual/gate with the same operation address bits",
+    "Mirror Givens-conjugated shared transition",
+    "independent per-symbol matrices as upper reference"
+  ],
+  "development": {
+    "worlds": [43100, 43101],
+    "seeds": [0, 1, 2],
+    "learning_rates": [0.001, 0.003],
+    "coordinate_scales": [0.5, 1.0],
+    "updates": 1500,
+    "selection_metric": "mean length-6 held-out relative MSE subject to payload and MAC gates"
+  },
+  "fresh": {
+    "worlds": [43110, 43111, 43112],
+    "seeds": [0, 1, 2],
+    "locked_before_access": true,
+    "open_only_if_development_gate_passes": true
+  },
+  "storage": {
+    "authority": "actual serialized torch inference payload bytes",
+    "paid_objects": [
+      "all learned transition matrices and gates",
+      "depth embeddings and per-symbol address codes",
+      "Givens angle/codebook metadata",
+      "tensor names, shapes, dtypes, and inference configuration"
+    ]
+  },
+  "compute": {
+    "report_examples": true,
+    "report_updates": true,
+    "report_active_macs_proxy": true,
+    "report_training_wall_clock": true,
+    "report_single_thread_cpu_inference_wall_clock": true
+  },
+  "success_gate": "On every fresh world, Mirror has length-6 relative MSE <=1.05x independent per-symbol matrices and either >=20% fewer actual payload bytes than the independent reference or >=10% lower MSE than byte-near low-rank gate (within 10% bytes), with <=1.10x active MAC proxy.",
+  "failure_gate": "Development Mirror misses quality gate, loses the storage gate without quality gain, or is matched/dominated by simple low-rank gate at byte-near cost; if so fresh remains sealed.",
+  "boundaries": [
+    "Synthetic mechanism only; no LM, NLP, or natural-sequence claim.",
+    "Operation IDs are supplied equally to all methods; router learning is outside scope.",
+    "Possible code combinations do not count as independent capacity.",
+    "All fresh data remain sealed unless development gate passes."
+  ]
+}

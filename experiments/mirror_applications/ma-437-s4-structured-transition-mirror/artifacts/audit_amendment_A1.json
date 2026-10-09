@@ -1,0 +1,16 @@
+{
+  "amendment": "A1",
+  "reason": "Initial teacher code rotated the full transition including its diagonal, unlike the frozen rank-one-factor-only View. A post-fresh audit discovered this mismatch.",
+  "handling": "All initial fresh outputs were invalidated and overwritten before outcome selection. The initial numeric summary is kept here solely as an audit breadcrumb; it is not evidence and is not used in the decision.",
+  "initial_fresh_records": 90,
+  "initial_summary": {
+    "mirror_mean_nrmse_length64": 0.007634,
+    "independent_mean_nrmse_length64": 0.005091,
+    "mirror_bytes": 2591,
+    "independent_bytes": 2691,
+    "mirror_mac_per_step": 40,
+    "independent_mac_per_step": 32
+  },
+  "amended_data": "Same development/fresh worlds and seeds rerun with fixed diagonal plus role-rotated rank-one factors. Final artifacts are development_runs.jsonl and fresh_runs.jsonl.",
+  "gate_or_method_changes": false
+}

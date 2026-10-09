@@ -1,0 +1,20 @@
+{
+  "experiment_id": "MA-436",
+  "amendment": 1,
+  "after_initial_screen_before_valid_rerun": true,
+  "initial_protocol_sha256": "3bd984af38aa82be83e91a7a5a827bda66724d1b3a2feab951feba3fd3b27cd0",
+  "amended_protocol": "PROTOCOL.json revision 2",
+  "reason": [
+    "The initial data generator sampled different input sequences for each expert, so the cross-expert diversity metric compared different inputs instead of the same function input.",
+    "Conjugating A, B and C together is a pure state-coordinate gauge transform and preserves the input-output transfer function, so it cannot create distinct logical experts."
+  ],
+  "changes": [
+    "Broadcast one identical per-seed sequence batch to all eight experts.",
+    "Apply the Givens view only to transition A_e=Q_e^T A Q_e while keeping B and C shared and unchanged; this creates distinct routed transition functions.",
+    "Use the exact native generated-A control with the same shared base and angle code."
+  ],
+  "unchanged": [
+    "MA ID, prior-art scope, two development seeds, three locked fresh seeds, model dimensions, optimizer updates, metric definitions, byte/runtime thresholds and inference format."
+  ],
+  "disposition": "The initial run artifacts are retained under runs/initial_invalid_similarity_gauge/ and excluded from terminal results. Rerun only development seeds 43601 and 43602. Fresh seeds remain sealed."
+}
