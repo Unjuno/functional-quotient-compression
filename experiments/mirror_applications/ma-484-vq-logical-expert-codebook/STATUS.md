@@ -5,7 +5,7 @@
 - Base commit: `5dff91c2`
 - Protocol frozen before fresh: yes
 - Development and fresh: complete; 3 fresh worlds × 3 seeds
-- Results and verification: yes (`7a703f10`)
+- Results and verification: yes (`7a703f10`); payload replay test passed (1/1)
 
 H: VQ Mirror expert codes preserve useful functions under actual-byte compression.
 
@@ -17,4 +17,4 @@ C: A rank-four teacher is best represented by unquantized shared-basis coordinat
 
 U: nonlinear learned experts, direct coordinate codebook fitting, routing, and natural task distributions.
 
-Next: artifact tests, registry update, integrity check, push, continue at next untested P0.
+Complete. Next: MA-486 — sparse dictionary Mirror function representation, on its dedicated branch.
