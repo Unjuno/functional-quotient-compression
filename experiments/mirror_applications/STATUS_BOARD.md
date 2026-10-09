@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (67 completed; 563 UNTESTED)
+- P0: **630** (68 completed; 562 UNTESTED)
 - P1: **422** (13 completed; 409 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1075 UNTESTED, 37 PROMISING, 43 FAIL**
+- Current MA statuses: **1074 UNTESTED, 37 PROMISING, 44 FAIL**
 - 68 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -48,15 +48,19 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 - **FAIL** for Mirror-specific value: A1 on new worlds found generic scalar exactly matches the Mirror Givens result. Initial fresh showed an aligned depth-orbit compression signal, but independent tasks required more capacity. Original fresh row CSV was overwritten by A1; original payloads and recorded aggregates remain, and no viewed worlds were rerun.
 
+## Completed: MA-278 — Compacter Mirror adapters
+
+- **FAIL:** aligned shared atom codes saved only 5.4% bytes vs native Compacter and generic scalar matched Mirror exactly. Independent shared codes were near no-adapter; rank-2 LoRA recovered them at higher bytes.
+
 ## Next candidate
 
-**MA-278 — Compacter Mirror hypercomplex adapters (P0; PA23)**
+**MA-282 — Monarch Mirror FFN transform (P0; PA24)**
 
 Reason:
 - MA-470/471/473/475/476/478/481/482, MA-483, MA-484, MA-486, MA-487, MA-488, MA-492, MA-494, MA-498, MA-501, MA-502 and MA-516 are completed on dedicated branches and cross-linked in the claim ledger;
 - MA-501 and MA-502 both found that VQ coordinates add substantial distortion over compact FP16 shared coordinates. The LoReFT representation-view family is temporarily deferred for redesign; skipped registry candidates remain UNTESTED. Work moves to the separate Function Vectors family at MA-516. Other completed candidates remain cross-linked in the claim ledger.
 
-Required controls: native Compacter hypercomplex adapter, shared basis plus Mirror code, ordinary low-rank adapter and independent adapter upper; measure quality, actual bytes and compute.
+Required controls: native Monarch structured transform, shared FFN, low-rank and butterfly controls; measure quality, actual bytes and transform runtime.
 
 The LoReFT family remains deferred after MA-501/502. MA-255’s PSP screen was not established because the development metric broadcasted incorrectly; MA-260’s fresh screen was not established because its training world was hardcoded. Both records and limitations are preserved.
 

@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-278.** MA-276 initial fresh showed a compact aligned depth-orbit result, but an A1 control on new worlds found generic scalar exactly equals Mirror. Independent tasks needed private capacity. Original fresh row CSV was overwritten by A1; original payloads and recorded aggregates preserved, no rerun. Continue to MA-278 with native Compacter controls.
+**Current operational pointer (2026-10-09): MA-282.** MA-278 found aligned shared atom codes saved only 5.4% vs Compacter and generic scalar matched Mirror; independent task updates required private LoRA. Continue to MA-282 with native Monarch controls.
 
 # Worker queue
 
