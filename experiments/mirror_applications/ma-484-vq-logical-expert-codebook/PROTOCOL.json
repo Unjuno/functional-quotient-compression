@@ -1,0 +1,17 @@
+{
+  "experiment_id":"MA-484","title":"VQ logical expert codebook","status":"FROZEN_SCREENING","base_commit":"5dff91c2","evidence_lane":"EXPERT_CODEBOOK/QUALITY/COLLISIONS/ACTUAL_BYTES",
+  "hypothesis":"A shared physical expert decoder plus quantized Mirror coordinates can represent many logical expert functions with materially fewer serialized bytes than independent experts while preserving held-out function quality.",
+  "physical_object":"one shared 32D linear expert base plus a shared 4D functional basis and codebook decoder",
+  "mirror_coordinate":"one learned VQ index per logical expert selecting a residual function coordinate",
+  "logical_multiplicity":"64 expert functions selected by router IDs",
+  "prior_art_refs":[91],
+  "controls":["independent full-precision expert vectors","shared low-rank functional basis with FP32 coordinates","full-vector learned VQ codebook plus expert indices","shared-basis Mirror coordinates plus VQ codebook and indices"],
+  "task":{"type":"synthetic linear expert function bank","experts":64,"input_dim":32,"output_dim":32,"teacher":"shared Gaussian base plus four shared orthogonal residual directions with correlated Gaussian coordinates; train/dev and fresh banks independently sampled","codebook_sizes":[8,16,32,64],"metrics":["held-out output NRMSE","actual serialized bytes and bytes/expert","unique logical codewords/collisions","router-selected expert quality","encode/decode operations"]},
+  "development":{"worlds":[48400,48401],"seeds":[0,1,2],"allowed":"fit codebooks and choose K on development only; fixed Lloyd algorithm and predeclared K sweep"},
+  "fresh":{"worlds":[48410,48411,48412],"seeds":[0,1,2],"locked_before_access":true},
+  "storage":{"authority":"actual serialized inference payload bytes","paid_objects":["base and shared residual basis","codebook entries and expert indices","per-expert full vectors for independent control","metadata and router IDs"]},
+  "compute":{"report_codebook_fit_updates":true,"report_projection_MAC_per_example":true,"report_measured_decode_latency":true},
+  "success_gate":"At some K, every fresh world has NRMSE <=0.05, payload <=50% of independent experts, and no more than 2% duplicate codes; compare low-rank and generic VQ controls at matched quality.",
+  "failure_gate":"No fresh K meets quality and byte gates, code collisions exceed gate, or generic shared-basis/VQ control matches Mirror without a Mirror-specific benefit.",
+  "boundaries":["Synthetic linear functions with shared low-dimensional residual structure only.","This does not establish neural MoE training, routing quality, or general capacity.","Logical expert count is not capacity; held-out function quality and collisions determine utility."]
+}
