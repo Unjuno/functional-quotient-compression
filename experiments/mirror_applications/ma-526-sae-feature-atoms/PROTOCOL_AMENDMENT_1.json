@@ -1,0 +1,8 @@
+{
+  "experiment_id": "MA-526",
+  "amendment": 1,
+  "reason": "The first frozen preflight launch found that the safe TiedSAE placeholder needed torch.nn.Module parameter lookup. The checkpoint loaded but no vectors, metrics or payloads were generated.",
+  "scope": "Loader-only fix: make local TiedSAE a minimal torch.nn.Module shell so the allowlisted checkpoint parameters are accessible. No data, feature selection, sparse coding, metrics, controls, gates or seeds changed.",
+  "preservation": "Failed launch and exit code retained under runs/preflight_load_failure_TiedSAE_class/.",
+  "fresh_accessed": false
+}

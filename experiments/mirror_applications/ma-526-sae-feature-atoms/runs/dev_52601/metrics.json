@@ -1,0 +1,431 @@
+{
+  "coding_seconds": 0.042840248002903536,
+  "experiment_id": "MA-526",
+  "extraction_seconds": 10.4897507080168,
+  "heldout_task_ids": [
+    12,
+    13,
+    14,
+    15
+  ],
+  "model": "EleutherAI/pythia-70m-deduped",
+  "model_bytes": 168144624,
+  "model_sha256": "3da388330e4549156d76b58d6d268c63cd005e9336b4f4d2d378421e7b7a33fd",
+  "pool_feature_ids": [
+    517,
+    1214,
+    1942,
+    1300,
+    1022,
+    1336,
+    45,
+    1502,
+    1688,
+    786,
+    1462,
+    1848,
+    1368,
+    1135,
+    907,
+    1127,
+    583,
+    137,
+    1422,
+    530,
+    1491,
+    792,
+    1372,
+    1199,
+    1519,
+    486,
+    1525,
+    389,
+    1078,
+    1090,
+    721,
+    1598,
+    797,
+    1913,
+    297,
+    1043,
+    1070,
+    465,
+    184,
+    1337,
+    1546,
+    1618,
+    155,
+    645,
+    1600,
+    12,
+    278,
+    1953,
+    1449,
+    599,
+    124,
+    1026,
+    1094,
+    1150,
+    499,
+    1256,
+    1311,
+    1202,
+    399,
+    554,
+    1319,
+    211,
+    35,
+    1748
+  ],
+  "pool_selected_from_task_ids": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+  ],
+  "pool_selection_top_aggregate_encoder_activation": true,
+  "pool_size": 64,
+  "revision": "e93a9faa9c77e5d09219f6c868bfc7a1bd65593c",
+  "rows": [
+    {
+      "active_compute_proxy": 0,
+      "candidate_input_tokens": 2016,
+      "coding_seconds": 0.0,
+      "common_base_bytes": 168144624,
+      "explicit_fv_total_bytes": 168179694,
+      "extraction_seconds": 10.4897507080168,
+      "incremental_over_preloaded_sae_bytes": 0,
+      "inference_seconds": 1.8359928709978703,
+      "method": "none",
+      "metrics": {
+        "by_task": [
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -16.25898277759552,
+            "mean_gold_margin": -4.185199499130249,
+            "name": "english_french",
+            "task_id": 12
+          },
+          {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -10.653069615364075,
+            "mean_gold_margin": -1.2531280517578125,
+            "name": "french_english",
+            "task_id": 13
+          },
+          {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -16.036027684807777,
+            "mean_gold_margin": -5.186522498726845,
+            "name": "english_spanish",
+            "task_id": 14
+          },
+          {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -9.21524178981781,
+            "mean_gold_margin": -1.0519104599952698,
+            "name": "spanish_english",
+            "task_id": 15
+          }
+        ],
+        "candidate_forward_calls": 256,
+        "candidate_input_tokens": 2016,
+        "candidate_sequences": 256,
+        "heldout_accuracy": 0.21875,
+        "mean_gold_candidate_logprob": -13.040830466896296,
+        "mean_gold_vs_best_negative_margin": -2.919190127402544,
+        "queries": 32
+      },
+      "model_bytes": 168144624,
+      "nonzero_coefficients_per_task": 0,
+      "optimizer_updates": 0,
+      "payload_bytes": 0,
+      "sae_bytes": 0,
+      "seed": 52601,
+      "support_examples": 128,
+      "support_forward_calls": 256,
+      "support_input_tokens": 9403,
+      "total_deployment_bytes": 168144624,
+      "vector_metrics": {},
+      "wall_time_seconds": 12.32574357901467
+    },
+    {
+      "active_compute_proxy": 0,
+      "candidate_input_tokens": 2016,
+      "coding_seconds": 0.0,
+      "common_base_bytes": 168144624,
+      "explicit_fv_total_bytes": 168179694,
+      "extraction_seconds": 10.4897507080168,
+      "incremental_over_preloaded_sae_bytes": 35070,
+      "inference_seconds": 2.11616199099808,
+      "method": "explicit_fv",
+      "metrics": {
+        "by_task": [
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -13.256775826215744,
+            "mean_gold_margin": -3.778504341840744,
+            "name": "english_french",
+            "task_id": 12
+          },
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -7.192892491817474,
+            "mean_gold_margin": -1.1888580918312073,
+            "name": "french_english",
+            "task_id": 13
+          },
+          {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -13.017988190054893,
+            "mean_gold_margin": -4.930651351809502,
+            "name": "english_spanish",
+            "task_id": 14
+          },
+          {
+            "accuracy": 0.5,
+            "mean_gold_logprob": -6.32964226603508,
+            "mean_gold_margin": -0.24333181977272034,
+            "name": "spanish_english",
+            "task_id": 15
+          }
+        ],
+        "candidate_forward_calls": 256,
+        "candidate_input_tokens": 2016,
+        "candidate_sequences": 256,
+        "heldout_accuracy": 0.25,
+        "mean_gold_candidate_logprob": -9.949324693530798,
+        "mean_gold_vs_best_negative_margin": -2.5353364013135433,
+        "queries": 32
+      },
+      "model_bytes": 168144624,
+      "nonzero_coefficients_per_task": 0,
+      "optimizer_updates": 0,
+      "payload_bytes": 35070,
+      "sae_bytes": 0,
+      "seed": 52601,
+      "support_examples": 128,
+      "support_forward_calls": 256,
+      "support_input_tokens": 9403,
+      "total_deployment_bytes": 168179694,
+      "vector_metrics": {},
+      "wall_time_seconds": 12.60591269901488
+    },
+    {
+      "active_compute_proxy": 16908288,
+      "candidate_input_tokens": 2016,
+      "coding_seconds": 0.042840248002903536,
+      "common_base_bytes": 172349015,
+      "explicit_fv_total_bytes": 168179694,
+      "extraction_seconds": 10.4897507080168,
+      "incremental_over_preloaded_sae_bytes": 3316,
+      "inference_seconds": 2.699764603021322,
+      "method": "native_sae_top8",
+      "metrics": {
+        "by_task": [
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -16.431010723114014,
+            "mean_gold_margin": -6.059823244810104,
+            "name": "english_french",
+            "task_id": 12
+          },
+          {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -11.09339451789856,
+            "mean_gold_margin": -1.4526214599609375,
+            "name": "french_english",
+            "task_id": 13
+          },
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -16.45194621384144,
+            "mean_gold_margin": -4.595329120755196,
+            "name": "english_spanish",
+            "task_id": 14
+          },
+          {
+            "accuracy": 0.375,
+            "mean_gold_logprob": -13.82390546798706,
+            "mean_gold_margin": -1.105911135673523,
+            "name": "spanish_english",
+            "task_id": 15
+          }
+        ],
+        "candidate_forward_calls": 256,
+        "candidate_input_tokens": 2016,
+        "candidate_sequences": 256,
+        "heldout_accuracy": 0.21875,
+        "mean_gold_candidate_logprob": -14.450064230710268,
+        "mean_gold_vs_best_negative_margin": -3.30342124029994,
+        "queries": 32
+      },
+      "model_bytes": 168144624,
+      "nonzero_coefficients_per_task": 8,
+      "optimizer_updates": 0,
+      "payload_bytes": 3316,
+      "sae_bytes": 4204391,
+      "seed": 52601,
+      "support_examples": 128,
+      "support_forward_calls": 256,
+      "support_input_tokens": 9403,
+      "total_deployment_bytes": 172352331,
+      "vector_metrics": {
+        "heldout_cosine_mean": 0.1496217905997303,
+        "heldout_cosine_min": 0.08879980348070216,
+        "heldout_relative_rmse": 1.1586025965756999
+      },
+      "wall_time_seconds": 13.232355559041025
+    },
+    {
+      "active_compute_proxy": 134348800,
+      "candidate_input_tokens": 2016,
+      "coding_seconds": 0.042840248002903536,
+      "common_base_bytes": 172349015,
+      "explicit_fv_total_bytes": 168179694,
+      "extraction_seconds": 10.4897507080168,
+      "incremental_over_preloaded_sae_bytes": 3316,
+      "inference_seconds": 1.9443464200012386,
+      "method": "global_omp8",
+      "metrics": {
+        "by_task": [
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -14.12968522310257,
+            "mean_gold_margin": -3.4832449555397034,
+            "name": "english_french",
+            "task_id": 12
+          },
+          {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -10.11193335056305,
+            "mean_gold_margin": -1.1425933837890625,
+            "name": "french_english",
+            "task_id": 13
+          },
+          {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -13.745246171951294,
+            "mean_gold_margin": -4.673164963722229,
+            "name": "english_spanish",
+            "task_id": 14
+          },
+          {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -8.4087695479393,
+            "mean_gold_margin": -0.8787841200828552,
+            "name": "spanish_english",
+            "task_id": 15
+          }
+        ],
+        "candidate_forward_calls": 256,
+        "candidate_input_tokens": 2016,
+        "candidate_sequences": 256,
+        "heldout_accuracy": 0.21875,
+        "mean_gold_candidate_logprob": -11.598908573389053,
+        "mean_gold_vs_best_negative_margin": -2.5444468557834625,
+        "queries": 32
+      },
+      "model_bytes": 168144624,
+      "nonzero_coefficients_per_task": 8,
+      "optimizer_updates": 0,
+      "payload_bytes": 3316,
+      "sae_bytes": 4204391,
+      "seed": 52601,
+      "support_examples": 128,
+      "support_forward_calls": 256,
+      "support_input_tokens": 9403,
+      "total_deployment_bytes": 172352331,
+      "vector_metrics": {
+        "heldout_cosine_mean": 0.6520770515183156,
+        "heldout_cosine_min": 0.6186551347735457,
+        "heldout_relative_rmse": 0.7581866829710614
+      },
+      "wall_time_seconds": 12.476937376020942
+    },
+    {
+      "active_compute_proxy": 16908288,
+      "candidate_input_tokens": 2016,
+      "coding_seconds": 0.042840248002903536,
+      "common_base_bytes": 172349015,
+      "explicit_fv_total_bytes": 168179694,
+      "extraction_seconds": 10.4897507080168,
+      "incremental_over_preloaded_sae_bytes": 3582,
+      "inference_seconds": 1.8550820590171497,
+      "method": "mirror_pool64_omp8",
+      "metrics": {
+        "by_task": [
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -14.171908497810364,
+            "mean_gold_margin": -3.4914210438728333,
+            "name": "english_french",
+            "task_id": 12
+          },
+          {
+            "accuracy": 0.125,
+            "mean_gold_logprob": -9.545422434806824,
+            "mean_gold_margin": -1.2092437148094177,
+            "name": "french_english",
+            "task_id": 13
+          },
+          {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -13.927830398082733,
+            "mean_gold_margin": -4.687117397785187,
+            "name": "english_spanish",
+            "task_id": 14
+          },
+          {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -8.003404200077057,
+            "mean_gold_margin": -0.914581298828125,
+            "name": "spanish_english",
+            "task_id": 15
+          }
+        ],
+        "candidate_forward_calls": 256,
+        "candidate_input_tokens": 2016,
+        "candidate_sequences": 256,
+        "heldout_accuracy": 0.1875,
+        "mean_gold_candidate_logprob": -11.412141382694244,
+        "mean_gold_vs_best_negative_margin": -2.5755908638238907,
+        "queries": 32
+      },
+      "model_bytes": 168144624,
+      "nonzero_coefficients_per_task": 8,
+      "optimizer_updates": 0,
+      "payload_bytes": 3582,
+      "sae_bytes": 4204391,
+      "seed": 52601,
+      "support_examples": 128,
+      "support_forward_calls": 256,
+      "support_input_tokens": 9403,
+      "total_deployment_bytes": 172352597,
+      "vector_metrics": {
+        "heldout_cosine_mean": 0.6015547175638165,
+        "heldout_cosine_min": 0.5585993600322898,
+        "heldout_relative_rmse": 0.798552339441139
+      },
+      "wall_time_seconds": 12.387673015036853
+    }
+  ],
+  "sae_bytes": 4204391,
+  "sae_repo": "Elriggs/pythia-70M-deduped-sae",
+  "sae_revision": "36c2027509efad69836aa4231999c9b717848ecd",
+  "sae_sha256": "85b57dfe34d19769e2df0e208e38fda8815da8493c56b703a99ff74cc610dbf4",
+  "sae_shape": [
+    2048,
+    512
+  ],
+  "seed": 52601,
+  "sparse_budget": 8
+}

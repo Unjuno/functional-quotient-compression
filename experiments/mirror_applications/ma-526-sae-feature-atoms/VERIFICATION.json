@@ -1,10 +1,59 @@
 {
   "experiment_id": "MA-526",
   "commit": null,
-  "tests": {"command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=/tmp/ma516-pkgs python -m pytest -q experiments/mirror_applications/ma-526-sae-feature-atoms/tests", "passed": null, "failed": null},
-  "serialization": {"format": "uncompressed NPZ", "roundtrip_checked": false, "byte_exact": false},
-  "metric_replay": {"checked": false, "max_difference": null},
-  "fresh_split_integrity_checked": false,
+  "protocol_freeze_commit": "b0411ba",
+  "protocol_sha256": "77d8321c994b22ccc88d64e04f3cf9d339158dcd0d1055db924673c8422e2d3e",
+  "source_sha256": "ae962d27a84a40c378c4035df2f6538a43aaa295b8bb79082c3d885c26d9fb9d",
+  "shared_harness_sha256": "a6efcff225c4fea194ed86ce12903c2893412dffdc77674f1b3347a7df08bc88",
+  "amendments": [
+    {
+      "id": 1,
+      "file": "PROTOCOL_AMENDMENT_1.json",
+      "sha256": "cdbdd748c21e2472b6619beaae896ff669523fa739555db57238d0486baafd79",
+      "scope": "Safe loading shell fix before metrics; failed preflight retained; no method or gate changes."
+    }
+  ],
+  "external_model": {
+    "repo": "EleutherAI/pythia-70m-deduped",
+    "revision": "e93a9faa9c77e5d09219f6c868bfc7a1bd65593c",
+    "weight_sha256": "3da388330e4549156d76b58d6d268c63cd005e9336b4f4d2d378421e7b7a33fd",
+    "config_sha256": "002050231a9b1ec3ac77aa6b9b3bbdc4d923f4068a7dd33b8da72a9bd6ad9a43",
+    "tokenizer_sha256": "c24618a1b3e6a38167beff1c72cffd126c3a66254347304b50547d12c5f25624",
+    "integrity_checked": true,
+    "common_model_bytes": 168144624
+  },
+  "external_sae": {
+    "repo": "Elriggs/pythia-70M-deduped-sae",
+    "revision": "36c2027509efad69836aa4231999c9b717848ecd",
+    "file": "pythia-70m-deduped_r4_gpt_neox.layers.3.pt",
+    "sha256": "85b57dfe34d19769e2df0e208e38fda8815da8493c56b703a99ff74cc610dbf4",
+    "bytes": 4204391,
+    "integrity_checked": true
+  },
+  "tests": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=/tmp/ma516-pkgs python -m pytest -q experiments/mirror_applications/ma-526-sae-feature-atoms/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "format": "uncompressed NPZ",
+    "roundtrip_checked": true,
+    "canonical_payloads_replayed": 8,
+    "byte_hash_identical": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0,
+    "task_splits_identical": true,
+    "pool_selection_audit_identical": true,
+    "teacher_task_metrics_identical": true
+  },
+  "fresh_split_integrity_checked": true,
   "fresh_seeds_accessed": [],
-  "notes": ["Pinned Pythia and SAE artifacts remain outside Git."]
+  "notes": [
+    "Frozen protocol predates dev evaluation; Amendment 1 corrected safe object parameter loading before metrics.",
+    "First verifier attempt expected a teacher_vectors.npz audit file that the frozen run format does not write; verifier now checks exact metrics, payloads, split manifest and SAE pool-selection audit instead. No run or metric code changed for this verifier correction.",
+    "SAE bytes are charged in standalone total and separately excluded only in the explicitly labeled preloaded-SAE incremental comparison.",
+    "The checkpoint artifacts remain outside Git."
+  ]
 }

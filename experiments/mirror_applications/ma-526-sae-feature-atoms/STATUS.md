@@ -1,16 +1,22 @@
 # MA-526 status
 
-- Status: SCREENING
+- Status: **FAIL**
 - Branch: `research/ma-526-sae-feature-mirror-atoms-20261009`
-- Protocol fixed before implementation and development.
-- Development seeds 52601/52602: not run.
-- Fresh seeds 52611–52613: locked, unopened.
-- Registry/status board: screening after freeze.
+- Protocol frozen before development; Amendment 1 fixed safe SAE object loading before any metrics were generated.
+- Development seeds 52601/52602: complete; deterministic replay exact.
+- Fresh seeds 52611–52613: sealed and unopened.
+- Registry/status board: FAIL after reconciliation.
 
 ## H / T / D / C / U
 
-- **H:** shared-pool SAE atom codes will preserve held-out FV causal effect within .10 nats/.05 accuracy, fit the incremental byte cap and beat native top-k/OMP controls.
-- **T:** pinned Pythia-70m and a 4x layer-3 SAE; 16 relation functions; 12 feature-pool fit tasks; four held out; fixed 64 pool atoms and eight coefficients; two dev seeds.
-- **D:** screening; no development metrics accessed.
-- **C:** standard sparse coding may explain all apparent value, while SAE standalone bytes dominate.
-- **U:** quality, storage, runtime, native-control and replay outcomes remain unknown.
+- **H:** a shared 64-atom SAE pool with eight coefficients would preserve explicit-FV quality, compress incremental code state, and beat native top-eight and global OMP.
+- **T:** pinned Pythia-70m plus pinned 4x layer-3 SAE; 12 tasks choose the pool and four are held out; two seeds; 64 atom IDs and eight pursuit coefficients.
+- **D:** FAIL. Mirror loses 1.463/1.567 gold-logprob nats vs explicit, misses accuracy tolerance on seed one, misses the global OMP margin on seed two, and uses more incremental bytes than OMP. The SAE makes standalone deployment 4,172,903 B larger than explicit FV deployment.
+- **C:** the SAE's fixed dictionary is poorly aligned to the task function vectors; native global sparse coding is simpler and smaller.
+- **U:** other SAEs, feature transforms, task families and broader language behavior remain untested.
+
+## Evidence classification
+
+- **Facts:** three tests pass; eight payloads, metrics, task splits and pool-selection audit replay exactly. Preflight failure is preserved; fresh is unopened.
+- **Interpretation:** a small code bank does not translate to a smaller full system when its required SAE basis is charged.
+- **Hypothesis:** an SAE-space transformation may help, as separately proposed by MA-527.
