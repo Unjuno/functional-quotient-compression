@@ -9,7 +9,7 @@ Integration branch: `research/mirror-application-current-evidence-20261008`; can
 - P0: **630** (128 completed; 502 UNTESTED)
 - P1: **422** (16 completed; 406 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1011 UNTESTED, 44 PROMISING, 100 FAIL**
+- Current MA statuses: **1011 UNTESTED, 43 PROMISING, 101 FAIL**
 - 48 experiment directories, complete with status/protocol/results/verification files, are represented in the current evidence set.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-268 is next.
@@ -51,9 +51,9 @@ Integration branch: `research/mirror-application-current-evidence-20261008`; can
 
 **MA-429 FAIL:** aligned recurrent depth5–8 error was Mirror 0.0133 vs linear time 0.1279, but actual bytes were equal at 1,829B; the registered <=90% byte threshold failed. MA-431 deferred pending depth-family redesign after repeated 2x2 serialization overhead failures. **Next: MA-434.**
 
-**MA-434 FAIL:** synthetic selective SSM Mirror quality improved (NRMSE 0.02235 vs independent 0.03894), but actual bytes were larger (2,837B vs 2,649B) and unfused training wall time was 9.026s vs 0.873s. **Next: MA-436/437.**
+**MA-434 FAIL:** a trained selective SSM view improved NRMSE but used larger payload and ~10.3x unfused train time; a separate direct decay-bias control exactly aliases its role coordinate and misses the 0.80x bytes gate. See [state-space family diagnostic](../../docs/phase2/STATE_SPACE_ROLE_VIEW_FAMILY_DIAGNOSTIC_2026-10-09.md).
 
-**MA-436 PROMISING (synthetic quality/storage Pareto only):** token-wise logical SSM roles achieved fresh NRMSE 0.00047 vs independent 0.00074 at 2,529B vs 3,045B (-17.0%). It uses 50% more recurrent MAC and 1.56× batch inference time; strict compute gate missed. Oracle roles and Givens-aligned transitions limit scope. **Next: MA-437, S4-native structured Views.**
+**MA-436 FAIL after amended native-control audit:** the earlier token-wise screen showed 17% fewer bytes but failed compute gates; amended development found exact native generated-transition function/payload alias, 0.743/0.738x full-copy bytes, and diversity/throughput gate failures. Fresh stayed sealed. This is the second consecutive role-view family failure; pause MA-437 onward pending redesign. **Queue resumes at MA-443.**
 
 **MA-437 FAIL:** after amendment A1 corrected the teacher to rotate only rank-one S4 factors, Mirror achieved length-64 NRMSE 0.000035 vs independent 0.000106, but payload was 2,591B vs 2,691B (96.3%, failing <=60%); rank-one residual was more accurate at 0.000009 and 2,973B. Stability passed. **Next: MA-438, frequency-band S4 Views.**
 
@@ -95,7 +95,7 @@ MA-327 FAIL: ordinary rank-2 coefficient products match Mirror exactly and both 
 
 ## Active experiment
 
-MA-434 is completed FAIL and committed on its dedicated branch. MA-436 is PROMISING only for synthetic quality/storage (Mirror 2,529B vs independent 3,045B, but 192 vs 128 MAC/token and 1.56× measured inference time). MA-437 failed its strict byte gate; MA-438 is narrowly PROMISING for a synthetic S4 timescale quality/storage Pareto point (10.1% fewer actual bytes than independent, but missed <=60% gate). MA-439 failed both independent quality and byte gates; MA-440 failed retention and byte gates; MA-441 also failed storage/drift gates despite 100% hard recall. MA-442 failed the Mirror-specific adaptation/storage gate; next is MA-443.
+MA-434 and amended MA-436 direct-control audits are FAIL; the earlier MA-436 Pareto screen is retained as bounded exploratory evidence. The shared-transition SSM role/view family is paused after two structural failures; see the family diagnostic. MA-437 failed its strict byte gate; MA-438 is narrowly PROMISING for a synthetic S4 timescale quality/storage Pareto point (10.1% fewer actual bytes than independent, but missed <=60% gate). MA-439 failed both independent quality and byte gates; MA-440 failed retention and byte gates; MA-441 also failed storage/drift gates despite 100% hard recall. MA-442 failed the Mirror-specific adaptation/storage gate; next is MA-443.
 
 ## Verified status index
 

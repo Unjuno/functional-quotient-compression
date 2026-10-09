@@ -1,6 +1,6 @@
 # Worker queue
 
-**Current operational pointer (2026-10-08): MA-443.** MA-436/438 show scoped synthetic quality/storage Pareto points; MA-437/439/440/441/442 failed their registered gates. Continue with the next registered queue item.
+**Current operational pointer (2026-10-09): MA-443.** MA-434 and amended MA-436 direct-control audits both failed: role coordinates aliased native decay/transition parameters, while the broader screens missed strict storage/compute gates. Pause MA-437 onward in the shared-transition SSM role/view family pending redesign; see `docs/phase2/STATE_SPACE_ROLE_VIEW_FAMILY_DIAGNOSTIC_2026-10-09.md`. Resume with MA-443.
 
 The queue is derived from `IDEA_REGISTRY.csv`. The registry is authoritative.
 
