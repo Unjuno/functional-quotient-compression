@@ -1,0 +1,108 @@
+{
+  "experiment_id": "MA-261",
+  "title": "BatchEnsemble-style rank-one Mirror experts",
+  "status": "FROZEN_SCREENING",
+  "base_commit": "d12b5187",
+  "evidence_lane": "EXPERT_QUALITY/ROUTING/ACTUAL_BYTES/ACTIVE_COMPUTE",
+  "prior_art_refs": [
+    17
+  ],
+  "model": {
+    "type": "linear top-1 MoE",
+    "input_dim": 2,
+    "output_dim": 2,
+    "experts": 4,
+    "router": "one shared trained linear softmax gate, held constant across expert methods"
+  },
+  "task": {
+    "type": "four-domain Gaussian mixture regression",
+    "expert_maps": "shared random base plus one shared rank-one functional direction with expert coefficient",
+    "train_examples": 2048,
+    "test_examples": 1024,
+    "metrics": [
+      "routed NRMSE",
+      "router accuracy",
+      "expert oracle NRMSE",
+      "payload bytes",
+      "training seconds",
+      "per-batch apply seconds",
+      "active experts"
+    ]
+  },
+  "hypothesis": "A rank-one Mirror coordinate bank on a shared expert can preserve routed task quality at fewer bytes than independent MoE experts; compare native BatchEnsemble rank-one modulation and an unconstrained generic shared rank-one coefficient control.",
+  "physical_object": "one shared linear expert matrix",
+  "mirror_coordinate": "per-expert bounded scalar m decoded as 1.5*tanh(m) over one shared rank-one direction",
+  "logical_multiplicity": "four routed expert functions",
+  "controls": [
+    "standard top-1 MoE with four untied experts",
+    "hard-tied single expert",
+    "native BatchEnsemble rank-one input/output factors",
+    "Mirror bounded rank-one shared-basis coordinates",
+    "generic unbounded shared rank-one coefficient control with same basis and per-expert codes"
+  ],
+  "development": {
+    "worlds": [
+      26100,
+      26101
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "allowed": "fixed 500 Adam updates at lr 0.01; check task/routing/serializer only, no fresh access"
+  },
+  "fresh": {
+    "worlds": [
+      26110,
+      26111,
+      26112
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual torch-serialized inference payload bytes including shared router, expert weights, codes/factors and metadata"
+  },
+  "compute": {
+    "report_updates": true,
+    "report_cpu_training_wall_clock": true,
+    "report_decode_seconds": true,
+    "report_routed_apply_seconds": true,
+    "report_active_experts": true
+  },
+  "success_gate": "Mirror mean routed NRMSE within 0.01 of standard MoE and uses <=50% of its serialized bytes in every fresh world; compare against BatchEnsemble and generic coefficient control for any Mirror-specific claim.",
+  "failure_gate": "Mirror loses >0.05 NRMSE vs standard MoE or does not improve storage at matched quality; generic coefficient control matching Mirror precludes a Mirror-specific claim.",
+  "boundaries": [
+    "Synthetic regression only; no natural-language or large MoE claim.",
+    "Router is shared and supplied as the same trained state across methods to isolate expert storage.",
+    "Task experts are deliberately rank-one aligned, so the random-task limitation remains open."
+  ],
+  "amendment_before_fresh": {
+    "reason": "Small matrix payloads are sensitive to per-tensor container headers, so comparing raw nested torch.save dictionaries would conflate representation with Python serialization overhead.",
+    "change": "Serialize every method as one flat expert tensor and one flat router tensor plus the same shape/key metadata; decode by deterministic reshape.",
+    "fresh_not_accessed": true
+  },
+  "development_summary": {
+    "router_accuracy_mean": 0.9963,
+    "routed_nrmse_mean": {
+      "standard_moe": 0.0481,
+      "batchensemble": 0.1062,
+      "mirror": 0.0982,
+      "generic_rank1": 0.0982,
+      "tied": 0.5118
+    },
+    "mean_payload_bytes": {
+      "standard_moe": 2149,
+      "batchensemble": 2213,
+      "mirror": 2149,
+      "generic_rank1": 2149,
+      "tied": 2085
+    },
+    "interpretation": "Mirror and generic rank-one control are functionally and byte-identical; standard MoE has better routed quality at same bytes."
+  }
+}
