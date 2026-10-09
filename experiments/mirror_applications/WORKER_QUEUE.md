@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-272.** MA-271 found exact one-plane orbit recovery, but generic fixed-plane scalar was identical and storage saved only 7.5% versus OFT, missing the preregistered gate. Independent OFT support fitting did not converge; oracle upper was exact. Continue to MA-272 with input-centric OFTv2 as the mandatory control.
+**Current operational pointer (2026-10-09): MA-273.** MA-272 confirmed input-centric/materialized OFT equivalence but roughly doubled batch-1024 CPU latency. Aligned Mirror angle saved ~49.4% task-state bytes versus full Q, while generic scalar matched exactly. Continue to MA-273 with native BOFT factor controls.
 
 # Worker queue
 
