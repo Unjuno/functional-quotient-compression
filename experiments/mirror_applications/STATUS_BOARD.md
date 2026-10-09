@@ -215,3 +215,5 @@ KG relation rotations (RotatE, TuckER, QuatE, PairRE), EXIF/device-aware ISPs (P
 **MA-484 FAIL:** on 9 fresh synthetic rank-four expert banks, K64 Mirror VQ used 3,933B but NRMSE was .3068 and collision fraction .863; shared FP32 low-rank coordinates were exact at 3,681B. No K met quality/collision/byte gates; generic full-vector VQ error exceeded 1.2 NRMSE. **Next: MA-485.**
 
 **MA-486 FAIL:** 32D synthetic vectors with 64 charged atoms / 128 functions: top-4 sparse codes used 12,769B (70.8% dense) at NRMSE .1093; top-8 reached .0258 but 15,329B (85.0%). No point met <=.05 error and <=50% bytes. Dictionary/index overhead dominates this bank size. **Next: MA-487.**
+
+**MA-487 FAIL:** on 9 fresh synthetic banks, OMP top-8 had NRMSE .0269 at 15,329B. LISTA errors were .821/.742/.644/.358 at depths 1/2/4/8 and each serialized router was 214,613B. No depth met .05 NRMSE; dense router state cost ~14x OMP. **Next: MA-488.**
