@@ -9,7 +9,7 @@ Integration branch: `research/ma-470-mend-shared-mirror-edit-basis-reconciled-20
 - P0: **630** (155 completed; 475 UNTESTED)
 - P1: **422** (23 completed; 399 UNTESTED)
 - P2: **103** (1 completed; 102 UNTESTED)
-- Current MA statuses: **976 UNTESTED, 50 PROMISING, 129 FAIL**
+- Current MA statuses: **975 UNTESTED, 51 PROMISING, 129 FAIL**
 - 48 experiment directories, complete with status/protocol/results/verification files, are represented in the current evidence set.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-268 is next.
@@ -23,7 +23,7 @@ Integration branch: `research/ma-470-mend-shared-mirror-edit-basis-reconciled-20
 
 ## Next candidate
 
-**MA-494 — Error-correcting Mirror expert IDs (P0; PA95)**
+**MA-498 — Learned code distance regularizer for Mirror bank (P0)**
 
 **MA-494 PROMISING (scoped synthetic noisy-address robustness):** with 32 expert IDs at bit-flip p=.1, binary accuracy was .591, ECOC-11 .816, and 3x repetition .868. Payloads were 2,149B / 2,277B vs 1,957B binary, with noiseless accuracy 1.0. Repetition beats ECOC; no Mirror-specific advantage or task-level routing benefit is established. **Next: MA-498 (P0).**
 
