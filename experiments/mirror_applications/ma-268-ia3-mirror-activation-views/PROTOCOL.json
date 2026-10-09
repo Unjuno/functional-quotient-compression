@@ -1,0 +1,15 @@
+{
+  "experiment_id":"MA-268","title":"IA3 baseline versus Mirror activation views","status":"SCREENING","base_commit":"8e82e394","evidence_lane":"ACTIVATION_VIEW/QUALITY/ACTUAL_BYTES/COMPUTE",
+  "prior_art_refs":[19],"model":{"type":"frozen two-layer feature network","input_dim":16,"hidden_dim":32,"output_dim":8,"tasks":8},
+  "task":{"strata":["one-plane Givens rotation views on hidden activation","independent diagonal IA3 scale views"],"support_examples_per_task":128,"audit_examples_per_task":512,"metrics":["output NRMSE","actual serialized shared model+task payload bytes","coordinate fit time","decode and task-batch apply time"]},
+  "hypothesis":"A one-angle Givens Mirror activation view can recover rotated task functions with lower task-state bytes than full IA3 channel scales, while IA3 should remain stronger for independent diagonal task variation.",
+  "physical_object":"one frozen shared feature network and common downstream weights","mirror_coordinate":"per-task Givens angle inserted at the hidden activation interface","logical_multiplicity":"8 task functions from one physical feature network",
+  "controls":["frozen base without task view","native IA3 per-task diagonal activation scales","one-angle Givens Mirror view","independent dense per-task activation transform upper control"],
+  "development":{"worlds":[26800,26801],"seeds":[0,1,2],"allowed":"validate forward shape, metric, fit and payload serialization; no fresh tuning"},
+  "fresh":{"worlds":[26810,26811,26812],"seeds":[0,1,2],"locked_before_access":true},
+  "storage":{"authority":"actual flat serialized inference payload bytes including shared weights, all task views and metadata"},
+  "compute":{"report_fit_updates":true,"report_fit_seconds":true,"report_decode_seconds":true,"report_task_batch_apply_seconds":true},
+  "success_gate":"Aligned Givens stratum: Mirror NRMSE <=0.01 and total payload <=80% of IA3 payload in each fresh world. Independent diagonal stratum maps where diagonal/private coordinates are necessary.",
+  "failure_gate":"Mirror aligned NRMSE >0.05 or no storage reduction at matched quality; IA3 superiority on independent stratum is a scoped boundary, not an experiment-wide failure by itself.",
+  "boundaries":["Synthetic frozen feature network only; no NLP or transformer quality claim.","Aligned rotation tasks are a feasibility regime; independent diagonal tasks test view mismatch.","Task IDs are given; routing is not studied."]
+}
