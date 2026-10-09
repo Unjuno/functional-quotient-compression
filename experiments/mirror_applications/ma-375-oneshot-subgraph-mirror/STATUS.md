@@ -3,7 +3,7 @@
 - Status: FAIL; exploratory development gate did not pass.
 - Branch: `research/ma-375-oneshot-subgraph-mirror-20261009`
 - Base commit: `4e75142`
-- Last verified commit: `309c158`
+- Last verified result commit: `4417c303`
 - Development complete: yes (seeds 37501, 37502)
 - Fresh/audit opened: no
 - Results committed: yes
