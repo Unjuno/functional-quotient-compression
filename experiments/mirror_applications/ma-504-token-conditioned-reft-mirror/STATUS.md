@@ -6,9 +6,9 @@
 - Protocol frozen before development: yes (`f525b439`)
 - Development complete: yes; LR 0.01 selected on validation intervention NRMSE
 - Fresh/audit opened: yes; 3 worlds × 3 seeds, 45 method rows
-- Results committed: pending
-- Verification committed: pending
-- Registry row updated: pending
+- Results committed: yes (`92d76da8`)
+- Verification committed: yes
+- Registry row updated: yes after verification
 
 ## Decision
 
@@ -24,7 +24,7 @@
 
 ## Next action
 
-Commit result/verification, update registry and claim ledger, run integrity verification, then continue to MA-508.
+Continue to MA-508 on its own research branch.
 
 ## Blockers
 

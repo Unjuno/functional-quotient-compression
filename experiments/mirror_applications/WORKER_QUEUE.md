@@ -1,8 +1,8 @@
-**Current operational pointer (2026-10-09): MA-504.** MA-501/502 failed their synthetic quality thresholds; MA-503 showed scoped storage/quality gains on a Givens-aligned orbit but slower CPU decode. Continue with token-conditioned ReFT and simple conditional-affine controls.
+**Current operational pointer (2026-10-09): MA-508.** MA-501/502 failed synthetic thresholds; MA-503/504 found scoped representation-space benefits on Givens-aligned tasks. Continue with activation-addition controls and natural representation directions.
 
 # Worker queue
 
-**Current operational pointer (2026-10-09): MA-504.** MA-436/438, MA-482 and MA-503 show scoped synthetic quality/storage Pareto points; findings remain bounded by their controls and tasks. Continue with token-conditioned representation Views.
+**Current operational pointer (2026-10-09): MA-508.** MA-436/438, MA-482 and MA-503/504 show scoped synthetic quality/storage Pareto points; findings remain bounded by their controls and tasks. Continue with the activation-addition representation-space queue.
 
 The queue is derived from `IDEA_REGISTRY.csv`. The registry is authoritative.
 
