@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-383.** MA-381 also narrowly missed the frozen full-payload gate (60.9-61.1% of independent bytes) despite near-exact aligned LoRAHub composition and a passing factor-gauge audit. Together with MA-379, this pauses the small shared adapter-bank subfamily: MA-380/382 await a new bank-scale protocol. MA-383 tests the distinct L2P retrieved-prompt pool and proceeds (P0).
+**Current operational pointer (2026-10-09): MA-385.** MA-383 failed the frozen screen: common nearest-key retrieval reached only 89.45-89.70% (below the 90% task-validity gate); Mirror also used 66.8% of explicit pool bytes and failed to fit one development prompt bank. Fresh remained sealed. Proceed to MA-385, DualPrompt expert prompts as Views (P0).
 
 # Worker queue
 

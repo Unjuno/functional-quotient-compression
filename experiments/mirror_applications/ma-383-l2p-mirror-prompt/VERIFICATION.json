@@ -1,10 +1,236 @@
 {
   "experiment_id": "MA-383",
-  "status": "PROTOCOL_FROZEN_PRE_DEVELOPMENT",
-  "protocol_commit": "pending",
-  "tests": {"command": "", "passed": 0, "failed": 0},
-  "serialization": {"actual_bytes_measured": false, "roundtrip_checked": false},
-  "metric_replay": {"checked": false},
-  "retrieval": {"same_keys_and_rule_across_methods": true, "top1_accuracy_checked": false},
-  "fresh": {"worlds": [38311, 38312, 38313], "opened": false}
+  "status": "FAIL_DEVELOPMENT_GATE",
+  "protocol_commit": "18f5646f",
+  "result_commit": "pending-result-commit",
+  "tests": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 pytest -q -p no:cacheprovider experiments/mirror_applications/ma-383-l2p-mirror-prompt/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "actual_npz_payloads": 10,
+    "all_sizes_checked": true,
+    "all_sha256_checked": true,
+    "all_reloaded": true
+  },
+  "metric_replay": {
+    "retrieval_keys_and_outputs_checked": true,
+    "all_metrics_within_atol": 1e-07
+  },
+  "retrieval": {
+    "same_keys_and_rule_across_methods": true,
+    "independent_control_top1": [
+      0.89453125,
+      0.89697265625
+    ],
+    "development_minimum": 0.9,
+    "task_validity_gate": "FAIL"
+  },
+  "fresh": {
+    "worlds": [
+      38311,
+      38312,
+      38313
+    ],
+    "opened": false,
+    "reason": "Development retrieval gate failed in both worlds; Mirror prompt quality and <=60% payload gates also failed."
+  },
+  "notes": [
+    "Mirror oracle prompt NRMSE failed badly in world 38301 (.6007) but was 3.25e-5 in world 38302; no tuning was allowed after frozen protocol.",
+    "Frozen reshape decoder has no learned state; all prompt values/bases/coordinates/keys and metadata are charged.",
+    "This is a synthetic frozen-feature screen, not a pretrained continual-learning reproduction."
+  ],
+  "payloads": [
+    {
+      "seed": 38301,
+      "method": "independent",
+      "bytes": 3628,
+      "sha256": "d77434f6cbb311f41537b584e019e965ea3fe9e7c3d6a270ecd761b1a32a2d0c",
+      "retrieval_top1_accuracy": 0.89453125,
+      "oracle_test_nrmse": 9.474435103129508e-08,
+      "retrieved_test_nrmse": 0.45671090111136436,
+      "retrieved_test_nrmse_by_prompt": [
+        0.35534605383872986,
+        0.46942174434661865,
+        0.46292683482170105,
+        0.476723313331604,
+        0.5695787072181702,
+        0.5752267241477966,
+        0.39107853174209595,
+        0.3533852994441986
+      ]
+    },
+    {
+      "seed": 38301,
+      "method": "tied",
+      "bytes": 1927,
+      "sha256": "0d5695bb8f8c410d15d4eb2d4b2d248ccf736fc3cfd9f462e8d488f177cc61a1",
+      "retrieval_top1_accuracy": 0.89453125,
+      "oracle_test_nrmse": 0.9471116065979004,
+      "retrieved_test_nrmse": 0.9188979789614677,
+      "retrieved_test_nrmse_by_prompt": [
+        0.699293851852417,
+        1.0530643463134766,
+        0.7119799852371216,
+        0.9092229604721069,
+        1.2567051649093628,
+        1.2673529386520386,
+        0.7645620703697205,
+        0.689002513885498
+      ]
+    },
+    {
+      "seed": 38301,
+      "method": "scalar",
+      "bytes": 2151,
+      "sha256": "fd5125c1e358a717e09b9802aa9d6a0310ec73bc876990abd26a65a0d4420c32",
+      "retrieval_top1_accuracy": 0.89453125,
+      "oracle_test_nrmse": 0.6054087281227112,
+      "retrieved_test_nrmse": 0.6679141037166119,
+      "retrieved_test_nrmse_by_prompt": [
+        0.5073498487472534,
+        1.0158404111862183,
+        0.614935040473938,
+        0.855665385723114,
+        0.8834528923034668,
+        0.6299945116043091,
+        0.4875328540802002,
+        0.34854188561439514
+      ]
+    },
+    {
+      "seed": 38301,
+      "method": "coeff",
+      "bytes": 2451,
+      "sha256": "7707923fbb64a1c6c925653d38fae5497d15ed9780eda95522034d102d1fbc73",
+      "retrieval_top1_accuracy": 0.89453125,
+      "oracle_test_nrmse": 2.0030608993693022e-07,
+      "retrieved_test_nrmse": 0.45671089366078377,
+      "retrieved_test_nrmse_by_prompt": [
+        0.35534605383872986,
+        0.46942174434661865,
+        0.46292680501937866,
+        0.47672325372695923,
+        0.5695787668228149,
+        0.5752267241477966,
+        0.39107850193977356,
+        0.3533852994441986
+      ]
+    },
+    {
+      "seed": 38301,
+      "method": "mirror",
+      "bytes": 2424,
+      "sha256": "f23d4f152439eae2679f34c863ca15b4a944eec5afd729cb1cc1b87574732def",
+      "retrieval_top1_accuracy": 0.89453125,
+      "oracle_test_nrmse": 0.600727379322052,
+      "retrieved_test_nrmse": 0.6634973511099815,
+      "retrieved_test_nrmse_by_prompt": [
+        0.5023975372314453,
+        0.9154198169708252,
+        0.602300763130188,
+        0.8827874064445496,
+        1.0010528564453125,
+        0.5682564377784729,
+        0.48304691910743713,
+        0.3527170717716217
+      ]
+    },
+    {
+      "seed": 38302,
+      "method": "independent",
+      "bytes": 3627,
+      "sha256": "50700ba04f4db6de4e0795fcfe8388c66cd19eee57404df525b9e8de6216d1bd",
+      "retrieval_top1_accuracy": 0.89697265625,
+      "oracle_test_nrmse": 1.0196638555726167e-07,
+      "retrieved_test_nrmse": 0.425137922167778,
+      "retrieved_test_nrmse_by_prompt": [
+        0.3612028658390045,
+        0.6082073450088501,
+        0.3844349980354309,
+        0.40489664673805237,
+        0.39586400985717773,
+        0.33427101373672485,
+        0.5166969895362854,
+        0.39552950859069824
+      ]
+    },
+    {
+      "seed": 38302,
+      "method": "tied",
+      "bytes": 1927,
+      "sha256": "4577c05201cf4cc537382d9773c39e0acb949aa0ec03dffb28dcc87a56613a6e",
+      "retrieval_top1_accuracy": 0.89697265625,
+      "oracle_test_nrmse": 0.9007815718650818,
+      "retrieved_test_nrmse": 0.8432378768920898,
+      "retrieved_test_nrmse_by_prompt": [
+        0.7238247394561768,
+        1.4212843179702759,
+        0.7094473838806152,
+        0.5746545791625977,
+        0.8058042526245117,
+        0.6712859869003296,
+        1.2441271543502808,
+        0.5954746007919312
+      ]
+    },
+    {
+      "seed": 38302,
+      "method": "scalar",
+      "bytes": 2152,
+      "sha256": "3f8223bd236ffed5c128de49c23bed3b28b3edeb4bdfe42593ef45e45eab6885",
+      "retrieval_top1_accuracy": 0.89697265625,
+      "oracle_test_nrmse": 0.5084024667739868,
+      "retrieved_test_nrmse": 0.6123828068375587,
+      "retrieved_test_nrmse_by_prompt": [
+        0.9519647359848022,
+        0.617479145526886,
+        0.39691510796546936,
+        0.4639631509780884,
+        0.5436362028121948,
+        0.3071047365665436,
+        0.8405623435974121,
+        0.7774370312690735
+      ]
+    },
+    {
+      "seed": 38302,
+      "method": "coeff",
+      "bytes": 2454,
+      "sha256": "600b6c18bfaca6fefa88adacd0f6c324d5ed2e44fb2a2d31b39d9b7e52dd7b63",
+      "retrieval_top1_accuracy": 0.89697265625,
+      "oracle_test_nrmse": 3.7798531593580265e-07,
+      "retrieved_test_nrmse": 0.4251379184424877,
+      "retrieved_test_nrmse_by_prompt": [
+        0.36120283603668213,
+        0.6082073450088501,
+        0.3844349980354309,
+        0.40489664673805237,
+        0.39586400985717773,
+        0.33427101373672485,
+        0.5166969895362854,
+        0.39552950859069824
+      ]
+    },
+    {
+      "seed": 38302,
+      "method": "mirror",
+      "bytes": 2423,
+      "sha256": "b6943c13151c4a70c37f5c31340e7e52d5c8c6dbf68e1f4bb8ed2842ddcd53e9",
+      "retrieval_top1_accuracy": 0.89697265625,
+      "oracle_test_nrmse": 3.2506242860108614e-05,
+      "retrieved_test_nrmse": 0.4251379333436489,
+      "retrieved_test_nrmse_by_prompt": [
+        0.36120274662971497,
+        0.6082072854042053,
+        0.38443517684936523,
+        0.40489664673805237,
+        0.39586395025253296,
+        0.33427104353904724,
+        0.516697108745575,
+        0.39552950859069824
+      ]
+    }
+  ]
 }
