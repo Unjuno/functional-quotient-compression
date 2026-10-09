@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-268.** MA-266 showed that product-law composition restores sequential function behavior and halves application steps, but generic scalar algebra exactly matched Mirror and the payload saving was only 2.8%. Continue to MA-268 with native IA3 scaling as the mandatory control.
+**Current operational pointer (2026-10-09): MA-271.** MA-268 found a structure-matched one-angle Givens activation view that recovered aligned synthetic tasks, but saved only 3.5% over IA3 and failed the preregistered 80% byte gate; IA3 handled independent diagonal tasks. Continue to MA-271 with native OFT as the mandatory control.
 
 # Worker queue
 

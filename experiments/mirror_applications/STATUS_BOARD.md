@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (61 completed; 569 UNTESTED)
+- P0: **630** (62 completed; 568 UNTESTED)
 - P1: **422** (13 completed; 409 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1081 UNTESTED, 37 PROMISING, 37 FAIL**
+- Current MA statuses: **1080 UNTESTED, 37 PROMISING, 38 FAIL**
 - 68 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -21,21 +21,26 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 - PROMISING is **not** ADOPTED. Treat reports with strict-gate misses or exploratory protocol deviations at their documented scope.
 - SRM/TM and prior Phase I results are not MA statuses.
 
+## Completed: MA-268 — IA3 Mirror activation views
+
+- **FAIL** against the registered ≤80% IA3 payload gate: aligned Givens view reached fresh NRMSE <5.3e-8 at 3,167 B vs IA3 3,283 B (3.5% reduction); IA3 remained nearly exact on independent diagonal task views.
+- Scoped synthetic orbit feasibility only; no language-model or Mirror-specific novelty claim. Full report and verification are linked in the claim ledger.
+
 ## Next candidate
 
-**MA-268 — IA3 Mirror activation views (P0; PA19)**
+**MA-271 — OFT Mirror task views (P0; PA20)**
 
 Reason:
 - MA-470/471/473/475/476/478/481/482, MA-483, MA-484, MA-486, MA-487, MA-488, MA-492, MA-494, MA-498, MA-501, MA-502 and MA-516 are completed on dedicated branches and cross-linked in the claim ledger;
 - MA-501 and MA-502 both found that VQ coordinates add substantial distortion over compact FP16 shared coordinates. The LoReFT representation-view family is temporarily deferred for redesign; skipped registry candidates remain UNTESTED. Work moves to the separate Function Vectors family at MA-516. Other completed candidates remain cross-linked in the claim ledger.
 
-Required controls: native IA3 per-channel scales, shared/tied activation scales, Mirror activation views, and low-rank/gated controls; measure downstream quality, actual bytes and inference cost.
+Required controls: native OFT orthogonal transforms, shared/tied transform controls, Mirror task views, and compact parameterization controls; measure task quality, transform bytes and geometry retention.
 
 The LoReFT family remains deferred after MA-501/502. MA-255’s PSP screen was not established because the development metric broadcasted incorrectly; MA-260’s fresh screen was not established because its training world was hardcoded. Both records and limitations are preserved.
 
 ## Active experiment
 
-MA-517, MA-257, MA-261, MA-265 and MA-266 are FAIL; MA-255 and MA-260 are NOT ESTABLISHED due implementation defects; MA-258 is PROMISING only on its aligned synthetic orbit. Next is MA-268.
+MA-517, MA-257, MA-261, MA-265 and MA-266 are FAIL; MA-255 and MA-260 are NOT ESTABLISHED due implementation defects; MA-258 is PROMISING only on its aligned synthetic orbit. Next is MA-271.
 
 The LoReFT representation-view family remains temporarily deferred for redesign after two consecutive VQ-vs-FP16 distortion failures.
 
