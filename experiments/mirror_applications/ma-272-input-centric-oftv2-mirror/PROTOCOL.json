@@ -1,0 +1,22 @@
+{
+  "experiment_id":"MA-272",
+  "title":"Input-centric OFTv2 versus materialized OFT and Mirror views",
+  "status":"SCREENING",
+  "base_commit":"c722c2ed",
+  "evidence_lane":"INPUT_CENTRIC_ORTHOGONAL_VIEW/QUALITY/ACTUAL_BYTES/RUNTIME",
+  "prior_art_refs":[22],
+  "hypothesis":"Applying an orthogonal task transform to activations without materializing transformed weights preserves the same function and reduces adaptation/decode overhead; a small Mirror coordinate can amortize task-specific view state only for aligned task orbits.",
+  "physical_object":"one frozen shared linear feature map",
+  "mirror_coordinate":"one input-side Givens angle at the activation interface",
+  "logical_multiplicity":"multiple task-conditioned functions from one shared physical weight matrix",
+  "model":{"input_dim":32,"output_dim":32,"tasks":8},
+  "task":{"support_examples":256,"audit_examples":1024,"strata":["aligned one-plane orthogonal views","independent orthogonal input views"]},
+  "controls":["shared baseline","weight-centric materialized OFT","input-centric activation OFT","input-centric Mirror angle","generic scalar plane control"],
+  "development":{"worlds":[27200,27201],"seeds":[0,1,2],"allowed":"check forward equivalence, layout, matrix orientation, timing instrumentation and payload accounting"},
+  "fresh":{"worlds":[27210,27211,27212],"seeds":[0,1,2],"locked_before_access":true},
+  "storage":{"authority":"canonical serialized inference payload bytes","paid_objects":["shared weight", "all task transforms/codes", "metadata"]},
+  "compute":{"report_forward_equivalence_error":true,"report_weight_materialization_seconds":true,"report_input_transform_seconds":true,"report_apply_latency":true,"report_macs":true},
+  "success_gate":"Input-centric output matches weight-centric OFT within 1e-6 relative error; aligned one-angle code <=50% per-task transform bytes and does not add more than 10% measured forward latency at batch 64.",
+  "failure_gate":"Function mismatch >1e-4, or view payload reduction <20% at matched quality, or input-centric transform adds >25% latency.",
+  "boundaries":["Synthetic linear function only","Task identity is supplied","No CUDA or language model claim","OFTv2 is prior art; input-side orthogonality is not a Mirror novelty claim"]
+}
