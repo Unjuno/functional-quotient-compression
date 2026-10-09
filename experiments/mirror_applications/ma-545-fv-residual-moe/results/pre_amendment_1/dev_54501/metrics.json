@@ -1,0 +1,84 @@
+{
+  "common_model_bytes": 168144624,
+  "compute": {
+    "FV_add_dims": 65536,
+    "candidate_sequences": 1024,
+    "candidate_tokens": 43200,
+    "evaluation_seconds": 152.95725678201416,
+    "extract_forward_calls": 384,
+    "extract_input_tokens": 14040,
+    "extraction_seconds": 20.690341947978595,
+    "query_examples": 128,
+    "rank1_active_rank_ops": 131072,
+    "router_fit_mac_proxy": 1048576000,
+    "router_updates": 1000,
+    "support_examples": 128
+  },
+  "experiment_id": "MA-545",
+  "metrics": {
+    "evaluation_seconds": 152.95725678201416,
+    "heldout_route_accuracy": 1.0,
+    "icl": {
+      "accuracy": 0.3125,
+      "candidate_sequences": 1024,
+      "candidate_tokens": 43200,
+      "mean_gold_logprob": -6.483588377581327,
+      "mean_gold_margin": -1.4060472456549178,
+      "queries": 128
+    },
+    "oracle_fv": {
+      "accuracy": 0.3046875,
+      "candidate_sequences": 1024,
+      "candidate_tokens": 43200,
+      "mean_gold_logprob": -6.224476180243073,
+      "mean_gold_margin": -1.2489163523714524,
+      "queries": 128
+    },
+    "route_accuracy_support": 1.0,
+    "routed_fv": {
+      "accuracy": 0.3046875,
+      "candidate_sequences": 1024,
+      "candidate_tokens": 43200,
+      "mean_gold_logprob": -6.224476180243073,
+      "mean_gold_margin": -1.2489163523714524,
+      "queries": 128
+    },
+    "routed_rank1": {
+      "accuracy": 0.3046875,
+      "candidate_sequences": 1024,
+      "candidate_tokens": 43200,
+      "mean_gold_logprob": -6.2246298895042855,
+      "mean_gold_margin": -1.2463435663667042,
+      "queries": 128
+    },
+    "shared_mean": {
+      "accuracy": 0.328125,
+      "candidate_sequences": 1024,
+      "candidate_tokens": 43200,
+      "mean_gold_logprob": -6.509224971203366,
+      "mean_gold_margin": -1.135489066989976,
+      "queries": 128
+    }
+  },
+  "model_sha256": "3da388330e4549156d76b58d6d268c63cd005e9336b4f4d2d378421e7b7a33fd",
+  "payload_bytes": {
+    "icl": 0,
+    "oracle_fv": 34438,
+    "rank1": 105376,
+    "routed_fv": 72384,
+    "shared_mean": 3712
+  },
+  "revision": "e93a9faa9c77e5d09219f6c868bfc7a1bd65593c",
+  "seed": 54501,
+  "standalone_bytes": {
+    "icl": 168144624,
+    "oracle_fv": 168179062,
+    "rank1": 168250000,
+    "routed_fv": 168217008,
+    "shared_mean": 168148336
+  },
+  "weight_control_fit": {
+    "ridge": 0.001,
+    "support_examples": 128
+  }
+}

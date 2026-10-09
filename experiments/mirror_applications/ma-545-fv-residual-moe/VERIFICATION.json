@@ -1,19 +1,30 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-545",
+  "commit": "pending",
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "PYTHONPATH=/tmp/ma534-python-deps python -m pytest -q experiments/mirror_applications/ma-545-fv-residual-moe/tests",
+    "passed": 3,
+    "failed": 0
   },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "actual_npz_byte_sizes": true,
+    "split_manifest_included": true
   },
   "metric_replay": {
-    "checked": false,
-    "max_difference": null
+    "checked": true,
+    "max_difference": 0.0,
+    "arrays_exact": true,
+    "split_manifest_exact": true,
+    "wall_clock_excluded": true
   },
   "fresh_split_integrity_checked": false,
-  "notes": []
+  "fresh_accessed": false,
+  "protocol_hash_matches_freeze": true,
+  "notes": [
+    "Development 54501 was rerun exactly: metrics, splits, all serialized arrays and byte sizes matched.",
+    "Amendment 2 added the support/query manifest bytes to all inference NPZ payloads and recomputed development actual byte counts without changing quality metrics.",
+    "Amended development passes the frozen gates to open fresh data: held-out route accuracy 1.00 on both seeds; routed FV exactly equals oracle FV; mean gold-logprob improvement over ICL is 0.289 nats; complete FV payload is 0.72494x the rank-one weight control."
+  ]
 }
