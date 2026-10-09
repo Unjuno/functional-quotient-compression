@@ -148,7 +148,7 @@ def main():
  summary['transcoder_standalone_total_bytes']=deploy_base_bytes+payload_bytes+cfg_bytes
  summary['method_incremental_bytes']={'native_mlp':0,'skip_only':skip_bytes,'transcoder_top128':payload_bytes+cfg_bytes,'rank128_cross_covariance_svd':rank_bytes,'transcoder_global_rms_normalized':norm_bytes,'transcoder_direction_plus_fit_norm_head':head_bytes}
  summary['method_standalone_bytes']={'native_mlp':model_bytes,'skip_only':deploy_base_bytes+skip_bytes,'transcoder_top128':deploy_base_bytes+payload_bytes+cfg_bytes,'rank128_cross_covariance_svd':deploy_base_bytes+rank_bytes,'transcoder_global_rms_normalized':deploy_base_bytes+norm_bytes,'transcoder_direction_plus_fit_norm_head':deploy_base_bytes+head_bytes}
- summary['method_payload_sha256']={'skip_only':sha(skip_payload),'transcoder_top128':sha(payload),'rank128_cross_covariance_svd':sha(rank_payload)}
+ summary['method_payload_sha256']={'skip_only':sha(skip_payload),'transcoder_top128':sha(payload),'rank128_cross_covariance_svd':sha(rank_payload),'global_rms_scales':sha(norm_payload),'fit_norm_head':sha(head_payload)}
  (out/'summary.json').write_text(json.dumps(summary,indent=2)+'\n')
  print(json.dumps(summary,indent=2))
 if __name__=='__main__': main()
