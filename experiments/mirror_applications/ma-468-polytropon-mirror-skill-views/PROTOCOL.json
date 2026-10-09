@@ -1,21 +1,105 @@
 {
-  "experiment_id":"MA-468",
-  "title":"Shared/private skill bank with Mirror skill views",
-  "status":"FROZEN_SCREENING",
-  "base_commit":"f2dfb165",
-  "evidence_lane":"MODULAR_SKILLS/LOGICAL_MULTIPLICITY/ALLOCATION/BYTES",
-  "hypothesis":"Two physical skill modules with per-skill Mirror Views will represent four logical skills and held-out skill combinations with at least 25% lower actual bytes than a four-module Polytropon bank, while keeping task NRMSE within 10%; private residuals should isolate off-orbit skills.",
-  "physical_object":"two learned 2D linear skill modules",
-  "mirror_coordinate":"per-logical-skill Givens angle selecting a view of one physical skill module",
-  "logical_multiplicity":"four logical skills and sparse two-skill task compositions",
-  "prior_art_refs":[85],
-  "controls":["two physical modules with no Views","two physical modules plus skill Views","two modules plus one private residual for off-orbit skill","four independent physical skill modules","sparse task-to-skill allocation table"],
-  "task":{"type":"2D linear modular skill composition","logical_skills":4,"physical_modules":2,"teacher":"skills 0/1 are rotated views of module A; skill 2 is module B; skill 3 is off-orbit B+residual","tasks":"all six pairwise skill combinations, with two held-out combination IDs","skill_support_examples":64,"query_examples_per_task":256,"allocation":"two sparse skill indices per task; same indices charged across controls"},
-  "development":{"worlds":[46800,46801],"seeds":[0,1,2],"view_angle_grid_points":361,"selection":"fixed grid and support fit; no fresh tuning"},
-  "fresh":{"worlds":[46810,46811,46812],"seeds":[0,1,2],"locked_before_access":true},
-  "storage":{"authority":"actual serialized inference payload bytes","paid_objects":["skill matrices or shared physical matrices","Mirror angles","private residual","task-skill allocation indices","metadata"],"amortization_N":[1,3,6]},
-  "compute":{"report_skill_calibration_MAC":true,"report_allocation_bytes":true,"report_query_MAC":true,"report_fit_wall":true,"report_query_wall":true},
-  "success_gate":"Every fresh world: Mirror NRMSE <=1.10x four-module bank on held-out pairwise tasks and N=6 payload <=75% four-module payload; report private residual crossover.",
-  "failure_gate":"Mirror misses quality or byte gate, view gains are matched by simply increasing physical module count, or allocations fail to retain skill composition.",
-  "boundaries":["Synthetic 2D skill bank only; no natural multi-task evidence.","The skill allocation IDs are supplied and equally charged.","One skill is deliberately off-orbit to measure private-state need."]
+  "experiment_id": "MA-468",
+  "title": "Shared/private skill bank with Mirror skill views",
+  "status": "FROZEN_A1",
+  "base_commit": "f2dfb165",
+  "evidence_lane": "MODULAR_SKILLS/LOGICAL_MULTIPLICITY/ALLOCATION/BYTES",
+  "hypothesis": "Two physical skill modules with per-skill Mirror Views will represent four logical skills and held-out skill combinations with at least 25% lower actual bytes than a four-module Polytropon bank, while keeping task NRMSE within 10%; private residuals should isolate off-orbit skills.",
+  "physical_object": "two learned 2D linear skill modules",
+  "mirror_coordinate": "per-logical-skill Givens angle selecting a view of one physical skill module",
+  "logical_multiplicity": "four logical skills and sparse two-skill task compositions",
+  "prior_art_refs": [
+    85
+  ],
+  "controls": [
+    "two physical modules with no Views",
+    "two physical modules plus skill Views",
+    "two modules plus one private residual for off-orbit skill",
+    "four independent physical skill modules",
+    "sparse task-to-skill allocation table"
+  ],
+  "task": {
+    "type": "2D linear modular skill composition",
+    "logical_skills": 4,
+    "physical_modules": 2,
+    "teacher": "skills 0/1 are rotated views of module A; skill 2 is module B; skill 3 is off-orbit B+residual",
+    "tasks": "all six pairwise skill combinations, with two held-out combination IDs",
+    "skill_support_examples": 64,
+    "query_examples_per_task": 256,
+    "allocation": "two sparse skill indices per task; same indices charged across controls"
+  },
+  "development": {
+    "worlds": [
+      46800,
+      46801
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "view_angle_grid_points": 361,
+    "selection": "fixed grid and support fit; no fresh tuning"
+  },
+  "fresh": {
+    "worlds": [
+      46810,
+      46811,
+      46812
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "skill matrices or shared physical matrices",
+      "Mirror angles",
+      "private residual",
+      "task-skill allocation indices",
+      "metadata"
+    ],
+    "amortization_N": [
+      1,
+      3,
+      6
+    ]
+  },
+  "compute": {
+    "report_skill_calibration_MAC": true,
+    "report_allocation_bytes": true,
+    "report_query_MAC": true,
+    "report_fit_wall": true,
+    "report_query_wall": true
+  },
+  "success_gate": "Every fresh world: Mirror NRMSE <=1.10x four-module bank on held-out pairwise tasks and N=6 payload <=75% four-module payload; report private residual crossover.",
+  "failure_gate": "Mirror misses quality or byte gate, view gains are matched by simply increasing physical module count, or allocations fail to retain skill composition.",
+  "boundaries": [
+    "Synthetic 2D skill bank only; no natural multi-task evidence.",
+    "The skill allocation IDs are supplied and equally charged.",
+    "One skill is deliberately off-orbit to measure private-state need."
+  ],
+  "fresh_A1": {
+    "worlds": [
+      46820,
+      46821,
+      46822
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "locked_before_access": true,
+    "excluded_exploratory_worlds": [
+      46810,
+      46811,
+      46812
+    ]
+  },
+  "amendment_A1": "Initial fresh payload review found that the serialized four-module control carried the two-module skill_to_module map. Corrected the inference metadata before any result decision; original worlds 46810-46812 are retained as exploratory and excluded. A1 uses fresh world IDs."
 }
