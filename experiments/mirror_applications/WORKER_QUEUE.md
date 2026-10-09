@@ -1,3 +1,5 @@
+**Current operational pointer (2026-10-09): MA-473.** MA-470/471 are recorded as scoped edit-basis and aligned ROME-coordinate results; continue the editing family with MEMIT and compare actual changed-weight bytes.
+
 # Worker queue
 
 The queue is derived from `IDEA_REGISTRY.csv`. The registry is authoritative.

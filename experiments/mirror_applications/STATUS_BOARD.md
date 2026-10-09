@@ -1,6 +1,6 @@
 # Mirror Application Status Board
 
-Updated: 2026-10-08 JST
+Updated: 2026-10-09 UTC
 Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Program totals (reconciled from authoritative 1155-row registry)
@@ -9,8 +9,8 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 - P0: **630** (35 completed; 595 UNTESTED)
 - P1: **422** (12 completed; 410 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1108 UNTESTED, 29 PROMISING, 18 FAIL**
-- 47 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
+- Current MA statuses: **1106 UNTESTED, 31 PROMISING, 18 FAIL**
+- 49 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
 - Thirteenth literature sweep added MA-996..1045 (50 UNTESTED; 40 P0/10 P1) and PA296..PA325. IDs MA-1000+ use four digits; consult `check_registry_integrity.py`. No new experiment results.
@@ -23,15 +23,13 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-255 — Mirror context superposition for task models (P0; PA16)**
+**MA-473 — MEMIT update basis + Mirror memory codes (P0; PA88)**
 
 Reason:
-- all previously locked MA-241/244/245/247–251/253 and subsequent old-chain P0 screens have completed;
-- the original P0 cross-over queue is exhausted among checked candidates;
-- MA-255 is the first untested P0 in the earlier high-information literature cross-over queue;
-- direct Parameter Superposition prior art gives a strong nearest control for insertion of the extra Mirror parameter `m`.
+- MA-470 and MA-471 resumed the model-editing evidence chain on dedicated branches; their scoped reports are cross-linked in the claim ledger;
+- MA-471 is the current aligned rank-one edit screen; MA-473 is the next executable P0 edit-family candidate after the P1 composition item MA-472.
 
-Required controls: native Parameter Superposition, naive/shared task-code basis, matched byte-near low-rank or VeRA-style modulation, independent-model upper reference where practical. Do not claim the superposition concept itself as a Mirror invention.
+Required controls: native MEMIT edited weights/deltas, shared low-rank edit basis, and independent update upper reference. Count all layerwise deltas and compare factual efficacy, specificity, interference and bytes.
 
 If blocked by a documented reproducibility or harness issue, record it and resume at MA-260 (BatchEnsemble), then MA-261/265/268 in the registered literature priority sequence. Do not jump to P1/novelty-picked topics before P0.
 
@@ -90,3 +88,8 @@ KG relation rotations (RotatE, TuckER, QuatE, PairRE), EXIF/device-aware ISPs (P
 - `CLAIM_LEDGER.csv` and each experiment's `VERIFICATION.json` are the evidence index; `STATUS_BOARD.md` is an operational cache.
 - Before allocating an ID or starting work, re-read the live registry and search for experiment branches.
 - Preserve old branches, failed results, exploratory data and locked protocols. No automatic merge to main.
+
+
+**MA-470 PROMISING (scoped, synthetic shared-basis storage):** at N64 Mirror+private reproduced edits at 3,793B vs MEND-style per-edit rank-two factors at 54,847B, but the generic independent four-atom basis was smaller (3,165B) at equal quality. No Mirror-specific gain; oracle least-squares coefficients, not learned MEND. **Next: MA-471.**
+
+**MA-471 PROMISING (aligned analytic ROME coordinate screen):** at N64 the angle-coded shared-plane representation used 2,909B vs ROME factors 5,925B and generic Cartesian coefficients 3,421B; max edit efficacy NRMSE 1.07e-7 and specificity drift 4.43e-8. N20 missed the <=80% byte gate. Known fixed-norm orbit only; private residual control and natural factual edits remain untested. **Next: MA-473.**
