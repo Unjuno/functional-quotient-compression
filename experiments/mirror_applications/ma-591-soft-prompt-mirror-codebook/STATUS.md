@@ -3,12 +3,12 @@
 - Status: FAIL (Mirror-specific attribution)
 - Branch: `research/ma-591-soft-prompt-mirror-codebook-20261009`
 - Base commit: `bfbb761d`
-- Evidence commit: pending
+- Evidence commit: `e9c92090`
 - Development complete: yes (59101/59102; amended source; same-seed replay exact)
 - Fresh/audit opened: no (native low-rank alias is decisive)
-- Results committed: pending
-- Verification committed: pending
-- Registry row updated: pending
+- Results committed: yes
+- Verification committed: yes
+- Registry row updated: yes
 
 ## Next action
 
