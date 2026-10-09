@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-554",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m pytest -q -p no:cacheprovider experiments/mirror_applications/ma-554-input-conditioned-mirror/tests",
+    "passed": 2,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Ten rows replay across two development seeds.",
+    "Mirror and direct two-basis payloads/output metrics match exactly.",
+    "No fresh data opened."
+  ]
+}

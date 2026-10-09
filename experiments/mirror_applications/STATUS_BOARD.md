@@ -6,11 +6,11 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (104 completed; 526 UNTESTED)
+- P0: **630** (105 completed; 525 UNTESTED)
 - P1: **422** (15 completed; 407 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1034 UNTESTED, 46 PROMISING, 75 FAIL**
-- 69 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
+- Current MA statuses: **1033 UNTESTED, 46 PROMISING, 76 FAIL**
+- 70 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
 - Thirteenth literature sweep added MA-996..1045 (50 UNTESTED; 40 P0/10 P1) and PA296..PA325. IDs MA-1000+ use four digits; consult `check_registry_integrity.py`. No new experiment results.
@@ -134,6 +134,8 @@ MA-341 and MA-342 consecutively missed the Mirror-specific byte gate because one
 The next P0 queued after MA-353. MA-354 is P1 and remains behind available P0 work.
 MA-553 FAIL: rank-4 task×layer code failed held-out task-layer output quality (nMSE 4.93) against exact independent FiLM; direct coefficient control is byte-identical. Fresh sealed.
 
+MA-554 FAIL: aligned context-to-rotation Mirror reaches 973B/zero nMSE, but direct two-basis coefficients are byte/function-identical; FiLM and generic dynamic filter are larger but less accurate on this planted orbit. Fresh sealed.
+
 ## Active experiment
 
 MA-517, MA-257, MA-261, MA-265 and MA-266 are FAIL; MA-255 and MA-260 are NOT ESTABLISHED due implementation defects; MA-258 is PROMISING only on its aligned synthetic orbit. Next is MA-271.
@@ -143,7 +145,7 @@ The LoReFT representation-view family remains temporarily deferred for redesign 
 ## Verified status index
 
 - **PROMISING (29):** MA-001, MA-002, MA-003, MA-004, MA-005, MA-006, MA-007, MA-008, MA-012, MA-014, MA-015, MA-041, MA-076, MA-079, MA-111, MA-121, MA-156, MA-160, MA-171, MA-173, MA-181, MA-189, MA-241, MA-244, MA-245, MA-249, MA-250, MA-251, MA-691.
-- **FAIL (18):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-553.
+- **FAIL (18):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-553, MA-554.
 
 All per-ID evidence is retained in the local experiment directories and in `CLAIM_LEDGER.csv`. Consult [the evidence integration audit](../../docs/phase2/MIRROR_MA_EVIDENCE_INTEGRATION_2026-10-08.md) for linked reports, verifications, provenance and claim boundaries.
 
