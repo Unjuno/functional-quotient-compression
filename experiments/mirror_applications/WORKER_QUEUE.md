@@ -485,4 +485,4 @@ MA-576 is closed **FAIL** on `research/ma-576-smoothquant-residual-rotation-2026
 
 ## Current MA-578 handoff — 2026-10-09
 
-MA-578 is active on `research/ma-578-kv-cache-mirror-rotation-20261009`. Protocol/source are frozen; registered dev seeds 57801/02 pending; fresh test windows 57811–13 remain sealed. PA112/PA113 controls are included.
+MA-578 is closed **FAIL** on `research/ma-578-kv-cache-mirror-rotation-20261009`: codebook4 misses FP16 next-token NLL by +.731/+1.550 nat/token and exactly aliases native selection; saved 11,776 B versus independent16 but did not recover cache quality. Fresh test stayed sealed. Next P0: MA-581 MLA latent + Mirror head reconstruction (PA115).

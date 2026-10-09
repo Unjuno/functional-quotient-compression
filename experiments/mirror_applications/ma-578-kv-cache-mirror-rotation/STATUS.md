@@ -1,1 +1,1 @@
-SCREENING — protocol and amended source frozen before registered development. Dev 57801/02 pending; fresh 57811–13 sealed.
+FAIL — fitted4 NLL delta is +0.731/+1.550 nat/token versus FP16, misses the 0.05 gate, and exactly aliases native shared-codebook; random4 is better in seed 57802. Actual cache bytes save 11,776 B versus independent16, but NLL remains poor. Fresh sealed.

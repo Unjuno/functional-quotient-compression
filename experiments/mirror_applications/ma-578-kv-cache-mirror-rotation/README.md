@@ -1,6 +1,6 @@
 # MA-578 — KV-cache Mirror rotation code
 
-Status: SCREENING — amended freeze; registered dev pending
+Status: FAIL — amended freeze; registered dev pending
 Prior art: PA112 QuaRot; PA113 SpinQuant
 
 ## H

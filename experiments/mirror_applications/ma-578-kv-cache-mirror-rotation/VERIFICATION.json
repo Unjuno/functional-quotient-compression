@@ -1,17 +1,25 @@
 {
-  "status": "PENDING",
+  "status": "FAIL",
   "base_commit": "94b2c20e",
   "protocol_frozen_before_registered_worlds": true,
-  "fresh_opened": false,
-  "checks": {
-    "unit_tests": "5 passed",
-    "registered_dev_seeds": "unopened",
-    "fresh_opened": false
-  },
-  "source_sha256_frozen_or_amended": "bbc5a9724775404f4290516bd094a10bfdb4e589267e43b823eaa61418ae94ee",
-  "protocol_sha256_final": "59fb7e1f852e3235fc4de2a4c0424f228fdae4a39b8c532497cb5d58ef985943",
   "amendments": [
     1,
     2
+  ],
+  "source_matches_amended_freeze": true,
+  "registered_dev_seeds": [
+    57801,
+    57802
+  ],
+  "fresh_opened": false,
+  "checks": {
+    "unit_tests": "5 passed",
+    "actual_cache_payload_bytes": "verified against NPZ stat sizes",
+    "native_codebook_alias": "exact arrays except method label",
+    "registry_integrity": "pending"
+  },
+  "notes": [
+    "Both development seeds miss the NLL gate by over 0.68 nat/token.",
+    "Fresh test data was not accessed."
   ]
 }
