@@ -1,0 +1,22 @@
+{
+  "experiment_id": "MA-271",
+  "title": "OFT independent task transforms versus shared Mirror orthogonal views",
+  "status": "SCREENING",
+  "base_commit": "db09ec4d",
+  "evidence_lane": "OFT_TASK_VIEWS/GEOMETRY/ACTUAL_BYTES/COMPUTE",
+  "prior_art_refs": [20],
+  "hypothesis": "On a shared frozen linear feature map, a low-dimensional one-plane orthogonal Mirror coordinate can reconstruct aligned task-specific orthogonal maps with substantially less serialized task state than independent OFT matrices; generic independent rotations may require factorized or private state.",
+  "physical_object": "one frozen shared two-layer feature network",
+  "mirror_coordinate": "one angle per task on a fixed two-channel plane",
+  "logical_multiplicity": "eight task-specific orthogonal output functions",
+  "model": {"input_dim": 16, "hidden_dim": 32, "output_dim": 8, "tasks": 8},
+  "task": {"support_examples_per_task": 128, "audit_examples_per_task": 512, "strata": ["aligned one-plane rotation family", "independent orthogonal matrices"]},
+  "controls": ["no task transform", "independent native OFT dense orthogonal transform per task", "one-angle Mirror view", "shared random one-plane view", "independent dense upper control"],
+  "development": {"worlds": [27100, 27101], "seeds": [0, 1, 2], "allowed": "validate parameterization, matrix orientation, task generation, fitting, serialization and metrics; select only before fresh"},
+  "fresh": {"worlds": [27110, 27111, 27112], "seeds": [0, 1, 2], "locked_before_access": true},
+  "storage": {"authority": "canonical serialized inference payload bytes", "paid_objects": ["shared network", "all per-task transform state", "basis/plane metadata", "decoder metadata"]},
+  "compute": {"report_fit_seconds": true, "report_updates": true, "report_apply_seconds": true, "report_transform_apply_macs": true},
+  "success_gate": "Aligned family: Mirror output NRMSE <=1e-4 and total payload <=50% of independent OFT payload in every fresh world. Generic orthogonal stratum maps private-state boundary.",
+  "failure_gate": "Mirror aligned NRMSE >0.01 or payload >80% of OFT at matched quality. No Mirror-specific claim if fixed-plane native coefficient control matches it.",
+  "boundaries": ["Synthetic frozen feature network only", "No text-to-image or natural task quality claim", "OFT is prior art; orthogonality itself is not a novelty claim", "Task identity is provided; no router tested"]
+}
