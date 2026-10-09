@@ -1,0 +1,15 @@
+{
+ "experiment_id":"MA-312","title":"Shared intrinsic basis + many Mirror task coordinates","status":"SCREENING","base_commit":"4dd7a158","prior_art_refs":[33],"evidence_lane":"INTRINSIC_TASK_CODE/SCALING/QUALITY/ACTUAL_BYTES/COMPUTE",
+ "hypothesis":"At larger task counts, a shared intrinsic basis plus per-task Mirror addresses amortizes shared state and reduces total bytes versus independent random-subspace coefficients, while generic PCA may match the compression; independent task vectors reveal the private-coordinate boundary.",
+ "physical_object":"frozen random projection U, D=256 to intrinsic d=32, shared across 64 tasks","mirror_coordinate":"one shared intrinsic vector plus 64 per-task Givens angles","logical_multiplicity":"64 task functions",
+ "model":{"input_dim":256,"intrinsic_dim":32,"tasks":64,"support_examples_per_task":64,"query_examples_per_task":128,"mirror_updates":800},
+ "strata":["64 aligned Givens orbit tasks","64 independent random intrinsic tasks"],
+ "controls":["independent intrinsic task coefficients","shared Mirror vector and task-angle coordinates","generic rank-2 PCA of independently fitted intrinsic task coordinates"],
+ "development":{"worlds":[31200,31201],"seeds":[0,1,2],"selection_metric":"query NRMSE, total serialized payload bytes, marginal task-state bytes, optimizer updates and wall time"},
+ "fresh":{"worlds":[31210,31211,31212],"seeds":[0,1,2],"locked_before_access":true},
+ "storage":{"authority":"actual serialized inference payload bytes","paid_objects":["random projection U in fp16","independent task coefficients or Mirror shared vector and angles","PCA mean/basis/codes","metadata"],"report_both":"full model+task payload and marginal task adaptation payload"},
+ "success_gate":"On aligned tasks, query NRMSE <=0.05 and at least 20% lower total bytes than independent coordinates; compute cost must be reported. Generic PCA matching Mirror means no Mirror-specific result. Independent stratum quantifies need for private coordinates.",
+ "failure_gate":"No total-byte gain at matched quality or severe compute regression; independent tasks are the preregistered boundary condition.",
+ "compute":{"report_support_examples":true,"report_optimizer_updates":true,"report_fit_seconds":true,"report_query_quality":true,"report_actual_bytes":true},
+ "boundaries":["Synthetic linear regression only","Random frozen U, not pretrained model","Aligned teacher tasks are generated from the tested Givens family","No natural multi-task learning claim"]
+}
