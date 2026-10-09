@@ -120,7 +120,7 @@ def run(seed,model_dir,out):
   rows.append(dict(seed=seed,method=label,rank=rank,payload_bytes=payload,total_deployment_bytes=base_bytes+payload,
                    common_base_bytes=base_bytes,extra_compute_proxy=ops,support_examples=128,
                    support_forward_calls=support['forward_calls'],support_input_tokens=support['input_tokens'],
-                   extraction_seconds=extract_s,inference_seconds=inference_s,metrics=metrics,
+                   extraction_seconds=extract_s,composition_build_seconds=compose_s,inference_seconds=inference_s,metrics=metrics,
                    composed_vector_norms=np.linalg.norm(method_vectors,axis=1).tolist(),
                    native_alias=False))
  for r in RANKS:
