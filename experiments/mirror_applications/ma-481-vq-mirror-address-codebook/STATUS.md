@@ -6,13 +6,13 @@
 - Protocol freeze: `2f9d8213`
 - Development complete: yes
 - Fresh/audit opened: yes, after protocol freeze
-- Results committed: pending
-- Verification committed: pending
+- Results committed: yes (`c5486cfe`)
+- Verification committed: yes (`c5486cfe`)
 - Registry row updated: yes (branch tip)
 
 ## Next action
 
-Run integrity checks, record the claim, and push the dedicated branch.
+MA-481 is complete; continue with MA-482 on a dedicated branch.
 
 ## Limitations
 
