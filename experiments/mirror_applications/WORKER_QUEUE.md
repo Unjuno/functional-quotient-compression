@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-320.** MA-307 showed an aligned synthetic allocation delay versus PackNet-style private storage; robust generic shared-basis fitting was close, and the teacher supplied Mirror latent codes. Continue to MA-320, Tucker logical experts.
+**Current operational pointer (2026-10-09): MA-322.** MA-307 showed an aligned synthetic allocation delay versus PackNet-style private storage; robust generic shared-basis fitting was close, and the teacher supplied Mirror latent codes. Continue to MA-322, TT-core Mirror adapter bank.
 
 # Worker queue
 

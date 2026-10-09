@@ -1,19 +1,96 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
-  "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+  "experiment_id": "MA-320",
+  "decision": "PROMISING narrowly for Givens-aligned logical experts; independent experts require free Tucker coefficients",
+  "protocol_commit": "bf10ab7f",
+  "fresh_worlds": [
+    32010,
+    32011,
+    32012
+  ],
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "fresh_rows": 72,
+  "strata": {
+    "aligned": {
+      "generic_pca_experts": {
+        "expert_matrix_nrmse": 0.00035201440267782245,
+        "routed_output_nrmse": 0.00035176637013339333,
+        "payload_bytes": 4867.0,
+        "fit_seconds": 0.000323768111734858,
+        "one_time_materialization_macs": 262144.0
+      },
+      "independent_full_experts": {
+        "expert_matrix_nrmse": 0.0002071873799044018,
+        "routed_output_nrmse": 0.0002073893184489053,
+        "payload_bytes": 65688.0,
+        "fit_seconds": 0.0,
+        "one_time_materialization_macs": 0.0
+      },
+      "mirror_expert_views": {
+        "expert_matrix_nrmse": 0.0004946779291559425,
+        "routed_output_nrmse": 0.0004947962491617849,
+        "payload_bytes": 4555.0,
+        "fit_seconds": 0.004049464780513922,
+        "one_time_materialization_macs": 262144.0
+      },
+      "tucker_free_experts": {
+        "expert_matrix_nrmse": 0.00029601539588636823,
+        "routed_output_nrmse": 0.0002967573042648534,
+        "payload_bytes": 6313.0,
+        "fit_seconds": 0.0,
+        "one_time_materialization_macs": 262144.0
+      }
+    },
+    "independent": {
+      "generic_pca_experts": {
+        "expert_matrix_nrmse": 0.8095014558898078,
+        "routed_output_nrmse": 0.8107809159490798,
+        "payload_bytes": 4867.0,
+        "fit_seconds": 0.0003285538890243818,
+        "one_time_materialization_macs": 262144.0
+      },
+      "independent_full_experts": {
+        "expert_matrix_nrmse": 0.00020785369916767295,
+        "routed_output_nrmse": 0.00020816103076665767,
+        "payload_bytes": 65688.0,
+        "fit_seconds": 0.0,
+        "one_time_materialization_macs": 0.0
+      },
+      "mirror_expert_views": {
+        "expert_matrix_nrmse": 1.0378472871250577,
+        "routed_output_nrmse": 1.0369600454966228,
+        "payload_bytes": 4555.0,
+        "fit_seconds": 0.003852139553701919,
+        "one_time_materialization_macs": 262144.0
+      },
+      "tucker_free_experts": {
+        "expert_matrix_nrmse": 0.00029290112110579177,
+        "routed_output_nrmse": 0.00029273910978291597,
+        "payload_bytes": 6313.0,
+        "fit_seconds": 0.0,
+        "one_time_materialization_macs": 262144.0
+      }
+    }
   },
-  "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
-  },
-  "metric_replay": {
-    "checked": false,
-    "max_difference": null
-  },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "facts": [
+    "Aligned 128-expert bank: Mirror 4,555 B / routed NRMSE 4.95e-4; free Tucker 6,313 B / 2.97e-4 (~28% bytes saved); generic PCA 4,867 B / 3.52e-4.",
+    "All methods pay shared matrix bank and fixed dispatch metadata. Mirror is ~6.4% smaller than generic PCA but has slightly higher error; fit wall time ~4.0 ms vs PCA ~0.32 ms.",
+    "Expert forward is 256 MAC/token after materialization; Tucker/Mirror/PCA each use 262,144 one-time materialization MACs for all experts.",
+    "Independent coefficients: free Tucker NRMSE 2.93e-4; Mirror 1.037 and PCA 0.810."
+  ],
+  "interpretation": "A Givens code can increase logical expert multiplicity over a shared Tucker bank and improve the storage-quality frontier against free Tucker coefficients in this aligned toy. Generic PCA occupies a nearby Pareto point; the result is not general MoE evidence. Independent expert functions need private coefficients.",
+  "hypothesis": "Supported narrowly as aligned representation feasibility with a distinct storage-quality Pareto point; broad or natural MoE capacity is not established.",
+  "counter_hypothesis": "Teacher coefficients are directly generated from the same Givens orbit, and generic PCA is nearly as compact/more accurate. A stronger nonlinear coefficient control could close the gap.",
+  "limitations": [
+    "Synthetic linear experts, D=16",
+    "Fixed router is a deterministic balanced hash, not learned",
+    "Aligned coefficients generated from Mirror orbit",
+    "No LM/MoE training or route/task accuracy",
+    "One-time materialization cost counted analytically; no inference-latency benchmark"
+  ],
+  "fresh_data_used_for_tuning": false,
+  "source_sha256": "5c7f0ea6fb41f6b03b68cff37fb29c1ddbeb45088325a83998a549ca89b57da0"
 }
