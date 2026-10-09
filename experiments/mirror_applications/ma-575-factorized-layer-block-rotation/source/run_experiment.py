@@ -87,9 +87,13 @@ def run(seed,split,model_dir,out):
     rng=np.random.default_rng(seed); bank=[new_code(rng) for _ in range(K)]
     # Precompute held-out/calibration reconstruction error for every factor pair per matrix and block.
     ec=np.empty((len(items),BLOCKS,K,K),np.float32); ea=np.empty_like(ec)
+    edc=np.empty((len(items),BLOCKS,K),np.float32); eda=np.empty_like(edc)
     for i,it in enumerate(items):
       for b in range(BLOCKS):
        wb=it['w'][:,b*GROUP:(b+1)*GROUP]
+       for q,c0 in enumerate(bank):
+        v0=fwht(wb)*(1/np.sqrt(GROUP)); v0=v0[:,c0[1]]*c0[0][None,:]; d0=quant_group(v0)
+        edc[i,b,q]=err(d0,v0,it['cal']); eda[i,b,q]=err(d0,v0,it['audit'])
        for a in range(K):
         for z in range(K):
          c=compose_codes(bank[a],bank[z]); v=fwht(wb)*(1/np.sqrt(GROUP)); v=v[:,c[1]]*c[0][None,:]
@@ -107,11 +111,11 @@ def run(seed,split,model_dir,out):
     fit_seconds=time.perf_counter()-t0
     lid[4:]=0
     # Independent upper and layer-shared controls choose from the same fixed candidate factors.
-    independent=np.argmin(ec,axis=(2,3)); layer_shared=np.zeros((len(items),BLOCKS),np.uint8)
+    independent=np.argmin(edc,axis=2); layer_shared=np.zeros((len(items),BLOCKS),np.uint8)
     for layer in LAYERS:
       ii=[i for i,x in enumerate(items) if x['layer']==layer]
       for b in range(BLOCKS):
-       c=min(range(K),key=lambda z:float(np.mean([ec[i,b,z,z] for i in ii])))
+       c=min(range(K),key=lambda z:float(np.mean([edc[i,b,z] for i in ii])))
        for i in ii: layer_shared[i,b]=c
     random_lid=np.random.default_rng(seed+7).integers(0,K,size=6,dtype=np.uint8); random_bid=np.random.default_rng(seed+9).integers(0,K,size=BLOCKS,dtype=np.uint8)
     # Independent and layer-shared states store selected exact per-block codes; factored state stores only bank+IDs.
