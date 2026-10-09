@@ -1,0 +1,20 @@
+{
+  "experiment_id": "MA-366",
+  "title": "Depth x expert factorized Mirror routing",
+  "status": "DEVELOPMENT_ONLY_PROTOCOL_DEVIATION_FRESH_INVALID",
+  "evidence_lane": "MECHANISM/STORAGE/ROUTING/QUALITY/COMPUTE",
+  "base_commit": "c935a90",
+  "hypothesis": "Factorized depth and expert coordinates recover held-out path compositions with fewer serialized bytes and routing MACs than flat path table and PA02 factorized routing while preserving function quality.",
+  "physical_object": "shared 16D-to-8D linear operator basis for four depth roles and four experts",
+  "mirror_coordinate": "pair of categorical depth and expert addresses",
+  "logical_multiplicity": "16 logical paths, each evaluated for distinctness and held-out composition quality",
+  "prior_art_refs": ["PA02", "PA49"],
+  "controls": ["flat 16-path operator table", "PA02-style factorized routing/operators", "factorized Mirror path code", "direct pair coefficients"],
+  "development": {"worlds_or_seeds": [36601,36602], "depths": 4, "experts": 4, "heldout_pairs": 4, "probes_per_path": 512, "selection_metric": "held-out nMSE, distinct paths, collisions/path entropy, actual bytes, routing MACs"},
+  "fresh": {"worlds_or_seeds": [36611,36612,36613], "locked_before_access": true, "open_only_if_development_passes": true, "deviation": "Runner was inadvertently run without --dev-only and generated fresh rows before gate evaluation. Those rows are disclosed, not analyzed or used; fresh evaluation is invalid and must be treated as exposed."},
+  "storage": {"authority": "actual deterministic ZIP/NPY inference payload after reload", "paid_objects": ["base operator", "depth and expert factor operators", "interaction basis", "all path maps in flat controls", "coordinates", "routing indices", "metadata"]},
+  "compute": {"optimizer_updates": 0, "report_examples": true, "report_routing_MACs": true, "report_operator_MACs": true, "report_wall_clock": true},
+  "success_gate": "Both dev seeds: held-out nMSE <=1e-6, all 16 paths distinct, >=10% smaller than PA02 and flat table, route MAC <= baseline; direct coefficients >=10% larger for Mirror-specific value.",
+  "failure_gate": "Direct control within 10%, quality fails, path diversity <16, or routing compute >1.1x baseline; fresh sealed.",
+  "boundaries": ["oracle synthetic linear path bank", "no learned router or Transformer", "path count is not expert capacity"]
+}
