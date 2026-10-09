@@ -23,7 +23,7 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-523 — function-vector residual private correction (P1; PA99)**
+**MA-523 — function-vector residual private correction (P1; PA99), deferred pending family redesign**
 
 Reason:
 - MA-470/471/473/475/476/478/481/482, MA-483, MA-484, MA-486, MA-487, MA-488, MA-492, MA-494, MA-498, MA-501, MA-502 and MA-516 are completed on dedicated branches and cross-linked in the claim ledger;
@@ -128,3 +128,6 @@ KG relation rotations (RotatE, TuckER, QuatE, PairRE), EXIF/device-aware ISPs (P
 
 
 **MA-522 FAIL (persistent session code):** at 8 turns, repeated ICL scored 42.19% versus 1.56% for explicit/PCA/PQ FV states. PCA/PQ combined state+context bytes were 23,118B/32,018B versus 14,957B repeated ICL; context tokens and CPU time decreased but utility and total-byte gates failed. **Next: MA-523 (P1).**
+
+
+**Function Vector family paused before MA-523:** MA-516–522 share the structural failure that explicit prompt-minus-query deltas do not execute the task; routing/compression/persistence do not repair it. MA-518 also had a separate factor-decoder defect. Resume only after a preregistered causal head-specific extraction passes direct-ICL and explicit-vector utility gates. See [redesign criteria](../../docs/phase2/FUNCTION_VECTOR_FAMILY_REDESIGN_2026-10-09.md). MA-523 remains UNTESTED.
