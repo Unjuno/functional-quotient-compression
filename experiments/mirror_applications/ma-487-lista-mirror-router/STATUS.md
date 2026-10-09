@@ -3,7 +3,7 @@
 - Status: FAIL
 - Branch: `research/ma-487-lista-mirror-router-20261009`
 - Base: `5071b10c`
-- Development LISTA trained; fresh worlds 48710-48712 × seeds 0-2 complete
+- Verification committed at `ffb65e44`. Development LISTA trained; fresh worlds 48710-48712 × seeds 0-2 complete
 
 H: Fixed-depth LISTA approximates OMP codes with lower inference work and practical stored state.
 
