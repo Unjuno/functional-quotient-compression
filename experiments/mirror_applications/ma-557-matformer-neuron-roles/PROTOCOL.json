@@ -1,0 +1,66 @@
+{
+  "experiment_id": "MA-557",
+  "title": "MatFormer FFN granularity and Mirror neuron roles",
+  "status": "DEVELOPMENT_ONLY_FAIL_MIRROR_SPECIFIC",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY/COMPUTE",
+  "base_commit": "7ede5c3e",
+  "hypothesis": "Granularity-specific Mirror neuron role codes recover width-specific FFN functions from shared nested neurons with fewer bytes than independent widths and better storage than ordinary gains.",
+  "physical_object": "one maximum-width 8-neuron FFN operator",
+  "mirror_coordinate": "width-specific diagonal neuron role gain",
+  "logical_multiplicity": "three nested widths 2,4,8",
+  "prior_art_refs": [
+    "PA107"
+  ],
+  "controls": [
+    "plain nested prefix",
+    "Mirror role gains",
+    "direct ordinary channel gains",
+    "independent per-width FFNs",
+    "native-tail width-specific neurons"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      55701,
+      55702
+    ],
+    "widths": [
+      2,
+      4,
+      8
+    ],
+    "input_dim": 8,
+    "output_dim": 8,
+    "probes_per_width": 512,
+    "selection_metric": "per-width nMSE, distinct outputs, actual serialized bytes"
+  },
+  "fresh": {
+    "worlds_or_seeds": [],
+    "locked_before_access": true,
+    "open_only_if_development_passes": false,
+    "reason": "Direct ordinary gain is an exact function-class and payload control."
+  },
+  "storage": {
+    "authority": "actual deterministic NPZ inference payload bytes",
+    "paid_objects": [
+      "shared maximum-width matrix",
+      "all role gains",
+      "tail neurons",
+      "independent width matrices",
+      "indices",
+      "metadata"
+    ]
+  },
+  "compute": {
+    "report_probes": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_time": true
+  },
+  "success_gate": "All widths nMSE <=1e-6; >=20% fewer bytes than independent widths; >=10% fewer bytes than direct gains.",
+  "failure_gate": "Direct gains match Mirror, or plain nested prefix already meets quality.",
+  "boundaries": [
+    "aligned synthetic FFN bank",
+    "no MatFormer training or language-model claim",
+    "fresh sealed on direct-control alias"
+  ]
+}
