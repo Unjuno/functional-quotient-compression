@@ -1,9 +1,25 @@
 {
   "experiment_id": "MA-517",
-  "commit": "pending final result commit",
-  "tests": {"command": "python experiments/mirror_applications/ma-517-function-vector-composition/tests/test_results.py", "passed": 4, "failed": 0},
-  "serialization": {"roundtrip_checked": true, "byte_exact": true, "note": "All 36 intervention payloads were reloaded; byte sizes and SHA-256 hashes match RESULTS_CORE.csv."},
-  "metric_replay": {"checked": true, "max_difference": 0.0, "note": "Result CSV replayed from fresh_runs.jsonl; all accuracies and task NLL values match."},
+  "commit": "49b358809d8cf2cf9c1b11921c983aca868c39d1",
+  "tests": {
+    "command": "python experiments/mirror_applications/ma-517-function-vector-composition/tests/test_results.py",
+    "passed": 4,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "note": "All 36 intervention payloads were reloaded; byte sizes and SHA-256 hashes match RESULTS_CORE.csv."
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0,
+    "note": "Result CSV replayed from fresh_runs.jsonl; all accuracies and task NLL values match."
+  },
   "fresh_split_integrity_checked": true,
-  "notes": ["Fresh IDs 51710-51712 and seeds 0-2 match frozen protocol.", "All methods were 0% exact accuracy; direct ICL gate failed, so composition quality is NOT ESTABLISHED.", "Model provenance is pinned to openai-community/gpt2 revision 607a30d783dfa663caf39e06633721c8d4cfcd7e; runtime payload bytes 550959861."]
+  "notes": [
+    "Fresh IDs 51710-51712 and seeds 0-2 match frozen protocol.",
+    "All methods were 0% exact accuracy; direct ICL gate failed, so composition quality is NOT ESTABLISHED.",
+    "Model provenance is pinned to openai-community/gpt2 revision 607a30d783dfa663caf39e06633721c8d4cfcd7e; runtime payload bytes 550959861."
+  ]
 }
