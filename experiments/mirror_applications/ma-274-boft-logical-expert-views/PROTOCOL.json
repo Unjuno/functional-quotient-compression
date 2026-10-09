@@ -1,0 +1,15 @@
+{
+  "experiment_id":"MA-274","title":"BOFT logical experts versus expert tying, gates and standard MoE","status":"SCREENING","base_commit":"e2303579","evidence_lane":"ROUTED_EXPERT_QUALITY/ACTUAL_BYTES/ACTIVE_COMPUTE","prior_art_refs":[21],
+  "hypothesis":"One shared physical linear expert plus compact task/expert butterfly Views can approximate routed specialized experts at materially lower payload bytes than untied MoE; generic gates and low-rank controls may explain any gain.",
+  "physical_object":"one shared 16×16 linear expert over fixed features","mirror_coordinate":"per-expert low-rank orthogonal/butterfly view code","logical_multiplicity":"four routed domain experts",
+  "model":{"input_dim":16,"feature_dim":16,"experts":4,"tasks":1},"task":{"train_examples":2048,"audit_examples":1024,"worlds":"fixed synthetic domain clusters"},
+  "controls":["standard untied MoE","hard tied single expert","tied expert plus IA3 diagonal gates","tied expert plus rank-one generic residual","tied expert plus one-plane Givens view","tied expert plus four-stage BOFT view","oracle independent expert upper"],
+  "development":{"worlds":[27400,27401],"seeds":[0,1,2],"allowed":"validate task, router, expert training, actual serialization and routed-vs-oracle metrics"},
+  "fresh":{"worlds":[27410,27411,27412],"seeds":[0,1,2],"locked_before_access":true},
+  "storage":{"authority":"actual serialized inference payload bytes including router, all expert states, view codes and metadata","paid_objects":["shared and private expert tensors","router","all addresses and schedules"]},
+  "compute":{"report_updates":true,"report_training_seconds":true,"report_routed_nrmse":true,"report_router_accuracy":true,"report_active_experts":true,"report_active_macs":true},
+  "success_gate":"At matched routed NRMSE <=0.05, BOFT logical experts use <=70% bytes of untied standard MoE and outperform the cheapest quality-matched Givens/gate/rank-one control by >=10% NRMSE.",
+  "failure_gate":"BOFT fails if routed NRMSE >0.10 or simple controls match within 5%; router accuracy <0.95 invalidates routed quality inference.",
+  "amendments":["Initial development exposed that the one-plane Givens view was not BOFT and that the task teacher was specifically aligned to that orbit. Added a true four-stage disjoint Givens butterfly bank and retained one-plane Givens as a simpler control before fresh access."],
+  "boundaries":["Synthetic fixed-feature regression only","Task identity is inferred by a separate shared router","No language model or natural MoE claim","Do not count logical combinations as capacity absent measured quality"]
+}
