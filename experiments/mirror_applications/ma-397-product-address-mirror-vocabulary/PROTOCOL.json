@@ -1,0 +1,80 @@
+{
+  "experiment_id": "MA-397",
+  "title": "Product-address vocabulary with collision-resolving Mirror codes",
+  "status": "PROTOCOL_FROZEN_BEFORE_DEVELOPMENT",
+  "base_commit": "9caa7a01",
+  "prior_art_refs": ["PA43", "PA58", "PA59"],
+  "hypothesis": "When a multiplicative quotient/remainder address maps two token IDs to each shared-table pair, one token-specific Givens angle can restore distinct logical embedding functions with lower complete payload than native two-coefficient product/hash embeddings and far below a full table.",
+  "physical_object": "Two fixed shared 32x16 component tables. A deterministic Cartesian product address space contains 1,024 pairs for 2,048 token IDs, so every address pair has exactly two token occupants.",
+  "mirror_coordinate": "One token-specific angle forms cos(theta_i)Q[a_i]+sin(theta_i)R[b_i], providing a compact continuous view that can separate tokens sharing the same product address.",
+  "logical_multiplicity": "2,048 token embeddings from 1,024 discrete product addresses plus one Mirror angle per token; each product address has two logical occupants.",
+  "prior_art_delta": "PA43 product keys create multiplicative discrete address spaces; PA58 adds token importance coefficients over shared hash components; PA59 uses complementary partitions. This experiment fixes a collision-heavy Cartesian address and tests whether one continuous Mirror coordinate resolves its two logical occupants more compactly than native two-coefficient importance values.",
+  "model": {
+    "vocabulary_size": 2048,
+    "subaddress_cardinality": [32, 32],
+    "component_dimension": 16,
+    "address_rule": "a_i=i mod 32; b_i=floor(i/32) mod 32; token i and i+1024 share a pair",
+    "updates": 4000,
+    "batch_size": 256,
+    "optimizer": "Adam",
+    "learning_rate": 0.01,
+    "development_seeds": [39701, 39702],
+    "fresh_seeds": [39711, 39712, 39713],
+    "methods": [
+      "independent full 2048x16 embedding upper control",
+      "pure product-address addition Q[a]+R[b]",
+      "product-address plus two unrestricted per-token importance coefficients",
+      "product-address plus one per-token Givens Mirror angle"
+    ]
+  },
+  "teacher": {
+    "tables": "Two fixed seeded random 32x16 component tables; all component values are paid in compositional payloads.",
+    "embedding": "Each token receives a seeded angle and teacher vector cos(theta_i)Q[a_i]+sin(theta_i)R[b_i]. Colliding token pairs receive independent angles.",
+    "task_quality": "One fixed seeded 16x16 decoder generates token classes. Report embedding NRMSE, decoder NLL/top-1, and collision-pair separation NRMSE comparing predicted versus teacher vector differences for i and i+1024.",
+    "collision_audit": "Verify 1,024 unique product addresses, exactly two occupants per address, and zero unique-address tokens."
+  },
+  "controls": [
+    "full independent embedding table",
+    "pure product-address shared addition",
+    "native unrestricted two-coefficient importance vector per token",
+    "one-angle Mirror collision-resolution coordinate"
+  ],
+  "development": {
+    "worlds_or_seeds": [39701, 39702],
+    "selection_metric": "Embedding NRMSE and collision-pair separation NRMSE are primary; decoder NLL/top-1, complete bytes, compute and runtime are secondary.",
+    "allowed_tuning": "No tuning planned. Addresses, tables, teacher, schedule and optimizer are fixed. Correctness-only fixes can rerun development before fresh access."
+  },
+  "fresh": {
+    "worlds_or_seeds": [39711, 39712, 39713],
+    "locked_before_access": true,
+    "open_gate": "Both development worlds: full and direct-coefficient NRMSE <=0.03; Mirror NRMSE <=0.03 and decoder NLL within .02 nat/top-1 within 1pp of direct coefficients; Mirror collision-pair separation NRMSE <=0.03; Mirror complete payload <=0.25x full table and <=0.80x direct coefficients; Mirror beats pure addition by >=0.05 embedding NRMSE and >=0.20 pair-separation NRMSE; address occupancy audit and exact payload replay pass. Otherwise fresh remains sealed.",
+    "fresh_success": "All three fresh worlds satisfy quality, collision separation, actual-byte, occupancy and replay gates."
+  },
+  "storage": {
+    "authority": "actual compressed NPZ inference payload bytes after reload",
+    "paid_objects": [
+      "full embedding table or both shared 32x16 component tables",
+      "every per-token direct coefficient pair or Mirror angle",
+      "fixed decoder",
+      "address dimensions/rule metadata and archive overhead"
+    ],
+    "deterministic_reconstruction": "Product addresses are exact arithmetic functions of token ID and dimensions; no index list is stored."
+  },
+  "compute": {
+    "report_component_lookups": true,
+    "report_composition_MAC_proxy": true,
+    "report_mirror_trigonometric_ops": true,
+    "report_decoder_MAC_proxy": true,
+    "report_training_tokens_and_updates": true,
+    "report_training_wall_time": true,
+    "report_inference_tokens_per_second": true
+  },
+  "success_gate": "All fresh worlds satisfy complete-payload, fidelity, collision-separation, native-coefficient and exact-replay criteria.",
+  "failure_gate": "Any development fidelity, collision distinction, bytes or replay gate fails.",
+  "boundaries": [
+    "deliberately collision-heavy synthetic product-address vocabulary; not a recommender or language-model result",
+    "teacher is aligned to the Mirror unit-circle orbit",
+    "all tokens collide by construction; no natural address-frequency distribution is tested",
+    "fixed updates do not establish near-convergence or capacity"
+  ]
+}
