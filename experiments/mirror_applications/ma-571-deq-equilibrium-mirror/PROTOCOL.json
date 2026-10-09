@@ -1,0 +1,60 @@
+{
+  "experiment_id": "MA-571",
+  "title": "Deep Equilibrium Mirror coordinate",
+  "status": "DEVELOPMENT_ONLY_FAIL",
+  "evidence_lane": "MECHANISM/STORAGE/STABILITY/COMPUTE",
+  "base_commit": "68dc82f2",
+  "hypothesis": "A compact coordinate inside a shared contractive equilibrium operator yields multiple stable fixed points with fewer bytes and comparable solver iterations versus direct task forcing and independent storage.",
+  "physical_object": "one shared two-dimensional contractive linear equilibrium map",
+  "mirror_coordinate": "task-specific angle selecting a fixed point on an orbit",
+  "logical_multiplicity": "eight stable task equilibria",
+  "prior_art_refs": [
+    "PA124"
+  ],
+  "controls": [
+    "hard-tied single equilibrium",
+    "Mirror task angle",
+    "direct two-basis coefficient/bias code",
+    "independent operator and equilibrium per task"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      57101,
+      57102
+    ],
+    "dimension": 2,
+    "tasks": 8,
+    "tolerance": 1e-06,
+    "max_iterations": 10000,
+    "selection_metric": "fixed-point nMSE, solver iterations, actual bytes, stability"
+  },
+  "fresh": {
+    "worlds_or_seeds": [],
+    "locked_before_access": true,
+    "open_only_if_development_passes": false,
+    "reason": "Direct coefficient basis is a matched specificity control."
+  },
+  "storage": {
+    "authority": "actual deterministic NPZ inference payload bytes",
+    "paid_objects": [
+      "shared operator",
+      "anchor state",
+      "task angle/code",
+      "direct bias coefficients",
+      "independent operators/fixed points",
+      "metadata"
+    ]
+  },
+  "compute": {
+    "report_fixed_point_iterations": true,
+    "report_operator_MACs": true,
+    "report_wall_time": true
+  },
+  "success_gate": "All tasks stable and nMSE <=1e-6; >=20% fewer bytes than independent; iterations within 10% of direct; >=10% fewer bytes than direct coefficient code.",
+  "failure_gate": "Direct coordinate matches Mirror, any task unstable, or quality fails.",
+  "boundaries": [
+    "linear affine DEQ only",
+    "no nonlinear DEQ training or implicit gradient claim",
+    "fresh sealed on direct alias"
+  ]
+}
