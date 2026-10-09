@@ -1,0 +1,64 @@
+{
+  "experiment_id": "MA-553",
+  "title": "Factorized task x layer FiLM Mirror code",
+  "status": "DEVELOPMENT_ONLY_FAIL",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY/COMPUTE",
+  "base_commit": "503f1b4f",
+  "hypothesis": "A task factor x layer factor Mirror coordinate recovers held-out FiLM affine states with lower bytes than independent pairs and improves the quality/byte frontier over ordinary factorization.",
+  "physical_object": "shared 32-channel representation with task/layer conditional FiLM",
+  "mirror_coordinate": "factorized task x layer affine coefficient code for gamma and beta",
+  "logical_multiplicity": "24 task-layer states; six held out from fitting",
+  "prior_art_refs": [
+    "PA106",
+    "PA118"
+  ],
+  "controls": [
+    "no modulation",
+    "independent FiLM per task-layer pair",
+    "rank-one direct coefficients",
+    "Mirror factorized coordinates",
+    "small HyperFormer-like MLP generator"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      55301,
+      55302
+    ],
+    "tasks": 6,
+    "layers": 4,
+    "channels": 32,
+    "train_pairs": 18,
+    "heldout_pairs": 6,
+    "probes_per_pair": 512,
+    "selection_metric": "heldout output nMSE, gamma/beta nMSE, actual serialized bytes"
+  },
+  "fresh": {
+    "worlds_or_seeds": [],
+    "locked_before_access": true,
+    "open_only_if_development_passes": false,
+    "reason": "Direct factorized coefficients provide an algebraically matched specificity control."
+  },
+  "storage": {
+    "authority": "actual deterministic NPZ inference payload bytes",
+    "paid_objects": [
+      "all affine coefficients",
+      "task/layer factors",
+      "generator weights/embeddings",
+      "indices",
+      "metadata"
+    ]
+  },
+  "compute": {
+    "report_probes": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true
+  },
+  "success_gate": "Heldout output nMSE <=1e-3; >=20% fewer bytes than independent table; >=10% byte advantage over direct factorization or generator at matched quality.",
+  "failure_gate": "Direct factorized coefficients match Mirror within 1% quality/bytes or heldout nMSE >1e-3.",
+  "boundaries": [
+    "oracle synthetic FiLM bank",
+    "no Transformer or natural-task claim",
+    "no fresh if specificity gate fails"
+  ]
+}
