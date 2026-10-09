@@ -23,7 +23,7 @@ Integration branch: `research/ma-470-mend-shared-mirror-edit-basis-reconciled-20
 
 ## Next candidate
 
-**MA-501 — LoReFT subspace + Mirror coordinate (P0)**
+**MA-502 — shared LoReFT basis + many Mirror task codes (P0)**
 
 **MA-494 PROMISING (scoped synthetic noisy-address robustness):** with 32 expert IDs at bit-flip p=.1, binary accuracy was .591, ECOC-11 .816, and 3x repetition .868. Payloads were 2,149B / 2,277B vs 1,957B binary, with noiseless accuracy 1.0. Repetition beats ECOC; no Mirror-specific advantage or task-level routing benefit is established. **Next: MA-498 (P0).**
 
@@ -227,3 +227,6 @@ KG relation rotations (RotatE, TuckER, QuatE, PairRE), EXIF/device-aware ISPs (P
 
 
 **MA-498 FAIL:** with 32 IDs and 8-bit codes under p=.1 bit flips, selected and random unique IDs both reached .667 accuracy (minimum distance 1) at 2,085B; binary IDs reached .595 at 1,957B. Distance regularization added no benefit over random codes.
+
+
+**MA-501 FAIL:** on synthetic frozen 64D representation vectors, FP16 LoReFT used 3,809B (21.1% dense) at NRMSE .0595, just above the .05 gate. VQ Mirror error ranged .466–.701; dense 18,025B was exact. A0 non-contiguous basis payloads are excluded; A1 stores rank-4 basis contiguously. Pretrained Transformer/task quality remains untested.
