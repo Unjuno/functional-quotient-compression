@@ -1,9 +1,9 @@
 # MA-356 status
 
 - Status: FAIL for Mirror-specific value; oracle factorized-code result
-- Branch: `research/ma-356-factorized-mirror-code-composition-20261008`
+- Branch: `research/ma-356-factorized-mirror-code-composition-20261009`
 - Base commit: `c935a90`
-- Last verified commit: `1e8ee4cc8f658db0bad89af743307cd3ae1fdd9e`
+- Last verified commit: `574959cd`
 - Development complete: yes
 - Fresh/audit opened: no; seeds 35611–35613 remain sealed
 - Results committed: yes

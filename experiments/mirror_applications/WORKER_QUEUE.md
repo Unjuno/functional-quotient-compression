@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-356.** MA-355 factorized an oracle additive 16×16 map bank at 5.1 KB, but direct two-index coefficients were only 12 B larger, below the preregistered Mirror margin; fresh stayed sealed after the development gate failed. Proceed to MA-356, product-key factorized Mirror code composition.
+**Current operational pointer (2026-10-09): MA-357.** MA-356 reconstructed an oracle bilinear 64-function bank with factorized codes, but ordinary direct coefficients were only 1 B larger, below the Mirror-specific gate; fresh stayed sealed. Proceed to MA-357, Hopfield reservoir for Mirror addresses.
 
 # Worker queue
 

@@ -1,7 +1,7 @@
 # MA-356 — Product-key factorized Mirror code composition
 
 Status: **FAIL for Mirror-specific value; narrow oracle factorized-code result**  
-Branch: `research/ma-356-factorized-mirror-code-composition-20261008`  
+Branch: `research/ma-356-factorized-mirror-code-composition-20261009`
 Base: `research/mirror-application-worker-ready-20261007` (`c935a90`)  
 Prior art: PA43 Product Key Memory.
 
