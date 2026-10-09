@@ -1,12 +1,12 @@
 # MA-261 status
 
-- Status: FAIL (development screen)
+- Status: FAIL (development screen; result replay verified)
 - Branch: `research/ma-261-rankone-mirror-experts-20261008`
 - Base commit: `f7f76de193063950d28b7834f337840b1e86f0ce`
 - Protocol frozen before development: yes
 - Fresh worlds opened: no
-- Results committed: pending
-- Verification committed: pending
+- Results committed: yes
+- Verification committed: yes
 
 ## Next action
 

@@ -1,8 +1,8 @@
 {
   "experiment_id": "MA-261",
-  "commit": null,
+  "commit": "pending",
   "tests": {
-    "command": "PYTHONPATH=.../ma-261-rankone-mirror-experts/source python -m pytest -q .../tests",
+    "command": "PYTHONDONTWRITEBYTECODE=1 python -m pytest -q -p no:cacheprovider experiments/mirror_applications/ma-261-rankone-mirror-experts/tests",
     "passed": 2,
     "failed": 0
   },
