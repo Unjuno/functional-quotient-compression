@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (209 completed; 421 UNTESTED; 0 SCREENING)
+- P0: **630** (209 completed; 420 UNTESTED; 1 SCREENING)
 - P1: **422** (13 completed; 409 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **163 FAIL, 14 NOT ESTABLISHED, 45 PROMISING, 933 UNTESTED, 0 SCREENING**
+- Current MA statuses: **163 FAIL, 14 NOT ESTABLISHED, 45 PROMISING, 932 UNTESTED, 1 SCREENING**
 - 47 baseline experiment directories remain present; 171 additional per-ID outcomes are linked to their dedicated research branches in `LIVE_BRANCH_RECONCILIATION.csv`.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This was the intake-time queue; current selection follows the live-branch reconciliation at the top of this board.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed at intake time; later live-branch outcomes are indexed above.
@@ -23,7 +23,7 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-MA-545 is a verified **FAIL** on `research/ma-545-fv-residual-moe-20261009`: few-shot route accuracy and oracle FV quality pass, and routed FVs improve gold likelihood, but shared-mean FV has higher held-out candidate accuracy in all five seeds at 8.27x lower fresh payload. MA-546 is a verified symmetry-audit PASS and capacity FAIL on `research/ma-546-representation-symmetry-20261009`: all compensated post-GELU views preserve Pythia outputs while uncompensated views alter them. The 16 addresses are gauge choices, not logical functions. MA-547 RoseLoRA versus Mirror edit locality is next.
+MA-545 is a verified **FAIL** on `research/ma-545-fv-residual-moe-20261009`: few-shot route accuracy and oracle FV quality pass, and routed FVs improve gold likelihood, but shared-mean FV has higher held-out candidate accuracy in all five seeds at 8.27x lower fresh payload. MA-546 is a verified symmetry-audit PASS and capacity FAIL on `research/ma-546-representation-symmetry-20261009`: all compensated post-GELU views preserve Pythia outputs while uncompensated views alter them. The 16 addresses are gauge choices, not logical functions. MA-547 RoseLoRA versus Mirror edit locality is now SCREENING on `research/ma-547-roselora-mirror-locality-20261009`.
 
 ## Active experiment
 

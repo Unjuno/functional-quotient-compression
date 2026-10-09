@@ -1,0 +1,97 @@
+{
+  "experiment_id": "MA-547",
+  "title": "Sparse weight edit versus routed hidden-space edit locality",
+  "status": "SCREENING",
+  "evidence_lane": "KNOWLEDGE_EDIT/EDIT_EFFICACY/LOCALITY/ACTUAL_BYTES/COMPUTE",
+  "base_commit": "52a11e2f79b626865a78274bbbd5dd682d428c00",
+  "hypothesis": "For 16 synthetic counterfactual fact edits on pinned Pythia-70M, a key-routed residual-stream Mirror vector can achieve a +2 target-versus-old answer logit-margin shift with better held-out paraphrase transfer or locality than sparse RoseLoRA output-row edits at comparable actual bytes, and may justify its 512D state over a gated scalar-logit control.",
+  "physical_object": "Pinned frozen Pythia-70M shared base model and final-layernorm residual state.",
+  "mirror_coordinate": "One per-edit residual vector m_i selected by exact key-token router and added at the final normalized hidden state.",
+  "logical_multiplicity": "16 counterfactual key/value edits; edit count is task coverage, not independent capacity.",
+  "prior_art_refs": [
+    "PA96",
+    "PA104"
+  ],
+  "controls": [
+    "No edit / frozen Pythia",
+    "Key-routed Mirror residual vector (one 512D m_i per edit)",
+    "Unconditional sparse RoseLoRA rank-one output-row edit, fit on support hidden states",
+    "Same-key-gated sparse output-row edit control (router charged identically)",
+    "Same-key-gated scalar logit-bias control (cheapest direct functional control)"
+  ],
+  "artifacts": {
+    "model_revision": "e93a9faa9c77e5d09219f6c868bfc7a1bd65593c",
+    "model_sha256": "3da388330e4549156d76b58d6d268c63cd005e9336b4f4d2d378421e7b7a33fd",
+    "config_sha256": "002050231a9b1ec3ac77aa6b9b3bbdc4d923f4068a7dd33b8da72a9bd9a43",
+    "tokenizer_sha256": "c24618a1b3e6a38167beff1c72cffd126c3a66254347304b50547d12c5f25624"
+  },
+  "task": {
+    "definition": "Synthetic counterfactual key/value relabelings using unique key strings and one-token old/new answer IDs sampled from ordinary tokenizer vocabulary; no semantic factual-knowledge claim.",
+    "edits_per_world": 16,
+    "support_paraphrases_per_edit": 4,
+    "heldout_paraphrases_per_edit": 4,
+    "locality_queries": "All held-out paraphrases for the other 15 keys, evaluated separately for each edit intervention.",
+    "primary_metric": "heldout edit success rate (new-token logit > old-token logit) and edit margin gain",
+    "secondary_metrics": [
+      "support-to-heldout margin transfer",
+      "non-target mean/max KL",
+      "non-target old-answer retention",
+      "router exact-key accuracy",
+      "actual serialized payload bytes",
+      "active compute proxy and stage wall times"
+    ]
+  },
+  "edit_rule": {
+    "key": "slot-00 through slot-15, tokenized and matched as exact subsequences in the prompt; store padded key token IDs, lengths and edit indices.",
+    "answers": "Per seed, sample 32 distinct ordinary token IDs; pair into old/new labels for 16 edits. Score the two answer-token logits only.",
+    "target_margin_gain": 2.0,
+    "mirror_vector": "At final-layernorm hidden h, m_i=2*(W_new-W_old)/||W_new-W_old||^2, so linear unembedding raises target-minus-old margin by exactly 2 when routed.",
+    "roselora": "From mean support final hidden hbar, update only the new-answer output row by deltaW=2*hbar/||hbar||^2. This is rank-one sparse-row weight editing; evaluate globally and with the same exact key gate.",
+    "native_bias": "Add +2.0 to the new-answer logit only when the exact key router fires; same key metadata is charged."
+  },
+  "development": {
+    "seeds": [
+      54701,
+      54702
+    ],
+    "selection_metric": "No tuning; test fixed analytic edit construction."
+  },
+  "fresh": {
+    "seeds": [
+      54711,
+      54712,
+      54713
+    ],
+    "locked_before_access": true,
+    "opened": false,
+    "opening_rule": "Open after implementation and development outcomes are committed; no tuning choices are permitted."
+  },
+  "storage": {
+    "authority": "Actual uncompressed NPZ inference payload bytes.",
+    "paid_objects": [
+      "base model files for standalone deployment",
+      "all Mirror residual vectors",
+      "all sparse RoseLoRA output-row factors/indices",
+      "all gated scalar biases and answer IDs",
+      "key token sequences, lengths, edit indices and schema",
+      "model/task metadata and deterministic edit seed"
+    ],
+    "reporting": "Report exact NPZ sizes for each edit system, incremental state and standalone Pythia total. No support text is required at inference and is not charged as state."
+  },
+  "compute": {
+    "hardware": "CPU, fixed five-thread limit.",
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": false,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true,
+    "active_compute_proxy": "Report support/query model forwards, one 512D vector add, sparse output-row dot products, key-token comparisons, scalar bias operations, scored prompts/tokens and all stage timings."
+  },
+  "success_gate": "Both dev seeds and all three fresh seeds: Mirror held-out edit success >=.75 and mean margin gain >=1.5; non-target mean KL <=.01; and at the measured quality/locality point Mirror improves over both same-router RoseLoRA and gated scalar bias on a byte/quality Pareto dimension. Fresh stays locked until dev thresholds and provenance pass.",
+  "failure_gate": "Mirror misses efficacy or locality in any fresh world, or the same-key gated bias/RoseLoRA control matches or dominates its edit/locality outcome at lower or equal actual bytes.",
+  "boundaries": [
+    "This is a synthetic counterfactual edit mechanism screen, not evidence of real-world factual knowledge editing.",
+    "One Pythia-70M checkpoint and one final-hidden/logit interface.",
+    "Keys are explicit and deterministic; routing generalization to fuzzy aliases is untested.",
+    "No claim of independent function capacity from 16 edits."
+  ]
+}
