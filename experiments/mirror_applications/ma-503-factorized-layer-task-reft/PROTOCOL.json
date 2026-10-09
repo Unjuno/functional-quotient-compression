@@ -1,0 +1,71 @@
+{
+  "experiment_id": "MA-503",
+  "title": "Factorized layer x task representation code",
+  "status": "FROZEN_SCREENING",
+  "base_commit": "49e86eb0",
+  "evidence_lane": "MECHANISM/STORAGE/RUNTIME",
+  "hypothesis": "A per-layer two-angle Mirror View applied to a per-task code recovers held-out layer-task interventions with lower actual serialized bytes than independent pair codes, while matching generic layer-matrix x task-code factorization.",
+  "physical_object": "Shared fixed synthetic 64x4 orthonormal intervention basis",
+  "mirror_coordinate": "Per-layer Givens angles on planes (0,1) and (2,3), composed with a per-task rank-4 code",
+  "logical_multiplicity": "8 layers x 32 task interventions; held-out layer-task combinations",
+  "prior_art_refs": [96],
+  "controls": [
+    "Independent full 64D intervention table",
+    "Direct LoReFT basis plus per-layer-task rank-4 coefficient table",
+    "One shared LoReFT task code reused across layers",
+    "Generic full 4x4 layer matrix x rank-4 task code",
+    "Mirror Givens layer View x rank-4 task code"
+  ],
+  "task": {
+    "type": "synthetic frozen representation intervention bank",
+    "layers": 8,
+    "tasks": 32,
+    "hidden_dim": 64,
+    "shared_rank": 4,
+    "target": "c[l,t] = R(theta_l) z[t] + rho*e[l,t]; y[l,t] = B c[l,t]",
+    "rho_values": [0.0, 0.1],
+    "holdout": "Deterministic 20% layer-task pairs; every layer and task appears in training",
+    "metrics": [
+      "held-out NRMSE",
+      "observed-pair NRMSE",
+      "actual serialized payload bytes",
+      "bytes per logical task",
+      "fit and decode wall time",
+      "application MAC proxy"
+    ]
+  },
+  "development": {
+    "worlds": [50300, 50301],
+    "seeds": [0, 1, 2],
+    "allowed": "Select common optimizer steps from {400,800,1200}; no other architecture or hyperparameter selection."
+  },
+  "fresh": {
+    "worlds": [50320, 50321, 50322],
+    "seeds": [0, 1, 2],
+    "locked_before_access": true,
+    "tuning_prohibited": true
+  },
+  "storage": {
+    "authority": "actual torch-serialized inference payload bytes",
+    "paid_objects": [
+      "shared 64x4 basis",
+      "layer View angles or layer matrices",
+      "per-task codes",
+      "per-pair coefficients or dense interventions",
+      "method metadata"
+    ]
+  },
+  "compute": {
+    "report_optimizer_steps": true,
+    "report_fit_wall_clock": true,
+    "report_decode_wall_clock": true,
+    "report_application_mac_proxy": true
+  },
+  "success_gate": "At rho=0, every fresh world has held-out NRMSE <=0.05, Mirror actual bytes <=80% of direct LoReFT coefficient-table bytes, and Mirror lies on a useful quality/byte Pareto point against shared-task tying and generic full-matrix factorization.",
+  "failure_gate": "Held-out quality or byte gate fails, or a simpler control matches quality at equal/fewer actual bytes.",
+  "boundaries": [
+    "Synthetic frozen representation screen only; shared basis is known by construction.",
+    "rho=0.1 maps private-residual need and is not a required pass condition.",
+    "No pretrained Transformer, language, capacity, or independent-capacity claim."
+  ]
+}
