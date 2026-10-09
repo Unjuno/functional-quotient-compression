@@ -6,9 +6,9 @@
 - Protocol frozen: `3d711bfe`; A1 amendment documented before A1 fresh rerun
 - Development complete: yes
 - Fresh/audit opened: yes (A1 worlds 48220-48222; A0 excluded)
-- Results committed: pending
-- Verification committed: pending
-- Registry row updated: pending
+- Results committed: yes (`cac6f3a8`)
+- Verification committed: yes
+- Registry row updated: yes
 
 ## Decision
 
