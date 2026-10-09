@@ -4,7 +4,7 @@
 - Branch: `research/ma-521-function-vector-demo-code-extraction-20261009`
 - Model: pinned GPT-2 revision `607a30d783dfa663caf39e06633721c8d4cfcd7e`, CPU float32
 - Fresh: 52110–52112 × seeds 0–2; 9 banks; 36 rows
-- Tests: 2 passed; payload hashes/sizes verified
+- Result commit: `04de540c`; tests: 2 passed; payload hashes/sizes verified
 
 ## H / T / D / C / U
 
