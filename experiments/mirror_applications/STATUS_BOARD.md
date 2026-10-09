@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (101 completed; 529 UNTESTED)
+- P0: **630** (102 completed; 528 UNTESTED)
 - P1: **422** (15 completed; 407 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1037 UNTESTED, 46 PROMISING, 72 FAIL**
+- Current MA statuses: **1036 UNTESTED, 46 PROMISING, 73 FAIL**
 - 68 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -341,3 +341,13 @@ KG relation rotations (RotatE, TuckER, QuatE, PairRE), EXIF/device-aware ISPs (P
 
 - **FAIL at development:** Mirror failed the registered narrow-width improvement over US-Net, tied the scalar gate at 4,179B, used 5.6% more nominal MACs than US-Net and took about 1.4× its training time. One seed missed the independent-width quality margin.
 - Two development worlds were replayed: all 10 payload hashes/bytes and non-timing metrics matched; only wall/throughput calibration varied. Three tests pass. Fresh stayed sealed; synthetic nested-width MLP only.
+
+
+## Completed: MA-368 — Factorized width × depth Mirror code
+
+- **FAIL:** held-out NLL was worse than the plain shared supernet and byte-matched factorized scalar in both development seeds. Mirror used 12,645B versus 12,161B for the supernet; it matched the scalar control at 12,645B and trained about 1.4× slower than the supernet.
+- Both seeds were regenerated: all eight payload hashes/bytes and every configuration's quality/MAC metrics matched; three tests pass. Fresh remained sealed. Synthetic fixed-budget supernet screen only.
+
+## Paused family: post-output width/depth Mirror codes
+
+MA-367 and MA-368 consecutively failed for the same insertion limitation: a post-activation Givens correction did not recover width/depth truncation, while matched ordinary scalar controls captured the same or better behavior. Pause MA-369, MA-371 and MA-372 pending a redesign that inserts `m` within repeated blocks or changes the training objective; any continuation needs a new amendment/MA and matched ordinary control. See [family diagnostic](../../docs/phase2/MA367_368_SLIMMABLE_OUTPUT_CODE_FAMILY_DIAGNOSTIC.md).

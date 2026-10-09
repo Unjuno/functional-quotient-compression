@@ -1,6 +1,7 @@
 # MA-368 — Factorized width × depth Mirror code
 
 Status: FAIL; frozen development gate did not pass.
+Dedicated branch: `research/ma-368-factorized-width-depth-mirror-20261009`
 Evidence lane: QUALITY / STORAGE / COMPUTE / UNSEEN CONFIG GENERALIZATION
 Base commit: `research/ma-367-universally-slimmable-width-mirror-20261008`
 Doctrine: `docs/phase2/MIRROR_PARAMETER_INTEGRATION_DOCTRINE.md`

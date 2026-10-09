@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-368.** MA-367 failed the narrow-width quality and Mirror-specific byte gates; the width code matched ordinary scalar gating and added compute. Proceed to MA-368, factorized width × depth Mirror code (P0).
+**Current operational pointer (2026-10-09): MA-374.** MA-367/368 consecutively failed for the same post-output width/depth correction limitation; MA-369/371/372 are paused pending redesign. Proceed to MA-374, ALBERT shared layers with a Mirror depth coordinate (P0).
 
 # Worker queue
 
