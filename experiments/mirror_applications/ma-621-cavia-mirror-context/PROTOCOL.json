@@ -1,0 +1,20 @@
+{
+  "experiment_id": "MA-621",
+  "title": "CAVIA Mirror task context",
+  "status": "FROZEN_DEVELOPMENT_SCREEN",
+  "evidence_lane": "META_ADAPTATION/QUALITY/STORAGE/COMPUTE",
+  "base_commit": "10f2ad2f",
+  "hypothesis": "A one-coordinate Mirror task context adapts faster or uses fewer bytes than CAVIA's unconstrained context at matched held-out quality.",
+  "physical_object": "shared 8x8 rotation-orbit regression operator basis",
+  "mirror_coordinate": "one task angle adapted from support examples",
+  "logical_multiplicity": "16 task-specific logical operators",
+  "prior_art_refs": ["PA129"],
+  "controls": ["shared no-context model", "Mirror angle context", "CAVIA two-coefficient context", "direct one-dimensional angle context", "independent task matrices"],
+  "development": {"worlds_or_seeds": [62101,62102], "tasks": 16, "input_dim": 8, "output_dim": 8, "support_examples_per_task": 4, "query_examples_per_task": 256, "mirror_grid_points": 180, "selection_metric": "heldout nMSE, actual payload bytes, adaptation compute"},
+  "fresh": {"worlds_or_seeds": [], "locked_before_access": true, "open_only_if_development_passes": false, "reason": "Direct angle context is an exact specificity control."},
+  "storage": {"authority": "actual deterministic NPZ bytes", "paid_objects": ["shared bases", "per-task angle or context coefficients", "independent matrices", "metadata"]},
+  "compute": {"report_support_examples": true, "report_adaptation_evaluations": true, "report_active_compute_proxy": true, "report_wall_time": true},
+  "success_gate": "Mirror improves over no-context, beats CAVIA/direct context at matched bytes or compute, and uses <50% independent task bytes.",
+  "failure_gate": "Direct angle context aliases Mirror or Mirror misses held-out quality gate.",
+  "boundaries": ["aligned linear rotation tasks", "no meta-training or natural few-shot claim", "fresh sealed on direct alias"]
+}
