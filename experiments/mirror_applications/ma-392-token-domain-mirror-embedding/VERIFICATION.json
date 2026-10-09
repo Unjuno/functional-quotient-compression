@@ -1,11 +1,189 @@
 {
   "experiment_id": "MA-392",
-  "status": "PROTOCOL_FROZEN_PRE_DEVELOPMENT",
-  "protocol_commit": "pending",
+  "status": "FAIL_DEVELOPMENT_STORAGE_GATE",
+  "protocol_commit": "5c028efa",
+  "implementation_commit": "5bfc0b68",
   "result_commit": "pending",
-  "tests": {"command": "", "passed": 0, "failed": 0},
-  "split_integrity": {"checked": false, "held_out_pairs": 0, "train_pairs": 0},
-  "serialization": {"actual_bytes_measured": false, "roundtrip_checked": false},
-  "metric_replay": {"checked": false},
-  "fresh": {"worlds": [39211, 39212, 39213], "opened": false}
+  "tests": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 pytest -q -p no:cacheprovider experiments/mirror_applications/ma-392-token-domain-mirror-embedding/tests",
+    "passed": 4,
+    "failed": 0
+  },
+  "split_integrity": {
+    "checked": true,
+    "held_out_pairs_per_seed": {
+      "39201": 205,
+      "39202": 209
+    },
+    "train_pairs_per_seed": {
+      "39201": 819,
+      "39202": 815
+    }
+  },
+  "serialization": {
+    "actual_npz_payloads": 10,
+    "all_sizes_checked": true,
+    "all_sha256_checked": true,
+    "all_payloads_reloaded_before_scoring": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "maximum_delta": 0.0,
+    "tolerance": 1e-07
+  },
+  "fresh": {
+    "worlds": [
+      39211,
+      39212,
+      39213
+    ],
+    "opened": false,
+    "reason": "Mirror payload was 60.3-60.4% of dense transform payload, above the frozen <=50% gate."
+  },
+  "development_worlds": [
+    {
+      "seed": 39201,
+      "train_pairs": 819,
+      "heldout_pairs": 205,
+      "payloads": [
+        {
+          "method": "oracle",
+          "bytes": 63024,
+          "sha256": "a6bd7b2ce2c999b5f3bc9508746a5844d95efae238ba8c4d47ebc585a284c535",
+          "metrics": {
+            "observed_embedding_nrmse": 0.0,
+            "observed_decoder_nll": 2.468400001525879,
+            "observed_decoder_top1_accuracy": 1.0,
+            "heldout_embedding_nrmse": 0.0,
+            "heldout_decoder_nll": 2.4722907543182373,
+            "heldout_decoder_top1_accuracy": 1.0
+          }
+        },
+        {
+          "method": "shared",
+          "bytes": 9861,
+          "sha256": "c15177609f9e5661623a3e2aa7134de029ff51e67a0a16f2f7864983935a6671",
+          "metrics": {
+            "observed_embedding_nrmse": 0.4234631657600403,
+            "observed_decoder_nll": 2.497206211090088,
+            "observed_decoder_top1_accuracy": 0.6520146727561951,
+            "heldout_embedding_nrmse": 0.4217725396156311,
+            "heldout_decoder_nll": 2.4983389377593994,
+            "heldout_decoder_top1_accuracy": 0.6682927012443542
+          }
+        },
+        {
+          "method": "film",
+          "bytes": 11167,
+          "sha256": "9d7c7b5cd3878a703591cb94d4230484004e67c7a7fe6d947f80463f3461c0e7",
+          "metrics": {
+            "observed_embedding_nrmse": 0.3867284655570984,
+            "observed_decoder_nll": 2.5131094455718994,
+            "observed_decoder_top1_accuracy": 0.6715506911277771,
+            "heldout_embedding_nrmse": 0.39232492446899414,
+            "heldout_decoder_nll": 2.515403985977173,
+            "heldout_decoder_top1_accuracy": 0.6878048777580261
+          }
+        },
+        {
+          "method": "dense",
+          "bytes": 17047,
+          "sha256": "d9017b6308cf9f0cfff6fee717b5c7f9062d944eadb884f5c7c7d396937943f7",
+          "metrics": {
+            "observed_embedding_nrmse": 0.014264784753322601,
+            "observed_decoder_nll": 2.4684977531433105,
+            "observed_decoder_top1_accuracy": 0.9816849827766418,
+            "heldout_embedding_nrmse": 0.016180818900465965,
+            "heldout_decoder_nll": 2.472231388092041,
+            "heldout_decoder_top1_accuracy": 0.9853658676147461
+          }
+        },
+        {
+          "method": "mirror",
+          "bytes": 10291,
+          "sha256": "5eb57cd1bbbdad7a40067d7805eccf9be4a222015f32eb32fccf9b70d677e6ad",
+          "metrics": {
+            "observed_embedding_nrmse": 1.4519703483983903e-07,
+            "observed_decoder_nll": 2.468400001525879,
+            "observed_decoder_top1_accuracy": 1.0,
+            "heldout_embedding_nrmse": 1.4080245591685525e-07,
+            "heldout_decoder_nll": 2.4722907543182373,
+            "heldout_decoder_top1_accuracy": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "seed": 39202,
+      "train_pairs": 815,
+      "heldout_pairs": 209,
+      "payloads": [
+        {
+          "method": "oracle",
+          "bytes": 63083,
+          "sha256": "7fbed8f4e1da912e19a23f8089e2f991855a1bfd173055d6aed1631e3f28edbb",
+          "metrics": {
+            "observed_embedding_nrmse": 0.0,
+            "observed_decoder_nll": 2.497833490371704,
+            "observed_decoder_top1_accuracy": 1.0,
+            "heldout_embedding_nrmse": 0.0,
+            "heldout_decoder_nll": 2.496764659881592,
+            "heldout_decoder_top1_accuracy": 1.0
+          }
+        },
+        {
+          "method": "shared",
+          "bytes": 9846,
+          "sha256": "3cd238aca3f4bff6a6f67d0756bf5b53bb872c06a7e950129dd82a53b2e5d214",
+          "metrics": {
+            "observed_embedding_nrmse": 0.45283764600753784,
+            "observed_decoder_nll": 2.52933931350708,
+            "observed_decoder_top1_accuracy": 0.6466257572174072,
+            "heldout_embedding_nrmse": 0.4490510821342468,
+            "heldout_decoder_nll": 2.5337939262390137,
+            "heldout_decoder_top1_accuracy": 0.6267942786216736
+          }
+        },
+        {
+          "method": "film",
+          "bytes": 11150,
+          "sha256": "ac7365b413e53abd4a71d3d5f45f28b090f4ed12e4351a4619a32ddfd082e845",
+          "metrics": {
+            "observed_embedding_nrmse": 0.42070260643959045,
+            "observed_decoder_nll": 2.546063184738159,
+            "observed_decoder_top1_accuracy": 0.6552147269248962,
+            "heldout_embedding_nrmse": 0.42683976888656616,
+            "heldout_decoder_nll": 2.547888994216919,
+            "heldout_decoder_top1_accuracy": 0.6459330320358276
+          }
+        },
+        {
+          "method": "dense",
+          "bytes": 17041,
+          "sha256": "66ad6a43fbcb64a1b3e35472efc8a05a26ff75e8684e5b8b77378e4992972c46",
+          "metrics": {
+            "observed_embedding_nrmse": 0.013688120990991592,
+            "observed_decoder_nll": 2.4976041316986084,
+            "observed_decoder_top1_accuracy": 0.9840490818023682,
+            "heldout_embedding_nrmse": 0.014306632801890373,
+            "heldout_decoder_nll": 2.496809244155884,
+            "heldout_decoder_top1_accuracy": 1.0
+          }
+        },
+        {
+          "method": "mirror",
+          "bytes": 10275,
+          "sha256": "5c7b9d1d9e38f13969a342df043ac2d43ef55a2691edb9883df48b876b10d73a",
+          "metrics": {
+            "observed_embedding_nrmse": 3.203208009949776e-08,
+            "observed_decoder_nll": 2.497833490371704,
+            "observed_decoder_top1_accuracy": 1.0,
+            "heldout_embedding_nrmse": 3.332733200522853e-08,
+            "heldout_decoder_nll": 2.496764659881592,
+            "heldout_decoder_top1_accuracy": 1.0
+          }
+        }
+      ]
+    }
+  ]
 }

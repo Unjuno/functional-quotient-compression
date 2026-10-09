@@ -1,0 +1,76 @@
+{
+  "experiment_id": "MA-392",
+  "seed": 39202,
+  "condition": "development",
+  "train_pair_count": 815,
+  "heldout_pair_count": 209,
+  "payloads_checked": 5,
+  "all_exact": true,
+  "payloads": [
+    {
+      "method": "oracle",
+      "bytes": 63083,
+      "sha256": "7fbed8f4e1da912e19a23f8089e2f991855a1bfd173055d6aed1631e3f28edbb",
+      "metrics": {
+        "observed_embedding_nrmse": 0.0,
+        "observed_decoder_nll": 2.497833490371704,
+        "observed_decoder_top1_accuracy": 1.0,
+        "heldout_embedding_nrmse": 0.0,
+        "heldout_decoder_nll": 2.496764659881592,
+        "heldout_decoder_top1_accuracy": 1.0
+      }
+    },
+    {
+      "method": "shared",
+      "bytes": 9846,
+      "sha256": "3cd238aca3f4bff6a6f67d0756bf5b53bb872c06a7e950129dd82a53b2e5d214",
+      "metrics": {
+        "observed_embedding_nrmse": 0.45283764600753784,
+        "observed_decoder_nll": 2.52933931350708,
+        "observed_decoder_top1_accuracy": 0.6466257572174072,
+        "heldout_embedding_nrmse": 0.4490510821342468,
+        "heldout_decoder_nll": 2.5337939262390137,
+        "heldout_decoder_top1_accuracy": 0.6267942786216736
+      }
+    },
+    {
+      "method": "film",
+      "bytes": 11150,
+      "sha256": "ac7365b413e53abd4a71d3d5f45f28b090f4ed12e4351a4619a32ddfd082e845",
+      "metrics": {
+        "observed_embedding_nrmse": 0.42070260643959045,
+        "observed_decoder_nll": 2.546063184738159,
+        "observed_decoder_top1_accuracy": 0.6552147269248962,
+        "heldout_embedding_nrmse": 0.42683976888656616,
+        "heldout_decoder_nll": 2.547888994216919,
+        "heldout_decoder_top1_accuracy": 0.6459330320358276
+      }
+    },
+    {
+      "method": "dense",
+      "bytes": 17041,
+      "sha256": "66ad6a43fbcb64a1b3e35472efc8a05a26ff75e8684e5b8b77378e4992972c46",
+      "metrics": {
+        "observed_embedding_nrmse": 0.013688120990991592,
+        "observed_decoder_nll": 2.4976041316986084,
+        "observed_decoder_top1_accuracy": 0.9840490818023682,
+        "heldout_embedding_nrmse": 0.014306632801890373,
+        "heldout_decoder_nll": 2.496809244155884,
+        "heldout_decoder_top1_accuracy": 1.0
+      }
+    },
+    {
+      "method": "mirror",
+      "bytes": 10275,
+      "sha256": "5c7b9d1d9e38f13969a342df043ac2d43ef55a2691edb9883df48b876b10d73a",
+      "metrics": {
+        "observed_embedding_nrmse": 3.203208009949776e-08,
+        "observed_decoder_nll": 2.497833490371704,
+        "observed_decoder_top1_accuracy": 1.0,
+        "heldout_embedding_nrmse": 3.332733200522853e-08,
+        "heldout_decoder_nll": 2.496764659881592,
+        "heldout_decoder_top1_accuracy": 1.0
+      }
+    }
+  ]
+}
