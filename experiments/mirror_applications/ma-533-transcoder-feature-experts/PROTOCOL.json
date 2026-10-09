@@ -103,6 +103,10 @@
     {
       "id": "amendment-4",
       "before_final_result": "The previous control byte column incorrectly reused transcoder bytes for skip-only and rank-128 controls. Each method now has its own serialized safetensors state and method config; both incremental and standalone payload sizes/hashes are reported. The quality metrics and data split are unchanged."
+    },
+    {
+      "id": "amendment-5",
+      "before_final_result": "Compute rank-128 validation output using the exact factorized state stored in its serialized payload and report rank-control, skip-only, and native/transcoder inference wall times plus rank-control MACs."
     }
   ]
 }
