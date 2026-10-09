@@ -1,0 +1,54 @@
+{
+  "experiment_id": "MA-534",
+  "status": "FAIL",
+  "base_commit": "2386e1e03d8590d95590c2bce90a5373dece5bd3",
+  "frozen_protocol_sha256": "2666a771b2bdd9be1f8acef410010cfa13532f968cbdc73aa1e5d3792ef0d4b4",
+  "amendments": [
+    "IMPLEMENTATION_AMENDMENT_1.json",
+    "IMPLEMENTATION_AMENDMENT_2.json"
+  ],
+  "development_seeds": [
+    53401,
+    53402
+  ],
+  "fresh_seeds": {
+    "seeds": [
+      53411,
+      53412,
+      53413
+    ],
+    "opened": false,
+    "reason": "Frozen quality/storage/native-control gates failed."
+  },
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-534-transcoder-mirror-mlps/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "format": "uncompressed NPZ",
+    "actual_serialized_bytes_recorded": true,
+    "payload_sha256_inventory": "payload_hashes.json"
+  },
+  "metric_replay": {
+    "checked": true,
+    "seeds": [
+      53401,
+      53402
+    ],
+    "metrics_split_payload_bytes_exact": true,
+    "elapsed_times_exact": false,
+    "notes": "Timing naturally varied; keyed quality metrics, role splits, pool IDs, and serialized payload lengths matched development/replay exactly."
+  },
+  "gate_summary": {
+    "explicit_quality_tolerance_passed_both_seeds": true,
+    "payload_le_2x_explicit_passed": false,
+    "beats_pairwise_by_010_nats_both_seeds": false,
+    "beats_elementwise_gate_by_010_nats_both_seeds": false
+  },
+  "notes": [
+    "Only four of sixteen task roles are held out for evaluation (32 queries total). Task-role IDs are externally supplied.",
+    "This tests selected sparse feature residual functions, not independent trained dense experts or learned routing.",
+    "The two early implementation errors emitted no persisted candidate metrics and are retained in execution_log/attempts.jsonl."
+  ]
+}

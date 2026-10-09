@@ -1,6 +1,6 @@
 # MA-534 — Role-conditioned logical MLP views over a sparse transcoder
 
-Status: SCREENING. The frozen development run tests whether sixteen role-specific Givens coordinates can express useful, input-dependent layer-3 MLP residual functions using a shared selected 16-atom transcoder view.
+Status: FAIL. The frozen development run tested whether sixteen role-specific Givens coordinates can express useful, input-dependent layer-3 MLP residual functions using a shared selected 16-atom transcoder view.
 
 ## H — hypothesis
 
@@ -16,9 +16,21 @@ Controls: no intervention; explicit per-role mean delta; unmodulated selected-fe
 
 Protocol and amendment were committed before the first model run. Fresh seeds 53411–53413 stay sealed unless both development seeds pass every frozen gate.
 
+## T — execution
+
+Two pinned development seeds (53401, 53402); each seed re-trained the 2048-feature top-32 transcoder for 1000 updates and fit each role-code control for 500 updates on each of 16 roles. The four held-out task roles contributed 32 queries per seed. All six controls were evaluated. Replay reran both seeds from scratch; pool IDs, split manifests, actual payload bytes and every quality metric matched exactly. Total replay wall time was 84.17 s and 94.46 s; per-method evaluation times are in `results/seed_*/metrics.json`. The early implementation errors before persisted metrics are retained in `execution_log/attempts.jsonl`.
+
 ## D — decision
 
-Pending execution.
+**FAIL.** The candidate met explicit mean-bank quality tolerance on both seeds, but failed the actual-byte cap and both Mirror-attribution margins. Fresh seeds 53411–53413 stayed sealed under the frozen rule.
+
+## C — strongest counter-hypothesis
+
+The independent elementwise sparse gate and equal-size pairwise gains explain any benefit. Givens has no robust advantage over either: it is worse than pairwise on both seeds and is worse than elementwise on one seed, while its selected 16-atom basis makes the deployment payload larger than the explicit delta bank.
+
+## U — remaining limits
+
+No learned router, larger model, different layer, natural held-out task family, private residual, or independent dense expert upper was evaluated. Each held-out task has eight queries, so accuracy changes in increments of 1/32. The transcoder feature code's online decoder compute is not included in the reported active-compute proxy as a hardware FLOP measurement; the proxy counts its fixed matrix operations.
 
 ## C — strongest counter-hypothesis
 
