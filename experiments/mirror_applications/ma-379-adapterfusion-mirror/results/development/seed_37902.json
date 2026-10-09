@@ -1,0 +1,206 @@
+{
+  "experiment_id": "MA-379",
+  "condition": "development",
+  "seed": 37902,
+  "source_updates": 1200,
+  "fusion_updates_per_target": 400,
+  "batch_size": 64,
+  "learning_rate": 0.01,
+  "results": [
+    {
+      "method": "independent",
+      "serialized_bytes": 7607,
+      "payload_sha256": "78cb1f874287ea327bcba1641c7b0b9e67d8f4404099b65e7f118fd7f0483284",
+      "payload_path": "development_37902_independent.npz",
+      "source_train_nrmse": 1.3046197011590266e-07,
+      "source_validation_nrmse": 1.3013446675813611e-07,
+      "source_test_nrmse": 1.314070914304466e-07,
+      "fusion_train_nrmse_by_target": [
+        0.0008195466944016516,
+        0.0012327408185228705,
+        0.0003833280934486538,
+        0.0007301191217266023
+      ],
+      "fusion_train_nrmse": 0.0007914336820249446,
+      "fusion_validation_nrmse_by_target": [
+        0.0008136535761877894,
+        0.001334924134425819,
+        0.0004095827753189951,
+        0.0007548978901468217
+      ],
+      "fusion_validation_nrmse": 0.0008282645940198563,
+      "fusion_test_nrmse_by_target": [
+        0.00082564284093678,
+        0.001316846115514636,
+        0.0004087716806679964,
+        0.0007600482203997672
+      ],
+      "fusion_test_nrmse": 0.0008278272143797949,
+      "source_mac_proxy": 1024,
+      "target_fusion_mac_proxy": 1024,
+      "optimizer_updates": 1600,
+      "source_examples_seen": 614400,
+      "target_examples_seen": 102400,
+      "source_training_wall_s": 0.5235391369933495,
+      "fusion_training_wall_s": 0.18260837200796232,
+      "total_training_wall_s": 1.510874870000407,
+      "inference_examples_per_s": 1017246.4981606007
+    },
+    {
+      "method": "tied",
+      "serialized_bytes": 2630,
+      "payload_sha256": "fab563a5a8c0fd32c1708044adec27fa81a5f0f2a45caf575b8ac27000a4dfbe",
+      "payload_path": "development_37902_tied.npz",
+      "source_train_nrmse": 0.9065600633621216,
+      "source_validation_nrmse": 0.9071096777915955,
+      "source_test_nrmse": 0.9078294038772583,
+      "fusion_train_nrmse_by_target": [
+        0.713448703289032,
+        0.7438718676567078,
+        0.7423683404922485,
+        0.7234781384468079
+      ],
+      "fusion_train_nrmse": 0.730791762471199,
+      "fusion_validation_nrmse_by_target": [
+        0.6974825859069824,
+        0.7427231669425964,
+        0.7415875196456909,
+        0.7259647846221924
+      ],
+      "fusion_validation_nrmse": 0.7269395142793655,
+      "fusion_test_nrmse_by_target": [
+        0.7104641795158386,
+        0.7659443020820618,
+        0.7600001096725464,
+        0.7281184196472168
+      ],
+      "fusion_test_nrmse": 0.7411317527294159,
+      "source_mac_proxy": 128,
+      "target_fusion_mac_proxy": 1024,
+      "optimizer_updates": 1600,
+      "source_examples_seen": 614400,
+      "target_examples_seen": 102400,
+      "source_training_wall_s": 0.3970838660025038,
+      "fusion_training_wall_s": 0.18424706600490026,
+      "total_training_wall_s": 0.6117454539926257,
+      "inference_examples_per_s": 375945.43919604813
+    },
+    {
+      "method": "scalar",
+      "serialized_bytes": 4476,
+      "payload_sha256": "abb10e2695ceacc98b4ff0b750167ec01ef6b1ce223d3bb52088ff0a2695529c",
+      "payload_path": "development_37902_scalar.npz",
+      "source_train_nrmse": 0.8318904042243958,
+      "source_validation_nrmse": 0.8334327936172485,
+      "source_test_nrmse": 0.8328770399093628,
+      "fusion_train_nrmse_by_target": [
+        0.7327567338943481,
+        0.758152186870575,
+        0.7490091919898987,
+        0.7164899110794067
+      ],
+      "fusion_train_nrmse": 0.7391020059585571,
+      "fusion_validation_nrmse_by_target": [
+        0.7295450568199158,
+        0.7582430839538574,
+        0.7578954100608826,
+        0.7191776037216187
+      ],
+      "fusion_validation_nrmse": 0.7412152886390686,
+      "fusion_test_nrmse_by_target": [
+        0.7317125201225281,
+        0.7704950571060181,
+        0.7600618004798889,
+        0.7218793630599976
+      ],
+      "fusion_test_nrmse": 0.7460371851921082,
+      "source_mac_proxy": 136,
+      "target_fusion_mac_proxy": 1024,
+      "optimizer_updates": 1600,
+      "source_examples_seen": 614400,
+      "target_examples_seen": 102400,
+      "source_training_wall_s": 0.4413582710112678,
+      "fusion_training_wall_s": 0.18217527199885808,
+      "total_training_wall_s": 0.6343326679925667,
+      "inference_examples_per_s": 1264192.0722651458
+    },
+    {
+      "method": "coeff",
+      "serialized_bytes": 4970,
+      "payload_sha256": "bf68f90436cd41e73dcb087f34356dad06adfdee6ace46905901c4d22a662b57",
+      "payload_path": "development_37902_coeff.npz",
+      "source_train_nrmse": 1.8943690349715325e-07,
+      "source_validation_nrmse": 1.897681585205646e-07,
+      "source_test_nrmse": 1.918717202897824e-07,
+      "fusion_train_nrmse_by_target": [
+        0.0008195845875889063,
+        0.0012327516451478004,
+        0.00038333775592036545,
+        0.0007301147561520338
+      ],
+      "fusion_train_nrmse": 0.0007914471862022765,
+      "fusion_validation_nrmse_by_target": [
+        0.0008136800024658442,
+        0.0013349296059459448,
+        0.00040960131445899606,
+        0.000754891661927104
+      ],
+      "fusion_validation_nrmse": 0.0008282756461994722,
+      "fusion_test_nrmse_by_target": [
+        0.0008256730507127941,
+        0.0013168577570468187,
+        0.00040877217543311417,
+        0.0007600437966175377
+      ],
+      "fusion_test_nrmse": 0.0008278366949525662,
+      "source_mac_proxy": 768,
+      "target_fusion_mac_proxy": 1024,
+      "optimizer_updates": 1600,
+      "source_examples_seen": 614400,
+      "target_examples_seen": 102400,
+      "source_training_wall_s": 0.5669206059974385,
+      "fusion_training_wall_s": 0.17371368399471976,
+      "total_training_wall_s": 0.7520405030081747,
+      "inference_examples_per_s": 1025541.3941246608
+    },
+    {
+      "method": "mirror",
+      "serialized_bytes": 4642,
+      "payload_sha256": "5a01a114fd35976b7de36df2579b7e27360c5684de32bd8f598e1fbecda7679b",
+      "payload_path": "development_37902_mirror.npz",
+      "source_train_nrmse": 2.299149599593875e-07,
+      "source_validation_nrmse": 2.286696343389849e-07,
+      "source_test_nrmse": 2.3050675679314736e-07,
+      "fusion_train_nrmse_by_target": [
+        0.0008195448899641633,
+        0.001232748618349433,
+        0.00038333694101311266,
+        0.0007301243022084236
+      ],
+      "fusion_train_nrmse": 0.0007914386878837831,
+      "fusion_validation_nrmse_by_target": [
+        0.0008136624237522483,
+        0.001334923435933888,
+        0.0004096000920981169,
+        0.0007549043511971831
+      ],
+      "fusion_validation_nrmse": 0.0008282725757453591,
+      "fusion_test_nrmse_by_target": [
+        0.000825652910862118,
+        0.0013168497243896127,
+        0.0004087790148332715,
+        0.0007600539247505367
+      ],
+      "fusion_test_nrmse": 0.0008278338937088847,
+      "source_mac_proxy": 832,
+      "target_fusion_mac_proxy": 1024,
+      "optimizer_updates": 1600,
+      "source_examples_seen": 614400,
+      "target_examples_seen": 102400,
+      "source_training_wall_s": 1.4084417529957136,
+      "fusion_training_wall_s": 0.18072212200786453,
+      "total_training_wall_s": 1.6008153410075465,
+      "inference_examples_per_s": 1098554.503582297
+    }
+  ]
+}

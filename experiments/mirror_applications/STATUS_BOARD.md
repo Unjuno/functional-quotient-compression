@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (106 completed; 524 UNTESTED)
+- P0: **630** (107 completed; 523 UNTESTED)
 - P1: **422** (15 completed; 407 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1034 UNTESTED, 46 PROMISING, 75 FAIL**
+- Current MA statuses: **1033 UNTESTED, 46 PROMISING, 76 FAIL**
 - 68 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -368,3 +368,10 @@ An earlier same-ID branch (`ma-374-albert-shared-depth-mirror`) tested a differe
 - **FAIL (exploratory development evidence):** across seeds 37501/37502, path-specific Givens did not improve validation-to-independent-test ranking over plain supernet and scalar controls. Mean test NLL was 0.2463/0.3089 for Mirror versus 0.2366/0.3076 plain and 0.2320/0.2900 scalar. Payload was 8,737B, equal to scalar and 2.8% above plain (8,499B).
 - Both stored development runs were regenerated on integration; all payload byte counts, hashes, and loaded metrics replayed exactly; four tests pass. Fresh seeds were not opened after gate failure. Protocol and development result first appear in one commit, so no independent pre-development freeze is evidenced.
 - Next P0 candidate: MA-379 — Mirror-compressed AdapterFusion bank.
+
+
+## Completed: MA-379 — AdapterFusion source-adapter Mirror bank
+
+- **FAIL on frozen development storage gate:** Mirror target-fusion NRMSE matched independent adapters and unrestricted shared-basis coefficients (.00062/.00083), and beat scalar gates (.868/.746), but actual total payload was 4,634/4,642B (60.8%/61.0% of independent), above the <=60% requirement. Mirror used ~3.7% more bytes than scalar and ~6.7% fewer than generic coefficients.
+- Two development worlds; 10 serialized payloads replay byte/hash/source/fusion metrics; four tests pass. Fresh worlds stayed sealed after the total-payload gate miss. This is a deliberately aligned synthetic frozen-feature proxy, not a natural-language AdapterFusion result.
+- Next P0 candidate in the operational queue: MA-381 — LoRAHub over Mirror-compressed LoRA basis.

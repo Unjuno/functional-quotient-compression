@@ -1,10 +1,168 @@
 {
   "experiment_id": "MA-379",
-  "status": "PROTOCOL_FROZEN_PRE_DEVELOPMENT",
-  "base_commit": "446cd4f3",
-  "tests": {"command": "", "passed": 0, "failed": 0},
-  "serialization": {"actual_bytes_measured": false, "roundtrip_checked": false},
-  "metric_replay": {"checked": false},
-  "fresh_split_integrity_checked": false,
-  "notes": ["Fresh seed IDs are locked in the committed protocol and remain sealed until all development gates pass."]
+  "status": "FAIL_DEVELOPMENT_GATE",
+  "protocol_commit": "bfe4cca9",
+  "result_commit": "pending-result-commit",
+  "tests": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 pytest -q -p no:cacheprovider experiments/mirror_applications/ma-379-adapterfusion-mirror/tests",
+    "passed": 4,
+    "failed": 0
+  },
+  "serialization": {
+    "actual_npz_payloads": 10,
+    "all_sizes_checked": true,
+    "all_sha256_checked": true,
+    "all_reloaded": true
+  },
+  "metric_replay": {
+    "source_and_target_test_metrics_checked": true,
+    "max_absolute_delta": 0.0,
+    "tolerance": 1e-07
+  },
+  "fresh": {
+    "worlds": [
+      37911,
+      37912,
+      37913
+    ],
+    "opened": false,
+    "reason": "Frozen development total payload gate failed at 60.8% and 61.0% of independent-bank bytes; threshold was <=60%."
+  },
+  "notes": [
+    "Development rerun after separating source-bank and target-router MAC accounting; only corrected metrics are stored.",
+    "The teacher source bank is intentionally on the shared Givens orbit and is only an aligned synthetic feasibility screen.",
+    "Inference throughput is one single-batch CPU measurement and is descriptive, not a deployment claim."
+  ],
+  "payloads": [
+    {
+      "seed": 37901,
+      "method": "independent",
+      "bytes": 7617,
+      "sha256": "3643f743f1b7943a05926839fcfad525565faf163d0c6c05323b4d48aad0c65c",
+      "source_test_nrmse": 1.397593649699047e-07,
+      "fusion_test_nrmse_by_target": [
+        0.0007785095949657261,
+        0.0005686094518750906,
+        0.00042434598435647786,
+        0.0006990916444920003
+      ]
+    },
+    {
+      "seed": 37901,
+      "method": "tied",
+      "bytes": 2630,
+      "sha256": "3a8da8a9bc11bc214288868112e1502924542de8181b5cb7e13e4776c2c4ae98",
+      "source_test_nrmse": 0.9502041935920715,
+      "fusion_test_nrmse_by_target": [
+        0.8449419736862183,
+        0.8530028462409973,
+        0.826464831829071,
+        0.868577778339386
+      ]
+    },
+    {
+      "seed": 37901,
+      "method": "scalar",
+      "bytes": 4473,
+      "sha256": "dc1125bb2c2f0b1032b5d8d51ae39ee7aa5f4f32e9a07e19ed13c45efaa2e865",
+      "source_test_nrmse": 0.8107101321220398,
+      "fusion_test_nrmse_by_target": [
+        0.8759971857070923,
+        0.8799198865890503,
+        0.8828073740005493,
+        0.8322075605392456
+      ]
+    },
+    {
+      "seed": 37901,
+      "method": "coeff",
+      "bytes": 4977,
+      "sha256": "b6429bf9497ec39bfc85c42d9c734acfb157e86f5efbd8c204bdc9a98f9f4c2c",
+      "source_test_nrmse": 2.3339629251495353e-07,
+      "fusion_test_nrmse_by_target": [
+        0.0007785161142237484,
+        0.000568619929254055,
+        0.0004243362636771053,
+        0.000699093914590776
+      ]
+    },
+    {
+      "seed": 37901,
+      "method": "mirror",
+      "bytes": 4634,
+      "sha256": "1f2baef44d66bd70c837d4f97060c02d22e54852fdce604d0c3bc6c07681c1d1",
+      "source_test_nrmse": 2.259212266153554e-07,
+      "fusion_test_nrmse_by_target": [
+        0.0007785313064232469,
+        0.0005686242366209626,
+        0.0004243339062668383,
+        0.0006990887341089547
+      ]
+    },
+    {
+      "seed": 37902,
+      "method": "independent",
+      "bytes": 7607,
+      "sha256": "78cb1f874287ea327bcba1641c7b0b9e67d8f4404099b65e7f118fd7f0483284",
+      "source_test_nrmse": 1.314070914304466e-07,
+      "fusion_test_nrmse_by_target": [
+        0.00082564284093678,
+        0.001316846115514636,
+        0.0004087716806679964,
+        0.0007600482203997672
+      ]
+    },
+    {
+      "seed": 37902,
+      "method": "tied",
+      "bytes": 2630,
+      "sha256": "fab563a5a8c0fd32c1708044adec27fa81a5f0f2a45caf575b8ac27000a4dfbe",
+      "source_test_nrmse": 0.9078294038772583,
+      "fusion_test_nrmse_by_target": [
+        0.7104641795158386,
+        0.7659443020820618,
+        0.7600001096725464,
+        0.7281184196472168
+      ]
+    },
+    {
+      "seed": 37902,
+      "method": "scalar",
+      "bytes": 4476,
+      "sha256": "abb10e2695ceacc98b4ff0b750167ec01ef6b1ce223d3bb52088ff0a2695529c",
+      "source_test_nrmse": 0.8328770399093628,
+      "fusion_test_nrmse_by_target": [
+        0.7317125201225281,
+        0.7704950571060181,
+        0.7600618004798889,
+        0.7218793630599976
+      ]
+    },
+    {
+      "seed": 37902,
+      "method": "coeff",
+      "bytes": 4970,
+      "sha256": "bf68f90436cd41e73dcb087f34356dad06adfdee6ace46905901c4d22a662b57",
+      "source_test_nrmse": 1.918717202897824e-07,
+      "fusion_test_nrmse_by_target": [
+        0.0008256730507127941,
+        0.0013168577570468187,
+        0.00040877217543311417,
+        0.0007600437966175377
+      ]
+    },
+    {
+      "seed": 37902,
+      "method": "mirror",
+      "bytes": 4642,
+      "sha256": "5a01a114fd35976b7de36df2579b7e27360c5684de32bd8f598e1fbecda7679b",
+      "source_test_nrmse": 2.3050675679314736e-07,
+      "fusion_test_nrmse_by_target": [
+        0.000825652910862118,
+        0.0013168497243896127,
+        0.0004087790148332715,
+        0.0007600539247505367
+      ]
+    }
+  ]
 }

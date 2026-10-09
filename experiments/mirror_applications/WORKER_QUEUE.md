@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-379.** MA-375 failed its exploratory development rank/quality gate: Givens per one-shot path did not beat plain sharing or scalar control. Stored dev runs replayed; fresh remained sealed, and no independent pre-development freeze commit is evidenced. Proceed to MA-379, Mirror-compressed AdapterFusion bank (P0).
+**Current operational pointer (2026-10-09): MA-381.** MA-379 failed the frozen total-payload gate by about one percentage point: the aligned synthetic Mirror bank matched independent/generic-coefficient fusion quality at 60.8-61.0% of independent bytes, while scalar gates had much worse quality. Fresh remained sealed. Proceed to MA-381, LoRAHub over a Mirror-compressed LoRA basis (P0).
 
 # Worker queue
 
