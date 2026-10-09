@@ -12,7 +12,7 @@
 
 ## Next action
 
-Run frozen fresh seeds 54511, 54512 and 54513 without tuning; currently in progress.
+Run frozen fresh seeds 54511, 54512 and 54513 without tuning; 54511 complete; 54512 running, then 54513.
 
 ## Blockers
 
