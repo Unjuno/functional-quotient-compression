@@ -190,7 +190,7 @@ High-information P0:
 15. MA-550 — adaptive allocation between weight-space and activation-space Views (**FAIL for Mirror-specific attribution; synthetic mixed allocation passes; native sparse-bias + ReFT control exactly explains result**)
 16. MA-551 — FiLM-to-Mirror hierarchy (**FAIL; fused runtime gate miss and exact native Givens alias; family paused**)
 17. MA-573 — QuaRot Mirror coordinate sweep (**FAIL; no benefit over identity/SmoothQuant or single QuaRot; exact native sweep alias; fresh sealed**)
-18. MA-574 — SpinQuant codebook of learned rotations (**next P0**)
+18. MA-574 — SpinQuant codebook of learned rotations (**SCREENING; frozen; registered dev pending; fresh sealed**)
 
 ## KV-cache transformation research lane
 
