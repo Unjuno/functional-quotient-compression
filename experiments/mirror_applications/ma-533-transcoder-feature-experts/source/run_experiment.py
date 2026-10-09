@@ -13,6 +13,7 @@ from safetensors import safe_open
 from safetensors.torch import save_file
 from huggingface_hub import hf_hub_download, model_info
 from datasets import load_dataset
+from transcoder_ops import forward as transcoder_forward
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 MODEL='HuggingFaceTB/SmolLM2-135M'
@@ -70,11 +71,8 @@ def main():
  # Match EleutherAI/sparsify SparseCoder.forward: top-k encoder, decoder plus x @ W_skip.T.
  tc_t=time.perf_counter()
  with torch.inference_mode():
-  preact=x @ w['encoder.weight'].T + w['encoder.bias']
-  vals,idx=preact.topk(K,dim=-1); acts=vals.clamp_min(0)
-  decoded=(acts.unsqueeze(-1)*w['W_dec'][idx]).sum(dim=1)+w['b_dec']
+  yhat,acts,idx=transcoder_forward(x,w,K)
   skip=x @ w['W_skip'].T
-  yhat=decoded+skip
  transcoder_wall=time.perf_counter()-tc_t
  dense_t=time.perf_counter()
  with torch.inference_mode(): dense_pred=block(x)
@@ -86,17 +84,22 @@ def main():
  svd_t=time.perf_counter(); xm=xf.mean(0); ym=yf.mean(0); xc=xf-xm; yc=yf-ym
  cov=xc.T @ yc / max(1,len(xc)-1)
  u,s,vh=torch.linalg.svd(cov,full_matrices=False); rank=128
+ left=u[:,:rank]*s[:rank]; right=vh[:rank]; bias=ym-xm@left@right
  low=(xc@u[:,:rank])@torch.diag(s[:rank])@vh[:rank]+ym
  svd_wall=time.perf_counter()-svd_t
  def metrics(pred):
   err=(pred-y).square().sum(-1); den=y.square().sum(-1)+1e-12
   cos=torch.nn.functional.cosine_similarity(pred,y,dim=-1)
   return {'relative_mse':float(err.sum()/den.sum()),'mean_token_relative_mse':float((err/den).mean()),'mean_cosine':float(cos.mean()),'p50_token_relative_error':float((err/den).sqrt().median()),'p95_token_relative_error':float(torch.quantile((err/den).sqrt(),.95))}
- # serialize exact inference state tensors and config to measure bytes; do not charge runtime-only Python code.
+ # Serialize each method's exact inference state; charge its own code/state and config bytes.
  payload=out/'transcoder.safetensors'; save_file(w,str(payload))
+ skip_payload=out/'skip_only.safetensors'; save_file({'W_skip':w['W_skip']},str(skip_payload))
+ rank_payload=out/'rank128.safetensors'; save_file({'left':left.contiguous(),'right':right.contiguous(),'bias':bias.contiguous()},str(rank_payload))
  cfg=json.loads(Path(cfg_path).read_text()); (out/'config.json').write_text(json.dumps(cfg,sort_keys=True,separators=(',',':'))+'\n')
  cfg_bytes=(out/'config.json').stat().st_size; payload_bytes=payload.stat().st_size
- summary={'experiment_id':'MA-533','split':a.split,'seed':a.seed,'n_sequences':len(chunks),'tokens':int(len(chunks)*128),'activation_vectors':int(x.shape[0]),'fit_vectors':int(x_fit.shape[0]),'model':MODEL,'model_revision':model_rev,'model_repo_files':{},'transcoder_repo':TC,'transcoder_revision':TC_REV,'transcoder_sha256':sha(tc_path),'transcoder_file_bytes':payload_bytes,'config_bytes':cfg_bytes,'transcoder_incremental_bytes':payload_bytes+cfg_bytes,'base_model_bytes':None,'active_nonzeros_per_vector':int(K),'optimizer_updates':0,'data':'closji/wikitext__wikitext-2-raw-v1 train parquet, revision d575192455c5e98b8daed777574046264579cb09','input_tokens_sha256':hashlib.sha256(chunks.numpy().tobytes()).hexdigest(),'full_model_capture_wall_seconds':wall,'native_dense_mlp_wall_seconds':dense_layer_wall,'transcoder_encode_decode_wall_seconds':transcoder_wall,'rank128_svd_fit_wall_seconds':svd_wall,'compute_proxy':{'vectors':int(x.shape[0]),'transcoder_encoder_dense_macs':int(x.shape[0]*w['encoder.weight'].numel()),'transcoder_decoder_sparse_macs':int(x.shape[0]*K*x.shape[-1]),'transcoder_skip_macs':int(x.shape[0]*w['W_skip'].numel()),'native_mlp_linear_macs':int(x.shape[0]*sum(p.numel() for n,p in block.named_parameters() if n.endswith('weight')))},'methods':{'skip_only':metrics(skip),'transcoder_top128':metrics(yhat),'rank128_cross_covariance_svd':metrics(low)}}
+ (out/'skip_only.json').write_text('{"kind":"linear_skip","input_dim":576}\n'); (out/'rank128.json').write_text('{"kind":"rank128_affine","rank":128}\n')
+ skip_bytes=skip_payload.stat().st_size+(out/'skip_only.json').stat().st_size; rank_bytes=rank_payload.stat().st_size+(out/'rank128.json').stat().st_size
+ summary={'experiment_id':'MA-533','split':a.split,'seed':a.seed,'n_sequences':len(chunks),'tokens':int(len(chunks)*128),'activation_vectors':int(x.shape[0]),'fit_vectors':int(x_fit.shape[0]),'model':MODEL,'model_revision':model_rev,'model_repo_files':{},'transcoder_repo':TC,'transcoder_revision':TC_REV,'transcoder_sha256':sha(tc_path),'transcoder_file_bytes':payload_bytes,'transcoder_payload_sha256':sha(payload),'config_bytes':cfg_bytes,'transcoder_incremental_bytes':payload_bytes+cfg_bytes,'base_model_bytes':None,'active_nonzeros_per_vector':int(K),'optimizer_updates':0,'data':'closji/wikitext__wikitext-2-raw-v1 train parquet, revision d575192455c5e98b8daed777574046264579cb09','input_tokens_sha256':hashlib.sha256(chunks.numpy().tobytes()).hexdigest(),'full_model_capture_wall_seconds':wall,'native_dense_mlp_wall_seconds':dense_layer_wall,'transcoder_encode_decode_wall_seconds':transcoder_wall,'rank128_svd_fit_wall_seconds':svd_wall,'compute_proxy':{'vectors':int(x.shape[0]),'transcoder_encoder_dense_macs':int(x.shape[0]*w['encoder.weight'].numel()),'transcoder_decoder_sparse_macs':int(x.shape[0]*K*x.shape[-1]),'transcoder_skip_macs':int(x.shape[0]*w['W_skip'].numel()),'native_mlp_linear_macs':int(x.shape[0]*sum(p.numel() for n,p in block.named_parameters() if n.endswith('weight')))},'methods':{'skip_only':metrics(skip),'transcoder_top128':metrics(yhat),'rank128_cross_covariance_svd':metrics(low)}}
  # Hash revision manifests to enable exact provenance; actual model payload bytes are independently fetched and charged.
  from huggingface_hub import snapshot_download
  snap=snapshot_download(MODEL,revision=model_rev,allow_patterns=['*.safetensors','*.bin','*.json'])
