@@ -53,7 +53,7 @@ def quant_group(w):
 def unpack(p,s):
     h=(p>>4).astype(np.int8)-8; l=(p&15).astype(np.int8)-8
     q=np.stack((h,l),axis=-1).reshape(p.shape[0],WIDTH).astype(np.float32)
-    return (q.reshape(p.shape[0],BLOCKS,GROUP)*s.astype(np.float32)[...,None]).reshape(p.shape)
+    return (q.reshape(p.shape[0],BLOCKS,GROUP)*s.astype(np.float32)[...,None]).reshape(p.shape[0],WIDTH)
 
 def transform(w,codes):
     x=fwht(w.reshape(w.shape[0],BLOCKS,GROUP))*(1/np.sqrt(GROUP))
