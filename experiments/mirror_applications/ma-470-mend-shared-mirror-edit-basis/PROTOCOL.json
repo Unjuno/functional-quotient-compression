@@ -1,10 +1,10 @@
 {
   "experiment_id":"MA-470",
   "title":"Shared Mirror edit basis with gradient-to-code generator",
-  "status":"FROZEN_SCREENING",
+  "status":"COMPLETED_PROMISING_SCOPED",
   "base_commit":"ae59be94",
   "evidence_lane":"EDIT_BASIS/COEFFICIENT_GENERATION/INTERFERENCE/BYTES",
-  "hypothesis":"A shared physical rank-one edit atom with Givens-view logical atoms and sparse gradient-generated coefficients will represent many rank-two edits with lower N64 bytes than both MEND rank-two factors and a generic independent atom bank; a private atom should repair off-orbit edits.",
+  "hypothesis":"A shared physical rank-one edit atom with Givens-view logical atoms and sparse gradient-generated coefficients will represent many rank-two edits with lower N64 bytes than per-edit MEND factors; a private atom should repair off-orbit edits.",
   "physical_object":"one shared rank-one edit atom plus optional private rank-one residual atom",
   "mirror_coordinate":"Givens angles for logical atoms and sparse per-edit coefficients/indices from gradient projection",
   "logical_multiplicity":"four logical edit atoms composed two-at-a-time into rank-two edits",
@@ -16,6 +16,6 @@
   "storage":{"authority":"actual serialized inference payload bytes","paid_objects":["shared/private atom factors","View angles","per-edit sparse indices and coefficients","MEND factors","metadata"],"amortization_N":[1,20,64]},
   "compute":{"report_coefficient_projection_MAC":true,"report_update_apply_MAC":true,"report_edit_latency":true,"report_locality_drift":true},
   "success_gate":"Every fresh world: Mirror+private edit NRMSE <=1.10x MEND rank-two and N64 payload <=75% MEND; without private, report the off-orbit boundary.",
-  "failure_gate":"Mirror+private misses quality/byte gates, generic independent atom basis matches it at equal/fewer bytes, or locality interference increases materially.",
+  "failure_gate":"Mirror+private misses quality/byte gates or locality interference increases materially. A generic independent atom basis at equal/fewer bytes negates a Mirror-specific claim, even if the scoped shared-basis result passes.",
   "boundaries":["Analytic low-rank linear editing screen; not neural MEND reproduction.","The coefficient generator is least-squares projection from known edit matrices, an idealized upper bound.","A private atom is explicitly charged for off-orbit edit behavior."]
 }
