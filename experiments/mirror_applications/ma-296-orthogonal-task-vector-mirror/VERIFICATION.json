@@ -1,19 +1,59 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
-  "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+  "experiment_id": "MA-296",
+  "decision": "FAIL",
+  "scope": "synthetic linear task-vector retrieval only",
+  "protocol_commit": "eb49e0cc",
+  "fresh_worlds": [
+    29610,
+    29611,
+    29612
+  ],
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "facts": {
+    "fresh_rows": 45,
+    "means": {
+      "generic_orthogonal_basis": {
+        "query_nrmse": 1.7718806980661207e-06,
+        "payload_bytes": 16744.0,
+        "fit_seconds": 4.521344413256479e-05
+      },
+      "mirror_hadamard": {
+        "query_nrmse": 1.7509117292825572e-06,
+        "payload_bytes": 16735.0,
+        "fit_seconds": 2.8971778293554154e-05
+      },
+      "psp_random": {
+        "query_nrmse": 0.9359536369641622,
+        "payload_bytes": 16730.0,
+        "fit_seconds": 3.095455435363369e-05
+      },
+      "raw_independent": {
+        "query_nrmse": 1.7557728774085667e-06,
+        "payload_bytes": 16473.0,
+        "fit_seconds": 3.5833887523040175e-05
+      },
+      "unbound_sum": {
+        "query_nrmse": 2.5238876475228205,
+        "payload_bytes": 2131.0,
+        "fit_seconds": 0.00010171822375721401
+      }
+    },
+    "fresh_checks": "all 45 rows present; payload byte counts include basis/address tables and metadata",
+    "tests": "2 protocol tests passed"
   },
-  "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
-  },
-  "metric_replay": {
-    "checked": false,
-    "max_difference": null
-  },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "interpretation": "Hadamard address retrieval and generic QR orthogonal basis match raw task deltas to numerical precision, but serialized payload is slightly larger than raw independent vectors. Unbound sum is smaller but incurs high query error. Random nonorthogonal PSP code has strong crosstalk under the fixed unbinding decoder.",
+  "hypothesis": "Rejected for this setup: orthogonalized Mirror coordinates did not reduce bytes or improve quality over raw deltas or generic orthogonal basis.",
+  "counter_hypothesis": "The address codebook is not compressible at N=8 and this linear toy does not model trained task-vector merging; a better learned PSP decoder could reduce crosstalk.",
+  "limitations": [
+    "Synthetic linear functions only",
+    "No language-model or nonlinear task merging",
+    "The reported interference column is off-diagonal task-delta Gram norm and is task correlation, not pure decoder crosstalk; query NRMSE is the retrieval-quality metric",
+    "No inference throughput measurement"
+  ],
+  "fresh_data_used_for_tuning": false,
+  "source_sha256": "adb4f3c55bb33e8921559fe8140d751a7ebb18d81e61b6f3ecdfd87c2b7794b5"
 }

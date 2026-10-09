@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-296.** MA-292 shared rank-4 task basis reconstructed held-out tasks and additive compositions, but PCA and generic coefficients matched or slightly beat Mirror at marginally lower bytes. Continue to MA-296 with orthogonalized task-vector controls.
+**Current operational pointer (2026-10-09): MA-297.** MA-296 failed: Hadamard address and generic QR matched raw task deltas but did not reduce actual payload bytes; unbound sum was smaller but had high query error. Continue to MA-297, SETA shared sparse subspace + Mirror views.
 
 # Worker queue
 

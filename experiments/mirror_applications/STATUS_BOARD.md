@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (72 completed; 558 UNTESTED)
+- P0: **630** (73 completed; 557 UNTESTED)
 - P1: **422** (13 completed; 409 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1070 UNTESTED, 37 PROMISING, 48 FAIL**
+- Current MA statuses: **1069 UNTESTED, 37 PROMISING, 49 FAIL**
 - 68 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -70,15 +70,9 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-296 — orthogonalized task-vector Mirror superposition (P0; PA27)**
+**MA-297 — SETA shared sparse subspace + Mirror views (P0; PA30)**
 
-Reason:
-- MA-470/471/473/475/476/478/481/482, MA-483, MA-484, MA-486, MA-487, MA-488, MA-492, MA-494, MA-498, MA-501, MA-502 and MA-516 are completed on dedicated branches and cross-linked in the claim ledger;
-- MA-501 and MA-502 both found that VQ coordinates add substantial distortion over compact FP16 shared coordinates. The LoReFT representation-view family is temporarily deferred for redesign; skipped registry candidates remain UNTESTED. Work moves to the separate Function Vectors family at MA-516. Other completed candidates remain cross-linked in the claim ledger.
-
-Required controls: ordinary task-vector addition, orthogonalized delta basis, Mirror superposition coefficients and independent upper; measure held-out composition and interference.
-
-The LoReFT family remains deferred after MA-501/502. MA-255’s PSP screen was not established because the development metric broadcasted incorrectly; MA-260’s fresh screen was not established because its training world was hardcoded. Both records and limitations are preserved.
+MA-296 failed: Hadamard address and generic QR match raw task deltas but use slightly more payload bytes; unbound sum compresses while losing task quality. Continue with SETA's shared sparse subspace and test whether Mirror coordinates help inside it.
 
 ## Active experiment
 
@@ -157,3 +151,9 @@ KG relation rotations (RotatE, TuckER, QuatE, PairRE), EXIF/device-aware ISPs (P
 
 
 **MA-481 FAIL for the registered N64 address-quality gate:** Mirror used 4,505B vs explicit keys/values 11,997B (37.6%) with 100% exact recall and zero key collisions, but mean paraphrase correct-address recall was 98.35% (<99%) and output NRMSE 0.180. Full explicit storage had the same retrieval failure, so this is crowded-address geometry, not a Mirror-specific regression. Generic Cartesian codes were only 5.4% larger; VQ K=8–64 collided heavily and K=128 exceeded explicit bytes. **Next: MA-482 (P0).**
+
+
+## Completed: MA-296 — orthogonalized task-vector Mirror superposition
+
+- **FAIL** on fresh synthetic linear tasks: Hadamard address and generic QR both reconstruct at ~2e-6 query NRMSE, but use 16,735/16,744 B versus 16,473 B raw task vectors. Unbound sum uses 2,131 B but query NRMSE is ~2.52. No Mirror-specific gain; random PSP unbinding control also has substantial crosstalk. See claim ledger.
+- Next P0 candidate: MA-297 — SETA shared sparse subspace + Mirror views.

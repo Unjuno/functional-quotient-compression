@@ -1,6 +1,6 @@
 # MA-296 — Orthogonalized task-vector Mirror superposition
 
-Status: SCREENING. Base: `66f551ec`. Prior art: PA16 Parameter Superposition and PA26 Task Arithmetic.
+Status: FAIL. Base: `66f551ec`. Prior art: PA16 Parameter Superposition and PA26 Task Arithmetic.
 
 ## H / hypothesis
 
@@ -12,7 +12,7 @@ Synthetic linear task edits (D=512, N=8), 640 support and 128 query examples per
 
 ## D / decision
 
-Pending fresh run.
+FAIL on fresh worlds: Hadamard and generic QR reconstruct at about 2e-6 query NRMSE but use 16,735 B and 16,744 B versus 16,473 B raw vectors. Unbound sum is 2,131 B but query NRMSE is about 2.52. Random PSP codes score about 0.94 under the fixed unbinding rule. No Mirror-specific storage or quality gain.
 
 ## C / strongest counter-hypothesis
 
