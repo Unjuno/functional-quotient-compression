@@ -1,0 +1,127 @@
+{
+  "experiment_id": "MA-521",
+  "title": "Compile demonstrations into a small function-vector code",
+  "status": "SCREENING",
+  "evidence_lane": "FUNCTION_VECTOR/DEMO_COMPILATION/CAUSAL_QUALITY/CONTEXT_TOKENS/ACTUAL_BYTES",
+  "base_commit": "cd76116c03429b7975d6c7e3a14d8ae80aaadaa6",
+  "hypothesis": "On four decoder-held-out relation tasks in pinned Pythia-70m, a demonstration feature encoder that predicts a three-dimensional Mirror code and shared decoder will preserve explicit-FV causal quality within 0.10 gold-logprob nats and 0.05 accuracy, use <=0.50x explicit-FV bytes including encoder and codes, save >=80% repeated-query context tokens versus direct ICL, and beat a same-rank linear demo-to-FV compiler by >=0.10 nats in both dev seeds.",
+  "physical_object": "Frozen Pythia-70m input embedding table and layer-4 residual stream, plus support-derived FV targets for sixteen relation tasks.",
+  "mirror_coordinate": "A three-scalar code predicted from the mean frozen token embedding of eight demonstration pairs, decoded through a shared 512x3 residual-vector basis.",
+  "logical_multiplicity": "Sixteen support-demonstrated relation functions compiled to small addresses; four function IDs are excluded from compiler training.",
+  "prior_art_refs": [
+    "PA82",
+    "PA99"
+  ],
+  "controls": [
+    "No intervention and no demonstration context",
+    "Direct in-context demonstrations attached to every query",
+    "Explicit FP32 support-derived function-vector bank",
+    "Rank-three linear demonstration-feature encoder plus shared residual decoder",
+    "Rank-three tanh Mirror-code encoder plus shared residual decoder"
+  ],
+  "task": {
+    "type": "pretrained causal-LM in-context relation recall",
+    "model": "EleutherAI/pythia-70m-deduped",
+    "revision": "e93a9faa9c77e5d09219f6c868bfc7a1bd65593c",
+    "model_weight_sha256": "3da388330e4549156d76b58d6d268c63cd005e9336b4f4d2d378421e7b7a33fd",
+    "config_sha256": "002050231a9b1ec3ac77aa6b9b3bbdc4d923f4068a7dd33b8da72a9bd6ad9a43",
+    "tokenizer_sha256": "c24618a1b3e6a38167beff1c72cffd126c3a66254347304b50547d12c5f25624",
+    "extraction": "Reuse the MA-516 frozen tasks, support/evaluation split, teacher-FV extraction, and layer-4 causal evaluator.",
+    "demonstration_feature": "Mean of frozen Pythia token embeddings over concatenated tokenizations of the eight formatted support pairs Input: x newline Output: y, divided by its L2 norm. No labels/task IDs enter the encoder.",
+    "hidden_dimension": 512,
+    "basis_fit_task_ids": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "basis_heldout_task_ids": [
+      12,
+      13,
+      14,
+      15
+    ],
+    "support_examples_per_function": 8,
+    "heldout_queries_per_task": 8,
+    "primary_metric": "mean held-out gold candidate log probability on task IDs 12-15",
+    "secondary_metrics": [
+      "held-out top-1 accuracy",
+      "gold margin",
+      "query context tokens",
+      "support/compile tokens",
+      "actual serialized inference bytes",
+      "FV reconstruction cosine and RMSE",
+      "compile and query wall time",
+      "active operation proxy"
+    ]
+  },
+  "compiler": {
+    "feature": "one 512-dimensional frozen-embedding mean per support set",
+    "mirror": "m=tanh(A^T x+a), v_hat=b+B m; rank 3",
+    "linear_control": "m=A^T x+a, v_hat=b+B m; same rank, same trainable shapes, same update budget",
+    "teacher": "MA-516 extracted support-derived residual-stream FV for each task",
+    "fit_tasks": "Only IDs 0-11 are used to optimize encoder and decoder against FV targets.",
+    "heldout_inference": "IDs 12-15 are compiled only from their demonstration features; their teacher vectors are used only for offline quality measurement, not the code prediction.",
+    "optimizer": "Adam, full batch, learning rate 0.01, zero weight decay, exactly 2000 updates for both learned compilers.",
+    "initialization": "Torch RNG seeded with registered seed; encoder and decoder weights iid Normal(0,1/sqrt(512)); biases initialized to zero.",
+    "training_loss": "mean squared error between decoded code and teacher FV, over 12 fit tasks and 512 activation dimensions"
+  },
+  "development": {
+    "seeds": [
+      52101,
+      52102
+    ],
+    "optimizer_updates": 2000,
+    "selection": "No rank, task, layer, prompt or scale tuning; fixed rank 3 and update count.",
+    "changes_after_run": "prohibited without numbered amendment"
+  },
+  "fresh": {
+    "seeds": [
+      52111,
+      52112,
+      52113
+    ],
+    "locked_before_access": true,
+    "opened": false,
+    "opening_rule": "Open only if both seeds preserve explicit-FV causal quality within .10 nats/.05 accuracy, meet <=.50x FV payload, save >=80% repeated-query tokens versus direct ICL, and beat the rank-three linear compiler by >=.10 nats."
+  },
+  "storage": {
+    "authority": "actual uncompressed NPZ inference payload bytes",
+    "paid_objects": [
+      "encoder matrix and bias",
+      "decoder matrix and mean",
+      "all sixteen three-scalar compiled codes",
+      "task IDs and model/layer/revision/dtype/schema metadata",
+      "direct ICL control's stored token IDs and offsets",
+      "explicit FV control's full sixteen-vector bank"
+    ],
+    "common_base": "Include pinned model/config/tokenizer bytes once. No teacher FV or reconstruction cache in learned compiler payload.",
+    "amortization": "Report support tokens at compile time and direct-ICL versus compiled query tokens; no query count is assumed for a storage claim."
+  },
+  "compute": {
+    "hardware": "CPU, fixed five-thread limit, no GPU",
+    "report_support_and_query_tokens": true,
+    "optimizer_updates": 2000,
+    "active_compute_proxy": "report encoder/decoder train multiply proxy, demonstration feature extraction embeddings, compiled decode multiply proxy, intervention adds, and query forward sequences",
+    "wall_time": "separate support extraction, feature extraction, encoder/decoder fit, compilation and query evaluation"
+  },
+  "gates": {
+    "PASS": "In both dev seeds, Mirror code compiler is within .05 absolute accuracy and .10 mean gold-logprob nats of explicit FVs, <=0.50x explicit FV-bank bytes, saves >=80% query context tokens vs direct ICL, and exceeds same-rank linear compiler by >=.10 gold-logprob nats.",
+    "FAIL": "Any frozen quality, storage, context-token, or linear-control attribution gate is missed.",
+    "NOT_ESTABLISHED": "Pinned model integrity, split alignment, or deterministic replay fails."
+  },
+  "boundaries": [
+    "Sixteen constrained relation tasks and four compiler-held-out tasks on one 70M model; not broad language understanding.",
+    "The encoder is a small conventional hypernetwork; compare it with the linear compiler and charge all encoder/decoder state.",
+    "Direct ICL and compiled FV have different support-context and compile/query compute; report both without assuming a query amortization count.",
+    "Fresh seeds remain unopened unless every quality, byte, token and attribution gate passes."
+  ]
+}
