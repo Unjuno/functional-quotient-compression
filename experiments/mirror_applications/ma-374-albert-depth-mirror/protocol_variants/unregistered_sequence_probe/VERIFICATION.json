@@ -1,0 +1,24 @@
+{
+  "experiment_id": "MA-374",
+  "commit": "52fd6b6",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-374-albert-shared-depth-mirror/tests",
+    "passed": 4,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Two development worlds used distinct recurrence coefficients and fresh randomized sequences.",
+    "All 12 serialized payloads were sized, SHA-256 checked, loaded from ZIP/NPY FP16, and every prefix's validation/test NLL, accuracy, and MAC count replayed exactly.",
+    "Prefix throughput was initially measured while computing the full four-layer prefix stack. The evaluator was corrected to stop at each requested depth; the locked development seeds were rerun. Stored payload hashes and quality metrics remained exact; throughput values now correspond to the requested depth.",
+    "The preregistered multi-depth gate failed in seed 37401, so fresh seeds 37411, 37412, 37413 remain unopened."
+  ]
+}

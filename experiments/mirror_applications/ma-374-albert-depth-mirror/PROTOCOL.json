@@ -1,0 +1,84 @@
+{
+  "experiment_id": "MA-374",
+  "title": "ALBERT shared layers + depth Mirror",
+  "status": "PROTOCOL_FROZEN_BEFORE_DEVELOPMENT",
+  "base_commit": "63004c8",
+  "prior_art_refs": [
+    "PA61"
+  ],
+  "hypothesis": "A small depth-specific Givens view on a fully tied repeated block recovers layer-role differentiation on held-out digits more effectively than hard sharing and equal-code FiLM, while retaining less than 60% of untied payload.",
+  "physical_object": "One 64-dimensional residual block applied at three logical depths; block contains separate attention-like linear residual map A and FFN-like two-layer residual map F.",
+  "mirror_coordinate": "Four Givens angles per depth on first eight channels after each repeated block; shared physical A/F remain tied.",
+  "logical_multiplicity": "Three logical depth roles backed by one tied physical block.",
+  "dataset": {
+    "name": "sklearn digits",
+    "version": "1.8.0",
+    "sha256": "faf2d98f61250c1cdc0b114323133d3c58da04f5c5d28bb78e4bde3c936a75b1",
+    "split": "stratified 60/20/20 per world"
+  },
+  "model": {
+    "input": 64,
+    "width": 64,
+    "depth": 3,
+    "classes": 10,
+    "training_updates": 600,
+    "batch_size": 64,
+    "optimizer": "AdamW",
+    "learning_rates": [
+      0.003,
+      0.01
+    ],
+    "methods": [
+      "untied A and F per depth",
+      "fully tied A and F",
+      "A tied only, F private by depth",
+      "F tied only, A private by depth",
+      "fully tied + depth Givens Mirror",
+      "fully tied + equal-code depth FiLM"
+    ],
+    "code_updates": 100
+  },
+  "development": {
+    "worlds": [
+      37400,
+      37401
+    ],
+    "selection": "mean validation NLL across all methods",
+    "allowed_tuning": "select base learning rate only from frozen grid"
+  },
+  "fresh": {
+    "worlds": [
+      37410,
+      37411,
+      37412
+    ],
+    "locked_before_access": true,
+    "required_cli": "--phase fresh --confirm-fresh with DEV_SELECTION.json"
+  },
+  "storage": {
+    "authority": "actual torch.save inference bundle bytes",
+    "paid": [
+      "all block weights",
+      "depth codes",
+      "classifier",
+      "architecture metadata",
+      "normalization",
+      "serialization overhead"
+    ]
+  },
+  "compute": {
+    "report_examples_seen": true,
+    "optimizer_updates": true,
+    "active_MAC_proxy": true,
+    "adaptation_MAC_proxy": true,
+    "training_wall_time": true,
+    "inference_throughput": true
+  },
+  "success_gate": "On all fresh worlds, tied+Mirror improves accuracy over fully tied by >=1pp, stays within 2pp of untied, uses <=60% untied bytes, and beats equal-byte FiLM by >=1pp or saves >=10% bytes at <=0.5pp loss.",
+  "failure_gate": "Fails tied/untied quality-storage gate in >=2 fresh worlds or simpler FiLM matches/dominates at equal/lower payload and compute.",
+  "boundaries": [
+    "small digits residual-block proxy, not ALBERT/BERT reproduction",
+    "no capacity claim from fixed update count",
+    "no device latency claim"
+  ]
+}

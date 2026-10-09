@@ -1,0 +1,60 @@
+{
+  "experiment_id": "MA-374",
+  "title": "ALBERT shared Transformer block with depth Mirror coordinates",
+  "status": "FROZEN_DEVELOPMENT_COMPLETED",
+  "base_commit": "de5504c",
+  "evidence_lane": "QUALITY/STORAGE/COMPUTE/DEPTH_DIVERSITY",
+  "hypothesis": "On a learnable synthetic sequence task, one shared Transformer block plus one small depth-specific Givens coordinate will recover per-depth predictive function lost by ALBERT-style hard sharing, beyond a byte-matched scalar residual gate, while using materially fewer bytes than untied layers.",
+  "prior_art_refs": ["PA61"],
+  "physical_object": "one Transformer block recurrently applied four times to a causal sequence",
+  "mirror_coordinate": "four learned Givens angles applied across adjacent residual channels after each shared block application",
+  "logical_multiplicity": "four logical depth roles from one physical shared block",
+  "model": {
+    "vocabulary": 8,
+    "sequence_length": 16,
+    "d_model": 16,
+    "heads": 2,
+    "ffn_dim": 64,
+    "layers": 4,
+    "train_sequences": 8192,
+    "validation_sequences": 2048,
+    "test_sequences": 4096,
+    "batch_size": 32,
+    "optimizer_updates": 1200,
+    "optimizer": "AdamW",
+    "learning_rate": 0.001,
+    "development_seeds": [37401, 37402],
+    "fresh_seeds": [37411, 37412, 37413],
+    "data": "Synthetic second-order modular recurrence sequences; each world fixes recurrence coefficients from its seed, and the model predicts the next token autoregressively. Fresh worlds use distinct coefficients and sequences."
+  },
+  "controls": [
+    "untied four-layer causal Transformer",
+    "ALBERT full sharing: attention, FFN, and normalization shared across all four layer applications",
+    "attention-only sharing with layer-specific FFN and normalization",
+    "FFN-only sharing with layer-specific attention and normalization",
+    "fully shared block plus four direct scalar residual-branch gates (matched 4-code control)",
+    "fully shared block plus four depth-specific Givens angles"
+  ],
+  "development_gate_before_fresh": "Both development seeds: untied validation accuracy >=0.70; hard-tied block has measurable final NLL gap >=0.02 nat versus untied; Mirror lowers final NLL >=5% versus hard tying and >=5% versus scalar gates; Mirror within 0.05 nat of untied; Mirror payload <=1.10x scalar-gate payload and <=0.60x untied payload; depth-prefix NLL improves over tied at >=2 of 4 depths; rotation MAC overhead <=10% total block MACs. Otherwise keep fresh sealed.",
+  "success_gate": "All three fresh seeds reproduce quality gains and depth-prefix improvements; actual payload <=0.60x untied; Mirror beats same-byte scalar control by >=5% NLL; active MAC <=1.10x tied; serialized metric/hash replay exact.",
+  "failure_gate": "Mirror fails the registered NLL improvement versus hard tying or scalar in both development seeds; depth-prefix benefit absent; or storage/compute limits fail.",
+  "storage": {
+    "authority": "actual deterministic ZIP/NPY FP16 inference payload bytes after reload",
+    "paid_objects": ["all attention, FFN, norm and embedding weights", "all four depth gates or Givens codes", "position embeddings and readout", "architecture IDs, metadata, and archive headers"]
+  },
+  "compute": {
+    "report_optimizer_updates_and_tokens": true,
+    "report_train_wall_clock": true,
+    "report_active_macs": true,
+    "report_throughput": true,
+    "depth_prefix_quality": true,
+    "mac_convention": "linear projections counted as one MAC per weight; attention score and value products counted by their multiply-accumulate operations; pointwise operations reported separately"
+  },
+  "boundaries": [
+    "small synthetic sequence task only; no BERT, language-model or natural-text claim",
+    "fresh seeds change the recurrence world and are not used for tuning",
+    "logical depth roles are not independent capacity; assess measured per-prefix predictive quality",
+    "fixed-update result is learning-efficiency evidence, not a near-converged capacity claim",
+    "fresh IDs remain sealed until every development gate passes"
+  ]
+}
