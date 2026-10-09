@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-475.** MA-470/471/473 are recorded as scoped edit-basis, aligned ROME-coordinate, and layerwise MEMIT-style storage results. Continue with native SERAC memory controls; MA-474 is P1 and remains queued.
+**Current operational pointer (2026-10-09): MA-476.** MA-470/471/473/475 are recorded as scoped edit-basis, ROME-coordinate, MEMIT-style layerwise storage, and SERAC value-memory results. Continue with native GRACE key/radius/value-codebook controls; MA-474 remains P1.
 
 # Worker queue
 

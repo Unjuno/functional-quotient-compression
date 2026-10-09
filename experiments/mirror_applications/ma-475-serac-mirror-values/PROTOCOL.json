@@ -1,7 +1,7 @@
 {
   "experiment_id": "MA-475",
   "title": "SERAC external memory values with Mirror code compression",
-  "status": "FROZEN_SCREENING",
+  "status": "COMPLETED_PROMISING_SCOPED",
   "base_commit": "69c70957",
   "evidence_lane": "MEMORY_VALUE_STORAGE/RETRIEVAL/QUALITY/LATENCY",
   "hypothesis": "With SERAC retrieval keys and scope classifier held fixed, shared counterfactual value basis plus one Mirror angle per edit will retain on-scope target behavior and off-scope deferral while reducing actual memory payload bytes versus explicit values; retrieval errors must be measured separately from value reconstruction.",
@@ -85,5 +85,8 @@
     "Synthetic external-memory mechanism screen, not a SERAC model reproduction.",
     "Scope retrieval is intentionally identical and oracle-simple for every method; retrieval and value-code effects are reported separately.",
     "Counterfactual values are hand-aligned to a fixed-norm 2D orbit; no natural edit generation or learned basis discovery."
+  ],
+  "deviations": [
+    "Lookup timing repetition count increased after initial timing showed an outlier; fresh metrics were rerun under the same frozen worlds/seeds and no configuration changed."
   ]
 }
