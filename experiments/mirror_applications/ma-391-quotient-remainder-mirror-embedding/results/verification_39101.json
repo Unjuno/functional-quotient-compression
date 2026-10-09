@@ -1,0 +1,70 @@
+{
+  "experiment_id": "MA-391",
+  "seed": 39101,
+  "condition": "development",
+  "unique_address_pairs": 1024,
+  "payloads_checked": 6,
+  "all_exact": true,
+  "payloads": [
+    {
+      "method": "full",
+      "bytes": 63234,
+      "sha256": "2b8dc98038da633d103054e7709a85bcb1dcad4d91190249347e29f213082761",
+      "metrics": {
+        "embedding_nrmse": 0.02471548691391945,
+        "decoder_nll": 2.4823429584503174,
+        "decoder_top1_accuracy": 0.9892578125
+      }
+    },
+    {
+      "method": "add",
+      "bytes": 6504,
+      "sha256": "e9e1f35a79f8035fcbb38b90fbe14a4d801e30f0f739a45529a2134a09fa8fdb",
+      "metrics": {
+        "embedding_nrmse": 1.6985595226287842,
+        "decoder_nll": 2.793405771255493,
+        "decoder_top1_accuracy": 0.240234375
+      }
+    },
+    {
+      "method": "product",
+      "bytes": 6516,
+      "sha256": "4eeb955c4a09a6319f0fdd9257235a29175c331429c5672214dae8b462f54d5e",
+      "metrics": {
+        "embedding_nrmse": 1.0603396892547607,
+        "decoder_nll": 2.7759523391723633,
+        "decoder_top1_accuracy": 0.0927734375
+      }
+    },
+    {
+      "method": "concat",
+      "bytes": 8886,
+      "sha256": "6ea5c2f549b2e8ef3a766a97854094fa47c6fdc833e4f1ab9cded411903ddae6",
+      "metrics": {
+        "embedding_nrmse": 1.4669873714447021,
+        "decoder_nll": 2.8071177005767822,
+        "decoder_top1_accuracy": 0.0654296875
+      }
+    },
+    {
+      "method": "coeff",
+      "bytes": 14226,
+      "sha256": "a95bdc94e490f109deb778d32c154d8c49fcb8cbec83695cdba87bc0530d3ca2",
+      "metrics": {
+        "embedding_nrmse": 0.009429935365915298,
+        "decoder_nll": 2.482093572616577,
+        "decoder_top1_accuracy": 0.9970703125
+      }
+    },
+    {
+      "method": "mirror",
+      "bytes": 10461,
+      "sha256": "d85f3b6336efc58a6259cfb4587442fd98c38516b2b6a1dd8ec7a65d9bf859fe",
+      "metrics": {
+        "embedding_nrmse": 0.12475479394197464,
+        "decoder_nll": 2.4857654571533203,
+        "decoder_top1_accuracy": 0.9912109375
+      }
+    }
+  ]
+}
