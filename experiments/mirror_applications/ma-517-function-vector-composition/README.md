@@ -1,6 +1,6 @@
 # MA-517 — Mirror composition of function vectors
 
-Status: SCREENING.
+Status: FAIL. See STATUS.md for H/T/D/C/U and scoped negative result.
 
 ## H / T / D / C / U
 

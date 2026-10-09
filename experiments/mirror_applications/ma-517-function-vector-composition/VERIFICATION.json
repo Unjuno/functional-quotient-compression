@@ -1,0 +1,33 @@
+{
+  "experiment_id": "MA-517",
+  "commit": "pending",
+  "tests": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 python -m unittest discover -s experiments/mirror_applications/ma-517-function-vector-composition/tests",
+    "passed": null,
+    "failed": null
+  },
+  "fresh_split_integrity_checked": true,
+  "serialization": {
+    "all_intervention_payloads_hash_and_size_verified_by_test": true,
+    "raw_and_factorized_bytes_equal": true
+  },
+  "metrics": {
+    "rows": 54,
+    "worlds": [
+      51710,
+      51711,
+      51712
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "all_quality_metrics_replay_from_RESULTS_CORE": true
+  },
+  "notes": [
+    "Fresh data were run once after frozen protocol and development smoke; no fresh-driven changes.",
+    "All six methods had 0% exact target accuracy on all 9 fresh world-seed banks.",
+    "Synthetic composition task only; direct ICL also failed the preregistered >12.5% gate."
+  ]
+}
