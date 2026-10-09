@@ -1,0 +1,461 @@
+{
+  "calibration_fraction": 0.2,
+  "candidate_count": 16,
+  "codebook_candidate_ids": [
+    5,
+    0,
+    1,
+    2
+  ],
+  "compute": {
+    "candidate_view_encode_seconds_total": 12.382022302976111,
+    "codebook_fit_seconds": 0.001693166996119544,
+    "model_load_seconds": 0.037474473007023335,
+    "optimizer_updates": 0,
+    "view_ops_per_all_12_module_tokens": 36864,
+    "view_ops_per_module_token": 3072
+  },
+  "experiment_id": "MA-574",
+  "file_sizes": {
+    "global_quarot": {
+      "codes_file": "global_quarot_rotation_codes.npz",
+      "rotation_code_bytes": 2575,
+      "total_payload_bytes": 4428869,
+      "weight_payload_bytes": 4426294,
+      "weights_file": "global_quarot_weights.npz"
+    },
+    "identity_int4": {
+      "codes_file": null,
+      "rotation_code_bytes": 0,
+      "total_payload_bytes": 4426294,
+      "weight_payload_bytes": 4426294,
+      "weights_file": "identity_int4_weights.npz"
+    },
+    "independent16": {
+      "codes_file": "independent16_rotation_codes.npz",
+      "rotation_code_bytes": 13578,
+      "total_payload_bytes": 4439872,
+      "weight_payload_bytes": 4426294,
+      "weights_file": "independent16_weights.npz"
+    },
+    "native_codebook4": {
+      "codes_file": "native_codebook4_rotation_codes.npz",
+      "rotation_code_bytes": 5648,
+      "total_payload_bytes": 4431942,
+      "weight_payload_bytes": 4426294,
+      "weights_file": "native_codebook4_weights.npz"
+    },
+    "random_codebook4": {
+      "codes_file": "random_codebook4_rotation_codes.npz",
+      "rotation_code_bytes": 5648,
+      "total_payload_bytes": 4431942,
+      "weight_payload_bytes": 4426294,
+      "weights_file": "random_codebook4_weights.npz"
+    },
+    "shared_codebook4": {
+      "codes_file": "shared_codebook4_rotation_codes.npz",
+      "rotation_code_bytes": 5648,
+      "total_payload_bytes": 4431942,
+      "weight_payload_bytes": 4426294,
+      "weights_file": "shared_codebook4_weights.npz"
+    },
+    "smoothquant": {
+      "codes_file": "smoothquant_view_scales.npz",
+      "rotation_code_bytes": 13074,
+      "total_payload_bytes": 4439368,
+      "weight_payload_bytes": 4426294,
+      "weights_file": "smoothquant_weights.npz"
+    }
+  },
+  "full_precision_function_max_abs_error": 1.0975752677833128e-06,
+  "global_code_id": 5,
+  "heldout_layers": [
+    4,
+    5
+  ],
+  "independent_best_heldout_nrmse": 0.09702522736431309,
+  "matrices": [
+    {
+      "id": "L0_attn",
+      "layer": 0,
+      "shape": [
+        512,
+        512
+      ],
+      "weight_sha256": "2c4a00e0100d5bcc07fe16334cef4a4c2a516125b6a5fe04b0ad696ac1f7f929"
+    },
+    {
+      "id": "L0_mlp_up",
+      "layer": 0,
+      "shape": [
+        2048,
+        512
+      ],
+      "weight_sha256": "df8cf2cab1b4aca8159e4abe41ba4e9294ca8ebd5c773aa74c6ca153928c86e9"
+    },
+    {
+      "id": "L1_attn",
+      "layer": 1,
+      "shape": [
+        512,
+        512
+      ],
+      "weight_sha256": "72550c626e3d465d7d00104928972e03636e1dc6ec78872d7b866316ff8ce6da"
+    },
+    {
+      "id": "L1_mlp_up",
+      "layer": 1,
+      "shape": [
+        2048,
+        512
+      ],
+      "weight_sha256": "ad5ee58cb0d21d27599d64d2d22f815c3ed7435a5623c1964ae341439cb4dee2"
+    },
+    {
+      "id": "L2_attn",
+      "layer": 2,
+      "shape": [
+        512,
+        512
+      ],
+      "weight_sha256": "2f697ebf7bf91d99816adb340b63f1d66d89ba8a8d3c412e36e57fe3e163573a"
+    },
+    {
+      "id": "L2_mlp_up",
+      "layer": 2,
+      "shape": [
+        2048,
+        512
+      ],
+      "weight_sha256": "9d8accf9736d848cc0af0227ba08b95c4f34fb113438e51ac4ca09307099e1e5"
+    },
+    {
+      "id": "L3_attn",
+      "layer": 3,
+      "shape": [
+        512,
+        512
+      ],
+      "weight_sha256": "1fc325ea1b34617d465287be4bed58db11a7b39897a8d8ac6eafb67f9314885b"
+    },
+    {
+      "id": "L3_mlp_up",
+      "layer": 3,
+      "shape": [
+        2048,
+        512
+      ],
+      "weight_sha256": "d9465337394ae8d87a811d82724e0c330958900617e662f7cac9f6bec63d3331"
+    },
+    {
+      "id": "L4_attn",
+      "layer": 4,
+      "shape": [
+        512,
+        512
+      ],
+      "weight_sha256": "f3330b744b2187bb69d204fdb0aff6c76272628727d73815ba101719bcf0d837"
+    },
+    {
+      "id": "L4_mlp_up",
+      "layer": 4,
+      "shape": [
+        2048,
+        512
+      ],
+      "weight_sha256": "4884d2b3aea852e93e81ad4fce041b64cf9d6d8530ea61f5a4ae3a17698eba43"
+    },
+    {
+      "id": "L5_attn",
+      "layer": 5,
+      "shape": [
+        512,
+        512
+      ],
+      "weight_sha256": "d9adc348d8feac11a15f00379e6d23c9be8754db06a06a9fc05cf66808e0b797"
+    },
+    {
+      "id": "L5_mlp_up",
+      "layer": 5,
+      "shape": [
+        2048,
+        512
+      ],
+      "weight_sha256": "405a671be128055c937cd6bf3c9fa75a48c77ff0d12c394562adf71594a95a86"
+    }
+  ],
+  "methods": {
+    "global_quarot": {
+      "encode_and_package_seconds": 0.6409416100068484,
+      "max_heldout_matrix_nrmse": 0.09720802315737119,
+      "mean_heldout_layer_nrmse": 0.0970252273643131,
+      "mean_train_layer_nrmse": 0.09710303520826351,
+      "per_module_calibration_nrmse": [
+        0.09632846152722889,
+        0.09719886542488107,
+        0.0967771355426814,
+        0.09721263731506705,
+        0.09717395745089441,
+        0.09749048561618787,
+        0.0973734072554357,
+        0.09726933153373173,
+        0.09680842769871774,
+        0.0968757299362881,
+        0.09791102190873792,
+        0.09698211818112075
+      ],
+      "per_module_heldout_nrmse": [
+        0.09670906277590208,
+        0.09686207029242165,
+        0.0969670144504545,
+        0.0969729856561143,
+        0.09702157705382224,
+        0.09682478424892234,
+        0.09676500201533154,
+        0.096952631363423,
+        0.09692314810095863,
+        0.0970544300671946,
+        0.09720802315737119,
+        0.09691530813172797
+      ],
+      "rotation_code_bytes": 2575,
+      "total_payload_bytes": 4428869,
+      "weight_payload_bytes": 4426294
+    },
+    "identity_int4": {
+      "encode_and_package_seconds": 0.2445122450008057,
+      "max_heldout_matrix_nrmse": 0.09810175082151798,
+      "mean_heldout_layer_nrmse": 0.09742527495024289,
+      "mean_train_layer_nrmse": 0.09720543611603283,
+      "per_module_calibration_nrmse": [
+        0.09791909742001008,
+        0.09604497257500734,
+        0.09843601224698607,
+        0.09616240561566856,
+        0.09721469726802467,
+        0.09534400025113542,
+        0.09918937324125512,
+        0.09733293031017536,
+        0.09751780467568487,
+        0.09776953429202999,
+        0.09602522623655833,
+        0.09837181139314859
+      ],
+      "per_module_heldout_nrmse": [
+        0.09921383947324763,
+        0.09598188381301474,
+        0.0977580223669373,
+        0.09644320395275888,
+        0.09728851528949135,
+        0.09595097619179552,
+        0.0979029789162856,
+        0.0976118182324053,
+        0.09717477825112932,
+        0.09770242781898587,
+        0.09672214290933843,
+        0.09810175082151798
+      ],
+      "rotation_code_bytes": 0,
+      "total_payload_bytes": 4426294,
+      "weight_payload_bytes": 4426294
+    },
+    "independent16": {
+      "encode_and_package_seconds": 0.5978437129815575,
+      "max_heldout_matrix_nrmse": 0.09720802315737119,
+      "mean_heldout_layer_nrmse": 0.0970252273643131,
+      "mean_train_layer_nrmse": 0.09710303520826351,
+      "per_module_calibration_nrmse": [
+        0.09632846152722888,
+        0.09719886542488106,
+        0.0967771355426814,
+        0.09721263731506703,
+        0.09717395745089441,
+        0.09749048561618787,
+        0.09737340725543568,
+        0.09726933153373171,
+        0.09680842769871774,
+        0.09687572993628808,
+        0.09791102190873792,
+        0.09698211818112075
+      ],
+      "per_module_heldout_nrmse": [
+        0.09670906277590206,
+        0.09686207029242164,
+        0.09696701445045451,
+        0.09697298565611431,
+        0.09702157705382224,
+        0.09682478424892234,
+        0.09676500201533154,
+        0.096952631363423,
+        0.09692314810095863,
+        0.0970544300671946,
+        0.09720802315737119,
+        0.09691530813172797
+      ],
+      "rotation_code_bytes": 13578,
+      "total_payload_bytes": 4439872,
+      "weight_payload_bytes": 4426294
+    },
+    "native_codebook4": {
+      "encode_and_package_seconds": 0.6362408520071767,
+      "max_heldout_matrix_nrmse": 0.09720802315737119,
+      "mean_heldout_layer_nrmse": 0.0970252273643131,
+      "mean_train_layer_nrmse": 0.09710303520826351,
+      "per_module_calibration_nrmse": [
+        0.09632846152722889,
+        0.09719886542488106,
+        0.0967771355426814,
+        0.09721263731506705,
+        0.09717395745089441,
+        0.09749048561618787,
+        0.0973734072554357,
+        0.09726933153373173,
+        0.09680842769871774,
+        0.09687572993628808,
+        0.09791102190873792,
+        0.09698211818112075
+      ],
+      "per_module_heldout_nrmse": [
+        0.09670906277590208,
+        0.09686207029242164,
+        0.0969670144504545,
+        0.0969729856561143,
+        0.09702157705382224,
+        0.09682478424892234,
+        0.09676500201533154,
+        0.096952631363423,
+        0.09692314810095863,
+        0.0970544300671946,
+        0.09720802315737119,
+        0.09691530813172797
+      ],
+      "rotation_code_bytes": 5648,
+      "total_payload_bytes": 4431942,
+      "weight_payload_bytes": 4426294
+    },
+    "random_codebook4": {
+      "encode_and_package_seconds": 0.6094943509961013,
+      "max_heldout_matrix_nrmse": 0.09720802315737119,
+      "mean_heldout_layer_nrmse": 0.0970252273643131,
+      "mean_train_layer_nrmse": 0.09710303520826351,
+      "per_module_calibration_nrmse": [
+        0.09632846152722889,
+        0.09719886542488106,
+        0.0967771355426814,
+        0.09721263731506705,
+        0.09717395745089444,
+        0.09749048561618787,
+        0.0973734072554357,
+        0.09726933153373171,
+        0.09680842769871774,
+        0.09687572993628808,
+        0.09791102190873792,
+        0.09698211818112075
+      ],
+      "per_module_heldout_nrmse": [
+        0.09670906277590206,
+        0.09686207029242164,
+        0.09696701445045451,
+        0.0969729856561143,
+        0.09702157705382224,
+        0.09682478424892234,
+        0.09676500201533154,
+        0.096952631363423,
+        0.09692314810095863,
+        0.0970544300671946,
+        0.09720802315737119,
+        0.09691530813172797
+      ],
+      "rotation_code_bytes": 5648,
+      "total_payload_bytes": 4431942,
+      "weight_payload_bytes": 4426294
+    },
+    "shared_codebook4": {
+      "encode_and_package_seconds": 0.6625792619888671,
+      "max_heldout_matrix_nrmse": 0.09720802315737119,
+      "mean_heldout_layer_nrmse": 0.0970252273643131,
+      "mean_train_layer_nrmse": 0.09710303520826351,
+      "per_module_calibration_nrmse": [
+        0.09632846152722889,
+        0.09719886542488106,
+        0.0967771355426814,
+        0.09721263731506705,
+        0.09717395745089441,
+        0.09749048561618787,
+        0.0973734072554357,
+        0.09726933153373173,
+        0.09680842769871774,
+        0.09687572993628808,
+        0.09791102190873792,
+        0.09698211818112075
+      ],
+      "per_module_heldout_nrmse": [
+        0.09670906277590208,
+        0.09686207029242164,
+        0.0969670144504545,
+        0.0969729856561143,
+        0.09702157705382224,
+        0.09682478424892234,
+        0.09676500201533154,
+        0.096952631363423,
+        0.09692314810095863,
+        0.0970544300671946,
+        0.09720802315737119,
+        0.09691530813172797
+      ],
+      "rotation_code_bytes": 5648,
+      "total_payload_bytes": 4431942,
+      "weight_payload_bytes": 4426294
+    },
+    "smoothquant": {
+      "encode_and_package_seconds": 0.27988348199869506,
+      "max_heldout_matrix_nrmse": 0.10697820160782771,
+      "mean_heldout_layer_nrmse": 0.10206856852799429,
+      "mean_train_layer_nrmse": 0.11074812733328601,
+      "per_module_calibration_nrmse": [
+        0.12495548173493322,
+        0.09794001242029374,
+        0.1076717335096131,
+        0.0989577494852157,
+        0.10322063304572585,
+        0.14162227373214487,
+        0.11078470160152654,
+        0.10083243313683503,
+        0.10373438820215945,
+        0.10253777478658078,
+        0.10186118635287825,
+        0.10907297242725357
+      ],
+      "per_module_heldout_nrmse": [
+        0.11871162906821621,
+        0.09722721520230837,
+        0.10326194296458692,
+        0.09856657400826548,
+        0.10061266713480929,
+        0.12700178723076644,
+        0.10395100562005363,
+        0.1001503234427159,
+        0.09997139140190285,
+        0.10150629990912366,
+        0.09981838119312293,
+        0.10697820160782771
+      ],
+      "rotation_code_bytes": 13074,
+      "total_payload_bytes": 4439368,
+      "weight_payload_bytes": 4426294
+    }
+  },
+  "model_revision": "e93a9faa9c77e5d09219f6c868bfc7a1bd65593c",
+  "model_sha256": "3da388330e4549156d76b58d6d268c63cd005e9336b4f4d2d378421e7b7a33fd",
+  "native_codebook_alias": {
+    "metrics_and_selected_rotation_state_exact": true
+  },
+  "seed": 57401,
+  "split": "dev",
+  "train_layers": [
+    0,
+    1,
+    2,
+    3
+  ]
+}

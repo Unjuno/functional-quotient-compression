@@ -1,6 +1,6 @@
 # MA-574 — SpinQuant rotation codebook
 
-Status: SCREENING
+Status: NOT ESTABLISHED
 Branch: `research/ma-574-spinquant-rotation-codebook-20261009`
 Prior art: PA113 SpinQuant; PA112 QuaRot; PA114 SmoothQuant
 

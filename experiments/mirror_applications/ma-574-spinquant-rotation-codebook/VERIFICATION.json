@@ -1,17 +1,22 @@
 {
-  "status": "PENDING",
+  "status": "NOT ESTABLISHED",
   "base_commit": "802da01e",
+  "result_commit": "d805d284",
+  "registered_development_artifacts_present": true,
   "protocol_frozen_before_registered_worlds": true,
-  "source_sha256": "c88459769088f84ce787dd38c593f827c805bbc2285032c84f4c74450dad5e3b",
   "fresh_opened": false,
   "checks": {
     "unit_tests": "4 passed",
-    "nonregistered_smoke_seed1": "12 Pythia matrices serialized; shared4 equals random4 and native outputs; excluded",
-    "registered_dev_seeds": "unopened",
-    "fresh_opened": false
+    "registry_integrity": "0 errors; 1155 candidates; 227 claims",
+    "diff_check": "passed after LF normalization",
+    "source_digest": "FAILED: freeze c88459769088f84ce787dd38c593f827c805bbc2285032c84f4c74450dad5e3b; committed source 7e3e95138fc981879086bf20abfefb3c2b1061882a981b703329300df4ea032f",
+    "protocol_digest": "PASS: frozen digest matches committed protocol",
+    "same_seed_replay": "FAILED provenance: codebook candidate IDs differ from artifacts labeled registered dev for both seeds",
+    "fresh_seeds_57411_57413": "sealed, not accessed"
   },
   "notes": [
-    "AMENDMENT_1 documents excluded seed-1 smoke; no implementation or gate changes followed."
-  ],
-  "protocol_sha256": "5fcac37e7a756ff0ac5ed0be2913c3b54df54d42b3b9462d992cb241bdec0269"
+    "Two post-hoc same-seed replays were made from frozen commit d805d284 and are diagnostic only.",
+    "Actual serialized artifact sizes and SHA-256 hashes are recorded in ARTIFACT_PROVENANCE.json.",
+    "Available metric artifacts suggest native shared/random aliases, but registered evidence cannot support a scientific verdict."
+  ]
 }

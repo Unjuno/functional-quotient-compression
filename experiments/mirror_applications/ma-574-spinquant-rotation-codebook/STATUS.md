@@ -1,3 +1,3 @@
 # MA-574 status
 
-SCREENING — protocol frozen after an excluded seed-1 implementation smoke (Amendment 1). PA112–114 reviewed. Registered development codebook seeds 57401/57402 and fresh seeds 57411–57413 have not been accessed.
+NOT ESTABLISHED — the frozen source SHA-256 value recorded in `freeze.json` does not match the committed source file. Replaying both development seeds from the frozen commit produced different codebook candidate IDs from the artifacts labeled registered development. Aggregate NRMSE remained close and the replay's shared, random, and native variants alias, but the provenance discrepancy prevents those values from validating the preregistered result. Fresh seeds 57411–57413 remain sealed. Full file sizes and hashes are in `ARTIFACT_PROVENANCE.json`; replay metrics are diagnostic only.
