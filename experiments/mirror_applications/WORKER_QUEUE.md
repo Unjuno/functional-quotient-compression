@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-331.** MA-330 is completed PROMISING narrowly for synthetic Givens-aligned KV role caches; independent states need private storage and Mirror materialization is slower than PCA/Tucker. Proceed to MA-331, Re-Basin-aligned Mirror task deltas.
+**Current operational pointer (2026-10-09): MA-332.** MA-330 is PROMISING narrowly for synthetic Givens-aligned KV role caches. MA-331 FAILed its fixed Mirror-specific byte gate at development; fresh remained sealed. Proceed to MA-332, Mirror permutation-orbit audit.
 
 # Worker queue
 

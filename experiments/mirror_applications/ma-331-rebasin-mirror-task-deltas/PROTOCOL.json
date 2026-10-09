@@ -1,0 +1,20 @@
+{
+  "experiment_id": "MA-331",
+  "title": "Re-Basin-aligned Mirror task deltas",
+  "status": "PROTOCOL_FROZEN_BEFORE_DEVELOPMENT",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY",
+  "base_commit": "547d30d",
+  "hypothesis": "For eight synthetic two-layer ReLU task models that are independently permuted in hidden units, exact Re-Basin alignment will expose six task deltas on a shared two-direction orbit. A one-phase Mirror code should reproduce held-out function outputs with nMSE <=1e-5 and use <=0.90x the actual bytes of the matched direct two-coefficient aligned control; two unrelated tasks test the private-state boundary.",
+  "physical_object": "shared two-layer ReLU base network plus a shared two-direction output-delta basis",
+  "mirror_coordinate": "per-task hidden-unit permutation address plus one phase on the aligned delta basis",
+  "logical_multiplicity": "eight task functions, six aligned to a common low-rank delta orbit and two unrelated private deltas",
+  "prior_art_refs": ["PA37", "PA26"],
+  "controls": ["independent full task MLPs", "unaligned rank-2 task-delta compression", "Re-Basin alignment plus direct two-coefficient delta codes", "Re-Basin alignment plus one Mirror phase per aligned task", "Re-Basin alignment with private unrelated-task deltas"],
+  "development": {"worlds_or_seeds": [33101, 33102], "selection_metric": "held-out task output nMSE and actual serialized payload bytes"},
+  "fresh": {"worlds_or_seeds": [33111, 33112, 33113], "locked_before_access": true},
+  "storage": {"authority": "actual deterministic fixed-timestamp ZIP/NPY FP16 inference payload bytes after reload", "paid_objects": ["shared base weights", "shared delta basis", "per-task permutation indices", "direct coefficients or Mirror phases", "private unrelated-task deltas", "metadata and archive headers"]},
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true},
+  "success_gate": "All three fresh seeds: aligned Mirror tasks have output nMSE <=1e-5; total Mirror payload including private deltas and permutations is <=0.90x matched direct aligned coefficient payload; unaligned compression is reported; exact FP16 reload and metric replay.",
+  "failure_gate": "Mirror misses quality in >=2 fresh seeds; or Mirror payload is >=direct aligned coefficients in >=2; or permutation alignment does not improve held-out function reconstruction; or unrelated task functions cannot be retained with the declared private deltas.",
+  "boundaries": ["synthetic post-fit ReLU task functions, not pretrained transformer merge evidence", "permutation addresses preserve hidden-unit symmetry and are paid", "task coordinates are oracle-generated and not learned", "low-rank compression is not independent capacity", "Mirror-specific claim requires advantage over Re-Basin plus direct coefficients"]
+}

@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (84 completed; 546 UNTESTED)
+- P0: **630** (85 completed; 545 UNTESTED)
 - P1: **422** (13 completed; 409 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1056 UNTESTED, 44 PROMISING, 55 FAIL**
+- Current MA statuses: **1055 UNTESTED, 44 PROMISING, 56 FAIL**
 - 68 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -72,11 +72,15 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 - **PROMISING, narrowly:** fresh aligned synthetic cache views: Mirror 2,287 B/context NRMSE .000602 vs rank-2 PCA/Tucker 6,502 B/.000427 and full 32,909 B/.000312. Hard-shared MLKV used 2,188 B but context error was .999. Mirror materialization .846 ms vs PCA/Tucker .051 ms at the same 32,768 MAC proxy. Independent cache states fail (Mirror context error 1.366), requiring private state off-orbit. No autoregressive or LM evidence.
 
+## Completed: MA-331 — Re-Basin-aligned Mirror task deltas
+
+- **FAIL for Mirror-specific byte gate at development:** Re-Basin/direct used 2,574 B and Mirror phase 2,562 B, only 0.47% below the frozen 10% margin; both preserved synthetic task outputs at nMSE <1e-8. Alignment improved rank-2 output nMSE from 0.20–0.264 to <1e-8, but that gain is not Mirror-specific. Fresh seeds remained sealed because the payload byte structure already missed the gate.
+
 ## Next candidate
 
-**MA-331 — Re-Basin-aligned Mirror task deltas (P0)**
+**MA-332 — Mirror permutation-orbit audit (P0)**
 
-MA-330 establishes only an aligned synthetic cache orbit and shows a materialization-time penalty; proceed to the registered symmetry alignment candidate.
+MA-331 was imported from its dedicated research branch; move to the next registry candidate and test whether candidate Views are function-preserving symmetries or add function diversity.
 
 ## Active experiment
 
