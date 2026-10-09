@@ -6,10 +6,10 @@ Integration branch: `research/mirror-application-current-evidence-20261008`; can
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (137 completed; 493 UNTESTED)
+- P0: **630** (138 completed; 492 UNTESTED)
 - P1: **422** (22 completed; 400 UNTESTED)
 - P2: **103** (1 completed; 102 UNTESTED)
-- Current MA statuses: **995 UNTESTED, 44 PROMISING, 116 FAIL**
+- Current MA statuses: **994 UNTESTED, 44 PROMISING, 117 FAIL**
 - 48 experiment directories, complete with status/protocol/results/verification files, are represented in the current evidence set.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-268 is next.
@@ -180,3 +180,6 @@ KG relation rotations (RotatE, TuckER, QuatE, PairRE), EXIF/device-aware ISPs (P
 
 
 **MA-462 FAIL for Mirror-specific frontier; aligned decoder result retained:** on original fresh worlds Mirror beat the fixed-budget HyperFormer MLP (N32 NRMSE 0.0691 vs 0.1991; 73.16 vs 110.78B/context). A1 Fourier decoder with identical embeddings reached 2.55e-7 at 77.16B/context, only 5.2% larger than Mirror while far more accurate. Mirror's structured rotation bias helps this aligned family but does not establish a unique storage/quality gain. **Next: MA-463.**
+
+
+**MA-463 FAIL:** for a rank-one 8×4×3 adapter tensor, factorized Mirror and generic CP matched exactly (N96 NRMSE 0.3064; 33.55B/combo), while HyperFormer was more accurate at 0.1559 / 55.59B. Mirror is 60.4% of HyperFormer bytes, just above the <=60% gate; additive control was smaller. One fresh world exposed severe factor-fit seed sensitivity. Initial unseeded run excluded in A1. **Next: MA-464.**
