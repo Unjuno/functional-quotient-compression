@@ -4,7 +4,7 @@
 - Branch: `research/ma-546-representation-symmetry-20261009`
 - Base commit: `ac1c3e1814aada23eb99254b841faa31b4bb0ffb`
 - Protocol frozen: yes
-- Development complete: no
+- Development complete: yes (amendment 1 corrected rerun)
 - Fresh opened: no
 - Results committed: no
 - Verification committed: no
@@ -12,7 +12,7 @@
 
 ## Next action
 
-Implement the seeded monomial/dense orthogonal gauge transforms and run development worlds.
+Commit corrected development, replay and source freeze; then open fresh 54611–54613.
 
 ## Blockers
 
