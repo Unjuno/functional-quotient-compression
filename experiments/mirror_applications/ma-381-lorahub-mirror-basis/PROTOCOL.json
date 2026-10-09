@@ -1,0 +1,92 @@
+{
+  "experiment_id": "MA-381",
+  "title": "LoRAHub composition over a Mirror-compressed candidate basis",
+  "status": "PROTOCOL_FROZEN_BEFORE_DEVELOPMENT",
+  "base_commit": "d7015f03",
+  "prior_art_refs": ["PA55"],
+  "hypothesis": "For a candidate LoRA bank whose full functional updates lie on a shared rank-2 Givens orbit, per-candidate Mirror angles can preserve LoRAHub few-shot signed-composition quality with no more than 60% of the independent candidate-bank payload, while scalar gates cannot recover that quality.",
+  "physical_object": "Eight frozen rank-2 LoRA candidate modules mapping 16D frozen features to 16D residual outputs, followed by four target-task signed scalar compositions selected from few-shot support data.",
+  "mirror_coordinate": "One per-candidate SO(2) Givens angle inserted between a shared rank-2 LoRA input factor A and output factor B; target LoRAHub composition coefficients remain the same independently optimized signed scalars for all bank variants.",
+  "logical_multiplicity": "Eight source LoRA functions and four few-shot target compositions over their bank.",
+  "prior_art_delta": "PA55/LoraHub freezes multiple candidate LoRA modules and learns positive/negative scalar composition weights on a few-shot target task. This experiment keeps that target-side scalar search unchanged and compresses only the source candidate bank.",
+  "model": {
+    "input_dim": 16,
+    "output_dim": 16,
+    "lora_rank": 2,
+    "candidate_modules": 8,
+    "target_tasks": 4,
+    "source_train_examples_per_world": 4096,
+    "target_support_examples_per_task": 64,
+    "target_test_examples_per_task": 2048,
+    "source_optimizer_updates": 1200,
+    "composition_optimizer_updates_per_target": 300,
+    "batch_size": 64,
+    "optimizer": "Adam",
+    "learning_rate": 0.01,
+    "development_seeds": [38101, 38102],
+    "fresh_seeds": [38111, 38112, 38113],
+    "methods": [
+      "independent rank-2 LoRA candidate bank + signed LoRAHub coefficients",
+      "one hard-tied LoRA candidate + signed coefficients",
+      "shared rank-2 basis + scalar source gates + signed coefficients",
+      "shared rank-2 basis + unrestricted 2x2 per-candidate coefficients + signed coefficients",
+      "shared rank-2 basis + one Givens angle per candidate + signed coefficients"
+    ],
+    "source_schedule": "Every update uses the same sampled 64 feature vectors for all eight candidate source tasks; mean source-bank MSE is minimized. Freeze each source bank before target composition adaptation.",
+    "target_schedule": "For each of four target tasks, train an 8-value signed coefficient vector on the same 64 support examples for all methods, 300 Adam updates. Evaluate once on 2,048 held-out features."
+  },
+  "teacher": {
+    "source_update": "B0 @ R(theta_i) @ A0, where B0 and A0 are shared within each world and each R is one SO(2) rotation. This is an explicitly aligned feasibility fixture.",
+    "target_task": "Sparse signed mixture of three source candidate outputs; fixed target coefficients are generated before adaptation and are not exposed to any method.",
+    "data": "Independent Gaussian frozen-feature examples; source and target outputs are deterministic linear functions of the features."
+  },
+  "controls": [
+    "full independently parameterized rank-2 LoRA candidate bank, mandatory LoRAHub upper/storage control",
+    "hard-tied single LoRA module",
+    "shared basis with scalar source gates",
+    "shared basis with unrestricted per-candidate 2x2 coefficient matrices",
+    "shared basis with per-candidate Givens angles",
+    "identical signed target-coefficient adaptation for every method"
+  ],
+  "development": {
+    "worlds_or_seeds": [38101, 38102],
+    "selection_metric": "mean target-test NRMSE over four target tasks; also report source candidate NRMSE, support fit, actual total payload bytes and composition search compute",
+    "allowed_tuning": "No hyperparameter search; fixed architecture and training schedule are run once. Any implementation correction must rerun development before fresh access."
+  },
+  "fresh": {
+    "worlds_or_seeds": [38111, 38112, 38113],
+    "locked_before_access": true,
+    "open_gate": "Both development worlds: full independent source-bank NRMSE <=0.03; Mirror target-test NRMSE <= independent-bank +0.01 and <=0.05; Mirror total payload <=0.60x independent; Mirror improves target-test NRMSE over scalar gates by >=0.01 at <=1.10x scalar bytes; unrestricted 2x2 coefficients do not match Mirror within 0.005 NRMSE at <=Mirror bytes; gauge audit max function-output delta <=1e-6. Otherwise fresh remains sealed."
+  },
+  "storage": {
+    "authority": "actual serialized NPZ inference payload bytes after reload",
+    "paid_objects": [
+      "all independent or shared LoRA A/B factors",
+      "all per-candidate Mirror angles, scalar gates, or 2x2 coefficient matrices",
+      "all four target-task signed LoRAHub composition vectors",
+      "dimensions, method tags, reconstruction metadata and NPZ names/headers/compression overhead"
+    ]
+  },
+  "compute": {
+    "report_source_examples_and_updates": true,
+    "report_target_support_examples_and_updates": true,
+    "report_source_adapter_MAC_proxy": true,
+    "report_composition_search_MAC_proxy": true,
+    "report_training_and_adaptation_wall_time": true,
+    "report_inference_examples_per_second": true
+  },
+  "symmetry_audit": {
+    "required": true,
+    "operation": "For every independent candidate, apply a nonsingular non-orthogonal 2x2 gauge G: B'=B@G and A'=inv(G)@A. Compare full D=B@A and source/target predictions; a gauge-only transformation is not additional multiplicity.",
+    "tolerance": 1e-6
+  },
+  "success_gate": "All three fresh worlds meet the source, target quality, <=60% total-payload, scalar-control and generic-coefficient gates; gauge audit and serialized metric replay pass.",
+  "failure_gate": "Mirror fails the <=60% payload or quality gate, scalar control matches its useful quality at comparable bytes, generic 2x2 coordinates match within 0.005 NRMSE at no greater bytes, or gauge audit fails.",
+  "boundaries": [
+    "aligned synthetic frozen-feature LoRA/LoRAHub feasibility proxy; no pretrained language model claim",
+    "source candidate bank is intentionally on a common rotation orbit; fresh results still do not establish natural-task compressibility",
+    "LoRA factor matrices are non-unique; compare full functional updates and logits/predictions, not raw factor similarity",
+    "few-shot composition is distinct from independently trained target adapters",
+    "fixed optimizer budget is not a near-converged capacity claim"
+  ]
+}
