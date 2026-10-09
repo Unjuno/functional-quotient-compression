@@ -1,0 +1,82 @@
+{
+  "experiment_id": "MA-307",
+  "title": "Mirror code before PackNet physical allocation",
+  "status": "SCREENING",
+  "base_commit": "b8aff2b4",
+  "prior_art_refs": [
+    32
+  ],
+  "evidence_lane": "MASK_SUBNETWORK/ALLOCATION/ACTUAL_BYTES/RETENTION",
+  "hypothesis": "For task updates that lie near a shared functional-view basis, trying a compact View before allocating per-task PackNet weights reduces stored physical values and bytes; novel residuals should trigger private allocation without harming earlier tasks.",
+  "physical_object": "shared 128-coordinate task basis embedded in D=2048 fixed mask/weight space",
+  "mirror_coordinate": "three coefficients over shared basis; sparse private residual on split",
+  "logical_multiplicity": "12 sequential linear task functions: eight shared-view tasks then four novel tasks",
+  "model": {
+    "dimension": 2048,
+    "active_shared_coordinates": 128,
+    "tasks": 12,
+    "shared_tasks": 8,
+    "novel_tasks": 4,
+    "shared_rank": 3,
+    "residual_cutoff": 0.02,
+    "relative_split_threshold": 0.1
+  },
+  "controls": [
+    "PackNet-style independent sparse task weights and indices",
+    "Mirror shared basis plus codes and private residual fallback",
+    "generic rank-3 PCA on support discovered from the first eight tasks, with the same sparse residual fallback",
+    "generic robust shared basis inferred from first eight tasks, with sparse outlier fit and private residual fallback",
+    "View without physical split"
+  ],
+  "development": {
+    "worlds": [
+      30700,
+      30701
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "selection_metric": "actual serialized bytes, query NRMSE, private allocation count"
+  },
+  "fresh": {
+    "worlds": [
+      30710,
+      30711,
+      30712
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual serialized payload bytes",
+    "paid_objects": [
+      "PackNet task indices and fp16 values",
+      "shared coordinate indices",
+      "Mirror basis and task codes",
+      "PCA shared-support indices, mean, basis and codes",
+      "private residual int16 indices and fp16 values",
+      "metadata",
+      "generic shared basis indices, basis, codes and residuals"
+    ]
+  },
+  "success_gate": "At query NRMSE <=0.05, Mirror with private fallback uses at least 30% fewer private values and bytes than PackNet independent storage, and triggers private allocation for novel tasks while retaining the first eight tasks.",
+  "failure_gate": "Shared View misses quality on novel tasks and fallback fails to recover it, or Mirror does not reduce allocation/bytes; generic PCA matching means no Mirror-specific result. Robust shared-basis control matching Mirror means no Mirror-specific result.",
+  "compute": {
+    "report_optimizer_updates": 0,
+    "report_query_nrmse": true,
+    "report_private_values": true,
+    "report_actual_bytes": true
+  },
+  "boundaries": [
+    "Synthetic linear task functions only",
+    "PackNet is approximated as independent sparse task weights; no iterative pruning/training",
+    "Task family contains constructed shared and novel components",
+    "Retention measured as simultaneous reconstruction, not sequential optimizer retention"
+  ]
+}
