@@ -4,14 +4,14 @@
 - Branch: `research/ma-511-hierarchical-condition-behavior-mirror-20261009`
 - Base commit: `25c4f935`
 - Protocol frozen: yes
-- Development complete: no
+- Development complete: yes; selected 800 common Adam steps on held-out Mirror NRMSE
 - Fresh/audit opened: no
 - Results committed: no
 - Verification committed: no
 
 ## Next action
 
-Implement held-out pair generator, generic matrix and Mirror factorized fits, then select common steps on development data.
+Freeze the 800-step choice and evaluate the locked fresh worlds/seeds.
 
 ## Blockers
 
