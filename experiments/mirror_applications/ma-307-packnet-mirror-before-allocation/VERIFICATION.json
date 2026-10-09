@@ -1,19 +1,68 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
-  "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+  "experiment_id": "MA-307",
+  "decision": "PROMISING, narrowly scoped to synthetic shared-plus-sparse-novel task stream",
+  "protocol_commit": "4b108ea5",
+  "fresh_worlds": [
+    30710,
+    30711,
+    30712
+  ],
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "fresh_rows": 45,
+  "means": {
+    "generic_pca_before_split": {
+      "query_nrmse": 0.003977542018724812,
+      "payload_bytes": 2626.3333333333335,
+      "allocated_private_values": 177.22222222222223,
+      "private_split_tasks": 12.0
+    },
+    "generic_robust_shared_basis": {
+      "query_nrmse": 0.0008908648839375625,
+      "payload_bytes": 1958.6666666666667,
+      "allocated_private_values": 62.44444444444444,
+      "private_split_tasks": 4.0
+    },
+    "mirror_before_split": {
+      "query_nrmse": 0.0003938146077820824,
+      "payload_bytes": 1658.3333333333333,
+      "allocated_private_values": 62.22222222222222,
+      "private_split_tasks": 4.0
+    },
+    "packnet_private": {
+      "query_nrmse": 0.0,
+      "payload_bytes": 9358.0,
+      "allocated_private_values": 1536.0,
+      "private_split_tasks": 12.0
+    },
+    "view_no_physical_split": {
+      "query_nrmse": 0.09957054422961341,
+      "payload_bytes": 1246.0,
+      "allocated_private_values": 0.0,
+      "private_split_tasks": 0.0
+    }
   },
-  "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
-  },
-  "metric_replay": {
-    "checked": false,
-    "max_difference": null
-  },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "facts": [
+    "PackNet-style independent sparse storage uses 1,536 per-task values and averages 9,358 B, with exact reconstruction.",
+    "Mirror shares a rank-3 128-coordinate basis, stores three codes per task, and splits private residuals only for four novel tasks; mean residual values 62.2 and serialized payload 1,658 B.",
+    "Mirror query NRMSE is 0.000394; no-split view NRMSE is 0.0996.",
+    "Generic robust shared-basis fit also splits four tasks, with 62.4 residual values, 1,959 B, and query NRMSE 0.000891.",
+    "Mirror total parameter values including shared basis/codes are approximately 482 versus 1,536 PackNet values (~69% fewer); payload is ~82% smaller.",
+    "Generic PCA baseline uses 2,626 B, ~178 residual values and query NRMSE 0.00398."
+  ],
+  "interpretation": "Trying a View before per-task physical allocation can delay allocation on this constructed task stream. Mirror improves the storage-quality point over PackNet and modestly over the robust generic shared-basis control; however, the teacher was generated from the exact Mirror basis and codes are directly available, so the difference is not evidence of general learned Mirror advantage.",
+  "hypothesis": "Supported as aligned synthetic allocation feasibility; general PackNet replacement and Mirror-specific learning advantage are not established.",
+  "counter_hypothesis": "The shared tasks are generated exactly from the stored Mirror basis, giving it oracle coordinates; a better uncentered generic factorization or robust code fitting may close the remaining gap.",
+  "limitations": [
+    "Synthetic linear tasks only",
+    "PackNet approximated as independent sparse task weights; no iterative pruning or training",
+    "Teacher shared tasks exactly use Mirror basis; latent codes directly supplied",
+    "No sequential optimizer retention, neural task quality, or inference latency",
+    "Generic robust control close but not byte-identical; uncentered robust factorization not tested"
+  ],
+  "fresh_data_used_for_tuning": false,
+  "source_sha256": "a076550dc473e30a10bdcc2a3f09fd7978ffbba2100445587bdd836ec873cf34"
 }

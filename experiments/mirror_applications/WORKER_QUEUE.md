@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-307.** MA-301 showed ~49% fewer bytes than independent packed binary masks on a teacher-aligned rank-2 mask family; a byte-matched generic logistic factorization was weaker at fixed 250 updates. Scope is narrow and not natural SupSup evidence. Continue to MA-307, Mirror code before PackNet physical allocation.
+**Current operational pointer (2026-10-09): MA-311.** MA-307 showed an aligned synthetic allocation delay versus PackNet-style private storage; robust generic shared-basis fitting was close, and the teacher supplied Mirror latent codes. Continue to MA-311, Mirror task code in intrinsic subspace.
 
 # Worker queue
 

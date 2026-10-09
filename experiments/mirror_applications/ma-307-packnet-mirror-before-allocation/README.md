@@ -25,3 +25,7 @@ Generic low-rank task-vector compression may delay allocation equally well; the 
 No iterative pruning, optimizer retention, routing, natural task or neural-network accuracy evidence.
 
 Development: Mirror splits all four novel tasks and no initial shared tasks, using ~61 residual values and 1,653 B with NRMSE ~4.1e-4. PackNet-style independent storage uses 1,536 private values and 9,358 B at exact function fit. A robust generic shared-basis fit, which estimates each code from the majority of coordinates and stores sparse outliers, uses the same 61 private values and NRMSE ~9.0e-4 at 1,952 B. This is a strong ordinary-control match; fresh evaluates frozen conditions.
+
+## Fresh result / scope
+
+Mirror + sparse fallback used 1,658 B with query NRMSE 0.000394, versus 9,358 B for PackNet-style independent sparse weights with exact reconstruction. It split all four novel tasks and stored about 62 private residual values; including shared basis and task codes, total physical values were about 482 vs 1,536. The robust generic shared-basis control was close at 1,959 B / 0.000891 and the same four split tasks. Teacher tasks were generated from Mirror's exact basis and supplied latent coordinates. This is a narrow feasibility signal, not evidence of a general PackNet replacement.

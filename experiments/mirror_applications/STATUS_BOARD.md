@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (76 completed; 554 UNTESTED)
+- P0: **630** (77 completed; 553 UNTESTED)
 - P1: **422** (13 completed; 409 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1066 UNTESTED, 38 PROMISING, 51 FAIL**
+- Current MA statuses: **1065 UNTESTED, 39 PROMISING, 51 FAIL**
 - 68 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -70,9 +70,9 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-307 — Mirror code before PackNet physical allocation (P0; PA32)**
+**MA-311 — Mirror task code in intrinsic subspace (P0)**
 
-MA-301 produced a narrow aligned synthetic mask result: about 49% fewer bytes than binary masks, while byte-matched logistic factorization had higher error. Next test whether a View delays PackNet physical allocation.
+MA-307 showed a narrow allocation-delay signal on a constructed task stream; a robust generic basis was close. Next test Mirror codes in an independently discovered intrinsic task subspace.
 
 ## Active experiment
 
@@ -156,13 +156,13 @@ KG relation rotations (RotatE, TuckER, QuatE, PairRE), EXIF/device-aware ISPs (P
 ## Completed: MA-296 — orthogonalized task-vector Mirror superposition
 
 - **FAIL** on fresh synthetic linear tasks: Hadamard address and generic QR both reconstruct at ~2e-6 query NRMSE, but use 16,735/16,744 B versus 16,473 B raw task vectors. Unbound sum uses 2,131 B but query NRMSE is ~2.52. No Mirror-specific gain; random PSP unbinding control also has substantial crosstalk. See claim ledger.
-- Next P0 candidate: MA-307 — Mirror code before PackNet physical allocation.
+- Next P0 candidate: MA-311 — Mirror task code in intrinsic subspace.
 
 
 ## Completed: MA-297 — SETA shared sparse subspace + Mirror views
 
 - **FAIL for Mirror-specific value; shared-subspace compression signal observed.** Fresh synthetic sparse task vectors recovered shared support at 100%; Mirror code used 836 B and generic PCA 841 B at query NRMSE ~3.31e-7, versus SETA-style shared/private 1,055 B. Task deltas were given to the encoder; this is not a faithful SETA continual-learning reproduction.
-- Next P0 candidate: MA-307 — Mirror code before PackNet physical allocation.
+- Next P0 candidate: MA-311 — Mirror task code in intrinsic subspace.
 
 
 ## Completed: MA-299 — Split-on-Share Mirror code allocation
@@ -174,4 +174,10 @@ KG relation rotations (RotatE, TuckER, QuatE, PairRE), EXIF/device-aware ISPs (P
 ## Completed: MA-301 — continuous Mirror supermask
 
 - **PROMISING, narrowly scoped:** on intentionally rank-2-aligned synthetic masks, Mirror used 16,750 B vs packed binary masks 32,847 B (~49% less) at query NRMSE 0.00854. A byte-matched generic logistic factorization had NRMSE 0.04798; PCA used more bytes and had NRMSE 0.158. Since the teacher masks were generated from the same rank-2 basis Mirror stores, this is not general SupSup/Piggyback or learned-task evidence.
-- Next P0 candidate: MA-307 — Mirror code before PackNet physical allocation.
+- Next P0 candidate: MA-311 — Mirror task code in intrinsic subspace.
+
+
+## Completed: MA-307 — Mirror code before PackNet physical allocation
+
+- **PROMISING, narrowly scoped synthetic screen:** Mirror with sparse fallback used 1,658 B and query NRMSE 0.000394 vs PackNet-style independent sparse storage at 9,358 B exact. It split four novel tasks; total physical values including shared basis/codes were ~482 vs 1,536. Robust generic shared-basis fit was close at 1,959 B / 0.000891. Teacher tasks were exactly generated from Mirror's basis with known codes; no trained PackNet or natural continual task evidence.
+- Next P0 candidate: MA-311 — Mirror task code in intrinsic subspace.

@@ -1,16 +1,22 @@
 # MA-307 status
 
-- Status: SCREENING
+- Status: PROMISING, narrowly scoped synthetic allocation feasibility
 - Branch: `research/ma-307-packnet-mirror-before-allocation-20261009`
-- Base commit: `b8aff2b4`
-- Development complete: yes (worlds 30700–30701 × seeds 0–2)
-- Fresh/audit opened: no
-- Protocol locked: after this commit, before fresh
+- Frozen protocol commit: `4b108ea5`
+- Fresh: complete, 3 worlds × 3 seeds; 45 result rows
+- Verification: complete
 
-## Next action
+## H
+Try a task View before assigning new per-task weights; allocate sparse private residuals only when a task exceeds a frozen reconstruction threshold.
 
-Run frozen fresh worlds 30710–30712.
+## T
+Synthetic D=2048 linear tasks: eight share a rank-3 basis on 128 coordinates; four add sparse novel residuals. Compared PackNet-style independent sparse weights, Mirror plus residual fallback, robust generic shared-basis fitting, ordinary PCA, and no split. Fresh worlds 30710–30712 × seeds 0–2.
 
-## Development decisions
+## D
+PROMISING only for this aligned screen. Mirror payload 1,658 B vs PackNet 9,358 B (~82% less); query NRMSE 0.000394. It split four novel tasks and stored ~62 residual values. Including shared basis and task codes, total physical values are ~482 versus 1,536 PackNet (~69% less). No-split view used 1,246 B but NRMSE 0.0996. Robust generic basis also split four tasks and was close: 1,959 B, NRMSE 0.000891, ~62 residual values.
 
-Fixed residual composition to add private corrections to shared predictions. Added robust generic shared-basis fitting because the initial PCA control used a mean-centered basis that was not comparable to the teacher's latent coordinates. The generic control estimates codes from majority inlier coordinates and preserves sparse outliers. Both changes preceded fresh evaluation.
+## C
+Teacher shared tasks are exactly generated from Mirror's stored basis, and their latent codes are directly supplied. A better generic factorization could close the remaining gap.
+
+## U
+No trained PackNet, optimizer retention, natural tasks, real network, or inference-latency evidence. This is representational feasibility, not a general PackNet replacement claim.
