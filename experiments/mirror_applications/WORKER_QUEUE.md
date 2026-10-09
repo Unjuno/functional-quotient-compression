@@ -1,4 +1,4 @@
-**Current operational pointer (2026-10-09): MA-353.** MA-352 reduced payload to 4,744 B vs MIMO 6,500 B but collapsed member disagreement to .00003 (correlation 1.0), nearly the single shared head. It fails diversity preservation. Proceed to MA-353, Bayesian distribution over Mirror coordinates.
+**Current operational pointer (2026-10-09): MA-355.** MA-353 failed its development storage/Mirror-specific gate: the 1,525 B Mirror posterior matched an ordinary Gaussian scalar byte-for-byte and exceeded the 1,493 B rank-1 posterior. Fresh stayed sealed. Proceed to MA-355, product-key Mirror expert/address routing.
 
 # Worker queue
 

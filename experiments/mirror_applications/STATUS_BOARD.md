@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (91 completed; 539 UNTESTED)
+- P0: **630** (92 completed; 538 UNTESTED)
 - P1: **422** (15 completed; 407 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1047 UNTESTED, 46 PROMISING, 62 FAIL**
+- Current MA statuses: **1046 UNTESTED, 46 PROMISING, 63 FAIL**
 - 68 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -122,12 +122,16 @@ MA-341 and MA-342 consecutively missed the Mirror-specific byte gate because one
 
 - **FAIL for diversity preservation:** fresh Mirror total payload 4,744 B vs MIMO 6,500 B, but member disagreement collapsed to .00003 and correlation reached 1.000, nearly identical to single shared head (4,708 B, zero disagreement). Storage savings removed MIMO member diversity; no capacity claim.
 
+## Completed: MA-353 — Bayesian distribution over Mirror coordinates
+
+- **FAIL at development for the frozen byte/Mirror-specific gate:** Mirror Gaussian coordinate used 1,525B, byte/hash-identical to direct Gaussian scalar and 32B larger than rank-1 Gaussian (1,493B). A three-mode archive used 591–592B and had exact teacher calibration. No fresh worlds were opened after the gate failed.
+- Synthetic oracle 16D logistic posterior only; 10 development payloads replayed exactly, 3 tests pass. No learned posterior or natural-data calibration claim.
+
 ## Next candidate
 
-**MA-353 — Bayesian distribution over Mirror coordinates (P0)**
+**MA-355 — product-key Mirror expert/address routing (P0)**
 
-Test posterior uncertainty over a low-description View code against posterior uncertainty over shared weights.
-
+The next P0 queued after MA-353. MA-354 is P1 and remains behind available P0 work.
 ## Active experiment
 
 MA-517, MA-257, MA-261, MA-265 and MA-266 are FAIL; MA-255 and MA-260 are NOT ESTABLISHED due implementation defects; MA-258 is PROMISING only on its aligned synthetic orbit. Next is MA-271.
