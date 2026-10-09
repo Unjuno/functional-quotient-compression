@@ -3,11 +3,12 @@
 - Status: FAIL
 - Branch: `research/ma-592-prompt-pool-mirror-composition-20261009`
 - Base commit: `e6e7ddc8`
+- Evidence commit: `d30e7e7c`
 - Development complete: yes (both banks; same-seed replay exact)
 - Fresh/audit opened: no (composition misses quality/improvement gate and aliases native L2P)
-- Results committed: pending
-- Verification committed: pending
-- Registry row updated: pending
+- Results committed: yes
+- Verification committed: yes
+- Registry row updated: yes
 
 ## Next action
 
