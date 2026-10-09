@@ -1,0 +1,15 @@
+{
+  "experiment_id":"MA-288","title":"Dynamic Mirror context code versus fast-weight programmer","status":"SCREENING","base_commit":"54f0352b","evidence_lane":"DYNAMIC_CONTEXT_MEMORY/QUALITY/ACTUAL_BYTES/UPDATE_COMPUTE","prior_art_refs":[25],
+  "hypothesis":"A shared slow controller can map live context to a compact functional coordinate that retrieves a task memory with fewer state bytes than explicit fast-weight updates, while generalizing to held-out context combinations.",
+  "physical_object":"one shared linear slow controller and memory basis","mirror_coordinate":"context-generated low-rank update code m(c)","logical_multiplicity":"session/task memories selected by input context",
+  "model":{"context_dim":8,"memory_dim":16,"rank":2,"contexts":16},"task":{"train_contexts":12,"heldout_contexts":4,"support_per_context":64,"query_per_context":128},
+  "controls":["no memory","native fast-weight outer-product programmer","explicit per-context rank-2 updates","shared basis with static context IDs","dynamic Mirror context code","generic linear low-rank context map","generic MLP context-to-code control"],
+  "development":{"worlds":[28800,28801],"seeds":[0,1,2],"allowed":"validate held-out split, memory update rule, code fitting, payload bytes and interference"},
+  "fresh":{"worlds":[28810,28811,28812],"seeds":[0,1,2],"locked_before_access":true},
+  "storage":{"authority":"actual serialized inference state bytes","paid_objects":["slow controller","memory bases","explicit fast weights or context code generator","context/index metadata"]},
+  "compute":{"report_context_updates":true,"report_update_macs":true,"report_query_macs":true,"report_bytes":true,"report_wall_clock":true},
+  "success_gate":"Held-out context query NRMSE <=0.05, no context leakage, and <=70% bytes of explicit fast updates; Mirror-specific claim requires beating generic context-to-code control.",
+  "failure_gate":"Held-out NRMSE >0.20, static-ID-only control matches dynamic code, or generic MLP matches Mirror at similar bytes.",
+  "amendments":["Development used a compositional rank-2 context rule; added a generic linear rank-2 control with the same function class as the Mirror code before fresh access. This prevents attributing a low-rank factorization benefit specifically to Mirror."],
+  "boundaries":["Synthetic linear associative memory only","No language-model claim","Context combinations are held out by identity","Fast-weight programmer is mandatory baseline"]
+}
