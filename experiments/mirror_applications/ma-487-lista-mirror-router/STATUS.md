@@ -3,7 +3,7 @@
 - Status: FAIL
 - Branch: `research/ma-487-lista-mirror-router-20261009`
 - Base: `5071b10c`
-- Verification committed at `ffb65e44`. Development LISTA trained; fresh worlds 48710-48712 × seeds 0-2 complete
+- Verification committed at `ffb65e44`; replay test passed (1/1). Development LISTA trained; fresh worlds 48710-48712 × seeds 0-2 complete
 
 H: Fixed-depth LISTA approximates OMP codes with lower inference work and practical stored state.
 
@@ -14,3 +14,6 @@ D: FAIL. OMP NRMSE .0269 / 15,329B. LISTA errors .821, .742, .644, .358; each pa
 C: Dense unrolled matrices plus small development set cause poor generalization and high storage.
 
 U: Better LISTA optimization/structured weights and learned task dictionaries.
+
+
+Next: MA-488 — shared/private dictionary + Mirror coefficients, on its dedicated branch.
