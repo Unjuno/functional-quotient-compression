@@ -1,0 +1,21 @@
+{
+  "experiment_id": "MA-614",
+  "title": "Mirror code composition before a shared interpreter",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/COMPUTE",
+  "base_commit": "bec1563a",
+  "hypothesis": "For an analytic function family, composing small Mirror codes before one shared executor call preserves sequential composition with lower active compute and a compact complete payload.",
+  "physical_object": "one shared ten-harmonic Fourier executor",
+  "mirror_coordinate": "phase-pair code composed before execution",
+  "logical_multiplicity": "ordered source-function pairs, with held-out phase pairings",
+  "prior_art_refs": ["PA127", "PA128"],
+  "controls": ["exact sequential two-sine composition", "one-call ten-harmonic Mirror decoder", "explicit composite Fourier coefficient codes"],
+  "fixture": "Two 8-phase grids. Hold out ordered pairs with (outer_index+inner_index) mod 4 = 0. Exact composition is sin(2*sin(x+inner_phase)+outer_phase); one-call executor uses harmonics 1..5.",
+  "development": {"worlds_or_seeds": [61401,61402], "optimizer_updates": 0, "selection_metric": "held-out NRMSE2, actual serialized bytes, arithmetic proxy, isolated CPU latency"},
+  "fresh": {"worlds_or_seeds": [], "locked_before_access": true, "run_only_if": "not applicable; deterministic analytic screen"},
+  "storage": {"authority": "actual serialized inference payload bytes", "format": "torch.save exact code payload", "paid_objects": ["source phase codes", "pair indices", "composite codes where stored", "metadata"]},
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true},
+  "success_gate": "Held-out Mirror NRMSE2 <=1e-6, active compute below sequential, and complete payload <=0.85x explicit composite codes.",
+  "failure_gate": "Quality gate miss, no active compute reduction, or payload ratio >0.85.",
+  "boundaries": ["Analytic deterministic mechanism screen only.", "No learned interpreter or natural task capacity claim.", "No fresh/audit split."]
+}
