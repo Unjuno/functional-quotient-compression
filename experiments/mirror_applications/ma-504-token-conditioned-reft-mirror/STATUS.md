@@ -8,7 +8,7 @@
 - Fresh/audit opened: yes; 3 worlds × 3 seeds, 45 method rows
 - Results committed: yes (`92d76da8`)
 - Verification committed: yes
-- Registry row updated: yes after verification
+- Registry row updated: yes after verification; artifact replay test passed (1/1)
 
 ## Decision
 
