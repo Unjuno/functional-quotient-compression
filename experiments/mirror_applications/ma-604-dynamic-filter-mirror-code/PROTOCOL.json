@@ -1,0 +1,21 @@
+{
+  "experiment_id":"MA-604",
+  "title":"Dynamic filter Mirror code generator",
+  "status":"SCREENING",
+  "evidence_lane":"MECHANISM/STORAGE/COMPUTE",
+  "base_commit":"16ddd3f2",
+  "hypothesis":"An input-generated three-angle Givens code on one shared operator retains held-out quality while reducing actual bytes and operator-generation work versus a generic dynamic-filter generator.",
+  "physical_object":"one learned 8x12 canonical linear operator",
+  "mirror_coordinate":"input-generated three Givens angles applied as two left and one right plane rotations to the shared operator",
+  "logical_multiplicity":"per-input 8x12 effective filter/operator",
+  "prior_art_refs":["PA122"],
+  "controls":["static shared 8x12 operator","three-matrix shared-basis linear coefficient mixer","generic input-to-96-filter hypernetwork (mandatory Dynamic Filter Network control)","teacher oracle upper reference"],
+  "fixture":"non-convolutional dynamic linear projection: y=W(x)x; teacher W(x) is a softmax mixture of four random 8x12 operator bases with coefficients from a 12->4 tanh->4 generator",
+  "development":{"worlds_or_seeds":[60401,60402],"train_examples":4096,"dev_examples":1024,"steps":1200,"batch_size":128,"optimizer":"AdamW lr=0.003, weight_decay=0","selection_metric":"held-out normalized MSE; fixed configuration across both worlds"},
+  "fresh":{"worlds_or_seeds":[60411,60412],"train_examples":4096,"dev_examples":1024,"steps":1200,"batch_size":128,"locked_before_access":true,"run_only_if":"development gates pass in both worlds"},
+  "storage":{"authority":"actual serialized inference payload bytes","format":"torch.save state_dict + method metadata to BytesIO","paid_objects":["canonical operator or operator bases","all code/router/hypernetwork weights","method and dimensional metadata"]},
+  "compute":{"report_tokens_or_examples":true,"report_optimizer_updates":true,"report_active_compute_proxy":true,"report_isolated_wall_clock":true,"proxy":"MAC proxy for code/filter generation, three Givens operator rotations or basis assembly, and dynamic linear projection per example"},
+  "success_gate":"Fresh Mirror MSE <=1.10x shared-basis control in both worlds; payload <=0.75x generic full-filter hypernetwork; compute proxy <=1.5x shared-basis control.",
+  "failure_gate":"Any development quality/byte/compute gate fails; fresh remains sealed.",
+  "boundaries":["Synthetic mechanism screen only; no natural Transformer or capacity claim.","Oracle teacher is privileged and not deployable."]
+}
