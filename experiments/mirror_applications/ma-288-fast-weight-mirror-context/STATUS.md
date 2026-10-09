@@ -6,3 +6,4 @@
 - Fresh: 63 rows, worlds 28810–28812 × seeds 0–2.
 - Mirror/generic rank-2: NRMSE 2e-6/1.7e-5 at 264/268 B; fast outer update NRMSE 0.891 at 577 B.
 - See `VERIFICATION.json`.
+- Verification rerun: 3 tests pass; 63 fresh rows and 105 payload size/SHA-256 entries checked.
