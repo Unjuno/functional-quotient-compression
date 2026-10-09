@@ -1,0 +1,109 @@
+{
+  "experiment_id": "MA-450",
+  "title": "Meta-learned decision: View vs private residual allocation",
+  "status": "SCREENING",
+  "evidence_lane": "PRIVATE_ALLOCATION/QUALITY/BYTES/IDENTIFICATION",
+  "base_commit": "59cb9098",
+  "hypothesis": "A development-selected residual-validation controller allocates private residuals only to tasks outside the shared Mirror subspace, achieving at least 95% of always-private query quality while using fewer exact serialized N=20 bytes; it must improve over always-Mirror on out-of-subspace tasks and match the simple validation-threshold control.",
+  "physical_object": "one shared 16D model basis with 2D Mirror subspace and optional private residual slots",
+  "mirror_coordinate": "2D task code, with a sparse per-task private residual only when validation indicates a miss",
+  "logical_multiplicity": "many related and unrelated task functions with adaptive private capacity",
+  "prior_art_refs": [
+    75,
+    30
+  ],
+  "controls": [
+    "always shared/Mirror code only",
+    "always private full task vector",
+    "development-selected simple validation threshold",
+    "development-selected controller with support residual features",
+    "oracle per-task allocation"
+  ],
+  "task": {
+    "type": "16D linear regression with mixed in-subspace and out-of-subspace tasks",
+    "dimension": 16,
+    "mirror_rank": 2,
+    "support_examples": 32,
+    "validation_split": [
+      16,
+      16
+    ],
+    "query_examples": 128,
+    "task_mix": "50% in-subspace, 50% out-of-subspace; held-out task draws",
+    "tasks_per_world": 40,
+    "task_id_partition": {
+      "development": [
+        100,
+        179
+      ],
+      "fresh": [
+        3000,
+        3119
+      ]
+    }
+  },
+  "development": {
+    "worlds": [
+      45000,
+      45001
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "threshold_grid": [
+      0.01,
+      0.03,
+      0.05,
+      0.1,
+      0.2,
+      0.4,
+      0.8
+    ]
+  },
+  "fresh": {
+    "worlds": [
+      45010,
+      45011,
+      45012
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "tasks_per_world": 40,
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "shared basis",
+      "task Mirror code",
+      "private residual if selected",
+      "controller or threshold",
+      "allocation flag",
+      "indices",
+      "metadata"
+    ],
+    "report_amortization_N": [
+      1,
+      20,
+      100
+    ]
+  },
+  "compute": {
+    "report_validation_compute": true,
+    "report_private_fit_compute": true,
+    "report_query_wall": true,
+    "report_controller_bytes": true
+  },
+  "success_gate": "Every fresh world: adaptive query NRMSE <=1.05x always-private; exact serialized N=20 bytes lower than always-private; improves over always-Mirror on out-of-subspace tasks; no worse than simple validation-threshold baseline.",
+  "failure_gate": "Any quality/bytes gate miss, task type is not identified, or simple validation rule matches the controller at equal bytes.",
+  "boundaries": [
+    "Synthetic linear allocation mechanism only.",
+    "No claim about natural continual learning or language models.",
+    "SETA decomposition is conceptually relevant but not reproduced."
+  ]
+}
