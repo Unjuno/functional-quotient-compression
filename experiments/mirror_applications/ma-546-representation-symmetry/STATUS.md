@@ -5,9 +5,9 @@
 - Base commit: `ac1c3e1814aada23eb99254b841faa31b4bb0ffb`
 - Development worlds: complete
 - Fresh worlds 54611–54613: complete; settings frozen
-- Results committed: pending integration
-- Verification committed: pending integration
-- Registry row updated: pending integration
+- Results committed: yes (`2ced0e1b346568dc1b9f2086ef2c27607390c016`)
+- Verification committed: yes
+- Registry row updated: yes; FAIL for multiplicity, PASS as symmetry audit
 
 ## Next action
 
