@@ -2,7 +2,7 @@
 
 - Status: PROMISING, scoped synthetic noisy-address robustness
 - Branch: `research/ma-494-error-correcting-expert-ids-20261009`
-- Base: `f5e5311d`; A1 includes registered 3x repetition control
+- Base: `f5e5311d`; A1 includes registered 3x repetition control; verification commit `ae75b488`
 - Fresh: 49420-49422 × seeds 0-2
 
 H: Redundant codes reduce route errors without excessive address storage.
