@@ -6,13 +6,13 @@
 - Protocol freeze: `fe2ffb3c`
 - Development complete: yes; selected tau=0.30
 - Fresh/audit opened: yes, after threshold freeze
-- Results committed: yes (pending report commit SHA)
-- Verification committed: yes (pending report commit SHA)
-- Registry row updated: yes (same report commit)
+- Results committed: yes (28397956)
+- Verification committed: yes (28397956)
+- Registry row updated: yes (28397956)
 
 ## Next action
 
-Test serialized payload replay, update the registry and claim ledger, verify integrity, and push this branch.
+MA-478 is complete; continue with MA-481 on its dedicated branch.
 
 ## Limitations
 
