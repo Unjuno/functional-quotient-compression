@@ -4,14 +4,14 @@
 - Branch: `research/ma-504-token-conditioned-reft-mirror-20261009`
 - Base commit: `e87c50a3`
 - Protocol frozen: yes
-- Development complete: no
+- Development complete: yes; selected learning rate = 0.01 by pooled validation intervention NRMSE
 - Fresh/audit opened: no
 - Results committed: no
 - Verification committed: no
 
 ## Next action
 
-Implement shared synthetic teacher and all registered controls, then select only the learning rate on development worlds.
+Commit development selection and lock it; then run the registered fresh worlds/seeds.
 
 ## Blockers
 
