@@ -1,0 +1,22 @@
+{
+  "experiment_id": "MA-332",
+  "title": "Mirror permutation-orbit audit",
+  "status": "PROTOCOL_FROZEN_BEFORE_DEVELOPMENT",
+  "base_commit": "9b454c57",
+  "evidence_lane": "MECHANISM/SYMMETRY_AUDIT/ACTUAL_BYTES",
+  "hypothesis": "Hidden permutations and positive hidden rescaling with inverse outgoing compensation preserve a ReLU MLP function and therefore add zero functional multiplicity; uncompensated Givens views change the function.",
+  "physical_object": "one fixed 16-24-8 two-layer ReLU MLP",
+  "mirror_coordinate": "a hidden-unit permutation, positive scaling, or Givens rotation code",
+  "logical_multiplicity": "count only functionally distinct outputs; gauge-equivalent coordinates count as one",
+  "prior_art_refs": [37, 47],
+  "controls": ["canonical baseline", "permutation-reindexed hidden units", "positive scaling with inverse outgoing compensation", "negative scaling with inverse compensation", "uncompensated Givens activation view", "Givens parameter transform with compensation", "independent full weights as storage reference"],
+  "model": {"input": 16, "hidden": 24, "output": 8, "relu": true},
+  "data": {"inputs_per_world": 4096, "distribution": "fixed-seed standard Gaussian", "metrics": ["output NRMSE", "max absolute output difference"]},
+  "development": {"worlds": [33201, 33202], "optimizer_updates": 0, "selection_metric": "symmetry output NRMSE and actual serialized bytes"},
+  "fresh": {"worlds": [33211, 33212, 33213], "locked_before_access": true, "optimizer_updates": 0},
+  "storage": {"authority": "actual serialized deterministic inference payload bytes", "paid_objects": ["shared weights and biases", "per-view transform code", "metadata"]},
+  "compute": {"report_examples": true, "optimizer_updates": 0, "active_compute_proxy": true, "isolated_wall_clock": true},
+  "success_gate": "Exact permutation, positive rescaling and compensated transform output NRMSE <=1e-6; uncompensated Givens output NRMSE >1e-3; gauge class has one unique logical output within tolerance.",
+  "failure_gate": "An asserted exact symmetry exceeds 1e-6 or uncompensated Givens is <=1e-3 NRMSE.",
+  "boundaries": ["fixed random synthetic ReLU MLP", "no trained model or task quality", "audit/control only, not a compression win", "no extrapolation to arbitrary architectures"]
+}
