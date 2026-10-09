@@ -1,21 +1,82 @@
 {
-  "experiment_id":"MA-464",
-  "title":"AdaMix over logical Mirror adaptations",
-  "status":"FROZEN_SCREENING",
-  "base_commit":"a904b900",
-  "evidence_lane":"STOCHASTIC_ADAPTATION_MIXTURE/QUALITY/MERGED_INFERENCE/BYTES",
-  "hypothesis":"A stochastic mixture of four logical Mirror views over one shared 2x2 adaptation basis will match four independent AdaMix adapters on routed fresh skills with lower actual bytes, while merged single-adapter inference retains comparable average quality.",
-  "physical_object":"one shared 2x2 adapter basis",
-  "mirror_coordinate":"four learned Givens view angles, one per logical adaptation component",
-  "logical_multiplicity":"four routed adapter behaviors",
-  "prior_art_refs":[83],
-  "controls":["AdaMix-style four independent adapters trained under stochastic component sampling","AdaMix independent adapters merged by arithmetic average at inference","Mirror views routed by skill ID","Mirror views merged to one average adapter","single shared adapter","independent skill adapter upper control"],
-  "task":{"type":"four-skill 2D linear adapter regression","skills":4,"mixture":"three skills are rotations of one shared basis; one off-orbit residual skill","support_examples_per_skill":64,"query_examples_per_skill":256,"training":"1,000 stochastic skill/component updates; component ID is sampled from the balanced skill mixture"},
-  "development":{"worlds":[46400,46401],"seeds":[0,1,2],"steps":1000,"selection":"fixed stochastic update budget; no fresh tuning"},
-  "fresh":{"worlds":[46410,46411,46412],"seeds":[0,1,2],"locked_before_access":true},
-  "storage":{"authority":"actual serialized inference payload bytes","paid_objects":["all independent adapter matrices or shared Mirror basis and angles","skill route IDs","merge metadata"],"amortization_N":[1,4]},
-  "compute":{"report_optimizer_updates":true,"report_active_MAC":true,"report_fit_wall":true,"report_query_wall":true,"report_merge_cost":true},
-  "success_gate":"Every fresh world: routed Mirror NRMSE <=1.10x routed AdaMix at <=60% N4 payload, and merged Mirror NRMSE <=1.10x merged AdaMix.",
-  "failure_gate":"Mirror misses routed quality/byte gate, merged inference degrades beyond gate, or a shared/no-view control matches Mirror at fewer bytes.",
-  "boundaries":["Synthetic four-skill linear mixture only.","Skill IDs are provided equally to routed controls.","No natural language or Transformer evidence."]
+  "experiment_id": "MA-464",
+  "title": "AdaMix over logical Mirror adaptations",
+  "status": "COMPLETED_FAIL",
+  "base_commit": "a904b900",
+  "evidence_lane": "STOCHASTIC_ADAPTATION_MIXTURE/QUALITY/MERGED_INFERENCE/BYTES",
+  "hypothesis": "A stochastic mixture of four logical Mirror views over one shared 2x2 adaptation basis will match four independent AdaMix adapters on routed fresh skills with lower actual bytes, while merged single-adapter inference retains comparable average quality.",
+  "physical_object": "one shared 2x2 adapter basis",
+  "mirror_coordinate": "four learned Givens view angles, one per logical adaptation component",
+  "logical_multiplicity": "four routed adapter behaviors",
+  "prior_art_refs": [
+    83
+  ],
+  "controls": [
+    "AdaMix-style four independent adapters trained under stochastic component sampling",
+    "AdaMix independent adapters merged by arithmetic average at inference",
+    "Mirror views routed by skill ID",
+    "Mirror views merged to one average adapter",
+    "single shared adapter",
+    "independent skill adapter upper control"
+  ],
+  "task": {
+    "type": "four-skill 2D linear adapter regression",
+    "skills": 4,
+    "mixture": "three skills are rotations of one shared basis; one off-orbit residual skill",
+    "support_examples_per_skill": 64,
+    "query_examples_per_skill": 256,
+    "training": "1,000 stochastic skill/component updates; component ID is sampled from the balanced skill mixture"
+  },
+  "development": {
+    "worlds": [
+      46400,
+      46401
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "steps": 1000,
+    "selection": "fixed stochastic update budget; no fresh tuning"
+  },
+  "fresh": {
+    "worlds": [
+      46410,
+      46411,
+      46412
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "all independent adapter matrices or shared Mirror basis and angles",
+      "skill route IDs",
+      "merge metadata"
+    ],
+    "amortization_N": [
+      1,
+      4
+    ]
+  },
+  "compute": {
+    "report_optimizer_updates": true,
+    "report_active_MAC": true,
+    "report_fit_wall": true,
+    "report_query_wall": true,
+    "report_merge_cost": true
+  },
+  "success_gate": "Every fresh world: routed Mirror NRMSE <=1.10x routed AdaMix at <=60% N4 payload, and merged Mirror NRMSE <=1.10x merged AdaMix.",
+  "failure_gate": "Mirror misses routed quality/byte gate, merged inference degrades beyond gate, or a shared/no-view control matches Mirror at fewer bytes.",
+  "boundaries": [
+    "Synthetic four-skill linear mixture only.",
+    "Skill IDs are provided equally to routed controls.",
+    "No natural language or Transformer evidence."
+  ]
 }
