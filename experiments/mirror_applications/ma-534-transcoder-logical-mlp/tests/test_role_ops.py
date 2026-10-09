@@ -1,6 +1,8 @@
 import sys,unittest
 from pathlib import Path
 import torch
+from safetensors.torch import save_file,load_file
+import tempfile
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'source'))
 from role_ops import givens_view,sparse_decode,fit_centroids,assign_roles
 
@@ -19,6 +21,14 @@ class RoleOpsTest(unittest.TestCase):
         torch.manual_seed(3); x=torch.randn(5,6); code=torch.rand(5,32); dec=torch.randn(32,6); b=torch.randn(6); skip=torch.randn(6,6)
         y,ids,vals=sparse_decode(code,dec,b,skip,x,8)
         self.assertEqual(ids.shape,(5,8)); self.assertEqual(vals.shape,(5,8)); self.assertEqual(y.shape,x.shape)
+    def test_independent_weight_copies_serialize_as_distinct_payload(self):
+        w=torch.randn(3,4,dtype=torch.bfloat16)
+        state={f'role{r}.weight':w.clone().contiguous() for r in range(4)}
+        with tempfile.TemporaryDirectory() as d:
+            p=Path(d)/'four.safetensors';save_file(state,str(p));loaded=load_file(str(p))
+            self.assertEqual(len(loaded),4)
+            self.assertGreaterEqual(p.stat().st_size,4*w.numel()*w.element_size())
+
     def test_centroid_roles_deterministic(self):
         torch.manual_seed(4); x=torch.cat([torch.randn(20,4)-2,torch.randn(20,4)+2])
         c,l=fit_centroids(x,2,53401); self.assertEqual(len(torch.unique(l)),2)
