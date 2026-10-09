@@ -7,3 +7,4 @@
 - Aligned Mirror/generic: NRMSE 4.82e-8, 1,971/1,972 B; native Monarch 3,202 B.
 - Independent shared code near baseline; native/private controls improve modestly.
 - See `VERIFICATION.json`.
+- Verification rerun: 3 tests pass; all 108 fresh rows and 180 payload size/SHA-256 entries checked.
