@@ -4,14 +4,14 @@
 - Branch: `research/ma-508-activation-addition-mirror-basis-20261009`
 - Base commit: `f85b2963`
 - Protocol frozen: yes
-- Development complete: no
+- Development complete: yes; deterministic encode/decode validated across 2 worlds × 3 seeds
 - Fresh/audit opened: no
 - Results committed: no
 - Verification committed: no
 
 ## Next action
 
-Implement deterministic steering-vector worlds, basis fitting on development-only behaviors, actual serialized methods and the locked readout metrics.
+Freeze development artifacts and run the locked fresh worlds/seeds; no hyperparameters are selected.
 
 ## Blockers
 
