@@ -1,0 +1,13 @@
+{
+  "experiment_id": "MA-594",
+  "title": "HyperFormer generator replaced by Mirror basis",
+  "status": "NOT_ESTABLISHED_PAUSED_BEFORE_MEASUREMENT",
+  "evidence_lane": "QUEUE_DISPOSITION_ONLY",
+  "base_commit": "cb0188e8",
+  "hypothesis": "A task×layer×position Mirror basis may replace generic HyperFormer++ generation at lower actual bytes without losing held-out adapter quality.",
+  "prior_art_refs": ["PA118"],
+  "blocker": "HYPERFORMER_MIRROR_CODE_FAMILY_DIAGNOSTIC_2026-10-08 pauses unchanged task×layer×position code-output variants after MA-461 and MA-462 miss frozen gates for the same seen-fidelity/native-control cause. MA-594 does not specify a materially distinct insertion or attribution control.",
+  "measurements_performed": false,
+  "fresh_or_audit_accessed": false,
+  "next_step_to_reopen": "Assign a new MA amendment or candidate specifying a distinct decoder/function family and a non-aliased native control before measurement."
+}
