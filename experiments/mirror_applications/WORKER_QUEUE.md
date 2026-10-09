@@ -472,4 +472,4 @@ The 1155-row worker-ready registry was reconciled against fetched `origin/resear
 
 ## Current handoff — 2026-10-09
 
-MA-574 is **NOT ESTABLISHED** because its recorded frozen source digest mismatch the committed source (the protocol digest matches) and same-seed diagnostic replays select different codebook IDs than the artifacts labeled registered development. Fresh stayed sealed. See `ma-574-spinquant-rotation-codebook/RESULTS.md` and `ARTIFACT_PROVENANCE.json`. Next executable P0 is MA-575 (factorized layer × block rotation code; PA113/PA21).
+MA-574 is **NOT ESTABLISHED** because its recorded frozen source digest mismatch the committed source (the protocol digest matches) and same-seed diagnostic replays select different codebook IDs than the artifacts labeled registered development. Fresh stayed sealed. See `ma-574-spinquant-rotation-codebook/RESULTS.md` and `ARTIFACT_PROVENANCE.json`. MA-575 is now active on research/ma-575-factorized-layer-block-rotation-20261009 (factorized layer × block rotation code; PA113/PA21); protocol/source frozen before dev.
