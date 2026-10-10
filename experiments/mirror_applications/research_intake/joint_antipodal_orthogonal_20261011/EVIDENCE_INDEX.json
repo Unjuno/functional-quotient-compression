@@ -1,0 +1,48 @@
+{
+  "id": "MV-JOINT-001",
+  "date_jst": "2026-10-11",
+  "branch": "research/mirror-joint-angular-loss-20261011",
+  "stage": "DEVELOPMENT_ONLY",
+  "primary_results": {
+    "paired_joint_fixed_pass": true,
+    "unpaired_geom_lambda005_allseed_pass": false,
+    "unpaired_geom_lambda05_allseed_pass": false,
+    "mirror_specific_pareto_pass": false
+  },
+  "n_trained_models": 42,
+  "n_optimizer_updates": 29400,
+  "n_model_npz_roundtrip_verified": 42,
+  "n_metrics_independently_recomputed": 168,
+  "max_replay_score_difference": 0,
+  "full_training_replay_bitwise_identical": 3,
+  "n_unit_tests_passed": 8,
+  "model_backend": "PyTorch2.10+cpu FP32",
+  "fresh_seeds_unopened": [
+    211,
+    212,
+    213
+  ],
+  "locked_before_dev": {
+    "protocol_sha256": "9c55f136d307e8dcfd24f1bc4068e1d9f40bb0dcd68b99dfbfd49e4bb366a4cf",
+    "experiment_sha256": "8d99ebf17f27286fedf457a9ad94eb0a5f45e33feda8e27c57d666686870399d",
+    "tests_sha256": "439ac848359d8ac00f6580861de94d77d4ac3537451f30da1025831a343fb035"
+  },
+  "report_md_sha256": "b70e8d396b18bf4cb4eff5e0035e9c3c9b8bb952e641d92f57acbca87cbcdf03",
+  "artifacts": {
+    "full": {
+      "filename": "MIRROR_JOINT_VIEWS_2026-10-11_FULL_EVIDENCE.zip",
+      "sha256": "b5ab1cd91fa783e77f6120f854b14f242397549ecdbd59fd421268ab4174ac46",
+      "bytes": 817585
+    },
+    "source_results": {
+      "filename": "MIRROR_JOINT_VIEWS_2026-10-11_SOURCE_RESULTS.zip",
+      "sha256": "f752a4706c78e3525afaa6c9e3bb0575882b2a7b3d0d6baae73c35665a883b24",
+      "bytes": 36508
+    }
+  },
+  "notes": [
+    "GitHub has summary/index only; runnable source and NPZ files are in conversation attachment",
+    "native two-head sign and low-rank two-dimensional polar parameterization are exact controls",
+    "No routed MoE, no real LM quality, no independent fresh validation"
+  ]
+}
