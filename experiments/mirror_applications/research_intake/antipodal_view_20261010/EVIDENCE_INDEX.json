@@ -1,0 +1,59 @@
+{
+  "date": "2026-10-10",
+  "branch": "research/mirror-antipodal-view-separation-20261010",
+  "scope": "research intake; no registered MA status mutation",
+  "dev_status": {
+    "A_view_distance": "FAIL",
+    "A_mirror_pareto": "FAIL",
+    "B_K_scaling_distance": "FAIL",
+    "B_K_scaling_pareto": "FAIL",
+    "C_aligned_sign": "PASS",
+    "C_unrelated_teacher": "FAIL",
+    "C_mirror_specific": "FAIL"
+  },
+  "verification": {
+    "python_unit_tests": 17,
+    "passed": 17,
+    "failed": 0,
+    "serialized_npz_verified": 211,
+    "metric_replay_scalars": 1101,
+    "max_abs_replay_difference": 0,
+    "native_signed_alias_npz_pairs": 18,
+    "fresh_seeds_opened": []
+  },
+  "predev_locks": {
+    "A": {
+      "protocol_sha256": "df73bbae9212cf9c4bf5fc45cb71eea80cb8dc23d1ba1bfe514cfee472d0afbd",
+      "source_sha256": "b0638bacdbb852541c44e22bcc2d1fdf5ab3ff7d8682344fbf772b19939cfcd5"
+    },
+    "B": {
+      "protocol_sha256": "8bbee1bca42a9761cd952513d15a93395f71572f7d2d69f5fd64800e13633135",
+      "source_sha256": "98d39c6174d19cd5a911c139fc2673d412f3efc7a7d207d17a3c4f1ae43eb7b7"
+    },
+    "C": {
+      "protocol_sha256": "44dbc80cae0e8c8b3e5f67ca84e85565237844a9928ecadccb83f6b0f3e90950",
+      "source_sha256": "a0dc2ee6eb3edc618a01717533d090d39a4e77afe71db44af706e3c6a3fce75e"
+    }
+  },
+  "report_sha256": "e06bbae77be00fab9437680f145e8578aa04d4fde4f8e7ed5994bd2c7ec95186",
+  "aggregate_csv_sha256": "bbb848a8ff0728cc08ecf52c6c7b0e208dcd5ac3156aa72f1d735df7ce799b2b",
+  "verification_json_sha256": "a14133553f0613984c19f25f2f895cc48763b8661e1920b9cd7bba2433df8e11",
+  "external_conversation_artifacts": {
+    "full_zip": {
+      "filename": "MIRROR_ANTIPODAL_2026-10-10_FULL_EVIDENCE.zip",
+      "bytes": 3307980,
+      "sha256": "3aa352ff12abfb040708cdcbc4f043cc9a07ab2c5c641dcf97628d1d52115bae"
+    },
+    "source_results_zip": {
+      "filename": "MIRROR_ANTIPODAL_2026-10-10_SOURCE_RESULTS.zip",
+      "bytes": 102861,
+      "sha256": "8c6775069a83e5ded5fdb625bc02e445a65e4cb46bdb4a0584a3b958c83961aa"
+    }
+  },
+  "notes": [
+    "DO NOT treat 2^r distinct linear functions as 2^r linearly independent skills",
+    "Full runnable source and all 211 NPZ banks are only in conversation artifacts, not uploaded to GitHub",
+    "All real-task labels are derived from one dataset; no independent natural language task family",
+    "Synthetic aligned teacher is generated from the same coded family; this is an aligned construction, not natural discovery"
+  ]
+}
