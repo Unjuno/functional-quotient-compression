@@ -1,0 +1,15 @@
+case,method,dev_seeds,mean_BCE_nat_label,min_BCE_nat_label,max_BCE_nat_label,mean_accuracy,whole_npz_bytes,scientific_note
+paired,single_anchor_fixed,3,0.397600,0.365637,0.428236,0.727778,19992,orthogonal_roles_not_supervised
+paired,fixed_cardinal,3,0.081239,0.060590,0.104507,0.976389,19972,native_twoheads_plus_sign_exact_alias
+paired,learned_angle_lambda0,3,0.105731,0.081429,0.129928,0.977315,20806,angles_learned
+paired,learned_angle_lambda0p05,3,0.108685,0.080792,0.132672,0.976389,20818,geometry_regularized
+paired,learned_angle_lambda0p5,3,0.106467,0.081893,0.127359,0.976852,20814,geometry_strong
+paired,native_rank2,3,0.093808,0.071672,0.117035,0.976852,20510,strong_rank2_control
+paired,native_fourheads,3,0.084265,0.066431,0.105555,0.976157,20180,strong_multihead_control
+unpaired,single_anchor_fixed,3,1.090275,1.076178,1.118041,0.661111,19992,orthogonal_roles_not_supervised
+unpaired,fixed_cardinal,3,0.317723,0.312263,0.321960,0.793519,19972,contradictory_anti_labels
+unpaired,learned_angle_lambda0,3,0.207806,0.204177,0.214699,0.924306,20806,no_angular_penalty
+unpaired,learned_angle_lambda0p05,3,0.265606,0.244942,0.289734,0.899074,20818,regularization_hurts
+unpaired,learned_angle_lambda0p5,3,0.295349,0.273196,0.312615,0.862269,20814,strong_regularization_hurts
+unpaired,native_rank2,3,0.202969,0.199300,0.209649,0.911111,20510,strong_lowrank_control
+unpaired,native_fourheads,3,0.065623,0.044888,0.094822,0.976852,20180,strong_fullhead_control
