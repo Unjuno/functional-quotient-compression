@@ -1,0 +1,49 @@
+{
+  "experiment": "TCSMA-002",
+  "stage": "source-frozen prospective replication of TCSMA-001 partial-world development signal",
+  "registered_after_observing_dev": true,
+  "initial_dev_seeds": [
+    1001,
+    1002,
+    1003
+  ],
+  "previously_sealed_TCSMA_001_fresh": [
+    1101,
+    1102,
+    1103
+  ],
+  "new_fresh_seeds": [
+    2101,
+    2102,
+    2103,
+    2104,
+    2105
+  ],
+  "unrelated_negative_control_seeds": [
+    2101,
+    2102
+  ],
+  "train_protocol_sha256": "81c75305a071809e40aa65951376c8f15bf56d4fa7b95eb8ff0d1799840f4d8e",
+  "science_source_sha256": "354e5d68847aba7668adc52d1187ae0d446cf666d32b88eb71b9073cc53a20f1",
+  "models": [
+    "ridge_independent",
+    "shared_dense",
+    "view_sparse_private",
+    "tcsma_full"
+  ],
+  "fixed_task_family": "partial, exactly 1 of 6 output rows per task outside learned rotated sparse shared dictionary",
+  "h1": "TCSMA partial match objective reduces test normalized MSE at same learned sparse transform and rank1 private budget",
+  "h2": "Quality and physical storage remain useful against a dense shared dictionary and independent per-task ridge reference",
+  "h3": "On unrelated functions, the match objective does not create spurious useful additional function capacity",
+  "decision": {
+    "delta_nMSE": "view_sparse_private test nMSE - tcsma_full test nMSE",
+    "H1_PASS": "delta_nMSE strictly >0 in at least 4 of 5 new fresh seeds AND mean(delta_nMSE)>=0.005 absolute",
+    "H2_PASS": "TCSMA nMSE <=0.06 in at least 4/5 seeds AND serialized TCSMA full bank <=0.80 times independent ridge in each seed",
+    "runtime_guard": "TCSMA batch64 folded inference median <=1.25 times view_sparse_private in at least 4/5 fresh seeds",
+    "H3_PASS": "on 2 unrelated worlds TCSMA cannot claim an independent ridge equivalence; explicitly report nMSE and matched pairs",
+    "mirror_specific_gate": "automatic FAIL when native shared transform+ sparse coefficients+private residual is algebraically identical",
+    "scope": "Synthetic linear mechanism only, same original teacher construction, not natural task transfer, no new LLM result"
+  },
+  "read_only_result_policy": "No selection or stopping based on 2101..2105 results; complete all 5 seeds before final verdict; no additional hyperparameter changes",
+  "compute": "One CPU torch thread, 450 Adam steps per method, 12 tasks with 128 training examples per task; same source and initialization as TCSMA-001"
+}
