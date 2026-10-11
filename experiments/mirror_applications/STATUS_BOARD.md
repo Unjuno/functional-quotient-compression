@@ -4,13 +4,13 @@ Updated: 2026-10-09 JST
 Canonical worker branch remains `research/mirror-application-worker-ready-20261007` (unchanged).
 This is an ISOLATED RESEARCH branch `research/mirror-lime-output-view-20261009`, NOT the worker authoritative queue.
 
-## Program totals (reconciled from authoritative 1193-row **isolated staging** registry)
+## Program totals (reconciled from authoritative 1194-row **isolated staging** registry)
 
-- Registered candidates: **1193**
-- P0: **651** (35 completed; 616 UNTESTED)
+- Registered candidates: **1194**
+- P0: **652** (36 completed; 616 UNTESTED)
 - P1: **439** (12 completed; 427 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **1146 UNTESTED, 29 PROMISING, 18 FAIL**
+- Current MA statuses: **1146 UNTESTED, 29 PROMISING, 19 FAIL**
 - 47 experiment directories, complete with status/protocol/results/verification files, have been imported into this branch.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). This does not change prior verified results or the current MA-255 next-candidate decision.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. MA-255 remains next.
@@ -145,3 +145,10 @@ Following the user's instruction, the previous MA-1175 first-priority assignment
 - **LiME is an especially strong native control:** a single shared PEFT modulated by per-expert scaling vectors and zero-parameter routing already realizes one-expensive-adapter many logical experts; an extra Mirror m is not itself novel.
 - LME01 uses five outputs from one shared trunk+one shared PEFT per image on sklearn digits; source pinned to `research/mirror-lime-output-view-20261009` before the five fresh [701..705]. After this source-aligned CPU screen, the scientific MA-1189 remains UNTESTED; native LiME zero-parameter routing and MMT-47 are not reproduced. See [report](research_intake/lime_output_view_20261009/pilots/lme01/REPORT.md).
 - Existing completed claims remain 29 PROMISING and 18 FAIL. Current live worker research branch with MA-255 next, WORKER_QUEUE and main are untouched.
+
+## 2026-10-12 — MA-1194 isolated verified research registration
+
+- Added MA-1194 (P0, **FAIL**) for Task-Conditioned Sparse Mirror Alignment on this isolated staging branch. Original canonical 1155-row worker-ready branch and main remain unchanged.
+- Three-seed development partial-sharing benefit was followed by prospectively locked *new* five-seed replication (source fixed and protocol committed before fresh). **0/5** benefited from adding the capped bidirectional nearest-neighbor match loss; mean normalized MSE 0.03236 with matching vs 0.02638 without. Unrelated controls did not acquire extra function capacity.
+- The nominal 32.0% archive saving against per-task ridge is not quality-equivalent (ridge nMSE 0.000039). Standard group-rotated sparse dictionary is algebraically equivalent; thus no Mirror-specific claim.
+- Verification: 11 tests, 124 saved inference NPZ, 100 independently reloaded dev/fresh evaluation rows, 2 bitwise full training replays; results under [research_intake/tcsma_20261012](research_intake/tcsma_20261012/README.md). The full runnable source/model archive is linked by SHA in the research report, not uploaded to this GitHub branch.
