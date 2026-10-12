@@ -1,0 +1,39 @@
+{
+  "phase":"POST_CALIBRATION_PRE_DEVELOPMENT",
+  "selection_sha256":"1f5d6a3240e46dca27c6b8790130fb568f59b522d02958afcc2f434918d926af",
+  "calibration_models_completed":120,
+  "test_metrics_read_during_calibration":false,
+  "shared_constants":{"weight_decay":0.0001,"steps":800,"warmup":0},
+  "aligned":{
+    "learned":{"lr":0.001,"axis_lr":0.001,"sigma":0.03},
+    "fixed_matched":{"lr":0.001,"axis_lr":0.001,"sigma":0.03},
+    "fixed":{"lr":0.01,"sigma":0.12},
+    "shared":{"lr":0.01,"sigma":0.03},
+    "native4":{"lr":0.01,"sigma":0.12},
+    "film":{"lr":0.01,"sigma":0.03},
+    "lora2":{"lr":0.01,"sigma":0.03},
+    "householder":{"lr":0.01,"sigma":0.03},
+    "multihead":{"lr":0.01,"sigma":0.03},
+    "private_ffn":{"lr":0.01,"sigma":0.03},
+    "long_native":"lora2"
+  },
+  "digits8":{
+    "learned":{"lr":0.001,"axis_lr":0.001,"sigma":0.03},
+    "fixed_matched":{"lr":0.001,"axis_lr":0.001,"sigma":0.03},
+    "fixed":{"lr":0.001,"sigma":0.12},
+    "shared":{"lr":0.01,"sigma":0.03},
+    "native4":{"lr":0.01,"sigma":0.12},
+    "film":{"lr":0.01,"sigma":0.03},
+    "lora2":{"lr":0.001,"sigma":0.12},
+    "householder":{"lr":0.001,"sigma":0.12},
+    "multihead":{"lr":0.001,"sigma":0.03},
+    "private_ffn":{"lr":0.001,"sigma":0.03},
+    "long_native":"film"
+  },
+  "long_steps":2400,
+  "long_families":["aligned","digits8"],
+  "long_methods":["learned","fixed_matched","calibration-best-native"],
+  "dev_seeds":[17101,17102,17103],
+  "fresh_seeds_still_sealed":[17111,17112,17113,17114,17115],
+  "note":"Candidate shared-backbone LR remained 0.001 as planned. Native calibration had a broader learning-rate grid up to0.01. Fixed_matched isolates axes at identical LR and initialization; tuned fixed is a separate stronger control. This is not a converged-capacity comparison."
+}
