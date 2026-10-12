@@ -1,0 +1,20 @@
+{
+ "id":"MA701-LP01-LR-DIAG",
+ "status":"NEW_POST_DISCOVERY_DEVELOPMENT_PROTOCOL",
+ "trigger":"Primary plan fixed learned shared-backbone LR at0.001 while native calibration allowed0.01. Matched fixed versus learned improves, but both underfit synthetic target. Long digit training increases BCE despite accuracy improvement.",
+ "original_verdict":"FAIL_DEV_GATE; never revised by this diagnostic",
+ "science_source_unchanged":"d8739e0a1128dec2dada093906dec089860cfbe1c7f4ada845c5a01661c593ab",
+ "calibration_seed":17100,
+ "calibration_families":["aligned","digits8"],
+ "new_common_grid":{"lr_and_axis_lr":[0.001,0.003,0.01],"sigma":[0.03,0.12],"warmup":0,"steps":800},
+ "calibration_reuse":"Reuse exact previously fitted native configurations; run only missing learned configurations. Same six allowed configurations for methods that use sigma; shared/multihead/private_ffn omit irrelevant duplicate sigma settings. Select by validation loss only.",
+ "new_development_seeds":[27101,27102,27103],
+ "families":["aligned","digits8"],
+ "methods":["learned","fixed_matched","fixed","lora2","householder","multihead","film"],
+ "steps":800,
+ "long_steps":2400,
+ "long_methods":["learned","fixed_matched","calibration-best native among film/lora2/householder/multihead"],
+ "analysis":"Report paired per-seed losses at800 and2400, actual bytes, no aggregate rescue of primary gates. Compare high-LR learned with matched fixed and strong independently selected native. All original fresh17111..17115 remain sealed.",
+ "secondary_overfit_diagnosis":"Report training versus validation/test BCE at the already registered800/2400 checkpoints. Do not choose a test-optimal checkpoint; early stopping/temperature calibration remains future work unless separately registered.",
+ "limits":"This follows observed primary development results; it is a new development study, NOT confirmatory fresh replication and NOT Phase B/C. No new teacher family or natural-language task."
+}
