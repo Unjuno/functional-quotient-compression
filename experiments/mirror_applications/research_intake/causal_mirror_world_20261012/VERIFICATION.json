@@ -1,0 +1,61 @@
+{
+  "id": "CMW-001",
+  "date": "2026-10-12",
+  "branch": "research/mirror-causal-world-dynamics-20261012",
+  "role": "research_intake_related_to_MA-798_MA-799_MA-802_MA-804",
+  "status": "FAIL_DEV_GATE_FRESH_SEALED",
+  "worlds": [
+    "shared",
+    "partial_shift",
+    "unrelated"
+  ],
+  "calibration_seed": 17000,
+  "dev_seeds": [
+    17011,
+    17012,
+    17013
+  ],
+  "fresh_sealed": [
+    18021,
+    18022,
+    18023,
+    18024,
+    18025
+  ],
+  "supervision": "forward event actor, target and kind are supervised; inverse event retrieved without event label by 48 candidate forward rollouts",
+  "models_trained": 117,
+  "optimizer_updates": 63450,
+  "actual_npz_replayed": 81,
+  "metric_replays": 891,
+  "replay_max_abs_error": 1.1102230246251565e-16,
+  "full_train_reproductions_sha_identical": 1,
+  "unit_tests_passed": 16,
+  "shared": {
+    "learned_plane_nmse": 0.012061734373370768,
+    "fixed_random_nmse": 0.015967768927415166,
+    "native_geometry_nmse": 0.004586206283420266,
+    "mirror_event_top1": 1,
+    "native_event_top1": 1,
+    "learned_npz_bytes": 7466.666666666667,
+    "native_npz_bytes": 6510
+  },
+  "partial_shift": {
+    "learned_nmse": 0.042566588769356366,
+    "learned_top1": 0.9733333333333333
+  },
+  "unrelated": {
+    "learned_nmse": 0.5383200347423553,
+    "learned_top1": 0.3933333333333333
+  },
+  "prereg_gate": "learned planes vs same-init fixed random planes: >=0.05 absolute heldout nMSE improvement in >=2/3 dev seeds; fails 0/3",
+  "paired_gains": [
+    0.00500484556,
+    0.00498618931,
+    0.0017270688
+  ],
+  "dev_gate_pass": false,
+  "original_fresh_opened": false,
+  "source_protocol_sha256": "46dec0ae0d63ea2c831277939e4aab1465282251536063a38bba28f43a0ca72a",
+  "evidence_full_zip_sha256": "d5ad84098d64277d4daa43fd73aa4659fd4f59da8addfd9477448847228400b0",
+  "full_source_repository_uploaded": false
+}
