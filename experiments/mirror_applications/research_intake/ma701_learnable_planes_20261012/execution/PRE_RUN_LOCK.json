@@ -1,0 +1,26 @@
+{
+  "status": "PRE_CALIBRATION_LOCK",
+  "local_commit": "a910564274790758b6c9d9e9072fda012b40f5e0",
+  "hashes": {
+    "PROTOCOL.json": "000146aac04511cba83a2b56a7b926c3fff3c60df2ccec373166e717998254c1",
+    "source/__init__.py": "c84b0bd5aff461ed34a5227cd7f34114ad27c4599f3d93a523dc4cb199217f85",
+    "source/experiment.py": "d8739e0a1128dec2dada093906dec089860cfbe1c7f4ada845c5a01661c593ab",
+    "source/planes.py": "0135ca6f56ea1933a5c71a1a3746f1fb6aaaecf803ac13db1c09f65898f86759",
+    "source/runner.py": "a7e64f77f5babd06767661310db53df37c5b9b2c7d9d028d879360cc019308f1",
+    "tests/test_experiment.py": "276e2ef0e9132515e40667b5f2623055807283fce0e947e7fee963f41d9fa5bc",
+    "tests/test_planes.py": "a45b9d4d52038f9b7007b04b25b8fc9b9997612869692ecf840509376df729f1",
+    "tests/test_runner.py": "1336c630c09a6bbabd9c36eda3ea06bdd68dab43dbb9398b1c0c7f45bd9e2936"
+  },
+  "calibration": {"seed":17100,"families":["aligned","digits8"],"selection":"validation only","runs":120},
+  "development": {"seeds":[17101,17102,17103],"families":["aligned","partial","unrelated","digits8","digits4"],"steps":800},
+  "long_continuation": {"steps":2400,"families":["aligned","digits8"],"methods":["learned","fixed_matched","calibration-best native"]},
+  "fresh_seeds_sealed":[17111,17112,17113,17114,17115],
+  "gates": {
+    "H1_dev":"at least 2/3 aligned seeds improve nMSE by >=10% over fixed_matched, with candidate mean nMSE<=0.05 at800",
+    "H2_dev":"all3 digits8 seeds: loss gap<=0.02 nat/label, worst-task gap<=0.05, accuracy gap>=-0.01 versus calibration-best non-private native",
+    "fresh_open":"both gates and numerical correctness must pass; otherwise fresh stays sealed",
+    "scope":"Phase A only; B/C conditional; no new official MA status; native exact alias cannot establish Mirror-specific novelty"
+  },
+  "tests_passed_before_lock":31,
+  "source_files_to_follow":"Hashes are frozen now; complete source and tests will be published verbatim and their Git blob hashes verified. No new data outcome has been observed."
+}
