@@ -1,146 +1,174 @@
-# MA-701-LP01 — 学習可能な共有Mirror変換面の共同学習 実験計画
+# MA-701-LP01 Rev.2 — 学習可能なMirror変換方向の共同最適化計画
 
-> For agentic workers: execute this plan task-by-task, with test-first changes and mandatory verification before scientific claims. This is a plan only; no new measurements have been produced.
+**科学的状態：PLAN_ONLY / 未実行。** 2026-10-12 JST。既存 MA-701 に接続する限定サブ実験。新規MA番号は発行しない。main、公式MA registry、既存FAIL/PROMISING判定は変更しない。**本書の数値は実験計画上の設定・事前判定条件であり、測定結果ではない。**
 
-**Status:** PLAN_ONLY / NOT STARTED. No new MA number, registry status mutation, fresh audit, or merge into main.
-**Date:** 2026-10-12 JST.
-**Goal:** 固定されたMirror回転面ではなく、少数の共有ベクトルから生成される回転面・タスク別View座標・共有ニューラル重みを共同学習し、品質/保存量/計算量の優位性を厳密に比較する。
-**Primary registry link:** MA-701 (Householder task Views, existing P0 UNTESTED). Related MA-703 (layer×task reflection), MA-956 (learned symmetry), TCSMA MA-1194 staging FAIL; not a newly minted MA-1195.
-**Architecture:** Shared non-linear FFN + learnable low-description orthogonal plane generators + per-task code; optional sparse gating and rank-one private residual. The learned axes must be shared globally, not stored per task. Compare exact native operator alias and strong rank/FiLM/LoRA/independent controls.
-**Tech Stack:** Python 3.13 / PyTorch 2.10+cpu / NumPy / scikit-learn / pytest, CPU one thread, actual named NPZ serialization.
-**Spec:** The objective and evidence contract in docs/phase2/MIRROR_PARAMETER_INTEGRATION_DOCTRINE.md and experiments/mirror_applications/EXPERIMENT_CONTRACT.md.
+> Worker instructions: Read the repository EXPERIMENT_CONTRACT.md and MIRROR_PARAMETER_INTEGRATION_DOCTRINE.md first. Implement tests before implementation, confirm a failing test before each feature, run full scoped tests, freeze source/protocol hashes before evaluating each reserved development/fresh world. Do all available computation in the container. Do not claim replication, novel Mirror capacity, or native baseline superiority from an aligned synthetic teacher alone.
 
-## Prior-research conflict check (verified, do not duplicate)
+## 0. 根拠・既存研究と本計画の差分
 
-- MV-JOINT-001 (research/mirror-joint-angular-loss-20261011) jointly trained four task losses and task angles, but on a **fixed two-dimensional rotation plane**. Paired loss was 0.08124 versus native four-head 0.08426; unrelated fixed-view loss 0.31772 versus native 0.06562. Learned planes and generators were not compared.
-- TCSMA-001/002 (research/ma-1194-task-sparse-mirror-alignment-20261012) jointly fitted shared dictionary/coefficients/fixed-plane angles/private rank-1; its auxiliary matching gradient uses fixed ridge-derived rows and primarily changes angles, not the shared dictionary. Prospectively preregistered five-seed matching addition failed 0/5.
-- MA-574/575 have actual dedicated branch records but concern **discrete Hadamard/sign/permutation code selection for int4 quantization**, not SGD-learned common rotation axes from multiple task losses. MA-574 status is NOT_ESTABLISHED because freeze SHA/provenance diverged; MA-575 development FAIL due exact native BOFT-style alias.
-- MA-701 and MA-703 already contain the vector-reflection/factorization idea as **UNTESTED registered proposals**, with no dedicated completed experiment branch observed at planning time. Do not register another ID or promote statuses.
-- HRA/Householder, BOFT/OFT and ordinary shared-basis adapters are direct prior art. A mirror-named implementation exactly matching a native parametrization is not a Mirror-specific novelty.
+- **MV-JOINT-001（2026-10-11）:** 共有2D出力と複数タスクの共同損失・学習角度は実験済み。ただし回転面は固定。相補4タスク BCE 0.08124、非相補4タスクでは固定4方向 BCE 0.31772・独立4ヘッド 0.06562。角度を離すだけでは品質が下がる。
+- **TCSMA-001/002 / MA-1194 isolated staging（2026-10-12）:** D、疎係数 A、固定面の角度 m、専用Eをタスクデータから同時学習。部分一致補助損失は固定リッジ推定に主として作用し、5新規seedで0勝（nMSE 0.03236 vs 補助なし0.02638）。新しい学習可能軸・機能勾配・一対一部分対応は未確認。
+- **MT001/RF1、MN008、MS009–014、SRM001:** 多View同時学習・再利用・共有/専用の有望な条件は既に検証済み。一方で、学習データを重複提示した効果、非共有対照との最終品質、推論コストの問題が残る。
+- **MA-701（P0 UNTESTED）:** 反射ベクトルを学習するHouseholder系列を既に登録。**LP01はその実験計画と関連する学習可能な「共有2D回転面」サブスクリーンであり、MA-701のHouseholder本体を置き換えない。** 学習できるHouseholder反射自体はHRA（Yuan et al., NeurIPS 2024）の既存技術。MA-703（層×タスク反射）・MA-956（学習した対称変換のタスク座標化）とも連携。
+- **MA-574/575:** 個別実験が存在。int4量子化用の離散回転コードと選択の実験であり本研究の共同学習とは異なる。574は凍結ソース不整合でNOT_ESTABLISHED、575はnative BOFT等価でFAIL。
+- **一番安い既存対照は重要:** HRA、OFT/BOFT、Givens構成、自由係数の共有rank-2/4、FiLM/IA3、同等予算LoRA、単一共有trunk＋独立ヘッド。数式的に同じnative変換をMirrorの新機構とは呼ばない。
 
-## H — falsifiable hypotheses
+参考文献: HRA https://arxiv.org/abs/2405.17484 ; https://papers.neurips.cc/paper_files/paper/2024/hash/cdd0640218a27e9e2c0e52e324e25db0-Abstract-Conference.html
 
-H1 *Learnability:* With the same shared backbone and training examples/optimizer updates, learning the shared plane vectors improves held-out task loss over **fixed-plane** task-coordinate learning in families whose useful axes are not coordinate-aligned; target >=10% relative improvement in paired nMSE on the synthetic positive mechanism world.
-H2 *Generalization:* Joint axis/coordinate learning produces useful non-identical task functions on both a deliberately aligned teacher and non-complement real-digit classification labels without severe interference.
-H3 *Marginal resource utility:* At K=8 and K=16 (if validated), whole-serving-bank serialized bytes and folded/eager latency compete with the best quality-qualified native shared low-rank, FiLM/LoRA and multihead controls. A smaller parameter count alone is not a pass.
-H4 *Gradient route:* Unlike the old TCSMA pseudo-alignment auxiliary, a genuinely learned shared-axis model has nonzero gradients from the **task loss** reaching shared feature parameters, axis vectors and per-task coordinates. Alignment auxiliary must be separately ablated.
-C0 *Counter-hypothesis:* Improved geometry is only a native HRA/OFT/group-dictionary reparameterization, gauge motion, extra optimizer capacity, task-specific oracle teacher alignment, or poor native baseline optimization.
+## 1. H — 分離して検証する仮説
 
-## Exact candidate operator (first trial)
+**H1 軸の学習効果:** 共有された学習可能な回転面ベクトルが、固定回転面＋同じタスクコードに比べて未見タスク例の損失を下げる。新しい軸を前提に教師が生成される「構造に整列した」合成世界と、オフファミリーを分ける。
 
-Let $h_\theta(x)\in\mathbb R^{32}$, $z(x)=W_{\rm up}h_\theta(x)\in\mathbb R^{32}$, shared learned raw axis vectors $a_j,b_j\in\mathbb R^{32}$ for $j=1,\dots,p$, and per-task code $m_t\in\mathbb R^p$.
+**H2 共同表現形成:** 共有FFN、変換面、タスクコードを訓練時から共同更新すると、機能的に異なる複数のラベルを表現でき、単純な角度分散の強制より予測品質と干渉を改善できる。
 
-Normalize $u_j=a_j/(\|a_j\|+\epsilon)$, then $v_j=\widetilde v_j/(\|\widetilde v_j\|+\epsilon)$ with $\widetilde v_j=b_j-(u_j^\top b_j)u_j$. Every generator is $G_j=v_ju_j^\top-u_jv_j^\top$ (skew symmetric). Each exact plane rotation is
+**H3 物理的な損益:** K=4/8 は表現学習機構の検証、K=16/32 は共有軸の初期費用の償却と完全な実推論ファイル容量を評価。圧縮「成功」は強いnative対照と品質が同等のときに限る。
 
-$$R_j(\varphi)=I+(\cos\varphi-1)(u_ju_j^\top+v_jv_j^\top)+\sin\varphi\,G_j.$$
+**H4 スパース・整合拡張:** H1が支持されたときだけ、生成子の疎選択、専用rank-1補正、機能空間の一対一部分対応を一つずつ追加する。以前のTCSMAの補助勾配断絶を再発させない。
 
-Define $Q_t=R_p(m_{tp})\cdots R_1(m_{t1})$ and apply **inside the shared nonlinearity**:
+**C0 反証:** 生成子を学習しても通常の低ランク/FiLM/HRAで同一の機能をより安く実現できる、あるいは学習済み軸が単なるゲージ自由度ならMirror特有の優位性はない。
 
-$$F_t(x)=w_{\rm head}^\top\big[(W_{\rm down}+E_t)\,\mathrm{GELU}(Q_tz(x))\big]+b_t.$$
+## 2. 対象モデルと数式・次元
 
-$W_{\rm down}\in\mathbb R^{32\times32}$ is shared, $E_t=P_tS_t^\top$ is optional task-private rank-one with $P_t,S_t\in\mathbb R^{32\times1}$. Task-head bias $b_t$ is paid for every method. The comparison always gives native controls the same shared feature extractor/training examples and at least comparable code budgets.
+初期の非線形タスクモデルは、共通trunkが出す h_theta(x) ∈ R^d、共通 W_up∈R^(d×d)、W_down∈R^(d×d) を持つ。各生成子 j=1..p は、すべてのタスクで共有する生ベクトル a_j,b_j∈R^d から定義する。
 
-Use $p=4$ for the initial primary screen. It requires 2pd=256 shared raw axis scalars plus Kp task angles before base/private/state/metadata. Orthogonality is approximate in floating point and must be explicitly unit tested. If a plane becomes numerically degenerate ($\|\widetilde v_j\|$ very small), **log/reinitialize on the permitted development stream** rather than silently returning a non-orthogonal matrix.
+1. u_j = a_j / ||a_j||_2
+2. vtilde_j = b_j − (u_j^T b_j) u_j
+3. v_j = vtilde_j / ||vtilde_j||_2
+4. G_j = v_j u_j^T − u_j v_j^T
+5. R_j(phi) = I + (cos(phi)−1)(u_j u_j^T + v_j v_j^T) + sin(phi) G_j
+6. Q_t = R_p(m_tp) ... R_2(m_t2) R_1(m_t1)
+7. F_t(x) = w_shared^T [W_down GELU(Q_t W_up h_theta(x)) + E_t GELU(W_up h_theta(x))] + b_t
 
-Variable/unit/dimensional audit:
-| Variable | Meaning | Dimension/type | Unit (normalized network) | Trainability |
-|---|---|---|---|---|
-| $d,p,K$ | width, generators, tasks | integer scalars; initial $d=32,p=4,K=8$ | 1 | frozen choices |
-| $a_j,b_j,u_j,v_j$ | shared plane vectors | $\mathbb R^d$ | 1 | raw $a,b$ learned |
-| $m_t$ | task address/code | $\mathbb R^p$ | 1 | learned |
-| $G_j,Q_t$ | skew generator, orthogonal View | $d\times d$ | 1 | derived |
-| $W_{\rm up},W_{\rm down},E_t$ | common FFN and private delta | $d\times d$ | 1 | common and optional private |
-| $F_t(x)$ | task logit | scalar | 1 | output |
-| $\ell_t$ | BCE / NLL | nonnegative scalar | nat/label | measured |
-| $B_{\rm total}$ | full inference payload | integer | byte | measured |
-| $T_{\rm inf}$ | per-batch inference time | positive scalar | ms | measured |
+**必須の数値訂正:** 正規化分母に「||a|| + epsilon」を使うと厳密な単位ベクトルにならない。||a||、||vtilde||がepsilon未満のときは数値的退化として検知し、そのseedの許可された事前定義した再初期化規則または FAIL を記録する。有効な大きさのときは真のノルムで割る。Gram–Schmidtが成立していれば R_j は理論上直交で、積 Q_t も直交。FP32の許容誤差は検査する。
 
-$Q_tz$ is $(d\times d)(d\times1)\to(d\times1)$, then $W_{\rm down}\mathrm{GELU}(Q_tz)\to d$, then $w_{\rm head}^\top\to1$. Orthogonality should keep $\|Q_tz\|_2$ invariant up to dtype error. A fixed invertible $Q$ alone can often be folded into neighboring weights and is not free additional capacity.
+**必須の勾配訂正:** 全m_t=0で開始すると、生成子軸 a,b への一次勾配は消失し得る。タスクコードは小さい非ゼロ値から初期化し、初期の軸勾配が実測でゼロでないことをチェックする。0初期化は失敗機構の対照としてのみ使う。
 
-## T — benchmark and controls
+**変数・単位:** d=潜在幅32、p=共有変換面数4、K=論理タスク数4/8/16/32、a,b,u,v,h,m∈実ベクトル（正規化NNにおいて無次元）、G/Q/W/E∈行列（無次元）、b_t∈実数（無次元logit）、L_BCE は nat/label、B_total は byte、推論時間は ms。E_t∈R^(d×d) は任意追加rank1の P_t S_t^T（各d×1）で、主検証では E_t=0。w_shared∈R^d は共有。Q_t(d×d)・W_up(d×d)・h(d×1) で中間は d×1、最終はスカラー。変換ベクトル数は共有側 2pd=256 個、タスクコードは Kp 個、その他すべて保存/計算費用を別途計上する。
 
-**T0 / pre-run:** Snapshot and hash source, fixed protocol, baseline code and list of data seeds before training or opening fresh. Compare the same task loss with and without learned axes. Never select a hyperparameter on fresh.
+**重要な容量損益計算:** 32次元×p=4では軸256個＋K×4個。最小の独立32次元タスクヘッド K×32 個と「軸+コード」だけを比較しても、K=8では288対256で軸方式が既に大きい。理想化した単純な損益分岐は 256+4K < 32K、すなわち K>9.142... で K>=10。共有readout・private・NPZメタデータまで含む実損益分岐は別に測る。このため **K=8に5%全体容量削減を強制しない**。K=16/32の方が適切な容量検証域となる。
 
-**T1 / synthetic falsification:** 12 task functions, each six output vectors in 24-dimensional latent space, train 128 examples/task and evaluate on 512 truly separate examples/task. Three families: (A) *unknown randomly oriented shared rotation planes* with common sparse rules; (B) same but one of six rows per task private/off-orbit; (C) independent dense unrelated teachers. Generator truth used only to construct data and post hoc audit, **never provided as a fitted initialization/target**. Synthetic teacher-aligned PASS is mechanism evidence only.
+## 3. T — 実験系列・タスクセット
 
-**T2 / nonlinear data:** sklearn digits (real 8×8 images) with eight binary prediction roles over the same source image: parity, >=5, prime digit, divisible by 3, digits 0/1/2, digits 3/4/5, digits 6/7/8, digits 1/4/9. All eight losses jointly update shared trunk, shared FFN and axes; image-ID-stratified train/dev/test partitions fixed per seed. The tasks are correlated labels of one small dataset; do NOT call them eight natural independently sourced tasks. Also use a paired-complement four-role fixture only as a positive control.
+### Phase A：学習機構と最適化を切り分ける（最優先）
 
-**Native controls (same example stream and train budget):**
-1. Hard shared FFN/no task View.
-2. Fixed coordinate-plane rotations with trainable per-task angles and identical architecture.
-3. Shared-axis *learned generator* with no matching/private loss: the primary candidate.
-4. Native learnable shared-plane/HRA-like parameterization with same degrees of freedom, to detect exact alias (M0).
-5. Ordinary rank-matched task-code/low-rank, FiLM/IA3, and rank-1/rank-2 LoRA; sweep their sizes to create a whole-byte Pareto envelope.
-6. One shared trunk plus independent task output heads; task-local FFN as expensive quality upper control.
-7. Candidate plus paid rank-one private residual; and a sparsity ablation (top-2 gated plane participation vs all generators).
-8. Only in a **separate** ablation: differentiable partially-matched functional alignment. Use one-to-one matching with unmatched penalty, gradients through **generated model features and learned axes**, and show $\lambda_{\rm match}=0$ controls. Do not repeat the capped 1-to-many detached-ridge loss as if it were a new mechanism.
+**A1 / 数値正当性:** p=1,2,4の回転実装と作用点を unit/gradient/gauge テスト。全ゼロ角で軸勾配が小さくなることを「予想される退化」対照として確認。m≠0では軸、コード、共有Wにタスク損失から勾配が届く。
 
-**Optimization controls:** Same shared initial trunk tensor and same batch index streams across methods. Fixed primary training: 800 AdamW updates, batch 64 for synthetic and batch 128 for digits; full 2,400-update continuation for the best native and candidate, without post hoc promotion of an 800-step result. One Torch thread and measured training steps/tokens/examples, wall time and active MAC proxy. No training outside container.
+**A2 / 三つの合成世界（d=24で独立の検証トラック）:** (aligned) 原点不明のランダムな低次元共有回転面を持つ教師、(partial) 6出力行のうち1つだけ共有Viewから外れる教師、(unrelated) 共有不能な独立密教師。各12タスク×128 train例×512 test例、教師軸・潜在パラメータは学習器に与えない。ランダムな入力/教師seedを全分割で独立させる。nMSEおよび最悪タスクnMSEを記録。
 
-## Hyperparameter control and audit firewall
+**A3 / 非線形の実データ:** sklearn digits の元画像IDを先にtrain/dev/testに分割し、同一画像から8つの教師あり二値判定を作る（偶奇、5以上、素数、3の倍数、0/1/2、3/4/5、6/7/8、1/4/9）。ここは実画像だが、**独立の自然タスク8件ではない**。非相補を主評価にし、相補ラベルだけの4Viewは別の機構対照。評価は平均BCE、最悪BCE、正解率、Viewの機能多様性。同一trunkが1回だけ重いforwardを行うことも確認する。
 
-Calibration-only seed 17100 (synthetic) and one disjoint digit development partition choose from a **small fixed predeclared grid**: axis LR $\{3\times10^{-4},10^{-3}\}$, axis warmup $\{0,100\}$ steps, and auxiliary matching weight $\{0,0.003\}$ — 8 settings max; zero auxiliary is the primary analysis. Shared trunk LR fixed at 0.001; AdamW weight decay 0.0001; zero dropout. Keep $p=4$ and no private residual as the primary mechanism screen. A later private rank/sparsity/plane-count sweep must be labeled a separate amendment and must not use audit-world scores.
+### Phase B：構造と予算（Phase A の開発判定後に別プロトコルでのみ実施）
 
-Three development seeds 17101–17103. Fresh seeds 17111–17115 are pre-reserved and **not accessed unless the development quality/byte/runtime gate passes**. Generate independent data-world random streams per family. If the code or preregistration changes, reserve NEW seeds instead of recycling exposed ones.
+固定/学習可能な回転面×p=2/4、軸共有・タスク個別軸、選択top-2・全生成子、rank-0/1 privateをアブレーションする。学習可能軸の追加shared bytesを全て支払う。K=4/8/16/32の合成タスク銀行で完全ファイル容量と同品質条件の損益分岐を測る。プライベート残差率・未使用View・単一viewへのcollapseを報告。
 
-**Development gate to open fresh:** learned-axis beats fixed-axis by >=10% relative test nMSE in at least 2/3 planted-axes development worlds, does not lose to matched native non-Mirror method by >0.02 nat/label mean digit BCE, and all serialization/gradient/gauge tests pass. Report dev variability, not a population confidence interval.
+### Phase C：整合損失（Phase A+Bから分離）
 
-**Fresh mechanism H1:** paired positive-world improvements on >=4/5 previously unopened seeds and median relative nMSE improvement >=10% at matched updates.
-**Fresh functional H2:** digit non-complement average BCE <= best quality-qualified native +0.02 nat/label; worst-task BCE degradation <=0.05, mean accuracy deficit <=1 percentage point; no role-collapse/near-constant solution.
-**Fresh efficiency H3:** at K=8 whole inference bytes <=95% of cheapest native method also satisfying H2, and batch1/batch64 folded forward median latency <=1.25x that native comparator. Report eager and one-off materialization separately; no claim of throughput gain from merely meeting tolerance.
-**Fresh specificity H4:** if native HRA/group-shared generators exactly produce the same model outputs/storage, mark **NO MIRROR-SPECIFIC ADVANTAGE** regardless of other gates; otherwise test the incremental difference, never relabel the native technique.
-**Unrelated safety:** in synthetic random unrelated worlds report failure severity/private residual fraction, and do not count spurious mathematical separation as independent capability.
+以前のTCSMAで失敗した capped 1-to-many 最近傍損失はそのまま再使用しない。訓練入力のみを使う **一対一・未対応ダミー付き部分マッチング**を比較、重み/ベクトル距離だけでなく出力logit/活性のタスク機能差で対応を構成する。固定するのは対応選択の離散マスクのみで、生成された特徴と変換軸を計算グラフから切り離さない。
 
-All criteria above are **PLAN VALUES, NOT observed experimental results**. Freeze the exact code, generator/teacher/data hashes and any justified modifications in a preregistration commit before first development or fresh run.
+Cの初回は λ_align=0 を主要対照とし、λ_align>0 の勾配が shared backbone、共有軸、タスクコードへ有限非ゼロで到達するかを機械的に検査。対応損失・Top-2疎化・private補正の寄与を必ず別々に帰属させる。選択された対応のprecision、未対応率、誤対応による最悪タスク損失も報告。
 
-## C — primary rival explanations / failure conditions
+## 4. 必須対照と公平性
 
-- A learned shared plane can be a change of coordinates absorbed by shared $W_{\rm up}/W_{\rm down}$, rather than independent task functions. Probe $\partial F_t/\partial m_t$, same-input logit disagreement and functional responses under equivalent gauges.
-- Rank-2 ordinary free coefficient code may express the same geometry at equal or lower cost; report an algebraic equivalence/alias as M0.
-- More shared parameters and more optimizers/steps can explain improved loss; match real serialized bytes and active training cost, not only nominal codes.
-- Sparsity and partial correspondence may introduce gradient noise or incorrect merging. Compare loss terms one at a time and do not assume a matching penalty is helpful.
-- Feature-plane collapse (nearly parallel axes), task collapse (identical logits), and private rank consuming the savings each independently FAIL the intended capacity/efficiency claim.
-- A positive planted-axis teacher is an aligned construction, not evidence of naturally shared group symmetry.
+| ID | 対照 | 役割 |
+|---|---|---|
+| C0 | Mirrorなし・共有FFN | タスク依存自由度の必要性 |
+| C1 | 固定座標Givens + 学習m | **H1の直接対照** |
+| C2 | 学習共有Givens面 + m、整合/privateなし | **主要候補** |
+| C3 | native HRA / learnable Householder、共有vector bank | 既存技術による学習ベクトル変換 |
+| C4 | native learnable Givensと同じ演算 | 数学的な完全alias監査（同一ならM0） |
+| C5 | rank-matched shared lowrank code / coefficient bank | 小さい一般的な自由度との比較 |
+| C6 | FiLM / IA3 + 構造非拘束コード | cheap gating |
+| C7 | 独立 LoRA rank1/rank2/rank4、source-aware公平版 | 強い既存学習・容量対照 |
+| C8 | 共有trunk + 各タスク通常head | **1回trunk計算の公平なnative多出力** |
+| C9 | 独立task-local FFN、別学習 | 高容量な品質upper bound |
+| C10 | 学習共有Givens + sparse top2/private1（別系列） | スパース/専用残差の追加価値 |
 
-## U — uncertainty / verification requirements
+重要：C2とnative学習Givens（C4）が同一関数・同一保存量になることはあり得る。その場合は明確に **native alias / Mirror固有性なし**とする。C2が固定面C1に勝つことは「学習軸が役立つ」機構結果ではあるが、既存HRAに対する新規性の証拠ではない。
 
-Report paired seed/task loss differences and their range, per-task curves, code norm/angle histograms, orthogonality error, plane degeneracy frequency, actual whole-file NPZ bytes including axes, codes, private factors, trained trunk and metadata, CPU batch1/64 timings, fit time, and optionally a seed-paired bootstrap explicitly marked **not a population CI** when all digit partitions reuse one source dataset. Do not combine byte/NLL/time scales into one score without defined units.
+**統制:** 同じランダムなshared初期値、同じ元画像/例ID、同じタスクのsampling stream、同じoptimizer update数、比較可能なtrainable-state容量、同じ数のforward/タスク/学習例を提供。各nativeも同じ校正用探索予算を受ける。例数を増やす multi-view と single-view を比較するときは総教師損失評価回数も揃える。fixed-update・equal-active-MACs・near-convergence(長時間更新)の結果を混同しない。
 
-**Prior TCSMA root-cause regression:** with $\lambda_{\rm match}>0$, take autograd gradients from the auxiliary term alone and explicitly assert nonzero finite gradients into (a) learned axis vectors, (b) shared representations, (c) per-task coordinates, and (d) any private residual the objective actually claims to optimize. When $\lambda_{\rm match}=0$, still require task gradients into axes and codes. If missing, do not interpret an outcome as testing co-adaptation.
+## 5. 事前固定ハイパーパラメータ選択
 
-## Runnable implementation work breakdown (not executed)
+**主機構:** p=4、private=0、sparse=off、align=0。全て共同学習（軸はshared、m_tはtask別）。
 
-**Target project path:** experiments/mirror_applications/research_intake/ma701_learnable_planes_20261012/.
+**校正探索のみ:** 軸専用LR ∈ {3e-4,1e-3}、軸を解凍するstep ∈ {0,100}、初期非ゼロ角度の標準偏差 ∈ {0.03,0.12} rad、合計2×2×2=8設定。共有W LR=0.001、AdamW weight decay 1e-4、dropout0。native C1/C3/C5/C6/C7にも同等の校正予算を付与。warmup=100のときもコード/共通重みは学習し、軸のみ最初の100 stepを凍結する。全0角度の単体診断は研究主結果に混ぜない。
 
-### Task 1 — frozen protocol + data firewall
-- [ ] Write PROTOCOL.json and source/worlds.py with signatures \`make_synthetic_world(seed:int,family:str,cfg:dict)->dict\` and \`make_digit_world(seed:int,cfg:dict)->dict\`; generate only allowed train/calibration/dev worlds.
-- [ ] Write tests/test_worlds.py first; assert different train/test image identities, teacher parameters never passed to the learner, task-specific outputs, and reserved fresh disjointness. Run pytest to observe the expected initial missing-implementation failure; then implement and rerun.
-- [ ] Record source/protocol SHA256 and branch parent commit in PRE_RUN_LOCK.json before opening any new dev seed. Commit.
+**校正:** 合成 seed=17100、および同時にロックしたdigits校正パーティションを使う。最良を選んだら「1つの選択設定」とそのnative対象設定を計測前に保存。
 
-### Task 2 — trainable shared-plane generator
-- [ ] Write tests/test_planes.py first: identity at zero angles, $Q_t^\top Q_t\approx I$, numerical inverse, finite-difference/autograd gradients for raw $a,b,m$, and non-degenerate fallback. Observe tests fail with missing module.
-- [ ] Implement source/planes.py \`orthonormal_planes(raw_a,raw_b,eps:float)->tuple\` and \`apply_plane_views(x,raw_a,raw_b,angles)->Tensor\` using O(pNd) plane updates (avoid materializing dense $d\times d$ per batch); add a dense reference for testing only.
-- [ ] Verify fixed-plane equivalence and composition order for noncommuting generators; commit.
+**開発:** synthetic worlds=17101/17102/17103、digits split=同seedで画像ID分離。各方式800 AdamW updates、batch64（合成）/128（digits）。H1候補と最良nativeは同じ初期条件から2400-step継続も登録し、800-step優位とnear-convergence優位を別々に記載。
 
-### Task 3 — matched task models and optimizer
-- [ ] Write tests/test_joint_train.py first: task loss reaches shared trunk, axes, codes; shared plane is *shared across tasks* and task-only residual is correctly paid; no silent task-head copy.
-- [ ] Implement source/models.py \`make_method(method:str,cfg:dict)->nn.Module\`; source/train.py \`fit_world(model,world,cfg,seed)->dict\`. All baselines use paired initializations, data batches and comparable updates.
-- [ ] Implement training-parameter-count and active MAC reports; 800/2400 step traces. Commit.
+**Fresh:** 17111–17115（未開封、開発合格時にのみ使用）。実装・seed・teacher/source/protocol hashes・選択設定・閾値を凍結した別コミットの後に一括評価する。開発が不合格ならfreshを開かない。新しい後続実験は新seedを割当てる。
 
-### Task 4 — optional sparse/matching ablations
-- [ ] Write tests/test_alignment.py first: one-to-one partial assignment, unmatched dummies, sparse top-2 gate, gradient route check for auxiliary loss and no audit-target leakage.
-- [ ] Implement source/alignment.py, paying assignment search/training overhead and private rank. Do not include this term in the primary axis comparison unless independently declared; commit.
+## 6. D — 事前判定閾値・停止条件
 
-### Task 5 — paid serialization and independent replay
-- [ ] Write tests/test_codec.py first: save/load of every method yields the same outputs before and after serialization, including axes and metadata; exact full NPZ length/hash, K-scaling and no missing reconstruction state.
-- [ ] Implement source/codec.py, source/evaluate.py and an isolated eager/folded CPU benchmark. Run pytest for the new tests and the complete repository baseline suite where available; report unrelated failures rather than suppress them. Commit.
+**A / 開発→freshゲート（すべて必須）**
+- H1 機構: aligned合成worldの固定軸C1比で、C2のテストnMSEが **2/3 seed以上で相対10%以上改善**、かつ候補の平均 nMSE <=0.05。
+- H2 実タスク: 非相補digits8役割のC2平均BCEが、比較できる最良のquality-qualified native対照比で **+0.02 nat/label以内**、最悪役割差 +0.05以内、平均正解率差 −1pp以内。結果を単一データ集合に条件付けて扱う。
+- H0 正当性: all unit/replay/orthogonality/gradient/gauge checks pass。候補・nativeで較正予算・実保存量・学習コストを隠さない。
+- C4のnative完全aliasはH1機構ゲートの検証を妨げないが、**Mirror固有性を否定**するため、採用判定はできない。
 
-### Task 6 — execute prelocked benchmarks / scientific decisions
-- [ ] Execute calibration seed, record selected configuration **before development scores**; then 17101–17103.
-- [ ] Apply development gate as written. Only if it passes, freeze a separate fresh protocol commit and run 17111–17115 without tuning.
-- [ ] Replay every serialized inference checkpoint and at least one full-seed retrain; write RESULTS_CORE.csv, VERIFICATION.json, STATUS.md and README.md with H/T/D/C/U. Mark FAIL/NOT_ESTABLISHED/PROMISING according to evidence; do not revise old MA-701 registry statuses without a complete ID-specific evidence contract.
-- [ ] Publish experiment source/tests/protocol/results on a dedicated research branch. Never change main automatically.
+**B / Fresh H1機構:** aligned world C2がC1より相対10%以上改善するものが **4/5 seed以上**、median相対改善10%以上。独立ridge/LoRA上限との差も必ず開示。
 
-## Next decision
+**B / Fresh H2タスク品質:** digits平均BCEが最良の同等予算nativeより+0.02以内、最悪役割BCEが+0.05以内、正解率差が−1pp以内。各seedごとにも明示し、全seedの平均だけで相殺しない。
 
-This plan is sufficient to start **MA-701-LP01**, a *subexperiment* addressing a missing learnable-axis question within existing registered MA-701/703; it must not appear as a new MA-1195 entry. Its own results are currently **NOT ESTABLISHED / NOT RUN**, and no fresh data have been opened.
+**C / K-scaling容量・実行時間:** K=8は機構比較のみで **5%容量削減を成功条件としない**。K=16はブレークイーブン探索、K=32は完全NPZ inference-bankの保存量が、その世界で品質閾値を満たす最安nativeの **95%以下**。合成K32で候補nMSEがnative比の絶対差+0.005以内、かつ0.05以下という品質閾値も必要。CPU batch1とbatch64のfolded推論中央値はnativeの1.25倍以内。eager・変換構築時間も別途報告。K32の合成教師alignedのみで容量PASSでも「自然機能圧縮成功」へ昇格しない。
+
+**総合状態:** H1成立/H2不成立→限定的機構シグナル。H1とH2合格だがnative同値→有用な既存正規直交adaptation、Mirror独自利得 **NOT ESTABLISHED/M0**。上限・非共有・同容量対照のどれにも品質と容量が勝てなければFAIL。freshを開かなかった世界の判定はdev-only。H3は別途家族の実用的なパレート点で評価する。これらの判定条件を結果後に修正しない。
+
+## 7. C/U — 失敗モード・誤差・監査
+
+- **初期m=0で軸勾配ゼロ**、ほぼ平行なa/b、タスクコードの飽和、p面間の実質同一化、View全滅/崩壊、shared後段の表現不足をそれぞれ監視。
+- **ゲージ偽装:** 同じ回転面の異なる基底(u,v)は同一作用を表せる。生の軸cosineだけで学習成功を判定しない。projector u u^T+v v^T、同一入力logit差、Jacobian dF/dm、実タスク損失で判定。
+- **最適化予算:** 候補だけに追加更新や長いLR探索を与えない。失敗をパラメータ化/学習性/容量のいずれと解釈できるか分離する。
+- **記述量:** NPZには学習済みtrunk、共有生成子、生軸、コード、利用条件、private、メタデータ、decoderをすべて格納。再構成可能な固定定数は宣言したアルゴリズムとseedを記録。training stateは推論容量に混ぜないがoffline費用を別途記録。
+- **時間:** Torch単一スレッドFP32、CPU仕様/clock/cgroupを記録。サンプル数・batch=1,64・ウォームアップ/繰り返し・時刻/分散を含め、マイクロベンチだけからGPUの速度を主張しない。
+- **統計:** 同じdigitsデータセットの分割seedは母集団独立研究ではない。paired task-wise差、seed別値、中央値・範囲、およびbootstrap（必要なら記述的と明記）を提示。npzの数値リプレイとtraining再実行は別の証拠。
+
+## 8. 実行可能な作業単位と具体的ファイル
+
+Project dir: experiments/mirror_applications/research_intake/ma701_learnable_planes_20261012/
+
+### Task 1 — プロトコル/データファイアウォール
+Files: PROTOCOL.json; PRE_RUN_LOCK.json; source/worlds.py; tests/test_worlds.py.
+- [ ] Test first: synthetic train/test RNG stream disjoint, digit image IDs disjoint, target teacher axis hidden from learner, no fresh IDs accessed.
+- [ ] Observe RED with pytest; implement make_synthetic_world(seed:int,family:str,cfg:dict)->dict and make_digit_world(seed:int,cfg:dict)->dict, observe GREEN; commit.
+
+### Task 2 — 変換面の学習器
+Files: source/planes.py; tests/test_planes.py.
+- [ ] Test first: Q(0)=I, Q^TQ≈I within FP32 1e-5, preserves norm, reversal works; degeneracy detection; multi-plane order noncommutativity, finite-difference/autograd correspondence in float64.
+- [ ] Explicitly test zero-m expected vanishing axis gradient; nonzero-m task gradient flows to raw a,b and m; observe RED then GREEN.
+- [ ] Implement orthonormal_planes(raw_a,raw_b,eps:float) and apply_plane_views(x,raw_a,raw_b,angles), using O(p*d) updates per vector without d×d materialization in the operational path; dense reference only for tests; commit.
+
+### Task 3 — 比較可能なタスクモデル
+Files: source/models.py; source/train.py; tests/test_train.py.
+- [ ] Test first: 1 physical shared trunk, all K task outputs, all trainable states counted; gradients into shared FFN/axes/codes, and optional private code only when present.
+- [ ] Implement make_method(method:str,cfg:dict)->nn.Module and fit_world(model,world,cfg,seed)->dict with same sampling/order/training budget; implement C0–C9 controls and 800/2400 train logs; commit.
+
+### Task 4 — 保存形式/計測
+Files: source/codec.py; source/evaluate.py; tests/test_codec.py.
+- [ ] Test first: deterministic NPZ state can be reconstructed after reload with identical model outputs and full byte length/hash, all code/generator/private tensors present.
+- [ ] Implement full inference-bank serializer, paired quality metrics, eager vs folded benchmark batch1/64, seed logs, K-scaling. Run tests; commit.
+
+### Task 5 — 調整と開発判定
+Files: RESULTS_CALIBRATION.csv; PROTOCOL_SELECTED.json; RESULTS_DEV.csv; VERIFICATION_DEV.json.
+- [ ] Execute only calibration seeds from fixed 8-setting grid; select candidate/native params without dev/fresh peeking. Save selection and source/data hashes before dev.
+- [ ] Execute all three dev seeds and baseline methods, preserve every negative result. Decide according to Section 6. If FAIL, stop fresh but report design diagnosis; do not promote by changing thresholds.
+
+### Task 6 — 別途の疎化・整合アブレーション
+Files: source/alignment.py; tests/test_alignment.py; PROTOCOL_ABLATION.json.
+- [ ] Only as a separately locked experiment; compare λ_align=0 with nonzero, one-to-one partial matching/unmatched dummy, sparse top-2, rank1 private independently; confirm its own gradient routes.
+- [ ] Report assignment cost, false alignment, per-task degradation, serialized private fraction; never use the 17111–17115 fresh seeds for this tuning.
+
+### Task 7 — Fresh検証/台帳提出
+Files: PROTOCOL_FRESH_LOCK.json; RESULTS_CORE.csv; STATUS.md; VERIFICATION.json; README.md.
+- [ ] If the dev gate passes, lock frozen source/selected hyperparameters; run all reserved fresh seeds without adapting or checking thresholds early. Save numeric payload/replay for every model.
+- [ ] Rerun at least one full training seed bit-for-bit where deterministic; run all scoped and available historical repo tests. Report failures instead of skipping.
+- [ ] Commit source/protocol/tests/results/hash-checked evidence to separate research branch; update existing MA-701 status only when the full MA experiment contract is met. Do not alter main. Report H/T/D/C/U and exact applicability bounds.
+
+## 9. 完了条件・次の判断
+
+This **planning revision** is complete only after the GitHub file and RUN_MATRIX.csv can be read back and verified; this does not mean an experiment passed.
+
+Begin implementation with Tasks 1–4, then run calibration before new development seeds. **Do not repeat MV-JOINT, fixed-angle TCSMA or discrete SpinQuant selection as the new contribution.** New question: Do shared learnable plane vectors, jointly optimized with task loss, reduce actual task loss/byte/time versus both fixed planes and the strongest native operator families, without hiding a task-specific full weight copy?
+
+**実験は未開始。** The next action requires implementing and preregistering code/protocol, not opening the reserved seeds.
