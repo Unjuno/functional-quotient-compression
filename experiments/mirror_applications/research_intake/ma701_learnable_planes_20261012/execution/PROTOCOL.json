@@ -1,0 +1,129 @@
+{
+  "calibration": {
+    "families": [
+      "aligned",
+      "digits8"
+    ],
+    "grid_learned": {
+      "axis_lr": [
+        0.0003,
+        0.001
+      ],
+      "base_lr": 0.001,
+      "sigma": [
+        0.03,
+        0.12
+      ],
+      "warmup": [
+        0,
+        100
+      ]
+    },
+    "grid_native": {
+      "lr": [
+        0.0003,
+        0.001,
+        0.003,
+        0.01
+      ],
+      "sigma": [
+        0.03,
+        0.12
+      ]
+    },
+    "models": 120,
+    "seed": 17100,
+    "selection": "minimum validation loss, never calibration test",
+    "unused_sigma_deduplicated": [
+      "shared",
+      "multihead",
+      "private_ffn"
+    ]
+  },
+  "date": "2026-10-12",
+  "dev_seeds": [
+    17101,
+    17102,
+    17103
+  ],
+  "fresh_seeds_sealed": [
+    17111,
+    17112,
+    17113,
+    17114,
+    17115
+  ],
+  "gate": {
+    "H1_dev": "at least2/3 aligned seeds relative nMSE gain>=10% vs fixed_matched AND learned mean nMSE<=0.05 at800 updates",
+    "H2_dev": "digits8 mean loss within +0.02 nat/label, worst task loss increase<=0.05, accuracy deficit<=0.01 versus calibration-chosen strongest non-private native; require all3 seeds",
+    "fresh_open": "only if BOTH development H1 and H2 plus correctness checks pass; otherwise no fresh; need explicit new frozen fresh runner",
+    "native_alias": "same mathematical operator means no new Mirror-specific function class, independent of learning success",
+    "original_fresh_H1": "at least4/5 relative gains>=10%; median>=10%"
+  },
+  "hypothesis": "Shared learned rotation planes improve joint task learning versus fixed planes; compare native methods and actual payloads.",
+  "id": "MA-701-LP01-A",
+  "methods": [
+    "shared",
+    "fixed",
+    "learned",
+    "native4",
+    "film",
+    "lora2",
+    "householder",
+    "multihead",
+    "private_ffn",
+    "fixed_matched"
+  ],
+  "native_definitions": {
+    "fixed": "independently calibrated fixed-plane method; stronger optimization control",
+    "fixed_matched": "same initial complete model and hyperparameters as selected learned except axes frozen; primary H1 comparator",
+    "householder": "two task-specific trainable reflection normals, native HRA-style control, not full paper replication",
+    "native4": "rank4 learned multiplicative feature dictionary plus four task coefficients",
+    "private_ffn": "shared up plus full per-task up delta and per-task output head, common trunk/down"
+  },
+  "optimization": {
+    "axis_weight_decay": 0,
+    "batch_global_synthetic": 64,
+    "batch_images_digits": 128,
+    "long_families": [
+      "aligned",
+      "digits8"
+    ],
+    "long_methods": [
+      "learned",
+      "fixed_matched",
+      "calibration-best native among native4/film/lora2/householder/multihead"
+    ],
+    "long_steps": 2400,
+    "optimizer": "AdamW",
+    "same_batch_stream": true,
+    "schedule": "constant learning rates; freeze axis updates during warmup",
+    "steps": 800,
+    "weight_decay": 0.0001
+  },
+  "plan_ref": "research/ma-701-learnable-planes-plan-20261012",
+  "planned_deviations": [
+    "Resolved nonlinear synthetic teacher details prospectively; matrix-bank nMSE from old linear TCSMA is not directly compared.",
+    "All calibration choices use validation not test; equally capped native grids have four learning rates instead of meaningless axis warmups.",
+    "Added fixed_matched alongside independently tuned fixed to isolate axes rather than hyperparameter changes.",
+    "Long continuation is prospectively assigned from calibration to learned/fixed_matched/best-native in aligned/digits8, not selected after development.",
+    "Exact native two-reflection alias is a numerical/autograd check rather than redundant training.",
+    "No routed MoE, no phase B/C, no official MA701 status replacement; full paper HRA reproduction not claimed."
+  ],
+  "scope": "Phase A only; no new MA ID; no alignment/private addition in primary candidate",
+  "status": "PRE_CALIBRATION_LOCK",
+  "version": "execution-spec-1",
+  "worlds": {
+    "aligned": "12 nonlinear functions sharing unknown four arbitrary overlapping planes; hidden32 input24 output6; random teacher separate from initialization",
+    "digits": "sklearn 1797 8x8 digit images; 60/20/20 stratified image-ID splits; pixels divided by16; eight named binary tasks and a separate four complementary tasks",
+    "digits_trunk": "64-48-GELU-32-GELU, trainable jointly; one trunk call per batch",
+    "partial": "same shared teacher except last of six outputs replaced by independent per-task nonlinear teacher",
+    "synthetic_inputs": "independent standard normal RNG streams; training-target mean/std normalize every split; clean teacher outputs; normalized MSE denominator per-task train second moment",
+    "synthetic_split_examples_per_task": [
+      128,
+      128,
+      512
+    ],
+    "unrelated": "independent per-task 24-to-32 GELU-to-6 teacher"
+  }
+}
