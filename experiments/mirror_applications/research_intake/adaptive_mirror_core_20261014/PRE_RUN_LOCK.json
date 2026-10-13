@@ -1,0 +1,90 @@
+{
+  "id": "AMA-001",
+  "status": "PLAN_ONLY_SOURCE_FROZEN_BEFORE_DEV",
+  "date": "2026-10-14",
+  "intent": "Benchmark learned shared Mirror plane axes + jointly learned odd/even activation + gated rank1 private fallback against native FiLM/private/head. Do not equate aligned synthetic wins with natural compression or new math.",
+  "task_worlds": [
+    "orbit",
+    "partial",
+    "unrelated",
+    "digits"
+  ],
+  "synthetic": {
+    "input_dim": 16,
+    "hidden": 16,
+    "outputs": 4,
+    "tasks": 8,
+    "N_train": 256,
+    "N_val": 128,
+    "N_test": 384
+  },
+  "digits": {
+    "data": "sklearn digits (1797 images)",
+    "method": "stratified 60/20/20 image-identity separation, train-only StandardScaler and PCA16, 8 correlated digit predicates",
+    "hidden": 16,
+    "output": 1,
+    "tasks": 8
+  },
+  "methods": [
+    "shared",
+    "fixed_mirror",
+    "mirror",
+    "activation_only",
+    "mirror_activation",
+    "mirror_activation_private",
+    "mirror_private",
+    "film",
+    "native_private",
+    "multihead"
+  ],
+  "optimization": {
+    "optimizer": "AdamW",
+    "updates_per_method_world_seed": 500,
+    "batch": 128,
+    "lr_synthetic": 0.008,
+    "lr_digits": 0.003,
+    "weight_decay": 0.0001,
+    "private_gate_penalty": 0.001,
+    "checkpoint_selection": "minimum seen-validation quality at steps 125,250,375,500; test only after selection"
+  },
+  "data_allocation": {
+    "calibration_smoke_seed": 5001,
+    "development_seeds": [
+      5101,
+      5102,
+      5103
+    ],
+    "fresh_seeds_SEALED": [
+      5201,
+      5202,
+      5203,
+      5204,
+      5205
+    ]
+  },
+  "original_development_gates": {
+    "H1": "partial mirror_activation_private better than mirror_activation by >=15% relative on >=2/3",
+    "H2": "orbit mirror_activation better than fixed-activation mirror by >=10% relative on >=2/3",
+    "H3": "partial mirror_activation_private <=min(film,native_private)+0.01 nMSE and whole NPZ <=1.05x cheapest native at equal quality on >=2/3",
+    "H4": "unrelated candidate within 0.05 nMSE of multihead",
+    "H5": "digits within 0.025 BCE of best native in >=2/3 and no worst-task collapse",
+    "H6": "batch64 CPU eager latency <=1.25x quality-qualified native"
+  },
+  "open_fresh_only_if_all_dev_gates_pass": true,
+  "resource_policy": "complete compressed NPZ serialized state including axes activation coeff gates private; one thread; warm 40 and 50 timed forward calls",
+  "scientific_boundaries": [
+    "teacher-aligned synthetic is feasibility only",
+    "trainable nonzero sigmoid gates do not give actual pruned sparse storage",
+    "exact native learnable Givens alias invalidates Mirror-specific novelty"
+  ],
+  "local_git_source_commit": "9ac49f2",
+  "previous_git_prereg_commit": "7a75e67",
+  "sha256": {
+    "PROTOCOL.json": "35b94ef2ee2922c27d6d57e491faa14c77eb7642fd5922327523aa6a15cb367b",
+    "EXPERIMENT_PLAN.md": "28f2332b0694e9ff5234a9204f302842ca42e147eacbc226784fbded781aedda",
+    "source/model.py": "2497b99a8fc9b444982c89013253e26592f66983e48d4f63d450f2e2deb7956d",
+    "source/worlds.py": "ef3bfa7a589fd836cfdd7c96c9dcad188a3cefb3be02e6c10d48097286e738c9",
+    "source/runner.py": "9982d9c1063c9baf376b658174ccf55a81709622d071857dfe743fb306f39134",
+    "source/run_experiment.py": "96e6a2c95428474a125f2bc8104d93f9c128fcab503d378c1b1555b0b0bb992f"
+  }
+}
