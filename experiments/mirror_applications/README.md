@@ -16,6 +16,10 @@ Do not silently reuse an ID for a different hypothesis. Update status only after
 The design rationale is documented in ../../docs/phase2/MIRROR_APPLICATION_DESIGN_SPACE.md.
 
 
+## Method-level research notes
+
+- [Mirror activation, transform and adaptive-sharing research intake (2026-10-13)](../../docs/phase2/MIRROR_ACTIVATION_SHARING_METHOD_INTAKE_2026-10-13.md) — proposal list linked to existing MA IDs. Research-only; not an experiment or a canonical registry update.
+
 ## Worker navigation
 
 Before starting an MA experiment, read:
