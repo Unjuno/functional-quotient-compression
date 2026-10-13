@@ -36,6 +36,10 @@ New literature families primarily supply:
 
 Do not turn the application program into a generic survey of adjacent architectures. The purpose of breadth is to test the same extra functional degree of freedom in many mechanisms.
 
+## Mirror method-level research intake (2026-10-13)
+
+- [Activation × transform geometry × adaptive sharing method list](MIRROR_ACTIVATION_SHARING_METHOD_INTAKE_2026-10-13.md) — 22 scoped research items under existing MA IDs; activation compatibility, learned generator families, variable capacity, partial sharing/private fallback and falsification. **Research index only**, not a new experimental result, registry status or worker-queue change.
+
 ## What can be multiplied logically?
 
 The registry treats any repeated object as a candidate:
