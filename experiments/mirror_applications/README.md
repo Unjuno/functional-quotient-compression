@@ -20,6 +20,10 @@ The design rationale is documented in ../../docs/phase2/MIRROR_APPLICATION_DESIG
 
 - [Mirror activation, transform and adaptive-sharing research intake (2026-10-13)](../../docs/phase2/MIRROR_ACTIVATION_SHARING_METHOD_INTAKE_2026-10-13.md) — proposal list linked to existing MA IDs. Research-only; not an experiment or a canonical registry update.
 
+## Method-level CPU research intake (2026-10-14)
+
+- [AMA-001: learned activation + Mirror plane + gated private mechanism screen](research_intake/adaptive_mirror_core_20261014/README.md) — 120 synthetic/digits development models, H1/H2 scoped improvement but overall DEV GATE FAIL (unrelated tasks, bytes, CPU latency). Full rerunnable source/checkpoints are in verified conversation evidence archives; this branch hosts prereg protocol, aggregate and verification. No official MA status change.
+
 ## Worker navigation
 
 Before starting an MA experiment, read:
