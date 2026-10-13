@@ -1,0 +1,67 @@
+{
+  "experiment": "AMA-001",
+  "date": "2026-10-14",
+  "scientific_status": "FAIL_DEV_GATE",
+  "dev_seeds": [
+    5101,
+    5102,
+    5103
+  ],
+  "fresh_seeds_sealed": [
+    5201,
+    5202,
+    5203,
+    5204,
+    5205
+  ],
+  "train_models": 120,
+  "adamw_updates_total": 60000,
+  "unit_tests_passed": 10,
+  "unit_tests_failed": 0,
+  "actual_inference_npz_replayed": 120,
+  "numeric_max_abs_replay_error": 0,
+  "full_retrains_sha256_bitwise_equal": 1,
+  "source_lock_SHA256": "2497b99a8fc9b444982c89013253e26592f66983e48d4f63d450f2e2deb7956d",
+  "initial_prereg_github_commit": "316068bf97ecfdd0ddc29ea2702179bcb684b61b",
+  "dev": {
+    "H1": {
+      "pass_count": 3,
+      "required": 2,
+      "passed": true
+    },
+    "H2": {
+      "pass_count": 2,
+      "required": 2,
+      "passed": true
+    },
+    "H3": {
+      "pass_count": 0,
+      "required": 2,
+      "passed": false
+    },
+    "H4": {
+      "pass_count": 0,
+      "required": 3,
+      "passed": false
+    },
+    "H5": {
+      "bce_numeric_pass_count": 3,
+      "formally_complete": false,
+      "reason": "worst-task collapse threshold unspecified prereg"
+    },
+    "H6": {
+      "pass_count": 0,
+      "required": 2,
+      "passed": false
+    }
+  },
+  "learned_partial_gate_usage": {
+    "off_orbit_tasks_2_6_mean": 0.4197291135787964,
+    "other_6_tasks_mean": 0.24231117963790894,
+    "physical_pruning_done": false
+  },
+  "complete_archive_sha256": "d42996f64475ff308c2031767ee184eb912424e60b7b1ccec95b28e8a246b576",
+  "source_archive_sha256": "4107bc7c765d7ebb6d188a45232a9e7dc67434998d773284ce171e4686cf09c4",
+  "official_registry_changed": false,
+  "main_changed": false
+}
