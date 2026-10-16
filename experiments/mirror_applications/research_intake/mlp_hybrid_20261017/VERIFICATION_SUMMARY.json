@@ -1,0 +1,50 @@
+{
+  "experiment": "MLP-HYBRID-001",
+  "status": "negative/mixed evidence; no Mirror-specific quality-byte improvement over native readout",
+  "date": "2026-10-17",
+  "original_primary_worlds": [
+    90641,
+    90642,
+    90643,
+    90644,
+    90645
+  ],
+  "seed_count_per_world": 2,
+  "primary_models": 220,
+  "postprimary_new_worlds": [
+    90721,
+    90722,
+    90723
+  ],
+  "postprimary_models": 60,
+  "unit_tests_passed": 11,
+  "all_saved_payloads_sha_and_bytes_checked": 560,
+  "source_locked_before_primary": true,
+  "source_locked_before_new_followup": true,
+  "primary_independent_numpy_fp64_max_loss_delta": 3.269543819017784e-8,
+  "followup_independent_numpy_fp64_max_loss_delta": 2.923667954957132e-8,
+  "full_retraining_exact_matches": 3,
+  "primary_gates": {
+    "attribute_rank2_over_gain": "FAIL",
+    "attribute_rank2_over_native_readout": "FAIL",
+    "digit_denoise_rank2_over_gain": "FAIL",
+    "digit_denoise_rank2_over_native_readout": "FAIL"
+  },
+  "reference_notes": {
+    "role_experiment_models": 312,
+    "role_model_payloads_verified": 624,
+    "grok_primary_models": 30,
+    "strong_grokking_90pct_reached": 0
+  },
+  "limits": [
+    "same public digit dataset resplit",
+    "not an actual Transformer",
+    "eager CPU slower",
+    "no natural-language NLL or GPU",
+    "related feature-task rather than unlabeled factor heldout"
+  ],
+  "archive_sha256": {
+    "source": "3e46efb46f1ae046240f308d679da87575d1b8f2c67dc0b0ee541f354b62030f",
+    "full": "ecb826c39d6e8eaec6a230eaea0cb1b311933365df0648cb71fbb297cb5df449"
+  }
+}
