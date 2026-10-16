@@ -1,0 +1,32 @@
+{
+  "id": "GIC002",
+  "primary_fresh_models": 2240,
+  "calibration_models": 224,
+  "widening_continuations": 320,
+  "shared_prefix_models": 80,
+  "posthoc_reference_models": 160,
+  "exact_retraining_models": 40,
+  "total_inference_payload_files": 5808,
+  "finite_payloads": 5808,
+  "unit_tests": 19,
+  "main_numeric_max_abs_error": 2.6258622143338073e-07,
+  "widening_numeric_max_abs_error": 6.657279572053199e-08,
+  "reference_numeric_max_abs_error": 1.9382791094368912e-08,
+  "insertion_max_output_change": 0.0,
+  "primary_source_lock_match": true,
+  "widening_source_lock_match": true,
+  "external_replication": false,
+  "historical_repo_tests_run": false,
+  "training_backend": "PyTorch2.10 CPU FP32, independent batched replicas",
+  "audit_backend": "separate NumPy float64 + SciPy ndtr",
+  "claims": {
+    "more_directions_improve_quality": "PASS in all4 primary strata",
+    "reliable_absolute_seed_stability": "PASS in1/4 primary strata",
+    "warmup_stability": "FAIL in4/4 primary strata",
+    "mirror_specificity_vs_pair_gain": "PASS only aligned strata; FAIL unrelated",
+    "past_failure_cause_identified": false,
+    "delayed_payoff_starvation_reproduced": false
+  },
+  "review": "same-session numerical audit; no external reviewer",
+  "logical_optimizer_updates_excluding_retrain": 1442000
+}

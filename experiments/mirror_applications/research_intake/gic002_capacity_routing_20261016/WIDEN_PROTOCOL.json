@@ -1,0 +1,12 @@
+{
+ "id":"GIC002-B","scope":"prospective function-preserving mid-training complexity expansion; separate from primary factorial",
+ "worlds":[97211,97212,97213,97214,97215],"families":["aligned","unrelated"],"ntrain":512,"inits":[0,1,2,3,4,5,6,7],
+ "prefix":"125 updates of mirror1_free with locked primary LR; same stream as continuation",
+ "arms":["continue1","expand8zero","expand8noise","expand8warm"],
+ "total_steps":500,"continuation_steps":375,
+ "initialization":{"continue1":"unchanged parent","expand8zero":"same parent and router, extra angles exactly zero; predictions preserved","expand8noise":"same parent/router, additional angles .1 normal from fixed code seed","expand8warm":"zero extension then reset router to0; uniform weights through total step250; NOT full function-preserving"},
+ "optimizer":"ALL four arms reset Adam at branch; same LR and global375 decay, so optimizer-state reset is controlled",
+ "gate":"candidate mean test MSE <=.95x continue1 AND worst-regime <=1.01x in >=4/5 worlds; variance improvement separately descriptive",
+ "selection":"none, fixed endpoint, no test-dependent control choices",
+ "truth_boundary":"No claim about old implementations, broad optimal allocation, or rigorous global optima. This changes function class and bytes except identity-extended insertion instant. New worlds not used in primary calibration."
+}
