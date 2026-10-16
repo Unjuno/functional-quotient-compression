@@ -1,0 +1,72 @@
+{
+  "source_hashes": {
+    "PROTOCOL.json": "78b85d520361a118ed67094bb919555a0f2836cd4bbb7133a993cb46f1321339",
+    "source/core.py": "157e30bfe724fe283b1f2dc9d83b0eecf326ae4207e6474dab3c0730e5e81345",
+    "source/run.py": "be11e5c079d7292b92800ef38fd661baf9e5433c2aa751b2380b9fa431303555",
+    "tests/test_core.py": "31abb9b7952b262a8e44aac5fa38594282de9279c52271bfcd7e82951e9c3951"
+  },
+  "learning_rates": {
+    "shared": 0.03,
+    "shared_pcgrad": 0.03,
+    "mirror_r2": 0.03,
+    "mirror_r2_pcgrad": 0.03,
+    "native_lowrank": 0.03,
+    "selected_private": 0.03,
+    "selected_private_pcgrad": 0.03,
+    "random_private": 0.03,
+    "random_private_pcgrad": 0.03,
+    "rank3": 0.03,
+    "film": 0.03,
+    "independent": 0.03
+  },
+  "calibration_scores": {
+    "shared": {
+      "0.01": 0.4809258026325198,
+      "0.03": 0.4802087527295063
+    },
+    "rank2": {
+      "0.01": 0.08040312295181824,
+      "0.03": 0.08030060437013847
+    },
+    "private": {
+      "0.01": 0.03471092959595232,
+      "0.03": 0.03464941640668026
+    },
+    "rank3": {
+      "0.01": 0.04208644151213019,
+      "0.03": 0.042072755456236004
+    },
+    "film": {
+      "0.01": 0.2896087397253282,
+      "0.03": 0.28960872687306305
+    },
+    "independent": {
+      "0.01": 0.0004113748995674057,
+      "0.03": 1.7641301215834397e-10
+    }
+  },
+  "environment": {
+    "python": "3.13.5",
+    "numpy": "2.3.5",
+    "cpu_model": "AMD EPYC 9V74 80-Core Processor",
+    "cpu_mhz_snapshots": [
+      2596.134,
+      2596.134,
+      2596.134,
+      2596.134,
+      2596.134
+    ],
+    "clock_locked": false,
+    "threads": {
+      "OPENBLAS_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1"
+    },
+    "dtype": "float64",
+    "gpu_used": false,
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.41",
+    "numpy_blas": "{'blas': {'name': 'scipy-openblas', 'found': True, 'version': '0.3.30', 'detection method': 'pkgconfig', 'include directory': '/opt/_internal/cpython-3.13.8/lib/python3.13/site-packages/scipy_openblas64/include', 'lib directory': '/opt/_internal/cpython-3.13.8/lib/python3.13/site-packages/scipy_openblas64/lib', 'openblas configuration': 'OpenBLAS 0.3.30  USE64BITINT DYNAMIC_ARCH NO_AFFINITY Haswell MAX_THREADS=64', 'pc file directory': '/project/.openblas'}, 'lapack': {'name': 'scipy-openblas', 'found': True, 'version': '0.3.30', 'detection method': 'pkgconfig', 'include directory': '/opt/_internal/cpython-3.13.8/lib/python3.13/site-packages/scipy_openblas64/include', 'lib directory': '/opt/_internal/cpython-3.13.8/lib/python3.13/site-packages/scipy_openblas64/lib', 'openblas configuration': 'OpenBLAS 0.3.30  USE64BITINT DYNAMIC_ARCH NO_AFFINITY Haswell MAX_THREADS=64', 'pc file directory': '/project/.openblas'}}"
+  },
+  "fresh_not_yet_run": true,
+  "selection_file_hash": "54c49b929da7c9b2e5f25630bdef4e2272f9423affc778177618dd177483768b"
+}

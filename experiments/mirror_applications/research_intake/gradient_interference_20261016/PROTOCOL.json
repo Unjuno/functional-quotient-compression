@@ -1,0 +1,107 @@
+{
+  "id": "GIC001",
+  "date": "2026-10-16",
+  "parent_repository": "Unjuno/functional-quotient-compression",
+  "parent_commit": "1c7047843dd093ca20a04d49992946ea58345fe6",
+  "scope": "Controlled nonlinear univariate curve-bank experiment, NOT an AMA001 rerun, deep KAN or LLM result; no canonical MA status changes",
+  "tasks": 8,
+  "knots": 17,
+  "rank": 2,
+  "private_count": 2,
+  "families": [
+    "identical",
+    "aligned",
+    "partial",
+    "unrelated"
+  ],
+  "train_inputs": 128,
+  "validation_inputs": 128,
+  "test_inputs": 512,
+  "input_domain": [
+    -1.0,
+    1.0
+  ],
+  "label_noise": 0.0,
+  "teacher_normalization": "one RMS scalar over all training task outputs, no test statistics",
+  "calibration_worlds": [
+    86101,
+    86102
+  ],
+  "calibration_initializations": [
+    1
+  ],
+  "fresh_worlds": [
+    86111,
+    86112,
+    86113,
+    86114,
+    86115
+  ],
+  "fresh_initializations": [
+    1,
+    2,
+    3
+  ],
+  "learning_rates": [
+    0.01,
+    0.03
+  ],
+  "learning_rate_selection": "calibration validation MSE; one shared LR per matched group: shared pair, rank2/PCGrad/native-alias triple, all four private allocation variants; rank3/FiLM/independent separate; minimum mean group score across all families/worlds; lower LR breaks ties",
+  "optimizer": "Adam, beta1=.9 beta2=.999 epsilon=1e-8, no weight decay",
+  "updates": 600,
+  "batch": "full training batch, all 8 tasks, equal loss weights",
+  "private_allocation": "common 150-update rank2 mean-gradient prefix; highest two validation residual tasks or random two; all four private methods use identical prefix and reset Adam at fork; no true private IDs used",
+  "pcgrad": "project each task's shared-parameter gradient against original other task gradients in seeded random order; average projected shared gradients; task-private gradients remain ordinary mean-loss gradients",
+  "methods": [
+    "shared",
+    "shared_pcgrad",
+    "mirror_r2",
+    "mirror_r2_pcgrad",
+    "native_lowrank",
+    "rank3",
+    "selected_private",
+    "selected_private_pcgrad",
+    "random_private",
+    "random_private_pcgrad",
+    "film",
+    "independent"
+  ],
+  "primary_metrics": [
+    "test_mean_mse",
+    "test_worst_task_mse",
+    "train_mse_minus_class_oracle",
+    "shared_gradient_cancel_ratio",
+    "shared_gradient_conflict_fraction",
+    "shared_gradient_absolute_norm",
+    "inference_bytes"
+  ],
+  "gradient_checkpoints": [
+    0,
+    150,
+    300,
+    600
+  ],
+  "oracle": "QR-weighted truncated SVD from training labels only; rank0/rank2/rank3/selected-private/random-private/full; analytic objective lower bound, NOT a trained-model comparison",
+  "mechanism_gates": {
+    "opposing_shared": "nonzero task gradients cancel, shared and PCGrad cannot beat constrained oracle",
+    "zero_factor_trap": "double-zero rank2 factors stall at mean curve; same rank with nonzero axes learns aligned task (fresh median test MSE <1e-3)",
+    "rank_boundary": "every trained result >= its empirical class oracle within 1e-9; unrelated rank2 class oracle > aligned rank2 class oracle in all worlds",
+    "pcgrad_value": "separate per-family paired effects for identical capacity/initialization; practical benefit needs >=5% median worst-task MSE improvement and <=1% mean-MSE degradation in >=4/5 world averages",
+    "selective_private": "same-budget selected vs random allocation; >=5% worst-task improvement in >=4/5 partial world averages, no claimed gradient-only attribution",
+    "mirror_specific": "FAIL by exact native-lowrank alias unless output/optimization/storage differ; no renaming gain allowed"
+  },
+  "fresh_policy": "fresh is opened only after tests, calibration LR selection and source lock; run all predeclared methods regardless of calibration scientific outcome because purpose is causal audit, not adoption promotion; no retuning or early stopping",
+  "compute": "container CPU only; NumPy float64 single-thread; exact manual derivatives checked against PyTorch autograd; equal steps are NOT equal work; record prefix cost and wall time",
+  "storage": "lossless float64 inference codec, all basis/grid metadata, factors, task IDs, private indices included; native alias shares identical inference format; no optimizer or teacher data in inference",
+  "uncertainty": "report per-world averages of 3 initializations, five-world paired effects, world-cluster bootstrap 95% descriptive intervals; not a powered confirmatory natural-task study",
+  "fresh_leakage_barrier": "do not access AMA001 seeds 5201-5205",
+  "verification": [
+    "finite-difference/autograd gradient agreement",
+    "PCGrad negative/no-conflict/zero tests",
+    "weighted-oracle optimality",
+    "codec roundtrip all records",
+    "one full fresh-world seed replay",
+    "source lock unchanged",
+    "native alias identical"
+  ]
+}

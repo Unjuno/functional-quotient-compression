@@ -1,0 +1,22 @@
+{
+  "id": "GIC001-B",
+  "status": "prospectively locked follow-up after primary GIC001 observations",
+  "purpose": "Does shared-gradient-conflict selection add value over cheap residual-based allocation at identical private capacity?",
+  "not_an_independent_confirmation_of_original_primary_gate": true,
+  "families": ["partial", "unrelated"],
+  "fresh_worlds": [86211, 86212, 86213, 86214, 86215],
+  "initializations": [1, 2, 3],
+  "learning_rate": 0.03,
+  "training": "same primary generator; full-batch 128x8, Adam float64; common rank2 prefix150 then reset-Adam suffix450; no retuning",
+  "private_rows": 2,
+  "policies": ["random", "val_residual", "train_residual", "gradient_conflict", "gradient_norm", "fisher_norm", "oracle_private"],
+  "references": ["mirror_r2", "rank3", "independent"],
+  "oracle_policy": "partial family only, true exception IDs explicitly supplied as nondeployable positive reference; excluded from practical selection claims",
+  "gradient_conflict": "per-task sum over other tasks of max(0,-dot(g_task_shared,g_other_shared)); only train data; raw c0/D coordinates held identical across selectors",
+  "gradient_norm": "squared Euclidean norm of each task shared-parameter gradient at prefix",
+  "fisher_norm": "coefficient gradient h H^(-1) h^T /4; H=B_train^T B_train/N; numerical least-squares information-metric diagnostic, not an asserted empirical-Fisher estimator",
+  "selection": "take highest two scores; all selectors use identical prefix state; random seed independent of hidden private IDs; no test labels for allocation",
+  "gate": "gradient_conflict vs val_residual: worst-task MSE >=5% lower and mean MSE <=1% worse in >=4/5 world means (each over 3 inits); same bytes mandatory. Report all paired effects regardless of sign.",
+  "control_alias": "fisher_norm and train_residual must match scores to 1e-10 on this noiseless full-column-rank linear coefficient fixture and select same tasks; this is an algebraic equivalence, not novelty",
+  "sealing": "freeze this protocol and follow-up source/test hashes before constructing worlds86211-86215; preserve original primary source lock"
+}
