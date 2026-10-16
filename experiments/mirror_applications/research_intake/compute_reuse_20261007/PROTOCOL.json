@@ -1,0 +1,41 @@
+{
+  "id": "RS-20261007-ALGEBRA",
+  "type": "research-support algebra diagnostics, not MA task-training experiment",
+  "base_reference": "0f7f3c2a6f5c684263ea2724b50f99bfae292e30",
+  "worlds_or_data": "random algebra fixtures and deterministic counterexamples, no language data",
+  "seeds": [
+    701,
+    702,
+    703,
+    704,
+    705
+  ],
+  "precision": [
+    "float64",
+    "float32"
+  ],
+  "device": "CPU",
+  "torch_threads": 1,
+  "hypotheses": [
+    "sign-conjugate FFN mixtures fuse exactly",
+    "antipodal conjugates cancel nonlinear response",
+    "value-only views with common attention weights fuse exactly",
+    "general nonlinear/softmax mixtures do not precompose"
+  ],
+  "forward_absolute_tolerance": {
+    "float64": 1e-09,
+    "float32": 0.0001
+  },
+  "gradient_comparison": "relative or scaled absolute tolerance with separately reported max error",
+  "learned_training_runs": 0,
+  "benchmarks": 0,
+  "registry_policy": "append research-intake subtests under existing MA IDs; do not reserve global MA IDs or reset live worker status",
+  "boundaries": [
+    "no GPU speed claim",
+    "no capacity result",
+    "no natural-language validation",
+    "no prior-art novelty claim",
+    "sign identity requires specified activations and shared projections; independent dropout invalidates it"
+  ],
+  "amendment": "Added general shared output-projection fusion and rectangular latent temperature checks; reused diagnostic seeds, not claimed fresh task data."
+}
