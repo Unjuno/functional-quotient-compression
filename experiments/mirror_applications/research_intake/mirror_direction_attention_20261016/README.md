@@ -6,7 +6,7 @@ The model is a single causal token-attention computation plus low-rank cross-Mir
 
 **Results:** With batch=2, d=64, r=16, K=4, sequence length T=512, the median CPU times were 1.9240ms (one token path), 7.0998ms (four separate token paths), 2.5099ms (shared token + view attention), and 34.6184ms (full token × view attention). The factorized approach is ~2.83x faster than four separate paths **but 1.30x slower than a single ordinary path** on this CPU fixture. These paths have different function classes; no same-quality conclusion is possible.
 
-**Files:** [full Japanese analysis](RESEARCH_NOTE_JA.md), [benchmark](pilot.py), [4 mechanism tests](test_mechanism.py), [measured CSV](benchmarks.csv), [verification](VERIFICATION.json).
+**Files:** [full Japanese analysis](../../../../docs/phase2/MIRROR_DIRECTION_ATTENTION_HYPOTHESIS_2026-10-16.md), [benchmark](pilot.py), [4 mechanism tests](test_mechanism.py), [measured CSV](benchmarks.csv), [verification](VERIFICATION.json).
 
 Reproduce in a new directory using PyTorch 2.10.0+cpu and Python 3.13:
 
