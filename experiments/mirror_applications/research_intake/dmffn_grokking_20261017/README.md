@@ -1,22 +1,21 @@
-# DMFFN-GROK-001 — Does gate×up Mirror SwiGLU exhibit grokking?
+# DMFFN-GROK-001 — Grokking and dual-input Mirror SwiGLU
 
-Executed **30 locked fresh CPU training fits** on four modular arithmetic functions, plus **6 post-primary shared-only control fits**. Check [Japanese report](REPORT_JA.md), [frozen primary protocol](PROTOCOL.json), [SHA lock](PRE_FRESH_LOCK.json), [primary summary](results/fresh/ANALYSIS.json), [learning curves](results/fresh/LEARNING_CURVES.csv), and [audit](results/fresh/AUDIT.json).
+**Executed synthetic algorithmic CPU experiment, 2026-10-17. Delayed generalization observed; strong Grokking NOT established.**
 
-**Mirror insertion:** The two input projections of one shared 3-matrix SwiGLU are separately rotated with two low-description gate View codes and two low-description up View codes, creating four compositional tasks without four physical MLP blocks. Native equal-count gain and per-pair code controls isolate the Mirror coordinates.
+Modulus 31, 961 ordered (a,b) inputs, four targets (a+b, a+2b, 2a+b, 2a+2b) mod 31. Train/test inputs split 60%/40%. Different splits of the same rules are not independent natural datasets and do not test unseen task combinations.
 
-**Observed:** A 3-split × 2-initialization 8,000-update CPU comparison gave 60.0% test accuracy for Mirror versus 35.2% gain, 35.7% pair-specific Mirror, and 82.3% independent 4 MLPs. Mirror delayed generalization criteria passed 5/6 seeds, but **strict 90%-test strong grokking passed 0/6**; 0/30 across all five primary methods. Standardized inference state payloads: Mirror/gain/pair=43,597 B, independent=163,861 B. Equal accuracy compression and Mirror-unique grokking **not established**.
+3 new splits × 2 initializations × 5 methods = **30 main fits**; 8,000 full-batch AdamW updates, LR 0.005, weight decay 0.5 except no-decay ablation. A separate six-fit shared-only control is postprimary.
 
-**Reproduce in a clean output directory:**
+| Method | Median heldout accuracy | Delayed generalization / 6 | Reach 90% / 6 | Inference bytes |
+|---|---:|---:|---:|---:|
+| Factorized Givens Mirror | 59.99% | 5 | 0 | 43,597 |
+| Native gain, matched parameters | 35.19% | 0 | 0 | 43,597 |
+| Pair-specific Mirror, matched parameters | 35.71% | 0 | 0 | 43,597 |
+| Four independent SwiGLU | 82.32% | 6 | 0 | 163,861 |
+| Mirror with weight decay 0 | 9.18% | 0 | 0 | 43,597 |
 
-```bash
-pip install -r requirements.txt
-export OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1
-python -m pytest -q tests
-python batch.py --out results/fresh-reproduction --workers 3
-python audit.py --path results/fresh-reproduction
-python analyze.py --path results/fresh-reproduction
-```
+Operational delayed-generalization criterion: >=99% training accuracy first, <=30% test at that time, then >=50% test after >=1,000 further updates. Strong Grokking additionally requires >=90% test; **0/30 main trials** reached that level. The observed generalization mostly improves gradually; no discontinuous transition or Mirror-specific causal effect is demonstrated.
 
-Do not overwrite archived `results/fresh`. Primary source hash lock `PRE_FRESH_LOCK.json` must match. `retrain.py` checks two primary fits including all saved checkpoints and full checkpoint payload bytes; `audit_tied.py` checks the separately frozen posthoc tied baseline. All software except Torch/Numpy/SciPy/pytest is Python standard library.
+Seven tests passed, all thirty saved inference models were SHA checked and independently replayed using NumPy FP64, six postprimary shared-only models separately replayed; two full 8,000-update retrainings reproduced tensor SHA and 41 logged checkpoints. Same-session verification, not third-party replication.
 
-`main`, old DMFFN reports, canonical MA registry and historical failed gates remain unchanged. Three data splits are drawn from the same modular universe and are not independent real-world datasets. No GPU, language-model, or multi-token decoder speed claims.
+Full frozen protocols, source, raw results, model files and Japanese report are preserved in the downloadable conversation full-evidence ZIP. This compact GitHub note is not a runnable reproduction by itself. Historical statuses and main are untouched.
