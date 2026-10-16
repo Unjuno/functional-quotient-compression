@@ -1,0 +1,38 @@
+{
+  "id": "MLP-USE-002",
+  "date": "2026-10-17",
+  "status": "exploratory CPU frozen-fresh experiment completed; mirror marginal value FAIL",
+  "datasets": [
+    "sklearn digits attributes",
+    "sklearn digits noise/patch reconstruction"
+  ],
+  "new_split_worlds": [
+    90831,
+    90832,
+    90833
+  ],
+  "seeds_per_world": 2,
+  "development_fits": 8,
+  "fresh_fits": 48,
+  "total_inference_files": 96,
+  "all_payload_sha256_bytes_match": true,
+  "independent_numpy_fp64_check": true,
+  "max_absolute_logit_difference": 0.00005481618667602106,
+  "max_absolute_loss_difference": 4.0248796892572436e-8,
+  "unit_tests_passed": 8,
+  "complete_deterministic_retrainings": 4,
+  "training_source_lock_match": true,
+  "provenance": "replayed in same CPU container, not external replication",
+  "source_archive": {
+    "name": "MLP_USE002_SOURCE_20261017.zip",
+    "sha256": "8ff4d52f3bc535ec6c91f3c9c0eb15b72bf317cc71fe3ab7b14c9700e24d59cb"
+  },
+  "full_evidence_archive": {
+    "name": "MLP_USE002_FULL_EVIDENCE_20261017.zip",
+    "sha256": "c59803da715fba592ed07f9a5a1c1df5b054df60c976d03b6b03457f3c585c26"
+  },
+  "known_non_training_error": "analyze.py generated complete ANALYSIS.json and SUMMARY.csv but errored in final console-only print; analyze_posthoc.py corrects only key name; locked training source untouched",
+  "equal_wall_time_quality_frontier": false,
+  "successful_Mirror_specific_gate": false,
+  "main_untouched": true
+}
