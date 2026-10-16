@@ -1,0 +1,34 @@
+{
+  "id": "MDA-INTAKE-20261016",
+  "type": "exploratory_not_preregistered",
+  "claim": "forward computer cost, causal mask, view-wise cross-grad only",
+  "date": "2026-10-16",
+  "seed": 64017,
+  "batch": 2,
+  "d": 64,
+  "r": 16,
+  "K": 4,
+  "T": [
+    128,
+    256,
+    512
+  ],
+  "methods": [
+    "single_token",
+    "4_independent_token",
+    "shared_token_plus_view_attention",
+    "joint_T_times_K_attention"
+  ],
+  "warmups_per_group": 20,
+  "measurements_per_group": 35,
+  "groups": 4,
+  "backend": "PyTorch 2.10.0 CPU 1 thread",
+  "controls": [
+    "single ordinary attention",
+    "K duplicated causal attentions",
+    "full 2-axis causal attention"
+  ],
+  "metric": "forward latency median milliseconds; no training",
+  "no_fresh_gate": true,
+  "registry_unchanged": true
+}

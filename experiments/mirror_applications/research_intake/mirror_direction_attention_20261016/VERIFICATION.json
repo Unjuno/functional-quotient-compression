@@ -1,0 +1,28 @@
+{
+  "status": "exploratory computational sanity check only; not a model training trial",
+  "date": "2026-10-16",
+  "device": "CPU",
+  "torch": "2.10.0+cpu",
+  "python": "3.13.5",
+  "threads": 1,
+  "batch": 2,
+  "hidden_dimension": 64,
+  "mirror_directions": 4,
+  "mirror_rank": 16,
+  "sequence_lengths": [
+    128,
+    256,
+    512
+  ],
+  "benchmark_groups": 4,
+  "measurements_per_group": 35,
+  "warmups_per_group": 20,
+  "source_sha256": "a648995417199d68c4f76c6aedc06bf5734289bd4d66e159aacd26a47accbbc7",
+  "test_sha256": "b50db1f8f5301def7cb0207ee3c334b3bfaa78c1e50d01efddd6f995f96ad3ec",
+  "data_sha256": "4d9e315abc99c1b278496834333c012be53abd4694fbe1ee5d21f8707bd8096f",
+  "unit_tests": 4,
+  "causal_prefix_perturbation_passed": true,
+  "cross_direction_gradients_passed": true,
+  "external_replication": false,
+  "data": "benchmarks.csv"
+}
