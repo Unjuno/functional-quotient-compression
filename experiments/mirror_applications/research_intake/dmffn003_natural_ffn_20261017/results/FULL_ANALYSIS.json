@@ -1,0 +1,77 @@
+{
+  "world_means": [
+    {
+      "world": 79221,
+      "mirror_vs_gain_BCE_ratio": 0.9823527699942762,
+      "mirror_vs_independent_BCE_ratio": 2.802734586119078,
+      "mirror_vs_independent_byte_ratio": 0.13331815076292416
+    },
+    {
+      "world": 79222,
+      "mirror_vs_gain_BCE_ratio": 0.5285089544206535,
+      "mirror_vs_independent_BCE_ratio": 1.803543672909198,
+      "mirror_vs_independent_byte_ratio": 0.13331815076292416
+    },
+    {
+      "world": 79223,
+      "mirror_vs_gain_BCE_ratio": 0.9695868277530132,
+      "mirror_vs_independent_BCE_ratio": 2.8137735466128855,
+      "mirror_vs_independent_byte_ratio": 0.13331815076292416
+    }
+  ],
+  "median_of_world_means": {
+    "gain": {
+      "test_all_BCE": 0.09127296134829521,
+      "test_all_accuracy": 0.9825617372989655,
+      "test_worst_pair_BCE": 0.19814453274011612,
+      "inference_bytes": 20489.0,
+      "parameters": 4270.0,
+      "wall_s": 2.4616392694997558
+    },
+    "independent": {
+      "test_all_BCE": 0.0319909872487187,
+      "test_all_accuracy": 0.9907407462596893,
+      "test_worst_pair_BCE": 0.0579104926437139,
+      "inference_bytes": 153685.0,
+      "parameters": 37737.0,
+      "wall_s": 2.38905297149995
+    },
+    "mirror": {
+      "test_all_BCE": 0.08966224640607831,
+      "test_all_accuracy": 0.9854938387870789,
+      "test_worst_pair_BCE": 0.18023506551980967,
+      "inference_bytes": 20489.0,
+      "parameters": 4270.0,
+      "wall_s": 2.985705238000264
+    },
+    "pair_mirror": {
+      "test_all_BCE": 0.19983641058206555,
+      "test_all_accuracy": 0.9739197492599487,
+      "test_worst_pair_BCE": 0.31144787371158594,
+      "inference_bytes": 20489.0,
+      "parameters": 4270.0,
+      "wall_s": 3.0414583164997566
+    },
+    "pair_readout": {
+      "test_all_BCE": 0.0399027224630117,
+      "test_all_accuracy": 0.9895061552524567,
+      "test_worst_pair_BCE": 0.08250255137681956,
+      "inference_bytes": 20817.0,
+      "parameters": 4454.0,
+      "wall_s": 1.452095854000163
+    },
+    "tied": {
+      "test_all_BCE": 0.5480246543884277,
+      "test_all_accuracy": 0.7322530746459961,
+      "test_worst_pair_BCE": 0.6599476933479309,
+      "inference_bytes": 19729.0,
+      "parameters": 4198.0,
+      "wall_s": 1.4046751474998018
+    }
+  },
+  "gate": {
+    "passed_worlds": 0,
+    "needed": 2,
+    "pass": false
+  }
+}

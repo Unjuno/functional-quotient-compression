@@ -1,0 +1,165 @@
+{
+  "teacher_distill": {
+    "final_models": 36,
+    "per_method_median_of_world_seed_means": {
+      "gain": {
+        "test_seen_BCE": 0.061118995770812,
+        "test_unseen_BCE": 3.247710883617401,
+        "test_unseen_accuracy": 0.7592592537403107,
+        "inference_bytes": 20489.0,
+        "parameters": 4270.0,
+        "wall_s": 1.9769073865002156
+      },
+      "independent": {
+        "test_seen_BCE": 0.03443815559148785,
+        "test_unseen_BCE": 0.6953719854354858,
+        "test_unseen_accuracy": 0.4930555522441864,
+        "inference_bytes": 153621.0,
+        "parameters": 37737.0,
+        "wall_s": 2.037765513499835
+      },
+      "mirror": {
+        "test_seen_BCE": 0.0719601549208164,
+        "test_unseen_BCE": 2.4890639185905457,
+        "test_unseen_accuracy": 0.6939814984798431,
+        "inference_bytes": 20489.0,
+        "parameters": 4270.0,
+        "wall_s": 2.4455198354999084
+      },
+      "pair_mirror": {
+        "test_seen_BCE": 0.0817339159548282,
+        "test_unseen_BCE": 4.295547366142273,
+        "test_unseen_accuracy": 0.619907408952713,
+        "inference_bytes": 20489.0,
+        "parameters": 4270.0,
+        "wall_s": 2.409256031000268
+      },
+      "pair_readout": {
+        "test_seen_BCE": 0.13100977241992945,
+        "test_unseen_BCE": 3.7286934852600098,
+        "test_unseen_accuracy": 0.5175926089286804,
+        "inference_bytes": 20817.0,
+        "parameters": 4454.0,
+        "wall_s": 1.1401489065001442
+      },
+      "tied": {
+        "test_seen_BCE": 0.5051954686641693,
+        "test_unseen_BCE": 0.6840596199035645,
+        "test_unseen_accuracy": 0.6194444298744202,
+        "inference_bytes": 19729.0,
+        "parameters": 4198.0,
+        "wall_s": 1.1755323609997959
+      }
+    },
+    "paired_per_world": [
+      {
+        "world": 79021,
+        "mirror_gain_unseen_BCE_ratio": 0.693467426053853,
+        "mirror_pair_unseen_BCE_ratio": 0.39659266669613913,
+        "mirror_tied_unseen_BCE_ratio": 2.4537276496581772,
+        "mirror_gain_seen_BCE_ratio": 0.8304182212434973
+      },
+      {
+        "world": 79022,
+        "mirror_gain_unseen_BCE_ratio": 0.7620432406007333,
+        "mirror_pair_unseen_BCE_ratio": 0.7413872261466142,
+        "mirror_tied_unseen_BCE_ratio": 3.751466460148183,
+        "mirror_gain_seen_BCE_ratio": 1.1773779004919727
+      },
+      {
+        "world": 79023,
+        "mirror_gain_unseen_BCE_ratio": 0.7664056339331995,
+        "mirror_pair_unseen_BCE_ratio": 0.4059045243470419,
+        "mirror_tied_unseen_BCE_ratio": 3.6520049725856265,
+        "mirror_gain_seen_BCE_ratio": 0.7377911751308758
+      }
+    ],
+    "preregistered_gate": {
+      "n_world_pass": 2,
+      "n_world_required": 2,
+      "pass": true,
+      "important_countertest_mirror_better_than_tied": 0
+    }
+  },
+  "direct_labels": {
+    "final_models": 36,
+    "per_method_median_of_world_seed_means": {
+      "gain": {
+        "test_seen_BCE": 0.1263477355241775,
+        "test_unseen_BCE": 3.8595919609069824,
+        "test_unseen_accuracy": 0.7699074149131775,
+        "inference_bytes": 20489.0,
+        "parameters": 4270.0,
+        "wall_s": 2.6181900000000002
+      },
+      "independent": {
+        "test_seen_BCE": 0.03888277709484095,
+        "test_unseen_BCE": 0.6930457353591919,
+        "test_unseen_accuracy": 0.5185185223817825,
+        "inference_bytes": 153621.0,
+        "parameters": 37737.0,
+        "wall_s": 2.72454
+      },
+      "mirror": {
+        "test_seen_BCE": 0.09615365415811535,
+        "test_unseen_BCE": 3.0923051834106445,
+        "test_unseen_accuracy": 0.7611111104488373,
+        "inference_bytes": 20489.0,
+        "parameters": 4270.0,
+        "wall_s": 3.229335
+      },
+      "pair_mirror": {
+        "test_seen_BCE": 0.1895339041948318,
+        "test_unseen_BCE": 7.392841577529907,
+        "test_unseen_accuracy": 0.6462962925434113,
+        "inference_bytes": 20489.0,
+        "parameters": 4270.0,
+        "wall_s": 3.227475
+      },
+      "pair_readout": {
+        "test_seen_BCE": 0.058397816494107205,
+        "test_unseen_BCE": 2.3389557003974915,
+        "test_unseen_accuracy": 0.4939814656972885,
+        "inference_bytes": 20817.0,
+        "parameters": 4454.0,
+        "wall_s": 1.57799
+      },
+      "tied": {
+        "test_seen_BCE": 0.5090904533863068,
+        "test_unseen_BCE": 0.6869155466556549,
+        "test_unseen_accuracy": 0.6231481432914734,
+        "inference_bytes": 19729.0,
+        "parameters": 4198.0,
+        "wall_s": 1.601575
+      }
+    },
+    "paired_per_world": [
+      {
+        "world": 79121,
+        "mirror_gain_unseen_BCE_ratio": 0.6702174081456452,
+        "mirror_pair_unseen_BCE_ratio": 0.35506353132708013,
+        "mirror_tied_unseen_BCE_ratio": 4.384921719774244,
+        "mirror_gain_seen_BCE_ratio": 0.7610239610484802
+      },
+      {
+        "world": 79122,
+        "mirror_gain_unseen_BCE_ratio": 0.9025198257358925,
+        "mirror_pair_unseen_BCE_ratio": 0.4711798876573897,
+        "mirror_tied_unseen_BCE_ratio": 5.071013869068246,
+        "mirror_gain_seen_BCE_ratio": 0.7993744896329342
+      },
+      {
+        "world": 79123,
+        "mirror_gain_unseen_BCE_ratio": 0.8691916047789741,
+        "mirror_pair_unseen_BCE_ratio": 0.4400021385959439,
+        "mirror_tied_unseen_BCE_ratio": 4.534201073021623,
+        "mirror_gain_seen_BCE_ratio": 0.6233336245298556
+      }
+    ],
+    "preregistered_gate": {
+      "n_world_pass": 0,
+      "n_world_required": 2,
+      "pass": false
+    }
+  }
+}
