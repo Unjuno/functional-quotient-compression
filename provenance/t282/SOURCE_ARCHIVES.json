@@ -1,0 +1,101 @@
+{
+  "source_archives": [
+    {
+      "name": "FQC_RESEARCH_HANDOFF_2026-09-09_T265(1).zip",
+      "sha256": "263fee8ae8614fe0963ce8eba8782a4515584142cdf798a8527ddd38c5f4cc59",
+      "bytes": 17189025,
+      "members": 135,
+      "uncompressed_bytes": 17751838,
+      "included_in_git": false
+    },
+    {
+      "name": "FQC_T266_T272_REAL_MODEL_RESULTS_2026-09-10.zip",
+      "sha256": "ab68a59a0f4ae20fa177993f1a101982bc24d7ffcbe5c4f46a8ec49543e4d214",
+      "bytes": 89891943,
+      "members": 130,
+      "uncompressed_bytes": 96467398,
+      "included_in_git": false
+    },
+    {
+      "name": "FQC_T273_T278_CODE_RESULTS_2026-09-10.zip",
+      "sha256": "665f25d835c96218bad7058cfc790df7311cde5b44f1b256b870bea2f789e7ca",
+      "bytes": 552950,
+      "members": 125,
+      "uncompressed_bytes": 1988366,
+      "included_in_git": false
+    },
+    {
+      "name": "FQC_T279_T282_CODE_RESULTS_2026-09-11.zip",
+      "sha256": "12f54d5b0e38becbc84eb7bc93f2eea2f99abf9b9a076f487a8f16ee8b6a7cd1",
+      "bytes": 661360,
+      "members": 172,
+      "uncompressed_bytes": 3594466,
+      "included_in_git": false
+    },
+    {
+      "name": "FQC_T279_T282_FULL_2026-09-11.zip",
+      "sha256": "365693310ff9414e5eab6fc2b5bdcc29bb0947d5c0c3047a8d4ef229a34fab37",
+      "bytes": 80602058,
+      "members": 175,
+      "uncompressed_bytes": 83510395,
+      "included_in_git": false
+    }
+  ],
+  "source_map": [
+    {
+      "destination": "experiments/t282/code/engine.py",
+      "source_member": "FQC_T279_T282_2026-09-11/legacy/scripts/engine.py",
+      "sha256": "3d43094787054c9377dfe778a8b2220a67abcb8d5848a7ada990cc15e22f47c8",
+      "transform": "byte-identical"
+    },
+    {
+      "destination": "experiments/t282/code/binary_codec.py",
+      "source_member": "FQC_T279_T282_2026-09-11/legacy/scripts/binary_codec.py",
+      "sha256": "061f0e96cfef53c592be98df0e503c6030000fa4ad840f0d0d5e567583303dec",
+      "transform": "byte-identical"
+    },
+    {
+      "destination": "experiments/t282/code/independent_decoder.py",
+      "source_member": "FQC_T279_T282_2026-09-11/legacy/scripts/independent_decoder.py",
+      "sha256": "afa258e16a787254af14fac77ac0894ffb65ee54486bfdad6572957dcf812961",
+      "transform": "byte-identical"
+    },
+    {
+      "destination": "experiments/t282/code/artifact_gate.py",
+      "source_member": "FQC_T279_T282_2026-09-11/legacy/scripts/artifact_gate.py",
+      "sha256": "ba1824622b70f3bd8fe79958531643da0c939b483338458d8d2fe2b4ddbae094",
+      "transform": "byte-identical"
+    },
+    {
+      "destination": "experiments/t282/code/affine_refit.py",
+      "source_member": "FQC_T279_T282_2026-09-11/legacy/scripts/affine_refit.py",
+      "sha256": "d1bfbadea6e39e35366b45eb5be0e5d2cab5b59d27f0ab63646602632e5ea476",
+      "transform": "byte-identical"
+    },
+    {
+      "destination": "experiments/t282/code/evaluation.py",
+      "source_member": "FQC_T279_T282_2026-09-11/legacy/scripts/evaluation.py",
+      "sha256": "e248467d944f16acf2b58f623f84455caf09df17afa986ad7dc185334b6c2371",
+      "transform": "byte-identical"
+    },
+    {
+      "destination": "experiments/t282/code/lossless_envelope.py",
+      "source_member": "FQC_T279_T282_2026-09-11/scripts/lossless_envelope.py",
+      "sha256": "d803d7ff3ddac4fdb965e6273f885a38e492b9de39c975b5eeffea7ecef7f610",
+      "transform": "byte-identical"
+    },
+    {
+      "destination": "experiments/t282/code/reference_neo.py",
+      "source_member": "FQC_T279_T282_2026-09-11/scripts/reference_neo.py",
+      "sha256": "a1580f218123f56e800a6f2fcc691bd7dc4157bbc67d9ee680490f2a55d6acd0",
+      "transform": "byte-identical"
+    }
+  ],
+  "excluded": [
+    "all checkpoint weights and compressed model artifacts",
+    "duplicate legacy trees",
+    "1.27 MB pytest XML; recorded summary retained",
+    "complete historical raw experiment archives; available in handoff ZIPs"
+  ],
+  "scope": "Curated executable scalar baseline and result witnesses through T282. Not a claim that every historical experiment runner is promoted."
+}

@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "purpose": "historical T277 byte-exact rebuild contract, NOT a new selection",
+  "checkpoint": "28M/pytorch_model.bin",
+  "checkpoint_sha256": "8ddd260f51b439744c8cc785b5516327d4bf32e31ccbfa9009bfadf12557fcf5",
+  "fit_backend": "cpu",
+  "fit_seed": 273278,
+  "paid_scalars": 51987968,
+  "execution": "decoded FP32 dense, batch 1",
+  "calibration_sha256": "554eec53e75d4261e6f3810560eda0d14548dfb1f7658ec637de64a2bed5d0aa",
+  "candidates": [
+    {
+      "candidate": "28M_rtn_b4_g64",
+      "method": "rtn",
+      "bits": 4,
+      "group": 64,
+      "bytes": 29320087,
+      "sha256": "7a0be2a28ffa8a1d197ece0fda68c4b6e221c056d11d99eaf7ed62dc4020b85a",
+      "decoded_tensor_sha256": "8c3ca834d7085cf4365c85527c39e101164abb755642b76ee02657f9581451c3"
+    },
+    {
+      "candidate": "28M_act_b4_g64",
+      "method": "act",
+      "bits": 4,
+      "group": 64,
+      "bytes": 29320087,
+      "sha256": "bc7235ebf212f18fda49a52daa7cac2d72de1b6d7e1ec5a3133127e5ca84d6ef",
+      "decoded_tensor_sha256": "1f0f8b960b69661b9a58538c110f15e652537d2684f59477fc422856d4883b02"
+    },
+    {
+      "candidate": "28M_act_b4_g128",
+      "method": "act",
+      "bits": 4,
+      "group": 128,
+      "bytes": 27696776,
+      "sha256": "4aa1b9de8d8d21e720678367836df257023583b807f9b50b67f9e1956a0ae563",
+      "decoded_tensor_sha256": "3e0a975880ce6b5462e3a584615dbacae2aa26e43fe32f2863b096310499b47c"
+    }
+  ],
+  "source_frontier_sha256": "d755fe7b7e828dad34bdbde794cc899ef9be27e0af09228f60312341a96be84d",
+  "observed_environment": {
+    "python": "3.13.5",
+    "numpy": "2.3.5",
+    "torch": "2.10.0+cpu",
+    "regex": "2026.5.9",
+    "scikit-learn": "1.8.0",
+    "scipy": "1.17.0",
+    "threadpoolctl": "3.6.0",
+    "pytest": "9.0.2",
+    "CUDA": "NOT_AVAILABLE",
+    "transformers": "NOT_INSTALLED",
+    "tokenizers": "NOT_INSTALLED"
+  },
+  "cross_platform_bitwise_reproduction": "NOT_VERIFIED; failure must not be hidden by rewriting reference hashes"
+}

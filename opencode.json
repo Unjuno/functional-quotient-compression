@@ -1,0 +1,46 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "share": "disabled",
+  "permission": {
+    "*": "ask",
+    "read": {
+      "*": "allow",
+      "*.env": "deny",
+      "*.env.*": "deny",
+      "*.pem": "deny",
+      "*.key": "deny"
+    },
+    "glob": "allow",
+    "grep": "allow",
+    "external_directory": "ask",
+    "edit": {
+      "*": "ask",
+      "runs/*": "allow",
+      "experiments/t282/code/*": "deny",
+      "experiments/t282/data/*": "deny",
+      "experiments/t282/locks/*": "deny",
+      "experiments/t282/records/*": "deny",
+      "provenance/t282/*": "deny",
+      "experiments/local/*": "allow",
+      "tests/local/*": "allow"
+    },
+    "bash": {
+      "*": "ask",
+      "git status*": "allow",
+      "git diff*": "allow",
+      "git log*": "allow",
+      "git rev-parse*": "allow",
+      "python scripts/fqc_preflight.py*": "allow",
+      "python -m pytest*": "allow",
+      "git push*": "deny",
+      "git reset --hard*": "deny",
+      "git clean*": "deny",
+      "gh pr merge*": "deny",
+      "gh release*": "deny",
+      "sudo*": "deny",
+      "rm *": "deny",
+      "python scripts/fqc_rebuild_frozen.py*": "allow"
+    }
+  },
+  "autoupdate": false
+}

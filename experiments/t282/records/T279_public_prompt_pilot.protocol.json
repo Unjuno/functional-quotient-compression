@@ -1,0 +1,84 @@
+{
+  "experiment": "T279",
+  "locked_before_forward": true,
+  "data_sha256": "eeb7d981c9e1a7e7de201dc54315696d47f920b11d55e0b1e09213324f0e86aa",
+  "data_origin": {
+    "source": "https://huggingface.co/datasets/roneneldan/TinyStories/blob/f54c09fd23315a6f9c86f9dc80f725de7d8f9c64/Evaluation%20prompts.yaml",
+    "upstream_etag_git_blob_sha1": "0b2b511fca50c183ac38b835d11d679a10548517",
+    "license": "CDLA-Sharing-1.0",
+    "authors": [
+      "Ronen Eldan",
+      "Yuanzhi Li"
+    ],
+    "retrieval": "Text transcribed from upstream web-rendered blob; then candidate whitespace encodings checked against upstream Git blob ETag.",
+    "upstream_exact_byte_verification": [],
+    "normalized_json_sha256": "eeb7d981c9e1a7e7de201dc54315696d47f920b11d55e0b1e09213324f0e86aa",
+    "n": 44,
+    "tokens": 2682,
+    "exact_text_overlap_with_legacy32": 0,
+    "limitations": [
+      "Public generation prompts, not complete validation stories.",
+      "Not the original GPT-4-graded generation benchmark.",
+      "No fitting or candidate selection uses these prompts in this run.",
+      "Prompt dependencies and prior public exposure cannot be excluded."
+    ]
+  },
+  "checkpoint_sha256": "8ddd260f51b439744c8cc785b5516327d4bf32e31ccbfa9009bfadf12557fcf5",
+  "artifacts": {
+    "28M_rtn_b4_g64": {
+      "sha256": "7a0be2a28ffa8a1d197ece0fda68c4b6e221c056d11d99eaf7ed62dc4020b85a",
+      "bytes": 29320087
+    },
+    "28M_act_b4_g128": {
+      "sha256": "4aa1b9de8d8d21e720678367836df257023583b807f9b50b67f9e1956a0ae563",
+      "bytes": 27696776
+    },
+    "28M_act_b4_g64": {
+      "sha256": "bc7235ebf212f18fda49a52daa7cac2d72de1b6d7e1ec5a3133127e5ca84d6ef",
+      "bytes": 29320087
+    }
+  },
+  "primary": "28M_act_b4_g128 versus 28M_rtn_b4_g64",
+  "secondary": "28M_act_b4_g64 versus 28M_rtn_b4_g64",
+  "H": "Primary frozen artifact has smaller actual bytes and lower mean KL than control, with NLL difference no greater than +0.02 nat/token.",
+  "T": {
+    "n": 44,
+    "n_min_for_previously_proposed_formal_external_gate": 256,
+    "tokens": "all prompt prefix tokens; no truncation, no BOS or EOS addition",
+    "stopping": "evaluate all 44 once; no early stop or retuning"
+  },
+  "D": "Formal external gate stays UNCERTAIN: n<256, no installed HF parity, normalized transcription not upstream byte-verified; report exploratory intervals only.",
+  "C": [
+    "weak RTN comparator",
+    "public prompt correlations",
+    "prefix-only distribution",
+    "prior checkpoint or historical exposure unverified"
+  ],
+  "U": {
+    "bootstrap": "paired prompt resampling, 10000 draws, seed279282",
+    "u_c": null,
+    "coverage_factor_k": null,
+    "unquantified": [
+      "prompt dependence",
+      "source transcription",
+      "upstream runtime difference",
+      "model-replica variation"
+    ]
+  },
+  "environment": {
+    "python": "3.13.5 (main, Jul 15 2026, 20:25:40) [GCC 14.2.0]",
+    "torch": "2.10.0+cpu",
+    "numpy": "2.3.5",
+    "CPU": "AMD EPYC 9V74 80-Core Processor",
+    "available_cpus": 5,
+    "platform": "Linux-6.18.35-x86_64-with-glibc2.41",
+    "CUDA_available": false,
+    "device": "cpu",
+    "dtype": "float32",
+    "batch": 1,
+    "threads": 2,
+    "interop_threads": 1,
+    "clock": "not pinned or sampled; timings are not performance claims",
+    "compression_execution": "dense FP32 decoded weights, not low-bit arithmetic"
+  }
+}
