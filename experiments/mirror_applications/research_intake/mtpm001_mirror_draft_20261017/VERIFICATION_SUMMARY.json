@@ -1,0 +1,33 @@
+{
+  "id": "MTPM-001",
+  "date": "2026-10-17",
+  "status": "EXPLORATORY_SYNTHETIC",
+  "primary_models": 132,
+  "long_followup_models": 24,
+  "development_models": 12,
+  "inference_payloads_verified": 156,
+  "unit_tests_passed": 14,
+  "primary_replay_exact": true,
+  "long_replay_exact": true,
+  "primary_metric_recompute_max_abs_error": 0,
+  "long_metric_recompute_max_abs_error": 0,
+  "stored_source_zip_sha256": "20be41eff0aa77d25edad9e1f43dc34d14204d4869574d1846ca7282fd75516c",
+  "stored_full_evidence_zip_sha256": "8be16bbb8d263caee4cec8d667ed58edd14005ddda82d4ad9f85eb3c13b02cad",
+  "hidden_mirror_bytes": 46192,
+  "hidden_independent_joint_bytes": 60216,
+  "hidden_gain_bytes": 46702,
+  "hidden_mirror_nll_world_median": 0.9121,
+  "hidden_independent_joint_nll_world_median": 2.4959,
+  "hidden_mirror_oracle_pq_accepted_world_median": 3.795,
+  "hidden_independent_oracle_pq_accepted_world_median": 2.343,
+  "hypothesis_results": {
+    "mirror_storage_quality_cyclic_revealed": "FAIL_1_of_3",
+    "mirror_storage_quality_random_revealed": "PASS_2_of_3",
+    "cross_direction_attention_value_random_hidden": "FAIL_0_of_3",
+    "native_joint_two_plan_over_marginal_hidden": "PASS_3_of_3",
+    "long_followup_mirror_vs_independent_nll": "PASS_3_of_3"
+  },
+  "evidence_boundary": "synthetic IID finite state; exact oracle p/q acceptance, not full decoder; no natural language; no equal wall time; no fused GPU speed claim",
+  "code_note": "full code and per-run evidence packaged as separately downloadable conversation ZIPs, not uploaded into this GitHub branch",
+  "historic_registry_untouched": true
+}
