@@ -1,0 +1,180 @@
+{
+  "independent_unit": "random split of same p=31 rule universe",
+  "worlds": [
+    87011,
+    87012,
+    87013
+  ],
+  "seeds": [
+    101,
+    202
+  ],
+  "n_runs": 30,
+  "summary": [
+    {
+      "method": "gain",
+      "n_worlds": 3,
+      "n_seeds": 2,
+      "median_world_mean_test_accuracy": 0.3518880158662796,
+      "range_world_mean_test_accuracy": [
+        0.3483072966337204,
+        0.3776041716337204
+      ],
+      "median_world_mean_train_accuracy": 1.0,
+      "seed_test_acc_std_median_world": 0.06951374555310902,
+      "mean_8000_test_ce": 4.902013301849365,
+      "median_inference_bytes": 43597,
+      "parameters": 10143,
+      "mean_wall_seconds_per_fit": 24.870655282166656,
+      "delayed_generalization_count": 0,
+      "strong_grokking_count": 0,
+      "test_50_reached_count": 0,
+      "test_50_step_median_observed": null,
+      "area_under_test_accuracy": 0.2771620011422783
+    },
+    {
+      "method": "independent",
+      "n_worlds": 3,
+      "n_seeds": 2,
+      "median_world_mean_test_accuracy": 0.8232421875,
+      "range_world_mean_test_accuracy": [
+        0.8115234375,
+        0.8372395932674408
+      ],
+      "median_world_mean_train_accuracy": 1.0,
+      "seed_test_acc_std_median_world": 0.05340127932190956,
+      "mean_8000_test_ce": 0.6617515434821447,
+      "median_inference_bytes": 163861,
+      "parameters": 40316,
+      "mean_wall_seconds_per_fit": 25.800483964499865,
+      "delayed_generalization_count": 6,
+      "strong_grokking_count": 0,
+      "test_50_reached_count": 6,
+      "test_50_step_median_observed": 3100.0,
+      "area_under_test_accuracy": 0.5461642790323822
+    },
+    {
+      "method": "mirror",
+      "n_worlds": 3,
+      "n_seeds": 2,
+      "median_world_mean_test_accuracy": 0.5999349057674408,
+      "range_world_mean_test_accuracy": [
+        0.5123697817325592,
+        0.6708984375
+      ],
+      "median_world_mean_train_accuracy": 1.0,
+      "seed_test_acc_std_median_world": 0.11094576243983403,
+      "mean_8000_test_ce": 2.0325522124767303,
+      "median_inference_bytes": 43597,
+      "parameters": 10143,
+      "mean_wall_seconds_per_fit": 30.58710793633342,
+      "delayed_generalization_count": 5,
+      "strong_grokking_count": 0,
+      "test_50_reached_count": 5,
+      "test_50_step_median_observed": 2800.0,
+      "area_under_test_accuracy": 0.5005601686115067
+    },
+    {
+      "method": "mirror_no_decay",
+      "n_worlds": 3,
+      "n_seeds": 2,
+      "median_world_mean_test_accuracy": 0.091796875,
+      "range_world_mean_test_accuracy": [
+        0.0807291679084301,
+        0.1018880233168602
+      ],
+      "median_world_mean_train_accuracy": 1.0,
+      "seed_test_acc_std_median_world": 0.011969257166828477,
+      "mean_8000_test_ce": 33.39055569966634,
+      "median_inference_bytes": 43597,
+      "parameters": 10143,
+      "mean_wall_seconds_per_fit": 30.11014483216665,
+      "delayed_generalization_count": 0,
+      "strong_grokking_count": 0,
+      "test_50_reached_count": 0,
+      "test_50_step_median_observed": null,
+      "area_under_test_accuracy": 0.08529188390821218
+    },
+    {
+      "method": "pair_mirror",
+      "n_worlds": 3,
+      "n_seeds": 2,
+      "median_world_mean_test_accuracy": 0.3570963591337204,
+      "range_world_mean_test_accuracy": [
+        0.3473307341337204,
+        0.3896484375
+      ],
+      "median_world_mean_train_accuracy": 1.0,
+      "seed_test_acc_std_median_world": 0.04005097002814429,
+      "mean_8000_test_ce": 5.388112147649129,
+      "median_inference_bytes": 43597,
+      "parameters": 10143,
+      "mean_wall_seconds_per_fit": 29.992717481333482,
+      "delayed_generalization_count": 0,
+      "strong_grokking_count": 0,
+      "test_50_reached_count": 0,
+      "test_50_step_median_observed": null,
+      "area_under_test_accuracy": 0.31024576821364463
+    }
+  ],
+  "paired_effects": [
+    {
+      "against": "gain",
+      "mirror_minus_other_test_accuracy_world_deltas": [
+        0.2516276091337204,
+        0.2932942658662796,
+        0.1604817658662796
+      ],
+      "paired_mean_difference": 0.23513454695542654,
+      "descriptive_95p_t_interval": [
+        0.06639948851308156,
+        0.4038696053977715
+      ],
+      "mirror_better_worlds": 3
+    },
+    {
+      "against": "independent",
+      "mirror_minus_other_test_accuracy_world_deltas": [
+        -0.2373046875,
+        -0.140625,
+        -0.3108724057674408
+      ],
+      "paired_mean_difference": -0.2296006977558136,
+      "descriptive_95p_t_interval": [
+        -0.44170821674910954,
+        -0.01749317876251763
+      ],
+      "mirror_better_worlds": 0
+    },
+    {
+      "against": "mirror_no_decay",
+      "mirror_minus_other_test_accuracy_world_deltas": [
+        0.5192057378590107,
+        0.5791015625,
+        0.410481758415699
+      ],
+      "paired_mean_difference": 0.5029296862582365,
+      "descriptive_95p_t_interval": [
+        0.29058542647960683,
+        0.7152739460368662
+      ],
+      "mirror_better_worlds": 3
+    },
+    {
+      "against": "pair_mirror",
+      "mirror_minus_other_test_accuracy_world_deltas": [
+        0.2102864682674408,
+        0.3138020783662796,
+        0.1650390475988388
+      ],
+      "paired_mean_difference": 0.22970919807751974,
+      "descriptive_95p_t_interval": [
+        0.04026960448855588,
+        0.4191487916664836
+      ],
+      "mirror_better_worlds": 3
+    }
+  ],
+  "strict_labeling": "test >=90% after train mastery for strong grokking; slow improvement only counts delayed generalization",
+  "causal_limits": "fixed training format; wd control only for Mirror; fixed compute not equal running time, no clean mechanism identification"
+}

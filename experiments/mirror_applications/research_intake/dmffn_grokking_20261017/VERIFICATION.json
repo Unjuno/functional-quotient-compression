@@ -1,0 +1,37 @@
+{
+  "id": "DMFFN-GROK-001",
+  "date": "2026-10-17",
+  "scope": "CPU synthetic modular combinatorial SwiGLU, not natural language",
+  "fresh_fits": 30,
+  "posthoc_tied_fits": 6,
+  "complete_retrainings": 2,
+  "unit_tests_passed": 7,
+  "core_sources_match_pre_fresh_lock": true,
+  "all_30_model_payload_sha_verified": true,
+  "independent_numpy_metrics_verified": true,
+  "max_numpy_vs_torch_logit_abs_delta": 4.52356692903777e-05,
+  "retrain_files_and_all_41_checkpoints_exact": true,
+  "posthoc_tied_recomputed_verified": true,
+  "strong_grokking_passed": 0,
+  "mirror_delayed_generalization_fits": 5,
+  "runtime": {
+    "cpu": "AMD EPYC 9V74 80-Core Processor",
+    "cpu_mhz_observed": 2596.134,
+    "clock_locked": false,
+    "python": "3.13.5",
+    "torch": "2.10.0+cpu",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "gpu": false,
+    "dtype": "float32"
+  },
+  "external_replication": false,
+  "actual_fresh_validation_reuse": "only data masks for same modular rule; three random splits",
+  "main_changed": false,
+  "limitations": [
+    "no Transformer/LM",
+    "no equal-quality compression",
+    "no strict grokking crossing 90%",
+    "same rule universe across splits"
+  ]
+}
