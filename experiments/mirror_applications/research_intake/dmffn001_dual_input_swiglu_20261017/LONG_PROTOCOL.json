@@ -1,0 +1,19 @@
+{
+  "id": "DMFFN-001/LONG",
+  "designed_after_primary_480_results": true,
+  "status": "separately locked new-world follow-up, not original primary preregistration",
+  "target": "test whether learned factorized dual-input Mirror approaches independent MLP with more training; preserve full-gate vs Mirror and novel compositional pair performance",
+  "new_worlds": [73211,73212,73213],
+  "initialization_seeds": [0,1],
+  "conditions": ["aligned_full","aligned_holdout","unrelated_full"],
+  "methods": ["mirror1","mirror4","mirror12","gain12","pair_mirror4","independent"],
+  "training_updates":6000,
+  "batch_size":64,
+  "learning_rate":0.018,
+  "weight_decay":0.0001,
+  "test_is_not_used_for_early_stopping":true,
+  "model_code":"unchanged source/model.py and source/train.py from first lock",
+  "primary_metrics":["normalized_test_MSE","unseen_pair_MSE_on_aligned_holdout","saved_bytes","wall_time"],
+  "decision":"paired world-level ratios and 2400 vs 6000 learning curves; do not merge with primary gate",
+  "limitations":"3 worlds, no Transformer or real language"
+}

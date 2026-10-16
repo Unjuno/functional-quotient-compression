@@ -1,0 +1,24 @@
+{
+  "id": "DMFFN-001",
+  "description": "Dual-input Mirror SwiGLU: factorized compositional gate/up Views, seed robustness, automatic capacity growth",
+  "date": "2026-10-17",
+  "evidence_level": "small CPU synthetic FFN mechanism; NOT a Transformer/language result",
+  "parent_evidence": ["MA-251 factorized expert-depth linear", "MA-247 recurrent fixed-budget fail", "GIC002 capacity/initialization"],
+  "physics": {"d": 8,"h": 24,"gate_views":3,"up_views":3,"tasks":9,"nonlinearity":"torch.nn.functional.silu", "planes":"disjoint adjacent 2D Givens planes", "orthogonal_code_max_q": 12},
+  "teacher": {"aligned": "shared gate/up/down matrices, random distinct gate/up Givens rotations", "partial": "aligned teacher plus nine pair-specific residual nonlinear projections", "unrelated": "nine independent random gate/up/down SwiGLU matrices"},
+  "dataset": {"train_x":512,"val_x":256,"test_x":512,"train_noise_std_ratio":0.035,"train_full_9_pairs":true,"heldout_training_pair_ids":[2,3,7],"heldout_condition":"aligned only; six seen pairs, three completely untrained pairs", "input_distribution":"standard normal iid, disjoint streams", "normalize_metrics":"train teacher RMS squared, computed without label noise"},
+  "dev": {"worlds":[73001],"init_seeds":[0],"optimizers":["AdamW lr 0.008", "AdamW lr 0.018"], "steps":800, "selection":"common learning rate minimizing arithmetic mean of held-in-pair validation normalized MSE for both teacher families and six methods; no test use"},
+  "fresh": {"worlds":[73111,73112,73113,73114,73115],"initializations":[0,1],"conditions":["aligned_full","aligned_holdout","partial_full","unrelated_full"], "methods":["tied","mirror1","mirror4","mirror12","gain12","gate_mirror12","up_mirror12","pair_mirror4","pair_gain4","factor_lora1","independent","auto_mirror"], "training_updates":2400,"batch_size":64,"checkpoint_updates":[300,600,1200,2400],"shared_init_weights":true,"paired_minibatch_sequences":true},
+  "autogrowth": {"method":"mirror", "initial_planes":1,"candidate_planes":[1,4,12],"validation_every_steps":400,"comparison_to_prev":0.90,"minimum_validation_nmse_for_growth":0.002,"new_rotation_angles":0,"growth_rule":"if relative improvement in seen-pair validation normalized MSE is <10% and validation NMSE remains >0.002, add next planes; never use heldout pairs or test", "optimizer_reset_on_growth":false,"storage":"serialize only final active coordinates"},
+  "storage": {"authority":"actual torch.save including architecture config, learned float tensors, and small metadata; optimizer excluded", "paired_methods_equal_params": ["mirror12 gain12", "mirror12 pair_mirror4", "mirror12 pair_gain4"],"native_lowrank":"factor_lora1: more parameters, explicitly separate in analysis"},
+  "quality": {"primary":"test NMSE full 9 pairs","other":["worst pair", "test heldout pair NMSE", "output variance across logical tasks", "frozen step learning curves", "elapsed CPU training time", "actual inference bytes", "active parameter count"]},
+  "gates": {
+    "mirror_specific_dual_vs_native": "mirror12 >10% lower test NMSE and <=5% worse worst-pair vs gain12, in >=4/5 worlds (paired world seed mean)",
+    "factorized_generalization": "aligned_holdout mirror12 heldout test NMSE <=0.80x pair_mirror4 and <=0.80x gain12 in >=4/5 worlds",
+    "automatic_growth": "auto_mirror final test NMSE <=1.10x mirror12 with fewer real inference bytes in >=4/5 aligned_full worlds",
+    "compression": "aligned_full mirror12 test NMSE <=1.10x independent with <=50% actual bytes in >=4/5 worlds",
+    "transfer": "no claims about natural language or Transformers; no native superiority if simpler baseline wins"
+  },
+  "statistics": "5 independent worlds; 2 initializations paired within world. World is independent unit; report ratios of per-world seed means, median and world-cluster uncertainty. Not 10 independent worlds.",
+  "runtime": "Python 3.13 PyTorch 2.10 CPU float32; OMP/BLAS one thread per process, up to 4 workers, clock not locked; no GPU or quantization"
+}
