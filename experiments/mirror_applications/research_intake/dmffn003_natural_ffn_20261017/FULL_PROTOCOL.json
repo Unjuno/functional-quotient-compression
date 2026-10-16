@@ -1,0 +1,11 @@
+{
+ "id":"DMFFN-003-REAL-LABEL-FULL-9", "date":"2026-10-17", "stage":"prospective follow-up after distillation and heldout pair results",
+ "question":"On natural digit labels and all observed 3x3 tasks, does gate/up Mirror reduce real stored FFN bytes without sacrificing test quality versus same-param gate or full independent?",
+ "data":"sklearn digits images; stratified split 60/20/20 each world; no pretrained Mirror teachers; exact same compositional tasks as DMFFN-003",
+ "methods":["tied","mirror","gain","pair_mirror","pair_readout","independent"],"train_tasks":"all_9","learning":"binary BCE from natural task labels; full-batch labels for all nine tasks, not oracle distillation",
+ "dev":{"world":79210,"lrs":[0.005,0.015],"updates":400,"selection":"mean validation BCE across all six methods"},
+ "worlds":[79221,79222,79223],"initializations":[0,1],"updates":2400,"checkpoints":[300,900,2400],"batch":64,"optimizer":"AdamW","wd":0.0001,
+ "gate":"Mirror at most 1.10x independent test BCE and <=0.5x inference bytes, and <=0.9x gain test BCE in >=2/3 worlds; report train budget/time",
+ "scope":"natural digit labels, constructed compositional binary tasks, not real FFN checkpoint migration or Transformer inference",
+ "source_lock":"before fresh_79221-79223"
+}

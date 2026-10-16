@@ -1,0 +1,11 @@
+{
+  "id": "DMFFN-003-DIGITS", "date": "2026-10-17", "experiment_type": "transfer_onto_naturally_trained_independent_FFNs",
+  "teacher": {"data": "sklearn load_digits 1797 natural handwritten digit images", "input_dim": 64, "hidden_dim": 32, "independent_swiglu_functions": 9,"optimizer":"AdamW","lr":0.01,"updates":800,"batch":64},
+  "split": {"train":0.60,"validation":0.20,"test":0.20,"stratified":true,"normalization":"training split only"},
+  "tasks": {"axis_A": ["even","prime","digit>=4"],"axis_B": ["set(0,1,2,3,5,8)","set(1,3,4,6,7,9)","set(0,2,4,5,7,9)"],"target":"A_i AND B_j", "student_seen":[0,1,4,5,6,8],"heldout_pairs":[2,3,7]},
+  "student": {"methods":["tied","mirror","gain","pair_mirror","pair_readout","independent"],"shared_init_and_minibatches":true,"teacher_distillation":"BCE with teacher sigmoid(logit/2) on seen pairs only","optimizer":"AdamW","wd":0.0001,"batch":64,"updates":1800,"checkpoints":[300,900,1800]},
+  "dev":{"world":79010,"teacher_updates":800,"LRs":[0.005,0.015],"student_updates":400,"rule":"one common rate by 6-method mean seen validation teacher KL"},
+  "worlds":[79021,79022,79023],"initializations":[0,1],"updates":1800,"checkpoints":[300,900,1800],
+  "primary_gates": {"mirror_vs_gain":"heldout test BCE >=5% lower than gain and seen test BCE <=1% worse in 2/3 world seed-averages","compositional_vs_pair":"report unseen heldout BCE relative to same-parameter per-pair Mirror","compression":"report actual serialized model bytes and seen-task quality relative to unrestricted independent"},
+  "safety_scope":"small CPU real digit images but constructed tasks; no Transformer, language, GPU, full FFN checkpoint compression claims", "freeze":"hash source and tests after selecting dev common LR, before fresh" 
+}

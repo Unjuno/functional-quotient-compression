@@ -1,0 +1,81 @@
+{
+  "world": 79010,
+  "teacher": {
+    "train": {
+      "accuracy": 1.0,
+      "BCE": 1.3668280189449433e-05
+    },
+    "val": {
+      "accuracy": 0.9885484576225281,
+      "BCE": 0.043003521859645844
+    },
+    "test": {
+      "accuracy": 0.990123450756073,
+      "BCE": 0.04825666546821594
+    }
+  },
+  "runs": [
+    {
+      "lr": 0.005,
+      "method": "tied",
+      "seen_val_teacher_KL": 0.48139816522598267
+    },
+    {
+      "lr": 0.005,
+      "method": "mirror",
+      "seen_val_teacher_KL": 0.03533218055963516
+    },
+    {
+      "lr": 0.005,
+      "method": "gain",
+      "seen_val_teacher_KL": 0.048917707055807114
+    },
+    {
+      "lr": 0.005,
+      "method": "pair_mirror",
+      "seen_val_teacher_KL": 0.04525719955563545
+    },
+    {
+      "lr": 0.005,
+      "method": "pair_readout",
+      "seen_val_teacher_KL": 0.01580917090177536
+    },
+    {
+      "lr": 0.005,
+      "method": "independent",
+      "seen_val_teacher_KL": 0.005293983034789562
+    },
+    {
+      "lr": 0.015,
+      "method": "tied",
+      "seen_val_teacher_KL": 0.48228126764297485
+    },
+    {
+      "lr": 0.015,
+      "method": "mirror",
+      "seen_val_teacher_KL": 0.026783650740981102
+    },
+    {
+      "lr": 0.015,
+      "method": "gain",
+      "seen_val_teacher_KL": 0.028983507305383682
+    },
+    {
+      "lr": 0.015,
+      "method": "pair_mirror",
+      "seen_val_teacher_KL": 0.053952012211084366
+    },
+    {
+      "lr": 0.015,
+      "method": "pair_readout",
+      "seen_val_teacher_KL": 0.01719752512872219
+    },
+    {
+      "lr": 0.015,
+      "method": "independent",
+      "seen_val_teacher_KL": 0.006810876540839672
+    }
+  ],
+  "selected_lr": 0.015,
+  "split_sha256": "c9d05c68355ab7f4cec519602df921f806b68bbedb339d3ca3b3f90c6cb4aeed"
+}

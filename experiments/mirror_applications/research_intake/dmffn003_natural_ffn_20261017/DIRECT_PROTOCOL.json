@@ -1,0 +1,13 @@
+{
+ "id":"DMFFN-003-REAL-LABEL-FOLLOWUP", "date":"2026-10-17", "status":"prospective separate follow-up after observing distillation stage",
+ "question":"Can factorized mirror generalize to 3 never supervised gate/up pair labels directly, without task-specific teacher gauge mismatch?",
+ "data":"sklearn load_digits; split 60/20/20 stratified; normalization only train data; same 9 conjunction binary tasks as stage A",
+ "training_pairs":[0,1,4,5,6,8],"heldout_pairs":[2,3,7],
+ "methods":["tied","mirror","gain","pair_mirror","pair_readout","independent"],
+ "dev":{"world":79110,"LRs":[0.005,0.015],"updates":400,"selection":"mean seen validation BCE; teacher-free"},
+ "worlds":[79121,79122,79123],"initializations":[0,1],"updates":2400,"checkpoints":[300,900,2400],"batch_size":64,"optimizer":"AdamW","weight_decay":0.0001,
+ "primary":"heldout true-label binary BCE; compare mirror against equal-param gain and hard tied after preserving seen quality",
+ "gate":"Mirror unseen BCE < gain in 2 of 3 world means, seen BCE <=1.05x gain, and unseen BCE < hard tying in 2 of 3 worlds",
+ "not_pre_registered_with_original_distillation_experiment":true,
+ "storage":"actual torch.save payload + metadata", "compute":"update count and CPU train time", "no_language_claim":true
+}

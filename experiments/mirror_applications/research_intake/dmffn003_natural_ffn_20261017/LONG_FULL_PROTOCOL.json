@@ -1,0 +1,32 @@
+{
+  "id": "DMFFN-003-REAL-LABEL-LONG",
+  "stage": "separate prospective after stages A-C",
+  "question": "Does longer training 6k close byte/quality gap vs same-capacity gain and separate 9 FFNs?",
+  "model": "same exact Student models as previously frozen, methods mirror/gain/independent only",
+  "data": "same sklearn digits 1797 images, different stratified world splits, 9 labels all supervised",
+  "worlds": [
+    79321,
+    79322
+  ],
+  "initializations": [
+    0,
+    1
+  ],
+  "updates": 6000,
+  "checkpoints": [
+    900,
+    2400,
+    6000
+  ],
+  "lr": 0.005,
+  "lr_origin": "dev 79210 selected across 6 methods before full supervision primary",
+  "optimizer": "AdamW wd1e-4 batch64",
+  "gate": "Mirror <=1.10x independent test BCE and <=50% serialized bytes in 2/2 worlds and improves gain at matched bytes",
+  "fixed_compute_note": "same optimizer steps not wall time/FLOPs",
+  "no_previous_fresh_world_reuse": true,
+  "model_methods": [
+    "mirror",
+    "gain",
+    "independent"
+  ]
+}
