@@ -1,0 +1,54 @@
+{
+  "id": "MA-1164-online-fused-cpu-20261018",
+  "date": "2026-10-18",
+  "status": "EXPLORATORY_ENGINEERING_DIAGNOSTIC_NOT_PREREGISTERED_FRESH",
+  "primary_question": "Can exact on-demand K-direction R-step Mirror execution be accelerated without allocating logical dxd weight matrices?",
+  "separate_family_a": {
+    "mode": "strict_matrix_free_signed_walsh_hadamard",
+    "reference": "../source/online_operator.py",
+    "implementation": "source/fused_online.py, numba njit compiled CPU FP64",
+    "dimensions": [64,128,256,512],
+    "batches": [1,64],
+    "k_rounds": [[1,1],[4,4]],
+    "shared_coefficients": "d FP64 scalar values, not K*R*d*d independent weights",
+    "nonlinear_sandwich_additional_probes": [[64,64,1,1],[128,64,4,4],[256,64,4,4],[512,64,4,4]],
+    "comparison": ["original torch eager implicit", "fused numba 1 CPU thread", "fused numba 4 CPU threads", "cached full dense virtual matrices torch 1 CPU thread"],
+    "matrix_materialization": "never in the fused kernel, only in dense oracle benchmark",
+    "output_equivalence_max_abs_tolerance": 2e-11
+  },
+  "separate_family_b": {
+    "mode": "previously_trained_digits_householder_givens_weight_generator",
+    "reference": "../../source/core.py",
+    "implementation": "source/fused_digits.py, numba njit compiled CPU FP64",
+    "physical_coefficients": 768,
+    "virtual_weights_transient_workspace_elements": 1210,
+    "K": 8,
+    "R": 4,
+    "batches": [1,64,256],
+    "teacher_checkpoint": "previous MA-1163 native_11.pt, NOT checked into this branch",
+    "weight_fit": "teacher weights only; no labels/logits/ground truth used to fit mirror",
+    "world": "618201 previously opened (POSTHOC, NOT FRESH)",
+    "comparator": "original torch Mirror decoder; preexpanded native torch matmul",
+    "function_equivalence_tolerance": 2e-12
+  },
+  "precision": "FP64 execution for all compared paths",
+  "timing": {
+    "statistic": "median and p90 ms per complete forward",
+    "reps": 21,
+    "warmups": 3,
+    "JIT_compile": "EXCLUDED from steady-state, measured separately under empty Numba cache",
+    "CPU": "AMD EPYC 9V74 virtual 5-vCPU, clock not pinned",
+    "torch_threads": 1,
+    "numba_serial_threads": 1,
+    "numba_parallel_threads": 4,
+    "memory_metric": "theoretical coefficient bytes and reference dense matrix sizes; no peak-RSS measurement"
+  },
+  "constraints": [
+    "no original MA-1164 scientific registry status edit",
+    "no full virtual matrix in fused family A",
+    "family B temporary 1210 virtual-weight vector is explicitly acknowledged",
+    "CPU eager vs JIT; one-time compilation excluded from per-forward timing",
+    "no GPU performance projections",
+    "no end-to-end training speed claims since no differentiable Numba VJP/optimizer"
+  ]
+}

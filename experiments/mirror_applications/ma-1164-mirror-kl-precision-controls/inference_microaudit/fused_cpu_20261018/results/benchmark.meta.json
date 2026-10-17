@@ -1,0 +1,72 @@
+{
+  "date": "2026-10-18",
+  "backend": "PyTorch eager 2.10.0+cpu + Numba nopython LLVM compiled",
+  "python": "3.13.5 (main, Jul 15 2026, 20:25:40) [GCC 14.2.0]",
+  "numba": "0.65.1",
+  "numpy": "2.3.5",
+  "torch": "2.10.0+cpu",
+  "hardware": "AMD EPYC 9V74 80-Core Processor",
+  "cpu_quota": 5,
+  "cpu_torch_threads": 1,
+  "numba_threads": [
+    1,
+    4
+  ],
+  "data": "deterministic synthetic FP64",
+  "reps": 21,
+  "clocks": "uncontrolled container VM",
+  "benchmark_scope": "steady-state forward only excluding JIT, code generation and transfers",
+  "memory_scope": "theoretical per-weight arrays; no sampled peak RSS/alloc trace",
+  "nonlinear_cases": [
+    {
+      "d": 64,
+      "batch": 64,
+      "K": 1,
+      "R": 1,
+      "max_error": 2.220446049250313e-16,
+      "old_ms": 0.27844599999999997,
+      "fused_ms": 0.070788,
+      "speedup": 3.9335198056167706,
+      "old_p90": 0.382245,
+      "fused_p90": 0.072171
+    },
+    {
+      "d": 128,
+      "batch": 64,
+      "K": 4,
+      "R": 4,
+      "max_error": 4.440892098500626e-16,
+      "old_ms": 6.310899999999999,
+      "fused_ms": 2.3990519999999997,
+      "speedup": 2.630580746061361,
+      "old_p90": 8.445266,
+      "fused_p90": 2.616945
+    },
+    {
+      "d": 256,
+      "batch": 64,
+      "K": 4,
+      "R": 4,
+      "max_error": 4.440892098500626e-16,
+      "old_ms": 9.859361,
+      "fused_ms": 4.968004,
+      "speedup": 1.9845718723253847,
+      "old_p90": 10.314769,
+      "fused_p90": 5.120137
+    },
+    {
+      "d": 512,
+      "batch": 64,
+      "K": 4,
+      "R": 4,
+      "max_error": 8.881784197001252e-16,
+      "old_ms": 17.474421,
+      "fused_ms": 10.810922999999999,
+      "speedup": 1.6163671686497074,
+      "old_p90": 20.035208,
+      "fused_p90": 13.185122999999999
+    }
+  ],
+  "results_rows": 16,
+  "absolute_error_max": 8.881784197001252e-16
+}
