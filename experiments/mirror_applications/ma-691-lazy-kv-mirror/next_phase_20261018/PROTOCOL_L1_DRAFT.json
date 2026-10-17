@@ -1,0 +1,41 @@
+{
+  "study_id": "MA-691-NEXTPHASE-L1",
+  "status": "DRAFT_NOT_FROZEN_DO_NOT_OPEN_FRESH",
+  "objective": "Train a cache-compatible causal language/retrieval model and compare actual quality, total KV bytes and tokens/sec against strongest GQA/MQA/MLA/native absorbed query/output controls; preserve differences in function class and bytes.",
+  "data": {
+    "development": "deterministic content retrieval/copy and separate document-held-out text corpus",
+    "language": "small public natural-text corpus (not yet selected: require immutable source revision, tokenizer hash and document split manifest before freeze)",
+    "fresh": "at least 3 independent document/world partitions and 2 independent initialization seeds (>=6 paired evaluations); no reuse of MA-691 numeric seeds"
+  },
+  "models": [
+    "native small causal attention (full independent-KV quality ceiling)",
+    "native MQA/GQA (matching KV-head budget)",
+    "native static Q/output adapters or absorbed View algebra (exact-functional no-Mirror)",
+    "MLA latent cache (quality/byte control)",
+    "Mirror canonical K/V with Givens, then separate Householder/butterfly exploration on DEV only",
+    "Mirror with private residual only if explicitly paid and preregistered"
+  ],
+  "quality": "heldout next-token NLL (nats/token), retrieval/copy accuracy, mode/view ablation; end-to-end decode logits equivalence for exact arms",
+  "deployment": "prefill to TTFT, 256-token decode, 1/4/8 active Views, switch dwell 1/8/64/256, 128/512/2048/8192 prefix; RoPE/cache producer/version/token prefix audited",
+  "metrics": [
+    "actual inference serialized bytes and View metadata",
+    "actual allocated KV and peak resident CPU/GPU memory",
+    "init+prefill time, switch latency, p50/p90 decode and accepted tokens/sec",
+    "per-token active FLOPs/MAC proxy and attention FLOPs",
+    "training updates/tokens, optimizer wall time and resource use",
+    "NLL and task accuracy paired by world x seed"
+  ],
+  "selection": "Tune learning rates/architectures only on dev before freezing L1; match both serialized bytes and training MAC budgets (distinct comparison tables); never use fresh for selection",
+  "adoption_gate": "After freeze, on >=2/3 fresh worlds: either >=10% end-to-end generated tokens/sec at <=1% relative heldout-NLL loss against fastest quality-matched native sharing control, OR >=2% relative NLL gain at <=10% runtime overhead and <=same total cache+program bytes; report confidence intervals and all task failures.",
+  "negative_controls": [
+    "static View folds into native projections: no unjustified novelty",
+    "QK common orthogonal gauge null",
+    "early-layer Mirror invalid downstream KV unless exact latent proof",
+    "independent model caches not reused without certified map"
+  ],
+  "boundaries": [
+    "Natural text corpus, model size, tokenizer and training steps pending before L1 freeze",
+    "GPU comparison only when actual GPU and optimized matching native kernels exist",
+    "MA-691 and MA-253 historic statuses untouched"
+  ]
+}
