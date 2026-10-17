@@ -1,0 +1,113 @@
+{
+  "id": "MA-1162-MULTIHEAD-MIRROR-RATE-QUALITY-20261018",
+  "purpose": "Minimize compact serialized physical MHA parameter payload while retaining per-head Attention function; independent diagnostic follow-up to earlier MA-1162 multihead aligned synthetic experiment",
+  "status": "FROZEN_BEFORE_NEW_FRESH",
+  "date": "2026-10-18",
+  "old_result_policy": "Previously opened MA-1162 worlds 16101/16102/16103 are not reused or pooled. 16110 development world was used to select only the global 12-bit View code / FP16 base reference. Previous FAILs unchanged.",
+  "development_world": [
+    16110
+  ],
+  "fresh_worlds_unopened": [
+    16111,
+    16112,
+    16113
+  ],
+  "initialization_seeds": [
+    1,
+    2
+  ],
+  "teacher_families": [
+    "linear",
+    "nonlinear",
+    "off_orbit"
+  ],
+  "student_families": {
+    "linear": "linear",
+    "nonlinear": "nonlinear",
+    "off_orbit": "linear"
+  },
+  "architecture": {
+    "d_model": 16,
+    "d_head": 8,
+    "heads": 4,
+    "shared_qkv_physical_elements": 384,
+    "head_q_and_output_code_scalars": 8,
+    "seq_length_train": 8,
+    "batch_train": 32,
+    "updates": 160,
+    "lr": 0.06,
+    "eval_examples": 256,
+    "optimizer": "Adam, gradient clipping 2",
+    "trainable": "only 8 head codes; shared QKV are physically stored frozen buffers in this particular mechanism study"
+  },
+  "train_eval_rng": {
+    "training": "world*113+seed*13+17",
+    "evaluation": "world*113+seed*13+1000017"
+  },
+  "storage_codec": {
+    "byte_order": "little endian",
+    "header_bytes": 14,
+    "header_fields": "magic,version,mode,base_precision,View_precision,d_model,d_head,heads",
+    "physical_precision_bits": [
+      16,
+      32
+    ],
+    "Mirror_code_precision_bits": [
+      8,
+      12,
+      16,
+      32
+    ],
+    "code_quantization": "uniform periodic angle map over [-pi,pi]; 32-bit codes stored as raw binary32",
+    "pack": "bit-pack all 2H head codes into one contiguous stream; one physical shared QKV bank; no virtual QKV matrices serialized",
+    "program_charge": "report separate source-code bytes as non-amortized upper bound. Raw codec bytes exclude library/program dependency and allocator metadata."
+  },
+  "comparators": [
+    "native independent QKV for each head, compact same-precision raw bytes, NOT capacity-equal",
+    "native folded linear Q/V right projections plus shared K, same function and same binary coding",
+    "shared QKV without View, 0 head code",
+    "existing equal-8-scalar gain control from original MA-1162 results"
+  ],
+  "metrics": [
+    "compact payload length by actual bytes buffer + checksum",
+    "roundtrip exact bitstream reconstruction",
+    "teacher vs codec output MSE",
+    "full precision student vs decoded codec output MSE",
+    "attention head pairwise KL",
+    "physical and logical weight count separately",
+    "KV canonical vs 4 materialized head historical cache theoretical bytes",
+    "source program length separately"
+  ],
+  "fixed_primary_candidate": {
+    "base_precision_bits": 16,
+    "View_precision_bits": 12,
+    "selection_basis": "development-only smallest code width passing BOTH aligned teacher families held-out MSE <1e-5; FP16 physical code was smaller than FP32"
+  },
+  "gates": {
+    "quality": "primary candidate MSE <1e-5 versus own aligned teacher in BOTH linear and nonlinear families for all six world-by-seed pairs per family",
+    "head_difference": "pairwise Attention KL >1e-4 on both aligned teacher families",
+    "storage": "primary model payload < same-precision full native QKV-head raw payload in all aligned rows; report source program separately",
+    "off_orbit": "off-orbit independent dense head teacher error retained without reinterpretation; expected >1e-3",
+    "native_exactness": "only linear Mirror may be claimed foldable into native Q/output maps",
+    "status": "PASS for compact aligned mechanism only; never call general real LM compression validated by these tests"
+  },
+  "execution": {
+    "backend": "PyTorch 2.10.0+cpu float32 execution; serialized base float16 or float32; packed code quantization",
+    "torch_threads": 1,
+    "cpu": "AMD EPYC 9V74 virtual, clock not controlled",
+    "on_excess_memory": "stop and record",
+    "fresh_trials": "3 worlds x 2 init seeds x 3 teacher families x 2 base precisions x 4 code precisions =144 rows, no exclusions"
+  },
+  "limitations": [
+    "aligned teachers generated from same Mirror family; no real language NLL",
+    "nonlinear output View is not functionally equivalent to linear native folded Q/V",
+    "negative off-orbit teacher is deliberately outside Mirror manifold",
+    "actual runtime code and precision-specific kernels not included in tiny payload",
+    "canonical cache requires identical producer/hidden states and provenance",
+    "logical MHA here excludes learned Wout and higher-layer cache interactions"
+  ],
+  "source_sha256": {
+    "source/rate_quality.py": "3af84083d320465732e9d964eccfb24ce38792f7c69188a0abd161d4cd574cd8",
+    "tests/test_rate_quality.py": "7edb6753c65fcf56c8cf01a636ff58165bf37fef163eacba2ea85b54af95579d"
+  }
+}
