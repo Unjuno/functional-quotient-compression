@@ -1,0 +1,29 @@
+{
+  "study": "MA-1163 direct pretrained weight-to-nonlinear-Mirror compilation and data-trained Mirror control",
+  "date": "2026-10-18",
+  "status": "FROZEN_BEFORE_DATA_EVALUATION",
+  "question": "After independently training a viable standard NN, can its stored weights be replaced mechanically with a deterministic nonlinear recurrent K-Mirror program plus m learned physical coordinates, retaining heldout image accuracy?",
+  "prior_evidence": "One-scalar mirror digit FAIL; m=1..17 direct weights ablation elsewhere. Do not change prior status.",
+  "task": "sklearn load_digits handwritten 8x8 grayscale, 1797 images 10 classes; fixed dataset version as installed",
+  "split": "stratified first 20% sealed test random_state=618201, remaining 20% validation random_state=618200; no audit selection",
+  "inputs": "images float64 scaled pixels/16, no train-set fitted feature normalization",
+  "native_model": "PyTorch float64 64->16 tanh ->10 linear; 1210 independent trainable scalars",
+  "native_optimizer": "AdamW lr=0.008 weight_decay=0, batches=128, updates=900, train seeds [11,12]",
+  "native_gate": "each native validation accuracy >= 0.90; if not, do not interpret Mirror accuracy",
+  "mirror_model": "orthonormal deterministic seed mixing followed by 3 consecutive residual (identity+gamma*mean_K Q^{-1} tanh(Qz+b)) transforms; K=3, gamma=0.16, Q uses fixed Givens/Householder/permutation, no learned mirror codes, no teacher labels used in conversion",
+  "mirror_controls": "plain deterministic orthogonal seed mixing with no nonlinear residual; same m coordinate count",
+  "physical_directions": [1,16,64,256,1210],
+  "direct_weight_fit_optimizer": "LBFGS torch float64 strong_wolfe max_iter=150 per m; optimizer sees only pretrained network's 1210 weights, not training or heldout labels",
+  "exact_full_m_method": "inverse contraction Picard iteration of each residual layer then invert fixed orthogonal seed mixing, no numerical optimization necessary; maximum 80 Picard steps per layer",
+  "direct_learning": "Mirror program K=3 R=3, direct AdamW lr=0.008 updates=450 on training examples only, physical m=[16,256,1210], report separate from compilation and native baseline",
+  "audit_gates": {
+    "native_viable": "each teacher validation accuracy >= 90%",
+    "mechanical_exact": "m=1210 compiled weights max_abs_difference < 1e-9 and exact logits max_abs_difference < 1e-8 on fresh inputs",
+    "low_dim_compression": "m<1210 must retain within 1.0 percentage point heldout test accuracy of native, and total serialized inference bytes must be smaller; also report matched nonmirror control",
+    "optimizer_issue": "if direct gradient optimizer fails despite constructive m=1210 solution, identify optimizer/conditioning rather than representational impossibility"
+  },
+  "metrics": ["teacher validation/test accuracy", "compiler weight L2/rmse", "fresh logits RMSE/max_abs", "compiled fresh accuracy", "m parameters", "serialized payload bytes", "extra decoder source bytes", "fit wall time", "forward ms batch64", "direct train accuracy"],
+  "comparison": "equal network topology and fresh test examples; independent physical trainable variables and inference memory tracked distinctly; nonlinear code source must be counted, not hidden",
+  "environment": "CPU torch float64 eager one thread; sklearn 1.8.0; no GPU",
+  "forbidden_interpretations": ["m=1210 is compression of independent scalar count", "1 learned nn.Parameter object equals one scalar", "selected fresh for optimization", "high precision bit scaling evaluated here"]
+}

@@ -1,0 +1,75 @@
+{
+  "experiment": "MA-1163-TRAINED-BASELINE-MIRROR-COMPILER",
+  "status": "SCREENING_MIRROR_SPECIFIC_FAIL",
+  "native_dev_all_pass": true,
+  "exact_m1210_weight_pass": true,
+  "max_exact_weight_error": 1.3322676295501878e-15,
+  "max_exact_logit_error": 1.4210854715202004e-14,
+  "native_fresh_test_accuracy_mean": 0.9740740740740742,
+  "n_primary_rows": 30,
+  "n_direct_rows": 9,
+  "n_dev_exploratory_rows": 48,
+  "n_fresh_replication_rows": 36,
+  "replication_worlds": {
+    "618310": {
+      "mean_drop_pp": 0.9722222222222188,
+      "mirror_minus_plain_accuracy_pp": 0.2777777777777768,
+      "retention_pass": true,
+      "mirror_specific_pass": false
+    },
+    "618311": {
+      "mean_drop_pp": 1.527777777777778,
+      "mirror_minus_plain_accuracy_pp": -0.4166666666666763,
+      "retention_pass": true,
+      "mirror_specific_pass": false
+    },
+    "618312": {
+      "mean_drop_pp": 1.3888888888888897,
+      "mirror_minus_plain_accuracy_pp": -0.1388888888888884,
+      "retention_pass": true,
+      "mirror_specific_pass": false
+    }
+  },
+  "retention_worlds_passed": 3,
+  "mirror_specific_worlds_passed": 0,
+  "mean_fresh_native_accuracy": 0.9685185185185184,
+  "mean_fresh_mirror_m768_accuracy": 0.9555555555555556,
+  "mean_fresh_plain_m768_accuracy": 0.9564814814814815,
+  "m768_mirror_payload_bytes_including_index": 9573,
+  "native_inference_payload_bytes": 11997,
+  "decoder_python_source_bytes_model_plus_sparse_class": 7644,
+  "m768_with_decoder_code_bytes_conservative": 17217,
+  "m768_storage_payload_savings_ratio": 0.202050512628157,
+  "m768_full_code_accounted_savings_ratio": -0.4351087771942985,
+  "hardware": "AMD EPYC 9V74 virtual CPU, 5 vCPU, one torch thread",
+  "clock": "not exposed/pinned; no cycle counter measurements",
+  "torch": "2.10.0+cpu",
+  "numpy": "2.3.5",
+  "scipy": "1.17.0",
+  "sklearn": "1.8.0",
+  "numeric_format": "IEEE754 FP64 only; no arbitrary/high-bit precision",
+  "class_data": "sklearn digits grayscale 8x8 images 1797, labels0..9",
+  "files_sha256": {
+    "PROTOCOL_FROZEN.json": "69ef45d23c3bbc0396abe4da1d8d0f7c3eb3adf43fb9f4dd1bd55defa65a0cde",
+    "PROTOCOL_EXPLORATORY_DIRECTION.json": "c03777c744eacf972f327ecf0694113acf2d55380a1cafafd7acc4aa1002be9e",
+    "PROTOCOL_FRESH_REPLICATION_FROZEN.json": "dcc2956ec74b3138b6906f9c9d08b98a7b36aad760dab00a58507244d77a6e69",
+    "source/model.py": "0e0856e0a8cb27f8217c17a2d9f26a0a845f43cc564ca253980760c0e7d609c1",
+    "source/run.py": "cf1c0c3dee1e775ca2d2a07cf126ec326e64b399dfcbeae9d59d81ed9f90017a",
+    "source/dev_direction_search.py": "13f0124efc7aac5b72d7bbe27bd1f5d72c35fefefd581c613b5c64b4154aca3d",
+    "source/replicate_direction.py": "64d1e0add992173d06ab0f4078f32e852cd2a699a818de17180a22cce17511cc",
+    "source/audit.py": "8aee0daf13dcee7f1298d26336db7dc7228a8556c40ee500dced91fd19440fe3",
+    "tests/test_model.py": "7f567055eb8c1f52882c2ef8da96d95adf574bdbbe2310dbead716f2e1231336",
+    "tests/test_compression.py": "12e3d570c1ed54be2428d541e1a9fcd5f1d3574f47c3bef7f15d1d8b22263194",
+    "results/baseline_development.csv": "0b98d27178a75fde538b5157325100e49f42e662a0e69e406581c24ac3801665",
+    "results/compiled_fresh.csv": "3583d1342388260d64c1e4ff12fe96fdb55d361c3e587e9c8c0d4bd630a5ec02",
+    "results/direct_training_fresh.csv": "dab0a3ac45823641cc2c65fb96c487ea708a7ac44fe735fb9a26ef2e8b935ded",
+    "results/direction_dev_exploratory.csv": "8e6ce452bfe8a069e6edd3dcb0312ef90ca6d5f7f7a24bbcd5a72bea1068e378",
+    "results/direction_fresh_replication.csv": "8dde610300e038bb4b3cd52f1d5569d13e444e06fbc21cd8773ee48438ca4464"
+  },
+  "scope": [
+    "No true compression when executable source counted once per tiny model",
+    "Selecting addresses from already fitted weights is a model-dependent code and index bytes are counted",
+    "Fresh partitions share one 1797-image corpus; do not claim natural multi-domain transfer",
+    "Mirror class is not superior to sparse plain orthogonal control"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "study": "MA-1163 follow-up independent partition replication of pretrained-weight-selected Mirror addresses",
+  "date": "2026-10-18",
+  "precommit_scope": "Separate fresh partition test after development-only direction search; does not retroactively preregister the initial 618201 partition",
+  "hypothesis": "Teacher-informed sparse coordinate selection of a fixed nonlinear K-Mirror decoder retains trained classifier accuracy with m in [512,768], accounting for index and executable-code bytes. Mirror-specific effect must surpass equal-m sparse plain orthogonal decoder.",
+  "data": "sklearn load_digits, 1797 samples; per world independent stratified test split 20%, followed by stratified dev split 20% of work data, training rest",
+  "fresh_worlds_fixed_before_eval": [618310,618311,618312],
+  "teacher_initialization_seeds": [11,12],
+  "baseline": "64->16 tanh ->10 float64, AdamW 900 updates, batch128 lr .008, dev >=.90 gating",
+  "mirror": "nonlinear 3 K parallel Householder-Givens-permutation mirrored tanh, 3 recurrent residual rounds gamma=.16, fixed transforms and activations, trainable physical coefficient vector m only",
+  "compression": "target is strictly saved native NN weights, no labels or logits in fitting; choose largest absolute m inverse Mirror coordinates; fit via LBFGS in weight space; report exact sparse indices as stored inference metadata",
+  "m": [512,768],
+  "controls": ["plain sparse orthogonal no nonlinear", "mirror sparse", "mirror naive first-m"],
+  "evaluation": "unopened world heldout samples; exact test accuracy/NLL; weight error L2; actual torch.save payload bytes, extra source code bytes, compile/forward wall time",
+  "gates": {
+    "retention": "mean per-world Mirror test accuracy is within 2 percentage points of native for m=768 in >=2/3 worlds",
+    "mirror_specific": "Mirror test accuracy exceeds sparse plain baseline by >=1 percentage point in >=2/3 worlds at equal m and bytes",
+    "storage": "count coefficient bytes, index bytes, transform metadata, and source code bytes separately; only call compression when final paid bytes < native",
+    "uncertain": "3 world partitions of one small digits corpus not natural-task generalization; code source amortization assumptions must be explicit"
+  },
+  "no_fresh_tuning": true,
+  "precision": "FP64 CPU single torch thread; high-bit scaling NOT tested"
+}
