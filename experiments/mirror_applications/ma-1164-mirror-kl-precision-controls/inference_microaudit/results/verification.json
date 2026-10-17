@@ -1,0 +1,42 @@
+{
+  "date": "2026-10-18",
+  "evidence": "posthoc deterministic synthetic-parameter serialization and CPU runtime audit; NOT learned digit accuracy",
+  "hardware": "CPU PyTorch 2.10.0+cpu one thread, x86 virtual AMD EPYC; CPU clock not fixed",
+  "shape": {
+    "virtual_weights": 1210,
+    "physical_coords": 768,
+    "K": 8,
+    "R": 4,
+    "batch": 64,
+    "input_features": 64
+  },
+  "serialized": {
+    "native_F16_flat": 2442,
+    "mirror_F16_bitmask": 1710,
+    "native_F16_torch_multi": 4637,
+    "mirror_F16_torch_int16_index": 4965
+  },
+  "runtime_median_ms": {
+    "native_matmul_only": 0.02563800080679357,
+    "virtual_weight_generation_only": 4.057424999700743,
+    "mirror_total_forward": 3.8887829996383516,
+    "bitmask_decode_once": 0.06677950023004087
+  },
+  "runtime_p90_ms": {
+    "native_matmul_only": 0.08627900024293922,
+    "virtual_weight_generation_only": 5.157988000064506,
+    "mirror_total_forward": 4.980832998626283,
+    "bitmask_decode_once": 0.13646689931192668
+  },
+  "quantized_decoder_roundtrip_exact": true,
+  "virtual_weights_stored_persistently": false,
+  "virtual_weights_materialized_per_forward": true,
+  "mask_bits": 1210,
+  "shared_runtime_code_bytes_excluded_from_all_payloads": true,
+  "limits": [
+    "synthetic coefficient values; source core.py unmodified; K/R dense virtual vector still materialized",
+    "not a streaming output kernel",
+    "FP16 is storage; compute is FP64",
+    "raw packing relies on stable runtime code version; its deploy bytes must be counted at system level"
+  ]
+}
