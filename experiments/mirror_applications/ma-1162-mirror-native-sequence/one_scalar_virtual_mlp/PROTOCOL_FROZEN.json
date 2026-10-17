@@ -1,0 +1,101 @@
+{
+  "id": "MA-1162-ONE-SCALAR-VIRTUAL-MLP-PILOT",
+  "date": "2026-10-18",
+  "stage": "FROZEN_BEFORE_FRESH",
+  "purpose": "One and only one differentiable FP64 scalar generates all weights of a 2->16->16->1 MLP through deterministic Mirror/nonlinearity recursion; teacher alignment and off-family generalization separated.",
+  "freeze": {
+    "source_sha256": {
+      "source/model.py": "a64f87b0f506e6c6495ad9177b452feacfaa6f775fa726ee154ff0dc92492187",
+      "source/run.py": "ae4c15d2170431cf200052b751191f230566e3d8094f80a8c6bc972d918e8497",
+      "tests/test_model.py": "2c3b0fea2a1dcbb57a3baab3e2274d7066a2cc26dca2e1cb0cacbe344d82c7a6"
+    },
+    "fresh_data_unopened_at_freeze": true
+  },
+  "architecture": {
+    "learned_tensors": 1,
+    "learned_scalar_elements": 1,
+    "virtual_weight_elements": 337,
+    "layer_dims": [
+      2,
+      16,
+      16,
+      1
+    ],
+    "generator": "analytic sinusoidal lift -> four 2-channel cyclic-permutation/Givens Mirror sandwiches with tanh and fixed analytic bias -> 337 virtual coefficients -> two hidden tanh layers",
+    "generator_coefficients": "fixed in source; no learned/non-source persistent address bank",
+    "modes": [
+      "mirror",
+      "spectral",
+      "linear_view",
+      "scalar_gain",
+      "dense"
+    ],
+    "inference_checkpoint": "torch.save({architecture metadata, state_dict}) in-memory; all source generator code is external and must additionally be accounted",
+    "gauge_null": "linear_view cancels exactly to spectral because Q^-1(Qz)=z"
+  },
+  "data": {
+    "dev_worlds": [
+      618320
+    ],
+    "fresh_worlds": [
+      618321,
+      618322,
+      618323
+    ],
+    "world_init_seeds": [
+      0,
+      1
+    ],
+    "n_train_per_world": 512,
+    "n_eval_per_world": 512,
+    "input": "each x_j uniform [-2,2], two independent streams per world and seed",
+    "aligned": "teacher uses exactly same Mirror generator architecture and independent fixed scalar s_star=0.15+0.45*sin(world*0.93+seed*0.51); this is deliberately aligned and does not establish generality",
+    "off_orbit": "y=0.55*sin(2.4*x0+phase)+0.30*cos(1.8*x1-0.7*phase)+0.4*x0*x1, phase=0.65*sin(world*0.23+seed*0.17)",
+    "train_rng": "generator world*299+seed*17+1357 for minibatch index draws",
+    "data_rng": "1000000+world*23+seed*987 + (0 if train else 414145)"
+  },
+  "optimization": {
+    "lr": 0.03,
+    "updates": 500,
+    "batch_size": 64,
+    "optimizer": "AdamW weight_decay=0, clip_norm=10",
+    "scalar_init": 0.2,
+    "dense_init": "copy all virtual Mirror weights at scalar 0.2, then train all 337 elements independently",
+    "selection": "LR was compared at .005,.03,.1 on DEVELOPMENT world only for 500 steps, fixed .03 before opening fresh; do not adjust from fresh"
+  },
+  "comparator_credits": {
+    "spectral": "one scalar analytic spectral lift no Mirror/nonlinear generator",
+    "linear_view": "invertible linear Mirror gauge with no activation, identical to spectral",
+    "scalar_gain": "one learned scalar times fixed seeded virtual vector",
+    "dense": "337-parameter unrestricted identically shaped MLP; same initialization as Mirror candidate"
+  },
+  "metrics": {
+    "primary": "held-out MSE and R2 per world/seed/task",
+    "secondary": [
+      "learned_scalar_end",
+      "actual torch.save inference checkpoint bytes",
+      "training wall s",
+      "64-item forward median wall ms",
+      "all 337 virtual element gradient coupling"
+    ],
+    "counts": "inference code/generator program source byte sizes reported separately from tensor checkpoint",
+    "learning_gate_aligned": "Mirror R2 >=0.99 in >=5/6 fresh world x seed evaluations",
+    "generalization_gate_off_family": "Mirror R2>=0.95 and within 0.05 of dense R2 in >=4/6 evaluations",
+    "mirror_specific_claim": "Even an aligned task success cannot establish superiority over non-Mirror alternatives on arbitrary targets",
+    "fairness_limits": "unequal inference compute and tensor storage between 1-scalar and dense; output quality and times compared, not a matched-compute Pareto conclusion"
+  },
+  "environment": {
+    "torch": "2.10.0+cpu",
+    "dtype": "float64 IEEE 754 binary64",
+    "cpu_threads": 1,
+    "hardware": "AMD EPYC 9V74 virtual CPU, no CUDA",
+    "platform": "Linux-6.18.55-x86_64-with-glibc2.41"
+  },
+  "boundaries": [
+    "One scalar has Jacobian rank at most 1 for generated weights where differentiable",
+    "FP46/FP8000/FP80000 gradients not executed in this pilot",
+    "No independent degrees of freedom multiplier claim",
+    "No natural language task",
+    "Source-code constants and procedural generator cannot be treated as free storage in deployment"
+  ]
+}

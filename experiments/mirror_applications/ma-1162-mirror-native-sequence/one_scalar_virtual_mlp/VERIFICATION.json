@@ -1,0 +1,241 @@
+{
+  "experiment_id": "MA-1162-ONE-SCALAR-VIRTUAL-MLP-PILOT",
+  "scientific_status": "MECHANISM_PASS_ALIGNED_PASS_OFF_FAMILY_FAIL",
+  "no_registry_promotion": true,
+  "unit_tests": {
+    "command": "python -m pytest -q tests",
+    "passed": 10,
+    "failed": 0,
+    "stdout": "..........                                                               [100%]\n10 passed in 2.56s"
+  },
+  "protocol_sha256": "93055bc4c2f5165a757e407e395d3bc90a9cc10f71680506d2964ab03d283ba4",
+  "file_sha256": {
+    "PROTOCOL_FROZEN.json": "93055bc4c2f5165a757e407e395d3bc90a9cc10f71680506d2964ab03d283ba4",
+    "README.md": "c7cc1776671064a14d41e823b3a7099ff9da0a72dff2ea67157bd809540037ad",
+    "results/DEVELOPMENT_TANGENT_DIAGNOSTIC.json": "996139a67731d5da09b8ea97bdd43d144eeb371bc5b9deeb35fa9dd327b8a938",
+    "results/dev_lr003_300_seed0.csv": "a632649a8490214269e1a96dd01aba2fbcfaf9c0a636338d9abea788c03e75d0",
+    "results/dev_lr003_300_seed0.meta.json": "0e9083c161dba2b9bc295c9da1342a9a50e0f385765a81a717bb4a451bb37135",
+    "results/dev_lrp005_500.csv": "fbd3eed27af1deab3b50a374ab61d79ac13df4d847085b835f9f70d5e7fdc5b8",
+    "results/dev_lrp005_500.meta.json": "534e6f2629d43b4a4d031f3be594842b223ee0954ca07309e3a9bdb7eedcea11",
+    "results/dev_lrp03_500.csv": "42e50ab6a020c9a25ced30545095c24103fa579075624040f895a325ed194858",
+    "results/dev_lrp03_500.meta.json": "8ac0f1b4050b2e215328bb4bc261485f45dcaa67df5f5cd19602d9ed0c34ce2c",
+    "results/dev_lrp10_500.csv": "e5c4cd864d3139d27843a19850ba6a66bf9c8dcf64daa5843a123810ef674471",
+    "results/dev_lrp10_500.meta.json": "349043dcc265c67598f4a21120e29f91ac7d16e89d58171a21980b5744aebb90",
+    "results/fresh_500_lr003.csv": "a95737f3e8be62df6eacb35c1006226da153fc7e26416ef9b21a5c7fe6835e89",
+    "source/diagnose_dev_tangent.py": "e98a857c4c64090a7208e923a76290fb88f1aba2f5ac5220e2a4d44f55e64b8d",
+    "source/model.py": "a64f87b0f506e6c6495ad9177b452feacfaa6f775fa726ee154ff0dc92492187",
+    "source/run.py": "ae4c15d2170431cf200052b751191f230566e3d8094f80a8c6bc972d918e8497",
+    "tests/test_model.py": "2c3b0fea2a1dcbb57a3baab3e2274d7066a2cc26dca2e1cb0cacbe344d82c7a6",
+    "results/fresh_500_lr003.meta.json": "910b190f928c4a47efef504a3ba63c60ca8952d325d8e7c55ec162884a11ec2e"
+  },
+  "fresh_result_rows": 60,
+  "fresh_worlds": [
+    618321,
+    618322,
+    618323
+  ],
+  "fresh_seeds": [
+    0,
+    1
+  ],
+  "zero_duplicate_rows": true,
+  "one_trainable_scalar_every_virtual_variant": true,
+  "exactly_337_generated_virtual_weights": true,
+  "gate_aligned": {
+    "threshold": "R2 >= 0.99 in at least 5 of 6 fresh runs",
+    "pass_count": 6,
+    "passed": true
+  },
+  "gate_off_family": {
+    "threshold": "R2 >=0.95 AND within 0.05 of dense model in at least 4 of 6",
+    "pass_count": 0,
+    "passed": false
+  },
+  "grouped_metrics": [
+    {
+      "task": "aligned",
+      "model": "dense",
+      "n": 6,
+      "mean_r2": 0.997688740008475,
+      "min_r2": 0.9964264393539596,
+      "max_r2": 0.9988900471615244,
+      "mean_mse": 2.498121706728408e-07,
+      "median_train_seconds": 0.2697980064999683,
+      "median_forward_ms": 0.02881300019907935,
+      "inference_checkpoint_bytes": 5397
+    },
+    {
+      "task": "aligned",
+      "model": "linear_view",
+      "n": 6,
+      "mean_r2": 0.10561860070912214,
+      "min_r2": -0.9907344548043078,
+      "max_r2": 0.6575474794720608,
+      "mean_mse": 7.081006488320912e-05,
+      "median_train_seconds": 0.9577070060001915,
+      "median_forward_ms": 0.3720029999385588,
+      "inference_checkpoint_bytes": 1833
+    },
+    {
+      "task": "aligned",
+      "model": "mirror",
+      "n": 6,
+      "mean_r2": 1.0,
+      "min_r2": 1.0,
+      "max_r2": 1.0,
+      "mean_mse": 7.061292192608999e-27,
+      "median_train_seconds": 1.0700865725002586,
+      "median_forward_ms": 0.445188000185226,
+      "inference_checkpoint_bytes": 1833
+    },
+    {
+      "task": "aligned",
+      "model": "scalar_gain",
+      "n": 6,
+      "mean_r2": 0.3407102881282909,
+      "min_r2": -0.6509844437723595,
+      "max_r2": 0.906255063161492,
+      "mean_mse": 4.0817829274504744e-05,
+      "median_train_seconds": 0.3313118640000994,
+      "median_forward_ms": 0.1279220000469649,
+      "inference_checkpoint_bytes": 1833
+    },
+    {
+      "task": "aligned",
+      "model": "spectral",
+      "n": 6,
+      "mean_r2": 0.10561860070909941,
+      "min_r2": -0.990734454803097,
+      "max_r2": 0.6575474794720706,
+      "mean_mse": 7.081006488322445e-05,
+      "median_train_seconds": 0.3248081970000385,
+      "median_forward_ms": 0.0845515000946761,
+      "inference_checkpoint_bytes": 1833
+    },
+    {
+      "task": "off_orbit",
+      "model": "dense",
+      "n": 6,
+      "mean_r2": 0.9893484177718038,
+      "min_r2": 0.985064694579458,
+      "max_r2": 0.9925196930580372,
+      "mean_mse": 0.005004325048105767,
+      "median_train_seconds": 0.2839165220000268,
+      "median_forward_ms": 0.02877299993997435,
+      "inference_checkpoint_bytes": 5397
+    },
+    {
+      "task": "off_orbit",
+      "model": "linear_view",
+      "n": 6,
+      "mean_r2": 0.004832421612066867,
+      "min_r2": -0.0133002468049403,
+      "max_r2": 0.0161466916263931,
+      "mean_mse": 0.4669081596310924,
+      "median_train_seconds": 0.9430779654999242,
+      "median_forward_ms": 0.3688784997848415,
+      "inference_checkpoint_bytes": 1833
+    },
+    {
+      "task": "off_orbit",
+      "model": "mirror",
+      "n": 6,
+      "mean_r2": -0.00032279185407159975,
+      "min_r2": -0.0178479750568179,
+      "max_r2": 0.0102795907080451,
+      "mean_mse": 0.46933621951597676,
+      "median_train_seconds": 1.0113412484997752,
+      "median_forward_ms": 0.4432804998941719,
+      "inference_checkpoint_bytes": 1833
+    },
+    {
+      "task": "off_orbit",
+      "model": "scalar_gain",
+      "n": 6,
+      "mean_r2": -0.020508967064065516,
+      "min_r2": -0.0425915990216771,
+      "max_r2": -0.0045934199258619,
+      "mean_mse": 0.47881776492411926,
+      "median_train_seconds": 0.34671903849994123,
+      "median_forward_ms": 0.1283325000258628,
+      "inference_checkpoint_bytes": 1833
+    },
+    {
+      "task": "off_orbit",
+      "model": "spectral",
+      "n": 6,
+      "mean_r2": 0.004832421612068333,
+      "min_r2": -0.0133002468049332,
+      "max_r2": 0.0161466916263931,
+      "mean_mse": 0.4669081596310917,
+      "median_train_seconds": 0.31577882699980364,
+      "median_forward_ms": 0.0853930000630498,
+      "inference_checkpoint_bytes": 1833
+    }
+  ],
+  "aligned_scalar_parameter_absolute_error_mean": 8.612161909541763e-13,
+  "serialization_bytes": {
+    "single_scalar_model_torch_save_with_config": 1833,
+    "dense_337_model_torch_save_state_only": 5397,
+    "raw_scalar_binary64": 8,
+    "raw_dense_337_binary64": 2696
+  },
+  "code_size_bytes": {
+    "model_py": 5647,
+    "run_py": 5640,
+    "generator_inference_code_not_in_checkpoint": true
+  },
+  "hardware": {
+    "cpu": "AMD EPYC 9V74 virtual CPU",
+    "device": "CPU",
+    "threads": 1,
+    "dtype": "float64",
+    "torch": "2.10.0+cpu",
+    "steps": 500,
+    "batch": 64
+  },
+  "uncertainty_model": "world bootstrap not claimed; u_c = sample std of 3 world means / sqrt(3), k=2 descriptive only; task family/model misspecification dominate",
+  "uncertainty": [
+    {
+      "task": "aligned",
+      "model": "mirror",
+      "mean_r2": 1.0,
+      "u_c": 0.0,
+      "k": 2,
+      "expanded_u": 0.0
+    },
+    {
+      "task": "aligned",
+      "model": "dense",
+      "mean_r2": 0.9976887400084751,
+      "u_c": 0.0003293000007064661,
+      "k": 2,
+      "expanded_u": 0.0006586000014129322
+    },
+    {
+      "task": "off_orbit",
+      "model": "mirror",
+      "mean_r2": -0.00032279185407159975,
+      "u_c": 0.004490176082953826,
+      "k": 2,
+      "expanded_u": 0.008980352165907653
+    },
+    {
+      "task": "off_orbit",
+      "model": "dense",
+      "mean_r2": 0.9893484177718038,
+      "u_c": 0.0017018283653354267,
+      "k": 2,
+      "expanded_u": 0.0034036567306708534
+    }
+  ],
+  "limitations": [
+    "aligned teacher generated from identical scalar Mirror program",
+    "R2 metric on a single regression family and off-family synthetic target",
+    "not a natural-model compression measurement",
+    "checkpoint bytes exclude architecture source program and environment",
+    "no FP8000 or FP80000 gradient experiment",
+    "4 nonlinear generator rounds cost actual CPU time"
+  ],
+  "execution_chronology": "51 rows before process timeout, 9 rows computed using unchanged run_one after restart; all world/seed/model entries present exactly once."
+}
