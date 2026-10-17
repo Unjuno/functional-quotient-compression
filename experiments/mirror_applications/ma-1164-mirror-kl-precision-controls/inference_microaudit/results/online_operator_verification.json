@@ -1,0 +1,90 @@
+{
+  "passed": 6,
+  "rows": [
+    {
+      "d": 64,
+      "batch": 64,
+      "K": 1,
+      "R": 1,
+      "physical_coeff_bytes_FP64": 512,
+      "explicit_weights_bytes_FP64": 32768,
+      "implicit_operator_temporary_virtual_W_bytes": 0,
+      "direct_ms_median_CPU": 0.28283,
+      "preexpanded_matmul_ms_median_CPU": 0.05189,
+      "implicit_over_dense_ratio": 5.451,
+      "max_abs_output_difference": 4.440892098500626e-16
+    },
+    {
+      "d": 64,
+      "batch": 64,
+      "K": 4,
+      "R": 4,
+      "physical_coeff_bytes_FP64": 512,
+      "explicit_weights_bytes_FP64": 524288,
+      "implicit_operator_temporary_virtual_W_bytes": 0,
+      "direct_ms_median_CPU": 4.55133,
+      "preexpanded_matmul_ms_median_CPU": 0.44208,
+      "implicit_over_dense_ratio": 10.295,
+      "max_abs_output_difference": 4.440892098500626e-16
+    },
+    {
+      "d": 128,
+      "batch": 64,
+      "K": 1,
+      "R": 1,
+      "physical_coeff_bytes_FP64": 1024,
+      "explicit_weights_bytes_FP64": 131072,
+      "implicit_operator_temporary_virtual_W_bytes": 0,
+      "direct_ms_median_CPU": 0.40408,
+      "preexpanded_matmul_ms_median_CPU": 0.11626,
+      "implicit_over_dense_ratio": 3.476,
+      "max_abs_output_difference": 4.440892098500626e-16
+    },
+    {
+      "d": 128,
+      "batch": 64,
+      "K": 4,
+      "R": 4,
+      "physical_coeff_bytes_FP64": 1024,
+      "explicit_weights_bytes_FP64": 2097152,
+      "implicit_operator_temporary_virtual_W_bytes": 0,
+      "direct_ms_median_CPU": 6.27265,
+      "preexpanded_matmul_ms_median_CPU": 1.25759,
+      "implicit_over_dense_ratio": 4.988,
+      "max_abs_output_difference": 8.881784197001252e-16
+    },
+    {
+      "d": 256,
+      "batch": 64,
+      "K": 1,
+      "R": 1,
+      "physical_coeff_bytes_FP64": 2048,
+      "explicit_weights_bytes_FP64": 524288,
+      "implicit_operator_temporary_virtual_W_bytes": 0,
+      "direct_ms_median_CPU": 0.6443,
+      "preexpanded_matmul_ms_median_CPU": 0.30392,
+      "implicit_over_dense_ratio": 2.12,
+      "max_abs_output_difference": 4.440892098500626e-16
+    },
+    {
+      "d": 256,
+      "batch": 64,
+      "K": 4,
+      "R": 4,
+      "physical_coeff_bytes_FP64": 2048,
+      "explicit_weights_bytes_FP64": 8388608,
+      "implicit_operator_temporary_virtual_W_bytes": 0,
+      "direct_ms_median_CPU": 9.87446,
+      "preexpanded_matmul_ms_median_CPU": 3.92495,
+      "implicit_over_dense_ratio": 2.516,
+      "max_abs_output_difference": 4.440892098500626e-16
+    }
+  ],
+  "limitations": [
+    "Fixed Walsh-Hadamard generator plus signed addresses; cannot generate arbitrary dense trained weights",
+    "No direct supervised training, CPU eager FP64, clocks not fixed",
+    "Sign direction codes deterministic and generated from fixed seeds",
+    "Dense reference caches virtual weights; direct path avoids all W matrices",
+    "Activation function tanh and residual are in the recurrent computation, not a training experiment"
+  ]
+}
