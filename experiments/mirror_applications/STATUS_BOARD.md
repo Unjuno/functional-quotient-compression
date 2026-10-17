@@ -3,13 +3,14 @@
 Updated: 2026-10-18 JST (Mirror-native focus intake; past outcomes unchanged)
 Canonical branch: `research/mirror-application-worker-ready-20261007`
 
-## Program totals (reconciled from authoritative 1162-row registry)
+## Program totals (reconciled from authoritative 1163-row registry)
 
-- Registered candidates: **1162**
-- P0: **635** (171 completed; 464 UNTESTED)
+- Registered candidates: **1163**
+- P0: **636** (171 completed; 464 UNTESTED; 1 SCREENING)
 - P1: **424** (15 completed; 409 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **976 UNTESTED, 54 PROMISING, 132 FAIL**
+- Current MA statuses: **976 UNTESTED, 1 SCREENING, 54 PROMISING, 132 FAIL**
+- **2026-10-18 MA-1163:** Pretrained digits MLP -> K=3 L=3 nonlinear Mirror virtual-weight compiler. Full-m exact reconstruction PASS, m768 selected-address fresh retention 3/3 PASS, native same-m plain comparator wins and decoder code cancels one-model storage saving; overall Mirror-specific M0. [Evidence](ma-1163-mechanical-mirror-compiler/REPORT_JA.md).
 - **2026-10-18 method expansion:** MA-1156..1161 (6 UNTESTED; 4 P0 / 2 P1). These are **ideas only** and do not imply trained results or verified cryptographic security. [Research intake](research_intake/nonlinear_keyed_mirror_20261018/README.md).
 - **2026-10-18 focused research target:** **MA-1162** Mirror-native parallel causal mixing + recurrent nonlinear Views (P0 **UNTESTED**; L0 algebra/causality tests 10/10, **no trained LM**). [Architecture and focus](../../docs/phase2/MIRROR_NATIVE_SEQUENCE_FOCUS_2026-10-18.md).
 - 47 baseline experiment directories remain present; verified external outcomes are linked to their dedicated branches in the registry and claim ledger.
