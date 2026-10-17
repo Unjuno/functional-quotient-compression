@@ -1,0 +1,73 @@
+{
+  "scope": "MA1164 matched-native confirmatory replay",
+  "date": "2026-10-18",
+  "reason": "Correct pre-existing mismatch: documented sealed fresh worlds 618450-618452 but source had 618460-618462; no hyperparameter or model change. Separate artifacts retained.",
+  "fresh_worlds": [
+    618450,
+    618451,
+    618452
+  ],
+  "seeds": [
+    51,
+    52
+  ],
+  "selected_lrs": {
+    "6": {
+      "lr": 0.004,
+      "accuracy": 0.9322916666666667,
+      "nll": 0.21158078883374137
+    },
+    "7": {
+      "lr": 0.008,
+      "accuracy": 0.9513888888888888,
+      "nll": 0.15935285618872858
+    },
+    "10": {
+      "lr": 0.008,
+      "accuracy": 0.9670138888888888,
+      "nll": 0.09911953051130323
+    },
+    "11": {
+      "lr": 0.016,
+      "accuracy": 0.9704861111111112,
+      "nll": 0.08695776747715561
+    },
+    "13": {
+      "lr": 0.008,
+      "accuracy": 0.9791666666666667,
+      "nll": 0.07223954660043388
+    },
+    "16": {
+      "lr": 0.008,
+      "accuracy": 0.984375,
+      "nll": 0.0625749864373469
+    }
+  },
+  "train_updates": 900,
+  "KR": {
+    "256": [
+      2,
+      4
+    ],
+    "512": [
+      2,
+      4
+    ],
+    "768": [
+      8,
+      4
+    ],
+    "1024": [
+      2,
+      4
+    ]
+  },
+  "checksum_sha256": {
+    "source/run.py": "bec5b22dd403424a8424ac601920191beba8498939e56bb87b77ae6112a6f51e",
+    "PROTOCOL.json": "e2dd4d3297ff19980066aebeff51ebdc36d458fa9a63c853a84462f224b32e78",
+    "results/selection.json": "31af918ff31e5ae1dc32430b0ed5c689db3a726aee5c197aff6d39f084efe940",
+    "tests/test_controls.py": "d580041b24668be1abd8774bf7419d28f202b398632141999c3f99b14c02aa7a"
+  },
+  "policy": "No tuning on test; report attempted out-of-protocol 618460-462 separately, do not pool",
+  "post_copy_test_assertion_fix": "Changed hard-coded test assertion to match the documented sealed fresh worlds; does not affect experiment runner or data."
+}

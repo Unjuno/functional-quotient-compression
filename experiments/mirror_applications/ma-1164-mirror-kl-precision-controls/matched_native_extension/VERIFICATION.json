@@ -1,0 +1,47 @@
+{
+  "study": "MA-1164 matched native independent width control",
+  "status": "SCREENING_FAIL_MIRROR_SPECIFIC",
+  "protocol_corrected_worlds": [
+    618450,
+    618451,
+    618452
+  ],
+  "seeds": [
+    51,
+    52
+  ],
+  "development_rows": 36,
+  "fresh_rows": 120,
+  "checks": {
+    "fresh_worlds_exact": true,
+    "paired_6_trials": true,
+    "no_duplicate_conditions": true,
+    "twenty_models_per_run": true,
+    "all_training_900_updates": true,
+    "all_fresh_scores_finite": true,
+    "unit_tests_passed": 9
+  },
+  "known_deviation": "Initial source mistakenly used 618460/461/462 despite preregistered 618450/451/452; those mismatched outcomes excluded. Same settings rerun at 618450/451/452. NativeMLP->NativeWidth structural bugfix before accepted evaluation, with exact replay test.",
+  "source_and_evidence_sha256": {
+    "source/run.py": "bec5b22dd403424a8424ac601920191beba8498939e56bb87b77ae6112a6f51e",
+    "tests/test_controls.py": "d580041b24668be1abd8774bf7419d28f202b398632141999c3f99b14c02aa7a",
+    "PROTOCOL.json": "e2dd4d3297ff19980066aebeff51ebdc36d458fa9a63c853a84462f224b32e78",
+    "FREEZE_CORRECTION.json": "1efe3ea754ff1d7f03cc4f9ff80c8d013d3d7d11e4ff6999d9710cd386f43327",
+    "results/selection.json": "31af918ff31e5ae1dc32430b0ed5c689db3a726aee5c197aff6d39f084efe940",
+    "results/development.csv": "0afd5435fb57008783f587580ec80f512e4f98eb223fd4ae8817f67ee928542d",
+    "results/fresh.csv": "4776e4d5171325f8242d68d9c21be59350c0ba69d8ee274121ae40568d4a18fd",
+    "REPORT_JA.md": "62fbb7f4815bb055b6183f2abc7f3805f5baa0a566addbf6e0ee78f924c93a95",
+    "README.md": "1345ac7cb2b5eb096e64da4b719d427bad548092376111d88f5a9242bd790ec9",
+    "STATUS.md": "3753b7252cb3195a30b55dabc6c8bc9450b15b7708c3b4829eea626cdcd567c3",
+    "results/summary.csv": "a3089bb7cbdb422e0760a16487952203fb46f8e4b6ae121845da229edcf06a29"
+  },
+  "environment": {
+    "torch": "2.10.0+cpu",
+    "cpu_threads": 1,
+    "cuda": false,
+    "platform": "Linux-6.18.55-x86_64-with-glibc2.41",
+    "cpu_name": "AMD EPYC 9V74 80-Core Processor",
+    "description": "CPU eager FP64 run; FP16 serialized native weights replayed in FP64; 64-image forward medians"
+  },
+  "interpretation": "Mirror virtual 1210-weight classifier functions, but m512/768/1024 are not Pareto-optimal against equal-param narrow native MLP or compact FP16 storage; teacher-weight fitting costs extra training."
+}
