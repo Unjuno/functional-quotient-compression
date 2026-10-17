@@ -1,0 +1,21 @@
+{
+  "id":"MA-1162-L1B-LONG-20261018",
+  "version":2,
+  "freeze_date":"2026-10-18",
+  "reason":"Prespecified long-budget causal learning confirmation; 800 updates chosen using only development world 618200 retrieval at 800 updates, prior to seeing the first fresh 96-update outcome",
+  "architecture_source":"unchanged source/l1.py from protocol L1v1, 12cf3e3cc1407ee183b575948eef0a26b1be5b29322bc03349904165ad2401cb",
+  "runner":"source/run_l1b.py",
+  "worlds_fresh_v2":[618211,618212,618213],
+  "world_specific_input_permutation":true,
+  "init_and_stream_seeds":[0,1],
+  "data_and_metrics":"same L1v1 generator (copy/retrieve/ordered), disjoint online training RNG and independent 384-query evaluation; last-query CE nats/example, NOT per-token LM NLL",
+  "negative_control":"hidden branch checked in its own long-budget native/Mirror suite as independently random future label; previous L1v1 negative cannot be used for selection",
+  "device":"CPU eager FP32; one thread, AMD EPYC 9V74 5 vCPU container",
+  "fixed":{"models":["native","tied","gain4","rank1_4","mirror4","independent4"],"tasks":["copy","retrieve","ordered"],"updates":800,"batch":32,"lr":0.003,"eval_queries":384},
+  "matched":{"models":["native","tied","gain4","rank1_4"],"tasks":["copy","retrieve","ordered"],"reference_model":"mirror4","reference_updates":800,"control_updates":"floor(800 * forward_MAC_proxy(mirror4) / forward_MAC_proxy(control))"},
+  "hidden":{"models":["native","mirror4"],"tasks":["hidden"],"updates":800},
+  "statistical_unit":"world x initial seed x task; no data-selected exclusions",
+  "gate":"Mirror4 >=5% lower mean query NLL than strongest byte-near (within 5%) compute-proxy-matched native/gain/rank1/tied in >=2/3 fresh worlds with <=10% worst causal-task NLL regression and all tasks better than 96-update token-local control",
+  "limitations":["structured synthetic tasks not natural language", "no exact measured-FLOP equality: softmax/rotations and kernels excluded", "independent K-head is an upper control, not byte matched", "worlds are independent random vocabulary permutations but same task family", "K=4,T=2 explored only at short budget; no L1b T sweep"],
+  "interpretation":"A failure after 800 updates constrains this particular architecture/training regime, not all Mirror-native models. Do not claim capacity proof or stop training early using fresh data."
+}
