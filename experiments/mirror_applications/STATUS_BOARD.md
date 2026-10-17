@@ -1,15 +1,16 @@
 # Mirror Application Status Board
 
-Updated: 2026-10-08 JST
+Updated: 2026-10-18 JST (idea intake; past outcomes unchanged)
 Canonical branch: `research/mirror-application-worker-ready-20261007`
 
-## Program totals (reconciled from authoritative 1155-row registry)
+## Program totals (reconciled from authoritative 1161-row registry)
 
-- Registered candidates: **1155**
-- P0: **630** (170 completed; 460 UNTESTED)
-- P1: **422** (15 completed; 407 UNTESTED)
+- Registered candidates: **1161**
+- P0: **634** (171 completed; 463 UNTESTED)
+- P1: **424** (15 completed; 409 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **969 UNTESTED, 54 PROMISING, 132 FAIL**
+- Current MA statuses: **975 UNTESTED, 54 PROMISING, 132 FAIL**
+- **2026-10-18 method expansion:** MA-1156..1161 (6 UNTESTED; 4 P0 / 2 P1). These are **ideas only** and do not imply trained results or verified cryptographic security. [Research intake](research_intake/nonlinear_keyed_mirror_20261018/README.md).
 - 47 baseline experiment directories remain present; verified external outcomes are linked to their dedicated branches in the registry and claim ledger.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). See the current Next candidate section for the live queue.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. see the current Next candidate section.
@@ -25,7 +26,7 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 **MA-473 — ROME edit composition and interference (P0; PA87; PA88)**
 
-The current 1155-row registry now includes 42 previously verified outcomes from the cumulative research branch through MA-338, plus MA-594–618 and other current-branch results. MA-618 is a verified development FAIL; its fresh split remains sealed. MA-325 is PROMISING only for synthetic Givens-aligned domains: 636 B vs PCA 981 B, with independent domains requiring private TT cores. MA-366 and MA-367 are now reconciled FAILs from their dedicated branches; MA-366 fresh split was accidentally exposed and is excluded, while MA-367 fresh remained sealed. MA-341/342 both failed their frozen development byte gates and are recorded in the claim ledger. MA-344/346 retain narrow synthetic communication/storage points but native phase controls alias Mirror. MA-349 failed its posterior storage gate. MA-351, MA-355, and MA-356 failed Mirror-specific development gates; their exact scalar/index controls matched at nearly identical bytes. MA-357 and MA-359 failed their frozen Mirror-specific gates with native controls matching payloads or compute; fresh remained sealed. MA-360 found a reversible activation-memory reduction but the Mirror view exactly aliased the direct scalar control. MA-361 and MA-364 failed because direct coefficient controls exactly matched their Mirror outputs and payloads. MA-353 is now reconciled as FAIL: its Mirror Gaussian coordinate matched ordinary Gaussian scalar bytes/hash exactly, cost 32 B more than rank-1 BNN and far more than the independent three-mode archive; predictive quality matched BNN. Fresh remained sealed. MA-365 is P1. MA-367/368 share a failure cause, so MA-369/371/372 are pending family redesign. MA-374 is a separate tested depth-tying family and failed; next eligible distinct P0 is MA-375.
+The current 1161-row registry now includes 42 previously verified outcomes from the cumulative research branch through MA-338, plus MA-594–618 and other current-branch results. MA-618 is a verified development FAIL; its fresh split remains sealed. MA-325 is PROMISING only for synthetic Givens-aligned domains: 636 B vs PCA 981 B, with independent domains requiring private TT cores. MA-366 and MA-367 are now reconciled FAILs from their dedicated branches; MA-366 fresh split was accidentally exposed and is excluded, while MA-367 fresh remained sealed. MA-341/342 both failed their frozen development byte gates and are recorded in the claim ledger. MA-344/346 retain narrow synthetic communication/storage points but native phase controls alias Mirror. MA-349 failed its posterior storage gate. MA-351, MA-355, and MA-356 failed Mirror-specific development gates; their exact scalar/index controls matched at nearly identical bytes. MA-357 and MA-359 failed their frozen Mirror-specific gates with native controls matching payloads or compute; fresh remained sealed. MA-360 found a reversible activation-memory reduction but the Mirror view exactly aliased the direct scalar control. MA-361 and MA-364 failed because direct coefficient controls exactly matched their Mirror outputs and payloads. MA-353 is now reconciled as FAIL: its Mirror Gaussian coordinate matched ordinary Gaussian scalar bytes/hash exactly, cost 32 B more than rank-1 BNN and far more than the independent three-mode archive; predictive quality matched BNN. Fresh remained sealed. MA-365 is P1. MA-367/368 share a failure cause, so MA-369/371/372 are pending family redesign. MA-374 is a separate tested depth-tying family and failed; next eligible distinct P0 is MA-375.
 
 Useful map from the imported evidence: aligned views sometimes reduce stored state (MA-255/258/268/276/282/312/314/330) but simple controls, fitting compute, runtime workspace, or unrelated-task failures often limit the claim. Symmetry-only views add zero functional multiplicity (MA-332/333); several exact direct-code aliases miss Mirror-specific gates (MA-257/271–273/296/303–304/327/337). All scoped claims and source branches are in `CLAIM_LEDGER.csv`.
 

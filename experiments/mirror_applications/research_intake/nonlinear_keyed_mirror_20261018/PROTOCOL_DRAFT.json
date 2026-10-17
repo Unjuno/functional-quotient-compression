@@ -1,0 +1,72 @@
+{
+  "id": "NKM-INTAKE-001",
+  "date": "2026-10-18",
+  "stage": "DESIGN_ONLY_NOT_FROZEN",
+  "no_training_performed": true,
+  "candidates": [
+    "MA-1156",
+    "MA-1157",
+    "MA-1158",
+    "MA-1159",
+    "MA-1160",
+    "MA-1161"
+  ],
+  "variables": {
+    "theta": "shared trainable parent",
+    "psi": "shared transform generators",
+    "m": "compact view coordinates",
+    "eta": "trainable or fixed activation coefficients",
+    "c": "nonsecret condition/role",
+    "k": "cryptographic access-control key separate from neural training"
+  },
+  "experiment_order": [
+    "analytical invariance and noncommutation",
+    "paired nonlinear sandwich",
+    "same-code repeated nonlinear views",
+    "joint theta/psi/m/eta training",
+    "oriented nonlinear gate",
+    "public-condition gate",
+    "standard crypto wrapping"
+  ],
+  "transform_controls": [
+    "identity",
+    "signed permutation",
+    "diagonal scale",
+    "Givens rotation",
+    "Householder reflection",
+    "simple invertible coupling"
+  ],
+  "activation_controls": [
+    "identity",
+    "ReLU",
+    "GELU",
+    "SiLU",
+    "tanh",
+    "low-knot spline"
+  ],
+  "native_controls": [
+    "ordinary shared FFN",
+    "native per-role readout",
+    "FiLM",
+    "IA3",
+    "LoRA rank1/2",
+    "independent FFNs",
+    "learned activation without Mirror",
+    "standard conditional router",
+    "ordinary encrypted adapter"
+  ],
+  "gates": {
+    "mechanism": "change output function beyond commuting/gauge null and fit held-out family",
+    "quality": "world-paired improvement over strongest matched-byte native control",
+    "storage": "actual serialized end-to-end inference bytes",
+    "compute": "separate per-stage FLOPs training FLOPs and measured latency",
+    "security": "at-rest AEAD integrity and explicit trust boundaries only"
+  },
+  "datasets": {
+    "development": "to be frozen per candidate before fresh",
+    "fresh": "not opened",
+    "natural": "required before general Transformer claims"
+  },
+  "runtime": "CPU mechanism first; GPU/kernel only when benchmarked",
+  "warning": "This draft is not an experimental preregistration or result. Refined numeric pass thresholds and splits must be frozen before first fresh run."
+}
