@@ -1,0 +1,30 @@
+{
+  "experiment": "MA-1162 / ONEPARAM-ALLWEIGHTS-001",
+  "date_jst": "2026-10-18",
+  "scope": "Feasibility spike: all learned affine maps in a tiny causal Transformer come from one shared tensor and one scalar Mirror address per role. Not a capacity or speed claim.",
+  "base_commit": "4ef99b4737d505f14b8b6aa702b358c77f044d14",
+  "branch": "research/ma1162-oneparam-allweights-20261018",
+  "interpretations": {
+    "primary": "one shared 64x64 learnable core plus 14 scalar role addresses; every embedding/Q/K/V/O/FFN/readout matrix is a cropped orthogonal conjugate of that core",
+    "literal_scalar_control": "exactly one trainable scalar, frozen random core included in stored bytes; all 14 roles have fixed offsets plus that scalar"
+  },
+  "architecture": {"vocab":64,"length":16,"d":32,"ff":64,"layers":2,"heads":2,"core":64,"roles":14,"position":"fixed sinusoidal","norm":"LayerNorm affine=False","bias":false,"activation":"fixed GELU","rotation":"one scalar angle, adjacent Givens planes with deterministic integer frequencies 1..32; same angle controls left and right orthogonal conjugation"},
+  "models": ["mirror","shared","gain","dense","dense_byte","scalar_only"],
+  "dense_byte": {"d":12,"ff":30,"layers":2,"heads":2,"note":"4128 independent scalars vs candidate 4110; actual compact inference bytes measured, not padded"},
+  "tasks": {
+    "copy":"15 independent symbols 0..7 followed by public query specifying lag 1..4; predict the selected earlier symbol",
+    "retrieve":"8 unique keys with random 4-valued labels, shuffled composite key/value tokens, 7 pads, public key query; predict label"
+  },
+  "worlds": {"development":[618230],"fresh":[618231,618232,618233],"seeds":[0,1],"meaning":"independent random input vocabulary encodings of the same two symbolic task families"},
+  "train": {"updates":400,"batch":32,"optimizer":"AdamW","lr":0.003,"weight_decay":0.0,"grad_clip":1.0,"dtype":"float32","backend":"PyTorch eager CPU","threads":1,"paired_batches":true,"eval_examples":1024},
+  "data_separation": "independent seeded torch.Generators for online train and heldout evaluation; protocol and source hash frozen before fresh worlds; no fresh tuning or early stopping",
+  "minimum_trials": "3 worlds x 2 seeds per model/task = 72 complete trials",
+  "gates": {
+    "structural":"only core and one scalar per role trainable in mirror; scalar_only exactly one trainable scalar; finite nonzero gradients; causal prefix unchanged within 1e-6; exact serialized reload logits",
+    "learning":"per task, candidate median heldout accuracy >=0.75 and median heldout query NLL <=0.70 of initialization; report task-wise pass, and pass-both separately",
+    "superiority":"NOT a primary gate; report simple shared/gain and byte-near dense controls without promoting fixed-update wins to capacity or Pareto proofs"
+  },
+  "accounting": "unique learned scalars, frozen scalars, logical matrix elements, raw state bytes, actual torch.save compact inference bytes, optimizer updates, examples/tokens, forward dense MAC proxy, 3x training MAC proxy, wall time, median/p10/p90 CPU inference time; transforms/nonlinear kernels explicitly not included in dense MAC proxy",
+  "deviations_from_full_MA1162_plan": ["only two causal query tasks for user-requested minimal feasibility", "no K/T sweep, no DB, no controller, no corpus LM", "no equal-training-FLOP or equal-time claim; fixed-update spike only", "existing L1 results and registry statuses are preserved; subexperiment not a new MA hypothesis"],
+  "negative_outcome_policy": "keep all results; underperformance of this one-parameter orbit does not falsify all Mirror representations"
+}
