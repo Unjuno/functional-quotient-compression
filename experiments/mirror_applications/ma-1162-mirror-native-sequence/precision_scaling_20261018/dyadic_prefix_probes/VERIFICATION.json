@@ -1,0 +1,25 @@
+{
+  "study": "ONE_SCALAR_DYADIC_PREFIX_VS_FLOAT64_20261018",
+  "status": "EXPLORATORY_NUMERICAL_ONLY",
+  "test_command": "PYTHONPATH=source python -m pytest -q tests/test_precision_coordinate_probe.py",
+  "local_test_result": "4 passed in 0.06s",
+  "rows": 7,
+  "precision_bits": [
+    16,
+    32,
+    53,
+    64,
+    128,
+    256,
+    800
+  ],
+  "binary64_collapse_in_fixture_at_or_above": 64,
+  "reported_local_derivative_approx": 4.084072,
+  "gpu": false,
+  "learning": false,
+  "statistical_claims": false,
+  "fixed_program_only": true,
+  "provenance": "One integer numerator plus denominator 2**p, not IEEE-style floating scalar; MP arbitrary precision used for Mirror arithmetic, p+125 work bits.",
+  "historical_status": "No change to MA-1162, MA-597..604 or any older result",
+  "source_and_test_readback": "GitHub exact content readback confirmed on new research branch"
+}
