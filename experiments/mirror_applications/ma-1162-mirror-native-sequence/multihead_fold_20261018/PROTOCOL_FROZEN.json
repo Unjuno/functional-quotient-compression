@@ -1,0 +1,115 @@
+{
+  "id": "MA-1162-MULTIHEAD-MIRROR-FOLD-L0-20261018",
+  "scope": "Multihead cache-safe Mirror structural equivalence + teacher-orbit code fitting; NOT a trained natural-language model, not a Mirror-specific capacity proof.",
+  "status": "FROZEN_BEFORE_FRESH_TEACHER_EXPERIMENT",
+  "date": "2026-10-18",
+  "baseline_branch": "research/ma-691-cache-aware-decode-plan-20261018",
+  "source_sha256": {
+    "source/multihead.py": "f14dda658375e39aa4c13670be965bfcc0fa16e39c9488309671edaccafa6d39",
+    "source/train.py": "b0561dd55eed853ec1731133a181e28fb328b3d092efab18ec88c30a6bd5b7f9",
+    "source/benchmark.py": "8823912beae5dada2913313e0d6ac9bbe95a0f953d47b34a3a57630212eb9944",
+    "tests/test_multihead.py": "4ad4b5de16490672966190088e10083f7429af2ad2f152b49895a8e405ffb701"
+  },
+  "insertion": "One shared dmodel-to-dhead QKV triple, H learned relative Query and post-attention output Mirror Views operating in parallel on a single canonical K/V. Repeat across layers is a later scope.",
+  "shapes": {
+    "batch_train": 32,
+    "train_seq_len": 8,
+    "d_model": 16,
+    "d_head": 8,
+    "logical_heads": 4,
+    "head_output": "[B,8,4,8]"
+  },
+  "worlds": {
+    "dev_world_opened": [
+      16100
+    ],
+    "new_fresh_unopened": [
+      16101,
+      16102,
+      16103
+    ],
+    "train_initializations": [
+      1,
+      2
+    ]
+  },
+  "train": {
+    "optimizer": "torch.optim.Adam, clip_grad_norm=2",
+    "updates": 160,
+    "batch": 32,
+    "lr": 0.06,
+    "target": "per-head full causal outputs MSE, not language NLL",
+    "eval_examples": 256,
+    "data": "disjoint Gaussian iid tensors from torch.Generator; world sets common physical QKV and head teacher, seed sets training/eval streams",
+    "generator_train_seed": "world*113 + seed*13 + 17",
+    "generator_eval_seed": "world*113 + seed*13 + 1000017"
+  },
+  "teacher_families": [
+    "linear two-plane Mirror orbit",
+    "nonlinear query/post-output Mirror orbit",
+    "off-orbit independent dense orthogonal head transforms"
+  ],
+  "students": [
+    "linear 2H Mirror scalars",
+    "nonlinear 2H Mirror scalars",
+    "gain 2H independent scalar controls",
+    "no-view null 0 scalars"
+  ],
+  "stronger_native_control": "Full independent dense Q/output right maps per head can represent off-orbit teacher at greater code bytes; a pre-folded static Q/readout version is exact to linear Mirror and MUST be compared for speed.",
+  "mechanism_gates": {
+    "head_causal": "changing suffix cannot change output prefix",
+    "linearly_folded_max_abs": "<=2e-6 float32 for tested fixed tensors",
+    "teacher_orbit_training": "matching student heldout MSE < 1e-5 in >=2/3 fresh worlds and both seeds",
+    "different_attention_heads": "pairwise head KL > 1e-5 on matching linear teachers",
+    "off_orbit": "report every outcome; no expectation of Mirror advantage",
+    "mirror_specific_runtime": "NO gate possible from this aligned synthetic head task alone; compare folded-native"
+  },
+  "runtime_diagnostic_opened_before_protocol": {
+    "status": "EXPLORATORY_NOT_FRESH",
+    "conditions": {
+      "batch": [
+        1,
+        4
+      ],
+      "prefix": [
+        128,
+        512,
+        2048,
+        8192
+      ],
+      "heads": [
+        1,
+        4,
+        8
+      ],
+      "head_dim": 8,
+      "d_model": 16,
+      "dtype": "FP32",
+      "threads": 1,
+      "warmup": 6,
+      "timed_repeats": 25
+    },
+    "comparators": [
+      "resident headwise materialized KV",
+      "canonical Q/output lazy Mirror",
+      "algebraically folded native Q/output",
+      "non-equivalent hard shared MQA control"
+    ]
+  },
+  "capacity_accounting": [
+    "unique trainable View scalars",
+    "shared physical QKV bytes",
+    "folded per-head Q matrices if materialized persistently",
+    "canonical K/V bytes vs resident headwise caches",
+    "intermediate activation memory not assumed free",
+    "timed single decode vs full autoregressive throughput separately"
+  ],
+  "freeze_limitations": [
+    "synthetic teacher is aligned by construction",
+    "normal text inference and GPU not tested",
+    "nonlinear post-attention activation is NOT identical to per-token nonlinear cached V",
+    "static folding can eliminate Mirror runtime without adding model functional capacity",
+    "exact full sequence and cache provenance test remains future MA-691 scope"
+  ],
+  "fresh_never_tune": true
+}
