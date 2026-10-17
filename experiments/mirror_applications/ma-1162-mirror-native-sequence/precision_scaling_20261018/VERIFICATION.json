@@ -1,0 +1,29 @@
+{
+  "study": "ONE_SCALAR_PRECISION_MIRROR_20261018",
+  "date": "2026-10-18",
+  "experiment_type": "deterministic mechanism precision screen",
+  "cpu": "AMD EPYC 9V74 (5 vCPU container)",
+  "gpu": false,
+  "torch_used": false,
+  "python": "3.13.5",
+  "precision_backend": "mpmath 1.3.0",
+  "one_learnable_scalar": true,
+  "n_worlds": 1,
+  "sample_quality_claim": false,
+  "rows": {
+    "results/train.csv": 16,
+    "results/runtime.csv": 8,
+    "results/phase_sensitivity.csv": 72
+  },
+  "sha256": {
+    "PROTOCOL_FROZEN.json": "d47c49b11c7f6778babe633a6363993cb4c698cbc02671178000795bfea32f63",
+    "source/precision_screen.py": "d7d9bc4020618ac295764639e6601d788f8c1c886c90a838827dfa5300cc3eba",
+    "tests/test_precision_screen.py": "7797c493a56ec39af2315b66f61ef812a41984eb85d3568cd779577d1df7a474",
+    "results/train.csv": "0aabe49ac53ebe63b6b9a3527b358ee47d1234bc685009036afa872ca6e9e919",
+    "results/runtime.csv": "f02e8b5b1cf32c542bc5d4ccfae69ded9218ffb9e782b16faab596c786418a1a",
+    "results/phase_sensitivity.csv": "b0c30252d8dfe5d2c521b293a3010a28d6d0901483455fb3a2bc9c857e01f44c",
+    "results/metadata.json": "5383fcfe36d0eb29f9c86f357aaf8cbc8480bdbffb402689a3ab6e289b19b229",
+    "REPORT_JA.md": "91fd87765dd22b3a7256fb4afe57b3a3857b80e62d9744ae43bf5f0c3976288d"
+  },
+  "methodology_warning": "Precision is number of fixed fractional bits, not total IEEE FP bit width; one-dimensional Gauss-Newton optimizer. CPU no GPU."
+}

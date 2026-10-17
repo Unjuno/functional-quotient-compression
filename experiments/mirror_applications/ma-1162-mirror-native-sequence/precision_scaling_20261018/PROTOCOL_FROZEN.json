@@ -1,0 +1,15 @@
+{
+  "study":"ONE_SCALAR_PRECISION_MIRROR_20261018",
+  "status":"frozen before running this standalone precision screening",
+  "hypothesis":"Increasing one scalar's mantissa/fraction precision improves attainable fit to targets on a fixed smooth nonlinear Mirror orbit but not its local rank, while finer phase addresses can exploit low-order scalar bits only at high sensitivity",
+  "representation":"one scalar s=N/2^p, N exact integer, 0<=s<1; p fraction bits, no separate learned code/weight; fixed role index is decoder program metadata, NOT a learned variable",
+  "precisions_fraction_bits":[16,32,53,64,128,256,800,8000],
+  "virtual_mirror_program":"8 roles, 2 nonlinear residual layers, each Q inverse tanh(Q z + fixed bias); fixed smooth frequencies [1,2,3,5,7,11,13,17]",
+  "teacher":"deterministic random exact 8192-bit fraction; aligned target same Mirror generator; off-orbit target fixed tangent-orthogonal perturbation",
+  "optimizer":"single scalar Gauss-Newton, high precision numerical derivative mp.diff, per-update quantization to p bits, backtracking; max 24 updates, no hidden trainable per-role values",
+  "alternate_phase_probe":"fixed roles j=[0,3,16,48,96,192,384,768,7000] with sin/cos phase 2^j*s, nonlinear Mirror sandwich; compare s with s+1/2^p",
+  "evaluation":"virtual-weight RMSE, final scalar roundoff, bit sensitivity by role, finite-difference Jacobian rank, wall time to evaluate 8-role generator on CPU; exact scalar bytes and GPU materialization estimates",
+  "backend":"CPU mpmath arbitrary precision; pure Python; no CUDA, no GPU wall time claimed",
+  "limits":"forward uses arbitrary precision, not PyTorch float64; p is fraction precision (not IEEE exponent+mantissa format). All target functions synthetic and aligned or deliberately off-orbit, no natural-language or RNN quality conclusion",
+  "precommitted_gates":{"gradient_dimension":1,"aligned_mse_nonincreasing_order_magnitude":"precision increases should lower roundoff-limited residual", "offorbit_nonzero":"irreducible target component for off-orbit", "adaptive_high_phase":"fine phase only accessible when precision resolves 2^-j"}
+}
