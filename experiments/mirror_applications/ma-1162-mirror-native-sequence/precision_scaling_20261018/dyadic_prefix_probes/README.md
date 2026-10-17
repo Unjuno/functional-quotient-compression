@@ -1,24 +1,26 @@
 # MA-1162 — Dyadic scalar coordinate / progressive precision numerical probe
 
-This is an **exploratory numeric experiment**, not a trained NN, not a prospective fresh/audit evaluation, and not a claim of independent capacity. Original precision scaling study is unchanged.
+This is an **exploratory numerical diagnostic**, not a trained NN, prospective fresh/audit evaluation, or claim of new independent model capacity. The original precision-scaling study is unchanged.
 
-**Mirror insertion:** use one progressively precise dyadic scalar as the only proposed physical trainable variable, accessed by four fixed orthogonal Mirror + tanh + inverse-Mirror residual steps. No role gains or angles are independently learned.
+**Mirror insertion:** One progressively precise dyadic scalar is the sole proposed physical learning variable, accessed by four fixed orthogonal Mirror + tanh + inverse-Mirror residual steps. No role angles or gains are independently learned.
 
-Goals: compare one-ULP fixed-point perturbations versus binary64 conversion collapse, confirm nested prefix continuity as extra fractional bits are added, and measure local nonlinear Mirror response.
+Goals: check exact one-ULP fixed-point perturbations against binary64 conversion, nested prefix continuity, and the local response of a repeated nonlinear Mirror operator.
 
-Reproduction (from this directory):
+Reproduction from this directory:
 
-`PYTHONPATH=source python -m pytest -q tests/test_precision_coordinate_probe.py
-python source/precision_coordinate_probe.py`
+```bash
+PYTHONPATH=source python -m pytest -q tests/test_precision_coordinate_probe.py
+python source/precision_coordinate_probe.py
+```
 
-The script writes a new `source/results.csv` (same data as committed `results.csv` for its numeric columns, except wall time may vary with hardware). It does not train a model. Dependencies: Python, `mpmath`, `pytest`. `PROTOCOL_EXPLORATORY.json` and `VERIFICATION.json` describe limitations.
+The script writes `source/results.csv`; compare its numeric columns with the committed `results.csv` (wall times vary by hardware). Requirements: Python, mpmath, pytest. No optimizer, images, or GPU required.
 
-## Outcomes
+## Findings
 
-- 4 local tests PASS; 7 precision conditions (fractional bits 16–800).
+- 4 tests PASS; 7 fractional precision conditions from 16 to 800 bits.
 - Dyadic spacing and parent-child prefix nesting hold exactly.
-- For this scalar/curve, ordinary binary64 converts `s_p` and `s_p+2^-p` to the same number for p>=64, while the arbitrary-precision recurrence distinguishes them.
-- Output sensitivity remains near 4.084, so finer stored bits produce proportionally smaller output changes, not demonstrably new independently learnable functionality.
-- The earlier 8,000-bit precision study already used `N/2^p` fixed-point storage, despite using arbitrary precision floating arithmetic for the Mirror operations.
+- In the tested fixture, ordinary binary64 rounds adjacent dyadic values to the same number from p=64 onwards, while arbitrary-precision evaluation distinguishes their nonlinear Mirror outputs.
+- Local output sensitivity remains approximately 4.084; finer stored bits alone do **not** demonstrate new independently learnable roles.
+- The previous 8,000-bit experiment already stored its scalar in `N/2^p` fixed-point form, while computing Mirror functions via arbitrary-precision floating-point arithmetic.
 
-See [Japanese report](REPORT_JA.md) and [CSV](results.csv).
+See [Japanese report](REPORT_JA.md), [CSV](results.csv), [protocol](PROTOCOL_EXPLORATORY.json), and [verification](VERIFICATION.json).
