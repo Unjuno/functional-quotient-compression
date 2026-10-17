@@ -1,0 +1,14 @@
+{
+  "id": "MA-1164-implicit-online-posthoc-20261018",
+  "status": "POSTHOC_DIAGNOSTIC_NOT_A_PREREGISTERED_FRESH_TEST",
+  "scope": "Storage and microkernel audit only; no training or unseen classification dataset is used",
+  "baseline": "Native dense virtual vector 1210 FP16 coefficients stored in a 22-byte-header raw file, then FP64 matrix execution",
+  "mirror_storage": "768 FP16 physical coefficients + ceil(1210/8) bitset + same 22-byte header, K=8,R=4 metadata",
+  "roundtrip": "Load only physical coefficients and addresses, regenerate virtual 1210-vector with unchanged MA1164 source/core.py, compare exact FP16-quantized decoder predictions",
+  "implicit_execution": "128/256/64-wide sign-Hadamard Mirror; one shared physical vector; K=1,4; R=1,4; FP64 CPU batch64; no full virtual W allocation in direct path",
+  "checks": ["bit-packed roundtrip and byte counts", "same-precision native FP16 payload", "Q^-1 diag(u) Q direct vs dense equality", "nonlinear Q^-1 tanh(diag(u) Qx) equality and nonzero gradient"],
+  "timing": {"backend":"torch 2.10 CPU eager", "threads":1, "repeat":19, "runtime":"median milliseconds", "clock":"not pinned", "device":"AMD EPYC virtual CPU, no GPU"},
+  "hypotheses": {"storage":"Stream-compatible physical state can be shorter than equivalent raw FP16 1210 dense weights", "execution":"K orthogonal views and R updates can be executed without persistent or temporary d-by-d virtual matrices for structured Mirror families", "speed":"CPU eager may not win; measured objectively"},
+  "reproducibility": "Source and RNG seeds fixed; task data none. Includes full input/output equality tests. Historical MA-1164 fresh data not reopened.",
+  "exclusions": ["No new natural-image quality results", "No exact memory watermark; temporary vector workspace does exist", "No GPU, fused CUDA kernel or arbitrary dense matrix equivalence", "No high precision >FP64 learning", "Runtime/code distribution bytes are common library costs and excluded symmetrically from raw per-model state files"]
+}
