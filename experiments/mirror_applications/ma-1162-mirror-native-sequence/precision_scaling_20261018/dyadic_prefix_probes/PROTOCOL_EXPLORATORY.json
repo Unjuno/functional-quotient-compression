@@ -1,0 +1,36 @@
+{
+  "experiment": "ONE_SCALAR_DYADIC_PREFIX_VS_FLOAT64_20261018",
+  "evidence_class": "EXPLORATORY_NUMERICAL_DIAGNOSTIC_ONLY",
+  "chronology": "Protocol documented retrospectively after first execution; not preregistered or held-out neural learning evidence.",
+  "goal": "Exact spacing, nesting of dyadic scalar prefixes, persistence through four nonlinear Mirror stages, and binary64 conversion control",
+  "single_scalar": "s_p = floor(s_star*2^p)/2^p, s_star exact seeded 2048-bit fraction; no learned roles or separate scale",
+  "precisions_fraction_bits": [
+    16,
+    32,
+    53,
+    64,
+    128,
+    256,
+    800
+  ],
+  "seed": 20261018,
+  "mirror_program": "4 residual repeats of Q^-1 tanh(Qz+fixed_bias), with fixed phase frequencies 7,10,13,16",
+  "backend": "CPU Python 3.13 / mpmath 1.3.0 / workprec(p+125)",
+  "reported_metrics": [
+    "exact 1 ULP",
+    "prefix extension step",
+    "Mirror output response",
+    "response/input sensitivity",
+    "float64 roundtrip collapse",
+    "wall time for 3 forwards"
+  ],
+  "limits": [
+    "No optimizer training",
+    "No image classification",
+    "No learning-capacity claim",
+    "Eager arbitrary precision CPU only",
+    "No free independent parameter count"
+  ],
+  "success_condition": "Dyadic prefix exactness for all precisions and finite nonzero Mirror output response",
+  "failure_condition": "Any erroneous dyadic spacing or nonmatching prefix; no capacity conclusion"
+}
