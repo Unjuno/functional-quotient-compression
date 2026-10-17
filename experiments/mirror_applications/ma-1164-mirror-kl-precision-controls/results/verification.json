@@ -1,0 +1,178 @@
+{
+  "id": "MA-1164",
+  "status": "SCREENING",
+  "overall_mirror_specific": "FAIL",
+  "frozen_protocol_verified": true,
+  "source_sha_verified": true,
+  "dev_rows": 118,
+  "fresh_rows": 102,
+  "fresh_worlds": [
+    618420,
+    618421,
+    618422
+  ],
+  "fresh_seed_count": 2,
+  "selected_K_R": {
+    "512": {
+      "k": 2,
+      "r": 4,
+      "mean_dev_accuracy": 0.875,
+      "mean_dev_nll": 0.42919507610966856
+    },
+    "768": {
+      "k": 8,
+      "r": 4,
+      "mean_dev_accuracy": 0.9565972222222223,
+      "mean_dev_nll": 0.18519362171212395
+    }
+  },
+  "world_gates": [
+    {
+      "world": 618420,
+      "m": 512,
+      "k": 2,
+      "rounds": 4,
+      "mirror_accuracy": 0.8875,
+      "native_fp16_accuracy": 0.9722222222222222,
+      "plain_accuracy": 0.8875,
+      "svd_accuracy": 0.6319444444444444,
+      "accuracy_drop_pp": 8.472222222222225,
+      "mirror_minus_plain_pp": 0.0,
+      "mirror_minus_best_nonmirror_pp": -8.472222222222225,
+      "retention_pass": false,
+      "mirror_specific_pass": false,
+      "payload_cap_bytes": 7013
+    },
+    {
+      "world": 618420,
+      "m": 768,
+      "k": 8,
+      "rounds": 4,
+      "mirror_accuracy": 0.9583333333333334,
+      "native_fp16_accuracy": 0.9722222222222222,
+      "plain_accuracy": 0.9611111111111112,
+      "svd_accuracy": 0.9555555555555555,
+      "accuracy_drop_pp": 1.388888888888884,
+      "mirror_minus_plain_pp": -0.2777777777777879,
+      "mirror_minus_best_nonmirror_pp": -1.388888888888884,
+      "retention_pass": true,
+      "mirror_specific_pass": false,
+      "payload_cap_bytes": 9573
+    },
+    {
+      "world": 618421,
+      "m": 512,
+      "k": 2,
+      "rounds": 4,
+      "mirror_accuracy": 0.9319444444444444,
+      "native_fp16_accuracy": 0.9847222222222222,
+      "plain_accuracy": 0.913888888888889,
+      "svd_accuracy": 0.6180555555555556,
+      "accuracy_drop_pp": 5.277777777777781,
+      "mirror_minus_plain_pp": 1.805555555555538,
+      "mirror_minus_best_nonmirror_pp": -5.277777777777781,
+      "retention_pass": false,
+      "mirror_specific_pass": false,
+      "payload_cap_bytes": 7013
+    },
+    {
+      "world": 618421,
+      "m": 768,
+      "k": 8,
+      "rounds": 4,
+      "mirror_accuracy": 0.9680555555555554,
+      "native_fp16_accuracy": 0.9847222222222222,
+      "plain_accuracy": 0.9736111111111111,
+      "svd_accuracy": 0.9708333333333333,
+      "accuracy_drop_pp": 1.6666666666666718,
+      "mirror_minus_plain_pp": -0.5555555555555647,
+      "mirror_minus_best_nonmirror_pp": -1.6666666666666718,
+      "retention_pass": true,
+      "mirror_specific_pass": false,
+      "payload_cap_bytes": 9573
+    },
+    {
+      "world": 618422,
+      "m": 512,
+      "k": 2,
+      "rounds": 4,
+      "mirror_accuracy": 0.8625,
+      "native_fp16_accuracy": 0.9680555555555557,
+      "plain_accuracy": 0.8902777777777777,
+      "svd_accuracy": 0.6861111111111111,
+      "accuracy_drop_pp": 10.555555555555562,
+      "mirror_minus_plain_pp": -2.777777777777768,
+      "mirror_minus_best_nonmirror_pp": -10.555555555555562,
+      "retention_pass": false,
+      "mirror_specific_pass": false,
+      "payload_cap_bytes": 7013
+    },
+    {
+      "world": 618422,
+      "m": 768,
+      "k": 8,
+      "rounds": 4,
+      "mirror_accuracy": 0.9541666666666666,
+      "native_fp16_accuracy": 0.9680555555555557,
+      "plain_accuracy": 0.9472222222222223,
+      "svd_accuracy": 0.9569444444444444,
+      "accuracy_drop_pp": 1.3888888888889062,
+      "mirror_minus_plain_pp": 0.6944444444444309,
+      "mirror_minus_best_nonmirror_pp": -1.3888888888889062,
+      "retention_pass": true,
+      "mirror_specific_pass": false,
+      "payload_cap_bytes": 9573
+    }
+  ],
+  "mirror_specific_pass_worlds_m768": 0,
+  "retention_pass_worlds_m768": 3,
+  "native_16bit_acc": 0.975,
+  "native_16bit_payload_bytes": 4637,
+  "mirror_m768_acc": 0.9601851851851851,
+  "mirror_m768_payload_bytes": 9573,
+  "mirror_decoder_source_bytes": 5008,
+  "mirror_m768_payload_plus_source_bytes": 14581,
+  "svd_ranks_bytes": [
+    {
+      "m": 512,
+      "svd_rank": 4.0,
+      "serialized_bytes": 6425
+    },
+    {
+      "m": 768,
+      "svd_rank": 8.0,
+      "serialized_bytes": 8985
+    }
+  ],
+  "hardware": {
+    "platform": "Linux-6.18.55-x86_64-with-glibc2.41",
+    "torch": "2.10.0+cpu",
+    "cpu_name": "AMD EPYC 9V74 80-Core Processor",
+    "threads": 1,
+    "cpu_visible": 5,
+    "cuda": false,
+    "float64_inference": true,
+    "float16_models_replayed_in_float64": true
+  },
+  "pinned_sha256": {
+    "PROTOCOL.json": "e95c8828e16b4243ddcf7def71ad9398c1ee4f2183877b0021f27b3a24da0d45",
+    "README.md": "b67cdce80a2e76c5c92e1c29f25b45ea5155198edb37b9f3c57984b34cff7ded",
+    "STATUS.md": "3867027930cbe99c3a5143de5eac28ca6d0037122d32943b3bf0ca0d3414c236",
+    "source/core.py": "5f0b1324eceaaa4b0a4bab637c661703c1d158cd0e47f2a960f168a4ea23be42",
+    "source/run.py": "07e60b15b8f41cce04c206b2907b797663e5809680ea1b7d5af1ee086141fe61",
+    "tests/test_core.py": "e5dd361ec4afbc10b465a8b726d06124bfa366f7fae41462338de7cebe6dd121"
+  },
+  "files_sha256": {
+    "development_sweep.csv": "c5c469450eb3c9b102813e31a5b4e1a90f864e319771e90bb897609974698d4a",
+    "development_selection.json": "b34c7b60cef2192b61567b777934604d475adb7d9cade7001ea08d4dee00029c",
+    "fresh_results.csv": "a9edfe4d3ba70a0467dea1c82e7ac9c203634a11a63b71e7b8fffe86ae4e9c1d"
+  },
+  "warnings": [
+    "Some fresh test images are reused in other worlds because each world draws a new split of the SAME fixed sklearn digits dataset. No independent-domain conclusion.",
+    "Fine-tuned model rows reuse pre-fine-tune weight_l2 and latency fields; only fine-tuned accuracy/NLL and elapsed seconds reflect adapted model.",
+    "FP16/FP32 stored weights were cast back to FP64 for quality evaluation, not true low-precision kernel latency.",
+    "Python decoder source-byte charge may be amortized across many deployments; report both unamortized and payload-only costs.",
+    "Inference wall medians affected by CPU clock and cache jitter; no hardware calibration. u_c not estimated.",
+    "K,R selected on development only. No fresh relabeling or retuning."
+  ]
+}
