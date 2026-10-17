@@ -1,0 +1,71 @@
+{
+  "id": "MA-1162-L1-SCREEN-20261018",
+  "protocol_version": 1,
+  "freeze_scope": "synthetic conditional single-query NLL screening, not full sequence language modeling and not proof of capacity",
+  "hypothesis": "K=4,T=1 orthogonal nonlinear Mirror causal mixing has at least 5% lower query NLL than strongest byte-near non-Mirror native/gain/rank1 control at matched train-compute proxy, in at least 2 of 3 fresh worlds and without greater than 10% regression on any of 3 causal tasks",
+  "worlds": {
+    "development_only": [618200],
+    "fresh_never_tune": [618201,618202,618203],
+    "init_and_data_stream_seeds": [0,1],
+    "world_specific_input_vocabulary_permutation": true,
+    "train_and_eval_rng_disjoint": true,
+    "fresh_seeds_known_a_priori": true
+  },
+  "data": {
+    "vocab_size":64,"sequence_length":32,"batch_size":32,"query_eval_examples":384,
+    "tasks": {
+      "copy":"uniform 31-symbol prefix; last query encodes lag 1..8, output is prior token 0..31",
+      "retrieve":"16 unique key-value pair tokens (key 0..15, value 0..2); query addresses a key; last output is corresponding value",
+      "ordered":"six noncommuting affine operators over Z3 followed by readout query; output is final state",
+      "hidden":"uniform random unseen 0..2 target independent of observed random prefix; irreducible Bayes NLL log(3)"
+    },
+    "metric":"last query target cross entropy (nats/example), NOT full sequence autoregressive NLL; accuracy",
+    "train_sample_stream":"online CPU torch.Generator with seed world*11+seed*103+task_index*10101+1",
+    "evaluation_stream":"independent generator seed world*11+seed*103+task_index*10101+9999999",
+    "input_encoding":"torch.randperm(64) seeded by world; world permutation is not given to model"
+  },
+  "model":{
+    "d_model":32,"d_ff":64,"position":"learned absolute","attention":"strict causal softmax",
+    "qkv":"shared projections evaluated once per recurrent step for Mirror and scalar/rank1 controls",
+    "mirror":"one learned orthogonal Givens angle repeated across each adjacent 2D channel plane; independent Q,K and nonlinear V-sandwich codes per logical head; exactly 3K trainable code scalars",
+    "non_mirror_baselines":["local","native","tied","gain4","rank1_4"],
+    "candidate_primary":"mirror4","candidate_exploratory":"mirror4_t2","unrestricted_quality_ceiling":"independent4",
+    "view_aggregation":"fixed arithmetic mean; no oracle labels, routing or learned per-example head selection"
+  },
+  "training":{
+    "optimizer":"AdamW weight_decay=0, clip_grad_norm=1.0",
+    "learning_rate":0.003,"fixed_update_count":96,"batch":32,
+    "compute_match_budget_reference":"mirror4 at 96 updates; floor(96*reference forward dense MAC proxy / model forward dense MAC proxy), at the same batch",
+    "budget_proxy_limitation":"proxy dense MAC only; does NOT count rotation/trig/softmax/norm, hence it is not an exact hardware equal-FLOP match",
+    "development_rule":"diagnostic check only; no tuning on fresh. If code/protocol is changed after freeze create a new protocol version and run new untouched fresh seeds",
+    "frozen_lrs":[0.003],"frozen_updates":[96]
+  },
+  "analysis":{
+    "paired_unit":"world x init_seed x task",
+    "causal_tasks":["copy","retrieve","ordered"],
+    "primary_ref":"strongest of native,tied,gain4,rank1_4 (byte within 5% candidate) with matched MAC-proxy train budget",
+    "primary_gate":"mean Mirror query NLL <=0.95 times strongest comparator on >=2/3 fresh worlds AND no causal task worse than 1.10 times comparator AND each causal task above token-local on mean",
+    "negative_gate":"hidden target cannot be predicted; not to be counted as a Mirror advantage; absolute NLL near log(3), random accuracy approximately 1/3",
+    "status_when_undertrained":"INCONCLUSIVE screening; do not reinterpret as global architecture failure",
+    "model_selection":"no fresh tuning and no selective exclusion",
+    "error_reporting":"all worlds, seeds and tasks reported; means plus paired differences; no CI claims from 3 worlds"
+  },
+  "storage_and_runtime":{
+    "bytes":"len(torch.save({config,state_dict})) on actual inference artifact (not optimizer)",
+    "physical_params":"unique learned scalar tensors (includes heads, norms and position encodings)",
+    "virtual_projection_weights":"3*K*d*d logical QKV projections, not independent free params",
+    "runtime":"torch eager CPU FP32, torch.set_num_threads(1), train wall_s and batch8 forward ms per run",
+    "training_mac_proxy":"3 * updates * batch * dense forward MAC; analytically estimated, not profiled exact FLOPs",
+    "hardware":"AMD EPYC 9V74 virtual 5-vCPU container, 5.8GiB RAM, CPU only, one PyTorch thread"
+  },
+  "falsification_and_limits": [
+    "same QK orthogonal rotation is a null gauge; Q/K absolute angle counts may overcount identifiable relative degrees",
+    "unrestricted K head upper control is not byte matched",
+    "rank1_4 may exceed candidate bytes by ~2.3%",
+    "K full-width heads have extra attention memory and softmax cost even if dense MAC proxy matches",
+    "last-query classification does not test dense autoregressive sequence quality",
+    "3 world-specific lexical permutations are synthetic families and do not establish natural-task transfer"
+  ],
+  "freeze_date":"2026-10-18",
+  "governance":"AGENTS.md, WORKER_START_HERE.md, docs/phase2/MIRROR_PARAMETER_INTEGRATION_DOCTRINE.md and experiments/mirror_applications/EXPERIMENT_CONTRACT.md"
+}
