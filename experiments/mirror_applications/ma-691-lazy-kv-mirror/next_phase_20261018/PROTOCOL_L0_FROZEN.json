@@ -1,0 +1,108 @@
+{
+  "study_id": "MA-691-NEXTPHASE-L0-20261018",
+  "status": "FROZEN_NOT_EXECUTED",
+  "date": "2026-10-18",
+  "scope": "Exact multi-View canonical KV cache, full autoregressive synthetic decode simulation (not a trained LM), cache-provenance and allocation audit",
+  "source_baselines": [
+    "experiments/mirror_applications/ma-691-lazy-kv-mirror/source/engine.py",
+    "experiments/mirror_applications/ma-253-cache-safe-final-moe/source/model.py",
+    "experiments/mirror_applications/ma-1164-mirror-kl-precision-controls/inference_microaudit/fused_cpu_20261018/source/fused_online.py",
+    "local follow-up /mnt/data/ma1164_kv_mirror_20261018/source/kv_benchmark.py (not assumed committed; import into experiment only after adding tested copy to repository)"
+  ],
+  "backend": {
+    "hardware": "5-vCPU virtual AMD EPYC; no GPU currently",
+    "torch": "2.10.0+cpu",
+    "dtype": "float32",
+    "threads": 1,
+    "layout": "B,H,T,D",
+    "kernel": "PyTorch eager CPU reference, later fused as separate arm"
+  },
+  "seeds": {
+    "development": [
+      691200
+    ],
+    "fresh_unopened": [
+      691201,
+      691202,
+      691203
+    ]
+  },
+  "fixed_shape": {
+    "kv_heads": 4,
+    "head_dim": 32,
+    "initial_prefix_lengths": [
+      128,
+      512,
+      2048,
+      8192
+    ],
+    "logical_views": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "batches": [
+      1,
+      4
+    ],
+    "generated_tokens": 256,
+    "dwell_lengths": [
+      1,
+      8,
+      64,
+      256
+    ]
+  },
+  "execution_budget": {
+    "exactness_grid": "All 4 prefix lengths x 4 logical-view counts x 2 batches x 3 fresh seeds, provided memory safety checks pass",
+    "timed_primary": "batch=1; all prefix/view cases x 3 fresh seeds",
+    "timed_secondary": "batch=4 same grid if <75% available RAM predicted and observed; label separately",
+    "measurements_per_case": 31,
+    "warmup_per_case": 10,
+    "timing_order": "randomized paired method order; same tensors and one process",
+    "memory_guard": "Stop single case if predicted/observed memory >75% container budget; record SKIPPED_OOM_GUARD, never silently omit"
+  },
+  "mirror_family": {
+    "primary": "static pairwise Givens right rotations with distinct Q/K and V codes; fixed seed; same historical hidden K0,V0",
+    "rope": "after-RoPE commuting plane-local rotations must match; noncommuting/early hidden change is negative counterexample"
+  },
+  "exact_controls": [
+    "Materialized all-View K/V cache and explicit K/V transforms (same attention outputs)",
+    "One canonical K/V with current-token Q and output-side transforms (candidate)",
+    "Native algebraically absorbed per-View Q/output projections on shared K/V (exact-function non-Mirror control)",
+    "Materialize one View on each switch (weak performance baseline, not adoption comparator)",
+    "Native hard shared K/V Query-only (different functionality; latency/quality labeled nonequivalent)"
+  ],
+  "negative_cases": [
+    "identical Q and K orthogonal rotation score gauge",
+    "noncommuting RoPE transform without correct correction must NOT pass",
+    "MA-253 early-FFN change invalidates downstream K/V",
+    "different producer-model/version/token prefix must reject alias",
+    "prefix changed with same token-length must reject provenance"
+  ],
+  "outputs": [
+    "RESULTS_L0.csv",
+    "RESULTS_SWITCH.csv",
+    "VERIFICATION_L0.json",
+    "RESULTS_MEMORY.csv",
+    "runtime_environment.json",
+    "REPORT_L0_JA.md"
+  ],
+  "exactness_pass": {
+    "fp32_max_abs_output_error": 0.000002,
+    "fp32_max_abs_logit_error": 0.00002,
+    "cache_alias": "Shared exact same K0,V0 data_ptr/storage objects; do not allocate K separate K/V resident copies",
+    "rope_commuting": "<=2e-6 absolute error",
+    "negative_controls": "detect invalid provenance and noncommuting/early-hidden-state case; do not silently claim exactness",
+    "storage": "Count canonical KV + resident View codes, indices, allocator padding, workspace; compare to materialized and absorbed native at identical data shapes"
+  },
+  "runtime_decision": "Measure full prefill+256 decode tokens and switching; report median,p90,throughput, RAM peak; no fixed speed PASS from algebra. Mark runtime promising only if throughput >=1.10x fastest exact-functional native on >=2/3 fresh seeds and no storage regression, otherwise no Mirror-specific runtime win.",
+  "freeze_integrity": "Source and protocol hashes recorded before fresh run; do not tune from fresh; preserve failed cases and opened seeds",
+  "limits": [
+    "Static compatible right-transform orbit by construction, not independent LoRA/model caches",
+    "CPU benchmark not a language model or GPU claim",
+    "K logical Views still pay per-view attention compute",
+    "Initial cache and decoding loops included in measured end-to-end fixture"
+  ]
+}
