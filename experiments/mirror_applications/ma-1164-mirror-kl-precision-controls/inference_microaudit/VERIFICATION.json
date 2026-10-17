@@ -1,0 +1,34 @@
+{
+  "date": "2026-10-18",
+  "status": "POSTHOC_DIAGNOSTIC",
+  "cpu_test_passes": 7,
+  "matched_packed_codec_roundtrip": true,
+  "max_implicit_equivalence_error": 8.881784197001252e-16,
+  "performance_result": "CPU eager direct slower for all 6 conditions",
+  "encoded_bytes": {
+    "native_F16_flat": 2442,
+    "mirror_F16_bitmask": 1710,
+    "native_F16_torch_multi": 4637,
+    "mirror_F16_torch_int16_index": 4965
+  },
+  "rows": 6,
+  "source_sha256": {
+    "source/audit.py": "eb1f6b9b348e0e3e7098affede0495bfeb534d0646b92c6b13e1c9c07c0ab439",
+    "source/online_operator.py": "b248b383cb3147571cf36483d89bd24c5c5e005e1bdd4452eac5f59a242c070e",
+    "tests/test_microaudit.py": "3e914c2a2b0a60dcfb5d89a83a486410f16182421f6f6088874687fbbb53ecd8",
+    "source/legacy_teacher_audit.py": "d76c318da00bd8f718142cb213b2b247f37c00edc09f31f7fe4ac0f5e0eb9372"
+  },
+  "historical_MA1164_status_unchanged": true,
+  "generated_evidence_no_fresh_data": true,
+  "platform": "Linux-6.18.55-x86_64-with-glibc2.41",
+  "python": "3.13.5 (main, Jul 15 2026, 20:25:40) [GCC 14.2.0]",
+  "reopened_legacy_world": "618201",
+  "teacher_seeds": [
+    11,
+    12,
+    13
+  ],
+  "old_checkpoint_native_fp16_accuracy_mean": 0.9740740740740742,
+  "old_checkpoint_mirror_fp16_accuracy_mean": 0.9638888888888889,
+  "fresh_status": "reopened_posthoc_never_sealed"
+}
