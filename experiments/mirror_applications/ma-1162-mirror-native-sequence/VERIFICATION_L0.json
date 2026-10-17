@@ -1,0 +1,50 @@
+{
+  "experiment_id": "MA-1162",
+  "stage": "L0_MATH_CAUSAL_PILOT_ONLY",
+  "date": "2026-10-18",
+  "test_command": "OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -m pytest -q tests",
+  "test_result": {
+    "passed": 10,
+    "failed": 0,
+    "seconds": 1.36
+  },
+  "cpu": "PyTorch 2.10.0+cpu, torch.set_num_threads(1) for timing; eager loops, no GPU",
+  "data": {
+    "fixed_d": 32,
+    "fixed_batch": 2,
+    "fixed_length": 32,
+    "benchmarked_views": [
+      1,
+      2,
+      4,
+      8,
+      16
+    ],
+    "geometry_test_seeds": [
+      41,
+      42,
+      43,
+      44,
+      45
+    ],
+    "scores_same_QK_max_difference": 9.5367431640625e-7,
+    "causal_prefix_max_difference": 0,
+    "distinct_QK_min_mean_difference": 0.7256643772125244,
+    "view_diversity_min_mean_difference": 0.03720035031437874
+  },
+  "sha256": {
+    "source/mechanism.py": "37ff68ad68861f17c9bf65593248ad10e1ab042a0dadb06caf9ec1fd364ad3f4",
+    "source/summarize_l0.py": "0c170679d85ce7f4cc0adcb3502379ab14f73edf045d5b6628390514f923481f",
+    "tests/test_mechanism.py": "59097fad0c402ea9ed3712ec168ca7912b25aa8737ad0de607d0b31029f6f2c7",
+    "results/RESULTS_L0.json": "32d4c7b168b55fa6aa7ce7f6949b7d53384573cfd8e600732f3e94ae93aaf389"
+  },
+  "scope_limited_to": [
+    "no model training",
+    "no held-out task learning",
+    "no equal-FLOP comparison",
+    "no optimized kernel",
+    "no real sequence NLL",
+    "no capacity multiplier"
+  ],
+  "formal_ma_status": "UNTESTED"
+}

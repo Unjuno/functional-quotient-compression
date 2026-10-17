@@ -2,6 +2,8 @@
 
 This repository contains several historical research lanes. Do not infer the current task from the oldest or largest directory.
 
+**Focused 2026-10-18 research branch:** MA-1162 (Mirror-native causal token mixing; one shared core, parallel K Mirror views, recurrent T and dynamic readout). Begin with [research focus](docs/phase2/MIRROR_NATIVE_SEQUENCE_FOCUS_2026-10-18.md) and [experiment plan](experiments/mirror_applications/ma-1162-mirror-native-sequence/EXPERIMENT_PLAN_JA.md). L0 mathematical checks pass; L1 task training is **UNTESTED**. This note is branch-scoped and does not replace the canonical backlog or mandate a main merge.
+
 ## 1. Read in this order
 
 1. `docs/phase2/CURRENT_STATE_2026-10-07.md`

@@ -1,0 +1,96 @@
+{
+  "name": "MNS-001_L0",
+  "date": "2026-10-18",
+  "scope": "Analytical/CPU forward checks ONLY; no fitted neural tasks or LM loss; K=16 is not independent capacity.",
+  "torch_version": "2.10.0+cpu",
+  "cpu_threads": 1,
+  "shape_benchmark": {
+    "batch": 2,
+    "seq_len": 32,
+    "d": 32
+  },
+  "tests_passed": 10,
+  "tests_failed": 0,
+  "num_eval_seeds": 5,
+  "geometry_checks": [
+    {
+      "seed": 41,
+      "qk_same_orthogonal_max_diff": 4.76837158203125e-07,
+      "qk_different_mean_diff": 0.7480965256690979,
+      "max_causal_prefix_diff": 0.0,
+      "view_0_1_mean_diff": 0.08794955164194107
+    },
+    {
+      "seed": 42,
+      "qk_same_orthogonal_max_diff": 9.5367431640625e-07,
+      "qk_different_mean_diff": 1.0037814378738403,
+      "max_causal_prefix_diff": 0.0,
+      "view_0_1_mean_diff": 0.03720035031437874
+    },
+    {
+      "seed": 43,
+      "qk_same_orthogonal_max_diff": 9.5367431640625e-07,
+      "qk_different_mean_diff": 0.7419928908348083,
+      "max_causal_prefix_diff": 0.0,
+      "view_0_1_mean_diff": 0.045518990606069565
+    },
+    {
+      "seed": 44,
+      "qk_same_orthogonal_max_diff": 9.5367431640625e-07,
+      "qk_different_mean_diff": 0.7750763893127441,
+      "max_causal_prefix_diff": 0.0,
+      "view_0_1_mean_diff": 0.04188556224107742
+    },
+    {
+      "seed": 45,
+      "qk_same_orthogonal_max_diff": 4.76837158203125e-07,
+      "qk_different_mean_diff": 0.7256643772125244,
+      "max_causal_prefix_diff": 0.0,
+      "view_0_1_mean_diff": 0.037740375846624374
+    }
+  ],
+  "forward_benchmark": [
+    {
+      "views": 1,
+      "trainable_scalars": 3075,
+      "torch_save_bytes": 15061,
+      "median_cpu_forward_ms": 0.16975,
+      "p90_cpu_forward_ms": 0.240164
+    },
+    {
+      "views": 2,
+      "trainable_scalars": 3078,
+      "torch_save_bytes": 15061,
+      "median_cpu_forward_ms": 0.329094,
+      "p90_cpu_forward_ms": 0.813387
+    },
+    {
+      "views": 4,
+      "trainable_scalars": 3084,
+      "torch_save_bytes": 15061,
+      "median_cpu_forward_ms": 0.686801,
+      "p90_cpu_forward_ms": 0.990147
+    },
+    {
+      "views": 8,
+      "trainable_scalars": 3096,
+      "torch_save_bytes": 15061,
+      "median_cpu_forward_ms": 1.267816,
+      "p90_cpu_forward_ms": 1.52852
+    },
+    {
+      "views": 16,
+      "trainable_scalars": 3120,
+      "torch_save_bytes": 15125,
+      "median_cpu_forward_ms": 2.511352,
+      "p90_cpu_forward_ms": 3.138741
+    }
+  ],
+  "limitations": [
+    "Eager Python per-view for loop, not fused accelerator",
+    "No train curve, no real language, no FLOP matching",
+    "No actual token generation throughput",
+    "KV cache storage/reuse not checked",
+    "Increasing view count increases active attention O(K*T^2*d) and runtime"
+  ]
+}

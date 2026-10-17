@@ -39,6 +39,7 @@ Do not turn the application program into a generic survey of adjacent architectu
 ## Mirror method-level research intake (2026-10-13)
 
 - [Activation × transform geometry × adaptive sharing method list](MIRROR_ACTIVATION_SHARING_METHOD_INTAKE_2026-10-13.md) — 22 scoped research items under existing MA IDs; activation compatibility, learned generator families, variable capacity, partial sharing/private fallback and falsification. **Research index only**, not a new experimental result, registry status or worker-queue change.
+- [Mirror-native sequence architecture focus (2026-10-18)](MIRROR_NATIVE_SEQUENCE_FOCUS_2026-10-18.md) — **MA-1162**: causal token mixing, K parallel View operators, T shared recurrent steps, nonlinear views and dynamic readout. **L0 validated only; supervised sequence learning untested.**
 - [Repeated nonlinear / learnable / gated / keyed Mirror](NONLINEAR_KEYED_MIRROR_RESEARCH_2026-10-18.md) — six NEW but **UNTESTED** MA-1156..1161 hypotheses: nonlinear sandwich; repeated same-code Views; joint theta/psi/m/eta learning; oriented activation gates; condition-coded gates; and standard encrypted m. This entry is design only.
 
 ## What can be multiplied logically?

@@ -1,0 +1,110 @@
+{
+  "id": "MA-1162",
+  "date": "2026-10-18",
+  "status": "L0_MECHANISM_COMPLETE_L1_DRAFT_NOT_FROZEN",
+  "hypothesis": "One shared physical causal token mixer+FFN with K learned Q/K/nonlinear V Mirror views and T recurrent passes provides useful distinct sequence-processing functions with fewer physical parameter bytes than the best native equal-byte/equal-compute control",
+  "mirror_insertion": "input/causal-QKV view codes m_q,m_k,m_v; nonlinear value sandwich; tied recurrent FFN and selected output times",
+  "L0": {
+    "evidence_level": "algebra, causal masking and CPU forward ONLY; no learning",
+    "dimensions": {
+      "batch": 2,
+      "length": 32,
+      "d": 32,
+      "views": [
+        1,
+        2,
+        4,
+        8,
+        16
+      ]
+    },
+    "num_numeric_seeds": 5,
+    "seed_values": [
+      41,
+      42,
+      43,
+      44,
+      45
+    ],
+    "tests": 10,
+    "cpu_threads": 1,
+    "checks": [
+      "Q and K identical orthogonal rotation leaves scores unchanged",
+      "distinct Q/K rotation changes scores",
+      "future input perturbations do not affect earlier outputs",
+      "View outputs differ",
+      "view-angle gradients finite nonzero",
+      "nonlinear sandwich differs from normal ReLU",
+      "same repeated ReLU sandwich is idempotent",
+      "residual recurrence nontrivial",
+      "serialized torch.save model roundtrip exact",
+      "subsequent recurrence depends on earlier state"
+    ],
+    "result_path": "results/RESULTS_L0.json"
+  },
+  "L1_draft": {
+    "development_worlds": [
+      618200
+    ],
+    "proposed_fresh_worlds_not_opened": [
+      618201,
+      618202,
+      618203
+    ],
+    "seeds": [
+      0,
+      1
+    ],
+    "vocab": 64,
+    "context_length": 32,
+    "d_model": 32,
+    "batch_size": 64,
+    "candidate_learning_rates": [
+      0.003,
+      0.01
+    ],
+    "proposed_updates": 1600,
+    "K": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "T": [
+      1,
+      2,
+      4
+    ],
+    "tasks": [
+      "delay/copy",
+      "content addressed retrieval",
+      "ordered transitions",
+      "hidden branch negative"
+    ],
+    "controls": [
+      "token-local MLP",
+      "native byte-near causal Transformer",
+      "tied recurrent causal Transformer",
+      "shared QKV gauge-null",
+      "gain/FiLM",
+      "rank1/2 adapter",
+      "ordinary separate-head quality ceiling",
+      "causal convolution/SSM when feasible"
+    ],
+    "preliminary_success_gate": "mean paired test sequence NLL <=0.95x strongest equal-byte native across >=2/3 fresh worlds without >10% worst role degradation; freeze this threshold and precise data/splits before fresh",
+    "selection_rule": "development-only; never use fresh data for LR/architecture selection"
+  },
+  "resource_contract": {
+    "storage": "actual serialized inference payload including mirror codes, projection matrices, routers/readout, metadata; no optimizer",
+    "train": "updates, examples, token count, measured wall clock, training FLOP proxy independently",
+    "inference": "active projection/Mirror/attention/FFN FLOPs, CPU ms for batch/length, GPU only if available, cache K/V if deployed"
+  },
+  "scientific_boundaries": [
+    "K logical views not K independent head capacity",
+    "shared projection only once per input H^(t), not once across changed recurrence states",
+    "causal channel Mirror alone cannot mix tokens",
+    "same orthogonal QK rotations are null gauge",
+    "unused virtual precision does not imply independent trainable function parameters",
+    "no natural-language, GPU or speculative speed claim from L0"
+  ]
+}
