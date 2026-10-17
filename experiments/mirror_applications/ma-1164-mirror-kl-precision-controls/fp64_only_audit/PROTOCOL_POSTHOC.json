@@ -1,0 +1,15 @@
+{
+  "study": "MA-1164B FP64-only paired reanalysis",
+  "date": "2026-10-18",
+  "status": "POSTHOC_DESCRIPTIVE_NOT_NEW_PREREGISTRATION",
+  "raw_source": "MA-1164B matched_native_controls/results/fresh.csv",
+  "raw_subset_sha256": "5b1ece63879196c49e67b4b3964f80cd4afc0819452e8849f89ba8331a251efb",
+  "worlds": [618460,618461,618462],
+  "seeds": [41,42],
+  "physical_m": [256,512,768],
+  "precision": "FP64 for model fitting, coefficients, storage and inferential computation; exclude all FP16 and FP32 controls",
+  "comparators": ["same-m plain", "near-m native narrow", "near-m rank factorized", "byte-cap native narrow and rank"],
+  "matching": "world x seed paired; native models use same test split",
+  "intervention": "No new learning, tuning, or model selection: descriptive reanalysis only",
+  "limitations": ["plain changes both mirror and nonlinear recurrence", "teacher-assisted compression vs scratch training", "three overlapping partitions of one corpus", "no statistical significance claim"]
+}
