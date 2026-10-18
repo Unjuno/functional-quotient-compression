@@ -1,0 +1,233 @@
+{
+  "schema_version": 1,
+  "created_date": "2026-10-18",
+  "research_id": "MA-1162",
+  "scope": "Branch-only architecture and ordered execution backlog; no new MA IDs",
+  "status": "PLANNED_NOT_EXECUTED",
+  "current_primary": "MA-1162-M0",
+  "authoritative_docs": [
+    "docs/phase2/MIRROR_NATIVE_MINIMAL_CORE_PRINCIPLE_2026-10-18.md",
+    "experiments/mirror_applications/ma-1162-mirror-native-sequence/MINIMAL_CORE_EXECUTION_ROADMAP_20261018.md",
+    "experiments/mirror_applications/EXPERIMENT_CONTRACT.md"
+  ],
+  "core_invariant": {
+    "physical_object": "one principally learned tensor/vector S, with m independently trainable scalar entries",
+    "address": "paid Mirror View code per role, head and recurrence depth",
+    "roles": [
+      "encoder_self",
+      "decoder_self",
+      "cross_attention",
+      "ffn",
+      "moe_extension"
+    ],
+    "scales": {
+      "m": "physical trained scalar count",
+      "K": "parallel head/View count",
+      "R": "serial shared-core recurrence count",
+      "precision": "numeric bits per scalar; separate research axis",
+      "P": "output/halting schedule, later stage"
+    },
+    "execution": "on-demand virtual operators, no mandatory full virtual weight materialization; no free K-fold attention compute",
+    "cache": "canonical cache only under common-producer compatible right-transform proof"
+  },
+  "tasks": [
+    {
+      "id": "MA-1162-M0",
+      "priority": 0,
+      "title": "Minimal core and role/mask validity",
+      "status": "TODO",
+      "dependencies": [],
+      "required_tests": [
+        "shared-S accounting",
+        "encoder future-token influence",
+        "decoder no-future leakage",
+        "cross uses encoder memory",
+        "multihead functional distinction",
+        "nonlinear Mirror nondegeneracy",
+        "roundtrip payload",
+        "KV invalidation guard",
+        "native fold equality"
+      ],
+      "outputs": [
+        "source/shared_core_roles.py",
+        "tests/test_shared_core_roles.py",
+        "results/MECHANISM_L0.csv",
+        "VERIFICATION_L0.json"
+      ],
+      "gate": "No invalid cache alias, no causal leak, nonzero cross-memory dependence, finite gradients; strict FP32 error <=2e-6 on exact algebra tests"
+    },
+    {
+      "id": "MA-1162-M1",
+      "priority": 0,
+      "title": "Train useful parallel roles with shared S",
+      "status": "BLOCKED_M0",
+      "dependencies": [
+        "MA-1162-M0"
+      ],
+      "tasks": [
+        "copy",
+        "content_retrieval",
+        "ordered_transition",
+        "unseen_random_branch_negative"
+      ],
+      "controls": [
+        "native shared no Mirror",
+        "FiLM/gain",
+        "rank1_or_2 shared adapter",
+        "untied per-role quality ceiling"
+      ],
+      "gate": "predeclared paired quality win on >=2 of >=3 frozen independent worlds x2 seeds and no collapsed role, else report null or fail"
+    },
+    {
+      "id": "MA-1162-M2",
+      "priority": 0,
+      "title": "Independent m/K/R scaling and matched budgets",
+      "status": "BLOCKED_M1",
+      "dependencies": [
+        "MA-1162-M1"
+      ],
+      "development_grid": {
+        "m": [
+          32,
+          128,
+          512
+        ],
+        "K": [
+          1,
+          4
+        ],
+        "R": [
+          1,
+          3
+        ],
+        "precision": "FP32 first"
+      },
+      "metrics": [
+        "quality/byte",
+        "quality/FLOPs",
+        "training wall time",
+        "forward latency",
+        "actual inference payload",
+        "effective Jacobian rank",
+        "task gradient conflicts",
+        "head ablations"
+      ],
+      "controls": [
+        "plain narrow native model",
+        "tied Universal Transformer",
+        "native grouped-query attention",
+        "FiLM and low-rank"
+      ],
+      "gate": "no adoption on aligned-only or weaker-than-simple-control outcomes"
+    },
+    {
+      "id": "MA-1162-M3",
+      "priority": 1,
+      "title": "Joint encoder and decoder with cross attention",
+      "status": "BLOCKED_M0_M1",
+      "dependencies": [
+        "MA-1162-M0",
+        "MA-1162-M1"
+      ],
+      "test_task": "encoder key-values are queried by decoder queries; heldout source-query pairings",
+      "controls": [
+        "native untied encoder-decoder",
+        "fully tied native model",
+        "FiLM role-conditioned tied model"
+      ],
+      "guards": [
+        "causal decoder mask",
+        "encoder bidirectional mask",
+        "encoder-memory causality",
+        "cross can only consume available encoder state",
+        "shared parameter does not imply free simultaneous compute"
+      ],
+      "gate": "preserved cross-source content dependence and no invalid dependency shortcut, then byte-matched heldout comparison"
+    },
+    {
+      "id": "MA-691-M4",
+      "priority": 1,
+      "title": "Exact canonical KV and multihead View read",
+      "status": "PLANNED_SEPARATE_L0_PROTOCOL",
+      "dependencies": [
+        "MA-1162-M0"
+      ],
+      "prior_protocol": "experiments/mirror_applications/ma-691-lazy-kv-mirror/next_phase_20261018/PROTOCOL_L0_FROZEN.json",
+      "controls": [
+        "explicit per-View KV",
+        "native Q/O algebraic folding",
+        "GQA/MQA/MLA",
+        "native prefill"
+      ],
+      "guards": [
+        "producer model and version",
+        "token prefix identity",
+        "RoPE placement",
+        "early Mirror downstream-cache invalidation"
+      ],
+      "gate": "exact algebra and pointer share; performance separate from mechanism"
+    },
+    {
+      "id": "MA-1162-M5",
+      "priority": 2,
+      "title": "FFN MoE roles with nonlinear View and private fallback",
+      "status": "BLOCKED_M2",
+      "dependencies": [
+        "MA-1162-M2"
+      ],
+      "controls": [
+        "simple native mixture of experts",
+        "FiLM",
+        "low-rank",
+        "sparse private residual"
+      ],
+      "gate": "show retained quality on independent/off-orbit functions with total code/router/runtime charges"
+    },
+    {
+      "id": "MA-1162-M6",
+      "priority": 2,
+      "title": "Fused no-materialization runtime",
+      "status": "BLOCKED_M2_M4",
+      "dependencies": [
+        "MA-1162-M2",
+        "MA-691-M4"
+      ],
+      "controls": [
+        "optimized BLAS native attention",
+        "native fused role kernels"
+      ],
+      "gate": "same-batch-hardware-precision and end-to-end tokens/sec better at matched quality; cold JIT separate"
+    },
+    {
+      "id": "PRECISION_SEPARATE",
+      "priority": 3,
+      "title": "Arbitrary-precision scalar expansion at fixed m",
+      "status": "DEFERRED_SEPARATE_RESEARCH",
+      "dependencies": [
+        "MA-1162-M2"
+      ],
+      "controls": [
+        "FP16/32/64 plain native same-bit",
+        "fixedpoint/float precision-matched non-Mirror"
+      ],
+      "gate": "real increase in heldout useful function capacity per paid bit and acceptable bit-op runtime, not mere numerical distinguishability"
+    }
+  ],
+  "study_protocol": {
+    "stage": "DRAFT_BACKLOG_ONLY",
+    "development_selection": "new development worlds only; do not tune on previously opened MA-1162 or MA-691 fresh",
+    "fresh": "freeze >=3 independent worlds and >=2 independent init seeds before opening",
+    "required_resource_accounting": [
+      "trainable scalar count",
+      "virtual logical parameter count",
+      "serialized bytes for all learned objects and codes",
+      "FP width",
+      "attention FLOPs",
+      "KV allocated RAM",
+      "training FLOPs and seconds",
+      "inference latency p50 p90"
+    ],
+    "hardware": "CPU container first, GPU only if actually available",
+    "historical_status_policy": "do not edit or promote MA-1162/691/253/1163/1164 result verdicts from design-only progress"
+  }
+}
