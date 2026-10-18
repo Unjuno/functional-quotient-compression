@@ -42,8 +42,8 @@ o_j=\mathrm{softmax}\!\left(\frac{(q_jA_j^\top)K_0^\top}{\sqrt{d}}\right)V_0 B_j
 ### FFNの共通処理と複数Mirror
 
 \[
-z=W_\mathrm{up}h,\qquad
-f_j(h)=W_\mathrm{down}Q_j^{-1}\phi_j(Q_jz),\qquad
+z=hW_\mathrm{up},\qquad
+f_j(h)=\phi_j(zQ_j)Q_j^{-1}W_\mathrm{down},\qquad
 h^{(r+1)}=h^{(r)}+\frac{1}{K}\sum_{j=1}^{K} f_j(h^{(r)}).
 \]
 
