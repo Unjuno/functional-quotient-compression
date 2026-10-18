@@ -1,6 +1,8 @@
 # Mirror-native Parallel/Recurrent Sequence Network — focused research target (2026-10-18)
 
 **Status: ARCHITECTURE TARGET + L0 ANALYTICAL PILOT ONLY. NO trained language-model advantage.**
+
+**Branch-scoped first-principles follow-up:** [minimal shared-core definition](MIRROR_NATIVE_MINIMAL_CORE_PRINCIPLE_2026-10-18.md) and [MA-1162 role-based experiment roadmap](../../experiments/mirror_applications/ma-1162-mirror-native-sequence/MINIMAL_CORE_EXECUTION_ROADMAP_20261018.md). The follow-up treats one principal physical parameter **vector/tensor** of variable independent dimension m as the research object, with K parallel View roles and R recurrent computations. It considers joint encoder/decoder/cross-attention/FFN from one shared core subject to actual data dependencies, cache provenance and paid code/compute. Later MA-1162 aligned multihead pilots and separate MA-1163/1164 evidence do not revise the scoped historical L0 statement in this document.
 Branch: `research/mirror-native-sequence-focus-20261018`. The main 2026-10-18 direction is now this architecture; no main merge or promotion of historical MA statuses.
 
 ## Purpose — beyond attaching Mirrors to an ordinary Transformer
