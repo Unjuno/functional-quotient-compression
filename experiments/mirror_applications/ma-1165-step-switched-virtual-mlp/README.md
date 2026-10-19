@@ -50,3 +50,7 @@ All models train from input/output only. Intermediate teacher states or teacher 
 ## Integrity
 
 No existing FAIL, frozen protocol, main or third_party/nanoGPT file is modified. A new MA ID is reserved only against the read registry from the parent branch, verified maximum MA-1164 at experiment creation. Results are not claimed before source-hash checks, tests, held-out scoring and payload accounting.
+
+## Completed results and next hypothesis
+
+[REPORT_JA.md](REPORT_JA.md) documents the negative result (aligned mechanism difference, independent-teacher gate FAIL). Source-code and per-seed 72-row evidence are committed under [source](source/) and [results](results/). The follow-up with **learnable** orientation and threshold code **within the same 192-parameter vector** is a newly proposed and not-yet-run study: [NEXT_PROTOCOL_PROPOSAL.md](NEXT_PROTOCOL_PROPOSAL.md).
