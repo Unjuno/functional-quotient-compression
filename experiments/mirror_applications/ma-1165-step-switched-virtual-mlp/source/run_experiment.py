@@ -159,7 +159,6 @@ def run(root:Path,quick:bool=False):
         if (i+1)%6==0 or quick:print(f'completed {len(completed)}/{len(todo)}: {label}, fresh={row["fresh_nmse"]:.5f}',flush=True)
     return len(completed)
 
-
 if __name__=='__main__':
     parser=argparse.ArgumentParser()
     parser.add_argument('--out',type=Path,default=Path(__file__).parents[1]);parser.add_argument('--quick',action='store_true')
