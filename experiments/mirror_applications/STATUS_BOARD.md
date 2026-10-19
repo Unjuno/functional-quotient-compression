@@ -1,15 +1,16 @@
 # Mirror Application Status Board
 
-Updated: 2026-10-18 JST (Mirror-native focus intake; past outcomes unchanged)
+Updated: 2026-10-19 JST (MA-1165 step-switched one-vector virtual-MLP negative mechanism result; old verdicts unchanged)
 Canonical branch: `research/mirror-application-worker-ready-20261007`
 
-## Program totals (reconciled from authoritative 1163-row registry)
+## Program totals (reconciled from authoritative 1165-row registry)
 
-- Registered candidates: **1163**
-- P0: **636** (171 completed; 464 UNTESTED; 1 SCREENING)
-- P1: **424** (15 completed; 409 UNTESTED)
+- Registered candidates: **1165**
+- P0: **637** (171 completed; 464 UNTESTED; 2 SCREENING)
+- P1: **425** (16 completed; 409 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **976 UNTESTED, 1 SCREENING, 54 PROMISING, 132 FAIL**
+- Current MA statuses: **976 UNTESTED, 2 SCREENING, 54 PROMISING, 133 FAIL**
+- **2026-10-19 MA-1165:** Switching step-specific nonlinear Mirror views during repeated one-vector virtual-MLP execution passed code/invariance and causal differentiation checks but **FAILED** the quality gate versus a simple gain control on independent-teacher tasks (only 1/3 paired seeds passed); 72/72 audits and checkpoint replays PASS. [Evidence](ma-1165-step-switched-virtual-mlp/REPORT_JA.md).
 - **2026-10-18 MA-1163:** Pretrained digits MLP -> K=3 L=3 nonlinear Mirror virtual-weight compiler. Full-m exact reconstruction PASS, m768 selected-address fresh retention 3/3 PASS, native same-m plain comparator wins and decoder code cancels one-model storage saving; overall Mirror-specific M0. [Evidence](ma-1163-mechanical-mirror-compiler/REPORT_JA.md).
 - **2026-10-18 method expansion:** MA-1156..1161 (6 UNTESTED; 4 P0 / 2 P1). These are **ideas only** and do not imply trained results or verified cryptographic security. [Research intake](research_intake/nonlinear_keyed_mirror_20261018/README.md).
 - **2026-10-18 focused research target:** **MA-1162** Mirror-native parallel causal mixing + recurrent nonlinear Views (P0 **UNTESTED**; L0 algebra/causality tests 10/10, **no trained LM**). [Architecture and focus](../../docs/phase2/MIRROR_NATIVE_SEQUENCE_FOCUS_2026-10-18.md).
@@ -83,7 +84,7 @@ KG relation rotations (RotatE, TuckER, QuatE, PairRE), EXIF/device-aware ISPs (P
 
 ## Concurrency and truth policy
 
-- The **995-row** `IDEA_REGISTRY.csv` is authoritative for status and candidate identity. Do not merge or overwrite it with an older 254-row experiment checkout.
+- The **1165-row** `IDEA_REGISTRY.csv` is authoritative for status and candidate identity. Do not merge or overwrite it with an older 254-row experiment checkout.
 - `CLAIM_LEDGER.csv` and each experiment's `VERIFICATION.json` are the evidence index; `STATUS_BOARD.md` is an operational cache.
 - Before allocating an ID or starting work, re-read the live registry and search for experiment branches.
 - Preserve old branches, failed results, exploratory data and locked protocols. No automatic merge to main.
