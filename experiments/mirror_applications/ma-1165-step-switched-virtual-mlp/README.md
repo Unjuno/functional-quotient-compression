@@ -1,6 +1,6 @@
 # MA-1165 — Step-switched nonlinear Mirror for one-vector virtual MLPs
 
-**Status: SCREENING plan; no empirical superiority claimed until RESULTS_CORE.csv and VERIFICATION.json are produced.**
+**Status: SCREENING complete — 72/72 synthetic CPU training runs and 8/8 unit tests verified; Mirror-specific matched-control gate FAIL. See [REPORT_JA.md](REPORT_JA.md) and [STATUS.md](STATUS.md).**
 
 **Mirror insertion:** this experiment adds a step-indexed nonlinear orthogonal Mirror to the virtual-weight generator of a single learned physical coefficient vector, so distinct recurrent MLP stages can use different virtual weights without storing full independent MLP matrices.
 
