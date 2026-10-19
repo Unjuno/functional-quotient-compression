@@ -1,0 +1,75 @@
+{
+  "id": "MA-1166",
+  "date": "2026-10-20",
+  "status": "FROZEN_BEFORE_TRAINING",
+  "input_dim": 6,
+  "hidden_dim": 8,
+  "unrolled_nodes": 6,
+  "module_id_rule": "(node-1)%3",
+  "loop_passes": 2,
+  "num_mirrors": 3,
+  "num_candidate_edges": 63,
+  "physical_core": 64,
+  "physical_total_mirror": 253,
+  "teacher_worlds": [
+    "aligned",
+    "independent"
+  ],
+  "seeds": [
+    211,
+    223
+  ],
+  "train_examples": 2048,
+  "dev_examples": 1024,
+  "fresh_examples": 1024,
+  "updates": 180,
+  "batch_size": 128,
+  "optimizer": "Adam",
+  "lr": 0.02,
+  "training_masks": {
+    "full": 1,
+    "sampled": 0.5,
+    "correction": 2
+  },
+  "comparators": [
+    "mirror_full",
+    "mirror_sample",
+    "affine_full",
+    "affine_sample",
+    "independent_full"
+  ],
+  "gate_regularization": {
+    "warmup_fraction": 0.25,
+    "maximum": 0.02
+  },
+  "posttrain": {
+    "candidate_gate_thresholds": [
+      0,
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.3,
+      0.4,
+      0.5
+    ],
+    "dev_loss_tolerance_relative": 0.05,
+    "dev_loss_tolerance_absolute": 0.01,
+    "core_prune_quantile_candidates": [
+      0,
+      0.1,
+      0.2,
+      0.3
+    ],
+    "postfit_refit_updates": 0
+  },
+  "report": [
+    "train_dev_fresh_nmse",
+    "actual_bytes",
+    "active_edge_eval",
+    "cpu_latency",
+    "swaps",
+    "gradients",
+    "checkpoint_replay"
+  ]
+}
