@@ -1,0 +1,113 @@
+{
+  "id": "MA-1169",
+  "date": "2026-10-20",
+  "version": 1,
+  "status": "frozen-before-training",
+  "parent": "MA-1168",
+  "seed_base": 1977,
+  "hypothesis": "Growing K from 4 to 8 or 16 while keeping 289 learned coefficients improves structured heldout quality and the nonlinear Householder-tanh-inverse weight decoder beats matched direct affine addressing.",
+  "models": [
+    "mirror4",
+    "affine4",
+    "mirror8",
+    "affine8",
+    "mirror16",
+    "affine16",
+    "native289"
+  ],
+  "worlds": [
+    "address8_aligned",
+    "native"
+  ],
+  "seeds": [
+    701,
+    709,
+    719
+  ],
+  "teacher": {
+    "address8_aligned": "fixed 8-page Mirror teacher same program family but independently sampled core+gates+codes; student not shown teacher theta",
+    "native": "independent NativeTeacher(6->25->6)"
+  },
+  "data": {
+    "train": {
+      "n": 1024,
+      "sigma": 0.8,
+      "offset": 100
+    },
+    "dev": {
+      "n": 512,
+      "sigma": 0.8,
+      "offset": 200
+    },
+    "fresh": {
+      "n": 1024,
+      "sigma": 0.8,
+      "offset": 300
+    },
+    "ood": {
+      "n": 1024,
+      "sigma": 1.6,
+      "offset": 400
+    },
+    "seed_rule": "seed*1000 + offset + (0 if aligned else 500)",
+    "splits_are_independent": true
+  },
+  "optimization": {
+    "updates": 400,
+    "optimizer": "AdamW",
+    "lr": 0.012,
+    "weight_decay": 0.0001,
+    "train_batch": 64,
+    "shuffle_generator_seed": "seed*101+117",
+    "dev_evaluate_every": 50,
+    "best_model": "lowest dev NMSE among evaluations",
+    "dtype": "torch.float32",
+    "hardware": "CPU, torch threads=1",
+    "loops": 3,
+    "pruning": false
+  },
+  "comparability": {
+    "trainable_coefficients": 289,
+    "physical_core": 64,
+    "edge_gates": 75,
+    "address_coordinates": 150,
+    "address_basis": "fixed seeded signed permutations; first four pages identical across 4/8/16",
+    "bank_offsets": "extra bank pages deterministic, generated from a separate seed stream; two-code angular logits at K>4",
+    "retention": "last loop, unchanged from MA-1168",
+    "decoder_equivalence": "Mirror/affine have identical routing/pages but different decoder as MA-1168",
+    "matched_bytes": "packet 20B header + 289 float32; count inference program and transient bank separately",
+    "BMM": true
+  },
+  "metrics": [
+    "train_nmse",
+    "dev_nmse",
+    "fresh_nmse",
+    "ood_nmse",
+    "best_update",
+    "packet_bytes",
+    "bank_buffer_bytes",
+    "runtime_batch1_us",
+    "runtime_batch64_us",
+    "address_mixing_MAC_proxy",
+    "mlp_MAC_proxy"
+  ],
+  "thresholds": {
+    "page_quality": "At least one K in [8,16] gains >=5% fresh NMSE over K4 of same decoder on >=5/6 pairs and median ratio <=0.95; disclose OOD/runtime even if passes",
+    "mirror_specific": "For at least one K, Mirror beats same-K affine by >=5% fresh NMSE on >=5/6 pairs and median ratio <=0.95; no unqualified win if compute higher",
+    "adoption": "Mirror-specific quality pass AND <=matched-affine measured median inference latency at batch1+64 AND < native289 fresh NMSE median and <= native289 payload bytes; otherwise no adoption",
+    "mechanism": "gradients of physical core, gates, addresses nonzero; all weights finite and shape[75,110]; first-four maps exact; tested packet roundtrip"
+  },
+  "statistical_scope": "n=6 paired worlds/seeds is exploratory, not population significance; fresh not used for tuning; fixed updates not convergence",
+  "controls": [
+    "same-address affine",
+    "native 289 scalar MLP"
+  ],
+  "unknowns": [
+    "decode FLOPs on GPU",
+    "long-term convergence",
+    "cross-domain transfer",
+    "program storage overhead",
+    "clock drift"
+  ],
+  "fresh_policy": "Evaluate once after all frozen model optimization, never retune."
+}
