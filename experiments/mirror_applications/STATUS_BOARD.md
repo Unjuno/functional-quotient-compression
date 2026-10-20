@@ -1,15 +1,16 @@
 # Mirror Application Status Board
 
-Updated: 2026-10-20 JST (MA-1171 synthetic SAE feature separation completed FAIL; past outcomes preserved)
+Updated: 2026-10-20 JST (MA-1172 SAE rank mechanism PASS but generic-tanh alias; Mirror-specific quality FAIL; past outcomes preserved)
 Canonical branch: `research/mirror-application-worker-ready-20261007`
 
-## Program totals (reconciled from authoritative 1171-row registry on this research branch)
+## Program totals (reconciled from authoritative 1172-row registry on this research branch)
 
-- Registered candidates: **1171**
+- Registered candidates: **1172**
 - P0: **642** (174 completed; 464 UNTESTED; 4 SCREENING)
-- P1: **426** (17 completed; 409 UNTESTED)
+- P1: **427** (18 completed; 409 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **976 UNTESTED, 4 SCREENING, 54 PROMISING, 137 FAIL**
+- Current MA statuses: **976 UNTESTED, 4 SCREENING, 54 PROMISING, 138 FAIL**
+- **2026-10-20 MA-1172:** Follow-up sparse autoencoder rank audit: 30 independently re-trained CPU models, fixed 8-page affine, direct tanh without Householder, Mirror tanh, cubic, full dense control; 5 unit tests and 30/30 packet replay PASS. Numerical rank at 1e-3: Mirror 32/32 in 6/6, **plain tanh also 32/32 in 6/6**, affine 8/32. FP64 recomputation confirms. Effective ranks: Mirror 5.40 vs plain tanh 5.90; Mirror OOD factor support F1 median .1141 vs dense onepass .3819; strict Mirror-specific feature recovery gate 0/6 FAIL, no adoption. [Report](ma-1172-sae-rank-specificity/REPORT_JA.md).
 - **2026-10-20 MA-1171:** Synthetic sparse autoencoder feature-disentanglement screen, 64 features into 32-dimensional mixed activations. 64 logical Mirror feature detectors from shared core32 + learned addresses, 3 residual Loop steps. 30 trained CPU models / five preregistration smoke-test groups / 30/30 packet replays PASS. Mirror beats same-address affine 6/6 narrowly (OOD F1 mean +.01345) but loses to native dense Loop all six (mean -.31817); 0/6 frozen strong separation gate; **FAIL**, no real LLM evidence. [Report](ma-1171-mirror-sae-disentangle/REPORT_JA.md).
 - **2026-10-20 MA-1170:** Real 30-s 16-kHz audio log-Mel sparse AE; 16 virtual 4x4 graph edges generated from 64 graph scalars and two Loop steps, 12 CPU trainings / 9 unit tests / packet replay PASS. Mirror fresh NMSE median 0.342928 vs same-address affine 0.333077; localization and >=5% quality gate FAIL. A posthoc rank16 PCA strong control attained 0.229338; exact FLAC PCM reference is separately verified. [Report](ma-1170-audio-mirror-graph/REPORT_JA.md).
 - **2026-10-20 MA-1169:** 4/8/16 page capacity sweep is recorded as SCREENING pending independent upload/verification of training source and fresh results; no evidence promotion from previous conversational metrics. [Frozen protocol](ma-1169-address-page-sweep/PROTOCOL.json).
