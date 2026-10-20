@@ -51,3 +51,14 @@ def test_skip_connection_and_shared_parameter_identity():
 
 def test_native_budget():
     assert sum(p.numel() for p in NativeMLP().parameters())==253
+
+@pytest.mark.parametrize('decoder',['mirror','affine'])
+@pytest.mark.parametrize('steps',[2,6])
+def test_sync_vectorized_matches_reference_gradients(decoder,steps):
+    net=ParallelGraph(decoder,'sync',1977,steps=steps)
+    x=torch.randn(3,6)
+    p=(net(x)**2).sum()
+    g=torch.autograd.grad(p,net.theta)[0]
+    q=(net.reference_sync(x)**2).sum()
+    h=torch.autograd.grad(q,net.theta)[0]
+    torch.testing.assert_close(g,h,atol=3e-5,rtol=3e-5)
