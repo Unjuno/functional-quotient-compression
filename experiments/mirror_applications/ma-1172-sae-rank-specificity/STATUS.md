@@ -1,10 +1,9 @@
-# MA-1172 — completed verification
+# MA-1172 — status and evidence
 
-- **2026-10-20 JST:** Preregistration on `research/ma-1172-sae-rank-specificity-20261020` was committed before training; source and controls subsequently frozen.
-- 30/30 new CPU FP32 trainings, 500 updates each (2 synthetic teacher worlds × 3 seeds × 5 methods), completed. The fresh ID and OOD splits were evaluated only after all 30 dev checkpoint selections.
-- **Unit tests:** 5/5 PASS. **Checkpoint packet byte-exact replays:** 30/30 PASS.
-- **H1 MECHANISM PASS:** Mirror numerical rank 32/32 vs linear page encoder 8/32 in all six pairs at rel threshold 0.001; FP64 forward recomputation confirms.
-- **H3 NON-SPECIFIC:** generic direct-tanh without Householder also reaches numerical rank 32/32 in all six pairs and has higher median energy effective rank than Mirror.
-- **H2 MIRROR-SPECIFIC FEATURE-RECOVERY FAIL:** frozen paired quality gate 0/6; Mirror vs direct tanh paired F1 win 2/6; full dense SAE remains substantially better.
-- Inference programs are not zero-cost; fixed buffers are deterministic and regenerated, decoder dictionary is independent learned 64×32, and CPU runtime is slower than simple controls.
-- Verdict: preserve mechanism as a scoped generic nonlinearity finding, do not adopt Mirror SAE or infer real LLM interpretability gains. MA-1171's earlier FAIL retained.
+- 2026-10-20 JST: Separate research branch `research/ma-1172-sae-rank-specificity-20261020`; README/PROTOCOL/STATUS committed **before training**.
+- 30/30 CPU FP32 trainings completed, 500 updates each; independent train/dev/fresh splits. Frozen fresh opened once after all dev selections.
+- Tests 5/5 PASS; 30/30 checkpoint packet replay PASS. FP64 forward recomputation confirms rank mechanism. Training+audit reports and hash records preserved.
+- **Mechanism H1 PASS:** Mirror rank=32/32 at rel threshold 0.001, 6/6; matched affine rank=8/32, 6/6.
+- **Specificity H3 FAIL as unique mechanism:** same-address direct-tanh without Householder reaches rank=32/32, 6/6; generic cubic 28–32.
+- **Quality H2 FAIL:** strict pair pass 0/6. Mirror ranks do not translate into superior feature recovery. Strong direct dense SAE much better.
+- No claim of native LLM SAE interpretability, convergence-limited capacity, free virtual parameters or dominance over simpler nonlinear map. MA-1171 historical FAIL not modified.
