@@ -88,3 +88,9 @@ PyTorch 2.10.0+cpu、float32、1 CPU thread、AdamW lr 0.003、weight decay 1e-5
 次の独立研究で試す価値があるのは、(1) 64真特徴が共通変換軌道上にある場合の分離限界と、(2) decoderも含む共同Mirror生成と、(3) 実際のLLM活性での介入評価。今回のfreshを再利用して調整するのではなく、新しい世界・seedで再凍結する。
 
 **一次研究との関係**：Gregor & LeCun (2010), learned sparse coding (LISTA); Gao et al. ICLR2025 SAE scaling; Karvonen et al. ICML2025 SAEBench; Makelov et al. ICLR2025 SAE evaluation and intervention. いずれも今回のMirror効果の直接証拠ではない。
+
+## 8. 事後の機構分析（品質ゲートに含めない）
+
+同じ30チェックポイントから、エンコーダー行列の特異値スペクトルを追加分析した（再学習なし）。**Affineの8ページ混合行列はランクが最大8**だが、Mirrorの要素ごとの非線形変換を適用すると、6件とも閾値 `σ_i/σ_max > 10^-3` の数値ランクが32となった。もっともエネルギー型実効ランク中央値はMirror 5.33、Affine 4.83であり、解釈可能な特徴分離が十分改善したわけではない。
+
+厳密なランク不等式、変数表、単位チェック、全30モデルの特異値実測は [`results/EXPLORATORY_RANK_AUDIT.md`](results/EXPLORATORY_RANK_AUDIT.md) と [`results/EXPLORATORY_ENCODER_RANK.csv`](results/EXPLORATORY_ENCODER_RANK.csv) に保存した。**品質判定FAILは変更しない。**
