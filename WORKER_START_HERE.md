@@ -2,6 +2,8 @@
 
 This repository contains several historical research lanes. Do not infer the current task from the oldest or largest directory.
 
+**Focused 2026-10-20 triage branch `research/mirror-usecase-focus-20261020`:** [selected Mirror use cases](docs/phase2/MIRROR_USECASE_SELECTION_2026-10-20_JA.md) and [MA-1166 Phase F learnable correspondence proposal](experiments/mirror_applications/ma-1166-exhaustive-mirror-supernet/PHASE_F_TRAINABLE_MAPPING_PROPOSAL.md). The next missing mechanism is *learning which shared physical coordinates/code addresses map to which virtual weight/edge/node*, not adding more fixed view and Loop candidates. The [MA-1166 Phase E report](experiments/mirror_applications/ma-1166-exhaustive-mirror-supernet/PHASE_E_REPORT_JA.md) documents negative Mirror-specific matched-control results; **Phase F is NOT RUN**. This priority is branch-scoped and leaves the canonical backlog and historical MA verdicts intact.
+
 **Focused 2026-10-18 research branch:** MA-1162 (Mirror-native causal token mixing; one shared core, parallel K Mirror views, recurrent T and dynamic readout). Begin with [research focus](docs/phase2/MIRROR_NATIVE_SEQUENCE_FOCUS_2026-10-18.md) and [experiment plan](experiments/mirror_applications/ma-1162-mirror-native-sequence/EXPERIMENT_PLAN_JA.md). L0 mathematical checks pass; L1 task training is **UNTESTED**. This note is branch-scoped and does not replace the canonical backlog or mandate a main merge.
 
 ## 1. Read in this order
