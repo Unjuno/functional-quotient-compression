@@ -1,0 +1,19 @@
+{
+  "id": "MA-1170", "date": "2026-10-20", "status": "frozen-before-training", "hypotheses": {
+    "rate_distortion": "Mirror+loop produces lower fresh NMSE than both equal-parameter same-address affine loop and ordinary sparse AE at identical feature-code length",
+    "localization": "Mirror has more frequency-selective causal latent-coordinate ablations than affine and sparse while preserving reconstruction quality",
+    "sparsification": "Low-gate graph edges can be masked without proportional quality deterioration"
+  },
+  "source": {"path": "pyannote/audio/sample/sample.wav", "sha256": "c319b4abca767b124e41432d364fd7df006cb26bb79d09326c487d606a134e6e", "sample_rate_Hz": 16000, "duration_s": 30, "content_caution": "one bundled recording; must not infer speech benchmark generalization"},
+  "feature": {"n_fft": 400, "hop_length": 160, "n_mels": 64, "mel_fmin_Hz": 80, "mel_fmax_Hz": 7600, "power": 2, "window": "Hann periodic", "center": false, "scale": "log1p(10 * mel-power), then per-band train-only standardization"},
+  "segments_s": {"train": [0,17], "dev": [18,21], "fresh": [22,25], "late": [26,29]},
+  "external_recording": "gradio/media_assets/audio/audio_sample.wav, 8 kHz, resample polyphase to 16 kHz, diagnostic only",
+  "models": ["mirror", "affine", "sparse", "native"], "seeds": [31,37,41],
+  "latent": {"n": 16, "topk": 6, "quantization": "per-coordinate uint8 unsigned clipped 0..99.5th training-percentile and static train-only scale", "bits_per_frame":128},
+  "graph": {"physical_core":16, "gates":16, "learnable_addresses":32, "logical_edges":16, "logical_weight_values":256, "nodes":4, "node_channels":4, "loops":2, "pages":4, "page_generator_seed":1170, "warp": "one fixed orthogonal Householder -> tanh -> inverse Householder", "control":"same-address direct affine", "prune_test":"eight smallest-gate edges masked at inference"},
+  "counts": {"mirror":2144,"affine":2144,"sparse":2080,"native":2352},
+  "training": {"optimizer":"AdamW", "updates":500, "lr":0.003, "weight_decay":0.0001, "batch_size":96, "dev_every":50, "dev_selection":"minimum full-dev NMSE", "l1_gate_coefficient":0.0005, "precision":"float32", "torch_threads":1, "hardware":"CPU"},
+  "fresh_usage": "no fresh or late inputs used during training, early stopping or model hyperparameter selection; evaluate selected checkpoints only after all twelve runs", "metrics": ["fresh_nmse","quantized_fresh_nmse","late_nmse","cross_record_nmse","selected_frequency_localization_top8","8_edge_mask_nmse","model_packet_bytes","latent_stream_bytes","cpu_batch1_us","cpu_batch64_us"],
+  "decision": {"mirror_quality":"at least 5% lower fresh NMSE than affine on each of three paired seeds AND lower 3-seed median fresh NMSE than direct sparse", "mirror_localization":"median top8 causal 8-band localization >=+0.05 absolute above both affine and sparse in all three seeds, with no >5% quality regression", "status_if_fail":"FAIL at tested pilot regime, not architectural impossibility"},
+  "limitations": "logMel lossy features, no waveform decoder, training from single recording, no strong codec reproduction, fixed 500 optimizer updates not near-convergence capacity evidence"
+}
