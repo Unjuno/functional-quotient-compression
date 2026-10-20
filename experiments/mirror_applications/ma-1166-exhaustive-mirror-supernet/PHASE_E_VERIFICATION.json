@@ -1,0 +1,81 @@
+{
+  "date": "2026-10-20 JST",
+  "experiment": "MA-1166 Phase E parallel virtual-weight graph, no pruning",
+  "training": {
+    "worlds": [
+      "aligned",
+      "independent",
+      "parallel_teacher"
+    ],
+    "seeds": [
+      461,
+      487
+    ],
+    "modes": [
+      "mirror_serial",
+      "mirror_serial_batched",
+      "mirror_sync2",
+      "mirror_sync6",
+      "affine_serial",
+      "affine_serial_batched",
+      "affine_sync2",
+      "affine_sync6",
+      "native253"
+    ],
+    "updates": 400,
+    "completed": 54,
+    "expected": 54,
+    "parameters_per_model": 253,
+    "mirror_physical_trainable_parameter_objects": 1,
+    "candidate_edges_per_graph": 63,
+    "pruned_edges": 0
+  },
+  "checks": {
+    "pytest_passed": 15,
+    "pytest_total": 15,
+    "checkpoint_sha256_replay_passed": 54,
+    "checkpoint_replay_total": 54,
+    "prediction_sha256_fresh_ood_verified": 54,
+    "batch_decoder_equivalent_to_serial_forward_and_gradient": true,
+    "sync_batched_equals_slow_per_edge_forward_and_gradient": true,
+    "nonzero_gradients": {
+      "shared_core": 64,
+      "gates": 63,
+      "mirror_codes": 126
+    }
+  },
+  "metrics": {
+    "fresh_nmse_median": {
+      "mirror_serial": 0.186873,
+      "mirror_serial_batched": 0.186872,
+      "mirror_sync2": 0.126644,
+      "mirror_sync6": 0.126093,
+      "affine_serial": 0.162338,
+      "affine_sync2": 0.119021,
+      "affine_sync6": 0.12251,
+      "native253": 0.025968
+    },
+    "paired_mirror_sync2_vs_mirror_serial": {
+      "wins": 6,
+      "total": 6,
+      "median_relative_error_change": -0.39435917669679926
+    },
+    "paired_mirror_sync2_vs_affine_sync2": {
+      "wins": 0,
+      "total": 6,
+      "median_relative_error_change": 0.07930183237415123
+    },
+    "paired_mirror_sync2_vs_native253": {
+      "wins": 0,
+      "total": 6
+    }
+  },
+  "decision": {
+    "sync_and_batched_mechanism": "PASS",
+    "mirror_specific_quality": "FAIL",
+    "extreme_storage_compression": "NOT_ESTABLISHED",
+    "GPU_runtime": "UNTESTED",
+    "training_to_capacity": "UNTESTED"
+  },
+  "note": "Full 54 checkpoint binaries and detailed trajectories are delivered separately in chat downloadable artifact. GitHub report contains paired fresh CSV, exact source and tests; no data claim beyond CPU synthetic fixed-update screen."
+}
