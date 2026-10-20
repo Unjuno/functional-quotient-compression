@@ -1,5 +1,8 @@
 # MA-1166 STATUS
 
-- 2026-10-20: BRANCH STARTED. README and frozen PROTOCOL written before implementation/training. No MA-1166 results yet.
-- Parent research branch: research/ma-1165-step-switched-mirror-20261019 (MA-1165 negative result preserved).
-- No changes to main; registry entry only after validation.
+- 2026-10-20: **PHASE E COMPLETE (CPU FP32)**. Full all-to-all synchronous virtual-weight Mirror, 126 candidate edges, one 442-float learned parameter tensor, all nodes/edges/loops retained; 36/36 paired teacher/seed/mode training runs, 8/8 math/autograd tests, 36/36 checkpoint/payload/fresh-output replays PASS in isolated container. [Report](PHASE_E_REPORT_JA.md), [36-run CSV](results/PHASE_E_36_RUNS.csv), [frozen protocol](PHASE_E_SYNC_PARALLEL_PROTOCOL.md).
+- Phase E finding: SYNC3 Mirror vs SERIAL Mirror 5/6 fresh NMSE wins **at 3x virtual edge compute**, but SYNC3 Mirror vs matched affine SYNC3 only 1/6 and vs native442 0/6. **Mirror-specific quality / practical efficiency NOT DEMONSTRATED**. The research hypothesis of learned physical-to-virtual assignment is still NOT TESTED (seed-based assignment fixed).
+- Reproducibility boundary: GitHub branch has frozen protocol, 36-run summary and audit report; all checkpoint files and executable source, exact stored inference binaries, full result JSON and hashes are in the downloadable conversation evidence archive, not yet attached in this branch. Do not describe GitHub-only replay as complete.
+- Earlier PHASE A/B/C/D protocols/evidence and MA-1165 negative results remain unmodified. Main not merged.
+- 2026-10-20: BRANCH STARTED. Original README and frozen PHASE A/B protocol recorded before execution.
+- Parent research branch: research/ma-1165-step-switched-mirror-20261019.
