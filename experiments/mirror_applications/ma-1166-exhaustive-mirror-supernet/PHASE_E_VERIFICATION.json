@@ -1,0 +1,51 @@
+{
+  "phase": "E",
+  "status": "VERIFIED_IN_CONTAINER; SOURCE_AND_36_CHECKPOINTS_IN_CONVERSATION_ARCHIVE_NOT_IN_GITHUB",
+  "date": "2026-10-20",
+  "physical_coefficients": 442,
+  "virtual_edges": 126,
+  "logical_virtual_weight_scalars": 13860,
+  "teacher_families": 2,
+  "seeds": [
+    461,
+    463,
+    467
+  ],
+  "methods": 6,
+  "run_count": 36,
+  "unit_tests": {
+    "passed": 8,
+    "failed": 0
+  },
+  "checkpoint_replays": {
+    "passed": 36,
+    "total": 36,
+    "payload_sha256_match": true,
+    "fresh_outputs_sha256_match": true,
+    "ood_outputs_sha256_match": true
+  },
+  "gradient_decomposition": {
+    "negative_cosine_pairs": 5,
+    "total_pairs": 90,
+    "max_reconstruction_error": 1.4901161193847656e-8
+  },
+  "fresh_comparisons": {
+    "mirror_sync3_better_than_mirror_serial": "5/6 at 3x edge evaluations",
+    "mirror_sync3_better_than_affine_sync3": "1/6",
+    "mirror_sync3_better_than_native442": "0/6"
+  },
+  "source_sha256": {
+    "model.py": "46aa56d82cb75ddfdeae6ac05860f97df3b3c30c2dda49994accb8d2ccd11626",
+    "train.py": "5c53fdaa02e820bf835240c3d33c698edad3684b864638bdccf36eaea147e4ec",
+    "verify.py": "274784d1dae0b47fc2fd817dd9b401631c8e6c40495bd99f390bf46a1a862de9",
+    "gradient_audit.py": "dcc054aa77f4ebaf8919a787d73081a8d23a537ffcb6c6bebcd97a8854719274",
+    "tests/test_model.py": "578eeea35105802577068df78c4c6d8bfe27e41038236cef234285df855223d7"
+  },
+  "result_sha256": {
+    "RESULTS.json": "72967b76f1f534c7747a9e22374aced226ff0698480e4be43de61d828acd0d18",
+    "GRADIENT_CONFLICT.json": "472671900e8fdc3aa53c734e2a2e567fcb3892ced392fa527ba715795d071203"
+  },
+  "checkpoints_count": 36,
+  "checkpoint_sha_aggregated_from_local_manifest": "9f7f87b9ab653049241161c97d088e1e9c1f1bffcb0464afb6599259efef0ab6",
+  "evidence_note": "Full checkpoint list, checkpoints, deterministic executable code and exact inference blobs are provided by separately generated companion ZIP in chat, not fetched from GitHub; GitHub has only summary/protocol/audit."
+}
