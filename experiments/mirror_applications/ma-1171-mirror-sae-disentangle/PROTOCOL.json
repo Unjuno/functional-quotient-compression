@@ -1,0 +1,104 @@
+{
+  "id": "MA-1171",
+  "date": "2026-10-20 JST",
+  "stage": "frozen_before_training",
+  "focus": "SAE activation feature disentanglement, not waveform compression; Mirror replaces virtual encoder detector weights; loop implements iterative residual correction",
+  "dimensions": {
+    "activation_d": 32,
+    "dictionary_features_f": 64,
+    "data_ground_truth_k": 3,
+    "SAE_topk": 3,
+    "fixed_pages": 8,
+    "address_dims": 6,
+    "encoder_loops": 3,
+    "lowrank_rank": 8
+  },
+  "algorithms": [
+    "dense_onepass",
+    "dense_loop",
+    "lowrank_loop",
+    "affine_loop",
+    "mirror_loop"
+  ],
+  "worlds": [
+    "iid",
+    "correlated_pairs"
+  ],
+  "seeds": [
+    11,
+    23,
+    47
+  ],
+  "dataset": {
+    "train_n": 8192,
+    "dev_n": 1024,
+    "fresh_id_n": 2048,
+    "fresh_ood_n": 2048,
+    "features": "unit-norm isotropic 64x32 ground truth decoder; x = sum of exactly 3 nonnegative latent features plus Gaussian noise sigma=.01",
+    "world_iid": "3 independent uniform feature IDs train/dev/fresh",
+    "world_correlated_pairs": "train/dev/fresh_id: anchor and neighbor partner XOR1 with probability 0.75, third distinct index; fresh_ood: 3 independent uniform IDs",
+    "separate_generators": "seed*100 + split index 0/1/2/3; ground truth dictionary based on seed+world id 10000 or 20000",
+    "data_governance": "train on x only; never feed true feature IDs or vectors to optimizer; frozen dev checkpoint selection, fresh evaluation once"
+  },
+  "optimization": {
+    "updates": 500,
+    "train_batch": 160,
+    "optimizer": "AdamW",
+    "lr": 0.003,
+    "weight_decay": 1e-05,
+    "dev_interval": 100,
+    "select": "min dev normalized MSE; ties choose earlier",
+    "float": "FP32",
+    "device": "CPU",
+    "torch_threads": 1,
+    "loop_step": 0.4,
+    "restarts": 3
+  },
+  "model": {
+    "common_decoder": "trainable 64x32 unit-row normalized dictionary plus trainable output bias 32",
+    "code": "TopK(ReLU) with exactly up to 3 active features",
+    "loop": "z0 = TopK(ReLU(E*x+b)); repeat T-1 times z=TopK(ReLU(z + .4 * (x - D*z - outbias) @ E^T))",
+    "mirror": "8 deterministic signed permutation views of shared 32 core, trainable (64x6) addresses scored with fixed page keys, softmax mix; Householder/tanh/inverse Householder nonlinearity, per-feature learned positive gain",
+    "affine": "identical shared core/pages/address/gains with identity instead of nonlinear Householder/tanh/inverse",
+    "lowrank": "trainable 64x8 times trainable 8x32 plus per-feature gain, exactly same iterations",
+    "dense_onepass": "independent 64x32 encoder and common decoder, T=1",
+    "dense_loop": "same dense encoder and common decoder, T=3"
+  },
+  "primary": [
+    "fresh_id_support_micro_F1_hungarian_decoder_alignment",
+    "fresh_ood_support_micro_F1_hungarian_decoder_alignment"
+  ],
+  "secondary": [
+    "fresh_id_NMSE",
+    "fresh_ood_NMSE",
+    "unique_signed_cosine_match",
+    "active_L0",
+    "serialized_packet_bytes",
+    "runtime_B1_us",
+    "runtime_B128_us"
+  ],
+  "interpretation": {
+    "alignment": "one-to-one Hungarian maximize POSITIVE groundtruth vs learned decoder cosine, then compute true-feature support micro-F1, using only evaluator access to known dictionary; alignment calculated once from checkpoint and true dictionary, never used for training",
+    "packet": "torch.save model state_dict+deterministic program seed as exported replayable payload; report bytes and fixed program generation separately; no optimizer states counted",
+    "timing": "torch no grad 1 CPU thread, warmup 15 steps, 100 runs per batch; report median; host clock unfixed"
+  },
+  "gates": {
+    "feature_recovery": "mirror_loop improves fresh OOD F1 by >=0.05 absolute over affine_loop and dense_loop in >=5 of 6 paired world-seeds; fresh_id NMSE <=1.10x affine_loop in all pairs",
+    "mirror_specific": "must beat identical address affine_loop; improvement shared with affine/lowrank is not Mirror-specific",
+    "scope": "small synthetic screen; 6 paired pairs, no LLM activation evidence, fixed-update not capacity, no interpretability claim beyond known synthetic factors"
+  },
+  "control_hierarchy": "dense single pass, dense iterative, lowrank iterative with more learned params, affine exact-address iterative, Mirror nonlinear iterative",
+  "prior_art": [
+    "Gregor & LeCun 2010 LISTA",
+    "Gao et al ICLR 2025 Scaling and Evaluating SAEs",
+    "Karvonen et al ICML 2025 SAEBench",
+    "Makelov et al ICLR 2025 principled SAE evaluations"
+  ],
+  "unknowns": [
+    "CPU host clock variation",
+    "independent dictionary random coherence",
+    "correlated feature identifiability",
+    "gradient interference across shared Mirror pages"
+  ],
+  "no_dev_tuning_on_fresh": true
+}
