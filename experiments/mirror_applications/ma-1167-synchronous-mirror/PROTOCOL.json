@@ -1,0 +1,59 @@
+{
+  "id": "MA-1167",
+  "date": "2026-10-20",
+  "phase": "SYNCHRONOUS_ALL_EDGES_NO_PRUNE",
+  "status": "FROZEN_PRE_TRAIN",
+  "nodes": 5,
+  "input_dim": 6,
+  "hidden_dim": 8,
+  "mirrors": 3,
+  "edges": 75,
+  "loop": 3,
+  "virtual_weight_per_edge": 110,
+  "virtual_total": 8250,
+  "physical_core": 64,
+  "physical_gate": 75,
+  "physical_code": 150,
+  "physical_total": 289,
+  "methods": [
+    "mirror_sync3",
+    "affine_sync3",
+    "native_289",
+    "mirror_sync1"
+  ],
+  "worlds": [
+    "aligned",
+    "native"
+  ],
+  "seeds": [
+    557,
+    563,
+    569
+  ],
+  "train": 2048,
+  "dev": 1024,
+  "fresh": 2048,
+  "ood": 2048,
+  "updates": 450,
+  "batch_size": 128,
+  "optimizer": "AdamW",
+  "lr": 0.015,
+  "weight_decay": 0.0001,
+  "input_std_id": 0.8,
+  "input_std_ood": 1.6,
+  "objective": "NMSE vs identity predictor",
+  "benchmark_batch_sizes": [
+    1,
+    64
+  ],
+  "no_prune": true,
+  "quality_gate": "mirror vs affine >=5% fresh NMSE in >=4/6 comparisons",
+  "runtime_gate": "batched mirror faster than equivalent Python-edge implementation",
+  "claims_not_tested": [
+    "GPUs",
+    "attention substitution",
+    "trainable arbitrary physical-to-virtual address assignment",
+    "quantitative global compression",
+    "parallelization across serial loop steps"
+  ]
+}
