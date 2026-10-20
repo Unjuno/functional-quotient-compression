@@ -1,0 +1,37 @@
+{
+  "id": "MA-1168",
+  "status": "PASS",
+  "date": "2026-10-20",
+  "unit_tests": {
+    "passed": 7,
+    "failed": 0
+  },
+  "trainings": {
+    "completed": 24,
+    "updates_per_run": 900
+  },
+  "replay": {
+    "checkpoint_fresh_ood": 24,
+    "serialized_inference_packets": 24,
+    "aligned_oracle": 3
+  },
+  "mechanistic_audits": {
+    "final_vjp_decompositions": 18,
+    "initial_final_gradient_conditions": 36,
+    "causal_code_swap": 12
+  },
+  "sha256": {
+    "model_py": "a985f92582365fbedf47c363c37e64f83a5011f5f0bf37c00a46e4ce6babd547",
+    "base_model_py": "29fa4f15e97ff399d2ade83c303495d46afee1d466aa3e98cd40071015946bc8",
+    "train_py": "3e8515ba774173fb1061d14909b50a1739107dcd02d5fa73e88c413b100c6598",
+    "results_full_csv": "ab643ac3ed6d03c1ea4c04fbad94950cefa4b3d354944bddee722f64d8528409",
+    "summary_json": "74e09ce19c52bc226333397e09dd1179d54d789cf808d03f38251982d5310029",
+    "full_archive": "8d3490d454ef8f17dcd9f1c155e1a4b193c7f1a052c1171f0391fed85cc34c97"
+  },
+  "result": "Trainable address beats fixed orientation 6/6, but Mirror fails against identical-affine and native; CPU batching mechanism PASS.",
+  "limitations": [
+    "Full code/checkpoints are archived in conversation, not all uploaded to GitHub",
+    "same 289 coefficient budget, but code/program buffers separate",
+    "synthetic fixed-update CPU screening only"
+  ]
+}
