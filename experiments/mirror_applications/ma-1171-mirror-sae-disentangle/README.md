@@ -9,3 +9,17 @@ Synthetic 64-factor activations in 32 dimensions, 3 true active features per inp
 See `PROTOCOL.json` for preregistered splits, train/dev/fresh discipline, controls, and strong success criterion. Freeze prior to train, preserve FAIL if Mirror does not beat identical-address affine and dense iterative controls. CPU only; no GPU or LLM claims.
 
 References: Gregor & LeCun (ICML 2010); Gao et al (ICLR 2025); Karvonen et al (ICML 2025); Makelov et al (ICLR 2025).
+
+## CPU reproduction
+
+In this experiment directory, after installing `requirements.txt` into an isolated virtual environment:
+
+```bash
+python tests/test_sae.py
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python source/experiment.py --phase train
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python source/experiment.py --phase audit
+```
+
+**The train phase never opens fresh splits.** The audit phase requires the complete train manifest, verifies all 30 model packets byte-for-byte and then opens fresh splits. The ZIP also includes all trained packets for replay without retraining. CPU measurements use unlocked host clocks and are not GPU performance evidence.
+
+**Posthoc mechanism analysis** (not part of the scientific quality gate): the nonlinear Mirror generated detector rows achieve numerical rank 32 against exact-affine page limit 8, but the spectral effective rank and actual factor separation remain low. See `results/EXPLORATORY_RANK_AUDIT.md`.
