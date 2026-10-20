@@ -1,15 +1,16 @@
 # Mirror Application Status Board
 
-Updated: 2026-10-20 JST (MA-1170 real-audio feature AE screened; Mirror-specific quality/localization FAIL; prior outcomes preserved)
+Updated: 2026-10-20 JST (MA-1171 synthetic SAE feature separation completed FAIL; past outcomes preserved)
 Canonical branch: `research/mirror-application-worker-ready-20261007`
 
-## Program totals (reconciled from authoritative 1170-row registry on this research branch)
+## Program totals (reconciled from authoritative 1171-row registry on this research branch)
 
-- Registered candidates: **1170**
+- Registered candidates: **1171**
 - P0: **642** (174 completed; 464 UNTESTED; 4 SCREENING)
-- P1: **425** (16 completed; 409 UNTESTED)
+- P1: **426** (17 completed; 409 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **976 UNTESTED, 4 SCREENING, 54 PROMISING, 136 FAIL**
+- Current MA statuses: **976 UNTESTED, 4 SCREENING, 54 PROMISING, 137 FAIL**
+- **2026-10-20 MA-1171:** Synthetic sparse autoencoder feature-disentanglement screen, 64 features into 32-dimensional mixed activations. 64 logical Mirror feature detectors from shared core32 + learned addresses, 3 residual Loop steps. 30 trained CPU models / five preregistration smoke-test groups / 30/30 packet replays PASS. Mirror beats same-address affine 6/6 narrowly (OOD F1 mean +.01345) but loses to native dense Loop all six (mean -.31817); 0/6 frozen strong separation gate; **FAIL**, no real LLM evidence. [Report](ma-1171-mirror-sae-disentangle/REPORT_JA.md).
 - **2026-10-20 MA-1170:** Real 30-s 16-kHz audio log-Mel sparse AE; 16 virtual 4x4 graph edges generated from 64 graph scalars and two Loop steps, 12 CPU trainings / 9 unit tests / packet replay PASS. Mirror fresh NMSE median 0.342928 vs same-address affine 0.333077; localization and >=5% quality gate FAIL. A posthoc rank16 PCA strong control attained 0.229338; exact FLAC PCM reference is separately verified. [Report](ma-1170-audio-mirror-graph/REPORT_JA.md).
 - **2026-10-20 MA-1169:** 4/8/16 page capacity sweep is recorded as SCREENING pending independent upload/verification of training source and fresh results; no evidence promotion from previous conversational metrics. [Frozen protocol](ma-1169-address-page-sweep/PROTOCOL.json).
 - **2026-10-20 MA-1168:** Trainable mapping study remains Mirror-specific FAIL as recorded in its own report.
