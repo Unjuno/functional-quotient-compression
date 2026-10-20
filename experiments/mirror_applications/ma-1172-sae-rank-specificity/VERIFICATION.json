@@ -1,0 +1,51 @@
+{
+  "protocol": "frozen on branch before training",
+  "fresh_opened_after_training": true,
+  "checkpoint_replays": 30,
+  "trainings": 30,
+  "H1_mechanism_pass": true,
+  "H2_quality_pass": false,
+  "H2_pair_passes": 0,
+  "H3_plain_tanh_rank_growth": true,
+  "seeds": [
+    101,
+    103,
+    107
+  ],
+  "worlds": [
+    "iid_independent_dictionary",
+    "nonlinear_orbit_dictionary_correlated_pairs"
+  ],
+  "environment": {
+    "python": "3.13.5",
+    "torch": "2.10.0+cpu",
+    "cpu": "INTEL(R) XEON(R) PLATINUM 8573C",
+    "device": "CPU",
+    "threads": 1,
+    "clock": "unlocked"
+  },
+  "result_core_sha256": "1493951f5ae839f54607434c466b8c04b451c22aae5fda4828d16dfab559b0e2",
+  "source_sha256": "3be7b71155cbd367691353d563e9c07c0e4752e21e1b5bf1ee5741ca3a66487b",
+  "tests_sha256": "1dd92b15ea1583d1a079107dfaa71caee3f31b80b08363be7fb2a5c6a6a0310a",
+  "rank_recompute_fp64_pass": true,
+  "rank_affine_fp64_pass": true,
+  "same_budget_four_variants": true,
+  "same_packet_four_variants": true,
+  "spec_thresholds": [
+    0.001,
+    0.01,
+    0.1
+  ],
+  "source_test_pass_count": 5,
+  "audit_evaluated_models": 30,
+  "method_checkpoints": {
+    "affine_loop": 6,
+    "dense_onepass": 6,
+    "mirror_loop": 6,
+    "poly_plain_loop": 6,
+    "tanh_plain_loop": 6
+  },
+  "test_status": "5/5 PASS",
+  "status": "MA-1172: mechanism supported; rank increase not Mirror-specific; disentanglement gate FAIL",
+  "uncertainty_note": "3 seeds repeated across 2 worlds; seed-clustered SE is descriptive, not an independent six-sample CI."
+}
