@@ -1,15 +1,17 @@
 # Mirror Application Status Board
 
-Updated: 2026-10-19 JST (MA-1165 step-switched one-vector virtual-MLP negative mechanism result; old verdicts unchanged)
+Updated: 2026-10-20 JST (MA-1167 synchronous all-edge batched virtual-weight mechanism PASS; Mirror-specific quality FAIL; older verdicts preserved)
 Canonical branch: `research/mirror-application-worker-ready-20261007`
 
-## Program totals (reconciled from authoritative 1165-row registry)
+## Program totals (reconciled from authoritative 1167-row registry)
 
-- Registered candidates: **1165**
-- P0: **637** (171 completed; 464 UNTESTED; 2 SCREENING)
+- Registered candidates: **1167**
+- P0: **639** (172 completed; 464 UNTESTED; 3 SCREENING)
 - P1: **425** (16 completed; 409 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **976 UNTESTED, 2 SCREENING, 54 PROMISING, 133 FAIL**
+- Current MA statuses: **976 UNTESTED, 3 SCREENING, 54 PROMISING, 134 FAIL**
+- **2026-10-20 MA-1167:** All 75 logical virtual-edge MLPs generated from one physical 289-coordinate parameter and all five states updated synchronously over T3 passes. 24 CPU training models and 24/24 fresh/OOD checkpoint replays PASS; 7 unit tests PASS. Batched CPU inference ~17.7x faster than same Mirror model's scalar-edge execution at batch1, but **Mirror-specific fresh quality FAIL** versus equal-budget affine control (0/6) and native MLP (0/6); runtime fixed seeded direction buffers 293,480 B, no GPU test. [Evidence](ma-1167-synchronous-mirror/REPORT_JA.md).
+- **2026-10-20 MA-1166:** Previous 63-edge virtual supergraph parameterization audit remains **SCREENING**; its full source/checkpoints were preserved in conversation archives, not treated as replayable GitHub proof. [Audit](ma-1166-exhaustive-mirror-supernet/PHASE_C_AUDIT_20261020.md).
 - **2026-10-19 MA-1165:** Switching step-specific nonlinear Mirror views during repeated one-vector virtual-MLP execution passed code/invariance and causal differentiation checks but **FAILED** the quality gate versus a simple gain control on independent-teacher tasks (only 1/3 paired seeds passed); 72/72 audits and checkpoint replays PASS. [Evidence](ma-1165-step-switched-virtual-mlp/REPORT_JA.md).
 - **2026-10-18 MA-1163:** Pretrained digits MLP -> K=3 L=3 nonlinear Mirror virtual-weight compiler. Full-m exact reconstruction PASS, m768 selected-address fresh retention 3/3 PASS, native same-m plain comparator wins and decoder code cancels one-model storage saving; overall Mirror-specific M0. [Evidence](ma-1163-mechanical-mirror-compiler/REPORT_JA.md).
 - **2026-10-18 method expansion:** MA-1156..1161 (6 UNTESTED; 4 P0 / 2 P1). These are **ideas only** and do not imply trained results or verified cryptographic security. [Research intake](research_intake/nonlinear_keyed_mirror_20261018/README.md).
