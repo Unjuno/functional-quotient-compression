@@ -1,0 +1,40 @@
+{
+  "id": "MA-1170",
+  "protocol_sha256": "86da7956cfac5eab05eb93be4b15fabeb3c9f46cab4807eb7edf1f3ae431557f",
+  "source_sha256": "c319b4abca767b124e41432d364fd7df006cb26bb79d09326c487d606a134e6e",
+  "program_sha256": "f26c881ad9c798ad55a18b8de796a76efa88c856a194e5f0bc13139449af4af3",
+  "n_runs": 12,
+  "checkpoint_replay": true,
+  "finite_all": true,
+  "frames": {
+    "train": 1698,
+    "dev": 298,
+    "fresh": 298,
+    "late": 298
+  },
+  "paired_mirror_affine_fresh_nmse_ratio": [
+    1.029574941996332,
+    1.025367372934542,
+    0.9633354979888415
+  ],
+  "mirror_quality_pass": false,
+  "mirror_localization_pass": false,
+  "model_status": "FAIL",
+  "hardware": {
+    "platform": "Linux-6.18.55-x86_64-with-glibc2.41",
+    "python": "3.13.5",
+    "torch": "2.10.0+cpu",
+    "threads": 1,
+    "cpu": "AMD EPYC 9V74 80-Core Processor",
+    "clock": "not pinned, frequency scaling may affect wall time",
+    "gpu": false
+  },
+  "caveats": [
+    "single thirty-second file and 3 seeds",
+    "mel magnitude cannot reconstruct audio phase",
+    "feature code-rate not waveform quality and not lossless",
+    "No external codec reproduced",
+    "full-source inference code size not included in torch-save state packet",
+    "500-update comparison not capacity or convergence"
+  ]
+}
