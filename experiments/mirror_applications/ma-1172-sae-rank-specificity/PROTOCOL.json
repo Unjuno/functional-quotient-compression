@@ -1,0 +1,85 @@
+{
+  "id": "MA-1172",
+  "frozen_at": "2026-10-20 JST",
+  "phase": "preregistered_before_new_training",
+  "ancestry": "MA-1171 exploratory rank audit",
+  "statement": "Nonlinear rank release is possible but not necessarily Householder-Mirror-specific and may fail SAE feature recovery. Test equal-address equal-parameter competitors on independent synthetic latent factor worlds.",
+  "hypotheses": {
+    "H1": "Mirror generates encoder numerical rank >8 with >98% of 32 singulars above rel threshold 1e-3 in 3/3 seeds in both worlds; affine rank <=8, repeat at FP64 and threshold 1e-2.",
+    "H2": "Mirror's feature recovery improves fresh OOD factor support F1 by >=0.03 absolute over both same-address affine and direct tanh (no Householder) on >=5/6 world-seed pairs and no fresh ID NMSE worse than 1.05x either control; otherwise Mirror-specific quality FAIL.",
+    "H3": "A direct elementwise nonlinearity can also break affine rank<=8; evaluate random initial weights and trained checkpoints and one deterministic low-rank counterexample."
+  },
+  "worlds": [
+    "iid_independent_dictionary",
+    "nonlinear_orbit_dictionary_correlated_pairs"
+  ],
+  "seeds": [
+    101,
+    103,
+    107
+  ],
+  "data": {
+    "train_n": 8192,
+    "dev_n": 1024,
+    "fresh_id_n": 2048,
+    "fresh_ood_n": 2048,
+    "dimensions": 32,
+    "features": 64,
+    "active_true_k": 3,
+    "sigma": 0.01,
+    "iid": "64 independently sampled 32-dimensional unit random features with uniform independent 3 active supports",
+    "orbit": "64 feature vectors from 8 random basis rows mixed by random learned-unknown convex codes, transformed with independent orthogonal 32x32 and elementwise tanh, renormalized; train/dev/id cooccurrence 75% adjacent pair, fresh_ood independent supports; independent of student mirror fixed pages and H",
+    "split": "Separate deterministic generators per world/seed/split; teacher dictionary unseen by learner; fixed true dictionaries only for evaluator matching"
+  },
+  "models": [
+    "affine_loop",
+    "tanh_plain_loop",
+    "mirror_loop",
+    "poly_plain_loop",
+    "dense_onepass"
+  ],
+  "same_budget": [
+    "affine_loop",
+    "tanh_plain_loop",
+    "mirror_loop",
+    "poly_plain_loop"
+  ],
+  "mirror_details": {
+    "encoder": "32 physical core, eight fixed signed permutation pages, learned 64x6 address, 64 gains; 64x32 separately trained reconstruction dictionary; fixed Householder H from deterministic seed 1171; tanh(2.5*(A@P@H))@H.T/2.5; row-normalized+gain",
+    "tanh_plain": "tanh(2.5*(A@P))/2.5; identical parameters",
+    "poly_plain": "(A@P)+0.5*(A@P)^3; identical parameters",
+    "affine": "A@P; identical parameters",
+    "dense": "Independent 64x32 learned detector; one pass upper reference",
+    "loop": "TopK(ReLU), K=3, T=3 (two residual corrections step .4) for all shared-address models; direct dense T=1",
+    "orthogonal": "H fixed Householder, exactly H@H.T=I; not learned; trainable coefficient counts exactly identical across four shared models; program fixed buffers accounted separately"
+  },
+  "training": {
+    "framework": "PyTorch CPU float32, torch.set_num_threads(1)",
+    "optimizer": "AdamW",
+    "learning_rate": 0.003,
+    "weight_decay": 0.00001,
+    "updates": 500,
+    "batch": 160,
+    "dev_evaluate_every": 100,
+    "select": "lowest dev NMSE; fresh never used in training or selection",
+    "all_initialization_and_batches_paired": true
+  },
+  "primary": [
+    "fresh ID NMSE",
+    "fresh OOD support micro-F1 by decoder row one-to-one positive cosine Hungarian matching with evaluator-only ground truth",
+    "numerical ranks at relative thresholds [0.001,0.01,0.1]",
+    "effective rank by spectral entropy",
+    "energy in top eight singular directions"
+  ],
+  "secondary": [
+    "saved learned parameters",
+    "actual inference bytes incl deterministic decoder/program metadata",
+    "CPU B1/B128 latency 15 warmup/100 trials",
+    "fresh OOD NMSE",
+    "dictionary cosine matching",
+    "student feature activity L0",
+    "directional rank robustness float64 and random initial probes"
+  ],
+  "decision": "Mechanism H1 PASS != quality H2 PASS. If tanh plain matches Mirror, classify rank as generic nonlinear map phenomenon. Posthoc positive teacher probes exploratory only, not used for gate. Six pairs not independent confidence intervals; report per-world, per-seed and grouped descriptive uncertainty.",
+  "environment": "CPU backend FP32 PyTorch; host clock not locked; no GPU; training samples and dev/fresh distinct; no main merge; keep negative evidence."
+}
