@@ -1,6 +1,8 @@
 # MA-1166 — Fully enumerated Mirror/Loop/pointer supergraph, soft routing and sampled-compute control
 
-**Status:** preregistered CPU mechanism screen, no results yet. **Date:** 2026-10-20 JST.
+**Current status (2026-10-20, focused research branch):** Phase E synthetic mechanism screen is recorded in [the Phase E report](PHASE_E_REPORT_JA.md) (Mirror-specific control gate FAIL). Mapping-address learning is not yet implemented: [Phase F proposal](PHASE_F_TRAINABLE_MAPPING_PROPOSAL.md), **NOT RUN**. [Research shortlist](../../../docs/phase2/MIRROR_USECASE_SELECTION_2026-10-20_JA.md). Exact source/checkpoint archives from Phase E are not included in this GitHub branch. The historical original preregistration below is preserved.
+
+**Original pre-run status:** preregistered CPU mechanism screen, no results yet. **Date:** 2026-10-20 JST.
 
 **Mirror insertion:** this experiment adds deterministically addressable nonlinear Mirror views `m_e` to the *virtual MLP weight decoder of every candidate graph edge* so that a single learned physical coefficient vector can supply many logical edge functions without storing independent edge MLPs.
 
