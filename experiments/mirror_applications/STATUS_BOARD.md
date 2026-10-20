@@ -1,15 +1,15 @@
 # Mirror Application Status Board
 
-Updated: 2026-10-19 JST (MA-1165 step-switched one-vector virtual-MLP negative mechanism result; old verdicts unchanged)
+Updated: 2026-10-20 JST (MA-1166 focus selected; previous negative verdicts unchanged)
 Canonical branch: `research/mirror-application-worker-ready-20261007`
 
-## Program totals (reconciled from authoritative 1165-row registry)
+## Program totals (reconciled from authoritative 1166-row registry)
 
-- Registered candidates: **1165**
-- P0: **637** (171 completed; 464 UNTESTED; 2 SCREENING)
+- Registered candidates: **1166**
+- P0: **638** (171 completed; 464 UNTESTED; 3 SCREENING)
 - P1: **425** (16 completed; 409 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **976 UNTESTED, 2 SCREENING, 54 PROMISING, 133 FAIL**
+- Current MA statuses: **976 UNTESTED, 3 SCREENING, 54 PROMISING, 133 FAIL**
 - **2026-10-19 MA-1165:** Switching step-specific nonlinear Mirror views during repeated one-vector virtual-MLP execution passed code/invariance and causal differentiation checks but **FAILED** the quality gate versus a simple gain control on independent-teacher tasks (only 1/3 paired seeds passed); 72/72 audits and checkpoint replays PASS. [Evidence](ma-1165-step-switched-virtual-mlp/REPORT_JA.md).
 - **2026-10-18 MA-1163:** Pretrained digits MLP -> K=3 L=3 nonlinear Mirror virtual-weight compiler. Full-m exact reconstruction PASS, m768 selected-address fresh retention 3/3 PASS, native same-m plain comparator wins and decoder code cancels one-model storage saving; overall Mirror-specific M0. [Evidence](ma-1163-mechanical-mirror-compiler/REPORT_JA.md).
 - **2026-10-18 method expansion:** MA-1156..1161 (6 UNTESTED; 4 P0 / 2 P1). These are **ideas only** and do not imply trained results or verified cryptographic security. [Research intake](research_intake/nonlinear_keyed_mirror_20261018/README.md).
@@ -24,6 +24,14 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 - Sixteenth literature sweep added **MA-1116..1155** (40 UNTESTED; 33 P0 / 7 P1) and **PA382..413** (32 primary sources): knowledge graph relation operators, camera ISP/lens optics, robot dynamics and room neural acoustic fields. No new MA measurements. See [sixteenth research notes](../../docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08_SIXTEENTH_SWEEP.md) and [40 per-ID test blueprints](../../docs/phase2/MIRROR_APPLICATION_EXPERIMENT_BLUEPRINTS_MA1116_1155.md); see the current Next candidate section.
 - PROMISING is **not** ADOPTED. Treat reports with strict-gate misses or exploratory protocol deviations at their documented scope.
 - SRM/TM and prior Phase I results are not MA statuses.
+
+## Focused branch MA-1166 — use-case triage (2026-10-20)
+
+**Branch-scoped override of worker focus, not a replacement for the canonical long backlog:** [selection report](../../docs/phase2/MIRROR_USECASE_SELECTION_2026-10-20_JA.md). For the next focused experiment, prioritize *learnable many-to-many physical-to-virtual mapping* in MA-1166 over increasing fixed Mirror directions, Loop counts or implicit unsupervised pruning. The proposed [Phase F mapping probe](ma-1166-exhaustive-mirror-supernet/PHASE_F_TRAINABLE_MAPPING_PROPOSAL.md) is **NOT RUN**.
+
+MA-1166 **SCREENING only**: [Phase E report](ma-1166-exhaustive-mirror-supernet/PHASE_E_REPORT_JA.md) records 36 synthetic CPU runs and a successful vectorized gradient mechanism. SYNC3 vs SERIAL Mirror fresh 5/6 favors SYNC3 but at 378 vs 126 virtual edge evaluations; Mirror vs matched affine SYNC3 fresh wins only 1/6, and vs native442 0/6. No source/checkpoints yet committed to this branch for full GitHub-only independent replay. No Mirror-specific quality/compute Pareto claim.
+
+Next application lanes (not additional new MA IDs): compiled training-only graph/sparse architecture; one costly shared projection with cheap independent views; InfiLoop-style recurrent state retention *as an auxiliary with matched scalar-damping controls*. KV-cache translation and Grokking are held until independently audited.
 
 ## Next candidate
 
