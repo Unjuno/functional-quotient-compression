@@ -1,0 +1,60 @@
+{
+  "id": "MA-1168",
+  "date": "2026-10-20",
+  "status": "FROZEN_BEFORE_TRAINING",
+  "parent": "MA-1167",
+  "nodes": 5,
+  "input_dim": 6,
+  "hidden_dim": 8,
+  "mirrors_per_source_dest": 3,
+  "edges": 75,
+  "loops": 3,
+  "virtual_weights_per_edge": 110,
+  "logical_weights": 8250,
+  "physical_total": 289,
+  "core": 64,
+  "gates": 75,
+  "address_codes": 150,
+  "address_pages": 4,
+  "address_page_logits": "[c0+c1,c0-c1,-c0+c1,-c0-c1]",
+  "method": [
+    "address_mirror",
+    "address_affine",
+    "orientation_mirror",
+    "native289"
+  ],
+  "worlds": [
+    "address_aligned",
+    "native"
+  ],
+  "seeds": [
+    601,
+    607,
+    613
+  ],
+  "train_examples": 2048,
+  "dev_examples": 1024,
+  "fresh_examples": 2048,
+  "ood_examples": 2048,
+  "input_std": 0.8,
+  "ood_input_std": 1.6,
+  "updates": 900,
+  "batch_size": 128,
+  "optimizer": "AdamW",
+  "lr": 0.012,
+  "weight_decay": 0.0001,
+  "checkpoint_dev_every": 50,
+  "gate_pressure": 0,
+  "pruning": false,
+  "selected_metric": "dev_nmse",
+  "measured": [
+    "fresh_nmse",
+    "ood_nmse",
+    "train_nmse",
+    "gradient_norm_group",
+    "inference_latency_batch1_64",
+    "actual_bytes",
+    "active_mac",
+    "oracle_replay"
+  ]
+}
