@@ -1,0 +1,37 @@
+{
+  "protocol_sha256": "27f914fe06676bf46b8a786667df644859da3a48e0c707b172514d8ca39fee1a",
+  "experiment_id": "MA-1171",
+  "worlds": [
+    "iid",
+    "correlated_pairs"
+  ],
+  "seeds": [
+    11,
+    23,
+    47
+  ],
+  "methods": [
+    "dense_onepass",
+    "dense_loop",
+    "lowrank_loop",
+    "affine_loop",
+    "mirror_loop"
+  ],
+  "trained_models": 30,
+  "checkpoint_replay_pass": 30,
+  "checkpoint_replay_fail": 0,
+  "frozen_gate_ood_f1_pair_passes": 0,
+  "frozen_gate_quality_all_pass": true,
+  "verdict": "FAIL",
+  "timestamp": "2026-10-20 JST",
+  "eval_used_for_tuning": false,
+  "environment": {
+    "python": "3.13.5",
+    "torch": "2.10.0+cpu",
+    "numpy": "2.3.5",
+    "cpu": "INTEL(R) XEON(R) PLATINUM 8573C",
+    "device": "CPU",
+    "threads": 1,
+    "clock": "not locked"
+  }
+}
