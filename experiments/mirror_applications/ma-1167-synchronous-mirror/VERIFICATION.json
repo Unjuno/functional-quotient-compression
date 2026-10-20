@@ -1,0 +1,42 @@
+{
+  "id": "MA-1167",
+  "date": "2026-10-20",
+  "status": "VERIFIED_CONTAINER_ARCHIVE_AND_GITHUB_REPORT",
+  "mechanism_gate": "PASS",
+  "mirror_quality_gate": "FAIL",
+  "cpu_batched_equivalence_gate": "PASS",
+  "gpu": "UNTESTED",
+  "test_command": "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m pytest -q tests/test_model.py",
+  "unit_tests": {
+    "passed": 7,
+    "failed": 0
+  },
+  "trained_models": 24,
+  "checkpoint_shas_verified": 24,
+  "fresh_ood_replays_verified": 24,
+  "serialized_packets_verified": 24,
+  "benchmark_entries": 24,
+  "full_loop_gradient_vjp_audits": 12,
+  "grad_decomposition_relative_error_order": 1e-7,
+  "batch1_mirror_batched_median_us": 880.683,
+  "batch1_mirror_scalar_median_us": 15597.081,
+  "batch1_native_median_us": 24.7005,
+  "learned_floats": 289,
+  "logical_weights": 8250,
+  "inference_packet_bytes": 1176,
+  "runtime_fixed_buffer_bytes": 293480,
+  "generated_virtual_weight_bytes": 33000,
+  "sha256": {
+    "model_py": "29fa4f15e97ff399d2ade83c303495d46afee1d466aa3e98cd40071015946bc8",
+    "train_py": "e778da820f3318d41208db8dcdaf0e4b9ec0a5e819fb597414db3d45e5ef6757",
+    "results_core_csv": "22adf83b3627c3543f44d4728103205b493f477fcebeddd76e59d8e1380a3003",
+    "full_conversation_archive": "381f24d0a805c0c6342b687a2f1dcc7715f410f68626ed33ee0bd315eeaf1f7c"
+  },
+  "limitations": [
+    "full replay requires container archive/checkpoints not just this metadata",
+    "GPU absent",
+    "fixed mapping from physical to virtual addresses",
+    "450 optimizer updates not near convergence"
+  ],
+  "report": "REPORT_JA.md"
+}
