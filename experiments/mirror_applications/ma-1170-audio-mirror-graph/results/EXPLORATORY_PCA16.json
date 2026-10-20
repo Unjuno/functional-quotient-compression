@@ -1,0 +1,30 @@
+{
+  "label": "EXPLORATORY POSTHOC rank16 PCA (outside prereg MA-1170 acceptance)",
+  "per_split": {
+    "train": {
+      "nmse": 0.13016292452812195,
+      "u8_nmse": 0.175480455160141
+    },
+    "dev": {
+      "nmse": 0.28538018465042114,
+      "u8_nmse": 0.2857246994972229
+    },
+    "fresh": {
+      "nmse": 0.2293376922607422,
+      "u8_nmse": 0.24276995658874512
+    },
+    "late": {
+      "nmse": 0.30523499846458435,
+      "u8_nmse": 0.30860018730163574
+    }
+  },
+  "n_train": 1698,
+  "pca_rank": 16,
+  "parameters_as_basis_and_mu": 1088,
+  "packet_bytes": 7573,
+  "fresh_u8_code_bytes": 4780,
+  "fresh_fp32_feature_bytes": 76288,
+  "b1_median_us": 6.7355,
+  "coding": "8-bit percentile [0.5%,99.5%] signed, extra two train-fitted scalars per coordinate charged",
+  "note": "PCA used only train, no hyperparameter fit to fresh data; included to avoid weak AE baselines."
+}
