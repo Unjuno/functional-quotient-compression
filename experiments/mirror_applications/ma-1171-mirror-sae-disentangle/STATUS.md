@@ -4,3 +4,4 @@
 - 30 CPU trainings, 500 updates each; 5 pre-train test groups PASS, fresh opened only after completing training, 30/30 inference-packet byte exact audit PASS.
 - Small benefit vs matched affine: 6/6 fresh OOD F1 positive but <0.05 absolute in all pairs; strict criterion vs affine AND dense_loop 0/6, no practical winner. Dense onepass clearly strongest.
 - Source and checkpoints retained in this report bundle. Research branch only; no merge to main.
+- Posthoc mechanism audit: affine 8-page detectors constrained to matrix rank ≤8; Mirror had numerical rank 32/32 in all six checkpoints, but spectral effective ranks 4.83 vs 5.33 only. **This does not change the frozen FAIL verdict.**
