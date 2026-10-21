@@ -1,0 +1,121 @@
+{
+  "id": "MA-1174",
+  "name": "Prospective structure-guided shared-parameter learning in Mirror virtual supergraphs",
+  "date": "2026-10-21 JST",
+  "version": 1,
+  "frozen_before_training": true,
+  "parent": "MA-1173",
+  "question": "Does cutting paths in order to improve future shared-core learning outperform pruning by instantaneous importance, random cutting, no cutting, and same final graph trained from scratch?",
+  "mirror_insertion": "4-node 2-view fully connected directed virtual MLP supergraph, 32 edges, D=8, two loops; one learned 128-coordinate physical core, 32x4 trainable page addresses, 32 edge gate logits; nonlinear fixed Householder-tanh-inverse Householder decoding",
+  "candidate_operations": "At two intervention events remove four edges; lookahead policy compares four heuristic sets and keep using cloned optimizer/state, six trial learning steps on identical future training batches; growth, node, view and loop change are intentionally deferred",
+  "environment": {
+    "framework": "PyTorch CPU float32",
+    "threads": 1,
+    "cuda": false,
+    "memory": "CPU",
+    "bench_batch": [
+      1,
+      64
+    ],
+    "bench_warmup": 12,
+    "bench_repeats": 51,
+    "clock": "unlocked"
+  },
+  "worlds": [
+    "aligned_sparse_mirror",
+    "independent_native_mlp"
+  ],
+  "seeds": [
+    1301,
+    1307,
+    1319
+  ],
+  "data": {
+    "train_n": 1024,
+    "dev_n": 384,
+    "fresh_n": 768,
+    "fresh_ood_n": 768,
+    "input_dimension": 8,
+    "output_dimension": 8,
+    "train_sigma": 0.9,
+    "dev_sigma": 0.9,
+    "fresh_sigma": 0.9,
+    "ood_sigma": 1.35,
+    "independent_split_generators": true,
+    "target_mean_var": "No oracle teacher target normalizer; normalize NMSE with train-only target RMS",
+    "teacher_access": "Teacher parameters are never given to student; use teacher cloned parameters only for oracle representability audit after frozen dev training"
+  },
+  "architecture": {
+    "nodes": 4,
+    "views": 2,
+    "directions": 4,
+    "core_dimension": 128,
+    "hidden_dimension": 8,
+    "loops": 2,
+    "total_edges": 32,
+    "fixed_input_node_mixing": true,
+    "independent_biases": true,
+    "edge_weight_decoder": "fixed signed permutations and nonlinear Householder sandwich, tanh or affine control",
+    "initial_gate_logit": -0.7,
+    "teacher_active_edges": 8,
+    "teacher_gate_logit": 1.2,
+    "loop_message_scale": 0.8,
+    "edge_prune_timing": "after shared-core/graph warmup, no repruning for baseline"
+  },
+  "training": {
+    "optimizer": "AdamW",
+    "learning_rate": 0.007,
+    "weight_decay": 0.00001,
+    "batch": 64,
+    "updates": 260,
+    "events": [
+      90,
+      170
+    ],
+    "cut_count_per_event": 4,
+    "lookahead_updates_per_candidate": 6,
+    "candidate_groups": 4,
+    "extra_update_control": 320,
+    "gradient_clip": 2,
+    "initial_seed_rule": "world+seed, same initial weights within variant",
+    "schedule": "same shuffled minibatch indices for paired methods",
+    "checkpoint_selection": "last-update checkpoint, no fresh selection"
+  },
+  "methods": [
+    "mirror_keep",
+    "mirror_random",
+    "mirror_low_gate",
+    "mirror_conflict",
+    "mirror_lookahead",
+    "mirror_guarded",
+    "direct_tanh_lookahead",
+    "affine_lookahead",
+    "native_dense",
+    "mirror_keep_extra"
+  ],
+  "post_training_control": "mirror_from_start_same_mask; replay selected final lookahead mask from initial parameters and same batch sequence for 260 updates; compute charged separately",
+  "primary_metric": "fresh NMSE divided by fixed train-only target mean-square relative to zero predictor",
+  "additional_metrics": [
+    "fresh_ood_nmse",
+    "train_end_nmse",
+    "dev_nmse",
+    "immediate_and_probe_future_delta",
+    "gradient_gate_cross_batch_conflict_rate",
+    "shared_core_gradient_rotation_after_cut",
+    "inference_total_serialized_bytes",
+    "active_mlp_MAC_per_sample",
+    "CPU forward latency B1/B64",
+    "probe_update_total",
+    "real_update_total",
+    "oracle_representability"
+  ],
+  "decision": {
+    "trajectory_pass": "Mirror lookahead fresh NMSE is >=5% smaller than mirror_from_start_same_mask AND mirror_random AND mirror_low_gate for >=5 of 6 world-seed paired trials",
+    "mirror_specific_pass": "Mirror lookahead fresh NMSE >=5% smaller than both direct_tanh_lookahead and affine_lookahead at 5/6 pairs; record resources, no adoption if excessive runtime",
+    "mechanism": "In >=4 of 6 pairs, cutting changes shared physical core gradient direction >=5 degrees on fixed training batch; oracle representability <= 1e-5 MSE on aligned world if true teacher is copied into student",
+    "efficiency": "Hard edges reduce 32->24 and are physically not generated/executed; account program metadata; compare actual walltime, serialized bytes and total (probe+real) updates",
+    "no_claim": "Successful mechanism alone is not a capacity proof, arbitrary MLP theorem, language-model generalization, or proof of search global optimum"
+  },
+  "selection_policy": "Development split only; fresh evaluated once after all train and from-start-mask checkpoints frozen and hashed; do not tune from fresh; negative outcomes retained",
+  "statistical_scope": "6 paired synthetic world/seed observations, descriptive only; predeclared thresholds; include best and worst per-pair and separate per-world tables"
+}
