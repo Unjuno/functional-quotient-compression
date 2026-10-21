@@ -1,0 +1,44 @@
+{
+  "experiment": "MA-1174",
+  "date": "2026-10-21",
+  "protocol_sha256": "80308193fd6b22aabe84f6e27c9f8350dafd792b433d35b01f7cff357d5207e8",
+  "torch": "2.10.0+cpu",
+  "python": "3.13.5",
+  "cpu": "CPU backend, 1 PyTorch thread, no CUDA, unlocked clock",
+  "unit_tests": {
+    "passed": 7,
+    "failed": 0,
+    "log_sha256": "05dbc3c87760fb260dfa5289763b9ce76e07581b3afeffa23a1575c6e5f0fa88"
+  },
+  "checkpoint_count": 66,
+  "checkpoint_hashes_checked": 66,
+  "checkpoint_replay_dev": 66,
+  "deployment_packet_replays": 60,
+  "teacher_oracle_aligned_exact": 3,
+  "fresh_opened_only_after_all_checkpoints": true,
+  "gates": {
+    "learning_trajectory": "FAIL 0/6",
+    "mirror_specific": "FAIL 1/6",
+    "gradient_rotation_mechanism": "PASS 6/6"
+  },
+  "caveats": [
+    "Two small synthetic teacher distributions, only 3 seeds",
+    "Dev data reused for many candidates and hence optimistic policy selection risk",
+    "Only edges optimized, node/view/loop stays fixed",
+    "No natural language or GPU test",
+    "MAC proxy excludes decoding and backwards",
+    "PyTorch packet bytes exclude program implementation distribution"
+  ],
+  "source_sha256": {
+    "source/data.py": "26afd540cf9b6ef1f345cd5ab5644316fe4b8328a78be41618e66d224b7bb4a6",
+    "source/model.py": "9856aaf30a6dae7fb222f29f2de67d68f740095c9e4cba0df3f935f841dea632",
+    "source/run.py": "d2a2f9f5ddf1e6a19a334b9acff8cf0b84394a822b3fc3483637ef26b16f4472",
+    "tests/test_model.py": "ab5ae8fd5099bc7cad188b4df43295a8e491bd5693fec456940d8bfa9e5f19c0"
+  },
+  "training_hash_manifest_sha256": "2fdb87e72bfee3ec970eb6a201a93046546c8d02cf3a02831289d07c57984c9f",
+  "core_result_sha256": "d8ef7be6c1f39dd329ac6dafac956236c6055c46cd32887aa59c7ffe02c91da1",
+  "source_logs": {
+    "TRAIN.log": "f5ea21a48ca1af94c28ae75979fc4344728cf99581b30295d426d66345c66399",
+    "AUDIT.log": "217662ba027485560107d183e3edd8340e40d3456fb78392799dddf4980184c0"
+  }
+}
