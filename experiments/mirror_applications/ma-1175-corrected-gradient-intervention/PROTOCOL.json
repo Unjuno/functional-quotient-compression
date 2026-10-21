@@ -1,0 +1,53 @@
+{
+  "id": "MA-1175",
+  "date": "2026-10-21",
+  "name": "Corrected structural intervention with exact shared-core VJPs and no-cut option",
+  "parent": "MA-1174 retrospective audit, different fresh worlds",
+  "status": "frozen_before_training",
+  "research_question": "Can selecting structural interventions based on exact edge-to-shared-core gradients and prospectively held-out dev recovery outperform never cutting and simpler pruning at fixed real-update count and after accounting for extra search computation?",
+  "scope": "Controlled 8D synthetic function regression, NOT a trained natural language model and NOT joint node/loop/view count optimization",
+  "architecture": {
+    "nodes":4,"views_per_ordered_pair":2,"max_edges":32,"loops":2,"width":8,
+    "core_floats":128,"address_floats":128,"gate_floats":32,"node_bias_floats":32,
+    "trainable_floats":320,
+    "mirror_operator":"fixed Householder -> tanh -> inverse Householder after learned signed permutation page mixing",
+    "hard_masks":"pruned edges no longer decoded or executed; inactive slots retained in training tensor but serialized only if active"
+  },
+  "data": {
+    "worlds":["aligned_sparse_mirror","independent_native_mlp"],
+    "seeds":[1327,1361,1381,1399,1409],
+    "train_n":1024,"dev_n":384,"fresh_n":768,"ood_n":768,
+    "split_generation":"Existing deterministic dataset generator, seed-disjoint from MA-1174; student never observes teacher parameters or active indices",
+    "denominator":"train-only mean squared teacher target; no fresh access before checksum-complete checkpoints"
+  },
+  "training": {
+    "torch":"CPU eager float32; threads=1; no CUDA, clock unlocked",
+    "optimizer":"AdamW","lr":0.007,"weight_decay":0.00001,"clip_grad_norm":1.0,
+    "total_real_updates":420,"train_batch":64,"cut_events":[100,230],"cut_four_edges_per_event":4,
+    "probe_horizons_for_training_choice":{"short":6,"long":40},
+    "candidate_types":["true_shared_gradient_conflict","low_gate","low_edge_vjp_norm","random"],
+    "no_cut_option":true,"dev_margin_nmse":0.0005,
+    "long_probe_updates_per_event":200,"long_probe_updates_total":400,
+    "unselected_probes":"discard all candidate cloned optimizer/model state; apply only selected binary mask to real trajectory",
+    "probe_batching":"all forks and keep use identical predetermined future batches; RNG independent of fresh",
+    "selection":"evaluate noncut and all available candidate four-edge masks on DEV after exactly H updates, choose best if gain >=0.0005; otherwise keep",
+    "gradient_conflict":"exact per-edge VJP through physical shared core; score -cos(g_i, g_total-g_i) where cosine negative, weighted by |g_i|; average exact g_i across 2 training mini-batches",
+    "gradient_ablation":"use smallest exact |g_i| among active edges",
+    "search_accounting":"log real updates, all cloned probe updates, core VJP overhead and active-edge MAC proxy separately",
+    "same_final_mask_control":"train from original seed with final long-guard selected mask for 420 updates",
+    "extra_budget_control":"mirror keep for 820 real updates (420+400), not exactly total CPU FLOPs; compare actual measured compute separately",
+    "posthoc_horizon_audit":"H=120 DEV-only fork audit at the first cut event from the same exact checkpoint; never used in candidate choice or fresh selection"
+  },
+  "methods":["mirror_keep","mirror_keep_extra","mirror_random","mirror_low_gate","mirror_trueconflict","mirror_guard_short","mirror_guard_long","mirror_from_start_mask","direct_guard_long","native_dense"],
+  "metrics":["train_NMSE","dev_NMSE","fresh_NMSE","OOD_NMSE","selected_cuts","active_edge_count","actual_packet_bytes","active_MLP_MAC_proxy","CPU_latency_B1_B64","VJP_reconstruction_error","short_vs_long_DEV_rank_stability","current/shared-core gradient rotation","real_and_probe_update_count","serial_bytes"],
+  "decision":{
+    "mechanism_pass":"exact sum of per-edge VJP matches full core gradient relative <= 1e-4; cut alters future gradient on same train batch; hard cut removes computation",
+    "guard_validity_pass":"in all 20 (2x5x2) long-guard decisions, cut iff best dev probe improves no-cut by at least 0.0005; never force an inferior cut",
+    "learning_pass":"long guarded Mirror fresh-NMSE >=5% lower than BOTH short guarded and no-cut 420-update baselines in at least 7/10 paired world-seed runs, AND median OOD NMSE not worse than either",
+    "mirror_specific_pass":"Mirror long guard fresh-NMSE >=5% lower than non-Mirror direct-tanh guarded long in >=7/10 pairs; same optimizer and trainable scalar count",
+    "adoption":"learning + mirror_specific passes and no worse quality-per-actual-byte and train-compute than strongest control; large probe cost can render quality gains non-economic",
+    "no_unqualified_claim":"Improvement on aligned synthetic Mirror teacher alone is mechanism evidence; even all 10 passes would not establish language generality or universal MLP representation"
+  },
+  "uncertainty":"paired 5 seeds per two synthetic teacher worlds: descriptive, not population CI; report all pairs, failures, CPU/machine and checkpoint hashes",
+  "research_integrity":"fresh/OOD sealed until every model trained and manifest hashed; no threshold or settings changes after seeing fresh; prior MA-1174 FAIL preserved, no main merge"
+}
