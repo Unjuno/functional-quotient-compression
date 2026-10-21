@@ -1,15 +1,16 @@
 # Mirror Application Status Board
 
-Updated: 2026-10-21 JST (MA-1173 causal Mirror supergraph: hard structural mechanism PASS; future-learning improvement FAIL)
+Updated: 2026-10-21 JST (MA-1174 guided cut-learning mechanism PASS; trajectory and Mirror-specific quality FAIL)
 Canonical branch: `research/mirror-application-worker-ready-20261007`
 
-## Program totals (reconciled from authoritative 1173-row registry on this research branch)
+## Program totals (reconciled from authoritative 1174-row registry on this research branch)
 
-- Registered candidates: **1173**
-- P0: **643** (175 completed; 464 UNTESTED; 4 SCREENING)
+- Registered candidates: **1174**
+- P0: **644** (176 completed; 464 UNTESTED; 4 SCREENING)
 - P1: **427** (18 completed; 409 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **976 UNTESTED, 4 SCREENING, 54 PROMISING, 139 FAIL**
+- Current MA statuses: **976 UNTESTED, 4 SCREENING, 54 PROMISING, 140 FAIL**
+- **2026-10-21 MA-1174:** Structural intervention in 4-node / 2-view / 2-loop synthetic Mirror supergraph: 32 virtual MLP edges -> 24 hard active edges; 66 CPU-trained models, 7 tests, 66 checkpoint replays; lookahead cuts measurably rotate shared-core gradients (>=5 deg in 6/6 pairs), but **failed** paired fresh learning-trajectory improvement in 0/6 and Mirror-specific quality in 1/6. Same-final topology trained from initialization won 6/6; 320 scalar Mirror model loses to 314-scalar native MLP. Fully accounted 60 lookahead probe updates. [Report](ma-1174-structure-guided-supergraph/REPORT_JA.md).
 - **2026-10-21 MA-1173:** Causal symbolic next-token Mirror supergraph: one 288-coefficient core generated 18 ordered MLP edges among 3 nodes and two Mirror directions, T2, with real Boolean cuts. Prospective H8 cut selection tested against random/low-gate/direct-tanh/affine/tied FFN and matched extra-training control across 54 CPU checkpoints. Mechanism 18→12 executed edges PASS; active edge MAC/token 10368→6912; inference packet 13668→13540 B (program buffers extra). Fresh OOD query superiority versus random and low-gate **0/6 FAIL**; Guard accepted 1/18 interventions; 6 source tests and 48 deployment packet replays PASS. No real natural text, no all-node/Loop/direction NAS, no Mirror-specific benefit. [Report](ma-1173-lookahead-supergraph-lm/REPORT_JA.md).
 - **2026-10-20 MA-1172:** Follow-up sparse autoencoder rank audit: 30 independently re-trained CPU models, fixed 8-page affine, direct tanh without Householder, Mirror tanh, cubic, full dense control; 5 unit tests and 30/30 packet replay PASS. Numerical rank at 1e-3: Mirror 32/32 in 6/6, **plain tanh also 32/32 in 6/6**, affine 8/32. FP64 recomputation confirms. Effective ranks: Mirror 5.40 vs plain tanh 5.90; Mirror OOD factor support F1 median .1141 vs dense onepass .3819; strict Mirror-specific feature recovery gate 0/6 FAIL, no adoption. [Report](ma-1172-sae-rank-specificity/REPORT_JA.md).
 - **2026-10-20 MA-1171:** Synthetic sparse autoencoder feature-disentanglement screen, 64 features into 32-dimensional mixed activations. 64 logical Mirror feature detectors from shared core32 + learned addresses, 3 residual Loop steps. 30 trained CPU models / five preregistration smoke-test groups / 30/30 packet replays PASS. Mirror beats same-address affine 6/6 narrowly (OOD F1 mean +.01345) but loses to native dense Loop all six (mean -.31817); 0/6 frozen strong separation gate; **FAIL**, no real LLM evidence. [Report](ma-1171-mirror-sae-disentangle/REPORT_JA.md).
