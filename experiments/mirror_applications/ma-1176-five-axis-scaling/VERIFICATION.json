@@ -1,0 +1,49 @@
+{
+  "id": "MA-1176",
+  "date": "2026-10-24",
+  "status": "COMPLETE / SCREENING, only scoped small synthetic claims",
+  "protocol_sha256": "8f9f9e929e064a43fb2c8fc27f2c870024ca1bfd0103074058080b2183522790",
+  "sealed_manifest_sha256": "7caa7ad2448c870797768517cd8a58d6ade435b4d8eb937e00f39da3ec8f9a1d",
+  "training_checkpoint_count": 189,
+  "all_checkpoint_hashes_verified": true,
+  "fresh_after_seal": true,
+  "dev_checkpoint_replay": "ALL_PASS",
+  "test_count": 11,
+  "test_passed": 11,
+  "model_range_parameters": [
+    32,
+    132
+  ],
+  "train_torch": "2.10.0+cpu",
+  "train_threads": 1,
+  "platform": "Linux-6.18.55-x86_64-with-glibc2.41",
+  "train_elapsed_seconds": 79.6935460489999,
+  "gates": {
+    "mirror_specific_5pct_pairs": 2,
+    "mirror_specific_gate": false,
+    "loop_T3_gain_pairs": 3,
+    "loop_gain_gate": true,
+    "loop_onepass_distill_pairs": 1,
+    "loop_deployment_gate": false,
+    "data_quality_oracle_beats_noisy_mirror_pairs": 6,
+    "data_quality_oracle_beats_noisy_film_pairs": 6,
+    "data_quality_mirror_gate": true,
+    "data_quality_film_gate": true,
+    "search4_gain_pairs": 3,
+    "search_gate": false
+  },
+  "source_train_hashes": {
+    "data.py": "8d8d50d1166c643abffa363e61f200dd622cd9c9419730150b45668b670fdc9f",
+    "models.py": "2e2f49b1557e9be926770b9246942a05f26dd2547323ce0975059c88351ded41",
+    "run.py": "5c229361aa34f683a34204dc5df78b74627957b0624bedb5d1fe793666e6e813"
+  },
+  "result_csv_sha256": "040db96c300756d985fb404b10900c6a223d2dbb3cf6b9df4da0606a4a9b6af6",
+  "limitations": [
+    "2 synthetic teacher worlds",
+    "3 model seeds",
+    "Only predeclared base models (no real causal attention)",
+    "Updated analysis/test files after training without changing train/eval/source sealed hashes",
+    "Wall-clock lacks fixed CPU clocks",
+    "MAC proxy excludes Mirror elementwise and memory operations"
+  ]
+}
