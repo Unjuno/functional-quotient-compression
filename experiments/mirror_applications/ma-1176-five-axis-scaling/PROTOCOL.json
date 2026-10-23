@@ -1,0 +1,51 @@
+{
+  "id": "MA-1176",
+  "date": "2026-10-24",
+  "title": "Five independent scaling axes: Loop, Mirror, physical parameters, information, search",
+  "status": "PRE_REGISTERED_BEFORE_ANY_TRAINING",
+  "intent": "Taxonomize tiny-parameter scaling levers before proposing a full attention-equivalent Mirror-Loop architecture; establish where and when each lever earns value, without claiming language-model advantages.",
+  "model": {
+    "input_dim": 4,
+    "output_dim": 4,
+    "rule_count": 3,
+    "teacher_hidden": 8,
+    "student_hidden_levels": [4, 8, 12],
+    "physical_parameter_formula": {"shared": "8*hidden", "film": "11*hidden", "mirror": "11*hidden", "independent": "24*hidden"},
+    "mirror_insertion": "Rule-indexed Householder reflection -> tanh -> inverse reflection on the shared hidden state. Shared up/down projections; one learnable vector per rule.",
+    "matched_non_mirror_control": "Rule-indexed FiLM-style hidden feature gain with same learned scalar count at matched width; independent tiny per-rule MLP upper/control.",
+    "loop_model": "Fixed 4x4 shared recurrent map plus 4x4 output map, T=1/2/3 sequential residual updates, 32 learned scalars in all variants. A 3-step recurrent teacher provides regression targets.",
+    "loop_distillation": "Compare 1-step direct task learner with 1-step student using a frozen trained 3-step model as auxiliary teacher; record both task loss and extra teacher training compute. Distillation is not assumed to preserve quality."
+  },
+  "splits": {
+    "worlds": ["aligned_mirror_teacher", "independent_mlp_teacher"],
+    "student_seeds": [17, 29, 43],
+    "training_default_size": 384,
+    "development_size": 256,
+    "fresh_size": 512,
+    "ood_size": 512,
+    "train_rule_distribution": "uniform unless declared skew",
+    "dev_fresh_rule_distribution": "uniform",
+    "ood_shift": "covariate normal shift x ~ N(0.55, 1.4^2), not new teacher rules",
+    "leakage_prevention": "Train and dev generated before fitting. Fresh and OOD generated strictly after all checkpoint SHA-256 hashes written. Search and selection use dev only. Synthetic teacher functions are deterministic and frozen."
+  },
+  "optimizer": {"name":"AdamW","lr":0.012,"weight_decay":0.00001,"batch_size":32,"main_steps":240,"loop_steps":320,"search_candidate_steps":120,"device":"CPU","dtype":"FP32","torch_threads":1},
+  "lanes": {
+    "representation": "Four model types shared-8, FiLM-8, Mirror-8, independent-4, 2 worlds x 3 seeds, identical data and updates. Mirror has 88 trainable scalar coefficients vs FiLM-8 88 vs independent-4 96.",
+    "parameters": "FiLM and Mirror widths 4/8/12; 2 worlds x 3 seeds; hold training data/updates fixed.",
+    "data_unique_examples": "Mirror and FiLM width8; train sizes 96/384/1536, same 240 updates and batch size, 2 worlds x 3 seeds.",
+    "data_information_quality": "Mirror and FiLM width8 on 384 examples with clean balanced / skew 80%-10%-10% / 20% shuffled targets / oracle-filtered 20% noisy labels; same 240 updates; evaluate balanced rule-conditional fresh losses. Oracle filter is an upper control and must not be called an actual curation algorithm.",
+    "loop": "Dedicated 3-iteration recurrent teacher, 3 seeds, 32-parameter students with 1/2/3 recurrent steps and 32-parameter one-pass two-layer control; 1-step trained with auxiliary frozen 3-step student via distillation; report both teacher and student training cost.",
+    "search": "2 worlds x 3 seed groups; candidates 1/4/8 total, composed of shared8/film8/mirror8/independent4 repeated with changed initialization; each train 120 steps and dev-select. Compare single FiLM8 model trained 120/480/960 updates. Count all candidate train time/updates and candidate parameter/model size; evaluate fresh only after sealing. Candidate models have 64/88/96 parameters and are not exact-byte matched to each other; selection is exploratory."
+  },
+  "measurements": ["fresh_nmse", "ood_nmse", "fresh_rule_nmse", "physical_trainable_parameters", "inference_payload_bytes_actual", "gradient_steps", "number_of_unique_train_examples", "per_model_forward_MAC_proxy", "total_training_forward_MAC_proxy", "training_wall_time", "search_trial_count", "best_dev_selected_model", "loop_inference_steps", "loop_distill_teacher_training_time"],
+  "decisions": {
+    "mirror_specific_gate": "At width8 and 240 steps Mirror fresh NMSE >=5% better than FiLM in at least 5 of 6 paired world x seed tests; additionally show complete inference bytes and compute; aligned teacher alone is not evidence of general advantage.",
+    "loop_gain_gate": "T3 recurrent 32-param student reduces final fresh NMSE >=10% versus T1 on at least 2/3 loop seeds; this is a quality gain, NOT compute efficiency. Separate deployment gate requires distilled T1 final loss <=1.05x learned T3 loss in >=2/3 seeds with <=0.5x active inference MAC proxy.",
+    "data_quality_gate": "Oracle-filtered noisy dataset beats unfiltered noisy fresh on >=5/6 paired world x seed for a given architecture; correctly label oracle advantage as a data-quality sanity check, not a real data-cleaning method.",
+    "search_gate": "At 4 candidates, dev-selected search fresh NMSE at least 5% better than the single FiLM8 480-update control in >=4/6 pairs; report total actual train time and MAC proxy. A gain only over FiLM8 120-step control is insufficient.",
+    "parameter_scaling": "Descriptive Pareto chart; do not predeclare monotonicity or a universal scaling law from 4/8/12 widths.",
+    "data_scaling": "Descriptive unique-data frontier, not an asymptotic data-scaling exponent from three points.",
+    "overall_adoption": "No architecture-level claim from this tiny synthetic screening, even if one gate passes. A follow-up on natural tokens and attention-equivalent causal semantics is required."
+  },
+  "notes": "All models below 300 scalar parameters. Count data reuse and search training explicitly; do not call virtual functions independent parameters or equate equal update count with equal FLOPs. Freeze seeds, data, controls, optimizer and gates before training. Preserve failures. No merge to main."
+}
