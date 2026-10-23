@@ -12,4 +12,4 @@ The independent variable and claimed unit of each axis differs:
 
 **Pre-reg**: see `PROTOCOL.json`. Fresh/OOD are sealed until training checkpoints are hashed. Report split-conditional errors, bytes, training time and a forward MAC proxy separately. Synthetic aligned-Mirror teachers are favorable to the Mirror family and never sufficient on their own for a superiority claim. The independent teacher world is mandatory. Do not assume a monotonic scaling relationship or any transfer to pretrained attention.
 
-Operational notes: CPU FP32, 1 numerical thread, PyTorch 2.10. `python source/run.py --phase train` followed by `--phase eval`; `python -m unittest discover -s tests -v`; `python source/analyze.py` once eval is complete. `--phase train` never generates fresh examples. `--phase eval` verifies a sealed manifest first.
+Operational notes: CPU FP32, 1 numerical thread, PyTorch 2.10. `python source/run.py --phase train` followed by `--phase eval`; `python -m unittest discover -s tests -v`; `python analysis/analyze.py` once eval is complete. `--phase train` never generates fresh examples. `--phase eval` verifies a sealed manifest first.
