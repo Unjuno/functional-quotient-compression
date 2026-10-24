@@ -1,15 +1,16 @@
 # Mirror Application Status Board
 
-Updated: 2026-10-24 JST (MA-1177 SoftmaxFix x Mirror Attention trained 120 models: numerical & exact-function preservation PASS, Mirror-specific and classification quality FAIL)
+Updated: 2026-10-24 JST (MA-1178 MLP-to-Mirror distillation complete; aligned oracle exactness PASS, random-start/cross-world Mirror-specific gates FAIL)
 Canonical branch: `research/mirror-application-worker-ready-20261007`
 
-## Program totals (reconciled from authoritative 1177-row registry on this research branch)
+## Program totals (reconciled from authoritative 1178-row registry on this research branch)
 
-- Registered candidates: **1177**
-- P0: **647** (179 completed; 464 UNTESTED; 4 SCREENING)
+- Registered candidates: **1178**
+- P0: **648** (180 completed; 464 UNTESTED; 4 SCREENING)
 - P1: **427** (18 completed; 409 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **976 UNTESTED, 4 SCREENING, 54 PROMISING, 143 FAIL**
+- Current MA statuses: **976 UNTESTED, 4 SCREENING, 54 PROMISING, 144 FAIL**
+- **2026-10-24 MA-1178:** Function-only distillation of 20 pretrained ordinary MLP teachers into 3 logical task functions with one physically shared Householder-Mirror core: 180 synthetic CPU student models, 180/180 SHA256 checkpoint/fresh/OOD replay PASS, 7 mechanism source tests PASS. Householder-aligned 444-scalar teacher triplet has exact shared 196-scalar Mirror oracle FP32 NMSE max 4.72e-14 (mechanism PASS); random H8 aligned student beats equal-budget FiLM and near-budget independent models in 5/5 pairs at >=10%, but primary H16 absolute distillation gate 2/5, Mirror-specific 3/5, cross-world Mirror vs FiLM 3/15 all FAIL. FiLM/independent teacher functions instead favor FiLM/native models; Mirror CPU slower. Posthoc 40 pretrained-core transfer models remain exploratory. No natural-language/Attention or general Mirror dominance claim. [Report](ma-1178-mlp-mirror-distillation/REPORT_JA.md).
 - **2026-10-24 MA-1177:** Barron et al. stable Softmax/Cross-Entropy fix tested in Mirror virtual Attention, with equal-size FiLM and independent-head controls: 72 hard-classification + 48 exact-teacher-copy distillation =120 CPU-trained/checkpoint-hash sealed models, all 120 replay, 8 tests, two full bitwise retrains PASS. FP32/BF16 high-confidence target-gradient fixes PASS. Fixed CE did not improve Mirror high-score Fresh classification by >=5% in any of 6 pairs; relative Mirror improvement over same-size FiLM 0/6 (both FAIL). Corrected soft CE prevents spurious exact-copy Mirror drift in 6/6 cases, but FiLM also benefits (generic numerical accuracy, not Mirror-specific). Additional 48 DEV-only near-copy checks labeled POSTHOC, no Fresh selection. No real Grokking/LM/GPU evidence. [Report](ma-1177-softmaxfix-mirror-attention/REPORT_JA.md).
 - **2026-10-24 MA-1176:** Five-axis 4D three-rule diagnostic, 189 train/checkpoint-hash-sealed CPU models, 11 tests PASS; Loop T3 improves vs T1 in 3/3 but static native one-pass outperforms loop T3 median, one-step distillation gate 1/3 FAIL; Mirror vs exact 88-scalar FiLM only 2/6 >=5% paired wins FAIL, independent teacher worse; oracle-only data cleanup 6/6 for both models (non-deployable sanity check); 4 candidate dev-selected architecture/seed search 3/6 vs equal-update FiLM continue-training FAIL. No natural-language, causal attention, new power-law, or Pareto dominance. [Report](ma-1176-five-axis-scaling/REPORT_JA.md).
 - **2026-10-21 MA-1175:** Corrective synthetic Mirror-supergraph rerun with true per-edge shared-core VJPs and no-cut H6/H40 lookahead; 100 CPU-trained models and 100 checkpoint hashes validated; source tests 10 PASS. H40 accepted only 5/20 cuts under the guard (20/20 decisions consistent), but future-learning gain 0/10 and Mirror-specific gain 2/10 against direct-tanh (both FAIL). Same final mask from initialization no worse in 10/10; extra training beats H40 in 10/10. Not trained natural-language LM or MiTA integration. [Report](ma-1175-corrected-gradient-intervention/REPORT_JA.md).
