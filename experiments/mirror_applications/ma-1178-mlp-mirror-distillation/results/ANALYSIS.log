@@ -1,0 +1,81 @@
+{
+  "oracle": {
+    "per_seed_dev_nmse": [
+      2.7051797120675114e-14,
+      2.2640187553838204e-14,
+      3.755990210806721e-14,
+      4.716679423984637e-14,
+      3.9310820574706017e-14
+    ],
+    "max": 4.716679423984637e-14
+  },
+  "decisions": {
+    "mechanism_exact": true,
+    "distill_mirror_related_h16_at_least_4of5_nmse_lt_0p01": false,
+    "mirror_specific_h16_4of5_above_10pct_vs_film_and_independent": false,
+    "cross_world_8of15_10pct_gain_vs_film_h16": false,
+    "practical_pareto_not_claimed_without_full_compute": false
+  },
+  "frontier": {
+    "mirror_related": {
+      "8": {
+        "mirror": 0.021404,
+        "film": 0.031749,
+        "shared": 0.047908,
+        "independent": 0.058985
+      },
+      "16": {
+        "mirror": 0.010794,
+        "film": 0.012171,
+        "shared": 0.042454,
+        "independent": 0.019508
+      },
+      "24": {
+        "mirror": 0.007229,
+        "film": 0.009727,
+        "shared": 0.042491,
+        "independent": 0.011951
+      }
+    },
+    "film_related": {
+      "8": {
+        "mirror": 0.064911,
+        "film": 0.025534,
+        "shared": 0.128177,
+        "independent": 0.075052
+      },
+      "16": {
+        "mirror": 0.026037,
+        "film": 0.006473,
+        "shared": 0.116157,
+        "independent": 0.026726
+      },
+      "24": {
+        "mirror": 0.014519,
+        "film": 0.001884,
+        "shared": 0.115845,
+        "independent": 0.01256
+      }
+    },
+    "independent": {
+      "8": {
+        "mirror": 0.149126,
+        "film": 0.083866,
+        "shared": 0.669848,
+        "independent": 0.072045
+      },
+      "16": {
+        "mirror": 0.053833,
+        "film": 0.028936,
+        "shared": 0.672489,
+        "independent": 0.024748
+      },
+      "24": {
+        "mirror": 0.032561,
+        "film": 0.016054,
+        "shared": 0.675663,
+        "independent": 0.013754
+      }
+    }
+  }
+}
