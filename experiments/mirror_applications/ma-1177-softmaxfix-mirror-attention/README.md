@@ -11,3 +11,13 @@
 - No new causal LM; no Mirror-independent benefit is claimed without beating matched FiLM on normalized rate–quality frontier.
 
 Preregistered protocol: `PROTOCOL.json` committed **before** training. Sources: https://arxiv.org/abs/2610.31642 and https://jonbarron.info/softmaxfix/ . The prior normal-scale null result (72 model replays) remains historical evidence.
+
+## Completed evidence
+
+**120 trained models, 120/120 frozen checkpoint replays, 8 numeric tests PASS.**
+Read `REPORT_JA.md` for exact Fresh FP64 comparisons and posthoc near-copy DEV-only notes.
+Run tests: `python -m unittest discover -s tests -p 'test_*.py' -v`.
+Run reproducibility checks after unpacking the complete ZIP: `python source/verify.py`.
+Main train protocol: `python source/run.py train` then `python source/run.py evaluate`, only in a clean directory (overwrites are deliberately prohibited).
+Results: `results/RESULTS_CORE.csv`, `results/ANALYSIS.json`, `results/NUMERIC_AUDIT.json`, `results/VERIFICATION.json`.
+Previous historical CE/softmax-sensitive experiments are NOT retroactively reclassified.
