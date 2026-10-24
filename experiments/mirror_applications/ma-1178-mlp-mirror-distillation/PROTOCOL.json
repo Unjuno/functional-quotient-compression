@@ -1,0 +1,61 @@
+{
+  "id": "MA-1178",
+  "date": "2026-10-24",
+  "status": "PRE_REGISTERED_BEFORE_TRAINING",
+  "title": "Functional distillation of pretrained ordinary MLP teacher families into a compact shared Householder-Mirror MLP",
+  "hypothesis": "Small physical parameter budgets may support multiple reusable teacher MLP functions via task-specific Mirror codes, especially when teachers have a shared function geometry; the effect must be isolated from FiLM and equal-budget independent MLPs.",
+  "teacher": {
+    "type": "ordinary learned tanh MLP 4->16->4 (148 physical float parameters per teacher)",
+    "pretraining": "AdamW 1100 updates, lr=.012, batch128, 3072 teacher train examples per task, best among 550/825/1100 on independent teacher dev768",
+    "teacher_worlds": {
+      "mirror_related": "Train a common ordinary MLP teacher, make 3 ordinary MLPs with first layer H_m W_up, H_m b_up and second layer W_down H_m; random fixed Householder directions. Exact Mirror-oracle expressivity by construction; label this favorable aligned world.",
+      "film_related": "Train same common ordinary MLP teacher, construct 3 ordinary MLPs with task-dependent elementwise hidden activation gains (1+.85*tanh(code)). Exact FiLM-oracle expressivity by construction.",
+      "independent": "Train 3 unrelated ordinary MLP teachers independently on 3 different nonlinear analytic functions. No structure imposed."
+    },
+    "teacher_model": "train all 4 pretrained base/independent MLPs per seed and freeze them before student training",
+    "student_cannot_see": "the base teacher weights, oracle mirror directions, or task-generating analytic function; student sees only labeled input/function-output pairs with rule ID"
+  },
+  "student": {
+    "input_dim": 4,
+    "output_dim": 4,
+    "num_functions": 3,
+    "hidden_widths": [8,16,24],
+    "teacher_hidden_width": 16,
+    "student_architectures": ["mirror", "film", "shared", "independent"],
+    "mirror": "Shared W_up, b_up, W_down, b_down; per-task learned H-vector u_m. h_m=H(u_m) tanh(H(u_m) (W_up x+b_up)); output W_down h_m+b_down. Householder applied by fused rank-1 vector expression. No teacher transfer of weights to the trained student.",
+    "non_mirror_film": "Same shared W and exact scalar count; per-task learned H-vector controlling hidden gain 1+.85*tanh(code), with the same tanh nonlinearity.",
+    "non_mirror_shared": "Same hidden width but no per-task code; deliberately smaller shared baseline, not matched-budget.",
+    "native_control": "3 completely independent ordinary tanh MLPs with per-rule hidden widths 3/7/10 matching mirror width 8/16/24 respectively within 8 percent physical trainable scalar count.",
+    "param_count_mirror_film": "12*H+4: 100/196/292",
+    "param_count_independent": "3*(9*H'+4): 93/201/282",
+    "total_teacher_params": 444,
+    "initialization": "Torch seeded random fresh student initialized separately; same shared-W initial RNG for Mirror/FiLM at matched width"
+  },
+  "train": {
+    "seeds": [101,211,307,401,503],
+    "num_worlds": 3,
+    "num_models_expected": 180,
+    "student_train_examples": 1024,
+    "student_dev_examples": 384,
+    "student_fresh_examples": 1024,
+    "student_ood_examples": 1024,
+    "student_data": "inputs iid Uniform[-1,1]^4 for train/dev/fresh, Uniform[-1.6,1.6]^4 for OOD; disjoint generator seeds per split, world and base seed",
+    "sampling": "fixed per-world+seed stream of 750 batch128 sampled train indices, all 4 arms and 3 widths share stream",
+    "optimizer": "AdamW lr=.012, wd=1e-4, clipping 1.0, CPU FP32, torch threads=1, exactly 750 real student optimizer updates",
+    "loss": "per-example teacher-output MSE divided by squared train-only teacher target mean (floor 1e-5), no CE/softmax",
+    "checkpoint_selection": "DEV NMSE minimum among updates 250,500,750; sealed before fresh; no selection/tuning on fresh or OOD",
+    "training_cost": "measure wall clock seconds separately for each student and teacher training; parameter counts and actual serialized inference bytes; at equal updates FLOPs are not matched",
+    "all_seeds_full_factorial": true,
+    "oracle_witness": "Mirror H16 with pretrained common core + true Householder codes for mirror-related world must reproduce 3 teacher MLPs with max DEV NMSE below 1e-10; neither oracle weights nor codes can initialize the trained student"
+  },
+  "decisions_frozen": {
+    "mechanism_exact": "Mirror 16 oracle DEV NMSE <1e-10 for all 5 seeds",
+    "functional_distillation": "random-init trained Mirror H16 on mirror-related teacher Fresh NMSE <0.01 for >=4/5 seeds",
+    "mirror_specific_aligned": "mirror-related H16 Mirror has >=10pct lower Fresh NMSE than both same-param FiLM and comparable-param independent student in >=4/5 seeds",
+    "cross_world_generalizability": "H16 Mirror >=10pct lower Fresh NMSE than equal-param FiLM in >=8/15 pairs across all three worlds",
+    "deployment": "Even if quality passes, no deployment advantage without actual output packet bytes, active inference compute, teacher+student training compute and runtime Pareto comparison",
+    "fail_reporting": "Report per-seed paired data, no suppression of unfavorable worlds. Aligned oracle advantage does not establish novelty or generic utility."
+  },
+  "prior_art": "Model distillation, FiLM, hypernetwork weight generators, meta-learning / parameter tying, Householder parameterization; compare instead of claiming entirely novel framework.",
+  "research_integrity": "Register on new branch before any training; retain MA-1177 negative conclusions; fresh evaluation only after all student checkpoints hashed. No main merge without user request."
+}
