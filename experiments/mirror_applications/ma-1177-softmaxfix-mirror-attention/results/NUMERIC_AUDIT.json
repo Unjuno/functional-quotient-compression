@@ -1,0 +1,71 @@
+{
+  "prereg_numeric_reference": true,
+  "dtype_cliff_tests": [
+    {
+      "dtype": "torch.float32",
+      "margin": 18.0,
+      "CE_standard_target_gradient": 0.0,
+      "CE_fixed_target_gradient": -3.0459958111350716e-08,
+      "CE_standard_gradient_sum": 3.0459958111350716e-08,
+      "CE_fixed_gradient_sum": 0.0,
+      "max_softmax_standard_input_grad": 0.0,
+      "max_softmax_fixed_input_grad": 3.045995455863704e-08
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "margin": 7.0,
+      "CE_standard_target_gradient": 0.0,
+      "CE_fixed_target_gradient": -0.00182342529296875,
+      "CE_standard_gradient_sum": 0.00182342529296875,
+      "CE_fixed_gradient_sum": 0.0,
+      "max_softmax_standard_input_grad": 0.0,
+      "max_softmax_fixed_input_grad": 0.00182342529296875
+    },
+    {
+      "dtype": "torch.float64",
+      "margin": 40.0,
+      "CE_standard_target_gradient": 0.0,
+      "CE_fixed_target_gradient": -8.496708510583178e-18,
+      "CE_standard_gradient_sum": 8.496708510583178e-18,
+      "CE_fixed_gradient_sum": 0.0,
+      "max_softmax_standard_input_grad": 0.0,
+      "max_softmax_fixed_input_grad": 8.496708510583178e-18
+    }
+  ],
+  "actual_trained_Mirror_logit_test": [
+    {
+      "seed": 1801,
+      "n_sat": 5,
+      "total_n": 384,
+      "max_sat_margin": 20.368776321411133,
+      "standard_target_grad": 0.0,
+      "fixed_target_grad": -1.4254539770774954e-09,
+      "fp64_target_grad": -1.4254535329882856e-09,
+      "standard_grad_sum": 1.4254539770774954e-09,
+      "fixed_grad_sum": -2.3583997907405588e-17
+    },
+    {
+      "seed": 1811,
+      "n_sat": 1,
+      "total_n": 384,
+      "max_sat_margin": 16.95728874206543,
+      "standard_target_grad": 0.0,
+      "fixed_target_grad": -4.320592239537291e-08,
+      "fp64_target_grad": -4.320593449680388e-08,
+      "standard_grad_sum": 4.320592239537291e-08,
+      "fixed_grad_sum": -6.328271240363392e-15
+    },
+    {
+      "seed": 1823,
+      "n_sat": 13,
+      "total_n": 384,
+      "max_sat_margin": 29.210060119628906,
+      "standard_target_grad": 0.0,
+      "fixed_target_grad": -2.0617295576948885e-13,
+      "fp64_target_grad": -2.0605739337042905e-13,
+      "standard_grad_sum": 2.0617295576948885e-13,
+      "fixed_grad_sum": 7.855320687109827e-21
+    }
+  ],
+  "note": "Standalone log-softmax test, not fused SDPA kernel replacement; learned-model test is from TRAIN only."
+}
