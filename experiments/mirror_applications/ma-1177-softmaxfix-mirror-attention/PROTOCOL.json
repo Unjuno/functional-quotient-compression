@@ -1,0 +1,57 @@
+{
+  "id": "MA-1177",
+  "prereg_date_jst": "2026-10-24",
+  "status": "PREREGISTERED_BEFORE_TRAINING",
+  "purpose": "Test whether Barron et al. 2026 A Fix for Softmax and Cross-Entropy changes Mirror-generated virtual attention experts in regimes deliberately sensitive to softmax collapse and teacher-student cancellation; separate generic numerical improvement from Mirror-specific benefit.",
+  "literature": ["https://arxiv.org/abs/2610.31642", "https://jonbarron.info/softmaxfix/", "https://github.com/Unjuno/functional-quotient-compression/blob/research/ma-1176-five-axis-scaling-microbench-20261024/experiments/mirror_applications/ma-1176-five-axis-scaling/REPORT_JA.md"],
+  "units": "Loss reported in nats per query. Synthetic normalized logits and parameters are dimensionless. Wall seconds are observed, not fixed clock.",
+  "setup": {
+    "device": "cpu", "threads": 1, "torch_dtype": "float32", "teacher_worlds": ["householder_aligned", "unrelated_orthogonal"], "world_seeds": [1801, 1811, 1823],
+    "query_dim": 8, "memory_items": 12, "conditional_rules": 3,
+    "parameterizations": {"mirror": 88, "film": 88, "independent": 192},
+    "teacher": "Fixed world/seed-specific attention map; rule ID supplied to student (oracle routing) as in prior exploration. Labels in hard lane are top-1 teacher retrieval, not original dense teacher probabilities.",
+    "generator": "Torch CPU RNG, split-specific seeds train/dev/fresh/ood. Fresh/OOD not generated before all checkpoints hash-frozen.",
+    "train_count": 384, "dev_count": 256, "fresh_count": 768, "ood_count": 768
+  },
+  "lane_hard_ce": {
+    "models": ["mirror", "film", "independent"],
+    "logit_scales": [2.5, 12.0],
+    "losses": ["standard_ce", "fixed_ce"],
+    "runs": 72,
+    "train_updates": 550, "batch_size": 64, "optimizer": "AdamW", "learning_rate": 0.016, "adam_eps": 1e-8, "weight_decay": 0.05,
+    "same_initialization_and_batch_order": true,
+    "log_every_updates": 50,
+    "fixed_ce": "Barron hard-target exact-margin expression softplus(logsumexp(non-target logits minus target logit)).",
+    "metrics": ["fresh_fp64_ce", "ood_fp64_ce", "fresh_top1", "dev_fp64_ce", "train_saturated_fraction_fp32_margin_gt_16p6", "max_train_margin", "min_floating_loss", "worst_dev_ce_step_change", "gradient_zero_sum_error", "wall_seconds"],
+    "caveat": "High logit scale is intentionally adversarial. It is not evidence of what happens in ordinary Transformers. Independent expert is a larger upper control."
+  },
+  "lane_distillation": {
+    "models": ["mirror", "film"], "teacher_source": "same-world same-seed fixed_ce-trained high-logit-scale 12.0 model from the hard lane; student initialized as exact parameter copy of teacher",
+    "losses": ["standard_soft_ce", "fixed_soft_ce"],
+    "epsilons": [1e-8, 1e-12],
+    "runs": 48,
+    "train_updates": 150, "batch_size": 64, "learning_rate": 0.02, "weight_decay": 0.0,
+    "temperature": 1.0,
+    "fixed_soft_ce": "Barron et al. eq. 9: use teacher logits and log ratio delta, expm1/log1p, enforce zero-sum backward, keep original standard forward value. Implemented with detach-gradient surrogate; no teacher gradients.",
+    "metrics": ["fresh_teacher_student_fp64_kl", "fresh_rms_logit_difference", "fresh_top1_disagreement", "train_initial_equal_logit_grad_norm", "max_parameter_displacement", "wall_seconds"],
+    "caveat": "Trivially identical student teacher is numerical invariance test, NOT ability to learn a distinct compressed student."
+  },
+  "lane_numeric": {
+    "precision": ["float32", "bfloat16", "float64"],
+    "logits": [[9.0, -9.0, -9.0], [2.0, 1.0, 0.0]],
+    "properties": ["high-margin target gradient preserved", "gradient sums to zero to finite precision", "student=teacher zero gradient", "small delta comparison to float64", "householder Q/K simultaneous rotation attention-score invariance"],
+    "note": "Standalone attention softmax to be checked separately; high beta CE lane does not automatically fix SDPA internals."
+  },
+  "success_gates": {
+    "numeric": "at fp32 [9,-9,-9] fixed target grad nonzero close to fp64; exact-match soft target fixed max logit gradient zero; tests pass",
+    "hard_ce": "within Mirror arm fixed CE achieves at least 5% lower fresh FP64 CE than standard CE in 4/6 paired world-seeds in high-scale group; must report equivalent control outcomes separately",
+    "distillation": "in at least 5/6 world-seeds for mirror eps=1e-8, fixed soft CE fresh teacher-student KL is lower than standard (tolerance 1e-9 nat/query), with exact logit-match zero gradient",
+    "mirror_specific": "in at least 4/6 world-seeds, fixed-ce improvement fraction for Mirror exceeds same-88-parameter FiLM by 5 percentage points; no unconditional Mirror superiority without this",
+    "adoption": "numeric pass and prospective quality gate pass versus matched control at accounting of bytes/training compute; hard-only or distill-only signal is scoped not architecture win"
+  },
+  "integrity": {
+    "no_fresh_until_all_training_frozen": true, "no_fresh_based_hyperparameter_changes": true,
+    "save_all_results_negative_and_positive": true,
+    "comparison_warning": "Contrast training stability against control at matched updates and real CPU time. Previous MA-1173, MA-1175, MA-1176 failures remain unchanged. This new study does not claim grokking, causal LM performance, or production savings."
+  }
+}
