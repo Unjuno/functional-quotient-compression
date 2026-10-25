@@ -1,0 +1,110 @@
+{
+  "id": "MA-1180",
+  "date": "2026-10-25",
+  "status": "PRE_REGISTERED_BEFORE_TRAINING",
+  "parent": "MA-1179",
+  "branch": "research/ma-1180-mirror-optimizer-geometry-20261025",
+  "objective": "Ablate optimizer/parameterization compatibility of scale-invariant Householder Mirror function codes, using same teacher checkpoints and new data splits; isolate code optimizer while leaving core AdamW identical.",
+  "primary_hypothesis": "A sphere-tangent scalar-moment adaptive update for Mirror codes improves fresh functional distillation NMSE beyond an AdamW code update; check against tuned Euclidean AdamW and FiLM.",
+  "control_teacher_provenance": {
+    "source": "MA-1179 5 sealed pretrained teacher checkpoints",
+    "source_sha256": "472f330c44fe491daa30bb80308c1962a7215641c2b15a534fae7b2ed34f87b2",
+    "teacher_sha256": {
+      "101": "ca33a2c8fe1db4437d6fd63e9011eceebf32e08ff7dea736ef1542f5ae2ab549",
+      "211": "a70fd07b983901306b3ffd127b5046f24b9cd8bd985d5c9d014f445e9499193e",
+      "307": "1198502a9dd3349b687e7220d48f73336153c80bc47753ff20e8aad6bdaef1dd",
+      "401": "07dee16063f71e346b1f572ab8caa410325ef1812d6d5f2601915f1722d28a17",
+      "503": "a0567fba815e0ccd5fb88be37e5eb6acf792a1de0a4ac7128d825c0ad9065d31"
+    },
+    "worlds": [
+      "mirror_positive",
+      "correlated_independent",
+      "unrelated_independent"
+    ],
+    "teacher_reuse": "Teacher weights are FIXED and reused to isolate student optimizer. All results conditioned on known teacher identities; not independent novel teacher-family validation.",
+    "teacher_training_cost": "Inherited MA-1179 teacher cost; not double-counted for per-student optimizer comparisons but disclose full upstream cost."
+  },
+  "design": {
+    "worlds": [
+      "correlated_independent",
+      "mirror_positive",
+      "unrelated_independent"
+    ],
+    "seeds": [
+      101,
+      211,
+      307,
+      401,
+      503
+    ],
+    "student_arms": [
+      "mirror_adamw",
+      "mirror_adamw_nodecay",
+      "mirror_adamw_low",
+      "mirror_adamw_high",
+      "mirror_adamw_renorm",
+      "mirror_sphere_scalar_adam",
+      "mirror_sphere_sgd_momentum",
+      "film_adamw"
+    ],
+    "models": 120,
+    "hidden": 16,
+    "functions": 3,
+    "dims_in_out": 4,
+    "student_train_n": 1024,
+    "dev_n": 384,
+    "fresh_n": 1024,
+    "ood_n": 1024,
+    "total_steps": 750,
+    "batch": 128,
+    "dev_checkpoints": [
+      250,
+      500,
+      750
+    ],
+    "sampling": "One frozen per seed-world index schedule, shared across all arms; separate deterministic NEW train/dev/fresh/OOD streams, not reusing MA-1179 split seeds.",
+    "fresh_seal": "All 120 student checkpoints hashed and manifest written before first Fresh/OOD sample is generated",
+    "criterion": "train-only mean squared teacher output normalized MSE",
+    "primary_world": "correlated_independent"
+  },
+  "optimizer": {
+    "core": "AdamW(lr=0.012, weight_decay=1e-4), torch CPU FP32; always same for all arms",
+    "code_methods": {
+      "mirror_adamw": "code AdamW(lr=.012,wd=1e-4), directly comparable to MA-1179",
+      "mirror_adamw_nodecay": "code AdamW(lr=.012,wd=0)",
+      "mirror_adamw_low": "code AdamW(lr=.004,wd=1e-4)",
+      "mirror_adamw_high": "code AdamW(lr=.036,wd=1e-4)",
+      "mirror_adamw_renorm": "code AdamW(lr=.012,wd=1e-4), reproject each learned rule vector to its exact initial norm after each step",
+      "mirror_sphere_scalar_adam": "tangent projected gradients, first moment beta1=.9 projected after each step, scalar per-rule second moment beta2=.999 of mean-square tangent gradient, code lr=.012, norm-retraction to its own initial norm; this is an experimental sphere-oriented optimizer, NOT a claimed implementation of published Riemannian Adam",
+      "mirror_sphere_sgd_momentum": "tangent projected SGD with momentum .9 and lr=.03, retraction to initial norm, transported projected momentum",
+      "film_adamw": "same physical 196 float count FiLM non-Mirror control; AdamW(lr=.012,wd=1e-4) all coefficients"
+    },
+    "shared_optimizer_parameters": "all core and code trainable parameters subject to same global gradient norm clipping=1; all optimizers see identical per-step batches, no optimizer pretraining",
+    "initialization": "every arm same shared core and code draw for matched seed/world; sphere and renorm keep that per-row INITIAL code norm, so first forward predictions identical for all Mirror arms",
+    "teacher_weights": "Student sees x,task_id,teacher_output only, not teacher checkpoint weights or oracle transforms",
+    "model_params": "196 for each arm, 148 core+3x16 rule code"
+  },
+  "pre_registered_gates": {
+    "geometry_fixed": "On correlated world Fresh, sphere_scalar_adam Mirror gets at least 10% lower NMSE than mirror_adamw in >=4/5 paired seeds.",
+    "geometry_vs_euclidean_tuned": "Within EACH correlated seed, select lowest DEV NMSE among sphere_scalar_adam, sphere_sgd_momentum, renorm; compare against lowest DEV NMSE among 4 AdamW arms, then test selected models on Fresh; geometry winner at least 10% NMSE in >=4/5 seeds. State 3 vs 4 candidates and charge ALL optimizer search training.",
+    "mirror_specific_quality": "correlated world, DEV-selected best geometry Mirror at least 10% lower Fresh NMSE than FiLM baseline in >=4/5 seeds; if not, optimizer changes do not establish Mirror utility.",
+    "mechanism": "Check double-precision Householder scale/sign invariance abs max below 1e-10, gradient radial orthogonality |dot(v,grad)|/(||v|| ||grad||) <1e-8 with unclamped nonzero vectors, initial forward match among Mirror arms <1e-7.",
+    "cost": "Report train wall/forward latency/packet bytes. Equal student updates and parameter count are NOT FLOP matching. Claim deployment Pareto only if includes actual compute and runtime."
+  },
+  "negative_controls": [
+    "Unrelated independently pretrained teachers",
+    "FiLM same-count control",
+    "AdamW without code decay",
+    "AdamW LR-low/high"
+  ],
+  "uncertainty": [
+    "5 teacher identities already examined in MA-1179, but independent fresh data",
+    "Synthetic 4D only",
+    "Code lr sweep is narrow and method-dependent",
+    "CPU overhead and runtime variance",
+    "No inference to true manifold convergence theorem",
+    "Oracle-positive family may favor Mirror by construction"
+  ],
+  "hardware": "CPU PyTorch 2.10.0+cpu Python3.13.5 one torch CPU thread FP32; record machine automatically",
+  "previous_parent_fresh": "MA-1179 Fresh was opened and its results known. MA-1180 hypothesis and gates frozen before new training, and generates distinct held-out Fresh RNG streams. Study is confirmatory only for *new student samples*, not a blinded unseen teacher family."
+}
