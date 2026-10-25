@@ -3,6 +3,8 @@
 Updated: 2026-10-24 JST (MA-1178 MLP-to-Mirror distillation complete; aligned oracle exactness PASS, random-start/cross-world Mirror-specific gates FAIL)
 Canonical branch: `research/mirror-application-worker-ready-20261007`
 
+**2026-10-25 research handoff (documentation-only; no new experiment):** [Five-axis scaling / Attention-as-Fast-Weight / Mirror / Loop / MA-1178 distillation](../../docs/phase2/RESEARCH_HANDOFF_2026-10-25_MIRROR_SCALING_AND_DISTILLATION_JA.md). Existing 1,178 registry entries and all frozen PASS/FAIL verdicts are unchanged.
+
 ## Program totals (reconciled from authoritative 1178-row registry on this research branch)
 
 - Registered candidates: **1178**
