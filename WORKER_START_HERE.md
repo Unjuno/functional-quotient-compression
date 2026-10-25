@@ -2,6 +2,8 @@
 
 This repository contains several historical research lanes. Do not infer the current task from the oldest or largest directory.
 
+**Current 2026-10-25 branch-scoped handoff:** [Mirror scaling, attention, and pretrained-MLP distillation — integrated evidence and stop line](docs/phase2/RESEARCH_HANDOFF_2026-10-25_MIRROR_SCALING_AND_DISTILLATION_JA.md). MA-1178 is complete with 180 student runs; Mirror-specific generalization gates remain FAIL. Current user instruction is documentation/repository sync only: **do not start a new training run, allocate a new MA ID, or change historical results without an explicit follow-up request.** This note updates the orientation for this research branch, not the historical canonical backlog or `main`.
+
 **Focused 2026-10-18 research branch:** MA-1162 (Mirror-native causal token mixing; one shared core, parallel K Mirror views, recurrent T and dynamic readout). Begin with [research focus](docs/phase2/MIRROR_NATIVE_SEQUENCE_FOCUS_2026-10-18.md) and [experiment plan](experiments/mirror_applications/ma-1162-mirror-native-sequence/EXPERIMENT_PLAN_JA.md). L0 mathematical checks pass; L1 task training is **UNTESTED**. This note is branch-scoped and does not replace the canonical backlog or mandate a main merge.
 
 ## 1. Read in this order
