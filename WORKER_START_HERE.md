@@ -1,5 +1,7 @@
 # Worker Start Here — Mirror Application Program
 
+**2026-10-25 follow-up on this research branch:** The user explicitly resumed experiments after the earlier documentation-only stop line. MA-1179 (independently pretrained correlated-MLP warm-start, FAIL) and MA-1180 (Householder optimizer geometry, FAIL) are complete on branch `research/ma-1180-mirror-optimizer-geometry-20261025`; read [the branch-scoped follow-up handoff](docs/phase2/RESEARCH_HANDOFF_2026-10-25_MLP_OPTIMIZER_FOLLOWUP_JA.md) first. The prior stop-line text below describes the earlier state, not a prohibition against the later explicit request. Do not change historical FAIL verdicts or merge to main without instructions.
+
 This repository contains several historical research lanes. Do not infer the current task from the oldest or largest directory.
 
 **Current 2026-10-25 branch-scoped handoff:** [Mirror scaling, attention, and pretrained-MLP distillation — integrated evidence and stop line](docs/phase2/RESEARCH_HANDOFF_2026-10-25_MIRROR_SCALING_AND_DISTILLATION_JA.md). MA-1178 is complete with 180 student runs; Mirror-specific generalization gates remain FAIL. Current user instruction is documentation/repository sync only: **do not start a new training run, allocate a new MA ID, or change historical results without an explicit follow-up request.** This note updates the orientation for this research branch, not the historical canonical backlog or `main`.
