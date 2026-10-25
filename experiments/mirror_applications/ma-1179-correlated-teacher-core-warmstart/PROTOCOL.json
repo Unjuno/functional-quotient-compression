@@ -1,0 +1,87 @@
+{
+  "id": "MA-1179",
+  "date": "2026-10-25",
+  "status": "PRE_REGISTERED_BEFORE_TRAINING",
+  "objective": "Test whether pooled function-only core initialization helps Householder Mirror distill independently pretrained correlated ordinary MLP functions, beyond matched FiLM and rank-one codes.",
+  "worlds": {
+    "mirror_positive": "One independently pretrained common ordinary tanh 4->16->4 MLP, three dense teacher MLPs formed by algebraically exact Householder transformations (positive control only).",
+    "correlated_independent": "Three ordinary tanh 4->16->4 MLPs trained from independent random initializations on targets 0.75*common_analytic(x, seed)+0.25*task_analytic(x,seed,rule). No shared or copied trained teacher weights.",
+    "unrelated_independent": "Three ordinary tanh 4->16->4 MLPs trained from independent random initializations on distinct task_analytic(x,seed,rule)."
+  },
+  "teacher": {
+    "model": "Ordinary 4->16->4 tanh MLP (148 parameters); common model plus 3 correlated and 3 unrelated per seed; 7*5=35 distinct trained teacher models",
+    "source_functions": "Deterministic random 12-unit tanh-plus-sine analytic function, seeded separately by task; teacher supervision only, no teacher weights to students",
+    "optimizer": "AdamW(lr=0.012, weight_decay=0.0001), clip_norm=1, CPU FP32, torch_num_threads=1",
+    "steps": 700,
+    "batch": 128,
+    "train_examples": 3072,
+    "dev_examples": 768,
+    "dev_checkpoint_steps": [
+      350,
+      700
+    ]
+  },
+  "student": {
+    "input_dim": 4,
+    "output_dim": 4,
+    "rules": 3,
+    "hidden": 16,
+    "arms": [
+      "mirror_cold",
+      "mirror_warm",
+      "film_cold",
+      "film_warm",
+      "rank1_cold",
+      "rank1_warm",
+      "independent_cold",
+      "shared_cold"
+    ],
+    "matching": "Mirror / FiLM / rank-one use same 148-parameter core and 3x16 rule codes = 196 floats; independent has 201 floats (3 ordinary width-7 MLPs); shared has 148 floats",
+    "mirror": "Pre-/post-tanh Householder reflection by rule code with two rank-1 O(H) operations",
+    "film": "Elementwise pre-tanh gain (1+0.85*tanh(code))",
+    "rank1": "Single rank-1 learned pre-tanh projection residual: tanh(u + 0.85*project_code(u)); no Householder post-transform",
+    "warm": "250 pooled train-label distillation updates of task-blind common MLP core followed by 500 task-aware updates with identical initial task codes; no teacher weights or oracle directions copied",
+    "cold": "750 task-aware updates; same physical shared core random initialization as pre-warm core; no pooled stage",
+    "optimizer": "AdamW(lr=0.012, weight_decay=0.0001), clip_norm=1, batch=128, same indexed stream by world/seed for all arms",
+    "checkpoint_selection": "DEV normalized MSE, at cumulative update 500 and 750; warm 250 pooled + (250 or 500) conditional; cold at 500 or 750 conditional",
+    "steps_total": 750,
+    "warm_steps": 250,
+    "warm_conditional_steps": 500,
+    "train_examples": 1024,
+    "dev_examples": 384,
+    "fresh_examples": 1024,
+    "ood_examples": 1024,
+    "data_ranges": "train/dev/fresh Uniform[-1,1]^4; OOD Uniform[-1.6,1.6]^4; different deterministic PRNG streams"
+  },
+  "experimental_design": {
+    "seeds": [
+      101,
+      211,
+      307,
+      401,
+      503
+    ],
+    "worlds": 3,
+    "student_arms": 8,
+    "expected_student_checkpoints": 120,
+    "primary_world": "correlated_independent",
+    "primary_width": 16,
+    "student_information": "Only teacher outputs (x, task ID, y); no teacher weights, oracle codes, or analytic formula",
+    "fresh_seal": "Write all teacher and 120 student checkpoint SHA256 and protocol SHA256 in SEALED_TRAIN_MANIFEST.json before creating any fresh/OOD inputs; never use fresh for selection."
+  },
+  "preregistered_gates": {
+    "warmstart_optimization": "In correlated_independent, mirror_warm Fresh NMSE at least 10% below mirror_cold in >=4/5 paired seeds",
+    "mirror_specific": "In correlated_independent, mirror_warm Fresh NMSE at least 10% below BOTH film_warm and rank1_warm in >=4/5 paired seeds",
+    "deployment": "No deployment advantage claim unless Mirror wins a measured quality/serialized-byte/train+inference-wall Pareto comparison; do not infer FLOPs equality from identical updates",
+    "generalization": "Treat mirror_positive as aligned control, unrelated_independent as falsification; no natural-language/gpu/scaling claim from synthetic 4D experiments"
+  },
+  "accounting": {
+    "teacher_pretrain": "35 teacher model training costs measured, separated from student comparison but reported",
+    "warm_pretrain": "250 pooled-core updates charged to each warm strategy even if one common initialization is re-used between warm arms",
+    "examples_seen": "750*128=96000 per student, including warm; teacher separately 700*128=89600 per teacher",
+    "compute": "Report linear forward MAC/sample and training MAC proxy plus code ops separately, train CPU wall, batch1/batch128 forward us and torch.save packet bytes. Update matching is not exact FLOPs matching.",
+    "checkpoint_storage": "Large binary training artifacts may remain outside git; manifest SHA256 and regeneration scripts committed."
+  },
+  "environment": "Container CPU PyTorch 2.10.0+cpu Python 3.13.5, FP32, single torch CPU thread, no GPU; record hardware details",
+  "integrity": "Full per-seed paired results, SHA256 manifest, source tests, checkpoint replays, frozen verdicts including negative results. No changes to MA-1178/main."
+}
