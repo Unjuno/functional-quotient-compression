@@ -1,5 +1,7 @@
 # Vector Mirror Research — Functional sharing, sparse rules, and Mirror residuals
 
+**2026-10-25 branch update:** [Current Mirror research handoff (JP): five scaling axes, partial Mirror Attention, Loop, stable softmax, and MA-1178 MLP distillation](docs/phase2/RESEARCH_HANDOFF_2026-10-25_MIRROR_SCALING_AND_DISTILLATION_JA.md). On this research branch the user requested repository synchronization only; no new experiment is running as part of that request. Historical Phase II canonical summaries remain in place.
+
 **Research in progress. No quality-preserving 64x Transformer result, general LLM capacity multiplier, or general Mirror-native advantage is claimed.**
 
 ## Current organization — 2026-10-07
