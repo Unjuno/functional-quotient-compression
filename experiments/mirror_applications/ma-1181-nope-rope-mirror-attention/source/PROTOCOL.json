@@ -1,0 +1,26 @@
+{
+  "id": "MA-1181", "date": "2026-10-30", "status": "PRE_REGISTERED_BEFORE_TRAINING",
+  "objective": "Ablate RoPE vs NoPE and Query-Mirror vs residual-boundary Mirror in a shared two-pass causal Transformer; test if NoPE specifically improves Mirror's incremental benefit rather than generally changing task difficulty",
+  "notes": "Earlier MA1178-1180 MLP distillation never used RoPE; their negative results cannot be attributed to RoPE. This is new causal attention experiment, not a reanalysis.",
+  "tasks": {
+    "set_membership": "9 random content tokens; label 1 iff token3 occurs anywhere; balanced by construction; 10th token is fixed query token; order independent",
+    "last_slot": "Exactly one token3 among first 9; label 1 iff at last content slot (index8); balanced positives and negatives; 10th token is fixed query; order sensitive"
+  },
+  "models": {
+    "position": ["nope", "rope"], "arms": ["shared", "film_q", "mirror_q", "mirror_residual"],
+    "insertion": "Q-only Householder applied per recurrent pass (mirror_q); residual-stream Householder applied at each shared block boundary with inverse after block (mirror_residual); two codes for recurrent passes; film_q has two same-length per-pass conditional vectors",
+    "shared": "unmodified same-base recurrent Transformer; no per-loop codes",
+    "architecture": "1 token embedding, 1 shared transformer block repeated twice, d_model16, 1 attention head, FFN width32, SiLU, causal mask, last-token binary readout. No explicit position signal in NoPE; RoPE applied to query/key in head-dim 2D bands.",
+    "init": "same RNG seed for common backbone among all four arms at a given seed, task, position; Householder codes randomly initialized but orthonormalized in forward, optional film codes initial near identity"
+  },
+  "design": {"seeds": [101,211,307], "tasks": ["set_membership", "last_slot"], "n_train": 768, "n_dev": 256, "n_fresh": 512, "batch": 64, "steps": 350, "lr": 0.003, "adamw_wd": 0.0001, "clip_norm": 1.0, "expected_students": 48, "num_loop_passes": 2, "checkpoint_selection": [175,350], "fresh_only_after_seal": true},
+  "metrics": ["Fresh cross entropy", "Fresh accuracy", "DEV CE for checkpoint selection", "torch.save actual inference payload bytes", "measured batch64 forward us", "train wall clock", "per-model parameter count", "NoPE versus RoPE interaction relative to FiLM"],
+  "gates": {
+    "primary_screening": "In set_membership, NoPE yields an improvement in the Mirror-Q-vs-FiLM Fresh CE gap >= 0.02 nats over RoPE in >=2 of 3 paired seeds; define gap = CE(film_q)-CE(mirror_q). This is screening only.",
+    "mirror_nope_useful": "Mirror-Q beats FiLM-Q by >=0.02 CE in >=2/3 NoPE set_membership seeds; screening only.",
+    "sanity": "training and evaluation causal; all checkpoints hashes sealed before Fresh; NoPE paired same-rotation Q/K logits invariant; RoPE paired mirror can change logits when noncommuting; no claims about natural language or speed without bytes/runtime measures"
+  },
+  "hardware_contract": "CPU FP32 torch 1 thread, 2026-10-30 runtime record, clock not fixed; training steps match, FLOPs not precisely matched",
+  "limitations": "Three independent seeds and synthetic tasks, 350 updates. Findings strictly exploratory. If results differ between tasks interpret as positional-inductive-bias tradeoff. Query-only Mirror is not by itself non-absorptive across passes, only different per-loop codes can provide extra function switches.",
+  "status_update": "Never replace historical FAIL; register completed result only after tests and report are present"
+}
