@@ -1,0 +1,113 @@
+{
+  "id": "MA-1184",
+  "status": "DRAFT_NOT_PREREGISTERED",
+  "date": "2026-10-31",
+  "experiment_family": "non-Mirror-trained teacher functional-orbit fit",
+  "goal": "Identify out-of-sample function classes where tiny Householder view codes meaningfully reuse one shared nonlinear core; separate feasibility from optimization and deployment",
+  "not_in_scope": [
+    "MoE",
+    "Transformer Loop",
+    "natural-language benchmark",
+    "Private residual training",
+    "unseen task data used for selection"
+  ],
+  "teacher_generation": {
+    "primary_worlds": [
+      "related_independently_pretrained",
+      "partly_related_independently_pretrained",
+      "unrelated_independently_pretrained"
+    ],
+    "positive_control": "separate intentionally Householder-aligned teacher; excluded from primary hypothesis",
+    "function_labels": "Analytic target functions with task-related base and independently drawn perturbations; independently initialized ordinary dense MLP teachers fitted from labels; no Householder or Mirror construction",
+    "no_leakage": [
+      "teacher weights not given to student",
+      "target task generation coefficients not given to student",
+      "new task identities and function-generation seeds sealed for confirmation"
+    ]
+  },
+  "candidate_model": {
+    "input_dim": 8,
+    "hidden_dim": 16,
+    "output_dim": 3,
+    "K": 3,
+    "activation": [
+      "ReLU",
+      "SiLU"
+    ],
+    "Mirror": "Q_m=I-2u_m u_m^T with ||u_m||=1; f_m(x)=B Q_m^T sigma(Q_m(Ax+b))+c",
+    "shared_core_scalars": 195,
+    "householder_scalars_per_view": 16,
+    "total_mirror_scalars": 243,
+    "view_selector": "external task ID available identically to all arms; cost and metadata counted"
+  },
+  "controls": [
+    "shared-only",
+    "FiLM with 16 scalars/view",
+    "coupled-rank1 with unconstrained beta/view (strict superset of Mirror)",
+    "BatchEnsemble-style task factorization (all factors counted)",
+    "fixed/random Householder",
+    "small independent width-6 and width-7 byte-brackets",
+    "independent full-width upper bound (not comparable byte budget)"
+  ],
+  "stages": {
+    "L0": {
+      "purpose": "separate pilot tasks and calibration; no Fresh/OOD",
+      "requirements": [
+        "nonfinite:0",
+        "test activation-scale and condition-code gradients on genuine input distribution",
+        "verify teacher trained independently, no Mirror-derived primary tasks",
+        "verify minimum non-saturated baseline; absolute loss-gain thresholds achievable; otherwise stop before freeze",
+        "verify sample/task identity disjointness"
+      ]
+    },
+    "L1": {
+      "purpose": "fit task code against frozen shared core and estimate allowed functional approximation in DEV-only worlds",
+      "measure": [
+        "macro NMSE",
+        "per-task tail NMSE",
+        "marginal gain over shared-only",
+        "coupled-rank1 oracle finite-budget dominance check",
+        "view-swap effects",
+        "Jacobian/activation-mask changes",
+        "real bytes and train/inference cost"
+      ],
+      "required_dev_families_min": 5
+    },
+    "L2": {
+      "purpose": "only after freeze, confirm independently generated task identities and function families",
+      "required_new_task_families_min": 10,
+      "holdout": "No hidden target task generation coefficients, teacher weights, or Fresh targets used to choose hyperparameters",
+      "note": "No L2 without a frozen protocol and preflight passed"
+    }
+  },
+  "candidate_decision_policy": {
+    "quality": "Report paired log-NMSE ratios Mirror/FiLM and Mirror/coupled-rank1, including joint-training and frozen-core fitting as different evidence lanes",
+    "classification": "The trained Mirror may win from better inductive bias even though coupled-rank1 strictly includes it; do not claim representational strict superset",
+    "pilot": "Require baseline to be above a fixed non-saturation floor to avoid impossible absolute improvement tests; final floor/threshold to be preregistered before training",
+    "progression": "If all new non-Mirror teacher families give no competitive functional-orbit fit vs simpler controls, stop before expensive joint training; positive control does not override this gate",
+    "status_labels": [
+      "UNTESTED",
+      "SCREENING",
+      "PROMISING",
+      "FAIL"
+    ]
+  },
+  "metrics_and_uncertainty": {
+    "primary": "paired per-task Fresh macro NMSE on new task identities, selected without Fresh",
+    "other": [
+      "OOD macro NMSE",
+      "worst task NMSE",
+      "torch.save bytes",
+      "gradient steps and total operations",
+      "forward median/IQR and training-wall across seeds"
+    ],
+    "sample_minimum": "DEV >=5 independent task-family seeds; confirm >=10 new task-family seeds",
+    "error_u_c": "s(log(Mirror/control paired NMSE))/sqrt(n), report n and distribution; no normal-theory 95% claim at n=5",
+    "coverage": "Teacher task families, input distribution and normalization must be fixed before freeze"
+  },
+  "next_stage": "Separate experiment ID only after L2: shared-Mirror+private rank [0,1,2,4] vs matched FiLM+private/coupled-rank1+private; no private capacity free.",
+  "dependencies": [
+    "experiments/mirror_applications/EXPERIMENT_CONTRACT.md",
+    "docs/phase2/MIRROR_GEOMETRIC_ORBIT_AND_PRIVATE_NEXT_STEPS_2026-10-30_JA.md"
+  ]
+}
