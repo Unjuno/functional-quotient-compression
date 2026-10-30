@@ -86,3 +86,13 @@
 - Householderはcoupled-rank1に厳密に含まれる点を全候補で維持。
 - MA-1182の不可能な判定閾値を明記し、同種の設計ミスを防ぐ。
 - Repoの次候補に新しいMA IDは予約していない。正式にプロトコルを凍結する直前にlive registryから採番する。
+
+## 2026-10-31 update — MA-1184の正式な研究候補登録
+
+この文書の2026-10-30時点での「MA IDは未採番」という記述は**当日の歴史的記録**。2026-10-31に現在の研究ブランチでレジストリ最大ID 1183を再確認し、次の一件だけを **[MA-1184（UNTESTED）](../../experiments/mirror_applications/ma-1184-natural-function-orbit-diagnostic/README.md)** として正式に登録した。
+
+- P0: 独立生成・独立訓練済みでHouseholder変換由来ではない教師関数の、機能空間でのMirror-orbit適合度。既知の関数構築を陽性対照から自然な関数へ一般化できるか測る。
+- P0の判定では、固定共有核の関数適合度、コード学習、核とコードの共同学習を別々に評価。FiLM、Mirrorを包含するcoupled-rank1、BatchEnsemble、独立MLPを同資源基準で比較する。
+- **P1のMirror+Privateは未採番・未訓練**。P0で教師機能の適合領域が見つかるまでは拡張しない。
+- [実験計画](../../experiments/mirror_applications/ma-1184-natural-function-orbit-diagnostic/EXPERIMENT_PLAN_JA.md)、[未凍結プロトコル](../../experiments/mirror_applications/ma-1184-natural-function-orbit-diagnostic/PROTOCOL_DRAFT.json)。本更新は実験結果でも事前登録済み学習でもない。
+- MA-1179〜1183の負の記録と探索／確証の区別を保持。mainへのマージは行わない。
