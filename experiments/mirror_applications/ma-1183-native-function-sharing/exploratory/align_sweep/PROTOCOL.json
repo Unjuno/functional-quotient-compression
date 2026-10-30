@@ -1,0 +1,23 @@
+{
+  "type": "POSTHOC_EXPLORATORY_AFTER_MA1183_FRESH",
+  "status": "SEPARATE_EXPLORATORY_REPLICATION_NOT_CONFIRMATION",
+  "version": "v1-freeze-before-sweep-train",
+  "question": "As private functional mixture weight gamma increases with exactly the same teacher kernels, random initial students and paired data, at what approximate gamma does the Mirror-vs-FiLM advantage disappear?",
+  "seed_set_new": [601,607,613,619,631],
+  "gamma_grid_fixed": [0.0,0.1,0.2,0.3,0.4,0.6,1.0],
+  "activation": "relu",
+  "arms": ["film", "mirror", "coupled", "ind_budget"],
+  "steps": 500,
+  "batch": 128,
+  "n_train": 512,
+  "n_dev": 256,
+  "n_fresh": 512,
+  "n_ood": 512,
+  "lr": 0.006,
+  "weight_decay": 0.0001,
+  "eval_every": 100,
+  "non_tuned_metrics": ["DEV", "Fresh NMSE", "OOD NMSE", "paired log Mirror/FiLM and Mirror/Coupled ratios"],
+  "randomness_control": "teacher shared matrices, all private matrices and each train/dev/fresh/ood X are held identical across gamma for each seed; batch sequence is held identical across all gamma/arms in a seed; teacher output normalization per gamma is part of target definition",
+  "fresh_policy": "Generate only after all 140 train/dev checkpoints hashed and seal manifest frozen with fresh_generated:false",
+  "interpretation": "Post-hoc exploratory because gamma sweep chosen after seeing MA-1183 210-run results. Do NOT promote to preregistered confirmation or override MA-1183 FAIL."
+}
