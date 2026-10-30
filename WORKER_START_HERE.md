@@ -1,5 +1,11 @@
 # Worker Start Here — Mirror Application Program
 
+**2026-10-31 branch-scoped current handoff — MA-1184 next-step candidate:**
+The user requested a repository update after reviewing MA-1183. The new current research branch is `research/ma-1184-natural-function-orbit-diagnostic-20261031`. The authoritative registry now includes **MA-1184 UNTESTED**. Its aim is to test functional Householder-orbit fit on independently generated/trained ordinary MLP teacher functions **not built with Mirror**. Read [MA-1184 README](experiments/mirror_applications/ma-1184-natural-function-orbit-diagnostic/README.md), [the Japanese experiment plan](experiments/mirror_applications/ma-1184-natural-function-orbit-diagnostic/EXPERIMENT_PLAN_JA.md), and [draft, UNFROZEN protocol](experiments/mirror_applications/ma-1184-natural-function-orbit-diagnostic/PROTOCOL_DRAFT.json). **No training is authorized or claimed by this documentation-only update**; before an actual trial, freeze and hash full teacher-generation code, world/task IDs, baseline anti-saturation pilot decision, all controls, and a complete `PROTOCOL.json`. Do not reuse MA-1183 exploratory gamma thresholds as confirmatory evidence. Do not allocate P1 Mirror+Private yet; that requires P0 evidence and a new live registry allocation. MA-1179 through MA-1183 remain FAIL. No main merge.
+
+**Historical instruction precedence:** older below entries describe past branch-scoped stopping points and should not override the latest explicit user request or the current UNTESTED MA-1184 candidate.
+
+
 **2026-10-25 follow-up on this research branch:** The user explicitly resumed experiments after the earlier documentation-only stop line. MA-1179 (independently pretrained correlated-MLP warm-start, FAIL) and MA-1180 (Householder optimizer geometry, FAIL) are complete on branch `research/ma-1180-mirror-optimizer-geometry-20261025`; read [the branch-scoped follow-up handoff](docs/phase2/RESEARCH_HANDOFF_2026-10-25_MLP_OPTIMIZER_FOLLOWUP_JA.md) first. The prior stop-line text below describes the earlier state, not a prohibition against the later explicit request. Do not change historical FAIL verdicts or merge to main without instructions.
 
 This repository contains several historical research lanes. Do not infer the current task from the oldest or largest directory.
