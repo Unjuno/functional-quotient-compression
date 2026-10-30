@@ -1,0 +1,54 @@
+{
+  "id": "MA-1182",
+  "date": "2026-10-30",
+  "research_question": "Does learned Householder mirror activation of a NoPE semantic head improve a RoPE/NoPE hybrid recurrent attention block over comparable FiLM and coupled rank-one controls, while retaining positional competence?",
+  "design_status": "PRE_REGISTERED_BEFORE_TRAINING",
+  "predecessor": "MA-1181",
+  "model": {
+    "width": 32,
+    "heads": 2,
+    "head_width": 16,
+    "ff_width": 64,
+    "recurrence": 2,
+    "train_sequence_content_length": 10,
+    "ood_content_length": 14,
+    "vocab": 13,
+    "positions": ["rope", "nope", "hybrid"],
+    "arms": ["shared", "film", "mirror", "coupled_rank1", "fixed_mirror"],
+    "position_semantics": "head0 RoPE/head1 RoPE for rope; both NoPE for nope; head0 RoPE/head1 NoPE for hybrid",
+    "insertion": "Only the head1 VALUE vector receives an activation gate per recurrent step. Shared uses silu(v); Mirror uses H silu(H v), same shared weights, two learned H codes. FiLM uses silu(v*(1+0.8*tanh(gamma))), two gamma vectors. Coupled_rank1 uses S silu(S v) with S=I+beta*uu^T, beta learnable initialized -2, strictly contains Mirror when beta=-2, two code vectors and two beta scalars. Fixed_mirror uses two fixed seeded H vectors stored and included in packet.",
+    "head_ff": "Both heads use shared causal self-attention weights across passes, pre-norm, a residual projection, and shared SiLU FFN; only head1's gated value differs by arm.",
+    "initialization": "Identical learned embedding, backbone, readout initialization across all arms and positions within seed; mirror/fixed/coupled_rank1 use equal initial code directions and matched beta=-2; FiLM gamma initialized zero. Record initial activation and function change on actual train input; no tuning after results."
+  },
+  "tasks": {
+    "set_membership": "10 key/value content tokens; query key at last token; balanced yes iff a token with query key occurs; ignores ordering",
+    "last_value": "10 key/value content tokens; query fixed special token; balanced label equals bit at last content position; requires positional selection but not query-key matching",
+    "last_matching_key": "10 key/value content tokens; query key at last token; at least 2 occurrences of query key with opposing bits; balanced label is bit of latest occurrence. Requires key match and relative recency."
+  },
+  "design": {
+    "seeds": [101, 211, 307],
+    "n_train": 3072,
+    "n_dev": 640,
+    "n_fresh": 1280,
+    "n_ood": 1280,
+    "batch_size": 64,
+    "steps": 450,
+    "lr": 0.003,
+    "weight_decay": 0.0001,
+    "grad_clip": 1.0,
+    "checkpoints": [225, 450],
+    "total_models": 135,
+    "freeze_manifest_before_fresh": true,
+    "main_task": "last_matching_key",
+    "primary_pos": "hybrid",
+    "primary_arm": "mirror",
+    "note": "No hyperparameter selection across arms after looking at fresh; checkpoint by each arm DEV CE only. Fresh and OOD strictly generated after checkpoint hashes sealed. OOD uses 14 content tokens and differing split seed."
+  },
+  "decision": {
+    "primary": "At least 2/3 paired seeds: Fresh CE hybrid/mirror <= min(hybrid/film CE, hybrid/coupled_rank1 CE)-0.02 on last_matching_key. Also no negative positional control >0.02 CE versus hybrid/film on last_value.",
+    "interaction_diagnostic": "Within last_matching_key compute delta=(CE_hybrid_film-CE_hybrid_mirror) - (CE_rope_film-CE_rope_mirror) per matched seed. Report paired values and sign, not a separate causal proof.",
+    "resource_gate": "Even if quality passes, usefulness additionally requires a Pareto comparison of torch.save bytes, batch64 forward time and training time against non-Mirror controls; no claimed speedups from parameter counts alone.",
+    "stopping": "No extension or retraining based on Fresh; preserve failure and do not create new seeds to chase gains."
+  },
+  "limitations": "Tiny synthetic Transformer, 3 seeds, 450 updates. One RoPE and one NoPE head, not a full LM. Orthogonal Householder may not help and coupled rank1 contains it; no assumption of Mirror-specific superiority. The 14-token OOD extrapolation may violate learned length inductive biases; no claim about long-context LMs. Manual CPU implementation, fixed update budget is not FLOP equality."
+}
