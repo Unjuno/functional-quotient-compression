@@ -1,17 +1,29 @@
 # Mirror Application Status Board
 
-Updated: 2026-10-24 JST (MA-1178 MLP-to-Mirror distillation complete; aligned oracle exactness PASS, random-start/cross-world Mirror-specific gates FAIL)
-Canonical branch: `research/mirror-application-worker-ready-20261007`
+Updated: 2026-10-30 JST — MA-1183 first-principles function reuse and 140-model posthoc structure sweep indexed. **This board is an operational cache; the branch-scoped registry and sealed reports are authoritative.**
+Branch: `research/ma-1183-native-function-sharing-20261030`. This update does not merge into `main` and does not change any preregistered verdict.
 
-**2026-10-25 research handoff (documentation-only; no new experiment):** [Five-axis scaling / Attention-as-Fast-Weight / Mirror / Loop / MA-1178 distillation](../../docs/phase2/RESEARCH_HANDOFF_2026-10-25_MIRROR_SCALING_AND_DISTILLATION_JA.md). Existing 1,178 registry entries and all frozen PASS/FAIL verdicts are unchanged.
+## Program totals (branch-scoped, reconciled with IDEA_REGISTRY.csv)
 
-## Program totals (reconciled from authoritative 1178-row registry on this research branch)
+- Registered candidates: **1183**
+- P0: **653** (recent MA-1179–1183 research includes negative or limited findings)
+- P1: **427**
+- P2: **103**
+- Current MA statuses: **976 UNTESTED, 4 SCREENING, 54 PROMISING, 149 FAIL**
+- Completed scientific-status candidates: **203** (54 PROMISING + 149 FAIL). These labels do not imply 203 independent confirmation studies.
 
-- Registered candidates: **1178**
-- P0: **648** (180 completed; 464 UNTESTED; 4 SCREENING)
-- P1: **427** (18 completed; 409 UNTESTED)
-- P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **976 UNTESTED, 4 SCREENING, 54 PROMISING, 144 FAIL**
+## 2026-10-30 primary research updates
+
+- **MA-1183 — FAIL (0/5, preregistered primary):** 210 models of shared nonlinear ReLU/SiLU functions. In a deliberately Householder-generated positive-control world Mirror beats FiLM and near-budget independent MLP but not encompassing coupled rank1; at 35% independent-function coefficient mixing the gain vanishes. Additional 140-model gamma sweep is **posthoc exploration**, not confirmatory; the Mirror/FiLM geometric mean error ratio is 0.7629 at gamma=.1, 0.9412 at gamma=.2, 1.1267 at gamma=.3. [Report](ma-1183-native-function-sharing/REPORT_JA.md), [verified 210-model results](ma-1183-native-function-sharing/results/VERIFICATION.json), [exploratory sweep](ma-1183-native-function-sharing/exploratory/align_sweep/EXPLORATORY_REPORT_JA.md).
+- **MA-1182 — FAIL (0/3, non-discriminating gate):** Hybrid RoPE+NoPE Value-Mirror, 135 models. Fresh matching-key task reached CE approx 0.00022 for FiLM so the predeclared 0.02-nat improvement gate was **unachievable**. Longer-context OOD position detection favored full RoPE over Hybrid Mirror. [Report](ma-1182-hybrid-rope-nope-mirror-loop/REPORT_JA.md).
+- **MA-1181 — FAIL (0/3):** NoPE vs RoPE Mirror placement, 48 models; order-free Fresh classification saturated, position-sensitive task favored RoPE. [Report](ma-1181-nope-rope-mirror-attention/REPORT_JA.md).
+- **MA-1180 — FAIL:** Constraint-aware Householder direction optimization reduced radial drift without robust correlated-teacher Fresh quality gains vs FiLM. 120 models. [Report](ma-1180-mirror-optimizer-geometry/REPORT_JA.md).
+- **MA-1179 — FAIL:** Distillation into related pretrained MLP teachers; pooled core warm-start not reliably superior, Mirror-aligned positive-control separate. 120 students. [Report](ma-1179-correlated-teacher-core-warmstart/REPORT_JA.md).
+
+**Next interpretation checkpoint:** No Mirror-specific performance/storage/runtime Pareto advantage is established by MA-1179–1183. The useful falsifiable hypothesis is whether geometric sharing works for the shared component of partially related functions while a separately budgeted private residual handles the remainder. Compare to full FiLM+private, encompassing coupled-rank1+private, small independent experts, and shared-only; prevent near-zero baseline errors from making a preregistered threshold unreachable.
+
+## Earlier historical experiments and research intakes (preserved below)
+
 - **2026-10-24 MA-1178:** Function-only distillation of 20 pretrained ordinary MLP teachers into 3 logical task functions with one physically shared Householder-Mirror core: 180 synthetic CPU student models, 180/180 SHA256 checkpoint/fresh/OOD replay PASS, 7 mechanism source tests PASS. Householder-aligned 444-scalar teacher triplet has exact shared 196-scalar Mirror oracle FP32 NMSE max 4.72e-14 (mechanism PASS); random H8 aligned student beats equal-budget FiLM and near-budget independent models in 5/5 pairs at >=10%, but primary H16 absolute distillation gate 2/5, Mirror-specific 3/5, cross-world Mirror vs FiLM 3/15 all FAIL. FiLM/independent teacher functions instead favor FiLM/native models; Mirror CPU slower. Posthoc 40 pretrained-core transfer models remain exploratory. No natural-language/Attention or general Mirror dominance claim. [Report](ma-1178-mlp-mirror-distillation/REPORT_JA.md).
 - **2026-10-24 MA-1177:** Barron et al. stable Softmax/Cross-Entropy fix tested in Mirror virtual Attention, with equal-size FiLM and independent-head controls: 72 hard-classification + 48 exact-teacher-copy distillation =120 CPU-trained/checkpoint-hash sealed models, all 120 replay, 8 tests, two full bitwise retrains PASS. FP32/BF16 high-confidence target-gradient fixes PASS. Fixed CE did not improve Mirror high-score Fresh classification by >=5% in any of 6 pairs; relative Mirror improvement over same-size FiLM 0/6 (both FAIL). Corrected soft CE prevents spurious exact-copy Mirror drift in 6/6 cases, but FiLM also benefits (generic numerical accuracy, not Mirror-specific). Additional 48 DEV-only near-copy checks labeled POSTHOC, no Fresh selection. No real Grokking/LM/GPU evidence. [Report](ma-1177-softmaxfix-mirror-attention/REPORT_JA.md).
 - **2026-10-24 MA-1176:** Five-axis 4D three-rule diagnostic, 189 train/checkpoint-hash-sealed CPU models, 11 tests PASS; Loop T3 improves vs T1 in 3/3 but static native one-pass outperforms loop T3 median, one-step distillation gate 1/3 FAIL; Mirror vs exact 88-scalar FiLM only 2/6 >=5% paired wins FAIL, independent teacher worse; oracle-only data cleanup 6/6 for both models (non-deployable sanity check); 4 candidate dev-selected architecture/seed search 3/6 vs equal-update FiLM continue-training FAIL. No natural-language, causal attention, new power-law, or Pareto dominance. [Report](ma-1176-five-axis-scaling/REPORT_JA.md).
@@ -99,7 +111,7 @@ KG relation rotations (RotatE, TuckER, QuatE, PairRE), EXIF/device-aware ISPs (P
 
 ## Concurrency and truth policy
 
-- The **1165-row** `IDEA_REGISTRY.csv` is authoritative for status and candidate identity. Do not merge or overwrite it with an older 254-row experiment checkout.
+- The branch-current `IDEA_REGISTRY.csv` is authoritative for status and candidate identity (1,183 candidates as of 2026-10-30); historical snapshots may show smaller counts. Do not merge or overwrite it with an older 254-row experiment checkout.
 - `CLAIM_LEDGER.csv` and each experiment's `VERIFICATION.json` are the evidence index; `STATUS_BOARD.md` is an operational cache.
 - Before allocating an ID or starting work, re-read the live registry and search for experiment branches.
 - Preserve old branches, failed results, exploratory data and locked protocols. No automatic merge to main.
