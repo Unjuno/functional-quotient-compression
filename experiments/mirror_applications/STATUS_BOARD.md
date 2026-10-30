@@ -1,16 +1,21 @@
 # Mirror Application Status Board
 
-Updated: 2026-10-30 JST — MA-1183 first-principles function reuse and 140-model posthoc structure sweep indexed. **This board is an operational cache; the branch-scoped registry and sealed reports are authoritative.**
-Branch: `research/ma-1183-native-function-sharing-20261030`. This update does not merge into `main` and does not change any preregistered verdict.
+Updated: 2026-10-31 JST — MA-1184 natural-function Mirror-orbit diagnostic registered as UNTESTED; MA-1183 historical FAIL retained. **This board is an operational cache; the branch-scoped registry and sealed reports are authoritative.**
+Branch: `research/ma-1184-natural-function-orbit-diagnostic-20261031`. This update does not merge into `main` and does not change any preregistered verdict.
 
 ## Program totals (branch-scoped, reconciled with IDEA_REGISTRY.csv)
 
-- Registered candidates: **1183**
-- P0: **653** (recent MA-1179–1183 research includes negative or limited findings)
+- Registered candidates: **1184**
+- P0: **654** (recent MA-1179–1183 research includes negative or limited findings)
 - P1: **427**
 - P2: **103**
-- Current MA statuses: **976 UNTESTED, 4 SCREENING, 54 PROMISING, 149 FAIL**
+- Current MA statuses: **977 UNTESTED, 4 SCREENING, 54 PROMISING, 149 FAIL**
 - Completed scientific-status candidates: **203** (54 PROMISING + 149 FAIL). These labels do not imply 203 independent confirmation studies.
+
+## 2026-10-31 next candidate (not yet executed)
+
+- **MA-1184 — UNTESTED, P0:** Before trying Mirror+Private or more Loop/MoE variants, measure the **functional Householder-orbit compatibility of independently generated and independently pretrained ordinary MLP task-functions**, with no Mirror-based construction in the primary worlds. Separate fixed-core orbit-fit, code-only training and joint learning; compare shared-only, matched FiLM, enclosing coupled-rank1, BatchEnsemble, fixed Mirror and near-byte independent student controls. [README](ma-1184-natural-function-orbit-diagnostic/README.md), [experiment plan](ma-1184-natural-function-orbit-diagnostic/EXPERIMENT_PLAN_JA.md), [draft protocol (NOT frozen)](ma-1184-natural-function-orbit-diagnostic/PROTOCOL_DRAFT.json). **No training or new performance claim.** Halt if an independent pilot shows saturated tasks, impossible decision thresholds or function-identity leakage.
+- **P1 successor is not yet allocated an MA ID:** Mirror+small Private residual, only if P0 shows nontrivial shared-function fit on non-Mirror-generated teachers; matched FiLM+Private and coupled-rank1+Private are compulsory controls. Preserve every negative result.
 
 ## 2026-10-30 primary research updates
 
