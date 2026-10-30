@@ -69,7 +69,7 @@ f_m(x)=B Q_m^{\top}\sigma\!\left(Q_m(Ax+b)\right)+c
 
 **D** — 本書は未凍結の研究計画であり、確認検定の効果量・精度基準は、L0でベースライン分布を観測した後、**L2を見ずに**確定する。候補として、関連世界でMirror/FiLM Fresh NMSEの対応幾何平均比≤0.90、強いcoupled-rank1にも同品質の学習効率または実bytes/時間Pareto利益、さらに無関連では誤った適合判定を出さないことを要求する。独立教師に対する単なる「近似できた」はMirror固有のPASSではない。L1/L2で目的が異なる場合は、それぞれ別ゲート。
 
-**C** — (i) 関数群がHausdorff/Householder orbitに属さない、(ii) 結合rank1・FiLM・BatchEnsembleがより低費用、(iii) 共有核の探索が難しい、(iv) 近似が弱くても小さなPrivate項で大半の問題が解ける、(v) 活性化・出力スケールが診断を歪める。特に結合rank1はMirrorの厳密上位族である。
+**C** — (i) 関数群がHouseholder orbitに属さない、(ii) 結合rank1・FiLM・BatchEnsembleがより低費用、(iii) 共有核の探索が難しい、(iv) 近似が弱くても小さなPrivate項で大半の問題が解ける、(v) 活性化・出力スケールが診断を歪める。特に結合rank1はMirrorの厳密上位族である。
 
 **U** — 教師生成過程、モデル未同定性、初期値・活性化スケール、タスク世界seed、最適化停滞、長さ/分布OOD、torch.saveメタデータ、CPU/GPUカーネル、非線形演算費用。対応log比の誤差とタスク世界の外挿区間を別途報告する。
 
