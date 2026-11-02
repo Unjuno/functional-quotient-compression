@@ -1,0 +1,8 @@
+{
+  "amendment": 3,
+  "recorded_before_timed_development_replay": true,
+  "reason": "Frozen metrics require atomic exact accuracy and isolated evaluation timing, but the prior corrected development report only retained composition accuracy, optimizer updates and fit wall time.",
+  "change": "Recompute atomic exact accuracy for each learned executor, benchmark selected held-out composition evaluation time, add inference MAC proxy and per-method total time. No weights, splits, optimization, settings, gates or fresh policy change.",
+  "preservation": "The corrected untimed development payloads and metrics are retained under results/pre_amendment_3/ for exact numeric comparison.",
+  "fresh_worlds_opened": false
+}

@@ -1,0 +1,22 @@
+{
+  "experiment_id": "MA-540",
+  "selection_rule": "maximize mean heldout ordered-pair exact accuracy of FV tied executor across both dev seeds",
+  "candidate_dev_accuracy_by_setting": {
+    "800:0.001": 0.11051136363636363,
+    "800:0.003": 0.5278409090909091,
+    "1600:0.001": 0.23125,
+    "1600:0.003": 0.9857954545454546
+  },
+  "selected_setting": {
+    "updates": 1600,
+    "learning_rate": 0.003
+  },
+  "meets_0_99_on_each_dev_seed": false,
+  "fresh_seeds": [
+    54011,
+    54012,
+    54013
+  ],
+  "fresh_opened": false,
+  "reason": "Selected candidate misses 0.99 in dev world 54001 and exactly aliases native operator-ID/external two-call controls; Mirror-specific attribution gate fails."
+}

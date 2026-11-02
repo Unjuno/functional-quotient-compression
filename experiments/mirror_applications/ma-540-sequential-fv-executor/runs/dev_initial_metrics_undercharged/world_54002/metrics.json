@@ -1,0 +1,174 @@
+{
+  "experiment_id": "MA-540",
+  "heldout_pair_list": [
+    [
+      0,
+      1
+    ],
+    [
+      1,
+      0
+    ],
+    [
+      2,
+      3
+    ],
+    [
+      3,
+      2
+    ]
+  ],
+  "rows": [
+    {
+      "active_macs_per_packet": 4608,
+      "fit_seconds": 3.227992175001418,
+      "method": "fv_tied",
+      "metrics": {
+        "atomic_exact_accuracy": 1.0,
+        "external_two_call": {
+          "exact_pair_accuracy": 1.0,
+          "examples": 64,
+          "final_token_nll": 0.0006219629431143403,
+          "intermediate_accuracy": 1.0,
+          "intermediate_valid_path_rate": 1.0
+        },
+        "heldout_pairs": {
+          "exact_pair_accuracy": 1.0,
+          "examples": 64,
+          "final_token_nll": 0.0006219629431143403,
+          "intermediate_accuracy": 1.0,
+          "intermediate_valid_path_rate": 1.0
+        },
+        "reverse_order": {
+          "exact_pair_accuracy": 1.0,
+          "examples": 32,
+          "final_token_nll": 0.0006447160267271101,
+          "intermediate_accuracy": 1.0,
+          "intermediate_valid_path_rate": 1.0
+        }
+      },
+      "payload_bytes": 27167,
+      "payload_sha256": "4c4765def28ee540065d88219cb27bb7f635cc3f898016b9000892a8813b94f6",
+      "runtime_seconds_per_packet": {
+        "external_two_call": 0.00016470350965391845,
+        "internal_unroll": 0.00019398699805606157
+      },
+      "train_examples": 160000,
+      "updates": 2500
+    },
+    {
+      "active_macs_per_packet": 4608,
+      "fit_seconds": 2.701409675006289,
+      "method": "native_tied",
+      "metrics": {
+        "atomic_exact_accuracy": 1.0,
+        "external_two_call": {
+          "exact_pair_accuracy": 1.0,
+          "examples": 64,
+          "final_token_nll": 0.0005130597273819149,
+          "intermediate_accuracy": 1.0,
+          "intermediate_valid_path_rate": 1.0
+        },
+        "heldout_pairs": {
+          "exact_pair_accuracy": 1.0,
+          "examples": 64,
+          "final_token_nll": 0.0005130597273819149,
+          "intermediate_accuracy": 1.0,
+          "intermediate_valid_path_rate": 1.0
+        },
+        "reverse_order": {
+          "exact_pair_accuracy": 1.0,
+          "examples": 32,
+          "final_token_nll": 0.0005119965644553304,
+          "intermediate_accuracy": 1.0,
+          "intermediate_valid_path_rate": 1.0
+        }
+      },
+      "payload_bytes": 23591,
+      "payload_sha256": "4ba1285e1f4c0b6efb65029f66e895228438481b40fab4d01d662e649be0db7a",
+      "runtime_seconds_per_packet": {
+        "external_two_call": 0.00011996249668300152,
+        "internal_unroll": 0.0001622099953237921
+      },
+      "train_examples": 160000,
+      "updates": 2500
+    },
+    {
+      "active_macs_per_packet": 4608,
+      "fit_seconds": 2.756003405986121,
+      "method": "fv_one_shot",
+      "metrics": {
+        "atomic_exact_accuracy": 1.0,
+        "external_two_call": null,
+        "heldout_pairs": {
+          "exact_pair_accuracy": 0.28125,
+          "examples": 64,
+          "final_token_nll": 3.941375255584717,
+          "intermediate_accuracy": null,
+          "intermediate_valid_path_rate": null
+        },
+        "reverse_order": {
+          "exact_pair_accuracy": 0.28125,
+          "examples": 32,
+          "final_token_nll": 3.9546151161193848,
+          "intermediate_accuracy": null,
+          "intermediate_valid_path_rate": null
+        }
+      },
+      "payload_bytes": 30219,
+      "payload_sha256": "d86c8491e8122e5c9c352117fe96df67b38f33217afa7f2749ccd11813a393db",
+      "runtime_seconds_per_packet": {},
+      "train_examples": 160000,
+      "updates": 2500
+    },
+    {
+      "active_macs_per_packet": 9216,
+      "fit_seconds": 3.032384707010351,
+      "method": "native_untied",
+      "metrics": {
+        "atomic_exact_accuracy": 1.0,
+        "external_two_call": null,
+        "heldout_pairs": {
+          "exact_pair_accuracy": 1.0,
+          "examples": 64,
+          "final_token_nll": 0.0006108946981839836,
+          "intermediate_accuracy": 1.0,
+          "intermediate_valid_path_rate": 1.0
+        },
+        "reverse_order": {
+          "exact_pair_accuracy": 1.0,
+          "examples": 32,
+          "final_token_nll": 0.0006555045256391168,
+          "intermediate_accuracy": 1.0,
+          "intermediate_valid_path_rate": 1.0
+        }
+      },
+      "payload_bytes": 44249,
+      "payload_sha256": "3a609ce0320cb32f5724d98473edf389578c611ebea118c0aea8f38d83d903c3",
+      "runtime_seconds_per_packet": {},
+      "train_examples": 160000,
+      "updates": 2500
+    },
+    {
+      "active_macs_per_packet": 2,
+      "fit_seconds": 0,
+      "method": "exact_operator_table_upper",
+      "metrics": {
+        "atomic_exact_accuracy": 1.0,
+        "heldout_pairs": {
+          "exact_pair_accuracy": 1.0,
+          "examples": 64,
+          "final_token_nll": 0.0,
+          "intermediate_accuracy": 1.0,
+          "intermediate_valid_path_rate": 1.0
+        }
+      },
+      "payload_bytes": 668,
+      "payload_sha256": "7176b2ff7d7ed10fed67ec87d3ace8c3afefb057bd6d44fa0cae3cebb0fae218",
+      "runtime_seconds_per_packet": {},
+      "train_examples": 0,
+      "updates": 0
+    }
+  ],
+  "world": 54002
+}

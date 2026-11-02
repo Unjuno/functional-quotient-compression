@@ -1,0 +1,189 @@
+{
+  "experiment_id": "MA-540",
+  "heldout_pair_list": [
+    [
+      0,
+      1
+    ],
+    [
+      1,
+      0
+    ],
+    [
+      2,
+      3
+    ],
+    [
+      3,
+      2
+    ]
+  ],
+  "rows": [
+    {
+      "active_macs_per_packet": 41984,
+      "external_two_call_active_macs_per_packet": 74752,
+      "fit_seconds": 3.3004212380037643,
+      "method": "fv_tied",
+      "metrics": {
+        "atomic_exact_accuracy": 1.0,
+        "external_two_call": {
+          "exact_pair_accuracy": 1.0,
+          "examples": 64,
+          "final_token_nll": 0.0006219629431143403,
+          "intermediate_accuracy": 1.0,
+          "intermediate_valid_path_rate": 1.0
+        },
+        "heldout_pairs": {
+          "exact_pair_accuracy": 1.0,
+          "examples": 64,
+          "final_token_nll": 0.0006219629431143403,
+          "intermediate_accuracy": 1.0,
+          "intermediate_valid_path_rate": 1.0
+        },
+        "reverse_order": {
+          "exact_pair_accuracy": 1.0,
+          "examples": 32,
+          "final_token_nll": 0.0006447160267271101,
+          "intermediate_accuracy": 1.0,
+          "intermediate_valid_path_rate": 1.0
+        }
+      },
+      "payload_bytes": 27441,
+      "payload_sha256": "887d2434ee3f90479ffee83994df53d3f32d7ef18fad185c7e4961055d04a6cc",
+      "runtime_seconds_per_packet": {
+        "external_two_call": 0.0001677785039646551,
+        "internal_unroll": 0.0001957789936568588
+      },
+      "train_examples": 160000,
+      "training_macs_per_update": 475136,
+      "training_macs_total": 1187840000,
+      "updates": 2500
+    },
+    {
+      "active_macs_per_packet": 9216,
+      "external_two_call_active_macs_per_packet": 9216,
+      "fit_seconds": 2.7897873150068335,
+      "method": "native_tied",
+      "metrics": {
+        "atomic_exact_accuracy": 1.0,
+        "external_two_call": {
+          "exact_pair_accuracy": 1.0,
+          "examples": 64,
+          "final_token_nll": 0.0005130597273819149,
+          "intermediate_accuracy": 1.0,
+          "intermediate_valid_path_rate": 1.0
+        },
+        "heldout_pairs": {
+          "exact_pair_accuracy": 1.0,
+          "examples": 64,
+          "final_token_nll": 0.0005130597273819149,
+          "intermediate_accuracy": 1.0,
+          "intermediate_valid_path_rate": 1.0
+        },
+        "reverse_order": {
+          "exact_pair_accuracy": 1.0,
+          "examples": 32,
+          "final_token_nll": 0.0005119965644553304,
+          "intermediate_accuracy": 1.0,
+          "intermediate_valid_path_rate": 1.0
+        }
+      },
+      "payload_bytes": 23865,
+      "payload_sha256": "ee67a00fe220f6e812fb67551551225a760d673fdade3f3edaad3c615398767d",
+      "runtime_seconds_per_packet": {
+        "external_two_call": 0.00010785450285766274,
+        "internal_unroll": 0.00013135401241015643
+      },
+      "train_examples": 160000,
+      "training_macs_per_update": 442368,
+      "training_macs_total": 1105920000,
+      "updates": 2500
+    },
+    {
+      "active_macs_per_packet": 38144,
+      "external_two_call_active_macs_per_packet": null,
+      "fit_seconds": 2.601813924993621,
+      "method": "fv_one_shot",
+      "metrics": {
+        "atomic_exact_accuracy": 1.0,
+        "external_two_call": null,
+        "heldout_pairs": {
+          "exact_pair_accuracy": 0.28125,
+          "examples": 64,
+          "final_token_nll": 3.941375255584717,
+          "intermediate_accuracy": null,
+          "intermediate_valid_path_rate": null
+        },
+        "reverse_order": {
+          "exact_pair_accuracy": 0.28125,
+          "examples": 32,
+          "final_token_nll": 3.9546151161193848,
+          "intermediate_accuracy": null,
+          "intermediate_valid_path_rate": null
+        }
+      },
+      "payload_bytes": 30493,
+      "payload_sha256": "f8a0f7a199eafbc22174107cec31247571a0f28f9093d5601dcf9802bcf36a67",
+      "runtime_seconds_per_packet": {},
+      "train_examples": 160000,
+      "training_macs_per_update": 376832,
+      "training_macs_total": 942080000,
+      "updates": 2500
+    },
+    {
+      "active_macs_per_packet": 9216,
+      "external_two_call_active_macs_per_packet": null,
+      "fit_seconds": 2.955857137014391,
+      "method": "native_untied",
+      "metrics": {
+        "atomic_exact_accuracy": 1.0,
+        "external_two_call": null,
+        "heldout_pairs": {
+          "exact_pair_accuracy": 1.0,
+          "examples": 64,
+          "final_token_nll": 0.0006108946981839836,
+          "intermediate_accuracy": 1.0,
+          "intermediate_valid_path_rate": 1.0
+        },
+        "reverse_order": {
+          "exact_pair_accuracy": 1.0,
+          "examples": 32,
+          "final_token_nll": 0.0006555045256391168,
+          "intermediate_accuracy": 1.0,
+          "intermediate_valid_path_rate": 1.0
+        }
+      },
+      "payload_bytes": 44523,
+      "payload_sha256": "d2bb1d240e18fd68db36eba83fbe4504e43b4e71828a9741badb23de4f485278",
+      "runtime_seconds_per_packet": {},
+      "train_examples": 160000,
+      "training_macs_per_update": 442368,
+      "training_macs_total": 1105920000,
+      "updates": 2500
+    },
+    {
+      "active_macs_per_packet": 2,
+      "external_two_call_active_macs_per_packet": null,
+      "fit_seconds": 0,
+      "method": "exact_operator_table_upper",
+      "metrics": {
+        "atomic_exact_accuracy": 1.0,
+        "heldout_pairs": {
+          "exact_pair_accuracy": 1.0,
+          "examples": 64,
+          "final_token_nll": 0.0,
+          "intermediate_accuracy": 1.0,
+          "intermediate_valid_path_rate": 1.0
+        }
+      },
+      "payload_bytes": 668,
+      "payload_sha256": "7176b2ff7d7ed10fed67ec87d3ace8c3afefb057bd6d44fa0cae3cebb0fae218",
+      "runtime_seconds_per_packet": {},
+      "train_examples": 0,
+      "training_macs_per_update": 0,
+      "training_macs_total": 0,
+      "updates": 0
+    }
+  ],
+  "world": 54002
+}

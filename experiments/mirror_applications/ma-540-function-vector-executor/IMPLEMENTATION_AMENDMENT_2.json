@@ -1,0 +1,9 @@
+{
+  "amendment": 2,
+  "recorded_before_corrected_development_replay": true,
+  "reason": "Source audit found that the first untied control duplicated the tied checkpoint tensors. This measured duplicated storage but did not instantiate independently learned step-specific blocks as required by the frozen protocol.",
+  "change": "Train two independent StepNet instances from distinct deterministic initialization seeds on the same atomic data minibatch stream; use the first for step one and the second for step two. Candidate, native, untied, and endpoint conditions use paired deterministic minibatch indices within each setting. Charge both untied state dictionaries and both training costs.",
+  "preservation": "All pre-amendment development files and metrics are retained under results/pre_amendment_2/ and are excluded from final gate selection.",
+  "scope": "This strengthens one native control only. FV/native controls, data splits, candidates, selection rule, thresholds and fresh policy are unchanged.",
+  "fresh_worlds_opened": false
+}
