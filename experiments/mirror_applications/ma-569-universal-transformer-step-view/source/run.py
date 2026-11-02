@@ -37,7 +37,7 @@ def run(seed,split,root):
   errs=[];ms=[];ops=[]
   for t in HELD:
    pred=methods[t][m];target=Y[t];errs.append(np.sqrt(np.mean((pred-target)**2)/(np.mean(target*target)+1e-20)))
-   ops.append(256*D*D*(1+t)+ (256*4 if m in ('mirror','direct_time','static_lora') else 0))
+   ops.append(256*D*D*(2+t)+ (256*4 if m in ('mirror','direct_time','static_lora') else 0))
   # Full forward includes recurrent transitions and output projection; averaged over heldout step counts.
   def fn():
    acc=[]
