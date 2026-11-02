@@ -1,0 +1,40 @@
+{
+  "experiment_id": "MA-546",
+  "commit": "2ced0e1b346568dc1b9f2086ef2c27607390c016",
+  "tests": {
+    "command": "PYTHONPATH=/tmp/ma534-python-deps python -m pytest -q experiments/mirror_applications/ma-546-representation-symmetry/tests",
+    "passed": 4,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "actual_npz_byte_sizes": true,
+    "all_five_worlds_checked": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0,
+    "arrays_exact": true,
+    "split_manifest_exact": true,
+    "wall_clock_excluded": true,
+    "replayed_seed": 54601
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_accessed": true,
+  "fresh_seeds_completed": [
+    54611,
+    54612,
+    54613
+  ],
+  "protocol_hash_matches_freeze": true,
+  "notes": [
+    "Corrected dev gates pass in both seeds and all three fresh seeds.",
+    "16 monomial views and one dense Hadamard view have compensated local delta <=2.99e-6, full-model top1 100%, max KL <=7.91e-6.",
+    "Uncompensated control changes outputs: fresh mean KL .88\u20132.18, top-1 agreement .023\u2013.805.",
+    "Actual code payloads: 231,772 B monomial bank, 15,268 B dense address, plus 168,144,624 B shared model.",
+    "The 16 view addresses are function-equivalent gauge choices, not additional capacity.",
+    "Corrected dev seed 54601 exact replay matched all non-timing artifacts.",
+    "Initial pre-amendment run and protocol amendment are preserved."
+  ]
+}

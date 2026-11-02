@@ -1,0 +1,66 @@
+{
+  "compute": {
+    "baseline_forward_seconds": 0.4552046660101041,
+    "dense_activation_macs_proxy": 6777995264,
+    "dense_full_forward_seconds": 0.5473031799774617,
+    "dense_local_transform_projection_seconds": 0.00739754200913012,
+    "dense_weight_compensation_seconds": 0.011853998992592096,
+    "dense_weight_transform_macs_proxy": 4294967296,
+    "monomial_activation_element_ops_proxy": 52953088,
+    "monomial_full_forward_seconds": 0.43560883597820066,
+    "monomial_local_projection_16_views_seconds": 0.07192591202328913,
+    "uncompensated_full_forward_seconds": 0.4552569600054994
+  },
+  "dimensions": {
+    "mlp_expansion": 2048,
+    "residual": 512
+  },
+  "experiment_id": "MA-546",
+  "functional_metrics": {
+    "compensated_dense_full_model": {
+      "max_abs_logit_delta": 0.0081787109375,
+      "max_kl_from_base": 2.7285459509585053e-06,
+      "mean_abs_logit_delta": 0.0007880612392909825,
+      "mean_kl_from_base": 1.3558054945406184e-07,
+      "top1_agreement": 1.0
+    },
+    "compensated_dense_local_max_abs": 2.9802322387695312e-06,
+    "compensated_monomial_full_model": {
+      "max_abs_logit_delta": 0.0101318359375,
+      "max_kl_from_base": 1.9743201846722513e-06,
+      "mean_abs_logit_delta": 0.0007603596313856542,
+      "mean_kl_from_base": 1.5348827275829535e-07,
+      "top1_agreement": 1.0
+    },
+    "compensated_monomial_local_max_abs": 2.3245811462402344e-06,
+    "uncompensated_monomial_full_model": {
+      "max_abs_logit_delta": 16.50341796875,
+      "max_kl_from_base": 1.9580320119857788,
+      "mean_abs_logit_delta": 6.050014019012451,
+      "mean_kl_from_base": 0.8800405859947205,
+      "top1_agreement": 0.8046875
+    }
+  },
+  "gates": {
+    "full_model_distribution_equivalent": true,
+    "local_projection_delta_within_1e-5": true,
+    "uncompensated_changes_logits": true
+  },
+  "input_tokens": 808,
+  "model_sha256": "3da388330e4549156d76b58d6d268c63cd005e9336b4f4d2d378421e7b7a33fd",
+  "prompts": 128,
+  "revision": "e93a9faa9c77e5d09219f6c868bfc7a1bd65593c",
+  "seed": 54611,
+  "serialized_bytes": {
+    "K_independent_models_upper": 2690313984,
+    "dense_complete_system": 168159892,
+    "dense_hadamard_view": 15268,
+    "monomial_complete_system": 168376396,
+    "monomial_view_bank": 231772,
+    "shared_model_files": 168144624
+  },
+  "views": {
+    "dense_hadamard_count": 1,
+    "monomial_count": 16
+  }
+}

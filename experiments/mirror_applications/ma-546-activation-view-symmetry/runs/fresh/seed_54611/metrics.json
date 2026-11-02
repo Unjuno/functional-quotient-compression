@@ -1,0 +1,86 @@
+{
+  "seed": 54611,
+  "rows": [
+    {
+      "view": "identity",
+      "condition_number": 1.0,
+      "paired_max_abs": 0.0,
+      "paired_relative_rms": 0.0,
+      "unpaired_relative_rms": 0.0,
+      "paired_payload_bytes": 51216,
+      "unpaired_payload_bytes": 51220,
+      "write_seconds": 0.002922429994214326
+    },
+    {
+      "view": "permutation_sign",
+      "condition_number": 1.0,
+      "paired_max_abs": 9.5367431640625e-07,
+      "paired_relative_rms": 1.0930717309065585e-07,
+      "unpaired_relative_rms": 0.7889731526374817,
+      "paired_payload_bytes": 51216,
+      "unpaired_payload_bytes": 51220,
+      "write_seconds": 0.0004431149864103645
+    },
+    {
+      "view": "diagonal",
+      "condition_number": 3.4165713787078857,
+      "paired_max_abs": 9.5367431640625e-07,
+      "paired_relative_rms": 1.1496460672333342e-07,
+      "unpaired_relative_rms": 0.29408422112464905,
+      "paired_payload_bytes": 51216,
+      "unpaired_payload_bytes": 51220,
+      "write_seconds": 0.000576402002479881
+    },
+    {
+      "view": "orthogonal",
+      "condition_number": 1.0000001192092896,
+      "paired_max_abs": 9.5367431640625e-07,
+      "paired_relative_rms": 1.7448080313897663e-07,
+      "unpaired_relative_rms": 0.8165498375892639,
+      "paired_payload_bytes": 51216,
+      "unpaired_payload_bytes": 51220,
+      "write_seconds": 0.00039402200491167605
+    }
+  ],
+  "max_paired_abs_error": 9.5367431640625e-07,
+  "max_unpaired_relative_rms": 0.8165498375892639,
+  "min_condition_number": 1.0,
+  "baseline_payload_bytes": 17390,
+  "payloads": {
+    "identity": {
+      "bytes": 51216,
+      "sha256": "e01cb66cb509f30991f795ca16e3eac72033f5780f0d84a00b86bbcf149ba1d0"
+    },
+    "identity_unpaired": {
+      "bytes": 51220,
+      "sha256": "430513b677e9a7ca1b385d3e6203c263b534557d1a1caf0bbad8d8f7dbc26735"
+    },
+    "permutation_sign": {
+      "bytes": 51216,
+      "sha256": "aea2aa3840b0259c6f070fb41f108bca6621bdc1ca6f522b41d0ab6ec7c79a06"
+    },
+    "permutation_sign_unpaired": {
+      "bytes": 51220,
+      "sha256": "83397fbcb45cf5fb42416b85f7a7dfeee1ffcb8783fb55c72dad293b38f794aa"
+    },
+    "diagonal": {
+      "bytes": 51216,
+      "sha256": "685ec4579bf963c3ff9e612a3c45f64895f7bafd9e0c5c2010293615837795cc"
+    },
+    "diagonal_unpaired": {
+      "bytes": 51220,
+      "sha256": "1942d0179b8e031d1a1d350a3b9a45502eca99478c016805a7cb363a70a14360"
+    },
+    "orthogonal": {
+      "bytes": 51216,
+      "sha256": "33b14974d0e61b0febae8ff0e5923251bcaefbe150953ef65c4e47942575e9fb"
+    },
+    "orthogonal_unpaired": {
+      "bytes": 51220,
+      "sha256": "85724c61286c6bb9827a47768bb31d838719dc1547e75588004e953f72c4d554"
+    }
+  },
+  "input_vectors": 256,
+  "optimizer_updates": 0,
+  "baseline_mac_per_input": 4096
+}
