@@ -6,18 +6,21 @@ D=8;I=4;N=128;PHI=.23;TOL=1e-7;MAXIT=100;LAMBDA=.2
 def rot_apply(u,theta):
  z=u.copy(); a=u[...,0].copy();b=u[...,1].copy();c=np.cos(theta);s=np.sin(theta);z[...,0]=c*a-s*b;z[...,1]=s*a+c*b;return z
 
-def solve(x,U,A,V,angles=None,roles=None,Q=None,indU=None):
- if indU is not None: u=np.stack([x[k]@indU[int(roles[k]>0)] for k in range(len(x))])
+def solve(x,U,A,V,angles=None,roles=None,Q=None,indU=None,role_codes=None,basis_indices=None,lamb=LAMBDA,tol=TOL,maxit=MAXIT):
+ role_codes=np.array([-1.,1.]) if role_codes is None else role_codes
+ ids=None if roles is None else np.searchsorted(role_codes,roles)
+ if indU is not None: u=np.stack([x[k]@indU[ids[k]] for k in range(len(x))])
  else:
   u=x@U
-  if angles is not None:u=rot_apply(u,angles[np.searchsorted(np.array([-1.,1.]),roles)])
+  if angles is not None:u=rot_apply(u,angles[ids])
   elif Q is not None:
-   q=Q[np.searchsorted(np.array([-1.,1.]),roles)];u0=u.copy();u[:,:2]=np.einsum('ni,nij->nj',u[:,:2],np.eye(2)[None,:,:]+q)
+   axes=np.array([0,1]) if basis_indices is None else basis_indices
+   q=Q[ids];u[:,axes]=np.einsum('ni,nij->nj',u[:,axes],np.eye(2)[None,:,:]+q)
  z=np.zeros((len(x),D));iters=np.zeros(len(x),int);res=np.full(len(x),np.inf)
- for k in range(1,MAXIT+1):
-  zn=np.tanh(LAMBDA*(z@A)+u);delta=np.max(np.abs(zn-z),axis=1);active=iters==0;done=(delta<TOL)&active;iters[done]=k;res[done]=delta[done];z[active]=zn[active]
+ for k in range(1,maxit+1):
+  zn=np.tanh(lamb*(z@A)+u);delta=np.max(np.abs(zn-z),axis=1);active=iters==0;done=(delta<tol)&active;iters[done]=k;res[done]=delta[done];z[active]=zn[active]
   if np.all(iters):break
- iters[iters==0]=MAXIT;res[iters==MAXIT]=np.max(np.abs(np.tanh(LAMBDA*(z@A)+u)-z),axis=1)[iters==MAXIT]
+ iters[iters==0]=maxit;res[iters==maxit]=np.max(np.abs(np.tanh(lamb*(z@A)+u)-z),axis=1)[iters==maxit]
  return z@V,iters,res
 
 def run(seed,split,root):
@@ -34,12 +37,15 @@ def run(seed,split,root):
  with np.load(out/'direct.npz') as q:dv=(q['angles'],q['role_codes'])
  with np.load(out/'rank2.npz') as q:rv=(q['Q'],q['role_codes'],q['basis_indices'])
  with np.load(out/'independent.npz') as q:iu=q['U_roles']
- target,_,_=solve(X,U0,A0,V0,angles=np.array([-PHI,PHI]),roles=roles)
- funcs={'native':lambda:solve(X,U0,A0,V0)[0],'mirror':lambda:solve(X,U0,A0,V0,angles=mv[0],roles=roles)[0],'direct':lambda:solve(X,U0,A0,V0,angles=dv[0],roles=roles)[0],'rank2':lambda:solve(X,U0,A0,V0,roles=roles,Q=rv[0])[0],'independent':lambda:solve(X,U0,A0,V0,roles=roles,indU=iu)[0]}
+ def decoded(**kw):
+  kw.setdefault('role_codes',roles0);kw.update(lamb=lam,tol=tol,maxit=maxit)
+  return solve(X,U0,A0,V0,**kw)
+ target,_,_=solve(X,U0,A0,V0,angles=np.array([-PHI,PHI]),roles=roles,lamb=LAMBDA,tol=TOL,maxit=MAXIT)
+ funcs={'native':lambda:decoded()[0],'mirror':lambda:decoded(angles=mv[0],roles=roles,role_codes=mv[1])[0],'direct':lambda:decoded(angles=dv[0],roles=roles,role_codes=dv[1])[0],'rank2':lambda:decoded(roles=roles,Q=rv[0],role_codes=rv[1],basis_indices=rv[2])[0],'independent':lambda:decoded(roles=roles,indU=iu)[0]}
  payload={'native':sb,'mirror':sb+mb,'direct':sb+db,'rank2':sb+qb,'independent':sb+ib};obj={k:(out/f'{k}.npz').stat().st_size for k in ['shared','mirror','direct','rank2','independent']};hashes={k:hashlib.sha256((out/f'{k}.npz').read_bytes()).hexdigest() for k in obj}
  times={};rows=[]
  for m,fn in funcs.items():
-  y,its,res=solve(X,U0,A0,V0,angles=mv[0],roles=roles) if m=='mirror' else solve(X,U0,A0,V0,angles=dv[0],roles=roles) if m=='direct' else solve(X,U0,A0,V0,roles=roles,Q=rv[0]) if m=='rank2' else solve(X,U0,A0,V0,roles=roles,indU=iu) if m=='independent' else solve(X,U0,A0,V0)
+  y,its,res=decoded(angles=mv[0],roles=roles,role_codes=mv[1]) if m=='mirror' else decoded(angles=dv[0],roles=roles,role_codes=dv[1]) if m=='direct' else decoded(roles=roles,Q=rv[0],role_codes=rv[1],basis_indices=rv[2]) if m=='rank2' else decoded(roles=roles,indU=iu) if m=='independent' else decoded()
   nrmse=float(np.sqrt(np.mean((y-target)**2)/(np.mean(target*target)+1e-20)))
   for _ in range(2):fn()
   t=time.perf_counter()
