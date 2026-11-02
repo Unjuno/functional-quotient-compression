@@ -37,7 +37,7 @@ def test_teacher_world_has_locked_width_split():
 
 
 def test_saved_development_payloads_replay_exactly():
-    root = ROOT / "runs" / "dev"
-    worlds = sorted(root.glob("*/RESULTS_CORE.csv"))
-    assert worlds, "run frozen development worlds before artifact replay"
+    root = ROOT / "runs" / "a1_timing"
+    worlds = sorted(root.glob("*/*/RESULTS_CORE.csv"))
+    assert len(worlds) == 5, "replay all two development and three fresh A1 worlds"
     assert sum(verify_world(path.parent) for path in worlds) == 32 * len(worlds)

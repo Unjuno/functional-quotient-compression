@@ -4,14 +4,27 @@
   "source_sha256": "efb28efd143db3c89867c39f15434fce62f7a94e61fb4fcb31a160c7023f0754",
   "protocol_sha256": "ccab5d470935d076581ac223e22500e0f536bf2a5a1e72536d5c62cdccc63a47",
   "selected_configuration": {
-    "training_widths": [8, 16, 24, 32],
-    "heldout_widths": [4, 12, 20, 28],
+    "training_widths": [
+      8,
+      16,
+      24,
+      32
+    ],
+    "heldout_widths": [
+      4,
+      12,
+      20,
+      28
+    ],
     "mirror_code": "least-squares affine angle theta(q)=a+bq from training-width angle estimates",
     "direct_control": "least-squares affine functions c(q)=c0+c1q and s(q)=s0+s1q on training widths",
     "dtype": "FP32 shared maps and code payloads",
     "optimizer_updates": 0
   },
-  "development_worlds": [56001, 56002],
+  "development_worlds": [
+    56001,
+    56002
+  ],
   "development_summary": {
     "heldout_width_nrmse_mean": {
       "usnet_prefix": 0.22049243440574784,
@@ -34,5 +47,18 @@
     "mirror_to_independent_total_payload_ratio": 0.5978733392391506,
     "fresh_opened": false
   },
-  "decision": "Freeze the protocol-defined solver and all controls unchanged. Mirror passes dev quality/interpolation but misses the <=50% independent total-payload gate (59.8%). Direct coefficients are within 0.3% total bytes but have worse held-out quality. Fresh worlds will run once to assess transfer; no settings will be selected or changed from them."
+  "decision": "Freeze the protocol-defined solver and all controls unchanged. Mirror passes dev quality/interpolation but misses the <=50% independent total-payload gate (59.8%). Direct coefficients are within 0.3% total bytes but have worse held-out quality. Fresh worlds will run once to assess transfer; no settings will be selected or changed from them.",
+  "a1_timing_replay": {
+    "amendment_commit": "f7da2286",
+    "worlds": [
+      56001,
+      56002,
+      56011,
+      56012,
+      56013
+    ],
+    "same_quality_payload_and_hashes_as_a0": true,
+    "fresh_tuning": false
+  },
+  "a1_source_sha256": "94df42778551ed875d4812faaa5541414a9c4a0d3f5c61ea214a5fc747b3064a"
 }
