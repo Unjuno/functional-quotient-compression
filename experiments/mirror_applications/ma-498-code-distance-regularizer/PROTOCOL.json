@@ -1,0 +1,98 @@
+{
+  "experiment_id": "MA-498",
+  "title": "Learned code distance regularizer for Mirror bank",
+  "status": "FROZEN_SCREENING",
+  "base_commit": "eb5c7a1b",
+  "evidence_lane": "CODE_DISTANCE/NOISY_ROUTING/ACTUAL_BYTES",
+  "hypothesis": "At a fixed 8-bit address budget, a development-optimized minimum-distance codebook will reduce held-out noisy logical-function misrouting relative to random code assignments without increasing serialized codebook bytes.",
+  "physical_object": "shared decoder with 32 logical functions and fixed 8-bit addresses",
+  "mirror_coordinate": "learned binary codeword trained/selected for inter-function distance",
+  "logical_multiplicity": "32 distinct functions with robust IDs",
+  "prior_art_refs": [
+    95
+  ],
+  "controls": [
+    "random unique 8-bit code assignment",
+    "development-selected max-min-Hamming codebook",
+    "ordinary compact 5-bit IDs"
+  ],
+  "task": {
+    "type": "synthetic address transmission with independent bit flips",
+    "functions": 32,
+    "code_bits": 8,
+    "flip_probabilities": [
+      0,
+      0.02,
+      0.05,
+      0.1,
+      0.2
+    ],
+    "metrics": [
+      "minimum code distance",
+      "misroute accuracy",
+      "actual serialized codebook bytes",
+      "decode comparisons"
+    ]
+  },
+  "development": {
+    "worlds": [
+      49800,
+      49801
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "allowed": "choose codebook from predeclared random candidate pool by maximum minimum distance; no fresh-dependent selection"
+  },
+  "fresh": {
+    "worlds": [
+      49820,
+      49821,
+      49822
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "locked_before_access": true,
+    "A0_excluded": "random baseline allowed duplicate IDs"
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "all function codewords",
+      "function-to-code mapping",
+      "decoder metadata"
+    ]
+  },
+  "compute": {
+    "report_pairwise_distance_ops": true,
+    "report_nearest_decode_ops": true
+  },
+  "success_gate": "At p=.1, optimized code reduces misroute rate >=25% versus random 8-bit codes at equal payload bytes, with 100% noiseless accuracy.",
+  "failure_gate": "No noise robustness gain at equal bytes, or code separation only improves at additional address bits.",
+  "boundaries": [
+    "Synthetic fixed-flip channel only.",
+    "This tests codebook selection, not neural router training or task quality.",
+    "Code distance is not functional capacity."
+  ],
+  "amendment_A1": {
+    "reason": "The initial random-code control accidentally allowed duplicate codewords, producing <100% noiseless accuracy and invalidating comparison to selected codebooks. A0 is preserved as exploratory.",
+    "change": "Require unique codewords for all random/optimized codebooks; no gate change.",
+    "fresh_worlds": [
+      49820,
+      49821,
+      49822
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "locked_before_A1_access": true,
+    "authoritative": "A1 only"
+  }
+}

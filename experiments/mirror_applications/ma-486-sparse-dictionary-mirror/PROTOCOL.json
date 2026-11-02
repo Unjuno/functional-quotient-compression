@@ -1,0 +1,17 @@
+{
+  "experiment_id":"MA-486","title":"Sparse dictionary Mirror function representation","status":"FROZEN_SCREENING","base_commit":"7754a91f","evidence_lane":"SHARED_DICTIONARY/SPARSE_FUNCTION_CODES/ACTUAL_BYTES",
+  "hypothesis":"A paid shared functional atom dictionary plus sparse per-function addresses will reconstruct sparse-combination functions with fewer serialized bytes than independent dense functions while matching dense/signed coefficient controls at fixed distortion.",
+  "physical_object":"one shared overcomplete dictionary of 64 atoms in 32D function space",
+  "mirror_coordinate":"per-function sparse atom indices and signed scalar coefficients",
+  "logical_multiplicity":"128 reconstructed function vectors from a shared atom bank",
+  "prior_art_refs":[93,94],
+  "controls":["independent dense FP32 functions","shared dictionary with dense FP16 coefficients","shared dictionary with signed 1-bit support coefficients","sparse dictionary Mirror codes with FP16 coefficients","generic top-k coefficient approximation"],
+  "task":{"type":"synthetic 32D function vectors generated from 4-sparse shared atom combinations","functions":128,"dimension":32,"atoms":64,"sparsity":4,"metrics":["held-out normalized reconstruction error","actual serialized bytes and bytes/function","support recovery and active atom count","decode MAC and latency"]},
+  "development":{"worlds":[48600,48601],"seeds":[0,1,2],"allowed":"select sparse threshold from registered top-k in {2,4,8,16}; shared dictionary learned only from development targets; no fresh-dependent fitting"},
+  "fresh":{"worlds":[48610,48611,48612],"seeds":[0,1,2],"locked_before_access":true},
+  "storage":{"authority":"actual serialized inference payload bytes","paid_objects":["shared dictionary atoms","per-function sparse indices and coefficient values","dense coefficient alternatives","serialization metadata"]},
+  "compute":{"report_omp_iterations":true,"report_decode_MAC_per_function":true,"report_measured_encode_decode_latency":true},
+  "success_gate":"At fixed top-4, every fresh world NRMSE <=0.05 and sparse payload <=50% independent dense bytes; report support recovery and compare dense/signed shared coefficient controls.",
+  "failure_gate":"Sparse code misses quality/byte gate or dense/signed coefficient control matches quality at fewer bytes; report whether dictionary amortization is the limiting factor.",
+  "boundaries":["Synthetic 4-sparse vector combinations only; not a trained network or language model.","Dictionary, indices, coefficients and all metadata charged.","Logical combination count is not capacity; only held-out reconstruction quality counts."]
+}

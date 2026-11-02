@@ -1,0 +1,17 @@
+{
+  "experiment_id":"MA-487","title":"LISTA router for Mirror atom coefficients","status":"FROZEN_SCREENING","base_commit":"5071b10c","evidence_lane":"SPARSE_CODE_INFERENCE/QUALITY/ROUTER_BYTES/COMPUTE",
+  "hypothesis":"A learned fixed-depth LISTA inference network on the same shared functional dictionary will approach OMP sparse-code reconstruction with lower inference steps, while its serialized router weights remain smaller than the per-function dense coefficient representation.",
+  "physical_object":"the same 32D, 64-atom dictionary from MA-486",
+  "mirror_coordinate":"input-specific sparse atom coefficients inferred by OMP or a trained LISTA network",
+  "logical_multiplicity":"function-specific sparse combinations from shared atoms",
+  "prior_art_refs":[93],
+  "controls":["OMP sparse codes on same dictionary and top-8 budget","LISTA with 1/2/4/8 fixed inference steps","dense least-squares coefficients","signed top-8 codes"],
+  "task":{"type":"synthetic 32D functions from 4-sparse shared atoms","dictionary_atoms":64,"functions_per_bank":128,"metrics":["fresh reconstruction NRMSE","active atom count","serialized router + dictionary + function codes bytes","inference MAC/steps","encode latency"]},
+  "development":{"worlds":[48700,48701],"seeds":[0,1,2],"allowed":"train LISTA on development examples only; fixed top-8 sparsity and predeclared 1/2/4/8 steps; no fresh-dependent changes"},
+  "fresh":{"worlds":[48710,48711,48712],"seeds":[0,1,2],"locked_before_access":true},
+  "storage":{"authority":"actual serialized inference payload bytes","paid_objects":["dictionary atoms","LISTA weights and thresholds","per-function inputs or sparse codes as required by inference contract","metadata"]},
+  "compute":{"report_lista_steps":true,"report_MAC_per_function":true,"report_measured_latency":true},
+  "success_gate":"At <=8 LISTA steps, every fresh bank has NRMSE <=0.05 and <=1.05x OMP top-8 error; router compute/bytes are reported and end-to-end inference beats OMP on measured latency or MAC.",
+  "failure_gate":"LISTA misses quality, requires more compute/bytes than OMP without offsetting inference benefit, or router is only evaluated on training functions.",
+  "boundaries":["Synthetic fixed dictionary and sparse-vector task; no neural MoE routing claim.","LISTA training examples are development only; fresh target functions are unseen.","Do not interpret number of sparse combinations as capacity."]
+}

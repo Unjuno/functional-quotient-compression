@@ -1,0 +1,96 @@
+{
+  "experiment_id": "MA-501",
+  "title": "LoReFT subspace + Mirror coordinate",
+  "status": "FROZEN_SCREENING",
+  "base_commit": "0ea7c36c",
+  "evidence_lane": "REPRESENTATION_INTERVENTION/QUALITY/ACTUAL_BYTES",
+  "hypothesis": "A shared low-dimensional representation subspace plus per-task Mirror coordinates can store synthetic hidden-state interventions with lower actual bytes than independent LoReFT-style intervention vectors at matched intervention quality.",
+  "physical_object": "one frozen synthetic 64D representation space and shared rank-4 intervention basis",
+  "mirror_coordinate": "per-task four-dimensional coordinate, with optional low-bit codebook index",
+  "logical_multiplicity": "64 task-specific hidden-state interventions",
+  "prior_art_refs": [
+    96
+  ],
+  "controls": [
+    "independent per-task dense intervention vectors",
+    "shared rank-4 FP16 LoReFT-style coefficients",
+    "shared basis plus quantized Mirror codebook coordinates",
+    "shared basis only/no task coordinate"
+  ],
+  "task": {
+    "type": "synthetic frozen representation intervention bank",
+    "tasks": 64,
+    "hidden_dim": 64,
+    "shared_rank": 4,
+    "metrics": [
+      "held-out intervention NRMSE",
+      "serialized intervention payload bytes",
+      "intervention locality across tasks",
+      "application MAC"
+    ]
+  },
+  "development": {
+    "worlds": [
+      50100,
+      50101
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "allowed": "fit shared basis/codebook on development interventions and choose codebook size from {8,16,32,64} only"
+  },
+  "fresh": {
+    "worlds": [
+      50120,
+      50121,
+      50122
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "locked_before_access": true,
+    "A0_excluded": "serialized non-contiguous basis view included backing storage"
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "shared intervention basis",
+      "per-task coordinates or indices",
+      "codebook state",
+      "independent dense interventions",
+      "metadata"
+    ]
+  },
+  "compute": {
+    "report_intervention_MAC_per_token": true,
+    "report_code_lookup_ops": true,
+    "report_measured_application_latency": true
+  },
+  "success_gate": "At some codebook setting, every fresh world has NRMSE <=0.05 and payload <=50% independent dense intervention bytes; compare FP16 LoReFT coordinates and report all application cost.",
+  "failure_gate": "Quality/byte gate fails or shared FP16 LoReFT coefficients match/better Mirror at equal or fewer bytes; record private intervention need.",
+  "boundaries": [
+    "Synthetic frozen representation space only; no pretrained Transformer, NLP or task-learning evidence.",
+    "This is storage/quality mechanism screening, not end-to-end LoReFT reproduction.",
+    "Logical task count alone is not capacity."
+  ],
+  "amendment_A1": {
+    "reason": "A0 serialized a non-contiguous SVD basis view backed by the full 64x64 singular-vector storage, inflating paid bytes. A0 retained as exploratory and excluded.",
+    "change": "Materialize the rank-4 basis contiguously before serialization; no quality or selection gate changes.",
+    "fresh_worlds": [
+      50120,
+      50121,
+      50122
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "locked_before_A1_access": true,
+    "authoritative": "A1 only"
+  }
+}

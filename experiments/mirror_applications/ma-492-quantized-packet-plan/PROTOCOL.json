@@ -1,0 +1,95 @@
+{
+  "experiment_id": "MA-492",
+  "title": "Quantized packet-plan Mirror latent",
+  "status": "FROZEN_SCREENING",
+  "base_commit": "7ff75963",
+  "evidence_lane": "PACKET_PLAN/JOINT_MODE_COVERAGE/ACTUAL_BITS",
+  "hypothesis": "A small discrete Mirror packet-plan code can preserve joint future-mode coverage at lower actual bytes than a continuous packet latent and independent per-position predictions.",
+  "physical_object": "one shared packet decoder over a fixed synthetic two-step transition model",
+  "mirror_coordinate": "one discrete latent code selects a joint two-token future plan",
+  "logical_multiplicity": "jointly decoded future packets under one shared decoder",
+  "prior_art_refs": [
+    91,
+    10
+  ],
+  "controls": [
+    "independent per-position categorical predictions",
+    "continuous packet latent",
+    "quantized shared packet-plan codebook",
+    "single-mode greedy baseline"
+  ],
+  "task": {
+    "type": "synthetic branching two-step packet prediction",
+    "contexts": 256,
+    "modes": 16,
+    "tokens_per_packet": 2,
+    "metrics": [
+      "joint mode coverage",
+      "joint NLL",
+      "valid packet rate",
+      "code entropy/bits",
+      "serialized decoder+codebook bytes"
+    ]
+  },
+  "development": {
+    "worlds": [
+      49200,
+      49201
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "allowed": "choose codebook size from {2,4,8,16} on dev only"
+  },
+  "fresh": {
+    "worlds": [
+      49220,
+      49221,
+      49222
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "locked_before_access": true,
+    "A0_excluded": "exploratory due invalid mode table/coverage metric"
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "decoder state",
+      "packet plan codebook",
+      "context-to-code map",
+      "continuous latent alternative and metadata"
+    ]
+  },
+  "compute": {
+    "report_decoder_MAC_per_packet": true,
+    "report_code_lookup_latency": true
+  },
+  "success_gate": "At some codebook size <=8, every fresh world covers >=95% of target joint modes and beats independent categorical coverage at <=50% of its payload bytes, without reducing valid packet rate.",
+  "failure_gate": "Discrete code collisions reduce joint mode coverage or codebook/decoder bytes erase savings; report all mode-coverage and bit-rate tradeoffs.",
+  "boundaries": [
+    "Synthetic branching packet task only; no language modeling or speculative decoding claim.",
+    "Logical combinations are not capacity; held-out joint mode coverage is authoritative."
+  ],
+  "amendment_A1": {
+    "reason": "A0 packet mode table accidentally used token IDs beyond the declared vocabulary and the coverage metric counted token symbols rather than distinct joint packet plans. A0 preserved as exploratory and excluded.",
+    "change": "Use 16 unique legal joint pairs over an 8-symbol vocabulary; joint-mode coverage counts distinct plan codes and independent valid rate sums probability over legal pairs. No gate change.",
+    "fresh_worlds": [
+      49220,
+      49221,
+      49222
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "locked_before_A1_access": true,
+    "authoritative": "A1 only"
+  }
+}

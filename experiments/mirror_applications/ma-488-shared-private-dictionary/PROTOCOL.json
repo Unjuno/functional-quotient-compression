@@ -1,0 +1,17 @@
+{
+  "experiment_id":"MA-488","title":"Shared/private dictionary + Mirror coefficients","status":"FROZEN_SCREENING","base_commit":"d90dface","evidence_lane":"SHARED_PRIVATE_FRONTIER/ACTUAL_BYTES/PRIVATE_RESIDUAL_QUALITY",
+  "hypothesis":"A shared functional basis plus small Mirror coordinates will represent aligned functions economically, while allocating private residual atoms only to off-manifold functions will improve the quality-byte frontier over all-shared or all-private storage.",
+  "physical_object":"one shared 32D base function and four shared residual atoms, with optional per-function private residual vectors",
+  "mirror_coordinate":"four shared-basis coefficients; residual is private only when thresholded reconstruction error requires it",
+  "logical_multiplicity":"64 functions across 25%, 50%, or 75% off-manifold heterogeneity",
+  "prior_art_refs":[94],
+  "controls":["all independent dense functions","shared-only Mirror coefficients","shared basis + private residual for every function","thresholded shared/private allocation"],
+  "task":{"type":"synthetic shared/private function bank","functions":64,"dimension":32,"shared_rank":4,"heterogeneity_fractions":[0.25,0.5,0.75],"metrics":["held-out NRMSE","actual serialized bytes","private residual fraction","quality-byte frontier"]},
+  "development":{"worlds":[48800,48801],"seeds":[0,1,2],"allowed":"select one residual threshold from [0.05,0.1,0.2,0.4] on development only"},
+  "fresh":{"worlds":[48810,48811,48812],"seeds":[0,1,2],"locked_before_access":true},
+  "storage":{"authority":"actual serialized inference payload bytes","paid_objects":["shared base and basis","all shared coefficients","private residual vectors and indices","full dense functions for controls"]},
+  "compute":{"report_projection_MAC_per_function":true,"report_private_fraction":true,"report_decode_latency":true},
+  "success_gate":"For every fresh world and heterogeneity level, adaptive shared/private has NRMSE <=0.05 and payload <=80% all-independent dense, with private fraction below 100%; beat shared-only quality-byte tradeoff.",
+  "failure_gate":"Adaptive allocation misses quality/bytes, or private state consumes the saved storage; report threshold and heterogeneity boundary.",
+  "boundaries":["Synthetic linear functions and known shared basis only.","No learned neural experts or task routing claim.","Private residual bytes are fully charged."]
+}

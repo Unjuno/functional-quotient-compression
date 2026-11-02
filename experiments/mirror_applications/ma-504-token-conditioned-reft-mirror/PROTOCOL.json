@@ -1,0 +1,79 @@
+{
+  "experiment_id": "MA-504",
+  "title": "Token-conditioned Mirror ReFT",
+  "status": "FROZEN_SCREENING",
+  "base_commit": "e87c50a3",
+  "evidence_lane": "MECHANISM/STORAGE/COMPUTE",
+  "hypothesis": "For continuous token contexts, a rank-4 LoReFT intervention with a small context-generated Givens View recovers tokenwise interventions with fewer serialized bytes than FiLM and generic coordinate MLP while preserving quality.",
+  "physical_object": "Fixed shared synthetic 64x4 representation-intervention basis and shared token projection",
+  "mirror_coordinate": "Two context-generated Givens angles per token, applied to a projected rank-4 activation code",
+  "logical_multiplicity": "Token-specific interventions for continuous contexts",
+  "prior_art_refs": [63, 96],
+  "controls": [
+    "Shared/no intervention",
+    "Linear LoReFT coefficients from concatenated hidden/context inputs",
+    "Generic MLP producing rank-4 LoReFT coefficients",
+    "Context-conditioned FiLM per-channel affine modulation",
+    "Token-conditioned Mirror Givens View"
+  ],
+  "task": {
+    "type": "synthetic continuous-context token activation intervention",
+    "hidden_dim": 64,
+    "context_dim": 8,
+    "intervention_rank": 4,
+    "train_tokens_per_world": 8192,
+    "validation_tokens_per_world": 2048,
+    "test_tokens_per_world": 4096,
+    "target": "delta(h,u)=B*R(Wu)*P*h; output=h+delta",
+    "context_distribution": "Continuous iid Gaussian; test examples use unseen context vectors",
+    "metrics": [
+      "test intervention NRMSE",
+      "test output NRMSE",
+      "actual serialized payload bytes",
+      "MAC proxy per token",
+      "training wall time",
+      "measured CPU inference throughput"
+    ]
+  },
+  "training": {
+    "optimizer": "AdamW",
+    "updates": 1000,
+    "batch_size": 128,
+    "learning_rate_candidates": [0.003, 0.01]
+  },
+  "development": {
+    "worlds": [50400, 50401],
+    "seeds": [0, 1, 2],
+    "selection": "Select learning rate by mean validation intervention NRMSE across all methods."
+  },
+  "fresh": {
+    "worlds": [50410, 50411, 50412],
+    "seeds": [0, 1, 2],
+    "locked_before_access": true,
+    "tuning_prohibited": true
+  },
+  "storage": {
+    "authority": "actual torch.save inference payload bytes",
+    "paid_objects": [
+      "shared LoReFT basis",
+      "shared token projection",
+      "context-to-angle generator or FiLM parameters",
+      "generic coefficient MLP or direct coefficient generator",
+      "all inference metadata and serialization state"
+    ]
+  },
+  "compute": {
+    "report_train_tokens": true,
+    "report_optimizer_updates": true,
+    "report_mac_proxy_per_token": true,
+    "report_training_wall_time": true,
+    "report_inference_tokens_per_second": true
+  },
+  "success_gate": "Every fresh world has intervention NRMSE <=0.05; Mirror payload <=80% FiLM bytes; and Mirror relative NRMSE is within 10% of generic MLP LoReFT.",
+  "failure_gate": "Quality/storage fails or a simpler control matches quality at equal/fewer bytes.",
+  "boundaries": [
+    "Synthetic continuous-context intervention only; Givens-aligned teacher.",
+    "No pretrained Transformer, language, capacity, or natural-token claim.",
+    "Continuous test contexts do not establish compositional task capacity."
+  ]
+}
