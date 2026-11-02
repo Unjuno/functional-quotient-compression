@@ -1,0 +1,8 @@
+{
+  "amendment":"A1",
+  "reason":"A post-run inference audit found that solver tolerance/iteration cap, role-code mapping, and rank-2 basis indices were stored but not read by the decoder; a separate MAC check found the output projection was omitted.",
+  "change":"A1 decodes all paid solver/router/view/basis metadata, counts input projection + every solver iteration + output projection + view, and reruns unchanged worlds to runs/a1. Preserve initial runs/dev and runs/fresh.",
+  "fresh_accessed_before_amendment":true,
+  "data_or_hyperparameter_changes":false,
+  "purpose":"Inference-state decoder and compute-accounting correction only."
+}

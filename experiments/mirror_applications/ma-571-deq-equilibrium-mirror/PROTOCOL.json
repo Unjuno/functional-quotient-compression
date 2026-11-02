@@ -1,0 +1,64 @@
+{
+  "experiment_id": "MA-571",
+  "title": "DEQ equilibrium Mirror coordinate",
+  "status": "FROZEN_SCREENING",
+  "base_commit": "c935a903",
+  "prior_art_refs": [
+    124
+  ],
+  "hypothesis": "A role-conditioned Mirror input view inside a contractive shared fixed-point operator recovers unseen equilibrium functions with fewer bytes than per-role operators; solver residual/iterations and direct controls are charged.",
+  "physical_object": "One 8D contractive equilibrium operator with shared input/output maps",
+  "mirror_coordinate": "Two role-specific Givens angles applied to shared input features before fixed-point iteration",
+  "logical_multiplicity": "Two task-role equilibrium functions, evaluated across heldout input distributions",
+  "development": {
+    "seeds": [
+      57101,
+      57102
+    ],
+    "train_input_scale": 1.0,
+    "solver_tolerance": 1e-07
+  },
+  "fresh": {
+    "seeds": [
+      57111,
+      57112,
+      57113
+    ],
+    "locked_before_access": true,
+    "train_input_scale": 1.0,
+    "solver_tolerance": 1e-07
+  },
+  "controls": [
+    "shared DEQ without view",
+    "generic direct role-angle code inside equilibrium operator",
+    "rank-2 shared input correction",
+    "independent per-role equilibrium input operators"
+  ],
+  "storage": {
+    "authority": "actual serialized NPZ bytes",
+    "paid_objects": [
+      "shared equilibrium matrices",
+      "solver tolerance/iteration cap",
+      "role codes",
+      "Mirror angles",
+      "direct angles",
+      "rank-2 residual bases",
+      "independent per-role operators"
+    ]
+  },
+  "compute": {
+    "optimizer_updates": 0,
+    "report_fixed_point_residual": true,
+    "report_iterations": true,
+    "report_matrix_MAC_proxy": true,
+    "report_end_to_end_CPU_wall_time": true
+  },
+  "success_gate": "All fresh worlds: Mirror output NRMSE <=1e-4, converged residual <=1e-7, <=50% bytes of independent operators; Mirror-specific advantage >=10% bytes or solver MACs over direct/rank2 at matched quality.",
+  "failure_gate": "Direct angle control exactly aliases Mirror, instability/nonconvergence, or frozen quality/storage gate missed.",
+  "boundaries": [
+    "Synthetic contractive fixed-point mechanism only; no trained DEQ/DEQ Transformer, natural task, GPU, or capacity claim.",
+    "Teacher inserts a Givens role view inside the shared operator, favorable to Mirror."
+  ],
+  "amendment": "AMENDMENT_A1.json",
+  "compute_contract": "A1 active MAC proxy includes x-to-hidden projection, each fixed-point iteration, final output projection and view transform; all stored solver/role/basis settings are decoded."
+}
