@@ -8,9 +8,9 @@
 
 **H:** A compact configuration-conditioned Givens function code improves held-out width/depth/kernel subnet quality over native subnet selection and generic rank-one correction at lower complete inference bytes than independent maps.
 
-**T:** Frozen in `PROTOCOL.json`; 2 development worlds select no hyperparameters, then 3 fresh worlds; 4 fit and 4 held-out joint configurations; zero optimizer updates.
+**T:** Frozen in `PROTOCOL.json` and amended by `AMENDMENT_A1.json` before fresh access; 2 development worlds select no hyperparameters, then 3 fresh worlds; 4 fit and 4 held-out joint configurations; zero optimizer updates.
 
-**D:** Pending execution.
+**D:** A0 development exposed an invalid independent upper control; preserved. A1 development rerun and fresh evaluation pending.
 
 **C:** The favorable teacher orbit is intentionally Givens-aligned; a direct parameterization or naturally trained supernetwork may explain any gain.
 

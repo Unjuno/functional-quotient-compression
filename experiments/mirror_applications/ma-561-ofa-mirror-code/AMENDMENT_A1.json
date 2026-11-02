@@ -1,0 +1,9 @@
+{
+  "amendment": "A1",
+  "reason": "The initial development upper reference used per-configuration linear regression directly from input to output, which could not represent the shared nonlinear backbone plus a configuration-specific hidden/output map. It was not a valid quality upper control.",
+  "change": "Replace the independent reference with an oracle-calibrated full effective output map per configuration, M_c = G(theta_c) C_c, applied after the same shared hidden backbone. Charge every serialized map. The native, Mirror, rank-one control, worlds, fit/heldout configurations and gates are unchanged.",
+  "fresh_accessed_before_amendment": false,
+  "old_development_artifacts_preserved": true,
+  "new_development_replay": "A1 development is rerun on the same two development seeds before fresh execution.",
+  "claim_boundary": "This is an oracle upper storage/quality reference, not a training-reachable baseline."
+}

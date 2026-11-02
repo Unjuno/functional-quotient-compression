@@ -69,7 +69,7 @@ def run(seed,out,split):
     u,v,a=unpack(rankfit.x)
     # Full independent configuration maps: least-squares linear maps per configuration, including held-out.
     # They are an oracle-calibrated storage/quality ceiling, not a learnable transfer baseline.
-    full={c:np.linalg.lstsq(X[c],Y[c],rcond=None)[0] for c in ALL}
+    full={c:(givens(np.eye(c[0]),teacher_angle(c))@C[:c[0],:]) for c in ALL}
     payload=out/split/str(seed); payload.mkdir(parents=True,exist_ok=True)
     shared=payload/'shared.npz'; shared_b=archive(shared,A=A,B=B,C=C)
     mirror_b=archive(payload/'mirror.npz',q=q)
@@ -81,12 +81,12 @@ def run(seed,out,split):
         x=X[c]; y=Y[c]
         pm=givens(hidden(x,c,weights),q@cf(c))@C[:c[0],:]
         pr=base(x,c,weights)+np.outer(x@u,v*(a@cf(c)))
-        preds={'native':base(x,c,weights),'mirror':pm,'rank1':pr,'independent':x@full[c]}
+        preds={'native':base(x,c,weights),'mirror':pm,'rank1':pr,'independent':hidden(x,c,weights)@full[c]}
         for method,pred in preds.items():
             rows.append({'seed':seed,'split':split,'width':c[0],'depth':c[1],'kernel':c[2],'method':method,'nrmse':np.sqrt(normalized_mse(pred,y)),'payload_bytes':shared_b+{'native':0,'mirror':mirror_b,'rank1':rank_b,'independent':full_b}[method],'shared_bytes':shared_b,'method_bytes':{'native':0,'mirror':mirror_b,'rank1':rank_b,'independent':full_b}[method],'fit_seconds':fit_seconds if method=='mirror' else rank_seconds if method=='rank1' else 0.0,'forward_ms_384':None})
     # Benchmark inference on a single heldout config, 30 batches; CPU timing only.
     c=HELD[0]; x=X[c]
-    funcs={'native':lambda:base(x,c,weights),'mirror':lambda:givens(hidden(x,c,weights),q@cf(c))@C[:c[0],:],'rank1':lambda:base(x,c,weights)+np.outer(x@u,v*(a@cf(c))),'independent':lambda:x@full[c]}
+    funcs={'native':lambda:base(x,c,weights),'mirror':lambda:givens(hidden(x,c,weights),q@cf(c))@C[:c[0],:],'rank1':lambda:base(x,c,weights)+np.outer(x@u,v*(a@cf(c))),'independent':lambda:hidden(x,c,weights)@full[c]}
     for method,fn in funcs.items():
         t=time.perf_counter()
         for _ in range(30): fn()
