@@ -1,0 +1,63 @@
+{
+  "experiment_id": "MA-558",
+  "title": "MatFormer mix-and-match Mirror layer codes",
+  "status": "DEVELOPMENT_ONLY_FAIL_MIRROR_SPECIFIC",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY/COMPUTE",
+  "base_commit": "ae62f3aa",
+  "hypothesis": "Layer-indexed Mirror granularity codes improve held-out mixed-width submodels beyond native nested FFN selection while storing less than flat and direct coefficient controls.",
+  "physical_object": "shared 3-layer nested-width FFN operator bank",
+  "mirror_coordinate": "per-layer width code composed into a logical submodel",
+  "logical_multiplicity": "27 width assignments, six locked held-out mixes measured",
+  "prior_art_refs": [
+    "PA107"
+  ],
+  "controls": [
+    "native nested-prefix mix",
+    "flat per-configuration table",
+    "factorized Mirror layer codes",
+    "ordinary direct factorized coefficients"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      55801,
+      55802
+    ],
+    "layers": 3,
+    "granularities": [
+      2,
+      4,
+      8
+    ],
+    "train_configs": 9,
+    "heldout_configs": 6,
+    "selection_metric": "held-out operator nMSE, distinct functions, actual bytes"
+  },
+  "fresh": {
+    "worlds_or_seeds": [],
+    "locked_before_access": true,
+    "open_only_if_development_passes": false,
+    "reason": "Direct factorized coefficient control tests Mirror specificity."
+  },
+  "storage": {
+    "authority": "actual deterministic NPZ bytes",
+    "paid_objects": [
+      "shared weights",
+      "per-layer width codes",
+      "basis",
+      "flat tables",
+      "indices",
+      "metadata"
+    ]
+  },
+  "compute": {
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_wall_time": true
+  },
+  "success_gate": "Held-out nMSE <=1e-6; >=10% fewer bytes than flat; >=10% fewer than direct coefficient control.",
+  "failure_gate": "Direct coefficients match Mirror or held-out nMSE gate fails.",
+  "boundaries": [
+    "oracle synthetic bank",
+    "no actual MatFormer training or LM claim"
+  ]
+}
