@@ -1,0 +1,35 @@
+{
+  "experiment_id": "MA-518",
+  "commit": "pending",
+  "fresh_split_integrity_checked": true,
+  "tests": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 python -m unittest discover -s experiments/mirror_applications/ma-518-factorized-function-domain-mirror/tests",
+    "passed": 2,
+    "failed": 0
+  },
+  "artifact_hash_size_replay": true,
+  "result_rows": 45,
+  "fresh_worlds": [
+    51810,
+    51811,
+    51812
+  ],
+  "fresh_seeds": [
+    0,
+    1,
+    2
+  ],
+  "methods": [
+    "direct_icl",
+    "explicit",
+    "factorized",
+    "generic",
+    "query_only"
+  ],
+  "notes": [
+    "Direct ICL development gate passed in all 6 development world-seed cases (31.25%).",
+    "Fresh run was not tuned; all serialized payload hashes and byte lengths verified.",
+    "Implementation audit found factorized inference used per-task flat rank-2 projection; stored procedure/domain code tables were unused. Factorization claim is not established.",
+    "Explicit/generic/factorized interventions all scored 0% across fresh banks; task-quality gate failed."
+  ]
+}

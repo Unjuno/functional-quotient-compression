@@ -1,0 +1,103 @@
+{
+  "experiment_id": "MA-518",
+  "title": "Factorized function x domain vector code",
+  "status": "FROZEN_SCREENING",
+  "base_commit": "9efb42fe",
+  "evidence_lane": "FUNCTION_DOMAIN_FACTORIZATION/HELD_OUT_QUALITY/ACTUAL_BYTES/COMPUTE",
+  "model": {
+    "id": "openai-community/gpt2",
+    "revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+    "parameters": 124439808,
+    "dtype": "float32",
+    "device": "CPU"
+  },
+  "hypothesis": "On a synthetic procedure x domain task bank, factorized function x domain Mirror coefficients preserve heldout target NLL while using >=20% fewer actual payload bytes than a generic pooled PCA coefficient table at equal rank.",
+  "physical_object": "one frozen GPT-2 model and one shared residual intervention site at block 6",
+  "mirror_coordinate": "procedure factor x domain factor codes plus an explicitly charged per-combination product code; heldout claims only count when all paid coefficients are included",
+  "logical_multiplicity": "unseen combinations of four procedures and four domains",
+  "prior_art_refs": [
+    99,
+    100
+  ],
+  "controls": [
+    "query-only",
+    "direct in-context demonstrations",
+    "explicit per-task deltas",
+    "generic pooled PCA basis with flat coefficients",
+    "factorized procedure/domain basis and coefficients",
+    "procedure-only and domain-only ablations"
+  ],
+  "task": {
+    "type": "synthetic deterministic transformation instruction following",
+    "procedures": [
+      "prepend",
+      "append",
+      "reverse",
+      "rotate"
+    ],
+    "domains": [
+      "fruit",
+      "shape",
+      "color",
+      "vehicle"
+    ],
+    "train_factor_pairs": "fixed preregistered incomplete 4x4 grid",
+    "fresh_factor_pairs": "complementary heldout pairs per world",
+    "metric": [
+      "exact target-token accuracy",
+      "mean target NLL",
+      "actual serialized payload bytes",
+      "extraction and application latency"
+    ]
+  },
+  "development": {
+    "worlds": [
+      51800,
+      51801
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "allowed": "Validate tokenizer, task semantics and direct-ICL validity only. If direct ICL is <=12.5% in any development world, do not open fresh; mark NOT ESTABLISHED and redesign as a new MA amendment. Rank=4, block=6, factor split and all gates fixed a priori."
+  },
+  "fresh": {
+    "worlds": [
+      51810,
+      51811,
+      51812
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "shared means and bases",
+      "all generic or factorized FP16 coefficients",
+      "factor IDs",
+      "indices",
+      "metadata",
+      "decoder/reconstruction state",
+      "per-combination product/task coefficients for all registered logical functions, including heldout combinations"
+    ]
+  },
+  "compute": {
+    "report_extraction_seconds": true,
+    "report_forward_seconds": true,
+    "report_forward_pass_count": true,
+    "optimizer_updates": 0
+  },
+  "success_gate": "Development direct ICL must exceed 12.5% in both worlds. Then direct ICL exceeds chance in every fresh world; factorized intervention mean target NLL <=1.05 x explicit-delta NLL; and serialized factorized payload <=0.80 x generic PCA payload at fixed rank/quality, counting all per-combination coefficients. Otherwise FAIL/NOT ESTABLISHED as specified.",
+  "failure_gate": "Direct ICL is at/below chance in any fresh world, intervention fails to improve query-only NLL, or factorized representation misses quality/byte gate.",
+  "boundaries": [
+    "Synthetic token transformation screen only, not natural language performance or causal head-specific Function Vector evidence.",
+    "No model weight updates; task prompts define the behaviors.",
+    "Factor combination count is not capacity; heldout task behavior and actual bytes decide."
+  ]
+}
