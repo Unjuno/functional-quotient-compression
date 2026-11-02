@@ -1,0 +1,8 @@
+{
+  "amendment":"A3",
+  "reason":"A post-run audit identified that role-ID-to-view-table mapping metadata was explicit in Mirror state but implicit in rank-2 and dense upper state.",
+  "change":"Serialize the same two-role mapping in Mirror, rank-2, and dense packages. Keep shared input encoding and routing state common. Re-run the unchanged seeds/settings into runs/a3; preserve A0-A2.",
+  "fresh_accessed_before_amendment":true,
+  "data_or_hyperparameter_changes":false,
+  "purpose":"Parity of inference metadata charging only."
+}

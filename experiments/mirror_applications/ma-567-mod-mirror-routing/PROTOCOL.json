@@ -1,0 +1,66 @@
+{
+  "experiment_id": "MA-567",
+  "title": "Mixture-of-Depths plus Mirror compute/function routing",
+  "status": "FROZEN_SCREENING",
+  "base_commit": "c935a903",
+  "prior_art_refs": [
+    111
+  ],
+  "hypothesis": "At an identical token-depth compute budget, a role-conditioned Mirror view recovers distinct token functions beyond MoD routing alone; measure whether it improves the quality/bytes/active-FLOPs frontier over a generic shared rank-2 residual.",
+  "physical_object": "One shared two-block 8-channel nonlinear network",
+  "mirror_coordinate": "A binary task-role code selects a small Givens angle on the first hidden channel pair, independently of the token's depth route",
+  "logical_multiplicity": "Two token roles x two compute routes (one or two blocks)",
+  "development": {
+    "seeds": [
+      56701,
+      56702
+    ],
+    "tokens_per_seed": 512,
+    "deep_token_fraction": 0.5,
+    "role_balance": "exactly balanced",
+    "selection": "No hyperparameter tuning; verify fixed protocol and implementation."
+  },
+  "fresh": {
+    "seeds": [
+      56711,
+      56712,
+      56713
+    ],
+    "locked_before_access": true,
+    "tokens_per_seed": 512,
+    "deep_token_fraction": 0.5,
+    "role_balance": "exactly balanced"
+  },
+  "controls": [
+    "MoD routing alone, same fixed top-50% deep-token route",
+    "MoD plus generic shared rank-2 role residual",
+    "MoD plus role-conditioned Mirror Givens view",
+    "dense two-block independent compute upper reference",
+    "generic direct role-angle table with the same two scalar codes and Givens operation"
+  ],
+  "storage": {
+    "authority": "actual serialized NPZ inference payload bytes",
+    "paid_objects": [
+      "shared network weights",
+      "router rule and threshold",
+      "Mirror angle codes",
+      "rank-2 residual basis and role coefficients",
+      "independent dense state",
+      "metadata"
+    ]
+  },
+  "compute": {
+    "optimizer_updates": 0,
+    "report_active_block FLOPs": "count only routed tokens; separately include view/residual MACs",
+    "report_cpu_forward_wall_time": true
+  },
+  "success_gate": "All three fresh worlds: Mirror NRMSE <=1e-4, same exact deep-token fraction as MoD, and a better actual-byte/quality point than MoD alone. Mirror-specific advantage requires either >=10% lower total bytes at matched quality or >=10% lower active compute at matched bytes than the shared rank-2 control.",
+  "failure_gate": "Mirror misses the utility gate, or the generic shared rank-2 or direct scalar-angle control matches its quality with equal/lower bytes and active compute.",
+  "boundaries": [
+    "Synthetic token-function mechanism only; no trained Transformer, language NLL, GPU, energy, or capacity evidence.",
+    "Teacher contains an explicit role-conditioned first-pair Givens view; this is favorable to Mirror.",
+    "MoD compute allocation and role function choice are separately logged; combination count is not called capacity."
+  ],
+  "amendment": "A1-A6; A6 restores A0-A3 shared/input precision and is the authoritative audited replay.",
+  "accounting_correction": "A6 records float64 shared/input state and float32 View state as actually serialized and decoded. Direct angle table is an exact generic control."
+}

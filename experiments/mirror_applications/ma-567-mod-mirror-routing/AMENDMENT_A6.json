@@ -1,0 +1,9 @@
+{
+  "amendment":"A6",
+  "reason":"Independent audit showed A4/A5 had changed the previously used shared/input precision from float64 to float32. A5 also lacked a separate serialized generic direct-angle control in the original protocol.",
+  "change":"A6 restores float64 inputs and shared weights used in A0-A3; retains serialized-state inference, independent high-precision teacher, decoded router/depth fraction and role/basis metadata, fused rank-2, full-path timing, and direct scalar-angle alias control. Re-run the same seed IDs/settings into runs/a6. Preserve A0-A5.",
+  "fresh_accessed_before_amendment":true,
+  "precision_variant_changed_in_A4_A5":true,
+  "data_or_hyperparameter_changes":false,
+  "claim_boundary":"A6 is an audited replay using the originally used shared/input precision, not an independent new fresh sample. The analytic direct-angle alias is the scoped falsification result."
+}
