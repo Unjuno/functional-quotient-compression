@@ -1,0 +1,84 @@
+{
+  "experiment_id": "MA-526",
+  "title": "SAE feature bank as Mirror atoms",
+  "status": "SCREENING_AMENDED",
+  "amendment": {
+    "date": "2026-10-09",
+    "reason": "Pinned parquet is read directly; pyarrow is installed in the worker container. CPU-only full GPT-2 backward throughput made the planned sample prohibitively slow. Before accessing fresh examples, reduce the screening sample to 8 train, 4 dev, and 8 official-test rows per label. Scoring formula, K/alpha grid, and SHA256 row-selection algorithm remain unchanged; treat this as low-power screening and do not generalize beyond it. Final frozen development and fresh metrics use exact full-model intervention forwards.",
+    "dataset_revision_verified": true,
+    "fresh_access_rule": "Fresh test rows remain unopened until development freeze."
+  },
+  "row_id_artifact": "LOCKED_ROW_IDS.json",
+  "sample_size_amendment": {"train_per_label": 8, "dev_per_label": 4, "fresh_per_label": 8, "power_note": "Exploratory low-power screen due to CPU-only execution cost; follow-up replication required."},
+  "artifact_policy": "Raw pinned datasets and model/SAE files are held in the worker cache/artifacts and are not committed. Their source revision, byte counts, and hashes are recorded in the report.",
+  "base_commit": "263bd613",
+  "evidence_lane": "LANGUAGE/MECHANISM/STORAGE/RUNTIME",
+  "prior_art_refs": ["PA102"],
+  "hypothesis": "For four related but distinct news-topic steering functions in GPT-2 small, a shared SAE feature bank plus per-topic Givens Mirror coordinates preserves fresh topic-label uplift and limits collateral drift with fewer actual code bytes than independent sparse SAE lists and generic shared low-rank codes.",
+  "model": {
+    "repo": "openai-community/gpt2",
+    "revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+    "dtype": "float32",
+    "device": "cpu"
+  },
+  "sae": {
+    "repo": "jbloom/GPT2-Small-OAI-v5-32k-resid-post-SAEs",
+    "revision": "21df74db7b9f690cd2403a20485cf75f46330d0d",
+    "hook": "blocks.8.hook_resid_post",
+    "d_in": 768,
+    "d_sae": 32768,
+    "activation": "topk",
+    "topk": 32,
+    "normalize_activations": "layer_norm"
+  },
+  "dataset": {
+    "repo": "fancyzhx/ag_news",
+    "revision": "eb185aade064a813bc0b7f42de02595523103ca7",
+    "prompt_template": "News: {text}\nTopic:",
+    "label_texts": ["World", "Sports", "Business", "Sci/Tech"],
+    "split_selection": {
+      "algorithm": "stratified sample without replacement within label using SHA256(dataset_revision|split|row_idx|MA-526), then sort by digest",
+      "train_per_label": 32,
+      "dev_per_label": 16,
+      "fresh_per_label": 32,
+      "fresh_source_split": "test",
+      "fresh_row_ids_locked_before_dev": true
+    }
+  },
+  "mirror_insertion": "Per-topic Givens angles rotate paired coefficients in one shared SAE feature bank before decoding into the layer-8 residual stream.",
+  "physical_object": "one pinned GPT-2 small model and one pinned layer-8 SAE dictionary shared by all four topic functions",
+  "mirror_coordinate": "up to eight FP16 per-topic Givens angles (K/2 active adjacent pairs) over paired coefficients in a shared SAE feature atom bank",
+  "logical_multiplicity": "four topic-conditioned residual-stream steering functions",
+  "controls": [
+    "no intervention",
+    "independent SAE top-K feature steering per topic",
+    "random same-K SAE feature steering",
+    "shared SAE atom bank with generic per-topic low-rank coefficients",
+    "shared SAE atom bank with Givens Mirror angles",
+    "dense residual-gradient steering upper reference"
+  ],
+  "development": {
+    "data": "AG News train split; 32 examples per label for fitting and 16 per label for development selection",
+    "allowed_selection": ["K in {4,8,16}", "alpha in {0.25,0.5,1.0}", "development-only Givens angle fitting from zero initialization"],
+    "fresh_opened_only_after_dev_freeze": true
+  },
+  "fresh": {
+    "data": "AG News official test split; 32 examples per label",
+    "locked_before_access": true,
+    "use_for_tuning": false
+  },
+  "feature_selection": "For each topic c and SAE feature j, compute S[c,j]=mean_i <grad_h logP(label_c|x_i), D_j> over training examples, where h is the last layer-8 residual and D_j is decoder feature j. Independent SAE selects each class top-K positive scores; shared bank selects K features by total absolute score across topics.",
+  "mirror_code": "One shared K-vector initialized from pooled training scores; rotate adjacent coefficient pairs with K/2 per-topic FP16 Givens angles. Initialize angles to zero and fit on development only.",
+  "generic_shared_lowrank_control": "Use the same K SAE atoms and rank K/2 unconstrained per-topic coefficients.",
+  "primary_metric": "correct-label sequence log-probability uplift on fresh texts under the corresponding oracle topic code",
+  "secondary_metrics": ["correct-label ranking accuracy", "full-vocabulary KL drift", "active SAE features", "actual serialized code bytes", "complete shared+code payload bytes", "SAE/GPT-2 MAC proxy", "CPU wall-clock and examples/second"],
+  "storage": {
+    "authority": "actual serialized file bytes and SHA-256",
+    "paid_shared_objects": ["all GPT-2 model tensors", "tokenizer files", "SAE encoder and decoder tensors", "SAE normalization/configuration metadata"],
+    "paid_per_method_objects": ["feature indices", "sparse coefficients", "shared code basis", "Mirror angles", "scales", "reconstruction and task metadata"],
+    "shared_payload_counted_once_per_bank": true
+  },
+  "success_gate": "Every fresh topic retains >=90% of independent top-8 SAE uplift, loses <=2 percentage points of label-ranking accuracy, has <=1.10x full-vocabulary KL drift, and uses >=20% fewer incremental code bytes; generic shared low-rank control must not dominate at byte-near cost (within 10%).",
+  "failure_gate": "Development cannot meet quality/KL/byte gates, or generic/shared low-rank matches or dominates Mirror at byte-near cost; keep fresh sealed.",
+  "boundaries": ["Four AG News topics and one GPT-2/SAE layer only.", "Topic ID is supplied; routing is not evaluated.", "No LM or SAE fine-tuning; only feature/code selection and development fitting.", "Feature steering success does not establish arbitrary behavior capacity."]
+}
