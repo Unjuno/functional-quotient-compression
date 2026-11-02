@@ -1,0 +1,101 @@
+{
+  "experiment_id": "MA-517",
+  "title": "Mirror composition of function vectors",
+  "status": "FROZEN_SCREENING",
+  "base_commit": "64f4d3b0",
+  "evidence_lane": "FUNCTION_VECTOR_COMPOSITION/HELD_OUT_ACCURACY/ACTUAL_BYTES/INTERFERENCE",
+  "model": {
+    "id": "openai-community/gpt2",
+    "revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+    "parameters": 124439808,
+    "dtype": "float32",
+    "device": "CPU"
+  },
+  "hypothesis": "For two demonstrated mappings that compose on held-out inputs, layer-factorized application of two extracted function vectors will improve held-out composition accuracy over raw same-layer vector addition at the same or lower intervention payload cost.",
+  "physical_object": "one frozen GPT-2 model with two fixed residual-stream intervention sites at layers 4 and 8",
+  "mirror_coordinate": "ordered pair of task function vectors (f1,f2); compare same-layer sum against role/layer-factorized code",
+  "logical_multiplicity": "composed fruit-to-color and color-to-shape mappings yielding fruit-to-shape outputs",
+  "prior_art_refs": [
+    99
+  ],
+  "controls": [
+    "query-only frozen GPT-2",
+    "direct in-context demonstrations of both mappings",
+    "raw f1+f2 at layer 6",
+    "factorized f1@layer4 and f2@layer8",
+    "f1-only/f2-only ablations",
+    "explicit two-vector serialized payload"
+  ],
+  "task": {
+    "type": "synthetic compositional ICL",
+    "tasks_per_world": 16,
+    "support": "four fruit->color pairs and four color->shape pairs covering held-out fruit intermediates",
+    "held_out_queries": 4,
+    "metrics": [
+      "held-out target-token accuracy and NLL",
+      "composition accuracy vs direct ICL/raw sum/ablations",
+      "cross-task vector similarity",
+      "actual two-vector payload bytes",
+      "extract/apply latency"
+    ],
+    "shapes": [
+      "circle",
+      "square",
+      "triangle",
+      "diamond",
+      "oval",
+      "star",
+      "heart",
+      "sphere"
+    ]
+  },
+  "development": {
+    "worlds": [
+      51700,
+      51701
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "allowed": "development used only to check serialization and estimate basis-free vector variability; layer sites and arithmetic/factorized conditions fixed a priori"
+  },
+  "fresh": {
+    "worlds": [
+      51710,
+      51711,
+      51712
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual serialized function-vector intervention payload; report pinned model+tokenizer base bytes separately",
+    "paid_objects": [
+      "both full task vectors or factorized vectors",
+      "all per-task metadata and decoder state"
+    ]
+  },
+  "compute": {
+    "report_support_vector_extraction_seconds": true,
+    "report_intervention_forward_seconds": true,
+    "report_model_forward_passes": true
+  },
+  "success_gate": "Direct composition ICL exceeds 12.5% chance in every fresh world, and factorized layer application beats raw f1+f2 by >=5 percentage points in every world without lowering direct ICL; include payload bytes and ablations.",
+  "failure_gate": "Direct composition ICL is at chance, extracted vectors do not improve query-only, or layer-factorized code does not beat raw vector addition at equal bytes.",
+  "boundaries": [
+    "One small GPT-2 checkpoint and synthetic mapping composition only; not a broad NLP or GPT-J Function Vectors reproduction.",
+    "No model weight training; support demonstrations define tasks.",
+    "Function composition count is not capacity; held-out exact task behavior is primary."
+  ],
+  "amendment_before_fresh": {
+    "reason": "The tokenizer smoke test found one shape label split into multiple tokens, which would make single-next-token scoring invalid.",
+    "change": "Replace hexagon with the one-token label sphere; no task structure or success gate changed.",
+    "fresh_not_opened": true
+  }
+}
