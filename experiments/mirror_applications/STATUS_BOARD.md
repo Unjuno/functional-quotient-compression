@@ -9,7 +9,7 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 - P0: **630** (183 completed; 447 UNTESTED)
 - P1: **422** (15 completed; 407 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **942 UNTESTED, 58 PROMISING, 154 FAIL, 1 SCREENING**
+- Current MA statuses: **941 UNTESTED, 58 PROMISING, 155 FAIL, 1 SCREENING**
 - 47 baseline experiment directories remain present; verified external outcomes are linked to their dedicated branches in the registry and claim ledger.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). See the current Next candidate section for the live queue.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. see the current Next candidate section.
@@ -114,3 +114,5 @@ MA-550's 2-dev + 3-fresh synthetic allocation screen passes reconstruction but F
 MA-551 FAIL: Givens views recover an aligned synthetic function bank in fewer bytes than independent FiLM, but miss the frozen fused-throughput gate in both development worlds and exactly alias a native Givens adapter. Fresh stayed sealed.
 
 MA-553 FAIL: task×layer rank-4 FiLM factorization and direct coefficients are the same function at the same 5,204B, but miss held-out output quality badly (nMSE 4.93). A smaller HyperFormer-like generator also misses quality; fresh stayed sealed.
+
+MA-554 FAILs Mirror-specific attribution: on an aligned synthetic rotation orbit, the direct two-basis coefficient control is byte- and function-identical to Mirror (973B, zero held-out nMSE). Fresh stayed sealed.

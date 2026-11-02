@@ -1,0 +1,68 @@
+{
+  "experiment_id": "MA-554",
+  "title": "Input-conditioned Mirror modulation network",
+  "status": "DEVELOPMENT_ONLY_FAIL_MIRROR_SPECIFIC",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY/COMPUTE",
+  "base_commit": "93600071",
+  "hypothesis": "A low-description context-to-Mirror-code generator reproduces held-out sample-conditioned functions with better payload/compute than FiLM, generic dynamic filters, and direct coefficient generation.",
+  "physical_object": "shared 8x8 operator and fixed orthogonal rotation basis",
+  "mirror_coordinate": "context-generated rotation angle",
+  "logical_multiplicity": "sample-specific functions over continuous two-dimensional context",
+  "prior_art_refs": [
+    "PA106",
+    "PA122"
+  ],
+  "controls": [
+    "shared static operator",
+    "angle-code Mirror generator",
+    "direct two-basis coefficient generator",
+    "context-conditioned FiLM",
+    "generic full-matrix linear dynamic filter"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      55401,
+      55402
+    ],
+    "input_dim": 8,
+    "context_dim": 2,
+    "output_dim": 8,
+    "train_contexts": 256,
+    "test_contexts": 256,
+    "probes_per_context": 32,
+    "selection_metric": "heldout output nMSE, actual serialized bytes, generator and operator MAC proxy"
+  },
+  "fresh": {
+    "worlds_or_seeds": [],
+    "locked_before_access": true,
+    "open_only_if_development_passes": false,
+    "reason": "Direct two-basis coefficient control is evaluated before fresh split."
+  },
+  "storage": {
+    "authority": "actual deterministic NPZ inference payload bytes",
+    "paid_objects": [
+      "shared operator",
+      "rotation basis",
+      "context encoder",
+      "generator coefficients",
+      "FiLM generator",
+      "dynamic filter generator",
+      "metadata"
+    ]
+  },
+  "compute": {
+    "report_examples": true,
+    "report_optimizer_updates": true,
+    "report_generator_MACs": true,
+    "report_operator_MACs": true,
+    "report_isolated_wall_clock": true
+  },
+  "success_gate": "Mirror output nMSE <=1e-4, >=10% fewer bytes than FiLM and generic dynamic filter, and >=10% smaller than direct coefficient generator at matched quality.",
+  "failure_gate": "Direct coefficient control matches Mirror within 1% bytes/quality or output quality fails.",
+  "boundaries": [
+    "synthetic smooth rotation orbit",
+    "no natural input or Transformer claim",
+    "fresh remains sealed if specificity gate fails",
+    "Direct two-basis coefficient representation was charged only for shared W and context map; fixed J is deterministic, making its serialized state identical to Mirror."
+  ]
+}
