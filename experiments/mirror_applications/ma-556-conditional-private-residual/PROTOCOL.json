@@ -1,0 +1,79 @@
+{
+  "experiment_id": "MA-556",
+  "title": "Conditional modulation with sparse private residual",
+  "status": "DEVELOPMENT_ONLY_FAIL_STORAGE_FRONTIER",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY/PRIVATE_FRONTIER/COMPUTE",
+  "base_commit": "e5916d18",
+  "hypothesis": "A shared conditional low-rank view plus sparse private residuals retains function quality across growing task heterogeneity with fewer bytes than independent operators, and identifies where private state becomes necessary.",
+  "physical_object": "shared 8x8 base operator and rank-2 shared task basis",
+  "mirror_coordinate": "per-task basis coefficients plus sparse private residual entries",
+  "logical_multiplicity": "eight task-conditioned operators",
+  "prior_art_refs": [
+    "PA106",
+    "PA18"
+  ],
+  "controls": [
+    "shared base",
+    "rank-2 Mirror",
+    "rank-2 direct coefficient basis",
+    "Mirror plus sparse private residual fractions",
+    "independent full operators"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      55601,
+      55602
+    ],
+    "tasks": 8,
+    "matrix_shape": [
+      8,
+      8
+    ],
+    "heterogeneity": [
+      0.0,
+      0.1,
+      0.3,
+      0.6
+    ],
+    "private_fractions": [
+      0,
+      0.05,
+      0.1,
+      0.25,
+      0.5,
+      1.0
+    ],
+    "selection_metric": "nMSE-byte frontier and private fraction at threshold"
+  },
+  "fresh": {
+    "worlds_or_seeds": [],
+    "locked_before_access": true,
+    "open_only_if_development_passes": false,
+    "reason": "Direct coefficient basis is matched and the registered frontier is synthetic mechanism evidence."
+  },
+  "storage": {
+    "authority": "actual deterministic NPZ payload bytes",
+    "paid_objects": [
+      "shared base",
+      "shared basis",
+      "per-task coefficients",
+      "private residual values",
+      "indices",
+      "metadata"
+    ]
+  },
+  "compute": {
+    "report_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_time": true
+  },
+  "success_gate": "At heterogeneity <=0.3, residual fraction <0.25 reaches nMSE <=1e-3 and saves >=20% bytes over independent operators.",
+  "failure_gate": "No residual fraction below 0.5 meets nMSE <=1e-3 at heterogeneity <=0.3, or shared/private bytes never beat independent storage.",
+  "boundaries": [
+    "oracle SVD basis screen",
+    "no trained PEFT or natural task claim",
+    "no fresh worlds if direct control aliases Mirror",
+    "Magnitude top-k oracle selection gives an optimistic residual frontier, not a learned residual allocator."
+  ]
+}
