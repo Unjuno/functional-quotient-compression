@@ -1,0 +1,8 @@
+{
+  "amendment":"A1",
+  "reason":"The initial implementation logged the grid evaluation count but omitted calibration wall time and measured no inference wall time despite the compute contract.",
+  "change":"A1 records dev calibration seconds and warmed end-to-end folded-matrix inference time from serialized/dequantized weights; method settings, selected angle, data, payload objects and quality remain unchanged. Preserve initial runs; use runs/a1 as audited measurement replay.",
+  "fresh_accessed_before_amendment":true,
+  "data_or_hyperparameter_changes":false,
+  "purpose":"Compute timing instrumentation only."
+}
