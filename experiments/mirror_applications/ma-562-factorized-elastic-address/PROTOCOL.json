@@ -1,0 +1,12 @@
+{
+  "experiment_id":"MA-562","title":"Factorized width x depth Mirror address","status":"FROZEN_SCREENING","base_commit":"c935a903","prior_art_refs":[108,109],
+  "hypothesis":"An additive width-factor plus depth-factor Givens address transfers to unseen joint width/depth configurations with near-independent quality and lower actual bytes than per-configuration maps.",
+  "physical_object":"One shared 12-channel residual network","mirror_coordinate":"theta(width,depth)=alpha_width+beta_depth, stored as two small factor vectors","logical_multiplicity":"Nine width x depth configurations with four joint combinations held out",
+  "development":{"seeds":[56201,56202],"train_configs":[[4,1],[4,2],[8,1],[8,3],[12,2]],"heldout_configs":[[4,3],[8,2],[12,1],[12,3]]},
+  "fresh":{"seeds":[56211,56212,56213],"locked_before_access":true,"train_configs":[[4,1],[4,2],[8,1],[8,3],[12,2]],"heldout_configs":[[4,3],[8,2],[12,1],[12,3]]},
+  "controls":["native elastic network without correction","generic direct additive scalar law alpha_width+beta_depth applied as a Givens angle","independent effective output map per configuration"],
+  "storage":{"authority":"actual serialized NPZ inference payload bytes","paid_objects":["shared network weights","Mirror width/depth factors","generic control coefficients","all independent per-config maps","metadata"]},
+  "success_gate":"Across all fresh worlds, Mirror heldout NRMSE <=1e-4, <=50% bytes of independent maps, and >=10% smaller payload than generic additive scalar control at comparable quality.",
+  "failure_gate":"Mirror misses quality/storage gate or generic additive scalar control reproduces its outputs and uses equal/lower bytes.","compute":{"optimizer_updates":0,"report_cpu_wall_time":true},
+  "boundaries":["Synthetic additive Givens-orbit mechanism only; no trained OFA/US-Net, natural task, GPU, or capacity evidence.","The generic additive scalar control is an explicit functional alias audit: exact function equality counts against Mirror-specificity."]
+}
