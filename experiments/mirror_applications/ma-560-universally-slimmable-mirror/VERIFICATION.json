@@ -1,0 +1,11 @@
+{
+  "experiment_id": "MA-560",
+  "commit": "pending",
+  "protocol_commit": "1831195c",
+  "tests": {"command": "PYTHONDONTWRITEBYTECODE=1 python -m pytest -q -p no:cacheprovider experiments/mirror_applications/ma-560-universally-slimmable-mirror/tests", "passed": 4, "failed": 0},
+  "serialization": {"roundtrip_checked": true, "byte_exact": true, "worlds_checked": [56001, 56002]},
+  "metric_replay": {"checked": true, "max_difference": 0.0, "rows_checked": 64},
+  "fresh_split_integrity_checked": false,
+  "fresh_opened": false,
+  "notes": ["Protocol frozen before implementation and development at 1831195c.", "Two development worlds replay all metrics and payload bytes/hashes exactly.", "Mirror meets development quality but misses the independent total-payload ratio gate; fresh stays locked pending protocol-fixed transfer evaluation."]
+}
