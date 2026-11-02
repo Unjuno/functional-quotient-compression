@@ -1,4 +1,4 @@
-import argparse, csv, json, time
+import argparse, csv, json, time, hashlib
 from pathlib import Path
 import numpy as np
 from scipy.optimize import least_squares
@@ -93,7 +93,9 @@ def run(seed,out,split):
         ms=(time.perf_counter()-t)*1000/30
         for row in rows:
             if row['method']==method: row['forward_ms_384']=ms
-    p=payload/'metrics.json'; p.write_text(json.dumps({'seed':seed,'split':split,'mirror_coeff':q.tolist(),'rank1_u':u.tolist(),'rank1_v':v.tolist(),'rank1_config':a.tolist(),'bytes':{'shared':shared_b,'mirror':mirror_b,'rank1':rank_b,'independent':full_b},'optimizer_updates':0,'fit_seconds':{'mirror':fit_seconds,'rank1':rank_seconds}},indent=2)+'\n')
+    files={k:payload/f'{k}.npz' for k in ['shared','mirror','rank1','independent']}
+    hashes={k:hashlib.sha256(path.read_bytes()).hexdigest() for k,path in files.items()}
+    p=payload/'metrics.json'; p.write_text(json.dumps({'seed':seed,'split':split,'mirror_coeff':q.tolist(),'rank1_u':u.tolist(),'rank1_v':v.tolist(),'rank1_config':a.tolist(),'bytes':{'shared':shared_b,'mirror':mirror_b,'rank1':rank_b,'independent':full_b},'sha256':hashes,'optimizer_updates':0,'fit_seconds':{'mirror':fit_seconds,'rank1':rank_seconds}},indent=2)+'\n')
     with (payload/'RESULTS_CORE.csv').open('w',newline='') as f:
         w=csv.DictWriter(f,fieldnames=list(rows[0])); w.writeheader(); w.writerows(rows)
     return rows
