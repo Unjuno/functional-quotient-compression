@@ -1,0 +1,54 @@
+{
+  "experiment_id": "MA-539",
+  "title": "Packet-level function vector as shared plan",
+  "status": "SCREENING",
+  "evidence_lane": "SYNTHETIC_PACKET_MECHANISM/ACTUAL_BYTES/COMPUTE",
+  "base_commit": "c2bac092",
+  "hypothesis": "One support-extracted compact function code shared across four future slots matches an independent exact function execution on joint packet validity while costing at most half the address bytes of four independent slot codes. The FV-specific hypothesis is falsified if the same shared code interpreted as a generic packet latent performs identically at equal bytes.",
+  "physical_object": "Shared fixed rule bank and four-slot executor.",
+  "mirror_coordinate": "One support-extracted 8-dimensional FV address shared by all future packet slots.",
+  "logical_multiplicity": "One selected logical function determines an ordered four-token packet while using a single shared address.",
+  "prior_art_refs": ["PA99", "PA10", "TM001"],
+  "controls": ["KV-cached autoregressive executor", "independent phase slots with no shared plan", "PTP-style single shared packet latent", "generic learned shared packet latent matched in dimension and extraction budget", "explicit shared rule ID upper bound, charged"],
+  "task": {
+    "type": "synthetic deterministic rule execution with support demonstrations disjoint from query packets",
+    "packet_length": 4,
+    "symbols": 16,
+    "rules_per_world": 8,
+    "support_examples_per_world": 64,
+    "query_packets_per_world": 256,
+    "rule": "apply selected bijection recursively to start symbol for four ordered targets",
+    "leakage_constraint": "FV extractor sees support input/output pairs only, never query targets"
+  },
+  "development": {
+    "worlds": [60101, 60102],
+    "updates": 0,
+    "batch_size": 128,
+    "optimizer": "none; exact finite-state extraction/execution audit",
+    "learning_rate": null,
+    "selection_metric": "exact packet validity and actual serialized address bytes",
+    "settings_frozen_before_run": true
+  },
+  "fresh": {
+    "worlds": [60111, 60112, 60113],
+    "locked_before_access": true,
+    "access_condition": "Open only if on each development world FV joint NLL is >=10% lower than both generic shared latent and independent slots, exact packet accuracy >=95%, and FV address bytes <=50% of four independent slot codes."
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": ["common rule bank", "common executor", "FV encoder and shared address", "generic shared latent state", "independent per-slot codes", "slot heads", "configs and metadata", "direct rule-ID oracle code"],
+    "serialization": "deterministic safetensors plus canonical JSON; hash each payload"
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true,
+    "inference": "CPU one thread, per-packet latency across all methods"
+  },
+  "success_gate": "On every fresh world, FV execution has >=95% exact packet accuracy, is no worse than shared generic latent at equal bytes, and FV address bytes are <=50% of four independent slot codes. Any FV-specific advantage requires a measurable improvement over the equal-byte shared generic latent.",
+  "failure_gate": "A development world has <95% FV exact packet accuracy, or FV does not reduce address bytes against four independent codes; fresh worlds remain sealed. Identical FV and generic-latent behavior is recorded as no FV-specific advantage.",
+  "boundaries": ["Synthetic deterministic mechanism only; not natural-language quality or capacity.", "The direct rule-ID is an oracle ceiling, not an FV result.", "Rule identity is available from disjoint support examples; no query target is exposed to extraction.", "Logical code combinations are not counted as independent capacity.", "All packet methods use the same exact finite-state executor; wall-time is a common executor calibration, not a method-specific neural inference comparison. Joint NLL is not estimated by this exact screen."],
+  "frozen_at": "2026-10-09",
+  "amendments": [{"id":"amendment-1","date":"2026-10-09","before_measurement":true,"reason":"The initial formulation's arbitrary 8-rule codebook made model training irrelevant and left FV extraction underdefined. Replace trainable neural optimization with an exact finite-state mechanism audit: derive a shared function codebook from support examples, freeze all decoding, and compare matched shared codes against repeated independent slot codes and a generic latent re-interpretation. No dev metrics or audit data were read before amendment.","changes":["optimizer updates set to zero","replace 10% NLL superiority as primary FV gate with exact function execution, actual code bytes, and an explicit FV-vs-generic-latent tie audit","fresh gate applies only if development structural/byte gate passes"]}]
+}

@@ -1,0 +1,441 @@
+{
+  "experiment_id": "MA-539",
+  "status": "FAIL",
+  "decision_scope": "FV-specific value FAIL; generic shared-address storage factorization passes the exact finite-state synthetic mechanism screen.",
+  "amended_protocol_fixed_before_measurement": true,
+  "amended_protocol_committed_before_measurement": false,
+  "fresh_accessed": true,
+  "fresh_access_gate": "Both development worlds passed the preregistered amended exact-accuracy >=95% and shared-address <=50% of four independent-slot bytes gate.",
+  "accounting_amendment": "Canonical inference JSON configs were included after the initial run; this changed serialized byte totals only, not model behavior or selection.",
+  "tests": {
+    "command": "pytest -q experiments/mirror_applications/ma-539-packet-function-vector/tests",
+    "result": "2 passed"
+  },
+  "checks": [
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/PROTOCOL.json",
+      "bytes": 4928,
+      "sha256": "ca838cf7e5a2f49866a008f007e5ed6b2f4ba8f157a9430247fe719eb06470f3"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/README.md",
+      "bytes": 7390,
+      "sha256": "86cae78cd20f8c66dc6480d258c63af51849caa46a2e84dec03d58beb06436a6"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/RESULTS_CORE.csv",
+      "bytes": 6944,
+      "sha256": "75daaa478fdad2bbb61f0c977f0dfbbc75c6ca95050cf1366bced74aec8721d4"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/STATUS.md",
+      "bytes": 2197,
+      "sha256": "85a0e89c921bcca3b3eefe5ab66e1e403ef043bd264905a59f4751f6c503553b"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/dev/SUMMARY.json",
+      "bytes": 7460,
+      "sha256": "11fdb91aa8fe9b40c54b1de0c216dd076956dcbc668eeafc88e728b0c8370b42"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/dev/seed_60101/world_60101_ar_exact.json",
+      "bytes": 121,
+      "sha256": "3a2b6f2df523186f9bfa8682af64f13671dafc99f2d324b6d713592731b424e8"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/dev/seed_60101/world_60101_ar_exact.safetensors",
+      "bytes": 336,
+      "sha256": "fafd9aba099c39a07c2dad079305b3f763fa078b53cf341233b43e2521cb069e"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/dev/seed_60101/world_60101_common.json",
+      "bytes": 103,
+      "sha256": "c37fcd41b61669d168b80728bff41154844c7657d9437174d5c4382df7482dee"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/dev/seed_60101/world_60101_common.safetensors",
+      "bytes": 1104,
+      "sha256": "1a26a3ad80d14362615364ef6cb4a935a1e5779ecc7db368de9120793a6e9142"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/dev/seed_60101/world_60101_fv_shared_code.json",
+      "bytes": 132,
+      "sha256": "da626a73f2b789a98eaaa68687c533db9befb184f0de38df32010b8ef77d86f5"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/dev/seed_60101/world_60101_fv_shared_code.safetensors",
+      "bytes": 336,
+      "sha256": "fafd9aba099c39a07c2dad079305b3f763fa078b53cf341233b43e2521cb069e"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/dev/seed_60101/world_60101_generic_shared_latent.json",
+      "bytes": 132,
+      "sha256": "da626a73f2b789a98eaaa68687c533db9befb184f0de38df32010b8ef77d86f5"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/dev/seed_60101/world_60101_generic_shared_latent.safetensors",
+      "bytes": 336,
+      "sha256": "fafd9aba099c39a07c2dad079305b3f763fa078b53cf341233b43e2521cb069e"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/dev/seed_60101/world_60101_independent_slots.json",
+      "bytes": 141,
+      "sha256": "3962b6f1c15c70ca42cf0ea3017a5e1337b530e85ca93a8f1d4acfc456be803d"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/dev/seed_60101/world_60101_independent_slots.safetensors",
+      "bytes": 1104,
+      "sha256": "c6dd1265a8a86846a1b3be78b48c151176466f40eed97942a2d21f785e72ed7c"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/dev/seed_60101/world_60101_ptp_shared_latent.json",
+      "bytes": 132,
+      "sha256": "da626a73f2b789a98eaaa68687c533db9befb184f0de38df32010b8ef77d86f5"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/dev/seed_60101/world_60101_ptp_shared_latent.safetensors",
+      "bytes": 336,
+      "sha256": "fafd9aba099c39a07c2dad079305b3f763fa078b53cf341233b43e2521cb069e"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/dev/seed_60101/world_60101_rule_id_oracle.json",
+      "bytes": 132,
+      "sha256": "da626a73f2b789a98eaaa68687c533db9befb184f0de38df32010b8ef77d86f5"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/dev/seed_60101/world_60101_rule_id_oracle.safetensors",
+      "bytes": 336,
+      "sha256": "fafd9aba099c39a07c2dad079305b3f763fa078b53cf341233b43e2521cb069e"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/dev/seed_60101/world_60101_shared_address.safetensors",
+      "bytes": 336,
+      "sha256": "fafd9aba099c39a07c2dad079305b3f763fa078b53cf341233b43e2521cb069e"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/dev/seed_60102/world_60102_ar_exact.json",
+      "bytes": 121,
+      "sha256": "4d029cdef1b0924e63e2dfcca893b498ad70ada3bea97bbb81426faf3d24aa1f"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/dev/seed_60102/world_60102_ar_exact.safetensors",
+      "bytes": 336,
+      "sha256": "fafd9aba099c39a07c2dad079305b3f763fa078b53cf341233b43e2521cb069e"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/dev/seed_60102/world_60102_common.json",
+      "bytes": 103,
+      "sha256": "c37fcd41b61669d168b80728bff41154844c7657d9437174d5c4382df7482dee"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/dev/seed_60102/world_60102_common.safetensors",
+      "bytes": 1104,
+      "sha256": "d863a738ca8605c3c9c15c9fc8f08c1e140ca66743412139d4bea751a53e89ab"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/dev/seed_60102/world_60102_fv_shared_code.json",
+      "bytes": 132,
+      "sha256": "da626a73f2b789a98eaaa68687c533db9befb184f0de38df32010b8ef77d86f5"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/dev/seed_60102/world_60102_fv_shared_code.safetensors",
+      "bytes": 336,
+      "sha256": "fafd9aba099c39a07c2dad079305b3f763fa078b53cf341233b43e2521cb069e"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/dev/seed_60102/world_60102_generic_shared_latent.json",
+      "bytes": 132,
+      "sha256": "da626a73f2b789a98eaaa68687c533db9befb184f0de38df32010b8ef77d86f5"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/dev/seed_60102/world_60102_generic_shared_latent.safetensors",
+      "bytes": 336,
+      "sha256": "fafd9aba099c39a07c2dad079305b3f763fa078b53cf341233b43e2521cb069e"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/dev/seed_60102/world_60102_independent_slots.json",
+      "bytes": 141,
+      "sha256": "e3ae64d36060af8902cb33db933552f546bb9411d053a14e3106771f4c8a1ee2"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/dev/seed_60102/world_60102_independent_slots.safetensors",
+      "bytes": 1104,
+      "sha256": "c6dd1265a8a86846a1b3be78b48c151176466f40eed97942a2d21f785e72ed7c"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/dev/seed_60102/world_60102_ptp_shared_latent.json",
+      "bytes": 132,
+      "sha256": "da626a73f2b789a98eaaa68687c533db9befb184f0de38df32010b8ef77d86f5"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/dev/seed_60102/world_60102_ptp_shared_latent.safetensors",
+      "bytes": 336,
+      "sha256": "fafd9aba099c39a07c2dad079305b3f763fa078b53cf341233b43e2521cb069e"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/dev/seed_60102/world_60102_rule_id_oracle.json",
+      "bytes": 132,
+      "sha256": "da626a73f2b789a98eaaa68687c533db9befb184f0de38df32010b8ef77d86f5"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/dev/seed_60102/world_60102_rule_id_oracle.safetensors",
+      "bytes": 336,
+      "sha256": "fafd9aba099c39a07c2dad079305b3f763fa078b53cf341233b43e2521cb069e"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/dev/seed_60102/world_60102_shared_address.safetensors",
+      "bytes": 336,
+      "sha256": "fafd9aba099c39a07c2dad079305b3f763fa078b53cf341233b43e2521cb069e"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/fresh/SUMMARY.json",
+      "bytes": 11122,
+      "sha256": "c442f03c5678592415bec2cb6858933a5c42e6c665c160abd42c072eef030a80"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/fresh/seed_60111/world_60111_ar_exact.json",
+      "bytes": 121,
+      "sha256": "04c0cde86e51501faed9162072ad9619c30a1e39be7cb10aa8557323471e6f85"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/fresh/seed_60111/world_60111_ar_exact.safetensors",
+      "bytes": 336,
+      "sha256": "fafd9aba099c39a07c2dad079305b3f763fa078b53cf341233b43e2521cb069e"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/fresh/seed_60111/world_60111_common.json",
+      "bytes": 103,
+      "sha256": "c37fcd41b61669d168b80728bff41154844c7657d9437174d5c4382df7482dee"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/fresh/seed_60111/world_60111_common.safetensors",
+      "bytes": 1104,
+      "sha256": "d0a425ff902d321cc98a19d0cff34c05619d0de40c55f61847fdcec1c111e6a0"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/fresh/seed_60111/world_60111_fv_shared_code.json",
+      "bytes": 132,
+      "sha256": "da626a73f2b789a98eaaa68687c533db9befb184f0de38df32010b8ef77d86f5"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/fresh/seed_60111/world_60111_fv_shared_code.safetensors",
+      "bytes": 336,
+      "sha256": "fafd9aba099c39a07c2dad079305b3f763fa078b53cf341233b43e2521cb069e"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/fresh/seed_60111/world_60111_generic_shared_latent.json",
+      "bytes": 132,
+      "sha256": "da626a73f2b789a98eaaa68687c533db9befb184f0de38df32010b8ef77d86f5"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/fresh/seed_60111/world_60111_generic_shared_latent.safetensors",
+      "bytes": 336,
+      "sha256": "fafd9aba099c39a07c2dad079305b3f763fa078b53cf341233b43e2521cb069e"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/fresh/seed_60111/world_60111_independent_slots.json",
+      "bytes": 141,
+      "sha256": "c4fab86af315907f5fde3c3211ebb5ac37683be2501f50f84f55dbe0c7b8494f"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/fresh/seed_60111/world_60111_independent_slots.safetensors",
+      "bytes": 1104,
+      "sha256": "c6dd1265a8a86846a1b3be78b48c151176466f40eed97942a2d21f785e72ed7c"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/fresh/seed_60111/world_60111_ptp_shared_latent.json",
+      "bytes": 132,
+      "sha256": "da626a73f2b789a98eaaa68687c533db9befb184f0de38df32010b8ef77d86f5"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/fresh/seed_60111/world_60111_ptp_shared_latent.safetensors",
+      "bytes": 336,
+      "sha256": "fafd9aba099c39a07c2dad079305b3f763fa078b53cf341233b43e2521cb069e"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/fresh/seed_60111/world_60111_rule_id_oracle.json",
+      "bytes": 132,
+      "sha256": "da626a73f2b789a98eaaa68687c533db9befb184f0de38df32010b8ef77d86f5"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/fresh/seed_60111/world_60111_rule_id_oracle.safetensors",
+      "bytes": 336,
+      "sha256": "fafd9aba099c39a07c2dad079305b3f763fa078b53cf341233b43e2521cb069e"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/fresh/seed_60111/world_60111_shared_address.safetensors",
+      "bytes": 336,
+      "sha256": "fafd9aba099c39a07c2dad079305b3f763fa078b53cf341233b43e2521cb069e"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/fresh/seed_60112/world_60112_ar_exact.json",
+      "bytes": 121,
+      "sha256": "50fc72f2f4fed12d36fe690baa66a2420c2d60c9e6083e07c2d8919a7806587c"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/fresh/seed_60112/world_60112_ar_exact.safetensors",
+      "bytes": 336,
+      "sha256": "fafd9aba099c39a07c2dad079305b3f763fa078b53cf341233b43e2521cb069e"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/fresh/seed_60112/world_60112_common.json",
+      "bytes": 103,
+      "sha256": "c37fcd41b61669d168b80728bff41154844c7657d9437174d5c4382df7482dee"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/fresh/seed_60112/world_60112_common.safetensors",
+      "bytes": 1104,
+      "sha256": "41952f9e6860006a30e4f9bfb98178e8bb8625a806b355e1a95727a6fede42e4"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/fresh/seed_60112/world_60112_fv_shared_code.json",
+      "bytes": 132,
+      "sha256": "da626a73f2b789a98eaaa68687c533db9befb184f0de38df32010b8ef77d86f5"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/fresh/seed_60112/world_60112_fv_shared_code.safetensors",
+      "bytes": 336,
+      "sha256": "fafd9aba099c39a07c2dad079305b3f763fa078b53cf341233b43e2521cb069e"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/fresh/seed_60112/world_60112_generic_shared_latent.json",
+      "bytes": 132,
+      "sha256": "da626a73f2b789a98eaaa68687c533db9befb184f0de38df32010b8ef77d86f5"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/fresh/seed_60112/world_60112_generic_shared_latent.safetensors",
+      "bytes": 336,
+      "sha256": "fafd9aba099c39a07c2dad079305b3f763fa078b53cf341233b43e2521cb069e"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/fresh/seed_60112/world_60112_independent_slots.json",
+      "bytes": 141,
+      "sha256": "e15eab23f3bbc3a1aadb35fdd06bd796db07c7520c97f05a4120e75c95b3b9f6"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/fresh/seed_60112/world_60112_independent_slots.safetensors",
+      "bytes": 1104,
+      "sha256": "c6dd1265a8a86846a1b3be78b48c151176466f40eed97942a2d21f785e72ed7c"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/fresh/seed_60112/world_60112_ptp_shared_latent.json",
+      "bytes": 132,
+      "sha256": "da626a73f2b789a98eaaa68687c533db9befb184f0de38df32010b8ef77d86f5"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/fresh/seed_60112/world_60112_ptp_shared_latent.safetensors",
+      "bytes": 336,
+      "sha256": "fafd9aba099c39a07c2dad079305b3f763fa078b53cf341233b43e2521cb069e"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/fresh/seed_60112/world_60112_rule_id_oracle.json",
+      "bytes": 132,
+      "sha256": "da626a73f2b789a98eaaa68687c533db9befb184f0de38df32010b8ef77d86f5"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/fresh/seed_60112/world_60112_rule_id_oracle.safetensors",
+      "bytes": 336,
+      "sha256": "fafd9aba099c39a07c2dad079305b3f763fa078b53cf341233b43e2521cb069e"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/fresh/seed_60112/world_60112_shared_address.safetensors",
+      "bytes": 336,
+      "sha256": "fafd9aba099c39a07c2dad079305b3f763fa078b53cf341233b43e2521cb069e"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/fresh/seed_60113/world_60113_ar_exact.json",
+      "bytes": 121,
+      "sha256": "df034eae51dce7b80dcb5a80a15fc74ab4fb237b19fe3b36a10f95734a945fb7"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/fresh/seed_60113/world_60113_ar_exact.safetensors",
+      "bytes": 336,
+      "sha256": "fafd9aba099c39a07c2dad079305b3f763fa078b53cf341233b43e2521cb069e"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/fresh/seed_60113/world_60113_common.json",
+      "bytes": 103,
+      "sha256": "c37fcd41b61669d168b80728bff41154844c7657d9437174d5c4382df7482dee"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/fresh/seed_60113/world_60113_common.safetensors",
+      "bytes": 1104,
+      "sha256": "a08a9f2701e51be76bdd4a1ce6aaaf8221be0afc2537a66809e0e47234173a8f"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/fresh/seed_60113/world_60113_fv_shared_code.json",
+      "bytes": 132,
+      "sha256": "da626a73f2b789a98eaaa68687c533db9befb184f0de38df32010b8ef77d86f5"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/fresh/seed_60113/world_60113_fv_shared_code.safetensors",
+      "bytes": 336,
+      "sha256": "fafd9aba099c39a07c2dad079305b3f763fa078b53cf341233b43e2521cb069e"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/fresh/seed_60113/world_60113_generic_shared_latent.json",
+      "bytes": 132,
+      "sha256": "da626a73f2b789a98eaaa68687c533db9befb184f0de38df32010b8ef77d86f5"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/fresh/seed_60113/world_60113_generic_shared_latent.safetensors",
+      "bytes": 336,
+      "sha256": "fafd9aba099c39a07c2dad079305b3f763fa078b53cf341233b43e2521cb069e"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/fresh/seed_60113/world_60113_independent_slots.json",
+      "bytes": 141,
+      "sha256": "49eaa471c49ea1fcca8496a7e4ab777497efc3da9ef3a00529f86907403d0e25"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/fresh/seed_60113/world_60113_independent_slots.safetensors",
+      "bytes": 1104,
+      "sha256": "c6dd1265a8a86846a1b3be78b48c151176466f40eed97942a2d21f785e72ed7c"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/fresh/seed_60113/world_60113_ptp_shared_latent.json",
+      "bytes": 132,
+      "sha256": "da626a73f2b789a98eaaa68687c533db9befb184f0de38df32010b8ef77d86f5"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/fresh/seed_60113/world_60113_ptp_shared_latent.safetensors",
+      "bytes": 336,
+      "sha256": "fafd9aba099c39a07c2dad079305b3f763fa078b53cf341233b43e2521cb069e"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/fresh/seed_60113/world_60113_rule_id_oracle.json",
+      "bytes": 132,
+      "sha256": "da626a73f2b789a98eaaa68687c533db9befb184f0de38df32010b8ef77d86f5"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/fresh/seed_60113/world_60113_rule_id_oracle.safetensors",
+      "bytes": 336,
+      "sha256": "fafd9aba099c39a07c2dad079305b3f763fa078b53cf341233b43e2521cb069e"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/runs/fresh/seed_60113/world_60113_shared_address.safetensors",
+      "bytes": 336,
+      "sha256": "fafd9aba099c39a07c2dad079305b3f763fa078b53cf341233b43e2521cb069e"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/source/__init__.py",
+      "bytes": 61,
+      "sha256": "e9def91c44b9156d2372cd0c1a1d67a7c1ed5a2c7cd283c2098a83c55996ea00"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/source/run.py",
+      "bytes": 7424,
+      "sha256": "706d45c05416472a17d1b5424adad0c0a2633c0a130978c6117ebacd48a3956f"
+    },
+    {
+      "path": "experiments/mirror_applications/ma-539-packet-function-vector/tests/test_screen.py",
+      "bytes": 668,
+      "sha256": "fd92926a2e57a2220d354c1fc325f487e78bba9d1c4ec6796d8460ac62a47553"
+    }
+  ],
+  "provenance": {
+    "branch": "research/ma-539-packet-function-vector-20261009",
+    "initial_protocol_commit": "e66f7ef1",
+    "result_bundle_commit": "920d1bb9001c6521125ae1fe3f9dadbd65fe51ad"
+  }
+}
