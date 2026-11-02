@@ -138,21 +138,29 @@ def run_world(world_id: int, split: str, outdir: Path) -> list[dict]:
         nbytes, digest = payload(path, method, U, V, angle_fit, coeff, ind_maps)
         for k in WIDTHS:
             _, _, x, y = data[k]
-            start = time.perf_counter()
+            decode_start = time.perf_counter()
             if method == "independent_full":
-                pred = x @ ind_maps[WIDTHS.index(k)]
+                A = ind_maps[WIDTHS.index(k)]
                 macs = 2 * INPUT_DIM * OUTPUT_DIM
             else:
                 A, extra = predict(U, V, k, method, angle_fit, coeff)
-                pred = x @ A
                 macs = 2 * INPUT_DIM * k + 2 * k * OUTPUT_DIM + extra
-            elapsed = time.perf_counter() - start
+            decode_seconds = time.perf_counter() - decode_start
+            start = time.perf_counter()
+            pred = None
+            for _ in range(20):
+                pred = x @ A
+            forward_seconds = (time.perf_counter() - start) / 20
+            assert pred is not None
             records.append({
                 "world": world_id, "split": split, "method": method, "width": k,
                 "heldout_examples": int(len(x)), "optimizer_updates": 0,
                 "payload_bytes": nbytes, "payload_sha256": digest,
                 "heldout_nrmse": nrmse(pred, y), "macs_per_example_proxy": int(macs),
-                "wall_seconds": elapsed, "theta_slope": float(angle_fit[0]) if method == "mirror_angle" else "",
+                "decode_wall_seconds": decode_seconds,
+                "forward_wall_seconds_per_batch": forward_seconds,
+                "wall_seconds": decode_seconds + forward_seconds,
+                "theta_slope": float(angle_fit[0]) if method == "mirror_angle" else "",
                 "theta_intercept": float(angle_fit[1]) if method == "mirror_angle" else ""
             })
     return records
