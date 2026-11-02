@@ -1,0 +1,8 @@
+{
+  "amendment":"A4",
+  "reason":"Independent audit found that prior timing excluded the backbone, block 2 was precomputed for all tokens, MAC accounting omitted common projections and miscounted rank-2 work, and inference predictions used uncompressed float64 state rather than serialized float32 arrays.",
+  "change":"A4 loads serialized float32 NPZ state for inference; computes block 2 only for routed tokens except dense upper; includes router, both common projections, role view/residual, full end-to-end Python CPU timing, per-object bytes, and per-method totals. All seeds, token inputs, roles, 50% route, teachers, model widths and quality/storage gates are unchanged. Re-run into runs/a4; retain A0-A3 artifacts.",
+  "fresh_accessed_before_amendment":true,
+  "data_or_hyperparameter_changes":false,
+  "purpose":"Correct inference, compute and serialization measurement; do not use A0-A3 fresh quality for tuning."
+}

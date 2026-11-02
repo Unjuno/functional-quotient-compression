@@ -1,0 +1,8 @@
+{
+  "amendment":"A2",
+  "reason":"A1 metrics.json used method names for the serialized-object byte map, while the separate results table correctly recorded total method payloads. The verifier caught the mislabeled per-object byte entries.",
+  "change":"A2 writes actual per-file byte sizes under object names and method total payload sizes separately, then reruns the same five seeds and unchanged settings. Preserve A0 and A1 artifacts.",
+  "fresh_accessed_before_amendment":true,
+  "data_or_hyperparameter_changes":false,
+  "purpose":"Correct audit metadata; task, methods, routes, payload objects and gates unchanged."
+}

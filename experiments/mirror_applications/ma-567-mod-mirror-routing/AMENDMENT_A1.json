@@ -1,0 +1,8 @@
+{
+  "amendment":"A1",
+  "reason":"The initial dense upper payload omitted the role-angle code required to reproduce the exact target output, undercharging its serialized inference state.",
+  "change":"Charge the dense upper for the same role-angle array while preserving all model settings, seeds, routes, task outputs, and gates. Re-run the same development/fresh worlds into runs/a1; preserve A0 artifacts.",
+  "fresh_accessed_before_amendment":true,
+  "data_or_hyperparameter_changes":false,
+  "purpose":"Correct serialization accounting only; no fresh result used for tuning."
+}
