@@ -1,0 +1,62 @@
+{
+  "experiment_id": "MA-573",
+  "title": "QuaRot Mirror coordinate sweep",
+  "status": "FROZEN_SCREENING",
+  "base_commit": "c935a903",
+  "prior_art_refs": [
+    112,
+    113
+  ],
+  "hypothesis": "A one-angle hidden-channel gauge selected on development data lowers int4 quantization distortion over identity and a fixed Hadamard gauge while preserving full-precision function; compare to direct learned Givens-angle control and charge actual payload bytes.",
+  "physical_object": "Two shared 8x8 linear layers with an 8D hidden gauge",
+  "mirror_coordinate": "One Givens angle rotates hidden basis: W1'=W1R, W2'=R^T W2; rotations are folded into quantized weights",
+  "logical_multiplicity": "Equivalent full-precision gauges for one function; not independent functions",
+  "development": {
+    "seeds": [
+      57301,
+      57302
+    ],
+    "angle_grid": "181 evenly spaced points in [-pi/2,pi/2]",
+    "selection_metric": "aggregate normalized output MSE after per-matrix symmetric int4 quantization"
+  },
+  "fresh": {
+    "seeds": [
+      57311,
+      57312,
+      57313
+    ],
+    "locked_before_access": true,
+    "angle": "single development-selected angle frozen for all fresh worlds"
+  },
+  "controls": [
+    "identity gauge int4",
+    "fixed normalized Walsh-Hadamard gauge int4 (QuaRot-style)",
+    "development-selected single Givens angle (Mirror coordinate)",
+    "direct learned scalar Givens angle using identical frozen value (SpinQuant-style attribution control)",
+    "full-precision independent two-matrix reference"
+  ],
+  "storage": {
+    "authority": "actual serialized NPZ inference payload bytes",
+    "quantization": "symmetric per-matrix signed int4, nibble packed; scales and method metadata charged",
+    "paid_objects": [
+      "both packed int4 matrices",
+      "both scales",
+      "rotation/method metadata",
+      "full precision matrices for upper reference"
+    ]
+  },
+  "compute": {
+    "optimizer_updates": 0,
+    "report_calibration_search_evaluations": true,
+    "report_inference_macs": true,
+    "report_wall_time": true
+  },
+  "success_gate": "Fresh angle gauge preserves full-precision function before quantization, reduces mean NRMSE >=20% versus both identity and Hadamard on every world, and Mirror payload <=50% of full precision.",
+  "failure_gate": "Gauge equivalence fails, no fresh quantization-quality improvement over QuaRot controls, or direct scalar-angle control exactly aliases the Mirror candidate (Mirror-specificity failure).",
+  "boundaries": [
+    "Synthetic 2-layer linear quantization screen only; no LLM/NLL, GPU, energy or natural quantized model evidence.",
+    "The task studies representation conditioning under quantization, not functional capacity.",
+    "Learned rotations are prior art (SpinQuant); any gain is attributed only to this screened gauge choice, not a new rotation principle."
+  ],
+  "amendment": "AMENDMENT_A1.json"
+}
