@@ -1,0 +1,7 @@
+# MA-561 — OFA architecture code + Mirror function code
+
+Status: SCREENING. Frozen protocol: [`PROTOCOL.json`](PROTOCOL.json). Prior art PA109 establishes Once-for-All subnet specialization by architecture coordinates; this screen asks only whether an additional compact function code adds useful held-out configuration behavior.
+
+The environment has CPU-only PyTorch and no checked-out OFA implementation or accelerator. This experiment is therefore a synthetic OFA-like mechanism screen, not an OFA/ImageNet result. It uses a shared width/depth/kernel-elastic residual network and compares native subnet selection, a generic rank-one output correction, a compact Givens code, and independent configuration maps. The teacher is deliberately an aligned smooth Givens orbit, so even a positive result is an upper-favorable mechanism test.
+
+No optimizer updates are used. Two development worlds and three fresh worlds are fixed in `PROTOCOL.json`; four joint configurations are held out in every world. All shared maps and method-specific inference state are charged using actual serialized NPZ bytes. A FAIL here only falsifies the frozen synthetic configuration-code hypothesis.

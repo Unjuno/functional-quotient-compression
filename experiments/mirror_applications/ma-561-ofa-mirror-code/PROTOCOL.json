@@ -1,0 +1,20 @@
+{
+  "experiment_id": "MA-561",
+  "title": "OFA architecture code plus Mirror function code",
+  "status": "FROZEN_SCREENING",
+  "evidence_lane": "SYNTHETIC_MECHANISM/HELDOUT_CONFIG_QUALITY/ACTUAL_BYTES/CPU_COMPUTE",
+  "base_commit": "c935a903",
+  "hypothesis": "On one shared width/depth/kernel-elastic supernetwork, a compact configuration-conditioned Givens correction will improve unseen configuration quality over native subnet selection and beat a byte-matched generic rank-one output correction without storing independent subnet weights.",
+  "physical_object": "One fixed 12-channel residual supernetwork with shared input, recurrent hidden, and output maps",
+  "mirror_coordinate": "Three FP32 coefficients mapping normalized width, depth and kernel configuration to one Givens angle applied to active hidden channels",
+  "logical_multiplicity": "Eight width/depth/kernel subnet functions, including four held-out joint configurations",
+  "prior_art_refs": [109],
+  "controls": ["native elastic subnet with no correction", "configuration-conditioned rank-one output correction with comparable bytes", "Mirror Givens correction", "independent full output map per configuration upper reference"],
+  "development": {"worlds_or_seeds": [56101, 56102], "configurations_fit": [[6,1,1],[12,1,3],[6,3,3],[12,3,1]], "heldout_configurations": [[6,1,3],[12,1,1],[6,3,1],[12,3,3]], "selection_metric": "held-out configuration normalized MSE; no hyperparameter tuning on heldout"},
+  "fresh": {"worlds_or_seeds": [56111, 56112, 56113], "locked_before_access": true, "fit_configurations": [[6,1,1],[12,1,3],[6,3,3],[12,3,1]], "heldout_configurations": [[6,1,3],[12,1,1],[6,3,1],[12,3,3]]},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["shared supernetwork maps", "Mirror coefficients", "rank-one correction factors and configuration coefficients", "independent per-config output maps", "metadata and config indices"]},
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true},
+  "success_gate": "On all three fresh worlds, Mirror heldout NRMSE <=1e-4, improves native subnet NRMSE by >=10%, uses <=50% bytes of independent maps, and uses >=10% fewer bytes than the byte-matched generic correction at comparable quality.",
+  "failure_gate": "Any fresh world misses quality or byte gates, or generic direct correction matches Mirror quality within 10% at equal/lower bytes.",
+  "boundaries": ["Synthetic OFA-like mechanism test only; no OFA checkpoint, progressive shrinking training, ImageNet, hardware-specific latency, or GPU evidence.", "Teacher uses a smooth width/depth/kernel Givens orbit, intentionally favorable to the mechanism.", "No optimizer updates; test is calibration/interpolation, not capacity or trained supernet evidence."]
+}
