@@ -9,7 +9,7 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 - P0: **630** (183 completed; 447 UNTESTED)
 - P1: **422** (15 completed; 407 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **956 UNTESTED, 58 PROMISING, 141 FAIL**
+- Current MA statuses: **955 UNTESTED, 58 PROMISING, 142 FAIL**
 - 47 baseline experiment directories remain present; verified external outcomes are linked to their dedicated branches in the registry and claim ledger.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). See the current Next candidate section for the live queue.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. see the current Next candidate section.
@@ -84,3 +84,7 @@ KG relation rotations (RotatE, TuckER, QuatE, PairRE), EXIF/device-aware ISPs (P
 - `CLAIM_LEDGER.csv` and each experiment's `VERIFICATION.json` are the evidence index; `STATUS_BOARD.md` is an operational cache.
 - Before allocating an ID or starting work, re-read the live registry and search for experiment branches.
 - Preserve old branches, failed results, exploratory data and locked protocols. No automatic merge to main.
+
+## Registry-driven continuation
+
+MA-516 is audited and integrated as FAIL: PCA rank-4 reduced explicit intervention bytes to 34.6% with low vector NRMSE, but explicit and compressed interventions all had 0% held-out task accuracy. This is scoped to the tested GPT-2 support-delta extraction/injection. The registry is authoritative; the next untested P0 is MA-517, function-vector Mirror composition. Earlier cached pointers to MA-483 are stale.
