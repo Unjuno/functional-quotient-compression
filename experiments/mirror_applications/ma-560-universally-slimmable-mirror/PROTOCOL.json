@@ -1,0 +1,54 @@
+{
+  "experiment_id": "MA-560",
+  "title": "Universally slimmable Mirror width code",
+  "status": "FROZEN_SCREENING",
+  "base_commit": "c935a903",
+  "evidence_lane": "SYNTHETIC_WIDTH_INTERPOLATION/QUALITY/ACTUAL_BYTES/COMPUTE",
+  "hypothesis": "A continuous width-dependent Givens coordinate on one shared width-elastic hidden network recovers held-out width functions more accurately and with fewer bytes than ordinary prefix-width inference, while its gain over a generic direct-coefficient width code remains to be tested.",
+  "physical_object": "One shared 16-channel linear hidden network with fixed input and output maps",
+  "mirror_coordinate": "Two FP32 coefficients defining an affine angle theta(q)=a+bq, applied as adjacent-channel Givens rotations before retaining the first k channels",
+  "logical_multiplicity": "Width-conditioned functions at hidden widths k in {4,6,8,10,12,14,16}",
+  "prior_art_refs": [108],
+  "controls": [
+    "ordinary prefix US-Net baseline with theta=0",
+    "Mirror affine-angle coordinate fit from training widths",
+    "generic direct sine/cosine coefficient functions fit over the same shared rotated channel basis",
+    "independent full hidden-to-output matrices per requested width as a storage/quality upper control"
+  ],
+  "task": {
+    "type": "deterministic synthetic width-conditioned regression",
+    "input_dim": 16,
+    "hidden_dim": 16,
+    "output_dim": 8,
+    "teacher": "Shared random U,V maps; apply a width-conditioned adjacent-pair Givens transform with theta(q)=a+bq, then retain the first k hidden channels and apply the corresponding prefix of V",
+    "training_widths": [4, 8, 16],
+    "heldout_widths": [6, 10, 14],
+    "examples_per_width": 1024,
+    "metrics": ["held-out output NRMSE per width", "actual serialized payload bytes", "active MAC proxy", "CPU wall time"]
+  },
+  "development": {
+    "worlds": [56001, 56002],
+    "allowed": "Validate implementation and freeze any fixed solver/precision choices; do not alter widths, teacher family, or gates after opening fresh worlds.",
+    "settings_frozen_before_fresh": true
+  },
+  "fresh": {
+    "worlds": [56011, 56012, 56013],
+    "locked_before_access": true,
+    "use_for_tuning": false
+  },
+  "storage": {
+    "authority": "actual serialized NPZ inference payload bytes",
+    "paid_objects": ["shared U and V weights", "all per-method angle or coefficient generators", "metadata and width configuration", "independent matrices for the upper control"],
+    "shared_base_counted_once_per_method_payload": false
+  },
+  "compute": {
+    "report_examples": true,
+    "optimizer_updates": 0,
+    "report_active_compute_proxy": true,
+    "report_wall_clock": true
+  },
+  "success_gate": "Across every fresh world and held-out width, Mirror NRMSE <=1e-4 and at least 10% lower than ordinary prefix US-Net; Mirror actual bytes <=50% of the independent-width upper; Mirror uses at least 10% fewer bytes than a generic direct coefficient code at matched quality.",
+  "failure_gate": "Mirror misses any fresh quality or total-payload gate, ordinary prefix US-Net matches its quality, or the generic direct coefficient control matches its quality/bytes within 10%.",
+  "boundaries": ["Mechanism screen on a synthetic linear width family, not a trained US-Net or Transformer", "No capacity claim from the number of tested widths", "Fresh worlds test fixed teacher-family transfer only", "All input and model maps are deterministic from the world seed but are serialized and charged in each method payload"]
+  ,"amendments": [{"id": "A1", "reason": "Separate asymmetric one-time map reconstruction from repeated forward timing", "fixed_before_replay": true, "scope": "Timing measurement only; preserve all A0 artifacts and replay the same worlds/inputs/settings/payloads", "artifact": "AMENDMENT_A1.json"}]
+}

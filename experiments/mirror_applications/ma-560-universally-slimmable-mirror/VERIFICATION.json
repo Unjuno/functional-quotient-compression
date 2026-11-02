@@ -1,0 +1,42 @@
+{
+  "experiment_id": "MA-560",
+  "commit": "pending",
+  "protocol_commit": "1831195c",
+  "tests": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 python -m pytest -q -p no:cacheprovider experiments/mirror_applications/ma-560-universally-slimmable-mirror/tests",
+    "passed": 4,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "worlds_checked": [
+      56001,
+      56002,
+      56011,
+      56012,
+      56013
+    ],
+    "same_payload_hashes_A0_A1": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0,
+    "rows_checked": 160,
+    "quality_identical_A0_A1": true
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_opened": true,
+  "notes": [
+    "Five worlds replayed after timing-only A1; quality, serialized sizes and hashes match A0 exactly.",
+    "Fresh settings were not tuned.",
+    "A0 timing values are preserved; A1 separates map decode/setup from repeated forward timing."
+  ],
+  "fresh_worlds": [
+    56011,
+    56012,
+    56013
+  ],
+  "status": "FAIL",
+  "result_summary": "Fresh quality passed, total-payload gate failed (5,396B vs 9,032B independent; 59.8%)."
+}

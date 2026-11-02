@@ -1,0 +1,17 @@
+{
+  "experiment_id": "MA-560",
+  "amendment": "A1",
+  "reason": "The first wall-clock field included output-map construction for US-Net/Mirror/direct controls but used already-generated independent matrices, so decode/setup timing was not comparable.",
+  "fixed_before_replay": true,
+  "scope": "Measurement only",
+  "changes": [
+    "Replay the identical development and fresh worlds, inputs, widths, teacher parameters, selected codes and serialized payloads.",
+    "Report one-time per-width decode/map-construction wall time separately from repeated batch forward wall time.",
+    "Preserve A0 artifacts and wall-clock values as exploratory; A1 timing is authoritative.",
+    "Do not change quality metrics, payload serialization, methods, gates or settings."
+  ],
+  "worlds": [56001, 56002, 56011, 56012, 56013],
+  "fresh_tuning": false,
+  "protocol_base_commit": "1831195c",
+  "development_freeze_commit": "1789a70a"
+}
