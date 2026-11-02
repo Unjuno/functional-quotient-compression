@@ -1,0 +1,16 @@
+{
+ "experiment_id":"MA-520","title":"Function Vector to Mirror code distillation","status":"FROZEN_SCREENING","base_commit":"10195e6b","evidence_lane":"FV_CODE_DISTILLATION/RECONSTRUCTION/TASK_UTILITY/ACTUAL_BYTES",
+ "model":{"id":"openai-community/gpt2","revision":"607a30d783dfa663caf39e06633721c8d4cfcd7e","parameters":124439808,"dtype":"float32","device":"CPU"},
+ "hypothesis":"A fixed-rank shared decoder and product-quantized Mirror codes compress task function-vector interventions below explicit vector bytes while preserving heldout task quality.",
+ "physical_object":"one frozen GPT-2 with shared residual intervention decoder at block 6","mirror_coordinate":"per-task code m decoded through a paid shared basis/codebook","logical_multiplicity":"16 procedure x domain residual interventions",
+ "prior_art_refs":[99],"controls":["query-only","direct ICL","explicit full vectors","generic PCA shared basis + FP16 coefficients","product-quantized Mirror code + shared decoder","oracle task ID"],
+ "task":{"type":"synthetic procedure x domain prompts","tasks":16,"metrics":["vector NRMSE/cosine","target-token accuracy and NLL","actual payload bytes","decode and inference latency"]},
+ "development":{"worlds":[52000,52001],"seeds":[0,1,2],"allowed":"fit PCA/codebook only on development task vectors; select K=8 product codebook, block=6 fixed; no fresh-driven changes"},
+ "fresh":{"worlds":[52010,52011,52012],"seeds":[0,1,2],"locked_before_access":true},
+ "storage":{"authority":"actual serialized inference payload bytes","paid_objects":["decoder basis","codebook","all task codes and IDs","normalization","indices","metadata"]},
+ "compute":{"report_examples":true,"optimizer_updates":0,"report_code_decode_latency":true,"report_forward_latency":true},
+ "success_gate":"Direct ICL above chance in each fresh world; Mirror target NLL <=1.05 x explicit-FV NLL; Mirror payload <=0.80 x explicit-FV bytes; report generic PCA at matched rank/bytes.",
+ "failure_gate":"Direct ICL is valid but Mirror misses quality or byte gate, or simple generic PCA matches/beats Mirror at equal bytes.",
+ "not_established_gate":"Direct ICL and explicit-FV execution are both at/below chance; vector compression is then representation-only and cannot support useful-function claims.",
+ "boundaries":["Synthetic GPT-2 tasks only; no natural language or causal-head claim.","A vector compression ratio is not useful-function multiplicity.","Function-space target metrics are required in addition to vector error."]
+}

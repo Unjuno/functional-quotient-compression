@@ -9,7 +9,7 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 - P0: **630** (183 completed; 447 UNTESTED)
 - P1: **422** (15 completed; 407 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **953 UNTESTED, 58 PROMISING, 144 FAIL**
+- Current MA statuses: **951 UNTESTED, 58 PROMISING, 146 FAIL**
 - 47 baseline experiment directories remain present; verified external outcomes are linked to their dedicated branches in the registry and claim ledger.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). See the current Next candidate section for the live queue.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. see the current Next candidate section.
@@ -92,3 +92,7 @@ MA-516 is audited and integrated as FAIL: PCA rank-4 reduced explicit interventi
 MA-517 is audited and integrated as FAIL: on pinned GPT-2, direct ICL, query-only, raw-sum, layer-factorized, and single-vector conditions all had 0% exact accuracy across 9 fresh world-seed banks. Raw and factorized payloads were equal at 99,945B. This is scoped to the tested synthetic composition and support-delta vectors.
 
 MA-518 is audited as a task-quality FAIL; its factorization comparison is NOT ESTABLISHED because inference ignored the stored procedure/domain codes. Direct ICL was valid at 31.25%, but all interventions scored 0% across nine fresh banks. Do not treat the smaller 11,993B payload as a quality-matched Mirror compression result.
+
+MA-520 is FAIL: K8 product quantization reduced vector bytes to 27.7% of explicit but explicit, PCA and PQ interventions all had 0% task accuracy; vector NRMSE was .1755 and NLL was worse than explicit. Together MA-518/520 show repeated failure of prompt-delta interventions to produce useful task behavior; MA-518 also had a factor-decoder defect. This FV compression subfamily is paused for redesign of the causal extraction/measurement interface. Resume only with head-specific causal vectors and a valid task-native quality gate; continue the registry queue in other families.
+
+MA-521 is FAIL: a demo encoder recovered task identity only 25% of the time while direct ICL reached 37.5%; oracle and compiled function-vector executions had 0% task accuracy, and compiled bytes exceeded the explicit FV+ID bank. Across MA-518/520/521, no prompt-delta FV execution produced task utility; MA-518 additionally had a factor decoder defect. This meets the family pause criterion: defer further FV variants until a causal extraction/execution interface and valid matched generic encoder are established.

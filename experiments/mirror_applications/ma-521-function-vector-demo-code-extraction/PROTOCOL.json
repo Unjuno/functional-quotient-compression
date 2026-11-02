@@ -1,0 +1,16 @@
+{
+ "experiment_id":"MA-521","title":"Mirror code extraction from demonstrations","status":"FROZEN_SCREENING","base_commit":"3d7c2ff7","evidence_lane":"DEMO_TO_CODE/ROUTING/EXECUTION/CONTEXT_AND_STATE_BYTES",
+ "model":{"id":"openai-community/gpt2","revision":"607a30d783dfa663caf39e06633721c8d4cfcd7e","parameters":124439808,"dtype":"float32","device":"CPU"},
+ "hypothesis":"A frozen demonstration encoder plus compact task code predicts the appropriate FV code while preserving heldout task utility and reducing deployed state/context cost vs direct ICL.",
+ "physical_object":"frozen GPT-2 plus shared demonstration encoder and task FV decoder","mirror_coordinate":"small predicted task code m from demonstration context","logical_multiplicity":"16 procedure x domain functions without replaying full demonstrations",
+ "prior_art_refs":[99,82],"controls":["query-only","direct ICL","explicit FV plus task ID","prototype context router","linear frozen-encoder code head","HyperFormer-style generic task embedding baseline"],
+ "task":{"type":"synthetic deterministic procedure x domain prompts","tasks":16,"metrics":["code/task ID accuracy","target accuracy and NLL","context tokens saved","actual serialized encoder/head/FV payload bytes","compute and latency"]},
+ "development":{"worlds":[52100,52101],"seeds":[0,1,2],"allowed":"train linear head/prototype on development-only task contexts; fixed code dim=4; no fresh-driven changes"},
+ "fresh":{"worlds":[52110,52111,52112],"seeds":[0,1,2],"locked_before_access":true},
+ "storage":{"authority":"actual serialized inference payload and remaining context bytes","paid_objects":["encoder/head state","codebook","FV decoder basis","task codes","indices and metadata"]},
+ "compute":{"report_examples":true,"report_updates":true,"report_inference_latency":true},
+ "success_gate":"Direct ICL above chance and code-routed target accuracy within 5pp of direct ICL; at least 50% context-token reduction; total incremental payload lower than explicit FV+ID bank.",
+ "failure_gate":"Valid direct ICL but extracted code fails target quality or storage/context gates.",
+ "not_established_gate":"Direct ICL at/below chance; code prediction alone cannot establish useful functions.",
+ "boundaries":["Synthetic GPT-2 prompt task only; not natural ICL compilation.","Count encoder/head, decoder and codes; no free pretrained state beyond pinned base model.","Prediction of task identity is not functional execution."]
+}
