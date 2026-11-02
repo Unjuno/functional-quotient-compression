@@ -1,0 +1,76 @@
+{
+  "common_model_bytes": 168144624,
+  "compute": {
+    "all_method_edit_application_seconds": 1.1018114140024409,
+    "analytic_edit_fit_seconds": 0.00175773398950696,
+    "capture_forward_seconds": 0.5856337629957125,
+    "capture_support_queries": 128,
+    "gated_bias_ops_proxy": 1024,
+    "mirror_vector_add_ops_proxy": 32768,
+    "roselora_global_rank1_ops_proxy": 524288,
+    "router_token_comparisons": 1920
+  },
+  "edits": 16,
+  "experiment_id": "MA-547",
+  "gates": {
+    "mirror_edit_efficacy": false,
+    "mirror_locality": true,
+    "router_perfect": false
+  },
+  "heldout_queries": 64,
+  "metrics": {
+    "bias_gated": {
+      "edit_success_rate": NaN,
+      "max_non_target_kl": 0.0,
+      "mean_abs_non_target_margin_shift": 0.0,
+      "mean_non_target_kl": 0.0,
+      "mean_target_margin_gain": NaN,
+      "non_target_top1_retention": 1.0
+    },
+    "mirror_gated": {
+      "edit_success_rate": NaN,
+      "max_non_target_kl": 0.0,
+      "mean_abs_non_target_margin_shift": 0.0,
+      "mean_non_target_kl": 0.0,
+      "mean_target_margin_gain": NaN,
+      "non_target_top1_retention": 1.0
+    },
+    "roselora_gated": {
+      "edit_success_rate": NaN,
+      "max_non_target_kl": 0.0,
+      "mean_abs_non_target_margin_shift": 0.0,
+      "mean_non_target_kl": 0.0,
+      "mean_target_margin_gain": NaN,
+      "non_target_top1_retention": 1.0
+    },
+    "roselora_global": {
+      "edit_success_rate": NaN,
+      "max_non_target_kl": 0.0005918236565776169,
+      "mean_abs_non_target_margin_shift": 2.0001720190048218,
+      "mean_non_target_kl": 3.4304076591730546e-05,
+      "mean_target_margin_gain": NaN,
+      "non_target_top1_retention": 1.0
+    }
+  },
+  "model_sha256": "3da388330e4549156d76b58d6d268c63cd005e9336b4f4d2d378421e7b7a33fd",
+  "revision": "e93a9faa9c77e5d09219f6c868bfc7a1bd65593c",
+  "router_accuracy": 0.0,
+  "seed": 54701,
+  "serialized_bytes": {
+    "base": 0,
+    "bias_gated": 3166,
+    "mirror_gated": 36130,
+    "roselora_gated": 36122,
+    "roselora_global": 34754
+  },
+  "standalone_bytes": {
+    "base": 168144624,
+    "bias_gated": 168147790,
+    "mirror_gated": 168180754,
+    "roselora_gated": 168180746,
+    "roselora_global": 168179378
+  },
+  "support_and_query_tokens": 1056,
+  "support_base_margin_mean": -0.6340370178222656,
+  "support_examples": 64
+}
