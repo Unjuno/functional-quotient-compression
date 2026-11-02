@@ -1,0 +1,80 @@
+{
+  "experiment_id": "MA-527",
+  "title": "Mirror transform over SAE feature space",
+  "status": "SCREENING_AMENDED",
+  "amendment_1": {
+    "date": "2026-10-09",
+    "reason": "The first development implementation applied the frozen alpha=0.5 to compressed interventions but evaluated the explicit-FV reference at alpha=1.0. This amplitude mismatch invalidates that gate comparison. Preserve the initial run as a superseded diagnostic, and apply the same alpha to explicit FV and all intervention controls on rerun. No fresh-seed causal outcomes (seeds 52711-52713) were accessed; no configuration or declared split changes. A later harness audit disclosed task-ID extraction leakage in post_run_amendment_2.",
+    "supersedes": "Initial development summary with unmatched explicit-FV scale; retained under runs/preflight_scale_mismatch/"
+  },
+  "post_run_amendment_2": {
+    "date": "2026-10-09",
+    "reason": "Split audit found the inherited extraction harness constructs and serializes FVs/codes for all task IDs 0-15 during each dev run, although only task IDs 12-13 were evaluated. Therefore task identities 14-15 were accessed under dev seeds and cannot be called sealed. Fresh seeds 52711-52713 were never run and no fresh causal metrics were computed. The development FAIL remains valid for IDs 12-13; do not reuse IDs 14-15 for a later fresh audit.",
+    "metrics_reclassified": "development-only evidence; no fresh/audit evidence",
+    "future_fresh_requirement": "Use new unseen task identities and ensure extraction/serialization excludes audit identities until the development gate passes."
+  },
+  "evidence_lane": "SAE_FEATURE_STEERING/QUALITY/SPARSITY/ACTUAL_BYTES/COMPUTE",
+  "base_commit": "c935a903",
+  "prior_art_refs": ["PA102", "PA96"],
+  "hypothesis": "On four held-out relation tasks in pinned Pythia-70m, a small orthogonal Givens View applied to sparse SAE feature activations can retain explicit-FV causal quality, keep post-transform activations sparse, and improve the quality/byte frontier over native SAE top-k, global sparse coding, and LoReFT at comparable intervention dimension.",
+  "task": {
+    "type": "pretrained causal-LM relation recall with residual-stream interventions",
+    "model": "EleutherAI/pythia-70m-deduped",
+    "revision": "e93a9faa9c77e5d09219f6c868bfc7a1bd65593c",
+    "model_weight_sha256": "3da388330e4549156d76b58d6d268c63cd005e9336b4f4d2d378421e7b7a33fd",
+    "sae_repo": "Elriggs/pythia-70M-deduped-sae",
+    "sae_revision": "36c2027509efad69836aa4231999c9b717848ecd",
+    "sae_file": "pythia-70m-deduped_r4_gpt_neox.layers.3.pt",
+    "sae_sha256": "85b57dfe34d19769e2df0e208e38fda8815da8493c56b703a99ff74cc610dbf4",
+    "sae_bytes": 4204391,
+    "sae_shape": "tied encoder [2048,512] with decoder atoms equal to encoder rows",
+    "hook": "GPT-NeoX layer 3 output"
+  },
+  "physical_object": "one pinned Pythia-70m and its shared 2048-atom layer-3 SAE",
+  "mirror_insertion": "Apply a fixed sparse pairwise Givens transform to each sparse SAE activation vector before tied-decoder reconstruction; only angles and sparse activation codes vary by task.",
+  "mirror_coordinate": "up to 16 FP16 Givens angles in a 32-dimensional active feature subspace; all transformed nonzeros, indices, angles, and metadata are charged.",
+  "mirror_angle_pattern": "For scale s, shared angle theta_j=s*sin(2*pi*(j+1)/17), j=0..15. Pairwise rotate consecutive coordinates of the fit-selected 32-feature code bank. Apply to each task's SAE code, then retain the 8 largest absolute rotated coefficients and decode with original bank atoms. No held-out vector fits the shared angles.",
+  "feature_bank": "Select the 32 SAE feature IDs with the largest aggregate positive encoder activations across fit task IDs 0-11 only. The untransformed shared-bank control uses top-eight absolute activations over this same bank.",
+  "logical_multiplicity": "four held-out relation-function residual interventions",
+  "controls": [
+    "No intervention",
+    "Explicit support-derived FP32 function-vector bank",
+    "Native SAE encoder activations with top-eight positive features",
+    "Global-dictionary signed matching pursuit with eight atoms",
+    "Untransformed shared SAE sparse code with matched active dimension",
+    "Mirror Givens transform over the sparse feature code",
+    "LoReFT-style rank-8 residual intervention",
+    "Dense residual steering upper reference"
+  ],
+  "split": {
+    "fit_task_ids": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+    "dev_task_ids": [12, 13],
+    "fresh_task_ids": [14, 15],
+    "development_seeds": [52701, 52702],
+    "fresh_seeds": [52711, 52712, 52713],
+    "fresh_open_rule": "Open only after both dev seeds meet the quality, sparsity, and byte gates; freeze all transform and scale settings before opening. Fresh IDs and seeds are fixed here.",
+    "integrity_status": "Task identities 14-15 were accidentally extracted/serialized by the dev harness; seeds 52711-52713 were not run and no fresh metrics were calculated. New identities are required for confirmatory audit."
+  },
+  "development": {
+    "fixed_configuration": {"givens_pattern_scale": 0.1, "intervention_scale": 0.5},
+    "selection": "No hyperparameter selection; evaluate one preregistered configuration for both development seeds.",
+    "optimizer_updates": 0,
+    "selection_metric": "dev gold-token log-probability, candidate accuracy, post-transform nonzeros, and actual serialized bytes; dev is a gate only",
+    "changes_after_run": "prohibited without numbered amendment"
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": ["model", "SAE", "SAE feature IDs", "sparse coefficients", "Givens angles", "LoReFT factors", "scale", "metadata"],
+    "shared_model_and_SAE_counted_once": true
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true,
+    "report_inference_latency": true
+  },
+  "success_gate": "On every fresh task and seed, mean gold-candidate log-probability must be within 0.10 nats and accuracy within 0.05 absolute of explicit FVs; Mirror must preserve <=16 nonzeros/task after code transform, use <=0.50x explicit incremental payload bytes, and not be dominated by either untransformed shared-bank sparse code or LoReFT at byte-near cost. Report standalone total bytes with the SAE charged.",
+  "failure_gate": "Dev cannot satisfy the quality/sparsity/byte gates, or Mirror is dominated by native sparse coding or LoReFT at byte-near cost.",
+  "boundaries": ["Four relation tasks and one pinned model/layer only.", "No router evaluation.", "Fresh task IDs/seeds cannot tune settings.", "Sparse activations and task-aligned function vectors do not establish broad behavior capacity."]
+}
