@@ -1,0 +1,19 @@
+{
+  "experiment_id":"MA-637",
+  "title":"Sequential GRACE codebook growth with shared Mirror value basis",
+  "status":"SCREENING",
+  "base_commit":"3fb5c60e",
+  "prior_art_refs":["PA139"],
+  "hypothesis":"A shared rank-4 value basis compresses a growing discrete edit codebook while preserving retention and scope locality; Mirror must beat native PCA value coding after lookup/decode cost.",
+  "task":{"key_dim":8,"value_dim":16,"calibration_values":16,"sequential_edits":128,"true_value_rank":4,"growth_snapshots":[16,32,64,128],"positive_and_negative_queries_per_key":4,"deferral_radius":0.08},
+  "development_seeds":[63701,63702],
+  "fresh_seeds":[63711,63712,63713],
+  "fresh_sealed":true,
+  "controls":["explicit_GRACE_values","Mirror_shared_basis_value_codes","native_PCA_value_codes"],
+  "routing":"Nearest-key lookup with fixed deferral radius identical across methods; charge key vectors, radii, edit order and IDs in every payload.",
+  "storage":"Actual serialized inference .npz bytes at every growth snapshot, including base executor, all memory state, basis/codes or values and metadata.",
+  "metrics":["old-edit retention value nRMSE","positive scope hit rate","negative false-positive rate","complete bytes","marginal bytes per edit","lookup+decode latency"],
+  "success_gate":"At every snapshot and both seeds: retention nRMSE <=1e-5, positive hit >=99%, false positives <=1%, and complete bytes <=75% explicit GRACE. Mirror-specific gain also requires strict improvement over native PCA coding.",
+  "failure_gate":"Retention/scope/storage miss or exact native PCA alias. Fresh remains sealed.",
+  "boundaries":["Synthetic discrete memory only","No pretrained model or real continual editing","Calibration basis is paid as model state","Protocol frozen before development"]
+}
