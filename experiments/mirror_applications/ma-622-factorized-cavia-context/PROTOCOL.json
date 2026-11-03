@@ -1,0 +1,68 @@
+{
+  "experiment_id": "MA-622",
+  "title": "Factorized CAVIA task context with held-out factor combinations",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/META_ADAPTATION/HELDOUT_COMPOSITION/ACTUAL_BYTES",
+  "base_commit": "739ba2ed",
+  "hypothesis": "A shared CAVIA context vector addressed by task-factor and role-factor coordinates can recover held-out combinations with lower actual task-state bytes than independent contexts; Mirror-specific value requires beating direct-angle and additive factorized CAVIA controls.",
+  "physical_object": "One shared 16-input, 8-context linear task model and context basis",
+  "mirror_coordinate": "m=(task_factor, role_factor), decoded as R(alpha_i)R(beta_j)c0",
+  "logical_multiplicity": "Sixteen task functions from a 4x4 factor product, with four task combinations held out",
+  "prior_art_refs": ["PA129"],
+  "task_worlds": {
+    "factor_values": 4,
+    "task_pairs": 16,
+    "heldout_pairs": [[0,0],[1,1],[2,2],[3,3]],
+    "training_pairs": "all remaining pairs; every factor value appears in training",
+    "aligned_context": "one shared context vector transformed by factor-indexed block-Givens rotations R(alpha_i)R(beta_j)",
+    "private_interaction_world": "aligned context plus pair-specific residual with fixed relative amplitude 0.25",
+    "input_dim": 16,
+    "context_dim": 8,
+    "support_examples_per_task": 16,
+    "audit_examples_per_task": 128
+  },
+  "controls": [
+    "shared model with zero context",
+    "independent CAVIA context fitted from each task's support, including held-out task supports",
+    "factorized Mirror rotation context fitted on 12 training combinations",
+    "native direct-angle CAVIA with the same factor coordinates",
+    "native additive factorized CAVIA context u_i+v_j fitted on training combinations"
+  ],
+  "development": {
+    "worlds_or_seeds": [62201, 62202],
+    "selection_metric": "held-out aligned nRMSE, private-interaction nRMSE, complete serialized payload bytes, task-state bytes, context/factor fit operations and wall time",
+    "hyperparameters_frozen": true
+  },
+  "fresh": {
+    "worlds_or_seeds": [62211, 62212, 62213],
+    "locked_before_access": true,
+    "open_only_if_development_quality_storage_and_native_specificity_gates_pass": true
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "shared base predictor and context basis",
+      "independent task contexts or factor context seed and angle codes",
+      "native factor tables where used",
+      "factor-pair indices",
+      "schema and metadata"
+    ]
+  },
+  "compute": {
+    "report_support_examples": true,
+    "report_context_solve_evaluations": true,
+    "report_factor_fit_iterations": true,
+    "report_active_mac_proxy": true,
+    "report_isolated_wall_clock": true,
+    "optimizer_updates": 0
+  },
+  "success_gate": "Both development seeds on aligned tasks: held-out nRMSE <=0.05, >=20% improvement over shared/no-context, and task-state bytes <=75% of independent CAVIA; additionally beat native direct-angle and additive factorized CAVIA at comparable bytes/compute for a Mirror-specific result.",
+  "failure_gate": "Any aligned quality/storage miss, exact direct-angle output-and-state alias, or native additive factorized CAVIA matching quality at equal/lower bytes and compute.",
+  "boundaries": [
+    "Synthetic linear mechanism only; no meta-training",
+    "Factor indices are available metadata and charged; no task-free routing claim",
+    "Four held-out diagonal combinations preserve all factor levels in training",
+    "Private interaction residual measures where factor-specific private context is needed",
+    "Fresh seeds remain sealed after any development gate miss or native alias"
+  ]
+}
