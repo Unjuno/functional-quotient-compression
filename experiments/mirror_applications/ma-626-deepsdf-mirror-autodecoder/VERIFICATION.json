@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-626",
+  "commit": "9124089f",
+  "tests": {
+    "command": "pytest -q experiments/mirror_applications/ma-626-deepsdf-mirror-autodecoder/tests",
+    "passed": 2,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Protocol hash matches freeze.json.",
+    "Development seeds only; fresh remained sealed after exact direct-conditioning alias.",
+    "Shared payload 1236 B vs independent grids 236666-236709 B; direct analytic conditioner exactly matched Mirror outputs with lower compute."
+  ]
+}
