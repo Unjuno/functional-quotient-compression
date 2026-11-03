@@ -1,0 +1,20 @@
+{
+  "experiment_id":"MA-639",
+  "title":"Null-space constrained rank-one edits with compressed Mirror values",
+  "status":"SCREENING",
+  "base_commit":"a7d4bff6",
+  "prior_art_refs":["PA140","PA135"],
+  "hypothesis":"LOKI null-space projection protects prior keys; shared Mirror coding of projected edit values reduces bytes while retaining efficacy/locality. Measure projection and compression separately; compare to native PCA.",
+  "task":{"layer_shape":[32,32],"edit_count":16,"protected_key_count":16,"heldout_edits":4,"worlds":{"aligned_value_rank":2,"private_value_rank":16},"training_edits":12,"stored_value_ranks":[0,1,2,4,8,16]},
+  "development_seeds":[63901,63902],
+  "fresh_seeds":[63911,63912,63913],
+  "fresh_sealed":true,
+  "controls":["unprojected_full_rank1_edits","LOKI_projected_full_rank1_edits","projected_Mirror_basis_codes","projected_native_PCA_codes"],
+  "projection":"P=I-KK^T for orthonormal protected key basis K; rank-one right factors are projected into the null space of K^T and normalized to preserve requested edit response.",
+  "fit_policy":"Value bases fit only on 12 training edits. Heldout edit values are encoded from requested target vectors. Audit efficacy/locality does not enter fitting.",
+  "storage":"Actual serialized .npz bytes including base matrix, protected/edit keys, projected right factors, value basis/codes, IDs and metadata.",
+  "metrics":["heldout edit efficacy nRMSE","protected-key leakage ratio","complete bytes","edit-state bytes","projection/encode/decode operation proxy"],
+  "success_gate":"Aligned rank-2 world on both seeds: efficacy <=1e-5, locality leakage <=1e-6 and complete bytes <=75% projected full updates. Mirror-specific success further requires better frontier than native PCA.",
+  "failure_gate":"Quality/locality/storage miss or exact native PCA alias. Fresh remains sealed.",
+  "boundaries":["Synthetic linear mechanism only","One-hot/orthonormal protected keys","No real model editing claim","Separate projection effects from compression effects"]
+}
