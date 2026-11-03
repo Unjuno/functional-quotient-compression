@@ -477,3 +477,8 @@ MA-574 is NOT ESTABLISHED due to a frozen source-digest mismatch. MA-575, MA-576
 ## Current handoff — 2026-11-03, MA-622
 
 Integrated the checked MA-574..591 sequence, the separate MA-545 result, MA-592 prompt composition, and MA-621 CAVIA context screen. MA-574 is NOT ESTABLISHED; MA-575/576/578/581/582/589/591/545/592/621 are FAIL for their documented scoped gates. MA-583/585/586 remain operationally paused after the MLA/KV family diagnostic. Next P0: MA-622 factorized CAVIA context (PA129).
+
+
+## Current handoff — 2026-11-03, MA-623
+
+MA-622 is a verified development FAIL on `research/ma-622-cavia-factorized-context-20261103`: aligned factorized contexts met held-out quality/state-byte gates, but native direct-angle CAVIA exactly matched its outputs, state and full payload. Fresh seeds remained sealed. Private-interaction held-out nRMSE was 0.141–0.198 for the factor view versus 0 for per-task support-adapted contexts. Next P0: MA-623, shared CAVIA context plus explicit private residual coordinate (PA129), to locate the quality/bytes boundary.
