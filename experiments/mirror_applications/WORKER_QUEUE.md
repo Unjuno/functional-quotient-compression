@@ -522,3 +522,8 @@ MA-632 is a verified FAIL on `research/ma-632-rome-private-frontier-20261103`: a
 ## Current handoff — 2026-11-03, MA-636
 
 MA-635 is a verified fixed-budget FAIL on `research/ma-635-mend-mirror-code-editor-20261103`: the 2D code editor saved ~33% bytes and 70% operation proxy versus full-output MEND but nRMSE .062–.068 missed the .05 gate; native low-rank MEND exactly aliased it. Fresh sealed. Next independent P0: MA-636, SERAC memory-value to Mirror function code (PA138).
+
+
+## Current handoff — 2026-11-03, MA-637
+
+MA-636 is a verified FAIL on `research/ma-636-serac-mirror-value-code-20261103`: shared PCA preserved scope and held-out values but reduced full SERAC memory by ~39%, missing the 50% gate; native PCA exactly matched and measured lower latency. Fresh sealed. Next P0: MA-637, GRACE value-code compression by Mirror basis (PA139).
