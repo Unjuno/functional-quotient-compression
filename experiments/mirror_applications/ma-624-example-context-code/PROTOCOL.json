@@ -1,0 +1,19 @@
+{
+  "experiment_id":"MA-624",
+  "title":"Support examples to factorized Mirror context code",
+  "status":"SCREENING",
+  "base_commit":"b2bcc634",
+  "prior_art_refs":["PA130","PA129"],
+  "hypothesis":"An inferred factor-addressed code can represent held-out compositional task functions with a better actual storage/compute/quality frontier than generic CNP-style context aggregation and direct CAVIA adaptation.",
+  "task":{"input_dim":16,"context_dim":8,"factor_pairs":16,"heldout_pairs":[[0,0],[1,1],[2,2],[3,3]],"support_examples":16,"audit_examples":128,"factor_id_given_to_encoder":false},
+  "development_seeds":[62401,62402],
+  "fresh_seeds":[62411,62412,62413],
+  "fresh_sealed":true,
+  "controls":["zero_context","direct_CAVIA_least_squares_from_support","generic_pooled_residual_context_CNP_style","factorized_Mirror_code_fitted_from_support","independent_per_task_codebook_upper"],
+  "fit_policy":"Fit shared factor codebook only on the 12 visible combinations. Infer task code from support samples only. Audit data never enter fitting.",
+  "storage":"Actual serialized inference .npz bytes, including shared predictor, context basis, factor codebook, encoder or solve metadata, indices and schema.",
+  "compute":"Count support examples, least-squares/nonlinear solve evaluations, active multiply-add proxy and isolated wall time; zero optimizer updates.",
+  "success_gate":"Both development seeds: held-out nRMSE <=0.05 and a strict improvement over both generic pooled context and direct CAVIA in at least one bytes/compute axis without worse quality, with no regression on another axis at matched quality.",
+  "failure_gate":"Mirror fails quality or is weakly dominated by either generic control on complete bytes, compute and quality. Fresh remains sealed after any gate miss.",
+  "boundaries":["Synthetic linear mechanism only","Factor identity is not given to encoder","No natural task or language-model claim","No changes after development begins"]
+}
