@@ -1,19 +1,23 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-627",
+  "commit": "57d5110c",
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "pytest -q experiments/mirror_applications/ma-627-periodic-mirror-modulation/tests",
+    "passed": 2,
+    "failed": 0
   },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "roundtrip_checked": true,
+    "byte_exact": true
   },
   "metric_replay": {
-    "checked": false,
-    "max_difference": null
+    "checked": true,
+    "max_difference": 0.0
   },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Protocol hash verified against freeze.json.",
+    "Development seeds only; fresh stayed sealed due to exact native modulation alias.",
+    "Mirror code payload 879-883 B vs independent sampled curves 24788-24892 B; native activation exactly matched."
+  ]
 }
