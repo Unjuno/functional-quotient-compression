@@ -487,3 +487,8 @@ MA-622 is a verified development FAIL on `research/ma-622-cavia-factorized-conte
 ## Current handoff — 2026-11-03, MA-624
 
 MA-623 is a verified development FAIL on `research/ma-623-cavia-private-residual-20261103`: in the rank-2 private-interaction synthetic world, rank 2 missed quality (nRMSE 0.099–0.109; 3,347–3,351 B), rank 4 met quality on only one seed (0.044 vs 0.079; 3,755–3,762 B), and rank 8 reached zero error but cost 4,527–4,529 B against independent CAVIA at 3,039–3,045 B. Native PCA residual exactly aliases Mirror. Fresh stayed sealed. Next P0: MA-624, infer context from examples and compare against generic conditional context aggregation (PA130).
+
+
+## Current handoff — 2026-11-03, MA-626
+
+MA-624 is a verified development FAIL on `research/ma-624-example-context-code-20261103`: direct CAVIA and generic pooled context aggregation both reached numerical-zero held-out nRMSE. Direct CAVIA used 1,771–1,773 B and compute proxy 1,024; inferred Mirror code used 2,540 B and compute proxy 32,768. Fresh stayed sealed. MA-625 is P1; next P0: MA-626, DeepSDF-style shared decoder with per-shape latent codes (PA131).
