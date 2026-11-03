@@ -502,3 +502,8 @@ MA-626 is a verified scoped FAIL on `research/ma-626-deepsdf-mirror-autodecoder-
 ## Current handoff — 2026-11-03, MA-628
 
 MA-627 is a verified development FAIL for Mirror-specific attribution on `research/ma-627-periodic-mirror-modulation-20261103`: 879–883 B codes reconstructed held-out harmonic signals (mean nRMSE <1e-15) versus ~24.8 KB sampled curves, but native modulated periodic activation exactly matched output, bytes and compute. Fresh stayed sealed. Next P0: MA-628, COIN++-style shared/private modulation codec (PA133).
+
+
+## Current handoff — 2026-11-03, MA-631
+
+MA-628 is a verified scoped FAIL on `research/ma-628-coinpp-mirror-codec-20261103`: 12-bit codes reached mean nRMSE 0.00038–0.00039 with 218–219 B versus 4,962–5,272 B for independent sampled curves, but ordinary COIN++ modulation exactly matched the bitstream and all rate-distortion points. MA-622–628 now show repeated exact aliases to ordinary latent or conditioning methods; see `docs/phase2/CAVIA_IMPLICIT_FUNCTION_FAMILY_DIAGNOSTIC_2026-11-03.md`. Pause MA-625/629/630 pending a Mirror-specific redesign. Next independent P0: MA-631, ROME edit bank to shared Mirror basis (PA134).
