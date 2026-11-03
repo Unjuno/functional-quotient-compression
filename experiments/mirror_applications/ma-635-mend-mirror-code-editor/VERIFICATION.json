@@ -1,19 +1,23 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-635",
+  "commit": "2c459448",
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "pytest -q experiments/mirror_applications/ma-635-mend-mirror-code-editor/tests",
+    "passed": 2,
+    "failed": 0
   },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "roundtrip_checked": true,
+    "byte_exact": true
   },
   "metric_replay": {
-    "checked": false,
-    "max_difference": null
+    "checked": true,
+    "max_difference": 0.0
   },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Protocol SHA-256 verified against freeze.json.",
+    "Fixed 1000-update development screen only; fresh sealed after quality miss and exact native low-rank alias.",
+    "Mirror saved ~33% bytes and 70% operation proxy but nRMSE 0.062-0.068 exceeded 0.05 gate."
+  ]
 }
