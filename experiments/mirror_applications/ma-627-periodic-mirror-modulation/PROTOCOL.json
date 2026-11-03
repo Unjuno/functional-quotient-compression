@@ -1,0 +1,19 @@
+{
+  "experiment_id":"MA-627",
+  "title":"Shared periodic function decoder with Mirror amplitude/phase/frequency code",
+  "status":"SCREENING",
+  "base_commit":"d5c1b59e",
+  "prior_art_refs":["PA132"],
+  "hypothesis":"Small amplitude/phase/frequency views recover held-out periodic functions with fewer actual bytes than independent sampled curves; Mirror-specific value must beat native periodic activation modulation.",
+  "family":{"domain":"1D periodic signals","frequency_harmonics":[1,2,3,4],"phases":[0,1.5707963267948966,3.141592653589793,4.71238898038469],"heldout":"diagonal frequency-phase pairs","support_points":64,"audit_points":512},
+  "development_seeds":[62701,62702],
+  "fresh_seeds":[62711,62712,62713],
+  "fresh_sealed":true,
+  "controls":["independent_512_point_float32_curves","shared_periodic_Mirror_decoder_amplitude_phase_frequency_code","native_modulated_periodic_activation_same_code"],
+  "fit_policy":"Infer frequency by minimum support residual over the four frozen harmonics; solve sine/cosine coefficients by least squares. No audit data enter fitting.",
+  "storage":"Actual serialized inference .npz bytes, including shared decoder schema, per-signal codes or sampled curves, indices and metadata.",
+  "compute":"Count support-frequency candidates, least-squares operations, decoder arithmetic operations and isolated wall time; zero optimizer updates.",
+  "success_gate":"Both development seeds: held-out audit nRMSE <=1e-5 and Mirror payload <=25% independent curve payload. Mirror-specific success further requires better bytes or compute than native activation modulation at equal quality.",
+  "failure_gate":"Quality/storage gate miss or native activation modulation exact/equal-cost alias. Fresh remains sealed after any failure.",
+  "boundaries":["Single-layer analytic periodic decoder only","No learned SIREN training claim","No general implicit-function claim","Protocol frozen before development"]
+}
