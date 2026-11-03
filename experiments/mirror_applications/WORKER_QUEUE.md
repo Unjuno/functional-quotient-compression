@@ -492,3 +492,8 @@ MA-623 is a verified development FAIL on `research/ma-623-cavia-private-residual
 ## Current handoff — 2026-11-03, MA-626
 
 MA-624 is a verified development FAIL on `research/ma-624-example-context-code-20261103`: direct CAVIA and generic pooled context aggregation both reached numerical-zero held-out nRMSE. Direct CAVIA used 1,771–1,773 B and compute proxy 1,024; inferred Mirror code used 2,540 B and compute proxy 32,768. Fresh stayed sealed. MA-625 is P1; next P0: MA-626, DeepSDF-style shared decoder with per-shape latent codes (PA131).
+
+
+## Current handoff — 2026-11-03, MA-627
+
+MA-626 is a verified scoped FAIL on `research/ma-626-deepsdf-mirror-autodecoder-20261103`: the analytic shared circle SDF payload was 1,236 B versus 236,666–236,709 B for independent grids, but direct native center/radius conditioning exactly matched outputs and payload while using ~35% fewer arithmetic operations. Fresh remained sealed. This does not test learned DeepSDF or general shapes. Next P0: MA-627, periodic-activation Mirror modulation (PA132).
