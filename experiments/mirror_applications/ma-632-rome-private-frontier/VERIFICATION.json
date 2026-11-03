@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-632",
+  "commit": "ba754eb9",
+  "tests": {
+    "command": "pytest -q experiments/mirror_applications/ma-632-rome-private-frontier/tests",
+    "passed": 2,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Protocol hash matches freeze.json.",
+    "Development seeds only; fresh remained sealed after joint low-rank control dominated.",
+    "Private rank 0/2/4 is exactly recovered, rank8 costs more than independent, and rank16 is not identified from 12 training edits."
+  ]
+}
