@@ -1,0 +1,3 @@
+# MA-574 status
+
+NOT ESTABLISHED — the frozen source SHA-256 value recorded in `freeze.json` does not match the committed source file. Replaying both development seeds from the frozen commit produced different codebook candidate IDs from the artifacts labeled registered development. Aggregate NRMSE remained close and the replay's shared, random, and native variants alias, but the provenance discrepancy prevents those values from validating the preregistered result. Fresh seeds 57411–57413 remain sealed. Full file sizes and hashes are in `ARTIFACT_PROVENANCE.json`; replay metrics are diagnostic only.

@@ -1,0 +1,3 @@
+# Amendment 1 — excluded parser/serializer smoke
+
+Before protocol/source freeze, nonregistered seed 1 was run only to validate safetensors matrix reads, codebook selection, quantized payload serialization, exact full-precision function preservation, and native-control alias checks. The four-entry codebook tied independent per-matrix quality and reduced full payload bytes by about 0.18%, but selected the same entries as the random codebook and the native control. The smoke is excluded from registered development/fresh statistics and lives at `/workspace/artifacts/ma574_smoke_seed1`. No gates, candidate count, codebook size, layer split, or source behavior were changed in response.

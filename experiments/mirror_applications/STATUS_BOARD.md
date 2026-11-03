@@ -1,15 +1,15 @@
 # Mirror Application Status Board
 
-Updated: 2026-10-08 JST
+Updated: 2026-11-03 UTC
 Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (210 completed; 420 UNTESTED)
+- P0: **630** (211 completed; 419 UNTESTED; 1 NOT ESTABLISHED)
 - P1: **422** (15 completed; 407 UNTESTED)
 - P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **930 UNTESTED, 59 PROMISING, 165 FAIL, 1 SCREENING**
+- Current MA statuses: **929 UNTESTED, 59 PROMISING, 165 FAIL, 1 SCREENING, 1 NOT ESTABLISHED**
 - 47 baseline experiment directories remain present; verified external outcomes are linked to their dedicated branches in the registry and claim ledger.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). See the current Next candidate section for the live queue.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. see the current Next candidate section.
@@ -23,13 +23,13 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-574 — SpinQuant codebook of learned rotations (P0; PA113)**
+**MA-575 — Factorized layer × block rotation code (P0; PA113/PA21)**
 
-MA-560, MA-561, MA-562, MA-565, MA-567, MA-569, MA-571 and MA-573 have dedicated research branches and reconciled evidence. MA-573's selected gauge lost to fixed Hadamard on fresh synthetic int4 matrices and missed its complete-payload gate. The next UNTESTED P0 in registry order after MA-573 is MA-574. Compare a reusable compact rotation codebook against one global rotation and independently learned per-layer SpinQuant rotations. Charge all codebook/index state and actual serialized quantized inference payloads.
+MA-574 is **NOT ESTABLISHED**: the recorded source digest differs from the committed source, and same-seed replay selected different codebook entries than the registered development artifacts. The protocol digest matches; diagnostic replays show close NRMSE and a shared/random/native alias, but they cannot validate the frozen evidence. Fresh seeds remained sealed. The result and artifact hashes are preserved at `ma-574-spinquant-rotation-codebook/`. Proceed to MA-575, which tests a distinct factorized layer-by-block coordinate and must compare with native factorized rotation controls.
 
 ## Active experiment
 
-No experiment is currently active. The cumulative evidence branch is `research/ma-evidence-reconciliation-1155-20261009`; latest integrated result is MA-573. Main remains untouched.
+No experiment is currently active. The cumulative evidence branch is `research/ma-evidence-reconciliation-1155-20261009`; MA-574 has been reconciled from its dedicated branch. Main remains untouched.
 
 ## Verified status index
 
