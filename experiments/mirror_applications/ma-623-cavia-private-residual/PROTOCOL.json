@@ -1,0 +1,20 @@
+{
+  "experiment_id":"MA-623",
+  "title":"CAVIA shared context plus private residual rank sweep",
+  "status":"SCREENING",
+  "base_commit":"3a9c7b05",
+  "prior_art_refs":["PA129"],
+  "hypothesis":"A low-dimensional task-private residual on top of factorized shared CAVIA context recovers held-out interaction tasks with less actual payload than independent full contexts; residual rank traces the storage/quality break-even.",
+  "world":{"input_dim":16,"context_dim":8,"factor_pairs":16,"heldout_pairs":[[0,0],[1,1],[2,2],[3,3]],"training_pairs":"remaining 12 combinations","support_examples":16,"audit_examples":128,"conditions":["aligned","private_interaction"]},
+  "development_seeds":[62301,62302],
+  "fresh_seeds":[62311,62312,62313],
+  "fresh_sealed":true,
+  "residual_ranks":[0,1,2,4,8],
+  "controls":["zero_context","independent_full_8d_CAVIA_support_fit","direct_task_residual_coordinates_same_rank","native_PCA_residual_basis_same_rank"],
+  "fit_policy":"Fit shared factor context and residual basis using only the 12 training factor pairs. Fit held-out private residual codes only from that task's support examples. Audit samples never enter fitting.",
+  "storage":"Actual serialized inference .npz bytes; charge shared predictor/basis, factor-angle context, residual basis, per-task residual codes, pair indices, schema and metadata.",
+  "compute":"Report support-example count, least-squares evaluations, PCA fit cost proxy, active multiply-add proxy and wall time. Zero optimizer updates.",
+  "success_gate":"Both dev seeds in private_interaction: held-out nRMSE <=0.05 and <=75% independent full-context payload at some rank; a Mirror-specific result also requires PCA residual to beat direct-coordinate residual at comparable bytes and compute.",
+  "failure_gate":"No rank meets quality/storage, or native residual control matches PCA residual quality at equal/lower bytes and compute. Fresh seeds remain sealed on any gate miss.",
+  "boundaries":["Synthetic linear mechanism only","Task factor indices are known and charged","No natural task, meta-training, or language-model claim","Do not change rank, seeds or gates after development begins"]
+}
