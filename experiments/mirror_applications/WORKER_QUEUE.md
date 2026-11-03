@@ -497,3 +497,8 @@ MA-624 is a verified development FAIL on `research/ma-624-example-context-code-2
 ## Current handoff — 2026-11-03, MA-627
 
 MA-626 is a verified scoped FAIL on `research/ma-626-deepsdf-mirror-autodecoder-20261103`: the analytic shared circle SDF payload was 1,236 B versus 236,666–236,709 B for independent grids, but direct native center/radius conditioning exactly matched outputs and payload while using ~35% fewer arithmetic operations. Fresh remained sealed. This does not test learned DeepSDF or general shapes. Next P0: MA-627, periodic-activation Mirror modulation (PA132).
+
+
+## Current handoff — 2026-11-03, MA-628
+
+MA-627 is a verified development FAIL for Mirror-specific attribution on `research/ma-627-periodic-mirror-modulation-20261103`: 879–883 B codes reconstructed held-out harmonic signals (mean nRMSE <1e-15) versus ~24.8 KB sampled curves, but native modulated periodic activation exactly matched output, bytes and compute. Fresh stayed sealed. Next P0: MA-628, COIN++-style shared/private modulation codec (PA133).
