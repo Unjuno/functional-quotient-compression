@@ -467,3 +467,13 @@ MA-602 is a verified FAIL on `research/ma-602-sparse-hash-collision-repair-20261
 ## Current handoff — 2026-11-03
 
 MA-574 is **NOT ESTABLISHED** because its frozen source digest mismatches the committed source and same-seed diagnostic replays selected different codebook IDs from the registered development artifacts; fresh remained sealed. See `ma-574-spinquant-rotation-codebook/RESULTS.md` and `ARTIFACT_PROVENANCE.json`. Next P0: MA-575 (factorized layer × block rotation code; PA113/PA21).
+
+
+## Current handoff — 2026-11-03, MA-591
+
+MA-574 is NOT ESTABLISHED due to a frozen source-digest mismatch. MA-575, MA-576, MA-578, MA-581, MA-582, MA-589 and MA-591 are verified FAILs for the scoped reasons recorded in their per-ID reports. The MLA latent family is paused for MA-583/585/586 after two consecutive shared-latent quality failures. Next P0: MA-545 (function-vector MoE without weight experts; PA99).
+
+
+## Current handoff — 2026-11-03, MA-622
+
+Integrated the checked MA-574..591 sequence, the separate MA-545 result, MA-592 prompt composition, and MA-621 CAVIA context screen. MA-574 is NOT ESTABLISHED; MA-575/576/578/581/582/589/591/545/592/621 are FAIL for their documented scoped gates. MA-583/585/586 remain operationally paused after the MLA/KV family diagnostic. Next P0: MA-622 factorized CAVIA context (PA129).

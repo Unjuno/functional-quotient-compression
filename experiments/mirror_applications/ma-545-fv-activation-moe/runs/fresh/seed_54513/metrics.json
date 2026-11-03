@@ -1,0 +1,588 @@
+{
+  "audit_queries": 64,
+  "common_base_bytes": 168144624,
+  "common_base_files": {
+    "config.json": 567,
+    "model.safetensors": 166029852,
+    "special_tokens_map.json": 99,
+    "tokenizer.json": 2113710,
+    "tokenizer_config.json": 396
+  },
+  "config_sha256": "002050231a9b1ec3ac77aa6b9b3bbdc4d923f4068a7dd33b8da72a9bd6ad9a43",
+  "experiment_id": "MA-545",
+  "extraction_seconds": 16.313794941001106,
+  "full_deployment_bytes": {
+    "oracle_fv": 168179734,
+    "oracle_weight_bias": 168179738,
+    "routed_fv_top1": 168213020,
+    "routed_fv_top2": 168213020,
+    "routed_weight_bias_top1": 168213024,
+    "shared_mean_fv": 168149008
+  },
+  "full_mlp_expert_bank_deployment_bytes": 302545078,
+  "model_revision": "e93a9faa9c77e5d09219f6c868bfc7a1bd65593c",
+  "model_sha256": "3da388330e4549156d76b58d6d268c63cd005e9336b4f4d2d378421e7b7a33fd",
+  "payloads": {
+    "full_mlp_expert_bank_bytes_only": {
+      "bytes": 134400454,
+      "sha256": "f739de83b45737391d620a464d617707faa4ec3b37c31274d3989d4f2b8d789f"
+    },
+    "oracle_fv": {
+      "bytes": 35110,
+      "sha256": "b5983e81bd927a80c7a4acdbe96ef5ea32d587c65057ee21dfc401bc5a48cffa"
+    },
+    "oracle_weight_bias": {
+      "bytes": 35114,
+      "sha256": "faeeadf461bc5fb8495b615c43f93424ca0c53453cf2c40d534c84412180a3df"
+    },
+    "routed_fv_top1": {
+      "bytes": 68396,
+      "sha256": "c1302370a6f000268f05b13c8593631a4ad877f7dcb865470dfff0520b8a296e"
+    },
+    "routed_fv_top2": {
+      "bytes": 68396,
+      "sha256": "c2aaef1949a67539a58dc1f03a52069071ce6ca5b42a734636f498d7f9f06758"
+    },
+    "routed_weight_bias_top1": {
+      "bytes": 68400,
+      "sha256": "7c248273fb51e5cbac37ca14566b161a661578046287dfa5b7080e4b2f98dcca"
+    },
+    "shared_mean_fv": {
+      "bytes": 4384,
+      "sha256": "3aa99ae6116c61fd942aa521d2f5d08e4022ee832c5aae77bc132f79b169a144"
+    }
+  },
+  "results": {
+    "candidate_input_tokens": 55020,
+    "candidate_sequences": 7168,
+    "evaluation_queries": 64,
+    "inference_seconds_all_methods": 49.46589808200952,
+    "methods": {
+      "no_intervention": {
+        "heldout_accuracy": 0.46875,
+        "mean_gold_logprob": -10.013125030323863,
+        "mean_gold_vs_best_negative_margin": -1.0142766195349395,
+        "per_task": {
+          "0": {
+            "accuracy": 0.75,
+            "mean_gold_logprob": -8.596431612968445
+          },
+          "1": {
+            "accuracy": 1.0,
+            "mean_gold_logprob": -5.531799376010895
+          },
+          "10": {
+            "accuracy": 0.5,
+            "mean_gold_logprob": -11.222087144851685
+          },
+          "11": {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -10.965040385723114
+          },
+          "12": {
+            "accuracy": 0.0,
+            "mean_gold_logprob": -17.25172746181488
+          },
+          "13": {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -10.374729871749878
+          },
+          "14": {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -15.58720052242279
+          },
+          "15": {
+            "accuracy": 0.0,
+            "mean_gold_logprob": -10.132575273513794
+          },
+          "2": {
+            "accuracy": 0.0,
+            "mean_gold_logprob": -15.225697755813599
+          },
+          "3": {
+            "accuracy": 0.5,
+            "mean_gold_logprob": -8.958810448646545
+          },
+          "4": {
+            "accuracy": 1.0,
+            "mean_gold_logprob": -7.435600996017456
+          },
+          "5": {
+            "accuracy": 0.75,
+            "mean_gold_logprob": -8.002513766288757
+          },
+          "6": {
+            "accuracy": 0.5,
+            "mean_gold_logprob": -5.278681635856628
+          },
+          "7": {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -12.749114483594894
+          },
+          "8": {
+            "accuracy": 1.0,
+            "mean_gold_logprob": -4.200180292129517
+          },
+          "9": {
+            "accuracy": 0.5,
+            "mean_gold_logprob": -8.69780945777893
+          }
+        },
+        "queries": 64
+      },
+      "oracle_task_fv": {
+        "heldout_accuracy": 0.453125,
+        "mean_gold_logprob": -6.626088224817067,
+        "mean_gold_vs_best_negative_margin": -1.2398865867871791,
+        "per_task": {
+          "0": {
+            "accuracy": 0.75,
+            "mean_gold_logprob": -4.940108060836792
+          },
+          "1": {
+            "accuracy": 1.0,
+            "mean_gold_logprob": -2.2050800025463104
+          },
+          "10": {
+            "accuracy": 0.5,
+            "mean_gold_logprob": -8.5475435256958
+          },
+          "11": {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -6.713322311639786
+          },
+          "12": {
+            "accuracy": 0.0,
+            "mean_gold_logprob": -14.007957696914673
+          },
+          "13": {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -6.796477198600769
+          },
+          "14": {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -13.068704843521118
+          },
+          "15": {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -6.7983609437942505
+          },
+          "2": {
+            "accuracy": 0.0,
+            "mean_gold_logprob": -13.601412922143936
+          },
+          "3": {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -3.3780360221862793
+          },
+          "4": {
+            "accuracy": 1.0,
+            "mean_gold_logprob": -2.909804552793503
+          },
+          "5": {
+            "accuracy": 1.0,
+            "mean_gold_logprob": -2.834856629371643
+          },
+          "6": {
+            "accuracy": 0.5,
+            "mean_gold_logprob": -3.337635613977909
+          },
+          "7": {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -10.771018356084824
+          },
+          "8": {
+            "accuracy": 0.75,
+            "mean_gold_logprob": -3.436394155025482
+          },
+          "9": {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -2.6706987619400024
+          }
+        },
+        "queries": 64
+      },
+      "oracle_weight_bias": {
+        "heldout_accuracy": 0.453125,
+        "mean_gold_logprob": -6.626126009039581,
+        "mean_gold_vs_best_negative_margin": -1.23998863552697,
+        "per_task": {
+          "0": {
+            "accuracy": 0.75,
+            "mean_gold_logprob": -4.940197944641113
+          },
+          "1": {
+            "accuracy": 1.0,
+            "mean_gold_logprob": -2.2051049321889877
+          },
+          "10": {
+            "accuracy": 0.5,
+            "mean_gold_logprob": -8.54738563299179
+          },
+          "11": {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -6.713236600160599
+          },
+          "12": {
+            "accuracy": 0.0,
+            "mean_gold_logprob": -14.007858633995056
+          },
+          "13": {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -6.79584276676178
+          },
+          "14": {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -13.068872451782227
+          },
+          "15": {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -6.798362731933594
+          },
+          "2": {
+            "accuracy": 0.0,
+            "mean_gold_logprob": -13.601300746202469
+          },
+          "3": {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -3.3783688247203827
+          },
+          "4": {
+            "accuracy": 1.0,
+            "mean_gold_logprob": -2.9098897576332092
+          },
+          "5": {
+            "accuracy": 1.0,
+            "mean_gold_logprob": -2.8354740142822266
+          },
+          "6": {
+            "accuracy": 0.5,
+            "mean_gold_logprob": -3.337878853082657
+          },
+          "7": {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -10.771261394023895
+          },
+          "8": {
+            "accuracy": 0.75,
+            "mean_gold_logprob": -3.436356246471405
+          },
+          "9": {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -2.670624613761902
+          }
+        },
+        "queries": 64
+      },
+      "routed_fv_top1": {
+        "heldout_accuracy": 0.453125,
+        "mean_gold_logprob": -6.626088224817067,
+        "mean_gold_vs_best_negative_margin": -1.2398865867871791,
+        "per_task": {
+          "0": {
+            "accuracy": 0.75,
+            "mean_gold_logprob": -4.940108060836792
+          },
+          "1": {
+            "accuracy": 1.0,
+            "mean_gold_logprob": -2.2050800025463104
+          },
+          "10": {
+            "accuracy": 0.5,
+            "mean_gold_logprob": -8.5475435256958
+          },
+          "11": {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -6.713322311639786
+          },
+          "12": {
+            "accuracy": 0.0,
+            "mean_gold_logprob": -14.007957696914673
+          },
+          "13": {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -6.796477198600769
+          },
+          "14": {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -13.068704843521118
+          },
+          "15": {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -6.7983609437942505
+          },
+          "2": {
+            "accuracy": 0.0,
+            "mean_gold_logprob": -13.601412922143936
+          },
+          "3": {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -3.3780360221862793
+          },
+          "4": {
+            "accuracy": 1.0,
+            "mean_gold_logprob": -2.909804552793503
+          },
+          "5": {
+            "accuracy": 1.0,
+            "mean_gold_logprob": -2.834856629371643
+          },
+          "6": {
+            "accuracy": 0.5,
+            "mean_gold_logprob": -3.337635613977909
+          },
+          "7": {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -10.771018356084824
+          },
+          "8": {
+            "accuracy": 0.75,
+            "mean_gold_logprob": -3.436394155025482
+          },
+          "9": {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -2.6706987619400024
+          }
+        },
+        "queries": 64
+      },
+      "routed_fv_top2": {
+        "heldout_accuracy": 0.453125,
+        "mean_gold_logprob": -6.729231052100658,
+        "mean_gold_vs_best_negative_margin": -1.1215710362885147,
+        "per_task": {
+          "0": {
+            "accuracy": 0.75,
+            "mean_gold_logprob": -5.243159532546997
+          },
+          "1": {
+            "accuracy": 1.0,
+            "mean_gold_logprob": -2.3147037029266357
+          },
+          "10": {
+            "accuracy": 0.5,
+            "mean_gold_logprob": -8.602142453193665
+          },
+          "11": {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -6.786103814840317
+          },
+          "12": {
+            "accuracy": 0.0,
+            "mean_gold_logprob": -14.345252871513367
+          },
+          "13": {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -6.6180959939956665
+          },
+          "14": {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -13.322919607162476
+          },
+          "15": {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -6.599413871765137
+          },
+          "2": {
+            "accuracy": 0.0,
+            "mean_gold_logprob": -14.174907624721527
+          },
+          "3": {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -3.2830594778060913
+          },
+          "4": {
+            "accuracy": 1.0,
+            "mean_gold_logprob": -2.950268566608429
+          },
+          "5": {
+            "accuracy": 1.0,
+            "mean_gold_logprob": -2.898376226425171
+          },
+          "6": {
+            "accuracy": 0.5,
+            "mean_gold_logprob": -3.3239990174770355
+          },
+          "7": {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -10.781880855560303
+          },
+          "8": {
+            "accuracy": 0.75,
+            "mean_gold_logprob": -3.7342551946640015
+          },
+          "9": {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -2.689158022403717
+          }
+        },
+        "queries": 64
+      },
+      "routed_weight_bias_top1": {
+        "heldout_accuracy": 0.453125,
+        "mean_gold_logprob": -6.626126009039581,
+        "mean_gold_vs_best_negative_margin": -1.23998863552697,
+        "per_task": {
+          "0": {
+            "accuracy": 0.75,
+            "mean_gold_logprob": -4.940197944641113
+          },
+          "1": {
+            "accuracy": 1.0,
+            "mean_gold_logprob": -2.2051049321889877
+          },
+          "10": {
+            "accuracy": 0.5,
+            "mean_gold_logprob": -8.54738563299179
+          },
+          "11": {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -6.713236600160599
+          },
+          "12": {
+            "accuracy": 0.0,
+            "mean_gold_logprob": -14.007858633995056
+          },
+          "13": {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -6.79584276676178
+          },
+          "14": {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -13.068872451782227
+          },
+          "15": {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -6.798362731933594
+          },
+          "2": {
+            "accuracy": 0.0,
+            "mean_gold_logprob": -13.601300746202469
+          },
+          "3": {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -3.3783688247203827
+          },
+          "4": {
+            "accuracy": 1.0,
+            "mean_gold_logprob": -2.9098897576332092
+          },
+          "5": {
+            "accuracy": 1.0,
+            "mean_gold_logprob": -2.8354740142822266
+          },
+          "6": {
+            "accuracy": 0.5,
+            "mean_gold_logprob": -3.337878853082657
+          },
+          "7": {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -10.771261394023895
+          },
+          "8": {
+            "accuracy": 0.75,
+            "mean_gold_logprob": -3.436356246471405
+          },
+          "9": {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -2.670624613761902
+          }
+        },
+        "queries": 64
+      },
+      "shared_mean_fv": {
+        "heldout_accuracy": 0.484375,
+        "mean_gold_logprob": -8.20601501967758,
+        "mean_gold_vs_best_negative_margin": -0.7014465807005763,
+        "per_task": {
+          "0": {
+            "accuracy": 0.75,
+            "mean_gold_logprob": -6.521955370903015
+          },
+          "1": {
+            "accuracy": 1.0,
+            "mean_gold_logprob": -4.001529842615128
+          },
+          "10": {
+            "accuracy": 0.5,
+            "mean_gold_logprob": -9.332306563854218
+          },
+          "11": {
+            "accuracy": 0.5,
+            "mean_gold_logprob": -8.266593873500824
+          },
+          "12": {
+            "accuracy": 0.0,
+            "mean_gold_logprob": -15.143730521202087
+          },
+          "13": {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -7.232607007026672
+          },
+          "14": {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -14.003192901611328
+          },
+          "15": {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -7.608412861824036
+          },
+          "2": {
+            "accuracy": 0.0,
+            "mean_gold_logprob": -14.03979977965355
+          },
+          "3": {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -6.233412384986877
+          },
+          "4": {
+            "accuracy": 1.0,
+            "mean_gold_logprob": -6.549590468406677
+          },
+          "5": {
+            "accuracy": 1.0,
+            "mean_gold_logprob": -5.7620909214019775
+          },
+          "6": {
+            "accuracy": 0.5,
+            "mean_gold_logprob": -3.679392531514168
+          },
+          "7": {
+            "accuracy": 0.25,
+            "mean_gold_logprob": -11.706963807344437
+          },
+          "8": {
+            "accuracy": 0.75,
+            "mean_gold_logprob": -5.104233980178833
+          },
+          "9": {
+            "accuracy": 0.5,
+            "mean_gold_logprob": -6.110427498817444
+          }
+        },
+        "queries": 64
+      }
+    },
+    "model_calls": 448,
+    "native_bias_alias": {
+      "oracle_max_abs_candidate_score_delta": 0.0030031204223632812,
+      "oracle_score_alias_within_frozen_tolerance": true
+    },
+    "router": {
+      "calibration_vectors_per_task": 4,
+      "prototype_count": 16,
+      "top1_task_accuracy": 1.0,
+      "top2_contains_task_rate": 1.0
+    }
+  },
+  "router_calibration_examples": 64,
+  "seed": 54513,
+  "support_examples": 128,
+  "support_extraction": {
+    "calibration_input_tokens": 4811,
+    "fv_forward_calls": 256,
+    "router_forward_calls": 64,
+    "support_input_tokens": 9343
+  },
+  "tokenizer_sha256": "c24618a1b3e6a38167beff1c72cffd126c3a66254347304b50547d12c5f25624"
+}

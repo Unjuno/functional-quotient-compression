@@ -1,0 +1,1 @@
+FAIL — residual rotation beats scale-only by 3.71%, but is 2.68% worse than QuaRot-only, costs 13,778 B more than the best single component, and exactly aliases native sequential SmoothQuant+QuaRot. Random residual matches quality with 704 B fewer. Fresh sealed.

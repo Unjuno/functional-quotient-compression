@@ -1,0 +1,49 @@
+{
+  "experiment_id": "MA-545",
+  "commit": "0a520e4ab65f42f7cebf4f7b444b1922e97ffdaf",
+  "tests": {
+    "command": "PYTHONPATH=/tmp/ma534-python-deps python -m pytest -q experiments/mirror_applications/ma-545-fv-residual-moe/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "actual_npz_byte_sizes": true,
+    "split_manifest_included": true,
+    "all_five_seeds_payload_sizes_checked": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0,
+    "arrays_exact": true,
+    "split_manifest_exact": true,
+    "wall_clock_excluded": true,
+    "replayed_seed": 54501
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_accessed": true,
+  "fresh_seeds_completed": [
+    54511,
+    54512,
+    54513
+  ],
+  "protocol_hash_matches_freeze": true,
+  "route_audit": {
+    "all_five_accuracy": 1.0,
+    "all_five_macro_f1": 1.0,
+    "fresh_confusions_diagonal": true
+  },
+  "notes": [
+    "Both amended development seeds and all three fresh seeds used fixed seeds and frozen conditions.",
+    "Fresh route accuracy and macro-F1 are 1.00; each 16x16 confusion matrix has eight correct examples on each diagonal class and zero off-diagonal counts.",
+    "Fresh routed FV matches oracle accuracy exactly, but is below shared-mean answer accuracy by 0.0313/0.0547/0.0469 while costing 8.27x as many bytes.",
+    "Fresh FV payload is 0.7031x the rank-one weight-expert bank; rank-one metrics are nearly indistinguishable.",
+    "Actual NPZ byte counts include the serialized split manifest, router, expert state, task indices and schema.",
+    "Deterministic dev seed 54501 replay matched metrics, split, all arrays and serialized sizes exactly; measured timings are excluded from exact comparison.",
+    "Post-run router/rank-one fit wall-clock profile refit frozen conditions on saved data; fitted parameters matched serialized arrays exactly.",
+    "The first ambient-RNG development artifacts remain preserved under results/pre_amendment_1/; amended seeded runs are authoritative.",
+    "Fresh seed 54513 completed under frozen settings; route accuracy/macro-F1 1.00, routed FV equals oracle, 78,117 B vs 111,109 B rank-one, and shared mean is 0.0469 accuracy higher at 9,445 B.",
+    "Fresh routed FV loses to shared-mean candidate accuracy in all three fresh seeds, at 8.27x its serialized payload; this is the primary-metric failure despite the gold-likelihood tradeoff."
+  ]
+}

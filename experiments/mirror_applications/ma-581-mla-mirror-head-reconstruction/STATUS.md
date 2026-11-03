@@ -1,0 +1,1 @@
+FAIL — eight-session basis+cache deployment is 44.1% of FP16 cache bytes, but NLL delta is +1.036/+0.412 nat/token versus gate ≤+0.05; shared residual code exactly aliases native dictionary, and seed quality direction reverses vs MLA-only. Fresh sealed.

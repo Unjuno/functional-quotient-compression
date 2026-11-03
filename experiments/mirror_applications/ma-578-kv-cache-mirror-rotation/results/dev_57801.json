@@ -1,0 +1,127 @@
+{
+  "calibration_prefixes": 4,
+  "candidate_count": 16,
+  "codebook_size": 4,
+  "compute": {
+    "calibration_prefill_seconds": 0.1901001069927588,
+    "candidate_error_seconds": 2.7763058280106634,
+    "codebook_fit_seconds": 0.0008649220108054578,
+    "model_load_seconds": 0.07630404899828136,
+    "online_query_and_value_view_ops_per_token": 30720,
+    "optimizer_updates": 0,
+    "total_wall_seconds": 18.604947554995306
+  },
+  "dataset": "WikiText-2 raw",
+  "dataset_file": "valid.txt",
+  "dataset_sha256": "f0737ed31fc1329026e95cb8b98e19c2a182c39c240ab909dc31abf2f8af58e8",
+  "experiment_id": "MA-578",
+  "file_sizes": {
+    "fp16_cache": {
+      "payload_bytes": 787746,
+      "payload_file": "fp16_cache_cache_payload.npz"
+    },
+    "identity_int4": {
+      "payload_bytes": 222762,
+      "payload_file": "identity_int4_cache_payload.npz"
+    },
+    "independent16": {
+      "payload_bytes": 235902,
+      "payload_file": "independent16_cache_payload.npz"
+    },
+    "mirror_codebook4": {
+      "payload_bytes": 224126,
+      "payload_file": "mirror_codebook4_cache_payload.npz"
+    },
+    "native_shared_codebook4": {
+      "payload_bytes": 224126,
+      "payload_file": "native_shared_codebook4_cache_payload.npz"
+    },
+    "quarot_global": {
+      "payload_bytes": 223742,
+      "payload_file": "quarot_global_cache_payload.npz"
+    },
+    "random_codebook4": {
+      "payload_bytes": 224126,
+      "payload_file": "random_codebook4_cache_payload.npz"
+    }
+  },
+  "fitted_codebook_candidate_ids": [
+    2,
+    1,
+    8,
+    13
+  ],
+  "methods": {
+    "fp16_cache": {
+      "actual_cache_payload_bytes": 787746,
+      "mean_cache_encode_seconds": 0.0007189949337771395,
+      "mean_cache_mse": 1.3870643158497842e-05,
+      "mean_next_token_nll": 5.187141632661223,
+      "mean_query_seconds": 0.010306488688001991,
+      "nll_delta_vs_fp16": 0.0,
+      "std_next_token_nll": 4.440041054712873
+    },
+    "identity_int4": {
+      "actual_cache_payload_bytes": 222762,
+      "mean_cache_encode_seconds": 0.009847730942055932,
+      "mean_cache_mse": 1.3216821253299713,
+      "mean_next_token_nll": 6.551162324845791,
+      "mean_query_seconds": 0.010786881372041535,
+      "nll_delta_vs_fp16": 1.3640206921845675,
+      "std_next_token_nll": 3.9982446363156345
+    },
+    "independent16": {
+      "actual_cache_payload_bytes": 235902,
+      "mean_cache_encode_seconds": 0.044071834314308944,
+      "mean_cache_mse": 2.497257649898529,
+      "mean_next_token_nll": 5.9694718942046165,
+      "mean_query_seconds": 0.011571088134587626,
+      "nll_delta_vs_fp16": 0.7823302615433931,
+      "std_next_token_nll": 3.3832784247774668
+    },
+    "mirror_codebook4": {
+      "actual_cache_payload_bytes": 224126,
+      "mean_cache_encode_seconds": 0.04403039825410815,
+      "mean_cache_mse": 2.757404774427414,
+      "mean_next_token_nll": 5.918459130451083,
+      "mean_query_seconds": 0.011470609309981228,
+      "nll_delta_vs_fp16": 0.7313174977898598,
+      "std_next_token_nll": 3.651824762532397
+    },
+    "native_shared_codebook4": {
+      "actual_cache_payload_bytes": 224126,
+      "mean_cache_encode_seconds": 0.04343208399586729,
+      "mean_cache_mse": 2.757404774427414,
+      "mean_next_token_nll": 5.918459130451083,
+      "mean_query_seconds": 0.011036498375688097,
+      "nll_delta_vs_fp16": 0.7313174977898598,
+      "std_next_token_nll": 3.651824762532397
+    },
+    "quarot_global": {
+      "actual_cache_payload_bytes": 223742,
+      "mean_cache_encode_seconds": 0.04352257074788213,
+      "mean_cache_mse": 3.3217360377311707,
+      "mean_next_token_nll": 5.863437976688147,
+      "mean_query_seconds": 0.012557517124150763,
+      "nll_delta_vs_fp16": 0.6762963440269232,
+      "std_next_token_nll": 3.169723305083627
+    },
+    "random_codebook4": {
+      "actual_cache_payload_bytes": 224126,
+      "mean_cache_encode_seconds": 0.043844410185556626,
+      "mean_cache_mse": 2.845332369208336,
+      "mean_next_token_nll": 5.907670043408871,
+      "mean_query_seconds": 0.011698609063387266,
+      "nll_delta_vs_fp16": 0.7205284107476473,
+      "std_next_token_nll": 3.271009119158837
+    }
+  },
+  "model_revision": "e93a9faa9c77e5d09219f6c868bfc7a1bd65593c",
+  "model_sha256": "3da388330e4549156d76b58d6d268c63cd005e9336b4f4d2d378421e7b7a33fd",
+  "note": "NLL is measured on one next token after a quantized 64-token prefix cache; only prefix cache is quantized, query-token cache is not retained.",
+  "prefix_tokens": 64,
+  "query_target_pairs": 16,
+  "seed": 57801,
+  "selected_global_code": 2,
+  "split": "dev"
+}

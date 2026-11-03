@@ -1,0 +1,24 @@
+{
+  "experiment_id": "MA-621",
+  "commit": "eb4bc435",
+  "tests": {
+    "command": "pytest -q experiments/mirror_applications/ma-621-cavia-mirror-context/tests/test_run.py",
+    "passed": 2,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0,
+    "rows_replayed": 10,
+    "result": "source/verify.py reproduced dev metrics and serialized byte counts exactly"
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Development gate failed on exact direct-angle alias and higher CAVIA adaptation efficiency; fresh remained sealed.",
+    "Integration validation reran the test suite (2 passed) and deterministic 10-row metric/byte replay."
+  ]
+}

@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (211 completed; 419 UNTESTED; 1 NOT ESTABLISHED)
+- P0: **630** (220 completed; 409 UNTESTED; 1 SCREENING; 1 NOT ESTABLISHED)
 - P1: **422** (15 completed; 407 UNTESTED)
-- P2: **103** (0 completed; 103 UNTESTED)
-- Current MA statuses: **929 UNTESTED, 59 PROMISING, 165 FAIL, 1 SCREENING, 1 NOT ESTABLISHED**
+- P2: **103** (0 UNTESTED)
+- Current MA statuses: **175 FAIL, 1 NOT ESTABLISHED, 59 PROMISING, 1 SCREENING, 919 UNTESTED**
 - 47 baseline experiment directories remain present; verified external outcomes are linked to their dedicated branches in the registry and claim ledger.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). See the current Next candidate section for the live queue.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. see the current Next candidate section.
@@ -23,21 +23,21 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-**MA-575 — Factorized layer × block rotation code (P0; PA113/PA21)**
+**MA-622 — Factorized CAVIA context (P0; PA129)**
 
-MA-574 is **NOT ESTABLISHED**: the recorded source digest differs from the committed source, and same-seed replay selected different codebook entries than the registered development artifacts. The protocol digest matches; diagnostic replays show close NRMSE and a shared/random/native alias, but they cannot validate the frozen evidence. Fresh seeds remained sealed. The result and artifact hashes are preserved at `ma-574-spinquant-rotation-codebook/`. Proceed to MA-575, which tests a distinct factorized layer-by-block coordinate and must compare with native factorized rotation controls.
+MA-574, MA-575, MA-576, MA-578, MA-581, MA-582, MA-589 and MA-591 are reconciled from their dedicated branches. MA-574 is NOT ESTABLISHED because its frozen source digest mismatches the committed source; the other seven are scoped FAILs. MA-581/582 triggered the documented MLA latent family pause for MA-583/585/586. MA-545 is reconciled as FAIL from its canonical few-shot routed FV branch; an alternative activation-only MA-545 protocol is preserved separately and also fails attribution, without pooling. MA-592 fails its top-2 prompt composition quality/native-L2P gates. MA-621 is a verified development FAIL: direct-angle exactly aliases Mirror and CAVIA fits the aligned tasks with fewer adaptation evaluations. MA-622 remains the next executable P0.
 
 ## Active experiment
 
-No experiment is currently active. The cumulative evidence branch is `research/ma-evidence-reconciliation-1155-20261009`; MA-574 has been reconciled from its dedicated branch. Main remains untouched.
+MA-622 is next for a dedicated research branch and frozen development screen. The cumulative evidence branch is `research/ma-evidence-reconciliation-1155-20261009`; main remains untouched.
 
 ## Verified status index
 
-- **PROMISING (58):** MA-001, MA-002, MA-003, MA-004, MA-005, MA-006, MA-007, MA-008, MA-012, MA-014, MA-015, MA-041, MA-076, MA-079, MA-111, MA-121, MA-156, MA-160, MA-171, MA-173, MA-181, MA-189, MA-241, MA-244, MA-245, MA-249, MA-250, MA-251, MA-255, MA-258, MA-268, MA-276, MA-282, MA-312, MA-314, MA-325, MA-330, MA-344, MA-346, MA-381, MA-408, MA-411, MA-608, MA-612, MA-613, MA-691, MA-453, MA-431, MA-470, MA-471, MA-473, MA-475, MA-476, MA-482, MA-494, MA-503, MA-504, MA-511.
-- **FAIL (141):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-257, MA-260, MA-261, MA-265, MA-266, MA-271, MA-272, MA-273, MA-274, MA-278, MA-286, MA-288, MA-292, MA-296, MA-297, MA-299, MA-301, MA-303, MA-304, MA-307, MA-309, MA-311, MA-315, MA-318, MA-319, MA-320, MA-322, MA-327, MA-331, MA-332, MA-333, MA-335, MA-337, MA-338, MA-341, MA-342, MA-349, MA-351, MA-353, MA-355, MA-356, MA-357, MA-359, MA-360, MA-361, MA-364, MA-366, MA-367, MA-374, MA-375, MA-379, MA-383, MA-385, MA-389, MA-391, MA-392, MA-393, MA-395, MA-397, MA-399, MA-401, MA-403, MA-369, MA-371, MA-372, MA-405, MA-407, MA-413, MA-416, MA-417, MA-418, MA-429, MA-596, MA-597, MA-598, MA-599, MA-600, MA-601, MA-602, MA-603, MA-604, MA-606, MA-607, MA-610, MA-611, MA-614, MA-616, MA-617, MA-618, MA-444, MA-446, MA-451, MA-368, MA-452, MA-437, MA-455, MA-457, MA-461, MA-462, MA-463, MA-464, MA-466, MA-468, MA-469, MA-478, MA-481, MA-484, MA-486, MA-487, MA-488, MA-492, MA-498, MA-501, MA-502, MA-508, MA-510.
+- **PROMISING (59):** MA-001, MA-002, MA-003, MA-004, MA-005, MA-006, MA-007, MA-008, MA-012, MA-014, MA-015, MA-041, MA-076, MA-079, MA-111, MA-121, MA-156, MA-160, MA-171, MA-173, MA-181, MA-189, MA-241, MA-244, MA-245, MA-249, MA-250, MA-251, MA-255, MA-258, MA-268, MA-276, MA-282, MA-312, MA-314, MA-325, MA-330, MA-344, MA-346, MA-381, MA-408, MA-411, MA-431, MA-453, MA-470, MA-471, MA-473, MA-475, MA-476, MA-482, MA-494, MA-503, MA-504, MA-511, MA-561, MA-608, MA-612, MA-613, MA-691.
+- **NOT ESTABLISHED (1):** MA-574.
+- **FAIL (175):** MA-009, MA-010, MA-011, MA-013, MA-019, MA-024, MA-048, MA-061, MA-063, MA-086, MA-116, MA-129, MA-186, MA-199, MA-208, MA-247, MA-248, MA-253, MA-257, MA-260, MA-261, MA-265, MA-266, MA-271, MA-272, MA-273, MA-274, MA-278, MA-286, MA-288, MA-292, MA-296, MA-297, MA-299, MA-301, MA-303, MA-304, MA-307, MA-309, MA-311, MA-315, MA-318, MA-319, MA-320, MA-322, MA-327, MA-331, MA-332, MA-333, MA-335, MA-337, MA-338, MA-341, MA-342, MA-349, MA-351, MA-353, MA-355, MA-356, MA-357, MA-359, MA-360, MA-361, MA-364, MA-366, MA-367, MA-368, MA-369, MA-371, MA-372, MA-374, MA-375, MA-379, MA-383, MA-385, MA-389, MA-391, MA-392, MA-393, MA-395, MA-397, MA-399, MA-401, MA-403, MA-405, MA-407, MA-413, MA-416, MA-417, MA-418, MA-419, MA-424, MA-425, MA-427, MA-429, MA-434, MA-436, MA-437, MA-442, MA-444, MA-446, MA-451, MA-452, MA-455, MA-457, MA-461, MA-462, MA-463, MA-464, MA-466, MA-468, MA-469, MA-478, MA-481, MA-484, MA-486, MA-487, MA-488, MA-492, MA-498, MA-501, MA-502, MA-508, MA-510, MA-516, MA-517, MA-518, MA-520, MA-521, MA-527, MA-539, MA-540, MA-545, MA-546, MA-547, MA-550, MA-551, MA-553, MA-554, MA-556, MA-557, MA-558, MA-560, MA-562, MA-565, MA-567, MA-569, MA-571, MA-573, MA-575, MA-576, MA-578, MA-581, MA-582, MA-589, MA-591, MA-592, MA-596, MA-597, MA-598, MA-599, MA-600, MA-601, MA-602, MA-603, MA-604, MA-606, MA-607, MA-610, MA-611, MA-614, MA-616, MA-617, MA-618, MA-621.
 
-All per-ID evidence is retained in the local experiment directories and in `CLAIM_LEDGER.csv`. Consult [the evidence integration audit](../../docs/phase2/MIRROR_MA_EVIDENCE_INTEGRATION_2026-10-08.md) for linked reports, verifications, provenance and claim boundaries.
-
+All per-ID evidence is retained in experiment directories and `CLAIM_LEDGER.csv`. The MA-545 alternative protocol remains on its dedicated branch and is cross-referenced in its reconciliation note.
 ## 2026-10-08 research sweep
 
 New directions are cross-model cache translators, neural graphics and 4D Gaussian fields, speaker-adaptive synthesis, generative flow/solver coordinates, and cross-model stitching. They are **UNTESTED**. See [current research notes](../../docs/phase2/MIRROR_APPLICATION_RESEARCH_NOTES_2026-10-08.md). The new cross-model cache lane distinguishes exact MA-691 algebra from approximate learned transfer.
