@@ -1,0 +1,19 @@
+{
+  "experiment_id":"MA-628",
+  "title":"Actual-bit rate-distortion for quantized periodic Mirror codes",
+  "status":"SCREENING",
+  "base_commit":"8ff5351d",
+  "prior_art_refs":["PA133","PA132"],
+  "hypothesis":"Quantized/entropy-coded functional codes preserve held-out signal quality at fewer actual bytes than independent sampled curves; Mirror-specific value must beat native quantized activation modulation.",
+  "family":{"domain":"1D sine signals","harmonics":[1,2,3,4],"phases":[0,1.5707963267948966,3.141592653589793,4.71238898038469],"heldout":"diagonal harmonic/phase pairs","support_points":64,"audit_points":512},
+  "development_seeds":[62801,62802],
+  "fresh_seeds":[62811,62812,62813],
+  "fresh_sealed":true,
+  "quantization":{"amplitude_bits":[4,6,8,10,12],"phase_bits":[4,6,8,10,12],"frequency_bits":2,"amplitude_range":[0.5,1.5],"phase_range":[0,6.283185307179586],"entropy_codec":"zlib level 9 over bit-packed stream"},
+  "controls":["quantized periodic Mirror code","native COIN++-style quantized modulation same code and decoder","independent 512-point 8-bit sampled curves"],
+  "storage":"Actual serialized byte stream includes version/schema, ranges, bit widths, task indices, quantized values and entropy-coded payload; no parameter-count proxy.",
+  "compute":"Report support search, bit packing, entropy encode/decode, signal reconstruction arithmetic and wall time.",
+  "success_gate":"Both seeds: at least one frozen bit width achieves audit nRMSE <=1e-3 and <=25% bytes of independent 8-bit curves; Mirror-specific success also requires strictly better bytes/quality/compute than native modulation.",
+  "failure_gate":"No rate-distortion point meets quality/storage or exact native alias. Fresh sealed after any failure.",
+  "boundaries":["Synthetic one-dimensional single-sine family","No learned decoder training","No general modality claim","Frozen bit-width sweep only"]
+}
