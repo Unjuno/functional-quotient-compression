@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-624",
+  "commit": "182bee69",
+  "tests": {
+    "command": "pytest -q experiments/mirror_applications/ma-624-example-context-code/tests",
+    "passed": 2,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Protocol SHA-256 verified against freeze.json.",
+    "Development seeds only; fresh seeds remained sealed after Mirror dominance.",
+    "All methods achieved numerical-zero held-out nRMSE; direct CAVIA used fewer bytes and lower active-compute proxy than Mirror."
+  ]
+}
