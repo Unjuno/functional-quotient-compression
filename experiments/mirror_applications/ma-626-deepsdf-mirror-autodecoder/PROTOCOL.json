@@ -1,0 +1,18 @@
+{
+  "experiment_id":"MA-626",
+  "title":"Canonical SDF decoder with per-shape Mirror coordinates",
+  "status":"SCREENING",
+  "base_commit":"70d55f30",
+  "prior_art_refs":["PA131"],
+  "hypothesis":"A shared canonical function with small shape-view coordinates reproduces held-out function instances with lower actual storage than independent per-shape payloads; Mirror-specific value must beat native direct conditioning.",
+  "task":{"domain":"2D signed distance functions","family":"translated and scaled circles","instances":16,"heldout_instances":4,"support_points":64,"audit_points":256,"grid_upper":"64x64 float32"},
+  "development_seeds":[62601,62602],
+  "fresh_seeds":[62611,62612,62613],
+  "fresh_sealed":true,
+  "controls":["independent_per_shape_SDF_grid","shared_canonical_circle_decoder_plus_Mirror_m=(cx,cy,r)","shared_canonical_decoder_plus_native_direct_shape_conditioning_same_code"],
+  "storage":"Measure actual compressed inference .npz bytes, including decoder definition/state, codes, indices and schema; deterministic analytic decoder may be represented by fixed versioned code metadata only if reconstruction is exact and included in schema accounting.",
+  "compute":"Count pointwise arithmetic operations and report wall time; no fitting optimizer updates.",
+  "success_gate":"Both development seeds: held-out audit nRMSE <=1e-5 and shared-view payload <=25% independent grids. Mirror-specific success additionally requires improving bytes or compute over native direct conditioning at matched quality.",
+  "failure_gate":"Quality/storage gate miss or native direct conditioning is an exact equal-cost alias. Fresh stays sealed on any failure.",
+  "boundaries":["Restricted translated/scaled circle family only","No learned decoder training or general 3D shape claim","No quality measured on real scans","No protocol changes after development starts"]
+}
