@@ -507,3 +507,8 @@ MA-627 is a verified development FAIL for Mirror-specific attribution on `resear
 ## Current handoff — 2026-11-03, MA-631
 
 MA-628 is a verified scoped FAIL on `research/ma-628-coinpp-mirror-codec-20261103`: 12-bit codes reached mean nRMSE 0.00038–0.00039 with 218–219 B versus 4,962–5,272 B for independent sampled curves, but ordinary COIN++ modulation exactly matched the bitstream and all rate-distortion points. MA-622–628 now show repeated exact aliases to ordinary latent or conditioning methods; see `docs/phase2/CAVIA_IMPLICIT_FUNCTION_FAMILY_DIAGNOSTIC_2026-11-03.md`. Pause MA-625/629/630 pending a Mirror-specific redesign. Next independent P0: MA-631, ROME edit bank to shared Mirror basis (PA134).
+
+
+## Current handoff — 2026-11-03, MA-632
+
+MA-631 is a verified FAIL on `research/ma-631-rome-edit-shared-basis-20261103`: 32D synthetic rank-one edits had near-zero held-out efficacy error and zero locality leakage. Factor-table edit state was 1,358–1,360 B vs 2,587–2,616 B independent, but full payload reduction was ~19% and missed the 50% gate; ordinary shared low-rank per-edit codes were smaller, and native additive tables exactly aliased Mirror. Fresh stayed sealed. Next P0: MA-632 ROME aligned/private edit frontier (PA135).
