@@ -1,0 +1,18 @@
+{
+  "experiment_id":"MA-632",
+  "title":"ROME aligned/private rank and payload frontier",
+  "status":"SCREENING",
+  "base_commit":"ade36fdb",
+  "prior_art_refs":["PA135"],
+  "hypothesis":"A rank-2 shared edit basis plus private residual basis traces a quality/bytes frontier as private edit rank grows; the Mirror split must outperform ordinary joint low-rank edits.",
+  "task":{"hidden_dim":32,"edit_count":16,"training_edits":12,"heldout_pairs":[[0,0],[1,1],[2,2],[3,3]],"shared_rank":2,"true_private_ranks":[0,2,4,8,16],"stored_private_ranks":[0,1,2,4,8,16],"keys":"one-hot schema-indexed ROME keys, IDs charged"},
+  "development_seeds":[63201,63202],
+  "fresh_seeds":[63211,63212,63213],
+  "fresh_sealed":true,
+  "controls":["independent_rank_one_edits","shared_plus_private_Mirror_basis","ordinary_joint_low_rank_basis_with_per_edit_codes"],
+  "storage":"Actual serialized inference .npz bytes, including base layer, all basis matrices, per-edit shared/private codes, key IDs and metadata. Also report edit-state-only serialized bytes.",
+  "metrics":["heldout edit efficacy nRMSE","off-key leakage","complete payload bytes","edit-state bytes","operation count","wall time"],
+  "success_gate":"For aligned true-private rank 0 and 2: efficacy nRMSE <=1e-5, locality <=1e-6, complete payload <=70% independent. Mirror-specific success additionally requires a strict frontier gain over ordinary joint low-rank control at matched quality.",
+  "failure_gate":"No aligned quality/storage point or exact/equal native joint low-rank frontier. Fresh sealed on failure.",
+  "boundaries":["Synthetic linear edit mechanism only","Private coefficients are supplied by edit request; held-out edits do not train bases","No pretrained-model factuality claim","No protocol changes after freeze"]
+}
