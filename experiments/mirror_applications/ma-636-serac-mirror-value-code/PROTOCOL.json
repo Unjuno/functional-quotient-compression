@@ -1,0 +1,19 @@
+{
+  "experiment_id":"MA-636",
+  "title":"SERAC memory value compression with shared Mirror basis",
+  "status":"SCREENING",
+  "base_commit":"5f080ba7",
+  "prior_art_refs":["PA138"],
+  "hypothesis":"A shared rank-4 value code reduces explicit SERAC memory bytes while preserving held-out edit efficacy and scope locality; Mirror-specific value must beat native PCA coding and include retrieval/decode cost.",
+  "task":{"query_dim":8,"value_dim":16,"edits":128,"basis_train_edits":96,"heldout_edits":32,"true_value_rank":4,"positive_queries_per_key":4,"negative_queries_per_key":4,"scope_radius":0.08},
+  "development_seeds":[63601,63602],
+  "fresh_seeds":[63611,63612,63613],
+  "fresh_sealed":true,
+  "controls":["SERAC_explicit_key_value_memory","Mirror_shared_rank4_value_basis_codes","native_PCA_lowrank_value_codes"],
+  "routing":"Same nearest-key scope router and radius for all conditions; key vectors, thresholds and indices are paid in every payload.",
+  "storage":"Actual serialized inference .npz bytes including base executor, keys, radii, values or code basis/codes, indices and schema.",
+  "metrics":["heldout value nRMSE","positive scope hit rate","negative false-positive rate","complete bytes","retrieval+decode latency","operation proxy"],
+  "success_gate":"Both seeds: heldout nRMSE <=1e-5, positive hit >=99%, negative false positives <=1%, and payload <=50% explicit SERAC. Mirror-specific success additionally requires strict frontier gain over native PCA code at matched quality/routing.",
+  "failure_gate":"Quality/scope/storage miss or exact native PCA alias. Fresh remains sealed.",
+  "boundaries":["Synthetic SERAC memory mechanism only","No pretrained language-model editing claim","No training or tuning on fresh keys","Protocol frozen before development"]
+}
