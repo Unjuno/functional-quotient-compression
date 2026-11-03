@@ -482,3 +482,8 @@ Integrated the checked MA-574..591 sequence, the separate MA-545 result, MA-592 
 ## Current handoff — 2026-11-03, MA-623
 
 MA-622 is a verified development FAIL on `research/ma-622-cavia-factorized-context-20261103`: aligned factorized contexts met held-out quality/state-byte gates, but native direct-angle CAVIA exactly matched its outputs, state and full payload. Fresh seeds remained sealed. Private-interaction held-out nRMSE was 0.141–0.198 for the factor view versus 0 for per-task support-adapted contexts. Next P0: MA-623, shared CAVIA context plus explicit private residual coordinate (PA129), to locate the quality/bytes boundary.
+
+
+## Current handoff — 2026-11-03, MA-624
+
+MA-623 is a verified development FAIL on `research/ma-623-cavia-private-residual-20261103`: in the rank-2 private-interaction synthetic world, rank 2 missed quality (nRMSE 0.099–0.109; 3,347–3,351 B), rank 4 met quality on only one seed (0.044 vs 0.079; 3,755–3,762 B), and rank 8 reached zero error but cost 4,527–4,529 B against independent CAVIA at 3,039–3,045 B. Native PCA residual exactly aliases Mirror. Fresh stayed sealed. Next P0: MA-624, infer context from examples and compare against generic conditional context aggregation (PA130).
