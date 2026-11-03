@@ -1,19 +1,23 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-628",
+  "commit": "0de11878",
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "pytest -q experiments/mirror_applications/ma-628-coinpp-mirror-codec/tests",
+    "passed": 2,
+    "failed": 0
   },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "roundtrip_checked": true,
+    "byte_exact": true
   },
   "metric_replay": {
-    "checked": false,
-    "max_difference": null
+    "checked": true,
+    "max_difference": 0.0
   },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Protocol hash matches freeze.json.",
+    "Actual zlib-coded bitstream measured; development seeds only and fresh remains sealed due exact native alias.",
+    "At 12 bits, 218-219 B payload reached mean nRMSE 0.00038-0.00039 versus 4,962-5,272 B independent curves; native stream exactly equal."
+  ]
 }
