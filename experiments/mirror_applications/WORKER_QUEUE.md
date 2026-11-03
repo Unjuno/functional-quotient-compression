@@ -527,3 +527,8 @@ MA-635 is a verified fixed-budget FAIL on `research/ma-635-mend-mirror-code-edit
 ## Current handoff — 2026-11-03, MA-637
 
 MA-636 is a verified FAIL on `research/ma-636-serac-mirror-value-code-20261103`: shared PCA preserved scope and held-out values but reduced full SERAC memory by ~39%, missing the 50% gate; native PCA exactly matched and measured lower latency. Fresh sealed. Next P0: MA-637, GRACE value-code compression by Mirror basis (PA139).
+
+
+## Current handoff — 2026-11-03, MA-639
+
+MA-637 is a verified FAIL on `research/ma-637-grace-mirror-codebook-20261103`: retention/scope held across 16–128 synthetic edits; full payload savings grew from ~7% to ~38%, but native PCA exactly aliased Mirror and decoding added operations. MA-636/637 trigger a pause of shared value-code MA-638 pending redesign; see `docs/phase2/SERAC_GRACE_VALUE_CODE_DIAGNOSTIC_2026-11-03.md`. Next independent P0: MA-639 LOKI null-space edit coordinates (PA140).
