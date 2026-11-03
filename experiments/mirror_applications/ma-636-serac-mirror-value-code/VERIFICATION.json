@@ -1,19 +1,23 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-636",
+  "commit": "0b35b6fe",
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "pytest -q experiments/mirror_applications/ma-636-serac-mirror-value-code/tests",
+    "passed": 2,
+    "failed": 0
   },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "roundtrip_checked": true,
+    "byte_exact": true
   },
   "metric_replay": {
-    "checked": false,
-    "max_difference": null
+    "checked": true,
+    "max_difference": 0.0
   },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Protocol SHA-256 matches freeze.json.",
+    "Development seeds only; fresh sealed after exact PCA alias and full-payload gate miss.",
+    "Complete payload 8.07-8.08KB vs 13.29-13.32KB explicit; scope preserved; native PCA arrays identical."
+  ]
 }
