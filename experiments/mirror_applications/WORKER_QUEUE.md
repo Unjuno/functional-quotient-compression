@@ -517,3 +517,8 @@ MA-631 is a verified FAIL on `research/ma-631-rome-edit-shared-basis-20261103`: 
 ## Current handoff — 2026-11-03, MA-635
 
 MA-632 is a verified FAIL on `research/ma-632-rome-private-frontier-20261103`: aligned/private rank sweep identifies the point where residual bytes erase savings, while the native joint low-rank control matches quality/locality at lower bytes. MA-631 and MA-632 share this structural cause; pause ROME/MEMIT MA-633/634 pending redesign per `docs/phase2/ROME_EDIT_FAMILY_DIAGNOSTIC_2026-11-03.md`. Next independent P0: MA-635, MEND editor emitting Mirror code (PA136).
+
+
+## Current handoff — 2026-11-03, MA-636
+
+MA-635 is a verified fixed-budget FAIL on `research/ma-635-mend-mirror-code-editor-20261103`: the 2D code editor saved ~33% bytes and 70% operation proxy versus full-output MEND but nRMSE .062–.068 missed the .05 gate; native low-rank MEND exactly aliased it. Fresh sealed. Next independent P0: MA-636, SERAC memory-value to Mirror function code (PA138).
