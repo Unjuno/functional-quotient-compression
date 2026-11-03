@@ -1,19 +1,23 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-631",
+  "commit": "d09a525c",
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "pytest -q experiments/mirror_applications/ma-631-rome-edit-shared-basis/tests",
+    "passed": 2,
+    "failed": 0
   },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "roundtrip_checked": true,
+    "byte_exact": true
   },
   "metric_replay": {
-    "checked": false,
-    "max_difference": null
+    "checked": true,
+    "max_difference": 0.0
   },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Protocol SHA-256 verified against freeze.json.",
+    "Development only; fresh seeds remained sealed after native additive alias.",
+    "Heldout efficacy <2e-14 and locality 0; Mirror factor table full payload 5.39KB vs independent 6.63-6.65KB; native additive control exact."
+  ]
 }
