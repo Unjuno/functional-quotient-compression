@@ -1,0 +1,19 @@
+{
+  "experiment_id":"MA-635",
+  "title":"Gradient-factor MEND editor emitting a shared-basis Mirror code",
+  "status":"SCREENING",
+  "base_commit":"bb89e261",
+  "prior_art_refs":["PA137"],
+  "hypothesis":"A learned editor emitting a compact rank-2 code preserves held-out edit efficacy at lower actual bytes/compute than generic full-update MEND; Mirror-specific benefit must exceed native low-rank MEND.",
+  "task":{"gradient_feature_dim":8,"update_dim":32,"teacher_rank":2,"train_examples":2048,"audit_examples":256,"hidden_units":32,"teacher":"z=[sin(x0)+0.3*x1,tanh(x2-x3)]; update=Qz"},
+  "development_seeds":[63501,63502],
+  "fresh_seeds":[63511,63512,63513],
+  "fresh_sealed":true,
+  "training":{"optimizer":"Adam","updates":1000,"batch_size":64,"learning_rate":0.003,"same_random_feature_stream_per_control":true},
+  "controls":["generic_MEND_MLP_to_32D_update","Mirror_code_MLP_to_2D_plus_shared_basis","native_lowrank_MEND_2D_output_same_as_Mirror"],
+  "storage":"Actual serialized inference .npz payload including editor weights, shared basis, base layer, schema and key metadata.",
+  "metrics":["heldout update nRMSE","off-key locality leakage","complete payload bytes","active multiply-add proxy","audit evaluation latency"],
+  "success_gate":"Both development seeds: Mirror nRMSE <=0.05, <=75% generic MEND payload bytes, and no latency/compute regression; Mirror-specific success additionally requires strict gain over native low-rank MEND.",
+  "failure_gate":"Quality/storage/compute miss or native low-rank MEND exact alias. Fresh remains sealed.",
+  "boundaries":["Synthetic gradient/update task only","Fixed-budget learning-efficiency screen, not capacity claim","No pretrained model or real factual edits","No protocol changes after freeze"]
+}
