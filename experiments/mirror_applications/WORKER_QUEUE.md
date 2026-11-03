@@ -512,3 +512,8 @@ MA-628 is a verified scoped FAIL on `research/ma-628-coinpp-mirror-codec-2026110
 ## Current handoff — 2026-11-03, MA-632
 
 MA-631 is a verified FAIL on `research/ma-631-rome-edit-shared-basis-20261103`: 32D synthetic rank-one edits had near-zero held-out efficacy error and zero locality leakage. Factor-table edit state was 1,358–1,360 B vs 2,587–2,616 B independent, but full payload reduction was ~19% and missed the 50% gate; ordinary shared low-rank per-edit codes were smaller, and native additive tables exactly aliased Mirror. Fresh stayed sealed. Next P0: MA-632 ROME aligned/private edit frontier (PA135).
+
+
+## Current handoff — 2026-11-03, MA-635
+
+MA-632 is a verified FAIL on `research/ma-632-rome-private-frontier-20261103`: aligned/private rank sweep identifies the point where residual bytes erase savings, while the native joint low-rank control matches quality/locality at lower bytes. MA-631 and MA-632 share this structural cause; pause ROME/MEMIT MA-633/634 pending redesign per `docs/phase2/ROME_EDIT_FAMILY_DIAGNOSTIC_2026-11-03.md`. Next independent P0: MA-635, MEND editor emitting Mirror code (PA136).
