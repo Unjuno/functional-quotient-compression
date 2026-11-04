@@ -1,13 +1,20 @@
 {
   "experiment_id": "MA-653",
-  "commit": "pending",
+  "commit": "0c13d4fc",
   "tests": {
     "command": "PYTHONPATH=experiments/mirror_applications/ma-653-titans-mirror-long-term-memory/source pytest -q experiments/mirror_applications/ma-653-titans-mirror-long-term-memory/tests",
     "passed": 3,
     "failed": 0
   },
-  "serialization": {"roundtrip_checked": true, "byte_exact": true},
-  "metric_replay": {"checked": true, "max_difference": 0.0, "rows": 40},
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0,
+    "rows": 40
+  },
   "fresh_split_integrity_checked": true,
   "notes": [
     "Protocol SHA-256 matches freeze.json.",
