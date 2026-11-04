@@ -1,0 +1,40 @@
+{
+  "experiment_id": "MA-649",
+  "title": "Meta-SGD family update vector with Mirror low-rank codes",
+  "status": "SCREENING",
+  "evidence_lane": "FEW_SHOT_ADAPTATION_STORAGE",
+  "base_commit": "35be5784",
+  "prior_art_refs": ["PA151"],
+  "related_prior_results": ["MA-446"],
+  "hypothesis": "A shared rank-4 basis plus per-family Mirror codes compresses Meta-SGD update vectors for correlated task families while retaining one-step query quality; increasing family heterogeneity reveals when private update coordinates are required.",
+  "physical_object": "Shared 32D initialization and family-conditioned update vector bank",
+  "mirror_coordinate": "Per-family rank-4 code reconstructing a Meta-SGD update vector from a shared basis",
+  "logical_multiplicity": "Eight few-shot task-family adaptation rules",
+  "task": {
+    "parameter_dim": 32,
+    "task_families": 8,
+    "support_examples_per_family": 256,
+    "query_examples_per_family": 512,
+    "heterogeneity_levels": [0.0, 0.25, 0.5],
+    "query_metric": "Mean and worst-family quadratic query loss after one support-gradient update",
+    "support_gradient": "Family-diagonal quadratic task with sampled target and additive support-gradient noise"
+  },
+  "development_seeds": [64901, 64902],
+  "fresh_seeds": [64911, 64912, 64913],
+  "fresh_locked_before_access": true,
+  "controls": [
+    "One global Meta-SGD update vector shared across families",
+    "Independent full Meta-SGD vector per family",
+    "Mirror shared PCA rank-4 basis plus family codes",
+    "Native PCA rank-4 factorization with identical decoder",
+    "Seeded random rank-4 subspace plus fitted family coefficients"
+  ],
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": ["shared initialization", "family router IDs/schema", "global or family update vectors", "shared basis", "family codes", "metadata"]
+  },
+  "compute": ["support/query examples", "one-step vector update MAC proxy", "basis fitting SVD count", "isolated serialization wall time"],
+  "success_gate": "At heterogeneity 0 and .25 on both development seeds, Mirror query loss <=1.10x independent family Meta-SGD and complete payload <=75% of independent family vectors; strict Mirror-specific gain over native PCA in at least one preregistered quality/bytes/compute metric.",
+  "failure_gate": "Mirror misses quality or byte gate, or exactly aliases native PCA without strict Mirror-specific gain. Fresh seeds remain sealed.",
+  "boundaries": ["Synthetic diagonal quadratic task families only", "Analytic least-squares meta-fit; no learned initialization claim", "One inner support-gradient update", "No language-model or broad few-shot claim"]
+}
