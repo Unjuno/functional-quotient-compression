@@ -1,0 +1,38 @@
+{
+  "experiment_id": "MA-646",
+  "title": "ReLoRA restart coordinates and cumulative update rank",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM_STORAGE",
+  "base_commit": "7cc969a3",
+  "prior_art_refs": ["PA143"],
+  "hypothesis": "Reusing one rank-4 update basis across four restarts keeps cumulative update rank at most four; phase-specific coordinates over one shared overcomplete basis can recover rank growth, but must beat merged ReLoRA and ordinary block-ID controls in actual bytes to establish Mirror-specific value.",
+  "physical_object": "One shared 32x16 orthogonal update dictionary, or one rank-4 basis in the static-view condition",
+  "mirror_coordinate": "Restart-specific address selecting a rank-4 column block and phase coefficient matrix",
+  "logical_multiplicity": "Four low-rank update phases composing a rank-16 final function",
+  "task": {
+    "matrix_shape": [32, 32],
+    "restart_phases": 4,
+    "rank_per_phase": 4,
+    "target_effective_rank": 16,
+    "target": "Seeded orthogonal rank-16 matrix; phase p owns columns [4p:4p+4]",
+    "metric": "Final relative Frobenius error, numerical effective rank, actual serialized inference payload bytes and staged restart-state bytes"
+  },
+  "development_seeds": [64601, 64602],
+  "fresh_seeds": [64611, 64612, 64613],
+  "fresh_locked_before_access": true,
+  "controls": [
+    "ReLoRA independent rank-4 factors per phase, merged into final base weights",
+    "Static shared rank-4 basis reused with phase-specific coefficients",
+    "Mirror shared rank-16 basis dictionary plus phase address and rank-4 coefficients",
+    "Native shared dictionary with ordinary phase block IDs and identical decoder"
+  ],
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "separate_restart_state_metric": "serialized unmerged phase factors/coefficients plus basis/address state",
+    "paid_objects": ["base matrix", "ReLoRA merged weights or phase factors", "shared basis/dictionary", "phase coefficients", "restart codes/block IDs", "metadata"]
+  },
+  "compute": ["matrix multiply-add reconstruction proxy", "SVD/basis setup wall time", "serialization wall time"],
+  "success_gate": "Mirror block-address representation reconstructs relative error <=1e-5, numerical rank >=16, actual complete inference bytes <=90% of merged ReLoRA, and strict improvement over native block IDs in bytes, quality or compute. Static basis rank/error is reported as a negative boundary control.",
+  "failure_gate": "Mirror misses rank/quality or byte gate, or its saved function and coordinate are identical to ordinary dictionary block IDs. Fresh seeds remain sealed.",
+  "boundaries": ["Closed-form synthetic factor-bank screen; no neural network training", "No claim about ReLoRA convergence speed", "Rank is measured on reconstructed cumulative update, not number of restart phases", "Native dictionary/block-ID control receives the same shared basis and metadata budget"]
+}
