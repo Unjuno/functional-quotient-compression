@@ -1,1 +1,75 @@
-{"experiment_id":"MA-674","title":"Sparse top-k Mirror LoRA atoms","status":"SCREENING","evidence_lane":"MECHANISM/LORA_COMPOSITION/SPARSE_ATOM_ROUTING/QUALITY_BYTES_COMPUTE","base_commit":"5b8d961b","hypothesis":"Input-conditioned gating over logical LoRA experts can be aggregated into coefficients over a shared rank-1 atom bank; selecting the top-k atoms per input can preserve output quality while reducing active adapter compute and full expert-bank bytes. Mirror-specific value requires beating native sparse low-rank factor execution.","physical_object":"Shared bank of sixteen rank-1 LoRA atoms plus sixteen logical expert coefficient vectors","mirror_coordinate":"Input-conditioned sparse top-k selection over gate-aggregated atom coordinates","logical_multiplicity":"Sixteen logical LoRA experts and per-input sparse atom mixtures","prior_art_refs":["PA149"],"task":{"input_dim":16,"experts":16,"atoms":16,"examples":512,"atom_top_k":[2,4,8,16],"metric":"held-out output NRMSE, actual serialized payload bytes, active MAC proxy, CPU wall time"},"development":{"worlds_or_seeds":[67401,67402],"selection_metric":"quality/storage/active-MAC Pareto across top-k values"},"fresh":{"worlds_or_seeds":[67411,67412,67413],"locked_before_access":true},"controls":["Full dense MoLE expert bank with all experts active","Full dense MoLE with top-2 expert routing","Shared atom bank with top-k aggregated coefficients","Native sparse low-rank atom execution with identical selection rule and factors"],"storage":{"authority":"Actual serialized complete inference payload bytes","paid_objects":["base matrix","router","all atom factors","all logical expert codes","top-k metadata","schema"]},"compute":["gate and code aggregation MACs","active atom MACs per input","base matrix MACs","CPU inference wall time"],"success_gate":"At some k<16, output NRMSE <=0.02 and complete bytes <=60% of full expert bank; active MACs must improve over full MoLE. Mirror-specific success requires strict Pareto gain over native sparse low-rank control.","failure_gate":"Quality/storage gate miss or exact native sparse factor alias without strict Pareto gain; fresh remains sealed after exact alias.","boundaries":["Synthetic one-layer regression screen only","Router is fixed random input-conditioned softmax; this isolates representation/execution rather than learned routing","No task capacity claim from logical expert count","All charged arrays included in actual NPZ payload","Top-k atom indices are computed at inference and not stored"]}
+{
+  "experiment_id": "MA-674",
+  "title": "Sparse top-k Mirror LoRA atoms",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/LORA_COMPOSITION/SPARSE_ATOM_ROUTING/QUALITY_BYTES_COMPUTE",
+  "base_commit": "5b8d961b",
+  "hypothesis": "Input-conditioned gating over logical LoRA experts can be aggregated into coefficients over a shared rank-1 atom bank; selecting the top-k atoms per input can preserve output quality while reducing active adapter compute and full expert-bank bytes. Mirror-specific value requires beating native sparse low-rank factor execution.",
+  "physical_object": "Shared bank of sixteen rank-1 LoRA atoms plus sixteen logical expert coefficient vectors",
+  "mirror_coordinate": "Input-conditioned sparse top-k selection over gate-aggregated atom coordinates",
+  "logical_multiplicity": "Sixteen logical LoRA experts and per-input sparse atom mixtures",
+  "prior_art_refs": [
+    "PA149"
+  ],
+  "task": {
+    "input_dim": 16,
+    "experts": 16,
+    "atoms": 16,
+    "examples": 512,
+    "atom_top_k": [
+      2,
+      4,
+      8,
+      16
+    ],
+    "metric": "held-out output NRMSE, actual serialized payload bytes, active MAC proxy, CPU wall time"
+  },
+  "development": {
+    "worlds_or_seeds": [
+      67401,
+      67402
+    ],
+    "selection_metric": "quality/storage/active-MAC Pareto across top-k values"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      67411,
+      67412,
+      67413
+    ],
+    "locked_before_access": true
+  },
+  "controls": [
+    "Full dense MoLE expert bank with all experts active",
+    "Full dense MoLE with top-2 expert routing",
+    "Shared atom bank with top-k aggregated coefficients",
+    "Native sparse low-rank atom execution with identical selection rule and factors"
+  ],
+  "storage": {
+    "authority": "Actual serialized complete inference payload bytes",
+    "paid_objects": [
+      "base matrix",
+      "router",
+      "all atom factors",
+      "all logical expert codes",
+      "top-k metadata",
+      "schema"
+    ]
+  },
+  "compute": [
+    "gate and code aggregation MACs",
+    "active atom MACs per input",
+    "base matrix MACs",
+    "CPU inference wall time"
+  ],
+  "success_gate": "At some k<16, output NRMSE <=0.02 and complete bytes <=60% of full expert bank; active MACs must improve over full MoLE. Mirror-specific success requires strict Pareto gain over native sparse low-rank control.",
+  "failure_gate": "Quality/storage gate miss or exact native sparse factor alias without strict Pareto gain; fresh remains sealed after exact alias.",
+  "boundaries": [
+    "Synthetic one-layer regression screen only",
+    "Router is fixed random input-conditioned softmax; this isolates representation/execution rather than learned routing",
+    "No task capacity claim from logical expert count",
+    "All charged arrays included in actual NPZ payload",
+    "Top-k atom indices are computed at inference and not stored",
+    "Amendment before corrected rerun: initial development evaluated all dense atom outputs before masking and thus did not realize the reported sparse MAC proxy. Preserve under source/attempts/initial_dense_atom_eval. Corrected execution gathers only selected per-input factors before multiplication; top-2 full-expert control also evaluates only selected experts. Fresh remains sealed."
+  ]
+}

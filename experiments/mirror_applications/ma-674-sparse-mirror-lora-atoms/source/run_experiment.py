@@ -5,19 +5,20 @@ ROOT=Path(__file__).resolve().parents[1];D=16;E=M=16;N=512;TOPKS=(2,4,8,16)
 def softmax(a):
  z=a-a.max(-1,keepdims=True);v=np.exp(z);return v/v.sum(-1,keepdims=True)
 def forward_full(x,base,experts,router,top2=False):
- g=softmax(x@router)
+ g=softmax(x@router); update=np.zeros_like(x)
  if top2:
   ids=np.argpartition(g,-2,axis=1)[:,-2:];m=np.zeros_like(g);np.put_along_axis(m,ids,1.,axis=1);g*=m;g/=g.sum(1,keepdims=True)
- out=np.einsum('nd,eod->neo',x,experts)
- return x@base.T+np.einsum('ne,neo->no',g,out)
+  for n in range(len(x)):
+   for e in ids[n]: update[n]+=g[n,e]*(experts[e]@x[n])
+ else:
+  out=np.einsum('nd,eod->neo',x,experts);update=np.einsum('ne,neo->no',g,out)
+ return x@base.T+update
 def forward_atoms(x,base,u,v,c,router,k):
  g=softmax(x@router);coeff=g@c
  ix=np.argpartition(np.abs(coeff),-k,axis=1)[:,-k:]
- val=np.take_along_axis(coeff,ix,axis=1)
- z=x@v.T
- atom=np.einsum('nr,ro->nro',z,u)
- chosen=np.take_along_axis(atom,ix[:,:,None],axis=1)
- return x@base.T+np.einsum('nk,nko->no',val,chosen)
+ val=np.take_along_axis(coeff,ix,axis=1);us=u[ix];vs=v[ix]
+ z=np.einsum('nd,nkd->nk',x,vs)
+ return x@base.T+np.einsum('nk,nkd->nd',val*z,us)
 def run(seeds):
  rows=[]
  for seed in seeds:

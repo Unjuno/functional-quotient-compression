@@ -16,7 +16,7 @@ Synthetic one-layer D=16, E=M=16, 512 inputs, random fixed router, aligned rank-
 
 ## D — Decision
 
-FAIL. At k=2/4/8, NRMSE across seeds was .46–.48/.35–.39/.19–.22, missing the .02 gate. k=16 was exact, with 6.21KB versus 17.8KB and 655,360 versus 2,359,296 MAC proxy. However native low-rank outputs and compute exactly matched Mirror and its serialization was 2B smaller. Full top-2 expert routing had NRMSE .85–.86. Fresh remained sealed.
+FAIL. At k=2/4/8, NRMSE across seeds was .46–.48/.35–.39/.19–.22, missing the .02 gate. k=16 was exact, with 6.21KB versus 17.8KB and 655,360 versus 2,359,296 MAC proxy. However native low-rank outputs and compute exactly matched Mirror; its payload was 2B larger because of field-name encoding, a negligible metadata artifact rather than a functional advantage. Full top-2 expert routing had NRMSE .85–.86. Fresh remained sealed.
 
 ## C — Strongest counter-hypothesis
 
