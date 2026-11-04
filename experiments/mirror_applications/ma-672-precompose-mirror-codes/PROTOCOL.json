@@ -1,0 +1,21 @@
+{
+  "experiment_id": "MA-672",
+  "title": "Precompose adapter mixture codes before execution",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/LORA_COMPOSITION/PRECOMPOSITION_QUALITY_COMPUTE_BYTES",
+  "base_commit": "0d97988d",
+  "hypothesis": "For a layerwise input-dependent mixture of aligned LoRA experts, composing gate-weighted Mirror coordinates before applying a shared rank-R atom basis preserves outputs while reducing active adapter MACs versus evaluating each of E experts. A Mirror-specific gain requires improvement over native coefficient-space precomposition.",
+  "physical_object": "One dense base matrix and a shared rank-4 LoRA atom basis",
+  "mirror_coordinate": "Per-expert coefficients over shared rank-1 update atoms, mixed by an input-conditioned gate",
+  "logical_multiplicity": "16 logical adapters mixed dynamically into one effective per-input adapter",
+  "prior_art_refs": ["PA149", "PA125"],
+  "task": {"input_dim": 32,"experts": 16,"shared_atom_rank": 4,"examples": 512,"residual_rms": [0.0,0.05],"metric": "output NRMSE, actual serialized complete payload bytes, active MAC proxy, CPU inference wall time"},
+  "development": {"worlds_or_seeds": [67201,67202],"selection_metric": "Exact output/error and storage/active-MAC Pareto; no tuning after fresh access"},
+  "fresh": {"worlds_or_seeds": [67211,67212,67213],"locked_before_access": true},
+  "controls": ["Full independent LoRA bank: evaluate all expert updates then gate and sum", "Mirror atom-code precomposition: gate and sum expert codes before applying atom outputs", "Native low-rank coefficient-space precomposition with the same factors and runtime algebra", "Full independent-bank top-2 execution as sparse compute reference"],
+  "storage": {"authority": "Actual serialized complete inference payload bytes", "paid_objects": ["base matrix","router","expert factors or shared atoms and codes","private residual factors","schema and top-k metadata"]},
+  "compute": ["router and gate MACs","active adapter MAC proxy per input","base MACs","CPU inference wall time"],
+  "success_gate": "At rho=0, precomposed path must have output NRMSE <=1e-6, payload <=60% of full bank, and active adapter MACs <=50% of full bank. A Mirror-specific finding additionally requires strict Pareto improvement over native coefficient-space precomposition. At rho=.05, report quality/bytes with and without private rank-2 residual.",
+  "failure_gate": "Any quality gate miss or exact functional/state alias to native precomposition without strict Pareto gain. If exact alias is observed during development, fresh remains sealed.",
+  "boundaries": ["Synthetic one-layer regression screen only; no natural MoLE or LM claim","All router/base/basis/code/residual/metadata bytes are charged","The full bank and top-2 controls share the same input router and expert teacher","Fresh seeds stay sealed after exact native alias","Logical expert count is not interpreted as independent capacity"]
+}
