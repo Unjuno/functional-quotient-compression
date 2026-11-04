@@ -21,7 +21,7 @@ def run(seeds):
     for t in range(T):
      for l in range(L): pred[t,l]=x[t,l]@np.einsum('r,roi->oi',c[t,l],atoms[l]).T
    ids=[(t,l) for t in range(T) for l in range(L) if (t*7+l*11+seed)%4==0]
-   err=float(np.sqrt(np.mean((pred[[a for a,b in ids],[b for a,b in ids]]-target[[a for a,b in ids]])**2)/np.mean(target[[a for a,b in ids]]**2)))
+   err=float(np.sqrt(np.mean((pred[[a for a,b in ids],[b for a,b in ids]]-target[[a for a,b in ids],[b for a,b in ids]])**2)/np.mean(target[[a for a,b in ids],[b for a,b in ids]]**2)))
    mac=int(T*L*R+T*L*N*R*D*2)
    out.append({'seed':seed,'residual_rms':0.,'method':method,'serialized_bytes':path.stat().st_size,'output_nrmse':err,'examples':len(ids)*N,'optimizer_updates':0,'active_mac_proxy':mac,'inference_wall_time_s':0.,'serialization_wall_time_s':ser})
   assert np.array_equal(tf[:,None,:]*lf[None,:,:],np.asarray(native['task_left'])[:,None,:]*np.asarray(native['layer_right'])[None,:,:])
