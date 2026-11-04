@@ -1,0 +1,21 @@
+{
+  "experiment_id": "MA-680",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-680-multistream-qkv-views/tests",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Serialized QKV payload replay and future-token causal perturbation tests passed. Both seeds show exact native shared-basis alias and zero measured cross-stream/future leakage. Fresh sealed."
+  ]
+}
