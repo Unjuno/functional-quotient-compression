@@ -28,8 +28,8 @@ def decode(p):
  basis=p['basis'];codes=p['codes'] if 'codes' in p else p['coefficients'];out=np.einsum('mr,roi->moi',codes,basis)
  if 'private_left' in p:out+=np.einsum('mq,mqo,mqi->moi',np.ones((M,p['private_left'].shape[1]),'f'),p['private_left'],p['private_right'])
  return out
-def eval_metrics(deltas,x,protected,held):
- target=np.einsum('moi,mni->mno',deltas[held],x[held]);t=time.perf_counter();pred=np.einsum('moi,mni->mno',deltas[held],x[held]);wall=time.perf_counter()-t
+def eval_metrics(teacher,deltas,x,protected,held):
+ target=np.einsum('moi,mni->mno',teacher[held],x[held]);t=time.perf_counter();pred=np.einsum('moi,mni->mno',deltas[held],x[held]);wall=time.perf_counter()-t
  err=float(np.sqrt(np.mean((pred-target)**2)/max(float(np.mean(target**2)),1e-12)))
  leak=float(np.max(np.linalg.norm(deltas[held]@protected,axis=(1,2))/np.maximum(np.linalg.norm(deltas[held],axis=(1,2)),1e-12)))
  return err,leak,wall
@@ -37,7 +37,7 @@ def run(seeds):
  rows=[]
  for seed in seeds:
   for rho in RHOS:
-   protected,teacher,x=make_world(seed,rho);shared,codes=fit_shared(teacher[:24]);recon=np.einsum('mr,roi->moi',codes,shared);resid=teacher-recon;held=np.arange(24,32)
+   protected,_teacher_basis,teacher,x=make_world(seed,rho);shared,_train_codes=fit_shared(teacher[:24]);codes=(teacher.reshape(M,-1)@shared.reshape(R,-1).T).astype('f');recon=np.einsum('mr,roi->moi',codes,shared);resid=teacher-recon;held=np.arange(24,32)
    payloads={'projected_full':{'protected_keys':protected,'projected_deltas':teacher},'mirror_q0':{'protected_keys':protected,'basis':shared,'codes':codes}}
    for q in QRANKS[1:]:
     pl,pr=factor_private(resid,q);payloads[f'mirror_q{q}']={'protected_keys':protected,'basis':shared,'codes':codes,'private_left':pl,'private_right':pr}
@@ -47,14 +47,16 @@ def run(seeds):
     payloads[f'native_q{q}']=native
    for name,p in payloads.items():
     path=ROOT/'source'/f'{seed}_rho{rho:g}_{name}.npz';st=time.perf_counter();np.savez_compressed(path,**p);serial=time.perf_counter()-st
-    with np.load(path) as z:decoded=decode(z)
-    err,leak,wall=eval_metrics(decoded,x,protected,held);q=decoded.shape[0];rank=0 if 'projected_deltas' in p else (p['private_left'].shape[1] if 'private_left' in p else 0)
-    mac=int(len(held)*N*(D*D if 'projected_deltas' in p else R*D*2+rank*D*2))
-    rows.append({'seed':seed,'residual_rms':rho,'method':name,'serialized_bytes':path.stat().st_size,'output_nrmse':err,'examples':len(held)*N,'optimizer_updates':0,'active_mac_proxy':mac,'inference_wall_time_s':wall,'serialization_wall_time_s':serial,'protected_leakage':leak,'private_rank':rank})
+    with np.load(path) as z:
+     td=time.perf_counter();decoded=decode(z);decode_wall=time.perf_counter()-td
+    err,leak,wall=eval_metrics(teacher,decoded,x,protected,held);rank=0 if 'projected_deltas' in p else (p['private_left'].shape[1] if 'private_left' in p else 0)
+    decode_mac=0 if 'projected_deltas' in p else M*(R+rank)*D*D
+    mac=int(decode_mac+len(held)*N*D*D)
+    rows.append({'seed':seed,'residual_rms':rho,'method':name,'serialized_bytes':path.stat().st_size,'output_nrmse':err,'examples':len(held)*N,'optimizer_updates':0,'active_mac_proxy':mac,'inference_wall_time_s':wall,'serialization_wall_time_s':serial,'protected_leakage':leak,'private_rank':rank,'decode_mac_proxy':int(decode_mac),'decode_wall_time_s':decode_wall})
  (ROOT/'source/development.json').write_text(json.dumps(rows,indent=2)+'\n')
  with (ROOT/'RESULTS_CORE.csv').open('w',newline='') as f:
   w=csv.writer(f);w.writerow(['condition','world_or_seed','method','serialized_bytes','train_tokens_or_examples','optimizer_updates','active_compute_proxy','wall_time_s','primary_metric','primary_value','secondary_metric','secondary_value','serialization_wall_time_s','status_note'])
-  for r in rows:w.writerow([f"rho{r['residual_rms']:g}",r['seed'],r['method'],r['serialized_bytes'],r['examples'],0,r['active_mac_proxy'],r['inference_wall_time_s'],'output_nrmse',r['output_nrmse'],'protected_leakage/private_rank',f"{r['protected_leakage']}/{r['private_rank']}",r['serialization_wall_time_s'],'development; fresh sealed'])
+  for r in rows:w.writerow([f"rho{r['residual_rms']:g}",r['seed'],r['method'],r['serialized_bytes'],r['examples'],0,r['active_mac_proxy'],r['inference_wall_time_s'],'output_nrmse',r['output_nrmse'],'protected_leakage/private_rank/decode_MAC/decode_wall_s',f"{r['protected_leakage']}/{r['private_rank']}/{r['decode_mac_proxy']}/{r['decode_wall_time_s']}",r['serialization_wall_time_s'],'development; fresh sealed'])
  return rows
 if __name__=='__main__':
  a=argparse.ArgumentParser();a.add_argument('--seeds',nargs='+',type=int,required=True);print(json.dumps(run(a.parse_args().seeds),indent=2))
