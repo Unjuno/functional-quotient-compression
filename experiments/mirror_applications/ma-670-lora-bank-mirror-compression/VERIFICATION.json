@@ -1,19 +1,22 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-670",
+  "commit": "pending",
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-670-lora-bank-mirror-compression/tests -v",
+    "passed": 2,
+    "failed": 0
   },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "roundtrip_checked": true,
+    "byte_exact": true
   },
   "metric_replay": {
-    "checked": false,
-    "max_difference": null
+    "checked": true,
+    "max_difference": 0.0,
+    "rows": 48
   },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "All 48 development artifacts match recorded actual sizes and metrics. Mirror/native VeRA shared-bank arrays and outputs are identical. Fresh remains sealed after exact alias."
+  ]
 }
