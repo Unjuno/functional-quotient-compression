@@ -7,7 +7,10 @@ def make_world(seed):
  q=np.random.default_rng(seed);base=(q.normal(size=(V,D))/D**.5).astype('f');atom=(q.normal(size=(K,V,D))/D**.5).astype('f');codes=q.normal(size=(S,K)).astype('f');teacher=base[None]+np.einsum('sk,kvd->svd',codes,atom)
  inputs=q.integers(0,V,size=(S,N));hold=np.arange(V-24,V,dtype=int);return base,atom,codes,teacher,inputs,hold
 
-def lookup_mirror(ids,base,atom,codes):return base[ids]+np.einsum('sk,kd->sd',codes,atom[:,ids].transpose(1,0,2))
+def lookup_mirror(ids,base,atom,codes):
+ if ids.ndim==1:return base[ids][None,:,:]+np.einsum('sk,kvd->svd',codes,atom[:,ids,:])
+ chosen=atom[:,ids,:].transpose(1,0,2,3)
+ return base[ids]+np.einsum('sk,sknd->snd',codes,chosen)
 
 def run(seeds):
  rows=[]
@@ -25,8 +28,14 @@ def run(seeds):
    for s in range(S):
     for other in range(S):
      if other!=s:perturbed[other]=(perturbed[other]+17)%V
-   changed=lookup_mirror(perturbed,base,atom,codes);leak=float(max(np.max(np.abs(base_out[s]-changed[s])) for s in range(S)))
-   mac=int(S*len(hold)*D*(K if method in ('mirror_role_code','native_rank1_role') else 1))
+   leak=0.0
+   for s in range(S):
+    probe=test_ids.copy()
+    for other in range(S):
+     if other!=s:probe[other]=(probe[other]+17)%V
+    changed=lookup_mirror(probe,base,atom,codes)
+    leak=max(leak,float(np.max(np.abs(base_out[s]-changed[s]))))
+   mac=int(S*len(hold)*D*K if method in ('mirror_role_code','native_rank1_role') else 0)
    rows.append({'seed':seed,'residual_rms':0.,'method':method,'serialized_bytes':path.stat().st_size,'output_nrmse':err,'examples':S*len(hold),'optimizer_updates':0,'active_mac_proxy':mac,'inference_wall_time_s':wall,'serialization_wall_time_s':serial,'cross_stream_leakage':leak})
   assert np.array_equal(lookup_mirror(hold,base,atom,codes),lookup_mirror(hold,base,atom,codes.copy()))
  (ROOT/'source/development.json').write_text(json.dumps(rows,indent=2)+'\n')

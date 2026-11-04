@@ -1,1 +1,73 @@
-{"experiment_id":"MA-679","title":"Multi-stream role Mirror embeddings","status":"SCREENING","evidence_lane":"MECHANISM/PARALLEL_STREAMS/ROLE_EMBEDDING/QUALITY_BYTES_LEAKAGE","base_commit":"e4c0975d","hypothesis":"Four causally isolated streams whose token embeddings share a common table plus a rank-1 role-conditioned residual can be represented with lower serialized bytes than independent stream tables while retaining held-out token embeddings and zero cross-stream leakage. Mirror-specific value requires improvement over native rank-1 role-conditioned shared-basis embeddings.","physical_object":"Common vocabulary embedding table and one shared role residual atom","mirror_coordinate":"One scalar role code per stream selecting a view of the shared residual atom","logical_multiplicity":"Four logical streams (user, output, thought, tool) with distinct token embeddings","prior_art_refs":["PA153"],"task":{"streams":4,"vocabulary":64,"embedding_dim":16,"role_rank":1,"heldout_tokens_per_stream":24,"development_inputs_per_stream":128,"worlds_or_seeds":[67901,67902],"metric":"held-out embedding NRMSE, actual serialized inference payload bytes, lookup MAC proxy, cross-stream leakage"},"development":{"worlds_or_seeds":[67901,67902],"selection_metric":"quality/bytes/leakage; exact native alias seals fresh"},"fresh":{"worlds_or_seeds":[67911,67912,67913],"locked_before_access":true},"controls":["Independent full embedding table per stream","Hard-tied shared vocabulary embedding with no role coordinate","Mirror shared-base plus rank-1 residual atom and per-stream scalar code","Native shared-basis rank-1 role-conditioned embedding with same factors/function"],"storage":{"authority":"Actual serialized complete inference payload bytes","paid_objects":["embedding base","all role residual atoms or independent stream tables","per-stream role codes","schema and vocabulary/role metadata"]},"compute":["embedding lookup and role reconstruction MAC proxy per query","inference wall time","cross-stream perturbation replay"],"success_gate":"Mirror must achieve held-out NRMSE <=0.02, complete bytes <=60% of independent tables, and cross-stream leakage <=1e-6. Mirror-specific success additionally requires a strict Pareto gain over native rank-1 role-conditioned embeddings.","failure_gate":"Quality/leakage/byte gate miss or exact native alias without strict function-level gain; fresh remains sealed after exact alias.","boundaries":["Synthetic role-specific embedding reconstruction only; not a multi-stream LLM reproduction","Each stream query is evaluated independently; leakage probe verifies implementation isolation, not learned causal attention","Held-out token IDs are fixed by the seed and excluded from development input samples","Logical stream count is not treated as independent capacity","No hardware latency or trained-model claim"]}
+{
+  "experiment_id": "MA-679",
+  "title": "Multi-stream role Mirror embeddings",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/PARALLEL_STREAMS/ROLE_EMBEDDING/QUALITY_BYTES_LEAKAGE",
+  "base_commit": "e4c0975d",
+  "hypothesis": "Four causally isolated streams whose token embeddings share a common table plus a rank-1 role-conditioned residual can be represented with lower serialized bytes than independent stream tables while retaining held-out token embeddings and zero cross-stream leakage. Mirror-specific value requires improvement over native rank-1 role-conditioned shared-basis embeddings.",
+  "physical_object": "Common vocabulary embedding table and one shared role residual atom",
+  "mirror_coordinate": "One scalar role code per stream selecting a view of the shared residual atom",
+  "logical_multiplicity": "Four logical streams (user, output, thought, tool) with distinct token embeddings",
+  "prior_art_refs": [
+    "PA153"
+  ],
+  "task": {
+    "streams": 4,
+    "vocabulary": 64,
+    "embedding_dim": 16,
+    "role_rank": 1,
+    "heldout_tokens_per_stream": 24,
+    "development_inputs_per_stream": 128,
+    "worlds_or_seeds": [
+      67901,
+      67902
+    ],
+    "metric": "held-out embedding NRMSE, actual serialized inference payload bytes, lookup MAC proxy, cross-stream leakage"
+  },
+  "development": {
+    "worlds_or_seeds": [
+      67901,
+      67902
+    ],
+    "selection_metric": "quality/bytes/leakage; exact native alias seals fresh"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      67911,
+      67912,
+      67913
+    ],
+    "locked_before_access": true
+  },
+  "controls": [
+    "Independent full embedding table per stream",
+    "Hard-tied shared vocabulary embedding with no role coordinate",
+    "Mirror shared-base plus rank-1 residual atom and per-stream scalar code",
+    "Native shared-basis rank-1 role-conditioned embedding with same factors/function"
+  ],
+  "storage": {
+    "authority": "Actual serialized complete inference payload bytes",
+    "paid_objects": [
+      "embedding base",
+      "all role residual atoms or independent stream tables",
+      "per-stream role codes",
+      "schema and vocabulary/role metadata"
+    ]
+  },
+  "compute": [
+    "embedding lookup and role reconstruction MAC proxy per query",
+    "inference wall time",
+    "cross-stream perturbation replay"
+  ],
+  "success_gate": "Mirror must achieve held-out NRMSE <=0.02, complete bytes <=60% of independent tables, and cross-stream leakage <=1e-6. Mirror-specific success additionally requires a strict Pareto gain over native rank-1 role-conditioned embeddings.",
+  "failure_gate": "Quality/leakage/byte gate miss or exact native alias without strict function-level gain; fresh remains sealed after exact alias.",
+  "boundaries": [
+    "Synthetic role-specific embedding reconstruction only; not a multi-stream LLM reproduction",
+    "Each stream query is evaluated independently; leakage probe verifies implementation isolation, not learned causal attention",
+    "Held-out token IDs are fixed by the seed and excluded from development input samples",
+    "Logical stream count is not treated as independent capacity",
+    "No hardware latency or trained-model claim",
+    "Implementation amendment before any results: corrected lookup indexing for batched stream token IDs. No metrics had been generated; partial initial payloads preserved under source/attempts/initial_lookup_shape_error. Fresh remains sealed.",
+    "Probe amendment before rerun: the initial leakage check cumulatively perturbed all streams, including the target stream. Preserve under source/attempts/initial_leakage_probe. Corrected probe independently changes only non-target streams; corrected lookup compute proxy charges reconstruction MACs only (table lookup is not a MAC)."
+  ]
+}
