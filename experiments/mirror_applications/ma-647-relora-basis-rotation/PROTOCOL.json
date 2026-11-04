@@ -1,0 +1,39 @@
+{
+  "experiment_id": "MA-647",
+  "title": "ReLoRA basis rotation with shared butterfly View schedule",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM_STORAGE_RUNTIME",
+  "base_commit": "3a135653",
+  "prior_art_refs": ["PA143", "PA21"],
+  "hypothesis": "A shared butterfly angle schedule plus one scalar Mirror coordinate per restart generates diverse rank-4 update subspaces with lower full payload bytes than independent ReLoRA/BOFT factors while recovering rank-16 quality; any gain must beat the native shared-angle BOFT control.",
+  "physical_object": "One rank-4 seed basis and a shared five-stage butterfly angle table",
+  "mirror_coordinate": "One scalar per restart scaling the shared butterfly angles",
+  "logical_multiplicity": "Four phase-specific rank-4 update subspaces composing a rank-16 cumulative update",
+  "task": {
+    "matrix_shape": [32, 32],
+    "restart_phases": 4,
+    "rank_per_phase": 4,
+    "butterfly_stages": 5,
+    "angles_per_stage": 16,
+    "view_scales": [-2.0, -1.0, 1.0, 2.0],
+    "metric": "Relative Frobenius error, effective rank, actual serialized inference bytes, restart representation bytes, rotation/decode MAC proxy"
+  },
+  "development_seeds": [64701, 64702],
+  "fresh_seeds": [64711, 64712, 64713],
+  "fresh_locked_before_access": true,
+  "controls": [
+    "Independent ReLoRA rank-4 phase factors",
+    "ReLoRA plus independent per-phase BOFT angle tables",
+    "Mirror shared butterfly schedule plus per-phase scalar coordinates",
+    "Native shared-angle BOFT with the same shared schedule and phase scalars",
+    "Static unrotated rank-4 basis boundary control"
+  ],
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": ["base matrix", "seed basis", "shared butterfly angles", "phase scalars or independent angle tables", "phase coefficients", "phase metadata"]
+  },
+  "compute": ["butterfly rotation MAC proxy", "rank-4 update decode MAC proxy", "serialization wall time", "basis setup wall time"],
+  "success_gate": "Mirror relative error <=1e-5, effective rank >=16, complete inference payload <=90% of independent ReLoRA, and strict gain over native shared-angle BOFT in bytes, quality or compute.",
+  "failure_gate": "Quality/rank/byte miss, or exact alias to native shared-angle BOFT without strict Mirror-specific gain. Fresh seeds remain sealed.",
+  "boundaries": ["Closed-form synthetic function bank only", "No optimizer training or ReLoRA convergence claim", "The angle table and its code decoder are fully serialized and charged", "No dense orthogonal transform is considered free"]
+}
