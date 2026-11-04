@@ -1,0 +1,38 @@
+{
+  "experiment_id": "MA-655",
+  "title": "Neural Stored-program Memory with Mirror function codes",
+  "status": "SCREENING",
+  "evidence_lane": "PROGRAM_MEMORY_FUNCTION_QUALITY_STORAGE",
+  "base_commit": "c181bd31",
+  "prior_art_refs": ["PA134"],
+  "hypothesis": "A small function-space code can combine shared controller programs into many useful logical linear programs and generalize to unseen codes with lower serialized memory than independent programs; private function variation reveals the capacity limit.",
+  "physical_object": "Four shared linear controller basis programs stored in program memory",
+  "mirror_coordinate": "Per-program coefficient vector addressing/interpolating shared controller programs",
+  "logical_multiplicity": "16/64 stored programs and 16 unseen code-composed functions",
+  "task": {
+    "matrix_shape": [32, 32],
+    "program_counts": [16, 64],
+    "shared_program_basis_count": 4,
+    "private_function_residual_rms": [0.0, 0.05, 0.2],
+    "metric": "Held-out input output NRMSE, unseen-code execution NRMSE, pairwise function uniqueness, actual complete program-memory payload bytes",
+    "router": "Program key IDs are supplied and charged; held-out coefficient codes are runtime inputs"
+  },
+  "development_seeds": [65501, 65502],
+  "fresh_seeds": [65511, 65512, 65513],
+  "fresh_locked_before_access": true,
+  "controls": [
+    "Independent full linear program matrix per stored program",
+    "Neural Stored-program Memory with four explicit basis controllers and program coefficient values",
+    "Mirror rank-4 PCA function basis plus per-program codes",
+    "Native PCA rank-4 control with identical decoder",
+    "One-hot nearest-program selection without coefficient interpolation"
+  ],
+  "storage": {
+    "authority": "actual serialized inference/program-memory payload bytes",
+    "paid_objects": ["all basis controllers", "program codes or full matrices", "program keys/router", "metadata and reconstruction state"]
+  },
+  "compute": ["basis retrieval/interpolation MAC proxy", "program execution MAC proxy", "offline basis SVD cost", "serialization wall time"],
+  "success_gate": "At residual 0 and both program counts, Mirror stored-program and unseen-code NRMSE <=0.02 and complete payload <=50% of independent programs. Mirror-specific success also requires strict gain over native PCA and NSPM basis/code controls.",
+  "failure_gate": "Mirror misses held-out program quality/bytes or exactly aliases native PCA/NSPM basis coding without strict Mirror-specific gain. Fresh seeds remain sealed.",
+  "boundaries": ["Synthetic linear controller programs only", "No neural controller, dynamic interpolation training, or paper NSPM reproduction", "Unseen function count is credited only through measured held-out execution quality", "All basis/controller payloads and runtime codes are accounted"]
+}
