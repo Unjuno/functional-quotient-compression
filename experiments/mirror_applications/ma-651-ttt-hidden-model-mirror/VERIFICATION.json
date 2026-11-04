@@ -1,0 +1,17 @@
+{
+  "experiment_id": "MA-651",
+  "commit": "pending",
+  "tests": {
+    "command": "PYTHONPATH=experiments/mirror_applications/ma-651-ttt-hidden-model-mirror/source pytest -q experiments/mirror_applications/ma-651-ttt-hidden-model-mirror/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {"roundtrip_checked": true, "byte_exact": true},
+  "metric_replay": {"checked": true, "max_difference": 0.0, "rows": 10},
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Amended protocol hash matches freeze.json; LR=0.3 was selected using development seeds only.",
+    "Fresh seeds 65111-65113 remained sealed after storage and native-ID alias failure gate.",
+    "Two superseded development attempts are preserved with causes and excluded from final rows."
+  ]
+}

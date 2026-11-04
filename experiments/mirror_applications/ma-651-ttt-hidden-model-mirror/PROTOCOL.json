@@ -1,0 +1,80 @@
+{
+  "experiment_id": "MA-651",
+  "title": "TTT hidden linear model with Mirror-structured writable state",
+  "status": "SCREENING",
+  "evidence_lane": "TEST_TIME_STATE_QUALITY_STORAGE",
+  "base_commit": "7f086dae",
+  "prior_art_refs": [
+    "PA144"
+  ],
+  "hypothesis": "A shared bank of low-rank writable output subspaces plus one compact code per stream can retain long-context online adaptation quality while reducing recurrent hidden-model state bytes versus full TTT-Linear; mismatched or private directions expose the capacity boundary.",
+  "physical_object": "Shared 16x16 TTT initialization and 4 rank-4 output bases",
+  "mirror_coordinate": "Per-stream code selecting a writable rank-4 hidden-update subspace",
+  "logical_multiplicity": "16 sequence-specific online linear learners",
+  "task": {
+    "input_output_dim": 16,
+    "sequence_count": 16,
+    "distinct_output_modes": 4,
+    "rank_per_stream": 4,
+    "sequence_length": 128,
+    "updates_per_token": 1,
+    "metric": "Prequential Gaussian NLL and MSE at all tokens and final 32-token window; actual serialized hidden state bytes; update MAC proxy"
+  },
+  "development_seeds": [
+    65101,
+    65102
+  ],
+  "fresh_seeds": [
+    65111,
+    65112,
+    65113
+  ],
+  "fresh_locked_before_access": true,
+  "controls": [
+    "Full TTT-Linear writable 16x16 matrix per stream",
+    "One fixed rank-4 writable basis shared by every stream",
+    "Independent rank-4 TTT state with a private basis per stream",
+    "Mirror shared rank-4 basis dictionary and per-stream codes",
+    "Native shared dictionary with ordinary mode IDs and identical decoder"
+  ],
+  "storage": {
+    "authority": "actual serialized inference/recurrent-state payload bytes",
+    "paid_objects": [
+      "shared initialization",
+      "all per-stream writable states",
+      "private/shared bases",
+      "stream codes/IDs",
+      "router and metadata"
+    ]
+  },
+  "compute": [
+    "sequence examples",
+    "online updates",
+    "dense and projected update MAC proxy",
+    "bootstrap routing MAC",
+    "isolated wall clock"
+  ],
+  "success_gate": "At both development seeds, Mirror final-window NLL <=1.10x full TTT-Linear and total state payload <=50% of full TTT-Linear; mean all-token NLL <=1.10x independent rank-4 TTT. Strict Mirror-specific gain over native dictionary IDs is also required.",
+  "failure_gate": "Mirror misses quality/bytes or exactly aliases native dictionary-ID control. Keep fresh seeds sealed on failure.",
+  "boundaries": [
+    "Synthetic supervised online linear regression, TTT-like writable state only",
+    "No reproduction of self-supervised TTT-Linear/TTT-MLP paper results",
+    "Task-family output bases are generated and charged; no hidden free basis",
+    "No language-model claim"
+  ],
+  "development_learning_rate_selection": {
+    "candidate_values": [
+      0.03,
+      0.05,
+      0.1,
+      0.2,
+      0.3,
+      0.5,
+      1.0
+    ],
+    "selection_metric": "Mean final-32-token MSE averaged over all registered methods and both development seeds",
+    "selected_value": 0.3,
+    "fresh_accessed_during_selection": false,
+    "amendment_reason": "Protocol did not pin the online SGD rate; development sweep showed LR=1.0 unstable, and a shared development-only rate is needed for matched controls."
+  }
+}
