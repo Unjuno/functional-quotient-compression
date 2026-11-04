@@ -1,0 +1,21 @@
+{
+  "experiment_id": "MA-688",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-688-nullspace-private-edit-residuals/tests",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Corrected MAC replay includes one-time reconstruction of the full edit bank from serialized PCA basis/codes and private factors plus held-out application. Two development seeds, payload replay passed, all shared/private deltas remain in protected null space. Native alias seals fresh. Initial undercharged run preserved."
+  ]
+}
