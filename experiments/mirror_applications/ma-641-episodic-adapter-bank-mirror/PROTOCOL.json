@@ -1,0 +1,38 @@
+{
+  "experiment_id": "MA-641",
+  "title": "Episodic sparse adapter bank with shared Mirror output basis",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM",
+  "base_commit": "0567d264",
+  "prior_art_refs": ["PA152"],
+  "hypothesis": "For correlated episodic updates, one shared output basis plus per-episode Mirror codes reduces actual adapter-bank payload while preserving episode recall; as private episode variation grows, rank/residual cost erases savings.",
+  "physical_object": "Shared fixed base executor and episodic adapter output basis",
+  "mirror_coordinate": "Per-episode coefficients selecting shared output directions",
+  "logical_multiplicity": "16/64/128 episode-specific query-to-answer updates",
+  "task": {
+    "query_dim": 128,
+    "answer_dim": 128,
+    "episode_counts": [16, 64, 128],
+    "shared_rank": 4,
+    "orthogonal_private_residual_rms": [0.0, 0.05, 0.1, 0.25],
+    "metric": "Per-episode answer nRMSE and nearest-answer exact recall; cross-episode collision leakage",
+    "router": "Shared exact query-key ID to episode; router bytes charged and fixed across methods"
+  },
+  "development_seeds": [64101, 64102],
+  "fresh_seeds": [64111, 64112, 64113],
+  "fresh_locked_before_access": true,
+  "controls": [
+    "Independent sparse rank-1 episode adapters storing key ID and complete answer vector",
+    "Mirror shared output basis rank 4 plus per-episode codes",
+    "Native PCA rank-4 shared basis using the identical decoder and address payload"
+  ],
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": ["base executor", "router schema", "episode key IDs", "adapter basis or answer vectors", "episode codes", "format metadata"],
+    "report_full_payload_and_episode_state_separately": true
+  },
+  "compute": ["per-query multiply-add proxy", "isolated wall time", "training examples", "optimizer updates"],
+  "success_gate": "At private residual 0 and both episode bank sizes 64/128: mean answer nRMSE <= 0.02, exact recall >= 0.99, complete payload <= 75% of independent adapters, and strict improvement over native PCA in a preregistered metric. Rank-4 quality must be reported across all heterogeneity levels.",
+  "failure_gate": "Failure to reduce complete bytes at zero private residual; recall/error miss; or exact alias to native PCA without strict Mirror-specific gain. On any failure, keep fresh seeds sealed.",
+  "boundaries": ["Synthetic episodic adapter mechanism only", "No language-model or PA152 reproduction claim", "No post-freeze tuning against fresh seeds", "Episode router is fixed and shared; routing quality is outside this isolated test"]
+}
