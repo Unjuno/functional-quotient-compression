@@ -25,7 +25,7 @@ def pred_code(x,base,u,v,c,router):
  g=softmax(x@router);mix=g@c;z=x@v.T;return x@base.T+np.einsum('nr,ro,rn->no',mix,u,z) # corrected below to explicit stable contraction
 
 def pred_code(x,base,u,v,c,router):
- g=softmax(x@router); mix=g@c; atom_out=np.einsum('nd,roi->nro',x,np.einsum('ro,ri->roi',u,v)); return x@base.T+np.einsum('nr,nro->no',mix,atom_out)
+ g=softmax(x@router); mix=g@c; atom_out=np.einsum('nd,rod->nro',x,np.einsum('ro,ri->roi',u,v)); return x@base.T+np.einsum('nr,nro->no',mix,atom_out)
 def run(seeds):
  rows=[]
  for seed in seeds:
@@ -36,8 +36,8 @@ def run(seeds):
    for method,p in payloads.items():
     path=ROOT/'source'/f'{seed}_rho{rho:g}_{method}.npz';t=time.perf_counter();np.savez_compressed(path,**p);serial=time.perf_counter()-t
     t=time.perf_counter();y=methods[method]();wall=time.perf_counter()-t
-    active=N*D*D+(N*D*E if method!='mirror_precompose' and method!='native_coeff_precompose' else N*E*R+N*R*D*2)
-    if method=='full_top2':active=N*D*D+N*2*D*D
+    active=N*D*D+N*D*E+(N*E*D*D if method in ('full_bank','full_top2') else N*E*R+N*R*D*2)
+    if method=='full_top2':active=N*D*D+N*D*E+N*2*D*D
     rows.append({'seed':seed,'residual_rms':rho,'method':method,'serialized_bytes':path.stat().st_size,'output_nrmse':float(np.sqrt(np.mean((y-target)**2)/np.mean(target**2))),'examples':N,'optimizer_updates':0,'active_mac_proxy':int(active),'inference_wall_time_s':wall,'serialization_wall_time_s':serial})
    assert np.allclose(methods['mirror_precompose'](),methods['native_coeff_precompose'](),atol=0,rtol=0)
  (ROOT/'source/development.json').write_text(json.dumps(rows,indent=2)+'\n')
