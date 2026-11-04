@@ -32,8 +32,9 @@ def make_world(seed, heterogeneity):
 
 def fit_alpha(g, y, lambdas):
     # Least-squares one-step Meta-SGD rule per coordinate.
-    numerator = np.sum((g * y) * lambdas[None, :], axis=0)
-    denominator = np.sum(g * g, axis=0) + 1e-12
+    lam = np.broadcast_to(lambdas, g.shape)
+    numerator = np.sum(lam * g * y, axis=0)
+    denominator = np.sum(lam * g * g, axis=0) + 1e-12
     return numerator / denominator
 
 
@@ -57,7 +58,7 @@ def run_condition(seed, hetero):
     pooled_g = np.concatenate([x[0] for x in train], axis=0)
     pooled_y = np.concatenate([x[1] for x in train], axis=0)
     pooled_lambda = np.concatenate([np.repeat(lambdas[f][None, :], N_SUPPORT, axis=0) for f in range(FAM)], axis=0)
-    global_alpha = fit_alpha(pooled_g, pooled_y, np.mean(pooled_lambda, axis=0))
+    global_alpha = fit_alpha(pooled_g, pooled_y, pooled_lambda)
     global_bank = np.repeat(global_alpha[None, :], FAM, axis=0)
 
     # Mirror and native PCA use exactly the same SVD factors and decoder.
