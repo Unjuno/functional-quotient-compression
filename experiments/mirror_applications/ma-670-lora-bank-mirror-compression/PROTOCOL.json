@@ -1,0 +1,51 @@
+{
+  "experiment_id": "MA-670",
+  "title": "Compress source LoRA bank before composition",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/LORA_BANK_COMPOSITION_QUALITY_BYTES_COMPUTE",
+  "base_commit": "716ef8de",
+  "hypothesis": "A small Mirror source-code bank can preserve compositions of many pretrained LoRA modules with lower total bytes and composition compute than LoRAHub's uncompressed source bank, and must beat native VeRA/shared-scaling controls.",
+  "physical_object": "Shared rank-1 LoRA atom factors plus a small common source-adapter coefficient basis",
+  "mirror_coordinate": "Per-source coordinates and composed-target codes over shared LoRA atoms; private rank-2 source residuals handle off-basis variation",
+  "logical_multiplicity": "16 target adapters composed from 16/64 source LoRA modules",
+  "prior_art_refs": ["PA148", "PA18"],
+  "task": {
+    "matrix_dimension": 16,
+    "source_adapter_counts": [16, 64],
+    "target_compositions": 16,
+    "shared_atom_rank": 4,
+    "private_residual_rank": 2,
+    "residual_rms": [0.0, 0.05, 0.2],
+    "query_examples_per_target": 128,
+    "metric": "Held-out composed-output NRMSE, actual complete inference payload bytes, composition MAC proxy and inference MAC proxy"
+  },
+  "development": {
+    "worlds_or_seeds": [67001, 67002],
+    "selection_metric": "Quality/state-bytes/composition-compute frontier; no target coefficient search or fresh tuning"
+  },
+  "fresh": {
+    "worlds_or_seeds": [67011, 67012, 67013],
+    "locked_before_access": true
+  },
+  "controls": [
+    "LoRAHub-style full source LoRA factor bank plus dense target composition coefficients",
+    "Independent full composed target matrices as deployment upper control",
+    "Mirror shared atom basis with source and precomposed target codes",
+    "Native VeRA-style shared left/right rank-1 matrices and source scaling vectors, identical function decoder",
+    "Shared basis plus source private residual factors and charged target coefficients"
+  ],
+  "storage": {
+    "authority": "Actual serialized complete inference payload bytes",
+    "paid_objects": ["source LoRA factors or shared atoms", "all source codes", "target codes or target coefficients", "private residual factors", "shared base", "task IDs and metadata"]
+  },
+  "compute": ["Target coefficient composition MAC proxy", "private residual composition MAC proxy", "query inference MAC proxy", "serialization and inference CPU wall time"],
+  "success_gate": "At residual 0 and both source-bank sizes, Mirror composed-output NRMSE <=0.02 and complete payload <=50% of LoRAHub source bank plus coefficients; composition compute must not exceed LoRAHub. Mirror-specific success additionally requires a strict gain over VeRA/shared scaling in at least one Pareto axis without losing quality or another axis.",
+  "failure_gate": "Quality/bytes/compute gate misses or Mirror exactly aliases VeRA/native shared scaling without a strict Pareto gain. Development exact native alias permits fresh to remain sealed.",
+  "boundaries": [
+    "Synthetic linear adapter composition only; no LoRAHub paper benchmark or language-model task",
+    "Target composition coefficients are supplied by a fixed synthetic task construction, isolating source-bank compression from search (MA-669 tested coefficient search)",
+    "Source matrices are LoRA rank-6 or lower; all source factors are paid",
+    "For residual-free targets, precomposed target codes replace target coefficients; with private residuals, target coefficients are retained and charged",
+    "Logical combination count is credited only through measured composed-output quality"
+  ]
+}
