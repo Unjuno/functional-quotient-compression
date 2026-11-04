@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-652",
+  "title": "TTT shared writable basis with private residual rank",
+  "status": "SCREENING",
+  "evidence_lane": "TEST_TIME_STATE_PRIVATE_FRONTIER",
+  "base_commit": "7a1567c1",
+  "prior_art_refs": ["PA144"],
+  "related_prior_results": ["MA-651"],
+  "hypothesis": "A shared rank-4 writable TTT basis plus small per-stream private residuals reaches full-state online quality at lower actual bytes; increasing residual rank identifies the storage threshold for sequence-specific directions.",
+  "physical_object": "Shared TTT initialization and four rank-4 output modes",
+  "mirror_coordinate": "Per-stream code selects a shared mode; private residual state spans orthogonal sequence-specific output directions",
+  "logical_multiplicity": "16 online linear learners with private writable rank 0/2/4/8",
+  "task": {"dimension": 32, "streams": 16, "shared_modes": 4, "shared_rank_per_mode": 4, "private_residual_ranks": [0, 2, 4, 8], "sequence_length": 128, "metric": "Prequential NLL/MSE and last-32-token MSE; actual serialized state bytes; update MACs"},
+  "development_seeds": [65201, 65202],
+  "fresh_seeds": [65211, 65212, 65213],
+  "fresh_locked_before_access": true,
+  "controls": ["Full TTT-Linear state per stream", "Shared rank-4 mode only", "Shared dictionary code plus per-stream private residual rank r", "Native dictionary ID plus identical private residual factorization", "Independent private rank-(4+r) basis per stream upper control"],
+  "storage": {"authority": "actual serialized recurrent-state payload bytes", "paid_objects": ["base initialization", "shared mode dictionary", "stream mode codes", "private residual bases and coefficients", "all writable states", "router schema and metadata"]},
+  "compute": ["stream tokens and online updates", "projection/update MAC proxy", "bootstrap router MACs", "serialization wall time"],
+  "success_gate": "At some residual rank r, shared+private state reaches <=1.10x full TTT last-window MSE and <=60% of full-state bytes on both development seeds. Report where private residual becomes necessary. Mirror-specific success additionally requires a strict gain over native dictionary IDs.",
+  "failure_gate": "No rank meets quality/storage gate, or exact native dictionary-ID alias without strict Mirror-specific gain. Keep fresh seeds sealed.",
+  "boundaries": ["Synthetic supervised TTT-like online linear regression", "No self-supervised paper TTT reproduction", "Private directions are orthogonal to shared modes and fully serialized", "No language-model claim"]
+}
