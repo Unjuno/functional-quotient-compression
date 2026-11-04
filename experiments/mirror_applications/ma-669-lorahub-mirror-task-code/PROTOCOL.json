@@ -1,0 +1,85 @@
+{
+  "experiment_id": "MA-669",
+  "title": "LoRAHub coefficients from Mirror task code",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/FEWSHOT_LORA_COMPOSITION_QUALITY_BYTES_COMPUTE",
+  "base_commit": "03692d0a",
+  "hypothesis": "A learned low-dimensional task coordinate can replace LoRAHub's per-task full-bank coefficient search with fewer adaptation evaluations and less serialized task state while preserving held-out task quality; it must beat native low-rank coefficient priors to count as Mirror-specific.",
+  "physical_object": "Shared frozen base plus a bank of eight pretrained rank-1 LoRA atoms",
+  "mirror_coordinate": "Per-task two-dimensional code mapped through a meta-learned coefficient subspace over the eight LoRA atoms",
+  "logical_multiplicity": "16/64 new task-specific logical adapters composed from the shared atom bank",
+  "prior_art_refs": [
+    "PA148"
+  ],
+  "task": {
+    "input_output_dim": 8,
+    "lora_atoms": 8,
+    "mirror_code_dim": 2,
+    "task_counts": [
+      16,
+      64
+    ],
+    "support_examples": [
+      2,
+      4,
+      8
+    ],
+    "private_coefficient_residual_rms": [
+      0.0,
+      0.1,
+      0.25
+    ],
+    "heldout_queries_per_task": 128,
+    "meta_training_tasks": 128,
+    "metric": "Held-out output NRMSE, adaptation function evaluations/steps, complete serialized bank+task-code bytes, and adaptation/inference MAC proxies"
+  },
+  "development": {
+    "worlds_or_seeds": [
+      66901,
+      66902
+    ],
+    "selection_metric": "Quality/state-bytes/adaptation-evaluation Pareto; settings are fixed and fresh seeds cannot tune"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      66911,
+      66912,
+      66913
+    ],
+    "locked_before_access": true
+  },
+  "controls": [
+    "Independent full target matrices",
+    "LoRAHub-style derivative-free Powell search over all eight adapter coefficients with maxfev=3000; raised from 300 after a development convergence pilot showed a material residual at the original cap.",
+    "Direct least-squares fit of all eight LoRA coefficients (ordinary native optimization control)",
+    "Mirror two-dimensional task code inferred from support examples",
+    "Native low-rank task-coefficient subspace with the identical two-dimensional decoder",
+    "Oracle task coefficients as a quality upper control"
+  ],
+  "storage": {
+    "authority": "Actual serialized complete inference payload bytes",
+    "paid_objects": [
+      "shared base",
+      "all LoRA atom factors",
+      "meta-learned coefficient basis",
+      "per-task coefficient or Mirror codes",
+      "task IDs",
+      "search/code-decoder metadata"
+    ]
+  },
+  "compute": [
+    "Support-set adaptation projections and evaluations",
+    "held-out query application of active atoms",
+    "offline meta-code basis SVD",
+    "serialization wall time"
+  ],
+  "success_gate": "On residual 0 and support shots 2/4/8, Mirror must achieve mean held-out NRMSE <=0.05, use <=75% of LoRAHub complete state bytes, and need <=50% of its function evaluations at task counts 16/64. Mirror-specific success additionally requires strict gain over the native low-rank task-code control with no quality, bytes, or compute regression.",
+  "failure_gate": "Mirror misses quality/storage/evaluation gates or exactly aliases native low-rank coefficient coding without strict Pareto gain. Exact development alias permits fresh to remain sealed.",
+  "boundaries": [
+    "Synthetic few-shot linear regression only; not a LoRAHub paper benchmark",
+    "Meta coefficient basis is fit on disjoint meta-training tasks and its full payload is charged",
+    "LoRAHub sees support-set loss only; held-out queries are never used for code search",
+    "Search evaluation counts and basis-learning compute are reported separately",
+    "Fresh worlds cannot tune the coefficient-search schedule or code dimension"
+  ]
+}
