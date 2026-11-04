@@ -1,0 +1,84 @@
+{
+  "experiment_id": "MA-663",
+  "title": "Factorized channel \u00d7 timescale Mirror SSM",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/SSM_TRANSITION_STORAGE_QUALITY_COMPUTE",
+  "base_commit": "ee565b69",
+  "hypothesis": "A task code over shared channel and timescale factors can represent many selective transition tables with less serialized state than independent SSM rates; private residual factors reveal when the logical recurrence family needs task-specific parameters.",
+  "physical_object": "Shared channel and timescale transition factors for a diagonal state-space model",
+  "mirror_coordinate": "Per-task CP coefficients over shared channel \u00d7 timescale outer-product modes, plus optional private residual factors",
+  "logical_multiplicity": "16/64 task-specific logical recurrence tables over 8 channels \u00d7 8 timescales",
+  "prior_art_refs": [
+    "PA145"
+  ],
+  "task": {
+    "channel_count": 8,
+    "timescale_count": 8,
+    "task_counts": [
+      16,
+      64
+    ],
+    "sequence_length": 32,
+    "sequences_per_task": 16,
+    "shared_cp_rank": 4,
+    "private_residual_ranks": [
+      0,
+      2,
+      4,
+      8
+    ],
+    "private_residual_rms": [
+      0.0,
+      0.05,
+      0.2
+    ],
+    "metric": "Held-out sequence output NRMSE, actual complete serialized inference bytes, parameter-generation MAC proxy, recurrent update MAC proxy"
+  },
+  "development": {
+    "worlds_or_seeds": [
+      66301,
+      66302
+    ],
+    "selection_metric": "Quality/storage/generator-compute frontier; exact native CP alias falsifies Mirror-specific claim"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      66311,
+      66312,
+      66313
+    ],
+    "locked_before_access": true
+  },
+  "controls": [
+    "Independent full task transition-rate tables",
+    "Native shared rank-4 CP channel \u00d7 timescale factorization",
+    "Mirror-coded shared rank-4 CP recurrence with identical decoder",
+    "Native shared CP plus private per-task rank-r residual SVD factors",
+    "Mirror shared CP plus the same private residual factors"
+  ],
+  "storage": {
+    "authority": "Actual serialized inference payload bytes",
+    "paid_objects": [
+      "all task transition rates or shared channel/timescale factors",
+      "per-task CP codes",
+      "private residual factors",
+      "shared readout",
+      "task IDs and schema metadata"
+    ]
+  },
+  "compute": [
+    "Task transition-table generation MAC proxy",
+    "per-token recurrent update MAC proxy",
+    "16\u00d732 sequences per task",
+    "serialization wall time"
+  ],
+  "success_gate": "At residual 0 and task counts 16/64, Mirror mean output NRMSE <=0.02 and complete payload <=50% of full tables. For nonzero residual, at least one private residual rank must meet output NRMSE <= full-model output NRMSE + 0.02 and <=75% full bytes. Mirror must strictly beat the corresponding native CP control in quality, bytes, or compute without losing another Pareto axis.",
+  "failure_gate": "Mirror misses quality/storage gate or exactly aliases native CP and native CP+private controls. Exact development alias permits fresh to remain sealed.",
+  "boundaries": [
+    "Synthetic diagonal SSM with task-specific transition tables; not a Mamba or language-model reproduction",
+    "Transition rate is transformed through softplus before recurrence to ensure stability",
+    "All task codes, basis factors, residual state, readout and metadata are serialized and charged",
+    "Address count is not treated as logical capacity; only measured sequence quality is credited",
+    "Fresh worlds cannot alter CP rank, residual rank, or score"
+  ]
+}
