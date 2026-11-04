@@ -1,0 +1,10 @@
+[
+  {
+    "attempt": "initial_buggy_run",
+    "seeds": [64901, 64902],
+    "status": "SUPERSEDED_IMPLEMENTATION_BUG",
+    "problem": "Analytic Meta-SGD fit omitted the curvature weight from the least-squares denominator; global alpha also used mean curvature in place of per-example curvature.",
+    "action": "Corrected the closed-form fit to minimize the preregistered curvature-weighted query objective using each support example's family curvature. Re-ran the same development seeds and settings before any fresh access.",
+    "preservation": "Initial development JSON, CSV and generated payloads retained in attempts/initial_buggy_run/ and excluded from final result rows."
+  }
+]
