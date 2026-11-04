@@ -1,0 +1,25 @@
+{
+  "experiment_id": "MA-643",
+  "commit": "pending",
+  "tests": {
+    "command": "PYTHONPATH=experiments/mirror_applications/ma-643-galore-mirror-subspace/source pytest -q experiments/mirror_applications/ma-643-galore-mirror-subspace/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0,
+    "rows": 32
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Protocol SHA-256 matches freeze.json.",
+    "Fresh seeds 64311-64313 were not opened after quality/native-control failure gate.",
+    "Mirror and native dictionary-ID control have exactly identical saved states and outputs.",
+    "Added a separate geometry-only NPZ byte count and reran the same frozen development seeds to complete the preregistered storage accounting; no settings or seeds changed."
+  ]
+}
