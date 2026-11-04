@@ -8,23 +8,36 @@
   "physical_object": "Two frozen dense layer bases with eight LoRA experts per layer, represented by shared rank-1 atoms plus expert codes",
   "mirror_coordinate": "Per-layer/per-expert code over shared LoRA atoms; input-dependent MoLE gates mix codes before atom application",
   "logical_multiplicity": "Eight logical experts per layer and two layers of dynamically composed functions",
-  "prior_art_refs": ["PA149"],
+  "prior_art_refs": [
+    "PA149"
+  ],
   "task": {
     "input_dim": 16,
     "layer_count": 2,
     "experts_per_layer": 8,
     "shared_atom_rank": 4,
     "private_residual_rank": 2,
-    "expert_residual_rms": [0.0, 0.05, 0.2],
+    "expert_residual_rms": [
+      0.0,
+      0.05,
+      0.2
+    ],
     "heldout_inputs": 256,
     "metric": "Held-out two-layer output NRMSE, actual serialized complete inference bytes, active MAC proxy and CPU inference wall time"
   },
   "development": {
-    "worlds_or_seeds": [67101, 67102],
+    "worlds_or_seeds": [
+      67101,
+      67102
+    ],
     "selection_metric": "Quality/storage/active-compute Pareto; no gate or expert ranks change after fresh access"
   },
   "fresh": {
-    "worlds_or_seeds": [67111, 67112, 67113],
+    "worlds_or_seeds": [
+      67111,
+      67112,
+      67113
+    ],
     "locked_before_access": true
   },
   "controls": [
@@ -36,9 +49,21 @@
   ],
   "storage": {
     "authority": "Actual serialized complete inference payload bytes",
-    "paid_objects": ["layer base weights", "all expert LoRA factors or shared atom bases", "expert codes", "private residual factors", "router weights", "top-k metadata and reconstruction state"]
+    "paid_objects": [
+      "layer base weights",
+      "all expert LoRA factors or shared atom bases",
+      "expert codes",
+      "private residual factors",
+      "router weights",
+      "top-k metadata and reconstruction state"
+    ]
   },
-  "compute": ["Gate computation", "active expert/atom MAC proxy per input", "two-layer base MACs", "CPU inference wall time"] ,
+  "compute": [
+    "Gate computation",
+    "active expert/atom MAC proxy per input",
+    "two-layer base MACs",
+    "CPU inference wall time"
+  ],
   "success_gate": "At residual 0, shared Mirror output NRMSE <=0.02, complete bytes <=60% of full MoLE, and active MACs <=50% of full bank; at nonzero residual, private rank-2 mode must retain NRMSE <=0.02 and improve full-bank bytes or active compute. Mirror-specific success requires a strict frontier gain over native shared-basis MoLE.",
   "failure_gate": "Quality/storage/compute gate misses or Mirror exactly aliases native shared-basis MoLE without strict Pareto gain. Exact development alias permits fresh to remain sealed.",
   "boundaries": [
@@ -46,6 +71,7 @@
     "Router is an input-dependent softmax linear gate and its weights are charged",
     "For the compressed path gate probabilities are applied to expert codes before shared atom evaluation",
     "All expert banks, residuals, bases, gates and metadata are serialized",
-    "Expert count is not credited as independent capacity without measured composed-output quality"
+    "Expert count is not credited as independent capacity without measured composed-output quality",
+    "When rho=0, private residual tensors are omitted rather than serialized/evaluated as zero factors; the initial implementation is preserved under source/attempts."
   ]
 }

@@ -87,21 +87,25 @@ def run_condition(seed,rho):
     target=forward_full(x,base,expert,router)
     aa,bb=lora_factors(expert)
     reconstructed=np.einsum('leor,leri->leoi',aa,bb)
+    paid_prleft=prleft if rho>0 else None
+    paid_prright=prright if rho>0 else None
+    private_payload={} if rho==0 else {'private_left':prleft,'private_right':prright}
+    native_private_payload={} if rho==0 else {'private_left':prleft.copy(),'private_right':prright.copy()}
     payloads={
       'mole_full_bank':{'schema':SCHEMA,'base':base,'router':router,'expert_A':aa,'expert_B':bb},
       'mole_full_top2':{'schema':SCHEMA.copy(),'base':base.copy(),'router':router.copy(),'expert_A':aa.copy(),'expert_B':bb.copy(),'top_k':np.asarray([2],np.uint8)},
       'mirror_code':{'schema':SCHEMA.copy(),'base':base.copy(),'router':router.copy(),'atom_left':left,'atom_right':right,'expert_codes':codes},
       'native_shared_basis':{'schema':SCHEMA.copy(),'base':base.copy(),'router':router.copy(),'atom_left':left.copy(),'atom_right':right.copy(),'expert_scales':codes.copy()},
-      'mirror_code_private':{'schema':SCHEMA.copy(),'base':base.copy(),'router':router.copy(),'atom_left':left.copy(),'atom_right':right.copy(),'expert_codes':codes.copy(),'private_left':prleft,'private_right':prright},
-      'native_shared_basis_private':{'schema':SCHEMA.copy(),'base':base.copy(),'router':router.copy(),'atom_left':left.copy(),'atom_right':right.copy(),'expert_scales':codes.copy(),'private_left':prleft.copy(),'private_right':prright.copy()},
+      'mirror_code_private':{'schema':SCHEMA.copy(),'base':base.copy(),'router':router.copy(),'atom_left':left.copy(),'atom_right':right.copy(),'expert_codes':codes.copy(),**private_payload},
+      'native_shared_basis_private':{'schema':SCHEMA.copy(),'base':base.copy(),'router':router.copy(),'atom_left':left.copy(),'atom_right':right.copy(),'expert_scales':codes.copy(),**native_private_payload},
     }
     methods={
       'mole_full_bank':lambda:forward_full(x,base,reconstructed,router),
       'mole_full_top2':lambda:forward_full(x,base,reconstructed,router,topk=2),
       'mirror_code':lambda:forward_shared(x,base,left,right,codes,router),
       'native_shared_basis':lambda:forward_shared(x,base,left,right,codes,router),
-      'mirror_code_private':lambda:forward_shared(x,base,left,right,codes,router,prleft,prright),
-      'native_shared_basis_private':lambda:forward_shared(x,base,left,right,codes,router,prleft,prright),
+      'mirror_code_private':lambda:forward_shared(x,base,left,right,codes,router,paid_prleft,paid_prright),
+      'native_shared_basis_private':lambda:forward_shared(x,base,left,right,codes,router,paid_prleft,paid_prright),
     }
     rows=[]
     for method,payload in payloads.items():

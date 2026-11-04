@@ -1,7 +1,7 @@
 {
   "experiment_id": "MA-671",
   "base_commit": "57147cde",
-  "protocol_sha256": "b31f6cf2c9420c84fe659309981f8b4607055a9efa71c68681a34b6789b8245e",
+  "protocol_sha256": "956dbcb1a444b63ee7e7511b38133ee9d9cc4f5f0c223f90be405f9df15a003b",
   "frozen_before_development": true,
   "development_seeds": [
     67101,
@@ -13,5 +13,7 @@
     67113
   ],
   "fresh_accessed": false,
-  "amendments": []
+  "amendments": [
+    "Development-only implementation correction: omit the private rank-2 residual state and its MACs at rho=0; initial zero-private payload run preserved under source/attempts. Fresh remains sealed."
+  ]
 }
