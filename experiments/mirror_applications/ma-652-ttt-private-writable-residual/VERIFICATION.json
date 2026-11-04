@@ -1,9 +1,17 @@
 {
   "experiment_id": "MA-652",
   "commit": "pending",
-  "tests": {"command": "pytest -q experiments/mirror_applications/ma-652-ttt-private-writable-residual/tests", "passed": null, "failed": null},
-  "serialization": {"roundtrip_checked": false, "byte_exact": false},
-  "metric_replay": {"checked": false, "max_difference": null, "rows": 0},
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "tests": {
+    "command": "PYTHONPATH=experiments/mirror_applications/ma-652-ttt-private-writable-residual/source pytest -q experiments/mirror_applications/ma-652-ttt-private-writable-residual/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {"roundtrip_checked": true, "byte_exact": true},
+  "metric_replay": {"checked": true, "max_difference": 0.0, "rows": 40},
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Protocol SHA-256 matches freeze.json.",
+    "Fresh seeds 65211-65213 remained sealed after exact native dictionary-ID alias.",
+    "Private residual rank sweep and full actual payload accounting are preserved in development results."
+  ]
 }
