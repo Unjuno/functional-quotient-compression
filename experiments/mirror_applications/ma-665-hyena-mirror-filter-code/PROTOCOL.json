@@ -1,0 +1,49 @@
+{
+  "experiment_id": "MA-665",
+  "title": "Hyena-inspired implicit filter generator with Mirror codes",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/IMPLICIT_FILTER_QUALITY_STORAGE_RUNTIME",
+  "base_commit": "895c58aa",
+  "hypothesis": "A shared implicit filter basis and per-logical-filter Mirror code can preserve causal convolution outputs at lower payload bytes and compute than independent filters, while any Mirror-specific claim must exceed deterministic sinusoidal codes and native PCA filter coding.",
+  "physical_object": "Shared position-conditioned long-filter generator for channel-wise causal convolution",
+  "mirror_coordinate": "Per-task, per-channel coefficient vector over learned temporal filter functions",
+  "logical_multiplicity": "16/64 logical filter banks, each evaluated on held-out input sequences",
+  "prior_art_refs": ["PA146"],
+  "task": {
+    "logical_filter_counts": [16, 64],
+    "channels": 4,
+    "filter_length": 128,
+    "sequences_per_filter": 8,
+    "rank_sweep": [4, 8, 16],
+    "private_filter_residual_rms": [0.0, 0.05, 0.2],
+    "metric": "Held-out causal convolution output NRMSE, actual serialized inference bytes, filter-generation MAC proxy, FFT MAC proxy and CPU wall time"
+  },
+  "development": {
+    "worlds_or_seeds": [66501, 66502],
+    "selection_metric": "Quality/storage/FFT-compute frontier; Mirror must beat both native sinusoidal codes and native PCA filters"
+  },
+  "fresh": {
+    "worlds_or_seeds": [66511, 66512, 66513],
+    "locked_before_access": true
+  },
+  "controls": [
+    "Independent full causal filters",
+    "Native deterministic DCT/sinusoidal position code with coefficient table",
+    "Learned Mirror PCA filter basis and per-filter codes",
+    "Native PCA filter basis with identical decoder"
+  ],
+  "storage": {
+    "authority": "Actual serialized inference payload bytes",
+    "paid_objects": ["full kernels or learned filter basis", "per-task/per-channel codes", "frequency indices and schema metadata", "channel IDs and reconstruction state"]
+  },
+  "compute": ["Filter-generation MAC proxy", "zero-padded FFT convolution MAC proxy", "128 held-out input sequences per world and filter bank", "CPU wall time for serialization and inference"],
+  "success_gate": "At residual 0, rank <=8, and both logical-filter counts, Mirror NRMSE <=0.02 and complete bytes <=50% of independent full filters. Mirror-specific success additionally requires a strict quality/byte/compute gain over both deterministic sinusoidal and native PCA controls, without >10% FFT runtime regression.",
+  "failure_gate": "Quality/byte gate misses or Mirror exactly aliases a native PCA/sinusoidal method without strict frontier gain. Exact development alias permits fresh to remain sealed.",
+  "boundaries": [
+    "Hyena-inspired synthetic filter generator screen only; not a Hyena or language-model reproduction",
+    "Teacher filters are generated from eight fixed DCT position functions plus orthogonal residuals",
+    "DCT basis values are deterministic from fixed dimensions; basis IDs and all learned/filter-specific state are paid",
+    "Causal outputs are evaluated on held-out input sequences, not only kernel reconstruction error",
+    "No fresh result may change code rank or filter family"
+  ]
+}
