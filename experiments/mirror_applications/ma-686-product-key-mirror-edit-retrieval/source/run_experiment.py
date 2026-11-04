@@ -26,7 +26,6 @@ def retrieve(method,p,left,right,scope,labels,targets):
   else:pred[ok]=p['codes'][rows[ok]]@p['basis']
   mac=Q*(2*NL*KD+(R*D if method in ('mirror_product','native_lowrank_product') else D))
  wall=time.perf_counter()-start
- positive=labels>=0;wrong=(labels>=0)&(scope!=p['scopes'][np.maximum(labels,0)]) if method=='flat_bank' else (labels>=0)&(scope!=world_scope_placeholder)
  # scope error/false positive evaluated by query group: middle third is wrong-scope.
  group=np.arange(Q)//M; wrong_scope=group==1;absent=labels<0
  recall=float(np.mean(got[:M]==labels[:M]));err=float(np.sqrt(np.mean((pred[:M]-targets[:M])**2)/max(float(np.mean(targets[:M]**2)),1e-12)))
