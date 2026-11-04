@@ -1,0 +1,16 @@
+[
+  {
+    "attempt": "initial_wrong_basis_orientation",
+    "status": "SUPERSEDED_IMPLEMENTATION_BUG",
+    "problem": "The generated target restricted the input-side subspace, but the writable factor constrained the output-side subspace.",
+    "action": "Corrected target matrices to use the charged output basis and reran the same development seeds.",
+    "artifacts": "Preserved under attempts/initial_wrong_basis_orientation/."
+  },
+  {
+    "attempt": "correct_orientation_lr1",
+    "status": "DEVELOPMENT_HYPERPARAMETER_SCREEN",
+    "problem": "Common online SGD rate 1.0 was unstable for full TTT-Linear and private subspace updates.",
+    "action": "Development-only shared LR grid [0.03,0.05,0.1,0.2,0.3,0.5,1.0] selected 0.3 by mean final-window MSE across methods and both development seeds; final results rerun at this locked rate.",
+    "artifacts": "Preserved under attempts/correct_orientation_lr1/. No fresh seed was accessed."
+  }
+]

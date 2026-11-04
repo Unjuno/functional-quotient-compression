@@ -8,7 +8,7 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
 D, RANK, MODES, STREAMS, LENGTH = 16, 4, 4, 16, 128
-NOISE_STD, LR = .03, 1.0
+NOISE_STD, LR = .03, 0.3
 SCHEMA = np.frombuffer(b"TTT-LINEAR-STATE-V1", dtype=np.uint8)
 
 
@@ -21,8 +21,8 @@ def make_world(seed):
     for sid in range(STREAMS):
         mode = sid % MODES
         u = dictionary[:, mode * RANK:(mode + 1) * RANK]
-        coeff = rng.normal(0, .25, size=(RANK, D))
-        target = base.astype(np.float64) + u @ coeff
+        coeff = rng.normal(0, .25, size=(D, RANK))
+        target = base.astype(np.float64) + coeff @ u.T
         x = rng.normal(0, 1 / np.sqrt(D), size=(LENGTH, D))
         y = x @ target + rng.normal(0, NOISE_STD, size=(LENGTH, D))
         seqs.append({"mode": mode, "x": x, "y": y})
