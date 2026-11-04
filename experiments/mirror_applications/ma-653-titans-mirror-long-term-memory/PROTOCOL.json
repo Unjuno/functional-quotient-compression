@@ -1,0 +1,41 @@
+{
+  "experiment_id": "MA-653",
+  "title": "Titans-like surprise-gated long-term memory with shared Mirror basis",
+  "status": "SCREENING",
+  "evidence_lane": "LONG_TERM_MEMORY_STORAGE_QUALITY",
+  "base_commit": "9bc5fb90",
+  "prior_art_refs": ["PA147"],
+  "hypothesis": "A shared value basis plus per-key codes can compress surprise-gated long-term memory while preserving recall; private residual rank identifies where sequence-specific value directions are needed. Short-term cache state is measured and charged separately.",
+  "physical_object": "One shared long-term value basis plus per-key writable memory codes",
+  "mirror_coordinate": "Per-key code selecting shared value directions, with optional private residual code",
+  "logical_multiplicity": "64 key-value long-term memories with an 8-entry short-term cache",
+  "task": {
+    "keys": 64,
+    "value_dim": 32,
+    "shared_value_rank": 4,
+    "private_residual_ranks": [0, 2, 4, 8],
+    "short_term_cache_entries": 8,
+    "writes_per_key": 2,
+    "surprise_threshold": 0.12,
+    "metric": "Long-term-only and cache-aware query MSE/Gaussian NLL, surprise-triggered writes, full serialized state bytes"
+  },
+  "development_seeds": [65301, 65302],
+  "fresh_seeds": [65311, 65312, 65313],
+  "fresh_locked_before_access": true,
+  "controls": [
+    "Full Titans-like writable long-term matrix plus short-term cache",
+    "Shared rank-4 long-term value basis only",
+    "Shared basis plus private value residual rank r",
+    "Native low-rank basis/code memory with identical decoder",
+    "Explicit key-value table upper control"
+  ],
+  "storage": {
+    "authority": "actual serialized inference and memory-state payload bytes",
+    "report_separately": ["persistent/long-term memory bytes", "short-term cache bytes", "complete paid memory bytes"],
+    "paid_objects": ["shared base initialization", "long-term matrix or basis/codes", "private residual basis/codes", "short-term cache IDs/values", "surprise-gate state", "metadata"]
+  },
+  "compute": ["write/update MAC proxy", "query/retrieval MAC proxy", "surprise gate comparisons", "wall time"],
+  "success_gate": "For at least one r on both development seeds, complete memory payload <=50% of full-matrix control and cache-aware query MSE <=1.10x full control; report private-rank frontier. Mirror-specific success additionally requires a strict gain over native low-rank memory control.",
+  "failure_gate": "No quality/storage point meets gate or exact native low-rank alias without a Mirror-specific gain. Fresh seeds remain sealed.",
+  "boundaries": ["Titans-inspired surprise-gated fast-weight memory, not a paper reproduction", "One-hot synthetic keys and linear value retrieval", "Short-term cache is identical and separately charged for all methods", "No neural memory network or language-model claim"]
+}
