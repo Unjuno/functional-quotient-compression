@@ -1,9 +1,17 @@
 {
   "experiment_id": "MA-647",
   "commit": "pending",
-  "tests": {"command": "pytest -q experiments/mirror_applications/ma-647-relora-basis-rotation/tests", "passed": null, "failed": null},
-  "serialization": {"roundtrip_checked": false, "byte_exact": false},
-  "metric_replay": {"checked": false, "max_difference": null, "rows": 0},
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "tests": {
+    "command": "PYTHONPATH=experiments/mirror_applications/ma-647-relora-basis-rotation/source pytest -q experiments/mirror_applications/ma-647-relora-basis-rotation/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {"roundtrip_checked": true, "byte_exact": true},
+  "metric_replay": {"checked": true, "max_difference": 0.0, "rows": 10},
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Protocol SHA-256 matches freeze.json.",
+    "Fresh seeds 64711-64713 remained sealed after exact native BOFT alias.",
+    "Mirror and native shared-angle BOFT have elementwise identical inference state and same serialized bytes."
+  ]
 }
