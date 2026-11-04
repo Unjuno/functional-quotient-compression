@@ -1,0 +1,50 @@
+{
+  "experiment_id": "MA-658",
+  "title": "Fast-write Mirror views with slow consolidation",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/TEMPORAL_FUNCTION_STORAGE",
+  "base_commit": "dc36af10",
+  "hypothesis": "A temporary low-description functional view can be consolidated into a shared slow basis while preserving previously written functions at lower complete serialized state than retaining private fast adapters, and it can beat native shared low-rank consolidation on held-out outputs.",
+  "physical_object": "Shared base linear operator plus an incrementally consolidated low-rank update basis",
+  "mirror_coordinate": "Per-task fast update coordinates, remapped when new basis directions are consolidated",
+  "logical_multiplicity": "32 task functions retained across four consolidation boundaries",
+  "prior_art_refs": ["PA147", "PA143"],
+  "task": {
+    "matrix_shape": [32, 32],
+    "task_counts": [8, 32],
+    "consolidation_interval": 8,
+    "shared_update_rank": 4,
+    "private_update_rank": 2,
+    "task_residual_rms": [0.0, 0.05, 0.2],
+    "metric": "Held-out input-output NRMSE for every retained task; actual complete payload bytes at each consolidation boundary; update and decode MAC proxies"
+  },
+  "development": {
+    "worlds_or_seeds": [65801, 65802],
+    "selection_metric": "Mean across tasks of output NRMSE, complete serialized bytes, and old-task drift immediately before/after consolidation"
+  },
+  "fresh": {
+    "worlds_or_seeds": [65811, 65812, 65813],
+    "locked_before_access": true
+  },
+  "controls": [
+    "Independent full task matrices",
+    "Private fast rank-2 task deltas with no consolidation",
+    "Native shared rank-4 update basis with ordinary task coefficient vectors and the same consolidation schedule",
+    "Mirror coordinate-coded update basis with identical reconstruction operations",
+    "Native PCA of consolidated task deltas"
+  ],
+  "storage": {
+    "authority": "Actual serialized inference payload bytes",
+    "paid_objects": ["shared base", "consolidated update basis", "per-task coordinates", "unconsolidated fast residuals", "task IDs", "metadata and reconstruction state"]
+  },
+  "compute": ["Update/consolidation MAC proxy", "task decode MAC proxy", "actual serialization and isolated wall time"],
+  "success_gate": "At residual 0 and both task counts, all historical tasks have mean and worst-task NRMSE <=0.02 after each consolidation; complete payload is <=60% of independent matrices and <=80% of private rank-2 adapters; Mirror strictly beats native shared-low-rank control in quality/bytes without more than 10% decode MAC overhead.",
+  "failure_gate": "Any quality or byte gate fails, or Mirror exactly aliases native shared low-rank/PCA state and outputs. If development shows exact alias or clear gate failure, fresh may remain sealed and the scoped FAIL is recorded.",
+  "boundaries": [
+    "Synthetic linear tasks only; not a ReLoRA or Titans reproduction",
+    "Each task's target operator and held-out input set are fixed per world",
+    "The consolidation transition must preserve every previously written task or record its drift",
+    "All state including task IDs, codes and reconstruction metadata is charged",
+    "Fresh worlds are never used to alter rank, interval, residual or metric"
+  ]
+}
