@@ -1,0 +1,21 @@
+{
+  "experiment_id": "MA-671",
+  "commit": "pending",
+  "tests": {
+    "command": "python experiments/mirror_applications/ma-671-mole-gates-mirror-lora/source/run_experiment.py --seeds 67101 67102",
+    "passed": true,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Synthetic deterministic runner completed for both development seeds. Native shared-basis arrays and outputs exactly match Mirror representations. Fresh/audit data not accessed. NPZ files are the actual serialized inference payloads."
+  ]
+}
