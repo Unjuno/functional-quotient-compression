@@ -1,0 +1,49 @@
+{
+  "experiment_id": "MA-661",
+  "title": "Mamba selective-parameter Mirror basis",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/SELECTIVE_SSM_STORAGE_QUALITY_COMPUTE",
+  "base_commit": "da455205",
+  "hypothesis": "A small per-token coordinate m(x) over a shared basis for Mamba-style input-selective B/C/Delta generators can preserve sequence outputs with lower serialized payload and generator compute than independent native projections, and must beat a matched native joint-basis projection to count as Mirror-specific.",
+  "physical_object": "One shared input projection basis feeding selective B, C, and Delta generators in a diagonal state-space layer",
+  "mirror_coordinate": "Per-token m(x)=Vx, with B/C/Delta coefficients decoded from separate output bases U_B/U_C/U_Delta",
+  "logical_multiplicity": "Content-dependent selective state dynamics across input sequences",
+  "prior_art_refs": ["PA145"],
+  "task": {
+    "input_dim": 8,
+    "state_dim": 8,
+    "sequence_length": 32,
+    "sequences_per_world": 128,
+    "shared_input_ranks": [1, 2, 4, 8],
+    "residual_rms": [0.0, 0.1, 0.3],
+    "metric": "Held-out sequence output NRMSE, actual serialized inference payload bytes, generator MAC proxy and isolated serialization wall time"
+  },
+  "development": {
+    "worlds_or_seeds": [66101, 66102],
+    "selection_metric": "Quality-storage-compute frontier over rank and residual; no rank may be selected from fresh results"
+  },
+  "fresh": {
+    "worlds_or_seeds": [66111, 66112, 66113],
+    "locked_before_access": true
+  },
+  "controls": [
+    "Full native input-selective diagonal SSM with independent B/C/Delta linear projections",
+    "Native independent rank-k factorization of each B/C/Delta projection",
+    "Native joint shared-input-basis projection for B/C/Delta",
+    "Mirror per-token shared coordinate m(x) with the same joint basis and decoders"
+  ],
+  "storage": {
+    "authority": "Actual serialized inference payload bytes",
+    "paid_objects": ["A dynamics", "B/C/Delta generator weights", "shared input basis or independent factors", "biases", "schema and reconstruction metadata"]
+  },
+  "compute": ["Input projection/generator MAC proxy per token", "recurrent update proxy", "128×32 evaluated tokens per world", "serialization wall time"],
+  "success_gate": "At residual 0 and rank <=4, Mirror output NRMSE <=0.02 and complete payload <=60% of full native projections; it must strictly improve payload or quality over both native independent low-rank and native joint-basis controls without >10% generator-MAC overhead.",
+  "failure_gate": "Quality/storage gate misses, or Mirror state/outputs exactly alias the native joint shared-basis method without a strict quality/byte/compute gain. Development exact alias permits fresh to remain sealed.",
+  "boundaries": [
+    "Synthetic diagonal SSM only; not a Mamba implementation or language-model reproduction",
+    "Teacher selectivity is input-dependent for all three generated parameters B, C, and Delta",
+    "Rank and residual sweep are fixed before development",
+    "All dynamics, input basis, decoders, and metadata are serialized and charged",
+    "No fresh result may alter rank or factorization"
+  ]
+}
