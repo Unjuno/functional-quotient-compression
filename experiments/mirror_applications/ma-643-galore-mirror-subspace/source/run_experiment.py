@@ -44,6 +44,10 @@ def left_basis(g):
     return u[:, :RANK]
 
 
+def choose_code(dictionary, initial_gradient):
+    return int(np.argmax([np.linalg.norm(p.T @ initial_gradient) for p in dictionary]))
+
+
 def optimize(x, y, p, steps=STEPS):
     w = np.zeros((D, D), dtype=np.float64)
     m = np.zeros((RANK, D), dtype=np.float64)
@@ -64,7 +68,15 @@ def save_payload(seed, k, method, inference, resume):
     rp = ROOT / "source" / f"{seed}_k{k}_{method}_resume.npz"
     np.savez_compressed(ip, **inference)
     np.savez_compressed(rp, **resume)
-    return ip.stat().st_size, rp.stat().st_size
+    if method == "galore_independent":
+        geometry = {"task_projectors": resume["task_projectors"], "task_ids": resume["task_ids"], "schema": SCHEMA}
+    elif method in ("mirror_codebook", "native_codebook_id"):
+        geometry = {"projector_dictionary": resume["projector_dictionary"], "task_codes": resume["task_codes"], "task_ids": resume["task_ids"], "schema": SCHEMA}
+    else:
+        geometry = {"task_ids": resume["task_ids"], "schema": SCHEMA}
+    gp = ROOT / "source" / f"{seed}_k{k}_{method}_geometry.npz"
+    np.savez_compressed(gp, **geometry)
+    return ip.stat().st_size, rp.stat().st_size, gp.stat().st_size
 
 
 def run_one(seed, k):
@@ -105,13 +117,15 @@ def run_one(seed, k):
         methods["galore_independent"]["weights"].append(w.astype(np.float32)); methods["galore_independent"]["m"].append(gm.astype(np.float32)); methods["galore_independent"]["v"].append(gv.astype(np.float32)); methods["galore_independent"]["projectors"].append(p); methods["galore_independent"]["losses"].append(held)
         method_seconds["galore_independent"] += time.perf_counter() - t
 
-        # Both codebook implementations select the exact task mode in this controlled task.
-        p = dictionary[mode]
+        # Both codebook implementations choose a shared projector by gradient alignment.
+        initial_gradient = grad(x, y, np.zeros((D, D)))
+        code = choose_code(dictionary, initial_gradient)
+        p = dictionary[code]
         for name in ("mirror_codebook", "native_codebook_id"):
             t = time.perf_counter()
             w, cm, cv = optimize(x, y, p.astype(np.float64))
             held = float(np.mean((xh @ w - yh) ** 2))
-            methods[name]["weights"].append(w.astype(np.float32)); methods[name]["m"].append(cm.astype(np.float32)); methods[name]["v"].append(cv.astype(np.float32)); methods[name]["codes"].append(mode); methods[name]["losses"].append(held)
+            methods[name]["weights"].append(w.astype(np.float32)); methods[name]["m"].append(cm.astype(np.float32)); methods[name]["v"].append(cv.astype(np.float32)); methods[name]["codes"].append(code); methods[name]["losses"].append(held)
             method_seconds[name] += time.perf_counter() - t
 
     rows = []
@@ -126,15 +140,16 @@ def run_one(seed, k):
         elif method in ("mirror_codebook", "native_codebook_id"):
             resume["projector_dictionary"] = dictionary
             resume["task_codes"] = np.asarray(state["codes"], dtype=np.uint8)
-        inference_bytes, resume_bytes = save_payload(seed, k, method, inference, resume)
+        inference_bytes, resume_bytes, geometry_bytes = save_payload(seed, k, method, inference, resume)
         rows.append({
             "seed": seed, "distinct_gradient_modes": k, "method": method,
-            "inference_payload_bytes": inference_bytes, "resume_payload_bytes": resume_bytes,
+            "inference_payload_bytes": inference_bytes, "resume_payload_bytes": resume_bytes, "geometry_payload_bytes": geometry_bytes,
             "mean_heldout_mse": float(np.mean(state["losses"])), "max_heldout_mse": float(np.max(state["losses"])),
             "task_count": TASKS, "training_examples": TASKS * N,
             "optimizer_updates": TASKS * STEPS,
             "dense_gradient_mac_proxy": TASKS * STEPS * (2 * N * D * D),
             "projection_mac_proxy": 0 if method == "full_adam" else TASKS * STEPS * (4 * RANK * D * D),
+            "routing_mac_proxy": 0 if method not in ("mirror_codebook", "native_codebook_id") else TASKS * (k * 2 * RANK * D),
             "projector_discovery_svd_count": TASKS if method == "galore_independent" else (discovery_svds if method in ("mirror_codebook", "native_codebook_id") else 0),
             "wall_time_s": method_seconds[method],
         })
@@ -154,7 +169,7 @@ def run(seeds):
         w = csv.writer(f)
         w.writerow(["condition", "world_or_seed", "method", "serialized_bytes", "train_tokens_or_examples", "optimizer_updates", "active_compute_proxy", "wall_time_s", "primary_metric", "primary_value", "secondary_metric", "secondary_value", "status_note"])
         for r in rows:
-            w.writerow([f"modes_{r['distinct_gradient_modes']}", r["seed"], r["method"], r["resume_payload_bytes"], r["training_examples"], r["optimizer_updates"], r["dense_gradient_mac_proxy"] + r["projection_mac_proxy"], r["wall_time_s"], "mean_heldout_mse", r["mean_heldout_mse"], "inference_payload_bytes", r["inference_payload_bytes"], "development; fresh sealed"])
+            w.writerow([f"modes_{r['distinct_gradient_modes']}", r["seed"], r["method"], r["resume_payload_bytes"], r["training_examples"], r["optimizer_updates"], r["dense_gradient_mac_proxy"] + r["projection_mac_proxy"] + r["routing_mac_proxy"], r["wall_time_s"], "mean_heldout_mse", r["mean_heldout_mse"], "inference_payload_bytes", r["inference_payload_bytes"], "development; fresh sealed"])
     return rows
 
 
