@@ -1,19 +1,22 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-663",
+  "commit": "pending",
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-663-factorized-ssm-channel-timescale/tests -v",
+    "passed": 2,
+    "failed": 0
   },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "roundtrip_checked": true,
+    "byte_exact": true
   },
   "metric_replay": {
-    "checked": false,
-    "max_difference": null
+    "checked": true,
+    "max_difference": 0.0,
+    "rows": 240
   },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "All payload sizes are actual NPZ sizes; all 240 development metrics replay. Mirror/native CP and private-CP states are array and output identical. Fresh seeds remain sealed after exact alias. Protocol amendment clarifying residual quality tolerance is recorded and prior version preserved."
+  ]
 }
