@@ -12,13 +12,20 @@ def world(seed,rho):
  for e in range(E):
   a,s,b=np.linalg.svd(res[e],full_matrices=False);pl[e]=a[:,:P].T*s[:P,None];pr[e]=b[:P]
  return base,u,v,c,res,experts,pl,pr,router,x
-def pred_full(x,base,experts,router,top2=False):
+def expert_factors(experts,rank):
+ E0=experts.shape[0];la=np.zeros((E0,rank,D),'f');rb=np.zeros((E0,rank,D),'f')
+ for e in range(E0):
+  a,sv,b=np.linalg.svd(experts[e],full_matrices=False);la[e]=a[:,:rank].T*sv[:rank,None];rb[e]=b[:rank]
+ return la,rb
+def pred_full(x,base,la,rb,router,top2=False):
  g=softmax(x@router);out=np.zeros_like(x)
  if top2:
   ids=np.argpartition(g,-2,axis=1)[:,-2:];m=np.zeros_like(g);np.put_along_axis(m,ids,1.,axis=1);g*=m;g/=g.sum(1,keepdims=True)
   for n in range(len(x)):
-   for e in ids[n]:out[n]+=g[n,e]*(x[n]@experts[e].T)
- else:out=np.einsum('ne,neo->no',g,np.einsum('nd,eod->neo',x,experts))
+   for e in ids[n]:
+    z=rb[e]@x[n];out[n]+=g[n,e]*(la[e].T@z)
+ else:
+  z=np.einsum('nd,erd->ner',x,rb);ex=np.einsum('ner,ero->neo',z,la);out=np.einsum('ne,neo->no',g,ex)
  return x@base.T+out
 def pred_code(x,base,u,v,c,router,pl=None,pr=None):
  g=softmax(x@router);mix=g@c;z=x@v.T;out=np.einsum('nr,ro->no',mix*z,u)
@@ -29,16 +36,16 @@ def run(seeds):
  rows=[]
  for seed in seeds:
   for rho in (0.,.05):
-   base,u,v,c,res,experts,pl,pr,router,x=world(seed,rho);target=pred_full(x,base,experts,router)
-   payloads={'full_bank':{'base':base,'router':router,'experts':experts},'full_top2':{'base':base,'router':router,'experts':experts,'top_k':np.array([2],'u1')},'mirror_precompose':{'base':base,'router':router,'u':u,'v':v,'codes':c},'native_coeff_precompose':{'base':base,'router':router,'u':u.copy(),'v':v.copy(),'coefficients':c.copy()}}
-   methods={'full_bank':lambda:pred_full(x,base,experts,router),'full_top2':lambda:pred_full(x,base,experts,router,True),'mirror_precompose':lambda:pred_code(x,base,u,v,c,router),'native_coeff_precompose':lambda:pred_code(x,base,u,v,c,router)}
+   base,u,v,c,res,experts,pl,pr,router,x=world(seed,rho);rank=(R if rho==0 else D);ela,erb=expert_factors(experts,rank);target=pred_full(x,base,ela,erb,router)
+   payloads={'full_bank':{'base':base,'router':router,'expert_left':ela,'expert_right':erb},'full_top2':{'base':base,'router':router,'expert_left':ela,'expert_right':erb,'top_k':np.array([2],'u1')},'mirror_precompose':{'base':base,'router':router,'u':u,'v':v,'codes':c},'native_coeff_precompose':{'base':base,'router':router,'u':u.copy(),'v':v.copy(),'coefficients':c.copy()}}
+   methods={'full_bank':lambda:pred_full(x,base,ela,erb,router),'full_top2':lambda:pred_full(x,base,ela,erb,router,True),'mirror_precompose':lambda:pred_code(x,base,u,v,c,router),'native_coeff_precompose':lambda:pred_code(x,base,u,v,c,router)}
    if rho>0:
     payloads['mirror_precompose_private']={**payloads['mirror_precompose'],'private_left':pl,'private_right':pr};payloads['native_coeff_precompose_private']={**payloads['native_coeff_precompose'],'private_left':pl.copy(),'private_right':pr.copy()}
     methods['mirror_precompose_private']=lambda:pred_code(x,base,u,v,c,router,pl,pr);methods['native_coeff_precompose_private']=lambda:pred_code(x,base,u,v,c,router,pl,pr)
    for method,payload in payloads.items():
     path=ROOT/'source'/f'{seed}_rho{rho:g}_{method}.npz';st=time.perf_counter();np.savez_compressed(path,**payload);ser=time.perf_counter()-st;t=time.perf_counter();y=methods[method]();wall=time.perf_counter()-t
     active=N*D*D+N*D*E
-    if method in ('full_bank','full_top2'):active+=N*(2 if method=='full_top2' else E)*D*D
+    if method in ('full_bank','full_top2'):active+=N*(2 if method=='full_top2' else E)*rank*D*2
     else:
      active+=N*E*R+N*R*D*2
      if method.endswith('_private'):active+=N*E*P*D*2
