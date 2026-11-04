@@ -1,0 +1,19 @@
+{
+  "experiment_id":"MA-640",
+  "title":"RRDA edit and suppress roles with shared Mirror-conditioned adapter",
+  "status":"SCREENING",
+  "base_commit":"44740ab8",
+  "prior_art_refs":["PA141"],
+  "hypothesis":"One shared physical adapter basis plus role coordinates represents edit and suppress functions with less edit-state bytes when role updates align; increasing role angle reveals when a second/private basis is required.",
+  "task":{"output_dim":16,"roles":["edit","suppress"],"role_angles_degrees":[0,15,30,60,90],"audit_examples_per_role":128},
+  "development_seeds":[64001,64002],
+  "fresh_seeds":[64011,64012,64013],
+  "fresh_sealed":true,
+  "controls":["independent_full_role_adapters","Mirror_shared_basis_rank1_codes","Mirror_shared_basis_rank2_codes","native_shared_basis_role_gate_rank1","native_shared_basis_lowrank_rank2"],
+  "routing":"Role label/router is identical and charged for every method; this experiment isolates adapter state and function, not routing quality.",
+  "storage":"Actual serialized .npz inference payload includes base executor, router/role IDs, basis, codes, metadata and all reconstruction state. Report full bytes and role-adapter-state bytes separately.",
+  "metrics":["edit-role nRMSE","suppress-role nRMSE","full payload bytes","role-state bytes","per-role operation proxy"],
+  "success_gate":"At angle 0 on both seeds: role errors <=1e-5 and shared rank1 role-state <=75% of independent adapters. Across angles, rank2 should restore <=1e-5 if rank1 fails. Mirror-specific success additionally requires strict gain over native role gate/lowrank control.",
+  "failure_gate":"No edit-state storage gain at aligned angle, role quality miss, or exact native gate/basis alias. Fresh sealed after any failure.",
+  "boundaries":["Synthetic two-role adapter mechanism only","Base payload charged and separately reported","No RRDA/pretrained-model claim","No protocol changes after freeze"]
+}
