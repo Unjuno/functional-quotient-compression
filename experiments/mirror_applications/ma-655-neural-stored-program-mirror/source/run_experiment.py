@@ -29,18 +29,18 @@ def save(seed,n,rho,name,payload):
 def run_condition(seed,n,rho):
  basis,coeff,programs,unseen,unseen_targets,x,xu=make_world(seed,n,rho);flat=programs.reshape(n,-1)
  # Learned Mirror/native basis is the rank-4 PCA of stored controller functions.
- _,_,vh=np.linalg.svd(flat,full_matrices=False);pca=vh[:K].reshape(K,D,D).astype(np.float32);codes=flat@vh[:K].T
+ _,_,vh=np.linalg.svd(flat,full_matrices=False);pca=vh[:K].reshape(K,D,D).astype(np.float32);pca_flat=vh[:K];codes=flat@pca_flat.T;coordinate_transform=basis.reshape(K,-1)@pca_flat.T
  # The explicit NSPM control stores the generating basis and coefficients.
  nsm_pred=np.einsum('nk,kdh->ndh',coeff,basis);mirror_pred=np.einsum('nk,kdh->ndh',codes,pca)
  # Non-interpolating one-hot program selection with a scalar magnitude.
  idx=np.argmax(np.abs(codes),axis=1);onehot_codes=np.zeros_like(codes);onehot_codes[np.arange(n),idx]=codes[np.arange(n),idx];onehot_pred=np.einsum('nk,kdh->ndh',onehot_codes,pca)
- unseen_pca=np.einsum('nk,kdh->ndh',unseen,pca);unseen_nsm=np.einsum('nk,kdh->ndh',unseen,basis)
+ unseen_pca=(unseen@coordinate_transform@pca_flat).reshape(UNSEEN,D,D);unseen_nsm=np.einsum('nk,kdh->ndh',unseen,basis)
  unseen_idx=np.argmax(np.abs(unseen),axis=1);uc=np.zeros_like(unseen);uc[np.arange(UNSEEN),unseen_idx]=unseen[np.arange(UNSEEN),unseen_idx];unseen_onehot=np.einsum('nk,kdh->ndh',uc,basis)
  payloads={
   'independent_full_programs':{'schema':SCHEMA,'program_ids':np.arange(n,dtype=np.uint16),'program_matrices':programs},
   'nsm_explicit_basis_codes':{'schema':SCHEMA,'program_ids':np.arange(n,dtype=np.uint16),'basis_controllers':basis,'program_codes':coeff},
-  'mirror_pca_rank4':{'schema':SCHEMA,'program_ids':np.arange(n,dtype=np.uint16),'shared_function_basis':pca,'program_codes':codes.astype(np.float32)},
-  'native_pca_rank4':{'schema':SCHEMA,'program_ids':np.arange(n,dtype=np.uint16),'shared_function_basis':pca.copy(),'program_codes':codes.astype(np.float32).copy()},
+  'mirror_pca_rank4':{'schema':SCHEMA,'program_ids':np.arange(n,dtype=np.uint16),'shared_function_basis':pca,'program_codes':codes.astype(np.float32),'coordinate_transform':coordinate_transform.astype(np.float32)},
+  'native_pca_rank4':{'schema':SCHEMA,'program_ids':np.arange(n,dtype=np.uint16),'shared_function_basis':pca.copy(),'program_codes':codes.astype(np.float32).copy(),'coordinate_transform':coordinate_transform.astype(np.float32).copy()},
   'onehot_nearest_program':{'schema':SCHEMA,'program_ids':np.arange(n,dtype=np.uint16),'basis_controllers':basis,'selected_program_ids':idx.astype(np.uint8),'selected_scales':codes[np.arange(n),idx].astype(np.float32)},
  }
  predmap={'independent_full_programs':programs,'nsm_explicit_basis_codes':nsm_pred,'mirror_pca_rank4':mirror_pred,'native_pca_rank4':mirror_pred,'onehot_nearest_program':onehot_pred}
@@ -51,6 +51,7 @@ def run_condition(seed,n,rho):
   rows.append({'seed':seed,'program_count':n,'private_function_residual_rms':rho,'method':name,'serialized_bytes':size,'stored_program_nrmse':fit_metrics(decoded,programs,x),'unseen_code_nrmse':unseennrmse[name],'unique_function_fraction':unique_fraction(decoded),'stored_query_examples':n*QCOUNT,'unseen_query_examples':UNSEEN*QCOUNT,'optimizer_updates':0,'basis_decode_mac_proxy':int(n*K*D*D if 'basis' in name or 'pca' in name or 'onehot' in name else 0),'program_execute_mac_proxy':int((n+UNSEEN)*QCOUNT*2*D*D),'offline_basis_svd_count':int(name in ('mirror_pca_rank4','native_pca_rank4')),'wall_time_s':wall})
  assert np.array_equal(payloads['mirror_pca_rank4']['shared_function_basis'],payloads['native_pca_rank4']['shared_function_basis'])
  assert np.array_equal(payloads['mirror_pca_rank4']['program_codes'],payloads['native_pca_rank4']['program_codes'])
+ assert np.array_equal(payloads['mirror_pca_rank4']['coordinate_transform'],payloads['native_pca_rank4']['coordinate_transform'])
  return rows
 
 def run(seeds):
