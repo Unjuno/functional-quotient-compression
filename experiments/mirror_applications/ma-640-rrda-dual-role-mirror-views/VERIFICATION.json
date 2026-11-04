@@ -1,0 +1,24 @@
+{
+  "experiment_id": "MA-640",
+  "commit": "pending",
+  "tests": {
+    "command": "pytest -q experiments/mirror_applications/ma-640-rrda-dual-role-mirror-views/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0,
+    "rows": 60
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Protocol SHA-256 matches freeze.json.",
+    "Fresh seeds 64011-64013 were not opened after the prespecified development failure gate.",
+    "Rank-2 Mirror equals native shared low-rank control in outputs and serialized size; aligned rank-1 Mirror does not reduce bytes vs independent adapters and aliases native gating."
+  ]
+}
