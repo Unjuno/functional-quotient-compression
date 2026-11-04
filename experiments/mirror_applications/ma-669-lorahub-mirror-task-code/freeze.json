@@ -1,7 +1,7 @@
 {
   "experiment_id": "MA-669",
   "base_commit": "03692d0a",
-  "protocol_sha256": "275f8162a3129b97b49417dd5a6f316ba45c56e323bab6690844719b3e8057dd",
+  "protocol_sha256": "53fef7d4cedffdf9b8c2facf42c300e3639470912bf11fb52b8aadc77d9aebb1",
   "frozen_before_development": true,
   "development_seeds": [
     66901,
@@ -13,5 +13,8 @@
     66913
   ],
   "fresh_accessed": false,
-  "amendments": []
+  "amendments": [
+    "Development-only change to the LoRAHub search control: initial fixed coordinate search returned high held-out error despite 97 evaluations/task; replaced by derivative-free Powell direct search with maxfev=300. Initial implementation, metrics, artifacts and protocol are preserved under source/attempts/initial_coordinate_search and source/attempts/PROTOCOL_v1_initial_coordinate.json. Fresh remains sealed.",
+    "Development convergence pilot on seed 66901, N=16, 4 shots, rho=0: Powell error fell from 0.010 at 300 evaluations to 0.00000003 at convergence after 1,635. Raised fixed cap to maxfev=3000 before fresh access. The 300-cap grid is preserved under source/attempts/powell_300_eval_cap."
+  ]
 }

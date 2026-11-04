@@ -1,6 +1,7 @@
 import argparse,csv,json,time
 from pathlib import Path
 import numpy as np
+from scipy.optimize import minimize
 
 ROOT=Path(__file__).resolve().parents[1]
 D=8;J=8;R=2;META=128;QUERIES=128
@@ -31,18 +32,11 @@ def make_world(seed,n,shots,rho):
 
 def features(x,atoms):return np.einsum('nsi,joi->nsoj',x,atoms)
 
-def search_coeff(phi,y,steps=6):
-    j=phi.shape[-1];c=np.zeros(j,dtype=np.float64);target=y.reshape(-1).astype(np.float64);mat=phi.reshape(-1,j).astype(np.float64)
+def search_coeff(phi,y,maxfev=3000):
+    j=phi.shape[-1];target=y.reshape(-1).astype(np.float64);mat=phi.reshape(-1,j).astype(np.float64)
     def loss(v):return float(np.mean((mat@v-target)**2))
-    best=loss(c);evals=1;step=.5
-    for _ in range(steps):
-        changed=False
-        for i in range(j):
-            for sign in (-1.,1.):
-                trial=c.copy();trial[i]+=sign*step;value=loss(trial);evals+=1
-                if value+1e-15<best:c=trial;best=value;changed=True
-        if not changed:step*=.5
-    return c.astype(np.float32),evals
+    result=minimize(loss,np.zeros(j,dtype=np.float64),method='Powell',options={'maxfev':maxfev,'xtol':1e-4,'ftol':1e-8})
+    return result.x.astype(np.float32),int(result.nfev)
 
 def fit_methods(xs,ys,xq,base,atoms,qhat,weights,coeff):
     ps=features(xs,atoms);pq=features(xq,atoms);res=ys-np.einsum('nsi,oi->nso',xs,base)
@@ -61,6 +55,7 @@ def fit_methods(xs,ys,xq,base,atoms,qhat,weights,coeff):
         pred=np.einsum('nqoj,nj->nqo',pq,c)+np.einsum('nqi,oi->nqo',xq,base)
         err=float(np.sqrt(np.mean((pred-np.einsum('nqi,noi->nqo',xq,weights))**2)/np.mean(np.einsum('nqi,noi->nqo',xq,weights)**2)))
         results[method]=(c,err)
+    results['independent_full']=(weights,0.0)
     results['mirror_code']=(mcode,results['mirror_code'][1])
     results['native_lowrank_code']=(mcode.copy(),results['native_lowrank_code'][1])
     results['search_evals']=evals
@@ -90,7 +85,7 @@ def run_condition(seed,n,shots,rho):
         elif method=='native_full_coeff_ls':adapt=n*shots*D*J
         else:adapt=0
         val=fits[method][1]
-        rows.append({'seed':seed,'task_count':n,'support_examples':shots,'residual_rms':rho,'method':method,'serialized_bytes':size,'heldout_nrmse':val,'task_queries':n*QUERIES,'optimizer_updates':0,'function_evaluations':int(np.sum(evals)) if method=='lorahub_search' else int(n if method in ('mirror_code','native_lowrank_code','native_full_coeff_ls') else 0),'adaptation_compute_proxy':adapt,'query_compute_proxy':int(query_proxy),'meta_tasks':META,'wall_time_s':wall,'search_evaluations_mean':float(np.mean(evals))})
+        rows.append({'seed':seed,'task_count':n,'support_examples':shots,'residual_rms':rho,'method':method,'serialized_bytes':size,'heldout_nrmse':val,'task_queries':n*QUERIES,'optimizer_updates':0,'function_evaluations':int(np.sum(evals)) if method=='lorahub_search' else 0,'adaptation_steps':int(n if method in ('mirror_code','native_lowrank_code','native_full_coeff_ls') else 0),'adaptation_compute_proxy':adapt,'query_compute_proxy':int(query_proxy),'meta_tasks':META,'wall_time_s':wall,'lorahub_evaluations_per_task':float(np.mean(evals))})
     for a,b in (('mirror_code','native_lowrank_code'),):
         pa,pb=payloads[a],payloads[b]
         # Payload field names differ for clarity; all common physical state and code arrays are equal.
@@ -102,8 +97,8 @@ def run(seeds):
     rows=[r for seed in seeds for n in TASKS for shots in SHOTS for rho in RHOS for r in run_condition(seed,n,shots,rho)]
     (ROOT/'source'/'development.json').write_text(json.dumps(rows,indent=2)+'\n')
     with (ROOT/'RESULTS_CORE.csv').open('w',newline='') as f:
-        w=csv.writer(f);w.writerow(['condition','world_or_seed','method','serialized_bytes','train_tokens_or_examples','optimizer_updates','active_compute_proxy','wall_time_s','primary_metric','primary_value','secondary_metric','secondary_value','status_note'])
-        for r in rows:w.writerow([f"n{r['task_count']}_shots{r['support_examples']}_rho{r['residual_rms']:g}",r['seed'],r['method'],r['serialized_bytes'],r['task_queries']+r['support_examples']*r['task_count'],0,r['adaptation_compute_proxy']+r['query_compute_proxy'],r['wall_time_s'],'heldout_nrmse',r['heldout_nrmse'],'function_evaluations',r['function_evaluations'],'development; fresh sealed'])
+        w=csv.writer(f);w.writerow(['condition','world_or_seed','method','serialized_bytes','train_tokens_or_examples','optimizer_updates','active_compute_proxy','wall_time_s','primary_metric','primary_value','secondary_metric','secondary_value','adaptation_steps','lorahub_evaluations_per_task','status_note'])
+        for r in rows:w.writerow([f"n{r['task_count']}_shots{r['support_examples']}_rho{r['residual_rms']:g}",r['seed'],r['method'],r['serialized_bytes'],r['task_queries']+r['support_examples']*r['task_count'],0,r['adaptation_compute_proxy']+r['query_compute_proxy'],r['wall_time_s'],'heldout_nrmse',r['heldout_nrmse'],'function_evaluations',r['function_evaluations'],r['adaptation_steps'],r['lorahub_evaluations_per_task'],'development; fresh sealed'])
     return rows
 
 if __name__=='__main__':
