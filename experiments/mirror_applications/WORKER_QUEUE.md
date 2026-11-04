@@ -534,6 +534,6 @@ MA-636 is a verified FAIL on `research/ma-636-serac-mirror-value-code-20261103`:
 MA-637 is a verified FAIL on `research/ma-637-grace-mirror-codebook-20261103`: retention/scope held across 16–128 synthetic edits; full payload savings grew from ~7% to ~38%, but native PCA exactly aliased Mirror and decoding added operations. MA-636/637 trigger a pause of shared value-code MA-638 pending redesign; see `docs/phase2/SERAC_GRACE_VALUE_CODE_DIAGNOSTIC_2026-11-03.md`. Next independent P0: MA-639 LOKI null-space edit coordinates (PA140).
 
 
-## Current handoff — 2026-11-04, MA-640
+## Current handoff — 2026-11-04, MA-641
 
-MA-639 is a verified FAIL on `research/ma-639-loki-nullspace-mirror-codes-20261103`: LOKI projection reduced protected leakage from .40 to 0. Aligned rank-2 compression saved ~14.5% of full bytes, missed the 75% gate, and exactly aliased native PCA; private rank16 remained underidentified from 12 training edits. Fresh stayed sealed. Next P0: MA-640 RRDA edit-vs-suppress dual adapters (PA141).
+MA-639 is a verified FAIL on `research/ma-639-loki-nullspace-mirror-codes-20261103`: LOKI projection reduced protected leakage from .40 to 0. Aligned rank-2 compression saved ~14.5% of full bytes, missed the 75% gate, and exactly aliased native PCA; private rank16 remained underidentified from 12 training edits. Fresh stayed sealed. MA-640 is a verified scoped FAIL: aligned rank-1 Mirror did not reduce actual bytes versus independent adapters and matched native gating; rank-2 exactly matched native low-rank. Fresh stayed sealed. Next P0: MA-641 episodic adapter bank Mirror compression (PA152); independent sparse adapters are mandatory.
