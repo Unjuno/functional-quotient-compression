@@ -1,0 +1,22 @@
+{
+  "experiment_id": "MA-665",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-665-hyena-mirror-filter-code/tests -v",
+    "passed": 2,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0,
+    "rows": 144
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "All 144 development rows and payload sizes replay; native PCA arrays equal Mirror arrays. Fresh remains sealed following exact control alias and DCT dominance."
+  ]
+}
