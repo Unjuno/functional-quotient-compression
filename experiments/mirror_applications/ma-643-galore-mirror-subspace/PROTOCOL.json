@@ -1,0 +1,41 @@
+{
+  "experiment_id": "MA-643",
+  "title": "GaLore optimizer state with reusable Mirror subspace codes",
+  "status": "SCREENING",
+  "evidence_lane": "OPTIMIZER_STATE",
+  "base_commit": "19161f6c",
+  "prior_art_refs": ["PA142"],
+  "related_prior_results": ["MA-199"],
+  "hypothesis": "When independent tasks repeatedly use a small number of left-gradient subspaces, a shared projector dictionary and per-task Mirror codes reduce serialized GaLore resume state while retaining the convergence and retention of task-specific GaLore projectors.",
+  "physical_object": "Per-task trainable 32x32 matrices and low-rank Adam moments",
+  "mirror_coordinate": "Per-task discrete code selecting one projector from a shared gradient-subspace dictionary",
+  "logical_multiplicity": "16 task-specific optimizer geometries over 1/2/4/8 recurring gradient modes",
+  "task": {
+    "matrix_shape": [32, 32],
+    "tasks": 16,
+    "projector_rank": 4,
+    "distinct_gradient_modes": [1, 2, 4, 8],
+    "examples_per_task": 64,
+    "updates_per_task": 100,
+    "metric": "Mean/worst held-out task MSE after sequential training, actual inference bytes, actual resumable optimizer checkpoint bytes",
+    "projector_discovery": "Each task's initial full gradient; Mirror/native dictionary built from one calibration gradient per recurring mode; all costs reported"
+  },
+  "development_seeds": [64301, 64302],
+  "fresh_seeds": [64311, 64312, 64313],
+  "fresh_locked_before_access": true,
+  "controls": [
+    "Independent full Adam matrix per task",
+    "Standard GaLore with independently stored rank-4 projector and low-rank Adam moments per task",
+    "Mirror codebook GaLore with a shared projector dictionary and per-task codes",
+    "Native shared projector dictionary with ordinary discrete projector IDs, using the identical decoder"
+  ],
+  "storage": {
+    "authority": "actual serialized inference payload bytes and resumable optimizer checkpoint bytes",
+    "paid_objects": ["all task matrices", "all optimizer moments and steps", "projectors or shared projector dictionary", "task IDs", "Mirror/native codes", "format metadata"],
+    "datasets_excluded": "Training inputs/targets are deterministic task data and are not resumable optimizer state; their generation seed and provenance are recorded."
+  },
+  "compute": ["examples", "optimizer updates", "dense-gradient MAC proxy", "projection/decode MAC proxy", "projector discovery SVD count and wall time"],
+  "success_gate": "On both development seeds for K=1/2/4/8, Mirror held-out MSE <= 1.10x standard GaLore, previous-task retention degradation <=0.01, complete resumable payload <=95% of standard GaLore at K<=4 and serialized projector dictionary plus codes <=50% of independently stored projector bytes at K<=4, and strict Mirror-specific improvement over native dictionary IDs in at least one preregistered metric.",
+  "failure_gate": "Mirror misses quality/resume-byte gate or exactly aliases native projector-ID control without strict Mirror-specific gain. Keep fresh seeds sealed on failure.",
+  "boundaries": ["Synthetic linear optimization only", "No language-model training or natural gradient-statistics claim", "Task matrices are independent; this tests saved optimizer geometry, not multi-task inference capacity", "Report inference and resume bytes separately", "No tuning after fresh access"]
+}
