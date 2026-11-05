@@ -1,0 +1,27 @@
+{
+  "run_id": "LOOP-LORA-20261105",
+  "stage": "PILOT_ONLY_NOT_CONFIRMATION",
+  "formal_MA_id": null,
+  "scope": "New recurrent cross-attention decoder on static 8-node graph memory, not a language model or reproduction of RRT. Learn base at two loops, adapt only FFN with rank-4 per-loop LoRA at four and eight loops, then test functional replacement.",
+  "seed": 60601,
+  "base_loops": 2,
+  "extended_loops": [4, 8],
+  "task": "two-hop graph successor; graph mappings disjoint between train, development and adaptation inputs",
+  "nodes": 8,
+  "d_model": 32,
+  "ffn_hidden": 64,
+  "base_steps": 1200,
+  "base_lr": 0.003,
+  "lora_steps": 600,
+  "lora_lr": 0.006,
+  "batch": 64,
+  "optimizer": "AdamW weight_decay=0.0001, clip_norm=1, FP32 CPU one numerical thread",
+  "preflight_gate": "base DEV accuracy>=0.65, and at least one extended depth yields >=0.05 nat CE improvement from trained LoRA over identical shared weights with adapters removed at DEV accuracy>=0.65",
+  "prohibitions": "No confirmation test generated or inspected in pilot. Do not claim compressed functionality when the removed LoRA contributes no meaningful function. Preserve all pilot failures. Do not modify historical MA verdicts or merge main.",
+  "frozen_files_sha256": {
+    "source/model.py": "6506b8f564832aad756a27e01374207f9575732f2001be211a1fc4bfc3d1e90d",
+    "source/engine.py": "5ba6016b59c341745fb30e542479be0fc2eb571862cd893563f5768ffaa982d7",
+    "source/pilot.py": "383fd693886138b36be3b2934a0c7993e6d2b674f7aebe14b368422591bec740",
+    "tests/test_model.py": "187f1425caea225f9c89d9a72d302fb31da4f30614475175f4b89591527b1b98"
+  }
+}
