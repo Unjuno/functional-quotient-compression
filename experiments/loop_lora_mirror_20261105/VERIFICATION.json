@@ -1,0 +1,33 @@
+{
+  "run_id": "LOOP-LORA-20261105",
+  "tests_main": 25,
+  "tests_equal_budget_extension": 3,
+  "main_trained_models": 165,
+  "main_untrained_raw_controls": 20,
+  "posthoc_equal_budget_trained_models": 5,
+  "separate_pilot_trained_models": 5,
+  "checkpoint_hash_ok": 185,
+  "fresh_ood_metric_replays": 185,
+  "full_packet_replays": 185,
+  "adapter_packet_replays": 185,
+  "max_metric_difference": 0.0,
+  "frozen_source_files": 6,
+  "actual_LoRA_gauge_checks": 240,
+  "full_training_replays": [
+    {"model":"teacher_rank4","steps":600,"bitwise_selected_state":true,"seed":71011},
+    {"model":"Mirror2_student","steps":600,"bitwise_selected_state":true,"seed":71011}
+  ],
+  "extension_checkpoint_replays": 5,
+  "extension_packet_replays": 5,
+  "independent_environment": false,
+  "main_teacher_eligibility": "5/5",
+  "main_mirror_replacement_gate": "0/5 FAIL",
+  "main_mirror_specific_gate": "0/5 FAIL",
+  "extension_status": "POSTHOC_EXPLORATORY_SAME_TEACHERS_NEW_GRAPH_INPUTS",
+  "extension_mirror_vs_film_hybrid_ce_ratio_geomean": 0.9902697841409059,
+  "extension_mirror_vs_film_wins": "2/5",
+  "analysis_sha256": "1c9134245236ae1a5a84e4895f63c2c1b2f336ea1dcebd021fffa0667458651f",
+  "full_results_sha256": "45d96c388d5bd8f80658f77b91b777c365ddcf113fd75460600e8df0bc8ffa06",
+  "protocol_sha256": "7a6aaa8112c9fd437115cf8883f43aa59fe4ae1b1d4fe4c11de3c7cbc9c4aac9",
+  "review": "Self-review and executable checks; no independent reviewer agent available. Full sources and binary models are in the conversation artifact, not claimed uploaded to GitHub."
+}
