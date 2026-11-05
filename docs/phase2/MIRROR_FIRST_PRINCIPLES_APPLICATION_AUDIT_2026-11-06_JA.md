@@ -156,7 +156,7 @@ p_mV_m
 ## 6. ERROR CHECK と次の作業者向け注意
 
 - この統合は新しい訓練ではなく**一次実験記録の比較**。160系と185系は異なる条件であり、同じ研究の反復確認と呼ばない。
-- 新しいFP64検算は同梱の verify_invariants.py / verification.log を参照。KV algebra 256、d=32のHouseholder rank≤rをr=1–4で256、rank1への包含128を検査。すべてPASS。自然LM/GPU性能の証拠ではない。
+- 新しいFP64検算は [verify_invariants.py](mirror_2026_11_06/verify_invariants.py) と [verification.log](mirror_2026_11_06/verification.log) を参照。KV algebra 256、d=32のHouseholder rank≤rをr=1–4で256、rank1への包含128を検査。すべてPASS。自然LM/GPU性能の証拠ではない。
 - MA-1184の中央 status はなおUNTESTED（L2未実施）。L0/L1開発記録は別の証拠レーンとしてリンクし、statusを研究者の判断なしに変えない。
 - 旧MA-1181/1182の構造的 FAIL と不可能なFresh判定閾値を保持。結果を見た後に閾値を書き換えない。
 - 新しいMA番号を追加・予約していない。新規確認実験を立てる時点でlive registryから採番する。
