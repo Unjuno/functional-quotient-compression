@@ -1,0 +1,30 @@
+{
+  "run_id": "LOOP-LORA-20261105",
+  "status": "FROZEN_BEFORE_MAIN_TRAINING",
+  "formal_MA_id": null,
+  "local_commit": "5d1490aec13c569d80f4a2c45c51e559dd542eba",
+  "pilot": {"seed":60601,"base_two_hop_dev_acc":0.9986979365,"four_hop_R4_raw_acc":0.7408854365,"four_hop_R4_lora_acc":0.9973958135,"four_hop_R8_raw_acc":0.62109375,"four_hop_R8_lora_acc":0.9934895635,"status":"DEV_ONLY_VIABLE"},
+  "main_seeds": [71011,71023,71039,71059,71071],
+  "architecture": "8-node graph memory; learned shared single-query cross-attention and ReLU FFN, d32/h64, no MoE or positional encoding; NOT a language-model experiment",
+  "base": "1200 AdamW updates at 2 loops, true two-hop graph labels, lr0.003, batch64, 4096 train graphs",
+  "teacher": "Same frozen base extended to 4 or8 loops; per-loop FFN up/down rank4 LoRA, 600 updates lr0.006, batch64. Evaluate both two-hop retention and four-hop advancement.",
+  "students": ["mirror2","film","coupled2","lora1","lora2","mirror2_lora1","lora4"],
+  "student_training": "600 updates lr0.006, batch64, temperature2 KL to actual trained teacher outputs, same frozen shared base; no teacher adapter weights copied. DEV KL selection every100 steps including step0.",
+  "data": "3072 adapter-fit graphs,768 DEV; graph mappings disjoint across splits; after ALL model hashes sealed, generate1536 Fresh and1024 permutation-graph OOD. Five seeds are not five independent task families.",
+  "primary_cell": {"graph_hops":4,"network_loops":8},
+  "teacher_relevance_gate": "At least4/5 primary pairs: DEV accuracy>=0.80 and DEV CE improvement over zero adapters>=0.05nat; otherwise UNCERTAIN. Never drop ineligible seeds.",
+  "mirror_replacement_gate": "At least4/5 eligible primary pairs: retain>=80% of teacher task-CE benefit over raw, Fresh accuracy loss<=2 percentage points, full inference bytes<=75% of teacher. Benefit=(CEraw-CEstudent)/(CEraw-CEteacher), defined only if denominator>=0.05; no clipping.",
+  "mirror_specific_gate": "At least4/5 primary seed pairs Mirror2 teacher-output KL>=10% lower than BOTH same-code FiLM and enclosing coupled2. A secondary hybrid result does not replace this gate.",
+  "secondary": "Other depth/horizon cells; hybrid versus rank1/rank2; local FFN teacher-state errors; gauge-invariant BA singular values; loop code ordering; independently reported OOD. No universal superiority claims.",
+  "accounting": "185 final model artifacts=165 trained+20 raw ablations. Actual full and adapter-only inference packets measured separately; all shared base weights paid. Identical updates are NOT equal FLOPs. Isolated CPU timing after workers complete.",
+  "environment": "Intel Xeon Platinum8573C observed2300MHz, unlocked; Python3.13.5,PyTorch2.10.0+cpu,FP32;4 workers x1 numerical thread",
+  "source_sha256": {
+    "PROTOCOL.json":"7a6aaa8112c9fd437115cf8883f43aa59fe4ae1b1d4fe4c11de3c7cbc9c4aac9",
+    "source/model.py":"6506b8f564832aad756a27e01374207f9575732f2001be211a1fc4bfc3d1e90d",
+    "source/engine.py":"2dfab9f6c5c1cff52621625a1ef4706787640ae78f4e3620d244e856ae87eed4",
+    "source/main.py":"4930cf6b75a23a7deb05514ac77d042feeb66b15dc7b92e903ac3fcf0e3d4253",
+    "tests/test_model.py":"187f1425caea225f9c89d9a72d302fb31da4f30614475175f4b89591527b1b98",
+    "tests/test_engine.py":"cba96efe872f5cfc20381e5080f8c2eab55600ef02b232b3f77c5ddf38cde1cc"
+  },
+  "limitations": "One tiny graph task family,5 seeds,post-training adapter distillation not joint coadaptation,CPU eager only. No original RRT paper replication, no natural-language performance claim. Historical MA results and main unchanged."
+}
