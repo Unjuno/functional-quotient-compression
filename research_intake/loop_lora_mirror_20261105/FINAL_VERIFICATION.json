@@ -1,0 +1,56 @@
+{
+  "source_hashes_verified": 10,
+  "checkpoint_hashes_verified": 160,
+  "full_rollout_replays": 160,
+  "max_ce_or_accuracy_diff": 0.0,
+  "frozen_base_tensor_comparisons": 680,
+  "initial_base_tensor_comparisons": 2040,
+  "graph_id_split_counts": {
+    "21001": {
+      "train": 3000,
+      "dev": 700,
+      "fresh": 1000,
+      "ood": 1000
+    },
+    "21011": {
+      "train": 3000,
+      "dev": 700,
+      "fresh": 1000,
+      "ood": 1000
+    },
+    "21019": {
+      "train": 3000,
+      "dev": 700,
+      "fresh": 1000,
+      "ood": 1000
+    },
+    "21023": {
+      "train": 3000,
+      "dev": 700,
+      "fresh": 1000,
+      "ood": 1000
+    },
+    "21031": {
+      "train": 3000,
+      "dev": 700,
+      "fresh": 1000,
+      "ood": 1000
+    }
+  },
+  "retraining_checks": [
+    {
+      "name": "mirror_R4_s21001_lr0.003",
+      "tensor_bitwise_equal": true,
+      "selected_step_equal": true,
+      "dev_ce_diff": 0.0
+    },
+    {
+      "name": "lora2_R4_s21001_lr0.003",
+      "tensor_bitwise_equal": true,
+      "selected_step_equal": true,
+      "dev_ce_diff": 0.0
+    }
+  ],
+  "independent_machine": false,
+  "scope": "Same-container independent replay script. No claim of independent scientific replication."
+}
