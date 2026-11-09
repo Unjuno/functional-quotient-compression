@@ -1,0 +1,14 @@
+{
+ "experiment_id":"MA-738","title":"MoE neural-operator bank compressed by Mirror views","status":"SCREENING","evidence_lane":"MECHANISM/STORAGE/QUALITY/COMPUTE","base_commit":"0bb40ce0",
+ "hypothesis":"A shared spectral operator basis with per-regime View codes reduces a routed operator expert bank's complete bytes while preserving routed solution quality; top-2 views are useful only if their error gain justifies doubled active operator compute.",
+ "physical_object":"shared Fourier-domain spectral operator basis","mirror_coordinate":"regime coefficient code and top-k expert route","logical_multiplicity":"eight regime-specialized spectral operators",
+ "prior_art_refs":["PA186","PA02"],"controls":["independent full operator experts","one universal shared operator","native shared-basis/PCA expert bank","Mirror View bank","top-1 versus top-2 route"],
+ "development":{"worlds_or_seeds":["dev-73801"],"selection_metric":"held-out total/high-band solution nRMSE, full serialized bank bytes, active operator multiplications"},
+ "fresh":{"worlds_or_seeds":[],"locked_before_access":true,"reason":"no audit after exact native shared-basis alias"},
+ "grid":{"modes":32,"regimes":8,"basis_fit_regimes":6,"heldout_regimes":2,"basis_rank":4,"fields_per_regime":256,"seed":73801,"route_k":[1,2]},
+ "storage":{"authority":"actual serialized complete inference payload bytes","paid_objects":["expert or shared spectral weights","View coefficients","router tables/indices","domain metadata"]},
+ "compute":{"report_active_spectral_multiplications":true,"report_wall_clock":true,"training":"none; oracle mechanism screen"},
+ "success_gate":"Total and high-band solution nRMSE <=.02; >=25% bytes saved versus independent full experts; strict quality/byte improvement over native shared-basis control. Top-2 must report its doubled active work.",
+ "failure_gate":"Quality/storage miss, exact native function/payload alias, or top-2 quality gain with compute cost that loses the Pareto comparison is FAIL for Mirror-specific value.",
+ "boundaries":["Synthetic Fourier-diagonal operators only.","Regime router is an oracle metadata lookup, not a learned router.","No trained FNO, PDE validation, fresh audit or accelerator serving claim."]
+}
