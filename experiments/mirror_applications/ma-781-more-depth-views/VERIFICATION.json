@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-781",
+  "commit": "4f5b5efb",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-781-more-depth-views/tests",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": "native bilinear and Mirror metrics/payload hash exactly match"
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "All serialized parameterizations include bases, expert matrices, depth/expert codes and role IDs.",
+    "No SGD was used; the fitted synthetic operator code uses 44 least-squares solver evaluations.",
+    "Fresh seeds remained sealed after exact native factorization alias."
+  ]
+}
