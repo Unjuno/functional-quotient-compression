@@ -1,0 +1,22 @@
+{
+  "experiment_id":"MA-764",
+  "title":"Attention-generated dynamic local-rule Views",
+  "status":"SCREENING",
+  "evidence_lane":"MECHANISM/STORAGE/QUALITY/COMPUTE",
+  "base_commit":"f667de88",
+  "hypothesis":"An attention-derived code that interpolates local update kernels inside the nonlinear rule preserves heldout-context rollouts with lower complete bytes than independent context rules and a better quality/compute tradeoff than attention over nonlinear branch features.",
+  "physical_object":"two shared local 3x3 recurrent rule kernels",
+  "mirror_coordinate":"attention score from context selects a per-context rule interpolation coordinate",
+  "logical_multiplicity":"32 context-specific recurrent cellular dynamics",
+  "prior_art_refs":["PA197"],
+  "controls":["independent context-specific effective kernels","hard-tied kernel","attention mixture over nonlinear rule features","native attention-generated kernel hypernetwork"],
+  "development":{"worlds_or_seeds":["dev-76401"],"selection_metric":"heldout one-step and 10-step rollout nRMSE, state norm ratio, actual bytes and MACs"},
+  "fresh":{"worlds_or_seeds":[],"locked_before_access":true,"reason":"single synthetic mechanism screen; no audit opened after native kernel interpolation comparison"},
+  "grid":{"contexts":32,"training_contexts":20,"heldout_contexts":12,"kernel_shape":[1,1,3,3],"maps_per_context":8,"spatial_size":16,"rollout_steps":10,"seed":76401,"attention":"sigmoid(3*context)"},
+  "storage":{"authority":"actual serialized inference payload bytes","paid_objects":["two rule kernels","router slope/bias","context inputs and indices","independent effective kernels"]},
+  "compute":{"report_tokens_or_examples":true,"report_optimizer_updates":true,"report_active_compute_proxy":true,"report_isolated_wall_clock":true,"router_fit_examples":20,"optimizer_updates":0},
+  "success_gate":"Heldout update and rollout nRMSE <=0.02; max state norm ratio <=1.1; >=25% complete byte savings vs independent; strict frontier improvement over native hypernetwork and feature-attention controls.",
+  "failure_gate":"Any quality/storage/compute gate miss or exact native kernel-hypernetwork function/payload alias is FAIL for Mirror-specific value.",
+  "amendments":["A01 before final scoring: corrected one-step evaluation to compare candidates against teacher outputs on the same heldout input maps. The initial mismatched-input metrics are preserved in RESULTS_INITIAL_INPUT_MISMATCH.csv and excluded; seed and gates unchanged."],
+  "boundaries":["Synthetic scalar-field recurrent rules only; context and kernels are designed analytically.","No trained attention-NCA, emergent morphology, biological task or accelerator performance claim.","The dynamic basis convolution applies both basis rules each step; precomposed kernels have different compute accounting."]
+}
