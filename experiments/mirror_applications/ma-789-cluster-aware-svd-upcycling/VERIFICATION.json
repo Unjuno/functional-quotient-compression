@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-789",
+  "commit": "914da455",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-789-cluster-aware-svd-upcycling/tests",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": "Mirror/native global PCA payload hash and heldout metrics exactly match at both noise levels"
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "All router centroids, cluster IDs, expert IDs, basis tensors and codes are included in actual payload bytes.",
+    "Heldout members are excluded from basis fitting; their checkpoint weights are available for compressor coding.",
+    "No trained cluster-aware MoE result is claimed."
+  ]
+}
