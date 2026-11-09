@@ -1,0 +1,15 @@
+{
+ "experiment_id":"MA-721","title":"SWAG covariance subspace to Mirror posterior coordinates","status":"SCREENING","evidence_lane":"MECHANISM/QUALITY/STORAGE","base_commit":"a88dbb1c",
+ "hypothesis":"A structured Mirror coordinate over shared posterior mean and low-rank covariance preserves predictive NLL and calibration with fewer bytes than full covariance and improves over native SWAG/rank-1 BNN controls.",
+ "physical_object":"one posterior mean and shared covariance representation","mirror_coordinate":"sampled latent m mapped through low-rank covariance basis and diagonal correction","logical_multiplicity":"posterior predictive function samples from one parameter state",
+ "prior_art_refs":["PA181","PA41"],
+ "controls":["dense Gaussian posterior predictive","SWAG low-rank plus diagonal ranks 1/2/4/8/16","Mirror same posterior coordinate factors","rank-1 Bayesian factorized variance"],
+ "development":{"worlds_or_seeds":["dev-72101"],"selection_metric":"predictive NLL, 90% interval coverage, actual serialized posterior bytes"},
+ "fresh":{"worlds_or_seeds":[],"locked_before_access":true,"reason":"no audit if exact native SWAG alias appears"},
+ "grid":{"parameters":64,"train_examples":128,"test_examples":512,"trajectory_snapshots":64,"true_covariance_rank":8,"posterior_predictive_samples":256,"rank_sweep":[1,2,4,8,16],"noise_std":0.2},
+ "storage":{"authority":"actual serialized inference payload bytes","paid_objects":["posterior mean","covariance basis and spectrum","diagonal correction","sampling state","metadata"]},
+ "compute":{"report_posterior_sample_work":true,"report_predictive_forward_proxy":true,"report_wall_clock":true},
+ "success_gate":"NLL within .02 nat/example and 90% coverage within .03 of dense reference; >=25% fewer bytes than dense; better frontier than matched SWAG and rank-1 BNN.",
+ "failure_gate":"Any quality/storage gate miss or exact SWAG/Mirror function and payload alias is FAIL for Mirror-specific value.",
+ "boundaries":["Synthetic Bayesian linear regression only.","No neural network, natural benchmark, optimizer training, fresh/audit or deployment claim.","This tests posterior representation, not independent model capacity."]
+}
