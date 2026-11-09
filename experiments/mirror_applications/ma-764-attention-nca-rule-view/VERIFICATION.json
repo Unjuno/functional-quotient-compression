@@ -1,0 +1,15 @@
+{
+  "experiment_id":"MA-764",
+  "commit":"4d0644c2",
+  "tests":{"command":"python -m pytest -q experiments/mirror_applications/ma-764-attention-nca-rule-view/tests","passed":3,"failed":0},
+  "serialization":{"roundtrip_checked":true,"byte_exact":true},
+  "metric_replay":{"checked":true,"max_difference":0.0},
+  "fresh_split_integrity_checked":true,
+  "notes":[
+    "Native attention kernel hypernetwork and Mirror payload hashes, bytes, errors, state norms and MACs exactly match.",
+    "Feature attention uses identical payload bytes and MACs and stays under the preregistered .02 rollout error gate.",
+    "Deterministic replay reproduces all non-timing outputs; wall time is observational.",
+    "Initial one-step mismatched-input metrics are preserved separately and excluded.",
+    "Synthetic scalar-field local rules only; no attention-NCA emergence or trained model claim."
+  ]
+}
