@@ -1,0 +1,24 @@
+{
+  "experiment_id": "MA-733",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-733-fourier-mode-view-bank/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "All 54 matched native shared-band/Mirror rows have identical complete payload hash, bytes, total error, and high-band error.",
+    "A deterministic rerun reproduced all 168 non-timing metric fields exactly; wall-clock measurements are observational CPU multiplication timings.",
+    "Fresh/audit was not opened because the native shared-band exact alias falsified incremental Mirror specificity.",
+    "Synthetic designed spectral family only; no trained operator or physical PDE claim."
+  ]
+}
