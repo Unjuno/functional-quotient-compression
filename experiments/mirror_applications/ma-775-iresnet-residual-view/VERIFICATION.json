@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-775",
+  "commit": "c9629065",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-775-iresnet-residual-view/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": "timing fields excluded; deterministic metric and payload hash exact across rerun"
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Mirror payload SHA256 and all scored function/inverse/compute fields exactly match native rank-2 basis.",
+    "Initial unpaired-input screen retained separately; final scores use shared heldout inputs.",
+    "Fresh/audit split remains unopened after exact native alias."
+  ]
+}

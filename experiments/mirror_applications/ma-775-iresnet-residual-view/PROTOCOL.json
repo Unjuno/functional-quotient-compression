@@ -1,0 +1,68 @@
+{
+  "experiment_id": "MA-775",
+  "title": "Contractive i-ResNet residual task views",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY/COMPUTE/INVERTIBILITY",
+  "base_commit": "6fb05964",
+  "hypothesis": "A low-rank shared residual basis supports distinct contractive block functions with exact forward quality and convergent fixed-point inverse while reducing complete bytes versus independent residual matrices.",
+  "physical_object": "shared 4D residual block basis",
+  "mirror_coordinate": "per-task residual-basis coefficient vector",
+  "logical_multiplicity": "24 invertible residual blocks",
+  "prior_art_refs": [
+    "PA200",
+    "PA48"
+  ],
+  "controls": [
+    "independent residual matrices",
+    "hard-tied mean residual",
+    "scalar FiLM residual",
+    "native rank-2 residual basis"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      "dev-77501"
+    ],
+    "selection_metric": "heldout output nRMSE, inverse convergence/error, Lipschitz/singular-value margins, actual bytes and MACs"
+  },
+  "fresh": {
+    "worlds_or_seeds": [],
+    "locked_before_access": true,
+    "reason": "synthetic rank-2 residual screen; exact native factorization attribution assessed first"
+  },
+  "grid": {
+    "dimension": 4,
+    "tasks": 24,
+    "train_blocks": 16,
+    "heldout_blocks": 8,
+    "basis_rank": 2,
+    "calibration_examples_per_task": 32,
+    "test_examples_per_task": 256,
+    "seed": 77501,
+    "inverse_tolerance": 1e-06
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "residual basis or full matrices",
+      "all task codes/gains",
+      "task IDs"
+    ]
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true,
+    "inverse_solver": "fixed-point iteration, max 500 iterations"
+  },
+  "success_gate": "Heldout output nRMSE <=0.02; inverse converged on all samples with error <=1e-5; teacher Lipschitz <1; >=25% fewer complete bytes; strict quality/byte/compute gain over native basis and scalar FiLM.",
+  "failure_gate": "Invertibility/stability, quality, storage or compute gate miss, or exact native basis payload/function alias is FAIL for Mirror-specific value.",
+  "amendments": [
+    "A01 before final scoring: all methods use the same fixed heldout input matrices after initial evaluation accidentally drew a different test set per method. Initial unpaired values are preserved in RESULTS_INITIAL_UNPAIRED_INPUTS.csv; no seed or gate changed."
+  ],
+  "boundaries": [
+    "Synthetic linear contractive residual blocks only; matrices are generated from a shared rank-2 basis.",
+    "No trained i-ResNet, image model, reversible-memory training or accelerator inverse-runtime claim.",
+    "SVD basis and heldout codes are oracle-estimated from operator calibration outputs; this is not end-to-end training."
+  ]
+}
