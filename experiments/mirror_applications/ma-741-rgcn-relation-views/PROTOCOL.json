@@ -1,0 +1,14 @@
+{
+ "experiment_id":"MA-741","title":"R-GCN relation weights as Mirror views","status":"SCREENING","evidence_lane":"MECHANISM/STORAGE/QUALITY",
+ "base_commit":"bf06021e","hypothesis":"A rank-2 relation coordinate over a shared R-GCN basis preserves relation-specific link ranking with less complete payload than free per-relation basis coefficients, including held-out relation IDs, while beating a native rank-2 factorized coefficient control.",
+ "physical_object":"four shared relation transform matrices","mirror_coordinate":"per-relation two-dimensional code and shared code-to-basis map","logical_multiplicity":"32 relation-specific graph message transforms",
+ "prior_art_refs":["PA188"],"controls":["independent full relation matrices","ordinary R-GCN basis decomposition with four free coefficients/relation","rank-2 factorized relation coefficients","universal tied transform"],
+ "development":{"worlds_or_seeds":["dev-74101"],"selection_metric":"heldout relation Hits@1/MRR and operator error, actual full relation-bank bytes"},
+ "fresh":{"worlds_or_seeds":[],"locked_before_access":true,"reason":"no audit after exact native rank-2 coefficient-factorization alias"},
+ "grid":{"entities":64,"relations":32,"train_relations":24,"heldout_relations":8,"embedding_dim":16,"rgcn_basis_count":4,"relation_code_dim":2,"triples_per_relation":64,"seed":74101},
+ "storage":{"authority":"actual serialized full inference payload bytes","paid_objects":["relation bases or matrices","all relation codes/coefficients","code generator","entity embeddings","relation metadata"]},
+ "compute":{"report_message_multiply_proxy":true,"report_wall_clock":true,"training":"analytic relation-code regression only"},
+ "success_gate":"Heldout Hits@1 within 2 percentage points of independent matrices, >=25% full-bank byte savings vs both independent and free R-GCN coefficients, and strict frontier improvement over native rank-2 factorization.",
+ "failure_gate":"Quality miss, <25% byte savings, or exact native coefficient-factorization alias is FAIL for Mirror-specific value.",
+ "boundaries":["Synthetic relation operators and entity vectors only.","Held-out relation codes are available side information and are charged.","No trained R-GCN benchmark or real knowledge graph claim."]
+}
