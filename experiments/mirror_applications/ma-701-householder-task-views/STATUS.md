@@ -3,12 +3,12 @@
 - Status: FAIL
 - Branch: `research/ma-701-householder-task-views-20261109`
 - Base commit: `a6c00329`
-- Last verified commit: pending
+- Last verified commit: 124d57cb
 - Development complete: yes
 - Fresh/audit opened: yes
 - Results committed: yes
 - Verification committed: yes
-- Registry row updated: no
+- Registry row updated: yes (integration pending)
 
 ## Next action
 
