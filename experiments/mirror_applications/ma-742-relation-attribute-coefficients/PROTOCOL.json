@@ -1,0 +1,14 @@
+{
+ "experiment_id":"MA-742","title":"R-GCN basis coefficients factorized by relation attributes","status":"SCREENING","evidence_lane":"MECHANISM/STORAGE/QUALITY",
+ "base_commit":"a75fa0ec","hypothesis":"A shared R-GCN basis plus a learned mapping from relation attributes to basis coefficients composes unseen attribute combinations with fewer bytes and better operator quality than free per-relation R-GCN coefficients, and beats a native attribute-conditioned coefficient generator.",
+ "physical_object":"four shared relation transform matrices","mirror_coordinate":"four-value attribute feature code and learned code-to-basis map","logical_multiplicity":"32 relations spanning eight attribute combinations, including two held-out types",
+ "prior_art_refs":["PA188"],"controls":["independent full relation matrices","free R-GCN basis coefficients per seen relation","native linear attribute-to-coefficient generator","Mirror attribute code","universal tied transform"],
+ "development":{"worlds_or_seeds":["dev-74201"],"selection_metric":"held-out operator nRMSE / relation ranking and actual complete bytes"},
+ "fresh":{"worlds_or_seeds":[],"locked_before_access":true,"reason":"no audit after exact native attribute-generator alias"},
+ "grid":{"entities":64,"relations":32,"attribute_combinations":8,"relations_per_combination":4,"fit_combinations":6,"heldout_combinations":2,"embedding_dim":16,"basis_count":4,"attribute_code_dim":4,"seed":74201},
+ "storage":{"authority":"actual serialized full inference payload bytes","paid_objects":["relation bases or matrices","relation attributes","generator coefficients","entity embeddings","relation metadata"]},
+ "compute":{"report_message_multiply_proxy":true,"report_generator_compute":true,"report_wall_clock":true},
+ "success_gate":"Held-out operator nRMSE <=.02 and Hits@1 within two points of independent; >=25% complete byte savings vs free R-GCN coefficients; strict quality/byte improvement over native attribute generator.",
+ "failure_gate":"quality/storage miss or exact native attribute-generator function/payload alias is FAIL for Mirror-specific value.",
+ "boundaries":["Synthetic linear relation algebra only.","Relation attributes are explicit and all attribute tables are charged.","No trained R-GCN or real knowledge graph claim."]
+}
