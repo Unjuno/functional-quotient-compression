@@ -1,0 +1,61 @@
+{
+  "experiment_id": "MA-781",
+  "title": "MoRE shared expert pool with depth views",
+  "status": "FAIL",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY/COMPUTE",
+  "base_commit": "534a7ea8",
+  "hypothesis": "Layer-specific Mirror coordinates recover useful behavior across a reused expert pool with lower actual bytes than independent experts and outperform ordinary MoRE depth embeddings at heldout layer-expert roles.",
+  "physical_object": "shared expert matrix basis reused across four layers and four expert IDs",
+  "mirror_coordinate": "factorized depth and expert coordinates for shared basis coefficients",
+  "logical_multiplicity": "16 layer-expert operators from one shared matrix basis",
+  "prior_art_refs": [
+    "PA204"
+  ],
+  "controls": [
+    "independent layer-expert matrices",
+    "hard expert tying across depth",
+    "MoRE additive depth plus expert embedding",
+    "native bilinear shared-basis factorization"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      "78101"
+    ],
+    "selection_metric": "heldout operator nRMSE; complete serialized bytes; matrix and code-generation MAC proxy"
+  },
+  "fresh": {
+    "worlds_or_seeds": [],
+    "locked_before_access": true,
+    "reason": "single mechanism screen; stop attribution testing after exact native factorization alias"
+  },
+  "grid": {
+    "layers": 4,
+    "experts_per_layer": 4,
+    "input_dim": 8,
+    "output_dim": 8,
+    "shared_basis_rank": 2,
+    "heldout_pairs": "diagonal role pairs (l=e)"
+  },
+  "storage": {
+    "authority": "actual compressed NPZ inference payload bytes",
+    "paid_objects": [
+      "basis tensors",
+      "depth/expert embeddings or factors",
+      "IDs",
+      "metadata"
+    ]
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true
+  },
+  "success_gate": "Heldout operator nRMSE <=0.02, >=25% fewer actual bytes than independent roles, and strict byte/quality/compute improvement over MoRE additive depth conditioning and native factorization controls.",
+  "failure_gate": "FAIL for Mirror-specific value if native factorization exactly aliases Mirror, heldout quality fails, or storage/compute gates are missed.",
+  "boundaries": [
+    "Synthetic linear expert operators only; no trained MoRE model, language modeling, router learning, or GPU runtime claim.",
+    "Oracle-generated low-rank shared-basis teacher; heldout pairs are role compositions, not independent task checkpoints.",
+    "Native bilinear shared-basis factorization is a mandatory exact-form control."
+  ]
+}
