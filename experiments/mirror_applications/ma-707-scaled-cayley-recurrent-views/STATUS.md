@@ -3,7 +3,7 @@
 - Status: FAIL
 - Branch: `research/ma-707-scaled-cayley-recurrent-views-20261109`
 - Base commit: `322e8039`
-- Last verified commit: pending
+- Last verified commit: fb688041
 - Development complete: yes
 - Fresh/audit opened: yes
 - Results committed: yes
