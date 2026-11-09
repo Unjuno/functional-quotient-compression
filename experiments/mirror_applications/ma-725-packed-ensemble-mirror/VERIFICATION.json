@@ -1,9 +1,25 @@
 {
- "experiment_id":"MA-725",
- "commit":"pending",
- "tests":{"command":"python -m unittest discover -s experiments/mirror_applications/ma-725-packed-ensemble-mirror/tests -v","passed":1,"failed":0},
- "serialization":{"roundtrip_checked":false,"byte_exact":true},
- "metric_replay":{"checked":true,"max_difference":0.0},
- "fresh_split_integrity_checked":true,
- "notes":["Original full-batch deviation results are preserved; reconstructed source reproduces audited seed 72511 payload hashes and metrics exactly.","Protocol amendment 01 froze minibatch 128 before access to fresh seeds 72521/72522/72523.","Amended fresh quality/storage/diversity gates pass 3/3.","Givens has higher CPU latency than FiLM and packed independent; no GPU/fused-kernel claim.","Teacher functions are generated from a shared backbone plus Givens views; PROMISING only for aligned synthetic storage/quality, not adopted."]
+  "experiment_id": "MA-725",
+  "commit": "a807f029",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-725-packed-ensemble-mirror/tests -v",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": false,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Original full-batch deviation results are preserved; reconstructed source reproduces audited seed 72511 payload hashes and metrics exactly.",
+    "Protocol amendment 01 froze minibatch 128 before access to fresh seeds 72521/72522/72523.",
+    "Amended fresh quality/storage/diversity gates pass 3/3.",
+    "Givens has higher CPU latency than FiLM and packed independent; no GPU/fused-kernel claim.",
+    "Teacher functions are generated from a shared backbone plus Givens views; PROMISING only for aligned synthetic storage/quality, not adopted."
+  ]
 }
