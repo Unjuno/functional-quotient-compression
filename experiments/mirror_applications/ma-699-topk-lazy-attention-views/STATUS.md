@@ -3,12 +3,12 @@
 - Status: FAIL
 - Branch: `research/ma-699-topk-lazy-attention-views-20261109`
 - Base commit: `81c702ad`
-- Last verified commit: pending
+- Last verified commit: 781a4693
 - Development complete: yes
 - Fresh/audit opened: yes
 - Results committed: yes
 - Verification committed: yes
-- Registry row updated: no
+- Registry row updated: yes (integration pending)
 
 ## Next action
 
