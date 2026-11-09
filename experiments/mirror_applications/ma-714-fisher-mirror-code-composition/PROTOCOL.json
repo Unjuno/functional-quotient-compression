@@ -1,0 +1,21 @@
+{
+  "experiment_id": "MA-714",
+  "title": "Fisher-weighted Mirror code composition",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/QUALITY/STORAGE",
+  "base_commit": "6b6d3bc3",
+  "hypothesis": "Fisher-weighted composition in a shared task-delta basis can approximate full-parameter Fisher merging across multiple merge requests with less complete stored state than independent dense deltas, and can improve on unweighted code averaging.",
+  "physical_object": "shared base model and one rank-8 task-delta basis",
+  "mirror_coordinate": "merged task-code vector solved from projected per-task diagonal Fisher metrics",
+  "logical_multiplicity": "16 distinct multi-task merge requests over 8 source task deltas",
+  "prior_art_refs": ["PA178", "PA26"],
+  "controls": ["independent dense source deltas", "full-parameter diagonal Fisher merge", "Task Arithmetic unweighted parameter mean", "unweighted shared-code average", "Fisher-weighted shared-code solve", "native projected-Fisher code solve with identical basis and coefficients"],
+  "development": {"worlds_or_seeds": ["dev-71401"], "selection_metric": "mean Fisher-weighted quadratic validation loss, function NRMSE to full Fisher merge, total serialized source-plus-output bytes"},
+  "fresh": {"worlds_or_seeds": ["audit-71411", "audit-71412", "audit-71413"], "locked_before_access": true},
+  "grid": {"parameter_width": 256, "source_tasks": 8, "basis_rank": 8, "merge_requests": 16, "tasks_per_request": 4, "private_delta_fraction": [0.0, 0.1, 0.25], "fisher_log_std": 1.0},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["shared base vector", "shared basis", "source task codes or dense deltas", "per-task Fisher diagonals or sufficient statistics", "merged output codes/deltas", "request task IDs", "metadata"]},
+  "compute": {"report_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true, "report_projected_solve_and_materialization_work": true},
+  "success_gate": "Across all audit seeds, Fisher-code merge weighted validation loss <=1.05x full Fisher merge, improves >=10% over unweighted code mean, and complete source-plus-16-output payload <=75% of dense task-delta merge payload. Native identical projected-Fisher implementation is an attribution control; exact alias is FAIL for Mirror-specific value.",
+  "failure_gate": "Quality, byte or compute gate misses, or native projected-Fisher method matches the Mirror code merge exactly. Report when the basis restriction erases Fisher weighting benefits.",
+  "boundaries": ["Synthetic quadratic task-delta merging only; no pretrained model or natural benchmark.", "Fisher diagonals are synthetic log-normal importance weights, not estimated from real task data.", "Task Arithmetic and Fisher losses are shared-model merge points, not evidence that task count equals independent capacity.", "No GPU/production runtime conclusion; solve and apply costs are analytic proxies."]
+}
