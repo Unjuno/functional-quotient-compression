@@ -6,7 +6,7 @@
 - Protocol frozen: yes, after explicit development-stage amendment
 - Development complete: yes
 - Audit provenance: initial fixed-random-bank attempt exposed IDs 71011–71013; amended method has no valid audit
-- Results committed: pending
+- Results committed: yes (`bfcd4dd1`)
 - Verification committed: pending
 
 ## Result
