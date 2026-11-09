@@ -1,0 +1,21 @@
+{
+  "experiment_id": "MA-780",
+  "title": "Invertible-view evidence frontier",
+  "status": "SCREENING",
+  "evidence_lane": "META-ANALYSIS/STORAGE/QUALITY/COMPUTE/INVERTIBILITY",
+  "base_commit": "bdf462e8",
+  "hypothesis": "Across a common frozen activation benchmark, invertible View families will produce a useful quality/invertibility/actual-byte Pareto improvement over linear steering and native invertible controls.",
+  "physical_object": "frozen representation and invertible function parameterization",
+  "mirror_coordinate": "per-behavior task code and family selector",
+  "logical_multiplicity": "many invertible activation interventions",
+  "prior_art_refs": ["PA20", "PA96", "PA199", "PA200", "PA201"],
+  "controls": ["linear activation steering", "independent RealNVP", "native conditional RealNVP", "independent residual blocks", "hard tied residual", "scalar FiLM residual", "native rank-2 residual basis"],
+  "development": {"worlds_or_seeds": ["MA-771 seed 77101", "MA-772 seed 77201", "MA-775 seed 77501"], "selection_metric": "heldout function error, inverse error, complete serialized bytes and active compute"},
+  "fresh": {"worlds_or_seeds": [], "locked_before_access": true, "reason": "Source screens use different synthetic tasks, function dimensions, splits and measurement setups; pooling them would fabricate a matched benchmark."},
+  "grid": {"source_experiments": ["MA-771", "MA-772", "MA-775"], "common_frozen_backbone": false, "common_task_bank": false},
+  "storage": {"authority": "actual serialized inference payload bytes from each source report", "paid_objects": ["all reported transforms, bases, codes, task IDs and metadata"]},
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true},
+  "success_gate": "A common frozen representation/task bank with matched code and mapper budgets; at least one invertible Mirror method must improve the actual byte/quality/compute frontier over both linear steering and its strongest native invertible alias, with fresh task identities.",
+  "failure_gate": "NOT ESTABLISHED if source evidence cannot be compared on a common task/backbone or if required OFT/INNSteer direct controls are absent. FAIL if matched protocol completes and no Pareto improvement exists.",
+  "boundaries": ["This screening aggregates selected synthetic reports as separate rows and makes no pooled score or causal cross-method ranking.", "No common frozen LM activation bank or trained INNSteer/OFT control is present in these source artifacts.", "A follow-up matched benchmark is required before any cross-family Pareto claim."]
+}
