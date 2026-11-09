@@ -1,0 +1,15 @@
+{
+ "experiment_id":"MA-722","title":"compress SWAG/PCA posterior basis with Mirror factors","status":"SCREENING","evidence_lane":"MECHANISM/QUALITY/STORAGE","base_commit":"a88dbb1c",
+ "hypothesis":"Factorizing a SWAG posterior basis into compact Mirror factors preserves NLL/calibration while reducing complete posterior bytes beyond native SVD basis compression.",
+ "physical_object":"SWAG posterior mean and rank-16 covariance basis","mirror_coordinate":"low-rank factorization code for posterior basis columns","logical_multiplicity":"posterior samples reconstructed from a compressed shared basis",
+ "prior_art_refs":["PA181","PA182"],
+ "controls":["dense posterior covariance","full SWAG rank-16 basis","native truncated-SVD basis factorization","Mirror factor code with identical factorization"],
+ "development":{"worlds_or_seeds":["dev-72201"],"selection_metric":"predictive NLL, 90% coverage, covariance Frobenius error, complete serialized bytes"},
+ "fresh":{"worlds_or_seeds":[],"locked_before_access":true,"reason":"no audit after exact native factorization alias"},
+ "grid":{"parameters":64,"covariance_rank":16,"trajectory_snapshots":64,"test_examples":512,"factor_ranks":[2,4,8,12,16],"residual_diagonal_correction":true},
+ "storage":{"authority":"actual serialized inference bundle bytes","paid_objects":["posterior mean","left basis factor","right basis factor","eigenvalues","diagonal correction","metadata"]},
+ "compute":{"report_factor_reconstruction_and_sample_proxy":true,"report_wall_clock":true},
+ "success_gate":"NLL delta <=.02, coverage delta <=.03 vs dense, >=25% complete bytes saved, and better quality/byte frontier than native SVD factorization.",
+ "failure_gate":"Any quality/storage miss or exact native SVD function/payload alias => FAIL for Mirror-specific value.",
+ "boundaries":["Synthetic Gaussian linear regression only.","No neural posterior, natural task, audit or production runtime claim.","Posterior sample count is not independent capacity."]
+}
