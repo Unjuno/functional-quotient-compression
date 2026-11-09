@@ -1,0 +1,15 @@
+{
+  "experiment_id":"MA-753",
+  "commit":"2a3bd61c",
+  "tests":{"command":"python -m pytest -q experiments/mirror_applications/ma-753-t2i-adapter-shared-basis/tests","passed":3,"failed":0},
+  "serialization":{"roundtrip_checked":true,"byte_exact":true},
+  "metric_replay":{"checked":true,"max_difference":0.0},
+  "fresh_split_integrity_checked":true,
+  "notes":[
+    "Native shared-PCA and Mirror payload hashes, bytes, heldout errors, composition errors and MAC proxy exactly match.",
+    "Deterministic replay reproduces all non-timing outputs; wall time is observational only.",
+    "The synthetic bank is rank-2 by construction; heldout control codes use eight calibration examples each.",
+    "Initial calibration axis-order bug is preserved separately and excluded from final results; corrected run retains frozen seed and gates.",
+    "Fresh/audit is unopened after exact native alias. No trained adapter or image-quality claim."
+  ]
+}

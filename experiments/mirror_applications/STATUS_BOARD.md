@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (282 completed; 346 UNTESTED; 1 SCREENING; 1 NOT ESTABLISHED)
+- P0: **630** (283 completed; 345 UNTESTED; 1 SCREENING; 1 NOT ESTABLISHED)
 - P1: **422** (17 completed; 405 UNTESTED)
 - P2: **103** (103 UNTESTED)
-- Current MA statuses: **250 FAIL, 1 NOT ESTABLISHED, 60 PROMISING, 1 SCREENING, 843 UNTESTED**
+- Current MA statuses: **251 FAIL, 1 NOT ESTABLISHED, 60 PROMISING, 1 SCREENING, 842 UNTESTED**
 - 47 baseline experiment directories remain present; verified external outcomes are linked to their dedicated branches in the registry and claim ledger.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). See the current Next candidate section for the live queue.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. see the current Next candidate section.
@@ -48,6 +48,8 @@ MA-742 is complete as a scoped synthetic FAIL: learned relation-attribute codes 
 MA-751 is complete as a scoped synthetic FAIL: Givens Views preserve spatial output exactly but use 1,692B vs 1,617B copied and 23% more MACs; exact native Givens alias. No pretrained ControlNet/image quality claim. Dedicated branch: `research/ma-751-controlnet-branch-view-20261109`.
 
 MA-752 is complete as a scoped synthetic FAIL: factorized condition×depth state recovers the designed heldout operators at 6,989B vs 8,962B independent (22.0% savings, below 25% gate) and exactly aliases native factorization. No trained ControlNet/T2I-Adapter or image-quality claim. Dedicated branch: `research/ma-752-controlnet-depth-views-20261109`.
+
+MA-753 is complete as a scoped synthetic FAIL: shared rank-2 adapter basis preserves heldout and pair composition (nRMSE <1.1e-7) at 2,006B vs 8,811B full adapters (77.2% savings) but doubles MAC proxy and exactly aliases native PCA. No trained T2I-Adapter or image-generation claim. Dedicated branch: `research/ma-753-t2i-adapter-shared-basis-20261109`.
 
 ## Verified status index
 
