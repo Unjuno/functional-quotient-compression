@@ -6,7 +6,7 @@
 - Protocol frozen: yes (`39d52a4e`)
 - Development complete: yes
 - Fresh/audit opened: no
-- Results committed: pending
+- Results committed: yes (`e26e3623`)
 - Verification committed: pending
 
 ## Result
