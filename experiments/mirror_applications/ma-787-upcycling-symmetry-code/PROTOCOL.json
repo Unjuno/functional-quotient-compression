@@ -1,0 +1,64 @@
+{
+  "experiment_id": "MA-787",
+  "title": "Expert upcycling symmetry-breaking View code",
+  "status": "FAIL",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY/COMPUTE/LEARNING-EFFICIENCY",
+  "base_commit": "d933d1a3",
+  "hypothesis": "A small child-specific Mirror code breaks duplicated-expert symmetry and recovers child functions with fewer bytes and calibration examples than full continued pretraining, while beating random perturbation controls.",
+  "physical_object": "one duplicated parent linear expert shared by child roles",
+  "mirror_coordinate": "scalar coefficient over a shared learned residual direction",
+  "logical_multiplicity": "eight child experts from one parent expert",
+  "prior_art_refs": [
+    "PA206"
+  ],
+  "controls": [
+    "identical duplicate",
+    "random perturbation direction",
+    "native rank-1 LoRA/shared basis",
+    "full child continued-pretraining updates",
+    "independent full child weights"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      "78701; heterogeneity 0,.05"
+    ],
+    "selection_metric": "heldout output nRMSE, payload bytes, calibration examples, optimizer updates and active compute"
+  },
+  "fresh": {
+    "worlds_or_seeds": [],
+    "locked_before_access": true,
+    "reason": "exact native low-rank alias is assessed before fresh access"
+  },
+  "grid": {
+    "children": 8,
+    "train_children": 6,
+    "heldout_children": 2,
+    "dimension": 10,
+    "view_rank": 1,
+    "calibration_examples_per_heldout_child": 32,
+    "continued_pretraining_updates_per_child": 400
+  },
+  "storage": {
+    "authority": "actual compressed NPZ inference payload bytes",
+    "paid_objects": [
+      "parent matrix",
+      "shared residual basis",
+      "all child codes",
+      "IDs",
+      "full CPT child matrices"
+    ]
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true
+  },
+  "success_gate": "Heldout child nRMSE <=0.02 with >=25% fewer complete bytes than independent children, fewer updates/examples than CPT, and improvement beyond same-size native LoRA and random perturbation controls.",
+  "failure_gate": "FAIL for Mirror-specific value if native LoRA exactly aliases the code or the code misses task quality; record learning efficiency separately from capacity.",
+  "boundaries": [
+    "Synthetic linear child tasks only; no trained MoE pretraining, router quality, or language-model claim.",
+    "The shared basis is fit using training child identities only; heldout codes use calibration examples only.",
+    "Equal update counts are not capacity evidence; no capacity claim is made."
+  ]
+}
