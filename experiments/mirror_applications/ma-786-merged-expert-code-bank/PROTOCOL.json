@@ -1,0 +1,67 @@
+{
+  "experiment_id": "MA-786",
+  "title": "Merged expert clusters to logical member code bank",
+  "status": "FAIL",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY/COMPUTE",
+  "base_commit": "3f862036",
+  "hypothesis": "Routing-weighted merged expert centers plus compact member Views recover cluster members at fewer complete bytes than independent expert checkpoints, with private residual demand rising under heterogeneity.",
+  "physical_object": "routing-weighted dominant expert center per cluster",
+  "mirror_coordinate": "member-specific coefficients over a shared residual basis",
+  "logical_multiplicity": "32 member experts reconstructed from eight merged centers",
+  "prior_art_refs": [
+    "PA203"
+  ],
+  "controls": [
+    "independent member bank",
+    "routing-weighted merge only",
+    "native PCA coefficients over shared residual basis",
+    "private residual rank sweep"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      "78601; heterogeneity 0,.10"
+    ],
+    "selection_metric": "heldout member output nRMSE, router-weighted error, actual bytes and reconstruction MAC"
+  },
+  "fresh": {
+    "worlds_or_seeds": [],
+    "locked_before_access": true,
+    "reason": "Mirror and native PCA payload/function aliases are assessed before fresh access"
+  },
+  "grid": {
+    "clusters": 8,
+    "members_per_cluster": 4,
+    "dimension": 16,
+    "shared_basis_rank": 2,
+    "private_ranks": [
+      0,
+      4,
+      8,
+      16
+    ]
+  },
+  "storage": {
+    "authority": "actual compressed NPZ inference payload bytes",
+    "paid_objects": [
+      "weighted centers",
+      "basis",
+      "member codes",
+      "frequency weights",
+      "private factors",
+      "IDs"
+    ]
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true
+  },
+  "success_gate": "A shared code bank has heldout nRMSE <=0.02, >=25% fewer complete bytes than independent members, and beats native PCA/low-rank controls at equal bytes and compute.",
+  "failure_gate": "FAIL for Mirror specificity if native PCA matches the payload/function, or private residual demand erases savings at the quality gate.",
+  "boundaries": [
+    "Synthetic linear expert checkpoints and known routing frequencies only; no trained M-SMoE/MC-SMoE or end-task MoE score.",
+    "Routing frequencies are generated from a Zipf-like synthetic distribution and included in paid state.",
+    "Member weights are available to the compressor; heldout members are used only for reconstruction scoring."
+  ]
+}

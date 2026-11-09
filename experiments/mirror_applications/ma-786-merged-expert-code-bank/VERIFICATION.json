@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-786",
+  "commit": "b45c74b3",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-786-merged-expert-code-bank/tests",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": "Mirror and native PCA payload hashes and heldout metrics exactly match at both heterogeneity levels"
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Routing frequency values, cluster IDs, basis, member codes and private factors are all serialized and charged.",
+    "At heterogeneity .10, rank-16 private residual achieves near-exact quality but costs more than independent storage.",
+    "No trained expert bank or end-task MoE metric is claimed."
+  ]
+}
