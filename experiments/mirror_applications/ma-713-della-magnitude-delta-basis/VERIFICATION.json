@@ -1,0 +1,9 @@
+{
+  "experiment_id": "MA-713",
+  "commit": "pending",
+  "tests": {"command": "python -m unittest discover -s experiments/mirror_applications/ma-713-della-magnitude-delta-basis/tests -v", "passed": 1, "failed": 0},
+  "serialization": {"roundtrip_checked": true, "byte_exact": true, "development_model_payloads": 36, "native_pca_hash_alias": true, "sparse_indices_charged": true},
+  "metric_replay": {"checked": true, "rho0_magnitude_sparse_nrmse": 0.7536, "rho0_random_dare_nrmse": 3.0231, "rho0_rank1_pca_nrmse": 0.905},
+  "fresh_split_integrity_checked": false,
+  "notes": ["Development seed 71301 only; byte and quality gates missed, audits 71311-71313 unopened.", "Magnitude top-k is DELLA-inspired, not a reproduction of the full DELLA algorithm.", "TIES is a shared merged-model point, not per-task delta retention.", "Synthetic task deltas only; no natural model or GPU runtime claim."]
+}
