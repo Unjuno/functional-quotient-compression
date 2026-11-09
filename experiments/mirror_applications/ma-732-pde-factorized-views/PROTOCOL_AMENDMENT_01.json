@@ -1,0 +1,7 @@
+{
+ "reason":"Source review after the initial development run found that the implementation constructed the Green operator directly from the known PDE law and did not consume the declared 12 training combinations. Initial metrics are preserved as analytic-oracle exploratory accounting only.",
+ "valid_amended_screen":"For each grid, estimate one shared Green matrix and boundary basis by least squares from 128 observed random forcing/solution pairs for each of the 12 declared training coefficient-boundary combinations. Predict the four held-out combinations on disjoint random forcing fields. Compare independent operator bank, shared ordinary conditioning, Mirror (same shared factor code), and analytic exact operator.",
+ "unchanged":"Development seed 73201, grids, alpha/boundary split, gates and metrics are unchanged.",
+ "audit_accessed_before_change":false,
+ "original_results_preserved":"RESULTS_INITIAL_ANALYTIC.csv"
+}

@@ -1,0 +1,24 @@
+{
+  "experiment_id": "MA-732",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-732-pde-factorized-views/tests -v",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": false,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Amendment 01 fit Green and boundary operators from 12 training combinations before held-out evaluation.",
+    "Initial analytic-only implementation is preserved separately and excluded from generalization claims.",
+    "Held-out forcing inputs are disjoint; native scalar conditioning and Mirror payload/output alias exactly.",
+    "Shared operator saves 55-64% versus independent bank, but no Mirror-specific value; audit unopened."
+  ]
+}
