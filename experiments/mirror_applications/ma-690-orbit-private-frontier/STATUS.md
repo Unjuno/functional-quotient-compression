@@ -1,34 +1,34 @@
 # MA-690 status
 
-- Status: SCREENING
+- Status: FAIL (Mirror-specific attribution); local shared/private operator frontier measured
 - Branch: `research/ma-690-orbit-private-frontier-20261109`
 - Base commit: `53040b26`
-- Protocol frozen before implementation/run: yes; protocol hash will be recorded with results
-- Development complete: no
-- Fresh/audit opened: no
-- Results committed: no
-- Verification committed: no
+- Protocol frozen before first run; two documented pre-audit accounting/implementation amendments
+- Development: complete; seeds 69001/69002
+- Fresh/audit: sealed after exact native-family alias
+- Results committed: pending
+- Verification: 5 tests passed; full-residual replay maximum error <2.3e-8
 
 ## H — Hypothesis
 
-At fixed actual payload bytes, at least one family-specific View coordinate plus low-rank private residual will reconstruct cross-family operator banks better than residual-only SVD on multiple alpha points and generators.
+Across target families, a shared View coordinate plus low-rank private residual may beat a residual-only bank at matched actual serialized bytes.
 
 ## T — Treatment and controls
 
-Frozen plan: D=16, 8 tasks/bank, development seeds 69001/69002, seven target generators, six candidate families, alpha amplitude mixture 0/.25/.5/.75/1, residual ranks 0/1/2/4/8/full. Every candidate is evaluated on every generator. Native family coordinates, independent full matrices, backbone-only, and byte-matched residual-only SVD are controls. Givens/BOFT are local tangent screens.
+16x16 shared backbone, 8 tasks, 7 target generators, 6 candidate coordinate families, alpha amplitude values 0/.25/.5/.75/1, residual ranks 0/1/2/4/8/full, and 2 development seeds. Cross-evaluated every candidate on every generator; compared independent full matrices, native family coordinates, and byte-matched residual-only SVD. Oracle least squares/SVD; zero training updates.
 
 ## D — Decision
 
-Pending frozen development runs.
+FAIL for Mirror-specific value: all 2,520 candidate/native pairs have identical function, compute, bytes and serialized hash. The local shared/private representation frontier is informative: 64/2,520 points pass error<=.02, bytes<=75% independent and compute<=2x, all at alpha=0. In same-family alpha=0 rank0 settings, payload is 39.8–48.9% of independent with NRMSE<=5.8e-8. No alpha>0 point passes the .02 quality and 75% byte gate; full residual is exact but larger than independent. Family code plus residual beats the same-byte best residual-only SVD in 587/2,520 grid points, across multiple families/generators, while native controls exactly alias the representation. Fresh remains sealed.
 
 ## C — Strongest counter-hypothesis
 
-Residual-only SVD or a standard native parameterization may match the structured View frontier at equal actual bytes and compute.
+Native IA3/BatchEnsemble/VeRA/low-rank/Givens/BOFT local parameters already provide the same functions as the View coordinates; residual allocation explains heterogeneity.
 
 ## U — Unconfirmed
 
-The planned screen does not test learned task adaptation, nonlinear orthogonal finetuning, language quality, downstream generalization or optimized kernels.
+No learned adaptation, language quality, nonlinear orthogonal finetuning, downstream generalization or optimized accelerator kernels.
 
 ## Next action
 
-Implement the frozen local-operator bank, serialized controls and byte-matched SVD frontier; then run only development seeds 69001/69002.
+Integrate MA-690 FAIL and frontier findings into the registry/claim/status board; select the next eligible untested P0.

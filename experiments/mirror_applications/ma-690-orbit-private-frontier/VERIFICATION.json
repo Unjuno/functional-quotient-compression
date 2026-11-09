@@ -1,0 +1,29 @@
+{
+  "experiment_id": "MA-690",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-690-orbit-private-frontier/tests",
+    "passed": 5,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "payload_manifest_rows": 2520,
+    "payload_bytes_replayed_in_unit_test": "selected payload round trips checked; all 2,520 manifest entries preserve measured size/hash",
+    "canonical_native_alias_equal_bytes": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 2.2836462697093605e-08
+  },
+  "fresh_split_integrity_checked": true,
+  "protocol_sha256": "a001d4222fc5684dda277dad137ba11d4a62be5c1a977d47a298216f59572e58",
+  "notes": [
+    "The first development run double-counted the shared view in predictions and is preserved under source/attempts/initial_double_counted_view/.",
+    "A corrected development run preserved pre-alpha1 unused-code payloads under source/attempts/pre_alpha1_code_pruning/.",
+    "Final results use the corrected prediction and omit unused family state/codes at alpha=1.",
+    "All generator families were crossed with all candidate view families; fresh seeds 69011/69012/69013 remained sealed after native exact alias.",
+    "This is a deterministic local operator-space screen with zero optimizer updates, not downstream model-quality evidence."
+  ]
+}

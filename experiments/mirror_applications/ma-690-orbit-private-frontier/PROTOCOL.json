@@ -4,6 +4,25 @@
   "status": "SCREENING",
   "evidence_lane": "MECHANISM/OPERATOR_SPACE/ACTUAL_BYTES/COMPUTE",
   "base_commit": "53040b26",
+  "protocol_amendment_before_first_run": {
+    "reason": "Separate one-time logical-view reconstruction from per-query application while giving all methods one explicit amortization horizon.",
+    "change": "Report view/private decode operations per task switch, apply operations per query, and combined compute as apply plus decode divided by 128 queries per switch. The useful-point compute gate applies to this amortized combined value.",
+    "fresh_or_audit_accessed": false,
+    "hypothesis_task_seeds_quality_gates_unchanged": true
+  },
+  "implementation_amendment_after_development_bug": {
+    "timing": "after initial development run failed its full-residual calibration; before corrected rerun; no fresh/audit data accessed",
+    "finding": "The serializer helper returned the combined shared-view plus residual update while its caller added the shared view again, double-counting the view in reported predictions.",
+    "correction": "The helper now returns only the residual reconstruction; callers add the shared-view term once. Target, controls, metrics, seeds and gates are unchanged.",
+    "preserved_attempt": "source/attempts/initial_double_counted_view/"
+  },
+  "accounting_amendment_before_final_development_rerun": {
+    "timing": "after corrected development screen but before fresh/audit access",
+    "reason": "At alpha=1 the prescribed view gate is zero, so serializing its unused family state and coordinates would charge dead state rather than inference payload.",
+    "change": "Omit family state and view code arrays when alpha=1; shared W, gate, task IDs, and private residual remain charged.",
+    "preserved_attempt": "source/attempts/pre_alpha1_code_pruning/",
+    "hypothesis_task_seeds_quality_gates_unchanged": true
+  },
   "hypothesis": "Across several target generators, a shared backbone plus a compact family View code and low-rank private residual reaches lower normalized operator error at lower complete serialized bytes than the best residual-only SVD bank at the same actual byte budget.",
   "prior_art_refs": ["PA19", "PA17", "PA18", "PA21"],
   "scope": {
@@ -51,7 +70,9 @@
     "amortization": "report complete bank bytes and bytes per logical task"
   },
   "compute": {
-    "report": ["family-code matrix decode MAC proxy per task load", "private residual materialization MAC proxy per task load", "dense matrix apply proxy per query", "CPU in-memory decode-plus-apply wall time", "serialization wall time"],
+    "report": ["family-code matrix decode MAC proxy per task load", "private residual materialization MAC proxy per task load", "dense matrix apply MAC proxy per query", "CPU in-memory decode-plus-apply wall time", "serialization wall time"],
+    "decode_amortization_queries_per_task_switch": 128,
+    "operation_units": "MAC proxy throughout; combined per-query proxy equals apply MACs plus ceil((view decode MACs + residual decode MACs)/128).",
     "fresh_or_audit": "seeds 69011/69012/69013 sealed; do not open if native-family exact alias is observed"
   },
   "gates": {
