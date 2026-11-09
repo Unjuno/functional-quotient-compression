@@ -1,0 +1,20 @@
+{
+  "experiment_id": "MA-693",
+  "title": "Pre-RoPE canonical cache with deferred position and View transforms",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM",
+  "base_commit": "dfd5c63c",
+  "hypothesis": "A position-free content K/V cache plus per-view structured Givens coordinates can reproduce explicitly re-encoded RoPE attention within 1e-5 across arbitrary positions while using <=25% of the actual serialized 8-view cache payload at T=128; because these views need not commute with RoPE, they cannot generally be moved to one position-independent query transform.",
+  "physical_object": "one FP32 content-space K/V cache before RoPE",
+  "mirror_coordinate": "per-view structured cross-plane Givens angles applied to content keys before per-position RoPE, plus value-view angles after attention",
+  "logical_multiplicity": "8 position-specific logical KV views over one content cache",
+  "prior_art_refs": ["PA156", "PA157"],
+  "controls": ["ordinary no-view RoPE attention", "independent materialized per-view RoPE K/V cache", "native Givens coordinates with identical execution", "incorrect position-independent query-transform approximation"],
+  "development": {"worlds_or_seeds": ["dev-69301"], "selection_metric": "maximum relative attention-output error, actual NPZ payload bytes, and operation proxy; no tuning"},
+  "fresh": {"worlds_or_seeds": ["audit-69311", "audit-69312", "audit-69313"], "locked_before_access": true},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["content K and V tensors", "view angle codes", "positions/frequency metadata", "shape/dtype and causal metadata", "independent control's per-view K/V tensors"]},
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true, "report_dwell_break_even": true},
+  "success_gate": "All 3 locked audit seeds: lazy kernel result vs explicit cache maximum relative output error <=1e-5; actual shared serialized payload <=25% independent per-view cache bytes; native Givens control alias is reported as no Mirror-specific attribution even if algebra/storage pass.",
+  "failure_gate": "Any audit seed exceeds 1e-5 error or serialized payload exceeds 25%. Position-independent query approximation should fail by >1e-2 on at least one seed; otherwise the noncommutation boundary is not established.",
+  "boundaries": ["Synthetic FP32 attention only, D=16, T=128, 8 views; no model training, language task, GPU kernel, TTFT, or production throughput claim.", "View transforms are structured orthogonal Givens rotations mixing coordinates from different RoPE planes; value transforms use per-plane rotations.", "Report analytic MAC-equivalents and NumPy wall time descriptively; attention arithmetic is common and excluded from incremental transform proxy."]
+}
