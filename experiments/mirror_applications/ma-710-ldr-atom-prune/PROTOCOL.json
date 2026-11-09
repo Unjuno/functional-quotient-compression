@@ -29,11 +29,9 @@
   },
   "fresh": {
     "worlds_or_seeds": [
-      "audit-71011",
-      "audit-71012",
-      "audit-71013"
+      "NONE: audit-71011/71012/71013 exposed by invalid fixed-random-bank attempt; unusable for amended learned-bank evaluation"
     ],
-    "locked_before_access": true
+    "locked_before_access": false
   },
   "grid": {
     "width": 32,
@@ -72,7 +70,8 @@
     "Atom matrices are generated as Toeplitz atoms for controlled identifiability; the experiment does not train a production transform model.",
     "Pruning and coefficient fitting use task support examples only; audit vectors are held out.",
     "No GPU/fused kernel/runtime conclusion; MACs are analytic proxies.",
-    "Development initially used a fixed random bank; that attempt is preserved separately. The amended protocol learns the overcomplete dictionary from support-derived task generators before audit execution."
+    "Development initially used a fixed random bank; that attempt is preserved separately. The amended protocol learns the overcomplete dictionary from support-derived task generators before audit execution.",
+    "The initial fixed-random-bank run accidentally executed all listed audit seed IDs before the learned-bank amendment. Those outputs are preserved but invalid for the final method; the seed IDs are considered contaminated and no valid audit claim is made."
   ],
   "dictionary_learning": {
     "implementation": "sklearn.decomposition.DictionaryLearning",
@@ -85,6 +84,6 @@
     "training_inputs": "Toeplitz task generator vectors estimated from support examples only",
     "alpha": 0.1,
     "tol": 1e-08,
-    "development_selection": "Selected on dev-71001 versus tested alpha=1e-8 and 1.0; alpha=0.1 had best dev frontier though it still missed frozen quality/byte gates. Fresh/audit seeds remain unopened."
+    "development_selection": "Selected on dev-71001 versus tested alpha=1e-8 and 1.0; alpha=0.1 had best dev frontier though it still missed frozen quality/byte gates. Initial invalid fixed-bank outputs exposed 71011-71013; they are excluded and cannot validate the amended method."
   }
 }

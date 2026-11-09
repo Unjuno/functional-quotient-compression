@@ -1,0 +1,28 @@
+{
+  "experiment_id": "MA-710",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-710-ldr-atom-prune/tests -v",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "model_payloads": 24,
+    "native_sparse_coding_hash_alias": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "development_seed": 71001,
+    "rho0_postfit_nrmse": 0.14102645,
+    "rho0_toeplitz_nrmse": 2.446e-08
+  },
+  "fresh_split_integrity_checked": false,
+  "notes": [
+    "Development-only FAIL. Initial invalid fixed-bank implementation exposed audit IDs 71011-71013; no valid audit for the amended learned-bank method was run, and those IDs are contaminated.",
+    "Selected alpha=.1 from the preregistered development-only sweep; alpha 1e-8 and 1.0 results are retained in source/attempts/dictionary_alpha_sweep/DEV_TUNING.csv.",
+    "Initial fixed-random-bank implementation is preserved but excluded from MA-710 evidence.",
+    "Synthetic Toeplitz generators only; no neural model, natural-task or GPU runtime claim."
+  ]
+}
