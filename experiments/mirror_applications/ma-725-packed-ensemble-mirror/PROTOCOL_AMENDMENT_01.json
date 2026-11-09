@@ -1,0 +1,12 @@
+{
+ "experiment_id":"MA-725-A1",
+ "date":"2026-11-09",
+ "reason":"Post-run code audit found the implementation used all 512 examples/member per update although the frozen protocol specified batch size 128. This was a procedure mismatch discovered independently of fresh-result direction; the original rows remain preserved and exploratory.",
+ "preserved_original_protocol":"PROTOCOL.json and RESULTS_CORE.csv/RESULTS_FRESH.csv are not overwritten. Their metrics are tagged as full-batch deviation evidence, not valid confirmation of the frozen minibatch protocol.",
+ "amended_training":"400 optimizer steps, minibatch size 128 per member for all methods; same architecture, optimizer, learning rate, teacher construction and success gates.",
+ "new_development_replay_seed":"72501",
+ "new_fresh_seeds":["audit-72521","audit-72522","audit-72523"],
+ "fresh_seeds_locked_before_access":true,
+ "selection_policy":"No hyperparameters or architecture will be selected from the original fresh rows; amendment corrects only the implementation to match the already frozen protocol.",
+ "gates_unchanged":true
+}
