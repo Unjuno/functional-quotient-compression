@@ -1,0 +1,21 @@
+{
+  "experiment_id": "MA-707",
+  "title": "Scaled-Cayley recurrent Mirror Views",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM",
+  "base_commit": "322e8039",
+  "hypothesis": "One shared orthogonal recurrent base plus low-rank skew-symmetric per-task Cayley codes can reproduce stable task-specific recurrent dynamics with lower serialized bytes than independent dense transitions; matrix reconstruction overhead and spectral stability will set the practical frontier.",
+  "physical_object": "one shared FP32 orthogonal recurrent transition Q0",
+  "mirror_coordinate": "per-task low-rank skew matrices S=UVᵀ−VUᵀ, scaled through the Cayley transform, plus shared contraction scale",
+  "logical_multiplicity": "8 stable task-specific recurrent transitions over one physical base transition",
+  "prior_art_refs": ["PA171"],
+  "controls": ["independent full recurrent transition matrices", "hard-tied shared Q0", "native per-task low-rank Cayley parameterization with identical code", "spectral radius and sequence-state norm audit"],
+  "development": {"worlds_or_seeds": ["dev-70701"], "selection_metric": "trajectory NRMSE, actual serialized transition bytes, spectral radius, and solve amortization over sequence length"},
+  "fresh": {"worlds_or_seeds": ["audit-70711", "audit-70712", "audit-70713"], "locked_before_access": true},
+  "grid": {"state_width": 32, "tasks": 8, "sequence_length": 128, "skew_rank": [1, 2, 4], "contraction_scale": 0.95},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["shared Q0", "per-task U/V skew factors", "scale and shape metadata", "independent full transition matrices"]},
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true, "report_solve_amortization": true},
+  "success_gate": "Across all audit seeds, trajectory NRMSE <=1e-5, spectral radius <1, shared payload <=40% independent, and Cayley reconstruction overhead <=25% of 128-step recurrent matvec work. Native exact alias is FAIL for Mirror-specific attribution.",
+  "failure_gate": "Any audit seed exceeds quality/stability/byte/compute gates; exact native Cayley alias rejects Mirror-specific value regardless of generic recurrent sharing feasibility.",
+  "boundaries": ["Synthetic driven linear recurrence only; no trained RNN/SSM task, sequence prediction metric, or GPU runtime claim.", "Targets are generated from low-rank Cayley codes by construction; no learning/capacity result.", "Cayley transition is reconstructed on switch and amortized over the frozen sequence length; report solve overhead explicitly."]
+}
