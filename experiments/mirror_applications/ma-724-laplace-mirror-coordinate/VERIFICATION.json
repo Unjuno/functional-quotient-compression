@@ -1,0 +1,24 @@
+{
+  "experiment_id": "MA-724",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-724-laplace-mirror-coordinate/tests -v",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": false,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Development seed 72401 only; no audit data.",
+    "Mirror and native subspace Laplace payload hashes and predictions match exactly at all ranks.",
+    "Simple rank-1 covariance factor control matches rank-4 predictive metrics at smaller bytes.",
+    "The PA41 control is a simplified one-factor Gaussian approximation, not a full reproduction."
+  ]
+}

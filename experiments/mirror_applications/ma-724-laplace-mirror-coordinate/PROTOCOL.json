@@ -1,0 +1,15 @@
+{
+ "experiment_id":"MA-724","title":"Laplace posterior over Mirror coordinates only","status":"SCREENING","evidence_lane":"MECHANISM/QUALITY/STORAGE","base_commit":"b9ec24a1",
+ "hypothesis":"A Laplace posterior over a low-dimensional Mirror code preserves quality/calibration at lower complete bytes than full last-layer Laplace and improves over native subspace/diagonal controls.",
+ "physical_object":"frozen random-feature network and MAP output weights","mirror_coordinate":"stochastic low-dimensional output-weight View code with code-space Hessian","logical_multiplicity":"posterior predictive samples from one frozen feature network",
+ "prior_art_refs":["PA183","PA41"],
+ "controls":["full last-layer Laplace","diagonal full-weight Laplace","Mirror code-space Laplace","native PCA/subnetwork Laplace same basis","rank-1 posterior control"],
+ "development":{"worlds_or_seeds":["dev-72401"],"selection_metric":"test predictive NLL, accuracy, ECE, complete posterior bytes"},
+ "fresh":{"worlds_or_seeds":[],"locked_before_access":true,"reason":"no audit after exact native subspace alias or frozen quality failure"},
+ "grid":{"features":64,"train_examples":256,"test_examples":512,"basis_ranks":[4,8,16,32],"posterior_samples":128,"ece_bins":10},
+ "storage":{"authority":"actual serialized inference posterior payload bytes","paid_objects":["MAP mean","Hessian or code precision","basis","covariance factors","feature metadata","sampling state"]},
+ "compute":{"report_newton_steps":true,"report_hessian_and_sample_work":true,"report_wall_clock":true},
+ "success_gate":"NLL delta <=.02, accuracy delta <=.01, ECE delta <=.03 vs full Laplace, >=25% payload savings, and improvement over native subspace/rank-1 controls.",
+ "failure_gate":"Any quality/storage miss or exact native PCA/subspace function/payload alias => FAIL for Mirror-specific value.",
+ "boundaries":["Fixed random-feature classifier only; not an end-to-end neural model.","Synthetic data and one development seed only.","No audit, natural benchmark, GPU or deployment calibration claim."]
+}
