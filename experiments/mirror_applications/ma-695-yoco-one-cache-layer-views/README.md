@@ -1,6 +1,6 @@
 # MA-695 — YOCO one-cache with layer-specific reads
 
-Status: SCREENING  
+Status: FAIL  
 Evidence lane: MECHANISM  
 Base commit: `2fc822ad`
 
@@ -24,9 +24,12 @@ PA162/PA08 establish one-cache cross-layer sharing. MA-245 already showed an ali
 
 See frozen [PROTOCOL.json](PROTOCOL.json). The task is scoped to output error, complete bytes, and read compute, not language-model quality.
 
-## Decision
+## Results and decision
 
-FACT: pending.  
-INTERPRETATION: pending.  
-HYPOTHESIS: pending.  
-BOUNDARY: synthetic FP32 cross-layer attention only.
+**FACT:** Across three corrected audit seeds, aligned rho=0/q=0 layer reads matched independent caches within 2.82e-7, at 4,410 B versus 49,926 B (8.83%) and 0.293x the full-width attention MAC proxy. At rho=.1, q<=1 errors were .141–.151; q=2 .131–.147. q=4 restored output error below 2.88e-7 at 6,538 B (13.1% independent) and 0.293x compute. rho=.25 similarly required q=4 for exact output. The native shared-basis control exactly matched Mirror functions and payload hashes. Hard identical reads lose layer-specific behavior.
+
+**INTERPRETATION:** A shared latent read path provides a strong synthetic storage/compute frontier, including exact private rank-4 recovery at low bytes relative to materialized caches. The stricter frozen gate requiring rho=.1 with q<=1 fails, and all savings/functions are exactly the ordinary native shared-basis latent factorization; this is not Mirror-specific.
+
+**HYPOTHESIS:** YOCO-style one-cache layer diversity is feasible with latent-space read transforms, but the tested mechanism reduces to native basis coefficients and needs private rank for heterogeneous layers.
+
+**BOUNDARY:** Synthetic FP32 attention operators, four layers, T=96, D=16, latent R=4; no trained YOCO model, language NLL, GPU kernel, or production throughput claim. Initial bad-scaling attempt is preserved; corrected math replayed all locked seeds without tuning.
