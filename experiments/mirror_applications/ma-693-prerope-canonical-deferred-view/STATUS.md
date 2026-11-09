@@ -1,18 +1,18 @@
 # MA-693 status
 
-- Status: SCREENING
+- Status: FAIL
 - Branch: `research/ma-693-prerope-canonical-deferred-view-20261109`
 - Base commit: `dfd5c63c`
 - Last verified commit: pending
-- Development complete: no
-- Fresh/audit opened: no
-- Results committed: no
-- Verification committed: no
+- Development complete: yes
+- Fresh/audit opened: yes
+- Results committed: yes
+- Verification committed: yes
 - Registry row updated: no
 
 ## Next action
 
-Implement the frozen content-space deferred-view algebra and serialized payload replay.
+Integrate this scoped FAIL and advance to MA-694.
 
 ## Blockers
 
@@ -21,3 +21,8 @@ None.
 ## Decisions / rulings
 
 Protocol frozen before execution. A native Givens alias is not Mirror-specific evidence.
+
+
+## Result
+
+Three audit seeds matched explicit attention within 1.74e-7; the invalid query-only shortcut erred by 0.189–0.264. Shared NPZ payload was 42.62% of independent and missed the 25% gate. Native Givens exactly aliases Mirror; transform compute amortizes only at one generated token.
