@@ -1,9 +1,27 @@
 {
   "experiment_id": "MA-708",
-  "commit": "pending",
-  "tests": {"command": "python -m unittest discover -s experiments/mirror_applications/ma-708-ldr-mirror-layer-family/tests -v", "passed": 1, "failed": 0},
-  "serialization": {"roundtrip_checked": true, "byte_exact": true, "audit_rows": 12, "audit_payload_hashes_match_native": true},
-  "metric_replay": {"checked": true, "max_audit_operator_nrmse": 6.53e-8, "max_native_alias_abs": 0.0},
+  "commit": "ec08d16f",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-708-ldr-mirror-layer-family/tests -v",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "audit_rows": 12,
+    "audit_payload_hashes_match_native": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_audit_operator_nrmse": 6.53e-08,
+    "max_native_alias_abs": 0.0
+  },
   "fresh_split_integrity_checked": true,
-  "notes": ["Frozen synthetic LDR protocol; dev seed 70801 and audit seeds 70811/70812/70813.", "Ranks 1/2/4 mean candidate payload is 13.08%/25.58%/50.58% of independent dense; rank 8 is 100.57%.", "Reconstruction plus apply MAC proxy is 1.0156x/1.0312x/1.0625x/1.125x dense apply.", "Native shared atom coefficients are exact function and payload alias. No natural task, learned model or GPU runtime claim."]
+  "notes": [
+    "Frozen synthetic LDR protocol; dev seed 70801 and audit seeds 70811/70812/70813.",
+    "Ranks 1/2/4 mean candidate payload is 13.08%/25.58%/50.58% of independent dense; rank 8 is 100.57%.",
+    "Reconstruction plus apply MAC proxy is 1.0156x/1.0312x/1.0625x/1.125x dense apply.",
+    "Native shared atom coefficients are exact function and payload alias. No natural task, learned model or GPU runtime claim."
+  ]
 }
