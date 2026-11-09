@@ -1,0 +1,21 @@
+{
+  "experiment_id": "MA-702",
+  "title": "Householder logical experts from one shared FFN",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM",
+  "base_commit": "45a2bf56",
+  "hypothesis": "Sixteen expert-specific Householder output Views over one shared two-layer FFN can match independent experts with much lower bytes and modest added compute; a same-budget FiLM control tests whether simple diagonal gains explain the function diversity.",
+  "physical_object": "one shared FP32 two-layer FFN",
+  "mirror_coordinate": "per-expert products of r Householder output reflections",
+  "logical_multiplicity": "16 routed logical experts over one physical FFN",
+  "prior_art_refs": ["PA171", "PA21"],
+  "controls": ["independent full FFN experts", "ordinary hard-tied shared FFN", "same-budget per-channel FiLM gain control", "native Householder/BOFT-style orthogonal parameterization with identical function"],
+  "development": {"worlds_or_seeds": ["dev-70201"], "selection_metric": "per-expert output NRMSE, pairwise output diversity, actual serialized bytes, and active expert MAC proxy"},
+  "fresh": {"worlds_or_seeds": ["audit-70211", "audit-70212", "audit-70213"], "locked_before_access": true},
+  "grid": {"width": 64, "hidden_width": 64, "experts": 16, "examples": 128, "reflection_counts": [1, 2, 4, 8]},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["shared FFN weights", "per-expert reflection vectors", "routing IDs", "FiLM gains", "independent expert weights", "shape/activation metadata"]},
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true},
+  "success_gate": "Across all audit seeds, Householder output NRMSE <=1e-5 and complete payload <=25% independent at r<=4; active compute <=1.2x independent at r<=4. Compare same-budget FiLM output error. Native exact alias is FAIL for Mirror-specific attribution.",
+  "failure_gate": "Any audit seed exceeds quality/byte/compute thresholds at r<=4 or a simpler FiLM control matches quality with lower bytes/compute. Exact native Householder alias rejects Mirror-specific attribution regardless of generic expert-sharing feasibility.",
+  "boundaries": ["Synthetic routed FFN outputs only; no expert-training optimization, language-model utility, or GPU throughput claim.", "Teacher experts are generated from the Householder family by construction; this is a representation feasibility experiment, not learned capacity.", "One chosen expert is active per sample; router assignment IDs are serialized and charged."]
+}
