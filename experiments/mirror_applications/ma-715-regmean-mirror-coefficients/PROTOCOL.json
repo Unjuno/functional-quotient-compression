@@ -1,0 +1,74 @@
+{
+  "experiment_id": "MA-715",
+  "title": "RegMean statistics to Mirror merge coefficients",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/QUALITY/STORAGE",
+  "base_commit": "d65f326e",
+  "hypothesis": "On aligned synthetic layer deltas, a low-dimensional shared-basis coefficient solved from RegMean sufficient statistics preserves the full RegMean objective within 5% while reducing complete serialized merge state, including statistics, by at least 25% versus full RegMean and native projected RegMean.",
+  "physical_object": "shared rank-4 delta basis and source task deltas for one synthetic linear layer",
+  "mirror_coordinate": "per-request coefficient vector solved by minimizing the summed RegMean quadratic objective in the shared basis",
+  "logical_multiplicity": "12 synthetic merged outputs from 8 source tasks",
+  "prior_art_refs": [
+    "PA177",
+    "PA26"
+  ],
+  "controls": [
+    "full RegMean sufficient-statistic solve",
+    "Task Arithmetic mean",
+    "Mirror shared-basis coefficient solve",
+    "native projected RegMean solve with same basis and coefficients"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      "dev-71501"
+    ],
+    "selection_metric": "per-request normalized RegMean objective, complete payload bytes, solve-work proxy"
+  },
+  "fresh": {
+    "worlds_or_seeds": [],
+    "locked_before_access": true,
+    "reason": "development mechanism screen determines failure; audit is not opened after a frozen development failure"
+  },
+  "grid": {
+    "input_width": 64,
+    "output_width": 32,
+    "source_tasks": 8,
+    "basis_rank": 4,
+    "merge_requests": 12,
+    "tasks_per_request": [
+      2,
+      4,
+      6
+    ],
+    "private_residual_fraction": [
+      0.0,
+      0.1
+    ],
+    "ridge": 0.001
+  },
+  "storage": {
+    "authority": "actual serialized inference/reconstruction payload bytes",
+    "paid_objects": [
+      "shared basis",
+      "source task coefficients or dense deltas",
+      "per-task input Gram statistics",
+      "per-task input-output cross-statistics",
+      "request task IDs",
+      "merged output coefficients or weights",
+      "metadata"
+    ]
+  },
+  "compute": {
+    "examples_or_statistics": true,
+    "optimizer_updates": 0,
+    "active_solve_work_proxy": true,
+    "isolated_wall_clock": true
+  },
+  "success_gate": "Every request objective <=1.05x full RegMean; complete serialized bundle <=75% of both full RegMean and native projected solve; solve-work proxy <=1.25x.",
+  "failure_gate": "Any predeclared quality/storage/compute gate miss or exact payload/function alias with native projected RegMean is FAIL for Mirror-specific value. Gate definitions were fixed before inspecting dev outcomes.",
+  "boundaries": [
+    "Synthetic linear-layer mechanism only; no trained neural network, pretrained model or natural benchmark.",
+    "Gram and cross-statistics are generated synthetic sufficient statistics; their task acquisition cost is not measured, but their persistent deployment bytes are fully charged.",
+    "No audit/fresh result, GPU runtime, language quality or capacity claim."
+  ]
+}
