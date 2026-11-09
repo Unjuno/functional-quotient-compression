@@ -1,0 +1,24 @@
+{
+  "experiment_id": "MA-734",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-734-deeponet-role-sharing/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Native direct Givens and Mirror inference payload hash, actual bytes, factor error, operator error and multiply count match exactly.",
+    "A deterministic seed fixes teacher maps, role codes and held-out feature vectors; no audit was opened after exact native alias.",
+    "Untied upper control duplicates W values, and NPZ losslessly compresses them; byte counts use the actual full compressed payload.",
+    "Analytic synthetic teacher only; no trained DeepONet or PDE claim."
+  ]
+}

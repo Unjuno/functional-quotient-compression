@@ -1,0 +1,21 @@
+{
+  "experiment_id":"MA-734",
+  "title":"DeepONet branch/trunk Mirror role sharing",
+  "status":"SCREENING",
+  "evidence_lane":"MECHANISM/STORAGE/QUALITY",
+  "base_commit":"ee984bd8",
+  "hypothesis":"One shared latent map plus small role-specific orthogonal View codes preserves branch/trunk functions and composed operator quality with fewer bytes than untied role maps, and adds value beyond ordinary tied maps, output FiLM, and direct native Givens coordinates.",
+  "physical_object":"shared linear latent map from 8-dimensional role features to a 4-dimensional DeepONet factor",
+  "mirror_coordinate":"per-domain branch/trunk 4D Givens role coordinates",
+  "logical_multiplicity":"8 synthetic operator domains with separate branch and trunk roles",
+  "prior_art_refs":["PA187"],
+  "controls":["untied per-domain branch and trunk maps","ordinary hard-tied shared map","shared map plus output FiLM","native direct Givens role coordinates","Mirror role coordinates"],
+  "development":{"worlds_or_seeds":["dev-73401"],"selection_metric":"held-out branch/trunk factor nRMSE, composed operator nRMSE, actual complete serialized bytes"},
+  "fresh":{"worlds_or_seeds":[],"locked_before_access":true,"reason":"no audit after exact native direct-Givens alias"},
+  "grid":{"domains":8,"input_features":8,"latent_rank":4,"role_givens_planes":6,"train_examples_per_role_domain":512,"heldout_examples_per_role_domain":256,"operator_pairs_per_domain":4096,"seed":73401},
+  "storage":{"authority":"actual serialized complete inference payload bytes","paid_objects":["shared map","role coordinates or FiLM state","domain metadata","normalization state"]},
+  "compute":{"report_active_compute_proxy":true,"report_wall_clock":true,"training_updates":"none; analytic mechanism screen"},
+  "success_gate":"Mirror role codes meet factor and composed operator nRMSE <=.02, save >=25% bytes vs untied controls, and strictly improve the quality/byte frontier over direct native Givens and FiLM controls.",
+  "failure_gate":"Quality miss, <25% savings, or exact native Givens function/payload alias is FAIL for Mirror-specific value.",
+  "boundaries":["Synthetic role-aligned linear latent maps only.","No trained DeepONet, PDE, natural sensing or language claim.","No optimization, fresh world, or hardware runtime claim."]
+}
