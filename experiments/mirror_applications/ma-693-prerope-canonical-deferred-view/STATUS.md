@@ -3,12 +3,12 @@
 - Status: FAIL
 - Branch: `research/ma-693-prerope-canonical-deferred-view-20261109`
 - Base commit: `dfd5c63c`
-- Last verified commit: pending
+- Last verified commit: c0e8946b
 - Development complete: yes
 - Fresh/audit opened: yes
 - Results committed: yes
 - Verification committed: yes
-- Registry row updated: no
+- Registry row updated: yes (integration pending)
 
 ## Next action
 
