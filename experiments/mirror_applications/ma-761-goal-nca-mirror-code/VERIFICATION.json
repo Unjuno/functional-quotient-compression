@@ -1,0 +1,15 @@
+{
+  "experiment_id":"MA-761",
+  "commit":"5ab56e91",
+  "tests":{"command":"python -m pytest -q experiments/mirror_applications/ma-761-goal-nca-mirror-code/tests","passed":3,"failed":0},
+  "serialization":{"roundtrip_checked":true,"byte_exact":true},
+  "metric_replay":{"checked":true,"max_difference":0.0},
+  "fresh_split_integrity_checked":true,
+  "notes":[
+    "Native coordinate-conditioned and Mirror payload hashes, bytes, rollout success, steps and MAC proxy exactly match.",
+    "Deterministic replay reproduces all non-timing outputs; fit/evaluation wall time is observational.",
+    "Heldout goal IDs and coordinates were excluded from shared-rule training; 4 corner starts evaluated per goal.",
+    "Single-agent obstacle-free grid only; not a multi-cell NCA growth/regeneration result.",
+    "Fresh/audit unopened after exact native coordinate alias."
+  ]
+}
