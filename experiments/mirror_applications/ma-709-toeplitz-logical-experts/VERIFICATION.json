@@ -1,0 +1,9 @@
+{
+  "experiment_id": "MA-709",
+  "commit": "pending",
+  "tests": {"command": "python -m unittest discover -s experiments/mirror_applications/ma-709-toeplitz-logical-experts/tests -v", "passed": 1, "failed": 0},
+  "serialization": {"roundtrip_checked": true, "byte_exact": true, "model_payloads": 72, "canonical_payload_bytes": true, "native_shift_gain_hash_alias": true},
+  "metric_replay": {"checked": true, "max_aligned_candidate_nrmse": 0.0, "max_independent_toeplitz_nrmse": 2.58e-8},
+  "fresh_split_integrity_checked": true,
+  "notes": ["Model-level serialized NPZ payloads aggregate all 16 maps and shared state.", "Initial per-task-container byte accounting is retained as invalid attempt; corrected same-seed audit replays are not independent confirmation.", "Three audit seeds 70911-70913; shared kernel known by construction; no trained network or GPU runtime claim."]
+}

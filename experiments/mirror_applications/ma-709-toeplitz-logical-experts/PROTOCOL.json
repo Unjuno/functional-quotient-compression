@@ -1,0 +1,74 @@
+{
+  "experiment_id": "MA-709",
+  "title": "Toeplitz-like logical experts and heads",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/COMPUTE",
+  "base_commit": "eae6e926",
+  "hypothesis": "A shared circular-convolution kernel plus per-task shift/gain codes recovers structured logical maps at low actual payload bytes when tasks align, while private kernel variation reveals where task-private parameters become necessary.",
+  "physical_object": "one shared length-64 circular-convolution kernel",
+  "mirror_coordinate": "per-task integer cyclic shift and scalar gain",
+  "logical_multiplicity": "16 task-specific linear maps",
+  "prior_art_refs": [
+    "PA173",
+    "PA45"
+  ],
+  "controls": [
+    "independent full dense matrix fit",
+    "independent Toeplitz kernel fit (private kernel upper control)",
+    "hard-tied shared kernel",
+    "native shared circular-convolution shift/gain coordinates with canonical byte-identical encoding",
+    "DCT-diagonal structured linear control"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      "dev-70901"
+    ],
+    "selection_metric": "held-out normalized MSE, actual serialized bytes, and analytic operations proxy across frozen private-variation levels"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      "audit-70911",
+      "audit-70912",
+      "audit-70913"
+    ],
+    "locked_before_access": true
+  },
+  "grid": {
+    "width": 64,
+    "tasks": 16,
+    "support_vectors_per_task": 128,
+    "audit_vectors_per_task": 128,
+    "private_kernel_fraction": [
+      0.0,
+      0.05,
+      0.2
+    ]
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "shared kernel",
+      "per-task shift and gain codes",
+      "independent Toeplitz kernels",
+      "independent dense matrices",
+      "DCT diagonal coefficients",
+      "metadata"
+    ]
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true,
+    "report_fit_and_inference_work": true
+  },
+  "success_gate": "At least one private-variation level across all audit seeds: held-out NRMSE <=1e-5, full candidate payload <=25% independent dense payload, inference arithmetic <=1.25x Toeplitz FFT proxy, and strict improvement over byte-near native shared circular-convolution coordinates. Exact native alias is FAIL for Mirror-specific attribution.",
+  "failure_gate": "Exact native circular-convolution coordinate alias, or no private-variation level meets quality/byte/compute gates. Record aligned storage frontier and private residual break-even without treating logical combinations as independent capacity.",
+  "boundaries": [
+    "Synthetic linear input-output tasks generated from circular-convolution kernels; no trained network, natural task or language quality claim.",
+    "The shared teacher kernel is known by construction; this is a representation upper-bound screen, not a learning-efficiency result.",
+    "DCT-diagonal is a compact structured control, not a full ACDC implementation.",
+    "No GPU/fused/production latency claim; operation counts are analytic proxies.",
+    "Private state is represented by the independent Toeplitz upper control; no residual-rank sweep is included in this screen."
+  ]
+}
