@@ -3,8 +3,8 @@
 - Status: SCREENING
 - Branch: `research/ma-710-ldr-atom-prune-20261109`
 - Base commit: `54992634`
-- Protocol frozen in source: yes
-- Protocol commit: pending
+- Protocol frozen in source: amended before audit
+- Protocol commit: amendment pending
 - Development/audit: not run
 
 ## Next action

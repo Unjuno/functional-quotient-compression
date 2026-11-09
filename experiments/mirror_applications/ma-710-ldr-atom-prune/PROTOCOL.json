@@ -8,14 +8,80 @@
   "physical_object": "overcomplete bank of 32 length-64 Toeplitz atoms, each stored by its first row/column generators",
   "mirror_coordinate": "per-task sparse atom IDs and signed floating-point coefficients",
   "logical_multiplicity": "24 task-specific linear maps composed from two atoms each",
-  "prior_art_refs": ["PA174", "PA78"],
-  "controls": ["independent dense matrix fit", "independent Toeplitz kernel fit", "full 32-atom bank with dense per-task coefficients", "ordinary sparse coding over the same atoms", "post-fit physical atom pruning", "random prune to equal bank size", "small-from-start random atom bank"],
-  "development": {"worlds_or_seeds": ["dev-71001"], "selection_metric": "held-out NRMSE, full serialized payload bytes, active compute proxy, atom survival and reconstruction setup cost"},
-  "fresh": {"worlds_or_seeds": ["audit-71011", "audit-71012", "audit-71013"], "locked_before_access": true},
-  "grid": {"width": 32, "tasks": 24, "support_vectors_per_task": 128, "audit_vectors_per_task": 128, "initial_atoms": 32, "true_active_atoms": 6, "sparse_atoms_per_task": 2, "selection_threshold": 1e-5},
-  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["atom matrices/generators", "task coefficient arrays", "sparse atom indices", "pruned bank", "private composed kernels if stored", "independent Toeplitz kernels", "independent dense matrices", "metadata"]},
-  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true, "report_fit_prune_compose_and_apply_work": true},
+  "prior_art_refs": [
+    "PA174",
+    "PA78"
+  ],
+  "controls": [
+    "independent dense matrix fit",
+    "independent Toeplitz kernel fit",
+    "full 32-atom bank with dense per-task coefficients",
+    "ordinary sparse coding over the same atoms",
+    "post-fit physical atom pruning",
+    "random prune to equal bank size",
+    "small-from-start random atom bank"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      "dev-71001"
+    ],
+    "selection_metric": "held-out NRMSE, full serialized payload bytes, active compute proxy, atom survival and reconstruction setup cost"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      "audit-71011",
+      "audit-71012",
+      "audit-71013"
+    ],
+    "locked_before_access": true
+  },
+  "grid": {
+    "width": 32,
+    "tasks": 24,
+    "support_vectors_per_task": 128,
+    "audit_vectors_per_task": 128,
+    "initial_atoms": 32,
+    "true_active_atoms": 6,
+    "sparse_atoms_per_task": 2,
+    "selection_threshold": 1e-05
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "atom matrices/generators",
+      "task coefficient arrays",
+      "sparse atom indices",
+      "pruned bank",
+      "private composed kernels if stored",
+      "independent Toeplitz kernels",
+      "independent dense matrices",
+      "metadata"
+    ]
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true,
+    "report_fit_prune_compose_and_apply_work": true
+  },
   "success_gate": "Across all three audit seeds, post-fit pruned payload retains mean held-out NRMSE <=1e-5, is <=60% of independent Toeplitz payload and <=10% independent dense payload, uses no more than 2x Toeplitz apply proxy including one-time composition amortized over 128 queries, and strictly beats both equal-size random prune and small-from-start on quality at equal bytes. Native ordinary sparse coding exact alias is FAIL for Mirror-specific attribution.",
   "failure_gate": "Native sparse coding matches function/bytes/compute, or post-fit pruning does not meet frozen quality/byte/compute gates, or random/small-from-start performs equally well. Report generic sparse LDR feasibility separately.",
-  "boundaries": ["Synthetic linear regression tasks generated as sparse combinations of Toeplitz atoms; this is aligned mechanism screening, not natural task quality or model capacity.", "Atom matrices are generated as Toeplitz atoms for controlled identifiability; the experiment does not train a production transform model.", "Pruning and coefficient fitting use task support examples only; audit vectors are held out.", "No GPU/fused kernel/runtime conclusion; MACs are analytic proxies."]
+  "boundaries": [
+    "Synthetic linear regression tasks generated as sparse combinations of Toeplitz atoms; this is aligned mechanism screening, not natural task quality or model capacity.",
+    "Atom matrices are generated as Toeplitz atoms for controlled identifiability; the experiment does not train a production transform model.",
+    "Pruning and coefficient fitting use task support examples only; audit vectors are held out.",
+    "No GPU/fused kernel/runtime conclusion; MACs are analytic proxies.",
+    "Development initially used a fixed random bank; that attempt is preserved separately. The amended protocol learns the overcomplete dictionary from support-derived task generators before audit execution."
+  ],
+  "dictionary_learning": {
+    "implementation": "sklearn.decomposition.DictionaryLearning",
+    "n_components": 32,
+    "fit_algorithm": "lars",
+    "transform_algorithm": "omp",
+    "transform_n_nonzero_coefs": 2,
+    "max_iter": 200,
+    "random_state": "per frozen run seed",
+    "training_inputs": "Toeplitz task generator vectors estimated from support examples only"
+  }
 }
