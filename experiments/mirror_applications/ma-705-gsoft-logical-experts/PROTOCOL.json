@@ -1,0 +1,21 @@
+{
+  "experiment_id": "MA-705",
+  "title": "GSOFT logical experts from one shared FFN",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM",
+  "base_commit": "dba727b6",
+  "hypothesis": "Sixteen routed GSOFT output Views over one shared FFN can match independent expert functions with lower serialized bytes and modest active compute; same-budget IA3 and rank-one residual controls test whether simpler expert views suffice.",
+  "physical_object": "one shared FP32 two-layer FFN expert",
+  "mirror_coordinate": "per-expert group-shuffle block-orthogonal output factors",
+  "logical_multiplicity": "16 routed logical experts over one physical FFN",
+  "prior_art_refs": ["PA172", "PA01"],
+  "controls": ["independent full FFN experts", "ordinary hard-tied expert", "per-channel IA3 output gains", "rank-one output residual per expert", "native GSOFT group-shuffle parameterization with identical function"],
+  "development": {"worlds_or_seeds": ["dev-70501"], "selection_metric": "per-expert output NRMSE, pairwise diversity, actual bytes, active expert MAC proxy"},
+  "fresh": {"worlds_or_seeds": ["audit-70511", "audit-70512", "audit-70513"], "locked_before_access": true},
+  "grid": {"width": 64, "hidden_width": 64, "experts": 16, "examples": 128, "group_width": 8, "shuffle_stages": [1, 2, 4]},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["shared FFN weights", "all expert-specific GSOFT factors", "router IDs", "IA3 gains", "rank-one factors", "independent expert weights", "metadata"]},
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true},
+  "success_gate": "Across all audit seeds, GSOFT expert output NRMSE <=1e-5 and complete payload <=25% independent with active compute <=1.2x at <=2 stages. Compare IA3/rank-one at actual bytes. Native exact alias is FAIL for Mirror-specific attribution.",
+  "failure_gate": "Any audit seed misses quality/bytes/compute gate or IA3/rank-one matches quality at lower bytes/compute. Exact native GSOFT alias rejects Mirror-specific value regardless of generic expert-sharing feasibility.",
+  "boundaries": ["Synthetic routed FFN functions only; no expert training, language utility, GPU or serving claim.", "Target experts are generated from GSOFT Views by construction; this is not learned capacity evidence.", "One routed expert is active per sample and router IDs are serialized and charged."]
+}
