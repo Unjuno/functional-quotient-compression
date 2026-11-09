@@ -1,0 +1,15 @@
+{
+  "experiment_id":"MA-767",
+  "commit":"8f89b35f",
+  "tests":{"command":"python -m pytest -q experiments/mirror_applications/ma-767-online-adaptation-code-space/tests","passed":3,"failed":0},
+  "serialization":{"roundtrip_checked":true,"byte_exact":true},
+  "metric_replay":{"checked":true,"max_difference":0.0},
+  "fresh_split_integrity_checked":true,
+  "notes":[
+    "Native low-rank adapter and Mirror payload hashes, bytes, test metrics and adaptation operations exactly match at each support size.",
+    "Deterministic replay reproduces all serialized and numeric outputs exactly.",
+    "All 16 task codes are retained; the shared base/basis are supplied fixed state and included in payloads.",
+    "Dynamic code inference (409,600 MAC) and precomposed dense inference (131,072 MAC) are reported separately.",
+    "Synthetic fixed-basis regression only; no NCA/self-organization/real online task claim."
+  ]
+}

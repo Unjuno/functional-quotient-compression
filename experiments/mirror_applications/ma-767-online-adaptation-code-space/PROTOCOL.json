@@ -1,0 +1,21 @@
+{
+  "experiment_id":"MA-767",
+  "title":"Online task adaptation in functional-code space",
+  "status":"SCREENING",
+  "evidence_lane":"MECHANISM/STORAGE/QUALITY/COMPUTE",
+  "base_commit":"5f9157a3",
+  "hypothesis":"Adapting a rank-2 task code preserves heldout task accuracy with fewer complete bytes and less adaptation work than updating a full local rule, while retaining previous task codes.",
+  "physical_object":"shared 16D linear local rule with task-specific adaptation state",
+  "mirror_coordinate":"per-task 2D code on a fixed shared basis",
+  "logical_multiplicity":"16 sequentially adapted task functions retained in state",
+  "prior_art_refs":["PA198","PA195"],
+  "controls":["shared base without adaptation","full per-task weight copies","native low-rank adapter bank"],
+  "development":{"worlds_or_seeds":["dev-76701"],"selection_metric":"test relative RMSE, actual complete serialized bytes, adaptation examples/ops, retained task count"},
+  "fresh":{"worlds_or_seeds":[],"locked_before_access":true,"reason":"synthetic shared-subspace mechanism screen; no audit opened after native LoRA alias"},
+  "grid":{"input_dim":16,"code_rank":2,"tasks":16,"support_examples_per_task":[4,8,16],"test_examples_per_task":512,"seed":76701},
+  "storage":{"authority":"actual serialized inference payload bytes","paid_objects":["shared base weights","shared basis for code method","all task codes or full task weights","task IDs"]},
+  "compute":{"report_tokens_or_examples":true,"report_optimizer_updates":true,"report_active_compute_proxy":true,"report_isolated_wall_clock":true,"adaptation_solver":"closed-form least squares; zero gradient updates","report_dynamic_code_and_precomposed_dense_inference_separately":true},
+  "success_gate":"At <=8 support examples/task, relative RMSE <=0.02; >=25% fewer complete bytes and adaptation ops than full task weights; retain all 16 prior tasks; strict gain over native LoRA control.",
+  "failure_gate":"Quality/storage/adaptation gate miss or exact native low-rank adapter function/payload alias is FAIL for Mirror-specific value.",
+  "boundaries":["Synthetic linear shared-subspace tasks only; fixed basis and base are supplied, not learned online.","Closed-form adaptation is not self-organizing NCA or end-to-end online learning.","No continual real-task retention or deployed runtime claim."]
+}
