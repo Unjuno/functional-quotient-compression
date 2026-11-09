@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-792",
+  "commit": "a4fa1e85",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-792-routing-free-mirror-selfactivation/tests",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": "Mirror/native low-rank output-prototype payload hashes and metrics exactly match at both noise levels"
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Self-activation prototypes, codes, shared transform basis and balance offsets are serialized and charged.",
+    "Synthetic self-activation is a fixed Gaussian score, not a learned Routing-Free MoE gate.",
+    "No end-task or trained routing result is claimed."
+  ]
+}

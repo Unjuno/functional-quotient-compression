@@ -1,0 +1,65 @@
+{
+  "experiment_id": "MA-792",
+  "title": "Routing-free expert self-activation with functional Views",
+  "status": "FAIL",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY/COMPUTE/LOAD-BALANCE",
+  "base_commit": "5e6e3956",
+  "hypothesis": "A shared expert basis plus per-expert Mirror coordinates can jointly specialize expert outputs and self-activation decisions without a centralized top-k router, using fewer bytes than independent routing-free experts.",
+  "physical_object": "one shared expert transform and one shared activation prototype family",
+  "mirror_coordinate": "per-expert coefficient jointly modulating output matrix and self-activation centroid",
+  "logical_multiplicity": "four logical experts with self-activation over four token modes",
+  "prior_art_refs": [
+    "PA210",
+    "PA211"
+  ],
+  "controls": [
+    "independent routing-free experts with self-activation",
+    "shared hard-tied experts",
+    "central top-1 router with independent experts",
+    "native low-rank output and activation-coordinate control"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      "79201; heterogeneity 0,.05"
+    ],
+    "selection_metric": "mode routing accuracy, output nRMSE, load balance, payload bytes and active compute"
+  },
+  "fresh": {
+    "worlds_or_seeds": [],
+    "locked_before_access": true,
+    "reason": "native low-rank output/prototype control is checked before fresh access"
+  },
+  "grid": {
+    "experts": 4,
+    "modes": 4,
+    "dimension": 8,
+    "shared_output_rank": 1,
+    "tokens_per_mode": 256,
+    "private_heterogeneity": [
+      0,
+      0.05
+    ]
+  },
+  "storage": {
+    "authority": "actual compressed NPZ inference payload bytes",
+    "paid_objects": [
+      "expert matrices/basis/codes",
+      "activation centroids/basis/codes",
+      "balance biases",
+      "IDs"
+    ]
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true
+  },
+  "success_gate": "Routing-free Mirror achieves mode accuracy >=.95, output nRMSE <=.02, balanced loads, >=25% fewer bytes than independent routing-free experts, and beats native coordinate controls at matched compute.",
+  "failure_gate": "FAIL if self-activation loses balance/quality, byte/compute gates miss, or native coordinate controls exactly alias Mirror.",
+  "boundaries": [
+    "Synthetic Gaussian modes and linear experts; no trained routing-free MoE or LM loss claim.",
+    "Self-activation uses expert-local scores and adaptive balance offsets, not centralized top-k logits.",
+    "No learned gating or SGD in this screen; coordinates are oracle-estimated from generated operators."
+  ]
+}
