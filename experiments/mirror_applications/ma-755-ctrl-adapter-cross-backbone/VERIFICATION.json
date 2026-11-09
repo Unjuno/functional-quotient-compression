@@ -1,0 +1,15 @@
+{
+  "experiment_id":"MA-755",
+  "commit":"c99e8903",
+  "tests":{"command":"python -m pytest -q experiments/mirror_applications/ma-755-ctrl-adapter-cross-backbone/tests","passed":3,"failed":0},
+  "serialization":{"roundtrip_checked":true,"byte_exact":true},
+  "metric_replay":{"checked":true,"max_difference":0.0},
+  "fresh_split_integrity_checked":true,
+  "notes":[
+    "Native two-tower and Mirror payload hashes, bytes, heldout errors and MAC proxies exactly match.",
+    "Two deterministic replays reproduce all non-timing outputs; wall times are observational.",
+    "Teacher bridge grid is constructed from the same two-tower source/backbone factors; synthetic aligned screen only.",
+    "Training cost was 2,500 Adam updates and is reported separately from inference bytes/MACs.",
+    "No pretrained ControlNet/backbone, image, video or accelerator inference claim."
+  ]
+}
