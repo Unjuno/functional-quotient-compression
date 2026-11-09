@@ -1,0 +1,68 @@
+{
+  "experiment_id": "MA-785",
+  "title": "Residual re-specialization around merged experts",
+  "status": "FAIL",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY/COMPUTE",
+  "base_commit": "e01bc246",
+  "hypothesis": "After routing-guided cluster merging, compact shared residual Views recover member expert functions at lower complete bytes than independent experts; private residual budget marks where shared state stops sufficing.",
+  "physical_object": "four routing-cluster merged expert matrices",
+  "mirror_coordinate": "per-expert low-rank residual coordinates over a shared residual basis",
+  "logical_multiplicity": "sixteen logical experts recovered from four merged experts",
+  "prior_art_refs": [
+    "PA203"
+  ],
+  "controls": [
+    "independent original expert bank",
+    "merge-only M-SMoE-like centers",
+    "native shared-basis low-rank decompression",
+    "per-expert private low-rank residual sweep"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      "78501; heterogeneity 0, .05, .20"
+    ],
+    "selection_metric": "heldout expert-output nRMSE, complete serialized bytes, reconstruction and inference MAC"
+  },
+  "fresh": {
+    "worlds_or_seeds": [],
+    "locked_before_access": true,
+    "reason": "shared-basis and private residual forms are compared to their exact native low-rank controls; no task audit after alias"
+  },
+  "grid": {
+    "experts": 16,
+    "merge_clusters": 4,
+    "dimension": 12,
+    "shared_basis_rank": 2,
+    "private_residual_ranks": [
+      0,
+      2,
+      4,
+      8,
+      12
+    ],
+    "heldout_experts": "every fourth expert"
+  },
+  "storage": {
+    "authority": "actual compressed NPZ inference payload bytes",
+    "paid_objects": [
+      "cluster centers",
+      "shared basis",
+      "all expert codes",
+      "private residual factors",
+      "expert/group IDs"
+    ]
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true
+  },
+  "success_gate": "At least one low private-rank condition has heldout nRMSE <=0.02 and >=25% fewer complete bytes than independent weights, with no more compute than independent inference and a Mirror-specific gain over native low-rank decompression.",
+  "failure_gate": "FAIL for Mirror-specific value if native factorization exactly matches the representation, storage/quality gates fail, or private state eliminates savings.",
+  "boundaries": [
+    "Synthetic linear expert banks and known routing clusters only; no trained M-SMoE/MC-SMoE, router statistics, or language model claim.",
+    "Oracle checkpoints are generated from a shared low-rank residual plus private Gaussian heterogeneity.",
+    "Matrix reconstruction is a one-time load operation; inference MAC and reconstruction MAC are reported separately."
+  ]
+}

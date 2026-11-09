@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-785",
+  "commit": "7d967447",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-785-msmoe-residual-respecialization/tests",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": "Mirror/native rank-2 payload hash and heldout metrics exactly match across three heterogeneity worlds"
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Heldout experts are reserved from basis fitting; their codes are compressed from their available operator weights.",
+    "Private low-rank factors and reconstruction state are included in payload bytes.",
+    "No trained or natural MoE evidence is claimed."
+  ]
+}
