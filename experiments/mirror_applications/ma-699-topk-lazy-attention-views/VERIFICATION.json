@@ -1,0 +1,32 @@
+{
+  "experiment_id": "MA-699",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-699-topk-lazy-attention-views/tests -v",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "k8_shared_bytes": 10979,
+    "k8_independent_bytes": 68347,
+    "audit_k8_hashes": [
+      "961bb15fc6f098df33d98f7637a54256b506df8c87cc5d30f63534e764c56a4b",
+      "87b9ae1f694fb71c216b9b7f8030cd24c6538f394c1e27f611d6f950781d6572",
+      "942664a236002baa6c2f5b32a3c41f50cfa8461e5b32e5d6bca689303ad00250"
+    ]
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 1.863923984046778e-07
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Frozen protocol 0e096af1; audit seeds 69911-69913.",
+    "Top-k active compute scales with k and is reported separately from cache state.",
+    "Native phase coordinates exactly alias Mirror; no Mirror-specific attribution.",
+    "Output diversity is not an independent capacity claim.",
+    "Synthetic FP32 only."
+  ]
+}
