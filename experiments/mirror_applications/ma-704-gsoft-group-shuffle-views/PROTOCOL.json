@@ -1,0 +1,21 @@
+{
+  "experiment_id": "MA-704",
+  "title": "GSOFT group-shuffle Mirror task Views",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM",
+  "base_commit": "161cd9d4",
+  "hypothesis": "A shared linear weight plus short group-shuffle orthogonal View codes can reproduce independent dense task transforms with lower serialized bytes and matrix-free compute; a native GSOFT implementation should be an exact control and will determine whether the result is Mirror-specific.",
+  "physical_object": "one shared FP32 D×D linear weight",
+  "mirror_coordinate": "per-task packed block-orthogonal stages with deterministic group-shuffle permutations",
+  "logical_multiplicity": "16 task-specific dense logical transforms over one shared physical weight",
+  "prior_art_refs": ["PA172", "PA21", "PA24"],
+  "controls": ["independent full task matrices", "shared W plus native GSOFT group-shuffle coordinates", "one-stage and multi-stage matrix-free execution", "dense merged task-matrix apply"],
+  "development": {"worlds_or_seeds": ["dev-70401"], "selection_metric": "function output NRMSE, actual serialized bytes, MAC proxy, and CPU wall time per transform"},
+  "fresh": {"worlds_or_seeds": ["audit-70411", "audit-70412", "audit-70413"], "locked_before_access": true},
+  "grid": {"width": 64, "tasks": 16, "examples": 128, "block_width": 8, "group_shuffle_stages": [1, 2, 4]},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["shared W", "all per-task block orthogonal factors", "metadata", "independent full task matrices", "deterministic shuffle pattern description"]},
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true},
+  "success_gate": "Across all audit seeds, matrix-free GSOFT output NRMSE <=1e-5 and at 2 stages actual payload <=50% independent while compute <=1.3x dense apply. Mirror-specific attribution additionally requires beating native GSOFT at comparable state/compute.",
+  "failure_gate": "Any audit seed exceeds quality or byte/compute gates; exact native GSOFT alias is FAIL for Mirror-specific attribution regardless of generic structured-transform feasibility.",
+  "boundaries": ["Synthetic linear transforms generated from group-shuffle factors by construction; no trained task quality or capacity claim.", "CPU wall time is local NumPy calibration only, not a fused kernel or GPU serving result.", "Permutation schedule is a fixed deterministic function of shape and stage index; only the factors and schedule metadata are paid."]
+}
