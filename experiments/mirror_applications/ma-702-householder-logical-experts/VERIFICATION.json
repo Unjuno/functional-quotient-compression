@@ -1,0 +1,35 @@
+{
+  "experiment_id": "MA-702",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-702-householder-logical-experts/tests -v",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "audit_r1_hashes": [
+      "99b838ab6f9c3f7f08751cda0d4fe7c2327c12fd27533e65175811ac8f2c4e21",
+      "c1b7b4f65ee60b3aa4555cb33512f51ac5aec4ef3c18f6f21bf5f189e4e861f3",
+      "755cc532ebd9d51f1d0cd47bd099fde2cfa39a8fcc99775b29def643907bb366"
+    ],
+    "audit_r4_hashes": [
+      "354ca41644442089a557dffea05ccb6d944d323540d837e8a085c33340b913b3",
+      "f6cca725c40cc409c565f20d068e22d1510bb987621528fa993eb64cebff5099",
+      "bc7e09b58df24edfaa2065df9297d475ac25dc3a9b32840a44fe829e630d3a7d"
+    ]
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 9.3025065136563e-08
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Protocol frozen at 884bddc9; three audit seeds.",
+    "At r1 candidate 71,038B vs 787,590B independent, with 1.016x MAC proxy.",
+    "Native Householder exactly aliases; same-budget FiLM is 20B smaller at r1 but output error .263-.324.",
+    "Synthetic routed FFN teacher generated from Householder family.",
+    "MA-701 and MA-702 repeat native-parameterization alias; pause further reflection-code-only variants pending native-distinct mechanism."
+  ]
+}
