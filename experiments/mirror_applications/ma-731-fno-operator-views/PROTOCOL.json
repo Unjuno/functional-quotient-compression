@@ -1,0 +1,15 @@
+{
+ "experiment_id":"MA-731","title":"FNO parameter-family Mirror operator views","status":"SCREENING","evidence_lane":"MECHANISM/STORAGE/QUALITY","base_commit":"0276c9ae",
+ "hypothesis":"A shared spectral operator basis and low-description parameter code represents unseen diffusion operators with lower bytes than independent kernels and beats native per-mode polynomial conditioning.",
+ "physical_object":"one Fourier Neural Operator diagonal spectral multiplier kernel","mirror_coordinate":"alpha-conditioned coefficients over a shared operator atom basis","logical_multiplicity":"multiple diffusion operators indexed by physical PDE parameter alpha",
+ "prior_art_refs":["PA186"],
+ "controls":["independent spectral multiplier bank","Mirror low-rank basis plus cubic code","native per-mode cubic alpha conditioning","scalar linear interpolation","analytic known-law diffusion multiplier oracle"],
+ "development":{"worlds_or_seeds":["dev-73101"],"selection_metric":"relative solution error by resolution, complete serialized operator bytes, active multiply proxy"},
+ "fresh":{"worlds_or_seeds":[],"locked_before_access":true,"reason":"mechanism screen; no audit if native function or analytic control dominates"},
+ "grid":{"positive_fourier_modes":16,"fit_alpha_values":20,"heldout_alpha_values":7,"resolutions":[64,128],"input_fields_per_alpha":128,"diffusion_time":0.04,"mirror_basis_ranks":[2,4,8,16],"polynomial_degree":3},
+ "storage":{"authority":"actual serialized inference operator payload bytes","paid_objects":["shared operator base","basis atoms","alpha-to-code coefficients","independent per-alpha kernels","metadata"]},
+ "compute":{"report_spectral_multiply_proxy":true,"report_wall_clock":true},
+ "success_gate":"Relative solution error <=.02 at both resolutions, >=25% complete-byte saving vs independent kernels, and beat native per-mode polynomial conditioning in quality/bytes.",
+ "failure_gate":"Error/byte miss, exact native polynomial alias or known-law upper control dominance => scoped FAIL for Mirror-specific value.",
+ "boundaries":["Known synthetic 1D diffusion equation, no trained FNO checkpoint.","Analytic physical formula is an oracle upper control.","No natural PDE, extrapolation guarantee or accelerator runtime claim."]
+}

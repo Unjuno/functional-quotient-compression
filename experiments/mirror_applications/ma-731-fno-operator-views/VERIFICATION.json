@@ -1,0 +1,25 @@
+{
+  "experiment_id": "MA-731",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-731-fno-operator-views/tests -v",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": false,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Development seed 73101 only; no audit data accessed.",
+    "Protocol amendment 01 increased training alpha count to 20 before valid sweep because rank16 cannot be identified from eight centered samples.",
+    "Mirror and native PCA code controls have exact payload hash/output alias at each rank.",
+    "All Mirror bundles exceed independent and native per-mode cubic storage; scoped FAIL.",
+    "Analytic physics formula is an oracle upper bound, not learned FNO evidence."
+  ]
+}
