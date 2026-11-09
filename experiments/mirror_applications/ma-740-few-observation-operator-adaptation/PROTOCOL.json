@@ -1,0 +1,15 @@
+{
+ "experiment_id":"MA-740","title":"few-observation operator adaptation by Mirror code only","status":"SCREENING","evidence_lane":"MECHANISM/QUALITY/STORAGE/COMPUTE","base_commit":"4dea7a71",
+ "hypothesis":"A four-coordinate phase View adapted from sparse operator observations attains held-out function quality comparable to an eight-coordinate CAVIA-style latent context with lower serialized task state and no shared-weight updates.",
+ "physical_object":"fixed shared four-frequency operator basis and amplitudes","mirror_coordinate":"four task-specific Fourier phase coordinates only","logical_multiplicity":"task-specific operators inferred from few sensor/function observations",
+ "prior_art_refs":["PA187","PA129"],
+ "controls":["frozen shared operator","CAVIA-style eight-dimensional output context","full eight-parameter Fourier fine-tuning","Mirror four-phase code"],
+ "development":{"worlds_or_seeds":["dev-74001"],"calibration_observations_per_task":[4,8,16],"selection_metric":"held-out input nRMSE, adaptation function evaluations, actual complete serialized bytes"},
+ "fresh":{"worlds_or_seeds":["fresh-74002","fresh-74003","fresh-74004"],"locked_before_access":true,"reason":"run all three only if development Mirror meets quality/storage gate"},
+ "grid":{"frequencies":[1,2,3,4],"tasks":16,"heldout_inputs_per_task":256,"noise_sd":0.01,"phase_range":[-1.2,1.2]},
+ "storage":{"authority":"actual serialized full task-bank payload bytes","paid_objects":["shared amplitudes/frequency metadata","per-task phase or latent coefficients","task metadata"]},
+ "compute":{"report_observations_and_optimizer_function_evaluations":true,"report_adaptation_compute_proxy":true,"report_wall_clock":true},
+ "success_gate":"On all three frozen calibration sizes, Mirror test nRMSE <=.05 and within 10% of CAVIA context error, task-state bytes <=.65x CAVIA, and adaptation evaluation count no more than 2x context solve. If promising, pass all three fresh seeds.",
+ "failure_gate":"Quality, bytes or compute gate miss, or exact direct/native context representation alias, is FAIL for Mirror-specific value.",
+ "boundaries":["Analytic Fourier function family only; no neural network or physical PDE training.","No base model updates; task identities and observations are synthetic.","Fresh tasks are opened only after dev gate success."]
+}
