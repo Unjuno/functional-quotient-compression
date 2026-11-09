@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-783",
+  "commit": "f8eb99c4",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-783-unipool-layer-view/tests",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": "Mirror and direct-angle Givens payload/function/MAC values exactly match"
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "All methods serialize routers, expert IDs and layer IDs; Mirror/native additionally serialize all angle codes.",
+    "CPU timing is 50-pass local microbenchmark, not accelerator or fused-kernel evidence.",
+    "Fresh remained sealed after the native direct-angle exact alias."
+  ]
+}

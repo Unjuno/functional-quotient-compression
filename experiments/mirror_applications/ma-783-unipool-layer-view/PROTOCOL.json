@@ -1,0 +1,62 @@
+{
+  "experiment_id": "MA-783",
+  "title": "UniPool global expert pool with layer role views",
+  "status": "FAIL",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY/COMPUTE",
+  "base_commit": "fd752e28",
+  "hypothesis": "Small layer-specific input/output coordinate Views recover layer-specialized functions from one global physical expert pool with fewer complete bytes than per-layer experts, while retaining router quality and reasonable active compute.",
+  "physical_object": "one global bank of four 8x8 experts with a per-layer router",
+  "mirror_coordinate": "per-layer four-angle Givens coordinate code applied around shared experts",
+  "logical_multiplicity": "sixteen layer-expert operators from four physical experts and four layer codes",
+  "prior_art_refs": [
+    "PA205",
+    "PA20"
+  ],
+  "controls": [
+    "independent per-layer expert matrices",
+    "UniPool global experts without Views",
+    "native direct-angle Givens/OFT layer transforms"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      "78301"
+    ],
+    "selection_metric": "routed heldout output nRMSE, complete serialized payload bytes and router+expert MACs"
+  },
+  "fresh": {
+    "worlds_or_seeds": [],
+    "locked_before_access": true,
+    "reason": "exact native direct-angle alias is tested before opening fresh data"
+  },
+  "grid": {
+    "layers": 4,
+    "global_experts": 4,
+    "input_dim": 8,
+    "output_dim": 8,
+    "givens_angles_per_layer": 4,
+    "examples": 256
+  },
+  "storage": {
+    "authority": "actual compressed NPZ inference payload bytes",
+    "paid_objects": [
+      "global expert matrices",
+      "all per-layer routers",
+      "Givens angle codes",
+      "expert IDs",
+      "metadata"
+    ]
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true
+  },
+  "success_gate": "Routed output nRMSE <=0.02, >=25% fewer complete bytes than independent layer experts, and strict storage/quality/compute improvement over UniPool and direct-angle Givens controls.",
+  "failure_gate": "FAIL for Mirror-specific value if the native direct-angle control exactly aliases the view, or if router/quality/byte/compute gates are missed.",
+  "boundaries": [
+    "Synthetic linear experts and fixed random routers only; no trained UniPool/MoE, language model NLL or accelerator throughput claim.",
+    "The direct-angle Givens control is paid at identical precision and payload completeness.",
+    "No training or fresh task identity evaluation; operator maps are oracle generated."
+  ]
+}
