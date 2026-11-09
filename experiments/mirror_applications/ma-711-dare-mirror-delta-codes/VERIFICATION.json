@@ -1,0 +1,28 @@
+{
+  "experiment_id": "MA-711",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-711-dare-mirror-delta-codes/tests -v",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "development_model_payloads": 39,
+    "native_pca_hash_alias": true,
+    "dare_sparse_indices_charged": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_rank1_development_nrmse": 1.4122,
+    "min_rank1_bytes_over_dare_ratio": 0.857
+  },
+  "fresh_split_integrity_checked": false,
+  "notes": [
+    "Development seed 71101 only; frozen byte gate missed and audit seeds 71111-71113 remained unopened.",
+    "DARE sparse payload includes uint16 indices, float32 values, offsets and metadata.",
+    "Task Arithmetic/TIES reported as shared merge points and not conflated with per-task delta retention.",
+    "Synthetic task-delta family; no trained model, natural benchmark or GPU runtime claim."
+  ]
+}
