@@ -1,0 +1,21 @@
+{
+  "experiment_id":"MA-765",
+  "title":"Compact morphology code bank with damage recovery",
+  "status":"SCREENING",
+  "evidence_lane":"MECHANISM/STORAGE/QUALITY/COMPUTE",
+  "base_commit":"81f11587",
+  "hypothesis":"One shared local repair rule plus compact morphology codes reconstructs and recovers 16 patterns from 30% damage with at least 25% fewer complete bytes than storing independent morphology targets.",
+  "physical_object":"shared local recurrent target-repair update rule",
+  "mirror_coordinate":"per-morphology angle, phase, frequency and bias code",
+  "logical_multiplicity":"16 regenerating target patterns",
+  "prior_art_refs":["PA195","PA196"],
+  "controls":["independent full target-map bank","hard-tied single target","native analytic morphology coordinate code"],
+  "development":{"worlds_or_seeds":["dev-76501"],"selection_metric":"actual complete bytes, final target nRMSE, recovery fraction, stencil and generator operation proxy"},
+  "fresh":{"worlds_or_seeds":[],"locked_before_access":true,"reason":"training-free analytic screen; no independent audit after exact native analytic code alias"},
+  "grid":{"morphologies":16,"grid_size":[32,32],"damage_fraction":0.30,"rollout_steps":24,"update_rate":0.25,"seed":76501,"code":["angle","phase","frequency","bias"]},
+  "storage":{"authority":"actual serialized inference payload bytes","paid_objects":["all target maps for independent bank","all morphology codes","grid/generator metadata","shared rule implementation metadata"]},
+  "compute":{"report_tokens_or_examples":true,"report_optimizer_updates":true,"report_active_compute_proxy":true,"report_isolated_wall_clock":true,"training_updates":0,"target_generation_ops":"12 scalar operations per cell"},
+  "success_gate":"Mean final target nRMSE <=0.02, recovery fraction >=0.95, >=25% complete byte savings, and strict quality-byte-compute improvement over native analytic code and hard tying.",
+  "failure_gate":"Quality/recovery/byte gate miss or exact native analytic morphology-code function/payload alias is FAIL for Mirror-specific value.",
+  "boundaries":["Procedurally generated smooth sinusoidal target maps with a fixed local relaxation rule; not a learned NCA.","Damage is random cell replacement; no self-organized growth, regeneration dynamics, or biological morphology claim.","No accelerator runtime claim."]
+}

@@ -1,0 +1,15 @@
+{
+  "experiment_id":"MA-765",
+  "commit":"71f85763",
+  "tests":{"command":"python -m pytest -q experiments/mirror_applications/ma-765-morphology-code-bank/tests","passed":3,"failed":0},
+  "serialization":{"roundtrip_checked":true,"byte_exact":true},
+  "metric_replay":{"checked":true,"max_difference":0.0},
+  "fresh_split_integrity_checked":true,
+  "notes":[
+    "Native analytic morphology-code and Mirror payload hashes, bytes, target errors, recovery and ops exactly match.",
+    "Deterministic replay reproduces all non-timing metrics; wall time is observational.",
+    "All 16 target maps are generated from angle/phase/frequency/bias; 30% random cell damage applied before 24 local updates.",
+    "This is target-directed local relaxation, not emergent morphology or learned NCA regeneration.",
+    "Fresh/audit not opened after exact native analytic generator alias."
+  ]
+}
