@@ -1,0 +1,9 @@
+{
+  "experiment_id": "MA-712",
+  "commit": "pending",
+  "tests": {"command": "python -m unittest discover -s experiments/mirror_applications/ma-712-dare-parameter-superposition/tests -v", "passed": 1, "failed": 0},
+  "serialization": {"roundtrip_checked": true, "byte_exact": true, "development_model_payloads": 60, "native_hadamard_ps_hash_alias": true, "shared_base_and_context_state_charged": true},
+  "metric_replay": {"checked": true, "task_count_8_independent_dare_nrmse": 2.808, "task_count_8_dare_ps_nrmse": 8.692, "task_count_32_independent_dare_nrmse": 2.919, "task_count_32_dare_ps_nrmse": 17.599},
+  "fresh_split_integrity_checked": false,
+  "notes": ["Development seed 71201 only; frozen byte and quality gates missed; audit seeds 71211-71213 remained unopened.", "Sparse DARE payload includes base, uint16 indices, values, offsets, task IDs and metadata; PS payload includes base, superposed tensor, context seed/IDs and generator metadata.", "Synthetic linear task deltas; no pretrained model, natural benchmark or GPU runtime claim."]
+}
