@@ -1,0 +1,15 @@
+{
+ "experiment_id":"MA-718","title":"merge-many then factor reusable Mirror capability atoms","status":"SCREENING","evidence_lane":"MECHANISM/STORAGE/QUALITY","base_commit":"2a9990c9",
+ "hypothesis":"A shared capability atom basis fit to merged source deltas recovers individual tasks and their compositions at lower complete bytes than DARE/DELLA sparse controls, beyond native PCA/shared-basis coding.",
+ "physical_object":"shared basis learned from a bank of source task deltas","mirror_coordinate":"per-task sparse coefficient vector over shared capability atoms","logical_multiplicity":"24 individual synthetic source functions and pairwise composed functions",
+ "prior_art_refs":["PA175","PA176","PA27"],
+ "controls":["independent dense delta bank","random DARE-inspired top-10%","magnitude top-10% DELLA-inspired","native PCA/shared-basis ranks","Mirror atom codes","Task Arithmetic pair sums","TIES-like sign consensus"],
+ "development":{"worlds_or_seeds":["dev-71801"],"selection_metric":"held-out task and composition NRMSE, complete serialized bytes"},
+ "fresh":{"worlds_or_seeds":[],"locked_before_access":true,"reason":"frozen development gate decides whether audit is opened"},
+ "grid":{"dimension":512,"tasks":24,"basis_fit_tasks":16,"heldout_tasks":8,"latent_shared_rank":6,"private_noise_fraction":0.02,"basis_ranks":[2,4,6,8,12,16],"seed":71801},
+ "storage":{"authority":"actual serialized complete bank bytes","paid_objects":["basis atoms","task coefficients","sparse indices/values","private residuals","source task IDs","composition requests","outputs","metadata"]},
+ "compute":{"optimizer_updates":0,"report_svd_and_projection_proxy":true,"report_wall_clock":true},
+ "success_gate":"Held-out individual and pair-composition NRMSE <=0.05, >=25% complete bank byte savings versus independent and both sparse controls, and improvement over native PCA at matched bytes.",
+ "failure_gate":"Quality/byte miss or exact native PCA/shared-coordinate alias is FAIL for this synthetic Mirror-specific mechanism hypothesis.",
+ "boundaries":["Synthetic deltas only; no pretrained model, real tasks or natural quality.","DARE/DELLA/TIES are simplified synthetic controls, not complete algorithm reproductions.","No audit/fresh task identities are opened after development FAIL."]
+}
