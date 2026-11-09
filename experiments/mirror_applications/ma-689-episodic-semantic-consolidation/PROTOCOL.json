@@ -4,6 +4,13 @@
   "status": "SCREENING",
   "evidence_lane": "MECHANISM/STORAGE/COMPUTE/EPISODIC_RETIREMENT",
   "base_commit": "8c99306e",
+  "protocol_amendment": {
+    "timing": "before corrected development rerun; no fresh/audit data accessed",
+    "reason": "The initial serialization used longer NPZ field names for native PCA than Mirror, creating a small metadata-only byte difference for identical arrays.",
+    "change": "Equivalent Mirror and native PCA arrays use identical field names, array order and serializer so exact aliases have equal serialized bytes.",
+    "unchanged": ["hypothesis", "task", "seeds", "rank", "quality gates", "compute gates", "fresh-sealing rule"],
+    "preserved_attempt": "source/attempts/initial_noncanonical_native_schema/"
+  },
   "hypothesis": "For aligned episode-conditioned linear functions, transferring a compact shared-basis episode code bank into a persistent consolidated base and deleting the episode store preserves episode recall at lower complete serialized bytes and bounded lookup compute than independent full episode adapters.",
   "prior_art_refs": ["PA152", "PA147"],
   "task": {
