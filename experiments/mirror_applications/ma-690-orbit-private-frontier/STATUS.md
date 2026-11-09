@@ -6,7 +6,7 @@
 - Protocol frozen before first run; two documented pre-audit accounting/implementation amendments
 - Development: complete; seeds 69001/69002
 - Fresh/audit: sealed after exact native-family alias
-- Results committed: pending
+- Results committed: `3f04ee5181224ec927bb2cc7f494819004c1329a`
 - Verification: 5 tests passed; full-residual replay maximum error <2.3e-8
 
 ## H — Hypothesis
