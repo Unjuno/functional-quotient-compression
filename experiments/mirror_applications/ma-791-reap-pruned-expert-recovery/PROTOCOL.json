@@ -1,0 +1,66 @@
+{
+  "experiment_id": "MA-791",
+  "title": "REAP pruning with functional Views for removed experts",
+  "status": "FAIL",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY/COMPUTE",
+  "base_commit": "9b859ebf",
+  "hypothesis": "After reconstruction-aware pruning retains half of the expert pool, compact Views recover functionally useful pruned experts at lower complete bytes than storing the full bank.",
+  "physical_object": "eight retained expert matrices chosen as cluster partners",
+  "mirror_coordinate": "per-pruned-expert coefficient over a shared residual basis",
+  "logical_multiplicity": "sixteen expert behaviors from eight retained physical experts",
+  "prior_art_refs": [
+    "PA209"
+  ],
+  "controls": [
+    "independent full expert bank",
+    "REAP-like retained bank with routing to retained partners",
+    "native PCA residual codes",
+    "private residual rank control"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      "79101; heterogeneity 0,.05"
+    ],
+    "selection_metric": "heldout pruned-expert output nRMSE, actual bytes and reconstruction/inference MAC"
+  },
+  "fresh": {
+    "worlds_or_seeds": [],
+    "locked_before_access": true,
+    "reason": "native PCA exact alias is evaluated before fresh access"
+  },
+  "grid": {
+    "experts": 16,
+    "retained": 8,
+    "pruned": 8,
+    "dimension": 12,
+    "shared_rank": 1,
+    "heterogeneity": [
+      0,
+      0.05
+    ]
+  },
+  "storage": {
+    "authority": "actual compressed NPZ inference payload bytes",
+    "paid_objects": [
+      "retained experts",
+      "shared basis",
+      "codes",
+      "retained/pruned IDs",
+      "routing map",
+      "private factors"
+    ]
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true
+  },
+  "success_gate": "Heldout pruned expert nRMSE <=0.02 with >=25% fewer complete bytes than independent experts and lower reconstruction burden than full recovery.",
+  "failure_gate": "FAIL for Mirror-specific value if native PCA aliases, removed experts are not recoverable, or codes erase pruning savings.",
+  "boundaries": [
+    "Synthetic linear experts and predetermined retained/pruned pairs; no actual REAP importance estimates or MoE task quality.",
+    "Pruned experts are generated as partner plus shared residual and private noise.",
+    "No claim that reconstructing a pruned expert improves end-task quality."
+  ]
+}
