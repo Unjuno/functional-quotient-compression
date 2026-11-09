@@ -1,0 +1,15 @@
+{
+ "experiment_id":"MA-716","title":"KnOTS aligned LoRA Mirror bank","status":"SCREENING","evidence_lane":"MECHANISM/STORAGE/QUALITY","base_commit":"d65f326e",
+ "hypothesis":"After shared orthogonal alignment, sparse task-coordinate codes preserve heterogeneous low-rank updates at lower complete bytes than native aligned cores and independent LoRA factors, beyond gauge-only effects.",
+ "physical_object":"shared LoRA update subspace estimated from development tasks","mirror_coordinate":"sparse aligned core code per task, with optional paid private rank-1 residual","logical_multiplicity":"16 synthetic task update functions",
+ "prior_art_refs":["PA180","PA04","PA27","PA02"],
+ "controls":["independent rank-8 LoRA factors","native dense aligned core","native diagonal aligned core","native sparse top-k core","shared basis plus private rank-1 residual"],
+ "development":{"worlds_or_seeds":["dev-71601"],"selection_metric":"held-out task-delta NRMSE, complete serialized bytes, gauge invariance"},
+ "fresh":{"worlds_or_seeds":[],"locked_before_access":true,"reason":"mechanism screen only; audit not opened after development failure"},
+ "grid":{"dimension":128,"rank":8,"tasks":16,"train_tasks":8,"heldout_tasks":8,"sparse_topk":[2,4,8,16,32],"gauge_refactorizations":3},
+ "storage":{"authority":"actual serialized bank bytes","paid_objects":["shared bases","task codes","indices","scales","private residuals","metadata","independent LoRA factors for control"]},
+ "compute":{"optimizer_updates":0,"report_projection_work":true,"report_isolated_wall_clock":true},
+ "success_gate":"Held-out update NRMSE <=0.05 and >=25% complete payload savings against independent LoRA and native dense aligned cores, with native sparse controls not matching exactly.",
+ "failure_gate":"Quality/byte gate miss, exact alias to native aligned code, or zero function diversity after gauge refactorization => FAIL for Mirror-specific value.",
+ "boundaries":["Synthetic matrices only; no trained natural task adapters or base model.","Oracle held-out task updates measure representation only, not adaptation or task quality.","No fresh/audit, language or production runtime claim."]
+}
