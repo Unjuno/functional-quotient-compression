@@ -1,0 +1,21 @@
+{
+  "experiment_id": "MA-713",
+  "title": "DELLA magnitude-aware Mirror delta basis",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY",
+  "base_commit": "d47e0cc7",
+  "hypothesis": "Magnitude-aware retention followed by shared-basis task codes can preserve task function with fewer complete payload bytes than DELLA-style sparse deltas; gains must exceed random DARE sparsification, TIES and native PCA/shared coding.",
+  "physical_object": "shared base model and a magnitude-selected sparse task-delta bank",
+  "mirror_coordinate": "per-task coefficients over a shared PCA basis fitted to magnitude-retained deltas",
+  "logical_multiplicity": "16 task-specific model deltas",
+  "prior_art_refs": ["PA176", "PA27"],
+  "controls": ["independent dense deltas", "magnitude top-10% sparse deltas (DELLA-inspired control)", "random DARE top-10% sparse deltas", "magnitude-retained shared PCA ranks 1/2/4/8", "native PCA/shared-basis coding", "TIES trim/sign merge"],
+  "development": {"worlds_or_seeds": ["dev-71301"], "selection_metric": "held-out task-output NRMSE, complete serialized bytes, DELLA-relative error and interference"},
+  "fresh": {"worlds_or_seeds": ["audit-71311", "audit-71312", "audit-71313"], "locked_before_access": true},
+  "grid": {"delta_width": 2048, "tasks": 16, "shared_teacher_rank": 8, "private_delta_fraction": [0.0, 0.05, 0.2], "retained_fraction": 0.1, "pca_ranks": [1, 2, 4, 8], "probe_vectors_per_task": 128, "ties_trim_fraction": 0.2},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["dense deltas", "sparse indices and values", "shared basis", "task coefficients", "merge state", "metadata"]},
+  "compute": {"report_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true, "report_sparsification/PCA/merge work": true},
+  "success_gate": "At least one PCA rank across all audit seeds: full payload <=75% of magnitude-sparse payload, task-output NRMSE <= magnitude-sparse NRMSE +.02, and active inference arithmetic <=1.25x sparse decode. Mirror-specific value requires strict improvement over canonical native PCA/shared-basis control; exact alias is FAIL for Mirror-specific attribution.",
+  "failure_gate": "No magnitude-PCA rank meets the frozen bytes/quality/compute gate, or native PCA/shared-basis coding exactly matches the candidate. Report magnitude versus random retention separately.",
+  "boundaries": ["Synthetic low-rank task deltas only; no pretrained fine-tuning or natural benchmark.", "Top-magnitude retention is a transparent DELLA-inspired sparsification control, not a reproduction of the full DELLA sampling algorithm.", "TIES is reported as a shared merged-model interference point, not as per-task model retention.", "No GPU/production runtime claim; compute is an analytic proxy."]
+}
