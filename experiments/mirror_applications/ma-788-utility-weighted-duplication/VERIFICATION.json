@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-788",
+  "commit": "2244dc9e",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-788-utility-weighted-duplication/tests",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": "all-view and native rank-1 LoRA payload hash/metrics exactly match"
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Physical IDs, selected matrices, all utility weights, shared basis and child codes are paid in serialized payload.",
+    "Utility K=2 is compared against random K=2 and all physical copies.",
+    "No training or natural utility score was used."
+  ]
+}

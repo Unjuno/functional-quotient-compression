@@ -1,0 +1,69 @@
+{
+  "experiment_id": "MA-788",
+  "title": "Utility-weighted physical expert copies vs logical Views",
+  "status": "FAIL",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY/COMPUTE",
+  "base_commit": "35e3b169",
+  "hypothesis": "Allocating full physical copies to high-utility children and compact Views to aligned low-utility children improves the quality/bytes/compute frontier over all-copy, all-View and random-copy policies.",
+  "physical_object": "one parent expert with a shared residual basis and optional selected full child copies",
+  "mirror_coordinate": "per-child scalar basis coefficient for logical copies",
+  "logical_multiplicity": "sixteen child expert functions with utility-weighted physical allocation",
+  "prior_art_refs": [
+    "PA206"
+  ],
+  "controls": [
+    "all physical copies",
+    "all Mirror codes",
+    "utility-ranked hybrid",
+    "random hybrid at equal physical count",
+    "native rank-1 LoRA"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      "78801"
+    ],
+    "selection_metric": "utility-weighted heldout output error, total payload bytes, physical copies and code inference MAC"
+  },
+  "fresh": {
+    "worlds_or_seeds": [],
+    "locked_before_access": true,
+    "reason": "native low-rank control exactly aliases View; keep as one development screen"
+  },
+  "grid": {
+    "children": 16,
+    "dimension": 12,
+    "view_rank": 1,
+    "physical_copies": [
+      0,
+      2,
+      4,
+      8,
+      16
+    ],
+    "high_utility_private_variation": 0.15
+  },
+  "storage": {
+    "authority": "actual compressed NPZ inference payload bytes",
+    "paid_objects": [
+      "parent",
+      "shared basis",
+      "all child codes",
+      "physical child matrices",
+      "utility/routing weights",
+      "indices"
+    ]
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true
+  },
+  "success_gate": "A utility-ranked hybrid must beat all-copy and all-View quality/byte/compute Pareto at equal utility-weighted error and outperform random copy selection at equal K.",
+  "failure_gate": "FAIL for Mirror specificity if native low-rank matches View behavior, actual bytes erase hybrid savings, or utility selection does not beat random at equal K.",
+  "boundaries": [
+    "Synthetic linear child functions and frequency weights only; no trained MoE utility estimator or pretraining cost claim.",
+    "The top two utility children include private residual variation by construction.",
+    "No claim that observed fixed-budget gains increase model capacity."
+  ]
+}
