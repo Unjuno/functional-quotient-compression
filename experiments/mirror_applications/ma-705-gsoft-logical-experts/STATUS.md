@@ -3,7 +3,7 @@
 - Status: FAIL
 - Branch: `research/ma-705-gsoft-logical-experts-20261109`
 - Base commit: `dba727b6`
-- Last verified commit: pending
+- Last verified commit: aad2a273
 - Development complete: yes
 - Fresh/audit opened: yes
 - Results committed: yes
