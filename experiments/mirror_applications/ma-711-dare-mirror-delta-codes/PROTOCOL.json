@@ -1,0 +1,21 @@
+{
+  "experiment_id": "MA-711",
+  "title": "DARE-sparsified task deltas as Mirror codes",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY",
+  "base_commit": "dfd0adba",
+  "hypothesis": "After mandatory DARE sparsification, a shared task-delta basis plus compact task codes can reduce actual complete payload bytes while preserving held-out task function quality; gains must exceed native PCA/shared-basis coding and Task Arithmetic/TIES controls.",
+  "physical_object": "shared base model plus one sparse delta basis across 16 synthetic tasks",
+  "mirror_coordinate": "per-task coefficients over a shared basis fitted to DARE-sparsified deltas",
+  "logical_multiplicity": "16 task-specific model deltas",
+  "prior_art_refs": ["PA175", "PA26", "PA27"],
+  "controls": ["independent dense task deltas", "DARE per-task delta sparsification at identical 90% drop", "raw shared-basis coordinates", "DARE then PCA basis plus task codes", "native PCA/shared-basis coding of DARE deltas", "Task Arithmetic mean merge", "TIES-style trim/sign-merge baseline"],
+  "development": {"worlds_or_seeds": ["dev-71101"], "selection_metric": "held-out function NRMSE against original task deltas, error relative to DARE, complete serialized payload bytes, and merge interference"},
+  "fresh": {"worlds_or_seeds": ["audit-71111", "audit-71112", "audit-71113"], "locked_before_access": true},
+  "grid": {"delta_width": 2048, "tasks": 16, "physical_basis_rank": 8, "private_delta_fraction": [0.0, 0.05, 0.2], "dare_drop_fraction": 0.9, "pca_ranks": [1, 2, 4, 8]},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["dense deltas or sparse DARE indices and values", "shared bases", "task codes", "PCA state", "merge weights", "TIES sign/trim state", "metadata"]},
+  "compute": {"report_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true, "report_sparse_decode_and_basis_apply_work": true},
+  "success_gate": "At least one DARE+PCA rank across all audit seeds: actual full payload <=75% of DARE payload, original-task function NRMSE no more than DARE NRMSE +.02, and inference arithmetic <=1.25x sparse DARE decode. Mirror-specific value additionally requires strict improvement over canonical native PCA/shared-basis coding at matched bytes; exact alias is FAIL for Mirror-specific attribution.",
+  "failure_gate": "No rank meets the frozen DARE-relative quality/byte/compute gate, or native PCA/shared-basis representation exactly aliases Mirror. Report raw shared-basis, DARE and merge frontiers separately.",
+  "boundaries": ["Synthetic linear task deltas from a shared low-rank basis; no pretrained language model, natural benchmark or actual fine-tuning claim.", "The physical basis family is known only to generate tasks; raw-basis results are an oracle-aligned upper bound.", "Task Arithmetic and TIES merge one shared delta; their per-task interference metric is not directly equivalent to retaining separate task deltas.", "No GPU or production merge runtime conclusion; arithmetic counts are analytic proxies."]
+}
