@@ -1,0 +1,24 @@
+{
+  "experiment_id": "MA-718",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-718-capability-atoms/tests -v",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": false,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Development seed 71801 only; audit unopened.",
+    "Mirror atom payloads exactly alias native PCA payloads at every tested rank.",
+    "Full task arithmetic and TIES control rows were not implemented; simplified DARE/DELLA-inspired controls are explicitly scoped.",
+    "Scoped FAIL for Mirror-specific attribution despite useful synthetic PCA compression."
+  ]
+}
