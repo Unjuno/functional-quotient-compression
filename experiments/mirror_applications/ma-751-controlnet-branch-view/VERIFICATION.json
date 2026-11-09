@@ -1,11 +1,21 @@
 {
-  "experiment_id":"MA-751",
-  "commit":"pending",
-  "tests":{"command":"python -m pytest -q experiments/mirror_applications/ma-751-controlnet-branch-view/tests","passed":3,"failed":0},
-  "serialization":{"roundtrip_checked":true,"byte_exact":true},
-  "metric_replay":{"checked":true,"max_difference":0.0},
-  "fresh_split_integrity_checked":true,
-  "notes":[
+  "experiment_id": "MA-751",
+  "commit": "413276f8",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-751-controlnet-branch-view/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
     "Native direct Givens and Mirror share exact full payload hash, bytes, spatial error and MAC proxy.",
     "Deterministic rerun reproduces all non-timing outputs; CPU timing is observational only.",
     "Synthetic branch only; no pretrained ControlNet, image-generation or production latency claim.",
