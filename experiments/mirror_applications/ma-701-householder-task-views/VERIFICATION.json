@@ -1,0 +1,33 @@
+{
+  "experiment_id": "MA-701",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-701-householder-task-views/tests -v",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "audit_r4_hashes": [
+      "1d0c776755e6c1c953a61561d5dbbb13a7e60d9d5db9873524d0876fc40258d8",
+      "7bb4f131aec2d2dfc5ec2a75e66b8f08f8c51fd7fc016ccc7270b3216cac77a2",
+      "8ecaead8e631cdc25ef8ddf0b45624b81685bdfe0cef5d9059b94e7f0ff436da"
+    ],
+    "r4_candidate_bytes": 49936,
+    "r4_independent_bytes": 262668,
+    "block_control_packed_bytes": 66330
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 1.7381179126412703e-07
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Protocol frozen at c79b2975. Initial block-OFT dense-zero serialization preserved under source/attempts; compact blocks are authoritative.",
+    "Householder vs independent outputs <=1.74e-7; candidate uses 19.01% bytes at r4 and 1.125x compute.",
+    "Native Householder exactly aliases candidate.",
+    "Block-OFT is an oracle block projection, not trained BOFT/GSOFT.",
+    "Synthetic transform-family evidence only."
+  ]
+}
