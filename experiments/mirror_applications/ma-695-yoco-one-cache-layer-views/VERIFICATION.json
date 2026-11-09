@@ -1,0 +1,36 @@
+{
+  "experiment_id": "MA-695",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-695-yoco-one-cache-layer-views/tests -v",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "payload_count": 48,
+    "audit_rho0_q0_hashes": [
+      "6af0ee99c987b5642288673a4ac46a0574ddf5dbe8432f8860e59b3eed236089",
+      "887a7b1056dbbe206a3215b0dc2ec9f5639b5a698261161d03aca8361fa1fd4c",
+      "6320831513199cc7bbad5e6ef1f2d2ed8325858c9c066415c5f1664067ed3108"
+    ],
+    "audit_rho01_q4_hashes": [
+      "19b62f9b03bd8ab8f579e57429657982a3bad630032eda9aa5e49449155c4a04",
+      "732b62dbf5044fa03c80a5002fe66152d905929b79cfd3cd7ec850312c0855b8",
+      "3ec2e31fd7f7f3a35a2a80225c611f3994de0faba44ea7e90502d80ca6f3d57e"
+    ]
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 2.878161069475027e-07
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Protocol frozen at ebb1768c. Initial sqrt(R) scaling error invalidated initial attempt; source/results preserved in source/attempts/initial_bad_scaling; corrected sqrt(D) replay used unchanged seeds/grid/gates.",
+    "Aligned rho0/q0: 4410B vs 49926B and 0.293x compute proxy.",
+    "rho.1 q<=1 misses quality; q4 exact at 6538B.",
+    "Native shared-basis control exactly aliases candidate functions and payload.",
+    "No trained YOCO/language/GPU result."
+  ]
+}
