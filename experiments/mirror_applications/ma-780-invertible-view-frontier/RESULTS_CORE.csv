@@ -1,0 +1,14 @@
+source_ma,seed,task_scope,method,serialized_bytes,heldout_error,inverse_error,compute_proxy,wall_ms,paired_comparable,status_note
+MA-771,77101,synthetic_2d_task_codes,linear_activation_steering,693,0.289112,NA,3,71.996,false,source-only row; not same task as other MA rows
+MA-771,77101,synthetic_2d_task_codes,independent_realnvp_flows,573,0,4.768e-7,5,418.34,false,source-only row
+MA-771,77101,synthetic_2d_task_codes,native_conditional_realnvp,701,0,4.768e-7,5,170.522,false,exact native conditional RealNVP method
+MA-771,77101,synthetic_2d_task_codes,mirror_realnvp,701,0,4.768e-7,5,156.291,false,exact payload and function alias to native conditional RealNVP
+MA-772,77201,synthetic_condition_behavior_pairs,independent_pair_codes,715,0,4.768e-7,5,193.927,false,different synthetic task and metric from MA-771/775
+MA-772,77201,synthetic_condition_behavior_pairs,additive_condition_behavior,1071,0.094798,4.768e-7,7,104.045,false,quality gate miss
+MA-772,77201,synthetic_condition_behavior_pairs,native_product_condition_behavior,1071,6.078e-9,4.768e-7,7,94.079,false,exact native product code method
+MA-772,77201,synthetic_condition_behavior_pairs,mirror_product_condition_behavior,1071,6.078e-9,4.768e-7,7,87.289,false,exact payload and function alias to native product code
+MA-775,77501,synthetic_4d_contracting_residuals,independent_residual_blocks,1927,0,2.384e-7,8192,1136.765,false,different task dimension and compute convention from MA-771/772
+MA-775,77501,synthetic_4d_contracting_residuals,hard_tied_residual,507,0.137915,2.384e-7,8192,622.793,false,quality gate miss
+MA-775,77501,synthetic_4d_contracting_residuals,scalar_film_residual,802,0.092028,2.384e-7,8192,649.873,false,quality gate miss
+MA-775,77501,synthetic_4d_contracting_residuals,native_rank2_basis,970,1.865e-8,4.768e-7,16384,878.592,false,exact native low-rank method
+MA-775,77501,synthetic_4d_contracting_residuals,mirror_residual_views,970,1.865e-8,4.768e-7,16384,868.487,false,exact payload and function alias to native rank-2 basis

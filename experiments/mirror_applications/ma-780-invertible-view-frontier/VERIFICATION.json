@@ -1,0 +1,24 @@
+{
+  "experiment_id": "MA-780",
+  "commit": "53088e55",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-780-invertible-view-frontier/tests",
+    "passed": 2,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": false,
+    "max_difference": null
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Selected source payload values are copied verbatim; task-specific wall-time fields are disclosed as non-comparable.",
+    "No cross-family pooled score or rank is computed.",
+    "No new training; evidence inherits source reports MA-771/772/775.",
+    "Scope tests confirm 13 source rows and that every cross-family pair is marked non-comparable."
+  ]
+}
