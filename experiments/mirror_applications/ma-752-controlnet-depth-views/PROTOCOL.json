@@ -1,0 +1,21 @@
+{
+  "experiment_id":"MA-752",
+  "title":"Factorized control type x injection-depth views",
+  "status":"SCREENING",
+  "evidence_lane":"MECHANISM/STORAGE/QUALITY/COMPUTE",
+  "base_commit":"b9c89c34",
+  "hypothesis":"A low-description condition-code x injection-depth-code factorization predicts heldout condition-depth spatial operators with at least 25% lower complete serialized bytes than independent adapters and better quality-byte tradeoff than additive sharing.",
+  "physical_object":"shared spatial control adapter transfer matrices",
+  "mirror_coordinate":"condition identity coordinate and injection-depth coordinate, combined multiplicatively with a shared interaction basis",
+  "logical_multiplicity":"16 logical condition-by-depth control operators",
+  "prior_art_refs":["PA190","PA191"],
+  "controls":["independent condition-depth adapters","one shared adapter","native additive condition/depth factorization","native condition-code x depth-code factorization"],
+  "development":{"worlds_or_seeds":["dev-75201"],"selection_metric":"heldout condition-depth operator nRMSE and complete serialized payload bytes"},
+  "fresh":{"worlds_or_seeds":[],"locked_before_access":true,"reason":"synthetic mechanism screen with exact native factorization alias; no fresh audit opened"},
+  "grid":{"conditions":4,"depths":4,"operator_shape":[12,12],"heldout_pairs":[[0,0],[1,2],[2,3],[3,1]],"seed":75201},
+  "storage":{"authority":"actual serialized inference payload bytes","paid_objects":["shared base adapter","condition-specific terms","depth-specific terms","interaction basis","condition and depth codes","pair indices"]},
+  "compute":{"report_tokens_or_examples":true,"report_optimizer_updates":true,"report_active_compute_proxy":true,"report_isolated_wall_clock":true,"training_updates":0},
+  "success_gate":"Heldout operator nRMSE <=0.02, >=25% complete payload byte savings vs independent condition-depth adapters, and a strict quality-byte-compute frontier improvement over native additive factorization.",
+  "failure_gate":"Any quality/byte gate miss or exact native factorization payload/function alias is FAIL for Mirror-specific value.",
+  "boundaries":["Designed synthetic spatial operator family; no trained diffusion model, ControlNet checkpoint, image generation, or aesthetic evaluation.","Exact known-factor synthetic family estimates an upper-bound mechanism screen, not learned factor recovery.","No near-convergence capacity or hardware runtime claim."]
+}
