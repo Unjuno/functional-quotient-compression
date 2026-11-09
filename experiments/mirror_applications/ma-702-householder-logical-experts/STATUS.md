@@ -3,12 +3,12 @@
 - Status: FAIL
 - Branch: `research/ma-702-householder-logical-experts-20261109`
 - Base commit: `45a2bf56`
-- Last verified commit: pending
+- Last verified commit: 04e24ce2
 - Development complete: yes
 - Fresh/audit opened: yes
 - Results committed: yes
 - Verification committed: yes
-- Registry row updated: no
+- Registry row updated: yes (integration pending)
 
 ## Next action
 
