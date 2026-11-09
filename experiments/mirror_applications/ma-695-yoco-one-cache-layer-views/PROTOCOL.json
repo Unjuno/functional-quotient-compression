@@ -1,0 +1,21 @@
+{
+  "experiment_id": "MA-695",
+  "title": "YOCO one-cache with layer-specific reads",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM",
+  "base_commit": "2fc822ad",
+  "hypothesis": "A single global cache plus a shared rank-2 basis of layer-specific K/V read transforms can recover aligned cross-layer attention functions with <=75% complete bytes; private residual rank will determine when shared cache reads cease to recover layer-specific functions economically.",
+  "physical_object": "one global FP32 memory cache C shared by four cross-decoder layers",
+  "mirror_coordinate": "per-layer coefficients over a shared basis of K/V read transforms plus optional private residual rank q",
+  "logical_multiplicity": "four layer-specific logical memory functions over one physical cache",
+  "prior_art_refs": ["PA162", "PA08"],
+  "controls": ["hard identical shared cache reads", "independent full K/V layer maps and materialized outputs", "native shared-basis/PCA layer coefficients (exact function control)", "prior aligned MLKV/Mirror feasibility MA-245"],
+  "development": {"worlds_or_seeds": ["dev-69501"], "selection_metric": "per-layer attention-output NRMSE, complete serialized model/cache bytes, and read-transform MAC proxy across fixed rho/rank grid"},
+  "fresh": {"worlds_or_seeds": ["audit-69511", "audit-69512", "audit-69513"], "locked_before_access": true},
+  "grid": {"layers": 4, "sequence_length": 96, "width": 16, "shared_basis_rank": 2, "heterogeneity_rho": [0.0, 0.1, 0.25], "private_residual_ranks": [0, 1, 2, 4]},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["global cache C", "shared K/V transform basis", "layer coefficients", "private residual factors", "positions/causal/shape metadata", "independent layer K/V transforms and materialized caches"]},
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true},
+  "success_gate": "For rho=0 and rho=.1, at least one q<=1 point across all audit seeds has per-layer output NRMSE <=.02, complete payload <=75% independent, and read-transform MAC proxy <=2x independent. Mirror attribution also requires an advantage over native shared-basis/PCA.",
+  "failure_gate": "No q<=1 point meets quality/bytes/compute at rho=.1, or exact recovery requires payload >= independent. Exact native-basis alias is FAIL for Mirror-specific value regardless of generic shared-cache feasibility.",
+  "boundaries": ["Synthetic FP32 cross-layer attention operator screen only; no trained YOCO model, language NLL, GPU kernel, or production throughput claim.", "One global cache is held fixed; only layer read maps vary.", "Fresh seeds and grid frozen before execution; no audit tuning."]
+}
