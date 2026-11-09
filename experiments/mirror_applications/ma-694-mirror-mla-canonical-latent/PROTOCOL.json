@@ -1,0 +1,21 @@
+{
+  "experiment_id": "MA-694",
+  "title": "Mirror-MLA canonical latent cache",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM",
+  "base_commit": "61041d10",
+  "hypothesis": "A single rank-4 MLA latent cache plus a shared rank-2 basis of per-view K/V up-projections and small coefficients can retain synthetic attention output quality across aligned and mildly heterogeneous views at <=75% of full independent projection-plus-cache bytes; private low-rank residuals will identify where additional per-view state becomes necessary.",
+  "physical_object": "one shared rank-4 content latent sequence C",
+  "mirror_coordinate": "per-view coefficients over two shared K/V up-projection basis maps, optionally with private residual rank q",
+  "logical_multiplicity": "8 logical K/V projection roles read from one latent cache",
+  "prior_art_refs": ["PA161"],
+  "controls": ["hard-tied MLA with one K/V up-projection", "independent full per-view K/V up-projections", "native shared-basis coefficient/PCA representation (function-identical control)"],
+  "development": {"worlds_or_seeds": ["dev-69401"], "selection_metric": "per-view attention output NRMSE, actual serialized deployment bytes, and projection/decode MAC proxy over frozen rho/rank grid"},
+  "fresh": {"worlds_or_seeds": ["audit-69411", "audit-69412", "audit-69413"], "locked_before_access": true},
+  "grid": {"views": 8, "sequence_length": 96, "model_width": 16, "latent_width": 4, "shared_basis_rank": 2, "heterogeneity_rho": [0.0, 0.1, 0.25], "private_residual_ranks": [0, 1, 2, 4, 8]},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["latent cache C", "shared K/V up-projection basis", "per-view coefficients", "private residual factors", "shape/dtype/seed-independent metadata", "independent-control full K/V up-projections"]},
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true},
+  "success_gate": "For rho=0 and rho=0.1, at least one q<=2 point across all audit seeds has output NRMSE <=0.02, complete payload <=75% of independent, and incremental projection/decode MAC <=2x independent. Mirror-specific attribution additionally requires beating native shared-basis/PCA on function, bytes, or compute.",
+  "failure_gate": "No q<=2 point meets the joint error/bytes/compute gate for rho=0.1, or no tested regime beats the independent payload while retaining error <=0.02. Exact alias to native shared-basis control is FAIL for Mirror-specific value regardless of generic compression feasibility.",
+  "boundaries": ["Synthetic FP32 attention operator screen only; no trained MLA model, language NLL, GPU kernel, or production throughput claim.", "Basis and coefficients are fit from the same synthetic operator bank for controlled capacity measurement; no learning-efficiency or natural task claim.", "All fresh seeds and ranks were locked before any measurements; no audit tuning."]
+}
