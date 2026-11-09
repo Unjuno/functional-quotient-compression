@@ -6,7 +6,7 @@
 - Development: complete; seeds 68901/68902, rho 0/.05/.2
 - Fresh/audit: sealed; exact native PCA alias observed
 - Serialized replay tests: passed (2 tests)
-- Results committed: see verified result commit in `VERIFICATION.json`
+- Results committed: `dee21d8aed8740cb1c5a5bf09b3eb82f8c5b4d6f`
 - Registry row updated: pending integration
 
 ## H — Hypothesis
