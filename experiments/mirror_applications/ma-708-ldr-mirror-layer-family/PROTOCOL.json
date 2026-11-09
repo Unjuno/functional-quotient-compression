@@ -1,0 +1,71 @@
+{
+  "experiment_id": "MA-708",
+  "title": "Low-displacement-rank Mirror layer family",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM",
+  "base_commit": "8538db5a9645f5a52267a36a9397cff52ea49dc3",
+  "hypothesis": "A shared bank of low-displacement-rank generators with small layer codes reconstructs held-out logical dense maps at lower serialized payload and matvec cost than independent dense layers, while matching native LDR controls and native generator/coefficients may erase any Mirror-specific advantage.",
+  "physical_object": "shared left/right displacement generator banks defining a Toeplitz-like matrix family",
+  "mirror_coordinate": "per-layer displacement rank and coefficient matrix coding a dense linear operator",
+  "logical_multiplicity": "8 task/layer-specific D-by-D maps over one generator bank",
+  "prior_art_refs": [
+    "PA173",
+    "PA174"
+  ],
+  "controls": [
+    "independent dense matrices",
+    "hard-tied shared matrix",
+    "native LDR with independently stored generator/coefficients",
+    "native shared-generator coefficient factorization",
+    "Mirror code reconstruction"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      "dev-70801"
+    ],
+    "selection_metric": "held-out operator NRMSE, full serialized payload bytes, multiply-add proxy and isolated construction/apply wall time"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      "audit-70811",
+      "audit-70812",
+      "audit-70813"
+    ],
+    "locked_before_access": true
+  },
+  "grid": {
+    "width": 64,
+    "logical_maps": 8,
+    "displacement_rank": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "heldout_vectors_per_map": 64
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "left/right displacement generators",
+      "per-map coefficient matrices/codes",
+      "shape/rank metadata",
+      "independent dense matrices",
+      "native LDR generator and coefficient payload"
+    ]
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true,
+    "report_matrix_reconstruction_and_apply_cost": true
+  },
+  "success_gate": "Across all three audit seeds: held-out operator NRMSE <=1e-5, full payload <=50% independent dense payload at a selected rank, total reconstruction plus apply arithmetic <=1.25x independent dense apply, and strict advantage over byte-near native shared-generator coefficient control. Exact native alias is FAIL for Mirror-specific attribution.",
+  "failure_gate": "Native shared-generator coefficients exactly reproduce function, payload and compute (Mirror-specific FAIL), or no rank meets preregistered quality/byte/compute gates. Higher-rank byte crossover must be reported.",
+  "boundaries": [
+    "Synthetic linear-operator reconstruction with targets sampled from shared low-rank-displacement generator families; not trained neural-network task quality or capacity.",
+    "No GPU/fused-kernel or end-to-end model runtime claim.",
+    "Parameter counts are not storage authority; all inference objects are serialized and charged."
+  ]
+}
