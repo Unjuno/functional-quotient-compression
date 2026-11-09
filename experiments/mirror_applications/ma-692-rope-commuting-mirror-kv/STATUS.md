@@ -3,12 +3,12 @@
 - Status: FAIL
 - Branch: `research/ma-692-rope-commuting-mirror-kv-20261109`
 - Base commit: `bc1d9007`
-- Last verified commit: pending
+- Last verified commit: 3147f44b
 - Development complete: yes
 - Fresh/audit opened: yes
 - Results committed: yes
 - Verification committed: yes
-- Registry row updated: pending
+- Registry row updated: yes (integration commit pending)
 
 ## Next action
 
