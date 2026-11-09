@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-791",
+  "commit": "9cf8b26b",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-791-reap-pruned-expert-recovery/tests",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": "Mirror/native PCA payload hashes and heldout errors match at both noise levels"
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Pruned-to-retained route map, IDs, basis, codes and private factors are paid.",
+    "At sigma .05, rank4 private state exceeds independent payload bytes and still misses .02 error.",
+    "No REAP or end-task language quality claim is made."
+  ]
+}
