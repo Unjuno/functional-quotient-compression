@@ -3,12 +3,12 @@
 - Status: FAIL
 - Branch: `research/ma-694-mirror-mla-canonical-latent-20261109`
 - Base commit: `61041d10`
-- Last verified commit: pending
+- Last verified commit: df5be1a3
 - Development complete: yes
 - Fresh/audit opened: yes
 - Results committed: yes
 - Verification committed: yes
-- Registry row updated: no
+- Registry row updated: yes (integration pending)
 
 ## Next action
 
