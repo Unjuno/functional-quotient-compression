@@ -1,0 +1,72 @@
+{
+  "experiment_id": "MA-690",
+  "title": "Orbit-private frontier across View families",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/OPERATOR_SPACE/ACTUAL_BYTES/COMPUTE",
+  "base_commit": "53040b26",
+  "hypothesis": "Across several target generators, a shared backbone plus a compact family View code and low-rank private residual reaches lower normalized operator error at lower complete serialized bytes than the best residual-only SVD bank at the same actual byte budget.",
+  "prior_art_refs": ["PA19", "PA17", "PA18", "PA21"],
+  "scope": {
+    "backbone_shape": [16, 16],
+    "logical_tasks_per_bank": 8,
+    "development_seeds": [69001, 69002],
+    "target_generators": ["ia3_diagonal", "batchensemble_rank_one_tangent", "vera_fixed_random_lowrank", "shared_lora_lowrank", "givens_tangent", "boft_butterfly_tangent", "family_neutral_orthogonal_operator"],
+    "candidate_coordinate_families": ["ia3_diagonal", "batchensemble_rank_one_tangent", "vera_fixed_random_lowrank", "shared_lora_lowrank", "givens_tangent", "boft_butterfly_tangent"],
+    "alpha_amplitude_mixture": [0.0, 0.25, 0.5, 0.75, 1.0],
+    "private_residual_ranks": [0, 1, 2, 4, 8, "full"],
+    "normalization": "For each task, structured generator update S and private update R have equal Frobenius norm 0.1*||W||F; R is orthogonal to the union of all structured candidate spans and to S. Target is W+(1-alpha)S+alpha R. Alpha is an amplitude mixture, not a private-energy fraction; report measured component and total energies."
+  },
+  "family_definitions": {
+    "ia3_diagonal": "local input-channel activation scaling atoms W diag(e_j)",
+    "batchensemble_rank_one_tangent": "first-order row/column rank-one modulation atoms diag(e_i)W and W diag(e_j) at identity; excludes second-order cross term",
+    "vera_fixed_random_lowrank": "B diag(m) A with deterministic seeded frozen B and A, rank 4; B/A are paid shared state",
+    "shared_lora_lowrank": "U C V^T with deterministic seeded frozen U/V, rank 2; U/V are paid shared state",
+    "givens_tangent": "fixed disjoint Givens-plane generators J_ab W, local tangent at identity",
+    "boft_butterfly_tangent": "fixed butterfly-plane generators J_ab W across log2(D) stages, local tangent at identity",
+    "family_neutral_orthogonal_operator": "random matrix direction projected into the orthogonal complement of the union of all structured spans"
+  },
+  "controls": [
+    "Independent full target-matrix bank",
+    "Mirror family code plus rank-q private residual",
+    "Native direct family coordinates plus the same gate and rank-q residual; identical serialization schema",
+    "Residual-only per-task truncated-SVD bank; choose the highest rank fitting within each candidate's actual serialized bytes",
+    "Backbone-only W"
+  ],
+  "fit": {
+    "procedure": "Per-task deterministic least-squares projection onto each candidate family's analytic local basis; truncated SVD for the remaining matrix residual",
+    "training_examples": 0,
+    "optimizer_updates": 0,
+    "fit_compute": "report least-squares/SVD elapsed time and operation count separately; no claim of learning efficiency or generalization"
+  },
+  "quality": {
+    "primary": "aggregate normalized squared operator error sum_i||Delta_i-Delta_hat_i||F^2 / sum_i||Delta_i||F^2",
+    "secondary": "relative error on fixed held-out isotropic probe vectors",
+    "calibration": "own-family alpha=0 plus full residual must replay with operator error <=1e-6"
+  },
+  "storage": {
+    "authority": "actual serialized NPZ inference payload bytes, measured for every candidate/control point",
+    "precision": "float32 tensors; integer IDs and schema metadata charged",
+    "paid_objects": ["one W in shared-code methods", "all family state not deterministically reconstructible from W and paid seed", "per-task coordinates", "gate alpha", "all residual factors or dense residuals", "indices and metadata"],
+    "independent_control": "all eight target matrices serialized separately",
+    "amortization": "report complete bank bytes and bytes per logical task"
+  },
+  "compute": {
+    "report": ["family-code matrix decode MAC proxy per task load", "private residual materialization MAC proxy per task load", "dense matrix apply proxy per query", "CPU in-memory decode-plus-apply wall time", "serialization wall time"],
+    "fresh_or_audit": "seeds 69011/69012/69013 sealed; do not open if native-family exact alias is observed"
+  },
+  "gates": {
+    "useful_point": "operator error <=0.02, actual serialized bytes <=75% of independent target bank, and decode+apply proxy <=2x independent full bank",
+    "frontier_evidence": "family coordinate plus residual beats residual-only at the same actual byte budget on at least three alpha values in at least two target generators",
+    "mirror_specific": "strict Pareto improvement over corresponding native direct family coordinate control",
+    "failure": "exact native family function/compute/byte alias without strict Pareto gain; fresh remains sealed",
+    "not_established": "own-family alpha=0/full-residual calibration or serialized replay fails"
+  },
+  "boundaries": [
+    "This is a local linear operator-space screen; Givens and BOFT are explicitly tangent approximations, not full nonlinear finetuning.",
+    "All candidate families are cross-evaluated on all seven target generators.",
+    "The shared backbone is charged once for shared-bank candidates and full matrices are charged for the independent upper control.",
+    "The private residual-only control gets the largest SVD rank that fits within each candidate's measured payload bytes.",
+    "No language-model quality, learned adaptation, downstream generalization, or hardware-kernel claim follows.",
+    "Never tune after fresh access; if the exact native alias gate fires, leave fresh sealed."
+  ]
+}
