@@ -1,0 +1,31 @@
+{
+  "experiment_id": "MA-704",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-704-gsoft-group-shuffle-views/tests -v",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "audit_s2_hashes": [
+      "dc2a685169491ceebe1690329d3ca9da637ed93db954f2b777334b31441170dc",
+      "c857d83e07351116959abba13f995ac11141f2a748f72c8b111c540ffd7f8197",
+      "96bd0f8f1d2de987c802e2bed0004f173b59a008206ca67b1516a409b67b7536"
+    ],
+    "s2_payload_bytes": 99341,
+    "s2_independent_bytes": 262672
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 2.613260520406135e-08
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Frozen protocol 56b1fd23; three audit seeds.",
+    "Two-stage payload 37.8% independent, MAC proxy 1.25x, exact output.",
+    "Native GSOFT exactly aliases the candidate.",
+    "NumPy CPU wall time is descriptive and far slower than dense apply; no kernel claim."
+  ]
+}
