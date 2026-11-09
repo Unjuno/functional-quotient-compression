@@ -1,0 +1,22 @@
+{
+  "experiment_id":"MA-753",
+  "title":"T2I-Adapter bank to shared adapter basis",
+  "status":"SCREENING",
+  "evidence_lane":"MECHANISM/STORAGE/QUALITY/COMPUTE",
+  "base_commit":"3bf30111",
+  "hypothesis":"A shared rank-2 adapter function basis with per-condition codes preserves heldout control and pairwise composition while saving at least 25% complete serialized bytes over independent full adapters and improves on independent rank-2 adapters.",
+  "physical_object":"per-condition spatial guidance adapter matrices",
+  "mirror_coordinate":"per-condition low-dimensional code addressing a shared adapter basis",
+  "logical_multiplicity":"12 plug-and-play guidance adapters and their pairwise sums",
+  "prior_art_refs":["PA191"],
+  "controls":["independent full adapter matrices","independent per-condition rank-2 SVD adapters","native shared PCA basis plus condition coefficients"],
+  "development":{"worlds_or_seeds":["dev-75301"],"selection_metric":"heldout condition operator nRMSE, composition nRMSE, actual complete payload bytes"},
+  "fresh":{"worlds_or_seeds":[],"locked_before_access":true,"reason":"no audit opened; assess development gate and native factorization attribution first"},
+  "grid":{"conditions":12,"training_conditions":8,"heldout_conditions":[8,9,10,11],"input_dim":16,"output_dim":12,"rank":2,"calibration_examples_per_condition":8,"seed":75301},
+  "storage":{"authority":"actual serialized inference payload bytes","paid_objects":["shared learned adapter basis","all per-condition codes","condition indices","reconstruction arrays for independent controls"]},
+  "compute":{"report_tokens_or_examples":true,"report_optimizer_updates":true,"report_active_compute_proxy":true,"report_isolated_wall_clock":true,"training_updates":0,"calibration_examples":96},
+  "success_gate":"Heldout and pairwise composition nRMSE <=0.02; >=25% complete byte saving vs independent full adapters; strict quality-byte-compute improvement over independent rank-2 and native shared PCA controls.",
+  "failure_gate":"Quality/byte gate miss or exact native shared-basis/PCA function and payload alias is FAIL for Mirror-specific value.",
+  "amendments":["A01 before final scoring: corrected the heldout calibration design-matrix axis order and made active MACs count all individual and pair-composition requests consistently. The initial erroneous run is preserved in RESULTS_INITIAL_BUGGY.csv and excluded from final metrics; no protocol thresholds or seed changed."],
+  "boundaries":["Synthetic adapter matrices only; no trained T2I-Adapter, frozen diffusion backbone or generated image metric.","Shared basis is estimated from training condition matrices; heldout codes use eight calibration examples per condition.","No near-convergence capacity or accelerator runtime claim."]
+}
