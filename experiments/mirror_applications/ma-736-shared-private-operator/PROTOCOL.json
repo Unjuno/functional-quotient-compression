@@ -1,0 +1,15 @@
+{
+ "experiment_id":"MA-736","title":"shared operator plus sparse private physics residual","status":"SCREENING","evidence_lane":"MECHANISM/QUALITY/STORAGE",
+ "base_commit":"7f7e3319","hypothesis":"A shared low-rank operator basis plus small regime-specific View and sparse private residual preserves variable-diffusion solution quality below independent Green-operator bytes; private residual need rises with regime heterogeneity.",
+ "physical_object":"shared mean Green operator and rank-4 spectral basis","mirror_coordinate":"per-regime basis coefficients plus optional sparse private entries","logical_multiplicity":"eight variable-diffusion physical regimes",
+ "prior_art_refs":["PA186","PA187","PA18"],
+ "controls":["independent full Green operators","shared mean","native PCA operator coefficients","VeRA-like shared-basis scaling","Mirror operator code","matched top-k private residual"],
+ "development":{"worlds_or_seeds":["dev-73601"],"selection_metric":"held-out global/interface solution nRMSE, actual full payload bytes, private residual budget"},
+ "fresh":{"worlds_or_seeds":[],"locked_before_access":true,"reason":"no audit after exact native shared-basis alias or failed frozen quality/byte gate"},
+ "grid":{"unknowns":24,"domains":8,"basis_fit_domains":6,"heldout_domains":2,"basis_rank":4,"diffusion_contrasts":[0.0,0.05,0.1,0.2,0.4,0.8,0.3,0.6],"private_topk":[0,4,8,16,32,64],"test_forcings_per_domain":256,"seed":73601},
+ "storage":{"authority":"actual serialized full inference payload bytes","paid_objects":["mean operator","basis","View coordinates","residual indices/values","domain metadata"]},
+ "compute":{"report_operator_application_proxy":true,"report_wall_clock":true,"training":"none; oracle operator mechanism screen"},
+ "success_gate":"Global and interface nRMSE <=.02, >=25% savings vs independent, and strict quality/byte improvement over native PCA and VeRA-like controls.",
+ "failure_gate":"quality/storage miss or exact native coefficient/residual function/payload alias is FAIL for Mirror-specific value.",
+ "boundaries":["Synthetic 1D linear diffusion only.","Operators are generated analytically; no trained neural operator evidence.","No natural regime, physical PDE validation, audit or accelerator runtime claim."]
+}
