@@ -1,0 +1,15 @@
+{
+ "experiment_id":"MA-733","title":"Fourier-mode Mirror transform bank","status":"SCREENING","evidence_lane":"MECHANISM/STORAGE/QUALITY","base_commit":"6cc34d66",
+ "hypothesis":"Shared Fourier base and low-description band coordinates preserve multi-domain spectral operator functions with fewer bytes than independent kernels and beat native shared-band controls.",
+ "physical_object":"shared Fourier-domain operator base and four mode-band atoms","mirror_coordinate":"per-domain coefficients over mode-band atoms plus optional sparse private spectral entries","logical_multiplicity":"16 domain-specific spectral operators",
+ "prior_art_refs":["PA186","PA45"],
+ "controls":["independent per-mode kernels","Mirror mode-band code bank","native PCA/shared-band code bank","shared bands plus matched top-k private residual"],
+ "development":{"worlds_or_seeds":["dev-73301"],"selection_metric":"relative solution error overall and k>32 band, actual full bank bytes, residual budget"},
+ "fresh":{"worlds_or_seeds":[],"locked_before_access":true,"reason":"no audit if development fails or exact native shared-band alias"},
+ "grid":{"modes":64,"domains":16,"basis_fit_domains":12,"heldout_domains":4,"bands":4,"private_fraction":[0.0,0.05,0.2],"private_topk":[0,2,4,8,16],"resolutions":[128,256],"fields_per_domain":128},
+ "storage":{"authority":"actual serialized full operator-bank payload bytes","paid_objects":["shared base spectrum","band atoms","domain codes","private indices and values","domain metadata"]},
+ "compute":{"report_spectral_multiply_proxy":true,"report_wall_clock":true},
+ "success_gate":"Overall and high-band relative error <=.02, >=25% payload savings vs independent kernels, and improve quality/bytes beyond native PCA/shared-band controls.",
+ "failure_gate":"Quality/storage miss or exact native shared-band function/payload alias => FAIL for Mirror-specific value.",
+ "boundaries":["Synthetic spectral responses only.","Fourier operators are deliberately band-structured; no trained FNO or physical PDE claim.","No fresh/audit or accelerator runtime claim."]
+}
