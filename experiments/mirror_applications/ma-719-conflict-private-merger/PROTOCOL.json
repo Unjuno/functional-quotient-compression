@@ -1,0 +1,15 @@
+{
+ "experiment_id":"MA-719","title":"conflict-aware shared/private Mirror merger","status":"SCREENING","evidence_lane":"MECHANISM/STORAGE/QUALITY","base_commit":"ce74e7c1",
+ "hypothesis":"A shared task-delta basis plus selective private exception coordinates preserves task updates and pair compositions at lower bytes than dense deltas, and reveals the private-state threshold as conflict rises.",
+ "physical_object":"shared rank-8 task-delta basis","mirror_coordinate":"shared task coefficients plus magnitude-selected private residual entries","logical_multiplicity":"16 task functions and pairwise combinations",
+ "prior_art_refs":["PA177","PA178","PA27"],
+ "controls":["independent dense deltas","shared PCA only","shared PCA plus magnitude private residual","random private residual at matched count","native PCA plus top-k residual exact control"],
+ "development":{"worlds_or_seeds":["dev-71901"],"selection_metric":"held-out individual and pair NRMSE, full serialized bytes, residual fraction"},
+ "fresh":{"worlds_or_seeds":[],"locked_before_access":true,"reason":"audit not opened if development thresholds fail"},
+ "grid":{"dimension":512,"tasks":16,"fit_tasks":8,"heldout_tasks":8,"shared_rank":8,"heterogeneity":[0.0,0.05,0.2,0.5],"private_entries_per_task":[0,8,16,32,64,128,256]},
+ "storage":{"authority":"actual serialized complete bank bytes","paid_objects":["shared basis","task codes","private residual indices and values","request IDs","all outputs","metadata"]},
+ "compute":{"optimizer_updates":0,"report_projection_and_decode_proxy":true,"report_wall_clock":true},
+ "success_gate":"Both held-out individual and pair NRMSE <=.05, >=25% actual byte savings vs dense, and strictly better quality/byte frontier than matched random residual and native PCA+top-k.",
+ "failure_gate":"No tested budget meets quality/byte gates or exact native code alias; classify scoped FAIL, audit unopened.",
+ "boundaries":["Synthetic task-delta matrices only.","Fisher/RegMean statistics and TIES are not implemented; this is a representation frontier screen.","No natural tasks, language quality or production runtime inference."]
+}
