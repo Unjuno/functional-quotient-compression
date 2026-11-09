@@ -1,0 +1,15 @@
+{
+  "experiment_id":"MA-772",
+  "commit":"881524ab",
+  "tests":{"command":"python -m pytest -q experiments/mirror_applications/ma-772-condition-behavior-flow-code/tests","passed":3,"failed":0},
+  "serialization":{"roundtrip_checked":true,"byte_exact":true},
+  "metric_replay":{"checked":true,"max_difference":0.0},
+  "fresh_split_integrity_checked":true,
+  "notes":[
+    "Native product factorization and Mirror payload hashes, bytes, outputs, code error and cycle error exactly match.",
+    "Direct pair codes use fewer actual serialized bytes than product factor state; additive factor fails heldout gate.",
+    "Deterministic replay reproduces all non-timing outputs; fit/evaluation wall times are observational.",
+    "Heldout pair IDs are excluded from factor fitting; teacher is analytically rank-1 by construction.",
+    "Fresh/audit remains unopened. No trained conditional-flow result."
+  ]
+}
