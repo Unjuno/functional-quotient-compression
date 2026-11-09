@@ -3,12 +3,12 @@
 - Status: FAIL
 - Branch: `research/ma-697-exact-adapter-cache-switch-20261109`
 - Base commit: `af4020be`
-- Last verified commit: pending
+- Last verified commit: a76e2427
 - Development complete: yes
 - Fresh/audit opened: yes
 - Results committed: yes
 - Verification committed: yes
-- Registry row updated: no
+- Registry row updated: yes (integration pending)
 
 ## Next action
 
