@@ -1,0 +1,20 @@
+{
+  "experiment_id": "MA-692",
+  "title": "RoPE-commuting Mirror KV views",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM",
+  "base_commit": "bc1d9007",
+  "hypothesis": "For content-space per-plane rotations aligned to RoPE's 2D planes, a single RoPE-encoded canonical K/V cache plus serialized view angles reproduces materialized per-view attention outputs within 1e-5 relative error while using under 25% of the independent-view cache bytes at 8 views; equal-norm cross-plane rotations will fail the same query-side lazy mapping across multiple positions.",
+  "physical_object": "one FP32 RoPE-encoded canonical K/V cache",
+  "mirror_coordinate": "per-view angles for each RoPE 2D plane, plus matching value-plane rotation angles",
+  "logical_multiplicity": "8 attention K/V views over one physical cache",
+  "prior_art_refs": ["PA156"],
+  "controls": ["canonical identical view", "materialized independent per-view K/V cache", "native complex phase/per-plane angle coordinates", "equal-norm cross-plane noncommuting key transform"],
+  "development": {"worlds_or_seeds": ["dev-69201"], "selection_metric": "maximum relative attention-output error and actual NPZ serialized cache bytes; no hyperparameter tuning"},
+  "fresh": {"worlds_or_seeds": ["audit-69211", "audit-69212", "audit-69213"], "locked_before_access": true},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["canonical K and V tensors", "view angle codes", "position/frequency metadata", "tensor shape and dtype metadata", "independent control's per-view K/V tensors"]},
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true},
+  "success_gate": "Across all 3 locked audit seeds: commuting lazy attention max relative output error <=1e-5; canonical payload <=25% independent materialized payload; native phase coordinates exactly match Mirror functions, bytes, and compute (if so, report only an algebraic/cache-sharing result, not Mirror-specific value).",
+  "failure_gate": "Commuting lazy error >1e-5 on any audited seed, or canonical payload >25% independent payload. Noncommuting control is expected to reveal position-dependent score mismatch; if it does not, the proposed boundary is falsified.",
+  "boundaries": ["Synthetic FP32 attention mechanism only; no neural training, language task, GPU kernel, throughput claim, or general RoPE implementation claim.", "Alpha/rotation amplitudes are fixed to preregistered deterministic view angles; no audit-driven tuning.", "Actual compute is reported as an explicit MAC proxy; algebraic cache sharing does not imply free multiple-view attention."]
+}
