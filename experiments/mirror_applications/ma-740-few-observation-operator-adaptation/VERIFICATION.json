@@ -1,11 +1,21 @@
 {
-  "experiment_id":"MA-740",
-  "commit":"pending",
-  "tests":{"command":"python -m pytest -q experiments/mirror_applications/ma-740-few-observation-operator-adaptation/tests","passed":3,"failed":0},
-  "serialization":{"roundtrip_checked":true,"byte_exact":true},
-  "metric_replay":{"checked":true,"max_difference":0.0},
-  "fresh_split_integrity_checked":true,
-  "notes":[
+  "experiment_id": "MA-740",
+  "commit": "8121cdc2",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-740-few-observation-operator-adaptation/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
     "Mirror and native phase-coordinate payload hashes, bytes, task-state bytes, heldout error and adaptation operation counts match exactly.",
     "Development-only A01 selects ridge lambda 1e-4 for the generic context; initial unregularized run is retained in RESULTS_INITIAL_UNREGULARIZED.csv.",
     "Deterministic rerun reproduces all non-timing metrics; fresh seeds remain unopened after frozen gate miss.",
