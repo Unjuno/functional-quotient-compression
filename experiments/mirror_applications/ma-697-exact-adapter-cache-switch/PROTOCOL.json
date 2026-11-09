@@ -1,0 +1,21 @@
+{
+  "experiment_id": "MA-697",
+  "title": "Exact adapter switching with canonical prefix-cache reuse",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM",
+  "base_commit": "af4020be",
+  "hypothesis": "A known adapter-induced right transform of K/V can represent eight specialist prefix caches as one shared canonical cache plus view coordinates, exactly matching materialized specialist attention; cache-map work should amortize at a dwell length proportional to prefix length, while direct standard-LoRA cache reuse should be inaccurate for these prefix-active specialists.",
+  "physical_object": "one base-model canonical K/V prefix cache",
+  "mirror_coordinate": "per-specialist known K/V orthogonal transform coordinates applied to query and attention output on switch",
+  "logical_multiplicity": "eight prefix-active adapter specialists sharing one physical prefix cache",
+  "prior_art_refs": ["PA154", "PA155"],
+  "controls": ["independent per-specialist materialized caches", "direct standard-LoRA cache reuse without translation", "aLoRA-style adapter activation after invocation point", "native direct orthogonal/rotation coordinate control"],
+  "development": {"worlds_or_seeds": ["dev-69701"], "selection_metric": "attention-output relative error, actual serialized cache bytes, and transform MAC/dwell break-even"},
+  "fresh": {"worlds_or_seeds": ["audit-69711", "audit-69712", "audit-69713"], "locked_before_access": true},
+  "grid": {"prefix_length": 128, "head_width": 16, "specialists": 8, "dwell_tokens": [1, 16, 128, 512]},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["canonical K/V prefix cache", "per-specialist transform coordinates", "positions/causal metadata", "independent control's full per-specialist K/V caches"]},
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true, "report_dwell_break_even": true},
+  "success_gate": "Across all audit seeds: translated attention output relative error <=1e-5; shared cache payload <=25% independent cache bytes; transform-only compute break-even matches the preregistered prefix-length formula within integer rounding. Mirror-specific attribution additionally requires beating native direct rotation coordinates.",
+  "failure_gate": "Any audit seed has translated error >1e-5, shared payload >25%, or no cache-state reduction. Exact native rotation alias is FAIL for Mirror-specific attribution regardless of cache algebra success.",
+  "boundaries": ["Synthetic single-attention-layer cache algebra only; no adapter-trained neural model, language quality, GPU, TTFT, or production serving claim.", "aLoRA comparison is limited to prefix activation semantics: it preserves base prefix outputs and therefore does not realize a prefix-active specialist.", "Fresh seeds and dwell values frozen before measurements; no audit tuning."]
+}
