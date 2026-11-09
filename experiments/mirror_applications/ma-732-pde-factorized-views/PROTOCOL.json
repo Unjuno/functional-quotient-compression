@@ -1,0 +1,15 @@
+{
+ "experiment_id":"MA-732","title":"factorized PDE coefficient x boundary-condition Mirror code","status":"SCREENING","evidence_lane":"MECHANISM/QUALITY/STORAGE","base_commit":"152c7234",
+ "hypothesis":"Factorized Mirror coordinates recover held-out coefficient-boundary combinations from one shared operator with fewer bytes than independent operators and beat ordinary DeepONet parameter conditioning.",
+ "physical_object":"shared 1D Poisson Green operator and boundary basis","mirror_coordinate":"factorized m=(1/a,b0,b1)","logical_multiplicity":"16 coefficient x boundary operator combinations",
+ "prior_art_refs":["PA186","PA187"],
+ "controls":["independent complete operator bank","shared Green operator with ordinary scalar parameter conditioning","factorized Mirror code","analytic exact Poisson solve"],
+ "development":{"worlds_or_seeds":["dev-73201"],"selection_metric":"held-out solution relative L2 error at grids32/64 and complete serialized bytes"},
+ "fresh":{"worlds_or_seeds":[],"locked_before_access":true,"reason":"no audit after native conditioning alias or frozen gate failure"},
+ "grid":{"alpha_values":[0.5,1.0,2.0,4.0],"boundary_pairs":[[0,0],[1,0],[0,1],[1,1]],"train_combinations":12,"heldout_combinations":4,"forcing_fields_per_combo":128,"resolutions":[32,64]},
+ "storage":{"authority":"actual serialized complete operator-bank bytes","paid_objects":["Green operator or per-combo kernels","boundary basis","coefficient and boundary codebooks","combination metadata"]},
+ "compute":{"report_operator_application_proxy":true,"report_wall_clock":true},
+ "success_gate":"Held-out relative L2 error <=.02 at both grids, >=25% byte savings vs independent bank, and better frontier than ordinary scalar conditioning.",
+ "failure_gate":"Quality/storage miss or exact shared scalar-conditioning function/payload alias is FAIL for Mirror-specific value.",
+ "boundaries":["Known linear 1D Poisson equation only.","The physical law and Green operator are known; no learned neural operator evidence.","No audit, new physical law or hardware runtime claim."]
+}
