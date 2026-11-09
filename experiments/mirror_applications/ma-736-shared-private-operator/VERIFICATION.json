@@ -1,11 +1,21 @@
 {
-  "experiment_id":"MA-736",
-  "commit":"pending",
-  "tests":{"command":"python -m pytest -q experiments/mirror_applications/ma-736-shared-private-operator/tests","passed":3,"failed":0},
-  "serialization":{"roundtrip_checked":true,"byte_exact":true},
-  "metric_replay":{"checked":true,"max_difference":0.0},
-  "fresh_split_integrity_checked":true,
-  "notes":[
+  "experiment_id": "MA-736",
+  "commit": "f529f745",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-736-shared-private-operator/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
     "All native PCA/Mirror pairs, including six private budgets and fit/heldout groups, match complete payload hashes, bytes, errors and multiply counts exactly.",
     "Deterministic rerun reproduces all non-timing metrics exactly; wall-clock is a noisy CPU matrix application screen.",
     "Heldout codes and sparse residual support/values use known generated Green matrices; this is an oracle compression upper bound, not learned adaptation.",
