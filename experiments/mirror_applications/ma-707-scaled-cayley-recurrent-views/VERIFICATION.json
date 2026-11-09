@@ -1,0 +1,32 @@
+{
+  "experiment_id": "MA-707",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-707-scaled-cayley-recurrent-views/tests -v",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "audit_r1_hashes": [
+      "99795e3e712c5aeafc39b533c7fd1b84bdf65ba81b69d2b50dbcf34cd636a47b",
+      "2214fc83c8022ae858886c08ca9310b876e5fa7d5d1a677ccd921bd9626425f8",
+      "0d66d7f9c238be0ef975fdd1a81e824a15ac99d59ee53f65a89dfc02eaafad19"
+    ],
+    "r1_payload_bytes": 9428,
+    "r1_independent_bytes": 33542
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Frozen protocol 51441e4a; initial incorrect spectral-radius/tautological replay attempt preserved under source/attempts. Corrected fixed-seed run applies scale and replays serialized factors against independent transitions.",
+    "Maximum spectral radius .95000011; trajectory replay exact.",
+    "Rank1 payload 28.1% independent; solve/composition overhead 43.2%, missing 25% gate.",
+    "Native low-rank Cayley exactly aliases candidate.",
+    "Synthetic recurrence only."
+  ]
+}
