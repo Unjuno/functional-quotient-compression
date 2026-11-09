@@ -1,0 +1,15 @@
+{
+  "experiment_id":"MA-762",
+  "commit":"4175d1d7",
+  "tests":{"command":"python -m pytest -q experiments/mirror_applications/ma-762-nca-rule-basis-views/tests","passed":3,"failed":0},
+  "serialization":{"roundtrip_checked":true,"byte_exact":true},
+  "metric_replay":{"checked":true,"max_difference":0.0},
+  "fresh_split_integrity_checked":true,
+  "notes":[
+    "Native rank-3 factorization and Mirror payload hashes, bytes, heldout errors, state ratios and MACs exactly match.",
+    "Deterministic replay reproduces all non-timing outputs; wall time is observational.",
+    "Teacher kernels are rank-3 by construction; 64 training-rule kernels fit the basis and heldout codes use eight update maps each.",
+    "Initial clipped-generator output and corrected 24-rule development output are preserved; final 96-rule configuration follows disclosed development amendment A02.",
+    "Fresh/audit unopened after exact native alias. No trained NCA emergence claim."
+  ]
+}

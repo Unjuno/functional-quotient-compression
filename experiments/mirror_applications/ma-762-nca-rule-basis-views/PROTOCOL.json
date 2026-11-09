@@ -1,0 +1,22 @@
+{
+  "experiment_id":"MA-762",
+  "title":"Shared local update-rule basis with rule Views",
+  "status":"SCREENING",
+  "evidence_lane":"MECHANISM/STORAGE/QUALITY/COMPUTE",
+  "base_commit":"3a979716",
+  "hypothesis":"A shared rank-3 local-kernel basis and task codes preserve heldout cellular-rule update/rollout behavior with at least 25% fewer complete bytes than independent rules and improve on scalar FiLM.",
+  "physical_object":"24 scalar-field 3x3 recurrent local update kernels",
+  "mirror_coordinate":"per-rule coefficient vector selecting a shared kernel basis",
+  "logical_multiplicity":"24 local cellular dynamics from one shared basis",
+  "prior_art_refs":["PA195"],
+  "controls":["independent local-rule bank","one hard-tied mean rule","per-rule scalar gain FiLM","native rank-3 kernel factorization"],
+  "development":{"worlds_or_seeds":["dev-76201"],"selection_metric":"heldout one-step nRMSE, 12-step rollout nRMSE, state norm ratio, complete bytes, MAC proxy"},
+  "fresh":{"worlds_or_seeds":[],"locked_before_access":true,"reason":"synthetic aligned kernel mechanism screen; no audit opened after exact native basis alias"},
+  "grid":{"tasks":96,"training_rules":64,"heldout_rules":32,"kernel_shape":[1,1,3,3],"basis_rank":3,"maps_per_task":8,"spatial_size":16,"rollout_steps":12,"seed":76201},
+  "storage":{"authority":"actual serialized inference payload bytes","paid_objects":["shared kernels or basis","all rule codes/gains","task IDs","independent kernels for full control"]},
+  "compute":{"report_tokens_or_examples":true,"report_optimizer_updates":true,"report_active_compute_proxy":true,"report_isolated_wall_clock":true,"training_updates":0,"calibration_maps_per_task":8},
+  "success_gate":"Heldout update and rollout nRMSE <=0.02, max state norm ratio <=1.1, >=25% complete-byte savings vs independent, and strict Pareto gain over native factorization and FiLM.",
+  "failure_gate":"Quality/byte/compute gate miss or exact native kernel-factorization payload/function alias is FAIL for Mirror-specific value.",
+  "amendments":["A01 during development: removed elementwise clipping of generated kernels, which had broken the preregistered rank-3 teacher structure. The initial off-family output is preserved separately and excluded.","A02 during development: after the corrected 24-rule bank achieved only 19% serialized-byte savings, increased the rule bank to 96 tasks (64 train/32 heldout) to test amortized complete serialization overhead. Rank, seed, scoring and gates were not changed; corrected 24-rule results remain preserved in RESULTS_DEV_24TASKS.csv."],
+  "boundaries":["Synthetic scalar-field recurrent convolution rules only; kernels are generated from a shared rank-3 basis.","No trained growing/regenerating NCA, multi-channel morphology, biological task, or hardware runtime claim.","Training-free oracle aligned mechanism screen; no capacity claim."]
+}
