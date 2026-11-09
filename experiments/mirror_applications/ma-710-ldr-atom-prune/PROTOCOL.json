@@ -80,8 +80,11 @@
     "fit_algorithm": "lars",
     "transform_algorithm": "omp",
     "transform_n_nonzero_coefs": 2,
-    "max_iter": 200,
+    "max_iter": 500,
     "random_state": "per frozen run seed",
-    "training_inputs": "Toeplitz task generator vectors estimated from support examples only"
+    "training_inputs": "Toeplitz task generator vectors estimated from support examples only",
+    "alpha": 0.1,
+    "tol": 1e-08,
+    "development_selection": "Selected on dev-71001 versus tested alpha=1e-8 and 1.0; alpha=0.1 had best dev frontier though it still missed frozen quality/byte gates. Fresh/audit seeds remain unopened."
   }
 }
