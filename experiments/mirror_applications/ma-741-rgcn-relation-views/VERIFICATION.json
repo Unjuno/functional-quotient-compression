@@ -1,0 +1,14 @@
+{
+  "experiment_id":"MA-741",
+  "commit":"pending",
+  "tests":{"command":"python -m pytest -q experiments/mirror_applications/ma-741-rgcn-relation-views/tests","passed":3,"failed":0},
+  "serialization":{"roundtrip_checked":true,"byte_exact":true},
+  "metric_replay":{"checked":true,"max_difference":0.0},
+  "fresh_split_integrity_checked":true,
+  "notes":[
+    "Mirror rank-2 factor and native rank-2 factor control have identical complete payload hashes, bytes, function errors, Hits@1, MRR and compute proxies.",
+    "Held-out code generator is fit only from 24 training relation identities; held-out relation codes are charged side information.",
+    "Deterministic synthetic relation and entity generation; no real KG or trained R-GCN claim.",
+    "Link ranking is saturated for the generated relations; operator nRMSE is reported as the more sensitive function metric."
+  ]
+}
