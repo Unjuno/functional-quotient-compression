@@ -1,0 +1,25 @@
+{
+  "experiment_id": "MA-689",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-689-episodic-semantic-consolidation/tests",
+    "passed": 2,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "protocol_sha256": "44b766ab4d8c57c82d206d6539e0557e41f79a202c9e4b29c0659a628297f599",
+    "canonical_native_alias_equal_bytes": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Corrected development uses protocol schema amendment; original noncanonical schema run is preserved under source/attempts/initial_noncanonical_native_schema/.",
+    "Fresh seeds 68911/68912/68913 were not opened after native PCA matched Mirror function, compute and bytes.",
+    "Development replay manifest contains actual serialized file sizes and SHA-256 digests."
+  ]
+}

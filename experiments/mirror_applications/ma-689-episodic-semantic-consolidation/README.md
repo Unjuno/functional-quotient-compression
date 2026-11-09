@@ -1,36 +1,40 @@
 # MA-689 — Episodic Mirror adapter to semantic consolidation
 
-Status: SCREENING  
+Status: **FAIL for Mirror-specific value**  
 Evidence lane: MECHANISM / STORAGE / COMPUTE  
-Base commit: `8c99306e`
+Protocol frozen: `7715d2c7`; schema-accounting amendment made before corrected development rerun.
 
 ## Hypothesis
 
-H: When episode-specific linear functions share a low-rank semantic basis, transferring their compact episode codes into a persistent consolidated base and deleting the episode store preserves recall while reducing total serialized inference state versus independent full episode adapters.
+H: For aligned episode-conditioned linear functions, transferring compact shared-basis episode codes into a persistent consolidated base and deleting the episode store preserves recall at lower complete bytes than independent full episode adapters.
 
 ## Mirror insertion
 
-> **Mirror insertion:** this experiment adds an episode address `m` to one shared low-rank output-function basis so that many episodic mappings can be selected without storing a full private matrix for each episode.
+> **Mirror insertion:** this experiment adds an episode address `m` to one shared low-rank output-function basis so that many logical episode mappings can be selected without storing a full private matrix for each episode.
 
-- Native method: independent per-episode output vectors, addressed by episode ID.
-- Physical object: one shared rank-4 basis for the output function.
-- Logical functions: episode-ID-conditioned mappings reconstructed from basis coefficients.
-- Persistent `m`: one code per retained episode; consolidation transfers these codes into the persistent base payload before the episodic payload is deleted.
-- Cheapest native control: PCA basis plus ordinary episode coefficients, followed by the same transfer/deletion operation.
-- Closest prior art: PA152's episodic low-rank adapters and optional consolidation; PA147's separation of writable long-term memory from persistent learned memory.
+The physical object is a rank-4 basis in R^32. A persistent per-episode coordinate selects a reconstructed vector. The episode codes are moved into the consolidated base checkpoint before the old episode payload is deleted. The closest native method is PCA basis plus ordinary coefficients, transferred and retired identically.
 
-## Prior-art delta and comparisons
+## T — Treatment and controls
 
-The experiment isolates the retirement event. It measures recall and complete serialized bytes immediately before transfer, after transfer with the episode store still present, and after deleting that store. Controls are independent full episode vectors, shared-basis episode codes, a dense consolidated base, and native PCA coefficients consolidated in the same way. The shared-basis and native PCA payloads are functionally matched by design; any difference is evaluated only through exact serialized bytes, replay and compute, not labeled a Mirror-specific gain.
+Synthetic 32-episode vector memory, 24 basis-fit episodes and 8 excluded episodes, rank 4, rho=0/.05/.2, seeds 68901/68902. Compared independent full vectors, shared episode codes, exact dense consolidation, and native PCA consolidation. Counted complete base+episode payload before transfer, the live duplicate peak while both copies existed, and base-only payload after episode deletion. Serialized NPZ replay was checked for every saved state. Fresh seeds 68911/68912/68913 remained sealed.
 
-## Scope and gates
+## D — Decision
 
-This is a deterministic synthetic linear memory screen, not a language-model or continual-learning benchmark. Development uses seeds 68901 and 68902; 24 episodes fit the basis and 8 episodes are held out from basis fitting. Heterogeneity is swept at 0, .05 and .2. Fresh seeds remain sealed if the native PCA control exactly aliases the candidate or the development quality/storage gate fails.
+**FAIL for Mirror-specific value.**
 
-PASS requires: training-episode recall NRMSE <= .02 after deleting the episode store; complete post-retirement bytes <= 75% of the independent full bank; no more than 1.25x lookup MACs versus independent retrieval; and strict storage/quality/compute improvement over native PCA consolidation.
+- At rho=0, post-deletion NRMSE was <7.5e-8 in both seeds. Consolidated code payloads were 1,797B, about 47% of the independent pre-transfer bank (3,782–3,798B). Lookup decode used 128 MAC/vector; independent direct retrieval used zero MACs.
+- At rho=.05, post-deletion NRMSE was .0432–.0448; at rho=.2 it was .1728–.1790, both above the .02 gate. Payloads remained about 1.8KB.
+- Dense consolidation retained exact vectors but used 3,557–3,581B. The temporary transfer peak reached about 7.3KB because old and new state coexisted.
+- With canonical identical serialization schemas, native PCA and Mirror produced equal functions, compute, and actual bytes in every tested condition. This exact alias triggers the frozen fresh-sealing rule.
 
-FAIL includes loss of recall after deletion, missing the byte/compute gates, or an exact native PCA function/compute alias without strict Pareto gain. Fresh data will not be opened after an exact alias.
+## C — Strongest counter-hypothesis
 
-## H / T / D / C / U
+Ordinary PCA coordinates and deterministic checkpoint-state transfer fully explain the aligned-case storage result. Any byte saving comes from low-rank coding, not a Mirror-specific consolidation mechanism.
 
-These sections will be completed after the frozen development run. The final report distinguishes observed facts from interpretation and untested hypotheses.
+## U — Unconfirmed
+
+This is a synthetic vector-memory test. It does not establish semantic consolidation, learned base-weight integration, natural episodic recall, language quality, adaptive forgetting, continual learning, or hardware serving latency. The compact checkpoint still stores one address per episode; it relocates the episode representation instead of deleting episode-specific information.
+
+## Accounting amendment
+
+The initial successful development run used longer NPZ field names for native PCA, creating a metadata-only byte difference. Its source, payloads and results are preserved under `source/attempts/initial_noncanonical_native_schema/`. Before corrected development rerun, the protocol was amended to use identical serialization field names/order for equivalent Mirror and PCA arrays. Scientific gates, task, seeds and settings did not change. See [STATUS.md](STATUS.md), [PROTOCOL.json](PROTOCOL.json), [RESULTS_CORE.csv](RESULTS_CORE.csv) and [VERIFICATION.json](VERIFICATION.json).

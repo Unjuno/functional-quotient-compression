@@ -1,35 +1,34 @@
 # MA-689 status
 
-- Status: SCREENING
+- Status: FAIL (Mirror-specific attribution; aligned synthetic storage point only)
 - Branch: `research/ma-689-episodic-semantic-consolidation-20261109`
-- Base commit: `8c99306e`
-- Protocol frozen before implementation/run: yes
-- Development complete: no
-- Fresh/audit opened: no
-- Results committed: no
-- Verification committed: no
-- Registry row updated: no
+- Protocol frozen at `7715d2c7`; schema-only accounting amendment made before corrected development rerun
+- Development: complete; seeds 68901/68902, rho 0/.05/.2
+- Fresh/audit: sealed; exact native PCA alias observed
+- Serialized replay tests: passed (2 tests)
+- Results committed: see verified result commit in `VERIFICATION.json`
+- Registry row updated: pending integration
 
 ## H — Hypothesis
 
-A shared rank-4 basis and per-episode coordinates can be transferred to a persistent semantic base, after which the episodic store can be deleted without losing episode recall and at lower complete payload bytes than independent episode-specific values.
+Transfer rank-4 episode coordinates into a persistent base and delete the episode store without losing task recall, using materially fewer complete bytes than independent episode adapters.
 
 ## T — Treatment and controls
 
-Frozen synthetic task: 32 episode vectors in R^32, first 24 used to fit the basis and 8 excluded from fitting; rho=0/.05/.2; seeds 68901/68902. Compare independent full vectors, shared rank-4 coordinates, dense consolidation, and native PCA coordinates under the same transfer/deletion schedule. Account base plus episode state before transfer, duplicate transient peak, and base-only state after deletion. Fresh seeds 68911/68912/68913 remain sealed unless development meets gates and avoids exact native PCA alias.
+32 synthetic episode vectors in R^32; 24 basis-fit episodes, 8 excluded episodes; two development seeds; rho=0/.05/.2. Independent full vectors, shared code bank, dense consolidated base, and native PCA code bank/base were serialized and replayed. Measured pre-transfer state, duplicate transfer peak and post-deletion base-only state, plus per-vector MAC proxy and CPU lookup time.
 
 ## D — Decision
 
-Pending frozen development run.
+FAIL for Mirror-specific attribution. rho=0 passed recall and storage with <7.5e-8 NRMSE at 1,797B versus a 3,782–3,798B independent bank. rho=.05/.2 missed the .02 recall gate at .0432–.0448 and .1728–.1790. Mirror and native PCA exactly match function, MACs and canonical serialized bytes. Fresh remained sealed under the frozen rule. Dense consolidation kept exact recall at 3,557–3,581B. Code lookup costs 128 MAC/vector versus direct full-vector lookup's zero; transfer peak was about 7.3KB.
 
 ## C — Strongest counter-hypothesis
 
-Ordinary PCA coefficients and deterministic checkpoint-state transfer may explain any storage/retention result without a Mirror-specific mechanism.
+Ordinary PCA plus moving its coefficients into a checkpoint explains the storage point. The coordinates remain stored per episode, so this run did not test semantic weight consolidation.
 
 ## U — Unconfirmed
 
-Synthetic vector retrieval only; no learned language model, semantic episode task, online continual learning, optimizer, real episodic-adapter implementation, or hardware-serving claim.
+No natural episodes, learned semantic integration, language model, online training, forget policy or hardware serving test.
 
 ## Next action
 
-Implement the frozen serializer, transfer/delete pipeline, and replay checks; then run only the registered development seeds.
+Integrate the FAIL result, registry/status/claim records and provenance into the reconciliation branch; then select the next untested P0 from the live status board.
