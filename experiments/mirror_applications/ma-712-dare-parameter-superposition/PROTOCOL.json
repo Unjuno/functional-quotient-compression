@@ -1,0 +1,21 @@
+{
+  "experiment_id": "MA-712",
+  "title": "DARE before parameter-superposition unbinding",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY",
+  "base_commit": "c3521fb2",
+  "hypothesis": "DARE sparsification followed by context binding into one shared delta tensor can retain per-task held-out function quality at lower complete serialized state than independent DARE deltas; structured Mirror contexts must beat standard Parameter Superposition contexts at matched bytes to establish incremental value.",
+  "physical_object": "one shared base parameter vector and one superposed task-delta vector",
+  "mirror_coordinate": "per-task deterministic sign context generated from task ID and context seed; unbinding is elementwise context multiplication",
+  "logical_multiplicity": "2, 4, 8, 16, or 32 task deltas",
+  "prior_art_refs": ["PA175", "PA16"],
+  "controls": ["independent dense deltas", "independent DARE sparse deltas", "Parameter Superposition without DARE using random Rademacher contexts", "DARE then Parameter Superposition using random Rademacher contexts", "DARE then Hadamard/orthogonal contexts", "native Parameter Superposition with identical contexts and unbinding"],
+  "development": {"worlds_or_seeds": ["dev-71201"], "selection_metric": "held-out per-task output NRMSE, complete serialized payload bytes, DARE-relative error, context interference and decode operations"},
+  "fresh": {"worlds_or_seeds": ["audit-71211", "audit-71212", "audit-71213"], "locked_before_access": true},
+  "grid": {"delta_width": 1024, "task_counts": [2, 4, 8, 16, 32], "private_delta_fraction": [0.0, 0.1], "dare_drop_fraction": 0.9, "probe_vectors_per_task": 128, "context_generators": ["PCG64 task-seeded Rademacher", "deterministic Walsh-Hadamard rows"]},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["shared base vector", "dense superposed delta vector", "independent sparse DARE indices and values", "context seeds/task IDs", "context generator metadata", "task weights", "shape metadata"]},
+  "compute": {"report_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true, "report_bind_unbind_and_sparse_decode_work": true},
+  "success_gate": "At task count >=8 and at least one private fraction across all audit seeds, DARE+PS payload <=75% independent DARE payload, mean output NRMSE <= independent DARE NRMSE +.02, and unbind compute <=1.25x DARE decode. Mirror-specific value additionally requires strict advantage over byte-near standard PS/native context control; exact alias is FAIL for Mirror-specific attribution.",
+  "failure_gate": "DARE+PS fails quality/storage/compute gates or is matched by standard/native Parameter Superposition; report task-count/interference frontier and do not infer independent capacity from number of addresses.",
+  "boundaries": ["Synthetic linear task deltas; no pretrained model fine-tuning, language benchmark, or actual task-merge claim.", "Contexts are deterministic from code version, master seed and task ID; paid seed, IDs and metadata are serialized.", "Shared base is included in every complete payload; no common-base state is treated as free.", "No GPU or production runtime conclusion; operation counts are analytic proxies."]
+}
