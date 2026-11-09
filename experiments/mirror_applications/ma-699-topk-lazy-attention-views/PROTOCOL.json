@@ -1,0 +1,21 @@
+{
+  "experiment_id": "MA-699",
+  "title": "Top-k Mirror attention Views over one physical cache",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM",
+  "base_commit": "81c702ad",
+  "hypothesis": "Top-k attention over eight structured logical Views can use one canonical K/V cache plus view codes and paid routing indices while exactly matching independent materialized-view attention; active attention compute will scale with k even though cache bytes do not.",
+  "physical_object": "one FP32 canonical K/V cache",
+  "mirror_coordinate": "eight per-view RoPE-plane rotation codes on keys and values, with per-query selected-view indices",
+  "logical_multiplicity": "top-k logical attention functions active over one physical cache",
+  "prior_art_refs": ["PA156", "PA161"],
+  "controls": ["independent materialized per-view K/V caches", "single-view attention baseline", "native direct phase/rotation coordinate implementation with identical function"],
+  "development": {"worlds_or_seeds": ["dev-69901"], "selection_metric": "top-k output relative error, serialized bytes, active MAC proxy, and measured output diversity"},
+  "fresh": {"worlds_or_seeds": ["audit-69911", "audit-69912", "audit-69913"], "locked_before_access": true},
+  "grid": {"sequence_length": 64, "head_width": 16, "logical_views": 8, "top_k": [1, 2, 4, 8]},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["canonical K/V tensors", "per-view rotation coordinates", "per-query selected-view indices", "shape and causal metadata", "independent materialized per-view K/V tensors"]},
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true, "report_compute_vs_k": true},
+  "success_gate": "Across all audit seeds and k values, lazy top-k output relative error <=1e-5 and actual shared payload <=25% of independent payload at k=8. Report compute scaling with k explicitly; no free-compute claim. Native exact alias is FAIL for Mirror-specific attribution.",
+  "failure_gate": "Any audit error >1e-5 or k=8 payload >25% independent. Exact native rotation alias rejects Mirror-specific value even if shared-cache mechanics pass.",
+  "boundaries": ["Synthetic FP32 attention only; no trained model, language quality, capacity, GPU throughput, or production serving claim.", "Logical combinations are not independent capacity; assess only measured task outputs, bytes, and compute.", "Routing schedule is deterministic and its selected indices are serialized and charged in both methods."]
+}
