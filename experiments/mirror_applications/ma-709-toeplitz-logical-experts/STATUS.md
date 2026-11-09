@@ -6,7 +6,7 @@
 - Frozen configuration: yes; serialization accounting amendment documented
 - Development complete: yes
 - Fresh/audit opened: yes; corrected same-seed audit replay due accounting amendment
-- Results committed: pending
+- Results committed: yes (`948225ea`)
 - Verification committed: pending
 
 ## Result
