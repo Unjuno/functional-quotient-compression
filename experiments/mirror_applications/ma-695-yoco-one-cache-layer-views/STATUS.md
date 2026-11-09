@@ -3,12 +3,12 @@
 - Status: FAIL
 - Branch: `research/ma-695-yoco-one-cache-layer-views-20261109`
 - Base commit: `2fc822ad`
-- Last verified commit: pending
+- Last verified commit: 4d18e3f2
 - Development complete: yes
 - Fresh/audit opened: yes
 - Results committed: yes
 - Verification committed: yes
-- Registry row updated: no
+- Registry row updated: yes (integration pending)
 
 ## Next action
 
