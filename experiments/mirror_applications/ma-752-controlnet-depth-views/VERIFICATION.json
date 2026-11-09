@@ -1,0 +1,15 @@
+{
+  "experiment_id":"MA-752",
+  "commit":"ae288e37",
+  "tests":{"command":"python -m pytest -q experiments/mirror_applications/ma-752-controlnet-depth-views/tests","passed":3,"failed":0},
+  "serialization":{"roundtrip_checked":true,"byte_exact":true},
+  "metric_replay":{"checked":true,"max_difference":0.0},
+  "fresh_split_integrity_checked":true,
+  "notes":[
+    "Native factorized and Mirror payload hashes, bytes, heldout errors and MAC proxies exactly match.",
+    "Deterministic replay reproduces all non-timing outputs; wall time is observational only.",
+    "The factorized family is generated from known condition/depth factors; this is an oracle-structured synthetic mechanism screen.",
+    "Fresh/audit is unopened after exact native alias and the 25% storage gate miss.",
+    "No trained ControlNet, T2I-Adapter, pretrained diffusion or image-generation quality claim."
+  ]
+}
