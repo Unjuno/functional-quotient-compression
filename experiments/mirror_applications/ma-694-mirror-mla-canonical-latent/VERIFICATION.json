@@ -1,0 +1,36 @@
+{
+  "experiment_id": "MA-694",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-694-mirror-mla-canonical-latent/tests -v",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "grid_payloads": 60,
+    "audit_aligned_q0_sha256": [
+      "204ed24eab81946ac444db3ea3e1d2f9e7bffe71b0f500f6293d85ae5b3bcd18",
+      "3e9721d41333f5ae9a56a2f09749e12f456189bd3373679cb9ba0e0e5ad1e2e3",
+      "d4a2f845bcb8c92e0d441e2f4f49e7e6fed460b8503ef3836a5b3c2d316628ba"
+    ],
+    "audit_rho01_q8_sha256": [
+      "1c4919b677d583847b29faf0f61b67578ff52eaf344143081611121bd1d18c54",
+      "c19cd441418c69d4fa4fddb89d164577c4826c8d4c1bd69d80732a4e27e9a572",
+      "023d77e2f3952997120d78499e0edb68b2f427ad6f38caa7480de885a1e976c4"
+    ]
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Frozen protocol c69742e8 before measurements; 3 audit seeds covered full rho/rank grid.",
+    "Aligned rho0/q0 uses 4426B vs 6406B independent and passes output/byte/compute gates.",
+    "At rho0.1, q<=2 misses quality; q8 restores exact output at 8810B (137.5% independent).",
+    "Native shared-basis/PCA control exactly matches candidate outputs and serialized hashes.",
+    "Synthetic operator evidence only; no language or GPU inference claim."
+  ]
+}
