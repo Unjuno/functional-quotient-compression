@@ -1,0 +1,65 @@
+{
+  "experiment_id": "MA-789",
+  "title": "Cluster-aware SVD upcycling with shared View basis",
+  "status": "FAIL",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY/COMPUTE/ROUTING",
+  "base_commit": "de2208be",
+  "hypothesis": "A shared cross-cluster residual basis plus cluster/member codes preserves cluster-aware expert behavior at lower complete bytes than separate cluster-specific SVD subspaces and full experts.",
+  "physical_object": "cluster-specific expert subspaces discovered from semantic groups",
+  "mirror_coordinate": "shared basis coordinates indexed by semantic cluster and expert role",
+  "logical_multiplicity": "twelve upcycled experts across three semantic clusters",
+  "prior_art_refs": [
+    "PA207"
+  ],
+  "controls": [
+    "independent full expert bank",
+    "cluster-specific truncated SVD",
+    "global native PCA basis codes",
+    "routing centroid baseline"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      "78901; heterogeneity 0,.05"
+    ],
+    "selection_metric": "heldout routed operator nRMSE, router accuracy, actual bytes and reconstruction MAC"
+  },
+  "fresh": {
+    "worlds_or_seeds": [],
+    "locked_before_access": true,
+    "reason": "native shared-basis control is evaluated before fresh access"
+  },
+  "grid": {
+    "clusters": 3,
+    "experts_per_cluster": 4,
+    "dimension": 12,
+    "shared_rank": 3,
+    "cluster_rank": 3,
+    "private_noise": [
+      0,
+      0.05
+    ]
+  },
+  "storage": {
+    "authority": "actual compressed NPZ inference payload bytes",
+    "paid_objects": [
+      "cluster centroids",
+      "expert matrices/factors",
+      "basis tensors",
+      "codes",
+      "router metadata"
+    ]
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true
+  },
+  "success_gate": "Shared View basis preserves heldout routing and operator quality with >=25% fewer complete bytes than full experts and a strict gain over native global PCA and cluster-specific SVD at matched compute.",
+  "failure_gate": "FAIL for Mirror-specific value if native PCA matches the shared codes or byte/quality/compute gates fail.",
+  "boundaries": [
+    "Synthetic linear experts with known semantic clusters; no trained Cluster-Aware Upcycling or self-distillation claim.",
+    "Routing is nearest-centroid classification on synthetic activations; router state is fully serialized.",
+    "Cluster-specific SVD and global PCA are direct native controls."
+  ]
+}
