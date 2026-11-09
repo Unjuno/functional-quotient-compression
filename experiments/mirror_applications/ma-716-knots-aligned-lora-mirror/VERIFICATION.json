@@ -1,0 +1,25 @@
+{
+  "experiment_id": "MA-716",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-716-knots-aligned-lora-mirror/tests -v",
+    "passed": 2,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": false,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Development seed 71601 only; natural LoRA artifacts and audit tasks were not accessed.",
+    "Gauge refactorization changed independent LoRA predictions by at most 3.4e-16.",
+    "Mirror sparse top-2 exactly aliases native sparse top-2 payload and outputs.",
+    "Aligned held-out task-delta NRMSE exceeds the frozen 0.05 gate.",
+    "Protocol deviation: the full top-k and three-gauge grid was not swept after the initial frozen development point failed quality by a wide margin; no audit data were opened."
+  ]
+}
