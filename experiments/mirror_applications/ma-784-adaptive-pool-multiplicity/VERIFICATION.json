@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-784",
+  "commit": "90851094",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-784-adaptive-pool-multiplicity/tests",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": "Mirror and native Givens payload/function values exactly match at K=1 and K=2"
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Actual NPZ payload includes every pool matrix, center angle, role code, routing index and ID.",
+    "K=1 complete-byte savings versus independent K=4 are 11.4%, below the frozen 25% gate.",
+    "Fresh remained sealed after direct-angle exact alias."
+  ]
+}

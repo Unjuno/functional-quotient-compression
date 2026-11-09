@@ -1,0 +1,68 @@
+{
+  "experiment_id": "MA-784",
+  "title": "Adaptive physical pool size with logical Givens views",
+  "status": "FAIL",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY/COMPUTE",
+  "base_commit": "3922e5d1",
+  "hypothesis": "A smaller physical expert pool plus paid layer-role coordinates reaches the target quality of a four-expert independent bank with lower complete bytes, while simple pool tying does not.",
+  "physical_object": "K physical 8x8 experts selected from a four-function Givens orbit",
+  "mirror_coordinate": "one per-role Givens angle relative to an assigned physical expert center",
+  "logical_multiplicity": "four logical routed functions from K in {1,2,4} physical experts",
+  "prior_art_refs": [
+    "PA205",
+    "PA20"
+  ],
+  "controls": [
+    "standard global pool at K=1,2,4 without Views",
+    "four independent full experts",
+    "native direct-angle Givens coordinate control"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      "78401"
+    ],
+    "selection_metric": "heldout operator nRMSE, actual serialized bytes and router+expert MAC proxy"
+  },
+  "fresh": {
+    "worlds_or_seeds": [],
+    "locked_before_access": true,
+    "reason": "synthetic orbit exactly matches native direct-angle control; no fresh claim pursued"
+  },
+  "grid": {
+    "logical_roles": 4,
+    "pool_sizes": [
+      1,
+      2,
+      4
+    ],
+    "dimension": 8,
+    "view_plane": [
+      0,
+      1
+    ],
+    "heldout_examples_per_role": 256
+  },
+  "storage": {
+    "authority": "actual compressed NPZ inference payload bytes",
+    "paid_objects": [
+      "all K expert matrices",
+      "pool center angles",
+      "role-to-expert routing indices",
+      "per-role view codes",
+      "metadata"
+    ]
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true
+  },
+  "success_gate": "At least one K<4 view condition has heldout nRMSE <=0.02 and >=25% fewer complete bytes than the independent K=4 bank; compare compute and native direct-angle controls.",
+  "failure_gate": "FAIL for Mirror-specific value if direct-angle Givens matches the same payload/function, or if savings/quality do not meet the gate.",
+  "boundaries": [
+    "Designed one-plane orthogonal orbit only; no trained MoE, learned routers, language model, or natural task-bank claim.",
+    "Pool centers and assignments are fixed from the declared angle grid; no fresh task tuning.",
+    "The experiment measures operator reconstruction; active expert routing is a fixed paid role-index table."
+  ]
+}
