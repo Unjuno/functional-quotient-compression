@@ -1,0 +1,14 @@
+{
+ "experiment_id":"MA-751","title":"ControlNet branch compressed into Mirror views","status":"SCREENING","evidence_lane":"MECHANISM/STORAGE/QUALITY/COMPUTE",
+ "base_commit":"e90b5056","hypothesis":"One shared spatial control encoder plus small per-condition orthogonal channel Views preserves condition-specific control maps at lower complete serialized bytes than copied branches and improves over hard tying/FiLM.",
+ "physical_object":"shared two-layer convolutional spatial control branch","mirror_coordinate":"per-condition Givens channel rotation at the hidden control feature","logical_multiplicity":"eight condition-specific spatial control operators",
+ "prior_art_refs":["PA190"],"controls":["independent copied control branches","one hard-tied branch","per-condition output FiLM","native direct Givens channel codes","Mirror channel Views"],
+ "development":{"worlds_or_seeds":["dev-75101"],"selection_metric":"heldout spatial output nRMSE, actual complete branch payload bytes and convolution/view MAC proxy"},
+ "fresh":{"worlds_or_seeds":[],"locked_before_access":true,"reason":"no audit after exact native Givens alias or failed byte gate"},
+ "grid":{"conditions":8,"input_channels":1,"hidden_channels":8,"output_channels":4,"spatial_size":16,"train_maps_per_condition":32,"heldout_maps_per_condition":16,"givens_planes":6,"seed":75101},
+ "storage":{"authority":"actual serialized complete inference branch bytes","paid_objects":["shared convolution weights","per-condition Givens codes or FiLM","condition metadata"]},
+ "compute":{"report_convolution_and_view_macs":true,"report_wall_clock":true,"training_updates":"none; FiLM least squares only"},
+ "success_gate":"Heldout nRMSE <=.02, >=25% complete bytes saved versus independent copies, strict frontier gain over FiLM and native direct Givens controls.",
+ "failure_gate":"Quality/byte miss or exact native Givens function/payload alias is FAIL for Mirror-specific value.",
+ "boundaries":["Synthetic spatial control branch only; no pretrained diffusion model.","No prompt/image generation or aesthetic quality claim.","No hardware inference performance claim."]
+}
