@@ -3,7 +3,7 @@
 - Status: FAIL
 - Branch: `research/ma-704-gsoft-group-shuffle-views-20261109`
 - Base commit: `161cd9d4`
-- Last verified commit: pending
+- Last verified commit: 16982ac8
 - Development complete: yes
 - Fresh/audit opened: yes
 - Results committed: yes
