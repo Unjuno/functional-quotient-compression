@@ -1,0 +1,8 @@
+{
+ "amendment":"A01",
+ "reason":"The initial unregularized CAVIA-style least-squares control was numerically unstable at eight calibration points. A development-only ridge sweep (1e-4, 1e-3, 1e-2, 1e-1, 1) showed 1e-4 gave the strongest held-out fit at the sparse 8-point regime; this avoids handicapping the native context control.",
+ "frozen_change":"Use ridge lambda 1e-4 for CAVIA/full 8-coefficient context fits for every observation count. Preserve unregularized first run in git history; no fresh/audit seed has been opened.",
+ "selection_data":"development seed 74001 only",
+ "fresh_seeds_unchanged":[74002,74003,74004],
+ "gate_unchanged":true
+}
