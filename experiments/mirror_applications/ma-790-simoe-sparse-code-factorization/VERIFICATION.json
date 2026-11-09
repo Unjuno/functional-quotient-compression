@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-790",
+  "commit": "6b7447fa",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-790-simoe-sparse-code-factorization/tests",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": "Mirror/native PCA payload hashes and heldout outputs exactly match at ranks 1,2,4,8,16"
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Raw sparse support indices are paid in payload bytes.",
+    "No factorized rank reaches both the frozen quality and byte gates.",
+    "No trained SIMoE or language-model evidence is claimed."
+  ]
+}

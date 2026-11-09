@@ -1,0 +1,67 @@
+{
+  "experiment_id": "MA-790",
+  "title": "Factorized Mirror codes for SIMoE sparse interpolation coefficients",
+  "status": "FAIL",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY/COMPUTE",
+  "base_commit": "5f935a78",
+  "hypothesis": "Factorizing many sparse interpolation coefficient vectors reduces total SIMoE expert-bank bytes while preserving heldout expert outputs and using acceptable coefficient-generation compute.",
+  "physical_object": "shared sparse interpolation anchor experts",
+  "mirror_coordinate": "low-rank task code that generates sparse interpolation coefficients",
+  "logical_multiplicity": "128 logical upcycled experts from 16 anchors",
+  "prior_art_refs": [
+    "PA208"
+  ],
+  "controls": [
+    "SIMoE raw sparse coefficient indices and values",
+    "native PCA coefficient code",
+    "independent full logical experts"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      "79001"
+    ],
+    "selection_metric": "heldout output nRMSE, total compressed payload bytes and coefficient-generation MAC"
+  },
+  "fresh": {
+    "worlds_or_seeds": [],
+    "locked_before_access": true,
+    "reason": "native PCA is an exact functional control for the factorization"
+  },
+  "grid": {
+    "logical_experts": 128,
+    "anchors": 16,
+    "dimension": 8,
+    "sparse_top_k": 2,
+    "train_experts": 96,
+    "heldout_experts": 32,
+    "factor_ranks": [
+      1,
+      2,
+      4,
+      8,
+      16
+    ]
+  },
+  "storage": {
+    "authority": "actual compressed NPZ inference payload bytes",
+    "paid_objects": [
+      "all anchor experts",
+      "sparse indices and values or low-rank factors",
+      "expert IDs",
+      "metadata"
+    ]
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true
+  },
+  "success_gate": "At least one factor rank preserves heldout output nRMSE <=0.02 with >=25% fewer complete bytes than raw sparse SIMoE codes, while reporting decode compute.",
+  "failure_gate": "FAIL if raw sparse coefficients are smaller at matched quality, factorization misses quality, or native PCA exactly aliases Mirror.",
+  "boundaries": [
+    "Synthetic linear anchor bank and sparse task coefficients only; no trained SIMoE or language-model result.",
+    "Sparse supports are generated per task and explicitly serialized in the raw SIMoE control.",
+    "The factorized code emits dense coefficient vectors unless support metadata is explicitly charged."
+  ]
+}
