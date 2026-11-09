@@ -1,0 +1,24 @@
+{
+  "experiment_id": "MA-721",
+  "commit": "d514069e",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-721-swag-mirror-posterior/tests -v",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": false,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Development seed 72101 only; no audit worlds accessed.",
+    "Mirror posterior coordinate exactly aliases native SWAG payload and prediction for ranks 1/2/4/8/16.",
+    "Rank-1 BNN control is smaller than matched Mirror state.",
+    "Dense reference and all posterior methods use identical generated test inputs/targets."
+  ]
+}
