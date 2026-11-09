@@ -1,0 +1,24 @@
+{
+  "experiment_id": "MA-729",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-729-adaptive-ensemble-width/tests -v",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": false,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Development seed 72901 only; audit unopened.",
+    "Measured inference includes per-view Givens reconstruction.",
+    "Adaptive risk/coverage and payload gates fail; independent fixed-4 is smaller and faster.",
+    "Disagreement stopping exactly matches confidence-only on this test family."
+  ]
+}

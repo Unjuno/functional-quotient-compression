@@ -1,0 +1,15 @@
+{
+ "experiment_id":"MA-729","title":"uncertainty-triggered adaptive Mirror ensemble width","status":"SCREENING","evidence_lane":"MECHANISM/QUALITY/COMPUTE/STORAGE","base_commit":"60d62463",
+ "hypothesis":"Disagreement-triggered activation of additional Mirror Views preserves four-member quality while reducing average active compute and improving the risk/coverage/compute frontier over fixed-width/native early exit.",
+ "physical_object":"one shared 64-dimensional linear predictor vector","mirror_coordinate":"16 Givens plane angles per logical member","logical_multiplicity":"four member functions and input-adaptive ensemble widths 1 through 4",
+ "prior_art_refs":["PA183","PA184","PA41","PA42"],
+ "controls":["independent full member vectors","native Givens angle-coded bank","fixed-width 1/2/4 ensemble","confidence-threshold early exit"],
+ "development":{"worlds_or_seeds":["dev-72901"],"selection_metric":"selective risk, coverage, NLL, active views/MAC, actual bytes and latency distribution"},
+ "fresh":{"worlds_or_seeds":[],"locked_before_access":true,"reason":"development mechanism screen; audit only if frozen gates pass"},
+ "grid":{"dimension":64,"members":4,"rotation_planes":16,"development_examples":2048,"heldout_examples":4096,"thresholds":[0.1,0.2,0.3,0.4]},
+ "storage":{"authority":"actual serialized model plus policy payload bytes","paid_objects":["shared vector","angle codes or independent vectors","plane indices","thresholds","policy metadata"]},
+ "compute":{"report_average_active_members":true,"report_active_MAC_proxy":true,"report_latency_distribution":true},
+ "success_gate":"Adaptive coverage >=.95, selective risk <= fixed-4 risk +.02, >=25% lower average active compute than fixed-4 and better compute/quality frontier than confidence-only early exit.",
+ "failure_gate":"Coverage/quality/compute gates fail or exact Mirror/native view-bank alias; no audit after development FAIL.",
+ "boundaries":["Synthetic majority-vote linear classifier only.","One development world; no natural uncertainty calibration or benchmark claim.","No optimized accelerator or serving latency conclusion."]
+}
