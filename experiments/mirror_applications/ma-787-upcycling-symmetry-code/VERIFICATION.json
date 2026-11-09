@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-787",
+  "commit": "9b530513",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-787-upcycling-symmetry-code/tests",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": "Mirror and native rank-1 LoRA payload hash and predictions exactly match at both heterogeneity levels"
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Heldout child identities did not contribute to basis fitting; their codes use only 32 calibration examples.",
+    "Full CPT runs 400 minibatch updates for each of eight children; measured CPU training wall time is recorded.",
+    "Aligned result is an adaptation-efficiency signal, not a capacity claim."
+  ]
+}
