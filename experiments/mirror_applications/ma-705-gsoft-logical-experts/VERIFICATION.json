@@ -1,0 +1,32 @@
+{
+  "experiment_id": "MA-705",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-705-gsoft-logical-experts/tests -v",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "audit_s2_hashes": [
+      "3288c330cb6da0cdd5be69e77cae2aae15258b7ea310b2a09d312a857314f72a",
+      "40234341ec7fdc67cb199b5771f45147007772befd4d3e2bb390257b73131708",
+      "7de4be1d99e8b770fc2244ae7ef73601055bc9322d6ea493b989fa405b3682b3"
+    ],
+    "s2_payload_bytes": 132727,
+    "s2_independent_bytes": 787590
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 9.3025065136563e-08
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Protocol frozen f7cdfe6f; three audit seeds.",
+    "Two-stage state 16.85% independent with 1.125x MAC proxy; IA3 and rank-one miss output quality.",
+    "Native GSOFT exactly aliases function and serialized payload.",
+    "NumPy matrix-free wall time is slower than dense; no fused kernel claim.",
+    "MA-704/705 share repeated GSOFT-native alias; pause MA-706 pending a native-distinct mechanism."
+  ]
+}
