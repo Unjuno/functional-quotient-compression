@@ -1,0 +1,55 @@
+{
+  "experiment_id": "MA-689",
+  "title": "Episodic Mirror adapter to semantic consolidation",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/COMPUTE/EPISODIC_RETIREMENT",
+  "base_commit": "8c99306e",
+  "hypothesis": "For aligned episode-conditioned linear functions, transferring a compact shared-basis episode code bank into a persistent consolidated base and deleting the episode store preserves episode recall at lower complete serialized bytes and bounded lookup compute than independent full episode adapters.",
+  "prior_art_refs": ["PA152", "PA147"],
+  "task": {
+    "function": "episode_id -> output vector in R^32",
+    "episodes": 32,
+    "basis_fit_episodes": 24,
+    "basis_heldout_episodes": 8,
+    "shared_basis_rank": 4,
+    "heterogeneity_rho": [0.0, 0.05, 0.2],
+    "recall_metric": "NRMSE of recovered episode output vector on all 24 basis-fit episodes; held-out episodes are reported separately and are never used to fit the basis",
+    "consolidation_checkpoints": ["before_transfer", "after_transfer_store_retained", "after_episode_store_deleted"]
+  },
+  "development": {
+    "seeds": [68901, 68902],
+    "selection_metric": "post-deletion training-episode recall NRMSE, total serialized bytes, lookup MAC proxy, and exact serialized replay"
+  },
+  "fresh": {
+    "seeds": [68911, 68912, 68913],
+    "locked_before_access": true,
+    "open_only_if": "development meets quality/storage/compute gates and no exact function+compute alias to native PCA consolidation"
+  },
+  "controls": [
+    "Independent full episode-vector bank (exact retrieval upper control)",
+    "Shared rank-4 episode code bank using SVD-fitted basis",
+    "Consolidated dense base containing reconstructed episode vectors",
+    "Native PCA basis plus ordinary episode coefficients, transferred and retired identically"
+  ],
+  "storage": {
+    "authority": "actual serialized inference payload bytes measured from deterministic compressed NPZ files",
+    "paid_objects": ["basis", "all per-episode codes or vectors", "episode IDs", "consolidated base state", "schema and reconstruction metadata"],
+    "snapshots": "measure base plus episode store before transfer, during duplicate transfer, and base only after deletion; report the duplicate transient peak separately"
+  },
+  "compute": {
+    "lookup_mac_proxy": "dense lookup counts zero multiply-accumulates; rank-r basis decode counts r*32 MACs per episode lookup",
+    "transfer_mac_proxy": "count basis decode for every transferred episode; report one-time consolidation separately",
+    "wall_clock": "measure encode, transfer, serialization and batch lookup on CPU; timing is descriptive at this small scale",
+    "optimizer_updates": 0,
+    "training_examples": 24
+  },
+  "success_gate": "After episode-store deletion, training recall NRMSE <=0.02, full serialized bytes <=75% of independent bank, lookup MAC <=256 per vector retrieval, and a strict Pareto gain over the native PCA consolidation control.",
+  "failure_gate": "Recall loss after deletion, failure of quality/bytes/compute thresholds, or exact native PCA function/compute alias without strict Pareto gain. If exact alias is observed, fresh remains sealed.",
+  "boundaries": [
+    "Synthetic vector-valued linear memory only; no language-model, semantic recall, continual-learning or learned-editor claim.",
+    "The 8 held-out episodes are excluded from basis fitting and are reported as generalization diagnostics, not included in the retention gate.",
+    "Consolidation is an explicit deterministic state transfer; no extra task information is supplied after episode-store deletion.",
+    "Both Mirror codes and native PCA coefficients are fully charged; metadata and episode IDs are included.",
+    "No fresh/audit results may tune rank, gates or implementation."
+  ]
+}
