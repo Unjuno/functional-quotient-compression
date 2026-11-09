@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (284 completed; 344 UNTESTED; 1 SCREENING; 1 NOT ESTABLISHED)
+- P0: **630** (285 completed; 343 UNTESTED; 1 SCREENING; 1 NOT ESTABLISHED)
 - P1: **422** (17 completed; 405 UNTESTED)
 - P2: **103** (103 UNTESTED)
-- Current MA statuses: **252 FAIL, 1 NOT ESTABLISHED, 60 PROMISING, 1 SCREENING, 841 UNTESTED**
+- Current MA statuses: **253 FAIL, 1 NOT ESTABLISHED, 60 PROMISING, 1 SCREENING, 840 UNTESTED**
 - 47 baseline experiment directories remain present; verified external outcomes are linked to their dedicated branches in the registry and claim ledger.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). See the current Next candidate section for the live queue.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. see the current Next candidate section.
@@ -52,6 +52,8 @@ MA-752 is complete as a scoped synthetic FAIL: factorized condition×depth state
 MA-753 is complete as a scoped synthetic FAIL: shared rank-2 adapter basis preserves heldout and pair composition (nRMSE <1.1e-7) at 2,006B vs 8,811B full adapters (77.2% savings) but doubles MAC proxy and exactly aliases native PCA. No trained T2I-Adapter or image-generation claim. Dedicated branch: `research/ma-753-t2i-adapter-shared-basis-20261109`.
 
 MA-755 is complete as a scoped synthetic FAIL: learned source×backbone two-tower bridges predict heldout pairs at nRMSE 4.91e-5 using 1,308B / 96 MAC vs independent 3,341B / 192 MAC; 2,500 updates; exact native two-tower alias. No pretrained model/image claim. Dedicated branch: `research/ma-755-ctrl-adapter-cross-backbone-20261109`.
+
+MA-761 is complete as a scoped synthetic FAIL: one coordinate-conditioned local rule reaches 100% across five heldout goal cells at 5,631B vs 118,319B for an independent seen-goal bank with no unseen coverage; exact native coordinate-conditioning alias. No NCA growth/regeneration claim. Dedicated branch: `research/ma-761-goal-nca-mirror-code-20261109`.
 
 ## Verified status index
 

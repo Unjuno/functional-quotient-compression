@@ -1,0 +1,21 @@
+{
+  "experiment_id":"MA-761",
+  "title":"Goal code as functional coordinate for one shared NCA local rule",
+  "status":"SCREENING",
+  "evidence_lane":"MECHANISM/STORAGE/QUALITY/COMPUTE",
+  "base_commit":"c43ddfc0",
+  "hypothesis":"A shared local transition rule conditioned on a 2D goal coordinate reaches unseen goal cells more reliably and with lower complete bytes than an independent per-goal rule bank.",
+  "physical_object":"one shared local cell transition policy",
+  "mirror_coordinate":"goal position (x,y), broadcast as a low-description code to the shared rule",
+  "logical_multiplicity":"25 global target behaviors from one local update function",
+  "prior_art_refs":["PA195","PA196"],
+  "controls":["independent per-goal policies trained on seen goals","shared hard-tied rule without goal code","shared one-hot goal embedding","native coordinate-conditioned rule"],
+  "development":{"worlds_or_seeds":["dev-76101"],"selection_metric":"unseen-goal rollout success, mean steps, complete serialized bytes and active MACs"},
+  "fresh":{"worlds_or_seeds":[],"locked_before_access":true,"reason":"single scoped NCA-inspired mechanism screen; no audit opened after native coordinate alias"},
+  "grid":{"world_size":[5,5],"train_goals":20,"heldout_goals":[[0,0],[1,3],[3,1],[4,4],[2,2]],"evaluation_starts":[[0,0],[4,0],[0,4],[4,4]],"seed":76101,"shared_rule":"4->32->32->2 tanh MLP","train_updates":900},
+  "storage":{"authority":"actual serialized inference payload bytes","paid_objects":["all rule weights and biases","goal coordinate codes or one-hot embeddings","goal IDs","all independent per-goal rule weights"]},
+  "compute":{"report_tokens_or_examples":true,"report_optimizer_updates":true,"report_active_compute_proxy":true,"report_isolated_wall_clock":true,"training_updates":"shared rules 900; each observed independent goal rule 400"},
+  "success_gate":"At least 90% unseen-goal rollout success, >=25% fewer complete bytes than the independent rule bank, and strict improvement over the native coordinate-conditioned rule at matched compute.",
+  "failure_gate":"Unseen-goal rollout failure, byte/compute gate miss, or exact native coordinate-code function/payload alias is FAIL for Mirror-specific value.",
+  "boundaries":["Single-agent grid navigation using an NCA-inspired shared cell transition rule; no multi-cell pattern growth/regeneration claim.","No obstacles, continuous dynamics, learned morphology or biological realism.","No learned neural cellular automaton benchmark or accelerator runtime claim."]
+}
