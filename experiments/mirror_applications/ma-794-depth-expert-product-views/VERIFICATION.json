@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-794",
+  "commit": "PENDING",
+  "tests": {
+    "command": "pytest -q experiments/mirror_applications/ma-794-depth-expert-product-views/tests",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Each tested method's compressed NPZ payload was decoded and reconstructed; maximum absolute operator difference was below 1e-6.",
+    "Mirror product codes and native bilinear control produced identical serialized payload hashes and identical metrics.",
+    "Fresh/audit role combinations were never opened; the locked development screen failed its quality gate and aliased the native baseline."
+  ]
+}
