@@ -1,0 +1,8 @@
+{
+  "experiment_id": "MA-840",
+  "status": "PASS",
+  "scope": "Deterministic synthetic tanh MLP experiment and native control equality checks; scientific hypothesis status is FAIL.",
+  "commands": ["python experiments/mirror_applications/ma-840-tangent-private-residual/source/run_experiment.py", "pytest -q experiments/mirror_applications/ma-840-tangent-private-residual/tests"],
+  "checks": {"result_rows": 22, "focused_tests": "1 passed", "mirror_native_payload_hash_equal_for_all_ranks_scales": true, "teacher_upper_predictions_exact": true, "fresh_data_opened": false},
+  "provenance": {"base_commit": "99527bed", "dedicated_branch": "research/ma-840-tangent-private-residual-20261111", "development_seed": 84001}
+}
