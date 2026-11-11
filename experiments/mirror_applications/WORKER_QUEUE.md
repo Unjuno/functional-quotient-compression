@@ -557,3 +557,8 @@ MA-837 is a scoped synthetic FAIL: native no-task-storage feature generation and
 ## Current handoff — 2026-11-11, MA-838
 
 MA-838 is a scoped synthetic FAIL: the rank-4 shared tangent basis saves ~38% bytes vs independent deltas but misses .02 quality at both scales and exactly aliases native PCA; the tangent residual increases from .00156 at delta .03 to .06658 at delta .20. Fresh remained sealed. Next eligible P0 is MA-840 (tangent Mirror basis plus nonlinear private residual; PA226/PA18), which directly tests where private capacity becomes necessary. Dedicated branch: `research/ma-838-tangent-linearization-20261111`.
+
+
+## Current handoff — 2026-11-11, MA-840
+
+MA-840 is a scoped synthetic FAIL: at delta .03 the shared rank-0 model reaches .01405 nRMSE at 3,091 B, but rank4 is needed for .00312 and exceeds independent bytes (4,783 vs 4,680); at delta .20 all tangent variants miss quality. Mirror exactly aliases native PCA/residual. Fresh remained sealed. Next eligible P0: MA-841 (AI Engram memory bank compression; PA227), retaining causal sufficiency/specificity/reactivation/necessity checks. Dedicated branch: `research/ma-840-tangent-private-residual-20261111`.
