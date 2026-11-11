@@ -1,0 +1,19 @@
+{
+  "experiment_id": "MA-796",
+  "title": "Shared low-rank recurrent dynamics with task coordinates",
+  "status": "SCREENING",
+  "base_commit": "1101144d",
+  "prior_art_refs": ["PA212"],
+  "hypothesis": "A compact recurrent task View over shared dynamical components recovers held-out task compositions with lower complete bytes than independent RNN matrices while preserving long-horizon trajectories and showing component-specific causal sensitivity.",
+  "insertion": "recurrent transition only: A(m)=A0 + m1*B1 + m2*B2; input and readout are shared and task-independent",
+  "task_family": {"state_dim": 8, "task_grid": "a,b in {-1,0,1}; 9 task compositions", "heldout_rule": "two diagonal corner tasks held out from all basis/code fitting", "rank": 2, "sequence_length": 32},
+  "development": {"seeds": [79601], "training_sequences_per_task": 256, "test_sequences_per_task": 256, "selection": "no hyperparameter tuning; fixed rank-2 known task-coordinate basis"},
+  "fresh": {"seeds": [], "locked": true, "release_rule": "Do not open fresh after native low-rank alias or frozen quality-gate miss."},
+  "controls": ["independent per-task recurrent matrices", "shared recurrent core without task code", "Mirror task coordinates over shared recurrent bases", "native additive low-rank recurrent task conditioning with identical factors and codes"],
+  "metrics": ["heldout one-step transition nRMSE", "heldout 32-step rollout nRMSE", "all-task rollout nRMSE", "complete NPZ inference bytes", "spectral radius max", "component ablation delta by task factor", "active MAC proxy", "reconstruction MACs", "train/test sequences", "optimizer updates", "CPU rollout wall time"],
+  "storage": {"authority": "actual compressed NPZ payload", "paid": ["base transition", "recurrent basis matrices", "task codes or indices", "router/task IDs", "shared input/readout", "metadata"]},
+  "pass_gate": "Heldout rollout nRMSE <=0.02, at least 25% fewer bytes than independent, stable spectral radius <1, and strict advantage over native low-rank control at matched storage/compute.",
+  "fail_gate": "FAIL Mirror-specific claim on exact native alias, quality miss, unstable dynamics, or no strict native-control frontier gain.",
+  "compute": {"optimizer_updates": 0, "active_compute": "transition and shared readout MAC proxy per recurrent step; report task-code reconstruction separately", "runtime": "isolated CPU rollout for small synthetic test bank; not throughput evidence"},
+  "boundaries": ["Synthetic linear recurrent dynamics only; no trained RNN, task benchmark, or language-model result.", "Heldout diagonal task compositions are excluded from shared-basis and coefficient fitting.", "Task coordinates are given by known factor labels; no task inference is claimed.", "Mirror and native low-rank share the same mathematical parameterization, intentionally testing attribution rather than assuming a distinct mechanism."]
+}
