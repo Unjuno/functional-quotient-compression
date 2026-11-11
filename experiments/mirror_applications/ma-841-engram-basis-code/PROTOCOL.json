@@ -1,0 +1,67 @@
+{
+  "experiment_id": "MA-841",
+  "title": "Fisher-geometric causal memory bank with Mirror basis codes",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/MEMORY_CAUSALITY",
+  "base_commit": "18e282d9",
+  "prior_art_refs": [
+    "PA227"
+  ],
+  "hypothesis": "A shared Fisher-weighted basis plus compact per-memory Mirror codes will preserve causal memory specificity, reactivation, sufficiency/composition and necessity/erasure at >=25% fewer complete bytes than independent traces, and strictly beat native PCA factorization.",
+  "world": {
+    "seed": 84101,
+    "memory_count": 12,
+    "trace_dimension": 32,
+    "shared_rank": 3,
+    "ordinary_memories": 9,
+    "private_exception_memories": 3,
+    "fisher_metric": "fixed diagonal positive matrix"
+  },
+  "development": {
+    "seed": 84101,
+    "optimizer_updates": 0,
+    "tuning": "none; closed-form Fisher whitening, SVD, and residual ranks 0/1/3"
+  },
+  "fresh": {
+    "seeds": [],
+    "locked_before_access": true,
+    "release_rule": "Keep fresh sealed after native factorization alias or causal/byte gate miss."
+  },
+  "controls": [
+    "independent full traces",
+    "shared Fisher-weighted rank-3 basis",
+    "shared plus private residual ranks 1 and 3",
+    "native Fisher-weighted PCA/residual factorization",
+    "random Fisher-whitened rank-3 basis"
+  ],
+  "metrics": [
+    "reactivation nRMSE",
+    "specificity top-1 retrieval",
+    "sufficiency composition nRMSE",
+    "necessity after erasure",
+    "leakage to other memories after erasure",
+    "complete serialized inference bytes",
+    "basis decode MACs",
+    "optimizer updates",
+    "isolated scoring wall time",
+    "payload replay error"
+  ],
+  "storage": {
+    "authority": "actual compressed NPZ bytes",
+    "paid_objects": [
+      "all memory traces or basis",
+      "per-memory codes",
+      "private residual basis/codes",
+      "Fisher metric",
+      "memory IDs"
+    ]
+  },
+  "success_gate": "PASS only if all four causal checks pass (reactivation <=0.02, specificity >=0.99, composition <=0.02, necessity >=0.99 with other-memory erasure leakage <=0.01), complete bytes are >=25% below independent, and Mirror strictly beats native PCA.",
+  "failure_gate": "FAIL if any causal check/byte gate misses or native PCA matches Mirror exactly.",
+  "boundaries": [
+    "Synthetic associative-memory vectors only; no AI Engram replication or cognitive claim.",
+    "Nine memories share an aligned rank-3 span; three private exceptions are constructed.",
+    "Private basis is fit from observed exception traces and fully charged; no unseen-memory generalization is tested.",
+    "Fresh seeds remain sealed after alias or gate miss."
+  ]
+}

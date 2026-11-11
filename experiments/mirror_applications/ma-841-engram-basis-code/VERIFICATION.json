@@ -1,0 +1,8 @@
+{
+  "experiment_id": "MA-841",
+  "status": "PASS",
+  "scope": "Deterministic synthetic memory bank generation and causal check/native alias assertions; scientific hypothesis status is FAIL.",
+  "commands": ["python experiments/mirror_applications/ma-841-engram-basis-code/source/run_experiment.py", "pytest -q experiments/mirror_applications/ma-841-engram-basis-code/tests"],
+  "checks": {"result_rows": 8, "focused_tests": "1 passed", "mirror_native_hash_equal_each_rank": true, "independent_passes_all_causal_checks": true, "rank3_reconstruction_passes_causal_checks": true, "fresh_data_opened": false},
+  "provenance": {"base_commit": "18e282d9", "dedicated_branch": "research/ma-841-engram-basis-code-20261111", "seed": 84101}
+}
