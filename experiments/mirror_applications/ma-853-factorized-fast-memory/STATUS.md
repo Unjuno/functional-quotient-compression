@@ -13,8 +13,8 @@
 
 None; record scoped synthetic Mirror-attribution FAIL and continue to next eligible P0.
 
-- Results committed: pending
-- Verification committed: pending
+- Results committed: yes
+- Verification committed: yes
 
 ## Decisions / rulings
 
