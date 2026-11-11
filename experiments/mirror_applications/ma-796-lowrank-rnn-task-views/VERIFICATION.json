@@ -1,9 +1,19 @@
 {
   "experiment_id": "MA-796",
-  "commit": "PENDING",
-  "tests": {"command": "pytest -q experiments/mirror_applications/ma-796-lowrank-rnn-task-views/tests", "passed": 1, "failed": 0},
-  "serialization": {"roundtrip_checked": true, "byte_exact": true},
-  "metric_replay": {"checked": true, "max_difference": 0.0},
+  "commit": "e7737aaa1ad5396644c59821408d7da502d45538",
+  "tests": {
+    "command": "pytest -q experiments/mirror_applications/ma-796-lowrank-rnn-task-views/tests",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
   "fresh_split_integrity_checked": true,
   "notes": [
     "Heldout task combinations are excluded from transition-matrix and basis fitting; task factor labels are known and charged as coordinates.",
