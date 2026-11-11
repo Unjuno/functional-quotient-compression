@@ -3,11 +3,11 @@
 - Status: FAIL (Mirror-specific attribution); synthetic gain-state screen passes scoped quality/reset/storage gate
 - Branch: `research/ma-874-stable-synapse-gain-code-20261111`
 - Base commit: `54fee5d6`
-- Last verified commit: pending
+- Last verified commit: `83aed7d8d3db20f56eac2c994cdac613ea2eb1f6`
 - Development complete: yes
 - Fresh/audit opened: yes, after protocol freeze and development validation
-- Results committed: pending
-- Verification committed: pending
+- Results committed: yes (`83aed7d8d3db20f56eac2c994cdac613ea2eb1f6`)
+- Verification committed: pending provenance follow-up
 
 ## Next action
 
