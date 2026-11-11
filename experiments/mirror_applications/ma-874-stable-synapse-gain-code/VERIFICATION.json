@@ -1,0 +1,34 @@
+{
+  "experiment_id": "MA-874",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-874-stable-synapse-gain-code/tests && python experiments/mirror_applications/ma-874-stable-synapse-gain-code/verify_results.py",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "sixteen_task_payload_bytes": {
+      "mirror_and_native_gain": 264,
+      "independent_readout": 584,
+      "fast_recurrent_decay_and_scalar_gain": 648,
+      "shared_reservoir_and_metadata_charged": true
+    }
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_seeds": [
+    983,
+    997,
+    1009
+  ],
+  "notes": [
+    "Fresh world task codes and reservoir dynamics are independent of the development seed.",
+    "Reset test replays test sequences from zero state and compares exact hidden trajectories.",
+    "Fast-weight control is explicitly limited to per-task recurrent decay plus scalar gain."
+  ]
+}
