@@ -1,0 +1,13 @@
+{
+ "experiment_id":"MA-833","title":"KARC explicit basis with shared dynamical-system Views","status":"SCREENING","evidence_lane":"MECHANISM/STORAGE/FORECASTING","base_commit":"82eca699","prior_art_refs":["PA223"],
+ "hypothesis":"A shared explicit KARC feature bank plus compact system-specific readout Views predicts heldout dynamical trajectories with lower complete bytes than independent closed-form KARC readouts and improves on native low-rank readout factorization.",
+ "world":{"state_dim":4,"systems":8,"delay":1,"basis":"fixed Fourier features of delayed coordinates","forecast_horizon":8,"teacher":"system readouts are shared center plus rank-2 system-specific perturbations"},
+ "development":{"seed":83301,"train_sequences_per_system":256,"test_sequences_per_system":512,"optimizer_updates":0,"tuning":"none"},
+ "fresh":{"seeds":[],"locked_before_access":true,"release_rule":"Keep fresh sealed after native readout-factor alias or byte/quality gate miss."},
+ "controls":["independent closed-form KARC readout per system","shared KARC basis with one readout","Mirror system readout codes","native low-rank factorization of KARC readouts"],
+ "metrics":["heldout rollout nRMSE over horizon 8","actual basis+readout bytes","active feature evaluations","payload replay error","finite rollout stability"],
+ "storage":{"authority":"actual NPZ bytes","paid_objects":["Fourier feature specification","shared basis parameters","system codes/readouts","system IDs","metadata"]},
+ "success_gate":"heldout rollout nRMSE <=0.02, at least 25% fewer complete bytes than independent KARC readouts, and strict frontier gain over native low-rank readout control.","failure_gate":"FAIL if native readout factors match Mirror or quality/storage gate misses.",
+ "compute":{"report_sequences":true,"report_updates":true,"report_active_features":true,"report_wall_time":true,"stability":"report finite horizon output; readout is nonlinear Fourier map"},
+ "boundaries":["Synthetic stable linear dynamics only; no KARC reproduction or real forecasting claim.","System readout codes are present for all scored systems; no unseen-system code inference claim.","No fresh runs after native alias or gate failure."]
+}

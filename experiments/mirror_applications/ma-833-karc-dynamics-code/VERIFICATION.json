@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-833",
+  "commit": "PENDING",
+  "tests": {
+    "command": "pytest -q experiments/mirror_applications/ma-833-karc-dynamics-code/tests",
+    "passed": null,
+    "failed": null
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 9.313225746154785e-10
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Native/Mirror readout maps reconstruct with max absolute error below 1e-9; all rollouts remain finite.",
+    "Mirror and native low-rank KARC payloads differ by 8 B while matching output/compute.",
+    "Synthetic only; no KARC or real forecasting claim; fresh sealed."
+  ]
+}
