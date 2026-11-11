@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (322 FAIL; 51 PROMISING; 251 UNTESTED; 1 SCREENING; 6 NOT ESTABLISHED)
+- P0: **630** (323 FAIL; 51 PROMISING; 250 UNTESTED; 1 SCREENING; 6 NOT ESTABLISHED)
 - P1: **422** (17 completed; 405 UNTESTED)
 - P2: **103** (103 UNTESTED)
-- Current MA statuses: **330 FAIL, 6 NOT ESTABLISHED, 60 PROMISING, 1 SCREENING, 758 UNTESTED**
+- Current MA statuses: **331 FAIL, 6 NOT ESTABLISHED, 60 PROMISING, 1 SCREENING, 757 UNTESTED**
 - 47 baseline experiment directories remain present; verified external outcomes are linked to their dedicated branches in the registry and claim ledger.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). See the current Next candidate section for the live queue.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. see the current Next candidate section.
@@ -264,3 +264,5 @@ MA-874 FAIL for Mirror-specific attribution; frozen-reservoir gain state passed 
 
 
 MA-876 FAIL: on heldout Pythia-70M→SmolLM2-135M, a rank32 shared map basis cuts three-pair translator bytes 91.96% (7,590,286→609,934 B), but compressed next-token NLL is 3.11/3.77/5.34 nat worse than independent full ridge maps in the three fresh Wikitext worlds; gate was .05. Full ridge maps are also 1.61–3.43 nat worse than native target prefill. Native PCA code aliases Mirror; GPU unavailable. Single pair, CPU only. Dedicated branch: research/ma-876-shared-kv-translator-basis-20261111. Next P0: MA-877 position-free KV transfer after inverse RoPE.
+
+MA-877 FAIL: on Pythia-70M→SmolLM2-135M, inverse-RoPE position-free full maps improve on direct RoPE ridge by 0.35–1.29 nat but remain +0.82 to +2.97 nat above target-native NLL. Frozen rank32 is +12.35/+16.44/+13.61 nat above native in fresh seeds 983/997/1009. Payload falls 80.87% (2,996,100→573,060 B), with quality failure in all seeds and exact native PCA alias. Exact replay and final serializer test remain unverified after execution-environment outage; metrics are retained as single-run observations. Dedicated branch: research/ma-877-position-free-kv-transfer-20261111. Next P0: MA-878 head-matched Mirror bridge versus CacheBridge.
