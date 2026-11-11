@@ -606,3 +606,6 @@ MA-855 broad frontier is NOT ESTABLISHED: one synthetic linear task family; CAVI
 
 
 MA-856 is a scoped FAIL for Mirror-specific attribution; selected low-loss line misses its preregistered 2 pp worst-grid gate on seed 61. Endpoint+codes save bytes versus 17 materialized copies but do not beat the independent two-model bank. Native interpolation and Mirror coordinate alias exactly. Next eligible P0: MA-857 (shared learned simplex task vertices).
+
+
+MA-857 FAIL: the rotated-Digits simplex misses pooled-model quality by 5.19–6.85 pp on all fresh seeds; endpoint+codes are 128 B larger than the independent bank; native barycentric interpolation and Mirror coordinates match within float32 tolerance. Next P0: MA-858 (Bezier-surface model chart, PA232).

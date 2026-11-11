@@ -1,0 +1,94 @@
+{
+  "experiment_id": "MA-857",
+  "title": "jointly trained three-vertex neural simplex for domain mixtures",
+  "status": "FRESH_COMPLETE",
+  "evidence_lane": "QUALITY/STORAGE/COMPUTE",
+  "base_commit": "b8cde723",
+  "hypothesis": "Joint training of three endpoint MLPs through sampled barycentric mixtures can make interior simplex views accurately classify digit images drawn from the corresponding mixture of three rotated domains, while storing endpoints plus small barycentric codes more compactly than materializing a coordinate grid.",
+  "physical_object": "Three trained MLP endpoint state dictionaries",
+  "mirror_coordinate": "Three nonnegative barycentric weights summing to one; Mirror signed chart is m=2a-1 with redundant third component reconstructed by sum constraint",
+  "logical_multiplicity": "Interior classifiers on a sampled barycentric grid",
+  "prior_art_refs": [
+    "PA231",
+    "PA28"
+  ],
+  "controls": [
+    "single pooled standard MLP trained on the same domain-mixture data",
+    "three independently trained domain-specific models",
+    "uniform model soup of independent endpoints",
+    "native barycentric weight interpolation",
+    "Mirror m=2a-1 decoder",
+    "materialized 10-coordinate simplex checkpoint grid"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      41
+    ],
+    "selection_metric": "mean heldout NLL on the nine-point barycentric grid; learning rate selected from 0.03, 0.1"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      131,
+      149,
+      167
+    ],
+    "locked_before_access": true
+  },
+  "data": {
+    "source": "sklearn Digits",
+    "split": "fixed stratified 60/20/20; train_test_split seeds 420 and 421",
+    "domains": [
+      "identity",
+      "90-degree rotation",
+      "180-degree rotation"
+    ],
+    "normalization": "pixels / 16"
+  },
+  "training": {
+    "model": "MLP 64\u219232\u219210, ReLU",
+    "epochs": 80,
+    "batch_size": 64,
+    "optimizer": "SGD momentum .9, weight_decay 1e-4, cosine learning-rate schedule",
+    "coordinate_sampling": "uniform Dirichlet(1,1,1) each minibatch; per-example domain is sampled categorically from the same barycentric vector; interpolate all three endpoint weights before forward pass"
+  },
+  "evaluation": {
+    "coordinate_grid": "three vertices, three edge midpoints, centroid, plus three fixed interior points",
+    "metric": "accuracy and NLL against heldout digit labels on each coordinate's matching domain mixture",
+    "fresh_seed_meaning": "initialization/data-order replicates on the same fixed split, not unseen-task generalization"
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "three endpoints",
+      "coordinate codes",
+      "architecture and normalization metadata",
+      "materialized controls"
+    ],
+    "code_encoding": "float32 first two barycentric weights; third reconstructed exactly as 1-a0-a1"
+  },
+  "compute": {
+    "report": [
+      "training updates/examples",
+      "interpolation decode MAC proxy",
+      "heldout query MACs",
+      "wall time"
+    ]
+  },
+  "success_gate": "All fresh runs: worst-grid accuracy within 2 percentage points of the paired pooled standard MLP; endpoint domain accuracies at least 90%; endpoint+codes payload smaller than 10 materialized view states; Mirror decoder logits match within 5e-6 maximum absolute logit difference native barycentric interpolation.",
+  "failure_gate": "Any quality gate miss or exact alias to ordinary barycentric interpolation counts against the specific Mirror claim; report simplex utility separately.",
+  "boundaries": [
+    "Three image-rotation domains are a narrow synthetic domain-shift test; no language-model or unseen-domain claim.",
+    "The third barycentric coordinate is determined by the first two and sum-to-one constraint; its reconstruction state is part of the decoder specification.",
+    "A coordinate grid is a sample of views, not a count of independent model capacities."
+  ],
+  "amendments": [
+    {
+      "id": "01",
+      "date": "2026-11-11",
+      "reason": "Observed float32 roundoff in m=2a-1 decode on fresh outputs (max absolute logit difference 2.87e-6); verification uses a predeclared numerical equivalence tolerance of 5e-6, without changing model settings or quality gates.",
+      "fresh_data_accessed_before_amendment": true,
+      "settings_changed": false,
+      "updated_gate": "Mirror/native max logit difference <=5e-6."
+    }
+  ]
+}
