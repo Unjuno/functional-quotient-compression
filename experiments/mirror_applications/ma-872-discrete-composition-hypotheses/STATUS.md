@@ -3,11 +3,11 @@
 - Status: FAIL (Mirror-specific gate); discrete native-codebook screen passes its scoped quality/storage gate
 - Branch: `research/ma-872-discrete-composition-hypotheses-20261111`
 - Base commit: `d2afcc2c`
-- Last verified commit: pending
+- Last verified commit: `ea0971b87ee5ba619ef5a7c8ddc8e41c892b9ebb`
 - Development complete: yes
 - Fresh/audit opened: yes, after protocol freeze and development validation
-- Results committed: pending
-- Verification committed: pending
+- Results committed: yes (`ea0971b87ee5ba619ef5a7c8ddc8e41c892b9ebb`)
+- Verification committed: pending provenance follow-up
 
 ## Next action
 
