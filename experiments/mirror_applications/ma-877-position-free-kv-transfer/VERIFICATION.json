@@ -1,0 +1,41 @@
+{
+  "experiment_id": "MA-877",
+  "status": "PARTIAL_VERIFICATION",
+  "commit": "91577255f922965781d4ab814790aaae09a6793b",
+  "protocol_freeze_commit": "79ff15fc",
+  "fresh_settings_commit": "881b8992",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-877-position-free-kv-transfer/tests",
+    "passed_before_fresh": 3,
+    "failed": 0,
+    "scope": "RoPE inverse/reapply algebra and target-specific RoPE reapplication; final serializer-buffer test was added after fresh and could not run."
+  },
+  "rope_cache_roundtrip": {
+    "checked": true,
+    "pythia_gpt_neox_max_abs_error": 3.552713678800501e-15,
+    "smollm2_llama_max_abs_error": 8.881784197001252e-16
+  },
+  "serialization": {
+    "actual_payload_lengths_measured": true,
+    "full_bytes": 2996100,
+    "rank32_shared_bytes": 573060,
+    "roundtrip_checked": false,
+    "byte_buffer_test_pending": true
+  },
+  "metric_replay": {
+    "checked": false,
+    "max_difference": null,
+    "reason": "Fresh outputs were produced, but the execution environment became unavailable before deterministic replay and artifact hashing."
+  },
+  "fresh_splits_frozen_before_evaluation": true,
+  "fresh_seeds": [
+    983,
+    997,
+    1009
+  ],
+  "notes": [
+    "Rank32 was frozen after development and before fresh evaluation.",
+    "All three fresh worlds missed the registered quality gates; storage passed.",
+    "Do not treat the reported fresh values as replay-verified."
+  ]
+}
