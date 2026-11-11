@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-809",
+  "commit": "PENDING",
+  "tests": {
+    "command": "pytest -q experiments/mirror_applications/ma-809-private-skill-residual/tests",
+    "passed": null,
+    "failed": null
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "All evaluated maps are reconstructed from serialized NPZ payloads; maximum replay error is 0.",
+    "Shared-only misses the frozen quality gate; adding the private rank-1 code restores quality but costs more full bytes than independent storage.",
+    "Mirror View plus private residual and native additive-Givens plus rank-1 residual are within 2 serialized bytes and match within 1e-7 nRMSE; fresh remains sealed."
+  ]
+}
