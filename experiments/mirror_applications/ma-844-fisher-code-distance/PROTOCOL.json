@@ -1,0 +1,68 @@
+{
+  "experiment_id": "MA-844",
+  "title": "Fisher-metric distance for task update code assignment",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/INFORMATION_GEOMETRY",
+  "base_commit": "513ba350",
+  "prior_art_refs": [
+    "PA227",
+    "PA178"
+  ],
+  "hypothesis": "Fisher-weighted Mirror code assignment will preserve heldout functional updates with >=25% fewer complete bytes and lower Fisher-weighted task error/interference than Euclidean assignment, while strictly beating native Fisher k-means controls.",
+  "world": {
+    "seed": 84401,
+    "tasks": 72,
+    "train_tasks": 24,
+    "heldout_tasks": 48,
+    "update_dim": 32,
+    "codebook_size": 6,
+    "fisher": "diagonal geometric spectrum 0.1 to 10",
+    "teacher": "six clustered updates with small isotropic Fisher-whitened residual"
+  },
+  "development": {
+    "seed": 84401,
+    "optimizer_updates": 0,
+    "tuning": "none; deterministic farthest-point initialization and Lloyd clustering"
+  },
+  "fresh": {
+    "seeds": [],
+    "locked_before_access": true,
+    "release_rule": "Keep fresh sealed after exact native Fisher-control alias or strict gate miss."
+  },
+  "controls": [
+    "independent full update table",
+    "Euclidean k-means code assignment",
+    "Fisher-weighted Mirror code assignment",
+    "native Fisher-weighted k-means",
+    "shared mean update"
+  ],
+  "metrics": [
+    "heldout Fisher-weighted nRMSE",
+    "heldout Euclidean nRMSE",
+    "cluster retrieval accuracy",
+    "actual serialized payload bytes",
+    "assignment distance MACs",
+    "inference decode MACs",
+    "train/heldout task counts",
+    "optimizer updates",
+    "wall time",
+    "payload replay error"
+  ],
+  "storage": {
+    "authority": "actual compressed NPZ bytes",
+    "paid_objects": [
+      "codebook centers",
+      "per-task code indices",
+      "Fisher diagonal",
+      "task IDs",
+      "independent update tables"
+    ]
+  },
+  "success_gate": "PASS only if Fisher nRMSE <=0.02, >=25% fewer complete bytes than independent, lower Fisher error than Euclidean assignment, and strict advantage over native Fisher k-means.",
+  "failure_gate": "FAIL if quality/bytes gate misses or native Fisher k-means matches Mirror without a frontier gain.",
+  "boundaries": [
+    "Synthetic linearized task updates only; no trained PEFT or real Fisher estimator.",
+    "Six update clusters are constructed; heldout tasks are samples from known clusters.",
+    "No fresh seeds after native control alias or gate miss."
+  ]
+}
