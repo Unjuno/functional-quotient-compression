@@ -1,0 +1,20 @@
+{
+  "experiment_id": "MA-849",
+  "title": "Context-generated plasticity rule coordinate",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/ONLINE_COMPUTE",
+  "base_commit": "ee51a0c9",
+  "hypothesis": "A compact context-conditioned coordinate on a shared secant-Hebbian update rule will improve few-step adaptation across task curvature regimes at no more serialized rule bytes or update compute than a generic context-to-learning-rate control.",
+  "physical_object": "Shared online plasticity/update rule",
+  "mirror_coordinate": "Scalar coordinate modulating the shared secant-estimated learning rate from online gradient history",
+  "logical_multiplicity": "Task-adaptive update behavior across curvature regimes",
+  "prior_art_refs": ["PA228", "PA150"],
+  "controls": ["development-tuned fixed learning rate", "native context-conditioned scalar learning-rate gate", "Mirror coordinate on shared secant rule", "per-task best fixed rate diagnostic upper control"],
+  "development": {"worlds_or_seeds": [17], "selection_metric": "mean final quadratic excess loss after 12 updates"},
+  "fresh": {"worlds_or_seeds": [37, 59], "locked_before_access": true},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["rule parameters", "Mirror coordinate or native gate", "optimizer metadata", "writable current parameters and gradient-history state"]},
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true},
+  "success_gate": "Fresh final excess loss improves >=10% versus fixed-rate baseline while matching native context gate within 1% payload bytes and <=1.05x online MACs; for Mirror-specific claim additionally beat native context gate by >=5% loss at matched bytes/compute.",
+  "failure_gate": "No quality improvement over fixed rate, or native context gate matches Mirror within 1% quality/bytes, or update compute exceeds 1.05x native control.",
+  "boundaries": ["Synthetic quadratic adaptation only; no learned optimizer or differentiable-plasticity training claim.", "Development seed 17 selects fixed rate and shared rule multiplier; fresh seeds 37/59 are never tuned.", "Task curvature information is available only through observed gradient history, not teacher Hessians at inference."]
+}
