@@ -1,0 +1,20 @@
+{
+  "experiment_id": "MA-851",
+  "title": "DeltaNet low-rank writable state View",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/RUNTIME",
+  "base_commit": "e01796a1",
+  "hypothesis": "When an associative value stream lies in a shared rank-r output subspace, a compact low-rank writable DeltaNet state will preserve sequence recall while reducing serialized state bytes and write cost versus a full matrix state.",
+  "physical_object": "Delta-rule writable fast matrix W",
+  "mirror_coordinate": "Low-rank state coordinate C over a shared output basis U",
+  "logical_multiplicity": "Sequence-specific associative memories",
+  "prior_art_refs": ["PA230", "PA25"],
+  "controls": ["full matrix delta rule", "ordinary native low-rank matrix state", "Mirror low-rank writable state", "rank-matched batch reconstruction upper control"],
+  "development": {"worlds_or_seeds": [19], "selection_metric": "stored-key retrieval nRMSE, actual state payload bytes, update/query MACs"},
+  "fresh": {"worlds_or_seeds": [41, 67], "locked_before_access": true},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["full writable matrix or shared output basis and low-rank state", "metadata", "temporary reconstruction state"]},
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true},
+  "success_gate": "Fresh retrieval nRMSE <=1e-6, at least 25% fewer actual bytes than full matrix, and no more update MACs than full delta rule. Mirror-specific benefit requires beating native low-rank state in bytes/quality/compute.",
+  "failure_gate": "Quality/reset gate missed, <25% bytes saved, or native low-rank matches Mirror within 1% with equal/better bytes and compute.",
+  "boundaries": ["Synthetic associative sequence only; no trained DeltaNet or language model claim.", "Shared value basis is generated and serialized; no free reconstruction state.", "Fresh seeds 41 and 67 are not used for tuning."]
+}
