@@ -1,0 +1,21 @@
+{
+  "experiment_id": "MA-794",
+  "title": "Factorized depth × expert codes over a global reused pool",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY/COMPUTE/LOAD-BALANCE",
+  "base_commit": "8817f6c7",
+  "hypothesis": "A shared expert pool with a factorized depth×expert functional coordinate generalizes to unseen layer-expert combinations with fewer complete bytes than independent role experts while preserving routing balance.",
+  "physical_object": "eight global 8×8 experts reused at eight layer depths",
+  "mirror_coordinate": "rank-2 product of depth factors and expert factors over shared matrix bases",
+  "logical_multiplicity": "64 layer-expert functions from eight physical experts and rank-2 role factors",
+  "prior_art_refs": ["PA204", "PA205"],
+  "controls": ["independent per-layer expert matrices", "hard global expert tying", "MoRE-style additive depth plus expert embeddings", "native bilinear shared-basis factorization"],
+  "development": {"worlds_or_seeds": ["79401"], "selection_metric": "heldout role operator/output nRMSE, complete serialized bytes, active compute and per-layer expert load balance"},
+  "fresh": {"worlds_or_seeds": [], "locked_before_access": true, "reason": "exact native bilinear attribution is evaluated before any fresh role access"},
+  "grid": {"layers": 8, "global_experts": 8, "input_dim": 8, "output_dim": 8, "shared_basis_rank": 2, "heldout_roles": "checkerboard rule (layer + expert) mod 4 == 0; all rows and columns retain six training pairs"},
+  "storage": {"authority": "actual compressed NPZ inference payload bytes", "paid_objects": ["global expert matrices", "shared bases", "depth/expert factors or additive embeddings", "router matrices", "role maps", "IDs", "metadata"]},
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true},
+  "success_gate": "Heldout routed output nRMSE <=0.02, per-layer top-1 load max/min <=1.25, >=25% fewer complete bytes than independent roles, and strict frontier improvement over additive and native bilinear controls.",
+  "failure_gate": "FAIL for Mirror-specific value if native bilinear exactly matches state/function or if quality, bytes, compute, or load-balance gates miss.",
+  "boundaries": ["Synthetic linear experts and fixed balanced per-layer router only; no trained MoRE/UniPool, language-model NLL, or GPU throughput claim.", "Heldout roles are omitted from shared basis and factor fitting; this is synthetic role-composition generalization, not fresh model checkpoints.", "Per-role operator weights are oracle generated from a rank-2 bilinear teacher; factor fitting uses observed role matrices."]
+}
