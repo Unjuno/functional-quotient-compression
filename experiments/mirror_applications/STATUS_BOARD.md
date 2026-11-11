@@ -6,10 +6,11 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (323 FAIL; 51 PROMISING; 250 UNTESTED; 1 SCREENING; 6 NOT ESTABLISHED)
+- Claim ledger entries: **400**
+- P0: **630** (324 FAIL; 51 PROMISING; 248 UNTESTED; 1 SCREENING; 6 NOT ESTABLISHED)
 - P1: **422** (17 completed; 405 UNTESTED)
 - P2: **103** (103 UNTESTED)
-- Current MA statuses: **331 FAIL, 6 NOT ESTABLISHED, 60 PROMISING, 1 SCREENING, 757 UNTESTED**
+- Current MA statuses: **332 FAIL, 6 NOT ESTABLISHED, 60 PROMISING, 1 SCREENING, 756 UNTESTED**
 - 47 baseline experiment directories remain present; verified external outcomes are linked to their dedicated branches in the registry and claim ledger.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). See the current Next candidate section for the live queue.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. see the current Next candidate section.
@@ -265,4 +266,7 @@ MA-874 FAIL for Mirror-specific attribution; frozen-reservoir gain state passed 
 
 MA-876 FAIL: on heldout Pythia-70M→SmolLM2-135M, a rank32 shared map basis cuts three-pair translator bytes 91.96% (7,590,286→609,934 B), but compressed next-token NLL is 3.11/3.77/5.34 nat worse than independent full ridge maps in the three fresh Wikitext worlds; gate was .05. Full ridge maps are also 1.61–3.43 nat worse than native target prefill. Native PCA code aliases Mirror; GPU unavailable. Single pair, CPU only. Dedicated branch: research/ma-876-shared-kv-translator-basis-20261111. Next P0: MA-877 position-free KV transfer after inverse RoPE.
 
-MA-877 FAIL: on Pythia-70M→SmolLM2-135M, inverse-RoPE position-free full maps improve on direct RoPE ridge by 0.35–1.29 nat but remain +0.82 to +2.97 nat above target-native NLL. Frozen rank32 is +12.35/+16.44/+13.61 nat above native in fresh seeds 983/997/1009. Actual serialized payload falls 80.871% (2,996,165→573,125 B, including header/pair metadata), with quality failure in all seeds and native PCA alias. Re-evaluation reproduces prompt IDs, byte counts and all gate verdicts; NLL values vary by at most 0.02051181 nat across CPU runs. Dedicated branch: research/ma-877-position-free-kv-transfer-20261111. Next P0: MA-878 head-matched Mirror bridge versus CacheBridge.
+MA-877 FAIL: on Pythia-70M→SmolLM2-135M, inverse-RoPE position-free full maps improve on direct RoPE ridge by 0.35–1.29 nat but remain +0.82 to +2.97 nat above target-native NLL. Frozen rank32 is +12.35/+16.44/+13.61 nat above native in fresh seeds 983/997/1009. Actual serialized payload falls 80.871% (2,996,165→573,125 B, including header/pair metadata), with quality failure in all seeds and native PCA alias. Re-evaluation reproduces prompt IDs, byte counts and all gate verdicts; NLL values vary by at most 0.02051181 nat across CPU runs. Dedicated branch: research/ma-877-position-free-kv-transfer-20261111. Next P0: MA-879 attention-sensitive Mirror cache code calibration.
+
+
+MA-878 FAIL: Pythia-70M→SmolLM2-135M attention-matched head support beats fixed [0,4,7] by +0.158 nat in seed 983, then loses by 0.384/0.217 nat in seeds 997/1009. Rank32 shared PCA saves 80.871% actual translator bytes (2,996,165→573,125 B), but is +7.48 to +14.52 nat vs native and +5.64 to +12.42 nat vs full maps. Prompt identity/byte checks pass; all quality gates fail. CPU only, one pair/corpus, no generation claim. Dedicated branch: research/ma-878-head-matched-cachebridge-20261111. Next P0: MA-879 attention-sensitive Mirror cache code calibration.
