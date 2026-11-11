@@ -1,0 +1,8 @@
+{
+  "experiment_id": "MA-845",
+  "status": "PASS",
+  "scope": "Deterministic synthetic sequential memory and native fallback alias assertions; scientific hypothesis status is FAIL.",
+  "commands": ["python experiments/mirror_applications/ma-845-engram-private-fallback/source/run_experiment.py", "pytest -q experiments/mirror_applications/ma-845-engram-private-fallback/tests"],
+  "checks": {"result_rows": 5, "focused_tests": "1 passed", "fallback_count": 8, "mirror_native_payload_hash_identical": true, "retrieval_quality_preserved": true, "fresh_data_opened": false},
+  "provenance": {"base_commit": "76c8a771", "dedicated_branch": "research/ma-845-engram-private-fallback-20261111", "seed": 84501}
+}
