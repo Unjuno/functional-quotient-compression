@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-803",
+  "commit": "PENDING",
+  "tests": {
+    "command": "pytest -q experiments/mirror_applications/ma-803-koopman-eigenmode-code/tests",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Two diagonal regime compositions were excluded from latent transition regression and coefficient fitting.",
+    "All payloads decode to tested modal operators with maximum absolute error 0.",
+    "Mirror spectral-factor payload/hash/function exactly aliases native spectral factorization; fresh stayed sealed."
+  ]
+}
