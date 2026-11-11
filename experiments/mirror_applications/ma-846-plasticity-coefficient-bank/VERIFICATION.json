@@ -1,0 +1,22 @@
+{
+  "experiment_id": "MA-846",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-846-plasticity-coefficient-bank/tests -v",
+    "passed": 2,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Synthetic exploratory screen only. Fresh seeds 29,47 opened after protocol/code freeze. Scientific target/update mismatch identified; no post-fresh retuning.",
+    "Actual payload serialized to deterministic NPZ arrays plus JSON metadata; writable fast state charged separately."
+  ]
+}
