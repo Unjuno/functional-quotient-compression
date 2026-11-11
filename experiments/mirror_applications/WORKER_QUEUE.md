@@ -629,3 +629,6 @@ MA-865 FAIL: on identical four-task rotations, SVD rank3 saves 5.6% bytes but lo
 
 
 MA-866 FAIL for Mirror-specificity, with a useful systems tradeoff: one-agent policy uses 1/32 messages and bytes, nMSE .058–.060 vs centralized .042. The 38 B address table aliases a 24 B native type/reliability rule; no private state was sent. Next P0 MA-867 (agent-role × query code factorization).
+
+
+MA-867 FAIL for Mirror specificity, but native factorization passes this synthetic screen: heldout utility MAE ≤.0002, nMSE matches oracle, 136 B vs 271 B flat table, and 16 vs 64 messages. Native rank2 MF is identical. MA-868 P1; next P0 MA-869 carrier-connectivity-aware allocation.

@@ -1,0 +1,77 @@
+{
+  "experiment_id": "MA-867",
+  "title": "factorized agent-role by query Mesh policy code",
+  "status": "FAIL",
+  "evidence_lane": "QUALITY/COMMUNICATION/STORAGE/GENERALIZATION",
+  "base_commit": "b9af24dc",
+  "hypothesis": "A rank-2 role-by-query policy can infer held-out role-query compatibility from partial observations, choose two useful private agents per query, and use fewer serialized bytes than a flat utility table while approaching the full-information admission oracle.",
+  "physical_object": "Eight independent private agents with eight public role types",
+  "mirror_coordinate": "Role factor vectors and query factor vectors; native matrix-factorization control uses identical rank-2 decoder",
+  "logical_multiplicity": "Eight logical query policies, each selecting two roles from the shared private-agent population",
+  "prior_art_refs": [
+    "PA233"
+  ],
+  "controls": [
+    "full-information oracle utility table",
+    "flat observed role-query table with missing entries imputed by per-query observed mean",
+    "native rank-2 matrix factorization",
+    "Mirror role\u00d7query rank-2 code",
+    "random role selection"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      97
+    ],
+    "selection_metric": "fixed 25% heldout role-query pairs; optimizer and ridge settings fixed before fresh"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      601,
+      617,
+      631
+    ],
+    "heldout_pair_fraction": 0.25,
+    "locked_before_access": true
+  },
+  "world": {
+    "roles": 8,
+    "queries": 8,
+    "true_utility": "rank-2 Gaussian role/query latent product; per-pair observation precision is exp(clip(utility,-2,2))",
+    "training_pairs": "75% deterministic seeded mask; remaining pairs are unseen role-query combinations",
+    "agent_output": "typed scalar observation only; no agent weights, gradients, or hidden state"
+  },
+  "policy": {
+    "budget": "select top 2 roles for each query",
+    "factorization": "rank-2 role and query factors fitted to observed log precision with Adam for 600 updates, lr=.03",
+    "flat_missing_value": "mean of observed utilities for that query",
+    "quality": "posterior normalized MSE 1/(1+sum admitted precision) and heldout utility MAE"
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "role factors",
+      "query factors",
+      "flat utility table where used",
+      "query/task metadata",
+      "agent-role identifiers"
+    ],
+    "message": "uint8 role ID + uint8 query ID + float32 observation = 6 bytes"
+  },
+  "compute": {
+    "report": [
+      "factor fitting updates",
+      "role-query scoring MACs",
+      "messages and bytes",
+      "policy payload bytes",
+      "latency hops"
+    ]
+  },
+  "success_gate": "On fresh worlds, factorized rank2 heldout utility MAE is at most .35, mean query nMSE is within .05 of the oracle, the factor payload is smaller than flat table payload, and selected policy uses two messages per query; Mirror-specific gain additionally must exceed identical native rank-2 factorization.",
+  "failure_gate": "Heldout pairs generalize poorly, factor code fails byte/quality gates, or Mirror code equals the native rank-2 decoder. Report systems utility separately from Mirror-specific attribution.",
+  "boundaries": [
+    "This is a synthetic utility-factorization systems screen, not neural-network compression evidence.",
+    "Role/query pair count is not independent model capacity.",
+    "Only one-hop communication and scalar Gaussian observations are modeled.",
+    "Factor rank and optimizer settings remain fixed; fresh heldout pairs are never used for tuning."
+  ]
+}
