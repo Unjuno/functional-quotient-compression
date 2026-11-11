@@ -1,0 +1,22 @@
+{
+  "experiment_id": "MA-810",
+  "title": "Shared-basis Mirror compression of compositional motor option adapters",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/SEQUENCE",
+  "base_commit": "49ea94a4",
+  "prior_art_refs": ["PA216"],
+  "hypothesis": "A shared rank-2 adapter basis with per-option Mirror coefficients retains unseen option-sequence behavior while using at least 25% fewer complete bytes than a full adapter bank and beats ordinary low-rank coefficient factorization.",
+  "physical_object": "shared 8x8 motor core and common rank-2 residual atom bank",
+  "mirror_coordinate": "per-option two-value residual coefficients",
+  "logical_multiplicity": "eight composable motor options and held-out option sequences",
+  "task": {"dim": 8, "option_count": 8, "sequence_length": 4, "train_sequences": 10, "heldout_sequences": 8, "teacher": "shared orthogonal core plus option-specific linear residuals generated from a known rank-2 atom bank with one off-span option"},
+  "development": {"seed": 81001, "examples_per_sequence": 128, "test_examples_per_sequence": 256, "optimizer_updates": 0, "tuning": "none"},
+  "fresh": {"seeds": [], "locked_before_access": true, "release_rule": "Keep fresh sealed if Mirror misses byte gate or native coefficient factorization exactly matches."},
+  "controls": ["full independent option adapter bank", "shared core only", "native rank-2 shared basis coefficient table", "Mirror shared rank-2 option codes", "top-2 atom selection with explicit indices", "independent full rank-1 residual upper control"],
+  "metrics": ["heldout sequence action nRMSE", "actual complete serialized inference bytes including shared core, atoms, IDs, sequence metadata", "active MAC proxy per action", "payload reconstruction max error", "sequence compositional error", "CPU inference wall time"],
+  "storage": {"authority": "actual NPZ inference payload bytes", "paid_objects": ["shared core", "basis atoms", "option codes", "indices", "option/sequence metadata", "private residuals", "full independent adapters"]},
+  "success_gate": "Heldout sequence nRMSE <=0.02, >=25% fewer full bytes than independent adapter bank, and strict quality/byte gain over native rank-2 coefficient-table control.",
+  "failure_gate": "FAIL on byte miss, heldout sequence quality miss, or exact native coefficient factorization alias.",
+  "compute": {"report_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true, "mac_proxy": "64 per shared core application plus 128 per two rank-1 atom coefficients; count each option application in a sequence"},
+  "boundaries": ["Synthetic linear option maps only; no trained recurrent motor controller, robot, simulator, or safety claim.", "Option sequence IDs are known and charged.", "Off-span option is included to measure need for private capacity; no audit seeds are opened after frozen gate failure."]
+}

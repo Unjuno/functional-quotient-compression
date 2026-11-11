@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-810",
+  "commit": "PENDING",
+  "tests": {
+    "command": "pytest -q experiments/mirror_applications/ma-810-motor-option-bank/tests",
+    "passed": null,
+    "failed": null
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "All option maps are decoded from the serialized NPZ state and replay with max matrix error 0.",
+    "Mirror rank-2 option codes and native rank-2 adapter basis have identical heldout sequence error and compute proxy; fresh sealed.",
+    "Mirror is 33.8% smaller than full adapter bank, but this is exactly ordinary low-rank adapter-bank compression."
+  ]
+}
