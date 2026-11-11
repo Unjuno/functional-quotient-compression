@@ -552,3 +552,8 @@ MA-836 is a verified scoped synthetic FAIL. Rank-2 Mirror/native NTK factorizati
 ## Current handoff — 2026-11-11, MA-837
 
 MA-837 is a scoped synthetic FAIL: native no-task-storage feature generation and Mirror-generated task coordinates exactly alias at 630 B, with equal seen/unseen error and 36,864 MACs; caching codes costs 936 B and adds decode work. Fresh remained sealed. Continue with MA-838 (linearized fine-tuning Mirror tangent coordinates; PA226/PA33), measuring linearization error before any compression claim. Dedicated branch: `research/ma-837-ntk-feature-codegen-20261111`.
+
+
+## Current handoff — 2026-11-11, MA-838
+
+MA-838 is a scoped synthetic FAIL: the rank-4 shared tangent basis saves ~38% bytes vs independent deltas but misses .02 quality at both scales and exactly aliases native PCA; the tangent residual increases from .00156 at delta .03 to .06658 at delta .20. Fresh remained sealed. Next eligible P0 is MA-840 (tangent Mirror basis plus nonlinear private residual; PA226/PA18), which directly tests where private capacity becomes necessary. Dedicated branch: `research/ma-838-tangent-linearization-20261111`.
