@@ -1,0 +1,121 @@
+{
+  "experiment_id": "MA-876",
+  "title": "shared closed-form KV translator basis with pair codes",
+  "status": "PROTOCOL_FROZEN",
+  "base_commit": "df10d26a",
+  "prior_art_refs": [
+    "PA236"
+  ],
+  "hypothesis": "A low-rank shared basis over calibrated per-head affine KV maps can transfer caches for a heldout source-target model pair with target next-token NLL close to independent full ridge maps and substantially fewer serialized translator bytes.",
+  "physical_object": "Per-head key/value affine ridge translators for three ordered pairs over cached pretrained Pythia-70M, GPT-2, and SmolLM2-135M models",
+  "mirror_coordinate": "Rank-r coefficients for each pair/layer/head/key-or-value map, plus deterministic source-layer/head assignments",
+  "logical_multiplicity": "Multiple ordered cross-model KV translators addressed by pair, layer, head, and KV role",
+  "model_pairs": {
+    "basis_train": [
+      "openai-community/gpt2 -> EleutherAI/pythia-70m-deduped",
+      "openai-community/gpt2 -> HuggingFaceTB/SmolLM2-135M"
+    ],
+    "heldout_pair": "EleutherAI/pythia-70m-deduped -> HuggingFaceTB/SmolLM2-135M",
+    "source_target_mapping": "Nearest relative-depth source layer and nearest normalized source KV head; fixed before any quality results"
+  },
+  "controls": [
+    "full independent per-head affine ridge maps for heldout pair",
+    "native PCA basis and per-map code over the same trained map family",
+    "native target prefill NLL",
+    "source-cache translation with heldout pair full maps",
+    "no-translation target-prefill baseline"
+  ],
+  "development": {
+    "seed": 829,
+    "dataset_split": "wikitext train",
+    "calibration_prompts_per_pair": 24,
+    "test_prompts_for_heldout_pair": 16,
+    "candidate_ranks": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32
+    ],
+    "selection_metric": "Choose the smallest rank with mean heldout next-token NLL delta <= 0.05 nat from full ridge; otherwise freeze the rank with lowest delta. No fresh data used for selection."
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      983,
+      997,
+      1009
+    ],
+    "dataset_calibration_split": "wikitext validation",
+    "dataset_test_split": "wikitext test",
+    "calibration_prompts_per_pair_per_world": 12,
+    "test_prompts_for_heldout_pair_per_world": 16,
+    "candidate_prompt_constraints": "16-128 tokens; source and target token offset boundaries must match exactly; deterministic disjoint seed partitions",
+    "locked_before_access": true,
+    "calibration_selection": "Disjoint 12-prompt chunks from Wikitext validation aligned-prompt pool; three seeds partition the 36 selected prompts."
+  },
+  "mapping": {
+    "cache": "Hugging Face legacy past_key_values; per target layer/head map source K or V from a deterministic depth/head alignment",
+    "fit": "Affine per-head ridge from source 64D cache vector plus intercept to target 64D cache vector; alpha=0.01",
+    "basis": "Center all seen-pair flattened affine maps, fit PCA on the two basis-train ordered pairs only, and encode every map with rank-r coefficients",
+    "heldout_pair": "Fit full independent ridge maps from heldout-pair calibration prompts; project those maps onto the frozen basis without using heldout test prompts",
+    "text_alignment": "Only prompts whose source and target fast-tokenizer character offset sequences are exactly equal are eligible"
+  },
+  "quality": {
+    "primary": "Target-model next-token NLL on the heldout ordered pair using translated prefix KV and target final-prefix token",
+    "secondary": "Heldout target KV relative squared error versus target native prefill",
+    "gate": "Mean heldout NLL delta <= 0.05 nat from independent full ridge in every fresh world; report per-prompt distribution and native target NLL",
+    "boundary": "Text is Wikitext-2; this is a narrow cache-transfer screen, not general model equivalence"
+  },
+  "storage": {
+    "authority": "Exact deterministic little-endian float32/int16/uint8 serialized translator payload bytes",
+    "paid_objects": [
+      "map-family mean",
+      "shared rank-r map basis",
+      "per-map rank-r codes",
+      "pair/layer/head source assignment metadata",
+      "model-pair identifiers and serialization headers",
+      "independent full ridge matrices in control"
+    ],
+    "report": [
+      "heldout-pair mapper payload bytes",
+      "three-pair family payload bytes",
+      "source/target model weight bytes and tokenizer/config bytes separately",
+      "cache bytes per prompt separately"
+    ],
+    "amortization": "Charge shared basis once across all 456 per-head K/V maps and task codes for each map",
+    "common_state": "Source and target model weights are common to all translator controls and are reported but excluded from marginal mapper compression ratio."
+  },
+  "compute": {
+    "report": [
+      "calibration cache extraction wall time",
+      "map construction and PCA wall time",
+      "heldout translation MAC proxy",
+      "native target prefill wall time",
+      "source prefill plus translator plus target suffix wall time",
+      "peak resident memory if available"
+    ],
+    "hardware": "CPU-only execution; CUDA unavailable. No GPU throughput or latency claim."
+  },
+  "success_gate": "At a development-selected frozen rank, heldout-pair NLL delta <= 0.05 nat in each fresh world and three-pair family translator bytes are at least 80% below independent full-map bytes. Mirror-specific attribution additionally requires improvement over native PCA map coding at matched rank/bytes/compute.",
+  "failure_gate": "Any quality/storage gate miss or native PCA exact alias fails the Mirror-specific claim. Preserve cache-transfer quality/byte evidence independently.",
+  "boundaries": [
+    "Only three locally cached pretrained models and one heldout ordered pair are tested.",
+    "No GPU available; CPU timing only.",
+    "Tokenizer alignment restricts the text sample to prompts with identical token character offsets.",
+    "Map alignment uses deterministic relative depth/head matching rather than learned source-layer selection.",
+    "The basis is learned from two pairs and does not establish generalization to arbitrary model families or architectures."
+  ],
+  "protocol_amendments": [
+    {
+      "id": "01",
+      "timing": "before model-quality development run and before fresh test prompts were selected",
+      "change": "Tokenizer-offset feasibility scan found only 45 aligned validation prompts for GPT-2\u2192Pythia among 4,358 validation rows. Calibration reduced from 64 to 12 disjoint prompts per fresh world (36 total), retaining 64 disjoint test prompts per world. Calibration still supplies hundreds of token positions per per-head ridge map."
+    },
+    {
+      "id": "02",
+      "timing": "before model-quality development run and before fresh test prompts were selected",
+      "change": "Wikitext-2 test has fewer exactly token-offset-aligned prompts than validation for GPT-2\u2192Pythia; test prompt count reduced from 64 to 16 per seed (48 disjoint total), still yielding fresh target-NLL comparisons. No metric values had been inspected."
+    }
+  ]
+}
