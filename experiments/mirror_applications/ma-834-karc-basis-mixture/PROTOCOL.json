@@ -1,0 +1,13 @@
+{
+ "experiment_id":"MA-834","title":"Task-selected Fourier, spline and Chebyshev basis Views","status":"SCREENING","evidence_lane":"MECHANISM/STORAGE/ADAPTIVE_BASIS","base_commit":"115061cf","prior_art_refs":["PA223"],
+ "hypothesis":"A sparse Mirror code selects among shared Fourier, spline and Chebyshev basis families per task, preserving heldout forecasts with fewer active features/bytes than a fixed heterogeneous KARC bank and outperforming native basis-family selection.",
+ "world":{"task_count":9,"domain":[-1,1],"basis_families":["Fourier","cubic B-spline","Chebyshev"],"functions_per_family":3,"heldout_points_per_task":256,"teacher":"each target is generated from one family; family ID known only through support examples"},
+ "development":{"seed":83401,"support_points_per_task":64,"optimizer_updates":0,"tuning":"none"},
+ "fresh":{"seeds":[],"locked_before_access":true,"release_rule":"Keep fresh sealed after native basis-selection alias or byte/quality gate miss."},
+ "controls":["independent sampled function tables","one fixed Fourier basis for all tasks","full heterogeneous KARC bank with native family IDs","Mirror sparse basis-family View codes"],
+ "metrics":["heldout function nRMSE","complete payload bytes","active feature evaluations","family selection accuracy","payload replay error"],
+ "storage":{"authority":"actual compressed NPZ bytes","paid_objects":["all candidate basis definitions","task family IDs/codes","coefficients","support-derived selection metadata","sampled independent tables"]},
+ "success_gate":"heldout nRMSE <=0.02, at least 25% fewer complete bytes and active features than full heterogeneous bank, strict quality/byte gain over native KARC family selection.","failure_gate":"FAIL if native KARC basis selection matches Mirror or gates miss.",
+ "compute":{"report_support_points":true,"report_updates":true,"report_active_features":true,"report_wall_time":true},
+ "boundaries":["Analytic synthetic functions only; no trained KARC/forecasting claim.","Family IDs are inferred from support but stored for inference; this does not test unknown family at deployment.","No fresh data after native alias or frozen gate miss."]
+}

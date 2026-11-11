@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-834",
+  "commit": "PENDING",
+  "tests": {
+    "command": "pytest -q experiments/mirror_applications/ma-834-karc-basis-mixture/tests",
+    "passed": null,
+    "failed": null
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Basis-family identity was inferred from support only; selected IDs and coefficients are charged in inference payload.",
+    "Native family-ID payload is 2 B smaller than Mirror with the same fit/output/feature count.",
+    "Fresh remains sealed; synthetic analytic tasks only."
+  ]
+}
