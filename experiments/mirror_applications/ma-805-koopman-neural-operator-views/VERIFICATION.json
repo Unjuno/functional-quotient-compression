@@ -1,9 +1,19 @@
 {
   "experiment_id": "MA-805",
-  "commit": "PENDING",
-  "tests": {"command": "pytest -q experiments/mirror_applications/ma-805-koopman-neural-operator-views/tests", "passed": 1, "failed": 0},
-  "serialization": {"roundtrip_checked": true, "byte_exact": true},
-  "metric_replay": {"checked": true, "max_difference": 0.0},
+  "commit": "448bdf421c8a237479622155c4a4f8148b47fa84",
+  "tests": {
+    "command": "pytest -q experiments/mirror_applications/ma-805-koopman-neural-operator-views/tests",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
   "fresh_split_integrity_checked": true,
   "notes": [
     "The two interior diffusivities were held out from the training-regime set; all fields are synthetic draws from the known semigroup.",
