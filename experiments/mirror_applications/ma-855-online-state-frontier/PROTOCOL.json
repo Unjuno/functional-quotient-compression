@@ -1,0 +1,86 @@
+{
+  "experiment_id": "MA-855",
+  "title": "Common-task online state frontier",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/COMPUTE",
+  "base_commit": "783b44aa",
+  "hypothesis": "On heldout tasks from a shared low-rank-plus-residual linear family, a support-adapted latent state can reach comparable quality with less complete serialized state than full Hebbian/Delta matrices; Mirror-specific value requires beating CAVIA-style context and native low-rank updates.",
+  "physical_object": "Per-task linear function delta from shared mean model",
+  "mirror_coordinate": "Low-dimensional code over a train-task-derived shared basis",
+  "logical_multiplicity": "Task-specific functions from shared model plus writable state",
+  "prior_art_refs": [
+    "PA129",
+    "PA229",
+    "PA230"
+  ],
+  "controls": [
+    "shared mean/no adaptation",
+    "full outer-product Hebbian update",
+    "full-matrix normalized Delta update",
+    "CAVIA-style latent context with support-gradient updates",
+    "Mirror projected normalized Delta update",
+    "native same-basis low-rank Delta update",
+    "support-only ridge fit upper"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      29
+    ],
+    "selection_metric": "mean heldout random-query nRMSE on the same 32 support and 128 query examples/task; tune rates on development only"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      73,
+      89
+    ],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "shared mean model",
+      "train-learned decoder basis",
+      "per-task context or writable state bank",
+      "metadata",
+      "resumable state"
+    ]
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true
+  },
+  "success_gate": "Fresh methods must be compared at the same support budget; report quality/complete bytes/online compute. Mirror-specific claim requires paired improvement over CAVIA-style and native low-rank controls at matched state bytes and measured compute.",
+  "failure_gate": "Mirror aliases or is dominated by native/CAVIA context methods at matched budgets, or loses quality at equal actual bytes.",
+  "boundaries": [
+    "Single synthetic linear task subfamily, not a general adaptation frontier or reproduced CAVIA benchmark.",
+    "Hidden teachers are A=A0+U*C*V^T+sigma*R; A0 and basis are fitted only from a separate train-task set via support observations. Hidden U,V,C*,A and query labels remain evaluator-only.",
+    "CAVIA-style uses actual support-gradient context updates but no outer-loop meta-training; its name denotes a proxy.",
+    "Fresh tasks use independent whole-task seeds 73 and 89 and are never used for tuning."
+  ],
+  "amendments": [
+    {
+      "id": "01",
+      "reason": "Before any runs, Astra review rejected identity support and teacher-basis leakage.",
+      "changes": [
+        "Use nonorthogonal Gaussian support/query inputs.",
+        "Keep teacher A, hidden generators and query labels in evaluator.",
+        "Fit shared mean and decoder only from a separate support-observed train-task bank.",
+        "Use actual support-gradient steps for the CAVIA-style proxy; compare full Hebb/Delta, projected Delta, and support-only ridge."
+      ],
+      "fresh_policy": "No data accessed before this amendment."
+    },
+    {
+      "id": "02",
+      "reason": "After the protocol and rates were frozen, independent review found serialized metadata and live/snapshot state accounting needed normalization; reset also needed same-object verification.",
+      "changes": [
+        "Use method-independent serialized schema metadata so method names do not affect payload byte comparisons.",
+        "Report float64 live writable state bytes separately from float32 serialized snapshot-state bytes.",
+        "Reuse one state object and clear it in place between tasks.",
+        "Correct executed-operation MAC proxies for full Delta, projected Delta, ridge and query decoding; record shared-basis training cost separately."
+      ],
+      "fresh_policy": "Fresh tasks were accessed after frozen development rates. Deterministic replay corrects accounting/reset checks only; no tuning or method selection changed."
+    }
+  ]
+}

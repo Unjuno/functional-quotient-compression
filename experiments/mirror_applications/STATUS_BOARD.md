@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (358 completed; 271 UNTESTED; 1 SCREENING; 5 NOT ESTABLISHED)
+- P0: **630** (308 FAIL; 51 PROMISING; 264 UNTESTED; 1 SCREENING; 6 NOT ESTABLISHED)
 - P1: **422** (17 completed; 405 UNTESTED)
 - P2: **103** (103 UNTESTED)
-- Current MA statuses: **316 FAIL, 5 NOT ESTABLISHED, 60 PROMISING, 1 SCREENING, 773 UNTESTED**
+- Current MA statuses: **316 FAIL, 6 NOT ESTABLISHED, 60 PROMISING, 1 SCREENING, 772 UNTESTED**
 - 47 baseline experiment directories remain present; verified external outcomes are linked to their dedicated branches in the registry and claim ledger.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). See the current Next candidate section for the live queue.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. see the current Next candidate section.
@@ -214,3 +214,6 @@ MA-852 is a scoped synthetic FAIL for Mirror attribution: native scalar task gat
 
 
 MA-853 is a scoped synthetic FAIL for Mirror attribution: 4×4 role functions have zero heldout error for native/Mirror/MAP-Hadamard; native and Mirror are both 1,864 B/32,768 query MACs, full pair matrices 66,122 B/524,288, MAP/Hadamard 3,400 B/33,024. Next eligible P0: MA-855.
+
+
+MA-855 is NOT ESTABLISHED for the broad frontier: one synthetic low-rank linear task family and a CAVIA-style context proxy only. In-scope Mirror/native low-rank states alias exactly; full Delta is more accurate at lower compute. See its experiment report. The direct DeltaNet state-view family MA-851/852/853 has three consecutive native-parameterization aliases and is paused pending a genuinely distinct mechanism. Next eligible P0: MA-856.
