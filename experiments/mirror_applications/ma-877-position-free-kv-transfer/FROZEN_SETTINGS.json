@@ -1,0 +1,174 @@
+{
+  "dataset_fingerprint": {
+    "test": "a46124b21ac53738",
+    "validation": "51d84d52d095f90d"
+  },
+  "dev_bytes": {
+    "independent": 2996100,
+    "shared_rank32": 573060
+  },
+  "dev_commit": "79ff15fc",
+  "dev_metrics": {
+    "1": {
+      "compressed_nll_delta": 21.309253085404634,
+      "full_map_nll_delta": 0.6167046651244164,
+      "raw_rope_ridge_nll_delta": 2.6762760803103447
+    },
+    "16": {
+      "compressed_nll_delta": 16.10122011974454,
+      "full_map_nll_delta": 0.6167046651244164,
+      "raw_rope_ridge_nll_delta": 2.6762760803103447
+    },
+    "2": {
+      "compressed_nll_delta": 15.281084466725588,
+      "full_map_nll_delta": 0.6167046651244164,
+      "raw_rope_ridge_nll_delta": 2.6762760803103447
+    },
+    "32": {
+      "compressed_nll_delta": 11.604053396731615,
+      "full_map_nll_delta": 0.6167046651244164,
+      "raw_rope_ridge_nll_delta": 2.6762760803103447
+    },
+    "4": {
+      "compressed_nll_delta": 18.157667327672243,
+      "full_map_nll_delta": 0.6167046651244164,
+      "raw_rope_ridge_nll_delta": 2.6762760803103447
+    },
+    "8": {
+      "compressed_nll_delta": 19.51144229248166,
+      "full_map_nll_delta": 0.6167046651244164,
+      "raw_rope_ridge_nll_delta": 2.6762760803103447
+    }
+  },
+  "dev_results_sha256": "58ec86d38a1675fea009553641a30fd270faf29f3ba8f133d8e7a899bbd5380f",
+  "dev_seed": 829,
+  "experiment_id": "MA-877",
+  "fresh_prompt_row_ids": {
+    "1009": {
+      "calibration": [
+        1754,
+        183,
+        2312,
+        731,
+        2643,
+        1393,
+        926,
+        1269,
+        2367,
+        1362,
+        182,
+        2598
+      ],
+      "test": [
+        2853,
+        1990,
+        2125,
+        2136,
+        748,
+        58,
+        667,
+        1726,
+        2105,
+        2243,
+        3130,
+        753,
+        2536,
+        743,
+        2850,
+        2142
+      ]
+    },
+    "983": {
+      "calibration": [
+        1551,
+        320,
+        2381,
+        284,
+        684,
+        1389,
+        1785,
+        1226,
+        2409,
+        2561,
+        334,
+        2608
+      ],
+      "test": [
+        1220,
+        55,
+        2902,
+        3414,
+        974,
+        1687,
+        1166,
+        1817,
+        700,
+        2988,
+        2937,
+        564,
+        1290,
+        2100,
+        3386,
+        3524
+      ]
+    },
+    "997": {
+      "calibration": [
+        1268,
+        1134,
+        822,
+        447,
+        1044,
+        2648,
+        2269,
+        2447,
+        2440,
+        299,
+        1518,
+        138
+      ],
+      "test": [
+        2518,
+        666,
+        2931,
+        1480,
+        665,
+        1207,
+        2898,
+        2149,
+        2803,
+        1685,
+        2452,
+        2151,
+        1988,
+        981,
+        44,
+        2140
+      ]
+    }
+  },
+  "fresh_seeds": [
+    983,
+    997,
+    1009
+  ],
+  "hardware": "CPU; CUDA unavailable",
+  "model_artifacts": {
+    "EleutherAI/pythia-70m-deduped": {
+      "config_sha256": "002050231a9b1ec3ac77aa6b9b3bbdc4d923f4068a7dd33b8da72a9bd6ad9a43",
+      "snapshot": "e93a9faa9c77e5d09219f6c868bfc7a1bd65593c",
+      "weight_bytes": 166029852,
+      "weight_sha256": "3da388330e4549156d76b58d6d268c63cd005e9336b4f4d2d378421e7b7a33fd"
+    },
+    "HuggingFaceTB/SmolLM2-135M": {
+      "config_sha256": "1d556eab73b69c7f11f64c557a2f9c6f440bd4c6b89bb2584a6b498c92603843",
+      "snapshot": "93efa2f097d58c2a74874c7e644dbc9b0cee75a2",
+      "weight_bytes": 269060552,
+      "weight_sha256": "80521b40281d6ce74e35c9282c22539e75aa0ac8578892b2a59955ef78d55da1"
+    }
+  },
+  "protocol_freeze_commit": "79ff15fc",
+  "selected_rank": 32,
+  "selection_basis": "smallest transferred NLL among ranks1,2,4,8,16,32 on the single development seed; frozen despite missing .05 compression gate",
+  "source_sha256": "c62053b6592713bfb524960ecb78360633cb6a3f2483d118d78a40415cfa1bba"
+}
