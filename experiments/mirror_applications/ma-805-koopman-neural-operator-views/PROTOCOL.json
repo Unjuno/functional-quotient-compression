@@ -1,0 +1,19 @@
+{
+  "experiment_id": "MA-805",
+  "title": "Koopman neural-operator regime views on a periodic advection-diffusion family",
+  "status": "SCREENING",
+  "base_commit": "0849d4f7",
+  "prior_art_refs": ["PA215", "PA186"],
+  "hypothesis": "One shared Fourier-latent Koopman operator parameterized by a scalar system code recovers heldout PDE regimes with lower complete bytes than per-regime FNO kernels, while preserving field quality and spectral stability.",
+  "task": "periodic 1D advection-diffusion semigroup at a fixed horizon, varying diffusivity kappa",
+  "grid": {"spatial_points": 32, "regimes": 9, "diffusivity": "linear grid 0.0005..0.0035", "heldout": "interior indices 2 and 6", "test_fields_per_regime": 512},
+  "development": {"seed": 80501, "known_Fourier_latent_basis": true, "training_regimes": "all except two heldout values", "tuning": "none"},
+  "fresh": {"seeds": [], "locked": true, "release_rule": "No fresh access after exact native parameter-conditioning alias or a frozen quality/storage gate miss."},
+  "controls": ["independent per-regime FNO Fourier multiplier tables", "unconditioned shared KNO multiplier", "Mirror scalar diffusivity code over shared Fourier generator", "native conditional Fourier/KNO parameterization implementing the same physical law"],
+  "metrics": ["heldout/all-field nRMSE", "max multiplier magnitude", "actual compressed inference bytes", "active spectral operations", "code-generation operations", "test fields", "optimizer updates", "CPU transform/application wall time"],
+  "storage": {"authority": "actual compressed NPZ payload", "paid": ["Fourier generator and phase basis", "regime codes/IDs", "independent multiplier tables for FNO control", "grid and horizon metadata"]},
+  "pass_gate": "Heldout field nRMSE <=0.02, max multiplier magnitude <=1, at least 25% fewer bytes than independent FNO tables, and strict frontier gain over native conditional Fourier/KNO control.",
+  "fail_gate": "FAIL Mirror-specific value for exact native control alias, quality/stability miss, insufficient bytes savings, or no native-control frontier gain.",
+  "compute": {"optimizer_updates": 0, "active_compute": "rFFT/irFFT plus one complex multiplier per retained mode; report per-regime exponential code construction separately", "wall_time": "small CPU transform calibration; no neural-network/GPU throughput claim"},
+  "boundaries": ["Known linear PDE semigroup in a known Fourier basis; no trained KNO, FNO, or nonlinear PDE claim.", "The scalar diffusivity is supplied and charged; no PDE-parameter inference claim.", "Native conditional Fourier law is intentionally a strong control and may exactly match the Mirror view.", "This is a mechanism/storage screen for the operator insertion point, not reproduction of the cited KNO architecture."]
+}
