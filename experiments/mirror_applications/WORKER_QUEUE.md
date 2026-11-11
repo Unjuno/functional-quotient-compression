@@ -591,3 +591,5 @@ MA-845 is a scoped synthetic FAIL: 16 in-span codes plus eight private fallbacks
 ## Current handoff — 2026-11-11, MA-846
 
 MA-846 is NOT ESTABLISHED: frozen synthetic fresh seeds miss quality because target maps are not realizable by the implemented elementwise-modulated Hebbian update. Mirror/native low-rank alias at 1,777 B persistent + 4,608 B writable; no post-fresh tuning. Before claiming anything about differentiable plasticity, amend or create a new protocol with a realizable learner and new fresh seeds. Continue with MA-847 (persistent × transient Hebbian coordinates; PA229).
+
+MA-847 is NOT ESTABLISHED: the exploratory screen is invalid due to insufficient support-key coverage and teacher-oracle code construction; fresh rows are preserved but not evidential. A corrected screen requires new seeds. Continue with MA-848 (persistent identity × transient Hebbian state; PA229/PA129).

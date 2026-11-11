@@ -6,10 +6,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- P0: **630** (358 completed; 271 UNTESTED; 1 SCREENING; 4 NOT ESTABLISHED)
+- P0: **630** (358 completed; 271 UNTESTED; 1 SCREENING; 5 NOT ESTABLISHED)
 - P1: **422** (17 completed; 405 UNTESTED)
 - P2: **103** (103 UNTESTED)
-- Current MA statuses: **312 FAIL, 4 NOT ESTABLISHED, 60 PROMISING, 1 SCREENING, 778 UNTESTED**
+- Current MA statuses: **312 FAIL, 5 NOT ESTABLISHED, 60 PROMISING, 1 SCREENING, 777 UNTESTED**
 - 47 baseline experiment directories remain present; verified external outcomes are linked to their dedicated branches in the registry and claim ledger.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). See the current Next candidate section for the live queue.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. see the current Next candidate section.
@@ -199,3 +199,6 @@ MA-791 is complete as a scoped synthetic FAIL: rank-1 views recover aligned prun
 
 
 MA-792 is complete as a scoped synthetic FAIL: routing-free self-activation reaches .997 mode accuracy and .010 nRMSE with balanced loads, but costs 1,971B vs 1,659B for central top-1 and exactly aliases native low-rank output/prototype codes; at σ=.05 output error is .238. Dedicated branch: `research/ma-792-routing-free-mirror-selfactivation-20261109`. Next eligible P0: MA-794.
+
+
+MA-847 is NOT ESTABLISHED: the exploratory screen has support-span failure and teacher-oracle leakage, so preserved fresh rows are invalid. A corrected protocol requires new seeds. Next eligible P0: MA-848.

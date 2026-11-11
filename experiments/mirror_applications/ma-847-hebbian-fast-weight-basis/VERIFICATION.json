@@ -1,0 +1,21 @@
+{
+  "experiment_id": "MA-847",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-847-hebbian-fast-weight-basis/tests -v",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": false,
+    "byte_exact": false
+  },
+  "metric_replay": {
+    "checked": false,
+    "max_difference": null
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Fresh seeds 31,53 were run once; discovered support-coverage failure and teacher-oracle leakage. Rows preserved but invalid. Corrected design requires new fresh seeds."
+  ]
+}
