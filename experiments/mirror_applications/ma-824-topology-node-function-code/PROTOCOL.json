@@ -1,0 +1,13 @@
+{
+ "experiment_id":"MA-824","title":"Factor topology and node-function Views for graph programs","status":"SCREENING","evidence_lane":"MECHANISM/STORAGE/PROGRAM_COMPOSITION","base_commit":"fff24929","prior_art_refs":["PA220","PA128"],
+ "hypothesis":"Factoring graph topology from node-function identity lets a shared graph substrate compose unseen topology×function roles at lower complete bytes and active work than independent program networks and ordinary modular routing.",
+ "world":{"nodes":8,"feature_dim":4,"topologies":6,"node_functions":4,"heldout_pairs":6,"edges_per_topology":10,"teacher":"shared node-function basis and topology-specific sparse connectivity; heldout pairings combine stored topology and function codes"},
+ "development":{"seed":82401,"examples_per_pair":128,"test_examples_per_pair":256,"optimizer_updates":0,"tuning":"none"},
+ "fresh":{"seeds":[],"locked_before_access":true,"release_rule":"Keep fresh sealed after native modular-routing alias or storage/quality gate miss."},
+ "controls":["independent topology×function graph networks","shared graph substrate with native topology IDs and function IDs","Mirror factorized topology×function codes","fixed topology and fixed node function"],
+ "metrics":["heldout pair output nRMSE","full serialized inference bytes including graph/function metadata","active edge operations","payload replay error","program execution latency"],
+ "storage":{"authority":"actual NPZ bytes","paid_objects":["node-function matrices","topology edge lists","topology/function IDs","pair metadata","independent graph weights"]},
+ "success_gate":"heldout nRMSE <=0.02, >=25% fewer full bytes than independent, and strict quality/compute improvement over native modular routing.","failure_gate":"FAIL if native module/topology IDs implement the same composition or gates miss.",
+ "compute":{"report_examples":true,"report_updates":true,"report_active_edge_ops":true,"report_wall_time":true},
+ "boundaries":["Synthetic linear graph programs only; no Neural Interpreter or GrapNet reproduction.","Heldout pair IDs and constituent topology/function codes are present in payload; this tests compositional decoding, not unseen-code inference.","No fresh runs after native alias or gate miss."]
+}
