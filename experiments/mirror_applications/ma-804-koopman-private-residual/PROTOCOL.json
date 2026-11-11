@@ -1,0 +1,18 @@
+{
+  "experiment_id": "MA-804",
+  "title": "Shared stable Koopman operator with sparse private nonlinear residuals",
+  "status": "SCREENING",
+  "base_commit": "d59dd48e",
+  "prior_art_refs": ["PA214", "PA18"],
+  "hypothesis": "A shared low-rank regime-conditioned linear latent operator plus a sparse private nonlinear residual for exceptional regimes preserves long-horizon quality with fewer complete bytes than independent nonlinear dynamics, while shared-only errors localize where private capacity is needed.",
+  "dynamics": {"state_dim": 8, "regimes": 9, "regime_codes": "a,b in {-1,0,1}", "nonlinear_residual": "alpha_r * v * tanh(w^T z)^2", "exceptional_regimes": [0,8], "horizon": 40},
+  "development": {"seeds": [80401], "train_sequences_per_regime": 128, "test_sequences_per_regime": 128, "residual_active_threshold": 0.02, "tuning": "none; least-squares operator and residual fit"},
+  "fresh": {"seeds": [], "locked": true, "release_rule": "Keep fresh sealed after exact native shared/private alias or a quality/storage/stability gate miss."},
+  "controls": ["independent full linear operator and private nonlinear residual per regime", "shared operator codes without nonlinear residual", "Mirror shared operator plus sparse private nonlinear correction", "native conditional low-rank operator plus the same sparse private correction"],
+  "metrics": ["heldout/all-regime horizon-40 nRMSE", "shared-only error on exceptional vs common regimes", "active private residual count", "local Jacobian spectral radius", "actual NPZ bytes", "active MAC proxy", "operator reconstruction MACs", "train/test sequences", "optimizer updates", "CPU rollout wall time"],
+  "storage": {"authority": "actual compressed NPZ inference payload", "paid": ["shared operator and bases", "regime codes", "input map", "nonlinear feature vector", "private residual basis and active indices/values", "IDs and metadata"]},
+  "pass_gate": "Horizon-40 nRMSE <=0.02, max local Jacobian spectral radius <1, at least 25% fewer bytes than independent, private corrections active only where needed, and strict improvement over native shared/private controls.",
+  "fail_gate": "FAIL Mirror-specific value on exact native control alias, quality/stability miss, insufficient savings, or no native-control frontier improvement.",
+  "compute": {"optimizer_updates": 0, "active_MACs": "direct operator-factor applications + shared forcing map + nonlinear feature and output correction", "wall_time": "small CPU rollout calibration, not throughput evidence"},
+  "boundaries": ["Synthetic known feature residual and linear latent operator only; no learned Deep Koopman or nonlinear discovery claim.", "Residual feature direction w and residual output basis are fitted from development trajectories; only active regime scalars are stored privately.", "Test trajectories are independent of development sequences but use the same registered regimes.", "Native low-rank operator plus private scalar nonlinear residual is a mandatory direct control."]
+}

@@ -1,0 +1,13 @@
+{
+  "experiment_id": "MA-804",
+  "commit": "PENDING",
+  "tests": {"command": "pytest -q experiments/mirror_applications/ma-804-koopman-private-residual/tests", "passed": 1, "failed": 0},
+  "serialization": {"roundtrip_checked": true, "byte_exact": true},
+  "metric_replay": {"checked": true, "max_difference": 0.0},
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Independent test trajectories are separate from least-squares development trajectories but share the same nine registered regimes.",
+    "All decoded operators and sparse residual codes reproduce evaluated behavior with maximum serialization roundtrip difference 0.",
+    "Mirror and native shared/private payloads and functions match exactly; fresh stayed sealed after gate miss."
+  ]
+}
