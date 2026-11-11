@@ -1,0 +1,13 @@
+{
+ "experiment_id":"MA-830","title":"Factorized task × layer KanAdapter codes","status":"SCREENING","evidence_lane":"MECHANISM/STORAGE/ADAPTER_FACTOR","base_commit":"a2ebf46e","prior_art_refs":["PA224","PA118"],
+ "hypothesis":"A task-factor × layer-factor Mirror code over shared KAN parents reconstructs heldout task-layer adapter functions at lower complete bytes than independent adapters and beats native shared-hypernetwork/task-layer coefficient controls.",
+ "world":{"task_count":8,"layer_count":6,"input_dim":4,"parent_rank":2,"heldout":"checkerboard task-layer pairs","teacher":"shared analytic parent functions with rank-2 multiplicatively separable task×layer coefficients"},
+ "development":{"seed":83001,"samples_per_pair":128,"test_samples_per_pair":256,"optimizer_updates":0,"tuning":"none"},
+ "fresh":{"seeds":[],"locked_before_access":true,"release_rule":"Keep fresh sealed after native factor/hypernetwork alias or storage/quality gate failure."},
+ "controls":["independent task-layer KAN adapter functions","native shared hypernetwork/task-layer coefficient tensor","Mirror separate task and layer factors","task-only factor","layer-only factor"],
+ "metrics":["heldout pair function nRMSE","complete serialized bytes","parent-function evaluations","payload replay error","old pair retention"],
+ "storage":{"authority":"actual compressed NPZ bytes","paid_objects":["shared parent functions","task factors","layer factors","pair IDs","metadata","independent function samples"]},
+ "success_gate":"heldout nRMSE <=0.02, at least 25% fewer full bytes than independent pair adapters, and strict quality/byte advantage over native shared hypernetwork coefficient tensor.","failure_gate":"FAIL if native task-layer factors match Mirror or storage/quality gate misses.",
+ "compute":{"report_samples":true,"report_updates":true,"report_parent_evaluations":true,"report_wall_time":true},
+ "boundaries":["Synthetic analytic functions only; no speech/foundation/Transformer model claim.","Heldout pair IDs and factor codes remain in inference payload; no factor inference/generalization claim.","No fresh results after exact native factor alias or gate miss."]
+}
