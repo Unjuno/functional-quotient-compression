@@ -1,0 +1,8 @@
+{
+  "experiment_id": "MA-844",
+  "status": "PASS",
+  "scope": "Deterministic synthetic codebook run and native Fisher alias assertions; scientific hypothesis status is FAIL.",
+  "commands": ["python experiments/mirror_applications/ma-844-fisher-code-distance/source/run_experiment.py", "pytest -q experiments/mirror_applications/ma-844-fisher-code-distance/tests"],
+  "checks": {"result_rows": 5, "focused_tests": "1 passed", "mirror_native_fisher_payload_identical": true, "complete_bytes_include_fisher_and_task_codes": true, "fresh_data_opened": false},
+  "provenance": {"base_commit": "513ba350", "dedicated_branch": "research/ma-844-fisher-code-distance-20261111", "development_seed": 84401}
+}
