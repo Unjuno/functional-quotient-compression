@@ -1,0 +1,14 @@
+{
+  "experiment_id":"MA-816","title":"Separate computational content (what) from mechanism (how)","status":"SCREENING","evidence_lane":"MECHANISM/COMPOSITION",
+  "base_commit":"21a508de","prior_art_refs":["PA217"],
+  "hypothesis":"A shared linear computation tensor addressed by separate what and how codes generalizes to heldout cross-products with fewer complete bytes than independent pair operators and better than native tensor factorization.",
+  "world":{"dim":8,"what_values":6,"how_programs":5,"rank":2,"teacher":"shared core plus rank-2 tensor-product what×how operator residual"},
+  "development":{"seed":81601,"train_pairs":"(what+2*how) mod 5 != 0","test_examples_per_pair":256,"optimizer_updates":0,"tuning":"none"},
+  "fresh":{"seeds":[],"locked_before_access":true,"release_rule":"Keep fresh sealed after exact native tensor-factor alias or storage/quality gate miss."},
+  "controls":["independent full what×how matrices","shared core only","native CP/Tucker coefficient factorization","Mirror separate what/how codes"],
+  "metrics":["heldout cross-product operator nRMSE","full actual serialized bytes","active MAC proxy","payload replay error"],
+  "storage":{"authority":"actual compressed NPZ inference payload bytes","paid_objects":["shared core","factor bases","what codes","how codes","pair metadata","independent operators"]},
+  "success_gate":"heldout nRMSE <=0.02, >=25% fewer bytes than independent, and strict quality/byte advantage over native CP factorization.","failure_gate":"FAIL if native CP exactly matches Mirror or quality/storage gate misses.",
+  "compute":{"report_examples":true,"report_optimizer_updates":true,"report_active_compute_proxy":true,"report_wall_time":true,"mac_proxy":"64 core MAC plus factor decode operations per application"},
+  "boundaries":["Synthetic linear computation only; no learned reasoning or continual-learning claim.","The cross-product teacher is known and deliberately rank-2 separable.","No fresh data after control alias or gate failure."]
+}
