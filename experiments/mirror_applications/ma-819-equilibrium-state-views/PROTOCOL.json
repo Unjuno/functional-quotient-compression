@@ -1,0 +1,13 @@
+{
+ "experiment_id":"MA-819","title":"Shared equilibrium state with system-role Views","status":"SCREENING","evidence_lane":"MECHANISM/STORAGE/MULTISYSTEM_FORECAST","base_commit":"f3881fc9","prior_art_refs":["PA218"],
+ "hypothesis":"A shared simultaneous forecaster with small system-role Views predicts heldout multi-system trajectories at lower complete bytes and compute than independent system forecasters, with an advantage beyond native system embeddings.",
+ "world":{"state_dim":8,"system_count":8,"horizon":16,"shared_equilibrium":"common mean state plus role-specific linear perturbation","role_rank":2,"evaluation":"score the last two system IDs separately; their role codes remain deployed in the payload, so this is not unseen-system generalization"},
+ "development":{"seed":81901,"train_steps_per_system":128,"test_steps_per_system":256,"optimizer_updates":0,"tuning":"none"},
+ "fresh":{"seeds":[],"locked_before_access":true,"release_rule":"Keep fresh sealed on native embedding alias or byte/quality gate miss."},
+ "controls":["independent full transition matrices","shared equilibrium only","native system embedding linear modulation","Mirror role code over shared transition","factorized low-rank role table"],
+ "metrics":["heldout rollout nRMSE at horizon 16","actual complete serialized forecast bytes","active MAC per step","payload reconstruction error","CPU forecast wall time"],
+ "storage":{"authority":"actual NPZ inference payload bytes","paid_objects":["shared equilibrium state","transition core","role codes or embeddings","system IDs","metadata","independent matrices"]},
+ "success_gate":"heldout rollout nRMSE <=0.02, >=25% fewer complete bytes than independent, no worse than native embedding compute, and strict Mirror gain over native embedding.","failure_gate":"FAIL if native embedding/low-rank role code matches Mirror or quality/storage gate misses.",
+ "compute":{"report_steps":true,"report_optimizer_updates":true,"report_active_macs":true,"report_wall_time":true,"stability":"report spectral radius and horizon error"},
+ "boundaries":["Synthetic linear forecasting only; no ESE model, foundation forecasting, or real-system claim.","System IDs are known; no identity inference claim.","No fresh worlds after development gate failure or exact native alias."]
+}

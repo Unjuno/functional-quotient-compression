@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-819",
+  "commit": "PENDING",
+  "tests": {
+    "command": "pytest -q experiments/mirror_applications/ma-819-equilibrium-state-views/tests",
+    "passed": null,
+    "failed": null
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "All transition maps replay exactly and all payloads have spectral radius below one.",
+    "Mirror and native embedding payloads have identical bytes, transitions, rollout metrics and compute proxy.",
+    "Role codes for heldout-scored systems are stored in payload; unseen-system generalization was not tested. Fresh sealed."
+  ]
+}
