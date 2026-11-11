@@ -1,0 +1,97 @@
+{
+  "experiment_id": "MA-860",
+  "title": "few-shot new task projected into a learned shared parameter subspace",
+  "status": "FAIL",
+  "evidence_lane": "QUALITY/STORAGE/COMPUTE",
+  "base_commit": "d578bac8",
+  "hypothesis": "A rank-3 basis learned from three source rotation tasks can adapt a pooled classifier to a held-out fourth rotation using a small per-task coordinate and preserve most of full fine-tuning quality with lower total bytes when amortized across tasks.",
+  "physical_object": "Pooled base MLP plus rank-3 basis from source-task fine-tuning deltas",
+  "mirror_coordinate": "Three real-valued coefficients c for theta=theta0+sum(c_i*B_i); Mirror m=c is directly compared with native coefficient optimization",
+  "logical_multiplicity": "Per-task adapted classifiers expressed by task-specific coefficient vectors",
+  "prior_art_refs": [
+    "PA231",
+    "PA33"
+  ],
+  "controls": [
+    "no-adaptation pooled base",
+    "learned rank-3 PCA/task-delta basis",
+    "random orthonormal rank-3 subspace",
+    "full-model few-shot fine-tuning",
+    "native coefficient chart versus Mirror coefficient chart",
+    "serialized shared basis plus one task code versus full adapted model"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      53
+    ],
+    "selection_metric": "validation NLL after 100 support updates; method learning rates independently selected from .01,.1,.5",
+    "selected_settings": {
+      "base_lr": 0.1,
+      "learned_code_lr": 0.5,
+      "random_code_lr": 0.01,
+      "full_finetune_lr": 0.01
+    }
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      223,
+      239,
+      257
+    ],
+    "locked_before_access": true,
+    "locked_settings": {
+      "base_lr": 0.1,
+      "learned_code_lr": 0.5,
+      "random_code_lr": 0.01,
+      "full_finetune_lr": 0.01
+    }
+  },
+  "data": {
+    "source": "sklearn Digits",
+    "split": "fixed stratified source-image 60/20/20; split seeds 420 and 421",
+    "source_tasks": [
+      "0-degree",
+      "90-degree",
+      "180-degree rotations"
+    ],
+    "new_task": "270-degree rotation",
+    "normalization": "pixels / 16",
+    "few_shot_support": 32
+  },
+  "training": {
+    "model": "MLP 64\u219232\u219210, ReLU",
+    "base": "pooled training on source-task rotations",
+    "basis": "top rank-3 right singular vectors of three source fine-tuning deltas from common base; normalize each direction by its singular value divided by sqrt(2)",
+    "source_finetune_epochs": 15,
+    "base_epochs": 40,
+    "support_updates": 100,
+    "optimizer": "Adam for support adaptation; SGD momentum .9 and cosine schedule for base/source models"
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "base weights",
+      "three full-dimensional basis vectors",
+      "per-task coefficients",
+      "architecture and normalization metadata",
+      "full adapted model control"
+    ]
+  },
+  "compute": {
+    "report": [
+      "base/source optimizer updates and examples",
+      "support adaptation updates",
+      "subspace reconstruction MAC proxy",
+      "query MACs",
+      "wall time"
+    ]
+  },
+  "success_gate": "Across fresh runs, learned rank-3 code accuracy is within 2 pp of full fine-tune and at least 5 pp above random rank-3; shared base+basis+one-code bytes beat one full model, or a measured multi-task amortization bank beats the equivalent full-model bank without relying on untested duplicate codes.",
+  "failure_gate": "Learned code misses quality margin, random/native controls match it, or actual basis+base payload fails to beat full-model storage; Mirror-specific attribution fails if native coefficient optimization matches Mirror exactly.",
+  "boundaries": [
+    "This is a small vision-task projection screen, not pretrained-LM intrinsic-dimension evidence.",
+    "Only one held-out rotation is evaluated per replicate; no broad new-task generalization claim.",
+    "All basis vectors and code bytes are charged; no free learned basis.",
+    "Any deterministic coordinate mapping is not counted as Mirror-specific functional capacity."
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "experiment_id": "MA-860",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-860-new-task-subspace-projection/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "max_reload_logit_difference": 0.0
+  },
+  "metric_replay": {
+    "checked": true,
+    "fresh_seeds": [223, 239, 257]
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "New-task support examples are sampled from the training split; validation is used only for development selection and test data is disjoint.",
+    "Native coefficient and Mirror coefficient decode use identical coefficient vectors and outputs.",
+    "Fresh settings locked to development-selected method-specific learning rates; no settings changed after fresh access."
+  ]
+}
