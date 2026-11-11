@@ -1,0 +1,24 @@
+{
+  "experiment_id": "MA-857",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-857-shared-learned-simplex/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "max_grid_accuracy_difference": 0.0
+  },
+  "metric_replay": {
+    "checked": true,
+    "fresh_seeds": [131, 149, 167]
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Seed split is stratified by source digit and keeps all three domain transformations aligned per source image.",
+    "Native barycentric interpolation and m=2a-1 decode agree within 5e-6 maximum absolute logit difference; observed maximum was 2.86e-6.",
+    "Fresh settings locked to development-selected learning rate .1. No settings changed after fresh access."
+  ]
+}
