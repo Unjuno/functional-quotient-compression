@@ -1,0 +1,21 @@
+{
+  "experiment_id": "MA-852",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-852-task-conditioned-delta-rule/tests -v",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Fresh seeds 43/71 evaluated after fixed decay selection on dev seed23. Native task gate and Mirror codes have identical output/state/compute. Synthetic task-conditioned scalar decay only."
+  ]
+}
