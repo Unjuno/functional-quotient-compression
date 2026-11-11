@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-818",
+  "commit": "PENDING",
+  "tests": {
+    "command": "pytest -q experiments/mirror_applications/ma-818-new-how-code/tests",
+    "passed": null,
+    "failed": null
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "New operator maps are reconstructed from serialized basis and code.",
+    "Mirror uses 1,603 B vs 2,088 B explicit but misses 25% savings gate; native coordinate code is equivalent at 1,611 B.",
+    "Fresh remains sealed."
+  ]
+}
