@@ -1,0 +1,91 @@
+{
+  "experiment_id": "MA-858",
+  "title": "jointly trained quadratic Bezier surface chart",
+  "status": "FAIL",
+  "evidence_lane": "QUALITY/STORAGE/COMPUTE",
+  "base_commit": "3796005d",
+  "hypothesis": "Joint training of a 3x3 quadratic Bezier surface of MLP weights can yield accurate classifiers for heldout mixtures across four rotated Digits domains, using less serialized storage than materializing a 5x5 grid of surface views.",
+  "physical_object": "Nine MLP control-point state dictionaries for a tensor-product quadratic Bezier surface",
+  "mirror_coordinate": "Two normalized coordinates (u,v), or m=(2u-1,2v-1) with inverse decoder u=(m0+1)/2, v=(m1+1)/2",
+  "logical_multiplicity": "Twenty-five evaluated classifiers on a fixed 5x5 coordinate grid; count as views, not independent capacities",
+  "prior_art_refs": [
+    "PA232",
+    "PA231",
+    "PA28"
+  ],
+  "controls": [
+    "single pooled standard MLP trained on uniform four-domain mixtures",
+    "four independently trained rotation-domain MLPs",
+    "uniform model soup of four independent MLPs",
+    "native quadratic Bezier coordinates",
+    "Mirror m-coordinate decoder",
+    "25 materialized Bezier grid models",
+    "bilinear interpolation of four independently trained corner models"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      47
+    ],
+    "selection_metric": "mean validation NLL over the 5x5 coordinate grid; learning rate selected from .03 and .1"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      181,
+      199,
+      211
+    ],
+    "locked_before_access": true
+  },
+  "data": {
+    "source": "sklearn Digits",
+    "split": "fixed stratified source-image 60/20/20; train_test_split seeds 420 and 421",
+    "domains": [
+      "identity",
+      "90-degree rotation",
+      "180-degree rotation",
+      "270-degree rotation"
+    ],
+    "normalization": "pixels / 16"
+  },
+  "training": {
+    "model": "MLP 64\u219232\u219210, ReLU",
+    "surface": "tensor-product degree-2 Bernstein basis over 3x3 learned weight control points",
+    "epochs": 60,
+    "batch_size": 64,
+    "optimizer": "SGD momentum .9, weight_decay 1e-4, cosine learning-rate schedule",
+    "coordinate_sampling": "uniform independent u,v on [0,1]; each minibatch uses bilinear corner-domain mixture weights ((1-u)(1-v), u(1-v), (1-u)v, uv); all 9 control models are combined by quadratic Bernstein coefficients for forward/backward"
+  },
+  "evaluation": {
+    "coordinate_grid": "25 points on 5x5 uniform grid, endpoints and interior included",
+    "metric": "accuracy and NLL against heldout digit labels on each coordinate's matching bilinear four-domain mixture",
+    "fresh_seed_meaning": "initialization/data-order replicates on one fixed split; not unseen-task generalization"
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "all nine control point state dictionaries",
+      "25 coordinate codes for stored grid",
+      "architecture, normalization and surface metadata",
+      "all 25 materialized view state dictionaries",
+      "all independent baseline models"
+    ],
+    "coordinate_encoding": "two float32 values per coordinate; Mirror code is same width"
+  },
+  "compute": {
+    "report": [
+      "training updates/examples",
+      "control blending MAC proxy per coordinate",
+      "heldout query MACs across all views",
+      "wall time",
+      "single-view standard and independent controls"
+    ]
+  },
+  "success_gate": "Every fresh run: worst-grid accuracy within 2 percentage points of paired pooled standard model; all four corner accuracies at least 90%; 9-control-point payload smaller than 25 materialized views; Mirror decoder max absolute logit difference <=5e-6.",
+  "failure_gate": "Any quality gate miss fails the quality frontier; a native-coordinate alias or control-point payload that does not improve relevant quality/storage controls fails Mirror-specific attribution. Report each axis separately.",
+  "boundaries": [
+    "Four image rotation domains are a narrow synthetic domain-mixture screen; no language-model, natural multi-task, or unseen-domain claim.",
+    "All nine surface control points are fully charged; no learned control point is free.",
+    "Surface coordinates and 25 sampled views do not imply independent capacity.",
+    "A tensor-product quadratic Bezier surface is a deliberately small screen, not a reproduction of every PA232 model or optimizer detail."
+  ]
+}
