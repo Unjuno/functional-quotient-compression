@@ -567,3 +567,8 @@ MA-840 is a scoped synthetic FAIL: at delta .03 the shared rank-0 model reaches 
 ## Current handoff — 2026-11-11, MA-841
 
 MA-841 is a scoped synthetic causal-memory FAIL: rank3 passes the retrieval/composition/erasure checks but costs 2,468 B vs 2,253 B independent and 6x decode MACs; lower ranks miss causal checks. Mirror aliases native Fisher-PCA. Fresh remained sealed. Next eligible P0: MA-842 (compositional engram arithmetic; PA227), testing simultaneous multi-memory induction/retrieval and interference. Dedicated branch: `research/ma-841-engram-basis-code-20261111`.
+
+
+## Current handoff — 2026-11-11, MA-842
+
+MA-842 is a scoped synthetic composition FAIL: rank3 preserves 256 signed mixtures but saves only 9.2% bytes and costs 1.61x raw-addition MACs; rank0 saves 29.9% but misses composition quality. Mirror aliases native PCA/addition. Fresh remained sealed; combination count is not treated as capacity. Next eligible P0: MA-843 (reversible engram erase/restore; PA227/PA135/PA136). Dedicated branch: `research/ma-842-engram-arithmetic-20261111`.
