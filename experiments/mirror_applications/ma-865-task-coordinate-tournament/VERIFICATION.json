@@ -1,0 +1,26 @@
+{
+  "experiment_id": "MA-865",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-865-task-coordinate-tournament/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "native_mirror_max_logit_difference": 0.0,
+    "all_rank_payloads_measured_from_serialized_objects": true,
+    "model_soup_payload_measured": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "fresh_seeds": [401, 419, 433]
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "The four source tasks share one stratified train/validation/test source-image split and differ only by rotation.",
+    "SVD and random basis task codes are computed from train-only task deltas; test images and labels do not affect coordinates.",
+    "Fresh settings locked to development-selected rates. The soup payload accounting field was added after fresh access without changing model settings."
+  ]
+}
