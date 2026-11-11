@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-828",
+  "commit": "PENDING",
+  "tests": {
+    "command": "pytest -q experiments/mirror_applications/ma-828-kan-logical-experts/tests",
+    "passed": null,
+    "failed": null
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Mirror/native GS-KAN outputs decode exactly and use identical full bytes/evaluation counts.",
+    "Dense control is untrained and has nRMSE .998; no quality-matched dense MoE comparison claimed.",
+    "Fresh remains sealed."
+  ]
+}
