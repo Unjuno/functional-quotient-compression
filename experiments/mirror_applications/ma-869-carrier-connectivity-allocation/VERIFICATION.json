@@ -1,0 +1,34 @@
+{
+  "experiment_id": "MA-869",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-869-carrier-connectivity-allocation/tests && python experiments/mirror_applications/ma-869-carrier-connectivity-allocation/verify_results.py",
+    "passed": 4,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "charged_payloads": {
+      "schema": 14,
+      "native_schema_plus_rule": 17,
+      "mirror_schema_plus_descriptor_and_addresses": 19,
+      "observation_message": 6
+    }
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_seeds": [
+    701,
+    719,
+    733
+  ],
+  "notes": [
+    "Fresh seeds were frozen in PROTOCOL.json before execution.",
+    "Native rule and Mirror addresses select identical carriers.",
+    "Timing excludes any physical network and is a local synthetic harness measurement."
+  ]
+}
