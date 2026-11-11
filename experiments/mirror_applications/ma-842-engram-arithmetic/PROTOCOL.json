@@ -1,0 +1,74 @@
+{
+  "experiment_id": "MA-842",
+  "title": "Simultaneous compositional arithmetic over shared engram codes",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/MEMORY_COMPOSITION",
+  "base_commit": "47fb4b36",
+  "prior_art_refs": [
+    "PA227"
+  ],
+  "hypothesis": "Signed/sparse superposition of compact Mirror memory codes preserves multi-memory retrieval, composition and erasure with at least 25% fewer bytes than independent traces and beats native addition/factorization.",
+  "world": {
+    "seed": 84201,
+    "memories": 20,
+    "trace_dim": 32,
+    "shared_rank": 4,
+    "private_exceptions": 3,
+    "mixture_queries": 256,
+    "mixture_size_range": [
+      2,
+      8
+    ],
+    "signs": [
+      -1,
+      1
+    ]
+  },
+  "development": {
+    "seed": 84201,
+    "optimizer_updates": 0,
+    "tuning": "none; closed-form PCA and residual ranks 0/1/3"
+  },
+  "fresh": {
+    "seeds": [],
+    "locked_before_access": true,
+    "release_rule": "Keep sealed after native alias or quality/byte miss."
+  },
+  "controls": [
+    "independent raw addition",
+    "shared-only Mirror codes",
+    "shared plus residual ranks 1 and 3",
+    "native PCA factorization",
+    "shared mean trace"
+  ],
+  "metrics": [
+    "composition nRMSE",
+    "single retrieval error",
+    "signed cancellation",
+    "erasure necessity/interference",
+    "serialized bytes",
+    "decode/sum MACs",
+    "tested combinations",
+    "optimizer updates",
+    "wall time",
+    "replay error"
+  ],
+  "storage": {
+    "authority": "actual compressed NPZ bytes",
+    "paid_objects": [
+      "basis/traces",
+      "codes",
+      "private residuals",
+      "Fisher metric",
+      "IDs"
+    ]
+  },
+  "success_gate": "Composition, retrieval and cancellation nRMSE <=0.02; erasure removes only target; >=25% fewer bytes than independent; strict Mirror advantage over native controls.",
+  "failure_gate": "FAIL if any functional/byte gate misses or native addition/factorization matches Mirror without compute advantage.",
+  "boundaries": [
+    "Synthetic vectors only; not AI Engram or cognitive evidence.",
+    "Only 256 mixtures tested; combination counts are not capacity.",
+    "Three private exceptions are constructed and fully charged.",
+    "Fresh seeds remain sealed after alias or gate miss."
+  ]
+}

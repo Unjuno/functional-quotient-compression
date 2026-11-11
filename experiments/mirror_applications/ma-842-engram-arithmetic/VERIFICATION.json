@@ -1,0 +1,8 @@
+{
+  "experiment_id": "MA-842",
+  "status": "PASS",
+  "scope": "Deterministic synthetic composition execution and native alias/causal checks; scientific hypothesis status is FAIL.",
+  "commands": ["python experiments/mirror_applications/ma-842-engram-arithmetic/source/run_experiment.py", "pytest -q experiments/mirror_applications/ma-842-engram-arithmetic/tests"],
+  "checks": {"result_rows": 8, "focused_tests": "1 passed", "mirror_native_hash_equal_each_rank": true, "full_rank_mixture_error_below_1e-7": true, "fresh_data_opened": false},
+  "provenance": {"base_commit": "47fb4b36", "dedicated_branch": "research/ma-842-engram-arithmetic-20261111", "seed": 84201}
+}
