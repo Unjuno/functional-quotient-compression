@@ -632,3 +632,8 @@ MA-866 FAIL for Mirror-specificity, with a useful systems tradeoff: one-agent po
 
 
 MA-867 FAIL for Mirror specificity, but native factorization passes this synthetic screen: heldout utility MAE ≤.0002, nMSE matches oracle, 136 B vs 271 B flat table, and 16 vs 64 messages. Native rank2 MF is identical. MA-868 P1; next P0 MA-869 carrier-connectivity-aware allocation.
+
+
+## Current handoff — 2026-11-11, MA-879
+
+MA-878 is a fresh-evaluated FAIL on the frozen Pythia-70M→SmolLM2-135M pair. Attention-matched support improved NLL over fixed spread by 0.158 nat in only one of three seeds, and rank32 PCA saved 80.871% serialized bytes while losing 5.64–12.42 nat to full maps and 7.48–14.52 nat to native. Prompt/byte verification passed; quality gates failed. CPU only; one corpus/pair. Dedicated branch: `research/ma-878-head-matched-cachebridge-20261111`. Next candidate: MA-879 attention-sensitive Mirror cache-code calibration. This candidate must optimize target attention/output behavior, not repeat cache-MSE fitting; preserve native weighted ridge and fixed-spread/full-map controls.
