@@ -1,0 +1,13 @@
+{
+ "experiment_id":"MA-823","title":"Programmable graph topology as a functional architecture code","status":"SCREENING","evidence_lane":"MECHANISM/STORAGE/PROGRAM_EXECUTION","base_commit":"99527143","prior_art_refs":["PA220","PA127"],
+ "hypothesis":"A compact graph-program code reuses one shared node-function substrate to express several graph architectures, preserving heldout program outputs with fewer complete bytes and less active compute than independent graph networks and native sparse routing metadata.",
+ "world":{"nodes":8,"feature_dim":4,"programs":8,"edges_per_program":12,"teacher":"same node functions under per-program directed sparse graph topologies","heldout":"two topologies withheld from output scoring but programs stored at inference"},
+ "development":{"seed":82301,"examples_per_program":128,"test_examples_per_program":256,"optimizer_updates":0,"tuning":"none"},
+ "fresh":{"seeds":[],"locked_before_access":true,"release_rule":"Keep fresh sealed after exact native sparse-routing alias or storage/quality gate miss."},
+ "controls":["independent dense adjacency and node-function payloads","shared node functions plus native sparse edge indices","Mirror graph program code","shared fixed topology"],
+ "metrics":["heldout program output nRMSE","actual serialized bytes including graph metadata","active edge operations","program execution wall time","payload replay"],
+ "storage":{"authority":"actual NPZ bytes","paid_objects":["node functions","edge indices or dense adjacency","program IDs","graph code metadata"]},
+ "success_gate":"heldout nRMSE <=0.02, >=25% fewer complete bytes than independent, strict storage/compute gain over native sparse edge-index control.","failure_gate":"FAIL if Mirror aliases native sparse routing or misses full-byte/compute frontier.",
+ "compute":{"report_examples":true,"report_updates":true,"report_active_edges":true,"report_wall_time":true,"operation_count":"one message operation per active directed edge per layer"},
+ "boundaries":["Synthetic linear graph programs only; no GrapNet reproduction or learned architecture claim.","Heldout topology IDs and edge lists are stored in inference payload; this is not topology generalization.","No fresh worlds after development alias or gate failure."]
+}
