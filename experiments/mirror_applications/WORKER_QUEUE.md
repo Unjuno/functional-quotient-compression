@@ -614,3 +614,6 @@ MA-857 FAIL: the rotated-Digits simplex misses pooled-model quality by 5.19–6.
 MA-858 FAIL: the 3x3 quadratic Bezier chart has .733–.739 worst-grid accuracy vs pooled .887–.919; its 97,399 B surface is larger than the 43,827 B independent four-model bank and 11,933 B pooled model. Native/Mirror coordinates match exactly. MA-859 is P1; next eligible P0: MA-860.
 
 Model-manifold coordinate diagnostic (MA-856/857/858): all three continuous Mirror charts exactly or numerically alias native line/simplex/Bezier coordinates. Pause chart-coordinate renaming as a standalone mechanism. See docs/phase2/MODEL_MANIFOLD_MIRROR_COORDINATE_DIAGNOSTIC_2026-11-11.md. MA-860 may proceed only as new-task projection with native and random intrinsic-subspace controls; do not attribute any benefit to m reparameterization alone.
+
+
+MA-860 FAIL: held-out 270° task code .375/.394/.419 vs random rank-3 .381/.486/.419 and full fine-tune .786/.725/.681; shared base+basis+code 41,301 B vs full model 11,933 B. Native/Mirror codes alias. Continue to MA-862 (symmetry-aligned mode surface; PA232/PA37); MA-861 is P1.
