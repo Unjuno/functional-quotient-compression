@@ -599,3 +599,5 @@ MA-848 is a scoped synthetic FAIL for Mirror attribution: 8×6 task/episode fact
 MA-851 is a scoped synthetic FAIL for Mirror attribution: rank-2 delta state has fresh nRMSE 1.26e-7/1.23e-7, with 1,085 B Mirror vs 4,407 B full (75.4% fewer), and 4,096/3,072 update/query MACs vs 33,280/24,576. Native low-rank state matches exactly at 1,065 B. Continue with MA-852 (task-conditioned DeltaNet update-rule Mirror; PA230/PA150).
 
 MA-852 is a scoped synthetic FAIL for Mirror attribution: native scalar task gate and Mirror both have zero error at 8,788 B with identical compute; redundant full per-task lambda-I operators cost 16,946 B. Fixed scalar is smaller but misses retention (fresh nRMSE .346/.263). Continue with MA-853 (factorized key-role × value-role fast memory; PA229/PA230).
+
+MA-853 is a scoped synthetic FAIL for Mirror attribution: 4×4 role functions have zero heldout error for native/Mirror/MAP-Hadamard; native and Mirror are both 1,864 B/32,768 query MACs, full pair matrices 66,122 B/524,288, MAP/Hadamard 3,400 B/33,024. Continue with MA-855 (online functional-state frontier; PA129/PA229/PA230). MA-854 is P1.

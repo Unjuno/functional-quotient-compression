@@ -1,0 +1,21 @@
+{
+  "experiment_id": "MA-853",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-853-factorized-fast-memory/tests -v",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Fresh seeds 61/79 evaluated after dev freeze. Native role factors and Mirror share identical output and compute. Synthetic roles are provided; no learned role extraction claim."
+  ]
+}
