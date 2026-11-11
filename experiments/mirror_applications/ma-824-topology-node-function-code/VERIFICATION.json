@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-824",
+  "commit": "PENDING",
+  "tests": {
+    "command": "pytest -q experiments/mirror_applications/ma-824-topology-node-function-code/tests",
+    "passed": null,
+    "failed": null
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Decoded topology/function combinations replay all heldout outputs exactly.",
+    "Mirror and native modular routing have exact equal outputs/edge counts; independent payload is smaller by actual serialized bytes.",
+    "Heldout constituent codes are stored; no unseen component generalization claim. Fresh sealed."
+  ]
+}
