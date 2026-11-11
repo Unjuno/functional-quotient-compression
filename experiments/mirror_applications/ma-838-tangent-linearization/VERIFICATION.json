@@ -1,0 +1,8 @@
+{
+  "experiment_id": "MA-838",
+  "status": "PASS",
+  "scope": "Deterministic synthetic tanh MLP execution and native PCA alias assertions; scientific hypothesis status is FAIL.",
+  "commands": ["python experiments/mirror_applications/ma-838-tangent-linearization/source/run_experiment.py", "pytest -q experiments/mirror_applications/ma-838-tangent-linearization/tests"],
+  "checks": {"result_rows": 10, "focused_tests": "1 passed", "native_pca_mirror_hashes_identical_both_scales": true, "teacher_upper_error_zero": true, "fresh_data_opened": false},
+  "provenance": {"base_commit": "9ddefe35", "dedicated_branch": "research/ma-838-tangent-linearization-20261111", "seed": 83801, "amendment": "01: support size raised from 96 to 256 before amended development run"}
+}
