@@ -1,0 +1,21 @@
+{
+  "experiment_id": "MA-851",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-851-deltanet-writable-state/tests -v",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Fresh seeds 41,67 evaluated after development freeze. Shared basis and transient state both charged in serialized payload. Synthetic linear associative recall only."
+  ]
+}
