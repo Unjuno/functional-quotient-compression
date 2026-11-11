@@ -1,0 +1,20 @@
+{
+  "experiment_id": "MA-847",
+  "title": "Hebbian fast-weight Mirror basis",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/RUNTIME",
+  "base_commit": "9b4efa28",
+  "hypothesis": "A shared basis of Hebbian fast matrices plus transient episode coordinates can preserve one-shot associative recall while reducing writable fast-state bytes and update work versus a full per-episode matrix.",
+  "physical_object": "Writable Hebbian fast matrix",
+  "mirror_coordinate": "Transient coefficients over a shared fast-matrix basis",
+  "logical_multiplicity": "Episode-specific associative memories",
+  "prior_art_refs": ["PA229"],
+  "controls": ["full outer-product Hebbian matrix", "rank-k native factorization", "Mirror coefficient view", "direct low-rank fast state"],
+  "development": {"worlds_or_seeds": [13], "selection_metric": "heldout key-value retrieval nRMSE, writable bytes, write MACs"},
+  "fresh": {"worlds_or_seeds": [31, 53], "locked_before_access": true},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["shared basis", "transient coefficients", "full writable matrix when used", "slow encoder/readout", "metadata"]},
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true},
+  "success_gate": "Heldout nRMSE <= 0.02; at least 25% fewer combined persistent plus writable bytes than full matrix; online write MAC <=1.25x full outer-product update; no leakage after reset.",
+  "failure_gate": "Quality gate missed or savings <25% or write MAC >1.25x; native factor control matching Mirror means no Mirror-specific attribution.",
+  "boundaries": ["Synthetic content-addressable associative memory, no trained network claim.", "Task state is freshly zeroed per episode.", "Fresh seeds 31 and 53 are never used for tuning."]
+}
