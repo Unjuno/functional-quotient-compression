@@ -1,0 +1,18 @@
+{
+  "experiment_id": "MA-807",
+  "title": "Factorized embodiment × task coordinates for invertible action policies",
+  "status": "SCREENING",
+  "base_commit": "5a2cd3f2",
+  "prior_art_refs": ["PA202"],
+  "hypothesis": "Separating embodiment geometry from task coordinates in shared invertible action space recovers held-out embodiment-task pairs with lower full bytes than independent policies while preserving one-step action success.",
+  "grid": {"observation_dim": 8, "action_dim": 8, "embodiments": 3, "tasks": 3, "heldout_pairs": "checkerboard (embodiment+task) mod 2 == 0", "adapter": "two Givens rotation planes; angles sum embodiment and task factors"},
+  "development": {"seed": 80701, "train_examples_per_pair": 256, "test_examples_per_pair": 512, "tuning": "none"},
+  "fresh": {"seeds": [], "locked": true, "release_rule": "Do not open fresh after exact native additive-angle alias or failed quality/storage gate."},
+  "controls": ["independent full policy matrix for each embodiment-task pair", "embodiment-only policy", "task-only policy", "Mirror factorized embodiment × task code", "native additive Givens angle composition"],
+  "metrics": ["heldout action nRMSE", "task success at fixed tolerance", "actual complete NPZ bytes", "orthogonality error", "active MAC proxy", "heldout pairs", "train/test examples", "optimizer updates", "CPU action latency calibration"],
+  "storage": {"authority": "actual compressed NPZ inference payload", "paid": ["shared base action map", "embodiment angle codes", "task angle codes", "plane indices", "pair IDs", "independent policy matrices", "metadata"]},
+  "pass_gate": "Heldout nRMSE <=0.02, success >=0.95, >=25% fewer complete bytes than independent policies, one-step inference, and strict gain over native additive Givens composition.",
+  "fail_gate": "FAIL Mirror-specific claim on native Givens alias, quality/success miss, savings below 25%, or no strict frontier gain.",
+  "compute": {"optimizer_updates": 0, "active_MACs": "dense shared base plus four Givens rotations (two embodiment and two task, composed by summed angles); count independent dense matrix application separately", "wall_time": "small CPU synthetic action batch only"},
+  "boundaries": ["Synthetic linear action maps only; no multi-robot data, simulator, or hardware.", "Embodiment and task IDs are known and charged; no identity inference claim.", "Angle sums are deliberately the native additive control; Mirror must show benefit beyond this exact group composition."]
+}
