@@ -1,19 +1,43 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
-  "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+  "checks": {
+    "fresh_prompt_identity_checks": "PASS",
+    "gate": "FAIL",
+    "per_seed": [
+      {
+        "bytes_saved_fraction": 0.8087138058151003,
+        "matched_gain_vs_fixed": 0.15772126615047455,
+        "rank_delta_vs_native": 14.52178050763905,
+        "rank_gap_vs_full": 12.424056649208069,
+        "seed": 983
+      },
+      {
+        "bytes_saved_fraction": 0.8087138058151003,
+        "matched_gain_vs_fixed": -0.38410773128271103,
+        "rank_delta_vs_native": 10.445604026317596,
+        "rank_gap_vs_full": 7.355855122208595,
+        "seed": 997
+      },
+      {
+        "bytes_saved_fraction": 0.8087138058151003,
+        "matched_gain_vs_fixed": -0.21676185727119446,
+        "rank_delta_vs_native": 7.478161811828613,
+        "rank_gap_vs_full": 5.6401540115475655,
+        "seed": 1009
+      }
+    ],
+    "serialized_byte_checks": "PASS",
+    "status": "FAIL"
   },
-  "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
-  },
-  "metric_replay": {
-    "checked": false,
-    "max_difference": null
-  },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "decision": "FAIL",
+  "experiment_id": "MA-878",
+  "fresh_integrated_results": true,
+  "fresh_settings_freeze_commit": "e9b36b275",
+  "limitations": [
+    "single ordered model pair",
+    "single natural-language corpus",
+    "CPU only",
+    "no generation trajectory",
+    "CacheBridge-style local control, not paper reproduction"
+  ],
+  "protocol_freeze_commit": "e6a164427071f3b424d823e727e4a1f96eb6e9c3"
 }
