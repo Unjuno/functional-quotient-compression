@@ -157,7 +157,7 @@ def eval_heldout(pair:tuple[str,str],prompts:list[dict[str,Any]],models:dict[str
         prompt_ids.append(p['row'])
     return {'native_nll':native,'full_map_nll':full_nll,'compressed_nll':low_nll,'full_map_nll_delta':float(np.mean(full_nll)-np.mean(native)),'compressed_nll_delta':float(np.mean(low_nll)-np.mean(native)),'relative_cache_mse_full':float(np.mean(rel_full)),'relative_cache_mse_compressed':float(np.mean(rel_low)),'source_prefill_seconds':src_time,'target_native_prefill_seconds':native_time,'full_translation_seconds':full_apply,'compressed_translation_seconds':low_apply,'target_suffix_seconds_full':suffix_full,'target_suffix_seconds_compressed':suffix_low,'prompt_rows':prompt_ids,'map_codes':coeff.tolist()}
 
-def serialize_family(mapsets:list[dict[str,Any]],mean:np.ndarray,basis:np.ndarray,rank:int)->tuple[int,int]:
+def serialize_family_payloads(mapsets:list[dict[str,Any]],mean:np.ndarray,basis:np.ndarray,rank:int)->tuple[bytes,bytes]:
     names=[(a+'>'+b).encode() for a,b in (x['pair'] for x in mapsets)]
     metas=b'\0'.join(names)+b'\0'; all_refs=[r for x in mapsets for r in x['refs']]
     meta=bytes(v for r in all_refs for v in r)
@@ -168,6 +168,10 @@ def serialize_family(mapsets:list[dict[str,Any]],mean:np.ndarray,basis:np.ndarra
     for x in mapsets:
         _,codes=compress_maps(x['maps'],mean,basis,rank); shared.extend(np.asarray(codes,dtype='<f4').tobytes())
     full.extend(meta); shared.extend(meta)
+    return bytes(full),bytes(shared)
+
+def serialize_family(mapsets:list[dict[str,Any]],mean:np.ndarray,basis:np.ndarray,rank:int)->tuple[int,int]:
+    full,shared=serialize_family_payloads(mapsets,mean,basis,rank)
     return len(full),len(shared)
 
 def file_provenance(paths:dict[str,Path])->dict[str,Any]:

@@ -2,7 +2,7 @@ import sys
 from pathlib import Path
 import numpy as np
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'source'))
-from experiment import compress_maps,serialize_family,map_refs
+from experiment import compress_maps,serialize_family,serialize_family_payloads,map_refs
 
 class C:
     def __init__(self,layers,heads,hidden):
@@ -48,3 +48,13 @@ def test_cached_gpt2_identity_cache_injection_preserves_next_token_logit():
     tnll,_=transfer_nll(model,translated,ids[-2],ids[-1])
     native=float(torch.nn.functional.cross_entropy(out.logits[0,-2].reshape(1,-1),torch.tensor([ids[-1]])))
     assert abs(tnll-native)<1e-4
+
+
+def test_actual_family_payload_serialization_is_deterministic_and_byte_counted():
+    maps=np.zeros((1,65,64),dtype=np.float64)
+    mapset={'pair':('src/model','tgt/model'),'refs':[(0,0,0,0,0)],'maps':maps}
+    mean=np.zeros(65*64); basis=np.zeros((1,65*64))
+    full1,shared1=serialize_family_payloads([mapset],mean,basis,1)
+    full2,shared2=serialize_family_payloads([mapset],mean,basis,1)
+    assert full1==full2 and shared1==shared2
+    assert serialize_family([mapset],mean,basis,1)==(len(full1),len(shared1))

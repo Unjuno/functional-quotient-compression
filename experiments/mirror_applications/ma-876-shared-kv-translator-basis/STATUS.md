@@ -1,21 +1,21 @@
 # MA-876 status
 
-- Status: SCREENING
+- Status: FAIL (quality gate); translator storage compression passed narrowly scoped byte gates
 - Branch: `research/ma-876-shared-kv-translator-basis-20261111`
 - Base commit: `df10d26a`
 - Last verified commit: pending
 - Development complete: yes
-- Fresh/audit opened: no; rank32 and prompt partitions frozen in FROZEN_SETTINGS.json
-- Results committed: no
-- Verification committed: no
+- Fresh/audit opened: yes; rank32 and disjoint prompt partitions frozen before evaluation
+- Results committed: pending
+- Verification committed: pending
 
 ## Next action
 
-Run the three preregistered fresh worlds at frozen rank32; preserve all quality misses and replay metrics.
+Commit and push the checked results on this dedicated branch, then integrate the evidence into the cumulative research branch.
 
 ## Blockers
 
-No GPU is present. CPU model weights and memory are available; this screen will report CPU timings and omit GPU claims.
+None for the scoped CPU quality/storage screen. CUDA is unavailable, so GPU latency remains unmeasured.
 
 ## Decisions / rulings
 

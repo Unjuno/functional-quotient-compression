@@ -5,6 +5,14 @@
     "validation": "51d84d52d095f90d"
   },
   "development_independent_full_map_nll_delta": 2.8585,
+  "development_nll_delta_vs_full_map": {
+    "1": 7.647009998559952,
+    "16": 5.324959576129913,
+    "2": 5.270475834608078,
+    "32": 2.8833161741495132,
+    "4": 5.818962067365646,
+    "8": 5.8938723504543304
+  },
   "development_rank_nll_delta": {
     "1": 10.505520451813936,
     "16": 8.183470029383898,
@@ -350,6 +358,7 @@
       "weight_sha256": "248dfc3911869ec493c76e65bf2fcf7f615828b0254c12b473182f0f81d3a707"
     }
   },
+  "rank_selection_note": "Selection ordering is unchanged by comparing each candidate to the full-map NLL rather than native target NLL, because full-map NLL is constant across ranks for the same development heldout prompts; rank32 remains the minimum-delta candidate.",
   "selected_rank": 32,
   "selection_reason": "No candidate rank met the development NLL gate; rank 32 had the smallest NLL delta among frozen candidates (5.7418 nat; cache relative MSE 2508327.93)."
 }
