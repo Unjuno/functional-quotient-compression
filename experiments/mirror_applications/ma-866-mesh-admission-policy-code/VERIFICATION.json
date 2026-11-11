@@ -1,0 +1,27 @@
+{
+  "experiment_id": "MA-866",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-866-mesh-admission-policy-code/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "policy_bytes": 14,
+    "schema_bytes": 24,
+    "wire_message_bytes": 6
+  },
+  "metric_replay": {
+    "checked": true,
+    "fresh_seeds": [503, 521, 547],
+    "heldout_draws_per_seed": 4096
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Agent messages contain only uint8 agent id, uint8 typed coordinate id, and float32 observation.",
+    "Mirror table addresses exactly equal the native best-reliability rule addresses for all eight tasks.",
+    "No weights, gradients, hidden states, or private controller state crosses the agent boundary."
+  ]
+}
