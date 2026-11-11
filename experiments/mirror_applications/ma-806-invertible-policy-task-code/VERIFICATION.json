@@ -1,0 +1,13 @@
+{
+  "experiment_id": "MA-806",
+  "commit": "PENDING",
+  "tests": {"command": "pytest -q experiments/mirror_applications/ma-806-invertible-policy-task-code/tests", "passed": 1, "failed": 0},
+  "serialization": {"roundtrip_checked": true, "byte_exact": true},
+  "metric_replay": {"checked": true, "max_difference": 0.0},
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Test observations were independent of pooled least-squares base fitting.",
+    "All skill matrices decode from the NPZ payload with maximum absolute difference 0.",
+    "Mirror and native Givens adapters have identical payload hashes and actions; fresh stayed sealed."
+  ]
+}

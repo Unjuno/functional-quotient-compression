@@ -1,0 +1,18 @@
+{
+  "experiment_id": "MA-806",
+  "title": "One-step invertible action policy with compact skill coordinates",
+  "status": "SCREENING",
+  "base_commit": "1d57405b",
+  "prior_art_refs": ["PA202"],
+  "hypothesis": "A shared invertible action map plus compact per-skill adapter coordinates retains one-step action quality with lower complete bytes than independent skill policies, without adding iterative inference calls.",
+  "model": {"observation_dim": 8, "action_dim": 8, "skills": 9, "shared_policy": "orthogonal linear map", "adapter": "two shared Givens plane rotations with skill-specific angles"},
+  "development": {"seed": 80601, "train_examples_per_skill": 256, "test_examples_per_skill": 512, "tuning": "none"},
+  "fresh": {"seeds": [], "locked": true, "release_rule": "Do not open fresh after exact native Givens alias or frozen byte/quality gate miss."},
+  "controls": ["independent full invertible policy matrix per skill", "shared policy without skill adapter", "Mirror skill-angle code over shared invertible base", "native Givens adapter with ordinary per-skill angles", "four-evaluation straight-line flow sampler as iterative-compute reference"],
+  "metrics": ["test action nRMSE", "task success fraction at fixed action tolerance", "actual compressed policy bytes", "invertibility/orthogonality error", "active MAC proxy", "flow evaluations per action", "test actions", "optimizer updates", "CPU wall time"],
+  "storage": {"authority": "actual compressed NPZ inference payload", "paid": ["shared policy matrix", "Givens plane IDs and angles", "skill IDs", "independent policy matrices", "metadata"]},
+  "pass_gate": "Test action nRMSE <=0.02, success >=0.95, >=25% fewer complete bytes than independent, one-step execution, and strict improvement over native Givens control.",
+  "fail_gate": "FAIL Mirror-specific claim for native Givens alias, quality/success miss, savings below 25%, or extra one-step latency/compute without frontier gain.",
+  "compute": {"optimizer_updates": 0, "active_MACs": "dense shared policy plus two Givens rotations; iterative reference performs four flow evaluations", "wall_time": "small CPU synthetic action batch; no robot latency claim"},
+  "boundaries": ["Synthetic linear action targets only; no robot simulator, manipulation dataset, or hardware evaluation.", "Skill IDs are known and charged; no skill inference claim.", "The flow reference integrates a known straight-line conditional vector field; it is not a trained diffusion policy.", "Native Givens is the cheapest ordinary parameter control and is expected to be functionally equivalent."]
+}
