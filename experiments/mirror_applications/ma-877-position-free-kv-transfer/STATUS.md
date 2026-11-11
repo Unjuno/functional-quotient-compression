@@ -6,8 +6,8 @@
 - Protocol freeze: 79ff15fc
 - Development/fresh settings freeze: 881b8992
 - Fresh/audit opened: yes; rank 32 and disjoint prompt IDs frozen before evaluation
-- Results: report a5d1552, core metrics a251487, fresh summary 9157725, provenance 454db49
-- Verification: four tests pass; fresh prompt IDs, serialized payload sizes and all gate verdicts reproduce. NLL max deviation is 0.02051181 nat. See VERIFICATION.json.
+- Results commit: `b3ff4f864` (report, metrics, full replay and provenance)
+- Verification record: follow-up commit pending. Four tests pass; fresh prompt IDs, serialized payload sizes and all gate verdicts reproduce. NLL max deviation is 0.02051181 nat. See VERIFICATION.json.
 - Next P0 candidate: MA-878
 
 ## Decision summary
