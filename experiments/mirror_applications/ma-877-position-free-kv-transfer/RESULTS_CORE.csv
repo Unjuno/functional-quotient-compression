@@ -1,0 +1,13 @@
+condition,world_or_seed,method,serialized_bytes,train_tokens_or_examples,optimizer_updates,active_compute_proxy,wall_time_s,primary_metric,primary_value,secondary_metric,secondary_value,status_note
+development,829,direct_rope_ridge,2996100,24 prompts,0,180 affine maps,NA,heldout_nll_delta_vs_native,2.676276,NA,NA,Development control
+development,829,position_free_full,2996100,24 prompts,0,180 affine maps,NA,heldout_nll_delta_vs_native,0.616705,NA,NA,Development independent maps
+development,829,position_free_rank32,573060,24 prompts,0,23.96M reconstruction MAC + 748800 MAC/token,NA,heldout_nll_delta_vs_native,11.604054,delta_vs_full_maps,10.987349,Frozen rank32
+fresh,983,direct_rope_ridge,2996100,16 prompts,0,180 affine maps,NA,heldout_nll_delta_vs_native,1.474066,mean_native_nll,3.085373,CPU only
+fresh,983,position_free_full,2996100,12 calibration + 16 test prompts,0,180 affine maps,NA,heldout_nll_delta_vs_native,0.824539,improvement_vs_direct,0.649527,CPU only
+fresh,983,position_free_rank32,573060,12 calibration + 16 test prompts,0,23.96M reconstruction MAC + 748800 MAC/token,NA,heldout_nll_delta_vs_native,12.354864,delta_vs_full_maps,11.530325,FAIL quality
+fresh,997,direct_rope_ridge,2996100,16 prompts,0,180 affine maps,NA,heldout_nll_delta_vs_native,3.320937,mean_native_nll,1.911304,CPU only
+fresh,997,position_free_full,2996100,12 calibration + 16 test prompts,0,180 affine maps,NA,heldout_nll_delta_vs_native,2.974563,improvement_vs_direct,0.346374,CPU only
+fresh,997,position_free_rank32,573060,12 calibration + 16 test prompts,0,23.96M reconstruction MAC + 748800 MAC/token,NA,heldout_nll_delta_vs_native,16.440020,delta_vs_full_maps,13.465457,FAIL quality
+fresh,1009,direct_rope_ridge,2996100,16 prompts,0,180 affine maps,NA,heldout_nll_delta_vs_native,2.164473,mean_native_nll,2.849819,CPU only
+fresh,1009,position_free_full,2996100,12 calibration + 16 test prompts,0,180 affine maps,NA,heldout_nll_delta_vs_native,0.871592,improvement_vs_direct,1.292881,CPU only
+fresh,1009,position_free_rank32,573060,12 calibration + 16 test prompts,0,23.96M reconstruction MAC + 748800 MAC/token,NA,heldout_nll_delta_vs_native,13.606936,delta_vs_full_maps,12.735344,FAIL quality
