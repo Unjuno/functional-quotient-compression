@@ -1,0 +1,22 @@
+{
+  "experiment_id": "MA-826",
+  "commit": "PENDING",
+  "tests": {
+    "command": "pytest -q experiments/mirror_applications/ma-826-gskan-parent-edge-views/tests",
+    "passed": null,
+    "failed": null
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "All edge functions replay from serialized parent and affine codes.",
+    "Native GS-KAN and Mirror affine codes have same complete bytes, error and parent evaluations; modulation adds bytes. Fresh sealed."
+  ]
+}

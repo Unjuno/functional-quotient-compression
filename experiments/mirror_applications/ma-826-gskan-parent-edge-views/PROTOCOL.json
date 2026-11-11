@@ -1,0 +1,13 @@
+{
+ "experiment_id":"MA-826","title":"GS-KAN shared parent function with Mirror edge Views","status":"SCREENING","evidence_lane":"MECHANISM/STORAGE/EDGE_FUNCTIONS","base_commit":"5f3a7ec4","prior_art_refs":["PA222","PA221"],
+ "hypothesis":"Compositional Mirror edge Views over one shared GS-KAN parent function represent heldout scalar edge functions with fewer complete bytes or lower evaluation work than native GS-KAN affine transforms and independent KAN edge functions.",
+ "world":{"edge_count":32,"input_domain":[-1,1],"parent":"sin(x)+0.2*x^3","view":"f(a*x+b), with per-edge affine codes and optional bounded modulation","heldout_edges":8},
+ "development":{"seed":82601,"samples_per_edge":128,"test_samples_per_edge":256,"optimizer_updates":0,"tuning":"none"},
+ "fresh":{"seeds":[],"locked_before_access":true,"release_rule":"Keep fresh sealed after native GS-KAN exact alias or failure of complete-byte/compute gate."},
+ "controls":["independent sampled KAN edge functions","native GS-KAN affine-transformed shared parent","Mirror affine edge Views","Mirror affine plus modulation View"],
+ "metrics":["heldout function nRMSE","full serialized bytes including parent and codes","function evaluations per edge sample","payload replay error"],
+ "storage":{"authority":"actual NPZ payload bytes","paid_objects":["parent function specification/parameters","edge coefficients","modulation codes","edge IDs","metadata","independent edge samples"]},
+ "success_gate":"heldout nRMSE <=0.02, at least 25% fewer complete bytes than native GS-KAN and independent control, and strict function/evaluation frontier gain over native affine GS-KAN.","failure_gate":"FAIL if native GS-KAN affine transformation exactly matches Mirror or complete bytes/compute do not improve.",
+ "compute":{"report_samples":true,"report_optimizer_updates":true,"report_parent_evaluations":true,"report_wall_time":true},
+ "boundaries":["Synthetic analytic scalar edge functions only; no trained KAN claim.","The parent function and transforms are known; heldout edge parameters are included in payload.","No fresh samples after native alias or gate failure."]
+}
