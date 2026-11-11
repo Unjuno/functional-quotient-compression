@@ -1,0 +1,13 @@
+{
+ "experiment_id":"MA-818","title":"Add a new how/mechanism while keeping content fixed","status":"SCREENING","evidence_lane":"MECHANISM/STORAGE/FEW_SHOT","base_commit":"92c47a48","prior_art_refs":["PA217"],
+ "hypothesis":"A new computation mechanism can be added by a small code on a frozen mechanism basis, preserving outputs for known content and using less complete state than an explicit new operator or retraining the shared substrate.",
+ "world":{"dim":8,"what_count":6,"how_count":4,"new_how_index":3,"shared_operator_basis_rank":2,"teacher":"fixed content vectors pass through operators in a frozen rank-2 operator basis; new how is a combination of basis atoms"},
+ "development":{"seed":81801,"support_examples":32,"test_examples_per_what":128,"optimizer_updates":0,"tuning":"none"},
+ "fresh":{"seeds":[],"locked_before_access":true,"release_rule":"Keep fresh sealed after native coefficient alias or full-byte gate failure."},
+ "controls":["independent full operator bank","frozen shared operator basis with Mirror code","native basis coefficient code","explicit new operator","retrained shared operator core"],
+ "metrics":["heldout output nRMSE","old-how retention","full payload bytes","support/adaptation operations","payload replay error"],
+ "storage":{"authority":"actual NPZ inference payload bytes","paid_objects":["frozen operator basis","known operator codes","new operator code or explicit matrix","content vectors","metadata"]},
+ "success_gate":"new-how nRMSE <=0.02, retention nRMSE <=0.02, >=25% fewer full bytes than explicit operator, and strict gain over native coefficient code.","failure_gate":"FAIL if native factor code aliases Mirror or complete bytes miss gate.",
+ "compute":{"report_examples":true,"report_updates":true,"report_adaptation_operations":true,"report_active_compute":true,"report_wall_time":true},
+ "boundaries":["Synthetic linear operations only; no reasoning/continual-learning claim.","The frozen operator basis is a synthetic addressability control, not a learned mechanism basis.","No fresh seeds after development failure or exact native alias."]
+}
