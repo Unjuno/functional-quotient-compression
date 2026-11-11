@@ -547,3 +547,8 @@ MA-835 is a verified scoped synthetic FAIL: rank-2 system codes exactly alias na
 ## Current handoff — 2026-11-11, MA-836
 
 MA-836 is a verified scoped synthetic FAIL. Rank-2 Mirror/native NTK factorization aliases at 1,117 B and misses rollout quality (nRMSE .09086); full-rank NTK-orthogonal basis is exact but costs 2,065 B vs 1,614 B independent, adds 9x forward MAC proxy and leaves functional overlap unchanged. Fresh remained sealed. Continue with MA-837, the next eligible P0 by registry order. Dedicated branch: `research/ma-836-ntk-orthogonal-codebook-20261111`.
+
+
+## Current handoff — 2026-11-11, MA-837
+
+MA-837 is a scoped synthetic FAIL: native no-task-storage feature generation and Mirror-generated task coordinates exactly alias at 630 B, with equal seen/unseen error and 36,864 MACs; caching codes costs 936 B and adds decode work. Fresh remained sealed. Continue with MA-838 (linearized fine-tuning Mirror tangent coordinates; PA226/PA33), measuring linearization error before any compression claim. Dedicated branch: `research/ma-837-ntk-feature-codegen-20261111`.
