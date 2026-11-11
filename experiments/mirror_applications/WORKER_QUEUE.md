@@ -572,3 +572,8 @@ MA-841 is a scoped synthetic causal-memory FAIL: rank3 passes the retrieval/comp
 ## Current handoff — 2026-11-11, MA-842
 
 MA-842 is a scoped synthetic composition FAIL: rank3 preserves 256 signed mixtures but saves only 9.2% bytes and costs 1.61x raw-addition MACs; rank0 saves 29.9% but misses composition quality. Mirror aliases native PCA/addition. Fresh remained sealed; combination count is not treated as capacity. Next eligible P0: MA-843 (reversible engram erase/restore; PA227/PA135/PA136). Dedicated branch: `research/ma-842-engram-arithmetic-20261111`.
+
+
+## Family pause — 2026-11-11
+
+MA-841 and MA-842 are consecutive scoped synthetic FAILs for the same linear/PCA engram-code alias. Pause MA-843 until a Mirror-distinct reversible erase/restore mechanism is preregistered. See `docs/phase2/ENGRAM_MIRROR_CODE_FAMILY_DIAGNOSTIC_2026-11-11.md`. The overall queue continues with MA-844 (Fisher-metric code distance; PA227/PA178).
