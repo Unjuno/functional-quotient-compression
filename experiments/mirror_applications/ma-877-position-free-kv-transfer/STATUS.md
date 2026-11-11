@@ -7,7 +7,7 @@
 - Development/fresh settings freeze: 881b8992
 - Fresh/audit opened: yes; rank 32 and disjoint prompt IDs frozen before evaluation
 - Results: report a5d1552, core metrics a251487, fresh summary 9157725, provenance 454db49
-- Verification: partial; see VERIFICATION.json. Exact fresh replay and final serializer test remain pending.
+- Verification record: c33e04d. Partial; see VERIFICATION.json. Exact fresh replay and final serializer test remain pending.
 - Next P0 candidate: MA-878
 
 ## Decision summary
