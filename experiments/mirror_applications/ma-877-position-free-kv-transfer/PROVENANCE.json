@@ -1,26 +1,58 @@
 {
-  "experiment_id": "MA-877",
   "branch": "research/ma-877-position-free-kv-transfer-20261111",
+  "dataset_fingerprint": {
+    "test": "a46124b21ac53738",
+    "validation": "51d84d52d095f90d"
+  },
+  "experiment_id": "MA-877",
+  "files_sha256": {
+    "FROZEN_SETTINGS.json": "98ef34e5d24abaf10b49a42eba102e82d3700b3f02811aed85f2b9bb37775be9",
+    "PROTOCOL.json": "3b9afdba1a75efe4a963a5dbadd46a19d46af60d89794be0b6be001c89037936",
+    "README.md": "f94680441db816729cf6942ab869031c5d68368c0ff918a510f30bf66fb23601",
+    "RESULTS.md": "72f7bcb0e052e6b804c9af5b7ce964be436e3ee64952f9d50467c08034f0e79b",
+    "RESULTS_CORE.csv": "c54c230cb3d2592d321ab5bd0c8956cd93f93693b39d5e2566bf70f4046343a4",
+    "STATUS.md": "6adb5a329a99442fecf98ae6a010707129d5e90388aed4aa027fcd6fbd1c7a36",
+    "VERIFICATION.json": "62c71c4ee729faddd8aa7e21bb0d514e66126b3739bd3f028516ddb794f21f26",
+    "dev_results.json": "58ec86d38a1675fea009553641a30fd270faf29f3ba8f133d8e7a899bbd5380f",
+    "fresh_results.json": "5dfca08f42e7dca54f1dc095e7926612795f2a55e8f24d063ce4f514cc446fe1",
+    "fresh_summary.json": "2b28681d60614a936839f0c489730c86e6376689b16aa997a3cf87ca6a3ea8c5",
+    "source/experiment.py": "c62053b6592713bfb524960ecb78360633cb6a3f2483d118d78a40415cfa1bba",
+    "tests/test_experiment.py": "6ddd66a58e85ce1007b9657a0ae0e75eef1fe5a5b3d998ee806cd7b69c305b3d",
+    "verify_results.py": "57b2e22b417b964d6d1b084427b9b7f2e8462f73362caf2247f1f81af5c26094"
+  },
+  "model_artifacts": {
+    "EleutherAI/pythia-70m-deduped": {
+      "config_sha256": "002050231a9b1ec3ac77aa6b9b3bbdc4d923f4068a7dd33b8da72a9bd6ad9a43",
+      "snapshot": "e93a9faa9c77e5d09219f6c868bfc7a1bd65593c",
+      "weight_bytes": 166029852,
+      "weight_sha256": "3da388330e4549156d76b58d6d268c63cd005e9336b4f4d2d378421e7b7a33fd"
+    },
+    "HuggingFaceTB/SmolLM2-135M": {
+      "config_sha256": "1d556eab73b69c7f11f64c557a2f9c6f440bd4c6b89bb2584a6b498c92603843",
+      "snapshot": "93efa2f097d58c2a74874c7e644dbc9b0cee75a2",
+      "weight_bytes": 269060552,
+      "weight_sha256": "80521b40281d6ce74e35c9282c22539e75aa0ac8578892b2a59955ef78d55da1"
+    }
+  },
+  "notes": [
+    "Actual payload includes format header, ordered pair identifier and layer/head/role metadata.",
+    "Fresh NLL values have small CPU numerical variation; gate outcome is stable."
+  ],
   "protocol_freeze_commit": "79ff15fc",
-  "fresh_settings_commit": "881b8992",
-  "source_sha256": "recorded_in_FROZEN_SETTINGS.json",
-  "dataset_fingerprint": "recorded_in_FROZEN_SETTINGS.json",
-  "model_artifact_hashes": "recorded_in_FROZEN_SETTINGS.json",
-  "execution": {
-    "device": "CPU",
+  "rank_and_fresh_split_freeze_commit": "881b8992",
+  "replay": {
+    "max_abs_nll_difference": 0.020511809758405164,
+    "numeric_equality_claimed": false,
+    "prompt_ids_match": true,
+    "quality_gate_verdicts_match": true,
+    "serialized_payload_bytes_match": true
+  },
+  "runtime": {
     "cuda": false,
+    "datasets": "3.6.0",
+    "device": "CPU",
+    "numpy": "2.3.5",
     "torch": "2.14.1+cpu",
-    "transformers": "4.46.3",
-    "datasets": "3.6.0"
-  },
-  "result_commits": {
-    "report": "a5d15520294a09d28f822806d9147398590bad35",
-    "core_csv": "a2514876642d412e88e4008b2681b9cbb141d8ea",
-    "fresh_summary": "91577255f922965781d4ab814790aaae09a6793b",
-    "verification": "1a9d17f469ffefffc8e12b5e1fe7600c7fd26386"
-  },
-  "artifact_limitations": [
-    "The full raw fresh_results.json and post-run SHA-256 manifest were not retrievable after environment loss.",
-    "A summary with per-seed metrics and prompt lengths is retained; deterministic replay remains pending."
-  ]
+    "transformers": "4.46.3"
+  }
 }
