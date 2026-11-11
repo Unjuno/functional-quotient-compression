@@ -1,0 +1,13 @@
+{
+ "experiment_id":"MA-832","title":"Shared KAN parents with sparse private edge residuals","status":"SCREENING","evidence_lane":"MECHANISM/STORAGE/PRIVATE_RESIDUAL","base_commit":"8d7717b4","prior_art_refs":["PA222","PA18"],
+ "hypothesis":"A shared KAN parent plus small private rational residuals only on exceptional edges preserves all heldout functions with lower complete bytes than independent edge functions and beats ordinary GS-KAN plus KAN residual controls.",
+ "world":{"edge_count":32,"domain":[-1,1],"parent":"sin(x)+0.2*x^3","exception_edges":4,"private_residual":"one Gaussian rational bump per exceptional edge","heldout":"8 edges scored separately"},
+ "development":{"seed":83201,"samples_per_edge":128,"test_samples_per_edge":256,"optimizer_updates":0,"tuning":"none"},
+ "fresh":{"seeds":[],"locked_before_access":true,"release_rule":"Keep fresh sealed after native residual alias or complete-byte gate failure."},
+ "controls":["independent sampled edge functions","shared parent only","Mirror edge codes plus sparse private bump residuals","native GS-KAN parent plus standard rational residuals"],
+ "metrics":["heldout edge nRMSE","actual complete bytes","private edge count/bytes","parent and residual function evaluations","payload replay error"],
+ "storage":{"authority":"actual NPZ bytes","paid_objects":["parent parameters","edge codes","private residual centers/amplitudes/widths","edge indices","metadata","independent samples"]},
+ "success_gate":"heldout nRMSE <=0.02, >=25% fewer complete bytes than independent edges, and strict quality/byte/compute advantage over native GS-KAN + rational residual.","failure_gate":"FAIL if native residual parameterization matches Mirror or full-byte gate misses.",
+ "compute":{"report_samples":true,"report_updates":true,"report_parent_evaluations":true,"report_private_evaluations":true,"report_wall_time":true},
+ "boundaries":["Synthetic analytic scalar functions only; no trained KAN claim.","Exceptional edge IDs are known and charged; no anomaly selection claim.","No fresh samples after native residual alias or gate failure."]
+}

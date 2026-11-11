@@ -1,0 +1,22 @@
+{
+  "experiment_id": "MA-832",
+  "commit": "PENDING",
+  "tests": {
+    "command": "pytest -q experiments/mirror_applications/ma-832-kan-private-edge-residual/tests",
+    "passed": null,
+    "failed": null
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Decoded native/Mirror models exactly recover all 32 edge functions.",
+    "Mirror and native residual state differ by 10 B but function/compute match; shared-only misses heldout quality. Fresh sealed."
+  ]
+}
