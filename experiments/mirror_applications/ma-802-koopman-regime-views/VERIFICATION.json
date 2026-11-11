@@ -1,9 +1,19 @@
 {
   "experiment_id": "MA-802",
-  "commit": "PENDING",
-  "tests": {"command": "pytest -q experiments/mirror_applications/ma-802-koopman-regime-views/tests", "passed": 1, "failed": 0},
-  "serialization": {"roundtrip_checked": true, "byte_exact": true},
-  "metric_replay": {"checked": true, "max_difference": 0.0},
+  "commit": "0b1a42d85d37c2fc9644ca5b594cc25ad2432827",
+  "tests": {
+    "command": "pytest -q experiments/mirror_applications/ma-802-koopman-regime-views/tests",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
   "fresh_split_integrity_checked": true,
   "notes": [
     "The two diagonal heldout regimes were excluded from transition fitting and shared-basis regression.",
