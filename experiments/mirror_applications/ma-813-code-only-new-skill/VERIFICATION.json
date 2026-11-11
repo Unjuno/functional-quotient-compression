@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-813",
+  "commit": "PENDING",
+  "tests": {
+    "command": "pytest -q experiments/mirror_applications/ma-813-code-only-new-skill/tests",
+    "passed": null,
+    "failed": null
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "New-skill code is inferred from support samples and replayed from its serialized payload.",
+    "The 1,440 B Mirror deployment exceeds fresh rank-2 LoRA (981 B) and independent new-skill matrix (754 B); native shared-basis code exactly aliases.",
+    "Fresh remains sealed."
+  ]
+}
