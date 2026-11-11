@@ -1,0 +1,78 @@
+{
+  "experiment_id": "MA-836",
+  "title": "NTK-metric task codebook for low-interference shared updates",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/NTK_GEOMETRY",
+  "base_commit": "6ff01124",
+  "prior_art_refs": [
+    "PA225"
+  ],
+  "hypothesis": "For task updates whose distinctions are low-rank in the pooled tangent-kernel metric, an NTK-weighted Mirror codebook will preserve heldout task quality with at least 25% fewer complete bytes than independent updates and lower task interference than Euclidean low-rank coding, while beating the native NTK-weighted factorization control.",
+  "world": {
+    "seed": 83601,
+    "tasks": 8,
+    "input_dim": 32,
+    "support_examples_per_task": 96,
+    "heldout_examples_per_task": 256,
+    "teacher": "three shared directions with one low-energy component; task covariance is anisotropic and pooled NTK defines metric",
+    "rank": 2
+  },
+  "development": {
+    "seed": 83601,
+    "optimizer_updates": 0,
+    "tuning": "none; closed-form readouts and rank-2 SVD"
+  },
+  "fresh": {
+    "seeds": [],
+    "locked_before_access": true,
+    "release_rule": "Keep fresh sealed after exact native factorization alias or any strict gate miss."
+  },
+  "controls": [
+    "shared mean update",
+    "independent full task readouts",
+    "Euclidean rank-2 task factorization",
+    "native pooled-NTK weighted rank-2 factorization",
+    "Mirror NTK-orthogonal codebook",
+    "full-rank Euclidean orthogonal basis",
+    "full-rank NTK-orthogonal basis"
+  ],
+  "metrics": [
+    "heldout normalized squared error",
+    "complete serialized inference bytes",
+    "inter-task normalized NTK overlap",
+    "intra-task similarity",
+    "active forward MAC proxy",
+    "code decode MACs",
+    "support examples",
+    "optimizer updates",
+    "isolated wall clock",
+    "payload replay error"
+  ],
+  "storage": {
+    "authority": "actual compressed NPZ bytes",
+    "paid_objects": [
+      "task code vectors",
+      "shared update basis",
+      "task identifiers",
+      "basis metadata",
+      "readout matrices"
+    ]
+  },
+  "success_gate": "PASS only if heldout normalized error <=0.02, complete bytes are at least 25% below independent updates, inter-task NTK overlap is reduced versus Euclidean rank-2 coding, and Mirror strictly beats native NTK-weighted factorization in quality/bytes.",
+  "failure_gate": "FAIL if native NTK factorization aliases Mirror, quality/byte gates miss, or measured NTK orthogonality does not improve interference over Euclidean coding.",
+  "boundaries": [
+    "Synthetic linearized regression only; no trained network or real continual-learning claim.",
+    "Task-specific readout codes are stored, so no unseen-task generalization is tested.",
+    "The teacher is deliberately low-rank in the pooled NTK geometry; generalization outside this aligned case is not established.",
+    "Fresh seeds stay sealed after alias or gate miss."
+  ],
+  "amendment_01": {
+    "before_execution": "Added before testing the explicit orthogonal-basis control; initial rank-2 screen remains unchanged.",
+    "reason": "The registry hypothesis requires a measured NTK-orthogonal code/basis control, while rank-2 weighted SVD alone only tests metric-aware compression.",
+    "additional_control": "Full-rank task-specific coefficient codes over an NTK-orthonormal shared update basis; compare against full-rank Euclidean orthogonal basis and independent readouts.",
+    "added_metrics": [
+      "basis_orthogonality_error",
+      "codebook_factor_payload_bytes"
+    ]
+  }
+}
