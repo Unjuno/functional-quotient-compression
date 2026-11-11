@@ -1,0 +1,66 @@
+{
+  "experiment_id": "MA-837",
+  "title": "Input-conditioned NTK feature generator with Mirror task coordinate",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/NTK_FEATURE_GENERATOR",
+  "base_commit": "513c3af7",
+  "prior_art_refs": [
+    "PA225"
+  ],
+  "hypothesis": "A small Mirror coordinate generated from task descriptors will produce task-adaptive features without task-specific parameters, preserving heldout function quality while using fewer complete bytes or inference operations than the native no-task-storage NTK-CL feature generator.",
+  "world": {
+    "seed": 83701,
+    "tasks": 12,
+    "descriptor_dim": 2,
+    "feature_dim": 24,
+    "support_examples_per_task": 48,
+    "heldout_examples_per_task": 128,
+    "unseen_descriptor_tasks": 8,
+    "teacher": "linear task descriptor to shared feature readout"
+  },
+  "development": {
+    "seed": 83701,
+    "optimizer_updates": 0,
+    "tuning": "none; solve shared descriptor-conditioned readout by least squares"
+  },
+  "fresh": {
+    "seeds": [],
+    "locked_before_access": true,
+    "release_rule": "Keep fresh sealed after exact native generator alias or strict gate miss."
+  },
+  "controls": [
+    "native no-task-storage NTK-style feature generator",
+    "direct descriptor-to-readout conditioning (ordinary control)",
+    "Mirror-generated task coordinate",
+    "Mirror cached task-code table",
+    "independent per-task readouts",
+    "shared mean readout"
+  ],
+  "metrics": [
+    "seen and unseen descriptor heldout nRMSE",
+    "actual serialized model payload bytes",
+    "task metadata bytes",
+    "active feature MAC proxy",
+    "code-generation MACs",
+    "support examples",
+    "optimizer updates",
+    "isolated wall time",
+    "payload replay error"
+  ],
+  "storage": {
+    "authority": "actual compressed NPZ bytes",
+    "paid_objects": [
+      "shared generator/readout basis",
+      "task codes or descriptors if persisted",
+      "task IDs and metadata"
+    ]
+  },
+  "success_gate": "PASS only if Mirror-generated coordinates preserve seen/unseen nRMSE <=0.02 and strictly reduce complete model+task-state bytes or adaptation/inference compute versus native no-task-storage generator without increasing task-specific persistent parameters.",
+  "failure_gate": "FAIL if the generated coordinate is identical to native input conditioning, adds bytes without quality/compute benefit, or fails the quality gate.",
+  "boundaries": [
+    "Synthetic linear task family only; no trained NTK-CL or PEFT evidence.",
+    "Task descriptors are supplied as inference inputs; no inference-time code inferred from raw support set is tested.",
+    "Unseen descriptor tests interpolation in a known linear task family, not unseen task-family generalization.",
+    "Fresh seeds remain sealed after alias or gate miss."
+  ]
+}
