@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-801",
+  "commit": "PENDING",
+  "tests": {
+    "command": "pytest -q experiments/mirror_applications/ma-801-vector-network-task-state/tests",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Top-2 input-local selection ran once for every test example and produced 28 distinct atom subsets.",
+    "View and native CP coefficient factorization have identical payload hashes and outputs.",
+    "Fresh checkerboard task-state pairs remained sealed after storage-gate failure."
+  ]
+}

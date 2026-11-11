@@ -1,0 +1,21 @@
+{
+  "experiment_id": "MA-801",
+  "title": "Factorized slow task × fast state coefficients over Vector-Network atoms",
+  "status": "SCREENING",
+  "base_commit": "56e37142",
+  "prior_art_refs": ["PA213", "PA25"],
+  "hypothesis": "A separable task × input-state coefficient view over a shared rank-1 atom bank reconstructs held-out task-state combinations with lower complete bytes than an independent coefficient tensor while preserving per-input local atom inference.",
+  "physical_object": "K=8 rank-1 weight atoms shared by four tasks and four input states",
+  "mirror_coordinate": "task factors T[t,r] × state factors S[s,r] × shared atom coefficients H[r,k], rank r=2",
+  "local_inference": "per input, recompute atom scores |v_k^T x| and choose top-2; state code comes from the known input-state label",
+  "grid": {"tasks": 4, "states": 4, "atoms": 8, "input_dim": 8, "heldout": "checkerboard task-state pairs where (task+state) mod 2 == 0", "examples_per_task_state": 256},
+  "development": {"seeds": [80101], "factor_rank": 2, "tuning": "none"},
+  "fresh": {"seeds": [], "locked": true, "release_rule": "Do not open fresh after native CP/tensor factorization alias or frozen gate miss."},
+  "controls": ["independent task-state coefficient tensor", "task-only coefficient table", "state-only coefficient table", "Mirror separable task × state code", "native CP/tensor factorization of the coefficient tensor"],
+  "metrics": ["heldout/all-combination output nRMSE", "actual NPZ bytes", "active atoms and unique local subsets", "local inference iterations", "active MACs", "coefficient decode MACs", "test examples", "optimizer updates", "CPU wall time"],
+  "storage": {"authority": "actual compressed NPZ payload", "paid": ["atom left/right vectors", "task and state factors", "shared atom coefficient basis", "IDs/maps", "local inference metadata"]},
+  "pass_gate": "Heldout nRMSE <=0.02, at least 25% fewer bytes than independent task-state coefficients, exactly two input-local active atoms with varying subsets, and strict native-control frontier gain.",
+  "fail_gate": "FAIL Mirror-specific value on native factorization alias, storage gate miss, quality miss, or no strict native-control gain.",
+  "compute": {"optimizer_updates": 0, "active_MACs": "K input projections plus top-2 rank-1 outputs", "coefficient_decode_MACs": "task-state pair times rank-2 basis evaluation, reported separately"},
+  "boundaries": ["Synthetic compositional coefficient tensors only; no trained Vector Network or fast-weight learner claim.", "Task and state codes are supplied and charged; no task/state inference claim.", "The input-local atom selection is executed per example, but coefficient factors are oracle generated from a rank-2 separable teacher.", "Native tensor factorization is the direct attribution control."]
+}
