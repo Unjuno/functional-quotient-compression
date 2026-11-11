@@ -1,0 +1,22 @@
+{
+  "experiment_id": "MA-821",
+  "commit": "PENDING",
+  "tests": {
+    "command": "pytest -q experiments/mirror_applications/ma-821-rank-adaptive-matrix-memory/tests",
+    "passed": null,
+    "failed": null
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Rank-adaptive payloads replay with zero map error; composition metric recomputed from decoded matrices.",
+    "Mirror and native SVD rank allocation match function/compute; payload differs by 2 B only. Fresh sealed."
+  ]
+}
