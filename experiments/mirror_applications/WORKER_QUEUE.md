@@ -577,3 +577,8 @@ MA-842 is a scoped synthetic composition FAIL: rank3 preserves 256 signed mixtur
 ## Family pause — 2026-11-11
 
 MA-841 and MA-842 are consecutive scoped synthetic FAILs for the same linear/PCA engram-code alias. Pause MA-843 until a Mirror-distinct reversible erase/restore mechanism is preregistered. See `docs/phase2/ENGRAM_MIRROR_CODE_FAMILY_DIAGNOSTIC_2026-11-11.md`. The overall queue continues with MA-844 (Fisher-metric code distance; PA227/PA178).
+
+
+## Current handoff — 2026-11-11, MA-844
+
+MA-844 is a scoped synthetic FAIL: Fisher code assignment saves 69.7% bytes vs independent but misses .02 function quality (nRMSE .04609); Euclidean yields the same error/retrieval, while Fisher assignment doubles distance MACs and exactly aliases native Fisher k-means. Fresh remained sealed. Continue with MA-845 (engram-first continual memory allocation with private fallback; PA227/PA138/PA139). Dedicated branch: `research/ma-844-fisher-code-distance-20261111`.
