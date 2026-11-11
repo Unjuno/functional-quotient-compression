@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-835",
+  "status": "PASS",
+  "scope": "Verification of deterministic synthetic result generation and native/Mirror alias assertions; not evidence of the scientific hypothesis passing.",
+  "commands": [
+    "python experiments/mirror_applications/ma-835-karc-new-system-code/source/run_experiment.py",
+    "pytest -q experiments/mirror_applications/ma-835-karc-new-system-code/tests"
+  ],
+  "checks": {
+    "rows": 5,
+    "focused_tests": "1 passed",
+    "mirror_native_rank2_bytes_identical": true,
+    "mirror_native_rank2_payload_sha256_identical": true,
+    "mirror_native_rank2_rollout_error_identical": true,
+    "all_payloads_replay_deterministically": true,
+    "fresh_data_opened": false
+  },
+  "provenance": {
+    "base_commit": "6e9572a2",
+    "dedicated_branch": "research/ma-835-karc-new-system-code-20261111",
+    "development_seed": 83501
+  }
+}
