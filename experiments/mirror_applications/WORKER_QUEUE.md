@@ -582,3 +582,8 @@ MA-841 and MA-842 are consecutive scoped synthetic FAILs for the same linear/PCA
 ## Current handoff — 2026-11-11, MA-844
 
 MA-844 is a scoped synthetic FAIL: Fisher code assignment saves 69.7% bytes vs independent but misses .02 function quality (nRMSE .04609); Euclidean yields the same error/retrieval, while Fisher assignment doubles distance MACs and exactly aliases native Fisher k-means. Fresh remained sealed. Continue with MA-845 (engram-first continual memory allocation with private fallback; PA227/PA138/PA139). Dedicated branch: `research/ma-844-fisher-code-distance-20261111`.
+
+
+## Current handoff — 2026-11-11, MA-845
+
+MA-845 is a scoped synthetic FAIL: 16 in-span codes plus eight private fallbacks preserve retention at .00471 nRMSE, but full storage is 3,615 B (2.1% below independent; 11.3% below explicit SERAC/GRACE-style memory) and exactly aliases native low-rank fallback. Fresh remained sealed. Continue with MA-846 (differentiable-plasticity coefficient bank; PA228). Dedicated branch: `research/ma-845-engram-private-fallback-20261111`.
