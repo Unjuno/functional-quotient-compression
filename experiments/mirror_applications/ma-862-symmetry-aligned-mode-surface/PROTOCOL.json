@@ -1,0 +1,96 @@
+{
+  "experiment_id": "MA-862",
+  "title": "symmetry-aligned bilinear model chart",
+  "status": "FAIL",
+  "evidence_lane": "QUALITY/STORAGE/COMPUTE",
+  "base_commit": "a9b20c5d",
+  "hypothesis": "Hidden-neuron permutation alignment of four independently trained rotation-domain MLPs will improve interior bilinear chart quality versus unaligned weights, while all alignment metadata and endpoint payload bytes are charged.",
+  "physical_object": "Four independently trained MLP domain checkpoints",
+  "mirror_coordinate": "Bilinear chart coordinates (u,v), encoded as m=(2u-1,2v-1); native inverse is used as the exact control",
+  "logical_multiplicity": "Twenty-five sampled bilinear surface views from four aligned or unaligned domain models",
+  "prior_art_refs": [
+    "PA232",
+    "PA37"
+  ],
+  "controls": [
+    "unaligned independent domain checkpoints with bilinear interpolation",
+    "activation-correlation Hungarian hidden-neuron alignment then bilinear interpolation",
+    "independent corner model quality",
+    "uniform aligned and unaligned model soups",
+    "25 materialized surface views",
+    "native (u,v) versus Mirror m-coordinate decoder",
+    "single pooled standard MLP trained on uniform four-domain mixtures"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      67
+    ],
+    "selection_metric": "mean validation-domain NLL for independent endpoint training; learning rate selected from .03 and .1"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      271,
+      283,
+      307
+    ],
+    "locked_before_access": true
+  },
+  "data": {
+    "source": "sklearn Digits",
+    "split": "fixed stratified source-image 60/20/20; seeds 420 and 421",
+    "domains": [
+      "identity",
+      "90-degree rotation",
+      "180-degree rotation",
+      "270-degree rotation"
+    ],
+    "normalization": "pixels / 16",
+    "alignment_probe": "training images across all four rotations only; no labels used for neuron matching"
+  },
+  "training": {
+    "model": "MLP 64\u219232\u219210, ReLU",
+    "endpoint_training": "four independently initialized models, one per rotation domain, 60 epochs",
+    "alignment": "compute centered activation-correlation matrix for hidden units on training probe inputs; solve maximum-weight one-to-one assignment with Hungarian algorithm; permute first-layer rows/bias and second-layer columns to match model 0",
+    "surface": "bilinear interpolation of four endpoint weight states indexed by domain corners"
+  },
+  "evaluation": {
+    "grid": "5x5 uniform u,v grid; each point evaluated on a heldout domain mixture with bilinear corner weights",
+    "primary_metrics": "worst/mean grid accuracy and NLL; endpoint accuracy; alignment permutation and wall time",
+    "fresh_seed_meaning": "independent initialization and training order replicates on one fixed split, not unseen-task generalization"
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "four endpoint states",
+      "permutation indices if raw checkpoint plus decode mapping is stored",
+      "architecture, normalization and chart metadata",
+      "25 coordinate codes or materialized model states"
+    ],
+    "coordinate_encoding": "two float32 values per grid coordinate; same width for native and Mirror forms"
+  },
+  "compute": {
+    "report": [
+      "endpoint optimizer updates/examples",
+      "alignment matrix MAC proxy and wall time",
+      "bilinear blend MAC proxy",
+      "grid query MACs",
+      "total wall time"
+    ]
+  },
+  "success_gate": "Across all fresh seeds, aligned worst-grid accuracy improves over unaligned by at least 5 percentage points and reaches within 2 points of the pooled standard MLP; aligned endpoint functions remain unchanged within 1e-6 max logit difference; actual payload includes any stored permutation metadata; Mirror/native max logit delta <=5e-6.",
+  "failure_gate": "Alignment does not improve grid quality by the preregistered margin, quality remains below pooled baseline, or Mirror chart only reproduces native bilinear coordinates. Report alignment utility separately from Mirror-specific value.",
+  "boundaries": [
+    "Only a single hidden layer permutation is aligned; no claim about deep-network global symmetry solving.",
+    "Rotated Digits are a narrow synthetic vision setting.",
+    "Permutation matching uses train-only activation probes, no validation/test labels or logits.",
+    "Coordinate count is not independent model capacity."
+  ],
+  "amendments": [
+    {
+      "id": "01",
+      "date": "2026-11-11",
+      "reason": "Add explicit pooled-standard control already required by the success gate; this correction is made before any fresh seed access and does not change model, training, or selection settings.",
+      "fresh_data_accessed": false
+    }
+  ]
+}

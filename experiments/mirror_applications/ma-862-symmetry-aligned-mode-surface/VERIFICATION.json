@@ -1,0 +1,25 @@
+{
+  "experiment_id": "MA-862",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-862-symmetry-aligned-mode-surface/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "max_materialized_reload_logit_difference": 0.0,
+    "permutation_metadata_charged": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "fresh_seeds": [271, 283, 307]
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Neuron alignment uses only source-training inputs and no labels; it does not access validation/test samples.",
+    "Each aligned endpoint preserves output with max observed logit delta 1.91e-6; the preregistered 1e-6 strict threshold is narrowly missed.",
+    "Fresh settings locked to development-selected LR .03; no settings changed after fresh access."
+  ]
+}

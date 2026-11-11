@@ -617,3 +617,6 @@ Model-manifold coordinate diagnostic (MA-856/857/858): all three continuous Mirr
 
 
 MA-860 FAIL: held-out 270° task code .375/.394/.419 vs random rank-3 .381/.486/.419 and full fine-tune .786/.725/.681; shared base+basis+code 41,301 B vs full model 11,933 B. Native/Mirror codes alias. Continue to MA-862 (symmetry-aligned mode surface; PA232/PA37); MA-861 is P1.
+
+
+MA-862 FAIL: symmetry alignment improves mean grid accuracy only .44–1.07 pp and inconsistently changes worst-grid quality; raw-plus-permutation storage is 45,799 B vs 43,827 B raw. Native/Mirror chart exact alias. MA-863 P1; next P0 MA-864 (shared manifold plus private residual).
