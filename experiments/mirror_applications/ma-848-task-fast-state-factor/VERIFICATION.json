@@ -3,8 +3,8 @@
   "commit": "pending",
   "tests": {
     "command": "python -m unittest discover -s experiments/mirror_applications/ma-848-task-fast-state-factor/tests -v",
-    "passed": null,
-    "failed": null
+    "passed": 2,
+    "failed": 0
   },
   "serialization": {
     "roundtrip_checked": true,
@@ -16,6 +16,6 @@
   },
   "fresh_split_integrity_checked": true,
   "notes": [
-    "Fresh seeds 37 and 59 evaluated once after frozen protocol/code. Synthetic factor bank only; ordinary factorization exactly matches functional result and is 4 bytes smaller."
+    "Amendment01 corrects the original accounting and reset/serialization verification. Fresh seeds were deterministically replayed only for correction, with no tuning."
   ]
 }

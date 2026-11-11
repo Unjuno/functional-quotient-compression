@@ -1,20 +1,68 @@
 {
   "experiment_id": "MA-848",
-  "title": "Persistent task coordinate × transient Hebbian state",
+  "title": "Persistent task coordinate \u00d7 transient Hebbian state",
   "status": "SCREENING",
   "evidence_lane": "MECHANISM/STORAGE/COMPOSITION",
   "base_commit": "68bf596f",
-  "hypothesis": "Separating a persistent task identity scalar from a transient Hebbian associative state will preserve heldout task×memory compositions with lower total payload bytes than storing an independent effective matrix for every pair.",
+  "hypothesis": "Separating a persistent task identity scalar from a transient Hebbian associative state will preserve heldout task\u00d7memory compositions with lower total payload bytes than storing an independent effective matrix for every pair.",
   "physical_object": "Task-conditioned effective linear associative map",
   "mirror_coordinate": "Persistent task gain and transient episode state coordinate",
   "logical_multiplicity": "Task identities composed with memory episodes",
-  "prior_art_refs": ["PA229", "PA129"],
-  "controls": ["independent full effective matrices for observed task×episode pairs", "native CAVIA-style persistent scalar context times Hebbian fast matrix", "Mirror task View times transient fast-state View"],
-  "development": {"worlds_or_seeds": [17], "selection_metric": "heldout compositional nRMSE, actual total bytes, active MAC proxy"},
-  "fresh": {"worlds_or_seeds": [37, 59], "locked_before_access": true},
-  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["task codes", "episode fast matrices or codes", "pairwise matrices for independent control", "metadata"]},
-  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true},
+  "prior_art_refs": [
+    "PA229",
+    "PA129"
+  ],
+  "controls": [
+    "independent full effective matrices for observed task\u00d7episode pairs",
+    "native CAVIA-style persistent scalar context times Hebbian fast matrix",
+    "Mirror task View times transient fast-state View"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      17
+    ],
+    "selection_metric": "heldout compositional nRMSE, actual total bytes, active MAC proxy"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      37,
+      59
+    ],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "task codes",
+      "episode fast matrices or codes",
+      "pairwise matrices for independent control",
+      "metadata"
+    ]
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true
+  },
   "success_gate": "Heldout unseen-combination nRMSE <= 1e-6 and >=25% total serialized-byte reduction vs independent pair matrices, with zero cross-episode state leakage.",
   "failure_gate": "Quality/reset gate missed or <25% byte reduction; exact native factorization alias means no Mirror-specific attribution.",
-  "boundaries": ["Synthetic compositional mechanism screen only.", "Task gains and fast memories are independently sampled factors; pairwise bank trains only on a subset of combinations.", "Fresh worlds 37/59 are not used for tuning."]
+  "boundaries": [
+    "Synthetic compositional mechanism screen only.",
+    "Task gains and fast memories are independently sampled factors; pairwise bank trains only on a subset of combinations.",
+    "Fresh worlds 37/59 are not used for tuning."
+  ],
+  "amendments": [
+    {
+      "id": "01",
+      "reason": "Post-run independent review found accounting/verification defects: query MACs omitted query count, native/Mirror MACs were asymmetric by formula, fast-state byte dtype was misreported, reset did not reuse the same writable object, and serialization roundtrip was asserted without reload.",
+      "changes": [
+        "Count all 16 query vectors per heldout pair; count task gain multiply for native and Mirror equally.",
+        "Generate teacher memory matrices in float32; report one writable state and full state bank separately.",
+        "Reuse the same fast-state array across episodes and clear it in place before the next episode.",
+        "Reload serialized NPZ and compare each tensor byte-exactly."
+      ],
+      "fresh_policy": "Seeds 17, 37, 59 were deterministically replayed only to correct accounting/verification; no hyperparameters or model selection changed. Initial exposed fresh metrics are superseded by this amendment."
+    }
+  ]
 }

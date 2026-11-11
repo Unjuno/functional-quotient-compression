@@ -19,3 +19,8 @@ Implement and validate the factor composition and independent pair controls on d
 ## Decisions / rulings
 
 Native task×fast-state factorization exactly matches the Mirror behavior with 4 fewer serialized bytes and lower query MACs.
+
+
+## Amendment 01
+
+Corrected query MAC accounting, float32 writable state size, same-object reset, and actual serialization reload checks after independent review. Fresh seeds were replayed deterministically for correction only; no tuning.

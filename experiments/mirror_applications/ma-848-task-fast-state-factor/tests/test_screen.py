@@ -6,10 +6,11 @@ class TestFactorScreen(unittest.TestCase):
  def test_compositions_recover_and_reset(self):
   r=runner.run(37)
   self.assertEqual(r['heldout_pairs'],24)
-  self.assertLess(r['max_heldout_nrmse'],1e-6)
+  self.assertEqual(r['max_heldout_nrmse'],0.)
   self.assertEqual(r['reset_max_abs'],0.)
- def test_native_control_dominates_mirror_cost(self):
+  self.assertEqual(r['fast_state_bytes'],runner.D*runner.D*4)
+ def test_native_control_matches_mirror_cost(self):
   r=runner.run(59)
-  self.assertAlmostEqual(r['mean_heldout_nrmse'],2.495161959049289e-8,places=12)
+  self.assertEqual(r['native_query_macs'],r['mirror_query_macs'])
   self.assertLess(r['native_factor_bytes'],r['mirror_bytes'])
 if __name__=='__main__': unittest.main()
