@@ -1,0 +1,22 @@
+{
+  "experiment_id": "MA-811",
+  "commit": "PENDING",
+  "tests": {
+    "command": "pytest -q experiments/mirror_applications/ma-811-option-position-code/tests",
+    "passed": null,
+    "failed": null
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "All pair maps replay exactly from the serialized payloads.",
+    "Mirror and native additive controls have identical heldout sequence output and MAC proxy; native payload is 20 B smaller; fresh sealed."
+  ]
+}

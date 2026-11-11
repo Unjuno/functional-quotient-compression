@@ -1,0 +1,13 @@
+{
+  "experiment_id":"MA-811","title":"Factorized option identity × sequence-position role codes","status":"SCREENING","evidence_lane":"MECHANISM/STORAGE/SEQUENCE","base_commit":"271f8126","prior_art_refs":["PA216"],
+  "hypothesis":"A shared motor core with additive option and position Views preserves heldout option-position combinations and unseen four-step sequences while reducing complete bytes versus an independent option×position bank and beating native additive coefficient controls.",
+  "world":{"dim":8,"options":6,"positions":4,"rank":2,"teacher":"shared orthogonal core plus rank-2 atoms with coefficient c(option,position)=option_code+position_code","heldout":"six fixed four-option sequences with previously unseen option-position pairings"},
+  "development":{"seed":81101,"train_examples_per_pair":128,"test_examples_per_pair":256,"optimizer_updates":0,"tuning":"none"},
+  "fresh":{"seeds":[],"locked_before_access":true,"release_rule":"Keep fresh sealed after exact native additive-factor alias or any quality/storage gate miss."},
+  "controls":["independent full option×position matrix bank","shared core only","native additive option+position coefficient factorization","Mirror option×position Views"],
+  "metrics":["heldout sequence nRMSE","actual complete NPZ bytes","active MAC proxy","payload map replay error","isolated CPU batch wall time"],
+  "storage":{"authority":"actual NPZ bytes","paid_objects":["shared core","rank-2 atoms","option codes","position codes","pair IDs","sequence metadata","independent matrices"]},
+  "success_gate":"heldout nRMSE <=0.02, >=25% fewer complete bytes than independent, and strict frontier gain over native additive factorization.","failure_gate":"FAIL if quality/storage gate misses or native additive factors match outputs, bytes, and compute.",
+  "compute":{"optimizer_updates":0,"report_examples":true,"report_active_compute_proxy":true,"report_isolated_wall_clock":true,"mac_proxy":"64 shared-core MAC + 2*D*rank coefficient application per action"},
+  "boundaries":["Synthetic linear maps only; no learned or physical motor policy claims.","Option and position IDs are known and included in payload.","No fresh seeds after development failure or exact native alias."]
+}
