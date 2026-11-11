@@ -226,3 +226,5 @@ MA-857 is a FAIL for the preregistered quality/storage frontier and Mirror-speci
 
 
 MA-858 FAIL: a learned 3x3 quadratic Bezier surface reaches only .733–.739 worst-grid accuracy against pooled .887–.919. Nine controls cost 97,399 B, 2.22x the independent four-model bank and 8.16x a pooled model; the 25-view materialized grid costs 268,599 B. Native and Mirror chart logits match exactly. Dedicated branch: `research/ma-858-bezier-surface-chart-20261111`. MA-859 is P1; next eligible P0 is MA-860.
+
+Model-manifold diagnostic after MA-856/857/858: native line, barycentric, and Bezier charts exactly or numerically reproduce the Mirror coordinate. Pause experiments that only rename continuous chart coordinates. MA-860 remains distinct if tested as new-task projection against native/random subspace and full-finetuning controls; see [diagnostic](../../docs/phase2/MODEL_MANIFOLD_MIRROR_COORDINATE_DIAGNOSTIC_2026-11-11.md).
