@@ -1,0 +1,34 @@
+{
+  "experiment_id": "MA-872",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-872-discrete-composition-hypotheses/tests && python experiments/mirror_applications/ma-872-discrete-composition-hypotheses/verify_results.py",
+    "passed": 2,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "sixteen_task_payload_bytes": {
+      "mirror_and_native_codebook": 569,
+      "continuous_rank2": 489,
+      "independent": 809,
+      "all_metadata_and_task_addresses_charged": true
+    }
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_seeds": [
+    941,
+    953,
+    971
+  ],
+  "notes": [
+    "Fresh task instances and observations were generated from preregistered seeds.",
+    "Native and Mirror nearest-codebook results alias exactly.",
+    "No unseen rule, neural model, or RL claim is made."
+  ]
+}
