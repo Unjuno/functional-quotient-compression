@@ -1,0 +1,25 @@
+{
+  "experiment_id": "MA-867",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-867-mesh-role-query-factorization/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "factor_payload_bytes": 136,
+    "flat_payload_bytes": 271
+  },
+  "metric_replay": {
+    "checked": true,
+    "fresh_seeds": [601, 617, 631]
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Heldout role-query pairs are excluded from the factorization loss.",
+    "Native matrix factorization and Mirror factor decoder are the same rank-2 scores and selections.",
+    "Only scalar typed agent messages are modeled; no private state is exposed."
+  ]
+}
