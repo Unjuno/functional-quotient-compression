@@ -1,0 +1,15 @@
+{
+  "experiment_id":"MA-813","title":"Add a new motor skill using only a code on a frozen shared basis","status":"SCREENING","evidence_lane":"MECHANISM/STORAGE/FEW_SHOT",
+  "base_commit":"bb78d082","prior_art_refs":["PA216","PA129"],
+  "hypothesis":"A few-shot new skill lying in a frozen shared rank-2 action residual basis can be added by a compact Mirror code, preserving heldout action accuracy with lower total bytes and adaptation work than a fresh native rank-2 LoRA adapter.",
+  "world":{"dim":8,"base_skills":6,"shared_rank":2,"new_skill":"one heldout skill generated as a combination of frozen residual atoms","support_examples":32,"test_examples":512},
+  "development":{"seed":81301,"optimizer_updates":0,"tuning":"none"},
+  "fresh":{"seeds":[],"locked_before_access":true,"release_rule":"Keep fresh sealed after exact native coefficient alias or failure of quality/bytes gate."},
+  "controls":["frozen shared core without code","Mirror coefficient code on shared basis","native additive shared-basis coefficient code","fresh rank-2 LoRA factors fitted from the same 32 support examples","independent full new-skill matrix"],
+  "metrics":["heldout new-skill action nRMSE","actual full serialized bytes including frozen bases and new-skill state","support examples and adaptation operations","active MAC proxy","payload replay error"],
+  "storage":{"authority":"actual compressed NPZ inference payload bytes","paid_objects":["frozen core","shared atoms","base skill codes","new skill code or LoRA factors","metadata"]},
+  "success_gate":"new skill nRMSE <=0.02, complete deployed bytes at least 25% lower than fresh LoRA, and lower adaptation operations without worse quality than native shared-basis code.",
+  "failure_gate":"FAIL if native shared-basis code exactly matches Mirror or Mirror does not beat fresh LoRA on full bytes/quality/adaptation work.",
+  "compute":{"report_support_examples":true,"report_optimizer_updates":true,"report_adaptation_ops":true,"report_active_compute_proxy":true,"report_wall_clock":true},
+  "boundaries":["Synthetic linear action task only; no learned/physical robot skill claim.","Shared atoms and six base skill codes are generated and frozen before the new-skill support/test samples; this is a controlled synthetic addressability screen, not learned basis evidence. New-skill coefficient is inferred only from 32 support examples.","No fresh seeds after dev control alias or gate miss."]
+}
