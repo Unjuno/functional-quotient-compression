@@ -609,3 +609,6 @@ MA-856 is a scoped FAIL for Mirror-specific attribution; selected low-loss line 
 
 
 MA-857 FAIL: the rotated-Digits simplex misses pooled-model quality by 5.19–6.85 pp on all fresh seeds; endpoint+codes are 128 B larger than the independent bank; native barycentric interpolation and Mirror coordinates match within float32 tolerance. Next P0: MA-858 (Bezier-surface model chart, PA232).
+
+
+MA-858 FAIL: the 3x3 quadratic Bezier chart has .733–.739 worst-grid accuracy vs pooled .887–.919; its 97,399 B surface is larger than the 43,827 B independent four-model bank and 11,933 B pooled model. Native/Mirror coordinates match exactly. MA-859 is P1; next eligible P0: MA-860.
