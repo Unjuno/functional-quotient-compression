@@ -620,3 +620,6 @@ MA-860 FAIL: held-out 270° task code .375/.394/.419 vs random rank-3 .381/.486/
 
 
 MA-862 FAIL: symmetry alignment improves mean grid accuracy only .44–1.07 pp and inconsistently changes worst-grid quality; raw-plus-permutation storage is 45,799 B vs 43,827 B raw. Native/Mirror chart exact alias. MA-863 P1; next P0 MA-864 (shared manifold plus private residual).
+
+
+MA-864 FAIL: rank-1 private residual consistently improves shared rank3 and beats rank6, but heldout accuracy .461/.475/.478 is 13.3–32.8 pp below full tune; private shared payload 41,997 B vs 11,933 B full model. Native/Mirror coefficient alias. MA-863 P1; next P0 MA-865 common-coordinate tournament.

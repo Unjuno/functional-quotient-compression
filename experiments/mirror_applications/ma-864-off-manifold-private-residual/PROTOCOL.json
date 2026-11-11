@@ -1,0 +1,123 @@
+{
+  "experiment_id": "MA-864",
+  "title": "shared task manifold with private off-manifold low-rank residual",
+  "status": "FAIL",
+  "evidence_lane": "QUALITY/STORAGE/COMPUTE",
+  "base_commit": "b6813a75",
+  "hypothesis": "A private rank-1 classifier residual added to a shared rank-3 task manifold can recover off-manifold 270-degree task quality more efficiently than simply increasing the shared basis to rank 6, while keeping actual shared-plus-private inference payload below full fine-tuning.",
+  "physical_object": "Pooled base MLP, source-task delta basis, and optional task-private rank-1 fc2 residual",
+  "mirror_coordinate": "Native task coefficients c plus a private low-rank residual; Mirror coefficients are tested against direct native coefficients",
+  "logical_multiplicity": "Few-shot adapted 270-degree task functions represented by shared basis code and task-private residual",
+  "prior_art_refs": [
+    "PA231",
+    "PA18"
+  ],
+  "controls": [
+    "no-adaptation base",
+    "learned source-delta rank-3 basis",
+    "learned source-delta rank-6 basis",
+    "random rank-3 basis",
+    "rank-3 plus private rank-1 fc2 residual",
+    "full-model few-shot fine-tuning",
+    "native coefficient decode versus Mirror code identity"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      73
+    ],
+    "selection_metric": "validation NLL after 100 support updates; base and each adaptation method learning rate selected on development only",
+    "selected_settings": {
+      "base_lr": 0.1,
+      "rank3_code_lr": 0.01,
+      "rank6_code_lr": 0.5,
+      "random3_code_lr": 0.01,
+      "private_residual_lr": 0.01,
+      "full_finetune_lr": 0.01
+    }
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      311,
+      331,
+      347
+    ],
+    "locked_before_access": true,
+    "locked_settings": {
+      "base_lr": 0.1,
+      "rank3_code_lr": 0.01,
+      "rank6_code_lr": 0.5,
+      "random3_code_lr": 0.01,
+      "private_residual_lr": 0.01,
+      "full_finetune_lr": 0.01
+    }
+  },
+  "data": {
+    "source": "sklearn Digits with scipy image rotations",
+    "split": "fixed stratified source-image 60/20/20; split seeds 420 and 421",
+    "source_tasks": [
+      "0",
+      "45",
+      "90",
+      "135",
+      "180",
+      "225 degree rotations"
+    ],
+    "new_task": "270-degree rotation",
+    "support": "32 train examples per fresh seed; query uses heldout test examples",
+    "normalization": "pixels / 16"
+  },
+  "training": {
+    "model": "MLP 64\u219232\u219210, ReLU",
+    "base": "40-epoch uniform mixture on six source rotations",
+    "source_deltas": "six 15-epoch source-task fine-tunes from the common base",
+    "shared_bases": "top rank-3 and rank-6 right singular directions of source-task deltas",
+    "private_residual": "rank-1 LoRA delta on fc2 weight (10x1 times 1x32), fitted jointly with rank-3 coordinates",
+    "support_updates": 100,
+    "optimizer": "SGD momentum .9 for source training; Adam for support adaptation"
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "base state",
+      "all selected shared basis vectors",
+      "task coefficients",
+      "private LoRA factors and any private bias",
+      "architecture and normalization metadata",
+      "full adapted model control"
+    ]
+  },
+  "compute": {
+    "report": [
+      "base/source updates/examples",
+      "support updates/examples",
+      "subspace reconstruction MACs",
+      "private residual MACs",
+      "query MACs",
+      "wall time"
+    ]
+  },
+  "success_gate": "Across fresh runs, rank-3+private residual is within 2 pp of full fine-tuning and at least 5 pp better than rank-3 alone; its shared basis plus task residual bytes are less than one full adapted model and it matches or beats rank-6 quality at lower bytes.",
+  "failure_gate": "Private residual does not recover quality at lower actual bytes than full tuning, is inferior to rank-6 at lower cost, or no quality advantage over random controls; Mirror-specific attribution fails if native coefficient decode matches exactly.",
+  "boundaries": [
+    "Small rotated Digits adaptation screen only; no language-model or broad task generalization claim.",
+    "All basis vectors and private factors are charged; no private parameter is free.",
+    "One held-out target rotation per replicate; no broad continual-learning frontier claim.",
+    "Mirror identity re-encoding is not counted as added capacity."
+  ],
+  "amendments": [
+    {
+      "id": "01",
+      "date": "2026-11-11",
+      "reason": "Development audit found PyTorch slice storage made torch.save charge rank-6 backing storage for the rank-3 view. Payload serialization now clones the selected basis before save; tests assert actual serialized rank-3 and rank-6 payloads scale separately.",
+      "fresh_data_accessed": false,
+      "model_or_training_settings_changed": false
+    },
+    {
+      "id": "02",
+      "date": "2026-11-11",
+      "reason": "After fresh evaluation, correct the full-model byte comparator to serialize only the actual standalone state and architecture, rather than including empty basis/code metadata. Also record a standalone serialized basis payload. Model/training settings and fresh-seed outcomes are unchanged.",
+      "fresh_data_accessed": true,
+      "settings_changed": false
+    }
+  ]
+}

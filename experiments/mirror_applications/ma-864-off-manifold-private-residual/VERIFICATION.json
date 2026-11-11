@@ -1,0 +1,26 @@
+{
+  "experiment_id": "MA-864",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-864-off-manifold-private-residual/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "max_private_payload_logit_difference": 0.0,
+    "rank3_rank6_actual_payload_sizes_distinct": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "fresh_seeds": [311, 331, 347]
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Target support examples are selected from the training split and the heldout test images are disjoint.",
+    "A development-only serialization bug from backing storage in a rank-3 tensor slice was corrected and tested before fresh access.",
+    "Full fine-tune bytes count only standalone weights and inference metadata; no empty basis/code objects are charged to that control.",
+    "Fresh settings locked to development-selected rates; no settings changed after fresh access."
+  ]
+}
