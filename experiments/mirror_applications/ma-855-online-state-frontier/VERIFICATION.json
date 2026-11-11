@@ -1,0 +1,21 @@
+{
+  "experiment_id": "MA-855",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-855-online-state-frontier/tests -v",
+    "passed": 4,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Fresh seeds 73/89 opened after rates froze on dev seed 29. Amendment02 changed metadata/accounting only; no tuning after fresh. CAVIA is a linear context proxy without outer-loop meta-training; broad frontier NOT ESTABLISHED."
+  ]
+}
