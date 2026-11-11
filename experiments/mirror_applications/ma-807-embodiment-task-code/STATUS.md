@@ -5,7 +5,7 @@
 - Base: `5a2cd3f2`
 - Development: seed 80701; five heldout embodiment-task pairs.
 - Fresh/audit: sealed after storage-gate miss and exact native additive Givens alias.
-- Verification: pending focused test and payload replay.
+- Verification: focused test and payload replay passed; result is committed on the dedicated branch.
 
 ## H / T / D / C / U
 
@@ -17,4 +17,4 @@
 
 ## Next action
 
-Verify and record the scoped result; continue to MA-808/next eligible P0.
+Continue to MA-809. MA-806/807 additive-Givens robot action-code variants are paused; see `docs/phase2/ROBOT_ACTION_GIVENS_VIEW_DIAGNOSTIC_2026-11-11.md`.
