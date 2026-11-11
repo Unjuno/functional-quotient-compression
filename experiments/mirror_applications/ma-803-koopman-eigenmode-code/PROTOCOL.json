@@ -1,0 +1,20 @@
+{
+  "experiment_id": "MA-803",
+  "title": "Factorized regime codes over shared Koopman eigenmodes",
+  "status": "SCREENING",
+  "base_commit": "a181098d",
+  "prior_art_refs": ["PA214", "PA74"],
+  "hypothesis": "A shared orthogonal modal basis plus compact regime codes over eigenvalues recovers held-out stable Koopman dynamics with better complete bytes and transition compute than independent dense operators, while preserving stability under extrapolation audits.",
+  "physical_object": "one shared orthogonal eigenbasis Q and a diagonal latent transition for each regime",
+  "mirror_coordinate": "lambda(a,b)=lambda0 + a*d1 + b*d2, represented per mode",
+  "regimes": {"a,b": [-1,0,1], "count": 9, "heldout": "two diagonal corners", "dimension": 8, "rollout_horizon": 48},
+  "development": {"seeds": [80301], "train_sequences_per_observed_regime": 128, "test_sequences_per_regime": 128, "tuning": "none"},
+  "fresh": {"seeds": [], "locked": true, "release_rule": "Keep fresh sealed on exact native spectral-factor alias or any stability/quality gate miss."},
+  "controls": ["independent dense per-regime latent operators", "native per-regime diagonal eigenvalue table", "shared mean eigenvalues without regime code", "Mirror factorized eigenmode coordinates", "native low-rank spectral coefficient factorization"],
+  "metrics": ["heldout one-step error", "heldout horizon-48 forecast nRMSE", "max absolute eigenvalue/spectral radius", "actual compressed bytes", "active MAC proxy per step", "coefficient decode MACs", "train/test sequences", "optimizer updates", "CPU rollout wall time"],
+  "storage": {"authority": "actual compressed NPZ inference bytes", "paid": ["orthogonal eigenbasis", "eigenvalues or spectral bases", "regime factors/IDs", "shared input map", "metadata"]},
+  "pass_gate": "Heldout horizon-48 nRMSE <=0.02, max spectral radius <1 for all registered regimes, at least 25% fewer bytes than independent dense operators, and strict frontier gain over native diagonal/spectral controls.",
+  "fail_gate": "FAIL Mirror-specific value for exact native spectral alias, instability, quality miss, storage miss, or no native-control frontier improvement.",
+  "compute": {"optimizer_updates": 0, "active_MACs": "dense shared input map plus dense Q decode plus D modal multiplies for factorized codes; dense transition for independent operator bank", "wall_time": "small CPU synthetic rollout; not throughput evidence"},
+  "boundaries": ["Synthetic stable diagonal latent systems and known nonlinear observation conjugacy; no trained S4 or Koopman eigenvalue learning claim.", "Regime factors are known and charged.", "Extrapolation audit evaluates the registered factor grid only; out-of-range codes are reported separately and are not counted as valid regimes.", "Native diagonal/eigenvalue-table and native spectral-factor controls are required."]
+}
