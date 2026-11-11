@@ -1,0 +1,13 @@
+{
+ "experiment_id":"MA-828","title":"Logical nonlinear experts from a shared KAN edge-function basis","status":"SCREENING","evidence_lane":"MECHANISM/STORAGE/EXPERTS","base_commit":"e1d00b4b","prior_art_refs":["PA221","PA222","PA01"],
+ "hypothesis":"A shared KAN parent basis with small expert Views provides multiple useful nonlinear experts at lower complete bytes and comparable active edge compute than dense MoE experts and beats native GS-KAN transforms.",
+ "world":{"input_dim":4,"expert_count":8,"hidden_width":8,"edge_basis_rank":2,"teacher":"each expert is a distinct combination of shared analytic edge parents","router":"fixed balanced expert assignment for measurement"},
+ "development":{"seed":82801,"samples_per_expert":256,"test_samples_per_expert":512,"optimizer_updates":0,"tuning":"none"},
+ "fresh":{"seeds":[],"locked_before_access":true,"release_rule":"Keep fresh sealed on exact native GS-KAN transform alias or byte/quality gate failure."},
+ "controls":["independent dense FFN expert matrices","independent sampled KAN edge functions","native GS-KAN shared parent with expert affine transforms","Mirror expert codes on shared edge basis"],
+ "metrics":["heldout expert output nRMSE","serialized inference bytes incl router and IDs","active edge evaluations","payload replay error","balanced load"],
+ "storage":{"authority":"actual NPZ bytes","paid_objects":["shared parent edge functions","expert codes","router/assignment IDs","metadata","dense matrices"]},
+ "success_gate":"heldout nRMSE <=0.02, >=25% fewer bytes than dense MoE and strict quality/runtime gain over native GS-KAN at equal physical basis.","failure_gate":"FAIL if GS-KAN exactly matches expert Views or quality/storage/compute frontier fails.",
+ "compute":{"report_examples":true,"report_updates":true,"report_active_edges":true,"report_wall_time":true,"router":"fixed balanced IDs are still paid metadata"},
+ "boundaries":["Synthetic analytic nonlinear experts only; no trained KAN/MoE model claim.","Balanced expert IDs are supplied and stored; routing learning is not evaluated.","No fresh data after native alias or gate failure."]
+}
