@@ -1,0 +1,13 @@
+{
+ "experiment_id":"MA-822","title":"Group-composition code for algebraic matrix memory","status":"SCREENING","evidence_lane":"MECHANISM/STORAGE/COMPOSITION","base_commit":"b092c5c1","prior_art_refs":["PA219","PA46"],
+ "hypothesis":"A compact Mirror group element code over a shared generator reaches the minimal faithful representation for cyclic group composition, preserving heldout products with fewer bytes and compute than independent matrix memories and native group indices.",
+ "world":{"group":"cyclic C16","representation_dim":2,"generator":"rotation by 2pi/16","memory_count":16,"heldout_products":32,"composition":"multiply group elements by adding codes mod 16; compare decoded 2x2 action matrices"},
+ "development":{"seed":82201,"optimizer_updates":0,"tuning":"none"},
+ "fresh":{"seeds":[],"locked_before_access":true,"release_rule":"Keep fresh sealed after exact native group-code alias."},
+ "controls":["independent 2x2 matrix per element","shared generator plus Mirror integer code","native cyclic group element index and matrix power","full matrix table upper bound"],
+ "metrics":["heldout composition matrix nRMSE","complete serialized bytes","composition compute proxy","payload reconstruction error","orthogonality/determinant checks"],
+ "storage":{"authority":"actual NPZ bytes","paid_objects":["generator matrix","element codes","modulus","metadata","independent matrices"]},
+ "success_gate":"composition nRMSE <=1e-6, at least 25% fewer bytes than independent bank, and strict quality/byte/compute advantage over native group-index control.","failure_gate":"FAIL if native group representation exactly matches code or compute/storage gate does not improve.",
+ "compute":{"report_active_ops":true,"report_wall_time":true,"report_optimizer_updates":true,"operations":"report table lookup versus integer modular addition and 2x2 matrix multiplication separately"},
+ "boundaries":["Exact finite cyclic group toy only; no learned memory or neural-network claim.","The group law and order are known; this is not group discovery.","No fresh data after exact native group-code alias."]
+}
