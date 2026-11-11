@@ -31,3 +31,19 @@ def test_target_rope_reapplied_to_position_free_content():
     content=rope_transform(source_key,source,inverse=True)
     target_key=rope_transform(content,target)
     assert np.max(np.abs(rope_transform(target_key,target,inverse=True)-x)) < 1e-12
+
+
+def test_serialized_payload_sizes_are_actual_and_deterministic():
+    rng=np.random.default_rng(41)
+    maps=rng.normal(size=(6,3,4))
+    flat=maps.reshape(6,-1)
+    mean=flat.mean(axis=0)
+    _,_,basis=np.linalg.svd(flat-mean,full_matrices=False)
+    refs=[(i,0,i%2,i,0) for i in range(6)]
+    item={'pair':('src','tgt'),'maps':maps,'refs':refs}
+    full,shared=mod.serialize_family_payloads([item],mean,basis,2)
+    assert isinstance(full,bytes) and isinstance(shared,bytes)
+    assert len(full)>len(shared)>0
+    assert mod.serialize_family([item],mean,basis,2)==(len(full),len(shared))
+    assert full==mod.serialize_family_payloads([item],mean,basis,2)[0]
+    assert shared==mod.serialize_family_payloads([item],mean,basis,2)[1]

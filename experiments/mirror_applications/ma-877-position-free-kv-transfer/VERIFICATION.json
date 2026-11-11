@@ -1,41 +1,54 @@
 {
+  "commit": "pending",
   "experiment_id": "MA-877",
-  "status": "PARTIAL_VERIFICATION",
-  "commit": "91577255f922965781d4ab814790aaae09a6793b",
-  "protocol_freeze_commit": "79ff15fc",
-  "fresh_settings_commit": "881b8992",
-  "tests": {
-    "command": "python -m pytest -q experiments/mirror_applications/ma-877-position-free-kv-transfer/tests",
-    "passed_before_fresh": 3,
-    "failed": 0,
-    "scope": "RoPE inverse/reapply algebra and target-specific RoPE reapplication; final serializer-buffer test was added after fresh and could not run."
-  },
-  "rope_cache_roundtrip": {
-    "checked": true,
-    "pythia_gpt_neox_max_abs_error": 3.552713678800501e-15,
-    "smollm2_llama_max_abs_error": 8.881784197001252e-16
-  },
-  "serialization": {
-    "actual_payload_lengths_measured": true,
-    "full_bytes": 2996100,
-    "rank32_shared_bytes": 573060,
-    "roundtrip_checked": false,
-    "byte_buffer_test_pending": true
-  },
-  "metric_replay": {
-    "checked": false,
-    "max_difference": null,
-    "reason": "Fresh outputs were produced, but the execution environment became unavailable before deterministic replay and artifact hashing."
-  },
-  "fresh_splits_frozen_before_evaluation": true,
   "fresh_seeds": [
     983,
     997,
     1009
   ],
+  "fresh_settings_commit": "881b8992",
+  "fresh_split_integrity_checked": true,
+  "metric_replay": {
+    "checked": true,
+    "comparisons": 27,
+    "max_difference_vs_retained_summary": 0.020511809758405164,
+    "numeric_values_match": false,
+    "quality_gate_verdicts_match": true
+  },
   "notes": [
-    "Rank32 was frozen after development and before fresh evaluation.",
-    "All three fresh worlds missed the registered quality gates; storage passed.",
-    "Do not treat the reported fresh values as replay-verified."
-  ]
+    "Rank32 and disjoint prompt IDs were frozen before fresh evaluation.",
+    "Prompt identities and actual serialized payload byte counts replay exactly.",
+    "NLL values differ slightly across CPU numerical runs; only the quality-gate verdict is claimed as replicated.",
+    "Quality gate failed in all three fresh worlds; storage gate passed.",
+    "Native PCA map coding is a non-Mirror shared-basis control."
+  ],
+  "protocol_freeze_commit": "79ff15fc",
+  "rope_cache_roundtrip": {
+    "checked": true,
+    "max_abs_error_by_model": {
+      "EleutherAI/pythia-70m-deduped": 8.881784197001252e-16,
+      "HuggingFaceTB/SmolLM2-135M": 4.440892098500626e-16
+    }
+  },
+  "runtime_versions": {
+    "numpy": "2.3.5",
+    "torch": "2.14.1+cpu"
+  },
+  "serialization": {
+    "actual_payload_lengths_measured": true,
+    "byte_exact": true,
+    "deterministic_buffer_checked": true,
+    "full_serialized_bytes": 2996165,
+    "marginal_full_map_bytes_excluding_header_pair_name": 2996100,
+    "marginal_rank32_basis_and_codes_excluding_header_pair_name": 573060,
+    "rank32_shared_serialized_bytes": 573125,
+    "roundtrip_checked": false
+  },
+  "status": "REPLAYED_GATE_VERDICT",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-877-position-free-kv-transfer/tests",
+    "failed": 0,
+    "passed": 4,
+    "scope": "RoPE inverse/reapply algebra and target-specific RoPE reapplication"
+  }
 }

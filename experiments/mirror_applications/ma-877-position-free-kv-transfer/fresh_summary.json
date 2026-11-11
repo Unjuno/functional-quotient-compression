@@ -1,26 +1,59 @@
 {
+  "calibration_prompts_per_seed": 12,
+  "compute_proxy": {
+    "per_token_map_application_macs": 748800,
+    "rank32_map_reconstruction_macs": 23961600
+  },
+  "cpu_mean_seconds": {
+    "basis_fit": 0.162552458,
+    "calibration": 2.7435127693,
+    "full_map_translation_per_prompt": 0.0132505073,
+    "rank32_translation_per_prompt": 0.0129497774,
+    "source_prefill_per_prompt": 0.0401835435,
+    "target_native_prefill_per_prompt": 0.1042691173,
+    "target_suffix_per_prompt": 0.055483977
+  },
   "experiment_id": "MA-877",
-  "status": "observed fresh result; replay not completed",
-  "selected_rank": 32,
   "fresh_seeds": [
     983,
     997,
     1009
   ],
-  "test_prompts_per_seed": 16,
-  "calibration_prompts_per_seed": 12,
+  "mean": {
+    "direct_rope_delta": 2.3198254292,
+    "full_serialized_payload_bytes": 2996165,
+    "marginal_full_map_bytes_excluding_header_pair_name": 2996100,
+    "marginal_rank32_shared_bytes_excluding_header_pair_name": 573060,
+    "position_free_full_delta": 1.556898118,
+    "rank32_delta": 14.1339400345,
+    "rank32_minus_full": 12.577042,
+    "rank32_serialized_payload_bytes": 573125,
+    "relative_cache_mse_full": 0.3317660153,
+    "relative_cache_mse_rank32": 818.7412820542,
+    "storage_reduction_fraction": 0.8087,
+    "storage_reduction_fraction_actual_serialized": 0.8087138058151003
+  },
+  "replay_note": "A second execution reproduced prompt identities and byte counts exactly. Per-seed NLL values varied by at most 0.02051181 nat; all frozen per-seed gate verdicts were unchanged. See VERIFICATION.json.",
   "results": [
     {
-      "seed": 983,
-      "native_nll": 3.0853725541,
       "direct_rope_delta": 1.474066494,
+      "full_serialized_payload_bytes": 2996165,
+      "long_subset_nll": {
+        "full": 1.3591153026,
+        "native": 0.3530750722,
+        "rank32": 15.7741436958
+      },
+      "marginal_full_map_bytes_excluding_header_pair_name": 2996100,
+      "marginal_rank32_shared_bytes_excluding_header_pair_name": 573060,
+      "native_nll": 3.0853725541,
       "position_free_full_delta": 0.8245393541,
+      "positions_beyond_64": 2,
       "rank32_delta": 12.3548641335,
       "rank32_minus_full": 11.5303247795,
-      "full_bytes": 2996100,
-      "rank32_bytes": 573060,
+      "rank32_serialized_payload_bytes": 573125,
       "relative_cache_mse_full": 0.3455894844,
       "relative_cache_mse_rank32": 725.6401256231,
+      "seed": 983,
       "test_token_lengths": [
         40,
         28,
@@ -38,25 +71,27 @@
         61,
         16,
         79
-      ],
-      "positions_beyond_64": 2,
-      "long_subset_nll": {
-        "native": 0.3530750722,
-        "full": 1.3591153026,
-        "rank32": 15.7741436958
-      }
+      ]
     },
     {
-      "seed": 997,
-      "native_nll": 1.9113041228,
       "direct_rope_delta": 3.3209366808,
+      "full_serialized_payload_bytes": 2996165,
+      "long_subset_nll": {
+        "full": 2.6109427214,
+        "native": 0.7555150986,
+        "rank32": 21.2891960144
+      },
+      "marginal_full_map_bytes_excluding_header_pair_name": 2996100,
+      "marginal_rank32_shared_bytes_excluding_header_pair_name": 573060,
+      "native_nll": 1.9113041228,
       "position_free_full_delta": 2.9745628098,
+      "positions_beyond_64": 2,
       "rank32_delta": 16.4400197202,
       "rank32_minus_full": 13.4654569101,
-      "full_bytes": 2996100,
-      "rank32_bytes": 573060,
+      "rank32_serialized_payload_bytes": 573125,
       "relative_cache_mse_full": 0.3196905857,
       "relative_cache_mse_rank32": 935.8041536983,
+      "seed": 997,
       "test_token_lengths": [
         91,
         18,
@@ -74,25 +109,27 @@
         46,
         59,
         29
-      ],
-      "positions_beyond_64": 2,
-      "long_subset_nll": {
-        "native": 0.7555150986,
-        "full": 2.6109427214,
-        "rank32": 21.2891960144
-      }
+      ]
     },
     {
-      "seed": 1009,
-      "native_nll": 2.8498188518,
       "direct_rope_delta": 2.1644731127,
+      "full_serialized_payload_bytes": 2996165,
+      "long_subset_nll": {
+        "full": 1.5991210639,
+        "native": 1.3041611016,
+        "rank32": 18.7298965454
+      },
+      "marginal_full_map_bytes_excluding_header_pair_name": 2996100,
+      "marginal_rank32_shared_bytes_excluding_header_pair_name": 573060,
+      "native_nll": 2.8498188518,
       "position_free_full_delta": 0.8715921901,
+      "positions_beyond_64": 4,
       "rank32_delta": 13.6069362499,
       "rank32_minus_full": 12.7353441319,
-      "full_bytes": 2996100,
-      "rank32_bytes": 573060,
+      "rank32_serialized_payload_bytes": 573125,
       "relative_cache_mse_full": 0.330017976,
       "relative_cache_mse_rank32": 794.7795668411,
+      "seed": 1009,
       "test_token_lengths": [
         71,
         19,
@@ -110,38 +147,11 @@
         40,
         29,
         38
-      ],
-      "positions_beyond_64": 4,
-      "long_subset_nll": {
-        "native": 1.3041611016,
-        "full": 1.5991210639,
-        "rank32": 18.7298965454
-      }
+      ]
     }
   ],
-  "mean": {
-    "direct_rope_delta": 2.3198254292,
-    "position_free_full_delta": 1.556898118,
-    "rank32_delta": 14.1339400345,
-    "rank32_minus_full": 12.577042,
-    "full_bytes": 2996100,
-    "rank32_bytes": 573060,
-    "storage_reduction_fraction": 0.8087,
-    "relative_cache_mse_full": 0.3317660153,
-    "relative_cache_mse_rank32": 818.7412820542
-  },
-  "cpu_mean_seconds": {
-    "calibration": 2.7435127693,
-    "basis_fit": 0.162552458,
-    "source_prefill_per_prompt": 0.0401835435,
-    "target_native_prefill_per_prompt": 0.1042691173,
-    "full_map_translation_per_prompt": 0.0132505073,
-    "rank32_translation_per_prompt": 0.0129497774,
-    "target_suffix_per_prompt": 0.055483977
-  },
-  "compute_proxy": {
-    "rank32_map_reconstruction_macs": 23961600,
-    "per_token_map_application_macs": 748800
-  },
-  "replay_note": "Metrics and prompt token lengths were captured in the fresh run. Local replay and full per-example output could not be persisted after execution environment became unavailable."
+  "selected_rank": 32,
+  "serialization_note": "Authoritative serialized family payload includes 8-byte header, model-pair name and role metadata: 2,996,165 B independent and 573,125 B rank32. Marginal map counts exclude the 65 B header/pair-name overhead.",
+  "status": "observed fresh result; replay not completed",
+  "test_prompts_per_seed": 16
 }
