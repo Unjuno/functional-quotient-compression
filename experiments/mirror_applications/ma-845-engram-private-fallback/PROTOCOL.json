@@ -1,0 +1,70 @@
+{
+  "experiment_id": "MA-845",
+  "title": "Sequential shared engram codes with private edit fallback",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/CONTINUAL_MEMORY",
+  "base_commit": "76c8a771",
+  "prior_art_refs": [
+    "PA227",
+    "PA138",
+    "PA139"
+  ],
+  "hypothesis": "Allocating a compact shared-basis code when projection residual <=0.02 and a private edit otherwise will preserve sequential memory retrieval while reducing total bytes versus storing every trace, with a lower fallback rate than native codebook growth.",
+  "world": {
+    "seed": 84501,
+    "memories": 24,
+    "trace_dim": 32,
+    "shared_rank": 4,
+    "sequence": "16 in-span memories followed by 8 out-of-span exception memories",
+    "private_fallback_threshold": 0.02
+  },
+  "development": {
+    "seed": 84501,
+    "optimizer_updates": 0,
+    "tuning": "none; fixed rank4 basis from first 8 examples and frozen relative residual threshold .02"
+  },
+  "fresh": {
+    "seeds": [],
+    "locked_before_access": true,
+    "release_rule": "Keep fresh sealed after exact native fallback alias or quality/byte gate miss."
+  },
+  "controls": [
+    "independent full trace table",
+    "SERAC/GRACE-style explicit key-value edit memory",
+    "shared code with no private fallback",
+    "Mirror code then private full-vector fallback",
+    "native low-rank code plus identical fallback"
+  ],
+  "metrics": [
+    "sequential retrieval nRMSE",
+    "maximum per-memory nRMSE",
+    "specificity top1",
+    "fallback rate/count",
+    "actual serialized payload bytes",
+    "bytes per memory",
+    "write projection MACs",
+    "query decode MACs",
+    "optimizer updates",
+    "wall time",
+    "payload replay error"
+  ],
+  "storage": {
+    "authority": "actual compressed NPZ bytes",
+    "paid_objects": [
+      "shared basis",
+      "per-memory codes",
+      "private fallback vectors",
+      "keys/IDs",
+      "fallback flags",
+      "Fisher metric and metadata"
+    ]
+  },
+  "success_gate": "PASS only if retrieval nRMSE <=0.02, specificity >=0.99, total bytes >=25% below independent and SERAC/GRACE controls, and Mirror strictly improves fallback rate or bytes over native low-rank fallback.",
+  "failure_gate": "FAIL if quality/byte gate misses or native low-rank fallback exactly matches Mirror without advantage.",
+  "boundaries": [
+    "Synthetic vector memory only; no AI Engram/SERAC/GRACE replication or cognitive claim.",
+    "The in-span then exception order is constructed; no natural fallback rate is inferred.",
+    "All private fallback vectors and keys are charged.",
+    "Fresh seeds remain sealed after native alias or gate miss."
+  ]
+}
