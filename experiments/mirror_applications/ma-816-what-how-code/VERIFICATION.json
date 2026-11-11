@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-816",
+  "commit": "PENDING",
+  "tests": {
+    "command": "pytest -q experiments/mirror_applications/ma-816-what-how-code/tests",
+    "passed": null,
+    "failed": null
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "All serialized operator banks replay exactly.",
+    "Shared-only reaches nRMSE .00947 at 723 B; Mirror/native factorization reach zero error at 1,724/1,728 B.",
+    "Exact native tensor-factorization alias; fresh remains sealed."
+  ]
+}
