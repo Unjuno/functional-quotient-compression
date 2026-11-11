@@ -1,0 +1,13 @@
+{
+ "experiment_id":"MA-821","title":"Task-demanded rank allocation in matrix memory","status":"SCREENING","evidence_lane":"MECHANISM/CAPACITY/STORAGE","base_commit":"63a54114","prior_art_refs":["PA219"],
+ "hypothesis":"Per-task Mirror rank coordinates allocate only the effective rank demanded by each group-composition task, preserving heldout composition accuracy with fewer total bytes than a fixed-width matrix memory and outperforming native rank truncation.",
+ "world":{"matrix_dim":16,"tasks":8,"ranks_by_task":[1,1,2,2,4,4,6,8],"task_composition":"multiply two memory matrices and apply to heldout vectors","teacher":"orthogonal rank-r perturbations around a shared identity memory"},
+ "development":{"seed":82101,"train_pairs_per_task":64,"test_pairs_per_task":256,"optimizer_updates":0,"tuning":"none"},
+ "fresh":{"seeds":[],"locked_before_access":true,"release_rule":"Keep fresh sealed if native rank truncation matches or fixed/adaptive byte-quality gates fail."},
+ "controls":["independent full matrices","shared fixed-rank-8 memory","Mirror per-task effective-rank codes","native per-task SVD rank truncation"],
+ "metrics":["heldout composed-memory nRMSE","effective rank","actual full serialized bytes","composition error","payload replay"],
+ "storage":{"authority":"actual compressed NPZ inference payload bytes","paid_objects":["shared memory center","rank basis","per-task coefficients","rank indices","metadata","independent matrices"]},
+ "success_gate":"composition nRMSE <=0.02, at least 25% fewer full bytes than fixed-rank memory, and strict quality/byte improvement over native rank truncation.","failure_gate":"FAIL if native truncation exactly matches rank-code function or full byte frontier does not improve.",
+ "compute":{"report_examples":true,"report_optimizer_updates":true,"report_active_macs":true,"report_wall_time":true,"composition":"report two-memory matrix composition MACs"},
+ "boundaries":["Synthetic group-composition matrices only; no learned matrix memory or task-accuracy claim.","Task ranks are prescribed by construction; rank inference is not tested.","No fresh worlds after native control alias or gate failure."]
+}
