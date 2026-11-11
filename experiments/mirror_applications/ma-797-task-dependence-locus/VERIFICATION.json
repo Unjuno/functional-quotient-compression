@@ -1,0 +1,13 @@
+{
+  "experiment_id": "MA-797",
+  "commit": "PENDING",
+  "tests": {"command": "pytest -q experiments/mirror_applications/ma-797-task-dependence-locus/tests", "passed": 1, "failed": 0},
+  "serialization": {"roundtrip_checked": true, "byte_exact": true},
+  "metric_replay": {"checked": true, "max_difference": 0.0},
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Only -1 and 0 task factors were used to recover locus updates; all +1 tasks stayed held out until evaluation.",
+    "All serialized payloads decode to their evaluated stage matrices with maximum absolute error 0.",
+    "Mirror and native rank-1 controls have identical payload hashes and metrics; fresh stayed sealed."
+  ]
+}
