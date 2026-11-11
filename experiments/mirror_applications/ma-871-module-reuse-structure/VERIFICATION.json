@@ -1,0 +1,35 @@
+{
+  "experiment_id": "MA-871",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-871-module-reuse-structure/tests && python experiments/mirror_applications/ma-871-module-reuse-structure/verify_results.py",
+    "passed": 4,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "charged_payloads_at_six_heldout_tasks": {
+      "mirror_and_native_pca": 408,
+      "independent": 488,
+      "nearest_training_task_codebook": 686,
+      "pooled": 328,
+      "per_task_methods_include_shared_module_bank_and_metadata": true
+    }
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_seeds": [
+    907,
+    919,
+    937
+  ],
+  "notes": [
+    "Three fresh worlds use new module functions and new rank-2 task composition rules.",
+    "Native PCA and Mirror rank-2 coordinates are exactly functionally equivalent.",
+    "Timing values are host-local and excluded from deterministic replay comparisons."
+  ]
+}
