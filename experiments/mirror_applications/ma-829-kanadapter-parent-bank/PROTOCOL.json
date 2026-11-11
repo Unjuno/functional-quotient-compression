@@ -1,0 +1,13 @@
+{
+ "experiment_id":"MA-829","title":"Shared Group-Rational KAN parents for adapter-bank compression","status":"SCREENING","evidence_lane":"MECHANISM/STORAGE/ADAPTERS","base_commit":"6fed79ed","prior_art_refs":["PA224"],
+ "hypothesis":"A shared group-rational parent basis with compact task/domain Views retains heldout adapter outputs while reducing complete bytes versus independent KanAdapter modules and improves on native shared-parent coefficient controls.",
+ "world":{"input_dim":8,"tasks":8,"basis_rank":4,"adapter":"parallel residual scalar functions composed over shared rational basis features","heldout_tasks":2,"teacher":"task adapter coefficients generated from fixed shared rational parents"},
+ "development":{"seed":82901,"support_examples_per_task":128,"test_examples_per_task":256,"optimizer_updates":0,"tuning":"none"},
+ "fresh":{"seeds":[],"locked_before_access":true,"release_rule":"Keep fresh sealed after native coefficient alias or failure of complete-byte/quality gate."},
+ "controls":["independent per-task sampled adapter functions","native shared rational basis with task coefficients","Mirror task/domain Views","frozen shared parent without task code"],
+ "metrics":["heldout adapter output nRMSE","complete serialized bytes","active basis evaluations","payload replay error","task retention"],
+ "storage":{"authority":"actual compressed NPZ bytes","paid_objects":["rational parent parameters","task coefficients","task IDs","adapter metadata","independent sampled functions"]},
+ "success_gate":"heldout nRMSE <=0.02, at least 25% fewer complete bytes than independent KanAdapter bank, strict gain over native shared-parent coefficients, and no old-task retention loss.","failure_gate":"FAIL if native shared-parent coefficients match Mirror or full storage gate misses.",
+ "compute":{"report_examples":true,"report_updates":true,"report_active_basis_evaluations":true,"report_wall_time":true},
+ "boundaries":["Synthetic analytic adapter functions only; no pretrained speech or KanAdapter model reproduction.","Heldout task coefficients remain in inference payload; no task-code inference is tested.","No fresh runs after exact native alias or gate failure."]
+}
