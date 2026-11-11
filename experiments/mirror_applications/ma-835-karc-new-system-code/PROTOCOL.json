@@ -1,0 +1,26 @@
+{
+  "experiment_id": "MA-835",
+  "title": "Few-shot code adaptation for a new KARC dynamical system",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/CONTINUAL_DYNAMICS",
+  "base_commit": "6e9572a2",
+  "prior_art_refs": ["PA223"],
+  "hypothesis": "A compact system-specific Mirror coordinate over a frozen KARC feature bank will predict a newly encountered synthetic dynamical system with at least 25% fewer complete inference bytes than an independently stored readout, without worse heldout rollout error, and will improve on the native readout-adaptation control.",
+  "world": {
+    "systems": 8,
+    "state_dim": 4,
+    "horizon": 24,
+    "support_transitions_per_system": 48,
+    "heldout_rollouts_per_system": 32,
+    "frozen_features": "constant, state coordinates, quadratic cross terms, and fixed Fourier features",
+    "task_shift": "system-specific coefficients; two systems include a nonlinear component outside the frozen bank"
+  },
+  "development": {"seed": 83501, "optimizer_updates": 0, "tuning": "none; closed-form support least squares"},
+  "fresh": {"seeds": [], "locked_before_access": true, "release_rule": "Do not open fresh seeds after exact native readout alias or a strict gate miss."},
+  "controls": ["shared frozen feature bank with no system code", "independent full readout per system", "native KARC closed-form system-specific readout", "Mirror-coded readout over the same frozen bank", "basis-growth control that stores private residual features where required"],
+  "metrics": ["heldout rollout nRMSE", "complete serialized payload bytes", "active feature evaluations", "support transitions", "optimizer updates", "isolated inference wall clock", "basis growth events", "payload replay error"],
+  "storage": {"authority": "actual compressed NPZ bytes", "paid_objects": ["frozen basis definitions", "system codes/readouts", "system identifiers", "private residual basis and coefficients", "metadata"]},
+  "success_gate": "PASS only if the Mirror payload preserves rollout nRMSE <=0.02, uses at least 25% fewer bytes than independent readouts, and is strictly better in bytes/quality than native closed-form readout adaptation.",
+  "failure_gate": "FAIL if native readout adaptation exactly aliases Mirror, the shared basis misses quality, or the byte/quality gate is missed.",
+  "boundaries": ["Synthetic four-dimensional systems only; not trained KARC or real continual-learning evidence.", "System-specific support-derived readouts are stored at inference, so this does not test zero-shot unseen-system generalization.", "Basis-growth residuals are counted as persistent bytes.", "No fresh evaluation after native alias or gate miss."]
+}
