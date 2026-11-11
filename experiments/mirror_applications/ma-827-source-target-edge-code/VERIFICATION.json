@@ -1,0 +1,22 @@
+{
+  "experiment_id": "MA-827",
+  "commit": "PENDING",
+  "tests": {
+    "command": "pytest -q experiments/mirror_applications/ma-827-source-target-edge-code/tests",
+    "passed": null,
+    "failed": null
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "All edge functions are reconstructed from serialized state.",
+    "Endpoint factor payload is 1,708 B vs direct native edge coefficients at 1,285 B; all require same parent evaluation count. Fresh sealed."
+  ]
+}

@@ -1,0 +1,13 @@
+{
+ "experiment_id":"MA-827","title":"Factor source-node × target-node edge-function codes","status":"SCREENING","evidence_lane":"MECHANISM/STORAGE/EDGE_FACTOR","base_commit":"aab89aeb","prior_art_refs":["PA222"],
+ "hypothesis":"Factorizing edge-function identity into source and target node codes reconstructs heldout edge functions with fewer bytes than independent edge transforms and improves on native low-rank GS-KAN coefficients.",
+ "world":{"node_count":10,"edge_count":32,"parent":"sin(x)+0.2x^3","rank":2,"teacher":"edge affine scale is source_code*target_code; edge shift is source_bias+target_bias","heldout":"eight source-target pairs withheld from error scoring; codes remain stored"},
+ "development":{"seed":82701,"samples_per_edge":128,"test_samples_per_edge":256,"optimizer_updates":0,"tuning":"none"},
+ "fresh":{"seeds":[],"locked_before_access":true,"release_rule":"Keep fresh sealed after native low-rank factor alias or storage/quality gate miss."},
+ "controls":["independent sampled edge functions","native rank-2 GS-KAN edge coefficient matrix","Mirror source×target factor codes","source-only and target-only codes"],
+ "metrics":["heldout edge function nRMSE","actual complete bytes","parent evaluations","payload replay error"],
+ "storage":{"authority":"actual compressed NPZ bytes","paid_objects":["parent function","source and target codes","edge indices","coefficients","metadata","independent edge samples"]},
+ "success_gate":"heldout nRMSE <=0.02, >=25% fewer bytes than independent edges and strict quality/byte gain over native rank-2 coefficient matrix.","failure_gate":"FAIL if native coefficient factorization matches Mirror or storage/quality gate misses.",
+ "compute":{"report_samples":true,"report_optimizer_updates":true,"report_parent_evaluations":true,"report_wall_time":true},
+ "boundaries":["Synthetic analytic scalar edge functions only; no KAN model claim.","Heldout combinations use stored source/target codes; no unseen-node inference test.","No fresh run after exact native factor alias or gate failure."]
+}
