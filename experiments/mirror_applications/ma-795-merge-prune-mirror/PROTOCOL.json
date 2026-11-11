@@ -1,0 +1,18 @@
+{
+  "experiment_id": "MA-795",
+  "title": "Merge/prune overcomplete experts, then recover logical roles with compact Views",
+  "status": "SCREENING",
+  "base_commit": "c4990b6d",
+  "prior_art_refs": ["PA203", "PA209"],
+  "hypothesis": "After a routing-weighted merge/prune identifies a compact physical expert pool, rank-1 role Views recover removed distinctions with lower complete bytes than independent experts and materially lower heldout error than merge-only, prune-only, and small-from-start controls.",
+  "synthetic_task": {"experts": 8, "input_dim": 12, "output_dim": 12, "clusters": 2, "rank": 1, "train_examples_per_role": 128, "test_examples_per_role": 128, "importance": "cluster-skewed routing frequencies; one low-frequency expert in each cluster has a larger private residual"},
+  "development": {"seeds": [79501], "selection": "fixed rank-1 residual view; no hyperparameter sweep"},
+  "fresh": {"seeds": [], "locked_before_access": true, "release_rule": "Do not open fresh after exact native low-rank alias or failure of the development quality/storage gate."},
+  "controls": ["independent full expert set", "prune-only top-2 important experts with nearest retained routing", "merge-only routing-weighted cluster experts", "two-expert small-from-start cluster means", "merged core plus learned rank-1 logical View", "merged core plus native rank-1 residual factorization"],
+  "primary_metrics": ["test routed output nRMSE", "per-role output nRMSE", "actual serialized NPZ inference bytes", "active MAC proxy", "reconstruction MAC proxy", "examples", "optimizer updates", "CPU operator-evaluation wall time"],
+  "storage": {"authority": "actual compressed NPZ payload bytes", "paid": ["physical expert matrices", "View or native low-rank factors", "router centroids", "role maps", "importance weights", "basis", "metadata"]},
+  "pass_gate": "Mirror test nRMSE <=0.02; at least 25% fewer complete bytes than independent; strictly lower heldout error than merge-only and prune-only at no more active compute; and no exact native-control alias.",
+  "fail_gate": "FAIL Mirror-specific claim if native low-rank exactly aliases Mirror, quality gate misses, bytes savings <25%, or simple merge/prune control matches quality with lower bytes/compute.",
+  "compute": {"optimizer_updates": 0, "active_macs_per_example": "count dense expert apply plus router score proxy; report reconstruction separately", "wall_time": "single small CPU operator-evaluation calibration; not throughput evidence"},
+  "boundaries": ["Synthetic Gaussian inputs and linear experts only; no trained MoE, language-model, GPU, or general REAP/MC-SMoE claim.", "Small-from-start control is represented by the same two cluster means without overcomplete teacher exposure; this screen does not compare training trajectories.", "Mirror View is rank-1 residual factorization; exact equality to its native control ends attribution testing."]
+}
