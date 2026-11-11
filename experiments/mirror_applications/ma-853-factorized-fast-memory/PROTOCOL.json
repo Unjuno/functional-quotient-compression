@@ -1,0 +1,20 @@
+{
+  "experiment_id": "MA-853",
+  "title": "Factorized key-role × value-role fast memory",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/COMPOSITION",
+  "base_commit": "0b206c71",
+  "hypothesis": "Separate role codes for fast-memory addresses and stored functions can represent useful heldout pairings with less serialized state than an independent matrix per pair, while matching native factor and MAP/Hadamard controls.",
+  "physical_object": "Associative linear map for each key-role/value-role pair",
+  "mirror_coordinate": "Pair of discrete key-role and value-role addresses",
+  "logical_multiplicity": "Compositions of 4 key roles × 4 value roles",
+  "prior_art_refs": ["PA230", "PA11"],
+  "controls": ["independent full matrix per pair", "native shared key/value role factors", "Mirror pair of role coordinates", "MAP/Hadamard bound vector per pair"],
+  "development": {"worlds_or_seeds": [31], "selection_metric": "heldout pair retrieval nRMSE, complete serialized bytes, active MACs"},
+  "fresh": {"worlds_or_seeds": [61, 79], "locked_before_access": true},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["role bases or full pair maps", "pair indices/codes", "MAP/Hadamard binding vectors", "metadata"]},
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true},
+  "success_gate": "Fresh heldout pair nRMSE <=1e-6, at least 25% fewer bytes than full matrix bank, and no higher MACs than full bank. Mirror-specific value requires beating native role factors and VSA controls.",
+  "failure_gate": "Quality gate missed, byte reduction <25%, or native role factor/MAP-Hadamard controls match quality with equal/better bytes and compute.",
+  "boundaries": ["Synthetic role composition only; role factors are provided from training-role examples, no learned neural DeltaNet claim.", "All 16 pair combinations are enumerated for control payloads; heldout checkerboard pairs are scored separately.", "Fresh seeds 61/79 are not tuned."]
+}

@@ -9,7 +9,7 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 - P0: **630** (358 completed; 271 UNTESTED; 1 SCREENING; 5 NOT ESTABLISHED)
 - P1: **422** (17 completed; 405 UNTESTED)
 - P2: **103** (103 UNTESTED)
-- Current MA statuses: **315 FAIL, 5 NOT ESTABLISHED, 60 PROMISING, 1 SCREENING, 774 UNTESTED**
+- Current MA statuses: **316 FAIL, 5 NOT ESTABLISHED, 60 PROMISING, 1 SCREENING, 773 UNTESTED**
 - 47 baseline experiment directories remain present; verified external outcomes are linked to their dedicated branches in the registry and claim ledger.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). See the current Next candidate section for the live queue.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. see the current Next candidate section.
@@ -211,3 +211,6 @@ MA-851 is a scoped synthetic FAIL for Mirror attribution with a positive native 
 
 
 MA-852 is a scoped synthetic FAIL for Mirror attribution: native scalar task gate and Mirror both have zero error at 8,788 B with identical compute; redundant full per-task lambda-I operators cost 16,946 B. Fixed scalar is smaller but misses retention (fresh nRMSE .346/.263). Next eligible P0: MA-853.
+
+
+MA-853 is a scoped synthetic FAIL for Mirror attribution: 4×4 role functions have zero heldout error for native/Mirror/MAP-Hadamard; native and Mirror are both 1,864 B/32,768 query MACs, full pair matrices 66,122 B/524,288, MAP/Hadamard 3,400 B/33,024. Next eligible P0: MA-855.
