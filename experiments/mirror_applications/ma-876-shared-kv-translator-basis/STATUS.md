@@ -3,11 +3,11 @@
 - Status: FAIL (quality gate); translator storage compression passed narrowly scoped byte gates
 - Branch: `research/ma-876-shared-kv-translator-basis-20261111`
 - Base commit: `df10d26a`
-- Last verified commit: pending
+- Last verified commit: `73e867fe`
 - Development complete: yes
 - Fresh/audit opened: yes; rank32 and disjoint prompt partitions frozen before evaluation
-- Results committed: pending
-- Verification committed: pending
+- Results committed: `73e867fe`
+- Verification committed: follow-up commit (pending)
 
 ## Next action
 
