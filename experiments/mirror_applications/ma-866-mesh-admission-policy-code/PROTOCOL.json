@@ -1,0 +1,76 @@
+{
+  "experiment_id": "MA-866",
+  "title": "typed observation admission policy as a logical query code",
+  "status": "FAIL",
+  "evidence_lane": "QUALITY/COMMUNICATION/STORAGE/LATENCY",
+  "base_commit": "3b08b52c",
+  "hypothesis": "A small per-query admission code can select one of 32 independent private sensors for eight logical queries, reducing transmitted messages and policy bytes versus centralized all-observation inference, while native type-based routing remains a required mirror-specific control.",
+  "physical_object": "Thirty-two private scalar observation agents, four redundant agents per latent coordinate",
+  "mirror_coordinate": "One uint8 agent address per query, stored in an eight-query policy table",
+  "logical_multiplicity": "Eight coordinate-query functions served by one shared private-agent population",
+  "prior_art_refs": [
+    "PA233"
+  ],
+  "controls": [
+    "centralized exact posterior using all 32 typed observations",
+    "best-reliability one-agent admission per query",
+    "random one-agent admission",
+    "native type-and-reliability routing rule",
+    "Mirror query-to-agent address table"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      89
+    ],
+    "selection_metric": "no hyperparameter selection; fixed one-agent budget and fixed reliability schedule"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      503,
+      521,
+      547
+    ],
+    "heldout_latent_draws_per_seed": 4096,
+    "locked_before_access": true
+  },
+  "world": {
+    "latent": "z~N(0,I_8)",
+    "agents": 32,
+    "sensor_types": "4 agents per coordinate; fixed noise standard deviations [0.25,0.5,0.75,1.0] within each coordinate",
+    "messages": "only agent id, declared coordinate type, and one float32 noisy observation; no weights, gradients, hidden states, or policy internals are shared",
+    "queries": "one target coordinate per query, eight total"
+  },
+  "inference": {
+    "centralized": "Gaussian posterior mean from all four observations per queried coordinate",
+    "single_agent": "best or random admitted agent; posterior mean using its public noise class",
+    "latency": "one-hop star-to-aggregator topology, report messages and hop count explicitly"
+  },
+  "storage": {
+    "authority": "actual serialized policy bytes and actual encoded message bytes",
+    "paid_objects": [
+      "query-to-agent address table",
+      "policy header/version/task metadata",
+      "message agent id",
+      "message type id",
+      "float32 observation"
+    ],
+    "private_model_state": "agents retain their private measurement process; no model state is serialized into shared policy"
+  },
+  "compute": {
+    "report": [
+      "per-query scalar updates",
+      "message count/bytes",
+      "policy decode operations",
+      "one-hop latency proxy",
+      "wall time"
+    ]
+  },
+  "success_gate": "Single-agent policy uses at most 1/16 the centralized messages and actual message bytes, has heldout normalized MSE <=0.35, and stored policy is <=32 bytes; Mirror-specific gain additionally requires outperforming the native type/reliability rule with the same message budget.",
+  "failure_gate": "Quality misses the fixed MSE gate, communication/policy bytes fail their gate, or Mirror address table exactly aliases native deterministic routing. Report the communication-quality tradeoff even on failure.",
+  "boundaries": [
+    "This is a synthetic linear-Gaussian collective-inference screen, not a neural-network compression result.",
+    "Observation-only boundary is enforced: no agent weights, gradients, hidden states, or private policy are transmitted.",
+    "Logical query count does not equal independent model capacity.",
+    "The star topology gives a lower-bound latency screen; general mesh routing is untested."
+  ]
+}

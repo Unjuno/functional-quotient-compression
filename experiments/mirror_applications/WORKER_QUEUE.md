@@ -626,3 +626,6 @@ MA-864 FAIL: rank-1 private residual consistently improves shared rank3 and beat
 
 
 MA-865 FAIL: on identical four-task rotations, SVD rank3 saves 5.6% bytes but loses 8.5–9.6 pp; rank4 exceeds independent-bank bytes; task soup is compact but poor. Random rank3 is weaker; Mirror equals native PCA coordinates. Next P0 outside paused chart lane: MA-866 collective inference admission-policy coordinate.
+
+
+MA-866 FAIL for Mirror-specificity, with a useful systems tradeoff: one-agent policy uses 1/32 messages and bytes, nMSE .058–.060 vs centralized .042. The 38 B address table aliases a 24 B native type/reliability rule; no private state was sent. Next P0 MA-867 (agent-role × query code factorization).
