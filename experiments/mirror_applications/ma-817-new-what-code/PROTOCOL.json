@@ -1,0 +1,13 @@
+{
+ "experiment_id":"MA-817","title":"Add a new content operand while keeping mechanisms fixed","status":"SCREENING","evidence_lane":"MECHANISM/CONTINUAL_TRANSFER","base_commit":"1479cc4f","prior_art_refs":["PA217"],
+ "hypothesis":"A new what/content vector encoded by a small Mirror code can be composed with frozen known how/operators to produce heldout outputs at lower total bytes and no worse retention than adding an explicit native operand vector or retraining the shared core.",
+ "world":{"dim":8,"what_count":6,"how_count":3,"new_what_index":5,"shared_what_basis_rank":2,"teacher":"fixed operator matrices act on content vectors; new content lies in a frozen rank-2 shared content basis"},
+ "development":{"seed":81701,"support_examples":32,"test_examples_per_how":256,"optimizer_updates":0,"tuning":"none"},
+ "fresh":{"seeds":[],"locked_before_access":true,"release_rule":"Keep fresh sealed on exact native content-code alias or full-byte gate failure."},
+ "controls":["independent output vectors per how","frozen shared what basis plus Mirror code","native basis-coordinate vector code","explicit new what vector","retrain shared operator core"],
+ "metrics":["heldout output nRMSE","old-what retention error","complete serialized bytes","support examples/adaptation operations","payload replay error"],
+ "storage":{"authority":"actual NPZ inference payload bytes","paid_objects":["frozen operators","what basis","new what code or explicit vector","metadata","retrained operators"]},
+ "success_gate":"new-what heldout nRMSE <=0.02, old-what retention nRMSE <=0.02, at least 25% fewer total bytes than explicit operand and strict gain over native coordinate code.","failure_gate":"FAIL if native code exactly matches Mirror or full bytes fail frozen gate.",
+ "compute":{"report_examples":true,"report_optimizer_updates":true,"report_adaptation_ops":true,"report_active_compute_proxy":true,"report_wall_time":true},
+ "boundaries":["Synthetic linear computations only; no continual-learning or reasoning claim.","Frozen operator family and content basis are known synthetic controls.","No audit seeds after development alias or gate failure."]
+}

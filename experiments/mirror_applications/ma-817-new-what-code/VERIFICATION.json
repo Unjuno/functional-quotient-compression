@@ -1,0 +1,22 @@
+{
+  "experiment_id": "MA-817",
+  "commit": "PENDING",
+  "tests": {
+    "command": "pytest -q experiments/mirror_applications/ma-817-new-what-code/tests",
+    "passed": null,
+    "failed": null
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Output vectors are decoded from serialized payloads.",
+    "Mirror payload 1,241 B exceeds explicit new what 1,125 B; native coordinate code is functionally equal; fresh sealed."
+  ]
+}
