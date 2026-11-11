@@ -6,8 +6,8 @@
 - Last verified commit: pending
 - Development complete: no
 - Fresh/audit opened: no
-- Results committed: no
-- Verification committed: no
+- Results committed: yes
+- Verification committed: yes
 
 ## Next action
 
