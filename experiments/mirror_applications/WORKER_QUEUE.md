@@ -562,3 +562,8 @@ MA-838 is a scoped synthetic FAIL: the rank-4 shared tangent basis saves ~38% by
 ## Current handoff — 2026-11-11, MA-840
 
 MA-840 is a scoped synthetic FAIL: at delta .03 the shared rank-0 model reaches .01405 nRMSE at 3,091 B, but rank4 is needed for .00312 and exceeds independent bytes (4,783 vs 4,680); at delta .20 all tangent variants miss quality. Mirror exactly aliases native PCA/residual. Fresh remained sealed. Next eligible P0: MA-841 (AI Engram memory bank compression; PA227), retaining causal sufficiency/specificity/reactivation/necessity checks. Dedicated branch: `research/ma-840-tangent-private-residual-20261111`.
+
+
+## Current handoff — 2026-11-11, MA-841
+
+MA-841 is a scoped synthetic causal-memory FAIL: rank3 passes the retrieval/composition/erasure checks but costs 2,468 B vs 2,253 B independent and 6x decode MACs; lower ranks miss causal checks. Mirror aliases native Fisher-PCA. Fresh remained sealed. Next eligible P0: MA-842 (compositional engram arithmetic; PA227), testing simultaneous multi-memory induction/retrieval and interference. Dedicated branch: `research/ma-841-engram-basis-code-20261111`.
