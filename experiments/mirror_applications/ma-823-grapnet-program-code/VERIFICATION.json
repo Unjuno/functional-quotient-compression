@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-823",
+  "commit": "PENDING",
+  "tests": {
+    "command": "pytest -q experiments/mirror_applications/ma-823-grapnet-program-code/tests",
+    "passed": null,
+    "failed": null
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "All decoded graph outputs replay exactly.",
+    "Mirror graph code and native sparse indices have equal payload size/function/active edge count; dense adjacency is smaller at this N.",
+    "Scored topology edge lists are present in payload; no topology generalization tested. Fresh sealed."
+  ]
+}
