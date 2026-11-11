@@ -1,0 +1,30 @@
+{
+  "experiment_id": "MA-809",
+  "title": "Shared invertible action basis with sparse private skill residuals",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/ROBUSTNESS",
+  "base_commit": "796310e0",
+  "prior_art_refs": ["PA202", "PA18"],
+  "hypothesis": "A rank-2 shared orthogonal action basis plus small shared skill Views can represent common skills, while sparse private residual codes restore one deliberately heterogeneous skill at lower complete bytes than independent per-skill policies, without losing heldout OOD action accuracy.",
+  "physical_object": "one shared 8D orthogonal action transform and rank-2 residual basis",
+  "mirror_coordinate": "per-skill 2D orthogonal View coefficients plus an optional private residual selector/value",
+  "logical_multiplicity": "four invertible action maps, including one exceptional skill",
+  "world": {
+    "observation_dim": 8,
+    "action_dim": 8,
+    "skill_count": 4,
+    "shared_basis_rank": 2,
+    "private_exception_skill": 3,
+    "ood_shift": "heldout inputs have an orthogonal 2-plane shift absent from all fitting examples",
+    "teacher": "known orthogonal matrices generated from shared rank-2 Givens orbit; skill 3 includes a fixed rank-1 off-orbit private perturbation"
+  },
+  "development": {"seed": 80901, "train_examples_per_skill": 256, "test_examples_per_skill": 512, "optimizer_updates": 0, "tuning": "none"},
+  "fresh": {"seeds": [], "locked_before_access": true, "release_rule": "Do not open fresh data if the development payload misses the 25% savings gate or native low-rank/Givens controls match exactly."},
+  "controls": ["independent full policy matrix per skill", "single shared policy", "shared rank-2 native low-rank coefficient table", "shared Givens skill views", "shared Givens views plus sparse private rank-1 residual", "per-skill dense private residual upper control"],
+  "metrics": ["OOD action nRMSE", "success at action tolerance 0.02", "actual complete NPZ inference payload bytes", "private residual bytes", "active MAC proxy", "orthogonality error", "payload roundtrip error", "CPU inference batch wall time"],
+  "storage": {"authority": "actual compressed NPZ inference payload bytes", "paid_objects": ["shared basis", "per-skill view codes", "private residual codes and values", "selectors", "identity/shape metadata", "independent matrices in upper control"]},
+  "success_gate": "OOD nRMSE <=0.02 and success >=0.95 for all skills, >=25% fewer full bytes than independent policies, and strict quality-per-byte improvement over native shared low-rank/Givens and private rank-1 controls.",
+  "failure_gate": "FAIL if private residual cannot recover the exceptional skill, full bytes save <25%, or standard low-rank/Givens controls equal the View at no greater bytes/compute.",
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true, "operation_count": "dense 8x8 transform 64 MAC; each rank-1 residual adds 16 MAC; Givens view adds 16 scalar arithmetic ops"},
+  "boundaries": ["Synthetic linear policy maps only; no robot, manipulation, simulator, or safety claim.", "OOD shift is a fixed heldout orthogonal input-plane transform shared by all methods and is not inferred.", "No fresh/audit seeds will be opened after native alias or frozen storage gate failure."]
+}
