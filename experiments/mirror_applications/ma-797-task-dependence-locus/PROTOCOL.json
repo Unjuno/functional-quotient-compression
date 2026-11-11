@@ -1,0 +1,19 @@
+{
+  "experiment_id": "MA-797",
+  "title": "Factorized task-dependence locus code in a three-stage linear recurrent cell",
+  "status": "SCREENING",
+  "base_commit": "9d54e528",
+  "prior_art_refs": ["PA212"],
+  "hypothesis": "A compact task factor times a discrete input/recurrent/readout locus code recovers held-out task functions and identifies which computational locus carries task dependence, with fewer complete bytes than independent task matrices.",
+  "insertion": "one rank-1 additive update at exactly one of input, recurrent, or readout linear maps; task code stores scalar factor and locus ID",
+  "task_grid": {"state_dim": 8, "loci": ["input", "recurrent", "readout"], "task_factor": [-1,0,1], "heldout": "all three +1 tasks; fit only -1 and 0 examples per locus", "test_examples_per_task": 256},
+  "development": {"seeds": [79701], "tuning": "none; fixed rank-1 updates and linear task coordinates"},
+  "fresh": {"seeds": [], "locked": true, "release_rule": "Do not open fresh after native low-rank alias or failed frozen gate."},
+  "controls": ["independent full layer matrices per task", "shared three-stage core without task code", "Mirror factorized locus/task coordinates", "native rank-1 low-rank conditional update at the same locus"],
+  "metrics": ["heldout output nRMSE", "all-task nRMSE", "actual compressed inference bytes", "per-locus ablation nRMSE", "active/reconstruction MAC proxies", "test examples", "optimizer updates", "CPU wall time"],
+  "storage": {"authority": "actual compressed NPZ payload", "paid": ["three shared stage matrices", "rank-1 left/right vectors for each locus", "task factor and locus IDs", "task IDs", "metadata"]},
+  "pass_gate": "Heldout output nRMSE <=0.02, >=25% fewer bytes than independent, locus ablation identifies the generating locus, and strict storage/compute/quality advantage over native low-rank conditional control.",
+  "fail_gate": "FAIL Mirror-specific claim for exact native low-rank alias, quality miss, or no native-control frontier gain.",
+  "compute": {"optimizer_updates": 0, "active_MACs": "three dense base maps plus one rank-1 update (2D) per example", "reconstruction_MACs": "rank-1 update materialization for all task/locus entries, reported separately"},
+  "boundaries": ["Synthetic linear three-stage function screen, not a trained RNN or task benchmark.", "Task factor and locus label are supplied and charged; no task inference claim.", "Heldout positive scalar tasks are extrapolated from -1 and 0 using the preregistered linear coordinate rule.", "Native low-rank is deliberately parameter matched to the View." ]
+}
