@@ -1,0 +1,8 @@
+{
+  "experiment_id": "MA-836",
+  "status": "PASS",
+  "scope": "Deterministic synthetic result and factorization assertions; scientific hypothesis status is FAIL.",
+  "commands": ["python experiments/mirror_applications/ma-836-ntk-orthogonal-codebook/source/run_experiment.py", "pytest -q experiments/mirror_applications/ma-836-ntk-orthogonal-codebook/tests"],
+  "checks": {"result_rows": 7, "focused_tests": "1 passed", "rank2_mirror_native_payload_identical": true, "rank2_mirror_native_errors_identical": true, "full_rank_ntk_basis_orthogonality_error_below_1e-5": true, "full_rank_replay_error_below_1e-10": true, "fresh_data_opened": false},
+  "provenance": {"base_commit": "6ff01124", "dedicated_branch": "research/ma-836-ntk-orthogonal-codebook-20261111", "development_seed": 83601, "amendment": "01: added explicit full-rank orthogonal basis controls before measuring them"}
+}
