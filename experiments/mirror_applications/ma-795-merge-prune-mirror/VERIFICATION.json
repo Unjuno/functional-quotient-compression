@@ -1,9 +1,19 @@
 {
   "experiment_id": "MA-795",
-  "commit": "PENDING",
-  "tests": {"command": "pytest -q experiments/mirror_applications/ma-795-merge-prune-mirror/tests", "passed": 1, "failed": 0},
-  "serialization": {"roundtrip_checked": true, "byte_exact": true},
-  "metric_replay": {"checked": true, "max_difference": 0.0},
+  "commit": "2115c7e2607c9f2ce9cce302fb2279d08e403b24",
+  "tests": {
+    "command": "pytest -q experiments/mirror_applications/ma-795-merge-prune-mirror/tests",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
   "fresh_split_integrity_checked": true,
   "notes": [
     "Compressed NPZ payloads were decoded for all controls; maximum operator reconstruction difference was 0.",
