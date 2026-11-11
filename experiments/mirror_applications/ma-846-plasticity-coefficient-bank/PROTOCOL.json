@@ -1,0 +1,20 @@
+{
+  "experiment_id": "MA-846",
+  "title": "Differentiable-plasticity coefficient bank",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM",
+  "base_commit": "9ffcb1e6",
+  "hypothesis": "For aligned synthetic online learners, a shared Hebbian update basis plus compact task coordinates will preserve heldout adaptation while reducing serialized persistent and writable state relative to independent per-task plasticity tensors.",
+  "physical_object": "Shared slow linear readout and Hebbian update basis",
+  "mirror_coordinate": "Per-task coefficient vector over shared Hebbian update basis",
+  "logical_multiplicity": "Task-specific online update rules",
+  "prior_art_refs": ["PA228"],
+  "controls": ["shared slow weights with fixed common Hebbian rule", "independent per-task plasticity coefficients", "ordinary low-rank coefficient factorization", "Mirror coefficient bank", "independent full per-task update matrices upper control"],
+  "development": {"worlds_or_seeds": [11], "selection_metric": "heldout post-update prediction nRMSE subject to byte and update-MAC gates"},
+  "fresh": {"worlds_or_seeds": [29, 47], "locked_before_access": true},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["slow weights", "plasticity basis or coefficients", "task code", "dimensions and dtype metadata", "writable fast-state initialization"]},
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true},
+  "success_gate": "Mirror heldout nRMSE <= 0.02, at least 25% fewer total serialized bytes than independent coefficient bank, and online update MACs <= 1.25x independent; Mirror must beat native low-rank control by at least 10% bytes or 10% error.",
+  "failure_gate": "Quality gate missed, byte saving <25%, update MAC >1.25x, or native low-rank matches Mirror within 1% bytes and error.",
+  "boundaries": ["Synthetic mechanism screen only; no trained differentiable-plasticity or language-model claim.", "Persistent model bytes and writable per-episode fast-state bytes are reported separately and jointly.", "Fresh seeds are evaluated after code/protocol freeze and never used to tune."]
+}

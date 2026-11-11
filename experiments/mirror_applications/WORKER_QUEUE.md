@@ -587,3 +587,7 @@ MA-844 is a scoped synthetic FAIL: Fisher code assignment saves 69.7% bytes vs i
 ## Current handoff — 2026-11-11, MA-845
 
 MA-845 is a scoped synthetic FAIL: 16 in-span codes plus eight private fallbacks preserve retention at .00471 nRMSE, but full storage is 3,615 B (2.1% below independent; 11.3% below explicit SERAC/GRACE-style memory) and exactly aliases native low-rank fallback. Fresh remained sealed. Continue with MA-846 (differentiable-plasticity coefficient bank; PA228). Dedicated branch: `research/ma-845-engram-private-fallback-20261111`.
+
+## Current handoff — 2026-11-11, MA-846
+
+MA-846 is NOT ESTABLISHED: frozen synthetic fresh seeds miss quality because target maps are not realizable by the implemented elementwise-modulated Hebbian update. Mirror/native low-rank alias at 1,777 B persistent + 4,608 B writable; no post-fresh tuning. Before claiming anything about differentiable plasticity, amend or create a new protocol with a realizable learner and new fresh seeds. Continue with MA-847 (persistent × transient Hebbian coordinates; PA229).
