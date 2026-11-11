@@ -1,0 +1,22 @@
+{
+  "experiment_id": "MA-869",
+  "title": "carrier-connectivity-aware observation code allocation",
+  "status": "PROTOCOL_FROZEN",
+  "evidence_lane": "QUALITY/COMMUNICATION/STORAGE/LATENCY/CONNECTIVITY",
+  "base_commit": "123d13f3",
+  "hypothesis": "When the most reliable private sensor is disconnected from the aggregator, a connectivity-aware task code can choose a reachable carrier for each query and preserve inference quality with fewer transmitted observations than broad central collection.",
+  "physical_object": "Eight private sensor agents arranged as two carriers for each of four latent coordinates, plus aggregator and relay links",
+  "mirror_coordinate": "One uint8 agent address per coordinate query, paired with a topology/reliability schema",
+  "logical_multiplicity": "Four coordinate-query functions served by one connected submesh and a small task address table",
+  "prior_art_refs": ["PA233"],
+  "controls": ["central posterior from all reachable carriers", "best-reliability carrier ignoring connectivity", "connectivity-aware best reachable carrier", "random reachable carrier", "native graph/reliability rule versus Mirror address table"],
+  "development": {"worlds_or_seeds": [101], "selection_metric": "no tuning; fixed line topology and fixed cut probability"},
+  "fresh": {"worlds_or_seeds": [701, 719, 733], "latent_draws_per_seed": 4096, "locked_before_access": true},
+  "world": {"latent": "z~N(0,I_4)", "agents": "8; two private noisy carriers per coordinate", "topology": "aggregator connects to sensor 0, sensors form a chain; edge between sensors 3 and 4 is independently cut with probability .5", "noise": "per coordinate, one near/far sensor has sigma=.25 and the other sigma=.75, assigned by fresh seed", "observation": "agent id, typed coordinate id, one float32 value only; relays forward the unchanged typed observation"},
+  "policy": {"query_budget": "one admitted carrier per coordinate query", "connectivity_rule": "choose minimum-noise sensor among those with a path to aggregator", "quality": "posterior normalized MSE; unreachable required carriers yield prior error 1", "message_accounting": "count each hop transmission of each admitted observation, including relays"},
+  "storage": {"authority": "actual serialized topology/reliability schema and policy bytes", "paid_objects": ["edge-cut/topology descriptor", "eight sensor reliability classes", "four query-to-agent addresses", "native routing-rule descriptor", "message IDs/types/value"], "message": "uint8 agent ID + uint8 type ID + float32 value = 6 bytes"},
+  "compute": {"report": ["posterior scalar operations", "message hops/bytes", "policy and schema bytes", "max shortest-path latency", "wall time"]},
+  "success_gate": "For all fresh worlds, connectivity-aware code has mean nMSE within .02 of reachable-central posterior, uses fewer message-hop bytes than central, and never selects a disconnected sensor; Mirror-specific gain requires outperforming native connectivity/reliability routing.",
+  "failure_gate": "Any connectivity violation, quality miss, no message-hop reduction, or exact alias with native routing fails Mirror-specific attribution. Report the connectivity utility independently.",
+  "boundaries": ["Synthetic scalar linear-Gaussian system only; no neural network or arbitrary Mesh topology claim.", "Only a line with one possible cut is tested; higher-dimensional graph routing is untested.", "Only observations are transmitted; private models, gradients, and hidden states remain local.", "Policy addresses are not independent capacity units."]
+}
