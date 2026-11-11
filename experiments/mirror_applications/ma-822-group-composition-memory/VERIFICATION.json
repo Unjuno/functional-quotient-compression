@@ -1,0 +1,22 @@
+{
+  "experiment_id": "MA-822",
+  "commit": "PENDING",
+  "tests": {
+    "command": "pytest -q experiments/mirror_applications/ma-822-group-composition-memory/tests",
+    "passed": null,
+    "failed": null
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "All 16 group matrices replay from payload; orthogonality/determinant errors remain below 1e-6.",
+    "Native cyclic group code is 4 B smaller with identical outputs; independent matrix table is smaller and lower compute at this tiny group order. Fresh sealed."
+  ]
+}
