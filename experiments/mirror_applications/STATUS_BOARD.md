@@ -204,4 +204,4 @@ MA-792 is complete as a scoped synthetic FAIL: routing-free self-activation reac
 MA-847 is NOT ESTABLISHED: the exploratory screen has support-span failure and teacher-oracle leakage, so preserved fresh rows are invalid. A corrected protocol requires new seeds. Next eligible P0: MA-848.
 
 
-MA-848 is a scoped synthetic FAIL for Mirror attribution: 8×6 task/episode factors recover 24 heldout combinations at nRMSE 2.5e-8 with zero reset leakage. Native factorization uses 6,760 B versus 49,488 B independent matrices; Mirror uses 6,764 B and adds 6.25% query MACs. Next eligible P0: MA-849.
+MA-848 Amendment 01: synthetic 8×6 task/episode factors have zero heldout nRMSE/reset leakage; native factorization 6,760 B, Mirror 6,764 B, independent 49,488 B. Native and Mirror query MACs are equal (104,448); both factorized methods cost 6.25% more than full matrices. Corrected state bytes, same-object reset and serialization roundtrip are verified. MA-849 is P1 and deferred; its fresh seeds 37/59 were accidentally invoked and are burned. Next eligible P0: MA-851.
