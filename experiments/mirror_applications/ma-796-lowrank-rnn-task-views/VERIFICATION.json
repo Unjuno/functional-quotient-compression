@@ -1,0 +1,13 @@
+{
+  "experiment_id": "MA-796",
+  "commit": "PENDING",
+  "tests": {"command": "pytest -q experiments/mirror_applications/ma-796-lowrank-rnn-task-views/tests", "passed": 1, "failed": 0},
+  "serialization": {"roundtrip_checked": true, "byte_exact": true},
+  "metric_replay": {"checked": true, "max_difference": 0.0},
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Heldout task combinations are excluded from transition-matrix and basis fitting; task factor labels are known and charged as coordinates.",
+    "All serialized payloads decode to their evaluated matrices with maximum absolute error 0.",
+    "Mirror and native low-rank controls have identical serialized payload hashes and metrics; fresh stayed sealed."
+  ]
+}
