@@ -1,0 +1,21 @@
+{
+  "experiment_id": "MA-800",
+  "title": "Vector-Network rank-1 atoms with a factorized persistent task coefficient code",
+  "status": "SCREENING",
+  "base_commit": "866a29b4",
+  "prior_art_refs": ["PA213"],
+  "hypothesis": "A compact task-coordinate factorization of coefficients over shared rank-1 atoms preserves per-input sparse local inference on heldout task compositions while reducing complete bytes versus independent task coefficient tables.",
+  "physical_object": "K=8 shared rank-1 weight atoms u_k v_k^T",
+  "mirror_coordinate": "task factors (a,b) selecting coefficients c0 + a*c1 + b*c2 over the atom bank",
+  "local_inference": "for every input, score atoms by |v_k^T x| and select top-2 before composing output; selection is recomputed per example",
+  "task_grid": {"factors": "a,b in {-1,0,1}", "tasks": 9, "heldout": "diagonal corners (-1,-1) and (1,1)", "input_dim": 8, "output_dim": 8, "test_examples_per_task": 512},
+  "development": {"seeds": [80001], "coefficient_basis_rank": 3, "tuning": "none"},
+  "fresh": {"seeds": [], "locked": true, "release_rule": "Do not open fresh after exact native coefficient-factorization alias or frozen gate miss."},
+  "controls": ["independent per-task coefficient tables over the same atoms", "shared coefficient vector without task codes", "Mirror factorized task coefficient code", "native low-rank factorization of the task-by-atom coefficient matrix"],
+  "metrics": ["heldout and all-task output nRMSE", "actual compressed NPZ bytes", "average active atoms per example", "input-local top-2 selection audit", "active MAC proxy", "coefficient decode MACs", "test examples", "optimizer updates", "CPU wall time"],
+  "storage": {"authority": "actual compressed NPZ payload", "paid": ["rank-1 atom vectors", "coefficient bases or full task coefficients", "task codes/IDs", "local inference metadata"]},
+  "pass_gate": "Heldout nRMSE <=0.02, at least 25% fewer complete bytes than independent coefficients, average active atoms=2 with changing per-input selections, and strict frontier gain over native low-rank factorization.",
+  "fail_gate": "FAIL Mirror-specific value on exact native low-rank alias, quality miss, savings below 25%, or no strict control frontier gain.",
+  "compute": {"optimizer_updates": 0, "active_MAC_proxy": "K input projections plus top-2 rank-1 projections/scales/readout", "wall_time": "small CPU local-inference loop; not throughput evidence"},
+  "boundaries": ["Synthetic linear compositional task maps only; no reproduction of trained Vector Networks or their learning/inference algorithm.", "Task factor coordinates are known and charged; no task inference claim.", "The per-input atom selection is implemented and audited, but coefficient bases are oracle generated from an additive rank-2 teacher; it is not learned by gradient descent.", "Native coefficient factorization is a required direct attribution control."]
+}
