@@ -1,0 +1,85 @@
+{
+  "experiment_id": "MA-878",
+  "title": "Attention-weighted head-matched KV bridge versus fixed support and shared basis",
+  "status": "SCREENING",
+  "evidence_lane": "CROSS_MODEL_KV/HEAD_MAPPING/QUALITY/STORAGE/COMPUTE",
+  "base_commit": "e705db936",
+  "hypothesis": "For the frozen Pythia-70M\u2192SmolLM2-135M pair, choosing a one-to-one source KV-head assignment by target attention-weighted calibration loss improves fresh target NLL over the fixed spread assignment. A rank-32 shared map basis over the chosen head bridges retains matched-independent-map quality within 0.05 nat while reducing actual serialized bridge bytes by at least 50%.",
+  "physical_object": "Per-layer source-to-target KV affine translator maps across 180 target layer/head/role slots.",
+  "mirror_coordinate": "Per-target-layer head-address assignment plus per-role coefficient vector into a shared PCA map basis.",
+  "logical_multiplicity": "Distinct target KV roles read from a compactly addressed set of source-head supports.",
+  "prior_art_refs": [
+    "PA237",
+    "PA236"
+  ],
+  "prior_art_boundary": "PA237 CacheBridge motivates matched-head support and causal-attention-weighted calibration. This is a scoped local operationalization, not a paper reproduction.",
+  "models": {
+    "source": "EleutherAI/pythia-70m-deduped (8 KV heads, GPTNeoX RoPE fraction .25, theta 10000)",
+    "target": "HuggingFaceTB/SmolLM2-135M (3 KV heads, Llama RoPE theta 100000)"
+  },
+  "controls": [
+    "Native target prefill",
+    "Fixed spread source-head mapping [0,4,7] with attention-weighted affine ridge",
+    "Calibration-selected injective source-head mapping with attention-weighted affine ridge (CacheBridge-style support control)",
+    "Same attention-matched map family coded by a rank-32 shared PCA basis (native shared-basis attribution control)"
+  ],
+  "matching_rule": "For each target layer and target KV head, accumulate candidate weighted ridge sufficient statistics over source KV heads. Per-token importance is target attention mass received, summed over queries and query heads in the KV group, normalized to mean one per prompt. Select the injective 3-of-8 assignment minimizing the sum of normalized weighted K/V fit residuals. Fit selected affine maps with alpha 0.01.",
+  "depth_rule": "Map target layers to nearest relative source depth using round(tgt_layer*(source_layers-1)/(target_layers-1)).",
+  "roPE_control": "Both head-support controls use the same position-free interface: invert source and target RoPE for keys during mapping, fit values without RoPE, then reapply target RoPE. MA-877 established this comparison lane; MA-878 varies head support only.",
+  "development": {
+    "split": "Wikitext-2 train",
+    "seed": 829,
+    "calibration_prompts": 24,
+    "evaluation_prompts": 16,
+    "rank_candidates": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32
+    ],
+    "selection_metric": "Minimum target NLL among rank candidates, while reporting its gap to matched-independent maps and the exact serialized-byte frontier."
+  },
+  "fresh": {
+    "calibration_split": "Wikitext-2 validation",
+    "test_split": "Wikitext-2 test",
+    "seeds": [
+      983,
+      997,
+      1009
+    ],
+    "calibration_prompts_per_seed": 12,
+    "test_prompts_per_seed": 16,
+    "locked_before_access": true,
+    "prompt_identity": "exact tokenizer offset alignment; deterministic seed-disjoint prompt chunks"
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "fixed or matched affine maps OR shared mean and rank basis and per-role coefficients",
+      "per-target-layer source-head assignment",
+      "layer/head/KV-role metadata",
+      "pair name",
+      "format header"
+    ],
+    "common_model_weights": "reported separately; excluded from marginal translator comparison"
+  },
+  "compute": {
+    "report_examples_and_tokens": true,
+    "optimizer_updates": 0,
+    "report_active_compute_proxy": true,
+    "report_calibration_assignment_mapfit_basisfit_wall_times": true,
+    "report_per_prompt_prefill_and_application_wall_times": true,
+    "gpu_latency": "CUDA unavailable; no GPU runtime claim"
+  },
+  "success_gate": "For every fresh seed, attention-matched full maps improve next-token NLL over fixed-spread full maps by at least 0.10 nat; rank32 shared maps are within +0.05 nat of matched full maps; rank32 NLL is within +0.50 nat of native target; actual shared serialized payload is at most 50% of matched full-map payload.",
+  "failure_gate": "Any required quality or storage gate fails in at least two of three fresh seeds, or actual prompt identities / target-attention weighting / serialization checks fail.",
+  "boundaries": [
+    "One ordered model pair only.",
+    "One next-token probe per test prompt; no generation-trajectory claim.",
+    "Only three fresh seed partitions and one natural-language corpus.",
+    "PCA is the native non-Mirror shared-basis control; equal outputs at equal bytes are not Mirror-specific.",
+    "CPU latency only; no CacheBridge paper reproduction or GPU-serving claim."
+  ]
+}
