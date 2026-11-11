@@ -1,0 +1,76 @@
+{
+  "experiment_id": "MA-838",
+  "title": "Tangent coordinates for nonlinear fine-tuning with linearization audit",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/LINEARIZATION",
+  "base_commit": "9ddefe35",
+  "prior_art_refs": [
+    "PA226",
+    "PA33"
+  ],
+  "hypothesis": "A shared low-rank Mirror basis learned from task tangent updates will preserve heldout nonlinear fine-tuning quality with at least 25% fewer complete bytes than independent updates, outperform random intrinsic-dimension projection, and strictly beat native PCA/tangent factorization at matched rank.",
+  "world": {
+    "seed": 83801,
+    "model": "one-hidden-layer tanh MLP (input 6, hidden 12, scalar output)",
+    "tasks": 10,
+    "basis_rank": 4,
+    "support_examples_per_task": 256,
+    "heldout_examples_per_task": 256,
+    "delta_scales": [
+      0.03,
+      0.2
+    ],
+    "split": "six task updates to fit basis, four support-adapted heldout tasks"
+  },
+  "development": {
+    "seed": 83801,
+    "optimizer_updates": 0,
+    "tuning": "none; closed-form tangent least squares and rank-4 SVD"
+  },
+  "fresh": {
+    "seeds": [],
+    "locked_before_access": true,
+    "release_rule": "Keep fresh sealed after exact native factorization alias or quality/byte gate miss."
+  },
+  "controls": [
+    "exact nonlinear teacher update upper bound",
+    "independent support-fitted tangent update",
+    "random rank-4 intrinsic subspace",
+    "native PCA shared tangent basis",
+    "Mirror task coordinates in shared tangent basis"
+  ],
+  "metrics": [
+    "heldout nonlinear nRMSE",
+    "tangent linearization residual",
+    "complete serialized payload bytes",
+    "adaptation Jacobian evaluations",
+    "basis decode MAC proxy",
+    "inference forward MAC proxy",
+    "support examples",
+    "optimizer updates",
+    "isolated wall time",
+    "payload replay error"
+  ],
+  "storage": {
+    "authority": "actual compressed NPZ bytes",
+    "paid_objects": [
+      "base model parameters",
+      "shared tangent basis or random projection",
+      "task codes/full updates",
+      "task IDs and metadata"
+    ]
+  },
+  "success_gate": "At a predeclared delta scale, Mirror must attain nonlinear heldout nRMSE <=0.02, save >=25% complete bytes vs independent updates, beat random rank-4 subspace, and strictly beat native PCA at identical rank.",
+  "failure_gate": "FAIL if linearization residual exceeds quality tolerance, compression loses quality, random/native control matches Mirror, or byte gate misses.",
+  "boundaries": [
+    "Synthetic tanh MLP only; not a pretrained language model or real PEFT result.",
+    "Task updates are constructed from a shared low-rank tangent basis; broader task distributions are untested.",
+    "Four heldout task codes are fitted from support data; no zero-shot task generation.",
+    "No fresh seeds after native alias or gate miss."
+  ],
+  "amendment_01": {
+    "before_amended_run": "Added before rerunning the development screen; no fresh or audit worlds were viewed.",
+    "reason": "The original 96 support examples were fewer than the 97 MLP parameters, making per-task tangent least squares underdetermined.",
+    "change": "Increase support_examples_per_task from 96 to 256; preserve the same model, seeds, tasks, scales, controls and gates."
+  }
+}
