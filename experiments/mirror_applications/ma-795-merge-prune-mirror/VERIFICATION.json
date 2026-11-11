@@ -1,0 +1,13 @@
+{
+  "experiment_id": "MA-795",
+  "commit": "PENDING",
+  "tests": {"command": "pytest -q experiments/mirror_applications/ma-795-merge-prune-mirror/tests", "passed": 1, "failed": 0},
+  "serialization": {"roundtrip_checked": true, "byte_exact": true},
+  "metric_replay": {"checked": true, "max_difference": 0.0},
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Compressed NPZ payloads were decoded for all controls; maximum operator reconstruction difference was 0.",
+    "Mirror rank-1 residual and ordinary native rank-1 residual have identical bytes, SHA-256, and outputs.",
+    "Fresh data remained sealed after native alias and development quality-gate miss."
+  ]
+}
