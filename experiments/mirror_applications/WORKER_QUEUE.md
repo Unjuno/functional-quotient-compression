@@ -623,3 +623,6 @@ MA-862 FAIL: symmetry alignment improves mean grid accuracy only .44–1.07 pp a
 
 
 MA-864 FAIL: rank-1 private residual consistently improves shared rank3 and beats rank6, but heldout accuracy .461/.475/.478 is 13.3–32.8 pp below full tune; private shared payload 41,997 B vs 11,933 B full model. Native/Mirror coefficient alias. MA-863 P1; next P0 MA-865 common-coordinate tournament.
+
+
+MA-865 FAIL: on identical four-task rotations, SVD rank3 saves 5.6% bytes but loses 8.5–9.6 pp; rank4 exceeds independent-bank bytes; task soup is compact but poor. Random rank3 is weaker; Mirror equals native PCA coordinates. Next P0 outside paused chart lane: MA-866 collective inference admission-policy coordinate.

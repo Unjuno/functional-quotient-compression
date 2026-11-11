@@ -1,0 +1,105 @@
+{
+  "experiment_id": "MA-865",
+  "title": "common task-coordinate manifold tournament",
+  "status": "FAIL",
+  "evidence_lane": "QUALITY/STORAGE/COMPUTE",
+  "base_commit": "0b3392c7",
+  "hypothesis": "For four related digit-rotation tasks trained from one common base, a shared low-rank task-delta basis plus per-task codes can preserve task quality with fewer serialized bytes than independent checkpoints and outperform random intrinsic subspaces; Mirror coordinates must add value beyond native PCA/task-vector coordinates to support a Mirror-specific claim.",
+  "physical_object": "One pooled base MLP, four task-delta vectors, and candidate shared bases",
+  "mirror_coordinate": "Per-task coefficient vectors in a shared basis; Mirror coordinate is tested as identity encoding of native PCA coefficients",
+  "logical_multiplicity": "Four task-specific classifiers, one per rotation domain",
+  "prior_art_refs": [
+    "PA33",
+    "PA26",
+    "PA179",
+    "PA231",
+    "PA232"
+  ],
+  "controls": [
+    "independent full fine-tuned checkpoint bank",
+    "shared base plus full task vectors",
+    "uniform task-vector model soup",
+    "SVD/PCA task-delta bases at ranks 1,2,3,4",
+    "random orthonormal intrinsic bases at ranks 1,2,3,4",
+    "native task coefficients versus Mirror coefficient encoding"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      83
+    ],
+    "selection_metric": "mean validation task NLL; base and task learning rates selected from .03 and .1",
+    "selected_settings": {
+      "base_lr": 0.03,
+      "task_finetune_lr": 0.1
+    }
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      401,
+      419,
+      433
+    ],
+    "locked_before_access": true,
+    "locked_settings": {
+      "base_lr": 0.03,
+      "task_lr": 0.1
+    }
+  },
+  "data": {
+    "source": "sklearn Digits",
+    "split": "fixed stratified source-image 60/20/20; split seeds 420 and 421",
+    "tasks": [
+      "identity",
+      "90-degree",
+      "180-degree",
+      "270-degree rotation"
+    ],
+    "normalization": "pixels / 16"
+  },
+  "training": {
+    "model": "MLP 64\u219232\u219210, ReLU",
+    "base": "40 epochs, uniform task rotations",
+    "task_finetune": "20 epochs per task from the common base",
+    "task_vectors": "task model minus common base, computed from train-only task models",
+    "SVD_basis": "right singular vectors of the 4xP task-delta matrix; task codes are orthogonal projections",
+    "random_basis": "seeded orthonormal Gaussian bases with codes projected from the same task deltas"
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "base weights",
+      "all shared basis vectors",
+      "all four task codes",
+      "full task deltas for arithmetic control",
+      "architecture/normalization metadata",
+      "independent task models"
+    ],
+    "code_dtype": "float32"
+  },
+  "compute": {
+    "report": [
+      "base/task optimizer updates and examples",
+      "basis reconstruction MACs per task",
+      "heldout inference MACs",
+      "training wall time",
+      "decode wall time if practical"
+    ]
+  },
+  "success_gate": "At some rank <=3, learned SVD task-coordinate bank has mean task accuracy within 2 pp of independent experts, improves actual serialized bytes by at least 25% versus independent bank, and beats same-rank random basis by at least 5 pp; any Mirror-specific claim additionally requires a result beyond native coefficient coding.",
+  "failure_gate": "No rank meets all quality/storage gates, random basis matches, task soup dominates, or Mirror encoding aliases native coefficients. Report the best non-Mirror frontier separately.",
+  "boundaries": [
+    "Four rotated Digits tasks form a small related-task benchmark, not a natural-task or language-model result.",
+    "PCA basis and task codes are native controls, not Mirror inventions.",
+    "Four task IDs or coefficient vectors do not count as independent capacity without heldout task quality.",
+    "No new hyperparameters are selected from fresh task test metrics."
+  ],
+  "amendments": [
+    {
+      "id": "01",
+      "date": "2026-11-11",
+      "reason": "After the fresh run, add the actual serialized payload size for the model-soup control, which was listed in controls but not emitted in the initial result JSON. This is accounting only; training settings and metrics are unchanged.",
+      "fresh_data_accessed": true,
+      "settings_changed": false
+    }
+  ]
+}
