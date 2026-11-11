@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-830",
+  "commit": "PENDING",
+  "tests": {
+    "command": "pytest -q experiments/mirror_applications/ma-830-task-layer-kanadapter-code/tests",
+    "passed": null,
+    "failed": null
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Heldout task-layer factors are serialized and decode exact outputs.",
+    "Native factor payload is 20 B smaller with identical output/parent evaluations; independent table interpolation nRMSE .000545.",
+    "No trained KanAdapter/HyperFormer claim; fresh sealed."
+  ]
+}
