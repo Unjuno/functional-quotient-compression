@@ -3,11 +3,11 @@
 - Status: FAIL (Mirror-specific gate); synthetic rank-2 structure screen passes its scoped quality/storage gate
 - Branch: `research/ma-871-module-reuse-structure-20261111`
 - Base commit: `54c00313`
-- Last verified commit: pending
+- Last verified commit: `e164833e2e1bdd374925f72594fce0f4f6677999`
 - Development complete: yes
 - Fresh/audit opened: yes, after protocol freeze and development validation
-- Results committed: pending
-- Verification committed: pending
+- Results committed: yes (`e164833e2e1bdd374925f72594fce0f4f6677999`)
+- Verification committed: pending provenance follow-up
 
 ## Next action
 
