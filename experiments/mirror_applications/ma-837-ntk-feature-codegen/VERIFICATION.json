@@ -1,0 +1,8 @@
+{
+  "experiment_id": "MA-837",
+  "status": "PASS",
+  "scope": "Deterministic synthetic result generation and direct-control alias assertions; scientific hypothesis status is FAIL.",
+  "commands": ["python experiments/mirror_applications/ma-837-ntk-feature-codegen/source/run_experiment.py", "pytest -q experiments/mirror_applications/ma-837-ntk-feature-codegen/tests"],
+  "checks": {"result_rows": 6, "focused_tests": "1 passed", "native_mirror_payload_sha256_identical": true, "seen_and_unseen_predictions_identical": true, "cached_code_state_included_in_full_payload_bytes": true, "fresh_data_opened": false},
+  "provenance": {"base_commit": "513c3af7", "dedicated_branch": "research/ma-837-ntk-feature-codegen-20261111", "development_seed": 83701}
+}
