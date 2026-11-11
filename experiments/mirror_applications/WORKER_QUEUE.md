@@ -603,3 +603,6 @@ MA-852 is a scoped synthetic FAIL for Mirror attribution: native scalar task gat
 MA-853 is a scoped synthetic FAIL for Mirror attribution: 4×4 role functions have zero heldout error for native/Mirror/MAP-Hadamard; native and Mirror are both 1,864 B/32,768 query MACs, full pair matrices 66,122 B/524,288, MAP/Hadamard 3,400 B/33,024. Continue with MA-855 (online functional-state frontier; PA129/PA229/PA230). MA-854 is P1.
 
 MA-855 broad frontier is NOT ESTABLISHED: one synthetic linear task family; CAVIA-style context proxy lacks outer-loop meta-training. In-scope Mirror/native low-rank exactly alias; full Delta is more accurate at lower compute. MA-851/852/853 are three consecutive direct DeltaNet-state candidates with native-control aliases; pause further direct state-code variants pending a distinct mechanism. Continue with MA-856 (learned neural-subspace Mirror coordinate; PA231).
+
+
+MA-856 is a scoped FAIL for Mirror-specific attribution; selected low-loss line misses its preregistered 2 pp worst-grid gate on seed 61. Endpoint+codes save bytes versus 17 materialized copies but do not beat the independent two-model bank. Native interpolation and Mirror coordinate alias exactly. Next eligible P0: MA-857 (shared learned simplex task vertices).

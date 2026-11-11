@@ -1,0 +1,31 @@
+{
+  "experiment_id": "MA-856",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-856-neural-subspace-coordinate/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "native_mirror_max_logit_difference": 0.0,
+    "endpoint_reload_max_logit_difference": 0.0,
+    "materialized_reload_max_logit_difference": 0.0
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0,
+    "fresh_seeds": [
+      61,
+      79,
+      97
+    ]
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Fixed stratified Digits split shared across fresh initialization/data-order seeds; no fresh tuning.",
+    "Native alpha and m=2alpha-1 have identical logits by construction and implementation.",
+    "Mirror-specific result FAIL; materialized-line storage benefit does not beat the independent two-model bank."
+  ]
+}
