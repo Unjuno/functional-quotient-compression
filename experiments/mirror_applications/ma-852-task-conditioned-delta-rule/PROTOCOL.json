@@ -1,0 +1,20 @@
+{
+  "experiment_id": "MA-852",
+  "title": "Task-conditioned Delta-rule decay coordinate",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/STATE_DYNAMICS",
+  "base_commit": "b4d49dd0",
+  "hypothesis": "A compact task View on a shared decay-plus-Hebbian-write rule preserves long-context recall across task-specific retention regimes while using less serialized rule state than independent per-task full update operators.",
+  "physical_object": "Shared matrix-state update rule W <- lambda W + v k^T",
+  "mirror_coordinate": "Persistent task coordinate selecting decay lambda",
+  "logical_multiplicity": "Task-specific memory retention dynamics",
+  "prior_art_refs": ["PA230", "PA73"],
+  "controls": ["development-tuned fixed decay", "native task-indexed scalar decay gate", "Mirror task decay coordinate", "independent full per-task decay operators"],
+  "development": {"worlds_or_seeds": [23], "selection_metric": "paired final-state output nRMSE over short and long sequence prefixes"},
+  "fresh": {"worlds_or_seeds": [43, 71], "locked_before_access": true},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["shared rule metadata", "task decay gate or Mirror codes", "independent full update operators", "writable per-task state matrices"]},
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true},
+  "success_gate": "Fresh context-conditioned output nRMSE <=1e-6 and >=25% total payload saving versus full per-task operators; Mirror-specific claim requires improvement over direct scalar gate at matched bytes/compute.",
+  "failure_gate": "Quality/reset gate missed, byte savings <25%, or native scalar gate matches Mirror within 1% and has equal/better bytes and compute.",
+  "boundaries": ["Synthetic matrix-state retention only; no trained DeltaNet/Mamba claim.", "Task identity and decay code are charged; task-specific writable states are charged.", "Fresh seeds 43/71 remain sealed during development."]
+}
