@@ -3,11 +3,11 @@
 - Status: FAIL (Mirror-specific gate); connectivity utility gate passed in this narrow synthetic screen
 - Branch: `research/ma-869-carrier-connectivity-allocation-20261111`
 - Base commit: `123d13f3`
-- Last verified commit: pending final commit
+- Last verified commit: `95c33ca853ea3092900a686126d24a78c018b38f`
 - Development complete: yes
 - Fresh/audit opened: yes, only after frozen protocol and development check
-- Results committed: pending
-- Verification committed: pending
+- Results committed: yes (`95c33ca853ea3092900a686126d24a78c018b38f`)
+- Verification committed: pending provenance follow-up
 
 ## Next action
 
