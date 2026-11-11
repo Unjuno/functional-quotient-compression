@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-829",
+  "commit": "PENDING",
+  "tests": {
+    "command": "pytest -q experiments/mirror_applications/ma-829-kanadapter-parent-bank/tests",
+    "passed": null,
+    "failed": null
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "All adapter outputs decode from serialized parent and coefficients.",
+    "Mirror/native share identical function/evaluation count; 8 B payload difference is naming/layout.",
+    "No speech model or natural audio claim; fresh sealed."
+  ]
+}
