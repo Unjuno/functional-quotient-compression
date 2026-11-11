@@ -1,0 +1,19 @@
+{
+  "experiment_id": "MA-802",
+  "title": "Shared nonlinear encoder with low-rank latent Koopman regime Views",
+  "status": "SCREENING",
+  "base_commit": "177b234d",
+  "prior_art_refs": ["PA214"],
+  "hypothesis": "A shared invertible nonlinear coordinate map plus compact regime coordinates over stable latent linear dynamics recovers held-out regime compositions with lower complete bytes than independent Koopman operators while maintaining long-horizon stability and forecast quality.",
+  "insertion": "latent transition only: A(a,b)=A0+a*B1+b*B2; shared encoder/decoder is fixed across regimes",
+  "latent_system": {"state_dim": 8, "regimes": "a,b in {-1,0,1}; 9 total", "heldout": "diagonal corners (-1,-1) and (1,1)", "rollout_horizon": 40, "encoder": "known orthogonal Q with x=tanh(Qz); inverse is arctanh(x)Q"},
+  "development": {"seeds": [80201], "train_sequences_per_observed_regime": 128, "test_sequences_per_regime": 128, "rank": 2, "tuning": "none"},
+  "fresh": {"seeds": [], "locked": true, "release_rule": "Do not open fresh after native conditional low-rank alias or frozen gate miss."},
+  "controls": ["independent per-regime latent matrices", "shared latent operator without regime code", "Mirror regime coordinates over shared operators", "native additive low-rank conditional latent dynamics"],
+  "metrics": ["heldout one-step nRMSE", "heldout horizon-40 forecast nRMSE", "all-regime forecast nRMSE", "max spectral radius", "actual compressed NPZ bytes", "active MAC proxy per step", "regime reconstruction MACs", "train/test sequences", "optimizer updates", "CPU rollout wall time"],
+  "storage": {"authority": "actual compressed NPZ inference payload", "paid": ["orthogonal coordinate matrix", "latent operators or shared basis", "regime codes/IDs", "metadata"]},
+  "pass_gate": "Heldout horizon-40 nRMSE <=0.02, max spectral radius <1, at least 25% fewer complete bytes than independent, and strict frontier gain over native low-rank conditional dynamics.",
+  "fail_gate": "FAIL Mirror-specific claim on native low-rank alias, quality miss, unstable operator, storage gate miss, or no strict frontier gain.",
+  "compute": {"optimizer_updates": 0, "active_MACs": "three dense maps per step for independent latent transition+forcing+decode; five maps for direct rank-2 conditional transition+forcing+decode", "wall_time": "small CPU nonlinear-coordinate rollout calibration; not throughput evidence"},
+  "boundaries": ["Synthetic known nonlinear conjugacy and linear latent operators only; no trained Deep Koopman or nonlinear-system discovery claim.", "Regime factor codes are known and charged; no regime inference claim.", "The inverse encoder is deterministic from paid orthogonal Q and arctanh; no separate inverse matrix is stored.", "Native conditional low-rank dynamics is the direct attribution control."]
+}
