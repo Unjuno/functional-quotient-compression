@@ -1,0 +1,92 @@
+{
+  "experiment_id": "MA-856",
+  "title": "PA231 learned neural line coordinate",
+  "status": "FAIL",
+  "evidence_lane": "QUALITY/STORAGE/COMPUTE",
+  "base_commit": "7903e936",
+  "hypothesis": "A PA231-trained low-loss line yields several accurate, measurably diverse neural classifiers from two endpoints and small alpha codes, using fewer serialized bytes than materializing every line model; Mirror coordinate m=2alpha-1 must match native interpolation exactly.",
+  "physical_object": "Two learned MLP endpoint weight tensors",
+  "mirror_coordinate": "Scalar coordinate m=2alpha-1 along the learned endpoint line",
+  "logical_multiplicity": "Accurate neural models sampled along one low-loss line",
+  "prior_art_refs": [
+    "PA231"
+  ],
+  "controls": [
+    "single standard MLP",
+    "PA231 learned line beta=1",
+    "beta=0 diversity ablation",
+    "native ordinary interpolation alpha",
+    "same line decoded with Mirror m",
+    "17 materialized line models exact-output storage control",
+    "independent models compute-matched and fully trained"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      31
+    ],
+    "selection_metric": "development NLL; useful-line gate uses worst-grid accuracy within 2 percentage points of standard model and endpoint disagreement >0.5%",
+    "selected_settings": {
+      "learning_rate": 0.1,
+      "beta": 0.1,
+      "selection_basis": "minimum mean validation NLL across the 17-point alpha grid; development seed 31"
+    },
+    "default_comparator": {
+      "beta": 1.0,
+      "description": "PA231 paper default, reported as a fixed comparator, not selected"
+    }
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      61,
+      79,
+      97
+    ],
+    "locked_before_access": true,
+    "execution_settings": {
+      "learning_rate": 0.1,
+      "beta": 0.1,
+      "beta_ablation": 0.0,
+      "default_beta_comparator": 1.0,
+      "epochs": 100,
+      "alpha_grid_points": 17
+    }
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "both endpoints",
+      "alpha or Mirror coordinates",
+      "architecture and normalization metadata",
+      "materialized models for storage control"
+    ]
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true
+  },
+  "success_gate": "Fresh selected beta=0.1 line has worst-grid accuracy no more than 2 percentage points below its paired standard MLP, endpoint disagreement above 0.5%, and endpoint+coordinate actual serialized bytes below 17 materialized line models. The beta=1 PA231 default is reported separately. Mirror-specific gain additionally requires a result beyond ordinary alpha interpolation.",
+  "failure_gate": "Selected line misses quality/diversity gate, or Mirror coordinate exactly aliases ordinary interpolation; report line utility separately from Mirror-specific value.",
+  "boundaries": [
+    "Dataset is sklearn Digits, scaled by 1/16, stratified 60/20/20 split. Fresh seeds are training initialization/data-order replicates on the same heldout test partition, not unseen-task generalization.",
+    "Model is MLP 64\u219232\u219210 with ReLU, no BatchNorm/dropout (~2,410 parameters).",
+    "PA231 Algorithm 1: independently initialize endpoints, sample alpha~Uniform[0,1] each minibatch, optimize CE + beta*cos^2(endpoint weights) with SGD momentum .9; beta=1 default and beta=0 ablation.",
+    "Fresh runs are not used to tune. No language-model or new-capacity claim follows from line sample count."
+  ],
+  "amendments": [
+    {
+      "id": "01",
+      "date": "2026-11-11",
+      "reason": "Replace exploratory XOR proposal with PA231 line training on Digits before any fresh evaluation; development selects beta=0.1 while beta=1 remains a fixed paper-default comparator.",
+      "fresh_data_accessed_before_freeze": false
+    },
+    {
+      "id": "02",
+      "date": "2026-11-11",
+      "reason": "Fresh screen completed under the frozen settings; selected-line worst-grid accuracy exceeded the 2 pp allowance on seed 61, and ordinary alpha versus Mirror m gives exact logits.",
+      "fresh_data_accessed_before_this_amendment": true,
+      "settings_changed_after_fresh": false
+    }
+  ]
+}
