@@ -542,3 +542,8 @@ MA-639 is a verified FAIL on `research/ma-639-loki-nullspace-mirror-codes-202611
 ## Current handoff — 2026-11-11, MA-835
 
 MA-835 is a verified scoped synthetic FAIL: rank-2 system codes exactly alias native readout factorization at 1,469 B and miss rollout quality (nRMSE .03862); independent readouts meet the threshold at 2,690 B, while cubic basis growth restores quality at 3,206 B. Fresh remained sealed. Continue with MA-836 (NTK-orthogonal Mirror task codebook; PA225), preserving native PEFT/tangent-feature controls and reporting inter-task versus intra-task NTK statistics. Dedicated branch: `research/ma-835-karc-new-system-code-20261111`.
+
+
+## Current handoff — 2026-11-11, MA-836
+
+MA-836 is a verified scoped synthetic FAIL. Rank-2 Mirror/native NTK factorization aliases at 1,117 B and misses rollout quality (nRMSE .09086); full-rank NTK-orthogonal basis is exact but costs 2,065 B vs 1,614 B independent, adds 9x forward MAC proxy and leaves functional overlap unchanged. Fresh remained sealed. Continue with MA-837, the next eligible P0 by registry order. Dedicated branch: `research/ma-836-ntk-orthogonal-codebook-20261111`.
