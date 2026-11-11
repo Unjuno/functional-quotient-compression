@@ -247,7 +247,7 @@ High-information P0:
 5. MA-789/790 — Cluster-aware and sparse-interpolated upcycling coordinates
 6. MA-791/792 — REAP-aware logical recovery and routing-free Mirror experts
 7. MA-794/795 — global reused pool factorization and learn-many->compact logical recovery
-8. MA-796/798 — low-rank recurrent shared dynamical components and held-out composition
+8. MA-796/797 — recurrent task codes and factorized task-dependence loci (completed; exact-alias FAILs). Pause MA-798/799 pending a Mirror-distinct mechanism; see `docs/phase2/LATENT_DYNAMICS_TASK_VIEW_DIAGNOSTIC_2026-11-11.md`.
 9. MA-800/801 — Vector-Network reusable rank-1 atoms with persistent x fast coordinates
 10. MA-802/803/805 — Koopman latent operator Views and neural-operator bridge
 11. MA-806/807 — invertible one-step robot-policy Views and embodiment x task factorization
