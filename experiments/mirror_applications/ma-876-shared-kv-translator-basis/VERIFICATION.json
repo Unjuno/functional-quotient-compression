@@ -1,0 +1,34 @@
+{
+  "experiment_id": "MA-876",
+  "commit": "pending",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-876-shared-kv-translator-basis/tests && python experiments/mirror_applications/ma-876-shared-kv-translator-basis/verify_results.py",
+    "passed": 5,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "family_full_map_bytes": 7590286,
+    "family_shared_rank32_bytes": 609934,
+    "heldout_full_map_bytes": 2996100,
+    "heldout_shared_marginal_bytes": 573060,
+    "model_weights_common_and_reported_separately": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_seeds": [
+    983,
+    997,
+    1009
+  ],
+  "notes": [
+    "Rank32 and disjoint prompt row IDs were committed before fresh test evaluation.",
+    "Native target cache identity injection reproduced logits within 1.22e-4 max absolute error.",
+    "CUDA unavailable; CPU-only timing is reported.",
+    "Mirror and native PCA code the same map basis; no Mirror-specific benefit."
+  ]
+}
