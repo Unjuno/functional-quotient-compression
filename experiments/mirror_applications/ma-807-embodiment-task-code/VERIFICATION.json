@@ -1,0 +1,13 @@
+{
+  "experiment_id": "MA-807",
+  "commit": "PENDING",
+  "tests": {"command": "pytest -q experiments/mirror_applications/ma-807-embodiment-task-code/tests", "passed": 1, "failed": 0},
+  "serialization": {"roundtrip_checked": true, "byte_exact": true},
+  "metric_replay": {"checked": true, "max_difference": 0.0},
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Five checkerboard embodiment-task pairings were held out from shared-base fitting.",
+    "All compressed payloads decode to evaluated pair maps with maximum absolute error 0.",
+    "Factorized Mirror and native additive Givens have identical payload hashes/actions; fresh stayed sealed."
+  ]
+}
