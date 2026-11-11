@@ -1,0 +1,73 @@
+{
+  "experiment_id": "MA-877",
+  "title": "Position-free KV transfer after inverse RoPE",
+  "status": "SCREENING",
+  "evidence_lane": "CROSS_MODEL_KV/QUALITY/STORAGE/COMPUTE",
+  "base_commit": "66aa8caa",
+  "hypothesis": "For the frozen Pythia-70M\u2192SmolLM2-135M pair, fitting affine maps after inverse source/target RoPE and reapplying target RoPE improves long-context heldout next-token NLL over direct RoPE-space ridge; a rank\u226432 shared map basis retains the position-free full-map quality within 0.05 nat while reducing mapper bytes by at least 50%.",
+  "physical_object": "One position-free cross-model translator family across target KV layer/head roles.",
+  "mirror_coordinate": "Per-role coefficients into a shared PCA map basis; target RoPE is reapplied after map reconstruction.",
+  "logical_multiplicity": "Layer/head-specific target cache translators from one shared translator basis.",
+  "prior_art_refs": [
+    "PA236",
+    "PA156"
+  ],
+  "controls": [
+    "native target prefill",
+    "independent position-free per-role affine ridge",
+    "direct RoPE-space per-role affine ridge",
+    "rank 1/2/4/8/16/32 PCA map-code basis"
+  ],
+  "development": {
+    "split": "Wikitext-2 train",
+    "seed": 829,
+    "calibration_prompts": 24,
+    "test_prompts": 16,
+    "selection_metric": "Mean transferred next-token NLL delta vs full position-free independent ridge; ranks must also satisfy absolute target delta and actual-byte screen."
+  },
+  "fresh": {
+    "calibration_split": "Wikitext-2 validation",
+    "test_split": "Wikitext-2 test",
+    "seeds": [
+      983,
+      997,
+      1009
+    ],
+    "calibration_prompts_per_seed": 12,
+    "test_prompts_per_seed": 16,
+    "locked_before_access": true,
+    "prompt_identity": "exact tokenizer offset alignment; deterministic pair/seed disjoint chunks",
+    "test_context_positions": "Report all prompt lengths and separately summarize prompts whose tested prefix extends beyond position 64."
+  },
+  "models": {
+    "source": "EleutherAI/pythia-70m-deduped (GPTNeoX RoPE, rotary_pct 0.25, theta 10000)",
+    "target": "HuggingFaceTB/SmolLM2-135M (Llama RoPE, theta 100000)"
+  },
+  "map_fit": "Per target layer/KV head and K/V role closed-form affine ridge, alpha=0.01. Calibration fit sees only positions 0..63. Position-free path inverts each model RoPE for K, fits K and V in content coordinates, then reapplies target RoPE to translated K. Direct control fits/applies maps in each model\u2019s stored RoPE space.",
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "affine map or shared mean+basis+per-role coefficients",
+      "role/layer/head metadata",
+      "pair identifier",
+      "format header"
+    ],
+    "common_model_weights": "reported separately; not part of marginal translator comparison"
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": false,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true,
+    "hardware": "CPU only; source prefill, target prefill, calibration, map fit, translation, suffix timing separated"
+  },
+  "success_gate": "On fresh seeds, position-free independent maps improve mean NLL over direct RoPE-space ridge by >=0.10 nat on each seed; rank32 is within +0.05 nat of position-free full maps on every seed; actual shared mapper bytes <=50% of independent maps; the 3-seed mean compressed delta vs native target prefill <=0.50 nat.",
+  "failure_gate": "Any required quality or storage gate fails in at least two of three fresh seeds, or exact inverse/reapply validation fails.",
+  "boundaries": [
+    "One ordered model pair only; no general cross-family claim.",
+    "Only one next-token target per prompt and Wikitext-2.",
+    "Single tokenization offset-aligned prompt source; no long-generation trajectory claim.",
+    "CPU latency only; no GPU or serving adoption claim.",
+    "A native shared PCA map code is the attribution control; matching it means no Mirror-specific gain."
+  ]
+}
