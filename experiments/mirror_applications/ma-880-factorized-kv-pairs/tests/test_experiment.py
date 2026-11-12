@@ -41,6 +41,9 @@ def test_factorized_pair_maps_reconstruct_deterministically():
     pred1 = module.predict_pair_maps(pair, factor, mean, basis, refs, models)
     pred2 = module.predict_pair_maps(pair, factor, mean, basis, refs, models)
     assert pred1.shape == (len(refs), 65, 64)
+    assert factor['code_mean'].shape == (4,)
+    assert factor['code_scale'].shape == (4,)
+    assert (factor['code_scale'] > 0).all()
     assert np.isfinite(pred1).all()
     np.testing.assert_array_equal(pred1, pred2)
 
