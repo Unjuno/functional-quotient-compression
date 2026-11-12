@@ -1,0 +1,20 @@
+{
+  "experiment_id": "MA-892",
+  "title": "ReFiNe latent hierarchy Mirror coordinates",
+  "status": "UNTESTED",
+  "protocol_frozen": false,
+  "evidence_lane": "NEURAL_GRAPHICS/HIERARCHICAL_FIELDS/QUALITY/STORAGE/COMPUTE",
+  "blocker": "Official ReFiNe control requires Kaolin/Kaolin-Wisp with CUDA extension and external shape assets; unavailable in current CPU-only container.",
+  "hypothesis": "A compact hierarchy View coordinate can reduce address/latent bytes over native ReFiNe scene latents while preserving held-out SDF/PSNR quality and recursive query cost.",
+  "prior_art_refs": ["PA244"],
+  "physical_object": "One shared recursive ReFiNe field/network",
+  "mirror_coordinate": "Scene/shape hierarchy View code over recursive field roles",
+  "logical_multiplicity": "Multiple logical shapes or radiance fields from one shared recursive field",
+  "controls_required": ["Native ReFiNe latent codes", "Independent per-shape ReFiNe upper control when practical", "Matched-size ordinary latent/FiLM control"],
+  "fresh": {"whole_shape_holdout": true, "seeds": [], "locked_before_access": false},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["field weights", "all recursive nodes/addresses", "scene latents", "codes", "reconstruction metadata"]},
+  "compute": {"report_query_recursion_depth": true, "report_optimizer_updates": true, "report_fit_and_query_wall_clock": true},
+  "success_gate": "Not frozen; must be specified against native ReFiNe controls before fresh evaluation.",
+  "failure_gate": "Not frozen; no model run occurred.",
+  "boundaries": ["This feasibility review is not an SDF, PSNR, storage, or speed result.", "Do not replace ReFiNe with a generic toy MLP and call MA-892 complete."]
+}
