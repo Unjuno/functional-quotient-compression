@@ -14,3 +14,6 @@ See [PROTOCOL.json](PROTOCOL.json) for the frozen pair partitions, training reci
 
 
 Development amendment 01 standardizes each PCA code dimension from training-pair maps only. The mean and scale vectors are serialized and billed. Fresh splits remain unopened. See `PROTOCOL.json`.
+
+
+Post-fresh accounting amendment 02 adds per-world wall time, heldout full-map calibration time, and explicit serialized role-grid metadata. An identical replay preserves the original first-run artifact in `fresh_screening_run.json`; it does not alter settings or gates.

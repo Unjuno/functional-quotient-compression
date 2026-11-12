@@ -167,6 +167,11 @@
       "id": "01",
       "timing": "after initial development, before the amended development rerun and before any fresh split access",
       "change": "Initial raw-code development showed poorly conditioned coefficients (train code MSE about 9.8e5) and weak CP optimization. Standardize each PCA coefficient using mean/std computed only from training-pair map codes; serialize and charge these vectors; retain the same ranks, 600 updates, optimizer, pairs, prompt counts and selection rule."
+    },
+    {
+      "id": "02",
+      "timing": "after first fresh run, before an identical diagnostic replay",
+      "change": "Add per-world wall time, heldout full-map calibration time and fixed role-grid serializer metadata bytes. The replay uses the same frozen Q=1, model pairs, prompt IDs, calibration maps, seeds and 600 updates; it adds compute/accounting fields only and preserves the initial output."
     }
   ]
 }
