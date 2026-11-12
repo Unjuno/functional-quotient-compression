@@ -1,19 +1,45 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-883",
+  "commit": "pending",
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "pytest -q experiments/mirror_applications/ma-883-sparse-nonlinear-repair/tests",
+    "passed": 6,
+    "failed": 0
   },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "roundtrip_checked": true,
+    "initial_writer_decoder_order_mismatch": true,
+    "post_hoc_corrected_roundtrip_all_payloads": true,
+    "byte_exact": "serialized payload bytes and hashes measured from complete inference payload files",
+    "max_abs_nll_delta_nat": 0.0,
+    "payload_inventory": "PAYLOAD_INVENTORY.json",
+    "parameter_tensor_roundtrip_tested": true
   },
-  "metric_replay": {
-    "checked": false,
-    "max_difference": null
+  "fresh_split_integrity_checked": true,
+  "fresh_seeds": [
+    983,
+    997,
+    1009
+  ],
+  "development_hard_pairs": 2,
+  "selected_hidden_width": 16,
+  "fresh_gate_counts": {
+    "native_plus_1_pass": 2,
+    "full_ridge_plus_0_5_pass": 6,
+    "gelu_beats_identity_pass": 0,
+    "pairs_repaired": 2,
+    "max_pairs_allowed": 1
   },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "payload": {
+    "sparse_gelu_bytes": 6522107,
+    "full_ridge_bytes": 5990621,
+    "total_fraction_of_full_ridge": 1.0887196836521622,
+    "private_bytes": 3433087,
+    "private_fraction_of_full_ridge": 0.5730769815015839
+  },
+  "notes": [
+    "Development and all fresh results were recorded before decoder correction.",
+    "Decoder-only fix matches frozen writer order; post-hoc same-test replay is integrity evidence only.",
+    "CPU-only; no CacheBridge/MoT reproduction."
+  ]
 }
