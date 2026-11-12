@@ -1,0 +1,29 @@
+{
+  "experiment_id": "MA-894",
+  "commit": null,
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-894-tensorf-scene-factor-mirror/tests -v",
+    "passed": 4,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": false,
+    "authoritative_payload_measure": "len(np.savez_compressed(BytesIO, all paid arrays and metadata))"
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Synthetic scalar lattice only; no actual ray rendering or official TensoRF scene training.",
+    "Native scene-mode CP exactly aliases the Mirror coordinate parameterization in this experiment.",
+    "Fresh seeds were fixed in the frozen protocol before evaluation.",
+    "Post-run review found dense-query timing omitted an explicit gather; query wall-clock comparisons are invalid and are not used for the decision."
+  ],
+  "environment": {
+    "torch": "2.14.1+cpu",
+    "device": "cpu"
+  }
+}

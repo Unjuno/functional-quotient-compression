@@ -1,0 +1,83 @@
+{
+  "experiment_id": "MA-894",
+  "title": "TensoRF scene x component Mirror factorization (synthetic mechanism screen)",
+  "status": "SCREENING",
+  "protocol_frozen": true,
+  "evidence_lane": "SYNTHETIC_NEURAL_GRAPHICS/MECHANISM/STORAGE/COMPUTE",
+  "base_commit": "c738b4b1e99ce86e12157c963232138663e395e2",
+  "hypothesis": "When multiple fields share separable spatial atoms, a scene coordinate over shared tensor components will reconstruct unseen fields from partial coordinate samples using fewer serialized bytes than independent dense fields.",
+  "prior_art_refs": [
+    "PA246"
+  ],
+  "physical_object": "Three shared spatial factor tables X, Y, Z over a rank-4 scene x X x Y x Z CP field",
+  "mirror_coordinate": "Per-scene rank-4 coefficient vector",
+  "logical_multiplicity": "One rank-4 sampled scalar field per scene",
+  "controls": [
+    "Independent dense field payload per scene",
+    "Scene-mode CP factorization (native algebraic control; same 4-way CP function class)",
+    "PCA over flattened development fields with fresh-scene code fit from the same observed coordinates"
+  ],
+  "development": {
+    "seeds": [
+      89401,
+      89407
+    ],
+    "purpose": "Check fit convergence and code fitting; no fresh scenes accessed.",
+    "allowed_changes": [
+      "debugging",
+      "training stability only"
+    ],
+    "selection_metric": "Both development seeds must reach held-out grid nRMSE <= 0.001 after fixed 1000 CP updates; hyperparameters remain unchanged."
+  },
+  "fresh": {
+    "seeds": [
+      89501,
+      89503,
+      89509
+    ],
+    "development_scenes": 6,
+    "fresh_scenes": 3,
+    "observed_fraction": 0.5,
+    "locked_before_access": true
+  },
+  "task": {
+    "grid": [
+      8,
+      8,
+      8
+    ],
+    "rank": 4,
+    "training_updates": 1000,
+    "fresh_code_updates": 500,
+    "quality_metric": "held-out normalized RMSE and field PSNR proxy (peak-to-peak range fixed to 1)",
+    "query": "all integer lattice coordinates"
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "format": "NPZ containing every inference factor/code/metadata array",
+    "paid_objects": [
+      "shared CP axes",
+      "development and fresh scene codes",
+      "PCA mean and basis",
+      "all dense independent fields",
+      "shape/rank/normalization metadata"
+    ]
+  },
+  "compute": {
+    "report": [
+      "optimizer updates",
+      "fit wall-clock",
+      "fresh-code wall-clock",
+      "full-grid query wall-clock",
+      "multiply-add proxy"
+    ]
+  },
+  "success_gate": "Scoped mechanism signal only if Mirror achieves fresh held-out RMSE <= 0.02 and uses <= 50% of independent dense payload bytes; do not claim Mirror specificity if native scene-mode CP or PCA matches quality/bytes within 1%.",
+  "failure_gate": "Scoped FAIL for the Mirror-specific claim if quality gate fails, payload gate fails, or the native scene-mode CP control exactly aliases the Mirror parameterization at equal bytes and compute.",
+  "boundaries": [
+    "Synthetic scalar fields only; no images, volumetric rendering, real TensoRF optimization, novel-view PSNR, or FPS claim.",
+    "This screen can falsify Mirror-specific attribution for scene x CP component codes but cannot rule out TensoRF Views on real scenes.",
+    "Capacity claims require converged fixed-byte frontiers and are outside this screen."
+  ],
+  "implementation_sha256": "db561aabdc0c52f33f24aa926e68883649b0ea6d879b43bde06233ec7ba130bf"
+}
