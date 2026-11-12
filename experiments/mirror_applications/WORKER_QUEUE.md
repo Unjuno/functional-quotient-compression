@@ -643,3 +643,6 @@ MA-879 completed FAIL. See its RESULTS.md and VERIFICATION.json on `research/ma-
 
 
 MA-880 completed FAIL. See `experiments/mirror_applications/ma-880-factorized-kv-pairs/RESULTS.md` on `research/ma-880-factorized-kv-pairs-20261112`. Next P0: MA-881 — MoT translators compressed into logical experts.
+
+
+MA-881 completed FAIL. Three fresh Pythia-70M→SmolLM2-135M worlds: shared rank-32 MoT translator views saved 89.98% payload bytes but missed NLL gates by large margins in all worlds; the independent two-expert MoT-style control was also worse than native. Ordinary PCA coding, no Mirror-specific gain. Details: `experiments/mirror_applications/ma-881-mot-translator-views/RESULTS.md` on `research/ma-881-mot-translator-views-20261112`. Next P0: MA-882 — factor layer-alignment geometry from source-target pair identity; keep projection/injection positions fixed.
