@@ -1,0 +1,62 @@
+{
+  "authority": "actual serialized inference payload bytes",
+  "format": "MA889 binary: full per-role affine ridge maps plus per-pair RMS mean/std and frozen z thresholds",
+  "fresh_payloads": [
+    {
+      "seed": 12889,
+      "bytes": 7787782,
+      "sha256": "36d495cad30b9b5474064922a3493694f4c5eb8bba38cf7d5c21cef8b103699e",
+      "pre_header_fix_sha256": "21910b6ee49bae03d4d49560588f915c47792658ec50e9c2953422f762eb9309",
+      "full_ridge_map_bytes": 7787752,
+      "incremental_gate_bytes": 30,
+      "payload_file": "gated_full_ridge_1.bin",
+      "artifact_retained_in_git": false
+    },
+    {
+      "seed": 12893,
+      "bytes": 7787782,
+      "sha256": "869026a6897fc4ab882750fdd2bc63d3e1006389f60115ddd37086c526267d89",
+      "pre_header_fix_sha256": "670b0cddc47f6c8df289c81c203b760de93ee1bfaecabb7f29c8e37be0ff881a",
+      "full_ridge_map_bytes": 7787752,
+      "incremental_gate_bytes": 30,
+      "payload_file": "gated_full_ridge_2.bin",
+      "artifact_retained_in_git": false
+    },
+    {
+      "seed": 12899,
+      "bytes": 7787782,
+      "sha256": "08e990719961ef0ac4df569bd8ed786c50cb6fa85119c730596b9d0f3893d8e1",
+      "pre_header_fix_sha256": "54c95b94f2196a7111fa1bacce21898a1072a74a7d01e2e419cb301385744be7",
+      "full_ridge_map_bytes": 7787752,
+      "incremental_gate_bytes": 30,
+      "payload_file": "gated_full_ridge_3.bin",
+      "artifact_retained_in_git": false
+    }
+  ],
+  "development_thresholds": {
+    "EleutherAI/pythia-160m-deduped": "-inf",
+    "HuggingFaceTB/SmolLM2-135M": 1.0
+  },
+  "model_checkpoints": {
+    "EleutherAI/pythia-70m-deduped": {
+      "snapshot": "e93a9faa9c77e5d09219f6c868bfc7a1bd65593c",
+      "weight_files": 1,
+      "weights_sha256": "08c28411e2d493853bae377a53ecb12a9cfe8b92936cd678afb845f66c54eb2d",
+      "checkpoint_bytes": 166029852
+    },
+    "EleutherAI/pythia-160m-deduped": {
+      "snapshot": "582159a2dfe3e712a8d47ae83dec95ae3bde8e7e",
+      "weight_files": 1,
+      "weights_sha256": "6fb211f7d10b3ead37d2f1e51bc8a9971912cf24063889e00b010bf75e4cc998",
+      "checkpoint_bytes": 374998696
+    },
+    "HuggingFaceTB/SmolLM2-135M": {
+      "snapshot": "93efa2f097d58c2a74874c7e644dbc9b0cee75a2",
+      "weight_files": 1,
+      "weights_sha256": "8a9c1ed96bb73faf9045eba7e8ba6c9971f195f92380025d8ee7f4c661776142",
+      "checkpoint_bytes": 269060552
+    }
+  },
+  "interpretation": "The gate adds only 30 serialized bytes relative to the same full ridge map bank; maps themselves are not compressed.",
+  "artifact_retention": "Serialized payload blobs remain as local generated worktree artifacts and will be excluded from Git; hashes, byte counts, model provenance and deterministic serializer are committed."
+}

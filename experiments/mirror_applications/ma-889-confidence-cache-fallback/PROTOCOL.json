@@ -1,0 +1,80 @@
+{
+  "experiment_id": "MA-889",
+  "title": "Confidence-gated cross-model KV translation with native fallback",
+  "status": "SCREENING",
+  "evidence_lane": "CROSS_MODEL_KV/RELIABILITY/QUALITY/STORAGE/COMPUTE",
+  "base_commit": "480cac39b",
+  "hypothesis": "For source-to-target cache pairs that failed fixed affine translation, a threshold chosen only on development can use source-KV novelty (no target loss at inference) to select translation or native target prefill, keeping fresh target NLL within +0.5 nat of native while falling back on at most 50% of prompts and beating always-native end-to-end latency.",
+  "prior_art_refs": [
+    "PA236",
+    "PA238"
+  ],
+  "prior_art_boundary": "PA236 shows pair-dependent ridge failures; PA238 uses mixtures plus target-side context correction and reports trajectory failures. This test adds source-only reliability gating and native re-prefill, not a MoT reproduction.",
+  "models": {
+    "source": "EleutherAI/pythia-70m-deduped",
+    "targets": [
+      "EleutherAI/pythia-160m-deduped",
+      "HuggingFaceTB/SmolLM2-135M"
+    ]
+  },
+  "data": {
+    "source": "Salesforce/wikitext wikitext-103-raw-v1 train",
+    "exclusions": "Exclude Wikitext-2 titles/rows and all selected title/text hashes from MA-883, MA-886 and MA-887.",
+    "partition": "Whole article titles by int(SHA256(title)[:8],16) mod 4; bucket 0 development, buckets 1/2/3 fresh seeds 12889/12893/12899.",
+    "prompt_alignment": "Identical source/target tokenizer character offsets and token counts.",
+    "prompts_per_bucket": 48,
+    "split": "24 mapper/calibration fit, 8 development check, 16 heldout prompts per bucket."
+  },
+  "fixed_design": {
+    "mapper": "Independent per-source-target affine ridge KV map, layer/head nearest-relative alignment, remove source/target RoPE for fitting and restore target RoPE before replay; alpha 0.01, inherited as prior control from MA-886.",
+    "source_only_score": "Per prompt, RMS of source key/value vectors over mapped roles and positions, standardized against the corresponding 24-prompt fit-set mean and standard deviation. Gate does not inspect target cache, target logits, labels, or NLL at inference.",
+    "gate": "If standardized source RMS exceeds frozen development threshold, run native target prefill; otherwise translate. Gate is evaluated independently per target pair.",
+    "threshold_selection": "Use development check prompts only to select from fixed thresholds [-inf, -1, -0.5, 0, 0.5, 1, 1.5, 2, 3, inf]. Minimize mean per-target path time (translate apply+replay or native target prefill+replay); producer prefill is a shared constant across the two targets and is charged once in final fanout latency. Thresholds must satisfy mean NLL <= native +0.5 nat and fallback fraction <=50%; tie-break by lower NLL, then higher threshold. If none feasible, choose minimum-NLL threshold and record no feasible point.",
+    "fresh_fit": "Refit each pair map and source RMS normalizer on that fresh bucket fit split; reuse frozen threshold, no fresh retuning."
+  },
+  "controls": [
+    "Native target prefill plus one-token replay",
+    "Always translate using independent per-pair ridge map",
+    "Source-only confidence gate with native fallback",
+    "MA-886 shared global+role-code map reported as historical comparator, not rerun."
+  ],
+  "success_gate": "For both targets aggregated over all three fresh seeds: gated mean NLL <= native +0.5 nat; fallback <=50%; fanout end-to-end mean latency including one source prefill shared across both target handoffs is lower than two always-native target prefills; serialized per-pair mapper plus gate state is <=1% larger than the same independent ridge maps without the gate (this is a reliability-policy experiment, not a map-compression claim).",
+  "failure_gate": "Any quality, fallback, combined latency, or incremental payload gate fails; or no development threshold meets both the quality/fallback constraints.",
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_state": [
+      "per-pair affine maps",
+      "source RMS mean/std and threshold",
+      "pair/model IDs",
+      "layer/head alignment and dtype metadata"
+    ],
+    "report_system_cost": [
+      "source checkpoint",
+      "target checkpoint",
+      "mapper+gate payload"
+    ]
+  },
+  "compute": {
+    "hardware": "CPU (container capability probe reported torch 2.14.1+cpu, CUDA unavailable)",
+    "measurements": [
+      "source cache prefill",
+      "native target prefill and replay",
+      "mapper application and translated replay",
+      "fallback target prefill and replay",
+      "end-to-end wall time",
+      "fit and threshold selection time",
+      "active MAC proxy",
+      "peak RSS"
+    ]
+  },
+  "scope": [
+    "Two registered source-target pairs, one-token next-token replay, Wikitext-103 article-heldout prompts.",
+    "No target-side correction, multi-token rollout, GPU throughput, or general cross-model semantics."
+  ],
+  "protocol_amendments": [
+    {
+      "before_fresh": true,
+      "reason": "Development harness audit found the source prefill was charged once per target in threshold scoring and omitted on native fallback in reported gate latency; correct accounting is one source prefill shared across the two fanout targets, plus either translated replay or native target prefill/replay per target. The initial <=25% mapper-byte criterion was inapplicable because this candidate intentionally uses the registered per-pair ridge maps; replaced with a <=1% incremental gate-state overhead criterion, while reporting full map bytes. Fresh thresholds must use development-selected fixed values; fresh check prompts are not used to retune."
+    }
+  ]
+}
