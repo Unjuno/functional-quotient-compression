@@ -1,0 +1,38 @@
+{
+  "experiment_id": "MA-886",
+  "title": "One producer KV prefill fanned out to multiple target models",
+  "status": "SCREENING",
+  "base_commit": "520946190",
+  "evidence_lane": "CROSS_MODEL_KV/FANOUT/QUALITY/STORAGE/COMPUTE",
+  "hypothesis": "A single Pythia-70M producer prefill can be translated into useful target caches for both Pythia-160M and SmolLM2-135M using one pooled global affine map plus compact target-role gain/bias coordinates; counting the producer prefill once should beat two independent native target prefills in summed one-token handoff latency while keeping each target within +1 nat of native NLL.",
+  "prior_art_refs": ["PA239", "PA236"],
+  "prior_art_boundary": "PA236/PA239 establish cross-model cache transfer and prefill reuse as existing methods. This screen uses ordinary unweighted affine ridge and does not reproduce CacheBridge, Universal Context-Reuse, or MoT.",
+  "models": {"producer":"EleutherAI/pythia-70m-deduped","targets":["EleutherAI/pythia-160m-deduped","HuggingFaceTB/SmolLM2-135M"]},
+  "data": {
+    "source":"Salesforce/wikitext wikitext-103-raw-v1 train",
+    "old_content_exclusion":"Exclude every top-level article title and exact row in all Wikitext-2 raw-v1 splits, plus every title/text hash reserved in MA-883.",
+    "article_partition":"Whole article titles by int(SHA256(title)[:8],16) mod 4; bucket 0 development and buckets 1/2/3 fresh seeds 10883/10889/10897.",
+    "prompt_alignment":"Require identical character-offset tokenization and equal token count among producer and both targets; use the same text rows for both consumers.",
+    "prompts_per_bucket":48,
+    "split":"24 map-fit prompts, 8 check prompts, 16 test prompts per bucket.",
+    "eligibility":"16-128 tokens, unique text; title/text hashes disjoint from MA-883 and from other buckets."
+  },
+  "fixed_design": {
+    "producer":"Run Pythia-70M prefill once per prompt; this canonical K/V state supplies both target mappings.",
+    "layer_alignment":"Nearest relative source-layer index for each target layer.",
+    "head_alignment":"Nearest relative producer attention-head index for each target KV head.",
+    "rope":"Remove source and target RoPE from key vectors before fitting; restore each target RoPE before replay.",
+    "shared_physical_map":"One pooled 65x64 affine map shared over both targets and all target roles, fit on calibration rows.",
+    "target_view_code":"Per-target-role scalar output gain and 64D bias fitted by closed-form least squares.",
+    "ridge_alpha":0.01,
+    "fresh_fit":"Each fresh bucket refits maps/codes only on its own 24 calibration prompts; no dev weights are reused.",
+    "runtime_gate":"Target identity selects fixed role coordinates; no target-NLL or hidden cache-quality gate."
+  },
+  "controls":["Native target prefill and one-token target replay for both targets","Independent per-target-role affine ridge maps","One global affine map per target architecture without role coordinates","One pooled global affine map plus per-target-role gain/bias (candidate)","Native cache replay identity"],
+  "success_gate":"Across all six fresh target×seed conditions, candidate NLL is <= native +1.0 nat; in each seed summed source-prefill-once + both target translations + both target replays is faster than two native target prefills+replays; complete serialized translator payload <=25% of independent full-ridge mapper payload.",
+  "failure_gate":"Any quality, summed-latency, or mapper-byte gate failure. Also fail Mirror-specific attribution if candidate does not improve the joint quality/bytes/latency frontier over the target-global affine control.",
+  "storage":{"authority":"actual serialized inference payload bytes","paid_state":["shared affine map","target-role gains/biases","target model IDs","alignment and format metadata","all independent-control maps"],"system_storage":"Report producer, both target checkpoints, and mapper payload bytes separately; producer checkpoint is an added system object, not free."},
+  "compute":{"hardware":"CPU; report CUDA availability","measurements":["producer prefill once per text","each native target prefill","mapper apply per target","target replay per target","summed native and fanout wall time","calibration fit time","active MAC proxy per token","peak RSS"]},
+  "scope":["One Pythia-70M source, two target models, one-token next-token replay, article-heldout Wikitext-103-train prompts.","No multi-token decoding, other model pairs, GPU throughput, CacheBridge/MoT equivalence, or general cross-model semantics."],
+  "protocol_amendments":[]
+}
