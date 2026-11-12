@@ -1,12 +1,11 @@
 # MA-881 status
 
-- Status: SCREENING
+- Status: FAIL
 - Branch: `research/ma-881-mot-translator-views-20261112`
-- Base commit: `1d9f6706d`
-- Protocol freeze: frozen before development run
-- Development: not run
-- Fresh/audit opened: no
-- Results: pending
-- Verification: pending
+- Protocol freeze: `55146aac7` before development
+- Development rank freeze: `c0d540a58` before fresh audit
+- Fresh seeds: 983, 997, 1009
+- Quality gates: 0/3 pass; storage gates: 3/3 pass
+- Verification: integrity/gate replay passes; all quality gates fail
 
-This is a component-level MoT routing/context-correction screen with affine ridge experts, not a full MoT reproduction.
+See [RESULTS.md](RESULTS.md). This is a component-level MoT adaptation, not a full MoT reproduction.

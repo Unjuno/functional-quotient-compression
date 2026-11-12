@@ -1,19 +1,24 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-881",
+  "commit": "pending results commit",
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "python -m pytest -q experiments/mirror_applications/ma-881-mot-translator-views/tests",
+    "passed": 3,
+    "failed": 0
   },
   "serialization": {
     "roundtrip_checked": false,
-    "byte_exact": false
+    "byte_exact": true
   },
   "metric_replay": {
-    "checked": false,
-    "max_difference": null
+    "checked": true,
+    "max_difference": 0.0
   },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Serialized payload lengths and SHA-256 hashes match saved artifacts for all three worlds.",
+    "Fresh split membership, preregistered gates and verdicts replay in source/verify_results.py.",
+    "Quality gates fail in all three worlds; storage gates pass in all three.",
+    "No standalone reconstruction decoder or end-to-end inference roundtrip was implemented; serialization integrity was checked against emitted payload bytes."
+  ]
 }
