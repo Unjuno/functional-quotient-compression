@@ -1,7 +1,7 @@
 {
   "experiment_id": "MA-880",
   "title": "Cross-model KV source \u00d7 target factorization with whole ordered-pair holdout",
-  "status": "SCREENING",
+  "status": "FAIL",
   "evidence_lane": "CROSS_MODEL_KV/PAIR_GENERALIZATION/QUALITY/STORAGE/COMPUTE",
   "hypothesis": "A canonical rank-32 cache-map basis plus a low-rank CP functional coordinate over source-model identity \u00d7 target-model identity \u00d7 normalized target layer/head/KV role can predict unseen ordered cache-transfer pairs without fitting a pair-specific map. On two fresh ordered pairs, predictions will remain within +0.50 nat of independent weighted ridge and within +1.00 nat of native target prefill while using at least 50% fewer serialized bridge bytes than independent maps.",
   "prior_art_refs": [
@@ -178,5 +178,7 @@
       "timing": "after fresh implementation-deviation results were inspected; before corrected development and corrected fresh replay",
       "change": "Code review found the initial MA-880 implementation omitted the protocol-declared inverse-source/inverse-target RoPE operations during ridge fitting and target RoPE application during decoding. Preserve the initial outputs and serialized payloads as `*_unrotated_deviation` evidence, do not use them to select settings, implement the already frozen position rule, rerun development on train only to reselect CP rank, then run the corrected fresh worlds with unchanged pair partition, prompt counts and gates. GPT-2 uses absolute positions and receives no RoPE transform."
     }
-  ]
+  ],
+  "final_decision": "FAIL",
+  "post_fresh_deviation_disposition": "Initial raw-position implementation output is preserved but excluded from the official corrected result. Corrected result uses the already declared RoPE protocol after train-only dev reselection; same fresh row IDs were replayed, so this is an amended diagnostic and not an independent audit."
 }
