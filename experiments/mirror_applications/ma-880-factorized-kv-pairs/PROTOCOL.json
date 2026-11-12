@@ -1,0 +1,164 @@
+{
+  "experiment_id": "MA-880",
+  "title": "Cross-model KV source \u00d7 target factorization with whole ordered-pair holdout",
+  "status": "SCREENING",
+  "evidence_lane": "CROSS_MODEL_KV/PAIR_GENERALIZATION/QUALITY/STORAGE/COMPUTE",
+  "hypothesis": "A canonical rank-32 cache-map basis plus a low-rank CP functional coordinate over source-model identity \u00d7 target-model identity \u00d7 normalized target layer/head/KV role can predict unseen ordered cache-transfer pairs without fitting a pair-specific map. On two fresh ordered pairs, predictions will remain within +0.50 nat of independent weighted ridge and within +1.00 nat of native target prefill while using at least 50% fewer serialized bridge bytes than independent maps.",
+  "prior_art_refs": [
+    "PA236",
+    "PA237"
+  ],
+  "prior_art_boundary": "PA236/PA237 establish pair-dependent per-pair closed-form bridge controls. MA-876 tests a shared PCA basis with heldout-pair code fit; MA-880 tests source\u00d7target model factors that predict a whole unseen direction without heldout-pair calibration. This is not a CacheBridge reproduction.",
+  "physical_object": "Per-target-layer/head/KV affine cache maps, represented by a shared rank-32 PCA basis and source\u00d7target\u00d7role low-rank coefficients.",
+  "logical_multiplicity": "Ordered model-pair cache translators generated from one source factor table, one target factor table and normalized role factors.",
+  "mirror_coordinate": "Rank-Q CP product of source-model, target-model and normalized target-role factors, decoded through shared rank-32 map atoms.",
+  "models": [
+    "openai-community/gpt2",
+    "EleutherAI/pythia-70m-deduped",
+    "EleutherAI/pythia-160m-deduped",
+    "HuggingFaceTB/SmolLM2-135M"
+  ],
+  "pair_partition": {
+    "train": [
+      [
+        "openai-community/gpt2",
+        "EleutherAI/pythia-70m-deduped"
+      ],
+      [
+        "EleutherAI/pythia-70m-deduped",
+        "EleutherAI/pythia-160m-deduped"
+      ],
+      [
+        "EleutherAI/pythia-160m-deduped",
+        "HuggingFaceTB/SmolLM2-135M"
+      ],
+      [
+        "HuggingFaceTB/SmolLM2-135M",
+        "openai-community/gpt2"
+      ]
+    ],
+    "development": [
+      [
+        "EleutherAI/pythia-70m-deduped",
+        "openai-community/gpt2"
+      ],
+      [
+        "HuggingFaceTB/SmolLM2-135M",
+        "EleutherAI/pythia-160m-deduped"
+      ]
+    ],
+    "fresh_holdout": [
+      [
+        "EleutherAI/pythia-160m-deduped",
+        "EleutherAI/pythia-70m-deduped"
+      ],
+      [
+        "openai-community/gpt2",
+        "HuggingFaceTB/SmolLM2-135M"
+      ]
+    ],
+    "invariant": "All four model IDs appear as source and target in training pairs. No development or fresh ordered pair is used to fit the source\u00d7target factors."
+  },
+  "controls": [
+    "Native target prefill",
+    "Independent per-pair attention-weighted affine ridge maps fit on that pair calibration prompts",
+    "Rank-32 shared PCA basis fit only on training pairs, with heldout pair-specific calibration-map coefficients (diagnostic control)"
+  ],
+  "fixed_design": {
+    "head_dimension": 64,
+    "ridge_alpha": 0.01,
+    "layer_alignment": "nearest relative depth",
+    "head_alignment": "nearest relative KV-head index",
+    "position": "inverse source RoPE on keys before fit; target RoPE after key mapping; values unrotated",
+    "map_rank": 32,
+    "normalized_role_grid": {
+      "layers": 16,
+      "heads": 8,
+      "kv_roles": 2
+    },
+    "cp_rank_candidates": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "cp_optimizer": "Adam lr=0.01",
+    "cp_updates": 600,
+    "cp_objective": "mean squared error of training-pair rank-32 map codes plus 1e-5 factor L2 penalty"
+  },
+  "development": {
+    "split": "Wikitext-2 train",
+    "seed": 829,
+    "training_pair_calibration_prompts": 24,
+    "development_pair_calibration_prompts_for_full_control": 24,
+    "development_pair_test_prompts": 16,
+    "selection": "lowest mean factor-predicted target next-token NLL over the two whole development pairs; tie to smaller CP rank",
+    "fresh_not_opened_until_frozen": true
+  },
+  "fresh": {
+    "split_calibration": "Wikitext-2 validation",
+    "split_test": "Wikitext-2 test",
+    "seeds": [
+      983,
+      997,
+      1009
+    ],
+    "training_pair_calibration_prompts_per_pair_per_seed": 12,
+    "fresh_pair_full_control_calibration_prompts_per_pair_per_seed": 12,
+    "test_prompts_per_fresh_pair_per_seed": 12,
+    "prompt_eligibility": "16\u2013128 tokens and exact source/target tokenizer character-offset equality",
+    "selection": "Three fixed disjoint chunks from the first 36 aligned rows per pair, deterministic pair-specific permutation",
+    "fresh_model_pairs_used_to_fit_factorization": false
+  },
+  "primary_metrics": [
+    "heldout target next-token NLL",
+    "NLL delta versus native target prefill",
+    "NLL delta versus full independent pair ridge",
+    "NLL delta versus heldout-pair PCA code control",
+    "actual serialized factor payload bytes",
+    "actual independent map payload bytes"
+  ],
+  "success_gate": "For both fresh heldout pairs in all three seeds, factor NLL is no more than +0.50 nat from independent full-map NLL and no more than +1.00 nat from native target NLL; aggregate factor payload for both logical pairs is at least 50% smaller than the aggregate independent full-map payload.",
+  "failure_gate": "Any quality or storage gate miss. Also report separately if full independent maps themselves are >+1.00 nat from native; this means the transfer application is not useful at this scope.",
+  "mirror_specific_boundary": "The CP source\u00d7target\u00d7role decoder is an ordinary tensor-factorization control. Any match is a native low-rank factorization alias and cannot be claimed as Mirror-specific.",
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "factor_paid_state": [
+      "model IDs",
+      "pair IDs",
+      "layer/head/KV references",
+      "shared mean",
+      "rank-32 map basis",
+      "source factors",
+      "target factors",
+      "normalized role factors",
+      "CP bias",
+      "format header"
+    ],
+    "full_map_paid_state": [
+      "model-pair IDs",
+      "all independent affine map matrices",
+      "layer/head/KV references",
+      "format header"
+    ],
+    "common_model_weights": "reported separately; excluded from marginal translator payload"
+  },
+  "compute": {
+    "report": [
+      "per-pair ridge fit wall time",
+      "basis/factor fitting wall time",
+      "factor map application CPU time",
+      "source prefill time",
+      "target prefill time",
+      "peak RSS",
+      "CUDA availability"
+    ],
+    "hardware": "CPU-only expected; no GPU serving claim."
+  },
+  "scope": [
+    "Four cached pretrained models; eight directed pairs partitioned into four train, two development and two fresh pairs.",
+    "Wikitext-2, one-token next-token probes, fixed relative depth/head assignment and 64-dimensional head maps.",
+    "No multi-token generation trajectory, long-context serving, GPU latency or universal pair generalization claim."
+  ],
+  "protocol_amendments": []
+}
