@@ -1,0 +1,678 @@
+"""CPU cross-model KV translator family screen for MA-876."""
+from __future__ import annotations
+import os
+os.environ.setdefault('HF_HUB_OFFLINE','1'); os.environ.setdefault('HF_DATASETS_OFFLINE','1')
+import json,struct,time,resource,hashlib
+from pathlib import Path
+from typing import Any
+import numpy as np
+import torch
+import torch.nn.functional as F
+from datasets import load_dataset
+from transformers import AutoModelForCausalLM,AutoTokenizer,AutoConfig,DynamicCache
+
+DEV_CAL=24
+MODELS=('EleutherAI/pythia-70m-deduped','HuggingFaceTB/SmolLM2-135M')
+PAIR=(MODELS[0],MODELS[1]); TRAIN_PAIRS=(PAIR,); DEV_PAIRS=(PAIR,); FRESH_PAIRS=(PAIR,); PAIRS=(PAIR,)
+RANKS=(4,8,16,32); FACTOR_RANKS=(1,); D=64; ALPHA=.01; MIN_TOKENS=16; MAX_TOKENS=128
+FRESH_SEEDS=(983,997,1009); DEV_SEED=829
+HEADER=struct.Struct('<5sBBB')
+ROLE_LAYER_BINS=16; ROLE_HEAD_BINS=8; ROLE_COUNT=ROLE_LAYER_BINS*ROLE_HEAD_BINS*2
+GATE_HIDDEN=16; GATE_UPDATES=24; GATE_LR=1e-3
+
+def model_root()->Path: return Path.home()/'.cache/huggingface/hub'
+def snapshot(model_id:str)->Path:
+    p=model_root()/('models--'+model_id.replace('/','--'))/'snapshots'
+    if not p.exists(): raise FileNotFoundError(f'cached local model unavailable: {model_id}')
+    return sorted(p.iterdir())[0]
+def load_assets()->tuple[dict[str,Any],dict[str,Any],dict[str,Path]]:
+    torch.set_num_threads(min(4,os.cpu_count() or 1)); models={}; toks={}; paths={}
+    for name in MODELS:
+        p=snapshot(name); paths[name]=p
+        toks[name]=AutoTokenizer.from_pretrained(p,local_files_only=True,use_fast=True)
+        models[name]=AutoModelForCausalLM.from_pretrained(p,local_files_only=True,attn_implementation='eager').eval()
+    return models,toks,paths
+
+def corpus(split:str): return load_dataset('Salesforce/wikitext','wikitext-2-raw-v1',split=split,download_mode='reuse_dataset_if_exists')
+def eligible_prompts(split:str,pair:tuple[str,str],toks:dict[str,Any],minimum:int)->list[dict[str,Any]]:
+    ds=corpus(split); st,tt=toks[pair[0]],toks[pair[1]]; out=[]; seen=set()
+    for i,row in enumerate(ds):
+        text=row['text'].strip()
+        if len(text)<32 or text in seen: continue
+        a=st(text,add_special_tokens=False,return_offsets_mapping=True); b=tt(text,add_special_tokens=False,return_offsets_mapping=True)
+        if a['offset_mapping']!=b['offset_mapping']: continue
+        n=len(a['input_ids'])
+        if MIN_TOKENS<=n<=MAX_TOKENS:
+            seen.add(text); out.append({'row':i,'text':text,'src_ids':a['input_ids'],'tgt_ids':b['input_ids'],'tokens':n})
+            if len(out)>=minimum: break
+    return out
+
+def select_prompts(split:str,pair:tuple[str,str],toks:dict[str,Any],seed:int,count:int,role:str)->list[dict[str,Any]]:
+    need=(DEV_CAL+16 if split=='train' else len(FRESH_SEEDS)*count)
+    arr=eligible_prompts(split,pair,toks,need)
+    pair_tag=sum((i+1)*ord(c) for i,c in enumerate(pair[0]+'>'+pair[1]))
+    if split=='train':
+        perm=np.random.default_rng(seed+pair_tag%10000).permutation(len(arr))
+        start=0 if role=='cal' else DEV_CAL
+        chosen=perm[start:start+count]
+    else:
+        # One fixed permutation, then disjoint seed-indexed chunks across fresh worlds.
+        pair_tag=sum((i+1)*ord(c) for i,c in enumerate(pair[0]+'>'+pair[1]))
+        perm=np.random.default_rng(51_236+pair_tag+(0 if role=='cal' else 7_919)).permutation(len(arr))
+        group=FRESH_SEEDS.index(seed)
+        chosen=perm[group*count:(group+1)*count]
+    if len(chosen)<count: raise RuntimeError(f'need {count} aligned {split} prompts for {pair}; found {len(chosen)}')
+    return [arr[int(i)] for i in chosen]
+
+def cache_arrays(model:Any,ids:list[int])->tuple[list[tuple[np.ndarray,np.ndarray]],Any,float]:
+    x=torch.tensor(ids,dtype=torch.long).unsqueeze(0)
+    t0=time.perf_counter()
+    with torch.inference_mode(): out=model(input_ids=x,use_cache=True)
+    elapsed=time.perf_counter()-t0; past=out.past_key_values
+    if hasattr(past,'to_legacy_cache'): past=past.to_legacy_cache()
+    arr=[]
+    for k,v in past:
+        arr.append((k[0].detach().cpu().numpy().astype(np.float64),v[0].detach().cpu().numpy().astype(np.float64)))
+    return arr,out,elapsed
+
+def rope_inv_freq(config:Any,rotary_dim:int)->np.ndarray:
+    theta=float(getattr(config,'rope_theta',10000.0))
+    idx=np.arange(0,rotary_dim,2,dtype=np.float64)
+    return 1.0/(theta**(idx/rotary_dim))
+
+def rotate_half(x:np.ndarray)->np.ndarray:
+    half=x.shape[-1]//2
+    return np.concatenate([-x[...,half:],x[...,:half]],axis=-1)
+
+def rope_transform(x:np.ndarray,config:Any,inverse:bool=False)->np.ndarray:
+    """Apply/invert supported RoPE; GPT-2 uses absolute positions and is unchanged."""
+    y=np.asarray(x,dtype=np.float64).copy(); model_type=getattr(config,'model_type','')
+    if model_type not in ('gpt_neox','llama','mistral','qwen2'):
+        return y
+    rotary_dim=(int((config.hidden_size//config.num_attention_heads)*float(config.rotary_pct))
+                if model_type=='gpt_neox' else y.shape[-1])
+    inv=rope_inv_freq(config,rotary_dim); pos=np.arange(y.shape[-2],dtype=np.float64)
+    ang=np.outer(pos,inv); cos=np.concatenate([np.cos(ang),np.cos(ang)],axis=-1)
+    sin=np.concatenate([np.sin(ang),np.sin(ang)],axis=-1)
+    if model_type=='gpt_neox':
+        cos=np.concatenate([cos,np.ones((len(pos),y.shape[-1]-rotary_dim))],axis=-1)
+        sin=np.concatenate([sin,np.zeros((len(pos),y.shape[-1]-rotary_dim))],axis=-1)
+    shape=(1,)*(y.ndim-2)+(len(pos),cos.shape[-1]); cos=cos.reshape(shape); sin=sin.reshape(shape)
+    if inverse: sin=-sin
+    if model_type=='gpt_neox':
+        rot,tail=y[...,:rotary_dim],y[...,rotary_dim:]
+        return np.concatenate([rot*cos[...,:rotary_dim]+rotate_half(rot)*sin[...,:rotary_dim],tail],axis=-1)
+    return y*cos+rotate_half(y)*sin
+
+def map_refs(src_config:Any,tgt_config:Any)->list[tuple[int,int,int,int,int]]:
+    slayers=src_config.num_hidden_layers; tlayers=tgt_config.num_hidden_layers
+    sheads=getattr(src_config,'num_key_value_heads',None) or src_config.num_attention_heads
+    theads=getattr(tgt_config,'num_key_value_heads',None) or tgt_config.num_attention_heads
+    dsrc=src_config.hidden_size//src_config.num_attention_heads; dtgt=tgt_config.hidden_size//tgt_config.num_attention_heads
+    if dsrc!=D or dtgt!=D: raise ValueError(f'head dims must be {D}, got {dsrc}->{dtgt}')
+    refs=[]
+    for tl in range(tlayers):
+        sl=round(tl*(slayers-1)/max(1,tlayers-1))
+        for th in range(theads):
+            sh=round(th*(sheads-1)/max(1,theads-1))
+            for kv in (0,1): refs.append((tl,th,kv,sl,sh))
+    return refs
+
+def fit_pair_maps(pair:tuple[str,str],prompts:list[dict[str,Any]],models:dict[str,Any],toks:dict[str,Any])->dict[str,Any]:
+    src,tgt=pair; refs=map_refs(models[src].config,models[tgt].config); stats=[]; count=0
+    for _ in refs: stats.append([np.zeros((D+1,D+1),np.float64),np.zeros((D+1,D),np.float64)])
+    wall0=time.perf_counter(); src_time=tgt_time=0.
+    for p in prompts:
+        sc,_,ts=cache_arrays(models[src],p['src_ids']); tc,_,tt=cache_arrays(models[tgt],p['tgt_ids']); src_time+=ts; tgt_time+=tt
+        n=min(len(sc[0][0][0]),len(tc[0][0][0])); count+=n
+        for j,(tl,th,kv,sl,sh) in enumerate(refs):
+            x=sc[sl][kv][sh,:n,:]; y=tc[tl][kv][th,:n,:]
+            if kv==0:
+                x=rope_transform(x,models[src].config,inverse=True)
+                y=rope_transform(y,models[tgt].config,inverse=True)
+            xa=np.concatenate([x,np.ones((n,1),np.float64)],axis=1)
+            stats[j][0]+=xa.T@xa; stats[j][1]+=xa.T@y
+    maps=[]; eye=np.eye(D+1); eye[-1,-1]=0.
+    for sxx,sxy in stats: maps.append(np.linalg.solve(sxx+ALPHA*eye,sxy))
+    return {'pair':pair,'refs':refs,'maps':np.stack(maps),'samples':count,'calibration_seconds':time.perf_counter()-wall0,'source_forward_seconds':src_time,'target_forward_seconds':tgt_time}
+
+def fit_basis(mapsets:list[dict[str,Any]])->tuple[np.ndarray,np.ndarray,np.ndarray]:
+    vals=np.concatenate([x['maps'].reshape(len(x['maps']),-1) for x in mapsets],axis=0)
+    mean=vals.mean(axis=0); centered=vals-mean
+    _,_,vt=np.linalg.svd(centered,full_matrices=False)
+    return mean,vt,vals
+
+def compress_maps(maps:np.ndarray,mean:np.ndarray,basis:np.ndarray,rank:int)->tuple[np.ndarray,np.ndarray]:
+    flat=maps.reshape(len(maps),-1); coeff=(flat-mean)@basis[:rank].T; rec=mean+coeff@basis[:rank]
+    return rec.reshape(maps.shape),coeff
+
+def apply_maps(src_cache:list[tuple[np.ndarray,np.ndarray]],refs:list[tuple[int,int,int,int,int]],maps:np.ndarray,src_config:Any,tgt_config:Any)->list[tuple[torch.Tensor,torch.Tensor]]:
+    hkv=getattr(tgt_config,'num_key_value_heads',None) or tgt_config.num_attention_heads; layers=tgt_config.num_hidden_layers
+    length=src_cache[0][0].shape[1]; outk=np.zeros((layers,hkv,length,D),np.float32); outv=np.zeros_like(outk)
+    for i,(tl,th,kv,sl,sh) in enumerate(refs):
+        x=src_cache[sl][kv][sh]
+        if kv==0: x=rope_transform(x,src_config,inverse=True)
+        xa=np.concatenate([x,np.ones((length,1),np.float64)],axis=1)
+        y=(xa@maps[i]).astype(np.float32)
+        if kv==0: y=rope_transform(y,tgt_config).astype(np.float32)
+        (outk if kv==0 else outv)[tl,th]=y
+    return [(torch.from_numpy(outk[l:l+1]),torch.from_numpy(outv[l:l+1])) for l in range(layers)]
+
+def target_nll(model:Any,logits:torch.Tensor,label:int)->float:
+    return float(F.cross_entropy(logits.reshape(1,-1),torch.tensor([label],dtype=torch.long)))
+
+def transfer_nll(model:Any,past:list[tuple[torch.Tensor,torch.Tensor]],query:int,label:int)->tuple[float,float]:
+    ids=torch.tensor([[query]],dtype=torch.long); t0=time.perf_counter()
+    with torch.inference_mode(): out=model(input_ids=ids,past_key_values=tuple(past),use_cache=True)
+    return target_nll(model,out.logits[0,-1],label),time.perf_counter()-t0
+
+def eval_heldout(pair:tuple[str,str],prompts:list[dict[str,Any]],models:dict[str,Any],basis_mean:np.ndarray,basis:np.ndarray,rank:int,independent_maps:np.ndarray,refs:list[tuple[int,int,int,int,int]])->dict[str,Any]:
+    src,tgt=pair; model_s,model_t=models[src],models[tgt]
+    low_maps,coeff=compress_maps(independent_maps,basis_mean,basis,rank)
+    native=[]; full_nll=[]; low_nll=[]; native_time=[]; src_time=[]; full_apply=[]; low_apply=[]; suffix_full=[]; suffix_low=[]; rel_full=[]; rel_low=[]; prompt_ids=[]
+    for p in prompts:
+        sc,_,st=cache_arrays(model_s,p['src_ids']); tc,to,tt=cache_arrays(model_t,p['tgt_ids']); src_time.append(st); native_time.append(tt)
+        logits=to.logits[0,-2]; label=p['tgt_ids'][-1]; native.append(target_nll(model_t,logits,label))
+        # Relative heldout cache error, using all positions in the aligned prompt.
+        full_start=time.perf_counter(); full_past=apply_maps(sc,refs,independent_maps,model_s.config,model_t.config); full_apply.append(time.perf_counter()-full_start)
+        low_start=time.perf_counter(); low_past=apply_maps(sc,refs,low_maps,model_s.config,model_t.config); low_apply.append(time.perf_counter()-low_start)
+        def relerr(predpast:list[tuple[torch.Tensor,torch.Tensor]])->float:
+            num=den=0.
+            for l,(pk,pv) in enumerate(predpast):
+                tk,tv=tc[l]
+                for x,y in ((pk[0].numpy(),tk),(pv[0].numpy(),tv)):
+                    num+=float(np.sum((x-y)**2)); den+=float(np.sum(y**2))
+            return num/max(den,1e-30)
+        rel_full.append(relerr(full_past)); rel_low.append(relerr(low_past))
+        # Prefix excludes query and label; query token is target tokenizer's penultimate ID.
+        q=p['tgt_ids'][-2]; label=p['tgt_ids'][-1]; prefix_len=len(p['tgt_ids'])-2
+        def trim(past): return [(k[:,:,:prefix_len,:].contiguous(),v[:,:,:prefix_len,:].contiguous()) for k,v in past]
+        x,y=transfer_nll(model_t,trim(full_past),q,label); full_nll.append(x); suffix_full.append(y)
+        x,y=transfer_nll(model_t,trim(low_past),q,label); low_nll.append(x); suffix_low.append(y)
+        prompt_ids.append(p['row'])
+    return {'native_nll':native,'full_map_nll':full_nll,'compressed_nll':low_nll,'full_map_nll_delta':float(np.mean(full_nll)-np.mean(native)),'compressed_nll_delta':float(np.mean(low_nll)-np.mean(native)),'relative_cache_mse_full':float(np.mean(rel_full)),'relative_cache_mse_compressed':float(np.mean(rel_low)),'source_prefill_seconds':src_time,'target_native_prefill_seconds':native_time,'full_translation_seconds':full_apply,'compressed_translation_seconds':low_apply,'target_suffix_seconds_full':suffix_full,'target_suffix_seconds_compressed':suffix_low,'prompt_rows':prompt_ids,'map_codes':coeff.tolist()}
+
+def serialize_family_payloads(mapsets:list[dict[str,Any]],mean:np.ndarray,basis:np.ndarray,rank:int)->tuple[bytes,bytes]:
+    names=[(a+'>'+b).encode() for a,b in (x['pair'] for x in mapsets)]
+    metas=b'\0'.join(names)+b'\0'; all_refs=[r for x in mapsets for r in x['refs']]
+    meta=bytes(v for r in all_refs for v in r)
+    full=bytearray(HEADER.pack(b'MA876',0,rank,len(mapsets))); full.extend(metas)
+    shared=bytearray(HEADER.pack(b'MA876',1,rank,len(mapsets))); shared.extend(metas)
+    full_maps=np.concatenate([x['maps'] for x in mapsets],axis=0)
+    full.extend(np.asarray(full_maps,dtype='<f4').tobytes()); shared.extend(np.asarray(mean,dtype='<f4').tobytes()); shared.extend(np.asarray(basis[:rank],dtype='<f4').tobytes())
+    for x in mapsets:
+        _,codes=compress_maps(x['maps'],mean,basis,rank); shared.extend(np.asarray(codes,dtype='<f4').tobytes())
+    full.extend(meta); shared.extend(meta)
+    return bytes(full),bytes(shared)
+
+def serialize_family(mapsets:list[dict[str,Any]],mean:np.ndarray,basis:np.ndarray,rank:int)->tuple[int,int]:
+    full,shared=serialize_family_payloads(mapsets,mean,basis,rank)
+    return len(full),len(shared)
+
+def file_provenance(paths:dict[str,Path])->dict[str,Any]:
+    out={}
+    for name,p in paths.items():
+        weight=p/'model.safetensors'; token_files=['config.json','tokenizer.json','tokenizer_config.json','special_tokens_map.json','vocab.json','merges.txt']
+        out[name]={'snapshot':p.name,'weights_bytes':weight.stat().st_size if weight.exists() else 0,'tokenizer_config_bytes':sum((p/x).stat().st_size for x in token_files if (p/x).exists())}
+    return out
+
+def run_world(seed:int,cal_split:str,test_split:str,ncal:int,ntest:int,ranks:tuple[int,...],models:dict[str,Any],toks:dict[str,Any])->dict[str,Any]:
+    all_maps=[]; prompt_manifests={}; t0=time.perf_counter()
+    for pi,pair in enumerate(PAIRS):
+        cal=select_prompts(cal_split,pair,toks,seed,ncal,'cal'); prompt_manifests[f'{pair[0]}>{pair[1]}_cal']=[p['row'] for p in cal]
+        all_maps.append(fit_pair_maps(pair,cal,models,toks))
+    cal_wall=time.perf_counter()-t0
+    bt=time.perf_counter(); mean,basis,_=fit_basis(all_maps[:2]); basis_seconds=time.perf_counter()-bt; held=all_maps[2]
+    test=select_prompts(test_split,HELDOUT,toks,seed,ntest,'test'); prompt_manifests[f'{HELDOUT[0]}>{HELDOUT[1]}_test']=[p['row'] for p in test]
+    rank_eval={}
+    for rank in ranks:
+        rank_eval[str(rank)]=eval_heldout(HELDOUT,test,models,mean,basis,rank,held['maps'],held['refs'])
+    full_bytes,shared_bytes=serialize_family(all_maps,mean,basis,max(ranks))
+    return {'seed':seed,'calibration_seconds':cal_wall,'basis_fit_seconds':basis_seconds,'map_fit_seconds':[x['calibration_seconds'] for x in all_maps],'basis_train_maps':sum(len(x['maps']) for x in all_maps[:2]),'heldout_maps':len(held['maps']),'rank_results':rank_eval,'family_full_bytes':full_bytes,'family_shared_bytes_by_rank':{str(r):serialize_family(all_maps,mean,basis,r)[1] for r in ranks},'heldout_full_map_bytes':len(held['maps'])*(D+1)*D*4+len(held['refs'])*5,'heldout_shared_marginal_bytes':{str(r):len(mean.astype('<f4').tobytes())+len(basis[:r].astype('<f4').tobytes())+len(held['maps'])*r*4+len(held['refs'])*5 for r in ranks},'prompt_rows':prompt_manifests,'mean_tokens_calibration':[x['samples']/ncal for x in all_maps]}
+
+def run_dev()->dict[str,Any]:
+    models,toks,paths=load_assets(); row=run_world(DEV_SEED,'train','train',24,16,RANKS,models,toks)
+    return {'experiment_id':'MA-876','split':'wikitext train','ranks':list(RANKS),'row':row,'models':file_provenance(paths),'runtime':{'cuda_available':torch.cuda.is_available(),'max_rss_mib':resource.getrusage(resource.RUSAGE_SELF).ru_maxrss/1024}}
+
+def run_fresh(seeds:tuple[int,...],rank:int)->dict[str,Any]:
+    models,toks,paths=load_assets(); rows=[run_world(s,'validation','test',12,16,(rank,),models,toks) for s in seeds]
+    return {'experiment_id':'MA-876','seeds':list(seeds),'rank':rank,'rows':rows,'models':file_provenance(paths),'runtime':{'cuda_available':torch.cuda.is_available(),'max_rss_mib':resource.getrusage(resource.RUSAGE_SELF).ru_maxrss/1024}}
+
+def write_json(path:str|Path,data:dict[str,Any])->None: Path(path).write_text(json.dumps(data,indent=2,sort_keys=True)+'\n')
+
+
+# MA-880: canonical map PCA plus a CP source-model × target-model × role factor.
+def role_index(ref:tuple[int,int,int,int,int],target_config:Any)->int:
+    tl,th,kv,_,_=ref
+    nlayer=target_config.num_hidden_layers
+    nheads=getattr(target_config,'num_key_value_heads',None) or target_config.num_attention_heads
+    li=int(round(tl*(ROLE_LAYER_BINS-1)/max(1,nlayer-1)))
+    hi=int(round(th*(ROLE_HEAD_BINS-1)/max(1,nheads-1)))
+    return (li*ROLE_HEAD_BINS+hi)*2+kv
+
+def factor_observations(mapsets:list[dict[str,Any]],mean:np.ndarray,basis:np.ndarray,rank:int,models:dict[str,Any]):
+    src_ids=[]; tgt_ids=[]; roles=[]; codes=[]; pair_tags=[]
+    id_of={name:i for i,name in enumerate(MODELS)}
+    for item in mapsets:
+        src,tgt=item['pair']; flat=item['maps'].reshape(len(item['maps']),-1)
+        code=(flat-mean)@basis[:rank].T
+        for j,ref in enumerate(item['refs']):
+            src_ids.append(id_of[src]); tgt_ids.append(id_of[tgt])
+            roles.append(role_index(ref,models[tgt].config)); codes.append(code[j]); pair_tags.append(f'{src}>{tgt}')
+    return np.asarray(src_ids),np.asarray(tgt_ids),np.asarray(roles),np.asarray(codes,dtype=np.float32),pair_tags
+
+def fit_pair_factor(mapsets:list[dict[str,Any]],mean:np.ndarray,basis:np.ndarray,rank:int,q:int,steps:int,
+                    models:dict[str,Any],seed:int)->dict[str,Any]:
+    si,ti,ri,y,pair_tags=factor_observations(mapsets,mean,basis,rank,models)
+    code_mean=y.mean(axis=0); code_scale=np.maximum(y.std(axis=0),1e-6)
+    y_scaled=((y-code_mean)/code_scale).astype(np.float32)
+    torch.manual_seed(seed); dtype=torch.float32
+    idx_s=torch.as_tensor(si); idx_t=torch.as_tensor(ti); idx_r=torch.as_tensor(ri); target=torch.as_tensor(y_scaled)
+    u=torch.nn.Parameter(torch.randn((len(MODELS),q),dtype=dtype)*.1)
+    v=torch.nn.Parameter(torch.randn((len(MODELS),q),dtype=dtype)*.1)
+    role=torch.nn.Parameter(torch.randn((ROLE_COUNT,q,rank),dtype=dtype)*.1)
+    bias=torch.nn.Parameter(torch.zeros(rank,dtype=dtype))
+    opt=torch.optim.Adam([u,v,role,bias],lr=.01)
+    start=time.perf_counter(); losses=[]
+    for _ in range(steps):
+        pred=bias+(u[idx_s]*v[idx_t]).unsqueeze(-1).mul(role[idx_r]).sum(dim=1)
+        loss=torch.mean((pred-target)**2)+1e-5*(u.square().mean()+v.square().mean()+role.square().mean())
+        opt.zero_grad(set_to_none=True); loss.backward(); opt.step(); losses.append(float(loss.detach()))
+    pred_scaled=bias.detach().numpy()[None,:]+(u.detach().numpy()[si]*v.detach().numpy()[ti])[:,:,None].__mul__(role.detach().numpy()[ri]).sum(axis=1)
+    pred_raw=code_mean+code_scale*pred_scaled
+    return {'u':u.detach().numpy(),'v':v.detach().numpy(),'role':role.detach().numpy(),'bias':bias.detach().numpy(),
+            'code_mean':code_mean.astype(np.float32),'code_scale':code_scale.astype(np.float32),
+            'q':q,'rank':rank,'steps':steps,'fit_seconds':time.perf_counter()-start,
+            'train_code_mse':float(np.mean((pred_raw-y)**2)),
+            'train_scaled_code_mse':float(np.mean((pred_scaled-y_scaled)**2)),
+            'last_loss':losses[-1],'train_pairs':sorted(set(pair_tags))}
+
+def predict_pair_maps(pair:tuple[str,str],factor:dict[str,Any],mean:np.ndarray,basis:np.ndarray,
+                      refs:list[tuple[int,int,int,int,int]],models:dict[str,Any])->np.ndarray:
+    si=MODELS.index(pair[0]); ti=MODELS.index(pair[1]);
+    bins=np.asarray([role_index(ref,models[pair[1]].config) for ref in refs],dtype=np.int64)
+    codes=factor['code_mean'][None,:]+factor['code_scale'][None,:]*(factor['bias'][None,:]+((factor['u'][si]*factor['v'][ti])[None,:,None]*factor['role'][bins]).sum(axis=1))
+    return (mean[None,:]+codes@basis[:factor['rank']]).reshape(len(refs),D+1,D).astype(np.float64)
+
+def evaluate_maps(pair:tuple[str,str],prompts:list[dict[str,Any]],models:dict[str,Any],
+                  full_maps:np.ndarray,factor_maps:np.ndarray,pca_maps:np.ndarray,
+                  refs:list[tuple[int,int,int,int,int]])->dict[str,Any]:
+    src,tgt=pair; ms,mt=models[src],models[tgt]
+    metrics={name:{'nll':[],'rel_cache_mse':[],'apply_seconds':[],'suffix_seconds':[]} for name in ('full','factor','pca')}
+    native=[]; native_prefill=[]; source_prefill=[]; rows=[]; tokens=0
+    for p in prompts:
+        sc,_,st=cache_arrays(ms,p['src_ids']); tc,to,tt=cache_arrays(mt,p['tgt_ids'])
+        source_prefill.append(st); native_prefill.append(tt); tokens+=p['tokens']; rows.append(p['row'])
+        native.append(target_nll(mt,to.logits[0,-2],p['tgt_ids'][-1]))
+        plen=len(p['tgt_ids'])-2; query=p['tgt_ids'][-2]; label=p['tgt_ids'][-1]
+        for name,maps in (('full',full_maps),('factor',factor_maps),('pca',pca_maps)):
+            t0=time.perf_counter(); past=apply_maps(sc,refs,maps,ms.config,mt.config); metrics[name]['apply_seconds'].append(time.perf_counter()-t0)
+            pk=[(k[:,:,:plen,:].contiguous(),v[:,:,:plen,:].contiguous()) for k,v in past]
+            nll_value,suffix=transfer_nll(mt,pk,query,label); metrics[name]['nll'].append(nll_value); metrics[name]['suffix_seconds'].append(suffix)
+            num=den=0.0
+            for layer,(k,v) in enumerate(past):
+                tk,tv=tc[layer]; tk=tk[:,:plen,:]; tv=tv[:,:plen,:]
+                num+=float(np.sum((k[0,:,:plen,:].numpy()-tk)**2)+np.sum((v[0,:,:plen,:].numpy()-tv)**2))
+                den+=float(np.sum(tk**2)+np.sum(tv**2))
+            metrics[name]['rel_cache_mse'].append(num/max(den,1e-30))
+    for name in metrics:
+        metrics[name]['mean_nll']=float(np.mean(metrics[name]['nll']))
+        metrics[name]['delta_native']=metrics[name]['mean_nll']-float(np.mean(native))
+        metrics[name]['mean_rel_cache_mse']=float(np.mean(metrics[name]['rel_cache_mse']))
+    return {'pair':list(pair),'native_nll':native,'native_mean_nll':float(np.mean(native)),
+            'native_prefill_seconds':native_prefill,'source_prefill_seconds':source_prefill,
+            'metrics':metrics,'prompt_rows':rows,'test_tokens':tokens}
+
+def serialize_factor_payload(factor:dict[str,Any],mean:np.ndarray,basis:np.ndarray,
+                             outputs:list[dict[str,Any]])->bytes:
+    names=b'\0'.join(n.encode() for n in MODELS)+b'\0'
+    pair_meta=b'\0'.join((x['pair'][0]+'>'+x['pair'][1]).encode() for x in outputs)+b'\0'
+    refs=bytes(v for item in outputs for ref in item['refs'] for v in ref)
+    payload=bytearray(struct.pack('<5sBBBB',b'MA880',1,factor['rank'],factor['q'],len(outputs)))
+    payload.extend(struct.pack('<BB',ROLE_LAYER_BINS,ROLE_HEAD_BINS))
+    payload.extend(names); payload.extend(pair_meta); payload.extend(refs)
+    for arr in (mean,basis[:factor['rank']],factor['code_mean'],factor['code_scale'],factor['bias'],factor['u'],factor['v'],factor['role']):
+        payload.extend(np.asarray(arr,dtype='<f4').tobytes())
+    return bytes(payload)
+
+def factor_payload_bytes(factor:dict[str,Any],mean:np.ndarray,basis:np.ndarray,
+                         outputs:list[dict[str,Any]])->int:
+    return len(serialize_factor_payload(factor,mean,basis,outputs))
+
+def full_payload_bytes(outputs:list[dict[str,Any]])->int:
+    names=b'\0'.join((x['pair'][0]+'>'+x['pair'][1]).encode() for x in outputs)+b'\0'
+    refs=bytes(v for item in outputs for ref in item['refs'] for v in ref)
+    maps=np.concatenate([x['maps'] for x in outputs],axis=0)
+    payload=bytearray(struct.pack('<5sBBBB',b'MA880',0,0,0,len(outputs))); payload.extend(names)
+    payload.extend(np.asarray(maps,dtype='<f4').tobytes()); payload.extend(refs)
+    return len(payload)
+
+def run_ma880_dev()->dict[str,Any]:
+    models,toks,paths=load_assets(); start=time.perf_counter()
+    train=[]
+    for pair in TRAIN_PAIRS:
+        prompts=select_prompts('train',pair,toks,DEV_SEED,24,'cal'); train.append(fit_pair_maps(pair,prompts,models,toks))
+    mean,basis,_=fit_basis(train); candidates={}
+    for q in FACTOR_RANKS:
+        factor=fit_pair_factor(train,mean,basis,32,q,600,models,DEV_SEED+q)
+        pair_scores=[]
+        for pair in DEV_PAIRS:
+            cal=select_prompts('train',pair,toks,DEV_SEED,24,'cal')
+            full=fit_pair_maps(pair,cal,models,toks)
+            test=select_prompts('train',pair,toks,DEV_SEED,16,'test')
+            pm=predict_pair_maps(pair,factor,mean,basis,full['refs'],models)
+            pca,_=compress_maps(full['maps'],mean,basis,32)
+            ev=evaluate_maps(pair,test,models,full['maps'],pm,pca,full['refs'])
+            pair_scores.append({'pair':list(pair),'factor_mean_nll':ev['metrics']['factor']['mean_nll'],
+                                'native_mean_nll':ev['native_mean_nll'],'full_mean_nll':ev['metrics']['full']['mean_nll'],
+                                'pca_mean_nll':ev['metrics']['pca']['mean_nll']})
+        candidates[str(q)]={'factor':factor,'dev_pairs':pair_scores,
+                             'mean_factor_nll':float(np.mean([x['factor_mean_nll'] for x in pair_scores]))}
+    chosen=min(FACTOR_RANKS,key=lambda q:(candidates[str(q)]['mean_factor_nll'],q))
+    return {'experiment_id':'MA-880','dev_seed':DEV_SEED,'selected_q':chosen,'selected_steps':600,
+            'selection_rule':'lowest mean next-token NLL over two whole ordered dev pairs; tie smaller CP rank',
+            'train_pairs':[list(x) for x in TRAIN_PAIRS],'dev_pairs':[list(x) for x in DEV_PAIRS],
+            'factor_rank_candidates':list(FACTOR_RANKS),'candidate_results':{q:{'q':int(q),'fit_seconds':v['factor']['fit_seconds'],
+             'train_code_mse':v['factor']['train_code_mse'],'mean_factor_nll':v['mean_factor_nll'],'dev_pairs':v['dev_pairs']}
+             for q,v in candidates.items()},'models':file_provenance(paths),
+            'runtime':{'cuda_available':torch.cuda.is_available(),'max_rss_mib':resource.getrusage(resource.RUSAGE_SELF).ru_maxrss/1024,
+                       'total_seconds':time.perf_counter()-start}}
+
+def run_ma880_fresh(seeds:tuple[int,...],q:int,steps:int=600)->dict[str,Any]:
+    models,toks,paths=load_assets(); rows=[]
+    for seed in seeds:
+        world_start=time.perf_counter(); heldout_fit_seconds=[]
+        train=[]; train_prompt_rows={}
+        for pair in TRAIN_PAIRS:
+            prompts=select_prompts('validation',pair,toks,seed,12,'cal')
+            train_prompt_rows[f'{pair[0]}>{pair[1]}']=[p['row'] for p in prompts]
+            train.append(fit_pair_maps(pair,prompts,models,toks))
+        mean,basis,_=fit_basis(train); factor=fit_pair_factor(train,mean,basis,32,q,steps,models,seed+7717)
+        outputs=[]; evals=[]; manifests={'train_calibration':train_prompt_rows,'heldout_calibration':{},'heldout_test':{}}
+        for pair in FRESH_PAIRS:
+            cal=select_prompts('validation',pair,toks,seed,12,'cal')
+            manifests['heldout_calibration'][f'{pair[0]}>{pair[1]}']=[p['row'] for p in cal]
+            full=fit_pair_maps(pair,cal,models,toks); outputs.append(full); heldout_fit_seconds.append(full['calibration_seconds'])
+            test=select_prompts('test',pair,toks,seed,12,'test')
+            manifests['heldout_test'][f'{pair[0]}>{pair[1]}']=[p['row'] for p in test]
+            fmaps=predict_pair_maps(pair,factor,mean,basis,full['refs'],models)
+            pca,_=compress_maps(full['maps'],mean,basis,32)
+            evals.append(evaluate_maps(pair,test,models,full['maps'],fmaps,pca,full['refs']))
+        factor_payload=serialize_factor_payload(factor,mean,basis,outputs)
+        full_bytes=full_payload_bytes(outputs)
+        artifact_dir=Path(__file__).resolve().parents[1]/'artifacts'; artifact_dir.mkdir(exist_ok=True)
+        payload_path=artifact_dir/f'factor_payload_seed_{seed}.bin'; payload_path.write_bytes(factor_payload)
+        rows.append({'seed':seed,'pair_results':evals,'prompt_rows':manifests,'factor':{k:v for k,v in factor.items() if k not in ('u','v','role','bias','code_mean','code_scale')},
+                     'training_map_fit_seconds':[x['calibration_seconds'] for x in train],
+                     'heldout_map_fit_seconds':heldout_fit_seconds,
+                     'training_map_samples':[x['samples'] for x in train],
+                     'world_seconds':time.perf_counter()-world_start,
+                     'factor_payload_bytes':len(factor_payload),'independent_full_payload_bytes':full_bytes,
+                     'factor_bytes_saved_fraction':1-len(factor_payload)/full_bytes,
+                     'factor_payload_sha256':hashlib.sha256(factor_payload).hexdigest(),
+                     'factor_payload_path':str(payload_path.relative_to(Path(__file__).resolve().parents[2]))})
+    return {'experiment_id':'MA-880','seeds':list(seeds),'q':q,'steps':steps,'rows':rows,
+            'models':file_provenance(paths),'runtime':{'cuda_available':torch.cuda.is_available(),
+            'max_rss_mib':resource.getrusage(resource.RUSAGE_SELF).ru_maxrss/1024}}
+
+
+# MA-881 MoT component screen: token-level Top-1 routing + target replay KV correction.
+class TokenRouter(torch.nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.net=torch.nn.Sequential(torch.nn.Linear(D+3,GATE_HIDDEN),torch.nn.GELU(),torch.nn.Linear(GATE_HIDDEN,2))
+    def forward(self,x): return self.net(x)
+
+def fresh_partition(split:str,seed:int,toks:dict[str,Any],count:int=12)->list[dict[str,Any]]:
+    need=len(FRESH_SEEDS)*count
+    arr=eligible_prompts(split,PAIR,toks,need)
+    tag=sum((i+1)*ord(c) for i,c in enumerate(PAIR[0]+'>'+PAIR[1]))
+    salt=0 if split=='validation' else 7919
+    perm=np.random.default_rng(51236+tag+salt).permutation(len(arr))
+    group=FRESH_SEEDS.index(seed)
+    return [arr[int(i)] for i in perm[group*count:(group+1)*count]]
+
+def dev_partition(toks:dict[str,Any])->dict[str,list[dict[str,Any]]]:
+    arr=eligible_prompts('train',PAIR,toks,40)
+    tag=sum((i+1)*ord(c) for i,c in enumerate(PAIR[0]+'>'+PAIR[1]))
+    perm=np.random.default_rng(DEV_SEED+tag%10000).permutation(len(arr))
+    chosen=[arr[int(i)] for i in perm]
+    return {'expert0':chosen[:12],'expert1':chosen[12:24],'router':chosen[24:32],'test':chosen[32:40]}
+
+def split_fresh_cal(prompts:list[dict[str,Any]],seed:int)->dict[str,list[dict[str,Any]]]:
+    order=np.random.default_rng(seed+7301).permutation(len(prompts))
+    return {'expert0':[prompts[int(i)] for i in order[:4]],
+            'expert1':[prompts[int(i)] for i in order[4:8]],
+            'router':[prompts[int(i)] for i in order[8:12]]}
+
+def target_role_meta(ref:tuple[int,int,int,int,int],config:Any)->np.ndarray:
+    tl,th,kv,_,_=ref
+    layers=config.num_hidden_layers; heads=getattr(config,'num_key_value_heads',None) or config.num_attention_heads
+    return np.asarray([tl/max(1,layers-1),th/max(1,heads-1),float(kv)],dtype=np.float32)
+
+def gate_features(x:np.ndarray,ref:tuple[int,int,int,int,int],target_config:Any)->np.ndarray:
+    meta=target_role_meta(ref,target_config)
+    return np.concatenate([np.asarray(x,dtype=np.float32),np.broadcast_to(meta,(len(x),3))],axis=-1)
+
+def router_examples(item:dict[str,Any],experts:list[dict[str,Any]],models:dict[str,Any])->dict[str,Any]:
+    src,tgt=PAIR; ms,mt=models[src],models[tgt]
+    sc,_,_=cache_arrays(ms,item['src_ids']); tc,_,_=cache_arrays(mt,item['tgt_ids'])
+    refs=experts[0]['refs']; features=[]; y0=[]; y1=[]; target=[]
+    for j,(tl,th,kv,sl,sh) in enumerate(refs):
+        n=min(len(sc[sl][kv][sh]),len(tc[tl][kv][th]))
+        x=sc[sl][kv][sh,:n,:]; y=tc[tl][kv][th,:n,:]
+        if kv==0:
+            x=rope_transform(x,ms.config,inverse=True); y=rope_transform(y,mt.config,inverse=True)
+        xa=np.concatenate([x,np.ones((n,1),dtype=np.float64)],axis=1)
+        features.append(gate_features(x,refs[j],mt.config))
+        y0.append((xa@experts[0]['maps'][j]).astype(np.float32))
+        y1.append((xa@experts[1]['maps'][j]).astype(np.float32))
+        target.append(y.astype(np.float32))
+    return {'features':np.concatenate(features),'y0':np.concatenate(y0),'y1':np.concatenate(y1),
+            'target':np.concatenate(target),'source_cache':sc,'target_cache':tc,'target_out':None,
+            'item':item,'refs':refs}
+
+def straight_through_top1(logits:torch.Tensor,hard:bool=True)->torch.Tensor:
+    probs=torch.softmax(logits,dim=-1)
+    if not hard: return probs
+    idx=probs.argmax(dim=-1); one=torch.nn.functional.one_hot(idx,num_classes=2).to(probs.dtype)
+    return one-probs.detach()+probs
+
+def torch_rope(x:torch.Tensor,config:Any,inverse:bool=False)->torch.Tensor:
+    model_type=getattr(config,'model_type','')
+    if model_type not in ('gpt_neox','llama','mistral','qwen2'): return x
+    rotary_dim=(int((config.hidden_size//config.num_attention_heads)*float(config.rotary_pct))
+                if model_type=='gpt_neox' else x.shape[-1])
+    theta=float(getattr(config,'rope_theta',10000.0)); idx=torch.arange(0,rotary_dim,2,dtype=x.dtype,device=x.device)
+    inv=1.0/(theta**(idx/rotary_dim)); pos=torch.arange(x.shape[-2],dtype=x.dtype,device=x.device)
+    ang=pos[:,None]*inv[None,:]; cos=torch.cat([ang.cos(),ang.cos()],dim=-1); sin=torch.cat([ang.sin(),ang.sin()],dim=-1)
+    if model_type=='gpt_neox':
+        cos=torch.cat([cos,torch.ones((len(pos),x.shape[-1]-rotary_dim),device=x.device,dtype=x.dtype)],dim=-1)
+        sin=torch.cat([sin,torch.zeros((len(pos),x.shape[-1]-rotary_dim),device=x.device,dtype=x.dtype)],dim=-1)
+    if inverse: sin=-sin
+    def rot(z):
+        half=z.shape[-1]//2
+        return torch.cat([-z[...,half:],z[...,:half]],dim=-1)
+    if model_type=='gpt_neox':
+        a,tail=x[...,:rotary_dim],x[...,rotary_dim:]
+        return torch.cat([a*cos[...,:rotary_dim]+rot(a)*sin[...,:rotary_dim],tail],dim=-1)
+    return x*cos+rot(x)*sin
+
+def translated_cache_torch(router:TokenRouter,experts:list[dict[str,Any]],source_cache:list[tuple[np.ndarray,np.ndarray]],
+                           refs:list[tuple[int,int,int,int,int]],src_config:Any,tgt_config:Any,prefix_len:int,
+                           hard:bool=True)->tuple[tuple[torch.Tensor,torch.Tensor],...]:
+    layers=tgt_config.num_hidden_layers; hkv=getattr(tgt_config,'num_key_value_heads',None) or tgt_config.num_attention_heads
+    outk=[[None for _ in range(hkv)] for _ in range(layers)]; outv=[[None for _ in range(hkv)] for _ in range(layers)]
+    for j,(tl,th,kv,sl,sh) in enumerate(refs):
+        x=source_cache[sl][kv][sh,:prefix_len,:]
+        if kv==0: x=rope_transform(x,src_config,inverse=True)
+        xt=torch.as_tensor(x,dtype=torch.float32)
+        feat=torch.cat([xt,torch.as_tensor(np.broadcast_to(target_role_meta(refs[j],tgt_config),(prefix_len,3)),dtype=torch.float32)],dim=-1)
+        gate=straight_through_top1(router(feat),hard=hard)
+        xa=torch.cat([xt,torch.ones((prefix_len,1),dtype=torch.float32)],dim=-1)
+        w0=torch.as_tensor(experts[0]['maps'][j],dtype=torch.float32); w1=torch.as_tensor(experts[1]['maps'][j],dtype=torch.float32)
+        y0=xa@w0; y1=xa@w1; y=gate[:,0:1]*y0+gate[:,1:2]*y1
+        if kv==0: y=torch_rope(y,tgt_config)
+        (outk if kv==0 else outv)[tl][th]=y.unsqueeze(0).unsqueeze(0)
+    result=[]
+    for l in range(layers):
+        if any(x is None for x in outk[l]+outv[l]): raise AssertionError('incomplete routed KV output')
+        result.append((torch.cat(outk[l],dim=1),torch.cat(outv[l],dim=1)))
+    return tuple(result)
+
+def context_correction(router:TokenRouter,experts:list[dict[str,Any]],item_data:dict[str,Any],models:dict[str,Any],
+                       hard:bool=True)->tuple[torch.Tensor,torch.Tensor]:
+    ms,mt=(models[x] for x in PAIR); item=item_data['item']; prefix_len=len(item['tgt_ids'])-2
+    past=translated_cache_torch(router,experts,item_data['source_cache'],item_data['refs'],ms.config,mt.config,prefix_len,hard)
+    query=torch.tensor([[item['tgt_ids'][-2]]],dtype=torch.long)
+    out=mt(input_ids=query,past_key_values=DynamicCache.from_legacy_cache(past),use_cache=True)
+    replay=out.past_key_values.to_legacy_cache() if hasattr(out.past_key_values,'to_legacy_cache') else out.past_key_values
+    num=out.logits.new_tensor(0.0); den=out.logits.new_tensor(0.0)
+    for layer,(rk,rv) in enumerate(replay):
+        nk,nv=item_data['target_cache'][layer]
+        nk=torch.as_tensor(nk[:,-2,:],dtype=torch.float32); nv=torch.as_tensor(nv[:,-2,:],dtype=torch.float32)
+        rkq=rk[0,:,-1,:].float(); rvq=rv[0,:,-1,:].float()
+        num=num+(rkq-nk).square().sum()+(rvq-nv).square().sum()
+        den=den+nk.square().sum()+nv.square().sum()
+    cc=num/den.clamp_min(1e-30)
+    label=torch.tensor([item['tgt_ids'][-1]],dtype=torch.long)
+    ce=torch.nn.functional.cross_entropy(out.logits[:,-1,:],label)
+    return cc,ce
+
+def prepare_router_data(prompts:list[dict[str,Any]],experts:list[dict[str,Any]],models:dict[str,Any])->list[dict[str,Any]]:
+    return [router_examples(item,experts,models) for item in prompts]
+
+def train_mot_router(experts:list[dict[str,Any]],router_prompts:list[dict[str,Any]],models:dict[str,Any],seed:int)->tuple[TokenRouter,dict[str,Any]]:
+    data=prepare_router_data(router_prompts,experts,models); router=TokenRouter(); opt=torch.optim.Adam(router.parameters(),lr=GATE_LR)
+    for p in models[PAIR[1]].parameters(): p.requires_grad_(False)
+    history=[]; t0=time.perf_counter()
+    for step in range(GATE_UPDATES):
+        d=data[step%len(data)]
+        feat=torch.as_tensor(d['features'],dtype=torch.float32); e0=torch.as_tensor(d['y0'],dtype=torch.float32)
+        e1=torch.as_tensor(d['y1'],dtype=torch.float32); target=torch.as_tensor(d['target'],dtype=torch.float32)
+        gate=straight_through_top1(router(feat),hard=True); pred=gate[:,0:1]*e0+gate[:,1:2]*e1
+        map_loss=(pred-target).square().mean()/target.square().mean().clamp_min(1e-8)
+        cc,ce=context_correction(router,experts,d,models,hard=True)
+        loss=map_loss+0.10*cc+0.05*ce
+        opt.zero_grad(set_to_none=True); loss.backward(); torch.nn.utils.clip_grad_norm_(router.parameters(),1.0); opt.step()
+        history.append({'loss':float(loss.detach()),'map_rel_mse':float(map_loss.detach()),'context_correction_rel_mse':float(cc.detach()),'ce':float(ce.detach())})
+    return router,{'updates':GATE_UPDATES,'seconds':time.perf_counter()-t0,'last':history[-1],
+                   'mean_map_rel_mse':float(np.mean([x['map_rel_mse'] for x in history])),
+                   'mean_context_correction_rel_mse':float(np.mean([x['context_correction_rel_mse'] for x in history]))}
+
+def eval_mot(router:TokenRouter,experts:list[dict[str,Any]],prompts:list[dict[str,Any]],models:dict[str,Any])->dict[str,Any]:
+    ms,mt=(models[x] for x in PAIR); result={'native_nll':[],'mot_nll':[],'context_correction_rel_mse':[],'router_usage':np.zeros(2,dtype=np.float64),'route_count':0,'apply_seconds':[],'replay_seconds':[],'prompt_rows':[],'test_tokens':0}
+    for item in prompts:
+        sc,_,st=cache_arrays(ms,item['src_ids']); tc,to,tt=cache_arrays(mt,item['tgt_ids']); result['prompt_rows'].append(item['row']); result['test_tokens']+=item['tokens']
+        result['native_nll'].append(target_nll(mt,to.logits[0,-2],item['tgt_ids'][-1]))
+        plen=len(item['tgt_ids'])-2; t0=time.perf_counter()
+        past=translated_cache_torch(router,experts,sc,experts[0]['refs'],ms.config,mt.config,plen,hard=True)
+        result['apply_seconds'].append(time.perf_counter()-t0)
+        # Record the deterministic Top-1 route distribution over every target role and prefix token.
+        for j,(tl,th,kv,sl,sh) in enumerate(experts[0]['refs']):
+            x=sc[sl][kv][sh,:plen,:]
+            if kv==0: x=rope_transform(x,ms.config,inverse=True)
+            xt=torch.as_tensor(x,dtype=torch.float32)
+            meta=np.broadcast_to(target_role_meta(experts[0]['refs'][j],mt.config),(plen,3))
+            route=router(torch.cat([xt,torch.as_tensor(meta,dtype=torch.float32)],dim=-1)).argmax(dim=-1).numpy()
+            result['router_usage']+=np.bincount(route,minlength=2); result['route_count']+=len(route)
+        query=torch.tensor([[item['tgt_ids'][-2]]],dtype=torch.long); t1=time.perf_counter()
+        with torch.inference_mode(): out=mt(input_ids=query,past_key_values=DynamicCache.from_legacy_cache(past),use_cache=True)
+        result['replay_seconds'].append(time.perf_counter()-t1)
+        result['mot_nll'].append(target_nll(mt,out.logits[0,-1],item['tgt_ids'][-1]))
+        replay=out.past_key_values.to_legacy_cache() if hasattr(out.past_key_values,'to_legacy_cache') else out.past_key_values
+        num=den=0.0
+        for l,(rk,rv) in enumerate(replay):
+            nk,nv=tc[l]; nk=nk[:,-2,:]; nv=nv[:,-2,:]
+            num+=float(np.sum((rk[0,:,-1,:].numpy()-nk)**2)+np.sum((rv[0,:,-1,:].numpy()-nv)**2))
+            den+=float(np.sum(nk**2)+np.sum(nv**2))
+        result['context_correction_rel_mse'].append(num/max(den,1e-30))
+    result['native_mean_nll']=float(np.mean(result['native_nll'])); result['mot_mean_nll']=float(np.mean(result['mot_nll']))
+    result['delta_native']=result['mot_mean_nll']-result['native_mean_nll']
+    result['mean_context_correction_rel_mse']=float(np.mean(result['context_correction_rel_mse']))
+    result['router_fraction']=(result['router_usage']/max(1,result['route_count'])).tolist()
+    result['router_usage']=result['router_usage'].tolist()
+    return result
+
+def mot_serializers(experts:list[dict[str,Any]],basis_mean:np.ndarray,basis:np.ndarray,rank:int,router:TokenRouter)->dict[str,bytes]:
+    meta=bytes(v for ref in experts[0]['refs'] for v in ref); pair=(PAIR[0]+'>'+PAIR[1]).encode()+b'\0'
+    route=bytearray()
+    for key,value in router.state_dict().items(): route.extend(np.asarray(value.detach().cpu().numpy(),dtype='<f4').tobytes())
+    full=bytearray(struct.pack('<5sBBBB',b'MA881',0,0,2,1)); full.extend(pair); full.extend(meta)
+    full.extend(np.concatenate([x['maps'] for x in experts],axis=0).astype('<f4').tobytes()); full.extend(route)
+    rec=bytearray(struct.pack('<5sBBBB',b'MA881',1,rank,2,1)); rec.extend(pair); rec.extend(struct.pack('<BB',ROLE_LAYER_BINS,ROLE_HEAD_BINS)); rec.extend(meta)
+    rec.extend(np.asarray(basis_mean,dtype='<f4').tobytes()); rec.extend(np.asarray(basis[:rank],dtype='<f4').tobytes())
+    for x in experts:
+        _,codes=compress_maps(x['maps'],basis_mean,basis,rank); rec.extend(np.asarray(codes,dtype='<f4').tobytes())
+    rec.extend(route)
+    return {'full_mot':bytes(full),'shared_view_mot':bytes(rec)}
+
+def run_ma881_dev()->dict[str,Any]:
+    models,toks,paths=load_assets(); parts=dev_partition(toks)
+    ex=[fit_pair_maps(PAIR,parts['expert0'],models,toks),fit_pair_maps(PAIR,parts['expert1'],models,toks)]
+    mean,basis,_=fit_basis(ex); single=fit_pair_maps(PAIR,parts['expert0']+parts['expert1']+parts['router'],models,toks)
+    native_full={'maps':single['maps'],'refs':single['refs'],'pair':PAIR}
+    rows={}
+    for rank in RANKS:
+        compressed=[]
+        for e in ex:
+            maps,_=compress_maps(e['maps'],mean,basis,rank); compressed.append({**e,'maps':maps})
+        router,train_stats=train_mot_router(compressed,parts['router'],models,DEV_SEED+rank)
+        ev=eval_mot(router,compressed,parts['test'],models)
+        rows[str(rank)]={'training':train_stats,'evaluation':ev}
+    full_router,full_training=train_mot_router(ex,parts['router'],models,DEV_SEED+8100)
+    full_eval=eval_mot(full_router,ex,parts['test'],models)
+    single_eval=eval_mot_single(single,parts['test'],models)
+    chosen=min(RANKS,key=lambda rank:(rows[str(rank)]['evaluation']['mot_mean_nll'],rank))
+    return {'experiment_id':'MA-881','selected_rank':chosen,'rank_candidates':list(RANKS),'dev_seed':DEV_SEED,
+            'rank_results':rows,'full_mot':{'training':full_training,'evaluation':full_eval},'single_ridge':single_eval,
+            'prompt_rows':{k:[x['row'] for x in v] for k,v in parts.items()},'models':file_provenance(paths),
+            'runtime':{'cuda_available':torch.cuda.is_available(),'max_rss_mib':resource.getrusage(resource.RUSAGE_SELF).ru_maxrss/1024}}
+
+def eval_mot_single(mapset:dict[str,Any],prompts:list[dict[str,Any]],models:dict[str,Any])->dict[str,Any]:
+    ms,mt=(models[x] for x in PAIR); native=[]; transferred=[]; rows=[]; apply=[]; replay=[]; corr=[]
+    for item in prompts:
+        sc,_,_=cache_arrays(ms,item['src_ids']); tc,to,_=cache_arrays(mt,item['tgt_ids']); rows.append(item['row'])
+        native.append(target_nll(mt,to.logits[0,-2],item['tgt_ids'][-1])); plen=len(item['tgt_ids'])-2
+        t0=time.perf_counter(); past=apply_maps(sc,mapset['refs'],mapset['maps'],ms.config,mt.config); apply.append(time.perf_counter()-t0)
+        past=tuple((k[:,:,:plen,:].contiguous(),v[:,:,:plen,:].contiguous()) for k,v in past)
+        q=torch.tensor([[item['tgt_ids'][-2]]]); t1=time.perf_counter()
+        with torch.inference_mode(): out=mt(input_ids=q,past_key_values=DynamicCache.from_legacy_cache(past),use_cache=True)
+        replay.append(time.perf_counter()-t1); transferred.append(target_nll(mt,out.logits[0,-1],item['tgt_ids'][-1]))
+        legacy=out.past_key_values.to_legacy_cache() if hasattr(out.past_key_values,'to_legacy_cache') else out.past_key_values
+        num=den=0.
+        for l,(rk,rv) in enumerate(legacy):
+            nk,nv=tc[l]; nk=nk[:,-2,:]; nv=nv[:,-2,:]
+            num+=float(np.sum((rk[0,:,-1,:].numpy()-nk)**2)+np.sum((rv[0,:,-1,:].numpy()-nv)**2)); den+=float(np.sum(nk**2)+np.sum(nv**2))
+        corr.append(num/max(den,1e-30))
+    return {'native_mean_nll':float(np.mean(native)),'single_ridge_mean_nll':float(np.mean(transferred)),
+            'delta_native':float(np.mean(transferred)-np.mean(native)),'context_correction_rel_mse':float(np.mean(corr)),
+            'prompt_rows':rows,'apply_seconds':apply,'replay_seconds':replay}
+
+def run_ma881_fresh(seeds:tuple[int,...],rank:int)->dict[str,Any]:
+    models,toks,paths=load_assets(); rows=[]
+    for seed in seeds:
+        cal=fresh_partition('validation',seed,toks,12); parts=split_fresh_cal(cal,seed)
+        ex=[fit_pair_maps(PAIR,parts['expert0'],models,toks),fit_pair_maps(PAIR,parts['expert1'],models,toks)]
+        mean,basis,_=fit_basis(ex); compressed=[]
+        for e in ex:
+            maps,_=compress_maps(e['maps'],mean,basis,rank); compressed.append({**e,'maps':maps})
+        single=fit_pair_maps(PAIR,cal,models,toks); router_full,train_full=train_mot_router(ex,parts['router'],models,seed+1100)
+        router_shared,train_shared=train_mot_router(compressed,parts['router'],models,seed+2200)
+        test=fresh_partition('test',seed,toks,12)
+        ev_full=eval_mot(router_full,ex,test,models); ev_shared=eval_mot(router_shared,compressed,test,models); ev_single=eval_mot_single(single,test,models)
+        payload=mot_serializers(compressed,mean,basis,rank,router_shared)
+        full_payload=mot_serializers(ex,mean,basis,rank,router_full)['full_mot']
+        artifact_dir=Path(__file__).resolve().parents[1]/'artifacts'; artifact_dir.mkdir(exist_ok=True)
+        path=artifact_dir/f'shared_mot_payload_seed_{seed}.bin'; path.write_bytes(payload['shared_view_mot'])
+        rows.append({'seed':seed,'pair':list(PAIR),'prompt_rows':{'calibration':[x['row'] for x in cal],
+                     'expert0':[x['row'] for x in parts['expert0']],'expert1':[x['row'] for x in parts['expert1']],
+                     'router':[x['row'] for x in parts['router']],'test':[x['row'] for x in test]},
+                     'full_mot_training':train_full,'shared_mot_training':train_shared,
+                     'full_mot':ev_full,'shared_mot':ev_shared,'single_ridge':ev_single,
+                     'payload_bytes':{'full_mot':len(full_payload),'shared_view_mot':len(payload['shared_view_mot'])},
+                     'bytes_saved_fraction':1-len(payload['shared_view_mot'])/len(full_payload),
+                     'payload_sha256':hashlib.sha256(payload['shared_view_mot']).hexdigest(),
+                     'payload_path':str(path.relative_to(Path(__file__).resolve().parents[2]))})
+    return {'experiment_id':'MA-881','seeds':list(seeds),'selected_rank':rank,'rows':rows,'models':file_provenance(paths),
+            'runtime':{'cuda_available':torch.cuda.is_available(),'max_rss_mib':resource.getrusage(resource.RUSAGE_SELF).ru_maxrss/1024}}
