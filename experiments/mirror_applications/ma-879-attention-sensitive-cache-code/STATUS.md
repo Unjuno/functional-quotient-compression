@@ -8,7 +8,7 @@
 - Dev settings frozen: selected learning rate `0.002`; dev evidence in `dev_results.json`
 - Fresh/audit opened: yes, after freeze commit `aeac3d4e8` (fresh execution begins after this freeze commit)
 - Fresh/audit opened: yes, after freeze commit `aeac3d4e8`
-- Results: `RESULTS.md`; all three fresh seeds miss quality and pass bytes
+- Results: `RESULTS.md`; evidence commit `306e149d1`; all three fresh seeds miss quality and pass bytes
 - Verification: `VERIFICATION.json`
 
 This experiment fixes source-head support to [0,4,7] and tests target-loss optimization of shared-basis codes. It must not be reported as a Mirror-specific gain if the ordinary low-rank coefficient optimizer explains the result.
