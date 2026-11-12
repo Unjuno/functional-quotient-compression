@@ -297,7 +297,8 @@ def deserialize_payload(raw:bytes)->dict[str,Any]:
             n=ROLES*(D+1)*D; full[pk]=np.frombuffer(raw,dtype='<f4',count=n,offset=pos).reshape(ROLES,D+1,D).copy(); pos+=n*4
     if mode in (2,3,5):
         flags=np.frombuffer(raw,dtype=np.uint8,count=len(PAIRS),offset=pos); pos+=len(PAIRS)
-        selected=[pk for pk,flag in zip(['>'.join(p) for p in PAIRS],flags) if flag]
+        # Repair tensors are serialized in lexical key order; the mask remains in PAIRS order.
+        selected=sorted(pk for pk,flag in zip(['>'.join(p) for p in PAIRS],flags) if flag)
         activation='identity' if mode==2 else 'gelu'
         for pk in selected:
             h=int(meta['hidden'][pk]); shapes=((ROLES,D,h),(ROLES,h),(ROLES,h,D),(ROLES,D),(ROLES,D),(ROLES,D),(ROLES,D),(ROLES,D))
@@ -415,10 +416,28 @@ def run_fresh(seeds:tuple[int,...],hard:list[str],h:int)->dict[str,Any]:
     return {'experiment_id':'MA-883','seeds':list(seeds),'hard_pair_keys':hard,'selected_hidden_width':h,'rows':rows,'models':model_provenance(paths),
             'runtime':{'cuda_available':torch.cuda.is_available(),'max_rss_mib':resource.getrusage(resource.RUSAGE_SELF).ru_maxrss/1024}}
 
+def verify_saved_payloads()->dict[str,Any]:
+    """Post hoc serialization-only audit; no fitting or selection is performed."""
+    result=json.loads((Path(__file__).resolve().parents[1]/'fresh_results.json').read_text())
+    models,toks,paths=load_assets(); groups=load_prompt_sets(toks); rows=[]
+    for row in result['rows']:
+        bucket=str(FRESH_SEEDS.index(row['seed'])+1); prepared=prepare(groups[bucket],'verify',models)
+        test={pk:d['test'] for pk,d in prepared.items()}; checks={}
+        for name,rel in row['artifact_paths'].items():
+            raw=(Path(__file__).resolve().parents[2]/rel).read_bytes(); dec=deserialize_payload(raw)
+            rkey=name if name in ('sparse_linear_residual','sparse_mlp','full_mlp_upper') else None
+            rr={rkey:dec['repairs']} if rkey else {}
+            ev=evaluate(test,dec['base'],dec['full_maps'],dec['films'],rr,dec['hard'],models,(name,))
+            delta={pk:abs(ev['methods'][name]['per_pair_mean_nll'][pk]-row['test_metrics']['methods'][name]['per_pair_mean_nll'][pk]) for pk in test}
+            checks[name]={'payload_sha256':hashlib.sha256(raw).hexdigest(),'payload_bytes':len(raw),'per_pair_nll_delta':delta,'max_abs_nll_delta':max(delta.values()),'passed':max(delta.values())<=.001}
+        rows.append({'seed':row['seed'],'methods':checks})
+    return {'experiment_id':'MA-883','type':'post-hoc serialization decoder correction audit','training_or_selection_performed':False,'rows':rows,'models':model_provenance(paths)}
+
 if __name__=='__main__':
     import argparse
-    ap=argparse.ArgumentParser(); ap.add_argument('mode',choices=['dev','fresh']); ap.add_argument('--hard',default=''); ap.add_argument('--width',type=int,default=4); ap.add_argument('--seeds',default='983,997,1009')
+    ap=argparse.ArgumentParser(); ap.add_argument('mode',choices=['dev','fresh','verify_payloads']); ap.add_argument('--hard',default=''); ap.add_argument('--width',type=int,default=4); ap.add_argument('--seeds',default='983,997,1009')
     args=ap.parse_args()
     if args.mode=='dev': result=run_dev(); name='development_results.json'
-    else: result=run_fresh(tuple(int(x) for x in args.seeds.split(',')),[x for x in args.hard.split(';') if x],args.width); name='fresh_results.json'
+    elif args.mode=='fresh': result=run_fresh(tuple(int(x) for x in args.seeds.split(',')),[x for x in args.hard.split(';') if x],args.width); name='fresh_results.json'
+    else: result=verify_saved_payloads(); name='serialization_correction_audit.json'
     out=Path(__file__).resolve().parents[1]/name; out.write_text(json.dumps(result,indent=2)+'\n'); print(out)
