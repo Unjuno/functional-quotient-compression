@@ -1,0 +1,52 @@
+{
+  "experiment_id": "MA-880",
+  "selected_cp_rank": 1,
+  "updates": 600,
+  "map_rank": 32,
+  "train_pairs": [
+    [
+      "openai-community/gpt2",
+      "EleutherAI/pythia-70m-deduped"
+    ],
+    [
+      "EleutherAI/pythia-70m-deduped",
+      "EleutherAI/pythia-160m-deduped"
+    ],
+    [
+      "EleutherAI/pythia-160m-deduped",
+      "HuggingFaceTB/SmolLM2-135M"
+    ],
+    [
+      "HuggingFaceTB/SmolLM2-135M",
+      "openai-community/gpt2"
+    ]
+  ],
+  "development_pairs": [
+    [
+      "EleutherAI/pythia-70m-deduped",
+      "openai-community/gpt2"
+    ],
+    [
+      "HuggingFaceTB/SmolLM2-135M",
+      "EleutherAI/pythia-160m-deduped"
+    ]
+  ],
+  "fresh_pairs": [
+    [
+      "EleutherAI/pythia-160m-deduped",
+      "EleutherAI/pythia-70m-deduped"
+    ],
+    [
+      "openai-community/gpt2",
+      "HuggingFaceTB/SmolLM2-135M"
+    ]
+  ],
+  "fresh_seeds": [
+    983,
+    997,
+    1009
+  ],
+  "protocol_sha256": "b23c0604cfc3de24e5144cb341c2b542d8f9b73ddd9a55454dee8325670270b0",
+  "dev_results_sha256": "b02f783c23846bd0170c43f3794bf7fc78777ed939fff6070646a92f8cec9451",
+  "fresh_opened": false
+}
