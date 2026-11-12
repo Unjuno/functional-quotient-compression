@@ -5,8 +5,9 @@
 - Base commit: `00402001a`
 - Four model snapshots downloaded and cached before any model-quality development run
 - Protocol freeze: `ecf6f00e6`
-- Development: not run
-- Fresh/audit opened: no
+- Development: complete; selected CP rank 4 at 600 updates (lowest held-out dev NLL)
+- Development quality screen: factor NLL remains 7.2–14.3 nat worse than independent full maps across dev pairs; settings frozen regardless
+- Fresh/audit opened: no (settings frozen before fresh run)
 - Results: pending
 - Verification: pending
 
