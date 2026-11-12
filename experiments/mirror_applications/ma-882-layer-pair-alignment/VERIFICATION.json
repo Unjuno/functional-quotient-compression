@@ -1,19 +1,25 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-882",
+  "commit": "pending results commit",
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "python -m pytest -q experiments/mirror_applications/ma-882-layer-pair-alignment/tests",
+    "passed": 5,
+    "failed": 0
   },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "roundtrip_checked": true,
+    "byte_exact": true
   },
   "metric_replay": {
-    "checked": false,
-    "max_difference": null
+    "checked": true,
+    "max_difference": 0.000712553660076054
   },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Fresh validation and test seed chunks are disjoint within each pair; cross-pair Wikitext row overlaps are counted and reported.",
+    "Decoded full/PCA/CP payloads match stored byte counts and hashes; pair-mean NLL replay differences are below 0.001 nat.",
+    "Native-cache replay identity error is below 0.00002 nat.",
+    "CP quality passes 0/6 pair\u00d7seed conditions; serialized byte gates pass 6/6.",
+    "Payload replay is an amendment on the original fresh test IDs, not a second independent audit."
+  ]
 }
