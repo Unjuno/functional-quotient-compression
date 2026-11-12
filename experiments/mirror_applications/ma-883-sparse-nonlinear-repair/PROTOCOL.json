@@ -1,0 +1,88 @@
+{
+  "experiment_id": "MA-883",
+  "title": "Shared linear KV transport with dev-selected sparse private nonlinear repair",
+  "status": "SCREENING",
+  "base_commit": "85bff8c71",
+  "evidence_lane": "CROSS_MODEL_KV/SHARED_PRIVATE/NONLINEAR/QUALITY/STORAGE/COMPUTE",
+  "hypothesis": "A pooled per-role affine KV translator plus small pair-specific gain/bias coordinates will handle at least one of two calibrated Pythia-to-SmolLM2 pairs; a private per-role nonlinear residual, enabled only for pairs marked hard on development (shared-view delta to native >1.0 nat), will repair those pairs within the independent ridge quality while keeping private state ≤20% and total payload ≤75% of the independent two-pair ridge bank.",
+  "prior_art_refs": ["PA236", "PA238"],
+  "prior_art_boundary": "PA236 establishes closed-form cross-model ridge and layer matching; PA238 motivates nonlinear translators and target-context correction. This component screen uses ordinary unweighted ridge and a residual MLP; it is not a CacheBridge or MoT reproduction.",
+  "physical_object": "One shared affine KV map per target layer/head/KV role, pooled across two source-model pairs.",
+  "logical_multiplicity": "Per-pair translator views from output gain/bias coordinates; fixed pair-ID repair mask enables private nonlinear state only for development-identified hard pairs.",
+  "mirror_coordinate": "Pair/role FiLM gain and bias over a shared map; optional private per-role residual MLP for the frozen hard-pair mask. FiLM and low-rank identity-activation controls are ordinary native methods and are not Mirror-specific.",
+  "models": ["EleutherAI/pythia-70m-deduped", "EleutherAI/pythia-160m-deduped", "HuggingFaceTB/SmolLM2-135M"],
+  "pairs": [["EleutherAI/pythia-70m-deduped", "HuggingFaceTB/SmolLM2-135M"], ["EleutherAI/pythia-160m-deduped", "HuggingFaceTB/SmolLM2-135M"]],
+  "data": {
+    "source": "Salesforce/wikitext wikitext-103-raw-v1 train",
+    "old_content_exclusion": "Exclude all top-level article titles and exact normalized text rows appearing in any Wikitext-2 raw-v1 train/validation/test split.",
+    "article_partition": "Assign whole top-level articles by int(SHA256(title)[:8],16) mod 4: bucket 0 development; buckets 1/2/3 fresh seeds 983/997/1009.",
+    "pairing": "Use the same text rows for both source-target pairs; require exact source/target tokenizer offset equality for both pairs.",
+    "prompts_per_article_bucket": 48,
+    "eligibility": "16-128 tokens; exact character-offset equality; unique text; title absent from Wikitext-2.",
+    "fresh_claim_boundary": "Article-heldout Wikitext-103-train audit, not standard Wikitext-103 validation/test benchmark."
+  },
+  "fixed_design": {
+    "layer_alignment": "nearest relative depth; fixed across all methods",
+    "head_alignment": "nearest relative KV-head index",
+    "rope": "inverse source RoPE before fitting and target RoPE after key translation",
+    "roles": "180 SmolLM2 roles: 30 target layers × 3 KV heads × key/value",
+    "ridge_alpha": 0.01,
+    "shared_base": "Pooled affine ridge sufficient statistics from both source pairs on development map-fit prompts; frozen for fresh evaluation.",
+    "pair_view": "Per-role scalar output gain plus 64D bias, fit by closed-form least squares from calibration prompts.",
+    "hard_pair_rule": "Freeze pair-ID repair mask from development check prompts: mark a pair hard when pair-FiLM next-token NLL minus native target NLL >1.0 nat. Repair at most one of two pairs for a sparse-exception claim; if both are hard, retain both and declare sparse premise failed.",
+    "repair": "Pair-private per-role 64→h→64 GELU residual MLP over normalized source KV content; charge all weights, biases, input/residual normalization means and scales.",
+    "hidden_width_candidates": [4, 8, 16],
+    "optimizer": "Adam, lr=0.001, 24 fixed updates per pair/view; deterministic initialization from recorded seed; zero-initialized output layer.",
+    "objective": "Normalized rolewise KV residual MSE +0.10 target replay next-token cross-entropy; target model weights frozen.",
+    "linear_residual_control": "Same per-role two-layer residual parameterization, width, initialization, data, updates, and objective with identity activation instead of GELU."
+  },
+  "development": {
+    "article_bucket": 0,
+    "prompts_per_pair": 48,
+    "map_fit_prompts": 24,
+    "pair_mask_check_prompts": 8,
+    "width_selection_test_prompts": 16,
+    "selection": "Freeze hard-pair mask by the stated >1.0 nat check rule. Select the smallest hidden width among 4/8/16 whose repair NLL minimizes the flagged-pair development test mean; ties to smaller width. If no pair is flagged, freeze h=4 and record no repair selection evidence.",
+    "fresh_not_opened_until_mask_and_width_frozen": true
+  },
+  "fresh": {
+    "article_buckets": {"983": 1, "997": 2, "1009": 3},
+    "prompts_per_pair_per_seed": 48,
+    "map_fit_prompts": 24,
+    "secondary_calibration_check_prompts": 8,
+    "test_prompts": 16,
+    "selection": "Prompt rows and hard-pair mask are fixed before fresh outcomes; all pairs are reported even if not repaired.",
+    "runtime_gate": "Static pair-ID repair mask only. No target-NLL runtime oracle or post-fresh pair selection."
+  },
+  "controls": [
+    "Native target prefill and native-cache replay identity",
+    "Independent full affine ridge maps per pair",
+    "Shared pooled affine ridge without pair code",
+    "Shared map plus pair/role FiLM gain and bias, no private repair",
+    "Frozen-mask shared FiLM plus private identity-activation low-rank residual",
+    "Frozen-mask shared FiLM plus private GELU residual MLP",
+    "Independent full ridge plus nonlinear residual MLP for both pairs as upper control"
+  ],
+  "success_gate": "In every fresh pair×seed condition, sparse nonlinear candidate is within +0.50 nat of full ridge and +1.00 nat of native. For each repaired pair it improves ≥0.50 nat over shared FiLM and is within +0.25 nat of the independent nonlinear upper control; it beats the identity-activation control by ≥0.10 nat at matched width. Private repair bytes ≤20% and total shared+codes+private bytes ≤75% of the independent two-pair ridge payload, and no more than 1/2 pairs are repaired.",
+  "failure_gate": "Any quality, byte, nonlinear-attribution, or sparse-mask gate fails with prompt and serialization integrity passing. Report shared-linear failure, repair improvement, and byte exhaustion separately.",
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "shared_paid_state": ["pooled base maps", "model-pair identifiers", "layer/head/role metadata", "format header"],
+    "view_paid_state": ["per-pair/per-role gains and biases"],
+    "private_paid_state": ["private MLP weights and biases", "all normalization means/scales", "hard-pair mask", "repair width and metadata"],
+    "upper_control_paid_state": ["independent full maps plus every per-pair nonlinear residual state"],
+    "common_model_weights": "reported separately and excluded from marginal translator payload"
+  },
+  "serialization_integrity": {
+    "format": "MA883 versioned little-endian float32 inference payloads with explicit pair and repair masks",
+    "roundtrip": "Deserialize every method payload and replay the same fixed target prompts; require per-condition NLL absolute difference <=0.001 nat and exact parameter tensor reconstruction.",
+    "payload_hash": "SHA-256 each complete serialized inference payload; report actual file length in bytes.",
+    "scope": "All bases, pair coordinates, maps, repair weights, normalization state, metadata, and masks needed for deterministic reconstruction are paid in the relevant payload."
+  },
+  "compute": {
+    "hardware": "CPU; no GPU serving claim",
+    "report": ["calibration and pooled-map fit time", "pair-code fit time", "MLP and identity residual update/time", "active MAC proxy per token", "serialized payload decode time", "cache-apply and target replay wall time", "peak RSS", "CUDA availability"]
+  },
+  "scope": ["Two ordered Pythia-to-SmolLM2 pairs, one-token replay NLL, article-heldout Wikitext-103-train text.", "Static pair-level repair only; no runtime confidence gate.", "No broad unseen-model-pair generalization or Mirror-specific claim from FiLM/MLP utility."],
+  "protocol_amendments": ["Before development: specified serialized-payload deserialization and replay checks as a required integrity gate; implementation only, no method or metric change."]
+}
