@@ -232,8 +232,10 @@ def factor_observations(mapsets:list[dict[str,Any]],mean:np.ndarray,basis:np.nda
 def fit_pair_factor(mapsets:list[dict[str,Any]],mean:np.ndarray,basis:np.ndarray,rank:int,q:int,steps:int,
                     models:dict[str,Any],seed:int)->dict[str,Any]:
     si,ti,ri,y,pair_tags=factor_observations(mapsets,mean,basis,rank,models)
+    code_mean=y.mean(axis=0); code_scale=np.maximum(y.std(axis=0),1e-6)
+    y_scaled=((y-code_mean)/code_scale).astype(np.float32)
     torch.manual_seed(seed); dtype=torch.float32
-    idx_s=torch.as_tensor(si); idx_t=torch.as_tensor(ti); idx_r=torch.as_tensor(ri); target=torch.as_tensor(y)
+    idx_s=torch.as_tensor(si); idx_t=torch.as_tensor(ti); idx_r=torch.as_tensor(ri); target=torch.as_tensor(y_scaled)
     u=torch.nn.Parameter(torch.randn((len(MODELS),q),dtype=dtype)*.1)
     v=torch.nn.Parameter(torch.randn((len(MODELS),q),dtype=dtype)*.1)
     role=torch.nn.Parameter(torch.randn((ROLE_COUNT,q,rank),dtype=dtype)*.1)
@@ -244,16 +246,20 @@ def fit_pair_factor(mapsets:list[dict[str,Any]],mean:np.ndarray,basis:np.ndarray
         pred=bias+(u[idx_s]*v[idx_t]).unsqueeze(-1).mul(role[idx_r]).sum(dim=1)
         loss=torch.mean((pred-target)**2)+1e-5*(u.square().mean()+v.square().mean()+role.square().mean())
         opt.zero_grad(set_to_none=True); loss.backward(); opt.step(); losses.append(float(loss.detach()))
+    pred_scaled=bias.detach().numpy()[None,:]+(u.detach().numpy()[si]*v.detach().numpy()[ti])[:,:,None].__mul__(role.detach().numpy()[ri]).sum(axis=1)
+    pred_raw=code_mean+code_scale*pred_scaled
     return {'u':u.detach().numpy(),'v':v.detach().numpy(),'role':role.detach().numpy(),'bias':bias.detach().numpy(),
+            'code_mean':code_mean.astype(np.float32),'code_scale':code_scale.astype(np.float32),
             'q':q,'rank':rank,'steps':steps,'fit_seconds':time.perf_counter()-start,
-            'train_code_mse':float(np.mean((bias.detach().numpy()+(u.detach().numpy()[si]*v.detach().numpy()[ti])[:,:,None].__mul__(role.detach().numpy()[ri]).sum(axis=1)-y)**2)),
+            'train_code_mse':float(np.mean((pred_raw-y)**2)),
+            'train_scaled_code_mse':float(np.mean((pred_scaled-y_scaled)**2)),
             'last_loss':losses[-1],'train_pairs':sorted(set(pair_tags))}
 
 def predict_pair_maps(pair:tuple[str,str],factor:dict[str,Any],mean:np.ndarray,basis:np.ndarray,
                       refs:list[tuple[int,int,int,int,int]],models:dict[str,Any])->np.ndarray:
     si=MODELS.index(pair[0]); ti=MODELS.index(pair[1]);
     bins=np.asarray([role_index(ref,models[pair[1]].config) for ref in refs],dtype=np.int64)
-    codes=factor['bias'][None,:]+((factor['u'][si]*factor['v'][ti])[None,:,None]*factor['role'][bins]).sum(axis=1)
+    codes=factor['code_mean'][None,:]+factor['code_scale'][None,:]*(factor['bias'][None,:]+((factor['u'][si]*factor['v'][ti])[None,:,None]*factor['role'][bins]).sum(axis=1))
     return (mean[None,:]+codes@basis[:factor['rank']]).reshape(len(refs),D+1,D).astype(np.float64)
 
 def evaluate_maps(pair:tuple[str,str],prompts:list[dict[str,Any]],models:dict[str,Any],
@@ -274,7 +280,7 @@ def evaluate_maps(pair:tuple[str,str],prompts:list[dict[str,Any]],models:dict[st
             num=den=0.0
             for layer,(k,v) in enumerate(past):
                 tk,tv=tc[layer]; tk=tk[:,:plen,:]; tv=tv[:,:plen,:]
-                num+=float(np.sum((k[0].numpy()-tk)**2)+np.sum((v[0].numpy()-tv)**2))
+                num+=float(np.sum((k[0,:,:plen,:].numpy()-tk)**2)+np.sum((v[0,:,:plen,:].numpy()-tv)**2))
                 den+=float(np.sum(tk**2)+np.sum(tv**2))
             metrics[name]['rel_cache_mse'].append(num/max(den,1e-30))
     for name in metrics:
@@ -292,7 +298,7 @@ def serialize_factor_payload(factor:dict[str,Any],mean:np.ndarray,basis:np.ndarr
     refs=bytes(v for item in outputs for ref in item['refs'] for v in ref)
     payload=bytearray(struct.pack('<5sBBBB',b'MA880',1,factor['rank'],factor['q'],len(outputs)))
     payload.extend(names); payload.extend(pair_meta); payload.extend(refs)
-    for arr in (mean,basis[:factor['rank']],factor['bias'],factor['u'],factor['v'],factor['role']):
+    for arr in (mean,basis[:factor['rank']],factor['code_mean'],factor['code_scale'],factor['bias'],factor['u'],factor['v'],factor['role']):
         payload.extend(np.asarray(arr,dtype='<f4').tobytes())
     return bytes(payload)
 
@@ -362,7 +368,7 @@ def run_ma880_fresh(seeds:tuple[int,...],q:int,steps:int=600)->dict[str,Any]:
         full_bytes=full_payload_bytes(outputs)
         artifact_dir=Path(__file__).resolve().parents[1]/'artifacts'; artifact_dir.mkdir(exist_ok=True)
         payload_path=artifact_dir/f'factor_payload_seed_{seed}.bin'; payload_path.write_bytes(factor_payload)
-        rows.append({'seed':seed,'pair_results':evals,'prompt_rows':manifests,'factor':{k:v for k,v in factor.items() if k not in ('u','v','role','bias')},
+        rows.append({'seed':seed,'pair_results':evals,'prompt_rows':manifests,'factor':{k:v for k,v in factor.items() if k not in ('u','v','role','bias','code_mean','code_scale')},
                      'training_map_fit_seconds':[x['calibration_seconds'] for x in train],
                      'training_map_samples':[x['samples'] for x in train],
                      'factor_payload_bytes':len(factor_payload),'independent_full_payload_bytes':full_bytes,

@@ -84,7 +84,7 @@
     ],
     "cp_optimizer": "Adam lr=0.01",
     "cp_updates": 600,
-    "cp_objective": "mean squared error of training-pair rank-32 map codes plus 1e-5 factor L2 penalty"
+    "cp_objective": "mean squared error of standardized training-pair rank-32 map codes plus 1e-5 factor L2 penalty; means and scales are paid serialized state"
   },
   "development": {
     "split": "Wikitext-2 train",
@@ -133,7 +133,9 @@
       "target factors",
       "normalized role factors",
       "CP bias",
-      "format header"
+      "format header",
+      "rank-code normalization means",
+      "rank-code normalization scales"
     ],
     "full_map_paid_state": [
       "model-pair IDs",
@@ -160,5 +162,11 @@
     "Wikitext-2, one-token next-token probes, fixed relative depth/head assignment and 64-dimensional head maps.",
     "No multi-token generation trajectory, long-context serving, GPU latency or universal pair generalization claim."
   ],
-  "protocol_amendments": []
+  "protocol_amendments": [
+    {
+      "id": "01",
+      "timing": "after initial development, before the amended development rerun and before any fresh split access",
+      "change": "Initial raw-code development showed poorly conditioned coefficients (train code MSE about 9.8e5) and weak CP optimization. Standardize each PCA coefficient using mean/std computed only from training-pair map codes; serialize and charge these vectors; retain the same ranks, 600 updates, optimizer, pairs, prompt counts and selection rule."
+    }
+  ]
 }

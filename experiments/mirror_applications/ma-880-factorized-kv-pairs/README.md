@@ -11,3 +11,6 @@ A shared rank-32 map basis with compact source-model × target-model × normaliz
 The proposed coordinate is a CP product over source ID, target ID and normalized target layer/head/KV role, decoded through a shared map basis. Controls are native target prefill, independent weighted ridge fitted for each evaluated pair, and PCA map coding with pair-specific coefficients. CP factorization is itself an ordinary tensor-factorization baseline; a pass would not establish a Mirror-specific advantage.
 
 See [PROTOCOL.json](PROTOCOL.json) for the frozen pair partitions, training recipe, prompt rules, gates and byte accounting. No fresh prompts are opened before development selects the CP rank.
+
+
+Development amendment 01 standardizes each PCA code dimension from training-pair maps only. The mean and scale vectors are serialized and billed. Fresh splits remain unopened. See `PROTOCOL.json`.

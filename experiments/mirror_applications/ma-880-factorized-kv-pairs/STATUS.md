@@ -11,3 +11,5 @@
 - Verification: pending
 
 The experiment tests whole ordered-pair generalization from a source×target×role factor model. The ordinary CP factorization alias is explicit.
+
+- Amendment 01: rank-code standardization from training pairs only, before fresh access.
