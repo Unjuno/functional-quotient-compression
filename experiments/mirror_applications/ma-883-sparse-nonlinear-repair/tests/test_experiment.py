@@ -60,10 +60,13 @@ def test_actual_payload_roundtrip_for_all_modes():
         if mode in ('shared_linear','pair_film','sparse_linear_residual','sparse_mlp'):
             assert np.array_equal(decoded['base'],base)
         if mode in ('pair_film','sparse_linear_residual','sparse_mlp'):
-            assert np.array_equal(decoded['films'][next(iter(films))][0],films[next(iter(films))][0])
+            for key in films:
+                assert np.array_equal(decoded['films'][key][0],films[key][0])
+                assert np.array_equal(decoded['films'][key][1],films[key][1])
         if mode in ('full_ridge','full_mlp_upper'):
-            assert np.array_equal(decoded['full_maps'][next(iter(full))],full[next(iter(full))])
+            for key in full: assert np.array_equal(decoded['full_maps'][key],full[key])
         if mode in ('sparse_linear_residual','sparse_mlp','full_mlp_upper'):
             assert set(decoded['repairs'])==set(chosen)
             for key in chosen:
-                assert torch.equal(decoded['repairs'][key].w1,chosen[key].w1)
+                for name,value in chosen[key].state_dict().items():
+                    assert torch.equal(decoded['repairs'][key].state_dict()[name],value)
