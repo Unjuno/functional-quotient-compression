@@ -33,7 +33,7 @@ The shared-basis code is also the ordinary low-rank coefficient control; equalit
 - Dev: train split, seed 829, 24 calibration prompts and 16 held-out prompts.
 - Fresh: validation split for 12 calibration prompts and test split for 16 test prompts per seed, seeds 983, 997, 1009. Exact tokenizer offset alignment and deterministic disjoint row selection.
 - Basis rank: fixed at 32; no rank search after this protocol freeze.
-- Code optimization: Adam, 24 updates (two passes over 12 calibration prompts), learning-rate candidates `{1e-4, 5e-4, 2e-3}` selected by held-out dev NLL. Fresh runs use the selected learning rate and exactly 24 updates.
+- Code optimization: Adam, 24 Adam updates per development learning-rate candidate (one pass over 24 dev calibration prompts); candidates `{1e-4, 5e-4, 2e-3}` selected by held-out dev NLL. Fresh runs use the selected learning rate and exactly 24 updates (two passes over 12 calibration prompts).
 - Each update uses one calibration prompt: transfer its source prefix cache, feed the target query token, and minimize the target's next-token cross-entropy. Target model weights are frozen. No test prompt participates in code fitting.
 - Prompt target query is the penultimate target token and label is the final target token; transferred cache is truncated to the preceding prefix.
 
