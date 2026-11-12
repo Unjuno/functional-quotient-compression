@@ -172,6 +172,11 @@
       "id": "02",
       "timing": "after first fresh run, before an identical diagnostic replay",
       "change": "Add per-world wall time, heldout full-map calibration time and fixed role-grid serializer metadata bytes. The replay uses the same frozen Q=1, model pairs, prompt IDs, calibration maps, seeds and 600 updates; it adds compute/accounting fields only and preserves the initial output."
+    },
+    {
+      "id": "03",
+      "timing": "after fresh implementation-deviation results were inspected; before corrected development and corrected fresh replay",
+      "change": "Code review found the initial MA-880 implementation omitted the protocol-declared inverse-source/inverse-target RoPE operations during ridge fitting and target RoPE application during decoding. Preserve the initial outputs and serialized payloads as `*_unrotated_deviation` evidence, do not use them to select settings, implement the already frozen position rule, rerun development on train only to reselect CP rank, then run the corrected fresh worlds with unchanged pair partition, prompt counts and gates. GPT-2 uses absolute positions and receives no RoPE transform."
     }
   ]
 }

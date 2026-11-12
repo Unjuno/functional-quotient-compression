@@ -77,6 +77,35 @@ def cache_arrays(model:Any,ids:list[int])->tuple[list[tuple[np.ndarray,np.ndarra
         arr.append((k[0].detach().cpu().numpy().astype(np.float64),v[0].detach().cpu().numpy().astype(np.float64)))
     return arr,out,elapsed
 
+def rope_inv_freq(config:Any,rotary_dim:int)->np.ndarray:
+    theta=float(getattr(config,'rope_theta',10000.0))
+    idx=np.arange(0,rotary_dim,2,dtype=np.float64)
+    return 1.0/(theta**(idx/rotary_dim))
+
+def rotate_half(x:np.ndarray)->np.ndarray:
+    half=x.shape[-1]//2
+    return np.concatenate([-x[...,half:],x[...,:half]],axis=-1)
+
+def rope_transform(x:np.ndarray,config:Any,inverse:bool=False)->np.ndarray:
+    """Apply/invert supported RoPE; GPT-2 uses absolute positions and is unchanged."""
+    y=np.asarray(x,dtype=np.float64).copy(); model_type=getattr(config,'model_type','')
+    if model_type not in ('gpt_neox','llama','mistral','qwen2'):
+        return y
+    rotary_dim=(int((config.hidden_size//config.num_attention_heads)*float(config.rotary_pct))
+                if model_type=='gpt_neox' else y.shape[-1])
+    inv=rope_inv_freq(config,rotary_dim); pos=np.arange(y.shape[-2],dtype=np.float64)
+    ang=np.outer(pos,inv); cos=np.concatenate([np.cos(ang),np.cos(ang)],axis=-1)
+    sin=np.concatenate([np.sin(ang),np.sin(ang)],axis=-1)
+    if model_type=='gpt_neox':
+        cos=np.concatenate([cos,np.ones((len(pos),y.shape[-1]-rotary_dim))],axis=-1)
+        sin=np.concatenate([sin,np.zeros((len(pos),y.shape[-1]-rotary_dim))],axis=-1)
+    shape=(1,)*(y.ndim-2)+(len(pos),cos.shape[-1]); cos=cos.reshape(shape); sin=sin.reshape(shape)
+    if inverse: sin=-sin
+    if model_type=='gpt_neox':
+        rot,tail=y[...,:rotary_dim],y[...,rotary_dim:]
+        return np.concatenate([rot*cos[...,:rotary_dim]+rotate_half(rot)*sin[...,:rotary_dim],tail],axis=-1)
+    return y*cos+rotate_half(y)*sin
+
 def map_refs(src_config:Any,tgt_config:Any)->list[tuple[int,int,int,int,int]]:
     slayers=src_config.num_hidden_layers; tlayers=tgt_config.num_hidden_layers
     sheads=getattr(src_config,'num_key_value_heads',None) or src_config.num_attention_heads
@@ -100,6 +129,9 @@ def fit_pair_maps(pair:tuple[str,str],prompts:list[dict[str,Any]],models:dict[st
         n=min(len(sc[0][0][0]),len(tc[0][0][0])); count+=n
         for j,(tl,th,kv,sl,sh) in enumerate(refs):
             x=sc[sl][kv][sh,:n,:]; y=tc[tl][kv][th,:n,:]
+            if kv==0:
+                x=rope_transform(x,models[src].config,inverse=True)
+                y=rope_transform(y,models[tgt].config,inverse=True)
             xa=np.concatenate([x,np.ones((n,1),np.float64)],axis=1)
             stats[j][0]+=xa.T@xa; stats[j][1]+=xa.T@y
     maps=[]; eye=np.eye(D+1); eye[-1,-1]=0.
@@ -116,13 +148,15 @@ def compress_maps(maps:np.ndarray,mean:np.ndarray,basis:np.ndarray,rank:int)->tu
     flat=maps.reshape(len(maps),-1); coeff=(flat-mean)@basis[:rank].T; rec=mean+coeff@basis[:rank]
     return rec.reshape(maps.shape),coeff
 
-def apply_maps(src_cache:list[tuple[np.ndarray,np.ndarray]],refs:list[tuple[int,int,int,int,int]],maps:np.ndarray,tgt_config:Any)->list[tuple[torch.Tensor,torch.Tensor]]:
+def apply_maps(src_cache:list[tuple[np.ndarray,np.ndarray]],refs:list[tuple[int,int,int,int,int]],maps:np.ndarray,src_config:Any,tgt_config:Any)->list[tuple[torch.Tensor,torch.Tensor]]:
     hkv=getattr(tgt_config,'num_key_value_heads',None) or tgt_config.num_attention_heads; layers=tgt_config.num_hidden_layers
     length=src_cache[0][0].shape[1]; outk=np.zeros((layers,hkv,length,D),np.float32); outv=np.zeros_like(outk)
     for i,(tl,th,kv,sl,sh) in enumerate(refs):
         x=src_cache[sl][kv][sh]
+        if kv==0: x=rope_transform(x,src_config,inverse=True)
         xa=np.concatenate([x,np.ones((length,1),np.float64)],axis=1)
         y=(xa@maps[i]).astype(np.float32)
+        if kv==0: y=rope_transform(y,tgt_config).astype(np.float32)
         (outk if kv==0 else outv)[tl,th]=y
     return [(torch.from_numpy(outk[l:l+1]),torch.from_numpy(outv[l:l+1])) for l in range(layers)]
 
@@ -142,8 +176,8 @@ def eval_heldout(pair:tuple[str,str],prompts:list[dict[str,Any]],models:dict[str
         sc,_,st=cache_arrays(model_s,p['src_ids']); tc,to,tt=cache_arrays(model_t,p['tgt_ids']); src_time.append(st); native_time.append(tt)
         logits=to.logits[0,-2]; label=p['tgt_ids'][-1]; native.append(target_nll(model_t,logits,label))
         # Relative heldout cache error, using all positions in the aligned prompt.
-        full_start=time.perf_counter(); full_past=apply_maps(sc,refs,independent_maps,model_t.config); full_apply.append(time.perf_counter()-full_start)
-        low_start=time.perf_counter(); low_past=apply_maps(sc,refs,low_maps,model_t.config); low_apply.append(time.perf_counter()-low_start)
+        full_start=time.perf_counter(); full_past=apply_maps(sc,refs,independent_maps,model_s.config,model_t.config); full_apply.append(time.perf_counter()-full_start)
+        low_start=time.perf_counter(); low_past=apply_maps(sc,refs,low_maps,model_s.config,model_t.config); low_apply.append(time.perf_counter()-low_start)
         def relerr(predpast:list[tuple[torch.Tensor,torch.Tensor]])->float:
             num=den=0.
             for l,(pk,pv) in enumerate(predpast):
@@ -274,7 +308,7 @@ def evaluate_maps(pair:tuple[str,str],prompts:list[dict[str,Any]],models:dict[st
         native.append(target_nll(mt,to.logits[0,-2],p['tgt_ids'][-1]))
         plen=len(p['tgt_ids'])-2; query=p['tgt_ids'][-2]; label=p['tgt_ids'][-1]
         for name,maps in (('full',full_maps),('factor',factor_maps),('pca',pca_maps)):
-            t0=time.perf_counter(); past=apply_maps(sc,refs,maps,mt.config); metrics[name]['apply_seconds'].append(time.perf_counter()-t0)
+            t0=time.perf_counter(); past=apply_maps(sc,refs,maps,ms.config,mt.config); metrics[name]['apply_seconds'].append(time.perf_counter()-t0)
             pk=[(k[:,:,:plen,:].contiguous(),v[:,:,:plen,:].contiguous()) for k,v in past]
             nll_value,suffix=transfer_nll(mt,pk,query,label); metrics[name]['nll'].append(nll_value); metrics[name]['suffix_seconds'].append(suffix)
             num=den=0.0
