@@ -1,0 +1,156 @@
+{
+  "experiment_id": "MA-882",
+  "title": "Cross-layer KV map factorization over model pair and layer geometry",
+  "status": "SCREENING",
+  "base_commit": "22f7c1292",
+  "evidence_lane": "CROSS_MODEL_KV/LAYER_ALIGNMENT/QUALITY/STORAGE/COMPUTE",
+  "hypothesis": "For two calibrated Pythia-to-SmolLM2 model pairs with fixed top-2 source-layer routes, a shared map basis plus a compact CP coordinate over model pair, source-depth anchor, target layer, and KV role will retain heldout next-token NLL within 0.5 nat of the full selected-map bank and within 0.25 nat of ordinary PCA coding while using at most half the full selected-map payload bytes.",
+  "prior_art_refs": [
+    "PA236",
+    "PA237"
+  ],
+  "prior_art_boundary": "The screen uses ordinary unweighted affine ridge and PA236-style cross-layer map matching. It is not a CacheBridge reproduction and makes no attention-weighted calibration claim. PA237 informs the top-2 selection control only.",
+  "physical_object": "Per-map affine KV translators over fixed source-depth anchors and all target injection layers for two ordered model pairs.",
+  "logical_multiplicity": "Layer-to-layer KV handoffs selected by a frozen per-target-layer top-2 source-anchor route for each pair.",
+  "mirror_coordinate": "Shared rank-r matrix-map basis plus CP coefficients over ordered model pair × source anchor × target layer × target KV role.",
+  "models": [
+    "EleutherAI/pythia-70m-deduped",
+    "EleutherAI/pythia-160m-deduped",
+    "HuggingFaceTB/SmolLM2-135M"
+  ],
+  "pairs": [
+    [
+      "EleutherAI/pythia-70m-deduped",
+      "HuggingFaceTB/SmolLM2-135M"
+    ],
+    [
+      "EleutherAI/pythia-160m-deduped",
+      "HuggingFaceTB/SmolLM2-135M"
+    ]
+  ],
+  "fixed_design": {
+    "source_depth_anchors_relative": [
+      0.0,
+      0.5,
+      1.0
+    ],
+    "source_anchor_rule": "round(relative_depth * (source_layers - 1))",
+    "target_injection_layers": "all 30 SmolLM2 target layers, identical for all representations",
+    "head_alignment": "nearest relative KV-head index; source and target RoPE removed before fitting and target RoPE reapplied after key translation",
+    "role_axis": "six roles = target KV head 0..2 × key/value",
+    "ridge_alpha": 0.01,
+    "ridge_objective": "ordinary unweighted affine ridge on token-aligned KV vectors; attention weighting is not used",
+    "route_selection": "On disjoint route-selection prompts, choose the two source anchors with lowest mean normalized K/V reconstruction MSE per target layer; fixed equal 0.5 mixture weights. Routes are shared unchanged by full, PCA, CP, and nearest-depth comparisons where applicable.",
+    "map_basis_rank_candidates": [
+      32,
+      64,
+      128,
+      256
+    ],
+    "cp_rank_candidates": [
+      2,
+      4,
+      8,
+      16,
+      32
+    ],
+    "cp_fit": "masked squared reconstruction loss over selected route entries only; Adam; 300 updates; fixed initialization seed per world and rank"
+  },
+  "development": {
+    "split": "Wikitext-2 train",
+    "seed": 829,
+    "prompts_per_pair": 48,
+    "map_fit_prompts": 24,
+    "route_selection_prompts": 8,
+    "heldout_test_prompts": 16,
+    "pca_rank_selection": "smallest serialized PCA payload with development NLL <= full matched top-2 bank +0.50 nat and <= native +1.00 nat; if none qualifies, select lowest development NLL and mark the compression quality premise unsupported",
+    "cp_rank_selection": "smallest serialized CP payload with development NLL <= full +0.50 nat, PCA +0.25 nat, and native +1.00 nat; if none qualifies, select the lowest-NLL CP rank",
+    "fresh_not_opened_until_both_ranks_frozen": true
+  },
+  "fresh": {
+    "calibration_split": "Wikitext-2 validation",
+    "test_split": "Wikitext-2 test",
+    "seeds": [
+      983,
+      997,
+      1009
+    ],
+    "calibration_prompts_per_pair": 48,
+    "map_fit_prompts_per_seed": 12,
+    "route_selection_prompts_per_seed": 4,
+    "test_prompts_per_pair_per_seed": 12,
+    "prompt_eligibility": "16-128 tokens and exact source/target tokenizer offset equality",
+    "selection": "For each pair and split, deterministic pair-specific permutation of the first 48 eligible validation prompts; 16-prompt non-overlapping seed chunks. Test uses three disjoint seed chunks from the first 36 eligible test prompts.",
+    "unseen_pair_claim": false,
+    "preflight_eligible_minimum_confirmed": {
+      "Pythia-70M->SmolLM2": {
+        "validation": 48,
+        "test": 48
+      },
+      "Pythia-160M->SmolLM2": {
+        "validation": 48,
+        "test": 48
+      }
+    }
+  },
+  "controls": [
+    "Native SmolLM2 target prefill and native-cache replay identity check",
+    "Fixed nearest-relative-depth full ridge translator, all target injection layers",
+    "Independent full ridge maps using the same frozen top-2 source-anchor routes",
+    "Shared PCA map basis with unconstrained per-map coefficients and the same routes",
+    "CP-factorized coefficients with the same basis and same routes"
+  ],
+  "primary_metrics": [
+    "heldout target next-token NLL by pair and seed",
+    "NLL delta versus native, full matched-route maps, and PCA control",
+    "actual serialized inference payload bytes including routes, map means/bases, codes or factors and metadata",
+    "map fitting, route-selection, basis/CP fitting, payload decode, cache application and target replay wall-clock"
+  ],
+  "success_gate": "In every fresh pair×seed condition, CP NLL is within +0.50 nat of full matched-route maps, within +0.25 nat of PCA, and within +1.00 nat of native target prefill; complete CP payload is <=50% of full matched-route payload and strictly smaller than PCA payload. If full maps themselves exceed native by >1.00 nat, report the transfer-baseline failure separately and do not claim a useful transfer win.",
+  "failure_gate": "Any CP quality or storage gate misses in at least one fresh pair×seed condition, with integrity checks passing.",
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "full_paid_state": [
+      "selected full affine maps",
+      "top-2 source-anchor indices",
+      "mixture weights",
+      "pair/model identifiers",
+      "role/layer/head metadata",
+      "format header"
+    ],
+    "pca_paid_state": [
+      "shared mean",
+      "selected shared basis vectors",
+      "per-map codes",
+      "all route and role metadata",
+      "format header"
+    ],
+    "cp_paid_state": [
+      "shared mean",
+      "selected shared basis vectors",
+      "all CP factor tables",
+      "all route and role metadata",
+      "format header"
+    ],
+    "common_model_weights": "reported separately and excluded from marginal translator payload"
+  },
+  "compute": {
+    "hardware": "CPU; no GPU serving claim",
+    "report": [
+      "ridge map fit wall time",
+      "route-selection wall time",
+      "basis and CP fit updates/time",
+      "payload decode time",
+      "cached map application time",
+      "target replay time",
+      "peak RSS",
+      "CUDA availability"
+    ]
+  },
+  "scope": [
+    "Two ordered Pythia-to-SmolLM2 pairs with the same target model; no unseen-pair generalization claim.",
+    "Affine ridge translator screen, one-token replay NLL, Wikitext-2 only.",
+    "Ordinary CP/PCA are native controls; no Mirror-specific claim from a compression pass alone."
+  ],
+  "protocol_amendments": []
+}
