@@ -1,0 +1,21 @@
+{
+  "experiment_id": "MA-895",
+  "title": "K-Planes spatial versus temporal Mirror views",
+  "status": "UNTESTED",
+  "protocol_frozen": false,
+  "evidence_lane": "NEURAL_GRAPHICS/SPACE_TIME/QUALITY/STORAGE/RUNTIME",
+  "base_commit": "4e3105d60f6839e700247095f756e22ccd2a1f54",
+  "hypothesis": "A compact time/appearance View over shared K-Planes factors can preserve held-out timestamp and viewpoint quality while reducing scene/time state compared with native K-Planes specialization.",
+  "prior_art_refs": ["PA247"],
+  "physical_object": "Shared K-Planes explicit spatial and space-time planes",
+  "mirror_coordinate": "Time/appearance View code on planar features",
+  "logical_multiplicity": "Logical time-varying or appearance-conditioned radiance fields",
+  "controls_required": ["Native K-Planes explicit factorization", "Shared planes with ordinary time/appearance codes", "Mirror View", "Independent scene/time factors where practical"],
+  "fresh": {"heldout_timestamp_view_cells": true, "seeds": [], "locked_before_access": false},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["all spatial and temporal planes", "decoder", "time/appearance codes", "metadata", "reconstruction state"]},
+  "compute": {"report": ["fit wall-clock", "render wall-clock", "render FPS", "active compute"]},
+  "success_gate": "Not frozen; must be set against native K-Planes and ordinary code controls before fresh evaluation.",
+  "failure_gate": "Not frozen; no model run occurred.",
+  "blocker": "Official implementation imports tinycudann and standard configs require cuda:0; available PyTorch is CPU-only and tinycudann/data are absent.",
+  "boundaries": ["Feasibility review only; no temporal PSNR, bytes, or FPS result.", "Do not replace K-Planes with a CPU toy and call MA-895 complete."]
+}
