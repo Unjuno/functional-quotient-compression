@@ -1,0 +1,122 @@
+{
+  "experiment_id": "MA-881",
+  "title": "MoT token routing and Context Correction with shared translator Views",
+  "status": "SCREENING",
+  "evidence_lane": "CROSS_MODEL_KV/MOT/ROUTING/QUALITY/STORAGE/COMPUTE",
+  "prior_art_refs": [
+    "PA238",
+    "PA237"
+  ],
+  "hypothesis": "For a fixed Pythia-70M\u2192SmolLM2-135M pair, a two-expert token-routed translator with target-side context-correction training can be represented by one shared rank-r map basis and small expert coordinates, retaining target quality while reducing actual translator payload bytes versus independent full expert maps.",
+  "prior_art_boundary": "PA238 MoT uses token-level Top-K routing over recurrent cross-attention translators and a target-side context correction loss. This component screen retains token-level Top-1 routing and post-translation target KV trajectory correction, but uses affine ridge translator experts and one-token probes. It is not a full MoT paper reproduction. PA237 remains the weighted-ridge mapper control.",
+  "physical_object": "Two per-role affine KV translator experts fit from disjoint context subsets for one ordered model pair.",
+  "logical_multiplicity": "Token-level router selects one of two translator functional views from source cache state and normalized target role.",
+  "mirror_coordinate": "Rank-r coefficients for each target layer/head/KV-role expert map in one shared PCA basis; the same token router and target-side correction objective are used for full and compressed banks.",
+  "models": [
+    "EleutherAI/pythia-70m-deduped",
+    "HuggingFaceTB/SmolLM2-135M"
+  ],
+  "pair": [
+    "EleutherAI/pythia-70m-deduped",
+    "HuggingFaceTB/SmolLM2-135M"
+  ],
+  "fixed_design": {
+    "translator_experts": 2,
+    "expert_fit": "independent attention-weighted affine ridge maps fit on disjoint calibration prompt sets; alpha=0.01",
+    "map_rank_candidates": [
+      4,
+      8,
+      16,
+      32
+    ],
+    "normalization": "inverse source and target RoPE before key fitting; target RoPE after key translation",
+    "router": "shared MLP, input source 64D key/value token vector plus normalized target layer/head/KV role (67D), hidden width 16, two scores, deterministic straight-through Top-1",
+    "router_optimizer": "Adam lr=0.001, 24 updates; target weights and translators frozen",
+    "router_objective": "normalized tokenwise target-KV MSE + 0.10 normalized target replay-query KV correction loss + 0.05 next-token CE",
+    "context_correction": "after injecting translated prefix KV, replay the query token in the target; match all target-layer K/V for that query position to native target prefill K/V",
+    "top_k": 1,
+    "gate_balance_loss": 0.0
+  },
+  "development": {
+    "split": "Wikitext-2 train",
+    "seed": 829,
+    "aligned_prompt_pool": 40,
+    "expert_1_prompts": 12,
+    "expert_2_prompts": 12,
+    "router_context_correction_prompts": 8,
+    "heldout_test_prompts": 8,
+    "rank_selection": "lowest mean factorized-MoT next-token NLL; ties to smaller rank",
+    "fresh_not_opened_until_rank_frozen": true
+  },
+  "fresh": {
+    "calibration_split": "Wikitext-2 validation",
+    "test_split": "Wikitext-2 test",
+    "seeds": [
+      983,
+      997,
+      1009
+    ],
+    "aligned_prompt_pool_per_split": 36,
+    "calibration_prompts_per_seed": 12,
+    "expert_1_prompts": 4,
+    "expert_2_prompts": 4,
+    "router_context_correction_prompts": 4,
+    "test_prompts_per_seed": 12,
+    "prompt_eligibility": "16\u2013128 tokens and exact source/target tokenizer offset equality",
+    "selection": "three seed-disjoint 12-prompt chunks from deterministic pair-specific permutation"
+  },
+  "controls": [
+    "Native SmolLM2 target prefill",
+    "Single independent weighted-ridge map fit on all 12 calibration prompts, no router",
+    "Native MoT-style two-independent-expert bank with token-level Top-1 router and target context correction",
+    "Shared rank-r expert maps using the same token router and context correction objective (ordinary low-rank/PCA coefficient control)"
+  ],
+  "primary_metrics": [
+    "target next-token NLL",
+    "per-query target-layer KV context-correction relative MSE",
+    "expert token usage/route entropy",
+    "actual serialized translator+router payload bytes",
+    "translator application time and correction-train compute time"
+  ],
+  "success_gate": "For all three fresh seeds, shared-view MoT NLL is within +0.50 nat of full two-expert MoT, within +1.00 nat of single full ridge and native target prefill; shared-view full inference payload is at least 50% smaller than full MoT payload.",
+  "failure_gate": "Any quality or storage gate miss. A route collapse is reported even if quality passes.",
+  "mirror_specific_boundary": "The shared PCA expert-code representation is identical to conventional low-rank coefficient coding; any pass is an ordinary shared-basis compression result, not Mirror-specific, unless it exceeds that control at matched bytes and compute.",
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "full_mot_paid_state": [
+      "both expert affine maps",
+      "all role/layer/head references",
+      "router weights",
+      "model-pair identifier",
+      "format header"
+    ],
+    "shared_view_paid_state": [
+      "shared expert-map mean and rank-r basis",
+      "both expert code arrays",
+      "all role/layer/head references",
+      "router weights",
+      "model-pair identifier",
+      "role metadata",
+      "format header"
+    ],
+    "common_model_weights": "reported separately and excluded from marginal translator payload"
+  },
+  "compute": {
+    "report": [
+      "two-expert map fit wall time",
+      "basis fit wall time",
+      "router/context-correction training wall time and updates",
+      "per-token router plus expert application time",
+      "target replay time",
+      "peak RSS",
+      "CUDA availability"
+    ],
+    "hardware": "CPU; no GPU serving claim"
+  },
+  "scope": [
+    "One ordered model pair and Wikitext-2.",
+    "Two affine ridge translator experts, one-token test probes and 12 calibration prompts per fresh seed.",
+    "No multi-token completion trajectory or full MoT paper-reproduction claim."
+  ],
+  "protocol_amendments": []
+}
