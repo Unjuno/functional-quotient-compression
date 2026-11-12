@@ -1,13 +1,13 @@
 {
   "experiment_id": "MA-881",
   "title": "MoT token routing and Context Correction with shared translator Views",
-  "status": "SCREENING",
+  "status": "FAIL",
   "evidence_lane": "CROSS_MODEL_KV/MOT/ROUTING/QUALITY/STORAGE/COMPUTE",
   "prior_art_refs": [
     "PA238",
     "PA237"
   ],
-  "hypothesis": "For a fixed Pythia-70M\u2192SmolLM2-135M pair, a two-expert token-routed translator with target-side context-correction training can be represented by one shared rank-r map basis and small expert coordinates, retaining target quality while reducing actual translator payload bytes versus independent full expert maps.",
+  "hypothesis": "For a fixed Pythia-70M→SmolLM2-135M pair, a two-expert token-routed translator with target-side context-correction training can be represented by one shared rank-r map basis and small expert coordinates, retaining target quality while reducing actual translator payload bytes versus independent full expert maps.",
   "prior_art_boundary": "PA238 MoT uses token-level Top-K routing over recurrent cross-attention translators and a target-side context correction loss. This component screen retains token-level Top-1 routing and post-translation target KV trajectory correction, but uses affine ridge translator experts and one-token probes. It is not a full MoT paper reproduction. PA237 remains the weighted-ridge mapper control.",
   "physical_object": "Two per-role affine KV translator experts fit from disjoint context subsets for one ordered model pair.",
   "logical_multiplicity": "Token-level router selects one of two translator functional views from source cache state and normalized target role.",
@@ -62,7 +62,7 @@
     "expert_2_prompts": 4,
     "router_context_correction_prompts": 4,
     "test_prompts_per_seed": 12,
-    "prompt_eligibility": "16\u2013128 tokens and exact source/target tokenizer offset equality",
+    "prompt_eligibility": "16–128 tokens and exact source/target tokenizer offset equality",
     "selection": "three seed-disjoint 12-prompt chunks from deterministic pair-specific permutation"
   },
   "controls": [
