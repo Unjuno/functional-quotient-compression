@@ -1,0 +1,98 @@
+{
+  "base_commit": "cc3b71cc4",
+  "boundaries": [
+    "One ordered model pair",
+    "One corpus",
+    "One next-token probe per test prompt",
+    "CPU only",
+    "No generation-trajectory claim",
+    "Directly optimized PCA coordinates are an ordinary low-rank baseline; equal performance is not Mirror-specific"
+  ],
+  "compute": {
+    "gpu_latency": "CUDA unavailable; no GPU serving claim",
+    "optimizer_updates": 24,
+    "report_basis_ridge_and_code_calibration_wall_time": true,
+    "report_cpu_cache_application_time": true,
+    "report_layer_token_forward_proxy": true,
+    "report_tokens_examples": true
+  },
+  "controls": [
+    "Native target prefill cache",
+    "Full independent attention-weighted affine ridge maps",
+    "Rank-32 PCA reconstruction with projected ridge coefficients unmodified",
+    "Same rank-32 PCA basis with per-role coefficients optimized by target next-token NLL (ordinary low-rank/shared-basis adaptation control)"
+  ],
+  "development": {
+    "calibration_prompts": 24,
+    "evaluation_prompts": 16,
+    "learning_rate_candidates": [
+      0.0001,
+      0.0005,
+      0.002
+    ],
+    "optimizer": "Adam on per-role rank-32 codes only; target weights and shared basis frozen",
+    "seed": 829,
+    "selection_metric": "held-out dev next-token NLL after exactly 24 updates for each learning-rate candidate; ties broken by lower lr",
+    "split": "Wikitext-2 train",
+    "updates": 72,
+    "updates_per_lr_candidate": 24
+  },
+  "evidence_lane": "CROSS_MODEL_KV/CALIBRATION/QUALITY/STORAGE/COMPUTE",
+  "experiment_id": "MA-879",
+  "failure_gate": "At least two of three fresh seeds miss any required quality gate or byte gate; or prompt identity/serialization correctness fails.",
+  "fixed_design": {
+    "basis_rank": 32,
+    "depth_rule": "nearest relative layer round(tgt_layer*(source_layers-1)/(target_layers-1))",
+    "max_fit_positions": 64,
+    "position_rule": "inverse source RoPE before key fitting; apply target RoPE after translation; values unrotated",
+    "ridge_alpha": 0.01,
+    "source_kv_heads": [
+      0,
+      4,
+      7
+    ]
+  },
+  "fresh": {
+    "calibration_prompts_per_seed": 12,
+    "calibration_split": "Wikitext-2 validation",
+    "locked_before_access": true,
+    "prompt_identity": "exact source/target tokenizer offset alignment; deterministic seed-disjoint calibration/test row chunks",
+    "seeds": [
+      983,
+      997,
+      1009
+    ],
+    "test_prompts_per_seed": 16,
+    "test_split": "Wikitext-2 test",
+    "updates_per_seed": 24
+  },
+  "hypothesis": "With fixed [0,4,7] source-head support, target-NLL calibration of rank-32 shared-basis KV-map codes improves held-out target NLL over unmodified PCA-projected codes while retaining at least 50% actual serialized-byte savings versus independent attention-weighted ridge maps.",
+  "logical_multiplicity": "Per-target-role cache bridge functions addressable as small shared-basis coordinates.",
+  "mirror_coordinate": "Rank-32 coefficient vector per target layer/head/KV role, optimized through the target causal next-token objective.",
+  "models": {
+    "source": "EleutherAI/pythia-70m-deduped",
+    "target": "HuggingFaceTB/SmolLM2-135M"
+  },
+  "physical_object": "Fixed support per-layer source-to-target affine KV maps represented in one shared PCA basis.",
+  "prior_art_boundary": "PA237 establishes the relevant attention-weighted closed-form bridge control. PA227 motivates sensitivity-aware coordinates only by analogy; this is not an Engram/Fisher experiment or reproduction.",
+  "prior_art_refs": [
+    "PA237",
+    "PA227"
+  ],
+  "status": "SCREENING",
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "common_model_weights": "reported separately; excluded from marginal bridge payload comparison",
+    "paid_objects": [
+      "shared mean",
+      "rank-32 shared basis",
+      "all per-role rank-32 codes",
+      "target-layer/head/KV-role metadata",
+      "fixed source-head references",
+      "model-pair name",
+      "format header"
+    ]
+  },
+  "success_gate": "In all three fresh seeds, optimized rank-32 codes improve test NLL over unmodified rank-32 PCA by >=0.10 nat, are within +0.50 nat of native target and full ridge, and actual rank-32 serialized bytes are <=50% of full-map bytes.",
+  "title": "Attention-sensitive calibration of shared cross-model KV bridge codes"
+}
