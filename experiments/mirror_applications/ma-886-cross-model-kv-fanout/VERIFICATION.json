@@ -1,19 +1,43 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-886",
+  "commit": "pending",
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "pytest -q experiments/mirror_applications/ma-886-cross-model-kv-fanout/tests",
+    "passed": 5,
+    "failed": 0
   },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "roundtrip_checked": true,
+    "all_methods_all_fresh_seeds": true,
+    "max_abs_nll_delta_nat": 0.0,
+    "payload_inventory": "PAYLOAD_INVENTORY.json"
   },
-  "metric_replay": {
-    "checked": false,
-    "max_difference": null
+  "fresh_split_integrity_checked": true,
+  "fresh_seeds": [
+    10883,
+    10889,
+    10897
+  ],
+  "quality_gate": {
+    "candidate_native_plus_1_pass": 0,
+    "conditions": 6
   },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "latency_gate": {
+    "shared_view_fanout_beats_native": 2,
+    "seeds": 3
+  },
+  "payload": {
+    "shared_view_bytes": 138560,
+    "target_global_bytes": 33515,
+    "independent_full_ridge_bytes": 7787752,
+    "shared_fraction_of_full_ridge": 0.01779204062995329,
+    "producer_checkpoint_bytes": 166029852,
+    "target_checkpoint_bytes": 644059248
+  },
+  "cuda_available": false,
+  "notes": [
+    "Source prefill and cache extraction are charged once per text; native target timing excludes CPU cache extraction.",
+    "Latency is CPU-only, one-token replay, three fresh article groups.",
+    "Initial timing aggregation development run raised before any metrics were written; correction is disclosed in protocol before fresh."
+  ]
 }
