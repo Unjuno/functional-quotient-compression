@@ -297,6 +297,7 @@ def serialize_factor_payload(factor:dict[str,Any],mean:np.ndarray,basis:np.ndarr
     pair_meta=b'\0'.join((x['pair'][0]+'>'+x['pair'][1]).encode() for x in outputs)+b'\0'
     refs=bytes(v for item in outputs for ref in item['refs'] for v in ref)
     payload=bytearray(struct.pack('<5sBBBB',b'MA880',1,factor['rank'],factor['q'],len(outputs)))
+    payload.extend(struct.pack('<BB',ROLE_LAYER_BINS,ROLE_HEAD_BINS))
     payload.extend(names); payload.extend(pair_meta); payload.extend(refs)
     for arr in (mean,basis[:factor['rank']],factor['code_mean'],factor['code_scale'],factor['bias'],factor['u'],factor['v'],factor['role']):
         payload.extend(np.asarray(arr,dtype='<f4').tobytes())
@@ -348,6 +349,7 @@ def run_ma880_dev()->dict[str,Any]:
 def run_ma880_fresh(seeds:tuple[int,...],q:int,steps:int=600)->dict[str,Any]:
     models,toks,paths=load_assets(); rows=[]
     for seed in seeds:
+        world_start=time.perf_counter(); heldout_fit_seconds=[]
         train=[]; train_prompt_rows={}
         for pair in TRAIN_PAIRS:
             prompts=select_prompts('validation',pair,toks,seed,12,'cal')
@@ -358,7 +360,7 @@ def run_ma880_fresh(seeds:tuple[int,...],q:int,steps:int=600)->dict[str,Any]:
         for pair in FRESH_PAIRS:
             cal=select_prompts('validation',pair,toks,seed,12,'cal')
             manifests['heldout_calibration'][f'{pair[0]}>{pair[1]}']=[p['row'] for p in cal]
-            full=fit_pair_maps(pair,cal,models,toks); outputs.append(full)
+            full=fit_pair_maps(pair,cal,models,toks); outputs.append(full); heldout_fit_seconds.append(full['calibration_seconds'])
             test=select_prompts('test',pair,toks,seed,12,'test')
             manifests['heldout_test'][f'{pair[0]}>{pair[1]}']=[p['row'] for p in test]
             fmaps=predict_pair_maps(pair,factor,mean,basis,full['refs'],models)
@@ -370,7 +372,9 @@ def run_ma880_fresh(seeds:tuple[int,...],q:int,steps:int=600)->dict[str,Any]:
         payload_path=artifact_dir/f'factor_payload_seed_{seed}.bin'; payload_path.write_bytes(factor_payload)
         rows.append({'seed':seed,'pair_results':evals,'prompt_rows':manifests,'factor':{k:v for k,v in factor.items() if k not in ('u','v','role','bias','code_mean','code_scale')},
                      'training_map_fit_seconds':[x['calibration_seconds'] for x in train],
+                     'heldout_map_fit_seconds':heldout_fit_seconds,
                      'training_map_samples':[x['samples'] for x in train],
+                     'world_seconds':time.perf_counter()-world_start,
                      'factor_payload_bytes':len(factor_payload),'independent_full_payload_bytes':full_bytes,
                      'factor_bytes_saved_fraction':1-len(factor_payload)/full_bytes,
                      'factor_payload_sha256':hashlib.sha256(factor_payload).hexdigest(),
