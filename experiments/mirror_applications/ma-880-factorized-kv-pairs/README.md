@@ -20,3 +20,8 @@ Post-fresh accounting amendment 02 adds per-world wall time, heldout full-map ca
 
 
 Post-fresh code review found the first implementation omitted the frozen RoPE handling. Those raw-position results and payloads are retained as `*_unrotated_deviation` artifacts and are not used to choose corrected settings. Amendment 03 applies the already declared inverse-source/inverse-target RoPE rule, reruns development only on train data, then runs the corrected fresh screen. GPT-2 uses absolute position embeddings and is unchanged by the RoPE adapter.
+
+
+## Results
+
+See [RESULTS.md](RESULTS.md) for H/T/D/C/U, pair-by-seed NLLs, serialized bytes, compute, the preserved RoPE implementation deviation and scope boundaries.

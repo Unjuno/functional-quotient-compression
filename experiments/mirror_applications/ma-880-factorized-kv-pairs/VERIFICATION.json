@@ -1,19 +1,76 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-880",
+  "commit": "pending-final-results-commit",
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "python -m pytest -q experiments/mirror_applications/ma-880-factorized-kv-pairs/tests",
+    "passed": 4,
+    "failed": 0
+  },
+  "pair_holdout_integrity": {
+    "train_pairs": 4,
+    "development_pairs": 2,
+    "fresh_whole_ordered_pairs": 2,
+    "all_four_models_seen_as_source_and_target_in_training": true
+  },
+  "prompt_integrity": {
+    "calibration_prompts_per_pair_per_seed": 12,
+    "test_prompts_per_pair_per_seed": 12,
+    "fresh_seeds": 3,
+    "calibration_ids_disjoint_across_seeds": true,
+    "test_ids_disjoint_across_seeds": true,
+    "validation_test_text_overlap": 0,
+    "prompt_manifests_match_unrotated_deviation_run": true
   },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "serializer_roundtrip_checked": false,
+    "factor_payloads_written": true,
+    "factor_payload_bytes": [
+      583915,
+      583915,
+      583915
+    ],
+    "full_map_payload_bytes": [
+      4594139,
+      4594139,
+      4594139
+    ],
+    "factor_payload_sha256": [
+      "967cf0a34d669f1cd92416224d40ba6ee57c5567d85fb71f338ed6e4e4f77f79",
+      "cd3004077e0ef23d3c91ca9997a17734ef4843c01fcd9d82b5d48f82a52d531d",
+      "93feb94d550f579296968c3efc49d2aaa3f572813d421b7bbdc420c9beeab27e"
+    ]
   },
   "metric_replay": {
-    "checked": false,
-    "max_difference": null
+    "fresh_run_metrics_recomputed_from_saved_results": true,
+    "corrected_vs_unrotated_prompt_rows_exact": true,
+    "quality_pass_conditions": 0,
+    "quality_total_conditions": 6,
+    "storage_pass_worlds": 3,
+    "storage_total_worlds": 3,
+    "decision": "FAIL"
   },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "implementation_deviation": {
+    "initial_run_omitted_frozen_rope_rule": true,
+    "initial_results_and_payloads_preserved": true,
+    "corrected_fresh_reuses_same_prompt_ids": true,
+    "independent_corrected_audit": false,
+    "corrected_gate_is_amended_diagnostic": true
+  },
+  "cuda_available": false,
+  "file_sha256": {
+    "PROTOCOL.json": "1b06f8998d353c0bfd20690789bff09bf8f20ef03c4e7b6165c58d344f46c457",
+    "FROZEN_SETTINGS.json": "f01221e745aeffbd1a2726e48c0885ce55d8ed15f846b53b865d7955786d3121",
+    "dev_results.json": "86db0e438cd1f04ccbdb613aa9c094a59b640c5fee2dd75188c03104b78f00d3",
+    "source/experiment.py": "3a3101ea709f7730823e4ef80a494b3bc7299bf3e746983b9d8bd7305c60e6d4",
+    "source/verify_results.py": "023757d193c16d6306b59198084428a8bcded9b5e3e87a247ba3d546c9a9fad6",
+    "fresh_results.json": "c0180c7864dbf281a4f58dc8a04295768406468055469db4dc339c2c1346ae75",
+    "fresh_results_unrotated_deviation.json": "326a21568b84f9863fd244f2159c3932ba8586b0f60f5cab5322aa29c4d6beb7",
+    "RESULTS_CORE.csv": "ddb3fea0bd8cd5d770d2b0fb1dd27fec221d6a9bdfd0d2e229ee7b15b0ed5fca",
+    "RESULTS.md": "950cc883ef12c8110af53c0812667380d108a8bb568ee717cb9373aa4ab69759"
+  },
+  "notes": [
+    "RoPE-corrected development and Q selection used only train-split prompts; corrected Q=1 committed before corrected fresh replay.",
+    "The ordinary CP tensor-factorization control aliases the Mirror source\u00d7target\u00d7role decoder; no Mirror-specific claim.",
+    "Initial unrotated fresh run is an implementation deviation and is excluded from official gates but retained for provenance."
+  ]
 }
