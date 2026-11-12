@@ -1,0 +1,135 @@
+{
+  "experiment_id": "MA-887",
+  "mode": "dev",
+  "rows": [
+    {
+      "bucket": 0,
+      "seed": null,
+      "prompt_rows": {
+        "map_fit": [
+          90930,
+          96637,
+          95871,
+          96640,
+          93490,
+          96749,
+          96538,
+          99528,
+          41688,
+          86734,
+          81560,
+          75644,
+          73954,
+          49620,
+          94660,
+          86731,
+          88774,
+          96606,
+          44698,
+          96513,
+          97011,
+          94669,
+          96605,
+          98417
+        ],
+        "check": [
+          89653,
+          84662,
+          89668,
+          83683,
+          96642,
+          101920,
+          93451,
+          83291
+        ],
+        "test": [
+          61402,
+          96543,
+          57242,
+          47572,
+          96544,
+          93951,
+          96619,
+          87894,
+          89652,
+          91758,
+          96569,
+          92188,
+          99896,
+          45163,
+          99894,
+          96652
+        ]
+      },
+      "exact": {
+        "mean_native_nll": 4.8711578622460365,
+        "mean_shifted_native_nll": 4.871071606874466,
+        "mean_phase_view_nll": 4.871131494641304,
+        "max_abs_logit_delta_vs_shifted": 0.01513671875,
+        "max_abs_nll_delta_vs_shifted": 0.0026617050170898438,
+        "mean_cache_bytes": 1170432.0,
+        "mean_shifted_key_bytes": 1170432.0,
+        "phase_payload_bytes": 82,
+        "phase_to_keycache_ratio": 7.00596019247594e-05,
+        "mean_source_prefill_seconds": 0.05795403543748989,
+        "mean_native_shift_prefill_seconds": 0.05656675425001367,
+        "mean_phase_transform_seconds": 0.0025689913749715743,
+        "mean_phase_replay_seconds": 0.01865933962497479,
+        "mean_view_total_seconds": 0.07918236643743626,
+        "mean_native_shift_total_seconds": 0.05656675425001367
+      },
+      "approximate_cross_model": {
+        "mean_nll": 4.5179587546736,
+        "per_prompt_nll": [
+          4.218024253845215,
+          2.882542610168457,
+          6.774639129638672,
+          5.3974223136901855,
+          6.751698017120361,
+          6.676178932189941,
+          6.36055850982666,
+          2.683946371078491,
+          2.8663477897644043,
+          0.45917263627052307,
+          2.2238028049468994,
+          5.33738374710083,
+          5.754263877868652,
+          2.8443024158477783,
+          3.879229784011841,
+          7.177826881408691
+        ],
+        "mean_apply_seconds": 0.0399340169375364,
+        "mean_replay_seconds": 0.05861142218742543,
+        "serialization_roundtrip_max_abs_nll_delta": 0.0,
+        "native_target_mean_nll": 3.350669141858816,
+        "native_target_prefill_plus_replay_seconds": 0.21746947212503187,
+        "source_prefill_plus_apply_replay_seconds": 0.15649947456245172
+      },
+      "full_ridge_payload_bytes": 2995321,
+      "full_ridge_sha256": "78f476e892d7b1dfeb2844c8c788b9d3e81913793cf0a92d65c3a9f8b43644a2",
+      "phase_payload_bytes": 82,
+      "phase_payload_sha256": "5853753726dfe67dece7696749c12c743044d95f80729f757e9f1bac99bd11f6",
+      "source_prefill_plus_phase_view_seconds": 0.07918236643743626,
+      "native_shifted_prefill_seconds": 0.05656675425001367,
+      "approx_target_native_mean_nll": 3.350669141858816,
+      "source_model_prefill_plus_transform_seconds": 0.9272645669998383,
+      "phase_view_active_macs_per_token": 6144,
+      "approx_mapper_macs_per_token": 748800,
+      "fit_seconds": 0.2358308460002263,
+      "max_rss_mib": 1921.6171875
+    }
+  ],
+  "models": {
+    "EleutherAI/pythia-70m-deduped": {
+      "snapshot": "e93a9faa9c77e5d09219f6c868bfc7a1bd65593c",
+      "weights_sha256": "08c28411e2d493853bae377a53ecb12a9cfe8b92936cd678afb845f66c54eb2d",
+      "checkpoint_bytes": 166029852
+    },
+    "HuggingFaceTB/SmolLM2-135M": {
+      "snapshot": "93efa2f097d58c2a74874c7e644dbc9b0cee75a2",
+      "weights_sha256": "8a9c1ed96bb73faf9045eba7e8ba6c9971f195f92380025d8ee7f4c661776142",
+      "checkpoint_bytes": 269060552
+    }
+  },
+  "cuda_available": false
+}
