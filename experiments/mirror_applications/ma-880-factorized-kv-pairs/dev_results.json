@@ -1,0 +1,182 @@
+{
+  "experiment_id": "MA-880",
+  "dev_seed": 829,
+  "selected_q": 1,
+  "selected_steps": 600,
+  "selection_rule": "lowest mean next-token NLL over two whole ordered dev pairs; tie smaller CP rank",
+  "train_pairs": [
+    [
+      "openai-community/gpt2",
+      "EleutherAI/pythia-70m-deduped"
+    ],
+    [
+      "EleutherAI/pythia-70m-deduped",
+      "EleutherAI/pythia-160m-deduped"
+    ],
+    [
+      "EleutherAI/pythia-160m-deduped",
+      "HuggingFaceTB/SmolLM2-135M"
+    ],
+    [
+      "HuggingFaceTB/SmolLM2-135M",
+      "openai-community/gpt2"
+    ]
+  ],
+  "dev_pairs": [
+    [
+      "EleutherAI/pythia-70m-deduped",
+      "openai-community/gpt2"
+    ],
+    [
+      "HuggingFaceTB/SmolLM2-135M",
+      "EleutherAI/pythia-160m-deduped"
+    ]
+  ],
+  "factor_rank_candidates": [
+    1,
+    2,
+    4,
+    8
+  ],
+  "candidate_results": {
+    "1": {
+      "q": 1,
+      "fit_seconds": 0.618830536999667,
+      "train_code_mse": 206973.046875,
+      "mean_factor_nll": 15.931289076805115,
+      "dev_pairs": [
+        {
+          "pair": [
+            "EleutherAI/pythia-70m-deduped",
+            "openai-community/gpt2"
+          ],
+          "factor_mean_nll": 11.325766861438751,
+          "native_mean_nll": 4.749598924070597,
+          "full_mean_nll": 6.99063403904438,
+          "pca_mean_nll": 10.716739624738693
+        },
+        {
+          "pair": [
+            "HuggingFaceTB/SmolLM2-135M",
+            "EleutherAI/pythia-160m-deduped"
+          ],
+          "factor_mean_nll": 20.53681129217148,
+          "native_mean_nll": 4.490466918796301,
+          "full_mean_nll": 4.907507956027985,
+          "pca_mean_nll": 19.258412182331085
+        }
+      ]
+    },
+    "2": {
+      "q": 2,
+      "fit_seconds": 1.007919772999685,
+      "train_code_mse": 196900.53125,
+      "mean_factor_nll": 20.672608375549316,
+      "dev_pairs": [
+        {
+          "pair": [
+            "EleutherAI/pythia-70m-deduped",
+            "openai-community/gpt2"
+          ],
+          "factor_mean_nll": 16.73898559808731,
+          "native_mean_nll": 4.749598924070597,
+          "full_mean_nll": 6.99063403904438,
+          "pca_mean_nll": 10.716739624738693
+        },
+        {
+          "pair": [
+            "HuggingFaceTB/SmolLM2-135M",
+            "EleutherAI/pythia-160m-deduped"
+          ],
+          "factor_mean_nll": 24.606231153011322,
+          "native_mean_nll": 4.490466918796301,
+          "full_mean_nll": 4.907507956027985,
+          "pca_mean_nll": 19.258412182331085
+        }
+      ]
+    },
+    "4": {
+      "q": 4,
+      "fit_seconds": 1.1667198469999676,
+      "train_code_mse": 196698.4375,
+      "mean_factor_nll": 17.821185171604156,
+      "dev_pairs": [
+        {
+          "pair": [
+            "EleutherAI/pythia-70m-deduped",
+            "openai-community/gpt2"
+          ],
+          "factor_mean_nll": 14.878194391727448,
+          "native_mean_nll": 4.749598924070597,
+          "full_mean_nll": 6.99063403904438,
+          "pca_mean_nll": 10.716739624738693
+        },
+        {
+          "pair": [
+            "HuggingFaceTB/SmolLM2-135M",
+            "EleutherAI/pythia-160m-deduped"
+          ],
+          "factor_mean_nll": 20.764175951480865,
+          "native_mean_nll": 4.490466918796301,
+          "full_mean_nll": 4.907507956027985,
+          "pca_mean_nll": 19.258412182331085
+        }
+      ]
+    },
+    "8": {
+      "q": 8,
+      "fit_seconds": 1.9152096279999569,
+      "train_code_mse": 196541.265625,
+      "mean_factor_nll": 17.676177710294724,
+      "dev_pairs": [
+        {
+          "pair": [
+            "EleutherAI/pythia-70m-deduped",
+            "openai-community/gpt2"
+          ],
+          "factor_mean_nll": 15.463485479354858,
+          "native_mean_nll": 4.749598924070597,
+          "full_mean_nll": 6.99063403904438,
+          "pca_mean_nll": 10.716739624738693
+        },
+        {
+          "pair": [
+            "HuggingFaceTB/SmolLM2-135M",
+            "EleutherAI/pythia-160m-deduped"
+          ],
+          "factor_mean_nll": 19.88886994123459,
+          "native_mean_nll": 4.490466918796301,
+          "full_mean_nll": 4.907507956027985,
+          "pca_mean_nll": 19.258412182331085
+        }
+      ]
+    }
+  },
+  "models": {
+    "openai-community/gpt2": {
+      "snapshot": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+      "weights_bytes": 548105171,
+      "tokenizer_config_bytes": 2854566
+    },
+    "EleutherAI/pythia-70m-deduped": {
+      "snapshot": "e93a9faa9c77e5d09219f6c868bfc7a1bd65593c",
+      "weights_bytes": 166029852,
+      "tokenizer_config_bytes": 2114772
+    },
+    "EleutherAI/pythia-160m-deduped": {
+      "snapshot": "582159a2dfe3e712a8d47ae83dec95ae3bde8e7e",
+      "weights_bytes": 374998696,
+      "tokenizer_config_bytes": 2114774
+    },
+    "HuggingFaceTB/SmolLM2-135M": {
+      "snapshot": "93efa2f097d58c2a74874c7e644dbc9b0cee75a2",
+      "weights_bytes": 269060552,
+      "tokenizer_config_bytes": 3376802
+    }
+  },
+  "runtime": {
+    "cuda_available": false,
+    "max_rss_mib": 2723.4296875,
+    "total_seconds": 149.76235649299997
+  }
+}

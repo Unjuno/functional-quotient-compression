@@ -5,9 +5,9 @@
 - Base commit: `00402001a`
 - Four model snapshots downloaded and cached before any model-quality development run
 - Protocol freeze: `ecf6f00e6`; amendments `40095e836`, `294690119`, and RoPE correction pending commit
-- Development: initial unrotated run archived as deviation; corrected development pending
-- Initial unrotated development is not used for corrected setting selection
-- Fresh/audit opened: yes; unrotated implementation deviation is retained; corrected fresh pending
+- Development: RoPE-corrected; selected CP rank 1 at 600 updates
+- Corrected dev factor NLL is 4.34 nat and 15.63 nat worse than full maps on the two dev pairs; 6.58/16.05 nat worse than native
+- Fresh/audit opened: yes; unrotated implementation deviation is retained; corrected fresh pending; unrotated implementation deviation retained
 - Results: pending
 - Verification: pending
 
@@ -18,3 +18,5 @@ The experiment tests whole ordered-pair generalization from a source×target×ro
 - Post-fresh accounting amendment 02: diagnostic replay only; model/pair/prompt/Q/update settings unchanged.
 
 - RoPE correction follows the original frozen protocol; fresh deviation outputs are preserved separately.
+
+- Corrected Q and dev outputs frozen in `FROZEN_SETTINGS.json` and `dev_results.json` before corrected fresh replay.
