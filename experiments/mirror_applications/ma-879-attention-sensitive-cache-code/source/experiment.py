@@ -312,6 +312,13 @@ def transfer_nll(model: Any, past: list[tuple[torch.Tensor, torch.Tensor]], quer
     return nll(model, out.logits[0, -1], label), time.perf_counter() - start
 
 
+def transfer_logits(model: Any, past: list[tuple[torch.Tensor, torch.Tensor]], query: int) -> tuple[torch.Tensor, float]:
+    start = time.perf_counter()
+    with torch.inference_mode():
+        out = model(input_ids=torch.tensor([[query]], dtype=torch.long), past_key_values=tuple(past), use_cache=True)
+    return out.logits[0, -1].detach().float().cpu(), time.perf_counter() - start
+
+
 def eval_prompts(prompts: list[dict[str, Any]], models: dict[str, Any], fixed: dict[str, Any], matched: dict[str, Any], mean: np.ndarray, basis: np.ndarray, rank: int) -> dict[str, Any]:
     model_s, model_t = (models[x] for x in PAIR)
     compressed, codes = compress_maps(matched["maps"], mean, basis, rank)
@@ -546,11 +553,14 @@ def evaluate_ma879(prompts: list[dict[str, Any]], models: dict[str, Any], fixed:
     source_prefill, target_prefill = [], []
     prompt_rows, test_tokens = [], 0
     errors = {"full": [], "pca": [], "tuned": []}
+    logit_kl = {"full": [], "pca": [], "tuned": []}
+    logit_rmse = {"full": [], "pca": [], "tuned": []}
     for p in prompts:
         source_cache, _, st = cache_arrays(model_s, p["src_ids"])
         target_cache, target_out, tt = cache_arrays(model_t, p["tgt_ids"])
         source_prefill.append(st); target_prefill.append(tt); test_tokens += p["tokens"]
-        native.append(nll(model_t, target_out.logits[0, -2], p["tgt_ids"][-1]))
+        native_logits = target_out.logits[0, -2].detach().float().cpu()
+        native.append(nll(model_t, native_logits, p["tgt_ids"][-1]))
         prefix_len = len(p["tgt_ids"]) - 2
         source_prefix = [(k[:, :prefix_len].copy(), v[:, :prefix_len].copy()) for k, v in source_cache]
         candidates = [(fixed["maps"], full_nll, "full"), (pca_maps, pca_nll, "pca"), (tuned_maps, tuned_nll, "tuned")]
@@ -558,8 +568,12 @@ def evaluate_ma879(prompts: list[dict[str, Any]], models: dict[str, Any], fixed:
             t0 = time.perf_counter()
             past = apply_maps(source_prefix, fixed["refs"], maps, model_s.config, model_t.config)
             apply_ms[name].append(time.perf_counter()-t0)
-            val, _ = transfer_nll(model_t, past, p["tgt_ids"][-2], p["tgt_ids"][-1])
+            candidate_logits, _ = transfer_logits(model_t, past, p["tgt_ids"][-2])
+            val = nll(model_t, candidate_logits, p["tgt_ids"][-1])
             out_list.append(val)
+            logit_rmse[name].append(float(torch.mean((candidate_logits-native_logits)**2).sqrt()))
+            logit_kl[name].append(float(torch.sum(torch.softmax(native_logits, dim=-1) *
+                (torch.log_softmax(native_logits, dim=-1)-torch.log_softmax(candidate_logits, dim=-1)))))
             err = den = 0.0
             for layer, (pk, pv) in enumerate(past):
                 tk, tv = target_cache[layer]
@@ -574,6 +588,7 @@ def evaluate_ma879(prompts: list[dict[str, Any]], models: dict[str, Any], fixed:
             "optimized_delta_vs_native": float(np.mean(tuned_nll)-np.mean(native)),
             "optimized_gap_vs_full": float(np.mean(tuned_nll)-np.mean(full_nll)),
             "cache_relative_mse": errors, "apply_seconds_by_prompt": apply_ms,
+            "native_to_transfer_logit_rmse": logit_rmse, "native_to_transfer_kl_nats": logit_kl,
             "source_prefill_seconds": source_prefill, "target_prefill_seconds": target_prefill,
             "prompt_rows": prompt_rows, "test_tokens": test_tokens}
 

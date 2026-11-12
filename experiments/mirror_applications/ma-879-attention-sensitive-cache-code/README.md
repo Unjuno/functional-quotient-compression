@@ -1,6 +1,6 @@
 # MA-879 — Attention-sensitive calibration of shared KV bridge codes
 
-Status: SCREENING. Prior art: PA237 (CacheBridge) and PA227 (Fisher-geometric sensitivity). Base: MA-878 cumulative evidence state.
+Status: FAIL (3/3 fresh worlds miss quality; 3/3 pass payload bytes). Prior art: PA237 (CacheBridge) and PA227 (Fisher-geometric sensitivity). Base: MA-878 cumulative evidence state.
 
 ## Hypothesis
 
@@ -52,3 +52,8 @@ Actual serialized payload bytes include the shared mean, basis, all per-role cod
 ## Scope
 
 One ordered model pair, one natural-language corpus, three fresh partitions, one-token autoregressive probes, CPU only. No generation-trajectory or CacheBridge paper-reproduction claim.
+
+
+## Results
+
+See [RESULTS.md](RESULTS.md) for H/T/D/C/U, seed-level NLL/logit metrics, payload accounting, compute, and scope limits. A metric-only post-fresh replay added logit KL/RMSE without changing the frozen protocol or decision.
