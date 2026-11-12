@@ -1,16 +1,33 @@
 {
   "experiment_id": "MA-892",
-  "commit": "pending",
-  "tests": {"command": null, "passed": null, "failed": null},
-  "serialization": {"roundtrip_checked": false, "byte_exact": false},
-  "metric_replay": {"checked": false, "max_difference": null},
+  "commit": "bd14b8de764de4fa23d7901100fb98877619028a",
+  "tests": {
+    "command": null,
+    "passed": null,
+    "failed": null
+  },
+  "serialization": {
+    "roundtrip_checked": false,
+    "byte_exact": false
+  },
+  "metric_replay": {
+    "checked": false,
+    "max_difference": null
+  },
   "fresh_split_integrity_checked": false,
   "environment": {
     "torch": "2.14.1+cpu",
     "cuda_available": false,
-    "missing_packages": ["kaolin", "kaolin-wisp", "open3d"],
+    "missing_packages": [
+      "kaolin",
+      "kaolin-wisp",
+      "open3d"
+    ],
     "workspace_shape_or_checkpoint_assets_found": false,
     "official_build_note": "Official ReFiNe Dockerfile installs Kaolin/Kaolin-Wisp and builds Kaolin-Wisp with FORCE_CUDA=1."
   },
-  "notes": ["Feasibility review only; MA remains UNTESTED, not FAIL.", "Official demo requests three HB-dataset objects; no demo objects or checkpoint are present."]
+  "notes": [
+    "Feasibility review only; MA remains UNTESTED, not FAIL.",
+    "Official demo requests three HB-dataset objects; no demo objects or checkpoint are present."
+  ]
 }
