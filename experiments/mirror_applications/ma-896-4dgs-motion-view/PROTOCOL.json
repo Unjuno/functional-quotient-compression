@@ -1,0 +1,20 @@
+{
+  "experiment_id": "MA-896",
+  "title": "4DGS canonical Gaussian bank plus logical motion Views",
+  "status": "UNTESTED",
+  "protocol_frozen": false,
+  "evidence_lane": "NEURAL_GRAPHICS/SPACE_TIME/QUALITY/STORAGE/RUNTIME",
+  "hypothesis": "A compact time-conditioned motion View over shared canonical Gaussian geometry can replace independent per-motion deformation state while preserving held-out-time and held-out-view quality and render throughput.",
+  "prior_art_refs": ["PA248"],
+  "physical_object": "Shared canonical 3D Gaussian geometry and native 4DGS deformation decoder",
+  "mirror_coordinate": "Low-description motion View conditioned on timestamp",
+  "logical_multiplicity": "Multiple useful dynamic motion/frame functions from shared canonical Gaussians",
+  "controls_required": ["Official 4DGS canonical geometry plus native deformation field", "Shared canonical geometry plus ordinary scene/motion embedding and deformation decoder", "Mirror motion View", "Independent per-motion Gaussian/deformation upper control where practical"],
+  "fresh": {"heldout_timestamp_view_cells": true, "seeds": [], "locked_before_access": false},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["canonical Gaussian attributes", "deformation decoder and field", "motion codes", "appearance state", "metadata", "reconstruction state"]},
+  "compute": {"report": ["fit wall-clock", "render wall-clock", "measured render FPS", "active compute", "peak VRAM"]},
+  "success_gate": "Not frozen; set against official 4DGS and ordinary scene/motion-code controls before fresh evaluation.",
+  "failure_gate": "Not frozen; no model run occurred.",
+  "blocker": "Official implementation uses CUDA rasterizer and simple-knn extensions and CUDA-bound train/render paths; available PyTorch is CPU-only and dynamic scene data is absent.",
+  "boundaries": ["Feasibility review only; no PSNR, LPIPS, payload, or FPS result.", "Do not substitute a CPU toy renderer and call MA-896 complete."]
+}

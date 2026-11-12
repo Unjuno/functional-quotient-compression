@@ -1,0 +1,21 @@
+{
+  "experiment_id": "MA-896",
+  "commit": null,
+  "tests": {"command": null, "passed": null, "failed": null},
+  "serialization": {"roundtrip_checked": false, "byte_exact": false},
+  "metric_replay": {"checked": false, "max_difference": null},
+  "fresh_split_integrity_checked": false,
+  "environment": {
+    "torch": "2.14.1+cpu",
+    "cuda_available": false,
+    "nvidia_smi": false,
+    "upstream_commit": "843d5ac636c37e4b611242287754f3d4ed150144",
+    "cuda_rasterizer_built": false,
+    "dynamic_scene_dataset_found": false
+  },
+  "notes": [
+    "Feasibility review only; remains UNTESTED, not FAIL.",
+    "Official repository has CUDA rasterizer and simple-knn submodules; training/render paths use CUDA tensors/events.",
+    "No training, quality evaluation, payload measurement, or FPS claim was made."
+  ]
+}

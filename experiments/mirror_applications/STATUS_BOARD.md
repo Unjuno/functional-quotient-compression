@@ -303,3 +303,6 @@ MA-894 is a scoped synthetic FAIL for Mirror-specific scene × tensor-component 
 
 
 MA-895 execution review: official K-Planes imports `tinycudann`, and standard configs select `cuda:0`; current environment is CPU-only with no `tinycudann` or temporal dataset. It remains UNTESTED (not FAIL); see `experiments/mirror_applications/ma-895-kplanes-temporal-view/EXECUTION_BLOCKER.md`. Next eligible P0: MA-896.
+
+
+MA-896 execution review: official 4DGaussians (`hustvl/4DGaussians`, `843d5ac636c37e4b611242287754f3d4ed150144`) requires CUDA rasterizer/simple-knn extensions and CUDA-bound train/render paths. The current runtime is CPU-only and has no D-NeRF/HyperNeRF/dynerf data or checkpoints. No model run was made; status remains UNTESTED, not FAIL. See `experiments/mirror_applications/ma-896-4dgs-motion-view/EXECUTION_BLOCKER.md`. Next candidate remains MA-896 pending compatible execution resources.
