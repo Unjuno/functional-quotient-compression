@@ -1,0 +1,20 @@
+{
+  "experiment_id": "MA-891",
+  "title": "C-NGP shared scene field plus Mirror scene code",
+  "status": "UNTESTED",
+  "evidence_lane": "NEURAL_GRAPHICS/MULTI_SCENE/QUALITY/STORAGE/FORGETTING",
+  "protocol_frozen": false,
+  "blocker": "Faithful C-NGP baseline requires CUDA, tinycudann, and its compiled CUDA extension; baseline checkpoints and scene assets are absent.",
+  "hypothesis": "A compact scene-specific View coordinate on the shared C-NGP physical field can recover held-out scene radiance quality and retention at lower actual serialized bytes than native scene conditioning plus replay state.",
+  "physical_object": "One continually trained multi-scene C-NGP field and renderer",
+  "mirror_coordinate": "Scene-specific View coordinate m applied to the shared field representation",
+  "logical_multiplicity": "Multiple logical radiance fields from one shared physical field",
+  "prior_art_refs": ["PA243", "PA245"],
+  "controls_required": ["Native C-NGP scene pseudo-label plus generative replay", "Ordinary scene embedding/FiLM with matched bytes", "Independent per-scene field upper control when feasible"],
+  "fresh": {"seeds": [], "locked_before_access": false},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["shared field/hash parameters", "scene coordinates", "router or scene IDs", "replay memory", "decoder", "metadata"]},
+  "compute": {"report_scene_rays": true, "report_optimizer_updates": true, "report_ray_query_wall_clock": true},
+  "success_gate": "Not frozen; must be set against the native C-NGP scene-conditioning control before any fresh evaluation.",
+  "failure_gate": "Not frozen; no experiment has been run.",
+  "boundaries": ["No C-NGP/NeRF result is established by this feasibility review.", "Do not substitute a synthetic 2D field and call it MA-891 completion."]
+}

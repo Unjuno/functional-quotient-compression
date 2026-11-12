@@ -1,0 +1,1 @@
+This directory contains no experiment implementation because the official C-NGP baseline cannot run in the available CPU-only environment. See `../EXECUTION_BLOCKER.md` for the reproducible capability check and resumption requirements.
