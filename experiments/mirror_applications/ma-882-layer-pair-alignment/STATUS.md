@@ -1,18 +1,12 @@
 # MA-882 status
 
-- Status: SCREENING
+- Status: FAIL
 - Branch: `research/ma-882-layer-pair-alignment-20261112`
-- Base commit: `22f7c1292`
-- Protocol freeze: `ca28acaf8`, before development/audit
-- Development: complete; selected PCA rank 256 / CP rank 8, neither selection quality gate met
-- Fresh/audit opened: no
-- Results: pending
-- Verification: pending
+- Protocol freeze: `ca28acaf8`
+- Development ranks frozen: `4350280f0` (PCA 256, CP 8; neither development quality rule met)
+- Fresh seeds: 983, 997, 1009 across two ordered pairs
+- Quality gates: 0/6 pass; storage gates: 6/6 pass
+- Payload reconstruction: full/PCA/CP byte/hash checks pass; max replayed NLL difference 0.00072 nat
+- Verification: see `VERIFICATION.json` and `source/verify_results.py`
 
-## Next action
-
-Run the three frozen fresh worlds and evaluate the preregistered gates.
-
-## Blockers
-
-None.
+See [RESULTS.md](RESULTS.md). Top-2 layer matching beats fixed nearest-depth routing in this screen, but compressed map views fail quality.

@@ -269,6 +269,40 @@ def serialize_cp(mean:np.ndarray,basis:np.ndarray,factors:list[np.ndarray],rank:
     for a in factors: b.extend(np.asarray(a,dtype='<f4').tobytes())
     return bytes(b)
 
+def decode_payload(raw:bytes)->tuple[str,np.ndarray,list[np.ndarray]]:
+    magic,mode,nmeta=struct.unpack_from('<5sBI',raw,0)
+    if magic!=b'MA882': raise ValueError('bad MA-882 payload header')
+    pos=struct.calcsize('<5sBI'); meta=json.loads(raw[pos:pos+nmeta]); pos+=nmeta
+    nroutes=2*TARGET_LAYERS*2
+    routes=np.frombuffer(raw,dtype=np.uint8,count=nroutes,offset=pos).reshape(2,TARGET_LAYERS,2).astype(np.int8); pos+=nroutes
+    ids=[(p,int(a),t,role) for p in range(2) for t in range(TARGET_LAYERS) for a in routes[p,t]
+         for role in range(NROLES)]
+    bank=np.zeros((2,3,TARGET_LAYERS,TARGET_HEADS,2,D+1,D),np.float32)
+    if mode==0:
+        vals=np.frombuffer(raw,dtype='<f4',count=len(ids)*(D+1)*D,offset=pos).reshape(len(ids),D+1,D).copy()
+        pos+=len(ids)*(D+1)*D*4
+        for idx,val in zip(ids,vals):
+            p,a,t,role=idx; bank[p,a,t,role//2,role%2]=val
+    elif mode in (1,2):
+        rank=int(meta['rank']); size=(D+1)*D
+        mean=np.frombuffer(raw,dtype='<f4',count=size,offset=pos).copy(); pos+=size*4
+        basis=np.frombuffer(raw,dtype='<f4',count=rank*size,offset=pos).reshape(rank,size).copy(); pos+=rank*size*4
+        if mode==1:
+            codes=np.frombuffer(raw,dtype='<f4',count=len(ids)*rank,offset=pos).reshape(len(ids),rank).copy()
+            pos+=len(ids)*rank*4
+        else:
+            q=int(meta['cp_rank']); dims=((2,q),(3,q),(TARGET_LAYERS,q),(NROLES,q),(rank,q)); factors=[]
+            for shape in dims:
+                n=int(np.prod(shape)); factors.append(np.frombuffer(raw,dtype='<f4',count=n,offset=pos).reshape(shape).copy()); pos+=n*4
+            tensor=cp_reconstruct([torch.from_numpy(x) for x in factors]).detach().numpy()
+            codes=np.stack([tensor[idx] for idx in ids])
+        vals=mean[None,:]+codes@basis
+        for idx,val in zip(ids,vals):
+            p,a,t,role=idx; bank[p,a,t,role//2,role%2]=val.reshape(D+1,D)
+    else: raise ValueError(f'unknown MA-882 payload mode {mode}')
+    if pos!=len(raw): raise ValueError(f'payload has {len(raw)-pos} trailing bytes')
+    return ('full' if mode==0 else 'pca' if mode==1 else 'cp'),bank,[routes[p] for p in range(2)]
+
 def provenance(paths:dict[str,Path])->dict[str,Any]:
     out={}
     for mid,p in paths.items():
@@ -328,6 +362,16 @@ def run_fresh(seeds:tuple[int,...],rank:int,q:int)->dict[str,Any]:
             m=fit_maps(p,mapcal[i],models); mapsets.append(m); routes.append(choose_routes(m,routesel[i],models))
         fit_seconds=time.perf_counter()-tfit
         built=make_variants(mapsets,routes,rank,q,seed+rank*100+q); ev=evaluate(built['variants'],routes,test,mapsets,models)
+        decoded={}; decode_seconds={}; roundtrip_bank_error={}
+        for name,raw in built['serial'].items():
+            td=time.perf_counter(); decoded_name,decoded_bank,decoded_routes=decode_payload(raw); decode_seconds[name]=time.perf_counter()-td
+            if decoded_name!=name or any(not np.array_equal(a,b) for a,b in zip(routes,decoded_routes)):
+                raise AssertionError(f'{name} payload metadata/route roundtrip mismatch')
+            roundtrip_bank_error[name]=float(np.max(np.abs(decoded_bank-built['variants'][name])))
+            if roundtrip_bank_error[name]>2e-4: raise AssertionError(f'{name} map payload roundtrip error {roundtrip_bank_error[name]}')
+            decoded[name]=decoded_bank
+        evrt=evaluate(decoded,routes,test,mapsets,models)
+        roundtrip_nll_error={name:float(np.max(np.abs(np.asarray(ev['methods'][name]['nll'])-np.asarray(evrt['methods'][name]['nll'])))) for name in decoded}
         nroutes=nearest_routes(mapsets); nearest,_,_=pack_selected(mapsets,nroutes); env=evaluate({'nearest':nearest},nroutes,test,mapsets,models)
         artifact=Path(__file__).resolve().parents[1]/'artifacts'; artifact.mkdir(exist_ok=True)
         artifact_paths={}
@@ -343,6 +387,7 @@ def run_fresh(seeds:tuple[int,...],rank:int,q:int)->dict[str,Any]:
         rows.append({'seed':seed,'pair_results':pairrows,'prompt_rows':{'map_fit':[[x['row'] for x in z] for z in mapcal],'route':[[x['row'] for x in z] for z in routesel],'test':[[x['row'] for x in z] for z in test]},
             'full_mean_nll':ev['methods']['full']['mean_nll'],'pca_mean_nll':ev['methods']['pca']['mean_nll'],'cp_mean_nll':ev['methods']['cp']['mean_nll'],'native_mean_nll':ev['native_mean_nll'],
             'nearest_depth_mean_nll':env['methods']['nearest']['mean_nll'],'native_identity_max_abs_nll_diff':ev['identity_max_abs_nll_diff'],
+            'payload_roundtrip':{'max_map_abs_error':roundtrip_bank_error,'max_nll_abs_error':roundtrip_nll_error,'decode_seconds':decode_seconds},
             'route_table':[[x.tolist() for x in rr] for rr in routes],'payload_bytes':{k:len(v) for k,v in built['serial'].items()},
             'payload_sha256':{k:hashlib.sha256(v).hexdigest() for k,v in built['serial'].items()},'artifact_paths':artifact_paths,
             'compute':{'mapfit_route_seconds':fit_seconds,'cp_fit':built['cp_fit'],'application_seconds':{k:float(np.mean(v['apply_seconds'])) for k,v in ev['methods'].items()},'replay_seconds':{k:float(np.mean(v['replay_seconds'])) for k,v in ev['methods'].items()}}})

@@ -45,3 +45,16 @@ def test_fixed_route_map_application_uses_all_target_layers():
     assert len(out)==2 and out[0][0].shape==(1,3,4,64)
     assert torch.allclose(out[0][0],torch.full((1,3,4,64),1.5))
     assert torch.allclose(out[1][1],torch.full((1,3,4,64),11.5))
+
+def test_all_serialized_inference_payloads_roundtrip_exact_zero_maps():
+    mapsets=[{'maps':np.zeros((3,30,3,2,65,64),np.float32)} for _ in range(2)]
+    routes=[np.tile(np.array([[0,1],[1,2]],np.int8),(15,1)) for _ in mapsets]
+    bank,_,ids=m.pack_selected(mapsets,routes)
+    mean=np.zeros((65*64,),np.float32); basis=np.zeros((32,65*64),np.float32); codes=np.zeros((len(ids),32),np.float32)
+    raws=[m.serialize_full(bank,ids,routes),m.serialize_pca(mean,basis,codes,32,ids,routes)]
+    factors=[np.zeros((2,2),np.float32),np.zeros((3,2),np.float32),np.zeros((30,2),np.float32),np.zeros((6,2),np.float32),np.zeros((32,2),np.float32)]
+    raws.append(m.serialize_cp(mean,basis,factors,32,2,ids,routes))
+    for raw,want in zip(raws,('full','pca','cp')):
+        name,decoded,rte=m.decode_payload(raw)
+        assert name==want and np.array_equal(decoded,bank)
+        assert all(np.array_equal(a,b) for a,b in zip(routes,rte))

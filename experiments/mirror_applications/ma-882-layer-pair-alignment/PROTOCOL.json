@@ -1,7 +1,7 @@
 {
   "experiment_id": "MA-882",
   "title": "Cross-layer KV map factorization over model pair and layer geometry",
-  "status": "SCREENING",
+  "status": "FAIL",
   "base_commit": "22f7c1292",
   "evidence_lane": "CROSS_MODEL_KV/LAYER_ALIGNMENT/QUALITY/STORAGE/COMPUTE",
   "hypothesis": "For two calibrated Pythia-to-SmolLM2 model pairs with fixed top-2 source-layer routes, a shared map basis plus a compact CP coordinate over model pair, source-depth anchor, target layer, and KV role will retain heldout next-token NLL within 0.5 nat of the full selected-map bank and within 0.25 nat of ordinary PCA coding while using at most half the full selected-map payload bytes.",
@@ -152,5 +152,12 @@
     "Affine ridge translator screen, one-token replay NLL, Wikitext-2 only.",
     "Ordinary CP/PCA are native controls; no Mirror-specific claim from a compression pass alone."
   ],
-  "protocol_amendments": []
+  "protocol_amendments": [
+    {
+      "date": "2026-11-12",
+      "before_replay": "after the initial fresh run; ranks unchanged",
+      "reason": "The first fresh runner measured serialized bytes but did not instantiate inference state from the serialized payload before quality evaluation.",
+      "change": "Add deterministic full/PCA/CP binary decoders and replay the same frozen test prompt IDs from saved payloads; record decode time and NLL replay differences. No training, rank selection, or test-driven tuning is performed. The replay is a payload-integrity diagnostic on the same audit prompts, not an independent audit."
+    }
+  ]
 }
