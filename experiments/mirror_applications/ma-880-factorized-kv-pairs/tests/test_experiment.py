@@ -30,6 +30,16 @@ def test_role_address_is_bounded_and_kv_distinct():
     assert value == key + 1
 
 
+def test_rope_inverse_roundtrip_and_absolute_position_model_noop():
+    cfg = SimpleNamespace(model_type='llama', rope_theta=10000.0, hidden_size=64,
+                          num_attention_heads=1)
+    x = np.random.default_rng(31).normal(size=(9, 64))
+    np.testing.assert_allclose(module.rope_transform(module.rope_transform(x, cfg), cfg, inverse=True),
+                               x, rtol=1e-12, atol=1e-12)
+    gpt2 = SimpleNamespace(model_type='gpt2')
+    np.testing.assert_array_equal(module.rope_transform(x, gpt2), x)
+
+
 def test_factorized_pair_maps_reconstruct_deterministically():
     rng = np.random.default_rng(19)
     models = _configs()
