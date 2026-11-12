@@ -53,7 +53,7 @@ def test_actual_payload_roundtrip_for_all_modes():
         z=np.zeros((m.ROLES,m.D),np.float32); o=np.ones_like(z)
         repairs[pk]=m.RoleRepair(4,z,o,z,o,'gelu',7)
     for mode in ('shared_linear','pair_film','full_ridge','sparse_linear_residual','sparse_mlp','full_mlp_upper'):
-        chosen=repairs if mode=='full_mlp_upper' else {next(iter(repairs)):next(iter(repairs.values()))}
+        chosen=repairs if mode in ('sparse_linear_residual','sparse_mlp','full_mlp_upper') else {}
         hard=list(chosen) if mode not in ('shared_linear','pair_film','full_ridge') else []
         raw=m.serialize_payload(mode,base,films,full,chosen,hard); decoded=m.deserialize_payload(raw)
         assert len(raw)>0 and decoded['mode']=={'shared_linear':0,'pair_film':1,'sparse_linear_residual':2,'sparse_mlp':3,'full_ridge':4,'full_mlp_upper':5}[mode]

@@ -84,5 +84,8 @@
     "report": ["calibration and pooled-map fit time", "pair-code fit time", "MLP and identity residual update/time", "active MAC proxy per token", "serialized payload decode time", "cache-apply and target replay wall time", "peak RSS", "CUDA availability"]
   },
   "scope": ["Two ordered Pythia-to-SmolLM2 pairs, one-token replay NLL, article-heldout Wikitext-103-train text.", "Static pair-level repair only; no runtime confidence gate.", "No broad unseen-model-pair generalization or Mirror-specific claim from FiLM/MLP utility."],
-  "protocol_amendments": ["Before development: specified serialized-payload deserialization and replay checks as a required integrity gate; implementation only, no method or metric change."]
+  "protocol_amendments": [
+    "Before development: specified serialized-payload deserialization and replay checks as a required integrity gate; implementation only, no method or metric change.",
+    "After fresh seed 983 exposed a repair-array ordering mismatch in the decoder, and after all preregistered fresh outcomes were recorded, decoder ordering was corrected to match the frozen writer. No fitting, weights, hyperparameters, selection, or metrics changed. The original failed replay deltas remain in fresh_results.json; serialization_correction_audit.json is a post hoc implementation-integrity replay against the same saved audit metrics, not independent quality evidence."
+  ]
 }
