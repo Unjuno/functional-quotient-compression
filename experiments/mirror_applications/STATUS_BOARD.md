@@ -294,3 +294,6 @@ MA-891 execution review: official C-NGP requires the Instant-NGP CUDA stack (`ti
 
 
 MA-892 execution review: official ReFiNe imports Kaolin SPC operations and builds Kaolin-Wisp with `FORCE_CUDA=1`; the CPU-only environment lacks CUDA/Kaolin/Kaolin-Wisp, the three demo shapes and checkpoints. It remains UNTESTED (not FAIL); see `experiments/mirror_applications/ma-892-refine-hierarchy-mirror/EXECUTION_BLOCKER.md`. Next eligible P0: MA-893.
+
+
+MA-893 execution review: Instant-NGP's registered full hash-grid and fused CUDA runtime are mandatory; this environment has CPU-only PyTorch, no CUDA/nvidia-smi, no tinycudann/torch-ngp/nerfacc, and no native assets/checkpoint. It remains UNTESTED (not FAIL); see `experiments/mirror_applications/ma-893-hashgrid-mirror/EXECUTION_BLOCKER.md`. Next eligible P0: MA-894.

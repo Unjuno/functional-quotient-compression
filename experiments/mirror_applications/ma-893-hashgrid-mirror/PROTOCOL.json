@@ -1,0 +1,21 @@
+{
+  "experiment_id": "MA-893",
+  "title": "hash-grid Mirror scene specialization",
+  "status": "UNTESTED",
+  "protocol_frozen": false,
+  "evidence_lane": "NEURAL_GRAPHICS/QUALITY/STORAGE/RUNTIME",
+  "base_commit": "8d1ed0b316c481e8c10d285c51c39b8251ed19dc",
+  "hypothesis": "A compact scene View over shared Instant-NGP hash-grid features can replace duplicated per-scene learned grids while preserving held-out-view PSNR and rendering throughput.",
+  "prior_art_refs": ["PA245", "PA243"],
+  "physical_object": "Shared Instant-NGP multiresolution hash-grid encoder and decoder",
+  "mirror_coordinate": "Scene-specific compact feature-warp/View code",
+  "logical_multiplicity": "Multiple scene-conditioned radiance fields",
+  "controls_required": ["Independent per-scene Instant-NGP grids", "Shared grid plus ordinary scene code/FiLM", "Mirror scene Views", "C-NGP where reproducible"],
+  "fresh": {"scene_holdout": true, "seeds": [], "locked_before_access": false},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["all hash tables", "decoder weights", "scene codes", "routers or indices", "metadata", "reconstruction state"]},
+  "compute": {"report_fit_wall_clock": true, "report_render_wall_clock": true, "report_render_throughput": true, "report_active_compute": true},
+  "success_gate": "Not frozen; define against native independent-grid and ordinary scene-code controls before any fresh evaluation.",
+  "failure_gate": "Not frozen; no model run occurred.",
+  "blocker": "CPU-only PyTorch; no CUDA runtime, nvidia-smi, tinycudann, or native scene assets/checkpoint. Faithful Instant-NGP fused CUDA control unavailable.",
+  "boundaries": ["Feasibility review only; no PSNR, storage, collision, or speed result.", "Do not substitute a CPU toy field and call MA-893 tested."]
+}
