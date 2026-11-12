@@ -1,20 +1,76 @@
 {
-  "experiment_id":"MA-887",
-  "title":"Exact same-model cache View algebra versus approximate cross-model translation",
-  "status":"SCREENING",
-  "base_commit":"6b344250b",
-  "evidence_lane":"CROSS_MODEL_KV/EXACTNESS/QUALITY/STORAGE/COMPUTE",
-  "hypothesis":"A position-shift View within one RoPE-only Pythia model can be served exactly from one canonical position-neutral KV cache using a low-description phase code, while an unrelated SmolLM2 consumer requires an approximate learned cross-model mapper with nonzero quality cost. The experiment distinguishes exact algebraic Views from approximate translators rather than treating both as the same kind of cache reuse.",
-  "prior_art_refs":["PA156","PA157","PA236"],
-  "prior_art_boundary":"PA156 provides direct prior art for deferred positional encoding and one physical cache serving logical placements. PA157/PA236 establish learned cross-model ridge translation as approximate, pair-dependent prior art. This experiment is a small local audit, not a reproduction of those systems.",
-  "models":{"same_model":"EleutherAI/pythia-70m-deduped","approximate_target":"HuggingFaceTB/SmolLM2-135M"},
-  "data":{"source":"Salesforce/wikitext wikitext-103-raw-v1 train","exclusion":"Exclude all Wikitext-2 titles/rows and all prompt title/text hashes reserved by MA-883 and MA-886.","article_split":"Whole article title hash mod 4; bucket0 development, buckets1/2/3 fresh seeds 11887/11891/11897.","prompt_alignment":"Require exact character offset alignment and equal token counts for Pythia70 and SmolLM2.","prompts_per_bucket":48,"split":"24 map-fit, 8 check, 16 test; exact-algebra evaluation uses held-out test rows; cross-model ridge fits only map-fit rows.","eligibility":"16-128 tokens."},
-  "fixed_design":{"exact_view":"Pythia-70M has RoPE-only positional dependence. Remove source RoPE from each cached key to create the canonical position-neutral K; apply phase shift Δ=17 to cached keys, and supply shifted position_ids to the final target query. Compare full shifted-sequence logits/NLL against canonical-cache query and against a separately shifted native prefill.","approximate_view":"Fit ordinary independent per-target-role affine ridge maps from Pythia-70M prefix K/V to SmolLM2 prefix K/V, nearest-relative layer/head matching, source/target inverse RoPE for keys and target RoPE restoration.","ridge_alpha":0.01,"exact_phase_code":"One signed int32 Δ=17 plus fixed-format metadata. No learned degrees of freedom.","context":"One-token next-token replay; exact test covers native sequence at positions 0..n and globally shifted positions Δ..Δ+n."},
-  "controls":["Native Pythia-70M prefill at position offset 0","Native Pythia-70M prefill at position offset 17","Canonical KV cache with phase-shift View algebra","Independent full affine Pythia70→Smol ridge mapper","Native SmolLM2 prefill/cache replay"],
-  "success_gate":"Treating the exact position transform as an FP32 algebraic identity, require same-model View max absolute logit difference <=0.02 and absolute NLL delta <=0.005 in every fresh prompt; serialized exact View metadata is <=1% of one materialized K-cache byte count. Approximate cross-model row is reported separately and is never labeled exact. Report cache transform MAC proxy and CPU wall time.",
-  "failure_gate":"Any exactness gate miss. Independently classify the approximate translator by +1 nat target quality, mapper bytes, and translation/replay latency; approximate failure does not erase an exact algebra pass.",
-  "storage":{"authority":"actual serialized inference payload bytes","exact_paid_state":["phase offset","metadata/header"],"approximate_paid_state":["all per-role ridge maps","metadata/alignment state"],"cache_state":"Report canonical K/V, materialized shifted K, and target cache bytes separately; shared model weights are common within exact same-model comparison."},
-  "compute":{"hardware":"CPU; report CUDA availability","measurements":["canonical prefill","native shifted prefill","key phase transform/application","query replay","cross-model mapper application","peak RSS","active transform MAC proxy"]},
-  "scope":["One Pythia model, one known RoPE global-shift symmetry, one approximate Pythia70→SmolLM2 pair, one-token replay.","No general exact cross-model equivalence, no multi-token rollout, and no GPU fused LazyAttention claim."],
-  "protocol_amendments":["Before any development metrics were written: fixed cache plumbing to convert CPU NumPy K/V arrays to batch-first Torch tensors before DynamicCache injection. The first development process raised a type error before scoring; no method, metric, data split, or decision rule changed. Fresh data remained unopened.","A second development-only run exposed an extra batch dimension on the native legacy-cache path, before any scores were written. Cache injection now accepts both unbatched array K/V and already-batched Torch K/V while normalizing them to rank 4. No method, data, metric, or decision rule changed; fresh remains sealed.","Before fresh access, development showed FP32 full-model replay accumulation up to 0.0152 logit and 0.0027 nat while layer cache/key algebra matched within about 1e-5. The exact-view output tolerance was set to 0.02 logits and 0.005 nat to bound FP32 accumulation; data, model, transform, and quality metric are unchanged. No fresh results had been opened."]
+  "experiment_id": "MA-887",
+  "title": "Exact same-model cache View algebra versus approximate cross-model translation",
+  "status": "FAIL",
+  "base_commit": "6b344250b",
+  "evidence_lane": "CROSS_MODEL_KV/EXACTNESS/QUALITY/STORAGE/COMPUTE",
+  "hypothesis": "A position-shift View within one RoPE-only Pythia model can be served exactly from one canonical position-neutral KV cache using a low-description phase code, while an unrelated SmolLM2 consumer requires an approximate learned cross-model mapper with nonzero quality cost. The experiment distinguishes exact algebraic Views from approximate translators rather than treating both as the same kind of cache reuse.",
+  "prior_art_refs": [
+    "PA156",
+    "PA157",
+    "PA236"
+  ],
+  "prior_art_boundary": "PA156 provides direct prior art for deferred positional encoding and one physical cache serving logical placements. PA157/PA236 establish learned cross-model ridge translation as approximate, pair-dependent prior art. This experiment is a small local audit, not a reproduction of those systems.",
+  "models": {
+    "same_model": "EleutherAI/pythia-70m-deduped",
+    "approximate_target": "HuggingFaceTB/SmolLM2-135M"
+  },
+  "data": {
+    "source": "Salesforce/wikitext wikitext-103-raw-v1 train",
+    "exclusion": "Exclude all Wikitext-2 titles/rows and all prompt title/text hashes reserved by MA-883 and MA-886.",
+    "article_split": "Whole article title hash mod 4; bucket0 development, buckets1/2/3 fresh seeds 11887/11891/11897.",
+    "prompt_alignment": "Require exact character offset alignment and equal token counts for Pythia70 and SmolLM2.",
+    "prompts_per_bucket": 48,
+    "split": "24 map-fit, 8 check, 16 test; exact-algebra evaluation uses held-out test rows; cross-model ridge fits only map-fit rows.",
+    "eligibility": "16-128 tokens."
+  },
+  "fixed_design": {
+    "exact_view": "Pythia-70M has RoPE-only positional dependence. Remove source RoPE from each cached key to create the canonical position-neutral K; apply phase shift \u0394=17 to cached keys, and supply shifted position_ids to the final target query. Compare full shifted-sequence logits/NLL against canonical-cache query and against a separately shifted native prefill.",
+    "approximate_view": "Fit ordinary independent per-target-role affine ridge maps from Pythia-70M prefix K/V to SmolLM2 prefix K/V, nearest-relative layer/head matching, source/target inverse RoPE for keys and target RoPE restoration.",
+    "ridge_alpha": 0.01,
+    "exact_phase_code": "One signed int32 \u0394=17 plus fixed-format metadata. No learned degrees of freedom.",
+    "context": "One-token next-token replay; exact test covers native sequence at positions 0..n and globally shifted positions \u0394..\u0394+n."
+  },
+  "controls": [
+    "Native Pythia-70M prefill at position offset 0",
+    "Native Pythia-70M prefill at position offset 17",
+    "Canonical KV cache with phase-shift View algebra",
+    "Independent full affine Pythia70\u2192Smol ridge mapper",
+    "Native SmolLM2 prefill/cache replay"
+  ],
+  "success_gate": "Treating the exact position transform as an FP32 algebraic identity, require same-model View max absolute logit difference <=0.02 and absolute NLL delta <=0.005 in every fresh prompt; serialized exact View metadata is <=1% of one materialized K-cache byte count. Approximate cross-model row is reported separately and is never labeled exact. Report cache transform MAC proxy and CPU wall time.",
+  "failure_gate": "Any exactness gate miss. Independently classify the approximate translator by +1 nat target quality, mapper bytes, and translation/replay latency; approximate failure does not erase an exact algebra pass.",
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "exact_paid_state": [
+      "phase offset",
+      "metadata/header"
+    ],
+    "approximate_paid_state": [
+      "all per-role ridge maps",
+      "metadata/alignment state"
+    ],
+    "cache_state": "Report canonical K/V, materialized shifted K, and target cache bytes separately; shared model weights are common within exact same-model comparison."
+  },
+  "compute": {
+    "hardware": "CPU; report CUDA availability",
+    "measurements": [
+      "canonical prefill",
+      "native shifted prefill",
+      "key phase transform/application",
+      "query replay",
+      "cross-model mapper application",
+      "peak RSS",
+      "active transform MAC proxy"
+    ]
+  },
+  "scope": [
+    "One Pythia model, one known RoPE global-shift symmetry, one approximate Pythia70\u2192SmolLM2 pair, one-token replay.",
+    "No general exact cross-model equivalence, no multi-token rollout, and no GPU fused LazyAttention claim."
+  ],
+  "protocol_amendments": [
+    "Before any development metrics were written: fixed cache plumbing to convert CPU NumPy K/V arrays to batch-first Torch tensors before DynamicCache injection. The first development process raised a type error before scoring; no method, metric, data split, or decision rule changed. Fresh data remained unopened.",
+    "A second development-only run exposed an extra batch dimension on the native legacy-cache path, before any scores were written. Cache injection now accepts both unbatched array K/V and already-batched Torch K/V while normalizing them to rank 4. No method, data, metric, or decision rule changed; fresh remains sealed.",
+    "Before fresh access, development showed FP32 full-model replay accumulation up to 0.0152 logit and 0.0027 nat while layer cache/key algebra matched within about 1e-5. The exact-view output tolerance was set to 0.02 logits and 0.005 nat to bound FP32 accumulation; data, model, transform, and quality metric are unchanged. No fresh results had been opened."
+  ]
 }

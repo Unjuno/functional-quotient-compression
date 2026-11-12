@@ -1,19 +1,49 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-887",
+  "commit": "pending",
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "pytest -q experiments/mirror_applications/ma-887-exact-kv-view-boundary/tests",
+    "passed": 4,
+    "failed": 0
   },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "phase_code_roundtrip_checked": true,
+    "full_ridge_roundtrip_checked": true,
+    "ridge_nll_max_abs_delta_nat": 0.0,
+    "payload_inventory": "PAYLOAD_INVENTORY.json"
   },
-  "metric_replay": {
-    "checked": false,
-    "max_difference": null
+  "fresh_split_integrity_checked": true,
+  "fresh_seeds": [
+    11887,
+    11891,
+    11897
+  ],
+  "exact_view": {
+    "fresh_conditions": 3,
+    "max_abs_logit_delta": 0.009033203125,
+    "max_abs_nll_delta_nat": 0.00284576416015625,
+    "logit_tolerance": 0.02,
+    "nll_tolerance_nat": 0.005,
+    "all_pass": true,
+    "phase_payload_bytes": 82,
+    "mean_shifted_key_cache_bytes": 1089536,
+    "phase_to_keycache_ratio": 7.526139567669173e-05,
+    "cpu_latency_faster_than_native_shifted_prefill": 0
   },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "approximate_cross_model": {
+    "quality_delta_nats": [
+      1.4468342140316963,
+      1.0137451142072678,
+      2.417474006768316
+    ],
+    "all_within_plus_1": false,
+    "independent_ridge_payload_bytes": 2995321,
+    "payload_nll_roundtrip_max_delta": 0.0
+  },
+  "cuda_available": false,
+  "notes": [
+    "The exact same-model position View is a known RoPE algebra/LazyAttention analogue, not a Mirror-specific result.",
+    "Unfused CPU phase materialization is slower than native shifted prefill in all fresh buckets.",
+    "Approximate Pythia70\u2192SmolLM2 ridge is separately classified and never called exact."
+  ]
 }

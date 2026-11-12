@@ -1,18 +1,12 @@
 # MA-887 status
 
-- Status: SCREENING
+- Status: FAIL overall; exact-view subclaim passed
 - Branch: `research/ma-887-exact-kv-view-boundary-20261112`
-- Protocol and implementation frozen: `76a3c69f0`
-- Development: exact same-model position View passes amended FP32 tolerances; cross-model ridge delta is +1.17 nat
-- Fresh/audit opened: no
-- Conditions and seeds frozen in `FROZEN_CONFIG.json`
-- Results: pending
+- Protocol/methods frozen: `76a3c69f0` / `825dfb48f`
+- Fresh complete: seeds 11887/11891/11897, article-heldout buckets 1/2/3
+- Exact-view max logit/NLL deltas: 0.00903 / 0.00285 nat, within amended tolerances
+- Approximate Pythia70→Smol ridge missed +1 nat in all 3 fresh buckets
+- Unfused CPU exact-view path slower than native shifted prefill in all 3 buckets
+- Result commit: pending
 - Verification: pending
-
-## Next action
-
-Run buckets 1/2/3 without changes and separately report exact algebra and approximate ridge outcomes.
-
-## Blockers
-
-None.
+- Next eligible P0: MA-889
