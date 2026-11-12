@@ -1,19 +1,47 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-879",
+  "commit": "pending-final-commit",
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "python -m pytest -q experiments/mirror_applications/ma-879-attention-sensitive-cache-code/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "prompt_integrity": {
+    "calibration_unique": 36,
+    "test_unique": 48,
+    "cross_split_text_overlap": 0,
+    "within_seed_row_overlap": 0
   },
   "serialization": {
     "roundtrip_checked": false,
-    "byte_exact": false
+    "byte_exact": true,
+    "method": "actual byte lengths returned by serialize_ma879; same 573125/2996165 bytes on all fresh worlds; unit test checks shared/full ordering"
   },
   "metric_replay": {
-    "checked": false,
-    "max_difference": null
+    "checked": true,
+    "nll_max_difference": 0.0,
+    "prompt_ids_exact": true,
+    "payload_bytes_exact": true,
+    "logit_kl_rmse_replay": true
   },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "predeclared_gate_replay": {
+    "quality_pass_seeds": 0,
+    "byte_pass_seeds": 3,
+    "decision": "FAIL"
+  },
+  "cuda_available": false,
+  "file_sha256": {
+    "PROTOCOL.json": "a3b0f33cba2014d202382d7317f96ea33a343225475c785b3dfadc509c9f6031",
+    "source/experiment.py": "cfab6cf17b284f49d85335eb2ba30a4a2936242c0f4344fb5b35f7e15c8df618",
+    "source/verify_results.py": "fa2667d702bc1bb6e468fdc755bfc1fd79e9404f7367080b6cc8a94ad57db4bc",
+    "fresh_results.json": "80fb08073af9b35453cb6abbc92f0010884762698a4c1c4ca23f395bd3a1bc93",
+    "fresh_screening_run.json": "638b9bce6130df27168e0b57af4543a0438e06c1b22f8a3ffd6217794cab099e",
+    "RESULTS_CORE.csv": "5ccf519e8d5881490545b0fc54c1efe03174b59c6068d56f1b6182fb68f55bcf",
+    "RESULTS.md": "8622ebfaa2bd721b2345fc54a9967238af0cb3c6d7b593bb36dd71f4e2d69609"
+  },
+  "notes": [
+    "Metric-only post-fresh amendment added target-native-to-transfer logit KL and RMSE; no treatment, frozen learning rate, prompt selection, updates or gate changed.",
+    "Initial fresh output retained as fresh_screening_run.json; rerun reproduced NLLs, prompt IDs, bytes and decision exactly.",
+    "Direct rank-32 coefficient optimization is an ordinary low-rank control and aliases the proposed Mirror coordinate; no Mirror-specific claim."
+  ]
 }

@@ -79,7 +79,7 @@
     "PA237",
     "PA227"
   ],
-  "status": "SCREENING",
+  "status": "FAIL",
   "storage": {
     "authority": "actual serialized inference payload bytes",
     "common_model_weights": "reported separately; excluded from marginal bridge payload comparison",
@@ -94,5 +94,12 @@
     ]
   },
   "success_gate": "In all three fresh seeds, optimized rank-32 codes improve test NLL over unmodified rank-32 PCA by >=0.10 nat, are within +0.50 nat of native target and full ridge, and actual rank-32 serialized bytes are <=50% of full-map bytes.",
-  "title": "Attention-sensitive calibration of shared cross-model KV bridge codes"
+  "title": "Attention-sensitive calibration of shared cross-model KV bridge codes",
+  "post_fresh_amendment": {
+    "reason": "Add native-to-bridge logit KL and RMSE diagnostics required by the registry quality map.",
+    "changes_to_treatment_or_gates": false,
+    "same_frozen_learning_rate_seeds_prompts_initialization_and_update_count": true,
+    "initial_fresh_output": "fresh_screening_run.json",
+    "NLL_values_and_gate_verdicts_identical": true
+  }
 }
