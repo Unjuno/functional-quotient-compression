@@ -389,6 +389,14 @@ def run_fresh(seeds:tuple[int,...],hard:list[str],h:int)->dict[str,Any]:
           'sparse_linear_residual':serialize_payload('sparse_linear_residual',base,films,full,linear,hard),
           'sparse_mlp':serialize_payload('sparse_mlp',base,films,full,sparse,hard),
           'full_mlp_upper':serialize_payload('full_mlp_upper',base,films,full,upper,sorted(upper))}
+        roundtrip={}
+        for name,raw in variants.items():
+            td=time.perf_counter(); dec=deserialize_payload(raw); decode_seconds=time.perf_counter()-td
+            rkey={'sparse_linear_residual':'sparse_linear_residual','sparse_mlp':'sparse_mlp','full_mlp_upper':'full_mlp_upper'}.get(name)
+            rr={rkey:dec['repairs']} if rkey else {}
+            replay=evaluate(test,dec['base'],dec['full_maps'],dec['films'],rr,dec['hard'],models,(name,))
+            delta=max(abs(replay['methods'][name]['per_pair_mean_nll'][pk]-ev['methods'][name]['per_pair_mean_nll'][pk]) for pk in test)
+            roundtrip[name]={'decode_seconds':decode_seconds,'max_abs_per_pair_nll_delta':delta,'payload_bytes':len(raw),'passed':delta<=.001}
         artifact=Path(__file__).resolve().parents[1]/'artifacts'; artifact.mkdir(exist_ok=True); outpaths={}; hashes={}
         for name,raw in variants.items():
             out=artifact/f'{name}_seed_{seed}.bin'; out.write_bytes(raw); outpaths[name]=str(out.relative_to(Path(__file__).resolve().parents[2])); hashes[name]=hashlib.sha256(raw).hexdigest()
@@ -399,7 +407,7 @@ def run_fresh(seeds:tuple[int,...],hard:list[str],h:int)->dict[str,Any]:
         row={'seed':seed,'article_bucket':int(bucket),'prompt_rows':{pk:{k:[z['item']['row'] for z in v] for k,v in split.items()} for pk,split in prepared.items()},
              'check_metrics':check_ev,'test_metrics':ev,'hard_pair_keys':hard,'repaired_pair_fraction':len(hard)/len(PAIRS),'repaired_token_fraction':repaired/max(1,token_total),
              'payload_bytes':{k:len(v) for k,v in variants.items()},'private_repair_bytes':private_bytes,'private_fraction_of_full_ridge':private_bytes/full_bytes,
-             'total_sparse_fraction_of_full_ridge':candidate_bytes/full_bytes,'payload_sha256':hashes,'artifact_paths':outpaths,'training':training,
+             'total_sparse_fraction_of_full_ridge':candidate_bytes/full_bytes,'payload_sha256':hashes,'artifact_paths':outpaths,'serialization_roundtrip':roundtrip,'training':training,
              'compute':{'fresh_fit_repair_eval_seconds':time.perf_counter()-t0,'max_rss_mib':resource.getrusage(resource.RUSAGE_SELF).ru_maxrss/1024}}
         rows.append(row)
         partial={'experiment_id':'MA-883','hard_pair_keys':hard,'selected_hidden_width':h,'seeds_completed':[x['seed'] for x in rows],'rows':rows,'models':model_provenance(paths)}
