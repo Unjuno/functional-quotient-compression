@@ -57,7 +57,10 @@ def rope_t(x,cfg,positions):
 def forward(model,ids,offset=0,past=None,cache_position=None):
  q=torch.tensor([ids],dtype=torch.long);pos=torch.arange(len(ids),dtype=torch.long)[None,:]+offset;kw={'input_ids':q,'position_ids':pos,'use_cache':True}
  if past is not None:
-  past_len=past[0][0].shape[-2];past_t=tuple((torch.as_tensor(k,dtype=torch.float32)[None],torch.as_tensor(v,dtype=torch.float32)[None]) for k,v in past);kw['past_key_values']=DynamicCache.from_legacy_cache(past_t);kw['attention_mask']=torch.ones((1,past_len+len(ids)),dtype=torch.long);kw['cache_position']=cache_position
+  past_len=past[0][0].shape[-2]
+  def batch(a):
+   t=torch.as_tensor(a,dtype=torch.float32);return t[None] if t.ndim==3 else t
+  past_t=tuple((batch(k),batch(v)) for k,v in past);kw['past_key_values']=DynamicCache.from_legacy_cache(past_t);kw['attention_mask']=torch.ones((1,past_len+len(ids)),dtype=torch.long);kw['cache_position']=cache_position
  with torch.inference_mode():return model(**kw)
 def legacy(out):
  p=out.past_key_values
