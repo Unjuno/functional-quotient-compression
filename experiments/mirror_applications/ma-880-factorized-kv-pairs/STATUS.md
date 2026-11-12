@@ -21,4 +21,4 @@ The experiment tests whole ordered-pair generalization from a source×target×ro
 
 - Corrected Q and dev outputs frozen in `FROZEN_SETTINGS.json` and `dev_results.json` before corrected fresh replay.
 
-- Corrected evidence commit: pending. Initial raw-position screen is retained as an implementation deviation and excluded from final gates.
+- Corrected evidence commit: `9475cfe63`. Initial raw-position screen is retained as an implementation deviation and excluded from final gates.
