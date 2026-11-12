@@ -34,5 +34,5 @@
   "storage":{"authority":"actual serialized inference payload bytes","paid_state":["shared affine map","target-role gains/biases","target model IDs","alignment and format metadata","all independent-control maps"],"system_storage":"Report producer, both target checkpoints, and mapper payload bytes separately; producer checkpoint is an added system object, not free."},
   "compute":{"hardware":"CPU; report CUDA availability","measurements":["producer prefill once per text","each native target prefill","mapper apply per target","target replay per target","summed native and fanout wall time","calibration fit time","active MAC proxy per token","peak RSS"]},
   "scope":["One Pythia-70M source, two target models, one-token next-token replay, article-heldout Wikitext-103-train prompts.","No multi-token decoding, other model pairs, GPU throughput, CacheBridge/MoT equivalence, or general cross-model semantics."],
-  "protocol_amendments":[]
+  "protocol_amendments":["Before fresh evaluation: fixed a development-only timing aggregation type mismatch that raised after model fitting/evaluation but before any development metrics were written. No outcomes were recorded by that run; no experiment condition, model, metric, or decision rule changed."]
 }

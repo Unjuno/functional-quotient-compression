@@ -198,11 +198,15 @@ def evaluate(data_by_target,bundles,models,methods):
   result['methods'][method+'_mean']={t:float(np.mean(result['methods'][method][t])) for t in TARGETS}
   result['methods'][method+'_per_target']={t:float(np.mean(result['methods'][method][t])) for t in TARGETS}
   # Each prompt has one source prefill shared across both targets, charged once in combined fanout latency.
+  data_order=[(t,d) for t in TARGETS for d in data_by_target[t]]
   source_by_row={d['item']['row']:d['source_prefill_seconds'] for t in TARGETS for d in data_by_target[t]}
-  native_by_row={d['item']['row']:sum(x['native_prefill_seconds']+x['native_replay_seconds'] for t in TARGETS for x in data_by_target[t] if x['item']['row']==d['item']['row']) for d in data_by_target[TARGETS[0]]}
-  fanout_by_row={}
-  for idx,row in enumerate(source_by_row):
-   fanout_by_row[row]=source_by_row[row]+sum(result['timing'][method]['apply'][j]+result['timing'][method]['replay'][j] for j,(t,dd) in enumerate(( (t,d) for t in TARGETS for d in sum([data_by_target[t][p] for p in ('test',)],[]) )) if dd['item']['row']==row)
+  native_by_row={}
+  for t in TARGETS:
+   for d in data_by_target[t]:
+    row=d['item']['row'];native_by_row[row]=native_by_row.get(row,0.)+d['native_prefill_seconds']+d['native_replay_seconds']
+  fanout_by_row=dict(source_by_row)
+  for idx,(t,d) in enumerate(data_order):
+   row=d['item']['row'];fanout_by_row[row]+=result['timing'][method]['apply'][idx]+result['timing'][method]['replay'][idx]
   result['timing'][method+'_mean_fanout_seconds_per_prompt']=float(np.mean(list(fanout_by_row.values()))) if fanout_by_row else None
   result['timing'][method+'_mean_native_seconds_per_prompt']=float(np.mean(list(native_by_row.values()))) if native_by_row else None
  return result
