@@ -17,6 +17,7 @@ for row in data["rows"]:
     ids = row["prompt_rows"]
     assert len(set(ids["expert0"] + ids["expert1"] + ids["router"])) == 12
     assert not (set(ids["calibration"]) & set(ids["test"]))
+    assert abs(shared["native_mean_nll"] - single["native_mean_nll"]) < 1e-9
     q = (shared["mot_mean_nll"] <= full["mot_mean_nll"] + 0.5
          and shared["mot_mean_nll"] <= single["single_ridge_mean_nll"] + 1.0
          and shared["mot_mean_nll"] <= shared["native_mean_nll"] + 1.0)
@@ -24,6 +25,7 @@ for row in data["rows"]:
     gates.append({"seed": row["seed"], "quality_pass": q, "storage_pass": s,
                   "delta_full": shared["mot_mean_nll"] - full["mot_mean_nll"],
                   "delta_single": shared["mot_mean_nll"] - single["single_ridge_mean_nll"],
+                  "delta_native": shared["mot_mean_nll"] - shared["native_mean_nll"],
                   "bytes": row["payload_bytes"], "saved_fraction": row["bytes_saved_fraction"]})
 assert all(g["storage_pass"] for g in gates)
 assert not any(g["quality_pass"] for g in gates)
