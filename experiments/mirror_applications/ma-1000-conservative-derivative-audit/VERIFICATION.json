@@ -1,9 +1,22 @@
 {
   "experiment_id": "MA-1000",
-  "commit": "pending",
-  "tests": {"command": "python experiments/mirror_applications/ma-1000-conservative-derivative-audit/source/run_audit.py verify", "passed": 3, "failed": 0},
-  "serialization": {"roundtrip_checked": true, "byte_exact": true},
-  "metric_replay": {"checked": true, "max_difference": 0.0},
+  "commit": "53c18e58a34663b62ca52572d475305e10fc3757",
+  "tests": {
+    "command": "python experiments/mirror_applications/ma-1000-conservative-derivative-audit/source/run_audit.py verify",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
   "fresh_split_integrity_checked": true,
-  "notes": ["All three fresh worlds pass the frozen conservative-gradient and rotation-equivariance checks; separate-force-head negative control is detected.", "Synthetic radial audit only; no trained neural potential result."]
+  "notes": [
+    "All three fresh worlds pass the frozen conservative-gradient and rotation-equivariance checks; separate-force-head negative control is detected.",
+    "Synthetic radial audit only; no trained neural potential result."
+  ]
 }

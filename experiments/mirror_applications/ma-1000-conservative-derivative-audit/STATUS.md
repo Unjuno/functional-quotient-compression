@@ -3,7 +3,7 @@
 - Status: PROMISING (synthetic conservative-derivative audit only)
 - Branch: `research/ma-1000-conservative-derivative-audit-20261113`
 - Base commit: `10938908f`
-- Last verified commit: pending
+- Last verified commit: `53c18e58a34663b62ca52572d475305e10fc3757`
 - Development complete: no
 - Fresh/audit opened: yes (100011, 100013, 100017)
 - Results committed: pending
