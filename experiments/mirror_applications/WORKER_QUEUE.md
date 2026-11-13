@@ -776,3 +776,6 @@ MA-950 remains UNTESTED: only one HNeRV serialized-payload result exists, while 
 
 
 MA-951 scoped synthetic C4 task-view FAIL: fixed phase missed preregistered task0/task1 quality retention on 2/3 fresh seeds and was 7 B larger than independent heads; private residual restored quality at +426 B. Exact transformed copies are not counted as capacity. See `ma-951-gcnn-task-conditional-mirror-exception/RESULTS.md`. Next P0 MA-952 steerable CNN irrep-channel Mirror specialization; CPU torch available, but e2cnn/escnn dependencies are absent, so inspect whether a pinned upstream CPU path can be made runnable before scoring.
+
+
+MA-952 scoped synthetic e2cnn C4 screen FAIL: learned task×irrep code and ordinary per-channel gate averaged 71.7% on orbit tasks vs 100% independent heads; Mirror payload 22,917 B vs 22,781 B. Private residual did not restore orbit quality. MA-951/952 share a small-screen shared-readout bottleneck; pause MA-953..960 for structural redesign (see `docs/phase2/C4_TASK_CONDITIONAL_MIRROR_DIAGNOSTIC_2026-11-13.md`). Next P0 in a different family: MA-961 fixed-synapse spiking threshold task views.

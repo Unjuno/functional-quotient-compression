@@ -1,0 +1,89 @@
+{
+  "experiment_id": "MA-952",
+  "title": "Steerable CNN irrep-channel Mirror specialization",
+  "status": "FAIL",
+  "protocol_frozen": true,
+  "amendment": "02: amendment 01 stopped before any matched comparison because in-place irrep code assembly broke autograd; fix uses functional concatenation",
+  "scope": "CPU synthetic mechanism screen using official e2cnn; no natural image or broad steerable-CNN claim.",
+  "base_commit": "60ee5d6ea",
+  "prior_art_refs": [
+    "PA276",
+    "PA278"
+  ],
+  "upstream": {
+    "project": "QUVA-Lab/e2cnn",
+    "commit": "022d6ca4a78ab666f3c149d1849e324ed1d40238",
+    "version": "0.2.3"
+  },
+  "hypothesis": "A compact task\u00d7irrep code over a shared C4-steerable CNN can specialize group-related tasks with lower full serialized bytes than independent task heads; an ordinary per-channel gate is the strongest low-cost control, and a non-orbit task may require private state.",
+  "physical_object": "One e2cnn C4 steerable convolutional trunk with regular-representation hidden fields and output multiplicities of real irreps 0, 1, and 2.",
+  "mirror_coordinate": "Three learned per-task scalars multiply shared readout weights for each irrep block; private exception adds one task-specific readout.",
+  "logical_multiplicity": "Two orientation tasks in the same C4 orbit plus an object-class task outside the orbit; orbit copies do not count as independent capacity.",
+  "controls": [
+    "independent task readouts",
+    "shared readout with learned task\u00d7irrep scalars",
+    "same shared readout with task\u00d7channel ordinary gate",
+    "Mirror code plus private task-2 readout"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      95201
+    ],
+    "selection_metric": "shape/import smoke only; no hyperparameter selection"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      95221,
+      95223,
+      95227
+    ],
+    "locked_before_access": true,
+    "train_examples": 512,
+    "test_examples": 256,
+    "train_orientations": [
+      0,
+      1,
+      2
+    ],
+    "heldout_orientation": 3
+  },
+  "training": {
+    "updates": 500,
+    "optimizer": "Adam",
+    "learning_rate": 0.003,
+    "batch_size": 64,
+    "threads": 1,
+    "device": "CPU"
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "e2cnn trunk",
+      "readout",
+      "irrep/task codes",
+      "ordinary gate/private residual",
+      "metadata"
+    ]
+  },
+  "metrics": [
+    "per-task held-out accuracy",
+    "equivariance error",
+    "actual payload bytes",
+    "training/inference wall time",
+    "forward MAC proxy",
+    "serialized replay error"
+  ],
+  "success_gate": "Mirror reaches at least 95% of independent-head accuracy on both orbit tasks on every fresh seed, full payload is at most 90% of independent heads, and ordinary per-channel gate does not match at equal/fewer bytes.",
+  "failure_gate": "Any quality or byte gate miss, or ordinary gate matching Mirror at no greater byte cost.",
+  "boundaries": [
+    "Synthetic rotated-patch tasks only.",
+    "Exact C4 task copies are not extra independent functions.",
+    "Learned irrep scalars may be ordinary irrep gating; any such alias precludes Mirror-specific attribution.",
+    "No natural-image, broad equivariance, or capacity claim."
+  ],
+  "implementation_history": [
+    "Amendment 01 implementation run aborted after the first native-head row due to an autograd in-place mutation in the Mirror branch; no matched comparison was produced. That exposed seed is excluded from amendment 02.",
+    "Amendment 02 uses three new seeds, fixed before re-running any condition."
+  ],
+  "result_report": "RESULTS.md"
+}
