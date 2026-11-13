@@ -1,0 +1,19 @@
+{
+  "experiment_id":"MA-982",
+  "title":"Type-II site subspace with persistent Mirror site coordinate",
+  "status":"SCREENING",
+  "protocol_frozen":true,
+  "base_commit":"e680ee002",
+  "hypothesis":"For synthetic sites whose dominant channel subspaces differ by antenna phase ramps, a shared Type-II base subspace plus small persistent site coordinates preserves beamforming rate while reducing total serialized model-plus-feedback description versus storing a separate subspace per site.",
+  "prior_art_refs":["PA289"],
+  "scope":"Synthetic narrowband 8-antenna channel model; not a PA289 reproduction, measured channel data, or field trial.",
+  "system":{"sites":4,"antennas":8,"subspace_rank":2,"users_per_site":128,"snr_db":10,"off_subspace_leakage":0.12,"coefficient_quantization_bits_per_real":8,"pilot_probes_per_site":8},
+  "conditions":["shared_global_subspace_no_site_code","mirror_shared_subspace_plus_site_phase_coordinate","native_phase_parametric_TypeII","stored_per_site_TypeII_subspace","full_quantized_CSI_feedback"],
+  "worlds":{"development":[98201],"fresh":[98211,98213,98217]},
+  "metrics":["relative channel NMSE","spectral efficiency under reconstructed-channel MRT","serialized persistent state bytes","online feedback bits per user","pilot probes per site","complex MAC proxy"],
+  "storage":{"authority":"actual torch.save decoded persistent inference payload bytes; total description also reports online feedback bits separately","paid":["shared or site subspaces","site coordinates/indices","router/site fingerprints","metadata"]},
+  "success_gate":"In every fresh world, Mirror mean rate is >=95% of full quantized CSI and >=95% of stored per-site Type-II; per-site persistent+online description is <=80% of stored Type-II while pilot probes are counted separately.",
+  "failure_gate":"Any fresh world misses quality or total description gate, or Mirror exactly aliases the native phase-parametric Type-II control.",
+  "fresh":{"locked_before_access":true,"seeds":[98211,98213,98217]},
+  "boundaries":["Synthetic generated channel worlds only.","No multi-user scheduling/interference, coherence-time signaling, RF energy, latency, or public data claim.","Native phase-parametric Type-II is an explicit low-cost control; a win against only stored subspaces is not Mirror-specific evidence."]
+}

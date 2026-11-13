@@ -815,3 +815,6 @@ MA-980 remains NOT ESTABLISHED: ideal phase views reconstruct exactly, but nativ
 
 
 MA-981 synthetic clustered ULA screen FAIL: Mirror phase views and native sector-angle codes tie exactly; 10,401 B vs 18,277 B independent (56.9%, missing <=50% gate) at 99.66% of its rate. No measured-channel/PA288/RF energy claim. See `ma-981-wireless-beam-mirror-screen/RESULTS.md`.
+
+
+MA-982 synthetic Type-II site-subspace screen FAIL: Mirror aliases native phase-parametric Type-II exactly; total model+feedback savings vs stored per-site Type-II only 2.9%, below the 20% gate. 99.11% of full-CSI mean rate, 34 feedback bits/user. No measured-channel/PA289 claim. See `ma-982-type2-site-subspace-mirror/RESULTS.md`.
