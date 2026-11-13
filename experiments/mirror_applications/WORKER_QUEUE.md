@@ -743,3 +743,6 @@ MA-936 remains UNTESTED: no CUDA/NVIDIA GPU, official NerVast implementation/che
 
 
 MA-937 remains UNTESTED: official HNeRV decode smoke works on its single 132-frame Bunny scene, but there are no multiple fitted scenes for held-out scene×window tests; NerVast weights are also unavailable. See `ma-937-nervast-scene-chunk-factorization/EXECUTION_BLOCKER.md`. Continue to P0 MA-938.
+
+
+MA-938 remains UNTESTED: official NerVast checkpoint and Fisher masks are absent, along with video frames and CUDA for bitstream/RD/FPS. No synthetic mask substituted. See `ma-938-nervast-fisher-private-allocation/EXECUTION_BLOCKER.md`. Next P0 MA-939 HNeRV adaptive frame feature Mirror views.

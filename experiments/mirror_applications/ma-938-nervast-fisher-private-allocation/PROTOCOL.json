@@ -1,0 +1,60 @@
+{
+  "experiment_id": "MA-938",
+  "title": "Fisher-guided Mirror versus private video weights",
+  "status": "UNTESTED",
+  "evidence_lane": "DIRECT_NEURAL_VIDEO_APPLICATION",
+  "base_commit": "d905f4d07",
+  "prior_art_refs": [
+    "PA268"
+  ],
+  "hypothesis": "With NerVast Fisher-selected shared weights frozen, replace a subset of remaining private chunk parameters by structured Mirror codes without exceeding a preregistered RD loss; preserve sparse private residuals where needed.",
+  "physical_object": "NerVast shared INR parameter subset plus native Fisher-selected masks.",
+  "mirror_coordinate": "Per-chunk m and sparse private residual mask.",
+  "logical_multiplicity": "Adaptive chunk-specific video decoders represented by shared parameters, small coordinates and a measured private frontier.",
+  "controls": [
+    "native NerVast Fisher sharing/private weights",
+    "hard tying",
+    "equal-byte LoRA or low-rank residual",
+    "Mirror code only",
+    "Mirror plus sparse private residual"
+  ],
+  "development": {
+    "worlds_or_seeds": [],
+    "selection_metric": "Not run; native masks and checkpoint unavailable."
+  },
+  "fresh": {
+    "worlds_or_seeds": [],
+    "locked_before_access": false,
+    "selection_metric": "Not run."
+  },
+  "storage": {
+    "authority": "actual serialized inference payload and encoded bitstream bytes",
+    "paid_objects": [
+      "shared checkpoint",
+      "Fisher mask",
+      "Mirror codes",
+      "private residual weights",
+      "metadata",
+      "bitstream"
+    ]
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true,
+    "decode_fps_required": true
+  },
+  "success_gate": "Not evaluated; require same fitted model/masks and held-out scene-cut RD/FPS metrics.",
+  "failure_gate": "Not evaluated.",
+  "blockers": [
+    "Official NerVast implementation and fitted checkpoints unavailable in the workspace.",
+    "Fisher masks/sensitivity scores and matched scene-cut frames unavailable.",
+    "No CUDA/NVIDIA GPU for registered video decode FPS and native bitstream audit."
+  ],
+  "boundaries": [
+    "Cannot substitute an arbitrary Fisher mask: the proposal tests NerVast allocation after native sharing.",
+    "Do not tune mask on audit frames.",
+    "UNTESTED is not a negative result."
+  ]
+}

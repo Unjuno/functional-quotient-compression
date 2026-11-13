@@ -390,3 +390,6 @@ MA-936 remains **UNTESTED**: CUDA/NVIDIA GPU, official NerVast code/checkpoints/
 
 
 MA-937 remains **UNTESTED**: official HNeRV CPU smoke works, but upstream supplies only one 132-frame Bunny scene, so held-out scene×window combinations cannot be tested; NerVast native weights are absent. See `ma-937-nervast-scene-chunk-factorization/EXECUTION_BLOCKER.md`. Next P0 MA-938 (NerVast Fisher-guided private-vs-Mirror allocation).
+
+
+MA-938 remains **UNTESTED**: no official NerVast weights/Fisher masks/video frames or CUDA; cannot measure post-NerVast private-vs-Mirror allocation or the bitstream/FPS frontier. See `ma-938-nervast-fisher-private-allocation/EXECUTION_BLOCKER.md`. Next P0 MA-939 HNeRV adaptive frame feature views.
