@@ -1,0 +1,154 @@
+{
+  "results": [
+    {
+      "method": "native_quantized_embedding",
+      "rank": 128,
+      "audit_mean_psnr_db": 35.037141086493044,
+      "audit_min_psnr_db": 33.12250941364316,
+      "payload_bytes": 19762,
+      "full_deployment_bytes": 7576370,
+      "cpu_decode_fps": 0.28208585967604555,
+      "audit_decode_seconds": 127.62071817900869,
+      "encode_updates": 0,
+      "mapping_macs_per_frame": 0,
+      "status": "reference"
+    },
+    {
+      "method": "mirror_coordinate",
+      "rank": 2,
+      "audit_mean_psnr_db": 19.597401040034267,
+      "audit_min_psnr_db": 18.35915661996375,
+      "latent_mse_vs_native": 1.5956008434295654,
+      "payload_bytes": 4319,
+      "full_deployment_bytes": 7560927,
+      "cpu_decode_fps": 0.48462205802695535,
+      "audit_decode_seconds": 74.28469134600891,
+      "encode_updates": 0,
+      "mapping_macs_per_frame": 256,
+      "status": "FAIL"
+    },
+    {
+      "method": "mirror_coordinate",
+      "rank": 4,
+      "audit_mean_psnr_db": 20.2291227412392,
+      "audit_min_psnr_db": 18.444162633772258,
+      "latent_mse_vs_native": 1.0058096647262573,
+      "payload_bytes": 4831,
+      "full_deployment_bytes": 7561439,
+      "cpu_decode_fps": 0.3129674714542707,
+      "audit_decode_seconds": 115.02792872600548,
+      "encode_updates": 0,
+      "mapping_macs_per_frame": 512,
+      "status": "FAIL"
+    },
+    {
+      "method": "mirror_coordinate",
+      "rank": 8,
+      "audit_mean_psnr_db": 20.803701480798928,
+      "audit_min_psnr_db": 18.724001142070968,
+      "latent_mse_vs_native": 0.5869856476783752,
+      "payload_bytes": 5855,
+      "full_deployment_bytes": 7562463,
+      "cpu_decode_fps": 0.3234195952290799,
+      "audit_decode_seconds": 111.31050972499361,
+      "encode_updates": 0,
+      "mapping_macs_per_frame": 1024,
+      "status": "FAIL"
+    },
+    {
+      "method": "mirror_coordinate",
+      "rank": 16,
+      "audit_mean_psnr_db": 21.95129936396339,
+      "audit_min_psnr_db": 19.066600191607655,
+      "latent_mse_vs_native": 0.37890222668647766,
+      "payload_bytes": 7980,
+      "full_deployment_bytes": 7564588,
+      "cpu_decode_fps": 0.33681719141156824,
+      "audit_decode_seconds": 106.88290538000001,
+      "encode_updates": 0,
+      "mapping_macs_per_frame": 2048,
+      "status": "FAIL"
+    }
+  ],
+  "control_alias": [
+    {
+      "rank": 2,
+      "mirror_pca_max_abs_output_difference": 0.0,
+      "payload_bytes_equal": true,
+      "functional_alias": true
+    },
+    {
+      "rank": 4,
+      "mirror_pca_max_abs_output_difference": 0.0,
+      "payload_bytes_equal": true,
+      "functional_alias": true
+    },
+    {
+      "rank": 8,
+      "mirror_pca_max_abs_output_difference": 0.0,
+      "payload_bytes_equal": true,
+      "functional_alias": true
+    },
+    {
+      "rank": 16,
+      "mirror_pca_max_abs_output_difference": 0.0,
+      "payload_bytes_equal": true,
+      "functional_alias": true
+    }
+  ],
+  "audit_frames": [
+    96,
+    97,
+    98,
+    99,
+    100,
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108,
+    109,
+    110,
+    111,
+    112,
+    113,
+    114,
+    115,
+    116,
+    117,
+    118,
+    119,
+    120,
+    121,
+    122,
+    123,
+    124,
+    125,
+    126,
+    127,
+    128,
+    129,
+    130,
+    131
+  ],
+  "development_frames": [
+    0,
+    95
+  ],
+  "official_repo_commit": "4872129c8d004a25477e0c1ffbbff4ba71943ad5",
+  "video_frames": 132,
+  "latent_shape": [
+    132,
+    16,
+    2,
+    4
+  ],
+  "common_decoder_bytes": 7556608,
+  "native_embedding_bytes": 19762,
+  "native_full_bytes": 7576370,
+  "device": "cpu",
+  "torch": "2.14.1+cpu"
+}

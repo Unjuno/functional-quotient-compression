@@ -1,0 +1,88 @@
+{
+  "experiment_id": "MA-939",
+  "title": "HNeRV frame embedding Mirror coordinate frontier",
+  "status": "FAIL",
+  "protocol_frozen": true,
+  "amendment": "01 single-video official checkpoint frame-embedding mechanism screen",
+  "scope": "One Bunny video only. Measures actual quantized latent-code storage, held-out reconstruction PSNR and CPU decode cost; not multi-video generalization or NerVast comparison.",
+  "base_commit": "b19416272",
+  "prior_art_refs": [
+    "PA267"
+  ],
+  "upstream": {
+    "repo": "https://github.com/haochen-rye/HNeRV",
+    "commit": "4872129c8d004a25477e0c1ffbbff4ba71943ad5",
+    "decoder": "checkpoints/img_decoder.pth",
+    "video_checkpoint": "checkpoints/quant_vid.pth"
+  },
+  "video": {
+    "id": "HNeRV bundled Bunny",
+    "frames": 132,
+    "resolution": "1280x720 source; center crop 640x1280 to match model output",
+    "frame_order": "lexicographic zero-padded filenames"
+  },
+  "hypothesis": "A shared latent basis plus small per-frame Mirror coordinate m can reduce HNeRV content-adaptive embedding bytes while preserving held-out frame PSNR and decode FPS; compare against ordinary PCA/low-rank coordinates to test Mirror specificity.",
+  "physical_object": "Pinned HNeRV image decoder and one shared basis over the official 128-D per-frame embedding.",
+  "mirror_coordinate": "m_t = Q_r^T(z_t - mean), synthesized by mean + Q_r m_t.",
+  "logical_multiplicity": "132 frame-specific decoder inputs represented by one common basis and per-frame coordinates.",
+  "controls": [
+    "official native quantized per-frame embedding",
+    "ordinary PCA/low-rank basis plus coordinates (same functional parameterization)",
+    "independent full embedding upper control"
+  ],
+  "development": {
+    "frames": "0:96",
+    "selection_metric": "No hyperparameter chosen from audit; report frozen rank sweep."
+  },
+  "fresh": {
+    "frames": "96:132",
+    "locked_before_access": true,
+    "seeds": [],
+    "reason": "One fixed official checkpoint/video; frame-index split is the unit of held-out evaluation."
+  },
+  "rank_sweep": [
+    2,
+    4,
+    8,
+    16
+  ],
+  "quantization": {
+    "basis": "uniform affine uint8 per tensor",
+    "coordinates": "uniform affine uint8 per tensor",
+    "native": "official checkpoint quantization"
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "TorchScript decoder",
+      "quantized common model weights",
+      "mean latent",
+      "basis",
+      "all 132 frame codes",
+      "quantization minima/scales",
+      "metadata"
+    ]
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true,
+    "decode_fps_required": true,
+    "updates": "0; deterministic SVD/coordinate projection"
+  },
+  "metrics": [
+    "per-frame PSNR on frames 96:132",
+    "actual code payload/full deployment bytes",
+    "CPU FPS including code synthesis",
+    "basis+coordinate MAC proxy",
+    "Mirror-vs-PCA output and byte alias check"
+  ],
+  "success_gate": "At least one rank reduces full deployment bytes by \u226510%, retains native mean audit PSNR within 0.25 dB, and achieves \u226590% native CPU FPS.",
+  "failure_gate": "All ranks miss quality or latency gate, or the Mirror code exactly aliases the ordinary PCA/low-rank control; report all frontier points regardless.",
+  "boundaries": [
+    "Single Bunny checkpoint only; no independent scene/video capacity claim.",
+    "This rank-code mechanism may be ordinary low-rank compression; Mirror-specific value requires a non-aliasing gain over PCA.",
+    "No NerVast result, bitrate/entropy coding, GPU decode, or general HNeRV training claim."
+  ]
+}

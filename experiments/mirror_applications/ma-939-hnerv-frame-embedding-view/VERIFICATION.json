@@ -1,0 +1,32 @@
+{
+  "experiment_id": "MA-939",
+  "commit": null,
+  "tests": {
+    "command": "python experiments/mirror_applications/ma-939-hnerv-frame-embedding-view/source/run_screen.py (full CPU screen); python -m py_compile experiments/mirror_applications/ma-939-hnerv-frame-embedding-view/source/run_screen.py",
+    "passed": 2,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "payload_files": 5
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "environment": {
+    "device": "cpu",
+    "torch": "2.14.1+cpu",
+    "cuda_available": false
+  },
+  "fresh_seeds": [],
+  "notes": [
+    "Official HNeRV commit and hashes for all video frames/checkpoints recorded in source/data_manifest.json.",
+    "Basis fit used development frames 0:96; PSNR/FPS audit used held-out frames 96:132.",
+    "All four rank payloads were saved, reloaded and decoded; Mirror coordinate equals PCA control exactly.",
+    "Quality gate failed at every rank; one Bunny video only, no entropy-coded bitstream or scene-generalization claim.",
+    "A pinned-upstream clone/revision guard was added after the completed metric run; the metric-generating code path is unchanged and final source syntax check passed."
+  ]
+}

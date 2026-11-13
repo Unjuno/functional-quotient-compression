@@ -1,0 +1,1 @@
+Run the frozen source script. It checks payload serialization/reload, native and rank-sweep decode PSNR/FPS on held-out frames, and exact functional/byte aliasing between Mirror coordinates and PCA control.

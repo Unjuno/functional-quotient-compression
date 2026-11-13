@@ -6,11 +6,11 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- Claim ledger entries: **417**
-- P0: **630** (340 FAIL; 52 PROMISING; 232 UNTESTED; 6 NOT ESTABLISHED)
+- Claim ledger entries: **418**
+- P0: **630** (341 FAIL; 52 PROMISING; 231 UNTESTED; 6 NOT ESTABLISHED)
 - P1: **422** (17 completed; 405 UNTESTED)
 - P2: **103** (103 UNTESTED)
-- Current MA statuses: **348 FAIL, 6 NOT ESTABLISHED, 61 PROMISING, 1 SCREENING, 739 UNTESTED**
+- Current MA statuses: **349 FAIL, 6 NOT ESTABLISHED, 61 PROMISING, 1 SCREENING, 738 UNTESTED**
 - 47 baseline experiment directories remain present; verified external outcomes are linked to their dedicated branches in the registry and claim ledger.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). See the current Next candidate section for the live queue.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. see the current Next candidate section.
@@ -393,3 +393,6 @@ MA-937 remains **UNTESTED**: official HNeRV CPU smoke works, but upstream suppli
 
 
 MA-938 remains **UNTESTED**: no official NerVast weights/Fisher masks/video frames or CUDA; cannot measure post-NerVast private-vs-Mirror allocation or the bitstream/FPS frontier. See `ma-938-nervast-fisher-private-allocation/EXECUTION_BLOCKER.md`. Next P0 MA-939 HNeRV adaptive frame feature views.
+
+
+MA-939 scoped HNeRV Bunny frame-coordinate screen **FAIL**: uint8 rank-2..16 codes reduced embedding bytes 59.6–78.1%, but held-out PSNR fell 13.09–15.44 dB and full decoder/model payload shrank only 0.16–0.20%; all coordinate rows exactly alias PCA. CPU only, one video, no bpp claim. See `ma-939-hnerv-frame-embedding-view/RESULTS.md`. P1 MA-940 skipped; next P0 MA-941 DCVC-UF chunk latent/frame views.
