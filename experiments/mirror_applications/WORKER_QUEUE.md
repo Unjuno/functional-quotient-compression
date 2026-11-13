@@ -797,3 +797,5 @@ MA-963 remains UNTESTED: bounded source search found no official TACOS repositor
 
 
 MA-964 scoped fixed-core LIF SVD oracle screen FAIL: structured rank1 exact but saved only 14.6% actual bytes (<20% gate); shared is smaller and 96.98% agreement. Generic rank1/2 agreement 91.5/93.2%. Exact native SVD alias; no learned/energy claim. See `ma-964-lif-tau-threshold-factor/RESULTS.md`. Next P0 MA-965.
+
+MA-965 remains UNTESTED (NOT ESTABLISHED / deferred): official EAS-SNN code exists, but Gen1 data/checkpoint are absent locally and CUDA/GPU is unavailable. No synthetic surrogate substituted for the registered detection task. See `ma-965-eas-snn-event-sampler-mirror/EXECUTION_BLOCKER.md`. Next P0 MA-966 fine event timing / packet phase.

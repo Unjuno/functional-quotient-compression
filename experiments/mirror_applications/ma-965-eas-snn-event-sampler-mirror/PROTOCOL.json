@@ -1,0 +1,19 @@
+{
+  "experiment_id": "MA-965",
+  "title": "EAS-SNN adaptive sampler Mirror event View",
+  "status": "NOT ESTABLISHED",
+  "protocol_frozen": false,
+  "scope": "Deferred before execution because required real event data/checkpoint and GPU are unavailable. No surrogate result is substituted.",
+  "base_commit": "59fa0e0d3",
+  "upstream": {
+    "repository": "https://github.com/Windere/EAS-SNN",
+    "commit": "423cb8be283af75426c908e94b723456f961913d",
+    "paper": "https://arxiv.org/abs/2403.12574"
+  },
+  "hypothesis": "A compact sensor/time/context coordinate can make one EAS-SNN adaptive event sampler behave as multiple useful event-window samplers while retaining fine timing and improving full-detector storage/quality/runtime over native adaptive sampling and simple conditioning.",
+  "controls": ["native shared AdaptiveRSNNEmbedding", "direct per-condition threshold/gain", "equal-byte FiLM or low-rank modulation", "Mirror-conditioned shared sampler", "independent sampler copies"],
+  "required_fresh_data": ["whole held-out event sequences", "held-out sensor/time conditions"],
+  "required_metrics": ["mAP", "event latency", "samples/events processed", "actual full inference payload bytes", "runtime", "measured energy or explicitly omitted"],
+  "blockers": ["official Gen1 data/checkpoint not present in workspace", "CUDA unavailable; nvidia-smi unavailable"],
+  "decision_rule": "Do not infer PASS or FAIL without execution; retain registry status UNTESTED and skip to next P0 candidate."
+}
