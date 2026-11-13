@@ -767,3 +767,6 @@ MA-945 remains UNTESTED: official code has no trained checkpoint or video data; 
 
 
 MA-946 remains UNTESTED: no native S-NVRC source/checkpoint/prefix bitstream/video or CUDA for equal-rate RD/decoder FLOPs. See `ma-946-snvrc-prefix-view-mirror/EXECUTION_BLOCKER.md`. Skip P1 MA-947; next P0 MA-948.
+
+
+MA-948 remains UNTESTED: no multi-scene cut dataset or native adaptive INR checkpoint; CUDA unavailable. Bunny temporal windows were not mislabeled as cuts. See `ma-948-video-scene-cut-private-birth/EXECUTION_BLOCKER.md`. Skip P1 MA-949; next P0 MA-950.
