@@ -99,7 +99,7 @@ def learn_dev(seed,width):
     for _ in range(4):
       z=rng.normal(size=2); c=theta+u@z
       xc,yc=dataset(rng,c,8,width); xv,yv=dataset(rng,c,20,width)
-      m=fit(xc@basis,yc); vals.append(measure(mean+basis@m,xv,yv)[2])
+      m=fit(xc@basis,yc-xc@mean); vals.append(measure(mean+basis@m,xv,yv)[2])
     return mean,basis,float(np.mean(vals))
 
 def main():
