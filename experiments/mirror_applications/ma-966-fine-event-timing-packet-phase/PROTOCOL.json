@@ -1,0 +1,49 @@
+{
+  "experiment_id": "MA-966",
+  "title": "Fine event timing under shared Mirror phase views",
+  "status": "SCREENING",
+  "protocol_frozen": true,
+  "amendment": "Initial frozen CPU screen; use actual D1 Vernier acquisition and a compact event Transformer adapter. This does not reproduce the paper's MNIST-pretrained encoder.",
+  "scope": "Test whether per-window temporal phase coordinates add useful shared-encoder functionality on held-out Vernier offsets while retaining exact timestamp access; do not infer neural-state reuse or broad capacity.",
+  "base_commit": "e501275e6",
+  "prior_art": {
+    "PA285": "Assa et al., Temporal coding enables hyperacuity in event-based vision, Nature Communications 17, 9951 (2026), DOI 10.1038/s41467-026-76878-6.",
+    "official_code": "https://github.com/ahissar-lab/event-based-hyperacuity/tree/c2b75060e1bb0f1334ca37da23b672483aae9e37",
+    "official_dataset": "https://doi.org/10.5281/zenodo.20973756 (resolved version record 20973757)"
+  },
+  "hypothesis": "A shared event encoder with one small phase coordinate per temporal window will improve sign decoding on unseen Vernier offsets over the same shared encoder without per-window codes, while preserving exact timestamp features and using substantially fewer serialized bytes than four independent encoders.",
+  "data": {
+    "dataset": "D1 Vernier event trials from Event-Based Tiny Images, Zenodo record 20973757, datasets/ebtMNIST-D1/Vernier/events.pkl and labels.pkl",
+    "windows": {"starts_ms": [80, 100, 120, 140], "events_per_window": 48, "selection": "first 48 chronological events at or after each start, matching native start-time selection; do not shuffle events"},
+    "train_labels": [13, 14, 26, 27],
+    "development_labels": [15, 25],
+    "fresh_labels": [16, 17, 18, 19, 21, 22, 23, 24],
+    "label_rule": "sign(label-20); report each absolute offset separately",
+    "split_integrity": "Each trial stays whole; its four windows are never split across train/dev/audit. Three optimizer seeds are repeated fits on one acquisition, not independent data worlds."
+  },
+  "controls": [
+    "shared exact-time event encoder",
+    "shared encoder plus official-style fixed periodic sin/cos time features (period 128 ms)",
+    "shared encoder plus learned per-window phase coordinate m rotating the periodic sin/cos pair (period 128 ms)",
+    "shared encoder plus native per-window time-offset before the same periodic sin/cos encoding (strong exact-affine control)",
+    "four independent event encoders, one per temporal window",
+    "shared phase-only encoding with the raw timestamp channel removed (timing-loss ablation)",
+    "shared exact-time model with timestamp jitter sigma 0.25, 0.5, 1, 2 ms at audit"
+  ],
+  "model": {
+    "architecture": "small pre-norm Transformer encoder: input linear, d_model=32, 1 layer, 4 heads, feedforward=64, mean token pooling, binary sign head",
+    "normalization": "official D1 Vernier input scaling: timestamp ms centered at 110 and scaled by 0.1; x centered at 35; y centered at 26; polarity unchanged",
+    "training": "AdamW, batch 64, maximum 30 epochs, early stop by development accuracy with patience 6; same examples and seed per condition",
+    "seeds": {"development": [96601], "fresh": [96611, 96613, 96617]},
+    "device": "CPU"
+  },
+  "metrics": ["per-offset sign accuracy", "macro accuracy over absolute offsets 1..4", "actual serialized model payload bytes including m/config/metadata", "optimizer updates", "encoder token presentations", "isolated wall time", "CPU inference examples/s", "timestamp audit and jitter response"],
+  "storage_contract": {
+    "authority": "actual serialized inference payload bytes",
+    "format": "torch.save state dict plus JSON metadata for every method",
+    "paid_objects": ["all encoder/readout tensors", "all per-window phase/time-offset coordinates", "condition/window metadata", "serialization metadata"]
+  },
+  "success_gate": "Mirror phase is within 2 percentage points of independent encoders on fresh macro sign accuracy, improves by at least 2 points over shared exact-time, uses <=80% of independent payload bytes, and beats the equal-byte native per-window affine/periodic control by >=2 points without >10% added inference wall time.",
+  "failure_gate": "The Mirror phase function is exactly represented by the native per-window phase/time-offset control at equal bytes, or it misses any preregistered fresh quality/byte gate. Exact mathematical/native alias is a FAIL for Mirror-specific value even if shared conditioning is useful.",
+  "boundaries": ["No MNIST-pretrained PointTransformer checkpoint is used; this is a small from-scratch mechanism screen, not a reproduction of published Vernier hyperacuity results.", "No energy claim; CPU time and token presentations only.", "Phase features supplement exact timestamp input except in the declared phase-only ablation.", "The independent encoders are a quality upper control; their summed compute is reported.", "Fixed phase rotation is mathematically an ordinary time offset in sin/cos coordinates and must not be called a Mirror-specific gain if matched."]
+}

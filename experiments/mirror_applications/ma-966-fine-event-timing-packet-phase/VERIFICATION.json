@@ -1,0 +1,42 @@
+{
+  "experiment_id": "MA-966",
+  "commit": "pending",
+  "tests": {
+    "command": "python experiments/mirror_applications/ma-966-fine-event-timing-packet-phase/tests/verify_result.py",
+    "passed": 7,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "payload_authority": "torch.save state dict + metadata byte length; fresh scoring used reloaded state"
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0,
+    "notes": [
+      "dev state reload reproduced selected accuracy within 3e-8",
+      "Mirror phase and native time-offset fresh predictions matched exactly for all 3 seeds"
+    ]
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Three optimizer seeds come from one D1 acquisition and are not independent data worlds.",
+    "No MNIST-pretrained PointTransformer checkpoint; no reproduction claim.",
+    "Exact phase/time-offset alias audit max logit error 0.0.",
+    "Data hashes and source versions are in source/DATA_PROVENANCE.json."
+  ],
+  "split_counts": {
+    "train_trials": 202,
+    "development_trials": 101,
+    "fresh_trials": 405,
+    "windows_per_trial": 4,
+    "events_per_window": 48
+  },
+  "fresh_seeds": [
+    96611,
+    96613,
+    96617
+  ],
+  "result_status": "FAIL for preregistered Mirror-specific screen"
+}

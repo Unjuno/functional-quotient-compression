@@ -6,11 +6,11 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- Claim ledger entries: **418**
-- P0: **630** (346 FAIL; 52 PROMISING; 225 UNTESTED; 6 NOT ESTABLISHED; 1 SCREENING)
+- Claim ledger entries: **424**
+- P0: **630** (347 FAIL; 52 PROMISING; 224 UNTESTED; 6 NOT ESTABLISHED; 1 SCREENING)
 - P1: **422** (17 completed; 405 UNTESTED)
 - P2: **103** (103 UNTESTED)
-- Current MA statuses: **354 FAIL, 6 NOT ESTABLISHED, 61 PROMISING, 1 SCREENING, 733 UNTESTED**
+- Current MA statuses: **355 FAIL, 6 NOT ESTABLISHED, 61 PROMISING, 1 SCREENING, 732 UNTESTED**
 - 47 baseline experiment directories remain present; verified external outcomes are linked to their dedicated branches in the registry and claim ledger.
 - New research: MA-876..935 (60 candidates), PA236..PA265 (30 primary sources). See the current Next candidate section for the live queue.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. see the current Next candidate section.
@@ -446,3 +446,5 @@ MA-963 remains UNTESTED: bounded source search found no official TACOS repositor
 MA-964 scoped fixed-core LIF oracle SVD screen FAIL: structured rank1 reproduced traces exactly but saved only 14.6% actual bytes, below gate; shared parameters are 220 B smaller at 96.98% agreement. Generic rank1/rank2 reached 91.5%/93.2% spike agreement. Mirror exactly aliases native SVD. No trained or energy claim. See `ma-964-lif-tau-threshold-factor/RESULTS.md`. Next P0 MA-965.
 
 MA-965 remains UNTESTED (NOT ESTABLISHED / deferred): official EAS-SNN source exists, but no Gen1 data/checkpoint is locally available and CUDA/GPU is absent. No synthetic surrogate was substituted for the registered detection/mAP hypothesis. See `ma-965-eas-snn-event-sampler-mirror/EXECUTION_BLOCKER.md`. Skip this full experiment and advance to P0 MA-966 fine event timing / packet phase.
+
+MA-966 scoped real-data D1 Vernier CPU screen FAIL: shared Mirror phase averaged 82.08% sign accuracy on unseen offsets 1–4; fixed periodic features averaged 83.14%, raw time 81.93%, and four independent encoders 83.56%. Mirror used 42,346 B vs 166,923 B independent but was 573 B larger than the plain shared raw-time model. Mirror phase and native per-window time offset had identical fresh predictions and 0.0 max logit difference. No pretrained PointTransformer or energy claim. See `ma-966-fine-event-timing-packet-phase/RESULTS.md`. Skip P1 MA-967; next P0 MA-968 spiking logical-MoE threshold specialists.
