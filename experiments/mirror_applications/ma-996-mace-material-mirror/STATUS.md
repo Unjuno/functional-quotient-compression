@@ -3,11 +3,11 @@
 - Status: FAIL (scoped synthetic screen; official MACE-MP result not established)
 - Branch: `research/ma-996-mace-material-mirror-20261113`
 - Base commit: `156d437db`
-- Last verified commit: pending
+- Last verified commit: `1c9e903e778b44d7d9d2f34b02b81bf2128184c8`
 - Development complete: yes (seed 99601; selected width 0.65, rank 2)
 - Fresh/audit opened: yes (99611, 99613, 99617)
-- Results committed: pending
-- Verification committed: pending
+- Results committed: yes
+- Verification committed: yes
 
 ## Next action
 

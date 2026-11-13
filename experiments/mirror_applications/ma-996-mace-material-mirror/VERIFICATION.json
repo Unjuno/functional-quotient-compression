@@ -1,9 +1,22 @@
 {
   "experiment_id": "MA-996",
-  "commit": "pending",
-  "tests": {"command": "python experiments/mirror_applications/ma-996-mace-material-mirror/source/run_screen.py verify", "passed": 3, "failed": 0},
-  "serialization": {"roundtrip_checked": true, "byte_exact": true},
-  "metric_replay": {"checked": true, "max_difference": 0.0},
+  "commit": "1c9e903e778b44d7d9d2f34b02b81bf2128184c8",
+  "tests": {
+    "command": "python experiments/mirror_applications/ma-996-mace-material-mirror/source/run_screen.py verify",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
   "fresh_split_integrity_checked": true,
-  "notes": ["All three preregistered fresh worlds passed exact serialization reload, finite-difference force-gradient residual <1e-7, and rotation-equivariance residual <1e-10.", "The result is a scoped synthetic mechanism screen, not official MACE-MP evidence."]
+  "notes": [
+    "All three preregistered fresh worlds passed exact serialization reload, finite-difference force-gradient residual <1e-7, and rotation-equivariance residual <1e-10.",
+    "The result is a scoped synthetic mechanism screen, not official MACE-MP evidence."
+  ]
 }
