@@ -1,9 +1,22 @@
 {
   "experiment_id": "MA-1001",
-  "commit": "pending",
-  "tests": {"command": "python experiments/mirror_applications/ma-1001-md-view-stability/source/run_md.py verify", "passed": 3, "failed": 0},
-  "serialization": {"roundtrip_checked": true, "byte_exact": true},
-  "metric_replay": {"checked": true, "max_difference": 0.0},
+  "commit": "1870a60aaf7d59b3e94ee56be8e313ab22cdf54e",
+  "tests": {
+    "command": "python experiments/mirror_applications/ma-1001-md-view-stability/source/run_md.py verify",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
   "fresh_split_integrity_checked": true,
-  "notes": ["All three fresh worlds completed 3000-step NVE trajectories; serialized replay exactly matches drift and Mirror/native path.", "Synthetic LJ only; no MatterSim/MACE or material-dynamics result."]
+  "notes": [
+    "All three fresh worlds completed 3000-step NVE trajectories; serialized replay exactly matches drift and Mirror/native path.",
+    "Synthetic LJ only; no MatterSim/MACE or material-dynamics result."
+  ]
 }
