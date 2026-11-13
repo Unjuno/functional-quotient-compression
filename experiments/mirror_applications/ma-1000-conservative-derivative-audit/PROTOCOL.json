@@ -1,0 +1,20 @@
+{
+  "experiment_id": "MA-1000",
+  "title": "Conservative atomistic derivative audit of energy-layer Mirror perturbations",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM",
+  "base_commit": "10938908f",
+  "hypothesis": "A low-dimensional Mirror code inserted only into a scalar invariant energy model yields force fields that are exactly conservative and rotation equivariant when forces are derived as negative energy gradients; a separately perturbed force head does not.",
+  "physical_object": "Shared scalar radial energy function",
+  "mirror_coordinate": "Rank-2 coefficient code inside energy layer",
+  "logical_multiplicity": "Multiple synthetic conservative energy landscapes",
+  "prior_art_refs": ["PA296", "PA298"],
+  "controls": ["shared-only energy", "rank-2 Mirror energy with gradient forces", "native rank-2 coefficient control", "independent full energy coefficient tables", "separately perturbed force-head negative control"],
+  "development": {"worlds_or_seeds": [100001], "selection_metric": "no tuning; verify finite-difference residual and rotation covariance"},
+  "fresh": {"worlds_or_seeds": [100011, 100013, 100017], "locked_before_access": true},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["shared energy coefficients", "Mirror basis", "per-function codes", "full independent coefficients", "metadata"]},
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true},
+  "success_gate": "For both distinct Mirror codes, max finite-difference force-gradient residual <1e-7 and max rotation-equivariance residual <1e-10 in every fresh world; the separate-force-head negative control must exceed the gradient-residual threshold.",
+  "failure_gate": "Gradient or equivariance violation in energy-derived force; or negative control is not detected.",
+  "boundaries": ["Synthetic radial mechanism audit only, not a trained MACE/NequIP result.", "Passing establishes physical consistency of this insertion, not quality, capacity, byte savings, or natural material transfer."]
+}
