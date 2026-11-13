@@ -25,11 +25,6 @@ def sample(rng,t,p,n):
     for _ in range(n):
       pos=config(rng,t,p);e,f=energy_force(pos);xs.append(pos);ys.append((e,f))
     return xs,ys
-def scale_fit(ys):
-    num=den=0.
-    for e,f in ys:
-      e0,f0=energy_force_from_true_geometry_cache
-    return 1.
 def nrmse(a,b):return float(np.sqrt(np.mean((a-b)**2))/(np.std(b)+1e-12))
 def main():
  ap=argparse.ArgumentParser();ap.add_argument('mode',choices=['dev','fresh','verify']);ap.add_argument('--world',type=int);a=ap.parse_args()

@@ -6,11 +6,11 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- Claim ledger entries: **435**
-- P0: **630** (350 FAIL; 52 PROMISING; 221 UNTESTED; 6 NOT ESTABLISHED; 1 SCREENING)
+- Claim ledger entries: **436**
+- P0: **630** (351 FAIL; 52 PROMISING; 220 UNTESTED; 6 NOT ESTABLISHED; 1 SCREENING)
 - P1: **422** (17 completed; 405 UNTESTED)
 - P2: **103** (103 UNTESTED)
-- Current MA statuses: **363 FAIL, 9 NOT ESTABLISHED, 61 PROMISING, 1 SCREENING, 721 UNTESTED**
+- Current MA statuses: **364 FAIL, 9 NOT ESTABLISHED, 61 PROMISING, 1 SCREENING, 720 UNTESTED**
 - 47 baseline experiment directories remain present; verified external outcomes are linked to their dedicated branches in the registry and claim ledger.
 - New research: MA-876..935 (60 candidates), PA236..PA265 (30 primary sources). See the current Next candidate section for the live queue.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. see the current Next candidate section.
@@ -477,4 +477,4 @@ MA-985 small synthetic MU-MISO/WMMSE screen FAIL: rank-2 AP×RIS factor reached 
 
 ## Current sequence handoff — 2026-11-13
 
-Wireless Mirror candidates MA-986..989 are paused for structural redesign; their registry rows remain UNTESTED. MA-981/982 consecutively alias native steering/Type-II controls, and MA-983..985 repeat the native-control alias with embedding, phase-gradient, and product-code controls. See [wireless family diagnostic](../../docs/phase2/WIRELESS_MIRROR_FAMILY_DIAGNOSTIC_2026-11-13.md). MA-990 through MA-993 spatial-audio HRTF candidates are deferred as UNTESTED because the required SONICOM measurements are unavailable in this workspace. MA-996/997 are consecutive scoped synthetic FAILs in atomistic material-code lanes: both preserve conservative forces but exactly alias native low-rank/shared-mask controls and miss the byte gate. MA-998 is paused UNTESTED pending a structurally distinct species/environment insertion. No official MACE-MP/PA300 result. See both RESULTS.md files. Continue at MA-999 (temperature × pressure material Views).
+Wireless Mirror candidates MA-986..989 are paused for structural redesign; their registry rows remain UNTESTED. MA-981/982 consecutively alias native steering/Type-II controls, and MA-983..985 repeat the native-control alias with embedding, phase-gradient, and product-code controls. See [wireless family diagnostic](../../docs/phase2/WIRELESS_MIRROR_FAMILY_DIAGNOSTIC_2026-11-13.md). MA-990 through MA-993 spatial-audio HRTF candidates are deferred as UNTESTED because the required SONICOM measurements are unavailable in this workspace. MA-996/997 are consecutive scoped synthetic FAILs in atomistic material-code lanes: both preserve conservative forces but exactly alias native low-rank/shared-mask controls and miss the byte gate. MA-998 is paused UNTESTED pending a structurally distinct species/environment insertion. No official MACE-MP/PA300 result. See both RESULTS.md files. MA-999 is a scoped synthetic FAIL: same-coordinate LJ potential is invariant across T/P; shared-only is exact and Mirror adds bytes. No MatterSim/NPT claim. See its RESULTS.md. Continue at MA-1000 (conservative atomistic derivative audit).

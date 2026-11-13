@@ -1,20 +1,59 @@
 {
   "experiment_id": "MA-999",
-  "title": "Temperature × pressure MatterSim Mirror factor (synthetic condition-invariance screen)",
-  "status": "SCREENING",
+  "title": "Temperature \u00d7 pressure MatterSim Mirror factor (synthetic condition-invariance screen)",
+  "status": "FAIL",
   "evidence_lane": "MECHANISM/STORAGE",
   "base_commit": "d62e00892",
-  "hypothesis": "A compact T×P code adds useful condition-specific force-law capacity beyond one shared potential and native direct condition scalars, while preserving force consistency and improving actual bytes/quality.",
+  "hypothesis": "A compact T\u00d7P code adds useful condition-specific force-law capacity beyond one shared potential and native direct condition scalars, while preserving force consistency and improving actual bytes/quality.",
   "physical_object": "Shared scalar pair-potential energy law",
   "mirror_coordinate": "Separable temperature and pressure code factors",
   "logical_multiplicity": "Thermodynamic-condition-specific energy/force functions",
-  "prior_art_refs": ["PA299"],
-  "controls": ["shared condition-invariant potential", "native direct 3×3 T/P scalar table", "independent condition-specific scalar fits"],
-  "development": {"worlds_or_seeds": [99901], "selection_metric": "development-only check of separable rank-1 T×P code against native condition table"},
-  "fresh": {"worlds_or_seeds": [99911, 99913, 99917], "locked_before_access": true},
-  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["shared potential parameters", "temperature values", "pressure values", "Mirror factors or native table", "metadata"]},
-  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true},
+  "prior_art_refs": [
+    "PA299"
+  ],
+  "controls": [
+    "shared condition-invariant potential",
+    "native direct 3\u00d73 T/P scalar table",
+    "independent condition-specific scalar fits"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      99901
+    ],
+    "selection_metric": "development-only check of separable rank-1 T\u00d7P code against native condition table",
+    "selected_rank": 1
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      99911,
+      99913,
+      99917
+    ],
+    "locked_before_access": true,
+    "configuration_frozen_at_commit": "508587108"
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "shared potential parameters",
+      "temperature values",
+      "pressure values",
+      "Mirror factors or native table",
+      "metadata"
+    ]
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true
+  },
   "success_gate": "On condition-shifted heldout ensembles, Mirror improves combined energy/force error at >=25% fewer actual bytes than direct native T/P conditioning, with conservative force and rotation equivariance checks passing.",
   "failure_gate": "Shared condition-invariant potential is sufficient, Mirror exactly aliases native condition controls without improving the Pareto frontier, or physical consistency fails.",
-  "boundaries": ["Synthetic Lennard-Jones condition-sampling screen only; not MatterSim, not PA299 reproduction, and not an NPT benchmark.", "T/P change sampled geometry distribution; the physical pair potential is held fixed by construction.", "This screen tests whether condition codes are needed to change the force law, not MatterSim's ensemble accuracy."]
+  "boundaries": [
+    "Synthetic Lennard-Jones condition-sampling screen only; not MatterSim, not PA299 reproduction, and not an NPT benchmark.",
+    "T/P change sampled geometry distribution; the physical pair potential is held fixed by construction.",
+    "This screen tests whether condition codes are needed to change the force law, not MatterSim's ensemble accuracy."
+  ],
+  "decision": "Scoped synthetic FAIL: shared condition-invariant potential is exact and Mirror codes add bytes/compute."
 }

@@ -1,3 +1,7 @@
+## Current handoff — 2026-11-13, MA-999
+
+MA-999 completed as a scoped synthetic FAIL: a shared analytic LJ potential predicts all T/P-shifted geometry samples exactly; Mirror factors increase actual payload from 526 B to 1,618 B. Force consistency passed. The sample box scaling is not an NPT simulation, and no MatterSim result is claimed. See `ma-999-temperature-pressure-material-mirror/RESULTS.md`. Continue to MA-1000 conservative derivative audit.
+
 ## Current handoff — 2026-11-13, MA-997
 
 MA-997 completed as a scoped synthetic FAIL: shared six-index sparse Mirror codes exactly alias the matched native shared-mask table at 1,732 B; the saving versus independent sparse masks is only 2.0%, below the frozen 25% gate. Force consistency and serialized replay passed in all three fresh worlds. MA-996/997 are consecutive atomistic material-code failures against native parameterizations, so pause MA-998 UNTESTED pending structural redesign. No PA300/MACE claim. See `ma-997-sparse-support-mirror/RESULTS.md`. Advance to distinct-family MA-999.
