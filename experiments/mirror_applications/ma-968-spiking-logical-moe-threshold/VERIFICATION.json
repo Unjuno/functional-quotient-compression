@@ -1,0 +1,35 @@
+{
+  "experiment_id": "MA-968",
+  "commit": "pending",
+  "tests": {
+    "command": "python experiments/mirror_applications/ma-968-spiking-logical-moe-threshold/tests/verify_result.py",
+    "passed": 6,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "authority": "torch.save state dict, identity router mapping, and metadata bytes"
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0,
+    "notes": [
+      "fresh evaluation used reloaded inference state",
+      "Mirror/direct-threshold logits alias exactly after copying decoded threshold vector and shared synapses"
+    ]
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "30 fresh rows: 2 task families x 3 worlds x 5 methods.",
+    "Development world 96801 is retained separately.",
+    "Role identity is known to all methods; these are synthetic one-neuron tasks, not natural SNN evidence.",
+    "Spike count and MAC values are proxies, not hardware energy."
+  ],
+  "fresh_world_seeds": [
+    96811,
+    96813,
+    96817
+  ],
+  "result_status": "FAIL for preregistered Mirror-specific and byte gates"
+}

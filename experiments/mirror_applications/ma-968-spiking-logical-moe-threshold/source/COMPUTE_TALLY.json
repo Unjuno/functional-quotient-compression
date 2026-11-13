@@ -1,0 +1,12 @@
+{
+  "examples_per_role": {"train": 4096, "development": 1024, "fresh": 2048},
+  "roles": 8,
+  "inference_per_example": {
+    "shared": {"active_synapse_macs": 16, "threshold_lookups": 1, "extra_scalar_ops": 0},
+    "direct_threshold": {"active_synapse_macs": 16, "threshold_lookups": 1, "extra_scalar_ops": 0},
+    "mirror_threshold": {"active_synapse_macs": 16, "threshold_lookups": 1, "extra_scalar_ops": 2},
+    "rank2_private_synapse": {"active_synapse_macs": 80, "threshold_lookups": 1, "extra_scalar_ops": 0},
+    "independent_moe_top1": {"active_synapse_macs": 16, "threshold_lookups": 1, "router_comparisons": 0, "router": "known identity role mapping lookup"}
+  },
+  "energy_boundary": "No joule or hardware power measurement; spike count/MACs are proxies only."
+}

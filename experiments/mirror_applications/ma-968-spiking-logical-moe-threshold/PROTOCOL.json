@@ -1,0 +1,41 @@
+{
+  "experiment_id": "MA-968",
+  "title": "One spiking expert with logical threshold specialists",
+  "status": "SCREENING",
+  "protocol_frozen": true,
+  "base_commit": "e585be3b3",
+  "scope": "Synthetic CPU mechanism screen for whether threshold views can share one spiking synapse pool and where private synapse state becomes necessary.",
+  "hypothesis": "A shared spiking synapse vector plus a small task-role threshold coordinate will recover independent-expert quality on tasks sharing synaptic structure at lower actual payload bytes; on generic task-specific synapses, threshold-only views will fail and rank-limited private synapse residuals will reveal the sharing boundary.",
+  "teacher_families": {
+    "shared_synapse_threshold": "Eight binary tasks share one teacher synaptic vector and vary only task threshold.",
+    "generic_task_synapses": "Eight binary tasks use independently sampled teacher synaptic vectors and thresholds."
+  },
+  "data": {
+    "input": "iid standard-normal 16D observations with explicit observed task role id",
+    "tasks": 8,
+    "train_per_task": 4096,
+    "development_per_task": 1024,
+    "fresh_test_per_task": 2048,
+    "world_seeds": {"development": [96801], "fresh": [96811, 96813, 96817]},
+    "teacher_labels": "hard one-neuron threshold spike sign; role identity available to every method",
+    "split": "independent examples per role and world; fresh worlds use new teacher weights and samples"
+  },
+  "controls": [
+    "one physical synapse vector and one shared threshold",
+    "one shared synapse vector plus ordinary direct per-role threshold table",
+    "one shared synapse vector plus Mirror base/scale/role-coordinate threshold generator",
+    "shared synapse plus rank-2 role-specific synapse residual and direct threshold table",
+    "eight independent routed SNN experts with one active expert per role"
+  ],
+  "model": {
+    "physical_object": "one 16-input synapse vector feeding a hard-threshold single-step spiking neuron",
+    "training": "AdamW with sigmoid surrogate logits at train time; hard spike sign at inference; up to 300 epochs, early stopping on development accuracy with patience 15",
+    "device": "CPU",
+    "router": "role id is observable and identical across methods; expert route is deterministic top-1 identity lookup, whose mapping is charged in serialized metadata"
+  },
+  "metrics": ["fresh per-role accuracy", "macro accuracy", "actual serialized inference payload bytes", "active synapse MAC proxy", "threshold lookups", "spike rate", "optimizer updates", "wall time"],
+  "storage": {"authority": "actual torch.save inference payload bytes", "paid_objects": ["all synapses", "all threshold parameters or Mirror base/scale/role codes", "router mapping", "metadata"]},
+  "success_gate": "On shared_synapse_threshold fresh worlds, Mirror is within 1 percentage point of independent, uses <=80% of independent bytes, and improves >=2 points over the ordinary direct threshold-bank control at comparable active MACs. Generic family is reported separately and must state where private synapses restore quality.",
+  "failure_gate": "Mirror misses any quality/byte gate or exactly aliases the direct threshold bank without a better quality/storage/compute frontier.",
+  "boundaries": ["Synthetic one-neuron threshold task only; no natural SNN, event dataset, or MoE benchmark claim.", "Spike count is a simulator output, not hardware energy.", "Three fresh worlds are required for this scoped screen.", "Role identity is supplied to all controls; no task inference/generalization claim.", "Rank-2 residual is a simple private-state control, not a full search over ranks."]
+}
