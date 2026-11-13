@@ -1,0 +1,94 @@
+{
+  "experiment_id": "MA-962",
+  "title": "Task \u00d7 time-step Mirror normalization View",
+  "status": "FAIL",
+  "protocol_frozen": true,
+  "amendment": "03: development-only exclusion of generic-random task bank after native full TEBN failed feasibility gate; fresh screen is structured low-rank bank only",
+  "scope": "Synthetic event-stream screen using a custom PyTorch hard-spike/triangular-surrogate LIF; not a TEBN paper reproduction or hardware energy result.",
+  "base_commit": "77b6ae425",
+  "prior_art_refs": [
+    "PA283"
+  ],
+  "hypothesis": "A shared low-rank task\u00d7time normalization code can preserve full TEBN quality with less actual serialized inference state when task/time gain matrices have low rank; generic full-rank task signatures should reveal the boundary. Any rank-r Mirror advantage over the identical native rank-r factorization is zero by construction.",
+  "physical_object": "Fixed shared 8-channel-to-2-cell encoder, shared batch normalization, and two LIF neurons over 16 event bins.",
+  "mirror_coordinate": "G[q,t] = U[q,:] V[:,t], with task code U and shared temporal bases V; rank-4 primary condition.",
+  "logical_multiplicity": "Eight task-specific temporal event classifiers over shared synapses; task IDs are supplied to all task-conditioned methods and charged in payload metadata.",
+  "controls": [
+    "one shared native TEBN time gain vector",
+    "full independent native task\u00d7time TEBN gain table",
+    "task-scalar \u00d7 time rank-1 factorization",
+    "rank-4 Mirror factorization",
+    "identical native rank-4 temporal factorization alias control"
+  ],
+  "task_families": {
+    "structured_rank3": "K[q,t] = 0.35 + 0.65*cos(2*pi*(q/8 - t/16)); signed, bounded by 1 and rank at most 3.",
+    "generic_random": "Fresh independent K[q,t] sampled uniformly from [-1,1], then normalized by max absolute value.",
+    "generic_random_status": "NOT ESTABLISHED at development: native full table reached 46.5% after 1,000 updates and 47.3% after 5,000, below the preregistered 90% native gate; no fresh random-bank evaluation will be used to judge Mirror."
+  },
+  "data": "For balanced y\u2208{-1,+1}, four positive event replicas have rate .5+.4*y*K[q,t] and four negative replicas rate .5-.4*y*K[q,t].",
+  "development": {
+    "worlds_or_seeds": [
+      96201
+    ],
+    "purpose": "Confirm full task\u00d7time TEBN reaches >=90% and validate training/runtime only; no fresh selection."
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      96211,
+      96213,
+      96217
+    ],
+    "locked_before_access": true,
+    "tasks": 8,
+    "timesteps": 16,
+    "train_examples_per_task": 256,
+    "test_examples_per_task": 512,
+    "task_families": [
+      "structured_rank3"
+    ]
+  },
+  "training": {
+    "updates": 1000,
+    "optimizer": "Adam",
+    "learning_rate": 0.02,
+    "batch_size": 128,
+    "threads": 1,
+    "encoder": "fixed W=[+1/4 x4,-1/4 x4] and its negative",
+    "lif": "u=0.9*u+g[q,t]*BN(Wx); hard spike at 1 with triangular surrogate gradient; subtractive reset",
+    "batch_norm": "shared running-statistics BN over batch\u00d7time; affine scale/shift fixed (not task/time-dependent)"
+  },
+  "storage": {
+    "authority": "actual custom serialized inference payload bytes",
+    "format": "one flattened typed tensor stream plus JSON manifest; same serializer for all conditions",
+    "paid_objects": [
+      "fixed encoder",
+      "BN affine and running state",
+      "gain table or factors",
+      "task IDs and shape/mode manifest",
+      "LIF constants"
+    ],
+    "ordinary_alias_verification": "Rank-4 Mirror and native factor state tensors are asserted equal after identical training seeds and batches."
+  },
+  "compute": [
+    "examples and optimizer updates",
+    "training and inference wall time",
+    "per-example LIF neuron updates",
+    "spike counts",
+    "first-correct-spike latency with no-correct-spike censored at 16",
+    "factor-code gain reconstruction operations"
+  ],
+  "success_gate": "For each fresh world and task family, full TEBN reaches >=90% accuracy; rank-4 Mirror is within 2 percentage points of full on each task, serialized payload is <=80% of full, and spike count/latency regressions are <=10%.",
+  "failure_gate": "Quality, actual-byte, or dynamic-operation gate miss. Native full below 90% means that family is NOT ESTABLISHED, not a Mirror FAIL.",
+  "boundaries": [
+    "No natural event data, TEBN benchmark reproduction, GPU, joules, or hardware efficiency claim.",
+    "Rank-4 Mirror and ordinary rank-4 factorization use identical mathematics; no Mirror-specific gain can be claimed if they match.",
+    "Report structured and random banks separately; task combinations do not imply independent capacity.",
+    "The compact serializer is the declared inference format and all metadata/state are paid."
+  ],
+  "development_amendments": [
+    "Amendment 01 had learnable BN affine values; native full table failed development at chance with zero spikes, while rank-4 factors learned the structured bank.",
+    "Development inspection showed shared BN beta became strongly negative. Amendment 02 freezes the shared BN affine values to isolate task/time normalization gain; fresh seeds remain sealed.",
+    "Amendment 03 freezes fresh evaluation to structured_rank3 after generic_random native full table failed the development feasibility gate at both 1,000 and 5,000 updates. The random bank is reported NOT ESTABLISHED, not FAIL."
+  ],
+  "result_report": "RESULTS.md"
+}

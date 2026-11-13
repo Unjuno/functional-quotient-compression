@@ -782,3 +782,6 @@ MA-952 scoped synthetic e2cnn C4 screen FAIL: learned task×irrep code and ordin
 
 
 MA-961 scoped synthetic scalar LIF threshold screen FAIL: affine task-index code averaged 97.2% vs FP32 100% and used 2,581 B vs 2,101 B; direct int4 averaged 98.9% and also exceeded FP32 bytes. Private residual restored labels at 2,809 B. See `ma-961-fixed-synapse-spike-threshold/RESULTS.md`. Next P0 MA-962 task×time-step normalization.
+
+
+MA-962 scoped custom CPU LIF screen FAIL on structured rank-3 signatures: rank-4 factors retained accuracy but saved only 4.2% actual bytes and increased spike count/latency; shared TEBN already achieved 99.94%. Exact ordinary rank-4 factorization alias. Generic-random bank NOT ESTABLISHED because native full control failed development feasibility. See `ma-962-task-time-tebn-view/RESULTS.md`. Next P0 MA-963 TACOS neuromodulator compression.
