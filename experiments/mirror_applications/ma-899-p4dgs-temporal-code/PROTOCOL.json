@@ -1,0 +1,68 @@
+{
+  "experiment_id": "MA-899",
+  "title": "P-4DGS predictive residual as Mirror temporal code",
+  "status": "UNTESTED",
+  "protocol_frozen": false,
+  "evidence_lane": "NEURAL_GRAPHICS/TEMPORAL_COMPRESSION/RATE_DISTORTION/RANDOM_ACCESS/RUNTIME",
+  "hypothesis": "A compact time-block Mirror coordinate over one shared spatio-temporal anchor predictor can recover useful logical frame residual functions at fewer actual serialized bits than independent frame corrections while matching or improving the native predictive rate-distortion and random-access/frame-throughput frontier.",
+  "prior_art_refs": [
+    "PA251"
+  ],
+  "physical_object": "P-4DGS shared 3D anchor-based spatial-temporal predictor and deformation representation",
+  "mirror_coordinate": "Time-block Mirror prediction residual coordinate m",
+  "logical_multiplicity": "Distinct logical temporal frame corrections decoded from shared physical predictor state",
+  "controls_required": [
+    "Official native P-4DGS predictive anchor/residual plus adaptive quantization/context entropy coding",
+    "Shared predictor with ordinary low-rank/predictive residual coordinate",
+    "Shared predictor plus proposed Mirror block coordinate",
+    "Independent per-time-block residual state upper control"
+  ],
+  "development": {
+    "scene_split": "No data available; no split opened",
+    "worlds_or_seeds": [],
+    "selection_metric": "Frozen in advance before any future amendment"
+  },
+  "fresh": {
+    "heldout_scene_time_view_cells": true,
+    "worlds_or_seeds": [],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual serialized coded inference bitstream bytes",
+    "paid_objects": [
+      "predictor/deformation weights",
+      "anchor state and indices",
+      "quantization scales/codebooks",
+      "entropy model/context state",
+      "Mirror coordinates",
+      "routers/indices",
+      "headers and reconstruction metadata"
+    ]
+  },
+  "compute": {
+    "report": [
+      "coding/decoding operations or MAC proxy",
+      "fit examples and optimizer updates",
+      "encoding wall clock",
+      "isolated decode and random-access latency",
+      "measured render frame FPS",
+      "peak VRAM"
+    ]
+  },
+  "quality": {
+    "metrics": [
+      "PSNR",
+      "SSIM",
+      "LPIPS",
+      "temporal consistency",
+      "rate-distortion curve"
+    ],
+    "success_gate": "Not frozen; no audit tuning allowed. Requires matched native/ordinary controls and fresh held-out scenes before evaluation."
+  },
+  "blocker": "Bounded official-source search did not identify P-4DGS code; no official implementation or D-NeRF/NeRF-DS assets are local. Current runtime is CPU-only; registered render/FPS frontier cannot be assessed.",
+  "boundaries": [
+    "Feasibility review only; no codec/model trained or evaluated.",
+    "Do not substitute a toy residual codec and claim P-4DGS evidence.",
+    "Any proxy-screen requires a separately scoped protocol amendment and cannot establish registered rendering/rate-distortion claims."
+  ]
+}

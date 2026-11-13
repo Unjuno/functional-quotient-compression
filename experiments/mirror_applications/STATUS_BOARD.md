@@ -312,3 +312,6 @@ MA-897 execution review: official ADC-GS (`H-Huang774/ADC-GS`, `5501b8a163b564a5
 
 
 MA-898 execution review: official CC-4DGS (`KyungdaePark/CC-4DGS`, `1ba6c8f2bf76352e1ce444560996e7ff325cb412`) requires CUDA 11.8 rasterizer/simple-knn and held-out N3DV/Technicolor scenes for its registered PSNR/FPS comparison. Its pure-PyTorch CDF component passes a reduced random-weight CPU smoke (finite 16×12 output), but this is not trained-model or Mirror evidence; a pretrained-checkpoint function/bytes screen would need a separate amendment. MA-898 remains UNTESTED, not FAIL. See `experiments/mirror_applications/ma-898-cc4dgs-role-view/EXECUTION_BLOCKER.md`. Next candidate: MA-899.
+
+
+MA-899 execution review: PA251 confirms spatial-temporal anchor prediction, adaptive quantization, and context entropy coding evaluated on D-NeRF/NeRF-DS splits. A bounded GitHub/public-code search for the exact title and arXiv ID did not identify official source; no implementation or scene data are present locally. The runtime is CPU-only/no CUDA, so the registered bitstream rate-distortion/random-access/render FPS frontier was not run. MA-899 remains UNTESTED, not FAIL. See `experiments/mirror_applications/ma-899-p4dgs-temporal-code/EXECUTION_BLOCKER.md`. Next candidate: MA-900 (GenSplatCodec structural × appearance Mirror code).

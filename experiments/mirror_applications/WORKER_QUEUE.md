@@ -663,3 +663,6 @@ MA-881 completed FAIL. Three fresh Pythia-70M→SmolLM2-135M worlds: shared rank
 
 
 MA-882 completed FAIL. Fixed top-2 layer matching beat nearest relative depth in all six fresh pair×seed conditions. Rank-256 PCA and CP rank 8 both lost quality; CP saved 64.2% actual bytes vs full selected maps but NLL was +13.06–19.76 nat vs full and +14.46–19.82 vs native. Full map transfer itself exceeded native by >1 nat in four conditions. Payload decode and NLL replay verification passed. Ordinary PCA/CP aliases; no Mirror-specific gain. See `experiments/mirror_applications/ma-882-layer-pair-alignment/RESULTS.md` on `research/ma-882-layer-pair-alignment-20261112`. Next P0: MA-883 — cheap shared linear cache transfer plus sparse private nonlinear repair for high-error pairs.
+
+
+MA-899 remains UNTESTED after feasibility review: bounded search did not identify official P-4DGS code; there are no local D-NeRF/NeRF-DS assets and the registered render/FPS frontier needs CUDA. No codec/model run or metrics were produced. See `ma-899-p4dgs-temporal-code/EXECUTION_BLOCKER.md`. Skip this blocked candidate and continue with MA-900, GenSplatCodec structural × appearance Mirror code.
