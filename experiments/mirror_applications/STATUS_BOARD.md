@@ -408,3 +408,6 @@ MA-943 remains **UNTESTED**: only a third-party DCVC-RT repository was found; it
 
 
 MA-944 remains **UNTESTED**: official DCMVC code/checkpoint/bitstreams/test video and CUDA are unavailable; the only repository hit was unrelated DGMVC. Native flow-orientation/context-compensation comparison cannot run. See `ma-944-dcmvc-reference-context-view/EXECUTION_BLOCKER.md`. Next P0 MA-945 CoANeRV shared-coordinate decoder.
+
+
+MA-945 remains **UNTESTED**: official CoANeRV source exists but has no trained checkpoints or video datasets; no CUDA for random-query throughput/peak-memory measurement. See `ma-945-coanerv-shared-coordinate-code/EXECUTION_BLOCKER.md`. Next P0 MA-946 S-NVRC prefix video codec.

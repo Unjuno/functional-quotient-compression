@@ -761,3 +761,6 @@ MA-943 remains UNTESTED: only third-party DCVC-RT source was found; its README r
 
 
 MA-944 remains UNTESTED: no official DCMVC code/checkpoint/bitstreams or CUDA; only GitHub hit was unrelated DGMVC. No matched reference-driven context baseline available. See `ma-944-dcmvc-reference-context-view/EXECUTION_BLOCKER.md`. Next P0 MA-945.
+
+
+MA-945 remains UNTESTED: official code has no trained checkpoint or video data; no CUDA for random-query throughput/memory evaluation. No synthetic proxy used. See `ma-945-coanerv-shared-coordinate-code/EXECUTION_BLOCKER.md`. Next P0 MA-946.

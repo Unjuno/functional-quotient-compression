@@ -1,0 +1,1 @@
+No trained-model tests or rate-distortion evaluation were run. Required CoANeRV checkpoint, video dataset and CUDA are absent.
