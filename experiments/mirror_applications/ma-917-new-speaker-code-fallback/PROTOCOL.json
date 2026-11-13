@@ -1,0 +1,15 @@
+{
+  "experiment_id": "MA-917",
+  "title": "Few-shot new speaker by Mirror code then private fallback",
+  "status": "UNTESTED",
+  "protocol_frozen": false,
+  "prior_art_refs": ["PA253", "PA254"],
+  "hypothesis": "A small Mirror code serves in-manifold new speakers while a threshold-triggered private adapter handles outliers, improving actual bytes versus quality while retaining old voices.",
+  "required_controls": ["frozen multispeaker generator with Mirror code", "ordinary speaker embedding or generated adapter", "private adapter fallback", "independent fine-tuning upper control"],
+  "development": {"speakers": [], "shots": [], "trigger_threshold": null},
+  "fresh": {"support_query_disjoint": true, "heldout_speakers": true, "seeds": [], "locked_before_access": true},
+  "metrics": ["speaker similarity", "WER/CER", "old-speaker retention", "actual serialized bytes", "adaptation compute", "latency"],
+  "storage_authority": "serialized generator plus each Mirror code, trigger/router, fallback adapter and metadata",
+  "blocker": "No runnable official multispeaker generator/checkpoint or compatible evaluation speaker assets; only LTS100 single-speaker pretraining checkpoint found.",
+  "boundary": "No new-speaker/fallback claims from single-speaker checkpoint or synthetic data."
+}

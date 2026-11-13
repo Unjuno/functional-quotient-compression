@@ -703,3 +703,5 @@ MA-912 remains UNTESTED: StableVC linked page is stale; direct repo contains dem
 MA-914 remains UNTESTED despite 5/5 upstream unit tests: only synthetic shape/checkpoint tests ran, and repository/paper mapping to PA259's separate semantic/acoustic streams is unresolved. No Mirror comparison or codec metrics. MA-915 is P1; continue to MA-916 multi-speaker speaker-adapter-bank storage frontier.
 
 MA-916 remains UNTESTED: the registered matched baseline set and speaker evaluation assets are unavailable, so no adapter-bank frontier was measured. MA-915 is P1; continue to MA-917 few-shot new speaker by Mirror code then private fallback.
+
+MA-917 remains UNTESTED: no runnable multispeaker checkpoint, compatible speaker encoder assets or consent-safe support/query voices; single-speaker LTS100 cannot test new-speaker fallback. See `ma-917-new-speaker-code-fallback/EXECUTION_BLOCKER.md`. MA-918 is P1; continue to the next eligible P0 candidate.

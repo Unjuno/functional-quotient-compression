@@ -1,0 +1,1 @@
+No adaptation test ran because the required multispeaker checkpoint and evaluation assets are absent. Keep support/query voice splits disjoint and freeze the fallback threshold before any future fresh evaluation.
