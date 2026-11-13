@@ -1,0 +1,28 @@
+{
+  "experiment_id": "MA-937",
+  "commit": null,
+  "tests": {
+    "command": "Pinned official HNeRV CPU decode smoke; see source/environment.json",
+    "passed": 1,
+    "failed": 0,
+    "scope": "upstream decode availability only, not MA-937 hypothesis"
+  },
+  "serialization": {
+    "roundtrip_checked": false,
+    "byte_exact": false
+  },
+  "metric_replay": {
+    "checked": false,
+    "max_difference": null
+  },
+  "fresh_split_integrity_checked": false,
+  "environment": {
+    "device": "cpu",
+    "cuda_available": false
+  },
+  "notes": [
+    "Official HNeRV decoder reproduced one finite Bunny frame from supplied checkpoint.",
+    "One video/scene only; no scene\u00d7chunk model experiment or multi-scene quality evaluation.",
+    "UNTESTED disposition."
+  ]
+}

@@ -740,3 +740,6 @@ MA-933 scoped TinyStories joint residual/KV FAIL: rank-8 chart cut connector sta
 
 
 MA-936 remains UNTESTED: no CUDA/NVIDIA GPU, official NerVast implementation/checkpoints/Fisher masks, or video frames; mandatory bitstream RD and decode FPS cannot run. See `ma-936-nervast-mirror-private-chunk/EXECUTION_BLOCKER.md`. Advance to MA-937 (P0); MA-934/935 are P1 and skipped for now.
+
+
+MA-937 remains UNTESTED: official HNeRV decode smoke works on its single 132-frame Bunny scene, but there are no multiple fitted scenes for held-out scene×window tests; NerVast weights are also unavailable. See `ma-937-nervast-scene-chunk-factorization/EXECUTION_BLOCKER.md`. Continue to P0 MA-938.

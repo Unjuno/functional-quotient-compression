@@ -387,3 +387,6 @@ MA-933 scoped TinyStories 1M→8M joint residual/KV screen **FAIL**: shared rank
 
 
 MA-936 remains **UNTESTED**: CUDA/NVIDIA GPU, official NerVast code/checkpoints/Fisher masks and video frames are unavailable, preventing native-mask-matched bitstream/RD/decode-FPS measurement. See `ma-936-nervast-mirror-private-chunk/EXECUTION_BLOCKER.md`. P1 MA-934/935 skipped; next P0 MA-937 HNeRV/NerVast scene×chunk factorization.
+
+
+MA-937 remains **UNTESTED**: official HNeRV CPU smoke works, but upstream supplies only one 132-frame Bunny scene, so held-out scene×window combinations cannot be tested; NerVast native weights are absent. See `ma-937-nervast-scene-chunk-factorization/EXECUTION_BLOCKER.md`. Next P0 MA-938 (NerVast Fisher-guided private-vs-Mirror allocation).
