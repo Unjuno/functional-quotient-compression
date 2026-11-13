@@ -1,0 +1,456 @@
+[
+  {
+    "seed": 96901,
+    "d1_data": {
+      "domain": "D1",
+      "trials": 708,
+      "label_counts": {
+        "13": 51,
+        "14": 51,
+        "15": 51,
+        "16": 51,
+        "17": 51,
+        "18": 51,
+        "19": 51,
+        "21": 51,
+        "22": 50,
+        "23": 50,
+        "24": 50,
+        "25": 50,
+        "26": 50,
+        "27": 50
+      },
+      "events_sha256": "4a8b8b67f5ae0f3c4d3f5f6d35deb8bb5b56bd6db8e0ee9fa73a5c554382dff9",
+      "labels_sha256": "f568c3bfbb719dab88173a65a7a9045520f2105ebe89efbade622465fea2336f",
+      "timestamp_scale": "microseconds to milliseconds, matching official loader",
+      "window_start_ms": 80.0,
+      "window_events": 48
+    },
+    "d2_data": {
+      "domain": "D2",
+      "trials": 708,
+      "label_counts": {
+        "13": 51,
+        "14": 51,
+        "15": 51,
+        "16": 51,
+        "17": 51,
+        "18": 51,
+        "19": 51,
+        "21": 51,
+        "22": 50,
+        "23": 50,
+        "24": 50,
+        "25": 50,
+        "26": 50,
+        "27": 50
+      },
+      "events_sha256": "c1b3558e60db7729c468b4681cdfcb89ce2bf28a320bbe7b594cb7e0308c6443",
+      "labels_sha256": "f568c3bfbb719dab88173a65a7a9045520f2105ebe89efbade622465fea2336f",
+      "timestamp_scale": "microseconds to milliseconds, matching official loader",
+      "window_start_ms": 80.0,
+      "window_events": 48
+    },
+    "d1_split_counts": [
+      420,
+      140,
+      148
+    ],
+    "d2_split_counts": [
+      420,
+      140,
+      148
+    ],
+    "d1_fit": {
+      "updates": 18,
+      "wall_s": 0.537909781007329,
+      "best_dev": 0.5142857142857142
+    },
+    "results": [
+      {
+        "row": {
+          "seed": 96901,
+          "condition": "zero",
+          "k_private": 0,
+          "d1_payload_bytes": 2589,
+          "joint_payload_bytes": 2589,
+          "private_bytes": 0,
+          "d1_fresh_accuracy": 0.5142857142857142,
+          "d2_fresh_accuracy": 0.44285714285714284,
+          "spikes_per_sequence": 10.964285850524902,
+          "active_mac_proxy": 1536,
+          "optimizer_updates": 18,
+          "wall_time_s": 0.537909781007329,
+          "status_note": "real event D1->D2; whole-trial splits; one acquisition"
+        },
+        "d2_adaptation": {
+          "updates": 0,
+          "wall_s": 0.0,
+          "best_dev": null,
+          "mask": []
+        },
+        "mask": [],
+        "payload_sha256": "f7d7dbfe9ff83854b4c199c82e466daf5216d6c31d1c6cf079944129367c6b5b"
+      },
+      {
+        "row": {
+          "seed": 96901,
+          "condition": "direct",
+          "k_private": 0,
+          "d1_payload_bytes": 2589,
+          "joint_payload_bytes": 2841,
+          "private_bytes": 252,
+          "d1_fresh_accuracy": 0.5142857142857142,
+          "d2_fresh_accuracy": 0.5214285714285715,
+          "spikes_per_sequence": 8.642857551574707,
+          "active_mac_proxy": 1536,
+          "optimizer_updates": 44,
+          "wall_time_s": 1.0504807450051885,
+          "status_note": "real event D1->D2; whole-trial splits; one acquisition"
+        },
+        "d2_adaptation": {
+          "updates": 26,
+          "wall_s": 0.5125709639978595,
+          "best_dev": 0.5214285714285715,
+          "mask": []
+        },
+        "mask": [],
+        "payload_sha256": "61eb7b2a4005a5893f3ebe24cb740d9f81fffbf3f010bbd5ae769cf1e0966e13"
+      },
+      {
+        "row": {
+          "seed": 96901,
+          "condition": "mirror",
+          "k_private": 0,
+          "d1_payload_bytes": 2589,
+          "joint_payload_bytes": 3093,
+          "private_bytes": 504,
+          "d1_fresh_accuracy": 0.5142857142857142,
+          "d2_fresh_accuracy": 0.5,
+          "spikes_per_sequence": 8.735713958740234,
+          "active_mac_proxy": 1536,
+          "optimizer_updates": 46,
+          "wall_time_s": 1.1575784260203363,
+          "status_note": "real event D1->D2; whole-trial splits; one acquisition"
+        },
+        "d2_adaptation": {
+          "updates": 28,
+          "wall_s": 0.6196686450130073,
+          "best_dev": 0.5,
+          "mask": []
+        },
+        "mask": [],
+        "payload_sha256": "2b0bb7d75847daba91398f62de474a54164290b21fb33d1a0f6f823a8ab912e3"
+      },
+      {
+        "row": {
+          "seed": 96901,
+          "condition": "sparse",
+          "k_private": 1,
+          "d1_payload_bytes": 2589,
+          "joint_payload_bytes": 3597,
+          "private_bytes": 1008,
+          "d1_fresh_accuracy": 0.5142857142857142,
+          "d2_fresh_accuracy": 0.5357142857142857,
+          "spikes_per_sequence": 8.271428108215332,
+          "active_mac_proxy": 1584,
+          "optimizer_updates": 46,
+          "wall_time_s": 1.3390304290078348,
+          "status_note": "real event D1->D2; whole-trial splits; one acquisition"
+        },
+        "d2_adaptation": {
+          "updates": 28,
+          "wall_s": 0.8011206480005058,
+          "best_dev": 0.5357142857142857,
+          "mask": [
+            7
+          ]
+        },
+        "mask": [
+          7
+        ],
+        "payload_sha256": "7800631e42feed0f89b291295be801b5fb3ec4514aebebc85972e05c417a7a7e"
+      },
+      {
+        "row": {
+          "seed": 96901,
+          "condition": "sparse",
+          "k_private": 2,
+          "d1_payload_bytes": 2589,
+          "joint_payload_bytes": 3597,
+          "private_bytes": 1008,
+          "d1_fresh_accuracy": 0.5142857142857142,
+          "d2_fresh_accuracy": 0.5214285714285715,
+          "spikes_per_sequence": 8.635714530944824,
+          "active_mac_proxy": 1632,
+          "optimizer_updates": 36,
+          "wall_time_s": 1.079561113001546,
+          "status_note": "real event D1->D2; whole-trial splits; one acquisition"
+        },
+        "d2_adaptation": {
+          "updates": 18,
+          "wall_s": 0.5416513319942169,
+          "best_dev": 0.5214285714285715,
+          "mask": [
+            7,
+            27
+          ]
+        },
+        "mask": [
+          7,
+          27
+        ],
+        "payload_sha256": "0e41b7e7fa0a8852d80c1c983d085d49684aeab6292e7d924206ccdf19c0dfed"
+      },
+      {
+        "row": {
+          "seed": 96901,
+          "condition": "sparse",
+          "k_private": 4,
+          "d1_payload_bytes": 2589,
+          "joint_payload_bytes": 3597,
+          "private_bytes": 1008,
+          "d1_fresh_accuracy": 0.5142857142857142,
+          "d2_fresh_accuracy": 0.5142857142857142,
+          "spikes_per_sequence": 5.5428571701049805,
+          "active_mac_proxy": 1728,
+          "optimizer_updates": 33,
+          "wall_time_s": 0.973206469003344,
+          "status_note": "real event D1->D2; whole-trial splits; one acquisition"
+        },
+        "d2_adaptation": {
+          "updates": 15,
+          "wall_s": 0.43529668799601495,
+          "best_dev": 0.5142857142857142,
+          "mask": [
+            7,
+            27,
+            3,
+            19
+          ]
+        },
+        "mask": [
+          7,
+          27,
+          3,
+          19
+        ],
+        "payload_sha256": "201ff8ae0e1f472bdb86dab52978ac8cb3850b3b87f12d67ab8b8f9a2f4e4566"
+      },
+      {
+        "row": {
+          "seed": 96901,
+          "condition": "sparse",
+          "k_private": 8,
+          "d1_payload_bytes": 2589,
+          "joint_payload_bytes": 3597,
+          "private_bytes": 1008,
+          "d1_fresh_accuracy": 0.5142857142857142,
+          "d2_fresh_accuracy": 0.5285714285714286,
+          "spikes_per_sequence": 6.585714340209961,
+          "active_mac_proxy": 1920,
+          "optimizer_updates": 39,
+          "wall_time_s": 1.033050614016247,
+          "status_note": "real event D1->D2; whole-trial splits; one acquisition"
+        },
+        "d2_adaptation": {
+          "updates": 21,
+          "wall_s": 0.495140833008918,
+          "best_dev": 0.5285714285714286,
+          "mask": [
+            7,
+            27,
+            3,
+            19,
+            31,
+            24,
+            4,
+            11
+          ]
+        },
+        "mask": [
+          7,
+          27,
+          3,
+          19,
+          31,
+          24,
+          4,
+          11
+        ],
+        "payload_sha256": "785647434ec39b3aa3aaa53d991d4cddeef07d769730b97a1af9ca4c173c8571"
+      },
+      {
+        "row": {
+          "seed": 96901,
+          "condition": "sparse",
+          "k_private": 16,
+          "d1_payload_bytes": 2589,
+          "joint_payload_bytes": 3661,
+          "private_bytes": 1072,
+          "d1_fresh_accuracy": 0.5142857142857142,
+          "d2_fresh_accuracy": 0.4857142857142857,
+          "spikes_per_sequence": 3.1857142448425293,
+          "active_mac_proxy": 2304,
+          "optimizer_updates": 31,
+          "wall_time_s": 0.7234812020033132,
+          "status_note": "real event D1->D2; whole-trial splits; one acquisition"
+        },
+        "d2_adaptation": {
+          "updates": 13,
+          "wall_s": 0.18557142099598423,
+          "best_dev": 0.4857142857142857,
+          "mask": [
+            7,
+            27,
+            3,
+            19,
+            31,
+            24,
+            4,
+            11,
+            5,
+            0,
+            23,
+            15,
+            28,
+            17,
+            16,
+            25
+          ]
+        },
+        "mask": [
+          7,
+          27,
+          3,
+          19,
+          31,
+          24,
+          4,
+          11,
+          5,
+          0,
+          23,
+          15,
+          28,
+          17,
+          16,
+          25
+        ],
+        "payload_sha256": "ea8a72d87146fb5d317f843e85749146c7e88920212448eeaca0a573ccfba71f"
+      },
+      {
+        "row": {
+          "seed": 96901,
+          "condition": "sparse",
+          "k_private": 32,
+          "d1_payload_bytes": 2589,
+          "joint_payload_bytes": 3725,
+          "private_bytes": 1136,
+          "d1_fresh_accuracy": 0.5142857142857142,
+          "d2_fresh_accuracy": 0.5071428571428571,
+          "spikes_per_sequence": 0.12857143580913544,
+          "active_mac_proxy": 3072,
+          "optimizer_updates": 32,
+          "wall_time_s": 0.8151505690038903,
+          "status_note": "real event D1->D2; whole-trial splits; one acquisition"
+        },
+        "d2_adaptation": {
+          "updates": 14,
+          "wall_s": 0.27724078799656127,
+          "best_dev": 0.5071428571428571,
+          "mask": [
+            7,
+            27,
+            3,
+            19,
+            31,
+            24,
+            4,
+            11,
+            5,
+            0,
+            23,
+            15,
+            28,
+            17,
+            16,
+            25,
+            29,
+            8,
+            1,
+            9,
+            13,
+            12,
+            20,
+            6,
+            21,
+            26,
+            2,
+            18,
+            30,
+            10,
+            14,
+            22
+          ]
+        },
+        "mask": [
+          7,
+          27,
+          3,
+          19,
+          31,
+          24,
+          4,
+          11,
+          5,
+          0,
+          23,
+          15,
+          28,
+          17,
+          16,
+          25,
+          29,
+          8,
+          1,
+          9,
+          13,
+          12,
+          20,
+          6,
+          21,
+          26,
+          2,
+          18,
+          30,
+          10,
+          14,
+          22
+        ],
+        "payload_sha256": "f6654f26b44eacccc3d318e76b74c4787d147bedf4441e792a912be0c827c06e"
+      },
+      {
+        "row": {
+          "seed": 96901,
+          "condition": "independent",
+          "k_private": 32,
+          "d1_payload_bytes": 2589,
+          "joint_payload_bytes": 3533,
+          "private_bytes": 944,
+          "d1_fresh_accuracy": 0.5142857142857142,
+          "d2_fresh_accuracy": 0.6,
+          "spikes_per_sequence": 6.27142858505249,
+          "active_mac_proxy": 1536,
+          "optimizer_updates": 33,
+          "wall_time_s": 0.8016595030057942,
+          "status_note": "independent D2 SNN plus retained D1 SNN"
+        },
+        "payload_sha256": "774ff0636eb258617d6e9484a416faecf87bd079bfe78864a19a2175ffabcec8",
+        "independent_dev": 0.6
+      }
+    ],
+    "d1_evaluation_accuracy": 0.5142857142857142,
+    "evaluation_split": "development"
+  }
+]

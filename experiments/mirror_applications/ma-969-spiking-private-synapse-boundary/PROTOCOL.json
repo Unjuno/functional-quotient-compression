@@ -1,0 +1,72 @@
+{
+  "experiment_id": "MA-969",
+  "title": "Small Mirror state plus private synapse exceptions on event domains",
+  "status": "NOT ESTABLISHED",
+  "protocol_frozen": true,
+  "base_commit": "6d463c54f",
+  "scope": "CPU adaptation-boundary screen using real event Vernier trials from two sensor-distance domains. The model is a small recurrent SNN adapter, not a reproduction of the paper's pretrained Transformer.",
+  "hypothesis": "A shared recurrent SNN trained on D1 can retain D1 performance and adapt to D2 using a compact threshold coordinate plus a sparse private synapse mask, reaching independent-D2 quality with a smaller actual joint payload than a full private SNN.",
+  "data": {
+    "dataset": "Event-Based Tiny Images D1 and D2 Vernier trials, Zenodo 20973757",
+    "inputs": "first 48 chronological events at or after 80 ms; fields timestamp,x,y,polarity; official timestamp rescale to ms",
+    "targets": "sign(label-20) for event trials labelled 13..19 or 21..27",
+    "split": "One frozen whole-trial stratified 60/20/20 partition: D1 split seed 96900 and D2 split seed 96901. Development run uses only train/development partitions. Fresh optimizer seeds 96911/13/17 share the locked fresh test trials; they are not independent acquisitions.",
+    "seeds": [
+      96911,
+      96913,
+      96917
+    ],
+    "domains": [
+      "D1 shared-core training",
+      "D2 sequential target adaptation"
+    ],
+    "development_seed": 96901,
+    "optimizer_seeds": [
+      96911,
+      96913,
+      96917
+    ]
+  },
+  "model": {
+    "architecture": "8-neuron recurrent LIF with shared 8x4 input synapses, subtractive reset, threshold vector and spike-count linear readout",
+    "training": "surrogate sigmoid threshold gradient; D1 core trained first; D2 adaptation freezes D1 core and optimizes listed state only; early stopping on D2 development",
+    "device": "CPU"
+  },
+  "controls": [
+    "D1 shared core zero-shot on D2",
+    "shared core plus direct per-domain threshold vector (native STL-style control)",
+    "shared core plus one-dimensional Mirror threshold coordinate",
+    "Mirror threshold coordinate plus top-k private synapse entries, k in [1,2,4,8,16,32]",
+    "independent D2 recurrent SNN while retaining the D1 model"
+  ],
+  "metrics": [
+    "D1 fresh retention accuracy",
+    "D2 fresh sign accuracy",
+    "joint serialized payload bytes",
+    "private synapse count/bytes",
+    "spikes per sequence",
+    "active MAC proxy",
+    "optimizer updates",
+    "CPU wall time"
+  ],
+  "storage": {
+    "authority": "actual torch.save joint D1+D2 inference payload bytes",
+    "charged": [
+      "shared core",
+      "D1 and D2 thresholds",
+      "Mirror basis and coordinate",
+      "private mask indices and values",
+      "readout",
+      "domain routing metadata"
+    ]
+  },
+  "success_gate": "At some k, Mirror+private reaches within 2 points of independent D2 accuracy and within 1 point of D1 retention while joint payload is <=80% independent and better than the direct threshold-only control at the same byte/MAC budget.",
+  "failure_gate": "No k meets quality and byte gates; Mirror equals native threshold control; or private residual cost exceeds the independent joint payload.",
+  "post_run_audit": "Invalid screen: sparse scatter overwrites shared weights rather than adding delta; implemented surrogate and MAC proxy mismatch frozen protocol; serialized replay incomplete; D1 and independent D2 near chance. No mechanism-level conclusion; any correction is a new amendment/ID.",
+  "boundaries": [
+    "This is one real acquisition with two distance domains; three split/model seeds are not independent sensor acquisitions.",
+    "The D1/D2 labels provide sign classification, not the paper's MNIST-pretrained hyperacuity transfer result.",
+    "No TACOS reproduction, hardware energy, or deployment latency claim.",
+    "Sparse residual index/values and all D1+D2 reconstruction state are charged."
+  ]
+}

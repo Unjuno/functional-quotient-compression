@@ -6,11 +6,11 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- Claim ledger entries: **425**
+- Claim ledger entries: **426**
 - P0: **630** (348 FAIL; 52 PROMISING; 223 UNTESTED; 6 NOT ESTABLISHED; 1 SCREENING)
 - P1: **422** (17 completed; 405 UNTESTED)
 - P2: **103** (103 UNTESTED)
-- Current MA statuses: **356 FAIL, 6 NOT ESTABLISHED, 61 PROMISING, 1 SCREENING, 731 UNTESTED**
+- Current MA statuses: **356 FAIL, 7 NOT ESTABLISHED, 61 PROMISING, 1 SCREENING, 730 UNTESTED**
 - 47 baseline experiment directories remain present; verified external outcomes are linked to their dedicated branches in the registry and claim ledger.
 - New research: MA-876..935 (60 candidates), PA236..PA265 (30 primary sources). See the current Next candidate section for the live queue.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. see the current Next candidate section.
@@ -450,3 +450,6 @@ MA-965 remains UNTESTED (NOT ESTABLISHED / deferred): official EAS-SNN source ex
 MA-966 scoped real-data D1 Vernier CPU screen FAIL: shared Mirror phase averaged 82.08% sign accuracy on unseen offsets 1–4; fixed periodic features averaged 83.14%, raw time 81.93%, and four independent encoders 83.56%. Mirror used 42,346 B vs 166,923 B independent but was 573 B larger than the plain shared raw-time model. Mirror phase and native per-window time offset had identical fresh predictions and 0.0 max logit difference. No pretrained PointTransformer or energy claim. See `ma-966-fine-event-timing-packet-phase/RESULTS.md`. Skip P1 MA-967; next P0 MA-968 spiking logical-MoE threshold specialists.
 
 MA-968 scoped synthetic spiking threshold-specialist screen FAIL: on shared-synapse teachers Mirror scored 99.53% vs direct threshold bank 99.55% at 2,653 B; independent experts used 2,597 B. Mirror decodes exactly to native threshold conditioning (0.0 logit error). On generic synapse teachers Mirror scored 65.48%, rank-2 private residual 80.10%, independent top-1 experts 99.24%. No natural SNN or energy claim. See `ma-968-spiking-logical-moe-threshold/RESULTS.md`. Next P0 MA-969 shared/private spiking residuals.
+
+
+MA-969 remains NOT ESTABLISHED: audit found sparse `scatter` overwrote shared synapses instead of adding residuals; MAC accounting mismatched dense execution, decoded replay was incomplete, and D1/independent-D2 scores were near chance. Preserve invalid run; correction requires a new amendment/ID and fresh audit data. See `ma-969-spiking-private-synapse-boundary/RESULTS.md`. MA-970 is P1; select next eligible P0.

@@ -1,0 +1,9 @@
+{
+  "experiment_id": "MA-969",
+  "commit": "pending",
+  "tests": {"command": "python experiments/mirror_applications/ma-969-spiking-private-synapse-boundary/tests/verify_result.py", "passed": 1, "failed": 0},
+  "serialization": {"roundtrip_checked": "partial; adaptation state replayed from in-memory shared core, not decoded shared_core; zero-shot bypassed", "byte_exact": true},
+  "metric_replay": {"checked": "partial; accuracy-only for serialized adapters", "max_difference": null},
+  "fresh_split_integrity_checked": true,
+  "notes": ["Invalid implementation screen; do not use as evidence for or against the preregistered mechanism.", "Astra review confirmed scatter replaces shared synapses rather than adding residuals; k=32 zeroes all selected weights at initialization.", "Implemented surrogate derivative and active MAC proxy mismatch frozen protocol/operations.", "D1 and independent D2 fresh accuracy near chance; one acquisition shared across optimizer seeds."]
+}
