@@ -1,0 +1,32 @@
+{
+  "experiment_id": "MA-919",
+  "commit": null,
+  "tests": {
+    "command": "python experiments/mirror_applications/ma-919-flowmap-interval-mirror/source/run_screen.py (run twice)",
+    "passed": 2,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "payload_files": 6
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "environment": {
+    "device": "cpu"
+  },
+  "notes": [
+    "Three fresh analytic ODE systems; two full replays had identical metrics and bytes.",
+    "Mirror coordinate is an invertible ordinary time reparameterization; fixed-budget learning-efficiency only, no capacity claim.",
+    "No PA260 image/FID validation."
+  ],
+  "fresh_seeds": [
+    91911,
+    91913,
+    91917
+  ]
+}

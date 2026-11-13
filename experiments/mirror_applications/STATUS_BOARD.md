@@ -1,16 +1,16 @@
 # Mirror Application Status Board
 
-Updated: 2026-11-12 UTC
+Updated: 2026-11-13 UTC
 Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- Claim ledger entries: **409**
-- P0: **630** (335 FAIL; 51 PROMISING; 238 UNTESTED; 6 NOT ESTABLISHED)
+- Claim ledger entries: **412**
+- P0: **630** (335 FAIL; 52 PROMISING; 238 UNTESTED; 6 NOT ESTABLISHED)
 - P1: **422** (17 completed; 405 UNTESTED)
 - P2: **103** (103 UNTESTED)
-- Current MA statuses: **343 FAIL, 6 NOT ESTABLISHED, 60 PROMISING, 1 SCREENING, 745 UNTESTED**
+- Current MA statuses: **343 FAIL, 6 NOT ESTABLISHED, 61 PROMISING, 1 SCREENING, 744 UNTESTED**
 - 47 baseline experiment directories remain present; verified external outcomes are linked to their dedicated branches in the registry and claim ledger.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). See the current Next candidate section for the live queue.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. see the current Next candidate section.
@@ -354,3 +354,5 @@ MA-914 feasibility review: official `hybridcodec/hybridcodec` unit tests pass 5/
 MA-916 remains UNTESTED: bounded exact-title review found no runnable NanoVoice, MoA-TTS or Hyper-MoA implementations/checkpoints; HyperTTS lacks matched held-out audio/evaluation assets in this environment. No matched speaker-bank frontier or quality/byte metrics. MA-915 is P1; next eligible P0 MA-917 few-shot new speaker code with private fallback. See `ma-916-speaker-adapter-bank/EXECUTION_BLOCKER.md`.
 
 MA-917 remains UNTESTED: official HyperTTS LTS100 checkpoint is single-speaker pretraining; VCTK multi-speaker checkpoint is not published in the README, and this CPU environment lacks compatible speaker encoder/evaluation assets. No Mirror/private fallback comparison ran. MA-918 is P1; next eligible P0 is the next registered candidate in queue.
+
+MA-919 scoped mechanism screen is PROMISING for fixed-budget learning efficiency only: analytic 2D linear-flow `(s,t-s)` view lowered held-out map MSE 48.3% and composition MSE 53.1% over native `(s,t)` across 3/3 fresh systems at equal 21,585 serialized bytes and 4,480 MLP MACs. This is an ordinary invertible time-coordinate reparameterization, not Mirror-specific freedom or increased capacity. PA260 image/FID and near-convergence remain untested. See `ma-919-flowmap-interval-mirror/RESULTS.md`. MA-920 is the next eligible P0 after P1 MA-918; MA-920 is the next candidate to inspect.

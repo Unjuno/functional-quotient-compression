@@ -1,0 +1,1 @@
+Run `python source/run_screen.py` from this experiment directory or invoke the source path from repository root. The script uses only fresh preregistered systems 91911/91913/91917 and writes transient serialized states only long enough to measure actual bytes. Protocol was frozen before fresh runs.

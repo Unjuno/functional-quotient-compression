@@ -705,3 +705,7 @@ MA-914 remains UNTESTED despite 5/5 upstream unit tests: only synthetic shape/ch
 MA-916 remains UNTESTED: the registered matched baseline set and speaker evaluation assets are unavailable, so no adapter-bank frontier was measured. MA-915 is P1; continue to MA-917 few-shot new speaker by Mirror code then private fallback.
 
 MA-917 remains UNTESTED: no runnable multispeaker checkpoint, compatible speaker encoder assets or consent-safe support/query voices; single-speaker LTS100 cannot test new-speaker fallback. See `ma-917-new-speaker-code-fallback/EXECUTION_BLOCKER.md`. MA-918 is P1; continue to the next eligible P0 candidate.
+
+MA-919 scoped mechanism screen PROMISING only for fixed-budget learning efficiency: 3/3 analytic fresh systems favored `(s,t-s)` at equal state bytes and MLP MAC proxy; the coordinate is an ordinary invertible time reparameterization, so no Mirror-specific or capacity claim. No PA260 image/FID test. See `ma-919-flowmap-interval-mirror/RESULTS.md`.
+
+Next eligible after MA-919 is MA-920 (P0), consistency-model noise-level Mirror view; P1 MA-918 is skipped for now.

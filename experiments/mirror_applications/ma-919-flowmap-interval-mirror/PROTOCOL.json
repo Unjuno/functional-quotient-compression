@@ -1,0 +1,23 @@
+{
+  "experiment_id": "MA-919",
+  "title": "Two-time flow-map interval Mirror code",
+  "status": "SCREENING",
+  "protocol_frozen": true,
+  "amendment": "01-mechanism-only analytic linear-flow screen",
+  "prior_art_refs": ["PA260"],
+  "hypothesis": "A shared flow-map MLP addressed by start-time plus duration will improve held-out map/composition quality per serialized byte or compute over native (start,end) conditioning and an ordinary coordinate control.",
+  "scope": "Analytic low-dimensional ODE mechanism screen only; not PA260 image-model reproduction, CIFAR/ImageNet FID, or a generative capacity claim.",
+  "worlds": [
+    {"seed": 91911, "A": [[0.0, -1.0], [1.0, -0.1]]},
+    {"seed": 91913, "A": [[-0.2, -0.7], [0.9, -0.05]]},
+    {"seed": 91917, "A": [[0.15, -1.2], [0.8, -0.25]]}
+  ],
+  "development": {"seed": 91901, "used_for": "smoke check only; no hyperparameter selection"},
+  "fresh": {"seeds": [91911, 91913, 91917], "locked_before_run": true},
+  "conditions": ["native (s,t) concatenated into shared MLP", "Mirror coordinate m=(s,dt=t-s) into same shared MLP", "independent full map per sampled interval upper reference (analytic oracle only)"],
+  "training": {"steps": 600, "batch_size": 256, "hidden_width": 64, "optimizer": "Adam", "learning_rate": 0.001, "train_points_per_step": "fresh x~N(0,I), 0<=s<t<=1", "loss": "MSE against exp((t-s)A)x"},
+  "metrics": ["held-out endpoint map MSE", "three-map semigroup composition MSE", "actual torch serialized state bytes", "MLP MAC proxy", "training wall time"],
+  "storage_authority": "actual inference state dict serialization bytes; include all learned coordinate state",
+  "gates": {"useful_signal": "Mirror improves fresh mean map and composition error >=10% at <=5% more serialized bytes and <=10% more MACs", "fail": "Mirror does not improve either quality metric over native and coordinate alias within seed variance, or breaches budget", "not_established": "unstable/missing fresh world or implementation issue"},
+  "limitations": ["Mirror coordinate is a fixed invertible reparameterization of native times and is deliberately tested as the cheapest control.", "No image data, FID, PA260 release checkpoint, or neural generative baseline is evaluated."]
+}
