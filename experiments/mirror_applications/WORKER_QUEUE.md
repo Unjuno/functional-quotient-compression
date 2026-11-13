@@ -785,3 +785,6 @@ MA-961 scoped synthetic scalar LIF threshold screen FAIL: affine task-index code
 
 
 MA-962 scoped custom CPU LIF screen FAIL on structured rank-3 signatures: rank-4 factors retained accuracy but saved only 4.2% actual bytes and increased spike count/latency; shared TEBN already achieved 99.94%. Exact ordinary rank-4 factorization alias. Generic-random bank NOT ESTABLISHED because native full control failed development feasibility. See `ma-962-task-time-tebn-view/RESULTS.md`. Next P0 MA-963 TACOS neuromodulator compression.
+
+
+MA-962 amendment 04 correction: Astra audit found train/test generic-random K signatures differed in the first dev screen; that NOT ESTABLISHED call is withdrawn. Corrected dev and fresh use a shared per-world K bank. Fresh generic full TEBN reached 100%, rank4 99.98%; rank4 still saved only 4.2% bytes and raised spikes 25.1%. Retired interrupted seeds excluded. See `ma-962-task-time-tebn-view/RESULTS.md`.

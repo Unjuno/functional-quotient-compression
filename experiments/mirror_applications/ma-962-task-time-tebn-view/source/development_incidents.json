@@ -3,7 +3,11 @@
     "description": "Shared BN had trainable affine values; native full gain table collapsed to a no-spike solution.",
     "seed": 96201,
     "updates": 1000,
-    "structured_rank3": {"full_tebn_accuracy": 0.5, "full_tebn_mean_spikes": 0.0, "mirror_rank4_accuracy": 1.0},
+    "structured_rank3": {
+      "full_tebn_accuracy": 0.5,
+      "full_tebn_mean_spikes": 0.0,
+      "mirror_rank4_accuracy": 1.0
+    },
     "action": "Inspected BN state, observed strongly negative shared beta, and froze affine scale/shift while retaining running statistics before fresh evaluation."
   },
   "amendment_02_generic_random_extension": {
@@ -11,9 +15,19 @@
     "updates": 5000,
     "family": "generic_random",
     "full_tebn_accuracy": 0.473388671875,
-    "accuracy_by_task": [0.009765625,0.736328125,0.197265625,0.94140625,0.66015625,0.619140625,0.462890625,0.16015625],
+    "accuracy_by_task": [
+      0.009765625,
+      0.736328125,
+      0.197265625,
+      0.94140625,
+      0.66015625,
+      0.619140625,
+      0.462890625,
+      0.16015625
+    ],
     "mean_spikes_per_example": 6.02880859375,
     "payload_bytes": 1166,
-    "decision": "NOT ESTABLISHED; full-table control remained below the frozen 90% feasibility gate, so no fresh generic-random scores were used."
+    "decision": "Do not use: training and test used different K matrices. Corrected development with shared bank_seed reached 99.98% full TEBN.",
+    "status": "INVALID SPLIT; previous low-accuracy decision withdrawn"
   }
 }

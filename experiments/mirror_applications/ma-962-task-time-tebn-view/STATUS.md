@@ -1,3 +1,3 @@
 # Status
 
-FAIL (scoped structured temporal signature). Rank-4 preserved quality but saved only 4.2% actual bytes versus full TEBN, raised mean spikes 11.0%, and slowed first-correct latency 32.0%. The task-agnostic shared TEBN already reached 99.94%. Generic-random bank is NOT ESTABLISHED because native full control failed development feasibility. See [RESULTS.md](RESULTS.md).
+FAIL (scoped structured and generic screens). Rank-4 factorization saves only 4.2% bytes and raises spike counts beyond the 10% gate; exact ordinary rank-4 alias. Structured shared TEBN already reaches 99.94%; generic task-conditioned View improves over shared TEBN but misses storage/dynamic gates. See [RESULTS.md](RESULTS.md).

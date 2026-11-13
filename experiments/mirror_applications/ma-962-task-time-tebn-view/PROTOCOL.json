@@ -3,7 +3,7 @@
   "title": "Task \u00d7 time-step Mirror normalization View",
   "status": "FAIL",
   "protocol_frozen": true,
-  "amendment": "03: development-only exclusion of generic-random task bank after native full TEBN failed feasibility gate; fresh screen is structured low-rank bank only",
+  "amendment": "05: corrected generic bank split and fresh-run seed amendment after premature command was interrupted",
   "scope": "Synthetic event-stream screen using a custom PyTorch hard-spike/triangular-surrogate LIF; not a TEBN paper reproduction or hardware energy result.",
   "base_commit": "77b6ae425",
   "prior_art_refs": [
@@ -23,7 +23,7 @@
   "task_families": {
     "structured_rank3": "K[q,t] = 0.35 + 0.65*cos(2*pi*(q/8 - t/16)); signed, bounded by 1 and rank at most 3.",
     "generic_random": "Fresh independent K[q,t] sampled uniformly from [-1,1], then normalized by max absolute value.",
-    "generic_random_status": "NOT ESTABLISHED at development: native full table reached 46.5% after 1,000 updates and 47.3% after 5,000, below the preregistered 90% native gate; no fresh random-bank evaluation will be used to judge Mirror."
+    "generic_random_status": "Completed on corrected fresh worlds; train/test share one K bank per world. Full native TEBN achieved 100% mean accuracy."
   },
   "data": "For balanced y\u2208{-1,+1}, four positive event replicas have rate .5+.4*y*K[q,t] and four negative replicas rate .5-.4*y*K[q,t].",
   "development": {
@@ -45,7 +45,17 @@
     "test_examples_per_task": 512,
     "task_families": [
       "structured_rank3"
-    ]
+    ],
+    "generic_random_worlds_or_seeds": [
+      96241,
+      96243,
+      96247
+    ],
+    "generic_random_locked_before_access": true,
+    "generic_random_task_families": [
+      "generic_random"
+    ],
+    "generic_random_status": "Completed with fresh seeds [96241,96243,96247] after retired interrupted seeds [96231,96233,96237] were excluded."
   },
   "training": {
     "updates": 1000,
@@ -88,7 +98,9 @@
   "development_amendments": [
     "Amendment 01 had learnable BN affine values; native full table failed development at chance with zero spikes, while rank-4 factors learned the structured bank.",
     "Development inspection showed shared BN beta became strongly negative. Amendment 02 freezes the shared BN affine values to isolate task/time normalization gain; fresh seeds remain sealed.",
-    "Amendment 03 freezes fresh evaluation to structured_rank3 after generic_random native full table failed the development feasibility gate at both 1,000 and 5,000 updates. The random bank is reported NOT ESTABLISHED, not FAIL."
+    "Amendment 03 freezes fresh evaluation to structured_rank3 after generic_random native full table failed the development feasibility gate at both 1,000 and 5,000 updates. The random bank is reported NOT ESTABLISHED, not FAIL.",
+    "Post-run audit found make_data derived K from each sample seed, so generic_random training and test used different task definitions. Existing generic_random development evidence is preserved in source/development_invalid_split.json and withdrawn. Structured_rank3 is unaffected because K is seed-independent. Amendment 04 passes a common bank_seed to train and test.",
+    "Corrected generic_random development uses a shared bank_seed across train/test; full TEBN reached 99.98%. A fresh run was started before the JSON protocol update succeeded and interrupted during its first condition; no row output was retained or used. Those seeds [96231,96233,96237] are retired. Amendment 05 freezes new fresh seeds [96241,96243,96247]."
   ],
   "result_report": "RESULTS.md"
 }

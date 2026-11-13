@@ -1,6 +1,6 @@
 {
   "experiment_id": "MA-962",
-  "commit": "f68f16dc5b2c2999297d4f00fd0c4c44496a47be",
+  "commit": "PENDING",
   "tests": {
     "command": "python -m py_compile experiments/mirror_applications/ma-962-task-time-tebn-view/source/run_screen.py && python experiments/mirror_applications/ma-962-task-time-tebn-view/source/run_screen.py",
     "passed": true,
@@ -16,10 +16,12 @@
   },
   "fresh_split_integrity_checked": true,
   "notes": [
-    "Fresh seeds 96211, 96213, 96217 used only on structured_rank3 after generic_random native feasibility failure was documented.",
-    "Custom typed-tensor+JSON payload was reloaded and evaluated; replay max abs error 0.0.",
-    "Rank-4 Mirror and native control state tensors and per-task accuracy asserted equal.",
-    "Generic random development full TEBN remained <90% even after 5,000 updates; status NOT ESTABLISHED.",
+    "Structured fresh seeds 96211, 96213, 96217 completed.",
+    "Corrected generic-random fresh seeds 96241, 96243, 96247 completed with shared task-signature bank between train and test.",
+    "Retired interrupted generic seeds 96231, 96233, 96237 excluded.",
+    "Custom typed-tensor+JSON payload reloaded and evaluated; replay max abs error 0.0.",
+    "Rank-4 Mirror and native control state tensors asserted equal.",
+    "Initial generic-random development failure was a train/test signature mismatch and is withdrawn.",
     "CPU synthetic custom LIF only; no TEBN reproduction or hardware joule claim."
   ]
 }

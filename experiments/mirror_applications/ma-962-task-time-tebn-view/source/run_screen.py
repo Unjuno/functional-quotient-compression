@@ -9,6 +9,7 @@ import torch.nn.functional as F
 ROOT=Path(__file__).resolve().parents[1]
 Q=8;T=16;CH=8;H=2;RANK=4;LEAK=.9;THRESHOLD=1.;UPDATES=1000;BATCH=128;LR=.02
 FRESH=[96211,96213,96217];DEV=96201;torch.set_num_threads(1)
+GENERIC_FRESH=[96241,96243,96247]
 
 class SurrogateSpike(torch.autograd.Function):
     @staticmethod
@@ -24,8 +25,8 @@ def signature(kind,seed):
         return .35+.65*np.cos(2*np.pi*(q-t))
     rng=np.random.default_rng(seed+3001);k=rng.uniform(-1.,1.,(Q,T));return k/np.abs(k).max()
 
-def make_data(seed,n_per_task,kind):
-    rng=np.random.default_rng(seed);k=signature(kind,seed);xs=[];ys=[];qs=[]
+def make_data(seed,n_per_task,kind,bank_seed=None):
+    rng=np.random.default_rng(seed);k=signature(kind,seed if bank_seed is None else bank_seed);xs=[];ys=[];qs=[]
     for q in range(Q):
         y=np.tile(np.array([0,1],dtype=np.int64),(n_per_task+1)//2)[:n_per_task]
         rng.shuffle(y);sign=(2*y-1)[:,None];signal=sign*k[q][None,:]
@@ -125,7 +126,8 @@ def fit(condition,seed,kind,train,test,updates=UPDATES):
     return row,blob
 
 def run_seed(seed,kind,updates,conditions):
-    train=make_data(seed+100,256,kind);test=make_data(seed+200,512,kind);rows=[];blobs={}
+    bank_seed=seed+3001
+    train=make_data(seed+100,256,kind,bank_seed);test=make_data(seed+200,512,kind,bank_seed);rows=[];blobs={}
     for condition in conditions:
         row,blob=fit(condition,seed,kind,train,test,updates);rows.append(row);blobs[condition]=blob
         print(json.dumps({k:row[k] for k in ['seed','family','condition','payload_bytes','accuracy','mean_spikes_per_example','train_seconds','inference_examples_per_second','serialization_replay_max_abs']}),flush=True)
@@ -138,12 +140,19 @@ def run_seed(seed,kind,updates,conditions):
     return rows
 
 def main():
-    ap=argparse.ArgumentParser();ap.add_argument('--dev',action='store_true');a=ap.parse_args()
+    ap=argparse.ArgumentParser();ap.add_argument('--dev',action='store_true');ap.add_argument('--generic-fresh',action='store_true');a=ap.parse_args()
     if a.dev:
         rows=[]
         for family in ['structured_rank3','generic_random']:
             rows+=run_seed(DEV,family,UPDATES,['full_tebn','mirror_rank4','native_rank4'])
         (ROOT/'source/development.json').write_text(json.dumps(rows,indent=2)+'\n');return
+    if a.generic_fresh:
+        rows=[]
+        for seed in GENERIC_FRESH:
+            rows+=run_seed(seed,'generic_random',UPDATES,['shared_tebn','full_tebn','rank1_native','mirror_rank4','native_rank4'])
+        with (ROOT/'RESULTS_GENERIC.csv').open('w',newline='') as f:
+            w=csv.DictWriter(f,fieldnames=list(rows[0]));w.writeheader();w.writerows(rows)
+        (ROOT/'source/generic_results.json').write_text(json.dumps({'results':rows,'fresh_seeds':GENERIC_FRESH,'family':'generic_random','device':'cpu'},indent=2)+'\n');return
     rows=[]
     for seed in FRESH:
         rows+=run_seed(seed,'structured_rank3',UPDATES,['shared_tebn','full_tebn','rank1_native','mirror_rank4','native_rank4'])
