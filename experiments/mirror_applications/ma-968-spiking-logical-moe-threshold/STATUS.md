@@ -3,7 +3,7 @@
 - Status: FAIL (scoped synthetic screen)
 - Branch: `research/ma-968-spiking-logical-moe-threshold-20261113`
 - Base commit: `e585be3b3`
-- Result commit: pending
+- Result commit: `9b3bb1a6e`
 - Protocol frozen: yes
 - Development complete: yes
 - Fresh/audit opened: yes
