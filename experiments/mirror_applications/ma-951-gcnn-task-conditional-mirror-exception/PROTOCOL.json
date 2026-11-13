@@ -1,0 +1,84 @@
+{
+  "experiment_id": "MA-951",
+  "title": "G-CNN task-conditional Mirror exception",
+  "status": "FAIL",
+  "protocol_frozen": true,
+  "amendment": "01 synthetic C4 task orbit and non-orbit exception",
+  "scope": "Mechanism-only synthetic image screen; tests exact transformed-copy tasks versus one genuinely non-orbit task.",
+  "base_commit": "88b0309ff",
+  "prior_art_refs": [
+    "PA275",
+    "PA276"
+  ],
+  "hypothesis": "A two-bit task phase coordinate over one exactly C4-equivariant representation can serve group-related logical functions with fewer bytes than independent task heads; a non-orbit task may require private residual parameters.",
+  "physical_object": "One shared convolutional feature extractor lifted to an exact C4 orbit representation by evaluating the same CNN on four rotations.",
+  "mirror_coordinate": "Task phase m_t selects a cyclic relabeling of the four orientation-feature slots; optional private residual for the non-orbit task.",
+  "logical_multiplicity": "Task0/Task1 are exact C4-related orientation decisions; Task2 is an object-class decision outside that orbit.",
+  "prior_art_controls": [
+    "native shared exact C4 orbit representation with independent task heads",
+    "Mirror shared head + fixed phase codes, no private residual",
+    "Mirror phase + private residual for task2",
+    "ordinary learned task gate over group slots"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      95101
+    ],
+    "selection_metric": "Implementation smoke only; no hyperparameter selection."
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      95111,
+      95113,
+      95117
+    ],
+    "locked_before_access": true,
+    "train_examples": 512,
+    "test_examples": 256
+  },
+  "training": {
+    "updates": 500,
+    "optimizer": "Adam",
+    "learning_rate": 0.003,
+    "batch_size": 64,
+    "threads": 1
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "shared CNN weights",
+      "task heads/shared readout",
+      "task phase codes",
+      "gate or private residual",
+      "metadata"
+    ]
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true,
+    "report_examples_per_second": true
+  },
+  "metrics": [
+    "per-task held-out accuracy",
+    "exact C4 feature equivariance max error",
+    "actual serialized payload bytes",
+    "train/inference wall time",
+    "group-forward/head MAC proxy"
+  ],
+  "success_gate": "On all fresh seeds, phase view retains \u226595% native task0/task1 accuracy with \u226460% of native-head payload; private residual must restore task2 within 5 percentage points.",
+  "failure_gate": "Phase view misses task0/task1 accuracy or is matched by ordinary gate at equal/fewer bytes; classify no Mirror-specific gain. Report non-orbit task private-state frontier separately.",
+  "boundaries": [
+    "Task0 and Task1 are exact transformed copies and do not count as independent capacity.",
+    "Task2 is a distinct non-orbit class decision; passing does not establish general task multiplicity.",
+    "Group orbit is an exact reindexing and may be equivalent to a task-specific head or gate.",
+    "No natural-image dataset or broad G-CNN claim."
+  ],
+  "completed_fresh_seeds": [
+    95111,
+    95113,
+    95117
+  ],
+  "result_report": "RESULTS.md"
+}

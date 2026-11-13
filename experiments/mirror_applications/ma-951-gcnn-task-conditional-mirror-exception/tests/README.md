@@ -1,0 +1,1 @@
+Run the frozen CPU screen; it verifies C4 feature permutation equivariance, serializes all four controls, reloads them, then reports fresh-seed task accuracy and actual payload bytes.

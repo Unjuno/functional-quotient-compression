@@ -1,0 +1,24 @@
+{
+  "experiment_id": "MA-951",
+  "commit": "PENDING",
+  "tests": {
+    "command": "python -m py_compile experiments/mirror_applications/ma-951-gcnn-task-conditional-mirror-exception/source/run_screen.py && python experiments/mirror_applications/ma-951-gcnn-task-conditional-mirror-exception/source/run_screen.py",
+    "passed": true,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Three preregistered fresh seeds completed; train/test arrays use separate seeds.",
+    "Exact C4 equivariance max absolute error 0.0 for all conditions.",
+    "Serialized reload replay max absolute error 0.0.",
+    "Synthetic mechanism screen only; no natural-image claim."
+  ]
+}

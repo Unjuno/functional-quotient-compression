@@ -773,3 +773,6 @@ MA-948 remains UNTESTED: no multi-scene cut dataset or native adaptive INR check
 
 
 MA-950 remains UNTESTED: only one HNeRV serialized-payload result exists, while other native video bitstreams are unavailable; no same-content bitrate tournament or GPU VRAM/FPS comparison. See `ma-950-video-mirror-marginal-byte-tournament/EXECUTION_BLOCKER.md`. Skip P1 MA-949; next P0 MA-951.
+
+
+MA-951 scoped synthetic C4 task-view FAIL: fixed phase missed preregistered task0/task1 quality retention on 2/3 fresh seeds and was 7 B larger than independent heads; private residual restored quality at +426 B. Exact transformed copies are not counted as capacity. See `ma-951-gcnn-task-conditional-mirror-exception/RESULTS.md`. Next P0 MA-952 steerable CNN irrep-channel Mirror specialization; CPU torch available, but e2cnn/escnn dependencies are absent, so inspect whether a pinned upstream CPU path can be made runnable before scoring.
