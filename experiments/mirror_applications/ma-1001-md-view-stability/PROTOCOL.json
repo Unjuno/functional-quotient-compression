@@ -1,0 +1,20 @@
+{
+  "experiment_id": "MA-1001",
+  "title": "Mirror force-code stability across long rollouts",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/RUNTIME",
+  "base_commit": "1a0ea278c",
+  "hypothesis": "A fixed material Mirror code in an energy-derived force law preserves NVE trajectory stability as well as a functionally identical native material coefficient; a separately perturbed force field is unstable/nonconservative.",
+  "physical_object": "Shared Lennard-Jones pair potential and velocity-Verlet simulator",
+  "mirror_coordinate": "Fixed per-material epsilon scale code m",
+  "logical_multiplicity": "Two material/task-specific dynamical regimes",
+  "prior_art_refs": ["PA299", "PA297"],
+  "controls": ["shared base potential", "Mirror epsilon code", "native per-material epsilon coefficients", "independent full epsilon parameters", "separate-force perturbation negative control"],
+  "development": {"worlds_or_seeds": [100101], "selection_metric": "fixed dt 0.002 and 3000 NVE steps; no tuning beyond detecting integration failure"},
+  "fresh": {"worlds_or_seeds": [100111, 100113, 100117], "locked_before_access": true},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["shared potential parameters", "Mirror code", "native material coefficients", "metadata"]},
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true},
+  "success_gate": "Both views complete all 3000 steps with finite state and relative NVE energy drift <1e-3 in every fresh world; Mirror trajectory agrees with its native coefficient alias within 1e-10; negative control exhibits detectable energy drift or force-gradient inconsistency.",
+  "failure_gate": "Catastrophic rollout, energy drift threshold exceeded, physical consistency violation, or alias fails to replay.",
+  "boundaries": ["Synthetic LJ NVE integrator screen only; not MatterSim/MACE MD or material stability evidence.", "No NVT sampling, periodic boundary conditions, or thermodynamic ensemble claims.", "Passing validates a fixed-code trajectory mechanism only, not Mirror-specific advantage."]
+}
