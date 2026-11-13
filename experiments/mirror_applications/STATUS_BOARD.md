@@ -474,3 +474,7 @@ MA-984 ideal RIS phase-code screen FAIL for Mirror-specific attribution: a 10-bi
 
 
 MA-985 small synthetic MU-MISO/WMMSE screen FAIL: rank-2 AP×RIS factor reached 1.4709 mean WSR vs fixed-procedure full WMMSE 2.6888 (54.7%) and used 2,781 B vs 2,725 B. Power residual <=2.4e-7. Ordinary product control matches Mirror payload/hash/WSR exactly. This optimizes each synthetic configuration directly and is not held-out learned-policy generalization or PA290. See `ma-985-ap-ris-joint-mirror-screen/RESULTS.md`.
+
+## Current sequence handoff — 2026-11-13
+
+Wireless Mirror candidates MA-986..989 are paused for structural redesign; their registry rows remain UNTESTED. MA-981/982 consecutively alias native steering/Type-II controls, and MA-983..985 repeat the native-control alias with embedding, phase-gradient, and product-code controls. See [wireless family diagnostic](../../docs/phase2/WIRELESS_MIRROR_FAMILY_DIAGNOSTIC_2026-11-13.md). Continue with next distinct P0 MA-990, spatial-audio HRTF field personalization.

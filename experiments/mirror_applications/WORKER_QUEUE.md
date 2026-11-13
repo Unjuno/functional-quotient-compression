@@ -827,3 +827,5 @@ MA-984 ideal RIS screen FAIL for Mirror-specific attribution: 10-bit two-coordin
 
 
 MA-985 synthetic MU-MISO WMMSE/RIS screen FAIL: rank-2 AP×RIS Mirror averaged WSR 1.4709 vs fixed-procedure full-control WMMSE 2.6888 (54.7%) and used 2,781 B vs 2,725 B; max power residual <=2.4e-7. Native product is exact alias. Per-config optimization only, not PA290 or learned generalization. See `ma-985-ap-ris-joint-mirror-screen/RESULTS.md`.
+
+Wireless family decision (2026-11-13): pause MA-986..989 for structural redesign; leave these candidates UNTESTED. MA-981/982 are consecutive exact native-control aliases, with MA-983..985 reinforcing the same issue. See `docs/phase2/WIRELESS_MIRROR_FAMILY_DIAGNOSTIC_2026-11-13.md`. Resume at distinct P0 MA-990 (spatial-audio HRTF personalization).
