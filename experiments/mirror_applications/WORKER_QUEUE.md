@@ -1,3 +1,7 @@
+## Current handoff — 2026-11-13, MA-996
+
+MA-996 completed as a scoped synthetic FAIL for Mirror-specific value. Conservative radial energy/force consistency passed in three fresh worlds, but rank-2 Mirror exactly aliases native rank-2, actual payload is 2,066 B vs 1,774 B independent, and MAC proxy is 48% higher. No MACE-MP/MPTrj claim. See `ma-996-mace-material-mirror/RESULTS.md`. Continue with MA-997 sparse equivariant support × Mirror.
+
 ## Current handoff — 2026-11-13, MA-990 feasibility defer
 
 MA-990 official MERL RANF code was located, but the required SONICOM HRTF subject data is unavailable in this workspace and no confirmed acquisition path was found in the bounded source check. MA-991..993 share the missing subject-measurement dependency; all remain UNTESTED and deferred, not FAIL. No experiment or metrics were produced. See `ma-990-ranf-hrtf-personalization/README.md`. Advance to MA-996, a separate P0 family.
