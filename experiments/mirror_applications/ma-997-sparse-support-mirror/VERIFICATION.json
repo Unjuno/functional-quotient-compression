@@ -1,9 +1,23 @@
 {
   "experiment_id": "MA-997",
-  "commit": "pending",
-  "tests": {"command": "python experiments/mirror_applications/ma-997-sparse-support-mirror/source/run_screen.py verify", "passed": 3, "failed": 0},
-  "serialization": {"roundtrip_checked": true, "byte_exact": true},
-  "metric_replay": {"checked": true, "max_difference": 0.0},
+  "commit": "d97ec995aa0a5e59a49fd7b2beb2544e67389069",
+  "tests": {
+    "command": "python experiments/mirror_applications/ma-997-sparse-support-mirror/source/run_screen.py verify",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
   "fresh_split_integrity_checked": true,
-  "notes": ["All three fresh worlds passed exact metric replay from saved serialized payloads.", "Finite-difference force-gradient residual <1e-7 and rotation-equivariance residual <1e-10 in all targets.", "Scoped synthetic mechanism screen only; no PA300/MACE-MP evidence is claimed."]
+  "notes": [
+    "All three fresh worlds passed exact metric replay from saved serialized payloads.",
+    "Finite-difference force-gradient residual <1e-7 and rotation-equivariance residual <1e-10 in all targets.",
+    "Scoped synthetic mechanism screen only; no PA300/MACE-MP evidence is claimed."
+  ]
 }

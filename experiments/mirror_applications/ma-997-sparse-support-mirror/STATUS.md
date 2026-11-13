@@ -3,11 +3,11 @@
 - Status: FAIL (scoped synthetic screen; official MACE adaptation not established)
 - Branch: `research/ma-997-sparse-support-mirror-20261113`
 - Base commit: `5862e2498`
-- Last verified commit: pending
+- Last verified commit: `d97ec995aa0a5e59a49fd7b2beb2544e67389069`
 - Development complete: yes (seed 99701; support indices [0, 4, 8, 12, 16, 20])
 - Fresh/audit opened: yes (99711, 99713, 99717)
-- Results committed: pending
-- Verification committed: pending
+- Results committed: yes
+- Verification committed: yes
 
 ## Next action
 
