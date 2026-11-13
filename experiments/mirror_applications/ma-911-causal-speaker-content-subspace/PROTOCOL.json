@@ -1,0 +1,46 @@
+{
+  "experiment_id": "MA-911",
+  "title": "Causal speaker-content subspace Mirror factors",
+  "status": "UNTESTED",
+  "protocol_frozen": false,
+  "evidence_lane": "SPEECH_REPRESENTATION/CAUSAL_INTERVENTION/OOD_SPEAKER/STORAGE",
+  "hypothesis": "A compact Mirror speaker \u00d7 content coordinate preserves independently manipulable speaker identity and lexical content on heldout swaps/OOD speakers while improving bytes or quality over the official native interventional subspace and simple factorization controls.",
+  "prior_art_refs": [
+    "PA257"
+  ],
+  "controls_required": [
+    "Official interventional post-training subspace network",
+    "Ordinary linear/native speaker-content factorization",
+    "Mirror speaker \u00d7 content factors",
+    "Untransformed SSL feature baseline"
+  ],
+  "quality": {
+    "metrics": [
+      "OOD speaker verification EER/minDCF",
+      "SpeechCommands keyword spotting accuracy",
+      "speaker/content intervention swap leakage"
+    ],
+    "fresh_split": "Hold out speakers and complete speaker \u00d7 content intervention cells"
+  },
+  "storage": {
+    "authority": "actual serialized inference representation bytes",
+    "paid_objects": [
+      "SSL backbone if deployed",
+      "subspace maps",
+      "Mirror bases/codes",
+      "normalization and reconstruction state"
+    ]
+  },
+  "compute": {
+    "report": [
+      "post-training examples/updates",
+      "projection MACs",
+      "inference latency"
+    ]
+  },
+  "blocker": "Official training/evaluation assets are unavailable: no interventional audio/features/checkpoint, VoxCeleb1, LibriTTS or SpeechCommands audio locally; dataset-generation recipe requires F5-TTS Apptainer.",
+  "boundaries": [
+    "Feasibility review only; no model or proxy run.",
+    "Do not infer causal speech separation from synthetic matrix data or a non-interventional speech set."
+  ]
+}
