@@ -1,0 +1,19 @@
+{
+  "experiment_id": "MA-898",
+  "title": "CC-4DGS compressed deformation Mirror role code",
+  "status": "UNTESTED",
+  "protocol_frozen": false,
+  "evidence_lane": "NEURAL_GRAPHICS/SPACE_TIME/QUALITY/STORAGE/RUNTIME",
+  "hypothesis": "A compact scene/motion coordinate at the CC-4DGS CDF deterministic feature interface can generate multiple useful dynamic deformation functions from shared compressed CDF+CCA state with lower actual serialized payload than independent per-scene/motion assets, while retaining quality and rendering throughput.",
+  "prior_art_refs": ["PA250"],
+  "physical_object": "Shared CC-4DGS deterministic dense hash features, compact CDF decoder, canonical Gaussian attributes and CCA compressed bundle",
+  "mirror_coordinate": "Scene/motion View code m at the CDF feature input",
+  "logical_multiplicity": "Multiple distinct scene or motion deformation functions backed by one paid CDF+CCA physical object",
+  "controls_required": ["Official CC-4DGS CDF+CCA", "Shared CDF with ordinary scene/motion embedding", "Mirror scene/motion coordinate", "Independent per-scene/motion CDF assets when practical"],
+  "fresh": {"heldout_timestamp_view_cells": true, "seeds": [], "locked_before_access": false},
+  "storage": {"authority": "actual serialized deployable payload bytes", "paid_objects": ["all CDF decoder weights", "deterministic feature/layout metadata", "canonical point-cloud attributes", "CCA autoencoder or deployed decoder", "quantization tables", "residual codebooks", "Mirror codes", "routers/indices", "reconstruction metadata"]},
+  "compute": {"report": ["active compute", "fit wall-clock", "measured render FPS", "peak VRAM", "random-access latency"]},
+  "quality": {"metrics": ["PSNR", "LPIPS/SSIM", "temporal consistency"], "fresh_worlds": [], "success_gate": "Not frozen; lock thresholds and held-out scene-time-view cells before fresh evaluation."},
+  "blocker": "Official CC-4DGS was validated with CUDA 11.8/RTX 4090, builds CUDA rasterizer/simple-knn extensions, uses CUDA-bound paths, and ships no dataset files. Current runtime is CPU-only and N3DV/Technicolor scenes are absent.",
+  "boundaries": ["Feasibility review only; no PSNR, payload, or FPS evidence.", "The reduced random-weight CPU CDF smoke is not trained-model or Mirror evidence.", "A function-distortion/bytes screen with released checkpoints would require a new scoped amendment and cannot certify rendered quality/FPS.", "Do not replace the official renderer with a toy CPU rasterizer and claim the registered frontier."]
+}

@@ -1,5 +1,10 @@
 # Worker queue
 
+## Current handoff — 2026-11-13, MA-898
+
+MA-896 and MA-897 remain UNTESTED and are skipped per user direction due the unavailable official CUDA renderers and scene data. MA-898 official CC-4DGS is also blocked for its registered PSNR/FPS frontier, but its pure-PyTorch CDF component runs a reduced random-weight CPU smoke; keep this as environment evidence only. No trained-model/Mirror result is claimed; a checkpoint function/bytes study would need a scoped amendment. MA-898 remains UNTESTED. See `ma-898-cc4dgs-role-view/EXECUTION_BLOCKER.md`. Advance to MA-899.
+
+
 ## Current handoff — 2026-11-13, MA-897
 
 MA-896 official 4DGS remains UNTESTED due CUDA and scene-data requirements; it is skipped for now per user direction, with blocker preserved on its dedicated branch. MA-897 official ADC-GS has the same CUDA-runtime blocker plus missing HyperNeRF/N3V assets; it remains UNTESTED, not FAIL. See `ma-897-adc-gs-anchor-motion/EXECUTION_BLOCKER.md`. Advance to MA-898.

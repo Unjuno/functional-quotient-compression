@@ -1,0 +1,45 @@
+{
+  "experiment_id": "MA-897",
+  "commit": "695970e81b9181b8ad9961df83e93a851ad4de59",
+  "tests": {
+    "command": null,
+    "passed": null,
+    "failed": null
+  },
+  "serialization": {
+    "roundtrip_checked": false,
+    "byte_exact": false
+  },
+  "metric_replay": {
+    "checked": false,
+    "max_difference": null
+  },
+  "fresh_split_integrity_checked": false,
+  "environment": {
+    "torch": "2.14.1+cpu",
+    "cuda_available": false,
+    "nvidia_smi": false,
+    "upstream_commit": "5501b8a163b564a583cca2edf251868e795c3040",
+    "cuda_extensions_built": false,
+    "dynamic_scene_dataset_found": false,
+    "official_cdf_cpu_smoke": {
+      "status": "passed",
+      "input_shape": [
+        16,
+        4
+      ],
+      "output_shape": [
+        16,
+        12
+      ],
+      "weights": "random initialized reduced config",
+      "trained_model_evidence": false
+    }
+  },
+  "notes": [
+    "Feasibility review only; remains UNTESTED, not FAIL.",
+    "Official ADC-GS pins PyTorch 1.12.1+cu116 and compiles CUDA rasterizer/simple-knn extensions.",
+    "No training, rendering, quality evaluation, payload measurement, or FPS claim was made.",
+    "Untouched official CDF primitive runs on CPU for a reduced random-weight smoke; no trained checkpoint, Mirror code, scene, or rendered quality was evaluated."
+  ]
+}
