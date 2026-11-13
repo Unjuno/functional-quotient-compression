@@ -1,0 +1,93 @@
+{
+  "world": 99713,
+  "support_indices": [
+    0,
+    4,
+    8,
+    12,
+    16,
+    20
+  ],
+  "targets": 4,
+  "calibration_examples_per_target": 8,
+  "heldout_examples_per_target": 24,
+  "methods": {
+    "shared_only": {
+      "energy_nrmse_mean": 0.4609574805831834,
+      "force_nrmse_mean": 0.311263410119096,
+      "combined_nrmse_mean": 0.3948511697973675,
+      "serialized_bytes": 1038,
+      "inference_mac_proxy_per_config": 100,
+      "material_decode_mac_proxy": 0,
+      "roundtrip_exact": true
+    },
+    "mirror_shared_support": {
+      "energy_nrmse_mean": 5.79429013200871e-16,
+      "force_nrmse_mean": 3.3917581926756334e-16,
+      "combined_nrmse_mean": 4.830100725946326e-16,
+      "serialized_bytes": 1732,
+      "inference_mac_proxy_per_config": 100,
+      "material_decode_mac_proxy": 6,
+      "roundtrip_exact": true
+    },
+    "native_shared_support": {
+      "energy_nrmse_mean": 5.79429013200871e-16,
+      "force_nrmse_mean": 3.3917581926756334e-16,
+      "combined_nrmse_mean": 4.830100725946326e-16,
+      "serialized_bytes": 1732,
+      "inference_mac_proxy_per_config": 100,
+      "material_decode_mac_proxy": 6,
+      "roundtrip_exact": true
+    },
+    "independent_sparse": {
+      "energy_nrmse_mean": 0.19668359710472605,
+      "force_nrmse_mean": 0.17020096765497233,
+      "combined_nrmse_mean": 0.18451636318043646,
+      "serialized_bytes": 1768,
+      "inference_mac_proxy_per_config": 100,
+      "material_decode_mac_proxy": 6,
+      "roundtrip_exact": true
+    },
+    "independent_full": {
+      "energy_nrmse_mean": 0.13460054480913677,
+      "force_nrmse_mean": 0.09161695357023458,
+      "combined_nrmse_mean": 0.11513247336092387,
+      "serialized_bytes": 1774,
+      "inference_mac_proxy_per_config": 100,
+      "material_decode_mac_proxy": 0,
+      "roundtrip_exact": true
+    }
+  },
+  "integrity_checks": [
+    {
+      "target": 0,
+      "force_gradient_max_abs": 3.584389035582447e-11,
+      "rotation_equivariance_max_abs": 8.326672684688674e-17,
+      "calibration_examples": 8,
+      "heldout_examples": 24
+    },
+    {
+      "target": 1,
+      "force_gradient_max_abs": 5.1870618911209476e-11,
+      "rotation_equivariance_max_abs": 2.0122792321330962e-16,
+      "calibration_examples": 8,
+      "heldout_examples": 24
+    },
+    {
+      "target": 2,
+      "force_gradient_max_abs": 4.204658149431495e-11,
+      "rotation_equivariance_max_abs": 5.551115123125783e-17,
+      "calibration_examples": 8,
+      "heldout_examples": 24
+    },
+    {
+      "target": 3,
+      "force_gradient_max_abs": 4.738680281501928e-11,
+      "rotation_equivariance_max_abs": 6.071532165918825e-17,
+      "calibration_examples": 8,
+      "heldout_examples": 24
+    }
+  ],
+  "optimizer_updates": 0,
+  "fresh_batch_wall_time_s": 0.1499032030114904
+}

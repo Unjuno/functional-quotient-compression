@@ -1,7 +1,7 @@
 {
   "experiment_id": "MA-997",
   "title": "Structured sparse equivariant support \u00d7 Mirror code",
-  "status": "SCREENING",
+  "status": "FAIL",
   "evidence_lane": "STORAGE",
   "base_commit": "5862e2498",
   "hypothesis": "A shared six-coordinate sparse support plus per-material Mirror coefficients recovers aligned conservative material residuals with at least 25% fewer actual bytes than independent sparse adaptation while beating a matched native shared-support control.",
@@ -65,5 +65,6 @@
     "Fresh support remains sealed until protocol and dev support selection are committed."
   ],
   "implementation_amendment_01": "Before fresh access, payload review found independent_sparse serialized values derived from the dense fit rather than the selected sparse fit. Corrected payload to serialize the exact sparse-fit coefficients used for evaluation; no fresh world was opened.",
-  "verification_amendment_02": "Added deterministic replay from saved serialized payloads for post-hoc verification only; no fresh outcomes or tuning changed."
+  "verification_amendment_02": "Added deterministic replay from saved serialized payloads for post-hoc verification only; no fresh outcomes or tuning changed.",
+  "decision": "Scoped synthetic Mirror-specific FAIL; native shared-support control exactly aliases Mirror and actual byte savings miss the preregistered gate."
 }

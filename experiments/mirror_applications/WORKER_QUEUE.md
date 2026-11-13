@@ -1,3 +1,7 @@
+## Current handoff — 2026-11-13, MA-997
+
+MA-997 completed as a scoped synthetic FAIL: shared six-index sparse Mirror codes exactly alias the matched native shared-mask table at 1,732 B; the saving versus independent sparse masks is only 2.0%, below the frozen 25% gate. Force consistency and serialized replay passed in all three fresh worlds. MA-996/997 are consecutive atomistic material-code failures against native parameterizations, so pause MA-998 UNTESTED pending structural redesign. No PA300/MACE claim. See `ma-997-sparse-support-mirror/RESULTS.md`. Advance to distinct-family MA-999.
+
 ## Current handoff — 2026-11-13, MA-996
 
 MA-996 completed as a scoped synthetic FAIL for Mirror-specific value. Conservative radial energy/force consistency passed in three fresh worlds, but rank-2 Mirror exactly aliases native rank-2, actual payload is 2,066 B vs 1,774 B independent, and MAC proxy is 48% higher. No MACE-MP/MPTrj claim. See `ma-996-mace-material-mirror/RESULTS.md`. Continue with MA-997 sparse equivariant support × Mirror.

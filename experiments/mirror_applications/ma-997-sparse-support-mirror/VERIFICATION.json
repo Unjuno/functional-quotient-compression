@@ -1,9 +1,9 @@
 {
   "experiment_id": "MA-997",
   "commit": "pending",
-  "tests": {"command": "pending", "passed": null, "failed": null},
-  "serialization": {"roundtrip_checked": false, "byte_exact": false},
-  "metric_replay": {"checked": false, "max_difference": null},
-  "fresh_split_integrity_checked": false,
-  "notes": ["Synthetic sparse-support mechanism screen; no official MACE-MP evidence is claimed."]
+  "tests": {"command": "python experiments/mirror_applications/ma-997-sparse-support-mirror/source/run_screen.py verify", "passed": 3, "failed": 0},
+  "serialization": {"roundtrip_checked": true, "byte_exact": true},
+  "metric_replay": {"checked": true, "max_difference": 0.0},
+  "fresh_split_integrity_checked": true,
+  "notes": ["All three fresh worlds passed exact metric replay from saved serialized payloads.", "Finite-difference force-gradient residual <1e-7 and rotation-equivariance residual <1e-10 in all targets.", "Scoped synthetic mechanism screen only; no PA300/MACE-MP evidence is claimed."]
 }
