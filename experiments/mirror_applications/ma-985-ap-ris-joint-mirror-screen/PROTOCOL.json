@@ -1,0 +1,21 @@
+{
+  "experiment_id":"MA-985",
+  "title":"AP×RIS factorized code under MU-MISO WMMSE",
+  "status":"FAIL",
+  "protocol_frozen":true,
+  "base_commit":"15c36719a",
+  "prior_art_refs":["PA290","PA288"],
+  "hypothesis":"On fresh synthetic MU-MISO channel configurations, jointly factorized AP beam and RIS phase coordinates preserve weighted sum rate while using fewer serialized control bytes than a full per-configuration joint policy table.",
+  "scope":"Small ideal narrowband MU-MISO simulator with standard WMMSE active precoding and gradient RIS phase updates; each configuration is optimized directly. This is not learned-policy generalization, PA290 reproduction, or 3GPP channel modeling.",
+  "system":{"ap_antennas":4,"ris_elements":8,"users":2,"scenarios_per_world":8,"sum_power_limit":1.0,"noise_power":0.1},
+  "conditions":["full_AP_full_RIS_WMMSE","rank2_AP_full_RIS","full_AP_rank2_RIS","rank2_AP_rank2_Mirror","rank2_AP_rank2_native_product_code"],
+  "factorization":{"AP":"fixed two-column DFT beam basis with per-config complex coefficients","RIS":"constant plus linear spatial phase basis with per-config two real coefficients"},
+  "worlds":{"development":[98501],"fresh":[98511,98513,98517]},
+  "metrics":["mean weighted sum rate","power constraint residual","actual torch.save inference-control bytes","AP/RIS code dimensions","WMMSE iterations","RIS gradient iterations","complex MAC proxy","CPU wall time"],
+  "storage":{"authority":"actual serialized control table including bases, all per-config AP/RIS coordinates, router/config IDs and metadata"},
+  "success_gate":"Factorized Mirror has >=90% of full WMMSE mean WSR in each fresh world and uses <=50% of full joint control payload bytes.",
+  "failure_gate":"Any quality/storage gate misses, power constraints fail, or native AP×RIS product code exactly aliases Mirror.",
+  "fresh":{"locked_before_access":true,"seeds":[98511,98513,98517]},
+  "pre_fresh_amendment":"Code review before fresh access corrected the active-compute MAC proxy to use reduced AP rank and avoid double-counting configurations; renamed the power metric to max residual. RIS Adam updates now preserve the best observed phase iterate because individual steps are not guaranteed monotone. No fresh data was accessed before these changes.",
+  "boundaries":["Fresh synthetic channel configurations only; no learned model or held-out real site data; each configuration is optimized with its channel known.","WSR is simulator output, not field network throughput; full WMMSE+RIS is a fixed-iteration reference, not a guaranteed global optimum.","Reported CPU wall/MAC costs include offline per-configuration optimization, not serving inference or phase-switch time.","No hardware energy, latency, RF impairment, RIS coupling, or PA290 DL/GNN reproduction claim."]
+}

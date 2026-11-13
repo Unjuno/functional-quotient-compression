@@ -6,11 +6,11 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- Claim ledger entries: **432**
+- Claim ledger entries: **433**
 - P0: **630** (348 FAIL; 52 PROMISING; 223 UNTESTED; 6 NOT ESTABLISHED; 1 SCREENING)
 - P1: **422** (17 completed; 405 UNTESTED)
 - P2: **103** (103 UNTESTED)
-- Current MA statuses: **360 FAIL, 9 NOT ESTABLISHED, 61 PROMISING, 1 SCREENING, 724 UNTESTED**
+- Current MA statuses: **361 FAIL, 9 NOT ESTABLISHED, 61 PROMISING, 1 SCREENING, 723 UNTESTED**
 - 47 baseline experiment directories remain present; verified external outcomes are linked to their dedicated branches in the registry and claim ledger.
 - New research: MA-876..935 (60 candidates), PA236..PA265 (30 primary sources). See the current Next candidate section for the live queue.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. see the current Next candidate section.
@@ -471,3 +471,6 @@ MA-983 synthetic CsiNet-style domain screen FAIL: at 130 feedback bits/channel, 
 
 
 MA-984 ideal RIS phase-code screen FAIL for Mirror-specific attribution: a 10-bit two-coordinate phase payload retained 99.73% of continuous rate and used 176 B vs 2,064 B for 2-bit full-element codes, but native phase-gradient control matched exactly. Every condition still updates all 64 physical elements. No PA290 or hardware energy/latency claim. See `ma-984-ris-phase-mirror-screen/RESULTS.md`.
+
+
+MA-985 small synthetic MU-MISO/WMMSE screen FAIL: rank-2 AP×RIS factor reached 1.4709 mean WSR vs fixed-procedure full WMMSE 2.6888 (54.7%) and used 2,781 B vs 2,725 B. Power residual <=2.4e-7. Ordinary product control matches Mirror payload/hash/WSR exactly. This optimizes each synthetic configuration directly and is not held-out learned-policy generalization or PA290. See `ma-985-ap-ris-joint-mirror-screen/RESULTS.md`.

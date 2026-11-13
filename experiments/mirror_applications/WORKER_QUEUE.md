@@ -824,3 +824,6 @@ MA-983 synthetic CSI-domain screen FAIL: Mirror rank-1 code missed independent q
 
 
 MA-984 ideal RIS screen FAIL for Mirror-specific attribution: 10-bit two-coordinate code retained 99.73% continuous rate at 176 B/128 commands vs 2,064 B full-element 2-bit control, but native phase-gradient control exactly aliases Mirror; all 64 elements are still updated. No hardware energy/PA290 claim. See `ma-984-ris-phase-mirror-screen/RESULTS.md`.
+
+
+MA-985 synthetic MU-MISO WMMSE/RIS screen FAIL: rank-2 AP×RIS Mirror averaged WSR 1.4709 vs fixed-procedure full-control WMMSE 2.6888 (54.7%) and used 2,781 B vs 2,725 B; max power residual <=2.4e-7. Native product is exact alias. Per-config optimization only, not PA290 or learned generalization. See `ma-985-ap-ris-joint-mirror-screen/RESULTS.md`.

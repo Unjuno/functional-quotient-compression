@@ -1,0 +1,9 @@
+{
+  "experiment_id":"MA-985",
+  "commit":"pending",
+  "tests":{"command":"python experiments/mirror_applications/ma-985-ap-ris-joint-mirror-screen/tests/verify_result.py","passed":1,"failed":0},
+  "serialization":{"roundtrip_checked":true,"byte_exact":true,"authority":"torch.save state decoded before rate replay"},
+  "metric_replay":{"checked":true,"max_difference":0.0,"notes":["fresh seed 98511 recomputed from decoded control; Mirror/native product payload and WSR identical"]},
+  "fresh_split_integrity_checked":true,
+  "notes":["15 result rows: 3 fresh worlds x 5 control methods.","Total power residual is <2.4e-7 for every method/world.","Corrected active MAC proxy before fresh; includes reduced AP solve rank and does not double-count configurations.","Standard WMMSE synthetic baseline, not PA290 reproduction or global optimality guarantee."]
+}
