@@ -1,3 +1,7 @@
+## Current handoff — 2026-11-13, MA-1000
+
+MA-1000 is PROMISING only for the synthetic physical-validity check: energy-layer Mirror functions with forces derived from the energy pass finite-difference and rotation checks; the separate-force-head control violates consistency. Native rank-2 is identical and Mirror payload is larger than independent coefficients. No trained MACE/NequIP or quality claim. See `ma-1000-conservative-derivative-audit/RESULTS.md`. Continue to MA-1001 long-rollout stability.
+
 ## Current handoff — 2026-11-13, MA-999
 
 MA-999 completed as a scoped synthetic FAIL: a shared analytic LJ potential predicts all T/P-shifted geometry samples exactly; Mirror factors increase actual payload from 526 B to 1,618 B. Force consistency passed. The sample box scaling is not an NPT simulation, and no MatterSim result is claimed. See `ma-999-temperature-pressure-material-mirror/RESULTS.md`. Continue to MA-1000 conservative derivative audit.

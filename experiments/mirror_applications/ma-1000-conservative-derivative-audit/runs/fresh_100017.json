@@ -1,0 +1,40 @@
+{
+  "world": 100017,
+  "functions": 2,
+  "radial_examples": 2,
+  "optimizer_updates": 0,
+  "methods": {
+    "mirror_energy": {
+      "serialized_bytes": 2034,
+      "roundtrip_exact": true,
+      "inference_mac_proxy_per_config": 110
+    },
+    "native_rank2_energy": {
+      "serialized_bytes": 2034,
+      "roundtrip_exact": true,
+      "inference_mac_proxy_per_config": 110
+    },
+    "independent_energy": {
+      "serialized_bytes": 1294,
+      "roundtrip_exact": true,
+      "inference_mac_proxy_per_config": 100
+    }
+  },
+  "checks": [
+    {
+      "view": 0,
+      "force_gradient_max_abs": 4.4936054877098286e-11,
+      "rotation_equivariance_max_abs": 3.191891195797325e-16,
+      "negative_control_residual": 0.0020000000000000018,
+      "code_function_difference_energy": 0.08986145488909925
+    },
+    {
+      "view": 1,
+      "force_gradient_max_abs": 3.7102543259948106e-11,
+      "rotation_equivariance_max_abs": 3.0878077872387166e-16,
+      "negative_control_residual": 0.0020000000000000018,
+      "code_function_difference_energy": 0.16447083320279385
+    }
+  ],
+  "fresh_batch_wall_time_s": 0.023381592007353902
+}
