@@ -1,0 +1,66 @@
+{
+  "experiment_id": "MA-900",
+  "title": "GenSplatCodec structural \u00d7 appearance Mirror code",
+  "status": "UNTESTED",
+  "protocol_frozen": false,
+  "evidence_lane": "NEURAL_GRAPHICS/GENERATIVE_COMPRESSION/MULTI_VIEW_QUALITY/STORAGE/RUNTIME",
+  "hypothesis": "A compact structural \u00d7 appearance View code can share one geometry-guided one-step Gaussian decoder across logical scene variants and preserve multi-view consistency with a better actual-stream rate-quality-latency frontier than native independent codec state and ordinary latent/gain controls.",
+  "prior_art_refs": [
+    "PA265"
+  ],
+  "physical_object": "Shared GenSplatCodec geometry-guided one-step generative decoder and structure/appearance coding state",
+  "mirror_coordinate": "Structure factor \u00d7 appearance View code m",
+  "logical_multiplicity": "Multiple useful scene variants reconstructed from shared paid decoder state",
+  "controls_required": [
+    "Official native GenSplatCodec structure and reference-appearance streams plus one-step decoder",
+    "Shared native decoder with ordinary appearance latent or photometric gain control",
+    "Shared decoder plus Mirror structure-factor \u00d7 appearance View code",
+    "Independent per-scene codec state upper control when practical"
+  ],
+  "development": {
+    "scenes_or_seeds": [],
+    "selection_metric": "No split opened; thresholds must be frozen before any future amendment"
+  },
+  "fresh": {
+    "heldout_scenes_and_camera_views": true,
+    "scenes_or_seeds": [],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual serialized coded stream bytes",
+    "paid_objects": [
+      "decoder/checkpoint weights",
+      "structure stream",
+      "reference-appearance stream",
+      "Mirror codes",
+      "latent/gain controls",
+      "quantizers and codebooks",
+      "indices and metadata",
+      "reconstruction state"
+    ]
+  },
+  "compute": {
+    "report": [
+      "one-step NFE",
+      "active compute proxy",
+      "encoding and decoding wall clock",
+      "inference latency",
+      "peak memory"
+    ]
+  },
+  "quality": {
+    "metrics": [
+      "PSNR",
+      "SSIM",
+      "LPIPS",
+      "cross-view consistency"
+    ],
+    "success_gate": "Not frozen; must define before any future fresh evaluation, with NFE-matched controls."
+  },
+  "blocker": "Bounded exact-title search did not locate official source; current runtime lacks CUDA/Gaussian renderer/diffusion package and no scenes are local.",
+  "boundaries": [
+    "Feasibility review only; no model, bytes, quality, or latency run.",
+    "Do not substitute ExGS or another Gaussian codec for the registered GenSplatCodec control.",
+    "A toy/proxy implementation cannot establish the registered frontier."
+  ]
+}

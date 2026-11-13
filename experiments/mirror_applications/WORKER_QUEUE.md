@@ -666,3 +666,6 @@ MA-882 completed FAIL. Fixed top-2 layer matching beat nearest relative depth in
 
 
 MA-899 remains UNTESTED after feasibility review: bounded search did not identify official P-4DGS code; there are no local D-NeRF/NeRF-DS assets and the registered render/FPS frontier needs CUDA. No codec/model run or metrics were produced. See `ma-899-p4dgs-temporal-code/EXECUTION_BLOCKER.md`. Skip this blocked candidate and continue with MA-900, GenSplatCodec structural × appearance Mirror code.
+
+
+MA-900 remains UNTESTED after source/runtime feasibility review: official source/checkpoints and benchmark scenes were not identified; no CUDA, diffusion package, or Gaussian renderer is available. No run or metrics. See `ma-900-gensplatcodec-structure-view/EXECUTION_BLOCKER.md`. MA-901 is P1; next eligible P0 is MA-902, scene identity × time Mirror field (PA243/PA247).
