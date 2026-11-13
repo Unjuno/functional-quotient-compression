@@ -3,6 +3,7 @@
 - Status: FAIL (scoped Mirror-specific screen)
 - Branch: `research/ma-966-fine-event-timing-packet-phase-20261113`
 - Base commit: `e501275e6`
+- Result commit: `f819bf6d9`
 - Protocol frozen: yes
 - Development complete: yes
 - Fresh/audit opened: yes; label-offset groups remained disjoint
