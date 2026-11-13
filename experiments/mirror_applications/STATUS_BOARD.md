@@ -399,3 +399,6 @@ MA-939 scoped HNeRV Bunny frame-coordinate screen **FAIL**: uint8 rank-2..16 cod
 
 
 MA-941 remains **UNTESTED**: the CVPR paper is available, but official DCVC-UF source/checkpoint/entropy coder/bitstream were not found; CUDA is unavailable. Native coded-bit and chunk-parallel FPS comparison cannot run. See `ma-941-dcvc-uf-frame-views/EXECUTION_BLOCKER.md`. Next P0 MA-942 DCVC-UF frame-offset × QP factor.
+
+
+MA-942 remains **UNTESTED**: no DCVC-UF 64-QP bank, entropy coder, bitstreams or CUDA; equal-rate BD-rate/FPS measurement cannot run. See `ma-942-dcvc-uf-frame-qp-factor/EXECUTION_BLOCKER.md`. Next P0 MA-943.

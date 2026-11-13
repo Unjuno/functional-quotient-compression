@@ -752,3 +752,6 @@ MA-939 scoped HNeRV Bunny frame-code screen FAIL: rank-2..16 reduced serialized 
 
 
 MA-941 remains UNTESTED: no official DCVC-UF implementation/checkpoint/entropy coder/bitstream, and no CUDA for the registered chunk-parallel FPS comparison. Paper only; no substitute codec claim. See `ma-941-dcvc-uf-frame-views/EXECUTION_BLOCKER.md`. Next P0 MA-942.
+
+
+MA-942 remains UNTESTED: no official DCVC-UF/QP bank/bitstreams or CUDA for equal-rate BD-rate and FPS. See `ma-942-dcvc-uf-frame-qp-factor/EXECUTION_BLOCKER.md`. Advance to next P0 MA-943.

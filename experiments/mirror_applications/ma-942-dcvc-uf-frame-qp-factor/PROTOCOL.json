@@ -1,0 +1,57 @@
+{
+  "experiment_id": "MA-942",
+  "title": "DCVC-UF frame-offset \u00d7 QP rate-control factor",
+  "status": "UNTESTED",
+  "evidence_lane": "DIRECT_NEURAL_VIDEO_APPLICATION",
+  "base_commit": "b9fb7f29b",
+  "prior_art_refs": [
+    "PA269",
+    "PA270"
+  ],
+  "hypothesis": "A factorized frame-slot \u00d7 QP coordinate can share DCVC-UF rate-control module state while preserving equal-bit BD-rate, quality and decode FPS versus the native 64-QP rate bank.",
+  "physical_object": "DCVC-UF shared chunk decoder and native rate-control modules.",
+  "mirror_coordinate": "Frame slot \u00d7 quantization/rate point m.",
+  "logical_multiplicity": "Many bitrate-frame decoder policies over one physical chunk decoder.",
+  "controls": [
+    "native DCVC-UF 64-QP rate-control bank",
+    "factorized frame-slot \u00d7 QP code",
+    "equal-coded-bitrate native reference"
+  ],
+  "development": {
+    "worlds_or_seeds": [],
+    "selection_metric": "Not run; codec and QP bank unavailable."
+  },
+  "fresh": {
+    "worlds_or_seeds": [],
+    "locked_before_access": false,
+    "selection_metric": "Not run."
+  },
+  "storage": {
+    "authority": "actual coded bitstream, rate-control state and decoder payload bytes",
+    "paid_objects": [
+      "shared decoder",
+      "all 64 QP coordinates or factor codes",
+      "entropy coder/codebook",
+      "metadata"
+    ]
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true,
+    "decode_fps_required": true
+  },
+  "success_gate": "Not evaluated; requires native 64-QP bitstreams and equal-rate quality/FPS frontier.",
+  "failure_gate": "Not evaluated.",
+  "blockers": [
+    "DCVC-UF official implementation/checkpoints/entropy coder/64-QP bank unavailable.",
+    "No CUDA/NVIDIA GPU to measure the registered frame-parallel decode and rate-control costs.",
+    "No native coded-bitstream dataset in the workspace."
+  ],
+  "boundaries": [
+    "Do not treat free QP labels as compressed state; all rate-control metadata must be paid.",
+    "No synthetic rate-control proxy can establish codec BD-rate.",
+    "UNTESTED is not FAIL."
+  ]
+}
