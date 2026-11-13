@@ -1,0 +1,57 @@
+{
+  "experiment_id": "MA-943",
+  "title": "DCVC-RT rate-control bank compressed by Mirror",
+  "status": "UNTESTED",
+  "evidence_lane": "DIRECT_NEURAL_VIDEO_APPLICATION",
+  "base_commit": "7cc45980b",
+  "prior_art_refs": [
+    "PA270"
+  ],
+  "hypothesis": "A compact bitrate-mode coordinate can replace selected native DCVC-RT rate-control modules while preserving BD-rate, 1080p FPS and function-call/memory-I/O cost.",
+  "physical_object": "DCVC-RT shared motion/temporal-context codec and native rate-control module bank.",
+  "mirror_coordinate": "Bitrate-mode View m over selected rate-control modules.",
+  "logical_multiplicity": "Multiple logical video quality settings without a full independent module bank.",
+  "controls": [
+    "official DCVC-RT native module bank",
+    "shared module with ordinary low-rank/gating control",
+    "Mirror bitrate-mode coordinate"
+  ],
+  "development": {
+    "worlds_or_seeds": [],
+    "selection_metric": "Not run; official trained checkpoint and codec data unavailable."
+  },
+  "fresh": {
+    "worlds_or_seeds": [],
+    "locked_before_access": false,
+    "selection_metric": "Not run."
+  },
+  "storage": {
+    "authority": "actual coded bitstream and serialized decoder/rate-control payload bytes",
+    "paid_objects": [
+      "codec weights",
+      "native rate modules or Mirror codes",
+      "entropy coder",
+      "metadata"
+    ]
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true,
+    "decode_fps_required": true,
+    "1080p_required": true
+  },
+  "success_gate": "Not evaluated; require matched 1080p BD-rate/FPS and call/memory-I/O audit.",
+  "failure_gate": "Not evaluated.",
+  "blockers": [
+    "No official DCVC-RT trained weights, data, or benchmark bitstreams found.",
+    "Only one third-party repository was found; its README explicitly says inference on pretrained DCVC-RT weights did not work due to dependencies.",
+    "No checkpoint files in that repository; dependencies include incompatible/legacy stack; CUDA/NVIDIA unavailable."
+  ],
+  "boundaries": [
+    "Do not treat third-party implementation as native DCVC-RT result.",
+    "No 1080p FPS, BD-rate, codec call count or Mirror metrics were measured.",
+    "UNTESTED is not FAIL."
+  ]
+}

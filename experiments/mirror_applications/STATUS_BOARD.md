@@ -402,3 +402,6 @@ MA-941 remains **UNTESTED**: the CVPR paper is available, but official DCVC-UF s
 
 
 MA-942 remains **UNTESTED**: no DCVC-UF 64-QP bank, entropy coder, bitstreams or CUDA; equal-rate BD-rate/FPS measurement cannot run. See `ma-942-dcvc-uf-frame-qp-factor/EXECUTION_BLOCKER.md`. Next P0 MA-943.
+
+
+MA-943 remains **UNTESTED**: only a third-party DCVC-RT repository was found; its README reports pretrained inference failure, and it has no weights/data. No CUDA for the 1080p FPS/call audit. See `ma-943-dcvc-rt-rate-bank-mirror/EXECUTION_BLOCKER.md`. Next P0 MA-944 DCMVC reference-driven temporal context correction.

@@ -755,3 +755,6 @@ MA-941 remains UNTESTED: no official DCVC-UF implementation/checkpoint/entropy c
 
 
 MA-942 remains UNTESTED: no official DCVC-UF/QP bank/bitstreams or CUDA for equal-rate BD-rate and FPS. See `ma-942-dcvc-uf-frame-qp-factor/EXECUTION_BLOCKER.md`. Advance to next P0 MA-943.
+
+
+MA-943 remains UNTESTED: only third-party DCVC-RT source was found; its README reports pretrained inference failure and it has no weights/data. CPU-only environment cannot satisfy the 1080p FPS/call gate. See `ma-943-dcvc-rt-rate-bank-mirror/EXECUTION_BLOCKER.md`. Next P0 MA-944.

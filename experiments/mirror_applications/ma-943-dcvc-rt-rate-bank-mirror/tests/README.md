@@ -1,0 +1,1 @@
+No DCVC-RT codec tests were run: only a third-party implementation with reported pretrained inference problems was available; no weights/data/GPU.
