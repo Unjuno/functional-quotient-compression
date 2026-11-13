@@ -1,0 +1,15 @@
+{
+  "experiment_id": "MA-916",
+  "title": "Speaker adapter-bank storage frontier for added voices",
+  "status": "UNTESTED",
+  "protocol_frozen": false,
+  "prior_art_refs": ["PA253", "PA254", "PA255", "PA256"],
+  "hypothesis": "A shared TTS backbone and small Mirror speaker codes improve the actual serialized bytes-per-voice versus quality/runtime frontier over native per-speaker adapters and strong shared speaker adaptation methods.",
+  "required_controls": ["NanoVoice shared scale matrix", "HyperTTS generated adapters", "MoA-TTS", "Hyper-MoA", "Mirror code", "independent per-speaker adapter upper control when practical"],
+  "development": {"speakers": [], "seeds": []},
+  "fresh": {"heldout_speakers": true, "seeds": [], "locked_before_access": true},
+  "metrics": ["speaker similarity", "intelligibility (WER/CER)", "actual serialized inference bytes per voice", "adaptation compute", "inference latency"],
+  "storage_authority": "serialized deployed backbone plus all per-voice codes, adapters, bases, generators, routers, metadata and reconstruction state",
+  "blocker": "Matched runnable official baseline checkpoints and speaker-evaluation assets unavailable in this environment.",
+  "boundary": "Do not substitute an unrelated TTS family or weaken the registered controls; no Mirror claim without matched quality and byte measurements."
+}

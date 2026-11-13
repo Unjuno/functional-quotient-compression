@@ -1,0 +1,1 @@
+No model test was run: no matched executable baseline set or speaker evaluation assets were available. Before resuming, pin model/data revisions, freeze speaker splits and preregister all byte/quality controls.
