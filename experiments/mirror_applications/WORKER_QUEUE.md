@@ -709,3 +709,5 @@ MA-917 remains UNTESTED: no runnable multispeaker checkpoint, compatible speaker
 MA-919 scoped mechanism screen PROMISING only for fixed-budget learning efficiency: 3/3 analytic fresh systems favored `(s,t-s)` at equal state bytes and MLP MAC proxy; the coordinate is an ordinary invertible time reparameterization, so no Mirror-specific or capacity claim. No PA260 image/FID test. See `ma-919-flowmap-interval-mirror/RESULTS.md`.
 
 Next eligible after MA-919 is MA-920 (P0), consistency-model noise-level Mirror view; P1 MA-918 is skipped for now.
+
+MA-920 remains UNTESTED: official CIFAR checkpoint host blocked by proxy; no JAX/Flax or accelerator, and native-only ImageNet weights cannot test Mirror. MA-921 is the next P0 candidate; inspect its registered row and prior art before proceeding.

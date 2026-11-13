@@ -1,0 +1,12 @@
+{
+  "experiment_id": "MA-920",
+  "title": "Consistency-model Mirror noise-level view",
+  "status": "UNTESTED",
+  "protocol_frozen": false,
+  "prior_art_refs": ["PA261"],
+  "hypothesis": "A small Mirror noise-level/condition code improves image quality per byte at matched NFE over native consistency conditioning and ordinary controls.",
+  "required_controls": ["official native consistency model", "ordinary native time/noise embedding", "byte-near low-rank or gate control", "Mirror view", "distilled native upper/reference when available"],
+  "metrics": ["FID or registered sample-quality metric", "NFE", "actual serialized inference bytes", "latency"],
+  "blocker": "Official CIFAR checkpoint host inaccessible; JAX/CUDA stack unavailable; native-only HF ImageNet model lacks trained Mirror comparison and adequate CPU quality-evaluation path.",
+  "boundary": "No native-only or untrained-shim result counts as a Mirror comparison. Do not substitute synthetic flow quality for the registered image-model claim."
+}
