@@ -1,0 +1,34 @@
+{
+  "experiment_id": "MA-930",
+  "commit": null,
+  "tests": {
+    "command": "python experiments/mirror_applications/ma-930-factorized-stitching-bridges/source/run_screen.py",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "payload_files": 6
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "environment": {
+    "device": "cpu"
+  },
+  "notes": [
+    "All model/dataset revisions and SHA-256 values in source/data_manifest.json.",
+    "Factorized checkpoint reload replay max difference 0.0 for each seed.",
+    "Native target-tail identity check max logit difference 0.0 at layers 2/4/6/8.",
+    "Factorized connector failed held-out quality gate despite large connector-byte savings.",
+    "Screen is representation transfer only; no StitchLLM throughput or semantic-equivalence claim."
+  ],
+  "fresh_seeds": [
+    93001,
+    93007,
+    93013
+  ]
+}

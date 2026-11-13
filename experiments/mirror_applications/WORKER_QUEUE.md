@@ -725,3 +725,6 @@ Priority correction: MA-925 is P0 per IDEA_REGISTRY, not P1. It remains UNTESTED
 MA-926 remains UNTESTED: no matched shared subject LoRA bank/eval images and no CUDA for SDXL. MA-927/928 are P1; next P0 MA-929 StitchLLM connector sharing.
 
 MA-929 remains UNTESTED: official StitchLLM code, matched model/connector assets and native throughput control unavailable. MA-930 is the next P0 factorized source × target × layer bridge candidate.
+
+
+MA-930 scoped TinyStories feature-transfer screen FAIL: connector bytes −97.6%, but target-tail KL/NLL drift ~1.95× independent affine and total deployment bytes −0.76%; no StitchLLM throughput/semantic claim. See `ma-930-factorized-stitching-bridges/RESULTS.md`. Next P0 MA-931 SAE/probe feature transport.
