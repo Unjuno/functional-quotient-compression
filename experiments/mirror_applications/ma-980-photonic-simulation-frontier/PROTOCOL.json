@@ -1,0 +1,22 @@
+{
+  "experiment_id":"MA-980",
+  "title":"Photonic operator storage/computation frontier (ideal simulation only)",
+  "status":"NOT ESTABLISHED",
+  "protocol_frozen":true,
+  "base_commit":"26b9698a6",
+  "evidence_lane":"MECHANISM/STORAGE/SIMULATED_COMPUTE",
+  "hypothesis":"For multiple useful 4x4 unitary tasks sharing a fixed Hadamard optical core, output/input phase Views preserve exact operator quality at lower serialized payload bytes than independent dense operators; native phase-bank controls will determine whether any Mirror-specific advantage remains.",
+  "prior_art_refs":["PA286","PA287","PA295"],
+  "scope":"Deterministic ideal linear-optics simulation; not a LightPro/MZI device measurement.",
+  "tasks":"Eight independent phase-coded transformations per world, target U_t = D_out(phi_t) H D_in(psi_t), with 4 channels and phases sampled uniformly in [-pi,pi].",
+  "controls":["one shared H operator for all tasks","native direct input/output phase bank","Mirror factorized phase View","independent dense complex 4x4 matrices"],
+  "worlds":{"development":[98001],"fresh":[98011,98013,98017]},
+  "metrics":["relative Frobenius operator error","max output error on fixed probe vectors","actual torch.save payload bytes","simulated complex MAC and phase operation counts"],
+  "storage":{"authority":"actual serialized torch.save inference payload bytes including shared core, task phases, dense matrices, routing/task metadata, and object descriptions","paid_objects":["Hadamard matrix or dense task matrices","all phase codes","task indices","dtype/shape metadata"]},
+  "compute":"Count 4x4 complex MACs and scalar phase modulators in ideal algebra only; no timing, joules, thermal tuning, insertion loss, fabrication footprint, or switch latency inferred.",
+  "fresh":{"locked_before_access":true,"seeds":[98011,98013,98017]},
+  "success_gate":"At least 7/8 tasks per fresh world have relative operator error <=1e-6 and factorized payload <=50% of dense independent payload.",
+  "failure_gate":"Any fresh world fails quality/byte gate, or Mirror exactly aliases a native direct phase bank with no measured Mirror-specific advantage.",
+  "post_run_audit":"Native and Mirror payloads used different field names and metadata strings, producing a 64 B archive-size difference despite identical phase tensor values/shapes/dtypes. This confounds Mirror byte attribution. Fresh worlds were already opened; no same-ID rerun.",
+  "boundaries":["Synthetic analytic task family only.","Simulated operation counts are not measured energy/latency/footprint.","No physical device superiority claim absent LightPro/MZI hardware and calibrated measurements."]
+}

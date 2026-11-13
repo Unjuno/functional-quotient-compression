@@ -809,3 +809,6 @@ MA-969 remains NOT ESTABLISHED: audit found sparse `scatter` overwrote shared sy
 
 
 MA-971 remains NOT ESTABLISHED: no LightPro hardware/API or suitable optical simulator is available; physical loss, switch cost and programmed state cannot be measured. No proxy result claimed. See `ma-971-lightpro-control-screen/README.md`. Skip to next software-executable P0.
+
+
+MA-980 remains NOT ESTABLISHED: ideal phase views reconstruct exactly, but native-vs-Mirror bytes are confounded by schema strings and Mirror is 75.9% of dense payload, missing the 50% gate. Simulation only; no device metrics. See `ma-980-photonic-simulation-frontier/RESULTS.md`.

@@ -6,11 +6,11 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- Claim ledger entries: **427**
+- Claim ledger entries: **428**
 - P0: **630** (348 FAIL; 52 PROMISING; 223 UNTESTED; 6 NOT ESTABLISHED; 1 SCREENING)
 - P1: **422** (17 completed; 405 UNTESTED)
 - P2: **103** (103 UNTESTED)
-- Current MA statuses: **356 FAIL, 8 NOT ESTABLISHED, 61 PROMISING, 1 SCREENING, 729 UNTESTED**
+- Current MA statuses: **356 FAIL, 9 NOT ESTABLISHED, 61 PROMISING, 1 SCREENING, 728 UNTESTED**
 - 47 baseline experiment directories remain present; verified external outcomes are linked to their dedicated branches in the registry and claim ledger.
 - New research: MA-876..935 (60 candidates), PA236..PA265 (30 primary sources). See the current Next candidate section for the live queue.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. see the current Next candidate section.
@@ -456,3 +456,6 @@ MA-969 remains NOT ESTABLISHED: audit found sparse `scatter` overwrote shared sy
 
 
 MA-971 remains NOT ESTABLISHED: LightPro and suitable photonic simulation are unavailable, so optical quality, calibrated loss, programmed bits, switch energy, and latency cannot be measured. No CPU matrix proxy substituted. See `ma-971-lightpro-control-screen/README.md`. Skip physical MA-971; seek a software-testable P0 candidate.
+
+
+MA-980 is NOT ESTABLISHED for Mirror-specific storage: an ideal simulated 4x4 phase family reconstructs exactly and saves bytes against dense operators, but direct native phase-bank payload is only 64 B larger due unequal key/metadata strings; matched-schema comparison was not rerun after fresh inspection. Mirror payload is 75.9% of dense, missing the <=50% gate. Physical energy/loss/switch/footprint not measured. See `ma-980-photonic-simulation-frontier/RESULTS.md`. Next inspect the next software-testable P0.
