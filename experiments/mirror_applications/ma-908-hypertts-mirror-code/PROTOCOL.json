@@ -1,0 +1,57 @@
+{
+  "experiment_id": "MA-908",
+  "title": "HyperTTS generator emits Mirror code only",
+  "status": "UNTESTED",
+  "protocol_frozen": false,
+  "evidence_lane": "MULTISPEAKER_TTS/HYPERNETWORK/QUALITY/STORAGE/COMPUTE",
+  "hypothesis": "Constraining HyperTTS generated adapter state to a small explicit Mirror code can preserve heldout speaker quality while improving actual code bytes or generation compute beyond an equal-capacity native hypernetwork.",
+  "prior_art_refs": [
+    "PA254"
+  ],
+  "physical_object": "Frozen TTS backbone, shared adapter basis and speaker-conditioned HyperTTS hypernetwork",
+  "mirror_coordinate": "Small Mirror code m emitted/selected from speaker representation before adapter reconstruction",
+  "controls_required": [
+    "Official HyperTTS generator",
+    "Equal-capacity native hypernetwork control",
+    "Mirror-code-constrained generator",
+    "Independent speaker adapter bank"
+  ],
+  "fresh": {
+    "heldout_speakers": true,
+    "seeds": [],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual serialized deployable inference payload bytes",
+    "paid_objects": [
+      "backbone and generator checkpoints",
+      "shared adapter basis",
+      "speaker embedding/code",
+      "Mirror code",
+      "indices/quantization/metadata",
+      "reconstruction state"
+    ]
+  },
+  "compute": {
+    "report": [
+      "adapter generation MACs",
+      "speaker adaptation examples/updates",
+      "inference RTF",
+      "isolated wall clock"
+    ]
+  },
+  "quality": {
+    "metrics": [
+      "speaker similarity",
+      "WER/CER or intelligibility",
+      "acoustic reconstruction quality"
+    ],
+    "success_gate": "Not frozen; require fresh heldout speakers before evaluation."
+  },
+  "blocker": "Official code/checkpoint are available, but raw heldout reference speech and precomputed speaker embeddings are absent from workspace; current runtime is CPU-only with old official dependency pins.",
+  "boundaries": [
+    "Source/checkpoint inspection is not a model result.",
+    "No unrelated TTS or random speaker vector may stand in for heldout speaker quality.",
+    "No synthesis/bytes/quality/compute claim was measured."
+  ]
+}

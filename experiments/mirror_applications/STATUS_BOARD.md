@@ -333,3 +333,6 @@ MA-906 execution review: PA253 specifies a native shared speaker scale matrix; b
 
 
 MA-907 execution review: same PA253 NanoVoice source/checkpoint/multi-speaker-corpus blocker as MA-906. No factorized voice-layer run or metric; MA-907 remains UNTESTED, not FAIL. See `experiments/mirror_applications/ma-907-nanovoice-layer-view/EXECUTION_BLOCKER.md`. Next candidate: MA-908 HyperTTS generator emits Mirror code only.
+
+
+MA-908 feasibility review: official `declare-lab/hypertts` source and linked LTS100 checkpoint were found; repository provides preprocessing manifests/example samples but lacks raw heldout speech and speaker embedding arrays. Runtime CPU-only; no adaptation/synthesis/metric run. MA-908 remains UNTESTED, not FAIL. See `experiments/mirror_applications/ma-908-hypertts-mirror-code/EXECUTION_BLOCKER.md`. Next eligible P0: MA-909 Mixture-of-Adapters compressed into Mirror logical speaker experts.
