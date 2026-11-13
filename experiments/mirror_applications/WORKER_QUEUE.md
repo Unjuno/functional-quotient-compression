@@ -675,3 +675,9 @@ MA-902 complete as a scoped synthetic FAIL: rank-4 multiplicative scene×time co
 
 
 MA-903 complete as a scoped synthetic Mirror-attribution FAIL. Canonical rigid geometry plus action SE(3) codes save ~96.98% actual bytes vs posed-cloud materialization and decode exact heldout compositions, but corrected native SE(3) aliases exactly; transform compute is added. Real action-conditioned world-model dynamics remain untested. See `ma-903-se3-object-motion-view/RESULTS.md` on `research/ma-903-se3-object-motion-view-20261113`. Next eligible P0: MA-904 action × object identity Mirror dynamics.
+
+
+MA-904 remains UNTESTED and is paused with the direct scene/object coordinate subfamily after MA-902/903 produced two consecutive native-parameterization aliases; resume only with a structurally distinct action-conditioned mechanism. See `docs/phase2/NEURAL_GRAPHICS_MIRROR_DIAGNOSTIC_2026-11-13.md`. MA-905 is P1; continue to MA-906 NanoVoice scale bank + Mirror speaker code.
+
+
+MA-906 remains UNTESTED after source/data review: no official NanoVoice implementation/checkpoint or multi-speaker corpus in bounded search/workspace; do not substitute an unrelated TTS model. See `ma-906-nanovoice-mirror-code/EXECUTION_BLOCKER.md`. Advance to MA-907 factorized voice × layer NanoVoice View.

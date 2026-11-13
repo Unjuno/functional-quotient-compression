@@ -1,0 +1,56 @@
+{
+  "experiment_id": "MA-906",
+  "title": "NanoVoice scale bank + Mirror speaker code",
+  "status": "UNTESTED",
+  "protocol_frozen": false,
+  "evidence_lane": "MULTISPEAKER_TTS/SPEAKER_QUALITY/STORAGE/ADAPTATION",
+  "hypothesis": "A compact speaker View over NanoVoice shared scale state recovers heldout speaker identity with lower actual bytes per voice than native per-speaker scales while preserving quality and intelligibility.",
+  "prior_art_refs": [
+    "PA253"
+  ],
+  "physical_object": "Native NanoVoice shared speaker adaptation scale basis",
+  "mirror_coordinate": "Speaker View code m over shared scale matrix",
+  "logical_multiplicity": "Many useful distinct heldout voices without copying full speaker adapter state",
+  "controls_required": [
+    "Official NanoVoice shared trainable scale matrix",
+    "Native per-speaker scale table and ordinary speaker embedding",
+    "Proposed Mirror speaker code",
+    "Independent per-speaker adapter upper control"
+  ],
+  "fresh": {
+    "heldout_speakers": true,
+    "seeds": [],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes per voice",
+    "paid_objects": [
+      "shared model and scale basis",
+      "speaker codes/scales",
+      "quantizers/codebooks",
+      "metadata",
+      "speaker encoder state"
+    ]
+  },
+  "compute": {
+    "report": [
+      "adaptation examples/updates",
+      "speaker adaptation wall clock",
+      "synthesis real-time factor",
+      "inference throughput"
+    ]
+  },
+  "quality": {
+    "metrics": [
+      "speaker similarity",
+      "WER/CER or intelligibility",
+      "acoustic quality"
+    ],
+    "success_gate": "Not frozen; define before development/audit access."
+  },
+  "blocker": "Official NanoVoice code/checkpoints and multi-speaker corpus absent from bounded search and workspace; unrelated TTS is not a valid substitute.",
+  "boundaries": [
+    "Feasibility review only; no model or audio generated.",
+    "Do not claim from synthetic embeddings or a different TTS system."
+  ]
+}

@@ -324,3 +324,9 @@ MA-902 is a scoped synthetic FAIL. On three amended fresh seeds, rank-4 scene×t
 
 
 MA-903 scoped synthetic rigid-body screen: canonical point clouds plus six primitive SE(3) actions exactly reconstruct all heldout two-action compositions and save ~96.98% actual NPZ bytes vs materialized posed clouds. After correcting the native control, it stores identical state, outputs, and compute; Mirror-specific attribution FAILS. Transform validity, byte roundtrip, output replay, and fresh-split checks pass. Shared decode costs 1728 MAC proxy vs 0 for cached independent lookup. No learned PA252 dynamics or real rendering claim. See `experiments/mirror_applications/ma-903-se3-object-motion-view/RESULTS.md`. Next eligible P0: MA-904 action × object identity Mirror dynamics.
+
+
+Neural graphics scene/object coordinate subfamily paused after two consecutive scoped synthetic FAILs for native-control attribution: MA-902 scene×time factors exactly alias native rank-4 factorization and miss quality in 2/3 fresh seeds; MA-903 canonical+SE(3) views exactly alias ordinary native SE(3) instancing after fair control correction. MA-904 remains UNTESTED pending a structurally distinct action-conditioned mechanism; no real scene/rendering claims. See `docs/phase2/NEURAL_GRAPHICS_MIRROR_DIAGNOSTIC_2026-11-13.md`. Continue outside this subfamily at MA-906 (MA-905 is P1).
+
+
+MA-906 execution review: PA253 specifies a native shared speaker scale matrix; bounded exact-title GitHub search and local inspection found no NanoVoice source/checkpoint or multi-speaker corpus. CPU-only package availability does not provide the native baseline; unrelated VieNeu Nano was not substituted. No synthesis or metrics; MA-906 remains UNTESTED, not FAIL. See `experiments/mirror_applications/ma-906-nanovoice-mirror-code/EXECUTION_BLOCKER.md`. Next eligible P0: MA-907 factorized voice × layer NanoVoice View.
