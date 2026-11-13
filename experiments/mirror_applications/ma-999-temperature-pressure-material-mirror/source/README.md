@@ -1,0 +1,1 @@
+Analytic Lennard-Jones energy/force mechanism screen. Temperature and pressure alter only the synthetic position sampling box; the target potential is condition-invariant. This is not an NPT simulator or MatterSim implementation.
