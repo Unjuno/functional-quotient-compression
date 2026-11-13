@@ -6,11 +6,11 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- Claim ledger entries: **428**
+- Claim ledger entries: **429**
 - P0: **630** (348 FAIL; 52 PROMISING; 223 UNTESTED; 6 NOT ESTABLISHED; 1 SCREENING)
 - P1: **422** (17 completed; 405 UNTESTED)
 - P2: **103** (103 UNTESTED)
-- Current MA statuses: **356 FAIL, 9 NOT ESTABLISHED, 61 PROMISING, 1 SCREENING, 728 UNTESTED**
+- Current MA statuses: **357 FAIL, 9 NOT ESTABLISHED, 61 PROMISING, 1 SCREENING, 727 UNTESTED**
 - 47 baseline experiment directories remain present; verified external outcomes are linked to their dedicated branches in the registry and claim ledger.
 - New research: MA-876..935 (60 candidates), PA236..PA265 (30 primary sources). See the current Next candidate section for the live queue.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. see the current Next candidate section.
@@ -459,3 +459,6 @@ MA-971 remains NOT ESTABLISHED: LightPro and suitable photonic simulation are un
 
 
 MA-980 is NOT ESTABLISHED for Mirror-specific storage: an ideal simulated 4x4 phase family reconstructs exactly and saves bytes against dense operators, but direct native phase-bank payload is only 64 B larger due unequal key/metadata strings; matched-schema comparison was not rerun after fresh inspection. Mirror payload is 75.9% of dense, missing the <=50% gate. Physical energy/loss/switch/footprint not measured. See `ma-980-photonic-simulation-frontier/RESULTS.md`. Next inspect the next software-testable P0.
+
+
+MA-981 synthetic clustered ULA screen FAIL: Mirror sector Views reached 2.869 bits/s/Hz at 10,401 B across three worlds, but native sector steering code matched outputs, bytes and operations exactly; 16-beam independent banks reached 2.879 bits/s/Hz at 18,277 B. The preregistered <=50% byte gate missed (56.9%). No measured channel, PA288 or RF energy claim. See `ma-981-wireless-beam-mirror-screen/RESULTS.md`.

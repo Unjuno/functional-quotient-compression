@@ -812,3 +812,6 @@ MA-971 remains NOT ESTABLISHED: no LightPro hardware/API or suitable optical sim
 
 
 MA-980 remains NOT ESTABLISHED: ideal phase views reconstruct exactly, but native-vs-Mirror bytes are confounded by schema strings and Mirror is 75.9% of dense payload, missing the 50% gate. Simulation only; no device metrics. See `ma-980-photonic-simulation-frontier/RESULTS.md`.
+
+
+MA-981 synthetic clustered ULA screen FAIL: Mirror phase views and native sector-angle codes tie exactly; 10,401 B vs 18,277 B independent (56.9%, missing <=50% gate) at 99.66% of its rate. No measured-channel/PA288/RF energy claim. See `ma-981-wireless-beam-mirror-screen/RESULTS.md`.

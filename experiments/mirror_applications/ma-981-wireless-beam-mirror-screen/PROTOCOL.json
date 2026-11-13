@@ -1,0 +1,19 @@
+{
+  "experiment_id":"MA-981",
+  "title":"Shared ULA beam codebook with sector phase Views",
+  "status":"SCREENING",
+  "protocol_frozen":true,
+  "base_commit":"d6609dd5b",
+  "hypothesis":"A shared 8-beam ULA codebook plus one sector phase-ramp address preserves simulated sector throughput at lower serialized state than independent sector codebooks; a native sector-indexed steering-code control tests whether this is Mirror-specific.",
+  "prior_art_refs":["PA288"],
+  "scope":"Synthetic clustered narrowband ULA channels; not a public measured channel dataset, 3GPP conformance model, or network field trial.",
+  "system":{"antennas":8,"sectors":4,"users_per_sector":256,"snr_db":10,"channel":"one LOS path plus three random clustered paths, sector-centered azimuths"},
+  "conditions":["global_shared_DFT_codebook","mirror_sector_phase_view","native_sector_steering_codebook","independent_sector_dense_codebooks","continuous_matched_filter_upper"],
+  "worlds":{"development":[98101],"fresh":[98111,98113,98117]},
+  "metrics":["mean spectral efficiency","5th percentile spectral efficiency","feedback bits per selected beam","actual serialized codebook bytes","phase/complex MAC proxy"],
+  "storage":{"authority":"actual torch.save decoded inference state, including codebook, sector addresses, metadata and router","charged":["shared beams","sector phase address","native steering parameters","independent codebooks","sector routing metadata"]},
+  "compute":"Report complex MAC proxy for beam scoring and phase operations. This is simulation only; no radio energy/latency claim.",
+  "success_gate":"Mirror retains >=95% of independent-codebook mean spectral efficiency in every fresh world and uses <=50% of its serialized beam-state bytes; native sector-address control must be separately evaluated.",
+  "failure_gate":"Any fresh world misses quality/storage gate or Mirror aliases the native sector steering-code control.",
+  "boundaries":["Synthetic generated channels only.","No realistic pilot/coherence feedback overhead modeled beyond beam-index bits.","No measured spectral efficiency, RF energy, switching latency, or field generalization."]
+}
