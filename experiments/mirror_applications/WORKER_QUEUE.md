@@ -717,6 +717,9 @@ MA-921 scoped analytic endpoint-code mechanism FAIL: native continuous condition
 
 MA-922 remains UNTESTED: official S4S source/native schedules and matched teacher/eval model unavailable; generic ODE would not satisfy required controls. MA-923 is P1; next eligible P0 is MA-924 LoRA.rar subject × style hypermerge.
 
-MA-924 remains UNTESTED: LoRA.rar hypernetwork checkpoints found but no pair assets/eval images; official SDXL inference hardcodes CUDA. No quality/bytes result. MA-925 is P1; next eligible P0 MA-926 new subject by code.
+MA-924 remains UNTESTED: LoRA.rar hypernetwork checkpoints found but no pair assets/eval images; official SDXL inference hardcodes CUDA. No quality/bytes result. MA-925 is P0 per IDEA_REGISTRY; it was processed next. MA-926 follows.
 
 Priority correction: MA-925 is P0 per IDEA_REGISTRY, not P1. It remains UNTESTED: cited source inaccessible (401), matched LoRA banks absent and SDXL requires unavailable CUDA. See `ma-925-estlora-timestep-selector/EXECUTION_BLOCKER.md`. Next P0 is MA-926.
+
+
+MA-926 remains UNTESTED: no matched shared subject LoRA bank/eval images and no CUDA for SDXL. MA-927/928 are P1; next P0 MA-929 StitchLLM connector sharing.

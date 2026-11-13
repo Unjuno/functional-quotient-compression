@@ -1,0 +1,13 @@
+{
+  "experiment_id": "MA-926",
+  "title": "Add new subject with Mirror code on shared LoRA bank",
+  "status": "UNTESTED",
+  "protocol_frozen": false,
+  "prior_art_refs": ["PA263", "PA264"],
+  "hypothesis": "A small code on a frozen shared LoRA bank reduces actual bytes per new subject while preserving subject fidelity and old-subject retention versus independent LoRA and LoRA.rar.",
+  "required_controls": ["independent full subject LoRA", "native LoRA.rar composition", "ordinary subject embedding/adapter", "Mirror code on shared bank"],
+  "metrics": ["subject fidelity", "prior-subject retention", "actual bytes per subject including stored inputs/embeddings", "generation latency"],
+  "split": "hold out complete subjects and their reference images",
+  "blocker": "No suitable LoRA bank/evaluation images; CPU-only runtime cannot run SDXL.",
+  "boundary": "Do not use unrelated community LoRAs or synthetic tensors as subject-quality evidence."
+}
