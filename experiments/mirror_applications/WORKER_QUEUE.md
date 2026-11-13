@@ -716,3 +716,5 @@ MA-920 remains UNTESTED: official CIFAR checkpoint host blocked by proxy; no JAX
 MA-921 scoped analytic endpoint-code mechanism FAIL: native continuous conditioning won map quality on 3/3 fresh ODE worlds; endpoint codes cost 7.2% more actual bytes and alias ordinary additive endpoint embeddings. No image/FID claim. See `ma-921-factorized-flow-endpoints/RESULTS.md`. Next P0 is MA-922 S4S solver coefficient Mirror family.
 
 MA-922 remains UNTESTED: official S4S source/native schedules and matched teacher/eval model unavailable; generic ODE would not satisfy required controls. MA-923 is P1; next eligible P0 is MA-924 LoRA.rar subject × style hypermerge.
+
+MA-924 remains UNTESTED: LoRA.rar hypernetwork checkpoints found but no pair assets/eval images; official SDXL inference hardcodes CUDA. No quality/bytes result. MA-925 is P1; next eligible P0 MA-926 new subject by code.

@@ -1,0 +1,13 @@
+{
+  "experiment_id": "MA-924",
+  "title": "LoRA.rar subject x style Mirror merge code",
+  "status": "UNTESTED",
+  "protocol_frozen": false,
+  "prior_art_refs": ["PA263"],
+  "hypothesis": "Explicit factorized subject/style Mirror parameters improve unseen combination fidelity per deployed byte or merge cost over native LoRA.rar and independent merged pairs.",
+  "required_controls": ["native LoRA.rar hypernetwork", "independent subject-style merged LoRA", "factorized ordinary subject/style control", "Mirror subject/style code"],
+  "metrics": ["subject fidelity", "style fidelity", "human/MLLM evaluation where available", "actual serialized deployment bytes", "merge time", "generation latency"],
+  "split": "hold out complete subject x style pairs and report each factor's train exposure",
+  "blocker": "Official repo has hypernetwork checkpoints only; no LoRA pair assets/test images; inference requires CUDA SDXL but runtime is CPU-only.",
+  "boundary": "Do not treat random-LoRA tensor smoke tests or hypernetwork checkpoint size alone as personalization quality/storage evidence."
+}

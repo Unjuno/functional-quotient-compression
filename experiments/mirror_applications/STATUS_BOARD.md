@@ -363,3 +363,5 @@ MA-920 remains UNTESTED: official CIFAR checkpoint host returns proxy 403 and th
 MA-921 scoped analytic endpoint screen FAIL: learned additive endpoint codes increased held-out map MSE 73.1% mean versus native `(s,t)` on 3/3 fresh worlds, cost 7.2% more serialized state and exactly aliased ordinary endpoint embeddings. Amendment 01 is archived/excluded for unpaired initialization/data; amendment 02 is confirmatory. No PA260 image/FID conclusion. See `ma-921-factorized-flow-endpoints/RESULTS.md`. MA-922 is next P0.
 
 MA-922 remains UNTESTED: official S4S code, native schedules and matched teacher checkpoint were not found; no generic ODE proxy was substituted. MA-923 is P1; next eligible P0 MA-924 LoRA.rar subject × style hypermerge. See `ma-922-s4s-solver-mirror/EXECUTION_BLOCKER.md`.
+
+MA-924 remains UNTESTED: official LoRA.rar hypernetwork checkpoints exist, but no subject/style LoRA pairs or eval images are included; SDXL inference requires CUDA and this runtime is CPU-only. No held-out quality/bytes comparison. MA-925 is P1; next eligible P0 is MA-926 (new subject by code).

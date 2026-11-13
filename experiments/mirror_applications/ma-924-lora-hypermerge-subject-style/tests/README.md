@@ -1,0 +1,1 @@
+No registered experiment test ran: the repository lacks subject/style LoRAs and evaluation images, and its SDXL inference entry point requires CUDA. The hypernetwork weights alone cannot be scored for held-out personalization.
