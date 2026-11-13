@@ -1,0 +1,20 @@
+{
+  "experiment_id": "MA-997",
+  "title": "Structured sparse equivariant support × Mirror code",
+  "status": "SCREENING",
+  "evidence_lane": "STORAGE",
+  "base_commit": "5862e2498",
+  "hypothesis": "A shared six-coordinate sparse support plus per-material Mirror coefficients recovers aligned conservative material residuals with at least 25% fewer actual bytes than independent sparse adaptation while beating a matched native shared-support control.",
+  "physical_object": "Shared radial energy basis and shared pretrained-like base potential",
+  "mirror_coordinate": "Per-material values on a shared six-entry update support",
+  "logical_multiplicity": "Multiple material-specific conservative residual potentials",
+  "prior_art_refs": ["PA300"],
+  "controls": ["shared-only", "native shared-mask coefficient table", "independent sparse masks", "independent full coefficients"],
+  "development": {"worlds_or_seeds": [99701], "selection_metric": "select six shared support coordinates by aggregate absolute dev coefficient residual"},
+  "fresh": {"worlds_or_seeds": [99711, 99713, 99717], "locked_before_access": true},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["shared base", "radial basis centers/width", "support indices", "per-material values", "per-material masks", "metadata"]},
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true},
+  "success_gate": "Held-out combined energy/force nRMSE <=0.02, exact force consistency and rotation equivariance, >=25% actual-byte reduction vs independent sparse payload, and a quality/storage or compute advantage over native shared-support coefficient control.",
+  "failure_gate": "Exact native-control alias, failure of byte/quality gate, or violation of conservative/equivariant physical constraints.",
+  "boundaries": ["Scoped synthetic conservative radial-potential mechanism screen only; not PA300 or MACE-MP reproduction.", "Fresh support remains sealed until protocol and dev support selection are committed."]
+}
