@@ -417,3 +417,6 @@ MA-946 remains **UNTESTED**: no official S-NVRC implementation, trained checkpoi
 
 
 MA-948 remains **UNTESTED**: only one Bunny scene is available, with no cut annotations or native NerVast/adaptive INR checkpoint; CUDA is absent. See `ma-948-video-scene-cut-private-birth/EXECUTION_BLOCKER.md`. P1 MA-949 skipped; next P0 MA-950 benchmark tournament.
+
+
+MA-950 remains **UNTESTED**: only MA-939’s single HNeRV model-payload screen exists; no identical-content/equal-bitrate native bitstreams across codec families and no GPU for peak VRAM. See `ma-950-video-mirror-marginal-byte-tournament/EXECUTION_BLOCKER.md`. P1 MA-949 skipped; next P0 MA-951 group-equivariant convolution Mirror exception.

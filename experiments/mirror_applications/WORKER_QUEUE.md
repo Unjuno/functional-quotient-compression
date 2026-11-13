@@ -770,3 +770,6 @@ MA-946 remains UNTESTED: no native S-NVRC source/checkpoint/prefix bitstream/vid
 
 
 MA-948 remains UNTESTED: no multi-scene cut dataset or native adaptive INR checkpoint; CUDA unavailable. Bunny temporal windows were not mislabeled as cuts. See `ma-948-video-scene-cut-private-birth/EXECUTION_BLOCKER.md`. Skip P1 MA-949; next P0 MA-950.
+
+
+MA-950 remains UNTESTED: only one HNeRV serialized-payload result exists, while other native video bitstreams are unavailable; no same-content bitrate tournament or GPU VRAM/FPS comparison. See `ma-950-video-mirror-marginal-byte-tournament/EXECUTION_BLOCKER.md`. Skip P1 MA-949; next P0 MA-951.

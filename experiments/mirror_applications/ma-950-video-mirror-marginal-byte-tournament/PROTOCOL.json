@@ -1,0 +1,62 @@
+{
+  "experiment_id": "MA-950",
+  "title": "Cross-method video Mirror marginal-byte and decode-speed tournament",
+  "status": "UNTESTED",
+  "evidence_lane": "CROSS_METHOD_BENCHMARK",
+  "base_commit": "0a1488acb",
+  "prior_art_refs": [
+    "PA267",
+    "PA268",
+    "PA269",
+    "PA270"
+  ],
+  "hypothesis": "Across matched video contents and coded-rate points, Mirror methods that compress model/code state improve marginal quality-per-byte without increasing decode speed or peak VRAM cost relative to native codec controls.",
+  "physical_object": "Comparable trained video INRs/codecs with actual encoded bitstreams and matching scene/frame contents.",
+  "mirror_coordinate": "Method family selector across frame/segment/rate View codes.",
+  "logical_multiplicity": "Comparable useful frame/video functions under matched bitstream and decoder budgets.",
+  "controls": [
+    "native HNeRV/NeRV embeddings",
+    "native NerVast masks",
+    "native DCVC-UF frame decoders",
+    "native DCVC-RT module banks"
+  ],
+  "development": {
+    "worlds_or_seeds": [],
+    "selection_metric": "Not run; no two comparable native outcomes."
+  },
+  "fresh": {
+    "worlds_or_seeds": [],
+    "locked_before_access": false,
+    "selection_metric": "Not run."
+  },
+  "storage": {
+    "authority": "actual embedded bitstream plus decoder/model payload bytes",
+    "paid_objects": [
+      "video content/latents",
+      "all Mirror/native codes",
+      "decoder weights",
+      "entropy coder",
+      "metadata"
+    ]
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true,
+    "decode_fps_required": true,
+    "peak_vram_required": true
+  },
+  "success_gate": "Not evaluated; identical content and bitrate grid across at least two native codec families required.",
+  "failure_gate": "Not evaluated.",
+  "blockers": [
+    "Only one comparable point exists: MA-939 HNeRV Bunny serialized embedding frontier; it is model-state payload, not an entropy-coded bitstream.",
+    "No NerVast, DCVC-UF, DCVC-RT, or DCMVC official weights/bitstreams in the workspace.",
+    "No CUDA/NVIDIA for peak VRAM and matched decode FPS."
+  ],
+  "boundaries": [
+    "Do not compare unrelated contents or incomparable rate points.",
+    "Do not treat serialized neural payload as bpp or a bitstream tournament.",
+    "UNTESTED is not FAIL."
+  ]
+}
