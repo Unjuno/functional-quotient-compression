@@ -336,3 +336,6 @@ MA-907 execution review: same PA253 NanoVoice source/checkpoint/multi-speaker-co
 
 
 MA-908 feasibility review: official `declare-lab/hypertts` source and linked LTS100 checkpoint were found; repository provides preprocessing manifests/example samples but lacks raw heldout speech and speaker embedding arrays. Runtime CPU-only; no adaptation/synthesis/metric run. MA-908 remains UNTESTED, not FAIL. See `experiments/mirror_applications/ma-908-hypertts-mirror-code/EXECUTION_BLOCKER.md`. Next eligible P0: MA-909 Mixture-of-Adapters compressed into Mirror logical speaker experts.
+
+
+MA-909 execution review: bounded exact-title GitHub/public-code search and local inspection found no identifiable PA255 MoA-TTS source, checkpoint or speaker test data. No model/audio run or metric; MA-909 remains UNTESTED, not FAIL. See `experiments/mirror_applications/ma-909-moa-mirror-speaker-experts/EXECUTION_BLOCKER.md`. Next candidate: MA-910 Hyper-MoA plus Mirror residual speaker code.

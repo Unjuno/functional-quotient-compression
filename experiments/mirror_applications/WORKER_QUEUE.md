@@ -687,3 +687,6 @@ MA-907 remains UNTESTED because official NanoVoice source, checkpoint and speake
 
 
 MA-908 remains UNTESTED: official HyperTTS code/checkpoint located, but raw heldout reference audio and speaker embedding arrays are absent; no speaker-quality/bytes run. See `ma-908-hypertts-mirror-code/EXECUTION_BLOCKER.md`. Advance to MA-909 Mixture-of-Adapters compressed into Mirror logical speaker experts.
+
+
+MA-909 remains UNTESTED: no official PA255 MoA-TTS implementation/checkpoint/speaker set located; no run. See `ma-909-moa-mirror-speaker-experts/EXECUTION_BLOCKER.md`. Advance to MA-910 Hyper-MoA plus Mirror residual speaker code.

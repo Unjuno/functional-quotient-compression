@@ -1,0 +1,49 @@
+{
+  "experiment_id": "MA-909",
+  "title": "Mixture-of-Adapters compressed into Mirror logical speaker experts",
+  "status": "UNTESTED",
+  "protocol_frozen": false,
+  "evidence_lane": "MULTISPEAKER_TTS/MOE/STORAGE/RUNTIME/QUALITY",
+  "hypothesis": "Shared functional Views compress speaker-conditioned MoA adapter state while preserving heldout speaker fidelity and routing/latency against native MoA and simple shared controls.",
+  "prior_art_refs": [
+    "PA255"
+  ],
+  "controls_required": [
+    "Official native MoA TTS with original router",
+    "Matched shared adapter/gate control",
+    "Mirror logical speaker experts",
+    "Independent speaker adapter bank"
+  ],
+  "storage": {
+    "authority": "actual serialized adapter-bank plus shared model inference bytes per voice",
+    "paid_objects": [
+      "TTS backbone",
+      "all adapter bases",
+      "router/gates",
+      "speaker codes",
+      "indices and metadata",
+      "reconstruction state"
+    ]
+  },
+  "quality": {
+    "metrics": [
+      "speaker fidelity",
+      "intelligibility",
+      "acoustic quality",
+      "routing balance"
+    ],
+    "split": "heldout speaker identities"
+  },
+  "compute": {
+    "report": [
+      "active adapters/MACs",
+      "inference latency/RTF",
+      "router compute"
+    ]
+  },
+  "blocker": "Bounded search found no identifiable official PA255 implementation/checkpoint/data; no native MoA-TTS assets are local.",
+  "boundaries": [
+    "Feasibility review only; no training or synthesis.",
+    "Do not substitute unrelated TTS or MoA implementation."
+  ]
+}
