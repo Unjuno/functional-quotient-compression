@@ -711,3 +711,6 @@ MA-919 scoped mechanism screen PROMISING only for fixed-budget learning efficien
 Next eligible after MA-919 is MA-920 (P0), consistency-model noise-level Mirror view; P1 MA-918 is skipped for now.
 
 MA-920 remains UNTESTED: official CIFAR checkpoint host blocked by proxy; no JAX/Flax or accelerator, and native-only ImageNet weights cannot test Mirror. MA-921 is the next P0 candidate; inspect its registered row and prior art before proceeding.
+
+
+MA-921 scoped analytic endpoint-code mechanism FAIL: native continuous conditioning won map quality on 3/3 fresh ODE worlds; endpoint codes cost 7.2% more actual bytes and alias ordinary additive endpoint embeddings. No image/FID claim. See `ma-921-factorized-flow-endpoints/RESULTS.md`. Next P0 is MA-922 S4S solver coefficient Mirror family.

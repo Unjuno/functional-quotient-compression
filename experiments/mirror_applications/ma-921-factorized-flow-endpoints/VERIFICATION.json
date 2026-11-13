@@ -1,0 +1,34 @@
+{
+  "experiment_id": "MA-921",
+  "commit": null,
+  "tests": {
+    "command": "python experiments/mirror_applications/ma-921-factorized-flow-endpoints/source/run_screen.py",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "payload_files": 9
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "environment": {
+    "device": "cpu"
+  },
+  "notes": [
+    "Amendment 02 uses paired shared-MLP initializations and paired training data.",
+    "All 3 fresh systems: native map MSE lower than additive endpoint codes.",
+    "Mirror and ordinary additive endpoint embedding controls exactly alias.",
+    "Amendment 01 archived and excluded due initialization/data stream mismatch; first filename-dependent byte measurement corrected with common serialization path.",
+    "Analytic flow only; no PA260 image/FID result."
+  ],
+  "fresh_seeds": [
+    92121,
+    92123,
+    92129
+  ]
+}

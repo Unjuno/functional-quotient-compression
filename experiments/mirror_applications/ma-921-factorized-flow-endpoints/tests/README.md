@@ -1,0 +1,1 @@
+Run the frozen screening script from repository root. It asserts every endpoint appears in training and evaluates withheld endpoint pairs only. Serialized states are temporary and used to measure exact bytes and verify checkpoint reload.

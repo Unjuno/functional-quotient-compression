@@ -1,0 +1,96 @@
+{
+  "experiment_id": "MA-921",
+  "title": "Factorized flow-map endpoint views",
+  "status": "FAIL",
+  "protocol_frozen": true,
+  "amendment": "02-paired-initialization-and-data-streams",
+  "prior_art_refs": [
+    "PA260"
+  ],
+  "hypothesis": "Learned start and end endpoint codes composed through one shared flow-map network improve held-out interval-pair map and semigroup quality over native continuous (s,t) conditioning at a useful serialized-byte cost.",
+  "scope": "Analytic low-dimensional ODE only; no PA260 image generation or FID claim.",
+  "worlds": [
+    {
+      "seed": 92121,
+      "A": [
+        [
+          0.0,
+          -0.8
+        ],
+        [
+          0.8,
+          -0.08
+        ]
+      ]
+    },
+    {
+      "seed": 92123,
+      "A": [
+        [
+          -0.1,
+          -1.0
+        ],
+        [
+          0.7,
+          -0.15
+        ]
+      ]
+    },
+    {
+      "seed": 92129,
+      "A": [
+        [
+          0.1,
+          -0.9
+        ],
+        [
+          1.1,
+          -0.2
+        ]
+      ]
+    }
+  ],
+  "data": {
+    "time_grid_points": 8,
+    "train_endpoint_pairs": "fixed 80% hash split among s<t pairs; each endpoint appears in training",
+    "fresh_x": "x~N(0,I2)"
+  },
+  "training": {
+    "steps": 600,
+    "batch_size": 128,
+    "hidden_width": 32,
+    "endpoint_code_dim": 2,
+    "optimizer": "Adam",
+    "learning_rate": 0.002,
+    "pairing": "same pair order and same x minibatches across conditions"
+  },
+  "conditions": [
+    "native scalar start/end times",
+    "Mirror additive learned start/end code",
+    "ordinary learned additive endpoint embedding control (same parameterization)"
+  ],
+  "metrics": [
+    "held-out endpoint-pair map MSE",
+    "semigroup composition MSE",
+    "actual serialized state dict bytes",
+    "MLP MAC proxy",
+    "training wall time"
+  ],
+  "storage_authority": "torch serialized inference state including both endpoint code tables",
+  "gates": {
+    "signal": "Mirror beats native by >=10% map and composition error at <=10% extra actual bytes and compute on 3/3 worlds",
+    "mirror_specific": "Mirror also beats ordinary additive endpoint-embedding control; exact alias means no Mirror-specific value",
+    "fail": "No held-out quality gain or excessive byte/compute cost",
+    "not_established": "unstable/missing fresh world or implementation issue"
+  },
+  "boundaries": [
+    "No FID or image quality claim.",
+    "The ordinary endpoint embedding control is structurally identical to Mirror and is expected to expose any relabeling.",
+    "Amendment 01 fresh worlds archived and excluded after discovering model construction consumed the shared RNG differently across conditions; amendment 02 initializes shared MLP weights and data streams identically.",
+    "Amendment 01 output archived and excluded because initial shared-MLP weights/data streams were not paired; amendment 02 is confirmatory."
+  ],
+  "development": {
+    "seed": 92119,
+    "used_for": "implementation check only; no hyperparameter changes"
+  }
+}
