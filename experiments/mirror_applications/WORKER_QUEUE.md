@@ -728,3 +728,6 @@ MA-929 remains UNTESTED: official StitchLLM code, matched model/connector assets
 
 
 MA-930 scoped TinyStories feature-transfer screen FAIL: connector bytes −97.6%, but target-tail KL/NLL drift ~1.95× independent affine and total deployment bytes −0.76%; no StitchLLM throughput/semantic claim. See `ma-930-factorized-stitching-bridges/RESULTS.md`. Next P0 MA-931 SAE/probe feature transport.
+
+
+MA-931 scoped TinyStories probe-transfer FAIL: factorized rank-8 bridge retained 85.3% structural AP but only 0.91% curated animal-lexical AP; independent affine retained 97.8% and 8.69%, respectively. Connector bytes fell 95.9%, while full deployment fell only 0.375%. Reload replay was exact. This is not PA242 or broad semantic evidence. See `ma-931-sae-probe-feature-transport/RESULTS.md`. Next P0 MA-932: falsify stitch validity with unrelated-task and structured-noise controls.

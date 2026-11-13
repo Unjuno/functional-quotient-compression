@@ -1,0 +1,26 @@
+{
+  "experiment_id": "MA-931",
+  "title": "Probe feature transport by cross-model Mirror bridge",
+  "status": "FAIL",
+  "protocol_frozen": true,
+  "amendment": "01 TinyStories real-LM probe transport",
+  "scope": "Feature/probe transport only; not PA242 reproduction, broad semantic equivalence, or an end-to-end LLM stitching benchmark.",
+  "prior_art_refs": ["PA241", "PA242"],
+  "models": [
+    {"id": "roneneldan/TinyStories-1M", "revision": "77f1b168e219585646439073245fe87e56b3023e", "hidden": 64, "layers": 8},
+    {"id": "roneneldan/TinyStories-3M", "revision": "cfaf26ec85ecdfc1bd7c2638104cce55cb67f894", "hidden": 128, "layers": 8},
+    {"id": "roneneldan/TinyStories-8M", "revision": "8612e3b15c66ffa94eaa6ee0de5c96edd2d630af", "hidden": 256, "layers": 8}
+  ],
+  "dataset": {"id": "roneneldan/TinyStories", "revision": "f54c09fd23315a6f9c86f9dc80f725de7d8f9c64", "train_rows": "256:512", "validation_rows": "128:256", "max_length": 32},
+  "features": {
+    "structural": "GPT-2 token word-boundary indicator (token starts Ġ) versus continuation token; valid non-padding positions only.",
+    "semantic_lexical": "Curated animal-word token indicator for dog, cat, puppy, kitten, bird, duck, rabbit, bunny, mouse, fox, bear, lion, tiger, elephant, horse, cow, sheep, pig, chicken, frog, turtle, fish, butterfly, owl, deer; only whole-word GPT-2 tokens.",
+    "negative_control": "Train probe against deterministic shuffled labels with matched prevalence; evaluate against true held-out labels."
+  },
+  "bridges": {"factorization": "W=B_target C_layer A_source", "rank": 8, "layers": [4, 8], "training_pairs": [[0, 1], [1, 0], [1, 2], [2, 1]], "heldout_pairs": [[0, 2], [2, 0]], "seeds": [93101, 93107, 93113]},
+  "training": {"connector_updates": 500, "connector_batch": 256, "probe_updates": 300, "probe_batch": 256, "optimizer": "Adam", "learning_rate": 0.003, "paired_seed_and_examples": true},
+  "controls": ["native target hidden-state probe", "independent affine connector per heldout pair/layer then target probe", "factorized bridge then same target probe", "frequency-matched shuffled-label probe"],
+  "metrics": ["per-family average precision and balanced accuracy", "native-to-transferred probe score drop", "heldout hidden reconstruction MSE", "actual serialized connector+probe bytes", "full model-plus-connector deployment bytes", "connector/probe MAC proxy", "training wall time"],
+  "gates": {"signal": "factorized transfer retains >=90% of native AP for both feature families in both directions and uses <=25% of independent connector bytes", "fail": "either family retains <75% native AP or factorized transport is no better than shuffled-label control", "not_established": "too few lexical positives (<30 in train or <10 in validation) or runtime/model failure"},
+  "boundaries": ["Animal-word probe is a weak lexical concept test, not a semantic understanding claim.", "Word-boundary is structural tokenization information.", "PA241 warns output agreement does not imply information preservation; report each family separately.", "Include model backbone, probes, dictionaries, connectors and metadata in full payload accounting."]
+}

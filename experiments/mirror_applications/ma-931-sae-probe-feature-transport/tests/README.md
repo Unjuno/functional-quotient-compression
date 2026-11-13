@@ -1,0 +1,1 @@
+Run the frozen source script. It checks the train/validation row ranges are disjoint, enforces minimum positive counts, compares native/independent/factorized/shuffled controls, and round-trips serialized connector/probe state before reporting bytes.

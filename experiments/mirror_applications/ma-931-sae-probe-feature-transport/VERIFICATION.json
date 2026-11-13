@@ -1,0 +1,12 @@
+{
+  "experiment_id": "MA-931",
+  "commit": null,
+  "tests": {"command": "python experiments/mirror_applications/ma-931-sae-probe-feature-transport/source/run_screen.py", "passed": 1, "failed": 0},
+  "serialization": {"roundtrip_checked": true, "byte_exact": true, "payload_files": 3},
+  "metric_replay": {"checked": true, "max_difference": 0.0},
+  "fresh_split_integrity_checked": true,
+  "environment": {"device": "cpu", "torch": "2.7.1+cpu"},
+  "fresh_seeds": [93101, 93107, 93113],
+  "positive_counts": {"animal_train": 46, "animal_validation": 26},
+  "notes": ["Frozen split rows 256:512 fit and 128:256 held out; disjoint.", "All three connector/probe serialization replay checks had max absolute output difference 0.0.", "Frozen quality gate failed; no broad semantic or PA242 reproduction claim."]
+}
