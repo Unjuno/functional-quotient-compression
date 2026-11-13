@@ -791,3 +791,6 @@ MA-962 amendment 04 correction: Astra audit found train/test generic-random K si
 
 
 MA-961 verification correction: previous score arrays bypassed loaded payloads and int4 codes were not nibble packed. Corrected amendment 04 used fresh seeds 96131/33/37 and loaded-state decoding; affine 95.88% / 2,581 B vs FP32 100% / 2,101 B, packed int4 99.01% / 2,363 B. FAIL remains. See `ma-961-fixed-synapse-spike-threshold/RESULTS.md`.
+
+
+MA-963 remains UNTESTED: bounded source search found no official TACOS repository; paper/supplement do not specify executable per-synapse `m` increment/indexing or complete timing. No proxy SNN substituted. See `ma-963-tacos-neuromodulator-mirror-compression/EXECUTION_BLOCKER.md`. Skip blocked MA-963 and continue to P0 MA-964 membrane-tau/threshold factorized View.

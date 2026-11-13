@@ -438,3 +438,6 @@ MA-962 amendment 04 correction: Astra audit found train/test generic-random K si
 
 
 MA-961 verification amendment: Astra found prior scores did not decode loaded thresholds and int4 codes were stored in uint8. Superseded scores remain in the experiment directory; corrected amendment 04 on fresh seeds 96131/33/37 scores decoded state and packs nibbles. Affine result 95.88% / 2,581 B vs FP32 100% / 2,101 B; packed int4 99.01% / 2,363 B. FAIL remains.
+
+
+MA-963 remains UNTESTED: bounded source search found no official TACOS repository; paper/supplement do not specify executable per-synapse `m` increment/indexing or complete timing. No proxy SNN substituted. See `ma-963-tacos-neuromodulator-mirror-compression/EXECUTION_BLOCKER.md`. Skip blocked MA-963 and continue to P0 MA-964 membrane-tau/threshold factorized View.

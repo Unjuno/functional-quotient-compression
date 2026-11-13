@@ -1,0 +1,16 @@
+{
+  "experiment_id": "MA-963",
+  "title": "TACOS neuromodulator Mirror compression",
+  "status": "UNTESTED",
+  "protocol_frozen": false,
+  "prior_art_refs": ["PA281"],
+  "paper": "TACOS: Task Agnostic Continual Learning in Spiking Neural Networks, arXiv:2409.00021v1",
+  "paper_source_sha256": "13e74d2e540c432cbc396ba74922f6af8a571503f87ee42bd458507cca51f7da",
+  "hypothesis": "A small context-generated neuromodulator code may compress TACOS per-synapse metaplastic state while preserving task-agnostic continual retention, with separate accounting for inference weights and resumable learning state.",
+  "required_native_control": "Faithful TACOS reproduction with exact metaplastic update/indexing, eRBP, reference-weight, heterosynaptic decay, data stream and no task IDs or boundaries.",
+  "mandatory_comparators_if_unblocked": ["native TACOS m and W_ref state", "direct quantized m", "neuron-broadcast m", "ordinary low-rank m compression", "Mirror context-generated m from identical activity trace"],
+  "blocker": "Paper and supplement do not specify an executable per-synapse m increment condition/indexing rule or enough timing/sample-duration detail to reproduce native TACOS; no official source repository or code was identified in bounded search.",
+  "environment": {"device": "CPU-only", "torch": "2.14.1+cpu", "snntorch": false, "spikingjelly": false},
+  "decision": "Do not substitute an arbitrary metaplastic SNN; preserve UNTESTED and continue to MA-964.",
+  "scope_boundary": "No model training, synthetic proxy, or performance claim was produced."
+}
