@@ -693,3 +693,9 @@ MA-909 remains UNTESTED: no official PA255 MoA-TTS implementation/checkpoint/spe
 
 
 MA-910 remains UNTESTED: no official Hyper-MoA baseline/checkpoint or speaker few-shot data identified; no run. See `ma-910-hypermoa-mirror-speaker-residual/EXECUTION_BLOCKER.md`. Advance to MA-911 causal speaker-content subspace Mirror factors.
+
+
+MA-911 remains UNTESTED after source/data feasibility review: official source located, but intervention audio/features, VoxCeleb1/SpeechCommands test assets and F5-TTS Apptainer path are unavailable. No proxy was run. See `ma-911-causal-speaker-content-subspace/EXECUTION_BLOCKER.md`. Advance to MA-912 content × timbre × prosody Mirror code.
+
+
+MA-912 remains UNTESTED: StableVC linked page is stale; direct repo contains demo audio only, no model/checkpoint/eval pipeline. No run. See `ma-912-content-timbre-prosody-mirror/EXECUTION_BLOCKER.md`. MA-913 is P1; continue to MA-914 HybridCodec semantic × acoustic Mirror state.

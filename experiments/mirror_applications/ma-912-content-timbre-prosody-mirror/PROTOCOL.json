@@ -1,0 +1,54 @@
+{
+  "experiment_id": "MA-912",
+  "title": "Content \u00d7 timbre \u00d7 prosody Mirror code",
+  "status": "UNTESTED",
+  "protocol_frozen": false,
+  "evidence_lane": "VOICE_CONVERSION/FACTOR_COMPOSITION/QUALITY/STORAGE/RUNTIME",
+  "hypothesis": "Factorized content \u00d7 timbre \u00d7 prosody Mirror codes compose unseen timbre-style pairings at lower serialized state or inference cost while preserving linguistic content and prosodic attributes beyond native StableVC and ordinary controls.",
+  "prior_art_refs": [
+    "PA258",
+    "PA257"
+  ],
+  "controls_required": [
+    "Official StableVC native content/timbre/style model",
+    "Ordinary factorized embeddings/gates",
+    "Mirror factorized code",
+    "Independent per-speaker/style modules"
+  ],
+  "fresh": {
+    "heldout_timbre_style_pairings": true,
+    "heldout_speakers": true,
+    "seeds": [],
+    "locked_before_access": true
+  },
+  "quality": {
+    "metrics": [
+      "speaker similarity",
+      "CER/WER",
+      "prosody/style preservation"
+    ],
+    "split": "hold out complete timbre \u00d7 style pairings"
+  },
+  "storage": {
+    "authority": "actual serialized deployed inference bytes",
+    "paid_objects": [
+      "StableVC model/checkpoint",
+      "factor bases and codes",
+      "quantizers",
+      "router/gates",
+      "indices and reconstruction metadata"
+    ]
+  },
+  "compute": {
+    "report": [
+      "flow integration steps",
+      "latency / real-time factor",
+      "adaptation cost"
+    ]
+  },
+  "blocker": "Linked StableVC project points to stale HTML; direct GitHub repository has examples but no runnable model code, weights, scripts or benchmark assets.",
+  "boundaries": [
+    "Feasibility review only; no synthesis/metric run.",
+    "Do not use unrelated VC model or demo files as StableVC evidence."
+  ]
+}

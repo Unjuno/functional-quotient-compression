@@ -342,3 +342,9 @@ MA-909 execution review: bounded exact-title GitHub/public-code search and local
 
 
 MA-910 feasibility review: PA256 is the mandatory native shared hypernetwork+MoA control. Bounded exact-title source search and local inspection found no official Hyper-MoA code/checkpoint or few-shot speaker data. No TTS training, synthesis, or metrics; MA-910 remains UNTESTED, not FAIL. See `experiments/mirror_applications/ma-910-hypermoa-mirror-speaker-residual/EXECUTION_BLOCKER.md`. Next eligible P0: MA-911 causal speaker-content subspace Mirror factors.
+
+
+MA-911 feasibility review: official interventional-post-training-speech source found. README requires F5-TTS Apptainer-generated interventional audio from LibriTTS, WavLM features, SpeechCommands and VoxCeleb1 tests; none are available locally, and runtime lacks torchaudio/Apptainer/CUDA. Zenodo releases contain source archives only. No substitute or proxy run; MA-911 remains UNTESTED, not FAIL. See `experiments/mirror_applications/ma-911-causal-speaker-content-subspace/EXECUTION_BLOCKER.md`. Next eligible P0: MA-912 content × timbre × prosody Mirror code.
+
+
+MA-912 feasibility review: StableVC's linked project page is stale; direct `yaoxunji/stablevc` contains demo assets but no runnable implementation, checkpoint, training/evaluation scripts or benchmark corpus. No substitute voice conversion model or metrics; MA-912 remains UNTESTED, not FAIL. See `experiments/mirror_applications/ma-912-content-timbre-prosody-mirror/EXECUTION_BLOCKER.md`. MA-913 is P1; next eligible P0 MA-914 HybridCodec semantic × acoustic Mirror state.
