@@ -818,3 +818,6 @@ MA-981 synthetic clustered ULA screen FAIL: Mirror phase views and native sector
 
 
 MA-982 synthetic Type-II site-subspace screen FAIL: Mirror aliases native phase-parametric Type-II exactly; total model+feedback savings vs stored per-site Type-II only 2.9%, below the 20% gate. 99.11% of full-CSI mean rate, 34 feedback bits/user. No measured-channel/PA289 claim. See `ma-982-type2-site-subspace-mirror/RESULTS.md`.
+
+
+MA-983 synthetic CSI-domain screen FAIL: Mirror rank-1 code missed independent quality (7.985 vs 8.848 bits/s/Hz; NMSE -3.89 vs -21.06 dB) and exactly aliases ordinary embedding at 26,781 B. Fixed 130 feedback bits/channel; no PA291/measured-channel claim. See `ma-983-csinet-domain-mirror-screen/RESULTS.md`.

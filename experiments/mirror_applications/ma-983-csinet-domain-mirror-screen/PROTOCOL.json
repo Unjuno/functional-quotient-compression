@@ -1,0 +1,20 @@
+{
+  "experiment_id":"MA-983",
+  "title":"Shared CSI decoder with held-out-domain Mirror code",
+  "status":"SCREENING",
+  "protocol_frozen":true,
+  "base_commit":"4e10fd6ca",
+  "prior_art_refs":["PA291"],
+  "hypothesis":"On unseen channel domains, a source-trained shared CSI decoder plus a low-dimensional persistent Mirror decoder coordinate can improve reconstruction and beamforming versus no domain adaptation at fixed latent feedback bits; it must beat matched ordinary embedding/FiLM/low-rank controls to support Mirror-specific attribution.",
+  "scope":"Tiny linear CsiNet-style compressor on synthetic angular-delay MIMO channels; not a CsiNet implementation or PA291 reproduction.",
+  "data":"Saleh-Valenzuela-inspired 8x8 complex angular-delay channels with random clustered paths; source domains train the shared decoder, target domain identities are held out, each target has 64 calibration and 256 test channels.",
+  "models":["shared decoder no domain code","rank-1 Mirror decoder basis with one fitted domain coordinate","same-budget ordinary domain embedding","group-FiLM decoder calibration","rank-1 LoRA decoder residual","independent target decoder upper control"],
+  "dimensions":{"channel_complex":64,"latent_real":16,"latent_quant_bits":8,"source_domains":4,"target_domains_per_world":4,"calibration_per_target":64,"test_per_target":256},
+  "worlds":{"development":[98301],"fresh":[98311,98313,98317]},
+  "adaptation":"All domain adaptation fits use only the 64 calibration channels per target. Test channels and target path draws are generated separately and are never used for fitting.",
+  "metrics":["relative channel NMSE","beamforming gain","single-user spectral efficiency","actual serialized persistent bytes","online latent and domain-ID feedback bits","calibration examples","MAC proxy","CPU serialization plus held-out scoring wall time"],
+  "storage":{"authority":"actual torch.save inference payload bytes including shared encoder/decoder, adapter bases, codes, per-domain state and metadata","feedback":"128 latent bits plus 2 domain-ID bits per channel for every method"},
+  "success_gate":"Mirror reaches within 1 dB NMSE of independent target decoder and >=95% of its beamforming rate in every fresh world, while using <=80% of matched ordinary-adapter total persistent bytes at identical feedback bits.",
+  "failure_gate":"Any quality/byte gate missed or matched ordinary embedding/FiLM/LoRA reproduces Mirror within measurement precision.",
+  "boundaries":["Synthetic channels only; no PA291 data or trained CsiNet checkpoint.","No multi-user interference, CSI coherence-time, RF energy or deployment latency claim.","Mirror domain coordinate is persistent at the decoder and counted in payload; it is not free online signaling.","Reported wall time covers serialization and held-out scoring only; common source fitting and calibration solves are excluded."]
+}

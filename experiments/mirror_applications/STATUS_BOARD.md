@@ -6,11 +6,11 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- Claim ledger entries: **430**
+- Claim ledger entries: **431**
 - P0: **630** (348 FAIL; 52 PROMISING; 223 UNTESTED; 6 NOT ESTABLISHED; 1 SCREENING)
 - P1: **422** (17 completed; 405 UNTESTED)
 - P2: **103** (103 UNTESTED)
-- Current MA statuses: **358 FAIL, 9 NOT ESTABLISHED, 61 PROMISING, 1 SCREENING, 726 UNTESTED**
+- Current MA statuses: **359 FAIL, 9 NOT ESTABLISHED, 61 PROMISING, 1 SCREENING, 725 UNTESTED**
 - 47 baseline experiment directories remain present; verified external outcomes are linked to their dedicated branches in the registry and claim ledger.
 - New research: MA-876..935 (60 candidates), PA236..PA265 (30 primary sources). See the current Next candidate section for the live queue.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. see the current Next candidate section.
@@ -465,3 +465,6 @@ MA-981 synthetic clustered ULA screen FAIL: Mirror sector Views reached 2.869 bi
 
 
 MA-982 synthetic Type-II site-subspace screen FAIL: Mirror/native phase-parametric controls tie exactly at 2,273 B and 34 feedback bits/user; mean rate is 99.11% of full quantized CSI. Against stored per-site Type-II, model+online-feedback shrinks only 2.9% (below the 20% gate). No measured channel/PA289 reproduction/RF energy claim. See `ma-982-type2-site-subspace-mirror/RESULTS.md`.
+
+
+MA-983 synthetic CsiNet-style domain screen FAIL: at 130 feedback bits/channel, rank-1 Mirror had 7.985 bits/s/Hz and -3.89 dB NMSE vs independent decoder 8.848 and -21.06 dB. Mirror state was 26,781 B and exactly matched ordinary embedding, while shared-only was 18,213 B. No PA291 or measured-channel claim. See `ma-983-csinet-domain-mirror-screen/RESULTS.md`.

@@ -1,0 +1,9 @@
+{
+  "experiment_id":"MA-983",
+  "commit":"pending",
+  "tests":{"command":"python experiments/mirror_applications/ma-983-csinet-domain-mirror-screen/tests/verify_result.py","passed":1,"failed":0},
+  "serialization":{"roundtrip_checked":true,"byte_exact":true,"authority":"torch.save payload decoded before scoring"},
+  "metric_replay":{"checked":true,"max_difference":0.0,"notes":["fresh generated worlds replayed; matched ordinary embedding has identical payload hash and output"]},
+  "fresh_split_integrity_checked":true,
+  "notes":["18 rows: 3 fresh target-domain worlds x 6 methods.","Each of four target identities per world used 64 calibration channels and 256 separate test channels.","Synthetic tiny linear CsiNet-style screen only; not PA291/CsiNet reproduction.","Wall time excludes common source fitting/calibration solver and is limited to serialization plus held-out scoring."]
+}
