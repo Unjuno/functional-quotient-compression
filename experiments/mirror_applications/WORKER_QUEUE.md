@@ -723,3 +723,5 @@ Priority correction: MA-925 is P0 per IDEA_REGISTRY, not P1. It remains UNTESTED
 
 
 MA-926 remains UNTESTED: no matched shared subject LoRA bank/eval images and no CUDA for SDXL. MA-927/928 are P1; next P0 MA-929 StitchLLM connector sharing.
+
+MA-929 remains UNTESTED: official StitchLLM code, matched model/connector assets and native throughput control unavailable. MA-930 is the next P0 factorized source × target × layer bridge candidate.

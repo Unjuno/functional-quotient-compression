@@ -370,3 +370,5 @@ Priority correction: MA-925 is P0 in IDEA_REGISTRY (an earlier queue note incorr
 
 
 MA-926 remains UNTESTED: no matched shared LoRA bank or subject evaluation images are available, and SDXL inference requires unavailable CUDA. No new-subject fidelity/retention/bytes comparison. MA-927/928 are P1; next P0 MA-929 StitchLLM connector sharing. See `ma-926-new-subject-mirror-code/EXECUTION_BLOCKER.md`.
+
+MA-929 remains UNTESTED: no official StitchLLM source/checkpoints or native connector bank were found, so the mandatory native throughput control cannot run. MA-930 is the next P0 factorized model-stitching candidate. See `ma-929-stitchllm-connector-mirror/EXECUTION_BLOCKER.md`.

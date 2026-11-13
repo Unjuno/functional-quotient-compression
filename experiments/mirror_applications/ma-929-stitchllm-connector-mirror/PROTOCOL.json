@@ -1,0 +1,13 @@
+{
+  "experiment_id": "MA-929",
+  "title": "StitchLLM connector shared Mirror code",
+  "status": "UNTESTED",
+  "protocol_frozen": false,
+  "prior_art_refs": ["PA240"],
+  "hypothesis": "A shared connector basis and small block addresses reduce actual connector bytes while preserving NLL and serving throughput versus native StitchLLM.",
+  "required_controls": ["native StitchLLM per-interface trainable bridges", "shared connector basis", "Mirror basis plus source/target block codes", "independent connector upper control"],
+  "metrics": ["NLL", "router bytes", "connector serialized bytes", "throughput", "latency"],
+  "split": "hold out ordered source/target block interfaces",
+  "blocker": "No public official source/checkpoint or matched models/connectors found; mandatory native throughput control cannot be reproduced.",
+  "boundary": "Do not substitute nanoGPT or unrelated model stitching for StitchLLM controls."
+}
