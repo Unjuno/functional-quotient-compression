@@ -1,0 +1,1 @@
+Run the frozen source script. It checks exact common-task output agreement, held-out private-feature AUC, full-affine and structured-Fourier controls, serialized payload replay, and private-coordinate counterfactual response over five frozen fresh seeds.

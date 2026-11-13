@@ -731,3 +731,6 @@ MA-930 scoped TinyStories feature-transfer screen FAIL: connector bytes −97.6%
 
 
 MA-931 scoped TinyStories probe-transfer FAIL: factorized rank-8 bridge retained 85.3% structural AP but only 0.91% curated animal-lexical AP; independent affine retained 97.8% and 8.69%, respectively. Connector bytes fell 95.9%, while full deployment fell only 0.375%. Reload replay was exact. This is not PA242 or broad semantic evidence. See `ma-931-sae-probe-feature-transport/RESULTS.md`. Next P0 MA-932: falsify stitch validity with unrelated-task and structured-noise controls.
+
+
+MA-932 scoped analytic falsification FAIL: exact shared-task agreement coexists with absent private target information across five toy fresh worlds; full affine has the same information limit. This is not a natural-model incidence claim. See `ma-932-stitch-validity-falsification/RESULTS.md`. Next P0 MA-933 joint KV/residual transport.

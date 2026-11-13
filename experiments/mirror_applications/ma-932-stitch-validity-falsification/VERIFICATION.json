@@ -1,0 +1,35 @@
+{
+  "experiment_id": "MA-932",
+  "commit": null,
+  "tests": {
+    "command": "python experiments/mirror_applications/ma-932-stitch-validity-falsification/source/run_screen.py",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "payload_files": 4
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "environment": {
+    "device": "cpu",
+    "numpy": "2.1.3"
+  },
+  "fresh_seeds": [
+    93211,
+    93217,
+    93223,
+    93229,
+    93231
+  ],
+  "notes": [
+    "Fresh seed list frozen before run; no development-based hyperparameter selection.",
+    "All five minimal stitch outputs matched common task exactly; private probe and intervention failed by construction.",
+    "Synthetic informational falsification only; not pretrained model / PA241 replication."
+  ]
+}

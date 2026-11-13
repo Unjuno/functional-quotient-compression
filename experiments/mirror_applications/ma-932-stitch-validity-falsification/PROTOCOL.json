@@ -1,0 +1,62 @@
+{
+  "experiment_id": "MA-932",
+  "title": "Stitch validity: output match versus information retention",
+  "status": "FAIL",
+  "evidence_lane": "SYNTHETIC_INFORMATIONAL_FALSIFICATION",
+  "base_commit": "05987b8f5fdadf029b43e30e967a95a7b3e69e3b",
+  "hypothesis": "Perfect shared-task output agreement of a low-description stitched representation is insufficient to establish informational equivalence: private feature probes and interventions can reveal information absent from the source even when task logits agree exactly.",
+  "physical_object": "Paired source/target representations with one common task feature and one private feature; linear output heads.",
+  "mirror_coordinate": "One scalar shared-task stitch coordinate (select common feature); optional full affine upper control.",
+  "logical_multiplicity": "Task output agreement versus recoverability of an additional target-private feature.",
+  "prior_art_refs": [
+    "PA241"
+  ],
+  "controls": [
+    "native target representation and probe",
+    "common-feature stitch (rank-1 fixed coordinate)",
+    "unrelated-task output head negative control",
+    "structured Fourier-noise feature negative control",
+    "full affine bridge upper control"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      93201,
+      93202
+    ],
+    "selection_metric": "Only validate implementation and serialization; no hyperparameter selection."
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      93211,
+      93217,
+      93223,
+      93229,
+      93231
+    ],
+    "locked_before_access": true,
+    "n": 4096,
+    "train_n": 2048,
+    "heldout_n": 2048
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "source and target feature generators and heads",
+      "bridge matrices and biases",
+      "probe and metadata"
+    ]
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": false,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true
+  },
+  "success_gate": "A View can only be considered informationally valid if it preserves both shared-task outputs and target-private probe/intervention outcomes on every fresh seed, while beating structured-noise and unrelated-task controls.",
+  "failure_gate": "If task output matches within 1e-6 on all fresh seeds but private-feature probe AUC or counterfactual intervention behavior is below native by >0.10, classify task agreement as insufficient; if unrelated/noise controls also match task output, reject output match as evidence of shared information.",
+  "boundaries": [
+    "Synthetic analytic falsification only, not a learned-model or PA241 reproduction.",
+    "The private feature is constructed to be task-irrelevant; test identifies insufficiency of output agreement, not failure of useful shared task function.",
+    "No broad Mirror capacity claim."
+  ]
+}
