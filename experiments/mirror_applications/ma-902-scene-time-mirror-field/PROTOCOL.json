@@ -1,0 +1,91 @@
+{
+  "experiment_id": "MA-902",
+  "title": "Scene identity \u00d7 time Mirror field",
+  "status": "FAIL",
+  "protocol_frozen": true,
+  "evidence_lane": "SYNTHETIC_NEURAL_GRAPHICS/COMPOSITION/GENERALIZATION/STORAGE/COMPUTE",
+  "hypothesis": "A rank-4 multiplicative scene \u00d7 time code over a shared spatial basis predicts held-out scene-time cells at lower serialized bytes than independent fields and more accurately than a matched additive scene+time code; Mirror-specific value requires beating algebraically equivalent native rank-4 tensor factorization.",
+  "prior_art_refs": [
+    "PA243",
+    "PA247"
+  ],
+  "physical_object": "Shared spatial basis over a one-dimensional synthetic radiance field",
+  "mirror_coordinate": "Rank-4 multiplicative scene coefficient \u00d7 time coefficient code",
+  "logical_multiplicity": "Scene-specific time-varying scalar fields evaluated at held-out scene-time combinations",
+  "controls_required": [
+    "Independent dense field payload for every scene-time cell (oracle upper-quality/storage control)",
+    "Native rank-4 scene \u00d7 time \u00d7 spatial tensor factorization",
+    "Rank-4 additive scene + time shared-basis code",
+    "Rank-4 multiplicative Mirror scene \u00d7 time shared-basis code"
+  ],
+  "data_generation": {
+    "scenes": 8,
+    "timestamps": 6,
+    "spatial_samples": 96,
+    "rank": 4,
+    "structure": "Four smooth shared spatial atoms with multiplicative scene and time coefficients plus a small scene-time-private residual",
+    "observed_cells": "Deterministic 4-of-6 timestamps per scene, cyclic schedule; every scene and timestamp appears in training, remaining 16 cells are held out",
+    "development_seeds": [
+      90201,
+      90207
+    ],
+    "fresh_seeds": [
+      90221,
+      90223,
+      90229
+    ],
+    "fresh_lock": "Seeds and held-out cell schedule frozen before generation/evaluation"
+  },
+  "optimization": {
+    "optimizer": "Adam",
+    "learning_rate": 0.03,
+    "updates": 3000,
+    "initialization_seeded": true,
+    "development_tuning": "None beyond fixed protocol values",
+    "fresh_tuning": "Forbidden",
+    "weight_decay": 0.0001,
+    "amendment": "01; selected only from development seeds after observed optimizer instability; initially opened fresh seeds are excluded and preserved."
+  },
+  "storage": {
+    "authority": "Actual compressed NPZ serialized inference payload bytes",
+    "paid_objects": [
+      "spatial basis",
+      "scene codes",
+      "time codes",
+      "factorization metadata",
+      "all independently stored cell fields for upper control"
+    ],
+    "excluded": "Training observations and optimizer state are not inference payload"
+  },
+  "compute": {
+    "report": [
+      "optimizer updates",
+      "multiply-add proxy per query",
+      "fit wall clock",
+      "serialized payload bytes"
+    ],
+    "runtime": "CPU wall clock is descriptive only"
+  },
+  "quality": {
+    "metric": "Held-out scene-time cell normalized RMSE over all 96 spatial samples",
+    "success_gate": "Screening only: Mirror nRMSE <= 0.05 in all fresh seeds and at least 25% fewer bytes than independent full-cell payload",
+    "mirror_specific_gate": "Mirror beats native rank-4 factorization by >1e-6 nRMSE or 1% bytes; exact algebraic aliases fail this gate",
+    "failure_gate": "Fails synthetic quality gate in at least 2/3 fresh seeds or is matched by native factorization/additive control"
+  },
+  "boundaries": [
+    "Synthetic mechanism screen only; no C-NGP, K-Planes, radiance rendering, real scene, PSNR, or FPS claim.",
+    "Native rank-4 tensor factorization is algebraically equivalent by construction and is a mandatory attribution control.",
+    "Private residual in generator bounds extrapolation; independent-cell oracle is not a deployable held-out predictor.",
+    "Amendment 01 excludes preliminary fresh seeds 90211/90213/90219; confirmatory fresh seeds are 90221/90223/90229."
+  ],
+  "decision": {
+    "facts": [
+      "Fresh multiplicative/native nRMSE: .02277, 1.52103, .06961.",
+      "Actual compressed NPZ payload is 2461\u20132464 B versus 17638\u201317682 B for independent dense full-cell oracle; about 86.0% fewer bytes.",
+      "Native rank-4 control exactly aliases Mirror predictions, payload, and MAC proxy.",
+      "Mirror query MAC proxy 392 versus dense 96; two of three fresh seeds fail nRMSE <= .05."
+    ],
+    "interpretation": "Scoped synthetic FAIL for the quality gate and Mirror-specific value; low bytes reflect native rank-4 separability in this generator.",
+    "hypothesis": "Whether a real multiscene field benefits from scene\u00d7time Mirror coordinates remains untested."
+  }
+}

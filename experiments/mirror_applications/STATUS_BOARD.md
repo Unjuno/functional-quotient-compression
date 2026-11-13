@@ -7,10 +7,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 - Registered candidates: **1155**
 - Claim ledger entries: **409**
-- P0: **630** (333 FAIL; 51 PROMISING; 240 UNTESTED; 6 NOT ESTABLISHED)
+- P0: **630** (334 FAIL; 51 PROMISING; 239 UNTESTED; 6 NOT ESTABLISHED)
 - P1: **422** (17 completed; 405 UNTESTED)
 - P2: **103** (103 UNTESTED)
-- Current MA statuses: **341 FAIL, 6 NOT ESTABLISHED, 60 PROMISING, 1 SCREENING, 747 UNTESTED**
+- Current MA statuses: **342 FAIL, 6 NOT ESTABLISHED, 60 PROMISING, 1 SCREENING, 746 UNTESTED**
 - 47 baseline experiment directories remain present; verified external outcomes are linked to their dedicated branches in the registry and claim ledger.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). See the current Next candidate section for the live queue.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. see the current Next candidate section.
@@ -318,3 +318,6 @@ MA-899 execution review: PA251 confirms spatial-temporal anchor prediction, adap
 
 
 MA-900 execution review: PA265/arXiv 2607.24403 describes dual structure/appearance streams and geometry-guided one-step diffusion. Bounded arXiv/GitHub/public-code searches did not identify official code or checkpoints; local CPU-only runtime lacks CUDA, `diffusers`, `gsplat`, and benchmark scenes. ExGS is a distinct method and was not substituted. No codec/model or metrics; MA-900 remains UNTESTED, not FAIL. See `experiments/mirror_applications/ma-900-gensplatcodec-structure-view/EXECUTION_BLOCKER.md`. MA-901 is P1, so advance to next eligible P0 MA-902 (scene identity × time Mirror field).
+
+
+MA-902 is a scoped synthetic FAIL. On three amended fresh seeds, rank-4 scene×time codes have nRMSE .02277/1.52103/.06961; two miss the .05 gate. Actual NPZ payloads are 2461–2464 B versus 17638–17682 B independent dense oracle (~86% savings), but native rank-4 factorization exactly aliases Mirror and query MAC proxy is 4.08× dense. Payload roundtrip/replay and split integrity passed. No real C-NGP/K-Planes rendering claim. Initial unregularized fresh set is preserved/excluded; amendment selected on development only. See `experiments/mirror_applications/ma-902-scene-time-mirror-field/RESULTS.md`. Next eligible P0: MA-903 canonical object Gaussians with SE3 Mirror motion code.

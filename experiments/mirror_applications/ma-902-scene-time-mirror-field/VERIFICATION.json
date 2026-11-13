@@ -1,0 +1,35 @@
+{
+  "experiment_id": "MA-902",
+  "commit": null,
+  "tests": {
+    "command": "python experiments/mirror_applications/ma-902-scene-time-mirror-field/tests/verify_payloads.py",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "payload_files": 20
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference_below": 2e-05
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_seeds": [
+    90221,
+    90223,
+    90229
+  ],
+  "environment": {
+    "torch": "2.14.1+cpu",
+    "device": "CPU",
+    "official_scene_data": false,
+    "official_C_NGP_or_K_Planes_run": false
+  },
+  "notes": [
+    "Payload test and split integrity command passed.",
+    "Pre-amendment unregularized fresh seeds 90211/90213/90219 are retained under source/results/pre_amendment and excluded from confirmatory claims.",
+    "Result is synthetic-only; no rendered PSNR/FPS or real scene result."
+  ]
+}

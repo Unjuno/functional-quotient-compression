@@ -669,3 +669,6 @@ MA-899 remains UNTESTED after feasibility review: bounded search did not identif
 
 
 MA-900 remains UNTESTED after source/runtime feasibility review: official source/checkpoints and benchmark scenes were not identified; no CUDA, diffusion package, or Gaussian renderer is available. No run or metrics. See `ma-900-gensplatcodec-structure-view/EXECUTION_BLOCKER.md`. MA-901 is P1; next eligible P0 is MA-902, scene identity × time Mirror field (PA243/PA247).
+
+
+MA-902 complete as a scoped synthetic FAIL: rank-4 multiplicative scene×time codes save ~86% actual NPZ bytes vs independent dense full-cell fields, but miss nRMSE<=.05 in 2/3 amended fresh seeds, exactly alias native tensor factorization, and cost 4.08× query MAC proxy. Roundtrip/replay and split checks pass; real scene rendering remains untested. See `ma-902-scene-time-mirror-field/RESULTS.md` on `research/ma-902-scene-time-mirror-field-20261113`. Next eligible P0: MA-903 canonical object Gaussians with SE3 Mirror motion code.
