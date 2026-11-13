@@ -681,3 +681,6 @@ MA-904 remains UNTESTED and is paused with the direct scene/object coordinate su
 
 
 MA-906 remains UNTESTED after source/data review: no official NanoVoice implementation/checkpoint or multi-speaker corpus in bounded search/workspace; do not substitute an unrelated TTS model. See `ma-906-nanovoice-mirror-code/EXECUTION_BLOCKER.md`. Advance to MA-907 factorized voice × layer NanoVoice View.
+
+
+MA-907 remains UNTESTED because official NanoVoice source, checkpoint and speaker data are unavailable; no voice-layer run. See `ma-907-nanovoice-layer-view/EXECUTION_BLOCKER.md`. Continue to MA-908 HyperTTS generator emits Mirror code only.

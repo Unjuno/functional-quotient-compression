@@ -1,0 +1,39 @@
+{
+  "experiment_id": "MA-907",
+  "title": "Factorized voice \u00d7 layer NanoVoice View",
+  "status": "UNTESTED",
+  "protocol_frozen": false,
+  "evidence_lane": "MULTISPEAKER_TTS/COMPOSITION/STORAGE/QUALITY",
+  "hypothesis": "A low-description speaker \u00d7 layer View recovers heldout voice-layer modulation with lower actual payload than independent per-speaker scales and beats native scale factorization.",
+  "prior_art_refs": [
+    "PA253"
+  ],
+  "controls_required": [
+    "Official NanoVoice scales",
+    "Native speaker embedding \u00d7 layer scale",
+    "Mirror speaker \u00d7 layer code",
+    "Independent speaker-layer scale bank"
+  ],
+  "storage": {
+    "authority": "actual serialized inference bytes",
+    "paid_objects": [
+      "shared TTS weights",
+      "scale basis",
+      "speaker/layer codes",
+      "indices and metadata"
+    ]
+  },
+  "quality": {
+    "metrics": [
+      "speaker similarity",
+      "intelligibility",
+      "acoustic quality"
+    ],
+    "heldout": "whole speaker-layer combinations"
+  },
+  "blocker": "Official NanoVoice source, checkpoint and corpus unavailable in bounded search/workspace.",
+  "boundaries": [
+    "Feasibility review only; no model/audio execution.",
+    "Do not substitute unrelated TTS implementation."
+  ]
+}
