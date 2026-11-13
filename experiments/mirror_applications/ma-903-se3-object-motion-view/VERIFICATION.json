@@ -1,0 +1,29 @@
+{
+  "experiment_id": "MA-903",
+  "commit": null,
+  "tests": {
+    "command": "python experiments/mirror_applications/ma-903-se3-object-motion-view/tests/verify_payloads.py",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "payload_files": 15
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_point_error": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_seeds": [
+    90331,
+    90333,
+    90339
+  ],
+  "notes": [
+    "Corrected native SE3 control byte-aliases Mirror exactly.",
+    "Pre-amendment materialized pose-table comparison archived and excluded from confirmatory conclusion.",
+    "Synthetic only; no learned world model, camera renderer, real object, or rollout quality tested."
+  ]
+}

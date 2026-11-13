@@ -672,3 +672,6 @@ MA-900 remains UNTESTED after source/runtime feasibility review: official source
 
 
 MA-902 complete as a scoped synthetic FAIL: rank-4 multiplicative scene×time codes save ~86% actual NPZ bytes vs independent dense full-cell fields, but miss nRMSE<=.05 in 2/3 amended fresh seeds, exactly alias native tensor factorization, and cost 4.08× query MAC proxy. Roundtrip/replay and split checks pass; real scene rendering remains untested. See `ma-902-scene-time-mirror-field/RESULTS.md` on `research/ma-902-scene-time-mirror-field-20261113`. Next eligible P0: MA-903 canonical object Gaussians with SE3 Mirror motion code.
+
+
+MA-903 complete as a scoped synthetic Mirror-attribution FAIL. Canonical rigid geometry plus action SE(3) codes save ~96.98% actual bytes vs posed-cloud materialization and decode exact heldout compositions, but corrected native SE(3) aliases exactly; transform compute is added. Real action-conditioned world-model dynamics remain untested. See `ma-903-se3-object-motion-view/RESULTS.md` on `research/ma-903-se3-object-motion-view-20261113`. Next eligible P0: MA-904 action × object identity Mirror dynamics.

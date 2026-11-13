@@ -1,0 +1,76 @@
+{
+  "experiment_id": "MA-903",
+  "title": "Canonical object Gaussians with SE3 Mirror motion code",
+  "status": "FAIL",
+  "protocol_frozen": true,
+  "evidence_lane": "SYNTHETIC_3D_GEOMETRY/SE3_COMPOSITION/STORAGE/COMPUTE",
+  "hypothesis": "One canonical point cloud plus a compact valid SE(3) motion code reconstructs unseen action compositions with materially fewer serialized bytes than storing each posed point cloud; Mirror-specific value requires an advantage over native SE(3) pose parameters with the same decoder.",
+  "prior_art_refs": [
+    "PA252"
+  ],
+  "physical_object": "Canonical point-cloud geometry for each rigid object",
+  "mirror_coordinate": "SE(3) rigid pose matrix code m composed from action transforms",
+  "logical_multiplicity": "Object poses produced from held-out two-action compositions without duplicating geometry",
+  "controls_required": [
+    "Independent posed point-cloud bank for every logical object/action view",
+    "Native SE(3) matrix pose parameters plus shared canonical geometry",
+    "Mirror-addressed SE(3) motion code plus shared canonical geometry"
+  ],
+  "data_generation": {
+    "objects": 4,
+    "points_per_object": 256,
+    "primitive_actions": 6,
+    "heldout_compositions": "All ordered action pairs; transforms are composed in SE(3), not added in Euclidean coordinates",
+    "development_seeds": [
+      90301,
+      90307
+    ],
+    "fresh_seeds": [
+      90331,
+      90333,
+      90339
+    ],
+    "fresh_locked_before_generation": true
+  },
+  "storage": {
+    "authority": "Actual compressed NPZ serialized inference payload bytes",
+    "paid_objects": [
+      "all canonical object points",
+      "all primitive action transforms",
+      "object/action indices and metadata",
+      "all independent posed point clouds in upper control"
+    ]
+  },
+  "compute": {
+    "report": [
+      "SE(3) composition plus point transform MAC proxy",
+      "payload bytes",
+      "CPU replay wall time as descriptive only"
+    ]
+  },
+  "quality": {
+    "metric": "Maximum and RMS pointwise Euclidean error against direct SE(3) action composition",
+    "validity": "Rotation orthogonality, determinant, and homogeneous last row",
+    "success_gate": "All fresh worlds have max error <=1e-5 and at least 50% fewer bytes than independent posed point clouds",
+    "mirror_specific_gate": "Mirror payload/output/compute must improve over native SE(3) control; exact aliases fail attribution"
+  },
+  "boundaries": [
+    "Synthetic rigid point geometry only; no MRO-GWM training, real object interaction, camera rendering, occlusion, or rollout PSNR claim.",
+    "The native SE(3) control uses identical pose matrices and decoder; exact alias is expected and tests Mirror attribution.",
+    "SE(3) action composition is not evidence of learned action-conditioned dynamics.",
+    "Amendment 01 corrects the native SE(3) control to use the same six primitive transforms and shared decoder as Mirror; preliminary pose-table-control fresh set 90321/90323/90329 is archived and excluded."
+  ],
+  "notes": [
+    "Amendment 01: native control stores the same primitive SE(3) transforms and decoder, so its payload must byte-alias Mirror; new fresh seeds replace initially evaluated set."
+  ],
+  "decision": {
+    "facts": [
+      "Fresh canonical+SE3 payload: 12,348\u201312,372 B; fully materialized posed point clouds: 409,738\u2013410,119 B (~96.98% reduction).",
+      "All heldout action compositions have exactly zero pointwise decode error in synthetic geometry.",
+      "Corrected native SE3 payload and outputs exactly equal Mirror in all fresh seeds.",
+      "Shared transform compute proxy is 1728 MAC; independent cached point-cloud lookup is 0 transform MAC."
+    ],
+    "interpretation": "Synthetic rigid-geometry storage mechanism passes, but it exactly aliases ordinary native SE3 instancing; FAIL Mirror-specific attribution.",
+    "hypothesis": "Real action-conditioned dynamics and nonrigid/appearance states remain untested."
+  }
+}
