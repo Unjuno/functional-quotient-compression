@@ -8,13 +8,54 @@
   "physical_object": "Shared pair-radial energy basis and shared material coefficient subspace",
   "mirror_coordinate": "Two-dimensional material coordinate m fitted from sparse energy/force calibration",
   "logical_multiplicity": "Distinct conservative material pair potentials",
-  "prior_art_refs": ["PA296", "PA297", "PA300"],
-  "controls": ["shared-only potential", "native rank-2 coefficient factorization", "scalar gate", "development-selected sparse coefficient update", "independent full material coefficients"],
-  "development": {"worlds_or_seeds": [99601], "selection_metric": "held-out combined energy/force normalized RMSE; select radial basis width and code rank"},
-  "fresh": {"worlds_or_seeds": [99611, 99613, 99617], "locked_before_access": true},
-  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["radial centers and widths", "shared coefficients/subspace", "material code", "metadata", "sparse indices and residuals where used"]},
-  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true},
+  "prior_art_refs": [
+    "PA296",
+    "PA297",
+    "PA300"
+  ],
+  "controls": [
+    "shared-only potential",
+    "native rank-2 coefficient factorization",
+    "scalar gate",
+    "development-selected sparse coefficient update",
+    "independent full material coefficients"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      99601
+    ],
+    "selection_metric": "held-out combined energy/force normalized RMSE; select radial basis width and code rank"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      99611,
+      99613,
+      99617
+    ],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "radial centers and widths",
+      "shared coefficients/subspace",
+      "material code",
+      "metadata",
+      "sparse indices and residuals where used"
+    ]
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true
+  },
   "success_gate": "Fresh held-out material combined normalized RMSE <= 0.02, exact energy-gradient force consistency and rotation equivariance, >=25% actual payload savings versus independent material coefficients, and a quality/storage advantage over native low-rank and sparse-update controls.",
   "failure_gate": "Any physical-consistency violation; failure of quality or byte gate; or exact/native-control alias without a Mirror-specific quality/storage/compute advantage.",
-  "boundaries": ["Scoped synthetic radial-potential mechanism screen only; no official MACE-MP, MPTrj, PA297, or real material result is claimed.", "The Mirror coordinate is compared with a mathematically matched native low-rank coefficient control.", "Fresh worlds are generated only after this protocol is committed."]
+  "boundaries": [
+    "Scoped synthetic radial-potential mechanism screen only; no official MACE-MP, MPTrj, PA297, or real material result is claimed.",
+    "The Mirror coordinate is compared with a mathematically matched native low-rank coefficient control.",
+    "Fresh worlds are generated only after this protocol is committed."
+  ],
+  "implementation_amendment_01": "Before fresh access, development code review found delta coordinates were fit without subtracting shared base predictions. Corrected fitting to yc - Xc@base for Mirror and sparse residual controls; also corrected serialization to store every target scalar-gate alpha. No fresh world was opened before this correction."
 }

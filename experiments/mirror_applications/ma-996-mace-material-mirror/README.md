@@ -35,3 +35,7 @@ FACT: pending run.
 INTERPRETATION: pending run.
 HYPOTHESIS: pending run.
 BOUNDARY: no MACE-MP or real-material claim.
+
+## Protocol amendment 01
+
+Before opening fresh worlds, development review found an implementation error in delta-code fitting: the shared-base prediction was not subtracted from calibration targets. The Mirror and sparse fit now use residual targets, and the scalar-gate payload stores all per-target gates. No fresh result was accessed before this correction.

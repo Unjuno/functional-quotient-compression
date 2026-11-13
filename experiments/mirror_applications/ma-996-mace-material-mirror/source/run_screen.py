@@ -121,15 +121,15 @@ def main():
    devcs=np.stack(devcs); base=devcs.mean(0); _,_,vt=np.linalg.svd(devcs-base,full_matrices=False); b=vt[:2].T
    rng=np.random.default_rng(a.world); target_codes=rng.normal(size=(4,2)); targets=[theta+u@z for z in target_codes]
    methods={k:[] for k in ['shared_only','scalar_gate','mirror_rank2','native_rank2','sparse_update','independent_fit']}
-   metrics=[]; m_codes=[]; independent=[]; sparse_codes=[]
+   metrics=[]; m_codes=[]; independent=[]; sparse_codes=[]; scalar_alphas=[]; wall_start=time.perf_counter()
    # Development-selected 6-coefficient support.
    support=np.argsort(np.mean(np.abs(devcs-base),axis=0))[-6:]
    for idx,c in enumerate(targets):
       xc,yc=dataset(rng,c,8,width); xv,yv=dataset(rng,c,24,width)
       # Mirror and native low-rank are deliberately same parameterization; bytes/hash expose alias.
-      m=fit(xc@b,yc); cm=base+b@m; m_codes.append(m)
-      pred=fit(xc@base,yc); alpha=float(pred[0]/(base@base+1e-12)); cs=alpha*base
-      xs=xc[:,support]; ds=fit(xs,yc); csp=base.copy(); csp[support]+=ds; sparse_codes.append(ds)
+      m=fit(xc@b,yc-xc@base); cm=base+b@m; m_codes.append(m)
+      alpha=float(np.dot(xc@base,yc)/(np.dot(xc@base,xc@base)+1e-12)); cs=alpha*base; scalar_alphas.append(alpha)
+      xs=xc[:,support]; ds=fit(xs,yc-xc@base); csp=base.copy(); csp[support]+=ds; sparse_codes.append(ds)
       ci=fit(xc,yc); independent.append(ci)
       preds={'shared_only':base,'scalar_gate':cs,'mirror_rank2':cm,'native_rank2':cm.copy(),'sparse_update':csp,'independent_fit':ci}
       for name,cc in preds.items(): methods[name].append(measure(cc,xv,yv))
@@ -138,7 +138,7 @@ def main():
    # Store fully charged inference payloads, including basis/centers/width and per-target data.
    states={
     'shared_only':{'centers':CENTERS,'width':np.array(width),'base':base},
-    'scalar_gate':{'centers':CENTERS,'width':np.array(width),'base':base,'alpha':np.array([float(np.dot(m_codes[0],m_codes[0]))])},
+    'scalar_gate':{'centers':CENTERS,'width':np.array(width),'base':base,'alpha':np.asarray(scalar_alphas)},
     'mirror_rank2':{'centers':CENTERS,'width':np.array(width),'base':base,'basis':b,'codes':np.stack(m_codes)},
     'native_rank2':{'centers':CENTERS,'width':np.array(width),'base':base,'basis':b,'codes':np.stack(m_codes)},
     'sparse_update':{'centers':CENTERS,'width':np.array(width),'base':base,'indices':support.astype(np.int16),'residuals':np.stack(sparse_codes)},
@@ -152,8 +152,8 @@ def main():
       loaded=np.load(out/f'{a.world}_{name}.npz'); roundtrip[name]=all(np.array_equal(loaded[k],v) for k,v in state.items())
    summary={}
    for name,vals in methods.items():
-      arr=np.asarray(vals); summary[name]={'energy_nrmse_mean':float(arr[:,0].mean()),'force_nrmse_mean':float(arr[:,1].mean()),'combined_nrmse_mean':float(arr[:,2].mean()),'serialized_bytes':bytes_by[name],'inference_mac_proxy_per_config':int(5*4*len(CENTERS)*2+(48 if name in ['mirror_rank2','native_rank2'] else 6 if name=='sparse_update' else D if name=='scalar_gate' else 0)),'roundtrip_exact':roundtrip[name]}
-   result={'world':a.world,'width':width,'rank':2,'targets':4,'calibration_examples_per_target':8,'heldout_examples_per_target':24,'methods':summary,'integrity_checks':metrics,'units':'synthetic eV-style coefficient units','wall_time_seconds':None}
+      arr=np.asarray(vals); summary[name]={'energy_nrmse_mean':float(arr[:,0].mean()),'force_nrmse_mean':float(arr[:,1].mean()),'combined_nrmse_mean':float(arr[:,2].mean()),'serialized_bytes':bytes_by[name],'inference_mac_proxy_per_config':int(2*10*len(CENTERS)+(48 if name in ['mirror_rank2','native_rank2'] else 6 if name=='sparse_update' else D if name=='scalar_gate' else 0)),'roundtrip_exact':roundtrip[name]}
+   result={'world':a.world,'width':width,'rank':2,'targets':4,'calibration_examples_per_target':8,'heldout_examples_per_target':24,'methods':summary,'integrity_checks':metrics,'units':'synthetic eV-style coefficient units','wall_time_seconds':float(time.perf_counter()-wall_start),'train_examples_total':12*20,'calibration_examples_total':4*8,'optimizer_updates':0}
    path=out/f'fresh_{a.world}.json'; path.write_text(json.dumps(result,indent=2)+'\n'); print(json.dumps(result,indent=2))
  else:
    files=list(out.glob('fresh_*.json')); good=[]
