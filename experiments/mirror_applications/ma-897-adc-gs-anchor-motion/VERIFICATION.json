@@ -1,0 +1,21 @@
+{
+  "experiment_id": "MA-897",
+  "commit": null,
+  "tests": {"command": null, "passed": null, "failed": null},
+  "serialization": {"roundtrip_checked": false, "byte_exact": false},
+  "metric_replay": {"checked": false, "max_difference": null},
+  "fresh_split_integrity_checked": false,
+  "environment": {
+    "torch": "2.14.1+cpu",
+    "cuda_available": false,
+    "nvidia_smi": false,
+    "upstream_commit": "5501b8a163b564a583cca2edf251868e795c3040",
+    "cuda_extensions_built": false,
+    "dynamic_scene_dataset_found": false
+  },
+  "notes": [
+    "Feasibility review only; remains UNTESTED, not FAIL.",
+    "Official ADC-GS pins PyTorch 1.12.1+cu116 and compiles CUDA rasterizer/simple-knn extensions.",
+    "No training, rendering, quality evaluation, payload measurement, or FPS claim was made."
+  ]
+}

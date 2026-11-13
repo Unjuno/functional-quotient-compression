@@ -1,5 +1,10 @@
 # Worker queue
 
+## Current handoff — 2026-11-13, MA-897
+
+MA-896 official 4DGS remains UNTESTED due CUDA and scene-data requirements; it is skipped for now per user direction, with blocker preserved on its dedicated branch. MA-897 official ADC-GS has the same CUDA-runtime blocker plus missing HyperNeRF/N3V assets; it remains UNTESTED, not FAIL. See `ma-897-adc-gs-anchor-motion/EXECUTION_BLOCKER.md`. Advance to MA-898.
+
+
 ## Current handoff — 2026-11-12, MA-896
 
 MA-895 is UNTESTED because official K-Planes requires CUDA/tinycudann. MA-896 was reviewed and is also blocked before training: official 4DGaussians needs CUDA rasterizer/simple-knn extensions and dynamic-scene assets absent from this CPU-only workspace. It remains UNTESTED, not FAIL; see `ma-896-4dgs-motion-view/EXECUTION_BLOCKER.md`. Resume MA-896 when compatible hardware and a fixed scene dataset are available.

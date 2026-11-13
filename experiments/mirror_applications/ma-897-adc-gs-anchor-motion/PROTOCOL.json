@@ -1,0 +1,19 @@
+{
+  "experiment_id": "MA-897",
+  "title": "ADC-GS anchor motion Mirror bank",
+  "status": "UNTESTED",
+  "protocol_frozen": false,
+  "evidence_lane": "NEURAL_GRAPHICS/SPACE_TIME/QUALITY/STORAGE/RUNTIME",
+  "hypothesis": "A compact anchor-group × time motion coordinate over shared ADC-GS anchor deformation state can express multiple useful dynamic functions at lower actual serialized bytes than separate motion/deformation state, while retaining quality and rendering throughput.",
+  "prior_art_refs": ["PA249"],
+  "physical_object": "Shared ADC-GS anchor-based Gaussian representation and native hierarchical deformation model",
+  "mirror_coordinate": "Compact anchor-group × time motion coordinate m",
+  "logical_multiplicity": "Distinct useful temporal motion trajectories sharing anchor deformation state",
+  "controls_required": ["Official ADC-GS native anchor deformation", "Shared ADC-GS anchors with ordinary learned motion/time embedding plus deformation decoder", "Mirror anchor-group × time coordinate", "Independent per-motion Gaussian/deformation assets when practical"],
+  "fresh": {"heldout_timestamp_view_cells": true, "seeds": [], "locked_before_access": false},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["canonical Gaussian attributes", "anchors and anchor assignment", "deformation decoder and field", "all motion codes", "appearance state", "entropy/codebook state", "metadata", "reconstruction state"]},
+  "compute": {"report": ["active compute", "fit wall-clock", "render FPS", "random-access latency", "peak VRAM"]},
+  "quality": {"metrics": ["PSNR", "LPIPS", "temporal motion stability"], "fresh_worlds": [], "success_gate": "Not frozen; lock thresholds and fresh cells before any evaluation."},
+  "blocker": "Official ADC-GS setup pins CUDA 11.6-era PyTorch and compiles CUDA Gaussian rasterizer/simple-knn extensions; train/render code calls CUDA directly. Current runtime is CPU-only and no HyperNeRF/N3V scenes or checkpoints are present.",
+  "boundaries": ["Feasibility review only; no model training, rendered quality, payload, or FPS result.", "Do not substitute a CPU toy renderer or generic motion field and call MA-897 complete."]
+}
