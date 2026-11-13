@@ -17,3 +17,5 @@ Development seed 99701 selects six support coordinates. Fresh worlds 99711/99713
 ## Decision
 
 FACT: pending.\nINTERPRETATION: pending.\nHYPOTHESIS: pending.\nBOUNDARY: synthetic radial-potential mechanism only.
+
+Implementation amendment 01: before fresh access, fixed serialization to store the independent sparse-fit values corresponding to its selected indices. No fresh world was opened before this correction. Radial width is fixed at 0.65 to match MA-996.

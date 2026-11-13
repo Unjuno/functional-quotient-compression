@@ -29,7 +29,7 @@ def main():
   if a.world not in [99711,99713,99717]:raise SystemExit('unregistered fresh world')
   cfg=json.load(open(runs/'development.json'));support=np.asarray(cfg['support_indices'],dtype=int);rng=np.random.default_rng(a.world);width=.65
   lists={k:[] for k in ['shared_only','mirror_shared_support','native_shared_support','independent_sparse','independent_full']}
-  codes=[];inds=[];fulls=[];checks=[];t0=time.perf_counter()
+  codes=[];inds=[];sparse_codes=[];fulls=[];checks=[];t0=time.perf_counter()
   for target in range(4):
    delta=np.zeros(D);delta[support]=rng.normal(0,.03,len(support));c=theta+delta
    xc,yc=radial.dataset(rng,c,8,width);xv,yv=radial.dataset(rng,c,24,width)
@@ -41,14 +41,14 @@ def main():
    cf=radial.fit(xc,yc)
    for name,coef in [('shared_only',theta),('mirror_shared_support',cm),('native_shared_support',cn),('independent_sparse',ci),('independent_full',cf)]:
     lists[name].append(radial.measure(coef,xv,yv))
-   codes.append(m);inds.append(si);fulls.append(cf)
+   codes.append(m);inds.append(si);sparse_codes.append(mi);fulls.append(cf)
    fd,eq=radial.force_consistency(cm,np.random.default_rng(a.world+target+5),width)
    checks.append({'target':target,'force_gradient_max_abs':fd,'rotation_equivariance_max_abs':eq,'calibration_examples':8,'heldout_examples':24})
   states={
    'shared_only':{'centers':CENTERS,'width':np.array(width),'base':theta},
    'mirror_shared_support':{'centers':CENTERS,'width':np.array(width),'base':theta,'indices':support.astype(np.int16),'values':np.stack(codes)},
    'native_shared_support':{'centers':CENTERS,'width':np.array(width),'base':theta,'indices':support.astype(np.int16),'values':np.stack(codes)},
-   'independent_sparse':{'centers':CENTERS,'width':np.array(width),'base':theta,'indices':np.stack(inds).astype(np.int16),'values':np.stack([np.asarray([fulls[i][j]-theta[j] for j in inds[i]]) for i in range(4)])},
+   'independent_sparse':{'centers':CENTERS,'width':np.array(width),'base':theta,'indices':np.stack(inds).astype(np.int16),'values':np.stack(sparse_codes)},
    'independent_full':{'centers':CENTERS,'width':np.array(width),'coefficients':np.stack(fulls)}}
   sizes={};roundtrip={}
   for name,state in states.items():
