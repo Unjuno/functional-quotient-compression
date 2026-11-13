@@ -1,3 +1,7 @@
+## Current handoff — 2026-11-13, MA-1001
+
+MA-1001 is PROMISING only for synthetic LJ NVE stability: two 3,000-step Mirror trajectories in each of three fresh worlds had <5.5e-9 relative energy drift and exactly matched native coefficient paths. The negative separate-force control drifted; Mirror payload/compute were higher than native. No MatterSim/MACE result. See `ma-1001-md-view-stability/RESULTS.md`. Continue at MA-1003; MA-1002 is P1.
+
 ## Current handoff — 2026-11-13, MA-1000
 
 MA-1000 is PROMISING only for the synthetic physical-validity check: energy-layer Mirror functions with forces derived from the energy pass finite-difference and rotation checks; the separate-force-head control violates consistency. Native rank-2 is identical and Mirror payload is larger than independent coefficients. No trained MACE/NequIP or quality claim. See `ma-1000-conservative-derivative-audit/RESULTS.md`. Continue to MA-1001 long-rollout stability.

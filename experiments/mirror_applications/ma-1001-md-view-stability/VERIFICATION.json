@@ -1,9 +1,9 @@
 {
   "experiment_id": "MA-1001",
   "commit": "pending",
-  "tests": {"command": "pending", "passed": null, "failed": null},
-  "serialization": {"roundtrip_checked": false, "byte_exact": false},
-  "metric_replay": {"checked": false, "max_difference": null},
-  "fresh_split_integrity_checked": false,
-  "notes": ["Synthetic LJ NVE stability screen only."]
+  "tests": {"command": "python experiments/mirror_applications/ma-1001-md-view-stability/source/run_md.py verify", "passed": 3, "failed": 0},
+  "serialization": {"roundtrip_checked": true, "byte_exact": true},
+  "metric_replay": {"checked": true, "max_difference": 0.0},
+  "fresh_split_integrity_checked": true,
+  "notes": ["All three fresh worlds completed 3000-step NVE trajectories; serialized replay exactly matches drift and Mirror/native path.", "Synthetic LJ only; no MatterSim/MACE or material-dynamics result."]
 }
