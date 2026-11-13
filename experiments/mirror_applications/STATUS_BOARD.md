@@ -435,3 +435,6 @@ MA-962 scoped custom CPU LIF screen FAIL on structured rank-3 signature: rank-4 
 
 
 MA-962 amendment 04 correction: Astra audit found train/test generic-random K signatures differed in the first dev screen; that NOT ESTABLISHED call is withdrawn. Corrected dev and fresh use a shared per-world K bank. Fresh generic full TEBN reached 100%, rank4 99.98%; rank4 still saved only 4.2% bytes and raised spikes 25.1%. Retired interrupted seeds excluded. See `ma-962-task-time-tebn-view/RESULTS.md`.
+
+
+MA-961 verification amendment: Astra found prior scores did not decode loaded thresholds and int4 codes were stored in uint8. Superseded scores remain in the experiment directory; corrected amendment 04 on fresh seeds 96131/33/37 scores decoded state and packs nibbles. Affine result 95.88% / 2,581 B vs FP32 100% / 2,101 B; packed int4 99.01% / 2,363 B. FAIL remains.

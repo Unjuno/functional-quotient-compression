@@ -1,40 +1,42 @@
-# MA-961 results — fixed-synapse spiking threshold task views
+# MA-961 corrected results — fixed-synapse spiking threshold task views
 
 ## H — Hypothesis
 
-An affine task-index coordinate can replace per-task neuron thresholds with less serialized state while retaining threshold-classifier quality. Irregular threshold worlds should reveal the need for private residual values.
+An affine task-index coordinate can replace independent per-task thresholds with lower serialized payload while retaining threshold-classifier accuracy. Direct 4-bit threshold quantization is the strongest simple storage control; irregular thresholds may require private residuals.
 
 ## T — Test
 
-**Fact.** CPU deterministic integrate-and-fire simulation, 3 fresh worlds (96121, 96123, 96127), 16 tasks/world, 4,096 Gaussian test examples/task. One shared scalar synapse and one LIF unit, 8 steps, leak 0.9, reset-to-zero, input bias 1.5. Each task is a binary threshold decision `x > c_t`; task boundaries are fresh random draws sorted across task IDs. Compared FP32 threshold bank, direct min/max affine 4-bit codes, least-squares affine task-index threshold code, and affine code plus a full private residual table. Actual `torch.save` inference payload bytes include synapse, threshold/code, calibration state, and metadata. Amendment 01 wrote unmatched metrics then errored while printing; those files are preserved and excluded. Amendment 02 used three new seeds.
+**Fact.** CPU deterministic integrate-and-fire simulation, three new fresh worlds (96131, 96133, 96137), 16 tasks/world, 4,096 Gaussian test examples/task. One shared scalar synapse and one LIF unit, 8 steps, leak 0.9, zero reset, input bias 1.5. Each task is `x > c_t`; task boundaries are fresh sorted random draws. Compared FP32 thresholds, direct min/max 4-bit codes, least-squares affine task-index code, and affine code plus a full private residual table. Amendment 04 packed two 4-bit codes per byte. Every inference threshold was decoded from the serialized state loaded with `weights_only=True` and that decoded value was used for scoring. All state tensors matched their pre-serialization values exactly. Payload bytes include tensor archive, metadata, min/max range or affine parameters, task indices, and shared synapse.
+
+Amendment 02 metrics that scored in-memory float64 reconstructions are superseded. Amendment 03 also reused those prior seeds by implementation error; its output is preserved and excluded. Amendment 04 ran the corrected scoring code on new seeds.
 
 ## Results
 
-**Fact.** Means over all task×world rows:
+**Fact.** Means over 48 task×world rows:
 
 | Condition | Accuracy | Mean spikes/example | Serialized payload bytes |
 |---|---:|---:|---:|
-| Independent FP32 thresholds | 1.0000 | 0.8083 | 2,101 |
-| Direct 4-bit threshold quantization | 0.9889 | 0.8050 | 2,299 |
-| Affine task-index Mirror code | 0.9721 | 0.7589 | 2,581 |
-| Affine code + full private residual | 1.0000 | 0.8083 | 2,809 |
+| Independent FP32 thresholds | 1.0000 | 1.1145 | 2,101 |
+| Direct packed 4-bit threshold codes | 0.9901 | 1.1018 | 2,363 |
+| Affine task-index Mirror code | 0.9588 | 1.0851 | 2,581 |
+| Affine code + private residual | 1.0000 | 1.1145 | 2,809 |
 
-The affine code failed the frozen 99% accuracy gate and was 480 B larger than the FP32 baseline. Direct 4-bit coding narrowly missed 99% mean accuracy and was 198 B larger. Exact private residuals restored outputs but increased payload by 708 B. The number of spikes changed with threshold reconstruction; this is an operation-count proxy, not joules or measured hardware energy. Per-world/task results and threshold tables are in `RESULTS_CORE.csv` and `source/results.json`.
+The affine code failed the frozen quality gate and used 480 B more than FP32 (+22.8%). Direct 4-bit coding averaged 99.01% accuracy but still used 262 B more (+12.5%), missing the 20% actual-payload saving gate. Full residuals recovered the teacher exactly but added 708 B (+33.7%). The packed code used 8 bytes for sixteen 4-bit codes; its larger total file includes quantization range and serialization/manifest overhead. Spike counts are simulator operation counts, not joules.
 
-**Interpretation.** At this tiny scale, serialization metadata outweighed the nominal threshold-code savings. Irregular task thresholds were poorly represented by one affine task coordinate; restoring them required a full residual table. Direct quantization was closer in quality, but its actual serialized payload still exceeded the native FP32 bank.
+**Interpretation.** In this tiny task bank, neither threshold coding scheme improved the full serialized storage frontier. The affine task coordinate lost quality and cost more bytes; direct quantization retained near-perfect quality but its range and format metadata erased the nominal code savings. An irregular threshold table required the full private residual.
 
 ## D — Decision
 
-**FAIL (scoped synthetic threshold screen).** Neither affine Mirror code nor direct 4-bit threshold codes passed the preregistered combined quality/storage gate. No energy or trained-SNN advantage is established.
+**FAIL (scoped synthetic threshold screen).** The preregistered affine quality/storage gate failed. Direct packed int4 was close in quality but larger in actual payload than FP32. No STL-SNN, energy, or learned-network advantage is established.
 
 ## C — Strongest counter-hypothesis
 
-The sixteen-task fixture is too small for codebook metadata to amortize. A larger task bank with genuinely smooth threshold structure could move the full-payload frontier; the affine approximation also assumes task-index regularity that random worlds do not provide.
+The sixteen-task model is too small for codebook/range metadata to amortize. A much larger bank might reduce per-task storage, though an arithmetic progression would still be an ordinary native scalar parameterization rather than Mirror-specific value.
 
 ## U — Unconfirmed
 
-No STL-SNN implementation, gradient-trained network, multi-neuron event model, real event dataset, hardware spike energy, wall-clock serving benchmark, or generalization to unseen task thresholds was tested. The task functions are one-dimensional decision boundaries, not independent classifiers.
+No STL-SNN implementation, gradient-trained network, multi-neuron event model, real event dataset, hardware spike energy, serving benchmark, or unseen-task generalization was tested. These are one-dimensional thresholds, not independent classifiers.
 
 ## Verification
 
-The corrected amendment 02 script was syntax-checked and run. The FP32 model reproduces its teacher threshold labels exactly on every row. Inference payloads were serialized for each condition/world. The first aborted output is retained separately and excluded from reported metrics.
+The corrected run used seeds 96131, 96133, 96137. It serializes each condition, reloads all tensor states, decodes its actual threshold representation, and scores using those decoded thresholds. Direct int4 nibble packing was round-tripped. Superseded runs are retained as `source/amendment02_unloaded_scoring.*` and `source/amendment03_reused_seeds.*`.
