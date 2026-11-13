@@ -7,10 +7,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 - Registered candidates: **1155**
 - Claim ledger entries: **418**
-- P0: **630** (343 FAIL; 52 PROMISING; 228 UNTESTED; 6 NOT ESTABLISHED; 1 SCREENING)
+- P0: **630** (344 FAIL; 52 PROMISING; 227 UNTESTED; 6 NOT ESTABLISHED; 1 SCREENING)
 - P1: **422** (17 completed; 405 UNTESTED)
 - P2: **103** (103 UNTESTED)
-- Current MA statuses: **351 FAIL, 6 NOT ESTABLISHED, 61 PROMISING, 1 SCREENING, 736 UNTESTED**
+- Current MA statuses: **352 FAIL, 6 NOT ESTABLISHED, 61 PROMISING, 1 SCREENING, 735 UNTESTED**
 - 47 baseline experiment directories remain present; verified external outcomes are linked to their dedicated branches in the registry and claim ledger.
 - New research: MA-876..935 (60 candidates), PA236..PA265 (30 primary sources). See the current Next candidate section for the live queue.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. see the current Next candidate section.
@@ -426,3 +426,6 @@ MA-951 scoped synthetic C4 screen FAIL: fixed phase missed preregistered task0/t
 
 
 MA-952 scoped synthetic e2cnn C4 screen FAIL: task×irrep code and ordinary per-channel gate averaged 71.7% on orbit tasks vs 100% independent readouts; Mirror payload was 22,917 B vs 22,781 B. Private residual did not restore orbit-task quality. Together with MA-951 this supports pausing the direct soft-symmetry task-readout family MA-953..960 pending structural redesign, not a broad equivariance conclusion. See [diagnostic](../../docs/phase2/C4_TASK_CONDITIONAL_MIRROR_DIAGNOSTIC_2026-11-13.md). Advance to different family P0 MA-961: fixed-synapse spiking threshold task views.
+
+
+MA-961 scoped synthetic LIF threshold screen FAIL: affine task-index threshold code averaged 97.2% vs FP32 100% accuracy and used 2,581 B vs 2,101 B; direct int4 codes averaged 98.9% and used 2,299 B. Private residual restored labels at 2,809 B. Spike counts are simulator operations, not hardware energy. See `ma-961-fixed-synapse-spike-threshold/RESULTS.md`. Next P0 MA-962: task×time-step normalization Mirror view.

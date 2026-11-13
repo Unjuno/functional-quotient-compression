@@ -779,3 +779,6 @@ MA-951 scoped synthetic C4 task-view FAIL: fixed phase missed preregistered task
 
 
 MA-952 scoped synthetic e2cnn C4 screen FAIL: learned task×irrep code and ordinary per-channel gate averaged 71.7% on orbit tasks vs 100% independent heads; Mirror payload 22,917 B vs 22,781 B. Private residual did not restore orbit quality. MA-951/952 share a small-screen shared-readout bottleneck; pause MA-953..960 for structural redesign (see `docs/phase2/C4_TASK_CONDITIONAL_MIRROR_DIAGNOSTIC_2026-11-13.md`). Next P0 in a different family: MA-961 fixed-synapse spiking threshold task views.
+
+
+MA-961 scoped synthetic scalar LIF threshold screen FAIL: affine task-index code averaged 97.2% vs FP32 100% and used 2,581 B vs 2,101 B; direct int4 averaged 98.9% and also exceeded FP32 bytes. Private residual restored labels at 2,809 B. See `ma-961-fixed-synapse-spike-threshold/RESULTS.md`. Next P0 MA-962 task×time-step normalization.

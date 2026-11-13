@@ -1,0 +1,65 @@
+{
+  "experiment_id": "MA-961",
+  "title": "Fixed-synapse spiking threshold task views",
+  "status": "FAIL",
+  "protocol_frozen": true,
+  "amendment": "02: amendment 01 completed calculations but stopped while printing a JSON summary due to a misplaced flush argument; its output is retained separately and excluded",
+  "scope": "Mechanism-only synthetic threshold bank; not an STL-SNN reproduction or neuromorphic energy claim.",
+  "base_commit": "9e82f2029",
+  "prior_art_refs": [
+    "PA282"
+  ],
+  "hypothesis": "An affine task coordinate (base plus task-index times step) can replace a bank of independent per-task firing thresholds with lower serialized bytes while retaining each threshold classifier; an irregular threshold bank will expose the private-residual boundary.",
+  "physical_object": "One shared scalar synapse and one deterministic leaky integrate-and-fire neuron, evaluated for each task threshold.",
+  "mirror_coordinate": "Task index m selects theta_m = base + step*m; optional fitted private residuals are charged in full.",
+  "logical_multiplicity": "Sixteen task-specific one-dimensional decision boundaries. This is a synthetic threshold family, not sixteen independent neural classifiers.",
+  "controls": [
+    "independent FP32 task thresholds",
+    "direct min/max 4-bit threshold quantization",
+    "affine base+step task coordinate",
+    "affine coordinate plus residual table"
+  ],
+  "fresh": {
+    "worlds_or_seeds": [
+      96121,
+      96123,
+      96127
+    ],
+    "locked_before_access": true,
+    "tasks_per_world": 16,
+    "test_examples_per_task": 4096
+  },
+  "training": {
+    "updates": 0,
+    "threshold_source": "predefined synthetic teacher thresholds; no learned parameters",
+    "device": "CPU"
+  },
+  "dynamics": {
+    "steps": 8,
+    "leak": 0.9,
+    "reset": "zero after spike",
+    "shared_synaptic_weight": 1.0,
+    "input_bias": 1.5
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "synaptic state",
+      "threshold code/table",
+      "quantization range or affine coefficients",
+      "task indexing metadata"
+    ]
+  },
+  "success_gate": "On every fresh world, affine coordinate accuracy is at least 99% of FP32 threshold accuracy and full serialized payload is at least 20% smaller; report spike counts and compare direct 4-bit quantization.",
+  "failure_gate": "Any quality/byte gate miss or direct quantization matches the Mirror coordinate at equal/fewer bytes.",
+  "boundaries": [
+    "The code is compared to native scalar threshold parameterizations and direct quantization.",
+    "Exact arithmetic progression is not Mirror-specific if ordinary parameter coding matches.",
+    "No learned SNN, natural event data, energy joules, or hardware efficiency claim."
+  ],
+  "implementation_history": [
+    "Amendment 01 wrote metrics but exited on a summary-printing TypeError before run completion; preserved as source/amendment01_unmatched.* and excluded from reported result.",
+    "Amendment 02 fixes summary printing and uses three new seeds fixed before rerun."
+  ],
+  "result_report": "RESULTS.md"
+}
