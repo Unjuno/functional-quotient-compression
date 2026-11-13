@@ -1,0 +1,1 @@
+No experiment tests were run because required source/checkpoints/video assets/hardware were unavailable. Resource checks are documented in `source/environment.json`; do not treat them as model verification.

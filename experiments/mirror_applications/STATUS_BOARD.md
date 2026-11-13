@@ -384,3 +384,6 @@ MA-932 scoped analytic falsification **FAIL**: five constructed worlds had exact
 
 
 MA-933 scoped TinyStories 1M→8M joint residual/KV screen **FAIL**: shared rank-8 chart cut connector bytes 97.3% vs independent affine, but mapped-cache next-token NLL delta was +3.90 vs +1.14 nat/token across three deterministic fresh seeds. Charging the required source model yields 167,755,967 B, 44.9% above target-only native and only 0.93% below independent full deployment. No GPU/serving claim. Amendment 01 implementation pilot is preserved; amendment 02 used fresh disjoint rows after fixing seed order. See `ma-933-joint-kv-residual-transport/RESULTS.md`. Next eligible P0 is MA-936; P1 MA-934/935 are skipped for now.
+
+
+MA-936 remains **UNTESTED**: CUDA/NVIDIA GPU, official NerVast code/checkpoints/Fisher masks and video frames are unavailable, preventing native-mask-matched bitstream/RD/decode-FPS measurement. See `ma-936-nervast-mirror-private-chunk/EXECUTION_BLOCKER.md`. P1 MA-934/935 skipped; next P0 MA-937 HNeRV/NerVast scene×chunk factorization.

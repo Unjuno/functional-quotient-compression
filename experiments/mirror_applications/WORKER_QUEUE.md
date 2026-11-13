@@ -737,3 +737,6 @@ MA-932 scoped analytic falsification FAIL: exact shared-task agreement coexists 
 
 
 MA-933 scoped TinyStories joint residual/KV FAIL: rank-8 chart cut connector state 97.3% vs independent affine but cache NLL delta was +3.90 vs +1.14 nat/token; full source+target deployment was 44.9% above target-only and only 0.93% below independent. Amendment 02 has deterministic seeds and new rows; amendment 01 pilot retained separately. No fused serving claim. See `ma-933-joint-kv-residual-transport/RESULTS.md`. Skip P1 MA-934/935 and continue to next P0 MA-936.
+
+
+MA-936 remains UNTESTED: no CUDA/NVIDIA GPU, official NerVast implementation/checkpoints/Fisher masks, or video frames; mandatory bitstream RD and decode FPS cannot run. See `ma-936-nervast-mirror-private-chunk/EXECUTION_BLOCKER.md`. Advance to MA-937 (P0); MA-934/935 are P1 and skipped for now.

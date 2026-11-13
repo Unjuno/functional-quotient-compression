@@ -1,0 +1,29 @@
+{
+  "experiment_id": "MA-936",
+  "commit": null,
+  "tests": {
+    "command": "python -c \"import torch; print(torch.cuda.is_available())\"; command -v nvidia-smi",
+    "passed": 0,
+    "failed": 0,
+    "not_run_reason": "No model tests or training run: required GPU, official checkpoint and real video assets unavailable."
+  },
+  "serialization": {
+    "roundtrip_checked": false,
+    "byte_exact": false
+  },
+  "metric_replay": {
+    "checked": false,
+    "max_difference": null
+  },
+  "fresh_split_integrity_checked": false,
+  "environment": {
+    "device": "cpu",
+    "cuda_available": false,
+    "nvidia_smi_installed": false
+  },
+  "notes": [
+    "Resource checks only; no experimental metrics or model verification.",
+    "Official NerVast implementation, fitted checkpoints, Fisher masks, and scene/frame assets not found.",
+    "UNTESTED is preserved; no FAIL claim."
+  ]
+}
