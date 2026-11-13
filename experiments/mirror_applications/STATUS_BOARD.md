@@ -6,11 +6,11 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- Claim ledger entries: **426**
+- Claim ledger entries: **427**
 - P0: **630** (348 FAIL; 52 PROMISING; 223 UNTESTED; 6 NOT ESTABLISHED; 1 SCREENING)
 - P1: **422** (17 completed; 405 UNTESTED)
 - P2: **103** (103 UNTESTED)
-- Current MA statuses: **356 FAIL, 7 NOT ESTABLISHED, 61 PROMISING, 1 SCREENING, 730 UNTESTED**
+- Current MA statuses: **356 FAIL, 8 NOT ESTABLISHED, 61 PROMISING, 1 SCREENING, 729 UNTESTED**
 - 47 baseline experiment directories remain present; verified external outcomes are linked to their dedicated branches in the registry and claim ledger.
 - New research: MA-876..935 (60 candidates), PA236..PA265 (30 primary sources). See the current Next candidate section for the live queue.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. see the current Next candidate section.
@@ -453,3 +453,6 @@ MA-968 scoped synthetic spiking threshold-specialist screen FAIL: on shared-syna
 
 
 MA-969 remains NOT ESTABLISHED: audit found sparse `scatter` overwrote shared synapses instead of adding residuals; MAC accounting mismatched dense execution, decoded replay was incomplete, and D1/independent-D2 scores were near chance. Preserve invalid run; correction requires a new amendment/ID and fresh audit data. See `ma-969-spiking-private-synapse-boundary/RESULTS.md`. MA-970 is P1; select next eligible P0.
+
+
+MA-971 remains NOT ESTABLISHED: LightPro and suitable photonic simulation are unavailable, so optical quality, calibrated loss, programmed bits, switch energy, and latency cannot be measured. No CPU matrix proxy substituted. See `ma-971-lightpro-control-screen/README.md`. Skip physical MA-971; seek a software-testable P0 candidate.

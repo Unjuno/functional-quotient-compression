@@ -806,3 +806,6 @@ MA-968 scoped synthetic one-neuron SNN screen FAIL: direct threshold bank reache
 
 
 MA-969 remains NOT ESTABLISHED: audit found sparse `scatter` overwrote shared synapses instead of adding residuals; MAC accounting mismatched dense execution, decoded replay was incomplete, and D1/independent-D2 scores were near chance. Preserve invalid run; correction requires a new amendment/ID and fresh audit data. See `ma-969-spiking-private-synapse-boundary/RESULTS.md`. MA-970 is P1; select next eligible P0.
+
+
+MA-971 remains NOT ESTABLISHED: no LightPro hardware/API or suitable optical simulator is available; physical loss, switch cost and programmed state cannot be measured. No proxy result claimed. See `ma-971-lightpro-control-screen/README.md`. Skip to next software-executable P0.
