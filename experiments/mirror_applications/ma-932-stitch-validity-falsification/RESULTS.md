@@ -16,7 +16,7 @@ Five fresh analytic worlds (seeds 93211, 93217, 93223, 93229, 93231), 4,096 exam
 - Held-out private-feature AUC: native **1.000**, minimal stitch **0.500**, full affine **0.500**, structured Fourier nuisance **0.505**.
 - Counterfactual private-coordinate intervention mean response: native **1.0**, stitch **0.0**.
 - Mean actual serialized fixture bytes (includes paid deterministic feature coefficients, task/probe heads, bridge and metadata): native 1511 B, stitch 1489 B, full affine 1247 B, Fourier control 693 B. This tiny constructed fixture is not a model storage comparison; affine was smaller than the stitch serialization. Reload replay max absolute error 0.0e+00.
-- Each seed used 4096 examples, 0 updates, 8192 operation proxy, and mean elapsed wall time 0.0297s.
+- Each seed used 4096 examples, 0 updates, 8192 operation proxy, and mean elapsed wall time 0.0217s.
 
 ### Interpretation
 

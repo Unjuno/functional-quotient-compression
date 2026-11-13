@@ -55,6 +55,7 @@ def run(seed):
  # Reload and verify exact outputs from saved objects.
  with np.load(ROOT/'source'/f'stitch_{seed}.npz') as q:
   xre=x[va][:2]; cre=(xre[:,0]+.4*xre[:,1]>.0).astype('float32'); fre=np.sin(xre[:,0]+.7*xre[:,1]).astype('float32'); replay=np.stack([cre,fre],1)@q['bridge']; replayerr=float(np.max(np.abs(replay-(source[va][:2]@W))))
+ for name in [f'native_{seed}.npz',f'stitch_{seed}.npz',f'affine_{seed}.npz',f'noise_{seed}.npz']:(ROOT/'source'/name).unlink(missing_ok=True)
  return {'seed':seed,'task_output_max_abs_error':task_err,'native_private_auc':probe_native['auc'],'stitch_private_auc':probe_stitch['auc'],'native_private_balanced_accuracy':probe_native['balanced_accuracy'],'stitch_private_balanced_accuracy':probe_stitch['balanced_accuracy'],'affine_private_auc':affine_private['auc'],'affine_task_max_abs_error':affine_task_err,'structured_noise_private_auc':structured['auc'],'unrelated_task_output_error':unrelated_match,'native_intervention_delta':delta,'stitch_intervention_delta':stitched_delta,'native_bytes':b_native,'stitch_bytes':b_stitch,'affine_bytes':b_affine,'structured_noise_bytes':b_noise,'reload_max_abs_error':replayerr,'examples':N,'updates':0,'active_ops_proxy':int(N*2),'wall_seconds':None}
 
 def main():
