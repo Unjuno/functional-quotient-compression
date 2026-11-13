@@ -1,0 +1,25 @@
+{
+  "experiment_id": "MA-964",
+  "commit": "PENDING",
+  "tests": {
+    "command": "python -m py_compile experiments/mirror_applications/ma-964-lif-tau-threshold-factor/source/run_screen.py && python experiments/mirror_applications/ma-964-lif-tau-threshold-factor/source/run_screen.py",
+    "passed": true,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": false,
+    "max_difference": null
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Fresh seeds 96421, 96423, 96427; task/family data streams held identical across controls within world.",
+    "Common typed-tensor+JSON payload decoded before inference; all tensor arrays round-tripped exactly.",
+    "Mirror/native rank1 and rank2 factor state/outputs asserted equal.",
+    "Amendment 01 post-reset voltage outputs preserved but excluded; amendment 02 reports pre-reset peak.",
+    "Oracle SVD compression diagnostic only; no training, natural data, or hardware energy claim."
+  ]
+}

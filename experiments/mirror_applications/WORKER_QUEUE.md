@@ -794,3 +794,6 @@ MA-961 verification correction: previous score arrays bypassed loaded payloads a
 
 
 MA-963 remains UNTESTED: bounded source search found no official TACOS repository; paper/supplement do not specify executable per-synapse `m` increment/indexing or complete timing. No proxy SNN substituted. See `ma-963-tacos-neuromodulator-mirror-compression/EXECUTION_BLOCKER.md`. Skip blocked MA-963 and continue to P0 MA-964 membrane-tau/threshold factorized View.
+
+
+MA-964 scoped fixed-core LIF SVD oracle screen FAIL: structured rank1 exact but saved only 14.6% actual bytes (<20% gate); shared is smaller and 96.98% agreement. Generic rank1/2 agreement 91.5/93.2%. Exact native SVD alias; no learned/energy claim. See `ma-964-lif-tau-threshold-factor/RESULTS.md`. Next P0 MA-965.

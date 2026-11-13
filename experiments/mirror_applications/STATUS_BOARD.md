@@ -7,10 +7,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 - Registered candidates: **1155**
 - Claim ledger entries: **418**
-- P0: **630** (345 FAIL; 52 PROMISING; 226 UNTESTED; 6 NOT ESTABLISHED; 1 SCREENING)
+- P0: **630** (346 FAIL; 52 PROMISING; 225 UNTESTED; 6 NOT ESTABLISHED; 1 SCREENING)
 - P1: **422** (17 completed; 405 UNTESTED)
 - P2: **103** (103 UNTESTED)
-- Current MA statuses: **353 FAIL, 6 NOT ESTABLISHED, 61 PROMISING, 1 SCREENING, 734 UNTESTED**
+- Current MA statuses: **354 FAIL, 6 NOT ESTABLISHED, 61 PROMISING, 1 SCREENING, 733 UNTESTED**
 - 47 baseline experiment directories remain present; verified external outcomes are linked to their dedicated branches in the registry and claim ledger.
 - New research: MA-876..935 (60 candidates), PA236..PA265 (30 primary sources). See the current Next candidate section for the live queue.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. see the current Next candidate section.
@@ -441,3 +441,6 @@ MA-961 verification amendment: Astra found prior scores did not decode loaded th
 
 
 MA-963 remains UNTESTED: bounded source search found no official TACOS repository; paper/supplement do not specify executable per-synapse `m` increment/indexing or complete timing. No proxy SNN substituted. See `ma-963-tacos-neuromodulator-mirror-compression/EXECUTION_BLOCKER.md`. Skip blocked MA-963 and continue to P0 MA-964 membrane-tau/threshold factorized View.
+
+
+MA-964 scoped fixed-core LIF oracle SVD screen FAIL: structured rank1 reproduced traces exactly but saved only 14.6% actual bytes, below gate; shared parameters are 220 B smaller at 96.98% agreement. Generic rank1/rank2 reached 91.5%/93.2% spike agreement. Mirror exactly aliases native SVD. No trained or energy claim. See `ma-964-lif-tau-threshold-factor/RESULTS.md`. Next P0 MA-965.

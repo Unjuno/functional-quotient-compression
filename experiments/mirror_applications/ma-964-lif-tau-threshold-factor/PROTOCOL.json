@@ -1,0 +1,92 @@
+{
+  "experiment_id": "MA-964",
+  "title": "LIF membrane timescale \u00d7 threshold factorization",
+  "status": "FAIL",
+  "protocol_frozen": true,
+  "amendment": "02: include pre-reset peak membrane in stability audit and assert all serialized tensor roundtrips; fresh seeds replaced",
+  "scope": "Synthetic CPU recurrent LIF parameter reconstruction; SVD is an oracle compression diagnostic, not trained Mirror or capacity evidence.",
+  "base_commit": "fc5a57836",
+  "prior_art_refs": [
+    "PA282",
+    "PA283"
+  ],
+  "hypothesis": "Task\u00d7neuron membrane tau and threshold tables can be compressed by shared neuron bases plus small task coordinates when the teacher tables are factorized; generic tables expose when private/full state is needed.",
+  "physical_object": "One fixed recurrent 8-neuron LIF synapse core with an 8-input event encoder shared across tasks.",
+  "mirror_coordinate": "For each parameter table M[q,n] in {tau,theta}, store rank-r factors A[q,:], B[:,n] and reconstruct M\u2248AB.",
+  "controls": [
+    "task-agnostic per-neuron shared tau/threshold",
+    "independent full task\u00d7neuron tau/threshold upper control",
+    "rank-1 SVD factorization",
+    "rank-2 SVD factorization",
+    "ordinary native SVD factorization with identical math and factors"
+  ],
+  "teacher_families": {
+    "structured_rank1": "tau[q,n]=task_tau[q]*neuron_tau[n] and theta[q,n]=task_theta[q]*neuron_theta[n] with positive bounded factors.",
+    "generic_random": "Independent uniform tau and threshold values per task/neuron, within fixed bounds."
+  },
+  "data": "Fresh Bernoulli event streams for each task, class, and seed; every condition sees identical streams and the fixed encoder/recurrent weights.",
+  "development": {
+    "worlds_or_seeds": [
+      96401
+    ],
+    "selection_metric": "runtime/shape smoke only; no rank selection from fresh results"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      96421,
+      96423,
+      96427
+    ],
+    "locked_before_access": true,
+    "tasks": 8,
+    "neurons": 8,
+    "timesteps": 16,
+    "test_examples_per_task": 128
+  },
+  "training": {
+    "updates": 0,
+    "method": "oracle truncated SVD of the predefined teacher parameter bank",
+    "device": "CPU"
+  },
+  "dynamics": {
+    "synaptic_weights": "fixed shared seeded matrices",
+    "tau_decay": "alpha=exp(-1/tau)",
+    "reset": "subtract threshold on spike",
+    "quality": [
+      "spike-trace Hamming agreement",
+      "spike precision/recall/F1",
+      "first-spike latency error",
+      "maximum membrane magnitude"
+    ]
+  },
+  "storage": {
+    "authority": "actual custom serialized inference payload bytes",
+    "format": "same typed-tensor stream plus JSON manifest for every control",
+    "paid_objects": [
+      "input/recurrent synapses",
+      "tau and threshold full tables or factors",
+      "task/neuron indexing",
+      "metadata"
+    ]
+  },
+  "compute": [
+    "neuron-time updates",
+    "fixed synaptic MAC proxy",
+    "one-time factor decode MACs",
+    "runtime dense parameter memory",
+    "inference wall time"
+  ],
+  "success_gate": "On structured_rank1 fresh worlds, rank-1 achieves >=95% teacher spike Hamming agreement, full payload <=80% of independent, and finite stable voltages; compare ordinary rank-1 exact alias. Report generic-random separately.",
+  "failure_gate": "Quality, actual-byte, or stability gate miss. Any exact native low-rank alias precludes Mirror-specific attribution.",
+  "boundaries": [
+    "No learned SNN, STL-SNN/TACOS reproduction, natural event data, hardware energy, or capacity claim.",
+    "SVD uses the teacher parameter bank and is an oracle compression upper bound.",
+    "Task IDs are provided to all task-conditioned variants and task mapping is charged.",
+    "Factorized states reconstruct dense tau/threshold tables at load; report the full runtime table memory and decode work."
+  ],
+  "verification_amendments": [
+    "Amendment 01 computed max_abs_membrane after subtractive reset, underreporting the true pre-reset peak; its metrics are preserved and excluded as decision-quality stability evidence.",
+    "Amendment 02 records peak before reset, checks every payload tensor roundtrip, and uses new seeds 96421, 96423, 96427."
+  ],
+  "result_report": "RESULTS.md"
+}
