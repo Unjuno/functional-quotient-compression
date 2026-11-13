@@ -1,0 +1,20 @@
+{
+  "experiment_id": "MA-990",
+  "title": "RANF shared listener field plus Mirror personalization code",
+  "status": "UNTESTED",
+  "evidence_lane": "STORAGE",
+  "base_commit": "f67938a67",
+  "hypothesis": "A compact listener-specific coordinate on a shared RANF field improves measured-direction HRTF quality per serialized byte over RANF retrieval and native sparse adaptation.",
+  "physical_object": "Official MERL RANF HRTF field and retrieval memory",
+  "mirror_coordinate": "Listener-specific spectral code m",
+  "logical_multiplicity": "Personalized listener HRTFs",
+  "prior_art_refs": ["PA292"],
+  "controls": ["RANF retrieved-subject field", "nearest-subject retrieval", "native sparse adaptation", "independent per-listener field"],
+  "development": {"worlds_or_seeds": [], "selection_metric": "Not run: SONICOM subject data unavailable"},
+  "fresh": {"worlds_or_seeds": [], "locked_before_access": true},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["shared field", "retrieval memory", "listener code", "metadata", "private residual if used"]},
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true},
+  "success_gate": "Not evaluated; requires held-out SONICOM listeners and measured-direction quality/bytes comparison.",
+  "failure_gate": "Not evaluated.",
+  "boundaries": ["No synthetic substitute or PA292 reproduction claimed.", "Official source inspected at 774561a3683271e1b83cccd15fb5f92086002d55."]
+}
