@@ -1,9 +1,23 @@
 {
   "experiment_id": "MA-999",
-  "commit": "pending",
-  "tests": {"command": "python experiments/mirror_applications/ma-999-temperature-pressure-material-mirror/source/run_screen.py verify", "passed": 3, "failed": 0},
-  "serialization": {"roundtrip_checked": true, "byte_exact": true},
-  "metric_replay": {"checked": true, "max_difference": 0.0},
+  "commit": "a75194a96fefb8a793d42a67a309b39fbddefaf6",
+  "tests": {
+    "command": "python experiments/mirror_applications/ma-999-temperature-pressure-material-mirror/source/run_screen.py verify",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
   "fresh_split_integrity_checked": true,
-  "notes": ["All three fresh-world metrics replay exactly from serialized payloads.", "Same-coordinate condition-label force spread <1e-10; finite-difference force-gradient residual <1e-7; rotation-equivariance residual <1e-10.", "Synthetic LJ condition-sampling screen only; not MatterSim/NPT evidence."]
+  "notes": [
+    "All three fresh-world metrics replay exactly from serialized payloads.",
+    "Same-coordinate condition-label force spread <1e-10; finite-difference force-gradient residual <1e-7; rotation-equivariance residual <1e-10.",
+    "Synthetic LJ condition-sampling screen only; not MatterSim/NPT evidence."
+  ]
 }

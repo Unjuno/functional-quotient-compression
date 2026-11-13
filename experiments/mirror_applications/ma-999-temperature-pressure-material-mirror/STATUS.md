@@ -3,7 +3,7 @@
 - Status: FAIL (scoped synthetic condition-invariance screen; MatterSim not tested)
 - Branch: `research/ma-999-temperature-pressure-material-mirror-20261113`
 - Base commit: `d62e00892`
-- Last verified commit: pending
+- Last verified commit: `a75194a96fefb8a793d42a67a309b39fbddefaf6`
 - Development complete: yes (seed 99901; rank-1 code fixed in committed runner)
 - Fresh/audit opened: yes (99911, 99913, 99917)
 - Results committed: pending
