@@ -396,3 +396,6 @@ MA-938 remains **UNTESTED**: no official NerVast weights/Fisher masks/video fram
 
 
 MA-939 scoped HNeRV Bunny frame-coordinate screen **FAIL**: uint8 rank-2..16 codes reduced embedding bytes 59.6–78.1%, but held-out PSNR fell 13.09–15.44 dB and full decoder/model payload shrank only 0.16–0.20%; all coordinate rows exactly alias PCA. CPU only, one video, no bpp claim. See `ma-939-hnerv-frame-embedding-view/RESULTS.md`. P1 MA-940 skipped; next P0 MA-941 DCVC-UF chunk latent/frame views.
+
+
+MA-941 remains **UNTESTED**: the CVPR paper is available, but official DCVC-UF source/checkpoint/entropy coder/bitstream were not found; CUDA is unavailable. Native coded-bit and chunk-parallel FPS comparison cannot run. See `ma-941-dcvc-uf-frame-views/EXECUTION_BLOCKER.md`. Next P0 MA-942 DCVC-UF frame-offset × QP factor.

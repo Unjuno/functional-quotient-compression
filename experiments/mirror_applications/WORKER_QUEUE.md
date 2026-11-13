@@ -749,3 +749,6 @@ MA-938 remains UNTESTED: official NerVast checkpoint and Fisher masks are absent
 
 
 MA-939 scoped HNeRV Bunny frame-code screen FAIL: rank-2..16 reduced serialized embedding bytes 59.6–78.1% but lost 13.09–15.44 dB held-out PSNR; full deployment savings under 0.21%, with exact ordinary PCA alias. One video only, no bpp/scene generalization. See `ma-939-hnerv-frame-embedding-view/RESULTS.md`. Skip P1 MA-940; next P0 MA-941.
+
+
+MA-941 remains UNTESTED: no official DCVC-UF implementation/checkpoint/entropy coder/bitstream, and no CUDA for the registered chunk-parallel FPS comparison. Paper only; no substitute codec claim. See `ma-941-dcvc-uf-frame-views/EXECUTION_BLOCKER.md`. Next P0 MA-942.
