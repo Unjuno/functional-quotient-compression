@@ -758,3 +758,6 @@ MA-942 remains UNTESTED: no official DCVC-UF/QP bank/bitstreams or CUDA for equa
 
 
 MA-943 remains UNTESTED: only third-party DCVC-RT source was found; its README reports pretrained inference failure and it has no weights/data. CPU-only environment cannot satisfy the 1080p FPS/call gate. See `ma-943-dcvc-rt-rate-bank-mirror/EXECUTION_BLOCKER.md`. Next P0 MA-944.
+
+
+MA-944 remains UNTESTED: no official DCMVC code/checkpoint/bitstreams or CUDA; only GitHub hit was unrelated DGMVC. No matched reference-driven context baseline available. See `ma-944-dcmvc-reference-context-view/EXECUTION_BLOCKER.md`. Next P0 MA-945.
