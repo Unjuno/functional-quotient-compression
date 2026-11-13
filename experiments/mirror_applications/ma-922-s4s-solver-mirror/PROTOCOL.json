@@ -1,0 +1,12 @@
+{
+  "experiment_id": "MA-922",
+  "title": "S4S solver coefficient Mirror family",
+  "status": "UNTESTED",
+  "protocol_frozen": false,
+  "prior_art_refs": ["PA262"],
+  "hypothesis": "A shared solver coefficient basis plus small Mirror addresses represents multiple fast solver configurations with fewer actual bytes while preserving quality and NFE/latency versus native S4S coefficients and schedules.",
+  "required_controls": ["native S4S tuned coefficients/schedules", "shared low-rank coefficient basis", "Mirror basis plus coordinates", "independent per-task solver upper control"],
+  "metrics": ["FID or registered image quality", "NFE", "actual serialized solver bytes", "latency", "controller compute"],
+  "blocker": "No official S4S source/checkpoint or native coefficient artifacts found; CPU-only runtime and no matched teacher image model/evaluation path.",
+  "boundary": "Generic analytic ODE solvers do not substitute for S4S native tuned controls and image-quality evidence."
+}
