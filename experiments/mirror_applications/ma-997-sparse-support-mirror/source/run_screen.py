@@ -59,8 +59,22 @@ def main():
   r={'world':a.world,'support_indices':support.tolist(),'targets':4,'calibration_examples_per_target':8,'heldout_examples_per_target':24,'methods':methods,'integrity_checks':checks,'optimizer_updates':0,'fresh_batch_wall_time_s':time.perf_counter()-t0}
   (runs/f'fresh_{a.world}.json').write_text(json.dumps(r,indent=2)+'\n');print(json.dumps(r,indent=2))
  else:
-  fs=sorted(runs.glob('fresh_*.json'));ok=[]
+  fs=sorted(runs.glob('fresh_*.json'));checks=[]
   for f in fs:
-   d=json.load(open(f));ok.append(all(x['roundtrip_exact'] for x in d['methods'].values()) and max(x['force_gradient_max_abs'] for x in d['integrity_checks'])<1e-7 and max(x['rotation_equivariance_max_abs'] for x in d['integrity_checks'])<1e-10)
-  print(json.dumps({'files':[str(f) for f in fs],'passed':ok,'all_pass':bool(ok) and all(ok)},indent=2))
+   d=json.load(open(f));world=d['world'];cfg=json.load(open(runs/'development.json'));support=np.asarray(cfg['support_indices'],dtype=int);rng=np.random.default_rng(world);states={name:np.load(runs/f'{world}_{name}.npz') for name in d['methods']};scores={name:[] for name in d['methods']}
+   for t in range(4):
+    delta=np.zeros(D);delta[support]=rng.normal(0,.03,len(support));c=theta+delta;xc,yc=radial.dataset(rng,c,8,.65);xv,yv=radial.dataset(rng,c,24,.65)
+    for name,z in states.items():
+     base=z['base'] if 'base' in z else theta
+     if name=='shared_only':coef=base
+     elif name in ['mirror_shared_support','native_shared_support']:
+      coef=base.copy();coef[z['indices']]+=z['values'][t]
+     elif name=='independent_sparse':
+      coef=base.copy();coef[z['indices'][t]]+=z['values'][t]
+     else:coef=z['coefficients'][t]
+     scores[name].append(radial.measure(coef,xv,yv)[2])
+   replay={name:abs(float(np.mean(v))-d['methods'][name]['combined_nrmse_mean']) for name,v in scores.items()}
+   passed=all(x['roundtrip_exact'] for x in d['methods'].values()) and max(x['force_gradient_max_abs'] for x in d['integrity_checks'])<1e-7 and max(x['rotation_equivariance_max_abs'] for x in d['integrity_checks'])<1e-10 and max(replay.values())<1e-10
+   checks.append({'world':world,'passed':passed,'max_metric_replay_difference':max(replay.values()),'by_method':replay})
+  print(json.dumps({'files':[str(f) for f in fs],'checks':checks,'all_pass':bool(checks) and all(x['passed'] for x in checks)},indent=2))
 if __name__=='__main__':main()

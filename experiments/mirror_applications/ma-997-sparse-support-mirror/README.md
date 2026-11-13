@@ -19,3 +19,5 @@ Development seed 99701 selects six support coordinates. Fresh worlds 99711/99713
 FACT: pending.\nINTERPRETATION: pending.\nHYPOTHESIS: pending.\nBOUNDARY: synthetic radial-potential mechanism only.
 
 Implementation amendment 01: before fresh access, fixed serialization to store the independent sparse-fit values corresponding to its selected indices. No fresh world was opened before this correction. Radial width is fixed at 0.65 to match MA-996.
+
+Protocol amendment 02: verification now replays all reported fresh metrics from deterministic seed regeneration and the saved serialized payloads. This is a post-hoc verification-only addition; no parameters or fresh outcomes were retuned.
