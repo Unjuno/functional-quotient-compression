@@ -734,3 +734,6 @@ MA-931 scoped TinyStories probe-transfer FAIL: factorized rank-8 bridge retained
 
 
 MA-932 scoped analytic falsification FAIL: exact shared-task agreement coexists with absent private target information across five toy fresh worlds; full affine has the same information limit. This is not a natural-model incidence claim. See `ma-932-stitch-validity-falsification/RESULTS.md`. Next P0 MA-933 joint KV/residual transport.
+
+
+MA-933 scoped TinyStories joint residual/KV FAIL: rank-8 chart cut connector state 97.3% vs independent affine but cache NLL delta was +3.90 vs +1.14 nat/token; full source+target deployment was 44.9% above target-only and only 0.93% below independent. Amendment 02 has deterministic seeds and new rows; amendment 01 pilot retained separately. No fused serving claim. See `ma-933-joint-kv-residual-transport/RESULTS.md`. Skip P1 MA-934/935 and continue to next P0 MA-936.

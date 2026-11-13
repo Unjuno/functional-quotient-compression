@@ -1,0 +1,108 @@
+{
+  "experiment_id": "MA-933",
+  "title": "One cross-model coordinate chart for residual and KV transport",
+  "status": "FAIL",
+  "protocol_frozen": true,
+  "amendment": "02 corrected deterministic initialization; amendment 01 preserved as implementation pilot",
+  "scope": "CPU real-LM paired-model screen; evaluates residual reconstruction plus next-token quality after translated KV handoff. Not a serving or broad cache-transfer benchmark.",
+  "base_commit": "c8c73fc0e",
+  "prior_art_refs": [
+    "PA236",
+    "PA242"
+  ],
+  "models": [
+    {
+      "id": "roneneldan/TinyStories-1M",
+      "revision": "77f1b168e219585646439073245fe87e56b3023e",
+      "hidden": 64,
+      "layers": 8,
+      "heads": 16
+    },
+    {
+      "id": "roneneldan/TinyStories-8M",
+      "revision": "8612e3b15c66ffa94eaa6ee0de5c96edd2d630af",
+      "hidden": 256,
+      "layers": 8,
+      "heads": 16
+    }
+  ],
+  "dataset": {
+    "id": "roneneldan/TinyStories",
+    "revision": "f54c09fd23315a6f9c86f9dc80f725de7d8f9c64",
+    "train_rows": "768:1024",
+    "validation_rows": "512:640",
+    "max_length": 32
+  },
+  "hypothesis": "A shared source/target coordinate chart with small role\u00d7layer View cores can transport residual states and both K/V cache tensors with quality approaching independent per-role/layer affine maps while using fewer actual serialized connector bytes.",
+  "physical_object": "Frozen TinyStories GPT-Neo 1M source and 8M target model pair.",
+  "mirror_coordinate": "Shared source projection A and target projection B, with role\u00d7layer 8\u00d78 cores and biases; roles are residual, key and value.",
+  "logical_multiplicity": "One physical cross-model chart serves residual feature maps and cache K/V handoffs across depth.",
+  "controls": [
+    "native target cache (quality reference)",
+    "independent affine map for each role\u00d7layer, fitted on same train token pairs",
+    "joint rank-8 shared A/B chart with per-role\u00d7layer core and bias"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      93301
+    ],
+    "selection_metric": "Implementation smoke only; fixed rank and all settings frozen before validation rows."
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      93321,
+      93327,
+      93333
+    ],
+    "locked_before_access": true,
+    "training_pairs": "same 1M\u21928M pair; train texts rows 768:1024",
+    "validation_pairs": "same ordered pair; disjoint validation texts rows 512:640"
+  },
+  "training": {
+    "factor_updates": 1200,
+    "batch": 256,
+    "optimizer": "Adam",
+    "learning_rate": 0.003,
+    "rank": 8,
+    "layers": "all 8",
+    "roles": [
+      "residual",
+      "key",
+      "value"
+    ],
+    "seeding": "Set Python and Torch seed before chart initialization and each batch schedule"
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "shared A/B/core/bias or per-role/layer affine maps",
+      "source 1M weights required to produce cache",
+      "target 8M weights",
+      "metadata"
+    ]
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true
+  },
+  "metrics": [
+    "per-role/layer validation reconstruction MSE",
+    "native target versus mapped-cache next-token NLL delta",
+    "actual serialized connector bytes",
+    "target-only versus source+target+connector deployment bytes",
+    "mapper MAC proxy",
+    "fit wall time",
+    "serialized replay error"
+  ],
+  "success_gate": "Shared chart NLL delta within 0.5 nat/token of independent affine and mean reconstruction MSE no more than 1.25\u00d7 independent, while connector bytes \u226425% independent on all three seeds.",
+  "failure_gate": "Miss quality gate on \u22652/3 seeds, or source+target deployment bytes exceed native target-only by >5%, or no connector byte advantage versus independent.",
+  "boundaries": [
+    "Source model and target model full byte counts both reported; cache-translation does not erase source execution cost.",
+    "No GPU, fused-cache kernel, multi-token throughput or serving claim.",
+    "This is one model pair and disjoint text rows; not PA236 reproduction.",
+    "Mirror-specific interpretation requires comparison to the simpler independent affine maps and direct role-aware native mapping.",
+    "Amendment 01 (rows 512:768 / 384:512) is retained as an implementation pilot only because chart initialization occurred before the seed was set; amendment 02 uses new unseen validation rows and deterministic seed discipline."
+  ]
+}

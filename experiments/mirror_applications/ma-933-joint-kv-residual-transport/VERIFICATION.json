@@ -1,0 +1,38 @@
+{
+  "experiment_id": "MA-933",
+  "commit": null,
+  "tests": {
+    "command": "python experiments/mirror_applications/ma-933-joint-kv-residual-transport/source/run_screen.py",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "payload_files": 2
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "environment": {
+    "device": "cpu",
+    "torch": "2.7.1+cpu"
+  },
+  "fresh_seeds": [
+    93321,
+    93327,
+    93333
+  ],
+  "notes": [
+    "Amendment 02 split rows 768:1024 fit / 512:640 validation; pinned model and dataset SHA-256 hashes plus serialized source-file manifest are in source/data_manifest.json.",
+    "Per-seed deterministic initialization and optimizer sampling; 1,200 shared-chart updates per seed.",
+    "Both serialized chart and independent affine maps were reloaded before validation; chart replay max absolute error 0.0.",
+    "All three shared-chart cache NLL rows miss the frozen quality gate.",
+    "Amendment 01 retained separately as implementation pilot after seed-order defect.",
+    "No GPU or serving-throughput claim.",
+    "CPU wall per 128-sequence cache evaluation: shared 5.86s, independent affine 5.46s, native target 5.78s; includes prefills and is not serving throughput.",
+    "Independent affine fitting took 0.94s; shared chart training 3.91s mean for 1,200 updates."
+  ]
+}

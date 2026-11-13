@@ -6,11 +6,11 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- Claim ledger entries: **416**
-- P0: **630** (339 FAIL; 52 PROMISING; 233 UNTESTED; 6 NOT ESTABLISHED)
+- Claim ledger entries: **417**
+- P0: **630** (340 FAIL; 52 PROMISING; 232 UNTESTED; 6 NOT ESTABLISHED)
 - P1: **422** (17 completed; 405 UNTESTED)
 - P2: **103** (103 UNTESTED)
-- Current MA statuses: **347 FAIL, 6 NOT ESTABLISHED, 61 PROMISING, 1 SCREENING, 740 UNTESTED**
+- Current MA statuses: **348 FAIL, 6 NOT ESTABLISHED, 61 PROMISING, 1 SCREENING, 739 UNTESTED**
 - 47 baseline experiment directories remain present; verified external outcomes are linked to their dedicated branches in the registry and claim ledger.
 - New research: MA-876..935 (60 UNTESTED), PA236..PA265 (30 primary sources). See the current Next candidate section for the live queue.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. see the current Next candidate section.
@@ -381,3 +381,6 @@ MA-931 scoped TinyStories probe-transfer screen **FAIL**: factorized bridge reta
 
 
 MA-932 scoped analytic falsification **FAIL**: five constructed worlds had exact common-task output agreement, yet private-feature AUC was 1.0 native vs ~0.50 stitch/full affine; private-coordinate intervention response was 1.0 native vs 0.0 stitch. This rejects output matching as sufficient information-equivalence evidence in the toy construction only. See `ma-932-stitch-validity-falsification/RESULTS.md`. Next P0: MA-933 joint KV/residual transport.
+
+
+MA-933 scoped TinyStories 1M→8M joint residual/KV screen **FAIL**: shared rank-8 chart cut connector bytes 97.3% vs independent affine, but mapped-cache next-token NLL delta was +3.90 vs +1.14 nat/token across three deterministic fresh seeds. Charging the required source model yields 167,755,967 B, 44.9% above target-only native and only 0.93% below independent full deployment. No GPU/serving claim. Amendment 01 implementation pilot is preserved; amendment 02 used fresh disjoint rows after fixing seed order. See `ma-933-joint-kv-residual-transport/RESULTS.md`. Next eligible P0 is MA-936; P1 MA-934/935 are skipped for now.

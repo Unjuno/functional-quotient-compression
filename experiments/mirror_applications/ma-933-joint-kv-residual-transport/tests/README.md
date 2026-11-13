@@ -1,0 +1,1 @@
+Run the frozen script. It checks native target cache versus translated K/V next-token NLL, role/layer reconstruction, serialized map replay and payload bytes for three fresh seeds.
