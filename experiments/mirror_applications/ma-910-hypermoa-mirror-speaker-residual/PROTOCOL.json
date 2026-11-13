@@ -1,0 +1,46 @@
+{
+  "experiment_id": "MA-910",
+  "title": "Hyper-MoA plus Mirror residual speaker code",
+  "status": "UNTESTED",
+  "protocol_frozen": false,
+  "evidence_lane": "MULTISPEAKER_TTS/HYPER_MOA/RESIDUAL/QUALITY/STORAGE",
+  "hypothesis": "A low-description Mirror residual adds heldout speaker quality/diversity beyond native shared Hyper-MoA without module growth and with favorable actual per-voice bytes and adaptation cost.",
+  "prior_art_refs": [
+    "PA256"
+  ],
+  "controls_required": [
+    "Official native shared Hyper-MoA without residual",
+    "Equal-parameter ordinary speaker embedding/residual",
+    "Proposed Mirror residual code",
+    "Independent per-speaker adapter bank"
+  ],
+  "storage": {
+    "authority": "actual serialized deployed bytes per new voice",
+    "paid_objects": [
+      "Hyper-MoA backbone and shared module",
+      "residual code and bases",
+      "speaker embedding/encoder",
+      "indices and metadata"
+    ]
+  },
+  "quality": {
+    "metrics": [
+      "speaker similarity",
+      "intelligibility",
+      "acoustic quality"
+    ],
+    "split": "heldout few-shot speakers"
+  },
+  "compute": {
+    "report": [
+      "adaptation examples/updates",
+      "adaptation time",
+      "synthesis RTF"
+    ]
+  },
+  "blocker": "No official Hyper-MoA implementation/checkpoint or few-shot speaker corpus identified in bounded search/workspace.",
+  "boundaries": [
+    "Feasibility review only; no TTS substitution.",
+    "No result is inferred from related HyperTTS or MoA systems."
+  ]
+}

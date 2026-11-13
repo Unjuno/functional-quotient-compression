@@ -690,3 +690,6 @@ MA-908 remains UNTESTED: official HyperTTS code/checkpoint located, but raw held
 
 
 MA-909 remains UNTESTED: no official PA255 MoA-TTS implementation/checkpoint/speaker set located; no run. See `ma-909-moa-mirror-speaker-experts/EXECUTION_BLOCKER.md`. Advance to MA-910 Hyper-MoA plus Mirror residual speaker code.
+
+
+MA-910 remains UNTESTED: no official Hyper-MoA baseline/checkpoint or speaker few-shot data identified; no run. See `ma-910-hypermoa-mirror-speaker-residual/EXECUTION_BLOCKER.md`. Advance to MA-911 causal speaker-content subspace Mirror factors.
