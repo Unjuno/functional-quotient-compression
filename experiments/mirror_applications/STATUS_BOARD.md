@@ -365,3 +365,5 @@ MA-921 scoped analytic endpoint screen FAIL: learned additive endpoint codes inc
 MA-922 remains UNTESTED: official S4S code, native schedules and matched teacher checkpoint were not found; no generic ODE proxy was substituted. MA-923 is P1; next eligible P0 MA-924 LoRA.rar subject × style hypermerge. See `ma-922-s4s-solver-mirror/EXECUTION_BLOCKER.md`.
 
 MA-924 remains UNTESTED: official LoRA.rar hypernetwork checkpoints exist, but no subject/style LoRA pairs or eval images are included; SDXL inference requires CUDA and this runtime is CPU-only. No held-out quality/bytes comparison. MA-925 is P1; next eligible P0 is MA-926 (new subject by code).
+
+Priority correction: MA-925 is P0 in IDEA_REGISTRY (an earlier queue note incorrectly listed it as P1). MA-925 remains UNTESTED: PA264's cited anonymous source returns 401; matched subject/style LoRA banks and CUDA image generation are unavailable. See `ma-925-estlora-timestep-selector/EXECUTION_BLOCKER.md`. Next P0 is MA-926 after this record.

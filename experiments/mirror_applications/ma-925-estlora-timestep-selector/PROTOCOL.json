@@ -1,0 +1,13 @@
+{
+  "experiment_id": "MA-925",
+  "title": "EST-LoRA timestep Mirror subject/style selector",
+  "status": "UNTESTED",
+  "protocol_frozen": false,
+  "prior_art_refs": ["PA264"],
+  "hypothesis": "A compact timestep x layer x subject/style selector improves personalization fidelity per byte or overhead over native EST-LoRA heuristics on identical banks.",
+  "required_controls": ["native EST-LoRA training-free selection", "ordinary learned or fixed selector", "Mirror structured selector", "per-step native subject/style LoRA bank"],
+  "metrics": ["subject fidelity", "style fidelity", "NFE", "actual selector and bank bytes", "mix/selection overhead", "latency"],
+  "split": "same source banks and denoising steps; hold out complete subject-style combinations",
+  "blocker": "Cited code source returns 401; required matched LoRA banks/eval assets unavailable; CPU-only runtime cannot run SDXL generation.",
+  "boundary": "Do not replace the source banks or evaluate a synthetic selector as personalization quality evidence."
+}
