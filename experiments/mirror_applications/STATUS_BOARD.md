@@ -411,3 +411,6 @@ MA-944 remains **UNTESTED**: official DCMVC code/checkpoint/bitstreams/test vide
 
 
 MA-945 remains **UNTESTED**: official CoANeRV source exists but has no trained checkpoints or video datasets; no CUDA for random-query throughput/peak-memory measurement. See `ma-945-coanerv-shared-coordinate-code/EXECUTION_BLOCKER.md`. Next P0 MA-946 S-NVRC prefix video codec.
+
+
+MA-946 remains **UNTESTED**: no official S-NVRC implementation, trained checkpoint, native nested-prefix bitstream or benchmark video; CUDA is also unavailable. See `ma-946-snvrc-prefix-view-mirror/EXECUTION_BLOCKER.md`. P1 MA-947 skipped; next P0 MA-948 scene-cut-triggered private residual.

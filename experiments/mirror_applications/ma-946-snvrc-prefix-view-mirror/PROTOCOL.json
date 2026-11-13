@@ -1,0 +1,56 @@
+{
+  "experiment_id": "MA-946",
+  "title": "S-NVRC nested prefix with Mirror quality coordinate",
+  "status": "UNTESTED",
+  "evidence_lane": "DIRECT_NEURAL_VIDEO_APPLICATION",
+  "base_commit": "c4b7388f4",
+  "prior_art_refs": [
+    "PA273"
+  ],
+  "hypothesis": "A compact quality/resolution View can preserve more reconstruction quality at a smaller embedded decoder/feature prefix than S-NVRC\u2019s native nested prefix layers, improving equal-rate RD versus the native scalable bitstream.",
+  "physical_object": "S-NVRC shared scalable INR grids and nested decoder/feature layers.",
+  "mirror_coordinate": "Quality/resolution coordinate m over codebook/prefix depth.",
+  "logical_multiplicity": "Multiple video quality/complexity points from one embedded prefix code.",
+  "controls": [
+    "native S-NVRC nested feature prefixes",
+    "native nested decoder layers",
+    "equal-state ordinary quality code",
+    "Mirror quality coordinate"
+  ],
+  "development": {
+    "worlds_or_seeds": [],
+    "selection_metric": "Not run; native implementation/bitstream unavailable."
+  },
+  "fresh": {
+    "worlds_or_seeds": [],
+    "locked_before_access": false,
+    "selection_metric": "Not run."
+  },
+  "storage": {
+    "authority": "actual embedded bitstream bits and decoder state bytes",
+    "paid_objects": [
+      "video latent/grid",
+      "all prefix layers or Mirror coordinates",
+      "decoder",
+      "metadata"
+    ]
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true,
+    "decoder_flops_required": true
+  },
+  "success_gate": "Not evaluated; requires official native prefix bitstream and matched RD/decoder-FLOP curves.",
+  "failure_gate": "Not evaluated.",
+  "blockers": [
+    "No official S-NVRC source/checkpoint/nested bitstream or benchmark videos found in this workspace or public GitHub search.",
+    "No CUDA/NVIDIA device for the required decoder work comparison."
+  ],
+  "boundaries": [
+    "Do not synthesize arbitrary prefixes and call them native S-NVRC scalable bitstreams.",
+    "No rate-distortion or Mirror result produced.",
+    "UNTESTED is not FAIL."
+  ]
+}

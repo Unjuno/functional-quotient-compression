@@ -764,3 +764,6 @@ MA-944 remains UNTESTED: no official DCMVC code/checkpoint/bitstreams or CUDA; o
 
 
 MA-945 remains UNTESTED: official code has no trained checkpoint or video data; no CUDA for random-query throughput/memory evaluation. No synthetic proxy used. See `ma-945-coanerv-shared-coordinate-code/EXECUTION_BLOCKER.md`. Next P0 MA-946.
+
+
+MA-946 remains UNTESTED: no native S-NVRC source/checkpoint/prefix bitstream/video or CUDA for equal-rate RD/decoder FLOPs. See `ma-946-snvrc-prefix-view-mirror/EXECUTION_BLOCKER.md`. Skip P1 MA-947; next P0 MA-948.
