@@ -4,14 +4,14 @@
 - Branch: `research/ma-997-sparse-support-mirror-20261113`
 - Base commit: `5862e2498`
 - Last verified commit: pending
-- Development complete: no
-- Fresh/audit opened: no
+- Development complete: yes (seed 99701; support indices [0, 4, 8, 12, 16, 20])
+- Fresh/audit opened: no (locked worlds 99711, 99713, 99717)
 - Results committed: no
 - Verification committed: no
 
 ## Next action
 
-Implement support-selection development run, freeze its six indices, then evaluate only the registered fresh worlds.
+Run locked fresh worlds 99711, 99713, and 99717; do not retune support.
 
 ## Blockers
 
