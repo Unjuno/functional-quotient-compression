@@ -1,0 +1,15 @@
+{
+  "experiment_id": "MA-914",
+  "title": "HybridCodec semantic x acoustic Mirror state",
+  "status": "UNTESTED",
+  "protocol_frozen": false,
+  "prior_art_refs": ["PA259"],
+  "hypothesis": "A small stream-role view lets shared semantic/acoustic transforms preserve semantic specialization and reconstruction while improving actual-byte, quality, or runtime frontier over native stream-specific transforms and simple controls.",
+  "required_controls": ["native separate streams", "ordinary shared transforms", "byte-near low-rank/gate control", "Mirror shared transforms", "independent per-stream upper control when practical"],
+  "development": {"worlds": [], "seeds": []},
+  "fresh": {"worlds": [], "seeds": [], "locked_before_access": true},
+  "primary_metrics": ["semantic content error", "SI-SDR or reconstruction distortion", "bitrate", "actual serialized inference bytes", "decode time"],
+  "storage_authority": "actual serialized inference payload bytes including shared bases, view codes, routers, quantizers, metadata, and reconstruction state",
+  "blocker": "Official source paper/stream mapping unresolved; only upstream synthetic unit tests ran, no registered task evaluation or Mirror comparison.",
+  "boundary": "Do not claim capacity/storage/quality benefit from upstream unit tests. Resume after source-to-PA259 correspondence is established and protocol is frozen."
+}

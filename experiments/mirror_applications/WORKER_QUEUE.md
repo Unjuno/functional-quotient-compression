@@ -699,3 +699,5 @@ MA-911 remains UNTESTED after source/data feasibility review: official source lo
 
 
 MA-912 remains UNTESTED: StableVC linked page is stale; direct repo contains demo audio only, no model/checkpoint/eval pipeline. No run. See `ma-912-content-timbre-prosody-mirror/EXECUTION_BLOCKER.md`. MA-913 is P1; continue to MA-914 HybridCodec semantic × acoustic Mirror state.
+
+MA-914 remains UNTESTED despite 5/5 upstream unit tests: only synthetic shape/checkpoint tests ran, and repository/paper mapping to PA259's separate semantic/acoustic streams is unresolved. No Mirror comparison or codec metrics. MA-915 is P1; continue to MA-916 multi-speaker speaker-adapter-bank storage frontier.

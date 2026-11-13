@@ -348,3 +348,5 @@ MA-911 feasibility review: official interventional-post-training-speech source f
 
 
 MA-912 feasibility review: StableVC's linked project page is stale; direct `yaoxunji/stablevc` contains demo assets but no runnable implementation, checkpoint, training/evaluation scripts or benchmark corpus. No substitute voice conversion model or metrics; MA-912 remains UNTESTED, not FAIL. See `experiments/mirror_applications/ma-912-content-timbre-prosody-mirror/EXECUTION_BLOCKER.md`. MA-913 is P1; next eligible P0 MA-914 HybridCodec semantic × acoustic Mirror state.
+
+MA-914 feasibility review: official `hybridcodec/hybridcodec` unit tests pass 5/5 in isolated CPU environment, but its README describes semantic discrete + optional continuous residual and cites a differently titled paper than PA259's separate semantic/acoustic dual-stream model. No full audio/Mirror comparison ran; keep UNTESTED pending source mapping. MA-915 is P1; next eligible P0 MA-916 multi-speaker TTS speaker-adapter-bank frontier. See `ma-914-hybridcodec-semantic-acoustic/EXECUTION_BLOCKER.md`.

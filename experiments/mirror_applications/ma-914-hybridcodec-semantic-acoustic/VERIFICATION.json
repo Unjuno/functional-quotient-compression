@@ -1,0 +1,10 @@
+{
+  "experiment_id": "MA-914",
+  "commit": null,
+  "tests": {"command": "/tmp/ma914-venv/bin/pytest -q /tmp/ma914-hybridcodec/tests", "passed": 5, "failed": 0},
+  "serialization": {"roundtrip_checked": false, "byte_exact": false},
+  "metric_replay": {"checked": false, "max_difference": null},
+  "fresh_split_integrity_checked": false,
+  "environment": {"torch": "2.7.1+cpu", "torchaudio": "2.7.1+cpu", "device": "cpu", "official_repo": "hybridcodec/hybridcodec", "upstream_commit": "16b0158932f5d3f6735fa45595684d846f83bfbc", "libritts_test_clean_local": false, "mirror_evaluation_run": false},
+  "notes": ["Upstream tests cover synthetic shapes/checkpoint format only. Registered PA259 stream/source correspondence unresolved; no Mirror claim."]
+}
