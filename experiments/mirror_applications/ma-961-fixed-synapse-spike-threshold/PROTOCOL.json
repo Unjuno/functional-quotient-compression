@@ -3,7 +3,7 @@
   "title": "Fixed-synapse spiking threshold task views",
   "status": "FAIL",
   "protocol_frozen": true,
-  "amendment": "02: amendment 01 completed calculations but stopped while printing a JSON summary due to a misplaced flush argument; its output is retained separately and excluded",
+  "amendment": "04: update executable seed list after implementation did not match the preregistered new seeds",
   "scope": "Mechanism-only synthetic threshold bank; not an STL-SNN reproduction or neuromorphic energy claim.",
   "base_commit": "9e82f2029",
   "prior_art_refs": [
@@ -21,9 +21,9 @@
   ],
   "fresh": {
     "worlds_or_seeds": [
-      96121,
-      96123,
-      96127
+      96131,
+      96133,
+      96137
     ],
     "locked_before_access": true,
     "tasks_per_world": 16,
@@ -48,7 +48,8 @@
       "threshold code/table",
       "quantization range or affine coefficients",
       "task indexing metadata"
-    ]
+    ],
+    "direct_int4": "Two threshold codes packed into each byte; min/max range and metadata charged."
   },
   "success_gate": "On every fresh world, affine coordinate accuracy is at least 99% of FP32 threshold accuracy and full serialized payload is at least 20% smaller; report spike counts and compare direct 4-bit quantization.",
   "failure_gate": "Any quality/byte gate miss or direct quantization matches the Mirror coordinate at equal/fewer bytes.",
@@ -59,7 +60,14 @@
   ],
   "implementation_history": [
     "Amendment 01 wrote metrics but exited on a summary-printing TypeError before run completion; preserved as source/amendment01_unmatched.* and excluded from reported result.",
-    "Amendment 02 fixes summary printing and uses three new seeds fixed before rerun."
+    "Amendment 02 fixes summary printing and uses three new seeds fixed before rerun.",
+    "Amendment 03 scoring fix executed but script still listed prior seeds 96121/96123/96127; output is preserved as source/amendment03_reused_seeds.* and excluded. Amendment 04 aligns script and protocol on new fresh seeds 96131/96133/96137.",
+    "Amendment 04 executed on new seeds 96131, 96133, 96137; thresholds were decoded from loaded payloads and packed int4 codes were used."
   ],
-  "result_report": "RESULTS.md"
+  "result_report": "RESULTS.md",
+  "verification_amendments": [
+    "Astra audit found prior scoring used original float64 teacher/reconstruction arrays rather than decoded loaded payloads; prior fresh data results are superseded and preserved in source/amendment02_unloaded_scoring.*.",
+    "Prior direct_int4 serialized uint8 codes without nibble packing; corrected format stores two 4-bit codes per byte.",
+    "Amendment 03 decodes each saved payload and scores those thresholds on three new fresh seeds 96131, 96133, 96137."
+  ]
 }

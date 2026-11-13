@@ -1,3 +1,3 @@
 # Status
 
-FAIL (scoped synthetic threshold screen). The affine task-index coordinate averaged 97.2% accuracy and serialized to 2,581 B vs 100% and 2,101 B for FP32 thresholds. Direct 4-bit codes also exceeded FP32 payload bytes. See [RESULTS.md](RESULTS.md).
+FAIL (corrected synthetic threshold screen). Loaded-payload scoring on fresh seeds 96131/96133/96137: affine code averaged 95.88% and used 2,581 B vs FP32 100% / 2,101 B; packed int4 averaged 99.01% but used 2,363 B. See [RESULTS.md](RESULTS.md).

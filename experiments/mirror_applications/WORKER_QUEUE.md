@@ -782,3 +782,6 @@ MA-952 scoped synthetic e2cnn C4 screen FAIL: learned task×irrep code and ordin
 
 
 MA-961 scoped synthetic scalar LIF threshold screen FAIL: affine task-index code averaged 97.2% vs FP32 100% and used 2,581 B vs 2,101 B; direct int4 averaged 98.9% and also exceeded FP32 bytes. Private residual restored labels at 2,809 B. See `ma-961-fixed-synapse-spike-threshold/RESULTS.md`. Next P0 MA-962 task×time-step normalization.
+
+
+MA-961 verification correction: previous score arrays bypassed loaded payloads and int4 codes were not nibble packed. Corrected amendment 04 used fresh seeds 96131/33/37 and loaded-state decoding; affine 95.88% / 2,581 B vs FP32 100% / 2,101 B, packed int4 99.01% / 2,363 B. FAIL remains. See `ma-961-fixed-synapse-spike-threshold/RESULTS.md`.

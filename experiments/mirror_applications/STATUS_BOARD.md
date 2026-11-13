@@ -429,3 +429,6 @@ MA-952 scoped synthetic e2cnn C4 screen FAIL: task×irrep code and ordinary per-
 
 
 MA-961 scoped synthetic LIF threshold screen FAIL: affine task-index threshold code averaged 97.2% vs FP32 100% accuracy and used 2,581 B vs 2,101 B; direct int4 codes averaged 98.9% and used 2,299 B. Private residual restored labels at 2,809 B. Spike counts are simulator operations, not hardware energy. See `ma-961-fixed-synapse-spike-threshold/RESULTS.md`. Next P0 MA-962: task×time-step normalization Mirror view.
+
+
+MA-961 verification amendment: Astra found previous scores did not decode loaded thresholds and int4 codes were stored in uint8. Superseded scores remain in the experiment directory; corrected amendment 04 on fresh seeds 96131/33/37 scores decoded state and packs nibbles. Affine result 95.88% / 2,581 B vs FP32 100% / 2,101 B; packed int4 99.01% / 2,363 B. FAIL remains.
