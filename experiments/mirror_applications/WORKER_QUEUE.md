@@ -821,3 +821,6 @@ MA-982 synthetic Type-II site-subspace screen FAIL: Mirror aliases native phase-
 
 
 MA-983 synthetic CSI-domain screen FAIL: Mirror rank-1 code missed independent quality (7.985 vs 8.848 bits/s/Hz; NMSE -3.89 vs -21.06 dB) and exactly aliases ordinary embedding at 26,781 B. Fixed 130 feedback bits/channel; no PA291/measured-channel claim. See `ma-983-csinet-domain-mirror-screen/RESULTS.md`.
+
+
+MA-984 ideal RIS screen FAIL for Mirror-specific attribution: 10-bit two-coordinate code retained 99.73% continuous rate at 176 B/128 commands vs 2,064 B full-element 2-bit control, but native phase-gradient control exactly aliases Mirror; all 64 elements are still updated. No hardware energy/PA290 claim. See `ma-984-ris-phase-mirror-screen/RESULTS.md`.

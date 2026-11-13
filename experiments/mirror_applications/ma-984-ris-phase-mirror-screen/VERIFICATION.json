@@ -1,0 +1,9 @@
+{
+  "experiment_id":"MA-984",
+  "commit":"pending",
+  "tests":{"command":"python experiments/mirror_applications/ma-984-ris-phase-mirror-screen/tests/verify_result.py","passed":1,"failed":0},
+  "serialization":{"roundtrip_checked":true,"byte_exact":true,"authority":"actual fixed-header, bit-packed phase command stream"},
+  "metric_replay":{"checked":true,"max_difference":0.0,"notes":["packed commands decoded before scoring; Mirror and native phase-gradient rates identical"]},
+  "fresh_split_integrity_checked":true,
+  "notes":["Three fresh ideal simulated channel worlds.","Phase-gradient profile updates all 64 RIS elements even though its control uses two coefficients.","No measured hardware energy, switching latency or PA290 reproduction claim."]
+}

@@ -1,0 +1,19 @@
+{
+  "experiment_id":"MA-984",
+  "title":"RIS grouped/low-rank Mirror phase control screen",
+  "status":"FAIL",
+  "protocol_frozen":true,
+  "base_commit":"28dfbab40",
+  "prior_art_refs":["PA290"],
+  "hypothesis":"Across synthetic cascaded single-user links, a two-coordinate phase View can preserve most of continuous RIS beamforming quality using fewer controller bits than full native per-element phase programming.",
+  "scope":"Ideal narrowband 64-element RIS simulator; not PA290 reproduction, 3GPP model or hardware measurement.",
+  "channels":{"elements":64,"group_size":8,"scenarios_per_world":128,"snr_db":10,"cascaded_coefficients":"unit-magnitude spatial phase ramp with randomized slope/curvature and per-element phase noise; direct complex path"},
+  "conditions":["continuous_full_element_upper","native_full_element_2bit","native_8_group_2bit","mirror_two_coordinate_5bit","native_two_coordinate_phase_gradient_5bit"],
+  "worlds":{"development":[98401],"fresh":[98411,98413,98417]},
+  "metrics":["mean spectral efficiency","5th percentile spectral efficiency","phase command bits per scenario","actual serialized packed command bytes","phase actuators/update proxy","controller phase evaluations","CPU wall time"],
+  "serialization":{"format":"custom fixed-header packed inference command stream; per-element/group/rank codes bit-packed with scenario ordering and decoder metadata included","authority":"actual serialized inference control payload bytes"},
+  "success_gate":"Mirror retains >=95% of continuous upper mean rate in every fresh world and uses <=50% actual packed command bytes versus native full-element 2-bit phase control.",
+  "failure_gate":"Any fresh world misses quality/bytes gate, or native two-coordinate phase-gradient control exactly aliases Mirror.",
+  "fresh":{"locked_before_access":true,"seeds":[98411,98413,98417]},
+  "boundaries":["Synthetic channel family only.","No multi-user sum-rate, AP/RIS joint optimizer, RF/phase-switch energy, settling latency, fabrication or measured channel claim.","Controller counts are proxies, not hardware energy or latency."]
+}
