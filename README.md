@@ -13,7 +13,8 @@ The previous Phase-I README remains preserved verbatim in [the Phase I snapshot]
 
 ## Start here
 
-- [**2026-11-15 A1–A5 conditional function capacity experiments**](experiments/mirror_capacity/README.md) — new CPU synthetic evidence, including negative results and reproducible A5 code. These do not establish a general Mirror-native compression benefit.
+- [**2026-11-15 A6 real handwritten-digit, 16-function capacity benchmark**](experiments/mirror_capacity/A6/README.md) — 336 models, locked IID/OOD audit and negative Mirror-specific result; same underlying digit images across six task mappings.
+- [**A1–A6 conditional function capacity evidence ledger**](experiments/mirror_capacity/README.md) — prior synthetic controls and new real-image follow-up; none establishes a general Mirror capacity multiplier.
 
 - [**Phase II research state through MN010**](docs/phase2/RESEARCH_STATE_THROUGH_MN010.md)
 - [**Global Dense Mirror architecture**](docs/phase2/GLOBAL_DENSE_MIRROR_ARCHITECTURE.md)
