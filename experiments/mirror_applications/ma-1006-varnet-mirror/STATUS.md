@@ -3,11 +3,11 @@
 - Status: FAIL (amended development gate)
 - Branch: `research/ma-1006-varnet-mirror-20261114`
 - Base commit: `05f2e4c72`
-- Last verified commit: pending until commit until commit
+- Last verified commit: `4340c052c` until commit
 - Development complete: FAIL after fair tied-pretraining rerun
 - Fresh/audit opened: no
-- Results committed: pending
-- Verification committed: pending
+- Results committed: yes
+- Verification committed: yes
 - Registry row updated: yes (FAIL)
 
 ## Next action
