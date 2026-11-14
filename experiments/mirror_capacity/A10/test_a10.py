@@ -152,3 +152,16 @@ def test_changing_withheld_audit_labels_cannot_change_trained_model():
     a=fit_two_stage(world,'mirror',512,0,meta_steps=4,adapt_steps=3,batch=16)
     b=fit_two_stage(tainted,'mirror',512,0,meta_steps=4,adapt_steps=3,batch=16)
     assert serialize(a['model'])==serialize(b['model'])
+
+
+def test_audit_rejects_protocol_hash_change(tmp_path):
+    from train import run_training
+    from audit import audit_run
+    import json
+    c=dict(worlds=[899],seeds=[0],methods=['mirror'],caps=[512],meta_steps=2,adapt_steps=2,batch=8,experiment='A10_SMOKE')
+    out=tmp_path/'run';run_training(out,c,workers=1)
+    lock=out/'train.lock.json'
+    d=json.loads(lock.read_text());d['protocol_sha256']='0'*64
+    lock.write_text(json.dumps(d))
+    with pytest.raises(RuntimeError,match='protocol SHA'):
+        audit_run(out)
