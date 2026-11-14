@@ -16,6 +16,9 @@ def audit_run(out:Path)->dict:
     out=Path(out)
     if (out/'audit.csv').exists():raise FileExistsError('refusing to overwrite an existing audit')
     receipt=json.loads((out/'train.lock.json').read_text(encoding='utf-8'))
+    actual_proto=hashlib.sha256((Path(__file__).parent/'PROTOCOL.md').read_bytes()).hexdigest()
+    if receipt.get('protocol_sha256')!=actual_proto:
+        raise RuntimeError('protocol SHA mismatch')
     config=json.loads((out/'config.json').read_text(encoding='utf-8'))
     if receipt['config_sha256']!=hashlib.sha256((out/'config.json').read_bytes()).hexdigest():
         raise RuntimeError('config SHA mismatch')
