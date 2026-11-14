@@ -1,4 +1,4 @@
-# Mirror functional capacity studies (A1–A5)
+# Mirror functional capacity studies (A1–A6)
 
 **Interpretation as of 2026-11-15:** This exploratory sequence has NOT established a Mirror-specific rate–quality advantage over carefully controlled conditional Dense, FiLM, output-basis, or low-rank models. Distinguish synthetic evidence from actual Transformer compression. Source-code implementations of the models evolve between phases, so do not pool the results as one preregistered trial.
 
@@ -9,9 +9,11 @@
 | A3 (2026-11-14) | Explicit input-rotation adapter and matched-byte controls | Simple input-coordinate adapter dominates on rotation-teacher task; full Mirror not needed. |
 | A4/A4b (2026-11-14) | Continual learning of old/new tasks with code-only freeze, replay, rank-matched Mirror4 | Mirrored structure does not reliably beat FiLM / shared output-basis in old/new task Pareto quality, even after increasing code from 1 to 4. A4b is exploratory follow-up. |
 | **[A5 (2026-11-15)](A5/README.md)** | Fixed 1500/3000B budget, 6 fresh worlds × 2 seeds × two **non-Mirror** teacher families, six methods | **288 models; Mirror4 loses to dev-selected best non-Mirror control on IID/OOD in 24/24 world × condition comparisons; zero >=10% capacity wins**. Independent teacher quality threshold was unmet by all methods, so some rate comparisons are censored. |
+| **[A6 (2026-11-15)](A6/README.md)** | Real handwritten-digit images with 16 known binary functions; 6 distinct mappings/splits of the **same 1,797-image dataset**, two function families, seven student models, 6/12k byte caps | **336 models; Mirror4 wins 0/6 worlds on IID BCE across all four family×budget conditions.** A shared FFN with task-specific output heads wins digit-mask tasks. XOR/ink task is censored at the preregistered quality threshold. No 10% byte saving established. |
 
 ## Reproducibility and evidence boundary
 
+- [A6 code, frozen protocol, full aggregate evidence, audit and tests](A6/README.md) add a small real-image **known-task** benchmark; weight files remain in the separate evidence ZIP. The six worlds share one source image dataset, so they do not count as six independent external datasets.
 - [A5 protocol](A5/PROTOCOL.md), [full code](A5/a5.py), [training](A5/train.py), [auditing](A5/audit.py), [tests](A5/test_a5.py), and [results](A5/REPORT_JA.md) are part of this Git history. Small aggregated CSVs are checked into `A5/results/`.
 - A1–A4 full synthetic evidence archives are retained in the earlier conversation's downloadable artifacts but are **not** silently reclassified as public Git-hosted checkpoints. The main conclusions above are from those experiment reports; the bundles can be independently introduced under explicit provenance later.
 - All recorded model-file sizes exclude common decoder source code and execution frameworks. They are serialized learned weights, **not** a universal description-length lower bound or GPU runtime advantage.
@@ -19,4 +21,4 @@
 
 ## Next research gate
 
-Choose non-Mirror teacher families with *known and unknown task addresses*, compare conditional function factorization under matched stored-byte **and training/inference compute** frontiers, and require a fresh-world replication with a frozen protocol. If no low-description structured Mirror variant improves on strong controls, favor ordinary shared-basis methods rather than expanding Mirror count.
+Prioritize the distinction between **shared feature extraction** and **task-specific readout** after A6's strong multihead result. Next evaluate held-out task addresses and real multi-domain tasks, then compare full stored-byte **and matched training/inference compute** frontiers using a frozen protocol. Do not keep increasing shear-Mirror count without a mechanism-specific positive control. If no low-description structured Mirror variant improves on strong controls, favor ordinary shared-basis methods rather than expanding Mirror count.
