@@ -1,0 +1,74 @@
+{
+  "experiment_id": "MA-1006",
+  "title": "VarNet cascade phase-view reconstruction screen",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/RUNTIME",
+  "base_commit": "05f2e4c72",
+  "hypothesis": "After training an official fastMRI VarNet on one synthetic multi-coil scanner, tying cascade denoisers loses quality on a held-out coil-sensitivity scanner, while a per-cascade complex Givens Mirror angle over one shared denoiser recovers more quality per serialized byte than hard tying and a same-count scalar-gate control, without changing the VarNet data-consistency parameters or acquired k-space operator.",
+  "prior_art_refs": ["PA302"],
+  "prior_code": {
+    "repository": "https://github.com/facebookresearch/fastMRI.git",
+    "commit": "91f2df4711adbb6d643df1810f234e4abcf5881b",
+    "license": "MIT"
+  },
+  "model": {
+    "class": "fastmri.models.varnet.VarNet",
+    "num_cascades": 3,
+    "sens_chans": 4,
+    "sens_pools": 2,
+    "chans": 4,
+    "pools": 2,
+    "complex_layout": "real/imag last dimension",
+    "device": "CPU"
+  },
+  "data": {
+    "type": "deterministic analytic synthetic multi-coil phantoms; mechanism-only, not clinical or fastMRI benchmark evidence",
+    "image_shape": [64, 64],
+    "coils": 4,
+    "acceleration": 4,
+    "fully_sampled_center_lines": 8,
+    "train_scanner": "A: fixed smooth coil profiles, train phantom seeds 106001..106032; first 24 train examples",
+    "target_scanner": "B: shifted smooth coil amplitude and phase profiles; support seeds 106101..106108, development seeds 106201..106216",
+    "fresh_seeds": [106301, 106307, 106313],
+    "fresh_examples_per_seed": 8,
+    "fresh_metrics_or_quality_opened": false
+  },
+  "protocol": {
+    "training_seed": 106001,
+    "pretraining_updates": 24,
+    "pretraining_examples": 24,
+    "target_support_examples": 8,
+    "adaptation_updates_per_method": 24,
+    "methods": [
+      "independent native VarNet fine-tune on support upper control",
+      "shared single denoiser, no view (hard-tying baseline)",
+      "shared denoiser plus three per-cascade scalar gates",
+      "shared denoiser plus three per-cascade complex Givens angles (Mirror)"
+    ],
+    "adaptation_scope": "scanner sensitivity estimator and DC scalars remain frozen for all view methods; full native FT upper control may update all model parameters",
+    "view_placement": "post-denoiser complex output only, before the native VarNetBlock sensitivity expansion and DC subtraction",
+    "dc_invariant": "Mirror has no access to mask, acquired k-space values, or cascade dc_weight; report acquired-line residual for all methods. Native fastMRI VarNet uses learned soft DC, so exact measured-sample projection is not claimed.",
+    "primary_metrics": ["development NMSE", "development PSNR dB", "acquired k-space residual"],
+    "selection": "development seeds only; freeze all weights/codes before fresh seed access"
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": ["shared denoiser parameters", "sensitivity network", "cascade data-consistency scalars", "view angles/gates", "model/architecture metadata", "independent per-cascade weights for native control"],
+    "base_and_total_system_bytes_reported": true
+  },
+  "compute": {
+    "report_examples": true,
+    "report_optimizer_updates": true,
+    "report_parameter_count_and_MAC_proxy": true,
+    "report_cpu_wall_clock": true,
+    "report_inference_time": true
+  },
+  "success_gate": "Mirror improves hard-tying development NMSE by at least 10%, is within 5% relative NMSE of independent fine-tune, beats same-count scalar gates, uses at least 20% fewer actual total bytes than independent fine-tune, and does not alter VarNet DC parameters; fresh must confirm direction in all three worlds before PROMISING.",
+  "failure_gate": "Mirror equals hard tying, is matched/dominated by the scalar gate, fails measurement-operator invariance, or its payload/runtime removes quality-per-byte benefit.",
+  "boundaries": [
+    "Synthetic phantoms only; this is a VarNet mechanism screen, not fastMRI benchmark or clinical evidence.",
+    "No patient data or diagnosis tasks.",
+    "CPU small architecture; no full-scale VarNet latency claim.",
+    "No clinical or scanner deployment claim."
+  ]
+}
