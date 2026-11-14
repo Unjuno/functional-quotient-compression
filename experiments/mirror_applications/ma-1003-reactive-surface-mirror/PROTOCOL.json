@@ -1,7 +1,7 @@
 {
   "experiment_id": "MA-1003",
   "title": "Few-shot reactive-surface Mirror code",
-  "status": "SCREENING",
+  "status": "FAIL",
   "evidence_lane": "STORAGE/RUNTIME/CAPACITY",
   "base_commit": "6463b1676",
   "hypothesis": "With a common frozen pretrained interatomic prior, a shared low-rank energy-readout basis plus a small per-surface code fitted from few reference structures reduces held-out reactive-region energy and force errors versus the frozen prior and approaches an equal-byte independent readout without storing one full readout per surface.",
@@ -65,7 +65,9 @@
       "stage4": 32,
       "stage5_support": 32
     },
-    "note": "Selected stage-1 records are excluded due non-converged flag; stage2 contains source facets Cu100/Cu110/Cu111 only, no Cu211."
+    "note": "Selected stage-1 records are excluded due non-converged flag; stage2 contains source facets Cu100/Cu110/Cu111 only, no Cu211.",
+    "selected_config_hash": "02556df431cadda719c63fd4534aece3eb4fa25d8333daf8a5e7a40d673f84be",
+    "recorded_metric_replay": "two deterministic development runs matched all quality metrics exactly; wall time is intentionally excluded from exact replay comparison."
   },
   "fresh": {
     "stage": "6_new_datapoints_4",
@@ -76,7 +78,8 @@
     "barrier_claim_allowed": false,
     "manifest_sha256": "7be703b68660dc60ea7c9e2e323d2ddc34b633943505d6dadd8e5e472f0d82c2",
     "selected_groups_per_facet": 8,
-    "raw_files_opened": false
+    "raw_files_opened": false,
+    "decision": "sealed_after_development_gate_failure"
   },
   "storage": {
     "authority": "actual serialized inference payload bytes",
@@ -136,5 +139,22 @@
       "Stage 3 and 4 remain development validation (32 records each), stage 5 is few-shot support (32 records), and stage 6 remains untouched fresh audit.",
       "Data are obtained through NOMAD partial archive query for system atoms and final calculation energy/forces; full aims.out logs are not needed."
     ]
+  },
+  "amendment_03": {
+    "date": "2026-11-14",
+    "reason": "Development comparison completed before any audit file access.",
+    "changes": [
+      "Freeze selected rank=2, support_shots=4, ridge alpha=1e-3 for m, shared-task readout ridge alpha=1e-2, independent readout ridge alpha=1e-2.",
+      "Development gate failed because energy-derived Mirror adaptation worsened force MAE and was materially worse than independent readouts; do not open stage 6 for this hypothesis.",
+      "Record exact development payload serialization and native low-rank function alias."
+    ]
+  },
+  "selected_development_config": {
+    "rank": 2,
+    "support_shots_per_facet": 4,
+    "mirror_code_ridge_alpha": 0.001,
+    "basis_readout_ridge_alpha": 0.01,
+    "independent_readout_ridge_alpha": 0.01,
+    "reason": "Lowest mean energy MAE among frozen development grid rank 1-3 x shots 1,2,4,8 on stage3/4 cross-validation."
   }
 }

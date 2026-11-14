@@ -7,10 +7,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 - Registered candidates: **1155**
 - Claim ledger entries: **438**
-- P0: **630** (351 FAIL; 54 PROMISING; 218 UNTESTED; 6 NOT ESTABLISHED; 1 SCREENING)
+- P0: **630** (352 FAIL; 54 PROMISING; 217 UNTESTED; 6 NOT ESTABLISHED; 1 SCREENING)
 - P1: **422** (17 completed; 405 UNTESTED)
 - P2: **103** (103 UNTESTED)
-- Current MA statuses: **364 FAIL, 9 NOT ESTABLISHED, 63 PROMISING, 2 SCREENING, 717 UNTESTED**
+- Current MA statuses: **365 FAIL, 9 NOT ESTABLISHED, 63 PROMISING, 1 SCREENING, 717 UNTESTED**
 - 47 baseline experiment directories remain present; verified external outcomes are linked to their dedicated branches in the registry and claim ledger.
 - New research: MA-876..935 (60 candidates), PA236..PA265 (30 primary sources). See the current Next candidate section for the live queue.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. see the current Next candidate section.
@@ -480,6 +480,6 @@ MA-985 small synthetic MU-MISO/WMMSE screen FAIL: rank-2 AP×RIS factor reached 
 Wireless Mirror candidates MA-986..989 are paused for structural redesign; their registry rows remain UNTESTED. MA-981/982 consecutively alias native steering/Type-II controls, and MA-983..985 repeat the native-control alias with embedding, phase-gradient, and product-code controls. See [wireless family diagnostic](../../docs/phase2/WIRELESS_MIRROR_FAMILY_DIAGNOSTIC_2026-11-13.md). MA-990 through MA-993 spatial-audio HRTF candidates are deferred as UNTESTED because the required SONICOM measurements are unavailable in this workspace. MA-996/997 are consecutive scoped synthetic FAILs in atomistic material-code lanes: both preserve conservative forces but exactly alias native low-rank/shared-mask controls and miss the byte gate. MA-998 is paused UNTESTED pending a structurally distinct species/environment insertion. No official MACE-MP/PA300 result. See both RESULTS.md files. MA-999 is a scoped synthetic FAIL: same-coordinate LJ potential is invariant across T/P; shared-only is exact and Mirror adds bytes. No MatterSim/NPT claim. See its RESULTS.md. MA-1000 synthetic energy-gradient audit is PROMISING for physical validity only: 3 fresh worlds pass force-gradient and rotation checks, while the separate-force negative control fails; native rank-2 aliases and no compression claim is made. See its RESULTS.md. MA-1001 is PROMISING only for synthetic NVE stability: all 3,000-step LJ rollouts stayed stable and exactly matched native coefficients, while Mirror storage and compute increased. No trained-model claim. See its RESULTS.md. Continue at MA-1003 (reactive-surface few-shot adaptation); MA-1002 is P1.
 
 
-## MA-1003 screening update — 2026-11-14
+## MA-1003 result update — 2026-11-14
 
-MA-1003 is now SCREENING on dedicated branch `research/ma-1003-reactive-surface-mirror-20261114`. Public H2/Cu data and an official MACE-MP small checkpoint are pinned by SHA-256. A 12-structure CPU feasibility probe is development-only and burned; frozen-prior errors are high. No Mirror or PA301 transfer control has run, so the registered hypothesis remains NOT ESTABLISHED. Curated frames lack trajectory IDs and explicit barrier/path labels. A metadata-only NOMAD stage-6 whole-run-group audit split is locked (manifest SHA-256 `7be703b...f0d82c2`); its raw files remain unopened. No fresh result or barrier claim is allowed yet. See `experiments/mirror_applications/ma-1003-reactive-surface-mirror/RESULTS.md`.
+MA-1003 is a development-gate FAIL on dedicated branch `research/ma-1003-reactive-surface-mirror-20261114`. Rank-2/4-shot improves calibrated energy error vs frozen MACE-MP but worsens force error; independent readout is substantially better. Mirror exactly aliases native low-rank factorization. Its payload is 5,187 B vs 7,029 B independent (26.2% fewer), while adapter MAC proxy doubles. Stage-6 remains sealed after the failed gate; no barrier claim. Next eligible P0 by registry order: MA-1004. See `experiments/mirror_applications/ma-1003-reactive-surface-mirror/RESULTS.md`.

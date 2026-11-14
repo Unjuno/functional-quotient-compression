@@ -2,32 +2,40 @@
   "experiment_id": "MA-1003",
   "commit": "pending",
   "tests": {
-    "command": "python experiments/mirror_applications/check_registry_integrity.py",
-    "passed": 1,
+    "command": "/tmp/ma1003env/bin/python -m unittest discover -s experiments/mirror_applications/ma-1003-reactive-surface-mirror/tests -v; python experiments/mirror_applications/check_registry_integrity.py",
+    "passed": 4,
     "failed": 0
   },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false,
-    "note": "No Mirror or adapter inference payload has been trained/serialized yet; prior checkpoint bytes are recorded from the downloaded artifact."
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "mirror_payload_bytes": 5187,
+    "mirror_payload_sha256": "26ebeca8516458d4a929775ece0d71996ed78cf5fcecb5d3cb7095149a21e9ca",
+    "native_payload_bytes": 5187,
+    "native_payload_sha256": "26ebeca8516458d4a929775ece0d71996ed78cf5fcecb5d3cb7095149a21e9ca",
+    "independent_payload_bytes": 7029,
+    "independent_payload_sha256": "bb5d19a521fec8fc8ec138e5f873f2184d2774c2311f56ee884ba46c6cfeaae1",
+    "note": "Both Mirror and native low-rank payloads are the exact same serialized state/hash; total state adds the common 32,581,838-byte MACE-MP checkpoint."
   },
   "metric_replay": {
     "checked": true,
-    "max_difference": null,
-    "note": "Development feasibility metrics were computed once in the CPU probe and entered in RESULTS_CORE.csv; row-level replay not yet implemented."
+    "max_difference": 0.0,
+    "note": "Two development runs from the pinned script/data/checkpoint reproduced selected rank/shots and all energy/force quality metrics bit-exactly. Wall-clock values vary and are not included in the replay delta."
   },
   "fresh_split_integrity_checked": true,
   "provenance": {
-    "data_sha256": "d4346a959558077447bdfefdcaaf66f761190ef29ad81898e6ff61a173b02a09",
+    "data_download_manifest_sha256": "1413b3deaf8dfd44a5738c62ba3cba2311f31d95be939ba449e0a3edfb450177",
+    "data_manifest_artifact_sha256": "84cd469da97a436c0bd8fac34a6a6da6834eb549d94d244d751b9b739b77be2f",
+    "screen_artifact_sha256": "02556df431cadda719c63fd4534aece3eb4fa25d8333daf8a5e7a40d673f84be",
+    "locked_split_manifest_sha256": "7be703b68660dc60ea7c9e2e323d2ddc34b633943505d6dadd8e5e472f0d82c2",
     "prior_sha256": "2ddb079cee0e131eaaf6912ba581b394551ead283e95c99cfe78c605d10b5736",
     "dataset_repo_commit": "72db5df1f152c86afa4de98af628b1a67268445b",
     "mace_freeze_commit": "933231d31b2b5437e8e31fdb85039822fa399d1b"
   },
   "notes": [
-    "SCREENING only: 12 development feasibility frames are burned and cannot be reused for fresh claims.",
-    "Base frozen MACE-MP evaluation was CPU-only; no Mirror candidate or PA301 adaptation control has run.",
-    "Extxyz trajectory lineage and barrier/path labels remain unresolved.",
-    "Registry integrity check passed with zero errors before MA-1003 row update.",
-    "Metadata-only split manifest was frozen with SHA-256 7be703b68660dc60ea7c9e2e323d2ddc34b633943505d6dadd8e5e472f0d82c2 before any stage-6 raw file/metric access; fresh stage raw remains unopened."
+    "Development-only FAIL. Fresh stage-6 raw archives and metrics were never fetched/opened after development gate failure.",
+    "Three artifact-integrity tests passed, including exact Mirror/native payload alias and split disjointness; registry integrity passed with zero errors.",
+    "Primary stage data use NOMAD partial archive query; full FHI-aims log downloads were halted because they were too large.",
+    "No PA301 full-backbone fine-tune, barrier metric, or generalized catalyst claim."
   ]
 }

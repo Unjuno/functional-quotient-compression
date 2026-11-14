@@ -1,18 +1,18 @@
 # MA-1003 status
 
-- Status: SCREENING
+- Status: FAIL (development gate; fresh sealed)
 - Branch: `research/ma-1003-reactive-surface-mirror-20261114`
 - Base commit: `6463b1676`
 - Last verified commit: pending
-- Development complete: no
-- Fresh/audit opened: no (12 initial diagnostic structures are burned development data)
-- Results committed: no
-- Verification committed: no
-- Registry row updated: no
+- Development complete: yes
+- Fresh/audit opened: no; stage-6 metadata manifest is locked but no raw files/metrics were downloaded because the development gate failed.
+- Results committed: pending commit
+- Verification committed: pending commit
+- Registry row updated: pending commit
 
 ## Next action
 
-Implement the shared-basis/readout controls on the parsed development data, tune rank on stages 3–4, use stage 5 only for few-shot support, and freeze configs before querying stage 6 archives.
+Commit the checked development failure and proceed to MA-1004 on its own research branch.
 
 ## Blockers
 
@@ -23,3 +23,7 @@ The curated extxyz lacks trajectory/path IDs and is excluded from primary scorin
 - Do not use the domain-trained H2/Cu checkpoint as the shared prior; it overlaps the target domain.
 - Exclude the 12 initial per-cell prior diagnostic frames from all future fresh scoring.
 - Do not claim barrier MAE from this data absent verified reaction paths/barriers.
+
+## Decision
+
+FAIL on development quality and Mirror-specific attribution. Rank-2/4-shot improves offset-corrected energy error versus frozen MACE-MP, but force error worsens; independent readouts are substantially better. Native low-rank factorization has the exact same inference payload/function. Fresh remains sealed.

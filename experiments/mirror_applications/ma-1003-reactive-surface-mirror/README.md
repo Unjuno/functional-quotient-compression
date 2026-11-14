@@ -1,9 +1,9 @@
 # MA-1003 — Few-shot reactive-surface Mirror code
 
-Status: SCREENING  
-Evidence lane: STORAGE / RUNTIME / CAPACITY (screening only)  
-Base commit: `6463b1676`  
-Doctrine: `docs/phase2/MIRROR_PARAMETER_INTEGRATION_DOCTRINE.md`  
+Status: FAIL (development gate; fresh sealed)
+Evidence lane: STORAGE / RUNTIME / CAPACITY (development only)
+Base commit: `6463b1676`
+Doctrine: `docs/phase2/MIRROR_PARAMETER_INTEGRATION_DOCTRINE.md`
 Integration map: `docs/phase2/MIRROR_PARAMETER_INTEGRATION_MATRIX.md`
 
 ## Hypothesis
