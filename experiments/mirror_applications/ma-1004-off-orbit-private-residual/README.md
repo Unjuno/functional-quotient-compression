@@ -33,10 +33,10 @@ The hypothesis is falsified if Mirror-only meets the quality gate (private state
 
 ## Split lock
 
-Use each structure's published `old_indices` only as a time-order key. No random-frame split. Freeze these absolute windows before reading labels: source tasks use `0 <= old_indices < 100000`; uracil support uses the same interval, development uses `[100000, 200000)`, and fresh audit uses `[500000, 650000)`. A fixed SHA256 order selects at most 128 source examples, 8/16/32 target support examples, up to 128 development rows, and up to 64 fresh rows.
-- Deduplicate exact coordinate hashes across all partitions; remove overlapping rows from the later split without inspecting energies or forces.
+Use each structure's published `old_indices` only as a time-order key. No random-frame split. Freeze these absolute windows before reading labels: source tasks use `0 <= old_indices < 100000`; uracil support uses `[0, 80000)`, development uses `[80000, 100000)`, and fresh audit uses `[100000, 133770)`. Amendment 01 changed the empty 500000–650000 target interval after checking only the old-index range (uracil max 133769); no target metrics or labels were inspected. A fixed SHA256 order selects at most 128 source examples, 8/16/32 target support examples, up to 128 development rows, and up to 64 fresh rows.
+- Old-index windows are disjoint by construction. No exact-geometry deduplication involving fresh rows is claimed because the fresh coordinate values remain uninspected.
 
-The four per-molecule tensor shards were downloaded and hashed. The benzene shard was inspected for schema and `old_indices` range only; the uracil shard is present in the container, but its energies, forces, and coordinates have not been parsed or scored. Fresh uracil rows remain unselected/unopened until development config and payload are frozen.
+The four tensor shards were downloaded and hashed. The uracil shard was deserialized by a split-lock script to discover a nonempty fresh window and select row positions. The script accessed only `old_indices`; although `torch.load` deserialized the shard tensors, no coordinate, energy, or force values were indexed or examined, and no training losses or quality metrics were accessed. The split was not locked before this metadata-only shard access, but was locked before any metrics or quality access. The row manifest is `runs/ROW_MANIFEST.json` (SHA-256 `39b925511f67d0706a9c45c5bbb77b3d7e5caf473503997ad5bc7876216d8601`). Fresh metrics remain sealed until development config and payload are frozen.
 
 ## Controls
 

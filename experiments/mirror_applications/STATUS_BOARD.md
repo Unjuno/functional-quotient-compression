@@ -487,4 +487,4 @@ MA-1003 is a development-gate FAIL on dedicated branch `research/ma-1003-reactiv
 
 ## MA-1004 setup — 2026-11-14
 
-MA-1004 is SCREENING on `research/ma-1004-off-orbit-private-residual-20261114`. rMD17 CC0 molecule data and MACE-MP small prior are pinned; PA300 code is pinned to its MIT repository commit. Uracil data shard is downloaded but labels/coordinates are unopened and no metric has been computed. Old-index windows are locked in `experiments/mirror_applications/ma-1004-off-orbit-private-residual/PROTOCOL.json`.
+MA-1004 is SCREENING on `research/ma-1004-off-orbit-private-residual-20261114`. rMD17 CC0 molecule data and MACE-MP small prior are pinned; PA300 code is pinned to its MIT repository commit. Uracil tensor shard was deserialized for old_indices split metadata only; coordinates, energies, forces and metrics were not inspected. The split was locked after metadata access but before metric access. Old-index windows are locked in `experiments/mirror_applications/ma-1004-off-orbit-private-residual/PROTOCOL.json`.

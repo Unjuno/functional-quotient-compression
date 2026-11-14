@@ -56,12 +56,23 @@
   "split": {
     "ordering": "published old_indices ascending; fixed original-index windows, not random frames",
     "source_basis": "for benzene/toluene/naphthalene select up to 128 records each with 0 <= old_indices < 100000 using SHA256(MA1004|source|molecule|old_index) order",
-    "target_support": "uracil records with 0 <= old_indices < 100000; select 8/16/32 support rows with the same deterministic hash ordering",
-    "development": "uracil 100000 <= old_indices < 200000; select up to 128 deterministic rows for rank/shot/private-state selection",
-    "fresh": "uracil 500000 <= old_indices < 650000; select up to 64 deterministic rows after protocol and model/config/payload lock",
-    "fresh_raw_or_labels_opened": false,
-    "fresh_file_downloaded_but_not_parsed_or_scored": true,
-    "deduplicate": "SHA256 of atomic numbers and positions rounded to 1e-6 Angstrom; remove overlap from the later partition before reading any target labels"
+    "target_support": "uracil records with 0 <= old_indices < 80000; select 8/16/32 support rows with the same deterministic hash ordering",
+    "development": "uracil 80000 <= old_indices < 100000; select up to 128 deterministic rows for rank/shot/private-state selection",
+    "fresh": "uracil 100000 <= old_indices < 133770; select up to 64 deterministic rows after protocol and model/config/payload lock",
+    "fresh_raw_or_labels_opened": true,
+    "fresh_file_downloaded_but_not_parsed_or_scored": false,
+    "fresh_metrics_or_quality_opened": false,
+    "locked_before_metric_access": true,
+    "row_manifest": {
+      "path": "runs/ROW_MANIFEST.json",
+      "sha256": "39b925511f67d0706a9c45c5bbb77b3d7e5caf473503997ad5bc7876216d8601",
+      "metadata_only": true
+    },
+    "fresh_shard_deserialized_for_old_indices": true,
+    "locked_before_any_fresh_shard_access": false,
+    "partition_integrity": "Old-index windows are disjoint by construction. The serialized fresh shard was deserialized to read old_indices only; fresh coordinates/label values were not indexed or examined. Exact-coordinate deduplication involving fresh rows is not claimed.",
+    "fresh_label_values_inspected": false,
+    "fresh_tensor_file_deserialized": true
   },
   "controls": [
     "frozen MACE-MP plus support-fitted task energy offset",
@@ -86,8 +97,11 @@
       100417,
       100429
     ],
-    "locked_before_access": true,
-    "raw_or_labels_opened": false
+    "locked_before_access": false,
+    "raw_or_labels_opened": true,
+    "locked_before_metric_access": true,
+    "metrics_or_quality_opened": false,
+    "raw_access_scope": "The .pt shard was deserialized (therefore its tensors were loaded); the split-lock script accessed only old_indices. No coordinate, energy, or force values were indexed or inspected, and no metrics or quality were computed."
   },
   "storage": {
     "authority": "actual serialized inference payload bytes",
@@ -115,5 +129,25 @@
     "All tested elements are supported by the MACE-MP embedding; this is not unseen-element transfer.",
     "No reaction barrier labels; no barrier claim.",
     "No random-frame split; old_indices interval split and exact-geometry deduplication are required."
-  ]
+  ],
+  "amendment_01": {
+    "date": "2026-11-14",
+    "reason": "Metadata-only old_indices audit showed uracil indices range 1..133769; the original 500000..650000 audit window was empty. No positions, energies, forces, or quality metrics were inspected.",
+    "changes": [
+      "Target support window changed to 0 <= old_indices < 80000.",
+      "Development window changed to 80000 <= old_indices < 100000.",
+      "Fresh audit window changed to 100000 <= old_indices < 133770.",
+      "Source molecule windows remain 0 <= old_indices < 100000.",
+      "The initial uracil tensor shard was downloaded before the empty-window discovery. A split script deserialized the shard but accessed only old_indices for partition counts/selection; no uracil coordinates, energies, forces, training losses, or quality metrics were read. This state is explicitly recorded as metadata-only exposure."
+    ]
+  },
+  "amendment_02": {
+    "date": "2026-11-14",
+    "reason": "Corrected the provenance wording to distinguish metadata-only old_indices access from coordinate/label inspection. The fresh shard was deserialized, so the earlier claim that it had not been parsed was inaccurate.",
+    "changes": [
+      "Record that torch deserialized the complete fresh tensor shard, but experiment code accessed only old_indices metadata; no fresh coordinates, energies, forces, or metrics were examined.",
+      "Remove exact-geometry deduplication claim because fresh coordinates remain sealed. Old-index windows are disjoint by construction.",
+      "Record that the split was not locked before metadata access, but was locked before any quality or metric access."
+    ]
+  }
 }

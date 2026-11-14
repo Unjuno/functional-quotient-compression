@@ -1,5 +1,5 @@
 {
-  "experiment_id": "MA-XXX",
+  "experiment_id": "MA-1004",
   "commit": "pending",
   "tests": {
     "command": "pending",
@@ -14,9 +14,10 @@
     "checked": false,
     "max_difference": null
   },
-  "fresh_split_integrity_checked": false,
+  "fresh_split_integrity_checked": true,
   "notes": [
     "SCREENING setup only; no adaptation metrics or serialized inference payload.",
-    "Uracil tensor artifact downloaded and hashed; its labels and coordinates have not been parsed/scored."
+    "Uracil tensor shard was deserialized solely to read old_indices metadata for split locking. No uracil coordinates, energy/force labels, losses, or quality metrics were inspected.",
+    "Split metadata was accessed before final protocol lock; the split was locked before any quality or metric access."
   ]
 }

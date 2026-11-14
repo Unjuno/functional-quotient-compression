@@ -5,7 +5,7 @@
 - Base commit: `28f0dceef`
 - Last verified commit: pending
 - Development complete: no
-- Fresh/audit opened: no (uracil file downloaded; labels and coordinates unopened)
+- Fresh/audit shard: deserialized; only old_indices metadata was accessed; fresh coordinate/label values and metrics were not examined
 - Results committed: no
 - Verification committed: no
 - Registry row updated: no
@@ -16,4 +16,4 @@ After protocol commit, inspect only `old_indices` and structural metadata to ver
 
 ## Blockers
 
-The StructureCloud tensor mirror has no independent license metadata; use original ColabFit rMD17 CC0 record as authority and preserve its file hashes. Uracil is downloaded but no labels/coordinates opened. Fixed old-index windows and target selected-row manifest remain to be verified. PA300 control compatibility with this MACE-MP checkpoint must be tested.
+The StructureCloud tensor mirror has no independent license metadata; use original ColabFit rMD17 CC0 record as authority and preserve its file hashes. Uracil was deserialized for row-index metadata; no coordinate or label values were indexed or inspected. Amendment 01 sets nonempty support/dev/fresh windows from old-index metadata; selected-row manifest is being regenerated before any metrics. PA300 control compatibility with this MACE-MP checkpoint must be tested.
