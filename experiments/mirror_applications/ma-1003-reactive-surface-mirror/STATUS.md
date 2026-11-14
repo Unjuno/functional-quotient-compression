@@ -12,11 +12,11 @@
 
 ## Next action
 
-Download and parse selected stage 1–5 data only, implement matched controls, tune on stages 3–4, and freeze configs before opening stage 6 raw files.
+Implement the shared-basis/readout controls on the parsed development data, tune rank on stages 3–4, use stage 5 only for few-shot support, and freeze configs before querying stage 6 archives.
 
 ## Blockers
 
-The curated extxyz lacks trajectory/path IDs and is excluded from primary scoring. NOMAD mainfile paths provide run-group split keys; the stage-6 audit manifest is frozen and hashed before raw access (SHA-256 `7be703b...f0d82c2`); stage-6 raw files remain unopened. Barrier labels/path pairing are not explicit. PA301 training recipe has not yet been operationally reproduced on this checkpoint.
+The curated extxyz lacks trajectory/path IDs and is excluded from primary scoring. NOMAD mainfile paths provide run-group split keys; the stage-6 audit manifest is frozen and hashed before raw access (SHA-256 `7be703b...f0d82c2`); stage-6 raw files remain unopened. Stage-1 selected AIMD outputs are nonconverged and excluded by Amendment 02. Barrier labels/path pairing are not explicit. PA301 training recipe has not yet been operationally reproduced on this checkpoint.
 
 ## Decisions / rulings
 

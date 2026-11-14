@@ -23,7 +23,10 @@
     "explicit_barrier_labels": false,
     "trajectory_ids_in_curated_extxyz": false,
     "primary_split_source": "NOMAD raw entries grouped by mainfile stage/facet/result-run path; do not use curated extxyz for primary fresh scoring",
-    "primary_composition": "Cu54H2 only (56 atoms); exclude other composition before scoring under this locked rule"
+    "primary_composition": "Cu54H2 only (56 atoms); exclude other composition before scoring under this locked rule",
+    "archive_query": "POST /entries/{entry_id}/archive/query; required run.system[-1] plus run.calculation[-1].energy, forces, calculation_converged",
+    "download_manifest_sha256": "1413b3deaf8dfd44a5738c62ba3cba2311f31d95be939ba449e0a3edfb450177",
+    "inclusion_filter": "n_atoms==56 and calculation_converged is true and all energy/forces/positions are finite"
   },
   "prior": {
     "name": "MACE-MP small",
@@ -44,7 +47,6 @@
   ],
   "development": {
     "shared_basis_fit_stages": [
-      "1_initial_data_0_AIMD",
       "2_initial_data_0_MD"
     ],
     "hyperparameter_development_stages": [
@@ -56,7 +58,14 @@
     "selection_metric": "Mean per-atom energy MAE and force component MAE on held-out development run groups; select rank and shot count only here.",
     "burned_probe": "12 curated extxyz frames previously inspected; not used in primary stage-group split.",
     "manifest_sha256": "7be703b68660dc60ea7c9e2e323d2ddc34b633943505d6dadd8e5e472f0d82c2",
-    "selected_groups_per_facet": 8
+    "selected_groups_per_facet": 8,
+    "selected_converged_records": {
+      "stage2": 46,
+      "stage3": 32,
+      "stage4": 32,
+      "stage5_support": 32
+    },
+    "note": "Selected stage-1 records are excluded due non-converged flag; stage2 contains source facets Cu100/Cu110/Cu111 only, no Cu211."
   },
   "fresh": {
     "stage": "6_new_datapoints_4",
@@ -116,5 +125,16 @@
     "method": "one shared scalar residual-energy offset fitted on stage-1/2 56-atom development structures only",
     "paid_in_payload": true,
     "also_report": "energy-difference MAE relative to stage-1/2 DFT mean"
+  },
+  "amendment_02": {
+    "date": "2026-11-14",
+    "reason": "Development NOMAD archive screening found stage-1 AIMD entries marked calculation_converged=false; the filter is fixed before fresh access.",
+    "changes": [
+      "Only entries with exactly 56 atoms (Cu54H2), calculation_converged=true, finite energy, positions and force labels enter training/evaluation.",
+      "Stage 1 is excluded (all 85 records in selected groups are nonconverged in the downloaded subset).",
+      "Basis fit is stage 2 only (46 selected converged records across Cu100/Cu110/Cu111); no Cu211 basis task exists.",
+      "Stage 3 and 4 remain development validation (32 records each), stage 5 is few-shot support (32 records), and stage 6 remains untouched fresh audit.",
+      "Data are obtained through NOMAD partial archive query for system atoms and final calculation energy/forces; full aims.out logs are not needed."
+    ]
   }
 }
