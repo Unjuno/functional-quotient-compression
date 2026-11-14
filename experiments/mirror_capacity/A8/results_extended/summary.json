@@ -1,0 +1,26 @@
+{
+  "status": "exploratory A8",
+  "models": 32,
+  "audit_scores": 96,
+  "summaries": [
+    {
+      "family": "ramp",
+      "cap": 512,
+      "n_worlds": 4,
+      "mirror_beat_iid": 0,
+      "mirror_beat_ood": 0,
+      "mirror_joint_win": 0,
+      "mirror_pass_worlds": 0,
+      "control_pass_worlds": 4,
+      "iid_geomean_ratio": 56.32916070156372,
+      "iid_95ci_lo": 6.732928666359301,
+      "iid_95ci_hi": 471.26213607403565,
+      "ood_geomean_ratio": 15.015786020601906,
+      "ood_95ci_lo": 3.1015318379408185,
+      "ood_95ci_hi": 72.69757061923345
+    }
+  ],
+  "bounds_note": "probe-only, not held-out empirical MSE",
+  "selection": "non-Mirror comparison selected by mean dev MSE across two seeds",
+  "quality": "IID and OOD NRMSE <=.08; missing quality frontiers censored"
+}
