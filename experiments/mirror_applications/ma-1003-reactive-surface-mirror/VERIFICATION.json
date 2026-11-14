@@ -1,0 +1,33 @@
+{
+  "experiment_id": "MA-1003",
+  "commit": "pending",
+  "tests": {
+    "command": "python experiments/mirror_applications/check_registry_integrity.py",
+    "passed": 1,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": false,
+    "byte_exact": false,
+    "note": "No Mirror or adapter inference payload has been trained/serialized yet; prior checkpoint bytes are recorded from the downloaded artifact."
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": null,
+    "note": "Development feasibility metrics were computed once in the CPU probe and entered in RESULTS_CORE.csv; row-level replay not yet implemented."
+  },
+  "fresh_split_integrity_checked": true,
+  "provenance": {
+    "data_sha256": "d4346a959558077447bdfefdcaaf66f761190ef29ad81898e6ff61a173b02a09",
+    "prior_sha256": "2ddb079cee0e131eaaf6912ba581b394551ead283e95c99cfe78c605d10b5736",
+    "dataset_repo_commit": "72db5df1f152c86afa4de98af628b1a67268445b",
+    "mace_freeze_commit": "933231d31b2b5437e8e31fdb85039822fa399d1b"
+  },
+  "notes": [
+    "SCREENING only: 12 development feasibility frames are burned and cannot be reused for fresh claims.",
+    "Base frozen MACE-MP evaluation was CPU-only; no Mirror candidate or PA301 adaptation control has run.",
+    "Extxyz trajectory lineage and barrier/path labels remain unresolved.",
+    "Registry integrity check passed with zero errors before MA-1003 row update.",
+    "Metadata-only split manifest was frozen with SHA-256 7be703b68660dc60ea7c9e2e323d2ddc34b633943505d6dadd8e5e472f0d82c2 before any stage-6 raw file/metric access; fresh stage raw remains unopened."
+  ]
+}

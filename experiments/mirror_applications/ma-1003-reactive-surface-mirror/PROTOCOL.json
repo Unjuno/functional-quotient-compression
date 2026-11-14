@@ -1,0 +1,104 @@
+{
+  "experiment_id": "MA-1003",
+  "title": "Few-shot reactive-surface Mirror code",
+  "status": "SCREENING",
+  "evidence_lane": "STORAGE/RUNTIME/CAPACITY",
+  "base_commit": "6463b1676",
+  "hypothesis": "With a common frozen pretrained interatomic prior, a shared low-rank energy-readout basis plus a small per-surface code fitted from few reference structures reduces held-out reactive-region energy and force errors versus the frozen prior and approaches an equal-byte independent readout without storing one full readout per surface.",
+  "physical_object": "Common frozen MACE-MP small interatomic potential weights",
+  "mirror_coordinate": "Per-surface code m in delta_E = pooled_node_features @ B @ m; forces are negative coordinate gradients of this energy correction",
+  "logical_multiplicity": "Few-shot calibrated surface/task-specific potential corrections over a shared basis",
+  "prior_art_refs": [
+    "PA301"
+  ],
+  "data": {
+    "repository": "https://github.com/wgst/ml-gas-surface",
+    "repository_commit": "72db5df1f152c86afa4de98af628b1a67268445b",
+    "dataset_path": "databases/h2cu/pes/h2cu_20220529_as4_forces_red_clr20240208_e0.xyz",
+    "frames": 4220,
+    "bytes": 25174977,
+    "sha256": "d4346a959558077447bdfefdcaaf66f761190ef29ad81898e6ff61a173b02a09",
+    "nomad_dataset_doi": "10.17172/NOMAD/2023.05.03-2",
+    "nomad_dataset_id": "4r6KEYExRb-lQRUtpCfL7g",
+    "explicit_barrier_labels": false,
+    "trajectory_ids_in_curated_extxyz": false,
+    "primary_split_source": "NOMAD raw entries grouped by mainfile stage/facet/result-run path; do not use curated extxyz for primary fresh scoring"
+  },
+  "prior": {
+    "name": "MACE-MP small",
+    "url": "https://github.com/ACEsuit/mace-mp/releases/download/mace_mp_0/2023-12-10-mace-128-L0_energy_epoch-249.model",
+    "bytes": 32581838,
+    "sha256": "2ddb079cee0e131eaaf6912ba581b394551ead283e95c99cfe78c605d10b5736",
+    "committed": false,
+    "device": "CPU",
+    "domain_trained_h2cu_checkpoint_excluded": true
+  },
+  "controls": [
+    "frozen common MACE-MP prior",
+    "PA301-style frozen-transfer/partial fine-tuning if executable and reproducible",
+    "shared low-rank basis plus per-surface Mirror code",
+    "same-rank native low-rank readout/code control",
+    "independent task readout/private correction upper control when feasible",
+    "domain-trained H2/Cu checkpoint diagnostic only, excluded as common prior"
+  ],
+  "development": {
+    "shared_basis_fit_stages": [
+      "1_initial_data_0_AIMD",
+      "2_initial_data_0_MD"
+    ],
+    "hyperparameter_development_stages": [
+      "3_new_datapoints_1",
+      "4_new_datapoints_2"
+    ],
+    "target_support_stage": "5_new_datapoints_3",
+    "worlds_or_seeds": [],
+    "selection_metric": "Mean per-atom energy MAE and force component MAE on held-out development run groups; select rank and shot count only here.",
+    "burned_probe": "12 curated extxyz frames previously inspected; not used in primary stage-group split.",
+    "manifest_sha256": "7be703b68660dc60ea7c9e2e323d2ddc34b633943505d6dadd8e5e472f0d82c2",
+    "selected_groups_per_facet": 8
+  },
+  "fresh": {
+    "stage": "6_new_datapoints_4",
+    "split_unit": "Whole NOMAD result-run parent groups at mainfile path /<facet>/.../1_results/<run-id>/1_forces/aims.out; group all associated entries together.",
+    "selection": "Preselect run IDs deterministically from metadata only, freeze manifest and hash before downloading any stage-6 raw files or reading metrics.",
+    "worlds_or_seeds": [],
+    "locked_before_access": true,
+    "barrier_claim_allowed": false,
+    "manifest_sha256": "7be703b68660dc60ea7c9e2e323d2ddc34b633943505d6dadd8e5e472f0d82c2",
+    "selected_groups_per_facet": 8,
+    "raw_files_opened": false
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "all shared Mirror basis tensors",
+      "per-surface m codes",
+      "bias/normalization/metadata needed for decode",
+      "native adapter/readout tensors for controls",
+      "private residuals if used"
+    ],
+    "base_checkpoint_reported_separately_and_counted_for_total_system_frontier": true
+  },
+  "compute": {
+    "report_examples_and_reference_structures": true,
+    "report_optimizer_updates": true,
+    "report_active_MAC_or_FLOP_proxy": true,
+    "report_isolated_wall_clock": true,
+    "device": "CPU"
+  },
+  "success_gate": "On a preregistered fresh reactive-region set, few-shot shared-basis adaptation improves both energy and force errors over frozen prior; is within 5% of independent-readout quality; saves >=25% actual serialized adaptation bytes versus independent readouts; and adds <=20% inference compute/wall time.",
+  "failure_gate": "No held-out quality improvement over frozen prior, failure of either energy/force gate, failure of 25% payload savings, >20% compute/time penalty, or exact same-rank native control alias (Mirror-specific attribution FAIL).",
+  "boundaries": [
+    "The primary fresh split is the NOMAD stage 6 group; never tune on it.",
+    "The curated extxyz has no trajectory IDs and is excluded from primary split/scoring.",
+    "No explicit barrier labels; report held-out energy/force errors only unless complete reference paths are independently verified.",
+    "No generalized materials/catalyst claim from H2/Cu data.",
+    "Capacity is not established by fixed-update gains."
+  ],
+  "split_manifest": {
+    "path": "runs/NOMAD_SPLIT_MANIFEST.json",
+    "sha256": "7be703b68660dc60ea7c9e2e323d2ddc34b633943505d6dadd8e5e472f0d82c2",
+    "selection_rule": "Per stage and facet, select first 8 complete result-run groups sorted by SHA256(MA-1003-v1|stage|facet|run_id), from metadata only. Stage 6 raw files and metrics unopened as of freeze.",
+    "role_group_counts": "Exact selected groups and all member entry IDs/mainfiles are recorded in manifest."
+  }
+}
