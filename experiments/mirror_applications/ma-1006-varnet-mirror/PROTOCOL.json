@@ -5,7 +5,9 @@
   "evidence_lane": "MECHANISM/STORAGE/RUNTIME",
   "base_commit": "05f2e4c72",
   "hypothesis": "After training an official fastMRI VarNet on one synthetic multi-coil scanner, tying cascade denoisers loses quality on a held-out coil-sensitivity scanner, while a per-cascade complex Givens Mirror angle over one shared denoiser recovers more quality per serialized byte than hard tying and a same-count scalar-gate control, without changing the VarNet data-consistency parameters or acquired k-space operator.",
-  "prior_art_refs": ["PA302"],
+  "prior_art_refs": [
+    "PA302"
+  ],
   "prior_code": {
     "repository": "https://github.com/facebookresearch/fastMRI.git",
     "commit": "91f2df4711adbb6d643df1810f234e4abcf5881b",
@@ -23,13 +25,20 @@
   },
   "data": {
     "type": "deterministic analytic synthetic multi-coil phantoms; mechanism-only, not clinical or fastMRI benchmark evidence",
-    "image_shape": [64, 64],
+    "image_shape": [
+      64,
+      64
+    ],
     "coils": 4,
     "acceleration": 4,
     "fully_sampled_center_lines": 8,
     "train_scanner": "A: fixed smooth coil profiles, train phantom seeds 106001..106032; first 24 train examples",
     "target_scanner": "B: shifted smooth coil amplitude and phase profiles; support seeds 106101..106108, development seeds 106201..106216",
-    "fresh_seeds": [106301, 106307, 106313],
+    "fresh_seeds": [
+      106301,
+      106307,
+      106313
+    ],
     "fresh_examples_per_seed": 8,
     "fresh_metrics_or_quality_opened": false
   },
@@ -48,12 +57,23 @@
     "adaptation_scope": "scanner sensitivity estimator and DC scalars remain frozen for all view methods; full native FT upper control may update all model parameters",
     "view_placement": "post-denoiser complex output only, before the native VarNetBlock sensitivity expansion and DC subtraction",
     "dc_invariant": "Mirror has no access to mask, acquired k-space values, or cascade dc_weight; report acquired-line residual for all methods. Native fastMRI VarNet uses learned soft DC, so exact measured-sample projection is not claimed.",
-    "primary_metrics": ["development NMSE", "development PSNR dB", "acquired k-space residual"],
+    "primary_metrics": [
+      "development NMSE",
+      "development PSNR dB",
+      "acquired k-space residual"
+    ],
     "selection": "development seeds only; freeze all weights/codes before fresh seed access"
   },
   "storage": {
     "authority": "actual serialized inference payload bytes",
-    "paid_objects": ["shared denoiser parameters", "sensitivity network", "cascade data-consistency scalars", "view angles/gates", "model/architecture metadata", "independent per-cascade weights for native control"],
+    "paid_objects": [
+      "shared denoiser parameters",
+      "sensitivity network",
+      "cascade data-consistency scalars",
+      "view angles/gates",
+      "model/architecture metadata",
+      "independent per-cascade weights for native control"
+    ],
     "base_and_total_system_bytes_reported": true
   },
   "compute": {
@@ -70,5 +90,21 @@
     "No patient data or diagnosis tasks.",
     "CPU small architecture; no full-scale VarNet latency claim.",
     "No clinical or scanner deployment claim."
-  ]
+  ],
+  "failure_gate_result": "Givens Mirror did not improve hard tying by 10%, was dominated by same-size scalar gates, and did not approach independent fine-tune quality. Fresh left sealed.",
+  "amendment_01": {
+    "reason": "The first development run exposed a control-init mismatch: independent cascades were trained first and then averaged to create the tied comparator. This is weaker than ordinary tying from initialization, so the initial screen is retained as exploratory only and a fairer rerun is frozen before the new metrics are read.",
+    "changes": [
+      "Train an independent VarNet on the same Scanner-A examples for 24 updates.",
+      "Separately initialize a VarNet with one denoiser module shared across all three cascades from initialization, then train that hard-tied model on the same Scanner-A examples for 24 updates.",
+      "Initialize hard-tied, scalar-gate and Mirror target methods from this tied-pretrained state; keep scanner sensitivity model and per-cascade DC scalars unchanged for view-only methods.",
+      "Keep independent frozen and independent target full-fine-tune controls initialized from the independently pretrained model.",
+      "Use the already fixed Scanner-B 8-shot support and 16-row development sets. Fresh seeds remain sealed."
+    ]
+  },
+  "excluded_exploratory_run": {
+    "path": "runs/DEV_LOCK_pre_amendment01.json",
+    "reason": "hard-tied model created by averaging independently trained cascades rather than ordinary tied pretraining",
+    "metrics_were_development_only": true
+  }
 }

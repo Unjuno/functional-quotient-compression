@@ -1,19 +1,24 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-1006",
+  "commit": "pending",
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "PYTHONPATH=/tmp/fastmri_official:/workspace/ma-integration/experiments/mirror_applications/ma-1006-varnet-mirror/source /tmp/ma1003env/bin/python -m pytest -q experiments/mirror_applications/ma-1006-varnet-mirror/tests; python experiments/mirror_applications/check_registry_integrity.py",
+    "passed": 3,
+    "failed": 0
   },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "exploratory_checkpoint_sha256": "bf74a90af8eed0f416eae09d34cd33f35bb7b843ef96370b841b0f721426443a",
+    "roundtrip_checked": true
   },
   "metric_replay": {
-    "checked": false,
-    "max_difference": null
+    "checked": true,
+    "max_difference": 0.0,
+    "scope": "pre-amendment exploratory screen only; excluded from final decision"
   },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Amendment 01 is pending; terminal result remains NOT ESTABLISHED.",
+    "Exploratory pre-amendment checkpoint replay is exact but excluded because hard tying was initialized by averaging independently trained cascades.",
+    "No fresh seeds or metrics opened."
+  ]
 }
