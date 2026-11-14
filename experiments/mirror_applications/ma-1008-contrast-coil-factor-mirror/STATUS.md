@@ -5,9 +5,9 @@
 - Base commit: `631e2cc0a28255fefdf2538133a5f30e849f4c59`
 - Development complete: yes
 - Fresh/audit opened: no
-- Results committed: pending
-- Verification committed: pending
-- Registry row updated: pending
+- Results committed: yes (`decd8ee37`)
+- Verification committed: yes (provenance points to evidence commit `decd8ee37`)
+- Registry row updated: yes
 
 ## Next action
 
