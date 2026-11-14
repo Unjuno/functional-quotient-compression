@@ -24,7 +24,11 @@ MA-990 official MERL RANF code was located, but the required SONICOM HRTF subjec
 
 # Worker queue
 
-## Current handoff — 2026-11-14, MA-1010
+## Current handoff — 2026-11-14, MA-1011
+
+MA-1011 is a synthetic complementary-mask MRI INR FAIL: Givens Mirror NMSE 2.646 vs 1.144 native continuous-TI conditioning; complete payload is 26,117 B, only 0.73% below FiLM. Exact replay passed; fresh sealed, no acquired MRI claim. See `ma-1011-multicontrast-inr-mirror/RESULTS.md`. Continue to P0 MA-1012 (scanner-site calibrated Mirror code).
+
+## Previous handoff — 2026-11-14, MA-1010
 
 MA-1010 is a bounded synthetic D2SA-style MRI TTA FAIL: Givens views reduce coordinate count (4 vs 72) but actual complete payload falls only 3.25% vs FiLM (5,709 vs 5,901 B). Mirror NMSE .6951 trails frozen hard sharing .6807 and independent adaptation .6790. Deterministic replay passed; fresh sealed. No acquired MRI or official D2SA reproduction. See `ma-1010-d2sa-mirror-tta/RESULTS.md`. Continue to P0 MA-1011 (multi-contrast implicit MRI decoder).
 

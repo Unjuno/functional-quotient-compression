@@ -1,0 +1,29 @@
+{
+  "experiment_id": "MA-1011",
+  "commit": "pending-evidence-commit",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-1011-multicontrast-inr-mirror/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "payload_bytes": {
+      "native_time": 24849,
+      "film": 26309,
+      "mirror": 26117,
+      "independent": 188112
+    }
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Deterministic replay has exact image metrics, payload byte totals and shared checkpoint hash.",
+    "Fresh seeds 1011007/1011013/1011019 remain unopened after the development FAIL.",
+    "Analytic synthetic MRI only; no public PA306 implementation or acquired PREDICTOM data in the workspace."
+  ]
+}

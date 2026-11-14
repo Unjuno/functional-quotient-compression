@@ -1,0 +1,96 @@
+{
+  "experiment_id": "MA-1011",
+  "title": "Multi-contrast MRI INR with compact contrast Givens views",
+  "status": "FAIL",
+  "evidence_lane": "MECHANISM/STORAGE/COMPUTE",
+  "base_commit": "60f00a01c",
+  "prior_art": {
+    "ref": "PA306",
+    "paper": "INR meets Multi-Contrast MRI Reconstruction",
+    "arxiv": "2509.04888v1",
+    "official_code": "No public code repository found in bounded search; no acquired PREDICTOM data is available in the workspace."
+  },
+  "hypothesis": "For one synthetic MPnRAGE-like slice with complementary undersampling across eight inversion contrasts, a shared spatial INR plus two learned Givens angles per contrast reconstructs all contrasts within 1% NMSE of the native continuous-TI shared INR while reducing complete payload bytes by at least 25% versus per-contrast FiLM and at least 50% versus independent INR models.",
+  "physical_object": "shared spatial implicit neural field and output head",
+  "mirror_coordinate": "two contrast-specific Givens angles rotating paired latent channels",
+  "logical_multiplicity": "eight contrast-specific logical images from shared spatial parameters",
+  "scope": "bounded analytic synthetic mechanism screen; not a reproduction of PA306 and not a patient/acquired MRI study",
+  "data": {
+    "type": "analytic synthetic inversion-recovery brain-like tissue map",
+    "shape": "24x24 pixels, 8 TI contrasts",
+    "ti_ms": [
+      100,
+      350,
+      600,
+      850,
+      1100,
+      1350,
+      1600,
+      1850
+    ],
+    "seed": 1011001,
+    "undersampling": "complementary 6/24 Cartesian phase-encode lines per contrast; 2 center lines shared; 5 lines train, 1 disjoint acquired line held out per contrast",
+    "ground_truth_use": "post-fit scoring only; no ground truth in reconstruction objective"
+  },
+  "controls": [
+    "native coordinate-conditioned shared INR using continuous normalized TI input",
+    "shared spatial INR plus per-contrast ordinary FiLM coefficients",
+    "shared spatial INR plus two learned Givens Mirror angles per contrast",
+    "eight independent per-contrast spatial INR fits"
+  ],
+  "training": {
+    "optimizer": "Adam",
+    "updates_per_method": "300 joint updates for each shared method; independent control gets 300 updates per contrast (2,400 total optimizer steps), reported as the native independent upper control.",
+    "selection": "fixed one-shot schedule; no hyperparameter adjustment after results",
+    "objective": "sum of normalized measured k-space MSE over only training lines; holdout lines used for scoring"
+  },
+  "metrics": [
+    "image NMSE and PSNR against hidden analytic truth",
+    "heldout acquired k-space residual",
+    "actual serialized full eight-contrast inference payload bytes",
+    "optimizer updates",
+    "CNN/MLP MAC proxy",
+    "wall time"
+  ],
+  "storage": {
+    "authority": "actual torch.save inference payload bytes",
+    "common_schema": "identical architecture/measurement metadata fields; charge all learned tensors and contrast codes",
+    "paid": [
+      "shared INR weights",
+      "per-contrast Mirror or FiLM coordinates",
+      "per-contrast heads for independent model",
+      "metadata"
+    ]
+  },
+  "success_gate": "Mirror relative NMSE no more than 1% worse than native continuous-TI INR; actual payload at least 25% below FiLM and 50% below independent; heldout acquired residual no more than 1.1x native.",
+  "failure_gate": "FAIL if Mirror misses quality or storage gates, loses to native coordinate conditioning at similar cost, or has worse heldout data consistency.",
+  "fresh": {
+    "worlds_or_seeds": [
+      1011007,
+      1011013,
+      1011019
+    ],
+    "locked_before_access": true,
+    "run_only_if_development_passes": true
+  },
+  "boundaries": [
+    "No acquired MRI, PREDICTOM subject data, coil maps, or clinical result.",
+    "One analytic tissue map and eight contrasts only; no anatomy generalization.",
+    "No capacity claim; one fixed synthetic development run."
+  ],
+  "failure_gate_result": "FAIL at development: Mirror NMSE 2.6464 is 131.4% worse than native continuous-TI INR (1.1438), heldout k-space RMSE .1530 vs .1338 (>1.1x gate), and complete payload 26,117 B vs 26,309 B FiLM (0.73% saving versus required 25%). Fresh remains unopened.",
+  "compute": {
+    "coordinate_samples_per_update": 4608,
+    "native_mlp_forward_mac_per_update": 24182784,
+    "shared_inr_forward_mac_per_update": 24791040,
+    "mirror_rotation_ops_proxy": "two Givens pairs per voxel per contrast, 8 contrasts; plus shared MLP",
+    "shared_updates": 300,
+    "independent_updates": 2400,
+    "wall_times_s": {
+      "native_time": 2.316359485999783,
+      "film": 2.114812032001282,
+      "mirror": 3.037159754998356,
+      "independent": 3.01753691399972
+    }
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "schema": "MA1011-dev-v1",
+  "code_sha256": "983f58776e65e05238f60f0847616e1beb356402e84f9713e1f58d65ff84bcb8",
+  "seed": 1011001,
+  "fresh_seeds": [
+    1011007,
+    1011013,
+    1011019
+  ],
+  "fresh_opened": false,
+  "training": {
+    "shared_methods_updates": 300,
+    "independent_updates": 2400,
+    "samples": 4608,
+    "mask_lines_per_contrast": 6,
+    "train_lines": 5,
+    "heldout_lines": 1
+  },
+  "results": {
+    "native_time": {
+      "nmse": 1.1438050083475904,
+      "psnr_db": 13.802351868898041,
+      "global_ssim": -0.22972899954766035,
+      "heldout_kspace_rmse": 0.13382236065808684,
+      "updates": 300,
+      "wall_s": 2.316359485999783
+    },
+    "film": {
+      "nmse": 2.7256003746977506,
+      "psnr_db": 10.03125000475663,
+      "global_ssim": -0.13968417549040169,
+      "heldout_kspace_rmse": 0.14379655523225665,
+      "updates": 300,
+      "wall_s": 2.114812032001282,
+      "code_dimensions_per_contrast": 8
+    },
+    "mirror": {
+      "nmse": 2.646416978400869,
+      "psnr_db": 10.159289065904638,
+      "global_ssim": -0.15498657245188951,
+      "heldout_kspace_rmse": 0.1529897153377533,
+      "updates": 300,
+      "wall_s": 3.037159754998356,
+      "code_dimensions_per_contrast": 2
+    },
+    "independent": {
+      "nmse": 1.1526100269299482,
+      "psnr_db": 13.769047874070788,
+      "global_ssim": 0.05607539729680866,
+      "heldout_kspace_rmse": 0.2718531754461502,
+      "updates": 2400,
+      "wall_s": 3.01753691399972
+    }
+  },
+  "payload_bytes": {
+    "native_time": 24849,
+    "film": 26309,
+    "mirror": 26117,
+    "independent": 188112
+  },
+  "wall_total_s": 12.329416057000344,
+  "checkpoint_sha256": "11c10e1f1631b21afc31a689133051fce5f297d4996e495522a04120e43d12f4"
+}
