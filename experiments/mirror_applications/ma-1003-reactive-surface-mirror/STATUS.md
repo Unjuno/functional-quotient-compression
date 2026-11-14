@@ -3,12 +3,12 @@
 - Status: FAIL (development gate; fresh sealed)
 - Branch: `research/ma-1003-reactive-surface-mirror-20261114`
 - Base commit: `6463b1676`
-- Last verified commit: pending
+- Last verified commit: `8fd5ec1d5947789bbd6686025828c4e0a075b39a`
 - Development complete: yes
 - Fresh/audit opened: no; stage-6 metadata manifest is locked but no raw files/metrics were downloaded because the development gate failed.
-- Results committed: pending commit
-- Verification committed: pending commit
-- Registry row updated: pending commit
+- Results committed: yes
+- Verification committed: yes
+- Registry row updated: yes
 
 ## Next action
 
