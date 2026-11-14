@@ -1,0 +1,22 @@
+{
+  "experiment_id": "MA-1009",
+  "commit": "pending-evidence-commit",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-1009-dune-representation-chart/tests",
+    "passed": 5,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Replay via source/verify_result.py: payload hashes exact; checkpoint tensors roundtrip exactly; maximum acquired-sample residual 0; fresh seeds 1009301/1009307/1009313 remain unopened.",
+    "Synthetic analytic phantom mechanism screen only; no acquired MRI, DUNE checkpoint, or clinical claim."
+  ]
+}

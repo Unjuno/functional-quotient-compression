@@ -1,0 +1,43 @@
+{
+  "protocol": "MA-1009 initial development run, invalid for prior-quality attribution",
+  "reason": "Four coils times 14 of 32 phase-encode lines creates 1792 complex measurement samples for a 1024-complex-pixel image; the SENSE operator fully determined these synthetic cases and the final projection alone recovered near-zero image error. Preserve as an operator-degeneracy diagnostic; exclude all these metrics from the MA decision. Fresh stayed sealed.",
+  "development_metrics": {
+    "native_shared_dune": {
+      "nmse": 9.251350414907211e-10,
+      "psnr_db": 105.19123983383179,
+      "global_ssim": 0.9999999590218067,
+      "sample_residual": 1.1161371951118326e-06,
+      "seconds": 0.03282764812502137,
+      "n": 16,
+      "wall_total_seconds": 0.5386722499988537
+    },
+    "ordinary_latent_film": {
+      "nmse": 7.813916215460015e-10,
+      "psnr_db": 106.00381374359131,
+      "global_ssim": 0.9999999925494194,
+      "sample_residual": 1.0542576873717735e-06,
+      "seconds": 0.0323362173123769,
+      "n": 16,
+      "wall_total_seconds": 0.5286755670003913
+    },
+    "latent_givens_mirror": {
+      "nmse": 9.678727194706305e-10,
+      "psnr_db": 105.22090291976929,
+      "global_ssim": 1.000000011175871,
+      "sample_residual": 1.1279349436676966e-06,
+      "seconds": 0.03434116193807313,
+      "n": 16,
+      "wall_total_seconds": 0.5602185030002147
+    },
+    "independent_scanner_b_finetune": {
+      "nmse": 3.260925080308952e-10,
+      "psnr_db": 110.2608733177185,
+      "global_ssim": 0.9999999962747097,
+      "sample_residual": 6.977311954869947e-07,
+      "seconds": 0.03271738431271842,
+      "n": 16,
+      "wall_total_seconds": 0.535287328000777
+    }
+  },
+  "fresh_opened": false
+}

@@ -1,0 +1,47 @@
+{
+  "protocol": "MA-1009 amendment 04 output; incomplete as image-space exact projection",
+  "reason": "Hard measured-sample replacement was followed by SENSE adjoint. It gave zero projected-kspace residual but returned images re-encoded with relative residual about 0.069. This did not satisfy an exact image-space measurement projection. Preserve these metrics as exploratory; they are excluded from the amended decision. Fresh stayed sealed.",
+  "metrics": {
+    "native_shared_dune": {
+      "nmse": 0.05872752773575485,
+      "psnr_db": 26.862403869628906,
+      "global_ssim": 0.9532484710216522,
+      "sample_residual": 0.0,
+      "image_reencoded_residual": 0.06879169144667685,
+      "seconds": 0.002076079562357336,
+      "n": 16,
+      "wall_total_seconds": 0.04649523499938368
+    },
+    "ordinary_latent_film": {
+      "nmse": 0.059808066580444574,
+      "psnr_db": 26.780826330184937,
+      "global_ssim": 0.9514716826379299,
+      "sample_residual": 0.0,
+      "image_reencoded_residual": 0.0693915190640837,
+      "seconds": 0.0019846344372353997,
+      "n": 16,
+      "wall_total_seconds": 0.04287525700055994
+    },
+    "latent_givens_mirror": {
+      "nmse": 0.05866257264278829,
+      "psnr_db": 26.867332577705383,
+      "global_ssim": 0.9533688388764858,
+      "sample_residual": 0.0,
+      "image_reencoded_residual": 0.06875185528770089,
+      "seconds": 0.0034438026250427356,
+      "n": 16,
+      "wall_total_seconds": 0.06719206199886685
+    },
+    "independent_scanner_b_finetune": {
+      "nmse": 0.06296939263120294,
+      "psnr_db": 26.54902184009552,
+      "global_ssim": 0.9462439380586147,
+      "sample_residual": 0.0,
+      "image_reencoded_residual": 0.07008929830044508,
+      "seconds": 0.0016146028748380559,
+      "n": 16,
+      "wall_total_seconds": 0.036807587999646785
+    }
+  },
+  "fresh_opened": false
+}

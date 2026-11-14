@@ -1,0 +1,47 @@
+{
+  "protocol": "MA-1009 amendment 03 output; invalid for prior attribution",
+  "reason": "The projection helper fed an already-masked predicted k-space into torch.where, forcing all unmeasured frequencies to zero. Therefore the returned SENSE image was independent of the latent prior; all four development metrics were identical. Preserve as an implementation-failure record and exclude from decision. Fresh stayed sealed.",
+  "metrics": {
+    "native_shared_dune": {
+      "nmse": 0.05532241496257484,
+      "psnr_db": 27.12789821624756,
+      "global_ssim": 0.9615230821073055,
+      "sample_residual": 0.0,
+      "image_reencoded_residual": 0.06644938560202718,
+      "seconds": 0.001633825375165543,
+      "n": 16,
+      "wall_total_seconds": 0.03897756600053981
+    },
+    "ordinary_latent_film": {
+      "nmse": 0.05532241496257484,
+      "psnr_db": 27.12789821624756,
+      "global_ssim": 0.9615230821073055,
+      "sample_residual": 0.0,
+      "image_reencoded_residual": 0.06644938560202718,
+      "seconds": 0.0018499916875498457,
+      "n": 16,
+      "wall_total_seconds": 0.0407680429998436
+    },
+    "latent_givens_mirror": {
+      "nmse": 0.05532241496257484,
+      "psnr_db": 27.12789821624756,
+      "global_ssim": 0.9615230821073055,
+      "sample_residual": 0.0,
+      "image_reencoded_residual": 0.06644938560202718,
+      "seconds": 0.0022715541247180226,
+      "n": 16,
+      "wall_total_seconds": 0.046422625999184675
+    },
+    "independent_scanner_b_finetune": {
+      "nmse": 0.05532241496257484,
+      "psnr_db": 27.12789821624756,
+      "global_ssim": 0.9615230821073055,
+      "sample_residual": 0.0,
+      "image_reencoded_residual": 0.06644938560202718,
+      "seconds": 0.0016871978748440597,
+      "n": 16,
+      "wall_total_seconds": 0.03796068900010141
+    }
+  },
+  "fresh_opened": false
+}

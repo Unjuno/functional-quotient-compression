@@ -1,0 +1,180 @@
+{
+  "experiment_id": "MA-1009",
+  "title": "DUNE latent-prior scanner Mirror chart",
+  "status": "FAIL",
+  "evidence_lane": "MECHANISM/STORAGE/COMPUTE",
+  "base_commit": "db8f25f35",
+  "hypothesis": "On a synthetic scanner-shift reconstruction task, one Givens chart inside the DUNE latent regularizer improves held-out scanner-B reconstruction beyond native shared DUNE and byte-near FiLM while leaving exact decoder-VJP data consistency and final measurement projection unchanged.",
+  "prior_art_refs": [
+    "PA304",
+    "PA302"
+  ],
+  "prior_art": {
+    "paper": "Deep Unrolled Networks in Representation Space Applied to MRI Reconstruction",
+    "arxiv": "https://arxiv.org/abs/2606.21602",
+    "official_repository": "https://github.com/EfeIlicak/DUNE",
+    "observed_commit": "8e62d1b9ca193060d09f5ac4e866dc4a6af28347",
+    "repo_status": "Public repository contains README only at observed commit; author says code will be available upon publication; no source license or checkpoints observed; implementation independently follows paper Eqs. 5, 6, 8."
+  },
+  "model": {
+    "representation": "4-channel learned feature representation from 2-channel complex SENSE image; shared 1x1 encoder and decoder",
+    "regularizer": "shared residual 4->8->4 CNN, 3 latent steps",
+    "data_consistency": "DUNE exact decoder VJP for A^H(A(D(z))-y) at each latent step. Final output is the orthogonal image-space projection onto A(x)=y, computed with a deterministic QR factorization of the explicit complex SENSE operator. The same sensitivity map, mask, operator factorization, and solve apply to every method; acquired-sample residual is measured by re-encoding the returned image.",
+    "device": "CPU",
+    "mirror_insertion": "scanner-B code is a Givens angle on latent channel pairs (0,1) and (2,3), conjugating only shared latent regularizer R_m(z)=T(-m)R(T(m)z). Encoder, decoder, forward operator, VJP, QR image-space projection, mask, coil maps, and data are unchanged."
+  },
+  "data": {
+    "type": "analytic synthetic complex phantoms with two smooth coils; no acquired MRI",
+    "shape": [
+      32,
+      32
+    ],
+    "scanner_a_source_seeds": [
+      1009001,
+      1009002,
+      1009003,
+      1009004,
+      1009005,
+      1009006,
+      1009007,
+      1009008,
+      1009009,
+      1009010,
+      1009011,
+      1009012,
+      1009013,
+      1009014,
+      1009015,
+      1009016,
+      1009017,
+      1009018,
+      1009019,
+      1009020,
+      1009021,
+      1009022,
+      1009023,
+      1009024
+    ],
+    "scanner_b_support_seeds": [
+      1009101,
+      1009102,
+      1009103,
+      1009104,
+      1009105,
+      1009106,
+      1009107,
+      1009108
+    ],
+    "scanner_b_development_seeds": [
+      1009201,
+      1009202,
+      1009203,
+      1009204,
+      1009205,
+      1009206,
+      1009207,
+      1009208,
+      1009209,
+      1009210,
+      1009211,
+      1009212,
+      1009213,
+      1009214,
+      1009215,
+      1009216
+    ],
+    "fresh_seeds": [
+      1009301,
+      1009307,
+      1009313
+    ],
+    "fresh_opened": false,
+    "mask": "4x Cartesian with eight center lines",
+    "scanner_shift": "known analytic coil sensitivity amplitude/phase shift; maps supplied as explicit forward operator; no shift is hidden from A",
+    "coils": 2,
+    "operator_rank_note": "2 coils x 14 sampled phase-encode lines x 32 readouts = 896 complex measurements < 1024 complex image unknowns, so the inverse problem remains underdetermined."
+  },
+  "controls": [
+    "native shared DUNE latent prior, frozen on scanner B",
+    "same DUNE plus scanner-specific latent FiLM scale+bias (8 coefficients)",
+    "DUNE plus scanner-specific latent Givens Mirror angle (1 coefficient)",
+    "full independent scanner-B fine-tune upper control"
+  ],
+  "training": {
+    "source_examples": 24,
+    "source_updates": 48,
+    "target_support_examples": 8,
+    "view_adaptation_updates": 48,
+    "upper_finetune_updates": 48,
+    "optimizer": "Adam lr=0.001",
+    "selection": "one frozen architecture, no hyperparameter tuning; scanner-B support only updates Mirror/FiLM codes or full upper control; dev remains separate"
+  },
+  "metrics": [
+    "complex image NMSE",
+    "magnitude PSNR",
+    "global SSIM",
+    "measured k-space residual after projection",
+    "actual serialized inference payload bytes",
+    "CPU update and per-case wall time",
+    "forward/VJP/CG operation counts"
+  ],
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "report": "base DUNE payload; added scanner-B code payload; total two-scanner deployment payload compared with base plus independent full scanner-B model",
+    "paid": [
+      "encoder/decoder/regularizer weights",
+      "scanner code",
+      "operator and architecture metadata",
+      "CG iteration count",
+      "dtype and normalization metadata"
+    ],
+    "comparison": "Serialize all alternatives with the same outer keys, architecture/operator metadata, dtype and deployment labels; only the paid model/code tensor structure differs. Measure complete torch.save inference/deployment payloads."
+  },
+  "success_gate": "Mirror improves dev NMSE at least 5% versus native shared DUNE and same-model FiLM, is within 10% of independent scanner-B fine-tune, saves at least 20% total serialized bytes against two independent scanner models, and projected acquired-sample residual <=1e-5.",
+  "failure_gate": "Mirror misses the quality or storage gate, fails the measurement residual gate, or changes the decoder VJP/forward/projection path.",
+  "fresh": {
+    "worlds_or_seeds": [
+      1009301,
+      1009307,
+      1009313
+    ],
+    "locked_before_access": true,
+    "run_only_if_development_passes": true
+  },
+  "boundaries": [
+    "Synthetic mechanism only; no fastMRI, prototype scanner, patient, or clinical claim.",
+    "One coil-map shift and one train/dev split.",
+    "Repo has no released implementation/checkpoint at pinned observed commit; independently implemented from equations."
+  ],
+  "compute": {
+    "source_updates": 48,
+    "view_updates": 48,
+    "per_scan_update_examples": 8,
+    "report_inference_fft_calls": true,
+    "report_wall_clock": true,
+    "projection": "Operator QR factorization is reported as one-time wall and ephemeral bytes per unique sensitivity-map/mask pair; per-case inference timing starts after cache warmup and uses the same cached factors.",
+    "projection_qr_state_bytes_reported": true
+  },
+  "amendment_01": {
+    "reason": "Pre-metric operator test found 12 CG steps left relative acquired-sample residual 8.12e-2, failing registered 1e-5 gate. Increased common projection iterations to 256 (residual <1e-5 on fixed test) before training/evaluating any model; identical for all arms."
+  },
+  "amendment_02": {
+    "reason": "The initial four-coil case had 1792 complex samples for 1024 complex image unknowns, so strict projection itself recovered the target and made the prior comparison non-identifying. Before any corrected quality run, reduce to two explicit coils: same 14 sampled lines now gives 896 < 1024 measurements. Preserve initial metrics separately as invalid; reuse fixed source/support/dev seed lists; fresh remains sealed."
+  },
+  "amendment_03": {
+    "reason": "With the underdetermined two-coil A, object-space CG projection did not achieve the registered tolerance robustly (relative residual 2.7e-4 and then rose with iterations). Replace it with exact orthogonal projection in measured k-space: measured entries are set to y exactly, unmeasured entries remain the prior prediction; report the image re-encoded residual separately. This is identical for all conditions and is frozen before corrected quality results."
+  },
+  "amendment_04": {
+    "reason": "Amendment 03 development metrics were identical because the k-space projection helper used a masked forward prediction, setting every unmeasured coefficient to zero before the projection. This masked the latent prior output. Preserve those invalid metrics. Before the corrected rerun, use the unmasked SENSE/FFT prediction for unacquired coefficients, replace only acquired coefficients by measured y, and apply the same SENSE adjoint. No fresh examples were accessed."
+  },
+  "amendment_05": {
+    "reason": "Amendment 04 had zero projected k-space residual but the SENSE-adjoint image re-encoded with 6.9% residual, so it did not meet the exact image-space projection requirement. Before corrected metrics, use QR of A^H to compute the orthogonal projection x + Q(R^H)^-1(y-Ax); this is stable for the underdetermined full-row-rank operator and preserves the nullspace component. No fresh data accessed."
+  },
+  "amendment_06": {
+    "reason": "The first quality run timed the one-time scanner-B QR construction only in the first method, making native per-case latency incomparable to later methods. Before the final replay, warm/cache the same operator factorization before timing every method, report one-time QR construction separately, and measure cached per-case latency. No model weights, codes, quality metrics, or seeds change."
+  },
+  "failure_gate_result": "FAIL: Mirror improves NMSE only 0.00060216% vs native shared and 0.00347974% vs FiLM, below 5% threshold. With uniform serialization, complete two-scanner payloads are 5,965 B hard shared, 6,217 B Mirror, 6,469 B FiLM, and 10,419 B independent. Mirror adds 252 B over hard sharing at effectively tied quality; fresh remains sealed.",
+  "amendment_07": {
+    "reason": "The interim byte audit revealed nonuniform metadata/container framing between standalone models and multi-scanner deployment objects. Before finalizing storage results, use a shared serialization schema with identical architecture/operator metadata and top-level keys for hard-shared, Mirror, FiLM, and independent two-scanner deployments; only paid model/code tensors differ. No quality metrics or model choices change; fresh remains sealed."
+  }
+}

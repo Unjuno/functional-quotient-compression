@@ -1,0 +1,32 @@
+{
+  "protocol": "MA-1009 serialization pre-amendment 07; not used for final byte decision",
+  "reason": "Single-model and two-scanner deployment byte objects used different metadata wrappers. Preserve previous measured sizes, but the final comparison will reserialize all deployment alternatives through the same keys and metadata framing. Quality metrics are unaffected.",
+  "payloads": {
+    "native_shared_dune": {
+      "bytes": 6029,
+      "sha256": "acafb9da8006056397dd9e7bf8693ed031b113380e4304db85ded24a8760f255"
+    },
+    "ordinary_latent_film": {
+      "bytes": 6533,
+      "sha256": "57d9f19bee36692fd8acfbb0437296bbbc760c2cf622b0fdc737570002494e93"
+    },
+    "latent_givens_mirror": {
+      "bytes": 6281,
+      "sha256": "e9ea1e05502c01863a28f133bfa8e8fe5518d8ecba6c70a32ecc081b409befd4"
+    },
+    "independent_scanner_b_finetune": {
+      "bytes": 6605,
+      "sha256": "0f52c7d8577943f4d8af67955f3623254687ea3766ec88494084ae697168f5d2"
+    }
+  },
+  "deployment_payloads": {
+    "shared_source_model_bytes": 6029,
+    "source_only_two_scanner_hard_shared_bytes": 5709,
+    "source_plus_scanner_b_mirror_code_bytes": 5961,
+    "source_plus_scanner_b_film_bytes": 6213,
+    "source_plus_independent_scanner_b_model_bytes": 10099,
+    "mirror_saving_vs_independent_fraction": 0.40974353896425386,
+    "film_saving_vs_independent_fraction": 0.3847905733240915
+  },
+  "fresh_opened": false
+}

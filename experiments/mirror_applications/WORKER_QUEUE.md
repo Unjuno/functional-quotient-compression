@@ -24,7 +24,11 @@ MA-990 official MERL RANF code was located, but the required SONICOM HRTF subjec
 
 # Worker queue
 
-## Current handoff — 2026-11-14, MA-1008
+## Current handoff — 2026-11-14, MA-1009
+
+MA-1009 is a bounded synthetic DUNE-z scanner-view FAIL: the Givens code improves NMSE only 0.000602% vs native hard sharing and adds 252 B, failing the frozen 5% gate. Exact replay/data consistency pass; fresh sealed and no acquired MRI claim. See `ma-1009-dune-representation-chart/RESULTS.md`. Continue to P0 MA-1010 (D2SA slice-distribution Mirror-only TTA).
+
+## Previous handoff — 2026-11-14, MA-1008
 
 MA-1008 is a bounded synthetic FAIL: on a 3x3 contrast-coil grid with (2,2) withheld, the five-coordinate Givens chart misses the matched scalar quality gate and has the same actual serialized bytes as the eight-code bank. Fresh remains sealed; no acquired MRI claim. See `ma-1008-contrast-coil-factor-mirror/RESULTS.md`. Continue to P0 MA-1009 (DUNE representation-chart scanner View).
 
