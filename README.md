@@ -13,6 +13,8 @@ The previous Phase-I README remains preserved verbatim in [the Phase I snapshot]
 
 ## Start here
 
+- [**2026-11-15 A1–A5 conditional function capacity experiments**](experiments/mirror_capacity/README.md) — new CPU synthetic evidence, including negative results and reproducible A5 code. These do not establish a general Mirror-native compression benefit.
+
 - [**Phase II research state through MN010**](docs/phase2/RESEARCH_STATE_THROUGH_MN010.md)
 - [**Global Dense Mirror architecture**](docs/phase2/GLOBAL_DENSE_MIRROR_ARCHITECTURE.md)
 - [**MN011 pre-registered breadth × count plan**](experiments/mirror_native/MN011_PLAN.md)
