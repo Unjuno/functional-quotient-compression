@@ -22,7 +22,8 @@
     "nomad_dataset_id": "4r6KEYExRb-lQRUtpCfL7g",
     "explicit_barrier_labels": false,
     "trajectory_ids_in_curated_extxyz": false,
-    "primary_split_source": "NOMAD raw entries grouped by mainfile stage/facet/result-run path; do not use curated extxyz for primary fresh scoring"
+    "primary_split_source": "NOMAD raw entries grouped by mainfile stage/facet/result-run path; do not use curated extxyz for primary fresh scoring",
+    "primary_composition": "Cu54H2 only (56 atoms); exclude other composition before scoring under this locked rule"
   },
   "prior": {
     "name": "MACE-MP small",
@@ -100,5 +101,20 @@
     "sha256": "7be703b68660dc60ea7c9e2e323d2ddc34b633943505d6dadd8e5e472f0d82c2",
     "selection_rule": "Per stage and facet, select first 8 complete result-run groups sorted by SHA256(MA-1003-v1|stage|facet|run_id), from metadata only. Stage 6 raw files and metrics unopened as of freeze.",
     "role_group_counts": "Exact selected groups and all member entry IDs/mainfiles are recorded in manifest."
+  },
+  "amendment_01": {
+    "date": "2026-11-14",
+    "reason": "NOMAD raw FHI-aims total energies include a large pseudopotential reference zero; first raw development file was parsed only to validate format, with no metrics selected.",
+    "changes": [
+      "Primary records are restricted to 56-atom Cu54H2 structures so composition is fixed.",
+      "A shared scalar energy offset is fitted using only basis-fit stages 1-2 and paid in all controls/candidate payloads; force labels remain unchanged.",
+      "Energy quality is reported both total-energy MAE per atom after that fixed offset and energy-difference MAE relative to the stage-1/2 mean.",
+      "The one downloaded stage-3 development file is retained as development data; no stage-6 files or metrics accessed."
+    ]
+  },
+  "energy_calibration": {
+    "method": "one shared scalar residual-energy offset fitted on stage-1/2 56-atom development structures only",
+    "paid_in_payload": true,
+    "also_report": "energy-difference MAE relative to stage-1/2 DFT mean"
   }
 }
