@@ -149,5 +149,38 @@
       "Remove exact-geometry deduplication claim because fresh coordinates remain sealed. Old-index windows are disjoint by construction.",
       "Record that the split was not locked before metadata access, but was locked before any quality or metric access."
     ]
+  },
+  "amendment_03": {
+    "date": "2026-11-14",
+    "reason": "After inspecting the frozen 8-shot baseline on development data, freeze a bounded implementation screen before opening adaptation-method metrics. This is development-set model selection and does not replace the registered full-control success gate.",
+    "changes": [
+      "Use the final nonlinear MACE readout weight vector (16 float64 values) as the only adapted parameter slice for a CPU feasibility screen.",
+      "Fit one source delta per benzene/toluene/naphthalene using the first eight hash-ordered source rows, 3 epochs (24 force-only updates per source).",
+      "Build a centered rank-2 SVD basis from those three source deltas; fit an 8-shot uracil code for 24 force-only updates.",
+      "Compare rank-2 code, rank-2 plus four support-gradient-selected private readout coordinates (24 updates), and a direct 16-coordinate uracil readout update (24 updates).",
+      "Evaluate force-component MAE on the fixed 128-row development set, one seed 100401. Fresh remains sealed. This screen does not test PA300 full EquiSparseDeltaSTR, the full fine-tune upper control, or energy quality; a promising result requires a new locked multi-seed control stage."
+    ]
+  },
+  "screening_subprotocol_03": {
+    "seed": 100401,
+    "source_rows_per_task": 8,
+    "source_epochs": 3,
+    "source_updates_per_task": 24,
+    "target_support_shots": 8,
+    "target_epochs": 3,
+    "target_updates_per_method": 24,
+    "adapted_slice": "MACE-MP small final nonlinear readout linear_2.weight, 16 float64 entries",
+    "primary_metric": "development force-component MAE (eV/A)",
+    "methods": [
+      "rank-2 source-SVD molecule code",
+      "rank-2 plus four support-gradient-selected private coordinates",
+      "direct 16-coordinate readout update"
+    ],
+    "excluded_claims": [
+      "no capacity claim",
+      "no fresh result",
+      "no full-model or PA300 comparison",
+      "no energy-quality result in this screen"
+    ]
   }
 }

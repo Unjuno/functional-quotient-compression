@@ -1,1 +1,6 @@
 condition,world_or_seed,method,serialized_bytes,train_tokens_or_examples,optimizer_updates,active_compute_proxy,wall_time_s,primary_metric,primary_value,secondary_metric,secondary_value,status_note
+MA-1004,100401,frozen MACE-MP; 8-shot energy offset,32581838,8,0,,,dev_force_component_MAE_eV_A,0.254951,dev_energy_MAE_eV_atom,0.006158,development only
+MA-1004,100401,single scalar force-scale gate,32583795,8,0,,,dev_force_component_MAE_eV_A,0.24178,dev_energy_MAE_eV_atom,0.006341,development only; energy offset refit; timing not compared
+MA-1004,100401,rank-2 source-SVD Mirror code,32584303,8,24,,,dev_force_component_MAE_eV_A,0.254876,adaptation_payload_B,2465,development only; energy not measured
+MA-1004,100401,rank-2 plus four private coordinates,32584935,8,24,,,dev_force_component_MAE_eV_A,0.24943,adaptation_payload_B,3097,development only; energy not measured
+MA-1004,100401,direct 16-coordinate readout update,32583607,8,24,,,dev_force_component_MAE_eV_A,0.243877,adaptation_payload_B,1769,development only; energy not measured

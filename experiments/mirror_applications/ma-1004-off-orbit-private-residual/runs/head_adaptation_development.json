@@ -1,0 +1,75 @@
+{
+  "experiment_id": "MA-1004",
+  "role": "development screening; no fresh quality access",
+  "data": "rMD17 CC0",
+  "prior": "MACE-MP small",
+  "seed": 100401,
+  "target_support_shots": 8,
+  "development_rows": 128,
+  "source_basis_rows_per_molecule": 8,
+  "source_training": {
+    "benzene": {
+      "updates": 24,
+      "last_force_mse": 0.026646315124326286
+    },
+    "toluene": {
+      "updates": 24,
+      "last_force_mse": 0.04773817649635946
+    },
+    "naphthalene": {
+      "updates": 24,
+      "last_force_mse": 0.07256705505914429
+    }
+  },
+  "rank": 2,
+  "basis_sha256": "edc369e7075b24c36a0359bfcde0aff69d6e2da635419f45f0498db9b542246f",
+  "target_updates": 24,
+  "private_residual_coordinates": 4,
+  "private_mask_indices": [
+    3,
+    5,
+    9,
+    11
+  ],
+  "development": {
+    "mirror_rank2": {
+      "dev_force_component_mae_eV_A": 0.2548760775329293,
+      "dev_rows": 128,
+      "adaptation_updates": 24,
+      "seconds_inference_mean": 0.113562005109344
+    },
+    "mirror_plus_top4_private": {
+      "dev_force_component_mae_eV_A": 0.24943019528105934,
+      "dev_rows": 128,
+      "adaptation_updates": 24,
+      "seconds_inference_mean": 0.13097288891405867
+    },
+    "direct_16_readout": {
+      "dev_force_component_mae_eV_A": 0.24387744984724247,
+      "dev_rows": 128,
+      "adaptation_updates": 24,
+      "seconds_inference_mean": 0.11350736271093353
+    }
+  },
+  "payloads": {
+    "mirror_rank2": {
+      "serialized_bytes": 2465,
+      "sha256": "9405a0ae323db1bebc4be5a5f603c5a8fac5a53714106c1c8a80f6956437f076"
+    },
+    "mirror_plus_top4_private": {
+      "serialized_bytes": 3097,
+      "sha256": "1b576d61fe4c738f29a1656753a9fed1f97920c93b834bcd5f6decea50686337"
+    },
+    "direct_16_readout": {
+      "serialized_bytes": 1769,
+      "sha256": "fa8813047626799f999e4d16ed7544bfae9f1d2e8c6229f56bc418df70de2c97"
+    }
+  },
+  "train_wall_s": 85.22644032000062,
+  "fresh_rows_accessed": false,
+  "notes": [
+    "Force-only last-readout adaptation feasibility screen. Energy is not reported in this script.",
+    "direct_16_readout is a matched low-dimensional sparse-head control, not PA300 full EquiSparseDeltaSTR or full-model fine-tuning.",
+    "Mirror and native rank-2 factorization are the same parameterization here; any equivalent scores do not support a Mirror-specific claim."
+  ]
+}

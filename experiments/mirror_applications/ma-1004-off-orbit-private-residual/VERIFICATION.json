@@ -2,13 +2,14 @@
   "experiment_id": "MA-1004",
   "commit": "pending",
   "tests": {
-    "command": "pending",
-    "passed": 0,
+    "command": "/tmp/ma1003env/bin/python -m unittest discover -s experiments/mirror_applications/ma-1004-off-orbit-private-residual/tests -v; python experiments/mirror_applications/check_registry_integrity.py",
+    "passed": 2,
     "failed": 0
   },
   "serialization": {
     "roundtrip_checked": false,
-    "byte_exact": false
+    "byte_exact": false,
+    "measured_actual_torch_save_payloads": true
   },
   "metric_replay": {
     "checked": false,
@@ -16,8 +17,9 @@
   },
   "fresh_split_integrity_checked": true,
   "notes": [
-    "SCREENING setup only; no adaptation metrics or serialized inference payload.",
-    "Uracil tensor shard was deserialized solely to read old_indices metadata for split locking. No uracil coordinates, energy/force labels, losses, or quality metrics were inspected.",
-    "Split metadata was accessed before final protocol lock; the split was locked before any quality or metric access."
+    "Bounded development screen FAIL; 8-shot support and 128 fixed development rows only.",
+    "Official PA300 wrapper completed a force forward, but no PA300 training/convergence metrics were run. Full-model fine-tune and adapted energy quality were not run.",
+    "Fresh uracil rows remain sealed; no fresh metrics were accessed.",
+    "Actual torch.save payload byte counts/hashes for the screen are recorded in runs/head_adaptation_development.json."
   ]
 }
