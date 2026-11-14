@@ -1,0 +1,46 @@
+{
+  "experiment_id": "MA-1008",
+  "commit": null,
+  "tests": {
+    "command": "PYTHONPATH=/tmp/fastmri_official python -m pytest -q experiments/mirror_applications/ma-1008-contrast-coil-factor-mirror/tests",
+    "passed": 4,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "inference_payload_bytes": {
+      "hard_shared_frozen": 9877,
+      "factorized_scalar_film": 10193,
+      "factorized_givens_mirror": 10193,
+      "direct_pair_givens_target_adapt": 10129,
+      "independent_target_finetune": 9877
+    },
+    "matched_bank_payloads": {
+      "direct_eight_pair_givens_bank": {
+        "bytes": 10129,
+        "sha256": "378e03e0c251028fa4a4ba8cd2b0a985f67be4f51fdf26898829e05b0a768551"
+      },
+      "shared_prior_plus_five_factor_givens": {
+        "bytes": 10129,
+        "sha256": "08965e9d623a04421657950029c6c83dcfd83be8b8c09b9b75ecf7976effd44b"
+      },
+      "compression_fraction": 0.0
+    }
+  },
+  "metric_replay": {
+    "checked": true,
+    "command": "PYTHONPATH=/tmp/fastmri_official python experiments/mirror_applications/ma-1008-contrast-coil-factor-mirror/source/verify_result.py",
+    "max_difference": 0.0,
+    "code_sha256": "f38587ed79f4a5c25fc55901362590e08c7329ab5e88a76ca81fc95b0d04f0c3"
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_opened": false,
+  "notes": [
+    "Amendment 01 is the decision-bearing run; amendment 00 is separately preserved exploratory output.",
+    "Metric replay exact on CPU; serialized payload hashes/bytes matched across rerun.",
+    "Checkpoint tensor roundtrip exact.",
+    "No fresh seed artifacts generated.",
+    "Synthetic-only mechanism screen; no fastMRI acquisition or clinical claim."
+  ]
+}

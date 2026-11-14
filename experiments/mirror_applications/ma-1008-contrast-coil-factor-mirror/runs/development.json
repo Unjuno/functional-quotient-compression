@@ -1,0 +1,331 @@
+{
+  "protocol": "MA-1008 amendment 01; development only; one heldout cell (contrast 2, coil 2)",
+  "source_pretrain": {
+    "updates": 240,
+    "examples_seen": 240,
+    "trainable_parameters": 1760,
+    "wall_seconds": 0.274076020999928
+  },
+  "observed_pair_code_fits": {
+    "givens_0_0": {
+      "updates": 80,
+      "examples_seen": 80,
+      "trainable_parameters": 1,
+      "wall_seconds": 0.07915141999910702
+    },
+    "givens_0_1": {
+      "updates": 80,
+      "examples_seen": 80,
+      "trainable_parameters": 1,
+      "wall_seconds": 0.0813196400013112
+    },
+    "givens_0_2": {
+      "updates": 80,
+      "examples_seen": 80,
+      "trainable_parameters": 1,
+      "wall_seconds": 0.07947560799948405
+    },
+    "givens_1_0": {
+      "updates": 80,
+      "examples_seen": 80,
+      "trainable_parameters": 1,
+      "wall_seconds": 0.07823227099834185
+    },
+    "givens_1_1": {
+      "updates": 80,
+      "examples_seen": 80,
+      "trainable_parameters": 1,
+      "wall_seconds": 0.07613176799895882
+    },
+    "givens_1_2": {
+      "updates": 80,
+      "examples_seen": 80,
+      "trainable_parameters": 1,
+      "wall_seconds": 0.08350286400127516
+    },
+    "givens_2_0": {
+      "updates": 80,
+      "examples_seen": 80,
+      "trainable_parameters": 1,
+      "wall_seconds": 0.08064925799953926
+    },
+    "givens_2_1": {
+      "updates": 80,
+      "examples_seen": 80,
+      "trainable_parameters": 1,
+      "wall_seconds": 0.07742451699959929
+    },
+    "scalar_0_0": {
+      "updates": 80,
+      "examples_seen": 80,
+      "trainable_parameters": 1,
+      "wall_seconds": 0.06705446700107132
+    },
+    "scalar_0_1": {
+      "updates": 80,
+      "examples_seen": 80,
+      "trainable_parameters": 1,
+      "wall_seconds": 0.07025085600071179
+    },
+    "scalar_0_2": {
+      "updates": 80,
+      "examples_seen": 80,
+      "trainable_parameters": 1,
+      "wall_seconds": 0.06777801899988845
+    },
+    "scalar_1_0": {
+      "updates": 80,
+      "examples_seen": 80,
+      "trainable_parameters": 1,
+      "wall_seconds": 0.07040692400005355
+    },
+    "scalar_1_1": {
+      "updates": 80,
+      "examples_seen": 80,
+      "trainable_parameters": 1,
+      "wall_seconds": 0.07197734299916192
+    },
+    "scalar_1_2": {
+      "updates": 80,
+      "examples_seen": 80,
+      "trainable_parameters": 1,
+      "wall_seconds": 0.06794525999976031
+    },
+    "scalar_2_0": {
+      "updates": 80,
+      "examples_seen": 80,
+      "trainable_parameters": 1,
+      "wall_seconds": 0.06444577000002027
+    },
+    "scalar_2_1": {
+      "updates": 80,
+      "examples_seen": 80,
+      "trainable_parameters": 1,
+      "wall_seconds": 0.067492296000637
+    }
+  },
+  "factorization": {
+    "givens": {
+      "pair_values": {
+        "0,0": 0.02745903469622135,
+        "0,1": 0.010505891405045986,
+        "0,2": -0.04829099401831627,
+        "1,0": 0.018048115074634552,
+        "1,1": -0.009165136143565178,
+        "1,2": -0.049121301621198654,
+        "2,0": 0.04039691016077995,
+        "2,1": 0.010819845832884312
+      },
+      "factor_coordinates": [
+        0.028987928526476008,
+        -0.009970751591026769,
+        0.008911025943234561,
+        -0.02458115294575693,
+        -0.07270870055072008
+      ],
+      "source_pair_fit_wall_seconds": 0.6358873459976166,
+      "source_pair_fit_updates": 640
+    },
+    "scalar": {
+      "pair_values": {
+        "0,0": -0.021609991788864136,
+        "0,1": 0.012540893629193306,
+        "0,2": 0.037877682596445084,
+        "1,0": -0.01081796269863844,
+        "1,1": 0.006493871100246906,
+        "1,2": 0.035160042345523834,
+        "2,0": -0.017245609313249588,
+        "2,1": 0.0015242273220792413
+      },
+      "factor_coordinates": [
+        -0.015391617799953872,
+        0.0006757887701193538,
+        -0.004174499171009907,
+        0.023410851950757216,
+        0.051572585885878666
+      ],
+      "source_pair_fit_wall_seconds": 0.5473509350013046,
+      "source_pair_fit_updates": 640
+    }
+  },
+  "known_cell_retention": {
+    "givens": {
+      "factorized_mean_nmse": 0.036196773406118155,
+      "direct_code_mean_nmse": 0.03620224300539121,
+      "factorized_per_cell_nmse": [
+        0.04954567179083824,
+        0.03239201055839658,
+        0.025165578816086054,
+        0.043562435545027256,
+        0.02887251740321517,
+        0.02403636509552598,
+        0.04382325056940317,
+        0.042176357470452785
+      ],
+      "direct_per_cell_nmse": [
+        0.04954575374722481,
+        0.03240535641089082,
+        0.025173115078359842,
+        0.043567512184381485,
+        0.02887746039777994,
+        0.02403561258688569,
+        0.043831235729157925,
+        0.04218189790844917
+      ]
+    },
+    "scalar": {
+      "factorized_mean_nmse": 0.03616104036336765,
+      "direct_code_mean_nmse": 0.036164757097139955,
+      "factorized_per_cell_nmse": [
+        0.04956365656107664,
+        0.03237105021253228,
+        0.02496575564146042,
+        0.043581207282841206,
+        0.02886043582111597,
+        0.023934426717460155,
+        0.043807934038341045,
+        0.04220385663211346
+      ],
+      "direct_per_cell_nmse": [
+        0.04957170411944389,
+        0.03237068094313145,
+        0.024965588469058275,
+        0.04360087215900421,
+        0.028858700767159462,
+        0.0239368942566216,
+        0.043802136555314064,
+        0.042211479507386684
+      ]
+    }
+  },
+  "target_adaptation": {
+    "direct_pair_givens_target_adapt": {
+      "updates": 80,
+      "examples_seen": 80,
+      "trainable_parameters": 1,
+      "wall_seconds": 0.08492688600017573
+    },
+    "independent_target_finetune": {
+      "updates": 80,
+      "examples_seen": 80,
+      "trainable_parameters": 1760,
+      "wall_seconds": 0.08656631099984224
+    }
+  },
+  "metrics": {
+    "hard_shared_frozen": {
+      "nmse": 0.021697363816201687,
+      "psnr_db": 34.44428491592407,
+      "measured_coil_residual": 0.07464540004730225,
+      "inference_seconds_per_case": 0.0007349414995587722,
+      "n": 8
+    },
+    "factorized_scalar_film": {
+      "nmse": 0.02153702813666314,
+      "psnr_db": 34.475104331970215,
+      "measured_coil_residual": 0.0755647961050272,
+      "inference_seconds_per_case": 0.0006234962502276176,
+      "n": 8
+    },
+    "factorized_givens_mirror": {
+      "nmse": 0.021623360575176775,
+      "psnr_db": 34.45729970932007,
+      "measured_coil_residual": 0.07488769479095936,
+      "inference_seconds_per_case": 0.0005548720000660978,
+      "n": 8
+    },
+    "direct_pair_givens_target_adapt": {
+      "nmse": 0.021624071872793138,
+      "psnr_db": 34.456944942474365,
+      "measured_coil_residual": 0.07495536468923092,
+      "inference_seconds_per_case": 0.000618130249904425,
+      "n": 8
+    },
+    "independent_target_finetune": {
+      "nmse": 0.01539002382196486,
+      "psnr_db": 35.95250701904297,
+      "measured_coil_residual": 0.06539580039680004,
+      "inference_seconds_per_case": 0.0005628572500882001,
+      "n": 8
+    }
+  },
+  "payloads": {
+    "hard_shared_frozen": {
+      "bytes": 9877
+    },
+    "factorized_scalar_film": {
+      "bytes": 10193
+    },
+    "factorized_givens_mirror": {
+      "bytes": 10193
+    },
+    "direct_pair_givens_target_adapt": {
+      "bytes": 10129
+    },
+    "independent_target_finetune": {
+      "bytes": 9877
+    }
+  },
+  "bank_storage_comparison": {
+    "direct_eight_pair_givens_bank": {
+      "bytes": 10129,
+      "sha256": "378e03e0c251028fa4a4ba8cd2b0a985f67be4f51fdf26898829e05b0a768551"
+    },
+    "shared_prior_plus_five_factor_givens": {
+      "bytes": 10129,
+      "sha256": "08965e9d623a04421657950029c6c83dcfd83be8b8c09b9b75ecf7976effd44b"
+    },
+    "compression_fraction": 0.0
+  },
+  "device": "cpu",
+  "source_pairs": [
+    [
+      0,
+      0
+    ],
+    [
+      0,
+      1
+    ],
+    [
+      0,
+      2
+    ],
+    [
+      1,
+      0
+    ],
+    [
+      1,
+      1
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      2,
+      0
+    ],
+    [
+      2,
+      1
+    ]
+  ],
+  "source_examples": 32,
+  "support_examples_per_observed_pair": 4,
+  "target_support_examples": 4,
+  "development_examples": 8,
+  "source_updates": 240,
+  "updates_per_observed_pair_code": 80,
+  "target_adaptation_updates": 80,
+  "fresh_seeds": [
+    1008301,
+    1008307,
+    1008313
+  ],
+  "fresh_opened": false,
+  "checkpoint": "development_models.pt",
+  "checkpoint_sha256": "7c28a591b7503d54e90cce94d6ce7af5a0d149c87b68fef69c760b73aca3c6be",
+  "code_sha256": "f38587ed79f4a5c25fc55901362590e08c7329ab5e88a76ca81fc95b0d04f0c3"
+}

@@ -24,6 +24,10 @@ MA-990 official MERL RANF code was located, but the required SONICOM HRTF subjec
 
 # Worker queue
 
+## Current handoff — 2026-11-14, MA-1008
+
+MA-1008 is a bounded synthetic FAIL: on a 3x3 contrast-coil grid with (2,2) withheld, the five-coordinate Givens chart misses the matched scalar quality gate and has the same actual serialized bytes as the eight-code bank. Fresh remains sealed; no acquired MRI claim. See `ma-1008-contrast-coil-factor-mirror/RESULTS.md`. Continue to P0 MA-1009 (DUNE representation-chart scanner View).
+
 ## Current handoff — 2026-11-13, MA-898
 
 MA-896 and MA-897 remain UNTESTED and are skipped per user direction due the unavailable official CUDA renderers and scene data. MA-898 official CC-4DGS is also blocked for its registered PSNR/FPS frontier, but its pure-PyTorch CDF component runs a reduced random-weight CPU smoke; keep this as environment evidence only. No trained-model/Mirror result is claimed; a checkpoint function/bytes study would need a scoped amendment. MA-898 remains UNTESTED. See `ma-898-cc4dgs-role-view/EXECUTION_BLOCKER.md`. Advance to MA-899.

@@ -1,0 +1,137 @@
+{
+  "experiment_id": "MA-1008",
+  "title": "Contrast x coil factorized MRI Mirror prior \u2014 amendment 01",
+  "status": "FAIL",
+  "evidence_lane": "MECHANISM/STORAGE/COMPUTE",
+  "base_commit": "631e2cc0a28255fefdf2538133a5f30e849f4c59",
+  "hypothesis": "For a 3x3 synthetic multi-contrast and coil-domain grid with cell (2,2) withheld, an additive contrast-plus-coil Givens chart fitted only from the other eight cells improves held-out-cell NMSE over both hard sharing and a byte-matched native additive scalar chart; a separate-cell adaptation is only an upper control.",
+  "prior_art_refs": [
+    "PA306",
+    "PA302"
+  ],
+  "prior_art_delta": "PA306 already studies continuous contrast conditioning; test whether the functional effect factorizes contrast from coil identity and generalizes to an unseen pair beyond ordinary scalar conditioning.",
+  "data": {
+    "type": "deterministic analytic synthetic complex phantoms; no acquired MRI",
+    "shape": [
+      32,
+      32
+    ],
+    "coils": 4,
+    "undersampling": "4x Cartesian with 8 center lines",
+    "contrast_levels": [
+      "0",
+      "1",
+      "2"
+    ],
+    "coil_domains": [
+      "0",
+      "1",
+      "2"
+    ],
+    "source_pairs": [
+      "0-0",
+      "0-1",
+      "0-2",
+      "1-0",
+      "1-1",
+      "1-2",
+      "2-0",
+      "2-1"
+    ],
+    "heldout_pair": "2-2",
+    "support_seeds": "1008101 + 100*c + 10*k + i, i=0..3 for each observed pair",
+    "development_seeds": [
+      1008201,
+      1008202,
+      1008203,
+      1008204,
+      1008205,
+      1008206,
+      1008207,
+      1008208
+    ],
+    "fresh_seeds": [
+      1008301,
+      1008302,
+      1008303
+    ],
+    "fresh_opened": false,
+    "target_support_seeds": [
+      1008251,
+      1008252,
+      1008253,
+      1008254
+    ]
+  },
+  "model": {
+    "prior": "residual CNN, real/imag channels 2->12->12->2",
+    "unroll": "one explicit SENSE adjoint initialization followed by prior; same mask/coil map/FFT path for every method",
+    "device": "CPU",
+    "code": "For each of the eight observed contrast-coil cells, fit one scalar or one Givens angle on four support phantoms; least-squares project the eight fitted cell codes onto a gauge-fixed additive chart: global offset + two contrast effects + two coil effects (five coordinates). Predict withheld cell (2,2) from the chart. Also report target-specific code/full fine-tune as non-transfer upper controls using separate target support."
+  },
+  "controls": [
+    "hard_shared_frozen",
+    "factorized_scalar_film projected from eight observed cell codes",
+    "factorized_givens_mirror projected from eight observed cell codes",
+    "direct_pair_givens target-support upper control",
+    "independent_target_finetune target-support upper control",
+    "eight-entry direct code bank for storage and observed-cell reconstruction audit"
+  ],
+  "training": {
+    "source_examples": "32 (4 each across eight observed cells)",
+    "source_updates": 240,
+    "target_support_examples": 4,
+    "adaptation_updates": 80,
+    "optimizer": "Adam, lr=0.001",
+    "selection": "No hyperparameter search. Frozen chart is determined only by eight observed cells; held-out target support used only for the separate upper controls.",
+    "observed_cell_code_adaptation_updates": "80 per cell x 8 cells per code family",
+    "target_upper_adaptation_updates": 80
+  },
+  "metrics": [
+    "complex-image NMSE",
+    "magnitude PSNR dB",
+    "measured-kspace residual",
+    "serialized inference payload bytes",
+    "inference wall seconds per case",
+    "optimizer wall seconds"
+  ],
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "include": [
+      "prior weights",
+      "learned coordinates/scales",
+      "operator metadata",
+      "mask definition",
+      "coil-map generator metadata",
+      "architecture and dtype metadata"
+    ],
+    "comparison": "Serialize common model and physics metadata identically; direct bank carries eight float32 pair codes, factorized Mirror carries five float32 coordinates. Include complete torch.save payload bytes."
+  },
+  "compute": {
+    "report_examples": true,
+    "report_optimizer_updates": true,
+    "report_trainable_parameters": true,
+    "report_forward_operator_calls": true,
+    "report_wall_clock": true
+  },
+  "success_gate": "On held-out cell (2,2), Mirror NMSE at least 5% lower than hard sharing and factorized scalar control, within 10% of target-specific upper control, and its actual total payload at least 20% below an eight-code direct Givens bank for the observed cells while preserving the same explicit multicoil operator. Report known-cell retention before any fresh opening.",
+  "failure_gate": "Mirror fails to beat both hard sharing and factorized scalar control, or loses the predeclared known-cell retention/storage gate, or alters forward/adjoint physics.",
+  "fresh": {
+    "worlds_or_seeds": [
+      1008301,
+      1008307,
+      1008313
+    ],
+    "locked_before_access": true,
+    "run_only_if_development_passes": true
+  },
+  "boundaries": [
+    "Synthetic mechanism screen only, not fastMRI data, clinical quality, or scanner validation.",
+    "One held-out contrast-coil pair and a single fixed architecture.",
+    "No hyperparameter tuning or fresh access after seeing development outcome."
+  ],
+  "amendment_01": {
+    "reason": "Original first-pass screen fit factor coordinates on held-out target support and therefore did not test unseen contrast-coil generalization. Preserve its output as exploratory; exclude it from the amended decision. Amendment freezes the heldout cell and fits the chart from the other eight cells only. No fresh metrics had been accessed before amendment."
+  },
+  "failure_gate_result": "Development FAIL: Mirror NMSE 0.021623 vs hard sharing 0.021697 (0.34% better) and factorized scalar 0.021537 (0.40% worse); target full-prior fine-tune 0.015390. Matched shared-prior bank payload is 10,129 B for both eight direct codes and five factor coordinates (0% total-byte reduction). All quality/storage gates missed; fresh remains sealed."
+}
