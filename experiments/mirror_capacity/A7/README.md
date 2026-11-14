@@ -13,7 +13,7 @@ A7 tests whether task-dependent hidden nonlinearities outperform shared feature 
 - `test_a7.py` — six tests.
 - `replay.py` — independent-process byte-identical replay of selected checkpoints.
 - `REPORT_JA.md` — full Japanese research report, numerical tables, limitations, error checks.
-- `results/audit/` — full score tables, selected model contrasts, quality frontier and checksums.
+- `results/world_ratios.csv` — 24 world×family×budget validation-selected contrasts; full 1,008-score audit and checkpoint hashes are in the separately archived A7 evidence ZIP.
 
 ## Reproduce
 
