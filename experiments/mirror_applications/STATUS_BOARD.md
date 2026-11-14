@@ -7,10 +7,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 - Registered candidates: **1155**
 - Claim ledger entries: **442**
-- P0: **630** (354 FAIL; 54 PROMISING; 214 UNTESTED; 6 NOT ESTABLISHED; 2 SCREENING)
+- P0: **630** (355 FAIL; 54 PROMISING; 214 UNTESTED; 6 NOT ESTABLISHED; 1 SCREENING)
 - P1: **422** (17 completed; 405 UNTESTED)
 - P2: **103** (103 UNTESTED)
-- Current MA statuses: **367 FAIL, 9 NOT ESTABLISHED, 63 PROMISING, 2 SCREENING, 714 UNTESTED**
+- Current MA statuses: **368 FAIL, 9 NOT ESTABLISHED, 63 PROMISING, 1 SCREENING, 714 UNTESTED**
 - 47 baseline experiment directories remain present; verified external outcomes are linked to their dedicated branches in the registry and claim ledger.
 - New research: MA-876..935 (60 candidates), PA236..PA265 (30 primary sources). See the current Next candidate section for the live queue.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. see the current Next candidate section.
@@ -495,6 +495,6 @@ MA-1004 is a bounded development-gate FAIL on `research/ma-1004-off-orbit-privat
 MA-1006 is a synthetic development-gate FAIL after the fair tied-pretraining rerun. On 16 scanner-B cases, Givens Mirror NMSE is .160418 vs hard tie .160539 (0.076% relative gain) and same-size scalar gate .155246; independent FT is .092474 at 2× payload. Hard tying itself saves 49.9% bytes and slightly beats the independent frozen model on this synthetic split. Development checkpoint replay is exact; fresh remains sealed. No fastMRI acquisition benchmark or clinical claim. Next P0: MA-1007. See `experiments/mirror_applications/ma-1006-varnet-mirror/RESULTS.md`.
 
 
-## MA-1007 setup — 2026-11-14
+## MA-1007 development result — 2026-11-14
 
-MA-1007 is SCREENING on `research/ma-1007-modl-iteration-mirror-20261114`. PA303 describes a shared residual CNN across CG data-consistency iterations. The linked official TensorFlow 1.x repository has no declared root code license; no code or checkpoint was copied. An independent compact PyTorch equation implementation passed A/A^H adjointness and Givens isometry tests, with finite CG forward on a 32×32 synthetic four-coil phantom. The locked screen compares native tied MoDL, per-step scalar lambda, per-step hidden-feature Givens Mirror and independent CNN controls; fresh seeds remain sealed. This is synthetic mechanism evidence, not fastMRI or clinical performance. See `experiments/mirror_applications/ma-1007-modl-iteration-mirror/PROTOCOL.json`.
+MA-1007 is a development-gate FAIL on `research/ma-1007-modl-iteration-mirror-20261114`. The hidden-channel Givens Mirror has NMSE .047501, equal to hard-tied MoDL (.047493) and worse than same-size per-step scalar lambda (.047129); its serialized payload is 6,861 B vs scalar control 6,609 B. Independent fine-tuning reaches .024894 at 16,810 B. Checkpoint replay is exact and fresh remains sealed. This is synthetic mechanism evidence, not a fastMRI or clinical result. The MRI/inverse-operator family has now produced two consecutive Givens-denoiser-view FAILs against simple scalar controls; record the shared cause and redesign rule before continuing in this family. MA-1008 is a different registry family and is next. See `experiments/mirror_applications/ma-1007-modl-iteration-mirror/RESULTS.md`.

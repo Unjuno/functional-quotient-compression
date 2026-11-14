@@ -1,19 +1,26 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-1007",
+  "commit": "pending until commit",
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "/tmp/ma1003env/bin/python -m pytest -q experiments/mirror_applications/ma-1007-modl-iteration-mirror/tests; python experiments/mirror_applications/check_registry_integrity.py",
+    "passed": 4,
+    "failed": 0
   },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "actual_torch_save_payloads_recorded": true,
+    "checkpoint_sha256": "efa840d3117fa43f8479806f5f175408df8d243387fe08b5650f76c1bb481481",
+    "roundtrip_checked": true
   },
   "metric_replay": {
-    "checked": false,
-    "max_difference": null
+    "checked": true,
+    "max_difference": 0.0,
+    "artifact": "runs/DEV_REPLAY.json"
   },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Development-gate FAIL on deterministic synthetic analytic MRI phantoms; no fresh seeds generated or evaluated.",
+    "Independent PyTorch implementation of PA303 equations; official TensorFlow 1.x code not copied because the repository has no declared root license.",
+    "A/A^H adjointness and hidden-feature Givens norm preservation verified.",
+    "No fastMRI benchmark or clinical claim."
+  ]
 }

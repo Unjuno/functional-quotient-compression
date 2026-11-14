@@ -1,1 +1,6 @@
 condition,world_or_seed,method,serialized_bytes,train_tokens_or_examples,optimizer_updates,active_compute_proxy,wall_time_s,primary_metric,primary_value,secondary_metric,secondary_value,status_note
+MA-1007,107001,independent frozen CNNs,16810,24,24,2647,0.301,dev_NMSE,0.033736,global_SSIM,0.792616,development scanner B
+MA-1007,107001,native tied MoDL,6609,24,24,883,0.317,dev_NMSE,0.047493,global_SSIM,0.742564,shared CNN pretrained from initialization
+MA-1007,107001,tied plus scalar per-step lambda,6609,32,48,3,0.563,dev_NMSE,0.047129,global_SSIM,0.745895,8 target support examples; scalar control
+MA-1007,107001,tied plus Givens Mirror feature views,6861,32,48,3,0.593,dev_NMSE,0.047501,global_SSIM,0.742436,Mirror dominated by scalar-step control; fresh sealed
+MA-1007,107001,independent CNNs fine-tuned,16810,32,48,2647,0.597,dev_NMSE,0.024894,global_SSIM,0.809612,upper control; development only

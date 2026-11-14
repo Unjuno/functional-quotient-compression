@@ -1,7 +1,7 @@
 {
   "experiment_id": "MA-1007",
   "title": "MoDL tied denoiser with iteration Mirror coordinate",
-  "status": "SCREENING",
+  "status": "FAIL",
   "evidence_lane": "MECHANISM/STORAGE/RUNTIME",
   "base_commit": "95f891f53",
   "hypothesis": "On a held-out synthetic coil-sensitivity scanner, three per-iteration Givens views over the hidden channels of one MoDL denoiser recover useful iteration-specific priors beyond the native tied denoiser and match or beat a same-size per-iteration scalar-step control, while preserving the explicit MRI forward/adjoint data-consistency operator.",
@@ -92,5 +92,6 @@
     "One seed and one coil-shift family in this screen.",
     "No patient data or diagnosis task.",
     "No full-scale GPU throughput claim."
-  ]
+  ],
+  "failure_gate_result": "The 3-angle Givens view has dev NMSE 0.047501 versus tied 0.047493 and scalar per-step lambda 0.047129, costs 6861 B versus 6609 B, and misses independent FT NMSE 0.024894. Fresh remains sealed."
 }
