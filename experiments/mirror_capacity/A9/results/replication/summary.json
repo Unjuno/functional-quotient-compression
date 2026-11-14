@@ -1,0 +1,95 @@
+{
+  "num_models": 108,
+  "num_scores": 432,
+  "num_worlds": 6,
+  "primary": {
+    "mirror_scaffold_code4_joint_pass_worlds": 6,
+    "mirror_scaffold_code4_iid_better_worlds": 6,
+    "H1_PASS": true,
+    "mirror_codeonly_to_random_full4_geomean_iid_MSE_ratio": 0.0005537316657948694,
+    "logratio_combined_standard_uncertainty": 1.7939906008298385,
+    "ratio_95pct_t_CI": [
+      5.501828875822211e-06,
+      0.055730333426289747
+    ]
+  },
+  "method_summary": [
+    {
+      "kind": "mirror",
+      "regime": "random_full4",
+      "median_world_iid_nrmse": 0.41143174167644264,
+      "median_world_ood_nrmse": 0.43821094499274327,
+      "joint_pass_worlds": 0,
+      "n_worlds": 6
+    },
+    {
+      "kind": "mirror",
+      "regime": "scaffold_code4",
+      "median_world_iid_nrmse": 0.01544097087895575,
+      "median_world_ood_nrmse": 0.015416544308173526,
+      "joint_pass_worlds": 6,
+      "n_worlds": 6
+    },
+    {
+      "kind": "mirror",
+      "regime": "scaffold_full4",
+      "median_world_iid_nrmse": 0.12337054779816974,
+      "median_world_ood_nrmse": 0.1790262356795297,
+      "joint_pass_worlds": 1,
+      "n_worlds": 6
+    },
+    {
+      "kind": "pre",
+      "regime": "random_full4",
+      "median_world_iid_nrmse": 0.42491588698744753,
+      "median_world_ood_nrmse": 0.5106951899281482,
+      "joint_pass_worlds": 0,
+      "n_worlds": 6
+    },
+    {
+      "kind": "pre",
+      "regime": "scaffold_code4",
+      "median_world_iid_nrmse": 0.01544097087895575,
+      "median_world_ood_nrmse": 0.015416544308173526,
+      "joint_pass_worlds": 6,
+      "n_worlds": 6
+    },
+    {
+      "kind": "pre",
+      "regime": "scaffold_full4",
+      "median_world_iid_nrmse": 0.08131071761859159,
+      "median_world_ood_nrmse": 0.10015484244672411,
+      "joint_pass_worlds": 3,
+      "n_worlds": 6
+    },
+    {
+      "kind": "shift",
+      "regime": "random_full4",
+      "median_world_iid_nrmse": 0.22435769412365325,
+      "median_world_ood_nrmse": 0.2565605019348162,
+      "joint_pass_worlds": 0,
+      "n_worlds": 6
+    },
+    {
+      "kind": "shift",
+      "regime": "scaffold_code4",
+      "median_world_iid_nrmse": 0.01544097087895575,
+      "median_world_ood_nrmse": 0.015416544308173526,
+      "joint_pass_worlds": 6,
+      "n_worlds": 6
+    },
+    {
+      "kind": "shift",
+      "regime": "scaffold_full4",
+      "median_world_iid_nrmse": 0.003928691572378627,
+      "median_world_ood_nrmse": 0.0033936291104794767,
+      "joint_pass_worlds": 6,
+      "n_worlds": 6
+    }
+  ],
+  "caveats": [
+    "family-aware scaffold with no teacher thresholds; not a generic model comparison",
+    "same random minibatch stream but not matched FLOPs",
+    "only six synthetic worlds, two seeds and one optimizer; 95% interval descriptive"
+  ]
+}
