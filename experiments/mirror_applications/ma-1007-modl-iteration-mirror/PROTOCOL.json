@@ -1,0 +1,96 @@
+{
+  "experiment_id": "MA-1007",
+  "title": "MoDL tied denoiser with iteration Mirror coordinate",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/STORAGE/RUNTIME",
+  "base_commit": "95f891f53",
+  "hypothesis": "On a held-out synthetic coil-sensitivity scanner, three per-iteration Givens views over the hidden channels of one MoDL denoiser recover useful iteration-specific priors beyond the native tied denoiser and match or beat a same-size per-iteration scalar-step control, while preserving the explicit MRI forward/adjoint data-consistency operator.",
+  "prior_art_refs": [
+    "PA303"
+  ],
+  "prior_art": {
+    "paper": "MoDL: Model Based Deep Learning Architecture for Inverse Problems",
+    "arxiv": "https://arxiv.org/abs/1712.02862",
+    "official_repository": "https://github.com/hkaggarwal/modl",
+    "observed_commit": "2b02b9b48348eb44a56398f7b15d7dc556771edc",
+    "official_code_license": "not declared in repository root; no code copied",
+    "implementation_note": "Independent PyTorch implementation from paper equations. Official repository uses TensorFlow 1.x and is not runnable in this Python 3.12 CPU environment."
+  },
+  "model": {
+    "unroll_steps": 3,
+    "cnn": "residual 3-layer real/imag CNN, 2->8->8->2 channels, shared across steps for native MoDL",
+    "cg_iterations": 5,
+    "coil_count": 4,
+    "device": "CPU",
+    "complex_layout": "torch.complex64"
+  },
+  "data": {
+    "type": "deterministic synthetic analytic phantoms with four smooth coil sensitivity maps",
+    "shape": [
+      32,
+      32
+    ],
+    "undersampling": "4x Cartesian, 8 center lines",
+    "train_scanner": "A; 24 phantoms from seeds 107001..107024",
+    "target_scanner": "B; coil amplitude/phase shifted; support 8 seeds 107101..107108; development 16 seeds 107201..107216",
+    "fresh_seeds": [
+      107301,
+      107307,
+      107313
+    ],
+    "fresh_examples_per_seed": 8,
+    "fresh_metrics_or_quality_opened": false,
+    "boundary": "mechanism-only synthetic reconstruction, not fastMRI or clinical evidence"
+  },
+  "protocol": {
+    "seed": 107001,
+    "source_pretraining_updates": 24,
+    "target_support_examples": 8,
+    "target_updates_per_adaptive_control": 24,
+    "controls": [
+      "independent per-step CNNs pretrained on scanner A (frozen on scanner B)",
+      "ordinary native MoDL shared CNN and shared lambda, trained tied from initialization",
+      "shared CNN plus three independently learned scalar lambda_i steps",
+      "shared CNN plus three Givens angles applied to hidden feature-channel pairs",
+      "independent per-step CNNs fine-tuned on target support upper control"
+    ],
+    "mirror_placement": "one per-step angle rotates every adjacent pair of the 8 hidden CNN channels after the first convolution; it cannot access mask, k-space, or CG state",
+    "data_consistency": "A and A^H use the same measured mask and coil maps in all methods; CG solves (A^H A + lambda_i I)x = A^H y + lambda_i D(x_prev). Only scalar-step control may vary lambda_i; Mirror angles do not alter A, A^H, mask, measured k-space, or lambda.",
+    "development_metrics": [
+      "NMSE",
+      "PSNR dB",
+      "global SSIM",
+      "measured-line residual",
+      "CG normal-equation residual"
+    ],
+    "fresh_gate": "fresh used only if development passes all predeclared quality/control/storage gates",
+    "initialization": "Independent and tied pretraining both reset torch.manual_seed(107001) before construction, so their first denoiser begins from identical weights; subsequent cascade CNNs in the independent model are independently initialized."
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "shared or independent CNN weights",
+      "lambda or lambda_i",
+      "Mirror angles",
+      "coil operator/config metadata",
+      "CG iteration count",
+      "architecture metadata"
+    ],
+    "report_full_total_bytes": true
+  },
+  "compute": {
+    "record_examples": true,
+    "record_optimizer_updates": true,
+    "record_trainable_parameter_count": true,
+    "record_cpu_train_and_inference_wall_time": true,
+    "report_forward_operator_calls_and_CG_iterations": true
+  },
+  "success_gate": "Mirror improves hard-tied dev NMSE by >=10%, is within 5% relative NMSE of independent full fine-tune, beats per-step scalar lambda_i, uses >=20% fewer serialized total bytes than independent fine-tune, and preserves the exact same A/A^H/mask path; fresh must confirm direction in all three worlds before PROMISING.",
+  "failure_gate": "Mirror is matched/dominated by native tied MoDL or scalar lambda_i at equal/lower bytes, misses quality gate, or changes the measured-data operator.",
+  "boundaries": [
+    "Synthetic small model only; not fastMRI acquisition data or a clinical claim.",
+    "One seed and one coil-shift family in this screen.",
+    "No patient data or diagnosis task.",
+    "No full-scale GPU throughput claim."
+  ]
+}
