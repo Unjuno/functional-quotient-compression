@@ -3,11 +3,11 @@
 - Status: FAIL (bounded development gate)
 - Branch: `research/ma-1004-off-orbit-private-residual-20261114`
 - Base commit: `28f0dceef`
-- Last verified commit: to be recorded after commit
+- Last verified commit: `29ef57374d8601a9977605c273cc3a3e265d6414`
 - Development screen complete: yes; full control tournament not run
 - Fresh/audit shard: deserialized; only old_indices metadata was accessed; fresh coordinate/label values and metrics were not examined
-- Results committed: pending
-- Verification committed: pending
+- Results committed: yes
+- Verification committed: yes
 - Registry row updated: yes (FAIL; bounded development gate)
 
 ## Next action
