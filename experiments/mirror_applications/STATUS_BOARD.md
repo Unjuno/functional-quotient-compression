@@ -7,10 +7,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 - Registered candidates: **1155**
 - Claim ledger entries: **441**
-- P0: **630** (353 FAIL; 54 PROMISING; 215 UNTESTED; 6 NOT ESTABLISHED; 2 SCREENING)
+- P0: **630** (354 FAIL; 54 PROMISING; 215 UNTESTED; 6 NOT ESTABLISHED; 1 SCREENING)
 - P1: **422** (17 completed; 405 UNTESTED)
 - P2: **103** (103 UNTESTED)
-- Current MA statuses: **366 FAIL, 9 NOT ESTABLISHED, 63 PROMISING, 2 SCREENING, 715 UNTESTED**
+- Current MA statuses: **367 FAIL, 9 NOT ESTABLISHED, 63 PROMISING, 1 SCREENING, 715 UNTESTED**
 - 47 baseline experiment directories remain present; verified external outcomes are linked to their dedicated branches in the registry and claim ledger.
 - New research: MA-876..935 (60 candidates), PA236..PA265 (30 primary sources). See the current Next candidate section for the live queue.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. see the current Next candidate section.
@@ -490,6 +490,6 @@ MA-1003 is a development-gate FAIL on dedicated branch `research/ma-1003-reactiv
 MA-1004 is a bounded development-gate FAIL on `research/ma-1004-off-orbit-private-residual-20261114`. On 8-shot support and 128 uracil development rows, rank-2 source-SVD Mirror gives .25488 eV/A force-component MAE; four private coordinates improve to .24943, still worse than the same-shot scalar gate (.24178) and direct 16-coordinate update (.24388). Actual serialized payloads are 3,097 B for Mirror+private versus 1,769 B direct-16 and 1,957 B scalar gate (plus common 32,581,838 B MACE-MP prior). Fresh remains sealed. One seed, one readout slice, force-only; no PA300 training/full FT or energy-quality claim. Continue to next eligible P0, MA-1006. See `experiments/mirror_applications/ma-1004-off-orbit-private-residual/RESULTS.md`.
 
 
-## MA-1006 amendment 01 — 2026-11-14
+## MA-1006 development result — 2026-11-14
 
-An initialization mismatch was found in the first synthetic VarNet screen: independently trained cascades were averaged to create the tied comparator. That run and exact development replay are preserved as exploratory, not as the candidate decision. Amendment 01 retrains the hard-tied denoiser shared from initialization on the same Scanner-A examples before rerunning scanner-B development controls. Fresh seeds remain sealed. See `experiments/mirror_applications/ma-1006-varnet-mirror/PROTOCOL.json`.
+MA-1006 is a synthetic development-gate FAIL after the fair tied-pretraining rerun. On 16 scanner-B cases, Givens Mirror NMSE is .160418 vs hard tie .160539 (0.076% relative gain) and same-size scalar gate .155246; independent FT is .092474 at 2× payload. Hard tying itself saves 49.9% bytes and slightly beats the independent frozen model on this synthetic split. Development checkpoint replay is exact; fresh remains sealed. No fastMRI acquisition benchmark or clinical claim. Next P0: MA-1007. See `experiments/mirror_applications/ma-1006-varnet-mirror/RESULTS.md`.

@@ -7,18 +7,21 @@
     "failed": 0
   },
   "serialization": {
-    "exploratory_checkpoint_sha256": "bf74a90af8eed0f416eae09d34cd33f35bb7b843ef96370b841b0f721426443a",
+    "actual_torch_save_payloads_recorded": true,
+    "model_checkpoint_sha256": "fa184959d20de124d7b257cdff0597dd4424003716bb47bc539d8012330956de",
     "roundtrip_checked": true
   },
   "metric_replay": {
     "checked": true,
     "max_difference": 0.0,
-    "scope": "pre-amendment exploratory screen only; excluded from final decision"
+    "replay_artifact": "runs/DEV_REPLAY.json"
   },
   "fresh_split_integrity_checked": true,
   "notes": [
-    "Amendment 01 is pending; terminal result remains NOT ESTABLISHED.",
-    "Exploratory pre-amendment checkpoint replay is exact but excluded because hard tying was initialized by averaging independently trained cascades.",
-    "No fresh seeds or metrics opened."
+    "Amendment 01 control rerun is the terminal development result; the first run is retained as exploratory and excluded due to tied-control initialization mismatch.",
+    "Checkpoint replay reproduced all five methods on 16 development examples exactly; no fresh seeds were generated or evaluated.",
+    "Official fastMRI VarNet source is pinned to MIT commit 91f2df4711adbb6d643df1810f234e4abcf5881b.",
+    "View methods leave native soft-DC operator and per-cascade DC scalars unchanged; exact acquired-sample projection is not claimed.",
+    "Synthetic mechanism-only screen; no clinical or fastMRI acquisition benchmark claim."
   ]
 }

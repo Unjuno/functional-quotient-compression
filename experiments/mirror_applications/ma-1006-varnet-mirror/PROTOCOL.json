@@ -1,7 +1,7 @@
 {
   "experiment_id": "MA-1006",
   "title": "VarNet cascade phase-view reconstruction screen",
-  "status": "SCREENING",
+  "status": "FAIL",
   "evidence_lane": "MECHANISM/STORAGE/RUNTIME",
   "base_commit": "05f2e4c72",
   "hypothesis": "After training an official fastMRI VarNet on one synthetic multi-coil scanner, tying cascade denoisers loses quality on a held-out coil-sensitivity scanner, while a per-cascade complex Givens Mirror angle over one shared denoiser recovers more quality per serialized byte than hard tying and a same-count scalar-gate control, without changing the VarNet data-consistency parameters or acquired k-space operator.",
@@ -91,7 +91,7 @@
     "CPU small architecture; no full-scale VarNet latency claim.",
     "No clinical or scanner deployment claim."
   ],
-  "failure_gate_result": "Givens Mirror did not improve hard tying by 10%, was dominated by same-size scalar gates, and did not approach independent fine-tune quality. Fresh left sealed.",
+  "failure_gate_result": "Amendment 01 fair tied pretraining: Givens Mirror NMSE 0.160418 vs hard tie 0.160539 (0.076% relative improvement), scalar gate 0.155246, independent FT 0.092474. Same serialized payload as scalar gate. Fresh remains sealed.",
   "amendment_01": {
     "reason": "The first development run exposed a control-init mismatch: independent cascades were trained first and then averaged to create the tied comparator. This is weaker than ordinary tying from initialization, so the initial screen is retained as exploratory only and a fairer rerun is frozen before the new metrics are read.",
     "changes": [

@@ -1,1 +1,6 @@
 condition,world_or_seed,method,serialized_bytes,train_tokens_or_examples,optimizer_updates,active_compute_proxy,wall_time_s,primary_metric,primary_value,secondary_metric,secondary_value,status_note
+MA-1006,106001,independent frozen VarNet,137010,24,24,29387,1.292,dev_NMSE,0.163529,PSNR_dB,22.65599775314331,development scanner B; fresh sealed
+MA-1006,106001,hard-tied denoiser pretrained tied,68678,24,24,14695,1.163,dev_NMSE,0.160539,PSNR_dB,22.75326108932495,development scanner B; 49.9 percent fewer bytes
+MA-1006,106001,tied plus scalar gates,68678,32,48,3,1.799,dev_NMSE,0.155246,PSNR_dB,22.901416778564453,8 target support examples; 24 view updates
+MA-1006,106001,tied plus Givens Mirror angles,68678,32,48,3,1.809,dev_NMSE,0.160418,PSNR_dB,22.756407260894775,Mirror dominated by scalar gate; fresh sealed
+MA-1006,106001,independent full fine-tune,137010,32,48,29387,2.465,dev_NMSE,0.092474,PSNR_dB,25.219987154006958,upper control; development only
