@@ -7,10 +7,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 - Registered candidates: **1155**
 - Claim ledger entries: **438**
-- P0: **630** (352 FAIL; 54 PROMISING; 217 UNTESTED; 6 NOT ESTABLISHED; 1 SCREENING)
+- P0: **630** (352 FAIL; 54 PROMISING; 216 UNTESTED; 6 NOT ESTABLISHED; 2 SCREENING)
 - P1: **422** (17 completed; 405 UNTESTED)
 - P2: **103** (103 UNTESTED)
-- Current MA statuses: **365 FAIL, 9 NOT ESTABLISHED, 63 PROMISING, 1 SCREENING, 717 UNTESTED**
+- Current MA statuses: **365 FAIL, 9 NOT ESTABLISHED, 63 PROMISING, 2 SCREENING, 716 UNTESTED**
 - 47 baseline experiment directories remain present; verified external outcomes are linked to their dedicated branches in the registry and claim ledger.
 - New research: MA-876..935 (60 candidates), PA236..PA265 (30 primary sources). See the current Next candidate section for the live queue.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. see the current Next candidate section.
@@ -483,3 +483,8 @@ Wireless Mirror candidates MA-986..989 are paused for structural redesign; their
 ## MA-1003 result update — 2026-11-14
 
 MA-1003 is a development-gate FAIL on dedicated branch `research/ma-1003-reactive-surface-mirror-20261114`. Rank-2/4-shot improves calibrated energy error vs frozen MACE-MP but worsens force error; independent readout is substantially better. Mirror exactly aliases native low-rank factorization. Its payload is 5,187 B vs 7,029 B independent (26.2% fewer), while adapter MAC proxy doubles. Stage-6 remains sealed after the failed gate; no barrier claim. Next eligible P0 by registry order: MA-1004. See `experiments/mirror_applications/ma-1003-reactive-surface-mirror/RESULTS.md`.
+
+
+## MA-1004 setup — 2026-11-14
+
+MA-1004 is SCREENING on `research/ma-1004-off-orbit-private-residual-20261114`. rMD17 CC0 molecule data and MACE-MP small prior are pinned; PA300 code is pinned to its MIT repository commit. Uracil data shard is downloaded but labels/coordinates are unopened and no metric has been computed. Old-index windows are locked in `experiments/mirror_applications/ma-1004-off-orbit-private-residual/PROTOCOL.json`.

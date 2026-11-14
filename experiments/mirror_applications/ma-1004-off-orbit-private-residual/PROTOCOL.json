@@ -1,0 +1,119 @@
+{
+  "experiment_id": "MA-1004",
+  "title": "Off-orbit molecular task with private sparse residual",
+  "status": "SCREENING",
+  "evidence_lane": "STORAGE/RUNTIME/CAPACITY",
+  "base_commit": "28f0dceef",
+  "hypothesis": "A low-dimensional target-molecule code over one shared correction basis is insufficient on off-orbit molecular conformations, but a small learned sparse private residual can restore both energy and force quality at less inference-state cost than a matched PA300 sparse fine-tune.",
+  "physical_object": "Official frozen MACE-MP small crystal-trained interatomic potential",
+  "mirror_coordinate": "Rank-2 molecule code m over a shared parameter-delta basis learned on benzene/toluene/naphthalene",
+  "logical_multiplicity": "Molecule-specific potential corrections; uracil is a held-out target task",
+  "prior_art_refs": [
+    "PA300",
+    "PA298",
+    "PA297"
+  ],
+  "prior_code": {
+    "repository": "https://github.com/Lactobacillus/equivariant-sparse-finetuning",
+    "commit": "8873c7ca05580cf7577d961ee021ef056824c54f",
+    "license": "MIT",
+    "control": "EquiSparseDeltaSTR"
+  },
+  "data": {
+    "dataset": "colabfit/rMD17",
+    "dataset_doi": "10.60732/682fe04a",
+    "upstream_doi": "10.6084/m9.figshare.12672038.v3",
+    "license": "CC0-1.0",
+    "fields": [
+      "energy",
+      "atomic_forces",
+      "positions",
+      "old_indices"
+    ],
+    "source_molecules": [
+      "benzene",
+      "toluene",
+      "naphthalene"
+    ],
+    "target_molecule": "uracil",
+    "composition_boundary": "C/H/N/O known elements; molecular-domain configuration OOD versus MACE-MP crystal prior, not unseen-element transfer",
+    "artifact_hashes": {
+      "benzene": "dea6c7531d6e686a3c71239eca0f6d5b0c9cba721a9454dc0f2d234adcad021c",
+      "toluene": "62c9fa70f33180d5dcd3f88adb970bd98fc9eef29b579e24f0c675947428306e",
+      "naphthalene": "32983b8a7606c9f2a245f58a9a3775721625927dd8c9616cf1c7dc97640ce8a7",
+      "uracil": "84464145847581b4df2202f9a7975b34ab1bc538e6a5959075f5815cbdcf003a"
+    },
+    "mirror": "StructureCloud/rMD17 preprocessed per-molecule tensor files; original dataset CC0-1.0 per ColabFit card.",
+    "local_copy_note": "Uracil file is downloaded in the container, but no uracil energies/forces/positions have been parsed or scored. Split membership is fixed by old_indices windows above."
+  },
+  "prior": {
+    "name": "MACE-MP small",
+    "url": "https://github.com/ACEsuit/mace-mp/releases/download/mace_mp_0/2023-12-10-mace-128-L0_energy_epoch-249.model",
+    "bytes": 32581838,
+    "sha256": "2ddb079cee0e131eaaf6912ba581b394551ead283e95c99cfe78c605d10b5736",
+    "device": "CPU"
+  },
+  "split": {
+    "ordering": "published old_indices ascending; fixed original-index windows, not random frames",
+    "source_basis": "for benzene/toluene/naphthalene select up to 128 records each with 0 <= old_indices < 100000 using SHA256(MA1004|source|molecule|old_index) order",
+    "target_support": "uracil records with 0 <= old_indices < 100000; select 8/16/32 support rows with the same deterministic hash ordering",
+    "development": "uracil 100000 <= old_indices < 200000; select up to 128 deterministic rows for rank/shot/private-state selection",
+    "fresh": "uracil 500000 <= old_indices < 650000; select up to 64 deterministic rows after protocol and model/config/payload lock",
+    "fresh_raw_or_labels_opened": false,
+    "fresh_file_downloaded_but_not_parsed_or_scored": true,
+    "deduplicate": "SHA256 of atomic numbers and positions rounded to 1e-6 Angstrom; remove overlap from the later partition before reading any target labels"
+  },
+  "controls": [
+    "frozen MACE-MP plus support-fitted task energy offset",
+    "shared rank-2 Mirror basis and molecule code",
+    "exact same-rank native parameter factorization",
+    "official PA300 EquiSparseDeltaSTR sparse fine-tuning",
+    "Mirror plus private sparse equivariant residual with mask/index bytes charged",
+    "full fine-tune upper control where feasible"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      100401,
+      100403,
+      100407
+    ],
+    "selection_metric": "Mean per-atom energy MAE and force-component MAE on uracil 20th-30th old-index percentile; source tasks fit basis only.",
+    "optimizer_updates": "Record actual updates; fixed sample budgets and early-stop only on development data."
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      100411,
+      100417,
+      100429
+    ],
+    "locked_before_access": true,
+    "raw_or_labels_opened": false
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "shared basis tensors",
+      "target molecule code m",
+      "private sparse residual values",
+      "mask and sparse indices",
+      "threshold/normalization/energy offsets",
+      "metadata and decoding state"
+    ],
+    "base_checkpoint_counted_separately_and_in_total_system_bytes": true
+  },
+  "compute": {
+    "report_examples": true,
+    "report_optimizer_updates": true,
+    "report_adapter_MAC_proxy_and_full_model_forward_count": true,
+    "report_isolated_wall_clock_and_inference_time": true,
+    "device": "CPU"
+  },
+  "success_gate": "Mirror+private sparse residual is within 5% of PA300 sparse control on both energy and force MAE, saves at least 25% actual total adaptation payload bytes, and adds at most 20% inference time; a Mirror-specific claim also requires beating the exact native factorization control.",
+  "failure_gate": "Mirror-only/private residual miss energy or force quality; private state erases byte savings; PA300/native control matches or dominates at lower bytes/compute; or compute exceeds the frozen runtime gate.",
+  "boundaries": [
+    "rMD17 molecule subset only; not bulk-material or catalyst evidence.",
+    "All tested elements are supported by the MACE-MP embedding; this is not unseen-element transfer.",
+    "No reaction barrier labels; no barrier claim.",
+    "No random-frame split; old_indices interval split and exact-geometry deduplication are required."
+  ]
+}
