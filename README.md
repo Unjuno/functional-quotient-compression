@@ -13,8 +13,10 @@ The previous Phase-I README remains preserved verbatim in [the Phase I snapshot]
 
 ## Start here
 
+- [**2026-11-15 A7 compositional-image capacity experiment**](experiments/mirror_capacity/A7/README.md) — 336 locked models, 16 AND/XOR tasks, seven controls, negative Mirror-specific rate-quality result. Six mapping worlds share one digit dataset.
+
 - [**2026-11-15 A6 real handwritten-digit, 16-function capacity benchmark**](experiments/mirror_capacity/A6/README.md) — 336 models, locked IID/OOD audit and negative Mirror-specific result; same underlying digit images across six task mappings.
-- [**A1–A6 conditional function capacity evidence ledger**](experiments/mirror_capacity/README.md) — prior synthetic controls and new real-image follow-up; none establishes a general Mirror capacity multiplier.
+- [**A1–A7 conditional function capacity evidence ledger**](experiments/mirror_capacity/README.md) — prior synthetic controls and new real-image follow-up; none establishes a general Mirror capacity multiplier.
 
 - [**Phase II research state through MN010**](docs/phase2/RESEARCH_STATE_THROUGH_MN010.md)
 - [**Global Dense Mirror architecture**](docs/phase2/GLOBAL_DENSE_MIRROR_ARCHITECTURE.md)
