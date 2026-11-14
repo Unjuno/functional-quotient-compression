@@ -1,4 +1,4 @@
-# Mirror functional capacity studies (A1–A6)
+# Mirror functional capacity studies (A1–A7)
 
 **Interpretation as of 2026-11-15:** This exploratory sequence has NOT established a Mirror-specific rate–quality advantage over carefully controlled conditional Dense, FiLM, output-basis, or low-rank models. Distinguish synthetic evidence from actual Transformer compression. Source-code implementations of the models evolve between phases, so do not pool the results as one preregistered trial.
 
@@ -11,6 +11,8 @@
 | **[A5 (2026-11-15)](A5/README.md)** | Fixed 1500/3000B budget, 6 fresh worlds × 2 seeds × two **non-Mirror** teacher families, six methods | **288 models; Mirror4 loses to dev-selected best non-Mirror control on IID/OOD in 24/24 world × condition comparisons; zero >=10% capacity wins**. Independent teacher quality threshold was unmet by all methods, so some rate comparisons are censored. |
 | **[A6 (2026-11-15)](A6/README.md)** | Real handwritten-digit images with 16 known binary functions; 6 distinct mappings/splits of the **same 1,797-image dataset**, two function families, seven student models, 6/12k byte caps | **336 models; Mirror4 wins 0/6 worlds on IID BCE across all four family×budget conditions.** A shared FFN with task-specific output heads wins digit-mask tasks. XOR/ink task is censored at the preregistered quality threshold. No 10% byte saving established. |
 
+| **[A7 (2026-11-15)](A7/README.md)** | 16 compositional image predicates from 8 spatial features (AND/XOR), six new mappings × two seeds, seven matched-weight-cap methods, 6/12k-byte caps | **336 models; Mirror4 has IID and OOD BCE ratio >1 in all 24 mapping×family×cap comparisons, no 10% byte reduction wins.** XOR Mirror minimum passing size remains censored; multihead passed quality in 2/6 mappings. Same underlying digits source, no independent domain replication. |
+
 ## Reproducibility and evidence boundary
 
 - [A6 code, frozen protocol, full aggregate evidence, audit and tests](A6/README.md) add a small real-image **known-task** benchmark; weight files remain in the separate evidence ZIP. The six worlds share one source image dataset, so they do not count as six independent external datasets.
@@ -21,4 +23,4 @@
 
 ## Next research gate
 
-Prioritize the distinction between **shared feature extraction** and **task-specific readout** after A6's strong multihead result. Next evaluate held-out task addresses and real multi-domain tasks, then compare full stored-byte **and matched training/inference compute** frontiers using a frozen protocol. Do not keep increasing shear-Mirror count without a mechanism-specific positive control. If no low-description structured Mirror variant improves on strong controls, favor ordinary shared-basis methods rather than expanding Mirror count.
+Prioritize the distinction between **shared feature extraction** and **task-specific readout** after A6–A7's strong multihead results. Next evaluate held-out task addresses and real multi-domain tasks, then compare full stored-byte **and matched training/inference compute** frontiers using a frozen protocol. Do not keep increasing shear-Mirror count without a mechanism-specific positive control. If no low-description structured Mirror variant improves on strong controls, favor ordinary shared-basis methods rather than expanding Mirror count.
