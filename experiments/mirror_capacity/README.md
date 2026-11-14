@@ -1,4 +1,4 @@
-# Mirror functional capacity studies (A1–A7)
+# Mirror functional capacity studies (A1–A8)
 
 **Interpretation as of 2026-11-15:** This exploratory sequence has NOT established a Mirror-specific rate–quality advantage over carefully controlled conditional Dense, FiLM, output-basis, or low-rank models. Distinguish synthetic evidence from actual Transformer compression. Source-code implementations of the models evolve between phases, so do not pool the results as one preregistered trial.
 
@@ -13,6 +13,8 @@
 
 | **[A7 (2026-11-15)](A7/README.md)** | 16 compositional image predicates from 8 spatial features (AND/XOR), six new mappings × two seeds, seven matched-weight-cap methods, 6/12k-byte caps | **336 models; Mirror4 has IID and OOD BCE ratio >1 in all 24 mapping×family×cap comparisons, no 10% byte reduction wins.** XOR Mirror minimum passing size remains censored; multihead passed quality in 2/6 mappings. Same underlying digits source, no independent domain replication. |
 
+| **[A8/A8b (2026-11-15)](A8/README.md)** | Rank-certified 16-function hinge/ramp teachers; 6 worlds × 2 seeds × 2 caps × 7 models = 336 trained, plus 32 longer-training models on four fresh worlds | **Exact capacity exists**: shear-Mirror expresses hinge/ramp in 220/244 B from teacher-provided thresholds, but non-Mirror shifts can do the same. **Trained Mirror fails a general saved-byte gate**; ramp 512 B joint-quality pass 0/6 vs dev-selected control 6/6. A8b 2400 updates ramp: Mirror 0/4 vs controls 4/4. Mathematical rank obstruction applies only to shared features + affine task heads; not a proof of Mirror uniqueness. |
+
 ## Reproducibility and evidence boundary
 
 - [A6 code, frozen protocol, full aggregate evidence, audit and tests](A6/README.md) add a small real-image **known-task** benchmark; weight files remain in the separate evidence ZIP. The six worlds share one source image dataset, so they do not count as six independent external datasets.
@@ -23,4 +25,4 @@
 
 ## Next research gate
 
-Prioritize the distinction between **shared feature extraction** and **task-specific readout** after A6–A7's strong multihead results. Next evaluate held-out task addresses and real multi-domain tasks, then compare full stored-byte **and matched training/inference compute** frontiers using a frozen protocol. Do not keep increasing shear-Mirror count without a mechanism-specific positive control. If no low-description structured Mirror variant improves on strong controls, favor ordinary shared-basis methods rather than expanding Mirror count.
+Prioritize the distinction between **shared feature extraction** and **task-specific readout** after A6–A7's strong multihead results. After A8's constructive rank analysis, distinguish expressibility from reachability under optimization. Next evaluate held-out task addresses and real multi-domain tasks, then compare full stored-byte **and matched training/inference compute** frontiers using a frozen protocol. Do not keep increasing shear-Mirror count without a mechanism-specific positive control. If no low-description structured Mirror variant improves on strong controls, favor ordinary shared-basis methods rather than expanding Mirror count.
