@@ -1,0 +1,189 @@
+{
+  "interpretation": "Tested small synthetic families, frozen 800-update budget; not a proof of general model capacity.",
+  "provenance": {
+    "audited_models": 288,
+    "expected": 288,
+    "models": 288,
+    "train_lock_sha256": "edba12cf4d9b9f06392430f5dbb9ff581a9eabe04dc2000589eb44c0e0810e51"
+  },
+  "quality_frontier": [
+    {
+      "best_control_min_passing_bytes": 1452,
+      "censor": "none",
+      "family": "compositional",
+      "mirror_better_by_10pct": false,
+      "mirror_min_passing_bytes": 1452,
+      "world": 500
+    },
+    {
+      "best_control_min_passing_bytes": 1452,
+      "censor": "none",
+      "family": "compositional",
+      "mirror_better_by_10pct": false,
+      "mirror_min_passing_bytes": 2972,
+      "world": 501
+    },
+    {
+      "best_control_min_passing_bytes": 1476,
+      "censor": "none",
+      "family": "compositional",
+      "mirror_better_by_10pct": false,
+      "mirror_min_passing_bytes": 2972,
+      "world": 502
+    },
+    {
+      "best_control_min_passing_bytes": 1452,
+      "censor": "none",
+      "family": "compositional",
+      "mirror_better_by_10pct": false,
+      "mirror_min_passing_bytes": 1452,
+      "world": 503
+    },
+    {
+      "best_control_min_passing_bytes": 1452,
+      "censor": "none",
+      "family": "compositional",
+      "mirror_better_by_10pct": false,
+      "mirror_min_passing_bytes": 2972,
+      "world": 504
+    },
+    {
+      "best_control_min_passing_bytes": 1452,
+      "censor": "none",
+      "family": "compositional",
+      "mirror_better_by_10pct": false,
+      "mirror_min_passing_bytes": 1452,
+      "world": 505
+    },
+    {
+      "best_control_min_passing_bytes": null,
+      "censor": "none_pass",
+      "family": "independent",
+      "mirror_better_by_10pct": false,
+      "mirror_min_passing_bytes": null,
+      "world": 500
+    },
+    {
+      "best_control_min_passing_bytes": null,
+      "censor": "none_pass",
+      "family": "independent",
+      "mirror_better_by_10pct": false,
+      "mirror_min_passing_bytes": null,
+      "world": 501
+    },
+    {
+      "best_control_min_passing_bytes": null,
+      "censor": "none_pass",
+      "family": "independent",
+      "mirror_better_by_10pct": false,
+      "mirror_min_passing_bytes": null,
+      "world": 502
+    },
+    {
+      "best_control_min_passing_bytes": null,
+      "censor": "none_pass",
+      "family": "independent",
+      "mirror_better_by_10pct": false,
+      "mirror_min_passing_bytes": null,
+      "world": 503
+    },
+    {
+      "best_control_min_passing_bytes": null,
+      "censor": "none_pass",
+      "family": "independent",
+      "mirror_better_by_10pct": false,
+      "mirror_min_passing_bytes": null,
+      "world": 504
+    },
+    {
+      "best_control_min_passing_bytes": null,
+      "censor": "none_pass",
+      "family": "independent",
+      "mirror_better_by_10pct": false,
+      "mirror_min_passing_bytes": null,
+      "world": 505
+    }
+  ],
+  "summaries": [
+    {
+      "all_control_model_medians": {
+        "basis4": 0.21718374715095534,
+        "dense4": 0.4063327887048046,
+        "film4": 0.3794766923189448,
+        "lowrank4": 0.5096629183725147,
+        "mirror4": 0.4075915879519223,
+        "pre4": 0.38008712628370106
+      },
+      "cap": 1500,
+      "ci95_high": 1.9589257613629545,
+      "ci95_low": 1.7618525248333217,
+      "family": "compositional",
+      "geometric_mean_ratio": 1.857777785048136,
+      "iid_wins": 0,
+      "k_t": 2.5705818356363146,
+      "log_ratio_u_c": 0.02062381640029316,
+      "ood_wins": 0,
+      "worlds": 6
+    },
+    {
+      "all_control_model_medians": {
+        "basis4": 0.10451618734358514,
+        "dense4": 0.26521581121298576,
+        "film4": 0.20097713438531184,
+        "lowrank4": 0.47125287114430947,
+        "mirror4": 0.2260130441517259,
+        "pre4": 0.21444045957122188
+      },
+      "cap": 3000,
+      "ci95_high": 2.3906724389318215,
+      "ci95_low": 1.914554168663868,
+      "family": "compositional",
+      "geometric_mean_ratio": 2.139409237118213,
+      "iid_wins": 0,
+      "k_t": 2.5705818356363146,
+      "log_ratio_u_c": 0.04319837109682126,
+      "ood_wins": 0,
+      "worlds": 6
+    },
+    {
+      "all_control_model_medians": {
+        "basis4": 0.6870486616740461,
+        "dense4": 0.5828549239219295,
+        "film4": 0.571141680432382,
+        "lowrank4": 0.7332644516362721,
+        "mirror4": 0.6398201256142972,
+        "pre4": 0.6377384757840192
+      },
+      "cap": 1500,
+      "ci95_high": 1.1466802025424307,
+      "ci95_low": 1.0876350820868719,
+      "family": "independent",
+      "geometric_mean_ratio": 1.116767485298362,
+      "iid_wins": 0,
+      "k_t": 2.5705818356363146,
+      "log_ratio_u_c": 0.010282749371638901,
+      "ood_wins": 0,
+      "worlds": 6
+    },
+    {
+      "all_control_model_medians": {
+        "basis4": 0.6732224407404488,
+        "dense4": 0.46665068032405355,
+        "film4": 0.44053033251559237,
+        "lowrank4": 0.6929474559443572,
+        "mirror4": 0.541367164504496,
+        "pre4": 0.528198795036537
+      },
+      "cap": 3000,
+      "ci95_high": 1.2692197531810294,
+      "ci95_low": 1.1834772575836094,
+      "family": "independent",
+      "geometric_mean_ratio": 1.225598920024667,
+      "iid_wins": 0,
+      "k_t": 2.5705818356363146,
+      "log_ratio_u_c": 0.013604976425065168,
+      "ood_wins": 0,
+      "worlds": 6
+    }
+  ]
+}
