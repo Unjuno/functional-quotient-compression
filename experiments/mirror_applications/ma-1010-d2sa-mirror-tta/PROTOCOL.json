@@ -1,0 +1,129 @@
+{
+  "experiment_id": "MA-1010",
+  "title": "D2SA two-stage synthetic MRI test-time adaptation with Mirror-only compact state",
+  "status": "FAIL",
+  "evidence_lane": "MECHANISM/STORAGE/COMPUTE",
+  "base_commit": "6bbb22cf2",
+  "prior_art": {
+    "ref": "PA305",
+    "paper": "D2SA: Dual-Stage Distribution and Slice Adaptation for Efficient Test-Time Adaptation in MRI Reconstruction",
+    "arxiv": "2503.20815v2",
+    "official_repository": "https://github.com/uceclz0/D2SA-MRI-Recon",
+    "repository_commit": "2650d483a7cd77b13242e88719094ee837a45446",
+    "license": "Apache-2.0",
+    "source_observation": "Official code is available and documents batch patient-wise adaptation of a SIREN prompt plus per-slice latent vectors followed by single-slice DEBlock refinement. The README states the required pretrained knee/brain checkpoints and MRI data are not included and must be obtained via the upstream project. The official path depends on upstream U-Net code and CUDA-oriented MRI packages/checkpoints not installed here."
+  },
+  "hypothesis": "On a controlled synthetic MRI anatomy shift, a shared distribution coordinate plus a compact per-slice Givens view can retain self-supervised D2SA-style TTA quality within 1% of ordinary two-stage FiLM adaptation while reducing complete per-volume adaptation-state bytes by at least 25% and not increasing online updates.",
+  "scope": "Bounded mechanism screen, not a reproduction or clinical evaluation of D2SA. Synthetic 32x32 single-coil complex phantoms and an independently implemented small reconstructor because official training assets are absent.",
+  "model": {
+    "shared_object": "small shared 4-channel latent MRI prior and measurement operator",
+    "coordinate": "volume-level and slice-level coordinates inserted in the 4-channel latent feature map",
+    "native_control": "ordinary affine FiLM scale/bias coordinates with identical two-stage self-supervised adaptation objective",
+    "mirror": "two volume-level plus two slice-level Givens angles conjugating the same latent regularizer",
+    "frozen_shared_model": "no test-time update",
+    "upper_control": "independent per-slice last-layer adaptation"
+  },
+  "data": {
+    "type": "analytic synthetic complex MRI phantoms; no acquired MRI",
+    "size": "32x32; single-coil Cartesian 4x undersampling",
+    "source_train_seeds": [
+      1010001,
+      1010002,
+      1010003,
+      1010004,
+      1010005,
+      1010006,
+      1010007,
+      1010008
+    ],
+    "target_support_seeds": [
+      1010101,
+      1010102,
+      1010103,
+      1010104
+    ],
+    "target_development_seeds": [
+      1010201,
+      1010202,
+      1010203,
+      1010204,
+      1010205,
+      1010206,
+      1010207,
+      1010208
+    ],
+    "fresh_seeds": [
+      1010301,
+      1010307,
+      1010313
+    ],
+    "fresh_opened": false,
+    "test_time_reference_policy": "Fully sampled target images are used only for post-adaptation scoring; TTA receives only disjoint measured k-space partitions."
+  },
+  "controls": [
+    "frozen shared prior, no adaptation",
+    "native D2SA-style two-stage adaptation using shared FiLM distribution parameters and ordinary per-slice FiLM codes",
+    "same prior and update budget with volume and slice Givens Mirror coordinates",
+    "independent per-slice last-layer adaptation upper control"
+  ],
+  "training": {
+    "pretraining": "supervised source-domain phantom training, fixed schedule",
+    "adaptation": "split acquired samples into disjoint optimization and heldout scoring masks; no target reference in the loss",
+    "stage_one": "shared volume adaptation on four support slices",
+    "stage_two": "per-slice adaptation on eight development slices",
+    "updates": "12 updates per stage and case for all trainable-code methods",
+    "selection": "fixed one-shot screen; no fresh-set access and no hyperparameter selection"
+  },
+  "metrics": [
+    "target image NMSE",
+    "PSNR",
+    "SSIM",
+    "heldout acquired-sample consistency",
+    "actual serialized full per-volume payload bytes",
+    "TTA optimizer updates",
+    "active operation proxy",
+    "wall time"
+  ],
+  "storage": {
+    "authority": "actual serialized inference/TTA state payload bytes",
+    "paid": [
+      "shared prior weights",
+      "all per-volume distribution and slice codes",
+      "metadata",
+      "optimizer state excluded from inference payload but separately reported as transient adaptation memory"
+    ],
+    "common_schema": "All alternatives are serialized with identical architecture and acquisition metadata keys."
+  },
+  "success_gate": "Development Mirror meets the registered hypothesis only if it is within 1% relative NMSE of native FiLM adaptation, saves at least 25% complete per-volume state bytes, and uses no more TTA updates; a PASS would still require fresh sealed seeds.",
+  "failure_gate": "FAIL if Mirror is >1% relatively worse than native adaptation, fails heldout measurement consistency, provides <25% byte savings, is dominated by a byte-near ordinary code control, or requires more updates.",
+  "fresh": {
+    "worlds_or_seeds": [
+      1010301,
+      1010307,
+      1010313
+    ],
+    "locked_before_access": true,
+    "run_only_if_development_passes": true
+  },
+  "boundaries": [
+    "No acquired MRI or clinical claim.",
+    "Not an exact D2SA implementation/reproduction; official D2SA checkpoints and upstream training assets are absent.",
+    "Single-coil, small synthetic problem cannot establish performance on multi-coil real anatomy, scanner shifts, or clinical TTA.",
+    "Synthetic ground truth is used for scoring only, never for target adaptation."
+  ],
+  "failure_gate_result": "FAIL at the frozen development gate: Mirror saves only 192 B (3.25%) vs ordinary two-stage FiLM, below the 25% requirement; it also has higher NMSE than frozen sharing and independent per-slice adaptation. Fresh seeds remain unopened.",
+  "compute": {
+    "source_examples": 32,
+    "source_updates": 80,
+    "source_examples_seen": 640,
+    "development_target_support_slices": 4,
+    "development_target_eval_slices": 8,
+    "tta_updates_per_method": 108,
+    "independent_upper_updates": 96,
+    "cnn_forward_mac_per_slice": 516096,
+    "tta_forward_mac_proxy": "74,317,824 CNN MAC across 144 support+slice update predictions per code method; backward pass and FFT costs additionally incurred. Independent control: 49,544,? CNN MAC proxy across 96 predictions.",
+    "fft": "one forward FFT prediction per TTA update; heldout residual scoring adds 8 FFT calls per method",
+    "wall": "pretraining and TTA wall time measured separately in runs/development.json",
+    "active_compute_proxy": "74,317,824 CNN forward MAC across 144 support+slice update predictions per code method; backward pass and FFT costs additionally incurred. Independent control: 49,545,216 CNN forward MAC across 96 predictions."
+  }
+}

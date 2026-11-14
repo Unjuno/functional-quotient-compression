@@ -1,0 +1,29 @@
+{
+  "experiment_id": "MA-1010",
+  "commit": "pending-evidence-commit",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-1010-d2sa-mirror-tta/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "payload_bytes": {
+      "film": 5901,
+      "mirror": 5709,
+      "frozen": 5141,
+      "independent": 34689
+    }
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Replay verified exact metrics and actual serialized byte totals; source checkpoint hash exact.",
+    "Fresh seeds 1010301/1010307/1010313 remain unopened after the frozen development FAIL.",
+    "Official D2SA source inspected at 2650d483a7cd77b13242e88719094ee837a45446; Apache-2.0. Synthetic adaptation is independently implemented and is not an official reproduction."
+  ]
+}

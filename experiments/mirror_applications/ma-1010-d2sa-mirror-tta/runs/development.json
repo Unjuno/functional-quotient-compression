@@ -1,0 +1,116 @@
+{
+  "schema": "MA1010-dev-v1",
+  "code_sha256": "e016df9f894f4a53b1ebd29072a6def2a383eb7daedf8878a95f1b1ccc3572cf",
+  "seed_protocol": {
+    "source_train": [
+      1010001,
+      1010002,
+      1010003,
+      1010004,
+      1010005,
+      1010006,
+      1010007,
+      1010008,
+      1010009,
+      1010010,
+      1010011,
+      1010012,
+      1010013,
+      1010014,
+      1010015,
+      1010016,
+      1010017,
+      1010018,
+      1010019,
+      1010020,
+      1010021,
+      1010022,
+      1010023,
+      1010024,
+      1010025,
+      1010026,
+      1010027,
+      1010028,
+      1010029,
+      1010030,
+      1010031,
+      1010032
+    ],
+    "support": [
+      1010101,
+      1010102,
+      1010103,
+      1010104
+    ],
+    "development": [
+      1010201,
+      1010202,
+      1010203,
+      1010204,
+      1010205,
+      1010206,
+      1010207,
+      1010208
+    ],
+    "fresh": [
+      1010301,
+      1010307,
+      1010313
+    ],
+    "fresh_opened": false
+  },
+  "pretrain": {
+    "updates": 80,
+    "examples": 32,
+    "wall_s": 2.90245879000031,
+    "trainable_parameters": 518
+  },
+  "development_metrics": {
+    "frozen": {
+      "nmse": 0.6806625030391281,
+      "psnr_db": 1.7277457448386115,
+      "updates": 0,
+      "wall_s": 0,
+      "heldout_measurement_residual": 0.10251130303367972
+    },
+    "film": {
+      "nmse": 1.2042671599091233,
+      "psnr_db": -0.3361272404384635,
+      "updates": 108,
+      "wall_s": 0.2743327030038927,
+      "code_dims": {
+        "distribution": 8,
+        "slice": 8
+      },
+      "stage_one_loss": "self-supervised acquired train partition",
+      "heldout_measurement_residual": 0.117035205475986
+    },
+    "mirror": {
+      "nmse": 0.6951249211101604,
+      "psnr_db": 1.6179675936781646,
+      "updates": 108,
+      "wall_s": 0.33117126999968605,
+      "code_dims": {
+        "distribution": 2,
+        "slice": 2
+      },
+      "stage_one_loss": "self-supervised acquired train partition",
+      "heldout_measurement_residual": 0.10917785298079252
+    },
+    "independent": {
+      "nmse": 0.6789755053525071,
+      "psnr_db": 1.7409745207920204,
+      "updates": 96,
+      "wall_s": 0.18539165599941043,
+      "heldout_measurement_residual": 0.10470043122768402
+    }
+  },
+  "payload_bytes": {
+    "film": 5901,
+    "mirror": 5709,
+    "frozen": 5141,
+    "independent": 34689
+  },
+  "wall_total_s": 3.7452096329998312,
+  "checkpoint_sha256": "d7c54893a568cea028de888fc1930604590028fc4ba43990a697730a67162d96"
+}

@@ -24,7 +24,11 @@ MA-990 official MERL RANF code was located, but the required SONICOM HRTF subjec
 
 # Worker queue
 
-## Current handoff — 2026-11-14, MA-1009
+## Current handoff — 2026-11-14, MA-1010
+
+MA-1010 is a bounded synthetic D2SA-style MRI TTA FAIL: Givens views reduce coordinate count (4 vs 72) but actual complete payload falls only 3.25% vs FiLM (5,709 vs 5,901 B). Mirror NMSE .6951 trails frozen hard sharing .6807 and independent adaptation .6790. Deterministic replay passed; fresh sealed. No acquired MRI or official D2SA reproduction. See `ma-1010-d2sa-mirror-tta/RESULTS.md`. Continue to P0 MA-1011 (multi-contrast implicit MRI decoder).
+
+## Previous handoff — 2026-11-14, MA-1009
 
 MA-1009 is a bounded synthetic DUNE-z scanner-view FAIL: the Givens code improves NMSE only 0.000602% vs native hard sharing and adds 252 B, failing the frozen 5% gate. Exact replay/data consistency pass; fresh sealed and no acquired MRI claim. See `ma-1009-dune-representation-chart/RESULTS.md`. Continue to P0 MA-1010 (D2SA slice-distribution Mirror-only TTA).
 
