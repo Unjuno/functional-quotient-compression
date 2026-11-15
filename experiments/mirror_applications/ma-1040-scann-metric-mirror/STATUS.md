@@ -9,7 +9,7 @@
 - Development: complete; selected short +0.30 rad, long +0.15 rad
 - Fresh audit: 705 disjoint qids; quality, payload and five-repeat latency evaluated
 - Results: exact ranking/metric/payload replay; 3 tests pass
-- Registry row and claim ledger: pending final integration commit
+- Registry row, claim ledger, status board and worker queue: updated; integration commit pending
 
 ## Decision
 
@@ -17,4 +17,4 @@ The predeclared quality gate fails. Mirror nDCG gain is +0.005 pp and Recall@10 
 
 ## Next action
 
-Complete registry/status/claim integration, run integrity and replay checks, push this branch, then advance to P0 MA-1041 (DiskANN graph traversal with query-state View).
+Run final registry, replay and test checks; push this branch; then advance to P0 MA-1041 (DiskANN graph traversal with query-state View).
