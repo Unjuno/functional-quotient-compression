@@ -90,7 +90,7 @@ def series_normalized(records, per_record):
             grouped.setdefault(key,[]).append(i)
         out[ds]={}
         for key, ix in grouped.items():
-            row=per_record[ix]
+            row=[per_record[i] for i in ix]
             out[ds][key]={
                 "crps":float(np.mean([x["crps"] for x in row])),
                 "wql":float(sum(x["wql_num"] for x in row)/max(sum(x["wql_den"] for x in row),1e-8)),

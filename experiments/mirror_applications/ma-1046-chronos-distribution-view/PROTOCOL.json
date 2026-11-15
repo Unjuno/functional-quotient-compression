@@ -219,6 +219,17 @@
         "audit datasets, windows and sampling seeds",
         "metric definitions and decision gates"
       ]
+    },
+    {
+      "id": "AM-07",
+      "reason": "The report reducer then raised a TypeError when grouping forecast-window rows by series because it indexed a Python list with a list of row IDs. No aggregate audit metrics were saved or displayed.",
+      "change": "Select grouped per-record score rows with an explicit list comprehension and rerun the reducer against the unchanged, frozen forecast artifacts.",
+      "unchanged": [
+        "raw Chronos forecast artifacts",
+        "selected m and all controls",
+        "audit seeds and data splits",
+        "metric formulas and decision gates"
+      ]
     }
   ]
 }

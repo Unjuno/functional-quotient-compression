@@ -1,6 +1,7 @@
 import importlib.util
 import math
 import os
+import sys
 import tempfile
 import zipfile
 import unittest
@@ -12,6 +13,8 @@ SRC = Path(__file__).resolve().parents[1] / "source" / "run_chronos.py"
 spec = importlib.util.spec_from_file_location("run_chronos", SRC)
 mod = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(mod)
+sys.path.insert(0,str(SRC.parent))
+import evaluate_audit as audit_eval
 
 
 class MA1046ProtocolTests(unittest.TestCase):
@@ -73,6 +76,16 @@ class MA1046ProtocolTests(unittest.TestCase):
             self.assertEqual(count,2)
             self.assertEqual(rows[0][0],"1:T2")
             np.testing.assert_array_equal(rows[0][1],np.asarray([4,5,6],dtype=np.float32))
+
+    def test_audit_series_aggregation_selects_window_rows(self):
+        records=[{"dataset":"D","series":"A"},{"dataset":"D","series":"A"},{"dataset":"D","series":"B"}]
+        rows=[{"crps":1.,"wql_num":2.,"wql_den":4.,"mase":.5,"coverage90":.8,"naive_crps":2.},
+              {"crps":3.,"wql_num":3.,"wql_den":6.,"mase":1.5,"coverage90":.9,"naive_crps":3.},
+              {"crps":4.,"wql_num":8.,"wql_den":8.,"mase":2.,"coverage90":.7,"naive_crps":4.}]
+        out=audit_eval.series_normalized(records,rows)["D"]
+        self.assertEqual(out["A"]["crps"],2.0)
+        self.assertAlmostEqual(out["A"]["wql"],5/10)
+        self.assertEqual(out["B"]["crps"],4.0)
 
     def test_crps_zero_for_perfect_degenerate_forecast(self):
         y=np.asarray([[1.,2.,3.]])
