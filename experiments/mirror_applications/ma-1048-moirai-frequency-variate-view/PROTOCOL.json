@@ -1,7 +1,7 @@
 {
   "experiment_id": "MA-1048",
   "title": "Moirai frequency × variate factorized distribution View",
-  "status": "FROZEN_BEFORE_AUDIT",
+  "status": "FAIL_WITH_REPORTING_AMENDMENTS",
   "evidence_lane": "TIME_SERIES / PROBABILISTIC_QUALITY / STORAGE / CPU_RUNTIME",
   "base_commit": "f4b41c001",
   "prior_art_refs": ["PA328"],
@@ -78,6 +78,20 @@
       "reason": "The initial draft used ETT, whose final time region had been accessed by MA-1047; that would not provide a program-level fresh audit.",
       "change": "Replace ETT with pinned PEMS-BAY, derive two predeclared rates from the same new source, and use the registered checkerboard held-out frequency×variate design.",
       "impact": "No Moirai forecast, PEMS-BAY target, Mirror parameter, or outcome was viewed before this amendment. Model API smoke used random synthetic tensors only."
+    },
+    {
+      "id": "AM-01",
+      "timing": "after audit inference, before final reporting",
+      "reason": "The input manifest initially recorded row counts and hashes but omitted the HDF timestamp endpoints.",
+      "change": "Add start/end timestamp metadata from the HDF index. The original frozen manifest hash is preserved in DEV_FREEZE.json; source bytes, sensor selection, pair split, and model outputs are unchanged.",
+      "impact": "Metadata-only; no target values were used to change methods, codes, metrics, or gates."
+    },
+    {
+      "id": "AM-02",
+      "timing": "after audit inference, before final reporting",
+      "reason": "The storage gate refers to the full 2×14 independent calibration table.",
+      "change": "Serialize an identity-initialized full coefficient table as a storage-only shape reference and measure its actual bytes. It is not used as an audit quality result.",
+      "impact": "Adds no forecast method, target access, fitting, or metric; the primary audit remains frozen."
     }
   ]
 }

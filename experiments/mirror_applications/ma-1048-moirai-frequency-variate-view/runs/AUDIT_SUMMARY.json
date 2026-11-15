@@ -1,0 +1,130 @@
+{
+  "5min": {
+    "zero_shot": {
+      "heldout_cells": 6,
+      "crps": 4.0735308542365445,
+      "wql": 0.06269855587939466,
+      "mase": 5.064673261499492
+    },
+    "global": {
+      "heldout_cells": 6,
+      "crps": 4.123132490383001,
+      "wql": 0.06394584713835545,
+      "mase": 5.163830612415083
+    },
+    "frequency_only": {
+      "heldout_cells": 6,
+      "crps": 4.109958627635948,
+      "wql": 0.06403692940983577,
+      "mase": 5.134381524896224
+    },
+    "variate_only": {
+      "heldout_cells": 6,
+      "crps": 5.168267437238523,
+      "wql": 0.07926140597572294,
+      "mase": 6.680648005801667
+    },
+    "additive": {
+      "heldout_cells": 6,
+      "crps": 13.99568158157381,
+      "wql": 0.235249573287824,
+      "mase": 15.009146528293135
+    },
+    "mirror_factorized": {
+      "heldout_cells": 6,
+      "crps": 13.994463762132147,
+      "wql": 0.2352293402640331,
+      "mase": 15.00756982926841
+    },
+    "seasonal_naive": {
+      "heldout_cells": 6,
+      "crps": 5.608989166440787,
+      "wql": 0.09447059769601505,
+      "mase": 5.93630161463454
+    }
+  },
+  "15min": {
+    "zero_shot": {
+      "heldout_cells": 6,
+      "crps": 4.038797951772318,
+      "wql": 0.06278771994216042,
+      "mase": 4.12478458568805
+    },
+    "global": {
+      "heldout_cells": 6,
+      "crps": 4.049198817481112,
+      "wql": 0.06314674795551949,
+      "mase": 4.087240178095059
+    },
+    "frequency_only": {
+      "heldout_cells": 6,
+      "crps": 4.182345413005636,
+      "wql": 0.06464329627392401,
+      "mase": 4.2330561133546665
+    },
+    "variate_only": {
+      "heldout_cells": 6,
+      "crps": 4.198499054665976,
+      "wql": 0.0660978870153653,
+      "mase": 4.209786426959115
+    },
+    "additive": {
+      "heldout_cells": 6,
+      "crps": 85.07593100717783,
+      "wql": 1.3792841545420902,
+      "mase": 62.49789429152688
+    },
+    "mirror_factorized": {
+      "heldout_cells": 6,
+      "crps": 85.06185020817888,
+      "wql": 1.379054251801575,
+      "mase": 62.487786610378784
+    },
+    "seasonal_naive": {
+      "heldout_cells": 6,
+      "crps": 5.256597222001464,
+      "wql": 0.08776004350073041,
+      "mase": 4.008909000690196
+    }
+  },
+  "zero_shot_payload": {
+    "incremental_bytes": 360,
+    "complete_bytes": 55321242
+  },
+  "global_payload": {
+    "incremental_bytes": 368,
+    "complete_bytes": 55321250
+  },
+  "frequency_only_payload": {
+    "incremental_bytes": 376,
+    "complete_bytes": 55321258
+  },
+  "variate_only_payload": {
+    "incremental_bytes": 473,
+    "complete_bytes": 55321355
+  },
+  "additive_payload": {
+    "incremental_bytes": 481,
+    "complete_bytes": 55321363
+  },
+  "mirror_factorized_payload": {
+    "incremental_bytes": 489,
+    "complete_bytes": 55321371
+  },
+  "independent_full_table_reference_payload": {
+    "incremental_bytes": 585,
+    "complete_bytes": 55321467,
+    "quality_result": "not fit; serialized full-table identity template only"
+  },
+  "runtime": {
+    "audit_model_p50_s_per_series": 0.2860940778755321,
+    "audit_model_p95_s_per_series": 0.36432410100223933,
+    "postprocess_32x288_p50_ms": 0.004061002982780337,
+    "postprocess_32x288_p95_ms": 0.004504842945607378,
+    "device": "CPU, torch 2.14.1+cpu"
+  },
+  "seasonal_naive_payload": {
+    "incremental_bytes": 360,
+    "complete_bytes": 55321242
+  }
+}

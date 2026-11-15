@@ -1,19 +1,99 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-1048",
+  "commit": "pending-result-commit",
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "/tmp/ma1048-env/bin/python -m pytest -q experiments/mirror_applications/ma-1048-moirai-frequency-variate-view/tests",
+    "passed": 4,
+    "failed": 0
   },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "common_checkpoint_payload_bytes": 55320882,
+    "method_incremental_bytes": {
+      "zero_shot": 360,
+      "global": 368,
+      "frequency_only": 376,
+      "variate_only": 473,
+      "additive": 481,
+      "mirror_factorized": 489,
+      "seasonal_naive": 360,
+      "independent_full_table_reference": 585
+    },
+    "complete_payload_bytes": {
+      "zero_shot": 55321242,
+      "global": 55321250,
+      "frequency_only": 55321258,
+      "variate_only": 55321355,
+      "additive": 55321363,
+      "mirror_factorized": 55321371,
+      "seasonal_naive": 55321242,
+      "independent_full_table_reference": 55321467
+    },
+    "weights_sha256": "cc46831272ea07e99d78fe05c09e730c7c76a1b272cddbdaf5173dae371cb238",
+    "data_sha256": "65d69fb0a2323dba9867179eb7af47c8b814186bc459ff0a4937d21614153c8f",
+    "method_payload_hashes": {
+      "zero_shot": {
+        "method.json": "91ed4f62ff8038f7742235b49e0bdd7ee644fd14727888994a4e1cddd9d520ba",
+        "coefficients.f32le": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "global": {
+        "method.json": "ba456229aeb3a77821b909085c9f7ca9aa8c618f071b9c9afa2cd047e02772f8",
+        "coefficients.f32le": "3cea576b9be6264ffdde8e21a72b5e62f5a8c8f30e285e302f31b8e4ca99f43f"
+      },
+      "frequency_only": {
+        "method.json": "952d4e1cf53e560a84ede451babfdb9c7ffeebaf53cb3146b22137f2aabffff0",
+        "coefficients.f32le": "444442e39d19711bd6c4600ef70e8172f1cf25d6bc1802596d7b77204e65427c"
+      },
+      "variate_only": {
+        "method.json": "ec15d118aa32668c0a8cd6ce818e6d32bbd79fef83407cc70514a38457baa0ad",
+        "coefficients.f32le": "3e351c4f778b2c7591e950c148eec26c846dafedd5aac4696e95fdc60ed10c58"
+      },
+      "additive": {
+        "method.json": "8c7cee0721aa6a8654a4641a8e47e39bec46cc542245d61bbdb8d039e793e6e4",
+        "coefficients.f32le": "17716d70b41a2ce4c3ec881926c8298336bd927558b6de75190c62acc1d7feab"
+      },
+      "mirror_factorized": {
+        "method.json": "825be9c91490a95fd891aa3904c6f4e2c19ffff9d972e9c6d4923c2d8dcad8ed",
+        "coefficients.f32le": "57635855ca69619a8661fe8d48e887045e5f545ce82dd21f43292233a7691705"
+      },
+      "seasonal_naive": {
+        "method.json": "9c38967724f79512998f9e52cc1badb0d070b1ae202a413b8c339d403364612c",
+        "coefficients.f32le": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "independent_full_table_reference": {
+        "method.json": "3bfebea36d91ab8bed72b0862da4646895bc0ff90c6d26a9742e7a27a20c55bd",
+        "coefficients.f32le": "ee14c95696b3f2c359fade383cdc4154f0979721369bf02a8d4a1f236df7ccba"
+      }
+    }
   },
   "metric_replay": {
-    "checked": false,
-    "max_difference": null
+    "checked": true,
+    "method": "Replay empirical CRPS/WQL/MASE from saved Moirai samples, saved held-out targets and frozen development coefficients. No model inference or refit.",
+    "sha256": "40cef8a3e215cd138aaf0088dca7c9b94d148cb13f045a7a449ee1d6f728d1fd",
+    "identical_rerun_sha256": "40cef8a3e215cd138aaf0088dca7c9b94d148cb13f045a7a449ee1d6f728d1fd",
+    "max_difference": 0.0,
+    "scored_cells": 84
   },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "fresh_split_integrity_checked": true,
+  "protocol_frozen_before_audit": true,
+  "development_freeze_sha256": "2f186d504732bf60bac6e6a2127325f82750aeceaee5bf5f3ae8606bee9195d1",
+  "audit_forecasts_sha256": {
+    "audit_frequency_1.npz": "2a6dee3e6b0052e97aa8cf65071e7f2d6bed4d90371ca43855e4dec1e7269b63",
+    "audit_frequency_0.npz": "a7d4df47e4b0dd163ba0ca168237fe622c3937d12dde2bddb073008c3d44e053"
+  },
+  "input_manifest_frozen_sha256": "895c8d0dcd60b0e33e5a4a131657d1267775f6272996ca4d082392c3723e1487",
+  "input_manifest_final_sha256": "33fe2ff985bdd5c991bfa2284f764f39bea7be0867e472e3b27d6dc01fe82e13",
+  "source_sha256": {
+    "run_experiment.py": "4e3d7405c99424370dc74a18cfa8d2c819f3379a0e7b7d4104a0d5611e30f9a0",
+    "fit_controls.py": "6a1ab4dc54f50d8421dec4dda6d00c9f8dbbbeb72d9a5a9c4580752391758082"
+  },
+  "notes": [
+    "12 frequency\u00d7sensor audit pairs are disjoint from the 16 code-fit pairs; all heldout targets lie in the final 20% temporal region.",
+    "PEMS-BAY final timeline was not used by MA-1046/1047; 15-minute data are nonoverlapping means of the pinned 5-minute series.",
+    "AM-01 adds timestamp endpoints to the provenance manifest only; no targets or analysis were changed.",
+    "AM-02 serializes a full identity table for byte-size reference only; no quality outcome is claimed.",
+    "Moirai pretraining overlap with public traffic time-series datasets is unknown.",
+    "CPU-only inference; no H100/GPU performance claim."
+  ]
 }

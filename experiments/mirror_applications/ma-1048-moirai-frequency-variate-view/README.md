@@ -1,5 +1,5 @@
 # MA-1048 — Moirai frequency × variate View
 
-The frozen protocol uses the official Moirai-1.1-R-small checkpoint and previously unused PEMS-BAY traffic sensor data. It forms 5-minute and 15-minute views and withholds all registered frequency×sensor pairs from code fitting. See PROTOCOL.json for the fixed pair/time split, controls, and quality gates.
+**Decision: FAIL.** On the frozen checkerboard holdout over fresh PEMS-BAY traffic sensors, the factorized calibration produces much worse CRPS than zero-shot Moirai and is functionally matched by a simpler additive code. See [RESULTS.md](RESULTS.md), [PROTOCOL.json](PROTOCOL.json), and [VERIFICATION.json](VERIFICATION.json).
 
-Development selected seasonal naive by validation CRPS; calibrated Moirai View and native-control coefficients are frozen in runs/DEV_FREEZE.json. Final-period predictions have not been generated yet.
+The model checkpoint and raw PEMS-BAY input are not committed. Saved development and final sample forecasts, model/data hashes, actual method payloads, and source provenance are included.
