@@ -1,0 +1,13 @@
+{
+  "artifact": "QINCo v1 model reference source",
+  "upstream_repository": "https://github.com/facebookresearch/Qinco",
+  "upstream_commit": "5a324954d5c9b3700d4407d6cc24c3db6e52890e",
+  "upstream_path": "qinco_v1/model_qinco.py",
+  "upstream_sha256": "042a741b2574c32dc46e40e1ef737daaa961732b68b54e5060899b5a575a7d5a",
+  "vendored_path": "source/qinco_reference.py",
+  "vendored_sha256": "a77f912227148a2b299076dc49e57f286e81e0bd4e0514f5e8ae1c731b475c61",
+  "local_change": "Only import path redirected to the experiment's quantization helper; QINCo/QINCoStep definitions retained.",
+  "license": "CC BY-NC 4.0",
+  "license_file": "QINCO_LICENSE.txt",
+  "faiss": "Not installed; official structure's PyTorch codeword assignment is retained through the equivalent local exact torch distance helper; search uses exact brute-force L2."
+}
