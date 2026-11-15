@@ -34,6 +34,7 @@ obj={
  "experiment":"MA-1038",
  "protocol_commit":"4ae21b523c310c4bdc6b60d7234b2e2f6b8725fd",
  "frozen_runner_commit":"bf7f7052d9ce67d83d7ff9e05bd58c814ca8a85d",
+ "replay_runner_commit":subprocess.check_output(["git","-C",str(ROOT),"rev-parse","HEAD"],text=True).strip(),
  "summary_sha256":sha(summary),
  "inputs":inputs,
  "external_vector_cache":{"path":"/tmp/ma1038/cache","files":cache_files},
