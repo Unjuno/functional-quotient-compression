@@ -1,0 +1,56 @@
+{
+  "experiment_id": "MA-1031",
+  "title": "SAM2 interactive correction prompt views",
+  "status": "SCREENING",
+  "evidence_lane": "VISION/INTERACTION/STORAGE",
+  "base_commit": "d8ee28e09abe984f8493231bfba90587c503dd08",
+  "prior_art_refs": ["PA315"],
+  "hypothesis": "Across four tracked objects, a shared positive-negative correction-pair radius plus per-object/frame midpoint and Givens angle will retain direct-click corrected J&F within 1 pp while reducing serialized correction-history bytes by at least 25%; report full session bytes and test against native 8px-grid click coding.",
+  "physical_object": "SAM2 per-object interactive click history for a video session",
+  "mirror_coordinate": "For each object, a shared correction-pair radius and a per-frame Givens angle, addressed around the current correction-pair midpoint",
+  "logical_multiplicity": "Per-object positive/negative click pairs across frames reconstructed from one shared pair geometry and a small frame View code",
+  "insertion_point": "Coordinate history immediately before SAM2 add_new_points_or_box; the decoder reconstructs click coordinates before the official prompt encoder",
+  "controls": [
+    "official SAM2 zero-correction propagation",
+    "official SAM2 direct positive/negative click corrections from current-frame errors",
+    "native 8-pixel-grid quantized direct clicks",
+    "Mirror polar pair code with shared per-object radius",
+    "per-frame exact mask corrections as quality upper control"
+  ],
+  "scene": {
+    "model": "official SAM2.1 Hiera-tiny",
+    "resolution": 256,
+    "device": "CPU",
+    "objects": 4,
+    "frames": 6,
+    "initial_prompt": "exact object masks on frame 0",
+    "human_correction_simulation": "At each current frame, choose one positive point from false negatives and one negative point from false positives using only that frame's ground truth and current prediction; no future frame or mask is read.",
+    "clicks_per_object_correction_frame": 2
+  },
+  "development": {
+    "worlds_or_seeds": [103100],
+    "selection_metric": "Freeze per-object shared pair radii as the mean half-distance between direct correction pairs on the development world; no audit tuning.",
+    "allowed_tuning": "No architecture or threshold tuning."
+  },
+  "fresh": {
+    "worlds_or_seeds": [103101, 103102, 103103],
+    "locked_before_access": true,
+    "data_generated_only_after_development_freeze": true
+  },
+  "storage": {
+    "authority": "actual serialized correction-history payload and actual serialized resumable SAM2 session bundle bytes",
+    "paid_objects": ["SAM2 checkpoint", "SAM2 source/config", "video frame cache retained by inference state", "initial mask prompts", "predicted masks", "object pointers/scores/memory", "click-history tensor or Mirror radii/midpoints/angles", "private mask corrections", "payload metadata"]
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true,
+    "report_fps": true,
+    "training_updates": 0,
+    "active_compute": "SAM2 propagation plus click encoding/decoding and correction calls; report per-video wall time and click count"
+  },
+  "success_gate": "Across all three fresh worlds, Mirror corrected mean J&F is within 1 pp of direct clicks, correction-history payload is at least 25% smaller than direct float32 clicks, and Mirror has either better J&F than 8px-grid clicks at equal/lower prompt bytes or at least 1 pp better J&F with no more than 2x their prompt bytes. Full session bytes are reported separately.",
+  "failure_gate": "Mirror misses the direct-click quality or prompt-history byte gate in at least two fresh worlds, or the 8px-grid native control dominates Mirror on both prompt bytes and J&F.",
+  "boundaries": ["three synthetic fresh videos only", "four objects and six frames", "256px CPU SAM2.1 Hiera-tiny", "human correction prompts simulated from current-frame ground truth only", "no natural-video, benchmark, or GPU claim", "this test compresses prompt history, not the number of human corrections"]
+}
