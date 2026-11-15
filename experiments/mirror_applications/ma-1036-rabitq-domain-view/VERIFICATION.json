@@ -1,19 +1,31 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-1036",
+  "freeze_commit": "e3d4d7dfcbff453b292e6a410e11dce257ac3b85",
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "PYTHONPATH=/tmp/ma1036deps python -m unittest discover -s experiments/mirror_applications/ma-1036-rabitq-domain-view/tests -v",
+    "passed": 4,
+    "failed": 0
   },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "payload_variants_replayed": 12,
+    "payload_files_hashed": 60
   },
   "metric_replay": {
-    "checked": false,
-    "max_difference": null
+    "checked": true,
+    "max_difference": 0.0,
+    "metrics": [
+      "Recall@10",
+      "squared-L2 estimator MAE and signed error"
+    ]
   },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Fresh worlds 103601-103603; development seed 103600.",
+    "Mirror FAIL: storage gate passes vs independent bank but shared-index quality gate fails.",
+    "Transform+search throughput NOT ESTABLISHED due large repeated-run variation.",
+    "Post-quantization gauge rankings identical for all audit seeds.",
+    "See POST_AUDIT_AMENDMENT.md; initial result artifacts preserved."
+  ]
 }

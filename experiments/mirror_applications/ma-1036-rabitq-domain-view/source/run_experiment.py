@@ -77,17 +77,23 @@ def payload(root,method,seed,indices,bases,angles):
             bh=hash(np.asarray(R).tobytes())
             if bh not in seen_basis:
                 rb=np.asarray(R,dtype='<f4').tobytes(order='C'); (p/f'basis_{i}.f32').write_bytes(rb); n+=len(rb); seen_basis.add(bh)
-    meta={'method':method,'seed':seed,'angles_rad':[float(a) for a in angles], 'd':D,'index_count':len(indices),'faiss_version':faiss.__version__}
+    unique=[]; domain_to_index=[]
+    for idx in indices:
+        found=next((i for i,x in enumerate(unique) if x is idx),None)
+        if found is None: found=len(unique); unique.append(idx)
+        domain_to_index.append(found)
+    meta={'method':method,'seed':seed,'angles_rad':[float(a) for a in angles], 'd':D,'physical_index_count':len(unique),'domain_to_index':domain_to_index,'faiss_version':faiss.__version__}
     mb=json.dumps(meta,sort_keys=True,separators=(',',':')).encode(); (p/'manifest.json').write_bytes(mb); n+=len(mb)
     return n
 
 def arm(train,db,qs,base_seed,method,angles=None):
-    idxs=[]; bases=[]; trans=[]; t0=time.perf_counter()
+    idxs=[]; bases=[]; trans=[]; build=0.0
     shared_idx=None
+    shared_R=rotation(base_seed) if method in ('shared','mirror') else None
     for j in range(len(DOMAINS)):
         if method=='unrotated': R=None; th=0.
-        elif method=='shared': R=rotation(base_seed); th=0.
-        elif method=='mirror': R=rotation(base_seed); th=float(angles[j])
+        elif method=='shared': R=shared_R; th=0.
+        elif method=='mirror': R=shared_R; th=float(angles[j])
         elif method=='independent': R=rotation(base_seed+j+1); th=0.
         else: raise ValueError(method)
         tr=givens(train,th); dbv=givens(db,th); qv=givens(qs[j],th)
@@ -96,10 +102,9 @@ def arm(train,db,qs,base_seed,method,angles=None):
         if method in ('unrotated','shared') and shared_idx is not None:
             idx=shared_idx
         else:
-            idx=index_for(tr,dbv)
+            tb=time.perf_counter(); idx=index_for(tr,dbv); build += time.perf_counter()-tb
             if method in ('unrotated','shared'): shared_idx=idx
         idxs.append(idx); bases.append(R); trans.append(qv)
-    build=time.perf_counter()-t0
     rec=[]; r1=[]; search=[]; tsearch=[]
     for j,idx in enumerate(idxs):
         r,a,_=recall(idx, (db if bases[j] is None else apply_basis(givens(db,0. if method in ('shared','independent') else float(angles[j])),bases[j])), trans[j]); rec.append(r); r1.append(a)
