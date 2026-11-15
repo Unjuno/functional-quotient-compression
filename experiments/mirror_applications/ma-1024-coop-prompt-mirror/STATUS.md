@@ -9,4 +9,4 @@ T: frozen CLIP ViT-B/32; CIFAR-10 4-shot base classes; four transforms; 30 updat
 D: FAIL. Mirror prompt state saves 73.8% vs independent, but novel accuracy is 8.59 pp lower; harmonic mean misses the 1 pp tolerance. Shared CoOp uses 73 fewer bytes and generalizes better.
 C: four-shot adaptation may underfit each domain.
 U: other datasets/backbones, natural shifts, private residual frontier, CoCoOp/MaPLe and external seeds.
-Last verified commit: pending.
+Last verified commit: `502fc4a1234b1fa9c5e7d202e717106b03798992`.
