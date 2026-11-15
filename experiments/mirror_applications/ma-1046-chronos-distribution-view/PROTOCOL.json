@@ -1,0 +1,79 @@
+{
+  "experiment_id": "MA-1046",
+  "title": "Chronos tiny frequency-conditioned probabilistic output View",
+  "status": "SCREENING",
+  "evidence_lane": "TIME_SERIES / PROBABILISTIC_QUALITY / STORAGE / RUNTIME",
+  "base_commit": "0efef595c",
+  "prior_art_refs": ["PA326"],
+  "hypothesis": "A two-scalar frequency-conditioned Givens code over standardized Chronos forecast-sample shapes can improve proper probabilistic forecast quality on chronologically later, dataset-held-out ETT/Monash series beyond zero-shot Chronos and ordinary output temperature calibration, while adding negligible state and under 10% decode/postprocessing latency.",
+  "physical_object": "One frozen amazon/chronos-t5-tiny checkpoint, shared across all series and frequencies.",
+  "mirror_coordinate": "m=(theta_15min, theta_1h), two float32 values. For each forecast lead, orthogonalize the centered forecast sample residual against its squared residual and apply a Givens rotation by theta. Between 15-minute and hourly development frequencies, interpolate linearly in log2(hours/step); clamp outside the observed interval to the nearest endpoint.",
+  "logical_multiplicity": "Frequency-conditioned probabilistic output distributions for many univariate forecast series from one frozen decoder.",
+  "prior_art_delta": "Chronos already normalizes and quantizes each input series and samples probabilistic output trajectories. The candidate changes only the post-decoder distribution shape, preserving each lead's ensemble mean and variance. The matched native controls are output temperature scaling and the algebraically equivalent normalized quadratic/Hermite residual.",
+  "model": {
+    "id": "amazon/chronos-t5-tiny",
+    "revision": "29d808298f1a62493e7b9a5e08529d0d930fa189",
+    "architecture": "Official Chronos-T5-Tiny, 8M parameters, CPU float32 weights. Chronos quantizes real-valued series into 4096 input/output token bins; checkpoint weights themselves are not INT8 quantized. The registry wording 'quantized decoder' is interpreted as Chronos token quantization, not post-training weight quantization.",
+    "inference_package": "chronos-forecasting==1.5.3, torch==2.14.1+cpu, transformers==4.46.3",
+    "samples_per_forecast": 32,
+    "temperature": 1.0,
+    "top_k": 50,
+    "top_p": 1.0,
+    "context_length": 512
+  },
+  "data": {
+    "development": {
+      "datasets": [
+        {"id": "ETTh1", "url": "https://raw.githubusercontent.com/zhouhaoyi/ETDataset/1d16c8f4f943005d613b5bc962e9eeb06058cf07/ETT-small/ETTh1.csv", "frequency_minutes": 60, "horizon": 24, "seasonal_period": 24},
+        {"id": "ETTm1", "url": "https://raw.githubusercontent.com/zhouhaoyi/ETDataset/1d16c8f4f943005d613b5bc962e9eeb06058cf07/ETT-small/ETTm1.csv", "frequency_minutes": 15, "horizon": 96, "seasonal_period": 96}
+      ],
+      "split": "first 60% chronological rows fit development code; next 20% validate and choose the frozen grid/config; last 20% of these development files is not scored for final evidence.",
+      "series": "all seven numeric channels, excluding date; 4 spaced fit windows and 2 spaced validation windows per channel; window targets do not overlap within each channel."
+    },
+    "fresh_audit": {
+      "locked_before_access": true,
+      "datasets": [
+        {"id": "Weather daily", "url": "https://zenodo.org/records/4654822/files/weather_dataset.zip", "source": "Chronos paper zero-shot benchmark II / Monash TSF", "frequency_minutes": 1440, "horizon": 30, "seasonal_period": 7, "series_count": 12, "series_indices": [182, 304, 363, 587, 731, 770, 1482, 1490, 1888, 2021, 2452, 2658], "windows_per_series": 3},
+        {"id": "Australian Electricity Demand", "url": "https://zenodo.org/records/4659727/files/australian_electricity_demand_dataset.zip", "source": "Chronos paper zero-shot benchmark II / Monash TSF", "frequency_minutes": 30, "horizon": 48, "seasonal_period": 48, "series_count": 5, "series_indices": "all", "windows_per_series": 3}
+      ],
+      "split": "Final 20% of each chosen series is the forecast-target region; forecast origins are fixed, evenly spaced, non-overlapping by horizon, and use only observations strictly preceding the target. No audit labels or forecasts are used to fit m or controls.",
+      "model_pretraining_overlap": "The Chronos paper lists Weather and Australian Electricity in its zero-shot evaluation benchmark. The selected source datasets and future targets are held out from this experiment's code fitting. This is not an independent re-pretraining audit."
+    },
+    "sample_seeds": [104601, 104602, 104603],
+    "split_integrity": "Development uses only ETTh1/ETTm1. Audit uses different Chronos zero-shot datasets Weather and Australian Electricity, 12 predeclared Weather series and all 5 electricity series. Dataset/frequency pairs are disjoint from development. Daily Weather is outside the dev frequency interval and receives the protocol-frozen clamped hourly code."
+  },
+  "controls": [
+    "Frozen Chronos zero-shot output",
+    "Native frequency-conditioned output temperature calibration with two float32 coefficients, fitted only on development forecasts",
+    "Native two-coefficient location/scale calibration on the two development frequencies",
+    "Normalized quadratic/Hermite residual control; this is algebraically equivalent to the one-angle Givens View after amplitude normalization and is an explicit Mirror-specificity falsifier",
+    "Seasonal-naive forecast using period 24/96 in development and period 7/48 in audit"
+  ],
+  "selection": {
+    "development_frequency_code": "Fit theta_hour and theta_15min from train-region forecast samples using the preregistered grid [-0.60,0.60] step 0.05 radians; choose the minimum equally weighted mean empirical CRPS. Fit the two coefficients of the log-frequency temperature and the native two-frequency location/scale on the same train windows. Use the next chronological 20% only for selecting among predefined method/config variants, then freeze one candidate state.",
+    "metric_primary": "Empirical sample CRPS, equal-weighted across audit datasets after normalizing each dataset score by its frozen seasonal-naive CRPS.",
+    "metrics_secondary": ["normalized weighted quantile loss at tau=0.1,0.5,0.9", "MASE of median forecast", "90% interval coverage and absolute coverage error", "actual complete serialized bytes", "decoder and postprocessing p50/p95 wall time"],
+    "bootstrap": "10,000 paired block bootstrap replicates, block=one complete series; use as descriptive uncertainty, not to relax point-estimate gates."
+  },
+  "gates": {
+    "promising": "Across both fresh datasets, Mirror improves normalized CRPS by at least 1.0% versus zero-shot and at least 0.5% versus the strongest native temperature/location-scale control; normalized WQL does not worsen more than 0.5%; median MASE does not worsen more than 1%; p95 added decode+View latency <=10%; complete payload includes the single shared checkpoint and all m/config state.",
+    "fail": "Mirror fails its quality gate on either audit dataset, or a native temperature/Hermite control matches its score within 0.1%, or the code adds no useful downstream distribution quality. An exact Hermite/Givens alias is a FAIL for Mirror-specific attribution even if the shared postprocessing is useful.",
+    "not_established": "Model/data execution unavailable, fewer than 8 valid selected Weather series or fewer than 4 electricity series, unrecoverable Chronos inference instability, or test split/series overlap cannot be verified."
+  },
+  "storage": {
+    "authority": "Actual serialized inference payload bytes.",
+    "paid_objects": ["all shared checkpoint inference files (model.safetensors and model/generation configs)", "two float32 frequency View coefficients or native calibration coefficients", "frequency knot/interpolation/clamp metadata", "forecast sample count and generation config", "method-specific serialized calibration state"],
+    "reporting": "Report common checkpoint bytes once, then full checkpoint+method state for every method, plus incremental state bytes and source/runner code bytes separately. No claim that code-generation algorithm or checkpoint is free."
+  },
+  "compute": {
+    "report": ["model generation p50/p95 and contexts/s", "View/calibration postprocess p50/p95", "active generated tokens and forecast samples", "fit grid evaluations and wall-clock", "decode wall-clock"],
+    "optimizer_updates": 0,
+    "training": "No Chronos weight updates; only development calibration codes are fit."
+  },
+  "boundaries": [
+    "One small Chronos checkpoint and two Monash zero-shot datasets; no broad time-series foundation model claim.",
+    "No unseen model architecture or frequency beyond the registered clamped extension.",
+    "The View and Hermite residual control may be algebraically identical; no Mirror-specific claim without beating the simpler control.",
+    "Chronos checkpoint weights are FP32; only the input/output series tokenizer uses quantized tokens."
+  ]
+}
