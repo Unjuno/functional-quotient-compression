@@ -1,0 +1,69 @@
+{
+  "experiment_id": "MA-1039",
+  "title": "PLAID centroid pruning with a query-role task View",
+  "status": "SCREENING",
+  "evidence_lane": "NATURAL_BENCHMARK_SCOPED / RETRIEVAL / STORAGE / RUNTIME",
+  "base_commit": "720481fcc9fda56eb63483d3d42c7e000d8688f5",
+  "hypothesis": "Two development-selected query-role centroid-bank Givens views can improve fresh TREC-COVID candidate recall and MRR@10 by at least 0.5 absolute percentage points over native PLAID pruning on one fixed residual-coded index, without duplicating the token index; any Mirror-specific advantage must also beat the exactly matched native query-side inverse-Givens routing control by 0.5 pp.",
+  "physical_object": "One official ColBERTv2 frozen encoder, one shared 512-centroid residual-coded token index, one PLAID inverted centroid-to-document map",
+  "mirror_coordinate": "One float32 Givens angle for each of two query-length roles; apply to the centroid bank only during PLAID cell selection and centroid-based candidate pruning",
+  "logical_multiplicity": "Two task/query-role candidate-generation and reranking functions sharing one physical PLAID index",
+  "prior_art_refs": [
+    "PA321",
+    "PA322"
+  ],
+  "controls": [
+    "Official ColBERT/PLAID CPU index and native centroid pruning, ncells=2, centroid_score_threshold=0.45, ndocs=4096 for k=100 (fixed config across all arms).",
+    "Same fixed index with two query-role Givens views applied to centroid vectors before native cell selection and centroid pruning",
+    "Matched native query-side inverse Givens applied only to the routing query vectors; full-query residual MaxSim reranking remains unchanged. Centroid scores/candidate sets must agree with the Mirror bank view within 1e-6",
+    "All-document residual-MaxSim upper retrieval control over the same compressed index, using the full PID list and bypassing cell pruning",
+    "Independent query encoders omitted: one extra complete BERT encoder is hundreds of MB and does not isolate the registered centroid-routing coordinate"
+  ],
+  "development": {
+    "dataset": "Official BEIR TREC-COVID collection/query/qrels archive; qid split and candidate construction are frozen below before archive contents are opened",
+    "query_split": "Numeric qids with qid mod 5 in {0,1} are audit; all other positive-qrel qids are development. This creates disjoint query identities.",
+    "candidate_collection": "Union of every corpus document with positive qrels for a query in the official TREC-COVID qrels, plus 512 background corpus documents selected by ascending SHA256('MA1039|1039|' + doc_id), excluding all positive-qrel documents. Preserve full document IDs and order in a charged mapping file.",
+    "worlds_or_seeds": [
+      "TREC-COVID official qid split; background seed 1039; PLAID index seed 1039"
+    ],
+    "role_definition": "Short/long role split at the median unpadded ColBERT token count among development qrel queries; equality belongs to short role.",
+    "selection_metric": "For each role independently, choose the angle maximizing mean development MRR@10 over [-0.20,-0.15,-0.10,-0.05,0,0.05,0.10,0.15,0.20] radians; tie-break by smallest absolute angle then smaller signed angle.",
+    "index": "Official ColBERT residual indexer and official PLAID CPU traversal; 128-D, doc_maxlen=180, query_maxlen=32, nbits=1, fixed 512 centroid partitions (cap the upstream small-corpus auto-partition estimate at 512 through a runtime adapter; keep all other official index/search paths). kmeans_niters=20, collection sampling seed=1039, FAISS k-means seed=123 (fixed upstream), nranks=1."
+  },
+  "fresh": {
+    "dataset": "All official TREC-COVID qrel queries selected by the frozen numeric qid split; full fixed positive-plus-background candidate collection",
+    "worlds_or_seeds": [
+      "40% of qid residues (mod 5 in {0,1}); all eligible audit qrels and queries; no audit query/qrel used for angle selection"
+    ],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "Official ColBERTv2 weights, config and tokenizer",
+      "Every official PLAID index file, including centroid matrix, packed token codes, residual bitstream, doc lengths, IVF mapping, collection PID map and metadata",
+      "Two serialized View angles, query-role threshold and view metadata",
+      "Any separate learned router, address, codebook or reconstruction state"
+    ],
+    "index_reuse": "The same on-disk PLAID index is shared by no-view, Mirror and native routing control; do not multiply-count it for each arm, but report the marginal View-state bytes.",
+    "deterministic_free_state": "Only fixed model/tokenizer bytes shared by all compared arms"
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true,
+    "report_per_query_latency_and_candidate_counts": true,
+    "updates": "No encoder updates; report development angle-query evaluations.",
+    "proxies": "Report qrels-query/document pairs, valid token vectors, PLAID centroids scored per query, unique pre-pruning IVF candidate PIDs, reranked document tokens, query-side and direct centroid-side Givens FLOPs, index build and search wall clocks. Candidate Recall@1000 denotes the final reranked top-1000; pre-pruning IVF-union recall is separately labeled."
+  },
+  "success_gate": "On the held-out TREC-COVID audit queries, Mirror improves MRR@10 and candidate Recall@1000 by >=0.005 absolute over native PLAID, has nonidentical useful task-role results, and beats the matched native query-side inverse-Givens routing control by >=0.005 MRR@10 at equal candidate settings and actual payload. Report nDCG@10 and tail latency as secondary measures.",
+  "failure_gate": "FAIL for Mirror-specific value if the matched native query-side routing control reproduces centroid scores/candidate sets within 1e-6, or if fresh MRR gain is <0.005. FAIL for compression if Mirror actual marginal bytes do not improve the fixed-index utility frontier. Runtime NOT ESTABLISHED because single-pass per-query wall times are not repeated calibration and cannot establish stable latency ordering.",
+  "boundaries": [
+    "Bounded TREC-COVID positive-plus-random-background candidate collection, not full 171k-document benchmark score.",
+    "Uses the official ColBERT implementation's CPU PLAID traversal with a fixed smaller-corpus partition cap; not a GPU or production-scale throughput claim.",
+    "Audit qids and qrels must not be used to choose role threshold, angles, index parameters or codebook.",
+    "The query-side inverse rotation is a functional control for centroid-scoring orthogonality, not a different full query encoder.",
+    "Separate observed facts, interpretation and further hypothesis in results."
+  ]
+}
