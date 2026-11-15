@@ -1,3 +1,7 @@
+## Current handoff — 2026-11-15, MA-1042 complete
+
+MA-1042 is FAIL for Mirror-specific attribution: the exact affine-coordinate control aliases Mirror. One shared official PGM path over four synthetic affine domains returned 120,000/120,000 exact fresh predecessor answers and cut actual serialized payload 74.97% vs four independent indexes (133,720 vs 534,260 B); the CPU p95 gate passed. Update checks use DynamicPGMIndex; predecessor queries use a rebuilt static PGMIndex due the pinned dynamic iterator API. Synthetic-only result; natural data and online dynamic predecessor serving remain unestablished. See experiments/mirror_applications/ma-1042-pgm-domain-residual-view/RESULTS.md. Continue at next P0 MA-1046 (Chronos shared time model + distribution Mirror code).
+
 ## Current handoff — 2026-11-13, MA-1001
 
 MA-1001 is PROMISING only for synthetic LJ NVE stability: two 3,000-step Mirror trajectories in each of three fresh worlds had <5.5e-9 relative energy drift and exactly matched native coefficient paths. The negative separate-force control drifted; Mirror payload/compute were higher than native. No MatterSim/MACE result. See `ma-1001-md-view-stability/RESULTS.md`. Continue at MA-1003; MA-1002 is P1.

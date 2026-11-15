@@ -6,11 +6,11 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- Claim ledger entries: **466**
-- P0: **630** (383 FAIL; 54 PROMISING; 182 UNTESTED; 10 NOT ESTABLISHED; 1 SCREENING)
+- Claim ledger entries: **467**
+- P0: **630** (384 FAIL; 54 PROMISING; 181 UNTESTED; 10 NOT ESTABLISHED; 1 SCREENING)
 - P1: **422** (17 completed; 405 UNTESTED)
 - P2: **103** (103 UNTESTED)
-- Current MA statuses: **391 FAIL, 10 NOT ESTABLISHED, 63 PROMISING, 1 SCREENING, 690 UNTESTED**
+- Current MA statuses: **392 FAIL, 10 NOT ESTABLISHED, 63 PROMISING, 1 SCREENING, 689 UNTESTED**
 - 47 baseline experiment directories remain present; verified external outcomes are linked to their dedicated branches in the registry and claim ledger.
 - New research: MA-876..935 (60 candidates), PA236..PA265 (30 primary sources). See the current Next candidate section for the live queue.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. see the current Next candidate section.
@@ -24,7 +24,7 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-MA-1041 feasibility review: the container reports only rotational virtual `vda` (ROTA=1), tmpfs and persistent memory, with no directly available SSD; DiskANN source/package and CMake/Ninja are absent. No experiment or metrics were produced; MA-1041 remains UNTESTED (not FAIL). See `experiments/mirror_applications/ma-1041-diskann-query-view/EXECUTION_BLOCKER.md`. Advance to P0 MA-1042 (PGM-index piecewise model with domain residual View, PA325). MA-1039 is complete as a bounded official ColBERTv2/PLAID CPU FAIL: fresh TREC-COVID audit MRR@10 is 0.096726 vs 0.097917 native (-0.119 pp); Recall@1000 gains +0.309 pp, below the +0.5 pp gate. Native inverse query-Givens matches candidate sets/top-100 exactly; full payload 491,544,817 B vs 491,544,697 B (+120 B), runtime NOT ESTABLISHED. See `experiments/mirror_applications/ma-1039-plaid-mirror-pruning/RESULTS.md`. MA-1038 is complete as a scoped official ColBERTv2/SciFact→NFCorpus FAIL: shared 256-centroid + int8 residual index reaches nDCG@10 0.332290; role View reaches 0.333051 (+0.076 pp, below +0.5 pp gate) and lowers MRR by 0.108 pp. Native inverse query-Givens matches quality and bytes. Full payloads: 726,467,488 B full-float; 511,690,535 B residual native; 511,690,756 B Mirror. Runtime NOT ESTABLISHED; not a PLAID traversal claim.
+MA-1042 is complete with a scoped FAIL for Mirror-specific attribution. Three confirmatory fresh worlds: one shared official PGM path plus affine domain coordinates returned 120,000/120,000 exact predecessor answers and reduced actual serialized payload 74.97% vs four independent indexes (133,720 vs 534,260 B); CPU p95 passed. Ordinary affine-coordinate control is a functionally exact alias, so this is generic shared-index/coordinate compression, not Mirror-specific evidence. Dynamic update membership passed; predecessor queries use a rebuilt static PGMIndex. Synthetic affine domains only. See branch research/ma-1042-pgm-domain-residual-view-20261115 and experiments/mirror_applications/ma-1042-pgm-domain-residual-view/RESULTS.md. MA-1041 remains UNTESTED due absent SSD. Next P0: MA-1046 (Chronos shared time model + distribution Mirror code).
 
 Previous: MA-1033 is complete as a scoped frozen CLIP ViT-B/32 class×domain composition FAIL: Mirror averages 86.25% held-out-cell accuracy vs 86.67% additive and shared across three fresh image seeds; it wins one seed and loses two against additive. Learned payload 1,580,814 B vs 1,744,542 B independent cells (9.39%, below the 25% gate); complete-bundle saving only 0.0268%. Exact serialization/data/metric replay and three tests pass. No official prompt-learning reproduction. See `experiments/mirror_applications/ma-1033-class-domain-prompt-mirror/RESULTS.md`.
 
