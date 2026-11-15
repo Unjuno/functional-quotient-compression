@@ -7,13 +7,13 @@
 - Result status: audit completed; independent metric/payload/data-map replay exact
 - Development complete: yes
 - Fresh/audit opened: yes, after the frozen development angle file
-- Results committed: pending
-- Verification committed: pending
-- Registry row updated: pending
+- Results committed: yes (`facae087ea605d29b8a76bd1c4073b1ec4bb8736`)
+- Verification committed: yes (`facae087ea605d29b8a76bd1c4073b1ec4bb8736`)
+- Registry row updated: yes (final integration commit pending)
 
 ## Next action
 
-Integrate the verified FAIL into the registry, claim ledger, status board and worker queue; run registry integrity and push.
+MA-1039 is closed. Registry, claim ledger, status board and worker queue now record the scoped FAIL. Run final registry integrity and push the research branch; then begin P0 MA-1040 on its dedicated branch.
 
 ## Blockers
 
