@@ -6,11 +6,11 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- Claim ledger entries: **457**
-- P0: **630** (374 FAIL; 54 PROMISING; 191 UNTESTED; 10 NOT ESTABLISHED; 1 SCREENING)
+- Claim ledger entries: **458**
+- P0: **630** (375 FAIL; 54 PROMISING; 190 UNTESTED; 10 NOT ESTABLISHED; 1 SCREENING)
 - P1: **422** (17 completed; 405 UNTESTED)
 - P2: **103** (103 UNTESTED)
-- Current MA statuses: **382 FAIL, 10 NOT ESTABLISHED, 63 PROMISING, 1 SCREENING, 699 UNTESTED**
+- Current MA statuses: **383 FAIL, 10 NOT ESTABLISHED, 63 PROMISING, 1 SCREENING, 698 UNTESTED**
 - 47 baseline experiment directories remain present; verified external outcomes are linked to their dedicated branches in the registry and claim ledger.
 - New research: MA-876..935 (60 candidates), PA236..PA265 (30 primary sources). See the current Next candidate section for the live queue.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. see the current Next candidate section.
@@ -24,7 +24,9 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-MA-1029 is complete as a scoped synthetic SAM ViT-B adapter FAIL: Mirror uses 20,505 B adaptation state (64.0% below independent) but hard sharing is 188 B smaller at effectively equal quality; FiLM is higher quality in all three fresh worlds. Full-bundle savings versus independent are only 36,454 B. Six tests and saved metric/payload/data-hash verification pass. Continue to P0 MA-1030. See `experiments/mirror_applications/ma-1029-mopeft-sam-expert-view/RESULTS.md`.
+MA-1030 is complete as a scoped synthetic SAM2.1 Hiera-tiny CPU FAIL: one causal private slot cut object-memory state 50.0%, but selected non-rare ID42 in all 18 frame-world opportunities and never shifted ID99. J&F 0.17772 vs 0.60567 independent and 0.28987 rank-1 additive; full-session savings 0.240%, and rank-1 dominates. Input/payload/prediction hashes, metric replay and four tests pass. Continue to P0 MA-1031. See `experiments/mirror_applications/ma-1030-sam2-rare-object-private-fallback/RESULTS.md`.
+
+Previous: MA-1029 is a scoped synthetic SAM ViT-B adapter FAIL: Mirror uses 20,505 B adaptation state (64.0% below independent) but hard sharing is 188 B smaller at effectively equal quality; FiLM is higher quality in all three fresh worlds. Full-bundle savings versus independent are only 36,454 B. Six tests and saved metric/payload/data-hash verification pass. See `experiments/mirror_applications/ma-1029-mopeft-sam-expert-view/RESULTS.md`.
 
 Previous: MA-1028 is NOT ESTABLISHED: official SAM2Long multi-object path scoring assumes scalar object scores, so the registered two-object tree control could not run. A one-object 12-frame diagnostic is exploratory only; masks tie exactly across controls and Mirror path memory shrinks 62.5%, but complete-session bytes only 3.11% (hard sharing is 240 B smaller). Six artifact/metric/source tests pass. See `experiments/mirror_applications/ma-1028-sam2long-memory-path-view/EXECUTION_BLOCKER.md`.
 
