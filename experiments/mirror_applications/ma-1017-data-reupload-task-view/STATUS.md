@@ -9,4 +9,4 @@ T: two-qubit, three-block schedule; four distinct tasks; 16 inputs/task; 1,024 s
 D: FAIL. Mirror and native scalar controls exactly alias at 379 B; both preserve teacher and save 27.5% vs independent bank. Five tests/replay pass.
 C: only aligned synthetic tasks; fixed task phases encode the teacher family.
 U: noise, QPU, compilation, natural tasks, learned adaptation, fresh data.
-Last verified commit: pending.
+Last verified commit: `84c1c7928caf2cce36b08d2e8f944467b4ce80e7`.
