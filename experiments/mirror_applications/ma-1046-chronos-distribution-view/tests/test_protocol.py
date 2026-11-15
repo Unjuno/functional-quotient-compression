@@ -1,5 +1,8 @@
 import importlib.util
 import math
+import os
+import tempfile
+import zipfile
 import unittest
 from pathlib import Path
 
@@ -57,6 +60,19 @@ class MA1046ProtocolTests(unittest.TestCase):
         self.assertEqual(num.shape,(2,))
         np.testing.assert_allclose(den,3*np.sum(np.abs(y),axis=1))
         np.testing.assert_allclose(num,0.0,atol=0.0)
+
+    def test_tsf_reader_skips_preamble_until_data_marker(self):
+        with tempfile.TemporaryDirectory() as td:
+            archive=Path(td)/"tiny.zip"
+            content=("# Dataset Information\n@relation x\n@attribute series_name string\n"
+                     "@frequency daily\n@missing false\n@equallength true\n@data\n"
+                     "T1:1,2,3\nT2:4,5,6\n").encode()
+            with zipfile.ZipFile(archive,"w") as z:
+                z.writestr("tiny.tsf",content)
+            count,rows=mod.tsf_selected(archive,"tiny.tsf",[1])
+            self.assertEqual(count,2)
+            self.assertEqual(rows[0][0],"1:T2")
+            np.testing.assert_array_equal(rows[0][1],np.asarray([4,5,6],dtype=np.float32))
 
     def test_crps_zero_for_perfect_degenerate_forecast(self):
         y=np.asarray([[1.,2.,3.]])

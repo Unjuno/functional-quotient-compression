@@ -84,12 +84,17 @@
         }
       ],
       "split": "Final 20% of each chosen series is the forecast-target region; forecast origins are fixed, evenly spaced, non-overlapping by horizon, and use only observations strictly preceding the target. No audit labels or forecasts are used to fit m or controls.",
-      "model_pretraining_overlap": "The Chronos paper lists Weather and Australian Electricity in its zero-shot evaluation benchmark. The selected source datasets and future targets are held out from this experiment's code fitting. This is not an independent re-pretraining audit."
+      "model_pretraining_overlap": "The Chronos paper lists Weather and Australian Electricity in its zero-shot evaluation benchmark. The selected source datasets and future targets are held out from this experiment's code fitting. This is not an independent re-pretraining audit.",
+      "sample_seeds": [
+        104604,
+        104605,
+        104606
+      ]
     },
     "sample_seeds": [
-      104601,
-      104602,
-      104603
+      104604,
+      104605,
+      104606
     ],
     "split_integrity": "Development uses only ETTh1/ETTm1. Audit uses different Chronos zero-shot datasets Weather and Australian Electricity, 12 predeclared Weather series and all 5 electricity series. Dataset/frequency pairs are disjoint from development. Daily Weather is outside the dev frequency interval and receives the protocol-frozen clamped hourly code."
   },
@@ -179,6 +184,17 @@
         "all forecast windows, horizons and seeds",
         "model checkpoint and selected distribution codes",
         "quality/storage/runtime thresholds"
+      ]
+    },
+    {
+      "id": "AM-04",
+      "reason": "The first audit attempt generated Weather forecast samples but stopped before any Australian Electricity forecast because the TSF parser incorrectly treated the archive preamble line \"# Dataset Information\" as a series row. The parser must advance to @data before counting records. Weather outputs from seeds 104601-104603 are preserved but not used as confirmatory results.",
+      "change": "Skip all TSF preamble until the explicit @data marker; preserve the same dataset series indices and windows; use untouched confirmation sampling seeds 104604-104606 for both fresh datasets.",
+      "unchanged": [
+        "input archive bytes and selected series",
+        "frozen model and development codes",
+        "forecast horizons and code transforms",
+        "metrics and decision gates"
       ]
     }
   ]

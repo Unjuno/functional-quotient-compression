@@ -24,7 +24,7 @@ MODEL = Path(os.environ.get(
 SAMPLES = 32
 CTX = 512
 BATCH = 8
-AUDIT_SEEDS = [104601, 104602, 104603]
+AUDIT_SEEDS = [104604, 104605, 104606]
 WEATHER_IDS = [182, 304, 363, 587, 731, 770, 1482, 1490, 1888, 2021, 2452, 2658]
 DATASET_SPECS = {
     "ETTh1": {"freq_min": 60, "horizon": 24, "period": 24},
@@ -47,10 +47,15 @@ def tsf_selected(zip_path, member, indices):
     want = set(indices)
     out = {}
     seen = 0
+    data_started = False
     with zipfile.ZipFile(zip_path) as zf, zf.open(member) as raw:
         for line in raw:
             line = line.decode("utf-8").strip()
-            if not line or line.startswith("@"):
+            if not data_started:
+                if line == "@data":
+                    data_started = True
+                continue
+            if not line:
                 continue
             if seen in want:
                 fields = line.split(":")
