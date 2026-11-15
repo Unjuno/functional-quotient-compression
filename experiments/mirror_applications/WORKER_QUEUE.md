@@ -26,7 +26,7 @@ MA-990 official MERL RANF code was located, but the required SONICOM HRTF subjec
 
 ## Current handoff — 2026-11-15, MA-1017
 
-MA-1017 is a bounded aligned synthetic data-reupload FAIL for Mirror-specific value. Four distinct task classifiers reach 98.44% 1,024-shot accuracy with both Mirror and native scalar-phase schedules at 379 B; both save 27.5% vs independent task circuits, while no-view sharing reaches 51.56%. The Mirror and native controls exactly alias; five tests/replay pass, fresh sealed. No QPU, noise or compiled-device claim. Continue to P0 MA-1018. See `ma-1017-data-reupload-task-view/RESULTS.md`.
+MA-1017 is a bounded aligned synthetic data-reupload FAIL for Mirror-specific value. Four distinct task classifiers reach 98.44% 1,024-shot accuracy with both Mirror and native scalar-phase schedules at 379 B; both save 27.5% vs independent task circuits, while no-view sharing reaches 51.56%. The Mirror and native controls exactly alias; five tests/replay pass, fresh sealed. No QPU, noise or compiled-device claim. MA-1016/1017 trigger a pause of quantum MA-1018..1023, which remain UNTESTED pending a Mirror-distinct mechanism. Continue at P0 MA-1024. See `ma-1017-data-reupload-task-view/RESULTS.md` and `../../docs/phase2/QUANTUM_MIRROR_FAMILY_DIAGNOSTIC_2026-11-15.md`.
 
 ## Current handoff — 2026-11-15, MA-1016
 

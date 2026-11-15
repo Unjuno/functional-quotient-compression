@@ -24,7 +24,7 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-MA-1017 is complete as a scoped synthetic FAIL for Mirror-specific attribution: four distinct task functions reach 98.44% shot accuracy with the Mirror schedule and ordinary scalar phase alike; both use 379 B and save 27.5% vs independent circuits, while no-view sharing reaches 51.56%. Five tests/replay pass; fresh sealed; no QPU/noisy-device claim. Continue to P0 MA-1018. See `experiments/mirror_applications/ma-1017-data-reupload-task-view/RESULTS.md`.
+MA-1017 is complete as a scoped synthetic FAIL for Mirror-specific attribution: four distinct task functions reach 98.44% shot accuracy with the Mirror schedule and ordinary scalar phase alike; both use 379 B and save 27.5% vs independent circuits, while no-view sharing reaches 51.56%. Five tests/replay pass; fresh sealed; no QPU/noisy-device claim. MA-1016/1017 are consecutive quantum-family failures with the same exact native scalar-phase alias, so pause MA-1018..1023 UNTESTED pending redesign. Continue to P0 MA-1024. See `experiments/mirror_applications/ma-1017-data-reupload-task-view/RESULTS.md` and `../../docs/phase2/QUANTUM_MIRROR_FAMILY_DIAGNOSTIC_2026-11-15.md`.
 
 MA-1016 is complete as an aligned synthetic FAIL: four distinct TT-generated task functions have 100% exact teacher agreement; at 1,024 shots all methods score 95.31%. Mirror saves 3.4% actual bytes vs native rank-2 TT, below the 10% gate, exactly aliases a native scalar-phase control (567 B), and exceeds the independent angle bank by 48 B. Six tests/replay pass; fresh sealed; no QPU or official TensorHyper claim. Continue at P0 MA-1017. See `experiments/mirror_applications/ma-1016-tensorhyper-vqc-mirror/RESULTS.md`.
 
