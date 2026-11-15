@@ -1,0 +1,21 @@
+{
+  "experiment_id": "MA-1041",
+  "title": "DiskANN graph traversal with query-state View",
+  "status": "UNTESTED",
+  "protocol_frozen": false,
+  "evidence_lane": "ANN / SSD RUNTIME / QUALITY / STORAGE",
+  "base_commit": "930e610ef2bb54b0717f6cf17d690c07a47b1933",
+  "hypothesis": "A small query/task View specializes traversal on one shared SSD-resident DiskANN graph, preserving recall while improving the recall / SSD I/O / p99 tradeoff over native search_list_size tuning and a simple query-conditioned traversal gate.",
+  "physical_object": "One official DiskANN graph and vector store on a directly measured SSD.",
+  "mirror_coordinate": "Small query/task state m affecting graph traversal policy without changing graph topology.",
+  "logical_multiplicity": "Task-specific retrieval traversal policies over one shared graph.",
+  "prior_art_refs": ["PA324"],
+  "controls_required": ["Official native DiskANN search-list-size tuning", "Simple query-conditioned traversal gate", "Mirror query traversal state", "Exact retrieval where practical"],
+  "blocker": "Container exposes virtual rotational vda and tmpfs, with no directly measurable SSD. DiskANN package/source and CMake/Ninja build tools are absent. SSD I/O/P99 hypothesis cannot be tested here.",
+  "fresh": {"split_frozen": false, "audit_opened": false},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["all graph/vector index files", "ID map", "metadata", "task/query coordinates", "router and reconstruction state"]},
+  "compute": {"ssd_reads": true, "report_qps": true, "report_p99": true, "report_build_update_cost": true},
+  "success_gate": "Not frozen: do not invent gates without the required DiskANN SSD runtime and data.",
+  "failure_gate": "No model result; registry remains UNTESTED until a faithful experiment can be run.",
+  "boundaries": ["Feasibility blocker only; no ANN quality, storage or latency data.", "Do not substitute an in-memory graph or unrelated ANN implementation for registered DiskANN SSD behavior."]
+}
