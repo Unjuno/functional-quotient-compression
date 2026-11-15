@@ -1,0 +1,21 @@
+{
+  "schema": "mirror-a13-evidence-v1",
+  "experiment": "A13 and post-result A13b/A13c/A13d",
+  "created_date": "2026-11-15",
+  "classification": "EXPLORATORY_SYNTHETIC_CPU",
+  "upstream_A12_zip_sha256": "0c3ee59af6bc4ccbab569f65ec16a38cd4b2a85ff2fb52b8ed00e5f0da4adc94",
+  "A13": {"frozen_parent_models": 36, "optimized_models": 108, "post_lock_split_scores": 324, "task_level_ES_policies": 288, "optimizer_candidate_evals_per_task": 960},
+  "A13b_post_discovery": {"optimized_models": 72, "post_lock_split_scores": 216, "methods": ["Adam4", "Sobol960"]},
+  "A13c_post_discovery": {"fresh_meta_parent_models": 36, "optimized_models": 108, "post_lock_split_scores": 324, "new_world_ids": [1300,1301,1302]},
+  "A13d_post_discovery": {"optimized_models": 12, "post_lock_split_scores": 36, "mirror_candidate_evals_per_task": 9600},
+  "total_new_models": 300,
+  "total_archived_parent_model_files": 72,
+  "total_post_lock_split_scores": 900,
+  "independently_replayed_identical_files": {"A13_optimized": 9, "A13b_optimized": 2, "A13c_fresh_meta": 2, "A13c_optimized": 6, "A13d_optimized": 1},
+  "test_a13_passed": 11,
+  "models_with_verified_new_code_only_changes": 300,
+  "hardware": {"cpu": "Intel Xeon Platinum 8573C", "observed_mhz": 2299.998, "clock_locked": false, "workers": 4, "numerical_threads_per_worker": 1, "model_backend": "PyTorch 2.10.0+cpu FP32", "ES_fitness": "NumPy float64"},
+  "quality_gate": "old-dev and unseen IID and unseen OOD each NRMSE <=0.20 (world means over 2 seeds)",
+  "result": "A13 tent Shift ES 3/3, FiLM ES 3/3, Mirror ES 0/3; A13c fresh worlds Shift ES 3/3, FiLM ES 2/3, Mirror ES 0/3; A13d Mirror 10x ES 0/6; no Mirror-specific byte-quality gain",
+  "scientific_limits": ["Only synthetic 1D teacher families", "A13b/c/d are post-discovery followups", "No FLOPs matching", "Code search and shared scaffold are different resource costs", "Sine OOD fails", "Task latent R2 is posthoc and world-specific", "Original A12 fixed scaffolds and teacher family generator selected by prior research"]
+}
