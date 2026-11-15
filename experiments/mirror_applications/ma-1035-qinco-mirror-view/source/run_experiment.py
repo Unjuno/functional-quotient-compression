@@ -230,9 +230,13 @@ def run(lane, seed):
     truth=exact_topk(xq,xdb,10); rows={}; payload_hash={}; code_hash={}
     for method in METHODS:
         model=models[method];model.eval()
-        t0=time.perf_counter()
-        with torch.no_grad(): codes,_=model.encode(torch.from_numpy(xdb))
-        encode_wall=time.perf_counter()-t0;codes_np=codes.cpu().numpy().astype(np.uint8)
+        with torch.no_grad(): model.encode(torch.from_numpy(xdb))
+        encode_times=[]
+        for _ in range(5):
+            t0=time.perf_counter()
+            with torch.no_grad(): codes,_=model.encode(torch.from_numpy(xdb))
+            encode_times.append(time.perf_counter()-t0)
+        encode_wall=float(np.median(encode_times));codes_np=codes.cpu().numpy().astype(np.uint8)
         model_raw=serialize_model(model,method,seed)
         code_raw=pack_codes(codes_np)
         index_meta=json.dumps({"schema":"MA1035-index-v1","method":method,"rows":len(xdb),"d":D,"M":M,"K":K,"codes_per_row":M,"packed_bits_per_code":4,"implicit_row_ids":True},sort_keys=True,separators=(",",":")).encode()+b"\n"
@@ -240,17 +244,31 @@ def run(lane, seed):
         model_path=RUNS/f"model_{seed}_{method}.bin"; index_path=RUNS/f"index_{seed}_{method}.bin"
         model_path.write_bytes(model_raw);index_path.write_bytes(index_raw)
         payload_hash[method]=hashlib.sha256(model_raw).hexdigest();code_hash[method]=hashlib.sha256(index_raw).hexdigest()
-        t0=time.perf_counter()
-        with torch.no_grad():recon=model.decode(torch.from_numpy(codes_np.astype(np.int64))).cpu().numpy().astype(np.float32)
-        decode_wall=time.perf_counter()-t0
-        t0=time.perf_counter();pred=exact_topk(xq,recon,10);search_wall=time.perf_counter()-t0
+        code_tensor=torch.from_numpy(codes_np.astype(np.int64))
+        with torch.no_grad(): model.decode(code_tensor)
+        decode_times=[]
+        for _ in range(20):
+            t0=time.perf_counter()
+            with torch.no_grad():recon=model.decode(code_tensor).cpu().numpy().astype(np.float32)
+            decode_times.append(time.perf_counter()-t0)
+        decode_wall=float(np.median(decode_times))
+        # Warm the BLAS path and report the median of repeated complete-query scans.
+        exact_topk(xq,recon,10)
+        scan_times=[]
+        for _ in range(20):
+            t0=time.perf_counter();pred=exact_topk(xq,recon,10);scan_times.append(time.perf_counter()-t0)
+        search_wall=float(np.median(scan_times))
         # compute metrics with this already-measured prediction to avoid an unreported second search.
         nmse=float(np.mean((xdb-recon)**2)/(np.var(xdb)+1e-12))
         r1=float(np.mean(pred[:,0]==truth[:,0]));r10=float(np.mean([len(set(p)&set(t))/10 for p,t in zip(pred,truth)]))
         model_bytes=len(model_raw);index_bytes=len(index_raw);total=model_bytes+index_bytes
         rows[method]={"normalized_mse":nmse,"recall_at_1":r1,"recall_at_10":r10,
             "training_wall_s":train_wall[method],"training":train_info[method],"database_encode_wall_s":encode_wall,
-            "database_decode_load_wall_s":decode_wall,"search_wall_s":search_wall,"query_qps":len(xq)/max(search_wall,1e-12),
+            "database_decode_load_wall_s":decode_wall,"search_wall_s_median_20_scans":search_wall,
+            "search_qps_median":len(xq)/max(search_wall,1e-12),
+            "decode_load_plus_scan_qps":len(xq)/max(decode_wall+search_wall,1e-12),
+            "generator_macs_per_encoded_vector":0 if method=="rq_static" else int((M-1)*K*(2*D*D+2*D*H)),
+            "coordinate_ops_per_encode_vector":(0 if method in ["rq_static","qinco_native","qinco_tied"] else int((M-1)*3*D if method=="qinco_mirror_givens" else (M-1)*D)),
             "resident_reconstruction_bytes":int(recon.nbytes),"serialized_model_bytes":model_bytes,"serialized_index_bytes":index_bytes,
             "total_serialized_bytes":total,"full_float32_database_bytes":int(xdb.nbytes),"code_count":int(codes_np.size),
             "model_payload_sha256":payload_hash[method],"index_payload_sha256":code_hash[method]}

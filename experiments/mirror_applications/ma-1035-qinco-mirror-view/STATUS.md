@@ -3,7 +3,7 @@
 - Status: SCREENING
 - Branch: `research/ma-1035-qinco-mirror-view-20261115`
 - Base commit: `e4ebfb8f7a1e45e3407fb1583c606ccd08cac81e`
-- Development complete: no
+- Development complete: yes
 - Fresh/audit opened: no
 - Results committed: no
 - Verification committed: no
@@ -11,8 +11,12 @@
 
 ## Next action
 
-Commit frozen protocol and source, run development world 103500, then freeze any selected settings before fresh worlds 103501–103503.
+Run frozen fresh worlds 103501–103503 without changing settings.
 
 ## Blockers
 
-None. The official QINCo v1 source is available at a pinned public commit. Faiss is not installed; exact codeword assignment and exact top-10 retrieval use PyTorch and brute-force distance calculations in this small screen.
+None. Faiss is unnecessary for this screen; exact PyTorch codeword assignment and exact brute-force L2 search are used.
+
+## Decisions / rulings
+
+A1 replaced unstable single-shot lookup timing with warm-up plus repeated medians before fresh worlds were opened. The initial timing artifact remains preserved. See `AMENDMENTS.md` and `FREEZE.json`.

@@ -72,7 +72,8 @@
       "resident decoded-vector scratch bytes",
       "generator MAC proxy",
       "Mirror coordinate FLOP proxy"
-    ]
+    ],
+    "timing_method": "Warm model path once; database encode is the median of 5 complete encodes; database decode-at-load and full 128-query scan are each medians of 20 complete repeats. Report load+scan throughput separately from scan-only throughput."
   },
   "storage": {
     "paid_objects": [
@@ -101,5 +102,8 @@
     "not QINCo paper reproduction",
     "not SIFT/BigANN or large-scale ANN evidence",
     "no GPU/QPS deployment claim"
+  ],
+  "amendments": [
+    "A1: the first development screen used single-shot encode/decode/scan timing, which showed unstable sub-millisecond differences. Before audit access, keep the same model and quality gates but warm up and use repeat medians for 5 encodes and 20 decode/scan runs. Preserve the initial timing artifact; see AMENDMENTS.md."
   ]
 }
