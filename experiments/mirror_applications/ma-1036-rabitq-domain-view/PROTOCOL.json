@@ -1,0 +1,113 @@
+{
+  "experiment_id": "MA-1036",
+  "title": "RaBitQ domain-specific Givens quantizer views",
+  "status": "FROZEN",
+  "evidence_lane": "ANN/QUANTIZATION/GEOMETRY/STORAGE/COMPUTE",
+  "base_commit": "59e7f1fe1be9f2ed94cceeaaf358da7c64176ce6",
+  "prior_art": {
+    "id": "PA319",
+    "implementation": "FAISS IndexRaBitQ",
+    "faiss_version": "1.16.0",
+    "repo_commit": "ebab8f784c1d177129602269d5ad966c525fbdcb"
+  },
+  "hypothesis": "A shared paid random rotation basis plus one per-domain Givens angle and domain-specific RaBitQ code stream will approach independent per-domain random rotations while using at least 25% fewer complete basis+index bytes; post-quantization orthogonal views on one code stream should preserve rankings exactly and yield no new function.",
+  "physical_object": "One D\u00d7D FAISS random orthogonal rotation basis and one 1-bit-per-dimension RaBitQ quantizer/code stream.",
+  "mirror_coordinate": "One scalar Givens angle m_d per query domain, applied before the shared random rotation and quantization. Every domain-specific code stream and FAISS quantizer state is charged.",
+  "logical_multiplicity": "Domain-specific approximate ranking functions over one shared random-rotation basis; a separate exact-geometry post-quantization control rotates both query and decoded reconstruction.",
+  "data": {
+    "type": "synthetic anisotropic clustered retrieval worlds",
+    "dimension": 128,
+    "clusters": 32,
+    "vectors": {
+      "train": 2048,
+      "database": 2048,
+      "queries_per_domain": 256
+    },
+    "domains": [
+      "isotropic",
+      "front-loaded variance",
+      "back-loaded variance",
+      "alternating variance"
+    ],
+    "development_seed": 103600,
+    "fresh_world_seeds": [
+      103601,
+      103602,
+      103603
+    ],
+    "ground_truth": "Exact Euclidean top-10 on the untransformed database; all view transforms are orthogonal and leave exact ranking invariant."
+  },
+  "quantizer": {
+    "implementation": "FAISS IndexRaBitQ 1.16.0",
+    "bits_per_dimension": 1,
+    "basis": "FAISS RandomRotationMatrix(D,D), seeded once for shared-basis arms",
+    "domain_transform": "same full-pair Givens rotation over 64 adjacent coordinate pairs; one angle scalar per domain"
+  },
+  "controls": [
+    "unrotated shared RaBitQ single code stream",
+    "shared random-rotation RaBitQ single code stream",
+    "Mirror shared random rotation plus dev-selected per-domain Givens angles and separate domain code streams",
+    "independent random rotation plus separate RaBitQ code stream per domain",
+    "post-quantization orthogonal gauge: rotate query and decoded reconstruction together from the same code stream"
+  ],
+  "selection": {
+    "dev_grid_rad": [
+      0,
+      0.3926990817,
+      0.7853981634,
+      1.1780972451,
+      1.5707963268,
+      1.9634954085,
+      2.3561944902,
+      2.7488935719
+    ],
+    "selection_metric": "per-domain Recall@10; choose one angle per domain on development world 103600 only",
+    "fresh_seed_lock": true
+  },
+  "metrics": {
+    "quality": [
+      "Recall@1",
+      "Recall@10",
+      "mean absolute and signed distance-estimator error on returned top-10 candidates"
+    ],
+    "storage": "actual serialized FAISS index bytes plus actual FP32 rotation basis bytes plus all per-domain angles/manifests",
+    "compute": [
+      "index train+add wall",
+      "warm median search-only QPS",
+      "warm median transform+search QPS",
+      "exact-transform FLOP proxy",
+      "resident index bytes"
+    ]
+  },
+  "success_gate": "On all three fresh worlds, Mirror per-domain mean Recall@10 is within 1 percentage point of independent-rotation control; improves on the shared single-index result by at least 2 points in at least 3/4 domains; complete Mirror payload is at least 25% smaller than independent-rotation bank; and transform+search QPS is no more than 10% slower than the independent control.",
+  "failure_gate": "Mirror fails any storage/quality/runtime gate, a shared single index ties or beats Mirror, or gains require storing every domain bitstream without a net byte advantage.",
+  "storage": {
+    "paid_objects": [
+      "dense shared rotation matrix (FP32)",
+      "each serialized RaBitQ index including codes and centroid state",
+      "all per-domain angle codes",
+      "self-describing manifests"
+    ],
+    "reconstructible_free": [
+      "none; basis and indexes are serialized explicitly"
+    ]
+  },
+  "compute": {
+    "report_database_examples": true,
+    "report_index_build_wall": true,
+    "report_transform_and_search_wall": true,
+    "report_exact_ground_truth_ops": true
+  },
+  "boundaries": [
+    "synthetic 128-D clustered vectors",
+    "no natural SIFT/BigANN/embedding data",
+    "Faiss IndexRaBitQ 1.16.0 CPU implementation",
+    "angles selected from development only",
+    "orthogonal exact-metric invariance does not imply query-specific capacity"
+  ],
+  "implementation": {
+    "entrypoint": "source/run_experiment.py",
+    "tests": "python -m unittest discover -s tests",
+    "runtime": "FAISS 1.16.0 CPU"
+  }
+}
