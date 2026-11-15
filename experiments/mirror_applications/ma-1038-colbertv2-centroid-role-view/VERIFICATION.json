@@ -1,0 +1,94 @@
+{
+  "experiment": "MA-1038",
+  "limitations": [
+    "cache hashes and upstream provenance are recorded separately",
+    "the search implementation is a CPU full-MaxSim screen, not PLAID production traversal"
+  ],
+  "max_abs_metric_diff": 0.0,
+  "payload_replay": "all on-disk component lengths match recorded actual serialized inference byte counts",
+  "payloads": {
+    "audit_full_float": {
+      "file_count": 10,
+      "files": {
+        "config.json": 743,
+        "doc_ids.json": 39740,
+        "doc_offsets.int64.npy": 29200,
+        "doc_vectors.float32.npy": 287293568,
+        "index_format.json": 196,
+        "pytorch_model.bin": 438405935,
+        "special_tokens_map.json": 112,
+        "tokenizer.json": 466081,
+        "tokenizer_config.json": 405,
+        "vocab.txt": 231508
+      },
+      "serialized_bytes": 726467488
+    },
+    "audit_mirror": {
+      "file_count": 15,
+      "files": {
+        "centroid_codes.uint8.npy": 561248,
+        "centroids.float32.npy": 131200,
+        "config.json": 743,
+        "doc_ids.json": 39740,
+        "doc_offsets.int64.npy": 29200,
+        "index_format.json": 272,
+        "pytorch_model.bin": 438405935,
+        "residual_scale.float32.npy": 640,
+        "residuals.int8.npy": 71823488,
+        "role_angles.float32.npy": 136,
+        "role_threshold.json": 48,
+        "special_tokens_map.json": 112,
+        "tokenizer.json": 466081,
+        "tokenizer_config.json": 405,
+        "vocab.txt": 231508
+      },
+      "serialized_bytes": 511690756
+    },
+    "audit_native_query_givens": {
+      "file_count": 15,
+      "files": {
+        "centroid_codes.uint8.npy": 561248,
+        "centroids.float32.npy": 131200,
+        "config.json": 743,
+        "doc_ids.json": 39740,
+        "doc_offsets.int64.npy": 29200,
+        "index_format.json": 272,
+        "pytorch_model.bin": 438405935,
+        "residual_scale.float32.npy": 640,
+        "residuals.int8.npy": 71823488,
+        "role_angles.float32.npy": 136,
+        "role_threshold.json": 48,
+        "special_tokens_map.json": 112,
+        "tokenizer.json": 466081,
+        "tokenizer_config.json": 405,
+        "vocab.txt": 231508
+      },
+      "serialized_bytes": 511690756
+    },
+    "audit_residual_native": {
+      "file_count": 13,
+      "files": {
+        "centroid_codes.uint8.npy": 561248,
+        "centroids.float32.npy": 131200,
+        "config.json": 743,
+        "doc_ids.json": 39740,
+        "doc_offsets.int64.npy": 29200,
+        "index_format.json": 235,
+        "pytorch_model.bin": 438405935,
+        "residual_scale.float32.npy": 640,
+        "residuals.int8.npy": 71823488,
+        "special_tokens_map.json": 112,
+        "tokenizer.json": 466081,
+        "tokenizer_config.json": 405,
+        "vocab.txt": 231508
+      },
+      "serialized_bytes": 511690535
+    }
+  },
+  "quality_replay": "exact metric values replayed from fixed cached vectors and frozen codebook/angles",
+  "roles": {
+    "long": 1,
+    "short": 322
+  },
+  "status": "PASS"
+}
