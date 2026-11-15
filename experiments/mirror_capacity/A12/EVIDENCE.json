@@ -1,0 +1,219 @@
+{
+  "schema": "A12-evidence-v1",
+  "experiment": "A12+A12b",
+  "date": "2026-11-15",
+  "provenance": "A12 preregistered as an exploratory follow-up to A11; A12b protocol fixed after A12 audit",
+  "original_a11_checksum": "523e5b1cb32b8cd06c2a999119456cb63e82b020823bf31c60e1331e3c0060d7",
+  "a11_reconstruction_equal": true,
+  "setup": {
+    "families": [
+      "tent",
+      "sine"
+    ],
+    "worlds": [
+      1200,
+      1201,
+      1202
+    ],
+    "seeds": [
+      0,
+      1
+    ],
+    "methods": [
+      "mirror",
+      "shift",
+      "film"
+    ],
+    "cap_bytes": 1024,
+    "meta_steps": [
+      600,
+      2400
+    ],
+    "support_n": [
+      32,
+      256
+    ],
+    "adapt_steps": [
+      200,
+      800
+    ],
+    "a12b_support_n": 1024,
+    "a12b_steps": 2400,
+    "batch": 128,
+    "cpu": "INTEL(R) XEON(R) PLATINUM 8573C",
+    "observed_cpu_mhz_range": [
+      2300.0,
+      2300.0
+    ],
+    "threads_per_worker": 1,
+    "workers": 4,
+    "torch": "2.10.0+cpu",
+    "python": "3.13.5",
+    "gpu": false,
+    "clocks_locked": false
+  },
+  "counts": {
+    "main_model_files": 288,
+    "main_meta_checkpoint_files": 72,
+    "followup_model_files": 72,
+    "main_split_scores": 864,
+    "followup_split_scores": 216,
+    "main_world_condition_rows": 144,
+    "factor_effect_rows": 54,
+    "oracle_family_world_support_rows": 12,
+    "oracle_individual_curve_fits": 96,
+    "main_replay_passed": 12,
+    "followup_replay_passed": 8,
+    "a12_unit_tests_passed": 11,
+    "a11_regression_tests_passed": 10
+  },
+  "sha256": {
+    "main_lock": "94589935928e102320821f947766923a07a16480602e235b3ad587973af118ea",
+    "followup_lock": "5a104cfb7bb790eb82110784bac8be3ccffede41e5f41c17f2809b2aeba1a330",
+    "protocol": "7c4bccfe306b422cbc84d0e082f80d8fd74e564ce96e7a9e567893752cc4a930",
+    "followup_protocol": "0ebf66512b200cff3f9284dc74bd95267757a61ffa872694bc7fe2732023b24d",
+    "original_a11_source": "0b83c47f6584cb69a9f3e630e36b136043e67a4d2055c30dc7baf4792a203d58",
+    "main_world_means": "0f4bd6dc5d00eb0739be0296020b0a6998700a298a75c6d48a8c3c931cc90f36",
+    "main_attribution": "c246bae17e9e54c81261638cab2185151f38dfb5a2facf37d8720648f494badf",
+    "followup_world_means": "a176edbb49b4412ad3f6d63c4461604bc6c945e76b6207ba4b715a1204b1c00b",
+    "oracle": "b860db8a0bad95490aca275cf2b7170a7b583d4b178f4d3f429e2ba0b011f82a"
+  },
+  "gates": [
+    {
+      "family": "sine",
+      "method": "film",
+      "axis": "adapt",
+      "n_benefit": 1,
+      "n_worlds": 3
+    },
+    {
+      "family": "sine",
+      "method": "film",
+      "axis": "meta",
+      "n_benefit": 0,
+      "n_worlds": 3
+    },
+    {
+      "family": "sine",
+      "method": "film",
+      "axis": "support",
+      "n_benefit": 1,
+      "n_worlds": 3
+    },
+    {
+      "family": "sine",
+      "method": "mirror",
+      "axis": "adapt",
+      "n_benefit": 1,
+      "n_worlds": 3
+    },
+    {
+      "family": "sine",
+      "method": "mirror",
+      "axis": "meta",
+      "n_benefit": 1,
+      "n_worlds": 3
+    },
+    {
+      "family": "sine",
+      "method": "mirror",
+      "axis": "support",
+      "n_benefit": 0,
+      "n_worlds": 3
+    },
+    {
+      "family": "sine",
+      "method": "shift",
+      "axis": "adapt",
+      "n_benefit": 1,
+      "n_worlds": 3
+    },
+    {
+      "family": "sine",
+      "method": "shift",
+      "axis": "meta",
+      "n_benefit": 0,
+      "n_worlds": 3
+    },
+    {
+      "family": "sine",
+      "method": "shift",
+      "axis": "support",
+      "n_benefit": 0,
+      "n_worlds": 3
+    },
+    {
+      "family": "tent",
+      "method": "film",
+      "axis": "adapt",
+      "n_benefit": 3,
+      "n_worlds": 3
+    },
+    {
+      "family": "tent",
+      "method": "film",
+      "axis": "meta",
+      "n_benefit": 0,
+      "n_worlds": 3
+    },
+    {
+      "family": "tent",
+      "method": "film",
+      "axis": "support",
+      "n_benefit": 3,
+      "n_worlds": 3
+    },
+    {
+      "family": "tent",
+      "method": "mirror",
+      "axis": "adapt",
+      "n_benefit": 2,
+      "n_worlds": 3
+    },
+    {
+      "family": "tent",
+      "method": "mirror",
+      "axis": "meta",
+      "n_benefit": 0,
+      "n_worlds": 3
+    },
+    {
+      "family": "tent",
+      "method": "mirror",
+      "axis": "support",
+      "n_benefit": 3,
+      "n_worlds": 3
+    },
+    {
+      "family": "tent",
+      "method": "shift",
+      "axis": "adapt",
+      "n_benefit": 3,
+      "n_worlds": 3
+    },
+    {
+      "family": "tent",
+      "method": "shift",
+      "axis": "meta",
+      "n_benefit": 1,
+      "n_worlds": 3
+    },
+    {
+      "family": "tent",
+      "method": "shift",
+      "axis": "support",
+      "n_benefit": 3,
+      "n_worlds": 3
+    }
+  ],
+  "limitations": [
+    "no general Mirror-specific capacity gain demonstrated",
+    "post-discovery A12b not preregistered",
+    "family-aware oracle is not a matched reference",
+    "only three synthetic worlds/family, two seeds/world",
+    "training steps matched but FLOPs and inference compute not matched",
+    "software decoder bytes excluded",
+    "support count changes batch-index sampling as well as examples",
+    "A12b joint uses old+new labels and updates all weights, so changes more than just freezing"
+  ]
+}
