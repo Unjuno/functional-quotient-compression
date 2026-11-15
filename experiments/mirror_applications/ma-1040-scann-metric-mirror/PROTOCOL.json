@@ -1,0 +1,70 @@
+{
+  "experiment_id": "MA-1040",
+  "title": "ScaNN anisotropic query-metric View over one shared index",
+  "status": "SCREENING",
+  "evidence_lane": "ANN / QUALITY / STORAGE / COMPUTE",
+  "base_commit": "1e4cfb9fad4bcbfb88130c2676f133a720c288c0",
+  "hypothesis": "On one fixed ScaNN AVQ index, two development-selected query-length-role Givens codes improve fresh ArguAna nDCG@10 and Recall@10 by at least 0.5 percentage points over native ScaNN, while sharing all indexed vectors; Mirror-specific credit additionally requires beating the matched native query-side two-coordinate linear transform by at least 0.2 percentage points.",
+  "physical_object": "One frozen Nomic Embed v1.5 INT8 ONNX encoder, one 768-D dense corpus embedding matrix, one ScaNN partition/codebook/anisotropic quantization/reorder index.",
+  "mirror_coordinate": "One float32 Givens angle for each short/long query role, applied to the same two query-vector dimensions before the unchanged ScaNN searcher.",
+  "logical_multiplicity": "Two query-role retrieval functions sharing the same physical corpus embeddings and serialized ScaNN index.",
+  "prior_art_refs": ["PA318"],
+  "controls": [
+    "ScaNN 1.4.2 official CPU builder with dot-product AVQ, one fixed tree, asymmetric hashing and reorder stage; no query view.",
+    "Same frozen searcher plus two role-specific Givens query views selected on development qrels.",
+    "Matched native two-coordinate linear query readout with normalized weights; if functionally identical, this falsifies Mirror-specific attribution.",
+    "Exact full-corpus cosine top-10 over the same embeddings as a ranking-quality ceiling/control."
+  ],
+  "data": {
+    "dataset": "Official BEIR ArguAna archive",
+    "archive_sha256": "cfdf79adce27a401b3cd3ea267903134dbfab2c6afeb95d7fe5724a00bf7557b",
+    "candidate_corpus": "All official corpus documents; no qrel-based document filtering.",
+    "query_split": "All qid identities are partitioned by SHA256('MA1040|ArguAna|split|' + qid): first digest byte < 128 is development; otherwise audit. The split is deterministic, disjoint and independent of relevance labels.",
+    "query_roles": "Short/long at median development query wordpiece-token count; equality belongs to short. Query text may define role before scoring; no qrel is used for role assignment.",
+    "fresh_audit": "Audit query IDs and qrels remain unopened until the development-selected angle file and code/index config are committed."
+  },
+  "embedding": {
+    "model": "nomic-ai/nomic-embed-text-v1.5",
+    "model_revision": "e9b6763023c676ca8431644204f50c2b100d9aab",
+    "artifact": "Official INT8 ONNX export from the pinned repository snapshot used by MA-1037",
+    "document_prefix": "search_document: ",
+    "query_prefix": "search_query: ",
+    "pooling": "Masked mean, full 768-D layer norm epsilon 1e-5, then L2 normalization, matching the model card/MA-1037 implementation.",
+    "device": "CPU"
+  },
+  "index": {
+    "implementation": "ScaNN 1.4.2 CPU; dot_product; AVQ tree partitioning; asymmetric hashing; fixed float reorder.",
+    "num_leaves": 128,
+    "leaves_to_search": 16,
+    "dimensions_per_block": 2,
+    "avq_tree_weight": 1.0,
+    "anisotropic_quantization_threshold": 0.2,
+    "reorder_neighbors": 100,
+    "build_threads": 4,
+    "search_parameters": "One fixed index/config shared by every query arm; final k=10."
+  },
+  "development": {
+    "angle_grid_rad": [-0.30, -0.25, -0.20, -0.15, -0.10, -0.05, 0.0, 0.05, 0.10, 0.15, 0.20, 0.25, 0.30],
+    "selection": "Select one angle per query-length role by maximum development nDCG@10 using only the 50% hash-split development qids; tie-break on smaller absolute angle then smaller signed angle.",
+    "updates": 0,
+    "lock_artifacts": ["source code", "ScaNN configuration", "query-role threshold", "role angles", "selection metrics", "development IDs hash"]
+  },
+  "fresh": {
+    "locked_before_access": true,
+    "audit_split": "Hash-split audit qids from official ArgUana test qrels.",
+    "metrics": ["nDCG@10", "Recall@10", "MRR@10", "ANN Recall@10 vs exact cosine", "candidate counts"],
+    "latency": "Five isolated repeated randomized arm blocks per query batch; report P50/P95 only if calibration is stable, otherwise NOT ESTABLISHED."
+  },
+  "storage": {
+    "authority": "Actual serialized inference payload bytes.",
+    "paid_objects": ["Nomic model/config/tokenizer/architecture code", "all corpus and query embeddings when retained", "serialized ScaNN index files including tree, codebook and reorder data", "Givens code and role-threshold metadata", "native linear-control coordinates", "document/query ID maps and manifests"],
+    "shared_index_charged_once": true
+  },
+  "compute": {
+    "report": ["embedding examples and wall-clock", "ScaNN build time", "ScaNN candidates visited where exposed", "query and index transform FLOPs", "five repeated query latency blocks", "CPU thread count"],
+    "optimizer_updates": 0
+  },
+  "success_gate": "On the fresh audit, both nDCG@10 and Recall@10 improve by at least 0.5 pp versus native ScaNN, the Mirror code is a functional role-specific mapping, full shared index bytes are unchanged plus <=256 B code/metadata, and p95 latency is no more than 10% slower. A Mirror-specific PASS additionally requires >=0.2 pp nDCG gain over the matched native linear transform.",
+  "failure_gate": "FAIL for Mirror-specific value if the linear query transform reproduces the Givens view within 1e-6 and ranking metrics exactly, or if both fresh quality gains are below 0.5 pp, or if the full payload frontier is not improved.",
+  "boundaries": ["One pretrained encoder, one ArgUana benchmark, CPU ScaNN 1.4.2; no GPU or production-scale latency claim.", "One task collection split into query-length roles; no cross-dataset transfer claim.", "ANN quality and exact retrieval quality are distinct; report both.", "If query Givens aliases native linear transform, any performance movement is ordinary query-metric freedom, not Mirror-specific capacity."]
+}
