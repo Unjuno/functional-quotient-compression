@@ -56,7 +56,7 @@
     "native_library": "Official gvinciguerra/PGM-index header-only C++ library",
     "source_commit": "c6fcf3d34e55eb0061b01e2f49dfcbdb711f1407",
     "license": "Apache-2.0",
-    "index": "pgm::DynamicPGMIndex<uint64_t,uint64_t,pgm::PGMIndex<uint64_t,Epsilon,4>>",
+    "index": "Official DynamicPGMIndex replays inserts/deletes, then official PGMIndex<uint64_t,Epsilon,4> is rebuilt from the final key set for predecessor queries. This is required because the pinned DynamicPGMIndex exposes forward lower_bound iterators but no predecessor decrement API.",
     "epsilon_grid": [
       8,
       16,
@@ -86,7 +86,7 @@
   },
   "storage": {
     "authority": "Actual serialized inference payload bytes.",
-    "serialization": "Persist sorted key/value arrays plus exact reconstruction configuration. Official PGM segment state is rebuilt deterministically from each paid key array and fixed epsilon; report rebuild time and RAM size separately.",
+    "serialization": "Persist initial sorted key/value arrays plus ordered update logs, domain codes and config; rebuild the official dynamic state and post-update PGM predictor deterministically. Report dynamic update-state RAM bytes, final predictor RAM bytes and rebuild/update compute separately.",
     "paid_objects": [
       "all final key/value arrays or shared canonical array",
       "all domain scale/offset codes",
@@ -126,6 +126,22 @@
         "domain mappings",
         "update procedure",
         "serialized-byte accounting"
+      ]
+    },
+    {
+      "id": "AM-02",
+      "reason": "The pinned official DynamicPGMIndex iterator is forward-only and exposes no predecessor iterator decrement. To keep the registered exact predecessor task on the official PGM prediction path, replay all inserts/deletes in DynamicPGMIndex, verify updated membership, then rebuild PGMIndex on the final key set for exact predecessor/range correction. This change precedes all data/metric runs.",
+      "changes": [
+        "dynamic update exactness is checked via find/membership after each batch",
+        "predecessor queries use official PGMIndex rebuilt deterministically over post-update keys",
+        "update log and both update/rebuild compute are charged/reported"
+      ],
+      "unchanged": [
+        "fresh seeds",
+        "epsilon grid and development selection",
+        "quality/correctness gates",
+        "task coordinates",
+        "complete serialized byte accounting"
       ]
     }
   ]
