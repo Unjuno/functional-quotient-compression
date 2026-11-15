@@ -6,11 +6,11 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- Claim ledger entries: **456**
-- P0: **630** (373 FAIL; 54 PROMISING; 192 UNTESTED; 10 NOT ESTABLISHED; 1 SCREENING)
+- Claim ledger entries: **457**
+- P0: **630** (374 FAIL; 54 PROMISING; 191 UNTESTED; 10 NOT ESTABLISHED; 1 SCREENING)
 - P1: **422** (17 completed; 405 UNTESTED)
 - P2: **103** (103 UNTESTED)
-- Current MA statuses: **381 FAIL, 10 NOT ESTABLISHED, 63 PROMISING, 1 SCREENING, 700 UNTESTED**
+- Current MA statuses: **382 FAIL, 10 NOT ESTABLISHED, 63 PROMISING, 1 SCREENING, 699 UNTESTED**
 - 47 baseline experiment directories remain present; verified external outcomes are linked to their dedicated branches in the registry and claim ledger.
 - New research: MA-876..935 (60 candidates), PA236..PA265 (30 primary sources). See the current Next candidate section for the live queue.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. see the current Next candidate section.
@@ -24,7 +24,9 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-MA-1028 is NOT ESTABLISHED: official SAM2Long multi-object path scoring assumes scalar object scores, so the registered two-object tree control could not run. A one-object 12-frame diagnostic is exploratory only; masks tie exactly across controls and Mirror path memory shrinks 62.5%, but complete-session bytes only 3.11% (hard sharing is 240 B smaller). Six artifact/metric/source tests pass. See `experiments/mirror_applications/ma-1028-sam2long-memory-path-view/EXECUTION_BLOCKER.md`. Continue to P0 MA-1029.
+MA-1029 is complete as a scoped synthetic SAM ViT-B adapter FAIL: Mirror uses 20,505 B adaptation state (64.0% below independent) but hard sharing is 188 B smaller at effectively equal quality; FiLM is higher quality in all three fresh worlds. Full-bundle savings versus independent are only 36,454 B. Six tests and saved metric/payload/data-hash verification pass. Continue to P0 MA-1030. See `experiments/mirror_applications/ma-1029-mopeft-sam-expert-view/RESULTS.md`.
+
+Previous: MA-1028 is NOT ESTABLISHED: official SAM2Long multi-object path scoring assumes scalar object scores, so the registered two-object tree control could not run. A one-object 12-frame diagnostic is exploratory only; masks tie exactly across controls and Mirror path memory shrinks 62.5%, but complete-session bytes only 3.11% (hard sharing is 240 B smaller). Six artifact/metric/source tests pass. See `experiments/mirror_applications/ma-1028-sam2long-memory-path-view/EXECUTION_BLOCKER.md`.
 
 Previous: MA-1027 is complete as a scoped SAM2.1 Hiera-tiny synthetic CPU FAIL: two-angle Givens memory Mirror saves 23.84% object-state bytes but only 0.303% full-session bytes; J&F collapses to 0.03043 vs 0.87608 independent and 0.36879 rank-1 additive. Exact replay, payload hashes/arithmetic and six tests pass. One five-frame four-object generated clip; no natural-video/GPU claim. See `experiments/mirror_applications/ma-1027-sam2-object-state-view/README.md`.
 

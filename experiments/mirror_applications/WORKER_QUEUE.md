@@ -24,9 +24,11 @@ MA-990 official MERL RANF code was located, but the required SONICOM HRTF subjec
 
 # Worker queue
 
-## Current handoff — 2026-11-15, MA-1028
+## Current handoff — 2026-11-15, MA-1029
 
-MA-1028 is NOT ESTABLISHED: official SAM2Long path scoring assumes scalar object scores, blocking the registered two-object tree. A one-object 12-frame diagnostic is exploratory only: all masks tie, Mirror path-memory bytes fall 62.5%, full-session bytes fall 3.11%, and hard sharing is 240 B smaller. Six tests validate prediction/metric replay and payload manifests. Continue to P0 MA-1029. See `ma-1028-sam2long-memory-path-view/EXECUTION_BLOCKER.md`.
+MA-1029 is complete as a scoped synthetic SAM ViT-B adapter FAIL. Mirror adapter payload is 20,505 B (64.0% below independent), but hard sharing is 188 B smaller at effectively identical quality; FiLM has higher mIoU in all three fresh worlds. Full-deployment savings are only 36,454 B. Six tests pass; hashes and saved metrics replay exactly. This is not official MoPEFT/MESS or natural-image evidence. Continue to P0 MA-1030. See `ma-1029-mopeft-sam-expert-view/RESULTS.md`.
+
+Previous: MA-1028 is NOT ESTABLISHED: official SAM2Long path scoring assumes scalar object scores, blocking the registered two-object tree. A one-object 12-frame diagnostic is exploratory only: all masks tie, Mirror path-memory bytes fall 62.5%, full-session bytes fall 3.11%, and hard sharing is 240 B smaller. Six tests validate prediction/metric replay and payload manifests. See `ma-1028-sam2long-memory-path-view/EXECUTION_BLOCKER.md`.
 
 Previous: MA-1027 is a scoped official SAM2.1 Hiera-tiny synthetic CPU FAIL: two-angle Givens memory Mirror saves 23.84% object-memory bytes but 0.303% full-session bytes; J&F .03043 vs .87608 independent and .36879 rank-1 additive. Exact full replay, payload arithmetic/hash checks and six tests pass. Five-frame four-object scene only. See `ma-1027-sam2-object-state-view/README.md`.
 
