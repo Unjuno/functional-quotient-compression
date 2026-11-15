@@ -24,18 +24,13 @@ MA-990 official MERL RANF code was located, but the required SONICOM HRTF subjec
 
 # Worker queue
 
-## Current handoff — 2026-11-15, MA-1031
+## Current handoff — 2026-11-15, MA-1033
 
-MA-1031 is a scoped synthetic SAM2.1 Hiera-tiny interactive prompt FAIL: Mirror polar history is 503 B vs 544 B direct (7.5% savings, below the 25% gate), with J&F .77332 vs .83345; 8px-grid coding is 318 B and J&F .83840. Mirror retains all 40 clicks/video and saves 43 B in the full session. Four tests and input/history/prediction/metric replay pass. Continue at P0 MA-1033 (MA-1032 is P1). See `ma-1031-sam2-interactive-prompt-view/RESULTS.md`.
+MA-1033 is a scoped frozen CLIP ViT-B/32 class×domain composition FAIL: Mirror averages 86.25% held-out-pair accuracy vs 86.67% additive and shared over three fresh image seeds; it wins one seed and loses twice to additive. Learned payload is 1,580,814 B vs 1,744,542 B independent cells (9.39%, below the 25% gate); full-bundle saving is 0.0268%. Exact payload/metric replay and three tests pass. This is a shallow synthetic-domain CPU screen, not an official CoOp/CoCoOp/MaPLe result. Continue to P0 MA-1035 (MA-1034 is P1). See `ma-1033-class-domain-prompt-mirror/RESULTS.md`.
 
-Previous: MA-1030 is a scoped synthetic SAM2.1 Hiera-tiny FAIL: the one-slot causal fallback halved object-memory bytes but allocated all 18 slots to stable outlier ID42, never shifted ID99. J&F 0.17772 vs 0.60567 independent and 0.28987 rank-1 additive. Complete-session savings are 0.240%; rank-1 is better in quality, bytes and FPS. Four tests and input/payload/prediction/metric replay pass. See `ma-1030-sam2-rare-object-private-fallback/RESULTS.md`.
+## Previous handoff — 2026-11-15, MA-1031
 
-Previous: MA-1029 is a scoped synthetic SAM ViT-B adapter FAIL: Mirror adaptation state is 64.0% below independent, but hard sharing is 188 B smaller at effectively equal quality and FiLM scores higher in all three fresh worlds. Full-bundle savings are 36,454 B. Six tests pass; not official MoPEFT/MESS or natural-image evidence. See `ma-1029-mopeft-sam-expert-view/RESULTS.md`.
-
-Previous: MA-1028 is NOT ESTABLISHED: official SAM2Long path scoring assumes scalar object scores, blocking the registered two-object tree. A one-object 12-frame diagnostic is exploratory only: all masks tie, Mirror path-memory bytes fall 62.5%, full-session bytes fall 3.11%, and hard sharing is 240 B smaller. Six tests validate prediction/metric replay and payload manifests. See `ma-1028-sam2long-memory-path-view/EXECUTION_BLOCKER.md`.
-
-Previous: MA-1027 is a scoped official SAM2.1 Hiera-tiny synthetic CPU FAIL: two-angle Givens memory Mirror saves 23.84% object-memory bytes but 0.303% full-session bytes; J&F .03043 vs .87608 independent and .36879 rank-1 additive. Exact full replay, payload arithmetic/hash checks and six tests pass. Five-frame four-object scene only. See `ma-1027-sam2-object-state-view/README.md`.
-
+MA-1031 is a scoped synthetic SAM2.1 Hiera-tiny interactive prompt FAIL: Mirror polar history is 503 B vs 544 B direct (7.5% savings, below the 25% gate), with J&F .77332 vs .83345; 8px-grid coding is 318 B and J&F .83840. Mirror retains all 40 clicks/video and saves 43 B in the full session. Four tests and input/history/prediction/metric replay pass. See `ma-1031-sam2-interactive-prompt-view/RESULTS.md`.
 ## Current handoff — 2026-11-15, MA-1025
 
 MA-1025 is a bounded CIFAR-10/CLIP FAIL: image-conditioned Mirror uses 74,935 B learned state and scores 81.25% novel accuracy, 6.25 pp above the full CoCoOp-style control, yet ties matched rank-2 additive at 83.33% base, 81.25% novel and 82.28% H. This fails the preregistered >=1 pp Mirror-specific gate. Full bundle is 608,938,515 B (74,935 B over CLIP). Exact serialized replay, asset/data hashes and six tests pass. Audit is only 40 images, disjoint from MA-1024; no broad VLM claim. Continue to P0 MA-1026. See `ma-1025-cocoop-instance-view/RESULTS.md`.

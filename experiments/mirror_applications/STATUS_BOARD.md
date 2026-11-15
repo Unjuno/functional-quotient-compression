@@ -6,11 +6,11 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- Claim ledger entries: **459**
-- P0: **630** (376 FAIL; 54 PROMISING; 189 UNTESTED; 10 NOT ESTABLISHED; 1 SCREENING)
+- Claim ledger entries: **460**
+- P0: **630** (377 FAIL; 54 PROMISING; 188 UNTESTED; 10 NOT ESTABLISHED; 1 SCREENING)
 - P1: **422** (17 completed; 405 UNTESTED)
 - P2: **103** (103 UNTESTED)
-- Current MA statuses: **384 FAIL, 10 NOT ESTABLISHED, 63 PROMISING, 1 SCREENING, 697 UNTESTED**
+- Current MA statuses: **385 FAIL, 10 NOT ESTABLISHED, 63 PROMISING, 1 SCREENING, 696 UNTESTED**
 - 47 baseline experiment directories remain present; verified external outcomes are linked to their dedicated branches in the registry and claim ledger.
 - New research: MA-876..935 (60 candidates), PA236..PA265 (30 primary sources). See the current Next candidate section for the live queue.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. see the current Next candidate section.
@@ -24,7 +24,9 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-MA-1031 is complete as a scoped synthetic SAM2.1 Hiera-tiny CPU FAIL: Mirror click history is 503 B vs 544 B direct (7.5% saving) and mean J&F 0.77332 vs 0.83345 direct. Native 8px-grid control uses only 318 B and scores 0.83840. Mirror uses the same 40 clicks/video; complete-session savings are 43 B. Four tests and input/history/prediction/metric replay pass. Continue to P0 MA-1033 (MA-1032 is P1). See `experiments/mirror_applications/ma-1031-sam2-interactive-prompt-view/RESULTS.md`.
+MA-1033 is complete as a scoped frozen CLIP ViT-B/32 class×domain composition FAIL: Mirror averages 86.25% held-out-cell accuracy vs 86.67% additive and shared across three fresh image seeds; it wins one seed and loses two against additive. Learned payload 1,580,814 B vs 1,744,542 B independent cells (9.39%, below the 25% gate); complete-bundle saving only 0.0268%. Exact serialization/data/metric replay and three tests pass. Continue to P0 MA-1035 (MA-1034 is P1). No official prompt-learning reproduction. See `experiments/mirror_applications/ma-1033-class-domain-prompt-mirror/RESULTS.md`.
+
+Previous: MA-1031 is complete as a scoped synthetic SAM2.1 Hiera-tiny CPU FAIL: Mirror click history is 503 B vs 544 B direct (7.5% saving) and mean J&F 0.77332 vs 0.83345 direct. Native 8px-grid control uses only 318 B and scores 0.83840. Mirror uses the same 40 clicks/video; complete-session savings are 43 B. Four tests and input/history/prediction/metric replay pass. See `experiments/mirror_applications/ma-1031-sam2-interactive-prompt-view/RESULTS.md`.
 
 Previous: MA-1030 is a scoped synthetic SAM2.1 Hiera-tiny CPU FAIL: one causal private slot cut object-memory state 50.0%, but selected non-rare ID42 in all 18 frame-world opportunities and never shifted ID99. J&F 0.17772 vs 0.60567 independent and 0.28987 rank-1 additive; full-session savings 0.240%, and rank-1 dominates. Input/payload/prediction hashes, metric replay and four tests pass. See `experiments/mirror_applications/ma-1030-sam2-rare-object-private-fallback/RESULTS.md`.
 
