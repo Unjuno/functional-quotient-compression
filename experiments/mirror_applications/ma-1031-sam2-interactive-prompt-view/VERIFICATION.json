@@ -1,1 +1,25 @@
-{"experiment_id":"MA-1031","status":"SCREENING","protocol_frozen_before_data":false,"development_data_generated":false,"audit_data_generated":false,"tests":{"passed":null,"failed":null},"decision":null}
+{
+  "experiment_id": "MA-1031",
+  "branch": "research/ma-1031-sam2-interactive-prompt-view-20261115",
+  "base_commit": "d8ee28e09abe984f8493231bfba90587c503dd08",
+  "protocol_commit": "4dc51fe9385685a2a934b1fccd3834de2e510f88",
+  "development_radius_freeze_commit": "3c6fa6cd3e9cb2e503ae83a62f1e76cc9bde9fd5",
+  "runner_commit_before_audit": "d4cfb577d6e29a0337a4f58bcea0987d2434f457",
+  "official_sam2_source_commit": "2b90b9f5ceec907a1c18123530e92e794ad901a4",
+  "checkpoint": {"name": "sam2.1_hiera_tiny.pt", "sha256": "7402e0d864fa82708a20fbd15bc84245c2f26dff0eb43a4b5b93452deb34be69", "bytes": 156008466, "stored_outside_git": true},
+  "config_sha256": "f932eac1c6241e910031b2f000a81cd9f8a8d4896e2277ab5ffb721f378b188d",
+  "protocol_sha256": "762e4ee98380b6178333cac0a0b8206a5a1b83d5d59d3ee6165e7f5fef19ebee",
+  "source_sha256": {"generate_video.py": "8d490d3078107308d64de54bd78038c6b64751b0b83203a0a5aa30c9ee298f5e", "run_interactive.py": "ec5921e7e55ee5afc578fe9a0cf5e7c4b4d12209e66589b81bd212c5e93bc829", "verify_result.py": "2633df3dd5ca9f37a85e734dcecf9b94ae3d453a861cef1e74a201b975f833a2"},
+  "development_seed": 103100,
+  "audit_seeds": [103101, 103102, 103103],
+  "audit_worlds": 3,
+  "method_world_rows": 15,
+  "input_hashes": "PASS: all 18 audit frame/mask pairs match their generated world manifests",
+  "correction_history_payloads": "PASS: all 15 history payload files match the recorded exact bytes and SHA-256",
+  "prediction_hashes_and_metrics": "PASS: all 15 saved predictions match SHA-256; J, boundary F, J&F and ID switches replay within 1e-12",
+  "full_session_state": "Serialized with torch.save into memory per run; exact state byte length and SHA-256 are recorded in audit_rows.jsonl. Large duplicate state binaries are intentionally not retained. Full bytes charge checkpoint, config, runtime source and serialized resumable state.",
+  "full_session_byte_arithmetic": "PASS: checkpoint + config + runtime source/config + exact in-memory serialized session state length",
+  "tests": {"command": "PYTHONPATH=/tmp/ma1027-sam2 python -m unittest discover -s experiments/mirror_applications/ma-1031-sam2-interactive-prompt-view/tests -v", "passed": 4, "failed": 0},
+  "decision": "FAIL",
+  "scope_limits": ["Three synthetic audit videos only.", "SAM2.1 Hiera-tiny at 256px on CPU.", "No natural-video, benchmark, GPU or click-count reduction claim."]
+}
