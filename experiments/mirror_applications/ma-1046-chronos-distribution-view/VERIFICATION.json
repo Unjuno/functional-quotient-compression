@@ -1,19 +1,53 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-1046",
+  "commit": "pending-result-commit",
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "/tmp/ma1046-env/bin/python -m pytest -q experiments/mirror_applications/ma-1046-chronos-distribution-view/tests",
+    "passed": 8,
+    "failed": 0
   },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "common_checkpoint_payload_bytes": 33589724,
+    "method_incremental_bytes": {
+      "mirror": 237,
+      "hermite": 238,
+      "native_temperature": 249,
+      "native_affine": 252
+    },
+    "complete_bytes": {
+      "mirror": 33589961,
+      "hermite": 33589962,
+      "native_temperature": 33589973,
+      "native_affine": 33589976
+    },
+    "model_payload_sha256": {
+      "model.safetensors": "eed458758bd8165d80f496a90bcd2cfed9f1bf7d7b08677acd64e0f7d72bdcf2",
+      "config.json": "b107d9011b8cf4557d2cae9d2ab5be07af8ff102d2d4ff19b452f44c3af76552",
+      "generation_config.json": "e255d602baf228364ebfd4e787b9fa8a0f41d0ade452f76bdfd5cd57f7f9b8e4"
+    }
   },
   "metric_replay": {
-    "checked": false,
-    "max_difference": null
+    "checked": true,
+    "command": "PYTHONPATH=experiments/mirror_applications/ma-1046-chronos-distribution-view/source /tmp/ma1046-env/bin/python experiments/mirror_applications/ma-1046-chronos-distribution-view/source/evaluate_audit.py",
+    "max_difference": 0.0,
+    "source": "saved audit forecasts/labels in runs/audit/*.npz; AUDIT_METRICS.json regenerated"
   },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "fresh_split_integrity_checked": true,
+  "fresh_seeds": [
+    104604,
+    104605,
+    104606
+  ],
+  "forecast_windows_per_seed": {
+    "Weather": 36,
+    "AustralianElectricity": 15
+  },
+  "notes": [
+    "Audit labels were not used to fit codes; code freeze predates confirmatory forecast generation.",
+    "Mirror/Hermite normalized CRPS differs by <2e-8 on both datasets.",
+    "Checkpoint bytes count model.safetensors, config.json, generation_config.json; raw model and dataset files are provenance-only and not committed.",
+    "Prior invalidated Weather runs on seeds 104601-104603 are excluded and retained under runs/exploratory_invalidated/."
+  ]
 }
