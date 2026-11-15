@@ -1,0 +1,25 @@
+{
+  "experiment_id": "MA-1029",
+  "title": "SAM feature adapter-bank Mirror views",
+  "status": "SCREENING",
+  "base_commit": "4133cff18",
+  "prior_art": {
+    "id": "PA317",
+    "paper": "MoPEFT: A Mixture-of-PEFTs for the Segment Anything Model",
+    "url": "https://arxiv.org/abs/2405.00293v1",
+    "official_sam_repository": "https://github.com/facebookresearch/segment-anything",
+    "mopeft_repository_search": "Official source repository not located in paper, arXiv metadata or bounded GitHub repository search; this experiment is not an official MoPEFT reproduction."
+  },
+  "hypothesis": "Across three synthetic visual-domain segmentation tasks using frozen SAM ViT-B, one shared bottleneck Adapter plus two task-specific Givens angles can reach within 1 mIoU point of independent Adapters, use at least 25% fewer serialized adaptation bytes, and beat a matched per-task FiLM/diagonal-gate control by at least 1 point on at least two of three fresh worlds.",
+  "scope": "Feature-space mechanism screen with official SAM ViT-B image encoder, prompt encoder and mask decoder; synthetic masks with bounding-box prompts. PEFT modules are attached to the final image embedding for CPU-feasible controlled adaptation. Not the paper's internal per-transformer-layer MoPEFT implementation, MESS, or natural-image benchmark evidence.",
+  "runtime": {"device": "CPU", "sam_input_resolution": 1024, "model": "SAM ViT-B", "checkpoint": "sam_vit_b_01ec64.pth"},
+  "tasks": {"domains": ["color-shifted textured shapes", "low-contrast camouflage", "patterned background with partial occluders"], "training_examples_per_domain": 8, "development_examples_per_domain": 8, "audit_examples_per_domain": 16, "audit_seeds": [102901, 102902, 102903], "development_seed": 102900, "prompt": "tight visible-object bounding box with fixed 8px margin"},
+  "mirror_insertion": "At the final frozen SAM image embedding, a trainable bottleneck Adapter maps 256 channels to rank-8 latent channels. Mirror applies task-specific Givens rotations to two latent channel planes (0,1) and (2,3) before the shared up projection. Coordinates are learned only from that task's training examples. The original SAM checkpoint and all prompts/metadata remain charged.",
+  "controls": ["zero-shot frozen SAM", "independent rank-8 bottleneck Adapter per domain", "hard-shared rank-8 Adapter", "shared Adapter plus two per-domain Givens angles", "shared Adapter plus per-domain FiLM scale/shift on the 8 latent channels", "feature-space MoPEFT-like Adapter + rank-8 linear LoRA + learned prefix-residual bank with learned task gates"],
+  "training": {"optimizer": "Adam", "learning_rate": 0.001, "updates_per_domain": 20, "batch_size": 1, "loss": "binary cross entropy on low-resolution mask logits plus soft Dice", "frozen": ["SAM image encoder", "SAM prompt encoder", "SAM mask decoder"], "trainable": "listed PEFT modules and codes only", "development_tuning": "Only development seed 102900 may be used to select among predeclared learning rates {0.0003,0.001}; choose by mean development mIoU, then freeze. All other architecture, rank, and update counts are fixed."},
+  "metrics": {"quality": "per-domain mIoU and mean boundary F-score on audit images; macro-average across domains and worlds", "storage": "actual serialized adaptation state bytes (all adapters, Givens/FiLM/gate/prefix codes, bases and metadata); full deploy bytes add official SAM checkpoint, source/config and prompt preprocessing state", "compute": "training updates/examples, encode/decode FLOPs proxy, isolated wall-clock, per-image inference wall"},
+  "success_gate": "Mirror adaptation state at least 25% smaller than independent Adapter bank; macro audit mIoU no more than 1pp below independent; at least 1pp above FiLM in at least 2/3 seeds; no domain more than 3pp below independent in any seed; full-deploy storage and CPU time reported.",
+  "failure_gate": "Mirror misses the byte or quality gate in at least 2/3 audit worlds, or the MoPEFT-like/FiLM control matches or beats Mirror at equal or fewer adaptation bytes.",
+  "fresh_protocol": "Protocol frozen before development/audit data generation. Development seed 102900 only for the two allowed learning rates; audit seeds 102901-102903 sealed until freeze. No audit-driven code or setting changes.",
+  "limitations": ["synthetic image masks only", "8 training examples/domain", "final-embedding adapter insertion rather than per-layer PEFT", "MoPEFT-like control is paper-inspired and not official code", "no MESS/natural-image claim", "CPU single-resolution screen"]
+}
