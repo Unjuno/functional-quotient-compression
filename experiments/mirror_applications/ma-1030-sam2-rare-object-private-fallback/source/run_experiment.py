@@ -174,7 +174,7 @@ def run_method(predictor,method,scene,video_cache,world='dev',threshold=0.5):
     tag=f'{world}_{method}_t{threshold:.3f}'
     name=f'payload_{tag}.bin';(RUNS/name).write_bytes(state_raw)
     predpath=RUNS/f'predictions_{tag}.npz';np.savez_compressed(predpath,masks=np.stack(predictions).astype(np.uint8))
-    return {'world':world,'method':method,'threshold':threshold if method=='mirror_private_fallback' else None,'fallback_frames':fallback_frames,**score,'session_payload_bytes':len(state_raw),'object_memory_payload_bytes':stat['memory_tensor_bytes'],'private_object_state_bytes':stat['private_object_state_bytes'],'session_header_bytes':stat['header_bytes'],'memory_encode_wall_s':encode_wall,'memory_decode_wall_s':decode_wall,'encode_decode_wall_s':encode_wall+decode_wall,'propagation_wall_s':prop_wall,'full_run_wall_s':full_wall,'fps':len(predictions)/max(full_wall,1e-12),'payload_file':name,'prediction_file':predpath.name,'payload_sha256':hashlib.sha256(state_raw).hexdigest(),'prediction_sha256':hashlib.sha256(predpath.read_bytes()).hexdigest(),'manifest':stat['manifest'],'checkpoint_bytes':CKPT.stat().st_size,'config_bytes':CONFIG.stat().st_size,'shared_video_cache_bytes':len(video_cache),'full_session_payload_bytes':CKPT.stat().st_size+CONFIG.stat().st_size+len(video_cache)+len(state_raw)}
+    return {'world':world,'method':method,'threshold':threshold if method=='mirror_private_fallback' else None,'fallback_frames':fallback_frames,**score,'session_payload_bytes':len(state_raw),'object_memory_payload_bytes':stat['memory_tensor_bytes'],'private_object_state_bytes':stat['private_object_state_bytes'],'session_header_bytes':stat['header_bytes'],'memory_encode_wall_s':encode_wall,'memory_decode_wall_s':decode_wall,'encode_decode_wall_s':encode_wall+decode_wall,'propagation_wall_s':prop_wall,'full_run_wall_s':full_wall,'fps':len(predictions)/max(full_wall,1e-12),'payload_file':name,'prediction_file':predpath.name,'payload_sha256':hashlib.sha256(state_raw).hexdigest(),'prediction_sha256':hashlib.sha256(predpath.read_bytes()).hexdigest(),'manifest':stat['manifest'],'checkpoint_bytes':CKPT.stat().st_size,'config_bytes':CONFIG.stat().st_size,'shared_video_cache_bytes':len(video_cache),'shared_video_cache_sha256':hashlib.sha256(video_cache).hexdigest(),'full_session_payload_bytes':CKPT.stat().st_size+CONFIG.stat().st_size+len(video_cache)+len(state_raw)}
 
 def make_predictor():
     return build_sam2_video_predictor('configs/sam2.1/sam2.1_hiera_t.yaml',str(CKPT),device='cpu',apply_postprocessing=False,hydra_overrides_extra=[f'++model.image_size={IMAGE_SIZE}'])
@@ -187,6 +187,7 @@ def run_world(world,methods,thresholds):
         f=FR/row['jpeg'];g=GT/f"{row['frame']:05}.npz";assert hashlib.sha256(f.read_bytes()).hexdigest()==row['jpeg_sha256'];assert hashlib.sha256(g.read_bytes()).hexdigest()==row['gt_sha256']
     predictor=make_predictor();cache_start=time.perf_counter();common=predictor.init_state(str(FR),offload_video_to_cpu=False,offload_state_to_cpu=False);cache_wall=time.perf_counter()-cache_start
     cache=np.ascontiguousarray(common['images'].cpu().numpy().astype('<f4'));cache_payload=json.dumps({'schema':'MA1030-frame-cache-v1','shape':list(cache.shape),'dtype':'float32-le'},sort_keys=True,separators=(',',':')).encode()+b'\n'+cache.tobytes(order='C');del common
+    (RUNS/f'shared_video_cache_{world}.bin').write_bytes(cache_payload)
     results=[]
     for method in methods:
         for threshold in thresholds if method=='mirror_private_fallback' else [PRIVATE_THRESHOLD]:
@@ -199,8 +200,8 @@ def main():
     import argparse
     ap=argparse.ArgumentParser();ap.add_argument('--phase',choices=['dev','audit'],required=True);a=ap.parse_args()
     if a.phase=='dev':
-        rows=[]
-        for r in run_world('dev',METHODS,[0.15,0.3,0.5,0.8]):rows.append(r)
+        rows=run_world('dev',METHODS,[0.15,0.3,0.5,0.8])
+        (RUNS/'dev_rows.jsonl').write_text(''.join(json.dumps(r,sort_keys=True)+'\n' for r in rows))
         fb=[r for r in rows if r['method']=='mirror_private_fallback']
         chosen=max(fb,key=lambda r:(r['mean_jf'],-r['session_payload_bytes']))
         freeze={'schema':'MA1030-frozen-dev-v1','base_commit':'fc7c2640f','dev_seed':103000,'selected_threshold':chosen['threshold'],'dev_macro_jf':chosen['mean_jf'],'dev_private_frames':len(chosen['fallback_frames']),'audit_seeds':[103001,103002,103003],'frozen':True}
