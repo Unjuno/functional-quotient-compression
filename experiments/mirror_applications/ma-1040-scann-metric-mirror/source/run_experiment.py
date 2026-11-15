@@ -58,7 +58,6 @@ def encode_stage():
  cv,ct=run(dt,'corpus_vectors'); qv,qtsec=run(qt,'query_vectors')
  assert cv.shape==(len(did),D) and qv.shape==(len(qid),D)
  (HERE/'runs').mkdir(parents=True,exist_ok=True)
- np.save(HERE/'runs/corpus_vectors.npy',cv,allow_pickle=False); np.save(HERE/'runs/query_vectors.npy',qv,allow_pickle=False)
  (HERE/'runs/ids.json').write_text(json.dumps({'doc_ids':did,'query_ids':qid},separators=(',',':'))+'\n')
  # Token counts used only for role assignment; labels do not influence this step.
  lengths=np.asarray([len(tok.encode(x,add_special_tokens=True,truncation=True,max_length=256)) for x in qt],dtype=np.int32)
