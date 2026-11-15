@@ -89,7 +89,9 @@ def make_or_load_index(docids,texts):
     name="trec-covid-positive-pool-1bit-512c"
     expected=OUT/"ma1039"/"indexes"/name
     if (expected/"metadata.json").exists():
-        return name,str(expected),0.0
+        build_record=EXP/"runs"/"INDEX_BUILD_PROVENANCE.json"
+        wall=float(json.loads(build_record.read_text())["wall_seconds"]) if build_record.exists() else 0.0
+        return name,str(expected),wall
     patch_small_corpus_partition_cap()
     cfg=ColBERTConfig(root=str(OUT),experiment="ma1039",nbits=1,dim=128,doc_maxlen=180,query_maxlen=32,mask_punctuation=True,kmeans_niters=20,index_bsize=64,nranks=1,avoid_fork_if_possible=True)
     started=time.perf_counter()
@@ -180,27 +182,40 @@ def main():
     roles={q:(0 if query_token_count[q]<=threshold else 1) for q in qrels}
     Qcache={}
     for q in dev_qids+aud_qids: Qcache[q]=searcher.encode(q)
+    # Reuse a previously saved development-only freeze on deterministic replay.
+    freeze_path=EXP/"runs"/"DEV_FREEZE.json"
+    if freeze_path.exists():
+        previous=json.loads(freeze_path.read_text())
+        if previous.get("dev_queries")==dev_qids and previous.get("audit_queries")==aud_qids and previous.get("angle_grid")==ANGLE_GRID.tolist():
+            threshold=int(previous["role_threshold_raw_tokens"])
+            chosen=list(previous["angles"])
+            freeze=previous
+        else:
+            raise RuntimeError("Saved development freeze does not match the current frozen split/protocol")
+    else:
+        previous=None
     # Freeze one role coordinate per role on development MRR@10 only.
     dev_rows={}
-    for q in dev_qids:
-        r=run_one(searcher,state,Qcache[q],docids,q,"native",k=100)
-        dev_rows[q]=r
-    angle_scores={0:[],1:[]}
-    for a in ANGLE_GRID:
+    if previous is None:
         for q in dev_qids:
-            rr=run_one(searcher,state,Qcache[q],docids,q,"mirror_centroid_bank",float(a),k=100)
-            dev_rows[(q,float(a))]=rr
+            r=run_one(searcher,state,Qcache[q],docids,q,"native",k=100)
+            dev_rows[q]=r
+        angle_scores={0:[],1:[]}
+        for a in ANGLE_GRID:
+            for q in dev_qids:
+                rr=run_one(searcher,state,Qcache[q],docids,q,"mirror_centroid_bank",float(a),k=100)
+                dev_rows[(q,float(a))]=rr
+            for role in [0,1]:
+                qs=[q for q in dev_qids if roles[q]==role]
+                vals=[metric(q,dev_rows[(q,float(a))]["ranking"],qrels)[1] for q in qs]
+                angle_scores[role].append((float(np.mean(vals)),float(a)))
+        chosen=[]
         for role in [0,1]:
-            qs=[q for q in dev_qids if roles[q]==role]
-            vals=[metric(q,dev_rows[(q,float(a))]["ranking"],qrels)[1] for q in qs]
-            angle_scores[role].append((float(np.mean(vals)),float(a)))
-    chosen=[]
-    for role in [0,1]:
-        best=max(x[0] for x in angle_scores[role]); tied=[x[1] for x in angle_scores[role] if abs(x[0]-best)<1e-12]
-        chosen.append(sorted(tied,key=lambda a:(abs(a),a))[0])
-    freeze={"role_threshold_raw_tokens":threshold,"angles":chosen,"angle_grid":ANGLE_GRID.tolist(),"dev_angle_mrr":{str(k):v for k,v in angle_scores.items()},"dev_queries":dev_qids,"audit_queries":aud_qids,"selection":"dev qrels only; frozen before audit scoring"}
-    (EXP/"runs").mkdir(exist_ok=True)
-    (EXP/"runs"/"DEV_FREEZE.json").write_text(json.dumps(freeze,indent=2,sort_keys=True)+"\n")
+            best=max(x[0] for x in angle_scores[role]); tied=[x[1] for x in angle_scores[role] if abs(x[0]-best)<1e-12]
+            chosen.append(sorted(tied,key=lambda a:(abs(a),a))[0])
+        freeze={"role_threshold_raw_tokens":threshold,"angles":chosen,"angle_grid":ANGLE_GRID.tolist(),"dev_angle_mrr":{str(k):v for k,v in angle_scores.items()},"dev_queries":dev_qids,"audit_queries":aud_qids,"selection":"dev qrels only; frozen before audit scoring"}
+        (EXP/"runs").mkdir(exist_ok=True)
+        freeze_path.write_text(json.dumps(freeze,indent=2,sort_keys=True)+"\n")
     # Fresh query audit: native PLAID, centroid View, native query push-through, and full compressed scan.
     arms={"plaid_native":[],"mirror":[],"native_query_control":[],"full_index_scan":[]}
     candidate_recall={"plaid_native":[],"mirror":[],"native_query_control":[]}
@@ -220,12 +235,12 @@ def main():
     audit_roles={q:roles[q] for q in aud_qids}
     metrics={name:summarize(rows,qrels,audit_roles) for name,rows in arms.items()}
     top10_changed=sum(arms["plaid_native"][i]["ranking"][:10]!=arms["mirror"][i]["ranking"][:10] for i in range(len(aud_qids)))
-    model_files=[MODEL/n for n in ["pytorch_model.bin","config.json","tokenizer.json","tokenizer_config.json","special_tokens_map.json","vocab.txt"] if (MODEL/n).exists()]
+    model_files=sorted(p for p in MODEL.rglob("*") if p.is_file())
     base_payload=payload_sizes(index_path,docids,model_files)
     view_payload=payload_sizes(index_path,docids,model_files,chosen,threshold)
     # View state's actual serialized files are counted once and shared with the native control.
     indexmeta=json.loads((Path(index_path)/"metadata.json").read_text())
-    summary={"experiment":"MA-1039","dataset_archive_sha256":sha256(DATA/"trec-covid.zip"),"checkpoint_archive_sha256":"d07df4b2a9fe1848fbed333127a1a5b4f2d96106f420948f0db4450b018cb119","colbert_reference_commit":"cc4f3dc91c0b45d2d08c251d9d95178285c65f1c","candidate_documents":len(docids),"development_queries":dev_qids,"audit_queries":aud_qids,"role_threshold_raw_tokens":threshold,"audit_role_counts":{"short":sum(roles[q]==0 for q in aud_qids),"long":sum(roles[q]==1 for q in aud_qids)},"angles":chosen,"angle_grid":ANGLE_GRID.tolist(),"development_angle_mrr":angle_scores,"metrics":metrics,"prepruning_ivf_union_recall_mean":{k:float(np.mean(v)) for k,v in candidate_recall.items()},"candidate_counts_mean":{k:float(np.mean([x["candidate_count"] for x in arms[k]])) for k in ["plaid_native","mirror","native_query_control"]},"ranking_divergence":{"top10_changed_queries":int(top10_changed),"query_count":len(aud_qids)},"equivalence":{"all_same_cells":all(x["same_cells"] for x in equivalence),"all_same_candidate_ids":all(x["same_candidate_ids"] for x in equivalence),"all_same_top100":all(x["same_top100"] for x in equivalence),"max_abs_centroid_score_delta":max(x["max_abs_centroid_score_delta"] for x in equivalence),"per_query":equivalence},"payload":{"native":base_payload,"mirror":view_payload,"native_query_control":view_payload,"marginal_view_bytes":view_payload["complete_bytes"]-base_payload["complete_bytes"]},"latency_status":"NOT ESTABLISHED: one pass per arm/query, no repeated isolated timing calibration", "index":{"path":str(index_path),"num_partitions":indexmeta["num_partitions"],"num_embeddings":indexmeta["num_embeddings"],"doclens_file_count":len(list(Path(index_path).glob("doclens.*.json"))),"build_wall_seconds":index_wall},"optimizer_updates":0,"development_angle_query_evaluations":len(ANGLE_GRID)*len(dev_qids),"audit_query_wall_seconds":{k:[float(x["wall_seconds"]) for x in arms[k]] for k in ["plaid_native","mirror","native_query_control","full_index_scan"]},"audit_route_seconds":{k:[float(x["route_seconds"]) for x in arms[k]] for k in ["plaid_native","mirror","native_query_control"]}}
+    summary={"experiment":"MA-1039","dataset_archive_sha256":sha256(DATA.parent/"trec-covid.zip"),"checkpoint_archive_sha256":"d07df4b2a9fe1848fbed333127a1a5b4f2d96106f420948f0db4450b018cb119","colbert_reference_commit":"cc4f3dc91c0b45d2d08c251d9d95178285c65f1c","candidate_documents":len(docids),"development_queries":dev_qids,"audit_queries":aud_qids,"role_threshold_raw_tokens":threshold,"audit_role_counts":{"short":sum(roles[q]==0 for q in aud_qids),"long":sum(roles[q]==1 for q in aud_qids)},"angles":chosen,"angle_grid":ANGLE_GRID.tolist(),"development_angle_mrr":angle_scores,"metrics":metrics,"prepruning_ivf_union_recall_mean":{k:float(np.mean(v)) for k,v in candidate_recall.items()},"candidate_counts_mean":{k:float(np.mean([x["candidate_count"] for x in arms[k]])) for k in ["plaid_native","mirror","native_query_control"]},"ranking_divergence":{"top10_changed_queries":int(top10_changed),"query_count":len(aud_qids)},"equivalence":{"all_same_cells":all(x["same_cells"] for x in equivalence),"all_same_candidate_ids":all(x["same_candidate_ids"] for x in equivalence),"all_same_top100":all(x["same_top100"] for x in equivalence),"max_abs_centroid_score_delta":max(x["max_abs_centroid_score_delta"] for x in equivalence),"per_query":equivalence},"payload":{"native":base_payload,"mirror":view_payload,"native_query_control":view_payload,"marginal_view_bytes":view_payload["complete_bytes"]-base_payload["complete_bytes"]},"latency_status":"NOT ESTABLISHED: one pass per arm/query, no repeated isolated timing calibration", "index":{"path":str(index_path),"num_partitions":indexmeta["num_partitions"],"num_embeddings":indexmeta["num_embeddings"],"doclens_file_count":len(list(Path(index_path).glob("doclens.*.json"))),"build_wall_seconds":index_wall},"optimizer_updates":0,"development_angle_query_evaluations":len(ANGLE_GRID)*len(dev_qids),"audit_query_wall_seconds":{k:[float(x["wall_seconds"]) for x in arms[k]] for k in ["plaid_native","mirror","native_query_control","full_index_scan"]},"audit_route_seconds":{k:[float(x["route_seconds"]) for x in arms[k]] for k in ["plaid_native","mirror","native_query_control"]}}
     (EXP/"runs"/"summary.json").write_text(json.dumps(summary,indent=2,sort_keys=True)+"\n")
     print(json.dumps(summary,indent=2,sort_keys=True),flush=True)
 
