@@ -220,12 +220,13 @@ def quantile_metrics(samples, y):
         q = np.quantile(samples, tau, axis=1)
         e = y - q
         losses.append(2.0 * np.maximum(tau * e, (tau - 1.0) * e))
-    wql = np.sum(np.stack(losses), axis=(0, 2)) / (3.0 * np.maximum(np.sum(np.abs(y), axis=1), 1e-8))
+    wql_num = np.sum(np.stack(losses), axis=(0, 2))
+    wql_den = 3.0 * np.sum(np.abs(y), axis=1)
     med = np.quantile(samples, 0.5, axis=1)
     low = np.quantile(samples, 0.05, axis=1)
     high = np.quantile(samples, 0.95, axis=1)
     coverage = np.mean((y >= low) & (y <= high), axis=1)
-    return wql, np.mean(np.abs(med - y), axis=1), coverage
+    return wql_num, wql_den, np.mean(np.abs(med - y), axis=1), coverage
 
 
 def naive_forecast(w, series_values):
@@ -244,14 +245,14 @@ def metrics(records, method_samples):
         s = method_samples[i:i+1]
         y = r["target"][None, :]
         c = float(sample_crps(s, y)[0])
-        wql, mae, cov = quantile_metrics(s, y)
+        wql_num, wql_den, mae, cov = quantile_metrics(s, y)
         nf = naive_forecast(r, r["full_series"])
         nc = float(np.mean(np.abs(nf - r["target"])))
         scale = float(np.mean(np.abs(np.diff(r["history"], n=1)))) if False else float(
             np.mean(np.abs(r["history"][r["period"]:] - r["history"][:-r["period"]]))
         )
         per_record.append({"dataset": r["dataset"], "series": r["series"], "crps": c,
-                           "wql": float(wql[0]), "mae": float(mae[0]),
+                           "wql_num": float(wql_num[0]), "wql_den": float(wql_den[0]), "mae": float(mae[0]),
                            "mase": float(mae[0] / max(scale, 1e-8)),
                            "coverage90": float(cov[0]), "naive_crps": nc})
     for dataset in sorted({r["dataset"] for r in records}):
@@ -261,7 +262,7 @@ def metrics(records, method_samples):
             "windows": len(rows),
             "crps": float(np.mean([x["crps"] for x in rows])),
             "crps_vs_seasonal_naive": float(np.mean([x["crps"] for x in rows]) / max(ncrps, 1e-8)),
-            "wql_0.1_0.5_0.9": float(np.mean([x["wql"] for x in rows])),
+            "wql_0.1_0.5_0.9": float(sum(x["wql_num"] for x in rows) / max(sum(x["wql_den"] for x in rows), 1e-8)),
             "mase": float(np.mean([x["mase"] for x in rows])),
             "coverage90": float(np.mean([x["coverage90"] for x in rows])),
             "naive_mae": ncrps

@@ -50,6 +50,14 @@ class MA1046ProtocolTests(unittest.TestCase):
         for (_,end),(start,_) in zip(spans,spans[1:]):
             self.assertLessEqual(end,start)
 
+    def test_wql_returns_pooled_loss_numerator_and_denominator(self):
+        y=np.asarray([[1.0,2.0],[0.01,0.02]],dtype=np.float32)
+        samples=np.repeat(y[:,None,:],4,axis=1)
+        num,den,mae,cov=mod.quantile_metrics(samples,y)
+        self.assertEqual(num.shape,(2,))
+        np.testing.assert_allclose(den,3*np.sum(np.abs(y),axis=1))
+        np.testing.assert_allclose(num,0.0,atol=0.0)
+
     def test_crps_zero_for_perfect_degenerate_forecast(self):
         y=np.asarray([[1.,2.,3.]])
         s=np.repeat(y[:,None,:],4,axis=1)
