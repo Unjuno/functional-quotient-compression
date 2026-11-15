@@ -1,0 +1,54 @@
+{
+  "model": {
+    "id": "amazon/chronos-t5-tiny",
+    "revision": "29d808298f1a62493e7b9a5e08529d0d930fa189",
+    "inference_payload_files": {
+      "model.safetensors": {
+        "bytes": 33588440,
+        "sha256": "eed458758bd8165d80f496a90bcd2cfed9f1bf7d7b08677acd64e0f7d72bdcf2"
+      },
+      "config.json": {
+        "bytes": 1142,
+        "sha256": "b107d9011b8cf4557d2cae9d2ab5be07af8ff102d2d4ff19b452f44c3af76552"
+      },
+      "generation_config.json": {
+        "bytes": 142,
+        "sha256": "e255d602baf228364ebfd4e787b9fa8a0f41d0ade452f76bdfd5cd57f7f9b8e4"
+      }
+    },
+    "common_checkpoint_payload_bytes": 33589724,
+    "weights_dtype": "float32"
+  },
+  "data": {
+    "ETTh1.csv": {
+      "bytes": 2589657,
+      "sha256": "f18de3ad269cef59bb07b5438d79bb3042d3be49bdeecf01c1cd6d29695ee066"
+    },
+    "ETTm1.csv": {
+      "bytes": 10360719,
+      "sha256": "6ce1759b1a18e3328421d5d75fadcb316c449fcd7cec32820c8dafda71986c9e"
+    },
+    "weather_dataset.zip": {
+      "bytes": 38820451,
+      "sha256": "adc9195b4b842673892fec1ba22cced9c42d5c4cba9a261f455ffbe96db7847b",
+      "extracted_member": "weather_dataset.tsf",
+      "extracted_member_bytes": 212401586,
+      "extracted_member_sha256": "90c87d3e836b975ca093cc2ff964062d0394eadf5ade70e01b49a556d9a39cc6"
+    },
+    "australian_electricity_demand_dataset.zip": {
+      "bytes": 5770526,
+      "sha256": "b1439c28a631766bd05ee327f1f430a887b9f53b38a8cd5c0769ded1fd4aaf5a",
+      "extracted_member": "australian_electricity_demand_dataset.tsf",
+      "extracted_member_bytes": 13422464,
+      "extracted_member_sha256": "73af0efd30a102d63b7e4ae2972ced64d4172eba20cfd4614016a8c83a748c7f"
+    }
+  },
+  "dependency": {
+    "chronos_forecasting": "1.5.3",
+    "torch": "2.14.1+cpu",
+    "transformers": "4.46.3",
+    "python": "3.12"
+  },
+  "raw_data_location": "/tmp/ma1046-data",
+  "raw_dataset_archives_are_not_committed": true
+}
