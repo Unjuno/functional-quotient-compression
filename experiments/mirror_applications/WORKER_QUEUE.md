@@ -24,6 +24,11 @@ MA-990 official MERL RANF code was located, but the required SONICOM HRTF subjec
 
 # Worker queue
 
+## Current handoff — 2026-11-15, MA-1026
+
+MA-1026 is a bounded CIFAR-10/CLIP MaPLe FAIL: coupled modality Givens views save 75.0% prompt-state bytes vs independent per-domain prompts and match its novel accuracy, but Mirror H-mean 81.27% is 1.28 pp below matched rank-1 additive and hard-shared MaPLe at 82.55%. Held-out base domain×class accuracy ties both at 79.17%. Full bundle is 612,024,716 B. Serialized replay and five tests pass. The audit has 160 class×domain cells disjoint from MA-1024/1025; CPU, ViT-B/32, depth 2, 20 updates/method; not official MaPLe reproduction. Continue to P0 MA-1027. See `ma-1026-maple-coupled-view/RESULTS.md`.
+
+
 ## Current handoff — 2026-11-15, MA-1025
 
 MA-1025 is a bounded CIFAR-10/CLIP FAIL: image-conditioned Mirror uses 74,935 B learned state and scores 81.25% novel accuracy, 6.25 pp above the full CoCoOp-style control, yet ties matched rank-2 additive at 83.33% base, 81.25% novel and 82.28% H. This fails the preregistered >=1 pp Mirror-specific gate. Full bundle is 608,938,515 B (74,935 B over CLIP). Exact serialized replay, asset/data hashes and six tests pass. Audit is only 40 images, disjoint from MA-1024; no broad VLM claim. Continue to P0 MA-1026. See `ma-1025-cocoop-instance-view/RESULTS.md`.

@@ -1,0 +1,18 @@
+{
+  "experiment_id":"MA-1026",
+  "status":"PASS: artifact/replay integrity; FAIL: preregistered Mirror-specific gate",
+  "protocol_fixed_before_training_and_audit_image_access":true,
+  "test_images_opened_after_prompt_freeze":true,
+  "checks":[
+    {"name":"official_backbone_assets_hashes","result":"PASS","command":"python source/verify_result.py"},
+    {"name":"train_test_ids_disjoint_from_MA1024_MA1025","result":"PASS","command":"python source/verify_result.py"},
+    {"name":"audit_image_hashes","result":"PASS","count":40},
+    {"name":"heldout_domain_class_training_cells","result":"PASS","count":6},
+    {"name":"self_describing_prompt_payload_hashes_and_bundle_bytes","result":"PASS","command":"python source/verify_result.py"},
+    {"name":"exact_serialized_prompt_metric_replay","result":"PASS","tolerance":1e-12,"command":"python source/verify_result.py"},
+    {"name":"unit_tests","result":"PASS","passed":5,"command":"python -m unittest discover -s experiments/mirror_applications/ma-1026-maple-coupled-view/tests -v"},
+    {"name":"mirror_specific_quality_gate","result":"FAIL","reason":"Mirror H-mean 81.27%, additive rank-1 82.55%; Mirror also trails shared MaPLe by 1.28 pp."}
+  ],
+  "replay_stdout":{"asset_hashes":true,"audit_hashes":true,"heldout_domain_class_cells":true,"payload_hashes_and_full_bundle_arithmetic":true,"previous_experiment_train_audit_disjointness":true,"serialized_prompt_replay_exact":true,"mirror_specific_gate":"FAIL: additive multimodal control has higher H-mean"},
+  "boundaries":["CIFAR-10 only","CPU only","ViT-B/32 prompt depth 2","20 updates/method, one seed","not an official MaPLe reproduction or broad VLM claim"]
+}

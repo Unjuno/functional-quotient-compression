@@ -1,0 +1,111 @@
+{
+  "experiment_id": "MA-1026",
+  "title": "MaPLe paired modality Mirror prompt coordinates",
+  "status": "COMPLETE",
+  "base_commit": "b837a9935",
+  "evidence_lane": "LANGUAGE/MULTIMODAL/STORAGE/COMPUTE",
+  "prior_art": {
+    "id": "PA314",
+    "official_repository": "https://github.com/muzairkhattak/multimodal-prompt-learning",
+    "commit": "69bce21ae8eda80ad6187534b2dce09cf6c59e17",
+    "official_config": "ViT-B/16, n_ctx=2, prompt_depth=9, 5 epochs"
+  },
+  "hypothesis": "For domain-conditioned vision-language prompts, separate visual/textual Givens coordinates over one shared coupled MaPLe prompt state preserve held-out domain-class and base-to-novel quality with less state than independent per-domain MaPLe, and beat matched rank-1 additive modality controls.",
+  "scope_deviation": "Bounded CPU screen using cached CLIP ViT-B/32, prompt_depth=2 (one deep prompt), 4 CIFAR-10 shots/class, 20 updates/method. This is not an official MaPLe benchmark reproduction; architecture retains its coupled shallow visual projection and deep text/vision prompts.",
+  "model": {
+    "name": "openai/clip-vit-base-patch32",
+    "parameters_frozen": true,
+    "context_tokens": 2,
+    "prompt_depth": 2,
+    "trainable_prompt_state_only": true
+  },
+  "factorization": {
+    "visual_factor": "domain-specific visual-coordinate scalar m_v",
+    "language_factor": "domain-specific text-coordinate scalar m_t",
+    "mirror_operator": "apply Givens rotations across the two prompt-token positions, independently in text and visual streams; visual shallow/deep prompts remain projections of text prompts before the visual rotation",
+    "additive_control": "same per-domain two scalar codes applied to learned visual/text low-rank prompt bases"
+  },
+  "data": {
+    "dataset": "uoft-cs/cifar10",
+    "train_classes": [
+      "airplane",
+      "automobile",
+      "bird",
+      "cat",
+      "deer",
+      "dog"
+    ],
+    "novel_classes": [
+      "frog",
+      "horse",
+      "ship",
+      "truck"
+    ],
+    "domains": [
+      "original",
+      "grayscale",
+      "brightness_0.65",
+      "gaussian_blur_radius_1.0"
+    ],
+    "train_images_per_base_class": 4,
+    "audit_images_per_class": 4,
+    "train_seed": 102601,
+    "audit_seed": 102602,
+    "exclude_MA1024_and_MA1025_train_indices": true,
+    "exclude_MA1024_and_MA1025_test_indices": true,
+    "heldout_base_class_domain_pairs": "for each base class c, withhold all training images from domain c mod 4; each class and each domain remains represented in other observed pairs",
+    "audit_open": "official test images opened only after all prompt states are frozen; all held-out pairs/classes and image hashes recorded"
+  },
+  "training": {
+    "updates_per_method": 20,
+    "batch_size": 4,
+    "domain_schedule": "round-robin across four domains",
+    "optimizer": "Adam",
+    "learning_rate": 0.001,
+    "method_order": [
+      "shared_maple",
+      "independent_domain_maple",
+      "mirror_maple",
+      "additive_rank1_multimodal"
+    ]
+  },
+  "controls": [
+    "zero-shot CLIP",
+    "one shared native coupled MaPLe state",
+    "independent native coupled MaPLe state per domain",
+    "shared MaPLe plus visual/text Givens coordinates",
+    "shared MaPLe plus matched visual/text rank-1 additive prompt bases"
+  ],
+  "metrics": {
+    "quality": "mean base accuracy, mean novel accuracy, harmonic mean over class x image-domain cells, and held-out base domain-class pair accuracy",
+    "storage": "actual serialized prompt payload bytes and full frozen backbone plus payload bytes",
+    "compute": "training wall, full audit inference wall, per-image wall, trainable parameters and prompt-view application MAC proxy"
+  },
+  "storage": {
+    "format": "UTF-8 JSON inference manifest plus contiguous little-endian float32 arrays",
+    "paid_state": [
+      "all coupled prompt contexts and projections",
+      "domain view codes",
+      "low-rank bases",
+      "mapping/token templates/domain and class metadata",
+      "frozen CLIP model/config/tokenizer/processor files"
+    ]
+  },
+  "success_gate": "Mirror novel accuracy and H-mean no more than 1 pp below independent MaPLe; at least 25% fewer learned prompt bytes than independent MaPLe; and >=1 pp higher H-mean than additive control.",
+  "failure_gate": "Additive multimodal low-rank control matches/beats Mirror, or Mirror misses independent-quality tolerance.",
+  "fresh": {
+    "official_test_split": true,
+    "locked_before_access": true,
+    "opened_at_freeze": false,
+    "opened_after_all_prompt_states_frozen": true
+  },
+  "boundaries": [
+    "small CIFAR-10 screen",
+    "single pretrained CLIP model",
+    "CPU only",
+    "one update budget and one seed",
+    "not official MaPLe reproduction or broad VLM result"
+  ],
+  "final_decision": "FAIL",
+  "final_decision_basis": "Mirror misses the required >=1pp H-mean advantage over the rank-1 additive multimodal control (81.27% vs 82.55%) and trails hard-shared MaPLe; independent-bank quality passes the frozen criteria but was trained for five updates/domain."
+}
