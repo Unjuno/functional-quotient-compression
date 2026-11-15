@@ -24,9 +24,11 @@ MA-990 official MERL RANF code was located, but the required SONICOM HRTF subjec
 
 # Worker queue
 
-## Current handoff — 2026-11-15, MA-1030
+## Current handoff — 2026-11-15, MA-1031
 
-MA-1030 is a scoped synthetic SAM2.1 Hiera-tiny FAIL: the one-slot causal fallback halved object-memory bytes but allocated all 18 slots to stable outlier ID42, never shifted ID99. J&F 0.17772 vs 0.60567 independent and 0.28987 rank-1 additive. Complete-session savings are 0.240%; rank-1 is better in quality, bytes and FPS. Four tests and input/payload/prediction/metric replay pass. Continue at P0 MA-1031. See `ma-1030-sam2-rare-object-private-fallback/RESULTS.md`.
+MA-1031 is a scoped synthetic SAM2.1 Hiera-tiny interactive prompt FAIL: Mirror polar history is 503 B vs 544 B direct (7.5% savings, below the 25% gate), with J&F .77332 vs .83345; 8px-grid coding is 318 B and J&F .83840. Mirror retains all 40 clicks/video and saves 43 B in the full session. Four tests and input/history/prediction/metric replay pass. Continue at P0 MA-1033 (MA-1032 is P1). See `ma-1031-sam2-interactive-prompt-view/RESULTS.md`.
+
+Previous: MA-1030 is a scoped synthetic SAM2.1 Hiera-tiny FAIL: the one-slot causal fallback halved object-memory bytes but allocated all 18 slots to stable outlier ID42, never shifted ID99. J&F 0.17772 vs 0.60567 independent and 0.28987 rank-1 additive. Complete-session savings are 0.240%; rank-1 is better in quality, bytes and FPS. Four tests and input/payload/prediction/metric replay pass. See `ma-1030-sam2-rare-object-private-fallback/RESULTS.md`.
 
 Previous: MA-1029 is a scoped synthetic SAM ViT-B adapter FAIL: Mirror adaptation state is 64.0% below independent, but hard sharing is 188 B smaller at effectively equal quality and FiLM scores higher in all three fresh worlds. Full-bundle savings are 36,454 B. Six tests pass; not official MoPEFT/MESS or natural-image evidence. See `ma-1029-mopeft-sam-expert-view/RESULTS.md`.
 
