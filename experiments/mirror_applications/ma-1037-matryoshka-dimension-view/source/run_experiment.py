@@ -168,8 +168,12 @@ def audit(model_dir):
   assert np.array_equal(Qm,Qc) and np.array_equal(Xm,Xc)
   for method,Q,X in [('native_prefix',Qn,Xn),('mirror_givens',Qm,Xm),('linear_boundary_control',Qc,Xc)]:
    metrics=ranking_metrics(Q,X,test_ids,docids,test)
-   index_path=ROOT/'payload'/method/f'candidate_d{d}.npy'
-   candidate_bytes,candidate_hash=save_npy(index_path,X)
+   index_path=(ROOT/'payload'/'mirror_givens'/f'candidate_d{d}.npy' if method=='linear_boundary_control' else ROOT/'payload'/method/f'candidate_d{d}.npy')
+   if method=='linear_boundary_control':
+    candidate_bytes=index_path.stat().st_size; candidate_hash=sha256(index_path)
+    assert np.array_equal(np.load(index_path,allow_pickle=False),X)
+   else:
+    candidate_bytes,candidate_hash=save_npy(index_path,X)
    coordinate_bytes=0 if method=='native_prefix' or d==D else (4 if method=='mirror_givens' else 8)
    coordinate_path=ROOT/'payload'/method/f'coordinate_d{d}.bin'
    if coordinate_bytes:
