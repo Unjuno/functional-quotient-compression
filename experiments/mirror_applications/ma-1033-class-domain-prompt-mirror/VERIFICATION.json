@@ -1,19 +1,42 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-1033",
+  "commit": "pending-result-commit",
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "PYTHONPATH=. python -m unittest discover -s experiments/mirror_applications/ma-1033-class-domain-prompt-mirror/tests -v",
+    "passed": 3,
+    "failed": 0
   },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "payload_methods": [
+      "zero_shot",
+      "shared_maple",
+      "mirror_product",
+      "additive_code",
+      "independent_cell"
+    ],
+    "full_bundle_arithmetic_checked": true
   },
   "metric_replay": {
-    "checked": false,
-    "max_difference": null
+    "checked": true,
+    "command": "python experiments/mirror_applications/ma-1033-class-domain-prompt-mirror/source/verify_result.py",
+    "passed": true,
+    "max_difference": 0.0
   },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "fresh_split_integrity_checked": true,
+  "source_sha256": "3267398418d3ce0f73488014d170f713958c589c5f18d5e7987fe118cc175bf1",
+  "audit_seeds": [
+    103301,
+    103302,
+    103303
+  ],
+  "model_sha256": "a63082132ba4f97a80bea76823f544493bffa8082296d62d71581a4feff1576f",
+  "notes": [
+    "CIFAR-10 train/test fingerprints and audit image hashes replayed.",
+    "Train and audit indices are disjoint from MA-1024, MA-1025 and MA-1026.",
+    "Three fresh image samples share the same fixed trained states; training-seed variance was not estimated.",
+    "Mirror-specific gate failed: same-size additive control matches/beats Mirror on mean held-out accuracy; learned payload saving vs independent cells is 9.39%, below 25%.",
+    "One invalid one-layer development smoke is preserved in AMENDMENTS.md and excluded; corrected full-layer implementation was frozen before audit."
+  ]
 }

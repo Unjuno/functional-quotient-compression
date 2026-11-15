@@ -1,23 +1,23 @@
 # MA-1033 status
 
-- Status: SCREENING
+- Status: FAIL
 - Branch: `research/ma-1033-class-domain-prompt-mirror-20261115`
 - Base commit: `45ec2fe67f2c911980a4d48ae3867ef8300f0734`
-- Last verified commit: pending audit
+- Last verified commit: pending final commit
 - Development complete: yes
-- Fresh/audit opened: no
+- Fresh/audit opened: yes, seeds 103301–103303
 - Results committed: no
 - Verification committed: no
 - Registry row updated: no
 
 ## Next action
 
-Run the frozen three-seed audit (103301–103303); do not alter the frozen configuration.
+Commit the result, register the scoped FAIL, push this research branch, then continue to the next eligible P0 candidate MA-1035 (MA-1034 is P1).
 
 ## Blockers
 
-None. Cached CLIP and CIFAR-10 assets are available in the container; execution is CPU-only.
+None.
 
 ## Decisions / rulings
 
-Amendment A1 corrected the prompt forward from one transformer layer to all frozen CLIP layers before any audit access. The bad development smoke run is documented and excluded; the full-layer rerun is frozen in `FREEZE.json`.
+The first one-layer development smoke was a code-path bug, not scientific evidence; it remains recorded in `AMENDMENTS.md`. Corrected all-layer implementation and protocol were frozen before audit.
