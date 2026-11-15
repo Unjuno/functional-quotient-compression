@@ -1,0 +1,53 @@
+{
+  "warning": "POSTHOC: oracle was selected on DIFFERENT A13 IID/OOD test labels; challenge labels never used in code selection; still privileged evaluation, not a deployable comparison",
+  "summary": [
+    {
+      "method": "film",
+      "algorithm": "privileged_oracle",
+      "worlds": 6,
+      "pass_worlds": 6,
+      "iid_mean": 0.13740021770195968,
+      "ood_mean": 0.14583822293388649
+    },
+    {
+      "method": "film",
+      "algorithm": "support_es",
+      "worlds": 6,
+      "pass_worlds": 5,
+      "iid_mean": 0.15559905282541545,
+      "ood_mean": 0.1642543811291401
+    },
+    {
+      "method": "mirror",
+      "algorithm": "privileged_oracle",
+      "worlds": 6,
+      "pass_worlds": 0,
+      "iid_mean": 0.331417693645622,
+      "ood_mean": 0.3954372004799005
+    },
+    {
+      "method": "mirror",
+      "algorithm": "support_es",
+      "worlds": 6,
+      "pass_worlds": 0,
+      "iid_mean": 0.35936418051104946,
+      "ood_mean": 0.45332129149136197
+    },
+    {
+      "method": "shift",
+      "algorithm": "privileged_oracle",
+      "worlds": 6,
+      "pass_worlds": 6,
+      "iid_mean": 0.07635415563902,
+      "ood_mean": 0.08565761989712917
+    },
+    {
+      "method": "shift",
+      "algorithm": "support_es",
+      "worlds": 6,
+      "pass_worlds": 6,
+      "iid_mean": 0.09021511444974968,
+      "ood_mean": 0.09887300196631875
+    }
+  ]
+}
