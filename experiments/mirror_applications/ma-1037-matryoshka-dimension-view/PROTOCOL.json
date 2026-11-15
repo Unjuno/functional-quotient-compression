@@ -33,12 +33,19 @@
     "dimension": 768,
     "document_prefix": "search_document: ",
     "query_prefix": "search_query: ",
-    "pooling": "masked mean, full-dimension layer norm, then full-vector L2 normalization, matching the model card",
+    "pooling": "ONNX last_hidden_state; masked mean, full-dimension layer norm (epsilon 1e-5), then full-vector L2 normalization, matching the model card.",
     "tokenizer": "pinned Nomic model repository tokenizer",
     "max_length": 512,
-    "device": "CPU"
+    "device": "CPU",
+    "execution_artifact": "Official Nomic repository ONNX model_quantized.onnx (INT8 quantized export) at the pinned model revision; all compared methods use this same artifact."
   },
-  "budgets": [64, 128, 256, 512, 768],
+  "budgets": [
+    64,
+    128,
+    256,
+    512,
+    768
+  ],
   "controls": [
     "native Matryoshka prefix at each dimension",
     "Mirror boundary Givens angle chosen on train qrels at each dimension",
@@ -52,14 +59,32 @@
     "audit_isolation": "test qrels are opened only after protocol freeze and development selection lock"
   },
   "metrics": {
-    "quality": ["nDCG@10", "Recall@10", "MRR@10"],
+    "quality": [
+      "nDCG@10",
+      "Recall@10",
+      "MRR@10"
+    ],
     "storage": "actual .npy serialized source vector table, per-budget candidate vector index, model/tokenizer/code, per-budget coordinate and manifest bytes",
-    "compute": ["encoder wall time and docs/s", "exact retrieval wall time and queries/s", "2*Nq*Ndoc*d retrieval FLOP proxy", "per-query Givens FLOP proxy"]
+    "compute": [
+      "encoder wall time and docs/s",
+      "exact retrieval wall time and queries/s",
+      "2*Nq*Ndoc*d retrieval FLOP proxy",
+      "per-query Givens FLOP proxy"
+    ]
   },
   "success_gate": "At least two of the four sub-full dimensions improve test nDCG@10 by >=0.5 percentage points over native prefix; no sub-full dimension regresses by >0.5 points; the complete materialized Mirror bank is <=1.01x matched native candidate bytes; and median retrieval throughput is >=90% of native. A Mirror-specific PASS additionally requires >=0.2 point nDCG@10 improvement over the matched normalized linear boundary control.",
   "failure_gate": "No qualifying held-out quality-cost point, materialized Mirror payload exceeds 1.01x native candidate bank, a matched simple control ties the Mirror function/quality, or full-dimension Mirror changes rankings despite exact orthogonality.",
   "storage": {
-    "paid_objects": ["full source 768-D corpus vectors", "each materialized native or Mirror candidate vector table", "model weights and config", "tokenizer files", "Nomic architecture source", "domain/budget view coordinates", "corpus ID map", "manifests"],
+    "paid_objects": [
+      "full source 768-D corpus vectors",
+      "each materialized native or Mirror candidate vector table",
+      "model weights and config",
+      "tokenizer files",
+      "Nomic architecture source",
+      "domain/budget view coordinates",
+      "corpus ID map",
+      "manifests"
+    ],
     "queries": "test query texts and temporary query vectors are input/work state, not persistent retrieval index state; their hashes and embedding replay are recorded",
     "full_payload_rule": "common encoder and source table are charged to every complete method bank; all budget-specific candidate banks and coordinate metadata are also charged"
   },
@@ -67,6 +92,16 @@
     "one natural scientific retrieval benchmark and one pretrained encoder",
     "no encoder fine-tuning; task/budget views selected only on train qrels",
     "exact dense full-corpus retrieval, not ANN index latency",
-    "the full-dimension orthogonal gauge is an invariance check, not independent capacity"
+    "the full-dimension orthogonal gauge is an invariance check, not independent capacity",
+    "Encoder representation uses the repository-provided INT8 ONNX export; reported retrieval conclusions are conditional on this CPU execution artifact."
+  ],
+  "protocol_amendments": [
+    {
+      "id": "AM-01",
+      "reason": "The pinned FP32 PyTorch artifact produced no vectors after a 10-minute CPU-only run; an official INT8 ONNX export from the same model revision is available and runs through ONNX Runtime. This was changed before any SciFact embeddings, qrels metrics, development selection, or audit were produced.",
+      "new_artifact": "onnx/model_quantized.onnx",
+      "onnxruntime_version": "1.22.0",
+      "selection_or_gate_changed": false
+    }
   ]
 }

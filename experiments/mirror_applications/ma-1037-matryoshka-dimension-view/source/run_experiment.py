@@ -4,14 +4,11 @@ import argparse, csv, hashlib, json, math, os, statistics, sys, time
 from pathlib import Path
 import numpy as np
 import pyarrow.parquet as pq
-import torch
-import torch.nn.functional as F
+import onnxruntime as ort
 from transformers import AutoTokenizer
 
 SRC=Path(__file__).resolve().parent
 ROOT=SRC.parent
-sys.path.insert(0,str(SRC))
-from vendor import NomicBertConfig,NomicBertModel
 D=768; DIMS=(64,128,256,512,768); GRID=np.linspace(-math.pi/2,math.pi/2,21)
 MODEL_REV='e9b6763023c676ca8431644204f50c2b100d9aab'
 CODE_REV='7710840340a098cfb869c4f65e87cf2b1b70caca'
@@ -34,16 +31,19 @@ def read_data(data_dir):
  query_texts=['search_query: '+str(x['text']).strip() for x in qt]
  return corpus_ids,corpus_texts,query_ids,query_texts
 
-def encode_texts(model,tokenizer,texts,batch_size,max_length):
+def encode_texts(session,tokenizer,texts,batch_size,max_length):
  outs=[]; t0=time.perf_counter()
+ names={x.name for x in session.get_inputs()}
  for lo in range(0,len(texts),batch_size):
-  batch=tokenizer(texts[lo:lo+batch_size],padding=True,truncation=True,max_length=max_length,return_tensors='pt')
-  with torch.inference_mode(): o=model(**batch)
-  mask=batch['attention_mask'].unsqueeze(-1).to(o.last_hidden_state.dtype)
-  pooled=(o.last_hidden_state*mask).sum(1)/mask.sum(1).clamp(min=1)
-  pooled=F.layer_norm(pooled,(pooled.shape[-1],))
-  pooled=F.normalize(pooled,p=2,dim=1)
-  outs.append(pooled.float().cpu().numpy())
+  batch=tokenizer(texts[lo:lo+batch_size],padding=True,truncation=True,max_length=max_length,return_tensors='np')
+  feeds={name:np.asarray(batch[name],dtype=np.int64) for name in names}
+  hidden=session.run(['last_hidden_state'],feeds)[0]
+  mask=np.asarray(batch['attention_mask'],dtype=np.float32)[:,:,None]
+  pooled=(hidden*mask).sum(1)/np.maximum(mask.sum(1),1.)
+  mean=pooled.mean(axis=1,keepdims=True); var=np.mean((pooled-mean)**2,axis=1,keepdims=True)
+  pooled=(pooled-mean)/np.sqrt(var+1e-5)
+  pooled=pooled/np.maximum(np.linalg.norm(pooled,axis=1,keepdims=True),1e-12)
+  outs.append(pooled.astype(np.float32,copy=False))
  wall=time.perf_counter()-t0
  return np.ascontiguousarray(np.concatenate(outs,axis=0),dtype=np.float32),wall
 
@@ -129,8 +129,7 @@ def dev_select():
 
 def model_bundle_bytes(model_dir):
  model_dir=Path(model_dir)
- files=[model_dir/'model.safetensors',model_dir/'config.json',model_dir/'tokenizer.json',model_dir/'tokenizer_config.json',model_dir/'special_tokens_map.json',model_dir/'vocab.txt']
- files += [SRC/'vendor'/'modeling_hf_nomic_bert.py',SRC/'vendor'/'configuration_hf_nomic_bert.py',SRC/'vendor'/'LICENSE.txt']
+ files=[model_dir/'onnx'/'model_quantized.onnx',model_dir/'config.json',model_dir/'tokenizer.json',model_dir/'tokenizer_config.json',model_dir/'special_tokens_map.json',model_dir/'vocab.txt']
  return sum(p.stat().st_size for p in files if p.exists()),[{'path':str(p),'bytes':p.stat().st_size,'sha256':sha256(p)} for p in files if p.exists()]
 
 def save_npy(path,x):
@@ -194,12 +193,11 @@ def audit(model_dir):
 
 def embed(model_dir,data_dir,batch_size=16,max_length=512):
  corpus_ids,corpus_texts,query_ids,query_texts=read_data(data_dir)
- torch.set_num_threads(int(os.environ.get('MA1037_TORCH_THREADS','4')))
+ so=ort.SessionOptions(); so.intra_op_num_threads=int(os.environ.get('MA1037_ONNX_THREADS','4')); so.inter_op_num_threads=1
+ session=ort.InferenceSession(str(Path(model_dir)/'onnx'/'model_quantized.onnx'),sess_options=so,providers=['CPUExecutionProvider'])
  tok=AutoTokenizer.from_pretrained(model_dir,local_files_only=True)
- cfg=NomicBertConfig.from_pretrained(model_dir,local_files_only=True)
- model=NomicBertModel.from_pretrained(model_dir,config=cfg,local_files_only=True); model.eval().to('cpu')
- corpus,ct=encode_texts(model,tok,corpus_texts,batch_size,max_length)
- queries,qt=encode_texts(model,tok,query_texts,batch_size,max_length)
+ corpus,ct=encode_texts(session,tok,corpus_texts,batch_size,max_length)
+ queries,qt=encode_texts(session,tok,query_texts,batch_size,max_length)
  assert corpus.shape==(5183,D) and queries.shape==(1109,D)
  cp=ROOT/'runs'/'corpus_vectors.npy'; qp=ROOT/'runs'/'query_vectors.npy'
  np.save(cp,corpus,allow_pickle=False); np.save(qp,queries,allow_pickle=False)
@@ -207,7 +205,7 @@ def embed(model_dir,data_dir,batch_size=16,max_length=512):
  (ROOT/'runs'/'embedding_ids.json').write_text(json.dumps(ids,separators=(',',':'))+'\n')
  data_dir=Path(data_dir)
  assets=[data_dir/x for x in ('corpus.parquet','queries.parquet','train.tsv','test.tsv')]
- meta={'model_revision':MODEL_REV,'model_weight_sha256':sha256(Path(model_dir)/'model.safetensors'),'model_weight_bytes':(Path(model_dir)/'model.safetensors').stat().st_size,'corpus_embedding_shape':list(corpus.shape),'query_embedding_shape':list(queries.shape),'corpus_encode_wall_s':ct,'query_encode_wall_s':qt,'documents_per_s':len(corpus)/ct,'queries_per_s':len(queries)/qt,'max_length':max_length,'batch_size':batch_size,'torch_threads':torch.get_num_threads(),'embedding_files':[{'path':str(p),'bytes':p.stat().st_size,'sha256':sha256(p)} for p in [cp,qp,ROOT/'runs'/'embedding_ids.json']],'input_files':[{'name':p.name,'bytes':p.stat().st_size,'sha256':sha256(p)} for p in assets]}
+ meta={'model_revision':MODEL_REV,'model_weight_sha256':sha256(Path(model_dir)/'onnx'/'model_quantized.onnx'),'model_weight_bytes':(Path(model_dir)/'onnx'/'model_quantized.onnx').stat().st_size,'corpus_embedding_shape':list(corpus.shape),'query_embedding_shape':list(queries.shape),'corpus_encode_wall_s':ct,'query_encode_wall_s':qt,'documents_per_s':len(corpus)/ct,'queries_per_s':len(queries)/qt,'max_length':max_length,'batch_size':batch_size,'onnx_threads':int(os.environ.get('MA1037_ONNX_THREADS','4')),'embedding_files':[{'path':str(p),'bytes':p.stat().st_size,'sha256':sha256(p)} for p in [cp,qp,ROOT/'runs'/'embedding_ids.json']],'input_files':[{'name':p.name,'bytes':p.stat().st_size,'sha256':sha256(p)} for p in assets]}
  (ROOT/'runs'/'EMBEDDING_PROVENANCE.json').write_text(json.dumps(meta,indent=2)+'\n')
  return meta
 
