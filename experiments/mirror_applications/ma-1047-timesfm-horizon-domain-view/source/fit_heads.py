@@ -56,7 +56,8 @@ def fit(X,Y):
     baseline=np.zeros((2,4,2)); baseline[:,:,0]=1
     return {"timesfm":baseline.tolist(),"shared":np.tile(shared,(2,4,1)).tolist(),
             "additive":additive.tolist(),"independent":cell.tolist(),
-            "mirror_factorized":mirror.tolist(),"fit_parameters":opt.x.tolist()}
+            "mirror_factorized":mirror.tolist(),"factorized_parameters":opt.x.tolist(),
+            "additive_parameters":beta.tolist()}
 
 def score(bundle,heads):
     rows=[]

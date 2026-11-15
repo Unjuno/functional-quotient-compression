@@ -1,5 +1,5 @@
 # MA-1047 — TimesFM horizon × domain factorized output head
 
-Status: protocol frozen before fresh audit. The registered proposal asks whether one frozen TimesFM patch decoder can support useful horizon/domain-specific forecasts with a compact factorized coordinate. See PROTOCOL.json for the pinned model, time split, controls, and gates.
+**Decision: FAIL** for the registered quality gate. The factorized output code is matched by a smaller native additive control and worsens MASE on ETTm1. Actual complete payloads, fresh time windows, and CPU runtime are reported in [RESULTS.md](RESULTS.md); the frozen protocol and post-audit reducer amendments are in [PROTOCOL.json](PROTOCOL.json).
 
-The official TimesFM 2.5 PyTorch checkpoint loads on CPU in this environment. The registered H100 latency cannot be tested here; CPU quality, bytes, and runtime remain measurable. Fresh final-20% targets stay unopened until development selection is complete.
+The checkpoint is official TimesFM 2.5 PyTorch. Fresh targets are the final 20% chronological windows of ETTh1 and ETTm1; neither series data nor weights are committed raw. H100 runtime remains unmeasured in this CPU-only environment.

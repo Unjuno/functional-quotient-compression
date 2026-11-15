@@ -1,0 +1,83 @@
+{
+  "ETTh1": {
+    "timesfm": {
+      "macro_mase": 2.2744065859797664,
+      "macro_smape": 43.23242265561989
+    },
+    "shared": {
+      "macro_mase": 2.2525884074042173,
+      "macro_smape": 42.62989330216281
+    },
+    "additive": {
+      "macro_mase": 2.2762711713330748,
+      "macro_smape": 43.09496426161557
+    },
+    "independent": {
+      "macro_mase": 2.3247102219477673,
+      "macro_smape": 44.04006810559219
+    },
+    "mirror_factorized": {
+      "macro_mase": 2.2766562272078654,
+      "macro_smape": 43.10608513154747
+    },
+    "seasonal_naive": {
+      "macro_mase": 2.331991110307733,
+      "macro_smape": 43.93057238449411
+    }
+  },
+  "ETTm1": {
+    "timesfm": {
+      "macro_mase": 4.087304718938827,
+      "macro_smape": 42.259848832344794
+    },
+    "shared": {
+      "macro_mase": 4.4289142338673475,
+      "macro_smape": 43.282361221802795
+    },
+    "additive": {
+      "macro_mase": 4.594271163004437,
+      "macro_smape": 43.86165812232547
+    },
+    "independent": {
+      "macro_mase": 4.549057797559104,
+      "macro_smape": 43.677445916218524
+    },
+    "mirror_factorized": {
+      "macro_mase": 4.594771538419175,
+      "macro_smape": 43.868282259300635
+    },
+    "seasonal_naive": {
+      "macro_mase": 4.308486067387288,
+      "macro_smape": 41.87380519974355
+    }
+  },
+  "_runtime": {
+    "audit_model_p50_s_per_forecast": 0.29657605650087737,
+    "audit_model_p95_s_per_forecast": 0.3214193098829128,
+    "postprocess_affine_p50_ms": 0.003080494934692979,
+    "postprocess_affine_p95_ms": 0.004268203338142484,
+    "h100_latency": "NOT ESTABLISHED; CUDA/H100 unavailable"
+  },
+  "timesfm_payload": {
+    "incremental_bytes": 359,
+    "complete_bytes": 925181938
+  },
+  "shared_payload": {
+    "incremental_bytes": 378,
+    "complete_bytes": 925181957
+  },
+  "additive_payload": {
+    "incremental_bytes": 432,
+    "complete_bytes": 925182011
+  },
+  "independent_payload": {
+    "incremental_bytes": 464,
+    "complete_bytes": 925182043
+  },
+  "mirror_factorized_payload": {
+    "incremental_bytes": 449,
+    "complete_bytes": 925182028
+  },
+  "common_checkpoint_bytes": 925181579,
+  "serialization_basis": "model.safetensors + config.json + actual float32 coefficients + method.json metadata; source bytes listed separately"
+}

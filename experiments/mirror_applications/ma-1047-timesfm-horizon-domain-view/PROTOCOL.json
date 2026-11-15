@@ -1,7 +1,7 @@
 {
   "experiment_id": "MA-1047",
   "title": "TimesFM horizon × domain factorized output-head View",
-  "status": "FROZEN_BEFORE_AUDIT",
+  "status": "FAIL_WITH_REPORTING_AMENDMENTS",
   "evidence_lane": "TIME_SERIES / FORECAST_QUALITY / STORAGE / CPU_RUNTIME",
   "base_commit": "2ff7aa816",
   "prior_art_refs": ["PA327"],
@@ -57,5 +57,20 @@
     "paid_state": ["model.safetensors", "config.json", "all affine factors and offsets", "method metadata", "generation settings"],
     "reporting": "Report shared checkpoint once, method-specific state bytes, complete payload, and source bytes separately. No parameter-count-only compression claim."
   },
-  "amendments": []
+  "amendments": [
+    {
+      "id": "AM-01",
+      "timing": "after audit forecasts were generated",
+      "reason": "The first reducer omitted the preregistered seasonal-naive secondary control even though it was listed in this protocol.",
+      "change": "Add seasonal-naive MASE/sMAPE to the reducer using only the saved forecast origins, historical context, and saved audit targets; regenerate AUDIT_METRICS.json from the same saved TimesFM forecasts.",
+      "impact": "No model forecasts, fitted states, method selection, Mirror coefficients, primary gate, or audit windows changed. The Mirror and native-control metrics are unchanged."
+    },
+    {
+      "id": "AM-02",
+      "timing": "after audit scoring",
+      "reason": "Payload verification required a canonical serialized additive-control state and report-only fit provenance.",
+      "change": "Persist the frozen additive table as its minimum equivalent 10-float baseline/domain/horizon code; preserve the already frozen Mirror factorized code and all forecast outputs.",
+      "impact": "No fitted coefficient table, forecast, metric, or decision gate changed. The state is a deterministic re-encoding of the development-fitted additive table."
+    }
+  ]
 }

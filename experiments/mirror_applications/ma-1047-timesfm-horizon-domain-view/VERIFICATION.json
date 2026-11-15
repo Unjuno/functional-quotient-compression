@@ -1,19 +1,74 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-1047",
+  "commit": "pending-result-commit",
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "/tmp/ma1047-env/bin/python -m pytest -q experiments/mirror_applications/ma-1047-timesfm-horizon-domain-view/tests",
+    "passed": 4,
+    "failed": 0
   },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "common_checkpoint_payload_bytes": 925181579,
+    "incremental_method_bytes": {
+      "timesfm": 359,
+      "shared": 378,
+      "additive": 432,
+      "independent": 464,
+      "mirror_factorized": 449
+    },
+    "complete_payload_bytes": {
+      "timesfm": 925181938,
+      "shared": 925181957,
+      "additive": 925182011,
+      "independent": 925182043,
+      "mirror_factorized": 925182028
+    },
+    "checkpoint_weights_sha256": "2f776efe6245e42b24bc4153ffdf61810140210e4bd3b01fb21f7aa779ab6ce8",
+    "method_payload_files_sha256": {
+      "timesfm": {
+        "method.json": "0fc1050adf7fc7d4e4ee1cd89557882b9212cae866d01459dcd3f7ae44b05a88",
+        "coefficients.f32le": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "shared": {
+        "method.json": "ebf2155529543157cac28dc2c449aa7627e730c40429a749db49f6cce9e069c4",
+        "coefficients.f32le": "6fbb0b65954225d3c2107f7a34c81eb71db3597b65209e7afbc4e40cd2d1b807"
+      },
+      "additive": {
+        "method.json": "5543d997e1ad40af16def3b00585a50e9726330750479205b1711d4ac313c0aa",
+        "coefficients.f32le": "3e1eb3013f287c2512e49eb0688158e62fe675fd5a8593ec2eb8da26fd3e5034"
+      },
+      "independent": {
+        "method.json": "0424a89d480c78a6c0dd6b9272f3dd302208be839507a61949c30f0ea3c5120a",
+        "coefficients.f32le": "6b34ec1993f6b02d1e5bd25f1157b79279ba97bf8b8c822570fdeb1985741429"
+      },
+      "mirror_factorized": {
+        "method.json": "5b73969bac8d317d1229bcfe24730ba6c2338632b48eee951a78179461bb32e2",
+        "coefficients.f32le": "cf7e0de54afb88bbe29632bb318042452f0d66ee1d29d107098056743c2a152e"
+      }
+    }
   },
   "metric_replay": {
-    "checked": false,
-    "max_difference": null
+    "checked": true,
+    "method": "Regenerate all method metrics from saved frozen audit forecasts, inputs and targets using the frozen development states; no model inference or refit.",
+    "metrics_sha256": "35c86035387f4bbfd0db2f3d5899b4680ea878350a93eb9fdd4758b861ce1bf2",
+    "identical_rerun_hash": "35c86035387f4bbfd0db2f3d5899b4680ea878350a93eb9fdd4758b861ce1bf2",
+    "max_difference": 0.0,
+    "rows": 336
   },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "fresh_split_integrity_checked": true,
+  "development_freeze_sha256": "49de43dd50aac68423bd2dde99e4284c0771901e3a08cd04cbbb72a398e8af36",
+  "fresh_forecast_sha256": "1d5f59f4433665690bd1feb681940cf3f245feed35aefa04abf755bec26fd6a4",
+  "input_manifest_sha256": "db9af4a56af5a13e8556086c3849933a25c5e1a60b90a1e4d4802ed36df942dd",
+  "source_sha256": {
+    "fit_heads.py": "79ddaa4faae35232c19f8999b9a4a8aee736ba73b4d16379e454f2a6effcf1ed",
+    "run_experiment.py": "ecb548caea661730ff4c3d6365ff75c91cf1132906268490e3064ab4e9799bdb"
+  },
+  "notes": [
+    "Fresh targets are final-20% chronological regions; origins were checked against fixed formula for each input series.",
+    "AM-01 adds only the preregistered seasonal-naive secondary metric in the saved-output reducer; learned forecast outputs and codes are unchanged.",
+    "AM-02 serializes the frozen additive table in its exact minimal 10-float equivalent representation; forecast metrics and code values are unchanged.",
+    "CPU-only PyTorch; H100 latency is NOT ESTABLISHED.",
+    "TimesFM train-corpus overlap with ETT benchmark series may exist; this is not an independent-pretraining audit."
+  ]
 }
