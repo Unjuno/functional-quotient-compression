@@ -1,0 +1,59 @@
+{
+  "experiment_id": "MA-1038",
+  "title": "ColBERTv2 shared centroid bank with query-role Givens views",
+  "status": "SCREENING",
+  "evidence_lane": "NATURAL_BENCHMARK_SCOPED",
+  "base_commit": "8e73da3cb0386bd4405dd8488cda2e511709eb4",
+  "hypothesis": "Two query-length-role Givens views over one fixed residual-coded ColBERTv2 document bank will improve fresh-dataset nDCG@10 by at least 0.5 absolute percentage points over the same bank without views; the minimal native query-side Givens control should not reproduce the Mirror function at equal bytes if the view is Mirror-specific.",
+  "physical_object": "One fixed ColBERTv2 encoder, one 128D shared residual centroid bank, one document-token code/residual table per collection",
+  "mirror_coordinate": "One float32 Givens angle for each of two query-length roles, applied as an orthogonal view of the decoded centroid-plus-residual document vectors",
+  "logical_multiplicity": "Two query-role late-interaction scoring functions over the same physical compressed document token index",
+  "prior_art_refs": ["PA321"],
+  "controls": [
+    "Official ColBERTv2 frozen shared encoder with full-float document token vectors and exact MaxSim",
+    "Same frozen encoder with a single shared 256-centroid plus signed-int8 per-coordinate residual token code, no View",
+    "Same compressed physical index with role-specific Mirror Givens angles applied to decoded document token vectors before exact MaxSim",
+    "Matched native query-side inverse Givens using the same two float32 angles; all query-document scores must match the document-side Mirror to <= 1e-6",
+    "Independent query encoders are not trained in this screen: this would add roughly a full 109M-parameter BERT encoder per role and is outside the registered small-coordinate budget; the exact-score native Givens control is stricter for isolating m"
+  ],
+  "development": {
+    "dataset": "BEIR SciFact train qrels and SciFact corpus only; source files inherited from MA-1037 artifacts, pinned by SHA256 in ARTIFACT_PROVENANCE.json",
+    "worlds_or_seeds": ["fixed 2026-11-15 split; all 809 train-qrel query IDs; minibatch k-means seed 1038"],
+    "role_definition": "Short/long role split at the median unpadded ColBERT query token count among SciFact train-qrel query IDs; equality belongs to short role",
+    "selection_metric": "For each role, maximize mean SciFact train-query nDCG@10 over angle grid [-0.20,-0.15,-0.10,-0.05,0,0.05,0.10,0.15,0.20] radians; ties choose smallest absolute angle then numerically smaller angle",
+    "codebook": "256-centroid MiniBatchKMeans, batch_size=8192, max_iter=50, n_init=1, seed=1038 fit on at most 100000 L2-normalized ColBERT token vectors sampled only from SciFact corpus; residual scale per coordinate is the SciFact-training-corpus 99.9th percentile of absolute assignment residual divided by 127"
+  },
+  "fresh": {
+    "dataset": "BEIR NFCorpus official corpus, queries and qrels downloaded from the official BEIR dataset endpoint only after this protocol is committed; all available qrel query IDs are audit, disjoint dataset from development",
+    "worlds_or_seeds": ["all official NFCorpus queries with qrels; codebook and two role angles frozen from SciFact development"],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "Pinned ColBERTv2 model checkpoint, tokenizer, configuration and all scoring state",
+      "Full-float control document token vectors, valid-token offsets/masks and document ID mapping",
+      "Compressed shared centroid matrix, per-coordinate residual scales, every valid document-token centroid index and every 128-coordinate int8 residual, offsets/masks, document ID mapping and serialization metadata",
+      "Both per-role angle coordinates, role threshold, and any distinct reconstruction/scoring state"
+    ],
+    "view_coordinates": "2 x serialized float32 angle; all role/address and metadata bytes counted",
+    "deterministic_free_state": "Only ColBERTv2 model/tokenizer files already paid in every compared arm"
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true,
+    "report_encoder_docs_queries_and_search_wall_clock": true,
+    "updates": "No model fine-tuning; angle selection is exhaustive evaluation over the frozen 9-point grid. Report number of role-angle/query-document evaluations.",
+    "scoring": "Exact MaxSim over the complete collection for all evaluated query IDs; report multiply-add proxy and measured CPU wall time. Report both direct document-side view cost and algebraically pushed query-side control cost."
+  },
+  "success_gate": "On fresh NFCorpus, Mirror must improve mean nDCG@10 by >=0.005 absolute over no-view compressed baseline, show nonidentical useful role rankings, and beat the matched native query-Givens control by >=0.005 absolute nDCG@10 at comparable actual bytes and compute. Actual compressed payload must be reported; no compression win is implied without byte comparison.",
+  "failure_gate": "FAIL for Mirror-specific utility if the exact matched native query-side Givens control reproduces all scores within 1e-6, or if fresh nDCG gain is <0.005 absolute; FAIL for compression if residual-coded index is not smaller than full-float token vectors. If required official model execution is not feasible on available hardware, status NOT ESTABLISHED with evidence.",
+  "boundaries": [
+    "A bounded single-model cross-dataset CPU screen, not a claim about all ColBERTv2 datasets or PLAID production throughput.",
+    "The native Givens control is the simplest functional-coordinate control and intentionally tests whether the claimed View is just a query transform.",
+    "Fresh NFCorpus qrels/query text must not be read or used for development before this protocol and code are frozen.",
+    "Report fact, interpretation and hypothesis separately; no capacity claim from fixed-model view selection."
+  ]
+}
