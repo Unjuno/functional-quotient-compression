@@ -1,0 +1,9 @@
+{
+  "attempt": 1,
+  "outcome": "RUNNER_ERROR_BEFORE_AUDIT_FRAMES",
+  "observed": "SAM2 yielded the prompted frame 0, then raised a tensor-rank mismatch when the first stored memory feature was restored for frame 1.",
+  "audit_frames_1_to_4_accessed": false,
+  "quality_metrics_computed": false,
+  "correction": "Restore the per-object memory tensor with its expected [1,C,H,W] shape, not [1,1,C,H,W]. Timing fields were also separated into model propagation and memory encode/decode wall.",
+  "scientific_parameters_changed": false
+}

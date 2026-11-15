@@ -1,0 +1,78 @@
+{
+  "experiment_id": "MA-1027",
+  "title": "SAM2 streaming object-memory Mirror code",
+  "status": "FAIL",
+  "base_commit": "79944e175",
+  "prior_art": {
+    "id": "PA315",
+    "official_repository": "https://github.com/facebookresearch/sam2",
+    "official_commit": "2b90b9f5ceec907a1c18123530e92e794ad901a4",
+    "checkpoint": "sam2.1_hiera_tiny.pt",
+    "checkpoint_url": "https://dl.fbaipublicfiles.com/segment_anything_2/092824/sam2.1_hiera_tiny.pt",
+    "checkpoint_sha256": "7402e0d864fa82708a20fbd15bc84245c2f26dff0eb43a4b5b93452deb34be69"
+  },
+  "hypothesis": "For four prompted objects in one short video, two per-object Givens angles can reconstruct object-specific SAM2 memory features from one per-frame shared memory tensor with >=25% lower actual session-state bytes, at <=1pp J&F loss versus native per-object memory, and outperform a matched rank-1 additive memory code.",
+  "scope": "Official SAM2.1 Hiera-tiny video predictor on one deterministic synthetic 5-frame CPU clip. This is not natural-video or benchmark evidence.",
+  "runtime": {
+    "device": "CPU",
+    "image_size": 256,
+    "sam2_cuda_extension": "disabled per upstream CPU-use instructions",
+    "torch": "2.14.1+cpu",
+    "torchvision": "0.29.2+cpu"
+  },
+  "scene": {
+    "generator_seed": 102701,
+    "frames": 5,
+    "objects": 4,
+    "object_ids": [
+      11,
+      37,
+      42,
+      99
+    ],
+    "shapes": [
+      "circle",
+      "square",
+      "triangle",
+      "ellipse"
+    ],
+    "initial_prompt": "exact per-object mask on frame 0",
+    "audit_frames": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "occlusion": "objects cross/partially overlap during deterministic motion"
+  },
+  "memory_target": "per-object output_dict_per_obj[*][frame].maskmem_features; output masks, object pointers, scores, input mask prompts and metadata remain private and are charged unchanged.",
+  "mirror_coordinate": "per object and memory frame m=(theta_1,theta_2), analytically fit two channel-pair Givens rotations (0,1) and (2,3) of a shared cross-object mean memory tensor; all other memory channels reconstruct from the common base.",
+  "controls": [
+    "native independent per-object SAM2 memory",
+    "hard-shared per-frame mean memory",
+    "Mirror two-angle shared memory reconstruction",
+    "rank-1 additive residual memory code"
+  ],
+  "training": "none; codes are fitted causally from current-frame object memories after each frame output and before future frames are processed. No future frame or ground-truth mask is used to fit codes.",
+  "metrics": {
+    "quality": "per-object J, boundary F, mean J&F, identity assignment switches, off-diagonal cross-object mask IoU",
+    "storage": "actual self-describing serialized session payload bytes, including SAM2 checkpoint/config, normalized video frame cache, all input prompts, prediction masks, object pointers/scores, memory reconstruction bases/codes and metadata",
+    "compute": "full forward wall/FPS, encode/decode wall, Givens FLOP proxy vs additive MAC proxy"
+  },
+  "success_gate": "Mirror full session payload >=25% below independent; mean J&F no more than 1pp below independent; no additional ID switches; and at least 1pp higher mean J&F than rank-1 additive at equal or fewer bytes.",
+  "failure_gate": "Rank-1 additive matches/beats Mirror quality, or Mirror misses independent quality/ID-switch tolerance.",
+  "fresh": {
+    "scene_seed_locked_before_generation": true,
+    "audit_opened_at_freeze": true,
+    "frozen_before_scene_generation": true,
+    "result_replayed_after_freeze": true
+  },
+  "boundaries": [
+    "one synthetic scene",
+    "four objects",
+    "five frames",
+    "SAM2.1 Hiera-tiny",
+    "CPU 256px reduced inference resolution",
+    "no DAVIS/YoutubeVOS/natural-video claim"
+  ]
+}

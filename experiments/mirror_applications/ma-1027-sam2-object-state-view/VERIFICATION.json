@@ -1,0 +1,38 @@
+{
+  "experiment_id": "MA-1027",
+  "branch": "research/ma-1027-sam2-object-state-view-20261115",
+  "base_commit": "79944e175",
+  "official_sam2_commit": "2b90b9f5ceec907a1c18123530e92e794ad901a4",
+  "checkpoint_sha256": "7402e0d864fa82708a20fbd15bc84245c2f26dff0eb43a4b5b93452deb34be69",
+  "config_sha256": "f932eac1c6241e910031b2f000a81cd9f8a8d4896e2277ab5ffb721f378b188d",
+  "checkpoint_bytes": 156008466,
+  "scene_seed": 102701,
+  "scene_manifest_sha256": "2664c4963dc95bc3fd8023431a4c01c4596cf7c9ea8dbc9c99b172fd5677dcef",
+  "full_forward_replay": {
+    "passed": true,
+    "methods": [
+      "independent",
+      "hard_shared",
+      "mirror_givens",
+      "additive_rank1"
+    ],
+    "predictions_exact": true,
+    "payload_hashes_exact": true,
+    "metric_tolerance": 1e-12,
+    "common_video_cache_exact": true,
+    "payload_manifest_exact": true,
+    "full_session_arithmetic_exact": true
+  },
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-1027-sam2-object-state-view/tests -v",
+    "passed": 6,
+    "failed": 0
+  },
+  "protocol_gate": "FAIL",
+  "reason": "Mirror mean J&F 0.03043 is 84.57 pp below independent, 33.84 pp below rank-1 additive; complete-session byte savings 0.303%, below 25% gate.",
+  "notes": [
+    "One generated synthetic clip only; not a natural-video benchmark.",
+    "The initial runner tensor-rank error occurred before scored runs; corrected code and final source hash are frozen in development.json.",
+    "Checkpoint is cached outside Git; its exact SHA-256 is recorded."
+  ]
+}

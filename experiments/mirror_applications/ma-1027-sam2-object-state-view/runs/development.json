@@ -1,0 +1,3259 @@
+{
+  "schema": "MA1027-v1",
+  "prior_art": "PA315",
+  "official_repo": "https://github.com/facebookresearch/sam2",
+  "official_commit": "2b90b9f5ceec907a1c18123530e92e794ad901a4",
+  "model": "SAM2.1 Hiera-tiny",
+  "checkpoint_path": "/tmp/ma1027-sam2/sam2.1_hiera_tiny.pt",
+  "checkpoint_bytes": 156008466,
+  "checkpoint_sha256": "7402e0d864fa82708a20fbd15bc84245c2f26dff0eb43a4b5b93452deb34be69",
+  "config_path": "/tmp/ma1027-sam2/sam2/configs/sam2.1/sam2.1_hiera_t.yaml",
+  "config_bytes": 3855,
+  "config_sha256": "f932eac1c6241e910031b2f000a81cd9f8a8d4896e2277ab5ffb721f378b188d",
+  "runtime": {
+    "device": "cpu",
+    "torch": "2.14.1+cpu",
+    "torchvision": "0.29.2+cpu",
+    "image_size": 256,
+    "threads": 4,
+    "cuda_available": false,
+    "cuda_extension_built": false
+  },
+  "scene": {
+    "schema": "MA1027-synthetic-crossing-v1",
+    "seed": 102701,
+    "frames": 5,
+    "width": 256,
+    "height": 256,
+    "object_ids": [
+      11,
+      37,
+      42,
+      99
+    ],
+    "shapes": [
+      "circle",
+      "square",
+      "triangle",
+      "ellipse"
+    ],
+    "colors_rgb": [
+      [
+        230,
+        38,
+        34
+      ],
+      [
+        33,
+        205,
+        64
+      ],
+      [
+        37,
+        83,
+        232
+      ],
+      [
+        235,
+        205,
+        30
+      ]
+    ],
+    "draw_order": [
+      11,
+      37,
+      42,
+      99
+    ],
+    "rows": [
+      {
+        "frame": 0,
+        "jpeg": "00000.jpg",
+        "jpeg_sha256": "84c524619d50decdb516f6dbe7f21cba086a93f6d9ac44478df6550f71fc509e",
+        "gt_sha256": "0f3be250e806acbe9c98b5ed7d95b01f924c62166873a24f4a30423b33ca9a39",
+        "visible_pixels": [
+          1517,
+          2025,
+          1300,
+          1753
+        ]
+      },
+      {
+        "frame": 1,
+        "jpeg": "00001.jpg",
+        "jpeg_sha256": "d13c7eced6e4615f63cce98d3a7cdbfe5288c8d0d02c73f8c8ab78601d0405ed",
+        "gt_sha256": "51055f2892ed360b3a5294acd42abd34e6e4395f62a9f234d953fdfdcec5e41e",
+        "visible_pixels": [
+          1517,
+          2025,
+          1300,
+          1753
+        ]
+      },
+      {
+        "frame": 2,
+        "jpeg": "00002.jpg",
+        "jpeg_sha256": "fa8b7c5c2257a59f091b84a54564bacbd755a6b529656a4d2111a4fe3be972f4",
+        "gt_sha256": "a044d7fd68a8341aa9c36e2216ea7b5893cfb64693846ff134cd019f12b35a49",
+        "visible_pixels": [
+          1307,
+          1705,
+          1047,
+          1753
+        ]
+      },
+      {
+        "frame": 3,
+        "jpeg": "00003.jpg",
+        "jpeg_sha256": "946a722f5fe4adb1884d17bd9d1590c7d8ed3e6d5af7351d18a3fa225f18666a",
+        "gt_sha256": "3e46fc5aad4b6134007bfcb0090349e50dcb44b7e8b21b251002f42c2c5f013a",
+        "visible_pixels": [
+          536,
+          1199,
+          1105,
+          1753
+        ]
+      },
+      {
+        "frame": 4,
+        "jpeg": "00004.jpg",
+        "jpeg_sha256": "32dc1ba77aabc9d43daaf27b698a123590d8678270a8c10900f1f151de77a209",
+        "gt_sha256": "25bf3619c99de1cd979c216799b4bc8cc96b56d254babda669ff372b473fd0a3",
+        "visible_pixels": [
+          1517,
+          2025,
+          1300,
+          1753
+        ]
+      }
+    ]
+  },
+  "object_memory_private_state_included": [
+    "initial mask prompts",
+    "per-frame pred_masks",
+    "per-frame obj_ptr",
+    "per-frame object_score_logits"
+  ],
+  "common_video_cache_bytes": 3932238,
+  "common_video_cache_sha256": "b9e973c07703c621dcb41a226ecd7fd08bf8743dc99549289508a571a599155d",
+  "results": {
+    "independent": {
+      "method": "independent",
+      "mean_j": 0.8447179317294621,
+      "mean_boundary_f": 0.9074367380722201,
+      "mean_jf": 0.876077334900841,
+      "id_switches": 4,
+      "cross_object_iou": 0.03411440383238303,
+      "assignment_by_frame": [
+        [
+          0,
+          1,
+          2,
+          3
+        ],
+        [
+          0,
+          1,
+          2,
+          3
+        ],
+        [
+          0,
+          1,
+          2,
+          3
+        ],
+        [
+          0,
+          2,
+          1,
+          3
+        ],
+        [
+          0,
+          1,
+          2,
+          3
+        ]
+      ],
+      "session_payload_bytes": 2059603,
+      "object_memory_payload_bytes": 655360,
+      "private_object_state_bytes": 1396816,
+      "session_header_bytes": 7427,
+      "memory_encode_wall_s": 0.001745730001857737,
+      "memory_decode_wall_s": 0.0003568659922166262,
+      "encode_decode_wall_s": 0.0021025959940743633,
+      "propagation_wall_s": 1.2747967640025308,
+      "full_run_wall_s": 1.2787151829979848,
+      "fps": 3.910174889983988,
+      "payload_sha256": "2fe46bd1e27cc00acffaaa6fa8473520677dc0cbbce436900969ad67216d234f",
+      "prediction_sha256": "ebfb4aaa27da2dda4bae1c4fefb7a37a73405bcd39bf9e6eacf194b6e32e0914",
+      "manifest": [
+        {
+          "name": "private/prompt_mask/object_11",
+          "shape": [
+            1,
+            1,
+            256,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 262144
+        },
+        {
+          "name": "private/object_11/frame_0/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_11/frame_0/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_11/frame_0/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_11/frame_1/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_11/frame_1/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_11/frame_1/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_11/frame_2/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_11/frame_2/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_11/frame_2/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_11/frame_3/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_11/frame_3/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_11/frame_3/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_11/frame_4/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_11/frame_4/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_11/frame_4/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/prompt_mask/object_37",
+          "shape": [
+            1,
+            1,
+            256,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 262144
+        },
+        {
+          "name": "private/object_37/frame_0/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_37/frame_0/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_37/frame_0/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_37/frame_1/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_37/frame_1/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_37/frame_1/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_37/frame_2/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_37/frame_2/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_37/frame_2/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_37/frame_3/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_37/frame_3/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_37/frame_3/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_37/frame_4/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_37/frame_4/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_37/frame_4/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/prompt_mask/object_42",
+          "shape": [
+            1,
+            1,
+            256,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 262144
+        },
+        {
+          "name": "private/object_42/frame_0/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_42/frame_0/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_42/frame_0/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_42/frame_1/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_42/frame_1/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_42/frame_1/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_42/frame_2/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_42/frame_2/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_42/frame_2/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_42/frame_3/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_42/frame_3/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_42/frame_3/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_42/frame_4/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_42/frame_4/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_42/frame_4/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/prompt_mask/object_99",
+          "shape": [
+            1,
+            1,
+            256,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 262144
+        },
+        {
+          "name": "private/object_99/frame_0/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_99/frame_0/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_99/frame_0/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_99/frame_1/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_99/frame_1/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_99/frame_1/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_99/frame_2/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_99/frame_2/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_99/frame_2/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_99/frame_3/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_99/frame_3/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_99/frame_3/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_99/frame_4/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_99/frame_4/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_99/frame_4/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "memory/frame_0/raw",
+          "shape": [
+            4,
+            64,
+            16,
+            16
+          ],
+          "dtype": "<u2",
+          "bytes": 131072
+        },
+        {
+          "name": "memory/frame_1/raw",
+          "shape": [
+            4,
+            64,
+            16,
+            16
+          ],
+          "dtype": "<u2",
+          "bytes": 131072
+        },
+        {
+          "name": "memory/frame_2/raw",
+          "shape": [
+            4,
+            64,
+            16,
+            16
+          ],
+          "dtype": "<u2",
+          "bytes": 131072
+        },
+        {
+          "name": "memory/frame_3/raw",
+          "shape": [
+            4,
+            64,
+            16,
+            16
+          ],
+          "dtype": "<u2",
+          "bytes": 131072
+        },
+        {
+          "name": "memory/frame_4/raw",
+          "shape": [
+            4,
+            64,
+            16,
+            16
+          ],
+          "dtype": "<u2",
+          "bytes": 131072
+        }
+      ],
+      "full_session_payload_bytes": 162004162
+    },
+    "hard_shared": {
+      "method": "hard_shared",
+      "mean_j": 0.0348687963491158,
+      "mean_boundary_f": 0.025564268547284386,
+      "mean_jf": 0.030216532448200092,
+      "id_switches": 0,
+      "cross_object_iou": 0.0348687963491158,
+      "assignment_by_frame": [
+        [
+          0,
+          1,
+          2,
+          3
+        ],
+        [
+          0,
+          1,
+          2,
+          3
+        ],
+        [
+          0,
+          1,
+          2,
+          3
+        ],
+        [
+          0,
+          1,
+          2,
+          3
+        ],
+        [
+          0,
+          1,
+          2,
+          3
+        ]
+      ],
+      "session_payload_bytes": 1568073,
+      "object_memory_payload_bytes": 163840,
+      "private_object_state_bytes": 1396816,
+      "session_header_bytes": 7417,
+      "memory_encode_wall_s": 0.0015003070038801525,
+      "memory_decode_wall_s": 0.001089140001568012,
+      "encode_decode_wall_s": 0.0025894470054481644,
+      "propagation_wall_s": 1.3081212519937253,
+      "full_run_wall_s": 1.312045581998973,
+      "fps": 3.8108432120035247,
+      "payload_sha256": "8e39fbc8951e73c64fa5aa35ad654d4f69bf82e553de8cc48134a3ea7fe8bdca",
+      "prediction_sha256": "e8bf0fc68f1a977fd299f6839837ccc9a53ba7e755de326aafdbd6c703d14c1d",
+      "manifest": [
+        {
+          "name": "private/prompt_mask/object_11",
+          "shape": [
+            1,
+            1,
+            256,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 262144
+        },
+        {
+          "name": "private/object_11/frame_0/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_11/frame_0/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_11/frame_0/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_11/frame_1/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_11/frame_1/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_11/frame_1/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_11/frame_2/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_11/frame_2/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_11/frame_2/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_11/frame_3/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_11/frame_3/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_11/frame_3/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_11/frame_4/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_11/frame_4/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_11/frame_4/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/prompt_mask/object_37",
+          "shape": [
+            1,
+            1,
+            256,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 262144
+        },
+        {
+          "name": "private/object_37/frame_0/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_37/frame_0/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_37/frame_0/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_37/frame_1/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_37/frame_1/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_37/frame_1/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_37/frame_2/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_37/frame_2/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_37/frame_2/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_37/frame_3/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_37/frame_3/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_37/frame_3/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_37/frame_4/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_37/frame_4/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_37/frame_4/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/prompt_mask/object_42",
+          "shape": [
+            1,
+            1,
+            256,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 262144
+        },
+        {
+          "name": "private/object_42/frame_0/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_42/frame_0/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_42/frame_0/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_42/frame_1/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_42/frame_1/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_42/frame_1/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_42/frame_2/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_42/frame_2/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_42/frame_2/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_42/frame_3/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_42/frame_3/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_42/frame_3/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_42/frame_4/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_42/frame_4/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_42/frame_4/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/prompt_mask/object_99",
+          "shape": [
+            1,
+            1,
+            256,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 262144
+        },
+        {
+          "name": "private/object_99/frame_0/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_99/frame_0/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_99/frame_0/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_99/frame_1/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_99/frame_1/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_99/frame_1/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_99/frame_2/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_99/frame_2/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_99/frame_2/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_99/frame_3/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_99/frame_3/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_99/frame_3/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_99/frame_4/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_99/frame_4/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_99/frame_4/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "memory/frame_0/base",
+          "shape": [
+            64,
+            16,
+            16
+          ],
+          "dtype": "<u2",
+          "bytes": 32768
+        },
+        {
+          "name": "memory/frame_1/base",
+          "shape": [
+            64,
+            16,
+            16
+          ],
+          "dtype": "<u2",
+          "bytes": 32768
+        },
+        {
+          "name": "memory/frame_2/base",
+          "shape": [
+            64,
+            16,
+            16
+          ],
+          "dtype": "<u2",
+          "bytes": 32768
+        },
+        {
+          "name": "memory/frame_3/base",
+          "shape": [
+            64,
+            16,
+            16
+          ],
+          "dtype": "<u2",
+          "bytes": 32768
+        },
+        {
+          "name": "memory/frame_4/base",
+          "shape": [
+            64,
+            16,
+            16
+          ],
+          "dtype": "<u2",
+          "bytes": 32768
+        }
+      ],
+      "full_session_payload_bytes": 161512632
+    },
+    "mirror_givens": {
+      "method": "mirror_givens",
+      "mean_j": 0.03540359383913291,
+      "mean_boundary_f": 0.025449876280256228,
+      "mean_jf": 0.030426735059694572,
+      "id_switches": 2,
+      "cross_object_iou": 0.03472618368511124,
+      "assignment_by_frame": [
+        [
+          0,
+          1,
+          2,
+          3
+        ],
+        [
+          0,
+          1,
+          2,
+          3
+        ],
+        [
+          0,
+          1,
+          2,
+          3
+        ],
+        [
+          0,
+          1,
+          2,
+          3
+        ],
+        [
+          0,
+          1,
+          3,
+          2
+        ]
+      ],
+      "session_payload_bytes": 1568597,
+      "object_memory_payload_bytes": 164000,
+      "private_object_state_bytes": 1396816,
+      "session_header_bytes": 7781,
+      "memory_encode_wall_s": 0.008855972995661432,
+      "memory_decode_wall_s": 0.005411999991338234,
+      "encode_decode_wall_s": 0.014267972986999666,
+      "propagation_wall_s": 1.2320569069961493,
+      "full_run_wall_s": 1.2478779899975052,
+      "fps": 4.0068019791021365,
+      "payload_sha256": "264f7ce9fc8c712d4d90dc2bbfa84e2b385074165040c985a3b422b9303b1f6f",
+      "prediction_sha256": "1e6bb571e213dfddc63c0c867a0e8ee435de1a3f7210afcddf3ca0f5c8e32c97",
+      "manifest": [
+        {
+          "name": "private/prompt_mask/object_11",
+          "shape": [
+            1,
+            1,
+            256,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 262144
+        },
+        {
+          "name": "private/object_11/frame_0/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_11/frame_0/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_11/frame_0/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_11/frame_1/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_11/frame_1/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_11/frame_1/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_11/frame_2/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_11/frame_2/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_11/frame_2/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_11/frame_3/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_11/frame_3/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_11/frame_3/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_11/frame_4/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_11/frame_4/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_11/frame_4/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/prompt_mask/object_37",
+          "shape": [
+            1,
+            1,
+            256,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 262144
+        },
+        {
+          "name": "private/object_37/frame_0/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_37/frame_0/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_37/frame_0/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_37/frame_1/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_37/frame_1/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_37/frame_1/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_37/frame_2/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_37/frame_2/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_37/frame_2/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_37/frame_3/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_37/frame_3/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_37/frame_3/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_37/frame_4/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_37/frame_4/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_37/frame_4/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/prompt_mask/object_42",
+          "shape": [
+            1,
+            1,
+            256,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 262144
+        },
+        {
+          "name": "private/object_42/frame_0/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_42/frame_0/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_42/frame_0/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_42/frame_1/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_42/frame_1/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_42/frame_1/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_42/frame_2/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_42/frame_2/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_42/frame_2/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_42/frame_3/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_42/frame_3/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_42/frame_3/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_42/frame_4/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_42/frame_4/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_42/frame_4/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/prompt_mask/object_99",
+          "shape": [
+            1,
+            1,
+            256,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 262144
+        },
+        {
+          "name": "private/object_99/frame_0/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_99/frame_0/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_99/frame_0/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_99/frame_1/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_99/frame_1/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_99/frame_1/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_99/frame_2/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_99/frame_2/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_99/frame_2/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_99/frame_3/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_99/frame_3/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_99/frame_3/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_99/frame_4/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_99/frame_4/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_99/frame_4/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "memory/frame_0/base",
+          "shape": [
+            64,
+            16,
+            16
+          ],
+          "dtype": "<u2",
+          "bytes": 32768
+        },
+        {
+          "name": "memory/frame_0/angles",
+          "shape": [
+            4,
+            2
+          ],
+          "dtype": "<f4",
+          "bytes": 32
+        },
+        {
+          "name": "memory/frame_1/base",
+          "shape": [
+            64,
+            16,
+            16
+          ],
+          "dtype": "<u2",
+          "bytes": 32768
+        },
+        {
+          "name": "memory/frame_1/angles",
+          "shape": [
+            4,
+            2
+          ],
+          "dtype": "<f4",
+          "bytes": 32
+        },
+        {
+          "name": "memory/frame_2/base",
+          "shape": [
+            64,
+            16,
+            16
+          ],
+          "dtype": "<u2",
+          "bytes": 32768
+        },
+        {
+          "name": "memory/frame_2/angles",
+          "shape": [
+            4,
+            2
+          ],
+          "dtype": "<f4",
+          "bytes": 32
+        },
+        {
+          "name": "memory/frame_3/base",
+          "shape": [
+            64,
+            16,
+            16
+          ],
+          "dtype": "<u2",
+          "bytes": 32768
+        },
+        {
+          "name": "memory/frame_3/angles",
+          "shape": [
+            4,
+            2
+          ],
+          "dtype": "<f4",
+          "bytes": 32
+        },
+        {
+          "name": "memory/frame_4/base",
+          "shape": [
+            64,
+            16,
+            16
+          ],
+          "dtype": "<u2",
+          "bytes": 32768
+        },
+        {
+          "name": "memory/frame_4/angles",
+          "shape": [
+            4,
+            2
+          ],
+          "dtype": "<f4",
+          "bytes": 32
+        }
+      ],
+      "full_session_payload_bytes": 161513156
+    },
+    "additive_rank1": {
+      "method": "additive_rank1",
+      "mean_j": 0.36042437238594593,
+      "mean_boundary_f": 0.3771641231419177,
+      "mean_jf": 0.3687942477639318,
+      "id_switches": 2,
+      "cross_object_iou": 0.07827355353139057,
+      "assignment_by_frame": [
+        [
+          0,
+          1,
+          2,
+          3
+        ],
+        [
+          0,
+          1,
+          2,
+          3
+        ],
+        [
+          0,
+          1,
+          2,
+          3
+        ],
+        [
+          0,
+          1,
+          2,
+          3
+        ],
+        [
+          0,
+          1,
+          3,
+          2
+        ]
+      ],
+      "session_payload_bytes": 1732739,
+      "object_memory_payload_bytes": 327760,
+      "private_object_state_bytes": 1396816,
+      "session_header_bytes": 8163,
+      "memory_encode_wall_s": 0.019409520995395724,
+      "memory_decode_wall_s": 0.001166417005151743,
+      "encode_decode_wall_s": 0.020575938000547467,
+      "propagation_wall_s": 1.0860688059983659,
+      "full_run_wall_s": 1.1081883639999432,
+      "fps": 4.511868345154594,
+      "payload_sha256": "67d67f60b38bfc28bc951b4addce029f3be2926157f62de137c5e9b77fa74cfd",
+      "prediction_sha256": "80d9fbdb3e2e3b419d1c024675b8a8769b619e1cbeb9e0af7dc01afcbbf35e6b",
+      "manifest": [
+        {
+          "name": "private/prompt_mask/object_11",
+          "shape": [
+            1,
+            1,
+            256,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 262144
+        },
+        {
+          "name": "private/object_11/frame_0/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_11/frame_0/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_11/frame_0/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_11/frame_1/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_11/frame_1/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_11/frame_1/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_11/frame_2/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_11/frame_2/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_11/frame_2/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_11/frame_3/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_11/frame_3/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_11/frame_3/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_11/frame_4/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_11/frame_4/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_11/frame_4/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/prompt_mask/object_37",
+          "shape": [
+            1,
+            1,
+            256,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 262144
+        },
+        {
+          "name": "private/object_37/frame_0/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_37/frame_0/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_37/frame_0/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_37/frame_1/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_37/frame_1/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_37/frame_1/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_37/frame_2/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_37/frame_2/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_37/frame_2/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_37/frame_3/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_37/frame_3/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_37/frame_3/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_37/frame_4/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_37/frame_4/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_37/frame_4/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/prompt_mask/object_42",
+          "shape": [
+            1,
+            1,
+            256,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 262144
+        },
+        {
+          "name": "private/object_42/frame_0/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_42/frame_0/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_42/frame_0/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_42/frame_1/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_42/frame_1/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_42/frame_1/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_42/frame_2/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_42/frame_2/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_42/frame_2/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_42/frame_3/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_42/frame_3/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_42/frame_3/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_42/frame_4/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_42/frame_4/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_42/frame_4/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/prompt_mask/object_99",
+          "shape": [
+            1,
+            1,
+            256,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 262144
+        },
+        {
+          "name": "private/object_99/frame_0/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_99/frame_0/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_99/frame_0/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_99/frame_1/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_99/frame_1/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_99/frame_1/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_99/frame_2/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_99/frame_2/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_99/frame_2/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_99/frame_3/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_99/frame_3/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_99/frame_3/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "private/object_99/frame_4/pred_masks",
+          "shape": [
+            1,
+            1,
+            64,
+            64
+          ],
+          "dtype": "<f4",
+          "bytes": 16384
+        },
+        {
+          "name": "private/object_99/frame_4/obj_ptr",
+          "shape": [
+            1,
+            256
+          ],
+          "dtype": "<f4",
+          "bytes": 1024
+        },
+        {
+          "name": "private/object_99/frame_4/object_score_logits",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "<f4",
+          "bytes": 4
+        },
+        {
+          "name": "memory/frame_0/base",
+          "shape": [
+            64,
+            16,
+            16
+          ],
+          "dtype": "<u2",
+          "bytes": 32768
+        },
+        {
+          "name": "memory/frame_0/basis",
+          "shape": [
+            64,
+            16,
+            16
+          ],
+          "dtype": "<u2",
+          "bytes": 32768
+        },
+        {
+          "name": "memory/frame_0/coeff",
+          "shape": [
+            4
+          ],
+          "dtype": "<f4",
+          "bytes": 16
+        },
+        {
+          "name": "memory/frame_1/base",
+          "shape": [
+            64,
+            16,
+            16
+          ],
+          "dtype": "<u2",
+          "bytes": 32768
+        },
+        {
+          "name": "memory/frame_1/basis",
+          "shape": [
+            64,
+            16,
+            16
+          ],
+          "dtype": "<u2",
+          "bytes": 32768
+        },
+        {
+          "name": "memory/frame_1/coeff",
+          "shape": [
+            4
+          ],
+          "dtype": "<f4",
+          "bytes": 16
+        },
+        {
+          "name": "memory/frame_2/base",
+          "shape": [
+            64,
+            16,
+            16
+          ],
+          "dtype": "<u2",
+          "bytes": 32768
+        },
+        {
+          "name": "memory/frame_2/basis",
+          "shape": [
+            64,
+            16,
+            16
+          ],
+          "dtype": "<u2",
+          "bytes": 32768
+        },
+        {
+          "name": "memory/frame_2/coeff",
+          "shape": [
+            4
+          ],
+          "dtype": "<f4",
+          "bytes": 16
+        },
+        {
+          "name": "memory/frame_3/base",
+          "shape": [
+            64,
+            16,
+            16
+          ],
+          "dtype": "<u2",
+          "bytes": 32768
+        },
+        {
+          "name": "memory/frame_3/basis",
+          "shape": [
+            64,
+            16,
+            16
+          ],
+          "dtype": "<u2",
+          "bytes": 32768
+        },
+        {
+          "name": "memory/frame_3/coeff",
+          "shape": [
+            4
+          ],
+          "dtype": "<f4",
+          "bytes": 16
+        },
+        {
+          "name": "memory/frame_4/base",
+          "shape": [
+            64,
+            16,
+            16
+          ],
+          "dtype": "<u2",
+          "bytes": 32768
+        },
+        {
+          "name": "memory/frame_4/basis",
+          "shape": [
+            64,
+            16,
+            16
+          ],
+          "dtype": "<u2",
+          "bytes": 32768
+        },
+        {
+          "name": "memory/frame_4/coeff",
+          "shape": [
+            4
+          ],
+          "dtype": "<f4",
+          "bytes": 16
+        }
+      ],
+      "full_session_payload_bytes": 161677298
+    }
+  },
+  "code_sha256": "17d474bd80f109f1601fb7da517c8513c639b075cf7cbd2f134851afa62ab081",
+  "scene_generator_sha256": "0dd2dac1585c23eac4b21fc9dbb684811448eb00628ab3d0958da24df9b994e3",
+  "boundaries": [
+    "one synthetic crossing scene",
+    "four objects",
+    "five frames",
+    "four propagated frames",
+    "SAM2.1 Hiera-tiny",
+    "CPU 256px",
+    "not natural-video benchmark evidence"
+  ],
+  "memory_reconstruction": {
+    "hard_shared": {
+      "mean_relative_rmse": 0.5289977252483368,
+      "per_frame_relative_rmse": [
+        0.44451215863227844,
+        0.548198401927948,
+        0.7626097202301025,
+        0.35547733306884766,
+        0.5341910123825073
+      ]
+    },
+    "mirror_givens": {
+      "mean_relative_rmse": 0.5289471387863159,
+      "per_frame_relative_rmse": [
+        0.4444112777709961,
+        0.5481343269348145,
+        0.7626097202301025,
+        0.35537880659103394,
+        0.5342015624046326
+      ]
+    },
+    "additive_rank1": {
+      "mean_relative_rmse": 0.44565579295158386,
+      "per_frame_relative_rmse": [
+        0.347734659910202,
+        0.4258100986480713,
+        0.5747654438018799,
+        0.31672370433807373,
+        0.5632450580596924
+      ]
+    }
+  },
+  "memory_reconstruction_artifact_sha256": "e06934d46ef9097ef0637042eb361dbe0de17fe76176a22aea34d4702f19d8e7",
+  "attempt_01_diagnostic": {
+    "attempt": 1,
+    "outcome": "RUNNER_ERROR_BEFORE_AUDIT_FRAMES",
+    "observed": "SAM2 yielded the prompted frame 0, then raised a tensor-rank mismatch when the first stored memory feature was restored for frame 1.",
+    "audit_frames_1_to_4_accessed": false,
+    "quality_metrics_computed": false,
+    "correction": "Restore the per-object memory tensor with its expected [1,C,H,W] shape, not [1,1,C,H,W]. Timing fields were also separated into model propagation and memory encode/decode wall.",
+    "scientific_parameters_changed": false
+  },
+  "derived_comparisons": {
+    "mirror_object_state_savings_vs_independent": 0.2383983709481876,
+    "mirror_full_session_savings_vs_independent": 0.003030823368599611,
+    "mirror_memory_feature_savings_vs_independent": 0.749755859375,
+    "mirror_jf_delta_vs_independent_pp": -84.56505998411464,
+    "mirror_jf_delta_vs_hard_shared_pp": 0.021020261149447966,
+    "mirror_jf_delta_vs_additive_pp": -33.836751270423726,
+    "mirror_session_savings_vs_independent": 0.2383983709481876
+  }
+}

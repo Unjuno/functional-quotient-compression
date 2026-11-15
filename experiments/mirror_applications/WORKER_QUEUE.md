@@ -24,10 +24,11 @@ MA-990 official MERL RANF code was located, but the required SONICOM HRTF subjec
 
 # Worker queue
 
-## Current handoff — 2026-11-15, MA-1026
+## Current handoff — 2026-11-15, MA-1027
 
-MA-1026 is a bounded CIFAR-10/CLIP MaPLe FAIL: coupled modality Givens views save 75.0% prompt-state bytes vs independent per-domain prompts and match its novel accuracy, but Mirror H-mean 81.27% is 1.28 pp below matched rank-1 additive and hard-shared MaPLe at 82.55%. Held-out base domain×class accuracy ties both at 79.17%. Full bundle is 612,024,716 B. Serialized replay and five tests pass. The audit has 160 class×domain cells disjoint from MA-1024/1025; CPU, ViT-B/32, depth 2, 20 updates/method; not official MaPLe reproduction. Continue to P0 MA-1027. See `ma-1026-maple-coupled-view/RESULTS.md`.
+MA-1027 is a scoped official SAM2.1 Hiera-tiny synthetic CPU FAIL: Givens Mirror saves 23.84% object-memory bytes but 0.303% full-session bytes; J&F .03043 vs .87608 independent and .36879 rank-1 additive. Exact full replay, payload arithmetic/hash checks and six tests pass. Five-frame four-object scene only. Continue to P0 MA-1028. See `ma-1027-sam2-object-state-view/README.md`.
 
+Previous: MA-1026 is a bounded CIFAR-10/CLIP MaPLe FAIL: coupled modality Givens views save 75.0% prompt-state bytes vs independent per-domain prompts and match its novel accuracy, but Mirror H-mean 81.27% is 1.28 pp below matched rank-1 additive and hard-shared MaPLe at 82.55%. Held-out base domain×class accuracy ties at 79.17%. Full bundle is 612,024,716 B. Serialized replay and five tests pass. The audit has 160 class×domain cells disjoint from MA-1024/1025; CPU, ViT-B/32, depth 2, 20 updates/method; not official MaPLe reproduction. See `ma-1026-maple-coupled-view/RESULTS.md`.
 
 ## Current handoff — 2026-11-15, MA-1025
 
