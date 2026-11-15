@@ -2,17 +2,40 @@
   "experiment_id": "MA-1042",
   "selected_epsilon": 8,
   "selection_rule": "minimum public DynamicPGMIndex size_in_bytes among exact dev candidates; tie-break smaller epsilon",
-  "dev_seeds": [1042, 1043],
+  "dev_seeds": [
+    1042,
+    1043
+  ],
   "queries_per_domain": 1000,
-  "grid": [8, 16, 32, 64],
+  "grid": [
+    8,
+    16,
+    32,
+    64
+  ],
   "exactness": "all Mirror, matched affine, and independent answers exact for all 4000 queries per seed; all final insert/delete membership assertions pass",
   "selection_metric": "shared_dynamic_ram_bytes",
-  "observed_shared_dynamic_ram_bytes": {"8": 266984, "16": 266984, "32": 266984, "64": 266984},
+  "observed_shared_dynamic_ram_bytes": {
+    "8": 266984,
+    "16": 266984,
+    "32": 266984,
+    "64": 266984
+  },
   "selection_result": "All candidates tie on the frozen public DynamicPGMIndex RAM metric; select minimum epsilon 8.",
-  "fresh_audit_seeds": [1044, 1045, 1046],
+  "fresh_audit_seeds": [
+    1047,
+    1048,
+    1049
+  ],
   "audit_accessed_before_freeze": false,
   "compiler": "g++ -std=c++17 -O3 -DNDEBUG",
   "binary_sha256": "058b84a6c0465824b77c1b75212d0043c57ef831cbd8f13401fd3580d1ab3e0f",
   "source_sha256": "fc0308d34872c630806f724324fd1e70fda9a43c8879b860e8f8a135d459ec20",
-  "sweep_sha256": "954dc654fe7af9a102d5ef9e445b72b0656d5626d3b8af7ee1eb3ce784be8ab9"
+  "sweep_sha256": "954dc654fe7af9a102d5ef9e445b72b0656d5626d3b8af7ee1eb3ce784be8ab9",
+  "amendment": "AM-03",
+  "audit_accessed_before_am03_freeze": false,
+  "post_amendment_dev_correctness": "all Mirror, matched affine and independent predecessor outputs exact on 4000 queries per development seed; all update membership assertions pass",
+  "post_amendment_source_sha256": "4a8a3376e40f4e64cc5800a2107483dc9e771ed07849a17632a7997067d71300",
+  "post_amendment_binary_sha256": "cdc89c22a11d2bb7634abc3895eb3209bf257723c36ce84d90d2acf00e8e7aba",
+  "post_amendment_dev_results_sha256": "f0d9eb4735b79acf4779592899a8f27551dbb0a6ab6c649c8a6ae6ba37e9c787"
 }
