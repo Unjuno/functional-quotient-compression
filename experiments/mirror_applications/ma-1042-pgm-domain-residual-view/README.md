@@ -1,19 +1,28 @@
 # MA-1042 — PGM-index domain residual View
 
-Status: SCREENING  
-Evidence lane: INDEX / CORRECTNESS / STORAGE / COMPUTE / RUNTIME  
-Prior art: PA325; official PGM-index C++ source pinned in `PROTOCOL.json`.
+Status: FAIL for Mirror-specific attribution. See RESULTS.md for the scoped mechanism result, all gates, limitations and H/T/D/C/U record.
 
-## Hypothesis
+## Research question
 
-A small task code can turn one canonical ordered key set and one dynamic PGM-index into four exact logical predecessor maps when each domain is a monotone affine image of the canonical keys. The comparison charges all explicit key/value arrays, domain codes, and reconstruction metadata.
+Can a small domain coordinate share one physical piecewise learned index across several logical ordered-key domains while retaining exact predecessor answers and updates?
 
-> **Mirror insertion:** this experiment adds per-domain affine code `m` to the query and result interface of one shared DynamicPGMIndex so four ordered domains can use one physical ordered key set and predictor.
+This screen uses four deliberately affine-related synthetic domains. Its observed 74.97% serialized-payload reduction vs four independent indexes is also reproduced exactly by the ordinary affine-coordinate control. The saving is therefore evidence for generic shared-index/coordinate compression only, not Mirror-specific value.
 
-## Prior-art delta and controls
+## Implementation and controls
 
-The official PGM-index already provides approximate piecewise-linear predictions, bounded correction ranges, predecessor lookup, and insert/delete updates. This experiment adds only a domain coordinate before the native query path. Controls are four independent official PGM-indexes, a shared hard-tied canonical index, a matched ordinary native affine query transform, and exact ordered-map predecessor outputs. Any match by the ordinary affine control is a failure of Mirror-specific attribution.
+The experiment uses the official Apache-2.0 PGM-index headers pinned to source commit c6fcf3d34e55eb0061b01e2f49dfcbdb711f1407. The experiment code is in source/run_pgm.cpp; third_party/nanoGPT is not modified. Controls are four independent PGM indexes, one shared index with an ordinary affine query mapping, a no-view negative control, and exact sorted-vector predecessor answers. All serialized keys, update logs, affine codes and configuration are included in actual-byte accounting.
 
-## Freeze
+The pinned DynamicPGMIndex is used to apply and check insert/delete operations. It has no predecessor-decrement iterator; after updates the final keys are used to rebuild an official static PGMIndex for predecessor queries. This constraint and both costs are disclosed in RESULTS.md.
 
-Two development seeds select epsilon from the frozen grid under an exactness constraint; AM-01 records that the official dynamic API does not expose correction-window width. Three disjoint fresh seeds are reserved for audit. Each world inserts and deletes 128 keys before queries. All serialized keys, task coordinates, update logs and reconstruction metadata are charged. The pinned DynamicPGMIndex has forward-only lower_bound iterators, so official DynamicPGMIndex membership/update correctness is checked, then an official PGMIndex is deterministically rebuilt over the final keys for predecessor queries; AM-02 records this before any metrics.
+## Reproduction
+
+Compile with g++17 using the pinned source include directory. From the repository root:
+
+    g++ -std=c++17 -O3 -DNDEBUG -I /path/to/PGM-index/include experiments/mirror_applications/ma-1042-pgm-domain-residual-view/source/run_pgm.cpp -o run_pgm
+    ./run_pgm 1050 10000 /tmp/ma1042-audit 8 1
+
+The confirmatory runs and payload files are under runs/audit. The payload reconstruction and integrity verifier is:
+
+    python experiments/mirror_applications/ma-1042-pgm-domain-residual-view/tests/verify_payload.py -v
+
+The frozen development choice and amendment history are in runs/DEV_FREEZE.json and PROTOCOL.json. Superseded audit artifacts remain under runs/exploratory_invalidated and are not confirmatory evidence.

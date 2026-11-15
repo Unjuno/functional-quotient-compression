@@ -1,19 +1,46 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-1042",
+  "commit": "pending-result-commit",
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "python experiments/mirror_applications/ma-1042-pgm-domain-residual-view/tests/verify_payload.py -v",
+    "passed": 4,
+    "failed": 0
   },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "audit_worlds": [
+      1050,
+      1051,
+      1052
+    ],
+    "shared_payload_bytes_each": 133720,
+    "independent_payload_bytes_each": 534260,
+    "filesystem_size_replay": true
   },
   "metric_replay": {
-    "checked": false,
-    "max_difference": null
+    "checked": true,
+    "max_difference": 0,
+    "predecessor_answers_checked": 120000,
+    "mirror_affine_alias": true,
+    "no_view_exact_answers": 0
   },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "fresh_split_integrity_checked": true,
+  "superseded_audits_preserved": [
+    "1044-1046",
+    "1047-1049"
+  ],
+  "artifacts": {
+    "audit_results_sha256": "1921543f3f7dc904d5f595455b8697a1563f577d442dea3d5b8366ce5a488e54",
+    "final_binary_sha256": "7bce8bf29b5dce9c3d8f3897c55e66b9fa52ddaa2fe0d33fd66a097a77ad440d",
+    "source_sha256": "4d6e5b38933b9ca6cf6c5425507a7bb61914ebdc11917228a87d5610dd24397d",
+    "pgm_index_header_sha256": "d2dc04727114fe7f869fa3fbdd628cfbad93297ad398fb14967ccf1cc6446b13",
+    "pgm_dynamic_header_sha256": "3f2692eec5a8313b16c924e135669055c527e3338b49b3058bd03358412698de"
+  },
+  "decision": "FAIL for Mirror-specific attribution; exact affine coordinate is the matched native control.",
+  "notes": [
+    "Synthetic affine-related key domains only; no natural-database generalization claim.",
+    "Dynamic updates are checked, then an official static PGMIndex is rebuilt for predecessor queries because the pinned dynamic iterator has no decrement interface.",
+    "Initial fresh runs with seeds 1044-1046 and 1047-1049 remain in the repository as exploratory diagnostics and are excluded from the final confirmatory audit."
+  ]
 }
