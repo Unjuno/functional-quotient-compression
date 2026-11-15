@@ -24,9 +24,9 @@ MA-990 official MERL RANF code was located, but the required SONICOM HRTF subjec
 
 # Worker queue
 
-## Current handoff — 2026-11-15, MA-1035
+## Current handoff — 2026-11-15, MA-1036
 
-MA-1035 is a scoped QINCo v1-structure synthetic ANN FAIL: shared Givens-stage View uses 22,634 B vs 60,386 B independent QINCo (62.5% fewer model+index bytes), but Recall@10 is 42.34% vs 47.81% (-5.47 pp) and load+scan QPS is 25.2% lower. Additive control is within 0.13 pp of Mirror and faster; static RQ dominates the synthetic task. Exact model/index/metric replay and four tests pass. The upstream QINCo v1 source is pinned; this is not a SIFT/BigANN or official checkpoint result. Continue to P0 MA-1036; MA-1034 is P1. See `ma-1035-qinco-mirror-view/RESULTS.md`.
+MA-1036 is a scoped synthetic FAISS RaBitQ FAIL: domain Givens views save 42.6% actual bytes vs independent rotation banks (264,683 vs 461,251 B), and mean Recall@10 is within 0.13 pp. But shared single-index RaBitQ already matches the independent bank; Mirror fails the +2 pp utility gate in every domain. Postquantization gauge changes zero neighbor IDs. QPS is NOT ESTABLISHED after repeated 256-query batches reversed ordering. Four tests and exact serialized index/byte/Recall/distance-error replay pass. Synthetic D=128 CPU only; no SIFT/BigANN claim. Advance to P0 MA-1037 Matryoshka dimension-budget Mirror readout; MA-1034 remains P1. See `ma-1036-rabitq-domain-view/RESULTS.md` and `POST_AUDIT_AMENDMENT.md`.
 
 ## Previous handoff — 2026-11-15, MA-1033
 
