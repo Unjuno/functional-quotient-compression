@@ -1,0 +1,61 @@
+{
+  "experiment_id": "MA-1047",
+  "title": "TimesFM horizon × domain factorized output-head View",
+  "status": "FROZEN_BEFORE_AUDIT",
+  "evidence_lane": "TIME_SERIES / FORECAST_QUALITY / STORAGE / CPU_RUNTIME",
+  "base_commit": "2ff7aa816",
+  "prior_art_refs": ["PA327"],
+  "hypothesis": "A small horizon-by-domain factorized affine output-head code fit on early ETTh1/ETTm1 windows can improve later-window point-forecast quality over frozen TimesFM and a single shared affine calibrator, while using less serialized state than independent domain×horizon calibrators.",
+  "physical_object": "One frozen official google/timesfm-2.5-200m-pytorch checkpoint; model state is shared across all domains and forecast horizons.",
+  "mirror_coordinate": "A separable affine head: yhat[d,h] = (u[d] * v[h]) * yhat_raw + (a[d] + b[h]) for d∈{ETTh1,ETTm1}, h∈{96,192,336,720}. The 12 float32 coordinates are serialized with metadata; no checkpoint or calibration state is free.",
+  "logical_multiplicity": "Eight dataset-domain × horizon-specific point forecasting functions from one shared pretrained decoder and a factorized calibration code.",
+  "prior_art_delta": "TimesFM already supports user-selected horizons from a shared patch decoder. This screen tests whether a compact learned output head provides useful horizon/domain specialization beyond native horizon selection and ordinary shared/per-cell affine calibration.",
+  "model": {
+    "id": "google/timesfm-2.5-200m-pytorch",
+    "revision": "1d952420fba87f3c6dee4f240de0f1a0fbc790e3",
+    "package": "timesfm==2.0.2",
+    "framework": "torch 2.14.1+cpu",
+    "torch_compile": false,
+    "weights_dtype": "float32",
+    "context_length": 512,
+    "quantile_head": "continuous; point forecast is median",
+    "shared_model_updates": 0
+  },
+  "data": {
+    "sources": [
+      {"id":"ETTh1","url":"https://raw.githubusercontent.com/zhouhaoyi/ETDataset/1d16c8f4f943005d613b5bc962e9eeb06058cf07/ETT-small/ETTh1.csv","frequency_minutes":60,"channels":"seven numeric covariate columns"},
+      {"id":"ETTm1","url":"https://raw.githubusercontent.com/zhouhaoyi/ETDataset/1d16c8f4f943005d613b5bc962e9eeb06058cf07/ETT-small/ETTm1.csv","frequency_minutes":15,"channels":"seven numeric covariate columns"}
+    ],
+    "split": "Per dataset, first 60% chronological rows provide calibration fit windows; next 20% provide validation only; final 20% is fresh audit. All windows are ordered, context uses only rows before its origin, and targets remain within their respective split.",
+    "horizons": [96,192,336,720],
+    "window_selection": "For each channel and dataset, fit 4 evenly spaced origins in the first 60% with context 512; validation 2 evenly spaced origins wholly within the next 20%; audit 3 fixed evenly spaced origins wholly within the final 20%, with audit horizon targets fixed at H=720 and all shorter horizons scored at the same origins. No audit labels/forecasts will be accessed for fitting or selection.",
+    "audit_accessed_before_freeze": false,
+    "pretraining_overlap": "ETT benchmark availability may overlap TimesFM training corpora; this is a later-time evaluation of fixed series, not an independent-pretraining audit."
+  },
+  "controls": [
+    "Frozen zero-shot TimesFM native horizon output",
+    "One global affine calibration shared across domains and horizons",
+    "Additive domain + horizon affine calibration (native low-parameter control)",
+    "Independent per-domain × horizon affine calibration (upper storage/quality reference)",
+    "Factorized rank-one domain × horizon affine head (candidate Mirror form)",
+    "Seasonal naive (period 24 hourly; 96 for 15-minute)"
+  ],
+  "selection": {
+    "fit": "Fit affine head coefficients by least-squares on first-60% calibration windows; fit shared/additive/factorized models on identical forecast/target pairs. No pretrained weights updated.",
+    "validation": "Use next-20% only to select from the frozen list of affine forms; choice and code are frozen before loading final-20% audit labels.",
+    "primary_metric": "Mean per-window MASE, macro-averaged over datasets and channels.",
+    "secondary_metrics": ["sMAPE", "MAE", "actual complete serialized payload bytes", "CPU model inference p50/p95", "post-head CPU p50/p95"],
+    "compute_limit": "CPU measurements only. The registered H100 latency cannot be established in this CPU-only container; quality/bytes remain measurable. No H100 claim will be made."
+  },
+  "gates": {
+    "promising": "On both datasets, factorized View improves audit MASE by at least 1% over frozen TimesFM and at least 0.5% over the additive native calibration; sMAPE does not worsen >0.5%; complete payload is smaller than independent per-cell calibrators; CPU head overhead p95 <=10% of model inference.",
+    "fail": "View misses the quality gate on either dataset, matches a simpler control within 0.1%, or adds no quality/storage Pareto improvement.",
+    "not_established": "Official checkpoint or declared fresh windows cannot be executed/verified, or fewer than 5 channels survive data validation. H100-specific latency remains separately NOT ESTABLISHED regardless of quality outcome."
+  },
+  "storage": {
+    "authority": "Actual serialized inference payload bytes.",
+    "paid_state": ["model.safetensors", "config.json", "all affine factors and offsets", "method metadata", "generation settings"],
+    "reporting": "Report shared checkpoint once, method-specific state bytes, complete payload, and source bytes separately. No parameter-count-only compression claim."
+  },
+  "amendments": []
+}
