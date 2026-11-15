@@ -1,0 +1,90 @@
+{
+  "encoder": {
+    "model": "Nomic Embed v1.5 official INT8 ONNX",
+    "model_payload_bytes": 138243620,
+    "corpus_encode_wall_s": 1354.891369281002,
+    "query_encode_wall_s": 20.395128488999035,
+    "documents_per_s": 3.825398934196809,
+    "queries_per_s": 54.37572999837611,
+    "corpus_embedding_table_bytes": 15922304,
+    "query_vectors_are_ephemeral_and_not_index_state": true
+  },
+  "five_budget_banks": [
+    {
+      "method": "native_prefix",
+      "complete_five_budget_bank_bytes": 174126309,
+      "source_embedding_bytes": 15922304,
+      "candidate_tables_bytes": 19903232,
+      "coordinate_bytes": 0,
+      "model_bundle_bytes": 138243620
+    },
+    {
+      "method": "mirror_givens",
+      "complete_five_budget_bank_bytes": 174126539,
+      "source_embedding_bytes": 15922304,
+      "candidate_tables_bytes": 19903232,
+      "coordinate_bytes": 16,
+      "model_bundle_bytes": 138243620
+    },
+    {
+      "method": "linear_boundary_control",
+      "complete_five_budget_bank_bytes": 174126718,
+      "source_embedding_bytes": 15922304,
+      "candidate_tables_bytes": 19903232,
+      "coordinate_bytes": 32,
+      "model_bundle_bytes": 138243620
+    }
+  ],
+  "comparison": {
+    "64": {
+      "native_ndcg10": 0.5099191450344235,
+      "mirror_ndcg10": 0.5130713212671038,
+      "mirror_minus_native_pp": 0.31521762326802705,
+      "linear_control_ndcg10": 0.5130713212671038,
+      "mirror_bytes": 155548488,
+      "native_bytes": 155548431,
+      "mirror_qps": 34392.6143827305,
+      "native_qps": 35089.65641142856
+    },
+    "128": {
+      "native_ndcg10": 0.5988513169878231,
+      "mirror_ndcg10": 0.5985733693450311,
+      "mirror_minus_native_pp": -0.02779476427919869,
+      "linear_control_ndcg10": 0.5985733693450311,
+      "mirror_bytes": 156875338,
+      "native_bytes": 156875281,
+      "mirror_qps": 30822.821386241067,
+      "native_qps": 29497.942076912834
+    },
+    "256": {
+      "native_ndcg10": 0.657418740586701,
+      "mirror_ndcg10": 0.656921063941763,
+      "mirror_minus_native_pp": -0.049767664493804986,
+      "linear_control_ndcg10": 0.656921063941763,
+      "mirror_bytes": 159529034,
+      "native_bytes": 159528977,
+      "mirror_qps": 24615.964296550123,
+      "native_qps": 26255.675487527707
+    },
+    "512": {
+      "native_ndcg10": 0.6834330299551382,
+      "mirror_ndcg10": 0.6834750652170525,
+      "mirror_minus_native_pp": 0.004203526191426388,
+      "linear_control_ndcg10": 0.6834750652170525,
+      "mirror_bytes": 164836428,
+      "native_bytes": 164836369,
+      "mirror_qps": 16491.413331455675,
+      "native_qps": 20370.156988855328
+    },
+    "768": {
+      "native_ndcg10": 0.6899209621204875,
+      "mirror_ndcg10": 0.6899209621204875,
+      "mirror_minus_native_pp": 0.0,
+      "linear_control_ndcg10": 0.6899209621204875,
+      "mirror_bytes": 154221455,
+      "native_bytes": 154221455,
+      "mirror_qps": 16245.32344674631,
+      "native_qps": 16454.719815112927
+    }
+  }
+}

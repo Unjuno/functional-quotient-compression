@@ -1,9 +1,35 @@
 {
   "experiment_id": "MA-1037",
-  "commit": "<sha>",
-  "tests": {"command": "<command>", "passed": null, "failed": null},
-  "serialization": {"roundtrip_checked": false, "byte_exact": false},
-  "metric_replay": {"checked": false, "max_difference": null},
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "freeze_commits": [
+    "22e9737a5a47e75d97c673d91e5729e9cf4cacc2",
+    "1776b54220edd97dcf1da4cd0b2e02a635eb07ae",
+    "615a6e1fe4aa602c47563ed5dbb7f73e5f13e7ab",
+    "9e10efebdf84e38e45d4377aa970d3d0a8ca2795",
+    "986f4235fa5895173ed09b4f401b86dc2d03d647"
+  ],
+  "tests": {
+    "command": "PYTHONPATH=/tmp/ma1037-onnx-deps python -m unittest discover -s experiments/mirror_applications/ma-1037-matryoshka-dimension-view/tests -v",
+    "passed": 5,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "method_dimension_rows_replayed": 15,
+    "payload_files_hashed": 33
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0,
+    "metrics": ["nDCG@10", "Recall@10", "MRR@10"]
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "SciFact train and test query IDs are disjoint (809 development, 300 audit).",
+    "All selected angles were chosen on train qrels before test was opened.",
+    "Mirror and normalized linear boundary control candidate arrays/readouts are bit-exact at all five dimensions.",
+    "Full 768-D zero-view reuses the paid source table; no duplicate candidate bytes are counted.",
+    "The FP32 execution path was stopped before producing embeddings. The official INT8 ONNX export at the same model revision was frozen by pre-audit amendment AM-01.",
+    "Two audit implementation failures and the post-audit timing correction are preserved; no angle, quality gate, or test-driven tuning occurred."
+  ]
 }
