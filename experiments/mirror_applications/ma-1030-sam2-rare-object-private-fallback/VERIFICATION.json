@@ -1,9 +1,41 @@
 {
   "experiment_id": "MA-1030",
-  "status": "SCREENING",
-  "protocol_frozen_before_data": false,
-  "development_data_generated": false,
-  "audit_data_generated": false,
-  "tests": {"passed": null, "failed": null},
-  "decision": null
+  "branch": "research/ma-1030-sam2-rare-object-private-fallback-20261115",
+  "base_commit": "fc7c2640fef0da03f7064d3d41e4b20f3afc2545",
+  "protocol_source_freeze_commit": "ec729acfe",
+  "development_freeze_commit": "2f3d44166b663c8c551d552640b2345a15dd444e",
+  "protocol_sha256": "4b5a54448d6254e169907de930093e2b52f466c97e3a47697b6bf36c98c11f01",
+  "source_sha256": {"generate_video.py": "9d70948ede2772298873628450c2606d2e8e7edaf23b81243bbc40b63e2351a7", "run_experiment.py": "098a06b46798f192d83d53afc6634eaa9640642282d4965c30d1fd3e8516d244", "verify_result.py": "f9438cdd0e2e92c3b814b75d4ed8237b0678fb0585b3c5ee9853cbe4b8f45863"},
+  "development_seed": 103000,
+  "audit_seeds": [103001, 103002, 103003],
+  "official_sam2_source_commit": "2b90b9f5ceec907a1c18123530e92e794ad901a4",
+  "checkpoint": {
+    "name": "sam2.1_hiera_tiny.pt",
+    "sha256": "7402e0d864fa82708a20fbd15bc84245c2f26dff0eb43a4b5b93452deb34be69",
+    "bytes": 156008466,
+    "stored_outside_git": true
+  },
+  "config_sha256": "f932eac1c6241e910031b2f000a81cd9f8a8d4896e2277ab5ffb721f378b188d",
+  "protocol_frozen_before_data": true,
+  "development_frozen_before_audit_generation": true,
+  "selected_threshold": 0.15,
+  "audit_worlds": 3,
+  "method_world_rows": 15,
+  "audit_input_hashes": "PASS: all video-frame JPEGs and ground-truth masks match each frozen manifest",
+  "shared_cache_hashes": "PASS: serialized normalized frame caches match all world records",
+  "payload_hashes_lengths_manifests": "PASS: all actual session payloads match hashes, serialized tensor lengths and memory-byte totals",
+  "prediction_hashes_metrics": "PASS: output hashes and J/F, boundary F, cross-object IoU, and ID-switch metrics replay within 1e-12",
+  "full_session_bytes": "PASS: checkpoint + config + shared frame cache + serialized session-state payload",
+  "forward_replay_from_saved_payload": "NOT RUN; predictions and metrics were replay-verified from retained saved masks, payload hashes and manifests were checked",
+  "tests": {
+    "command": "PYTHONPATH=/tmp/ma1027-sam2 python -m unittest discover -s experiments/mirror_applications/ma-1030-sam2-rare-object-private-fallback/tests -v",
+    "passed": 4,
+    "failed": 0
+  },
+  "decision": "FAIL",
+  "scope_limits": [
+    "Three synthetic fresh audit videos, four objects and six frames each.",
+    "SAM2.1 Hiera-tiny at 256px on CPU only.",
+    "No natural-video, benchmark, GPU or general SAM2 claim."
+  ]
 }
