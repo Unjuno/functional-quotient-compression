@@ -1,0 +1,80 @@
+{
+  "experiment": "A11_MAIN",
+  "date": "2026-11-15",
+  "evidence_class": "exploratory CPU synthetic; no general compression advantage",
+  "model_count": 288,
+  "split_score_count": 864,
+  "world_group_count": 144,
+  "replayed_checkpoint_count": 12,
+  "protocol_sha256": "086f995f6d6503ff48f100423aca3f97628f94e2548faac6948912193cf3facb",
+  "config_sha256": "0304901c105ae653873dec6149e91dafabc8e785662d9e46e454222260cfa46b",
+  "train_lock_sha256": "bf04f11b40e22c1e5d77d3c8ff117120ccd66c3fa273e4c40925aab86d33bac5",
+  "model_sha256_manifest_digest": "595c849b43cc5213cc01780cd45708dbebc90537a403b9b25cd289967bdf0806",
+  "model_digest_algorithm": "sorted path + tab + bytes + tab + SHA256, newline joined, no terminal newline",
+  "source_sha256": {
+    "a11.py": "0b83c47f6584cb69a9f3e630e36b136043e67a4d2055c30dc7baf4792a203d58",
+    "train.py": "c015555573e5b9d4e2eda9912189b2a6c4694f08d79316a3d7a2f07e617088e8",
+    "audit.py": "89326838d2022f84491c13366ec080b0a40a44de4ab34b4674a5b21778e71f2b",
+    "replay.py": "e8f055cad0b95fdd64cca0267af8e56bab9fbeb267577a9c98cc127b214bab20",
+    "analyze.py": "c58b1ca418825743c655c8ca1bd4567500d958adbaddbcc963b8b531a247a702",
+    "test_a11.py": "abe6e9de866b8834104f67adba0d22c36fd9b255171f7c525071e22ba2a23310",
+    "PROTOCOL.md": "086f995f6d6503ff48f100423aca3f97628f94e2548faac6948912193cf3facb",
+    "README.md": "a5ce251056b9e0c2fd116f9f051c2614eb309886bcab68348fb356cde42fb841",
+    "REPORT_JA.md": "c22122f69bc649a56ac80fd4f317442bb7323558450eba5a945b547b900cdf82"
+  },
+  "committed_result_sha256": {
+    "summary.csv": "d5d75444a930afeca3b551f8c5133622271339788390930868447998fe036830",
+    "worlds.csv": "a9673e8518002cc9f1f5f3e18233aa44c8d3834424042b46d67413d4f71618fd",
+    "reference_pairs.csv": "7fac7c04ea085a6132202bd2d866b8a546edf94c4148ea3c4b4c7a4e5fe19629",
+    "frontier.csv": "d16264b037a26487e08d0184302033614bc0300bc244608fc13eb2a8764722ab",
+    "frontier.json": "bef8e2dcbbcf0ffdb8c342475ab2a6c39a5fa7d055a1f16395e132cc87fef594",
+    "replay.json": "650ca637088b10f7f416c746a9da38eb76be242e7dd001318187a86fdf5fbc71"
+  },
+  "full_results_sha256": {
+    "audit.csv": "234511ee412abd5e4611595287510b2a7f61d852717588d96f26f275b9e7ba39",
+    "worlds.csv": "a9673e8518002cc9f1f5f3e18233aa44c8d3834424042b46d67413d4f71618fd",
+    "summary.csv": "d5d75444a930afeca3b551f8c5133622271339788390930868447998fe036830",
+    "reference_pairs.csv": "7fac7c04ea085a6132202bd2d866b8a546edf94c4148ea3c4b4c7a4e5fe19629",
+    "frontier.json": "bef8e2dcbbcf0ffdb8c342475ab2a6c39a5fa7d055a1f16395e132cc87fef594",
+    "frontier.csv": "d16264b037a26487e08d0184302033614bc0300bc244608fc13eb2a8764722ab",
+    "replay.json": "650ca637088b10f7f416c746a9da38eb76be242e7dd001318187a86fdf5fbc71"
+  },
+  "environment": {
+    "python": "3.13.5",
+    "torch": "2.10.0+cpu",
+    "device": "CPU",
+    "cpu": "INTEL(R) XEON(R) PLATINUM 8573C",
+    "cpu_clock_observed_mhz_range": [
+      2300.0,
+      2300.0
+    ],
+    "clocks_locked": false,
+    "workers": 4,
+    "threads_per_worker": 1,
+    "precision": "FP32"
+  },
+  "wall_seconds": 79.968469212,
+  "conformance": {
+    "a11_tests": "10/10 pass",
+    "a10_regression_tests": "14/14 pass",
+    "locked_audit": "288/288 sha verified before scoring",
+    "replay": "12/12 byte-identical",
+    "budget_caps": [
+      512,
+      640,
+      768,
+      1024
+    ],
+    "quality_nrmse_threshold": 0.2
+  },
+  "conclusions": {
+    "ramp_shift_passing_cases": 8,
+    "ramp_mirror_passing_cases": 1,
+    "tent_passing_cases": 0,
+    "sine_passing_cases": 0,
+    "observed_mirror_bytes_for_ramp_world1101": 764,
+    "observed_shift_bytes_for_ramp_world1101": 500,
+    "mirror_specific_10percent_saving": "NOT OBSERVED",
+    "other_families": "CENSORED"
+  }
+}
