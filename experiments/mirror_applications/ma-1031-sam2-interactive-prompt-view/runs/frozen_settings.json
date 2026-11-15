@@ -1,0 +1,21 @@
+{
+  "schema": "MA1031-dev-freeze-v1",
+  "base_commit": "d8ee28e09",
+  "dev_seed": 103100,
+  "shared_half_radius_float16": [
+    15.6796875,
+    34.71875,
+    25.453125,
+    16.453125
+  ],
+  "radius_rule": "per-object mean half-distance of two direct dev corrections across frames 1-5",
+  "audit_seeds": [
+    103101,
+    103102,
+    103103
+  ],
+  "frozen": true,
+  "runner_commit_before_audit": "d4cfb577d6e29a0337a4f58bcea0987d2434f457",
+  "protocol_sha256": "762e4ee98380b6178333cac0a0b8206a5a1b83d5d59d3ee6165e7f5fef19ebee",
+  "pre_audit_amendments": "Fixed Mirror point-pair axis order discovered in the dev smoke run; re-ran all dev methods. Serialized full session to memory for exact byte/hash measurement and retained only hash/length, history payload, and predictions to avoid committing large duplicate inference states. No quality gates, click rules, coding, or frozen radii changed."
+}
