@@ -24,6 +24,10 @@ MA-990 official MERL RANF code was located, but the required SONICOM HRTF subjec
 
 # Worker queue
 
+## Current handoff — 2026-11-15, MA-1024
+
+MA-1024 is a CIFAR-10/CLIP prompt FAIL: domain-phase Mirror saves 73.8% prompt bytes vs independent CoOp, but novel accuracy is 77.34% vs 85.94% independent and 88.28% shared CoOp; H-mean misses the 1 pp tolerance. The complete 608.9 MB bundle saves only 24,506 B and shared CoOp is 73 B smaller. Native scalar Givens exactly aliases Mirror. Official test was opened after freeze; exact same-split replay, hashes and three tests pass. Continue to P0 MA-1025. See `ma-1024-coop-prompt-mirror/RESULTS.md`.
+
 ## Current handoff — 2026-11-15, MA-1017
 
 MA-1017 is a bounded aligned synthetic data-reupload FAIL for Mirror-specific value. Four distinct task classifiers reach 98.44% 1,024-shot accuracy with both Mirror and native scalar-phase schedules at 379 B; both save 27.5% vs independent task circuits, while no-view sharing reaches 51.56%. The Mirror and native controls exactly alias; five tests/replay pass, fresh sealed. No QPU, noise or compiled-device claim. MA-1016/1017 trigger a pause of quantum MA-1018..1023, which remain UNTESTED pending a Mirror-distinct mechanism. Continue at P0 MA-1024. See `ma-1017-data-reupload-task-view/RESULTS.md` and `../../docs/phase2/QUANTUM_MIRROR_FAMILY_DIAGNOSTIC_2026-11-15.md`.

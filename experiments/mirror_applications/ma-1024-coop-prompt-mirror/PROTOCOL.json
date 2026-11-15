@@ -1,0 +1,20 @@
+{
+  "experiment_id":"MA-1024",
+  "title":"CoOp task prompt bank replaced by structured Mirror code",
+  "status":"SCREENING",
+  "evidence_lane":"LANGUAGE/STORAGE/COMPUTE",
+  "base_commit":"64d11ac4c",
+  "hypothesis":"A small domain phase code on shared CoOp context tokens preserves base-to-novel classification across four visual domains with less prompt storage than independent domain contexts, while adding value beyond a matched native scalar control.",
+  "physical_object":"frozen openai/clip-vit-base-patch32 vision/text model and a shared four-token CoOp context basis",
+  "mirror_coordinate":"one domain angle applying Givens rotations to context-token pairs (0,1) and (2,3)",
+  "logical_multiplicity":"four domain-specific prompt classifiers",
+  "prior_art_refs":["PA312","PA313"],
+  "controls":["zero-shot CLIP","shared CoOp context","independent per-domain CoOp contexts","Mirror domain phase","native scalar Givens phase control"],
+  "development":{"dataset":"uoft-cs/cifar10","train_classes":["airplane","automobile","bird","cat","deer","dog"],"novel_classes":["frog","horse","ship","truck"],"domains":["original","grayscale","brightness_0.65","gaussian_blur_radius_1.0"],"shots_per_base_class":4,"official_test_images_per_class_after_freeze":8,"selection_seed":102401,"n_context_tokens":4,"updates":30,"optimizer":"Adam lr=0.002","batch":"all selected base examples across domains","selection_metric":"base/novel accuracy and harmonic mean; no official test split used for tuning"},
+  "fresh":{"dataset_split":"official CIFAR-10 test","classes":"all ten; novel classes 6-9 are primary generalization audit","images_per_class":8,"locked_before_access":true,"opened":false},
+  "storage":{"authority":"actual serialized inference payload bytes","prompt_format":"UTF-8 JSON header plus contiguous little-endian float32 arrays","full_bundle_bytes":"sum of exact CLIP model/tokenizer/processor file sizes plus exact serialized prompt payload bytes","paid_objects":["CLIP ViT-B/32 weights/config","tokenizer vocab and merges","image preprocessing config","prompt context vectors","domain coordinates","class/domain labels","postprocessor metadata"]},
+  "compute":{"report_image_feature_extraction_wall":true,"report_prompt_training_updates_and_wall":true,"report_prompt_text_inference_wall":true,"report_clips_backbone_parameters":true,"report_inference_examples":true,"cpu_only":true},
+  "success_gate":"Mirror base/novel harmonic mean within 1 pp of independent-domain CoOp; >=25% fewer prompt bytes than independent; >=2 pp novel accuracy over shared CoOp.",
+  "failure_gate":"Native scalar Givens control matches Mirror within 0.1 pp, or quality/storage gate fails.",
+  "boundaries":["CIFAR-10 only","four deterministic image transforms","frozen pretrained CLIP","small CPU prompt-learning screen","no broad VLM or production claim","fresh audit not used for tuning"]
+}

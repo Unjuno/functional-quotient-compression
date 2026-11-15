@@ -1,0 +1,20 @@
+{
+  "experiment_id":"MA-1024",
+  "status":"PASS_VERIFICATION / FAIL_HYPOTHESIS",
+  "protocol_frozen_before_run":true,
+  "fresh_opened":true,
+  "checks":[
+    {"name":"official_test_split_separation","passed":true,"detail":"CIFAR-10 test split opened only after all three prompt variants were frozen; never used for hyperparameter changes."},
+    {"name":"same_split_metric_replay","passed":true,"detail":"A second complete run reproduced selected indices, image hashes, exact payload sizes and all per-domain accuracy metrics. Replay summary is runs/replay_summary.json."},
+    {"name":"complete_bundle_byte_accounting","passed":true,"detail":"608,863,580 B shared backbone/tokenizer/processor plus exact prompt payload; full-bundle arithmetic checked."},
+    {"name":"prompt_payload_files","passed":true,"detail":"All five serialized prompt payload sizes and SHA-256 hashes verified."},
+    {"name":"model_asset_hashes","passed":true,"detail":"CLIP weights, config, tokenizer and processor files match recorded byte sizes and SHA-256."},
+    {"name":"unit_tests","passed":true,"detail":"3 tests passed."},
+    {"name":"native_scalar_control","passed":true,"detail":"Mirror and native scalar Givens prompt payloads/results are identical."}
+  ],
+  "code_sha256":"3edb3b267a6a2c9fb80921eba82d925b14d74648e4efc91abefd568b907f80cb",
+  "dataset_fingerprints":{"train":"dc9b490412f5c250","test":"bab4620c7501a3e6"},
+  "model_weight_sha256":"a63082132ba4f97a80bea76823f544493bffa8082296d62d71581a4feff1576f",
+  "environment":{"device":"CPU","transformers":"4.57-compatible HF CLIP","backbone_parameters":151277313,"total_wall_s":189.74344421099886},
+  "result":"Scoped CIFAR-10 FAIL; no general VLM transfer claim."
+}
