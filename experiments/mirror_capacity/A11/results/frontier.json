@@ -1,0 +1,114 @@
+{
+  "experiment": "A11_MAIN",
+  "model_count": 288,
+  "split_score_count": 864,
+  "independent_worlds_per_family": 2,
+  "seeds_per_world": 2,
+  "caps": [
+    512,
+    640,
+    768,
+    1024
+  ],
+  "frontiers": [
+    {
+      "family": "ramp",
+      "world": 1100,
+      "mirror_bytes": null,
+      "mirror_cap": null,
+      "reference_bytes": 500.0,
+      "reference_method": "shift",
+      "reference_cap": 512,
+      "observed_ratio": null,
+      "mirror_10pct_win": null,
+      "classification": "mirror_censored"
+    },
+    {
+      "family": "ramp",
+      "world": 1101,
+      "mirror_bytes": 764.0,
+      "mirror_cap": 768,
+      "reference_bytes": 500.0,
+      "reference_method": "shift",
+      "reference_cap": 512,
+      "observed_ratio": 1.528,
+      "mirror_10pct_win": false,
+      "classification": "both_observed"
+    },
+    {
+      "family": "sine",
+      "world": 1100,
+      "mirror_bytes": null,
+      "mirror_cap": null,
+      "reference_bytes": null,
+      "reference_method": null,
+      "reference_cap": null,
+      "observed_ratio": null,
+      "mirror_10pct_win": null,
+      "classification": "both_censored"
+    },
+    {
+      "family": "sine",
+      "world": 1101,
+      "mirror_bytes": null,
+      "mirror_cap": null,
+      "reference_bytes": null,
+      "reference_method": null,
+      "reference_cap": null,
+      "observed_ratio": null,
+      "mirror_10pct_win": null,
+      "classification": "both_censored"
+    },
+    {
+      "family": "tent",
+      "world": 1100,
+      "mirror_bytes": null,
+      "mirror_cap": null,
+      "reference_bytes": null,
+      "reference_method": null,
+      "reference_cap": null,
+      "observed_ratio": null,
+      "mirror_10pct_win": null,
+      "classification": "both_censored"
+    },
+    {
+      "family": "tent",
+      "world": 1101,
+      "mirror_bytes": null,
+      "mirror_cap": null,
+      "reference_bytes": null,
+      "reference_method": null,
+      "reference_cap": null,
+      "observed_ratio": null,
+      "mirror_10pct_win": null,
+      "classification": "both_censored"
+    }
+  ],
+  "passing_group_counts": {
+    "ramp": {
+      "basis": 0,
+      "film": 7,
+      "mirror": 1,
+      "multihead": 0,
+      "pre": 0,
+      "shift": 8
+    },
+    "sine": {
+      "basis": 0,
+      "film": 0,
+      "mirror": 0,
+      "multihead": 0,
+      "pre": 0,
+      "shift": 0
+    },
+    "tent": {
+      "basis": 0,
+      "film": 0,
+      "mirror": 0,
+      "multihead": 0,
+      "pre": 0,
+      "shift": 0
+    }
+  },
+  "warning": "Observed passing model size is a finite-grid upper bound only; with no pass, frontier censored. Comparisons do NOT match training FLOPs."
+}
