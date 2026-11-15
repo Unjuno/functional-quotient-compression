@@ -1,0 +1,27 @@
+{
+  "experiment_id": "MA-1028",
+  "attempts": [
+    {
+      "attempt": "256px feasibility",
+      "outcome": "stopped before any quality metrics",
+      "evidence": "Official relative-attention reshape assumes 4096 tokens/frame; runtime shape [1,260,64] attempted reshape [1,1,4096,-1] and failed."
+    },
+    {
+      "attempt": "1024px CPU feasibility",
+      "outcome": "three-frame execution completed",
+      "quality_metrics_inspected": false,
+      "protocol_amendment": "official 1024px resolution; seeds, controls, target, and gates unchanged"
+    },
+    {
+      "attempt": "one-object 12-frame exploratory comparison",
+      "outcome": "all four methods completed for seed 102801; saved mask predictions and serialized payloads",
+      "protocol_deviation": "frozen protocol specified two objects; runner provided a single object because upstream SAM2Long path selection assumes scalar object scores",
+      "payload_and_predictions_hashed": true
+    },
+    {
+      "attempt": "seed 102802",
+      "outcome": "aborted at frame 4 before any result was emitted",
+      "reason": "multi-object protocol deviation identified; no scientific settings tuned from the partial run"
+    }
+  ]
+}

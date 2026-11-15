@@ -1,11 +1,40 @@
 {
   "experiment_id": "MA-1028",
-  "status": "SCREENING",
+  "registered_status": "NOT ESTABLISHED",
+  "registered_protocol_objects": 2,
+  "objects_scored": 1,
   "official_sam2long_commit": "d70b50a7936fec55af20123530e92e794ad901a4",
-  "official_sam2_checkpoint_sha256": "7402e0d864fa82708a20fbd15bc84245c2f26dff0eb43a4b5b93452deb34be69",
-  "protocol_frozen_before_scene_generation": true,
-  "audit_scenes_generated": false,
-  "replay_checked": false,
-  "tests": {"passed": null, "failed": null},
-  "notes": ["Feasibility only; no audit scores yet."]
+  "official_sam2_commit": "2b90b9f5ceec907a1c18123530e92e794ad901a4",
+  "protocol_amendment": "Official 1024px resolution adopted before scored run after 256px feasibility error; one-object result remains exploratory because frozen protocol required two objects.",
+  "exploratory_one_object": {
+    "full_forward_completed": true,
+    "prediction_metric_replay_checked": true,
+    "payload_blob_hashes_and_lengths_captured_before_blob_cleanup": true,
+    "session_tensor_manifests_retained": true,
+    "all_four_prediction_hashes_identical": true
+  },
+  "registered_two_object_test": {
+    "completed": false,
+    "reason": "Official SAM2Long path selection calls object_score_logits.item() and comments that its path logic assumes one object; the registered multi-object tree control is not executable as supplied."
+  },
+  "tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-1028-sam2long-memory-path-view/tests -v",
+    "passed": 6,
+    "failed": 0
+  },
+  "notes": [
+    "One seed and one object only; no natural-video benchmark or generalization claim.",
+    "Large serialized exploratory cache/session blobs were deleted after exact hashes, lengths, and tensor manifests were captured; checkpoint remains external."
+  ],
+  "one_object_metric_replay": {
+    "checked_from_saved_prediction_arrays": true,
+    "mean_jf_all_methods": 0.8440573780362298,
+    "all_four_predictions_identical": true,
+    "max_metric_difference": 0.0
+  },
+  "payload_validation": {
+    "binary_blobs_hash_captured_before_cleanup": true,
+    "manifest_tensor_bytes_equal_to_serialized_lengths": true,
+    "checkpoint_config_cache_session_arithmetic_exact": true
+  }
 }
