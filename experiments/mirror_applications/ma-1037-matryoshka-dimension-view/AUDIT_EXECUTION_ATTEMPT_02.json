@@ -1,0 +1,11 @@
+{
+  "experiment_id": "MA-1037",
+  "audit_qrels_opened": true,
+  "attempt": "query-to-top10 timing correction rerun",
+  "result": "implementation error before results were persisted",
+  "error": "NameError in the QPS reporting expression after timing completed; code used the old local variable name Q instead of query_source",
+  "quality_values_saved_or_inspected": false,
+  "angles_or_gates_changed": false,
+  "correction": "use the actual query-source batch length in the throughput numerator",
+  "rerun": "same test qrels, same frozen angles, same dimensions, methods, and gates"
+}

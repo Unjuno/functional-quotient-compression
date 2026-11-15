@@ -146,7 +146,7 @@ def retrieval_qps(query_source,X,transform,repeats=5):
  _=exact_topk(transform(query_source),X,10); times=[]
  for _ in range(repeats):
   t=time.perf_counter(); _=exact_topk(transform(query_source),X,10); times.append(time.perf_counter()-t)
- med=float(np.median(times)); return (len(Q)/med if med else float('inf')),med
+ med=float(np.median(times)); return (len(query_source)/med if med else float('inf')),med
 
 def audit(model_dir):
  corpus,queries,ids=load_embeddings(); dev=json.loads((ROOT/'runs'/'DEV_SELECTION.json').read_text())
