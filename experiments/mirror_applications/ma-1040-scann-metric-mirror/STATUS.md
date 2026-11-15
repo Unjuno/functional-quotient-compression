@@ -6,8 +6,8 @@
 - Dataset: official BEIR ArgUana archive downloaded; SHA256 pinned in PROTOCOL.json
 - ScaNN runtime: 1.4.2 installed in `/tmp/ma1040env`
 - Embeddings/index: CPU embedding started; resumable 256-token protocol amendment committed before development metrics
-- Development freeze: pending
-- Audit opened: no
+- Development freeze: locked and committed before audit; short +0.30 rad, long +0.15 rad
+- Audit opened: no (dev freeze committed)
 - Results/verification: pending
 - Replay history: one initial uncheckpointed encoding attempt was stopped before saving embeddings or metrics; AM-01 records the CPU-screen change.
 
