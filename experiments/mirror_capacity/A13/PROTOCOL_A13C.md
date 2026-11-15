@@ -1,0 +1,9 @@
+# A13c — fresh-world repeat of the ES code-adaptation mechanism
+
+2026-11-15. **This follow-up is post-A13 discovery**. Do not count it as fully preregistered independent confirmatory evidence; the frozen code and search policies were established before any A13c world was generated or fit.
+
+The A13 main experiment reused A12's already learned parent scaffolds. To check the mechanism on new weights, train fresh 2400-step parent scaffolds on worlds 1300,1301,1302 from the unchanged A11 external 1D tent and sine teacher generators, using the exact A12 `fit_meta_checkpoints` meta-training routine. For each family×world×seed0/1×model {Mirror,Shift,FiLM} = 36 new frozen 1024-byte-cap parents. No true teacher function parameters go to the students.
+
+After hashing and freezing *all* 36 parent files, perform the **same exact A13 optimizer protocol** with initial new codes from the parent: per-task ES diagonal Gaussian P32×30 generations, uniform random 960 draws/task, and full-support AdamW 960 steps, all using the identical 32 task support pairs for 8 unseen codes, no dev/IID/OOD access. **108 final models**. Same search bound ±4, ES mutation sigma and elite settings, optimizer lr0.01. All 108 files must be locked and SHA-verified before new IID/OOD/old-dev evaluation. Report world means and algorithmic win counts without selecting worlds. Cost: 960×8×32 support-example forwards per parent per optimizer; Adam also incurs backwards, so not matched FLOPs.
+
+The primary descriptive question is whether the tent ES vs single-start Adam improvement and the Shift/FiLM passing-quality pattern reproduce across 3 new worlds; the sine nonpass OOD result is a secondary negative control. Avoid post-hoc changes to threshold: joint NRMSE≤0.20 on old-dev, new-IID and new-OOD. Raw source/weight-file descriptions count header+FP32 weights+SHA-256 (A11 serializer); Python decoder omitted.
