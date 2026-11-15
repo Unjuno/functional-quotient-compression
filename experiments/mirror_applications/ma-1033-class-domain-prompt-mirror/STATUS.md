@@ -2,9 +2,9 @@
 
 - Status: SCREENING
 - Branch: `research/ma-1033-class-domain-prompt-mirror-20261115`
-- Base commit: pending protocol freeze
-- Last verified commit: none
-- Development complete: no
+- Base commit: `45ec2fe67f2c911980a4d48ae3867ef8300f0734`
+- Last verified commit: pending audit
+- Development complete: yes
 - Fresh/audit opened: no
 - Results committed: no
 - Verification committed: no
@@ -12,7 +12,7 @@
 
 ## Next action
 
-Commit the frozen protocol and source, run development seed 103300, then freeze the selected configuration before opening audit seeds 103301–103303.
+Run the frozen three-seed audit (103301–103303); do not alter the frozen configuration.
 
 ## Blockers
 
@@ -20,4 +20,4 @@ None. Cached CLIP and CIFAR-10 assets are available in the container; execution 
 
 ## Decisions / rulings
 
-The experiment uses a shallow coupled two-token prompt screen. It does not claim to reproduce the official prompt-learning configurations.
+Amendment A1 corrected the prompt forward from one transformer layer to all frozen CLIP layers before any audit access. The bad development smoke run is documented and excluded; the full-layer rerun is frozen in `FREEZE.json`.

@@ -143,7 +143,8 @@ def encode_text(model, tok, contexts):
     h = tm.embeddings(input_ids=ids).clone()
     h[:, 1:1 + NCTX] = contexts
     mask = _create_4d_causal_attention_mask((len(CLASSES), 77), h.dtype, h.device)
-    h = tm.encoder.layers[0](h, attention_mask=None, causal_attention_mask=mask, output_attentions=False)[0]
+    for layer in tm.encoder.layers:
+        h = layer(h, attention_mask=None, causal_attention_mask=mask, output_attentions=False)[0]
     h = tm.final_layer_norm(h)
     eos = (ids == tok.eos_token_id).int().argmax(-1)
     pooled = h[torch.arange(len(CLASSES)), eos]
@@ -155,7 +156,8 @@ def encode_image(model, pixels, visual_ctx):
     h = vm.embeddings(pixel_values=pixels)
     h = torch.cat((h, visual_ctx[None].expand(len(pixels), -1, -1)), dim=1)
     h = vm.pre_layrnorm(h)
-    h = vm.encoder.layers[0](h, attention_mask=None, causal_attention_mask=None, output_attentions=False)[0]
+    for layer in vm.encoder.layers:
+        h = layer(h, attention_mask=None, causal_attention_mask=None, output_attentions=False)[0]
     pooled = vm.post_layernorm(h[:, 0])
     return F.normalize(model.visual_projection(pooled), dim=-1)
 

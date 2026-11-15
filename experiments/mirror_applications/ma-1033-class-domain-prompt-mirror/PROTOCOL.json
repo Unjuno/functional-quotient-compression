@@ -54,7 +54,8 @@
     "batch_size": 4,
     "domain_schedule": "round robin; held-out class-domain cells are excluded from every training batch",
     "torch_threads": 4,
-    "development_selection": "No hyperparameter search; fixed seed is used only to validate the runner and development metrics are excluded from the primary fresh result. Any required change is frozen before audit indices are opened."
+    "development_selection": "No hyperparameter search; fixed seed is used only to validate the runner and development metrics are excluded from the primary fresh result. Any required change is frozen before audit indices are opened.",
+    "prompt_forward": "Prompts enter the shallow context positions and then traverse all 12 frozen transformer layers in both text and vision CLIP branches."
   },
   "metrics": {
     "primary": "accuracy on withheld class-domain Cartesian cells",
@@ -105,5 +106,8 @@
     "shallow prompt insertion",
     "not official CoOp/CoCoOp/MaPLe reproduction",
     "no broad open-set or natural-domain claim"
+  ],
+  "amendments": [
+    "A1: development smoke revealed one-layer prompt-path bug; corrected both CLIP branches to full encoder depth and reran development seed 103300 before accessing any audit seed. See AMENDMENTS.md."
   ]
 }
