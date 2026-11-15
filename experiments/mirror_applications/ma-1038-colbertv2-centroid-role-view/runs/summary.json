@@ -1,0 +1,210 @@
+{
+  "angle_grid": [
+    -0.20000000298023224,
+    -0.15000000596046448,
+    -0.10000000149011612,
+    -0.05000000074505806,
+    0.0,
+    0.05000000074505806,
+    0.10000000149011612,
+    0.15000000596046448,
+    0.20000000298023224
+  ],
+  "angles": [
+    0.20000000298023224,
+    0.20000000298023224
+  ],
+  "audit_docs": 3633,
+  "audit_queries": 323,
+  "audit_role_query_counts": {
+    "long": 1,
+    "short": 322
+  },
+  "audit_tokens": 561120,
+  "compute": {
+    "audit_full_float": {
+      "document_token_vectors": 561120,
+      "maxsim_mac_proxy": 742366248960,
+      "query_document_pairs": 1173459,
+      "query_token_vectors": 10336,
+      "wall_seconds": 67.26879596710205
+    },
+    "audit_mirror_pushed_query": {
+      "document_token_vectors": 561120,
+      "maxsim_mac_proxy": 742366248960,
+      "query_document_pairs": 1173459,
+      "query_token_vectors": 10336,
+      "wall_seconds": 61.59599590301514
+    },
+    "audit_residual_native": {
+      "document_token_vectors": 561120,
+      "maxsim_mac_proxy": 742366248960,
+      "query_document_pairs": 1173459,
+      "query_token_vectors": 10336,
+      "wall_seconds": 60.10527515411377
+    }
+  },
+  "dev_docs": 5183,
+  "dev_tokens": 815632,
+  "doc_side_to_query_side_equiv_sample_max_abs_score_diff": 7.152557373046875e-07,
+  "doc_side_to_query_side_equiv_sample_n": 4096,
+  "execution_replay_seconds": 157.906,
+  "experiment": "MA-1038",
+  "initial_full_pass_seconds": 2495.5,
+  "metrics": {
+    "audit_full_float": {
+      "all": {
+        "mrr10": 0.5510860484544695,
+        "n": 323,
+        "ndcg10": 0.3323742176308875
+      },
+      "role_0": {
+        "mrr10": 0.5512447007788622,
+        "n": 322,
+        "ndcg10": 0.3326533399790128
+      },
+      "role_1": {
+        "mrr10": 0.5,
+        "n": 1,
+        "ndcg10": 0.242496821534539
+      }
+    },
+    "audit_mirror": {
+      "all": {
+        "mrr10": 0.5501498845152096,
+        "n": 323,
+        "ndcg10": 0.33305085981448224
+      },
+      "role_0": {
+        "mrr10": 0.5503056294981761,
+        "n": 322,
+        "ndcg10": 0.33333208353584853
+      },
+      "role_1": {
+        "mrr10": 0.5,
+        "n": 1,
+        "ndcg10": 0.242496821534539
+      }
+    },
+    "audit_native_query_givens": {
+      "all": {
+        "mrr10": 0.5501498845152096,
+        "n": 323,
+        "ndcg10": 0.33305085981448224
+      },
+      "role_0": {
+        "mrr10": 0.5503056294981761,
+        "n": 322,
+        "ndcg10": 0.33333208353584853
+      },
+      "role_1": {
+        "mrr10": 0.5,
+        "n": 1,
+        "ndcg10": 0.242496821534539
+      }
+    },
+    "audit_residual_native": {
+      "all": {
+        "mrr10": 0.5512322472848789,
+        "n": 323,
+        "ndcg10": 0.3322895242898155
+      },
+      "role_0": {
+        "mrr10": 0.5513913536429064,
+        "n": 322,
+        "ndcg10": 0.3325683836151425
+      },
+      "role_1": {
+        "mrr10": 0.5,
+        "n": 1,
+        "ndcg10": 0.242496821534539
+      }
+    }
+  },
+  "model_bundle_bytes": 439104784,
+  "model_checkpoint_sha256": "d07df4b2a9fe1848fbed333127a1a5b4f2d96106f420948f0db4450b018cb119",
+  "nfcorpus_zip_sha256": "efe5be03f8c5b86a5870102d0599d227c8c6e2484328e68c6522560385671b0b",
+  "notes": "query-side native Givens control uses identical angle files; score equivalence is audited on fixed samples and follows orthogonal dot-product algebra.",
+  "optimizer_updates": 0,
+  "payload_bytes": {
+    "audit_full_float": 726467488,
+    "audit_mirror": 511690756,
+    "audit_native_query_givens": 511690756,
+    "audit_residual_native": 511690535
+  },
+  "payload_files": {
+    "audit_full_float": {
+      "config.json": 743,
+      "doc_ids.json": 39740,
+      "doc_offsets.int64.npy": 29200,
+      "doc_vectors.float32.npy": 287293568,
+      "index_format.json": 196,
+      "pytorch_model.bin": 438405935,
+      "special_tokens_map.json": 112,
+      "tokenizer.json": 466081,
+      "tokenizer_config.json": 405,
+      "vocab.txt": 231508
+    },
+    "audit_mirror": {
+      "centroid_codes.uint8.npy": 561248,
+      "centroids.float32.npy": 131200,
+      "config.json": 743,
+      "doc_ids.json": 39740,
+      "doc_offsets.int64.npy": 29200,
+      "index_format.json": 272,
+      "pytorch_model.bin": 438405935,
+      "residual_scale.float32.npy": 640,
+      "residuals.int8.npy": 71823488,
+      "role_angles.float32.npy": 136,
+      "role_threshold.json": 48,
+      "special_tokens_map.json": 112,
+      "tokenizer.json": 466081,
+      "tokenizer_config.json": 405,
+      "vocab.txt": 231508
+    },
+    "audit_native_query_givens": {
+      "centroid_codes.uint8.npy": 561248,
+      "centroids.float32.npy": 131200,
+      "config.json": 743,
+      "doc_ids.json": 39740,
+      "doc_offsets.int64.npy": 29200,
+      "index_format.json": 272,
+      "pytorch_model.bin": 438405935,
+      "residual_scale.float32.npy": 640,
+      "residuals.int8.npy": 71823488,
+      "role_angles.float32.npy": 136,
+      "role_threshold.json": 48,
+      "special_tokens_map.json": 112,
+      "tokenizer.json": 466081,
+      "tokenizer_config.json": 405,
+      "vocab.txt": 231508
+    },
+    "audit_residual_native": {
+      "centroid_codes.uint8.npy": 561248,
+      "centroids.float32.npy": 131200,
+      "config.json": 743,
+      "doc_ids.json": 39740,
+      "doc_offsets.int64.npy": 29200,
+      "index_format.json": 235,
+      "pytorch_model.bin": 438405935,
+      "residual_scale.float32.npy": 640,
+      "residuals.int8.npy": 71823488,
+      "special_tokens_map.json": 112,
+      "tokenizer.json": 466081,
+      "tokenizer_config.json": 405,
+      "vocab.txt": 231508
+    }
+  },
+  "ranking_divergence_vs_no_view": {
+    "mean_top10_overlap_fraction": 0.9297213622291024,
+    "queries_with_different_top10": 294
+  },
+  "role_threshold_tokens": 22,
+  "seed": 1038,
+  "selection_evaluations": 7281,
+  "train_queries": 809,
+  "view_compute_proxy": {
+    "direct_document_side_givens_flops_per_audit_pass": 69596835840,
+    "native_query_side_givens_flops": 3969024
+  }
+}

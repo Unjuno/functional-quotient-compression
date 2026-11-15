@@ -11,7 +11,7 @@ summary = json.loads((EXP / "runs" / "summary.json").read_text())
 _, dev_queries, dev_qrels = m.load_scifact()
 audit_docs, audit_queries, audit_qrels = m.load_nfcorpus()
 dev_qids = sorted(q for q in dev_qrels if q in dev_queries and any(v > 0 for v in dev_qrels[q].values()))
-aud_dids = [str(x["_id"]) for x in audit_docs]
+aud_dids = [str(x[0]) for x in audit_docs]
 aud_qids = sorted(q for q in audit_qrels if q in audit_queries and any(v > 0 for v in audit_qrels[q].values()))
 
 def load_cache(prefix):
