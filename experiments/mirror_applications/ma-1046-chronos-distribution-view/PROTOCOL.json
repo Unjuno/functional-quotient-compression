@@ -54,7 +54,7 @@
           "frequency_minutes": 1440,
           "horizon": 30,
           "seasonal_period": 7,
-          "series_count": 12,
+          "series_count": 3018,
           "series_indices": [
             182,
             304,
@@ -168,6 +168,18 @@
         "audit dataset IDs/series/windows/seeds",
         "all success/failure thresholds"
       ]
+    },
+    {
+      "id": "AM-03",
+      "reason": "Before any Chronos audit forecast generation, the pinned Monash Weather archive was found to contain 3,018 TSF records; the Chronos PA326 paper table lists 3,010. The first 3,010 positions and all predeclared selected indices are valid in the downloaded archive.",
+      "change": "Pin the exact archive row count to 3,018 and retain the 12 fixed Weather row indices [182,304,363,587,731,770,1482,1490,1888,2021,2452,2658]. No forecasts were generated before this metadata check.",
+      "unchanged": [
+        "archive bytes and SHA-256",
+        "selected audit row indices",
+        "all forecast windows, horizons and seeds",
+        "model checkpoint and selected distribution codes",
+        "quality/storage/runtime thresholds"
+      ]
     }
   ]
-}\n
+}
