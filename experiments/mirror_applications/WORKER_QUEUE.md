@@ -24,10 +24,13 @@ MA-990 official MERL RANF code was located, but the required SONICOM HRTF subjec
 
 # Worker queue
 
-## Current handoff — 2026-11-15, MA-1033
+## Current handoff — 2026-11-15, MA-1035
 
-MA-1033 is a scoped frozen CLIP ViT-B/32 class×domain composition FAIL: Mirror averages 86.25% held-out-pair accuracy vs 86.67% additive and shared over three fresh image seeds; it wins one seed and loses twice to additive. Learned payload is 1,580,814 B vs 1,744,542 B independent cells (9.39%, below the 25% gate); full-bundle saving is 0.0268%. Exact payload/metric replay and three tests pass. This is a shallow synthetic-domain CPU screen, not an official CoOp/CoCoOp/MaPLe result. Continue to P0 MA-1035 (MA-1034 is P1). See `ma-1033-class-domain-prompt-mirror/RESULTS.md`.
+MA-1035 is a scoped QINCo v1-structure synthetic ANN FAIL: shared Givens-stage View uses 22,634 B vs 60,386 B independent QINCo (62.5% fewer model+index bytes), but Recall@10 is 42.34% vs 47.81% (-5.47 pp) and load+scan QPS is 25.2% lower. Additive control is within 0.13 pp of Mirror and faster; static RQ dominates the synthetic task. Exact model/index/metric replay and four tests pass. The upstream QINCo v1 source is pinned; this is not a SIFT/BigANN or official checkpoint result. Continue to P0 MA-1036; MA-1034 is P1. See `ma-1035-qinco-mirror-view/RESULTS.md`.
 
+## Previous handoff — 2026-11-15, MA-1033
+
+MA-1033 is a scoped frozen CLIP ViT-B/32 class×domain composition FAIL: Mirror averages 86.25% held-out-pair accuracy vs 86.67% additive and shared over three fresh image seeds; it wins one seed and loses twice to additive. Learned payload is 1,580,814 B vs 1,744,542 B independent cells (9.39%, below the 25% gate); full-bundle saving is 0.0268%. Exact payload/metric replay and three tests pass. Shallow synthetic-domain CPU screen, not official CoOp/CoCoOp/MaPLe. See `ma-1033-class-domain-prompt-mirror/RESULTS.md`.
 ## Previous handoff — 2026-11-15, MA-1031
 
 MA-1031 is a scoped synthetic SAM2.1 Hiera-tiny interactive prompt FAIL: Mirror polar history is 503 B vs 544 B direct (7.5% savings, below the 25% gate), with J&F .77332 vs .83345; 8px-grid coding is 318 B and J&F .83840. Mirror retains all 40 clicks/video and saves 43 B in the full session. Four tests and input/history/prediction/metric replay pass. See `ma-1031-sam2-interactive-prompt-view/RESULTS.md`.

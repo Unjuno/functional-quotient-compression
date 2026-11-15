@@ -5,9 +5,9 @@
 - Base commit: `e4ebfb8f7a1e45e3407fb1583c606ccd08cac81e`
 - Development complete: yes
 - Fresh/audit opened: yes, worlds 103501–103503
-- Results committed: no
-- Verification committed: no
-- Registry row updated: no
+- Results committed: yes (`a609236611f7dc12ca27a1a651a8f74cf413d891`)
+- Verification committed: yes
+- Registry row updated: yes
 
 ## Next action
 
