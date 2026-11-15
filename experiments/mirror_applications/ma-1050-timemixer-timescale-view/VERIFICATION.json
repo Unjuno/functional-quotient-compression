@@ -1,0 +1,27 @@
+{
+  "experiment_id": "MA-1050",
+  "status": "FAIL",
+  "commit": null,
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-1050-timemixer-timescale-view/tests/test_replay.py",
+    "passed": 2,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "payload_manifest": "runs/payload_manifest.json"
+  },
+  "metric_replay": {
+    "checked": false,
+    "max_difference": null
+  },
+  "fresh_split_integrity_checked": true,
+  "protocol_frozen_before_audit": true,
+  "notes": [
+    "One seed; 20 fixed epochs/40 updates each",
+    "ETT time audit is not a new data source; ETT had prior program use",
+    "Small CPU-scale multiscale adapter, not full official TimeMixer",
+    "audit metrics were computed after fixed configuration and training budget were locked"
+  ]
+}

@@ -1,0 +1,1 @@
+MA-1050 scoped screening FAIL. Mirror misses the frozen 2% audit MSE improvement gate: 0.044012 vs hard-shared 0.043438, and is 252 B larger. The ordinary additive control scores 0.043244. 2 replay/payload tests pass. Full official TimeMixer reproduction and multi-seed confirmation remain unestablished. See RESULTS.md.

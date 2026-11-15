@@ -40,6 +40,16 @@ MA-990 official MERL RANF code was located, but the required SONICOM HRTF subjec
 
 # Worker queue
 
+## Previous handoff — 2026-11-15, MA-1049
+
+MA-1049 NOT ESTABLISHED before fitting: pinned PEMS08 source has unnamed `(17856,170,3)` series and an edge-cost CSV, with no channel semantics for speed. No model was fit or audit opened. See `ma-1049-patchtst-variate-view/EXECUTION_BLOCKER.md`.
+
+
+## Current handoff — 2026-11-15, MA-1050
+
+MA-1050 scoped FAIL: one-seed fixed 20-epoch/40-update CPU-scale multiscale mixer on ETTh1/ETTm1 yields audit MSE .044012 Mirror vs .043438 hard-sharing and .043244 additive; Mirror payload is 206,124 B vs 205,872 B hard share. Two replay/byte checks pass. The model is a small adapter, not a full official TimeMixer reproduction, and ETT is a temporal holdout rather than a new dataset for this program. See `ma-1050-timemixer-timescale-view/RESULTS.md`. Continue to P0 MA-1051 iTransformer channel-conditioned View (PA331).
+
+
 ## Current handoff — 2026-11-15, MA-1049
 
 MA-1049 is NOT ESTABLISHED before fitting. The frozen source `jimmygao3218/PEMS08` revision `7d5f30e2f1b538973ff805fc84ac42a0bd7422aa` contains an unnamed `(17856,170,3)` time-series array and a CSV that is only a `from,to,cost` edge table. Because the protocol required documented speed and no column semantics were supplied, no feature was selected post-inspection and no train/dev/audit metrics were run. Exact asset hashes and rationale are recorded in `ma-1049-patchtst-variate-view/EXECUTION_BLOCKER.md`. Continue to P0 MA-1050 TimeMixer seasonal-timescale Mirror (PA330).

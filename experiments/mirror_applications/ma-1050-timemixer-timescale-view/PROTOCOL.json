@@ -1,0 +1,69 @@
+{
+  "experiment_id": "MA-1050",
+  "title": "TimeMixer seasonal-timescale Mirror address bank",
+  "status": "FROZEN_SCREENING_PROTOCOL",
+  "evidence_lane": "MECHANISM",
+  "base_commit": "595d21803",
+  "hypothesis": "On two pinned time-series domains with different dominant periods, a low-description timescale\u00d7regime coordinate bank over one shared multiscale mixer reduces macro audit MASE by at least 2% relative to hard-shared TimeMixer and beats matched additive scale/regime coefficients at equal byte cost.",
+  "physical_object": "One shared multiscale mixer forecast backbone",
+  "mirror_coordinate": "factorized learned scale and regime coordinates for shared mixing coefficients",
+  "logical_multiplicity": "Regime-conditioned predictors across multiple temporal scales",
+  "prior_art_refs": [
+    "PA330"
+  ],
+  "controls": [
+    "seasonal naive",
+    "DLinear",
+    "hard-shared multiscale mixer",
+    "matched additive scale-plus-regime coefficients",
+    "independent per-domain mixer upper reference"
+  ],
+  "dataset_selection": {
+    "development_source": "ETTh1 and ETTm1 from zhouhaoyi/ETDataset main commit resolved by GitHub API at protocol-freeze time; listed variables HUFL,HULL,MUFL,MULL,LUFL,LULL,OT",
+    "fresh_source": "PEMS-BAY excluded to preserve freshness relative to MA-1048; use final 20% temporal windows of each pinned ETT dataset as fresh audit, after development selection on first 60%/middle 20%",
+    "split": "chronological official ETT train/validation/test boundaries are avoided in favor of contiguous 60/20/20; context 96 and horizon 24",
+    "windows": "deterministically select max 48 training origins per series, 12 development origins, and 12 audit origins from the corresponding split; M and S variants share same procedure",
+    "note": "MA-1046/1047 used ETT, so audit windows are not program-level fresh. This is clearly scoped single-run fresh time split only; no claim of new data source."
+  },
+  "model": {
+    "implementation": "Official TimeMixer source models/TimeMixer.py from thuml/Time-Series-Library commit 4e938a1767106324dd753b2a44832bf870a0252e; port only needed multiscale mixing components into adapter to avoid unrelated framework dependency",
+    "seed": 105001,
+    "training": "Small CPU model, same update budget and data order for all variants; 20 epochs maximum, AdamW, batch 64; lock after development selection and before final-20% audit"
+  },
+  "development": {
+    "worlds_or_seeds": [
+      105001
+    ],
+    "selection_metric": "macro MASE across development series and horizons"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      105001
+    ],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "shared model state_dict",
+      "view or control coefficients",
+      "domain and scale metadata",
+      "serialization overhead"
+    ]
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true
+  },
+  "success_gate": "At least 2% lower macro audit MASE than hard sharing and the byte-matched additive control, with complete payload smaller than independent per-domain models.",
+  "failure_gate": "No audit quality gain over hard sharing, or additive control matches/beats Mirror at comparable bytes.",
+  "boundaries": [
+    "fixed-budget screen is not capacity claim",
+    "ETT data source was used in prior MA-1046/1047; audit uses unseen temporal windows but not a new dataset",
+    "CPU-scale adapter is not an official benchmark reproduction",
+    "no GPU/runtime generalization from CPU timings",
+    "no post-audit tuning"
+  ]
+}
