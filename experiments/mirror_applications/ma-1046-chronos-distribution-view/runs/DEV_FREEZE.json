@@ -1,0 +1,42 @@
+{
+  "experiment_id": "MA-1046",
+  "amendments": [
+    "AM-01",
+    "AM-02"
+  ],
+  "selected_codes": {
+    "theta_15min": 0.0,
+    "theta_1h": -0.05,
+    "logtemp": {
+      "15": 0.6,
+      "60": 0.15
+    },
+    "affine": {
+      "15": [
+        -0.5042806267738342,
+        1.0218682289123535
+      ],
+      "60": [
+        -0.1686801165342331,
+        0.9795697331428528
+      ]
+    }
+  },
+  "selection": "Final calibration states fit on the first 80% of ETTh1/ETTm1 development rows after the predefined 60/20 validation split. No audit forecasts or target metrics have been accessed.",
+  "dev_metrics_sha256": "e7dab4169a7c9a3223c47469460c61e47829f9f1833e165cfd67ea4ef9cefa5f",
+  "dev_candidate_sha256": "8d0a4b47756020cb8a6a7a5b95adbf9e3cc2f44e6939fd388cb02472f98e0f66",
+  "dev_source_sha256": "057b07a581bf7460bf324a99ba542a5ef1b5202bba7ee2f7017597fde8eb53df",
+  "audit_datasets": [
+    "Weather daily",
+    "Australian Electricity Demand half-hourly"
+  ],
+  "audit_sample_seeds": [
+    104601,
+    104602,
+    104603
+  ],
+  "audit_windows_per_series": 3,
+  "samples_per_forecast": 32,
+  "audit_accessed_before_freeze": false,
+  "observed_dev_validation": "Mirror underperformed zero-shot and native temperature on both ETT datasets for normalized CRPS; this scoped negative development signal does not alter the registered fresh audit or thresholds."
+}
