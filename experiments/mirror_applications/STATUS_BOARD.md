@@ -6,11 +6,11 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- Claim ledger entries: **462**
-- P0: **630** (379 FAIL; 54 PROMISING; 186 UNTESTED; 10 NOT ESTABLISHED; 1 SCREENING)
+- Claim ledger entries: **463**
+- P0: **630** (380 FAIL; 54 PROMISING; 185 UNTESTED; 10 NOT ESTABLISHED; 1 SCREENING)
 - P1: **422** (17 completed; 405 UNTESTED)
 - P2: **103** (103 UNTESTED)
-- Current MA statuses: **387 FAIL, 10 NOT ESTABLISHED, 63 PROMISING, 1 SCREENING, 694 UNTESTED**
+- Current MA statuses: **388 FAIL, 10 NOT ESTABLISHED, 63 PROMISING, 1 SCREENING, 693 UNTESTED**
 - 47 baseline experiment directories remain present; verified external outcomes are linked to their dedicated branches in the registry and claim ledger.
 - New research: MA-876..935 (60 candidates), PA236..PA265 (30 primary sources). See the current Next candidate section for the live queue.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. see the current Next candidate section.
@@ -24,7 +24,7 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-MA-1036 is complete as a scoped synthetic RaBitQ FAIL: per-domain Givens views save 42.6% actual bytes vs independent rotations (264,683 vs 461,251 B) and stay within 0.13 pp Recall@10, but the shared single-index control already matches independent quality. Mirror fails the +2 pp utility gate in every domain; runtime is NOT ESTABLISHED due repeated short-batch QPS reversals. Exact serialized replay passes; postquantization gauge changes zero neighbor IDs. Continue to P0 MA-1037 Matryoshka dimension-budget Mirror readout; MA-1034 remains P1. No natural ANN/BigANN claim. See `experiments/mirror_applications/ma-1036-rabitq-domain-view/RESULTS.md`.
+MA-1037 is complete as a scoped Nomic Embed v1.5/SciFact FAIL: the best held-out nDCG@10 gain is +0.315 pp at d64, below the +0.5 pp gate; the normalized linear boundary control is bit-exact to Mirror. Complete five-budget bytes are 174,126,539 vs 174,126,309 B native. QPS ordering shifted between repeated short batches, so runtime is NOT ESTABLISHED. Exact serialized payload/metric replay and five tests pass; one INT8 ONNX model and one benchmark only. Continue to P0 MA-1038 ColBERTv2 shared centroid query/document roles. See `experiments/mirror_applications/ma-1037-matryoshka-dimension-view/RESULTS.md`.
 
 Previous: MA-1033 is complete as a scoped frozen CLIP ViT-B/32 class×domain composition FAIL: Mirror averages 86.25% held-out-cell accuracy vs 86.67% additive and shared across three fresh image seeds; it wins one seed and loses two against additive. Learned payload 1,580,814 B vs 1,744,542 B independent cells (9.39%, below the 25% gate); complete-bundle saving only 0.0268%. Exact serialization/data/metric replay and three tests pass. No official prompt-learning reproduction. See `experiments/mirror_applications/ma-1033-class-domain-prompt-mirror/RESULTS.md`.
 

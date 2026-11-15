@@ -24,9 +24,9 @@ MA-990 official MERL RANF code was located, but the required SONICOM HRTF subjec
 
 # Worker queue
 
-## Current handoff — 2026-11-15, MA-1036
+## Current handoff — 2026-11-15, MA-1037
 
-MA-1036 is a scoped synthetic FAISS RaBitQ FAIL: domain Givens views save 42.6% actual bytes vs independent rotation banks (264,683 vs 461,251 B), and mean Recall@10 is within 0.13 pp. But shared single-index RaBitQ already matches the independent bank; Mirror fails the +2 pp utility gate in every domain. Postquantization gauge changes zero neighbor IDs. QPS is NOT ESTABLISHED after repeated 256-query batches reversed ordering. Four tests and exact serialized index/byte/Recall/distance-error replay pass. Synthetic D=128 CPU only; no SIFT/BigANN claim. Advance to P0 MA-1037 Matryoshka dimension-budget Mirror readout; MA-1034 remains P1. See `ma-1036-rabitq-domain-view/RESULTS.md` and `POST_AUDIT_AMENDMENT.md`.
+MA-1037 is a scoped Nomic Embed v1.5 official INT8 ONNX / BEIR SciFact FAIL: on 300 test query IDs, best Mirror nDCG@10 gain is +0.315 pp at d64, below the +0.5 pp gate; the matched normalized two-coefficient boundary readout is bit-exact to Givens at all five dimensions. Complete five-budget bytes are 174,126,539 B Mirror vs 174,126,309 B native. Encoder took 1,354.9 s for 5,183 corpus documents on CPU. QPS is NOT ESTABLISHED after repeated short-batch ordering changed. Exact serialized payload and all 45 quality metrics replay; five tests pass. This is one quantized model and one natural benchmark, not an ANN or broad Matryoshka result. Continue to P0 MA-1038 ColBERTv2 shared centroid query/document roles. See `ma-1037-matryoshka-dimension-view/RESULTS.md` and its amendment log.
 
 ## Previous handoff — 2026-11-15, MA-1033
 
