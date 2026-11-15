@@ -1,0 +1,14 @@
+{
+  "experiment_id": "MA-1037",
+  "amendment": "POST-AUDIT-QUERY-PATH-01",
+  "audit_qrels_already_opened": true,
+  "quality_and_storage_values_inspected": true,
+  "same_locked_data_angles_methods_and_gates": true,
+  "reason": "Initial timing started after query prefix/view materialization, omitting inference-time readout; complete query-to-top10 latency must include it.",
+  "correction": "Measure query prefix/view construction, exact score matrix, top-10 selection, and ordering together; isolate corpus candidate build wall separately. Add analytic query readout FLOP proxy.",
+  "quality_settings_changed": false,
+  "prior_opened_results_preserved": "runs/AUDIT_RESULTS_PRE_QUERY_TRANSFORM_TIMING.json",
+  "source_sha256": "73b04a245abf32b29bd3278bd79c6aebdbfba73290f394554e5785b8118ce7f0",
+  "protocol_sha256": "4cca784a05de1d2f13850e3e6a8fc1976c5c30bb03119f11b48614205a9d4e9a",
+  "test_qrels_retuned": false
+}

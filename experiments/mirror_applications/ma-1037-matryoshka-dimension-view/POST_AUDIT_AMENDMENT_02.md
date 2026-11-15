@@ -1,0 +1,3 @@
+# MA-1037 post-audit query-path timing correction
+
+The first successful audit measured exact scoring and top-10 selection on an already materialized query prefix/view. That omitted inference-time prefix normalization or Givens/linear boundary readout. Before finalizing the result, timing was corrected to include query readout, exact score matrix, top-10 selection, and ordering; corpus candidate construction is timed separately. Analytic per-query readout FLOPs are also reported. The opened quality/byte result is preserved in `runs/AUDIT_RESULTS_PRE_QUERY_TRANSFORM_TIMING.json`; the locked test split, selected angles, methods, and gates did not change. This is a post-audit instrumentation correction, not a new quality evaluation or tuning step.

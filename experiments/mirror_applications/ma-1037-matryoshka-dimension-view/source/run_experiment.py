@@ -142,10 +142,10 @@ def save_npy(path,x):
  np.save(path,np.asarray(x,dtype=np.float32),allow_pickle=False)
  return path.stat().st_size,sha256(path)
 
-def retrieval_qps(Q,X,repeats=5):
- _=exact_topk(Q,X,10); times=[]
+def retrieval_qps(query_source,X,transform,repeats=5):
+ _=exact_topk(transform(query_source),X,10); times=[]
  for _ in range(repeats):
-  t=time.perf_counter(); _=exact_topk(Q,X,10); times.append(time.perf_counter()-t)
+  t=time.perf_counter(); _=exact_topk(transform(query_source),X,10); times.append(time.perf_counter()-t)
  med=float(np.median(times)); return (len(Q)/med if med else float('inf')),med
 
 def audit(model_dir):
@@ -160,12 +160,12 @@ def audit(model_dir):
  model_bytes,model_files=model_bundle_bytes(model_dir)
  rows=[]; all_metrics={}
  for d in DIMS:
-  build_start=time.perf_counter(); Qn=prefix(Qfull,d); Xn=prefix(corpus,d); native_build=time.perf_counter()-build_start
+  build_start=time.perf_counter(); Xn=prefix(corpus,d); native_build=time.perf_counter()-build_start; Qn=prefix(Qfull,d)
   angles_d=angles[d]
-  build_start=time.perf_counter(); Qm=givens_prefix(Qfull,d,angles_d); Xm=givens_prefix(corpus,d,angles_d); mirror_build=time.perf_counter()-build_start
+  build_start=time.perf_counter(); Xm=givens_prefix(corpus,d,angles_d); mirror_build=time.perf_counter()-build_start; Qm=givens_prefix(Qfull,d,angles_d)
   # The simple normalized 2-coordinate boundary readout has w=(cos(theta), -sin(theta)); it aliases Givens exactly.
   wm=[math.cos(angles_d),-math.sin(angles_d)]
-  build_start=time.perf_counter(); Qc=linear_boundary_prefix(Qfull,d,wm); Xc=linear_boundary_prefix(corpus,d,wm); control_build=time.perf_counter()-build_start
+  build_start=time.perf_counter(); Xc=linear_boundary_prefix(corpus,d,wm); control_build=time.perf_counter()-build_start; Qc=linear_boundary_prefix(Qfull,d,wm)
   assert np.array_equal(Qm,Qc) and np.array_equal(Xm,Xc)
   for method,Q,X in [('native_prefix',Qn,Xn),('mirror_givens',Qm,Xm),('linear_boundary_control',Qc,Xc)]:
    metrics=ranking_metrics(Q,X,test_ids,docids,test)
@@ -189,9 +189,11 @@ def audit(model_dir):
    manifest={'method':method,'dimension':d,'rows':len(docids),'source_embedding':'payload/shared/full_source_vectors.npy','candidate':('payload/shared/full_source_vectors.npy' if d==D else 'candidate_d%d.npy'%d),'coordinate':(angles_d if method=='mirror_givens' else wm) if d<D and method!='native_prefix' else None,'normalized_after_prefix':True,'model_revision':MODEL_REV}
    mp=ROOT/'payload'/method/f'manifest_d{d}.json'; mp.parent.mkdir(parents=True,exist_ok=True); mp.write_text(json.dumps(manifest,sort_keys=True,separators=(',',':'))+'\n'); mb=mp.stat().st_size
    total=model_bytes+source_bytes+id_bytes+candidate_bytes+coordinate_bytes+mb
-   qps,wall=retrieval_qps(Q,X)
-   flops=2*len(Q)*len(docids)*d+(6*len(Q) if method=='mirror_givens' and d<D else 0)
-   rows.append({'split':'test','method':method,'dimension':d,'serialized_bytes':total,'model_payload_bytes':model_bytes,'source_embedding_bytes':source_bytes,'candidate_index_bytes':candidate_bytes,'coordinate_bytes':coordinate_bytes,'metadata_bytes':id_bytes+mb,'nDCG@10':metrics['nDCG@10'],'Recall@10':metrics['Recall@10'],'MRR@10':metrics['MRR@10'],'retrieval_qps':qps,'retrieval_wall_s':wall,'candidate_build_wall_s':{'native_prefix':native_build,'mirror_givens':mirror_build,'linear_boundary_control':control_build}[method],'active_compute_proxy_flops':int(flops),'candidate_sha256':candidate_hash})
+   transform={'native_prefix':lambda z,d=d:prefix(z,d),'mirror_givens':lambda z,d=d,t=angles_d:givens_prefix(z,d,t),'linear_boundary_control':lambda z,d=d,w=wm:linear_boundary_prefix(z,d,w)}[method]
+   qps,wall=retrieval_qps(Qfull,X,transform)
+   per_query_readout_flops=(3*d+1)+(6 if method=='mirror_givens' and d<D else (3 if method=='linear_boundary_control' and d<D else 0))
+   flops=2*len(Qfull)*len(docids)*d+len(Qfull)*per_query_readout_flops
+   rows.append({'split':'test','method':method,'dimension':d,'serialized_bytes':total,'model_payload_bytes':model_bytes,'source_embedding_bytes':source_bytes,'candidate_index_bytes':candidate_bytes,'coordinate_bytes':coordinate_bytes,'metadata_bytes':id_bytes+mb,'nDCG@10':metrics['nDCG@10'],'Recall@10':metrics['Recall@10'],'MRR@10':metrics['MRR@10'],'retrieval_qps':qps,'retrieval_wall_s':wall,'candidate_build_wall_s':{'native_prefix':native_build,'mirror_givens':mirror_build,'linear_boundary_control':control_build}[method],'active_compute_proxy_flops':int(flops),'readout_flops_per_query':int(per_query_readout_flops),'candidate_sha256':candidate_hash})
    all_metrics[f'{method}/d{d}']=metrics
  (ROOT/'runs'/'AUDIT_RESULTS.json').write_text(json.dumps({'test_query_count':len(test_ids),'test_qrel_rows':sum(len(v) for v in test.values()),'rows':rows,'metrics':all_metrics,'model_bundle_bytes':model_bytes,'model_bundle_files':model_files,'full_source_vectors_bytes':source_bytes,'full_source_sha256':source_hash},indent=2)+'\n')
  # Per-dimension materialized-system Pareto accounting charges source/model once plus each candidate and all view codes.

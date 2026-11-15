@@ -67,9 +67,10 @@
     "storage": "actual .npy serialized source vector table, per-budget candidate vector index, model/tokenizer/code, per-budget coordinate and manifest bytes",
     "compute": [
       "encoder wall time and docs/s",
-      "exact retrieval wall time and queries/s",
+      "exact retrieval wall time including native prefix normalization or Mirror query Givens readout, score matrix, top-10 selection, and ordering",
       "2*Nq*Ndoc*d retrieval FLOP proxy",
-      "per-query Givens FLOP proxy"
+      "per-query Givens FLOP proxy",
+      "readout FLOP proxy: 3*d+1 normalization operations plus 6 Givens operations or 3 boundary-linear operations per query"
     ]
   },
   "success_gate": "At least two of the four sub-full dimensions improve test nDCG@10 by >=0.5 percentage points over native prefix; no sub-full dimension regresses by >0.5 points; the complete materialized Mirror bank is <=1.01x matched native candidate bytes; and median retrieval throughput is >=90% of native. A Mirror-specific PASS additionally requires >=0.2 point nDCG@10 improvement over the matched normalized linear boundary control.",
