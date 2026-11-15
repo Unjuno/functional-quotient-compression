@@ -1,0 +1,109 @@
+{
+  "experiment_id": "MA-1033",
+  "title": "Class by domain compositional prompt views",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM/VISION_LANGUAGE/ACTUAL_BYTES",
+  "base_commit": "45ec2fe67f2c911980a4d48ae3867ef8300f0734",
+  "hypothesis": "A factorized class-by-domain Givens coordinate over one shared coupled CLIP prompt basis will recover useful held-out class-domain prompt functions at lower payload cost than independent cell prompts, and will beat a parameter-matched additive coordinate on held-out-cell accuracy.",
+  "physical_object": "One frozen CLIP ViT-B/32 plus one shared two-token text context and its projected visual prompt basis.",
+  "mirror_coordinate": "Per-class scalar a_c and per-domain scalar b_d, combined as angle m_cd=a_c*b_d; the angle rotates the two text context tokens. The vision prompt is the shared projected basis, as in a shallow MaPLe-style coupling.",
+  "logical_multiplicity": "One prompt classifier view per class-domain pair, including withheld Cartesian pairs synthesized from learned class and domain factors.",
+  "prior_art_refs": [
+    "PA312",
+    "PA313",
+    "PA314"
+  ],
+  "scope_deviation": "A CPU ViT-B/32 two-token shallow coupled-prompt screen, not a reproduction of CoOp, CoCoOp or official depth-9 MaPLe. Prior MA-1024..1026 cover those native prompt families; this experiment isolates class-by-domain coordinate composition and a matched additive control.",
+  "controls": [
+    "zero-shot CLIP",
+    "one shared learned coupled prompt (CoOp/MaPLe-style baseline)",
+    "factorized class-by-domain product Givens coordinate",
+    "same-size additive class-plus-domain Givens coordinate",
+    "independent cell prompts on observed training cells, with no learned value for withheld cells (capacity reference only)"
+  ],
+  "data": {
+    "dataset": "uoft-cs/cifar10",
+    "model": "openai/clip-vit-base-patch32",
+    "domains": [
+      "original",
+      "grayscale",
+      "brightness_0.65",
+      "gaussian_blur_radius_1.0"
+    ],
+    "classes": "all ten CIFAR-10 classes; every class and domain is represented in training, while one deterministic class-domain cell per class is held out",
+    "holdout_rule": "withhold pair (class_id, domain_id) where domain_id=class_id mod 4; evaluate only after prompt states are frozen",
+    "prior_experiment_exclusion": "train and official-test image indices used by MA-1024, MA-1025 and MA-1026 are excluded",
+    "development_seed": 103300,
+    "audit_seeds": [
+      103301,
+      103302,
+      103303
+    ],
+    "images_per_class": {
+      "train": 8,
+      "audit_per_seed": 8
+    }
+  },
+  "model_and_training": {
+    "frozen_backbone": true,
+    "context_tokens": 2,
+    "prompt_depth": 1,
+    "optimizer": "Adam",
+    "learning_rate": 0.001,
+    "updates_per_method": 20,
+    "batch_size": 4,
+    "domain_schedule": "round robin; held-out class-domain cells are excluded from every training batch",
+    "torch_threads": 4,
+    "development_selection": "No hyperparameter search; fixed seed is used only to validate the runner and development metrics are excluded from the primary fresh result. Any required change is frozen before audit indices are opened."
+  },
+  "metrics": {
+    "primary": "accuracy on withheld class-domain Cartesian cells",
+    "secondary": [
+      "accuracy on observed class-domain cells",
+      "all-cell accuracy",
+      "per-domain accuracy",
+      "seen-to-heldout harmonic mean",
+      "actual serialized learned payload bytes",
+      "full model plus payload bytes",
+      "training updates/examples/wall",
+      "inference wall and images/sec",
+      "prompt-view operation proxy"
+    ],
+    "storage_authority": "actual self-describing serialized inference payload bytes; full bundle also charges cached backbone, tokenizer, processor and metadata"
+  },
+  "gates": {
+    "success": "Mirror is within 1 percentage point of the independent cell reference on observed cells, beats same-size additive control by at least 1 point on held-out cells, and reduces full payload bytes versus independent cell prompts by at least 25% without a material throughput loss.",
+    "failure": "Mirror fails any quality gate, the additive control matches or beats held-out accuracy, native shared prompt is equal/better at lower storage, or complete-bundle savings are negligible.",
+    "not_established": "Backbone/data assets cannot be verified, serialized-state replay fails, or official fresh split remains unopened."
+  },
+  "storage": {
+    "paid_objects": [
+      "all learned prompt tensors",
+      "all class/domain coordinates",
+      "projection and normalization tensors",
+      "self-describing class/domain and token-template manifest",
+      "frozen CLIP model/config/tokenizer/processor"
+    ],
+    "deterministically_reconstructible_free": [
+      "prompt tensors decoded deterministically from their stored payload"
+    ]
+  },
+  "compute": {
+    "report_examples_and_updates": true,
+    "report_active_compute_proxy": true,
+    "report_train_and_inference_wall": true,
+    "charge_repeated_text-prompt encoding for class-conditioned inference": true
+  },
+  "fresh": {
+    "locked_before_access": true,
+    "audit_images_opened_after_prompt_freeze": true
+  },
+  "boundaries": [
+    "small CIFAR-10 screen",
+    "synthetic deterministic image domains",
+    "frozen CLIP ViT-B/32",
+    "shallow prompt insertion",
+    "not official CoOp/CoCoOp/MaPLe reproduction",
+    "no broad open-set or natural-domain claim"
+  ]
+}
