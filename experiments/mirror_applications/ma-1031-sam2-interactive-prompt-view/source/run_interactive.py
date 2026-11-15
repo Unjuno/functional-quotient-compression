@@ -87,7 +87,7 @@ def run_one(world,method,radii=None):
             for i,oid in enumerate(IDS):_,_,corrected=predictor.add_new_points_or_box(state,frame,oid,points=quant[i],labels=[1,0],clear_old_points=True)
             click_count+=2*len(IDS);codes.append(quant)
         elif method=='mirror_polar':
-            center=(raw[:,:,0,:]+raw[:,:,1,:])/2;delta=raw[:,:,0,:]-raw[:,:,1,:];theta=np.arctan2(delta[...,1],delta[...,0]).astype('<f2').astype(np.float32);center=center.astype('<f2').astype(np.float32)
+            center=(raw[:,0,:]+raw[:,1,:])/2;delta=raw[:,0,:]-raw[:,1,:];theta=np.arctan2(delta[...,1],delta[...,0]).astype('<f2').astype(np.float32);center=center.astype('<f2').astype(np.float32)
             encoded_center=center.astype('<f2');encoded_theta=theta.astype('<f2');decoded=decode_polar(encoded_center.astype(np.float32),encoded_theta.astype(np.float32),radii)
             for i,oid in enumerate(IDS):_,_,corrected=predictor.add_new_points_or_box(state,frame,oid,points=decoded[i],labels=[1,0],clear_old_points=True)
             click_count+=2*len(IDS);mirror_codes.append({'center':encoded_center,'theta':encoded_theta})
