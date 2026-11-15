@@ -24,7 +24,11 @@ MA-990 official MERL RANF code was located, but the required SONICOM HRTF subjec
 
 # Worker queue
 
-## Current handoff — 2026-11-14, MA-1011
+## Current handoff — 2026-11-15, MA-1012
+
+MA-1012 is a bounded synthetic three-site MRI calibration FAIL: Mirror improves over FiLM and the underexposed private control, but frozen sharing has better NMSE (.6313 vs .7008) and Mirror saves only 1.16% actual payload vs FiLM. Exact replay and three tests passed; fresh sealed, no acquired scanner claim. See `ma-1012-scanner-site-mirror/RESULTS.md`. Continue to P0 MA-1013.
+
+## Previous handoff — 2026-11-14, MA-1011
 
 MA-1011 is a synthetic complementary-mask MRI INR FAIL: Givens Mirror NMSE 2.646 vs 1.144 native continuous-TI conditioning; complete payload is 26,117 B, only 0.73% below FiLM. Exact replay passed; fresh sealed, no acquired MRI claim. See `ma-1011-multicontrast-inr-mirror/RESULTS.md`. Continue to P0 MA-1012 (scanner-site calibrated Mirror code).
 

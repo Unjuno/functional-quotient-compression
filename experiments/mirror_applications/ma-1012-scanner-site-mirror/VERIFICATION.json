@@ -1,0 +1,30 @@
+{
+  "experiment_id": "MA-1012",
+  "commit": "pending-evidence-commit",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-1012-scanner-site-mirror/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "payload_bytes": {
+      "frozen": 5205,
+      "film": 5521,
+      "mirror": 5457,
+      "independent": 12333
+    }
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Deterministic development replay matches all metrics and actual serialized payload sizes exactly; source checkpoint hash matches.",
+    "Fresh seeds 1012301/1012307/1012313 remain unopened after FAIL.",
+    "Three analytic synthetic scanner shifts only; no acquired MRI, VarNet checkpoint, or clinical claim.",
+    "Private full-tune control had one quarter the support-example exposure per optimizer update of code conditions; recorded as a limitation."
+  ]
+}

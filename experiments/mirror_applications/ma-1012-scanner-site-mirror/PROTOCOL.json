@@ -1,0 +1,162 @@
+{
+  "experiment_id": "MA-1012",
+  "title": "Frozen MRI prior with site-calibrated Mirror codes",
+  "status": "FAIL",
+  "evidence_lane": "MECHANISM/STORAGE/COMPUTE",
+  "base_commit": "1ba7724d4",
+  "prior_art": {
+    "refs": [
+      "PA302",
+      "PA305"
+    ],
+    "PA302": "VarNet is a multi-coil unrolled network with sensitivity maps and explicit k-space consistency.",
+    "PA305": "D2SA uses patient-level distribution adaptation and slice-level test-time state.",
+    "assets": "No acquired MRI, fastMRI VarNet checkpoint, or released D2SA training checkpoint is present in this workspace. This is a synthetic mechanism screen, not a VarNet reproduction."
+  },
+  "hypothesis": "Across three held-out synthetic scanner sites with altered coil maps and sampling protocols, one site-specific Givens coordinate on a frozen multi-coil reconstruction prior will retain target anatomy quality within 1% NMSE of ordinary FiLM site calibration, save at least 25% actual deployment bytes over FiLM codes and 50% over independent per-site fine-tuning, and preserve held-out measurement consistency.",
+  "physical_object": "one frozen shared multi-coil reconstruction prior",
+  "mirror_coordinate": "two per-site Givens angles conjugating the four-channel latent regularizer",
+  "logical_multiplicity": "one calibrated prior view per scanner site",
+  "private_boundary": "independent full prior per site is upper control; all private tensors are charged",
+  "data": {
+    "type": "analytic synthetic complex phantoms, 2-coil SENSE acquisition",
+    "shape": "32x32",
+    "source_seeds": [
+      1012001,
+      1012002,
+      1012003,
+      1012004,
+      1012005,
+      1012006,
+      1012007,
+      1012008,
+      1012009,
+      1012010,
+      1012011,
+      1012012,
+      1012013,
+      1012014,
+      1012015,
+      1012016
+    ],
+    "site_support_seeds": [
+      1012101,
+      1012102,
+      1012103,
+      1012104,
+      1012111,
+      1012112,
+      1012113,
+      1012114,
+      1012121,
+      1012122,
+      1012123,
+      1012124
+    ],
+    "site_development_seeds": [
+      1012201,
+      1012202,
+      1012203,
+      1012204,
+      1012205,
+      1012206,
+      1012207,
+      1012208,
+      1012211,
+      1012212,
+      1012213,
+      1012214,
+      1012215,
+      1012216,
+      1012217,
+      1012218,
+      1012221,
+      1012222,
+      1012223,
+      1012224,
+      1012225,
+      1012226,
+      1012227,
+      1012228
+    ],
+    "fresh_seeds": [
+      1012301,
+      1012307,
+      1012313
+    ],
+    "fresh_opened": false,
+    "protocol_shift": "site-specific variable-density Cartesian sampling plus analytic sensitivity-map amplitude/phase/geometry changes; operator maps are given to all conditions",
+    "adaptation": "support and heldout acquired k-space partitions; fully sampled target truth is evaluation-only"
+  },
+  "controls": [
+    "frozen shared prior",
+    "shared prior plus 8-coefficient site-specific FiLM",
+    "shared prior plus 2-angle site-specific Givens Mirror",
+    "independent full-prior self-supervised fine-tuning per site"
+  ],
+  "training": {
+    "source_pretraining": "supervised on site 0 synthetic source phantoms",
+    "support_adaptation": "48 updates per site using four support cases and acquired train partition",
+    "private_upper": "48 updates per site across support cases",
+    "selection": "one fixed protocol; no fresh access or post-development tuning"
+  },
+  "metrics": [
+    "image NMSE / PSNR / global magnitude-SSIM proxy",
+    "heldout acquired k-space RMSE",
+    "actual complete multi-site serialized inference payload bytes",
+    "updates",
+    "active MAC/FFT proxy",
+    "site calibration wall time"
+  ],
+  "storage": {
+    "authority": "actual torch.save inference payload bytes",
+    "common_schema": "same model/site metadata and outer keys for all site packs",
+    "paid": [
+      "frozen prior checkpoint",
+      "all per-site coordinates or private weights",
+      "coil/operator metadata",
+      "architecture and deployment labels"
+    ]
+  },
+  "success_gate": "Mirror is no more than 1% worse in NMSE than FiLM and independent fine-tune, saves at least 25% complete bytes versus FiLM and 50% versus independent, and heldout k-space RMSE is no more than 1.1x FiLM. SSIM is reported descriptively.",
+  "failure_gate": "FAIL if Mirror misses the quality or storage gates, loses to a simpler FiLM coordinate at comparable bytes/compute, or fails heldout measurement consistency.",
+  "fresh": {
+    "worlds_or_seeds": [
+      1012301,
+      1012307,
+      1012313
+    ],
+    "locked_before_access": true,
+    "run_only_if_development_passes": true
+  },
+  "boundaries": [
+    "Synthetic mechanism only; no fastMRI/acquired scanner data, trained VarNet, D2SA weights, or clinical claim.",
+    "Three analytic OOD site maps and one anatomy generator do not establish real scanner generalization.",
+    "No capacity claim from a fixed-update synthetic screen."
+  ],
+  "failure_gate_result": "FAIL: Mirror NMSE .70081 is 11.0% worse than frozen shared prior (.63129); actual complete three-site payload saves only 64 B (1.16%) vs FiLM, below 25% gate. It does beat FiLM and private fine-tuning on this synthetic screen, but neither code adaptation improves frozen quality. Fresh remains sealed.",
+  "compute": {
+    "pretraining_updates": 64,
+    "source_examples": 16,
+    "source_presentations": 256,
+    "source_model_parameters": 518,
+    "site_code_updates": 144,
+    "code_method_support_presentations": 576,
+    "independent_full_tune_updates": 144,
+    "independent_support_presentations": 144,
+    "cnn_forward_macs_per_case": 516096,
+    "code_tta_forward_mac_proxy": 297271296,
+    "private_tune_forward_mac_proxy": 74317824,
+    "fft": "2-coil forward FFT per reconstruction; TTA backprop costs additional compute",
+    "wall_times_s": {
+      "frozen": 0,
+      "film": 0.5743751649970363,
+      "mirror": 0.7604380609991495,
+      "independent": 0.18464123500234564
+    },
+    "note": "Independent full-tune upper was updated on one support example per update (cycling four), while code methods used all four examples per update; equal optimizer steps but unequal support-example exposure."
+  },
+  "amendment_01": {
+    "reason": "The first execution reported NMSE, PSNR and heldout residual but omitted the preregistered global magnitude-SSIM calculation. This amendment adds only that score-only metric to the final deterministic replay; model, data, optimization, selection, gates and fresh-seed policy are unchanged. SSIM is descriptive and not used for tuning or the decision gate."
+  }
+}
