@@ -109,11 +109,12 @@ def train_eval_one(model,method,cache,train_rows,eval_rows,lr,world,seed):
     metrics,by,eval_wall=evaluate(model,adapter,cache,eval_rows)
     payload,meta=serialize_adapter(method,adapter,lr,seed);p=R/f'payload_{world}_{method}.pt';p.write_bytes(payload)
     save_predictions(world,method,by)
-    source_bytes=sum(p.stat().st_size for p in (SAMROOT/'segment_anything').rglob('*.py'))
+    runtime_files=list((SAMROOT/'segment_anything').rglob('*.py'))+[E/'source/adapters.py',E/'source/run_experiment.py',E/'PROTOCOL.json']
+    source_bytes=sum(p.stat().st_size for p in runtime_files)
     full=CKPT.stat().st_size+source_bytes+p.stat().st_size
     params=0 if adapter is None else sum(x.numel() for x in adapter.parameters())
     mac=0 if adapter is None else (2*256*8*64*64*(2 if method=='mopeft_like' else 1))
-    return {'world':world,'seed':seed,'method':method,'learning_rate':lr,'train_updates':TRAIN_STEPS if adapter is not None else 0,'train_examples':TRAIN_STEPS if adapter is not None else 0,'train_wall_s':trainwall,'macro_miou':metrics['macro_miou'],'macro_boundary_f':metrics['macro_boundary_f'],'per_domain':{d:{k:v for k,v in row.items() if k in ('miou','boundary_f','n')} for d,row in metrics.items() if d in DOMAINS},'mean_decoder_wall_s_per_image':float(np.mean(eval_wall)) if eval_wall else 0.,'adapter_parameters':params,'adapter_mac_proxy_per_image':mac,'adaptation_payload_bytes':len(payload),'adaptation_payload_sha256':hashlib.sha256(payload).hexdigest(),'full_deploy_bytes':full,'prediction_files':{d:hashlib.sha256((R/f'pred_{world}_{method}_{d}.npz').read_bytes()).hexdigest() for d in DOMAINS},'metadata':meta}
+    return {'world':world,'seed':seed,'method':method,'learning_rate':lr,'train_updates':TRAIN_STEPS if adapter is not None else 0,'train_examples':TRAIN_STEPS if adapter is not None else 0,'train_wall_s':trainwall,'macro_miou':metrics['macro_miou'],'macro_boundary_f':metrics['macro_boundary_f'],'per_domain':{d:{k:v for k,v in row.items() if k in ('miou','boundary_f','n')} for d,row in metrics.items() if d in DOMAINS},'mean_decoder_wall_s_per_image':float(np.mean(eval_wall)) if eval_wall else 0.,'adapter_parameters':params,'adapter_mac_proxy_per_image':mac,'adaptation_payload_bytes':len(payload),'adaptation_payload_sha256':hashlib.sha256(payload).hexdigest(),'deployment_source_bytes':source_bytes,'full_deploy_bytes':full,'prediction_files':{d:hashlib.sha256((R/f'pred_{world}_{method}_{d}.npz').read_bytes()).hexdigest() for d in DOMAINS},'metadata':meta}
 
 def phase_dev():
     manifest=load_manifest('dev');rows=manifest['rows'];model,predictor=load_model();cache,encwall=encode_rows(model,predictor,rows)

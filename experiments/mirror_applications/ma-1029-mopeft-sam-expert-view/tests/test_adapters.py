@@ -20,7 +20,7 @@ class SAMFeatureAdapterTests(unittest.TestCase):
         torch.testing.assert_close(film.apply(x,2),shared.apply(x,2),rtol=0,atol=0)
     def test_mopeft_gates_are_normalized(self):
         m=MoPEFTLike();x=torch.randn(1,256,8,8);y=m.apply(x,0)
-        self.assertEqual(tuple(y.shape),tuple(x.shape));self.assertAlmostEqual(float(torch.softmax(m.gate_logits[0],-1).sum()),1.0,places=7)
+        self.assertEqual(tuple(y.shape),tuple(x.shape));self.assertAlmostEqual(float(torch.softmax(m.gate_logits[0].detach(),-1).sum()),1.0,places=7)
     def test_registered_code_coordinates_are_small(self):
         m=MirrorGivens();self.assertEqual(m.angles.numel(),6)
         self.assertLess(m.angles.numel()*m.angles.element_size(),m.adapter.down.weight.numel()*m.adapter.down.weight.element_size())

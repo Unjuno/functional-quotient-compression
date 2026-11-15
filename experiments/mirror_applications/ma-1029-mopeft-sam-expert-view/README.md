@@ -1,9 +1,13 @@
 # MA-1029 — SAM feature adapter-bank Mirror views
 
-Status: SCREENING. The protocol is frozen in `PROTOCOL.json` before experiment data are generated.
+Status: **FAIL**, scoped synthetic feature-space screen. The Mirror view reduces adaptation payload relative to independent adapters, but hard sharing is 188 B smaller at nearly identical quality, and FiLM is better across all three worlds for 380 additional bytes. Full SAM bundle savings are negligible.
 
-This is a controlled feature-space screen of task-specific SAM adapter functions. A shared rank-8 bottleneck adapter receives per-domain Givens coordinates; comparisons include independent and hard-shared adapters, an equal-placement FiLM control, and a paper-inspired mixed Adapter/LoRA/prefix-gate control. The official MoPEFT repository could not be located in bounded source search, so this is not presented as an official MoPEFT or MESS reproduction.
+This is not an official MoPEFT or MESS reproduction. The tested modules attach to the final frozen SAM ViT-B image embedding for CPU feasibility; they do not reproduce per-layer MoPEFT. All generated examples are synthetic shapes with box prompts.
 
-All SAM modules are frozen. The trainable Adapter is placed on the final image embedding so updates remain feasible on CPU; every adapter/code byte and the frozen SAM deployment bundle are measured.
+- Protocol and resource amendment: `PROTOCOL.json`
+- Hypothesis, controls, findings and limits: `RESULTS.md`
+- Per-domain metrics: `RESULTS_CORE.csv`
+- Audit manifests, predictions, payloads and hashes: `runs/`
+- Verification: `VERIFICATION.json`, `source/verify_result.py`
 
-Before generating data, the sample count was reduced to 2 training / 2 development / 4 audit images per domain after a CPU timing feasibility check (7.82 s/image at eight threads). Three fresh audit worlds remain. The original model/training choices and gates are unchanged; the amendment is recorded in `PROTOCOL.json`.
+Development settings were frozen and committed before audit examples were generated. The audit has three fresh synthetic worlds. Do not interpret this screen as evidence on natural images, MESS, or general SAM adaptation.
