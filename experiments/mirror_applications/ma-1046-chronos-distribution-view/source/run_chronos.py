@@ -74,8 +74,8 @@ def load_dataset(name):
         return ett_series(name)
     if name == "Weather":
         count, items = tsf_selected(DATA / "weather_dataset.zip", "weather_dataset.tsf", WEATHER_IDS)
-        if count != 3018:
-            raise ValueError(f"Weather series count drift: expected 3018, got {count}")
+        if count != 3010:
+            raise ValueError(f"Weather series count drift: expected 3010, got {count}")
         return items
     if name == "AustralianElectricity":
         count, items = tsf_selected(

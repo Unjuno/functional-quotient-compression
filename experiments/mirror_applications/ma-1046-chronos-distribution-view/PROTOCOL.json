@@ -54,7 +54,7 @@
           "frequency_minutes": 1440,
           "horizon": 30,
           "seasonal_period": 7,
-          "series_count": 3018,
+          "series_count": 3010,
           "series_indices": [
             182,
             304,
@@ -194,6 +194,18 @@
         "input archive bytes and selected series",
         "frozen model and development codes",
         "forecast horizons and code transforms",
+        "metrics and decision gates"
+      ]
+    },
+    {
+      "id": "AM-05",
+      "reason": "The earlier AM-03 count of 3,018 was produced by the pre-AM-04 parser counting eight preamble lines before @data. The corrected TSF parser returns the PA326/Monash count of exactly 3,010 data-series rows. This metadata check failed before any forecast generation on final confirmatory seeds 104604-104606.",
+      "change": "Set Weather data-record count back to 3,010; keep the fixed selected indices, dataset archive, and fresh sample seeds unchanged.",
+      "unchanged": [
+        "archive bytes and SHA-256",
+        "selected series indices",
+        "forecast windows, horizons and seeds",
+        "frozen model and distribution codes",
         "metrics and decision gates"
       ]
     }
