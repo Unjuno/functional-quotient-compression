@@ -1,0 +1,92 @@
+{
+  "rows": [
+    {
+      "arm": "native",
+      "nDCG@10": 0.35196837521303065,
+      "Recall@10": 0.7333333333333333,
+      "MRR@10": 0.23179162445119894,
+      "ann_overlap_recall10_vs_exact": 0.9717730496453902,
+      "queries": 705
+    },
+    {
+      "arm": "mirror",
+      "nDCG@10": 0.35201881265428775,
+      "Recall@10": 0.7347517730496453,
+      "MRR@10": 0.2314797928627716,
+      "ann_overlap_recall10_vs_exact": 0.9643971631205676,
+      "queries": 705
+    },
+    {
+      "arm": "linear_control",
+      "nDCG@10": 0.35201881265428775,
+      "Recall@10": 0.7347517730496453,
+      "MRR@10": 0.2314797928627716,
+      "ann_overlap_recall10_vs_exact": 0.9643971631205676,
+      "queries": 705
+    }
+  ],
+  "payload": {
+    "model_bytes": 138243620,
+    "index_bytes": 30889586,
+    "index_files": [
+      {
+        "path": "payload/scann_index/ah_codebook.pb",
+        "bytes": 87170,
+        "sha256": "0f78c53177e3fa1e8151380357b8f61c2ab868cee1815b602306ce85796ce1b1"
+      },
+      {
+        "path": "payload/scann_index/datapoint_to_token.npy",
+        "bytes": 34824,
+        "sha256": "7cb8d3623800bff6efd7d9bf7e16c6c4176416d537cf53af1caa3dbfb81a63e9"
+      },
+      {
+        "path": "payload/scann_index/dataset.npy",
+        "bytes": 26646656,
+        "sha256": "519e554eedc2cdef6006a3aa24d37569a0a8a40d5662492b7c8ab57f23e018c3"
+      },
+      {
+        "path": "payload/scann_index/hashed_dataset.npy",
+        "bytes": 3330944,
+        "sha256": "68a3ea4fc127132605fc46b50d74ff37f34a9f6a0a59bb0f7f25d6e0ec62af84"
+      },
+      {
+        "path": "payload/scann_index/scann_assets.pbtxt",
+        "bytes": 897,
+        "sha256": "d8dbe429f41f41e9a2bc95e535543efa49048e6b9e1c5db270bde7363a15b934"
+      },
+      {
+        "path": "payload/scann_index/scann_config.pb",
+        "bytes": 194,
+        "sha256": "6aa0023fedb346fa9ea1cd875fe9a0194c263a348a41c29848e0f4596a3d6c57"
+      },
+      {
+        "path": "payload/scann_index/serialized_partitioner.pb",
+        "bytes": 788901,
+        "sha256": "6d9c0b618bcc366a81cfada985de96661d4785815cd7b4bbc1cc27a19d4e6f4d"
+      }
+    ],
+    "doc_id_map_bytes": 327971,
+    "mirror_code_and_role_metadata_bytes": 95,
+    "linear_control_and_role_metadata_bytes": 254,
+    "mirror_full_payload_bytes": 169461272,
+    "linear_control_full_payload_bytes": 169461431,
+    "native_full_payload_bytes": 169461177
+  },
+  "audit_qids_sha256": "8cfe0ec939565c056d9109b1a0b54f3188b6e5c3f9733681cba8dd0229b60fba",
+  "audit_qrels_count": 705,
+  "qrels_file_sha256": "0c47b481fa8b47fb9ca5e74bc8a017bdea14518c0e4a5d21345291180b3aca76",
+  "audit_opened_after_dev_freeze": true,
+  "matched_control_exact_arrays": true,
+  "searcher_config": {
+    "scann_version": "1.4.2",
+    "rows": 8674,
+    "dimension": 768,
+    "build_wall_seconds": 3.1067582849937025,
+    "num_leaves": 128,
+    "leaves_to_search": 16,
+    "avq": 1.0,
+    "dimensions_per_block": 2,
+    "anisotropic_quantization_threshold": 0.2,
+    "reorder_neighbors": 100
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "repeats_per_query_arm": 5,
+  "queries": 705,
+  "randomized_arm_order": true,
+  "seed": 1040,
+  "latency_scope": "CPU query Givens/linear transform plus ScaNN single-query search; excludes tokenizer/encoder, includes dynamic view computation",
+  "cpu_affinity": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "rows": {
+    "native": {
+      "p50_ms": 0.099744,
+      "p95_ms": 0.44130839999999977,
+      "mean_ms": 0.14507214553191491,
+      "n": 3525
+    },
+    "mirror": {
+      "p50_ms": 0.111867,
+      "p95_ms": 0.4495893999999998,
+      "mean_ms": 0.1572341546099291,
+      "n": 3525
+    },
+    "linear_control": {
+      "p50_ms": 0.110865,
+      "p95_ms": 0.4565919999999993,
+      "mean_ms": 0.15995003631205676,
+      "n": 3525
+    }
+  }
+}

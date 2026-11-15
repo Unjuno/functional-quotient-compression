@@ -1,19 +1,46 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-1040",
+  "commit": "358a31b90",
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "/tmp/ma1040env/bin/python -m pytest -q experiments/mirror_applications/ma-1040-scann-metric-mirror/tests",
+    "passed": 3,
+    "failed": 0
   },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "native_complete_bytes": 169461177,
+    "mirror_complete_bytes": 169461272,
+    "linear_control_complete_bytes": 169461431,
+    "marginal_mirror_bytes": 95,
+    "scann_index_bytes": 30889586,
+    "index_hashes_replayed_exact": true
   },
   "metric_replay": {
-    "checked": false,
-    "max_difference": null
+    "checked": true,
+    "max_difference": 0.0,
+    "full_scann_top10_replayed_exact": true,
+    "mirror_linear_control_rankings_exact": true,
+    "paired_bootstrap_replicates": 10000,
+    "exact_dense_overlap_replayed": true,
+    "ann_top10_replayed_from_serialized_index": true
   },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "fresh_split_integrity_checked": true,
+  "audit_query_count": 705,
+  "dataset_archive_sha256": "cfdf79adce27a401b3cd3ea267903134dbfab2c6afeb95d7fe5724a00bf7557b",
+  "model_revision": "e9b6763023c676ca8431644204f50c2b100d9aab",
+  "runtime_calibration": {
+    "repeats_per_query_arm": 5,
+    "randomized_order": true,
+    "p95_native_ms": 0.4413084,
+    "p95_mirror_ms": 0.4495894,
+    "p95_linear_ms": 0.456592
+  },
+  "notes": [
+    "Audit qrels were evaluated only after development lock commit 358a31b90.",
+    "Verifier reloads the serialized ScaNN index and exactly reproduces every saved audit top-10 position, then replays qrel metrics with maximum absolute difference 0.0.",
+    "Paired bootstrap is descriptive and did not change the frozen gate or parameters.",
+    "Input truncation was amended to 256 tokens before development selection; no full-length result was saved.",
+    "Bounded to one ArgUana task, one CPU runtime and one Nomic checkpoint."
+  ]
 }

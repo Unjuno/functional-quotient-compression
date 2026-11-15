@@ -1,6 +1,6 @@
 # MA-1040 — ScaNN anisotropic metric Mirror task code
 
-Status: SCREENING  
+Status: FAIL  
 Evidence lane: ANN / QUALITY / STORAGE / COMPUTE  
 Base commit: see `PROTOCOL.json`  
 Prior art: PA318 (ScaNN anisotropic vector quantization)
@@ -25,4 +25,6 @@ A two-coordinate Givens view is expressible by a matched native query-side linea
 
 ## Status
 
-The isolated ScaNN environment is installed. The registered model and dataset are available locally / being staged. No audit metrics have been opened or inspected.
+## Decision: FAIL
+
+The 705-query audit misses both +0.5 pp quality gates. Mirror improves nDCG by only +0.005 pp and Recall@10 by +0.142 pp, lowers MRR by −0.031 pp, and exactly matches the ordinary linear query control. Complete payload is 169,461,272 B vs 169,461,177 B native. Repeated p95 is 0.4496 ms vs 0.4413 ms native. See `RESULTS.md`; independent ranking, metric, payload and hash replay is in `VERIFICATION.json` and `runs/VERIFICATION_REPLAY.json`.

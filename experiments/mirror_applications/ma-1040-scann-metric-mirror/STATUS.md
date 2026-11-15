@@ -1,16 +1,20 @@
 # MA-1040 status
 
-- Status: SCREENING
+- Status: FAIL
 - Branch: `research/ma-1040-scann-metric-mirror-20261115`
-- Protocol freeze: pending source commit
-- Dataset: official BEIR ArgUana archive downloaded; SHA256 pinned in PROTOCOL.json
-- ScaNN runtime: 1.4.2 installed in `/tmp/ma1040env`
-- Embeddings/index: CPU embedding started; resumable 256-token protocol amendment committed before development metrics
-- Development freeze: locked and committed before audit; short +0.30 rad, long +0.15 rad
-- Audit opened: no (dev freeze committed)
-- Results/verification: pending
-- Replay history: one initial uncheckpointed encoding attempt was stopped before saving embeddings or metrics; AM-01 records the CPU-screen change.
+- Base commit: `1e4cfb9fa` (MA-1039 integration state)
+- Protocol and source freezes: see `ARTIFACT_PROVENANCE.json`; audit qrels opened only after development lock `358a31b90`
+- Data/model: official ArgUana archive and pinned Nomic Embed v1.5 INT8 ONNX; CPU, 256-token amended screen
+- Index: ScaNN 1.4.2 AVQ, one shared 8,674-document index
+- Development: complete; selected short +0.30 rad, long +0.15 rad
+- Fresh audit: 705 disjoint qids; quality, payload and five-repeat latency evaluated
+- Results: exact ranking/metric/payload replay; 3 tests pass
+- Registry row and claim ledger: pending final integration commit
+
+## Decision
+
+The predeclared quality gate fails. Mirror nDCG gain is +0.005 pp and Recall@10 gain +0.142 pp, both under +0.5 pp; MRR falls 0.031 pp. A matched native linear query transform gives exactly the same rankings. Mirror adds 95 B to the 169,461,177 B native deployment. Repeated p95 latency is 0.4496 ms vs 0.4413 ms native.
 
 ## Next action
 
-Implement the frozen encoder, role split, ScaNN AVQ index, dev-only metric selection, native linear control, then lock and run audit.
+Complete registry/status/claim integration, run integrity and replay checks, push this branch, then advance to P0 MA-1041 (DiskANN graph traversal with query-state View).
