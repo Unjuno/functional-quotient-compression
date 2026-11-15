@@ -1,19 +1,53 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-1035",
+  "commit": "pending-result-commit",
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "PYTHONPATH=experiments/mirror_applications/ma-1035-qinco-mirror-view/source python -m unittest discover -s experiments/mirror_applications/ma-1035-qinco-mirror-view/tests -v",
+    "passed": 4,
+    "failed": 0
   },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "methods": [
+      "rq_static",
+      "qinco_native",
+      "qinco_tied",
+      "qinco_mirror_givens",
+      "qinco_additive_rank1"
+    ],
+    "packed_index_codes_roundtrip": true,
+    "actual_model_plus_index_byte_arithmetic": true
   },
   "metric_replay": {
-    "checked": false,
-    "max_difference": null
+    "checked": true,
+    "command": "PYTHONPATH=experiments/mirror_applications/ma-1035-qinco-mirror-view/source python experiments/mirror_applications/ma-1035-qinco-mirror-view/source/verify_result.py",
+    "passed": true,
+    "max_difference": 0.0,
+    "replayed_conditions": 15
   },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "fresh_split_integrity_checked": true,
+  "freeze_sha256": {
+    "protocol": "6f84ad0998f81cd50e5f6b58e39300d28707135845483c44c1eea35846e9f9d0",
+    "runner": "1fa672f4a1d61d0d482994c603ede1385b6babb6419fd0db3cac13a46027b5f5",
+    "development": "eff8a362dc5e83c1bec0618a19fbba2ffa69652da38eccea655bccc49ef96d05"
+  },
+  "upstream_qinco": {
+    "commit": "5a324954d5c9b3700d4407d6cc24c3db6e52890e",
+    "original_source_sha256": "042a741b2574c32dc46e40e1ef737daaa961732b68b54e5060899b5a575a7d5a"
+  },
+  "fresh_world_seeds": [
+    103501,
+    103502,
+    103503
+  ],
+  "notes": [
+    "Exact generated world center/scale hashes, self-describing model payload hashes and packed index hashes replayed.",
+    "All three audit worlds were generated independently from the frozen seeds; each method was trained and tested within its own world.",
+    "Decoded database vectors are deterministic from model+index bytes; resident RAM is charged/reported, not stored in the inference file.",
+    "Faiss is not installed; exact PyTorch nearest assignment and brute-force L2 search were used.",
+    "No SIFT/BigANN, pretrained QINCo checkpoint, or large-scale ANN claim.",
+    "Shared stagewise k-means initialization time was replayed separately on each locked world with five repeats; the timing artifact is runs/common_init_timing.json and was not used for selection."
+  ],
+  "verifier_sha256": "e25b59c6b3add94202239d974edb9e2e8d965c8e85272d3e9ca288ebabf6c1cb"
 }

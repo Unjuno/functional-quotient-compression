@@ -1,0 +1,190 @@
+{
+  "schema": "MA1035-v1",
+  "lane": "audit",
+  "seed": 103502,
+  "world": {
+    "seed": 103502,
+    "centers_sha256": "54543caac86b6ddd7ef6d47a2c25c97a7d4ae3241e1055cdeeaea410b87f0488",
+    "scales_sha256": "c7f852bc2b6f50d414a189e9d2e1d65a3541f31ddfc3a628d15aad97186a8485"
+  },
+  "shape": {
+    "train": [
+      1024,
+      32
+    ],
+    "database": [
+      512,
+      32
+    ],
+    "queries": [
+      128,
+      32
+    ]
+  },
+  "model_config": {
+    "d": 32,
+    "K": 16,
+    "M": 4,
+    "L": 1,
+    "hidden": 32,
+    "updates": 80,
+    "batch": 64,
+    "lr": 0.001
+  },
+  "source_sha256": "1fa672f4a1d61d0d482994c603ede1385b6babb6419fd0db3cac13a46027b5f5",
+  "qinco_reference_sha256": "a77f912227148a2b299076dc49e57f286e81e0bd4e0514f5e8ae1c731b475c61",
+  "quantization_helper_sha256": "2ae652b72b626e105aeec0e8ea3f861e6b158dee5e05f042d7e09b3ee1a1be27",
+  "results": {
+    "rq_static": {
+      "normalized_mse": 0.06855930387973785,
+      "recall_at_1": 0.203125,
+      "recall_at_10": 0.5390625,
+      "training_wall_s": 0.0,
+      "training": {
+        "updates": 0,
+        "examples": 0,
+        "loss_first_last": []
+      },
+      "database_encode_wall_s": 0.0009346030055894516,
+      "database_decode_load_wall_s": 0.00013271099669509567,
+      "search_wall_s_median_20_scans": 0.0009106365032494068,
+      "search_qps_median": 140561.02467149083,
+      "decode_load_plus_scan_qps": 122682.0402663624,
+      "generator_macs_per_encoded_vector": 0,
+      "coordinate_ops_per_encode_vector": 0,
+      "resident_reconstruction_bytes": 65536,
+      "serialized_model_bytes": 8749,
+      "serialized_index_bytes": 1172,
+      "total_serialized_bytes": 9921,
+      "full_float32_database_bytes": 65536,
+      "code_count": 2048,
+      "model_payload_sha256": "c87f71d9bbae864efb0af48e91d8e220a43baa40f41ff81887f98cf130b1363a",
+      "index_payload_sha256": "39edb5fdf5dcd1850bde7720218f7c79c52e173f5240729085d35d77a588b80e"
+    },
+    "qinco_native": {
+      "normalized_mse": 0.08467315137386322,
+      "recall_at_1": 0.109375,
+      "recall_at_10": 0.48046875000000006,
+      "training_wall_s": 0.44188906300405506,
+      "training": {
+        "updates": 80,
+        "examples": 5120,
+        "loss_first_last": [
+          9.75601577758789,
+          3.626460552215576
+        ]
+      },
+      "database_encode_wall_s": 0.026243357002385892,
+      "database_decode_load_wall_s": 0.0005054079992987681,
+      "search_wall_s_median_20_scans": 0.0006546704971697181,
+      "search_qps_median": 195518.2042773756,
+      "decode_load_plus_scan_qps": 110337.36112655989,
+      "generator_macs_per_encoded_vector": 196608,
+      "coordinate_ops_per_encode_vector": 0,
+      "resident_reconstruction_bytes": 65536,
+      "serialized_model_bytes": 59211,
+      "serialized_index_bytes": 1175,
+      "total_serialized_bytes": 60386,
+      "full_float32_database_bytes": 65536,
+      "code_count": 2048,
+      "model_payload_sha256": "7f24cd3224d689cc741439cf3a5d7c85520e90a778e945cc965aeaf463656168",
+      "index_payload_sha256": "610af537b65364c2b15ae3b4c0cee435097ab2db0aa8d9e9687a0d62df388310"
+    },
+    "qinco_tied": {
+      "normalized_mse": 0.12570476531982422,
+      "recall_at_1": 0.0390625,
+      "recall_at_10": 0.42499999999999993,
+      "training_wall_s": 0.6309180509997532,
+      "training": {
+        "updates": 80,
+        "examples": 5120,
+        "loss_first_last": [
+          17.461833953857422,
+          4.2720184326171875
+        ]
+      },
+      "database_encode_wall_s": 0.007653952998225577,
+      "database_decode_load_wall_s": 0.0004452920002222527,
+      "search_wall_s_median_20_scans": 0.0005735224985983223,
+      "search_qps_median": 223182.1773563016,
+      "decode_load_plus_scan_qps": 125636.21753339641,
+      "generator_macs_per_encoded_vector": 196608,
+      "coordinate_ops_per_encode_vector": 0,
+      "resident_reconstruction_bytes": 65536,
+      "serialized_model_bytes": 21352,
+      "serialized_index_bytes": 1173,
+      "total_serialized_bytes": 22525,
+      "full_float32_database_bytes": 65536,
+      "code_count": 2048,
+      "model_payload_sha256": "19a4aec7c8f7f42d34b9a59914487c3ed48c95cb42eb656dee1cb0029da80a5d",
+      "index_payload_sha256": "1c71b8bd3c9baf821dc409ca5b5e1849d800ddfb4b29e691d440039e6796be92"
+    },
+    "qinco_mirror_givens": {
+      "normalized_mse": 0.12592603266239166,
+      "recall_at_1": 0.0390625,
+      "recall_at_10": 0.41484375000000007,
+      "training_wall_s": 0.43079075499554165,
+      "training": {
+        "updates": 80,
+        "examples": 5120,
+        "loss_first_last": [
+          17.544940948486328,
+          4.2739081382751465
+        ]
+      },
+      "database_encode_wall_s": 0.009234097997250501,
+      "database_decode_load_wall_s": 0.0009817519967327826,
+      "search_wall_s_median_20_scans": 0.0006390810049197171,
+      "search_qps_median": 200287.5989344726,
+      "decode_load_plus_scan_qps": 78971.73852549845,
+      "generator_macs_per_encoded_vector": 196608,
+      "coordinate_ops_per_encode_vector": 288,
+      "resident_reconstruction_bytes": 65536,
+      "serialized_model_bytes": 21452,
+      "serialized_index_bytes": 1182,
+      "total_serialized_bytes": 22634,
+      "full_float32_database_bytes": 65536,
+      "code_count": 2048,
+      "model_payload_sha256": "6b5f3be86e8650b99f7bb839270b6380543c73561f81b1f9280e6bba35bec1a6",
+      "index_payload_sha256": "f0e01478d107aedb54f8558e51ded08a6229453eb96c9f060e0c3a1f801e0b95"
+    },
+    "qinco_additive_rank1": {
+      "normalized_mse": 0.1256825178861618,
+      "recall_at_1": 0.0390625,
+      "recall_at_10": 0.42734374999999997,
+      "training_wall_s": 0.3188803429948166,
+      "training": {
+        "updates": 80,
+        "examples": 5120,
+        "loss_first_last": [
+          17.461833953857422,
+          4.272013187408447
+        ]
+      },
+      "database_encode_wall_s": 0.007785485002386849,
+      "database_decode_load_wall_s": 0.0004203380012768321,
+      "search_wall_s_median_20_scans": 0.0005780424980912358,
+      "search_qps_median": 221437.0057957175,
+      "decode_load_plus_scan_qps": 128207.63234159574,
+      "generator_macs_per_encoded_vector": 196608,
+      "coordinate_ops_per_encode_vector": 96,
+      "resident_reconstruction_bytes": 65536,
+      "serialized_model_bytes": 21625,
+      "serialized_index_bytes": 1183,
+      "total_serialized_bytes": 22808,
+      "full_float32_database_bytes": 65536,
+      "code_count": 2048,
+      "model_payload_sha256": "d210ef2559bf4a502d52e50111ec2cffb06da9b8e1dc371773ccd926801f582d",
+      "index_payload_sha256": "e627d89fdc23d78953fe5830fab6c2dccf2ce3c3d12707313251243586a7c66b"
+    }
+  },
+  "totals": {
+    "raw_database_bytes": 65536,
+    "exact_ground_truth": "brute-force Euclidean top-10 on uncompressed database"
+  },
+  "boundaries": [
+    "synthetic 32-D clustered-vector worlds only",
+    "QINCo-v1-structure model with small K/M and torch k-means init; not published checkpoint or paper reproduction",
+    "database scan uses generated reconstructions resident in RAM; serialized payload charges model plus packed indices and metadata"
+  ]
+}
