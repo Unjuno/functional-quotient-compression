@@ -1,0 +1,47 @@
+{
+  "experiment_id": "MA-1028",
+  "title": "SAM2Long memory-path feature views",
+  "status": "SCREENING",
+  "base_commit": "8a5b62bd8",
+  "prior_art": {
+    "id": "PA316",
+    "paper": "SAM2Long: Enhancing SAM 2 for Long Video Segmentation with a Training-Free Memory Tree",
+    "url": "https://arxiv.org/abs/2410.16268",
+    "official_repository": "https://github.com/Mark12Ding/SAM2Long",
+    "official_commit": "d70b50a7936fec55af20123530e92e794ad901a4"
+  },
+  "hypothesis": "In a fixed-width three-path SAM2Long tree, two per-path Givens angles over a shared frame memory can preserve long-video object J&F within 1 percentage point of independent path memories, use at least 25% fewer full-session serialized bytes, and beat rank-1 additive memory by at least 1 point at equal or fewer bytes.",
+  "scope": "Mechanism screen using the official SAM2Long inference implementation, official SAM2.1 Hiera-tiny checkpoint, CPU 256px, three fixed synthetic 12-frame object-crossing/reappearance clips. Not a DAVIS/LVOS/SA-V or natural-video benchmark.",
+  "runtime": {
+    "device": "CPU",
+    "image_size": 256,
+    "pathways": 3,
+    "sam2_cuda_extension": "disabled per upstream CPU support"
+  },
+  "methods": [
+    "official independent three-path SAM2Long",
+    "hard shared mean memory across path axis",
+    "two-angle per-path Givens reconstruction from one common memory base",
+    "rank-1 additive path residual control"
+  ],
+  "mirror_insertion": "At each video frame, replace the three pathway-specific maskmem_features tensors with one shared path-mean feature base plus two object/path-specific Givens angles on channel planes (0,1) and (2,3). Decode each selected path memory immediately before SAM2Long attention consumes it. Predicted masks, path scores, object pointers, positional encodings, image cache, prompts, and checkpoint remain charged and unchanged.",
+  "scene": {
+    "seeds": [102801, 102802, 102803],
+    "frames": 12,
+    "size": [256, 256],
+    "objects": 2,
+    "events": ["crossing", "partial occlusion", "temporary full occlusion", "reappearance"],
+    "prompt": "exact instance masks on frame 0 only"
+  },
+  "metrics": {
+    "quality": "mean per-object J&F over frames 1-11; object assignment switches",
+    "storage": "actual serialized complete inference session: checkpoint, config, shared normalized image cache, prompts, every path mask/score/pointer and every stored path-memory base/coordinate/residual plus self-describing metadata",
+    "compute": "whole-session wall/FPS, memory encode/decode wall, peak serialized state"
+  },
+  "success_gate": "Mirror complete-session payload at least 25% smaller than official independent three-path tree; mean J&F no more than 1pp below independent; no more than one additional identity switch; and at least 1pp better than rank-1 additive at equal or fewer bytes in at least 2/3 fresh clips, with no clip >3pp worse than independent.",
+  "failure_gate": "Mirror misses the storage or quality gate in at least 2/3 fresh clips, or rank-1 additive matches/beats Mirror quality at equal or fewer bytes in at least 2/3 clips.",
+  "development": "No label-derived hyperparameter tuning; fixed code dimensions, three-path count, and gates. A non-scored CPU smoke is permitted to confirm imports and protocol execution only.",
+  "audit": "Seeds 102801, 102802, 102803. Generated only after this protocol was written. No changes after opening the audit; any implementation correction must be documented before scored replay and may not inspect audit metrics to choose settings.",
+  "training": "None; memory coordinates are analytically fit from current-frame path memories before processing the next frame. No future frame or ground-truth mask is used for code fitting.",
+  "limitations": ["synthetic clips only", "12 frames", "two objects", "CPU reduced resolution", "official checkpoint is external but hash charged in full session", "no long-video benchmark claim"]
+}
