@@ -312,25 +312,35 @@ def main():
     print(f"dev docs={len(dev_dids)}, train_queries={len(dev_qids)}, dev_tokens={int(dev_doff[-1])}", flush=True)
     codebook, scale = fit_codebook(dev_dflat)
     dev_dec, dev_codes, dev_res = encode_index(dev_dflat, dev_doff, dev_dlen, codebook, scale, "dev")
-    median_len = int(np.median([dev_qlen[i] for i in range(len(dev_qids))]))
-    dev_roles = {q:(0 if int(dev_qlen[i]) <= median_len else 1) for i,q in enumerate(dev_qids)}
-    # freeze two independent role coordinates using training qrels only.
-    dev_q_index = {q:i for i,q in enumerate(dev_qids)}
-    base_dev_rank = score_all(dev_qflat, dev_qoff, dev_qlen, dev_dec, dev_doff, dev_dids, dev_qids, dev_qrels, name="dev_baseline")
-    angle_scores = {0:[],1:[]}
-    dev_score_cube = {}
-    for ai, angle in enumerate(ANGLES):
-        # one coordinate is evaluated at a time for both roles; cache full rankings per angle.
-        role_angles = [float(angle), float(angle)]
-        qid_index = dev_q_index
-        rank = score_all(dev_qflat, dev_qoff, dev_qlen, dev_dec, dev_doff, dev_dids, dev_qids, dev_qrels, role_angles, dev_roles, name=f"dev_angle_{angle:+.2f}")
-        met = metric_summary(rank, dev_qrels, dev_roles)
-        for role in [0,1]: angle_scores[role].append((met[f"role_{role}"]["ndcg10"], float(angle)))
-    chosen = []
-    for role in [0,1]:
-        best=max(x[0] for x in angle_scores[role]); tied=[x[1] for x in angle_scores[role] if abs(x[0]-best)<1e-12]
-        chosen.append(sorted(tied,key=lambda a:(abs(a),a))[0])
-    print(f"role_threshold={median_len}; frozen_angles={chosen}; dev_angle_scores={angle_scores}", flush=True)
+    freeze_path = EXP / "runs" / "DEV_FREEZE.json"
+    if freeze_path.exists():
+        frozen = json.loads(freeze_path.read_text())
+        assert frozen["angle_grid"] == ANGLES.tolist(), "frozen development grid does not match protocol"
+        median_len = int(frozen["role_threshold_tokens"])
+        chosen = [float(x) for x in frozen["angles"]]
+        angle_scores = {int(k):[(float(a),float(b)) for a,b in v] for k,v in frozen["angle_scores"].items()}
+        print(f"reuse frozen development choices: threshold={median_len}, angles={chosen}", flush=True)
+    else:
+        median_len = int(np.median([dev_qlen[i] for i in range(len(dev_qids))]))
+        dev_roles = {q:(0 if int(dev_qlen[i]) <= median_len else 1) for i,q in enumerate(dev_qids)}
+        # freeze two independent role coordinates using training qrels only.
+        dev_q_index = {q:i for i,q in enumerate(dev_qids)}
+        base_dev_rank = score_all(dev_qflat, dev_qoff, dev_qlen, dev_dec, dev_doff, dev_dids, dev_qids, dev_qrels, name="dev_baseline")
+        angle_scores = {0:[],1:[]}
+        for angle in ANGLES:
+            role_angles = [float(angle), float(angle)]
+            qid_index = dev_q_index
+            rank = score_all(dev_qflat, dev_qoff, dev_qlen, dev_dec, dev_doff, dev_dids, dev_qids, dev_qrels, role_angles, dev_roles, name=f"dev_angle_{angle:+.2f}")
+            met = metric_summary(rank, dev_qrels, dev_roles)
+            for role in [0,1]: angle_scores[role].append((met[f"role_{role}"]["ndcg10"], float(angle)))
+        chosen = []
+        for role in [0,1]:
+            best=max(x[0] for x in angle_scores[role]); tied=[x[1] for x in angle_scores[role] if abs(x[0]-best)<1e-12]
+            chosen.append(sorted(tied,key=lambda a:(abs(a),a))[0])
+        frozen = {"role_threshold_tokens":median_len,"angles":chosen,"angle_grid":ANGLES.tolist(),"angle_scores":{str(k):v for k,v in angle_scores.items()},"selected_from":"SciFact train qrels only; captured before NFCorpus metric calculation"}
+        freeze_path.parent.mkdir(parents=True,exist_ok=True)
+        freeze_path.write_text(json.dumps(frozen,indent=2,sort_keys=True)+"\n")
+        print(f"role_threshold={median_len}; frozen_angles={chosen}; dev_angle_scores={angle_scores}", flush=True)
     # Replace query caches with the audit set only after views are frozen.
     aud_qflat, aud_qoff, aud_qlen = encode_texts([aud_qtextmap[q] for q in aud_qids], aud_qids, tok, bert, proj, True, "audit_q")
     aud_dflat, aud_doff, aud_dlen = encode_texts(aud_texts, aud_dids, tok, bert, proj, False, "audit_d")
@@ -345,7 +355,7 @@ def main():
     rng = np.random.default_rng(SEED+2); diffs=[]
     for _ in range(4096):
         qi=int(rng.integers(len(aud_qids))); di=int(rng.integers(len(aud_dids)))
-        q=audit_qflat[aud_qoff[qi]:aud_qoff[qi+1]]; d=aud_dec[aud_doff[di]:aud_doff[di+1]]
+        q=aud_qflat[aud_qoff[qi]:aud_qoff[qi+1]]; d=aud_dec[aud_doff[di]:aud_doff[di+1]]
         th=chosen[aud_roles[aud_qids[qi]]]
         direct=role_rotation(d,th) @ np.asarray(q).T
         pushed=np.asarray(d) @ q_inverse(np.asarray(q),th).T
