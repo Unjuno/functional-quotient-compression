@@ -1,0 +1,83 @@
+{
+  "experiment_id": "MA-1048",
+  "title": "Moirai frequency × variate factorized distribution View",
+  "status": "FROZEN_BEFORE_AUDIT",
+  "evidence_lane": "TIME_SERIES / PROBABILISTIC_QUALITY / STORAGE / CPU_RUNTIME",
+  "base_commit": "f4b41c001",
+  "prior_art_refs": ["PA328"],
+  "hypothesis": "On entirely held-out frequency×variate combinations in a fresh multivariate sensor dataset, a compact factorized distribution code improves CRPS over frozen Moirai and an additive native frequency/variate control, while requiring less serialized calibration state than a full independent pair table.",
+  "physical_object": "One frozen Salesforce Moirai-1.1-R-small checkpoint shared across two sampling frequencies and fourteen traffic-sensor variates.",
+  "mirror_coordinate": "For frequency f∈{5-minute,15-minute} and sensor variate v∈{0..13}, transform the forecast sample distribution with scale s[f,v]=u[f]*w[v] and offset b[f,v]=a[f]+c[v]. This requires 32 float32 coordinates; all metadata is paid.",
+  "logical_multiplicity": "Twenty-eight frequency×variate probabilistic forecasts from one shared 13,827,528-parameter decoder.",
+  "prior_art_delta": "Moirai is already a shared universal time-series model with native adaptive patch selection. This experiment tests factorized calibration on sensor-frequency combinations withheld from fitting, against additive frequency/variate and single-factor controls.",
+  "model": {
+    "id": "Salesforce/moirai-1.1-R-small",
+    "revision": "0c24ab99db2c1a70ea2a0fc03bf113329772ac64",
+    "package": "uni2ts==1.1.1",
+    "framework": "torch 2.14.1+cpu",
+    "weights_dtype": "float32",
+    "context_length": 512,
+    "patch_size": "auto; selected from observed past context",
+    "physical_horizon": "24 hours: 288 five-minute steps or 96 fifteen-minute steps",
+    "samples_per_forecast": 32,
+    "shared_model_updates": 0
+  },
+  "data": {
+    "source": {
+      "id": "PEMS-BAY",
+      "repository": "jimmygao3218/PEMSBAY",
+      "revision": "c858397fb381d82c3d55ad0a81beb51a9bb9bdaa",
+      "file": "PEMS-BAY.h5",
+      "license": "CC-BY-4.0",
+      "source_frequency_minutes": 5
+    },
+    "sensor_selection": "Predeclare the first fourteen sensor columns in stored column order that are finite for every source timestamp. If fewer than fourteen satisfy this rule, mark NOT ESTABLISHED and do not substitute sensors after examining outcomes.",
+    "frequency_views": "Five-minute source series and non-overlapping fifteen-minute means formed from groups of exactly three consecutive five-minute observations, aligned from the first timestamp. The aggregation is causal for each completed bin; the same held-out time region is used at each rate.",
+    "temporal_split": "First 60% chronological rows for code fitting; next 20% for method selection; final 20% for confirmatory targets. Forecast context length 512 at each resampled frequency.",
+    "pair_split": "Fit pairs: five-minute sensor IDs [0,2,4,6,8,10,12,13]; fifteen-minute IDs [1,3,5,7,9,11,12,13]. Audit pairs: five-minute IDs [1,3,5,7,9,11]; fifteen-minute IDs [0,2,4,6,8,10]. Sensor IDs 12 and 13 connect the fitted pair graph across frequencies. Every audit pair is absent from code-fitting; every frequency and each audited sensor ID appears in other fit pairs.",
+    "origins": "Four spaced fit origins per trained pair, two validation origins per trained pair, and three spaced final-20% origins per held-out pair. All target horizons are one physical day and remain inside their split.",
+    "audit_targets_accessed_before_freeze": false,
+    "cross_experiment_data_note": "PEMS-BAY is not present in MA-1046 or MA-1047 experiment inputs. This is the MA-1048 fresh dataset."
+  },
+  "controls": [
+    "Frozen Moirai sample forecasts",
+    "Global affine distribution calibration",
+    "Frequency-only scale and offset code",
+    "Variate-only scale and offset code",
+    "Additive frequency + variate scale/offset code",
+    "Factorized frequency×variate scale with additive offset candidate",
+    "Seasonal-naive forecast"
+  ],
+  "selection": {
+    "fit": "Fit calibration coefficients by least squares from Moirai sample means and training targets only. No model weights update. Every method is applied later to the exact same saved samples.",
+    "validation": "Choose method family by empirical CRPS over the frozen method list using seen fit-pair validation forecasts. Freeze states and selection before generating final-20% Moirai audit samples.",
+    "primary_metric": "Empirical sample CRPS, macro-averaged over held-out frequency×variate pairs and audit origins.",
+    "secondary_metrics": ["WQL at 0.1/0.5/0.9", "MASE of predictive median", "complete serialized payload bytes", "CPU model and postprocess p50/p95"],
+    "sampling": "Each forecast uses a deterministic, preassigned PyTorch seed; all calibration controls reuse the saved sample tensor."
+  },
+  "gates": {
+    "promising": "On both held-out frequency groups, factorized View improves CRPS >=1% vs zero-shot and >=0.5% vs additive native calibration; WQL and MASE worsen no more than 0.5%; full payload is smaller than a full 2×14 independent calibration table; CPU postprocess p95 <=10% of model inference.",
+    "fail": "Candidate misses quality on either held-out group, is matched by a simpler control within 0.1%, or creates no useful quality/storage frontier.",
+    "not_established": "Official model cannot run, fewer than 2 held-out frequency roles or 5 held-out variates remain, or pair/time boundaries fail verification."
+  },
+  "storage": {
+    "authority": "Actual serialized inference payload bytes.",
+    "paid_state": ["model.safetensors", "config.json", "frequency and variate factors", "all output offsets", "sensor-role mapping", "sample count and prediction configuration"],
+    "reporting": "Report common checkpoint once, actual method state and metadata, full payload bytes, and inference source bytes separately."
+  },
+  "boundaries": [
+    "One small Moirai model on PEMS-BAY-derived five- and fifteen-minute sensor series; not a broad foundation model claim.",
+    "The 15-minute view is a deterministic resampling of the 5-minute source, not an independently measured frequency domain.",
+    "Moirai pretraining overlap with public traffic benchmarks is unknown.",
+    "CPU-only runtime; no accelerator latency claim."
+  ],
+  "amendments": [
+    {
+      "id": "AM-00",
+      "timing": "before any PEMS-BAY download or audit scoring",
+      "reason": "The initial draft used ETT, whose final time region had been accessed by MA-1047; that would not provide a program-level fresh audit.",
+      "change": "Replace ETT with pinned PEMS-BAY, derive two predeclared rates from the same new source, and use the registered checkerboard held-out frequency×variate design.",
+      "impact": "No Moirai forecast, PEMS-BAY target, Mirror parameter, or outcome was viewed before this amendment. Model API smoke used random synthetic tensors only."
+    }
+  ]
+}
