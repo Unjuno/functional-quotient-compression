@@ -24,6 +24,11 @@ MA-990 official MERL RANF code was located, but the required SONICOM HRTF subjec
 
 # Worker queue
 
+## Current handoff — 2026-11-15, MA-1025
+
+MA-1025 is a bounded CIFAR-10/CLIP FAIL: image-conditioned Mirror uses 74,935 B learned state and scores 81.25% novel accuracy, 6.25 pp above the full CoCoOp-style control, yet ties matched rank-2 additive at 83.33% base, 81.25% novel and 82.28% H. This fails the preregistered >=1 pp Mirror-specific gate. Full bundle is 608,938,515 B (74,935 B over CLIP). Exact serialized replay, asset/data hashes and six tests pass. Audit is only 40 images, disjoint from MA-1024; no broad VLM claim. Continue to P0 MA-1026. See `ma-1025-cocoop-instance-view/RESULTS.md`.
+
+
 ## Current handoff — 2026-11-15, MA-1024
 
 MA-1024 is a CIFAR-10/CLIP prompt FAIL: domain-phase Mirror saves 73.8% prompt bytes vs independent CoOp, but novel accuracy is 77.34% vs 85.94% independent and 88.28% shared CoOp; H-mean misses the 1 pp tolerance. The complete 608.9 MB bundle saves only 24,506 B and shared CoOp is 73 B smaller. Native scalar Givens exactly aliases Mirror. Official test was opened after freeze; exact same-split replay, hashes and three tests pass. Continue to P0 MA-1025. See `ma-1024-coop-prompt-mirror/RESULTS.md`.

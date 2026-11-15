@@ -1,0 +1,91 @@
+{
+  "experiment_id": "MA-1025",
+  "title": "CoCoOp image-conditioned Mirror prompt code",
+  "status": "COMPLETE",
+  "evidence_lane": "LANGUAGE/STORAGE/COMPUTE",
+  "base_commit": "5381123b3",
+  "hypothesis": "A two-value image-conditioned Givens code preserves CoCoOp base-to-novel accuracy with less generator state and provides value beyond an equal-width additive low-rank prompt conditioner.",
+  "physical_object": "frozen openai/clip-vit-base-patch32 plus shared 4-token context and image-conditioned prompt generator",
+  "mirror_coordinate": "m(x) in R^2 from frozen CLIP image feature, used as two paired Givens rotations on four prompt tokens",
+  "logical_multiplicity": "per-image conditional text prompts for one base/novel classifier",
+  "prior_art_refs": [
+    "PA313",
+    "PA312"
+  ],
+  "controls": [
+    "zero-shot CLIP",
+    "shared CoOp",
+    "full CoCoOp-style 512D image-conditioned prompt bias",
+    "Mirror 2D Givens code",
+    "2D additive low-rank prompt control"
+  ],
+  "development": {
+    "dataset": "uoft-cs/cifar10",
+    "train_classes": [
+      "airplane",
+      "automobile",
+      "bird",
+      "cat",
+      "deer",
+      "dog"
+    ],
+    "novel_classes": [
+      "frog",
+      "horse",
+      "ship",
+      "truck"
+    ],
+    "train_images_per_base_class": 4,
+    "audit_images_per_class": 4,
+    "selection_seed": 102501,
+    "exclude_MA1024_train_indices": true,
+    "exclude_MA1024_official_test_indices": true,
+    "n_context_tokens": 4,
+    "generator_hidden": 32,
+    "mirror_code_dim": 2,
+    "updates": 20,
+    "batch_size": 4,
+    "optimizer": "Adam lr=0.001",
+    "selection_metric": "base/novel accuracy, harmonic mean, prompt bytes, per-image prompt latency"
+  },
+  "fresh": {
+    "dataset_split": "official CIFAR-10 test",
+    "images_per_class": 4,
+    "disjoint_from_MA1024": true,
+    "indices_locked_before_access": true,
+    "opened_at_freeze": false,
+    "opened_after_all_prompt_states_frozen": true
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "prompt_format": "UTF-8 JSON header plus contiguous little-endian float32 arrays",
+    "full_bundle_bytes": "shared CLIP model/tokenizer/processor file bytes plus exact prompt/generator payload",
+    "paid_objects": [
+      "CLIP weights/config/tokenizer/image processor",
+      "context vectors",
+      "image conditioner and generator",
+      "Mirror code mapping",
+      "class labels and schedules",
+      "postprocessor"
+    ]
+  },
+  "compute": {
+    "report_image_feature_wall": true,
+    "report_updates_and_examples": true,
+    "report_per_image_text_inference_wall": true,
+    "report_backbone_parameters": true,
+    "report_cpu_device": true
+  },
+  "success_gate": "Mirror novel accuracy within 1 pp of CoCoOp; >=25% fewer prompt-generator bytes; >=1 pp better than matched rank-2 additive control at same updates.",
+  "failure_gate": "Rank-2 additive control matches/beats Mirror, or Mirror misses CoCoOp quality tolerance.",
+  "boundaries": [
+    "CIFAR-10 only",
+    "single original image domain",
+    "disjoint subset from MA-1024",
+    "frozen pretrained CLIP",
+    "CPU prompt-learning screen",
+    "no broad VLM claim"
+  ],
+  "final_decision": "FAIL",
+  "final_decision_basis": "Mirror matches the matched rank-2 additive control on base, novel and H-mean accuracy, violating the >=1pp Mirror-specific gate."
+}

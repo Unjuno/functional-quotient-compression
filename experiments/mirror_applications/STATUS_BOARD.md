@@ -7,10 +7,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 - Registered candidates: **1155**
 - Claim ledger entries: **452**
-- P0: **630** (370 FAIL; 54 PROMISING; 196 UNTESTED; 9 NOT ESTABLISHED; 1 SCREENING)
+- P0: **630** (371 FAIL; 54 PROMISING; 195 UNTESTED; 9 NOT ESTABLISHED; 1 SCREENING)
 - P1: **422** (17 completed; 405 UNTESTED)
 - P2: **103** (103 UNTESTED)
-- Current MA statuses: **378 FAIL, 9 NOT ESTABLISHED, 63 PROMISING, 1 SCREENING, 704 UNTESTED**
+- Current MA statuses: **379 FAIL, 9 NOT ESTABLISHED, 63 PROMISING, 1 SCREENING, 703 UNTESTED**
 - 47 baseline experiment directories remain present; verified external outcomes are linked to their dedicated branches in the registry and claim ledger.
 - New research: MA-876..935 (60 candidates), PA236..PA265 (30 primary sources). See the current Next candidate section for the live queue.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. see the current Next candidate section.
@@ -24,7 +24,9 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-MA-1024 is complete as a CIFAR-10/CLIP FAIL: Mirror prompt state saves 73.8% vs independent domain contexts, but novel accuracy is 77.34% vs 85.94% independent and 88.28% shared CoOp; H-mean misses the 1 pp tolerance. Full 608.9 MB bundle saves only 24,506 B, while shared CoOp is 73 B smaller. Native scalar Givens exactly aliases Mirror. Same-split replay, asset hashes and three tests pass; test split opened only after freeze. Continue to P0 MA-1025. See `experiments/mirror_applications/ma-1024-coop-prompt-mirror/RESULTS.md`.
+MA-1025 is complete as a bounded CIFAR-10/frozen CLIP FAIL: Mirror uses 74,935 B learned state and reaches 81.25% novel accuracy (13/16), 6.25 pp above the CoCoOp-style control, but ties rank-2 additive on all accuracies. It therefore fails the preregistered Mirror-specific 1 pp gate. Complete bundle is 608,938,515 B, only 74,935 B above CLIP. Serialized replay, asset/audit hashes and six tests pass. Continue to P0 MA-1026. See `experiments/mirror_applications/ma-1025-cocoop-instance-view/RESULTS.md`.
+
+Previous: MA-1024 is complete as a CIFAR-10/CLIP FAIL: Mirror prompt state saves 73.8% vs independent domain contexts, but novel accuracy is 77.34% vs 85.94% independent and 88.28% shared CoOp; H-mean misses the 1 pp tolerance. Full 608.9 MB bundle saves only 24,506 B, while shared CoOp is 73 B smaller. Native scalar Givens exactly aliases Mirror. Same-split replay, asset hashes and three tests pass; test split opened only after freeze. Continue to P0 MA-1025. See `experiments/mirror_applications/ma-1024-coop-prompt-mirror/RESULTS.md`.
 
 MA-1017 is complete as a scoped synthetic FAIL for Mirror-specific attribution: four distinct task functions reach 98.44% shot accuracy with the Mirror schedule and ordinary scalar phase alike; both use 379 B and save 27.5% vs independent circuits, while no-view sharing reaches 51.56%. Five tests/replay pass; fresh sealed; no QPU/noisy-device claim. MA-1016/1017 are consecutive quantum-family failures with the same exact native scalar-phase alias, so pause MA-1018..1023 UNTESTED pending redesign. Continue to P0 MA-1024. See `experiments/mirror_applications/ma-1017-data-reupload-task-view/RESULTS.md` and `../../docs/phase2/QUANTUM_MIRROR_FAMILY_DIAGNOSTIC_2026-11-15.md`.
 

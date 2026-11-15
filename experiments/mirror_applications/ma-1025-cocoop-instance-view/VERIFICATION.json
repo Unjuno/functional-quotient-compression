@@ -1,0 +1,66 @@
+{
+  "experiment_id": "MA-1025",
+  "status": "PASS: evidence integrity; FAIL: preregistered Mirror-specific hypothesis",
+  "protocol_frozen_before_run": true,
+  "fresh_opened_after_all_prompt_states_frozen": true,
+  "checks": [
+    {
+      "name": "serialized_payload_hash_size_and_state_replay",
+      "result": "PASS",
+      "command": "python source/verify_result.py"
+    },
+    {
+      "name": "self_describing_inference_payload_metadata",
+      "result": "PASS",
+      "note": "Inference mapping, token template, feature normalization and score scale are charged in the serialized header."
+    },
+    {
+      "name": "frozen_backbone_file_hashes_and_bundle_arithmetic",
+      "result": "PASS",
+      "command": "python source/verify_result.py"
+    },
+    {
+      "name": "train_and_audit_index_disjointness_from_MA1024",
+      "result": "PASS",
+      "command": "python source/verify_result.py"
+    },
+    {
+      "name": "audit_image_sha256",
+      "result": "PASS",
+      "count": 40
+    },
+    {
+      "name": "exact_aggregate_metric_replay_from_serialized_prompt_state",
+      "result": "PASS",
+      "tolerance": 1e-12
+    },
+    {
+      "name": "success_gate",
+      "result": "FAIL",
+      "reason": "Mirror and additive rank-2 controls tie on all three recorded accuracies; required Mirror advantage is at least 1 pp."
+    },
+    {
+      "name": "payload_metadata_amendment_replay",
+      "result": "PASS",
+      "note": "Metadata-only artifact amendment regenerated from saved learned tensors; full replay repeated exactly."
+    }
+  ],
+  "replay_stdout": {
+    "audit_hashes_and_sample_disjointness": true,
+    "full_bundle_arithmetic": true,
+    "mirror_equals_rank2_additive_quality": true,
+    "payload_and_backbone_hashes": true,
+    "serialized_prompt_replay_exact": true,
+    "status": "FAIL per frozen specificity gate"
+  },
+  "boundaries": [
+    "40 audit images",
+    "CPU only",
+    "CIFAR-10 / frozen CLIP only",
+    "no broad VLM claim"
+  ],
+  "unit_tests": {
+    "command": "python -m unittest discover -s experiments/mirror_applications/ma-1025-cocoop-instance-view/tests -v",
+    "passed": 6
+  }
+}
