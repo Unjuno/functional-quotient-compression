@@ -9,4 +9,4 @@ T: 4-qubit, 2-layer ideal statevector; four distinct task functions; all 16 bit 
 D: FAIL. Mirror saves 3.4% vs TT, not 10%; is byte/function identical to ordinary scalar-phase control; independent bank is 48 B smaller. Six tests and deterministic replay pass.
 C: Four tasks are too few for TT sharing; compact serializer metadata dominates the small models.
 U: trained task generalization, noisy device, compiled circuits, official TensorHyper reproduction, fresh seeds and QPU execution.
-Last verified commit: pending.
+Last verified commit: `2a2aa74d5ad9492a5d4b297a72f22dfcb295e5f8`.
