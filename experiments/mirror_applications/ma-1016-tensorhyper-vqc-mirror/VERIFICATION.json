@@ -1,0 +1,17 @@
+{
+  "experiment_id": "MA-1016",
+  "status": "PASS_VERIFICATION / FAIL_HYPOTHESIS",
+  "protocol_frozen_before_run": true,
+  "fresh_opened": false,
+  "checks": [
+    {"name": "task_diversity", "passed": true, "detail": "Four distinct sign-label functions; pairwise disagreement 50%-100%. Initial collapsed-task dev run excluded under protocol amendment 01."},
+    {"name": "statevector_and_shot_replay", "passed": true, "detail": "Deterministic replay exactly matches task outputs, seeded shot metrics and payload byte counts."},
+    {"name": "payload_roundtrip", "passed": true, "detail": "JSON header and contiguous float32-le tensor payload reconstruct TT state."},
+    {"name": "native_scalar_control_alias", "passed": true, "detail": "Mirror phase and native scalar-phase payload bytes and outputs match exactly."},
+    {"name": "unit_tests", "passed": true, "detail": "6 tests passed."},
+    {"name": "fresh_sealed", "passed": true, "detail": "Seeds 1016301, 1016307, 1016313 not opened."}
+  ],
+  "code_sha256": "c4b21d92dc3be2000b932a532c797603e43700f1b6c1c9e30c5144d7db8e61b2",
+  "environment": {"device": "CPU", "simulator": "complex128 statevector plus seeded binomial shot sampling", "wall_total_s": 0.16335675500158686},
+  "result": "Scoped aligned synthetic FAIL; no QPU, noisy-device or official TensorHyper-VQC claim."
+}

@@ -24,6 +24,10 @@ MA-990 official MERL RANF code was located, but the required SONICOM HRTF subjec
 
 # Worker queue
 
+## Current handoff — 2026-11-15, MA-1016
+
+MA-1016 is an aligned synthetic TT-VQC FAIL: four distinct task functions match the TT teacher exactly; 1,024-shot accuracy is 95.31% for all methods. Mirror saves only 3.4% actual bytes vs rank-2 native TT, exactly aliases the 567 B native scalar-phase control, and is 48 B larger than independent angles under the declared compact serializer. Six tests and exact replay pass; fresh sealed; no QPU/noisy-device claim. Continue to P0 MA-1017. See `ma-1016-tensorhyper-vqc-mirror/RESULTS.md`.
+
 ## Current handoff — 2026-11-15, MA-1014
 
 MA-1014 is a bounded synthetic DC placement FAIL. Post-DC Mirror breaks acquired samples (RMS .033-.083); final projection restores exactness but worsens heldout k-space error 8.6-14.7%. The pre-prior placement stays DC-exact but is within 0.5% of native prior quality and fails the 5% gain gate at all sites; actual serialized bytes rise 64 B. Exact replay and three tests pass; fresh sealed; no acquired MRI claim. Continue to P0 MA-1016 (MA-1015 is P1). See `ma-1014-dc-commutation-audit/RESULTS.md`.

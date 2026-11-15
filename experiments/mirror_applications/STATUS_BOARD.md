@@ -6,11 +6,11 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- Claim ledger entries: **449**
-- P0: **630** (367 FAIL; 54 PROMISING; 199 UNTESTED; 9 NOT ESTABLISHED; 1 SCREENING)
+- Claim ledger entries: **450**
+- P0: **630** (368 FAIL; 54 PROMISING; 198 UNTESTED; 9 NOT ESTABLISHED; 1 SCREENING)
 - P1: **422** (17 completed; 405 UNTESTED)
 - P2: **103** (103 UNTESTED)
-- Current MA statuses: **375 FAIL, 9 NOT ESTABLISHED, 63 PROMISING, 1 SCREENING, 707 UNTESTED**
+- Current MA statuses: **376 FAIL, 9 NOT ESTABLISHED, 63 PROMISING, 1 SCREENING, 706 UNTESTED**
 - 47 baseline experiment directories remain present; verified external outcomes are linked to their dedicated branches in the registry and claim ledger.
 - New research: MA-876..935 (60 candidates), PA236..PA265 (30 primary sources). See the current Next candidate section for the live queue.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. see the current Next candidate section.
@@ -23,6 +23,8 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 - SRM/TM and prior Phase I results are not MA statuses.
 
 ## Next candidate
+
+MA-1016 is complete as an aligned synthetic FAIL: four distinct TT-generated task functions have 100% exact teacher agreement; at 1,024 shots all methods score 95.31%. Mirror saves 3.4% actual bytes vs native rank-2 TT, below the 10% gate, exactly aliases a native scalar-phase control (567 B), and exceeds the independent angle bank by 48 B. Six tests/replay pass; fresh sealed; no QPU or official TensorHyper claim. Continue at P0 MA-1017. See `experiments/mirror_applications/ma-1016-tensorhyper-vqc-mirror/RESULTS.md`.
 
 MA-1014 is complete as a bounded synthetic FAIL: post-DC feature Mirror violates acquired-line consistency (RMS .033-.083); exact final reprojection restores it but worsens heldout error by 8.6-14.7%. Pre-prior Mirror misses the 5% heldout-quality gate at all sites and adds 64 B. Exact replay and three tests pass; fresh sealed; no acquired MRI or clinical claim. Continue to P0 MA-1016 (MA-1015 is P1). See `experiments/mirror_applications/ma-1014-dc-commutation-audit/RESULTS.md`.
 
