@@ -1,0 +1,3 @@
+# MA-1037 post-audit manifest path correction
+
+Review of the materialized payload found that the linear boundary control manifest named a local `candidate_d*.npy` path even though its byte-identical candidate table is shared from the Mirror directory. This made the control manifest incomplete for inference reconstruction. Manifests now contain resolvable experiment-relative paths for the candidate table, common full source table, corpus-ID map, optional coordinate asset, and pinned model artifact. Exact payload sizes change only by the paid manifest strings. The locked test split, embeddings, angles, candidate arrays, and metrics do not change. Previous opened results are retained; the final audit is rerun so authoritative serialized bytes include corrected manifests.

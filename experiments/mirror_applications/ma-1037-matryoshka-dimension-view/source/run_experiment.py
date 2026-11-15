@@ -186,7 +186,8 @@ def audit(model_dir):
     if method=='mirror_givens': coordinate_path.write_bytes(np.asarray([angles_d],dtype='<f4').tobytes())
     else: coordinate_path.write_bytes(np.asarray(wm,dtype='<f4').tobytes())
     coordinate_bytes=coordinate_path.stat().st_size
-   manifest={'method':method,'dimension':d,'rows':len(docids),'source_embedding':'payload/shared/full_source_vectors.npy','candidate':('payload/shared/full_source_vectors.npy' if d==D else 'candidate_d%d.npy'%d),'coordinate':(angles_d if method=='mirror_givens' else wm) if d<D and method!='native_prefix' else None,'normalized_after_prefix':True,'model_revision':MODEL_REV}
+   coordinate_asset=str(coordinate_path.relative_to(ROOT)) if coordinate_bytes else None
+   manifest={'method':method,'dimension':d,'rows':len(docids),'source_embedding':'payload/shared/full_source_vectors.npy','corpus_ids':'payload/shared/corpus_ids.json','candidate':str(index_path.relative_to(ROOT)),'coordinate_asset':coordinate_asset,'coordinate':(angles_d if method=='mirror_givens' else wm) if d<D and method!='native_prefix' else None,'normalized_after_prefix':True,'model_artifact':f'nomic-ai/nomic-embed-text-v1.5@{MODEL_REV}:onnx/model_quantized.onnx'}
    mp=ROOT/'payload'/method/f'manifest_d{d}.json'; mp.parent.mkdir(parents=True,exist_ok=True); mp.write_text(json.dumps(manifest,sort_keys=True,separators=(',',':'))+'\n'); mb=mp.stat().st_size
    total=model_bytes+source_bytes+id_bytes+candidate_bytes+coordinate_bytes+mb
    transform={'native_prefix':lambda z,d=d:prefix(z,d),'mirror_givens':lambda z,d=d,t=angles_d:givens_prefix(z,d,t),'linear_boundary_control':lambda z,d=d,w=wm:linear_boundary_prefix(z,d,w)}[method]
