@@ -76,13 +76,14 @@
   "fresh": {
     "locked_before_access": true,
     "audit_worlds": [
-      1044,
-      1045,
-      1046
+      1047,
+      1048,
+      1049
     ],
     "quality": "Every predecessor key and stable value must equal exact ordered-map control after 128 inserts and 128 deletes per world.",
     "correctness_audit": "10,000 queries per domain per fresh world; include values between transformed keys and boundary probes.",
-    "runtime": "Five randomized arm-order passes per query; report p50/p95 on this CPU only."
+    "runtime": "Five randomized arm-order passes per query; report p50/p95 on this CPU only.",
+    "audit_isolation": "Seeds 1044-1046 were run in a superseded implementation audit and are retained as exploratory diagnostics; confirmatory fresh worlds are 1047-1049, inaccessible until the defect correction and amendment were frozen."
   },
   "storage": {
     "authority": "Actual serialized inference payload bytes.",
@@ -142,6 +143,22 @@
         "quality/correctness gates",
         "task coordinates",
         "complete serialized byte accounting"
+      ]
+    },
+    {
+      "id": "AM-03",
+      "reason": "The first held-out execution (seeds 1044-1046) exposed a predecessor-correction implementation defect: PGMIndex.search guarantees a lower_bound inside [lo,hi), but for absent keys the predecessor may be the key immediately before lo. The prototype omitted that one-key left correction. This is an implementation bug, not a hypothesis-driven model or parameter change.",
+      "changes": [
+        "Extend the correction range one key left (when lo>0) before lower_bound, then return exact predecessor.",
+        "Preserve seeds 1044-1046 and their results as superseded exploratory diagnostics; do not use them as confirmatory evidence.",
+        "Use new fresh audit seeds 1047-1049; epsilon remains frozen at 8 from development."
+      ],
+      "unchanged": [
+        "data generator and domains",
+        "epsilon selection and dev results",
+        "quality/storage/runtime thresholds",
+        "controls and serializer",
+        "query/update counts"
       ]
     }
   ]
