@@ -131,8 +131,8 @@ def build_index():
  print(json.dumps({'build_wall_seconds':wall,'payload_files':[str(p.relative_to(HERE)) for p in target.rglob('*') if p.is_file()]},indent=2))
 
 def select_dev():
- split=json.loads((HERE/'runs/SPLIT_LOCK.json').read_text()); qids=sorted(split['dev_qids']); ids,Q,lens=ids_and_arrays(qids); x=np.load(HERE/'runs/corpus_vectors.npy',allow_pickle=False)
- rel=qrels_for(set(qids)); qids=[q for q in qids if q in rel]; ix=np.asarray([ids['query_ids'].index(q) for q in qids]); Q=Q[ix]; lens=lens[ix]
+ split=json.loads((HERE/'runs/SPLIT_LOCK.json').read_text()); allqids=sorted(split['dev_qids']); ids,Q,lens=ids_and_arrays(allqids); x=np.load(HERE/'runs/corpus_vectors.npy',allow_pickle=False)
+ rel=qrels_for(set(allqids)); keep=np.asarray([i for i,q in enumerate(allqids) if q in rel],dtype=np.int64); qids=[allqids[i] for i in keep]; Q=Q[keep]; lens=lens[keep]
  # Fit a single official ScaNN AVQ searcher; all transformed-query arms share it.
  searcher=scann.scann_ops_pybind.load_searcher(str(HERE/'payload/scann_index'))
  threshold=split['role_threshold_wordpieces']; roles=np.where(lens<=threshold,'short','long')
@@ -152,8 +152,8 @@ def select_dev():
 
 def audit():
  freeze=json.loads((HERE/'runs/DEV_FREEZE.json').read_text()); split=json.loads((HERE/'runs/SPLIT_LOCK.json').read_text()); threshold=freeze['role_threshold_wordpieces']; angles=freeze['angles_rad']
- qids=sorted(split['audit_qids']); ids,Q,lens=ids_and_arrays(qids); x=np.load(HERE/'runs/corpus_vectors.npy',allow_pickle=False)
- rel=qrels_for(set(qids)); qids=[q for q in qids if q in rel]; ix=np.asarray([ids['query_ids'].index(q) for q in qids]); Q=Q[ix]; lens=lens[ix]; roles=np.where(lens<=threshold,'short','long')
+ allqids=sorted(split['audit_qids']); ids,Q,lens=ids_and_arrays(allqids); x=np.load(HERE/'runs/corpus_vectors.npy',allow_pickle=False)
+ rel=qrels_for(set(allqids)); keep=np.asarray([i for i,q in enumerate(allqids) if q in rel],dtype=np.int64); qids=[allqids[i] for i in keep]; Q=Q[keep]; lens=lens[keep]; roles=np.where(lens<=threshold,'short','long')
  searcher=scann.scann_ops_pybind.load_searcher(str(HERE/'payload/scann_index'))
  exact=Q@x.T; exact_top=np.argpartition(-exact,9,axis=1)[:,:10]; rr=np.arange(len(Q))[:,None]; es=exact[rr,exact_top]; exact_top=exact_top[rr,np.argsort(-es,axis=1,kind='stable')]
  arms={'native':Q,'mirror':np.vstack([givens(Q[i:i+1],angles[roles[i]]) for i in range(len(Q))]),'linear_control':np.vstack([linear(Q[i:i+1],angles[roles[i]]) for i in range(len(Q))])}
