@@ -1,0 +1,21 @@
+{
+  "experiment_id":"MA-1017",
+  "title":"Task-conditional data re-upload schedule Mirror",
+  "status":"SCREENING",
+  "amendment_01":"Initial development seed 101701 produced only three unique task sign-label functions, with two duplicate task functions. Development-only seed selection fixed seed 101702, which yields four distinct task functions; selection used only task uniqueness, not Mirror-control outcome. Fresh seeds/gates remain unchanged.",
+  "evidence_lane":"MECHANISM/STORAGE/COMPUTE",
+  "base_commit":"acce6c207",
+  "hypothesis":"A scalar task phase on each repeated input-upload rotation can preserve task accuracy with less actual storage than an independent VQC bank, beyond the ordinary scalar-angle control.",
+  "physical_object":"shared 2-qubit 3-block native data-reupload ansatz",
+  "mirror_coordinate":"one task phase added to both qubit input rotation angles at each re-upload block",
+  "logical_multiplicity":"four task-specific classification functions on one fixed gate skeleton",
+  "prior_art_refs":["PA308"],
+  "controls":["shared ansatz without task view","independent full task VQC parameters","Mirror task phase","ordinary native scalar schedule phase"],
+  "development":{"seed":101702,"task_phases_radians":[0.1,0.85,1.75,2.9],"qubits":2,"reupload_blocks":3,"inputs":"16-point 4x4 grid in [-1,1]^2","shots_per_input":1024,"selection_metric":"four unique task label functions, teacher agreement, sampled accuracy, actual payload bytes, logical gate schedule"},
+  "fresh":{"worlds_or_seeds":[1017301,1017307,1017313],"locked_before_access":true,"opened":false},
+  "storage":{"authority":"actual serialized inference payload bytes","format":"UTF-8 JSON header plus contiguous little-endian float32 arrays","paid_objects":["shared or task-specific variational angles","task phase codes","rotation schedule metadata","readout/postprocessing metadata"]},
+  "compute":{"report_qubits":true,"report_shots":true,"report_logical_gates_and_depth":true,"report_statevector_wall_clock":true,"no_qpu_or_hardware_noise_claim":true},
+  "success_gate":"Mirror retains >=98% of independent teacher shot accuracy, saves >=25% actual bytes vs independent bank, and beats ordinary scalar schedule control by >=2 percentage points with equal shots and gates.",
+  "failure_gate":"Mirror aliases native scalar schedule, or misses the quality/storage gate.",
+  "boundaries":["aligned synthetic task family","ideal statevector plus binomial measurement sampling","no training/tuning","no hardware compilation/QPU/noise result","fresh seeds sealed"]
+}

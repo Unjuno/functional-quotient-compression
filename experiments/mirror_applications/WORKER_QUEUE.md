@@ -24,6 +24,10 @@ MA-990 official MERL RANF code was located, but the required SONICOM HRTF subjec
 
 # Worker queue
 
+## Current handoff — 2026-11-15, MA-1017
+
+MA-1017 is a bounded aligned synthetic data-reupload FAIL for Mirror-specific value. Four distinct task classifiers reach 98.44% 1,024-shot accuracy with both Mirror and native scalar-phase schedules at 379 B; both save 27.5% vs independent task circuits, while no-view sharing reaches 51.56%. The Mirror and native controls exactly alias; five tests/replay pass, fresh sealed. No QPU, noise or compiled-device claim. Continue to P0 MA-1018. See `ma-1017-data-reupload-task-view/RESULTS.md`.
+
 ## Current handoff — 2026-11-15, MA-1016
 
 MA-1016 is an aligned synthetic TT-VQC FAIL: four distinct task functions match the TT teacher exactly; 1,024-shot accuracy is 95.31% for all methods. Mirror saves only 3.4% actual bytes vs rank-2 native TT, exactly aliases the 567 B native scalar-phase control, and is 48 B larger than independent angles under the declared compact serializer. Six tests and exact replay pass; fresh sealed; no QPU/noisy-device claim. Continue to P0 MA-1017. See `ma-1016-tensorhyper-vqc-mirror/RESULTS.md`.

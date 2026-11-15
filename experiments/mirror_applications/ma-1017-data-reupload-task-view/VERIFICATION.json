@@ -1,0 +1,16 @@
+{
+  "experiment_id":"MA-1017",
+  "status":"PASS_VERIFICATION / FAIL_MIRROR_ATTRIBUTION",
+  "protocol_frozen_before_run":true,
+  "fresh_opened":false,
+  "checks":[
+    {"name":"task_diversity","passed":true,"detail":"Four distinct label functions with pairwise disagreement 18.75%-93.75%; amendment 01 excludes initial three-function teacher."},
+    {"name":"deterministic_replay","passed":true,"detail":"Exact statevector, shot, and payload-byte replay."},
+    {"name":"native_control_alias","passed":true,"detail":"Mirror schedule and native scalar schedule have byte-identical payload and prediction."},
+    {"name":"unit_tests","passed":true,"detail":"5 tests passed."},
+    {"name":"fresh_sealed","passed":true,"detail":"Seeds 1017301, 1017307, 1017313 not opened."}
+  ],
+  "code_sha256":"b9b31932ebabd8d527aa4456feadc98172104775f56ef0248d9f2d12e43d8e5e",
+  "environment":{"device":"CPU","simulator":"ideal 4-amplitude complex128 statevector plus seeded binomial shots","wall_total_s":0.12461507899934077},
+  "result":"Aligned synthetic FAIL for Mirror-specific attribution; no QPU/noise/compiled-hardware claim."
+}
