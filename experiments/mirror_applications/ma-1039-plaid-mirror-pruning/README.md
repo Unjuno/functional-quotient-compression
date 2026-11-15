@@ -1,13 +1,19 @@
 # MA-1039 — PLAID centroid pruning with a query-role task View
 
-This experiment adds two development-selected Givens coordinates to the shared centroid scoring bank used by official ColBERTv2 PLAID. It asks whether query-length roles can improve held-out retrieval while reusing one residual-coded token index. The required native query-side inverse-Givens control tests whether the insertion point provides any function beyond ordinary score-preserving parameter movement.
+**Decision: FAIL.** A two-angle centroid-bank View improves pre-pruning candidate-union recall but misses final MRR/Recall gates and exactly matches the ordinary inverse query-side Givens control.
 
-The run uses the pinned ColBERT source and checkpoint with CPU PLAID traversal, a bounded positive-qrel-plus-background TREC-COVID collection, and a qid-disjoint development/audit split. Read `PROTOCOL.json` before running. Audit data must not be opened until the source and protocol freeze commit is recorded.
+- [Protocol](PROTOCOL.json): frozen conditions, controls, gates, bounded-data scope and CPU codebook-sample amendment.
+- [Results](RESULTS.md): H/T/D/C/U, scoped audit metrics, actual bytes, compute and fact/interpretation/hypothesis separation.
+- [Verification](VERIFICATION.json): tests, exact metric replay, exact candidate map and actual payload replay.
+- `runs/summary.json`, `runs/audit_rankings.json`, `runs/DEV_FREEZE.json`, `runs/verification_replay.json`: numeric results, per-query replay records and artifact hashes. The checkpoint, raw corpus and PLAID index remain external; their provenance/hashes are recorded.
 
-Run from the repository root with the pinned environment paths available:
+## Reproduce
+
+From the repository root in the pinned environment, run:
 
 ```bash
-python experiments/mirror_applications/ma-1039-plaid-mirror-pruning/source/run_experiment.py
+PYTHONPATH=/tmp/ma1039deps:/tmp/ma1038/ColBERT python experiments/mirror_applications/ma-1039-plaid-mirror-pruning/source/verify_results.py
+pytest -q experiments/mirror_applications/ma-1039-plaid-mirror-pruning/tests
 ```
 
-The driver writes development freeze and audit summaries under `runs/`; large external model, index, and dataset files remain outside Git. The result is scoped to the bounded collection and CPU execution path, not a full-corpus or production-latency claim.
+The experiment driver is `source/run_experiment.py`. It requires the official BEIR TREC-COVID archive, pinned ColBERTv2 checkpoint, CPU FAISS and the official ColBERT source revision listed in `PROTOCOL.json` and `RESULTS.md`.

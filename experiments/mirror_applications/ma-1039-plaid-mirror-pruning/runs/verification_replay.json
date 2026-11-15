@@ -1,0 +1,82 @@
+{
+  "angle_roundtrip_exact": true,
+  "centroid_score_max_abs_delta": 3.8743019104003906e-07,
+  "checkpoint_file_sha256": {
+    "artifact.metadata": "0ddc5a54234cff6d13bc9411250a5479d9d96f3ffbace76d8a1884144377e434",
+    "config.json": "cbdcc01dc7772fd0e5e1d85d5de695faf8c4935ae3c7ea3fdb6c24397b284f3c",
+    "pytorch_model.bin": "26e4c2f9f95a3da4442252bb40d99e4fbfd098e733edac1d785c9937b8a278da",
+    "special_tokens_map.json": "303df45a03609e4ead04bc3dc1536d0ab19b5358db685b6f3da123d05ec200e3",
+    "tokenizer.json": "5fd1c882abbd30517dced455a2c9768945ec726b96727927e4959348d9de550b",
+    "tokenizer_config.json": "a16a31c8d474339d7a46afe7eb8583b24f8b74806af6e25294506523f9d0acfb",
+    "vocab.txt": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3"
+  },
+  "dataset_archive_sha256": "120f42a7864d2214234537733c0d2c6684e42fdfafff2c5eacf98afca6656aa0",
+  "dataset_hash_matches": true,
+  "experiment_id": "MA-1039",
+  "fresh_queries": 20,
+  "index_file_sha256": {
+    "0.codes.pt": "fe926c2e167e39d5912b9d09816af2bc2122ac114d9de0a11d1046b069d1c64f",
+    "0.metadata.json": "b06115d0b22ba4d58c56a4f9553b7c3c5f1cfdbd8889aaeae87790c6c0ffe27d",
+    "0.residuals.pt": "513594288c6b4aa6f1f25eadffc602e0925a050e2517dfe2b687f7c42be1dce4",
+    "avg_residual.pt": "3f7094f4b964c0b9ca3ff09cb5b02ae668356be200436f5f7916847df64423ff",
+    "buckets.pt": "fbaac7d304fdcd5e7db82ebc558ffe0c5f254705c91de6d3912a157914953158",
+    "centroids.pt": "376ec0dd64efe98fa2424719db1b5a2ac2aa539f24c898173847c3ac3d157d4f",
+    "doclens.0.json": "3dc55093df6e5d0f58f5a91a3b5f659f5b853041b841a90395ddfbb63397e85d",
+    "ivf.pid.pt": "59813c2b44f7491900b114074a9227e52f359d4a17a238a71b10d8d63c73f953",
+    "metadata.json": "cd72fdfaec9adaf754a2372256300ac65e0e9bc0dc6b881847976841b4fb0e37",
+    "plan.json": "151aa69e0b2b7ce77e7bd2502f8a664c744d80f63676c41f76ad3a9c28fc285a"
+  },
+  "metric_replay_exact": true,
+  "metric_replay_max_abs_difference": 0.0,
+  "mirror_equals_native_query_control_all_audit": true,
+  "notes": [
+    "Independent CPU replay from stored per-query rankings, official qrels and actual filesystem payloads."
+  ],
+  "payload_bytes_replayed": {
+    "index": 52239740,
+    "mirror_complete": 491544817,
+    "model_and_tokenizer": 439106417,
+    "native_complete": 491544697,
+    "pid_map": 198540,
+    "view": 120
+  },
+  "payload_replay_exact": true,
+  "pid_map_exact": true,
+  "prepruning_union_matches": true,
+  "replayed_metrics": {
+    "full_index_scan": {
+      "MRR@10": 0.09714285714285714,
+      "Recall@1000": 0.060614752015039595,
+      "n": 20,
+      "nDCG@10": 0.028564426753415355
+    },
+    "mirror": {
+      "MRR@10": 0.09672619047619048,
+      "Recall@1000": 0.05565304060516576,
+      "n": 20,
+      "nDCG@10": 0.029245842555083584
+    },
+    "native_query_control": {
+      "MRR@10": 0.09672619047619048,
+      "Recall@1000": 0.05565304060516576,
+      "n": 20,
+      "nDCG@10": 0.029245842555083584
+    },
+    "plaid_native": {
+      "MRR@10": 0.09791666666666667,
+      "Recall@1000": 0.05255864676722603,
+      "n": 20,
+      "nDCG@10": 0.029629231661821215
+    }
+  },
+  "replayed_prepruning_ivf_union_recall": {
+    "mirror": 0.7162168505159554,
+    "native_query_control": 0.7162168505159554,
+    "plaid_native": 0.6977164953817958
+  },
+  "roles": {
+    "long": 7,
+    "short": 13
+  },
+  "view_metadata_exact": true
+}

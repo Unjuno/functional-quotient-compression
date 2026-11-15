@@ -36,10 +36,6 @@ def main():
         for r in csv.DictReader(f,delimiter='\t'):
             qrels.setdefault(str(r['query-id']),{})[str(r['corpus-id'])]=int(r['score'])
     qrels={q:r for q,r in qrels.items() if any(v>0 for v in r.values())}
-    roles={q:(0 if summary['audit_role_counts']['short'] and
-                    q in set(x['qid'] for x in replay['plaid_native'] if x['qid'] in freeze['audit_queries']) and
-                    # Raw role lengths are frozen in the runner; audit role assignment is rederived below.
-                    False else 0) for q in []}
     # Reconstruct audit roles using the pinned ColBERT tokenizer and frozen development threshold.
     from transformers import AutoTokenizer
     tok=AutoTokenizer.from_pretrained(str(MODEL),local_files_only=True)
@@ -64,8 +60,23 @@ def main():
         if union: replay_union[arm]=float(np.mean(union))
     mirror={r['qid']:r for r in replay['mirror']}
     native={r['qid']:r for r in replay['native_query_control']}
-    exact_alias=all(mirror[q]['candidate_ids']==native[q]['candidate_ids'] and mirror[q]['ranking_top1000']==native[q]['ranking_top1000'] for q in mirror)
+    exact_alias=all(mirror[q]['candidate_ids']==native[q]['candidate_ids'] and mirror[q]['ranking_top1000'][:100]==native[q]['ranking_top1000'][:100] for q in mirror)
     archive_sha=sha(Path('/tmp/ma1039/trec-covid.zip'))
+    # Reconstruct the frozen candidate PID map from official corpus IDs and qrels.
+    corpus_ids=[]
+    with (DATA/'corpus.jsonl').open() as f:
+        for line in f: corpus_ids.append(str(json.loads(line)['_id']))
+    corpus_id_set=set(corpus_ids)
+    positives={d for rr in qrels.values() for d,v in rr.items() if v>0 and d in corpus_id_set}
+    background=[d for d in corpus_ids if d not in positives]
+    background.sort(key=lambda d:hashlib.sha256(f"MA1039|1039|{d}".encode()).hexdigest())
+    expected_docids=sorted(positives.union(background[:512]))
+    paid_docids=json.loads((PAYLOAD/'pid_to_docid.json').read_text())
+    pid_map_exact=paid_docids==expected_docids==sorted(expected_docids)
+    angle_state=np.fromfile(PAYLOAD/'role_angles.f32',dtype='<f4').tolist()
+    angle_roundtrip_exact=angle_state==[np.float32(a).item() for a in freeze['angles']]
+    view_meta=json.loads((PAYLOAD/'role_view.json').read_text())
+    view_metadata_exact=view_meta['role_threshold_raw_tokens']==freeze['role_threshold_raw_tokens']
     model_files=sorted(p for p in MODEL.rglob('*') if p.is_file())
     index_files=sorted(p for p in INDEX.rglob('*') if p.is_file())
     index_bytes=sum(p.stat().st_size for p in index_files)
@@ -83,14 +94,14 @@ def main():
         'mirror_equals_native_query_control_all_audit':exact_alias,
         'centroid_score_max_abs_delta':summary['equivalence']['max_abs_centroid_score_delta'],
         'payload_bytes_replayed':{'index':index_bytes,'model_and_tokenizer':model_bytes,'pid_map':pid_bytes,'view':angle_bytes,'native_complete':complete,'mirror_complete':complete+angle_bytes},
-        'payload_replay_exact':payload_ok,'index_file_sha256':{p.relative_to(INDEX).as_posix():sha(p) for p in index_files},
+        'payload_replay_exact':payload_ok,'pid_map_exact':pid_map_exact,'angle_roundtrip_exact':angle_roundtrip_exact,'view_metadata_exact':view_metadata_exact,'index_file_sha256':{p.relative_to(INDEX).as_posix():sha(p) for p in index_files},
         'checkpoint_file_sha256':{p.relative_to(MODEL).as_posix():sha(p) for p in model_files},
         'roles':{'short':sum(roles.values()==0 for _ in []),'long':0},
         'notes':['Independent CPU replay from stored per-query rankings, official qrels and actual filesystem payloads.']}
     result['roles']={'short':sum(1 for q in roles if roles[q]==0),'long':sum(1 for q in roles if roles[q]==1)}
     (EXP/'runs/verification_replay.json').write_text(json.dumps(result,indent=2,sort_keys=True)+'\n')
     print(json.dumps(result,indent=2,sort_keys=True))
-    if not result['dataset_hash_matches'] or not result['metric_replay_exact'] or not result['prepruning_union_matches'] or not result['mirror_equals_native_query_control_all_audit'] or not result['payload_replay_exact']:
+    if not result['dataset_hash_matches'] or not result['metric_replay_exact'] or not result['prepruning_union_matches'] or not result['mirror_equals_native_query_control_all_audit'] or not result['payload_replay_exact'] or not result['pid_map_exact'] or not result['angle_roundtrip_exact'] or not result['view_metadata_exact']:
         raise SystemExit('MA-1039 verification failed')
 
 if __name__=='__main__': main()

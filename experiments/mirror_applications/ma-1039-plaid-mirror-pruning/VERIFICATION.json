@@ -1,19 +1,37 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-1039",
+  "commit": "c17e52a01",
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "pytest -q experiments/mirror_applications/ma-1039-plaid-mirror-pruning/tests",
+    "passed": 5,
+    "failed": 0
   },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "native_complete_bytes": 491544697,
+    "mirror_complete_bytes": 491544817,
+    "marginal_view_bytes": 120,
+    "pid_map_exact": true,
+    "angle_roundtrip_exact": true,
+    "view_metadata_exact": true
   },
   "metric_replay": {
-    "checked": false,
-    "max_difference": null
+    "checked": true,
+    "max_difference": 0.0,
+    "candidate_union_recall_exact": true,
+    "mirror_native_query_control_same_candidate_sets": true,
+    "mirror_native_query_control_same_top100": true,
+    "centroid_score_max_abs_difference": 3.8743019104003906e-07
   },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "fresh_split_integrity_checked": true,
+  "dataset_archive_sha256": "120f42a7864d2214234537733c0d2c6684e42fdfafff2c5eacf98afca6656aa0",
+  "checkpoint_archive_sha256": "d07df4b2a9fe1848fbed333127a1a5b4f2d96106f420948f0db4450b018cb119",
+  "index_build_wall_seconds": 3355.76,
+  "notes": [
+    "Independent per-query replay from frozen official TREC-COVID qrels and saved top-1000 rankings; MRR/nDCG/Recall maximum absolute difference 0.0.",
+    "Actual index/model/tokenizer/PID-map/View serialized byte accounting reproduced exactly; SHA256 manifests are in runs/verification_replay.json.",
+    "CPU latency remains NOT ESTABLISHED because audit arms were timed once per query without isolated repeated calibration.",
+    "Scoped positive-qrel-plus-512-background collection; not full-corpus TREC-COVID performance."
+  ]
 }
