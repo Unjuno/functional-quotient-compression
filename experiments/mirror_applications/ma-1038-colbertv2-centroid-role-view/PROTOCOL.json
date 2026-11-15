@@ -3,7 +3,7 @@
   "title": "ColBERTv2 shared centroid bank with query-role Givens views",
   "status": "SCREENING",
   "evidence_lane": "NATURAL_BENCHMARK_SCOPED",
-  "base_commit": "8e73da3cb0386bd4405dd8488cda2e511709eb4",
+  "base_commit": "8e73da3cbb0386bd4405dd8488cda2e511709eb4",
   "hypothesis": "Two query-length-role Givens views over one fixed residual-coded ColBERTv2 document bank will improve fresh-dataset nDCG@10 by at least 0.5 absolute percentage points over the same bank without views; the minimal native query-side Givens control should not reproduce the Mirror function at equal bytes if the view is Mirror-specific.",
   "physical_object": "One fixed ColBERTv2 encoder, one 128D shared residual centroid bank, one document-token code/residual table per collection",
   "mirror_coordinate": "One float32 Givens angle for each of two query-length roles, applied as an orthogonal view of the decoded centroid-plus-residual document vectors",
@@ -21,7 +21,7 @@
     "worlds_or_seeds": ["fixed 2026-11-15 split; all 809 train-qrel query IDs; minibatch k-means seed 1038"],
     "role_definition": "Short/long role split at the median unpadded ColBERT query token count among SciFact train-qrel query IDs; equality belongs to short role",
     "selection_metric": "For each role, maximize mean SciFact train-query nDCG@10 over angle grid [-0.20,-0.15,-0.10,-0.05,0,0.05,0.10,0.15,0.20] radians; ties choose smallest absolute angle then numerically smaller angle",
-    "codebook": "256-centroid MiniBatchKMeans, batch_size=8192, max_iter=50, n_init=1, seed=1038 fit on at most 100000 L2-normalized ColBERT token vectors sampled only from SciFact corpus; residual scale per coordinate is the SciFact-training-corpus 99.9th percentile of absolute assignment residual divided by 127"
+    "codebook": "256-centroid MiniBatchKMeans, batch_size=8192, max_iter=50, n_init=1, seed=1038 fit on at most 100000 L2-normalized ColBERT token vectors sampled only from SciFact corpus; residual scale per coordinate is the 99.9th percentile of absolute assignment residual from a fixed-seed 100000-token sample from SciFact corpus, divided by 127"
   },
   "fresh": {
     "dataset": "BEIR NFCorpus official corpus, queries and qrels downloaded from the official BEIR dataset endpoint only after this protocol is committed; all available qrel query IDs are audit, disjoint dataset from development",
