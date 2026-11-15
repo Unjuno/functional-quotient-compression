@@ -1,0 +1,3 @@
+# MA-1037 post-development retrieval timing correction
+
+After train-qrels selection was completed, code review showed that the initial throughput timer measured score-matrix multiplication but omitted exact top-10 selection. Before opening test qrels, timing was corrected to include matrix scoring, top-10 selection, and ordering. The dev selection was replayed and all five selected angles and all 84 development grid scores were byte-identical. No model, split, dimension, coordinate, metric quality rule, or gate changed. The original dev output is retained as `runs/DEV_SELECTION_BEFORE_TIMING_FIX.json`; `runs/DEV_SELECTION.json` is authoritative and its selected angles are frozen in `DEV_LOCK.json`.

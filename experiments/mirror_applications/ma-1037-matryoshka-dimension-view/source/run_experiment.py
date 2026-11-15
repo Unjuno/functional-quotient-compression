@@ -84,11 +84,15 @@ def qrels(path):
    if rel>0: out.setdefault(q,{})[doc]=rel
  return out
 
-def ranking_metrics(query_vectors,doc_vectors,query_ids,doc_ids,rel_map,k=10):
+def exact_topk(query_vectors,doc_vectors,k=10):
  scores=query_vectors@doc_vectors.T
- kk=min(k,len(doc_ids)); part=np.argpartition(-scores,kk-1,axis=1)[:,:kk]
- rr=np.arange(len(query_ids))[:,None]; ss=scores[rr,part]
- order=np.argsort(-ss,axis=1,kind='stable'); top=part[rr,order]
+ kk=min(k,doc_vectors.shape[0]); part=np.argpartition(-scores,kk-1,axis=1)[:,:kk]
+ rr=np.arange(len(query_vectors))[:,None]; ss=scores[rr,part]
+ order=np.argsort(-ss,axis=1,kind='stable')
+ return part[rr,order]
+
+def ranking_metrics(query_vectors,doc_vectors,query_ids,doc_ids,rel_map,k=10):
+ top=exact_topk(query_vectors,doc_vectors,k)
  vals=[]
  for i,qid in enumerate(query_ids):
   rel=rel_map.get(qid,{})
@@ -138,9 +142,9 @@ def save_npy(path,x):
  return path.stat().st_size,sha256(path)
 
 def retrieval_qps(Q,X,repeats=5):
- _=Q@X.T; times=[]
+ _=exact_topk(Q,X,10); times=[]
  for _ in range(repeats):
-  t=time.perf_counter(); _=Q@X.T; times.append(time.perf_counter()-t)
+  t=time.perf_counter(); _=exact_topk(Q,X,10); times.append(time.perf_counter()-t)
  med=float(np.median(times)); return (len(Q)/med if med else float('inf')),med
 
 def audit(model_dir):
