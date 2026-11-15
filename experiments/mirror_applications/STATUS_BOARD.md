@@ -6,11 +6,11 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- Claim ledger entries: **467**
-- P0: **630** (384 FAIL; 54 PROMISING; 181 UNTESTED; 10 NOT ESTABLISHED; 1 SCREENING)
+- Claim ledger entries: **468**
+- P0: **630** (385 FAIL; 54 PROMISING; 180 UNTESTED; 10 NOT ESTABLISHED; 1 SCREENING)
 - P1: **422** (17 completed; 405 UNTESTED)
 - P2: **103** (103 UNTESTED)
-- Current MA statuses: **392 FAIL, 10 NOT ESTABLISHED, 63 PROMISING, 1 SCREENING, 689 UNTESTED**
+- Current MA statuses: **393 FAIL, 10 NOT ESTABLISHED, 63 PROMISING, 1 SCREENING, 688 UNTESTED**
 - 47 baseline experiment directories remain present; verified external outcomes are linked to their dedicated branches in the registry and claim ledger.
 - New research: MA-876..935 (60 candidates), PA236..PA265 (30 primary sources). See the current Next candidate section for the live queue.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. see the current Next candidate section.
@@ -24,7 +24,7 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-MA-1042 is complete with a scoped FAIL for Mirror-specific attribution. Three confirmatory fresh worlds: one shared official PGM path plus affine domain coordinates returned 120,000/120,000 exact predecessor answers and reduced actual serialized payload 74.97% vs four independent indexes (133,720 vs 534,260 B); CPU p95 passed. Ordinary affine-coordinate control is a functionally exact alias, so this is generic shared-index/coordinate compression, not Mirror-specific evidence. Dynamic update membership passed; predecessor queries use a rebuilt static PGMIndex. Synthetic affine domains only. See branch research/ma-1042-pgm-domain-residual-view-20261115 and experiments/mirror_applications/ma-1042-pgm-domain-residual-view/RESULTS.md. MA-1041 remains UNTESTED due absent SSD. Next P0: MA-1046 (Chronos shared time model + distribution Mirror code).
+MA-1046 is complete as a scoped FAIL. Fresh Chronos-T5-Tiny runs on Weather and Australian Electricity show the two-coordinate distribution View has worse normalized CRPS than zero-shot Chronos and native temperature on both; the Hermite control aliases Mirror. The code is 8 B, while shared checkpoint payload is 33,589,724 B and no quality/storage frontier improves. Exact metric replay and 8 tests pass. See branch research/ma-1046-chronos-distribution-mirror-20261115 and experiments/mirror_applications/ma-1046-chronos-distribution-view/RESULTS.md. MA-1041 remains UNTESTED due absent SSD. Next P0: MA-1047 (TimesFM horizon × domain Mirror coordinates).
 
 Previous: MA-1033 is complete as a scoped frozen CLIP ViT-B/32 class×domain composition FAIL: Mirror averages 86.25% held-out-cell accuracy vs 86.67% additive and shared across three fresh image seeds; it wins one seed and loses two against additive. Learned payload 1,580,814 B vs 1,744,542 B independent cells (9.39%, below the 25% gate); complete-bundle saving only 0.0268%. Exact serialization/data/metric replay and three tests pass. No official prompt-learning reproduction. See `experiments/mirror_applications/ma-1033-class-domain-prompt-mirror/RESULTS.md`.
 
