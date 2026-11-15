@@ -1,0 +1,67 @@
+{
+  "experiment_id": "MA-1030",
+  "title": "SAM2 rare-object memory private fallback",
+  "status": "SCREENING",
+  "evidence_lane": "VISION/STORAGE/COMPUTE",
+  "base_commit": "fc7c2640fef0da03f7064d3d41e4b20f3afc2545",
+  "hypothesis": "On a synthetic SAM2 video with three visually similar objects and one object that changes appearance under occlusion, an online residual-triggered private memory fallback for at most one object/frame will keep mean propagated J&F within 1 pp of independent memory, improve by at least 5 pp over Givens-only memory, and use at least 25% fewer object-memory payload bytes than independent memory without using future masks.",
+  "physical_object": "SAM2 per-object maskmem_features for each propagated frame",
+  "mirror_coordinate": "Two per-object Givens angles over one shared per-frame mean memory plus a residual-energy gated full private slot for at most one object per frame",
+  "logical_multiplicity": "Four stable object identities represented by one shared memory tensor, four small view codes, and sparse causal private fallback slots",
+  "prior_art_refs": ["PA315", "PA316"],
+  "upstream_assets": {
+    "official_repository": "https://github.com/facebookresearch/sam2",
+    "official_source_commit": "2b90b9f5ceec907a1c18123530e92e794ad901a4",
+    "checkpoint": "sam2.1_hiera_tiny.pt",
+    "checkpoint_sha256": "7402e0d864fa82708a20fbd15bc84245c2f26dff0eb43a4b5b93452deb34be69",
+    "config": "sam2/configs/sam2.1/sam2.1_hiera_t.yaml",
+    "device": "CPU; CUDA extension disabled per upstream CPU path"
+  },
+  "controls": [
+    "official SAM2 independent per-object memory",
+    "hard-shared per-frame mean memory",
+    "Givens Mirror without private fallback",
+    "rank-1 additive per-frame memory residual",
+    "Givens Mirror plus maximum-one private fallback",
+    "ID-switch count and fallback object IDs, reported without oracle future-mask error"
+  ],
+  "development": {
+    "worlds_or_seeds": [103000],
+    "selection_metric": "development propagated mean J&F; tie-break on complete serialized bytes",
+    "allowed_tuning": "Choose only the residual-energy threshold from [0.15, 0.30, 0.50, 0.80]. At most one object can receive a private tensor per frame."
+  },
+  "fresh": {
+    "worlds_or_seeds": [103001, 103002, 103003],
+    "locked_before_access": true,
+    "data_generated_only_after_development_freeze": true
+  },
+  "scene": {
+    "model": "official SAM2.1 Hiera-tiny",
+    "resolution": 256,
+    "device": "CPU",
+    "objects": 4,
+    "frames": 6,
+    "rare_object_id": 99,
+    "appearance_shift_frame": 3,
+    "occlusion_frames": [2, 3, 4],
+    "initial_prompts": "exact object masks on frame 0",
+    "synthetic_only": true
+  },
+  "fallback_rule": "After each causal frame, compute each object's L2 residual norm against the common memory mean, normalized by the common mean norm. If the maximum score reaches the frozen threshold, store that object's full current memory feature privately; otherwise store no private memory. No future frame, ground-truth mask, future score, or predicted future error participates.",
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": ["SAM2 checkpoint", "model config", "shared normalized video cache", "prompt masks", "predicted masks", "object pointers", "object scores", "per-frame shared bases", "all view coordinates", "fallback indices", "any private residual tensors", "self-describing metadata"]
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true,
+    "report_fps": true,
+    "training_updates": 0,
+    "active_compute": "report encode/decode timing and allocated private-memory tensor count; full SAM2 propagation remains charged"
+  },
+  "success_gate": "Across all 3 fresh worlds, fallback Mirror is within 1 pp mean J&F of independent, improves at least 5 pp over Givens-only in at least 2 worlds, uses at least 25% fewer serialized object-memory bytes than independent, and records zero additional ID switches versus independent.",
+  "failure_gate": "Mirror misses the quality or object-memory-byte gate in at least 2 fresh worlds, or fallback spends the private slot on non-rare identities so often that the quality gate fails; report complete-session bytes regardless.",
+  "boundaries": ["one deterministic synthetic video per seed", "4 objects and 6 frames", "SAM2.1 Hiera-tiny at 256px on CPU", "no natural-video, benchmark, GPU, or general SAM2 claim", "no oracle future-mask error or future ground truth for fallback selection"]
+}
