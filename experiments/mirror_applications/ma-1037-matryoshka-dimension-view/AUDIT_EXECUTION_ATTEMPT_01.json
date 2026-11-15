@@ -1,0 +1,11 @@
+{
+  "experiment_id": "MA-1037",
+  "audit_qrels_opened": true,
+  "attempt": "first frozen test audit invocation",
+  "result": "implementation error before results were persisted",
+  "error": "FileNotFoundError while writing the linear_boundary_control coordinate file because its payload directory had not yet been created",
+  "quality_values_saved_or_inspected": false,
+  "angles_or_gates_changed": false,
+  "correction": "create the coordinate payload directory before writing the already-frozen coordinate",
+  "rerun": "same test qrels, same frozen angles, same dimensions, methods, and gates"
+}

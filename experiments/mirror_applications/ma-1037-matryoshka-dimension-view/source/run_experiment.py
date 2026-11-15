@@ -181,6 +181,8 @@ def audit(model_dir):
    coordinate_bytes=0 if method=='native_prefix' or d==D else (4 if method=='mirror_givens' else 8)
    coordinate_path=ROOT/'payload'/method/f'coordinate_d{d}.bin'
    if coordinate_bytes:
+    coordinate_path.parent.mkdir(parents=True,exist_ok=True)
+   if coordinate_bytes:
     if method=='mirror_givens': coordinate_path.write_bytes(np.asarray([angles_d],dtype='<f4').tobytes())
     else: coordinate_path.write_bytes(np.asarray(wm,dtype='<f4').tobytes())
     coordinate_bytes=coordinate_path.stat().st_size
