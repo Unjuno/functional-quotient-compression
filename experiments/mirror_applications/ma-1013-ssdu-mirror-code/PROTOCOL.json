@@ -1,0 +1,148 @@
+{
+  "experiment_id": "MA-1013",
+  "title": "SSDU scan code with frozen multi-coil MRI prior",
+  "status": "FAIL",
+  "evidence_lane": "MECHANISM/STORAGE/COMPUTE",
+  "base_commit": "7de153282",
+  "prior_art": {
+    "ref": "PA307",
+    "paper": "Self-Supervised Learning of Physics-Guided Reconstruction Neural Networks without Fully-Sampled Reference Data",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7811359/",
+    "delta": "Fit only a compact per-scan functional coordinate using the SSDU train partition while keeping the reconstruction prior frozen; reserve acquired k-space samples for disjoint self-supervised validation. The held-out analytic image truth is scoring-only."
+  },
+  "hypothesis": "Across three synthetic target scans, a single two-angle scan-level Givens code optimized only on an SSDU train partition will improve held-out target image NMSE by at least 1% over frozen sharing, remain within 1% of same-update ordinary affine/FiLM and private full-prior tuning, preserve held-out k-space residual, and save at least 25% actual per-scan deployment bytes versus FiLM and 50% versus private models.",
+  "physical_object": "frozen 518-parameter two-coil reconstruction prior",
+  "mirror_coordinate": "two scan-specific Givens angles on the four-channel latent feature; prior parameters frozen",
+  "logical_multiplicity": "one SSDU-adapted reconstruction view per scan",
+  "no_leakage": "adaptation code sees only measured train partition; disjoint acquired holdout samples and fully sampled analytic truth are never used in loss or early stopping",
+  "data": {
+    "type": "analytic synthetic complex phantom scans; 2-coil SENSE",
+    "shape": "32x32",
+    "source_seeds": [
+      1013001,
+      1013002,
+      1013003,
+      1013004,
+      1013005,
+      1013006,
+      1013007,
+      1013008,
+      1013009,
+      1013010,
+      1013011,
+      1013012,
+      1013013,
+      1013014,
+      1013015,
+      1013016
+    ],
+    "target_scans": [
+      [
+        1013101,
+        1013102,
+        1013103,
+        1013104,
+        1013105,
+        1013106,
+        1013107,
+        1013108
+      ],
+      [
+        1013111,
+        1013112,
+        1013113,
+        1013114,
+        1013115,
+        1013116,
+        1013117,
+        1013118
+      ],
+      [
+        1013121,
+        1013122,
+        1013123,
+        1013124,
+        1013125,
+        1013126,
+        1013127,
+        1013128
+      ]
+    ],
+    "fresh_scan_seeds": [
+      1013301,
+      1013307,
+      1013313
+    ],
+    "fresh_opened": false,
+    "operator": "known site-specific two-coil sensitivity map and 8/32 Cartesian phase lines; train and heldout acquired lines are disjoint"
+  },
+  "controls": [
+    "frozen prior, no update",
+    "two-parameter native output affine scale/bias code",
+    "eight-parameter latent FiLM code",
+    "two-angle latent Givens Mirror code",
+    "private full-prior SSDU fine-tune upper control"
+  ],
+  "training": {
+    "pretraining": "64 source updates, batch 4",
+    "adaptation": "48 updates per scan on all eight slices, using only each slice's train-mask k-space; prior is frozen for affine/FiLM/Mirror",
+    "private_control": "48 updates per scan on the same eight-slice train-mask batch",
+    "selection": "fixed schedule; no ground truth or holdout samples used in adaptation; no fresh access"
+  },
+  "metrics": [
+    "target image NMSE / PSNR / magnitude-SSIM proxy (truth scoring-only)",
+    "disjoint heldout measured k-space RMSE",
+    "actual complete per-scan and three-scan serialized inference payload bytes",
+    "updates and target slice presentations",
+    "active MAC/FFT proxy",
+    "adaptation wall time"
+  ],
+  "storage": {
+    "authority": "actual serialized torch.save payload bytes",
+    "common_schema": "common outer keys, metadata, and tensor framing; inference payloads include shared prior plus codes or full private states",
+    "paid": [
+      "shared prior weights",
+      "all scan codes or full per-scan fine-tuned models",
+      "scanner/operator metadata and deployment framing"
+    ]
+  },
+  "success_gate": "Mirror improves NMSE at least 1% versus frozen; is no more than 1% worse than affine/FiLM/private controls; heldout k-space RMSE is <=1.1x FiLM; actual complete bytes save >=25% vs FiLM and >=50% vs private models.",
+  "failure_gate": "FAIL if Mirror does not improve frozen quality, loses to a simple same-size native code, fails heldout measurement consistency, misses actual byte gates, or requires more updates.",
+  "fresh": {
+    "worlds_or_seeds": [
+      1013301,
+      1013307,
+      1013313
+    ],
+    "locked_before_access": true,
+    "run_only_if_development_passes": true
+  },
+  "boundaries": [
+    "Synthetic mechanism only; no acquired MRI, fastMRI, clinical scan or trained VarNet claim.",
+    "Three analytic scans and one anatomy generator cannot establish generalization.",
+    "No capacity claim from fixed updates."
+  ],
+  "failure_gate_result": "FAIL: Mirror fails to improve frozen image quality (NMSE .68403 vs .64553), loses to a same-size two-value native affine code (.60978 at identical 5,457 B), and saves 0 B versus that control. It saves 1.16% vs FiLM, below 25%; fresh scan seeds remain sealed.",
+  "compute": {
+    "source_pretrain_updates": 64,
+    "source_pretrain_examples": 16,
+    "source_presentations": 256,
+    "source_parameters": 518,
+    "updates_per_scan": 48,
+    "target_scans": 3,
+    "slices_per_scan": 8,
+    "adaptation_presentations": 1152,
+    "cnn_forward_mac_per_slice": 516096,
+    "cnn_forward_macs_adaptation": 594542592,
+    "two_coil_forward_fft_count": 2304,
+    "mirror_givens_scalar_ops_proxy": 14155776,
+    "pretrain_wall_s": 1.5364430409972556,
+    "adaptation_wall_s": {
+      "frozen": 0,
+      "affine": 0.5768507070060878,
+      "film": 0.7367724049981916,
+      "mirror": 0.9742125729972031,
+      "private": 0.8381356009995216
+    }
+  }
+}

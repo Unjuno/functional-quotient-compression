@@ -1,0 +1,141 @@
+{
+  "schema": "MA1013-dev-v1",
+  "code_sha256": "8211fb5f9a5c533e7902188d636aef582f1c634f08d5454e8bcb7b5fb49d1307",
+  "source_seeds": [
+    1013001,
+    1013002,
+    1013003,
+    1013004,
+    1013005,
+    1013006,
+    1013007,
+    1013008,
+    1013009,
+    1013010,
+    1013011,
+    1013012,
+    1013013,
+    1013014,
+    1013015,
+    1013016
+  ],
+  "scan_seeds": [
+    [
+      1013101,
+      1013102,
+      1013103,
+      1013104,
+      1013105,
+      1013106,
+      1013107,
+      1013108
+    ],
+    [
+      1013111,
+      1013112,
+      1013113,
+      1013114,
+      1013115,
+      1013116,
+      1013117,
+      1013118
+    ],
+    [
+      1013121,
+      1013122,
+      1013123,
+      1013124,
+      1013125,
+      1013126,
+      1013127,
+      1013128
+    ]
+  ],
+  "fresh_seeds": [
+    1013301,
+    1013307,
+    1013313
+  ],
+  "fresh_opened": false,
+  "pretrain": {
+    "updates": 64,
+    "unique_examples": 16,
+    "presentations": 256,
+    "wall_s": 1.5364430409972556,
+    "parameters": 518
+  },
+  "adaptation": {
+    "updates_per_scan": 48,
+    "scans": 3,
+    "slices_per_scan": 8,
+    "support_presentations_per_method": 1152,
+    "loss_reads_only": [
+      "zf",
+      "s",
+      "train_mask",
+      "kspace"
+    ],
+    "never_loss_reads": [
+      "fully_sampled_truth",
+      "heldout_mask"
+    ]
+  },
+  "results": {
+    "frozen": {
+      "nmse": 0.6455329414503532,
+      "psnr_db": 23.767364252741093,
+      "heldout_kspace_rmse": 0.06901202760248755,
+      "global_ssim_magnitude_proxy": 0.2009263727037857,
+      "updates": 0,
+      "wall_s": 0
+    },
+    "affine": {
+      "nmse": 0.6097776475355857,
+      "psnr_db": 24.090993797113367,
+      "heldout_kspace_rmse": 0.07080768879192571,
+      "global_ssim_magnitude_proxy": 0.2580232714147617,
+      "updates": 144,
+      "wall_s": 0.5768507070060878
+    },
+    "film": {
+      "nmse": 0.7081904421276869,
+      "psnr_db": 23.394643806378724,
+      "heldout_kspace_rmse": 0.0678593321936205,
+      "global_ssim_magnitude_proxy": 0.21160402909542123,
+      "updates": 144,
+      "wall_s": 0.7367724049981916
+    },
+    "mirror": {
+      "nmse": 0.6840332375563758,
+      "psnr_db": 23.497134133047023,
+      "heldout_kspace_rmse": 0.06959287430314968,
+      "global_ssim_magnitude_proxy": 0.18916042447866252,
+      "updates": 144,
+      "wall_s": 0.9742125729972031
+    },
+    "private": {
+      "nmse": 0.6736944477410071,
+      "psnr_db": 23.562707648871353,
+      "heldout_kspace_rmse": 0.06734962990352263,
+      "global_ssim_magnitude_proxy": 0.219476320159932,
+      "updates": 144,
+      "wall_s": 0.8381356009995216
+    }
+  },
+  "payload_bytes_three_scans": {
+    "frozen": 5205,
+    "affine": 5457,
+    "film": 5521,
+    "mirror": 5457,
+    "private": 12333
+  },
+  "payload_bytes_one_scan": {
+    "frozen": 5205,
+    "affine": 5457,
+    "film": 5521,
+    "mirror": 5457,
+    "private": 5205
+  },
+  "wall_total_s": 4.736754457000643,
+  "checkpoint_sha256": "5a04b20c4d25d32cefbfcd14f413475b681afa3051897236ce643bbe2ed20075"
+}

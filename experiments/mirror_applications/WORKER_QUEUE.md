@@ -24,7 +24,11 @@ MA-990 official MERL RANF code was located, but the required SONICOM HRTF subjec
 
 # Worker queue
 
-## Current handoff — 2026-11-15, MA-1012
+## Current handoff — 2026-11-15, MA-1013
+
+MA-1013 is a bounded synthetic SSDU scan-code FAIL. Leakage controls pass (disjoint acquired train/holdout masks; reference truth absent from adaptation), but Mirror NMSE .6840 trails frozen .6455 and same-size affine .6098; payload equals affine and saves 1.16% vs FiLM. Exact replay/four tests pass, fresh sealed, no acquired MRI claim. See `ma-1013-ssdu-mirror-code/RESULTS.md`. Continue to P0 MA-1014.
+
+## Previous handoff — 2026-11-15, MA-1012
 
 MA-1012 is a bounded synthetic three-site MRI calibration FAIL: Mirror improves over FiLM and the underexposed private control, but frozen sharing has better NMSE (.6313 vs .7008) and Mirror saves only 1.16% actual payload vs FiLM. Exact replay and three tests passed; fresh sealed, no acquired scanner claim. See `ma-1012-scanner-site-mirror/RESULTS.md`. Continue to P0 MA-1013.
 

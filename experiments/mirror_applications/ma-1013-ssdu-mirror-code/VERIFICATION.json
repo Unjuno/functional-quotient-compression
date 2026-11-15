@@ -1,0 +1,38 @@
+{
+  "experiment_id": "MA-1013",
+  "commit": "pending-evidence-commit",
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-1013-ssdu-mirror-code/tests",
+    "passed": 4,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "payload_bytes_three_scans": {
+      "frozen": 5205,
+      "affine": 5457,
+      "film": 5521,
+      "mirror": 5457,
+      "private": 12333
+    },
+    "payload_bytes_one_scan": {
+      "frozen": 5205,
+      "affine": 5457,
+      "film": 5521,
+      "mirror": 5457,
+      "private": 5205
+    }
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_difference": 0.0
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "Code and private optimization paths read only zero-filled train input, sensitivity maps, train mask and measured k-space; they do not read fully sampled truth or heldout mask.",
+    "Train/heldout acquired sample splits are disjoint; exact replay and source checkpoint hash match.",
+    "Fresh seeds 1013301/1013307/1013313 remain unopened after FAIL.",
+    "Synthetic multi-coil phantoms only; no acquired MRI or VarNet claim."
+  ]
+}
