@@ -6,11 +6,11 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- Claim ledger entries: **468**
-- P0: **630** (385 FAIL; 54 PROMISING; 180 UNTESTED; 10 NOT ESTABLISHED; 1 SCREENING)
+- Claim ledger entries: **469**
+- P0: **630** (386 FAIL; 54 PROMISING; 179 UNTESTED; 10 NOT ESTABLISHED; 1 SCREENING)
 - P1: **422** (17 completed; 405 UNTESTED)
 - P2: **103** (103 UNTESTED)
-- Current MA statuses: **393 FAIL, 10 NOT ESTABLISHED, 63 PROMISING, 1 SCREENING, 688 UNTESTED**
+- Current MA statuses: **394 FAIL, 10 NOT ESTABLISHED, 63 PROMISING, 1 SCREENING, 687 UNTESTED**
 - 47 baseline experiment directories remain present; verified external outcomes are linked to their dedicated branches in the registry and claim ledger.
 - New research: MA-876..935 (60 candidates), PA236..PA265 (30 primary sources). See the current Next candidate section for the live queue.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. see the current Next candidate section.
@@ -24,7 +24,7 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 ## Next candidate
 
-MA-1046 is complete as a scoped FAIL. Fresh Chronos-T5-Tiny runs on Weather and Australian Electricity show the two-coordinate distribution View has worse normalized CRPS than zero-shot Chronos and native temperature on both; the Hermite control aliases Mirror. The code is 8 B, while shared checkpoint payload is 33,589,724 B and no quality/storage frontier improves. Exact metric replay and 8 tests pass. See branch research/ma-1046-chronos-distribution-mirror-20261115 and experiments/mirror_applications/ma-1046-chronos-distribution-view/RESULTS.md. MA-1041 remains UNTESTED due absent SSD. Next P0: MA-1047 (TimesFM horizon × domain Mirror coordinates).
+MA-1046 is a scoped FAIL: Chronos distribution View loses on fresh Weather and Australian Electricity; normalized-Hermite aliases it. MA-1047 is a scoped FAIL: official TimesFM 2.5 on final-20% ETTh1/ETTm1 windows shows factorized domain×horizon affine MASE 2.2767/4.5948 vs native 2.2744/4.0873 and matched additive control. State is 48 B vs additive 40 B; complete shared checkpoint is 925,181,579 B, so no useful storage frontier. Four tests/replay pass; H100 latency NOT ESTABLISHED. See branch research/ma-1047-timesfm-horizon-view-20261115 and experiments/mirror_applications/ma-1047-timesfm-horizon-domain-view/RESULTS.md. MA-1041 remains UNTESTED due absent SSD. Next P0: MA-1048 (Moirai frequency × variate factors).
 
 Previous: MA-1033 is complete as a scoped frozen CLIP ViT-B/32 class×domain composition FAIL: Mirror averages 86.25% held-out-cell accuracy vs 86.67% additive and shared across three fresh image seeds; it wins one seed and loses two against additive. Learned payload 1,580,814 B vs 1,744,542 B independent cells (9.39%, below the 25% gate); complete-bundle saving only 0.0268%. Exact serialization/data/metric replay and three tests pass. No official prompt-learning reproduction. See `experiments/mirror_applications/ma-1033-class-domain-prompt-mirror/RESULTS.md`.
 

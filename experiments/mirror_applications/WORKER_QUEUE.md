@@ -1,3 +1,7 @@
+## Current handoff — 2026-11-15, MA-1047 complete
+
+MA-1047 FAIL: official TimesFM 2.5 200M CPU on seven channels each from ETTh1/ETTm1, fit/validation/audit split 60/20/20 by time. Factorized rank-one domain×horizon affine code MASE is 2.2767/4.5948 vs native 2.2744/4.0873; additive native control is effectively identical and has smaller method payload (40 B vs 48 B). Complete payloads differ by only 15 B against the independent affine table’s 925 MB shared checkpoint. CPU inference p95 0.321 s/forecast; H100 latency NOT ESTABLISHED. Four tests and deterministic metric replay pass. AM-01/02 are disclosed reporting-only reducer/serialization fixes. See ma-1047-timesfm-horizon-domain-view/RESULTS.md. Continue at P0 MA-1048 (Moirai frequency × variate factors, PA328); audit must hold out complete frequency-variate combinations.
+
 ## Current handoff — 2026-11-15, MA-1046 complete
 
 MA-1046 is a scoped FAIL: on fresh Weather and Australian Electricity data, the two-value Chronos distribution View is worse than zero-shot and native temperature in normalized CRPS; normalized-Hermite aliases the View. It adds an 8 B coordinate and metadata to a 33,589,724 B common checkpoint, with no quality or storage frontier gain. Three fresh sampling seeds, exact saved-sample metric replay, and 8 tests pass. See `ma-1046-chronos-distribution-view/RESULTS.md`. Continue directly to P0 MA-1047 (TimesFM horizon × domain View, PA327); create its dedicated branch and freeze horizon/domain leakage controls before audit.
