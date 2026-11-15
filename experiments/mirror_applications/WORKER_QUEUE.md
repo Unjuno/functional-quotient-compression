@@ -24,11 +24,12 @@ MA-990 official MERL RANF code was located, but the required SONICOM HRTF subjec
 
 # Worker queue
 
-## Current handoff — 2026-11-15, MA-1037
+## Current handoff — 2026-11-15, MA-1039
 
-MA-1037 is a scoped Nomic Embed v1.5 official INT8 ONNX / BEIR SciFact FAIL: on 300 test query IDs, best Mirror nDCG@10 gain is +0.315 pp at d64, below the +0.5 pp gate; the matched normalized two-coefficient boundary readout is bit-exact to Givens at all five dimensions. Complete five-budget bytes are 174,126,539 B Mirror vs 174,126,309 B native. Encoder took 1,354.9 s for 5,183 corpus documents on CPU. QPS is NOT ESTABLISHED after repeated short-batch ordering changed. Exact serialized payload and all 45 quality metrics replay; five tests pass. This is one quantized model and one natural benchmark, not an ANN or broad Matryoshka result. Continue to P0 MA-1038 ColBERTv2 shared centroid query/document roles. See `ma-1037-matryoshka-dimension-view/RESULTS.md` and its amendment log.
+Continue with P0 MA-1039 PLAID centroid pruning with a task View (PA321/PA322). Keep one physical token-centroid index and modulate task-specific pruning/scoring; compare against native PLAID centroid pruning, ColBERTv2 and the cheapest query-side scoring control. Preserve all centroid/token bytes and report candidate recall, MRR/nDCG, index bytes and CPU traversal/rerank cost.
 
-## Previous handoff — 2026-11-15, MA-1033
+Previous: MA-1038 is a scoped official ColBERTv2/SciFact→NFCorpus FAIL. The shared 256-centroid + int8 residual index scores nDCG@10 0.332290; role View scores 0.333051 (+0.076 pp, below +0.5 pp) while MRR falls 0.108 pp. Both roles select +0.20 rad and audit roles are imbalanced 322:1. Native inverse query-Givens exactly matches the Mirror function and actual bytes. Complete payload is 726,467,488 B full-float, 511,690,535 B residual native, 511,690,756 B Mirror; ordinary residual coding saves 29.56%, Mirror adds 221 B. Latency NOT ESTABLISHED; exact metric/payload replay passes. Not a PLAID traversal claim. See `experiments/mirror_applications/ma-1038-colbertv2-centroid-role-view/RESULTS.md`.
+Previous: MA-1037 Nomic Embed v1.5/SciFact FAIL; best held-out nDCG gain +0.315 pp and the normalized linear control was bit-exact. See `experiments/mirror_applications/ma-1037-matryoshka-dimension-view/RESULTS.md`.
 
 MA-1033 is a scoped frozen CLIP ViT-B/32 class×domain composition FAIL: Mirror averages 86.25% held-out-pair accuracy vs 86.67% additive and shared over three fresh image seeds; it wins one seed and loses twice to additive. Learned payload is 1,580,814 B vs 1,744,542 B independent cells (9.39%, below the 25% gate); full-bundle saving is 0.0268%. Exact payload/metric replay and three tests pass. Shallow synthetic-domain CPU screen, not official CoOp/CoCoOp/MaPLe. See `ma-1033-class-domain-prompt-mirror/RESULTS.md`.
 ## Previous handoff — 2026-11-15, MA-1031

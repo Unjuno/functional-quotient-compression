@@ -43,7 +43,7 @@ The Mirror changes the top-10 list for 294/323 audit queries, with mean top-10 o
 
 Each exhaustive audit arm scored 1,173,459 query-document pairs and used a 742,366,248,960 MaxSim MAC proxy. The algebraically pushed query-side Givens adds approximately 3,969,024 scalar FLOPs for the 10,336 query-token vectors. Applying the same rotation directly to every decoded document vector for each of 323 queries would add approximately 69,596,835,840 scalar FLOPs per audit pass. Optimizer updates: 0.
 
-Measured per-arm full-MaxSim wall times varied across passes; see the execution logs summarized above and `runs/summary.json`. Since arm order, cache state and CPU load were not independently randomized or stabilized, latency is NOT ESTABLISHED.
+Measured per-arm full-MaxSim wall times varied across passes; full-float was 38.2–79.1 s, residual native 40.3–79.9 s and pushed view 23.1–74.7 s for 323 queries. Since arm order, cache state and CPU load were not independently randomized or stabilized, latency is NOT ESTABLISHED. The first end-to-end execution took 2,495.5 s; result replay took 157.9 s, final summary replay 261.7 s and independent verification 283.1 s, for 3,198.2 s total measured worker compute. The encoder-only stage time was not separately isolated; its time is included in the initial end-to-end wall figure.
 
 ## Interpretation
 

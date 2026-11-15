@@ -7,7 +7,8 @@
 - Initial runner frozen before audit: `bf7f7052d9ce67d83d7ff9e05bd58c814ca8a85d`
 - Fresh/audit opened: yes, BEIR NFCorpus official test qrels, after protocol and implementation freeze.
 - Development choices: +0.20/+0.20 rad; short/long threshold 22 tokens; selected only on SciFact train qrels.
-- Results committed: pending final integration commit.
+- Experiment results committed: `999e3eddc70d6443d2b43d622c7599defa522877`.
+- Registry/status/claim-ledger integration: in this branch's final integration commit.
 - Verification: PASS; exact metric replay (max difference 0) and exact payload file-size replay.
 - Tests: 3 passed.
 - Runtime: NOT ESTABLISHED; repeated CPU search passes ranged 23.1–79.9 s in order-sensitive executions.
