@@ -1,0 +1,75 @@
+{
+  "a14_sha256": "3df8ee6aa671e63b5da1db1c2b48c86d05277ec1d582e2fb6e48573aa715c5ce",
+  "classification": "SYNTHETIC EXPLORATORY; PRIVILEGED TEST LABEL ACCESS",
+  "code_optimization_tasks": 288,
+  "dependency_a13_sha256": {
+    "a13.py": "a7cc7fe3c2cf3cd2bd17f8e27fe96a530a69185a9d8c26b9ad08abc2817f29d3"
+  },
+  "evaluations_per_task": 960,
+  "evaluations_total": 276480,
+  "experiment": "A14_PRIVILEGED_CODE_MANIFOLD",
+  "independent_byte_replays": 4,
+  "main_date": "2026-11-15",
+  "new_heldout_generalization_claim": false,
+  "new_model_bytes_identical_across_source_path_compat_fix": 36,
+  "new_model_count": 36,
+  "original_summary": {
+    "film/privileged_oracle": {
+      "mean_iid": 0.1363409696402783,
+      "mean_ood": 0.14773512272363443,
+      "mean_support_mse": 0.0011627336910430845,
+      "quality_pass_worlds": 6,
+      "stored_bytes": 1016,
+      "worlds": 6
+    },
+    "film/support_es": {
+      "mean_iid": 0.15964302833109426,
+      "mean_ood": 0.1687006230338949,
+      "mean_support_mse": 0.0009702760536413362,
+      "quality_pass_worlds": 5,
+      "stored_bytes": 1016,
+      "worlds": 6
+    },
+    "mirror/privileged_oracle": {
+      "mean_iid": 0.332769142193622,
+      "mean_ood": 0.4118595035678984,
+      "mean_support_mse": 0.007846718919563235,
+      "quality_pass_worlds": 0,
+      "stored_bytes": 1004,
+      "worlds": 6
+    },
+    "mirror/support_es": {
+      "mean_iid": 0.3616840111622381,
+      "mean_ood": 0.478339233400428,
+      "mean_support_mse": 0.007035802137023352,
+      "quality_pass_worlds": 0,
+      "stored_bytes": 1004,
+      "worlds": 6
+    },
+    "shift/privileged_oracle": {
+      "mean_iid": 0.07720977715931578,
+      "mean_ood": 0.08729699670046871,
+      "mean_support_mse": 0.00040576031643735724,
+      "quality_pass_worlds": 6,
+      "stored_bytes": 1020,
+      "worlds": 6
+    },
+    "shift/support_es": {
+      "mean_iid": 0.09296320694330107,
+      "mean_ood": 0.10169857233315642,
+      "mean_support_mse": 0.00036147993495942477,
+      "quality_pass_worlds": 6,
+      "stored_bytes": 1020,
+      "worlds": 6
+    }
+  },
+  "parent_model_count": 36,
+  "posthoc_separately_identified": true,
+  "protocol_sha256": "ec803922f7e6fe0db4b86179ac7f154a0407a70363bc5a03911f07571f1ae696",
+  "repo_layout_replay_receipt": "results/replay_compat_receipt.json",
+  "repository_base": "Unjuno/functional-quotient-compression",
+  "score_rows": 72,
+  "source_code_not_counted_in_file_bytes": true,
+  "test_label_samples_per_task": 512,
+  "tests_passed": 8
+}
