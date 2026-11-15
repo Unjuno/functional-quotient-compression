@@ -1,0 +1,1 @@
+Official dependency: `https://github.com/gvinciguerra/PGM-index` at commit `c6fcf3d34e55eb0061b01e2f49dfcbdb711f1407`, Apache-2.0. The code is header-only. Execution uses `g++ -std=c++17` and includes `/tmp/ma1042-pgm-index/include`; build command and binary/source hashes will be recorded with results.

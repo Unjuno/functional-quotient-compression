@@ -1,0 +1,56 @@
+{
+  "experiment_id": "MA-1042",
+  "title": "PGM-index domain coordinate over a shared dynamic index",
+  "status": "SCREENING",
+  "evidence_lane": "INDEX / CORRECTNESS / STORAGE / COMPUTE / RUNTIME",
+  "protocol_frozen": true,
+  "base_commit": "150c2a4c57d1cd39dbc1999cabd3054c390d310b",
+  "prior_art_refs": ["PA325"],
+  "hypothesis": "For multiple key domains generated as monotone affine images of one canonical key set, a compact task code m plus one official DynamicPGMIndex can reproduce exact predecessor results and updates at much lower complete serialized data bytes than independent per-domain PGM indexes.",
+  "physical_object": "One canonical sorted key/value set and one official DynamicPGMIndex shared by four task domains.",
+  "mirror_coordinate": "Per-domain positive integer scale and offset (uint64 pair), applied to incoming query keys and returned predecessor keys; all query data are mapped to canonical coordinates before the one shared PGM index.",
+  "logical_multiplicity": "Four domain-specific ordered dictionaries with exact predecessor lookup over one shared key set/index.",
+  "data": {
+    "type": "Synthetic controlled mechanism test; no natural database benchmark claim.",
+    "worlds": {"development_seeds": [1042, 1043], "fresh_audit_seeds": [1044, 1045, 1046]},
+    "canonical_keys": 16384,
+    "query_count_per_domain_per_world": 10000,
+    "domains": [{"scale":3,"offset":1000000000},{"scale":5,"offset":4000000000},{"scale":7,"offset":9000000000},{"scale":11,"offset":16000000000}],
+    "generation": "SplitMix64-generated strictly increasing canonical keys with positive deterministic gaps; each domain stores (scale*key + offset, stable canonical value).",
+    "updates_per_world": {"insertions":128,"deletions":128},
+    "audit_isolation": "Fresh key/query seeds 1044–1046 are not used for epsilon selection."
+  },
+  "implementation": {
+    "native_library": "Official gvinciguerra/PGM-index header-only C++ library",
+    "source_commit": "c6fcf3d34e55eb0061b01e2f49dfcbdb711f1407",
+    "license": "Apache-2.0",
+    "index": "pgm::DynamicPGMIndex<uint64_t,uint64_t,pgm::PGMIndex<uint64_t,Epsilon,4>>",
+    "epsilon_grid": [8,16,32,64],
+    "epsilon_recursive": 4,
+    "development_selection": "Choose the epsilon with the fewest shared index bytes among those whose maximum PGM correction-window width is <=129 and whose dev predecessor results are all exact.",
+    "query_role_code": "The two-value affine map for each of four domains. A matched native affine query-key control stores/applies the same map."
+  },
+  "controls": [
+    "Four independently built official DynamicPGMIndexes over four explicit transformed keysets.",
+    "One shared canonical DynamicPGMIndex plus four task affine query Views.",
+    "Matched ordinary native affine coordinate on the same shared index (functionally expected to alias Mirror exactly).",
+    "Exact std::map predecessor answers after identical inserts/deletes."
+  ],
+  "fresh": {
+    "locked_before_access": true,
+    "audit_worlds": [1044,1045,1046],
+    "quality": "Every predecessor key and stable value must equal exact ordered-map control after 128 inserts and 128 deletes per world.",
+    "correctness_audit": "10,000 queries per domain per fresh world; include values between transformed keys and boundary probes.",
+    "runtime": "Five randomized arm-order passes per query; report p50/p95 on this CPU only."
+  },
+  "storage": {
+    "authority": "Actual serialized inference payload bytes.",
+    "serialization": "Persist sorted key/value arrays plus exact reconstruction configuration. Official PGM segment state is rebuilt deterministically from each paid key array and fixed epsilon; report rebuild time and RAM size separately.",
+    "paid_objects": ["all final key/value arrays or shared canonical array", "all domain scale/offset codes", "role/address and format metadata", "reconstruction/index configuration", "update state required to recover final arrays"],
+    "common_runtime": "C++ implementation binary/source is common across methods and reported separately; it is not charged to method-specific inference state."
+  },
+  "success_gate": "On every fresh world, all Mirror predecessor results and update outcomes are exact; shared code + one-index complete payload is <=50% of independent four-index payload; and p95 lookup latency is <=1.10x independent native PGM. A Mirror-specific PASS also requires beating the matched native affine coordinate control on a useful quality/storage/compute axis.",
+  "failure_gate": "FAIL for Mirror-specific value if the ordinary affine query coordinate reproduces exact behavior, or if any update/query violates predecessor correctness, or if the shared payload exceeds 50% of independent PGM bank bytes.",
+  "compute": {"report": ["PGM build and update seconds", "insert/delete counts", "DynamicPGMIndex RAM size_in_bytes", "query count", "PGM correction-window bound", "p50/p95 lookup time"], "optimizer_updates": 0},
+  "boundaries": ["Synthetic affine-related key domains only; this does not establish compression on arbitrary independent databases.", "All four tasks share key ordering up to known monotone integer affine coordinate maps.", "DynamicPGMIndex model state is deterministically rebuilt from persisted key/value arrays and fixed source/config; rebuild compute and in-memory model size are reported.", "Mirror and the native affine control are expected to be exact function aliases; a compact coordinate alone is not Mirror-specific evidence."]
+}
