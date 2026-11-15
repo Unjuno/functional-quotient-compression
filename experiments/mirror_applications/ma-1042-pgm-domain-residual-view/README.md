@@ -16,4 +16,4 @@ The official PGM-index already provides approximate piecewise-linear predictions
 
 ## Freeze
 
-Two development seeds select epsilon from the frozen grid under an exactness and correction-window constraint. Three disjoint fresh seeds are reserved for audit. Each world inserts and deletes 128 keys before queries. All serialized keys, task coordinates and reconstruction metadata are charged; PGM segments are deterministically rebuilt and their RAM bytes/build cost reported.
+Two development seeds select epsilon from the frozen grid under an exactness constraint; AM-01 records that the official dynamic API does not expose correction-window width. Three disjoint fresh seeds are reserved for audit. Each world inserts and deletes 128 keys before queries. All serialized keys, task coordinates and reconstruction metadata are charged; PGM segments are deterministically rebuilt and their RAM bytes/build cost reported.
