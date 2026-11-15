@@ -40,6 +40,11 @@ MA-990 official MERL RANF code was located, but the required SONICOM HRTF subjec
 
 # Worker queue
 
+## Current handoff — 2026-11-15, MA-1049
+
+MA-1049 is NOT ESTABLISHED before fitting. The frozen source `jimmygao3218/PEMS08` revision `7d5f30e2f1b538973ff805fc84ac42a0bd7422aa` contains an unnamed `(17856,170,3)` time-series array and a CSV that is only a `from,to,cost` edge table. Because the protocol required documented speed and no column semantics were supplied, no feature was selected post-inspection and no train/dev/audit metrics were run. Exact asset hashes and rationale are recorded in `ma-1049-patchtst-variate-view/EXECUTION_BLOCKER.md`. Continue to P0 MA-1050 TimeMixer seasonal-timescale Mirror (PA330).
+
+
 ## Current handoff — 2026-11-15, MA-1042
 
 Start P0 MA-1042, PGM-index piecewise model with compact domain residual View (PA325). Inspect the official PGM-index implementation and correctness guarantees. Test whether a small distribution/query coordinate can specialize prediction residuals on one shared piecewise model while preserving exact predecessor/range correctness under updates. Compare the native static/dynamic PGM configuration and ordinary distribution-aware parameter tuning with the Mirror residual View. Freeze key distribution/query splits before audit; measure exactness, worst-case lookup bounds, complete index bytes, update metadata, build/update cost and lookup latency. Create a dedicated `research/ma-1042-pgm-domain-residual-view-20261115` branch and `ma-1042-pgm-domain-residual-view/` from TEMPLATE.

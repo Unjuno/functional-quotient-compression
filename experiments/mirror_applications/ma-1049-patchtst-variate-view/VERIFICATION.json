@@ -1,0 +1,15 @@
+{
+  "experiment_id": "MA-1049",
+  "status": "NOT_ESTABLISHED",
+  "commit": null,
+  "protocol_frozen_before_data_access": true,
+  "source_revision_pinned": true,
+  "source_hashes": {"PEMS08.csv": "e5ab2a62f275741e6b07d3fba1623883ff9d692d406a44724d26efddc5e24b20", "PEMS08.npz": "e1d03ce74e9fb79149e6e7c37c680214822c4a285baa2f42278cacabcd25c075"},
+  "source_schema": {"npz_member": "data", "shape": [17856, 170, 3], "dtype": "float64", "csv_shape": [295, 3], "csv_fields": ["from", "to", "cost"]},
+  "training_run": false,
+  "audit_opened": false,
+  "tests": {"command": null, "passed": null, "failed": null},
+  "serialization": {"roundtrip_checked": false, "byte_exact": false},
+  "metric_replay": {"checked": false, "max_difference": null},
+  "notes": ["No training or quality result: pinned dataset has three undocumented time-series channels and the frozen hypothesis requires a documented speed channel. No post-inspection channel substitution was made."]
+}

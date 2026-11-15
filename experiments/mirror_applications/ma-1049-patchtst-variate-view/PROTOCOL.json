@@ -1,0 +1,34 @@
+{
+  "experiment_id": "MA-1049",
+  "title": "PatchTST variate-specific Mirror View over shared patch encoder",
+  "status": "NOT_ESTABLISHED_BLOCKED_SOURCE_SEMANTICS",
+  "evidence_lane": "MECHANISM",
+  "base_commit": "430f93c1a",
+  "hypothesis": "On unseen late PEMS08 windows, a two-scalar per-sensor rotation-and-scale View trained over one channel-independent shared PatchTST encoder will reduce macro sensor MSE by at least 2% versus hard sharing, and outperform a byte-matched diagonal channel FiLM control without materially increasing inference cost.",
+  "physical_object": "One PatchTST patch embedder and Transformer encoder shared across all selected sensors",
+  "mirror_coordinate": "Per sensor two fp32 scalars: angle and isotropic gain, applied as a 2D rotation-scale to the first two patch embedding coordinates",
+  "logical_multiplicity": "Distinct sensor-conditioned predictor functions from shared encoder weights",
+  "prior_art_refs": ["PA329"],
+  "controls": ["hard-shared PatchTST", "byte-matched per-sensor diagonal FiLM on first two embedding coordinates", "independent per-sensor linear prediction head over shared encoder if compute permits"],
+  "data": {
+    "source": "jimmygao3218/PEMS08",
+    "revision": "7d5f30e2f1b538973ff805fc84ac42a0bd7422aa",
+    "series": "expected a documented traffic speed channel; source schema inspection found PEMS08.npz data shape (17856,170,3) without column semantics and PEMS08.csv is a 295-row from/to/cost edge table; no column may be selected post-inspection",
+    "frequency": "5 minutes",
+    "split": "chronological 60% train / 20% development / final 20% audit; context 96, horizon 24",
+    "windows": "deterministic evenly spaced origins within each split; at most 48 train, 12 development, 12 audit windows per selected sensor"
+  },
+  "model": {
+    "implementation": "Hugging Face PatchTSTForPrediction, transformers 4.46.3, trained from scratch",
+    "config": {"context_length": 96, "patch_length": 12, "patch_stride": 12, "num_hidden_layers": 2, "d_model": 32, "num_attention_heads": 4, "ffn_dim": 64, "prediction_length": 24, "channel_attention": false, "scaling": "std", "loss": "mse"},
+    "seed": 104901,
+    "training": "same initialization, optimizer, batches, update count and data order for all candidates; 15 epochs maximum, AdamW, batch 64, fixed learning rate 0.001"
+  },
+  "development": {"worlds_or_seeds": [104901], "selection_metric": "macro sensor MSE on development windows; no audit access for selection"},
+  "fresh": {"worlds_or_seeds": [104901], "locked_before_access": true},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["shared model state_dict", "per-sensor Mirror or FiLM coordinates", "module/config metadata", "serialization container overhead"]},
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true},
+  "success_gate": "Audit macro sensor MSE at least 2% below hard sharing, and better than byte-matched FiLM, while total payload is smaller than independent per-sensor model payload; otherwise no Mirror-specific PASS.",
+  "failure_gate": "Mirror does not improve audit MSE over hard sharing, or byte-matched FiLM matches/beats it; report FAIL for Mirror-specific benefit.",
+  "boundaries": ["single seed and fixed-budget screen only; no near-convergence capacity claim", "blocked before any fitting or metric computation because pinned PEMS08 source provides no documented speed-channel semantics", "no substitute data or column selection after inspection", "CPU measurements do not establish accelerator runtime"]
+}
