@@ -15,7 +15,7 @@ The physical shared object is a single Nomic Embed v1.5 embedding model, corpus-
 
 ## Frozen protocol
 
-The official BEIR ArgUana archive is pinned by SHA256 in `PROTOCOL.json`. Query IDs are assigned to development/audit by a salted SHA256 rule independent of qrels; query length alone defines the two role addresses. The full corpus is indexed. Development chooses angles on the registered grid. Fresh audit qrels must stay closed until the code, index configuration and development freeze are committed.
+The official BEIR ArgUana archive is pinned by SHA256 in `PROTOCOL.json`. Amendment AM-01 caps model input at 256 tokens and makes vector encoding resumable, recorded before any development metric or audit access. Query IDs are assigned to development/audit by a salted SHA256 rule independent of qrels; query length alone defines the two role addresses. The full corpus is indexed. Development chooses angles on the registered grid. Fresh audit qrels must stay closed until the code, index configuration and development freeze are committed.
 
 ScaNN 1.4.2 CPU uses one dot-product AVQ tree, asymmetric hashing, and a fixed reorder stage. The same serialized index is used for all arms. Payload accounting charges model, codebook, index, maps, coordinates and manifests as specified in the protocol.
 

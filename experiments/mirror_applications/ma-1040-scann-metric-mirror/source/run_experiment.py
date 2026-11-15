@@ -34,28 +34,36 @@ def encode_stage():
  sess=ort.InferenceSession(str(MODEL/'onnx/model_quantized.onnx'),sess_options=opts,providers=['CPUExecutionProvider'])
  tok=AutoTokenizer.from_pretrained(str(MODEL),local_files_only=True)
  names={x.name for x in sess.get_inputs()}
- def run(texts):
-  allv=[]; t0=time.perf_counter()
-  bs=16
-  for i in range(0,len(texts),bs):
-   b=tok(texts[i:i+bs],padding=True,truncation=True,max_length=512,return_tensors='np')
+ def run(texts,name):
+  final=HERE/'runs'/f'{name}.npy'; partial=HERE/'runs'/f'{name}.partial.npy'; progress=HERE/'runs'/f'{name}.progress.json'
+  bs=16; maxlen=256; start=0; t0=time.perf_counter()
+  if progress.exists() and partial.exists():
+   start=int(json.loads(progress.read_text())['next_row'])
+  if start==0:
+   mm=np.lib.format.open_memmap(partial,mode='w+',dtype=np.float32,shape=(len(texts),D))
+  else:
+   mm=np.lib.format.open_memmap(partial,mode='r+',dtype=np.float32,shape=(len(texts),D))
+  for i in range(start,len(texts),bs):
+   b=tok(texts[i:i+bs],padding=True,truncation=True,max_length=maxlen,return_tensors='np')
    f={n:np.asarray(b[n],dtype=np.int64) for n in names}
    h=sess.run(['last_hidden_state'],f)[0]
    mask=np.asarray(b['attention_mask'],dtype=np.float32)[:,:,None]
    v=(h*mask).sum(1)/np.maximum(mask.sum(1),1.)
    mean=v.mean(axis=1,keepdims=True); var=np.mean((v-mean)**2,axis=1,keepdims=True)
    v=(v-mean)/np.sqrt(var+1e-5); v=v/np.maximum(np.linalg.norm(v,axis=1,keepdims=True),1e-12)
-   allv.append(v.astype(np.float32,copy=False))
-  return np.ascontiguousarray(np.concatenate(allv)),time.perf_counter()-t0
- cv,ct=run(dt); qv,qtsec=run(qt)
+   mm[i:i+len(v)]=v.astype(np.float32,copy=False); mm.flush()
+   progress.write_text(json.dumps({'next_row':i+len(v),'total_rows':len(texts),'max_length':maxlen})+'\n')
+  del mm; partial.replace(final); progress.unlink(missing_ok=True)
+  return np.load(final,mmap_mode='r',allow_pickle=False),time.perf_counter()-t0
+ cv,ct=run(dt,'corpus_vectors'); qv,qtsec=run(qt,'query_vectors')
  assert cv.shape==(len(did),D) and qv.shape==(len(qid),D)
  (HERE/'runs').mkdir(parents=True,exist_ok=True)
  np.save(HERE/'runs/corpus_vectors.npy',cv,allow_pickle=False); np.save(HERE/'runs/query_vectors.npy',qv,allow_pickle=False)
  (HERE/'runs/ids.json').write_text(json.dumps({'doc_ids':did,'query_ids':qid},separators=(',',':'))+'\n')
  # Token counts used only for role assignment; labels do not influence this step.
- lengths=np.asarray([len(tok.encode(x,add_special_tokens=True,truncation=True,max_length=512)) for x in qt],dtype=np.int32)
+ lengths=np.asarray([len(tok.encode(x,add_special_tokens=True,truncation=True,max_length=256)) for x in qt],dtype=np.int32)
  np.save(HERE/'runs/query_lengths.npy',lengths,allow_pickle=False)
- meta={'corpus_rows':len(did),'query_rows':len(qid),'dimension':D,'corpus_embedding_seconds':ct,'query_embedding_seconds':qtsec,'onnx_threads':opts.intra_op_num_threads,'batch_size':16,'dataset_archive_sha256':sha(Path('/tmp/ma1040_arguana.zip')),'dataset_asset_sha256':{n:sha(DATA/n) for n in ('corpus.jsonl','queries.jsonl')},'embedding_hashes':{n:sha(HERE/'runs'/n) for n in ('corpus_vectors.npy','query_vectors.npy','ids.json','query_lengths.npy')}}
+ meta={'corpus_rows':len(did),'query_rows':len(qid),'dimension':D,'corpus_embedding_seconds':ct,'query_embedding_seconds':qtsec,'onnx_threads':opts.intra_op_num_threads,'batch_size':16,'max_length':256,'resume_supported':True,'dataset_archive_sha256':sha(Path('/tmp/ma1040_arguana.zip')),'dataset_asset_sha256':{n:sha(DATA/n) for n in ('corpus.jsonl','queries.jsonl')},'embedding_hashes':{n:sha(HERE/'runs'/n) for n in ('corpus_vectors.npy','query_vectors.npy','ids.json','query_lengths.npy')}}
  (HERE/'runs/EMBEDDING_PROVENANCE.json').write_text(json.dumps(meta,indent=2)+'\n')
  print(json.dumps(meta,indent=2))
 

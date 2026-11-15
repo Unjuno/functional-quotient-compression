@@ -8,7 +8,9 @@
   "physical_object": "One frozen Nomic Embed v1.5 INT8 ONNX encoder, one 768-D dense corpus embedding matrix, one ScaNN partition/codebook/anisotropic quantization/reorder index.",
   "mirror_coordinate": "One float32 Givens angle for each short/long query role, applied to the same two query-vector dimensions before the unchanged ScaNN searcher.",
   "logical_multiplicity": "Two query-role retrieval functions sharing the same physical corpus embeddings and serialized ScaNN index.",
-  "prior_art_refs": ["PA318"],
+  "prior_art_refs": [
+    "PA318"
+  ],
   "controls": [
     "ScaNN 1.4.2 official CPU builder with dot-product AVQ, one fixed tree, asymmetric hashing and reorder stage; no query view.",
     "Same frozen searcher plus two role-specific Givens query views selected on development qrels.",
@@ -30,7 +32,8 @@
     "document_prefix": "search_document: ",
     "query_prefix": "search_query: ",
     "pooling": "Masked mean, full 768-D layer norm epsilon 1e-5, then L2 normalization, matching the model card/MA-1037 implementation.",
-    "device": "CPU"
+    "device": "CPU",
+    "max_length": 256
   },
   "index": {
     "implementation": "ScaNN 1.4.2 CPU; dot_product; AVQ tree partitioning; asymmetric hashing; fixed float reorder.",
@@ -44,27 +47,90 @@
     "search_parameters": "One fixed index/config shared by every query arm; final k=10."
   },
   "development": {
-    "angle_grid_rad": [-0.30, -0.25, -0.20, -0.15, -0.10, -0.05, 0.0, 0.05, 0.10, 0.15, 0.20, 0.25, 0.30],
+    "angle_grid_rad": [
+      -0.3,
+      -0.25,
+      -0.2,
+      -0.15,
+      -0.1,
+      -0.05,
+      0.0,
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.3
+    ],
     "selection": "Select one angle per query-length role by maximum development nDCG@10 using only the 50% hash-split development qids; tie-break on smaller absolute angle then smaller signed angle.",
     "updates": 0,
-    "lock_artifacts": ["source code", "ScaNN configuration", "query-role threshold", "role angles", "selection metrics", "development IDs hash"]
+    "lock_artifacts": [
+      "source code",
+      "ScaNN configuration",
+      "query-role threshold",
+      "role angles",
+      "selection metrics",
+      "development IDs hash"
+    ]
   },
   "fresh": {
     "locked_before_access": true,
     "audit_split": "Hash-split audit qids from official ArgUana test qrels.",
-    "metrics": ["nDCG@10", "Recall@10", "MRR@10", "ANN Recall@10 vs exact cosine", "candidate counts"],
+    "metrics": [
+      "nDCG@10",
+      "Recall@10",
+      "MRR@10",
+      "ANN Recall@10 vs exact cosine",
+      "candidate counts"
+    ],
     "latency": "Five isolated repeated randomized arm blocks per query batch; report P50/P95 only if calibration is stable, otherwise NOT ESTABLISHED."
   },
   "storage": {
     "authority": "Actual serialized inference payload bytes.",
-    "paid_objects": ["Nomic model/config/tokenizer/architecture code", "all corpus and query embeddings when retained", "serialized ScaNN index files including tree, codebook and reorder data", "Givens code and role-threshold metadata", "native linear-control coordinates", "document/query ID maps and manifests"],
+    "paid_objects": [
+      "Nomic model/config/tokenizer/architecture code",
+      "all corpus and query embeddings when retained",
+      "serialized ScaNN index files including tree, codebook and reorder data",
+      "Givens code and role-threshold metadata",
+      "native linear-control coordinates",
+      "document/query ID maps and manifests"
+    ],
     "shared_index_charged_once": true
   },
   "compute": {
-    "report": ["embedding examples and wall-clock", "ScaNN build time", "ScaNN candidates visited where exposed", "query and index transform FLOPs", "five repeated query latency blocks", "CPU thread count"],
+    "report": [
+      "embedding examples and wall-clock",
+      "ScaNN build time",
+      "ScaNN candidates visited where exposed",
+      "query and index transform FLOPs",
+      "five repeated query latency blocks",
+      "CPU thread count"
+    ],
     "optimizer_updates": 0
   },
   "success_gate": "On the fresh audit, both nDCG@10 and Recall@10 improve by at least 0.5 pp versus native ScaNN, the Mirror code is a functional role-specific mapping, full shared index bytes are unchanged plus <=256 B code/metadata, and p95 latency is no more than 10% slower. A Mirror-specific PASS additionally requires >=0.2 pp nDCG gain over the matched native linear transform.",
   "failure_gate": "FAIL for Mirror-specific value if the linear query transform reproduces the Givens view within 1e-6 and ranking metrics exactly, or if both fresh quality gains are below 0.5 pp, or if the full payload frontier is not improved.",
-  "boundaries": ["One pretrained encoder, one ArgUana benchmark, CPU ScaNN 1.4.2; no GPU or production-scale latency claim.", "One task collection split into query-length roles; no cross-dataset transfer claim.", "ANN quality and exact retrieval quality are distinct; report both.", "If query Givens aliases native linear transform, any performance movement is ordinary query-metric freedom, not Mirror-specific capacity."]
+  "boundaries": [
+    "One pretrained encoder, one ArgUana benchmark, CPU ScaNN 1.4.2; no GPU or production-scale latency claim.",
+    "One task collection split into query-length roles; no cross-dataset transfer claim.",
+    "ANN quality and exact retrieval quality are distinct; report both.",
+    "If query Givens aliases native linear transform, any performance movement is ordinary query-metric freedom, not Mirror-specific capacity."
+  ],
+  "protocol_amendments": [
+    {
+      "id": "AM-01",
+      "reason": "The initial full-length CPU embedding attempt was stopped after 18 minutes before any embedding artifact or metric was saved. To keep this screen executable and restartable, cap each official-model input at 256 tokens and checkpoint vector batches; this change was made before development selection and audit access.",
+      "changes": [
+        "maximum model input length 512 to 256 tokens",
+        "resumable per-batch vector output"
+      ],
+      "unchanged": [
+        "model revision and INT8 ONNX artifact",
+        "dataset and hash query split",
+        "ScaNN index parameters",
+        "view search grid and thresholds",
+        "quality/storage/runtime gates"
+      ]
+    }
+  ]
 }
