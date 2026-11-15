@@ -13,6 +13,8 @@ The previous Phase-I README remains preserved verbatim in [the Phase I snapshot]
 
 ## Start here
 
+- [**A14/A14b frozen-code ES oracle diagnostic**](experiments/mirror_capacity/A14/README.md) — intentionally uses audit labels to test reachable functional fit. Mirror remains 0/6 passing; Shift/FiLM 6/6. Privileged scores are *not* valid held-out quality or proof of representational impossibility. 
+
 - [**A13: ES task-code search and latent policy analysis**](experiments/mirror_capacity/A13/README.md) — code-only ES recovers tent Shift/FiLM, but full Mirror fails even after 10x search; sine OOD remains unpassed, no Mirror-specific byte gain. 
 
 - [**A12/A12b: identify why tent/sine functions fail**](experiments/mirror_capacity/A12/README.md) — 288 locked factorial models plus 72 post-discovery diagnostics: tent requires better code/scaffold learning, sine also shows an OOD extrapolation bottleneck. Family-aware 32-example fits show the data are informative; no Mirror-specific capacity gain. 
@@ -28,7 +30,7 @@ The previous Phase-I README remains preserved verbatim in [the Phase I snapshot]
 - [**2026-11-15 A7 compositional-image capacity experiment**](experiments/mirror_capacity/A7/README.md) — 336 locked models, 16 AND/XOR tasks, seven controls, negative Mirror-specific rate-quality result. Six mapping worlds share one digit dataset.
 
 - [**2026-11-15 A6 real handwritten-digit, 16-function capacity benchmark**](experiments/mirror_capacity/A6/README.md) — 336 models, locked IID/OOD audit and negative Mirror-specific result; same underlying digit images across six task mappings.
-- [**A1–A13 conditional function capacity evidence ledger**](experiments/mirror_capacity/README.md) — prior synthetic controls and new real-image follow-up; none establishes a general Mirror capacity multiplier.
+- [**A1–A14 conditional function capacity evidence ledger**](experiments/mirror_capacity/README.md) — prior synthetic controls and new real-image follow-up; none establishes a general Mirror capacity multiplier.
 
 - [**Phase II research state through MN010**](docs/phase2/RESEARCH_STATE_THROUGH_MN010.md)
 - [**Global Dense Mirror architecture**](docs/phase2/GLOBAL_DENSE_MIRROR_ARCHITECTURE.md)
