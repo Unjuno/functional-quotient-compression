@@ -234,6 +234,8 @@ def main():
         equivalence.append({"qid":q,"same_cells":mir["cells"]==nat["cells"],"same_candidate_ids":mir["candidate_ids"]==nat["candidate_ids"],"max_abs_centroid_score_delta":cell_scores,"same_top100":mir["ranking"]==nat["ranking"]})
     audit_roles={q:roles[q] for q in aud_qids}
     metrics={name:summarize(rows,qrels,audit_roles) for name,rows in arms.items()}
+    replay={name:[{"qid":row["qid"],"ranking_top1000":row["ranking_full"][:1000],"candidate_ids":row["candidate_ids"] if name!="full_index_scan" else [],"candidate_count":row["candidate_count"]} for row in rows] for name,rows in arms.items()}
+    (EXP/"runs"/"audit_rankings.json").write_text(json.dumps(replay,separators=(",",":"),sort_keys=True)+"\n")
     top10_changed=sum(arms["plaid_native"][i]["ranking"][:10]!=arms["mirror"][i]["ranking"][:10] for i in range(len(aud_qids)))
     model_files=sorted(p for p in MODEL.rglob("*") if p.is_file())
     base_payload=payload_sizes(index_path,docids,model_files)
