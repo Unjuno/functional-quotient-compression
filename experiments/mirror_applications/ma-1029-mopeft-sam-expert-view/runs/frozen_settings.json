@@ -1,0 +1,99 @@
+{
+  "schema": "MA1029-dev-freeze-v1",
+  "protocol_sha256": "2fc6eee01c5f5a2578c4eca4469f74423a33d9af2e0339ec76b550e60bf1d88a",
+  "dev_seed": 102900,
+  "image_encoder_seconds": 101.7311688460104,
+  "image_encoder_seconds_per_image": 8.477597403834201,
+  "selected": {
+    "zero_shot": {
+      "learning_rate": null,
+      "development_macro_miou": 0.9931509991239907
+    },
+    "independent_adapter": {
+      "candidates": [
+        {
+          "learning_rate": 0.0003,
+          "development_macro_miou": 0.9945770974931106,
+          "train_wall_s": 12.077680096997938
+        },
+        {
+          "learning_rate": 0.001,
+          "development_macro_miou": 0.9965116208718979,
+          "train_wall_s": 11.198161772001185
+        }
+      ],
+      "selected_learning_rate": 0.001,
+      "selected_development_macro_miou": 0.9965116208718979
+    },
+    "hard_shared_adapter": {
+      "candidates": [
+        {
+          "learning_rate": 0.0003,
+          "development_macro_miou": 0.9958215626196069,
+          "train_wall_s": 11.661073874995054
+        },
+        {
+          "learning_rate": 0.001,
+          "development_macro_miou": 0.994071083937862,
+          "train_wall_s": 11.827411543999915
+        }
+      ],
+      "selected_learning_rate": 0.0003,
+      "selected_development_macro_miou": 0.9958215626196069
+    },
+    "mirror_givens": {
+      "candidates": [
+        {
+          "learning_rate": 0.0003,
+          "development_macro_miou": 0.9958215626196069,
+          "train_wall_s": 11.128231301998312
+        },
+        {
+          "learning_rate": 0.001,
+          "development_macro_miou": 0.9941736796083247,
+          "train_wall_s": 12.344865412997024
+        }
+      ],
+      "selected_learning_rate": 0.0003,
+      "selected_development_macro_miou": 0.9958215626196069
+    },
+    "film_control": {
+      "candidates": [
+        {
+          "learning_rate": 0.0003,
+          "development_macro_miou": 0.9958215626196069,
+          "train_wall_s": 11.143310154999199
+        },
+        {
+          "learning_rate": 0.001,
+          "development_macro_miou": 0.9939007098325403,
+          "train_wall_s": 11.084367938005016
+        }
+      ],
+      "selected_learning_rate": 0.0003,
+      "selected_development_macro_miou": 0.9958215626196069
+    },
+    "mopeft_like": {
+      "candidates": [
+        {
+          "learning_rate": 0.0003,
+          "development_macro_miou": 0.9957660830524913,
+          "train_wall_s": 13.321851718996186
+        },
+        {
+          "learning_rate": 0.001,
+          "development_macro_miou": 0.9967101560761616,
+          "train_wall_s": 12.546798068004136
+        }
+      ],
+      "selected_learning_rate": 0.001,
+      "selected_development_macro_miou": 0.9967101560761616
+    }
+  },
+  "audit_seeds": [
+    102901,
+    102902,
+    102903
+  ],
+  "frozen": true
+}
