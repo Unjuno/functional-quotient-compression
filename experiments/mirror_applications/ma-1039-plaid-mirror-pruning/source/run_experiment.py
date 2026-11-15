@@ -83,9 +83,9 @@ def make_or_load_index(docids,texts):
     if (expected/"metadata.json").exists():
         return name,str(expected),0.0
     patch_small_corpus_partition_cap()
-    cfg=ColBERTConfig(root=str(OUT),experiment="ma1039",nbits=1,dim=128,doc_maxlen=180,query_maxlen=32,mask_punctuation=True,kmeans_niters=20,index_bsize=16,nranks=1,avoid_fork_if_possible=True)
+    cfg=ColBERTConfig(root=str(OUT),experiment="ma1039",nbits=1,dim=128,doc_maxlen=180,query_maxlen=32,mask_punctuation=True,kmeans_niters=20,index_bsize=128,nranks=1,avoid_fork_if_possible=True)
     started=time.perf_counter()
-    with Run().context(RunConfig(nranks=1,experiment="ma1039",root=str(OUT))):
+    with Run().context(RunConfig(nranks=1,experiment="ma1039",root=str(OUT),avoid_fork_if_possible=True)):
         ix=Indexer(checkpoint=str(MODEL),config=cfg,verbose=1)
         index_path=ix.index(name=name,collection=texts,overwrite="force_silent_overwrite")
     index_path=Path(index_path)
