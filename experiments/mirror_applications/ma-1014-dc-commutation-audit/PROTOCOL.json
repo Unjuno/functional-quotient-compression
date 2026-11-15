@@ -1,0 +1,27 @@
+{
+  "experiment_id": "MA-1014",
+  "title": "MRI data-consistency projection commutation audit",
+  "status": "SCREENING",
+  "amendment": "01 — correct the DC implementation and residual metric to use a unitary constant-sensitivity SENSE operator whose normal operator is identity, replace measured k-space samples, then apply the exact adjoint. The initial exploratory spatially-varying sensitivity code did not implement an exact projection; no results from that attempt are reported as evidence. Gates and seeds are unchanged.",
+  "evidence_lane": "MECHANISM/STORAGE/RUNTIME",
+  "base_branch": "research/mirror-application-worker-ready-20261007",
+  "hypothesis": "Post-DC nontrivial feature Mirror views violate acquired-sample consistency, while the same views before a final exact projection preserve it; projected views may or may not improve heldout quality.",
+  "physical_object": "one frozen small two-coil convolutional prior",
+  "mirror_coordinate": "two fixed Givens angles acting on two hidden feature planes",
+  "logical_multiplicity": "alternative prior functional views at three locations relative to exact data consistency",
+  "prior_art_refs": ["PA303", "PA304"],
+  "controls": ["plain zero-filled input with exact DC", "prior then exact DC", "post-DC Mirror", "pre-prior-feature Mirror then exact final DC"],
+  "development": {
+    "source_seeds": [1014001, 1014016],
+    "target_scan_seeds": [[1014101, 1014108], [1014111, 1014118], [1014121, 1014128]],
+    "updates": 64,
+    "selection_metric": "acquired-line residual, heldout-line residual, image NMSE; no tuning on target truth",
+    "operator_amendment": "unit-norm spatially constant two-coil sensitivity per site, making S^H S=I and one measured k-space overwrite an exact image projection"
+  },
+  "fresh": {"worlds_or_seeds": [1014301, 1014307, 1014313], "locked_before_access": true, "opened": false},
+  "storage": {"authority": "actual serialized inference payload bytes", "paid_objects": ["prior tensors", "two Mirror angles", "placement metadata", "operator metadata", "format metadata"]},
+  "compute": {"report_tokens_or_examples": true, "report_optimizer_updates": true, "report_active_compute_proxy": true, "report_isolated_wall_clock": true},
+  "success_gate": "Each projected view has acquired-line residual <=1e-6 and >=5% lower heldout-line error than the stronger prior-then-DC control on all three target scans.",
+  "failure_gate": "Post-DC view has acquired-line residual >1e-4, or the projected Mirror does not meet the heldout quality gate against prior-then-DC.",
+  "boundaries": ["synthetic phantom data only", "small CPU mechanism screen", "no acquired MRI/clinical claim", "fixed unoptimized Mirror coordinates", "fresh seeds unopened"]
+}

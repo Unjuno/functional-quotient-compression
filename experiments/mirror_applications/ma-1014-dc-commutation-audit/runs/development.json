@@ -1,0 +1,340 @@
+{
+  "schema": "MA1014-dev-v1",
+  "source_seeds": [
+    1014001,
+    1014002,
+    1014003,
+    1014004,
+    1014005,
+    1014006,
+    1014007,
+    1014008,
+    1014009,
+    1014010,
+    1014011,
+    1014012,
+    1014013,
+    1014014,
+    1014015,
+    1014016
+  ],
+  "target_seeds": [
+    [
+      1014101,
+      1014102,
+      1014103,
+      1014104,
+      1014105,
+      1014106,
+      1014107,
+      1014108
+    ],
+    [
+      1014111,
+      1014112,
+      1014113,
+      1014114,
+      1014115,
+      1014116,
+      1014117,
+      1014118
+    ],
+    [
+      1014121,
+      1014122,
+      1014123,
+      1014124,
+      1014125,
+      1014126,
+      1014127,
+      1014128
+    ]
+  ],
+  "fresh_seeds": [
+    1014301,
+    1014307,
+    1014313
+  ],
+  "fresh_opened": false,
+  "pretrain": {
+    "updates": 64,
+    "unique_examples": 16,
+    "presentations": 256,
+    "wall_s": 1.4401192419973086
+  },
+  "mirror_angles_radians": [
+    0.3700000047683716,
+    -0.28999999165534973
+  ],
+  "results": [
+    {
+      "site": 1,
+      "method": "plain_dc",
+      "acquired_residual": 1.8435383331016908e-08,
+      "unacquired_kspace_rmse": 0.17599045019596815,
+      "nmse": 0.7976747783903659,
+      "payload_bytes": 5141,
+      "updates": 0,
+      "eval_examples": 8,
+      "wall_s": 0.0016125039983307943,
+      "active_compute_proxy": {
+        "prior_mac": 0,
+        "prior_forward_calls": 0,
+        "complex_2d_fft_calls": 2,
+        "mirror_scalar_flops": 0
+      }
+    },
+    {
+      "site": 1,
+      "method": "prior_then_dc",
+      "acquired_residual": 1.883145295256128e-08,
+      "unacquired_kspace_rmse": 0.14588867221027613,
+      "nmse": 0.5510667478606105,
+      "payload_bytes": 5141,
+      "updates": 0,
+      "eval_examples": 8,
+      "wall_s": 0.004953389998263447,
+      "active_compute_proxy": {
+        "prior_mac": 516096,
+        "prior_forward_calls": 1,
+        "complex_2d_fft_calls": 4,
+        "mirror_scalar_flops": 0
+      }
+    },
+    {
+      "site": 1,
+      "method": "mirror_before_prior_then_dc",
+      "acquired_residual": 1.8897242437532213e-08,
+      "unacquired_kspace_rmse": 0.14582797791808844,
+      "nmse": 0.5501781773831138,
+      "payload_bytes": 5205,
+      "updates": 0,
+      "eval_examples": 8,
+      "wall_s": 0.008154290000675246,
+      "active_compute_proxy": {
+        "prior_mac": 516096,
+        "prior_forward_calls": 1,
+        "complex_2d_fft_calls": 4,
+        "mirror_scalar_flops": 12288
+      }
+    },
+    {
+      "site": 1,
+      "method": "mirror_after_dc",
+      "acquired_residual": 0.07778057991527021,
+      "unacquired_kspace_rmse": 0.1584258321672678,
+      "nmse": 0.8112048748032994,
+      "payload_bytes": 5205,
+      "updates": 0,
+      "eval_examples": 8,
+      "wall_s": 0.00840173599863192,
+      "active_compute_proxy": {
+        "prior_mac": 1032192,
+        "prior_forward_calls": 2,
+        "complex_2d_fft_calls": 4,
+        "mirror_scalar_flops": 12288
+      }
+    },
+    {
+      "site": 1,
+      "method": "mirror_after_then_reproject",
+      "acquired_residual": 2.5180513452127684e-08,
+      "unacquired_kspace_rmse": 0.15842582937330008,
+      "nmse": 0.6816200625626017,
+      "payload_bytes": 5205,
+      "updates": 0,
+      "eval_examples": 8,
+      "wall_s": 0.006505085002572741,
+      "active_compute_proxy": {
+        "prior_mac": 1032192,
+        "prior_forward_calls": 2,
+        "complex_2d_fft_calls": 8,
+        "mirror_scalar_flops": 12288
+      }
+    },
+    {
+      "site": 2,
+      "method": "plain_dc",
+      "acquired_residual": 1.1958122325683718e-08,
+      "unacquired_kspace_rmse": 0.18391409143805504,
+      "nmse": 0.925001840183826,
+      "payload_bytes": 5141,
+      "updates": 0,
+      "eval_examples": 8,
+      "wall_s": 0.0014008464986545732,
+      "active_compute_proxy": {
+        "prior_mac": 0,
+        "prior_forward_calls": 0,
+        "complex_2d_fft_calls": 2,
+        "mirror_scalar_flops": 0
+      }
+    },
+    {
+      "site": 2,
+      "method": "prior_then_dc",
+      "acquired_residual": 1.454866771499752e-08,
+      "unacquired_kspace_rmse": 0.14840786531567574,
+      "nmse": 0.6173463672523833,
+      "payload_bytes": 5141,
+      "updates": 0,
+      "eval_examples": 8,
+      "wall_s": 0.004803593499673298,
+      "active_compute_proxy": {
+        "prior_mac": 516096,
+        "prior_forward_calls": 1,
+        "complex_2d_fft_calls": 4,
+        "mirror_scalar_flops": 0
+      }
+    },
+    {
+      "site": 2,
+      "method": "mirror_before_prior_then_dc",
+      "acquired_residual": 1.4748636645300905e-08,
+      "unacquired_kspace_rmse": 0.14850864838808775,
+      "nmse": 0.6180236914711126,
+      "payload_bytes": 5205,
+      "updates": 0,
+      "eval_examples": 8,
+      "wall_s": 0.006061984000552911,
+      "active_compute_proxy": {
+        "prior_mac": 516096,
+        "prior_forward_calls": 1,
+        "complex_2d_fft_calls": 4,
+        "mirror_scalar_flops": 12288
+      }
+    },
+    {
+      "site": 2,
+      "method": "mirror_after_dc",
+      "acquired_residual": 0.032779774512164295,
+      "unacquired_kspace_rmse": 0.17033970914781094,
+      "nmse": 0.8584908881458301,
+      "payload_bytes": 5205,
+      "updates": 0,
+      "eval_examples": 8,
+      "wall_s": 0.007598278500154265,
+      "active_compute_proxy": {
+        "prior_mac": 1032192,
+        "prior_forward_calls": 2,
+        "complex_2d_fft_calls": 4,
+        "mirror_scalar_flops": 12288
+      }
+    },
+    {
+      "site": 2,
+      "method": "mirror_after_then_reproject",
+      "acquired_residual": 2.1894527746368908e-08,
+      "unacquired_kspace_rmse": 0.17033970914781094,
+      "nmse": 0.8454979406559381,
+      "payload_bytes": 5205,
+      "updates": 0,
+      "eval_examples": 8,
+      "wall_s": 0.0065712220002751565,
+      "active_compute_proxy": {
+        "prior_mac": 1032192,
+        "prior_forward_calls": 2,
+        "complex_2d_fft_calls": 8,
+        "mirror_scalar_flops": 12288
+      }
+    },
+    {
+      "site": 3,
+      "method": "plain_dc",
+      "acquired_residual": 1.6367092681157658e-08,
+      "unacquired_kspace_rmse": 0.1716201351955533,
+      "nmse": 0.8051335975716323,
+      "payload_bytes": 5141,
+      "updates": 0,
+      "eval_examples": 8,
+      "wall_s": 0.0013295723316938772,
+      "active_compute_proxy": {
+        "prior_mac": 0,
+        "prior_forward_calls": 0,
+        "complex_2d_fft_calls": 2,
+        "mirror_scalar_flops": 0
+      }
+    },
+    {
+      "site": 3,
+      "method": "prior_then_dc",
+      "acquired_residual": 1.9292611064258836e-08,
+      "unacquired_kspace_rmse": 0.14125991519540548,
+      "nmse": 0.5696701830778917,
+      "payload_bytes": 5141,
+      "updates": 0,
+      "eval_examples": 8,
+      "wall_s": 0.004347875999277069,
+      "active_compute_proxy": {
+        "prior_mac": 516096,
+        "prior_forward_calls": 1,
+        "complex_2d_fft_calls": 4,
+        "mirror_scalar_flops": 0
+      }
+    },
+    {
+      "site": 3,
+      "method": "mirror_before_prior_then_dc",
+      "acquired_residual": 1.8211833152648182e-08,
+      "unacquired_kspace_rmse": 0.14191063679754734,
+      "nmse": 0.5729956779273431,
+      "payload_bytes": 5205,
+      "updates": 0,
+      "eval_examples": 8,
+      "wall_s": 0.005238600333541399,
+      "active_compute_proxy": {
+        "prior_mac": 516096,
+        "prior_forward_calls": 1,
+        "complex_2d_fft_calls": 4,
+        "mirror_scalar_flops": 12288
+      }
+    },
+    {
+      "site": 3,
+      "method": "mirror_after_dc",
+      "acquired_residual": 0.08259670424740762,
+      "unacquired_kspace_rmse": 0.15579021349549294,
+      "nmse": 0.8806085284064292,
+      "payload_bytes": 5205,
+      "updates": 0,
+      "eval_examples": 8,
+      "wall_s": 0.006803128333558561,
+      "active_compute_proxy": {
+        "prior_mac": 1032192,
+        "prior_forward_calls": 2,
+        "complex_2d_fft_calls": 4,
+        "mirror_scalar_flops": 12288
+      }
+    },
+    {
+      "site": 3,
+      "method": "mirror_after_then_reproject",
+      "acquired_residual": 2.3143178706774847e-08,
+      "unacquired_kspace_rmse": 0.15579021256417036,
+      "nmse": 0.7360656636329903,
+      "payload_bytes": 5205,
+      "updates": 0,
+      "eval_examples": 8,
+      "wall_s": 0.005984145000790401,
+      "active_compute_proxy": {
+        "prior_mac": 1032192,
+        "prior_forward_calls": 2,
+        "complex_2d_fft_calls": 8,
+        "mirror_scalar_flops": 12288
+      }
+    }
+  ],
+  "code_sha256": "84a5cf26ea5b8568da7cde10d4926905e204e1c579c55a4dc8941c71f8014c82",
+  "total_wall_s": 1.542886797000392,
+  "checkpoint_sha256": "7ce2a0b6b6311bf022ca59f81cb46f38e4476d7ec7efce5047cb1a38745917a3",
+  "compute_proxy_definition": {
+    "mac_per_prior_forward": 516096,
+    "complex_2d_fft_calls": {
+      "SENSE forward": 2,
+      "SENSE adjoint": 2
+    },
+    "mirror_flops": {
+      "two Givens plane rotations": 12288
+    },
+    "excluded": "score-only target-k-space metric calculation and source-data preprocessing"
+  }
+}

@@ -24,6 +24,10 @@ MA-990 official MERL RANF code was located, but the required SONICOM HRTF subjec
 
 # Worker queue
 
+## Current handoff — 2026-11-15, MA-1014
+
+MA-1014 is a bounded synthetic DC placement FAIL. Post-DC Mirror breaks acquired samples (RMS .033-.083); final projection restores exactness but worsens heldout k-space error 8.6-14.7%. The pre-prior placement stays DC-exact but is within 0.5% of native prior quality and fails the 5% gain gate at all sites; actual serialized bytes rise 64 B. Exact replay and three tests pass; fresh sealed; no acquired MRI claim. Continue to P0 MA-1016 (MA-1015 is P1). See `ma-1014-dc-commutation-audit/RESULTS.md`.
+
 ## Current handoff — 2026-11-15, MA-1013
 
 MA-1013 is a bounded synthetic SSDU scan-code FAIL. Leakage controls pass (disjoint acquired train/holdout masks; reference truth absent from adaptation), but Mirror NMSE .6840 trails frozen .6455 and same-size affine .6098; payload equals affine and saves 1.16% vs FiLM. Exact replay/four tests pass, fresh sealed, no acquired MRI claim. See `ma-1013-ssdu-mirror-code/RESULTS.md`. Continue to P0 MA-1014.
