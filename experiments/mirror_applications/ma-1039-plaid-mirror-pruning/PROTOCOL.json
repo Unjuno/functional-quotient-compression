@@ -28,7 +28,7 @@
     ],
     "role_definition": "Short/long role split at the median unpadded ColBERT token count among development qrel queries; equality belongs to short role.",
     "selection_metric": "For each role independently, choose the angle maximizing mean development MRR@10 over [-0.20,-0.15,-0.10,-0.05,0,0.05,0.10,0.15,0.20] radians; tie-break by smallest absolute angle then smaller signed angle.",
-    "index": "Official ColBERT residual indexer and official PLAID CPU traversal; 128-D, doc_maxlen=180, query_maxlen=32, nbits=1, fixed 512 centroid partitions (cap the upstream small-corpus auto-partition estimate at 512 through a runtime adapter; keep all other official index/search paths). kmeans_niters=20, collection sampling seed=1039, FAISS k-means seed=123 (fixed upstream), nranks=1."
+    "index": "Official ColBERT residual indexer and official PLAID CPU traversal; 128-D, doc_maxlen=180, query_maxlen=32, nbits=1, fixed 512 centroid partitions (cap the upstream small-corpus auto-partition estimate at 512 through a runtime adapter). Train the codebook on a deterministic seed-1039 sample of 4,096 passages (or all if the collection is smaller), then encode every candidate document into the shared residual index. FAISS kmeans_niters=20, FAISS seed=123, nranks=1, index_bsize=64 (official CPU default)."
   },
   "fresh": {
     "dataset": "All official TREC-COVID qrel queries selected by the frozen numeric qid split; full fixed positive-plus-background candidate collection",
@@ -64,6 +64,7 @@
     "Uses the official ColBERT implementation's CPU PLAID traversal with a fixed smaller-corpus partition cap; not a GPU or production-scale throughput claim.",
     "Audit qids and qrels must not be used to choose role threshold, angles, index parameters or codebook.",
     "The query-side inverse rotation is a functional control for centroid-scoring orthogonality, not a different full query encoder.",
-    "Separate observed facts, interpretation and further hypothesis in results."
+    "Separate observed facts, interpretation and further hypothesis in results.",
+    "The 4,096-passage codebook sample is a declared CPU-screen deviation from upstream ColBERT, which samples all documents below 100k passages; all candidate documents are still encoded and indexed, and every search arm shares this same codebook/index."
   ]
 }

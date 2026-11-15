@@ -66,3 +66,13 @@ def test_adapter_records_matching_cells_and_candidates():
     assert torch.equal(mirror_pids, native_pids)
     assert torch.allclose(mirror_scores, native_scores, atol=2e-6, rtol=2e-6)
     assert torch.equal(ranker.codec.centroids, rotate_rows(ranker.codec.centroids, 0.0))
+
+
+def test_seeded_training_sample_is_stable_and_bounded():
+    import random
+    def sample(n, seed=1039):
+        return random.Random(seed).sample(range(n), min(4096, n))
+    first = sample(18049)
+    assert first == sample(18049)
+    assert len(first) == 4096 and len(set(first)) == 4096
+    assert sample(40) == sample(40) and len(sample(40)) == 40

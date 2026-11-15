@@ -62,6 +62,7 @@ def patch_small_corpus_partition_cap():
     """Bound only upstream's automatic partition count on this small screen."""
     from colbert.indexing.collection_indexer import CollectionIndexer
     original=CollectionIndexer.setup
+    original_sample=CollectionIndexer._sample_pids
     if getattr(CollectionIndexer,"_ma1039_cap_installed",False): return
     def setup_with_cap(self):
         original(self)
@@ -69,7 +70,14 @@ def patch_small_corpus_partition_cap():
         if actual!=self.num_partitions:
             self.num_partitions=actual
             self._save_plan()
+    def bounded_deterministic_sample(self):
+        # 4,096 passages provide hundreds of thousands of token vectors for
+        # the 512-centroid CPU screen while avoiding ColBERT's all-doc sample
+        # on this 18k-document bounded collection.
+        n=min(4096,len(self.collection))
+        return random.Random(SEED).sample(range(len(self.collection)),n)
     CollectionIndexer.setup=setup_with_cap
+    CollectionIndexer._sample_pids=bounded_deterministic_sample
     CollectionIndexer._ma1039_cap_installed=True
 
 def make_or_load_index(docids,texts):
@@ -83,7 +91,7 @@ def make_or_load_index(docids,texts):
     if (expected/"metadata.json").exists():
         return name,str(expected),0.0
     patch_small_corpus_partition_cap()
-    cfg=ColBERTConfig(root=str(OUT),experiment="ma1039",nbits=1,dim=128,doc_maxlen=180,query_maxlen=32,mask_punctuation=True,kmeans_niters=20,index_bsize=128,nranks=1,avoid_fork_if_possible=True)
+    cfg=ColBERTConfig(root=str(OUT),experiment="ma1039",nbits=1,dim=128,doc_maxlen=180,query_maxlen=32,mask_punctuation=True,kmeans_niters=20,index_bsize=64,nranks=1,avoid_fork_if_possible=True)
     started=time.perf_counter()
     with Run().context(RunConfig(nranks=1,experiment="ma1039",root=str(OUT),avoid_fork_if_possible=True)):
         ix=Indexer(checkpoint=str(MODEL),config=cfg,verbose=1)
