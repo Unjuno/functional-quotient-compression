@@ -11,10 +11,10 @@
     "official_commit": "d70b50a7936fec55af20123530e92e794ad901a4"
   },
   "hypothesis": "In a fixed-width three-path SAM2Long tree, two per-path Givens angles over a shared frame memory can preserve long-video object J&F within 1 percentage point of independent path memories, use at least 25% fewer full-session serialized bytes, and beat rank-1 additive memory by at least 1 point at equal or fewer bytes.",
-  "scope": "Mechanism screen using the official SAM2Long inference implementation, official SAM2.1 Hiera-tiny checkpoint, CPU 256px, three fixed synthetic 12-frame object-crossing/reappearance clips. Not a DAVIS/LVOS/SA-V or natural-video benchmark.",
+  "scope": "Mechanism screen using official SAM2Long inference implementation and official SAM2.1 Hiera-tiny checkpoint at its upstream 1024px input resolution on CPU; three fixed synthetic 12-frame object-crossing/reappearance clips. Not a DAVIS/LVOS/SA-V or natural-video benchmark.",
   "runtime": {
     "device": "CPU",
-    "image_size": 256,
+    "image_size": 1024,
     "pathways": 3,
     "sam2_cuda_extension": "disabled per upstream CPU support"
   },
@@ -26,11 +26,23 @@
   ],
   "mirror_insertion": "At each video frame, replace the three pathway-specific maskmem_features tensors with one shared path-mean feature base plus two object/path-specific Givens angles on channel planes (0,1) and (2,3). Decode each selected path memory immediately before SAM2Long attention consumes it. Predicted masks, path scores, object pointers, positional encodings, image cache, prompts, and checkpoint remain charged and unchanged.",
   "scene": {
-    "seeds": [102801, 102802, 102803],
+    "seeds": [
+      102801,
+      102802,
+      102803
+    ],
     "frames": 12,
-    "size": [256, 256],
+    "size": [
+      256,
+      256
+    ],
     "objects": 2,
-    "events": ["crossing", "partial occlusion", "temporary full occlusion", "reappearance"],
+    "events": [
+      "crossing",
+      "partial occlusion",
+      "temporary full occlusion",
+      "reappearance"
+    ],
     "prompt": "exact instance masks on frame 0 only"
   },
   "metrics": {
@@ -43,5 +55,20 @@
   "development": "No label-derived hyperparameter tuning; fixed code dimensions, three-path count, and gates. A non-scored CPU smoke is permitted to confirm imports and protocol execution only.",
   "audit": "Seeds 102801, 102802, 102803. Generated only after this protocol was written. No changes after opening the audit; any implementation correction must be documented before scored replay and may not inspect audit metrics to choose settings.",
   "training": "None; memory coordinates are analytically fit from current-frame path memories before processing the next frame. No future frame or ground-truth mask is used for code fitting.",
-  "limitations": ["synthetic clips only", "12 frames", "two objects", "CPU reduced resolution", "official checkpoint is external but hash charged in full session", "no long-video benchmark claim"]
+  "limitations": [
+    "synthetic clips only",
+    "12 frames",
+    "two objects",
+    "official checkpoint is external but hash charged in full session",
+    "no long-video benchmark claim",
+    "CPU inference at official 1024px resolution"
+  ],
+  "amendments": [
+    {
+      "date": "2026-11-15",
+      "before_scored_run": true,
+      "change": "Set input resolution to the official 1024px SAM2.1 configuration instead of 256px.",
+      "reason": "The official SAM2Long relative memory-attention code partitions each frame into 4096 spatial tokens. The 256px adaptation failed before any scored output with key sequence shape (1,260,64) and attempted reshape (1,1,4096,-1). A three-frame 1024px CPU execution smoke completed successfully. No quality metrics were calculated or inspected during either feasibility run; seeds, number of pathways, factorization, controls, gates, and generated scenes remain unchanged."
+    }
+  ]
 }

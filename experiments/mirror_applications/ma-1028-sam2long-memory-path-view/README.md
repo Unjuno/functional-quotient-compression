@@ -1,6 +1,6 @@
 # MA-1028 — SAM2Long memory-path feature views
 
-Status: SCREENING. The protocol is frozen in `PROTOCOL.json` before the MA-1028 scenes are generated.
+Status: SCREENING. A pre-score protocol amendment sets SAM2 input resolution to the upstream 1024px default; see `PROTOCOL.json`. Scenes were generated after the original freeze, and no quality metrics were inspected before the amendment.
 
 ## Hypothesis
 
@@ -17,3 +17,7 @@ See frozen `PROTOCOL.json`. The implementation uses official SAM2Long source com
 ## Results
 
 To be written after fresh-seed execution and verification.
+
+## Execution amendment
+
+The first 256px feasibility attempt stopped before scoring because official SAM2Long relative memory attention hardcodes 4096 spatial tokens per frame. A three-frame CPU smoke at the official 1024px resolution completed. Before scored runs, resolution was amended to 1024px; data seeds, memory code, controls and gates were unchanged.
