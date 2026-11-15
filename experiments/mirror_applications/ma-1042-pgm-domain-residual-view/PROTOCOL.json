@@ -76,14 +76,14 @@
   "fresh": {
     "locked_before_access": true,
     "audit_worlds": [
-      1047,
-      1048,
-      1049
+      1050,
+      1051,
+      1052
     ],
     "quality": "Every predecessor key and stable value must equal exact ordered-map control after 128 inserts and 128 deletes per world.",
     "correctness_audit": "10,000 queries per domain per fresh world; include values between transformed keys and boundary probes.",
     "runtime": "Five randomized arm-order passes per query; report p50/p95 on this CPU only.",
-    "audit_isolation": "Seeds 1044-1046 were run in a superseded implementation audit and are retained as exploratory diagnostics; confirmatory fresh worlds are 1047-1049, inaccessible until the defect correction and amendment were frozen."
+    "audit_isolation": "Seeds 1044-1046 and 1047-1049 are preserved as superseded exploratory runs: first set exposed correction bug, second set exposed shared-config flush-before-size-accounting bug. Confirmatory fresh worlds are 1050-1052 and were inaccessible before AM-04 freeze."
   },
   "storage": {
     "authority": "Actual serialized inference payload bytes.",
@@ -159,6 +159,22 @@
         "quality/storage/runtime thresholds",
         "controls and serializer",
         "query/update counts"
+      ]
+    },
+    {
+      "id": "AM-04",
+      "reason": "Review of the corrected audit payload files found the shared config.json stream was still open when recursive file sizes were measured. The file bytes were therefore omitted from the reported shared payload, although present on disk. This is a measurement implementation defect, independent of observed results.",
+      "changes": [
+        "Explicitly close and flush shared config.json before enumerating actual serialized payload bytes.",
+        "Preserve seeds 1047-1049 and their original files/results as exploratory and exclude those byte measurements from confirmation.",
+        "Run a new confirmatory fresh audit on seeds 1050-1052; keep epsilon 8 and all model/data/query gates fixed."
+      ],
+      "unchanged": [
+        "quality and exactness gates",
+        "shared/independent serialization definitions",
+        "data and query generation",
+        "epsilon and development results",
+        "controls"
       ]
     }
   ]
