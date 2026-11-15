@@ -1,0 +1,72 @@
+{
+  "experiment_id": "MA-1037",
+  "title": "Matryoshka dimension-budget Mirror readout",
+  "status": "SCREENING",
+  "evidence_lane": "ANN/EMBEDDING/QUALITY/STORAGE/COMPUTE",
+  "base_commit": "a258d20e88d956966518ccf161c21fafe750eb14",
+  "prior_art": {
+    "id": "PA320",
+    "model": "nomic-ai/nomic-embed-text-v1.5",
+    "model_revision": "e9b6763023c676ca8431644204f50c2b100d9aab",
+    "architecture_repo": "nomic-ai/nomic-bert-2048",
+    "architecture_revision": "7710840340a098cfb869c4f65e87cf2b1b70caca",
+    "dataset": "BeIR/scifact",
+    "dataset_revision": "b3b5335604bf5ee3c4447671af975ea25143d4f5",
+    "qrels_dataset": "BeIR/scifact-qrels",
+    "qrels_revision": "2938d17dc3b09882fdb8c12bbbe2e2dc0e75a029"
+  },
+  "hypothesis": "At the same prefix dimension, one task/budget-specific Givens coordinate at the prefix boundary can improve SciFact held-out retrieval quality over the native Matryoshka prefix, while using the same materialized candidate vector bytes plus a negligible coordinate, and the gain will exceed a matched normalized two-coordinate linear readout control.",
+  "physical_object": "Nomic Embed v1.5 full 768-D query/document encoder and full-dimensional corpus embedding table.",
+  "mirror_coordinate": "One float32 angle per prefix budget, rotating dimensions d-1 and d before taking the first d coordinates and renormalizing.",
+  "logical_multiplicity": "Five retrieval quality/latency functions at nested dimensions 64, 128, 256, 512, and 768.",
+  "data": {
+    "dataset": "BEIR SciFact scientific-claim retrieval",
+    "corpus_documents": 5183,
+    "queries_total": 1109,
+    "development": "BeIR/scifact-qrels train.tsv: 809 query IDs, 919 qrels rows",
+    "fresh_audit": "BeIR/scifact-qrels test.tsv: 300 disjoint query IDs, 339 qrels rows",
+    "relevance": "positive qrels only; exact full-corpus retrieval",
+    "seeds": "none; frozen pretrained encoder and fixed disjoint benchmark query split"
+  },
+  "embedding": {
+    "model": "nomic-ai/nomic-embed-text-v1.5",
+    "dimension": 768,
+    "document_prefix": "search_document: ",
+    "query_prefix": "search_query: ",
+    "pooling": "masked mean, full-dimension layer norm, then full-vector L2 normalization, matching the model card",
+    "tokenizer": "pinned Nomic model repository tokenizer",
+    "max_length": 512,
+    "device": "CPU"
+  },
+  "budgets": [64, 128, 256, 512, 768],
+  "controls": [
+    "native Matryoshka prefix at each dimension",
+    "Mirror boundary Givens angle chosen on train qrels at each dimension",
+    "matched normalized two-coordinate linear boundary readout (same function family as Givens, tested for exact alias)",
+    "full 768-D native retrieval upper control"
+  ],
+  "selection": {
+    "angle_grid_rad": "linspace(-pi/2, pi/2, 21)",
+    "selection_metric": "mean development nDCG@10 over train-qrels query IDs",
+    "selection_unit": "one angle per budget; 768-D view fixed to zero because a full orthogonal rotation preserves cosine similarity",
+    "audit_isolation": "test qrels are opened only after protocol freeze and development selection lock"
+  },
+  "metrics": {
+    "quality": ["nDCG@10", "Recall@10", "MRR@10"],
+    "storage": "actual .npy serialized source vector table, per-budget candidate vector index, model/tokenizer/code, per-budget coordinate and manifest bytes",
+    "compute": ["encoder wall time and docs/s", "exact retrieval wall time and queries/s", "2*Nq*Ndoc*d retrieval FLOP proxy", "per-query Givens FLOP proxy"]
+  },
+  "success_gate": "At least two of the four sub-full dimensions improve test nDCG@10 by >=0.5 percentage points over native prefix; no sub-full dimension regresses by >0.5 points; the complete materialized Mirror bank is <=1.01x matched native candidate bytes; and median retrieval throughput is >=90% of native. A Mirror-specific PASS additionally requires >=0.2 point nDCG@10 improvement over the matched normalized linear boundary control.",
+  "failure_gate": "No qualifying held-out quality-cost point, materialized Mirror payload exceeds 1.01x native candidate bank, a matched simple control ties the Mirror function/quality, or full-dimension Mirror changes rankings despite exact orthogonality.",
+  "storage": {
+    "paid_objects": ["full source 768-D corpus vectors", "each materialized native or Mirror candidate vector table", "model weights and config", "tokenizer files", "Nomic architecture source", "domain/budget view coordinates", "corpus ID map", "manifests"],
+    "queries": "test query texts and temporary query vectors are input/work state, not persistent retrieval index state; their hashes and embedding replay are recorded",
+    "full_payload_rule": "common encoder and source table are charged to every complete method bank; all budget-specific candidate banks and coordinate metadata are also charged"
+  },
+  "boundaries": [
+    "one natural scientific retrieval benchmark and one pretrained encoder",
+    "no encoder fine-tuning; task/budget views selected only on train qrels",
+    "exact dense full-corpus retrieval, not ANN index latency",
+    "the full-dimension orthogonal gauge is an invariance check, not independent capacity"
+  ]
+}
