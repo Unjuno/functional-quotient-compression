@@ -135,7 +135,7 @@ def main():
                 preds,post=transform_for(records,raw,codes,method)
                 method_arrays[method]=preds
                 met,per=metrics(records,preds)
-                report["metrics_by_seed"][str(seed)][dataset][method]=met
+                report["metrics_by_seed"][str(seed)].setdefault(dataset,{})[method]=met
                 all_methods[method].append((records,preds))
                 # Keep each series' scores paired across methods, datasets and sampling seeds.
                 grp=series_normalized(records,per)

@@ -208,6 +208,17 @@
         "frozen model and distribution codes",
         "metrics and decision gates"
       ]
+    },
+    {
+      "id": "AM-06",
+      "reason": "The frozen fresh Chronos forecasts were generated and saved, but the result reducer raised a KeyError because the per-seed dataset metrics dictionary was not initialized. No aggregate audit metrics were saved or viewed.",
+      "change": "Initialize the dataset node before storing per-method metrics, then replay the frozen reducer on the exact saved forecast tensors and labels. No model inference, seeds, codes, or metrics/gates change.",
+      "unchanged": [
+        "all saved raw forecast samples and targets",
+        "all frozen development codes",
+        "audit datasets, windows and sampling seeds",
+        "metric definitions and decision gates"
+      ]
     }
   ]
 }
