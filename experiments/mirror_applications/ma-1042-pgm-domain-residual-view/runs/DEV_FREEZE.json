@@ -1,0 +1,18 @@
+{
+  "experiment_id": "MA-1042",
+  "selected_epsilon": 8,
+  "selection_rule": "minimum public DynamicPGMIndex size_in_bytes among exact dev candidates; tie-break smaller epsilon",
+  "dev_seeds": [1042, 1043],
+  "queries_per_domain": 1000,
+  "grid": [8, 16, 32, 64],
+  "exactness": "all Mirror, matched affine, and independent answers exact for all 4000 queries per seed; all final insert/delete membership assertions pass",
+  "selection_metric": "shared_dynamic_ram_bytes",
+  "observed_shared_dynamic_ram_bytes": {"8": 266984, "16": 266984, "32": 266984, "64": 266984},
+  "selection_result": "All candidates tie on the frozen public DynamicPGMIndex RAM metric; select minimum epsilon 8.",
+  "fresh_audit_seeds": [1044, 1045, 1046],
+  "audit_accessed_before_freeze": false,
+  "compiler": "g++ -std=c++17 -O3 -DNDEBUG",
+  "binary_sha256": "058b84a6c0465824b77c1b75212d0043c57ef831cbd8f13401fd3580d1ab3e0f",
+  "source_sha256": "fc0308d34872c630806f724324fd1e70fda9a43c8879b860e8f8a135d459ec20",
+  "sweep_sha256": "954dc654fe7af9a102d5ef9e445b72b0656d5626d3b8af7ee1eb3ce784be8ab9"
+}
