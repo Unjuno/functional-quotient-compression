@@ -59,6 +59,7 @@ def normalize(x):
  return np.asarray(x/np.maximum(n,1e-12),dtype=np.float32)
 
 def prefix(x,d):
+ if d==D: return np.ascontiguousarray(np.asarray(x,dtype=np.float32))
  return np.ascontiguousarray(normalize(x[:,:d]))
 
 def givens_prefix(x,d,theta):
@@ -168,19 +169,22 @@ def audit(model_dir):
   assert np.array_equal(Qm,Qc) and np.array_equal(Xm,Xc)
   for method,Q,X in [('native_prefix',Qn,Xn),('mirror_givens',Qm,Xm),('linear_boundary_control',Qc,Xc)]:
    metrics=ranking_metrics(Q,X,test_ids,docids,test)
-   index_path=(ROOT/'payload'/'mirror_givens'/f'candidate_d{d}.npy' if method=='linear_boundary_control' else ROOT/'payload'/method/f'candidate_d{d}.npy')
-   if method=='linear_boundary_control':
-    candidate_bytes=index_path.stat().st_size; candidate_hash=sha256(index_path)
-    assert np.array_equal(np.load(index_path,allow_pickle=False),X)
+   if d==D:
+    index_path=srcpath; candidate_bytes=0; candidate_hash=source_hash
    else:
-    candidate_bytes,candidate_hash=save_npy(index_path,X)
+    index_path=(ROOT/'payload'/'mirror_givens'/f'candidate_d{d}.npy' if method=='linear_boundary_control' else ROOT/'payload'/method/f'candidate_d{d}.npy')
+    if method=='linear_boundary_control':
+     candidate_bytes=index_path.stat().st_size; candidate_hash=sha256(index_path)
+     assert np.array_equal(np.load(index_path,allow_pickle=False),X)
+    else:
+     candidate_bytes,candidate_hash=save_npy(index_path,X)
    coordinate_bytes=0 if method=='native_prefix' or d==D else (4 if method=='mirror_givens' else 8)
    coordinate_path=ROOT/'payload'/method/f'coordinate_d{d}.bin'
    if coordinate_bytes:
     if method=='mirror_givens': coordinate_path.write_bytes(np.asarray([angles_d],dtype='<f4').tobytes())
     else: coordinate_path.write_bytes(np.asarray(wm,dtype='<f4').tobytes())
     coordinate_bytes=coordinate_path.stat().st_size
-   manifest={'method':method,'dimension':d,'rows':len(docids),'source_embedding':'payload/shared/full_source_vectors.npy','candidate':'candidate_d%d.npy'%d,'coordinate':(angles_d if method=='mirror_givens' else wm) if d<D and method!='native_prefix' else None,'normalized_after_prefix':True,'model_revision':MODEL_REV}
+   manifest={'method':method,'dimension':d,'rows':len(docids),'source_embedding':'payload/shared/full_source_vectors.npy','candidate':('payload/shared/full_source_vectors.npy' if d==D else 'candidate_d%d.npy'%d),'coordinate':(angles_d if method=='mirror_givens' else wm) if d<D and method!='native_prefix' else None,'normalized_after_prefix':True,'model_revision':MODEL_REV}
    mp=ROOT/'payload'/method/f'manifest_d{d}.json'; mp.parent.mkdir(parents=True,exist_ok=True); mp.write_text(json.dumps(manifest,sort_keys=True,separators=(',',':'))+'\n'); mb=mp.stat().st_size
    total=model_bytes+source_bytes+id_bytes+candidate_bytes+coordinate_bytes+mb
    qps,wall=retrieval_qps(Q,X)

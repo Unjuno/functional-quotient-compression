@@ -20,6 +20,11 @@ class TestMatryoshkaView(unittest.TestCase):
   a=xa[:,-1].copy();b=xa[:,0].copy(); xa[:,-1]=c*a-s*b; xa[:,0]=s*a+c*b
   a=ya[:,-1].copy();b=ya[:,0].copy(); ya[:,-1]=c*a-s*b; ya[:,0]=s*a+c*b
   np.testing.assert_allclose(x@y.T,xa@ya.T,rtol=2e-6,atol=2e-6)
+ def test_full_dimension_prefix_is_the_paid_source_table(self):
+  x=np.random.default_rng(3).normal(size=(5,m.D)).astype(np.float32)
+  np.testing.assert_array_equal(m.prefix(x,m.D),x)
+  np.testing.assert_array_equal(m.givens_prefix(x,m.D,.7),x)
+  np.testing.assert_array_equal(m.linear_boundary_prefix(x,m.D,[.3,.4]),x)
  def test_metric_known_answer(self):
   q=np.eye(2,dtype=np.float32); d=np.eye(2,dtype=np.float32)
   met=m.ranking_metrics(q,d,['q0','q1'],['d0','d1'],{'q0':{'d0':1},'q1':{'d1':1}})
