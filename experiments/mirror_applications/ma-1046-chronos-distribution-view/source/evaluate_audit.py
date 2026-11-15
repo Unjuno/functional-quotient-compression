@@ -92,8 +92,11 @@ def series_normalized(records, per_record):
         for key, ix in grouped.items():
             row=per_record[ix]
             out[ds][key]={
-                k:float(np.mean([x[k] for x in row])) for k in
-                ("crps","wql","mase","coverage90","naive_crps")
+                "crps":float(np.mean([x["crps"] for x in row])),
+                "wql":float(sum(x["wql_num"] for x in row)/max(sum(x["wql_den"] for x in row),1e-8)),
+                "mase":float(np.mean([x["mase"] for x in row])),
+                "coverage90":float(np.mean([x["coverage90"] for x in row])),
+                "naive_crps":float(np.mean([x["naive_crps"] for x in row]))
             }
     return out
 

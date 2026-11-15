@@ -157,6 +157,17 @@
         "grid, metrics and gates",
         "fresh data remain unscored"
       ]
+    },
+    {
+      "id": "AM-02",
+      "reason": "Development metric review found that averaging per-window WQL ratios gives unstable weight to near-zero-valued ETTh1 series. Standard aggregate WQL pools the quantile-loss numerator and absolute-target denominator before division.",
+      "change": "Report each dataset/series WQL as sum(quantile loss numerator) divided by the pooled sum(abs(target)) across windows; development WQL is recomputed from saved forecast samples.",
+      "unchanged": [
+        "primary CRPS objective and fitted codes",
+        "forecast windows and all chronological splits",
+        "audit dataset IDs/series/windows/seeds",
+        "all success/failure thresholds"
+      ]
     }
   ]
-}
+}\n
