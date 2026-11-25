@@ -1,0 +1,52 @@
+{
+  "experiment_id": "MA-1059",
+  "title": "natural-series orbit versus independent trend residual sweep",
+  "status": "SCREENING",
+  "evidence_lane": "TIME_SERIES/QUALITY/STORAGE/COMPUTE",
+  "base_commit": "6f72ff2ce",
+  "prior_art_refs": [
+    "PA328",
+    "PA330",
+    "PA335"
+  ],
+  "hypothesis": "On heterogeneous natural forecasting series, a shared pretrained temporal backbone with a compact series View plus sparse private trend residual can match or improve held-out forecasts while using less actual serialized state than separate series-specific forecast heads. The added View must beat a byte-matched ordinary low-rank or affine control.",
+  "physical_object": "One shared multiseries temporal backbone and common forecast interface.",
+  "mirror_coordinate": "A low-dimensional series-specific View coordinate inferred from train history; optional sparse private trend residual only when a development-only rule selects it.",
+  "logical_multiplicity": "Forecast functions across naturally heterogeneous series families from one shared physical model.",
+  "prior_art": {
+    "PA328": "Moirai universal time-series transformer already shares across frequencies and variates; Mirror must add value beyond native conditioning.",
+    "PA330": "TimeMixer mixes multi-scale seasonal/trend signals; compare against its native scale-mixing and simple scale gates.",
+    "PA335": "N-BEATS uses interpretable shared bases; basis coefficients are a direct non-Mirror control."
+  },
+  "controls": [
+    "Native shared backbone / forecast head",
+    "hard sharing with no series code",
+    "byte-matched additive or diagonal gain / low-rank residual",
+    "Mirror View coordinate",
+    "independent per-series forecast heads as quality upper bound",
+    "seasonal naive and persistence where valid"
+  ],
+  "design": {
+    "datasets": "Select a public multiseries benchmark with metadata/semantics and documented license; balance stationary/nonstationary, scale, holiday and trend groups. No benchmark selection by audit scores.",
+    "split": "Split by complete series identity and chronological blocks; development selects all ranks, regularization and private-residual threshold. Freeze before fresh series and future windows are read.",
+    "primary_metric": "Per-series normalized forecast error (MASE or benchmark primary); report group and worst-quartile metrics.",
+    "secondary_metrics": [
+      "actual serialized inference payload bytes",
+      "private residual fraction and count",
+      "adaptation examples and optimizer updates",
+      "train/adaptation wall time",
+      "query latency",
+      "per-family quality"
+    ],
+    "compute": "Use container CPU/GPU available; report hardware and active MAC/FLOP proxy. No parameter-count-only storage claim."
+  },
+  "success_gate": "On fresh complete-series holdout, Mirror beats native shared and byte-matched simple control by at least 2% on primary metric, remains within 5% of independent-head quality, and reduces actual complete payload versus independent heads; all replay and split checks pass.",
+  "failure_gate": "Mirror fails any quality gate; simple control matches within 0.1%; private residual is needed for most series or removes storage gain; or actual bytes/compute erase the frontier.",
+  "not_established_gate": "No suitable licensed public dataset, unable to reproduce required controls, or split/data provenance cannot be verified.",
+  "boundaries": [
+    "One model/data family is screening evidence, not broad time-series capacity evidence.",
+    "View coordinates count as payload together with bases, mappings, normalization and residual state.",
+    "Do not use audit results to select architecture or thresholds.",
+    "A candidate private residual must be included in full byte and runtime costs."
+  ]
+}

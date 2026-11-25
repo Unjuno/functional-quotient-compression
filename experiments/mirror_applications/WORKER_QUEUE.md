@@ -1,6 +1,8 @@
-## Current handoff — 2026-11-25, MA-1057 complete
+## Current handoff — 2026-11-25, MA-1059 setup
 
-MA-1057 is a scoped FAIL; verified metrics, source hashes, and serialized bytes are in `experiments/mirror_applications/ma-1057-mixed-rate-frequency-horizon/`. Next eligible P0: MA-1058 cold-start few-shot series identity (PA326/PA332). Read its prior art and create its dedicated branch before protocol freeze.
+MA-1058 is a scoped FAIL on held Chronos cold-start sensor series. Adapter state is 35,310 B vs 557,410 B independent LoRA, but full payload saves only 1.53%; Mirror loses to independent LoRA and the same-cost diagonal control. Saved metrics and bytes replay; five stochastic first-query redraws differ and are documented. See `experiments/mirror_applications/ma-1058-chronos-coldstart-view/RESULTS.md`.
+
+MA-1059 is now the active P0 on dedicated branch `research/ma-1059-temporal-view-geometry-20261125`. PA328/PA330/PA335 were reviewed. Its falsifiable question is whether a compact series View over a shared temporal function family beats byte-matched diagonal/low-rank controls on naturally heterogeneous held-out series, and how often private trend state is needed. Protocol skeleton is present; no dataset, audit split, model implementation, or measurements are frozen yet. Choose and hash the public dataset/model using development-only evidence, then freeze complete-series and chronological split before any fresh labels are accessed.
 
 ## Current handoff — 2026-11-25, MA-1056 complete
 

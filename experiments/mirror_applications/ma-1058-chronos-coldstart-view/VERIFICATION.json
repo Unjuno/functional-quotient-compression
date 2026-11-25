@@ -1,19 +1,48 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-1058",
+  "commit": "9947079133c613a120cb8b1e3e5b990f034a3daa",
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "/tmp/ma1058-venv/bin/python -m pytest -q experiments/mirror_applications/ma-1058-chronos-coldstart-view/tests",
+    "passed": 3,
+    "failed": 0
   },
   "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+    "roundtrip_checked": true,
+    "byte_exact": true,
+    "payloads_verified": 32
   },
   "metric_replay": {
-    "checked": false,
-    "max_difference": null
+    "checked": true,
+    "rows": 16,
+    "max_difference": 0.0
   },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "fresh_split_integrity_checked": true,
+  "stochastic_forecast_replay": {
+    "exact_first_queries": 11,
+    "checked": 16,
+    "finite": 32,
+    "nonidentical_redraws": [
+      "native/105804",
+      "mirror/105804",
+      "diag/105804",
+      "full/105804",
+      "independent/105804"
+    ],
+    "metric_source": "saved audit sample arrays; all metric rows replay exactly"
+  },
+  "data_source_sha256": "65d69fb0a2323dba9867179eb7af47c8b814186bc459ff0a4937d21614153c8f",
+  "model_weights_sha256": "eed458758bd8165d80f496a90bcd2cfed9f1bf7d7b08677acd64e0f7d72bdcf2",
+  "notes": [
+    "Three tests pass.",
+    "Saved sample replay is exact for metrics; stochastic forecast regeneration differs for five rows at seed 105804 and is disclosed.",
+    "Scoped decision FAIL due quality gates and diagonal-control alias, despite state ratio pass."
+  ],
+  "artifact_sha256": {
+    "RESULTS.md": "d220314862f512307836771c715a3b836eb1460ce722605a7774807d31fe3b55",
+    "RESULTS_CORE.csv": "3627323916debf49ba33e436e694d9a66cefe5f55345209a7f79f847b57e6fcb",
+    "runs/input_manifest.json": "ef43ff1ef9cc73904dc54d8f1c8e6123edc0ae0616bc4f8b36662fdf2d591456",
+    "source/verify.py": "0071eb0ecc43361e53578f4ec20ce9bd99e40a325e196cc823fd528ace67438f",
+    "source/accounting_correction.py": "fda0b9f38a19502010dbb096b9476bb8808cbd6c3c4eddbb698bfd7671881467",
+    "runs/audit/results.json": "53301eebf54ab9acb14cb9bedfbc59bd9d445fb8bf0fb9c2ab92354afe07d4f9"
+  }
 }

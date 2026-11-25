@@ -1,0 +1,121 @@
+{
+  "experiment_id": "MA-1058",
+  "model": {
+    "id": "amazon/chronos-t5-tiny",
+    "revision": "29d808298f1a62493e7b9a5e08529d0d930fa189",
+    "parameters": 8394496,
+    "files": {
+      "model.safetensors": {
+        "bytes": 33588440,
+        "sha256": "eed458758bd8165d80f496a90bcd2cfed9f1bf7d7b08677acd64e0f7d72bdcf2"
+      },
+      "config.json": {
+        "bytes": 1142,
+        "sha256": "b107d9011b8cf4557d2cae9d2ab5be07af8ff102d2d4ff19b452f44c3af76552"
+      },
+      "generation_config.json": {
+        "bytes": 142,
+        "sha256": "e255d602baf228364ebfd4e787b9fa8a0f41d0ade452f76bdfd5cd57f7f9b8e4"
+      }
+    },
+    "total_bytes": 33589724,
+    "chronos_forecasting": "1.5.3",
+    "transformers": "4.46.3",
+    "torch": "2.14.1+cpu"
+  },
+  "data": {
+    "repo": "jimmygao3218/PEMSBAY",
+    "revision": "c858397fb381d82c3d55ad0a81beb51a9bb9bdaa",
+    "file": "PEMS-BAY.h5",
+    "sha256": "65d69fb0a2323dba9867179eb7af47c8b814186bc459ff0a4937d21614153c8f",
+    "rows": 52116,
+    "total_source_sensor_columns": 325,
+    "fit_ids": [
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37
+    ],
+    "dev_ids": [
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45
+    ],
+    "discarded_ids": [
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61
+    ],
+    "audit_ids": [
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77
+    ],
+    "audit_columns": [
+      400436,
+      400440,
+      400449,
+      400457,
+      400461,
+      400464,
+      400479,
+      400485,
+      400499,
+      400507,
+      400508,
+      400514,
+      400519,
+      400528,
+      400545,
+      400560
+    ],
+    "license": "CC-BY-4.0",
+    "audit_target_access_before_freeze": false,
+    "discarded_ids_note": "Only finite/nonfinite flags of 46\u201361 were inspected; no forecast metrics were computed. IDs excluded entirely."
+  },
+  "protocol_sha256": "85118331bc1897f18e0a45f21ae734b8bc47484b999c8c0330c3bedaee70a206",
+  "fresh_freeze_sha256": "2f35448a11517044dc8a192146e38180b61c232ccdee744455c13ae47bed3cea"
+}
