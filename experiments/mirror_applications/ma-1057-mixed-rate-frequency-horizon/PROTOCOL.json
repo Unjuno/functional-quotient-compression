@@ -1,0 +1,70 @@
+{
+  "experiment_id": "MA-1057",
+  "title": "Moirai mixed sample-rate × physical-horizon calibration View",
+  "status": "SCREENING",
+  "evidence_lane": "TIME_SERIES / FORECAST_QUALITY / STORAGE / CPU_RUNTIME",
+  "base_commit": "9c92ee793",
+  "prior_art_refs": ["PA327", "PA328"],
+  "hypothesis": "On a frozen Moirai checkpoint, factorized frequency×horizon calibration fitted on three observed cells improves fresh fourth-cell probabilistic forecast quality over native, additive and single-axis controls, at less state than independent cell calibrators.",
+  "physical_object": "One frozen official Salesforce Moirai-1.1-R-small model shared across sample rates and horizons",
+  "mirror_coordinate": "Scale s[f,h]=u[f]*v[h], offset b[f,h]=a[f]+c[h] over native forecast samples",
+  "logical_multiplicity": "Four frequency×physical-horizon forecast distributions from one shared decoder",
+  "model": {
+    "id": "Salesforce/moirai-1.1-R-small",
+    "revision": "0c24ab99db2c1a70ea2a0fc03bf113329772ac64",
+    "package": "uni2ts==1.1.1",
+    "framework": "torch 2.14.1 CPU",
+    "dtype": "float32",
+    "samples_per_forecast": 32,
+    "patch_size": "one shared value selected from [8,16,32] on native validation CRPS and then fixed across rates and horizons; no per-cell patch code",
+    "updates": 0
+  },
+  "data": {
+    "repository": "jimmygao3218/PEMSBAY",
+    "revision": "c858397fb381d82c3d55ad0a81beb51a9bb9bdaa",
+    "file": "PEMS-BAY.h5",
+    "asset_sha256": "65d69fb0a2323dba9867179eb7af47c8b814186bc459ff0a4937d21614153c8f",
+    "rows": 52116,
+    "source_sensor_columns": 325,
+    "license": "CC-BY-4.0",
+    "sensor_selection": "First eight stored sensor IDs >=14 that are finite over every source timestamp: [14,15,16,17,18,19,20,21]. This excludes all IDs 0..13 used by MA-1048. If any selected ID is non-finite, stop selection before metric access and report NOT ESTABLISHED.",
+    "cross_experiment_note": "Same PEMS-BAY network and source timestamp range as MA-1048, but disjoint predeclared sensor IDs; not an independent dataset family.",
+    "frequency_views": "5-minute native series and 15-minute series formed from aligned non-overlapping groups of 3 completed 5-minute values using causal box coefficients [1/3,1/3,1/3]. Every aggregate's last source index is before the corresponding forecast target.",
+    "horizons": {"short": "1 hour", "long": "24 hours"},
+    "steps": {"5-minute": {"short": 12, "long": 288}, "15-minute": {"short": 4, "long": 96}},
+    "context": {"physical_duration": "24 hours", "5-minute_steps": 288, "15-minute_steps": 96},
+    "split": "Chronological first 60% target rows for code fit, next 20% for selection, final 20% audit; input context may use preceding history but all targets stay fully inside their split.",
+    "fit_cells": [["5-minute", "1-hour"], ["5-minute", "24-hour"], ["15-minute", "24-hour"]],
+    "audit_cell": ["15-minute", "1-hour"],
+    "origins_per_sensor_cell": {"train": 4, "dev": 2, "audit": 3}
+  },
+  "controls": [
+    "Frozen native Moirai forecasts per rate and horizon",
+    "Global affine sample calibration",
+    "Frequency-only affine calibration",
+    "Horizon-only affine calibration",
+    "Additive frequency+horizon scale and offset control",
+    "Factorized frequency×horizon scale and offset Mirror",
+    "Independent per-cell scale and offset table",
+    "Seasonal naive with 24-hour physical period"
+  ],
+  "development": {
+    "selection_metric": "Select one shared Moirai patch size from [8,16,32] using native Moirai validation CRPS on three fit cells; choose calibration ridge strength from [0.0,0.01,0.1] on validation after fitting on train cells. Freeze before audit.",
+    "limits": "Audit origins, targets, forecast samples and metrics are inaccessible before freeze. Native model is not updated."
+  },
+  "fresh": {
+    "locked_before_access": true,
+    "seeds": [105702, 105703],
+    "audit": "Only the preregistered 15-minute × 1-hour cell, at three fixed evenly spaced origins on each selected sensor in the final 20% target interval."
+  },
+  "metric": {"primary": "CRPS on empirical 32-sample predictive distribution", "secondary": ["WQL", "MASE", "per-sensor metrics"]},
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_state": ["Moirai model.safetensors", "config.json", "calibration coefficients", "frequency/horizon IDs", "sensor mapping", "decoder and sampling metadata"],
+    "shared_model_charged_once": true
+  },
+  "compute": {"report_samples": true, "report_active_forecasts": true, "report_cpu_inference_p50_p95": true, "report_calibration_fit_time": true, "report_head_overhead": true},
+  "success_gate": "On both audit sampling seeds, Mirror improves pooled CRPS by >=2% over native Moirai, additive calibration and best single-axis control; no audit sensor worsens CRPS by >2%; complete bytes are less than independent-cell calibration; and post-head p95 overhead is <=10% of Moirai inference p95.",
+  "failure_gate": "Any success criterion fails, additive control aliases factorization within 0.1%, or native/seasonal naive quality is materially better.",
+  "boundaries": ["One network and reused PEMS-BAY timestamp range; disjoint sensors are not an independent dataset family.", "Fixed model, calibration-only experiment; no capacity claim.", "Affine factorization aliases ordinary low-rank/native calibration unless it beats the additive control.", "Physical time context and horizons are explicitly matched across sample rates."]
+}

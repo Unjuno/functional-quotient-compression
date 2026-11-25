@@ -1,3 +1,7 @@
+## Current handoff — 2026-11-25, MA-1057 complete
+
+MA-1057 is a scoped FAIL; verified metrics, source hashes, and serialized bytes are in `experiments/mirror_applications/ma-1057-mixed-rate-frequency-horizon/`. Next eligible P0: MA-1058 cold-start few-shot series identity (PA326/PA332). Read its prior art and create its dedicated branch before protocol freeze.
+
 ## Current handoff — 2026-11-25, MA-1056 complete
 
 MA-1056 is a scoped FAIL on pinned official DLinear and the public daily Exchange-Rate panel. Two fresh seeds: annual phase Mirror macro MASE .445625 vs .445626 DLinear, .445703 matched gain, and .384308 tuned last-value naive. Mirror payload 197,721 B vs 197,469 B DLinear; measured inference latency 2.53×. Three tests and twelve actual serialized checkpoint replays pass. Fixed-update CPU screen; one dataset family, no capacity claim. See `ma-1056-dlinear-periodic-view/RESULTS.md`. Continue at P0 MA-1057 mixed-rate frequency×horizon interpolation (PA327/PA328); MA-1054 remains P1.

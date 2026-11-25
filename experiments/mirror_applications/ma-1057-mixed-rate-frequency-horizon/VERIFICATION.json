@@ -1,0 +1,118 @@
+{
+  "experiment_id": "MA-1057",
+  "status": "PASS_VERIFICATION",
+  "checks": [
+    "four preregistered unit tests pass in pinned isolated environment",
+    "official model/data revision hashes recorded",
+    "fresh audit generated only after frozen source/protocol hashes",
+    "audit metrics deterministically replay from stored 32-sample predictions and targets",
+    "actual common model/config and per-method serialized code/metadata bytes measured",
+    "fit/dev/audit target bounds validated",
+    "independent verification script replays all 16 seed\u00d7method audit metric rows and checks all 8 actual payload byte counts and coefficient hashes"
+  ],
+  "source_hashes": {
+    "PROTOCOL.json": {
+      "sha256": "1970a84cbd5527e338249d89341310d6fa7f6f026c2e71a055ee046ff11b8dd2",
+      "bytes": 5495
+    },
+    "FRESH_FREEZE.json": {
+      "sha256": "f8e0a2f90378aac5b7bd2ef070396dab36c50b36accab1683c6d98c300bae42a",
+      "bytes": 1166
+    },
+    "source/collect_samples.py": {
+      "sha256": "07f0a1ef68bad72377427937f6027f0dba138b962bf17888e0e411d31589160c",
+      "bytes": 8676
+    },
+    "source/fit_controls.py": {
+      "sha256": "250833b1536e2c569a4d64ffe0be8e7b8e37bb416dc16b4df2170afcd880c1e6",
+      "bytes": 9245
+    },
+    "runs/input_manifest.json": {
+      "sha256": "e77da893f405da63dfbc196dc2f57f76cd96742374395db01060f15d24c2b007",
+      "bytes": 3229
+    },
+    "runs/audit/results.json": {
+      "sha256": "6695424d2ec07636d7408a728f6a9fd3603414a2d1f97df43755cd5fcca8f69f",
+      "bytes": 26541
+    },
+    "source/verify.py": {
+      "sha256": "9aa52333efcb510c914c70e1478d34d0ea19a9baf91dd294b7bbafe2e3258e14",
+      "bytes": 1567
+    },
+    "RESULTS.md": {
+      "sha256": "5f635e72f56d58a5fe805d5c81da8c792be251b58a28853df356640cab3239d1",
+      "bytes": 3682
+    },
+    "RESULTS_CORE.csv": {
+      "sha256": "6ec8fc887f5ebb536fc6ff28f0194ae6176f1e4073ec33cf9f1ae89518555b87",
+      "bytes": 1706
+    }
+  },
+  "audit_replayed": true,
+  "audit_seeds": [
+    105702,
+    105703
+  ],
+  "audit_cell": [
+    1,
+    0
+  ],
+  "payloads": {
+    "native": {
+      "common_model_bytes": 55320882,
+      "method_state_bytes": 355,
+      "complete_payload_bytes": 55321237,
+      "coefficients_bytes": 0,
+      "metadata_bytes": 355
+    },
+    "global": {
+      "common_model_bytes": 55320882,
+      "method_state_bytes": 363,
+      "complete_payload_bytes": 55321245,
+      "coefficients_bytes": 8,
+      "metadata_bytes": 355
+    },
+    "frequency_only": {
+      "common_model_bytes": 55320882,
+      "method_state_bytes": 379,
+      "complete_payload_bytes": 55321261,
+      "coefficients_bytes": 16,
+      "metadata_bytes": 363
+    },
+    "horizon_only": {
+      "common_model_bytes": 55320882,
+      "method_state_bytes": 377,
+      "complete_payload_bytes": 55321259,
+      "coefficients_bytes": 16,
+      "metadata_bytes": 361
+    },
+    "additive_log": {
+      "common_model_bytes": 55320882,
+      "method_state_bytes": 385,
+      "complete_payload_bytes": 55321267,
+      "coefficients_bytes": 24,
+      "metadata_bytes": 361
+    },
+    "mirror_factorized": {
+      "common_model_bytes": 55320882,
+      "method_state_bytes": 398,
+      "complete_payload_bytes": 55321280,
+      "coefficients_bytes": 32,
+      "metadata_bytes": 366
+    },
+    "independent": {
+      "common_model_bytes": 55320882,
+      "method_state_bytes": 392,
+      "complete_payload_bytes": 55321274,
+      "coefficients_bytes": 32,
+      "metadata_bytes": 360
+    },
+    "seasonal_naive": {
+      "common_model_bytes": 55320882,
+      "method_state_bytes": 363,
+      "complete_payload_bytes": 55321245,
+      "coefficients_bytes": 0,
+      "metadata_bytes": 363
+    }
+  }
+}
