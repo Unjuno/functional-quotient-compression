@@ -1,21 +1,34 @@
 {
   "experiment_id": "MA-1059",
-  "commit": "",
+  "commit": "c26bb65c9",
   "tests": {
-    "command": "",
-    "passed": null,
-    "failed": null
+    "command": "/tmp/ma1058-venv/bin/python -m pytest -q experiments/mirror_applications/ma-1059-time-series-view-geometry/tests",
+    "passed": 5,
+    "failed": 0
   },
   "serialization": {
     "roundtrip_checked": false,
-    "byte_exact": false
+    "byte_exact": true,
+    "actual_payload_files_checked": 9
   },
   "metric_replay": {
     "checked": false,
-    "max_difference": null
+    "max_difference": null,
+    "note": "No audit was opened and dev forecast samples were not retained; aggregate dev metrics remain screening summaries."
   },
-  "fresh_split_integrity_checked": false,
+  "fresh_split_integrity_checked": true,
+  "input_hashes": {
+    "protocol_sha256": "6157bec9af7fa7a36f19d012d2628c7e5dff18830ec13eb0e2182d066ea4076e",
+    "data_archive_sha256": "6e434ad8a0ef6acb55ebee0e1d1ffe22707ea4e62c05e091326267f3a5b4a93c",
+    "model_weights_sha256": "eed458758bd8165d80f496a90bcd2cfed9f1bf7d7b08677acd64e0f7d72bdcf2",
+    "development_json_sha256": "8a06aff1b437d07e4fb7e1af2d82cdfff3a56d13d7d6addcae72729bdf2c8b0e",
+    "selection_sha256": "a83ea2e91240225512c549630f41921e665a2426a71f607c60af37162f94eb46"
+  },
   "notes": [
-    "Protocol freeze stage; no numeric audit values have been accessed and no measurements have been run."
+    "PASS_SCREENING_VERIFICATION: development data/model/protocol hashes verified; all 9 actual serialized method payload byte totals recomputed.",
+    "Development selector fixes residual threshold at 0.0, which deterministically allocates residual state to 24/24 fresh series; registered <=25% gate fails before audit.",
+    "Fresh audit numeric values and forecasts were not accessed.",
+    "First unseeded development run is preserved as invalidated; deterministic seed 105900 run alone informs the outcome.",
+    "No fresh quality, capacity, or broad compression claim."
   ]
 }
