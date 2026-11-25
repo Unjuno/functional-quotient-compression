@@ -1,0 +1,79 @@
+{
+  "experiment_id": "MA-1056",
+  "title": "DLinear versus per-series annual periodic residual View",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM",
+  "base_commit": "c712b0d59",
+  "hypothesis": "A per-series phase coordinate over an input-derived annual residual harmonic improves future Exchange-Rate macro MASE over hard sharing, same-byte seasonal gain, tuned naive forecasts and DLinear, while costing fewer bytes than free per-series Fourier coefficients.",
+  "physical_object": "Pinned DLinear shared seasonal/trend linear maps plus fixed annual sinusoid basis",
+  "mirror_coordinate": "One learned phase scalar per currency, rotating input-projected annual residual (cos,sin) coefficients",
+  "logical_multiplicity": "Eight currency-specific periodic residual forecast functions",
+  "prior_art_refs": ["PA336"],
+  "source": {
+    "dlinear_repo": "https://github.com/cure-lab/LTSF-Linear",
+    "dlinear_commit": "0c113668a3b88c4c4ee586b8c5ec3e539c4de5a6",
+    "dlinear_file": "models/DLinear.py",
+    "dlinear_sha256": "0893b53cb6473d6bdca7aeca514cb3ee12efa6df227c29c4469571c9711451cc",
+    "license": "Apache-2.0"
+  },
+  "data": {
+    "dataset": "Exchange-Rate daily multivariate series",
+    "source_repo": "https://github.com/laiguokun/multivariate-time-series-data",
+    "source_commit": "7f402f185cc2435b5e66aed13a3b560ed142e023",
+    "source_file": "exchange_rate/exchange_rate.txt.gz",
+    "source_sha256_gzip": "6a4fbb561dcdee43f071a83badbeec9223a335552278348656738b556f1c2e9d",
+    "series": ["Australia", "Britain", "Canada", "Switzerland", "China", "Japan", "New Zealand", "Singapore"],
+    "rows": 7588,
+    "target_origin_definition": "first index of forecast target; each [origin,origin+horizon) must be inside its registered target split",
+    "split": "First 60% train, next 20% development, final 20% audit by original row order; audit contexts may use prior observations, target endpoints cannot cross split end.",
+    "normalization": "Per-series mean/std fit on first 60% only; MASE denominator is training mean absolute difference at lag 252."
+  },
+  "model": {
+    "forecast_horizon": 96,
+    "annual_period": 252,
+    "history_candidates": [252, 504],
+    "official_moving_average_kernel": 25,
+    "dlinear_tuning": {"learning_rates": [0.001, 0.005], "screen_updates": 100, "dev_seed": 105601},
+    "final_updates": 300,
+    "batch_size": 32,
+    "seeds": [105601, 105602, 105603],
+    "mirror_operator": "From the DLinear input seasonal residual x - moving_average(x,25), project the annual sine/cosine pair over the history window. Add future harmonic a*cos(2*pi*(t+1)/252+m_i)+b*sin(2*pi*(t+1)/252+m_i), with one trainable m_i per currency. No trend or DLinear weights are changed.",
+    "fixed_control_operator": "Same projected harmonic at m=0 with no code.",
+    "gain_control_operator": "Same projected harmonic at m=0 multiplied by one trainable gain per currency (same number of learned scalars as phase code)."
+  },
+  "controls": [
+    "Pinned official shared DLinear, context/lr selected on development",
+    "DLinear plus fixed zero-phase annual residual harmonic",
+    "DLinear plus equal-byte per-currency seasonal gain",
+    "DLinear plus factorized per-currency phase Mirror",
+    "DLinear plus free per-currency annual sine/cosine coefficients (upper control)",
+    "Eight independently trained official DLinear models",
+    "Last-value naive",
+    "Annual seasonal naive with dev-selected shared blend between last-value and seasonal repeat"
+  ],
+  "development": {
+    "worlds_or_seeds": [105601],
+    "selection_metric": "Select context in {252,504} and lr in {0.001,0.005} by development macro MASE; tune seasonal naive blend on same development block. Use seed 105601 and 100 updates for screen, then freeze context/lr and all gates.",
+    "limits": "The development loader stops at row 6070 and never loads the final 20%. No audit target or audit metric is loaded or computed before freeze. Development windows use only targets inside the registered 20% development interval."
+  },
+  "fresh": {
+    "worlds_or_seeds": [105602, 105603],
+    "locked_before_access": true,
+    "audit": "Final chronological 20% target intervals for all eight series; 96-step non-overlapping target blocks."
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": ["DLinear parameters", "Mirror phase or gain codes", "series routing ids", "selected history/horizon and period", "basis reconstruction metadata", "independent model state"],
+    "fixed_reconstructible": ["annual sine/cosine templates generated exactly from recorded period and index", "moving-average window semantics"]
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true,
+    "report_inference_latency": true
+  },
+  "success_gate": "On audit seeds 105602 and 105603, Mirror improves macro MASE by at least 2% over DLinear, equal-byte seasonal gain and tuned naive blend in both seeds; seen-series dev error is not degraded by >2%; serialized state is smaller than free sine/cosine coefficients and inference is no more than 1.25x shared DLinear latency.",
+  "failure_gate": "Any success condition fails or a same-byte gain/simple harmonic control matches Mirror within 1%.",
+  "boundaries": ["One public benchmark family; series are currencies from a shared chronological panel, not independent worlds.", "Fixed update screen; no capacity claim.", "Phase rotation is a reparameterization of the native harmonic coefficient pair; any claimed value must be compression or optimization beyond matched controls."]
+}

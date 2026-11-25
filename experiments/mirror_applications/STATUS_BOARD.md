@@ -6,11 +6,11 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- Claim ledger entries: **476**
-- P0: **630** (392 FAIL; 54 PROMISING; 172 UNTESTED; 11 NOT ESTABLISHED; 1 SCREENING)
+- Claim ledger entries: **477**
+- P0: **630** (393 FAIL; 54 PROMISING; 171 UNTESTED; 11 NOT ESTABLISHED; 1 SCREENING)
 - P1: **422** (17 completed; 405 UNTESTED)
 - P2: **103** (103 UNTESTED)
-- Current MA statuses: **400 FAIL, 11 NOT ESTABLISHED, 63 PROMISING, 1 SCREENING, 680 UNTESTED**
+- Current MA statuses: **401 FAIL, 11 NOT ESTABLISHED, 63 PROMISING, 1 SCREENING, 679 UNTESTED**
 - 47 baseline experiment directories remain present; verified external outcomes are linked to their dedicated branches in the registry and claim ledger.
 - New research: MA-876..935 (60 candidates), PA236..PA265 (30 primary sources). See the current Next candidate section for the live queue.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. see the current Next candidate section.
@@ -23,7 +23,7 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 - SRM/TM and prior Phase I results are not MA statuses.
 
 ## Next candidate
-MA-1046 is a scoped FAIL: Chronos distribution View loses on fresh Weather and Australian Electricity; normalized-Hermite aliases it. MA-1047 is a scoped FAIL: TimesFM factorized domain×horizon affine MASE 2.2767/4.5948 vs native 2.2744/4.0873; H100 latency NOT ESTABLISHED. MA-1048 is a scoped FAIL: Moirai factorized frequency×sensor CRPS 13.994/85.062 vs zero-shot 4.074/4.039, with additive control aliasing within 0.02%. MA-1049 is NOT ESTABLISHED: pinned PEMS08 source lacks documented channel semantics, so no model was fit. MA-1050 is a scoped FAIL: reduced CPU multiscale mixer audit MSE .044012 Mirror vs .043438 hard share and .043244 additive; not a full official TimeMixer reproduction. MA-1051 is a scoped FAIL: reduced CPU iTransformer-style PEMS07 audit MSE .212196 vs .212165 shared and .212180 FiLM. MA-1052 is a scoped FAIL: serialized-payload audit macro MASE 1.063280 Mirror vs 1.063251 hard share and 1.061715 diagonal. MA-1053 is a scoped FAIL: MOMENT-1-base forecast MASE 0.920243 vs 0.917809 diagonal, ECG accuracy .831778 vs .850000 diagonal and .867556 native, anomaly point F1 .046243 vs .044901 diagonal but AUPRC .015390 vs .015931. MA-1055 is a scoped FAIL: N-BEATS factorized phase MASE 2.264272 vs 2.275778 hard share, 2.281254 matched gain and 2.229177 common phase across two fresh seeds; 0.51% over hard share misses 2% gate and adds 698 B. Next eligible P0 is MA-1056 DLinear periodic View (PA336); MA-1054 remains P1. See the individual experiment reports for scope and verification.
+MA-1046 is a scoped FAIL: Chronos distribution View loses on fresh Weather and Australian Electricity; normalized-Hermite aliases it. MA-1047 is a scoped FAIL: TimesFM factorized domain×horizon affine MASE 2.2767/4.5948 vs native 2.2744/4.0873; H100 latency NOT ESTABLISHED. MA-1048 is a scoped FAIL: Moirai factorized frequency×sensor CRPS 13.994/85.062 vs zero-shot 4.074/4.039, with additive native calibration aliasing it. MA-1049 is NOT ESTABLISHED: pinned PEMS08 source lacks documented channel semantics. MA-1050 is a scoped FAIL: reduced CPU TimeMixer-like audit MSE .044012 Mirror vs .043438 hard share and .043244 additive. MA-1051 is a scoped FAIL: reduced CPU iTransformer-style PEMS07 audit MSE .212196 vs .212165 shared and .212180 FiLM. MA-1052 is a scoped FAIL: TRACE+Mirror MASE 1.063280 vs 1.063251 hard share and 1.061715 diagonal. MA-1053 is a scoped FAIL: MOMENT forecast MASE .920243 vs .917809 diagonal, ECG accuracy .831778 vs .850000 diagonal, anomaly point F1 .046243 vs .044901 diagonal but AUPRC .015390 vs .015931. MA-1055 is a scoped FAIL: N-BEATS phase MASE 2.264272 vs 2.275778 hard share, 2.281254 gain and 2.229177 common phase. MA-1056 is a scoped FAIL: DLinear+annual phase MASE .445625 vs .445626 DLinear, .445703 gain and .384308 last-value naive; phase adds 252 B and 2.53× latency. Next eligible P0: MA-1057 mixed-rate frequency×horizon interpolation (PA327/PA328); MA-1054 remains P1. Individual reports document scope and verification.
 
 ### MA-1052 result — 2026-11-25
 
@@ -56,6 +56,10 @@ See `experiments/mirror_applications/ma-1053-moment-task-codes/RESULTS.md` and b
 ### MA-1055 result — 2026-11-25
 
 MA-1055 is a scoped fixed-budget FAIL on official pinned N-BEATS. Across two ETTm2 channel-holdout seeds, factorized phase MASE is 2.264272 vs 2.275778 hard share, 2.281254 matched gain and 2.229177 common phase; its 0.51% hard-share gain misses the 2% gate. Its serialized payload is 4,974,395 B vs 4,973,697 B hard share and 4,974,078 B flat phase. Twelve serialized checkpoint replays and hash/byte checks pass. A development runner initially emitted ETTm1 audit output; preserved and excluded from selection, with audit moved to ETTm2 non-OT channels under AM-01. No capacity claim. See `ma-1055-nbeats-mirror-coeff/RESULTS.md`.
+
+### MA-1056 result — 2026-11-25
+
+MA-1056 is a scoped FAIL on pinned official DLinear and the public daily Exchange-Rate panel. Two audit seeds: annual phase Mirror macro MASE 0.445625, effectively tied with DLinear 0.445626 and matched per-series gain 0.445703; tuned last-value naive is stronger at 0.384308. Phase payload is 197,721 B vs 197,469 B DLinear and inference latency averages 2.53× DLinear. Three tests and twelve serialized checkpoint replays pass. Fixed-update CPU screen; no capacity claim. See `ma-1056-dlinear-periodic-view/RESULTS.md`.
 
 Previous: MA-1033 is complete as a scoped frozen CLIP ViT-B/32 class×domain composition FAIL: Mirror averages 86.25% held-out-cell accuracy vs 86.67% additive and shared across three fresh image seeds; it wins one seed and loses two against additive. Learned payload 1,580,814 B vs 1,744,542 B independent cells (9.39%, below the 25% gate); complete-bundle saving only 0.0268%. Exact serialization/data/metric replay and three tests pass. No official prompt-learning reproduction. See `experiments/mirror_applications/ma-1033-class-domain-prompt-mirror/RESULTS.md`.
 

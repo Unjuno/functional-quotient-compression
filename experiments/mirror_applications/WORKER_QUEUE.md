@@ -1,4 +1,8 @@
-## Current handoff — 2026-11-25, MA-1055 complete
+## Current handoff — 2026-11-25, MA-1056 complete
+
+MA-1056 is a scoped FAIL on pinned official DLinear and the public daily Exchange-Rate panel. Two fresh seeds: annual phase Mirror macro MASE .445625 vs .445626 DLinear, .445703 matched gain, and .384308 tuned last-value naive. Mirror payload 197,721 B vs 197,469 B DLinear; measured inference latency 2.53×. Three tests and twelve actual serialized checkpoint replays pass. Fixed-update CPU screen; one dataset family, no capacity claim. See `ma-1056-dlinear-periodic-view/RESULTS.md`. Continue at P0 MA-1057 mixed-rate frequency×horizon interpolation (PA327/PA328); MA-1054 remains P1.
+
+## Previous handoff — 2026-11-25, MA-1055 complete
 
 MA-1055 is a scoped FAIL on pinned ServiceNow N-BEATS. Two fresh ETTm2 channel-holdout seeds: factorized phase macro MASE 2.264272 vs 2.275778 hard share, 2.281254 matched gain, and 2.229177 common phase. The 0.51% improvement vs hard share misses the 2% gate; payload is 4,974,395 B vs 4,973,697 B shared and 4,974,078 B flat phase. Twelve actual serialized checkpoints and independent MASE replay/hash verification pass. A first dev runner accidentally emitted ETTm1 audit output; it was retained as invalidated, not used for tuning, and audit moved to ETTm2 non-OT channels before fresh access. Fixed-budget CPU screen, no capacity claim. See `ma-1055-nbeats-mirror-coeff/RESULTS.md`. Continue at P0 MA-1056 DLinear periodic View (PA336); MA-1054 is P1.
 

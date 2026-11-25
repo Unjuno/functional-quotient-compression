@@ -1,0 +1,133 @@
+{
+  "experiment_id": "MA-1056",
+  "status": "PASS_VERIFICATION",
+  "raw_sha256": "6a4fbb561dcdee43f071a83badbeec9223a335552278348656738b556f1c2e9d",
+  "protocol_sha256": "63b1d9d6511af927c15cc28778c1a1b14fea3756a2efec367cce7dd05f61ab32",
+  "checkpoint_replays": [
+    {
+      "method": "dlinear",
+      "seed": 105602,
+      "payload_bytes": 197469,
+      "payload_sha256": "a0675ae09d98402b90ab14e36633f7eb889f3ef6f3f98b06d9f64ea0674ff304",
+      "replayed_macro_mase": 0.4626922011375427,
+      "audit_windows": 15,
+      "target_start_min": 6070,
+      "target_end_max_exclusive": 7510
+    },
+    {
+      "method": "fixed",
+      "seed": 105602,
+      "payload_bytes": 197469,
+      "payload_sha256": "4127ceaeaeaf1e164de69f03885bef5c80652bf7b69ffc79c3e2d5af55fd0204",
+      "replayed_macro_mase": 0.46279096603393555,
+      "audit_windows": 15,
+      "target_start_min": 6070,
+      "target_end_max_exclusive": 7510
+    },
+    {
+      "method": "gain",
+      "seed": 105602,
+      "payload_bytes": 197721,
+      "payload_sha256": "8db51418a8c76108797703b2addbea841a0c6502041a08ce98a952e0eb6b51b3",
+      "replayed_macro_mase": 0.46291160583496094,
+      "audit_windows": 15,
+      "target_start_min": 6070,
+      "target_end_max_exclusive": 7510
+    },
+    {
+      "method": "mirror",
+      "seed": 105602,
+      "payload_bytes": 197721,
+      "payload_sha256": "a69b4fbafbbdb376f34eb13e9997046dbed445fea78eed8ffe79871761b30001",
+      "replayed_macro_mase": 0.46265488862991333,
+      "audit_windows": 15,
+      "target_start_min": 6070,
+      "target_end_max_exclusive": 7510
+    },
+    {
+      "method": "free_fourier",
+      "seed": 105602,
+      "payload_bytes": 197721,
+      "payload_sha256": "1068483ba253cc55a9f62a88303337cc8cb985c4bf4dd1ca973b38d1f9b2e61c",
+      "replayed_macro_mase": 0.46715617179870605,
+      "audit_windows": 15,
+      "target_start_min": 6070,
+      "target_end_max_exclusive": 7510
+    },
+    {
+      "method": "independent",
+      "seed": 105602,
+      "payload_bytes": 1568515,
+      "payload_sha256": "8497cd310c5f493367da49b75147d0a90345d2c5c97311716bfd0b7008356fd0",
+      "replayed_macro_mase": 0.6837826371192932,
+      "audit_windows": 15,
+      "target_start_min": 6070,
+      "target_end_max_exclusive": 7510
+    },
+    {
+      "method": "dlinear",
+      "seed": 105603,
+      "payload_bytes": 197469,
+      "payload_sha256": "0349cf05f1ddcd56e622b396ad4bc58699ad0fbb0024ffa7665bdc4fc4b82348",
+      "replayed_macro_mase": 0.4285603165626526,
+      "audit_windows": 15,
+      "target_start_min": 6070,
+      "target_end_max_exclusive": 7510
+    },
+    {
+      "method": "fixed",
+      "seed": 105603,
+      "payload_bytes": 197469,
+      "payload_sha256": "9b72335dc4070a046112785d918f962e7c9c1f548a216b4c365f360d2ed5a688",
+      "replayed_macro_mase": 0.4285396635532379,
+      "audit_windows": 15,
+      "target_start_min": 6070,
+      "target_end_max_exclusive": 7510
+    },
+    {
+      "method": "gain",
+      "seed": 105603,
+      "payload_bytes": 197721,
+      "payload_sha256": "c0cfcc297dd82476e2339525b0dde8c908439df444f43768080429e8e17df0b7",
+      "replayed_macro_mase": 0.42849427461624146,
+      "audit_windows": 15,
+      "target_start_min": 6070,
+      "target_end_max_exclusive": 7510
+    },
+    {
+      "method": "mirror",
+      "seed": 105603,
+      "payload_bytes": 197721,
+      "payload_sha256": "9b3734d0193c8180798473ba023e8923b8b93df67a4dcb63773a21fa4b434463",
+      "replayed_macro_mase": 0.4285942316055298,
+      "audit_windows": 15,
+      "target_start_min": 6070,
+      "target_end_max_exclusive": 7510
+    },
+    {
+      "method": "free_fourier",
+      "seed": 105603,
+      "payload_bytes": 197721,
+      "payload_sha256": "627a6d604ecfdbc208e3546f1757860c3d2604e115a9ac240044defd15e60412",
+      "replayed_macro_mase": 0.4345444440841675,
+      "audit_windows": 15,
+      "target_start_min": 6070,
+      "target_end_max_exclusive": 7510
+    },
+    {
+      "method": "independent",
+      "seed": 105603,
+      "payload_bytes": 1568515,
+      "payload_sha256": "dcab0567e7991470979b0d91981f2403b460d42990d04399b78cd9ce120e004a",
+      "replayed_macro_mase": 0.6274532079696655,
+      "audit_windows": 15,
+      "target_start_min": 6070,
+      "target_end_max_exclusive": 7510
+    }
+  ],
+  "checks": [
+    "all actual serialized checkpoint byte counts and hashes verified",
+    "all DLinear and view audit metrics replay exactly from serialized states",
+    "all audit target windows stay inside the registered final chronological split"
+  ]
+}
