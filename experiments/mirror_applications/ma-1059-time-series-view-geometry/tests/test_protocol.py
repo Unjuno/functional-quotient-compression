@@ -1,19 +1,24 @@
-import sys
+import hashlib
+import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "source"))
-from protocol_check import validate
 
 
-def test_registered_candidate_and_prior_art_are_locked():
-    p = validate()
+def test_registry_prior_art_and_split_frozen():
+    p = json.loads((ROOT / "PROTOCOL.json").read_text())
+    freeze = json.loads((ROOT / "FRESH_FREEZE.json").read_text())
     assert p["experiment_id"] == "MA-1059"
     assert p["prior_art_refs"] == ["PA328", "PA330", "PA335"]
-    assert "shared pretrained temporal" in p["hypothesis"]
-    assert any("Mirror" in c for c in p["controls"])
+    assert p["fresh"]["locked_before_access"] is True
+    assert freeze["frozen_before_numeric_data_access"] is True
+    assert freeze["protocol_sha256"] == hashlib.sha256((ROOT / "PROTOCOL.json").read_bytes()).hexdigest()
 
 
-def test_audit_split_is_not_claimed_frozen_prematurely():
-    p = validate()
-    assert "fresh" not in p or p["fresh"].get("locked_before_access") is False
+def test_all_splits_disjoint_and_previewed_rows_excluded():
+    p = json.loads((ROOT / "PROTOCOL.json").read_text())
+    split = p["data"]["series_ids"]
+    fit, dev, audit = map(set, (split["fit"], split["development"], split["audit"]))
+    assert len(fit) == 40 and len(dev) == 16 and len(audit) == 24
+    assert not (fit & dev or fit & audit or dev & audit)
+    assert not (fit | dev | audit) & set(p["data"]["exposed_excluded"])

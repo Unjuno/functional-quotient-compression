@@ -1,9 +1,7 @@
-# MA-1059 — Natural time-series View geometry
+# MA-1059 — Natural tourism-series View geometry
 
-**Mirror insertion:** this experiment adds a compact series coordinate `m` to the shared temporal forecast interface so that heterogeneous series functions can vary without duplicating a full per-series forecast head.
+**Mirror insertion:** this experiment adds one angle `m_s` to the shared rank-2 output LoRA latent of a frozen Chronos-T5-Tiny forecaster so that held-out monthly tourism series can express distinct forecast functions without storing one full adapter per series. A separate one-scalar horizon-trend residual tests where private state becomes necessary.
 
-The test is whether naturally occurring series lie near a shared function family that a low-description View can express, and where sparse private trend state becomes necessary. PA328, PA330 and PA335 define the strongest native controls: Moirai cross-series/frequency conditioning, TimeMixer scale mixing, and N-BEATS basis coefficients.
+The fixed data source is the Monash Time Series Repository's monthly Tourism competition dataset (366 series; HF revision and archive hash in `PROTOCOL.json`). T1–T8 were exposed by an initial metadata preview and are excluded. Remaining series are split by a stable SHA256 ordering of series names before numeric values are parsed. Fit, development and audit IDs are frozen in the protocol.
 
-Before opening fresh data, choose a licensed public dataset and record source hashes, series groups and train/dev/fresh splits. Compare native shared forecast, hard sharing, byte-matched additive/diagonal or low-rank controls, Mirror, and independent per-series heads. Only development may choose code rank and private residual threshold.
-
-Storage is the actual serialized inference payload, including model, bases, coordinates, IDs, normalizers and private residuals. Results are a screening result for one benchmark family; fixed-budget gains are not capacity evidence.
+Controls preserve the native Chronos model, pooled LoRA, byte-near diagonal gain, direct two-coordinate gain and independent per-series rank-2 LoRA. The trend residual is selected from support-only evidence using a development-frozen threshold. Report actual serialized bytes, adaptation state separately from the full checkpoint, forecast quality and residual selection fraction. This is a single-family screening result, not a capacity claim.
