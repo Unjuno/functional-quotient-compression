@@ -8,7 +8,10 @@
     "audit metrics deterministically replay from stored 32-sample predictions and targets",
     "actual common model/config and per-method serialized code/metadata bytes measured",
     "fit/dev/audit target bounds validated",
-    "independent verification script replays all 16 seed\u00d7method audit metric rows and checks all 8 actual payload byte counts and coefficient hashes"
+    "independent verification script replays all 16 seed\u00d7method audit metric rows and checks all 8 actual payload byte counts and coefficient hashes",
+    "post-audit storage correction materializes required float32 normalization state and excludes unused Moirai weights from seasonal-naive baseline",
+    "all 16 audit metric rows replay exactly from saved float32 coefficients and normalization arrays",
+    "all eight payload totals reconcile with actual serialized files"
   ],
   "source_hashes": {
     "PROTOCOL.json": {
@@ -32,20 +35,24 @@
       "bytes": 3229
     },
     "runs/audit/results.json": {
-      "sha256": "6695424d2ec07636d7408a728f6a9fd3603414a2d1f97df43755cd5fcca8f69f",
-      "bytes": 26541
+      "sha256": "ee560f0d7ca7106d42b5e297e58118abe64cd2d45aa0715c572d1202ea5ab622",
+      "bytes": 27062
     },
     "source/verify.py": {
-      "sha256": "9aa52333efcb510c914c70e1478d34d0ea19a9baf91dd294b7bbafe2e3258e14",
-      "bytes": 1567
+      "sha256": "793a2a2503ce9cb1148afadcd52e995c46497bf8176d2bc28e4007a2225e8e8e",
+      "bytes": 2464
     },
     "RESULTS.md": {
-      "sha256": "5f635e72f56d58a5fe805d5c81da8c792be251b58a28853df356640cab3239d1",
-      "bytes": 3682
+      "sha256": "2c53689ac17027c7b3b04a99c9343a9e89110df4fdf36737caa9be9281849d0e",
+      "bytes": 4305
     },
     "RESULTS_CORE.csv": {
-      "sha256": "6ec8fc887f5ebb536fc6ff28f0194ae6176f1e4073ec33cf9f1ae89518555b87",
-      "bytes": 1706
+      "sha256": "9c67e2f11295b33213056e7068dd1ed4b267b1bbd73281d036333edb53240d95",
+      "bytes": 1681
+    },
+    "source/accounting_correction.py": {
+      "sha256": "96dab3de65fd017a5126d5fad652710464a31607f5aaeb110ffab9d2b71ba278",
+      "bytes": 4348
     }
   },
   "audit_replayed": true,
@@ -114,5 +121,6 @@
       "coefficients_bytes": 0,
       "metadata_bytes": 363
     }
-  }
+  },
+  "accounting_correction": "No fitting or audit selection changed; corrected complete payloads and metrics replay are documented in RESULTS.md."
 }
