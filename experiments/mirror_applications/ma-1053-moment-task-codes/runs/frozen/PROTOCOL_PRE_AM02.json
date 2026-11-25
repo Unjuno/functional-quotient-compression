@@ -1,0 +1,101 @@
+{
+  "experiment_id": "MA-1053",
+  "title": "MOMENT forecasting, anomaly and classification task codes",
+  "status": "FROZEN_SCREENING_PROTOCOL",
+  "evidence_lane": "QUALITY/STORAGE/COMPUTE/MULTITASK_FUNCTION_SHARING",
+  "base_commit": "9aee6aacf",
+  "hypothesis": "For three frozen-encoder MOMENT tasks with different native output interfaces, one shared rank-r projection over exact native pre-head representations plus task-specific output heads can preserve each task\u2019s native score while using less total adaptation state than independent rank-r projections. A compact eight-angle task code applied to paired encoder features immediately before the shared projection will improve at least one task by its frozen task-specific margin versus both hard sharing and equal-byte diagonal gains without causing any other task to miss its native-quality tolerance.",
+  "physical_object": "One pinned MOMENT-1-base encoder/checkpoint shared by ETTm2 forecasting, tiltAPB2 anomaly reconstruction and ECG5000 classification; task-specific lightweight output operators.",
+  "mirror_coordinate": "Eight task-specific angles; each angle rotates adjacent feature pairs within one of eight contiguous 96-feature groups of the 768-d native pre-head encoder representation, before the shared 768\u2192r projection. This cannot be absorbed independently into the output heads because the projection is shared.",
+  "logical_multiplicity": "Forecast horizon output, patchwise reconstruction output and ECG class logits on the same physical encoder and one learned projection basis. Task selection is known/oracle and charged as fixed role metadata; no task inference claim.",
+  "prior_art_refs": [
+    "PA333"
+  ],
+  "data": {
+    "source_repo": "https://github.com/zhouhaoyi/ETDataset",
+    "source_revision": "1d16c8f4f943005d613b5bc962e9eeb06058cf07",
+    "files": {
+      "forecast": "ETT-small/ETTm2.csv",
+      "anomaly": "data/198_UCR_Anomaly_tiltAPB2_50000_124159_124985.out",
+      "classification_train": "data/ECG5000_TRAIN.ts",
+      "classification_audit": "data/ECG5000_TEST.ts"
+    },
+    "splits": {
+      "forecast": "ETTm2 chronological standard 12/4/4 month train/dev/audit; OT only; context 512, horizon 96; normalization fitted on training prefix only.",
+      "anomaly": "Filename-defined first 50,000 raw samples are normal training prefix; the next 10% of this prefix is threshold calibration only; official suffix is untouched audit. Fit normalization on normal training prefix only. Cover audit suffix in contiguous 512-point blocks, final block clipped, each timestamp exactly once.",
+      "classification": "Official ECG5000 train file is split into fixed stratified 80/20 fit/dev using seed 105301; official test file is fresh audit, opened only after freeze. Fit feature scaler on fit rows only, if required."
+    },
+    "development_seeds": [
+      105301
+    ],
+    "fresh_seeds": [
+      105302
+    ]
+  },
+  "model": {
+    "checkpoint": "AutonLab/MOMENT-1-base",
+    "revision": "5e44b0ea26376a176360f87831124e018f876d96",
+    "weights_sha256": "1a436826ffe618273ec62b9656dc4cab8edc470364f104e90542a4ebc14fb825",
+    "official_code_commit": "38f7310ad594100747ca2a8357e9c7ca7d323e0e",
+    "encoder": "Frozen official MOMENT embedder+encoder; intercept exact native pre-head tensor for each task. Forecasting uses official forecast path; anomaly uses deterministic reconstruct path; classification uses official classify path and official mask semantics.",
+    "rank": "r=32 fixed; no audit tuning.",
+    "mirror": "8 trainable task\u00d7angle scalars; initialization identity.",
+    "training": "Seeded task-balanced training, exactly 30 optimizer updates per task (90 task-specific updates total), batch size 8; AdamW lr=1e-3; same cached feature examples, task order and update count across shared/no-code/diagonal/Mirror. Independent rank-r projection controls receive same per-task examples/updates. Freeze before audit."
+  },
+  "controls": [
+    "Official pinned MOMENT native heads: pretrained reconstruction head (zero training), and task-native forecasting/classification heads fitted with the same update budget.",
+    "Hard shared rank-r projection and task-specific output operators; no task code.",
+    "Same shared projection with eight per-task diagonal gains before projection; byte-matched to Mirror.",
+    "Mirror: eight paired-plane rotation angles before shared projection.",
+    "Independent rank-r per-task projections plus task-specific output operators (unrestricted rank-r upper control).",
+    "Seasonal-naive period 96 forecasting control; anomaly threshold fixed from normal calibration only; class majority baseline."
+  ],
+  "quality": {
+    "forecast": "Audit MASE and MSE separately; native tolerance MASE\u22641.02\u00d7 native task head.",
+    "anomaly": "Raw pointwise F1, precision/recall, TP/FP/FN, AUPRC and normal calibration FPR; no event adjustment. Only one official event, so no event-level replication claim. Native tolerance F1 within 0.02 absolute of original pretrained reconstruction head.",
+    "classification": "Audit accuracy and macro-F1; native tolerance accuracy within 2 percentage points.",
+    "mirror_specific_gate": "At least one task exceeds the native tolerance under Mirror while hard-shared and diagonal-gain shared controls do not, or improves its task-native metric by \u22651% relative to both matched controls, while every other task remains within its native tolerance. No averaged cross-task quality score."
+  },
+  "storage": {
+    "authority": "Actual serialized inference payload bytes",
+    "paid_objects": [
+      "One MOMENT base checkpoint and config once, shared by all methods",
+      "Shared projection basis and all per-task output operators",
+      "All task-specific Mirror or diagonal coordinates",
+      "Native task heads, task IDs/indices, preprocessing scalers, anomaly threshold and metadata",
+      "Independent rank-r projection copies"
+    ]
+  },
+  "compute": {
+    "report_examples_windows": true,
+    "report_optimizer_updates": true,
+    "report_encoder_forward_examples": true,
+    "report_active_mac_proxy": true,
+    "report_feature_cache_bytes": true,
+    "report_wall_clock": true,
+    "report_cpu_profile_before_train": true,
+    "threads": 4
+  },
+  "selection": "Dev data may select no hyperparameter except the task-wise decision threshold for anomaly, calibrated only on known-normal calibration rows. Rank, rotation structure, update schedule, metrics and gates are fixed here. Fresh ECG test, forecast test suffix and anomaly test suffix remain unopened until protocol freeze.",
+  "success_gate": "Meet the per-task Mirror-specific gate above; no audit-selected threshold or settings; preserve payload provenance and deterministic metric replay.",
+  "failure_gate": "All tasks tie/lose to the strongest matched simple control, any task crosses its native tolerance without a compensating per-task gate, or task codes add bytes/compute without useful task-native change.",
+  "not_established_gate": "If pinned model implementation, exact task-native feature extraction, or official benchmark controls cannot run on available CPU, preserve blocker evidence and leave candidate NOT ESTABLISHED; do not substitute synthetic task labels.",
+  "boundaries": [
+    "Single seed per split; fixed-update screening only, no capacity claim.",
+    "One series/dataset per registered task; external validity is narrow.",
+    "Anomaly test contains a single event; F1/AUPRC are descriptive and not replicated event-level evidence.",
+    "Feature caching is a training convenience; cached pre-head tensors are not inference payload and are charged/reported separately.",
+    "Classifier task label is known at inference; no task router quality claim.",
+    "Native MOMENT forecast/classification heads are initialized from checkpoint and trained under the same frozen-encoder update budget; anomaly baseline uses its original pretrained reconstruction head.",
+    "ETTm2 is fresh to this MA, but ETT dataset family has appeared in earlier program experiments."
+  ],
+  "amendments": [
+    {
+      "id": "AM-01",
+      "timing": "after development harness profiling and before audit; no audit data opened",
+      "reason": "Corrected implementation-level feature capture/indexing and completed inference-state accounting for task scalers, task map and anomaly threshold; native task output parity is asserted batchwise. Fixed per-task rank, code family, optimizer, update counts, data partitions and quality gates are unchanged.",
+      "change": "Use official pinned native pre-head tensors; apply shared P after Mirror/gain; serialize and charge preprocessing metadata and anomaly threshold; add the registered seasonal-naive and class-majority controls; compute active task-side MAC proxy.",
+      "impact": "No model selection or quality threshold was based on fresh/audit data. Development metrics were observed before this amendment; it changes replay/accounting and executes already-listed controls only."
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "dataset_revisions": {
+    "ETTm2": "1d16c8f4f943005d613b5bc962e9eeb06058cf07",
+    "MOMENT benchmark datasets": "38f7310ad594100747ca2a8357e9c7ca7d323e0e"
+  },
+  "files": {
+    "198_UCR_Anomaly_tiltAPB2_50000_124159_124985.out": {
+      "size_bytes": 1545294,
+      "sha256": "afeabb56b00d9cba37a71a3ae3688b5528a73c899b16beafe3b75fc0992660a1"
+    },
+    "ECG5000_TEST.ts": {
+      "size_bytes": 7083409,
+      "sha256": "2343d4f750e3b2b4b0f470d985afadc590dbc69695597db6bb4888ef01c015ce"
+    },
+    "ECG5000_TRAIN.ts": {
+      "size_bytes": 786781,
+      "sha256": "1935be5cc08203aa7c0de288fbceb48997d475f43ee610fa373fd6f4a0d66775"
+    },
+    "ETTm2.csv": {
+      "size_bytes": 9677236,
+      "sha256": "db973ca252c6410a30d0469b13d696cf919648d0f3fd588c60f03fdbdbadd1fd"
+    },
+    "MOMENT-1-base/model.safetensors": {
+      "size_bytes": 453940120,
+      "sha256": "1a436826ffe618273ec62b9656dc4cab8edc470364f104e90542a4ebc14fb825"
+    },
+    "MOMENT-1-base/config.json": {
+      "size_bytes": 949,
+      "sha256": "f1c66c2bb845229c0ed27a1600dbcc956b85ab21f9e5fd8a1663e6641bed7755"
+    }
+  },
+  "splits": {
+    "ETTm2": "train 0:34560; dev 34560:46080; audit 46080:57600; trailing source rows not evaluated",
+    "ECG5000": "fixed stratified seed 105301; 400 fit/100 dev from official train; official test 4500 held for audit",
+    "tiltAPB2": "normal fit 0:45000; normal threshold calibration 45000:50000; audit 50000:end contiguous non-overlapping blocks"
+  },
+  "audit_status": "raw source files were downloaded and hashed before freeze; audit rows/labels were not selected, parsed as benchmark examples or scored until after the freeze record"
+}

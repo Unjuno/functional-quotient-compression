@@ -1,0 +1,25 @@
+{
+  "experiment_id": "MA-1053",
+  "fresh_seed": 105302,
+  "frozen_protocol": {
+    "size_bytes": 9032,
+    "sha256": "55235f517e3481b51282a501fa37b2b2621a6b1c2a87b960d4b04e84adce33d4"
+  },
+  "frozen_runner": {
+    "size_bytes": 24672,
+    "sha256": "e5bb63cc548cf04ff589f55fe46dedcba898e31c209358a9161a2b1b286532d3"
+  },
+  "development_result": {
+    "size_bytes": 1966400,
+    "sha256": "1d9ef85ef469eb9fad5963e6834114634629d9512fb05201ad0f0a16d42b9988"
+  },
+  "locked_before_audit": true,
+  "audit_files_loaded_for_hash_only": true,
+  "audit_samples_or_labels_scored": false,
+  "fixed_conditions": "rank32; 8-angle task-conditioned rotation before shared projection; eight diagonal gains control; exactly 30 updates per task; batch 8; AdamW 1e-3; metric-specific gates from PROTOCOL.json",
+  "frozen_protocol_snapshot": "runs/frozen/PROTOCOL_PRE_AM02.json",
+  "frozen_runner_snapshot": "runs/frozen/run_screen_PRE_AM02.py",
+  "post_audit_reporting_amendments": [
+    "AM-02 clarifies eight coordinates per role (24 scalar codes over three roles); existing serialized task-code metadata was corrected and actual bytes recomputed. No learned weight, data split, metric, threshold, hyperparameter or result changed."
+  ]
+}

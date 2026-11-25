@@ -1,0 +1,48 @@
+{
+  "experiment_id": "MA-1053",
+  "commit": "pending",
+  "protocol_frozen_before_audit": true,
+  "audit_seed": 105302,
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-1053-moment-task-codes/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "independent_verifier": {
+    "command": "PYTHONPATH=/tmp/ma1053-python:/tmp/moment-official python experiments/mirror_applications/ma-1053-moment-task-codes/source/verify_report.py",
+    "passed": true,
+    "checks": [
+      "frozen protocol and runner hashes",
+      "all input data/checkpoint hashes",
+      "native task head parity",
+      "serialized component byte sums and complete payload arithmetic",
+      "exact reloaded model prediction replay",
+      "forecast MASE/MSE replay",
+      "ECG5000 accuracy/macro-F1 replay",
+      "tiltAPB2 pointwise F1/counts/AUPRC replay"
+    ]
+  },
+  "serialization": {
+    "actual_component_bytes_recorded": true,
+    "reserialization_byte_exact_tested": false,
+    "complete_bundle_charges_common_base_once": true,
+    "preprocessing_and_threshold_metadata_charged": true
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_reloaded_prediction_difference": 0.0,
+    "independent_task_metric_replay_passed": true
+  },
+  "fresh_split_integrity_checked": true,
+  "native_prehead_parity": {
+    "max_abs_delta": 0.0,
+    "audit_checks": 598
+  },
+  "claim": "Scoped fixed-update FAIL; no capacity claim. Anomaly result covers one event only.",
+  "post_audit_reporting_amendment": "AM-02: clarified 8 learned coordinates per role (24 total), corrected serialized metadata, and recomputed actual JSON payload bytes; model tensors and quality outputs unchanged.",
+  "serialized_method_code_coordinates": {
+    "roles": 3,
+    "coordinates_per_role": 8,
+    "total": 24
+  }
+}
