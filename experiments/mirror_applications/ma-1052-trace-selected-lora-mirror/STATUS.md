@@ -3,12 +3,12 @@
 - Status: FAIL (scoped to the preregistered Mirror quality gate)
 - Branch: `research/ma-1052-trace-selected-lora-mirror-20261125`
 - Base commit: `26d91407d`
-- Last verified commit: pending
+- Last verified commit: 6aca812d644e65ea12721aa85f44801073ebcd5b
 - Development complete: yes
 - Fresh/audit opened: yes, seed 105202
-- Results committed: pending
-- Verification committed: pending
-- Registry row updated: pending
+- Results committed: yes (6aca812d644e65ea12721aa85f44801073ebcd5b)
+- Verification committed: yes (6aca812d644e65ea12721aa85f44801073ebcd5b)
+- Registry row updated: yes
 
 ## Result
 
@@ -18,7 +18,7 @@ Pooled in-memory metrics differ from reloaded-payload metrics. Exact repeated re
 
 ## Next action
 
-Update the registry, claim ledger, status board, and worker queue to FAIL; then continue sequentially to MA-1053.
+Proceed sequentially to MA-1053.
 
 ## Blockers
 
