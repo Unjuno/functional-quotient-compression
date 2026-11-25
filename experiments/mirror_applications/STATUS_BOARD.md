@@ -6,11 +6,11 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- Claim ledger entries: **474**
-- P0: **630** (390 FAIL; 54 PROMISING; 174 UNTESTED; 11 NOT ESTABLISHED; 1 SCREENING)
+- Claim ledger entries: **475**
+- P0: **630** (391 FAIL; 54 PROMISING; 173 UNTESTED; 11 NOT ESTABLISHED; 1 SCREENING)
 - P1: **422** (17 completed; 405 UNTESTED)
 - P2: **103** (103 UNTESTED)
-- Current MA statuses: **398 FAIL, 11 NOT ESTABLISHED, 63 PROMISING, 1 SCREENING, 682 UNTESTED**
+- Current MA statuses: **399 FAIL, 11 NOT ESTABLISHED, 63 PROMISING, 1 SCREENING, 681 UNTESTED**
 - 47 baseline experiment directories remain present; verified external outcomes are linked to their dedicated branches in the registry and claim ledger.
 - New research: MA-876..935 (60 candidates), PA236..PA265 (30 primary sources). See the current Next candidate section for the live queue.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. see the current Next candidate section.
@@ -23,7 +23,7 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 - SRM/TM and prior Phase I results are not MA statuses.
 
 ## Next candidate
-MA-1046 is a scoped FAIL: Chronos distribution View loses on fresh Weather and Australian Electricity; normalized-Hermite aliases it. MA-1047 is a scoped FAIL: TimesFM factorized domain×horizon affine MASE 2.2767/4.5948 vs native 2.2744/4.0873; H100 latency NOT ESTABLISHED. MA-1048 is a scoped FAIL: Moirai factorized frequency×sensor CRPS 13.994/85.062 vs zero-shot 4.074/4.039, with additive control aliasing within 0.02%. MA-1049 is NOT ESTABLISHED: pinned PEMS08 source lacks documented channel semantics, so no model was fit. MA-1050 is a scoped FAIL: reduced CPU multiscale mixer audit MSE .044012 Mirror vs .043438 hard share and .043244 additive; not a full official TimeMixer reproduction. MA-1051 is a scoped FAIL: reduced CPU iTransformer-style PEMS07 audit MSE .212196 Mirror vs .212165 shared and .212180 FiLM; complete payload 93,244 B vs 92,863 B shared, sensor ablation within 0.067%. Three replay/byte tests pass. MA-1052 is a scoped FAIL: serialized-payload audit macro MASE 1.063280 Mirror vs 1.063251 hard share and 1.061715 diagonal control; Mirror adds 543 B over hard share and fails the 2% gate. Four independent TRACE specialists score 1.083612 at 46,230,674 B adaptation payload; a pooled vs private per-role exception remains at ETTh2-H192. Pooled in-memory/reloaded metric discrepancies are disclosed; canonical serialized payloads replay exactly. See `ma-1052-trace-selected-lora-mirror/RESULTS.md`. Next sequential P0 candidate: MA-1053 MOMENT forecasting/anomaly/classification function codes (PA333).
+MA-1046 is a scoped FAIL: Chronos distribution View loses on fresh Weather and Australian Electricity; normalized-Hermite aliases it. MA-1047 is a scoped FAIL: TimesFM factorized domain×horizon affine MASE 2.2767/4.5948 vs native 2.2744/4.0873; H100 latency NOT ESTABLISHED. MA-1048 is a scoped FAIL: Moirai factorized frequency×sensor CRPS 13.994/85.062 vs zero-shot 4.074/4.039, with additive control aliasing within 0.02%. MA-1049 is NOT ESTABLISHED: pinned PEMS08 source lacks documented channel semantics, so no model was fit. MA-1050 is a scoped FAIL: reduced CPU multiscale mixer audit MSE .044012 Mirror vs .043438 hard share and .043244 additive; not a full official TimeMixer reproduction. MA-1051 is a scoped FAIL: reduced CPU iTransformer-style PEMS07 audit MSE .212196 Mirror vs .212165 shared and .212180 FiLM; complete payload 93,244 B vs 92,863 B shared, sensor ablation within 0.067%. Three replay/byte tests pass. MA-1052 is a scoped FAIL: serialized-payload audit macro MASE 1.063280 Mirror vs 1.063251 hard share and 1.061715 diagonal control; Mirror adds 543 B over hard share and fails the 2% gate. Four independent TRACE specialists score 1.083612 at 46,230,674 B adaptation payload; a pooled vs private per-role exception remains at ETTh2-H192. Pooled in-memory/reloaded metric discrepancies are disclosed; canonical serialized payloads replay exactly. See `ma-1052-trace-selected-lora-mirror/RESULTS.md`. MA-1053 is a scoped FAIL: MOMENT-1-base on ETTm2, ECG5000 and one tiltAPB2 anomaly event; Mirror forecast MASE 0.920243 vs diagonal 0.917809, ECG accuracy .831778 vs .850000 diagonal and .867556 native, and anomaly point F1 .046243 vs .044901 diagonal but AUPRC .015390 vs .015931. Shared projection state is 888,101 B vs 1,084,711 B independent rank-32, but complete-bundle difference is only 0.043%; hard share is 161 B smaller. Three tests and independent task-metric/serialized replay pass. Scoped fixed-update FAIL; no capacity claim. Next eligible P0 MA-1055 N-BEATS shared basis + Mirror coefficient (PA335); MA-1054 is P1. See `ma-1053-moment-task-codes/RESULTS.md`.
 
 ### MA-1052 result — 2026-11-25
 
@@ -38,6 +38,20 @@ MA-1046 is a scoped FAIL: Chronos distribution View loses on fresh Weather and A
 **U:** No near-convergence/capacity evidence, no GPU evidence, one fresh seed and two ETT datasets only. Pooled in-memory metrics differed from reloaded payload metrics; serialized-payload replay is exact and canonical, while the cause of that discrepancy remains unresolved.
 
 See `experiments/mirror_applications/ma-1052-trace-selected-lora-mirror/RESULTS.md` and its dedicated branch `research/ma-1052-trace-selected-lora-mirror-20261125`. Next: P0 MA-1053.
+
+### MA-1053 result — 2026-11-25
+
+**H:** A task-conditioned rank-32 shared projection with eight pre-projection paired-plane angles should maintain MOMENT forecasting, anomaly reconstruction and ECG classification while using less adaptation state than independent projections; Mirror must beat hard sharing and matched diagonal codes on at least one task with all other native-quality tolerances retained.
+
+**T:** Pinned MOMENT-1-base, official code commit 38f7310ad594100747ca2a8357e9c7ca7d323e0e; ETTm2 chronological holdout, ECG5000 official test, tiltAPB2 normal-prefix calibration and one-event suffix; development seed 105301, audit seed 105302. Frozen encoder; rank 32; eight angles per task (24 total scalar codes); 30 updates/task, batch 8. Controls: native MOMENT heads, hard share, equal-byte diagonal gains, independent rank-32 projections, seasonal naive and majority.
+
+**D:** FAIL for the preregistered all-task gate. Forecast MASE: Mirror .920243 vs diagonal .917809; ECG accuracy .831778 vs diagonal .850000 and native .867556; anomaly F1 .046243 vs diagonal .044901 but AUPRC .015390 vs .015931. Mirror bundle 888,101 B, 161 B above hard share, 5 B above diagonal, 18.13% below independent adaptation state; complete payload difference vs independent only 0.043%.
+
+**C:** The shared low-rank basis/diagonal control already explains the multi-task reuse. The small single-event F1 change trades off AUPRC and has low precision/recall, while classification misses native tolerance.
+
+**U:** One seed and dataset per task; anomaly has one event; no near-convergence/capacity evidence or GPU latency. Native forecast/classification heads are small-budget fitted; only reconstruction was pretrained.
+
+See `experiments/mirror_applications/ma-1053-moment-task-codes/RESULTS.md` and branch `research/ma-1053-moment-task-codes-20261125`. Next eligible P0: MA-1055 (PA335); MA-1054 remains P1.
 
 Previous: MA-1033 is complete as a scoped frozen CLIP ViT-B/32 class×domain composition FAIL: Mirror averages 86.25% held-out-cell accuracy vs 86.67% additive and shared across three fresh image seeds; it wins one seed and loses two against additive. Learned payload 1,580,814 B vs 1,744,542 B independent cells (9.39%, below the 25% gate); complete-bundle saving only 0.0268%. Exact serialization/data/metric replay and three tests pass. No official prompt-learning reproduction. See `experiments/mirror_applications/ma-1033-class-domain-prompt-mirror/RESULTS.md`.
 

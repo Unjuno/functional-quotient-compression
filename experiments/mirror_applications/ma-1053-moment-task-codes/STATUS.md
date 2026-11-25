@@ -5,9 +5,9 @@
 - Base commit: `9aee6aacf`
 - Development complete: yes (seed 105301)
 - Fresh/audit complete: yes (seed 105302)
-- Results committed: pending
-- Verification committed: pending
-- Registry row updated: pending
+- Results committed: yes (`cc56f59a7937d6e4984f2bb15d1d1fed24c5a9df`)
+- Verification committed: yes (`cc56f59a7937d6e4984f2bb15d1d1fed24c5a9df`)
+- Registry row updated: yes
 
 ## Audit summary
 

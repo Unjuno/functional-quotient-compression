@@ -1,3 +1,7 @@
+## Current handoff — 2026-11-25, MA-1053 complete
+
+MA-1053 is a scoped FAIL on pinned MOMENT-1-base. ETTm2 audit MASE .920243 Mirror vs .917809 diagonal; ECG5000 accuracy .831778 vs .850000 diagonal and .867556 native; one-event tiltAPB2 point F1 .046243 vs .044901 diagonal, while AUPRC .015390 vs .015931. Adaptation payload 888,101 B vs 887,940 B hard sharing and 1,084,711 B independent rank-32; full-bundle difference vs independent only .043%. Three tests, native pre-head parity and independent serialized metric replay pass. CPU-only, one seed/task, no capacity claim. See `ma-1053-moment-task-codes/RESULTS.md`. Continue at eligible P0 MA-1055 N-BEATS shared basis + Mirror coefficient (PA335); MA-1054 is P1.
+
 ## Current handoff — 2026-11-25, MA-1052 complete
 
 MA-1052 is a scoped FAIL on pinned MOMENT-1-base and four ETTh1/ETTh2 × horizon roles. Canonical serialized-payload audit macro MASE: TRACE+Mirror 1.063280, pooled hard share 1.063251, matched diagonal 1.061715; Mirror misses the 2% gate and adds 543 B vs hard share. Four independent TRACE specialists score 1.083612 with 46,230,674 B adaptation state. The pooled in-memory vs reloaded-payload discrepancy is unresolved, disclosed, and canonical payload replay is exact. CPU-only, one fresh audit seed; no capacity claim. See `ma-1052-trace-selected-lora-mirror/RESULTS.md`. Continue to P0 MA-1053 MOMENT task/function codes (PA333).
