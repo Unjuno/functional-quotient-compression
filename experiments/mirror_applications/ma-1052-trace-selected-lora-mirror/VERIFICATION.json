@@ -1,0 +1,47 @@
+{
+  "experiment_id": "MA-1052",
+  "commit": "pending",
+  "tests": {
+    "command": "pytest -q experiments/mirror_applications/ma-1052-trace-selected-lora-mirror/tests",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "byte_exact": false,
+    "payload_sha256_recorded": true,
+    "note": "Actual safetensors and metadata component bytes/hashes are recorded in runs/payload_hashes.json. Reloaded payload metric replay is deterministic; a byte-for-byte reserialization comparison was not performed."
+  },
+  "metric_replay": {
+    "checked": true,
+    "canonical_payload_metrics_second_replay_max_difference": {
+      "development": 0.0,
+      "audit": 0.0
+    },
+    "in_memory_to_serialized_payload_max_difference": {
+      "development": 0.08468759059906006,
+      "audit": 0.0447314977645874
+    },
+    "passed_for_canonical_payload": true,
+    "note": "The three pooled model in-memory metrics do not match their saved adapter/head payload metrics. Independent TRACE and linear-probe metrics match. Canonical quality values in RESULTS_CORE.csv and payload_metrics.json are from the serialized payload; discrepancy cause remains unresolved."
+  },
+  "fresh_split_integrity_checked": true,
+  "fresh_split": {
+    "dataset_revision": "1d16c8f4f943005d613b5bc962e9eeb06058cf07",
+    "train_only_normalization": true,
+    "audit_windows_nonoverlapping": true,
+    "audit_origins_per_role": {
+      "H192": 15,
+      "H720": 4
+    },
+    "seed": 105202
+  },
+  "notes": [
+    "Development seed 105201; fresh chronological audit seed 105202.",
+    "Pinned base checkpoint: AutonLab/MOMENT-1-base revision 5e44b0ea26376a176360f87831124e018f876d96; SHA256 1a436826ffe618273ec62b9656dc4cab8edc470364f104e90542a4ebc14fb825.",
+    "Official MOMENT code commit: 38f7310ad594100747ca2a8357e9c7ca7d323e0e.",
+    "Official TRACE source repository was not located; Gated DSIC and ProjDown are paper-derived.",
+    "No GPU was available. CPU inference latency results are descriptive only.",
+    "Mirror gate FAIL is based on serialized-payload audit MASE and is not a capacity claim."
+  ]
+}

@@ -1,0 +1,685 @@
+{
+  "experiment_id": "MA-1052",
+  "seed": 105201,
+  "evaluation": "dev",
+  "roles": [
+    "ETTh1_H192",
+    "ETTh1_H720",
+    "ETTh2_H192",
+    "ETTh2_H720"
+  ],
+  "base_revision": "5e44b0ea26376a176360f87831124e018f876d96",
+  "training_updates_per_role": 30,
+  "batch_size_per_role": 4,
+  "methods": {
+    "pooled_trace_shared": {
+      "metrics": {
+        "ETTh1_H192": {
+          "mase": 1.1185100078582764,
+          "smape": 0.9717823266983032,
+          "n_origins": 8,
+          "origins": [
+            8640,
+            9000,
+            9360,
+            9720,
+            10080,
+            10440,
+            10800,
+            11160
+          ]
+        },
+        "ETTh1_H720": {
+          "mase": 1.2388582229614258,
+          "smape": 1.0256513357162476,
+          "n_origins": 7,
+          "origins": [
+            8640,
+            9000,
+            9360,
+            9720,
+            10080,
+            10440,
+            10800
+          ]
+        },
+        "ETTh2_H192": {
+          "mase": 1.5889368057250977,
+          "smape": 0.6558513641357422,
+          "n_origins": 8,
+          "origins": [
+            8640,
+            9000,
+            9360,
+            9720,
+            10080,
+            10440,
+            10800,
+            11160
+          ]
+        },
+        "ETTh2_H720": {
+          "mase": 1.9415749311447144,
+          "smape": 0.7018831968307495,
+          "n_origins": 7,
+          "origins": [
+            8640,
+            9000,
+            9360,
+            9720,
+            10080,
+            10440,
+            10800
+          ]
+        },
+        "macro_mase": 1.4719699919223785,
+        "macro_smape": 0.8387920558452606
+      },
+      "payload": {
+        "weights_bytes": 18043552,
+        "metadata_bytes": 672,
+        "adaptation_bytes": 18044224
+      },
+      "selected": [
+        "block.0.layer.0.SelfAttention.o",
+        "block.1.layer.0.SelfAttention.o",
+        "block.4.layer.0.SelfAttention.o",
+        "block.6.layer.0.SelfAttention.v"
+      ],
+      "train_updates": 18,
+      "dsic_shared_updates_amortized": 12,
+      "train_wall_s": 49.30884061500001
+    },
+    "pooled_trace_diag": {
+      "metrics": {
+        "ETTh1_H192": {
+          "mase": 1.1235778331756592,
+          "smape": 0.9755488634109497,
+          "n_origins": 8,
+          "origins": [
+            8640,
+            9000,
+            9360,
+            9720,
+            10080,
+            10440,
+            10800,
+            11160
+          ]
+        },
+        "ETTh1_H720": {
+          "mase": 1.2424774169921875,
+          "smape": 1.0298762321472168,
+          "n_origins": 7,
+          "origins": [
+            8640,
+            9000,
+            9360,
+            9720,
+            10080,
+            10440,
+            10800
+          ]
+        },
+        "ETTh2_H192": {
+          "mase": 1.5934932231903076,
+          "smape": 0.6571418642997742,
+          "n_origins": 8,
+          "origins": [
+            8640,
+            9000,
+            9360,
+            9720,
+            10080,
+            10440,
+            10800,
+            11160
+          ]
+        },
+        "ETTh2_H720": {
+          "mase": 1.943765640258789,
+          "smape": 0.7020376920700073,
+          "n_origins": 7,
+          "origins": [
+            8640,
+            9000,
+            9360,
+            9720,
+            10080,
+            10440,
+            10800
+          ]
+        },
+        "macro_mase": 1.4758285284042358,
+        "macro_smape": 0.841151162981987
+      },
+      "payload": {
+        "weights_bytes": 18044088,
+        "metadata_bytes": 669,
+        "adaptation_bytes": 18044757
+      },
+      "selected": [
+        "block.0.layer.0.SelfAttention.o",
+        "block.1.layer.0.SelfAttention.o",
+        "block.4.layer.0.SelfAttention.o",
+        "block.6.layer.0.SelfAttention.v"
+      ],
+      "train_updates": 18,
+      "dsic_shared_updates_amortized": 12,
+      "train_wall_s": 48.76753412500011
+    },
+    "pooled_trace_mirror": {
+      "metrics": {
+        "ETTh1_H192": {
+          "mase": 1.1229026317596436,
+          "smape": 0.976710319519043,
+          "n_origins": 8,
+          "origins": [
+            8640,
+            9000,
+            9360,
+            9720,
+            10080,
+            10440,
+            10800,
+            11160
+          ]
+        },
+        "ETTh1_H720": {
+          "mase": 1.2379246950149536,
+          "smape": 1.0258678197860718,
+          "n_origins": 7,
+          "origins": [
+            8640,
+            9000,
+            9360,
+            9720,
+            10080,
+            10440,
+            10800
+          ]
+        },
+        "ETTh2_H192": {
+          "mase": 1.5930202007293701,
+          "smape": 0.6590312719345093,
+          "n_origins": 8,
+          "origins": [
+            8640,
+            9000,
+            9360,
+            9720,
+            10080,
+            10440,
+            10800,
+            11160
+          ]
+        },
+        "ETTh2_H720": {
+          "mase": 1.9342209100723267,
+          "smape": 0.7020949721336365,
+          "n_origins": 7,
+          "origins": [
+            8640,
+            9000,
+            9360,
+            9720,
+            10080,
+            10440,
+            10800
+          ]
+        },
+        "macro_mase": 1.4720171093940735,
+        "macro_smape": 0.8409260958433151
+      },
+      "payload": {
+        "weights_bytes": 18044088,
+        "metadata_bytes": 671,
+        "adaptation_bytes": 18044759
+      },
+      "selected": [
+        "block.0.layer.0.SelfAttention.o",
+        "block.1.layer.0.SelfAttention.o",
+        "block.4.layer.0.SelfAttention.o",
+        "block.6.layer.0.SelfAttention.v"
+      ],
+      "train_updates": 18,
+      "dsic_shared_updates_amortized": 12,
+      "train_wall_s": 50.822048155000175
+    },
+    "moment_linear_probe_ETTh1_H192": {
+      "metrics": {
+        "ETTh1_H192": {
+          "mase": 1.1206603050231934,
+          "smape": 0.9272236227989197,
+          "n_origins": 8,
+          "origins": [
+            8640,
+            9000,
+            9360,
+            9720,
+            10080,
+            10440,
+            10800,
+            11160
+          ]
+        },
+        "macro_mase": 1.1206603050231934,
+        "macro_smape": 0.9272236227989197
+      },
+      "adaptation_bytes": 37749866,
+      "train_updates": 30,
+      "train_wall_s": 12.645811958999957
+    },
+    "moment_linear_probe_ETTh1_H720": {
+      "metrics": {
+        "ETTh1_H720": {
+          "mase": 1.1622562408447266,
+          "smape": 0.9670556783676147,
+          "n_origins": 7,
+          "origins": [
+            8640,
+            9000,
+            9360,
+            9720,
+            10080,
+            10440,
+            10800
+          ]
+        },
+        "macro_mase": 1.1622562408447266,
+        "macro_smape": 0.9670556783676147
+      },
+      "adaptation_bytes": 141561010,
+      "train_updates": 30,
+      "train_wall_s": 18.322625238
+    },
+    "moment_linear_probe_ETTh2_H192": {
+      "metrics": {
+        "ETTh2_H192": {
+          "mase": 1.559942364692688,
+          "smape": 0.6223878264427185,
+          "n_origins": 8,
+          "origins": [
+            8640,
+            9000,
+            9360,
+            9720,
+            10080,
+            10440,
+            10800,
+            11160
+          ]
+        },
+        "macro_mase": 1.559942364692688,
+        "macro_smape": 0.6223878264427185
+      },
+      "adaptation_bytes": 37749869,
+      "train_updates": 30,
+      "train_wall_s": 13.069730659000015
+    },
+    "moment_linear_probe_ETTh2_H720": {
+      "metrics": {
+        "ETTh2_H720": {
+          "mase": 1.8172427415847778,
+          "smape": 0.7126893401145935,
+          "n_origins": 7,
+          "origins": [
+            8640,
+            9000,
+            9360,
+            9720,
+            10080,
+            10440,
+            10800
+          ]
+        },
+        "macro_mase": 1.8172427415847778,
+        "macro_smape": 0.7126893401145935
+      },
+      "adaptation_bytes": 141561013,
+      "train_updates": 30,
+      "train_wall_s": 19.258389905000058
+    },
+    "moment_linear_probe_reference": {
+      "metrics": {
+        "ETTh1_H192": {
+          "mase": 1.1206603050231934,
+          "smape": 0.9272236227989197,
+          "n_origins": 8,
+          "origins": [
+            8640,
+            9000,
+            9360,
+            9720,
+            10080,
+            10440,
+            10800,
+            11160
+          ]
+        },
+        "macro_mase": 1.8172427415847778,
+        "macro_smape": 0.7126893401145935,
+        "ETTh1_H720": {
+          "mase": 1.1622562408447266,
+          "smape": 0.9670556783676147,
+          "n_origins": 7,
+          "origins": [
+            8640,
+            9000,
+            9360,
+            9720,
+            10080,
+            10440,
+            10800
+          ]
+        },
+        "ETTh2_H192": {
+          "mase": 1.559942364692688,
+          "smape": 0.6223878264427185,
+          "n_origins": 8,
+          "origins": [
+            8640,
+            9000,
+            9360,
+            9720,
+            10080,
+            10440,
+            10800,
+            11160
+          ]
+        },
+        "ETTh2_H720": {
+          "mase": 1.8172427415847778,
+          "smape": 0.7126893401145935,
+          "n_origins": 7,
+          "origins": [
+            8640,
+            9000,
+            9360,
+            9720,
+            10080,
+            10440,
+            10800
+          ]
+        }
+      },
+      "macro_mase": 1.4150254130363464,
+      "adaptation_bytes_sum": 358621758,
+      "train_wall_s_sum": 63.29655776100003
+    },
+    "specialist_ETTh1_H192": {
+      "metrics": {
+        "ETTh1_H192": {
+          "mase": 1.1887669563293457,
+          "smape": 0.9990402460098267,
+          "n_origins": 8,
+          "origins": [
+            8640,
+            9000,
+            9360,
+            9720,
+            10080,
+            10440,
+            10800,
+            11160
+          ]
+        },
+        "macro_mase": 1.1887669563293457,
+        "macro_smape": 0.9990402460098267
+      },
+      "payload": {
+        "weights_bytes": 5065312,
+        "metadata_bytes": 675,
+        "adaptation_bytes": 5065987
+      },
+      "selected": [
+        "block.1.layer.0.SelfAttention.o",
+        "block.2.layer.0.SelfAttention.v",
+        "block.3.layer.0.SelfAttention.v",
+        "block.10.layer.0.SelfAttention.v"
+      ],
+      "train_updates": 30,
+      "dsic_updates": 12,
+      "train_wall_s": 12.328840811999726
+    },
+    "specialist_ETTh1_H720": {
+      "metrics": {
+        "ETTh1_H720": {
+          "mase": 1.326817274093628,
+          "smape": 1.1665575504302979,
+          "n_origins": 7,
+          "origins": [
+            8640,
+            9000,
+            9360,
+            9720,
+            10080,
+            10440,
+            10800
+          ]
+        },
+        "macro_mase": 1.326817274093628,
+        "macro_smape": 1.1665575504302979
+      },
+      "payload": {
+        "weights_bytes": 18053800,
+        "metadata_bytes": 677,
+        "adaptation_bytes": 18054477
+      },
+      "selected": [
+        "block.2.layer.0.SelfAttention.v",
+        "block.2.layer.0.SelfAttention.o",
+        "block.8.layer.1.DenseReluDense.wo",
+        "block.10.layer.0.SelfAttention.q"
+      ],
+      "train_updates": 30,
+      "dsic_updates": 12,
+      "train_wall_s": 12.107097977000194
+    },
+    "specialist_ETTh2_H192": {
+      "metrics": {
+        "ETTh2_H192": {
+          "mase": 1.6533167362213135,
+          "smape": 0.6730026006698608,
+          "n_origins": 8,
+          "origins": [
+            8640,
+            9000,
+            9360,
+            9720,
+            10080,
+            10440,
+            10800,
+            11160
+          ]
+        },
+        "macro_mase": 1.6533167362213135,
+        "macro_smape": 0.6730026006698608
+      },
+      "payload": {
+        "weights_bytes": 5075560,
+        "metadata_bytes": 678,
+        "adaptation_bytes": 5076238
+      },
+      "selected": [
+        "block.0.layer.1.DenseReluDense.wi_0",
+        "block.2.layer.0.SelfAttention.o",
+        "block.3.layer.0.SelfAttention.o",
+        "block.4.layer.0.SelfAttention.q"
+      ],
+      "train_updates": 30,
+      "dsic_updates": 12,
+      "train_wall_s": 13.320031784000093
+    },
+    "specialist_ETTh2_H720": {
+      "metrics": {
+        "ETTh2_H720": {
+          "mase": 2.025195360183716,
+          "smape": 0.7340760231018066,
+          "n_origins": 7,
+          "origins": [
+            8640,
+            9000,
+            9360,
+            9720,
+            10080,
+            10440,
+            10800
+          ]
+        },
+        "macro_mase": 2.025195360183716,
+        "macro_smape": 0.7340760231018066
+      },
+      "payload": {
+        "weights_bytes": 18053800,
+        "metadata_bytes": 676,
+        "adaptation_bytes": 18054476
+      },
+      "selected": [
+        "block.0.layer.0.SelfAttention.o",
+        "block.3.layer.0.SelfAttention.o",
+        "block.5.layer.1.DenseReluDense.wo",
+        "block.9.layer.0.SelfAttention.o"
+      ],
+      "train_updates": 30,
+      "dsic_updates": 12,
+      "train_wall_s": 12.102428626999881
+    },
+    "independent_trace_reference": {
+      "metrics": {
+        "ETTh1_H192": {
+          "mase": 1.1887669563293457,
+          "smape": 0.9990402460098267,
+          "n_origins": 8,
+          "origins": [
+            8640,
+            9000,
+            9360,
+            9720,
+            10080,
+            10440,
+            10800,
+            11160
+          ]
+        },
+        "macro_mase": 2.025195360183716,
+        "macro_smape": 0.7340760231018066,
+        "ETTh1_H720": {
+          "mase": 1.326817274093628,
+          "smape": 1.1665575504302979,
+          "n_origins": 7,
+          "origins": [
+            8640,
+            9000,
+            9360,
+            9720,
+            10080,
+            10440,
+            10800
+          ]
+        },
+        "ETTh2_H192": {
+          "mase": 1.6533167362213135,
+          "smape": 0.6730026006698608,
+          "n_origins": 8,
+          "origins": [
+            8640,
+            9000,
+            9360,
+            9720,
+            10080,
+            10440,
+            10800,
+            11160
+          ]
+        },
+        "ETTh2_H720": {
+          "mase": 2.025195360183716,
+          "smape": 0.7340760231018066,
+          "n_origins": 7,
+          "origins": [
+            8640,
+            9000,
+            9360,
+            9720,
+            10080,
+            10440,
+            10800
+          ]
+        }
+      },
+      "macro_mase": 1.5485240817070007,
+      "adaptation_bytes_sum": 46251178,
+      "train_wall_s_sum": 49.858399199999894,
+      "selected_by_role": {
+        "specialist_ETTh1_H192": [
+          "block.1.layer.0.SelfAttention.o",
+          "block.2.layer.0.SelfAttention.v",
+          "block.3.layer.0.SelfAttention.v",
+          "block.10.layer.0.SelfAttention.v"
+        ],
+        "specialist_ETTh1_H720": [
+          "block.2.layer.0.SelfAttention.v",
+          "block.2.layer.0.SelfAttention.o",
+          "block.8.layer.1.DenseReluDense.wo",
+          "block.10.layer.0.SelfAttention.q"
+        ],
+        "specialist_ETTh2_H192": [
+          "block.0.layer.1.DenseReluDense.wi_0",
+          "block.2.layer.0.SelfAttention.o",
+          "block.3.layer.0.SelfAttention.o",
+          "block.4.layer.0.SelfAttention.q"
+        ],
+        "specialist_ETTh2_H720": [
+          "block.0.layer.0.SelfAttention.o",
+          "block.3.layer.0.SelfAttention.o",
+          "block.5.layer.1.DenseReluDense.wo",
+          "block.9.layer.0.SelfAttention.o"
+        ]
+      }
+    },
+    "seasonal_naive": {
+      "ETTh1_H192": {
+        "mase": 1.860145926475525,
+        "n_origins": 8
+      },
+      "ETTh1_H720": {
+        "mase": 2.0089755058288574,
+        "n_origins": 7
+      },
+      "ETTh2_H192": {
+        "mase": 2.282205104827881,
+        "n_origins": 8
+      },
+      "ETTh2_H720": {
+        "mase": 2.6277356147766113,
+        "n_origins": 7
+      },
+      "macro_mase": 2.1947655379772186
+    }
+  },
+  "wall_start_unix": 1795635795.4188325,
+  "elapsed_wall_s": 681.2790571280002,
+  "data": {
+    "ETTh1": {
+      "train": 8640,
+      "val": 11520,
+      "test": 14400,
+      "mase_scale": 0.27824803959455074,
+      "mean": 17.1282616982271,
+      "std": 9.176491024944333,
+      "raw_length": 17420,
+      "sha256": "f18de3ad269cef59bb07b5438d79bb3042d3be49bdeecf01c1cd6d29695ee066"
+    },
+    "ETTh2": {
+      "train": 8640,
+      "val": 11520,
+      "test": 14400,
+      "mase_scale": 0.262266246555353,
+      "mean": 26.872023494265697,
+      "std": 11.584718923414682,
+      "raw_length": 17420,
+      "sha256": "a3dc2c597b9218c7ce1cd55eb77b283fd459a1d09d753063f944967dd6b9218b"
+    }
+  }
+}

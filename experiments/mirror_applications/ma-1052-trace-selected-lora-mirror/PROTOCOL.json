@@ -1,0 +1,117 @@
+{
+  "experiment_id": "MA-1052",
+  "title": "TRACE selected LoRA modules with task-horizon Mirror coordinates",
+  "status": "FROZEN_SCREENING_PROTOCOL",
+  "evidence_lane": "MECHANISM/STORAGE/QUALITY/COMPUTE",
+  "base_commit": "26d91407d",
+  "hypothesis": "At matched shared TRACE state and training exposures, a 2-parameter-per-selected-module-per-role rank-space Mirror view across four dataset×horizon forecasting roles improves mean audit MASE by at least 2% over a hard-shared TRACE adapter and byte-matched diagonal rank gains, while using less adaptation payload than four independent TRACE specialists.",
+  "physical_object": "One MOMENT-1-base backbone, TRACE-selected shared rank-2 LoRA modules, and one shared ProjDown forecast head",
+  "mirror_coordinate": "Per-role 2D rotation angle and log-gain applied in the selected LoRA rank-2 latent before each B projection; role is dataset×horizon.",
+  "logical_multiplicity": "Four dataset×forecast-horizon adaptations from a shared TRACE LoRA basis and forecast head.",
+  "prior_art_refs": [
+    "PA332",
+    "PA333"
+  ],
+  "data": {
+    "source": "ETDataset ETT-small ETTh1.csv and ETTh2.csv",
+    "revision": "1d16c8f4f943005d613b5bc962e9eeb06058cf07",
+    "url_template": "https://raw.githubusercontent.com/zhouhaoyi/ETDataset/1d16c8f4f943005d613b5bc962e9eeb06058cf07/ETT-small/{dataset}.csv",
+    "roles": [
+      "ETTh1 target OT × H=192",
+      "ETTh1 target OT × H=720",
+      "ETTh2 target OT × H=192",
+      "ETTh2 target OT × H=720"
+    ],
+    "context": 512,
+    "split": "Official ETTh chronological 12/4/4-month train/validation/test boundary; normalization statistics fit only on train prefix; training windows stride 1; validation and audit rolling origins are target-start indices. Development uses approximately eight origins per role (ETTh1/ETTh2 × H=192/720) with H=720 overlap; audit uses horizon-spaced non-overlapping origins: 15 at H=192 and 4 at H=720. Overlapping dev H=720 windows are correlated.",
+    "sha256": {
+      "ETTh1.csv": "f18de3ad269cef59bb07b5438d79bb3042d3be49bdeecf01c1cd6d29695ee066",
+      "ETTh2.csv": "a3dc2c597b9218c7ce1cd55eb77b283fd459a1d09d753063f944967dd6b9218b"
+    },
+    "size_bytes": {
+      "ETTh1.csv": 2589657,
+      "ETTh2.csv": 2417960
+    }
+  },
+  "model": {
+    "implementation": "Official MOMENT source repository moment-timeseries-foundation-model/moment commit 38f7310ad594100747ca2a8357e9c7ca7d323e0e; base checkpoint AutonLab/MOMENT-1-base revision 5e44b0ea26376a176360f87831124e018f876d96, model.safetensors SHA256 1a436826ffe618273ec62b9656dc4cab8edc470364f104e90542a4ebc14fb825 (453,940,120 bytes), config.json 949 bytes. TRACE Gated DSIC and ProjDown implemented from arXiv:2503.16991v3 because official TRACE source was not located.",
+    "backbone": "MOMENT-base: 12 layers, hidden 768, context 512, patch 8",
+    "lora": "Rank 2 on 7 linear modules per each of 12 encoder layers (q,k,v,o,wi_0,wi_1,wo; 84 gated modules); initialized from fixed seed; frozen original backbone.",
+    "selection": "TRACE Gated DSIC: randomly mask 10% of currently active gates; M=8 validation masked-gradient samples per pruning round; iterative fixed schedule removes 8 gates per round until 4/84 remain. Pooled models share a single selection computed from pooled role validation; each independent specialist computes its own role-specific selection. Paper prose says prune low importance, while one Algorithm 1 line says top; implement lowest as explicitly stated in Section 4.3.2 and disclose.",
+    "forecast_head": "TRACE ProjDown β=8; per patch projection 768→96 and forecast projection to requested horizon; pooled conditions share one head. Independent specialists receive their own head.",
+    "mirror": "Task×horizon rank-space rotation+gain (2 parameters: angle, log-gain) at each of four selected modules for each of four roles; 32 total coordinates, initialized to identity.",
+    "simple_control": "Same 32 parameters as Mirror, implemented as diagonal rank gains at each selected module and role.",
+    "training": "CPU feasibility screen passed at batch 1 (recorded before training). Development and fresh runs use 4 role-balanced task streams; each role receives 30 optimizer updates of batch size 4 (120 windows/role per run), AdamW lr=2e-4, fixed seed per run. For pooled runs each update jointly accumulates losses from all four roles and performs one optimizer update. Private specialist receives the same per-role examples and updates, with additional total compute recorded. Backbone weights frozen; gradients pass through encoder. No hyperparameter tuning on audit."
+  },
+  "controls": [
+    "MOMENT linear-probe native full forecast head (frozen encoder, train forecast head)",
+    "Native TRACE per-role specialist: selected-LoRA Gated DSIC and ProjDown β=8",
+    "Hard-shared pooled TRACE with one selected rank-2 LoRA basis and one pooled head, no role code",
+    "Hard-shared pooled TRACE plus matched diagonal rank-gain code",
+    "Hard-shared pooled TRACE plus Mirror rank rotation/gain role code",
+    "Seasonal naive, period 24"
+  ],
+  "development": {
+    "worlds_or_seeds": [
+      105201
+    ],
+    "selection_metric": "Mean development MASE across four fixed roles; MASE denominator calculated on the training split only."
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      105202
+    ],
+    "locked_before_access": true,
+    "metric": "Per-role and macro MASE on chronological test origins; also sMAPE, adaptation payload bytes, optimizer updates, examples, CPU wall-clock and inference latency."
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "Pinned MOMENT base weights once, common to pooled variants and separately itemized",
+      "Selected shared LoRA A/B and active gates",
+      "Forecast projection/ProjDown head",
+      "Per-role Mirror or diagonal coordinates",
+      "Role map, masks, model/config and serialization metadata",
+      "Four independent specialist adapter/head payloads for the independent control"
+    ]
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true,
+    "cpu_threads": 4,
+    "profile_before_training": true,
+    "per_role_updates": 30,
+    "batch_size_per_role": 4,
+    "dsic_random_masks_per_round": 8,
+    "pruning_rounds": 10
+  },
+  "success_gate": "Mirror macro audit MASE improves by ≥2% over both hard-shared pooled TRACE and byte-matched diagonal control; each of four roles is within 5% of its independent TRACE specialist; pooled adaptation payload is smaller than four specialists; replay passes.",
+  "failure_gate": "Mirror does not meet the quality criterion, diagonal control matches/beats Mirror, or pooled code cannot retain quality within the stated bound.",
+  "not_established_gate": "If frozen MOMENT forward/backward profiling shows the preregistered per-role training budget cannot complete within available CPU wall time, record feasibility NOT ESTABLISHED and continue to the next registry candidate. Do not replace TRACE with generic LoRA or report capacity.",
+  "boundaries": [
+    "No official TRACE implementation was located; algorithm is implemented from paper and cross-checked against Section 4.3.2 and Appendix A.",
+    "Single seed screen; no capacity claim.",
+    "ETTh1/ETTh2 are historical ETT datasets; one channel and four roles do not establish broad transfer.",
+    "No GPU latency claims.",
+    "Checkpoint config d_ff=2048 differs from paper Table 4 d_ff=3072.",
+    "H=720 rolling audit windows overlap and are correlated."
+  ],
+  "amendments": [
+    {
+      "id": "AM-01",
+      "timing": "after single-example CPU profile, before any training or audit access",
+      "reason": "Replace an infeasible hypothesis detail with the exact coordinate count and profile-informed fixed per-role update budget; clarify native linear-probe and seasonal-naive controls.",
+      "change": "Mirror/diagonal code has two scalars at each of four selected modules for each of four roles (32 total). Freeze 30 per-role updates × batch 4; add native MOMENT linear-probe and seasonal-naive controls.",
+      "impact": "No training or development results were used to select a model or inspect audit. The amendment improves specificity before the run."
+    },
+    {
+      "id": "AM-02",
+      "timing": "after development evaluation and before fresh audit training/evaluation",
+      "reason": "The executed development run used stride floor((validation length)/8), yielding 8 H=192 and 7 overlapping H=720 origins per dataset. The previously written protocol text incorrectly described four disjoint H=720 development windows.",
+      "change": "Preserve the executed development selector exactly for audit DSIC (8 H=192 / 7 H=720 validation origins); use the already intended non-overlap audit schedule (15 H=192 / 4 H=720 origins). No model, optimizer, or threshold changes.",
+      "impact": "This corrects a documentation/window-definition discrepancy before audit is opened and prevents selecting a new validation schedule after observing development quality. The fresh audit set remains untouched."
+    }
+  ]
+}

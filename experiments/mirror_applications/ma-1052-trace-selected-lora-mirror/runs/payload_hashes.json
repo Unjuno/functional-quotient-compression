@@ -1,0 +1,474 @@
+{
+  "model": {
+    "files": {
+      "config.json": {
+        "sha256": "f1c66c2bb845229c0ed27a1600dbcc956b85ab21f9e5fd8a1663e6641bed7755",
+        "size_bytes": 949
+      },
+      "model.safetensors": {
+        "sha256": "1a436826ffe618273ec62b9656dc4cab8edc470364f104e90542a4ebc14fb825",
+        "size_bytes": 453940120
+      }
+    },
+    "official_code_commit": "38f7310ad594100747ca2a8357e9c7ca7d323e0e",
+    "official_code_repo": "https://github.com/moment-timeseries-foundation-model/moment",
+    "repo": "AutonLab/MOMENT-1-base",
+    "revision": "5e44b0ea26376a176360f87831124e018f876d96"
+  },
+  "provenance": {
+    "PROTOCOL.json": {
+      "bytes": 9227,
+      "sha256": "fac68d017ab93150d01fd6f1766b7adcc29c57075408f7fdb5fdab3be0115b02"
+    },
+    "RESULTS_CORE.csv": {
+      "bytes": 2990,
+      "sha256": "552e849ec3eebc57f39a766ea05dd30c4a0ffb0d6854e7baf86f2e9803d013f8"
+    },
+    "RESULTS_PER_ROLE.csv": {
+      "bytes": 4862,
+      "sha256": "5039b7267de401401d4188a759cc252810c86dd8f8b176926a294f988883dea5"
+    },
+    "runs/audit/payload_metrics.json": {
+      "bytes": 8446,
+      "sha256": "93d63c43325cce0c99cac377d26edf8fdae478798b390b1f05a00aa63195cf8c"
+    },
+    "runs/audit/replay_verification.json": {
+      "bytes": 4290,
+      "sha256": "96485998319c85128cc34d3f3c81f9fec877792d9028ca2339af20244bd4b171"
+    },
+    "runs/audit/run.json": {
+      "bytes": 26238,
+      "sha256": "82f20bab792bb35f2b54d6662d303b95deb4c9682983a440ef87be364e0dd5eb"
+    },
+    "runs/dev/payload_metrics.json": {
+      "bytes": 7583,
+      "sha256": "c1cf83cc2bd8e30926c1ea7ea4c798e33bd1315599de3039e7c001fa7da0ad1c"
+    },
+    "runs/dev/replay_verification.json": {
+      "bytes": 4285,
+      "sha256": "6561e8b665c0cd67893929950451ea5bf776a833d41c70e9dadfd257ba13b4c6"
+    },
+    "runs/dev/run.json": {
+      "bytes": 16742,
+      "sha256": "f52d7ebea1c6f3bd3288a1c55e49ce029b7df8ab44d633bdb5a3e7efe9be8627"
+    },
+    "runs/environment.json": {
+      "bytes": 293,
+      "sha256": "07a3961e291fed6e845d9dc05c43a3910683aca72a2ad1d89af0038356b2227e"
+    },
+    "runs/input_manifest.json": {
+      "bytes": 1451,
+      "sha256": "3d849cc172e64df1340c78a02cc0756ddb6f447e50164102271f3a1de2425810"
+    },
+    "source/run_experiment.py": {
+      "bytes": 23099,
+      "sha256": "19332f186ab9a6d2b1087138ab95bdfd101c1c8f3dddaf416500e8ab1938f818"
+    },
+    "source/verify_replay.py": {
+      "bytes": 5092,
+      "sha256": "583874432502d0cf2f9a2210c1738db744198d1e3d7a265985ae2ae804490640"
+    }
+  },
+  "runs": {
+    "audit": {
+      "base_model_and_config_bytes": 453941069,
+      "elapsed_wall_s": 728.7111416870002,
+      "evaluation": "audit",
+      "methods": {
+        "independent_trace_reference": {
+          "adaptation_bytes": null,
+          "full_payload_bytes": null,
+          "serialized_components": {}
+        },
+        "moment_linear_probe_ETTh1_H192": {
+          "adaptation_bytes": 37749866,
+          "full_payload_bytes": 491690935,
+          "serialized_components": {
+            "head.safetensors": {
+              "bytes": 37749656,
+              "sha256": "726d332fe8b6b4137e25102b74b304ac716918a0cf1e73f4b99f8bdf07943af1"
+            },
+            "metadata.json": {
+              "bytes": 210,
+              "sha256": "fbb634bb372c2d16feec5ce3e66390156169239874e1bd1cb9c12e0b6ad84fe0"
+            }
+          }
+        },
+        "moment_linear_probe_ETTh1_H720": {
+          "adaptation_bytes": 141561010,
+          "full_payload_bytes": 595502079,
+          "serialized_components": {
+            "head.safetensors": {
+              "bytes": 141560800,
+              "sha256": "55dca2c88658d82750c287ef01617a2cb855010d47e9f33223a7e1f79eb6fbf1"
+            },
+            "metadata.json": {
+              "bytes": 210,
+              "sha256": "5c7c13626411a4df458a00efb1367b5ee67dd762c25637aa4b459b400da405f1"
+            }
+          }
+        },
+        "moment_linear_probe_ETTh2_H192": {
+          "adaptation_bytes": 37749869,
+          "full_payload_bytes": 491690938,
+          "serialized_components": {
+            "head.safetensors": {
+              "bytes": 37749656,
+              "sha256": "4b125593d266c4b14917487c2984ba39f46c8ef60ff07df61f185ebe2a5b78ca"
+            },
+            "metadata.json": {
+              "bytes": 213,
+              "sha256": "b3b3a02ffdbff0193f73f818ca4323327bdd625b82c4481b7f4dc2db6044704a"
+            }
+          }
+        },
+        "moment_linear_probe_ETTh2_H720": {
+          "adaptation_bytes": 141561013,
+          "full_payload_bytes": 595502082,
+          "serialized_components": {
+            "head.safetensors": {
+              "bytes": 141560800,
+              "sha256": "0a3fb69cfccc4d79754b63ec8d90aa7eb7499ed57939c317e9747e8c81154b47"
+            },
+            "metadata.json": {
+              "bytes": 213,
+              "sha256": "132759a08fdc419989944c9f9dd76e0622c6685a9219cc0ee18d2d1b46ef2d4b"
+            }
+          }
+        },
+        "moment_linear_probe_reference": {
+          "adaptation_bytes": null,
+          "full_payload_bytes": null,
+          "serialized_components": {}
+        },
+        "pooled_trace_diag": {
+          "adaptation_bytes": 18044766,
+          "full_payload_bytes": 471985835,
+          "serialized_components": {
+            "adapter.safetensors": {
+              "bytes": 18044096,
+              "sha256": "e5e2be847cde4753940ae99a352ad4c5f842357d8f0153705af82dcb20d5324c"
+            },
+            "metadata.json": {
+              "bytes": 670,
+              "sha256": "d2a5028c63e32355358233be803e5bc179530d33e5754da0dd502bd98259c28e"
+            }
+          }
+        },
+        "pooled_trace_mirror": {
+          "adaptation_bytes": 18044768,
+          "full_payload_bytes": 471985837,
+          "serialized_components": {
+            "adapter.safetensors": {
+              "bytes": 18044096,
+              "sha256": "4e2d6c9ebca8332f550945eb44f58a285100ba9171f495caf6b57579b6fb8b55"
+            },
+            "metadata.json": {
+              "bytes": 672,
+              "sha256": "e2ca1c29d1f730c6872dbb3e502e63afc2e04bd4b8c147b045386632c29ad209"
+            }
+          }
+        },
+        "pooled_trace_shared": {
+          "adaptation_bytes": 18044225,
+          "full_payload_bytes": 471985294,
+          "serialized_components": {
+            "adapter.safetensors": {
+              "bytes": 18043552,
+              "sha256": "bdf0295661f1dcef4dfa0f6f9f92553679ee15fbe049f2de01020ed95fe45a28"
+            },
+            "metadata.json": {
+              "bytes": 673,
+              "sha256": "a556664510fa0d6fa2e1da4c903f8a0219ab5f4d9f4e459777b58cfea27ac68c"
+            }
+          }
+        },
+        "seasonal_naive": {
+          "adaptation_bytes": null,
+          "full_payload_bytes": null,
+          "serialized_components": {}
+        },
+        "specialist_ETTh1_H192": {
+          "adaptation_bytes": 5065986,
+          "full_payload_bytes": 459007055,
+          "serialized_components": {
+            "adapter.safetensors": {
+              "bytes": 5065312,
+              "sha256": "207a905fdefd4fc9d2e11fca2d20d041b6435b0cab6e56aff83a74b1a0ef6d9c"
+            },
+            "metadata.json": {
+              "bytes": 674,
+              "sha256": "68ef866f8dc056b0dec322ed320e9b9a54f0e6b103478908887bebd0943b6ffa"
+            }
+          }
+        },
+        "specialist_ETTh1_H720": {
+          "adaptation_bytes": 18044226,
+          "full_payload_bytes": 471985295,
+          "serialized_components": {
+            "adapter.safetensors": {
+              "bytes": 18043552,
+              "sha256": "cb639454a418faef2febf37569c441d24ffb474909d50a2e008debcf0a6ec11f"
+            },
+            "metadata.json": {
+              "bytes": 674,
+              "sha256": "ab7d33ce6867af58b420b84b1e43c92f6205e4a14df93562d2afbcc67e337184"
+            }
+          }
+        },
+        "specialist_ETTh2_H192": {
+          "adaptation_bytes": 5076236,
+          "full_payload_bytes": 459017305,
+          "serialized_components": {
+            "adapter.safetensors": {
+              "bytes": 5075560,
+              "sha256": "d710dc5ff84ca63bad5c04f976c0bc39a3383c671255e2505ba750e1c615f81e"
+            },
+            "metadata.json": {
+              "bytes": 676,
+              "sha256": "5eb4ee27a64e48e113f76500981837807e66a0bff16415321eef6cacb7669082"
+            }
+          }
+        },
+        "specialist_ETTh2_H720": {
+          "adaptation_bytes": 18044226,
+          "full_payload_bytes": 471985295,
+          "serialized_components": {
+            "adapter.safetensors": {
+              "bytes": 18043552,
+              "sha256": "ee3d34f567e8843824bda01a7a3dc98840be9af2e9aff0a78e0d6479b8235e0c"
+            },
+            "metadata.json": {
+              "bytes": 674,
+              "sha256": "68a461f4de2f13db49d8fec35635288bcb5519067d15dd0a2568d57f656d1ea8"
+            }
+          }
+        }
+      },
+      "seed": 105202
+    },
+    "dev": {
+      "base_model_and_config_bytes": 453941069,
+      "elapsed_wall_s": 681.2790571280002,
+      "evaluation": "dev",
+      "methods": {
+        "independent_trace_reference": {
+          "adaptation_bytes": null,
+          "full_payload_bytes": null,
+          "serialized_components": {}
+        },
+        "moment_linear_probe_ETTh1_H192": {
+          "adaptation_bytes": 37749866,
+          "full_payload_bytes": 491690935,
+          "serialized_components": {
+            "head.safetensors": {
+              "bytes": 37749656,
+              "sha256": "2f0823dc53bdda26210b0db95420144fb0352d456409cf8fba5fcfb5e5bd1f4a"
+            },
+            "metadata.json": {
+              "bytes": 210,
+              "sha256": "fbb634bb372c2d16feec5ce3e66390156169239874e1bd1cb9c12e0b6ad84fe0"
+            }
+          }
+        },
+        "moment_linear_probe_ETTh1_H720": {
+          "adaptation_bytes": 141561010,
+          "full_payload_bytes": 595502079,
+          "serialized_components": {
+            "head.safetensors": {
+              "bytes": 141560800,
+              "sha256": "975b903552dce6cbba475d68558e97d608fe3ff1ff36c23a0043974f61eb27c8"
+            },
+            "metadata.json": {
+              "bytes": 210,
+              "sha256": "5c7c13626411a4df458a00efb1367b5ee67dd762c25637aa4b459b400da405f1"
+            }
+          }
+        },
+        "moment_linear_probe_ETTh2_H192": {
+          "adaptation_bytes": 37749869,
+          "full_payload_bytes": 491690938,
+          "serialized_components": {
+            "head.safetensors": {
+              "bytes": 37749656,
+              "sha256": "42f72e37c3c15d172031eddf823159f0891607299a0e35609554f761fe6362be"
+            },
+            "metadata.json": {
+              "bytes": 213,
+              "sha256": "b3b3a02ffdbff0193f73f818ca4323327bdd625b82c4481b7f4dc2db6044704a"
+            }
+          }
+        },
+        "moment_linear_probe_ETTh2_H720": {
+          "adaptation_bytes": 141561013,
+          "full_payload_bytes": 595502082,
+          "serialized_components": {
+            "head.safetensors": {
+              "bytes": 141560800,
+              "sha256": "707e9005ae0c106c2a80e2ac23b6dab7f7207df96757b61af4a1c32cb569fd0d"
+            },
+            "metadata.json": {
+              "bytes": 213,
+              "sha256": "132759a08fdc419989944c9f9dd76e0622c6685a9219cc0ee18d2d1b46ef2d4b"
+            }
+          }
+        },
+        "moment_linear_probe_reference": {
+          "adaptation_bytes": null,
+          "full_payload_bytes": null,
+          "serialized_components": {}
+        },
+        "pooled_trace_diag": {
+          "adaptation_bytes": 18044757,
+          "full_payload_bytes": 471985826,
+          "serialized_components": {
+            "adapter.safetensors": {
+              "bytes": 18044088,
+              "sha256": "521c5d89646e4d5e903498175ff7995853c7da0209350e0b6556df829cdf6ca0"
+            },
+            "metadata.json": {
+              "bytes": 669,
+              "sha256": "7c37622d631c404e7dbb7771dcfb5bf74249fe70138a2efe69f5e739c10a917d"
+            }
+          }
+        },
+        "pooled_trace_mirror": {
+          "adaptation_bytes": 18044759,
+          "full_payload_bytes": 471985828,
+          "serialized_components": {
+            "adapter.safetensors": {
+              "bytes": 18044088,
+              "sha256": "70539488421b52ea981ff8123b7db41828537f7fd91c16f038bbfed122a2a176"
+            },
+            "metadata.json": {
+              "bytes": 671,
+              "sha256": "ee9bf791f97e5cae5f7e207f128ad9b52075ec16a5b881de2720fc1a4b666ae0"
+            }
+          }
+        },
+        "pooled_trace_shared": {
+          "adaptation_bytes": 18044224,
+          "full_payload_bytes": 471985293,
+          "serialized_components": {
+            "adapter.safetensors": {
+              "bytes": 18043552,
+              "sha256": "186b508af3ac8cf3a55f1848766fdccafeaaa5709ddb5a0e2e7b6afb56f4e08d"
+            },
+            "metadata.json": {
+              "bytes": 672,
+              "sha256": "ec9bbbf5e560042b59efddaef027e4de201b3dfa031a0397e93853d5dadf37d6"
+            }
+          }
+        },
+        "seasonal_naive": {
+          "adaptation_bytes": null,
+          "full_payload_bytes": null,
+          "serialized_components": {}
+        },
+        "specialist_ETTh1_H192": {
+          "adaptation_bytes": 5065987,
+          "full_payload_bytes": 459007056,
+          "serialized_components": {
+            "adapter.safetensors": {
+              "bytes": 5065312,
+              "sha256": "a2a514d4ad3994644d469cc2ee8c4fbe4a553f9a1cd0ac5972ac25f8c04c4589"
+            },
+            "metadata.json": {
+              "bytes": 675,
+              "sha256": "f3e00e3f1fc42dc6c432b4a8374ec346a7602766b85d37bc4ae9f3a2236de1d0"
+            }
+          }
+        },
+        "specialist_ETTh1_H720": {
+          "adaptation_bytes": 18054477,
+          "full_payload_bytes": 471995546,
+          "serialized_components": {
+            "adapter.safetensors": {
+              "bytes": 18053800,
+              "sha256": "53e6c3948d6f680cda89e2c4621d0e7f66dc48e2cd1282575a8e2083130e4071"
+            },
+            "metadata.json": {
+              "bytes": 677,
+              "sha256": "dac4f403db61974987f424943eadbb7743a9850a6b29065f0c2af4d9afe54851"
+            }
+          }
+        },
+        "specialist_ETTh2_H192": {
+          "adaptation_bytes": 5076238,
+          "full_payload_bytes": 459017307,
+          "serialized_components": {
+            "adapter.safetensors": {
+              "bytes": 5075560,
+              "sha256": "7b26bb79bbe9a9044b105f5f590dc7fc1775376a68aa6da7aac2a5f89e60e516"
+            },
+            "metadata.json": {
+              "bytes": 678,
+              "sha256": "03182e4d12e8d435a5c7da79891d1c3a7f36455b83195c5dab2c88b95a336bf9"
+            }
+          }
+        },
+        "specialist_ETTh2_H720": {
+          "adaptation_bytes": 18054476,
+          "full_payload_bytes": 471995545,
+          "serialized_components": {
+            "adapter.safetensors": {
+              "bytes": 18053800,
+              "sha256": "64c2fd435234606b5c3ccccc9e53ecdfc6d23a3939e8a005d3869f145dce14c8"
+            },
+            "metadata.json": {
+              "bytes": 676,
+              "sha256": "4a3465b7a91a6218e5d8c6647da6995d451c3e1971099d0985b0e4afd41a0a97"
+            }
+          }
+        }
+      },
+      "seed": 105201
+    }
+  },
+  "study_artifacts": {
+    "PROTOCOL.json": {
+      "sha256": "fac68d017ab93150d01fd6f1766b7adcc29c57075408f7fdb5fdab3be0115b02",
+      "size_bytes": 9227
+    },
+    "README.md": {
+      "sha256": "a794cdf9d9938eed6f25d4b2a5e62666e2c0609805701e79e75bcf6694fce41a",
+      "size_bytes": 1537
+    },
+    "RESULTS.md": {
+      "sha256": "84b65672f83937fd353dfe753d743e1163cf0ff37436acac473dcbcc366bf81f",
+      "size_bytes": 5980
+    },
+    "RESULTS_CORE.csv": {
+      "sha256": "552e849ec3eebc57f39a766ea05dd30c4a0ffb0d6854e7baf86f2e9803d013f8",
+      "size_bytes": 2990
+    },
+    "RESULTS_PER_ROLE.csv": {
+      "sha256": "5039b7267de401401d4188a759cc252810c86dd8f8b176926a294f988883dea5",
+      "size_bytes": 4862
+    },
+    "STATUS.md": {
+      "sha256": "e187e0a511dcee2b59ba9191af1235e41f15deaa3c41a2747ce6bee0a6e0a03d",
+      "size_bytes": 1793
+    },
+    "VERIFICATION.json": {
+      "sha256": "661b69568144803359509560578a7980bd85eab2f4d771a517f91d53ca44b17f",
+      "size_bytes": 2119
+    },
+    "source/profile_cpu.py": {
+      "sha256": "6b1425d63fae3e39f040b4f7ad97746c1b90279906dbc41adf6b66d47e170a8c",
+      "size_bytes": 3497
+    },
+    "source/run_experiment.py": {
+      "sha256": "19332f186ab9a6d2b1087138ab95bdfd101c1c8f3dddaf416500e8ab1938f818",
+      "size_bytes": 23099
+    },
+    "source/verify_replay.py": {
+      "sha256": "583874432502d0cf2f9a2210c1738db744198d1e3d7a265985ae2ae804490640",
+      "size_bytes": 5092
+    },
+    "tests/test_trace_contract.py": {
+      "sha256": "2d79059a6fd6c618f1f4acef5ca268657686525dede729d3d80154e0195cf0f1",
+      "size_bytes": 2196
+    }
+  }
+}

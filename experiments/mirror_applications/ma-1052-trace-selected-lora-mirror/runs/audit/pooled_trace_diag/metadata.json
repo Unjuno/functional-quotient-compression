@@ -1,0 +1,29 @@
+{
+  "method": "pooled_trace_diag",
+  "selected_modules": [
+    "block.0.layer.0.SelfAttention.v",
+    "block.1.layer.0.SelfAttention.o",
+    "block.2.layer.0.SelfAttention.o",
+    "block.11.layer.0.SelfAttention.v"
+  ],
+  "role_codes": true,
+  "roles": [
+    "ETTh1_H192",
+    "ETTh1_H720",
+    "ETTh2_H192",
+    "ETTh2_H720"
+  ],
+  "base_model": "AutonLab/MOMENT-1-base",
+  "base_revision": "5e44b0ea26376a176360f87831124e018f876d96",
+  "head": "TRACE ProjDown beta=8",
+  "preprocessing": {
+    "ETTh1": {
+      "mean": 17.1282616982271,
+      "std": 9.176491024944333
+    },
+    "ETTh2": {
+      "mean": 26.872023494265697,
+      "std": 11.584718923414682
+    }
+  }
+}

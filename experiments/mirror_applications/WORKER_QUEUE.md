@@ -1,3 +1,7 @@
+## Current handoff — 2026-11-25, MA-1052 complete
+
+MA-1052 is a scoped FAIL on pinned MOMENT-1-base and four ETTh1/ETTh2 × horizon roles. Canonical serialized-payload audit macro MASE: TRACE+Mirror 1.063280, pooled hard share 1.063251, matched diagonal 1.061715; Mirror misses the 2% gate and adds 543 B vs hard share. Four independent TRACE specialists score 1.083612 with 46,230,674 B adaptation state. The pooled in-memory vs reloaded-payload discrepancy is unresolved, disclosed, and canonical payload replay is exact. CPU-only, one fresh audit seed; no capacity claim. See `ma-1052-trace-selected-lora-mirror/RESULTS.md`. Continue to P0 MA-1053 MOMENT task/function codes (PA333).
+
 ## Current handoff — 2026-11-15, MA-1048 complete
 
 MA-1048 FAIL on the pinned Moirai-1.1-R-small model and fresh PEMS-BAY-derived rates. With 12 checkerboard-held-out frequency×sensor pairs, factorized View CRPS is 13.994/85.062 at 5/15 minutes, versus zero-shot 4.074/4.039. Additive native calibration aliases it within 0.02%; both extrapolate badly, especially at 15 minutes. Factor code is 128 B vs 120 B additive; it saves only 96 B against a full independent table in the 55.3 MB full payload. 4 tests and exact saved-sample reducer replay pass; CPU p95 is 0.364 s/series. See ma-1048-moirai-frequency-variate-view/RESULTS.md. Continue at P0 MA-1049 PatchTST variate-specific View (PA329); use independent variate targets and paired hard-share, channel-embedding, and private encoder controls.

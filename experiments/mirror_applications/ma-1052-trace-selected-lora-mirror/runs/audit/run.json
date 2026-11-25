@@ -1,0 +1,958 @@
+{
+  "experiment_id": "MA-1052",
+  "seed": 105202,
+  "evaluation": "audit",
+  "roles": [
+    "ETTh1_H192",
+    "ETTh1_H720",
+    "ETTh2_H192",
+    "ETTh2_H720"
+  ],
+  "base_revision": "5e44b0ea26376a176360f87831124e018f876d96",
+  "training_updates_per_role": 30,
+  "batch_size_per_role": 4,
+  "methods": {
+    "pooled_trace_shared": {
+      "metrics": {
+        "ETTh1_H192": {
+          "mase": 0.7643417119979858,
+          "smape": 0.1679912656545639,
+          "n_origins": 15,
+          "origins": [
+            11520,
+            11712,
+            11904,
+            12096,
+            12288,
+            12480,
+            12672,
+            12864,
+            13056,
+            13248,
+            13440,
+            13632,
+            13824,
+            14016,
+            14208
+          ]
+        },
+        "ETTh1_H720": {
+          "mase": 0.7072387933731079,
+          "smape": 0.15413284301757812,
+          "n_origins": 4,
+          "origins": [
+            11520,
+            12240,
+            12960,
+            13680
+          ]
+        },
+        "ETTh2_H192": {
+          "mase": 1.3517359495162964,
+          "smape": 0.4684271216392517,
+          "n_origins": 15,
+          "origins": [
+            11520,
+            11712,
+            11904,
+            12096,
+            12288,
+            12480,
+            12672,
+            12864,
+            13056,
+            13248,
+            13440,
+            13632,
+            13824,
+            14016,
+            14208
+          ]
+        },
+        "ETTh2_H720": {
+          "mase": 1.37293541431427,
+          "smape": 0.4491468667984009,
+          "n_origins": 4,
+          "origins": [
+            11520,
+            12240,
+            12960,
+            13680
+          ]
+        },
+        "macro_mase": 1.049062967300415,
+        "macro_smape": 0.30992452427744865
+      },
+      "payload": {
+        "weights_bytes": 18043552,
+        "metadata_bytes": 673,
+        "adaptation_bytes": 18044225
+      },
+      "selected": [
+        "block.0.layer.0.SelfAttention.v",
+        "block.1.layer.0.SelfAttention.o",
+        "block.2.layer.0.SelfAttention.o",
+        "block.11.layer.0.SelfAttention.v"
+      ],
+      "train_updates": 18,
+      "dsic_shared_updates_amortized": 12,
+      "dsic_validation_examples_amortized": 6400,
+      "dsic_wall_s_amortized": 205.37070292299995,
+      "training_examples": 480,
+      "train_wall_s": 65.86620347400003,
+      "inference_latency": {
+        "n_single_example_runs": 20,
+        "p50_seconds": 0.14178751200006445,
+        "p95_seconds": 0.25630800850005925,
+        "examples_per_second_at_p50": 7.0528073022365
+      },
+      "active_compute_proxy_by_role": {
+        "ETTh1_H192": {
+          "approx_backbone_macs_per_example": 5511315456,
+          "selected_lora_macs_per_example": 9437184,
+          "projdown_head_macs_per_example": 5898240,
+          "mirror_elementary_ops_per_example": 0
+        },
+        "ETTh1_H720": {
+          "approx_backbone_macs_per_example": 5511315456,
+          "selected_lora_macs_per_example": 9437184,
+          "projdown_head_macs_per_example": 9142272,
+          "mirror_elementary_ops_per_example": 0
+        },
+        "ETTh2_H192": {
+          "approx_backbone_macs_per_example": 5511315456,
+          "selected_lora_macs_per_example": 9437184,
+          "projdown_head_macs_per_example": 5898240,
+          "mirror_elementary_ops_per_example": 0
+        },
+        "ETTh2_H720": {
+          "approx_backbone_macs_per_example": 5511315456,
+          "selected_lora_macs_per_example": 9437184,
+          "projdown_head_macs_per_example": 9142272,
+          "mirror_elementary_ops_per_example": 0
+        }
+      }
+    },
+    "pooled_trace_diag": {
+      "metrics": {
+        "ETTh1_H192": {
+          "mase": 0.7629368305206299,
+          "smape": 0.16785737872123718,
+          "n_origins": 15,
+          "origins": [
+            11520,
+            11712,
+            11904,
+            12096,
+            12288,
+            12480,
+            12672,
+            12864,
+            13056,
+            13248,
+            13440,
+            13632,
+            13824,
+            14016,
+            14208
+          ]
+        },
+        "ETTh1_H720": {
+          "mase": 0.7052803039550781,
+          "smape": 0.15375907719135284,
+          "n_origins": 4,
+          "origins": [
+            11520,
+            12240,
+            12960,
+            13680
+          ]
+        },
+        "ETTh2_H192": {
+          "mase": 1.354503870010376,
+          "smape": 0.4694921672344208,
+          "n_origins": 15,
+          "origins": [
+            11520,
+            11712,
+            11904,
+            12096,
+            12288,
+            12480,
+            12672,
+            12864,
+            13056,
+            13248,
+            13440,
+            13632,
+            13824,
+            14016,
+            14208
+          ]
+        },
+        "ETTh2_H720": {
+          "mase": 1.3602913618087769,
+          "smape": 0.4447728395462036,
+          "n_origins": 4,
+          "origins": [
+            11520,
+            12240,
+            12960,
+            13680
+          ]
+        },
+        "macro_mase": 1.0457530915737152,
+        "macro_smape": 0.3089703656733036
+      },
+      "payload": {
+        "weights_bytes": 18044096,
+        "metadata_bytes": 670,
+        "adaptation_bytes": 18044766
+      },
+      "selected": [
+        "block.0.layer.0.SelfAttention.v",
+        "block.1.layer.0.SelfAttention.o",
+        "block.2.layer.0.SelfAttention.o",
+        "block.11.layer.0.SelfAttention.v"
+      ],
+      "train_updates": 18,
+      "dsic_shared_updates_amortized": 12,
+      "dsic_validation_examples_amortized": 6400,
+      "dsic_wall_s_amortized": 205.37070292299995,
+      "training_examples": 480,
+      "train_wall_s": 56.00476552600003,
+      "inference_latency": {
+        "n_single_example_runs": 20,
+        "p50_seconds": 0.11028821550030443,
+        "p95_seconds": 0.11821929464988444,
+        "examples_per_second_at_p50": 9.067151875326514
+      },
+      "active_compute_proxy_by_role": {
+        "ETTh1_H192": {
+          "approx_backbone_macs_per_example": 5511315456,
+          "selected_lora_macs_per_example": 9437184,
+          "projdown_head_macs_per_example": 5898240,
+          "mirror_elementary_ops_per_example": 512
+        },
+        "ETTh1_H720": {
+          "approx_backbone_macs_per_example": 5511315456,
+          "selected_lora_macs_per_example": 9437184,
+          "projdown_head_macs_per_example": 9142272,
+          "mirror_elementary_ops_per_example": 512
+        },
+        "ETTh2_H192": {
+          "approx_backbone_macs_per_example": 5511315456,
+          "selected_lora_macs_per_example": 9437184,
+          "projdown_head_macs_per_example": 5898240,
+          "mirror_elementary_ops_per_example": 512
+        },
+        "ETTh2_H720": {
+          "approx_backbone_macs_per_example": 5511315456,
+          "selected_lora_macs_per_example": 9437184,
+          "projdown_head_macs_per_example": 9142272,
+          "mirror_elementary_ops_per_example": 512
+        }
+      }
+    },
+    "pooled_trace_mirror": {
+      "metrics": {
+        "ETTh1_H192": {
+          "mase": 0.7639310956001282,
+          "smape": 0.16782249510288239,
+          "n_origins": 15,
+          "origins": [
+            11520,
+            11712,
+            11904,
+            12096,
+            12288,
+            12480,
+            12672,
+            12864,
+            13056,
+            13248,
+            13440,
+            13632,
+            13824,
+            14016,
+            14208
+          ]
+        },
+        "ETTh1_H720": {
+          "mase": 0.7088152170181274,
+          "smape": 0.15443632006645203,
+          "n_origins": 4,
+          "origins": [
+            11520,
+            12240,
+            12960,
+            13680
+          ]
+        },
+        "ETTh2_H192": {
+          "mase": 1.3540546894073486,
+          "smape": 0.4703516364097595,
+          "n_origins": 15,
+          "origins": [
+            11520,
+            11712,
+            11904,
+            12096,
+            12288,
+            12480,
+            12672,
+            12864,
+            13056,
+            13248,
+            13440,
+            13632,
+            13824,
+            14016,
+            14208
+          ]
+        },
+        "ETTh2_H720": {
+          "mase": 1.3731663227081299,
+          "smape": 0.4489462375640869,
+          "n_origins": 4,
+          "origins": [
+            11520,
+            12240,
+            12960,
+            13680
+          ]
+        },
+        "macro_mase": 1.0499918311834335,
+        "macro_smape": 0.3103891722857952
+      },
+      "payload": {
+        "weights_bytes": 18044096,
+        "metadata_bytes": 672,
+        "adaptation_bytes": 18044768
+      },
+      "selected": [
+        "block.0.layer.0.SelfAttention.v",
+        "block.1.layer.0.SelfAttention.o",
+        "block.2.layer.0.SelfAttention.o",
+        "block.11.layer.0.SelfAttention.v"
+      ],
+      "train_updates": 18,
+      "dsic_shared_updates_amortized": 12,
+      "dsic_validation_examples_amortized": 6400,
+      "dsic_wall_s_amortized": 205.37070292299995,
+      "training_examples": 480,
+      "train_wall_s": 51.23401321900019,
+      "inference_latency": {
+        "n_single_example_runs": 20,
+        "p50_seconds": 0.11152800850004496,
+        "p95_seconds": 0.13364825259980082,
+        "examples_per_second_at_p50": 8.966357540577771
+      },
+      "active_compute_proxy_by_role": {
+        "ETTh1_H192": {
+          "approx_backbone_macs_per_example": 5511315456,
+          "selected_lora_macs_per_example": 9437184,
+          "projdown_head_macs_per_example": 5898240,
+          "mirror_elementary_ops_per_example": 1536
+        },
+        "ETTh1_H720": {
+          "approx_backbone_macs_per_example": 5511315456,
+          "selected_lora_macs_per_example": 9437184,
+          "projdown_head_macs_per_example": 9142272,
+          "mirror_elementary_ops_per_example": 1536
+        },
+        "ETTh2_H192": {
+          "approx_backbone_macs_per_example": 5511315456,
+          "selected_lora_macs_per_example": 9437184,
+          "projdown_head_macs_per_example": 5898240,
+          "mirror_elementary_ops_per_example": 1536
+        },
+        "ETTh2_H720": {
+          "approx_backbone_macs_per_example": 5511315456,
+          "selected_lora_macs_per_example": 9437184,
+          "projdown_head_macs_per_example": 9142272,
+          "mirror_elementary_ops_per_example": 1536
+        }
+      }
+    },
+    "moment_linear_probe_ETTh1_H192": {
+      "metrics": {
+        "ETTh1_H192": {
+          "mase": 0.7958768606185913,
+          "smape": 0.16754800081253052,
+          "n_origins": 15,
+          "origins": [
+            11520,
+            11712,
+            11904,
+            12096,
+            12288,
+            12480,
+            12672,
+            12864,
+            13056,
+            13248,
+            13440,
+            13632,
+            13824,
+            14016,
+            14208
+          ]
+        },
+        "macro_mase": 0.7958768606185913,
+        "macro_smape": 0.16754800081253052
+      },
+      "adaptation_bytes": 37749866,
+      "train_updates": 30,
+      "training_examples": 120,
+      "train_wall_s": 16.373191406999922,
+      "inference_latency": {
+        "n_single_example_runs": 5,
+        "p50_seconds": 0.11954273300034401,
+        "p95_seconds": 0.14614707559985618,
+        "examples_per_second_at_p50": 8.365209451896355
+      },
+      "active_compute_proxy": {
+        "approx_backbone_macs_per_example": 5511315456,
+        "linear_probe_head_macs_per_example": 9437184
+      }
+    },
+    "moment_linear_probe_ETTh1_H720": {
+      "metrics": {
+        "ETTh1_H720": {
+          "mase": 0.7429921627044678,
+          "smape": 0.16631120443344116,
+          "n_origins": 4,
+          "origins": [
+            11520,
+            12240,
+            12960,
+            13680
+          ]
+        },
+        "macro_mase": 0.7429921627044678,
+        "macro_smape": 0.16631120443344116
+      },
+      "adaptation_bytes": 141561010,
+      "train_updates": 30,
+      "training_examples": 120,
+      "train_wall_s": 17.119969930000025,
+      "inference_latency": {
+        "n_single_example_runs": 5,
+        "p50_seconds": 0.11205521300007604,
+        "p95_seconds": 0.11538338000018485,
+        "examples_per_second_at_p50": 8.924172050784655
+      },
+      "active_compute_proxy": {
+        "approx_backbone_macs_per_example": 5511315456,
+        "linear_probe_head_macs_per_example": 35389440
+      }
+    },
+    "moment_linear_probe_ETTh2_H192": {
+      "metrics": {
+        "ETTh2_H192": {
+          "mase": 1.332221269607544,
+          "smape": 0.4713384509086609,
+          "n_origins": 15,
+          "origins": [
+            11520,
+            11712,
+            11904,
+            12096,
+            12288,
+            12480,
+            12672,
+            12864,
+            13056,
+            13248,
+            13440,
+            13632,
+            13824,
+            14016,
+            14208
+          ]
+        },
+        "macro_mase": 1.332221269607544,
+        "macro_smape": 0.4713384509086609
+      },
+      "adaptation_bytes": 37749869,
+      "train_updates": 30,
+      "training_examples": 120,
+      "train_wall_s": 13.235122376999698,
+      "inference_latency": {
+        "n_single_example_runs": 5,
+        "p50_seconds": 0.14237699999966935,
+        "p95_seconds": 0.3568609185999776,
+        "examples_per_second_at_p50": 7.023606340928116
+      },
+      "active_compute_proxy": {
+        "approx_backbone_macs_per_example": 5511315456,
+        "linear_probe_head_macs_per_example": 9437184
+      }
+    },
+    "moment_linear_probe_ETTh2_H720": {
+      "metrics": {
+        "ETTh2_H720": {
+          "mase": 1.3939095735549927,
+          "smape": 0.4571206867694855,
+          "n_origins": 4,
+          "origins": [
+            11520,
+            12240,
+            12960,
+            13680
+          ]
+        },
+        "macro_mase": 1.3939095735549927,
+        "macro_smape": 0.4571206867694855
+      },
+      "adaptation_bytes": 141561013,
+      "train_updates": 30,
+      "training_examples": 120,
+      "train_wall_s": 18.802807270999892,
+      "inference_latency": {
+        "n_single_example_runs": 5,
+        "p50_seconds": 0.10968883199984703,
+        "p95_seconds": 0.1304747568001403,
+        "examples_per_second_at_p50": 9.116698407376557
+      },
+      "active_compute_proxy": {
+        "approx_backbone_macs_per_example": 5511315456,
+        "linear_probe_head_macs_per_example": 35389440
+      }
+    },
+    "moment_linear_probe_reference": {
+      "metrics": {
+        "ETTh1_H192": {
+          "mase": 0.7958768606185913,
+          "smape": 0.16754800081253052,
+          "n_origins": 15,
+          "origins": [
+            11520,
+            11712,
+            11904,
+            12096,
+            12288,
+            12480,
+            12672,
+            12864,
+            13056,
+            13248,
+            13440,
+            13632,
+            13824,
+            14016,
+            14208
+          ]
+        },
+        "macro_mase": 1.3939095735549927,
+        "macro_smape": 0.4571206867694855,
+        "ETTh1_H720": {
+          "mase": 0.7429921627044678,
+          "smape": 0.16631120443344116,
+          "n_origins": 4,
+          "origins": [
+            11520,
+            12240,
+            12960,
+            13680
+          ]
+        },
+        "ETTh2_H192": {
+          "mase": 1.332221269607544,
+          "smape": 0.4713384509086609,
+          "n_origins": 15,
+          "origins": [
+            11520,
+            11712,
+            11904,
+            12096,
+            12288,
+            12480,
+            12672,
+            12864,
+            13056,
+            13248,
+            13440,
+            13632,
+            13824,
+            14016,
+            14208
+          ]
+        },
+        "ETTh2_H720": {
+          "mase": 1.3939095735549927,
+          "smape": 0.4571206867694855,
+          "n_origins": 4,
+          "origins": [
+            11520,
+            12240,
+            12960,
+            13680
+          ]
+        }
+      },
+      "macro_mase": 1.066249966621399,
+      "adaptation_bytes_sum": 358621758,
+      "train_wall_s_sum": 65.53109098499954
+    },
+    "specialist_ETTh1_H192": {
+      "metrics": {
+        "ETTh1_H192": {
+          "mase": 0.7542022466659546,
+          "smape": 0.16747848689556122,
+          "n_origins": 15,
+          "origins": [
+            11520,
+            11712,
+            11904,
+            12096,
+            12288,
+            12480,
+            12672,
+            12864,
+            13056,
+            13248,
+            13440,
+            13632,
+            13824,
+            14016,
+            14208
+          ]
+        },
+        "macro_mase": 0.7542022466659546,
+        "macro_smape": 0.16747848689556122
+      },
+      "payload": {
+        "weights_bytes": 5065312,
+        "metadata_bytes": 674,
+        "adaptation_bytes": 5065986
+      },
+      "selected": [
+        "block.5.layer.0.SelfAttention.v",
+        "block.6.layer.0.SelfAttention.v",
+        "block.8.layer.0.SelfAttention.o",
+        "block.9.layer.0.SelfAttention.v"
+      ],
+      "train_updates": 30,
+      "dsic_updates": 12,
+      "dsic_validation_examples": 160,
+      "dsic_wall_s": 52.13839126799985,
+      "training_examples": 120,
+      "train_wall_s": 10.864124316000016,
+      "inference_latency": {
+        "n_single_example_runs": 5,
+        "p50_seconds": 0.11802413500026887,
+        "p95_seconds": 0.15346499639990724,
+        "examples_per_second_at_p50": 8.472843287499815
+      },
+      "active_compute_proxy_by_role": {
+        "ETTh1_H192": {
+          "approx_backbone_macs_per_example": 5511315456,
+          "selected_lora_macs_per_example": 9437184,
+          "projdown_head_macs_per_example": 5898240,
+          "mirror_elementary_ops_per_example": 0
+        }
+      }
+    },
+    "specialist_ETTh1_H720": {
+      "metrics": {
+        "ETTh1_H720": {
+          "mase": 0.747402012348175,
+          "smape": 0.165518656373024,
+          "n_origins": 4,
+          "origins": [
+            11520,
+            12240,
+            12960,
+            13680
+          ]
+        },
+        "macro_mase": 0.747402012348175,
+        "macro_smape": 0.165518656373024
+      },
+      "payload": {
+        "weights_bytes": 18043552,
+        "metadata_bytes": 674,
+        "adaptation_bytes": 18044226
+      },
+      "selected": [
+        "block.1.layer.0.SelfAttention.o",
+        "block.2.layer.0.SelfAttention.v",
+        "block.6.layer.0.SelfAttention.o",
+        "block.8.layer.0.SelfAttention.o"
+      ],
+      "train_updates": 30,
+      "dsic_updates": 12,
+      "dsic_validation_examples": 160,
+      "dsic_wall_s": 45.35749053100017,
+      "training_examples": 120,
+      "train_wall_s": 12.146371473999807,
+      "inference_latency": {
+        "n_single_example_runs": 5,
+        "p50_seconds": 0.12236212800007706,
+        "p95_seconds": 0.17838317220039243,
+        "examples_per_second_at_p50": 8.17246329680839
+      },
+      "active_compute_proxy_by_role": {
+        "ETTh1_H720": {
+          "approx_backbone_macs_per_example": 5511315456,
+          "selected_lora_macs_per_example": 9437184,
+          "projdown_head_macs_per_example": 9142272,
+          "mirror_elementary_ops_per_example": 0
+        }
+      }
+    },
+    "specialist_ETTh2_H192": {
+      "metrics": {
+        "ETTh2_H192": {
+          "mase": 1.317793607711792,
+          "smape": 0.44696855545043945,
+          "n_origins": 15,
+          "origins": [
+            11520,
+            11712,
+            11904,
+            12096,
+            12288,
+            12480,
+            12672,
+            12864,
+            13056,
+            13248,
+            13440,
+            13632,
+            13824,
+            14016,
+            14208
+          ]
+        },
+        "macro_mase": 1.317793607711792,
+        "macro_smape": 0.44696855545043945
+      },
+      "payload": {
+        "weights_bytes": 5075560,
+        "metadata_bytes": 676,
+        "adaptation_bytes": 5076236
+      },
+      "selected": [
+        "block.0.layer.0.SelfAttention.o",
+        "block.3.layer.0.SelfAttention.o",
+        "block.3.layer.1.DenseReluDense.wo",
+        "block.4.layer.0.SelfAttention.o"
+      ],
+      "train_updates": 30,
+      "dsic_updates": 12,
+      "dsic_validation_examples": 160,
+      "dsic_wall_s": 43.48331787699999,
+      "training_examples": 120,
+      "train_wall_s": 12.436833001000196,
+      "inference_latency": {
+        "n_single_example_runs": 5,
+        "p50_seconds": 0.10927046699998755,
+        "p95_seconds": 0.11423828459992365,
+        "examples_per_second_at_p50": 9.15160360758881
+      },
+      "active_compute_proxy_by_role": {
+        "ETTh2_H192": {
+          "approx_backbone_macs_per_example": 5511315456,
+          "selected_lora_macs_per_example": 11403264,
+          "projdown_head_macs_per_example": 5898240,
+          "mirror_elementary_ops_per_example": 0
+        }
+      }
+    },
+    "specialist_ETTh2_H720": {
+      "metrics": {
+        "ETTh2_H720": {
+          "mase": 1.5150511264801025,
+          "smape": 0.5488143563270569,
+          "n_origins": 4,
+          "origins": [
+            11520,
+            12240,
+            12960,
+            13680
+          ]
+        },
+        "macro_mase": 1.5150511264801025,
+        "macro_smape": 0.5488143563270569
+      },
+      "payload": {
+        "weights_bytes": 18043552,
+        "metadata_bytes": 674,
+        "adaptation_bytes": 18044226
+      },
+      "selected": [
+        "block.0.layer.0.SelfAttention.o",
+        "block.1.layer.0.SelfAttention.o",
+        "block.8.layer.0.SelfAttention.o",
+        "block.9.layer.0.SelfAttention.o"
+      ],
+      "train_updates": 30,
+      "dsic_updates": 12,
+      "dsic_validation_examples": 160,
+      "dsic_wall_s": 44.33931087600013,
+      "training_examples": 120,
+      "train_wall_s": 12.285297162000006,
+      "inference_latency": {
+        "n_single_example_runs": 5,
+        "p50_seconds": 0.10932299300020532,
+        "p95_seconds": 0.1140234752001561,
+        "examples_per_second_at_p50": 9.147206571614097
+      },
+      "active_compute_proxy_by_role": {
+        "ETTh2_H720": {
+          "approx_backbone_macs_per_example": 5511315456,
+          "selected_lora_macs_per_example": 9437184,
+          "projdown_head_macs_per_example": 9142272,
+          "mirror_elementary_ops_per_example": 0
+        }
+      }
+    },
+    "independent_trace_reference": {
+      "metrics": {
+        "ETTh1_H192": {
+          "mase": 0.7542022466659546,
+          "smape": 0.16747848689556122,
+          "n_origins": 15,
+          "origins": [
+            11520,
+            11712,
+            11904,
+            12096,
+            12288,
+            12480,
+            12672,
+            12864,
+            13056,
+            13248,
+            13440,
+            13632,
+            13824,
+            14016,
+            14208
+          ]
+        },
+        "macro_mase": 1.5150511264801025,
+        "macro_smape": 0.5488143563270569,
+        "ETTh1_H720": {
+          "mase": 0.747402012348175,
+          "smape": 0.165518656373024,
+          "n_origins": 4,
+          "origins": [
+            11520,
+            12240,
+            12960,
+            13680
+          ]
+        },
+        "ETTh2_H192": {
+          "mase": 1.317793607711792,
+          "smape": 0.44696855545043945,
+          "n_origins": 15,
+          "origins": [
+            11520,
+            11712,
+            11904,
+            12096,
+            12288,
+            12480,
+            12672,
+            12864,
+            13056,
+            13248,
+            13440,
+            13632,
+            13824,
+            14016,
+            14208
+          ]
+        },
+        "ETTh2_H720": {
+          "mase": 1.5150511264801025,
+          "smape": 0.5488143563270569,
+          "n_origins": 4,
+          "origins": [
+            11520,
+            12240,
+            12960,
+            13680
+          ]
+        }
+      },
+      "macro_mase": 1.083612248301506,
+      "adaptation_bytes_sum": 46230674,
+      "train_wall_s_sum": 47.732625953000024,
+      "selected_by_role": {
+        "specialist_ETTh1_H192": [
+          "block.5.layer.0.SelfAttention.v",
+          "block.6.layer.0.SelfAttention.v",
+          "block.8.layer.0.SelfAttention.o",
+          "block.9.layer.0.SelfAttention.v"
+        ],
+        "specialist_ETTh1_H720": [
+          "block.1.layer.0.SelfAttention.o",
+          "block.2.layer.0.SelfAttention.v",
+          "block.6.layer.0.SelfAttention.o",
+          "block.8.layer.0.SelfAttention.o"
+        ],
+        "specialist_ETTh2_H192": [
+          "block.0.layer.0.SelfAttention.o",
+          "block.3.layer.0.SelfAttention.o",
+          "block.3.layer.1.DenseReluDense.wo",
+          "block.4.layer.0.SelfAttention.o"
+        ],
+        "specialist_ETTh2_H720": [
+          "block.0.layer.0.SelfAttention.o",
+          "block.1.layer.0.SelfAttention.o",
+          "block.8.layer.0.SelfAttention.o",
+          "block.9.layer.0.SelfAttention.o"
+        ]
+      }
+    },
+    "seasonal_naive": {
+      "ETTh1_H192": {
+        "mase": 1.3373935222625732,
+        "n_origins": 15
+      },
+      "ETTh1_H720": {
+        "mase": 1.3664976358413696,
+        "n_origins": 4
+      },
+      "ETTh2_H192": {
+        "mase": 2.3654494285583496,
+        "n_origins": 15
+      },
+      "ETTh2_H720": {
+        "mase": 2.354959487915039,
+        "n_origins": 4
+      },
+      "macro_mase": 1.8560750186443329
+    }
+  },
+  "wall_start_unix": 1795636578.9445791,
+  "elapsed_wall_s": 728.7111416870002,
+  "data": {
+    "ETTh1": {
+      "train": 8640,
+      "val": 11520,
+      "test": 14400,
+      "mase_scale": 0.27824803959455074,
+      "mean": 17.1282616982271,
+      "std": 9.176491024944333,
+      "raw_length": 17420,
+      "sha256": "f18de3ad269cef59bb07b5438d79bb3042d3be49bdeecf01c1cd6d29695ee066"
+    },
+    "ETTh2": {
+      "train": 8640,
+      "val": 11520,
+      "test": 14400,
+      "mase_scale": 0.262266246555353,
+      "mean": 26.872023494265697,
+      "std": 11.584718923414682,
+      "raw_length": 17420,
+      "sha256": "a3dc2c597b9218c7ce1cd55eb77b283fd459a1d09d753063f944967dd6b9218b"
+    }
+  }
+}
