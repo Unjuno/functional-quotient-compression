@@ -1,0 +1,246 @@
+{
+  "experiment_id": "MA-1058",
+  "title": "Chronos few-shot cold-start series identity View",
+  "status": "SCREENING",
+  "evidence_lane": "TIME_SERIES/COLD_START/QUALITY/STORAGE/COMPUTE",
+  "base_commit": "6f72ff2ce",
+  "prior_art_refs": [
+    "PA326",
+    "PA332"
+  ],
+  "hypothesis": "On series identities excluded entirely from shared-code training, one frozen Chronos-T5-Tiny plus a single shared rank-2 lm_head LoRA basis and one few-shot series coordinate m_s can improve future-horizon MASE over zero-shot and pooled LoRA by at least 2%, while using under 10% of the per-series rank-2 LoRA payload. A per-series two-coefficient direct residual and independent rank-2 adapters establish how much private state is needed.",
+  "physical_object": "One frozen official amazon/chronos-t5-tiny checkpoint and a rank-1 output-logit LoRA basis shared across series.",
+  "mirror_coordinate": "One scalar angle m_s per series, inferred by minimizing teacher-forced support token NLL on six short forecast windows; it rotates a shared rank-2 LoRA latent. A direct two-coefficient update is the private-coordinate control; no support-selected fallback behavior is claimed.",
+  "logical_multiplicity": "Few-shot adaptive forecasters for held-out traffic sensor series from one physical Chronos model and one shared LoRA basis.",
+  "model": {
+    "id": "amazon/chronos-t5-tiny",
+    "revision": "29d808298f1a62493e7b9a5e08529d0d930fa189",
+    "implementation": "chronos-forecasting==1.5.3",
+    "precision": "CPU float32",
+    "forecast_samples": 32,
+    "context_length": 288,
+    "forecast_horizon": 12,
+    "frequency": "5-minute",
+    "updates": "No base-model updates; shared rank-1 LoRA training on fit sensors only, then per-series support adaptation.",
+    "libraries": {
+      "chronos_forecasting": "1.5.3",
+      "transformers": "4.46.3",
+      "torch": "2.14.1+cpu",
+      "h5py": "3.16.0"
+    }
+  },
+  "data": {
+    "repository": "jimmygao3218/PEMSBAY",
+    "revision": "c858397fb381d82c3d55ad0a81beb51a9bb9bdaa",
+    "file": "PEMS-BAY.h5",
+    "source_sensor_ids": {
+      "fit": [
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37
+      ],
+      "development": [
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "audit": [
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77
+      ],
+      "discarded_after_accidental_finiteness_screen": [
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61
+      ]
+    },
+    "disjoint_from_prior_ma_series": [
+      [
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21
+      ]
+    ],
+    "selection_rule": "Freeze the explicit stored sensor ID lists above before accessing their values. Fail/NOT ESTABLISHED if an ID is absent or any series has non-finite values.",
+    "episode": "For each sensor, the first 60% chronological target range supplies six support windows spaced across the range; the final 20% supplies three chronological non-overlapping query windows. Context is 288 steps; each query horizon is 12 steps. Development sensors choose rank/regularization/update count and private-state gate; audit query labels are never used for adaptation or fallback selection.",
+    "normalization": "No validation/test statistics. Chronos native context scaling; MASE lag-1 denominator is calculated from the first 60% prefix only. Also report persistence; seasonal-naive is allowed only when all compared methods have \u2265288 context observations.",
+    "audit_series_rule_amendment": "Before the audit protocol was frozen, an exploratory pandas load checked only finiteness of stored sensor positions 22\u201361; this exposed no target metrics but did touch finite/nonfinite state for proposed IDs 46\u201361. Those IDs are excluded entirely. Audit is reset to IDs 62\u201377, which were not read or inspected. All future phase-specific loading uses HDF column hyperslabs, never whole-frame reads."
+  },
+  "controls": [
+    "Frozen Chronos zero-shot",
+    "Pooled rank-2 lm_head LoRA shared across all series, no series code",
+    "Shared rank-2 LoRA basis plus learned one-scalar per-series Mirror coordinate m_s",
+    "Byte-near per-series diagonal gain on the same shared LoRA feature",
+    "Per-series independent rank-2 lm_head LoRA fit with identical six support windows (upper control)",
+    "Persistence and 24-hour seasonal-naive where applicable",
+    "Optional one-scalar private residual rule, selected using two support-only folds under a dev-frozen threshold"
+  ],
+  "development": {
+    "fit_series_ids": [
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37
+    ],
+    "selection_series_ids": [
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45
+    ],
+    "selection_metric": "macro MASE on development future query windows; tie-break on serialized adaptation payload bytes",
+    "support_targets_per_series": 6,
+    "queries_per_series": 3,
+    "allowed_changes": [
+      "LoRA rank from [1,2] on fit/dev only",
+      "ridge/weight decay from [0.0,0.01,0.1]",
+      "fixed optimizer updates from [10,30,60]",
+      "private residual gate threshold from dev support folds only"
+    ]
+  },
+  "fresh": {
+    "audit_series_ids": [
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77
+    ],
+    "locked_before_access": true,
+    "support_targets_per_series": 6,
+    "query_windows_per_series": 3,
+    "sampling_seeds": [
+      105803,
+      105804
+    ],
+    "query_labels_used_for_adaptation": false
+  },
+  "metrics": {
+    "primary": "per-series MASE, macro and worst quartile",
+    "secondary": [
+      "MASE per sensor",
+      "support-to-query degradation",
+      "fallback/private-residual fraction",
+      "32-sample CRPS",
+      "actual serialized bytes",
+      "CPU fit wall time and query latency"
+    ]
+  },
+  "storage": {
+    "authority": "Actual serialized inference payload bytes",
+    "paid_objects": [
+      "shared Chronos checkpoint, model/config/generation config",
+      "shared LoRA A/B factors and any scaling",
+      "per-series m code",
+      "private residuals only when selected",
+      "series ID map and decoder metadata",
+      "any task normalization state required at inference"
+    ],
+    "report_shared_checkpoint_once": true
+  },
+  "compute": {
+    "report_examples_and_target_tokens": true,
+    "report_optimizer_updates": true,
+    "report_active_token_flops_proxy": true,
+    "report_fit_and_adaptation_wall_clock": true,
+    "report_query_latency": true,
+    "cpu_threads": 4
+  },
+  "success_gate": "On audit series, Mirror improves macro MASE \u22652% over both Chronos zero-shot and pooled LoRA, is within 5% of independent per-series rank-2 LoRA, uses <10% of independent adaptation bytes, and beats same-cost diagonal-gain control by >0.1%; all serialized replay checks pass.",
+  "failure_gate": "Mirror misses any quality/storage gate, a same-cost ordinary diagonal gain matches it within 0.1%, or per-series full/independent controls show that one-dimensional m lacks needed functional freedom.",
+  "not_established_gate": "Pinned model/data inaccessible, API cannot support deterministically trainable shared rank-1 lm_head adapter and exact inference, or required per-series control cannot be reproduced.",
+  "boundaries": [
+    "PEMS-BAY is one network and same timestamp range as MA-1057, though sensor IDs are disjoint; not an independent dataset family.",
+    "Chronos pretraining overlap with PEMS-BAY is unknown.",
+    "Sensor IDs are held out as complete series from adapter-basis training; support observations on each audit series are allowed only for few-shot adaptation.",
+    "No capacity claim from logical combinations; report task quality, bytes and runtime.",
+    "MA-1058 tests series identity adaptation, not the mixed-rate calibration tested in MA-1057.",
+    "A full two-coefficient per-series update is treated as the private-coordinate boundary control; no conditional fallback-selection policy is tested."
+  ],
+  "amendments": [
+    {
+      "id": "AM-01",
+      "timing": "Before model fitting, development metrics, and audit freeze",
+      "reason": "Exploratory finite-value screening accidentally inspected finite flags for proposed audit sensor IDs 46\u201361.",
+      "change": "Discard IDs 46\u201361 and use audit IDs 62\u201377, never inspected previously. Keep fit 22\u201337 and dev 38\u201345. Implement column-selective HDF access.",
+      "impact": "No forecasts, target errors, or benchmark metrics were computed for discarded audit sensors. They remain unused. The audit set is unaccessed."
+    }
+  ]
+}
