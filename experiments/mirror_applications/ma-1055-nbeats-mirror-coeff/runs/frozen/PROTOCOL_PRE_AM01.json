@@ -1,0 +1,68 @@
+{
+  "experiment_id": "MA-1055",
+  "title": "N-BEATS shared seasonality basis with factorized phase coordinates",
+  "status": "SCREENING",
+  "evidence_lane": "MECHANISM",
+  "base_commit": "caf7ff192",
+  "hypothesis": "A series-family plus calendar-regime additive phase address over a shared N-BEATS seasonal basis improves held-out role MASE over native shared coefficients, matched additive gain and common time shift, while using fewer role parameters than a flat per-role phase table.",
+  "physical_object": "Pinned ServiceNow N-BEATS shared blocks and harmonic basis coefficients",
+  "mirror_coordinate": "Additive factorized per-frequency phase shifts indexed by series-family and weekday/weekend regime",
+  "logical_multiplicity": "Series x calendar-regime forecast functions from shared seasonal basis and role code",
+  "prior_art_refs": ["PA335"],
+  "source": {
+    "repository": "https://github.com/ServiceNow/N-BEATS",
+    "commit": "c746a4f13ffc957487e0c3279b182c3030836053",
+    "file": "models/nbeats.py",
+    "sha256_before_compat_patch": "8c96405934dcb113c04378eb5944d865f69c67aaeaa2b1e8c49b0702f5818bdf",
+    "compatibility_patch": "In isolated vendored copy, replace np.float with float for NumPy 2; record resulting patched source hash in verification."
+  },
+  "data": {
+    "dataset": "ETTm1.csv",
+    "dataset_provenance": "Reused from MA-1050, previously evaluated; disclose as temporal role holdout, not fresh dataset evidence.",
+    "channels": ["HUFL", "HULL", "MUFL", "MULL"],
+    "context": 512,
+    "horizon": 96,
+    "target_origin_definition": "target_start; every target interval [target_start,target_start+horizon) must lie entirely inside its registered split",
+    "scale": "Per-channel training-only mean/std; MASE denominator uses training seasonal lag 96",
+    "roles": ["channel-family x weekday/weekend"],
+    "split": "Chronological 60% train, next 20% development, final 20% audit; purge context+horizon at each boundary; audit cells are held from fit and development selection."
+  },
+  "model": {
+    "stack": "N-BEATS interpretable stack: 3 trend blocks and 3 seasonality blocks, 2 layers/block, width 128, Adam, batch size 32, 300 updates per model per seed",
+    "basis": "Official TrendBasis degree 2 and SeasonalityBasis harmonics=3 with the upstream theta chunk ordering.",
+    "mirror_operator": "Rotate forecast harmonic coefficient (cos_f,sin_f) pairs together for non-DC frequencies; do not rotate adjacent theta entries. For role c,r and band b, delta=delta_series[c,b]+delta_regime[r,b]. Preserve trend, DC, all backcasts and native network output.",
+    "phase_bands": "fixed low/high frequency split at the median non-DC harmonic index; learn two phase values per series factor and two per regime factor (12 scalars total).",
+    "seeds": [105501, 105502, 105503]
+  },
+  "controls": [
+    "Official native N-BEATS per-role training (unrestricted independent role upper control)",
+    "N-BEATS shared across roles, no role address",
+    "Shared N-BEATS plus matched 2(C+R) additive log-gain seasonal coefficient control",
+    "Shared N-BEATS plus one common phase per band",
+    "Shared N-BEATS plus factorized series+regime phase address",
+    "Shared N-BEATS plus flat independent role phase table"
+  ],
+  "development": {
+    "worlds_or_seeds": [105501],
+    "selection_metric": "Development MASE is a one-seed protocol calibration only; phase initialization scale is fixed at 0.25 radians, gain scale at 0.05, and no hyperparameter grid is searched.",
+    "limits": "No audit predictions or metrics are accessed before source, split checks, control definitions, and selection choices are frozen."
+  },
+  "fresh": {
+    "worlds_or_seeds": [105502, 105503],
+    "locked_before_access": true,
+    "audit": "Final chronological segment and held-out channel x calendar cells; no audit-based tuning."
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": ["shared block weights", "basis and model metadata", "role ids", "phase/gain codes", "private role weights when applicable", "container serialization metadata"]
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true
+  },
+  "success_gate": "On untouched held-out role cells, factorized phase improves pooled MASE by at least 2% over hard-share, matched gain and common-shift in at least 2/3 seeds, seen-role MASE degrades no more than 2%, and role-state bytes are less than flat phase with full serialized bundle no larger than independent models.",
+  "failure_gate": "Any success-gate criterion fails, or the Mirror coordinate aliases a matched native/simple parameterization without state or quality benefit.",
+  "boundaries": ["Single benchmark dataset reused from a prior MA; no independent-world claim.", "Fixed-budget screen only; no capacity claim.", "Harmonic phase rotation is representable by native N-BEATS coefficients."]
+}

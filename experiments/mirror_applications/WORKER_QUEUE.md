@@ -1,4 +1,8 @@
-## Current handoff — 2026-11-25, MA-1053 complete
+## Current handoff — 2026-11-25, MA-1055 complete
+
+MA-1055 is a scoped FAIL on pinned ServiceNow N-BEATS. Two fresh ETTm2 channel-holdout seeds: factorized phase macro MASE 2.264272 vs 2.275778 hard share, 2.281254 matched gain, and 2.229177 common phase. The 0.51% improvement vs hard share misses the 2% gate; payload is 4,974,395 B vs 4,973,697 B shared and 4,974,078 B flat phase. Twelve actual serialized checkpoints and independent MASE replay/hash verification pass. A first dev runner accidentally emitted ETTm1 audit output; it was retained as invalidated, not used for tuning, and audit moved to ETTm2 non-OT channels before fresh access. Fixed-budget CPU screen, no capacity claim. See `ma-1055-nbeats-mirror-coeff/RESULTS.md`. Continue at P0 MA-1056 DLinear periodic View (PA336); MA-1054 is P1.
+
+## Previous handoff — 2026-11-25, MA-1053 complete
 
 MA-1053 is a scoped FAIL on pinned MOMENT-1-base. ETTm2 audit MASE .920243 Mirror vs .917809 diagonal; ECG5000 accuracy .831778 vs .850000 diagonal and .867556 native; one-event tiltAPB2 point F1 .046243 vs .044901 diagonal, while AUPRC .015390 vs .015931. Adaptation payload 888,101 B vs 887,940 B hard sharing and 1,084,711 B independent rank-32; full-bundle difference vs independent only .043%. Three tests, native pre-head parity and independent serialized metric replay pass. CPU-only, one seed/task, no capacity claim. See `ma-1053-moment-task-codes/RESULTS.md`. Continue at eligible P0 MA-1055 N-BEATS shared basis + Mirror coefficient (PA335); MA-1054 is P1.
 
