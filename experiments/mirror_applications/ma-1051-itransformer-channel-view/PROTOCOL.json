@@ -1,0 +1,79 @@
+{
+  "experiment_id": "MA-1051",
+  "title": "iTransformer channel-conditioned Mirror residual",
+  "status": "FROZEN_SCREENING_PROTOCOL",
+  "evidence_lane": "MECHANISM",
+  "base_commit": "809064d50",
+  "hypothesis": "On held-out future windows of a distinct multi-sensor dataset, two per-sensor Givens coordinates on iTransformer variate tokens improve macro standardized MSE by at least 2% over shared cross-variate attention and beat byte-matched diagonal FiLM, without reducing robustness when input sensors are ablated.",
+  "physical_object": "One shared iTransformer variate-token embedding, cross-variable attention trunk and forecast head",
+  "mirror_coordinate": "Per-sensor angle and log-gain applied as a 2D rotation-scale to the first two hidden coordinates of each variate token before cross-variable attention",
+  "logical_multiplicity": "Sensor-conditioned forecasts while retaining attention across available variate tokens",
+  "prior_art_refs": [
+    "PA331"
+  ],
+  "controls": [
+    "shared iTransformer trunk with no coordinates",
+    "two-value per-sensor diagonal FiLM on first two token coordinates",
+    "independent per-sensor iTransformer upper reference"
+  ],
+  "data": {
+    "source": "jimmygao3218/PEMS07",
+    "revision": "e071fab0481c3db4eeb4193e79d821220b7b5bff",
+    "file": "PEMS07.npz",
+    "selection": "first 16 stored sensor channels; scalar sensor reading only, no semantic units asserted",
+    "split": "chronological 60/20/20; context 96, horizon 24; 48 evenly spaced train origins, 12 development origins, 12 audit origins",
+    "sha256": "a07887e610aa986276209bc9384d14ed7858fdcad1ded67f53dca19eb828600b",
+    "size_bytes": 43705518
+  },
+  "model": {
+    "implementation": "iTransformer variate tokenization and cross-variable attention; reduced CPU configuration trained from scratch",
+    "config": {
+      "context": 96,
+      "horizon": 24,
+      "channels": 16,
+      "d_model": 32,
+      "heads": 4,
+      "layers": 2,
+      "dropout": 0
+    },
+    "seed": 105101,
+    "training": "same initialization for shared variants; AdamW lr 0.001, batch 16 windows, 12 epochs fixed, same origins/order"
+  },
+  "development": {
+    "worlds_or_seeds": [
+      105101
+    ],
+    "selection_metric": "macro standardized MSE on development origins; no hyperparameter changes after audit begins"
+  },
+  "fresh": {
+    "worlds_or_seeds": [
+      105101
+    ],
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": [
+      "shared trunk state_dict",
+      "per-sensor Mirror or FiLM coordinates",
+      "channel map and model metadata",
+      "serialization container overhead"
+    ]
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true
+  },
+  "success_gate": "Mirror improves audit standardized MSE by >=2% over hard sharing and matched FiLM, passes sensor-input ablation non-inferiority within 2%, and is smaller than independent per-sensor payload.",
+  "failure_gate": "Mirror fails the 2% quality gate, FiLM matches/beats it, or sensor ablation degrades >2% versus shared baseline.",
+  "boundaries": [
+    "one seed and fixed budget do not establish capacity",
+    "CPU-scale iTransformer is not a full official benchmark reproduction",
+    "source README supplies scalar sensor readings without semantic units; no units or semantic meaning claimed",
+    "one dataset and 16 sensor channels only",
+    "no accelerator runtime claim",
+    "data file hash/shape were inspected as a schema-feasibility check before protocol was re-persisted after executor workspace reconnection; no model outputs or audit metrics were accessed"
+  ]
+}

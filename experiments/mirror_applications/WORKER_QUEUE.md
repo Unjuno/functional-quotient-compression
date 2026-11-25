@@ -40,6 +40,13 @@ MA-990 official MERL RANF code was located, but the required SONICOM HRTF subjec
 
 # Worker queue
 
+## Current handoff — 2026-11-25, MA-1051
+
+MA-1051 scoped FAIL on fresh-to-this-series PEMS07, first 16 sensor channels. One-seed, 12-epoch iTransformer-style cross-variate screen: audit standardized MSE .212196 Mirror, .212165 hard share, .212180 FiLM. Mirror payload 93,244 B vs shared 92,863 B. Sensor-input ablation is within 0.067% of shared, so robustness gate passes but quality gate fails. Independent per-sensor reference is 1,484,343 B and worse in this setup. Three tests and serialized-weight audit replay pass (max delta 6.21e-9). Reduced CPU implementation, not full official iTransformer reproduction; fixed-budget only. See `ma-1051-itransformer-channel-view/RESULTS.md`. Continue sequentially to P0 MA-1052 TRACE selected-LoRA task code (PA332).
+
+Previous: MA-1050 is a scoped FAIL: the reduced CPU multiscale mixer screen scored audit MSE .044012 Mirror vs .043438 hard share and .043244 additive; Mirror bundle is 252 B larger than hard share. Two tests pass; no official full TimeMixer reproduction. See `ma-1050-timemixer-timescale-view/RESULTS.md`. MA-1049 remains NOT ESTABLISHED because the pinned PEMS08 source has no channel semantics; see `ma-1049-patchtst-variate-view/EXECUTION_BLOCKER.md`.
+
+
 ## Previous handoff — 2026-11-15, MA-1049
 
 MA-1049 NOT ESTABLISHED before fitting: pinned PEMS08 source has unnamed `(17856,170,3)` series and an edge-cost CSV, with no channel semantics for speed. No model was fit or audit opened. See `ma-1049-patchtst-variate-view/EXECUTION_BLOCKER.md`.

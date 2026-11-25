@@ -6,11 +6,11 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 ## Program totals (reconciled from authoritative 1155-row registry)
 
 - Registered candidates: **1155**
-- Claim ledger entries: **472**
-- P0: **630** (388 FAIL; 54 PROMISING; 177 UNTESTED; 11 NOT ESTABLISHED; 1 SCREENING)
+- Claim ledger entries: **473**
+- P0: **630** (389 FAIL; 54 PROMISING; 176 UNTESTED; 11 NOT ESTABLISHED; 1 SCREENING)
 - P1: **422** (17 completed; 405 UNTESTED)
 - P2: **103** (103 UNTESTED)
-- Current MA statuses: **396 FAIL, 11 NOT ESTABLISHED, 63 PROMISING, 1 SCREENING, 684 UNTESTED**
+- Current MA statuses: **397 FAIL, 11 NOT ESTABLISHED, 63 PROMISING, 1 SCREENING, 683 UNTESTED**
 - 47 baseline experiment directories remain present; verified external outcomes are linked to their dedicated branches in the registry and claim ledger.
 - New research: MA-876..935 (60 candidates), PA236..PA265 (30 primary sources). See the current Next candidate section for the live queue.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. see the current Next candidate section.
@@ -23,8 +23,7 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 - SRM/TM and prior Phase I results are not MA statuses.
 
 ## Next candidate
-
-MA-1046 is a scoped FAIL: Chronos distribution View loses on fresh Weather and Australian Electricity; normalized-Hermite aliases it. MA-1047 is a scoped FAIL: TimesFM 2.5 factorized domain×horizon affine MASE 2.2767/4.5948 vs native 2.2744/4.0873; H100 latency NOT ESTABLISHED. MA-1048 is a scoped FAIL on pinned PEMS-BAY: factorized Moirai frequency×sensor CRPS 13.994/85.062 vs zero-shot 4.074/4.039; additive control aliases within 0.02%. It is 128 B vs 120 B additive and only saves 96 B vs the independent table in a 55.3 MB checkpoint. Four tests/replay pass. See branch research/ma-1048-moirai-frequency-variate-view-20261115 and experiments/mirror_applications/ma-1048-moirai-frequency-variate-view/RESULTS.md. MA-1049 is NOT ESTABLISHED before fitting: the pinned PEMS08 source supplies a 17,856×170×3 unnamed array and a separate edge-cost CSV; no documented speed channel exists, so no channel was selected after inspection. The frozen PatchTST comparison did not run. See `ma-1049-patchtst-variate-view/EXECUTION_BLOCKER.md`. Next P0: MA-1050 (TimeMixer seasonal-timescale View).
+MA-1046 is a scoped FAIL: Chronos distribution View loses on fresh Weather and Australian Electricity; normalized-Hermite aliases it. MA-1047 is a scoped FAIL: TimesFM factorized domain×horizon affine MASE 2.2767/4.5948 vs native 2.2744/4.0873; H100 latency NOT ESTABLISHED. MA-1048 is a scoped FAIL: Moirai factorized frequency×sensor CRPS 13.994/85.062 vs zero-shot 4.074/4.039, with additive control aliasing within 0.02%. MA-1049 is NOT ESTABLISHED: pinned PEMS08 source lacks documented channel semantics, so no model was fit. MA-1050 is a scoped FAIL: reduced CPU multiscale mixer audit MSE .044012 Mirror vs .043438 hard share and .043244 additive; not a full official TimeMixer reproduction. MA-1051 is a scoped FAIL: reduced CPU iTransformer-style PEMS07 audit MSE .212196 Mirror vs .212165 shared and .212180 FiLM; complete payload 93,244 B vs 92,863 B shared, sensor ablation within 0.067%. Three replay/byte tests pass. See `ma-1051-itransformer-channel-view/RESULTS.md`. Next sequential P0 candidate: MA-1052 TRACE selected-LoRA modules plus Mirror task code (PA332).
 
 Previous: MA-1033 is complete as a scoped frozen CLIP ViT-B/32 class×domain composition FAIL: Mirror averages 86.25% held-out-cell accuracy vs 86.67% additive and shared across three fresh image seeds; it wins one seed and loses two against additive. Learned payload 1,580,814 B vs 1,744,542 B independent cells (9.39%, below the 25% gate); complete-bundle saving only 0.0268%. Exact serialization/data/metric replay and three tests pass. No official prompt-learning reproduction. See `experiments/mirror_applications/ma-1033-class-domain-prompt-mirror/RESULTS.md`.
 

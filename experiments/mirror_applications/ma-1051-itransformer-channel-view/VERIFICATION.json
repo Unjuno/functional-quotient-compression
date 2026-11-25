@@ -1,0 +1,46 @@
+{
+  "experiment_id": "MA-1051",
+  "status": "FAIL",
+  "commit": null,
+  "source": {
+    "repo": "jimmygao3218/PEMS07",
+    "revision": "e071fab0481c3db4eeb4193e79d821220b7b5bff",
+    "file_bytes": 43705518,
+    "sha256": "a07887e610aa986276209bc9384d14ed7858fdcad1ded67f53dca19eb828600b",
+    "shape": [
+      28224,
+      883,
+      1
+    ]
+  },
+  "protocol_frozen_before_metric_access": true,
+  "source_schema_inspected_before_protocol_persisted_after_executor_reconnect": true,
+  "development_audit_disjoint_chronological": true,
+  "optimizer_updates": {
+    "film": 36,
+    "independent": 576,
+    "mirror": 36,
+    "shared": 36
+  },
+  "serialization": {
+    "roundtrip_checked": true,
+    "payload_manifest": "runs/payload_manifest.json",
+    "mirror_vs_shared_delta_bytes": 381
+  },
+  "metric_replay": {
+    "checked": true,
+    "max_abs_difference": 6.2088171548513316e-09,
+    "saved_predictions_replayed_from_serialized_weights": true
+  },
+  "tests": {
+    "command": "python -m pytest -q experiments/mirror_applications/ma-1051-itransformer-channel-view/tests/test_replay.py",
+    "passed": 3,
+    "failed": 0
+  },
+  "notes": [
+    "single seed, 12 epochs; not a capacity claim",
+    "reduced CPU iTransformer-style implementation, not full official benchmark reproduction",
+    "PEMS07 raw NPZ is downloaded by source script when absent and excluded from Git; pinned revision+hash recorded",
+    "independent reference trains 16 univariate models and does not retain cross-variable attention"
+  ]
+}

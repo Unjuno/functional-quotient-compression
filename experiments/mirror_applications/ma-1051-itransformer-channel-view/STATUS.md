@@ -1,0 +1,1 @@
+MA-1051 scoped FAIL: Mirror audit standardized MSE does not beat hard sharing or FiLM; complete payload is 381 B larger than shared. Sensor-input ablation is essentially unchanged relative to shared (within the frozen 2% bound). Exact saved-weight metric replay passed within 6.3e-9; 3 tests pass. No capacity claim; see RESULTS.md.
