@@ -1,0 +1,11 @@
+{
+  "experiment_id": "MA-1065",
+  "attempt": "DEV01",
+  "phase": "development",
+  "status": "failed_after_training_before_result_persistence",
+  "cause": "The runner completed all method/seed training but did not create the runs directory before writing development.json.",
+  "development_metrics_persisted": false,
+  "audit_rows_or_labels_accessed": false,
+  "settings_changed": false,
+  "resolution": "Create the output directory in run_dev and rerun the unchanged development protocol."
+}

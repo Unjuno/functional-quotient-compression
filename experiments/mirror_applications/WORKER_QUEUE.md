@@ -1,8 +1,10 @@
-## Current handoff — 2026-11-26, MA-1064 complete
+## Current handoff — 2026-11-26, MA-1065 complete
 
 MA-1064 is a scoped FAIL on the fresh MovieLens 1M partition, excluding all 99,718 MA-1063 audit pairs. At cutoff 5, 364 rare item IDs receive per-ID state and no users do. Mirror+residual rare-item AUC is .773529/.708333 vs ordinary residual .769118/.701716; its +.005 gate is missed on one seed. CPU throughput is 79.8%/81.5% of no-view DHE, missing 80% once. Payload is 179,623 B vs 1,282,473 B full tables; overall logloss stays within 0.002. All 12 payloads replay within 4.77e-7 logits and 2.54e-10 metric differences. No user-frequency<=5 rows are available; per-ID error-ranked allocation remains untested. See `ma-1064-dhe-rare-id-fallback/RESULTS.md`.
 
-Next eligible P0: MA-1065, QR complementary table × Mirror View code (PA339). Compare with native QR and multi-hash controls; count both quotient/remainder tables and per-task code bytes, and measure AUC/collisions/throughput. MA-1060 and MA-1061 remain P1.
+MA-1065 is a scoped development-only FAIL: QR methods stayed at chance through 15 dev epochs on MovieLens binary GMF, while FiLM and full tables learned. No fresh audit, payload frontier, or throughput result was produced; CTR and optimized QR-Rec remain untested.
+
+Next eligible P0: MA-1066, TT-Rec tensor cores with Mirror domain-role address (PA340). Compare with optimized TTEmbeddingBag and match cache; measure actual table bytes and GPU QPS. MA-1060 and MA-1061 remain P1.
 
 ## Current handoff — 2026-11-25, MA-1056 complete
 

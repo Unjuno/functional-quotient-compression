@@ -1,0 +1,27 @@
+{
+  "experiment_id": "MA-1065",
+  "commit": "",
+  "tests": {
+    "command": "pytest -q experiments/mirror_applications/ma-1065-qr-complementary-mirror/tests",
+    "passed": 5,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": false,
+    "byte_exact": false,
+    "note": "Fresh inference payloads were not produced because the development quality premise failed before audit."
+  },
+  "metric_replay": {
+    "checked": false,
+    "max_difference": null,
+    "note": "No sealed audit metrics were generated."
+  },
+  "fresh_split_integrity_checked": true,
+  "notes": [
+    "MovieLens archive hash and size were checked by the runner.",
+    "Development split excluded MA-1063 and MA-1064 scored audit pairs; the recorded count is in runs/development.json.",
+    "No MA-1065 audit rows or labels were read or persisted.",
+    "15-epoch development-only diagnostic is exploratory and retained as runs/development_extended.json.",
+    "The relative AUC success margin has no absolute quality floor and is vacuous at chance-level QR quality; decision uses the preregistered useful-quality premise."
+  ]
+}

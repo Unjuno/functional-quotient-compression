@@ -1,0 +1,76 @@
+{
+  "experiment_id": "MA-1065",
+  "title": "Shared quotient-remainder categorical tables with field Mirror views",
+  "status": "FAIL",
+  "evidence_lane": "RECOMMENDATION/QR/QUALITY/STORAGE/COMPUTE",
+  "base_commit": "019241f90",
+  "prior_art_refs": ["PA339"],
+  "hypothesis": "For MovieLens 1M binary preference prediction, one shared QR factor pair with per-role Givens views will preserve independent-QR quality while using at least 10% fewer complete bytes, improve AUC by at least 0.003 over the best shared-QR non-Mirror control on both fresh seeds, and retain at least 80% of shared-QR inference throughput.",
+  "scope": "MovieLens 1M explicit ratings >=4 binary preference screen. It is not a Criteo CTR reproduction.",
+  "physical_object": "One pair of quotient/remainder embedding tables shared by user and item roles, plus the common GMF prediction head.",
+  "mirror_coordinate": "Sixteen learned Givens angles per role applied to the shared QR composed embedding.",
+  "logical_multiplicity": "Two role-specific embedding functions from one shared physical QR factor pair.",
+  "prior_art_delta": "PA339 QR composes two complementary table lookups by elementwise multiplication and produces unique category index pairs. This experiment asks whether a small role view recovers utility when QR factors are shared across the user and item fields.",
+  "dataset": {
+    "name": "GroupLens MovieLens 1M",
+    "url": "https://files.grouplens.org/datasets/movielens/ml-1m.zip",
+    "archive_sha256": "a6898adb50b9ca05aa231689da44c217cb524e7ebd39d264c56e2832f2c54e20",
+    "archive_bytes": 5917549,
+    "citation": "F. Maxwell Harper and Joseph A. Konstan. 2015. The MovieLens Datasets: History and Context. ACM TiiS 5(4), Article 19. DOI 10.1145/2827872.",
+    "access_terms": "Research use only; cite Harper and Konstan (2015); no redistribution; no commercial/revenue-bearing use without GroupLens permission.",
+    "task_label": "rating >=4 is positive; ratings 1-3 are negative",
+    "previous_audit_exclusion": "Exclude pairs in either prior audit: SHA256(user_id:item_id) modulo 10 equals 9 (MA-1063), or among the remainder SHA256(MA-1064:user_id:item_id) modulo 10 equals 9 (MA-1064).",
+    "new_split": "Among remaining pairs, SHA256(MA-1065:user_id:item_id) modulo 10: 0-7 train, 8 dev, 9 fresh audit. Pair IDs are not persisted."
+  },
+  "model": {
+    "embedding_dimension": 32,
+    "categories": {"users": 6040, "items": 3952, "combined": 9992},
+    "shared_qr": {"remainder_rows": 101, "quotient_rows": 99, "combined_capacity": 9999, "mapping": "global_id user=(user_id-1); item=6040+(item_id-1); remainder=global_id mod 101; quotient=global_id div 101; composed vector is W_rem[remainder] elementwise-multiplied by W_quo[quotient]"},
+    "independent_qr": {"user_remainder_rows": 79, "user_quotient_rows": 77, "item_remainder_rows": 63, "item_quotient_rows": 63, "composition": "quotient and remainder lookups combined by elementwise multiplication"},
+    "hash_control": {"table_rows": 200, "mapping": "stable multiplicative hash of combined global ID"},
+    "head": "linear GMF logit over elementwise product of user and item embeddings",
+    "optimizer": "Adam lr=0.001, weight_decay=1e-6, batch=4096, CPU float32, one Torch thread",
+    "epoch_candidates": [1, 2, 3]
+  },
+  "controls": [
+    "Independent full-cardinality user/item embedding tables (upper control)",
+    "Independent per-role native QR tables (PA339 control)",
+    "One shared QR factor pair, no role view",
+    "One shared QR factor pair plus matched 16-value paired diagonal gains per role",
+    "One shared QR factor pair plus 32-channel FiLM per role",
+    "One shared QR factor pair plus 16-angle Givens Mirror per role",
+    "One 200-row shared hash table (same approximate storage as shared QR)"
+  ],
+  "development": {
+    "seeds": [106500, 106501],
+    "selection": "Train methods through epoch 3; choose method-specific epoch by mean development logloss across both seeds.",
+    "metrics": "primary binary AUC; secondary logloss; collision count by categorical mapping",
+    "tuning_boundary": "Development only; all prior audit pairs are excluded."
+  },
+  "fresh": {
+    "seeds": [106510, 106511],
+    "training_data": "Frozen training partition; fresh initialization per seed.",
+    "audit_data": "Frozen 10% split among previously unscored pairs.",
+    "locked_before_access": true
+  },
+  "success_gate": "Both fresh seeds: shared-QR+Mirror AUC >= best shared-QR non-Mirror control +0.003; overall logloss <= independent QR +0.002; complete payload <=90% of independent QR; CPU throughput >=80% of shared QR no-view.",
+  "failure_gate": "Mirror misses any fresh quality/storage/throughput gate, or matched diagonal/FiLM is within 0.003 AUC on both seeds.",
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": ["both QR factor tables", "role-specific Mirror/diagonal/FiLM codes", "full independent tables for upper control", "hash table for hash control", "GMF head", "QR dimensions/mapping metadata", "model and inference metadata"]
+  },
+  "compute": {
+    "report_training_examples": true,
+    "report_optimizer_updates": true,
+    "report_wall_time": true,
+    "report_inference_qps_and_p95": true
+  },
+  "boundaries": [
+    "One dataset and one deterministic fresh split; two training seeds are not independent data worlds.",
+    "The two previously scored MA-1063/1064 audit partitions are excluded from all MA-1065 splits.",
+    "QR complementarity prevents index-pair collisions, but learned embeddings can still be functionally redundant.",
+    "A small Mirror×roles combination count is not called independent capacity.",
+    "This is a compact CPU screen, not official QR-Rec, Criteo CTR, GPU or production evidence.",
+    "Do not redistribute MovieLens data or use it commercially without permission."
+  ]
+}
