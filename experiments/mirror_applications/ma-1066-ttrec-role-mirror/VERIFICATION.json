@@ -1,0 +1,26 @@
+{
+  "experiment_id": "MA-1066",
+  "commit": "",
+  "tests": {
+    "command": "pytest -q experiments/mirror_applications/ma-1066-ttrec-role-mirror/tests; python -m py_compile experiments/mirror_applications/ma-1066-ttrec-role-mirror/source/*.py",
+    "passed": 3,
+    "failed": 0
+  },
+  "serialization": {
+    "roundtrip_checked": false,
+    "byte_exact": false,
+    "note": "No model has been trained."
+  },
+  "metric_replay": {
+    "checked": false,
+    "max_difference": null,
+    "note": "No audit metrics exist."
+  },
+  "fresh_split_integrity_checked": false,
+  "notes": [
+    "Preparation only; no training or audit rows were read.",
+    "The dev runner exits with an explicit CUDA-required error in the CPU-only worker.",
+    "The pinned upstream CUDA extension was not built or runtime-tested in this environment.",
+    "GPU QPS and optimized TT-EmbeddingBag control are mandatory; CPU-only evidence cannot establish the registered hypothesis."
+  ]
+}
