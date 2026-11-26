@@ -7,7 +7,7 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 - Registered candidates: **1155**
 - Claim ledger entries: **484**
-- P0: **630** (399 FAIL; 54 PROMISING; 165 UNTESTED; 11 NOT ESTABLISHED; 1 SCREENING)
+- P0: **630** (400 FAIL; 54 PROMISING; 164 UNTESTED; 11 NOT ESTABLISHED; 1 SCREENING)
 - P1: **422** (17 completed; 405 UNTESTED)
 - P2: **103** (103 UNTESTED)
 - Current MA statuses: **408 FAIL, 11 NOT ESTABLISHED, 63 PROMISING, 1 SCREENING, 672 UNTESTED**
