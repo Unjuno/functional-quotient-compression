@@ -1,6 +1,6 @@
 {
   "experiment_id": "MA-1066",
-  "commit": "",
+  "commit": "ac5957c0fc1cb497e66e4e1be05ef07419171cf8",
   "tests": {
     "command": "pytest -q experiments/mirror_applications/ma-1066-ttrec-role-mirror/tests; python -m py_compile experiments/mirror_applications/ma-1066-ttrec-role-mirror/source/*.py",
     "passed": 3,
@@ -21,6 +21,7 @@
     "Preparation only; no training or audit rows were read.",
     "The dev runner exits with an explicit CUDA-required error in the CPU-only worker.",
     "The pinned upstream CUDA extension was not built or runtime-tested in this environment.",
+    "GPU Control registration cd662491288542b08c03bf103d9bf8ec for this exact source is pending_review and non-executable; preview returned TRAINING_PROFILE_UNAVAILABLE.",
     "GPU QPS and optimized TT-EmbeddingBag control are mandatory; CPU-only evidence cannot establish the registered hypothesis."
   ]
 }

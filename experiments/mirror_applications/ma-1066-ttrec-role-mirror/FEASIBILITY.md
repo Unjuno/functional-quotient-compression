@@ -12,11 +12,13 @@ MA-1066 compares a role-specific Mirror view over TT-Rec tensor-train embedding 
 - The official upstream implementation was located at `facebookresearch/FBTT-Embedding`, pinned source commit `b95947ccd32cf9ab851242cc606562f2a74d9efa`, and its unmodified MIT-licensed CUDA sources are now vendored in `source/vendor/FBTT-Embedding`. Its README documents CUDA kernels and software caching; the upstream package reports testing with PyTorch 1.6+ and CUDA 10.1.
 - An experiment-local runner and protocol now cover independent TT, shared TT, matched diagonal/FiLM, Givens Mirror, and dense controls. The runner refuses to train unless CUDA is available; it has not been trained or audited.
 - GPU Control exposes a GitHub repository+commit source-registration and review route. Its current training-source list contains only an unrelated `unjuno/model-as-a-paper` source in `pending_review` state; there is no reviewed MA-1066 profile available to execute now. Fixed GPU canary workloads are not the TT-Rec research workload.
+- The exact MA-1066 branch commit `8bf1d91c8ef34ec6e7b7c511d362b6edfde34ce3` was registered as source `d328e6b4cea94db4897e7f8cac07219d`; current state is `pending_review`, `executable=false`. A training preview with a $0.000001 ceiling returned `TRAINING_PROFILE_UNAVAILABLE` (“no validated training image configured for this commit”). No training submission was made.
+- After source-freeze hardening, exact commit `ac5957c0fc1cb497e66e4e1be05ef07419171cf8` was registered as `cd662491288542b08c03bf103d9bf8ec`; it is also `pending_review`, `executable=false`. Its $0.000001 preview returned `TRAINING_PROFILE_UNAVAILABLE`. No training submission was made; use this latest registration when review resumes.
 
 ## Reopen conditions
 
 1. Build the pinned upstream TT-EmbeddingBag in a reviewed CUDA image and test the adapter on that GPU.
-2. Commit and push the complete source on this dedicated research branch; submit the exact repository commit through GPU Control source review and confirm an executable profile.
+2. Complete GPU Control source review for registration `d328e6b4cea94db4897e7f8cac07219d` and configure a validated training image/profile for the exact commit; then confirm it is executable.
 3. Confirm the usable GPU type and cost ceiling, run development selection, then execute `source/freeze.py` to freeze data split, training budget, backend/cache policy, success gates, serialization format, and throughput protocol before any audit access.
 4. Run every method on that same GPU and cache setting. If source review or an appropriate GPU remains unavailable, preserve MA-1066 as UNTESTED and report NOT ESTABLISHED; do not substitute CPU latency for GPU QPS.
 
