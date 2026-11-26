@@ -1,0 +1,13 @@
+{
+  "experiment_id": "MA-1062",
+  "amendment": "AM-02",
+  "command": "source/train.py --phase audit",
+  "exit_code": 1,
+  "failure_point": "First final model setup after ua.test was loaded; train_one attempted to convert eval_rows=None into arrays and raised IndexError before model construction, optimizer updates, or audit metric evaluation.",
+  "error": "IndexError: too many indices for array: array is 0-dimensional, but 2 were indexed",
+  "audit_data_loaded_after_freeze": true,
+  "audit_metrics_or_predictions_generated": false,
+  "optimizer_updates_completed": 0,
+  "audit_outputs_written": false,
+  "settings_or_selection_changed": false
+}

@@ -129,6 +129,13 @@
       "reason": "Pre-audit review found the first runner would persist audit binary labels alongside predictions, and the success comparator omitted the registered H=512 per-coordinate diagonal control. No ua.test numeric values were read.",
       "change": "Persist audit logits without row labels or IDs; metric verification will recover targets from the pinned archive. Add diag16_512 to the strongest-control gate. Keep model candidates, dev results, selected epochs, split, and seeds unchanged.",
       "audit_access": "ua.test remains unopened."
+    },
+    {
+      "id": "AM-02",
+      "timing": "After the first frozen audit command failed before model construction, training, prediction, or metric evaluation.",
+      "reason": "The final-training path passed eval_rows=None into a helper that unconditionally constructed evaluation tensors. ua.test had been loaded after freeze but no values were scored, no optimizer updates occurred, and no predictions or metrics were written.",
+      "change": "Allow final training to omit eval tensors; maintain frozen method set, epochs, seeds, training data, and audit split. Retry same fresh evaluation after recording the failed attempt.",
+      "audit_access": "ua.test was read into memory after the AM-01 freeze, but no audit metric or prediction was computed or inspected; audit data is not used for selection."
     }
   ]
 }

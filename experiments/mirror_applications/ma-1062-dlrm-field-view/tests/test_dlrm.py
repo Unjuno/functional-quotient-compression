@@ -39,4 +39,13 @@ def test_protocol_freezes_all_controls_and_audit_outputs_do_not_save_labels():
     source=(ROOT/'source/train.py').read_text()
     assert "np.savez_compressed(adir/f'{method}_seed{seed}.npz',logits=preds)" in source
     assert "np.savez_compressed(adir/f'{method}_seed{seed}.npz',logits=preds,labels=labels)" not in source
-    assert protocol['amendments'][-1]['audit_access']=='ua.test remains unopened.'
+    assert protocol['amendments'][0]['audit_access']=='ua.test remains unopened.'
+    assert 'no audit metric or prediction was computed' in protocol['amendments'][-1]['audit_access']
+
+def test_final_train_path_accepts_no_eval_rows():
+    source=(ROOT/'source/train.py').read_text()
+    assert 'if eval_rows is not None: ec,ed,ey=arrays(eval_rows,mean,std)' in source
+    assert 'else: ec=ed=ey=None' in source
+    protocol=__import__('json').loads((ROOT/'PROTOCOL.json').read_text())
+    assert protocol['amendments'][-1]['id']=='AM-02'
+    assert 'no audit metric or prediction was computed' in protocol['amendments'][-1]['audit_access']

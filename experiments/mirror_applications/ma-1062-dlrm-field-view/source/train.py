@@ -34,7 +34,7 @@ def read_base():
 
 def read_audit_after_freeze():
     freeze=json.loads((ROOT/'FRESH_FREEZE.json').read_text())
-    if freeze.get('audit_numeric_values_opened') is not False: raise ValueError('fresh split already opened or malformed freeze')
+    if freeze.get('audit_metrics_or_predictions_previously_generated') is not False: raise ValueError('audit results already generated or malformed freeze')
     if freeze.get('protocol_sha256')!=sha(ROOT/'PROTOCOL.json') or freeze.get('runner_sha256')!=sha(ROOT/'source/train.py'):
         raise ValueError('frozen protocol or runner hash mismatch')
     verify_archive()
@@ -134,7 +134,9 @@ def evaluate(model,rows):
 
 def train_one(method,train_rows,eval_rows,seed,epochs,save_path=None):
     ts=np.asarray([r[4] for r in train_rows],dtype=np.float64); mean=float(ts.mean()); std=float(ts.std())
-    tc,td,ty=arrays(train_rows,mean,std); ec,ed,ey=arrays(eval_rows,mean,std)
+    tc,td,ty=arrays(train_rows,mean,std)
+    if eval_rows is not None: ec,ed,ey=arrays(eval_rows,mean,std)
+    else: ec=ed=ey=None
     torch.manual_seed(seed); np.random.seed(seed); model=DLRM(method,mean,std); opt=torch.optim.Adam(model.parameters(),lr=LR,weight_decay=1e-6)
     snapshots={}; started=time.perf_counter(); updates=0
     for epoch in range(1,epochs+1):

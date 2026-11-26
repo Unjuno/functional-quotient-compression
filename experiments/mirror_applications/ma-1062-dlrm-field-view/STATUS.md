@@ -1,5 +1,5 @@
 # MA-1062 status
 
-Phase: development complete; AM-01 pre-audit correction is being frozen. The official `ua.test` ratings remain unopened.
+Phase: corrected fresh audit is frozen and ready to retry; the first audit command failed before training or metric evaluation. The official `ua.test` numeric rows were loaded into memory after freeze but produced no predictions or metrics.
 
-Development uses 81,490 training / 9,080 validation ratings from `ua.base`, split by deterministic user/movie hash. Each method selected epoch independently from 3/5/8 using mean validation logloss across seeds 106200 and 106201. H=512 Mirror improved over paired diagonal by only about 0.00044 logloss, below the 0.002 gate. Pre-audit review added the omitted per-coordinate diagonal comparator and ensures target labels/IDs will not be persisted. The fresh audit settings, seeds and corrected runner are frozen before evaluation.
+AM-01 saved only aggregate metrics/logits (no row labels or IDs) and added the per-coordinate diagonal to the strongest-control gate. AM-02 fixed the final-training `eval_rows=None` path. Development results, selected epochs, training seeds, controls, and audit split are unchanged; both amendments are documented in `PROTOCOL.json` and freeze history files.

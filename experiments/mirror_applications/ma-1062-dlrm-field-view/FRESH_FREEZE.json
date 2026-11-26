@@ -1,14 +1,19 @@
 {
   "experiment_id": "MA-1062",
-  "amendment": "AM-01",
+  "amendments": [
+    "AM-01",
+    "AM-02"
+  ],
   "frozen_utc": "2026-11-26",
-  "parent_commit": "9489da931",
-  "protocol_sha256": "85d7639c99b9b46035c5686bce33ea29e44d1fb7b48ce4c3a5e110947eb29e08",
-  "runner_sha256": "9f838664f510f7b812b937991a8cf9ccaafb2dfc55cdc161da387833db2f86a0",
-  "tests_sha256": "c28231d2e76809058ebea8727c5c283201afb3929675c71a6a74a5b3e1ce918f",
+  "parent_commit": "82f9a93bd",
+  "protocol_sha256": "71518710b5a880eaf55a422a7e554b3b5e60c531fad8f368586bf1b79a832afd",
+  "runner_sha256": "94a20121dc414807f062ce40a644626c36605c3c4dab95e80d224f8062c03e38",
+  "tests_sha256": "ffe8b925d9bb7960091b28aecc880dc28d30721c3a572c5b7366bed11920ad99",
   "dataset_archive_sha256": "50d2a982c66986937beb9ffb3aa76efe955bf3d5c6b761f4e3a7cd717c6a3229",
   "development_selection_sha256": "ecf95bc7e55d8e7cf96c0a7d6437c55ab7e1dba2dae0702c0b8519677041a31d",
   "development_results_sha256": "683e999ed0ed0baa35bf30dd788bd13b2b74fdd7c91396913b753174e1fe041b",
+  "prior_freeze_sha256": "c33702b31064dd72110052c93759bc72cf2116ad4ed99d0cc1248020e5ed419e",
+  "failed_attempt_record_sha256": "381106de6aaeeae239bc78bf20a4e5c289a464d9b7243132090f71ec6097ebff",
   "selected_epochs": {
     "full": 3,
     "shared_hash_128": 5,
@@ -29,8 +34,11 @@
     106211
   ],
   "audit_member": "ml-100k/ua.test",
-  "audit_numeric_values_opened": false,
+  "audit_numeric_values_opened": true,
+  "audit_metrics_or_predictions_previously_generated": false,
+  "failed_attempt_optimizer_updates": 0,
+  "failed_attempt_settings_or_selection_changed": false,
   "selection_changes_after_audit_forbidden": true,
   "persisted_audit_rows_policy": "Only aggregate metrics and prediction logits are saved; do not save target labels or row identifiers.",
-  "amendment_summary": "Added H=512 per-coordinate diagonal to the strongest-control gate and prevented audit labels/IDs from entering persisted predictions. No audit numeric values were opened; method set, dev results, selection and seeds are unchanged."
+  "amendment_summary": "AM-01 preserved labels out of outputs and included diag16 in the gate. AM-02 fixes a pre-training None eval tensor crash; ua.test was loaded but no model update, prediction, metric, or selection occurred. Same seeds/split/settings are frozen for this retry."
 }
