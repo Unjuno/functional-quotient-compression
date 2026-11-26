@@ -1,8 +1,8 @@
-## Current handoff — 2026-11-25, MA-1059 setup
+## Current handoff — 2026-11-25, MA-1062 next after MA-1059
 
-MA-1058 is a scoped FAIL on held Chronos cold-start sensor series. Adapter state is 35,310 B vs 557,410 B independent LoRA, but full payload saves only 1.53%; Mirror loses to independent LoRA and the same-cost diagonal control. Saved metrics and bytes replay; five stochastic first-query redraws differ and are documented. See `experiments/mirror_applications/ma-1058-chronos-coldstart-view/RESULTS.md`.
+MA-1059 is a scoped development-screen FAIL on Monash monthly Tourism and pinned Chronos-T5-Tiny. The support-only residual selector chose threshold 0, which would allocate trend residuals to all 24 fresh IDs and fail the registered <=25% private-state gate; Mirror gained only 1.77% over pooled LoRA on dev. Actual state bytes were measured; full payload savings were 1.53% vs independent LoRA. Fresh IDs remain unopened. See `experiments/mirror_applications/ma-1059-time-series-view-geometry/RESULTS.md`.
 
-MA-1059 is now the active P0 on dedicated branch `research/ma-1059-temporal-view-geometry-20261125`. PA328/PA330/PA335 were reviewed. Its falsifiable question is whether a compact series View over a shared temporal function family beats byte-matched diagonal/low-rank controls on naturally heterogeneous held-out series, and how often private trend state is needed. Protocol skeleton is present; no dataset, audit split, model implementation, or measurements are frozen yet. Choose and hash the public dataset/model using development-only evidence, then freeze complete-series and chronological split before any fresh labels are accessed.
+Next eligible P0 is MA-1062, DLRM shared embedding basis + feature-field View codes (PA337). MA-1060 and MA-1061 remain P1. Open PA337, select a small licensed recommendation benchmark and frozen ID-frequency split, then test DLRM native/full table, a strong hash-embedding control, shared physical basis + field codes, and independent per-field embeddings. Count actual bytes, memory traffic and lookup latency; do not infer capacity from code combinations.
 
 ## Current handoff — 2026-11-25, MA-1056 complete
 
