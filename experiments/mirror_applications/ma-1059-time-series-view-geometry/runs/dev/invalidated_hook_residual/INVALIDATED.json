@@ -1,0 +1,7 @@
+{
+  "reason": "Astra code review found a pooled LoRA forward hook remained active while dev support-fold residual estimates were evaluated. The trend-residual least-squares denominator also multiplied the support count twice, shrinking residuals by four windows. Therefore the residual threshold, residual-enabled dev metrics, and prior FAIL rationale are invalid.",
+  "preserve": true,
+  "audit_series_numeric_values_opened": false,
+  "basis_training_and_standard_nonresidual_method_summaries": "Retain as prior observations; re-run deterministically with hook isolation before selecting settings.",
+  "status": "INVALIDATED_FOR_DECISION"
+}

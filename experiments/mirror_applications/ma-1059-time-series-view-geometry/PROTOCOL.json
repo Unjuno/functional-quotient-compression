@@ -282,5 +282,14 @@
     "No audit values may be read before the fresh freeze; the frozen series-ID list and archive hashes are committed first.",
     "Report adapter-state savings separately from full payload because the pretrained checkpoint dominates.",
     "Chronos/PEMS-BAY overlap from MA-1058 is irrelevant to dataset independence; Monash tourism is a distinct benchmark family."
+  ],
+  "amendments": [
+    {
+      "id": "AM-01",
+      "timing": "After the deterministic initial development screen and before opening any audit-series values",
+      "reason": "Source review found a pooled LoRA forward hook left active during support-fold residual scoring, and the residual least-squares denominator multiplied by the number of support windows twice. The initial residual threshold and residual-enabled dev metrics are invalidated and preserved under runs/dev/invalidated_hook_residual/.",
+      "change": "Explicitly deactivate unused hooks; correct the trend residual denominator; select a dimensionless minimum relative support-fold MASE improvement threshold, including null/no-residual, constrained to <=25% dev residual allocation. Keep all series IDs, model, standard method controls, seeds, and audit split unchanged.",
+      "audit_access": "No numeric audit series values were loaded; the frozen 24 audit IDs remain sealed."
+    }
   ]
 }

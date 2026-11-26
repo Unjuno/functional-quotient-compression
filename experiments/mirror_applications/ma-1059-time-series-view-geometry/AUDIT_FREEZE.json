@@ -1,0 +1,63 @@
+{
+  "experiment_id": "MA-1059",
+  "amendment": "AM-01",
+  "frozen_utc": "2026-11-26",
+  "parent_commit": "1afd62141",
+  "protocol_sha256": "9476f8347c6b701528a5d521315e2e09bc50f9a3ff150e26b1ec0f1a2b1d3d66",
+  "fresh_freeze_sha256": "7c8c98aed807b377d853fbfe0d605f7898d514dbb412b42c82f86618b585b47a",
+  "data_archive_sha256": "6e434ad8a0ef6acb55ebee0e1d1ffe22707ea4e62c05e091326267f3a5b4a93c",
+  "model_revision": "29d808298f1a62493e7b9a5e08529d0d930fa189",
+  "model_weights_sha256": "eed458758bd8165d80f496a90bcd2cfed9f1bf7d7b08677acd64e0f7d72bdcf2",
+  "development_selection_sha256": "c65a69b885ae946dfa368efeaf6de5741f8afe4ea409b3e75417a758e087913e",
+  "development_outputs_sha256": {
+    "runs/dev/selection.json": "c65a69b885ae946dfa368efeaf6de5741f8afe4ea409b3e75417a758e087913e",
+    "runs/dev/development.json": "3c91ac5351dc184f9432f27c6dcfacef271638f5aba258844a009158d4fb25ba",
+    "runs/dev/shared.pt": "1a8896846a7d905e818d2041db3494e64feb29ee0d68dba0d568571be861bd0b",
+    "runs/dev/pooled.pt": "cfc186e0cb52417267e880086ba4014d48a7f57f689261a936f1b9d1efab646c"
+  },
+  "frozen_code_and_config_sha256": {
+    "PROTOCOL.json": "9476f8347c6b701528a5d521315e2e09bc50f9a3ff150e26b1ec0f1a2b1d3d66",
+    "source/ma1059.py": "b5f105cac1b778455f0658832a66f1f04897ee37eba5259764d67a969742e979",
+    "source/serialize_dev.py": "c7542887058338516d6c5ffc228d09ac1351405876ff51509475d77a7f9352a9",
+    "source/verify.py": "34b1427bc1bd2462dc43b57b5aa2c4db1e8a10fc210e43321c2dfda5f3438d70"
+  },
+  "sampling_seeds": [
+    105903,
+    105904
+  ],
+  "audit_series_ids": [
+    "T166",
+    "T317",
+    "T325",
+    "T104",
+    "T358",
+    "T97",
+    "T159",
+    "T25",
+    "T148",
+    "T37",
+    "T173",
+    "T192",
+    "T319",
+    "T321",
+    "T131",
+    "T235",
+    "T185",
+    "T250",
+    "T363",
+    "T111",
+    "T338",
+    "T94",
+    "T106",
+    "T224"
+  ],
+  "audit_numeric_values_opened": false,
+  "selection_changes_after_audit_forbidden": true,
+  "amendment_summary": "Corrected pooled-hook isolation and trend residual denominator; dev-only relative support-fold MASE selector fixed at 0.025 with 2/16 dev allocation. No audit values were loaded before this freeze.",
+  "outputs_to_be_created": [
+    "runs/audit/results.json",
+    "runs/audit/*_seed105903.npz",
+    "runs/audit/*_seed105904.npz",
+    "runs/audit/payloads/"
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "experiment_id": "MA-1059",
+  "frozen_before_numeric_data_access": true,
+  "protocol_sha256": "6157bec9af7fa7a36f19d012d2628c7e5dff18830ec13eb0e2182d066ea4076e",
+  "benchmark": {
+    "repo": "Monash-University/monash_tsf",
+    "revision": "58aafbe2712ff481c014f562e42723f2820fd5d4",
+    "file": "data/tourism_monthly_dataset.zip",
+    "sha256": "6e434ad8a0ef6acb55ebee0e1d1ffe22707ea4e62c05e091326267f3a5b4a93c",
+    "exposed_series_excluded": [
+      "T1",
+      "T2",
+      "T3",
+      "T4",
+      "T5",
+      "T6",
+      "T7",
+      "T8"
+    ]
+  },
+  "model": {
+    "repo": "amazon/chronos-t5-tiny",
+    "revision": "29d808298f1a62493e7b9a5e08529d0d930fa189",
+    "weights_sha256": "eed458758bd8165d80f496a90bcd2cfed9f1bf7d7b08677acd64e0f7d72bdcf2"
+  },
+  "series_ids": "See PROTOCOL.json; SHA256-name split generated before numeric target parsing.",
+  "audit_numeric_values_opened": false,
+  "selection_changes_after_audit_forbidden": true
+}

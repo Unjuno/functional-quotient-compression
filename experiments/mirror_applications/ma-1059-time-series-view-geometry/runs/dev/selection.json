@@ -5,8 +5,15 @@
     "full": 30,
     "independent": 10
   },
-  "residual_threshold": 0.0,
+  "residual_min_relative_gain": 0.025,
   "shared_updates": 30,
   "residual_fraction_gate": 0.25,
-  "selected_before_audit_access": true
+  "selected_before_audit_access": true,
+  "hook_isolation": "all unused adapters explicitly inactive during each forecast",
+  "selection_criterion": "minimum support-fold MASE among thresholds whose dev residual allocation is <=25%; null threshold disables residual",
+  "development_residual_allocation_fraction": 0.125,
+  "development_residual_selected_ids": [
+    "T165",
+    "T164"
+  ]
 }

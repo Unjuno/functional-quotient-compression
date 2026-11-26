@@ -126,7 +126,7 @@ def trend_residual(pipe,hook,mode,code,support,seed):
     for j,(ctx,y,o) in enumerate(support):
         p=predict(pipe,hook,mode,code,ctx,seed+j); err=np.asarray(y,dtype=np.float64)-p.mean(axis=0,dtype=np.float64)
         num+=float(err@ramp); den+=float(ramp@ramp)
-    return float(num/max(den*len(support),1e-12))
+    return float(num/max(den,1e-12))
 
 def apply_resid(samples,r):
     ramp=np.linspace(-.5,.5,H,dtype=np.float32)
@@ -163,18 +163,25 @@ def run_dev(shared_updates=30):
     native=[]; pooled_rows=[]; persist=[]; seasonal=[]; resid_dev=[]
     pa=OutputLoRA(pipe,pooled['A'],pooled['B'],False); pcode=pooled['fit_codes']['shared']
     for sid in DEV_IDS:
+        pa.set('inactive',None); hook.set('inactive',None)
         x=series[sid]; w=windows(x); ctx,y,_=w['query'][0]; den=mase_den(x)
         native.append(row_metrics(predict(pipe,hook,'inactive',None,ctx,106200+int(sid[1:])),y,den))
+        hook.set('inactive',None); pa.set('pooled',pcode)
         pooled_rows.append(row_metrics(predict(pipe,pa,'pooled',pcode,ctx,106200+int(sid[1:])),y,den))
         persist.append(float(np.mean(np.abs(np.tile(ctx[-1],H)-y))/den)); seasonal.append(float(np.mean(np.abs(np.tile(ctx[-12:],1)-y)/den)) if len(ctx)>=12 else float('nan'))
-        # Support-only held-fold validation for trend-residual threshold selection.
+        # Support-only held-fold validation; ensure the pooled control hook is inactive.
+        pa.set('inactive',None); hook.set('inactive',None)
         code,_=adapt(pipe,shared['A'],shared['B'],w['support'][:3],'mirror',chosen['mirror'],106300+int(sid[1:]))
-        rr=trend_residual(pipe,hook,'mirror',code,w['support'][:3],106400+int(sid[1:])); vctx,vy,_=w['support'][3]; bp=predict(pipe,hook,'mirror',code,vctx,106500+int(sid[1:])); resid_dev.append({'r':rr,'base':mase(bp,vy,den),'corrected':mase(apply_resid(bp,rr),vy,den)})
-    thresholds=[0.,.01,.05,.1,.25,.5,1.,2.]
-    threshold=min(thresholds,key=lambda th:float(np.mean([z['corrected'] if abs(z['r'])>=th else z['base'] for z in resid_dev])))
-    out={'fit_series':FIT_IDS,'development_series':DEV_IDS,'models':models,'selected_updates':chosen,'residual_threshold':threshold,'native':summarize(native),'pooled_lora':summarize(pooled_rows),'persistence_mase':float(np.mean(persist)),'seasonal_naive_mase':float(np.mean(seasonal)),'shared_fit_seconds':shared['wall_seconds'],'pooled_fit_seconds':pooled['wall_seconds'],'dataset_sha256':sha(download_data()),'model_weights_sha256':sha(SNAP/'model.safetensors'),'support_fold_residual_mase':{'base':float(np.mean([x['base'] for x in resid_dev])),'corrected_all':float(np.mean([x['corrected'] for x in resid_dev]))}}
+        rr=trend_residual(pipe,hook,'mirror',code,w['support'][:3],106400+int(sid[1:])); vctx,vy,_=w['support'][3]; bp=predict(pipe,hook,'mirror',code,vctx,106500+int(sid[1:])); base=mase(bp,vy,den); corrected=mase(apply_resid(bp,rr),vy,den); resid_dev.append({'series_id':sid,'r':rr,'base':base,'corrected':corrected,'relative_gain':(base-corrected)/max(base,1e-8)})
+    pa.set('inactive',None)
+    thresholds=[None,0.,.01,.025,.05,.1]
+    def apply_threshold(z,th): return th is not None and z['relative_gain']>=th
+    eligible=[th for th in thresholds if sum(apply_threshold(z,th) for z in resid_dev)/len(resid_dev)<=.25]
+    threshold=min(eligible,key=lambda th:(float(np.mean([z['corrected'] if apply_threshold(z,th) else z['base'] for z in resid_dev])),-(float('inf') if th is None else th)))
+    residual_selected=[z['series_id'] for z in resid_dev if apply_threshold(z,threshold)]
+    out={'fit_series':FIT_IDS,'development_series':DEV_IDS,'models':models,'selected_updates':chosen,'residual_min_relative_gain':threshold,'residual_selected_ids':residual_selected,'residual_allocation_fraction':len(residual_selected)/len(resid_dev),'native':summarize(native),'pooled_lora':summarize(pooled_rows),'persistence_mase':float(np.mean(persist)),'seasonal_naive_mase':float(np.mean(seasonal)),'shared_fit_seconds':shared['wall_seconds'],'pooled_fit_seconds':pooled['wall_seconds'],'dataset_sha256':sha(download_data()),'model_weights_sha256':sha(SNAP/'model.safetensors'),'support_fold_residual_mase':{'base':float(np.mean([x['base'] for x in resid_dev])),'corrected_all':float(np.mean([x['corrected'] for x in resid_dev]))}}
     out['selection_locked']=True; (RUNS/'dev/development.json').write_text(json.dumps(out,indent=2)+'\n')
-    selection={'selected_updates':chosen,'residual_threshold':threshold,'shared_updates':shared_updates,'residual_fraction_gate':.25,'selected_before_audit_access':True}
+    selection={'selected_updates':chosen,'residual_min_relative_gain':threshold,'shared_updates':shared_updates,'residual_fraction_gate':.25,'selected_before_audit_access':True,'hook_isolation':'all unused adapters explicitly inactive during each forecast','selection_criterion':'minimum support-fold MASE among thresholds whose dev residual allocation is <=25%; null threshold disables residual','development_residual_allocation_fraction':len(residual_selected)/len(resid_dev),'development_residual_selected_ids':residual_selected}
     (RUNS/'dev/selection.json').write_text(json.dumps(selection,indent=2)+'\n')
     hook.close(); pa.close(); print(json.dumps(out,indent=2))
 
@@ -221,15 +228,20 @@ def run_audit():
     if sha(SNAP/'model.safetensors')!='eed458758bd8165d80f496a90bcd2cfed9f1bf7d7b08677acd64e0f7d72bdcf2': raise ValueError('model weights hash mismatch')
     shared=torch.load(RUNS/'dev/shared.pt',map_location='cpu',weights_only=False); pooled=torch.load(RUNS/'dev/pooled.pt',map_location='cpu',weights_only=False)
     shared_hook=OutputLoRA(pipe,shared['A'],shared['B'],False); pooled_hook=OutputLoRA(pipe,pooled['A'],pooled['B'],False)
-    selected=selection['selected_updates']; threshold=float(selection['residual_threshold']); codes={m:{} for m in ('mirror','diag','full','independent')}; residuals={}; residual_ids=[]; fit_seconds={m:0. for m in codes}
+    selected=selection['selected_updates']; threshold=selection['residual_min_relative_gain']; codes={m:{} for m in ('mirror','diag','full','independent')}; residuals={}; residual_ids=[]; fit_seconds={m:0. for m in codes}; residual_selector_seconds=0.
     for sid in AUDIT_IDS:
         support=windows(series[sid])['support']
         for mode in codes:
             code,elapsed=adapt(pipe,shared['A'],shared['B'],support,mode,int(selected[mode]),108000+int(sid[1:])+{'mirror':1,'diag':2,'full':3,'independent':4}[mode])
             codes[mode][sid]=code; fit_seconds[mode]+=elapsed
-        r=trend_residual(pipe,shared_hook,'mirror',codes['mirror'][sid],support,108500+int(sid[1:]))
-        residuals[sid]=r
-        if abs(r)>=threshold: residual_ids.append(sid)
+        pooled_hook.set('inactive',None); shared_hook.set('inactive',None); selector_t=time.perf_counter()
+        if threshold is not None:
+            cv_code,_=adapt(pipe,shared['A'],shared['B'],support[:3],'mirror',int(selected['mirror']),108510+int(sid[1:]))
+            r_cv=trend_residual(pipe,shared_hook,'mirror',cv_code,support[:3],108520+int(sid[1:])); vctx,vy,_=support[3]
+            bp=predict(pipe,shared_hook,'mirror',cv_code,vctx,108530+int(sid[1:])); den=mase_den(series[sid]); base=mase(bp,vy,den); corrected=mase(apply_resid(bp,r_cv),vy,den); gain=(base-corrected)/max(base,1e-8)
+            if gain>=float(threshold):
+                residual_ids.append(sid); residuals[sid]=trend_residual(pipe,shared_hook,'mirror',codes['mirror'][sid],support,108540+int(sid[1:]))
+        residual_selector_seconds+=time.perf_counter()-selector_t
     codes['mirror_trend']=codes['mirror']
     # Build actual serialized states; codes include all required series addresses and metadata.
     common_files=['model.safetensors','config.json','generation_config.json']; model_bytes=sum((SNAP/f).stat().st_size for f in common_files)
@@ -246,7 +258,7 @@ def run_audit():
     payloads['persistence']=serialize_state('persistence',{}, {}, [],model_bytes)
     payloads['seasonal_naive']=serialize_state('seasonal_naive',{}, {}, [],model_bytes)
     names=('native','pooled_lora','mirror','diag','full','independent','mirror_trend','persistence','seasonal_naive')
-    results={'experiment_id':'MA-1059','audit_series_ids':AUDIT_IDS,'seeds':[105903,105904],'data':{'archive_sha256':sha(path),'series_lengths':{s:len(series[s]) for s in AUDIT_IDS}},'selected_updates':selected,'residual_threshold':threshold,'residual_series_ids':residual_ids,'residual_fraction':len(residual_ids)/len(AUDIT_IDS),'methods':{},'payloads':payloads,'compute':{'support_fit_wall_seconds':fit_seconds,'query_wall_seconds':{}}}
+    results={'experiment_id':'MA-1059','audit_series_ids':AUDIT_IDS,'seeds':[105903,105904],'data':{'archive_sha256':sha(path),'series_lengths':{s:len(series[s]) for s in AUDIT_IDS}},'selected_updates':selected,'residual_min_relative_gain':threshold,'residual_series_ids':residual_ids,'residual_fraction':len(residual_ids)/len(AUDIT_IDS),'methods':{},'payloads':payloads,'compute':{'support_fit_wall_seconds':fit_seconds,'residual_selector_wall_seconds':residual_selector_seconds,'query_wall_seconds':{}}}
     outputs=RUNS/'audit'; outputs.mkdir(parents=True,exist_ok=True)
     for seed in (105903,105904):
         results['methods'][str(seed)]={}; query_times={m:[] for m in names}
@@ -254,12 +266,15 @@ def run_audit():
             preds=[]; targets=[]; ids=[]; origins=[]; metric_rows=[]
             for sid in AUDIT_IDS:
                 x=series[sid]; w=windows(x); ctx,y,o=w['query'][0]; den=mase_den(x)
+                pooled_hook.set('inactive',None); shared_hook.set('inactive',None)
                 if method=='native': mode='inactive'; code=None; hook=shared_hook
                 elif method=='pooled_lora': mode='pooled'; code=pooled['fit_codes']['shared']; hook=pooled_hook
                 elif method=='mirror_trend': mode='mirror'; code=codes['mirror'][sid]; hook=shared_hook
                 elif method in codes: mode=method; code=codes[method][sid]; hook=shared_hook
                 elif method in ('persistence','seasonal_naive'): hook=None
                 else: raise ValueError(method)
+                if method=='pooled_lora': shared_hook.set('inactive',None); pooled_hook.set('pooled',code)
+                elif method not in ('persistence','seasonal_naive'): pooled_hook.set('inactive',None); shared_hook.set(mode,code)
                 t=time.perf_counter()
                 if method=='persistence': pred=np.tile(ctx[-1],H)[None,:].astype(np.float32)
                 elif method=='seasonal_naive': pred=np.tile(ctx[-12:],1)[None,:].astype(np.float32)

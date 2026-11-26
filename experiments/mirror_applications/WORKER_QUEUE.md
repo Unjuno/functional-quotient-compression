@@ -1,8 +1,8 @@
-## Current handoff — 2026-11-25, MA-1062 next after MA-1059
+## Current handoff — 2026-11-26, MA-1059 corrected audit frozen
 
-MA-1059 is a scoped development-screen FAIL on Monash monthly Tourism and pinned Chronos-T5-Tiny. The support-only residual selector chose threshold 0, which would allocate trend residuals to all 24 fresh IDs and fail the registered <=25% private-state gate; Mirror gained only 1.77% over pooled LoRA on dev. Actual state bytes were measured; full payload savings were 1.53% vs independent LoRA. Fresh IDs remain unopened. See `experiments/mirror_applications/ma-1059-time-series-view-geometry/RESULTS.md`.
+AM-01 invalidated the previous MA-1059 development FAIL after finding a pooled-hook leak and a residual estimator denominator error. The corrected development selector uses a relative support-fold gain threshold of 0.025 and selects residuals on 2/16 dev series. Actual dev payloads are serialized and byte-checked. The 24 fresh series are still unopened; source, split, settings and sampling seeds are frozen in `experiments/mirror_applications/ma-1059-time-series-view-geometry/AUDIT_FREEZE.json`. Run the corrected fresh comparison before closing this MA.
 
-Next eligible P0 is MA-1062, DLRM shared embedding basis + feature-field View codes (PA337). MA-1060 and MA-1061 remain P1. Open PA337, select a small licensed recommendation benchmark and frozen ID-frequency split, then test DLRM native/full table, a strong hash-embedding control, shared physical basis + field codes, and independent per-field embeddings. Count actual bytes, memory traffic and lookup latency; do not infer capacity from code combinations.
+Next eligible P0 after MA-1059 is MA-1062, DLRM shared embedding basis + feature-field View codes (PA337). MA-1060 and MA-1061 remain P1. For MA-1062 use the official MovieLens 100K research-use archive only if its access terms are retained; compare full DLRM tables, ordinary shared hashing, same-cost field diagonal/rotation, and independent field tables. Count actual bytes and lookup latency.
 
 ## Current handoff — 2026-11-25, MA-1056 complete
 

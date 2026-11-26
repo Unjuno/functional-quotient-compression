@@ -1,7 +1,7 @@
 # MA-1059 status
 
-Decision: **FAIL at the development screen; fresh audit not run.** The frozen development selector chose a trend-residual threshold of 0.0. Under the preregistered `abs(r_s) >= threshold` rule, this allocates a residual to every audit series, violating the maximum 25% private-residual success gate. The selected Mirror result is also 1.77% better than pooled LoRA, below the 2% gate.
+Phase: corrected development complete; fresh audit configuration frozen, but audit series numeric values are still unopened.
 
-The deterministic development run used 40 fit and 16 dev series; the 24 audit IDs remain unopened. Initial unseeded run is retained under `runs/dev/invalidated_unseeded/`, not used for selection. Actual serialized dev state and full payload sizes are measured in `runs/dev/payloads/manifest.json`. See RESULTS.md and DEVELOPMENT_DECISION.json.
+AM-01 invalidated the prior development FAIL because a pooled LoRA hook remained active during residual support-fold scoring and the trend residual denominator was too small by the number of support windows. The previous report and payloads are preserved under `runs/dev/invalidated_hook_residual/`; they are not used for selection or the final decision.
 
-Next: close the scoped development failure, update registry/status/claim ledger, then proceed to the next eligible P0 candidate. No fresh-series, capacity, or broad compression claim is made.
+Corrected development chose Mirror 10 updates, diagonal/full 30, independent 10, and a relative support-fold trend threshold of 2.5%. Residuals were selected on 2/16 dev series (12.5%). Actual serialized states are checked in `runs/dev/payloads/manifest.json`. Fresh audit IDs and model/data revisions are frozen in `AUDIT_FREEZE.json`; no numeric audit target was loaded. Next action: run the frozen fresh comparison.

@@ -1,10 +1,10 @@
 condition,world_or_seed,method,serialized_bytes,train_examples_or_updates,optimizer_updates,active_compute_proxy,wall_time_s,primary_metric,primary_value,secondary_metric,secondary_value,status_note
-dev,105900,native,33589982,16,0,Chronos forward; FLOPs not measured,,macro_MASE,4.657899722456932,macro_CRPS,1956.846913722789,native zero-shot; 16 series
-dev,105900,pooled_lora,33624807,30,30,Chronos forward + LoRA; FLOPs not measured,0.6434903600002144,macro_MASE,4.633805140852928,macro_CRPS,1952.5328707598956,shared basis trained on fit split
-dev,105900,mirror,33624862,190,190,Chronos forward/backward + optimizer; FLOPs not measured,2.973707867004123,macro_MASE,4.551984030753374,macro_CRPS,1947.047961041522,selected 10 support updates/series; p50 query 0.417s
-dev,105900,diag,33624860,510,510,Chronos forward/backward + optimizer; FLOPs not measured,8.875347447999957,macro_MASE,4.563992004841566,macro_CRPS,1951.0623417345068,selected 30 support updates/series; p50 query 0.433s
-dev,105900,full,33624924,510,510,Chronos forward/backward + optimizer; FLOPs not measured,8.1673431850013,macro_MASE,4.561471309512854,macro_CRPS,1950.6452384202291,selected 30 support updates/series; p50 query 0.418s
-dev,105900,independent,34147043,190,190,Chronos forward/backward + optimizer; FLOPs not measured,2.390334788004111,macro_MASE,4.5731544606387615,macro_CRPS,1935.1346621534663,selected 10 support updates/series; p50 query 0.359s
-dev,105900,mirror_plus_trend,33625123,190,190,Chronos forward/backward + support residual fit; FLOPs not measured,2.973707867004123,macro_MASE,4.5951195657253265,query_CRPS,not saved,threshold 0 selects residual for every series; residual fit compute not timed
+dev,105900,native,33589982,16,0,Chronos forward; FLOPs not measured,,macro_MASE,4.607813745737076,macro_CRPS,1967.8952451083505,hook isolated; 16 query series
+dev,105900,pooled_lora,33624807,30,30,Chronos forward + LoRA; FLOPs not measured,0.4494457519977004,macro_MASE,4.633805140852928,macro_CRPS,1952.5328707598956,shared basis fit only on fit series
+dev,105900,mirror,33624862,190,190,Chronos forward/backward + optimizer; FLOPs not measured,2.440956943002675,macro_MASE,4.551984030753374,macro_CRPS,1947.047961041522,10 updates/series; query p50 0.390s
+dev,105900,diag,33624860,510,510,Chronos forward/backward + optimizer; FLOPs not measured,7.163295327995002,macro_MASE,4.563992004841566,macro_CRPS,1951.0623417345068,30 updates/series; query p50 0.384s
+dev,105900,full,33624924,510,510,Chronos forward/backward + optimizer; FLOPs not measured,7.394089917983365,macro_MASE,4.561471309512854,macro_CRPS,1950.6452384202291,30 updates/series; query p50 0.385s
+dev,105900,independent,34147043,190,190,Chronos forward/backward + optimizer; FLOPs not measured,2.324818098994001,macro_MASE,4.5731544606387615,macro_CRPS,1935.1346621534663,10 updates/series; query p50 0.370s
+dev,105900,mirror_trend_selected,33624902,190,190,Chronos support-fold validation + residual least squares; FLOPs not measured,2.440956943002675,residual_min_relative_gain,0.025,dev_residual_fraction,0.125,selected residual payload for 2/16 dev series; selective dev query MASE not separately measured
 dev,105900,persistence,283,0,0,O(horizon),,macro_MASE,4.455252222716808,macro_CRPS,not applicable,model-free
 dev,105900,seasonal_naive,284,0,0,O(horizon),,macro_MASE,1.9879444278776646,macro_CRPS,not applicable,model-free

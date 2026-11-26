@@ -1,34 +1,70 @@
 {
   "experiment_id": "MA-1059",
-  "commit": "287e8bd45",
+  "status": "SCREENING_PRE_AUDIT",
+  "commit": "pre-audit freeze parent 1afd62141",
   "tests": {
     "command": "/tmp/ma1058-venv/bin/python -m pytest -q experiments/mirror_applications/ma-1059-time-series-view-geometry/tests",
-    "passed": 5,
+    "passed": 6,
     "failed": 0
   },
+  "development_verification": {
+    "command": "/tmp/ma1058-venv/bin/python experiments/mirror_applications/ma-1059-time-series-view-geometry/source/verify.py",
+    "passed": true,
+    "audit_values_opened": false
+  },
   "serialization": {
+    "actual_development_methods_checked": 9,
     "roundtrip_checked": false,
-    "byte_exact": true,
-    "actual_payload_files_checked": 9
+    "metric_replay_checked": false,
+    "note": "Development aggregate samples were not retained; fresh audit will save per-method samples for independent metric replay."
   },
-  "metric_replay": {
-    "checked": false,
-    "max_difference": null,
-    "note": "No audit was opened and dev forecast samples were not retained; aggregate dev metrics remain screening summaries."
+  "corrected_dev_selection": {
+    "selected_updates": {
+      "mirror": 10,
+      "diag": 30,
+      "full": 30,
+      "independent": 10
+    },
+    "residual_min_relative_gain": 0.025,
+    "shared_updates": 30,
+    "residual_fraction_gate": 0.25,
+    "selected_before_audit_access": true,
+    "hook_isolation": "all unused adapters explicitly inactive during each forecast",
+    "selection_criterion": "minimum support-fold MASE among thresholds whose dev residual allocation is <=25%; null threshold disables residual",
+    "development_residual_allocation_fraction": 0.125,
+    "development_residual_selected_ids": [
+      "T165",
+      "T164"
+    ]
   },
-  "fresh_split_integrity_checked": true,
-  "input_hashes": {
-    "protocol_sha256": "6157bec9af7fa7a36f19d012d2628c7e5dff18830ec13eb0e2182d066ea4076e",
-    "data_archive_sha256": "6e434ad8a0ef6acb55ebee0e1d1ffe22707ea4e62c05e091326267f3a5b4a93c",
-    "model_weights_sha256": "eed458758bd8165d80f496a90bcd2cfed9f1bf7d7b08677acd64e0f7d72bdcf2",
-    "development_json_sha256": "8a06aff1b437d07e4fb7e1af2d82cdfff3a56d13d7d6addcae72729bdf2c8b0e",
-    "selection_sha256": "a83ea2e91240225512c549630f41921e665a2426a71f607c60af37162f94eb46"
+  "development_payload_bytes": {
+    "native": 33589982,
+    "pooled_lora": 33624807,
+    "mirror": 33624862,
+    "diag": 33624860,
+    "full": 33624924,
+    "independent": 34147043,
+    "mirror_trend": 33624902,
+    "persistence": 283,
+    "seasonal_naive": 284
+  },
+  "hashes": {
+    "PROTOCOL.json": "9476f8347c6b701528a5d521315e2e09bc50f9a3ff150e26b1ec0f1a2b1d3d66",
+    "FRESH_FREEZE.json": "7c8c98aed807b377d853fbfe0d605f7898d514dbb412b42c82f86618b585b47a",
+    "AUDIT_FREEZE.json": "41306f27cfc8e19bf449b4944b75b7ba366a11b7a318c38054b0ce44e29f3ff1",
+    "runs/dev/selection.json": "c65a69b885ae946dfa368efeaf6de5741f8afe4ea409b3e75417a758e087913e",
+    "runs/dev/development.json": "3c91ac5351dc184f9432f27c6dcfacef271638f5aba258844a009158d4fb25ba",
+    "runs/dev/shared.pt": "1a8896846a7d905e818d2041db3494e64feb29ee0d68dba0d568571be861bd0b",
+    "runs/dev/pooled.pt": "cfc186e0cb52417267e880086ba4014d48a7f57f689261a936f1b9d1efab646c",
+    "source/ma1059.py": "b5f105cac1b778455f0658832a66f1f04897ee37eba5259764d67a969742e979",
+    "source/serialize_dev.py": "c7542887058338516d6c5ffc228d09ac1351405876ff51509475d77a7f9352a9",
+    "source/verify.py": "34b1427bc1bd2462dc43b57b5aa2c4db1e8a10fc210e43321c2dfda5f3438d70"
   },
   "notes": [
-    "PASS_SCREENING_VERIFICATION: development data/model/protocol hashes verified; all 9 actual serialized method payload byte totals recomputed.",
-    "Development selector fixes residual threshold at 0.0, which deterministically allocates residual state to 24/24 fresh series; registered <=25% gate fails before audit.",
-    "Fresh audit numeric values and forecasts were not accessed.",
-    "First unseeded development run is preserved as invalidated; deterministic seed 105900 run alone informs the outcome.",
-    "No fresh quality, capacity, or broad compression claim."
+    "AM-01 invalidates the earlier development FAIL because of pooled-hook leakage and residual denominator error.",
+    "The corrected development selector uses 0.025 relative support-fold MASE improvement and selects 2/16 series.",
+    "Fresh audit protocol, IDs, seeds, code, model/data, and development selection are frozen in AUDIT_FREEZE.json.",
+    "No fresh numeric outcomes have been opened.",
+    "No capacity claim."
   ]
 }

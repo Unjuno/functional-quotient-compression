@@ -32,13 +32,17 @@ def main():
             code,_=m.adapt(pipe,shared['A'],shared['B'],m.windows(series[sid])['support'],mode,int(sel['selected_updates'][mode]),105910+int(sel['selected_updates'][mode])+int(sid[1:]))
             adapters[mode][sid]=code
         write(mode,None if mode=='independent' else shared,adapters[mode])
-    residuals={};rh=m.OutputLoRA(pipe,shared['A'],shared['B'],False)
+    residuals={};rh=m.OutputLoRA(pipe,shared['A'],shared['B'],False); threshold=sel['residual_min_relative_gain']
     for sid in ids:
-        r=m.trend_residual(pipe,rh,'mirror',adapters['mirror'][sid],m.windows(series[sid])['support'],106000+int(sid[1:])); residuals[sid]=r
+        w=m.windows(series[sid]); selected_resid=False
+        if threshold is not None:
+            cv,_=m.adapt(pipe,shared['A'],shared['B'],w['support'][:3],'mirror',int(sel['selected_updates']['mirror']),106300+int(sid[1:]))
+            rc=m.trend_residual(pipe,rh,'mirror',cv,w['support'][:3],106400+int(sid[1:])); vctx,vy,_=w['support'][3]
+            bp=m.predict(pipe,rh,'mirror',cv,vctx,106500+int(sid[1:])); den=m.mase_den(series[sid]); base=m.mase(bp,vy,den); corrected=m.mase(m.apply_resid(bp,rc),vy,den); gain=(base-corrected)/max(base,1e-8)
+            selected_resid=gain>=float(threshold)
+        if selected_resid: residuals[sid]=m.trend_residual(pipe,rh,'mirror',adapters['mirror'][sid],w['support'],106000+int(sid[1:]))
     rh.close()
-    # Threshold 0 means the frozen rule stores/applies a private residual for every series.
-    selected=[s for s in ids if abs(residuals[s])>=float(sel['residual_threshold'])]
-    write('mirror_trend',shared,adapters['mirror'],{s:residuals[s] for s in selected})
+    write('mirror_trend',shared,adapters['mirror'],residuals)
     (out/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
     print(json.dumps(manifest,indent=2))
 if __name__=='__main__':main()

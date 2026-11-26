@@ -11,7 +11,9 @@ def test_registry_prior_art_and_split_frozen():
     assert p["experiment_id"] == "MA-1059"
     assert p["prior_art_refs"] == ["PA328", "PA330", "PA335"]
     assert p["fresh"]["locked_before_access"] is True
-    assert freeze["frozen_before_numeric_data_access"] is True
+    assert freeze["protocol_and_split_amended_before_audit_access"] is True
+    assert freeze["audit_numeric_values_opened"] is False
+    assert json.loads((ROOT / "PROTOCOL.json").read_text())["amendments"][0]["id"] == "AM-01"
     assert freeze["protocol_sha256"] == hashlib.sha256((ROOT / "PROTOCOL.json").read_bytes()).hexdigest()
 
 

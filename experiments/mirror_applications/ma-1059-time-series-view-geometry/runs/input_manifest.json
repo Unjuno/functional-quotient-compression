@@ -3,10 +3,9 @@
   "dataset": {
     "repo": "Monash-University/monash_tsf",
     "revision": "58aafbe2712ff481c014f562e42723f2820fd5d4",
-    "archive": "data/tourism_monthly_dataset.zip",
     "archive_sha256": "6e434ad8a0ef6acb55ebee0e1d1ffe22707ea4e62c05e091326267f3a5b4a93c",
     "readme_sha256": "39dc67ac6d59ae03de584493f969de138f7581bb1b014b2aa57a9eca20c76230",
-    "license": "CC-BY-4.0 per dataset card"
+    "license": "Research-use terms in official GroupLens README; source is Monash/HF CC-BY-4.0."
   },
   "model": {
     "repo": "amazon/chronos-t5-tiny",
@@ -27,22 +26,22 @@
     }
   },
   "development_source_sha256": {
-    "source/ma1059.py": "f03a05e11d7f5775c21ca4201c891634668f3b438421e0f6792bec97587126d8",
-    "source/serialize_dev.py": "6523484edad038c81a6117078f16f5618b93d52cb174d2aa49ade0414000a44e"
+    "runs/dev/source_used.py": "3c03e7ea7c248ad9e9c3a0e93b1d1f9620470c4ea6ca2f86a654ced1296ff74c",
+    "runs/dev/serialize_dev_used.py": "c7542887058338516d6c5ffc228d09ac1351405876ff51509475d77a7f9352a9"
   },
   "development_outputs_sha256": {
-    "runs/dev/development.json": "8a06aff1b437d07e4fb7e1af2d82cdfff3a56d13d7d6addcae72729bdf2c8b0e",
-    "runs/dev/selection.json": "a83ea2e91240225512c549630f41921e665a2426a71f607c60af37162f94eb46",
-    "runs/dev/shared.pt": "387bcfa66b75a9a597512c6de6502cd20bff88353ae10446ffede9e48bd021c9",
-    "runs/dev/pooled.pt": "4568ec9d721acea1c403db42073349387d10acefd97af728a137d68a558867c4",
-    "runs/dev/payloads/manifest.json": "90fcab45888210e0d3888695cf70b8974c2b37e15eb9de9e898c25217f72f24d"
+    "runs/dev/development.json": "3c91ac5351dc184f9432f27c6dcfacef271638f5aba258844a009158d4fb25ba",
+    "runs/dev/selection.json": "c65a69b885ae946dfa368efeaf6de5741f8afe4ea409b3e75417a758e087913e",
+    "runs/dev/shared.pt": "1a8896846a7d905e818d2041db3494e64feb29ee0d68dba0d568571be861bd0b",
+    "runs/dev/pooled.pt": "cfc186e0cb52417267e880086ba4014d48a7f57f689261a936f1b9d1efab646c",
+    "runs/dev/payloads/manifest.json": "571a484131bd7f7458b3b8ef1af1b6310e9cb2d711309e64b3efab847208b8cf"
   },
   "environment": {
     "cpu": "Intel Xeon Platinum 8370C",
     "torch": "2.14.1+cpu",
     "transformers": "4.46.3",
-    "huggingface_hub": "0.36.2",
     "torch_threads": 1
   },
+  "protocol_amendment": "AM-01",
   "fresh_audit_values_opened": false
 }
