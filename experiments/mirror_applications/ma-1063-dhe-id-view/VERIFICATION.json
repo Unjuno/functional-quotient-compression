@@ -1,19 +1,211 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-1063",
+  "status": "FAIL",
+  "scope": "GroupLens MovieLens 1M explicit rating >=4 binary classification; scoped k=128 DHE CPU screen.",
+  "fresh_audit": {
+    "rows": 99718,
+    "training_seeds": [
+      106310,
+      106311
+    ],
+    "same_fixed_hash_partition": true,
+    "train_audit_pair_overlap": false,
+    "audit_labels_or_ids_persisted": false,
+    "selected_epochs": {
+      "full_tables": 3,
+      "dhe_shared": 3,
+      "dhe_diag": 3,
+      "dhe_film": 3,
+      "dhe_mirror": 3,
+      "dhe_independent": 3
+    }
+  },
+  "serialized_replay": {
+    "experiment_id": "MA-1063",
+    "status": "PASS",
+    "audit_rows": 99718,
+    "train_audit_pair_overlap": false,
+    "audit_labels_or_ids_persisted": false,
+    "payload_models_replayed": 12,
+    "max_logit_abs_difference": 9.5367431640625e-07,
+    "max_metric_difference": 5.3516470144288064e-09,
+    "replay_tolerances": {
+      "logit_abs": 1e-06,
+      "metric_abs": 1e-08
+    },
+    "per_model": {
+      "full_tables": {
+        "106310": {
+          "complete_payload_bytes": 1282540,
+          "max_logit_abs_diff": 4.76837158203125e-07,
+          "metric_max_abs_diff": 2.2641581942650646e-09
+        },
+        "106311": {
+          "complete_payload_bytes": 1282540,
+          "max_logit_abs_diff": 4.76837158203125e-07,
+          "metric_max_abs_diff": 1.0291629770620148e-09
+        }
+      },
+      "dhe_shared": {
+        "106310": {
+          "complete_payload_bytes": 106783,
+          "max_logit_abs_diff": 4.76837158203125e-07,
+          "metric_max_abs_diff": 1.2349954392476548e-09
+        },
+        "106311": {
+          "complete_payload_bytes": 106783,
+          "max_logit_abs_diff": 4.76837158203125e-07,
+          "metric_max_abs_diff": 6.174977196238274e-10
+        }
+      },
+      "dhe_diag": {
+        "106310": {
+          "complete_payload_bytes": 107158,
+          "max_logit_abs_diff": 7.152557373046875e-07,
+          "metric_max_abs_diff": 1.2349954392476548e-09
+        },
+        "106311": {
+          "complete_payload_bytes": 107158,
+          "max_logit_abs_diff": 4.76837158203125e-07,
+          "metric_max_abs_diff": 5.004165970490249e-10
+        }
+      },
+      "dhe_film": {
+        "106310": {
+          "complete_payload_bytes": 107542,
+          "max_logit_abs_diff": 5.066394805908203e-07,
+          "metric_max_abs_diff": 5.3516470144288064e-09
+        },
+        "106311": {
+          "complete_payload_bytes": 107542,
+          "max_logit_abs_diff": 7.152557373046875e-07,
+          "metric_max_abs_diff": 2.218050187963172e-10
+        }
+      },
+      "dhe_mirror": {
+        "106310": {
+          "complete_payload_bytes": 107238,
+          "max_logit_abs_diff": 4.76837158203125e-07,
+          "metric_max_abs_diff": 2.264158527331972e-09
+        },
+        "106311": {
+          "complete_payload_bytes": 107238,
+          "max_logit_abs_diff": 9.5367431640625e-07,
+          "metric_max_abs_diff": 1.8524931588714821e-09
+        }
+      },
+      "dhe_independent": {
+        "106310": {
+          "complete_payload_bytes": 211978,
+          "max_logit_abs_diff": 4.76837158203125e-07,
+          "metric_max_abs_diff": 1.0291628660397123e-09
+        },
+        "106311": {
+          "complete_payload_bytes": 211978,
+          "max_logit_abs_diff": 4.76837158203125e-07,
+          "metric_max_abs_diff": 8.233305148763748e-10
+        }
+      }
+    }
+  },
+  "actual_payload_bytes": {
+    "full_tables": 1282540,
+    "dhe_shared": 106783,
+    "dhe_diag": 107158,
+    "dhe_film": 107542,
+    "dhe_mirror": 107238,
+    "dhe_independent": 211978
+  },
+  "mean_fresh_metrics_and_runtime": {
+    "full_tables": {
+      "mean_logloss": 0.5456517408679112,
+      "mean_auc": 0.789620262257667,
+      "complete_payload_bytes": 1282540,
+      "mean_qps": 17035161.937528174,
+      "mean_p95_ms": 0.2041709500502974
+    },
+    "dhe_shared": {
+      "mean_logloss": 0.5553563665688077,
+      "mean_auc": 0.7770463342200911,
+      "complete_payload_bytes": 106783,
+      "mean_qps": 218410.1497954204,
+      "mean_p95_ms": 5.983706300000334
+    },
+    "dhe_diag": {
+      "mean_logloss": 0.5553430927924891,
+      "mean_auc": 0.7770684148068586,
+      "complete_payload_bytes": 107158,
+      "mean_qps": 211546.68156086962,
+      "mean_p95_ms": 6.032800449960973
+    },
+    "dhe_film": {
+      "mean_logloss": 0.5557860521966088,
+      "mean_auc": 0.7766075118249014,
+      "complete_payload_bytes": 107542,
+      "mean_qps": 230030.39812567466,
+      "mean_p95_ms": 5.530254124971634
+    },
+    "dhe_mirror": {
+      "mean_logloss": 0.5554654722939877,
+      "mean_auc": 0.7769294164793616,
+      "complete_payload_bytes": 107238,
+      "mean_qps": 203838.43704152154,
+      "mean_p95_ms": 6.418403375047887
+    },
+    "dhe_independent": {
+      "mean_logloss": 0.5473204453667107,
+      "mean_auc": 0.7838672144612533,
+      "complete_payload_bytes": 211978,
+      "mean_qps": 208078.8025305711,
+      "mean_p95_ms": 6.384040925019002
+    }
+  },
+  "gate_results": {
+    "quality_vs_strongest_matched_DHE_control": "FAIL: Mirror AUC does not exceed diagonal by 0.005; mean difference -0.000138998",
+    "full_table_auc_tolerance": "FAIL: Mirror trails full tables by 0.012690846 AUC",
+    "complete_payload_le_25pct_full_tables": "PASS",
+    "throughput_ge_80pct_no_view": "PASS",
+    "decision": "FAIL"
+  },
+  "development": {
+    "train_rows": 800787,
+    "dev_rows": 99704,
+    "seeds": [
+      106300,
+      106301
+    ],
+    "selection": "Per-method minimum mean dev logloss among epochs 1,2,3; all selected 3.",
+    "audit_opened_before_freeze": false
+  },
+  "dataset_archive": {
+    "sha256": "a6898adb50b9ca05aa231689da44c217cb524e7ebd39d264c56e2832f2c54e20",
+    "bytes": 5917549,
+    "raw_archive_committed": false
+  },
+  "input_hashes": {
+    "protocol_sha256": "ba8b137c066d8a19249a89c6970113c4b6473bbf3084ded649b3cf09ef3bcc32",
+    "fresh_freeze_sha256": "5888f6aa28d7e87134cf70e387e51e4a81baa54b3484d29e3309c41689932eae",
+    "development_selection_sha256": "be992f59e8d79d99fedb137f1f5d41e136448e814d1eae9d548b6c33f7490d51",
+    "runner_sha256": "857ee08efbd221c1c63b33e8f2a97a377b27520a4f97a33400726bbdacf7ce61",
+    "verifier_sha256": "5c75b5ccde59b468b5a907927bc26aa879c7e5079a6b428cb69b8470685a5492",
+    "audit_results_sha256": "fbbba08a103e95d155462e5eab69fbe608de1a3c97a1086f2ead44963c1c8928",
+    "external_artifact_manifest_sha256": "83c56e246e0018399ffaf34addced6705b46ed19f6bbaaa8c01329a6ca7255ba",
+    "results_report_sha256": "00f42e22acd5122d117f3bf421a7d594592d338079b75f390de10db52d607c2b",
+    "results_core_sha256": "752f1d68d78a207aa4a68f46b9bc19f41d75cd63d1c4d5ccb9279953580e9c09",
+    "external_manifest_sha256": "83c56e246e0018399ffaf34addced6705b46ed19f6bbaaa8c01329a6ca7255ba",
+    "test_sha256": "99a50994e18c43bce151407bb0efe4f549b3551d6e2c0e1d2cfd4296ec81218b",
+    "serialized_replay_record_sha256": "bc4bae874681e36d93474b48a6a5e15a040dc5bd42b0daa88246c97faff5e503"
+  },
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "python -m pytest -q experiments/mirror_applications/ma-1063-dhe-id-view/tests",
+    "passed": 4,
+    "failed": 0
   },
-  "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
-  },
-  "metric_replay": {
-    "checked": false,
-    "max_difference": null
-  },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "notes": [
+    "One MovieLens split and two training seeds; not independent data worlds.",
+    "k=128 and the compact decoder are a scaled CPU screen, not an official DHE reproduction.",
+    "No near-convergence or capacity claim.",
+    "Inference measurements are CPU microbenchmarks; QPS is batch throughput and does not establish serving performance.",
+    "Archive byte count correction is documented as AM-01; no audit scores existed at correction time."
+  ]
 }
