@@ -1,10 +1,11 @@
 {
   "experiment_id": "MA-1062",
+  "amendment": "AM-01",
   "frozen_utc": "2026-11-26",
-  "parent_commit": "57132f2f7",
-  "protocol_sha256": "cc47eb9620c668f869f62974db1c314bf4e8fe1510ddc0d64b835671e930aeaf",
-  "runner_sha256": "1de8450f8bcb4994f70d2bab81b3905b71ffb4fd9c532af2483fb869f8433083",
-  "tests_sha256": "c53228333d299b11b5b3dbd541f9a30ee4b1b1cf1cc803ad008296a46b7c2845",
+  "parent_commit": "9489da931",
+  "protocol_sha256": "85d7639c99b9b46035c5686bce33ea29e44d1fb7b48ce4c3a5e110947eb29e08",
+  "runner_sha256": "9f838664f510f7b812b937991a8cf9ccaafb2dfc55cdc161da387833db2f86a0",
+  "tests_sha256": "c28231d2e76809058ebea8727c5c283201afb3929675c71a6a74a5b3e1ce918f",
   "dataset_archive_sha256": "50d2a982c66986937beb9ffb3aa76efe955bf3d5c6b761f4e3a7cd717c6a3229",
   "development_selection_sha256": "ecf95bc7e55d8e7cf96c0a7d6437c55ab7e1dba2dae0702c0b8519677041a31d",
   "development_results_sha256": "683e999ed0ed0baa35bf30dd788bd13b2b74fdd7c91396913b753174e1fe041b",
@@ -30,5 +31,6 @@
   "audit_member": "ml-100k/ua.test",
   "audit_numeric_values_opened": false,
   "selection_changes_after_audit_forbidden": true,
-  "audit_access_rule": "Only run phase=audit after this file is committed; audit labels are evaluated after all fresh models are trained at frozen epochs."
+  "persisted_audit_rows_policy": "Only aggregate metrics and prediction logits are saved; do not save target labels or row identifiers.",
+  "amendment_summary": "Added H=512 per-coordinate diagonal to the strongest-control gate and prevented audit labels/IDs from entering persisted predictions. No audit numeric values were opened; method set, dev results, selection and seeds are unchanged."
 }

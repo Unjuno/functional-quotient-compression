@@ -2,6 +2,7 @@
   "experiment_id": "MA-1062",
   "decision": "PROCEED_TO_FRESH_AUDIT",
   "audit_numeric_values_opened": false,
+  "amendment": "AM-01",
   "selected_epochs": {
     "full": 3,
     "shared_hash_128": 5,
@@ -13,11 +14,15 @@
     "diag16_512": 8,
     "mirror_512": 8
   },
-  "development_comparison": {
-    "mirror512_logloss": 0.5993525405456508,
+  "development_means": {
+    "mirror_512_logloss": 0.5993525405456508,
+    "shared_hash_512_logloss": 0.6019802678305523,
     "diag8_512_logloss": 0.5997885922745747,
-    "shared_hash512_logloss": 0.6019802678305523,
-    "development_gate_delta": 0.002
+    "diag16_512_logloss": 0.600164141252035,
+    "field_hash_128x4_logloss": 0.6281109846778954,
+    "strongest_control": "diag8_512",
+    "strongest_control_logloss": 0.5997885922745747,
+    "mirror_improvement_over_strongest": 0.0004360517289239141
   },
-  "reason": "The corrected experiment protocol requires fresh confirmation; development Mirror gain over paired diagonal is below its 0.002 success margin and does not justify a positive claim. All controls remain frozen for a fair audit."
+  "reason": "Fresh audit remains required to finish the registered screen; development did not meet the quality threshold. AM-01 adds the omitted stronger diagonal comparator and prevents audit labels/IDs from being written to prediction artifacts."
 }

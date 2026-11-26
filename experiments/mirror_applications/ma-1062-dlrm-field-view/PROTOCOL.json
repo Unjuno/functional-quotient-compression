@@ -112,8 +112,8 @@
       "end-to-end DLRM p50/p95 per 1024-example batch"
     ]
   },
-  "success_gate": "On both fresh seeds, H=512 Mirror logloss is <= strongest of H=512 hash, H=512 paired diagonal and H=128x4 field tables minus 0.002; AUC is no more than 0.005 below full DLRM; complete payload is >=25% smaller than full DLRM; and lookup p95 is <=1.25x plain H=512 hash.",
-  "failure_gate": "Mirror misses any registered quality/storage/latency gate, or the byte-matched diagonal matches its logloss within 0.002 on both seeds.",
+  "success_gate": "On both fresh seeds, H=512 Mirror logloss is <= the strongest of shared H=512 hash, H=512 paired diagonal, H=512 per-coordinate diagonal, and H=128x4 field tables minus 0.002; AUC is no more than 0.005 below full DLRM; complete payload is >=25% smaller than full DLRM; and lookup p95 is <=1.25x plain H=512 hash.",
+  "failure_gate": "Mirror misses any registered quality/storage/latency gate, or any diagonal control matches its logloss within 0.002 on both seeds.",
   "not_established_gate": "Archive/hash mismatch, missing registered fields, audit overlap with development pairs, unreproducible required control, or runtime failure before all methods are evaluated.",
   "boundaries": [
     "MovieLens 100K screen only; explicit preference is not CTR or production recommendation.",
@@ -121,5 +121,14 @@
     "Two fresh seeds are initialization/training replicates on one fixed split, not independent datasets.",
     "No capacity claim from fixed epochs; no broad recommender claim.",
     "Do not redistribute the MovieLens archive or use it commercially."
+  ],
+  "amendments": [
+    {
+      "id": "AM-01",
+      "timing": "Before fresh audit access",
+      "reason": "Pre-audit review found the first runner would persist audit binary labels alongside predictions, and the success comparator omitted the registered H=512 per-coordinate diagonal control. No ua.test numeric values were read.",
+      "change": "Persist audit logits without row labels or IDs; metric verification will recover targets from the pinned archive. Add diag16_512 to the strongest-control gate. Keep model candidates, dev results, selected epochs, split, and seeds unchanged.",
+      "audit_access": "ua.test remains unopened."
+    }
   ]
 }

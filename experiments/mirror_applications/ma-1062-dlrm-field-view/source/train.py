@@ -181,7 +181,10 @@ def run_audit():
     if not (RUNS/'DEVELOPMENT_SELECTION.json').exists(): raise ValueError('development selection missing')
     selection=json.loads((RUNS/'DEVELOPMENT_SELECTION.json').read_text())
     if selection['audit_opened'] is not False: raise ValueError('development selection invalid')
-    audit=read_audit_after_freeze(); train=read_base(); out={'experiment_id':'MA-1062','audit_rows':len(audit),'seeds':FRESH_SEEDS,'selected_epochs':selection['selected_epochs'],'methods':{},'payloads':{},'compute':{}}
+    audit=read_audit_after_freeze(); train=read_base()
+    train_pairs={(r[0],r[1]) for r in train}; audit_pairs={(r[0],r[1]) for r in audit}
+    if train_pairs & audit_pairs: raise ValueError('official audit pairs overlap the training partition')
+    out={'experiment_id':'MA-1062','audit_rows':len(audit),'seeds':FRESH_SEEDS,'selected_epochs':selection['selected_epochs'],'methods':{},'payloads':{},'compute':{}}
     adir=RUNS/'audit'; adir.mkdir(parents=True,exist_ok=True)
     for method in METHODS:
         out['methods'][method]={}; out['payloads'][method]={}; out['compute'][method]={}
@@ -190,8 +193,8 @@ def run_audit():
             _,_,comp=train_one(method,train,None,seed,int(selection['selected_epochs'][method]),payload)
             # Reopen the actual serialized state and use it as the canonical evaluator.
             model,obj=load_model_from_payload(payload); metrics,preds=evaluate(model,audit)
-            labels=np.asarray([r[5] for r in audit],dtype=np.float32)
-            np.savez_compressed(adir/f'{method}_seed{seed}.npz',logits=preds,labels=labels)
+            # Keep official audit labels and row identifiers out of persisted artifacts.
+            np.savez_compressed(adir/f'{method}_seed{seed}.npz',logits=preds)
             latency=batch_latency(model,audit)
             metadata={'experiment_id':'MA-1062','method':method,'seed':seed,'model':'compact DLRM screening implementation','timestamp_mean':obj['timestamp_mean'],'timestamp_std':obj['timestamp_std'],'selected_epochs':selection['selected_epochs'][method],'archive_sha256':P['dataset']['archive_sha256']}
             meta=adir/f'{method}_seed{seed}.json'; meta.write_text(json.dumps(metadata,indent=2)+'\n')

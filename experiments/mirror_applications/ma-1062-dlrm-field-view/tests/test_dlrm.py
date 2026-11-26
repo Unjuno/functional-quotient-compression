@@ -29,3 +29,14 @@ def test_train_dev_split_is_pair_disjoint():
     train,dev=ma.split_train_dev(rows)
     train_pairs={(r[0],r[1]) for r in train}; dev_pairs={(r[0],r[1]) for r in dev}
     assert train_pairs.isdisjoint(dev_pairs)
+
+def test_protocol_freezes_all_controls_and_audit_outputs_do_not_save_labels():
+    import json
+    protocol=json.loads((ROOT/'PROTOCOL.json').read_text())
+    assert 'sixteen per-coordinate diagonal gains' in protocol['controls'][-2]
+    assert 'diag16_512' in (ROOT/'source/train.py').read_text()
+    assert 'per-coordinate diagonal' in protocol['success_gate']
+    source=(ROOT/'source/train.py').read_text()
+    assert "np.savez_compressed(adir/f'{method}_seed{seed}.npz',logits=preds)" in source
+    assert "np.savez_compressed(adir/f'{method}_seed{seed}.npz',logits=preds,labels=labels)" not in source
+    assert protocol['amendments'][-1]['audit_access']=='ua.test remains unopened.'
