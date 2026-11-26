@@ -1,8 +1,8 @@
-## Current handoff — 2026-11-26, MA-1059 corrected audit frozen
+## Current handoff — 2026-11-26, MA-1059 complete
 
-AM-01 invalidated the previous MA-1059 development FAIL after finding a pooled-hook leak and a residual estimator denominator error. The corrected development selector uses a relative support-fold gain threshold of 0.025 and selects residuals on 2/16 dev series. Actual dev payloads are serialized and byte-checked. The 24 fresh series are still unopened; source, split, settings and sampling seeds are frozen in `experiments/mirror_applications/ma-1059-time-series-view-geometry/AUDIT_FREEZE.json`. Run the corrected fresh comparison before closing this MA.
+MA-1059 is a corrected scoped FAIL under AM-01. Two sampling draws over 24 frozen Tourism audit series: macro MASE 5.587546 Mirror vs 5.564286 native, 5.584619 pooled LoRA, 5.580430 byte-near diagonal, and 3.735720 seasonal naive. Trend residual was selected on 3/24 and worsened MASE to 5.663872. Mirror state is 35,366 B vs 836,043 B independent, but full-bundle reduction is 2.33%. All 432 forecasts replay exactly from serialized payloads, all 432 metric rows replay at zero difference, and 6 tests pass. No capacity claim. See `ma-1059-time-series-view-geometry/RESULTS.md`.
 
-Next eligible P0 after MA-1059 is MA-1062, DLRM shared embedding basis + feature-field View codes (PA337). MA-1060 and MA-1061 remain P1. For MA-1062 use the official MovieLens 100K research-use archive only if its access terms are retained; compare full DLRM tables, ordinary shared hashing, same-cost field diagonal/rotation, and independent field tables. Count actual bytes and lookup latency.
+Next P0: MA-1062, DLRM shared embedding basis + feature-field View codes (PA337). MA-1060 and MA-1061 are P1. Use the frozen MovieLens 100K screening design: full DLRM tables, ordinary shared hashing, byte-near field diagonal/rotation controls, independent field tables; retain the dataset access terms and measure actual payload bytes, lookup latency and end-to-end quality.
 
 ## Current handoff — 2026-11-25, MA-1056 complete
 

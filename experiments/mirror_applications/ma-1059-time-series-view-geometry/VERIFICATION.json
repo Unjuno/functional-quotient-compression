@@ -1,70 +1,149 @@
 {
   "experiment_id": "MA-1059",
-  "status": "SCREENING_PRE_AUDIT",
-  "commit": "pre-audit freeze parent 1afd62141",
+  "status": "FAIL",
+  "scope": "Pinned Chronos-T5-Tiny / monthly Monash Tourism; two sampling draws on 24 held-out series.",
   "tests": {
     "command": "/tmp/ma1058-venv/bin/python -m pytest -q experiments/mirror_applications/ma-1059-time-series-view-geometry/tests",
-    "passed": 6,
+    "passed": 7,
     "failed": 0
   },
-  "development_verification": {
-    "command": "/tmp/ma1058-venv/bin/python experiments/mirror_applications/ma-1059-time-series-view-geometry/source/verify.py",
-    "passed": true,
-    "audit_values_opened": false
+  "fresh_audit": {
+    "series_count": 24,
+    "sampling_seeds": [
+      105903,
+      105904
+    ],
+    "audit_values_opened_after_freeze": true,
+    "freeze_parent_commit": "1afd62141",
+    "residual_series_count": 3,
+    "residual_fraction": 0.125
   },
-  "serialization": {
-    "actual_development_methods_checked": 9,
-    "roundtrip_checked": false,
-    "metric_replay_checked": false,
-    "note": "Development aggregate samples were not retained; fresh audit will save per-method samples for independent metric replay."
+  "serialized_replay": {
+    "status": "PASS",
+    "saved_metric_rows_replayed": 432,
+    "max_metric_difference": 0.0,
+    "serialized_payload_forecast_exact": true,
+    "max_serialized_forecast_difference": 0.0,
+    "actual_payload_bytes": {
+      "native": 33590178,
+      "pooled_lora": 33625003,
+      "mirror": 33625090,
+      "diag": 33625088,
+      "full": 33625184,
+      "independent": 34425767,
+      "mirror_trend": 33625146,
+      "persistence": 459,
+      "seasonal_naive": 462
+    }
   },
-  "corrected_dev_selection": {
-    "selected_updates": {
-      "mirror": 10,
-      "diag": 30,
-      "full": 30,
-      "independent": 10
+  "payload_file_totals_recomputed": {
+    "native": {
+      "method_state_bytes": 454,
+      "complete_payload_bytes": 33590178
     },
-    "residual_min_relative_gain": 0.025,
-    "shared_updates": 30,
-    "residual_fraction_gate": 0.25,
-    "selected_before_audit_access": true,
-    "hook_isolation": "all unused adapters explicitly inactive during each forecast",
-    "selection_criterion": "minimum support-fold MASE among thresholds whose dev residual allocation is <=25%; null threshold disables residual",
-    "development_residual_allocation_fraction": 0.125,
-    "development_residual_selected_ids": [
-      "T165",
-      "T164"
-    ]
+    "pooled_lora": {
+      "method_state_bytes": 35279,
+      "complete_payload_bytes": 33625003
+    },
+    "mirror": {
+      "method_state_bytes": 35366,
+      "complete_payload_bytes": 33625090
+    },
+    "diag": {
+      "method_state_bytes": 35364,
+      "complete_payload_bytes": 33625088
+    },
+    "full": {
+      "method_state_bytes": 35460,
+      "complete_payload_bytes": 33625184
+    },
+    "independent": {
+      "method_state_bytes": 836043,
+      "complete_payload_bytes": 34425767
+    },
+    "mirror_trend": {
+      "method_state_bytes": 35422,
+      "complete_payload_bytes": 33625146
+    },
+    "persistence": {
+      "method_state_bytes": 459,
+      "complete_payload_bytes": 459
+    },
+    "seasonal_naive": {
+      "method_state_bytes": 462,
+      "complete_payload_bytes": 462
+    }
   },
-  "development_payload_bytes": {
-    "native": 33589982,
-    "pooled_lora": 33624807,
-    "mirror": 33624862,
-    "diag": 33624860,
-    "full": 33624924,
-    "independent": 34147043,
-    "mirror_trend": 33624902,
-    "persistence": 283,
-    "seasonal_naive": 284
+  "input_hashes": {
+    "protocol_sha256": "9476f8347c6b701528a5d521315e2e09bc50f9a3ff150e26b1ec0f1a2b1d3d66",
+    "fresh_freeze_sha256": "7c8c98aed807b377d853fbfe0d605f7898d514dbb412b42c82f86618b585b47a",
+    "audit_freeze_sha256": "41306f27cfc8e19bf449b4944b75b7ba366a11b7a318c38054b0ce44e29f3ff1",
+    "data_archive_sha256": "6e434ad8a0ef6acb55ebee0e1d1ffe22707ea4e62c05e091326267f3a5b4a93c",
+    "model_weights_sha256": "eed458758bd8165d80f496a90bcd2cfed9f1bf7d7b08677acd64e0f7d72bdcf2",
+    "selection_sha256": "c65a69b885ae946dfa368efeaf6de5741f8afe4ea409b3e75417a758e087913e"
   },
-  "hashes": {
+  "artifact_sha256": {
     "PROTOCOL.json": "9476f8347c6b701528a5d521315e2e09bc50f9a3ff150e26b1ec0f1a2b1d3d66",
     "FRESH_FREEZE.json": "7c8c98aed807b377d853fbfe0d605f7898d514dbb412b42c82f86618b585b47a",
     "AUDIT_FREEZE.json": "41306f27cfc8e19bf449b4944b75b7ba366a11b7a318c38054b0ce44e29f3ff1",
-    "runs/dev/selection.json": "c65a69b885ae946dfa368efeaf6de5741f8afe4ea409b3e75417a758e087913e",
-    "runs/dev/development.json": "3c91ac5351dc184f9432f27c6dcfacef271638f5aba258844a009158d4fb25ba",
-    "runs/dev/shared.pt": "1a8896846a7d905e818d2041db3494e64feb29ee0d68dba0d568571be861bd0b",
-    "runs/dev/pooled.pt": "cfc186e0cb52417267e880086ba4014d48a7f57f689261a936f1b9d1efab646c",
+    "runs/audit/results.json": "a927339f1f69f60b0557b6665dfb2ab9f1d87f7518a11e630037fa191442492c",
+    "runs/audit/verification_replay.json": "4a7f2bc23e682f6dcda4f96b2ba2244f6020f35d8ee21eea682e87fb36a90eb9",
     "source/ma1059.py": "b5f105cac1b778455f0658832a66f1f04897ee37eba5259764d67a969742e979",
-    "source/serialize_dev.py": "c7542887058338516d6c5ffc228d09ac1351405876ff51509475d77a7f9352a9",
-    "source/verify.py": "34b1427bc1bd2462dc43b57b5aa2c4db1e8a10fc210e43321c2dfda5f3438d70"
+    "source/verify_audit.py": "155f5d5a978e9e2467e9ac5396a040b838e03bfb2043f739a71c0043b65ff7de",
+    "RESULTS.md": "de6b381f728745594e5e6870df241521fac177e0339caa2d8d3a00f981d0337f",
+    "RESULTS_CORE.csv": "6c0d39a44cba23df7a55e634a003b6fd9618eee43a08336c26dbfe30cd9136fc",
+    "tests/test_payload_manifest.py": "eb84e2f21cc3d368573b2cd5c7301d2531a04e33b81e23203ad32eb5bce5b5e8",
+    "README.md": "932d4c546b71110e359f7af32ac6cd00e3158b47283f656dd15d0f468f236a51",
+    "STATUS.md": "659c31af2373c8d5becd7303035b19856c65478316bfc106d472e04f12a3774d"
   },
   "notes": [
-    "AM-01 invalidates the earlier development FAIL because of pooled-hook leakage and residual denominator error.",
-    "The corrected development selector uses 0.025 relative support-fold MASE improvement and selects 2/16 series.",
-    "Fresh audit protocol, IDs, seeds, code, model/data, and development selection are frozen in AUDIT_FREEZE.json.",
-    "No fresh numeric outcomes have been opened.",
-    "No capacity claim."
-  ]
+    "The amended audit configuration, runner source, development selection, dataset archive, and model weights match the pre-audit freeze.",
+    "All 432 serialized-payload forecasts match saved forecast samples bit-exactly; all 432 per-series MASE/CRPS rows replay with max difference 0.0.",
+    "All actual serialized method file sizes and complete payload totals were recomputed.",
+    "Two seeds are stochastic forecast draws on the same fixed 24-series audit set, not independent data worlds.",
+    "No capacity or broad time-series claim."
+  ],
+  "audit_payload_file_sha256": {
+    "runs/audit/diag_seed105903.npz": "f8406d9023401112da5208e47ae15d7d01446a0e3148fddd16c5b34bacb16dff",
+    "runs/audit/diag_seed105904.npz": "09930d7765a896824007a277cdf38bf4b4b49d8e7df59af7a935132c33cb2a2d",
+    "runs/audit/full_seed105903.npz": "5335f4886e5e054d2f7bb6e40b5d14fc9f23985ea7cebacdda1dc4552c1155e7",
+    "runs/audit/full_seed105904.npz": "51b68806d5dd09c864a397f0ee48992d4a9bc6d1385a65ce907bef5e02e56903",
+    "runs/audit/independent_seed105903.npz": "aa0d23bf930aae32f04ea276591ad1a72c3a9067ab76bfef189f03d381663afe",
+    "runs/audit/independent_seed105904.npz": "80d4275eab6708dc211f9e5f29e52c426471bdb12936a4d570c09a2decc1d9e8",
+    "runs/audit/mirror_seed105903.npz": "7b6ca90641e307f620f4d0dae779a748088592f87e1c5258093cacf43ff4d439",
+    "runs/audit/mirror_seed105904.npz": "419469dbed78e13777947ac8fa3b6e77d1a2d10266e6af4eb8b8bea1a51df44d",
+    "runs/audit/mirror_trend_seed105903.npz": "93b1940b7e629b6f1319dcbf5bc06e19f870937bb7c888960931bb9e562a9e09",
+    "runs/audit/mirror_trend_seed105904.npz": "e312364369e2eb51daed598a60508fa7aab91da84706c113a4e980110754e9a0",
+    "runs/audit/native_seed105903.npz": "c7192c7e60f41b58c9fcd8cc86827e0e5f0413067438c1b8088b8667f486665e",
+    "runs/audit/native_seed105904.npz": "9e9f769d38f7c145606619a32361f6b32300eda2ba0cc05a62c5d9ab0b111d86",
+    "runs/audit/payloads/common_model_manifest.json": "5aa15ca1e1b68f18eaa49b1441738e196adaf3884e90f0bf0de0db8465d8ebb9",
+    "runs/audit/payloads/diag/method.json": "7c0a868261bd3517125926e18ed7e64fe59abb545551622f82b2a86cfe5af8b4",
+    "runs/audit/payloads/diag/series_codes.f32le": "42643bb1ba71783e1e5dcc633b3e7174bb8a1c5c24e13109cd41f35e45ae2640",
+    "runs/audit/payloads/full/method.json": "60961a64d84ccf50af7158002ad9bb070f3e3764080977003bb82b666e8cefe6",
+    "runs/audit/payloads/full/series_codes.f32le": "87e7e3320a565938f4fa993e512c5c371eaf08dc89e5414be39fe5b4d5b1dc3c",
+    "runs/audit/payloads/independent/method.json": "834907564c2057b3b4a95b17c4610ae329431b0e0b10de5cb3b535fef5755b9a",
+    "runs/audit/payloads/independent/series_codes.f32le": "f0b8f255e960855075f1a20f3412a052d734a7a3498244410b8fb792334c075a",
+    "runs/audit/payloads/mirror/method.json": "dfd50d3c1384f3fee340ac823e677f3190e77c7b2ee42d941428df420675c58b",
+    "runs/audit/payloads/mirror/series_codes.f32le": "d718b553a11f3700e17c15ef8b9a38c9fb673cec92e06d82e32410f7aeb3bcef",
+    "runs/audit/payloads/mirror_trend/method.json": "a7d69faeb5237a5848f646cd08b4ea6d34f17a7442dd58ae7ac610de07e88dc1",
+    "runs/audit/payloads/mirror_trend/series_codes.f32le": "d718b553a11f3700e17c15ef8b9a38c9fb673cec92e06d82e32410f7aeb3bcef",
+    "runs/audit/payloads/mirror_trend/trend_residuals.f32le": "4cbaad854d5d0636e3b2816d90d6c0d6810618b421c69d5d6e42f90976c43c40",
+    "runs/audit/payloads/native/method.json": "f7f100e62992d87fb4b79c6c85e5d81a221d5544388e7aa28257e4541290b409",
+    "runs/audit/payloads/persistence/method.json": "b31a1f3bb12f17f4ca8599f9a01a6fb708e4059243e2a0e85919abbfbffa7265",
+    "runs/audit/payloads/pooled_basis/A.f32le": "13eaebcd3045288ae45783c82a25b0c0f95846943ffb53ffde2daa4e2e99ae52",
+    "runs/audit/payloads/pooled_basis/B.f32le": "d88d18d6e2162497e38b541215c580ed7be974cf104ce1f0975448896bb1ab16",
+    "runs/audit/payloads/pooled_lora/global_angle.f32le": "ca4a4e61bce80526a442f9ae91b980b48d866b17abc4271be315ea2ef263d520",
+    "runs/audit/payloads/pooled_lora/method.json": "35b5422dd121f520b558a45481fa52179ddc96bcae4b64e3835dda6d4a8b3348",
+    "runs/audit/payloads/seasonal_naive/method.json": "18fd393fcb9ca5f550a7df87c3df42dda25c0078cf31915ba9c095682d04e56a",
+    "runs/audit/payloads/shared_basis/A.f32le": "9cc40166f9c4606ce6254ff90e08c14f772592c0e979d5a334d26e28423a71a8",
+    "runs/audit/payloads/shared_basis/B.f32le": "75c8e2476c19d3d24ab46e861bee79c031356fe2fd6df37373352a00b335a851",
+    "runs/audit/persistence_seed105903.npz": "77a3919b543d91657165aea62b79967b42a885bf93207684f4718e8325f7c1a3",
+    "runs/audit/persistence_seed105904.npz": "77a3919b543d91657165aea62b79967b42a885bf93207684f4718e8325f7c1a3",
+    "runs/audit/pooled_lora_seed105903.npz": "e5d1c663da97d287a72ffb89843f75882ad633f13c0edc0c6d275e2fcfd89170",
+    "runs/audit/pooled_lora_seed105904.npz": "9f8cea87aea7b2a61011165a85a8a5884934b89c1fba0de037e98d04e814fa58",
+    "runs/audit/results.json": "a927339f1f69f60b0557b6665dfb2ab9f1d87f7518a11e630037fa191442492c",
+    "runs/audit/seasonal_naive_seed105903.npz": "cfa757f8c4547445dafdf2a3c155b31b02a08607e44485e2b5462861c5fd7805",
+    "runs/audit/seasonal_naive_seed105904.npz": "cfa757f8c4547445dafdf2a3c155b31b02a08607e44485e2b5462861c5fd7805",
+    "runs/audit/verification_replay.json": "4a7f2bc23e682f6dcda4f96b2ba2244f6020f35d8ee21eea682e87fb36a90eb9"
+  }
 }

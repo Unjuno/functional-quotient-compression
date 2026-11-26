@@ -8,3 +8,21 @@ dev,105900,independent,34147043,190,190,Chronos forward/backward + optimizer; FL
 dev,105900,mirror_trend_selected,33624902,190,190,Chronos support-fold validation + residual least squares; FLOPs not measured,2.440956943002675,residual_min_relative_gain,0.025,dev_residual_fraction,0.125,selected residual payload for 2/16 dev series; selective dev query MASE not separately measured
 dev,105900,persistence,283,0,0,O(horizon),,macro_MASE,4.455252222716808,macro_CRPS,not applicable,model-free
 dev,105900,seasonal_naive,284,0,0,O(horizon),,macro_MASE,1.9879444278776646,macro_CRPS,not applicable,model-free
+audit,105903,native,33590178,24,0,Chronos inference; FLOPs not measured,,macro_MASE,5.560993418097496,macro_CRPS,2554.6290771479016,24 audit series; p50/p95=0.359161/0.377570s
+audit,105903,pooled_lora,33625003,24,0,Chronos inference; FLOPs not measured,,macro_MASE,5.626802871624629,macro_CRPS,2533.765174758657,24 audit series; p50/p95=0.387755/0.412625s
+audit,105903,mirror,33625090,24,10,Chronos inference; FLOPs not measured,3.5268922289942566,macro_MASE,5.573891902963321,macro_CRPS,2555.7547744893336,24 audit series; p50/p95=0.596396/0.900582s
+audit,105903,diag,33625088,24,30,Chronos inference; FLOPs not measured,10.189743540988275,macro_MASE,5.564412439862887,macro_CRPS,2554.3615684493593,24 audit series; p50/p95=0.538780/0.656323s
+audit,105903,full,33625184,24,30,Chronos inference; FLOPs not measured,10.19990069299456,macro_MASE,5.568095838030179,macro_CRPS,2555.261337376481,24 audit series; p50/p95=0.499018/0.519763s
+audit,105903,independent,34425767,24,10,Chronos inference; FLOPs not measured,3.3944907240074826,macro_MASE,5.629963422815005,macro_CRPS,2558.1337425912325,24 audit series; p50/p95=0.366759/0.374617s
+audit,105903,mirror_trend,33625146,24,0,Chronos inference; FLOPs not measured,,macro_MASE,5.649713998039563,macro_CRPS,2613.0319382995817,24 audit series; p50/p95=0.374914/0.445907s
+audit,105903,persistence,459,24,0,Chronos inference; FLOPs not measured,,macro_MASE,6.02715943257014,macro_CRPS,2884.4791666666665,24 audit series; p50/p95=0.000008/0.000043s
+audit,105903,seasonal_naive,462,24,0,Chronos inference; FLOPs not measured,,macro_MASE,3.7357197776436806,macro_CRPS,1258.1041666666667,24 audit series; p50/p95=0.000005/0.000008s
+audit,105904,native,33590178,24,0,Chronos inference; FLOPs not measured,,macro_MASE,5.567579547564189,macro_CRPS,2590.570471319347,24 audit series; p50/p95=0.376074/0.483566s
+audit,105904,pooled_lora,33625003,24,0,Chronos inference; FLOPs not measured,,macro_MASE,5.542435879508655,macro_CRPS,2564.572461282378,24 audit series; p50/p95=0.373647/0.395280s
+audit,105904,mirror,33625090,24,10,Chronos inference; FLOPs not measured,3.5268922289942566,macro_MASE,5.601199100414912,macro_CRPS,2583.3332640990698,24 audit series; p50/p95=0.369826/0.386966s
+audit,105904,diag,33625088,24,30,Chronos inference; FLOPs not measured,10.189743540988275,macro_MASE,5.596448073784511,macro_CRPS,2582.235347102756,24 audit series; p50/p95=0.370660/0.390171s
+audit,105904,full,33625184,24,30,Chronos inference; FLOPs not measured,10.19990069299456,macro_MASE,5.590194856127103,macro_CRPS,2581.9123683978564,24 audit series; p50/p95=0.368574/0.404366s
+audit,105904,independent,34425767,24,10,Chronos inference; FLOPs not measured,3.3944907240074826,macro_MASE,5.637390524148941,macro_CRPS,2600.7012438854845,24 audit series; p50/p95=0.366563/0.379370s
+audit,105904,mirror_trend,33625146,24,0,Chronos inference; FLOPs not measured,,macro_MASE,5.678030063708623,macro_CRPS,2640.7753542199384,24 audit series; p50/p95=0.364081/0.380001s
+audit,105904,persistence,459,24,0,Chronos inference; FLOPs not measured,,macro_MASE,6.02715943257014,macro_CRPS,2884.4791666666665,24 audit series; p50/p95=0.000009/0.000057s
+audit,105904,seasonal_naive,462,24,0,Chronos inference; FLOPs not measured,,macro_MASE,3.7357197776436806,macro_CRPS,1258.1041666666667,24 audit series; p50/p95=0.000004/0.000006s
