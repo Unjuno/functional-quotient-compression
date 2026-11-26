@@ -1,0 +1,58 @@
+{
+  "experiment_id": "MA-1064",
+  "amendments": [
+    "AM-01",
+    "AM-02"
+  ],
+  "protocol_sha256": "04c8624196f8a6a285dbf007c3bb486bdd21c7fe6c513359407fab5c898e7c81",
+  "runner_sha256": "137030c42e8d2c1870163ee9876c59e635b59c83f254b8558cb67b8412af2391",
+  "base_runner_sha256": "857ee08efbd221c1c63b33e8f2a97a377b27520a4f97a33400726bbdacf7ce61",
+  "selection_sha256": "3a1e2168e7fec07794c6b6c5efae710838d2caa3a7acda4d54349325ae25caaa",
+  "amendments_sha256": "0dcefdd121d438fb6a3147e51fc682e077a5d7e45d81b65523af471d6588dc22",
+  "failed_attempt_sha256": "e52440ecb072fc9e5d339cbb627e3ea0b897afa7b772db0e64baf2366b6b4f7a",
+  "tests_sha256": "3ab3c2b72fa3e0597d243bef5988d4419e7c60a6754a8b36c9a32aacadad3ed5",
+  "archive_sha256": "a6898adb50b9ca05aa231689da44c217cb524e7ebd39d264c56e2832f2c54e20",
+  "archive_bytes": 5917549,
+  "legacy_audit_exclusion": "SHA256(user_id:item_id) modulo 10 equals 9; all such rows excluded from train/dev/fresh",
+  "new_partition": "SHA256(MA-1064:user_id:item_id) modulo 10; 0-7 train, 8 dev, 9 fresh audit among nonexcluded rows",
+  "legacy_audit_rows_excluded": 99718,
+  "train_rows": 720438,
+  "development_rows": 90076,
+  "development_seeds": [
+    106400,
+    106401
+  ],
+  "fresh_seeds": [
+    106410,
+    106411
+  ],
+  "selected_cutoff": 5,
+  "selected_adapter_epochs": {
+    "id_residual": {
+      "1": 3,
+      "5": 3,
+      "20": 3
+    },
+    "private_replace": {
+      "1": 3,
+      "5": 3,
+      "20": 3
+    },
+    "id_mirror": {
+      "1": 3,
+      "5": 3,
+      "20": 3
+    },
+    "mirror_residual": {
+      "1": 3,
+      "5": 3,
+      "20": 3
+    }
+  },
+  "selected_full_epoch": 3,
+  "user_rare_dev_rows": 0,
+  "item_rare_dev_rows": 137,
+  "audit_labels_or_metrics_previously_accessed": false,
+  "audit_ids_used_only_for_split_hash_and_not_persisted": true,
+  "note": "Frozen before any MA-1064 fresh audit scoring. MA-1063 audit labels were never reused; pair IDs were hashed solely to exclude that partition."
+}

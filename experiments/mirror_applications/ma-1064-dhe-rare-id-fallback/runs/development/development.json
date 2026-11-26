@@ -1,0 +1,2768 @@
+{
+  "experiment_id": "MA-1064",
+  "archive_sha256": "a6898adb50b9ca05aa231689da44c217cb524e7ebd39d264c56e2832f2c54e20",
+  "legacy_MA1063_audit_rows_excluded": 99718,
+  "train_rows": 720438,
+  "dev_rows": 90076,
+  "audit_opened": false,
+  "development_seeds": [
+    106400,
+    106401
+  ],
+  "base": {
+    "106400": {
+      "compute": {
+        "wall_seconds": 25.14518204900014,
+        "updates": 528,
+        "training_examples": 2161314
+      },
+      "metrics": {
+        "overall": {
+          "logloss": 0.5592602558473311,
+          "auc": 0.7736351604927327
+        },
+        "slices": {
+          "user_freq_le5": {
+            "n": 0,
+            "auc": null,
+            "logloss": null
+          },
+          "item_freq_le5": {
+            "n": 137,
+            "logloss": 0.6941796893122828,
+            "auc": 0.632112815437902
+          },
+          "user_freq_0": {
+            "n": 0,
+            "auc": null,
+            "logloss": null
+          },
+          "item_freq_0": {
+            "n": 17,
+            "auc": null,
+            "logloss": null
+          }
+        },
+        "macro_rare_auc": 0.632112815437902
+      }
+    },
+    "106401": {
+      "compute": {
+        "wall_seconds": 23.60341714099968,
+        "updates": 528,
+        "training_examples": 2161314
+      },
+      "metrics": {
+        "overall": {
+          "logloss": 0.5579125224440359,
+          "auc": 0.7744658040683998
+        },
+        "slices": {
+          "user_freq_le5": {
+            "n": 0,
+            "auc": null,
+            "logloss": null
+          },
+          "item_freq_le5": {
+            "n": 137,
+            "logloss": 0.5880390434014531,
+            "auc": 0.6721919841662544
+          },
+          "user_freq_0": {
+            "n": 0,
+            "auc": null,
+            "logloss": null
+          },
+          "item_freq_0": {
+            "n": 17,
+            "auc": null,
+            "logloss": null
+          }
+        },
+        "macro_rare_auc": 0.6721919841662544
+      }
+    }
+  },
+  "adapters": {
+    "id_residual": {
+      "1": {
+        "106400": {
+          "metrics": {
+            "1": {
+              "overall": {
+                "logloss": 0.5592595521058323,
+                "auc": 0.7736355674993971
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.6937169869821697,
+                  "auc": 0.6321128154379021
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6321128154379021
+            },
+            "2": {
+              "overall": {
+                "logloss": 0.5592587928512822,
+                "auc": 0.7736360676154596
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.6932177854284294,
+                  "auc": 0.6311232063334983
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6311232063334983
+            },
+            "3": {
+              "overall": {
+                "logloss": 0.5592582181760084,
+                "auc": 0.7736363628403803
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.6928399427279668,
+                  "auc": 0.6311232063334983
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6311232063334983
+            }
+          },
+          "compute": {
+            "wall_seconds": 12.926746896000168,
+            "updates": 528,
+            "training_examples": 2161314
+          },
+          "selected_id_counts": [
+            0,
+            130
+          ]
+        },
+        "106401": {
+          "metrics": {
+            "1": {
+              "overall": {
+                "logloss": 0.5579119378532238,
+                "auc": 0.7744662734003254
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.5876546813430835,
+                  "auc": 0.673428995546759
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.673428995546759
+            },
+            "2": {
+              "overall": {
+                "logloss": 0.5579115524382483,
+                "auc": 0.7744665832603276
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.5874012752166186,
+                  "auc": 0.6736763978228599
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6736763978228599
+            },
+            "3": {
+              "overall": {
+                "logloss": 0.557910927216767,
+                "auc": 0.7744670682366506
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.5869901989381509,
+                  "auc": 0.67367639782286
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.67367639782286
+            }
+          },
+          "compute": {
+            "wall_seconds": 11.242118909000055,
+            "updates": 528,
+            "training_examples": 2161314
+          },
+          "selected_id_counts": [
+            0,
+            130
+          ]
+        }
+      },
+      "5": {
+        "106400": {
+          "metrics": {
+            "1": {
+              "overall": {
+                "logloss": 0.5592557237874263,
+                "auc": 0.7736401470182761
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.691199909546059,
+                  "auc": 0.6335972290945077
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6335972290945077
+            },
+            "2": {
+              "overall": {
+                "logloss": 0.5592514065014283,
+                "auc": 0.7736447356209989
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.6883613412719414,
+                  "auc": 0.636071251855517
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.636071251855517
+            },
+            "3": {
+              "overall": {
+                "logloss": 0.5592477543152545,
+                "auc": 0.7736486517669575
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.685960068850093,
+                  "auc": 0.6373082632360217
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6373082632360217
+            }
+          },
+          "compute": {
+            "wall_seconds": 11.372990413000025,
+            "updates": 528,
+            "training_examples": 2161314
+          },
+          "selected_id_counts": [
+            0,
+            364
+          ]
+        },
+        "106401": {
+          "metrics": {
+            "1": {
+              "overall": {
+                "logloss": 0.5579089037913295,
+                "auc": 0.7744695274350084
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.5856598188673156,
+                  "auc": 0.6763978228599702
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6763978228599702
+            },
+            "2": {
+              "overall": {
+                "logloss": 0.5579059873244164,
+                "auc": 0.7744722758023912
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.5837422738040838,
+                  "auc": 0.6786244433448787
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6786244433448787
+            },
+            "3": {
+              "overall": {
+                "logloss": 0.5579025757099287,
+                "auc": 0.774475479875934
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.5814991746318318,
+                  "auc": 0.6806036615536862
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6806036615536862
+            }
+          },
+          "compute": {
+            "wall_seconds": 11.501274939000268,
+            "updates": 528,
+            "training_examples": 2161314
+          },
+          "selected_id_counts": [
+            0,
+            364
+          ]
+        }
+      },
+      "20": {
+        "106400": {
+          "metrics": {
+            "1": {
+              "overall": {
+                "logloss": 0.5591556882526266,
+                "auc": 0.7737358569189847
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.6912022206138562,
+                  "auc": 0.6335972290945077
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6335972290945077
+            },
+            "2": {
+              "overall": {
+                "logloss": 0.559055282701194,
+                "auc": 0.7738311759620845
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.6883090299601563,
+                  "auc": 0.636318654131618
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.636318654131618
+            },
+            "3": {
+              "overall": {
+                "logloss": 0.558967135507323,
+                "auc": 0.773914206078607
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.6859662347717357,
+                  "auc": 0.6373082632360217
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6373082632360217
+            }
+          },
+          "compute": {
+            "wall_seconds": 11.799799882000116,
+            "updates": 528,
+            "training_examples": 2161314
+          },
+          "selected_id_counts": [
+            692,
+            809
+          ]
+        },
+        "106401": {
+          "metrics": {
+            "1": {
+              "overall": {
+                "logloss": 0.5578171720427176,
+                "auc": 0.7745660510967167
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.585688633954288,
+                  "auc": 0.6763978228599702
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6763978228599702
+            },
+            "2": {
+              "overall": {
+                "logloss": 0.5577221329945158,
+                "auc": 0.7746630042223699
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.5837119308450508,
+                  "auc": 0.6786244433448787
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6786244433448787
+            },
+            "3": {
+              "overall": {
+                "logloss": 0.557638015247138,
+                "auc": 0.7747493827446187
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.5814615151743252,
+                  "auc": 0.6806036615536862
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6806036615536862
+            }
+          },
+          "compute": {
+            "wall_seconds": 14.010972334000144,
+            "updates": 528,
+            "training_examples": 2161314
+          },
+          "selected_id_counts": [
+            692,
+            809
+          ]
+        }
+      }
+    },
+    "private_replace": {
+      "1": {
+        "106400": {
+          "metrics": {
+            "1": {
+              "overall": {
+                "logloss": 0.559254023982308,
+                "auc": 0.7736357622973788
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.6900823062917948,
+                  "auc": 0.6311232063334983
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6311232063334983
+            },
+            "2": {
+              "overall": {
+                "logloss": 0.559249058222957,
+                "auc": 0.7736378192833233
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.6868173738881176,
+                  "auc": 0.6313706086095993
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6313706086095993
+            },
+            "3": {
+              "overall": {
+                "logloss": 0.5592449381733332,
+                "auc": 0.7736395230086784
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.6841084863705172,
+                  "auc": 0.632607619990104
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.632607619990104
+            }
+          },
+          "compute": {
+            "wall_seconds": 11.471116395000081,
+            "updates": 528,
+            "training_examples": 2161314
+          },
+          "selected_id_counts": [
+            0,
+            130
+          ]
+        },
+        "106401": {
+          "metrics": {
+            "1": {
+              "overall": {
+                "logloss": 0.5579098545792872,
+                "auc": 0.7744677757671447
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.5862849515394156,
+                  "auc": 0.6766452251360713
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6766452251360713
+            },
+            "2": {
+              "overall": {
+                "logloss": 0.5579079635822762,
+                "auc": 0.7744693911773527
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.5850416417090301,
+                  "auc": 0.6796140524492825
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6796140524492825
+            },
+            "3": {
+              "overall": {
+                "logloss": 0.5579064432066441,
+                "auc": 0.7744706482803917
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.5840420113773355,
+                  "auc": 0.6801088570014845
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6801088570014845
+            }
+          },
+          "compute": {
+            "wall_seconds": 13.735996452999643,
+            "updates": 528,
+            "training_examples": 2161314
+          },
+          "selected_id_counts": [
+            0,
+            130
+          ]
+        }
+      },
+      "5": {
+        "106400": {
+          "metrics": {
+            "1": {
+              "overall": {
+                "logloss": 0.5592479948448029,
+                "auc": 0.7736459175299983
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.6861182143946396,
+                  "auc": 0.6298861949529935
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6298861949529935
+            },
+            "2": {
+              "overall": {
+                "logloss": 0.5592370286397388,
+                "auc": 0.7736574946364887
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.6789080546328798,
+                  "auc": 0.6316180108857001
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6316180108857001
+            },
+            "3": {
+              "overall": {
+                "logloss": 0.5592285813434725,
+                "auc": 0.7736670985302601
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.6733540498264825,
+                  "auc": 0.6296387926768926
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6296387926768926
+            }
+          },
+          "compute": {
+            "wall_seconds": 11.462169910999819,
+            "updates": 528,
+            "training_examples": 2161314
+          },
+          "selected_id_counts": [
+            0,
+            364
+          ]
+        },
+        "106401": {
+          "metrics": {
+            "1": {
+              "overall": {
+                "logloss": 0.557909921429595,
+                "auc": 0.7744707921079172
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.586328904884829,
+                  "auc": 0.6749134092033647
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6749134092033647
+            },
+            "2": {
+              "overall": {
+                "logloss": 0.5579097389543198,
+                "auc": 0.7744730105844165
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.586208929389299,
+                  "auc": 0.6768926274121723
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6768926274121723
+            },
+            "3": {
+              "overall": {
+                "logloss": 0.5579099144882327,
+                "auc": 0.774474836941662
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.5863243410150721,
+                  "auc": 0.6783770410687778
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6783770410687778
+            }
+          },
+          "compute": {
+            "wall_seconds": 11.463151853,
+            "updates": 528,
+            "training_examples": 2161314
+          },
+          "selected_id_counts": [
+            0,
+            364
+          ]
+        }
+      },
+      "20": {
+        "106400": {
+          "metrics": {
+            "1": {
+              "overall": {
+                "logloss": 0.5591046264142788,
+                "auc": 0.7737633976191653
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.6859236937198724,
+                  "auc": 0.6293913904007916
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6293913904007916
+            },
+            "2": {
+              "overall": {
+                "logloss": 0.5589753948492077,
+                "auc": 0.7738779292440587
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.6784829263332541,
+                  "auc": 0.6313706086095993
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6313706086095993
+            },
+            "3": {
+              "overall": {
+                "logloss": 0.5588645484835555,
+                "auc": 0.7739776448675184
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.6727724691340972,
+                  "auc": 0.6293913904007917
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6293913904007917
+            }
+          },
+          "compute": {
+            "wall_seconds": 14.283773414999814,
+            "updates": 528,
+            "training_examples": 2161314
+          },
+          "selected_id_counts": [
+            692,
+            809
+          ]
+        },
+        "106401": {
+          "metrics": {
+            "1": {
+              "overall": {
+                "logloss": 0.557775851459316,
+                "auc": 0.7745811012594555
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.5863022510425019,
+                  "auc": 0.6751608114794656
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6751608114794656
+            },
+            "2": {
+              "overall": {
+                "logloss": 0.5576642182447142,
+                "auc": 0.7746845256144421
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.586201116244353,
+                  "auc": 0.6766452251360713
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6766452251360713
+            },
+            "3": {
+              "overall": {
+                "logloss": 0.5575708039309266,
+                "auc": 0.7747752807830602
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.586385899939445,
+                  "auc": 0.6788718456209798
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6788718456209798
+            }
+          },
+          "compute": {
+            "wall_seconds": 12.90324452799996,
+            "updates": 528,
+            "training_examples": 2161314
+          },
+          "selected_id_counts": [
+            692,
+            809
+          ]
+        }
+      }
+    },
+    "id_mirror": {
+      "1": {
+        "106400": {
+          "metrics": {
+            "1": {
+              "overall": {
+                "logloss": 0.5592599940142643,
+                "auc": 0.7736353108808119
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.6940075369376874,
+                  "auc": 0.632112815437902
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.632112815437902
+            },
+            "2": {
+              "overall": {
+                "logloss": 0.5592597528627377,
+                "auc": 0.773635435279005
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.6938489824492913,
+                  "auc": 0.6316180108857001
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6316180108857001
+            },
+            "3": {
+              "overall": {
+                "logloss": 0.5592595617263857,
+                "auc": 0.7736355079497548
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.6937233123905873,
+                  "auc": 0.6318654131618011
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6318654131618011
+            }
+          },
+          "compute": {
+            "wall_seconds": 12.745116000000053,
+            "updates": 528,
+            "training_examples": 2161314
+          },
+          "selected_id_counts": [
+            0,
+            130
+          ]
+        },
+        "106401": {
+          "metrics": {
+            "1": {
+              "overall": {
+                "logloss": 0.5579124765989002,
+                "auc": 0.7744658096196375
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.5880089007267001,
+                  "auc": 0.6724393864423553
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6724393864423553
+            },
+            "2": {
+              "overall": {
+                "logloss": 0.5579124923751433,
+                "auc": 0.7744658131522435
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.588019273433733,
+                  "auc": 0.6721919841662544
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6721919841662544
+            },
+            "3": {
+              "overall": {
+                "logloss": 0.5579124634717761,
+                "auc": 0.7744658550388561
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.5880002697863412,
+                  "auc": 0.6726867887184562
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6726867887184562
+            }
+          },
+          "compute": {
+            "wall_seconds": 12.009672737000074,
+            "updates": 528,
+            "training_examples": 2161314
+          },
+          "selected_id_counts": [
+            0,
+            130
+          ]
+        }
+      },
+      "5": {
+        "106400": {
+          "metrics": {
+            "1": {
+              "overall": {
+                "logloss": 0.5592588890646266,
+                "auc": 0.7736367380535917
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.6932810446489097,
+                  "auc": 0.6333498268184067
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6333498268184067
+            },
+            "2": {
+              "overall": {
+                "logloss": 0.5592577059696309,
+                "auc": 0.7736380327536505
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.6925031726428542,
+                  "auc": 0.6331024245423057
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6331024245423057
+            },
+            "3": {
+              "overall": {
+                "logloss": 0.5592566130455542,
+                "auc": 0.7736392545306308
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.691784587028698,
+                  "auc": 0.6328550222662048
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6328550222662048
+            }
+          },
+          "compute": {
+            "wall_seconds": 12.203691815000184,
+            "updates": 528,
+            "training_examples": 2161314
+          },
+          "selected_id_counts": [
+            0,
+            364
+          ]
+        },
+        "106401": {
+          "metrics": {
+            "1": {
+              "overall": {
+                "logloss": 0.5579109737910131,
+                "auc": 0.7744674659071422
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.5870208209950217,
+                  "auc": 0.6731815932706581
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6731815932706581
+            },
+            "2": {
+              "overall": {
+                "logloss": 0.5579099084613209,
+                "auc": 0.7744685385576882
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.5863203783865946,
+                  "auc": 0.6756556160316675
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6756556160316675
+            },
+            "3": {
+              "overall": {
+                "logloss": 0.5579085504290106,
+                "auc": 0.7744698529394083
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.5854274870114532,
+                  "auc": 0.6763978228599703
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6763978228599703
+            }
+          },
+          "compute": {
+            "wall_seconds": 12.037891358999786,
+            "updates": 528,
+            "training_examples": 2161314
+          },
+          "selected_id_counts": [
+            0,
+            364
+          ]
+        }
+      },
+      "20": {
+        "106400": {
+          "metrics": {
+            "1": {
+              "overall": {
+                "logloss": 0.5592221379533688,
+                "auc": 0.7736718872298737
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.6933039586582085,
+                  "auc": 0.6333498268184067
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6333498268184067
+            },
+            "2": {
+              "overall": {
+                "logloss": 0.559185027222344,
+                "auc": 0.7737070838440062
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.6925139095448013,
+                  "auc": 0.6331024245423057
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6331024245423057
+            },
+            "3": {
+              "overall": {
+                "logloss": 0.5591501064008005,
+                "auc": 0.7737394980263419
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.691863593305503,
+                  "auc": 0.6328550222662048
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6328550222662048
+            }
+          },
+          "compute": {
+            "wall_seconds": 13.314154650000091,
+            "updates": 528,
+            "training_examples": 2161314
+          },
+          "selected_id_counts": [
+            692,
+            809
+          ]
+        },
+        "106401": {
+          "metrics": {
+            "1": {
+              "overall": {
+                "logloss": 0.5578647488100882,
+                "auc": 0.7745161086286102
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.5870365721529922,
+                  "auc": 0.6731815932706581
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6731815932706581
+            },
+            "2": {
+              "overall": {
+                "logloss": 0.5578175024042727,
+                "auc": 0.7745650654996733
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.5863222652618928,
+                  "auc": 0.6756556160316675
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6756556160316675
+            },
+            "3": {
+              "overall": {
+                "logloss": 0.5577740695855891,
+                "auc": 0.7746103721795355
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.585429719160621,
+                  "auc": 0.6763978228599703
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6763978228599703
+            }
+          },
+          "compute": {
+            "wall_seconds": 13.20251865299997,
+            "updates": 528,
+            "training_examples": 2161314
+          },
+          "selected_id_counts": [
+            692,
+            809
+          ]
+        }
+      }
+    },
+    "mirror_residual": {
+      "1": {
+        "106400": {
+          "metrics": {
+            "1": {
+              "overall": {
+                "logloss": 0.5592592946806215,
+                "auc": 0.773635695682525
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.6935477327245054,
+                  "auc": 0.6316180108857001
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6316180108857001
+            },
+            "2": {
+              "overall": {
+                "logloss": 0.559258310641076,
+                "auc": 0.7736362740205751
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.6929007374974624,
+                  "auc": 0.6313706086095993
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6313706086095993
+            },
+            "3": {
+              "overall": {
+                "logloss": 0.5592575698974404,
+                "auc": 0.773636666139829
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.6924137066674184,
+                  "auc": 0.6308758040573973
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6308758040573973
+            }
+          },
+          "compute": {
+            "wall_seconds": 12.161036861999946,
+            "updates": 528,
+            "training_examples": 2161314
+          },
+          "selected_id_counts": [
+            0,
+            130
+          ]
+        },
+        "106401": {
+          "metrics": {
+            "1": {
+              "overall": {
+                "logloss": 0.5579119002874665,
+                "auc": 0.77446631225899
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.5876299822689875,
+                  "auc": 0.6731815932706581
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6731815932706581
+            },
+            "2": {
+              "overall": {
+                "logloss": 0.5579115471643842,
+                "auc": 0.7744666518938134
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.5873978077086757,
+                  "auc": 0.6731815932706581
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6731815932706581
+            },
+            "3": {
+              "overall": {
+                "logloss": 0.557910927814508,
+                "auc": 0.7744671277862927
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.5869905919463001,
+                  "auc": 0.6724393864423553
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6724393864423553
+            }
+          },
+          "compute": {
+            "wall_seconds": 11.988313484000173,
+            "updates": 528,
+            "training_examples": 2161314
+          },
+          "selected_id_counts": [
+            0,
+            130
+          ]
+        }
+      },
+      "5": {
+        "106400": {
+          "metrics": {
+            "1": {
+              "overall": {
+                "logloss": 0.5592544217503183,
+                "auc": 0.773641441718335
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.6903438344034764,
+                  "auc": 0.6345868381989114
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6345868381989114
+            },
+            "2": {
+              "overall": {
+                "logloss": 0.5592491132212519,
+                "auc": 0.7736472942369796
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.6868535346648841,
+                  "auc": 0.6370608609599208
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6370608609599208
+            },
+            "3": {
+              "overall": {
+                "logloss": 0.5592446617571124,
+                "auc": 0.7736521303744439
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.6839267457317146,
+                  "auc": 0.6382978723404255
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6382978723404255
+            }
+          },
+          "compute": {
+            "wall_seconds": 11.947061550999933,
+            "updates": 528,
+            "training_examples": 2161314
+          },
+          "selected_id_counts": [
+            0,
+            364
+          ]
+        },
+        "106401": {
+          "metrics": {
+            "1": {
+              "overall": {
+                "logloss": 0.5579074479284608,
+                "auc": 0.7744711413312424
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.5847026049712833,
+                  "auc": 0.6776348342404751
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6776348342404751
+            },
+            "2": {
+              "overall": {
+                "logloss": 0.5579037345467378,
+                "auc": 0.7744746335644943
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.5822610971457991,
+                  "auc": 0.6791192478970806
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6791192478970806
+            },
+            "3": {
+              "overall": {
+                "logloss": 0.5578993723203804,
+                "auc": 0.7744786203625706
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.579392981077506,
+                  "auc": 0.6825828797624938
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6825828797624938
+            }
+          },
+          "compute": {
+            "wall_seconds": 11.846312830999977,
+            "updates": 528,
+            "training_examples": 2161314
+          },
+          "selected_id_counts": [
+            0,
+            364
+          ]
+        }
+      },
+      "20": {
+        "106400": {
+          "metrics": {
+            "1": {
+              "overall": {
+                "logloss": 0.5591206958578657,
+                "auc": 0.7737689743422217
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.6903682859890423,
+                  "auc": 0.6345868381989114
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6345868381989114
+            },
+            "2": {
+              "overall": {
+                "logloss": 0.5589920240335373,
+                "auc": 0.7738912688685596
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.6868123188190638,
+                  "auc": 0.6373082632360217
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6373082632360217
+            },
+            "3": {
+              "overall": {
+                "logloss": 0.5588819314596398,
+                "auc": 0.7739944550249775
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.6840096837074293,
+                  "auc": 0.6380504700643245
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6380504700643245
+            }
+          },
+          "compute": {
+            "wall_seconds": 17.459778304999872,
+            "updates": 528,
+            "training_examples": 2161314
+          },
+          "selected_id_counts": [
+            692,
+            809
+          ]
+        },
+        "106401": {
+          "metrics": {
+            "1": {
+              "overall": {
+                "logloss": 0.557773225855775,
+                "auc": 0.7746124379969946
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.5847465011019842,
+                  "auc": 0.6776348342404751
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6776348342404751
+            },
+            "2": {
+              "overall": {
+                "logloss": 0.5576421773943058,
+                "auc": 0.7747463136670867
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.5822319727669847,
+                  "auc": 0.6788718456209797
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6788718456209797
+            },
+            "3": {
+              "overall": {
+                "logloss": 0.5575312881100405,
+                "auc": 0.774860556879942
+              },
+              "slices": {
+                "user_freq_le5": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_le5": {
+                  "n": 137,
+                  "logloss": 0.5793591174797165,
+                  "auc": 0.6823354774863928
+                },
+                "user_freq_0": {
+                  "n": 0,
+                  "auc": null,
+                  "logloss": null
+                },
+                "item_freq_0": {
+                  "n": 17,
+                  "auc": null,
+                  "logloss": null
+                }
+              },
+              "macro_rare_auc": 0.6823354774863928
+            }
+          },
+          "compute": {
+            "wall_seconds": 15.615612382000108,
+            "updates": 528,
+            "training_examples": 2161314
+          },
+          "selected_id_counts": [
+            692,
+            809
+          ]
+        }
+      }
+    }
+  },
+  "adapter_selected_epochs": {
+    "id_residual": {
+      "1": 3,
+      "5": 3,
+      "20": 3
+    },
+    "private_replace": {
+      "1": 3,
+      "5": 3,
+      "20": 3
+    },
+    "id_mirror": {
+      "1": 3,
+      "5": 3,
+      "20": 3
+    },
+    "mirror_residual": {
+      "1": 3,
+      "5": 3,
+      "20": 3
+    }
+  },
+  "full_tables": {
+    "106400": {
+      "metrics": {
+        "1": {
+          "overall": {
+            "logloss": 0.6882628404269333,
+            "auc": 0.7369445878997848
+          },
+          "slices": {
+            "user_freq_le5": {
+              "n": 0,
+              "auc": null,
+              "logloss": null
+            },
+            "item_freq_le5": {
+              "n": 137,
+              "logloss": 0.6931160115915955,
+              "auc": 0.562097971301336
+            },
+            "user_freq_0": {
+              "n": 0,
+              "auc": null,
+              "logloss": null
+            },
+            "item_freq_0": {
+              "n": 17,
+              "auc": null,
+              "logloss": null
+            }
+          },
+          "macro_rare_auc": 0.562097971301336
+        },
+        "2": {
+          "overall": {
+            "logloss": 0.5982946973899381,
+            "auc": 0.7509217039362013
+          },
+          "slices": {
+            "user_freq_le5": {
+              "n": 0,
+              "auc": null,
+              "logloss": null
+            },
+            "item_freq_le5": {
+              "n": 137,
+              "logloss": 0.6969150142724636,
+              "auc": 0.636318654131618
+            },
+            "user_freq_0": {
+              "n": 0,
+              "auc": null,
+              "logloss": null
+            },
+            "item_freq_0": {
+              "n": 17,
+              "auc": null,
+              "logloss": null
+            }
+          },
+          "macro_rare_auc": 0.636318654131618
+        },
+        "3": {
+          "overall": {
+            "logloss": 0.5674867692623066,
+            "auc": 0.7716001026948718
+          },
+          "slices": {
+            "user_freq_le5": {
+              "n": 0,
+              "auc": null,
+              "logloss": null
+            },
+            "item_freq_le5": {
+              "n": 137,
+              "logloss": 0.6738528478598279,
+              "auc": 0.6301335972290946
+            },
+            "user_freq_0": {
+              "n": 0,
+              "auc": null,
+              "logloss": null
+            },
+            "item_freq_0": {
+              "n": 17,
+              "auc": null,
+              "logloss": null
+            }
+          },
+          "macro_rare_auc": 0.6301335972290946
+        }
+      },
+      "compute": {
+        "wall_seconds": 1.8355579789999865,
+        "updates": 528,
+        "training_examples": 2161314
+      }
+    },
+    "106401": {
+      "metrics": {
+        "1": {
+          "overall": {
+            "logloss": 0.68007218305465,
+            "auc": 0.7481365308372384
+          },
+          "slices": {
+            "user_freq_le5": {
+              "n": 0,
+              "auc": null,
+              "logloss": null
+            },
+            "item_freq_le5": {
+              "n": 137,
+              "logloss": 0.7479460032037779,
+              "auc": 0.6432459178624443
+            },
+            "user_freq_0": {
+              "n": 0,
+              "auc": null,
+              "logloss": null
+            },
+            "item_freq_0": {
+              "n": 17,
+              "auc": null,
+              "logloss": null
+            }
+          },
+          "macro_rare_auc": 0.6432459178624443
+        },
+        "2": {
+          "overall": {
+            "logloss": 0.59758504958941,
+            "auc": 0.7615427606033709
+          },
+          "slices": {
+            "user_freq_le5": {
+              "n": 0,
+              "auc": null,
+              "logloss": null
+            },
+            "item_freq_le5": {
+              "n": 137,
+              "logloss": 0.7314268429632638,
+              "auc": 0.652894606630381
+            },
+            "user_freq_0": {
+              "n": 0,
+              "auc": null,
+              "logloss": null
+            },
+            "item_freq_0": {
+              "n": 17,
+              "auc": null,
+              "logloss": null
+            }
+          },
+          "macro_rare_auc": 0.652894606630381
+        },
+        "3": {
+          "overall": {
+            "logloss": 0.5548387151808303,
+            "auc": 0.7820869841774355
+          },
+          "slices": {
+            "user_freq_le5": {
+              "n": 0,
+              "auc": null,
+              "logloss": null
+            },
+            "item_freq_le5": {
+              "n": 137,
+              "logloss": 0.6909183567097368,
+              "auc": 0.6640277090549233
+            },
+            "user_freq_0": {
+              "n": 0,
+              "auc": null,
+              "logloss": null
+            },
+            "item_freq_0": {
+              "n": 17,
+              "auc": null,
+              "logloss": null
+            }
+          },
+          "macro_rare_auc": 0.6640277090549233
+        }
+      },
+      "compute": {
+        "wall_seconds": 2.2529542679999395,
+        "updates": 528,
+        "training_examples": 2161314
+      }
+    }
+  },
+  "full_selected_epoch": 3,
+  "mirror_residual_cutoff_candidates": [
+    {
+      "cutoff": 1,
+      "epoch": 3,
+      "mean_macro_rare_auc": 0.6516575952498763,
+      "mean_logloss": 0.5585842488559742,
+      "mean_selected_ids": 130.0,
+      "eligible": true
+    },
+    {
+      "cutoff": 5,
+      "epoch": 3,
+      "mean_macro_rare_auc": 0.6604403760514597,
+      "mean_logloss": 0.5585720170387465,
+      "mean_selected_ids": 364.0,
+      "eligible": true
+    },
+    {
+      "cutoff": 20,
+      "epoch": 3,
+      "mean_macro_rare_auc": 0.6601929737753587,
+      "mean_logloss": 0.5582066097848402,
+      "mean_selected_ids": 1501.0,
+      "eligible": true
+    }
+  ],
+  "selected_cutoff": 5,
+  "selected_mirror_residual_epoch": 3,
+  "selected_full_epoch": 3,
+  "amendment": "AM-01",
+  "selection_scope_note": "User-frequency<=5 dev slice has 0 rows; candidate metric macro_rare_auc therefore equals item-frequency<=5 AUC. The registered gate was narrowed to item rare AUC before fresh audit."
+}

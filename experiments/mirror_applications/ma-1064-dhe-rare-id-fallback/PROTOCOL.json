@@ -1,0 +1,79 @@
+{
+  "experiment_id": "MA-1064",
+  "title": "DHE with train-frequency rare-ID private fallback",
+  "status": "SCREENING",
+  "evidence_lane": "RECOMMENDATION/LONG_TAIL/QUALITY/STORAGE/COMPUTE",
+  "base_commit": "f61214aef",
+  "prior_art_refs": ["PA338"],
+  "amendments": ["AM-01", "AM-02"],
+  "hypothesis": "On MovieLens 1M, assigning per-ID Mirror coordinates and private residuals only to items with at most a development-selected train-only frequency cutoff will improve rare-item AUC by at least 0.005 over the strongest same-cutoff non-Mirror fallback on both fresh seeds, keep overall logloss within 0.002 of shared DHE, use at most 25% of full-table payload, and retain at least 80% of no-fallback CPU throughput.",
+  "physical_object": "One frozen shared DHE hash encoder/decoder and generalized-matrix-factorization head, trained on the MA-1064 training partition.",
+  "mirror_coordinate": "Sixteen per-ID Givens angles per selected user or item ID; optional per-ID 32-dimensional private residual is charged separately.",
+  "logical_multiplicity": "ID-specific logical embedding functions while the dense hash decoder and prediction head remain physically shared.",
+  "task": "Explicit rating >=4 is positive, ratings 1-3 are negative; binary preference prediction, not CTR.",
+  "dataset": {
+    "name": "GroupLens MovieLens 1M",
+    "archive_url": "https://files.grouplens.org/datasets/movielens/ml-1m.zip",
+    "archive_sha256": "a6898adb50b9ca05aa231689da44c217cb524e7ebd39d264c56e2832f2c54e20",
+    "archive_bytes": 5917549,
+    "citation": "F. Maxwell Harper and Joseph A. Konstan. 2015. The MovieLens Datasets: History and Context. ACM TiiS 5(4), Article 19. DOI 10.1145/2827872.",
+    "access_terms": "Research use only; cite Harper and Konstan (2015); no redistribution; no commercial/revenue-bearing use without GroupLens permission.",
+    "legacy_audit_exclusion": "Exclude every pair whose SHA256(user_id:item_id) modulo 10 equals 9, the MA-1063 audit partition, from all MA-1064 train/dev/audit partitions. IDs may be inspected only to apply the exclusion; MA-1063 audit labels are not loaded or reused.",
+    "new_split": "For remaining pairs assign SHA256(MA-1064:user_id:item_id) modulo 10: 0-7 train, 8 development, 9 fresh audit. No pair overlap. The MA-1063 audit subset remains excluded entirely."
+  },
+  "inherited_dhe": {
+    "implementation": "Reuse the MA-1063 scoped CPU DHE encoder/decoder implementation, with exact source pinned by SHA256 in FRESH_FREEZE.json.",
+    "hash_coordinates": 128,
+    "hash_buckets": 1000000,
+    "prime": 1000033,
+    "seed": 0,
+    "embedding_dimension": 32,
+    "decoder": "four hidden Linear(64)+BatchNorm1d+Mish blocks followed by Linear(64,32)",
+    "head": "frozen learned GMF linear head",
+    "note": "This is a scaled k=128 CPU screen, not an official DHE reproduction."
+  },
+  "methods": [
+    "full independent user/item embedding tables (upper control)",
+    "shared DHE, no per-ID state",
+    "selected-ID ordinary residual (32 float32 values per ID)",
+    "selected-ID private embedding replacement (32 float32 values per ID)",
+    "selected-ID Givens Mirror only (16 float32 angles per ID)",
+    "selected-ID Givens Mirror plus private residual (16 angles + 32 residual values per ID)"
+  ],
+  "frequency_cutoff_candidates": [1, 5, 20],
+  "selection_rule": "Across two development seeds, choose the cutoff for Mirror+residual with highest mean item AUC on audit-independent dev rows whose train-only item frequency is <=5, subject to overall dev logloss no worse than shared DHE by >0.002. Ties choose fewer private bytes. Freeze this one cutoff and epoch per method before fresh audit. User-frequency slices are reported when they contain >=100 rows; absent slices are explicitly unavailable. AM-01 explains why item-only selection is used.",
+  "development": {
+    "seeds": [106400, 106401],
+    "epoch_candidates": [1, 2, 3],
+    "training": "Train one shared DHE base per seed for exactly three epochs; freeze decoder and GMF head. Train private code/residual parameters only for each cutoff and method. For each method/cutoff select epochs 1-3 by mean dev logloss across both seeds. Full-table upper control trains normally and selects epochs by the same rule.",
+    "metric": "primary for cutoff selection: item AUC for train-only item-frequency<=5; secondary: overall binary logloss. Report user-frequency<=5 only if at least 100 dev rows are available.",
+    "tuning_boundary": "Development only; legacy MA-1063 audit rows are excluded from every split."
+  },
+  "fresh": {
+    "seeds": [106410, 106411],
+    "audit_access": "Only after protocol, source, and development-selected cutoff/epochs are frozen and committed.",
+    "locked_before_access": true
+  },
+  "success_gate": "For both fresh seeds, selected Mirror+residual improves item AUC on train-frequency<=5 audit items by >=0.005 over the strongest of shared DHE, residual, private replacement, and Mirror-only at the same frozen cutoff; overall logloss <= shared DHE +0.002; complete payload <=25% of full tables; CPU batch throughput >=80% of no-fallback DHE.",
+  "failure_gate": "Mirror+residual misses any fresh quality, payload, or throughput gate, or ordinary residual/private replacement matches Mirror within 0.005 rare-item AUC on both seeds.",
+  "storage": {
+    "authority": "actual serialized inference payload bytes",
+    "paid_objects": ["DHE decoder and BatchNorm state", "GMF head", "selected user/item IDs", "per-ID Mirror angles", "private residual or replacement vectors", "hash/seed/cardinality metadata", "lookup indices/maps", "normalization and model metadata"]
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true,
+    "report_inference_qps_and_p95": true
+  },
+  "boundaries": [
+    "One MovieLens dataset; two fresh model seeds on one deterministic audit partition are not independent data worlds.",
+    "The MA-1063 audit partition is excluded entirely to prevent reusing previously scored ratings as MA-1064 training or development data.",
+    "Frequency selection uses training IDs and counts only; no audit popularity, labels, or future activity influences inference state.",
+    "No per-ID labels or audit row IDs are persisted.",
+    "A fixed three-epoch screen is not near-convergence or capacity evidence.",
+    "CPU timing is not GPU or production serving evidence.",
+    "Do not redistribute MovieLens data or use it commercially without permission."
+  ]
+}

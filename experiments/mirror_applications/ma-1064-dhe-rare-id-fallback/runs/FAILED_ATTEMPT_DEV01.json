@@ -1,0 +1,13 @@
+{
+  "experiment_id": "MA-1064",
+  "attempt": "DEV01",
+  "phase": "development",
+  "status": "failed_after_training_before_result_persistence",
+  "cause": "The completed in-memory development summary contained a NumPy bool_ value that json.dumps could not serialize.",
+  "training_completed": true,
+  "development_metrics_persisted": false,
+  "audit_rows_accessed": false,
+  "optimizer_updates_before_failure": "development model updates completed; aggregate update count was not persisted",
+  "settings_changed": false,
+  "resolution": "AM-02 changes result JSON serialization only; the unchanged development protocol was rerun successfully."
+}
