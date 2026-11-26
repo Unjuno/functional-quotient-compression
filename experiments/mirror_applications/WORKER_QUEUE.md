@@ -4,7 +4,7 @@ MA-1064 is a scoped FAIL on the fresh MovieLens 1M partition, excluding all 99,7
 
 MA-1065 is a scoped development-only FAIL: QR methods stayed at chance through 15 dev epochs on MovieLens binary GMF, while FiLM and full tables learned. No fresh audit, payload frontier, or throughput result was produced; CTR and optimized QR-Rec remain untested.
 
-MA-1066 remains UNTESTED. The worker is CPU-only and has no reviewed executable TT-Rec GPU profile; the official FBTT-Embedding source is pinned at b95947c. A source registration/review route exists, but no training or audit ran. Reopen after experiment source is committed, reviewed, and a usable GPU/cost ceiling is confirmed; see `ma-1066-ttrec-role-mirror/FEASIBILITY.md`.
+MA-1066 remains UNTESTED. The worker is CPU-only; GPU Control only executes its configured MAP-44M commit and exposes no profile-provisioning action. The exact MA-1066 preview returned `TRAINING_PROFILE_UNAVAILABLE`. Official FBTT-Embedding is pinned at b95947c; no training or audit ran. Reopen when an operator-provisioned TT-EmbeddingBag GPU profile or compatible GPU environment is available; see `ma-1066-ttrec-role-mirror/FEASIBILITY.md`.
 
 Next eligible P0: MA-1066, TT-Rec tensor cores with Mirror domain-role address (PA340). Compare with optimized TTEmbeddingBag and match cache; measure actual table bytes and GPU QPS. MA-1060 and MA-1061 remain P1.
 
