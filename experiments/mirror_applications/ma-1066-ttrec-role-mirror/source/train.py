@@ -127,6 +127,9 @@ def load_freeze():
     f=json.loads((ROOT/'FRESH_FREEZE.json').read_text())
     for key,path in [('protocol_sha256',ROOT/'PROTOCOL.json'),('runner_sha256',ROOT/'source/train.py'),('selection_sha256',RUNS/'DEVELOPMENT_SELECTION.json'),('tt_ops_sha256',VENDOR/'tt_embeddings_ops.py'),('tt_cuda_sha256',VENDOR/'tt_embeddings_cuda.cu')]:
         if f[key]!=sha(path): raise ValueError(f'freeze mismatch: {key}')
+    vh=hashlib.sha256()
+    for path in sorted(x for x in VENDOR.rglob('*') if x.is_file()): vh.update(path.relative_to(VENDOR).as_posix().encode()); vh.update(b'\0'); vh.update(path.read_bytes())
+    if f['vendor_tree_sha256']!=vh.hexdigest(): raise ValueError('freeze mismatch: vendor_tree_sha256')
     if f['audit_opened'] is not False: raise ValueError('freeze must precede audit access')
     if f['gpu_model']!=torch.cuda.get_device_name(0) or f['cuda_version']!=torch.version.cuda or f['torch_version']!=torch.__version__: raise ValueError('reviewed runtime mismatch')
     return f

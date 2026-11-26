@@ -5,11 +5,16 @@ from pathlib import Path
 import torch
 ROOT=Path(__file__).resolve().parents[1]
 def sha(p): return hashlib.sha256(p.read_bytes()).hexdigest()
+def tree_sha(root):
+    h=hashlib.sha256()
+    for p in sorted(x for x in root.rglob('*') if x.is_file()):
+        h.update(p.relative_to(root).as_posix().encode()); h.update(b'\0'); h.update(p.read_bytes())
+    return h.hexdigest()
 if not torch.cuda.is_available(): raise SystemExit('Freeze requires the reviewed CUDA runtime; do not create a CPU audit freeze')
 required=[ROOT/'PROTOCOL.json',ROOT/'source'/'train.py',ROOT/'runs'/'DEVELOPMENT_SELECTION.json',ROOT/'source'/'vendor'/'FBTT-Embedding'/'tt_embeddings_ops.py',ROOT/'source'/'vendor'/'FBTT-Embedding'/'tt_embeddings_cuda.cu']
 missing=[str(p) for p in required if not p.is_file()]
 if missing: raise SystemExit('Cannot freeze; missing: '+', '.join(missing))
-freeze={'experiment_id':'MA-1066','protocol_sha256':sha(required[0]),'runner_sha256':sha(required[1]),'selection_sha256':sha(required[2]),'tt_ops_sha256':sha(required[3]),'tt_cuda_sha256':sha(required[4]),'upstream_commit':'b95947ccd32cf9ab851242cc606562f2a74d9efa','torch_version':torch.__version__,'cuda_version':torch.version.cuda,'gpu_model':torch.cuda.get_device_name(0),'audit_opened':False,'cache_policy':'disabled'}
+freeze={'experiment_id':'MA-1066','protocol_sha256':sha(required[0]),'runner_sha256':sha(required[1]),'views_sha256':sha(ROOT/'source'/'views.py'),'freeze_sha256':sha(ROOT/'source'/'freeze.py'),'vendor_tree_sha256':tree_sha(ROOT/'source'/'vendor'/'FBTT-Embedding'),'selection_sha256':sha(required[2]),'tt_ops_sha256':sha(required[3]),'tt_cuda_sha256':sha(required[4]),'upstream_commit':'b95947ccd32cf9ab851242cc606562f2a74d9efa','torch_version':torch.__version__,'cuda_version':torch.version.cuda,'gpu_model':torch.cuda.get_device_name(0),'audit_opened':False,'cache_policy':'disabled'}
 out=ROOT/'FRESH_FREEZE.json'
 if out.exists(): raise SystemExit('FRESH_FREEZE.json already exists; do not overwrite an audit freeze')
 out.write_text(json.dumps(freeze,indent=2)+'\n')
