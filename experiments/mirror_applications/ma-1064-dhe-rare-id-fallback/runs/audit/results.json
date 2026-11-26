@@ -1,0 +1,713 @@
+{
+  "experiment_id": "MA-1064",
+  "audit_rows": 89977,
+  "excluded_MA1063_audit_rows": 99718,
+  "selected_cutoff": 5,
+  "selected_epochs": {
+    "experiment_id": "MA-1064",
+    "selected_cutoff": 5,
+    "adapter_selected_epochs": {
+      "id_residual": {
+        "1": 3,
+        "5": 3,
+        "20": 3
+      },
+      "private_replace": {
+        "1": 3,
+        "5": 3,
+        "20": 3
+      },
+      "id_mirror": {
+        "1": 3,
+        "5": 3,
+        "20": 3
+      },
+      "mirror_residual": {
+        "1": 3,
+        "5": 3,
+        "20": 3
+      }
+    },
+    "full_selected_epoch": 3,
+    "cutoff_rule": "AM-01: highest mean development item AUC at train-only item frequency <=5, subject to overall logloss <= shared DHE +0.002; user-frequency<=5 slice had zero rows.",
+    "audit_opened": false,
+    "user_rare_slice_dev_rows": 0,
+    "item_rare_slice_dev_rows": 137,
+    "amendment": "AM-01"
+  },
+  "methods": {
+    "dhe_shared": {
+      "106410": {
+        "metrics": {
+          "overall": {
+            "logloss": 0.5582744553301372,
+            "auc": 0.7742305049551724
+          },
+          "slices": {
+            "user_freq_le5": {
+              "n": 0,
+              "auc": null,
+              "logloss": null
+            },
+            "item_freq_le5": {
+              "n": 133,
+              "logloss": 0.5886551792102572,
+              "auc": 0.7568627450980392
+            },
+            "user_freq_0": {
+              "n": 0,
+              "auc": null,
+              "logloss": null
+            },
+            "item_freq_0": {
+              "n": 15,
+              "auc": null,
+              "logloss": null
+            }
+          },
+          "macro_rare_auc": 0.7568627450980392
+        },
+        "payload_bytes": 106972,
+        "checkpoint_bytes": 106559,
+        "metadata_bytes": 413,
+        "checkpoint_sha256": "921c438cd0895632ccd5959fc72ac294733cd5a8aa881d22c7f5a8d0043497af",
+        "metadata_sha256": "9633afb3612f87e26c1ece2ededec7cbbcec4a23ed806e769261f6f641dd47bf",
+        "logits_sha256": "aa54e49381b856eabdacb23d65d19dd168bfbfe0834512f90d0f1efc4f8dcd99",
+        "logits_bytes": 332760,
+        "latency": {
+          "batch_size": 1024,
+          "p50_ms": 4.076648000136629,
+          "p95_ms": 4.968699450068925,
+          "qps": 246542.08771315918
+        },
+        "compute": {
+          "wall_seconds": 26.722375852999903,
+          "updates": 528,
+          "training_examples": 2161314,
+          "base_wall_seconds": 26.722375852999903,
+          "selected_epoch": 3
+        },
+        "selected_id_counts": [
+          0,
+          0
+        ]
+      },
+      "106411": {
+        "metrics": {
+          "overall": {
+            "logloss": 0.5559026207347489,
+            "auc": 0.7753501601476528
+          },
+          "slices": {
+            "user_freq_le5": {
+              "n": 0,
+              "auc": null,
+              "logloss": null
+            },
+            "item_freq_le5": {
+              "n": 133,
+              "logloss": 0.6363809477292428,
+              "auc": 0.6801470588235294
+            },
+            "user_freq_0": {
+              "n": 0,
+              "auc": null,
+              "logloss": null
+            },
+            "item_freq_0": {
+              "n": 15,
+              "auc": null,
+              "logloss": null
+            }
+          },
+          "macro_rare_auc": 0.6801470588235294
+        },
+        "payload_bytes": 106972,
+        "checkpoint_bytes": 106559,
+        "metadata_bytes": 413,
+        "checkpoint_sha256": "fc1d7fca5b82b1b640103d21935d48a425d5013485f454d6248024ccedc27b9a",
+        "metadata_sha256": "f4e49156dcba8869c8e4d5ed0d66428c8f050bf553b6f4ba180cf44273af8e97",
+        "logits_sha256": "71b2f7ed36190cafb8552a3cc4ca683562954fb251e5ce9cb6df57ec8f1247de",
+        "logits_bytes": 332821,
+        "latency": {
+          "batch_size": 1024,
+          "p50_ms": 3.934572499929345,
+          "p95_ms": 4.378936900070584,
+          "qps": 258128.55386620405
+        },
+        "compute": {
+          "wall_seconds": 26.72885713200003,
+          "updates": 528,
+          "training_examples": 2161314,
+          "base_wall_seconds": 26.72885713200003,
+          "selected_epoch": 3
+        },
+        "selected_id_counts": [
+          0,
+          0
+        ]
+      }
+    },
+    "id_residual": {
+      "106410": {
+        "metrics": {
+          "overall": {
+            "logloss": 0.5582544980062952,
+            "auc": 0.7742504632317695
+          },
+          "slices": {
+            "user_freq_le5": {
+              "n": 0,
+              "auc": null,
+              "logloss": null
+            },
+            "item_freq_le5": {
+              "n": 133,
+              "logloss": 0.57515367449347,
+              "auc": 0.7691176470588235
+            },
+            "user_freq_0": {
+              "n": 0,
+              "auc": null,
+              "logloss": null
+            },
+            "item_freq_0": {
+              "n": 15,
+              "auc": null,
+              "logloss": null
+            }
+          },
+          "macro_rare_auc": 0.7691176470588235
+        },
+        "payload_bytes": 156099,
+        "checkpoint_bytes": 153973,
+        "metadata_bytes": 2126,
+        "checkpoint_sha256": "16e481dacc5ebbe6e078548f0fa5474ea8aca623870cd846df1b86fa93c4303b",
+        "metadata_sha256": "06c54291d40873b4ba89313d7f225642395f310980c9af587f3fd64f5a63111d",
+        "logits_sha256": "01447b6f1d7f8771ba3a3825098cb4574b3bd57a86245e426f8649a00c8c0b4c",
+        "logits_bytes": 332760,
+        "latency": {
+          "batch_size": 1024,
+          "p50_ms": 4.336749000003692,
+          "p95_ms": 5.1401657996393615,
+          "qps": 233956.202120419
+        },
+        "compute": {
+          "wall_seconds": 11.589179071000217,
+          "updates": 528,
+          "training_examples": 2161314,
+          "base_wall_seconds": 26.722375852999903,
+          "selected_epoch": 3
+        },
+        "selected_id_counts": [
+          0,
+          364
+        ]
+      },
+      "106411": {
+        "metrics": {
+          "overall": {
+            "logloss": 0.5558774047541319,
+            "auc": 0.7753788610669338
+          },
+          "slices": {
+            "user_freq_le5": {
+              "n": 0,
+              "auc": null,
+              "logloss": null
+            },
+            "item_freq_le5": {
+              "n": 133,
+              "logloss": 0.6193218628572759,
+              "auc": 0.7017156862745099
+            },
+            "user_freq_0": {
+              "n": 0,
+              "auc": null,
+              "logloss": null
+            },
+            "item_freq_0": {
+              "n": 15,
+              "auc": null,
+              "logloss": null
+            }
+          },
+          "macro_rare_auc": 0.7017156862745099
+        },
+        "payload_bytes": 156099,
+        "checkpoint_bytes": 153973,
+        "metadata_bytes": 2126,
+        "checkpoint_sha256": "66daa219e4cd6a15cc343bd165637c2141bc45d5f12967583b79bfdcd8527c54",
+        "metadata_sha256": "829874705997d9f51ed6f37316288ee808952bd8e65a23f19f84af4c64810a91",
+        "logits_sha256": "7d1ef43c7f097a73a8f33cc73b307496bc5a4828f51481bba4e3810bf4aceafa",
+        "logits_bytes": 332820,
+        "latency": {
+          "batch_size": 1024,
+          "p50_ms": 4.610164500036262,
+          "p95_ms": 6.137476050162147,
+          "qps": 212400.65770906562
+        },
+        "compute": {
+          "wall_seconds": 11.04501725099999,
+          "updates": 528,
+          "training_examples": 2161314,
+          "base_wall_seconds": 26.72885713200003,
+          "selected_epoch": 3
+        },
+        "selected_id_counts": [
+          0,
+          364
+        ]
+      }
+    },
+    "private_replace": {
+      "106410": {
+        "metrics": {
+          "overall": {
+            "logloss": 0.5582727746938235,
+            "auc": 0.7742437634068677
+          },
+          "slices": {
+            "user_freq_le5": {
+              "n": 0,
+              "auc": null,
+              "logloss": null
+            },
+            "item_freq_le5": {
+              "n": 133,
+              "logloss": 0.5875181971531267,
+              "auc": 0.7637254901960784
+            },
+            "user_freq_0": {
+              "n": 0,
+              "auc": null,
+              "logloss": null
+            },
+            "item_freq_0": {
+              "n": 15,
+              "auc": null,
+              "logloss": null
+            }
+          },
+          "macro_rare_auc": 0.7637254901960784
+        },
+        "payload_bytes": 156327,
+        "checkpoint_bytes": 154197,
+        "metadata_bytes": 2130,
+        "checkpoint_sha256": "da965b6c8c6aa45c5c35fd2645e82c3da934646b6c36164ca523f69d7a1861f7",
+        "metadata_sha256": "8b7a1b9e4911a0d952f147dfde03a55e16b84e04cb2306f7bb5bc8590bf8fb2a",
+        "logits_sha256": "5ead5c9dd836a489d154e0f47619d6e28fc11e15b351cfc1020d6c239a34322d",
+        "logits_bytes": 332763,
+        "latency": {
+          "batch_size": 1024,
+          "p50_ms": 4.427057500151932,
+          "p95_ms": 5.701633599869636,
+          "qps": 225564.54120970605
+        },
+        "compute": {
+          "wall_seconds": 10.310170377000304,
+          "updates": 528,
+          "training_examples": 2161314,
+          "base_wall_seconds": 26.722375852999903,
+          "selected_epoch": 3
+        },
+        "selected_id_counts": [
+          0,
+          364
+        ]
+      },
+      "106411": {
+        "metrics": {
+          "overall": {
+            "logloss": 0.555870188496334,
+            "auc": 0.7754003879583498
+          },
+          "slices": {
+            "user_freq_le5": {
+              "n": 0,
+              "auc": null,
+              "logloss": null
+            },
+            "item_freq_le5": {
+              "n": 133,
+              "logloss": 0.6144399288129406,
+              "auc": 0.6950980392156862
+            },
+            "user_freq_0": {
+              "n": 0,
+              "auc": null,
+              "logloss": null
+            },
+            "item_freq_0": {
+              "n": 15,
+              "auc": null,
+              "logloss": null
+            }
+          },
+          "macro_rare_auc": 0.6950980392156862
+        },
+        "payload_bytes": 156327,
+        "checkpoint_bytes": 154197,
+        "metadata_bytes": 2130,
+        "checkpoint_sha256": "7d510a08c7a3ae2d29193570736c892d0b7432ca0fc3c689909ce94bb76d12b1",
+        "metadata_sha256": "c5c34c385de68a71a987983bf47de0704cc1b1f47bbb05ff5975a812f96ec3f0",
+        "logits_sha256": "83d6d17ae8b40ec209abe086eae27e3d304dc308c788f8df0c14d8473ee4ac66",
+        "logits_bytes": 332824,
+        "latency": {
+          "batch_size": 1024,
+          "p50_ms": 4.396392499984358,
+          "p95_ms": 5.15791649993389,
+          "qps": 228956.1234101927
+        },
+        "compute": {
+          "wall_seconds": 10.520635477999804,
+          "updates": 528,
+          "training_examples": 2161314,
+          "base_wall_seconds": 26.72885713200003,
+          "selected_epoch": 3
+        },
+        "selected_id_counts": [
+          0,
+          364
+        ]
+      }
+    },
+    "id_mirror": {
+      "106410": {
+        "metrics": {
+          "overall": {
+            "logloss": 0.5582665280724168,
+            "auc": 0.7742383811779275
+          },
+          "slices": {
+            "user_freq_le5": {
+              "n": 0,
+              "auc": null,
+              "logloss": null
+            },
+            "item_freq_le5": {
+              "n": 133,
+              "logloss": 0.5832922403537347,
+              "auc": 0.7615196078431373
+            },
+            "user_freq_0": {
+              "n": 0,
+              "auc": null,
+              "logloss": null
+            },
+            "item_freq_0": {
+              "n": 15,
+              "auc": null,
+              "logloss": null
+            }
+          },
+          "macro_rare_auc": 0.7615196078431373
+        },
+        "payload_bytes": 132721,
+        "checkpoint_bytes": 130597,
+        "metadata_bytes": 2124,
+        "checkpoint_sha256": "d11cbac82f4f5e0da3386971e7988fa51f0ebaff62a742e4bb014b4f99044691",
+        "metadata_sha256": "82a9ce66bea03f2f318a17194ba3422f0da14365b33758fe3bb675f78f1a7f0c",
+        "logits_sha256": "f98997d33be3d5e286552fb32fdc8dcac4685ef7aa109fd252aef1bf6f8d4723",
+        "logits_bytes": 332759,
+        "latency": {
+          "batch_size": 1024,
+          "p50_ms": 4.554651499802276,
+          "p95_ms": 5.24544815000354,
+          "qps": 222003.68373320004
+        },
+        "compute": {
+          "wall_seconds": 10.70087115699971,
+          "updates": 528,
+          "training_examples": 2161314,
+          "base_wall_seconds": 26.722375852999903,
+          "selected_epoch": 3
+        },
+        "selected_id_counts": [
+          0,
+          364
+        ]
+      },
+      "106411": {
+        "metrics": {
+          "overall": {
+            "logloss": 0.5558914841344991,
+            "auc": 0.7753626622532126
+          },
+          "slices": {
+            "user_freq_le5": {
+              "n": 0,
+              "auc": null,
+              "logloss": null
+            },
+            "item_freq_le5": {
+              "n": 133,
+              "logloss": 0.6288468283256308,
+              "auc": 0.6904411764705882
+            },
+            "user_freq_0": {
+              "n": 0,
+              "auc": null,
+              "logloss": null
+            },
+            "item_freq_0": {
+              "n": 15,
+              "auc": null,
+              "logloss": null
+            }
+          },
+          "macro_rare_auc": 0.6904411764705882
+        },
+        "payload_bytes": 132721,
+        "checkpoint_bytes": 130597,
+        "metadata_bytes": 2124,
+        "checkpoint_sha256": "e7b949b7b1c4c6689a150ff661206e7dc4063cb5ea37cd68801028a5c8bb39f0",
+        "metadata_sha256": "7067f3d9e596f0457f1ffc05484d0918060e50c2a6ab7bda10db59e9372b83bc",
+        "logits_sha256": "7a7169706cb7ad1c0a0f6b160354c748600be3071760198dd138751f0a853f54",
+        "logits_bytes": 332817,
+        "latency": {
+          "batch_size": 1024,
+          "p50_ms": 4.578198999979577,
+          "p95_ms": 7.063828099944657,
+          "qps": 204211.00339027532
+        },
+        "compute": {
+          "wall_seconds": 11.11016771200002,
+          "updates": 528,
+          "training_examples": 2161314,
+          "base_wall_seconds": 26.72885713200003,
+          "selected_epoch": 3
+        },
+        "selected_id_counts": [
+          0,
+          364
+        ]
+      }
+    },
+    "mirror_residual": {
+      "106410": {
+        "metrics": {
+          "overall": {
+            "logloss": 0.5582474306252787,
+            "auc": 0.7742572597191746
+          },
+          "slices": {
+            "user_freq_le5": {
+              "n": 0,
+              "auc": null,
+              "logloss": null
+            },
+            "item_freq_le5": {
+              "n": 133,
+              "logloss": 0.570372458390267,
+              "auc": 0.7735294117647059
+            },
+            "user_freq_0": {
+              "n": 0,
+              "auc": null,
+              "logloss": null
+            },
+            "item_freq_0": {
+              "n": 15,
+              "auc": null,
+              "logloss": null
+            }
+          },
+          "macro_rare_auc": 0.7735294117647059
+        },
+        "payload_bytes": 179623,
+        "checkpoint_bytes": 177493,
+        "metadata_bytes": 2130,
+        "checkpoint_sha256": "9351752eedea58ca92e19a337e4ee1122f194e6974154fe4c2f62550434d7c6f",
+        "metadata_sha256": "7da923009acda282089827818c68e1f56c6d0ca3d0549746f27977dd3111504e",
+        "logits_sha256": "4533f75b7a65e2119ed6cfb708027ac714ad7cb4183acd832d562fd5c5cd703e",
+        "logits_bytes": 332765,
+        "latency": {
+          "batch_size": 1024,
+          "p50_ms": 4.895437999948626,
+          "p95_ms": 6.436167500191914,
+          "qps": 200828.78647226014
+        },
+        "compute": {
+          "wall_seconds": 15.578243962000215,
+          "updates": 528,
+          "training_examples": 2161314,
+          "base_wall_seconds": 26.722375852999903,
+          "selected_epoch": 3
+        },
+        "selected_id_counts": [
+          0,
+          364
+        ]
+      },
+      "106411": {
+        "metrics": {
+          "overall": {
+            "logloss": 0.5558673322991579,
+            "auc": 0.7753901192121047
+          },
+          "slices": {
+            "user_freq_le5": {
+              "n": 0,
+              "auc": null,
+              "logloss": null
+            },
+            "item_freq_le5": {
+              "n": 133,
+              "logloss": 0.6125076577354526,
+              "auc": 0.7083333333333334
+            },
+            "user_freq_0": {
+              "n": 0,
+              "auc": null,
+              "logloss": null
+            },
+            "item_freq_0": {
+              "n": 15,
+              "auc": null,
+              "logloss": null
+            }
+          },
+          "macro_rare_auc": 0.7083333333333334
+        },
+        "payload_bytes": 179623,
+        "checkpoint_bytes": 177493,
+        "metadata_bytes": 2130,
+        "checkpoint_sha256": "6aa329d2d5fa8d92d5eff870f12163aa9acd50bcd5c53b896cc2af587aec00ea",
+        "metadata_sha256": "4081986635c580be274133b2bb9f247a0a2f1f4635ba03bf38950a9e5fd85677",
+        "logits_sha256": "d00806d1b7752a262a23b9bbd6de1d852fa3d9f7e8988a84a92f5497a79e8a51",
+        "logits_bytes": 332821,
+        "latency": {
+          "batch_size": 1024,
+          "p50_ms": 4.9320795001221995,
+          "p95_ms": 5.978661700282828,
+          "qps": 205911.76394274132
+        },
+        "compute": {
+          "wall_seconds": 11.686315084999933,
+          "updates": 528,
+          "training_examples": 2161314,
+          "base_wall_seconds": 26.72885713200003,
+          "selected_epoch": 3
+        },
+        "selected_id_counts": [
+          0,
+          364
+        ]
+      }
+    },
+    "full_tables": {
+      "106410": {
+        "metrics": {
+          "overall": {
+            "logloss": 0.5559261824639955,
+            "auc": 0.7821280038357625
+          },
+          "slices": {
+            "user_freq_le5": {
+              "n": 0,
+              "auc": null,
+              "logloss": null
+            },
+            "item_freq_le5": {
+              "n": 133,
+              "logloss": 0.6687103872656869,
+              "auc": 0.767892156862745
+            },
+            "user_freq_0": {
+              "n": 0,
+              "auc": null,
+              "logloss": null
+            },
+            "item_freq_0": {
+              "n": 15,
+              "auc": null,
+              "logloss": null
+            }
+          },
+          "macro_rare_auc": 0.767892156862745
+        },
+        "payload_bytes": 1282473,
+        "checkpoint_bytes": 1282059,
+        "metadata_bytes": 414,
+        "checkpoint_sha256": "1f1e9db397343221baf9a6312a6cc290fbad065da6d1d6566b2198bd7de96431",
+        "metadata_sha256": "339d93fa1109c50c7e53a55a5fe93988b04dfe89b781422b3137b1e7d2494455",
+        "logits_sha256": "52ce89e25e144e500a3a83b42722c2aa1109196d218fde3ee7200189feca3284",
+        "logits_bytes": 333935,
+        "latency": {
+          "batch_size": 1024,
+          "p50_ms": 0.039030000152706634,
+          "p95_ms": 0.10745794993454172,
+          "qps": 21130796.844857104
+        },
+        "compute": {
+          "wall_seconds": 1.5483404219999102,
+          "updates": 528,
+          "training_examples": 2161314,
+          "base_wall_seconds": 26.722375852999903,
+          "selected_epoch": 3
+        },
+        "selected_id_counts": [
+          0,
+          0
+        ]
+      },
+      "106411": {
+        "metrics": {
+          "overall": {
+            "logloss": 0.5575511528885986,
+            "auc": 0.7792712333671197
+          },
+          "slices": {
+            "user_freq_le5": {
+              "n": 0,
+              "auc": null,
+              "logloss": null
+            },
+            "item_freq_le5": {
+              "n": 133,
+              "logloss": 0.6830235052655604,
+              "auc": 0.7598039215686275
+            },
+            "user_freq_0": {
+              "n": 0,
+              "auc": null,
+              "logloss": null
+            },
+            "item_freq_0": {
+              "n": 15,
+              "auc": null,
+              "logloss": null
+            }
+          },
+          "macro_rare_auc": 0.7598039215686275
+        },
+        "payload_bytes": 1282473,
+        "checkpoint_bytes": 1282059,
+        "metadata_bytes": 414,
+        "checkpoint_sha256": "b37d54e68d38c6e3c5899bbc0c7ed72cc629d7b47230899c93fcd391214aef85",
+        "metadata_sha256": "8224ca48a68c0aedbb7698737f9fb22cb6bd9b7f22cf87826e2663b3901dbf18",
+        "logits_sha256": "c9c06757182e6a034493d99481896bdf15141466d198986d04e893ff69d5ab9b",
+        "logits_bytes": 334046,
+        "latency": {
+          "batch_size": 1024,
+          "p50_ms": 0.03720349991453986,
+          "p95_ms": 0.08723965017907173,
+          "qps": 21229441.758605093
+        },
+        "compute": {
+          "wall_seconds": 1.544094485000187,
+          "updates": 528,
+          "training_examples": 2161314,
+          "base_wall_seconds": 26.72885713200003,
+          "selected_epoch": 3
+        },
+        "selected_id_counts": [
+          0,
+          0
+        ]
+      }
+    }
+  },
+  "audit_labels_or_ids_persisted": false
+}

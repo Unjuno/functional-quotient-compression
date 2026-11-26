@@ -5,3 +5,5 @@ This experiment extends the table-free DHE baseline from MA-1063 with per-ID sta
 The MA-1063 audit partition is excluded from MA-1064 train, development, and audit data because its labels were already scored. A new deterministic split is applied to the remaining ratings. Data access terms are in `DATASET_TERMS.md`; no raw ratings or per-ID payload metadata will be committed.
 
 The DHE base implementation is reused from MA-1063 and pinned in `FRESH_FREEZE.json`. The DHE decoder and GMF head are frozen while per-ID state is trained, isolating the incremental value of the private fallback. This is a scoped k=128 CPU screen, not an official DHE reproduction.
+
+Result: scoped **FAIL**. At cutoff 5, Mirror+residual raises mean rare-item AUC by 0.0055 over ordinary residual but misses the per-seed margin on one seed and the 80% throughput gate on the other. The full report includes the additional 23.5 kB Mirror cost and all controls.
