@@ -1,8 +1,8 @@
-## Current handoff — 2026-11-26, MA-1063 complete
+## Current handoff — 2026-11-26, MA-1064 complete
 
-MA-1063 is a scoped FAIL on the registered DHE plus structured role-view hypothesis. On MovieLens 1M, full tables score AUC .789620 at 1,282,540 B; shared DHE scores .777046 at 106,783 B; Mirror scores .776929 at 107,238 B and the matched diagonal scores .777068 at 107,158 B. Mirror misses both the +.005 control margin and the full-table AUC tolerance, while it meets the storage and no-view CPU throughput gates. Twelve serialized payloads replay within 9.54e-7 logits and 5.36e-9 metrics; audit IDs/labels and raw archive are not committed. The scoped k=128 CPU screen is not a DHE reproduction or capacity result. See `ma-1063-dhe-id-view/RESULTS.md`.
+MA-1064 is a scoped FAIL on the fresh MovieLens 1M partition, excluding all 99,718 MA-1063 audit pairs. At cutoff 5, 364 rare item IDs receive per-ID state and no users do. Mirror+residual rare-item AUC is .773529/.708333 vs ordinary residual .769118/.701716; its +.005 gate is missed on one seed. CPU throughput is 79.8%/81.5% of no-view DHE, missing 80% once. Payload is 179,623 B vs 1,282,473 B full tables; overall logloss stays within 0.002. All 12 payloads replay within 4.77e-7 logits and 2.54e-10 metric differences. No user-frequency<=5 rows are available; per-ID error-ranked allocation remains untested. See `ma-1064-dhe-rare-id-fallback/RESULTS.md`.
 
-Next eligible P0: MA-1064, DHE dynamic rare-ID private fallback (PA338). Test whether train-only rarity-based private exceptions improve the long tail enough to justify their bytes; freeze cutoffs and audit split before fresh scoring. MA-1060 and MA-1061 remain P1.
+Next eligible P0: MA-1065, QR complementary table × Mirror View code (PA339). Compare with native QR and multi-hash controls; count both quotient/remainder tables and per-task code bytes, and measure AUC/collisions/throughput. MA-1060 and MA-1061 remain P1.
 
 ## Current handoff — 2026-11-25, MA-1056 complete
 
