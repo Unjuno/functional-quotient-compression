@@ -1,8 +1,8 @@
-## Current handoff — 2026-11-26, MA-1062 complete
+## Current handoff — 2026-11-26, MA-1063 complete
 
-MA-1062 is a scoped FAIL on GroupLens MovieLens 100K explicit rating preference. H=512 field Mirror logloss .605938 vs .606059 strongest diagonal and .607905 plain hash; AUC .716810 vs .765202 full DLRM. Full payload 50,595 B vs 187,591 B full tables (73.0% saving), but lookup p95 is 5.4–6.6× plain hash. Eighteen serialized payload prediction replays and aggregate metrics pass. Audit labels/IDs are not persisted; raw archive remains external under GroupLens terms. AM-02 records a first frozen invocation that failed before model construction, updates or metrics; same settings/split were retried. No capacity claim. See `ma-1062-dlrm-field-view/RESULTS.md`.
+MA-1063 is a scoped FAIL on the registered DHE plus structured role-view hypothesis. On MovieLens 1M, full tables score AUC .789620 at 1,282,540 B; shared DHE scores .777046 at 106,783 B; Mirror scores .776929 at 107,238 B and the matched diagonal scores .777068 at 107,158 B. Mirror misses both the +.005 control margin and the full-table AUC tolerance, while it meets the storage and no-view CPU throughput gates. Twelve serialized payloads replay within 9.54e-7 logits and 5.36e-9 metrics; audit IDs/labels and raw archive are not committed. The scoped k=128 CPU screen is not a DHE reproduction or capacity result. See `ma-1063-dhe-id-view/RESULTS.md`.
 
-Next eligible P0: MA-1063, DHE table-free embedding plus dynamic rare-ID private fallback (PA338). MA-1060 and MA-1061 remain P1. For MA-1063 compare official DHE-style zero-table encoding, full lookup tables and simple FiLM; freeze ID-frequency split before audit, count private state bytes and measure long-tail quality/QPS.
+Next eligible P0: MA-1064, DHE dynamic rare-ID private fallback (PA338). Test whether train-only rarity-based private exceptions improve the long tail enough to justify their bytes; freeze cutoffs and audit split before fresh scoring. MA-1060 and MA-1061 remain P1.
 
 ## Current handoff — 2026-11-25, MA-1056 complete
 
