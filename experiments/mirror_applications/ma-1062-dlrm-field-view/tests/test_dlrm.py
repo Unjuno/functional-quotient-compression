@@ -1,0 +1,31 @@
+import importlib.util
+from pathlib import Path
+import torch
+ROOT=Path(__file__).resolve().parents[1]
+spec=importlib.util.spec_from_file_location('ma1062',ROOT/'source/train.py')
+ma=importlib.util.module_from_spec(spec); spec.loader.exec_module(ma)
+
+def test_hash_is_deterministic_and_field_specific():
+    x=torch.arange(1,100,dtype=torch.long)
+    assert torch.equal(ma.field_hash(x,0,512),ma.field_hash(x,0,512))
+    assert not torch.equal(ma.field_hash(x,0,512),ma.field_hash(x,1,512))
+
+def test_givens_view_preserves_each_embedding_norm_at_initialization():
+    torch.manual_seed(7); model=ma.DLRM('mirror_512',0,1)
+    cats=torch.tensor([[1,1,1,0],[943,1682,12,6]],dtype=torch.long)
+    before=torch.stack([model.shared(ma.field_hash(cats[:,i],i,512)) for i in range(4)],dim=1)
+    after=model.embed_fields(cats)
+    assert torch.equal(before,after)
+    assert torch.allclose(before.norm(dim=-1),after.norm(dim=-1),atol=1e-7)
+
+def test_dlrm_output_shape_for_each_parameterization():
+    cats=torch.tensor([[1,1,1,0],[2,3,12,6]],dtype=torch.long); dense=torch.zeros(2,1)
+    for method in ma.METHODS:
+        m=ma.DLRM(method,0,1)
+        assert m(cats,dense).shape==(2,)
+
+def test_train_dev_split_is_pair_disjoint():
+    rows=[(i%3+1,i%7+1,1,0,1_000_000+i,float(i%2)) for i in range(100)]
+    train,dev=ma.split_train_dev(rows)
+    train_pairs={(r[0],r[1]) for r in train}; dev_pairs={(r[0],r[1]) for r in dev}
+    assert train_pairs.isdisjoint(dev_pairs)

@@ -1,0 +1,125 @@
+{
+  "experiment_id": "MA-1062",
+  "title": "DLRM shared embedding table with field-specific Mirror views",
+  "status": "SCREENING",
+  "evidence_lane": "RECOMMENDATION/QUALITY/STORAGE/LOOKUP_RUNTIME",
+  "base_commit": "aab590386",
+  "prior_art_refs": [
+    "PA337"
+  ],
+  "hypothesis": "On MovieLens 100K binary preference prediction, a shared H=512 embedding table with eight field-wise 2D Givens angles per field will improve fresh logloss by at least 0.002 over the strongest byte-near shared-hash/diagonal control on both fresh training seeds, remain within 0.005 AUC of full DLRM tables, reduce complete serialized payload by at least 25% versus full tables, and add no more than 25% p95 lookup latency versus plain H=512 hashing.",
+  "task": "Binary preference classification: explicit MovieLens rating >=4 is positive; ratings 1-3 are negative. This is not CTR prediction.",
+  "physical_object": "One shared float32 table H[512,16] addressed by deterministic field-salted hashing, plus the common DLRM bottom/top MLP.",
+  "mirror_coordinate": "Four field-specific coordinates, each containing eight scalar angles for non-overlapping Givens rotations over pairs (0,1),(2,3),...,(14,15); applied after shared-table lookup and before DLRM interactions.",
+  "logical_multiplicity": "Four distinct field-conditioned embedding functions from one shared physical embedding table.",
+  "dataset": {
+    "name": "GroupLens MovieLens 100K",
+    "url": "https://files.grouplens.org/datasets/movielens/ml-100k.zip",
+    "archive_sha256": "50d2a982c66986937beb9ffb3aa76efe955bf3d5c6b761f4e3a7cd717c6a3229",
+    "archive_bytes": 4924029,
+    "rating_source": "ml-100k/ua.base for train/development; ml-100k/ua.test for fresh audit, never used for tuning",
+    "fields": [
+      "user_id",
+      "movie_id",
+      "UTC month",
+      "UTC weekday",
+      "normalized timestamp dense feature"
+    ],
+    "access_terms": "Research use only; cite Harper and Konstan (2015); no redistribution; no commercial/revenue-bearing use without GroupLens permission. Archive is not committed.",
+    "citation": "F. Maxwell Harper and Joseph A. Konstan. 2015. The MovieLens Datasets: History and Context. ACM TiiS 5(4), Article 19. DOI 10.1145/2827872."
+  },
+  "model": {
+    "family": "compact DLRM screening implementation",
+    "embedding_dim": 16,
+    "bottom_mlp": [
+      1,
+      16,
+      16
+    ],
+    "top_mlp": [
+      90,
+      32,
+      1
+    ],
+    "interactions": "pairwise dot products among four categorical vectors and one dense vector, concatenated with flattened vectors",
+    "dense_feature": "UTC timestamp normalized using training-part mean/std; normalization state is serialized and counted",
+    "optimizer": "Adam, lr=0.01, weight_decay=1e-6, batch=1024, CPU float32, one torch thread",
+    "epoch_candidates": [
+      3,
+      5,
+      8
+    ],
+    "batch_size": 1024,
+    "learning_rate": 0.01
+  },
+  "data_split": {
+    "development": "Split ua.base by SHA256(user_id:movie_id); remainder train, hash modulo 10 equals 0 is development. Reject any duplicate pair crossing the split.",
+    "fresh": "Official ua.test is the sole fresh audit; do not read numeric values until FRESH_FREEZE.json is committed.",
+    "feature_leakage": "UTC month/weekday/timestamp are derived only from each observed rating event; no demographics, genres, global u.data, or future labels are used. Timestamp normalization is fit on the training partition only."
+  },
+  "controls": [
+    "Independent full-cardinality field tables (full DLRM control)",
+    "One shared H=128 field-salted hash table, no View",
+    "One shared H=512 field-salted hash table, no View",
+    "Four independent H=128 field hash tables (same total rows/bytes as shared H=512)",
+    "H=128 shared table + eight paired-diagonal gains per field (same code bytes as Mirror)",
+    "H=128 shared table + eight paired Givens angles per field",
+    "H=512 shared table + eight paired-diagonal gains per field (same code bytes as Mirror)",
+    "H=512 shared table + sixteen per-coordinate diagonal gains per field (stronger, twice-code-size diagonal control)",
+    "H=512 shared table + eight paired Givens angles per field"
+  ],
+  "development": {
+    "training_seeds": [
+      106200,
+      106201
+    ],
+    "selection": "Train each method to 8 epochs; choose epoch from {3,5,8} by mean dev logloss across both seeds. No audit labels or metrics enter selection.",
+    "primary_selection_metric": "binary logloss",
+    "secondary": [
+      "AUC",
+      "field and user/movie frequency slices",
+      "actual full payload bytes",
+      "lookup latency"
+    ]
+  },
+  "fresh": {
+    "training_seeds": [
+      106210,
+      106211
+    ],
+    "training_data": "All ua.base rows after development settings are frozen; each seed retrains from scratch.",
+    "audit_data": "Official ua.test; evaluate once per seed.",
+    "locked_before_access": true
+  },
+  "storage": {
+    "authority": "Actual serialized inference payload bytes",
+    "paid_objects": [
+      "all DLRM MLP weights",
+      "all embedding tables or hash tables",
+      "all field angles/gains",
+      "timestamp normalization state",
+      "field hashing metadata",
+      "architecture and method metadata"
+    ]
+  },
+  "compute": {
+    "report_tokens_or_examples": true,
+    "report_optimizer_updates": true,
+    "report_active_compute_proxy": true,
+    "report_isolated_wall_clock": true,
+    "runtime_metrics": [
+      "embedding lookup p50/p95 per 1024-example batch",
+      "end-to-end DLRM p50/p95 per 1024-example batch"
+    ]
+  },
+  "success_gate": "On both fresh seeds, H=512 Mirror logloss is <= strongest of H=512 hash, H=512 paired diagonal and H=128x4 field tables minus 0.002; AUC is no more than 0.005 below full DLRM; complete payload is >=25% smaller than full DLRM; and lookup p95 is <=1.25x plain H=512 hash.",
+  "failure_gate": "Mirror misses any registered quality/storage/latency gate, or the byte-matched diagonal matches its logloss within 0.002 on both seeds.",
+  "not_established_gate": "Archive/hash mismatch, missing registered fields, audit overlap with development pairs, unreproducible required control, or runtime failure before all methods are evaluated.",
+  "boundaries": [
+    "MovieLens 100K screen only; explicit preference is not CTR or production recommendation.",
+    "Official ua.test is opened only after fresh freeze and never used for tuning.",
+    "Two fresh seeds are initialization/training replicates on one fixed split, not independent datasets.",
+    "No capacity claim from fixed epochs; no broad recommender claim.",
+    "Do not redistribute the MovieLens archive or use it commercially."
+  ]
+}
