@@ -1,8 +1,8 @@
-## Current handoff — 2026-11-26, MA-1059 complete
+## Current handoff — 2026-11-26, MA-1062 complete
 
-MA-1059 is a corrected scoped FAIL under AM-01. Two sampling draws over 24 frozen Tourism audit series: macro MASE 5.587546 Mirror vs 5.564286 native, 5.584619 pooled LoRA, 5.580430 byte-near diagonal, and 3.735720 seasonal naive. Trend residual was selected on 3/24 and worsened MASE to 5.663872. Mirror state is 35,366 B vs 836,043 B independent, but full-bundle reduction is 2.33%. All 432 forecasts replay exactly from serialized payloads, all 432 metric rows replay at zero difference, and 6 tests pass. No capacity claim. See `ma-1059-time-series-view-geometry/RESULTS.md`.
+MA-1062 is a scoped FAIL on GroupLens MovieLens 100K explicit rating preference. H=512 field Mirror logloss .605938 vs .606059 strongest diagonal and .607905 plain hash; AUC .716810 vs .765202 full DLRM. Full payload 50,595 B vs 187,591 B full tables (73.0% saving), but lookup p95 is 5.4–6.6× plain hash. Eighteen serialized payload prediction replays and aggregate metrics pass. Audit labels/IDs are not persisted; raw archive remains external under GroupLens terms. AM-02 records a first frozen invocation that failed before model construction, updates or metrics; same settings/split were retried. No capacity claim. See `ma-1062-dlrm-field-view/RESULTS.md`.
 
-Next P0: MA-1062, DLRM shared embedding basis + feature-field View codes (PA337). MA-1060 and MA-1061 are P1. Use the frozen MovieLens 100K screening design: full DLRM tables, ordinary shared hashing, byte-near field diagonal/rotation controls, independent field tables; retain the dataset access terms and measure actual payload bytes, lookup latency and end-to-end quality.
+Next eligible P0: MA-1063, DHE table-free embedding plus dynamic rare-ID private fallback (PA338). MA-1060 and MA-1061 remain P1. For MA-1063 compare official DHE-style zero-table encoding, full lookup tables and simple FiLM; freeze ID-frequency split before audit, count private state bytes and measure long-tail quality/QPS.
 
 ## Current handoff — 2026-11-25, MA-1056 complete
 

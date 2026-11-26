@@ -1,19 +1,153 @@
 {
-  "experiment_id": "MA-XXX",
-  "commit": "<sha>",
+  "experiment_id": "MA-1062",
+  "status": "FAIL",
+  "scope": "GroupLens MovieLens 100K ua.base/ua.test, explicit rating >=4 preference classification, compact CPU DLRM screening implementation.",
   "tests": {
-    "command": "<command>",
-    "passed": null,
-    "failed": null
+    "command": "/tmp/ma1058-venv/bin/python -m pytest -q experiments/mirror_applications/ma-1062-dlrm-field-view/tests",
+    "passed": 6,
+    "failed": 0
   },
-  "serialization": {
-    "roundtrip_checked": false,
-    "byte_exact": false
+  "fresh_audit": {
+    "rows": 9430,
+    "training_seeds": [
+      106210,
+      106211
+    ],
+    "unique_seed_worlds": 2,
+    "official_split": "ua.test",
+    "train_dev_pairs_disjoint": true,
+    "train_audit_pairs_disjoint": true,
+    "raw_archive_committed": false,
+    "audit_labels_or_ids_persisted": false,
+    "amendments": [
+      "AM-01",
+      "AM-02"
+    ],
+    "failed_attempt_optimizer_updates": 0,
+    "failed_attempt_generated_metrics": false
   },
-  "metric_replay": {
-    "checked": false,
-    "max_difference": null
+  "serialized_replay": {
+    "payload_models_replayed": 18,
+    "max_logit_abs_difference": 2.384185791015625e-07,
+    "max_metric_difference": 2.1460500043701813e-11,
+    "metric_replay_tolerance": 1e-09,
+    "canonical_evaluator": "model instantiated from serialized state_dict payload"
   },
-  "fresh_split_integrity_checked": false,
-  "notes": []
+  "actual_payload_bytes": {
+    "full": 187591,
+    "shared_hash_128": 25769,
+    "shared_hash_512": 50345,
+    "field_hash_128x4": 51243,
+    "mirror_128": 26019,
+    "diag8_128": 26002,
+    "diag8_512": 50578,
+    "diag16_512": 50723,
+    "mirror_512": 50595
+  },
+  "mean_fresh_metrics_and_bytes": {
+    "full": {
+      "mean_logloss": 0.5712504228811106,
+      "mean_auc": 0.7652015267342602,
+      "complete_payload_bytes": 187591
+    },
+    "shared_hash_128": {
+      "mean_logloss": 0.6452819021245235,
+      "mean_auc": 0.6517581203717411,
+      "complete_payload_bytes": 25769
+    },
+    "shared_hash_512": {
+      "mean_logloss": 0.6079050982972969,
+      "mean_auc": 0.7150365173626253,
+      "complete_payload_bytes": 50345
+    },
+    "field_hash_128x4": {
+      "mean_logloss": 0.6375114305689993,
+      "mean_auc": 0.6668062383148847,
+      "complete_payload_bytes": 51243
+    },
+    "mirror_128": {
+      "mean_logloss": 0.6388957683653085,
+      "mean_auc": 0.6628640374571804,
+      "complete_payload_bytes": 26019
+    },
+    "diag8_128": {
+      "mean_logloss": 0.6379340926620527,
+      "mean_auc": 0.6641041178183209,
+      "complete_payload_bytes": 26002
+    },
+    "diag8_512": {
+      "mean_logloss": 0.6074536227883227,
+      "mean_auc": 0.7159621633656252,
+      "complete_payload_bytes": 50578
+    },
+    "diag16_512": {
+      "mean_logloss": 0.6060588072790387,
+      "mean_auc": 0.7170747204331647,
+      "complete_payload_bytes": 50723
+    },
+    "mirror_512": {
+      "mean_logloss": 0.6059384913630741,
+      "mean_auc": 0.7168100259298134,
+      "complete_payload_bytes": 50595
+    }
+  },
+  "frequency_slice_counts": {
+    "users": {
+      "0": 0,
+      "1-5": 0,
+      "6-20": 2130,
+      ">20": 7300
+    },
+    "movies": {
+      "0": 2,
+      "1-5": 77,
+      "6-20": 334,
+      ">20": 9017
+    }
+  },
+  "gate_results": {
+    "quality_vs_strongest_control": "FAIL",
+    "AUC_vs_full": "FAIL",
+    "full_payload_saving_vs_full": 0.7302908988171074,
+    "lookup_p95_vs_plain_hash512": "FAIL"
+  },
+  "input_hashes": {
+    "protocol_sha256": "71518710b5a880eaf55a422a7e554b3b5e60c531fad8f368586bf1b79a832afd",
+    "fresh_freeze_sha256": "2f519f650415799de90ddeddbe743e36fbbc6d752a1694741c0abac164b6e1a0",
+    "runner_sha256": "94a20121dc414807f062ce40a644626c36605c3c4dab95e80d224f8062c03e38",
+    "test_archive_sha256": "50d2a982c66986937beb9ffb3aa76efe955bf3d5c6b761f4e3a7cd717c6a3229",
+    "development_selection_sha256": "ecf95bc7e55d8e7cf96c0a7d6437c55ab7e1dba2dae0702c0b8519677041a31d"
+  },
+  "artifact_sha256": {
+    "PROTOCOL.json": "71518710b5a880eaf55a422a7e554b3b5e60c531fad8f368586bf1b79a832afd",
+    "FRESH_FREEZE.json": "2f519f650415799de90ddeddbe743e36fbbc6d752a1694741c0abac164b6e1a0",
+    "FRESH_FREEZE_PRE_AM01.json": "4d459e381e5551462e58cf238daed3ae22b117479e991660e21255447a9c56a5",
+    "FRESH_FREEZE_PRE_AM02.json": "c33702b31064dd72110052c93759bc72cf2116ad4ed99d0cc1248020e5ed419e",
+    "DEVELOPMENT_DECISION.json": "a182e0ab8d9727c7b34643a22e2f48219b15d741c204efd7750679407b0a7ee9",
+    "runs/DEVELOPMENT_SELECTION.json": "ecf95bc7e55d8e7cf96c0a7d6437c55ab7e1dba2dae0702c0b8519677041a31d",
+    "runs/development.json": "683e999ed0ed0baa35bf30dd788bd13b2b74fdd7c91396913b753174e1fe041b",
+    "runs/FAILED_ATTEMPT_AM02.json": "381106de6aaeeae239bc78bf20a4e5c289a464d9b7243132090f71ec6097ebff",
+    "runs/audit/results.json": "99bc5bf49c00edc6e5fecc1c3b566733e04f0868cbf485d7e03de578da32e111",
+    "runs/audit/verification.json": "fd7b52c094e04cd0592e5d0c64fa3f47d31000d7eff7d35b1c651d782a327b33",
+    "runs/audit/frequency_slices.json": "3d08c9326a3fc4c863aeb89212e0c67894afeac1c6aff6db9792f3a79d0f5755",
+    "runs/audit/external_artifact_manifest.json": "8a04aec677a1ad49d4e726d700e677f98bb5109653d7793a3a094db3bd4ac4af",
+    "source/train.py": "94a20121dc414807f062ce40a644626c36605c3c4dab95e80d224f8062c03e38",
+    "source/verify_audit.py": "5fc3ca882ae6c5229df365d8c3d2c7e1c409e4f4e148b8015a987427dbfde4f7",
+    "source/frequency_slices.py": "16aab86fefb8cd1d6f2bd852fa6186e8cbadc8fce23b05d0d965dd11e308b6e7",
+    "tests/test_dlrm.py": "ffe8b925d9bb7960091b28aecc880dc28d30721c3a572c5b7366bed11920ad99",
+    "RESULTS.md": "f2b9106f3052ca69aad494ee30607f5023f839db4a916c0444d0af3df2d40831",
+    "RESULTS_CORE.csv": "d085da4d6d51248b6bfda25962229dc39387edf16f3dda4b2ff2c2b4b5cce3cb",
+    "DATASET_TERMS.md": "ffcf242621ce51392a56edc41fe9bf40fbfa97cc2ca7a4c1a08bcd3a83807d1c",
+    "README.md": "ad1ce1ea86bbb567cd194e3f7a2bd0ca6b34b89aacc6b60ff8c40dee6c3a23ee",
+    "STATUS.md": "1343e67e8009dd3f703e625002d1cfc79e134d8c635774fc2ecd016e4a767e6f",
+    ".gitignore": "5f6f42df717cc715da1d749889d94abeb8911110f373d92e6974d1950aeb0b91"
+  },
+  "notes": [
+    "The first frozen audit attempt parsed ua.test then failed before model construction or optimizer updates because eval_rows=None was processed as a dataset. AM-02 preserves and documents that attempt; no metrics were seen or settings changed.",
+    "AM-01 added the per-coordinate diagonal comparator and prevents saving target labels or row IDs.",
+    "The fresh split was only used after freeze; training/evaluation results were not used to alter the frozen settings.",
+    "Model payloads, logits and per-run metadata are local excluded artifacts; their byte counts/hashes are recorded in external_artifact_manifest.json.",
+    "MovieLens access terms prohibit redistribution and commercial use without permission.",
+    "No broad recommendation, production DLRM, or capacity claim."
+  ]
 }

@@ -7,10 +7,10 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 
 - Registered candidates: **1155**
 - Claim ledger entries: **480**
-- P0: **630** (396 FAIL; 54 PROMISING; 168 UNTESTED; 11 NOT ESTABLISHED; 1 SCREENING)
+- P0: **630** (397 FAIL; 54 PROMISING; 167 UNTESTED; 11 NOT ESTABLISHED; 1 SCREENING)
 - P1: **422** (17 completed; 405 UNTESTED)
 - P2: **103** (103 UNTESTED)
-- Current MA statuses: **404 FAIL, 11 NOT ESTABLISHED, 63 PROMISING, 1 SCREENING, 676 UNTESTED**
+- Current MA statuses: **405 FAIL, 11 NOT ESTABLISHED, 63 PROMISING, 1 SCREENING, 675 UNTESTED**
 - 47 baseline experiment directories remain present; verified external outcomes are linked to their dedicated branches in the registry and claim ledger.
 - New research: MA-876..935 (60 candidates), PA236..PA265 (30 primary sources). See the current Next candidate section for the live queue.
 - Twelfth literature sweep added MA-936..995 (60 UNTESTED; 47 P0/13 P1) and PA266..PA295. No new experiment results were claimed. see the current Next candidate section.
@@ -23,7 +23,7 @@ Canonical branch: `research/mirror-application-worker-ready-20261007`
 - SRM/TM and prior Phase I results are not MA statuses.
 
 ## Next candidate
-MA-1046 is a scoped FAIL: Chronos distribution View loses on fresh Weather and Australian Electricity; normalized-Hermite aliases it. MA-1047 is a scoped FAIL: TimesFM factorized domain×horizon affine MASE 2.2767/4.5948 vs native 2.2744/4.0873; H100 latency NOT ESTABLISHED. MA-1048 is a scoped FAIL: Moirai factorized frequency×sensor CRPS 13.994/85.062 vs zero-shot 4.074/4.039, with additive native calibration aliasing it. MA-1049 is NOT ESTABLISHED: pinned PEMS08 source lacks documented channel semantics. MA-1050 is a scoped FAIL: reduced CPU TimeMixer-like audit MSE .044012 Mirror vs .043438 hard share and .043244 additive. MA-1051 is a scoped FAIL: reduced CPU iTransformer-style PEMS07 audit MSE .212196 vs .212165 shared and .212180 FiLM. MA-1052 is a scoped FAIL: TRACE+Mirror MASE 1.063280 vs 1.063251 hard share and 1.061715 diagonal. MA-1053 is a scoped FAIL: MOMENT forecast MASE .920243 vs .917809 diagonal, ECG accuracy .831778 vs .850000 diagonal, anomaly point F1 .046243 vs .044901 diagonal but AUPRC .015390 vs .015931. MA-1055 is a scoped FAIL: N-BEATS phase MASE 2.264272 vs 2.275778 hard share, 2.281254 gain and 2.229177 common phase. MA-1056 is a scoped FAIL: DLinear+annual phase MASE .445625 vs .445626 DLinear, .445703 gain and .384308 last-value naive; phase adds 252 B and 2.53× latency. MA-1057 is a scoped FAIL: held Moirai 15m×1h CRPS 7.347/7.201 factorized vs 1.878/1.788 native and 1.733 seasonal naive; exact additive-log alias, corrected payload 55,321,654 B vs additive 55,321,641 B, including required normalization state. MA-1058 is a scoped FAIL: held Chronos cold-start Mirror uses 35,310 B adapter state vs 557,410 B independent LoRA, but only saves 1.53% full payload; audit MASE is 18.8–20.0% worse than independent LoRA and 0.31–0.47% worse than same-cost diagonal. Two sampling draws on one PEMS-BAY network; see the disclosed stochastic redraw limitation in its verification. MA-1054 remains P1. MA-1059 is a corrected scoped FAIL under AM-01: two sampling draws over 24 frozen tourism audit series give macro MASE 5.587546 Mirror vs 5.564286 native, 5.584619 pooled LoRA, 5.580430 diagonal, and 3.735720 seasonal naive. Sparse trend residual on 3/24 series worsens quality. Mirror state is much smaller than independent LoRA, but full payload saves only 2.33%; exact serialized replay and metric replay pass. MA-1054 remains P1. Next eligible P0: MA-1062 DLRM shared embedding basis + field View codes (PA337). Individual reports document scope and verification.
+MA-1046 is a scoped FAIL: Chronos distribution View loses on fresh Weather and Australian Electricity; normalized-Hermite aliases it. MA-1047 is a scoped FAIL: TimesFM factorized domain×horizon affine MASE 2.2767/4.5948 vs native 2.2744/4.0873; H100 latency NOT ESTABLISHED. MA-1048 is a scoped FAIL: Moirai factorized frequency×sensor CRPS 13.994/85.062 vs zero-shot 4.074/4.039, with additive native calibration aliasing it. MA-1049 is NOT ESTABLISHED: pinned PEMS08 source lacks documented channel semantics. MA-1050 is a scoped FAIL: reduced CPU TimeMixer-like audit MSE .044012 Mirror vs .043438 hard share and .043244 additive. MA-1051 is a scoped FAIL: reduced CPU iTransformer-style PEMS07 audit MSE .212196 vs .212165 shared and .212180 FiLM. MA-1052 is a scoped FAIL: TRACE+Mirror MASE 1.063280 vs 1.063251 hard share and 1.061715 diagonal. MA-1053 is a scoped FAIL: MOMENT forecast MASE .920243 vs .917809 diagonal, ECG accuracy .831778 vs .850000 diagonal, anomaly point F1 .046243 vs .044901 diagonal but AUPRC .015390 vs .015931. MA-1055 is a scoped FAIL: N-BEATS phase MASE 2.264272 vs 2.275778 hard share, 2.281254 gain and 2.229177 common phase. MA-1056 is a scoped FAIL: DLinear+annual phase MASE .445625 vs .445626 DLinear, .445703 gain and .384308 last-value naive; phase adds 252 B and 2.53× latency. MA-1057 is a scoped FAIL: held Moirai 15m×1h CRPS 7.347/7.201 factorized vs 1.878/1.788 native and 1.733 seasonal naive; exact additive-log alias, corrected payload 55,321,654 B vs additive 55,321,641 B, including required normalization state. MA-1058 is a scoped FAIL: held Chronos cold-start Mirror uses 35,310 B adapter state vs 557,410 B independent LoRA, but only saves 1.53% full payload; audit MASE is 18.8–20.0% worse than independent LoRA and 0.31–0.47% worse than same-cost diagonal. Two sampling draws on one PEMS-BAY network; see the disclosed stochastic redraw limitation in its verification. MA-1054 remains P1. MA-1059 is a corrected scoped FAIL under AM-01: two sampling draws over 24 frozen tourism audit series give macro MASE 5.587546 Mirror vs 5.564286 native and 3.735720 seasonal naive; sparse residual worsens quality and complete payload saves only 2.33% vs independent LoRA. MA-1062 is a scoped FAIL: on MovieLens 100K, H=512 field Mirror logloss .605938 vs .606059 strongest diagonal and .607905 plain hash; AUC .716810 vs .765202 full DLRM; complete payload 50,595 B vs 187,591 B (73.0% less), but lookup p95 5.4–6.6× plain hash. Serialized replay passed; labels/IDs were not persisted. MA-1054 remains P1. Next eligible P0: MA-1063 DHE dynamic rare-ID private fallback (PA338). Individual reports document scope and verification.
 
 ### MA-1059 result — 2026-11-26
 
@@ -38,6 +38,20 @@ MA-1046 is a scoped FAIL: Chronos distribution View loses on fresh Weather and A
 **U:** One dataset family, two stochastic draws on the same audit series, CPU only. No independent data worlds, near-convergence, or capacity claim.
 
 See `experiments/mirror_applications/ma-1059-time-series-view-geometry/RESULTS.md` and dedicated branch `research/ma-1059-temporal-view-geometry-20261125`. Next: P0 MA-1062.
+
+### MA-1062 result — 2026-11-26
+
+**H:** Shared H=512 field-salted embeddings plus eight 2D Givens angles per field should improve fresh logloss by ≥0.002 over shared hash/diagonal, stay within .005 AUC of full tables, save ≥25% complete bytes, and keep lookup p95 ≤1.25× plain hash.
+
+**T:** Compact CPU DLRM on official GroupLens MovieLens 100K; rating≥4 preference label; `ua.base` 81,490 train / 9,080 dev; `ua.test` 9,430 audit; two fresh training seeds. Controls: full field tables, H=128/512 shared hash, four 128-row field tables, paired and per-channel diagonal, Mirror at H=128/512. AM-01/02 are disclosed in the report; the failed initial audit attempt did zero updates and generated no metrics.
+
+**D:** FAIL. Mean audit logloss Mirror H=512 .605938, best diagonal .606059, shared hash .607905, full .571250. Mirror AUC .716810 vs full .765202, failing tolerance. Payload 50,595 B vs 187,591 B full (73.0% smaller), but lookup p95 is 5.4–6.6× plain hash. Eighteen serialized payload prediction replays differ by at most 2.4e-7 logits; metric difference ≤2.2e-11. Six tests pass.
+
+**C:** Most storage gain comes from ordinary hashing. A per-coordinate diagonal essentially matches Mirror, while embedding collisions/limited epochs leave the shared table far below full DLRM quality.
+
+**U:** One MovieLens split, two training seeds, CPU only; no production DLRM, GPU bandwidth, independent dataset or near-convergence evidence. No capacity claim.
+
+See `experiments/mirror_applications/ma-1062-dlrm-field-view/RESULTS.md` and `VERIFICATION.json` on `research/ma-1062-dlrm-field-view-20261126`. Next: P0 MA-1063.
 
 ### MA-1052 result — 2026-11-25
 
